@@ -32,6 +32,7 @@ static u8 GetTreeMutationValue(u8 id);
 static u16 GetBerryPestSpecies(u8 berryId);
 static void TryForWeeds(struct BerryTree *tree);
 static void TryForPests(struct BerryTree *tree);
+static void AddTreeBonus(struct BerryTree *tree, u8 bonus);
 
 //.rodata
 static const u8 sBerryDescriptionPart1_Cheri[] = _("Blooms with delicate pretty flowers.");
@@ -1919,7 +1920,7 @@ bool32 BerryTreeGrow(struct BerryTree *tree)
     case BERRY_STAGE_NO_BERRY:
         return FALSE;
     case BERRY_STAGE_FLOWERING:
-        tree->berryYield = tree->berryYield + CalcBerryYield(tree);
+        tree->berryYield = CalcBerryYield(tree);
     case BERRY_STAGE_PLANTED:
     case BERRY_STAGE_SPROUTED:
     case BERRY_STAGE_TRUNK:
@@ -2042,7 +2043,7 @@ void PlantBerryTree(u8 id, u8 berry, u8 stage, bool8 allowGrowth)
     tree->moistureLevel = 100;
     if (stage == BERRY_STAGE_BERRIES)
     {
-        tree->berryYield = tree->berryYield + CalcBerryYield(tree);
+        tree->berryYield = CalcBerryYield(tree);
         tree->minutesUntilNextStage *= ((tree->mulch == ITEM_TO_MULCH(ITEM_STABLE_MULCH)) ? 6 : 4);
     }
 
@@ -2166,11 +2167,15 @@ static u8 CalcBerryYieldInternal(u16 max, u16 min, u8 water)
 static u8 CalcBerryYield(struct BerryTree *tree)
 {
     const struct Berry *berry = GetBerryInfo(tree->berry);
-    u8 min = berry->minYield;
+    u8 min = berry->minYield + tree->berryYield;
     u8 max = berry->maxYield;
-    u8 result = CalcBerryYieldInternal(max, min, BerryTreeGetNumStagesWatered(tree));
+    u8 result;
     if (OW_BERRY_MULCH_USAGE && (tree->mulch == ITEM_TO_MULCH(ITEM_RICH_MULCH) || tree->mulch == ITEM_TO_MULCH(ITEM_AMAZE_MULCH)))
-        result += 2;
+        min += 2;
+    if (min >= max)
+        result = max;
+    else
+        result = CalcBerryYieldInternal(max, min, BerryTreeGetNumStagesWatered(tree));
 
     return result;
 }
@@ -2306,12 +2311,16 @@ void ObjectEventInteractionRemoveBerryTree(void)
 
 void ObjectEventInteractionPullBerryWeed(void)
 {
-    gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].weeds = FALSE;
+    struct BerryTree *tree = GetBerryTreeInfo(GetObjectEventBerryTreeId(gSelectedObjectEvent));
+    tree->weeds = FALSE;
+    AddTreeBonus(tree, GetWeedingBonusByBerryType(tree->berry));
 }
 
 void ObjectEventInteractionClearBerryPests(void)
 {
-    gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].pests = FALSE;
+    struct BerryTree *tree = GetBerryTreeInfo(GetObjectEventBerryTreeId(gSelectedObjectEvent));
+    tree->pests = FALSE;
+    AddTreeBonus(tree, GetPestsBonusByBerryType(tree->berry));
 }
 
 bool8 PlayerHasBerries(void)
@@ -2548,4 +2557,27 @@ static void TryForPests(struct BerryTree *tree)
         return;
     if (Random() % 100 < BERRY_PESTS_CHANCE && tree->stage > BERRY_STAGE_PLANTED)
         tree->pests = TRUE;
+}
+
+static void AddTreeBonus(struct BerryTree *tree, u8 bonus)
+{
+    if (OW_BERRY_MOISTURE) // use watered field to save track of intermediate bonuses
+    {
+        tree->watered += bonus;
+        while (tree->watered > 10)
+        {
+            tree->watered -= 10;
+            bonus = tree->berryYield + 1;
+            if (bonus > GetBerryInfo(tree->berry)->maxYield)
+                bonus = GetBerryInfo(tree->berry)->maxYield;
+            tree->berryYield = bonus;
+        }
+    }
+    else
+    {
+        bonus = tree->berryYield + bonus / 10;
+        if (bonus > GetBerryInfo(tree->berry)->maxYield)
+            bonus = GetBerryInfo(tree->berry)->maxYield;
+        tree->berryYield = bonus;
+    }
 }
