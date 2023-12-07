@@ -1756,7 +1756,16 @@ void BerryTreeTimeUpdate(s32 minutes)
                         if (OW_BERRY_MOISTURE == TRUE)
                         {
                             drainVal = OW_BERRY_VARIABLE_DRAIN_RATE ? GetDrainRateByBerryType(tree->berry) : 4;
-                            if (tree->moistureLevel == 0 || (!OW_BERRY_VARIABLE_DRAIN_RATE && tree->moistureLevel == 4)) // Without variable drain rate, this needs to trigger after 24 hours, hence the extra check
+                            if (OW_BERRY_MULCH_USAGE)
+                            {
+                                if (tree->mulch == ITEM_TO_MULCH(ITEM_GROWTH_MULCH))
+                                    drainVal *= 2;
+                                if (tree->mulch == ITEM_TO_MULCH(ITEM_DAMP_MULCH))
+                                    drainVal /= 2;
+                                if (tree->mulch == ITEM_TO_MULCH(ITEM_BOOST_MULCH) || tree->mulch == ITEM_TO_MULCH(ITEM_AMAZE_MULCH))
+                                    drainVal = 25;
+                            }
+                            if (tree->moistureLevel == 0 || (!OW_BERRY_VARIABLE_DRAIN_RATE && tree->moistureLevel == 4)) // Without variable drain rate (and without mulches), this needs to trigger after 24 hours, hence the extra check
                                 tree->watered++;
                             else if (tree->moistureLevel <= drainVal)
                                 tree->moistureLevel = 0;
