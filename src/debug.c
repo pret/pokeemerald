@@ -218,6 +218,7 @@ enum BerryFunctionsMenu
 {
     DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL,
     DEBUG_BERRY_FUNCTIONS_MENU_READY,
+    DEBUG_BERRY_FUNCTIONS_MENU_NEXT_STAGE,
     DEBUG_BERRY_FUNCTIONS_MENU_WEEDS,
     DEBUG_BERRY_FUNCTIONS_MENU_PESTS,
 };
@@ -414,6 +415,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId);
 
 static void DebugAction_BerryFunctions_ClearAll(u8 taskId);
 static void DebugAction_BerryFunctions_Ready(u8 taskId);
+static void DebugAction_BerryFunctions_NextStage(u8 taskId);
 static void DebugAction_BerryFunctions_Pests(u8 taskId);
 static void DebugAction_BerryFunctions_Weeds(u8 taskId);
 
@@ -600,6 +602,7 @@ static const u8 sDebugText_Sound_Music_ID[] =           _("Music Id: {STR_VAR_3}
 // Berry Function Menu
 static const u8 sDebugText_BerryFunctions_ClearAll[] =  _("Clear map trees");
 static const u8 sDebugText_BerryFunctions_Ready[] =     _("Ready map trees");
+static const u8 sDebugText_BerryFunctions_NextStage[] = _("Grow map trees");
 static const u8 sDebugText_BerryFunctions_Pests[] =     _("Give map trees pests");
 static const u8 sDebugText_BerryFunctions_Weeds[] =     _("Give map trees weeds");
 
@@ -785,10 +788,11 @@ static const struct ListMenuItem sDebugMenu_Items_Sound[] =
 
 static const struct ListMenuItem sDebugMenu_Items_BerryFunctions[] =
 {
-    [DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL] = {sDebugText_BerryFunctions_ClearAll, DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL},
-    [DEBUG_BERRY_FUNCTIONS_MENU_READY]     = {sDebugText_BerryFunctions_Ready, DEBUG_BERRY_FUNCTIONS_MENU_READY},
-    [DEBUG_BERRY_FUNCTIONS_MENU_PESTS]     = {sDebugText_BerryFunctions_Pests, DEBUG_BERRY_FUNCTIONS_MENU_PESTS},
-    [DEBUG_BERRY_FUNCTIONS_MENU_WEEDS]     = {sDebugText_BerryFunctions_Weeds, DEBUG_BERRY_FUNCTIONS_MENU_WEEDS},
+    [DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL]  = {sDebugText_BerryFunctions_ClearAll, DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL},
+    [DEBUG_BERRY_FUNCTIONS_MENU_READY]      = {sDebugText_BerryFunctions_Ready, DEBUG_BERRY_FUNCTIONS_MENU_READY},
+    [DEBUG_BERRY_FUNCTIONS_MENU_NEXT_STAGE] = {sDebugText_BerryFunctions_NextStage, DEBUG_BERRY_FUNCTIONS_MENU_NEXT_STAGE},
+    [DEBUG_BERRY_FUNCTIONS_MENU_PESTS]      = {sDebugText_BerryFunctions_Pests, DEBUG_BERRY_FUNCTIONS_MENU_PESTS},
+    [DEBUG_BERRY_FUNCTIONS_MENU_WEEDS]      = {sDebugText_BerryFunctions_Weeds, DEBUG_BERRY_FUNCTIONS_MENU_WEEDS},
 };
 
 // *******************************
@@ -892,10 +896,11 @@ static void (*const sDebugMenu_Actions_Sound[])(u8) =
 
 static void (*const sDebugMenu_Actions_BerryFunctions[])(u8) =
 {
-    [DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL] = DebugAction_BerryFunctions_ClearAll,
-    [DEBUG_BERRY_FUNCTIONS_MENU_READY]     = DebugAction_BerryFunctions_Ready,
-    [DEBUG_BERRY_FUNCTIONS_MENU_PESTS]     = DebugAction_BerryFunctions_Pests,
-    [DEBUG_BERRY_FUNCTIONS_MENU_WEEDS]     = DebugAction_BerryFunctions_Weeds,
+    [DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL]  = DebugAction_BerryFunctions_ClearAll,
+    [DEBUG_BERRY_FUNCTIONS_MENU_READY]      = DebugAction_BerryFunctions_Ready,
+    [DEBUG_BERRY_FUNCTIONS_MENU_NEXT_STAGE] = DebugAction_BerryFunctions_NextStage,
+    [DEBUG_BERRY_FUNCTIONS_MENU_PESTS]      = DebugAction_BerryFunctions_Pests,
+    [DEBUG_BERRY_FUNCTIONS_MENU_WEEDS]      = DebugAction_BerryFunctions_Weeds,
 };
 
 // *******************************
@@ -4697,6 +4702,24 @@ static void DebugAction_BerryFunctions_Ready(u8 taskId)
                 tree->stage = BERRY_STAGE_BERRIES - 1;
                 BerryTreeGrow(tree);
             }
+        }
+    }
+
+    ScriptContext_Enable();
+    Debug_DestroyMenu_Full(taskId);
+}
+
+static void DebugAction_BerryFunctions_NextStage(u8 taskId)
+{
+    u8 i;
+    struct BerryTree *tree;
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
+        {
+            tree = &gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(i)];
+            BerryTreeGrow(tree);
         }
     }
 

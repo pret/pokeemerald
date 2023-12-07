@@ -14,7 +14,7 @@
 
 // Berry settings
 #define OW_BERRY_MUTATIONS           FALSE      // If enabled, Berry plants can mutate based on berries planted next to them.
-#define OW_BERRY_MULCH_USAGE         TRUE       // If enabled, Mulch can be used on soil to fertilize it. Otherwise, it is considered unusable.
+#define OW_BERRY_MULCH_USAGE         FALSE      // If enabled, Mulch can be used on soil to fertilize it. Otherwise, it is considered unusable. Note that moisture effects only work with OW_BERRY_MOISTURE enabled!
 #define OW_BERRY_WEEDS               FALSE      // If enabled, weeds may grow on Berry plants that the player needs to take care of.
 #define OW_BERRY_PESTS               FALSE      // If enabled, pests may approach Berry plants that the player needs to take care of.
 #define OW_BERRY_MOISTURE            FALSE      // If enabled, Berry watering is not a matter of watering it once per stage, but rather of keeping the soil moist.
