@@ -1,8 +1,14 @@
-# pokeemerald Expansion
+# pokeemerald-expansion
 
-## What is the pokeemerald Expansion?
+## What is pokeemerald-expansion?
 
-The pokeemerald Expansion is a decomp hack base project based off pret's [pokeemerald](https://github.com/pret/pokeemerald) decompilation project. It's recommended that any new projects that plan on using it, to clone this repository instead of pret's vanilla repository, as we regurlarly incorporate pret's documentation changes. This is ***NOT*** a standalone romhack, and as such, most features will be unavailable and/or unbalanced if played as is.
+pokeemerald-expansion is a decomp hack base project based off pret's [pokeemerald](https://github.com/pret/pokeemerald) decompilation project. It's recommended that any new projects that plan on using it, to clone this repository instead of pret's vanilla repository, as we regurlarly incorporate pret's documentation changes. This is ***NOT*** a standalone romhack, and as such, most features will be unavailable and/or unbalanced if played as is.
+
+If you use pokeemerald-expansion in your hack, please add RHH (Rom Hacking Hideout) to your credits list. Optionally, you can list the version used, so it can help players know what features to expect.
+You can phrase it as the following:
+```
+Based off RHH's pokeemerald-expansion v1.6.2 https://github.com/rh-hideout/pokeemerald-expansion/
+```
 
 ## What features are included?
 - ***IMPORTANT*❗❗ Read through these to learn what features you can toggle**:
@@ -136,14 +142,14 @@ There are some mechanics, moves and abilities that are missing and being develop
 
 ### [Documentation on features can be found here](https://github.com/rh-hideout/pokeemerald-expansion/wiki)
 
-## If I already have a project based on regular pokeemerald, can I use the pokeemerald Expansion
+## If I already have a project based on regular pokeemerald, can I use pokeemerald-expansion?
 Yes! Keep in mind that we keep up with pret's documentation of pokeemerald, which means that if your project a bit old, you might get merge conflicts that you need to solve manually.
 - If you haven't set up a remote, run the command `git remote add RHH https://github.com/rh-hideout/pokeemerald-expansion`.
 - Once you have your remote set up, run the command `git pull RHH master`.
 
-With this, you'll get the latest version of the Expansion, plus a couple of bugfixes that haven't been released into the next patch version :)
+With this, you'll get the latest version of pokeemerald-expansion, plus a couple of bugfixes that haven't been released into the next patch version :)
 
-## **How do I update my version of the pokeemerald Expansion?**
+## **How do I update my version of pokeemerald-expansion?**
 - If you haven't set up a remote, run the command `git remote add RHH https://github.com/rh-hideout/pokeemerald-expansion`.
 - Once you have your remote set up, run the command `git pull RHH expansion/1.6.2`.
 
@@ -162,7 +168,7 @@ The project was originally started by DizzyEgg alongside other contributors.
 
 The project has now gotten larger and DizzyEgg is now maintaining the project as part of the ROM Hacking Hideout community. Some members of this community are taking on larger roles to help maintain the project.
 
-## What is ROM Hacking Hideout?
+## What is the ROM Hacking Hideout?
 
 A Discord-based ROM hacking community that has many members who hack using the disassembly and decompilation projects for Pokémon. Quite a few contributors to the original feature branches by DizzyEgg were members of ROM Hacking Hideout. You can call it RHH for short!
 

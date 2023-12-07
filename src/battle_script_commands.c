@@ -2159,7 +2159,7 @@ static void Cmd_attackanimation(void)
     if (gBattleControllerExecFlags)
         return;
 
-    if ((gHitMarker & HITMARKER_NO_ANIMATIONS)
+    if ((gHitMarker & (HITMARKER_NO_ANIMATIONS | HITMARKER_DISABLE_ANIMATION))
         && gCurrentMove != MOVE_TRANSFORM
         && gCurrentMove != MOVE_SUBSTITUTE
         // In a wild double battle gotta use the teleport animation if two wild pokemon are alive.
@@ -4920,7 +4920,7 @@ static void PlayAnimation(u32 battler, u8 animId, const u16 *argPtr, const u8 *n
         MarkBattlerForControllerExec(battler);
         gBattlescriptCurrInstr = nextInstr;
     }
-    else if (gHitMarker & HITMARKER_NO_ANIMATIONS && animId != B_ANIM_RESTORE_BG)
+    else if (gHitMarker & (HITMARKER_NO_ANIMATIONS | HITMARKER_DISABLE_ANIMATION) && animId != B_ANIM_RESTORE_BG)
     {
         BattleScriptPush(nextInstr);
         gBattlescriptCurrInstr = BattleScript_Pausex20;
@@ -5502,7 +5502,7 @@ static void Cmd_moveend(void)
             break;
         case MOVEEND_ATTACKER_INVISIBLE: // make attacker sprite invisible
             if (gStatuses3[gBattlerAttacker] & (STATUS3_SEMI_INVULNERABLE)
-                && gHitMarker & HITMARKER_NO_ANIMATIONS)
+                && gHitMarker & (HITMARKER_NO_ANIMATIONS | HITMARKER_DISABLE_ANIMATION))
             {
                 BtlController_EmitSpriteInvisibility(gBattlerAttacker, BUFFER_A, TRUE);
                 MarkBattlerForControllerExec(gBattlerAttacker);
@@ -7446,7 +7446,7 @@ static void Cmd_statusanimation(void)
         u32 battler = GetBattlerForBattleScript(cmd->battler);
         if (!(gStatuses3[battler] & STATUS3_SEMI_INVULNERABLE)
             && gDisableStructs[battler].substituteHP == 0
-            && !(gHitMarker & HITMARKER_NO_ANIMATIONS))
+            && !(gHitMarker & (HITMARKER_NO_ANIMATIONS | HITMARKER_DISABLE_ANIMATION)))
         {
             BtlController_EmitStatusAnimation(battler, BUFFER_A, FALSE, gBattleMons[battler].status1);
             MarkBattlerForControllerExec(battler);
@@ -7465,7 +7465,7 @@ static void Cmd_status2animation(void)
         u32 status2ToAnim = cmd->status2;
         if (!(gStatuses3[battler] & STATUS3_SEMI_INVULNERABLE)
             && gDisableStructs[battler].substituteHP == 0
-            && !(gHitMarker & HITMARKER_NO_ANIMATIONS))
+            && !(gHitMarker & (HITMARKER_NO_ANIMATIONS | HITMARKER_DISABLE_ANIMATION)))
         {
             BtlController_EmitStatusAnimation(battler, BUFFER_A, TRUE, gBattleMons[battler].status2 & status2ToAnim);
             MarkBattlerForControllerExec(battler);
@@ -7484,7 +7484,7 @@ static void Cmd_chosenstatusanimation(void)
         u32 wantedStatus = cmd->status;
         if (!(gStatuses3[battler] & STATUS3_SEMI_INVULNERABLE)
             && gDisableStructs[battler].substituteHP == 0
-            && !(gHitMarker & HITMARKER_NO_ANIMATIONS))
+            && !(gHitMarker & (HITMARKER_NO_ANIMATIONS | HITMARKER_DISABLE_ANIMATION)))
         {
             BtlController_EmitStatusAnimation(battler, BUFFER_A, cmd->isStatus2, wantedStatus);
             MarkBattlerForControllerExec(battler);
@@ -9308,26 +9308,6 @@ static void Cmd_various(void)
         VARIOUS_ARGS();
         gLastUsedAbility = gBattleMons[battler].ability;
         break;
-    }
-    case VARIOUS_TRY_HEAL_PULSE:
-    {
-        VARIOUS_ARGS(const u8 *failInstr);
-        if (BATTLER_MAX_HP(battler))
-        {
-            gBattlescriptCurrInstr = cmd->failInstr;
-        }
-        else
-        {
-            if (GetBattlerAbility(gBattlerAttacker) == ABILITY_MEGA_LAUNCHER && gBattleMoves[gCurrentMove].pulseMove)
-                gBattleMoveDamage = -(GetNonDynamaxMaxHP(battler) * 75 / 100);
-            else
-                gBattleMoveDamage = -(GetNonDynamaxMaxHP(battler) / 2);
-
-            if (gBattleMoveDamage == 0)
-                gBattleMoveDamage = -1;
-            gBattlescriptCurrInstr = cmd->nextInstr;
-        }
-        return;
     }
     case VARIOUS_TRY_QUASH:
     {
@@ -14499,7 +14479,7 @@ static void Cmd_pickup(void)
                     SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
                 }
             }
-            #if P_SHUCKLE_BERRY_JUICE == TRUE
+            #if P_SHUCKLE_BERRY_JUICE == GEN_2
             else if (species == SPECIES_SHUCKLE
                 && heldItem == ITEM_ORAN_BERRY
                 && (Random() % 16) == 0)
@@ -16430,4 +16410,27 @@ void BS_TryTrainerSlideDynamaxMsg(void)
     }
     else
         gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_TryHealPulse(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+
+    if (BATTLER_MAX_HP(gBattlerTarget))
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
+    else
+    {
+        if (GetBattlerAbility(gBattlerAttacker) == ABILITY_MEGA_LAUNCHER && gBattleMoves[gCurrentMove].pulseMove)
+            gBattleMoveDamage = -(GetNonDynamaxMaxHP(gBattlerTarget) * 75 / 100);
+        else if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN && gBattleMoves[gCurrentMove].argument == MOVE_EFFECT_FLORAL_HEALING)
+            gBattleMoveDamage = -(GetNonDynamaxMaxHP(gBattlerTarget) * 2 / 3);
+        else
+            gBattleMoveDamage = -(GetNonDynamaxMaxHP(gBattlerTarget) / 2);
+
+        if (gBattleMoveDamage == 0)
+            gBattleMoveDamage = -1;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
 }

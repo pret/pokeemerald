@@ -1243,7 +1243,7 @@ const struct MonCoords gMonBackPicCoords[NUM_SPECIES + 1] =
     [SPECIES_VOLTORB_HISUIAN]              = { .size = MON_COORDS_SIZE(48, 32), .y_offset = 10 },
     [SPECIES_ELECTRODE_HISUIAN]            = { .size = MON_COORDS_SIZE(64, 40), .y_offset =  7 },
     [SPECIES_TYPHLOSION_HISUIAN]           = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  2 },
-    [SPECIES_QWILFISH_HISUIAN]             = { .size = MON_COORDS_SIZE(56, 56), .y_offset =  6 },
+    [SPECIES_QWILFISH_HISUIAN]             = { .size = MON_COORDS_SIZE(56, 56), .y_offset =  8 },
     [SPECIES_SNEASEL_HISUIAN]              = { .size = MON_COORDS_SIZE(56, 64), .y_offset =  3 },
 #if P_GEN_5_POKEMON == TRUE
     [SPECIES_SAMUROTT_HISUIAN]             = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  8 },
@@ -1253,7 +1253,7 @@ const struct MonCoords gMonBackPicCoords[NUM_SPECIES + 1] =
     [SPECIES_BRAVIARY_HISUIAN]             = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  7 },
 #endif
 #if P_GEN_6_POKEMON == TRUE
-    [SPECIES_SLIGGOO_HISUIAN]              = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
+    [SPECIES_SLIGGOO_HISUIAN]              = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  1 },
     [SPECIES_GOODRA_HISUIAN]               = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  0 },
     [SPECIES_AVALUGG_HISUIAN]              = { .size = MON_COORDS_SIZE(64, 32), .y_offset = 16 },
 #endif

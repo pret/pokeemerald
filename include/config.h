@@ -64,13 +64,15 @@
 #define ITEM_EXPANSION
 
 // Generation constants used in configs to define behavior
-#define GEN_3 0
-#define GEN_4 1
-#define GEN_5 2
-#define GEN_6 3
-#define GEN_7 4
-#define GEN_8 5
-#define GEN_9 6
+#define GEN_1 0
+#define GEN_2 1
+#define GEN_3 2
+#define GEN_4 3
+#define GEN_5 4
+#define GEN_6 5
+#define GEN_7 6
+#define GEN_8 7
+#define GEN_9 8
 #define GEN_LATEST GEN_9
 
 // General settings

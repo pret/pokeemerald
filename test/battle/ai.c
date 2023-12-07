@@ -608,3 +608,42 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: Post-KO switches prioritize of
             TURN { MOVE(player, MOVE_WING_ATTACK) ; EXPECT_SEND_OUT(opponent, 2); }
     }
 }
+
+AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI switches out after sufficient stat drops")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING);
+        PLAYER(SPECIES_HITMONTOP) { Level(30); Moves(MOVE_CHARM, MOVE_TACKLE); Ability(ABILITY_INTIMIDATE); Speed(5); } 
+        OPPONENT(SPECIES_GRIMER) { Level(30); Moves(MOVE_TACKLE); Speed(4); }
+        OPPONENT(SPECIES_PONYTA) { Level(30); Moves(MOVE_HEADBUTT); Speed(4); }
+    } WHEN {
+            TURN { MOVE(player, MOVE_CHARM) ;}
+            TURN { MOVE(player, MOVE_TACKLE) ; EXPECT_SWITCH(opponent, 1); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will not switch out if Pokemon would faint to hazards unless party member can clear them")
+{
+    u32 move1;
+
+    PARAMETRIZE{move1 = MOVE_TACKLE; }
+    PARAMETRIZE{move1 = MOVE_RAPID_SPIN; }
+
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING);
+        PLAYER(SPECIES_HITMONTOP) { Level(30); Moves(MOVE_CHARM, MOVE_TACKLE, MOVE_STEALTH_ROCK, MOVE_EARTHQUAKE); Ability(ABILITY_INTIMIDATE); Speed(5); } 
+        OPPONENT(SPECIES_GRIMER) { Level(30); Moves(MOVE_TACKLE); Item(ITEM_FOCUS_SASH); Speed(4); }
+        OPPONENT(SPECIES_PONYTA) { Level(30); Moves(MOVE_HEADBUTT, move1); Speed(4); }
+    } WHEN {
+            TURN { MOVE(player, MOVE_STEALTH_ROCK) ;}
+            TURN { MOVE(player, MOVE_EARTHQUAKE) ;}
+            TURN { MOVE(player, MOVE_CHARM) ;}
+            TURN { // If the AI has a mon that can remove hazards, don't prevent them switching out
+                MOVE(player, MOVE_CHARM);
+                if (move1 == MOVE_RAPID_SPIN)
+                    EXPECT_SWITCH(opponent, 1);
+                else if (move1 == MOVE_TACKLE)
+                    EXPECT_MOVE(opponent, MOVE_TACKLE);
+            }        
+    }
+}
