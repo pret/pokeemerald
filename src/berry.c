@@ -23,7 +23,10 @@ static u8 CalcBerryYieldInternal(u16 max, u16 min, u8 water);
 static u8 CalcBerryYield(struct BerryTree *tree);
 static u8 GetBerryCountByBerryTreeId(u8 id);
 static u16 GetStageDurationByBerryType(u8);
-static u16 GetDrainRateByBerryType(u8);
+static u8 GetDrainRateByBerryType(u8);
+static u8 GetWaterBonusByBerryType(u8);
+static u8 GetWeedingBonusByBerryType(u8);
+static u8 GetPestsBonusByBerryType(u8);
 static void SetTreeMutations(u8 id, u8 berry);
 static u8 GetTreeMutationValue(u8 id);
 static u16 GetBerryPestSpecies(u8 berryId);
@@ -199,6 +202,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 25,
         .drainRate = 15,
+        .waterBonus = 10,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_CHESTO_BERRY - FIRST_BERRY_INDEX] =
@@ -219,6 +225,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 25,
         .drainRate = 15,
+        .waterBonus = 10,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_PECHA_BERRY - FIRST_BERRY_INDEX] =
@@ -239,6 +248,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 25,
         .drainRate = 15,
+        .waterBonus = 10,
+        .weedsBonus = 4,
+        .pestsBonus = 6,
     },
 
     [ITEM_RAWST_BERRY - FIRST_BERRY_INDEX] =
@@ -259,6 +271,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 25,
         .drainRate = 15,
+        .waterBonus = 10,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_ASPEAR_BERRY - FIRST_BERRY_INDEX] =
@@ -279,6 +294,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 25,
         .drainRate = 15,
+        .waterBonus = 10,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_LEPPA_BERRY - FIRST_BERRY_INDEX] =
@@ -299,6 +317,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 20,
         .drainRate = 15,
+        .waterBonus = 15,
+        .weedsBonus = 3,
+        .pestsBonus = 6,
     },
 
     [ITEM_ORAN_BERRY - FIRST_BERRY_INDEX] =
@@ -319,6 +340,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 20,
         .drainRate = 15,
+        .waterBonus = 10,
+        .weedsBonus = 4,
+        .pestsBonus = 6,
     },
 
     [ITEM_PERSIM_BERRY - FIRST_BERRY_INDEX] =
@@ -339,6 +363,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 20,
         .drainRate = 15,
+        .waterBonus = 10,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_LUM_BERRY - FIRST_BERRY_INDEX] =
@@ -359,6 +386,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 20,
         .drainRate = 8,
+        .waterBonus = 12,
+        .weedsBonus = 1,
+        .pestsBonus = 6,
     },
 
     [ITEM_SITRUS_BERRY - FIRST_BERRY_INDEX] =
@@ -379,6 +409,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 20,
         .drainRate = 7,
+        .waterBonus = 12,
+        .weedsBonus = 1,
+        .pestsBonus = 6,
     },
 
     [ITEM_FIGY_BERRY - FIRST_BERRY_INDEX] =
@@ -399,6 +432,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 25,
         .drainRate = 10,
+        .waterBonus = 15,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_WIKI_BERRY - FIRST_BERRY_INDEX] =
@@ -419,6 +455,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 25,
         .drainRate = 10,
+        .waterBonus = 15,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_MAGO_BERRY - FIRST_BERRY_INDEX] =
@@ -439,6 +478,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 25,
         .drainRate = 10,
+        .waterBonus = 15,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_AGUAV_BERRY - FIRST_BERRY_INDEX] =
@@ -459,6 +501,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 25,
         .drainRate = 10,
+        .waterBonus = 15,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_IAPAPA_BERRY - FIRST_BERRY_INDEX] =
@@ -479,6 +524,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 25,
         .drainRate = 10,
+        .waterBonus = 15,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_RAZZ_BERRY - FIRST_BERRY_INDEX] =
@@ -499,6 +547,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 20,
         .drainRate = 35,
+        .waterBonus = 10,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_BLUK_BERRY - FIRST_BERRY_INDEX] =
@@ -519,6 +570,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 20,
         .drainRate = 35,
+        .waterBonus = 10,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_NANAB_BERRY - FIRST_BERRY_INDEX] =
@@ -539,6 +593,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 20,
         .drainRate = 35,
+        .waterBonus = 10,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_WEPEAR_BERRY - FIRST_BERRY_INDEX] =
@@ -559,6 +616,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 20,
         .drainRate = 35,
+        .waterBonus = 10,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_PINAP_BERRY - FIRST_BERRY_INDEX] =
@@ -579,6 +639,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 20,
         .drainRate = 35,
+        .waterBonus = 10,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_POMEG_BERRY - FIRST_BERRY_INDEX] =
@@ -599,6 +662,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 20,
         .drainRate = 8,
+        .waterBonus = 5,
+        .weedsBonus = 3,
+        .pestsBonus = 6,
     },
 
     [ITEM_KELPSY_BERRY - FIRST_BERRY_INDEX] =
@@ -619,6 +685,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 20,
         .drainRate = 8,
+        .waterBonus = 5,
+        .weedsBonus = 3,
+        .pestsBonus = 6,
     },
 
     [ITEM_QUALOT_BERRY - FIRST_BERRY_INDEX] =
@@ -639,6 +708,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 20,
         .drainRate = 8,
+        .waterBonus = 5,
+        .weedsBonus = 3,
+        .pestsBonus = 6,
     },
 
     [ITEM_HONDEW_BERRY - FIRST_BERRY_INDEX] =
@@ -659,6 +731,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 20,
         .drainRate = 8,
+        .waterBonus = 5,
+        .weedsBonus = 3,
+        .pestsBonus = 6,
     },
 
     [ITEM_GREPA_BERRY - FIRST_BERRY_INDEX] =
@@ -679,6 +754,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 20,
         .drainRate = 8,
+        .waterBonus = 5,
+        .weedsBonus = 3,
+        .pestsBonus = 6,
     },
 
     [ITEM_TAMATO_BERRY - FIRST_BERRY_INDEX] =
@@ -699,6 +777,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 30,
         .drainRate = 8,
+        .waterBonus = 5,
+        .weedsBonus = 3,
+        .pestsBonus = 6,
     },
 
     [ITEM_CORNN_BERRY - FIRST_BERRY_INDEX] =
@@ -719,6 +800,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 30,
         .drainRate = 10,
+        .waterBonus = 10,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_MAGOST_BERRY - FIRST_BERRY_INDEX] =
@@ -739,6 +823,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 30,
         .drainRate = 10,
+        .waterBonus = 10,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_RABUTA_BERRY - FIRST_BERRY_INDEX] =
@@ -759,6 +846,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 30,
         .drainRate = 10,
+        .waterBonus = 10,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_NOMEL_BERRY - FIRST_BERRY_INDEX] =
@@ -779,6 +869,9 @@ const struct Berry gBerries[] =
         .sour = 20,
         .smoothness = 30,
         .drainRate = 10,
+        .waterBonus = 10,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_SPELON_BERRY - FIRST_BERRY_INDEX] =
@@ -799,6 +892,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 70,
         .drainRate = 8,
+        .waterBonus = 10,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_PAMTRE_BERRY - FIRST_BERRY_INDEX] =
@@ -819,6 +915,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 70,
         .drainRate = 8,
+        .waterBonus = 10,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_WATMEL_BERRY - FIRST_BERRY_INDEX] =
@@ -839,6 +938,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 70,
         .drainRate = 8,
+        .waterBonus = 10,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_DURIN_BERRY - FIRST_BERRY_INDEX] =
@@ -859,6 +961,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 70,
         .drainRate = 8,
+        .waterBonus = 10,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_BELUE_BERRY - FIRST_BERRY_INDEX] =
@@ -879,6 +984,9 @@ const struct Berry gBerries[] =
         .sour = 40,
         .smoothness = 70,
         .drainRate = 8,
+        .waterBonus = 10,
+        .weedsBonus = 2,
+        .pestsBonus = 6,
     },
 
     [ITEM_CHILAN_BERRY - FIRST_BERRY_INDEX] =
@@ -899,6 +1007,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 35,
         .drainRate = 6,
+        .waterBonus = 10,
+        .weedsBonus = 1,
+        .pestsBonus = 4,
     },
 
     [ITEM_OCCA_BERRY - FIRST_BERRY_INDEX] =
@@ -919,6 +1030,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 30,
         .drainRate = 6,
+        .waterBonus = 10,
+        .weedsBonus = 1,
+        .pestsBonus = 4,
     },
 
     [ITEM_PASSHO_BERRY - FIRST_BERRY_INDEX] =
@@ -939,6 +1053,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 30,
         .drainRate = 6,
+        .waterBonus = 10,
+        .weedsBonus = 1,
+        .pestsBonus = 4,
     },
 
     [ITEM_WACAN_BERRY - FIRST_BERRY_INDEX] =
@@ -959,6 +1076,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 30,
         .drainRate = 6,
+        .waterBonus = 10,
+        .weedsBonus = 1,
+        .pestsBonus = 4,
     },
 
     [ITEM_RINDO_BERRY - FIRST_BERRY_INDEX] =
@@ -979,6 +1099,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 30,
         .drainRate = 6,
+        .waterBonus = 10,
+        .weedsBonus = 1,
+        .pestsBonus = 4,
     },
 
     [ITEM_YACHE_BERRY - FIRST_BERRY_INDEX] =
@@ -999,6 +1122,9 @@ const struct Berry gBerries[] =
         .sour = 15,
         .smoothness = 30,
         .drainRate = 6,
+        .waterBonus = 10,
+        .weedsBonus = 1,
+        .pestsBonus = 4,
     },
 
     [ITEM_CHOPLE_BERRY - FIRST_BERRY_INDEX] =
@@ -1019,6 +1145,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 30,
         .drainRate = 6,
+        .waterBonus = 10,
+        .weedsBonus = 1,
+        .pestsBonus = 4,
     },
 
     [ITEM_KEBIA_BERRY - FIRST_BERRY_INDEX] =
@@ -1039,6 +1168,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 30,
         .drainRate = 6,
+        .waterBonus = 10,
+        .weedsBonus = 1,
+        .pestsBonus = 4,
     },
 
     [ITEM_SHUCA_BERRY - FIRST_BERRY_INDEX] =
@@ -1059,6 +1191,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 30,
         .drainRate = 6,
+        .waterBonus = 10,
+        .weedsBonus = 1,
+        .pestsBonus = 4,
     },
 
     [ITEM_COBA_BERRY - FIRST_BERRY_INDEX] =
@@ -1079,6 +1214,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 30,
         .drainRate = 6,
+        .waterBonus = 10,
+        .weedsBonus = 1,
+        .pestsBonus = 4,
     },
 
     [ITEM_PAYAPA_BERRY - FIRST_BERRY_INDEX] =
@@ -1099,6 +1237,9 @@ const struct Berry gBerries[] =
         .sour = 15,
         .smoothness = 30,
         .drainRate = 6,
+        .waterBonus = 10,
+        .weedsBonus = 1,
+        .pestsBonus = 4,
     },
 
     [ITEM_TANGA_BERRY - FIRST_BERRY_INDEX] =
@@ -1119,6 +1260,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 35,
         .drainRate = 6,
+        .waterBonus = 10,
+        .weedsBonus = 1,
+        .pestsBonus = 4,
     },
 
     [ITEM_CHARTI_BERRY - FIRST_BERRY_INDEX] =
@@ -1139,6 +1283,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 35,
         .drainRate = 6,
+        .waterBonus = 10,
+        .weedsBonus = 1,
+        .pestsBonus = 4,
     },
 
     [ITEM_KASIB_BERRY - FIRST_BERRY_INDEX] =
@@ -1159,6 +1306,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 35,
         .drainRate = 6,
+        .waterBonus = 10,
+        .weedsBonus = 1,
+        .pestsBonus = 4,
     },
 
     [ITEM_HABAN_BERRY - FIRST_BERRY_INDEX] =
@@ -1179,6 +1329,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 35,
         .drainRate = 6,
+        .waterBonus = 10,
+        .weedsBonus = 1,
+        .pestsBonus = 4,
     },
 
     [ITEM_COLBUR_BERRY - FIRST_BERRY_INDEX] =
@@ -1199,6 +1352,9 @@ const struct Berry gBerries[] =
         .sour = 20,
         .smoothness = 35,
         .drainRate = 6,
+        .waterBonus = 10,
+        .weedsBonus = 1,
+        .pestsBonus = 4,
     },
 
     [ITEM_BABIRI_BERRY - FIRST_BERRY_INDEX] =
@@ -1219,6 +1375,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 35,
         .drainRate = 6,
+        .waterBonus = 10,
+        .weedsBonus = 1,
+        .pestsBonus = 4,
     },
 
     [ITEM_ROSELI_BERRY - FIRST_BERRY_INDEX] =
@@ -1239,6 +1398,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 35,
         .drainRate = 6,
+        .waterBonus = 10,
+        .weedsBonus = 1,
+        .pestsBonus = 4,
     },
 
     [ITEM_LIECHI_BERRY - FIRST_BERRY_INDEX] =
@@ -1259,6 +1421,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 80,
         .drainRate = 4,
+        .waterBonus = 2,
+        .weedsBonus = 0,
+        .pestsBonus = 2,
     },
 
     [ITEM_GANLON_BERRY - FIRST_BERRY_INDEX] =
@@ -1279,6 +1444,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 80,
         .drainRate = 4,
+        .waterBonus = 2,
+        .weedsBonus = 0,
+        .pestsBonus = 2,
     },
 
     [ITEM_SALAC_BERRY - FIRST_BERRY_INDEX] =
@@ -1299,6 +1467,9 @@ const struct Berry gBerries[] =
         .sour = 40,
         .smoothness = 80,
         .drainRate = 4,
+        .waterBonus = 2,
+        .weedsBonus = 0,
+        .pestsBonus = 2,
     },
 
     [ITEM_PETAYA_BERRY - FIRST_BERRY_INDEX] =
@@ -1319,6 +1490,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 80,
         .drainRate = 4,
+        .waterBonus = 2,
+        .weedsBonus = 0,
+        .pestsBonus = 2,
     },
 
     [ITEM_APICOT_BERRY - FIRST_BERRY_INDEX] =
@@ -1339,6 +1513,9 @@ const struct Berry gBerries[] =
         .sour = 40,
         .smoothness = 80,
         .drainRate = 4,
+        .waterBonus = 2,
+        .weedsBonus = 0,
+        .pestsBonus = 2,
     },
 
     [ITEM_LANSAT_BERRY - FIRST_BERRY_INDEX] =
@@ -1359,6 +1536,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 30,
         .drainRate = 4,
+        .waterBonus = 1,
+        .weedsBonus = 0,
+        .pestsBonus = 1,
     },
 
     [ITEM_STARF_BERRY - FIRST_BERRY_INDEX] =
@@ -1379,6 +1559,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 30,
         .drainRate = 4,
+        .waterBonus = 1,
+        .weedsBonus = 0,
+        .pestsBonus = 1,
     },
 
     [ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX] =
@@ -1399,6 +1582,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 60,
         .drainRate = 7,
+        .waterBonus = 2,
+        .weedsBonus = 0,
+        .pestsBonus = 0,
     },
 
     [ITEM_MICLE_BERRY - FIRST_BERRY_INDEX] =
@@ -1419,6 +1605,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 60,
         .drainRate = 7,
+        .waterBonus = 2,
+        .weedsBonus = 0,
+        .pestsBonus = 0,
     },
 
     [ITEM_CUSTAP_BERRY - FIRST_BERRY_INDEX] =
@@ -1439,6 +1628,9 @@ const struct Berry gBerries[] =
         .sour = 0,
         .smoothness = 60,
         .drainRate = 7,
+        .waterBonus = 2,
+        .weedsBonus = 0,
+        .pestsBonus = 0,
     },
 
     [ITEM_JABOCA_BERRY - FIRST_BERRY_INDEX] =
@@ -1459,6 +1651,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 60,
         .drainRate = 7,
+        .waterBonus = 2,
+        .weedsBonus = 0,
+        .pestsBonus = 0,
     },
 
     [ITEM_ROWAP_BERRY - FIRST_BERRY_INDEX] =
@@ -1479,6 +1674,9 @@ const struct Berry gBerries[] =
         .sour = 40,
         .smoothness = 60,
         .drainRate = 7,
+        .waterBonus = 2,
+        .weedsBonus = 0,
+        .pestsBonus = 0,
     },
 
     [ITEM_KEE_BERRY - FIRST_BERRY_INDEX] =
@@ -1499,6 +1697,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 60,
         .drainRate = 7,
+        .waterBonus = 2,
+        .weedsBonus = 0,
+        .pestsBonus = 2,
     },
 
     [ITEM_MARANGA_BERRY - FIRST_BERRY_INDEX] =
@@ -1519,6 +1720,9 @@ const struct Berry gBerries[] =
         .sour = 10,
         .smoothness = 60,
         .drainRate = 7,
+        .waterBonus = 2,
+        .weedsBonus = 0,
+        .pestsBonus = 2,
     },
 
     [ITEM_ENIGMA_BERRY_E_READER - FIRST_BERRY_INDEX] =
@@ -1539,6 +1743,9 @@ const struct Berry gBerries[] =
         .sour = 40,
         .smoothness = 40,
         .drainRate = 7,
+        .waterBonus = 2,
+        .weedsBonus = 0,
+        .pestsBonus = 0,
     },
 };
 
@@ -1978,9 +2185,26 @@ static u16 GetStageDurationByBerryType(u8 berry)
     return GetBerryInfo(berry)->growthDuration * 60 / (OW_BERRY_SIX_STAGES ? 6 : 4);
 }
 
-static u16 GetDrainRateByBerryType(u8 berry)
+static u8 GetDrainRateByBerryType(u8 berry)
 {
     return GetBerryInfo(berry)->drainRate;
+}
+
+static u8 GetWaterBonusByBerryType(u8 berry)
+{
+    return GetBerryInfo(berry)->waterBonus;
+}
+
+static u8 GetWeedingBonusByBerryType(u8 berry)
+{
+    u8 bonus = GetBerryInfo(berry)->weedsBonus;
+    return (bonus == 0) ? 1 : bonus * 5;
+}
+
+static u8 GetPestsBonusByBerryType(u8 berry)
+{
+    u8 bonus = GetBerryInfo(berry)->pestsBonus;
+    return (bonus == 0) ? 2 : bonus * 5;
 }
 
 void ObjectEventInteractionGetBerryTreeData(void)
