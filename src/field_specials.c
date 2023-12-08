@@ -1424,7 +1424,7 @@ void LoadWallyZigzagoon(void)
 {
     u16 monData;
     #ifdef UBFIX
-    u16 monDataU8;
+    bool8 monDataU8;
     #endif
 
     CreateMon(&gPlayerParty[0], SPECIES_ZIGZAGOON, 7, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
