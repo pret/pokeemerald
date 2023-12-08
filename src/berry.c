@@ -170,14 +170,19 @@ static const u8 sBerryDescriptionPart2_Kee[] = _("first, then extremely bitter."
 static const u8 sBerryDescriptionPart1_Maranga[] = _("Its outside is very bitter, but its");
 static const u8 sBerryDescriptionPart2_Maranga[] = _("inside tastes like a sweet drink.");
 
-#if OW_BERRY_GROWTH_RATE < GEN_3 || OW_BERRY_GROWTH_RATE > GEN_7
+// Check include/config/overworld.h configs and throw an error if illegal
+#if OW_BERRY_GROWTH_RATE < GEN_3 || (OW_BERRY_GROWTH_RATE > GEN_7 && OW_BERRY_GROWTH_RATE != GEN_6_ORAS)
 #error "OW_BERRY_GROWTH_RATE must be between GEN_3 and GEN_7!"
 #endif
 
-#if OW_BERRY_YIELD_RATE < GEN_3 || OW_BERRY_YIELD_RATE > GEN_6
+#if OW_BERRY_YIELD_RATE < GEN_3 || (OW_BERRY_YIELD_RATE > GEN_6 && OW_BERRY_GROWTH_RATE != GEN_6_ORAS)
 #error "OW_BERRY_YIELD_RATE must be between GEN_3 and GEN_6!"
 #elif OW_BERRY_YIELD_RATE == GEN_5
 #error "OW_BERRY_YIELD_RATE can not be GEN_5!"
+#endif
+
+#if OW_BERRY_MOISTURE && OW_BERRY_DRAIN_RATE != GEN_4 && OW_BERRY_DRAIN_RATE != GEN_6_XY && OW_BERRY_DRAIN_RATE != GEN_6_ORAS
+#error "OW_BERRY_DRAIN_RATE must be GEN_5, GEN_6_XY or GEN_6_ORAS!"
 #endif
 
 #define GROWTH_DURATION(g3, g4, g5, xy, oras, g7) OW_BERRY_GROWTH_RATE == GEN_3 ? g3 : OW_BERRY_GROWTH_RATE == GEN_4 ? g4 : OW_BERRY_GROWTH_RATE == GEN_5 ? g5 : OW_BERRY_GROWTH_RATE == GEN_6_XY ? xy : OW_BERRY_GROWTH_RATE == GEN_6_ORAS ? oras : g7
@@ -1991,7 +1996,7 @@ void BerryTreeTimeUpdate(s32 minutes)
                     {
                         if (OW_BERRY_MOISTURE)
                         {
-                            drainVal = OW_BERRY_VARIABLE_DRAIN_RATE ? GetDrainRateByBerryType(tree->berry) : 4;
+                            drainVal = (OW_BERRY_DRAIN_RATE == GEN_4) ? GetDrainRateByBerryType(tree->berry) : (OW_BERRY_DRAIN_RATE == GEN_6_XY) ? 4 : 25;
                             if (OW_BERRY_MULCH_USAGE)
                             {
                                 if (tree->mulch == ITEM_TO_MULCH(ITEM_GROWTH_MULCH))
@@ -2012,7 +2017,7 @@ void BerryTreeTimeUpdate(s32 minutes)
                                 tree->moistureLevel = 0;
                             else
                                 tree->moistureLevel -= drainVal;
-                            if (!OW_BERRY_VARIABLE_DRAIN_RATE && tree->moistureLevel <= 4) // Without variable drain rate (and without mulches), this needs to trigger after 24 hours, hence the extra check
+                            if (OW_BERRY_DRAIN_RATE == GEN_6_XY && tree->moistureLevel <= 4) // Without variable drain rate (and without mulches), this needs to trigger after 24 hours, hence the extra check
                                 tree->moistureLevel = 0;
                         }
                         if (tree->moistureClock == 120)
