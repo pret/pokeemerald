@@ -1,11 +1,6 @@
 #include "global.h"
 #include "test/battle.h"
 
-ASSUMPTIONS
-{
-    ASSUME(P_GEN_7_POKEMON == TRUE); // Because only Necrozma can have this ability.
-}
-
 SINGLE_BATTLE_TEST("Neuroforce increases the strength of super-effective moves by 25%", s16 damage)
 {
     u32 move;

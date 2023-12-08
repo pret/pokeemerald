@@ -1349,16 +1349,20 @@ static void MarkPyramidTrainerAsBattled(u16 trainerId)
 #if BATTLE_PYRAMID_RANDOM_ENCOUNTERS == TRUE
 // check if given species evolved from a specific evolutionary stone
 // if nItems is passed as 0, it will check for any EVO_ITEM case
-extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
 static bool32 CheckBattlePyramidEvoRequirement(u16 species, const u16 *evoItems, u8 nItems)
 {
     u32 i, j, k;
     for (i = 0; i < NUM_SPECIES; i++)
     {
-        for (j = 0; j < EVOS_PER_MON; j++)
+        const struct Evolution *evolutions = GetSpeciesEvolutions(i);
+        if (evolutions == NULL)
+            continue;
+        for (j = 0; evolutions[j].method != EVOLUTIONS_END; j++)
         {
-            if (gEvolutionTable[i][j].targetSpecies == species
-                    && (gEvolutionTable[i][j].method == EVO_ITEM || gEvolutionTable[i][j].method == EVO_ITEM_MALE || gEvolutionTable[i][j].method == EVO_ITEM_FEMALE))
+            if (evolutions[j].targetSpecies == species
+                && (evolutions[j].method == EVO_ITEM
+                 || evolutions[j].method == EVO_ITEM_MALE
+                 || evolutions[j].method == EVO_ITEM_FEMALE))
             {
                 if (nItems == 0)
                 {
@@ -1368,10 +1372,10 @@ static bool32 CheckBattlePyramidEvoRequirement(u16 species, const u16 *evoItems,
                 else
                 {
                     // Otherwise, need to match specific set provided
-                    for (k = 0; k < nItems; k++) {
-                        if (gEvolutionTable[i][j].param == evoItems[k]) {
+                    for (k = 0; k < nItems; k++)
+                    {
+                        if (evolutions[j].param == evoItems[k])
                             return TRUE;
-                        }
                     }
                 }
             }
@@ -1465,7 +1469,7 @@ void GenerateBattlePyramidWildMon(void)
 
     // Set species, name
     SetMonData(&gEnemyParty[0], MON_DATA_SPECIES, &species);
-    StringCopy(name, gSpeciesNames[species]);
+    StringCopy(name, GetSpeciesName(species));
     SetMonData(&gEnemyParty[0], MON_DATA_NICKNAME, &name);
     
     // set level

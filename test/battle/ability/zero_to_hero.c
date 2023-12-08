@@ -1,11 +1,6 @@
 #include "global.h"
 #include "test/battle.h"
 
-ASSUMPTIONS
-{
-    ASSUME(P_GEN_9_POKEMON == TRUE);
-}
-
 SINGLE_BATTLE_TEST("Zero to Hero transforms Palafin when it switches out")
 {
     GIVEN {

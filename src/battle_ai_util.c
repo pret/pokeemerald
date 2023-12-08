@@ -489,6 +489,7 @@ void SaveBattlerData(u32 battlerId)
 static bool32 ShouldFailForIllusion(u32 illusionSpecies, u32 battlerId)
 {
     u32 i, j;
+    const struct LevelUpMove *learnset;
 
     if (BATTLE_HISTORY->abilities[battlerId] == ABILITY_ILLUSION)
         return FALSE;
@@ -500,13 +501,14 @@ static bool32 ShouldFailForIllusion(u32 illusionSpecies, u32 battlerId)
         if (move == MOVE_NONE)
             continue;
 
-        for (j = 0; gLevelUpLearnsets[illusionSpecies][j].move != MOVE_UNAVAILABLE; j++)
+        learnset = GetSpeciesLevelUpLearnset(illusionSpecies);
+        for (j = 0; learnset[j].move != MOVE_UNAVAILABLE; j++)
         {
-            if (gLevelUpLearnsets[illusionSpecies][j].move == move)
+            if (learnset[j].move == move)
                 break;
         }
         // The used move is in the learnsets of the fake species.
-        if (gLevelUpLearnsets[illusionSpecies][j].move != MOVE_UNAVAILABLE)
+        if (learnset[j].move != MOVE_UNAVAILABLE)
             continue;
 
         // The used move can be learned from Tm/Hm or Move Tutors.

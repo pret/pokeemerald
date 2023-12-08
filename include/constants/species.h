@@ -813,6 +813,7 @@
 #define SPECIES_SILVALLY_NORMAL                         773
 #define SPECIES_MINIOR                                  SPECIES_MINIOR_METEOR
 #define SPECIES_MINIOR_METEOR                           SPECIES_MINIOR_METEOR_RED
+#define SPECIES_MINIOR_RED                              SPECIES_MINIOR_METEOR_RED
 #define SPECIES_MINIOR_METEOR_RED                       774
 #define SPECIES_KOMALA                                  775
 #define SPECIES_TURTONATOR                              776
@@ -1349,6 +1350,12 @@
 #define SPECIES_SILVALLY_FAIRY                          FORMS_START + 287
 
 // Minior
+#define SPECIES_MINIOR_ORANGE                           SPECIES_MINIOR_METEOR_ORANGE
+#define SPECIES_MINIOR_YELLOW                           SPECIES_MINIOR_METEOR_YELLOW
+#define SPECIES_MINIOR_GREEN                            SPECIES_MINIOR_METEOR_GREEN
+#define SPECIES_MINIOR_BLUE                             SPECIES_MINIOR_METEOR_BLUE
+#define SPECIES_MINIOR_INDIGO                           SPECIES_MINIOR_METEOR_INDIGO
+#define SPECIES_MINIOR_VIOLET                           SPECIES_MINIOR_METEOR_VIOLET
 #define SPECIES_MINIOR_METEOR_ORANGE                    FORMS_START + 288
 #define SPECIES_MINIOR_METEOR_YELLOW                    FORMS_START + 289
 #define SPECIES_MINIOR_METEOR_GREEN                     FORMS_START + 290

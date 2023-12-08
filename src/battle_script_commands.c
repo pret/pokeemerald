@@ -94,8 +94,6 @@
 #define MEMBERS_7(a, b, c, d, e, f, g) a; b; c; d; e; f; g;
 #define MEMBERS_8(a, b, c, d, e, f, g, h) a; b; c; d; e; f; g; h;
 
-extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
-
 extern const u8 *const gBattleScriptsForMoveEffects[];
 
 // table to avoid ugly powing on gba (courtesy of doesnt)
@@ -14787,7 +14785,7 @@ static void Cmd_handleballthrow(void)
         else
             catchRate = gSpeciesInfo[gBattleMons[gBattlerTarget].species].catchRate;
 
-        if (gSpeciesInfo[gBattleMons[gBattlerTarget].species].flags & SPECIES_FLAG_ULTRA_BEAST)
+        if (gSpeciesInfo[gBattleMons[gBattlerTarget].species].isUltraBeast)
         {
             if (gLastUsedItem == ITEM_BEAST_BALL)
                 ballMultiplier = 500;
@@ -14868,13 +14866,18 @@ static void Cmd_handleballthrow(void)
                     ballMultiplier = (B_LURE_BALL_MODIFIER >= GEN_7 ? 500 : 300);
                 break;
             case ITEM_MOON_BALL:
-                for (i = 0; i < EVOS_PER_MON; i++)
+            {
+                const struct Evolution *evolutions = GetSpeciesEvolutions(gBattleMons[gBattlerTarget].species);
+                if (evolutions == NULL)
+                    break;
+                for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
                 {
-                    if (gEvolutionTable[gBattleMons[gBattlerTarget].species][i].method == EVO_ITEM
-                        && gEvolutionTable[gBattleMons[gBattlerTarget].species][i].param == ITEM_MOON_STONE)
+                    if (evolutions[i].method == EVO_ITEM
+                        && evolutions[i].param == ITEM_MOON_STONE)
                         ballMultiplier = 400;
                 }
-                break;
+            }
+            break;
             case ITEM_LOVE_BALL:
                 if (gBattleMons[gBattlerTarget].species == gBattleMons[gBattlerAttacker].species)
                 {
@@ -14890,7 +14893,7 @@ static void Cmd_handleballthrow(void)
                     ballMultiplier = 400;
                 break;
             case ITEM_HEAVY_BALL:
-                i = GetPokedexHeightWeight(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), 1);
+                i = GetSpeciesWeight(gBattleMons[gBattlerTarget].species);
                 if (B_HEAVY_BALL_MODIFIER >= GEN_7)
                 {
                     if (i < 1000)
@@ -15112,7 +15115,7 @@ static void Cmd_displaydexinfo(void)
         if (!gPaletteFade.active)
         {
             FreeAllWindowBuffers();
-            gBattleCommunication[TASK_ID] = DisplayCaughtMonDexPage(SpeciesToNationalPokedexNum(species),
+            gBattleCommunication[TASK_ID] = DisplayCaughtMonDexPage(species,
                                                                         gBattleMons[GetCatchingBattler()].otId,
                                                                         gBattleMons[GetCatchingBattler()].personality);
             gBattleCommunication[0]++;

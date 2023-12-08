@@ -4,7 +4,6 @@
 SINGLE_BATTLE_TEST("Aegislash reverts to Shield Form upon fainting")
 {
     GIVEN {
-        ASSUME(P_GEN_6_POKEMON == TRUE);
         PLAYER(SPECIES_AEGISLASH_SHIELD) { HP(1); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);

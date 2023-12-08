@@ -4073,9 +4073,10 @@ static bool32 IsDomeRareMove(u32 move)
     u16 species = 0;
     for(i = 0; i < NUM_SPECIES; i++)
     {
-        for(j = 0; gLevelUpLearnsets[i][j].move != LEVEL_UP_MOVE_END; j++)
+        const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(i);
+        for(j = 0; learnset[j].move != LEVEL_UP_MOVE_END; j++)
         {
-            if (gLevelUpLearnsets[i][j].move == move)
+            if (learnset[j].move == move)
             {
                 species++;
                 break;

@@ -4,7 +4,6 @@
 ASSUMPTIONS
 {
     ASSUME(gBattleMoves[MOVE_RELIC_SONG].effect == EFFECT_RELIC_SONG);
-    ASSUME(P_GEN_5_POKEMON == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Relic Song has a 10% chance to put the target to sleep")
@@ -43,7 +42,6 @@ SINGLE_BATTLE_TEST("Relic Song is prevented by Soundproof")
 SINGLE_BATTLE_TEST("Relic Song will become a Water-type move when used by a Pokémon with the Ability Liquid Voice")
 {
     GIVEN {
-        ASSUME(P_GEN_7_POKEMON == TRUE);
         PLAYER(SPECIES_VULPIX);
         OPPONENT(SPECIES_POPPLIO) { Ability(ABILITY_LIQUID_VOICE); }
     } WHEN {
@@ -164,7 +162,6 @@ SINGLE_BATTLE_TEST("Relic Song loses the form-changing effect with Sheer Force")
 SINGLE_BATTLE_TEST("Relic Song transforms Meloetta after Magician was activated")
 {
     GIVEN {
-        ASSUME(P_GEN_6_POKEMON == TRUE);
         PLAYER(SPECIES_MELOETTA_ARIA);
         OPPONENT(SPECIES_DELPHOX) { Ability(ABILITY_MAGICIAN); Item(ITEM_POTION); }
     } WHEN {

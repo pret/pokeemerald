@@ -65,7 +65,6 @@ SINGLE_BATTLE_TEST("U-turn does not switch the user out if replacements fainted"
 SINGLE_BATTLE_TEST("U-turn does not switch the user out if Wimp Out activates")
 {
     GIVEN {
-        ASSUME(P_GEN_7_POKEMON == TRUE);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WIMPOD) { MaxHP(100); HP(51); Ability(ABILITY_WIMP_OUT); }
@@ -83,7 +82,6 @@ SINGLE_BATTLE_TEST("U-turn does not switch the user out if Wimp Out activates")
 SINGLE_BATTLE_TEST("U-turn switches the user out if Wimp Out fails to activate")
 {
     GIVEN {
-        ASSUME(P_GEN_7_POKEMON == TRUE);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WIMPOD) { MaxHP(100); HP(51); Ability(ABILITY_WIMP_OUT); }

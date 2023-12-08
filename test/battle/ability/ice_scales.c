@@ -1,11 +1,6 @@
 #include "global.h"
 #include "test/battle.h"
 
-ASSUMPTIONS
-{
-    ASSUME(P_GEN_8_POKEMON == TRUE); // Because only Frosmoth can have this ability.
-}
-
 SINGLE_BATTLE_TEST("Ice Scales halves the damage from special moves", s16 damage)
 {
     u32 move;

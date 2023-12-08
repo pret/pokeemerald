@@ -41,7 +41,6 @@ SINGLE_BATTLE_TEST("Kee Berry raises the holder's Defense by one stage when hit 
 SINGLE_BATTLE_TEST("Kee Berry raises the holder's Defense by two stages with Ripen when hit by a physical move")
 {
     GIVEN {
-        ASSUME(P_GEN_8_POKEMON == TRUE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_APPLIN) { Item(ITEM_KEE_BERRY); Ability(ABILITY_RIPEN); }
     } WHEN {

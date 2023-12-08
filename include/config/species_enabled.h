@@ -1,17 +1,58 @@
-#ifndef GUARD_CONFIG_SPECIES_FAMILIES_H
-#define GUARD_CONFIG_SPECIES_FAMILIES_H
+#ifndef GUARD_CONFIG_SPECIES_ENABLED_H
+#define GUARD_CONFIG_SPECIES_ENABLED_H
 
+// Modifying the latest generation WILL change the saveblock due to Dex flags and will require a new save file.
+// Generations of Pokémon are defined by the first member introduced,
+// so Pikachu depends on the Gen 1 setting despite Pichu being the lowest member of the evolution tree.
+// Eg: If P_GEN_2_POKEMON is set to FALSE, all members of the Sneasel Family will be disabled
+// (Sneasel + Hisuian, Weavile and Sneasler).
+#define P_GEN_1_POKEMON                  TRUE // Generation 1 Pokémon (RGBY)
+#define P_GEN_2_POKEMON                  TRUE // Generation 2 Pokémon (GSC)
+#define P_GEN_3_POKEMON                  TRUE // Generation 3 Pokémon (RSE, FRLG)
+#define P_GEN_4_POKEMON                  TRUE // Generation 4 Pokémon (DPPt, HGSS)
+#define P_GEN_5_POKEMON                  TRUE // Generation 5 Pokémon (BW, B2W2)
+#define P_GEN_6_POKEMON                  TRUE // Generation 6 Pokémon (XY, ORAS)
+#define P_GEN_7_POKEMON                  TRUE // Generation 7 Pokémon (SM, USUM, LGPE)
+#define P_GEN_8_POKEMON                  TRUE // Generation 8 Pokémon (SwSh, BDSP, LA)
+#define P_GEN_9_POKEMON                  TRUE // Generation 9 Pokémon (SV)
+
+// Setting this to TRUE will add the new evolutions to the Regional Dex.
+#define P_NEW_EVOS_IN_REGIONAL_DEX       TRUE
+
+// Battle gimmick specific Forms.
+#define P_MEGA_EVOLUTIONS                TRUE
+#define P_PRIMAL_REVERSIONS              TRUE // Groudon and Kyogre only.
+#define P_ULTRA_BURST_FORMS              TRUE // Ultra Necrozma only.
+#define P_GIGANTAMAX_FORMS               TRUE
+#define P_TERA_FORMS                     TRUE
+
+// Fusion forms
+#define P_FUSION_FORMS                   TRUE
+
+// Regional Forms. Includes Regional Form evolutions, like Sirfetch'd.
 #define P_REGIONAL_FORMS                 TRUE
 #define P_ALOLAN_FORMS                   P_REGIONAL_FORMS
 #define P_GALARIAN_FORMS                 P_REGIONAL_FORMS
 #define P_HISUIAN_FORMS                  P_REGIONAL_FORMS
 #define P_PALDEAN_FORMS                  P_REGIONAL_FORMS
 
-#define P_MEGA_EVOLUTIONS                TRUE
-#define P_GIGANTAMAX_FORMS               TRUE
+// Big groups of forms that aren't always desired when choosing families.
+#define P_PIKACHU_EXTRA_FORMS            TRUE
+#define P_COSPLAY_PIKACHU_FORMS          P_PIKACHU_EXTRA_FORMS
+#define P_CAP_PIKACHU_FORMS              P_PIKACHU_EXTRA_FORMS
+
+// Cross-generation evolutions. Includes pre-evolutions.
+#define P_CROSS_GENERATION_EVOS          TRUE
+#define P_GEN_2_CROSS_EVOS               P_CROSS_GENERATION_EVOS
+#define P_GEN_3_CROSS_EVOS               P_CROSS_GENERATION_EVOS
+#define P_GEN_4_CROSS_EVOS               P_CROSS_GENERATION_EVOS
+//#define P_GEN_5_CROSS_EVOS             // Gen 5 didn't introduce any cross-gen evos.
+#define P_GEN_6_CROSS_EVOS               P_CROSS_GENERATION_EVOS // Just Sylveon.
+//#define P_GEN_7_CROSS_EVOS             // Alolan evolutions handled by P_ALOLAN_FORMS.
+#define P_GEN_8_CROSS_EVOS               P_CROSS_GENERATION_EVOS // Regional evolutions handled by P_GALARIAN_FORMS and P_HISUIAN_FORMS.
+#define P_GEN_9_CROSS_EVOS               P_CROSS_GENERATION_EVOS // Clodsire handled by P_PALDEAN_FORMS.
 
 // To disable specific families, replace P_GEN_x_POKEMON with FALSE.
-
 #define P_FAMILY_BULBASAUR               P_GEN_1_POKEMON
 #define P_FAMILY_CHARMANDER              P_GEN_1_POKEMON
 #define P_FAMILY_SQUIRTLE                P_GEN_1_POKEMON
@@ -554,4 +595,4 @@
 #define P_FAMILY_FEZANDIPITI             P_GEN_9_POKEMON
 #define P_FAMILY_OGERPON                 P_GEN_9_POKEMON
 
-#endif // GUARD_CONFIG_SPECIES_FAMILIES_H
+#endif // GUARD_CONFIG_SPECIES_ENABLED_H

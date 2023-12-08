@@ -301,7 +301,7 @@
 #define EVO_LEVEL_FAMILY_OF_THREE         45     // Pokémon reaches the specified level with a personality value with a modulus of 0
 #define EVO_LEVEL_FAMILY_OF_FOUR          46     // Pokémon reaches the specified level with a personality value with a modulus of 1-99
 
-#define EVOS_PER_MON 11
+#define EVOLUTIONS_END 0xFFFF
 
 // Evolution 'modes,' for GetEvolutionTargetSpecies
 #define EVO_MODE_NORMAL            0
@@ -330,21 +330,6 @@
 #define NUM_ABILITY_SLOTS (NUM_NORMAL_ABILITY_SLOTS + NUM_HIDDEN_ABILITY_SLOTS)
 #define NUM_NORMAL_ABILITY_SLOTS 2
 #define NUM_HIDDEN_ABILITY_SLOTS 1
-
-// Species Flags
-#define SPECIES_FLAG_LEGENDARY          (1 << 0)
-#define SPECIES_FLAG_MYTHICAL           (1 << 1)
-#define SPECIES_FLAG_MEGA_EVOLUTION     (1 << 2)
-#define SPECIES_FLAG_PRIMAL_REVERSION   (1 << 3)
-#define SPECIES_FLAG_ULTRA_BEAST        (1 << 4)
-#define SPECIES_FLAG_ALOLAN_FORM        (1 << 5)
-#define SPECIES_FLAG_GALARIAN_FORM      (1 << 6)
-#define SPECIES_FLAG_HISUIAN_FORM       (1 << 7)
-#define SPECIES_FLAG_PALDEAN_FORM       (1 << 8)
-#define SPECIES_FLAG_ALL_PERFECT_IVS    (1 << 9)
-#define SPECIES_FLAG_CANNOT_BE_TRADED   (1 << 10)
-#define SPECIES_FLAG_ULTRA_BURST        (1 << 11)
-#define SPECIES_FLAG_PARADOX            (1 << 12)
 
 #define LEGENDARY_PERFECT_IV_COUNT 3
 

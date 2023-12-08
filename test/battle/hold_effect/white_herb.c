@@ -165,7 +165,6 @@ SINGLE_BATTLE_TEST("White Herb wont have time to activate if Magician steals it"
 {
     KNOWN_FAILING; // White Herb is activated
     GIVEN {
-        ASSUME(P_GEN_6_POKEMON == TRUE);
         PLAYER(SPECIES_SLUGMA) {  Ability(ABILITY_WEAK_ARMOR); Item(ITEM_WHITE_HERB); }
         OPPONENT(SPECIES_FENNEKIN) { Ability(ABILITY_MAGICIAN); }
     } WHEN {

@@ -39,7 +39,6 @@ DOUBLE_BATTLE_TEST("Heal Pulse can heal partner")
 SINGLE_BATTLE_TEST("Heal Pulse is boosted by Mega Launcher")
 {
     GIVEN {
-        ASSUME(P_GEN_6_POKEMON == TRUE);
         PLAYER(SPECIES_WOBBUFFET) { MaxHP(100); HP(1); }
         OPPONENT(SPECIES_CLAWITZER);
     } WHEN {

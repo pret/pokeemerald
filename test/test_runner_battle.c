@@ -27,6 +27,8 @@
 #define INVALID(fmt, ...) Test_ExitWithResult(TEST_RESULT_INVALID, "%s:%d: " fmt, gTestRunnerState.test->filename, sourceLine, ##__VA_ARGS__)
 #define INVALID_IF(c, fmt, ...) do { if (c) Test_ExitWithResult(TEST_RESULT_INVALID, "%s:%d: " fmt, gTestRunnerState.test->filename, sourceLine, ##__VA_ARGS__); } while (0)
 
+#define ASSUMPTION_FAIL_IF(c, fmt, ...) do { if (c) Test_ExitWithResult(TEST_RESULT_ASSUMPTION_FAIL, "%s:%d: " fmt, gTestRunnerState.test->filename, sourceLine, ##__VA_ARGS__); } while (0)
+
 #define STATE gBattleTestRunnerState
 #define DATA gBattleTestRunnerState->data
 
@@ -1482,6 +1484,7 @@ void OpenPokemon(u32 sourceLine, u32 side, u32 species)
     u8 *partySize;
     struct Pokemon *party;
     INVALID_IF(species >= SPECIES_EGG, "Invalid species: %d", species);
+    ASSUMPTION_FAIL_IF(!IsSpeciesEnabled(species), "Species disabled: %d", species);
     if (side == B_SIDE_PLAYER)
     {
         partySize = &DATA.playerPartySize;
@@ -1492,7 +1495,7 @@ void OpenPokemon(u32 sourceLine, u32 side, u32 species)
         partySize = &DATA.opponentPartySize;
         party = DATA.recordedBattle.opponentParty;
     }
-    INVALID_IF(*partySize == PARTY_SIZE, "Too many Pokemon in party");
+    INVALID_IF(*partySize >= PARTY_SIZE, "Too many Pokemon in party");
     DATA.currentSide = side;
     DATA.currentPartyIndex = *partySize;
     DATA.currentMon = &party[DATA.currentPartyIndex];
