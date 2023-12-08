@@ -20,7 +20,7 @@ JPCONTESTGFXDIR := graphics/contest/japanese
 POKEDEXGFXDIR := graphics/pokedex
 STARTERGFXDIR := graphics/starter_choose
 NAMINGGFXDIR := graphics/naming_screen
-SPINDAGFXDIR := graphics/spinda_spots
+SPINDAGFXDIR := graphics/pokemon/spinda/spots
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark fairy
 contest_types := cool beauty cute smart tough
@@ -253,10 +253,10 @@ $(FONTGFXDIR)/short.fwjpnfont: $(FONTGFXDIR)/japanese_short.png
 $(FONTGFXDIR)/braille.fwjpnfont: $(FONTGFXDIR)/braille.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/frlg_male.fwjpnfont: $(FONTGFXDIR)/japanese_frlg_male_font.png
+$(FONTGFXDIR)/frlg_male.fwjpnfont: $(FONTGFXDIR)/japanese_frlg_male.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/frlg_female.fwjpnfont: $(FONTGFXDIR)/japanese_frlg_female_font.png
+$(FONTGFXDIR)/frlg_female.fwjpnfont: $(FONTGFXDIR)/japanese_frlg_female.png
 	$(GFX) $< $@
 
 

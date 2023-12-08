@@ -7,6 +7,8 @@
 static void *sHeapStart;
 static u32 sHeapSize;
 
+EWRAM_DATA u8 gHeap[HEAP_SIZE] = {0};
+
 void PutMemBlockHeader(void *block, struct MemBlock *prev, struct MemBlock *next, u32 size)
 {
     struct MemBlock *header = (struct MemBlock *)block;

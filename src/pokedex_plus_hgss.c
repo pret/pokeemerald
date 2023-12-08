@@ -192,7 +192,7 @@ static const u8 sText_Stats_eggGroup_AMORPHOUS[] = _("AMORPHOUS");
 static const u8 sText_Stats_eggGroup_WATER_2[] = _("WATER {CIRCLE_2}");
 static const u8 sText_Stats_eggGroup_DITTO[] = _("DITTO");
 static const u8 sText_Stats_eggGroup_DRAGON[] = _("DRAGON");
-static const u8 sText_Stats_eggGroup_UNDISCOVERED[] = _("---");
+static const u8 sText_Stats_eggGroup_NO_EGGS_DISCOVERED[] = _("---");
 static const u8 sText_Dex_SEEN[] = _("SEEN");
 static const u8 sText_Dex_OWN[] = _("OWN");
 
@@ -5885,7 +5885,7 @@ static void PrintStatsScreen_Left(u8 taskId)
         base_i++;
 
         //Egg cycles
-        if (sPokedexView->sPokemonStats.eggGroup1 == EGG_GROUP_UNDISCOVERED || sPokedexView->sPokemonStats.eggGroup2 == EGG_GROUP_UNDISCOVERED) //Species without eggs (legendaries etc)
+        if (sPokedexView->sPokemonStats.eggGroup1 == EGG_GROUP_NO_EGGS_DISCOVERED || sPokedexView->sPokemonStats.eggGroup2 == EGG_GROUP_NO_EGGS_DISCOVERED) //Species without eggs (legendaries etc)
         {
             PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_EggCycles, base_x, base_y + base_y_offset*base_i);
             PrintStatsScreenTextSmall(WIN_STATS_LEFT, gText_ThreeDashes, 78, base_y + base_y_offset*base_i);
@@ -5962,8 +5962,8 @@ static void PrintStatsScreen_Left(u8 taskId)
         case EGG_GROUP_DRAGON      :
             StringCopy(gStringVar1, sText_Stats_eggGroup_DRAGON);
             break;
-        case EGG_GROUP_UNDISCOVERED:
-            StringCopy(gStringVar1, sText_Stats_eggGroup_UNDISCOVERED);
+        case EGG_GROUP_NO_EGGS_DISCOVERED:
+            StringCopy(gStringVar1, sText_Stats_eggGroup_NO_EGGS_DISCOVERED);
             break;
         }
         //Egg group 2
@@ -6013,8 +6013,8 @@ static void PrintStatsScreen_Left(u8 taskId)
             case EGG_GROUP_DRAGON      :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_DRAGON);
                 break;
-            case EGG_GROUP_UNDISCOVERED:
-                StringCopy(gStringVar2, sText_Stats_eggGroup_UNDISCOVERED);
+            case EGG_GROUP_NO_EGGS_DISCOVERED:
+                StringCopy(gStringVar2, sText_Stats_eggGroup_NO_EGGS_DISCOVERED);
                 break;
             }
             StringExpandPlaceholders(gStringVar3, sText_Stats_eggGroup_Groups);
