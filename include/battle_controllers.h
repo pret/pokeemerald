@@ -103,18 +103,16 @@ enum {
 #define SetMonData16(mon, type, arg) SetMonData(mon, type, arg)
 #define SetMonData32(mon, type, arg) SetMonData(mon, type, arg)
 #else
-#define SetMonData16(mon, type, arg)            \
-{                                           \
-    u8 *data = arg;                         \
-    u16 value = (data[0]) | (data[1] << 8); \
-    SetMonData(mon, type, &value);          \
+#define SetMonData16(mon, type, arg) \
+{                                    \
+    u16 value = T1_READ_16(arg);     \
+    SetMonData(mon, type, &value);   \
 }
 
-#define SetMonData32(mon, type, arg)                                                \
-{                                                                               \
-    u8 *data = arg;                                                             \
-    u32 value = (data[0]) | (data[1] << 8) | (data[2] << 16) | (data[3] << 24); \
-    SetMonData(mon, type, &value);                                              \
+#define SetMonData32(mon, type, arg) \
+{                                    \
+    u32 value = T1_READ_32(arg);     \
+    SetMonData(mon, type, &value);   \
 }
 #endif
 
