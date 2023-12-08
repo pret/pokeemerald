@@ -2434,15 +2434,15 @@ static void CreateMonDexNum(u16 entryNum, u8 left, u8 top, u16 unused)
     if (sPokedexView->dexMode == DEX_MODE_HOENN)
         dexNum = NationalToHoennOrder(dexNum);
     memcpy(text, sText_No0000, ARRAY_COUNT(sText_No0000));
-    if (NATIONAL_DEX_COUNT > 999)
+    if (NATIONAL_DEX_COUNT > 999 && sPokedexView->dexMode != DEX_MODE_HOENN)
     {
         text[2] = CHAR_0 + dexNum / 1000;
         offset++;
     }
-    text[offset] = CHAR_0 + (dexNum % 1000) / 100;
-    text[offset + 1] = CHAR_0 + ((dexNum % 1000) % 100) / 10;
-    text[offset + 2] = CHAR_0 + ((dexNum % 1000) % 100) % 10;
-    text[offset + 3] = EOS;
+    text[offset++] = CHAR_0 + (dexNum % 1000) / 100;
+    text[offset++] = CHAR_0 + ((dexNum % 1000) % 100) / 10;
+    text[offset++] = CHAR_0 + ((dexNum % 1000) % 100) % 10;
+    text[offset++] = EOS;
     PrintMonDexNumAndName(0, FONT_NARROW, text, left, top);
 }
 
