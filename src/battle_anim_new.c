@@ -5680,13 +5680,13 @@ const struct SpriteTemplate gBlackHoleEclipseRedRingInwardsSpriteTemplate =
     .affineAnims = gThinRingShrinkingAffineAnimTable,
     .callback = AnimSpriteOnMonPos
 };
-static const union AffineAnimCmd gGrowingBackHoleTargetAffineCmds[] = {
+static const union AffineAnimCmd sGrowingBackHoleTargetAffineCmds[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0, 0, -10, 0x88),
     AFFINEANIMCMD_END,
 };
 static const union AffineAnimCmd *const gGrowingBlackHoleTargetAffineAnimTable[] = {
-    gGrowingBackHoleTargetAffineCmds,
+    sGrowingBackHoleTargetAffineCmds,
 };
 const struct SpriteTemplate gBlackHoleEclipseHoleSpriteTemplate =
 {
@@ -5698,13 +5698,13 @@ const struct SpriteTemplate gBlackHoleEclipseHoleSpriteTemplate =
     .affineAnims = gGrowingBlackHoleTargetAffineAnimTable,
     .callback = AnimSpriteOnMonPos
 };
-static const union AffineAnimCmd gShrinkingBlackHoleAffineCmds[] = {
+static const union AffineAnimCmd sShrinkingBlackHoleAffineCmds[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(-0x10, -0x10, 0xf6, 8),
     AFFINEANIMCMD_END_ALT(1),
 };
 static const union AffineAnimCmd *const gShrinkingBlackHoleAffineAnimTable[] = {
-    gShrinkingBlackHoleAffineCmds,
+    sShrinkingBlackHoleAffineCmds,
 };
 const struct SpriteTemplate gBlackHoleEclipseHoleShrinkSpriteTemplate =
 {
@@ -5716,13 +5716,13 @@ const struct SpriteTemplate gBlackHoleEclipseHoleShrinkSpriteTemplate =
     .affineAnims = gShrinkingBlackHoleAffineAnimTable,
     .callback = AnimSpriteOnMonPos
 };
-static const union AffineAnimCmd gGrowingBackHoleAffineCmds[] = {
+static const union AffineAnimCmd sGrowingBackHoleAffineCmds[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0, 0, -10, 0x48),
     AFFINEANIMCMD_END,
 };
 static const union AffineAnimCmd *const gGrowingBlackHoleAffineAnimTable[] = {
-    gGrowingBackHoleAffineCmds,
+    sGrowingBackHoleAffineCmds,
 };
 const struct SpriteTemplate gBlackHoleEclipseHoleUserSpriteTemplate =
 {
