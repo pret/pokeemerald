@@ -105,11 +105,76 @@ int main(int argc, char *argv[])
     });
 
     env.add_callback("cleanString", 1, [](Arguments& args) {
-        string badChars = ".'{} \n\t-\u00e9";
+        string badChars = ".'{} \n\t-&¿?";
+        string aChars = "áàâä";
+        string AChars = "ÁÀÂÄ";
+        string eChars = "éèêë";
+        string EChars = "ÉÈÊË";
+        string iChars = "íìîï";
+        string IChars = "ÍÌÎÏ";
+        string oChars = "óòôöœ";
+        string OChars = "ÓÒÔÖŒ";
+        string uChars = "úùûü";
+        string UChars = "ÚÙÛÜ";
+        string nChars = "ñ";
+        string NChars = "Ñ";
+        string dummyChars = "";
         string str = args.at(0)->get<string>();
         for (unsigned int i = 0; i < str.length(); i++) {
             if (badChars.find(str[i]) != std::string::npos) {
                 str[i] = '_';
+            }
+            if (nChars.find(str[i]) != std::string::npos)
+            {
+                str[i] = '_';
+            }
+            if (nChars.find(str[i]) != std::string::npos)
+            {
+                str[i] = 'n';
+            }
+            if (NChars.find(str[i]) != std::string::npos)
+            {
+                str[i] = 'N';
+            }
+            if (AChars.find(str[i]) != std::string::npos)
+            {
+                str[i] = 'A';
+            }
+            if (EChars.find(str[i]) != std::string::npos)
+            {
+                str[i] = 'E';
+            }
+            if (IChars.find(str[i]) != std::string::npos)
+            {
+                str[i] = 'I';
+            }
+            if (OChars.find(str[i]) != std::string::npos)
+            {
+                str[i] = 'O';
+            }
+            if (UChars.find(str[i]) != std::string::npos)
+            {
+                str[i] = 'U';
+            }
+            if (aChars.find(str[i]) != std::string::npos)
+            {
+                str[i] = 'a';
+            }
+            if (eChars.find(str[i]) != std::string::npos)
+            {
+                str[i] = 'e';
+            }
+            if (iChars.find(str[i]) != std::string::npos)
+            {
+                str[i] = 'i';
+            }
+            if (oChars.find(str[i]) != std::string::npos)
+            {
+                str[i] = 'o';
+            }
+            if (uChars.find(str[i]) != std::string::npos)
+            {
+                str[i] = 'u';
             }
         }
         return str;
