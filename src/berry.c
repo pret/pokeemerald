@@ -1858,10 +1858,17 @@ struct BerryTree *GetBerryTreeInfo(u8 id)
 bool32 ObjectEventInteractionWaterBerryTree(void)
 {
     struct BerryTree *tree = GetBerryTreeInfo(GetObjectEventBerryTreeId(gSelectedObjectEvent));
-#if OW_BERRY_MOISTURE == TRUE
-    tree->moistureLevel = 100;
-    return TRUE;
-#else
+
+    if (OW_BERRY_MOISTURE)
+    {
+        tree->moistureLevel = 100;
+        if (OW_BERRY_ALWAYS_WATERABLE)
+        {
+            return TRUE;
+        }
+        AddTreeBonus(tree, GetWaterBonusByBerryType(tree->berry));
+    }
+
     switch (tree->stage)
     {
     case BERRY_STAGE_PLANTED:
@@ -1882,7 +1889,6 @@ bool32 ObjectEventInteractionWaterBerryTree(void)
         return FALSE;
     }
     return TRUE;
-#endif
 }
 
 bool8 IsPlayerFacingEmptyBerryTreePatch(void)
@@ -1983,7 +1989,7 @@ void BerryTreeTimeUpdate(s32 minutes)
                     time -= 1;
                     if (tree->moistureClock % 60 == 0)
                     {
-                        if (OW_BERRY_MOISTURE == TRUE)
+                        if (OW_BERRY_MOISTURE)
                         {
                             drainVal = OW_BERRY_VARIABLE_DRAIN_RATE ? GetDrainRateByBerryType(tree->berry) : 4;
                             if (OW_BERRY_MULCH_USAGE)
@@ -1995,12 +2001,19 @@ void BerryTreeTimeUpdate(s32 minutes)
                                 if (tree->mulch == ITEM_TO_MULCH(ITEM_BOOST_MULCH) || tree->mulch == ITEM_TO_MULCH(ITEM_AMAZE_MULCH))
                                     drainVal = 25;
                             }
-                            if (tree->moistureLevel == 0 || (!OW_BERRY_VARIABLE_DRAIN_RATE && tree->moistureLevel == 4)) // Without variable drain rate (and without mulches), this needs to trigger after 24 hours, hence the extra check
-                                tree->watered++;
+                            if (OW_BERRY_ALWAYS_WATERABLE && tree->moistureLevel == 0)
+                            {
+                                if (tree->berryYield > GetBerryInfo(tree->berry)->minYield + GetBerryInfo(tree->berry)->maxYield / 5)
+                                    tree->berryYield -= GetBerryInfo(tree->berry)->maxYield / 5;
+                                else
+                                    tree->berryYield = GetBerryInfo(tree->berry)->minYield;
+                            }
                             else if (tree->moistureLevel <= drainVal)
                                 tree->moistureLevel = 0;
                             else
                                 tree->moistureLevel -= drainVal;
+                            if (!OW_BERRY_VARIABLE_DRAIN_RATE && tree->moistureLevel <= 4) // Without variable drain rate (and without mulches), this needs to trigger after 24 hours, hence the extra check
+                                tree->moistureLevel = 0;
                         }
                         if (tree->moistureClock == 120)
                         {
@@ -2041,6 +2054,8 @@ void PlantBerryTree(u8 id, u8 berry, u8 stage, bool8 allowGrowth)
     tree->minutesUntilNextStage = GetMulchAffectedGrowthRate(GetStageDurationByBerryType(berry), tree->mulch, stage);
     tree->stage = stage;
     tree->moistureLevel = 100;
+    if (OW_BERRY_ALWAYS_WATERABLE)
+        tree->berryYield = GetBerryInfo(berry)->maxYield;
     if (stage == BERRY_STAGE_BERRIES)
     {
         tree->berryYield = CalcBerryYield(tree);
@@ -2147,7 +2162,7 @@ static u8 CalcBerryYieldInternal(u16 max, u16 min, u8 water)
     u32 rand;
     u32 extraYield;
 
-    if (water == 0)
+    if (water == 0 || OW_BERRY_MOISTURE)
         return min;
     else
     {
@@ -2167,11 +2182,13 @@ static u8 CalcBerryYieldInternal(u16 max, u16 min, u8 water)
 static u8 CalcBerryYield(struct BerryTree *tree)
 {
     const struct Berry *berry = GetBerryInfo(tree->berry);
-    u8 min = berry->minYield + tree->berryYield;
+    u8 min = tree->berryYield;
     u8 max = berry->maxYield;
     u8 result;
     if (OW_BERRY_MULCH_USAGE && (tree->mulch == ITEM_TO_MULCH(ITEM_RICH_MULCH) || tree->mulch == ITEM_TO_MULCH(ITEM_AMAZE_MULCH)))
         min += 2;
+    if (!(OW_BERRY_MOISTURE && OW_BERRY_ALWAYS_WATERABLE))
+        min += berry->minYield;
     if (min >= max)
         result = max;
     else
