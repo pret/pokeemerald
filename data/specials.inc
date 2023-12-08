@@ -549,3 +549,4 @@ gSpecials::
 	def_special ObjectEventInteractionClearBerryPests
 	def_special ObjectEventInteractionBerryHasWeed
 	def_special ObjectEventInteractionBerryHasPests
+	def_special CanWaterBerryPlot

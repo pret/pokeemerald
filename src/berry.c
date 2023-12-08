@@ -2229,6 +2229,13 @@ static u8 GetPestsBonusByBerryType(u8 berry)
     return (bonus == 0) ? 2 : bonus * 5;
 }
 
+bool8 CanWaterBerryPlot(void)
+{
+    if (!OW_BERRY_MOISTURE || OW_BERRY_ALWAYS_WATERABLE)
+        return TRUE;
+    return (gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].moistureLevel == 0);
+}
+
 void ObjectEventInteractionGetBerryTreeData(void)
 {
     u8 id;

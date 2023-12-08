@@ -216,6 +216,8 @@ BerryTree_EventScript_WantToWater::
 .endif
 	checkitem ITEM_WAILMER_PAIL
 	goto_if_eq VAR_RESULT, FALSE, BerryTree_EventScript_DontWater
+	specialvar VAR_RESULT, CanWaterBerryPlot
+	goto_if_eq VAR_RESULT, FALSE, BerryTree_EventScript_DontWater
 	special ObjectEventInteractionGetBerryName
 	msgbox BerryTree_Text_WantToWater, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_WaterBerry
