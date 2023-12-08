@@ -255,7 +255,9 @@ static void ExitPartyMenu(void);
 static bool8 AllocPartyMenuBg(void);
 static bool8 AllocPartyMenuBgGfx(void);
 static void InitPartyMenuWindows(u8);
+static void LoadPartyMenuWindows(void);
 static void InitPartyMenuBoxes(u8);
+static void LoadPartyMenuBoxes(u8);
 static void LoadPartyMenuPokeballGfx(void);
 static bool8 CreatePartyMonSpritesLoop(void);
 static bool8 RenderPartyMenuBoxes(void);
@@ -557,17 +559,10 @@ static void InitPartyMenu(u8 menuType, u8 layout, u8 partyAction, bool8 keepCurs
 static void RefreshPartyMenu(void) //Refreshes the party menu without restarting tasks
 {
     u16 i;
-
-    sPartyMenuInternal->exitCallback = NULL;
-    sPartyMenuInternal->lastSelectedSlot = 0;
-    sPartyMenuInternal->spriteIdConfirmPokeball = 0x7F;
-    sPartyMenuInternal->spriteIdCancelPokeball = 0x7F;
-
     for (i = 0; i < ARRAY_COUNT(sPartyMenuInternal->data); i++)
         sPartyMenuInternal->data[i] = 0;
     for (i = 0; i < ARRAY_COUNT(sPartyMenuInternal->windowId); i++)
         sPartyMenuInternal->windowId[i] = WINDOW_NONE;
-
     gTextFlags.autoScroll = 0;
     CalculatePlayerPartyCount();
     SetMainCallback2(CB2_ReloadPartyMenu);
@@ -762,77 +757,62 @@ static bool8 ReloadPartyMenu(void)
         gMain.state++;
         break;
     case 6:
-        if (!AllocPartyMenuBg())
-        {
-            ExitPartyMenu();
-            return TRUE;
-        }
-        else
-        {
-            sPartyMenuInternal->data[0] = 0;
-            gMain.state++;
-        }
-        break;
-    case 7:
-        if (AllocPartyMenuBgGfx())
-            gMain.state++;
-        break;
-    case 8:
-        InitPartyMenuWindows(gPartyMenu.layout);
-        gMain.state++;
-        break;
-    case 9:
-        InitPartyMenuBoxes(gPartyMenu.layout);
         sPartyMenuInternal->data[0] = 0;
         gMain.state++;
         break;
-    case 10:
+    case 7:
+        LoadPartyMenuWindows();
+        gMain.state++;
+        break;
+    case 8:
+        LoadPartyMenuBoxes(gPartyMenu.layout);
+        sPartyMenuInternal->data[0] = 0;
+        gMain.state++;
+        break;
+    case 9:
         LoadHeldItemIcons();
         gMain.state++;
         break;
-    case 11:
+    case 10:
         LoadPartyMenuPokeballGfx();
         gMain.state++;
         break;
-    case 12:
+    case 11:
         LoadPartyMenuAilmentGfx();
         gMain.state++;
         break;
-    case 13:
+    case 12:
         LoadMonIconPalettes();
         gMain.state++;
         break;
-    case 14:
+    case 13:
         if (CreatePartyMonSpritesLoop())
         {
             sPartyMenuInternal->data[0] = 0;
             gMain.state++;
         }
         break;
-    case 15:
+    case 14:
         if (RenderPartyMenuBoxes())
         {
             sPartyMenuInternal->data[0] = 0;
             gMain.state++;
         }
         break;
-    case 16:
+    case 15:
         CreateCancelConfirmPokeballSprites();
         gMain.state++;
         break;
-    case 17:
+    case 16:
         CreateCancelConfirmWindows(sPartyMenuInternal->chooseHalf);
         gMain.state++;
         break;
-    case 18:
-        gMain.state++;
-        break;
-    case 19:
+    case 17:
         BlendPalettes(PALETTES_ALL, 16, RGB_WHITEALPHA);
         gPaletteFade.bufferTransferDisabled = FALSE;
         gMain.state++;
         break;
-    case 20:
+    case 18:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_WHITEALPHA);
         gMain.state++;
         break;
@@ -961,9 +941,13 @@ static void FreePartyPointers(void)
 
 static void InitPartyMenuBoxes(u8 layout)
 {
-    u8 i;
-
     sPartyMenuBoxes = Alloc(sizeof(struct PartyMenuBox[PARTY_SIZE]));
+    LoadPartyMenuBoxes(layout);
+}
+
+static void LoadPartyMenuBoxes(u8 layout)
+{
+    u32 i;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -2230,8 +2214,6 @@ static u8 CanTeachMove(struct Pokemon *mon, u16 move)
 
 static void InitPartyMenuWindows(u8 layout)
 {
-    u8 i;
-
     switch (layout)
     {
     case PARTY_LAYOUT_SINGLE:
@@ -2247,6 +2229,12 @@ static void InitPartyMenuWindows(u8 layout)
         InitWindows(sShowcaseMultiPartyMenuWindowTemplate);
         break;
     }
+    LoadPartyMenuWindows();
+}
+
+static void LoadPartyMenuWindows(void)
+{
+    u32 i;
     DeactivateAllTextPrinters();
     for (i = 0; i < PARTY_SIZE; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
