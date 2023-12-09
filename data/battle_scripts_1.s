@@ -904,8 +904,7 @@ BattleScript_EffectFling:
 	attackcanceler
 	jumpifcantfling BS_ATTACKER, BattleScript_FailedFromAtkString
 	setlastuseditem BS_ATTACKER
-	removeitem BS_ATTACKER
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	accuracycheck BattleScript_FlingMissed, ACC_CURR_MOVE
 	attackstring
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_PKMNFLUNG
@@ -914,6 +913,7 @@ BattleScript_EffectFling:
 	critcalc
 	damagecalc
 	adjustdamage
+	removeitem BS_ATTACKER
 	attackanimation
 	waitanimation
 	effectivenesssound
@@ -988,6 +988,12 @@ BattleScript_FlingWhiteHerb:
 	waitmessage B_WAIT_TIME_MED
 	swapattackerwithtarget
 	goto BattleScript_FlingEnd
+
+BattleScript_FlingMissed:
+	removeitem BS_ATTACKER
+	attackstring
+	ppreduce
+	goto BattleScript_MoveMissedPause
 
 BattleScript_EffectShellSideArm:
 	shellsidearmcheck
