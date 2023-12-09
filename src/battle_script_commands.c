@@ -2375,7 +2375,7 @@ static void Cmd_datahpupdate(void)
                 if (!gSpecialStatuses[battler].dmg && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
                     gSpecialStatuses[battler].dmg = gHpDealt;
 
-                if (IS_MOVE_PHYSICAL(gCurrentMove) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE) && gCurrentMove != MOVE_PAIN_SPLIT)
+                if (IS_MOVE_PHYSICAL(gCurrentMove) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE) && gBattleMoves[gCurrentMove].effect != EFFECT_PAIN_SPLIT)
                 {
                     gProtectStructs[battler].physicalDmg = gHpDealt;
                     gSpecialStatuses[battler].physicalDmg = gHpDealt;
@@ -2390,7 +2390,7 @@ static void Cmd_datahpupdate(void)
                         gSpecialStatuses[battler].physicalBattlerId = gBattlerTarget;
                     }
                 }
-                else if (!IS_MOVE_PHYSICAL(gCurrentMove) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
+                else if (!IS_MOVE_PHYSICAL(gCurrentMove) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE) && gBattleMoves[gCurrentMove].effect != EFFECT_PAIN_SPLIT)
                 {
                     gProtectStructs[battler].specialDmg = gHpDealt;
                     gSpecialStatuses[battler].specialDmg = gHpDealt;
@@ -8180,6 +8180,8 @@ static void RemoveAllTerrains(void)
 static bool32 TryDefogClear(u32 battlerAtk, bool32 clear)
 {
     s32 i;
+    u8 saveBattler = gBattlerAttacker;
+
     for (i = 0; i < 2; i++)
     {
         struct SideTimer *sideTimer = &gSideTimers[i];
@@ -8208,6 +8210,8 @@ static bool32 TryDefogClear(u32 battlerAtk, bool32 clear)
         }
         #endif // B_DEFOG_CLEARS_TERRAIN
     }
+
+    gBattlerAttacker = saveBattler;
 
     return FALSE;
 }
@@ -9575,25 +9579,6 @@ static void Cmd_various(void)
         VARIOUS_ARGS();
         UpdateAbilityPopup(battler);
         break;
-    }
-    case VARIOUS_DEFOG:
-    {
-        VARIOUS_ARGS(bool8 clear, const u8 *failInstr);
-        if (cmd->clear) // Clear
-        {
-            if (TryDefogClear(gEffectBattler, TRUE))
-                return;
-            else
-                gBattlescriptCurrInstr = cmd->nextInstr;
-        }
-        else
-        {
-            if (TryDefogClear(battler, FALSE))
-                gBattlescriptCurrInstr = cmd->nextInstr;
-            else
-                gBattlescriptCurrInstr = cmd->failInstr;
-        }
-        return;
     }
     case VARIOUS_JUMP_IF_TARGET_ALLY:
     {
@@ -16350,5 +16335,25 @@ void BS_TryHealPulse(void)
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = -1;
         gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+}
+
+void BS_TryDefog(void)
+{
+    NATIVE_ARGS(u8 clear, const u8 *failInstr);
+
+    if (cmd->clear)
+    {
+        if (TryDefogClear(gEffectBattler, TRUE))
+            return;
+        else
+            gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+    else
+    {
+        if (TryDefogClear(gBattlerAttacker, FALSE))
+            gBattlescriptCurrInstr = cmd->nextInstr;
+        else
+            gBattlescriptCurrInstr = cmd->failInstr;
     }
 }
