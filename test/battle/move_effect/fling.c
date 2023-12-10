@@ -272,7 +272,7 @@ SINGLE_BATTLE_TEST("Fling - thrown berry's effect activates for the target even 
     PARAMETRIZE { item = ITEM_SALAC_BERRY; effect = HOLD_EFFECT_SPEED_UP; statId = STAT_SPEED; }
 
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { Item(item); }
+        PLAYER(SPECIES_WOBBUFFET) { Item(item); Attack(1); }
         OPPONENT(SPECIES_WOBBUFFET) { Status1(status1); HP(399); MaxHP(400); MovesWithPP({MOVE_CELEBRATE, 35}); }
     } WHEN {
         TURN { MOVE(player, MOVE_FLING); }
@@ -345,3 +345,24 @@ SINGLE_BATTLE_TEST("Fling - thrown berry's effect activates for the target even 
     }
 }
 
+SINGLE_BATTLE_TEST("Fling deals damage based on items fling power")
+{
+    s16 damage[2];
+
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_CRUNCH].power == 80);
+        ASSUME(gItems[ITEM_VENUSAURITE].flingPower == 80);
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_VENUSAURITE); }
+        OPPONENT(SPECIES_REGIROCK);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CRUNCH); }
+        TURN { MOVE(player, MOVE_FLING); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CRUNCH, player);
+        HP_BAR(opponent, captureDamage: &damage[0]);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, player);
+        HP_BAR(opponent, captureDamage: &damage[1]);
+    } THEN {
+        EXPECT_EQ(damage[0], damage[1]);
+    }
+}
