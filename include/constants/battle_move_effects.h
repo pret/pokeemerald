@@ -420,7 +420,8 @@
 #define EFFECT_MAX_MOVE                     414
 #define EFFECT_GLAIVE_RUSH                  415
 #define EFFECT_RAGING_BULL                  416
+#define EFFECT_RAGE_FIST                    417
 
-#define NUM_BATTLE_MOVE_EFFECTS             417
+#define NUM_BATTLE_MOVE_EFFECTS             418
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

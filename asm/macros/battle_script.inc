@@ -1391,6 +1391,11 @@
 	.4byte \sidestatus
 	.endm
 
+	.macro trycopycat failInstr:req
+	callnative BS_TryCopycat
+	.4byte \failInstr
+	.endm
+
 	.macro setzeffect
 	callnative BS_SetZEffect
 	.endm
@@ -1803,11 +1808,6 @@
 	.macro jumpifcantusesynchronoise jumpInstr:req
 	various BS_ATTACKER, VARIOUS_TRY_SYNCHRONOISE
 	.4byte \jumpInstr
-	.endm
-
-	.macro trycopycat failInstr:req
-	various BS_ATTACKER, VARIOUS_TRY_COPYCAT
-	.4byte \failInstr
 	.endm
 
 	.macro showabilitypopup battler:req

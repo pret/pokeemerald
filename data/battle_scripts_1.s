@@ -443,6 +443,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectMaxMove                 @ EFFECT_MAX_MOVE
 	.4byte BattleScript_EffectGlaiveRush              @ EFFECT_GLAIVE_RUSH
 	.4byte BattleScript_EffectBrickBreak              @ EFFECT_RAGING_BULL
+	.4byte BattleScript_EffectHit                     @ EFFECT_RAGE_FIST
 
 BattleScript_EffectGlaiveRush::
 	call BattleScript_EffectHit_Ret
