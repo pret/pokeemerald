@@ -352,10 +352,10 @@ static const u16 sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
 
 const struct SpindaSpot gSpindaSpotGraphics[] =
 {
-    {.x = 16, .y = 7, .image = INCBIN_U16("graphics/spinda_spots/spot_0.1bpp")},
-    {.x = 40, .y = 8, .image = INCBIN_U16("graphics/spinda_spots/spot_1.1bpp")},
-    {.x = 22, .y = 25, .image = INCBIN_U16("graphics/spinda_spots/spot_2.1bpp")},
-    {.x = 34, .y = 26, .image = INCBIN_U16("graphics/spinda_spots/spot_3.1bpp")}
+    {.x = 16, .y =  7, .image = INCBIN_U16("graphics/pokemon/spinda/spots/spot_0.1bpp")},
+    {.x = 40, .y =  8, .image = INCBIN_U16("graphics/pokemon/spinda/spots/spot_1.1bpp")},
+    {.x = 22, .y = 25, .image = INCBIN_U16("graphics/pokemon/spinda/spots/spot_2.1bpp")},
+    {.x = 34, .y = 26, .image = INCBIN_U16("graphics/pokemon/spinda/spots/spot_3.1bpp")}
 };
 
 #include "data/pokemon/item_effects.h"
@@ -2729,14 +2729,14 @@ u8 GiveMonToPlayer(struct Pokemon *mon)
     }
 
     if (i >= PARTY_SIZE)
-        return SendMonToPC(mon);
+        return CopyMonToPC(mon);
 
     CopyMon(&gPlayerParty[i], mon, sizeof(*mon));
     gPlayerPartyCount = i + 1;
     return MON_GIVEN_TO_PARTY;
 }
 
-u8 SendMonToPC(struct Pokemon* mon)
+u8 CopyMonToPC(struct Pokemon *mon)
 {
     s32 boxNo, boxPos;
 
