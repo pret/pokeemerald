@@ -8853,6 +8853,10 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
     case EFFECT_MAX_MOVE:
         basePower = GetMaxMovePower(gBattleMons[battlerAtk].moves[gBattleStruct->chosenMovePositions[battlerAtk]]);
         break;
+    case EFFECT_RAGE_FIST:
+        basePower += 50 * gBattleStruct->timesGotHit[GetBattlerSide(battlerAtk)][gBattlerPartyIndexes[battlerAtk]];
+        basePower = (basePower > 350) ? 350 : basePower;
+        break;
     }
 
     // Move-specific base power changes
