@@ -113,7 +113,7 @@
 #define FORM_CHANGE_TIME_OF_DAY                 18
 
 // Form change that depends on a multichoice (e.g. Rotom Catalog).
-// param2: multichoice list (starting at 0).
+// param1: multichoice list (starting at 0).
 #define FORM_CHANGE_ITEM_USE_MULTICHOICE        19
 
 #endif // GUARD_CONSTANTS_FORM_CHANGE_TYPES_H
