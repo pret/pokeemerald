@@ -57593,12 +57593,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
 #if P_FAMILY_VELUZA
     [SPECIES_VELUZA] =
     {
-        .baseHP        =      90,
-        .baseAttack    =  102,
+        .baseHP        = 90,
+        .baseAttack    = 102,
         .baseDefense   = 73,
-        .baseSpeed     =   70,
-        .baseSpAttack  =   78,
-        .baseSpDefense =   65,
+        .baseSpeed     = 70,
+        .baseSpAttack  = 78,
+        .baseSpDefense = 65,
         .types = { TYPE_WATER, TYPE_PSYCHIC },
         .catchRate = 100,
         .expYield = 167,

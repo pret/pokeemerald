@@ -383,9 +383,7 @@ static const struct LevelUpMove sRattataAlolanLevelUpLearnset[] = {
     LEVEL_UP_MOVE(34, MOVE_ENDEAVOR),
     LEVEL_UP_END
 };
-#endif //P_ALOLAN_FORMS
 
-#if P_ALOLAN_FORMS
 static const struct LevelUpMove sRaticateAlolanLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 0, MOVE_SCARY_FACE),
     LEVEL_UP_MOVE( 1, MOVE_SCARY_FACE),
