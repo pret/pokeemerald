@@ -4691,6 +4691,9 @@ s8 GetMovePriority(u32 battler, u16 move)
     s8 priority;
     u16 ability = GetBattlerAbility(battler);
 
+    if (gBattleStruct->zmove.toBeUsed[battler] && gBattleMoves[move].power != 0)
+        move = gBattleStruct->zmove.toBeUsed[battler];
+
     priority = gBattleMoves[move].priority;
     if (ability == ABILITY_GALE_WINGS
     #if B_GALE_WINGS >= GEN_7
