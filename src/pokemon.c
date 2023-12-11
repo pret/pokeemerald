@@ -6092,3 +6092,22 @@ u16 GetCryIdBySpecies(u16 species)
         return 0;
     return gSpeciesInfo[species].cryId;
 }
+
+u16 GetSpeciesPreEvolution(u16 species)
+{
+    int i, j;
+
+    for (i = SPECIES_BULBASAUR; i < NUM_SPECIES; i++)
+    {
+        const struct Evolution *evolutions = GetSpeciesEvolutions(i);
+        if (evolutions == NULL)
+            continue;
+        for (j = 0; evolutions[j].method != EVOLUTIONS_END; j++)
+        {
+            if (SanitizeSpeciesId(evolutions[j].targetSpecies) == species)
+                return i;
+        }
+    }
+
+    return SPECIES_NONE;
+}

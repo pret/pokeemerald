@@ -709,5 +709,6 @@ u8 CalculatePartyCount(struct Pokemon *party);
 u16 SanitizeSpeciesId(u16 species);
 bool32 IsSpeciesEnabled(u16 species);
 u16 GetCryIdBySpecies(u16 species);
+u16 GetSpeciesPreEvolution(u16 species);
 
 #endif // GUARD_POKEMON_H
