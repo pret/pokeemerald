@@ -25988,7 +25988,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
         PALETTES(KyogrePrimal),
         ICON(KyogrePrimal, 0),
-        .isPrimalRevesion = TRUE,
+        .isPrimalReversion = TRUE,
     },
 #endif //P_PRIMAL_REVERSIONS
 #endif //P_FAMILY_KYOGRE
@@ -26080,7 +26080,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
         PALETTES(GroudonPrimal),
         ICON(GroudonPrimal, 0),
-        .isPrimalRevesion = TRUE,
+        .isPrimalReversion = TRUE,
     },
 #endif //P_PRIMAL_REVERSIONS
 #endif //P_FAMILY_GROUDON
@@ -48783,6 +48783,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerOffset = 8,                                                             \
         .footprint = gMonFootprint_Melmetal,                                            \
         LEARNSETS(Melmetal),                                                            \
+        .formSpeciesIdTable = sMelmetalFormSpeciesIdTable,                              \
         .formChangeTable = sMelmetalFormChangeTable,                                    \
         .isMythical = TRUE
 
@@ -48948,6 +48949,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .categoryName = _("Drummer"),                                           \
         .footprint = gMonFootprint_Rillaboom,                                   \
         LEARNSETS(Rillaboom),                                                   \
+        .formSpeciesIdTable = sRillaboomFormSpeciesIdTable,                     \
         .formChangeTable = sRillaboomFormChangeTable
 
     [SPECIES_RILLABOOM] =
@@ -48995,7 +48997,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(RillaboomGigantamax),
         ICON(RillaboomGigantamax, 1),
-        .formSpeciesIdTable = sRillaboomFormSpeciesIdTable,
         .isGigantamax = TRUE,
     },
 #endif //P_GIGANTAMAX_FORMS
@@ -49121,6 +49122,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .categoryName = _("Striker"),                                   \
         .footprint = gMonFootprint_Cinderace,                           \
         LEARNSETS(Cinderace),                                           \
+        .formSpeciesIdTable = sCinderaceFormSpeciesIdTable,             \
         .formChangeTable = sCinderaceFormChangeTable
 
     [SPECIES_CINDERACE] =
@@ -49169,7 +49171,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(CinderaceGigantamax),
         ICON(CinderaceGigantamax, 0),
-        .formSpeciesIdTable = sCinderaceFormSpeciesIdTable,
         .isGigantamax = TRUE,
     },
 #endif //P_GIGANTAMAX_FORMS
@@ -49296,6 +49297,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .categoryName = _("Secret Agent"),                              \
         .footprint = gMonFootprint_Inteleon,                            \
         LEARNSETS(Inteleon),                                            \
+        .formSpeciesIdTable = sInteleonFormSpeciesIdTable,              \
         .formChangeTable = sInteleonFormChangeTable
 
     [SPECIES_INTELEON] =
@@ -49569,6 +49571,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .categoryName = _("Raven"),                                                 \
         .footprint = gMonFootprint_Corviknight,                                     \
         LEARNSETS(Corviknight),                                                     \
+        .formSpeciesIdTable = sCorviknightFormSpeciesIdTable,                       \
         .formChangeTable = sCorviknightFormChangeTable
 
     [SPECIES_CORVIKNIGHT] =
@@ -49617,7 +49620,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(CorviknightGigantamax),
         ICON(CorviknightGigantamax, 0),
-        .formSpeciesIdTable = sCorviknightFormSpeciesIdTable,
         .isGigantamax = TRUE,
     },
 #endif //P_GIGANTAMAX_FORMS
@@ -49745,6 +49747,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .categoryName = _("Seven Spot"),                                    \
         .footprint = gMonFootprint_Orbeetle,                                \
         LEARNSETS(Orbeetle),                                                \
+        .formSpeciesIdTable = sOrbeetleFormSpeciesIdTable,                  \
         .formChangeTable = sOrbeetleFormChangeTable
 
     [SPECIES_ORBEETLE] =
@@ -49794,7 +49797,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(OrbeetleGigantamax),
         ICON(OrbeetleGigantamax, 0),
-        .formSpeciesIdTable = sOrbeetleFormSpeciesIdTable,
         .isGigantamax = TRUE,
     },
 #endif //P_GIGANTAMAX_FORMS
@@ -50163,6 +50165,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .categoryName = _("Bite"),                                                      \
         .footprint = gMonFootprint_Drednaw,                                             \
         LEARNSETS(Drednaw),                                                             \
+        .formSpeciesIdTable = sDrednawFormSpeciesIdTable,                               \
         .formChangeTable = sDrednawFormChangeTable
 
     [SPECIES_DREDNAW] =
@@ -50210,7 +50213,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(DrednawGigantamax),
         ICON(DrednawGigantamax, 0),
-        .formSpeciesIdTable = sDrednawFormSpeciesIdTable,
         .isGigantamax = TRUE,
     },
 #endif //P_GIGANTAMAX_FORMS
@@ -50433,6 +50435,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .categoryName = _("Coal"),                                                      \
         .footprint = gMonFootprint_Coalossal,                                           \
         LEARNSETS(Coalossal),                                                           \
+        .formSpeciesIdTable = sCoalossalFormSpeciesIdTable,                             \
         .formChangeTable = sCoalossalFormChangeTable
 
     [SPECIES_COALOSSAL] =
@@ -50481,7 +50484,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(CoalossalGigantamax),
         ICON(CoalossalGigantamax, 0),
-        .formSpeciesIdTable = sCoalossalFormSpeciesIdTable,
         .isGigantamax = TRUE,
     },
 #endif //P_GIGANTAMAX_FORMS
@@ -50562,6 +50564,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .categoryName = _("Apple Wing"),                                    \
         .footprint = gMonFootprint_Flapple,                                 \
         LEARNSETS(Flapple),                                                 \
+        .formSpeciesIdTable = sFlappleFormSpeciesIdTable,                   \
         .formChangeTable = sFlappleFormChangeTable
 
     [SPECIES_FLAPPLE] =
@@ -50610,7 +50613,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(FlappleGigantamax),
         ICON(FlappleGigantamax, 1),
-        .formSpeciesIdTable = sFlappleFormSpeciesIdTable,
         .isGigantamax = TRUE,
     },
 #endif //P_GIGANTAMAX_FORMS
@@ -50639,6 +50641,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .categoryName = _("Apple Nectar"),                                      \
         .footprint = gMonFootprint_Appletun,                                    \
         LEARNSETS(Appletun),                                                    \
+        .formSpeciesIdTable = sAppletunFormSpeciesIdTable,                      \
         .formChangeTable = sAppletunFormChangeTable
 
     [SPECIES_APPLETUN] =
@@ -50686,7 +50689,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(AppletunGigantamax),
         ICON(AppletunGigantamax, 1),
-        .formSpeciesIdTable = sAppletunFormSpeciesIdTable,
         .isGigantamax = TRUE,
     },
 #endif //P_GIGANTAMAX_FORMS
@@ -50812,6 +50814,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .categoryName = _("Sand Snake"),                                            \
         .footprint = gMonFootprint_Sandaconda,                                      \
         LEARNSETS(Sandaconda),                                                      \
+        .formSpeciesIdTable = sSandacondaFormSpeciesIdTable,                        \
         .formChangeTable = sSandacondaFormChangeTable
 
     [SPECIES_SANDACONDA] =
@@ -50861,7 +50864,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(SandacondaGigantamax),
         ICON(SandacondaGigantamax, 1),
-        .formSpeciesIdTable = sSandacondaFormSpeciesIdTable,
         .isGigantamax = TRUE,
     },
 #endif //P_GIGANTAMAX_FORMS
@@ -51307,6 +51309,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .categoryName = _("Radiator"),                                                  \
         .footprint = gMonFootprint_Centiskorch,                                         \
         LEARNSETS(Centiskorch),                                                         \
+        .formSpeciesIdTable = sCentiskorchFormSpeciesIdTable,                           \
         .formChangeTable = sCentiskorchFormChangeTable
 
     [SPECIES_CENTISKORCH] =
@@ -51355,7 +51358,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(CentiskorchGigantamax),
         ICON(CentiskorchGigantamax, 0),
-        .formSpeciesIdTable = sCentiskorchFormSpeciesIdTable,
         .isGigantamax = TRUE,
     },
 #endif //P_GIGANTAMAX_FORMS
@@ -51699,6 +51701,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .categoryName = _("Silent"),                                                    \
         .footprint = gMonFootprint_Hatterene,                                           \
         LEARNSETS(Hatterene),                                                           \
+        .formSpeciesIdTable = sHattereneFormSpeciesIdTable,                             \
         .formChangeTable = sHattereneFormChangeTable
 
     [SPECIES_HATTERENE] =
@@ -51746,7 +51749,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(HattereneGigantamax),
         ICON(HattereneGigantamax, 0),
-        .formSpeciesIdTable = sHattereneFormSpeciesIdTable,
         .isGigantamax = TRUE,
     },
 #endif //P_GIGANTAMAX_FORMS
@@ -51873,6 +51875,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .categoryName = _("Bulk Up"),                                           \
         .footprint = gMonFootprint_Grimmsnarl,                                  \
         LEARNSETS(Grimmsnarl),                                                  \
+        .formSpeciesIdTable = sGrimmsnarlFormSpeciesIdTable,                    \
         .formChangeTable = sGrimmsnarlFormChangeTable
 
     [SPECIES_GRIMMSNARL] =
@@ -51920,7 +51923,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(GrimmsnarlGigantamax),
         ICON(GrimmsnarlGigantamax, 0),
-        .formSpeciesIdTable = sGrimmsnarlFormSpeciesIdTable,
         .isGigantamax = TRUE,
     },
 #endif //P_GIGANTAMAX_FORMS
@@ -52677,6 +52679,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .categoryName = _("Copperderm"),                                            \
         .footprint = gMonFootprint_Copperajah,                                      \
         LEARNSETS(Copperajah),                                                      \
+        .formSpeciesIdTable = sCopperajahFormSpeciesIdTable,                        \
         .formChangeTable = sCopperajahFormChangeTable
 
     [SPECIES_COPPERAJAH] =
@@ -52724,8 +52727,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(CopperajahGigantamax),
         ICON(CopperajahGigantamax, 0),
-        .formSpeciesIdTable = sCopperajahFormSpeciesIdTable,
-
         .isGigantamax = TRUE,
     },
 #endif //P_GIGANTAMAX_FORMS
@@ -52951,6 +52952,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .categoryName = _("Alloy"),                                                     \
         .footprint = gMonFootprint_Duraludon,                                           \
         LEARNSETS(Duraludon),                                                           \
+        .formSpeciesIdTable = sDuraludonFormSpeciesIdTable,                             \
         .formChangeTable = sDuraludonFormChangeTable
 
     [SPECIES_DURALUDON] =
@@ -52998,7 +53000,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(DuraludonGigantamax),
         ICON(DuraludonGigantamax, 0),
-        .formSpeciesIdTable = sDuraludonFormSpeciesIdTable,
         .isGigantamax = TRUE,
     },
 #endif //P_GIGANTAMAX_FORMS
@@ -59449,6 +59450,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .palette = gMonPalette_Ogerpon##Form,                                           \
         ICON(OgerponTealMask, 1),                                                       \
         LEARNSETS(Ogerpon),                                                             \
+        .formSpeciesIdTable = sOgerponFormSpeciesIdTable,                               \
         .formChangeTable = sOgerponFormChangeTable,                                     \
         .isLegendary = TRUE,                                                            \
     }
