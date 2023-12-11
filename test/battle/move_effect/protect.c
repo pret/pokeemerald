@@ -124,13 +124,13 @@ SINGLE_BATTLE_TEST("Spiky Shield does 1/8 dmg of max hp of attackers making cont
     u16 usedMove = MOVE_NONE;
     u16 hp = 400, maxHp = 400;
 
-    PARAMETRIZE { usedMove = MOVE_TACKLE; hp = 1;}
-    PARAMETRIZE { usedMove = MOVE_TACKLE;}
-    PARAMETRIZE { usedMove = MOVE_LEER;}
-    PARAMETRIZE { usedMove = MOVE_WATER_GUN;}
+    PARAMETRIZE { usedMove = MOVE_TACKLE; hp = 1; }
+    PARAMETRIZE { usedMove = MOVE_TACKLE; }
+    PARAMETRIZE { usedMove = MOVE_LEER; }
+    PARAMETRIZE { usedMove = MOVE_WATER_GUN; }
 
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) {HP(hp); MaxHP(maxHp); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(hp); MaxHP(maxHp); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -295,7 +295,7 @@ DOUBLE_BATTLE_TEST("Wide Guard protects self and ally from multi-target moves")
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(opponentLeft, MOVE_WIDE_GUARD); MOVE(playerLeft, move, target:opponentLeft); }
+        TURN { MOVE(opponentLeft, MOVE_WIDE_GUARD); MOVE(playerLeft, move, target: opponentLeft); }
         TURN {}
     } SCENE {
         MESSAGE("Foe Wobbuffet used Wide Guard!");
@@ -314,6 +314,34 @@ DOUBLE_BATTLE_TEST("Wide Guard protects self and ally from multi-target moves")
             MESSAGE("Foe Wobbuffet protected itself!");
             NOT HP_BAR(opponentLeft);
             HP_BAR(playerRight);
+            MESSAGE("Foe Wobbuffet protected itself!");
+            NOT HP_BAR(opponentRight);
+        }
+    }
+}
+
+DOUBLE_BATTLE_TEST("Wide Guard can not fail on consecutive turns")
+{
+    u8 turns;
+
+    PASSES_RANDOMLY(2, 2);
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_HYPER_VOICE].target == MOVE_TARGET_BOTH);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponentLeft, MOVE_WIDE_GUARD); MOVE(playerLeft, MOVE_HYPER_VOICE, target: opponentLeft); }
+        TURN { MOVE(opponentLeft, MOVE_WIDE_GUARD); MOVE(playerLeft, MOVE_HYPER_VOICE, target: opponentLeft); }
+        TURN {}
+    } SCENE {
+        for (turns = 0; turns < 2; turns++) {
+            MESSAGE("Foe Wobbuffet used Wide Guard!");
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_WIDE_GUARD, opponentLeft);
+            NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_HYPER_VOICE, playerLeft);
+            MESSAGE("Foe Wobbuffet protected itself!");
+            NOT HP_BAR(opponentLeft);
             MESSAGE("Foe Wobbuffet protected itself!");
             NOT HP_BAR(opponentRight);
         }
@@ -351,6 +379,31 @@ DOUBLE_BATTLE_TEST("Quick Guard protects self and ally from priority moves")
             NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, playerLeft);
             MESSAGE("Foe Wobbuffet protected itself!");
             NOT HP_BAR(targetOpponent);
+        }
+    }
+}
+
+DOUBLE_BATTLE_TEST("Quick Guard can not fail on consecutive turns")
+{
+    u8 turns;
+
+    PASSES_RANDOMLY(2, 2);
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_QUICK_ATTACK].priority == 1);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponentLeft, MOVE_QUICK_GUARD); MOVE(playerLeft, MOVE_QUICK_ATTACK, target: opponentRight); }
+        TURN { MOVE(opponentLeft, MOVE_QUICK_GUARD); MOVE(playerLeft, MOVE_QUICK_ATTACK, target: opponentRight); }
+    } SCENE {
+        for (turns = 0; turns < 2; turns++) {
+            MESSAGE("Foe Wobbuffet used Quick Guard!");
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_GUARD, opponentLeft);
+            NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, playerLeft);
+            MESSAGE("Foe Wobbuffet protected itself!");
+            NOT HP_BAR(opponentRight);
         }
     }
 }
