@@ -6302,7 +6302,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     [MOVE_METAL_BURST] =
     {
         .effect = EFFECT_METAL_BURST,
-        .power = 0,
+        .power = 1,
         .type = TYPE_STEEL,
         .accuracy = 100,
         .pp = 10,
@@ -6428,7 +6428,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     [MOVE_TRUMP_CARD] =
     {
         .effect = EFFECT_TRUMP_CARD,
-        .power = 0,
+        .power = 1,
         .type = TYPE_NORMAL,
         .accuracy = 0,
         .pp = 5,
@@ -13656,7 +13656,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     [MOVE_COMEUPPANCE] =
     {
         .effect = EFFECT_METAL_BURST,
-        .power = 0,
+        .power = 1,
         .type = TYPE_DARK,
         .accuracy = 100,
         .pp = 10,
