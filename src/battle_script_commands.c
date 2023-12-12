@@ -14114,6 +14114,11 @@ static void Cmd_tryimprison(void)
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
+    else if (B_IMPRISON >= GEN_5)
+    {
+        gStatuses3[gBattlerAttacker] |= STATUS3_IMPRISONED_OTHERS;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
     else
     {
         u8 battler, sideAttacker;
