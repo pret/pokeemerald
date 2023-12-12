@@ -73,10 +73,10 @@ struct UsePokeblockSession
     u8 natureText[34];
 };
 
-// This struct is identical to PokenavMonListItem, the struct used for managing lists of Pokémon in the pokenav
+// This struct is identical to PokenavMonListItem, the struct used for managing lists of Pokémon in the PokéNav
 // Given that this screen is essentially duplicated in the poknav, this struct was probably the same one with
 // a more general name/purpose
-// TODO: Once the pokenav conditions screens are documented, resolve the above
+// TODO: Once the PokéNav conditions screens are documented, resolve the above
 struct UsePokeblockMenuPokemon
 {
     u8 boxId; // Because this screen is never used for the PC this is always set to TOTAL_BOXES_COUNT to refer to party
