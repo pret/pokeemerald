@@ -735,6 +735,7 @@
 #define OBJ_EVENT_GFX_ARCEUS_NORMAL              731
 #define OBJ_EVENT_GFX_VICTINI                    732
 
+// update numbers below after paste
 #define OBJ_EVENT_GFX_GREAT_BALL                 733
 #define OBJ_EVENT_GFX_ULTRA_BALL                 734
 #define OBJ_EVENT_GFX_MASTER_BALL                735

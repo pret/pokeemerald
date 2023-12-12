@@ -1490,3 +1490,4 @@ const u16 gObjectEventPal_Arceus_Steel[] = INCBIN_U16("graphics/object_events/pa
 const u16 gObjectEventPal_Arceus_Water[] = INCBIN_U16("graphics/object_events/palettes/followers/arceus_water.gbapal");
 const u32 gObjectEventPic_Victini[] = INCBIN_U32("graphics/object_events/pics/pokemon/followers/victini.4bpp");
 const u16 gObjectEventPal_Victini[] = INCBIN_U16("graphics/object_events/palettes/followers/victini.gbapal");
+// after pasting, replace all ~ with "
