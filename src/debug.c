@@ -71,22 +71,20 @@
 enum DebugMenu
 {
     DEBUG_MENU_ITEM_UTILITIES,
+    DEBUG_MENU_ITEM_PARTY_BOXES,
+    DEBUG_MENU_ITEM_GIVE,
     DEBUG_MENU_ITEM_SCRIPTS,
     DEBUG_MENU_ITEM_FLAGVAR,
-    //DEBUG_MENU_ITEM_BATTLE,
-    DEBUG_MENU_ITEM_GIVE,
     DEBUG_MENU_ITEM_FILL,
+    //DEBUG_MENU_ITEM_BATTLE,
     DEBUG_MENU_ITEM_SOUND,
-    DEBUG_MENU_ITEM_ACCESS_PC,
     DEBUG_MENU_ITEM_CANCEL,
 };
 
 enum UtilMenu
 {
-    DEBUG_UTIL_MENU_ITEM_HEAL_PARTY,
     DEBUG_UTIL_MENU_ITEM_FLY,
     DEBUG_UTIL_MENU_ITEM_WARP,
-    DEBUG_UTIL_MENU_ITEM_POISON_MONS,
     DEBUG_UTIL_MENU_ITEM_SAVEBLOCK,
     DEBUG_UTIL_MENU_ITEM_ROM_SPACE,
     DEBUG_UTIL_MENU_ITEM_WEATHER,
@@ -96,10 +94,18 @@ enum UtilMenu
     DEBUG_UTIL_MENU_ITEM_PLAYER_NAME,
     DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER,
     DEBUG_UTIL_MENU_ITEM_PLAYER_ID,
-    DEBUG_UTIL_MENU_ITEM_CLEAR_BOXES,
     DEBUG_UTIL_MENU_ITEM_CHEAT,
-    DEBUG_UTIL_MENU_ITEM_HATCH_AN_EGG,
     DEBUG_UTIL_MENU_ITEM_EXPANSION_VER,
+};
+
+enum PartyBoxesMenu
+{
+    DEBUG_PARTY_BOXES_MENU_ITEM_ACCESS_PC,
+    DEBUG_PARTY_BOXES_MENU_ITEM_MOVE_REMINDER,
+    DEBUG_PARTY_BOXES_MENU_ITEM_HATCH_AN_EGG,
+    DEBUG_PARTY_BOXES_MENU_ITEM_HEAL_PARTY,
+    DEBUG_PARTY_BOXES_MENU_ITEM_POISON_MONS,
+    DEBUG_PARTY_BOXES_MENU_ITEM_CLEAR_BOXES,
 };
 
 enum ScriptMenu
@@ -305,15 +311,16 @@ static void DebugAction_Util_Script_7(u8 taskId);
 static void DebugAction_Util_Script_8(u8 taskId);
 
 static void DebugAction_OpenUtilitiesMenu(u8 taskId);
+static void DebugAction_OpenPartyBoxesMenu(u8 taskId);
 static void DebugAction_OpenScriptsMenu(u8 taskId);
 static void DebugAction_OpenFlagsVarsMenu(u8 taskId);
 static void DebugAction_OpenGiveMenu(u8 taskId);
 static void DebugAction_OpenFillMenu(u8 taskId);
 static void DebugAction_OpenSoundMenu(u8 taskId);
-static void DebugAction_AccessPC(u8 taskId);
 
 static void DebugTask_HandleMenuInput_Main(u8 taskId);
 static void DebugTask_HandleMenuInput_Utilities(u8 taskId);
+static void DebugTask_HandleMenuInput_PartyBoxes(u8 taskId);
 static void DebugTask_HandleMenuInput_Scripts(u8 taskId);
 static void DebugTask_HandleMenuInput_FlagsVars(u8 taskId);
 static void DebugTask_HandleMenuInput_Battle(u8 taskId);
@@ -321,14 +328,11 @@ static void DebugTask_HandleMenuInput_Give(u8 taskId);
 static void DebugTask_HandleMenuInput_Fill(u8 taskId);
 static void DebugTask_HandleMenuInput_Sound(u8 taskId);
 
-static void DebugAction_Util_HealParty(u8 taskId);
 static void DebugAction_Util_Fly(u8 taskId);
 static void DebugAction_Util_Warp_Warp(u8 taskId);
 static void DebugAction_Util_Warp_SelectMapGroup(u8 taskId);
 static void DebugAction_Util_Warp_SelectMap(u8 taskId);
 static void DebugAction_Util_Warp_SelectWarp(u8 taskId);
-static void DebugAction_FlagsVars_RunningShoes(u8 taskId);
-static void DebugAction_Util_PoisonMons(u8 taskId);
 static void DebugAction_Util_CheckSaveBlock(u8 taskId);
 static void DebugAction_Util_CheckROMSpace(u8 taskId);
 static void DebugAction_Util_Weather(u8 taskId);
@@ -339,10 +343,15 @@ static void DebugAction_Util_WatchCredits(u8 taskId);
 static void DebugAction_Util_Player_Name(u8 taskId);
 static void DebugAction_Util_Player_Gender(u8 taskId);
 static void DebugAction_Util_Player_Id(u8 taskId);
-static void DebugAction_Util_Clear_Boxes(u8 taskId);
 static void DebugAction_Util_CheatStart(u8 taskId);
-static void DebugAction_Util_HatchAnEgg(u8 taskId);
 static void DebugAction_Util_ExpansionVersion(u8 taskId);
+
+static void DebugAction_PartyBoxes_AccessPC(u8 taskId);
+static void DebugAction_PartyBoxes_MoveReminder(u8 taskId);
+static void DebugAction_PartyBoxes_HatchAnEgg(u8 taskId);
+static void DebugAction_PartyBoxes_HealParty(u8 taskId);
+static void DebugAction_PartyBoxes_PoisonMons(u8 taskId);
+static void DebugAction_PartyBoxes_ClearBoxes(u8 taskId);
 
 static void DebugAction_FlagsVars_Flags(u8 taskId);
 static void DebugAction_FlagsVars_FlagsSelect(u8 taskId);
@@ -363,6 +372,7 @@ static void DebugAction_FlagsVars_EncounterOnOff(u8 taskId);
 static void DebugAction_FlagsVars_TrainerSeeOnOff(u8 taskId);
 static void DebugAction_FlagsVars_BagUseOnOff(u8 taskId);
 static void DebugAction_FlagsVars_CatchingOnOff(u8 taskId);
+static void DebugAction_FlagsVars_RunningShoes(u8 taskId);
 
 static void Debug_InitializeBattle(u8 taskId);
 
@@ -425,6 +435,8 @@ extern const u8 Debug_CheckROMSpace[];
 extern const u8 Debug_BoxFilledMessage[];
 extern const u8 Debug_ShowExpansionVersion[];
 
+extern const u8 FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon[];
+
 #include "data/map_group_count.h"
 
 // Text
@@ -438,13 +450,13 @@ static const u8 sDebugText_Empty[] =         _("");
 static const u8 sDebugText_Continue[] =      _("Continue…{CLEAR_TO 110}{RIGHT_ARROW}");
 // Main Menu
 static const u8 sDebugText_Utilities[] =        _("Utilities…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_PartyBoxes[] =       _("Party/Boxes…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Scripts[] =          _("Scripts…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_FlagsVars[] =        _("Flags & Vars…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Battle[] =           _("Battle Test{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Give[] =             _("Give X…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Fill[] =             _("Fill PC/Pockets…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Sound[] =            _("Sound…{CLEAR_TO 110}{RIGHT_ARROW}");
-static const u8 sDebugText_AccessPC[] =         _("Access PC…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Cancel[] =           _("Cancel");
 // Script menu
 static const u8 sDebugText_Util_Script_1[] =               _("Script 1");
@@ -456,14 +468,12 @@ static const u8 sDebugText_Util_Script_6[] =               _("Script 6");
 static const u8 sDebugText_Util_Script_7[] =               _("Script 7");
 static const u8 sDebugText_Util_Script_8[] =               _("Script 8");
 // Util Menu
-static const u8 sDebugText_Util_HealParty[] =                _("Heal Party");
 static const u8 sDebugText_Util_FlyToMap[] =                 _("Fly to map…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Util_WarpToMap[] =                _("Warp to map warp…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Util_WarpToMap_SelectMapGroup[] = _("Group: {STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n\n{STR_VAR_3}{CLEAR_TO 90}");
 static const u8 sDebugText_Util_WarpToMap_SelectMap[] =      _("Map: {STR_VAR_1}{CLEAR_TO 90}\nMapSec:{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}\n{STR_VAR_3}{CLEAR_TO 90}");
 static const u8 sDebugText_Util_WarpToMap_SelectWarp[] =     _("Warp:{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_3}{CLEAR_TO 90}");
 static const u8 sDebugText_Util_WarpToMap_SelMax[] =         _("{STR_VAR_1} / {STR_VAR_2}");
-static const u8 sDebugText_Util_PoisonParty[] =              _("Poison party");
 static const u8 sDebugText_Util_SaveBlockSpace[] =           _("SaveBlock Space…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Util_ROMSpace[] =                 _("ROM Space…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Util_Weather[] =                  _("Set weather…{CLEAR_TO 110}{RIGHT_ARROW}");
@@ -474,10 +484,15 @@ static const u8 sDebugText_Util_WatchCredits[] =             _("Watch Credits…
 static const u8 sDebugText_Util_Player_Name[] =              _("Player name");
 static const u8 sDebugText_Util_Player_Gender[] =            _("Toggle Gender");
 static const u8 sDebugText_Util_Player_Id[] =                _("New Trainer Id");
-static const u8 sDebugText_Util_Clear_Boxes[] =              _("Clear Storage Boxes");
 static const u8 sDebugText_Util_CheatStart[] =               _("CHEAT Start");
-static const u8 sDebugText_Util_HatchAnEgg[] =               _("Hatch an Egg");
 static const u8 sDebugText_Util_ExpansionVersion[] =         _("Expansion Version");
+// Party/Boxes Menu
+static const u8 sDebugText_PartyBoxes_AccessPC[] =           _("Access PC");
+static const u8 sDebugText_PartyBoxes_MoveReminder[] =       _("Move Reminder");
+static const u8 sDebugText_PartyBoxes_HatchAnEgg[] =         _("Hatch an Egg");
+static const u8 sDebugText_PartyBoxes_HealParty[] =          _("Heal Party");
+static const u8 sDebugText_PartyBoxes_PoisonParty[] =        _("Poison party");
+static const u8 sDebugText_PartyBoxes_ClearBoxes[] =         _("Clear Storage Boxes");
 // Flags/Vars Menu
 static const u8 sDebugText_FlagsVars_Flags[] =                  _("Set Flag XYZ…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_FlagsVars_Flag[] =                   _("Flag: {STR_VAR_1}{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}\n{STR_VAR_3}");
@@ -615,23 +630,21 @@ static const s32 sPowersOfTen[] =
 // List Menu Items
 static const struct ListMenuItem sDebugMenu_Items_Main[] =
 {
-    [DEBUG_MENU_ITEM_UTILITIES] = {sDebugText_Utilities, DEBUG_MENU_ITEM_UTILITIES},
-    [DEBUG_MENU_ITEM_SCRIPTS]   = {sDebugText_Scripts,   DEBUG_MENU_ITEM_SCRIPTS},
-    [DEBUG_MENU_ITEM_FLAGVAR]   = {sDebugText_FlagsVars, DEBUG_MENU_ITEM_FLAGVAR},
-    //[DEBUG_MENU_ITEM_BATTLE]    = {sDebugText_Battle,    DEBUG_MENU_ITEM_BATTLE},
-    [DEBUG_MENU_ITEM_GIVE]      = {sDebugText_Give,      DEBUG_MENU_ITEM_GIVE},
-    [DEBUG_MENU_ITEM_FILL]      = {sDebugText_Fill,      DEBUG_MENU_ITEM_FILL},
-    [DEBUG_MENU_ITEM_SOUND]     = {sDebugText_Sound,     DEBUG_MENU_ITEM_SOUND},
-    [DEBUG_MENU_ITEM_ACCESS_PC] = {sDebugText_AccessPC,  DEBUG_MENU_ITEM_ACCESS_PC},
-    [DEBUG_MENU_ITEM_CANCEL]    = {sDebugText_Cancel,    DEBUG_MENU_ITEM_CANCEL}
+    [DEBUG_MENU_ITEM_UTILITIES]     = {sDebugText_Utilities,    DEBUG_MENU_ITEM_UTILITIES},
+    [DEBUG_MENU_ITEM_PARTY_BOXES]   = {sDebugText_PartyBoxes,   DEBUG_MENU_ITEM_PARTY_BOXES},
+    [DEBUG_MENU_ITEM_GIVE]          = {sDebugText_Give,         DEBUG_MENU_ITEM_GIVE},
+    [DEBUG_MENU_ITEM_SCRIPTS]       = {sDebugText_Scripts,      DEBUG_MENU_ITEM_SCRIPTS},
+    [DEBUG_MENU_ITEM_FLAGVAR]       = {sDebugText_FlagsVars,    DEBUG_MENU_ITEM_FLAGVAR},
+    [DEBUG_MENU_ITEM_FILL]          = {sDebugText_Fill,         DEBUG_MENU_ITEM_FILL},
+    //[DEBUG_MENU_ITEM_BATTLE]        = {sDebugText_Battle,       DEBUG_MENU_ITEM_BATTLE},
+    [DEBUG_MENU_ITEM_SOUND]         = {sDebugText_Sound,        DEBUG_MENU_ITEM_SOUND},
+    [DEBUG_MENU_ITEM_CANCEL]        = {sDebugText_Cancel,       DEBUG_MENU_ITEM_CANCEL},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
 {
-    [DEBUG_UTIL_MENU_ITEM_HEAL_PARTY]     = {sDebugText_Util_HealParty,      DEBUG_UTIL_MENU_ITEM_HEAL_PARTY},
     [DEBUG_UTIL_MENU_ITEM_FLY]            = {sDebugText_Util_FlyToMap,       DEBUG_UTIL_MENU_ITEM_FLY},
     [DEBUG_UTIL_MENU_ITEM_WARP]           = {sDebugText_Util_WarpToMap,      DEBUG_UTIL_MENU_ITEM_WARP},
-    [DEBUG_UTIL_MENU_ITEM_POISON_MONS]    = {sDebugText_Util_PoisonParty,    DEBUG_UTIL_MENU_ITEM_POISON_MONS},
     [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]      = {sDebugText_Util_SaveBlockSpace, DEBUG_UTIL_MENU_ITEM_SAVEBLOCK},
     [DEBUG_UTIL_MENU_ITEM_ROM_SPACE]      = {sDebugText_Util_ROMSpace,       DEBUG_UTIL_MENU_ITEM_ROM_SPACE},
     [DEBUG_UTIL_MENU_ITEM_WEATHER]        = {sDebugText_Util_Weather,        DEBUG_UTIL_MENU_ITEM_WEATHER},
@@ -641,10 +654,18 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
     [DEBUG_UTIL_MENU_ITEM_PLAYER_NAME]    = {sDebugText_Util_Player_Name,    DEBUG_UTIL_MENU_ITEM_PLAYER_NAME},
     [DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER]  = {sDebugText_Util_Player_Gender,  DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER},
     [DEBUG_UTIL_MENU_ITEM_PLAYER_ID]      = {sDebugText_Util_Player_Id,      DEBUG_UTIL_MENU_ITEM_PLAYER_ID},
-    [DEBUG_UTIL_MENU_ITEM_CLEAR_BOXES]    = {sDebugText_Util_Clear_Boxes,    DEBUG_UTIL_MENU_ITEM_CLEAR_BOXES},
     [DEBUG_UTIL_MENU_ITEM_CHEAT]          = {sDebugText_Util_CheatStart,     DEBUG_UTIL_MENU_ITEM_CHEAT},
-    [DEBUG_UTIL_MENU_ITEM_HATCH_AN_EGG]   = {sDebugText_Util_HatchAnEgg,     DEBUG_UTIL_MENU_ITEM_HATCH_AN_EGG},
     [DEBUG_UTIL_MENU_ITEM_EXPANSION_VER]  = {sDebugText_Util_ExpansionVersion,DEBUG_UTIL_MENU_ITEM_EXPANSION_VER},
+};
+
+static const struct ListMenuItem sDebugMenu_Items_PartyBoxes[] =
+{
+    [DEBUG_PARTY_BOXES_MENU_ITEM_ACCESS_PC]      = {sDebugText_PartyBoxes_AccessPC,       DEBUG_PARTY_BOXES_MENU_ITEM_ACCESS_PC},
+    [DEBUG_PARTY_BOXES_MENU_ITEM_MOVE_REMINDER]  = {sDebugText_PartyBoxes_MoveReminder,   DEBUG_PARTY_BOXES_MENU_ITEM_MOVE_REMINDER},
+    [DEBUG_PARTY_BOXES_MENU_ITEM_HATCH_AN_EGG]   = {sDebugText_PartyBoxes_HatchAnEgg,     DEBUG_PARTY_BOXES_MENU_ITEM_HATCH_AN_EGG},
+    [DEBUG_PARTY_BOXES_MENU_ITEM_HEAL_PARTY]     = {sDebugText_PartyBoxes_HealParty,      DEBUG_PARTY_BOXES_MENU_ITEM_HEAL_PARTY},
+    [DEBUG_PARTY_BOXES_MENU_ITEM_POISON_MONS]    = {sDebugText_PartyBoxes_PoisonParty,    DEBUG_PARTY_BOXES_MENU_ITEM_POISON_MONS},
+    [DEBUG_PARTY_BOXES_MENU_ITEM_CLEAR_BOXES]    = {sDebugText_PartyBoxes_ClearBoxes,     DEBUG_PARTY_BOXES_MENU_ITEM_CLEAR_BOXES},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_Scripts[] =
@@ -760,22 +781,21 @@ static const struct ListMenuItem sDebugMenu_Items_Sound[] =
 // Menu Actions
 static void (*const sDebugMenu_Actions_Main[])(u8) =
 {
-    [DEBUG_MENU_ITEM_UTILITIES] = DebugAction_OpenUtilitiesMenu,
-    [DEBUG_MENU_ITEM_SCRIPTS]   = DebugAction_OpenScriptsMenu,
-    [DEBUG_MENU_ITEM_FLAGVAR]   = DebugAction_OpenFlagsVarsMenu,
-    //[DEBUG_MENU_ITEM_BATTLE]    = DebugAction_OpenBattleMenu,
-    [DEBUG_MENU_ITEM_GIVE]      = DebugAction_OpenGiveMenu,
-    [DEBUG_MENU_ITEM_FILL]      = DebugAction_OpenFillMenu,
-    [DEBUG_MENU_ITEM_SOUND]     = DebugAction_OpenSoundMenu,
-    [DEBUG_MENU_ITEM_ACCESS_PC] = DebugAction_AccessPC,
-    [DEBUG_MENU_ITEM_CANCEL]    = DebugAction_Cancel
+    [DEBUG_MENU_ITEM_UTILITIES]     = DebugAction_OpenUtilitiesMenu,
+    [DEBUG_MENU_ITEM_PARTY_BOXES]   = DebugAction_OpenPartyBoxesMenu,
+    [DEBUG_MENU_ITEM_GIVE]          = DebugAction_OpenGiveMenu,
+    [DEBUG_MENU_ITEM_SCRIPTS]       = DebugAction_OpenScriptsMenu,
+    [DEBUG_MENU_ITEM_FLAGVAR]       = DebugAction_OpenFlagsVarsMenu,
+    [DEBUG_MENU_ITEM_FILL]          = DebugAction_OpenFillMenu,
+    //[DEBUG_MENU_ITEM_BATTLE]        = DebugAction_OpenBattleMenu,
+    [DEBUG_MENU_ITEM_SOUND]         = DebugAction_OpenSoundMenu,
+    [DEBUG_MENU_ITEM_CANCEL]        = DebugAction_Cancel
 };
+
 static void (*const sDebugMenu_Actions_Utilities[])(u8) =
 {
-    [DEBUG_UTIL_MENU_ITEM_HEAL_PARTY]     = DebugAction_Util_HealParty,
     [DEBUG_UTIL_MENU_ITEM_FLY]            = DebugAction_Util_Fly,
     [DEBUG_UTIL_MENU_ITEM_WARP]           = DebugAction_Util_Warp_Warp,
-    [DEBUG_UTIL_MENU_ITEM_POISON_MONS]    = DebugAction_Util_PoisonMons,
     [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]      = DebugAction_Util_CheckSaveBlock,
     [DEBUG_UTIL_MENU_ITEM_ROM_SPACE]      = DebugAction_Util_CheckROMSpace,
     [DEBUG_UTIL_MENU_ITEM_WEATHER]        = DebugAction_Util_Weather,
@@ -785,10 +805,18 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
     [DEBUG_UTIL_MENU_ITEM_PLAYER_NAME]    = DebugAction_Util_Player_Name,
     [DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER]  = DebugAction_Util_Player_Gender,
     [DEBUG_UTIL_MENU_ITEM_PLAYER_ID]      = DebugAction_Util_Player_Id,
-    [DEBUG_UTIL_MENU_ITEM_CLEAR_BOXES]    = DebugAction_Util_Clear_Boxes,
     [DEBUG_UTIL_MENU_ITEM_CHEAT]          = DebugAction_Util_CheatStart,
-    [DEBUG_UTIL_MENU_ITEM_HATCH_AN_EGG]   = DebugAction_Util_HatchAnEgg,
     [DEBUG_UTIL_MENU_ITEM_EXPANSION_VER]  = DebugAction_Util_ExpansionVersion,
+};
+
+static void (*const sDebugMenu_Actions_PartyBoxes[])(u8) =
+{
+    [DEBUG_PARTY_BOXES_MENU_ITEM_ACCESS_PC]     = DebugAction_PartyBoxes_AccessPC,
+    [DEBUG_PARTY_BOXES_MENU_ITEM_MOVE_REMINDER] = DebugAction_PartyBoxes_MoveReminder,
+    [DEBUG_PARTY_BOXES_MENU_ITEM_HATCH_AN_EGG]  = DebugAction_PartyBoxes_HatchAnEgg,
+    [DEBUG_PARTY_BOXES_MENU_ITEM_HEAL_PARTY]    = DebugAction_PartyBoxes_HealParty,
+    [DEBUG_PARTY_BOXES_MENU_ITEM_POISON_MONS]   = DebugAction_PartyBoxes_PoisonMons,
+    [DEBUG_PARTY_BOXES_MENU_ITEM_CLEAR_BOXES]   = DebugAction_PartyBoxes_ClearBoxes,
 };
 
 static void (*const sDebugMenu_Actions_Scripts[])(u8) =
@@ -924,6 +952,13 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Utilities =
     .items = sDebugMenu_Items_Utilities,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_Utilities),
+};
+
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_PartyBoxes =
+{
+    .items = sDebugMenu_Items_PartyBoxes,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_PartyBoxes),
 };
 
 static const struct ListMenuTemplate sDebugMenu_ListTemplate_Scripts =
@@ -1354,6 +1389,25 @@ static void DebugTask_HandleMenuInput_Utilities(u8 taskId)
     }
 }
 
+static void DebugTask_HandleMenuInput_PartyBoxes(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Actions_PartyBoxes[input]) != NULL)
+            func(taskId);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        Debug_ReShowMainMenu();
+    }
+}
+
 static void DebugTask_HandleMenuInput_Scripts(u8 taskId)
 {
     void (*func)(u8);
@@ -1622,6 +1676,12 @@ static void DebugAction_OpenUtilitiesMenu(u8 taskId)
     Debug_ShowMenu(DebugTask_HandleMenuInput_Utilities, sDebugMenu_ListTemplate_Utilities);
 }
 
+static void DebugAction_OpenPartyBoxesMenu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_PartyBoxes, sDebugMenu_ListTemplate_PartyBoxes);
+}
+
 static void DebugAction_OpenScriptsMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
@@ -1656,13 +1716,6 @@ static void DebugAction_OpenSoundMenu(u8 taskId)
 
 // *******************************
 // Actions Utilities
-static void DebugAction_Util_HealParty(u8 taskId)
-{
-    PlaySE(SE_USE_ITEM);
-    HealPlayerParty();
-    ScriptContext_Enable();
-    Debug_DestroyMenu_Full(taskId);
-}
 
 static void DebugAction_Util_Fly(u8 taskId)
 {
@@ -1866,22 +1919,6 @@ static void DebugAction_Util_Warp_SelectWarp(u8 taskId)
 #undef tMapGroup
 #undef tMapNum
 #undef tWarp
-
-static void DebugAction_Util_PoisonMons(u8 taskId)
-{
-    int i;
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, 0)
-            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
-            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
-        {
-            u32 curStatus = STATUS1_POISON;
-            SetMonData(&gPlayerParty[i], MON_DATA_STATUS, &curStatus);
-        }
-    }
-    PlaySE(SE_FIELD_POISON);
-}
 
 void CheckSaveBlock1Size(struct ScriptContext *ctx)
 {
@@ -2113,13 +2150,6 @@ static void DebugAction_Util_Player_Id(u8 taskId)
     ScriptContext_Enable();
 }
 
-static void DebugAction_Util_Clear_Boxes(u8 taskId)
-{
-    ResetPokemonStorageSystem();
-    Debug_DestroyMenu_Full(taskId);
-    ScriptContext_Enable();
-}
-
 static void DebugAction_Util_CheatStart(u8 taskId)
 {
     if (!FlagGet(FLAG_SYS_CLOCK_SET))
@@ -2127,11 +2157,6 @@ static void DebugAction_Util_CheatStart(u8 taskId)
 
     InitTimeBasedEvents();
     Debug_DestroyMenu_Full_Script(taskId, Debug_CheatStart);
-}
-
-static void DebugAction_Util_HatchAnEgg(u8 taskId)
-{
-    Debug_DestroyMenu_Full_Script(taskId, Debug_HatchAnEgg);
 }
 
 static void DebugAction_Util_ExpansionVersion(u8 taskId)
@@ -4588,11 +4613,54 @@ SOUND_LIST_SE
 #undef X
 
 // *******************************
-// Actions Other
+// Actions Party/Boxes
 
-static void DebugAction_AccessPC(u8 taskId)
+static void DebugAction_PartyBoxes_AccessPC(u8 taskId)
 {
     Debug_DestroyMenu_Full_Script(taskId, EventScript_PC);
+}
+
+static void DebugAction_PartyBoxes_MoveReminder(u8 taskId)
+{
+    Debug_DestroyMenu_Full_Script(taskId, FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon);
+}
+
+static void DebugAction_PartyBoxes_HatchAnEgg(u8 taskId)
+{
+    Debug_DestroyMenu_Full_Script(taskId, Debug_HatchAnEgg);
+}
+
+static void DebugAction_PartyBoxes_HealParty(u8 taskId)
+{
+    PlaySE(SE_USE_ITEM);
+    HealPlayerParty();
+    ScriptContext_Enable();
+    Debug_DestroyMenu_Full(taskId);
+}
+
+static void DebugAction_PartyBoxes_PoisonMons(u8 taskId)
+{
+    int i;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, 0)
+            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
+            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
+        {
+            u32 curStatus = STATUS1_POISON;
+            SetMonData(&gPlayerParty[i], MON_DATA_STATUS, &curStatus);
+        }
+    }
+    PlaySE(SE_FIELD_POISON);
+    ScriptContext_Enable();
+    Debug_DestroyMenu_Full(taskId);
+}
+
+static void DebugAction_PartyBoxes_ClearBoxes(u8 taskId)
+{
+    ResetPokemonStorageSystem();
+    Debug_DestroyMenu_Full(taskId);
+    ScriptContext_Enable();
 }
 
 #endif //DEBUG_OVERWORLD_MENU == TRUE
