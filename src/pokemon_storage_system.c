@@ -199,7 +199,7 @@ enum {
     CURSOR_AREA_IN_BOX,
     CURSOR_AREA_IN_PARTY,
     CURSOR_AREA_BOX_TITLE,
-    CURSOR_AREA_BUTTONS, // Party Pokemon and Close Box
+    CURSOR_AREA_BUTTONS, // Party Pokémon and Close Box
 };
 #define CURSOR_AREA_IN_HAND CURSOR_AREA_BOX_TITLE // Alt name for cursor area used by Move Items
 
@@ -6687,8 +6687,8 @@ static void LoadSavedMovingMon(void)
 {
     if (sIsMonBeingMoved)
     {
-        // If it came from the party load a struct Pokemon,
-        // otherwise load a BoxPokemon
+        // If it came from the party load a struct Pokémon,
+        // otherwise load a BoxPokémon
         if (sMovingMonOrigBoxId == TOTAL_BOXES_COUNT)
             sStorage->movingMon = sSavedMovingMon;
         else

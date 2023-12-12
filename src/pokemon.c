@@ -98,7 +98,7 @@ static const struct CombinedMove sCombinedMoves[2] =
 };
 
 // NOTE: The order of the elements in the 3 arrays below is irrelevant.
-// To reorder the pokedex, see the values in include/constants/pokedex.h.
+// To reorder the pokedex, see the values in include/constants/Pokédex.h.
 
 #define SPECIES_TO_HOENN(name)      [SPECIES_##name - 1] = HOENN_DEX_##name
 #define SPECIES_TO_NATIONAL(name)   [SPECIES_##name - 1] = NATIONAL_DEX_##name
