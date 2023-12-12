@@ -16206,7 +16206,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
     [SPECIES_SNEASEL_HISUIAN] =
     {
         SNEASEL_MISC_INFO,
-        .types = { TYPE_POISON, TYPE_FIGHTING },
+        .types = { TYPE_FIGHTING, TYPE_POISON },
         .abilities = { ABILITY_INNER_FOCUS, ABILITY_KEEN_EYE, ABILITY_PICKPOCKET },
         .bodyColor = BODY_COLOR_GRAY,
         .weight = 270,
