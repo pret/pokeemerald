@@ -3512,7 +3512,7 @@ static void CursorCb_SendMon(u8 taskId)
     }
     else
     {
-        // gStringVar4 below is the error message buffered by TrySwitchInPokémon
+        // gStringVar4 below is the error message buffered by TrySwitchInPokemon
         PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
         DisplayPartyMenuMessage(gStringVar4, TRUE);
         gTasks[taskId].func = Task_ReturnToChooseMonAfterText;

@@ -367,7 +367,7 @@ static void VblankCB_StarterChoose(void)
 #define tPkmnSpriteId       data[1]
 #define tCircleSpriteId     data[2]
 
-// Data for sSpriteTemplate_Poké Ball
+// Data for sSpriteTemplate_Pokeball
 #define sTaskId data[0]
 #define sBallId data[1]
 

@@ -6687,8 +6687,8 @@ static void LoadSavedMovingMon(void)
 {
     if (sIsMonBeingMoved)
     {
-        // If it came from the party load a struct Pokémon,
-        // otherwise load a BoxPokémon
+        // If it came from the party load a struct Pokemon,
+        // otherwise load a BoxPokemon
         if (sMovingMonOrigBoxId == TOTAL_BOXES_COUNT)
             sStorage->movingMon = sSavedMovingMon;
         else

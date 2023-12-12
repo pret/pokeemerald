@@ -983,7 +983,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_MenuPokeballSmall =
     gPartyMenuPokeballSmall_Gfx, 0x0300, TAG_POKEBALL_SMALL
 };
 
-// Used for the pokeball sprite next to Cancel and Confirm when both are present, otherwise sSpriteTemplate_MenuPoké Ball is used
+// Used for the pokeball sprite next to Cancel and Confirm when both are present, otherwise sSpriteTemplate_MenuPokeball is used
 static const struct SpriteTemplate sSpriteTemplate_MenuPokeballSmall =
 {
     .tileTag = TAG_POKEBALL_SMALL,

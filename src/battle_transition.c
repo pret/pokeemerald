@@ -1315,7 +1315,7 @@ static void HBlankCB_Shuffle(void)
 #undef tAmplitude
 
 //------------------------------------------------------------------------
-// B_TRANSITION_BIG_Poké Ball, B_TRANSITION_AQUA, B_TRANSITION_MAGMA,
+// B_TRANSITION_BIG_POKEBALL, B_TRANSITION_AQUA, B_TRANSITION_MAGMA,
 // B_TRANSITION_REGICE, B_TRANSITION_REGISTEEL, B_TRANSITION_REGIROCK
 // and B_TRANSITION_KYOGRE.
 //
