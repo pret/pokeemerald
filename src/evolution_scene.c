@@ -542,7 +542,9 @@ static void CB2_TradeEvolutionSceneUpdate(void)
 static void CreateShedinja(u16 preEvoSpecies, struct Pokemon *mon)
 {
     u32 data = 0;
-    u16 ball = ITEM_POKE_BALL;
+    #if P_SHEDINJA_BALL >= GEN_4
+        u16 ball = ITEM_POKE_BALL;
+    #endif
     const struct Evolution *evolutions = GetSpeciesEvolutions(preEvoSpecies);
 
     if (evolutions == NULL)
