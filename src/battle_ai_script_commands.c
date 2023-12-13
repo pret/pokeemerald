@@ -1392,7 +1392,7 @@ static void Cmd_get_ability(void)
         }
         else
         {
-            AI_THINKING_STRUCT->funcResult = gSpeciesInfo[gBattleMons[battlerId].species].abilities[1]; // AI can't actually reach this part since no pokemon has ability 2 and no ability 1.
+            AI_THINKING_STRUCT->funcResult = gSpeciesInfo[gBattleMons[battlerId].species].abilities[1]; // AI can't actually reach this part since no Pokémon has ability 2 and no ability 1.
         }
     }
     else
@@ -1445,7 +1445,7 @@ static void Cmd_check_ability(void)
         }
         else
         {
-            ability = gSpeciesInfo[gBattleMons[battlerId].species].abilities[1]; // AI can't actually reach this part since no pokemon has ability 2 and no ability 1.
+            ability = gSpeciesInfo[gBattleMons[battlerId].species].abilities[1]; // AI can't actually reach this part since no Pokémon has ability 2 and no ability 1.
         }
     }
     else
@@ -1457,9 +1457,9 @@ static void Cmd_check_ability(void)
     if (ability == 0)
         AI_THINKING_STRUCT->funcResult = 2; // Unable to answer.
     else if (ability == gAIScriptPtr[2])
-        AI_THINKING_STRUCT->funcResult = 1; // Pokemon has the ability we wanted to check.
+        AI_THINKING_STRUCT->funcResult = 1; // Pokémon has the ability we wanted to check.
     else
-        AI_THINKING_STRUCT->funcResult = 0; // Pokemon doesn't have the ability we wanted to check.
+        AI_THINKING_STRUCT->funcResult = 0; // Pokémon doesn't have the ability we wanted to check.
 
     gAIScriptPtr += 3;
 }
