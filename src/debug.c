@@ -3490,7 +3490,7 @@ static void DebugAction_Fill_PCBoxes_Fast(u8 taskId) //Credit: Sierraffinity
     int boxId, boxPosition;
     u32 personality;
     struct BoxPokemon boxMon;
-    u16 species = SPECIES_BULBASAUR;
+    u16 species = SPECIES_SNIVY; //SPECIES_BULBASAUR;
     u8 speciesName[POKEMON_NAME_LENGTH + 1];
 
     personality = Random32();
