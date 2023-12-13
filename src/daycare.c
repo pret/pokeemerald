@@ -235,9 +235,8 @@ static void StorePokemonInDaycare(struct Pokemon *mon, struct DaycareMon *daycar
     CompactPartySlots();
     CalculatePlayerPartyCount();
 
-#if P_EGG_MOVE_TRANSFER >= GEN_8
-    TransferEggMoves();
-#endif
+    if (P_EGG_MOVE_TRANSFER >= GEN_8)
+        TransferEggMoves();
 }
 
 static void StorePokemonInEmptyDaycareSlot(struct Pokemon *mon, struct DayCare *daycare)
@@ -698,16 +697,19 @@ static void InheritPokeball(struct Pokemon *egg, struct BoxPokemon *father, stru
     if (motherBall == ITEM_MASTER_BALL || motherBall == ITEM_CHERISH_BALL)
         motherBall = ITEM_POKE_BALL;
 
-#if P_BALL_INHERITING >= GEN_7
-    if (fatherSpecies == motherSpecies)
-        inheritBall = (Random() % 2 == 0 ? motherBall : fatherBall);
-    else if (motherSpecies != SPECIES_DITTO)
+    if (P_BALL_INHERITING >= GEN_7)
+    {
+        if (fatherSpecies == motherSpecies)
+            inheritBall = (Random() % 2 == 0 ? motherBall : fatherBall);
+        else if (motherSpecies != SPECIES_DITTO)
+            inheritBall = motherBall;
+        else
+            inheritBall = fatherBall;
+    }
+    else if (P_BALL_INHERITING == GEN_6)
+    {
         inheritBall = motherBall;
-    else
-        inheritBall = fatherBall;
-#elif P_BALL_INHERITING == GEN_6
-    inheritBall = motherBall;
-#endif
+    }
     SetMonData(egg, MON_DATA_POKEBALL, &inheritBall);
 }
 
@@ -719,21 +721,18 @@ static void InheritAbility(struct Pokemon *egg, struct BoxPokemon *father, struc
     u8 inheritAbility = motherAbility;
 
     if (motherSpecies == SPECIES_DITTO)
-    #if P_ABILITY_INHERITANCE < GEN_6
-        return;
-    #else
-        inheritAbility = fatherAbility;
-    #endif
+    {
+        if (P_ABILITY_INHERITANCE >= GEN_6)
+            inheritAbility = fatherAbility;
+        else
+            return;
+    }
 
     if (inheritAbility < 2 && (Random() % 10 < 8))
     {
         SetMonData(egg, MON_DATA_ABILITY_NUM, &inheritAbility);
     }
-#if P_ABILITY_INHERITANCE < GEN_6
-    else if (Random() % 10 < 8)
-#else
-    else if (Random() % 10 < 6)
-#endif
+    else if (Random() % 10 < (P_ABILITY_INHERITANCE >= GEN_6 ? 6 : 8))
     {
         // Hidden Abilities have a different chance of being passed down
         SetMonData(egg, MON_DATA_ABILITY_NUM, &inheritAbility);
@@ -1088,9 +1087,8 @@ static void _GiveEggFromDaycare(struct DayCare *daycare)
     InheritIVs(&egg, daycare);
     InheritPokeball(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
     BuildEggMoveset(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
-#if P_ABILITY_INHERITANCE >= GEN_6
-    InheritAbility(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
-#endif
+    if (P_ABILITY_INHERITANCE >= GEN_6)
+        InheritAbility(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
 
     GiveMoveIfItem(&egg, daycare);
 
