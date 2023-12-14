@@ -3787,9 +3787,6 @@ static void TryDoEventsBeforeFirstTurn(void)
         *(gBattleStruct->monToSwitchIntoId + i) = PARTY_SIZE;
         gChosenActionByBattler[i] = B_ACTION_NONE;
         gChosenMoveByBattler[i] = MOVE_NONE;
-        // Record party slots of player's mons that appeared in battle
-        if (!BattlerHasAi(i))
-            gBattleStruct->appearedInBattle |= gBitTable[gBattlerPartyIndexes[i]];
     }
     TurnValuesCleanUp(FALSE);
     SpecialStatusesClear();
@@ -3802,7 +3799,12 @@ static void TryDoEventsBeforeFirstTurn(void)
         gBattleCommunication[i] = 0;
 
     for (i = 0; i < gBattlersCount; i++)
+    {
         gBattleMons[i].status2 &= ~STATUS2_FLINCHED;
+        // Record party slots of player's mons that appeared in battle
+        if (!BattlerHasAi(i))
+            gBattleStruct->appearedInBattle |= gBitTable[gBattlerPartyIndexes[i]];
+    }
 
     *(&gBattleStruct->turnEffectsTracker) = 0;
     *(&gBattleStruct->turnEffectsBattlerId) = 0;
