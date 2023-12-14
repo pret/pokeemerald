@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("Rocky Payload increases Rock-type move damage", s16 damage)
         ASSUME(gBattleMoves[MOVE_POWER_GEM].type == TYPE_ROCK);
         ASSUME(gBattleMoves[MOVE_ROCK_THROW].split == SPLIT_PHYSICAL);
         ASSUME(gBattleMoves[MOVE_POWER_GEM].split == SPLIT_SPECIAL);
-        PLAYER(SPECIES_WOBBUFFET) { Ability(ability); }
+        PLAYER(SPECIES_BOMBIRDIER) { Ability(ability); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, move); }

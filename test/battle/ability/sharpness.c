@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-SINGLE_BATTLE_TEST("Sharpness increases the power of cutting moves", s16 damage)
+SINGLE_BATTLE_TEST("Sharpness increases the power of slicing moves", s16 damage)
 {
     u32 move;
     u16 ability;
@@ -11,6 +11,8 @@ SINGLE_BATTLE_TEST("Sharpness increases the power of cutting moves", s16 damage)
     PARAMETRIZE { move = MOVE_SCRATCH; ability = ABILITY_STEADFAST; }
 
     GIVEN {
+        ASSUME(gBattleMoves[MOVE_AERIAL_ACE].slicingMove);
+        ASSUME(!gBattleMoves[MOVE_SCRATCH].slicingMove);
         PLAYER(SPECIES_GALLADE) { Ability(ability); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
