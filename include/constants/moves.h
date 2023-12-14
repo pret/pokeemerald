@@ -890,8 +890,23 @@
 #define MOVE_MATCHA_GOTCHA 830
 #define MOVE_SYRUP_BOMB 831
 #define MOVE_IVY_CUDGEL 832
+#define MOVE_833 833
+#define MOVE_834 834
+#define MOVE_835 835
+#define MOVE_836 836
+#define MOVE_837 837
+#define MOVE_838 838
+#define MOVE_839 839
+#define MOVE_840 840
+#define MOVE_841 841
+#define MOVE_842 842
+#define MOVE_843 843
+#define MOVE_844 844
+#define MOVE_845 845
+#define MOVE_846 846
+#define MOVE_847 847
 
-#define MOVES_COUNT_GEN9 833
+#define MOVES_COUNT_GEN9 848
 
 #define MOVES_COUNT         MOVES_COUNT_GEN9
 
