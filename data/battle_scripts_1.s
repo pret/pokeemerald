@@ -439,7 +439,6 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectChillyReception         @ EFFECT_CHILLY_RECEPTION
 	.4byte BattleScript_EffectMatchaGotcha            @ EFFECT_MATCHA_GOTCHA
 	.4byte BattleScript_EffectSyrupBomb               @ EFFECT_SYRUP_BOMB
-	.4byte BattleScript_EffectHit                     @ EFFECT_IVY_CUDGEL
 	.4byte BattleScript_EffectMaxMove                 @ EFFECT_MAX_MOVE
 	.4byte BattleScript_EffectGlaiveRush              @ EFFECT_GLAIVE_RUSH
 	.4byte BattleScript_EffectBrickBreak              @ EFFECT_RAGING_BULL
@@ -10813,7 +10812,7 @@ BattleScript_BerserkGeneRet_End:
 BattleScript_EffectSnow::
 	attackcanceler
 	attackstring
-	ppreduce	
+	ppreduce
 	call BattleScript_CheckPrimalWeather
 	setsnow
 	goto BattleScript_MoveWeatherChange

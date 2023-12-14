@@ -1,6 +1,12 @@
 #include "global.h"
 #include "test/battle.h"
 
+ASSUMPTIONS
+{
+    ASSUME(gBattleMoves[MOVE_IVY_CUDGEL].effect == EFFECT_CHANGE_TYPE_ON_ITEM);
+    ASSUME(gBattleMoves[MOVE_IVY_CUDGEL].argument == HOLD_EFFECT_MASK);
+}
+
 SINGLE_BATTLE_TEST("Ivy Gudgel changes the move type depending on the mask the user holds")
 {
     u16 species;
