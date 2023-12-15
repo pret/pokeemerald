@@ -5853,7 +5853,8 @@ static void Cmd_moveend(void)
                     if (IsBattlerAlive(battler)
                       && gBattlerAttacker != battler
                       && GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_EJECT_BUTTON
-                      && TARGET_TURN_DAMAGED
+                      && !DoesSubstituteBlockMove(gBattlerAttacker, battler, gCurrentMove)
+                      && (gSpecialStatuses[battler].physicalDmg != 0 || gSpecialStatuses[battler].specialDmg != 0 || gBattleStruct->enduredDamage & gBitTable[battler])
                       && CountUsablePartyMons(battler) > 0)  // Has mon to switch into
                     {
                         gBattleScripting.battler = battler;
