@@ -7,7 +7,7 @@ ASSUMPTIONS
     ASSUME(gBattleMoves[MOVE_IVY_CUDGEL].argument == HOLD_EFFECT_MASK);
 }
 
-SINGLE_BATTLE_TEST("Ivy Gudgel changes the move type depending on the mask the user holds")
+SINGLE_BATTLE_TEST("Ivy Cudgel changes the move type depending on the mask the user holds")
 {
     u16 species;
     u16 item;
