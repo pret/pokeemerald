@@ -5853,8 +5853,7 @@ static void Cmd_moveend(void)
                     if (IsBattlerAlive(battler)
                       && gBattlerAttacker != battler
                       && GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_EJECT_BUTTON
-                      && !DoesSubstituteBlockMove(gBattlerAttacker, battler, gCurrentMove)
-                      && (gSpecialStatuses[battler].physicalDmg != 0 || gSpecialStatuses[battler].specialDmg != 0 || gBattleStruct->enduredDamage & gBitTable[battler])
+                      && BATTLER_TURN_DAMAGED(battler)
                       && CountUsablePartyMons(battler) > 0)  // Has mon to switch into
                     {
                         gBattleScripting.battler = battler;
@@ -5889,7 +5888,7 @@ static void Cmd_moveend(void)
                       && IsBattlerAlive(battler)
                       && !DoesSubstituteBlockMove(gBattlerAttacker, battler, gCurrentMove)
                       && GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_RED_CARD
-                      && (gSpecialStatuses[battler].physicalDmg != 0 || gSpecialStatuses[battler].specialDmg != 0)
+                      && BATTLER_TURN_DAMAGED(battler)
                       && CanBattlerSwitch(gBattlerAttacker))
                     {
                         gLastUsedItem = gBattleMons[battler].item;
@@ -5953,7 +5952,7 @@ static void Cmd_moveend(void)
                     // Attacker is mon who made contact, battler is mon with pickpocket
                     if (battler != gBattlerAttacker                                                     // Cannot pickpocket yourself
                       && GetBattlerAbility(battler) == ABILITY_PICKPOCKET                               // Target must have pickpocket ability
-                      && BATTLER_DAMAGED(battler)                                                       // Target needs to have been damaged
+                      && BATTLER_TURN_DAMAGED(battler)                                                  // Target needs to have been damaged
                       && !DoesSubstituteBlockMove(gBattlerAttacker, battler, gCurrentMove)              // Subsitute unaffected
                       && IsBattlerAlive(battler)                                                        // Battler must be alive to pickpocket
                       && gBattleMons[battler].item == ITEM_NONE                                         // Pickpocketer can't have an item already
