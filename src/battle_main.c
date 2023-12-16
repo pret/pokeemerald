@@ -3141,6 +3141,7 @@ void SwitchInClearSetData(u32 battler)
         gDisableStructs[battler].battlerWithSureHit = disableStructCopy.battlerWithSureHit;
         gDisableStructs[battler].perishSongTimer = disableStructCopy.perishSongTimer;
         gDisableStructs[battler].battlerPreventingEscape = disableStructCopy.battlerPreventingEscape;
+        gDisableStructs[battler].embargoTimer = disableStructCopy.embargoTimer;
     }
 
     gMoveResultFlags = 0;
