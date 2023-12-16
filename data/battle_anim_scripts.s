@@ -27383,8 +27383,6 @@ General_RestoreBg:
 	waitbgfadein
 	end
 
-end
-
 General_ZMoveActivate:
 	loadspritegfx ANIM_TAG_FOCUS_ENERGY @focus energy
 	loadspritegfx ANIM_TAG_Z_MOVE_SYMBOL @Z-Move Symbol
