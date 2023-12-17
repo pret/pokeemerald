@@ -207,6 +207,7 @@ struct SpecialStatus
     // End of byte
     u8 emergencyExited:1;
     u8 afterYou:1;
+    u8 magicianStolen:1; // So that Life Orb doesn't activate after Magician steals it.
 };
 
 struct SideTimer
