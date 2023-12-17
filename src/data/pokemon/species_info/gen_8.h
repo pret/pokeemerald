@@ -3345,7 +3345,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .frontPicYOffset = 2,
         .frontAnimFrames = sAnims_AlcremieGigantamax,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(AlcremieStrawberry, 64, 64),
+        BACK_PIC(AlcremieGigantamax, 64, 64),
         .backPicYOffset = 9,
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(AlcremieGigantamax),

@@ -11688,6 +11688,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 120,
         .abilities = { ABILITY_COMPETITIVE, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_PURPLE,
+        .categoryName = _("Cruel"),
         .weight = 509,
         .description = COMPOUND_STRING(
             "It fires beams that immobilize opponents\n"

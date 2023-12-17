@@ -3702,6 +3702,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
     {
         TATSUGIRI_MISC_INFO,
         .bodyColor = BODY_COLOR_YELLOW,
+        .cryId = CRY_TATSUGIRI_STRETCHY,
         .description = COMPOUND_STRING(
             "It's one of the most intelligent\n"
             "dragon Pokémon. It camouflages itself\n"
