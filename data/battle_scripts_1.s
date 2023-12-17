@@ -8072,12 +8072,14 @@ BattleScript_AnticipationActivates::
 BattleScript_AftermathDmg::
 	pause B_WAIT_TIME_SHORT
 	call BattleScript_AbilityPopUp
+	jumpifability BS_ATTACKER, ABILITY_MAGIC_GUARD, BattleScript_AftermathDmgRet
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	printstring STRINGID_AFTERMATHDMG
 	waitmessage B_WAIT_TIME_LONG
 	tryfaintmon BS_ATTACKER
+BattleScript_AftermathDmgRet:
 	return
 
 BattleScript_DampPreventsAftermath::
