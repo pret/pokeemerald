@@ -744,11 +744,11 @@ static const struct MessageWindowInfo sDisplayStdMessages[] = {
 static const u8 sText_Ellipsis[] = _("…");
 
 static const struct MenuAction sKeyboardPageTitleTexts[UNION_ROOM_KB_PAGE_COUNT + 1] = {
-    [UNION_ROOM_KB_PAGE_UPPER]    = {gText_Upper, NULL},
-    [UNION_ROOM_KB_PAGE_LOWER]    = {gText_Lower, NULL},
-    [UNION_ROOM_KB_PAGE_EMOJI]    = {gText_Symbols, NULL},
-    [UNION_ROOM_KB_PAGE_REGISTER] = {gText_Register2, NULL},
-    [UNION_ROOM_KB_PAGE_COUNT]    = {gText_Exit2, NULL},
+    [UNION_ROOM_KB_PAGE_UPPER]    = {gText_Upper, {NULL}},
+    [UNION_ROOM_KB_PAGE_LOWER]    = {gText_Lower, {NULL}},
+    [UNION_ROOM_KB_PAGE_EMOJI]    = {gText_Symbols, {NULL}},
+    [UNION_ROOM_KB_PAGE_REGISTER] = {gText_Register2, {NULL}},
+    [UNION_ROOM_KB_PAGE_COUNT]    = {gText_Exit2, {NULL}},
 };
 
 static const u16 sUnionRoomChatInterfacePal[] = INCBIN_U16("graphics/union_room_chat/interface.gbapal");
@@ -1953,7 +1953,7 @@ static u8 *GetLimitedMessageStartPtr(void)
     for (i = 0; i < numChars; i++)
     {
         if (*str == CHAR_EXTRA_SYMBOL)
-            *str++;
+            str++;
 
         str++;
     }
@@ -3115,9 +3115,6 @@ static void DrawKeyboardWindow(void)
 static void LoadTextEntryWindow(void)
 {
     int i;
-    u8 unused[2];
-    unused[0] = 0;
-    unused[1] = 0xFF;
 
     // Pointless, cleared below. The tiles are nonsense anyway, see LoadChatWindowGfx.
     for (i = 0; i < MAX_MESSAGE_LENGTH; i++)

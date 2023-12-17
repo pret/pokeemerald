@@ -721,8 +721,6 @@ const struct SpriteTemplate gSweetScentPetalSpriteTemplate =
     .callback = AnimSweetScentPetal,
 };
 
-static const u16 sUnusedPalette[] = INCBIN_U16("graphics/battle_anims/unused/unknown.gbapal");
-
 const union AnimCmd gPainSplitAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 5),
@@ -1508,8 +1506,7 @@ static void FadeScreenToWhite_Step(u8 taskId)
 
 static void AnimSpikes(struct Sprite *sprite)
 {
-    u16 x;
-    u16 y;
+    s16 x, y;
 
     InitSpritePosToAnimAttacker(sprite, TRUE);
     SetAverageBattlerPositions(gBattleAnimTarget, FALSE, &x, &y);
@@ -4844,8 +4841,8 @@ static void AnimMeteorMashStar_Step(struct Sprite *sprite)
 // arg 4: duration
 static void AnimMeteorMashStar(struct Sprite *sprite)
 {
-    s16 y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);          // unused local variable
-    s16 x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET); // unused local variable
+    s16 UNUSED y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+    s16 UNUSED x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
 
     if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER || IsContest())
     {

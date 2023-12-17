@@ -313,7 +313,6 @@ static void GenerateInitialRentalMons(void)
         monSetId = Random() % NUM_SLATEPORT_TENT_MONS;
         for (j = firstMonId; j < firstMonId + i; j++)
         {
-            u16 monId = monIds[j];
             if (monIds[j] == monSetId)
                 break;
             if (species[j] == gFacilityTrainerMons[monSetId].species)

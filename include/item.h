@@ -9,17 +9,17 @@ typedef void (*ItemUseFunc)(u8);
 
 struct Item
 {
+    u32 price;
+    u16 secondaryId;
+    ItemUseFunc fieldUseFunc;
+    const u8 *description;
     u8 name[ITEM_NAME_LENGTH];
-    u16 price;
     u8 holdEffect;
     u8 holdEffectParam;
-    const u8 *description;
     u8 importance;
     u8 pocket;
     u8 type;
-    ItemUseFunc fieldUseFunc;
     u8 battleUsage;
-    u16 secondaryId;
     u8 flingPower;
 };
 

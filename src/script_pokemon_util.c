@@ -21,6 +21,7 @@
 #include "sprite.h"
 #include "string_util.h"
 #include "tv.h"
+#include "wild_encounter.h"
 #include "constants/items.h"
 #include "constants/battle_frontier.h"
 
@@ -66,12 +67,16 @@ u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 u
     struct Pokemon mon;
     u16 targetSpecies;
 
-    CreateMon(&mon, species, level, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    if (OW_SYNCHRONIZE_NATURE >= GEN_6 && (gSpeciesInfo[species].eggGroups[0] == EGG_GROUP_NO_EGGS_DISCOVERED || OW_SYNCHRONIZE_NATURE == GEN_7))
+        CreateMonWithNature(&mon, species, level, USE_RANDOM_IVS, PickWildMonNature());
+    else
+        CreateMon(&mon, species, level, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
+
     heldItem[0] = item;
     heldItem[1] = item >> 8;
     SetMonData(&mon, MON_DATA_HELD_ITEM, heldItem);
 
-    // In case a mon with a form changing item is given. Eg: SPECIES_ARCEUS with ITEM_SPLASH_PLATE will transform into SPECIES_ARCEUS_WATER upon gifted.
+    // In case a mon with a form changing item is given. Eg: SPECIES_ARCEUS_NORMAL with ITEM_SPLASH_PLATE will transform into SPECIES_ARCEUS_WATER upon gifted.
     targetSpecies = GetFormChangeTargetSpecies(&mon, FORM_CHANGE_ITEM_HOLD, 0);
     if (targetSpecies != SPECIES_NONE)
     {
@@ -149,7 +154,10 @@ void CreateScriptedWildMon(u16 species, u8 level, u16 item)
     u8 heldItem[2];
 
     ZeroEnemyPartyMons();
-    CreateMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, 0, 0, OT_ID_PLAYER_ID, 0);
+    if (OW_SYNCHRONIZE_NATURE > GEN_3)
+        CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, PickWildMonNature());
+    else
+        CreateMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, 0, 0, OT_ID_PLAYER_ID, 0);
     if (item)
     {
         heldItem[0] = item;
@@ -164,7 +172,10 @@ void CreateScriptedDoubleWildMon(u16 species1, u8 level1, u16 item1, u16 species
 
     ZeroEnemyPartyMons();
 
-    CreateMon(&gEnemyParty[0], species1, level1, 32, 0, 0, OT_ID_PLAYER_ID, 0);
+    if (OW_SYNCHRONIZE_NATURE > GEN_3)
+        CreateMonWithNature(&gEnemyParty[0], species1, level1, 32, PickWildMonNature());
+    else
+        CreateMon(&gEnemyParty[0], species1, level1, 32, 0, 0, OT_ID_PLAYER_ID, 0);
     if (item1)
     {
         heldItem1[0] = item1;
@@ -172,7 +183,10 @@ void CreateScriptedDoubleWildMon(u16 species1, u8 level1, u16 item1, u16 species
         SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, heldItem1);
     }
 
-    CreateMon(&gEnemyParty[1], species2, level2, 32, 0, 0, OT_ID_PLAYER_ID, 0);
+    if (OW_SYNCHRONIZE_NATURE > GEN_3)
+        CreateMonWithNature(&gEnemyParty[1], species2, level2, 32, PickWildMonNature());
+    else
+        CreateMon(&gEnemyParty[1], species2, level2, 32, 0, 0, OT_ID_PLAYER_ID, 0);
     if (item2)
     {
         heldItem2[0] = item2;

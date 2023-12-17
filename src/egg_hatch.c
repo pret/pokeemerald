@@ -360,7 +360,6 @@ static void AddHatchedMonToParty(u8 id)
     u8 isEgg = 0x46; // ?
     u16 species;
     u8 name[POKEMON_NAME_LENGTH + 1];
-    u16 ball;
     u16 metLevel;
     u8 metLocation;
     struct Pokemon *mon = &gPlayerParty[id];
@@ -422,6 +421,7 @@ static u8 EggHatchCreateMonSprite(u8 useAlt, u8 state, u8 partyId, u16 *speciesL
     u8 position = 0;
     u8 spriteId = 0;
     struct Pokemon *mon = NULL;
+    u16 species = SPECIES_NONE;
 
     if (useAlt == FALSE)
     {
@@ -434,23 +434,23 @@ static u8 EggHatchCreateMonSprite(u8 useAlt, u8 state, u8 partyId, u16 *speciesL
         mon = &gPlayerParty[partyId];
         position = B_POSITION_OPPONENT_RIGHT;
     }
+    species = GetMonData(mon, MON_DATA_SPECIES);
     switch (state)
     {
     case 0:
         // Load mon sprite gfx
         {
-            u16 species = GetMonData(mon, MON_DATA_SPECIES);
             u32 pid = GetMonData(mon, MON_DATA_PERSONALITY);
             HandleLoadSpecialPokePic(TRUE,
                                      gMonSpritesGfxPtr->sprites.ptr[(useAlt * 2) + B_POSITION_OPPONENT_LEFT],
                                      species, pid);
-            LoadCompressedSpritePalette(GetMonSpritePalStruct(mon));
+            LoadCompressedSpritePaletteWithTag(GetMonFrontSpritePal(mon), species);
             *speciesLoc = species;
         }
         break;
     case 1:
         // Create mon sprite
-        SetMultiuseSpriteTemplateToPokemon(GetMonSpritePalStruct(mon)->tag, position);
+        SetMultiuseSpriteTemplateToPokemon(species, position);
         spriteId = CreateSprite(&gMultiuseSpriteTemplate, EGG_X, EGG_Y, 6);
         gSprites[spriteId].invisible = TRUE;
         gSprites[spriteId].callback = SpriteCallbackDummy;
@@ -778,7 +778,7 @@ static void SpriteCB_Egg_Shake3(struct Sprite *sprite)
     {
         if (++sprite->sTimer > 38)
         {
-            u16 species;
+            u16 UNUSED species;
             sprite->callback = SpriteCB_Egg_WaitHatch;
             sprite->sTimer = 0;
             species = GetMonData(&gPlayerParty[sEggHatchData->eggPartyId], MON_DATA_SPECIES);

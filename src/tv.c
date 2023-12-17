@@ -107,28 +107,27 @@ static bool8 IsAddingPokeNewsDisallowed(u8);
 static void ClearPokeNewsBySlot(u8);
 static void TranslateRubyShows(TVShow *);
 static void TranslateJapaneseEmeraldShows(TVShow *);
-static void SetMixedTVShows(TVShow *, TVShow *, TVShow *, TVShow *);
+static void SetMixedTVShows(TVShow[TV_SHOWS_COUNT], TVShow[TV_SHOWS_COUNT], TVShow[TV_SHOWS_COUNT], TVShow[TV_SHOWS_COUNT]);
 static void DeleteExcessMixedShows(void);
 static void DeactivateShowsWithUnseenSpecies(void);
 static void DeactivateGameCompleteShowsIfNotUnlocked(void);
 static s8 FindInactiveShowInArray(TVShow *);
-static bool8 TryMixTVShow(TVShow *[], TVShow *[], u8);
+static bool8 TryMixTVShow(TVShow *[TV_SHOWS_COUNT], TVShow *[TV_SHOWS_COUNT], u8);
 static bool8 TryMixNormalTVShow(TVShow *, TVShow *, u8);
 static bool8 TryMixRecordMixTVShow(TVShow *, TVShow *, u8);
 static bool8 TryMixOutbreakTVShow(TVShow *, TVShow *, u8);
 static void DeactivateShow(u8 showIdx);
 static void DeactivateShowIfNotSeenSpecies(u16, u8);
-static void SetMixedPokeNews(PokeNews *, PokeNews *, PokeNews *, PokeNews *);
+static void SetMixedPokeNews(PokeNews[POKE_NEWS_COUNT], PokeNews[POKE_NEWS_COUNT], PokeNews[POKE_NEWS_COUNT], PokeNews[POKE_NEWS_COUNT]);
 static void ClearInvalidPokeNews(void);
 static void ClearPokeNewsIfGameNotComplete(void);
 static s8 GetPokeNewsSlotIfActive(PokeNews *, u8);
-static void InitTryMixPokeNewsShow(PokeNews *[], PokeNews *[]);
+static void InitTryMixPokeNewsShow(PokeNews *[POKE_NEWS_COUNT], PokeNews *[POKE_NEWS_COUNT]);
 static bool8 TryMixPokeNewsShow(PokeNews *, PokeNews *, s8);
 static void TVShowDone(void);
 static void InterviewAfter_FanClubLetter(void);
 static void InterviewAfter_RecentHappenings(void);
 static void InterviewAfter_PkmnFanClubOpinions(void);
-static void InterviewAfter_Dummy(void);
 static void InterviewAfter_BravoTrainerPokemonProfile(void);
 static void InterviewAfter_BravoTrainerBattleTowerProfile(void);
 static void InterviewAfter_ContestLiveUpdates(void);
@@ -1078,7 +1077,6 @@ void InterviewAfter(void)
         InterviewAfter_PkmnFanClubOpinions();
         break;
     case TVSHOW_DUMMY:
-        InterviewAfter_Dummy();
         break;
     case TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE:
         InterviewAfter_BravoTrainerPokemonProfile();
@@ -1618,11 +1616,6 @@ static void InterviewAfter_PkmnFanClubOpinions(void)
         show->fanclubOpinions.pokemonNameLanguage = LANGUAGE_JAPANESE;
     else
         show->fanclubOpinions.pokemonNameLanguage = GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_LANGUAGE);
-}
-
-static void InterviewAfter_Dummy(void)
-{
-    TVShow *show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
 }
 
 static void TryStartRandomMassOutbreak(void)
@@ -3939,8 +3932,7 @@ else \
     (langptr) = langfix; \
 }
 
-// Unused
-static void TranslateShowNames(TVShow *show, u32 language)
+static void UNUSED TranslateShowNames(TVShow *show, u32 language)
 {
     int i;
     TVShow **shows;

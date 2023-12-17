@@ -15,7 +15,7 @@
 #define MOVE_LIMITATION_BELCH                   (1 << 11)
 #define MOVE_LIMITATION_THROAT_CHOP             (1 << 12)
 #define MOVE_LIMITATION_STUFF_CHEEKS            (1 << 13)
-#define MOVE_LIMITATION_GIGATON_HAMMER          (1 << 14)
+#define MOVE_LIMITATION_CANT_USE_TWICE          (1 << 14)
 
 #define MOVE_LIMITATION_PLACEHOLDER             (1 << 15)
 #define MOVE_LIMITATIONS_ALL                    0xFFFF
@@ -33,14 +33,15 @@
 #define ABILITYEFFECT_TRACE2                     10
 #define ABILITYEFFECT_MOVE_END_OTHER             11
 #define ABILITYEFFECT_NEUTRALIZINGGAS            12
-#define ABILITYEFFECT_FIELD_SPORT                13 // Only used if B_SPORT_TURNS < GEN_6
+#define ABILITYEFFECT_FIELD_SPORT                13 // Only used if B_SPORT_TURNS >= GEN_6
 #define ABILITYEFFECT_ON_WEATHER                 14
 #define ABILITYEFFECT_ON_TERRAIN                 15
 #define ABILITYEFFECT_SWITCH_IN_TERRAIN          16
 #define ABILITYEFFECT_SWITCH_IN_WEATHER          17
+#define ABILITYEFFECT_OPPORTUNIST                18
 // Special cases
-#define ABILITYEFFECT_MUD_SPORT                  252 // Only used if B_SPORT_TURNS < GEN_6
-#define ABILITYEFFECT_WATER_SPORT                253 // Only used if B_SPORT_TURNS < GEN_6
+#define ABILITYEFFECT_MUD_SPORT                  252 // Only used if B_SPORT_TURNS >= GEN_6
+#define ABILITYEFFECT_WATER_SPORT                253 // Only used if B_SPORT_TURNS >= GEN_6
 
 // For the first argument of ItemBattleEffects, to deteremine which block of item effects to try
 #define ITEMEFFECT_ON_SWITCH_IN                 0
@@ -114,13 +115,10 @@ void HandleAction_TryFinish(void);
 void HandleAction_NothingIsFainted(void);
 void HandleAction_ActionFinished(void);
 u8 GetBattlerForBattleScript(u8 caseId);
-void PressurePPLose(u8 target, u8 attacker, u16 move);
-void PressurePPLoseOnUsingPerishSong(u8 attacker);
-void PressurePPLoseOnUsingImprison(u8 attacker);
 bool32 IsBattlerMarkedForControllerExec(u32 battler);
 void MarkBattlerForControllerExec(u32 battler);
 void MarkBattlerReceivedLinkData(u32 battler);
-void CancelMultiTurnMoves(u32 battler);
+const u8* CancelMultiTurnMoves(u32 battler);
 bool32 WasUnableToUseMove(u32 battler);
 void PrepareStringBattle(u16 stringId, u32 battler);
 void ResetSentPokesToOpponentValue(void);
@@ -147,6 +145,7 @@ bool32 TryChangeBattleWeather(u32 battler, u32 weatherEnumId, bool32 viaAbility)
 u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 moveArg);
 bool32 TryPrimalReversion(u32 battler);
 bool32 IsNeutralizingGasOnField(void);
+bool32 IsMoldBreakerTypeAbility(u32 ability);
 u32 GetBattlerAbility(u32 battler);
 u32 IsAbilityOnSide(u32 battler, u32 ability);
 u32 IsAbilityOnOpposingSide(u32 battler, u32 ability);
@@ -158,7 +157,7 @@ bool32 CanBattlerEscape(u32 battler); // no ability check
 void BattleScriptExecute(const u8 *BS_ptr);
 void BattleScriptPushCursorAndCallback(const u8 *BS_ptr);
 u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn);
-void ClearFuryCutterDestinyBondGrudge(u32 battler);
+void ClearVariousBattlerFlags(u32 battler);
 void HandleAction_RunBattleScript(void);
 u32 SetRandomTarget(u32 battler);
 u32 GetMoveTarget(u16 move, u8 setTarget);
@@ -240,7 +239,7 @@ bool32 CanBeFrozen(u32 battler);
 bool32 CanGetFrostbite(u32 battler);
 bool32 CanBeConfused(u32 battler);
 bool32 IsBattlerTerrainAffected(u32 battler, u32 terrainFlag);
-u32 GetBattlerFriendshipScore(u32 battler);
+u32 GetBattlerAffectionHearts(u32 battler);
 u32 CountBattlerStatIncreases(u32 battler, bool32 countEvasionAcc);
 bool32 IsMyceliumMightOnField(void);
 bool32 ChangeTypeBasedOnTerrain(u32 battler);
@@ -248,7 +247,9 @@ void RemoveConfusionStatus(u32 battler);
 u8 GetBattlerGender(u32 battler);
 bool32 AreBattlersOfOppositeGender(u32 battler1, u32 battler2);
 bool32 AreBattlersOfSameGender(u32 battler1, u32 battler2);
-u32 CalcSecondaryEffectChance(u32 battler, u8 secondaryEffectChance);
+u32 CalcSecondaryEffectChance(u32 battler, u8 secondaryEffectChance, u16 moveEffect);
 u8 GetBattlerType(u32 battler, u8 typeIndex);
+bool8 CanMonParticipateInSkyBattle(struct Pokemon *mon);
+bool8 IsMonBannedFromSkyBattles(u16 species);
 
 #endif // GUARD_BATTLE_UTIL_H

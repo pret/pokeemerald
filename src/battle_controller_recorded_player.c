@@ -66,7 +66,7 @@ static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 ba
     [CONTROLLER_FAINTANIMATION]           = BtlController_HandleFaintAnimation,
     [CONTROLLER_PALETTEFADE]              = BtlController_Empty,
     [CONTROLLER_SUCCESSBALLTHROWANIM]     = BtlController_Empty,
-    [CONTROLLER_BALLTHROWANIM]            = BtlController_Empty,
+    [CONTROLLER_BALLTHROWANIM]            = PlayerHandleBallThrowAnim,
     [CONTROLLER_PAUSE]                    = BtlController_Empty,
     [CONTROLLER_MOVEANIMATION]            = RecordedPlayerHandleMoveAnimation,
     [CONTROLLER_PRINTSTRING]              = RecordedPlayerHandlePrintString,
@@ -78,7 +78,7 @@ static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 ba
     [CONTROLLER_CHOOSEPOKEMON]            = RecordedPlayerHandleChoosePokemon,
     [CONTROLLER_23]                       = BtlController_Empty,
     [CONTROLLER_HEALTHBARUPDATE]          = RecordedPlayerHandleHealthBarUpdate,
-    [CONTROLLER_EXPUPDATE]                = BtlController_Empty,
+    [CONTROLLER_EXPUPDATE]                = PlayerHandleExpUpdate,
     [CONTROLLER_STATUSICONUPDATE]         = RecordedPlayerHandleStatusIconUpdate,
     [CONTROLLER_STATUSANIMATION]          = RecordedPlayerHandleStatusAnimation,
     [CONTROLLER_STATUSXOR]                = BtlController_Empty,
@@ -427,25 +427,7 @@ static void RecordedPlayerHandleMoveAnimation(u32 battler)
 
 static void RecordedPlayerHandlePrintString(u32 battler)
 {
-    u16 *stringId;
-
-    gBattle_BG0_X = 0;
-    gBattle_BG0_Y = 0;
-    stringId = (u16 *)(&gBattleResources->bufferA[battler][2]);
-    BufferStringBattle(*stringId, battler);
-
-    if (gTestRunnerEnabled)
-    {
-        TestRunner_Battle_RecordMessage(gDisplayedStringBattle);
-        if (gTestRunnerHeadless)
-        {
-            RecordedPlayerBufferExecCompleted(battler);
-            return;
-        }
-    }
-
-    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
-    gBattlerControllerFuncs[battler] = Controller_WaitForString;
+    BtlController_HandlePrintString(battler, FALSE, FALSE);
 }
 
 static void ChooseActionInBattlePalace(u32 battler)
@@ -507,28 +489,7 @@ static void RecordedPlayerHandleChoosePokemon(u32 battler)
 
 static void RecordedPlayerHandleHealthBarUpdate(u32 battler)
 {
-    s16 hpVal;
-    s32 maxHP, curHP;
-
-    LoadBattleBarGfx(0);
-    hpVal = gBattleResources->bufferA[battler][2] | (gBattleResources->bufferA[battler][3] << 8);
-
-    maxHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_MAX_HP);
-    curHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_HP);
-
-    if (hpVal != INSTANT_HP_BAR_DROP)
-    {
-        SetBattleBarStruct(battler, gHealthboxSpriteIds[battler], maxHP, curHP, hpVal);
-        TestRunner_Battle_RecordHP(battler, curHP, min(maxHP, max(0, curHP - hpVal)));
-    }
-    else
-    {
-        SetBattleBarStruct(battler, gHealthboxSpriteIds[battler], maxHP, 0, hpVal);
-        UpdateHpTextInHealthbox(gHealthboxSpriteIds[battler], HP_CURRENT, 0, maxHP);
-        TestRunner_Battle_RecordHP(battler, curHP, 0);
-    }
-
-    gBattlerControllerFuncs[battler] = Controller_WaitForHealthBar;
+    BtlController_HandleHealthBarUpdate(battler, TRUE);
 }
 
 static void RecordedPlayerHandleStatusIconUpdate(u32 battler)

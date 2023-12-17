@@ -64,16 +64,20 @@
 #define ITEM_EXPANSION
 
 // Generation constants used in configs to define behavior
-#define GEN_3 0
-#define GEN_4 1
-#define GEN_5 2
-#define GEN_6 3
-#define GEN_7 4
-#define GEN_8 5
-#define GEN_9 6
+#define GEN_1 0
+#define GEN_2 1
+#define GEN_3 2
+#define GEN_4 3
+#define GEN_5 4
+#define GEN_6 5
+#define GEN_7 6
+#define GEN_8 7
+#define GEN_9 8
 #define GEN_LATEST GEN_9
 
 // General settings
-#define EXPANSION_INTRO   TRUE    // If TRUE, a custom RHH intro will play after the vanilla copyright screen.
+#define EXPANSION_INTRO              TRUE    // If TRUE, a custom RHH intro will play after the vanilla copyright screen.
+#define POKEDEX_PLUS_HGSS            FALSE   // If TRUE, enables the custom HGSS style Pokedex.
+#define SUMMARY_SCREEN_NATURE_COLORS TRUE    // If TRUE, nature-based stat boosts and reductions will be red and blue in the summary screen.
 
 #endif // GUARD_CONFIG_H

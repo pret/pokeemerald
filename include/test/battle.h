@@ -199,6 +199,17 @@
  * - Instead of player and opponent there is playerLeft, playerRight,
  *   opponentLeft, and opponentRight.
  *
+ * AI_SINGLE_BATTLE_TEST(name, results...) and AI_DOUBLE_BATTLE_TEST(name, results...)
+ * Define battles where opponent mons are controlled by AI, the same that runs
+ * when battling regular Trainers. The flags for AI should be specified by
+ * the AI_FLAGS command.
+ * The rules remain the same as with the SINGLE and DOUBLE battle tests
+ * with some differences:
+ * - opponent's action is specified by the EXPECT_MOVE(s) / EXPECT_SEND_OUT / EXPECT_SWITCH commands
+ * - we don't control what opponent actually does, instead we make sure the opponent does what we expect it to do
+ * - we still control the player's action the same way
+ * - apart from the EXPECTED commands, there's also a new SCORE_ and SCORE__VAL commands
+ *
  * KNOWN_FAILING
  * Marks a test as not passing due to a bug. If there is an issue number
  * associated with the bug it should be included in a comment. If the
@@ -289,6 +300,11 @@
  * Note if Moves is specified then MOVE will not automatically add moves
  * to the moveset.
  *
+ * AI_FLAGS
+ * Specifies which AI flags are run during the test. Has use only for AI tests.
+ * The most common combination is  AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT)
+ * which is the general 'smart' AI.
+ *
  * WHEN
  * Contains the choices that battlers make during the battle.
  *
@@ -358,6 +374,20 @@
  * of this command is to check if a move was successful, e.g.:
  *     ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
  * target can only be specified for ANIM_TYPE_MOVE.
+ *
+ * EXPERIENCE_BAR(battler, [exp: | captureGainedExp:])
+ * If exp: is used, causes the test to fail if that amount of
+ * experience is not gained, e.g.:
+ *     EXPERIENCE_BAR(player, exp: 0);
+ * If captureGainedExp: is used, causes the test to fail if
+ * the Experience bar does not change, and then writes that change to the
+ * pointer, e.g.:
+ *     u32 exp;
+ *     EXPERIENCE_BAR(player, captureGainedExp: &exp);
+ * If none of the above are used, causes the test to fail if the Exp
+ * does not change at all.
+ * Please note that due to nature of tests, this command
+ * is only usable in WILD_BATTLE_TEST and will fail elsewhere.
  *
  * HP_BAR(battler, [damage: | hp: | captureDamage: | captureHP:])
  * If hp: or damage: are used, causes the test to fail if that amount of
@@ -456,6 +486,7 @@
 #include "recorded_battle.h"
 #include "util.h"
 #include "constants/abilities.h"
+#include "constants/battle_ai.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_move_effects.h"
 #include "constants/hold_effects.h"
@@ -469,8 +500,9 @@
 #define BATTLE_TEST_STACK_SIZE 1024
 #define MAX_TURNS 16
 #define MAX_QUEUED_EVENTS 25
+#define MAX_EXPECTED_ACTIONS 10
 
-enum { BATTLE_TEST_SINGLES, BATTLE_TEST_DOUBLES };
+enum { BATTLE_TEST_SINGLES, BATTLE_TEST_DOUBLES, BATTLE_TEST_WILD, BATTLE_TEST_AI_SINGLES, BATTLE_TEST_AI_DOUBLES };
 
 typedef void (*SingleBattleTestFunction)(void *, const u32, struct BattlePokemon *, struct BattlePokemon *);
 typedef void (*DoubleBattleTestFunction)(void *, const u32, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *);
@@ -492,6 +524,7 @@ enum
     QUEUED_ABILITY_POPUP_EVENT,
     QUEUED_ANIMATION_EVENT,
     QUEUED_HP_EVENT,
+    QUEUED_EXP_EVENT,
     QUEUED_MESSAGE_EVENT,
     QUEUED_STATUS_EVENT,
 };
@@ -511,8 +544,16 @@ struct QueuedAnimationEvent
 };
 
 enum { HP_EVENT_NEW_HP, HP_EVENT_DELTA_HP };
+enum { EXP_EVENT_NEW_EXP, EXP_EVENT_DELTA_EXP };
 
 struct QueuedHPEvent
+{
+    u32 battlerId:3;
+    u32 type:1;
+    u32 address:28;
+};
+
+struct QueuedExpEvent
 {
     u32 battlerId:3;
     u32 type:1;
@@ -541,6 +582,7 @@ struct QueuedEvent
         struct QueuedAbilityEvent ability;
         struct QueuedAnimationEvent animation;
         struct QueuedHPEvent hp;
+        struct QueuedExpEvent exp;
         struct QueuedMessageEvent message;
         struct QueuedStatusEvent status;
     } as;
@@ -558,6 +600,42 @@ struct BattlerTurn
     u8 criticalHit:2;
     u8 secondaryEffect:2;
     struct TurnRNG rng;
+};
+
+struct ExpectedAIAction
+{
+    u16 sourceLine;
+    u8 type:4; // which action
+    u8 moveSlots:4; // Expected move(s) to be chosen or not, marked as bits.
+    u8 target:4; // move target or id of mon which gets sent out
+    u8 explicitTarget:1; // For double battles, if it's set it requires the move to hit a specific target, otherwise any target is fine.
+    u8 pass:1; // No matter what AI does, it always passes.
+    u8 notMove:1; // We're expecting AI to choose any move EXCEPT the specified one.
+    u8 actionSet:1; // Action was set and is expected to happen. Set only for battlers controlled by AI.
+};
+
+#define MAX_AI_SCORE_COMPARISION_PER_TURN 4
+#define MAX_AI_LOG_LINES 10
+
+struct ExpectedAiScore
+{
+    // We can compare AI's move score to a value or to another move's score.
+    u8 moveSlot1:2;
+    u8 moveSlot2:2;
+    u8 target:2;
+    s8 value; // value
+    u8 cmp:3; // Uses battle script command's CMP_ macros
+    u8 toValue:1; // compare to value, not to move
+    u8 set:1;
+    u16 sourceLine;
+};
+
+struct AILogLine
+{
+    const char *file;
+    u16 line:15;
+    u16 set:1; // Whether score was set, or added/subtracted
+    s16 score;
 };
 
 struct BattleTestData
@@ -582,6 +660,8 @@ struct BattleTestData
     u8 turns;
     u8 actionBattlers;
     u8 moveBattlers;
+    bool8 hasAI:1;
+    bool8 logAI:1;
 
     struct RecordedBattleSave recordedBattle;
     u8 battleRecordTypes[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE];
@@ -595,6 +675,12 @@ struct BattleTestData
     u8 queueGroupStart;
     u8 queuedEvent;
     struct QueuedEvent queuedEvents[MAX_QUEUED_EVENTS];
+    u8 expectedAiActionIndex[MAX_BATTLERS_COUNT];
+    u8 aiActionsPlayed[MAX_BATTLERS_COUNT];
+    struct ExpectedAIAction expectedAiActions[MAX_BATTLERS_COUNT][MAX_EXPECTED_ACTIONS];
+    struct ExpectedAiScore expectedAiScores[MAX_BATTLERS_COUNT][MAX_TURNS][MAX_AI_SCORE_COMPARISION_PER_TURN]; // Max 4 comparisions per turn
+    struct AILogLine aiLogLines[MAX_BATTLERS_COUNT][MAX_MON_MOVES][MAX_AI_LOG_LINES];
+    u8 aiLogPrintedForMove[MAX_BATTLERS_COUNT]; // Marks ai score log as printed for move, so the same log isn't displayed multiple times.
 };
 
 struct BattleTestRunnerState
@@ -658,7 +744,7 @@ extern struct BattleTestRunnerState *const gBattleTestRunnerState;
         TO_DO; \
     }
 
-#define SINGLE_BATTLE_TEST(_name, ...) \
+#define BATTLE_TEST_ARGS_SINGLE(_name, _type, ...) \
     struct CAT(Result, __LINE__) { MEMBERS(__VA_ARGS__) }; \
     static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *, const u32, struct BattlePokemon *, struct BattlePokemon *); \
     __attribute__((section(".tests"))) static const struct Test CAT(sTest, __LINE__) = \
@@ -668,7 +754,7 @@ extern struct BattleTestRunnerState *const gBattleTestRunnerState;
         .runner = &gBattleTestRunner, \
         .data = (void *)&(const struct BattleTest) \
         { \
-            .type = BATTLE_TEST_SINGLES, \
+            .type = _type, \
             .sourceLine = __LINE__, \
             .function = { .singles = (SingleBattleTestFunction)CAT(Test, __LINE__) }, \
             .resultsSize = sizeof(struct CAT(Result, __LINE__)), \
@@ -676,7 +762,7 @@ extern struct BattleTestRunnerState *const gBattleTestRunnerState;
     }; \
     static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *results, const u32 i, struct BattlePokemon *player, struct BattlePokemon *opponent)
 
-#define DOUBLE_BATTLE_TEST(_name, ...) \
+#define BATTLE_TEST_ARGS_DOUBLE(_name, _type, ...) \
     struct CAT(Result, __LINE__) { MEMBERS(__VA_ARGS__) }; \
     static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *, const u32, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *); \
     __attribute__((section(".tests"))) static const struct Test CAT(sTest, __LINE__) = \
@@ -686,13 +772,21 @@ extern struct BattleTestRunnerState *const gBattleTestRunnerState;
         .runner = &gBattleTestRunner, \
         .data = (void *)&(const struct BattleTest) \
         { \
-            .type = BATTLE_TEST_DOUBLES, \
+            .type = _type, \
             .sourceLine = __LINE__, \
             .function = { .doubles = (DoubleBattleTestFunction)CAT(Test, __LINE__) }, \
             .resultsSize = sizeof(struct CAT(Result, __LINE__)), \
         }, \
     }; \
     static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *results, const u32 i, struct BattlePokemon *playerLeft, struct BattlePokemon *opponentLeft, struct BattlePokemon *playerRight, struct BattlePokemon *opponentRight)
+
+
+#define SINGLE_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_SINGLE(_name, BATTLE_TEST_SINGLES, __VA_ARGS__)
+#define WILD_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_SINGLE(_name, BATTLE_TEST_WILD, __VA_ARGS__)
+#define AI_SINGLE_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_SINGLE(_name, BATTLE_TEST_AI_SINGLES, __VA_ARGS__)
+
+#define DOUBLE_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_DOUBLE(_name, BATTLE_TEST_DOUBLES, __VA_ARGS__)
+#define AI_DOUBLE_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_DOUBLE(_name, BATTLE_TEST_AI_DOUBLES, __VA_ARGS__)
 
 /* Parametrize */
 
@@ -721,6 +815,8 @@ struct moveWithPP {
 #define GIVEN for (; gBattleTestRunnerState->runGiven; gBattleTestRunnerState->runGiven = FALSE)
 
 #define RNGSeed(seed) RNGSeed_(__LINE__, seed)
+#define AI_FLAGS(flags) AIFlags_(__LINE__, flags)
+#define AI_LOG AILogScores(__LINE__)
 
 #define PLAYER(species) for (OpenPokemon(__LINE__, B_SIDE_PLAYER, species); gBattleTestRunnerState->data.currentMon; ClosePokemon(__LINE__))
 #define OPPONENT(species) for (OpenPokemon(__LINE__, B_SIDE_OPPONENT, species); gBattleTestRunnerState->data.currentMon; ClosePokemon(__LINE__))
@@ -737,15 +833,18 @@ struct moveWithPP {
 #define SpDefense(spDefense) SpDefense_(__LINE__, spDefense)
 #define Speed(speed) Speed_(__LINE__, speed)
 #define Item(item) Item_(__LINE__, item)
-#define Moves(move1, ...) Moves_(__LINE__, (const u16 [MAX_MON_MOVES]) { move1, __VA_ARGS__ })
+#define Moves(move1, ...) do { u16 moves_[MAX_MON_MOVES] = {move1, __VA_ARGS__}; Moves_(__LINE__, moves_); } while(0)
 #define MovesWithPP(movewithpp1, ...) MovesWithPP_(__LINE__, (struct moveWithPP[MAX_MON_MOVES]) {movewithpp1, __VA_ARGS__})
 #define Friendship(friendship) Friendship_(__LINE__, friendship)
 #define Status1(status1) Status1_(__LINE__, status1)
+#define OTName(otName) do {static const u8 otName_[] = _(otName); OTName_(__LINE__, otName_);} while (0)
 
 void OpenPokemon(u32 sourceLine, u32 side, u32 species);
 void ClosePokemon(u32 sourceLine);
 
 void RNGSeed_(u32 sourceLine, u32 seed);
+void AIFlags_(u32 sourceLine, u32 flags);
+void AILogScores(u32 sourceLine);
 void Gender_(u32 sourceLine, u32 gender);
 void Nature_(u32 sourceLine, u32 nature);
 void Ability_(u32 sourceLine, u32 ability);
@@ -758,10 +857,27 @@ void SpAttack_(u32 sourceLine, u32 spAttack);
 void SpDefense_(u32 sourceLine, u32 spDefense);
 void Speed_(u32 sourceLine, u32 speed);
 void Item_(u32 sourceLine, u32 item);
-void Moves_(u32 sourceLine, const u16 moves[MAX_MON_MOVES]);
+void Moves_(u32 sourceLine, u16 moves[MAX_MON_MOVES]);
 void MovesWithPP_(u32 sourceLine, struct moveWithPP moveWithPP[MAX_MON_MOVES]);
 void Friendship_(u32 sourceLine, u32 friendship);
 void Status1_(u32 sourceLine, u32 status1);
+void OTName_(u32 sourceLine, const u8 *otName);
+
+// Created for easy use of EXPECT_MOVES, so the user can provide 1, 2, 3 or 4 moves for AI which can pass the test.
+struct FourMoves
+{
+    u16 moves[MAX_MON_MOVES];
+};
+
+struct TestAIScoreStruct
+{
+    u32 move1;
+    bool8 explicitMove1;
+    u32 valueOrMoveId2;
+    bool8 explicitValueOrMoveId2;
+    struct BattlePokemon *target;
+    bool8 explicitTarget;
+};
 
 #define PLAYER_PARTY (gBattleTestRunnerState->data.recordedBattle.playerParty)
 #define OPPONENT_PARTY (gBattleTestRunnerState->data.recordedBattle.opponentParty)
@@ -775,6 +891,22 @@ enum { TURN_CLOSED, TURN_OPEN, TURN_CLOSING };
 #define TURN for (OpenTurn(__LINE__); gBattleTestRunnerState->data.turnState == TURN_OPEN; CloseTurn(__LINE__))
 
 #define MOVE(battler, ...) Move(__LINE__, battler, (struct MoveContext) { APPEND_TRUE(__VA_ARGS__) })
+
+#define EXPECT_MOVE(battler, ...) ExpectMove(__LINE__, battler, (struct MoveContext) { APPEND_TRUE(__VA_ARGS__) })
+#define NOT_EXPECT_MOVE(battler, _move) ExpectMove(__LINE__, battler, (struct MoveContext) { .move = _move, .explicitMove = TRUE, .notExpected = TRUE, .explicitNotExpected = TRUE, })
+#define EXPECT_MOVES(battler, ...) ExpectMoves(__LINE__, battler, FALSE, (struct FourMoves) {{ __VA_ARGS__ }})
+#define NOT_EXPECT_MOVES(battler, ...) ExpectMoves(__LINE__, battler, TRUE, (struct FourMoves) {{ __VA_ARGS__ }})
+#define EXPECT_SEND_OUT(battler, partyIndex) ExpectSendOut(__LINE__, battler, partyIndex)
+#define EXPECT_SWITCH(battler, partyIndex) ExpectSwitch(__LINE__, battler, partyIndex)
+#define SCORE_EQ(battler, ...) Score(__LINE__, battler, CMP_EQUAL, FALSE, (struct TestAIScoreStruct) { APPEND_TRUE(__VA_ARGS__) } )
+#define SCORE_NE(battler, ...) Score(__LINE__, battler, CMP_NOT_EQUAL, FALSE, (struct TestAIScoreStruct) { APPEND_TRUE(__VA_ARGS__) } )
+#define SCORE_GT(battler, ...) Score(__LINE__, battler, CMP_GREATER_THAN, FALSE, (struct TestAIScoreStruct) { APPEND_TRUE(__VA_ARGS__) } )
+#define SCORE_LT(battler, ...) Score(__LINE__, battler, CMP_LESS_THAN, FALSE, (struct TestAIScoreStruct) { APPEND_TRUE(__VA_ARGS__) } )
+#define SCORE_EQ_VAL(battler, ...) Score(__LINE__, battler, CMP_EQUAL, TRUE, (struct TestAIScoreStruct) { APPEND_TRUE(__VA_ARGS__) } )
+#define SCORE_NE_VAL(battler, ...) Score(__LINE__, battler, CMP_NOT_EQUAL, TRUE, (struct TestAIScoreStruct) { APPEND_TRUE(__VA_ARGS__) } )
+#define SCORE_GT_VAL(battler, ...) Score(__LINE__, battler, CMP_GREATER_THAN, TRUE, (struct TestAIScoreStruct) { APPEND_TRUE(__VA_ARGS__) } )
+#define SCORE_LT_VAL(battler, ...) Score(__LINE__, battler, CMP_LESS_THAN, TRUE, (struct TestAIScoreStruct) { APPEND_TRUE(__VA_ARGS__) } )
+
 #define FORCED_MOVE(battler) ForcedMove(__LINE__, battler)
 #define SWITCH(battler, partyIndex) Switch(__LINE__, battler, partyIndex)
 #define SKIP_TURN(battler) SkipTurn(__LINE__, battler)
@@ -799,8 +931,12 @@ struct MoveContext
     u16 ultraBurst:1;
     u16 explicitUltraBurst:1;
     // TODO: u8 zMove:1;
+    u16 dynamax:1;
+    u16 explicitDynamax:1;
     u16 allowed:1;
     u16 explicitAllowed:1;
+    u16 notExpected:1; // Has effect only with EXPECT_MOVE
+    u16 explicitNotExpected:1;
     struct BattlePokemon *target;
     bool8 explicitTarget;
     struct TurnRNG rng;
@@ -820,6 +956,11 @@ struct ItemContext
 void OpenTurn(u32 sourceLine);
 void CloseTurn(u32 sourceLine);
 void Move(u32 sourceLine, struct BattlePokemon *, struct MoveContext);
+void ExpectMove(u32 sourceLine, struct BattlePokemon *, struct MoveContext);
+void ExpectMoves(u32 sourceLine, struct BattlePokemon *battler, bool32 notExpected, struct FourMoves moves);
+void ExpectSendOut(u32 sourceLine, struct BattlePokemon *battler, u32 partyIndex);
+void ExpectSwitch(u32 sourceLine, struct BattlePokemon *battler, u32 partyIndex);
+void Score(u32 sourceLine, struct BattlePokemon *battler, u32 cmp, bool32 toValue, struct TestAIScoreStruct cmpCtx);
 void ForcedMove(u32 sourceLine, struct BattlePokemon *);
 void Switch(u32 sourceLine, struct BattlePokemon *, u32 partyIndex);
 void SkipTurn(u32 sourceLine, struct BattlePokemon *);
@@ -837,6 +978,7 @@ void SendOut(u32 sourceLine, struct BattlePokemon *, u32 partyIndex);
 #define ABILITY_POPUP(battler, ...) QueueAbility(__LINE__, battler, (struct AbilityEventContext) { __VA_ARGS__ })
 #define ANIMATION(type, id, ...) QueueAnimation(__LINE__, type, id, (struct AnimationEventContext) { __VA_ARGS__ })
 #define HP_BAR(battler, ...) QueueHP(__LINE__, battler, (struct HPEventContext) { APPEND_TRUE(__VA_ARGS__) })
+#define EXPERIENCE_BAR(battler, ...) QueueExp(__LINE__, battler, (struct ExpEventContext) { APPEND_TRUE(__VA_ARGS__) })
 // Static const is needed to make the modern compiler put the pattern variable in the .rodata section, instead of putting it on stack(which can break the game).
 #define MESSAGE(pattern) do {static const u8 msg[] = _(pattern); QueueMessage(__LINE__, msg);} while (0)
 #define STATUS_ICON(battler, status) QueueStatus(__LINE__, battler, (struct StatusEventContext) { status })
@@ -872,6 +1014,15 @@ struct HPEventContext
     bool8 explicitCaptureDamage;
 };
 
+struct ExpEventContext
+{
+    u8 _;
+    u32 exp;
+    bool8 explicitExp;
+    s32 *captureGainedExp;
+    bool8 explicitCaptureGainedExp;
+};
+
 struct StatusEventContext
 {
     u16 status1;
@@ -891,6 +1042,7 @@ void CloseQueueGroup(u32 sourceLine);
 void QueueAbility(u32 sourceLine, struct BattlePokemon *battler, struct AbilityEventContext);
 void QueueAnimation(u32 sourceLine, u32 type, u32 id, struct AnimationEventContext);
 void QueueHP(u32 sourceLine, struct BattlePokemon *battler, struct HPEventContext);
+void QueueExp(u32 sourceLine, struct BattlePokemon *battler, struct ExpEventContext);
 void QueueMessage(u32 sourceLine, const u8 *pattern);
 void QueueStatus(u32 sourceLine, struct BattlePokemon *battler, struct StatusEventContext);
 

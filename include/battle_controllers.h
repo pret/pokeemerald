@@ -98,8 +98,9 @@ enum {
 
 // Special return values in gBattleBufferB from Battle Controller functions.
 #define RET_VALUE_LEVELED_UP   11
-#define RET_MEGA_EVOLUTION 0x80
-#define RET_ULTRA_BURST 0x70
+#define RET_MEGA_EVOLUTION (1 << 7)
+#define RET_ULTRA_BURST    (1 << 6)
+#define RET_DYNAMAX        (1 << 5)
 
 struct UnusedControllerStruct
 {
@@ -250,7 +251,7 @@ void BtlController_EmitDrawPartyStatusSummary(u32 battler, u32 bufferId, struct 
 void BtlController_EmitHidePartyStatusSummary(u32 battler, u32 bufferId);
 void BtlController_EmitEndBounceEffect(u32 battler, u32 bufferId);
 void BtlController_EmitSpriteInvisibility(u32 battler, u32 bufferId, bool8 isInvisible);
-void BtlController_EmitBattleAnimation(u32 battler, u32 bufferId, u8 animationId, u16 argument);
+void BtlController_EmitBattleAnimation(u32 battler, u32 bufferId, u8 animationId, struct DisableStruct* disableStructPtr, u16 argument);
 void BtlController_EmitLinkStandbyMsg(u32 battler, u32 bufferId, u8 mode, bool32 record);
 void BtlController_EmitResetActionMoveSelection(u32 battler, u32 bufferId, u8 caseId);
 void BtlController_EmitEndLinkBattle(u32 battler, u32 bufferId, u8 battleOutcome);
@@ -304,6 +305,7 @@ void BtlController_HandleBattleAnimation(u32 battler, bool32 ignoreSE, bool32 up
 // player controller
 void SetControllerToPlayer(u32 battler);
 void SetBattleEndCallbacks(u32 battler);
+void PlayerHandleBallThrowAnim(u32 battler);
 void PlayerHandleExpUpdate(u32 battler);
 u32 LinkPlayerGetTrainerPicId(u32 multiplayerId);
 void CB2_SetUpReshowBattleScreenAfterMenu(void);

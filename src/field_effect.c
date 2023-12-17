@@ -31,6 +31,7 @@
 #include "constants/metatile_behaviors.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "constants/map_types.h"
 
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 
@@ -231,12 +232,17 @@ static void SpriteCB_DeoxysRockFragment(struct Sprite *sprite);
 
 static void Task_MoveDeoxysRock(u8 taskId);
 
+static void Task_FldEffUseVsSeeker(u8 taskId);
+static void UseVsSeeker_StopPlayerMovement(struct Task *task);
+static void UseVsSeeker_DoPlayerAnimation(struct Task *task);
+static void UseVsSeeker_ResetPlayerGraphics(struct Task *task);
+static void UseVsSeeker_CleanUpFieldEffect(struct Task *task);
+
 // Static RAM declarations
 
 static u8 sActiveList[32];
 
 // External declarations
-extern const struct CompressedSpritePalette gMonPaletteTable[];
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
 extern u8 *gFieldEffectScriptPointers[];
@@ -900,8 +906,7 @@ u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buf
     return CreateSprite(&spriteTemplate, x, y, subpriority);
 }
 
-// Unused
-static void LoadTrainerGfx_TrainerCard(u8 gender, u16 palOffset, u8 *dest)
+static void UNUSED LoadTrainerGfx_TrainerCard(u8 gender, u16 palOffset, u8 *dest)
 {
     LZDecompressVram(gTrainerFrontPicTable[gender].data, dest);
     LoadCompressedPalette(gTrainerFrontPicPaletteTable[gender].data, palOffset, PLTT_SIZE_4BPP);
@@ -915,8 +920,8 @@ u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority)
 
 u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
 {
-    s32 spriteId = CreateMonPicSprite(species, 0, 0x8000, TRUE, x, y, 0, gMonPaletteTable[species].tag);
-    PreservePaletteInWeather(IndexOfSpritePaletteTag(gMonPaletteTable[species].tag) + 0x10);
+    s32 spriteId = CreateMonPicSprite(species, 0, 0x8000, TRUE, x, y, 0, species);
+    PreservePaletteInWeather(IndexOfSpritePaletteTag(species) + 0x10);
     if (spriteId == 0xFFFF)
         return MAX_SPRITES;
     else
@@ -925,9 +930,8 @@ u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
 
 u8 CreateMonSprite_FieldMove(u16 species, u32 otId, u32 personality, s16 x, s16 y, u8 subpriority)
 {
-    const struct CompressedSpritePalette *spritePalette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
-    u16 spriteId = CreateMonPicSprite(species, otId, personality, TRUE, x, y, 0, spritePalette->tag);
-    PreservePaletteInWeather(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
+    u16 spriteId = CreateMonPicSprite(species, otId, personality, TRUE, x, y, 0, species);
+    PreservePaletteInWeather(IndexOfSpritePaletteTag(species) + 0x10);
     if (spriteId == 0xFFFF)
         return MAX_SPRITES;
     else
@@ -2610,7 +2614,7 @@ static void FieldMoveShowMonOutdoorsEffect_Init(struct Task *task)
 {
     task->data[11] = REG_WININ;
     task->data[12] = REG_WINOUT;
-    StoreWordInTwoHalfwords(&task->data[13], (u32)gMain.vblankCallback);
+    StoreWordInTwoHalfwords((u16*) &task->data[13], (u32)gMain.vblankCallback);
     task->tWinHoriz = WIN_RANGE(DISPLAY_WIDTH, DISPLAY_WIDTH + 1);
     task->tWinVert = WIN_RANGE(DISPLAY_HEIGHT / 2, DISPLAY_HEIGHT / 2 + 1);
     task->tWinIn = WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR;
@@ -3912,3 +3916,68 @@ static void Task_MoveDeoxysRock(u8 taskId)
 #undef tVelocityY
 #undef tMoveSteps
 #undef tObjEventId
+
+static void (*const sUseVsSeekerEffectFuncs[])(struct Task *task) = {
+    UseVsSeeker_StopPlayerMovement,
+    UseVsSeeker_DoPlayerAnimation,
+    UseVsSeeker_ResetPlayerGraphics,
+    UseVsSeeker_CleanUpFieldEffect
+};
+
+u32 FldEff_UseVsSeeker(void)
+{
+    CreateTask(Task_FldEffUseVsSeeker, 0xFF);
+    return 0;
+}
+
+static void Task_FldEffUseVsSeeker(u8 taskId)
+{
+    sUseVsSeekerEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId]);
+}
+
+static void UseVsSeeker_StopPlayerMovement(struct Task *task)
+{
+    LockPlayerFieldControls();
+    FreezeObjectEvents();
+    gPlayerAvatar.preventStep = TRUE;
+    task->data[0]++;
+}
+
+static void UseVsSeeker_DoPlayerAnimation(struct Task *task)
+{
+    struct ObjectEvent * playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if ((ObjectEventIsMovementOverridden(playerObj) && (!(ObjectEventClearHeldMovementIfFinished(playerObj)))))
+        return;
+
+    if (gMapHeader.mapType != MAP_TYPE_UNDERWATER)
+    {
+        SetPlayerAvatarFieldMove();
+        ObjectEventSetHeldMovement(playerObj, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+    }
+    task->data[0]++;
+}
+
+static void UseVsSeeker_ResetPlayerGraphics(struct Task *task) {
+    struct ObjectEvent* playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+
+    if (!ObjectEventClearHeldMovementIfFinished(playerObj))
+        return;
+
+    if (gMapHeader.mapType != MAP_TYPE_UNDERWATER)
+    {
+        ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarGraphicsIdByCurrentState());
+        ObjectEventForceSetHeldMovement(playerObj, GetFaceDirectionMovementAction(playerObj->facingDirection));
+    }
+    task->data[0]++;
+}
+
+static void UseVsSeeker_CleanUpFieldEffect(struct Task *task)
+{
+    struct ObjectEvent * playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (!ObjectEventClearHeldMovementIfFinished(playerObj))
+        return;
+
+    gPlayerAvatar.preventStep = FALSE;
+    FieldEffectActiveListRemove(FLDEFF_USE_VS_SEEKER);
+    DestroyTask(FindTaskIdByFunc(Task_FldEffUseVsSeeker));
+}

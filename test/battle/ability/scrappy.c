@@ -20,7 +20,7 @@ SINGLE_BATTLE_TEST("Scrappy prevents intimidate")
         ABILITY_POPUP(player, ABILITY_INTIMIDATE);
         NONE_OF { ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player); }
         ABILITY_POPUP(opponent, ABILITY_SCRAPPY);
-        MESSAGE("Foe Kangaskhan's Attack was not lowered!");
+        MESSAGE("Foe Kangaskhan's Scrappy prevents stat loss!");
         HP_BAR(player, captureDamage: &turnTwoHit);
     } THEN {
         EXPECT_EQ(turnOneHit, turnTwoHit);

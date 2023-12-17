@@ -281,7 +281,7 @@ EWRAM_DATA static bool8 sShouldProcessSpriteCopyRequests = 0;
 EWRAM_DATA static u8 sSpriteCopyRequestCount = 0;
 EWRAM_DATA static struct SpriteCopyRequest sSpriteCopyRequests[MAX_SPRITES] = {0};
 EWRAM_DATA u8 gOamLimit = 0;
-static EWRAM_DATA u8 gOamDummyIndex = 0;
+static EWRAM_DATA u8 sOamDummyIndex = 0;
 EWRAM_DATA u16 gReservedSpriteTileCount = 0;
 EWRAM_DATA static u8 sSpriteTileAllocBitmap[128] = {0};
 EWRAM_DATA s16 gSpriteCoordOffsetX = 0;
@@ -292,7 +292,7 @@ EWRAM_DATA bool8 gAffineAnimsDisabled = FALSE;
 void ResetSpriteData(void)
 {
     ResetOamRange(0, 128);
-    gOamDummyIndex = 0;
+    sOamDummyIndex = 0;
     ResetAllSprites();
     ClearSpriteCopyRequests();
     ResetAffineAnimData();
@@ -324,7 +324,7 @@ void AnimateSprites(void)
 void BuildOamBuffer(void)
 {
     bool32 oamLoadDisabled;
-    u32 i, stride;
+    u32 i;
     u8 oamIndex;
 
     // All attributes which affect sorting packed into a single u32:
@@ -405,9 +405,9 @@ void BuildOamBuffer(void)
             break;
     }
 
-    for (i = oamIndex; i < gOamDummyIndex; i++)
+    for (i = oamIndex; i < sOamDummyIndex; i++)
         gMain.oamBuffer[i] = gDummyOamData;
-    gOamDummyIndex = oamIndex;
+    sOamDummyIndex = oamIndex;
 
     for (i = 0; matrices != 0; i++, matrices >>= 1)
     {

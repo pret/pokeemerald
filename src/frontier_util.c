@@ -624,8 +624,16 @@ static const u8 sFrontierBrainObjEventGfx[NUM_FRONTIER_FACILITIES][2] =
 
 const u16 gFrontierBannedSpecies[] =
 {
-    SPECIES_MEW, SPECIES_MEWTWO, SPECIES_HO_OH, SPECIES_LUGIA, SPECIES_CELEBI,
-    SPECIES_KYOGRE, SPECIES_GROUDON, SPECIES_RAYQUAZA, SPECIES_JIRACHI, SPECIES_DEOXYS, 0xFFFF
+    SPECIES_MEW, SPECIES_MEWTWO,
+    SPECIES_HO_OH, SPECIES_LUGIA, SPECIES_CELEBI,
+    SPECIES_KYOGRE, SPECIES_GROUDON, SPECIES_RAYQUAZA, SPECIES_JIRACHI, SPECIES_DEOXYS,
+    SPECIES_DIALGA, SPECIES_PALKIA, SPECIES_GIRATINA, SPECIES_MANAPHY, SPECIES_PHIONE, SPECIES_DARKRAI, SPECIES_SHAYMIN, SPECIES_ARCEUS,
+    SPECIES_VICTINI, SPECIES_RESHIRAM, SPECIES_ZEKROM, SPECIES_KYUREM, SPECIES_KELDEO, SPECIES_MELOETTA, SPECIES_GENESECT,
+    SPECIES_XERNEAS, SPECIES_YVELTAL, SPECIES_ZYGARDE, SPECIES_DIANCIE, SPECIES_HOOPA, SPECIES_VOLCANION,
+    SPECIES_COSMOG, SPECIES_COSMOEM, SPECIES_SOLGALEO, SPECIES_LUNALA, SPECIES_NECROZMA, SPECIES_MAGEARNA, SPECIES_MARSHADOW, SPECIES_ZERAORA, SPECIES_MELTAN, SPECIES_MELMETAL,
+    SPECIES_ZACIAN, SPECIES_ZAMAZENTA, SPECIES_ETERNATUS, SPECIES_CALYREX, SPECIES_ZARUDE,
+    SPECIES_KORAIDON, SPECIES_MIRAIDON,
+    0xFFFF
 };
 
 static const u8 *const sRecordsWindowChallengeTexts[][2] =
@@ -1878,38 +1886,23 @@ static void CheckBattleTypeFlag(void)
         gSpecialVar_Result = FALSE;
 }
 
+#define SPECIES_PER_LINE 3
+
 static u8 AppendCaughtBannedMonSpeciesName(u16 species, u8 count, s32 numBannedMonsCaught)
 {
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
     {
         count++;
-        switch (count)
+        if (numBannedMonsCaught == count)
+            StringAppend(gStringVar1, gText_SpaceAndSpace);
+        else if (numBannedMonsCaught > count)
+            StringAppend(gStringVar1, gText_CommaSpace);
+        if ((count % SPECIES_PER_LINE) == 0)
         {
-        case 1:
-        case 3:
-        case 5:
-        case 7:
-        case 9:
-        case 11:
-            if (numBannedMonsCaught == count)
-                StringAppend(gStringVar1, gText_SpaceAndSpace);
-            else if (numBannedMonsCaught > count)
-                StringAppend(gStringVar1, gText_CommaSpace);
-            break;
-        case 2:
-            if (count == numBannedMonsCaught)
-                StringAppend(gStringVar1, gText_SpaceAndSpace);
+            if (count == SPECIES_PER_LINE)
+                StringAppend(gStringVar1, gText_NewLine);
             else
-                StringAppend(gStringVar1, gText_CommaSpace);
-            StringAppend(gStringVar1, gText_NewLine);
-            break;
-        default:
-            if (count == numBannedMonsCaught)
-                StringAppend(gStringVar1, gText_SpaceAndSpace);
-            else
-                StringAppend(gStringVar1, gText_CommaSpace);
-            StringAppend(gStringVar1, gText_LineBreak);
-            break;
+                StringAppend(gStringVar1, gText_LineBreak);
         }
         StringAppend(gStringVar1, GetSpeciesName(species));
     }
@@ -1924,7 +1917,9 @@ static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monL
     if (species == SPECIES_EGG || species == SPECIES_NONE)
         return;
 
-    for (i = 0; gFrontierBannedSpecies[i] != 0xFFFF && gFrontierBannedSpecies[i] != species; i++)
+    for (i = 0; gFrontierBannedSpecies[i] != 0xFFFF
+      && gFrontierBannedSpecies[i] != GET_BASE_SPECIES_ID(species)
+      && IsSpeciesEnabled(gFrontierBannedSpecies[i]); i++)
         ;
 
     if (gFrontierBannedSpecies[i] != 0xFFFF)
@@ -2034,7 +2029,7 @@ static void CheckPartyIneligibility(void)
         }
         else
         {
-            if (count & 1)
+            if (count % SPECIES_PER_LINE == SPECIES_PER_LINE - 1)
                 StringAppend(gStringVar1, gText_LineBreak);
             else
                 StringAppend(gStringVar1, gText_Space2);
@@ -2048,6 +2043,8 @@ static void CheckPartyIneligibility(void)
     }
     #undef numEligibleMons
 }
+
+#undef SPECIES_PER_LINE
 
 static void ValidateVisitingTrainer(void)
 {

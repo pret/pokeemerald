@@ -4844,11 +4844,7 @@ const struct Item gItems[] =
         .name = _("Soul Dew"),
         .price = 0,
         .holdEffect = HOLD_EFFECT_SOUL_DEW,
-        #if B_SOUL_DEW_BOOST >= GEN_7
-            .holdEffectParam = 20,
-        #else
-            .holdEffectParam = 50,
-        #endif
+        .holdEffectParam = B_SOUL_DEW_BOOST >= GEN_7 ? 20 : 50,
         .description = sSoulDewDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -6436,14 +6432,6 @@ const struct Item gItems[] =
         .flingPower = 10,
     },
 
-#if B_CONFUSE_BERRIES_HEAL >= GEN_8
-    #define CONFUSE_BERRY_HEAL_FRACTION 3
-#elif B_CONFUSE_BERRIES_HEAL == GEN_7
-    #define CONFUSE_BERRY_HEAL_FRACTION 2
-#else
-    #define CONFUSE_BERRY_HEAL_FRACTION 8
-#endif
-
     [ITEM_FIGY_BERRY] =
     {
         .name = _("Figy Berry"),
@@ -6508,8 +6496,6 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
     },
-
-#undef CONFUSE_BERRY_HEAL_FRACTION
 
     [ITEM_RAZZ_BERRY] =
     {
@@ -8508,14 +8494,15 @@ const struct Item gItems[] =
         .importance = 1,
         .description = sRotomCatalogDesc,
         .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_RotomCatalog,
     },
 
     [ITEM_GRACIDEA] =
     {
         .name = _("Gracidea"),
         .price = 0,
+        .importance = 1,
         .description = sGracideaDesc,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
@@ -8526,6 +8513,7 @@ const struct Item gItems[] =
     {
         .name = _("Reveal Glass"),
         .price = 0,
+        .importance = 1,
         .description = sRevealGlassDesc,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
@@ -8536,10 +8524,11 @@ const struct Item gItems[] =
     {
         .name = _("DNA Splicers"),
         .price = 0,
+        .importance = 1,
         .description = sDNASplicersDesc,
         .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo: ItemUseOutOfBattle_FormChange_Fusion
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Fusion,
     },
 
     [ITEM_ZYGARDE_CUBE] =
@@ -8549,14 +8538,15 @@ const struct Item gItems[] =
         .importance = 1,
         .description = sZygardeCubeDesc,
         .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_ZygardeCube,
     },
 
     [ITEM_PRISON_BOTTLE] =
     {
         .name = _("Prison Bottle"),
         .price = 0,
+        .importance = 1,
         .description = sPrisonBottleDesc,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
@@ -8567,30 +8557,33 @@ const struct Item gItems[] =
     {
         .name = _("N-Solarizer"),
         .price = 0,
+        .importance = 1,
         .description = sNSolarizerDesc,
         .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo: ItemUseOutOfBattle_FormChange_Fusion
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Fusion,
     },
 
     [ITEM_N_LUNARIZER] =
     {
         .name = _("N-Lunarizer"),
         .price = 0,
+        .importance = 1,
         .description = sNLunarizerDesc,
         .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo: ItemUseOutOfBattle_FormChange_Fusion
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Fusion,
     },
 
     [ITEM_REINS_OF_UNITY] =
     {
         .name = _("ReinsOfUnity"),
         .price = 0,
+        .importance = 1,
         .description = sReinsOfUnityDesc,
         .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo: ItemUseOutOfBattle_FormChange_Fusion
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Fusion,
     },
 
 // Battle Mechanic Key Items
@@ -8730,7 +8723,11 @@ const struct Item gItems[] =
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,
+#if I_VS_SEEKER_CHARGING != 0
+        .fieldUseFunc = FieldUseFunc_VsSeeker,
+#else
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+#endif
     },
 
     [ITEM_TM_CASE] =
@@ -9077,11 +9074,11 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_OAKS_PARCEL] =
+    [ITEM_PARCEL] =
     {
-        .name = _("Oak's Parcel"),
+        .name = _("Parcel"),
         .price = 0,
-        .description = sOaksParcelDesc,
+        .description = sParcelDesc,
         .importance = 2,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -9646,5 +9643,175 @@ const struct Item gItems[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
+    },
+
+    [ITEM_FAIRY_FEATHER] =
+    {
+        .name = _("Fairy Feather"),
+        .price = 1000,
+        .holdEffect = HOLD_EFFECT_FAIRY_POWER,
+        .holdEffectParam = TYPE_BOOST_PARAM,
+        .description = sFairyFeatherDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 10,
+    },
+
+    [ITEM_SYRUPY_APPLE] =
+    {
+        .name = _("Syrupy Apple"),
+        .price = 2200,
+        .description = sSyrupyAppleDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+        .flingPower = 30,
+    },
+
+    [ITEM_UNREMARKABLE_TEACUP] =
+    {
+        .name = _("UnrmkblTeacup"),
+        .price = 1600,
+        .description = sUnremarkableTeacupDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+        .flingPower = 80,
+    },
+
+    [ITEM_MASTERPIECE_TEACUP] =
+    {
+        .name = _("MstrpceTeacup"),
+        .price = 38000,
+        .description = sMasterpieceTeacupDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+        .flingPower = 80,
+    },
+
+    [ITEM_CORNERSTONE_MASK] =
+    {
+        .name = _("CornrstneMask"),
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_MASK,
+        .description = sCornerstoneMaskDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_ROCK,
+    },
+
+    [ITEM_WELLSPRING_MASK] =
+    {
+        .name = _("WellsprngMask"),
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_MASK,
+        .description = sWellspringMaskDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_WATER,
+    },
+
+    [ITEM_HEARTHFLAME_MASK] =
+    {
+        .name = _("HrthflameMask"),
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_MASK,
+        .description = sHearthflameMaskDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_FIRE,
+    },
+
+    [ITEM_HEALTH_MOCHI] =
+    {
+        .name = _("Health Mochi"),
+        .price = 500,
+        .description = sHealthMochiDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .flingPower = 30,
+    },
+
+    [ITEM_MUSCLE_MOCHI] =
+    {
+        .name = _("Muscle Mochi"),
+        .price = 500,
+        .description = sMuscleMochiDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .flingPower = 30,
+    },
+
+    [ITEM_RESIST_MOCHI] =
+    {
+        .name = _("Resist Mochi"),
+        .price = 500,
+        .description = sResistMochiDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .flingPower = 30,
+    },
+
+    [ITEM_GENIUS_MOCHI] =
+    {
+        .name = _("Genius Mochi"),
+        .price = 500,
+        .description = sGeniusMochiDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .flingPower = 30,
+    },
+
+    [ITEM_CLEVER_MOCHI] =
+    {
+        .name = _("Clever Mochi"),
+        .price = 500,
+        .description = sCleverMochiDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .flingPower = 30,
+    },
+
+    [ITEM_SWIFT_MOCHI] =
+    {
+        .name = _("Swift Mochi"),
+        .price = 500,
+        .description = sSwiftMochiDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .flingPower = 30,
+    },
+
+    [ITEM_FRESH_START_MOCHI] =
+    {
+        .name = _("FrshStrtMochi"),
+        .price = 300,
+        .description = sFreshStartMochiDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_ResetEVs,
+        .flingPower = 30,
+    },
+
+    [ITEM_GLIMMERING_CHARM] =
+    {
+        .name = _("GlmmringCharm"),
+        .price = 0,
+        .importance = 1,
+        .description = sGlimmeringCharmDesc,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 };

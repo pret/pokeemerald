@@ -96,7 +96,7 @@ SINGLE_BATTLE_TEST("Teatime causes other Pokemon to consume their Berry even if 
 
 DOUBLE_BATTLE_TEST("Teatime causes all Pokémon to consume their berry")
 {
-    struct BattlePokemon *user;
+    struct BattlePokemon *user = NULL;
     PARAMETRIZE { user = playerLeft; }
     PARAMETRIZE { user = playerRight; }
     PARAMETRIZE { user = opponentLeft; }
@@ -244,7 +244,6 @@ SINGLE_BATTLE_TEST("Teatime triggers Motor Drive if it has been affected by Elec
     PARAMETRIZE { move = MOVE_PLASMA_FISTS; item = ITEM_NONE; }
 
     GIVEN {
-        ASSUME(P_GEN_4_POKEMON == TRUE);
         PLAYER(SPECIES_ELECTIVIRE) { Ability(ABILITY_MOTOR_DRIVE); Item(item); }
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_LIECHI_BERRY); }
     } WHEN {

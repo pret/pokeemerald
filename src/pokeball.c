@@ -1418,7 +1418,7 @@ static void SpriteCB_TradePokeballEnd(struct Sprite *sprite)
 #undef sTimer
 
 // Unreferenced here and in RS, but used in FRLG, possibly by mistake.
-static void DestroySpriteAndFreeResources_Ball(struct Sprite *sprite)
+static void UNUSED DestroySpriteAndFreeResources_Ball(struct Sprite *sprite)
 {
     DestroySpriteAndFreeResources(sprite);
 }

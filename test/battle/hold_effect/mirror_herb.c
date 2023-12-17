@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(gItems[ITEM_MIRROR_HERB].holdEffect == HOLD_EFFECT_MIRROR_HERB);
 }
 
-SINGLE_BATTLE_TEST("Mirror Herb copies all of foe's stat changes in a turn", s16 damage)
+SINGLE_BATTLE_TEST("Mirror Herb copies all of foe's positive stat changes in a turn", s16 damage)
 {
     u32 item;
     PARAMETRIZE { item = ITEM_NONE; }
@@ -34,7 +34,7 @@ SINGLE_BATTLE_TEST("Mirror Herb copies all of foe's stat changes in a turn", s16
     }
 }
 
-SINGLE_BATTLE_TEST("Mirror Herb copies all of of Stuff Cheeks")
+SINGLE_BATTLE_TEST("Mirror Herb copies all of Stuff Cheeks' stat boosts")
 {
     GIVEN {
         ASSUME(gItems[ITEM_LIECHI_BERRY].holdEffect == HOLD_EFFECT_ATTACK_UP);

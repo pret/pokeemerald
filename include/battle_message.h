@@ -238,6 +238,7 @@ enum
     TRAINER_SLIDE_MEGA_EVOLUTION,
     TRAINER_SLIDE_Z_MOVE,
     TRAINER_SLIDE_BEFORE_FIRST_TURN,
+    TRAINER_SLIDE_DYNAMAX,
 };
 
 void BufferStringBattle(u16 stringID, u32 battler);

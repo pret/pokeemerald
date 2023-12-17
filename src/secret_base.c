@@ -519,7 +519,7 @@ bool8 CurMapIsSecretBase(void)
 void InitSecretBaseAppearance(bool8 hidePC)
 {
     u16 secretBaseIdx;
-    u16 x, y;
+    s16 x, y;
     u8 *decorations;
     u8 *decorPos;
 
@@ -915,7 +915,7 @@ void ShowSecretBaseRegistryMenu(void)
 
 static void Task_ShowSecretBaseRegistryMenu(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    u16 *data = (u16*) gTasks[taskId].data;
     LockPlayerFieldControls();
     tNumBases = GetNumRegisteredSecretBases();
     if (tNumBases != 0)
@@ -977,7 +977,7 @@ static void RegistryMenu_OnCursorMove(s32 unused, bool8 flag, struct ListMenu *m
 
 static void FinalizeRegistryMenu(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    u16 *data = (u16*) gTasks[taskId].data;
     SetStandardWindowBorderStyle(tMainWindowId, FALSE);
     tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, tScrollOffset, tSelectedRow);
     AddRegistryMenuScrollArrows(taskId);
@@ -986,13 +986,13 @@ static void FinalizeRegistryMenu(u8 taskId)
 
 static void AddRegistryMenuScrollArrows(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    u16 *data = (u16*) gTasks[taskId].data;
     tArrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 188, 12, 148, tNumBases - tMaxShownItems, TAG_SCROLL_ARROW, TAG_SCROLL_ARROW, &tScrollOffset);
 }
 
 static void HandleRegistryMenuInput(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    u16 *data = (u16*) gTasks[taskId].data;
     s32 input = ListMenu_ProcessInput(tListTaskId);
     ListMenuGetScrollAndRow(tListTaskId, &tScrollOffset, &tSelectedRow);
 
@@ -1022,7 +1022,7 @@ static void HandleRegistryMenuInput(u8 taskId)
 static void ShowRegistryMenuActions(u8 taskId)
 {
     struct WindowTemplate template;
-    s16 *data = gTasks[taskId].data;
+    u16 *data = (u16*) gTasks[taskId].data;
     RemoveScrollIndicatorArrowPair(tArrowTaskId);
     template = sRegistryWindowTemplates[1];
     template.width = GetMaxWidthInMenuTable(sRegistryMenuActions, 2);
@@ -1054,7 +1054,7 @@ static void HandleRegistryMenuActionsInput(u8 taskId)
 
 static void ShowRegistryMenuDeleteConfirmation(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    u16 *data = (u16*) gTasks[taskId].data;
     ClearStdWindowAndFrame(tMainWindowId, FALSE);
     ClearStdWindowAndFrame(tActionWindowId, FALSE);
     ClearWindowTilemap(tMainWindowId);
@@ -1074,7 +1074,7 @@ static void ShowRegistryMenuDeleteYesNo(u8 taskId)
 
 void DeleteRegistry_Yes_Callback(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    u16 *data = (u16*) gTasks[taskId].data;
     ClearDialogWindowAndFrame(0, FALSE);
     DestroyListMenuTask(tListTaskId, &tScrollOffset, &tSelectedRow);
     gSaveBlock1Ptr->secretBases[tSelectedBaseId].registryStatus = UNREGISTERED;
@@ -1091,7 +1091,7 @@ static void DeleteRegistry_Yes(u8 taskId)
 
 static void DeleteRegistry_No(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    u16 *data = (u16*) gTasks[taskId].data;
     ClearDialogWindowAndFrame(0, FALSE);
     DestroyListMenuTask(tListTaskId, &tScrollOffset, &tSelectedRow);
     FinalizeRegistryMenu(taskId);
@@ -1100,7 +1100,7 @@ static void DeleteRegistry_No(u8 taskId)
 
 static void ReturnToMainRegistryMenu(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    u16 *data = (u16*) gTasks[taskId].data;
     AddRegistryMenuScrollArrows(taskId);
     ClearStdWindowAndFrame(tActionWindowId, FALSE);
     ClearWindowTilemap(tActionWindowId);
@@ -1732,6 +1732,9 @@ void ReceiveSecretBasesData(void *secretBases, size_t recordSize, u8 linkIdx)
 {
     struct SecretBaseRecordMixer mixers[3];
     u16 i;
+
+    if (linkIdx > 3)
+        return;
 
     if (FlagGet(FLAG_RECEIVED_SECRET_POWER))
     {

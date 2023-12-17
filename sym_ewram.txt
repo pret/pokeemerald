@@ -1,3 +1,4 @@
+	.include "gflib/malloc.o"
 	.include "src/decompress.o"
 	.include "src/main.o"
 	.include "gflib/window.o"
@@ -150,3 +151,4 @@
 	.include "src/rayquaza_scene.o"
 	.include "src/debug.o"
 	.include "src/battle_controller_player.o"
+	.include "src/pokedex_plus_hgss.o"

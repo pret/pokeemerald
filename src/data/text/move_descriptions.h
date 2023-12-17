@@ -214,7 +214,11 @@ static const u8 sDisableDescription[] = _(
 
 static const u8 sAcidDescription[] = _(
     "Sprays a hide-melting acid.\n"
+#if B_UPDATED_MOVE_DATA >= GEN_4
+    "May lower Sp. Def.");
+#else
     "May lower Defense.");
+#endif
 
 static const u8 sEmberDescription[] = _(
     "A weak fire attack that may\n"
@@ -986,7 +990,11 @@ static const u8 sSunnyDayDescription[] = _(
 
 static const u8 sCrunchDescription[] = _(
     "Crunches with sharp fangs.\n"
+#if B_UPDATED_MOVE_DATA >= GEN_4
     "May lower Defense.");
+#else
+    "May lower Sp. Def.");
+#endif
 
 static const u8 sMirrorCoatDescription[] = _(
     "Counters the foe's special\n"
@@ -3260,6 +3268,22 @@ static const u8 sHydroSteamDescription[] = _(
     "This move's power increases\n"
     "under harsh sunlight.");
 
+static const u8 sBloodMoonDescription[] = _(
+    "Unleashes the blood moon.\n"
+    "Can't be used twice in a row.");
+
+static const u8 sMatchaGotchaDescription[] = _(
+    "Absorbs half the damage\n"
+    "inflicted. May cause a burn.");
+
+static const u8 sSyrupBombDescription[] = _(
+    "Lowers the foe's speed\n"
+    "each turn for 3 turns.");
+
+static const u8 sIvyCudgelDescription[] = _(
+    "Type changes with held mask.\n"
+    "High critical-hit ratio.");
+
 const u8 gNotDoneYetDescription[] = _(
     "This move can't be used. Its\n"
     "effect is in development.");
@@ -4099,4 +4123,8 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_MAGICAL_TORQUE - 1] = sMagicalTorqueDescription,
     [MOVE_PSYBLADE - 1] = sPsybladeDescription,
     [MOVE_HYDRO_STEAM - 1] = sHydroSteamDescription,
+    [MOVE_BLOOD_MOON - 1] = sBloodMoonDescription,
+    [MOVE_MATCHA_GOTCHA - 1] = sMatchaGotchaDescription,
+    [MOVE_SYRUP_BOMB - 1] = sSyrupBombDescription,
+    [MOVE_IVY_CUDGEL - 1] = sIvyCudgelDescription,
 };

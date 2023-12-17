@@ -91,7 +91,6 @@ SINGLE_BATTLE_TEST("Air Balloon prevents the user from being healed by Grassy Te
 SINGLE_BATTLE_TEST("Air Balloon pops before it can be stolen with Magician")
 {
     GIVEN {
-        ASSUME(P_GEN_6_POKEMON == TRUE);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_AIR_BALLOON); };
         OPPONENT(SPECIES_DELPHOX) { Ability(ABILITY_MAGICIAN); };
     } WHEN {

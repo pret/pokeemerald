@@ -531,6 +531,7 @@ static s32 MgbaVPrintf_(const char *fmt, va_list va)
     s32 c, d;
     u32 p;
     const char *s;
+    const u8 *pokeS;
     while (*fmt)
     {
         switch ((c = *fmt++))
@@ -625,8 +626,8 @@ static s32 MgbaVPrintf_(const char *fmt, va_list va)
                     i = MgbaPutchar_(i, c);
                 break;
             case 'S':
-                s = va_arg(va, const u8 *);
-                while ((c = *s++) != EOS)
+                pokeS = va_arg(va, const u8 *);
+                while ((c = *pokeS++) != EOS)
                 {
                     if ((c = gWireless_RSEtoASCIITable[c]) != '\0')
                         i = MgbaPutchar_(i, c);

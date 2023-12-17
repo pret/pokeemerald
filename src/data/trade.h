@@ -372,8 +372,8 @@ static const u8 *const sActionTexts[] =
 
 static const struct MenuAction sSelectTradeMonActions[] =
 {
-    {sText_Summary2, Task_DrawSelectionSummary},
-    {sText_Trade2,   Task_DrawSelectionTrade}
+    {sText_Summary2, {Task_DrawSelectionSummary}},
+    {sText_Trade2,   {Task_DrawSelectionTrade}}
 };
 
 static const u8 *const sMessages[] =

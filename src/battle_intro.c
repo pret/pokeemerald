@@ -11,8 +11,6 @@
 #include "trig.h"
 #include "constants/trainers.h"
 
-static EWRAM_DATA u16 sBgCnt = 0;
-
 extern const u8 gBattleAnimBgCntSet[];
 extern const u8 gBattleAnimBgCntGet[];
 
@@ -40,39 +38,39 @@ void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value)
 {
     if (bgId < 4)
     {
-        sBgCnt = GetGpuReg(gBattleAnimBgCntSet[bgId]);
+        u32 bgCnt = GetGpuReg(gBattleAnimBgCntSet[bgId]);
         switch (attributeId)
         {
         case BG_ANIM_SCREEN_SIZE:
-            ((struct BgCnt *)&sBgCnt)->screenSize = value;
+            ((struct BgCnt *)&bgCnt)->screenSize = value;
             break;
         case BG_ANIM_AREA_OVERFLOW_MODE:
-            ((struct BgCnt *)&sBgCnt)->areaOverflowMode = value;
+            ((struct BgCnt *)&bgCnt)->areaOverflowMode = value;
             break;
         case BG_ANIM_MOSAIC:
-            ((struct BgCnt *)&sBgCnt)->mosaic = value;
+            ((struct BgCnt *)&bgCnt)->mosaic = value;
             break;
         case BG_ANIM_CHAR_BASE_BLOCK:
-            ((struct BgCnt *)&sBgCnt)->charBaseBlock = value;
+            ((struct BgCnt *)&bgCnt)->charBaseBlock = value;
             break;
         case BG_ANIM_PRIORITY:
-            ((struct BgCnt *)&sBgCnt)->priority = value;
+            ((struct BgCnt *)&bgCnt)->priority = value;
             break;
         case BG_ANIM_PALETTES_MODE:
-            ((struct BgCnt *)&sBgCnt)->palettes = value;
+            ((struct BgCnt *)&bgCnt)->palettes = value;
             break;
         case BG_ANIM_SCREEN_BASE_BLOCK:
-            ((struct BgCnt *)&sBgCnt)->screenBaseBlock = value;
+            ((struct BgCnt *)&bgCnt)->screenBaseBlock = value;
             break;
         }
 
-        SetGpuReg(gBattleAnimBgCntSet[bgId], sBgCnt);
+        SetGpuReg(gBattleAnimBgCntSet[bgId], bgCnt);
     }
 }
 
 int GetAnimBgAttribute(u8 bgId, u8 attributeId)
 {
-    u16 bgCnt;
+    u32 bgCnt;
 
     if (bgId < 4)
     {
@@ -118,7 +116,7 @@ void HandleIntroSlide(u8 terrain)
     {
         taskId = CreateTask(BattleIntroSlide3, 0);
     }
-    else if ((gBattleTypeFlags & BATTLE_TYPE_KYOGRE_GROUDON) && gGameVersion != VERSION_RUBY)
+    else if (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL) == SPECIES_KYOGRE)
     {
         terrain = BATTLE_TERRAIN_UNDERWATER;
         taskId = CreateTask(BattleIntroSlide2, 0);
@@ -587,7 +585,6 @@ static void BattleIntroSlidePartner(u8 taskId)
 void DrawBattlerOnBg(int bgId, u8 x, u8 y, u8 battlerPosition, u8 paletteId, u8 *tiles, u16 *tilemap, u16 tilesOffset)
 {
     int i, j;
-    u8 battler = GetBattlerAtPosition(battlerPosition);
     int offset = tilesOffset;
     CpuCopy16(gMonSpritesGfxPtr->sprites.ptr[battlerPosition], tiles, BG_SCREEN_SIZE);
     LoadBgTiles(bgId, tiles, 0x1000, tilesOffset);
@@ -602,7 +599,7 @@ void DrawBattlerOnBg(int bgId, u8 x, u8 y, u8 battlerPosition, u8 paletteId, u8 
     LoadBgTilemap(bgId, tilemap, BG_SCREEN_SIZE, 0);
 }
 
-static void DrawBattlerOnBgDMA(u8 x, u8 y, u8 battlerPosition, u8 arg3, u8 paletteId, u16 arg5, u8 arg6, u8 arg7)
+static void UNUSED DrawBattlerOnBgDMA(u8 x, u8 y, u8 battlerPosition, u8 arg3, u8 paletteId, u16 arg5, u8 arg6, u8 arg7)
 {
     int i, j, offset;
 

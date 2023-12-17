@@ -176,6 +176,7 @@ void Controller_PlayerPartnerShowIntroHealthbox(u32 battler)
         && ++gBattleSpritesDataPtr->healthBoxesData[battler].introEndDelay != 1)
     {
         gBattleSpritesDataPtr->healthBoxesData[battler].introEndDelay = 0;
+        TryShinyAnimation(battler, &gPlayerParty[gBattlerPartyIndexes[battler]]);
 
         if (IsDoubleBattle() && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
         {
@@ -399,7 +400,7 @@ static void PlayerPartnerHandleChoosePokemon(u32 battler)
     // Switching out
     else if (gBattleStruct->monToSwitchIntoId[battler] >= PARTY_SIZE || !IsValidForBattle(&gPlayerParty[gBattleStruct->monToSwitchIntoId[battler]]))
     {
-        chosenMonId = GetMostSuitableMonToSwitchInto(battler);
+        chosenMonId = GetMostSuitableMonToSwitchInto(battler, TRUE);
 
         if (chosenMonId == PARTY_SIZE || !IsValidForBattle(&gPlayerParty[chosenMonId])) // just switch to the next mon
         {

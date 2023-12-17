@@ -282,6 +282,49 @@ const u8 gItemEffect_SpdefFeather[11] = {
     [10] = 0,
 };
 
+const u8 gItemEffect_HpMochi[11] = {
+    [4] = ITEM4_EV_HP,
+    [6] = ITEM6_ADD_EV,
+    [10] = 0,
+};
+
+const u8 gItemEffect_AtkMochi[11] = {
+    [4] = ITEM4_EV_ATK,
+    [6] = ITEM6_ADD_EV,
+    [10] = 0,
+};
+
+const u8 gItemEffect_DefMochi[11] = {
+    [5] = ITEM5_EV_DEF,
+    [6] = ITEM6_ADD_EV,
+    [10] = 0,
+};
+
+const u8 gItemEffect_SpeedMochi[11] = {
+    [5] = ITEM5_EV_SPEED,
+    [6] = ITEM6_ADD_EV,
+    [10] = 0,
+};
+
+const u8 gItemEffect_SpatkMochi[11] = {
+    [5] = ITEM5_EV_SPATK,
+    [6] = ITEM6_ADD_EV,
+    [10] = 0,
+};
+
+const u8 gItemEffect_SpdefMochi[11] = {
+    [5] = ITEM5_EV_SPDEF,
+    [6] = ITEM6_ADD_EV,
+    [10] = 0,
+};
+
+const u8 gItemEffect_ResetMochi[11] = {
+    [4] = ITEM4_EV_HP | ITEM4_EV_ATK,
+    [5] = ITEM5_EV_DEF | ITEM5_EV_SPEED | ITEM5_EV_SPATK | ITEM5_EV_SPDEF,
+    [6] = ITEM6_RESET_EV,
+    [10] = 0,
+};
+
 const u8 gItemEffect_RareCandy[10] = {
     [3] = ITEM3_LEVEL_UP,
     [4] = ITEM4_REVIVE | ITEM4_HEAL_HP,
@@ -507,6 +550,15 @@ const u8 *const gItemEffectTable[ITEMS_COUNT] =
     [ITEM_GENIUS_FEATHER]     = gItemEffect_SpatkFeather,
     [ITEM_CLEVER_FEATHER]     = gItemEffect_SpdefFeather,
     [ITEM_SWIFT_FEATHER]      = gItemEffect_SpeedFeather,
+
+    //Mochi
+    [ITEM_HEALTH_MOCHI]       = gItemEffect_HpMochi,
+    [ITEM_MUSCLE_MOCHI]       = gItemEffect_AtkMochi,
+    [ITEM_RESIST_MOCHI]       = gItemEffect_DefMochi,
+    [ITEM_GENIUS_MOCHI]       = gItemEffect_SpatkMochi,
+    [ITEM_CLEVER_MOCHI]       = gItemEffect_SpdefMochi,
+    [ITEM_SWIFT_MOCHI]        = gItemEffect_SpeedMochi,
+    [ITEM_FRESH_START_MOCHI]  = gItemEffect_ResetMochi,
 
     // Candy
     [ITEM_RARE_CANDY]         = gItemEffect_RareCandy,

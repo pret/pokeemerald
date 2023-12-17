@@ -31,11 +31,11 @@ SINGLE_BATTLE_TEST("Damage calculation matches Gen5+")
             MOVE(player, MOVE_ICE_FANG, WITH_RNG(RNG_DAMAGE_MODIFIER, i));
         }
     }
-    SCENE{
+    SCENE {
         MESSAGE("Glaceon used Ice Fang!");
         HP_BAR(opponent, captureDamage: &dmg);
     }
-    THEN{
+    THEN {
         EXPECT_EQ(expectedDamage, dmg);
     }
 }
@@ -68,8 +68,45 @@ SINGLE_BATTLE_TEST("Damage calculation matches Gen5+ (Muscle Band, crit)")
             MOVE(player, MOVE_ICE_FANG, WITH_RNG(RNG_DAMAGE_MODIFIER, i), criticalHit: TRUE);
         }
     }
-    SCENE{
+    SCENE {
         MESSAGE("Glaceon used Ice Fang!");
+        HP_BAR(opponent, captureDamage: &dmg);
+    }
+    THEN {
+        EXPECT_EQ(expectedDamage, dmg);
+    }
+}
+
+SINGLE_BATTLE_TEST("Damage calculation matches Gen5+ (Marshadow vs Mawile)")
+{
+    s16 dmg;
+    s16 expectedDamage;
+    PARAMETRIZE { expectedDamage = 145; }
+    PARAMETRIZE { expectedDamage = 144; }
+    PARAMETRIZE { expectedDamage = 142; }
+    PARAMETRIZE { expectedDamage = 141; }
+    PARAMETRIZE { expectedDamage = 139; }
+    PARAMETRIZE { expectedDamage = 138; }
+    PARAMETRIZE { expectedDamage = 136; }
+    PARAMETRIZE { expectedDamage = 135; }
+    PARAMETRIZE { expectedDamage = 133; }
+    PARAMETRIZE { expectedDamage = 132; }
+    PARAMETRIZE { expectedDamage = 130; }
+    PARAMETRIZE { expectedDamage = 129; }
+    PARAMETRIZE { expectedDamage = 127; }
+    PARAMETRIZE { expectedDamage = 126; }
+    PARAMETRIZE { expectedDamage = 124; }
+    PARAMETRIZE { expectedDamage = 123; }
+    GIVEN {
+        PLAYER(SPECIES_MARSHADOW) { Level(100); Attack(286); }
+        OPPONENT(SPECIES_MAWILE) { Level(100); Defense(226); HP(241); }
+    } WHEN {
+        TURN {
+            MOVE(player, MOVE_SPECTRAL_THIEF, WITH_RNG(RNG_DAMAGE_MODIFIER, i), criticalHit: FALSE);
+        }
+    }
+    SCENE{
+        MESSAGE("Marshadow used SpectrlThief!");
         HP_BAR(opponent, captureDamage: &dmg);
     }
     THEN{

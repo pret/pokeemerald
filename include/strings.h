@@ -944,6 +944,7 @@ extern const u8 gText_UsedVar2WildLured[];
 extern const u8 gText_UsedVar2WildRepelled[];
 extern const u8 gText_BoxFull[];
 extern const u8 gText_WontHaveEffect[];
+extern const u8 gText_NextFusionMon[];
 
 extern const u8 gText_LevelSymbol[];
 extern const u8 gText_PkmnInfo[];
@@ -1318,6 +1319,19 @@ extern const u8 CableClub_Text_YouMayTradeHere[];
 extern const u8 CableClub_Text_YouMayBattleHere[];
 extern const u8 CableClub_Text_CanMixRecords[];
 extern const u8 CableClub_Text_CanMakeBerryPowder[];
+
+// Rotom Catalog text
+extern const u8 gText_LightBulb[];
+extern const u8 gText_MicrowaveOven[];
+extern const u8 gText_WashingMachine[];
+extern const u8 gText_Refrigerator[];
+extern const u8 gText_ElectricFan[];
+extern const u8 gText_LawnMower[];
+extern const u8 gText_Exit[];
+
+// Zygarde Cube text
+extern const u8 gText_ChangeForm[];
+extern const u8 gText_ChangeAbility[];
 
 // Frontier records.
 extern const u8 gText_WinStreak[];
@@ -2130,6 +2144,7 @@ extern const u8 gText_BoostPp[];
 extern const u8 gText_DoWhatWithItem[];
 extern const u8 gText_DoWhatWithMail[];
 extern const u8 gText_AlreadyHoldingOne[];
+extern const u8 gText_WhichAppliance[];
 extern const u8 gText_NoUse[];
 extern const u8 gText_Able[];
 extern const u8 gText_First_PM[];
@@ -3037,5 +3052,7 @@ extern const u8 gText_TellHimTheWords[];
 // Exp. Share
 extern const u8 gText_ExpShareOn[];
 extern const u8 gText_ExpShareOff[];
+
+extern const u8 gText_BasePointsResetToZero[];
 
 #endif // GUARD_STRINGS_H

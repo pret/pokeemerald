@@ -167,7 +167,7 @@
 #define EFFECT_MEMENTO                      163
 #define EFFECT_FACADE                       164
 #define EFFECT_FOCUS_PUNCH                  165
-#define EFFECT_SMELLINGSALT                 166
+#define EFFECT_SMELLING_SALTS               166
 #define EFFECT_FOLLOW_ME                    167
 #define EFFECT_NATURE_POWER                 168
 #define EFFECT_CHARGE                       169
@@ -412,9 +412,15 @@
 #define EFFECT_CORROSIVE_GAS                406
 #define EFFECT_POPULATION_BOMB              407
 #define EFFECT_MORTAL_SPIN                  408
-#define EFFECT_GIGATON_HAMMER               409
-#define EFFECT_SALT_CURE                    410
+#define EFFECT_SALT_CURE                    409
+#define EFFECT_CHILLY_RECEPTION             410
+#define EFFECT_MATCHA_GOTCHA                411
+#define EFFECT_SYRUP_BOMB                   412
+#define EFFECT_MAX_MOVE                     413
+#define EFFECT_GLAIVE_RUSH                  414
+#define EFFECT_RAGING_BULL                  415
+#define EFFECT_RAGE_FIST                    416
 
-#define NUM_BATTLE_MOVE_EFFECTS             411
+#define NUM_BATTLE_MOVE_EFFECTS             417
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

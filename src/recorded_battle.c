@@ -193,8 +193,7 @@ u8 RecordedBattle_GetBattlerAction(u32 actionType, u8 battlerId)
     }
 }
 
-// Unused
-static u8 GetRecordedBattleMode(void)
+static u8 UNUSED GetRecordedBattleMode(void)
 {
     return sRecordMode;
 }
@@ -493,20 +492,25 @@ static void Task_StartAfterCountdown(u8 taskId)
     }
 }
 
-void SetVariablesForRecordedBattle(struct RecordedBattleSave *src)
+void SetPartiesFromRecordedSave(struct RecordedBattleSave *src)
 {
-    bool8 var;
-    s32 i, j;
+    s32 i;
 
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
-
     for (i = 0; i < PARTY_SIZE; i++)
     {
         gPlayerParty[i] = src->playerParty[i];
         gEnemyParty[i] = src->opponentParty[i];
     }
+}
 
+void SetVariablesForRecordedBattle(struct RecordedBattleSave *src)
+{
+    bool8 var;
+    s32 i, j;
+
+    SetPartiesFromRecordedSave(src);
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         for (var = FALSE, j = 0; j < PLAYER_NAME_LENGTH + 1; j++)

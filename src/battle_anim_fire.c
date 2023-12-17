@@ -527,6 +527,18 @@ const struct SpriteTemplate gSpacialRendBladesTemplate2 =
     .callback = AnimFireSpread
 };
 
+// Sea of Fire
+const struct SpriteTemplate gTwisterEmberSpriteTemplate =
+{
+	.tileTag = ANIM_TAG_SMALL_EMBER,
+	.paletteTag = ANIM_TAG_SMALL_EMBER,
+	.oam = &gOamData_AffineOff_ObjNormal_32x32,
+	.anims = gAnims_BasicFire,
+	.images = NULL,
+	.affineAnims = gDummySpriteAffineAnimTable,
+	.callback = AnimMoveTwisterParticle,
+};
+
 static void AnimLavaPlumeOrbitScatter(struct Sprite *sprite)
 {
     sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);

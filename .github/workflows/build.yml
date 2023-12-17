@@ -10,6 +10,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: devkitpro/devkitarm
     env:
       GAME_VERSION: EMERALD
       GAME_REVISION: 0
@@ -27,7 +28,9 @@ jobs:
           repository: pret/agbcc
 
       - name: Install binutils
-        run: sudo apt install gcc-arm-none-eabi binutils-arm-none-eabi libelf-dev
+        run: |
+          sudo apt update
+          sudo apt install -y build-essential libpng-dev libelf-dev
         # build-essential, git, and libpng-dev are already installed
         # gcc-arm-none-eabi is only needed for the modern build
         # as an alternative to dkP
@@ -39,6 +42,9 @@ jobs:
         working-directory: agbcc
 
       - name: Agbcc
+        env:
+          MODERN: 0
+          COMPARE: 0
         run: make -j${nproc} -O all
 
       - name: Modern
@@ -49,6 +55,7 @@ jobs:
 
       - name: Test
         env:
+          MODERN: 1
           TEST: 1
         run: |
           make -j${nproc} -O pokeemerald-test.elf

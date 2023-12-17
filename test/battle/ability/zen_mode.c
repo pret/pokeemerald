@@ -4,11 +4,10 @@
 SINGLE_BATTLE_TEST("Zen Mode switches Darmanitan's form when HP is half or less at the end of the turn")
 {
     u16 standardSpecies, zenSpecies;
-    PARAMETRIZE { standardSpecies = SPECIES_DARMANITAN;          zenSpecies = SPECIES_DARMANITAN_ZEN_MODE; }
-    PARAMETRIZE { standardSpecies = SPECIES_DARMANITAN_GALARIAN; zenSpecies = SPECIES_DARMANITAN_ZEN_MODE_GALARIAN; }
+    PARAMETRIZE { standardSpecies = SPECIES_DARMANITAN_STANDARD_MODE;          zenSpecies = SPECIES_DARMANITAN_ZEN_MODE; }
+    PARAMETRIZE { standardSpecies = SPECIES_DARMANITAN_GALARIAN_STANDARD_MODE; zenSpecies = SPECIES_DARMANITAN_GALARIAN_ZEN_MODE; }
 
     GIVEN {
-        ASSUME(P_GEN_5_POKEMON == TRUE);
         ASSUME(gSpeciesInfo[standardSpecies].baseHP == 105);
         ASSUME(gSpeciesInfo[zenSpecies].baseHP == 105);
         PLAYER(standardSpecies)
@@ -34,11 +33,10 @@ SINGLE_BATTLE_TEST("Zen Mode switches Darmanitan's form when HP is half or less 
 SINGLE_BATTLE_TEST("Zen Mode switches Darmanitan's form when HP is half or less before the first turn")
 {
     u16 standardSpecies, zenSpecies;
-    PARAMETRIZE { standardSpecies = SPECIES_DARMANITAN;          zenSpecies = SPECIES_DARMANITAN_ZEN_MODE; }
-    PARAMETRIZE { standardSpecies = SPECIES_DARMANITAN_GALARIAN; zenSpecies = SPECIES_DARMANITAN_ZEN_MODE_GALARIAN; }
+    PARAMETRIZE { standardSpecies = SPECIES_DARMANITAN_STANDARD_MODE;          zenSpecies = SPECIES_DARMANITAN_ZEN_MODE; }
+    PARAMETRIZE { standardSpecies = SPECIES_DARMANITAN_GALARIAN_STANDARD_MODE; zenSpecies = SPECIES_DARMANITAN_GALARIAN_ZEN_MODE; }
 
     GIVEN {
-        ASSUME(P_GEN_5_POKEMON == TRUE);
         ASSUME(gSpeciesInfo[standardSpecies].baseHP == 105);
         ASSUME(gSpeciesInfo[zenSpecies].baseHP == 105);
         PLAYER(standardSpecies)
@@ -63,11 +61,10 @@ SINGLE_BATTLE_TEST("Zen Mode switches Darmanitan's form when HP is half or less 
 SINGLE_BATTLE_TEST("Zen Mode switches Darmanitan's form when HP is healed above half")
 {
     u16 standardSpecies, zenSpecies;
-    PARAMETRIZE { standardSpecies = SPECIES_DARMANITAN;          zenSpecies = SPECIES_DARMANITAN_ZEN_MODE; }
-    PARAMETRIZE { standardSpecies = SPECIES_DARMANITAN_GALARIAN; zenSpecies = SPECIES_DARMANITAN_ZEN_MODE_GALARIAN; }
+    PARAMETRIZE { standardSpecies = SPECIES_DARMANITAN_STANDARD_MODE;          zenSpecies = SPECIES_DARMANITAN_ZEN_MODE; }
+    PARAMETRIZE { standardSpecies = SPECIES_DARMANITAN_GALARIAN_STANDARD_MODE; zenSpecies = SPECIES_DARMANITAN_GALARIAN_ZEN_MODE; }
 
     GIVEN {
-        ASSUME(P_GEN_5_POKEMON == TRUE);
         ASSUME(gSpeciesInfo[standardSpecies].baseHP == 105);
         ASSUME(gSpeciesInfo[zenSpecies].baseHP == 105);
         PLAYER(standardSpecies)

@@ -29,7 +29,7 @@ EWRAM_DATA u16 ALIGNED(4) sBackupMapData[MAX_MAP_DATA_SIZE] = {0};
 EWRAM_DATA struct MapHeader gMapHeader = {0};
 EWRAM_DATA struct Camera gCamera = {0};
 EWRAM_DATA static struct ConnectionFlags sMapConnectionFlags = {0};
-EWRAM_DATA static u32 sFiller = 0; // without this, the next file won't align properly
+EWRAM_DATA static u32 UNUSED sFiller = 0; // without this, the next file won't align properly
 
 struct BackupMapLayout gBackupMapLayout;
 
@@ -48,16 +48,12 @@ static const struct MapConnection *GetIncomingConnection(u8 direction, int x, in
 static bool8 IsPosInIncomingConnectingMap(u8 direction, int x, int y, const struct MapConnection *connection);
 static bool8 IsCoordInIncomingConnectingMap(int coord, int srcMax, int destMax, int offset);
 
-#define GetBorderBlockAt(x, y)({                                                                   \
-    u16 block;                                                                                     \
-    int i;                                                                                         \
-    const u16 *border = gMapHeader.mapLayout->border; /* Unused, they read it again below */       \
-                                                                                                   \
-    i = (x + 1) & 1;                                                                               \
-    i += ((y + 1) & 1) * 2;                                                                        \
-                                                                                                   \
-    block = gMapHeader.mapLayout->border[i] | MAPGRID_COLLISION_MASK;                              \
-})
+static inline u16 GetBorderBlockAt(int x, int y)
+{
+    int i = (x + 1) & 1;
+    i += ((y + 1) & 1) * 2;
+    return gMapHeader.mapLayout->border[i] | MAPGRID_COLLISION_MASK;
+}
 
 #define AreCoordsWithinMapGridBounds(x, y) (x >= 0 && x < gBackupMapLayout.width && y >= 0 && y < gBackupMapLayout.height)
 
@@ -810,8 +806,7 @@ void GetCameraFocusCoords(u16 *x, u16 *y)
     *y = gSaveBlock1Ptr->pos.y + MAP_OFFSET;
 }
 
-// Unused
-static void SetCameraCoords(u16 x, u16 y)
+static void UNUSED SetCameraCoords(u16 x, u16 y)
 {
     gSaveBlock1Ptr->pos.x = x;
     gSaveBlock1Ptr->pos.y = y;
@@ -877,7 +872,7 @@ static void ApplyGlobalTintToPaletteEntries(u16 offset, u16 size)
 
 }
 
-static void ApplyGlobalTintToPaletteSlot(u8 slot, u8 count)
+static void UNUSED ApplyGlobalTintToPaletteSlot(u8 slot, u8 count)
 {
 
 }

@@ -10,11 +10,11 @@ SINGLE_BATTLE_TEST("Anger Shell activates only if the target had more than 50% o
     PARAMETRIZE { hp = 100; activates = FALSE; }
     PARAMETRIZE { hp = 50; activates = FALSE; }
     PARAMETRIZE { hp = 251; activates = TRUE; }
-    PARAMETRIZE { hp = 255; activates = TRUE; }
+    PARAMETRIZE { hp = 254; activates = TRUE; }
 
     GIVEN {
         ASSUME(gBattleMoves[MOVE_TACKLE].power != 0);
-        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_ANGER_SHELL); MaxHP(maxHp); HP(hp); }
+        PLAYER(SPECIES_KLAWF) { Ability(ABILITY_ANGER_SHELL); MaxHP(maxHp); HP(hp); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_TACKLE); }

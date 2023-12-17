@@ -69,6 +69,9 @@ void AnimTask_BlendBattleAnimPalExclude(u8 taskId)
         selectedPalettes = 0;
         // fall through
     case ANIM_ATTACKER:
+#ifdef UBFIX
+    default:
+#endif
         animBattlers[0] = gBattleAnimAttacker;
         break;
     case 3:
@@ -278,7 +281,7 @@ void AnimTask_DrawFallingWhiteLinesOnAttacker(u8 taskId)
     u16 species;
     int spriteId, newSpriteId;
     u16 var0;
-    u16 bg1Cnt;
+    u32 bg1Cnt;
     struct BattleAnimBgData animBgData;
 
     var0 = 0;
@@ -347,7 +350,7 @@ static void AnimTask_DrawFallingWhiteLinesOnAttacker_Step(u8 taskId)
 {
     struct BattleAnimBgData animBgData;
     struct Sprite *sprite;
-    u16 bg1Cnt;
+    u32 bg1Cnt;
 
     gTasks[taskId].data[10] += 4;
     gBattle_BG1_Y -= 4;
@@ -807,11 +810,11 @@ void AnimTask_SetAllNonAttackersInvisiblity(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void StartMonScrollingBgMask(u8 taskId, int unused, u16 scrollSpeed, u8 battler, bool8 includePartner, u8 numFadeSteps, u8 fadeStepDelay, u8 duration, const u32 *gfx, const u32 *tilemap, const u32 *palette)
+void StartMonScrollingBgMask(u8 taskId, int UNUSED unused, u16 scrollSpeed, u8 battler, bool8 includePartner, u8 numFadeSteps, u8 fadeStepDelay, u8 duration, const u32 *gfx, const u32 *tilemap, const u32 *palette)
 {
     u16 species;
     u8 spriteId, spriteId2;
-    u16 bg1Cnt;
+    u32 bg1Cnt;
     struct BattleAnimBgData animBgData;
     u8 battler2;
 
@@ -916,7 +919,7 @@ static void UpdateMonScrollingBgMask(u8 taskId)
                                            | WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR);
                 if (!IsContest())
                 {
-                    u16 bg1Cnt = GetGpuReg(REG_OFFSET_BG1CNT);
+                    u32 bg1Cnt = GetGpuReg(REG_OFFSET_BG1CNT);
                     ((vBgCnt *)&bg1Cnt)->charBaseBlock = 0;
                     SetGpuReg(REG_OFFSET_BG1CNT, bg1Cnt);
                 }

@@ -303,7 +303,14 @@ struct BattlePokemon
     /*0x59*/ u8 metLevel;
 };
 
-struct SpeciesInfo /*0x24*/
+struct Evolution
+{
+    u16 method;
+    u16 param;
+    u16 targetSpecies;
+};
+
+struct SpeciesInfo /*0x8C*/
 {
  /* 0x00 */ u8 baseHP;
  /* 0x01 */ u8 baseAttack;
@@ -313,7 +320,7 @@ struct SpeciesInfo /*0x24*/
  /* 0x05 */ u8 baseSpDefense;
  /* 0x06 */ u8 types[2];
  /* 0x08 */ u8 catchRate;
- /* 0x09 padding */
+ /* 0x09 */ u8 padding1;
  /* 0x0A */ u16 expYield; // expYield was changed from u8 to u16 for the new Exp System.
  /* 0x0C */ u16 evYield_HP:2;
             u16 evYield_Attack:2;
@@ -321,6 +328,7 @@ struct SpeciesInfo /*0x24*/
             u16 evYield_Speed:2;
  /* 0x0D */ u16 evYield_SpAttack:2;
             u16 evYield_SpDefense:2;
+            u16 padding2:4;
  /* 0x0E */ u16 itemCommon;
  /* 0x10 */ u16 itemRare;
  /* 0x12 */ u8 genderRatio;
@@ -330,9 +338,69 @@ struct SpeciesInfo /*0x24*/
  /* 0x16 */ u8 eggGroups[2];
  /* 0x18 */ u16 abilities[NUM_ABILITY_SLOTS]; // 3 abilities, no longer u8 because we have over 255 abilities now.
  /* 0x1E */ u8 safariZoneFleeRate;
- /* 0x1F */ u8 bodyColor : 7;
+            // Pokédex data
+ /* 0x1F */ u8 categoryName[13];
+ /* 0x1F */ u8 speciesName[POKEMON_NAME_LENGTH + 1];
+ /* 0x2C */ u16 cryId;
+ /* 0x2E */ u16 natDexNum;
+ /* 0x30 */ u16 height; //in decimeters
+ /* 0x32 */ u16 weight; //in hectograms
+ /* 0x34 */ u16 pokemonScale;
+ /* 0x36 */ u16 pokemonOffset;
+ /* 0x38 */ u16 trainerScale;
+ /* 0x3A */ u16 trainerOffset;
+ /* 0x3C */ const u8 *description;
+ /* 0x40 */ u8 bodyColor : 7;
+            // Graphical Data
             u8 noFlip : 1;
- /* 0x20 */ u16 flags;
+ /* 0x41 */ u8 frontAnimDelay;
+ /* 0x42 */ u8 frontAnimId;
+ /* 0x43 */ u8 backAnimId;
+ /* 0x44 */ const union AnimCmd *const *frontAnimFrames;
+ /* 0x48 */ const u32 *frontPic;
+ /* 0x4C */ const u32 *frontPicFemale;
+ /* 0x50 */ const u32 *backPic;
+ /* 0x54 */ const u32 *backPicFemale;
+ /* 0x58 */ const u32 *palette;
+ /* 0x5C */ const u32 *paletteFemale;
+ /* 0x60 */ const u32 *shinyPalette;
+ /* 0x64 */ const u32 *shinyPaletteFemale;
+ /* 0x68 */ const u8 *iconSprite;
+ /* 0x6C */ const u8 *iconSpriteFemale;
+ /* 0x70 */ const u8 *footprint;
+            // All Pokémon pics are 64x64, but this data table defines where in this 64x64 frame the sprite's non-transparent pixels actually are.
+ /* 0x74 */ u8 frontPicSize; // The dimensions of this drawn pixel area.
+ /* 0x74 */ u8 frontPicSizeFemale; // The dimensions of this drawn pixel area.
+ /* 0x75 */ u8 frontPicYOffset; // The number of pixels between the drawn pixel area and the bottom edge.
+ /* 0x76 */ u8 backPicSize; // The dimensions of this drawn pixel area.
+ /* 0x76 */ u8 backPicSizeFemale; // The dimensions of this drawn pixel area.
+ /* 0x77 */ u8 backPicYOffset; // The number of pixels between the drawn pixel area and the bottom edge.
+ /* 0x78 */ u8 iconPalIndex:3;
+            u8 iconPalIndexFemale:3;
+            u8 padding3:2;
+ /* 0x79 */ u8 enemyMonElevation; // This determines how much higher above the usual position the enemy Pokémon is during battle. Species that float or fly have nonzero values.
+            // Flags
+ /* 0x7A */ u32 isLegendary:1;
+            u32 isMythical:1;
+            u32 isUltraBeast:1;
+            u32 isParadoxForm:1;
+            u32 isMegaEvolution:1;
+            u32 isPrimalReversion:1;
+            u32 isUltraBurst:1;
+            u32 isGigantamax:1;
+            u32 isAlolanForm:1;
+            u32 isGalarianForm:1;
+            u32 isHisuianForm:1;
+            u32 isPaldeanForm:1;
+            u32 cannotBeTraded:1;
+            u32 allPerfectIVs:1;
+            u32 padding4:18;
+            // Move Data
+ /* 0x80 */ const struct LevelUpMove *levelUpLearnset;
+ /* 0x84 */ const u16 *teachableLearnset;
+ /* 0x88 */ const struct Evolution *evolutions;
+ /* 0x84 */ const u16 *formSpeciesIdTable;
+ /* 0x84 */ const struct FormChange *formChangeTable;
 };
 
 struct BattleMove
@@ -356,6 +424,7 @@ struct BattleMove
     u32 mirrorMoveBanned:1;
     u32 ignoresKingsRock:1;
     u32 highCritRatio:1;
+    u32 twoTurnMove:1;
     u32 punchingMove:1;
     u32 sheerForceBoost:1;
     u32 bitingMove:1;
@@ -378,13 +447,20 @@ struct BattleMove
     u32 thawsUser:1;
     u32 ignoresSubstitute:1;
     u32 strikeCount:4;  // Max 15 hits. Defaults to 1 if not set. May apply its effect on each hit.
-    u32 meFirstBanned:1;
+    u32 forcePressure:1;
+    u32 cantUseTwice:1;
     u32 gravityBanned:1;
+    u32 healBlockBanned:1;
+    u32 meFirstBanned:1;
     u32 mimicBanned:1;
     u32 metronomeBanned:1;
     u32 copycatBanned:1;
+    u32 assistBanned:1; // Matches same moves as copycatBanned + semi-invulnerable moves and Mirror Coat.
     u32 sleepTalkBanned:1;
     u32 instructBanned:1;
+    u32 encoreBanned:1;
+    u32 parentalBondBanned:1;
+    u32 skyBattleBanned:1;
 };
 
 #define SPINDA_SPOT_WIDTH 16
@@ -402,13 +478,6 @@ struct LevelUpMove
     u16 level;
 };
 
-struct Evolution
-{
-    u16 method;
-    u16 param;
-    u16 targetSpecies;
-};
-
 struct FormChange
 {
     u16 method;
@@ -417,6 +486,19 @@ struct FormChange
     u16 param2;
     u16 param3;
 };
+
+struct Fusion
+{
+    u16 fusionStorageIndex;
+    u16 itemId;
+    u16 targetSpecies1;
+    u16 targetSpecies2;
+    u16 fusingIntoMon;
+    u16 fusionMove;
+    u16 unfuseForgetMove;
+};
+
+extern const struct Fusion *const gFusionTablePointers[NUM_SPECIES];
 
 #define NUM_UNOWN_FORMS 28
 
@@ -441,8 +523,6 @@ extern const u8 gFacilityClassToTrainerClass[];
 extern const struct SpeciesInfo gSpeciesInfo[];
 extern const u8 *const gItemEffectTable[ITEMS_COUNT];
 extern const u32 gExperienceTables[][MAX_LEVEL + 1];
-extern const struct LevelUpMove *const gLevelUpLearnsets[];
-extern const u16 *const gTeachableLearnsets[];
 extern const u8 gPPUpGetMask[];
 extern const u8 gPPUpClearMask[];
 extern const u8 gPPUpAddValues[];
@@ -450,8 +530,6 @@ extern const u8 gStatStageRatios[MAX_STAT_STAGE + 1][2];
 extern const u16 gUnionRoomFacilityClasses[];
 extern const struct SpriteTemplate gBattlerSpriteTemplates[];
 extern const s8 gNatureStatTable[][5];
-extern const u16 *const gFormSpeciesIdTables[NUM_SPECIES];
-extern const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES];
 extern const u32 sExpCandyExperienceTable[];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
@@ -518,7 +596,7 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg);
 void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg);
 void CopyMon(void *dest, void *src, size_t size);
 u8 GiveMonToPlayer(struct Pokemon *mon);
-u8 SendMonToPC(struct Pokemon* mon);
+u8 CopyMonToPC(struct Pokemon *mon);
 u8 CalculatePlayerPartyCount(void);
 u8 CalculateEnemyPartyCount(void);
 u8 GetMonsStateToDoubles(void);
@@ -531,6 +609,15 @@ u8 GetSecretBaseTrainerClass(void);
 bool8 IsPlayerPartyAndPokemonStorageFull(void);
 bool8 IsPokemonStorageFull(void);
 const u8 *GetSpeciesName(u16 species);
+const u8 *GetSpeciesCategory(u16 species);
+const u8 *GetSpeciesPokedexDescription(u16 species);
+u16 GetSpeciesHeight(u16 species);
+u16 GetSpeciesWeight(u16 species);
+const struct LevelUpMove *GetSpeciesLevelUpLearnset(u16 species);
+const u16 *GetSpeciesTeachableLearnset(u16 species);
+const struct Evolution *GetSpeciesEvolutions(u16 species);
+const u16 *GetSpeciesFormTable(u16 species);
+const struct FormChange *GetSpeciesFormChanges(u16 species);
 u8 CalculatePPWithBonus(u16 move, u8 ppBonuses, u8 moveIndex);
 void RemoveMonPPBonus(struct Pokemon *mon, u8 moveIndex);
 void RemoveBattleMonPPBonus(struct BattlePokemon *mon, u8 moveIndex);
@@ -545,7 +632,6 @@ u8 GetNature(struct Pokemon *mon);
 u8 GetNatureFromPersonality(u32 personality);
 u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem, struct Pokemon *tradePartner);
 bool8 IsMonPastEvolutionLevel(struct Pokemon *mon);
-u16 HoennPokedexNumToSpecies(u16 hoennNum);
 u16 NationalPokedexNumToSpecies(u16 nationalNum);
 u16 NationalToHoennOrder(u16 nationalNum);
 u16 SpeciesToNationalPokedexNum(u16 species);
@@ -579,8 +665,6 @@ void PlayMapChosenOrBattleBGM(u16 songId);
 void CreateTask_PlayMapChosenOrBattleBGM(u16 songId);
 const u32 *GetMonFrontSpritePal(struct Pokemon *mon);
 const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality);
-const struct CompressedSpritePalette *GetMonSpritePalStruct(struct Pokemon *mon);
-const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16 species, u32 otId , u32 personality);
 bool8 IsMoveHM(u16 move);
 bool8 IsMonSpriteNotFlipped(u16 species);
 s8 GetMonFlavorRelation(struct Pokemon *mon, u8 flavor);
@@ -619,9 +703,12 @@ bool32 SpeciesHasGenderDifferences(u16 species);
 bool32 TryFormChange(u32 monId, u32 side, u16 method);
 void TryToSetBattleFormChangeMoves(struct Pokemon *mon, u16 method);
 u32 GetMonFriendshipScore(struct Pokemon *pokemon);
+u32 GetMonAffectionHearts(struct Pokemon *pokemon);
 void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality);
 u8 CalculatePartyCount(struct Pokemon *party);
 u16 SanitizeSpeciesId(u16 species);
 bool32 IsSpeciesEnabled(u16 species);
+u16 GetCryIdBySpecies(u16 species);
+u16 GetSpeciesPreEvolution(u16 species);
 
 #endif // GUARD_POKEMON_H

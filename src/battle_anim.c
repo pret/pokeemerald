@@ -248,6 +248,7 @@ void LaunchBattleAnimation(u32 animType, u32 animId)
     switch (animType)
     {
     case ANIM_TYPE_GENERAL:
+    default:
         animsTable = gBattleAnims_General;
         break;
     case ANIM_TYPE_MOVE:
@@ -277,6 +278,9 @@ void LaunchBattleAnimation(u32 animType, u32 animId)
         case B_ANIM_PRIMAL_REVERSION:
         case B_ANIM_ULTRA_BURST:
         case B_ANIM_GULP_MISSILE:
+        case B_ANIM_RAINBOW:
+        case B_ANIM_SEA_OF_FIRE:
+        case B_ANIM_SWAMP:
             sAnimHideHpBoxes = TRUE;
             break;
         default:
@@ -1468,10 +1472,8 @@ static void LoadDefaultBg(void)
 {
     if (IsContest())
         LoadContestBgAfterMoveAnim();
-#if B_TERRAIN_BG_CHANGE == TRUE
-    else if (gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
+    else if (B_TERRAIN_BG_CHANGE == TRUE && gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
         DrawTerrainTypeBattleBackground();
-#endif
     else
         DrawMainBattleBackground();
 }

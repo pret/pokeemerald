@@ -74,7 +74,7 @@ SINGLE_BATTLE_TEST("Rayquaza can Mega Evolve knowing Dragon Ascent")
 SINGLE_BATTLE_TEST("Mega Evolution affects turn order")
 {
     GIVEN {
-        ASSUME(B_MEGA_EVO_TURN_ORDER);
+        ASSUME(B_MEGA_EVO_TURN_ORDER >= GEN_7);
         PLAYER(SPECIES_GARDEVOIR) { Item(ITEM_GARDEVOIRITE); Speed(105); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(106); }
     } WHEN {
@@ -90,7 +90,7 @@ SINGLE_BATTLE_TEST("Mega Evolution affects turn order")
 SINGLE_BATTLE_TEST("Abilities replaced by Mega Evolution do not affect turn order")
 {
     GIVEN {
-        ASSUME(B_MEGA_EVO_TURN_ORDER);
+        ASSUME(B_MEGA_EVO_TURN_ORDER >= GEN_7);
         ASSUME(gSpeciesInfo[SPECIES_SABLEYE_MEGA].abilities[0] != ABILITY_STALL
             && gSpeciesInfo[SPECIES_SABLEYE_MEGA].abilities[1] != ABILITY_STALL);
         PLAYER(SPECIES_SABLEYE) { Item(ITEM_SABLENITE); Ability(ABILITY_STALL); Speed(105); }

@@ -16,11 +16,18 @@ struct StatFractions
     u8 divisor;
 };
 
+struct PickupItem
+{
+    u16 itemId;
+    u8 percentage[10];
+};
+
 s32 CalcCritChanceStageArgs(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility, u32 abilityAtk, u32 abilityDef, u32 holdEffectAtk);
 s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility);
 s32 GetCritHitChance(s32 critChanceIndex);
 u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u32 defAbility, u32 atkHoldEffect, u32 defHoldEffect);
 u8 GetBattlerTurnOrderNum(u8 battlerId);
+bool32 NoAliveMonsForPlayer(void);
 bool32 NoAliveMonsForEitherParty(void);
 void SetMoveEffect(bool32 primary, u32 certain);
 bool32 CanBattlerSwitch(u32 battlerId);
@@ -46,6 +53,7 @@ void StealTargetItem(u8 battlerStealer, u8 battlerItem);
 u8 GetCatchingBattler(void);
 u32 GetHighestStatId(u32 battlerId);
 bool32 ProteanTryChangeType(u32 battler, u32 ability, u32 move, u32 moveType);
+bool32 IsMoveNotAllowedInSkyBattles(u32 move);
 bool32 DoSwitchInAbilitiesItems(u32 battlerId);
 u8 GetFirstFaintedPartyIndex(u8 battlerId);
 bool32 IsMoveAffectedByParentalBond(u32 move, u32 battler);

@@ -202,7 +202,6 @@ SINGLE_BATTLE_TEST("Red Card does not activate if stolen by Magician")
     PARAMETRIZE { item = ITEM_POTION; activate = TRUE; }
 
     GIVEN {
-        ASSUME(P_GEN_6_POKEMON == TRUE);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_RED_CARD); }
         OPPONENT(SPECIES_FENNEKIN) { Ability(ABILITY_MAGICIAN); Item(item); }
         OPPONENT(SPECIES_WYNAUT);
@@ -384,7 +383,6 @@ SINGLE_BATTLE_TEST("Red Card does not activate if attacker's Sheer Force applied
 SINGLE_BATTLE_TEST("Red Card activates before Emergency Exit")
 {
     GIVEN {
-        ASSUME(P_GEN_7_POKEMON == TRUE);
         PLAYER(SPECIES_GOLISOPOD) { MaxHP(100); HP(51); Item(ITEM_RED_CARD); }
         PLAYER(SPECIES_WIMPOD);
         OPPONENT(SPECIES_WOBBUFFET);

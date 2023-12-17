@@ -1,3 +1,4 @@
+#include "config.h"
 #include "config/battle.h"
 #include "config/item.h"
 #include "constants/global.h"
@@ -1002,6 +1003,13 @@ Common_EventScript_LegendaryFlewAway::
 	bufferspeciesname STR_VAR_1, VAR_0x8004
 	msgbox gText_LegendaryFlewAway, MSGBOX_DEFAULT
 	release
+	end
+
+EventScript_VsSeekerChargingDone::
+	special VsSeekerFreezeObjectsAfterChargeComplete
+	waitstate
+	special VsSeekerResetObjectMovementAfterChargeComplete
+	releaseall
 	end
 
 	.include "data/scripts/pc_transfer.inc"

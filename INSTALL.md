@@ -82,7 +82,7 @@ Some tips before proceeding:
 4. Certain packages are required to build pokeemerald. Install these packages by running the following command:
 
     ```bash
-    sudo apt install build-essential binutils-arm-none-eabi git libpng-dev
+    sudo apt install build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi git libpng-dev
     ```
     <details>
         <summary><i>Note...</i></summary>
@@ -329,28 +329,28 @@ Open Terminal and enter the following commands, depending on which distro you're
 ### Debian/Ubuntu-based distributions
 Run the following command to install the necessary packages:
 ```bash
-sudo apt install build-essential binutils-arm-none-eabi git libpng-dev
+sudo apt install build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi git libpng-dev
 ```
 Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to-store-pokeemerald-linux).
 <details>
     <summary><i>Note for legacy repos...</i></summary>
 
 >   If the repository you plan to build has an **[older revision of the INSTALL.md](https://github.com/pret/pokeemerald/blob/571c598/INSTALL.md)**,
->   then you will have to install devkitARM. Install all the above packages except binutils-arm-none-eabi, and follow the instructions to
+>   then you will have to install devkitARM. Install all the above packages except for the arm-none-eabi packages, and follow the instructions to
 >   [install devkitARM on Debian/Ubuntu-based distributions](#installing-devkitarm-on-debianubuntu-based-distributions).
 </details>
 
 ### Arch Linux
 Run this command as root to install the necessary packages:
 ```bash
-pacman -S base-devel arm-none-eabi-binutils git libpng
+pacman -S base-devel arm-none-eabi-binutils arm-none-eabi-gcc arm-none-eabi-newlib git libpng
 ```
 Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to-store-pokeemerald-linux).
 <details>
     <summary><i>Note for legacy repos...</i></summary>
 
 >   If the repository you plan to build has an **[older revision of the INSTALL.md](https://github.com/pret/pokeemerald/blob/571c598/INSTALL.md)**,
->   then you will have to install devkitARM. Install all the above packages except binutils-arm-none-eabi, and follow the instructions to
+>   then you will have to install devkitARM. Install all the above packages except for the arm-none-eabi packages, and follow the instructions to
 >   [install devkitARM on Arch Linux](#installing-devkitarm-on-arch-linux).
 </details>
 

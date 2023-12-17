@@ -26,7 +26,7 @@ SINGLE_BATTLE_TEST("Quark Drive boosts either Attack or Special Attack, not both
 {
     u16 species;
     u32 move;
-    u16 damage[2];
+    s16 damage[2];
 
     PARAMETRIZE { species = SPECIES_BELLSPROUT; move = MOVE_TACKLE; }
     PARAMETRIZE { species = SPECIES_BELLSPROUT; move = MOVE_ROUND; }
@@ -58,7 +58,7 @@ SINGLE_BATTLE_TEST("Quark Drive either boosts Defense or Special Defense, not bo
 {
     u16 species;
     u32 move;
-    u16 damage[2];
+    s16 damage[2];
 
     PARAMETRIZE { species = SPECIES_ONIX; move = MOVE_TACKLE; }
     PARAMETRIZE { species = SPECIES_ONIX; move = MOVE_ROUND; }

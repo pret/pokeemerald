@@ -22,7 +22,6 @@ SINGLE_BATTLE_TEST("Electric Terrain protects grounded battlers from falling asl
 SINGLE_BATTLE_TEST("Electric Terrain activates Electric Seed and Mimicry")
 {
     GIVEN {
-        ASSUME(P_GEN_8_POKEMON == TRUE);
         ASSUME(gItems[ITEM_ELECTRIC_SEED].holdEffect == HOLD_EFFECT_SEEDS);
         ASSUME(gItems[ITEM_ELECTRIC_SEED].holdEffectParam == HOLD_EFFECT_PARAM_ELECTRIC_TERRAIN);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_ELECTRIC_SEED); }

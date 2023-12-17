@@ -174,8 +174,8 @@ struct BerryBlender
     u16 progressBarValue;
     u16 maxProgressBarValue;
     u16 centerScale;
-    u16 bg_X;
-    u16 bg_Y;
+    s16 bg_X;
+    s16 bg_Y;
     u8 opponentTaskIds[BLENDER_MAX_PLAYERS - 1];
     u8 perfectOpponents; // for debugging, NPCs will always hit Best
     u16 scores[BLENDER_MAX_PLAYERS][NUM_SCORE_TYPES];
@@ -2377,8 +2377,7 @@ static void Debug_SetMaxRPMStage(s16 value)
     sDebug_MaxRPMStage = value;
 }
 
-// Unused
-static s16 Debug_GetMaxRPMStage(void)
+static s16 UNUSED Debug_GetMaxRPMStage(void)
 {
     return sDebug_MaxRPMStage;
 }
@@ -2388,8 +2387,7 @@ static void Debug_SetGameTimeStage(s16 value)
     sDebug_GameTimeStage = value;
 }
 
-// Unued
-static s16 Debug_GetGameTimeStage(void)
+static s16 UNUSED Debug_GetGameTimeStage(void)
 {
     return sDebug_GameTimeStage;
 }
@@ -2501,8 +2499,7 @@ static void CalculatePokeblock(struct BlenderBerry *berries, struct Pokeblock *p
         flavors[i] = sPokeblockFlavors[i];
 }
 
-// Unused
-static void Debug_CalculatePokeblock(struct BlenderBerry* berries, struct Pokeblock* pokeblock, u8 numPlayers, u8 *flavors, u16 maxRPM)
+static void UNUSED Debug_CalculatePokeblock(struct BlenderBerry* berries, struct Pokeblock* pokeblock, u8 numPlayers, u8 *flavors, u16 maxRPM)
 {
     CalculatePokeblock(berries, pokeblock, numPlayers, flavors, maxRPM);
 }
@@ -3471,7 +3468,7 @@ static bool8 PrintBlendingResults(void)
     struct Pokeblock pokeblock;
     u8 flavors[FLAVOR_COUNT + 1];
     u8 text[40];
-    u16 berryIds[4]; // unused
+    u16 UNUSED berryIds[4];
 
     switch (sBerryBlender->mainState)
     {
@@ -3866,6 +3863,9 @@ static void Blender_AddTextPrinter(u8 windowId, const u8 *string, u8 x, u8 y, s3
     {
     case 0:
     case 3:
+#ifdef UBFIX
+    default:
+#endif
         txtColor[0] = TEXT_COLOR_WHITE;
         txtColor[1] = TEXT_COLOR_DARK_GRAY;
         txtColor[2] = TEXT_COLOR_LIGHT_GRAY;

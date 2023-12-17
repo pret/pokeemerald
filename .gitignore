@@ -21,7 +21,6 @@ sound/**/*.bin
 sound/songs/midi/*.s
 tools/agbcc
 *.map
-*.ld
 *.bat
 *.dump
 *.sa*
@@ -39,3 +38,4 @@ prefabs.json
 *.diff
 *.sym
 *.js
+src/data/map_group_count.h
