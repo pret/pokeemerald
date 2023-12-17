@@ -2755,7 +2755,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Wiglett, 64, 64),
-        .frontPicYOffset = 19,
+        .frontPicYOffset = 10,
         .frontAnimFrames = sAnims_Wiglett,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         BACK_PIC(Wiglett, 64, 64),
