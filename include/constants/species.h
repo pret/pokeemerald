@@ -1670,7 +1670,27 @@
 #define SPECIES_1024_FORM_3                             GEN9_START + 145
 #define SPECIES_1025                                    GEN9_START + 146
 
-#define GIGANTAMAX_START                                SPECIES_1025
+#define PLACEHOLDER_START                               SPECIES_1025
+
+// XD: Gale of Darkness
+#define SPECIES_LUGIA_SHADOW                            PLACEHOLDER_START + 1
+// Sun & Moon
+#define SPECIES_RATICATE_ALOLAN_TOTEM                   PLACEHOLDER_START + 2
+#define SPECIES_GUMSHOOS_TOTEM                          PLACEHOLDER_START + 3
+#define SPECIES_VIKAVOLT_TOTEM                          PLACEHOLDER_START + 4
+#define SPECIES_LURANTIS_TOTEM                          PLACEHOLDER_START + 5
+#define SPECIES_SALAZZLE_TOTEM                          PLACEHOLDER_START + 6
+#define SPECIES_MIMIKYU_TOTEM                           PLACEHOLDER_START + 7
+#define SPECIES_KOMMO_O_TOTEM                           PLACEHOLDER_START + 8
+// Ultra Sun & Ultra Moon
+#define SPECIES_MAROWAK_ALOLAN_TOTEM                    PLACEHOLDER_START + 9
+#define SPECIES_RIBOMBEE_TOTEM                          PLACEHOLDER_START + 10
+#define SPECIES_ARAQUANID_TOTEM                         PLACEHOLDER_START + 11
+#define SPECIES_TOGEDEMARU_TOTEM                        PLACEHOLDER_START + 12
+#define SPECIES_PIKACHU_PARTNER                         PLACEHOLDER_START + 13
+#define SPECIES_EEVEE_PARTNER                           PLACEHOLDER_START + 14
+
+#define GIGANTAMAX_START                                SPECIES_EEVEE_PARTNER
 
 // Gigantamax Forms
 #define SPECIES_VENUSAUR_GIGANTAMAX                     GIGANTAMAX_START + 1
