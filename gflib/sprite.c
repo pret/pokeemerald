@@ -751,9 +751,17 @@ void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, const struct SpriteFram
 {
     if (sSpriteCopyRequestCount < MAX_SPRITE_COPY_REQUESTS)
     {
-        sSpriteCopyRequests[sSpriteCopyRequestCount].src = images[index].data;
+        if (!images[0].relativeFrames)
+        {
+            sSpriteCopyRequests[sSpriteCopyRequestCount].src = images[index].data;
+            sSpriteCopyRequests[sSpriteCopyRequestCount].size = images[index].size;
+        }
+        else
+        {
+            sSpriteCopyRequests[sSpriteCopyRequestCount].src = images[0].data + images[0].size * index;
+            sSpriteCopyRequests[sSpriteCopyRequestCount].size = images[0].size;
+        }
         sSpriteCopyRequests[sSpriteCopyRequestCount].dest = (u8 *)OBJ_VRAM0 + TILE_SIZE_4BPP * tileNum;
-        sSpriteCopyRequests[sSpriteCopyRequestCount].size = images[index].size;
         sSpriteCopyRequestCount++;
     }
 }
