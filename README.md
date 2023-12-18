@@ -166,7 +166,7 @@ With this, you'll get the latest version of pokeemerald-expansion, plus a couple
 
 ## **How do I update my version of pokeemerald-expansion?**
 - If you haven't set up a remote, run the command `git remote add RHH https://github.com/rh-hideout/pokeemerald-expansion`.
-- Once you have your remote set up, run the command `git pull RHH expansion/1.6.2`.
+- Once you have your remote set up, run the command `git pull RHH expansion/1.7.0`.
 
 ### Please consider crediting the entire [list of contributors](https://github.com/rh-hideout/pokeemerald-expansion/wiki/Credits) in your project, as they have all worked hard to develop this project :)
 
