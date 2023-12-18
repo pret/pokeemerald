@@ -94,3 +94,21 @@ SINGLE_BATTLE_TEST("U-turn switches the user out if Wimp Out fails to activate")
         MESSAGE("Your foe's weak! Get 'em, Wynaut!");
     }
 }
+
+SINGLE_BATTLE_TEST("U-turn switches the user out after Ice Face activates")
+{
+    GIVEN {
+        ASSUME(P_GEN_8_POKEMON == TRUE);
+        PLAYER(SPECIES_BEEDRILL);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_EISCUE) { Ability(ABILITY_ICE_FACE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_U_TURN); SEND_OUT(player, 1); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_U_TURN, player);
+        HP_BAR(opponent);
+        ABILITY_POPUP(opponent, ABILITY_ICE_FACE);
+        MESSAGE("Foe Eiscue transformed!");
+        MESSAGE("Go! Wynaut!");
+    }
+}

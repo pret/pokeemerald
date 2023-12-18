@@ -9096,14 +9096,8 @@ BattleScript_SoundproofProtected::
 	goto BattleScript_MoveEnd
 
 BattleScript_IceFaceNullsDamage::
-	attackstring
-	attackanimation
-	waitanimation
-	effectivenesssound
-	hitanimation BS_TARGET
-	waitstate
 	call BattleScript_TargetFormChangeWithString
-	goto BattleScript_MoveEnd
+	return
 
 BattleScript_DazzlingProtected::
 	attackstring
