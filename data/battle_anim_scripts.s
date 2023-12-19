@@ -860,6 +860,21 @@ gBattleAnims_Moves::
 	.4byte Move_MATCHA_GOTCHA
 	.4byte Move_SYRUP_BOMB
 	.4byte Move_IVY_CUDGEL
+	.4byte Move_833
+	.4byte Move_834
+	.4byte Move_835
+	.4byte Move_836
+	.4byte Move_837
+	.4byte Move_838
+	.4byte Move_839
+	.4byte Move_840
+	.4byte Move_841
+	.4byte Move_842
+	.4byte Move_843
+	.4byte Move_844
+	.4byte Move_845
+	.4byte Move_846
+	.4byte Move_847
 @@@@ Z MOVES
 	.4byte Move_BREAKNECK_BLITZ
 	.4byte Move_ALL_OUT_PUMMELING
@@ -16963,6 +16978,21 @@ Move_IVY_CUDGEL::
 Move_NONE:
 Move_MIRROR_MOVE:
 Move_POUND:
+Move_833:
+Move_834:
+Move_835:
+Move_836:
+Move_837:
+Move_838:
+Move_839:
+Move_840:
+Move_841:
+Move_842:
+Move_843:
+Move_844:
+Move_845:
+Move_846:
+Move_847:
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_TARGET
 	setalpha 12, 8
