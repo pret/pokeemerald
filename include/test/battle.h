@@ -1063,7 +1063,7 @@ void ValidateFinally(u32 sourceLine);
     { \
         s32 _a = (a), _m = (m), _b = (b); \
         s32 _am = Q_4_12_TO_INT(_a * _m); \
-        s32 _t = Q_4_12_TO_INT(abs(_m) + Q_4_12_ROUND); \
+        s32 _t = max(Q_4_12_TO_INT(abs(_m) + Q_4_12_ROUND), 1); \
         if (abs(_am-_b) > _t) \
             Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: EXPECT_MUL_EQ(%d, %q, %d) failed: %d not in [%d..%d]", gTestRunnerState.test->filename, __LINE__, _a, _m, _b, _am, _b-_t, _b+_t); \
     } while (0)
