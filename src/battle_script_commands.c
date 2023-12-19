@@ -9530,7 +9530,7 @@ static void Cmd_various(void)
     case VARIOUS_TRY_INSTRUCT:
     {
         VARIOUS_ARGS(const u8 *failInstr);
-        u16 move = gLastMoves[gBattlerTarget];
+        u16 move = gLastPrintedMoves[gBattlerTarget];
         if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || gBattleMoves[move].effect == EFFECT_RECHARGE
          || gBattleMoves[move].instructBanned || gBattleMoves[move].twoTurnMove || IsDynamaxed(gBattlerTarget))
         {
@@ -9540,7 +9540,7 @@ static void Cmd_various(void)
         {
             gSpecialStatuses[gBattlerTarget].instructedChosenTarget = *(gBattleStruct->moveTarget + gBattlerTarget) | 0x4;
             gBattlerAttacker = gBattlerTarget;
-            gCalledMove = gLastMoves[gBattlerAttacker];
+            gCalledMove = move;
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
                 if (gBattleMons[gBattlerAttacker].moves[i] == gCalledMove)
