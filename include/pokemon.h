@@ -407,15 +407,22 @@ struct BattleMove
 {
     u16 effect;
     u8 power;
-    u8 type;
-    u8 accuracy;
-    u8 pp;
+    u8 type:5;
+    u8 split:3;
+
+    u16 accuracy:7;
+    u16 recoil:7;
+    u16 critBoost:2;
     u8 secondaryEffectChance;
-    u16 target;
     s8 priority;
-    u8 split;
-    u16 argument;
-    u8 zMoveEffect;
+
+    u16 target;
+    u8 pp;
+    union {
+        u8 effect;
+        u8 powerOverride;
+    } zMove;
+
     // Flags
     u32 makesContact:1;
     u32 ignoresProtect:1;
@@ -423,7 +430,6 @@ struct BattleMove
     u32 snatchAffected:1;
     u32 mirrorMoveBanned:1;
     u32 ignoresKingsRock:1;
-    u32 highCritRatio:1;
     u32 twoTurnMove:1;
     u32 punchingMove:1;
     u32 sheerForceBoost:1;
@@ -461,6 +467,8 @@ struct BattleMove
     u32 encoreBanned:1;
     u32 parentalBondBanned:1;
     u32 skyBattleBanned:1;
+
+    u16 argument;
 };
 
 #define SPINDA_SPOT_WIDTH 16

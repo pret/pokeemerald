@@ -148,11 +148,11 @@ SINGLE_BATTLE_TEST("Focus Energy increases the user's critical hit ratio by two 
     }
 }
 
-SINGLE_BATTLE_TEST("Flag highCritRatio increases the critical hit ratio by one stage")
+SINGLE_BATTLE_TEST("High crit rate increases the critical hit ratio by one stage")
 {
     PASSES_RANDOMLY(1, 8, RNG_CRITICAL_HIT);
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SLASH].highCritRatio == TRUE);
+        ASSUME(gBattleMoves[MOVE_SLASH].critBoost == 1);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -192,10 +192,10 @@ SINGLE_BATTLE_TEST("Scope Lens increases the critical hit ratio by one stage")
     }
 }
 
-SINGLE_BATTLE_TEST("Flag highCritRatio, Super Luck and Scope Lens cause the move to result in a critical hit")
+SINGLE_BATTLE_TEST("High crit rate, Super Luck and Scope Lens cause the move to result in a critical hit")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SLASH].highCritRatio == TRUE);
+        ASSUME(gBattleMoves[MOVE_SLASH].critBoost == 1);
         ASSUME(gItems[ITEM_SCOPE_LENS].holdEffect == HOLD_EFFECT_SCOPE_LENS);
         PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_SUPER_LUCK); Item(ITEM_SCOPE_LENS); };
         OPPONENT(SPECIES_WOBBUFFET);
