@@ -1671,24 +1671,66 @@
 #define SPECIES_1025                                    GEN9_START + 146
 
 #define PLACEHOLDER_START                               SPECIES_1025
-
 // XD: Gale of Darkness
 #define SPECIES_LUGIA_SHADOW                            PLACEHOLDER_START + 1
+// Diamond & Pearl
+#define SPECIES_MOTHIM_SANDY_CLOAK                      PLACEHOLDER_START + 2
+#define SPECIES_MOTHIM_TRASH_CLOAK                      PLACEHOLDER_START + 3
+// X & Y
+#define SPECIES_SCATTERBUG_POLAR                        PLACEHOLDER_START + 4
+#define SPECIES_SCATTERBUG_TUNDRA                       PLACEHOLDER_START + 5
+#define SPECIES_SCATTERBUG_CONTINENTAL                  PLACEHOLDER_START + 6
+#define SPECIES_SCATTERBUG_GARDEN                       PLACEHOLDER_START + 7
+#define SPECIES_SCATTERBUG_ELEGANT                      PLACEHOLDER_START + 8
+#define SPECIES_SCATTERBUG_MEADOW                       PLACEHOLDER_START + 9
+#define SPECIES_SCATTERBUG_MODERN                       PLACEHOLDER_START + 10
+#define SPECIES_SCATTERBUG_MARINE                       PLACEHOLDER_START + 11
+#define SPECIES_SCATTERBUG_ARCHIPELAGO                  PLACEHOLDER_START + 12
+#define SPECIES_SCATTERBUG_HIGH_PLAINS                  PLACEHOLDER_START + 13
+#define SPECIES_SCATTERBUG_SANDSTORM                    PLACEHOLDER_START + 14
+#define SPECIES_SCATTERBUG_RIVER                        PLACEHOLDER_START + 15
+#define SPECIES_SCATTERBUG_MONSOON                      PLACEHOLDER_START + 16
+#define SPECIES_SCATTERBUG_SAVANNA                      PLACEHOLDER_START + 17
+#define SPECIES_SCATTERBUG_SUN                          PLACEHOLDER_START + 18
+#define SPECIES_SCATTERBUG_OCEAN                        PLACEHOLDER_START + 19
+#define SPECIES_SCATTERBUG_JUNGLE                       PLACEHOLDER_START + 20
+#define SPECIES_SCATTERBUG_FANCY                        PLACEHOLDER_START + 21
+#define SPECIES_SCATTERBUG_POKE_BALL                    PLACEHOLDER_START + 22
+#define SPECIES_SPEWPA_POLAR                            PLACEHOLDER_START + 23
+#define SPECIES_SPEWPA_TUNDRA                           PLACEHOLDER_START + 24
+#define SPECIES_SPEWPA_CONTINENTAL                      PLACEHOLDER_START + 25
+#define SPECIES_SPEWPA_GARDEN                           PLACEHOLDER_START + 26
+#define SPECIES_SPEWPA_ELEGANT                          PLACEHOLDER_START + 27
+#define SPECIES_SPEWPA_MEADOW                           PLACEHOLDER_START + 28
+#define SPECIES_SPEWPA_MODERN                           PLACEHOLDER_START + 29
+#define SPECIES_SPEWPA_MARINE                           PLACEHOLDER_START + 30
+#define SPECIES_SPEWPA_ARCHIPELAGO                      PLACEHOLDER_START + 31
+#define SPECIES_SPEWPA_HIGH_PLAINS                      PLACEHOLDER_START + 32
+#define SPECIES_SPEWPA_SANDSTORM                        PLACEHOLDER_START + 33
+#define SPECIES_SPEWPA_RIVER                            PLACEHOLDER_START + 34
+#define SPECIES_SPEWPA_MONSOON                          PLACEHOLDER_START + 35
+#define SPECIES_SPEWPA_SAVANNA                          PLACEHOLDER_START + 36
+#define SPECIES_SPEWPA_SUN                              PLACEHOLDER_START + 37
+#define SPECIES_SPEWPA_OCEAN                            PLACEHOLDER_START + 38
+#define SPECIES_SPEWPA_JUNGLE                           PLACEHOLDER_START + 39
+#define SPECIES_SPEWPA_FANCY                            PLACEHOLDER_START + 40
+#define SPECIES_SPEWPA_POKE_BALL                        PLACEHOLDER_START + 41
 // Sun & Moon
-#define SPECIES_RATICATE_ALOLAN_TOTEM                   PLACEHOLDER_START + 2
-#define SPECIES_GUMSHOOS_TOTEM                          PLACEHOLDER_START + 3
-#define SPECIES_VIKAVOLT_TOTEM                          PLACEHOLDER_START + 4
-#define SPECIES_LURANTIS_TOTEM                          PLACEHOLDER_START + 5
-#define SPECIES_SALAZZLE_TOTEM                          PLACEHOLDER_START + 6
-#define SPECIES_MIMIKYU_TOTEM                           PLACEHOLDER_START + 7
-#define SPECIES_KOMMO_O_TOTEM                           PLACEHOLDER_START + 8
+#define SPECIES_RATICATE_ALOLAN_TOTEM                   PLACEHOLDER_START + 42
+#define SPECIES_GUMSHOOS_TOTEM                          PLACEHOLDER_START + 43
+#define SPECIES_VIKAVOLT_TOTEM                          PLACEHOLDER_START + 44
+#define SPECIES_LURANTIS_TOTEM                          PLACEHOLDER_START + 45
+#define SPECIES_SALAZZLE_TOTEM                          PLACEHOLDER_START + 46
+#define SPECIES_MIMIKYU_TOTEM                           PLACEHOLDER_START + 47
+#define SPECIES_KOMMO_O_TOTEM                           PLACEHOLDER_START + 48
 // Ultra Sun & Ultra Moon
-#define SPECIES_MAROWAK_ALOLAN_TOTEM                    PLACEHOLDER_START + 9
-#define SPECIES_RIBOMBEE_TOTEM                          PLACEHOLDER_START + 10
-#define SPECIES_ARAQUANID_TOTEM                         PLACEHOLDER_START + 11
-#define SPECIES_TOGEDEMARU_TOTEM                        PLACEHOLDER_START + 12
-#define SPECIES_PIKACHU_PARTNER                         PLACEHOLDER_START + 13
-#define SPECIES_EEVEE_PARTNER                           PLACEHOLDER_START + 14
+#define SPECIES_MAROWAK_ALOLAN_TOTEM                    PLACEHOLDER_START + 49
+#define SPECIES_RIBOMBEE_TOTEM                          PLACEHOLDER_START + 50
+#define SPECIES_ARAQUANID_TOTEM                         PLACEHOLDER_START + 51
+#define SPECIES_TOGEDEMARU_TOTEM                        PLACEHOLDER_START + 52
+// Let's Go Pikachu & Let's Go Eevee
+#define SPECIES_PIKACHU_PARTNER                         PLACEHOLDER_START + 53
+#define SPECIES_EEVEE_PARTNER                           PLACEHOLDER_START + 54
 
 #define GIGANTAMAX_START                                SPECIES_EEVEE_PARTNER
 

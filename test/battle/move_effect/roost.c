@@ -415,7 +415,6 @@ SINGLE_BATTLE_TEST("Roost does not suppress the ungrounded effect of Magnet Rise
 
 SINGLE_BATTLE_TEST("Roost does not suppress the ungrounded effect of Telekinesis")
 {
-    KNOWN_FAILING; // Telekinesis currently says the pokemon was identified
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { HP(1); }
         OPPONENT(SPECIES_WOBBUFFET);

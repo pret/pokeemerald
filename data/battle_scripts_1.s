@@ -2990,7 +2990,7 @@ BattleScript_EffectTelekinesis:
 	settelekinesis BattleScript_ButItFailed
 	attackanimation
 	waitanimation
-	printstring STRINGID_PKMNIDENTIFIED
+	printstring STRINGID_HURLEDINTOTHEAIR
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
@@ -9092,14 +9092,8 @@ BattleScript_SoundproofProtected::
 	goto BattleScript_MoveEnd
 
 BattleScript_IceFaceNullsDamage::
-	attackstring
-	attackanimation
-	waitanimation
-	effectivenesssound
-	hitanimation BS_TARGET
-	waitstate
 	call BattleScript_TargetFormChangeWithString
-	goto BattleScript_MoveEnd
+	return
 
 BattleScript_DazzlingProtected::
 	attackstring
