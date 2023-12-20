@@ -4,7 +4,7 @@
 ASSUMPTIONS
 {
     ASSUME(gSpeciesInfo[SPECIES_UMBREON].types[0] == TYPE_DARK);
-    ASSUME(gBattleMoves[MOVE_CONFUSE_RAY].split == SPLIT_STATUS);
+    ASSUME(gBattleMoves[MOVE_CONFUSE_RAY].category == BATTLE_CATEGORY_STATUS);
 }
 
 SINGLE_BATTLE_TEST("Prankster-affected moves don't affect Dark-type Pokémon")

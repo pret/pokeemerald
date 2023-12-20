@@ -84,7 +84,7 @@ bool32 ShouldLowerEvasion(u32 battlerAtk, u32 battlerDef, u32 defAbility);
 
 // move checks
 bool32 IsAffectedByPowder(u32 battler, u32 ability, u32 holdEffect);
-bool32 MovesWithSplitUnusable(u32 attacker, u32 target, u32 split);
+bool32 MovesWithCategoryUnusable(u32 attacker, u32 target, u32 category);
 u32 AI_WhichMoveBetter(u32 move1, u32 move2, u32 battlerAtk, u32 battlerDef, s32 noOfHitsToKo);
 s32 AI_CalcDamageSaveBattlers(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectiveness, bool32 considerZPower);
 s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectiveness, bool32 considerZPower, u32 weather);
@@ -98,10 +98,9 @@ u32 AI_GetMoveEffectiveness(u32 move, u32 battlerAtk, u32 battlerDef);
 u16 *GetMovesArray(u32 battler);
 bool32 IsConfusionMoveEffect(u32 moveEffect);
 bool32 HasMove(u32 battlerId, u32 move);
-bool32 HasOnlyMovesWithSplit(u32 battlerId, u32 split, bool32 onlyOffensive);
-bool32 HasMoveWithSplit(u32 battler, u32 split);
+bool32 HasOnlyMovesWithCategory(u32 battlerId, u32 category, bool32 onlyOffensive);
+bool32 HasMoveWithCategory(u32 battler, u32 category);
 bool32 HasMoveWithType(u32 battler, u32 type);
-bool32 HasMoveWithTypeAndSplit(u32 battler, u32 type, u32 split);
 bool32 HasMoveEffect(u32 battlerId, u32 moveEffect);
 bool32 HasMoveWithLowAccuracy(u32 battlerAtk, u32 battlerDef, u32 accCheck, bool32 ignoreStatus, u32 atkAbility, u32 defAbility, u32 atkHoldEffect, u32 defHoldEffect);
 bool32 IsAromaVeilProtectedMove(u32 move);
@@ -177,8 +176,8 @@ struct BattlePokemon *AllocSaveBattleMons(void);
 void FreeRestoreBattleMons(struct BattlePokemon *savedBattleMons);
 s32 CountUsablePartyMons(u32 battlerId);
 bool32 IsPartyFullyHealedExceptBattler(u32 battler);
-bool32 PartyHasMoveSplit(u32 battlerId, u32 split);
-bool32 SideHasMoveSplit(u32 battlerId, u32 split);
+bool32 PartyHasMoveCategory(u32 battlerId, u32 category);
+bool32 SideHasMoveCategory(u32 battlerId, u32 category);
 
 // score increases
 void IncreaseStatUpScore(u32 battlerAtk, u32 battlerDef, u32 statId, s32 *score);

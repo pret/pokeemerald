@@ -405,7 +405,7 @@ AI_DOUBLE_BATTLE_TEST("AI will not use a status move if partner already chose He
 
     for (j = MOVE_NONE + 1; j < MOVES_COUNT; j++)
     {
-        if (gBattleMoves[j].split == SPLIT_STATUS) {
+        if (gBattleMoves[j].category == BATTLE_CATEGORY_STATUS) {
             PARAMETRIZE{ statusMove = j; }
         }
     }

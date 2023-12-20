@@ -408,7 +408,7 @@ struct BattleMove
     u16 effect;
     u8 power;
     u8 type:5;
-    u8 split:3;
+    u8 category:3;
 
     u16 accuracy:7;
     u16 recoil:7;

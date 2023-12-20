@@ -149,9 +149,9 @@ void QueueZMove(u8 battler, u16 baseMove)
     gBattleStruct->zmove.toBeUsed[battler] = gBattleStruct->zmove.chosenZMove;
     gBattleStruct->zmove.baseMoves[battler] = baseMove;
     if (gBattleStruct->zmove.chosenZMove == MOVE_LIGHT_THAT_BURNS_THE_SKY)
-        gBattleStruct->zmove.splits[battler] = GetSplitBasedOnStats(battler);
+        gBattleStruct->zmove.categories[battler] = GetCategoryBasedOnStats(battler);
     else
-        gBattleStruct->zmove.splits[battler] = gBattleMoves[baseMove].split;
+        gBattleStruct->zmove.categories[battler] = gBattleMoves[baseMove].category;
 }
 
 bool32 IsViableZMove(u8 battler, u16 move)
@@ -518,7 +518,7 @@ static void ZMoveSelectionDisplayPower(u16 move, u16 zMove)
     if (zMove >= MOVE_CATASTROPIKA)
         power = gBattleMoves[zMove].power;
 
-    if (gBattleMoves[move].split != SPLIT_STATUS)
+    if (gBattleMoves[move].category != BATTLE_CATEGORY_STATUS)
     {
         txtPtr = StringCopy(gDisplayedStringBattle, sText_PowerColon);
         ConvertIntToDecimalStringN(txtPtr, power, STR_CONV_MODE_LEFT_ALIGN, 3);
@@ -687,7 +687,7 @@ static bool32 AreStatsMaxed(u8 battler, u8 n)
 
 u16 GetZMovePower(u16 move)
 {
-    if (gBattleMoves[move].split == SPLIT_STATUS)
+    if (gBattleMoves[move].category == BATTLE_CATEGORY_STATUS)
         return 0;
     if (gBattleMoves[move].effect == EFFECT_OHKO)
         return 180;

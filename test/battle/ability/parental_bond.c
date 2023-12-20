@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Parental Bond converts Tackle into a two-strike move")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TACKLE].split != SPLIT_STATUS);
+        ASSUME(gBattleMoves[MOVE_TACKLE].category != BATTLE_CATEGORY_STATUS);
         ASSUME(gBattleMoves[MOVE_TACKLE].strikeCount < 2);
         ASSUME(gBattleMoves[MOVE_TACKLE].effect == EFFECT_HIT);
         PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }

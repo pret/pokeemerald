@@ -322,19 +322,19 @@ u16 GetMaxMove(u16 battlerId, u16 baseMove)
     {
         return MOVE_STRUGGLE;
     }
-    else if (gBattleMoves[baseMove].split == SPLIT_STATUS)
+    else if (gBattleMoves[baseMove].category == BATTLE_CATEGORY_STATUS)
     {
         move = MOVE_MAX_GUARD;
     }
     else if (gBattleStruct->dynamicMoveType)
     {
         move = GetTypeBasedMaxMove(battlerId, gBattleStruct->dynamicMoveType & DYNAMIC_TYPE_MASK);
-        gBattleStruct->dynamax.splits[battlerId] = gBattleMoves[baseMove].split;
+        gBattleStruct->dynamax.categories[battlerId] = gBattleMoves[baseMove].category;
     }
     else
     {
         move = GetTypeBasedMaxMove(battlerId, gBattleMoves[baseMove].type);
-        gBattleStruct->dynamax.splits[battlerId] = gBattleMoves[baseMove].split;
+        gBattleStruct->dynamax.categories[battlerId] = gBattleMoves[baseMove].category;
     }
 
     return move;

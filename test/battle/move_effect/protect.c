@@ -12,10 +12,10 @@ ASSUMPTIONS
     ASSUME(gBattleMoves[MOVE_QUICK_GUARD].effect == EFFECT_PROTECT);
     ASSUME(gBattleMoves[MOVE_CRAFTY_SHIELD].effect == EFFECT_PROTECT);
     ASSUME(gBattleMoves[MOVE_BANEFUL_BUNKER].effect == EFFECT_PROTECT);
-    ASSUME(gBattleMoves[MOVE_TACKLE].split == SPLIT_PHYSICAL);
+    ASSUME(gBattleMoves[MOVE_TACKLE].category == BATTLE_CATEGORY_PHYSICAL);
     ASSUME(gBattleMoves[MOVE_TACKLE].makesContact);
-    ASSUME(gBattleMoves[MOVE_LEER].split == SPLIT_STATUS);
-    ASSUME(gBattleMoves[MOVE_WATER_GUN].split == SPLIT_SPECIAL);
+    ASSUME(gBattleMoves[MOVE_LEER].category == BATTLE_CATEGORY_STATUS);
+    ASSUME(gBattleMoves[MOVE_WATER_GUN].category == BATTLE_CATEGORY_SPECIAL);
     ASSUME(!(gBattleMoves[MOVE_WATER_GUN].makesContact));
 }
 
@@ -421,7 +421,7 @@ DOUBLE_BATTLE_TEST("Crafty Shield protects self and ally from status moves")
     GIVEN {
         ASSUME(gBattleMoves[MOVE_LEER].target == MOVE_TARGET_BOTH);
         ASSUME(gBattleMoves[MOVE_HYPER_VOICE].target == MOVE_TARGET_BOTH);
-        ASSUME(gBattleMoves[MOVE_HYPER_VOICE].split == SPLIT_SPECIAL);
+        ASSUME(gBattleMoves[MOVE_HYPER_VOICE].category == BATTLE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
