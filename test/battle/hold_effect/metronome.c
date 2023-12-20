@@ -67,7 +67,6 @@ SINGLE_BATTLE_TEST("Metronome Item's boost is reset if the attacker uses a diffe
 SINGLE_BATTLE_TEST("Metronome Item's boost is reset if the move fails")
 {
     s16 damage[2];
-    KNOWN_FAILING; //https://github.com/rh-hideout/pokeemerald-expansion/issues/3251
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_METRONOME); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -110,7 +109,6 @@ SINGLE_BATTLE_TEST("Metronome Item counts charging turn of moves for its attacki
 {
     u32 item;
 
-    KNOWN_FAILING; // https://github.com/rh-hideout/pokeemerald-expansion/issues/3250
     PARAMETRIZE {item = ITEM_NONE; }
     PARAMETRIZE {item = ITEM_METRONOME; }
     GIVEN {
