@@ -106,6 +106,8 @@ static u32 AssignCostToRunner(void)
 
 void CB2_TestRunner(void)
 {
+top:
+
     switch (gTestRunnerState.state)
     {
     case STATE_INIT:
@@ -361,6 +363,9 @@ void CB2_TestRunner(void)
         MgbaExit_(gTestRunnerState.exitCode);
         break;
     }
+
+    if (gMain.callback2 == CB2_TestRunner)
+        goto top;
 }
 
 void Test_ExpectedResult(enum TestResult result)
@@ -651,4 +656,26 @@ static s32 MgbaVPrintf_(const char *fmt, va_list va)
         REG_DEBUG_FLAGS = MGBA_LOG_INFO | 0x100;
     }
     return i;
+}
+
+/* Entry point for the Debugging and Control System. Handles illegal
+ * instructions, which are typically caused by branching to an invalid
+ * address. */
+__attribute__((naked, section(".dacs"), target("arm")))
+void DACSEntry(void)
+{
+    asm(".arm\n\
+         ldr r0, =(DACSHandle + 1)\n\
+         bx r0\n");
+}
+
+#define DACS_LR (*(vu32 *)0x3007FEC)
+
+void DACSHandle(void)
+{
+    if (gTestRunnerState.state == STATE_RUN_TEST)
+        gTestRunnerState.state = STATE_REPORT_RESULT;
+    gTestRunnerState.result = TEST_RESULT_CRASH;
+    ReinitCallbacks();
+    DACS_LR = ((uintptr_t)JumpToAgbMainLoop & ~1) + 4;
 }
