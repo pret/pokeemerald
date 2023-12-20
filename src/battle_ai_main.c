@@ -3075,16 +3075,16 @@ static bool32 IsPinchBerryItemEffect(u32 holdEffect)
     return FALSE;
 }
 
-static u32 CompareMoveAccuracies(u32 battlerAtk, u32 battlerDef, u32 moveSlot1, u32 moveSlot2)
+static s32 CompareMoveAccuracies(u32 battlerAtk, u32 battlerDef, u32 moveSlot1, u32 moveSlot2)
 {
     u32 acc1 = AI_DATA->moveAccuracy[battlerAtk][battlerDef][moveSlot1];
     u32 acc2 = AI_DATA->moveAccuracy[battlerAtk][battlerDef][moveSlot2];
 
     if (acc1 > acc2)
-        return 0;
-    else if (acc2 > acc1)
         return 1;
-    return 2;
+    else if (acc2 > acc1)
+        return -1;
+    return 0;
 }
 
 static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
@@ -3146,19 +3146,19 @@ static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
 
                 switch (CompareMoveAccuracies(battlerAtk, battlerDef, currId, i))
                 {
-                case 0:
+                case 1:
                     viableMoveScores[i] -= 2;
                     break;
-                case 1:
+                case -1:
                     viableMoveScores[currId] -= 2;
                     break;
                 }
                 switch (AI_WhichMoveBetter(moves[currId], moves[i], battlerAtk, battlerDef, noOfHits[currId]))
                 {
-                case 0:
+                case 1:
                     viableMoveScores[i] -= 1;
                     break;
-                case 1:
+                case -1:
                     viableMoveScores[currId] -= 1;
                     break;
                 }
@@ -4367,7 +4367,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             if (IsStatBoostingBerry(item) && aiData->hpPercents[battlerAtk] > 60)
                 ADJUST_SCORE(1);
             else if (ShouldRestoreHpBerry(battlerAtk, item) && !CanAIFaintTarget(battlerAtk, battlerDef, 0)
-              && ((GetWhichBattlerFaster(battlerAtk, battlerDef, TRUE) == 0 && CanTargetFaintAiWithMod(battlerDef, battlerAtk, 0, 0))
+              && ((GetWhichBattlerFaster(battlerAtk, battlerDef, TRUE) == 1 && CanTargetFaintAiWithMod(battlerDef, battlerAtk, 0, 0))
                || !CanTargetFaintAiWithMod(battlerDef, battlerAtk, toHeal, 0)))
                 ADJUST_SCORE(1);    // Recycle healing berry if we can't otherwise faint the target and the target wont kill us after we activate the berry
         }

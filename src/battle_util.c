@@ -883,12 +883,12 @@ void HandleAction_ActionFinished(void)
                 // have been executed before. The only recalculation needed is for moves/switch. Mega evolution is handled in src/battle_main.c/TryChangeOrder
                 if((gActionsByTurnOrder[i] == B_ACTION_USE_MOVE && gActionsByTurnOrder[j] == B_ACTION_USE_MOVE))
                 {
-                    if (GetWhichBattlerFaster(battler1, battler2, FALSE))
+                    if (GetWhichBattlerFaster(battler1, battler2, FALSE) == -1)
                         SwapTurnOrder(i, j);
                 }
                 else if ((gActionsByTurnOrder[i] == B_ACTION_SWITCH && gActionsByTurnOrder[j] == B_ACTION_SWITCH))
                 {
-                    if (GetWhichBattlerFaster(battler1, battler2, TRUE)) // If the actions chosen are switching, we recalc order but ignoring the moves
+                    if (GetWhichBattlerFaster(battler1, battler2, TRUE) == -1) // If the actions chosen are switching, we recalc order but ignoring the moves
                         SwapTurnOrder(i, j);
                 }
             }
@@ -1980,7 +1980,7 @@ u8 DoFieldEndTurnEffects(void)
                 {
                     if (!gProtectStructs[i].quash
                             && !gProtectStructs[j].quash
-                            && GetWhichBattlerFaster(gBattlerByTurnOrder[i], gBattlerByTurnOrder[j], FALSE))
+                            && GetWhichBattlerFaster(gBattlerByTurnOrder[i], gBattlerByTurnOrder[j], FALSE) == -1)
                         SwapTurnOrder(i, j);
                 }
             }

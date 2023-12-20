@@ -2,8 +2,8 @@
 #define GUARD_BATTLE_AI_UTIL_H
 
 // for AI_WhoStrikesFirst
-#define AI_IS_FASTER   0
-#define AI_IS_SLOWER   1
+#define AI_IS_FASTER   1
+#define AI_IS_SLOWER   -1
 
 #define FOE(battler) ((BATTLE_OPPOSITE(battler)) & BIT_SIDE)
 
@@ -30,7 +30,7 @@ bool32 IsTruantMonVulnerable(u32 battlerAI, u32 opposingBattler);
 bool32 AtMaxHp(u32 battler);
 u32 GetHealthPercentage(u32 battler);
 bool32 IsBattlerTrapped(u32 battler, bool32 switching);
-u32 AI_WhoStrikesFirst(u32 battlerAI, u32 battler2, u32 moveConsidered);
+s32 AI_WhoStrikesFirst(u32 battlerAI, u32 battler2, u32 moveConsidered);
 bool32 CanTargetFaintAi(u32 battlerDef, u32 battlerAtk);
 bool32 CanTargetMoveFaintAi(u32 move, u32 battlerDef, u32 battlerAtk, u32 nHits);
 bool32 CanTargetFaintAiWithMod(u32 battlerDef, u32 battlerAtk, s32 hpMod, s32 dmgMod);
@@ -85,7 +85,7 @@ bool32 ShouldLowerEvasion(u32 battlerAtk, u32 battlerDef, u32 defAbility);
 // move checks
 bool32 IsAffectedByPowder(u32 battler, u32 ability, u32 holdEffect);
 bool32 MovesWithCategoryUnusable(u32 attacker, u32 target, u32 category);
-u32 AI_WhichMoveBetter(u32 move1, u32 move2, u32 battlerAtk, u32 battlerDef, s32 noOfHitsToKo);
+s32 AI_WhichMoveBetter(u32 move1, u32 move2, u32 battlerAtk, u32 battlerDef, s32 noOfHitsToKo);
 s32 AI_CalcDamageSaveBattlers(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectiveness, bool32 considerZPower);
 s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectiveness, bool32 considerZPower, u32 weather);
 bool32 AI_IsDamagedByRecoil(u32 battler);
