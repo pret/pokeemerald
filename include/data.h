@@ -28,6 +28,22 @@ struct MonCoords
     u8 y_offset;
 };
 
+struct TrainerSprite
+{
+    u8 y_offset;
+    struct CompressedSpriteSheet frontPic;
+    struct CompressedSpritePalette palette;
+    const union AnimCmd *const *const animation;
+};
+
+struct TrainerBacksprite
+{
+    struct MonCoords coordinates;
+    struct CompressedSpriteSheet backPic;
+    struct CompressedSpritePalette palette;
+    const union AnimCmd *const *const animation;
+};
+
 #define MON_COORDS_SIZE(width, height)(DIV_ROUND_UP(width, 8) << 4 | DIV_ROUND_UP(height, 8))
 #define GET_MON_COORDS_WIDTH(size)((size >> 4) * 8)
 #define GET_MON_COORDS_HEIGHT(size)((size & 0xF) * 8)
@@ -91,15 +107,10 @@ extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteOpponentSide[];
 extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteContest[];
 
 extern const union AnimCmd sAnim_GeneralFrame0[];
+extern const union AnimCmd sAnim_GeneralFrame3[];
 extern const union AnimCmd *const gAnims_MonPic[];
-extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
-extern const struct MonCoords gTrainerFrontPicCoords[];
-extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
-extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
-extern const union AnimCmd *const *const gTrainerBackAnimsPtrTable[];
-extern const struct MonCoords gTrainerBackPicCoords[];
-extern const struct CompressedSpriteSheet gTrainerBackPicTable[]; // functionally unused
-extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
+extern const struct TrainerSprite gTrainerSprites[];
+extern const struct TrainerBacksprite gTrainerBacksprites[];
 
 extern const struct Trainer gTrainers[];
 extern const struct Trainer gBattlePartners[];
