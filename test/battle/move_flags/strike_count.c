@@ -50,7 +50,7 @@ SINGLE_BATTLE_TEST("Surging Strikes hits 3 times with each hit being a critical 
 
     GIVEN {
         ASSUME(gBattleMoves[MOVE_SURGING_STRIKES].strikeCount == 3);
-        ASSUME(gBattleMoves[MOVE_SURGING_STRIKES].critBoost == ALWAYS_CRIT);
+        ASSUME(gBattleMoves[MOVE_SURGING_STRIKES].alwaysCriticalHit == TRUE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

@@ -2721,7 +2721,7 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     } // check partner move effect
 
     // Adjust for always crit moves
-    if (gBattleMoves[aiData->partnerMove].critBoost == ALWAYS_CRIT && aiData->abilities[battlerAtk] == ABILITY_ANGER_POINT)
+    if (gBattleMoves[aiData->partnerMove].alwaysCriticalHit && aiData->abilities[battlerAtk] == ABILITY_ANGER_POINT)
     {
         if (AI_WhoStrikesFirst(battlerAtk, battlerAtkPartner, move) == AI_IS_SLOWER)   // Partner moving first
         {
@@ -4976,7 +4976,7 @@ static s32 AI_Risky(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
         return score;
 
-    if (gBattleMoves[move].critBoost > 0)
+    if (gBattleMoves[move].criticalHitStage > 0)
         ADJUST_SCORE(2);
 
     switch (gBattleMoves[move].effect)

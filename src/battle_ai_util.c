@@ -2236,8 +2236,7 @@ bool32 HasHighCritRatioMove(u32 battler)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && gBattleMoves[moves[i]].critBoost > 0
-            && gBattleMoves[moves[i]].critBoost < ALWAYS_CRIT) // don't count always crit moves
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && gBattleMoves[moves[i]].criticalHitStage > 0)
             return TRUE;
     }
 

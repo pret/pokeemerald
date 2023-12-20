@@ -51,7 +51,7 @@ SINGLE_BATTLE_TEST("Lansat Berry raises the holder's critical-hit-ratio by two s
 {
     PASSES_RANDOMLY(1, 2, RNG_CRITICAL_HIT);
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TACKLE].critBoost == 0);
+        ASSUME(gBattleMoves[MOVE_TACKLE].criticalHitStage == 0);
         ASSUME(B_CRIT_CHANCE >= GEN_6);
         PLAYER(SPECIES_WOBBUFFET) { MaxHP(160); HP(80); Item(ITEM_LANSAT_BERRY); }
         OPPONENT(SPECIES_WOBBUFFET);

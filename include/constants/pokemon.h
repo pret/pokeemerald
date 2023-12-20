@@ -230,9 +230,6 @@
 #define BATTLE_CATEGORY_SPECIAL     1
 #define BATTLE_CATEGORY_STATUS      2
 
-// Just for readability
-#define ALWAYS_CRIT         3
-
 // Growth rates
 #define GROWTH_MEDIUM_FAST  0
 #define GROWTH_ERRATIC      1
