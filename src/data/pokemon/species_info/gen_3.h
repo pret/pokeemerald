@@ -8176,6 +8176,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         PALETTES(DeoxysNormal),
         ICON(DeoxysNormal, 0),
         LEARNSETS(DeoxysNormal),
+        .formChangeTable = sDeoxysNormalFormChangeTable,
     },
 
     [SPECIES_DEOXYS_ATTACK] =
@@ -8199,6 +8200,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         PALETTES(DeoxysAttack),
         ICON(DeoxysAttack, 0),
         LEARNSETS(DeoxysAttack),
+        .formChangeTable = sDeoxysAttackFormChangeTable,
     },
 
     [SPECIES_DEOXYS_DEFENSE] =
@@ -8222,6 +8224,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         PALETTES(DeoxysDefense),
         ICON(DeoxysDefense, 0),
         LEARNSETS(DeoxysDefense),
+        .formChangeTable = sDeoxysDefenseFormChangeTable,
     },
 
     [SPECIES_DEOXYS_SPEED] =
@@ -8245,6 +8248,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         PALETTES(DeoxysSpeed),
         ICON(DeoxysSpeed, 0),
         LEARNSETS(DeoxysSpeed),
+        .formChangeTable = sDeoxysSpeedFormChangeTable,
     },
 #endif //P_FAMILY_DEOXYS
 
