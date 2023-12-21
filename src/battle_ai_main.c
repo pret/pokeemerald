@@ -3705,7 +3705,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
         }
         break;
     case EFFECT_BATON_PASS:
-        if (ShouldSwitch(battlerAtk) && (gBattleMons[battlerAtk].status2 & STATUS2_SUBSTITUTE
+        if (ShouldSwitch(battlerAtk, FALSE) && (gBattleMons[battlerAtk].status2 & STATUS2_SUBSTITUTE
           || (gStatuses3[battlerAtk] & (STATUS3_ROOTED | STATUS3_AQUA_RING | STATUS3_MAGNET_RISE | STATUS3_POWER_TRICK))
           || AnyStatIsRaised(battlerAtk)))
             ADJUST_SCORE(5);

@@ -2544,8 +2544,8 @@ bool32 ShouldPivot(u32 battlerAtk, u32 battlerDef, u32 defAbility, u32 move, u32
     bool32 shouldSwitch;
     u32 battlerToSwitch;
 
-    shouldSwitch = ShouldSwitch(battlerAtk);
-    battlerToSwitch = *(gBattleStruct->AI_monToSwitchIntoId + battlerAtk);
+    shouldSwitch = ShouldSwitch(battlerAtk, FALSE);
+    battlerToSwitch = gBattleStruct->AI_monToSwitchIntoId[battlerAtk];
 
     if (PartyBattlerShouldAvoidHazards(battlerAtk, battlerToSwitch))
         return DONT_PIVOT;
