@@ -280,6 +280,13 @@
  *     GIVEN {
  *         RNGSeed(0xC0DEIDEA);
  *
+ * FLAG_SET(flagId)
+ * Sets the specified flag. Can currently only set one flag at a time.
+ * Cleared between perameters and at the end of the test.
+ * Example:
+ *     GIVEN {
+ *         FLAG_SET(FLAG_SYS_EXAMPLE_FLAG);
+ *
  * PLAYER(species) and OPPONENT(species)
  * Adds the species to the player's or opponent's party respectively.
  * The Pokémon can be further customized with the following functions:
@@ -489,6 +496,7 @@
 #include "constants/battle_ai.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_move_effects.h"
+#include "constants/flags.h"
 #include "constants/hold_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -681,6 +689,7 @@ struct BattleTestData
     struct ExpectedAiScore expectedAiScores[MAX_BATTLERS_COUNT][MAX_TURNS][MAX_AI_SCORE_COMPARISION_PER_TURN]; // Max 4 comparisions per turn
     struct AILogLine aiLogLines[MAX_BATTLERS_COUNT][MAX_MON_MOVES][MAX_AI_LOG_LINES];
     u8 aiLogPrintedForMove[MAX_BATTLERS_COUNT]; // Marks ai score log as printed for move, so the same log isn't displayed multiple times.
+    u16 flagId;
 };
 
 struct BattleTestRunnerState
@@ -818,6 +827,8 @@ struct moveWithPP {
 #define AI_FLAGS(flags) AIFlags_(__LINE__, flags)
 #define AI_LOG AILogScores(__LINE__)
 
+#define FLAG_SET(flagId) SetFlagForTest(__LINE__, flagId)
+
 #define PLAYER(species) for (OpenPokemon(__LINE__, B_SIDE_PLAYER, species); gBattleTestRunnerState->data.currentMon; ClosePokemon(__LINE__))
 #define OPPONENT(species) for (OpenPokemon(__LINE__, B_SIDE_OPPONENT, species); gBattleTestRunnerState->data.currentMon; ClosePokemon(__LINE__))
 
@@ -839,6 +850,8 @@ struct moveWithPP {
 #define Status1(status1) Status1_(__LINE__, status1)
 #define OTName(otName) do {static const u8 otName_[] = _(otName); OTName_(__LINE__, otName_);} while (0)
 
+void SetFlagForTest(u32 sourceLine, u16 flagId);
+void ClearFlagAfterTest(void);
 void OpenPokemon(u32 sourceLine, u32 side, u32 species);
 void ClosePokemon(u32 sourceLine);
 

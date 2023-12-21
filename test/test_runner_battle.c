@@ -4,6 +4,7 @@
 #include "battle_anim.h"
 #include "battle_controllers.h"
 #include "characters.h"
+#include "event_data.h"
 #include "fieldmap.h"
 #include "item_menu.h"
 #include "main.h"
@@ -1339,6 +1340,7 @@ static void CB2_BattleTest_NextParameter(void)
     if (++STATE->runParameter >= STATE->parameters)
     {
         SetMainCallback2(CB2_TestRunner);
+        ClearFlagAfterTest();
     }
     else
     {
@@ -1349,6 +1351,7 @@ static void CB2_BattleTest_NextParameter(void)
 
 static void CB2_BattleTest_NextTrial(void)
 {
+    ClearFlagAfterTest();
     TearDownBattle();
 
     SetMainCallback2(CB2_BattleTest_NextParameter);
@@ -1390,6 +1393,7 @@ static void BattleTest_TearDown(void *data)
 {
     // Free resources that aren't cleaned up when the battle was
     // aborted unexpectedly.
+    ClearFlagAfterTest();
     if (STATE->tearDownBattle)
         TearDownBattle();
 }
@@ -1477,6 +1481,22 @@ const struct TestRunner gBattleTestRunner =
     .checkProgress = BattleTest_CheckProgress,
     .handleExitWithResult = BattleTest_HandleExitWithResult,
 };
+
+void SetFlagForTest(u32 sourceLine, u16 flagId)
+{
+    INVALID_IF(DATA.flagId != 0, "FLAG can only be set once per test");
+    DATA.flagId = flagId;
+    FlagSet(flagId);
+}
+
+void ClearFlagAfterTest(void)
+{
+    if (DATA.flagId != 0) 
+    {
+        FlagClear(DATA.flagId);
+        DATA.flagId = 0;
+    }
+}
 
 void OpenPokemon(u32 sourceLine, u32 side, u32 species)
 {
