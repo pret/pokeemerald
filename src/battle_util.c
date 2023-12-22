@@ -3338,7 +3338,8 @@ bool32 HandleFaintedMonActions(void)
                 && gCurrentTurnActionNumber != gBattlersCount)
             {
                 gAbsentBattlerFlags |= gBitTable[gBattlerFainted];
-                return FALSE;
+                if (gBattleStruct->faintedActionsState != 1)
+                    return FALSE;
             }
             break;
         case 3:
