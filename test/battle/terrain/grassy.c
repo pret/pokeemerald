@@ -18,7 +18,6 @@ SINGLE_BATTLE_TEST("Grassy Terrain recovers 1/16th HP at end of turn")
 SINGLE_BATTLE_TEST("Grassy Terrain activates Grassy Seed and Mimicry")
 {
     GIVEN {
-        ASSUME(P_GEN_8_POKEMON == TRUE);
         ASSUME(gItems[ITEM_GRASSY_SEED].holdEffect == HOLD_EFFECT_SEEDS);
         ASSUME(gItems[ITEM_GRASSY_SEED].holdEffectParam == HOLD_EFFECT_PARAM_GRASSY_TERRAIN);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_GRASSY_SEED); }

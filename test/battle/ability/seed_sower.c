@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Seed Sower sets up Grassy Terrain when hit by an attack")
 {
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_SEED_SOWER); }
+        PLAYER(SPECIES_ARBOLIVA) { Ability(ABILITY_SEED_SOWER); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_TACKLE); }
@@ -16,7 +16,7 @@ SINGLE_BATTLE_TEST("Seed Sower sets up Grassy Terrain when hit by an attack")
     }
 }
 
-#define ABILITY_PARAM(n)(abilities[n] = (k == n) ? ABILITY_SEED_SOWER : ABILITY_SHADOW_TAG)
+#define ABILITY_PARAM(n)(abilities[n] = (k == n) ? ABILITY_SEED_SOWER : ABILITY_HARVEST)
 #define MOVE_HIT(target, position)                      \
 {                                                       \
     HP_BAR(target);                                     \
@@ -52,10 +52,10 @@ DOUBLE_BATTLE_TEST("Multi-target moves hit correct battlers after Seed Sower is 
     GIVEN {
         ASSUME(gBattleMoves[MOVE_HYPER_VOICE].target == MOVE_TARGET_BOTH);
         ASSUME(gBattleMoves[MOVE_SURF].target == MOVE_TARGET_FOES_AND_ALLY);
-        PLAYER(SPECIES_WYNAUT) { Ability(abilities[B_POSITION_PLAYER_LEFT]); }
-        PLAYER(SPECIES_WOBBUFFET) { Ability(abilities[B_POSITION_PLAYER_RIGHT]); }
-        OPPONENT(SPECIES_WYNAUT) { Ability(abilities[B_POSITION_OPPONENT_LEFT]); }
-        OPPONENT(SPECIES_WOBBUFFET) { Ability(abilities[B_POSITION_OPPONENT_RIGHT]); }
+        PLAYER(SPECIES_ARBOLIVA) { Ability(abilities[B_POSITION_PLAYER_LEFT]); }
+        PLAYER(SPECIES_ARBOLIVA) { Ability(abilities[B_POSITION_PLAYER_RIGHT]); }
+        OPPONENT(SPECIES_ARBOLIVA) { Ability(abilities[B_POSITION_OPPONENT_LEFT]); }
+        OPPONENT(SPECIES_ARBOLIVA) { Ability(abilities[B_POSITION_OPPONENT_RIGHT]); }
     } WHEN {
         TURN {
             MOVE(opponentLeft, (attacker == B_POSITION_OPPONENT_LEFT) ? usedMove : MOVE_CELEBRATE);

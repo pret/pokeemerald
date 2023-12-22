@@ -5,8 +5,8 @@ ASSUMPTIONS
 {
     ASSUME(gBattleMoves[MOVE_TACKLE].power != 0);
     ASSUME(gBattleMoves[MOVE_GUST].power != 0);
-    ASSUME(gBattleMoves[MOVE_GUST].split == SPLIT_SPECIAL);
-    ASSUME(gBattleMoves[MOVE_TACKLE].split == SPLIT_PHYSICAL);
+    ASSUME(gBattleMoves[MOVE_GUST].category == BATTLE_CATEGORY_SPECIAL);
+    ASSUME(gBattleMoves[MOVE_TACKLE].category == BATTLE_CATEGORY_PHYSICAL);
     ASSUME(B_WEAK_ARMOR_SPEED >= GEN_7);
 }
 

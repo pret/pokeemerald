@@ -1,11 +1,6 @@
 #include "global.h"
 #include "test/battle.h"
 
-ASSUMPTIONS
-{
-    ASSUME(P_GEN_7_POKEMON == TRUE); // Because only Ultra Beasts have this ability
-}
-
 SINGLE_BATTLE_TEST("Beast Boost boosts the most proficient stat when knocking out a target")
 {
     u8 stats[] = {1, 1, 1, 1, 1};

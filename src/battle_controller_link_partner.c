@@ -28,6 +28,7 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "recorded_battle.h"
+#include "random.h"
 
 static void LinkPartnerHandleLoadMonSprite(u32 battler);
 static void LinkPartnerHandleSwitchInAnim(u32 battler);
@@ -234,7 +235,7 @@ static void LinkPartnerHandleDrawTrainerPic(u32 battler)
 
     trainerPicId = LinkPlayerGetTrainerPicId(GetBattlerMultiplayerId(battler));
     BtlController_HandleDrawTrainerPic(battler, trainerPicId, FALSE,
-                                       xPos, 80 + 4 * (8 - gTrainerBackPicCoords[trainerPicId].size),
+                                       xPos, 80 + 4 * (8 - gTrainerBacksprites[trainerPicId].coordinates.size),
                                        -1);
 }
 
@@ -261,7 +262,7 @@ static void LinkPartnerHandleHealthBarUpdate(u32 battler)
 static void LinkPartnerHandleIntroTrainerBallThrow(u32 battler)
 {
     u32 trainerPicId = LinkPlayerGetTrainerPicId(GetBattlerMultiplayerId(battler));
-    const u32 *trainerPal = gTrainerBackPicPaletteTable[trainerPicId].data;
+    const u32 *trainerPal = gTrainerBacksprites[trainerPicId].palette.data;
     // Link partner uses the same intro sequence as the player partner.
     BtlController_HandleIntroTrainerBallThrow(battler, 0xD6F9, trainerPal, 24, Controller_PlayerPartnerShowIntroHealthbox);
 }

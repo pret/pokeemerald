@@ -205,7 +205,6 @@ SINGLE_BATTLE_TEST("Embargo doesn't stop an item flung at an affected target fro
 
 SINGLE_BATTLE_TEST("Embargo is passed via Baton Pass")
 {
-    KNOWN_FAILING; // Embargo is currently being lifted right after a Baton Pass when it shouldn't.
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT) { Item(ITEM_LIGHT_BALL); };
@@ -336,9 +335,6 @@ SINGLE_BATTLE_TEST("Embargo can be reflected by Magic Coat")
 
 SINGLE_BATTLE_TEST("Embargo doesn't prevent Mega Evolution")
 {
-    // Embargo is currently being lifted right after a Baton Pass when it shouldn't.
-    // As a result, we can't check if Embargo is letting the opponent Mega Evolve normally or not.
-    KNOWN_FAILING;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -346,6 +342,7 @@ SINGLE_BATTLE_TEST("Embargo doesn't prevent Mega Evolution")
     } WHEN {
         TURN { MOVE(player, MOVE_EMBARGO); }
         TURN { MOVE(opponent, MOVE_BATON_PASS); SEND_OUT(opponent, 1); }
+        TURN { MOVE(opponent, MOVE_CELEBRATE, megaEvolve: TRUE); }
     } SCENE {
         // Turn 1
         MESSAGE("Wobbuffet used Embargo!");
@@ -354,6 +351,7 @@ SINGLE_BATTLE_TEST("Embargo doesn't prevent Mega Evolution")
         MESSAGE("Foe Wobbuffet used Baton Pass!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BATON_PASS, opponent);
         MESSAGE("2 sent out Charizard!");
+        // Turn 3
         MESSAGE("Foe Charizard's CharizarditeY is reacting to 2's Mega Ring!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, opponent);
         MESSAGE("Foe Charizard has Mega Evolved into Mega Charizard!");
@@ -362,9 +360,6 @@ SINGLE_BATTLE_TEST("Embargo doesn't prevent Mega Evolution")
 
 SINGLE_BATTLE_TEST("Embargo doesn't prevent Primal Reversion")
 {
-    // Embargo is currently being lifted right after a Baton Pass when it shouldn't.
-    // As a result, we can't check if Embargo is letting the opponent undergo Primal Reversion normally or not.
-    KNOWN_FAILING;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -384,7 +379,6 @@ SINGLE_BATTLE_TEST("Embargo doesn't prevent Primal Reversion")
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_PRIMAL_REVERSION, opponent);
         MESSAGE("Foe Groudon's Primal Reversion! It reverted to its primal form!");
         ABILITY_POPUP(opponent);
-        MESSAGE("The extremely harsh sunlight was not lessened at all!!");
         // Turn 3
         MESSAGE("Foe Groudon used Fling!");
         MESSAGE("But it failed!");

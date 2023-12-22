@@ -9,6 +9,7 @@
 #include "scanline_effect.h"
 #include "task.h"
 #include "trig.h"
+#include "constants/battle_partner.h"
 #include "constants/trainers.h"
 
 extern const u8 gBattleAnimBgCntSet[];
@@ -104,7 +105,7 @@ void HandleIntroSlide(u8 terrain)
 {
     u8 taskId;
 
-    if ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) && gPartnerTrainerId != TRAINER_STEVEN_PARTNER && gPartnerTrainerId < TRAINER_CUSTOM_PARTNER)
+    if ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) && gPartnerTrainerId < TRAINER_PARTNER(PARTNER_NONE))
     {
         taskId = CreateTask(BattleIntroSlidePartner, 0);
     }

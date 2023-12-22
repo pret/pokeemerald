@@ -129,7 +129,7 @@
  *        PARAMETRIZE { raiseAttack = FALSE; }
  *        PARAMETRIZE { raiseAttack = TRUE; }
  *        GIVEN {
- *            ASSUME(gBattleMoves[MOVE_TACKLE].split == SPLIT_PHYSICAL);
+ *            ASSUME(gBattleMoves[MOVE_TACKLE].category == BATTLE_CATEGORY_PHYSICAL);
  *            PLAYER(SPECIES_WOBBUFFET);
  *            OPPONENT(SPECIES_WOBBUFFET);
  *        } WHEN {
@@ -176,7 +176,7 @@
  * Pokémon we can observe the damage of a physical attack with and
  * without the burn. To document that this test assumes the attack is
  * physical we can use:
- *     ASSUME(gBattleMoves[MOVE_WHATEVER].split == SPLIT_PHYSICAL);
+ *     ASSUME(gBattleMoves[MOVE_WHATEVER].category == BATTLE_CATEGORY_PHYSICAL);
  *
  * ASSUMPTIONS
  * Should be placed immediately after any #includes and contain any
@@ -279,6 +279,13 @@
  * Example:
  *     GIVEN {
  *         RNGSeed(0xC0DEIDEA);
+ *
+ * FLAG_SET(flagId)
+ * Sets the specified flag. Can currently only set one flag at a time.
+ * Cleared between perameters and at the end of the test.
+ * Example:
+ *     GIVEN {
+ *         FLAG_SET(FLAG_SYS_EXAMPLE_FLAG);
  *
  * PLAYER(species) and OPPONENT(species)
  * Adds the species to the player's or opponent's party respectively.
@@ -489,6 +496,7 @@
 #include "constants/battle_ai.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_move_effects.h"
+#include "constants/flags.h"
 #include "constants/hold_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -681,6 +689,7 @@ struct BattleTestData
     struct ExpectedAiScore expectedAiScores[MAX_BATTLERS_COUNT][MAX_TURNS][MAX_AI_SCORE_COMPARISION_PER_TURN]; // Max 4 comparisions per turn
     struct AILogLine aiLogLines[MAX_BATTLERS_COUNT][MAX_MON_MOVES][MAX_AI_LOG_LINES];
     u8 aiLogPrintedForMove[MAX_BATTLERS_COUNT]; // Marks ai score log as printed for move, so the same log isn't displayed multiple times.
+    u16 flagId;
 };
 
 struct BattleTestRunnerState
@@ -818,6 +827,8 @@ struct moveWithPP {
 #define AI_FLAGS(flags) AIFlags_(__LINE__, flags)
 #define AI_LOG AILogScores(__LINE__)
 
+#define FLAG_SET(flagId) SetFlagForTest(__LINE__, flagId)
+
 #define PLAYER(species) for (OpenPokemon(__LINE__, B_SIDE_PLAYER, species); gBattleTestRunnerState->data.currentMon; ClosePokemon(__LINE__))
 #define OPPONENT(species) for (OpenPokemon(__LINE__, B_SIDE_OPPONENT, species); gBattleTestRunnerState->data.currentMon; ClosePokemon(__LINE__))
 
@@ -839,10 +850,12 @@ struct moveWithPP {
 #define Status1(status1) Status1_(__LINE__, status1)
 #define OTName(otName) do {static const u8 otName_[] = _(otName); OTName_(__LINE__, otName_);} while (0)
 
+void SetFlagForTest(u32 sourceLine, u16 flagId);
+void ClearFlagAfterTest(void);
 void OpenPokemon(u32 sourceLine, u32 side, u32 species);
 void ClosePokemon(u32 sourceLine);
 
-void RNGSeed_(u32 sourceLine, u32 seed);
+void RNGSeed_(u32 sourceLine, rng_value_t seed);
 void AIFlags_(u32 sourceLine, u32 flags);
 void AILogScores(u32 sourceLine);
 void Gender_(u32 sourceLine, u32 gender);
@@ -1063,7 +1076,7 @@ void ValidateFinally(u32 sourceLine);
     { \
         s32 _a = (a), _m = (m), _b = (b); \
         s32 _am = Q_4_12_TO_INT(_a * _m); \
-        s32 _t = Q_4_12_TO_INT(abs(_m) + Q_4_12_ROUND); \
+        s32 _t = max(Q_4_12_TO_INT(abs(_m) + Q_4_12_ROUND), 1); \
         if (abs(_am-_b) > _t) \
             Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: EXPECT_MUL_EQ(%d, %q, %d) failed: %d not in [%d..%d]", gTestRunnerState.test->filename, __LINE__, _a, _m, _b, _am, _b-_t, _b+_t); \
     } while (0)

@@ -193,13 +193,13 @@ struct Pokemon *GetIllusionMonPtr(u32 battler);
 void ClearIllusionMon(u32 battler);
 bool32 SetIllusionMon(struct Pokemon *mon, u32 battler);
 bool32 ShouldGetStatBadgeBoost(u16 flagId, u32 battler);
-u8 GetBattleMoveSplit(u32 moveId);
+u8 GetBattleMoveCategory(u32 moveId);
 bool32 CanFling(u32 battler);
 bool32 IsTelekinesisBannedSpecies(u16 species);
 bool32 IsHealBlockPreventingMove(u32 battler, u32 move);
 bool32 HasEnoughHpToEatBerry(u32 battler, u32 hpFraction, u32 itemId);
 bool32 IsPartnerMonFromSameTrainer(u32 battler);
-u8 GetSplitBasedOnStats(u32 battler);
+u8 GetCategoryBasedOnStats(u32 battler);
 bool32 TestSheerForceFlag(u32 battler, u16 move);
 void TryRestoreHeldItems(void);
 bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item);
@@ -223,13 +223,14 @@ bool32 IsAlly(u32 battlerAtk, u32 battlerDef);
 bool32 IsGen6ExpShareEnabled(void);
 
 // Ability checks
-bool32 IsRolePlayBannedAbilityAtk(u16 ability);
-bool32 IsRolePlayBannedAbility(u16 ability);
 bool32 IsSkillSwapBannedAbility(u16 ability);
+bool32 IsRolePlayDoodleBannedAbility(u16 ability);
+bool32 IsRolePlayDoodleBannedAbilityAttacker(u16 ability);
 bool32 IsWorrySeedBannedAbility(u16 ability);
 bool32 IsGastroAcidBannedAbility(u16 ability);
+bool32 IsEntrainmentBannedAbility(u16 ability);
 bool32 IsEntrainmentBannedAbilityAttacker(u16 ability);
-bool32 IsEntrainmentTargetOrSimpleBeamBannedAbility(u16 ability);
+bool32 IsSimpleBeamBannedAbility(u16 ability);
 
 bool32 CanSleep(u32 battler);
 bool32 CanBePoisoned(u32 battlerAttacker, u32 battlerTarget);

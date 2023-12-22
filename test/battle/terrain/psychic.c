@@ -21,7 +21,6 @@ SINGLE_BATTLE_TEST("Psychic Terrain protects grounded battlers from priority mov
 SINGLE_BATTLE_TEST("Psychic Terrain activates Psychic Seed and Mimicry")
 {
     GIVEN {
-        ASSUME(P_GEN_8_POKEMON == TRUE);
         ASSUME(gItems[ITEM_PSYCHIC_SEED].holdEffect == HOLD_EFFECT_SEEDS);
         ASSUME(gItems[ITEM_PSYCHIC_SEED].holdEffectParam == HOLD_EFFECT_PARAM_PSYCHIC_TERRAIN);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_PSYCHIC_SEED); }

@@ -2920,7 +2920,7 @@ void BufferStringBattle(u16 stringID, u32 battler)
         }
         break;
     case STRINGID_USEDMOVE: // pokemon used a move msg
-        if (gBattleStruct->zmove.active && gBattleStruct->zmove.activeSplit != SPLIT_STATUS)
+        if (gBattleStruct->zmove.active && gBattleStruct->zmove.activeCategory != BATTLE_CATEGORY_STATUS)
             StringCopy(gBattleTextBuff3, GetZMoveName(gBattleMsgDataPtr->currentMove));
         else if (IsMaxMove(gBattleMsgDataPtr->currentMove))
             StringCopy(gBattleTextBuff3, GetMaxMoveName(gBattleMsgDataPtr->currentMove));

@@ -134,7 +134,7 @@ void SetBattlerSpriteYOffsetFromRotation(u8 spriteId);
 u32 GetBattlePalettesMask(bool8 battleBackground, bool8 attacker, bool8 target, bool8 attackerPartner, bool8 targetPartner, bool8 anim1, bool8 anim2);
 u32 GetBattleMonSpritePalettesMask(u8 playerLeft, u8 playerRight, u8 opponentLeft, u8 opponentRight);
 u8 GetSpritePalIdxByBattler(u8 battler);
-s16 CloneBattlerSpriteWithBlend(u8);
+s16 CloneBattlerSpriteWithBlend(u8 animBattler);
 void DestroySpriteWithActiveSheet(struct Sprite *);
 u8 CreateInvisibleSpriteCopy(int, u8, int);
 void AnimLoadCompressedBgTilemapHandleContest(struct BattleAnimBgData *, const void *, bool32);

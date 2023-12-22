@@ -1,11 +1,6 @@
 #include "global.h"
 #include "test/battle.h"
 
-ASSUMPTIONS
-{
-    ASSUME(P_GEN_4_POKEMON == TRUE); // Because only Darkrai can have this ability.
-}
-
 // Also checks that non-sleeping enemy is not affected.
 SINGLE_BATTLE_TEST("Bad Dreams causes the sleeping enemy Pokemon to lose 1/8 of hp")
 {

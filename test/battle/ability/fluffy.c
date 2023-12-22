@@ -8,7 +8,6 @@ ASSUMPTIONS
     ASSUME(gBattleMoves[MOVE_TACKLE].makesContact);
     ASSUME(gBattleMoves[MOVE_FIRE_PUNCH].makesContact);
     ASSUME(gBattleMoves[MOVE_FIRE_PUNCH].type == TYPE_FIRE);
-    ASSUME(P_GEN_7_POKEMON == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Fluffy halves damage taken from moves that make direct contact", s16 damage)

@@ -4,7 +4,7 @@
 ASSUMPTIONS
 {
     ASSUME(gItems[ITEM_KEE_BERRY].holdEffect == HOLD_EFFECT_KEE_BERRY);
-    ASSUME(gBattleMoves[MOVE_TACKLE].split == SPLIT_PHYSICAL);
+    ASSUME(gBattleMoves[MOVE_TACKLE].category == BATTLE_CATEGORY_PHYSICAL);
 }
 
 SINGLE_BATTLE_TEST("Kee Berry raises the holder's Defense by one stage when hit by a physical move")
@@ -15,7 +15,7 @@ SINGLE_BATTLE_TEST("Kee Berry raises the holder's Defense by one stage when hit 
     PARAMETRIZE { move = MOVE_TACKLE; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SWIFT].split == SPLIT_SPECIAL);
+        ASSUME(gBattleMoves[MOVE_SWIFT].category == BATTLE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_KEE_BERRY); }
     } WHEN {
@@ -41,7 +41,6 @@ SINGLE_BATTLE_TEST("Kee Berry raises the holder's Defense by one stage when hit 
 SINGLE_BATTLE_TEST("Kee Berry raises the holder's Defense by two stages with Ripen when hit by a physical move")
 {
     GIVEN {
-        ASSUME(P_GEN_8_POKEMON == TRUE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_APPLIN) { Item(ITEM_KEE_BERRY); Ability(ABILITY_RIPEN); }
     } WHEN {
@@ -59,7 +58,7 @@ SINGLE_BATTLE_TEST("Kee Berry raises the holder's Defense by two stages with Rip
 SINGLE_BATTLE_TEST("Kee Berry is not triggered by a special move")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SWIFT].split == SPLIT_SPECIAL);
+        ASSUME(gBattleMoves[MOVE_SWIFT].category == BATTLE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_KEE_BERRY); }
     } WHEN {
