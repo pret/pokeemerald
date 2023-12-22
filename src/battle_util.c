@@ -976,6 +976,8 @@ static const u8 sAbilitiesAffectedByMoldBreaker[] =
     [ABILITY_GOOD_AS_GOLD] = 1,
     [ABILITY_PURIFYING_SALT] = 1,
     [ABILITY_WELL_BAKED_BODY] = 1,
+    [ABILITY_MINDS_EYE] = 1,
+    [ABILITY_ILLUMINATE] = 1,
 };
 
 static const u8 sAbilitiesNotTraced[ABILITIES_COUNT] =
@@ -9984,6 +9986,7 @@ s32 CalculateMoveDamageVars(u32 move, u32 battlerAtk, u32 battlerDef, u32 moveTy
 static inline void MulByTypeEffectiveness(uq4_12_t *modifier, u32 move, u32 moveType, u32 battlerDef, u32 defType, u32 battlerAtk, bool32 recordAbilities)
 {
     uq4_12_t mod = GetTypeModifier(moveType, defType);
+    u32 abilityAtk = GetBattlerAbility(battlerAtk);
 
     if (mod == UQ_4_12(0.0) && GetBattlerHoldEffect(battlerDef, TRUE) == HOLD_EFFECT_RING_TARGET)
     {
@@ -9995,11 +9998,13 @@ static inline void MulByTypeEffectiveness(uq4_12_t *modifier, u32 move, u32 move
     {
         mod = UQ_4_12(1.0);
     }
-    else if ((moveType == TYPE_FIGHTING || moveType == TYPE_NORMAL) && defType == TYPE_GHOST && GetBattlerAbility(battlerAtk) == ABILITY_SCRAPPY && mod == UQ_4_12(0.0))
+    else if ((moveType == TYPE_FIGHTING || moveType == TYPE_NORMAL) && defType == TYPE_GHOST
+        && (abilityAtk == ABILITY_SCRAPPY || abilityAtk == ABILITY_MINDS_EYE)
+        && mod == UQ_4_12(0.0))
     {
         mod = UQ_4_12(1.0);
         if (recordAbilities)
-            RecordAbilityBattle(battlerAtk, ABILITY_SCRAPPY);
+            RecordAbilityBattle(battlerAtk, abilityAtk);
     }
 
     if (moveType == TYPE_PSYCHIC && defType == TYPE_DARK && gStatuses3[battlerDef] & STATUS3_MIRACLE_EYED && mod == UQ_4_12(0.0))

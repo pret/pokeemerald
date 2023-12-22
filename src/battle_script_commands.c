@@ -1547,7 +1547,7 @@ static bool32 AccuracyCalcHelper(u16 move)
         return TRUE;
     }
     // If the attacker has the ability No Guard and they aren't targeting a Pokemon involved in a Sky Drop with the move Sky Drop, move hits.
-    else if (GetBattlerAbility(gBattlerAttacker) == ABILITY_NO_GUARD && (move != MOVE_SKY_DROP || gBattleStruct->skyDropTargets[gBattlerTarget] == 0xFF))
+    else if (GetBattlerAbility(gBattlerTarget) == ABILITY_NO_GUARD && (move != MOVE_SKY_DROP || gBattleStruct->skyDropTargets[gBattlerTarget] == 0xFF))
     {
         if (!JumpIfMoveFailed(7, move))
             RecordAbilityBattle(gBattlerAttacker, ABILITY_NO_GUARD);
@@ -1636,7 +1636,8 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
     gPotentialItemEffectBattler = battlerDef;
     accStage = gBattleMons[battlerAtk].statStages[STAT_ACC];
     evasionStage = gBattleMons[battlerDef].statStages[STAT_EVASION];
-    if (atkAbility == ABILITY_UNAWARE || atkAbility == ABILITY_KEEN_EYE || (B_ILLUMINATE_EFFECT >= GEN_9 && atkAbility == ABILITY_ILLUMINATE))
+    if (atkAbility == ABILITY_UNAWARE || atkAbility == ABILITY_KEEN_EYE || atkAbility == ABILITY_MINDS_EYE
+            || (B_ILLUMINATE_EFFECT >= GEN_9 && atkAbility == ABILITY_ILLUMINATE))
         evasionStage = DEFAULT_STAT_STAGE;
     if (gBattleMoves[move].ignoresTargetDefenseEvasionStages)
         evasionStage = DEFAULT_STAT_STAGE;
@@ -5080,7 +5081,7 @@ static void Cmd_playstatchangeanimation(void)
                         && ability != ABILITY_CLEAR_BODY
                         && ability != ABILITY_FULL_METAL_BODY
                         && ability != ABILITY_WHITE_SMOKE
-                        && !(ability == ABILITY_KEEN_EYE && currStat == STAT_ACC)
+                        && !((ability == ABILITY_KEEN_EYE || ability == ABILITY_MINDS_EYE) && currStat == STAT_ACC)
                         && !(B_ILLUMINATE_EFFECT >= GEN_9 && ability == ABILITY_ILLUMINATE && currStat == STAT_ACC)
                         && !(ability == ABILITY_HYPER_CUTTER && currStat == STAT_ATK)
                         && !(ability == ABILITY_BIG_PECKS && currStat == STAT_DEF))
@@ -11355,7 +11356,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
             return STAT_CHANGE_DIDNT_WORK;
         }
         else if (!certain
-                && ((battlerAbility == ABILITY_KEEN_EYE && statId == STAT_ACC)
+                && (((battlerAbility == ABILITY_KEEN_EYE || battlerAbility == ABILITY_MINDS_EYE) && statId == STAT_ACC)
                 || (B_ILLUMINATE_EFFECT >= GEN_9 && battlerAbility == ABILITY_ILLUMINATE && statId == STAT_ACC)
                 || (battlerAbility == ABILITY_HYPER_CUTTER && statId == STAT_ATK)
                 || (battlerAbility == ABILITY_BIG_PECKS && statId == STAT_DEF)))
