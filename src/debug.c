@@ -2144,7 +2144,7 @@ static void DebugAction_Util_Player_Gender(u8 taskId)
 
 static void DebugAction_Util_Player_Id(u8 taskId)
 {
-    u32 trainerId = ((Random() << 16) | Random());
+    u32 trainerId = Random32();
     SetTrainerId(trainerId, gSaveBlock2Ptr->playerTrainerId);
     Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();

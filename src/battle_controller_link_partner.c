@@ -28,6 +28,7 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "recorded_battle.h"
+#include "random.h"
 
 static void LinkPartnerHandleLoadMonSprite(u32 battler);
 static void LinkPartnerHandleSwitchInAnim(u32 battler);
