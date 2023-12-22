@@ -9257,7 +9257,7 @@ static void Cmd_various(void)
     case VARIOUS_SET_SIMPLE_BEAM:
     {
         VARIOUS_ARGS(const u8 *failInstr);
-        if (IsEntrainmentTargetOrSimpleBeamBannedAbility(gBattleMons[gBattlerTarget].ability)
+        if (IsSimpleBeamBannedAbility(gBattleMons[gBattlerTarget].ability)
             || gBattleMons[gBattlerTarget].ability == ABILITY_SIMPLE)
         {
             RecordAbilityBattle(gBattlerTarget, gBattleMons[gBattlerTarget].ability);
@@ -9282,7 +9282,7 @@ static void Cmd_various(void)
     {
         VARIOUS_ARGS(const u8 *failInstr);
         if (IsEntrainmentBannedAbilityAttacker(gBattleMons[gBattlerAttacker].ability)
-          || IsEntrainmentTargetOrSimpleBeamBannedAbility(gBattleMons[gBattlerTarget].ability))
+          || IsEntrainmentBannedAbility(gBattleMons[gBattlerTarget].ability))
         {
             RecordAbilityBattle(gBattlerTarget, gBattleMons[gBattlerTarget].ability);
             gBattlescriptCurrInstr = cmd->failInstr;
@@ -13875,24 +13875,25 @@ static void Cmd_tryswapitems(void)
     }
 }
 
-// Role Play
+// Role Play, Doodle
 static void Cmd_trycopyability(void)
 {
-    CMD_ARGS(const u8 *failInstr);
+    CMD_ARGS(u8 battler, const u8 *failInstr);
 
+    u32 battler = GetBattlerForBattleScript(cmd->battler);
     u16 defAbility = gBattleMons[gBattlerTarget].ability;
 
-    if (gBattleMons[gBattlerAttacker].ability == defAbility
+    if (gBattleMons[battler].ability == defAbility
       || defAbility == ABILITY_NONE
-      || IsRolePlayBannedAbilityAtk(gBattleMons[gBattlerAttacker].ability)
-      || IsRolePlayBannedAbility(defAbility))
+      || IsRolePlayDoodleBannedAbilityAttacker(gBattleMons[battler].ability)
+      || IsRolePlayDoodleBannedAbility(defAbility))
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
     else
     {
-        gBattleScripting.abilityPopupOverwrite = gBattleMons[gBattlerAttacker].ability;
-        gBattleMons[gBattlerAttacker].ability = gBattleStruct->overwrittenAbilities[gBattlerAttacker] = defAbility;
+        gBattleScripting.abilityPopupOverwrite = gBattleMons[battler].ability;
+        gBattleMons[battler].ability = gBattleStruct->overwrittenAbilities[battler] = defAbility;
         gLastUsedAbility = defAbility;
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
