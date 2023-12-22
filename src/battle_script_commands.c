@@ -6166,6 +6166,35 @@ static void Cmd_switchindataupdate(void)
     for (i = 0; i < sizeof(struct BattlePokemon); i++)
         monData[i] = gBattleResources->bufferB[battler][4 + i];
 
+    // Edge case: the sent out pokemon has 0 HP. This should never happen.
+    if (gBattleMons[battler].hp == 0)
+    {
+        // If it's a test, mark it as invalid.
+        if (gTestRunnerEnabled)
+        {
+            TestRunner_Battle_InvalidNoHPMon(battler, gBattlerPartyIndexes[battler]);
+        }
+        // Handle in-game scenario.
+        else
+        {
+            struct Pokemon *party = GetBattlerParty(battler);
+            // Find the first possible replacement for the not valid pokemon.
+            for (i = 0; i < PARTY_SIZE; i++)
+            {
+                if (IsValidForBattle(&party[i]))
+                    break;
+            }
+            // There is valid replacement.
+            if (i != PARTY_SIZE)
+            {
+                gBattlerPartyIndexes[battler] = gBattleStruct->monToSwitchIntoId[battler] = i;
+                BtlController_EmitGetMonData(battler, BUFFER_A, REQUEST_ALL_BATTLE, gBitTable[gBattlerPartyIndexes[battler]]);
+                MarkBattlerForControllerExec(battler);
+                return;
+            }
+        }
+    }
+
     gBattleMons[battler].type1 = gSpeciesInfo[gBattleMons[battler].species].types[0];
     gBattleMons[battler].type2 = gSpeciesInfo[gBattleMons[battler].species].types[1];
     gBattleMons[battler].type3 = TYPE_MYSTERY;
