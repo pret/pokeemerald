@@ -2543,22 +2543,22 @@ static u16 GetBerryPestSpecies(u8 berryId)
     switch(berry->color)
     {
         case BERRY_COLOR_RED:
-            return SPECIES_LEDYBA;
+            return P_FAMILY_LEDYBA ? SPECIES_LEDYBA : SPECIES_NONE;
             break;
         case BERRY_COLOR_BLUE:
-            return SPECIES_VOLBEAT;
+            return P_FAMILY_VOLBEAT_ILLUMISE ? SPECIES_VOLBEAT : SPECIES_NONE;
             break;
         case BERRY_COLOR_PURPLE:
-            return SPECIES_ILLUMISE;
+            return P_FAMILY_VOLBEAT_ILLUMISE ? SPECIES_ILLUMISE : SPECIES_NONE;
             break;
         case BERRY_COLOR_GREEN:
-            return SPECIES_BURMY_PLANT_CLOAK;
+            return P_FAMILY_BURMY ? SPECIES_BURMY_PLANT_CLOAK : SPECIES_NONE;
             break;
         case BERRY_COLOR_YELLOW:
-            return SPECIES_COMBEE;
+            return P_FAMILY_COMBEE ? SPECIES_COMBEE : SPECIES_NONE;
             break;
         case BERRY_COLOR_PINK:
-            return SPECIES_SPEWPA;
+            return P_FAMILY_SCATTERBUG ? SPECIES_SPEWPA : SPECIES_NONE;
             break;
     }
 #endif
