@@ -1182,28 +1182,8 @@ BattleScript_EffectShellSideArm:
 	goto BattleScript_EffectHit
 
 BattleScript_EffectPhotonGeyser:
-	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	attackstring
-	ppreduce
-	critcalc
-	damagecalc
-	adjustdamage
-	photongeysercheck BS_ATTACKER
-	attackanimation
-	waitanimation
-	effectivenesssound
-	hitanimation BS_TARGET
-	waitstate
-	healthbarupdate BS_TARGET
-	datahpupdate BS_TARGET
-	critmessage
-	waitmessage B_WAIT_TIME_LONG
-	resultmessage
-	waitmessage B_WAIT_TIME_LONG
-	seteffectwithchance
-	tryfaintmon BS_TARGET
-	goto BattleScript_MoveEnd
+	setphotongeysercategory
+	goto BattleScript_EffectHit
 
 BattleScript_EffectAuraWheel: @ Aura Wheel can only be used by Morpeko
 	jumpifspecies BS_ATTACKER, SPECIES_MORPEKO_FULL_BELLY, BattleScript_EffectSpeedUpHit
