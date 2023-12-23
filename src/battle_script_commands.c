@@ -2933,12 +2933,27 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 RESET_RETURN
             }
 
+            if (B_STATUS_TYPE_IMMUNITY == GEN_1)
+            {
+                u8 moveType = 0;
+                GET_MOVE_TYPE(gCurrentMove, moveType);
+                if (primary == FALSE && certain != MOVE_EFFECT_CERTAIN && IS_BATTLER_OF_TYPE(gEffectBattler, moveType))
+                    break;
+            }
+
             if (!CanBeBurned(gEffectBattler))
                 break;
 
             statusChanged = TRUE;
             break;
         case STATUS1_FREEZE:
+            if (B_STATUS_TYPE_IMMUNITY == GEN_1)
+            {
+                u8 moveType = 0;
+                GET_MOVE_TYPE(gCurrentMove, moveType);
+                if (primary == FALSE && certain != MOVE_EFFECT_CERTAIN && IS_BATTLER_OF_TYPE(gEffectBattler, moveType))
+                    break;
+            }
             if (!CanBeFrozen(gEffectBattler))
                 break;
 
@@ -2970,6 +2985,13 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     RESET_RETURN
                 }
                 else
+                    break;
+            }
+            if (B_STATUS_TYPE_IMMUNITY == GEN_1)
+            {
+                u8 moveType = 0;
+                GET_MOVE_TYPE(gCurrentMove, moveType);
+                if (primary == FALSE && certain != MOVE_EFFECT_CERTAIN && IS_BATTLER_OF_TYPE(gEffectBattler, moveType))
                     break;
             }
             if (!CanParalyzeType(gBattleScripting.battler, gEffectBattler)
@@ -3036,6 +3058,13 @@ void SetMoveEffect(bool32 primary, u32 certain)
             }
             break;
         case STATUS1_FROSTBITE:
+            if (B_STATUS_TYPE_IMMUNITY == GEN_1)
+            {
+                u8 moveType = 0;
+                GET_MOVE_TYPE(gCurrentMove, moveType);
+                if (primary == FALSE && certain != MOVE_EFFECT_CERTAIN && IS_BATTLER_OF_TYPE(gEffectBattler, moveType))
+                    break;
+            }
             if (!CanGetFrostbite(gEffectBattler))
                 break;
 
