@@ -46,6 +46,7 @@
 #define B_PRANKSTER_DARK_TYPES      GEN_LATEST // In Gen7+, Prankster-elevated status moves do not affect Dark type Pokémon.
 #define B_SHEER_COLD_IMMUNITY       GEN_LATEST // In Gen7+, Ice-types are immune to Sheer Cold
 #define B_ROOST_PURE_FLYING         GEN_LATEST // In Gen5+, Roost makes pure Flying-types into Normal-type.
+#define B_STATUS_TYPE_IMMUNITY      GEN_LATEST // In Gen1, Pokémon were immune to paralysis/freeze/burn side effects of attacking moves, if they shared a type with the move.
 
 // Turn settings
 #define B_BINDING_TURNS             GEN_LATEST // In Gen5+, binding moves last for 4-5 turns instead of 2-5 turns. (With Grip Claw, 7 and 5 turns respectively.)
