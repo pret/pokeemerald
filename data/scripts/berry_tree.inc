@@ -266,7 +266,7 @@ BerryTree_Text_PlantedOneBerry:
 
 BerryTree_Text_BerryGrowthStage1:
 .if OW_BERRY_SIX_STAGES == TRUE
-	.string "This is where you planted the\n{STR_VAR_1} BERRY!$"
+	.string "This is where you planted the\n{STR_VAR_1}!$"
 .else
 	.string "One {STR_VAR_1} was planted here.$"
 .endif
