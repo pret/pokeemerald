@@ -79,7 +79,7 @@ SINGLE_BATTLE_TEST("Hyper Cutter is ignored by Mold Breaker")
 SINGLE_BATTLE_TEST("Hyper Cutter doesn't prevent Attack stage reduction from moves used by the user")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SUPERPOWER].additionalEffects[0].moveEffect == MOVE_EFFECT_ATK_DEF_DOWN);
+        ASSUME(MoveHasMoveEffect(MOVE_SUPERPOWER, MOVE_EFFECT_ATK_DEF_DOWN, FALSE) == TRUE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_KRABBY) { Ability(ABILITY_HYPER_CUTTER); }
     } WHEN {

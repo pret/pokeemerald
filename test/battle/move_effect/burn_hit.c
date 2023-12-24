@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_EMBER].additionalEffects[0].moveEffect == MOVE_EFFECT_BURN);
+    ASSUME(MoveHasMoveEffect(MOVE_EMBER, MOVE_EFFECT_BURN, FALSE) == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Ember inflicts burn")
@@ -42,7 +42,7 @@ SINGLE_BATTLE_TEST("Ember cannot burn a Fire-type Pokémon")
 DOUBLE_BATTLE_TEST("Lava Plume inflicts burn to every battler on the field")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_LAVA_PLUME].additionalEffects[0].moveEffect == MOVE_EFFECT_BURN);
+        ASSUME(MoveHasMoveEffect(MOVE_LAVA_PLUME, MOVE_EFFECT_BURN, FALSE) == TRUE);
         ASSUME(gBattleMoves[MOVE_LAVA_PLUME].target == MOVE_TARGET_FOES_AND_ALLY);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET);
@@ -68,7 +68,7 @@ SINGLE_BATTLE_TEST("Matcha Gotcha inflicts burn 20% of the time")
 {
     PASSES_RANDOMLY(20, 100, RNG_SECONDARY_EFFECT);
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_MATCHA_GOTCHA].additionalEffects[0].moveEffect == MOVE_EFFECT_BURN);
+        ASSUME(MoveHasMoveEffect(MOVE_MATCHA_GOTCHA, MOVE_EFFECT_BURN, FALSE) == TRUE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -84,7 +84,7 @@ SINGLE_BATTLE_TEST("Matcha Gotcha inflicts burn 20% of the time")
 DOUBLE_BATTLE_TEST("Matcha Gatcha can burn both targets")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_MATCHA_GOTCHA].additionalEffects[0].moveEffect == MOVE_EFFECT_BURN);
+        ASSUME(MoveHasMoveEffect(MOVE_MATCHA_GOTCHA, MOVE_EFFECT_BURN, FALSE) == TRUE);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);

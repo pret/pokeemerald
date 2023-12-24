@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_SPIN_OUT].additionalEffects[0].moveEffect == MOVE_EFFECT_SPD_MINUS_2);
+    ASSUME(MoveHasMoveEffect(MOVE_SPIN_OUT, MOVE_EFFECT_SPD_MINUS_2, FALSE) == TRUE);
     ASSUME(gBattleMoves[MOVE_SPIN_OUT].additionalEffects[0].self == TRUE);
 }
 

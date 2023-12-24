@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_JAW_LOCK].additionalEffects[0].moveEffect == MOVE_EFFECT_TRAP_BOTH);
+    ASSUME(MoveHasMoveEffect(MOVE_JAW_LOCK, MOVE_EFFECT_TRAP_BOTH, FALSE) == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Jaw Lock traps both opponents")

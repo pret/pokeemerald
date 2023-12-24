@@ -3,8 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_MORTAL_SPIN].additionalEffects[0].moveEffect == MOVE_EFFECT_RAPIDSPIN);
-    ASSUME(gBattleMoves[MOVE_MORTAL_SPIN].additionalEffects[1].moveEffect == MOVE_EFFECT_POISON);
+    ASSUME(MoveHasMoveEffect(MOVE_MORTAL_SPIN, MOVE_EFFECT_RAPIDSPIN, FALSE) == TRUE);
+    ASSUME(MoveHasMoveEffect(MOVE_MORTAL_SPIN, MOVE_EFFECT_POISON, FALSE) == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Mortal Spin blows away hazards and poisons foe")

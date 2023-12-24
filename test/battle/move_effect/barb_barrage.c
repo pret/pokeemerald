@@ -4,7 +4,7 @@
 ASSUMPTIONS
 {
     ASSUME(gBattleMoves[MOVE_BARB_BARRAGE].effect == EFFECT_BARB_BARRAGE);
-    ASSUME(gBattleMoves[MOVE_BARB_BARRAGE].additionalEffects[0].moveEffect == MOVE_EFFECT_POISON);
+    ASSUME(MoveHasMoveEffect(MOVE_BARB_BARRAGE, MOVE_EFFECT_POISON, FALSE) == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Barb Barrage inflicts poison")

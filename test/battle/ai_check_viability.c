@@ -4,7 +4,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_BODY_SLAM].additionalEffects[0].moveEffect == MOVE_EFFECT_PARALYSIS);
+    ASSUME(MoveHasMoveEffect(MOVE_BODY_SLAM, MOVE_EFFECT_PARALYSIS, FALSE) == TRUE);
 }
 
 AI_SINGLE_BATTLE_TEST("AI sees increased base power of Facade")
@@ -80,7 +80,7 @@ AI_SINGLE_BATTLE_TEST("AI sees increased base power of Wake Up Slap")
 
 //     GIVEN {
 //         ASSUME(gBattleMoves[MOVE_GRAV_APPLE].effect == EFFECT_GRAV_APPLE);
-//         ASSUME(gBattleMoves[MOVE_TROP_KICK].additionalEffects[0].moveEffect == MOVE_EFFECT_ATK_MINUS_1);
+//         ASSUME(MoveHasMoveEffect(MOVE_TROP_KICK, MOVE_EFFECT_ATK_MINUS_1, FALSE) == TRUE);
 //         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
 //         PLAYER(SPECIES_WOBBUFFET) { HP(81); Speed(20); }
 //         OPPONENT(SPECIES_WOBBUFFET) { Speed(10); Moves(MOVE_TROP_KICK, MOVE_GRAV_APPLE); }

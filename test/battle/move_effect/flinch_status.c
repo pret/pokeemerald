@@ -3,12 +3,12 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_THUNDER_FANG].additionalEffects[0].moveEffect == MOVE_EFFECT_PARALYSIS);
-    ASSUME(gBattleMoves[MOVE_THUNDER_FANG].additionalEffects[1].moveEffect == MOVE_EFFECT_FLINCH);
-    ASSUME(gBattleMoves[MOVE_ICE_FANG].additionalEffects[0].moveEffect == MOVE_EFFECT_FREEZE);
-    ASSUME(gBattleMoves[MOVE_ICE_FANG].additionalEffects[1].moveEffect == MOVE_EFFECT_FLINCH);
-    ASSUME(gBattleMoves[MOVE_FIRE_FANG].additionalEffects[0].moveEffect == MOVE_EFFECT_BURN);
-    ASSUME(gBattleMoves[MOVE_FIRE_FANG].additionalEffects[1].moveEffect == MOVE_EFFECT_FLINCH);
+    ASSUME(MoveHasMoveEffect(MOVE_THUNDER_FANG, MOVE_EFFECT_PARALYSIS, FALSE) == TRUE);
+    ASSUME(MoveHasMoveEffect(MOVE_THUNDER_FANG, MOVE_EFFECT_FLINCH, FALSE) == TRUE);
+    ASSUME(MoveHasMoveEffect(MOVE_ICE_FANG, MOVE_EFFECT_FREEZE, FALSE) == TRUE);
+    ASSUME(MoveHasMoveEffect(MOVE_ICE_FANG, MOVE_EFFECT_FLINCH, FALSE) == TRUE);
+    ASSUME(MoveHasMoveEffect(MOVE_FIRE_FANG, MOVE_EFFECT_BURN, FALSE) == TRUE);
+    ASSUME(MoveHasMoveEffect(MOVE_FIRE_FANG, MOVE_EFFECT_FLINCH, FALSE) == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Thunder, Ice and Fire Fang inflict status 10% of the time")

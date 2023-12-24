@@ -3,8 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_TRIPLE_ARROWS].additionalEffects[0].moveEffect == MOVE_EFFECT_DEF_MINUS_1);
-    ASSUME(gBattleMoves[MOVE_TRIPLE_ARROWS].additionalEffects[1].moveEffect == MOVE_EFFECT_FLINCH);
+    ASSUME(MoveHasMoveEffect(MOVE_TRIPLE_ARROWS, MOVE_EFFECT_DEF_MINUS_1, FALSE) == TRUE);
+    ASSUME(MoveHasMoveEffect(MOVE_TRIPLE_ARROWS, MOVE_EFFECT_FLINCH, FALSE) == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Triple Arrows may lower Defense by one stage")

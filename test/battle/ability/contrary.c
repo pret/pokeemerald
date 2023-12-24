@@ -82,7 +82,7 @@ SINGLE_BATTLE_TEST("Contrary raises stats after using a move which would normall
     PARAMETRIZE { ability = ABILITY_CONTRARY; }
     PARAMETRIZE { ability = ABILITY_TANGLED_FEET; }
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_OVERHEAT].additionalEffects[0].moveEffect == MOVE_EFFECT_SP_ATK_TWO_DOWN);
+        ASSUME(MoveHasMoveEffect(MOVE_OVERHEAT, MOVE_EFFECT_SP_ATK_TWO_DOWN, FALSE) == TRUE);
         ASSUME(gBattleMoves[MOVE_OVERHEAT].split == SPLIT_SPECIAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_SPINDA) { Ability(ability); }
