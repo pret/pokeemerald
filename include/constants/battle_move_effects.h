@@ -200,7 +200,7 @@
 #define EFFECT_MUD_SPORT                    196
 #define EFFECT_UNUSED_197                   197
 #define EFFECT_WEATHER_BALL                 198
-#define EFFECT_OVERHEAT                     199
+#define EFFECT_UNUSED_199                   199
 #define EFFECT_TICKLE                       200
 #define EFFECT_COSMIC_POWER                 201
 #define EFFECT_SKY_UPPERCUT                 202
@@ -413,11 +413,10 @@
 #define EFFECT_POPULATION_BOMB              407
 #define EFFECT_UNUSED_408                   408
 #define EFFECT_SALT_CURE                    409
-#define EFFECT_SYRUP_BOMB                   410
-#define EFFECT_IVY_CUDGEL                   411
-#define EFFECT_MAX_MOVE                     412
-#define EFFECT_GLAIVE_RUSH                  413
+#define EFFECT_IVY_CUDGEL                   410
+#define EFFECT_MAX_MOVE                     411
+#define EFFECT_GLAIVE_RUSH                  412
 
-#define NUM_BATTLE_MOVE_EFFECTS             414
+#define NUM_BATTLE_MOVE_EFFECTS             413
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

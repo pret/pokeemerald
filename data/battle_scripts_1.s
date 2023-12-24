@@ -221,7 +221,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectMudSport                @ EFFECT_MUD_SPORT
 	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_197
 	.4byte BattleScript_EffectHit                     @ EFFECT_WEATHER_BALL
-	.4byte BattleScript_EffectOverheat                @ EFFECT_OVERHEAT
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_199
 	.4byte BattleScript_EffectTickle                  @ EFFECT_TICKLE
 	.4byte BattleScript_EffectCosmicPower             @ EFFECT_COSMIC_POWER
 	.4byte BattleScript_EffectSkyUppercut             @ EFFECT_SKY_UPPERCUT
@@ -432,7 +432,6 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_POPULATION_BOMB
 	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_408
 	.4byte BattleScript_EffectSaltCure                @ EFFECT_SALT_CURE
-	.4byte BattleScript_EffectSyrupBomb               @ EFFECT_SYRUP_BOMB
 	.4byte BattleScript_EffectHit                     @ EFFECT_IVY_CUDGEL
 	.4byte BattleScript_EffectMaxMove                 @ EFFECT_MAX_MOVE
 	.4byte BattleScript_EffectGlaiveRush              @ EFFECT_GLAIVE_RUSH
@@ -442,12 +441,6 @@ BattleScript_EffectGlaiveRush::
 	jumpifhalfword CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE, BattleScript_TryFaintMon
 	setglaiverush
 	goto BattleScript_TryFaintMon
-
-BattleScript_EffectSyrupBomb::
-	setmoveeffect MOVE_EFFECT_SYRUP_BOMB
-	call BattleScript_EffectHit_Ret
-	tryfaintmon BS_TARGET
-	goto BattleScript_MoveEnd
 
 BattleScript_SyrupBombActivates::
 	printstring STRINGID_TARGETCOVEREDINSTICKYCANDYSYRUP
@@ -5890,10 +5883,6 @@ BattleScript_EffectWaterSport::
 	printfromtable gSportsUsedStringIds
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
-
-BattleScript_EffectOverheat::
-	setmoveeffect MOVE_EFFECT_SP_ATK_TWO_DOWN | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
-	goto BattleScript_EffectHit
 
 BattleScript_EffectHammerArm::
 	setmoveeffect MOVE_EFFECT_SPD_MINUS_1 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN

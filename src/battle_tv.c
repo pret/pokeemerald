@@ -267,7 +267,6 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
 //    [EFFECT_BLAZE_KICK]               = 1,
     [EFFECT_MUD_SPORT]                  = 4,
     [EFFECT_WEATHER_BALL]               = 1,
-    [EFFECT_OVERHEAT]                   = 3,
     [EFFECT_TICKLE]                     = 1,
     [EFFECT_COSMIC_POWER]               = 1,
     [EFFECT_SKY_UPPERCUT]               = 1,
