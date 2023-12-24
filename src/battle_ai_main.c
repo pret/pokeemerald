@@ -4339,7 +4339,6 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
         else
             ADJUST_SCORE(1);
         break;
-    case EFFECT_SUPERPOWER:
     case EFFECT_MAKE_IT_RAIN:
         if (aiData->abilities[battlerAtk] == ABILITY_CONTRARY)
             ADJUST_SCORE(3);
@@ -4870,7 +4869,10 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
                     if (sereneGraceBoost)
                         IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPATK, &score);
                     break;
-                // case EFFECT_SUPERPOWER:
+                // Effects that lower stat(s) - only need to consider Contrary 
+                case MOVE_EFFECT_V_CREATE:
+                case MOVE_EFFECT_DEF_SPDEF_DOWN:
+                case MOVE_EFFECT_ATK_DEF_DOWN:
                 case MOVE_EFFECT_SP_ATK_TWO_DOWN:
                     if (aiData->abilities[battlerAtk] == ABILITY_CONTRARY)
                         ADJUST_SCORE(3);

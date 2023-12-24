@@ -116,7 +116,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectConversion2             @ EFFECT_CONVERSION_2
 	.4byte BattleScript_EffectLockOn                  @ EFFECT_LOCK_ON
 	.4byte BattleScript_EffectSketch                  @ EFFECT_SKETCH
-	.4byte BattleScript_EffectHammerArm               @ EFFECT_HAMMER_ARM
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_94
 	.4byte BattleScript_EffectSleepTalk               @ EFFECT_SLEEP_TALK
 	.4byte BattleScript_EffectDestinyBond             @ EFFECT_DESTINY_BOND
 	.4byte BattleScript_EffectHit                     @ EFFECT_FLAIL
@@ -199,7 +199,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectWish                    @ EFFECT_WISH
 	.4byte BattleScript_EffectAssist                  @ EFFECT_ASSIST
 	.4byte BattleScript_EffectIngrain                 @ EFFECT_INGRAIN
-	.4byte BattleScript_EffectSuperpower              @ EFFECT_SUPERPOWER
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_177
 	.4byte BattleScript_EffectMagicCoat               @ EFFECT_MAGIC_COAT
 	.4byte BattleScript_EffectRecycle                 @ EFFECT_RECYCLE
 	.4byte BattleScript_EffectHit                     @ EFFECT_REVENGE
@@ -301,7 +301,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectReflectType             @ EFFECT_REFLECT_TYPE
 	.4byte BattleScript_EffectSoak                    @ EFFECT_SOAK
 	.4byte BattleScript_EffectGrowth                  @ EFFECT_GROWTH
-	.4byte BattleScript_EffectCloseCombat             @ EFFECT_CLOSE_COMBAT
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_279
 	.4byte BattleScript_EffectLastResort              @ EFFECT_LAST_RESORT
 	.4byte BattleScript_EffectHit                     @ EFFECT_RECOIL_33_STATUS
 	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_282
@@ -5630,14 +5630,6 @@ BattleScript_EffectIngrain:
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectSuperpower:
-	setmoveeffect MOVE_EFFECT_ATK_DEF_DOWN | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
-	goto BattleScript_EffectHit
-
-BattleScript_EffectCloseCombat:
-	setmoveeffect MOVE_EFFECT_DEF_SPDEF_DOWN | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
-	goto BattleScript_EffectHit
-
 BattleScript_EffectMagicCoat:
 	attackcanceler
 	trysetmagiccoat BattleScript_FailedFromAtkString
@@ -5883,10 +5875,6 @@ BattleScript_EffectWaterSport::
 	printfromtable gSportsUsedStringIds
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
-
-BattleScript_EffectHammerArm::
-	setmoveeffect MOVE_EFFECT_SPD_MINUS_1 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
-	goto BattleScript_EffectHit
 
 BattleScript_EffectTickle::
 	attackcanceler

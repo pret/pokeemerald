@@ -95,7 +95,7 @@
 #define EFFECT_CONVERSION_2                 91
 #define EFFECT_LOCK_ON                      92
 #define EFFECT_SKETCH                       93
-#define EFFECT_HAMMER_ARM                   94
+#define EFFECT_UNUSED_94                    94
 #define EFFECT_SLEEP_TALK                   95
 #define EFFECT_DESTINY_BOND                 96
 #define EFFECT_FLAIL                        97
@@ -178,7 +178,7 @@
 #define EFFECT_WISH                         174
 #define EFFECT_ASSIST                       175
 #define EFFECT_INGRAIN                      176
-#define EFFECT_SUPERPOWER                   177
+#define EFFECT_UNUSED_177                   177
 #define EFFECT_MAGIC_COAT                   178
 #define EFFECT_RECYCLE                      179
 #define EFFECT_REVENGE                      180
@@ -282,7 +282,7 @@
 #define EFFECT_REFLECT_TYPE                 276
 #define EFFECT_SOAK                         277
 #define EFFECT_GROWTH                       278
-#define EFFECT_CLOSE_COMBAT                 279
+#define EFFECT_UNUSED_279                   279
 #define EFFECT_LAST_RESORT                  280
 #define EFFECT_RECOIL_33_STATUS             281
 #define EFFECT_UNUSED_282                   282
