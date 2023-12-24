@@ -400,8 +400,10 @@ struct BattleMove
 };
 
 #define ADDITIONAL_EFFECTS(...) \
-  .numAdditionalEffects = NARG_8(__VA_ARGS__) / 3, \
-  .additionalEffects = (const struct AdditionalEffect[]) { __VA_ARGS__ }
+  .numAdditionalEffects = ARRAY_COUNT(EFFECTS_ARR( __VA_ARGS__ )), \
+  .additionalEffects = EFFECTS_ARR( __VA_ARGS__ )
+
+#define EFFECTS_ARR(...) (const struct AdditionalEffect[]) { __VA_ARGS__ }
 
 #define PRIMARY_EFFECT(_moveEffect) {.self = FALSE, .chance = 0, .moveEffect = _moveEffect}
 #define PRIMARY_EFFECT_SELF(_moveEffect) {.self = TRUE, .chance = 0, .moveEffect = _moveEffect}

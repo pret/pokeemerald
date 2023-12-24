@@ -136,8 +136,8 @@
 #define EFFECT_HIDDEN_POWER                 132
 #define EFFECT_RAIN_DANCE                   133
 #define EFFECT_SUNNY_DAY                    134
-#define EFFECT_DEFENSE_UP_HIT               135
-#define EFFECT_ATTACK_UP_HIT                136
+#define EFFECT_UNUSED_135                   135
+#define EFFECT_UNUSED_136                   136
 #define EFFECT_ALL_STATS_UP_HIT             137
 #define EFFECT_FELL_STINGER                 138
 #define EFFECT_BELLY_DRUM                   139
@@ -275,7 +275,7 @@
 #define EFFECT_HURRICANE                    269
 #define EFFECT_TWO_TYPED_MOVE               270
 #define EFFECT_ME_FIRST                     271
-#define EFFECT_SPEED_UP_HIT                 272
+#define EFFECT_UNUSED_272                   272
 #define EFFECT_QUIVER_DANCE                 273
 #define EFFECT_COIL                         274
 #define EFFECT_ELECTRIFY                    275
@@ -321,7 +321,7 @@
 #define EFFECT_ACUPRESSURE                  315
 #define EFFECT_AROMATIC_MIST                316
 #define EFFECT_POWDER                       317
-#define EFFECT_SP_ATTACK_UP_HIT             318
+#define EFFECT_UNUSED_318                   318
 #define EFFECT_BELCH                        319
 #define EFFECT_PARTING_SHOT                 320
 #define EFFECT_UNUSED_321                   321
@@ -358,7 +358,7 @@
 #define EFFECT_RECOIL_HP_25                 352
 #define EFFECT_STUFF_CHEEKS                 353
 #define EFFECT_GRAV_APPLE                   354
-#define EFFECT_EVASION_UP_HIT               355
+#define EFFECT_UNUSED_355                   355
 #define EFFECT_GLITZY_GLOW                  356
 #define EFFECT_BADDY_BAD                    357
 #define EFFECT_SAPPY_SEED                   358
@@ -389,7 +389,7 @@
 #define EFFECT_DARK_VOID                    383
 #define EFFET_UNUSED_384                    384
 #define EFFECT_DOUBLE_SHOCK                 385
-#define EFFECT_SPECIAL_ATTACK_UP_HIT        386
+#define EFFECT_UNUSED_387                   386
 #define EFFECT_VICTORY_DANCE                387
 #define EFFECT_TEATIME                      388
 #define EFFECT_ATTACK_UP_USER_ALLY          389 // Howl 8th Gen

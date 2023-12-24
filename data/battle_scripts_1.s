@@ -95,7 +95,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_70
 	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_71
 	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_72
-	.4byte BattleScript_EffectHit                     @ EFFECT_EVASION_DOWN_HIT
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_73
 	.4byte BattleScript_EffectTwoTurnsAttack          @ EFFECT_TWO_TURNS_ATTACK
 	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_75
 	.4byte BattleScript_EffectHit                     @ EFFECT_VITAL_THROW
@@ -157,9 +157,9 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_HIDDEN_POWER
 	.4byte BattleScript_EffectRainDance               @ EFFECT_RAIN_DANCE
 	.4byte BattleScript_EffectSunnyDay                @ EFFECT_SUNNY_DAY
-	.4byte BattleScript_EffectDefenseUpHit            @ EFFECT_DEFENSE_UP_HIT
-	.4byte BattleScript_EffectAttackUpHit             @ EFFECT_ATTACK_UP_HIT
-	.4byte BattleScript_EffectAllStatsUpHit           @ EFFECT_ALL_STATS_UP_HIT
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_135
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_136
+	.4byte BattleScript_EffectHit                     @ EFFECT_ALL_STATS_UP_HIT
 	.4byte BattleScript_EffectHit                     @ EFFECT_FELL_STINGER
 	.4byte BattleScript_EffectBellyDrum               @ EFFECT_BELLY_DRUM
 	.4byte BattleScript_EffectPsychUp                 @ EFFECT_PSYCH_UP
@@ -294,7 +294,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_HURRICANE
 	.4byte BattleScript_EffectHit                     @ EFFECT_TWO_TYPED_MOVE
 	.4byte BattleScript_EffectMeFirst                 @ EFFECT_ME_FIRST
-	.4byte BattleScript_EffectSpeedUpHit              @ EFFECT_SPEED_UP_HIT
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_272
 	.4byte BattleScript_EffectQuiverDance             @ EFFECT_QUIVER_DANCE
 	.4byte BattleScript_EffectCoil                    @ EFFECT_COIL
 	.4byte BattleScript_EffectElectrify               @ EFFECT_ELECTRIFY
@@ -340,7 +340,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectAcupressure             @ EFFECT_ACUPRESSURE
 	.4byte BattleScript_EffectAromaticMist            @ EFFECT_AROMATIC_MIST
 	.4byte BattleScript_EffectPowder                  @ EFFECT_POWDER
-	.4byte BattleScript_EffectSpAtkUpHit              @ EFFECT_SP_ATTACK_UP_HIT
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_318
 	.4byte BattleScript_EffectHit                     @ EFFECT_BELCH
 	.4byte BattleScript_EffectPartingShot             @ EFFECT_PARTING_SHOT
 	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_321
@@ -377,7 +377,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectRecoilHP25              @ EFFECT_RECOIL_HP_25
 	.4byte BattleScript_EffectStuffCheeks             @ EFFECT_STUFF_CHEEKS
 	.4byte BattleScript_EffectHit                     @ EFFECT_GRAV_APPLE
-	.4byte BattleScript_EffectEvasionUpHit            @ EFFECT_EVASION_UP_HIT
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_355
 	.4byte BattleScript_EffectGlitzyGlow              @ EFFECT_GLITZY_GLOW
 	.4byte BattleScript_EffectBaddyBad                @ EFFECT_BADDY_BAD
 	.4byte BattleScript_EffectSappySeed               @ EFFECT_SAPPY_SEED
@@ -408,7 +408,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDarkVoid                @ EFFECT_DARK_VOID
 	.4byte BattleScript_EffectHit                     @ EFFET_UNUSED_384
 	.4byte BattleScript_EffectDoubleShock             @ EFFECT_DOUBLE_SHOCK
-	.4byte BattleScript_EffectSpecialAttackUpHit      @ EFFECT_SPECIAL_ATTACK_UP_HIT
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_387
 	.4byte BattleScript_EffectVictoryDance            @ EFFECT_VICTORY_DANCE
 	.4byte BattleScript_EffectTeatime                 @ EFFECT_TEATIME
 	.4byte BattleScript_EffectAttackUpUserAlly        @ EFFECT_ATTACK_UP_USER_ALLY
@@ -1180,10 +1180,6 @@ BattleScript_EffectGlitzyGlow:
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectEvasionUpHit:
-	setmoveeffect MOVE_EFFECT_EVS_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
-	goto BattleScript_EffectHit
-
 BattleScript_EffectStuffCheeks::
 	attackcanceler
 	attackstring
@@ -1563,10 +1559,6 @@ BattleScript_EffectPartingShotSwitch:
 	switchineffects BS_ATTACKER
 BattleScript_PartingShotEnd:
 	end
-
-BattleScript_EffectSpAtkUpHit:
-	setmoveeffect MOVE_EFFECT_SP_ATK_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
-	goto BattleScript_EffectHit
 
 BattleScript_EffectPowder:
 	attackcanceler
@@ -4999,22 +4991,6 @@ BattleScript_BlockedByPrimalWeatherRet::
 	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_RAIN_PRIMAL, BattleScript_NoReliefFromHeavyRainRet
 	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_STRONG_WINDS, BattleScript_MysteriousAirCurrentBlowsOnRet
 	return
-
-BattleScript_EffectDefenseUpHit::
-	setmoveeffect MOVE_EFFECT_DEF_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
-	goto BattleScript_EffectHit
-
-BattleScript_EffectAttackUpHit::
-	setmoveeffect MOVE_EFFECT_ATK_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
-	goto BattleScript_EffectHit
-
-BattleScript_EffectSpecialAttackUpHit::
-	setmoveeffect MOVE_EFFECT_SP_ATK_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
-	goto BattleScript_EffectHit
-
-BattleScript_EffectAllStatsUpHit::
-	setmoveeffect MOVE_EFFECT_ALL_STATS_UP | MOVE_EFFECT_AFFECTS_USER
-	goto BattleScript_EffectHit
 
 BattleScript_EffectBellyDrum::
 	attackcanceler

@@ -3509,14 +3509,22 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             ADJUST_SCORE(-3);
             break;
           }
-        goto SHOULD_USE_PHAZING_MOVE;
+        if (isDoubleBattle)
+            score += min(CountPositiveStatStages(battlerDef) + CountPositiveStatStages(BATTLE_PARTNER(battlerDef)), 7);
+        else
+            score += min(CountPositiveStatStages(battlerDef), 4);
+        break;
     case EFFECT_ROAR:
         if (aiData->abilities[battlerDef] == ABILITY_SOUNDPROOF || aiData->abilities[battlerDef] == ABILITY_SUCTION_CUPS)
         {
             ADJUST_SCORE(-3);
             break;
         }
-        goto SHOULD_USE_PHAZING_MOVE;
+        if (isDoubleBattle)
+            score += min(CountPositiveStatStages(battlerDef) + CountPositiveStatStages(BATTLE_PARTNER(battlerDef)), 7);
+        else
+            score += min(CountPositiveStatStages(battlerDef), 4);
+        break;
     case EFFECT_MULTI_HIT:
     case EFFECT_TRIPLE_KICK:
         if (AI_MoveMakesContact(aiData->abilities[battlerAtk], aiData->holdEffects[battlerAtk], move)
@@ -3761,10 +3769,6 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             ADJUST_SCORE(3);
         else if (HasMoveWithLowAccuracy(battlerAtk, battlerDef, 90, TRUE, aiData->abilities[battlerAtk], aiData->abilities[battlerDef], aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef]))
             ADJUST_SCORE(1);
-        break;
-    case EFFECT_SPEED_UP_HIT:
-        if (sereneGraceBoost && aiData->abilities[battlerDef] != ABILITY_CONTRARY && !AI_STRIKES_FIRST(battlerAtk, battlerDef, move))
-            ADJUST_SCORE(3);
         break;
     case EFFECT_DESTINY_BOND:
         if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER && CanTargetFaintAi(battlerDef, battlerAtk))
@@ -4021,14 +4025,6 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
                 ADJUST_SCORE(1);
         }
         break;
-    case EFFECT_ATTACK_UP_HIT:
-        if (sereneGraceBoost)
-            IncreaseStatUpScore(battlerAtk, battlerDef, STAT_ATK, &score);
-        break;
-    case EFFECT_SPECIAL_ATTACK_UP_HIT:
-        if (sereneGraceBoost)
-            IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPATK, &score);
-        break;
     case EFFECT_FELL_STINGER:
         if (gBattleMons[battlerAtk].statStages[STAT_ATK] < MAX_STAT_STAGE
           && aiData->abilities[battlerAtk] != ABILITY_CONTRARY
@@ -4045,7 +4041,35 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             score += (MAX_STAT_STAGE - gBattleMons[battlerAtk].statStages[STAT_ATK]);
         break;
     case EFFECT_PSYCH_UP:
-        goto SHOULD_USE_STAT_COPY_MOVE;
+        // Want to copy positive stat changes
+        for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
+        {
+            if (gBattleMons[battlerDef].statStages[i] > gBattleMons[battlerAtk].statStages[i])
+            {
+                switch (i)
+                {
+                case STAT_ATK:
+                    if (HasMoveWithSplit(battlerAtk, SPLIT_PHYSICAL))
+                        ADJUST_SCORE(1);
+                    break;
+                case STAT_SPATK:
+                    if (HasMoveWithSplit(battlerAtk, SPLIT_SPECIAL))
+                        ADJUST_SCORE(1);
+                    break;
+                case STAT_ACC:
+                case STAT_EVASION:
+                case STAT_SPEED:
+                    ADJUST_SCORE(1);
+                    break;
+                case STAT_DEF:
+                case STAT_SPDEF:
+                    if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_STALL)
+                        ADJUST_SCORE(1);
+                    break;
+                }
+            }
+        }
+        break;
     case EFFECT_SEMI_INVULNERABLE:
         ADJUST_SCORE(1);
         if (predictedMove != MOVE_NONE && !isDoubleBattle)
@@ -4831,31 +4855,50 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     for (i = 0; i < gBattleMoves[move].numAdditionalEffects; i++)
     {
         if (gBattleMoves[move].additionalEffects[i].self)
-            continue;
-
-        switch (gBattleMoves[move].additionalEffects[i].moveEffect)
         {
-            case MOVE_EFFECT_FLINCH:
-                score += ShouldTryToFlinch(battlerAtk, battlerDef, aiData->abilities[battlerAtk], aiData->abilities[battlerDef], move);
-                break;
-            case MOVE_EFFECT_ATK_MINUS_1:
-            case MOVE_EFFECT_DEF_MINUS_1:
-            case MOVE_EFFECT_SP_ATK_MINUS_1:
-            case MOVE_EFFECT_SP_DEF_MINUS_1:
-            case MOVE_EFFECT_ACC_MINUS_1:
-            case MOVE_EFFECT_EVS_MINUS_1:
-                if (sereneGraceBoost && aiData->abilities[battlerDef] != ABILITY_CONTRARY)
-                    ADJUST_SCORE(2);
-                break;
-            case MOVE_EFFECT_SPD_MINUS_1:
-                if (ShouldLowerSpeed(battlerAtk, battlerDef, aiData->abilities[battlerDef]))
-                {
+            // Consider move effects that target self
+            switch (gBattleMoves[move].additionalEffects[i].moveEffect)
+            {
+                case MOVE_EFFECT_SPD_PLUS_1:
+                    if (sereneGraceBoost && aiData->abilities[battlerAtk] != ABILITY_CONTRARY && !AI_STRIKES_FIRST(battlerAtk, battlerDef, move))
+                        ADJUST_SCORE(3);
+                    break;
+                case MOVE_EFFECT_ATK_PLUS_1:
+                    if (sereneGraceBoost)
+                        IncreaseStatUpScore(battlerAtk, battlerDef, STAT_ATK, &score);
+                    break;
+                case MOVE_EFFECT_SP_ATK_PLUS_1:
+                    if (sereneGraceBoost)
+                        IncreaseStatUpScore(battlerAtk, battlerDef, STAT_SPATK, &score);
+                    break;
+            }
+        }
+        else // consider move effects that hinder the target
+        {
+            switch (gBattleMoves[move].additionalEffects[i].moveEffect)
+            {
+                case MOVE_EFFECT_FLINCH:
+                    score += ShouldTryToFlinch(battlerAtk, battlerDef, aiData->abilities[battlerAtk], aiData->abilities[battlerDef], move);
+                    break;
+                case MOVE_EFFECT_ATK_MINUS_1:
+                case MOVE_EFFECT_DEF_MINUS_1:
+                case MOVE_EFFECT_SP_ATK_MINUS_1:
+                case MOVE_EFFECT_SP_DEF_MINUS_1:
+                case MOVE_EFFECT_ACC_MINUS_1:
+                case MOVE_EFFECT_EVS_MINUS_1:
                     if (sereneGraceBoost && aiData->abilities[battlerDef] != ABILITY_CONTRARY)
-                        ADJUST_SCORE(5);
-                    else
                         ADJUST_SCORE(2);
-                }
-                break;
+                    break;
+                case MOVE_EFFECT_SPD_MINUS_1:
+                    if (ShouldLowerSpeed(battlerAtk, battlerDef, aiData->abilities[battlerDef]))
+                    {
+                        if (sereneGraceBoost && aiData->abilities[battlerDef] != ABILITY_CONTRARY)
+                            ADJUST_SCORE(5);
+                        else
+                            ADJUST_SCORE(2);
+                    }
+                    break;
+            }
         }
 
         // Only consider the below if they're certain to happen
@@ -4868,14 +4911,12 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
                 IncreasePoisonScore(battlerAtk, battlerDef, move, &score);
                 break;
             case MOVE_EFFECT_CLEAR_SMOG:
-                SHOULD_USE_PHAZING_MOVE:
                 if (isDoubleBattle)
                     score += min(CountPositiveStatStages(battlerDef) + CountPositiveStatStages(BATTLE_PARTNER(battlerDef)), 7);
                 else
                     score += min(CountPositiveStatStages(battlerDef), 4);
                 break;
             case MOVE_EFFECT_SPECTRAL_THIEF:
-                SHOULD_USE_STAT_COPY_MOVE:
                 // Want to copy positive stat changes
                 for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
                 {

@@ -850,87 +850,96 @@ static bool32 AI_IsMoveEffectInPlus(u32 battlerAtk, u32 battlerDef, u32 move, s3
         if (CountUsablePartyMons(battlerAtk) != 0 && ShouldPivot(battlerAtk, battlerDef, abilityDef, move, AI_THINKING_STRUCT->movesetIndex))
             return TRUE;
         break;
-    case EFFECT_ATTACK_UP_HIT:
     case EFFECT_FELL_STINGER:
         if (BattlerStatCanRise(battlerAtk, abilityAtk, STAT_ATK))
             return TRUE;
-        break;
-    case EFFECT_DEFENSE_UP2_HIT:
-    case EFFECT_DEFENSE_UP_HIT:
-        if (BattlerStatCanRise(battlerAtk, abilityAtk, STAT_DEF))
-            return TRUE;
-        break;
-    case EFFECT_SPEED_UP_HIT:
-        if (BattlerStatCanRise(battlerAtk, abilityAtk, STAT_SPEED))
-            return TRUE;
-        break;
-    case EFFECT_SPECIAL_ATTACK_UP_HIT:
-        if (BattlerStatCanRise(battlerAtk, abilityAtk, STAT_SPATK))
-            return TRUE;
-        break;
-    case EFFECT_ALL_STATS_UP_HIT:
-        for (i = STAT_ATK; i <= NUM_STATS; i++)
-        {
-            if (BattlerStatCanRise(battlerAtk, abilityAtk, i))
-                return TRUE;
-        }
         break;
     }
 
     // check ADDITIONAL_EFFECTS
     for (i = 0; i < gBattleMoves[move].numAdditionalEffects; i++)
     {
-        // Obviously ignore moves that target self
+        // Consider move effects that target self
         if (gBattleMoves[move].additionalEffects[i].self)
-            continue;
-
-        switch (gBattleMoves[move].additionalEffects[i].moveEffect)
         {
-            case MOVE_EFFECT_POISON:
-            case MOVE_EFFECT_TOXIC:
-                if (AI_CanPoison(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE))
-                    return TRUE;
-                break;
-            case MOVE_EFFECT_BURN:
-                if (AI_CanBurn(battlerAtk, battlerDef, abilityDef, BATTLE_PARTNER(battlerAtk), move, MOVE_NONE))
-                    return TRUE;
-                break;
-            case MOVE_EFFECT_FREEZE_OR_FROSTBITE:
-                if (AI_CanGetFrostbite(battlerDef, abilityDef))
-                    return TRUE;
-                break;
-            case MOVE_EFFECT_PARALYSIS:
-                if (AI_CanParalyze(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE))
-                    return TRUE;
-                break;
-            case MOVE_EFFECT_CONFUSION:
-                if (AI_CanConfuse(battlerAtk, battlerDef, abilityDef, BATTLE_PARTNER(battlerAtk), move, MOVE_NONE))
-                    return TRUE;
-                break;
-            case MOVE_EFFECT_FLINCH:
-                if (ShouldTryToFlinch(battlerAtk, battlerDef, abilityAtk, abilityDef, move))
-                    return TRUE;
-                break;
-            case MOVE_EFFECT_ATK_MINUS_1:
-            case MOVE_EFFECT_DEF_MINUS_1:
-            case MOVE_EFFECT_SPD_MINUS_1:
-            case MOVE_EFFECT_SP_ATK_MINUS_1:
-            case MOVE_EFFECT_SP_DEF_MINUS_1:
-            case MOVE_EFFECT_ACC_MINUS_1:
-            case MOVE_EFFECT_EVS_MINUS_1:
-                if (ShouldLowerStat(battlerDef, abilityDef, STAT_ATK + (gBattleMoves[move].additionalEffects[i].moveEffect - MOVE_EFFECT_ATK_MINUS_1)) && noOfHitsToKo != 1)
-                    return TRUE;
-                break;
-            case MOVE_EFFECT_ATK_MINUS_2:
-            case MOVE_EFFECT_DEF_MINUS_2:
-            case MOVE_EFFECT_SPD_MINUS_2:
-            case MOVE_EFFECT_SP_ATK_MINUS_2:
-            case MOVE_EFFECT_SP_DEF_MINUS_2:
-            case MOVE_EFFECT_ACC_MINUS_2:
-            case MOVE_EFFECT_EVS_MINUS_2:
-                if (ShouldLowerStat(battlerDef, abilityDef, STAT_ATK + (gBattleMoves[move].additionalEffects[i].moveEffect - MOVE_EFFECT_ATK_MINUS_2)) && noOfHitsToKo != 1)
-                    return TRUE;
-                break;
+            switch (gBattleMoves[move].additionalEffects[i].moveEffect)
+            {
+                case MOVE_EFFECT_ATK_PLUS_1:
+                    if (BattlerStatCanRise(battlerAtk, abilityAtk, STAT_ATK))
+                        return TRUE;
+                    break;
+                case MOVE_EFFECT_DEF_PLUS_2:
+                case MOVE_EFFECT_DEF_PLUS_1:
+                    if (BattlerStatCanRise(battlerAtk, abilityAtk, STAT_DEF))
+                        return TRUE;
+                    break;
+                case MOVE_EFFECT_SPD_PLUS_1:
+                    if (BattlerStatCanRise(battlerAtk, abilityAtk, STAT_SPEED))
+                        return TRUE;
+                    break;
+                case MOVE_EFFECT_SP_ATK_PLUS_1:
+                    if (BattlerStatCanRise(battlerAtk, abilityAtk, STAT_SPATK))
+                        return TRUE;
+                    break;
+                case MOVE_EFFECT_ALL_STATS_UP:
+                    for (i = STAT_ATK; i <= NUM_STATS; i++)
+                    {
+                        if (BattlerStatCanRise(battlerAtk, abilityAtk, i))
+                            return TRUE;
+                    }
+                    break;
+            }
+        }
+        else // consider move effects that hinder the target
+        {
+            switch (gBattleMoves[move].additionalEffects[i].moveEffect)
+            {
+                case MOVE_EFFECT_POISON:
+                case MOVE_EFFECT_TOXIC:
+                    if (AI_CanPoison(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE))
+                        return TRUE;
+                    break;
+                case MOVE_EFFECT_BURN:
+                    if (AI_CanBurn(battlerAtk, battlerDef, abilityDef, BATTLE_PARTNER(battlerAtk), move, MOVE_NONE))
+                        return TRUE;
+                    break;
+                case MOVE_EFFECT_FREEZE_OR_FROSTBITE:
+                    if (AI_CanGetFrostbite(battlerDef, abilityDef))
+                        return TRUE;
+                    break;
+                case MOVE_EFFECT_PARALYSIS:
+                    if (AI_CanParalyze(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE))
+                        return TRUE;
+                    break;
+                case MOVE_EFFECT_CONFUSION:
+                    if (AI_CanConfuse(battlerAtk, battlerDef, abilityDef, BATTLE_PARTNER(battlerAtk), move, MOVE_NONE))
+                        return TRUE;
+                    break;
+                case MOVE_EFFECT_FLINCH:
+                    if (ShouldTryToFlinch(battlerAtk, battlerDef, abilityAtk, abilityDef, move))
+                        return TRUE;
+                    break;
+                case MOVE_EFFECT_ATK_MINUS_1:
+                case MOVE_EFFECT_DEF_MINUS_1:
+                case MOVE_EFFECT_SPD_MINUS_1:
+                case MOVE_EFFECT_SP_ATK_MINUS_1:
+                case MOVE_EFFECT_SP_DEF_MINUS_1:
+                case MOVE_EFFECT_ACC_MINUS_1:
+                case MOVE_EFFECT_EVS_MINUS_1:
+                    if (ShouldLowerStat(battlerDef, abilityDef, STAT_ATK + (gBattleMoves[move].additionalEffects[i].moveEffect - MOVE_EFFECT_ATK_MINUS_1)) && noOfHitsToKo != 1)
+                        return TRUE;
+                    break;
+                case MOVE_EFFECT_ATK_MINUS_2:
+                case MOVE_EFFECT_DEF_MINUS_2:
+                case MOVE_EFFECT_SPD_MINUS_2:
+                case MOVE_EFFECT_SP_ATK_MINUS_2:
+                case MOVE_EFFECT_SP_DEF_MINUS_2:
+                case MOVE_EFFECT_ACC_MINUS_2:
+                case MOVE_EFFECT_EVS_MINUS_2:
+                    if (ShouldLowerStat(battlerDef, abilityDef, STAT_ATK + (gBattleMoves[move].additionalEffects[i].moveEffect - MOVE_EFFECT_ATK_MINUS_2)) && noOfHitsToKo != 1)
+                        return TRUE;
+                    break;
+            }
         }
     }
 
