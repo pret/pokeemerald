@@ -1935,7 +1935,6 @@ bool32 BerryTreeGrow(struct BerryTree *tree)
     case BERRY_STAGE_PLANTED:
     case BERRY_STAGE_SPROUTED:
     case BERRY_STAGE_TRUNK:
-    case BERRY_STAGE_BUDDING:
         tree->stage++;
         break;
     case BERRY_STAGE_TALLER:
@@ -1943,6 +1942,10 @@ bool32 BerryTreeGrow(struct BerryTree *tree)
             tree->stage = BERRY_STAGE_TRUNK;
         else
             tree->stage++;
+        break;
+    case BERRY_STAGE_BUDDING:
+        tree->berryYield = CalcBerryYield(tree);
+        tree->stage = BERRY_STAGE_BERRIES;
         break;
     case BERRY_STAGE_BERRIES:
         tree->watered = 0;
