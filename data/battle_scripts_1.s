@@ -8016,6 +8016,7 @@ BattleScript_IllusionOff::
 	return
 
 BattleScript_CottonDownActivates::
+	copybyte sSAVED_BATTLER, gBattlerAttacker
 	showabilitypopup BS_TARGET
 	pause B_WAIT_TIME_LONG
 	destroyabilitypopup
@@ -8040,6 +8041,7 @@ BattleScript_CottonDownLoopIncrement:
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_CottonDownLoop
 BattleScript_CottonDownReturn:
 	swapattackerwithtarget
+	copybyte gBattlerAttacker, sSAVED_BATTLER
 	return
 
 BattleScript_AnticipationActivates::
