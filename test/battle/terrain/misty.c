@@ -22,7 +22,6 @@ SINGLE_BATTLE_TEST("Misty Terrain protects grounded battlers from non-volatile s
 SINGLE_BATTLE_TEST("Misty Terrain activates Misty Seed and Mimicry")
 {
     GIVEN {
-        ASSUME(P_GEN_8_POKEMON == TRUE);
         ASSUME(gItems[ITEM_MISTY_SEED].holdEffect == HOLD_EFFECT_SEEDS);
         ASSUME(gItems[ITEM_MISTY_SEED].holdEffectParam == HOLD_EFFECT_PARAM_MISTY_TERRAIN);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_MISTY_SEED); }

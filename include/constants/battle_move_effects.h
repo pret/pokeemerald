@@ -48,7 +48,7 @@
 #define EFFECT_RECOIL_IF_MISS               44
 #define EFFECT_MIST                         45
 #define EFFECT_FOCUS_ENERGY                 46
-#define EFFECT_RECOIL_25                    47
+#define EFFECT_RECOIL                       47
 #define EFFECT_CONFUSE                      48
 #define EFFECT_ATTACK_UP_2                  49
 #define EFFECT_DEFENSE_UP_2                 50
@@ -413,10 +413,13 @@
 #define EFFECT_POPULATION_BOMB              407
 #define EFFECT_UNUSED_408                   408
 #define EFFECT_SALT_CURE                    409
-#define EFFECT_IVY_CUDGEL                   410
+#define EFFECT_CHILLY_RECEPTION             410
 #define EFFECT_MAX_MOVE                     411
 #define EFFECT_GLAIVE_RUSH                  412
+#define EFFECT_RAGING_BULL                  413
+#define EFFECT_RAGE_FIST                    414
+#define EFFECT_DOODLE                       415
 
-#define NUM_BATTLE_MOVE_EFFECTS             413
+#define NUM_BATTLE_MOVE_EFFECTS             416
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

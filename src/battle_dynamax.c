@@ -150,7 +150,7 @@ bool32 CanDynamax(u16 battlerId)
 bool32 IsGigantamaxed(u16 battlerId)
 {
     // TODO: Incorporate Gigantamax factor.
-    if ((gSpeciesInfo[gBattleMons[battlerId].species].gigantamax))
+    if ((gSpeciesInfo[gBattleMons[battlerId].species].isGigantamax))
         return TRUE;
     return FALSE;
 }
@@ -289,13 +289,13 @@ static u16 GetTypeBasedMaxMove(u16 battlerId, u16 type)
     u16 species = gBattleMons[battlerId].species;
     u16 targetSpecies = SPECIES_NONE;
 
-    if (!gSpeciesInfo[species].gigantamax)
+    if (!gSpeciesInfo[species].isGigantamax)
         targetSpecies = GetBattleFormChangeTargetSpecies(battlerId, FORM_CHANGE_BATTLE_GIGANTAMAX);
 
     if (targetSpecies != SPECIES_NONE)
         species = targetSpecies;
 
-    if (gSpeciesInfo[species].gigantamax)
+    if (gSpeciesInfo[species].isGigantamax)
     {
         for (i = 0; i < ARRAY_COUNT(sGMaxMoveTable); i++)
         {
@@ -322,19 +322,19 @@ u16 GetMaxMove(u16 battlerId, u16 baseMove)
     {
         return MOVE_STRUGGLE;
     }
-    else if (gBattleMoves[baseMove].split == SPLIT_STATUS)
+    else if (gBattleMoves[baseMove].category == BATTLE_CATEGORY_STATUS)
     {
         move = MOVE_MAX_GUARD;
     }
     else if (gBattleStruct->dynamicMoveType)
     {
         move = GetTypeBasedMaxMove(battlerId, gBattleStruct->dynamicMoveType & DYNAMIC_TYPE_MASK);
-        gBattleStruct->dynamax.splits[battlerId] = gBattleMoves[baseMove].split;
+        gBattleStruct->dynamax.categories[battlerId] = gBattleMoves[baseMove].category;
     }
     else
     {
         move = GetTypeBasedMaxMove(battlerId, gBattleMoves[baseMove].type);
-        gBattleStruct->dynamax.splits[battlerId] = gBattleMoves[baseMove].split;
+        gBattleStruct->dynamax.categories[battlerId] = gBattleMoves[baseMove].category;
     }
 
     return move;

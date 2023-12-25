@@ -17,8 +17,8 @@ SINGLE_BATTLE_TEST("Transistor increases Electric-type move damage", s16 damage)
         ASSUME(gBattleMoves[MOVE_TACKLE].type != TYPE_ELECTRIC);
         ASSUME(gBattleMoves[MOVE_WILD_CHARGE].type == TYPE_ELECTRIC);
         ASSUME(gBattleMoves[MOVE_THUNDER_SHOCK].type == TYPE_ELECTRIC);
-        ASSUME(gBattleMoves[MOVE_WILD_CHARGE].split == SPLIT_PHYSICAL);
-        ASSUME(gBattleMoves[MOVE_THUNDER_SHOCK].split == SPLIT_SPECIAL);
+        ASSUME(gBattleMoves[MOVE_WILD_CHARGE].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gBattleMoves[MOVE_THUNDER_SHOCK].category == BATTLE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_REGIELEKI) { Ability(ability); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

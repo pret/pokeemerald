@@ -76,7 +76,7 @@ SINGLE_BATTLE_TEST("Burn Heal heals a battler from being burned")
     }
 }
 
-SINGLE_BATTLE_TEST("Ice Heal heals a battler from being paralyzed")
+SINGLE_BATTLE_TEST("Ice Heal heals a battler from being frozen")
 {
     GIVEN {
         ASSUME(gItems[ITEM_ICE_HEAL].battleUsage == EFFECT_ITEM_CURE_STATUS);

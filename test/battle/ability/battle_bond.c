@@ -3,7 +3,6 @@
 
 ASSUMPTIONS
 {
-    ASSUME(P_GEN_6_POKEMON == TRUE);
     ASSUME(gBattleMoves[MOVE_WATER_GUN].power != 0);
 }
 

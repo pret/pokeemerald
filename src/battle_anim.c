@@ -237,7 +237,9 @@ void LaunchBattleAnimation(u32 animType, u32 animId)
     if (gTestRunnerEnabled)
     {
         TestRunner_Battle_RecordAnimation(animType, animId);
-        if (gTestRunnerHeadless)
+        // Play Transform and Ally Switch even in Headless as these move animations also change mon data.
+        if (gTestRunnerHeadless
+            && !(animType == ANIM_TYPE_MOVE && (animId == MOVE_TRANSFORM || animId == MOVE_ALLY_SWITCH)))
         {
             gAnimScriptCallback = Nop;
             gAnimScriptActive = FALSE;
@@ -278,6 +280,9 @@ void LaunchBattleAnimation(u32 animType, u32 animId)
         case B_ANIM_PRIMAL_REVERSION:
         case B_ANIM_ULTRA_BURST:
         case B_ANIM_GULP_MISSILE:
+        case B_ANIM_RAINBOW:
+        case B_ANIM_SEA_OF_FIRE:
+        case B_ANIM_SWAMP:
             sAnimHideHpBoxes = TRUE;
             break;
         default:

@@ -4,6 +4,7 @@
 #include "battle_anim.h"
 #include "battle_controllers.h"
 #include "characters.h"
+#include "event_data.h"
 #include "fieldmap.h"
 #include "item_menu.h"
 #include "main.h"
@@ -27,11 +28,25 @@
 #define INVALID(fmt, ...) Test_ExitWithResult(TEST_RESULT_INVALID, "%s:%d: " fmt, gTestRunnerState.test->filename, sourceLine, ##__VA_ARGS__)
 #define INVALID_IF(c, fmt, ...) do { if (c) Test_ExitWithResult(TEST_RESULT_INVALID, "%s:%d: " fmt, gTestRunnerState.test->filename, sourceLine, ##__VA_ARGS__); } while (0)
 
+#define ASSUMPTION_FAIL_IF(c, fmt, ...) do { if (c) Test_ExitWithResult(TEST_RESULT_ASSUMPTION_FAIL, "%s:%d: " fmt, gTestRunnerState.test->filename, sourceLine, ##__VA_ARGS__); } while (0)
+
 #define STATE gBattleTestRunnerState
 #define DATA gBattleTestRunnerState->data
 
-#define RNG_SEED_DEFAULT 0x00000000
+#if HQ_RANDOM == TRUE
+#define RNG_SEED_DEFAULT {0, 0, 0, 0}
+static inline bool32 RngSeedNotDefault(const rng_value_t *seed)
+{
+    return (seed->a | seed->b | seed->c | seed->ctr) != 0;
 
+}
+#else
+#define RNG_SEED_DEFAULT 0x00000000
+static inline bool32 RngSeedNotDefault(const rng_value_t *seed)
+{
+    return *seed != RNG_SEED_DEFAULT;
+}
+#endif
 #undef Q_4_12
 #define Q_4_12(n) (s32)((n) * 4096)
 
@@ -254,11 +269,12 @@ static void BattleTest_Run(void *data)
     s32 i;
     u32 requiredPlayerPartySize;
     u32 requiredOpponentPartySize;
+    const rng_value_t defaultSeed = RNG_SEED_DEFAULT;
     const struct BattleTest *test = data;
 
     memset(&DATA, 0, sizeof(DATA));
 
-    DATA.recordedBattle.rngSeed = RNG_SEED_DEFAULT;
+    DATA.recordedBattle.rngSeed = defaultSeed;
     DATA.recordedBattle.textSpeed = OPTIONS_TEXT_SPEED_FAST;
     // Set battle flags and opponent ids.
     switch (test->type)
@@ -865,6 +881,12 @@ void TestRunner_Battle_CheckSwitch(u32 battlerId, u32 partyIndex)
     DATA.aiActionsPlayed[battlerId]++;
 }
 
+void TestRunner_Battle_InvalidNoHPMon(u32 battlerId, u32 partyIndex)
+{
+    Test_ExitWithResult(TEST_RESULT_INVALID, "%s: INVALID: %s trying to send out a mon(id: %d) with 0 HP.",
+                        gTestRunnerState.test->filename, BattlerIdentifier(battlerId), gBattlerPartyIndexes[battlerId]);
+}
+
 static bool32 CheckComparision(s32 val1, s32 val2, u32 cmp)
 {
     switch (cmp)
@@ -1337,6 +1359,7 @@ static void CB2_BattleTest_NextParameter(void)
     if (++STATE->runParameter >= STATE->parameters)
     {
         SetMainCallback2(CB2_TestRunner);
+        ClearFlagAfterTest();
     }
     else
     {
@@ -1345,8 +1368,23 @@ static void CB2_BattleTest_NextParameter(void)
     }
 }
 
+static inline rng_value_t MakeRngValue(const u16 seed)
+{
+    #if HQ_RANDOM == TRUE
+        int i;
+        rng_value_t result = {0, 0, seed, 1};
+        for (i = 0; i < 16; i++)
+        {
+            _SFC32_Next(&result);
+        }
+        return result;
+    #else
+        return ISO_RANDOMIZE1(seed);
+    #endif
+}
 static void CB2_BattleTest_NextTrial(void)
 {
+    ClearFlagAfterTest();
     TearDownBattle();
 
     SetMainCallback2(CB2_BattleTest_NextParameter);
@@ -1368,7 +1406,7 @@ static void CB2_BattleTest_NextTrial(void)
     {
         PrintTestName();
         gTestRunnerState.result = TEST_RESULT_PASS;
-        DATA.recordedBattle.rngSeed = ISO_RANDOMIZE1(STATE->runTrial);
+        DATA.recordedBattle.rngSeed = MakeRngValue(STATE->runTrial);
         DATA.queuedEvent = 0;
         DATA.lastActionTurn = 0;
         SetVariablesForRecordedBattle(&DATA.recordedBattle);
@@ -1388,6 +1426,7 @@ static void BattleTest_TearDown(void *data)
 {
     // Free resources that aren't cleaned up when the battle was
     // aborted unexpectedly.
+    ClearFlagAfterTest();
     if (STATE->tearDownBattle)
         TearDownBattle();
 }
@@ -1440,16 +1479,17 @@ void Randomly(u32 sourceLine, u32 passes, u32 trials, struct RandomlyContext ctx
     }
     else
     {
-        INVALID_IF(DATA.recordedBattle.rngSeed != RNG_SEED_DEFAULT, "RNG seed already set");
+        const rng_value_t defaultSeed = RNG_SEED_DEFAULT;
+        INVALID_IF(RngSeedNotDefault(&DATA.recordedBattle.rngSeed), "RNG seed already set");
         STATE->trials = 50;
         STATE->trialRatio = Q_4_12(1) / STATE->trials;
-        DATA.recordedBattle.rngSeed = 0;
+        DATA.recordedBattle.rngSeed = defaultSeed;
     }
 }
 
-void RNGSeed_(u32 sourceLine, u32 seed)
+void RNGSeed_(u32 sourceLine, rng_value_t seed)
 {
-    INVALID_IF(DATA.recordedBattle.rngSeed != RNG_SEED_DEFAULT, "RNG seed already set");
+    INVALID_IF(RngSeedNotDefault(&DATA.recordedBattle.rngSeed), "RNG seed already set");
     DATA.recordedBattle.rngSeed = seed;
 }
 
@@ -1476,12 +1516,29 @@ const struct TestRunner gBattleTestRunner =
     .handleExitWithResult = BattleTest_HandleExitWithResult,
 };
 
+void SetFlagForTest(u32 sourceLine, u16 flagId)
+{
+    INVALID_IF(DATA.flagId != 0, "FLAG can only be set once per test");
+    DATA.flagId = flagId;
+    FlagSet(flagId);
+}
+
+void ClearFlagAfterTest(void)
+{
+    if (DATA.flagId != 0) 
+    {
+        FlagClear(DATA.flagId);
+        DATA.flagId = 0;
+    }
+}
+
 void OpenPokemon(u32 sourceLine, u32 side, u32 species)
 {
     s32 i, data;
     u8 *partySize;
     struct Pokemon *party;
     INVALID_IF(species >= SPECIES_EGG, "Invalid species: %d", species);
+    ASSUMPTION_FAIL_IF(!IsSpeciesEnabled(species), "Species disabled: %d", species);
     if (side == B_SIDE_PLAYER)
     {
         partySize = &DATA.playerPartySize;
@@ -1492,7 +1549,7 @@ void OpenPokemon(u32 sourceLine, u32 side, u32 species)
         partySize = &DATA.opponentPartySize;
         party = DATA.recordedBattle.opponentParty;
     }
-    INVALID_IF(*partySize == PARTY_SIZE, "Too many Pokemon in party");
+    INVALID_IF(*partySize >= PARTY_SIZE, "Too many Pokemon in party");
     DATA.currentSide = side;
     DATA.currentPartyIndex = *partySize;
     DATA.currentMon = &party[DATA.currentPartyIndex];

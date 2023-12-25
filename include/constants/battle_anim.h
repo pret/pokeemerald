@@ -515,6 +515,7 @@
 #define BG_STEEL_BEAM_OPPONENT 78
 #define BG_STEEL_BEAM_PLAYER 79
 #define BG_CHLOROBLAST 80
+#define BG_RAINBOW 81
 
 // table ids for general animations (gBattleAnims_General)
 #define B_ANIM_STATS_CHANGE             0
@@ -559,6 +560,9 @@
 #define B_ANIM_DYNAMAX_GROWTH           39
 #define B_ANIM_MAX_SET_WEATHER          40
 #define B_ANIM_SYRUP_BOMB_SPEED_DROP    41
+#define B_ANIM_RAINBOW                  42
+#define B_ANIM_SEA_OF_FIRE              43
+#define B_ANIM_SWAMP                    44
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

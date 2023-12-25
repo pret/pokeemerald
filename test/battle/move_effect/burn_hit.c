@@ -101,3 +101,32 @@ DOUBLE_BATTLE_TEST("Matcha Gatcha can burn both targets")
         STATUS_ICON(opponentRight, burn: TRUE);
     }
 }
+
+#if B_STATUS_TYPE_IMMUNITY > GEN_1
+SINGLE_BATTLE_TEST("Scald should burn a Water-type Pokémon")
+#else
+SINGLE_BATTLE_TEST("Scald shouldn't burn a Water-type Pokémon")
+#endif
+{
+    GIVEN {
+        ASSUME(gSpeciesInfo[SPECIES_SQUIRTLE].types[0] == TYPE_WATER);
+        ASSUME(MoveHasMoveEffect(MOVE_SCALD, MOVE_EFFECT_BURN, FALSE) == TRUE);
+        ASSUME(gBattleMoves[MOVE_SCALD].type == TYPE_WATER);
+        PLAYER(SPECIES_SQUIRTLE);
+        OPPONENT(SPECIES_SQUIRTLE);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCALD); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALD, player);
+        HP_BAR(opponent);
+        #if B_STATUS_TYPE_IMMUNITY > GEN_1
+            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, opponent);
+            STATUS_ICON(opponent, burn: TRUE);
+        #else
+            NONE_OF {
+                ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, opponent);
+                STATUS_ICON(opponent, burn: TRUE);
+            }
+        #endif
+    }
+}

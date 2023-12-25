@@ -4,9 +4,9 @@
 ASSUMPTIONS
 {
     ASSUME(gBattleMoves[MOVE_SHELL_TRAP].effect == EFFECT_SHELL_TRAP);
-    ASSUME(gBattleMoves[MOVE_TACKLE].split == SPLIT_PHYSICAL);
-    ASSUME(gBattleMoves[MOVE_WATER_GUN].split == SPLIT_SPECIAL);
-    ASSUME(gBattleMoves[MOVE_LEER].split == SPLIT_STATUS);
+    ASSUME(gBattleMoves[MOVE_TACKLE].category == BATTLE_CATEGORY_PHYSICAL);
+    ASSUME(gBattleMoves[MOVE_WATER_GUN].category == BATTLE_CATEGORY_SPECIAL);
+    ASSUME(gBattleMoves[MOVE_LEER].category == BATTLE_CATEGORY_STATUS);
 }
 
 SINGLE_BATTLE_TEST("Shell Trap activates only if hit by a physical move")

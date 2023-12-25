@@ -31,6 +31,7 @@ void ItemUseOutOfBattle_FormChange(u8);
 void ItemUseOutOfBattle_FormChange_ConsumedOnUse(u8);
 void ItemUseOutOfBattle_RotomCatalog(u8);
 void ItemUseOutOfBattle_ZygardeCube(u8);
+void ItemUseOutOfBattle_Fusion(u8);
 void ItemUseOutOfBattle_Honey(u8);
 void ItemUseOutOfBattle_CannotUse(u8);
 void ItemUseOutOfBattle_ExpShare(u8);
@@ -40,6 +41,8 @@ void ItemUseInBattle_PartyMenuChooseMove(u8 taskId);
 void Task_UseDigEscapeRopeOnField(u8 taskId);
 u8 CanUseDigOrEscapeRopeOnCurMap(void);
 u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId);
+void FieldUseFunc_VsSeeker(u8 taskId);
+void Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker(u8 taskId);
 
 enum {
     BALL_THROW_UNABLE_TWO_MONS,

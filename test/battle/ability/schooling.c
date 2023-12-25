@@ -8,7 +8,6 @@ SINGLE_BATTLE_TEST("Schooling switches Level 20+ Wishiwashi's form when HP is 25
     PARAMETRIZE { level = 20; }
 
     GIVEN {
-        ASSUME(P_GEN_7_POKEMON == TRUE);
         ASSUME(gSpeciesInfo[SPECIES_WISHIWASHI_SOLO].baseHP == gSpeciesInfo[SPECIES_WISHIWASHI_SCHOOL].baseHP);
         PLAYER(SPECIES_WISHIWASHI_SOLO)
         {
@@ -48,7 +47,6 @@ SINGLE_BATTLE_TEST("Schooling switches Level 20+ Wishiwashi's form when HP is ov
     PARAMETRIZE { level = 20; overQuarterHP = TRUE; }
 
     GIVEN {
-        ASSUME(P_GEN_7_POKEMON == TRUE);
         ASSUME(gSpeciesInfo[SPECIES_WISHIWASHI_SOLO].baseHP == gSpeciesInfo[SPECIES_WISHIWASHI_SCHOOL].baseHP);
         PLAYER(SPECIES_WISHIWASHI_SOLO)
         {
@@ -82,7 +80,6 @@ SINGLE_BATTLE_TEST("Schooling switches Level 20+ Wishiwashi's form when HP is he
     PARAMETRIZE { level = 20; }
 
     GIVEN {
-        ASSUME(P_GEN_7_POKEMON == TRUE);
         ASSUME(gSpeciesInfo[SPECIES_WISHIWASHI_SOLO].baseHP == gSpeciesInfo[SPECIES_WISHIWASHI_SCHOOL].baseHP);
         PLAYER(SPECIES_WISHIWASHI_SOLO)
         {

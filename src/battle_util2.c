@@ -19,6 +19,10 @@ void AllocateBattleResources(void)
 
     gBattleStruct = AllocZeroed(sizeof(*gBattleStruct));
 
+#if B_FLAG_SKY_BATTLE
+    gBattleStruct->isSkyBattle = FlagGet(B_FLAG_SKY_BATTLE);
+#endif
+
     gBattleResources = AllocZeroed(sizeof(*gBattleResources));
     gBattleResources->secretBase = AllocZeroed(sizeof(*gBattleResources->secretBase));
     gBattleResources->flags = AllocZeroed(sizeof(*gBattleResources->flags));

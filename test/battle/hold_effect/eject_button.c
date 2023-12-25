@@ -187,3 +187,24 @@ SINGLE_BATTLE_TEST("Eject Button is activated before Emergency Exit")
         MESSAGE("Foe Golisopod is switched out with the Eject Button!");
     }
 }
+
+SINGLE_BATTLE_TEST("Eject Button is not triggered after High Jump Kick crash damage")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN {
+            MOVE(player, MOVE_PROTECT);
+            MOVE(opponent, MOVE_HIGH_JUMP_KICK);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_PROTECT, player);
+        MESSAGE("Foe Wobbuffet kept going and crashed!");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
+            MESSAGE("Foe Wobbuffet is switched out with the Eject Button!");
+        }
+    }
+}

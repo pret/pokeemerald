@@ -31,11 +31,11 @@ SINGLE_BATTLE_TEST("Damage calculation matches Gen5+")
             MOVE(player, MOVE_ICE_FANG, WITH_RNG(RNG_DAMAGE_MODIFIER, i));
         }
     }
-    SCENE{
+    SCENE {
         MESSAGE("Glaceon used Ice Fang!");
         HP_BAR(opponent, captureDamage: &dmg);
     }
-    THEN{
+    THEN {
         EXPECT_EQ(expectedDamage, dmg);
     }
 }
@@ -68,11 +68,11 @@ SINGLE_BATTLE_TEST("Damage calculation matches Gen5+ (Muscle Band, crit)")
             MOVE(player, MOVE_ICE_FANG, WITH_RNG(RNG_DAMAGE_MODIFIER, i), criticalHit: TRUE);
         }
     }
-    SCENE{
+    SCENE {
         MESSAGE("Glaceon used Ice Fang!");
         HP_BAR(opponent, captureDamage: &dmg);
     }
-    THEN{
+    THEN {
         EXPECT_EQ(expectedDamage, dmg);
     }
 }

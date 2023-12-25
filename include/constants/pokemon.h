@@ -25,24 +25,24 @@
 #define NUMBER_OF_MON_TYPES   19
 
 // Pokemon egg groups
-#define EGG_GROUP_NONE          0
-#define EGG_GROUP_MONSTER       1
-#define EGG_GROUP_WATER_1       2
-#define EGG_GROUP_BUG           3
-#define EGG_GROUP_FLYING        4
-#define EGG_GROUP_FIELD         5
-#define EGG_GROUP_FAIRY         6
-#define EGG_GROUP_GRASS         7
-#define EGG_GROUP_HUMAN_LIKE    8
-#define EGG_GROUP_WATER_3       9
-#define EGG_GROUP_MINERAL       10
-#define EGG_GROUP_AMORPHOUS     11
-#define EGG_GROUP_WATER_2       12
-#define EGG_GROUP_DITTO         13
-#define EGG_GROUP_DRAGON        14
-#define EGG_GROUP_UNDISCOVERED  15
+#define EGG_GROUP_NONE                0
+#define EGG_GROUP_MONSTER             1
+#define EGG_GROUP_WATER_1             2
+#define EGG_GROUP_BUG                 3
+#define EGG_GROUP_FLYING              4
+#define EGG_GROUP_FIELD               5
+#define EGG_GROUP_FAIRY               6
+#define EGG_GROUP_GRASS               7
+#define EGG_GROUP_HUMAN_LIKE          8
+#define EGG_GROUP_WATER_3             9
+#define EGG_GROUP_MINERAL             10
+#define EGG_GROUP_AMORPHOUS           11
+#define EGG_GROUP_WATER_2             12
+#define EGG_GROUP_DITTO               13
+#define EGG_GROUP_DRAGON              14
+#define EGG_GROUP_NO_EGGS_DISCOVERED  15
 
-#define EGG_GROUPS_PER_MON      2
+#define EGG_GROUPS_PER_MON            2
 
 // Pokemon natures
 #define NATURE_HARDY    0
@@ -225,10 +225,10 @@
 #define EV_ITEM_RAISE_LIMIT 100
 #endif
 
-// Split defines.
-#define SPLIT_PHYSICAL  0x0
-#define SPLIT_SPECIAL   0x1
-#define SPLIT_STATUS    0x2
+// Move category defines.
+#define BATTLE_CATEGORY_PHYSICAL    0
+#define BATTLE_CATEGORY_SPECIAL     1
+#define BATTLE_CATEGORY_STATUS      2
 
 // Growth rates
 #define GROWTH_MEDIUM_FAST  0
@@ -253,7 +253,8 @@
 #define F_SUMMARY_SCREEN_FLIP_SPRITE 0x80
 
 // Evolution types
-#define EVO_NONE                          0xffff // Not an actual evolution, used to generate offspring that can't evolve into the specified species, like regional forms.
+#define EVOLUTIONS_END                    0xFFFF // Not an actual evolution, used to mark the end of an evolution array.
+#define EVO_NONE                          0xFFFE // Not an actual evolution, used to generate offspring that can't evolve into the specified species, like regional forms.
 #define EVO_FRIENDSHIP                    1      // Pokémon levels up with friendship ≥ 220
 #define EVO_FRIENDSHIP_DAY                2      // Pokémon levels up during the day with friendship ≥ 220
 #define EVO_FRIENDSHIP_NIGHT              3      // Pokémon levels up at night with friendship ≥ 220
@@ -301,8 +302,6 @@
 #define EVO_LEVEL_FAMILY_OF_THREE         45     // Pokémon reaches the specified level with a personality value with a modulus of 0
 #define EVO_LEVEL_FAMILY_OF_FOUR          46     // Pokémon reaches the specified level with a personality value with a modulus of 1-99
 
-#define EVOS_PER_MON 11
-
 // Evolution 'modes,' for GetEvolutionTargetSpecies
 #define EVO_MODE_NORMAL            0
 #define EVO_MODE_TRADE             1
@@ -330,21 +329,6 @@
 #define NUM_ABILITY_SLOTS (NUM_NORMAL_ABILITY_SLOTS + NUM_HIDDEN_ABILITY_SLOTS)
 #define NUM_NORMAL_ABILITY_SLOTS 2
 #define NUM_HIDDEN_ABILITY_SLOTS 1
-
-// Species Flags
-#define SPECIES_FLAG_LEGENDARY          (1 << 0)
-#define SPECIES_FLAG_MYTHICAL           (1 << 1)
-#define SPECIES_FLAG_MEGA_EVOLUTION     (1 << 2)
-#define SPECIES_FLAG_PRIMAL_REVERSION   (1 << 3)
-#define SPECIES_FLAG_ULTRA_BEAST        (1 << 4)
-#define SPECIES_FLAG_ALOLAN_FORM        (1 << 5)
-#define SPECIES_FLAG_GALARIAN_FORM      (1 << 6)
-#define SPECIES_FLAG_HISUIAN_FORM       (1 << 7)
-#define SPECIES_FLAG_PALDEAN_FORM       (1 << 8)
-#define SPECIES_FLAG_ALL_PERFECT_IVS    (1 << 9)
-#define SPECIES_FLAG_CANNOT_BE_TRADED   (1 << 10)
-#define SPECIES_FLAG_ULTRA_BURST        (1 << 11)
-#define SPECIES_FLAG_PARADOX            (1 << 12)
 
 #define LEGENDARY_PERFECT_IV_COUNT 3
 

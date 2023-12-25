@@ -26,5 +26,7 @@ u8 FldEff_HeartIcon(void);
 u8 GetCurrentApproachingTrainerObjectEventId(void);
 u8 GetChosenApproachingTrainerObjectEventId(u8 arrayId);
 void PlayerFaceTrainerAfterBattle(void);
+u8 FldEff_DoubleExclMarkIcon(void);
+u8 FldEff_XIcon(void);
 
 #endif // GUARD_TRAINER_SEE_H

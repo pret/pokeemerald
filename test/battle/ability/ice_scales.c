@@ -1,11 +1,6 @@
 #include "global.h"
 #include "test/battle.h"
 
-ASSUMPTIONS
-{
-    ASSUME(P_GEN_8_POKEMON == TRUE); // Because only Frosmoth can have this ability.
-}
-
 SINGLE_BATTLE_TEST("Ice Scales halves the damage from special moves", s16 damage)
 {
     u32 move;
@@ -17,10 +12,10 @@ SINGLE_BATTLE_TEST("Ice Scales halves the damage from special moves", s16 damage
     PARAMETRIZE { ability = ABILITY_SHIELD_DUST; move = MOVE_TACKLE; }
     PARAMETRIZE { ability = ABILITY_ICE_SCALES; move = MOVE_TACKLE; }
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_PSYCHIC].split == SPLIT_SPECIAL);
-        ASSUME(gBattleMoves[MOVE_PSYSHOCK].split == SPLIT_SPECIAL);
+        ASSUME(gBattleMoves[MOVE_PSYCHIC].category == BATTLE_CATEGORY_SPECIAL);
+        ASSUME(gBattleMoves[MOVE_PSYSHOCK].category == BATTLE_CATEGORY_SPECIAL);
         ASSUME(gBattleMoves[MOVE_PSYSHOCK].effect == EFFECT_PSYSHOCK);
-        ASSUME(gBattleMoves[MOVE_TACKLE].split == SPLIT_PHYSICAL);
+        ASSUME(gBattleMoves[MOVE_TACKLE].category == BATTLE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_FROSMOTH) { Ability(ability); }
     } WHEN {

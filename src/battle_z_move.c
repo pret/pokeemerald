@@ -149,9 +149,9 @@ void QueueZMove(u8 battler, u16 baseMove)
     gBattleStruct->zmove.toBeUsed[battler] = gBattleStruct->zmove.chosenZMove;
     gBattleStruct->zmove.baseMoves[battler] = baseMove;
     if (gBattleStruct->zmove.chosenZMove == MOVE_LIGHT_THAT_BURNS_THE_SKY)
-        gBattleStruct->zmove.splits[battler] = GetSplitBasedOnStats(battler);
+        gBattleStruct->zmove.categories[battler] = GetCategoryBasedOnStats(battler);
     else
-        gBattleStruct->zmove.splits[battler] = gBattleMoves[baseMove].split;
+        gBattleStruct->zmove.categories[battler] = gBattleMoves[baseMove].category;
 }
 
 bool32 IsViableZMove(u8 battler, u16 move)
@@ -406,7 +406,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove, u32 battler)
 
         if (IS_MOVE_STATUS(move))
         {
-            u8 zEffect = gBattleMoves[move].zMoveEffect;
+            u8 zEffect = gBattleMoves[move].zMove.effect;
 
             gDisplayedStringBattle[0] = EOS;
 
@@ -518,7 +518,7 @@ static void ZMoveSelectionDisplayPower(u16 move, u16 zMove)
     if (zMove >= MOVE_CATASTROPIKA)
         power = gBattleMoves[zMove].power;
 
-    if (gBattleMoves[move].split != SPLIT_STATUS)
+    if (gBattleMoves[move].category != BATTLE_CATEGORY_STATUS)
     {
         txtPtr = StringCopy(gDisplayedStringBattle, sText_PowerColon);
         ConvertIntToDecimalStringN(txtPtr, power, STR_CONV_MODE_LEFT_ALIGN, 3);
@@ -687,43 +687,35 @@ static bool32 AreStatsMaxed(u8 battler, u8 n)
 
 u16 GetZMovePower(u16 move)
 {
-    if (gBattleMoves[move].split == SPLIT_STATUS)
+    if (gBattleMoves[move].category == BATTLE_CATEGORY_STATUS)
         return 0;
     if (gBattleMoves[move].effect == EFFECT_OHKO)
         return 180;
 
-    switch (move)
+    if (gBattleMoves[move].zMove.powerOverride > 0)
+        return gBattleMoves[move].zMove.powerOverride;
+    else
     {
-        case MOVE_MEGA_DRAIN:    return 120;
-        case MOVE_CORE_ENFORCER: return 140;
-        case MOVE_WEATHER_BALL:  return 160;
-        case MOVE_HEX:           return 160;
-        case MOVE_FLYING_PRESS:  return 170;
-        case MOVE_GEAR_GRIND:    return 180;
-        case MOVE_V_CREATE:      return 220;
-        default:
-        {
-            if (gBattleMoves[move].power >= 140)
-                return 200;
-            else if (gBattleMoves[move].power >= 130)
-                return 195;
-            else if (gBattleMoves[move].power >= 120)
-                return 190;
-            else if (gBattleMoves[move].power >= 110)
-                return 185;
-            else if (gBattleMoves[move].power >= 100)
-                return 180;
-            else if (gBattleMoves[move].power >= 90)
-                return 175;
-            else if (gBattleMoves[move].power >= 80)
-                return 160;
-            else if (gBattleMoves[move].power >= 70)
-                return 140;
-            else if (gBattleMoves[move].power >= 60)
-                return 120;
-            else
-                return 100;
-        }
+        if (gBattleMoves[move].power >= 140)
+            return 200;
+        else if (gBattleMoves[move].power >= 130)
+            return 195;
+        else if (gBattleMoves[move].power >= 120)
+            return 190;
+        else if (gBattleMoves[move].power >= 110)
+            return 185;
+        else if (gBattleMoves[move].power >= 100)
+            return 180;
+        else if (gBattleMoves[move].power >= 90)
+            return 175;
+        else if (gBattleMoves[move].power >= 80)
+            return 160;
+        else if (gBattleMoves[move].power >= 70)
+            return 140;
+        else if (gBattleMoves[move].power >= 60)
+            return 120;
+        else
+            return 100;
     }
 }
 
