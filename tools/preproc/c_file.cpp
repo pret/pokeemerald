@@ -321,10 +321,10 @@ int ExtractData(const std::unique_ptr<unsigned char[]>& buffer, int offset, int 
 
 void CFile::TryConvertIncbin()
 {
-    std::string idents[6] = { "INCBIN_S8", "INCBIN_U8", "INCBIN_S16", "INCBIN_U16", "INCBIN_S32", "INCBIN_U32" };
+    std::string idents[8] = { "INCBIN_S8", "INCBIN_U8", "INCBIN_S16", "INCBIN_U16", "INCBIN_S32", "INCBIN_U32", "DUMMY", "INCBIN_COMP"};
     int incbinType = -1;
 
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 8; i++)
     {
         if (CheckIdentifier(idents[i]))
         {
@@ -337,6 +337,8 @@ void CFile::TryConvertIncbin()
         return;
 
     int size = 1 << (incbinType / 2);
+    if (size > 4)
+        size = 4;
     bool isSigned = ((incbinType % 2) == 0);
 
     long oldPos = m_pos;
@@ -388,6 +390,10 @@ void CFile::TryConvertIncbin()
         }
 
         std::string path(&m_buffer[startPos], m_pos - startPos);
+
+        // INCBIN_COMP; include *compressed* version of file
+        if (incbinType == 7)
+            path = path.append(".lz");
 
         m_pos++;
 

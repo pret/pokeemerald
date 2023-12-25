@@ -292,6 +292,11 @@
 // will display correctly under bridges, etc.
 #define LARGE_OW_SUPPORT TRUE
 
+// See global.h for the toggle of OW_GFX_COMPRESS
+// Compressed gfx are incompatible with non-power-of-two sprite sizes:
+// (You should not use 48x48 sprites/tables for compressed gfx)
+// 16x32, 32x32, 64x64 etc are fine
+
 #define SHADOW_SIZE_S   0
 #define SHADOW_SIZE_M   1
 #define SHADOW_SIZE_L   2
