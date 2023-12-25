@@ -223,6 +223,8 @@ bool32 IsAlly(u32 battlerAtk, u32 battlerDef);
 bool32 IsGen6ExpShareEnabled(void);
 bool32 MoveEffectIsGuaranteed(u32 secondaryEffectChance);
 bool32 MoveHasMoveEffect(u32 move, u32 moveEffect, bool32 effectHitOnly);
+bool32 MoveHasMoveEffectWithChance(u32 move, u32 moveEffect, u32 chance);
+bool32 MoveHasMoveEffectSelf(u32 move, u32 moveEffect);
 
 // Ability checks
 bool32 IsSkillSwapBannedAbility(u16 ability);

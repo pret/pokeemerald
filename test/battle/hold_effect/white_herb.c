@@ -190,7 +190,7 @@ SINGLE_BATTLE_TEST("White Herb wont have time to activate if Pickpocket steals i
 {
     KNOWN_FAILING; // White Herb is activated
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_LEAF_STORM].effect == EFFECT_OVERHEAT);
+        ASSUME(MoveHasMoveEffectSelf(MOVE_LEAF_STORM, MOVE_EFFECT_SP_ATK_TWO_DOWN));
         PLAYER(SPECIES_SLUGMA) {  Ability(ABILITY_WEAK_ARMOR); Item(ITEM_WHITE_HERB); }
         OPPONENT(SPECIES_SNEASEL) { Ability(ABILITY_PICKPOCKET); }
     } WHEN {

@@ -11398,6 +11398,30 @@ bool32 MoveHasMoveEffect(u32 move, u32 moveEffect, bool32 effectHitOnly)
     return FALSE;
 }
 
+bool32 MoveHasMoveEffectWithChance(u32 move, u32 moveEffect, u32 chance)
+{
+    u8 i;
+    for (i = 0; i < gBattleMoves[move].numAdditionalEffects; i++)
+    {
+        if (gBattleMoves[move].additionalEffects[i].moveEffect == moveEffect
+            && gBattleMoves[move].additionalEffects[i].chance == chance)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 MoveHasMoveEffectSelf(u32 move, u32 moveEffect)
+{
+    u8 i;
+    for (i = 0; i < gBattleMoves[move].numAdditionalEffects; i++)
+    {
+        if (gBattleMoves[move].additionalEffects[i].moveEffect == moveEffect
+            && gBattleMoves[move].additionalEffects[i].self == TRUE)
+            return TRUE;
+    }
+    return FALSE;
+}
+
 bool8 CanMonParticipateInSkyBattle(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES);

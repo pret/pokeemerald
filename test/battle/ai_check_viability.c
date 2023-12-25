@@ -176,10 +176,8 @@ AI_SINGLE_BATTLE_TEST("AI chooses moves with secondary effect that have a 100% c
 
     GIVEN {
         AI_LOG;
-        ASSUME(gBattleMoves[MOVE_SHADOW_BALL].effect == EFFECT_SPECIAL_DEFENSE_DOWN_HIT);
-        ASSUME(gBattleMoves[MOVE_SHADOW_BALL].secondaryEffectChance == 20);
-        ASSUME(gBattleMoves[MOVE_LUSTER_PURGE].effect == EFFECT_SPECIAL_DEFENSE_DOWN_HIT);
-        ASSUME(gBattleMoves[MOVE_LUSTER_PURGE].secondaryEffectChance == 50);
+        ASSUME(MoveHasMoveEffectWithChance(MOVE_SHADOW_BALL, MOVE_EFFECT_SP_DEF_MINUS_1, 20));
+        ASSUME(MoveHasMoveEffectWithChance(MOVE_LUSTER_PURGE, MOVE_EFFECT_SP_DEF_MINUS_1, 50));
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_REGICE);
         OPPONENT(SPECIES_REGIROCK) { Ability(ability); Moves(MOVE_SHADOW_BALL, MOVE_LUSTER_PURGE); }
