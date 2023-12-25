@@ -3188,7 +3188,6 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     struct AiLogicData *aiData = AI_DATA;
     u32 movesetIndex = AI_THINKING_STRUCT->movesetIndex;
     u32 effectiveness = aiData->effectiveness[battlerAtk][battlerDef][movesetIndex];
-    u32 secondaryEffectChance = AI_CalcSecondaryEffectChance(battlerAtk, gBattleMoves[move].secondaryEffectChance);
     s8 atkPriority = GetMovePriority(battlerAtk, move);
     u32 predictedMove = aiData->predictedMoves[battlerDef];
     u32 predictedMoveSlot = GetMoveSlot(GetMovesArray(battlerDef), predictedMove);

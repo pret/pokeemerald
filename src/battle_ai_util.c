@@ -3828,3 +3828,31 @@ u32 AI_CalcSecondaryEffectChance(u32 battler, u32 secondaryEffectChance)
 
     return secondaryEffectChance;
 }
+
+bool32 AI_ShouldCopyStatChanges(u32 battlerAtk, u32 battlerDef)
+{
+    u8 i;
+    // Want to copy positive stat changes
+    for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
+    {
+        if (gBattleMons[battlerDef].statStages[i] > gBattleMons[battlerAtk].statStages[i])
+        {
+            switch (i)
+            {
+            case STAT_ATK:
+                return (HasMoveWithCategory(battlerAtk, BATTLE_CATEGORY_PHYSICAL));
+            case STAT_SPATK:
+                return (HasMoveWithCategory(battlerAtk, BATTLE_CATEGORY_SPECIAL));
+            case STAT_ACC:
+            case STAT_EVASION:
+            case STAT_SPEED:
+                return TRUE;
+            case STAT_DEF:
+            case STAT_SPDEF:
+                return (AI_THINKING_STRUCT->aiFlags & AI_FLAG_STALL);
+            }
+        }
+    }
+
+    return FALSE;
+}
