@@ -98,7 +98,6 @@ SINGLE_BATTLE_TEST("U-turn switches the user out if Wimp Out fails to activate")
 SINGLE_BATTLE_TEST("U-turn switches the user out after Ice Face activates")
 {
     GIVEN {
-        ASSUME(P_GEN_8_POKEMON == TRUE);
         PLAYER(SPECIES_BEEDRILL);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_EISCUE) { Ability(ABILITY_ICE_FACE); }
