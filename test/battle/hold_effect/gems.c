@@ -32,7 +32,7 @@ SINGLE_BATTLE_TEST("Gem boost is only applied once")
     s16 normalHit;
 
     GIVEN {
-        ASSUME(I_GEM_BOOST_POWER >= GEN_5);
+        ASSUME(I_GEM_BOOST_POWER >= GEN_6);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMAL_GEM); };
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
