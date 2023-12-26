@@ -3716,20 +3716,14 @@ static void Cmd_seteffectwithchance(void)
     {
         if (gBattleScripting.moveEffect &= ~(MOVE_EFFECT_CONTINUE))
         {
-            u32 percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance; // CalcSecondaryEffectChance(gBattlerAttacker, gBattleMoves[gCurrentMove].secondaryEffectChance, gCurrentMove);
-            if (gBattleScripting.moveEffect & MOVE_EFFECT_CERTAIN
-            || percentChance >= 100)
+            if (gBattleScripting.moveEffect & MOVE_EFFECT_CERTAIN)
             {
                 gBattleScripting.moveEffect &= ~MOVE_EFFECT_CERTAIN;
                 SetMoveEffect(FALSE, MOVE_EFFECT_CERTAIN);
             }
-            else if (RandomPercentage(RNG_SECONDARY_EFFECT, percentChance))
-            {
-                SetMoveEffect(FALSE, 0);
-            }
             else
             {
-                gBattlescriptCurrInstr = cmd->nextInstr;
+                SetMoveEffect(FALSE, 0);
             }
             gBattleScripting.moveEffect = 0;
         }
@@ -5424,10 +5418,7 @@ static void Cmd_moveend(void)
                 case EFFECT_RECOIL:
                     gBattleMoveDamage = max(1, gBattleScripting.savedDmg * max(1, gBattleMoves[gCurrentMove].recoil) / 100);
                     BattleScriptPushCursor();
-                    if (gBattleMoves[gCurrentMove].argument) // Flare Blitz - can burn, Volt Tackle - can paralyze
-                        gBattlescriptCurrInstr = BattleScript_MoveEffectRecoilWithStatus;
-                    else
-                        gBattlescriptCurrInstr = BattleScript_MoveEffectRecoil;
+                    gBattlescriptCurrInstr = BattleScript_MoveEffectRecoil;
                     effect = TRUE;
                     break;
                 }
@@ -9521,44 +9512,6 @@ static void Cmd_various(void)
         else
             gBattlescriptCurrInstr = cmd->failInstr;
         return;
-    }
-    case VARIOUS_ARGUMENT_STATUS_EFFECT:
-    {
-        VARIOUS_ARGS();
-        switch (gBattleMoves[gCurrentMove].argument)
-        {
-        case STATUS1_SLEEP:
-            gBattleScripting.moveEffect = MOVE_EFFECT_SLEEP;
-            break;
-        case STATUS1_BURN:
-            gBattleScripting.moveEffect = MOVE_EFFECT_BURN;
-            break;
-        case STATUS1_FREEZE:
-            gBattleScripting.moveEffect = MOVE_EFFECT_FREEZE;
-            break;
-        case STATUS1_PARALYSIS:
-            gBattleScripting.moveEffect = MOVE_EFFECT_PARALYSIS;
-            break;
-        case STATUS1_POISON:
-            gBattleScripting.moveEffect = MOVE_EFFECT_POISON;
-            break;
-        case STATUS1_TOXIC_POISON:
-            gBattleScripting.moveEffect = MOVE_EFFECT_TOXIC;
-            break;
-        case STATUS1_FROSTBITE:
-            gBattleScripting.moveEffect = MOVE_EFFECT_FROSTBITE;
-            break;
-        default:
-            gBattleScripting.moveEffect = 0;
-            break;
-        }
-        if (gBattleScripting.moveEffect != 0)
-        {
-            BattleScriptPush(cmd->nextInstr);
-            gBattlescriptCurrInstr = BattleScript_EffectWithChance;
-            return;
-        }
-        break;
     }
     case VARIOUS_TRY_HIT_SWITCH_TARGET:
     {

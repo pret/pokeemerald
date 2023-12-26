@@ -1808,10 +1808,6 @@
 	.4byte \jumpInstr
 	.endm
 
-	.macro argumentstatuseffect
-	various BS_ATTACKER, VARIOUS_ARGUMENT_STATUS_EFFECT
-	.endm
-
 	.macro tryhitswitchtarget failInstr:req
 	various BS_ATTACKER, VARIOUS_TRY_HIT_SWITCH_TARGET
 	.4byte \failInstr

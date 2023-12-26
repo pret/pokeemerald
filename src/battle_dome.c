@@ -4392,7 +4392,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                     allocatedArray[k] = (gBattleMoves[move].pp <= 5) ? 1 : 0;
                     break;
                 case MOVE_POINTS_EFFECT:
-                    allocatedArray[k] = (gBattleMoves[move].secondaryEffectChance > 0) ? 1 : 0;
+                    allocatedArray[k] = gBattleMoves[move].sheerForceBoost;
                     break;
                 }
             }
