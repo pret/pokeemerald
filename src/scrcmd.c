@@ -1390,7 +1390,7 @@ bool8 ScrCmd_dynmultichoice(struct ScriptContext *ctx)
     struct ListMenuItem *items;
 
     if (argc == 0)
-        return;
+        return FALSE;
 
     if (maxBeforeScroll == 0xFF)
         maxBeforeScroll = DYN_MULTICHOICE_DEFAULT_MAX_BEFORE_SCROLL;
@@ -1446,6 +1446,7 @@ bool8 ScrCmd_dynmultipush(struct ScriptContext *ctx)
     item.name = nameBuffer;
     item.id = id;
     MultichoiceDynamic_PushElement(item);
+    return FALSE;
 }
 
 bool8 ScrCmd_multichoice(struct ScriptContext *ctx)
