@@ -584,7 +584,7 @@ static void Cmd_trysetsnatch(void);
 static void Cmd_unused2(void);
 static void Cmd_switchoutabilities(void);
 static void Cmd_jumpifhasnohp(void);
-static void Cmd_getsecretpowereffect(void);
+static void Cmd_unused0xe4(void);
 static void Cmd_pickup(void);
 static void Cmd_unused3(void);
 static void Cmd_unused4(void);
@@ -843,7 +843,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_unused2,                                 //0xE1
     Cmd_switchoutabilities,                      //0xE2
     Cmd_jumpifhasnohp,                           //0xE3
-    Cmd_getsecretpowereffect,                    //0xE4
+    Cmd_unused0xe4,                              //0xE4
     Cmd_pickup,                                  //0xE5
     Cmd_unused3,                                 //0xE6
     Cmd_unused4,                                 //0xE7
@@ -3662,7 +3662,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 {
                     static const u8 sDireClawEffects[] = { MOVE_EFFECT_POISON, MOVE_EFFECT_PARALYSIS, MOVE_EFFECT_SLEEP };
                     gBattleScripting.moveEffect = RandomElement(RNG_DIRE_CLAW, sDireClawEffects);
-                    SetMoveEffect(TRUE, 0);
+                    SetMoveEffect(FALSE, 0);
                 }
                 break;
             case MOVE_EFFECT_STEALTH_ROCK:
@@ -3697,6 +3697,10 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     gBattlescriptCurrInstr = BattleScript_SyrupBombActivates;
                 }
                 break;
+            case MOVE_EFFECT_SECRET_POWER:
+                gBattleScripting.moveEffect = GetSecretPowerMoveEffect();
+                SetMoveEffect(FALSE, 0);
+                break;
             }
         }
     }
@@ -3712,7 +3716,7 @@ static void Cmd_seteffectwithchance(void)
     {
         if (gBattleScripting.moveEffect &= ~(MOVE_EFFECT_CONTINUE))
         {
-            u32 percentChance = CalcSecondaryEffectChance(gBattlerAttacker, gBattleMoves[gCurrentMove].secondaryEffectChance, gCurrentMove);
+            u32 percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance; // CalcSecondaryEffectChance(gBattlerAttacker, gBattleMoves[gCurrentMove].secondaryEffectChance, gCurrentMove);
             if (gBattleScripting.moveEffect & MOVE_EFFECT_CERTAIN
             || percentChance >= 100)
             {
@@ -3733,8 +3737,7 @@ static void Cmd_seteffectwithchance(void)
         {
             u32 percentChance = CalcSecondaryEffectChance(
                 gBattlerAttacker,
-                gBattleMoves[gCurrentMove].additionalEffects[gBattleStruct->additionalEffectsCounter].chance,
-                gCurrentMove
+                &gBattleMoves[gCurrentMove].additionalEffects[gBattleStruct->additionalEffectsCounter]
             );
             const u8 *currentPtr = gBattlescriptCurrInstr;
 
@@ -3746,7 +3749,7 @@ static void Cmd_seteffectwithchance(void)
 
                 SetMoveEffect(
                     percentChance == 0, // a primary effect
-                    percentChance >= 100 // certain to happen
+                    MOVE_EFFECT_CERTAIN * (percentChance >= 100) // certain to happen
                 );
             }
 
@@ -11649,7 +11652,7 @@ static void Cmd_confuseifrepeatingattackends(void)
     CMD_ARGS();
 
     if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_LOCK_CONFUSE) && !gSpecialStatuses[gBattlerAttacker].dancerUsedMove)
-        gBattleScripting.moveEffect = (MOVE_EFFECT_THRASH | MOVE_EFFECT_AFFECTS_USER);
+        gBattleScripting.moveEffect = (MOVE_EFFECT_THRASH | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN);
 
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
@@ -14391,12 +14394,8 @@ static void Cmd_jumpifhasnohp(void)
         gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-static void Cmd_getsecretpowereffect(void)
+static void Cmd_unused0xe4(void)
 {
-    CMD_ARGS();
-
-    gBattleScripting.moveEffect = GetSecretPowerMoveEffect();
-    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 u16 GetSecretPowerMoveEffect(void)

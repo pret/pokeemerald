@@ -194,7 +194,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectGrudge                  @ EFFECT_GRUDGE
 	.4byte BattleScript_EffectSnatch                  @ EFFECT_SNATCH
 	.4byte BattleScript_EffectHit                     @ EFFECT_LOW_KICK
-	.4byte BattleScript_EffectSecretPower             @ EFFECT_SECRET_POWER
+	.4byte BattleScript_EffectHit                     @ EFFECT_SECRET_POWER
 	.4byte BattleScript_EffectTeeterDance             @ EFFECT_TEETER_DANCE
 	.4byte BattleScript_EffectHitEscape               @ EFFECT_HIT_ESCAPE
 	.4byte BattleScript_EffectMudSport                @ EFFECT_MUD_SPORT
@@ -1073,15 +1073,15 @@ BattleScript_FlingFailConsumeItem::
 	goto BattleScript_FailedFromAtkString
 
 BattleScript_FlingFlameOrb:
-	setmoveeffect MOVE_EFFECT_BURN
+	setmoveeffect MOVE_EFFECT_BURN | MOVE_EFFECT_CERTAIN
 	seteffectprimary
 	goto BattleScript_FlingEnd
 BattleScript_FlingFlinch:
-	setmoveeffect MOVE_EFFECT_FLINCH
+	setmoveeffect MOVE_EFFECT_FLINCH | MOVE_EFFECT_CERTAIN
 	seteffectprimary
 	goto BattleScript_FlingEnd
 BattleScript_FlingLightBall:
-	setmoveeffect MOVE_EFFECT_PARALYSIS
+	setmoveeffect MOVE_EFFECT_PARALYSIS | MOVE_EFFECT_CERTAIN
 	seteffectprimary
 	goto BattleScript_FlingEnd
 BattleScript_FlingMentalHerb:
@@ -1095,11 +1095,11 @@ BattleScript_FlingMentalHerb:
 	restoretarget
 	goto BattleScript_FlingEnd
 BattleScript_FlingPoisonBarb:
-	setmoveeffect MOVE_EFFECT_POISON
+	setmoveeffect MOVE_EFFECT_POISON | MOVE_EFFECT_CERTAIN
 	seteffectprimary
 	goto BattleScript_FlingEnd
 BattleScript_FlingToxicOrb:
-	setmoveeffect MOVE_EFFECT_TOXIC
+	setmoveeffect MOVE_EFFECT_TOXIC | MOVE_EFFECT_CERTAIN
 	seteffectprimary
 	goto BattleScript_FlingEnd
 BattleScript_FlingWhiteHerb:
@@ -1118,7 +1118,6 @@ BattleScript_FlingMissed:
 
 BattleScript_EffectShellSideArm:
 	shellsidearmcheck
-	setmoveeffect MOVE_EFFECT_POISON
 	goto BattleScript_EffectHit
 
 BattleScript_EffectPhotonGeyser:
@@ -5369,7 +5368,6 @@ BattleScript_NotAffectedAbilityPopUp::
 BattleScript_EffectUproar::
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	setmoveeffect MOVE_EFFECT_UPROAR | MOVE_EFFECT_AFFECTS_USER
 	attackstring
 	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_UproarHit
 	ppreduce
@@ -5914,10 +5912,6 @@ BattleScript_EffectSnatch:
 	printstring STRINGID_PKMNWAITSFORTARGET
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
-
-BattleScript_EffectSecretPower::
-	getsecretpowereffect
-	goto BattleScript_EffectHit
 
 BattleScript_EffectRecoilHP25:
 	setmoveeffect MOVE_EFFECT_RECOIL_HP_25 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN

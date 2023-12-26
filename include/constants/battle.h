@@ -393,8 +393,9 @@
 #define MOVE_EFFECT_SPIKES              76
 #define MOVE_EFFECT_SYRUP_BOMB          77
 #define MOVE_EFFECT_FLORAL_HEALING      78
+#define MOVE_EFFECT_SECRET_POWER        79
 
-#define NUM_MOVE_EFFECTS                79
+#define NUM_MOVE_EFFECTS                80
 
 #define MOVE_EFFECT_AFFECTS_USER        0x2000
 #define MOVE_EFFECT_CERTAIN             0x4000

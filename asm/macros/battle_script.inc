@@ -1177,7 +1177,7 @@
 	.4byte \jumpInstr
 	.endm
 
-	.macro getsecretpowereffect
+	.macro unused_0xe4
 	.byte 0xe4
 	.endm
 
