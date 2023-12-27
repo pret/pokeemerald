@@ -38,10 +38,10 @@ static void InitializeSwitchinCandidate(struct Pokemon *mon)
 
 static bool32 IsAceMon(u32 battler, u32 monPartyId)
 {
-    if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_ACE_POKEMON
-        && !(gBattleStruct->forcedSwitch & gBitTable[battler])
-        && monPartyId == CalculateEnemyPartyCount()-1)
-            return TRUE;
+    if (AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_ACE_POKEMON
+            && !(gBattleStruct->forcedSwitch & gBitTable[battler])
+            && monPartyId == CalculateEnemyPartyCount()-1)
+        return TRUE;
     return FALSE;
 }
 
@@ -77,7 +77,7 @@ static bool32 HasBadOdds(u32 battler, bool32 emitResult)
 	u16 typeEffectiveness = UQ_4_12(1.0), aiMoveEffect; //baseline typing damage
 
     // Only use this if AI_FLAG_SMART_SWITCHING is set for the trainer
-    if (!(AI_THINKING_STRUCT->aiFlags & AI_FLAG_SMART_SWITCHING))
+    if (!(AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_SMART_SWITCHING))
         return FALSE;
 
     // Won't bother configuring this for double battles
@@ -433,7 +433,7 @@ static bool32 ShouldSwitchIfGameStatePrompt(u32 battler, bool32 emitResult)
         && monAbility != ABILITY_SOUNDPROOF)
         switchMon = TRUE;
 
-    if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_SMART_SWITCHING)
+    if (AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_SMART_SWITCHING)
     {
         //Yawn
         if (gStatuses3[battler] & STATUS3_YAWN
@@ -851,7 +851,7 @@ static bool32 CanMonSurviveHazardSwitchin(u32 battler)
 static bool32 ShouldSwitchIfEncored(u32 battler, bool32 emitResult)
 {
     // Only use this if AI_FLAG_SMART_SWITCHING is set for the trainer
-    if (!(AI_THINKING_STRUCT->aiFlags & AI_FLAG_SMART_SWITCHING))
+    if (!(AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_SMART_SWITCHING))
         return FALSE;
 
     // If not Encored or if no good switchin, don't switch
@@ -877,7 +877,7 @@ static bool32 AreAttackingStatsLowered(u32 battler, bool32 emitResult)
     s8 spAttackingStage = gBattleMons[battler].statStages[STAT_SPATK];
 
     // Only use this if AI_FLAG_SMART_SWITCHING is set for the trainer
-    if (!(AI_THINKING_STRUCT->aiFlags & AI_FLAG_SMART_SWITCHING))
+    if (!(AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_SMART_SWITCHING))
         return FALSE;
 
     // Physical attacker
@@ -1015,7 +1015,7 @@ bool32 ShouldSwitch(u32 battler, bool32 emitResult)
         return TRUE;
 
     //These Functions can prompt switch to generic pary members
-    if ((AI_THINKING_STRUCT->aiFlags & AI_FLAG_SMART_SWITCHING) && (CanMonSurviveHazardSwitchin(battler) == FALSE))
+    if ((AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_SMART_SWITCHING) && (CanMonSurviveHazardSwitchin(battler) == FALSE))
         return FALSE;
     if (ShouldSwitchIfAllBadMoves(battler, emitResult))
         return TRUE;
@@ -1939,7 +1939,7 @@ u8 GetMostSuitableMonToSwitchInto(u32 battler, bool32 switchAfterMonKOd)
 
     // Split ideal mon decision between after previous mon KO'd (prioritize offensive options) and after switching active mon out (prioritize defensive options), and expand the scope of both.
     // Only use better mon selection if AI_FLAG_SMART_MON_CHOICES is set for the trainer.
-    if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_SMART_MON_CHOICES)
+    if (AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_SMART_MON_CHOICES)
     {
         bestMonId = GetBestMonIntegrated(party, firstId, lastId, battler, opposingBattler, battlerIn1, battlerIn2, switchAfterMonKOd);
         return bestMonId;
