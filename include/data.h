@@ -66,6 +66,8 @@ struct TrainerMon
     u8 nature : 5;
     bool8 gender : 2;
     bool8 isShiny : 1;
+    u8 dynamaxLevel : 4;
+    bool8 gigantamaxFactor : 1;
 };
 
 #define TRAINER_PARTY(partyArray) partyArray, .partySize = ARRAY_COUNT(partyArray)

@@ -2025,3 +2025,33 @@
 	callnative CreateTrainerPartyForPlayer
 	trainerbattle_no_intro \trainer2, NULL
 	.endm
+
+	@ Sets VAR_RESULT to TRUE if stat can be hyper trained, or to
+	@ FALSE otherwise.
+	.macro canhypertrain stat:req, slot:req
+	callnative CanHyperTrain
+	.byte \stat
+	.2byte \slot
+	.endm
+
+	@ Hyper Trains a stat.
+	.macro hypertrain stat:req, slot:req
+	callnative HyperTrain
+	.byte \stat
+	.2byte \slot
+	.endm
+
+	@ Sets VAR_RESULT to TRUE if the Pokemon has the Gigantamax Factor,
+	@ or to FALSE otherwise.
+	.macro hasgigantamaxfactor slot:req
+	callnative HasGigantamaxFactor
+	.2byte \slot
+	.endm
+
+	@ Toggles the Gigantamax Factor for a Pokemon.
+	@ Fails for Melmetal (vanilla behavior).
+	@ Sets VAR_RESULT to TRUE if it succeeds, and FALSE otherwise.
+	.macro togglegigantamaxfactor slot:req
+	callnative ToggleGigantamaxFactor
+	.2byte \slot
+	.endm
