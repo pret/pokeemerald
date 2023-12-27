@@ -66,6 +66,7 @@ u32 AI_GetBattlerMoveTargetType(u32 battlerId, u32 move);
 bool32 ShouldUseZMove(u32 battlerAtk, u32 battlerDef, u32 chosenMove);
 u32 AI_CalcSecondaryEffectChance(u32 battler, u32 secondaryEffectChance);
 bool32 AI_ShouldCopyStatChanges(u32 battlerAtk, u32 battlerDef);
+u32 AI_ShouldSetUpHazards(struct AiLogicData *aiData, u32 battlerAtk, u32 battlerDef);
 
 // stat stage checks
 bool32 AnyStatIsRaised(u32 battlerId);
@@ -122,7 +123,7 @@ bool32 ShouldSetSun(u32 battlerAtk, u32 atkAbility, u32 holdEffect);
 bool32 HasSleepMoveWithLowAccuracy(u32 battlerAtk, u32 battlerDef);
 bool32 IsHealingMoveEffect(u32 effect);
 bool32 HasHealingEffect(u32 battler);
-bool32 IsTrappingMoveEffect(u32 effect);
+bool32 IsTrappingMove(u32 move);
 bool32 HasTrappingMoveEffect(u32 battler);
 bool32 ShouldFakeOut(u32 battlerAtk, u32 battlerDef, u32 move);
 bool32 HasThawingMove(u32 battler);

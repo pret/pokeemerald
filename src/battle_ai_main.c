@@ -1006,10 +1006,24 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         }
     }
 
+    // check things that aren't move effects (recoil)
+    if (gBattleMoves[move].recoil > 0)
+    {
+        if (AI_IsDamagedByRecoil(battlerAtk))
+        {
+            u32 recoilDmg = max(1, aiData->simulatedDmg[battlerAtk][battlerDef][AI_THINKING_STRUCT->movesetIndex] * max(1, gBattleMoves[move].recoil) / 100);
+            if (!ShouldUseRecoilMove(battlerAtk, battlerDef, recoilDmg, AI_THINKING_STRUCT->movesetIndex))
+                ADJUST_SCORE(-10);
+            }
+    }
+
     // check move effects
     switch (moveEffect)
     {
-        case EFFECT_HIT:
+        case EFFECT_HIT: // only applies to Vital Throw
+            if (gBattleMoves[move].priority < 0 && AI_STRIKES_FIRST(battlerAtk, battlerDef, move) && aiData->hpPercents[battlerAtk] < 40)
+                ADJUST_SCORE(-1);    // don't want to move last
+            break;
         default:
             break;  // check move damage
         case EFFECT_SLEEP:
@@ -1361,7 +1375,6 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             }
             break;
         //case EFFECT_BIDE:
-        //case EFFECT_RECHARGE:
         //case EFFECT_COUNTER:
         case EFFECT_PRESENT:
         case EFFECT_SONICBOOM:
@@ -1856,15 +1869,6 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             if (aiData->abilities[battlerAtk] != ABILITY_MAGIC_GUARD && AI_DATA->moveAccuracy[battlerAtk][battlerDef][AI_THINKING_STRUCT->movesetIndex] < 75)
                 ADJUST_SCORE(-6);
             break;
-        case EFFECT_RECOIL:
-            if (AI_IsDamagedByRecoil(battlerAtk))
-            {
-                u32 recoilDmg = max(1, aiData->simulatedDmg[battlerAtk][battlerDef][AI_THINKING_STRUCT->movesetIndex] * max(1, gBattleMoves[move].recoil) / 100);
-                if (!ShouldUseRecoilMove(battlerAtk, battlerDef, recoilDmg, AI_THINKING_STRUCT->movesetIndex))
-                    ADJUST_SCORE(-10);
-                break;
-            }
-            break;
         case EFFECT_TEETER_DANCE:
             if (((gBattleMons[battlerDef].status2 & STATUS2_CONFUSION)
               || (!DoesBattlerIgnoreAbilityChecks(aiData->abilities[battlerAtk], move) && aiData->abilities[battlerDef] == ABILITY_OWN_TEMPO)
@@ -2056,7 +2060,6 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
               || ((aiData->abilities[battlerDef] == ABILITY_CONTRARY) && !IS_TARGETING_PARTNER(battlerAtk, battlerDef))) // don't want to raise target stats unless its your partner
                 ADJUST_SCORE(-10);
             break;
-
         case EFFECT_PSYCH_UP:   // haze stats check
             {
                 for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
@@ -2392,8 +2395,6 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
               || PartnerMoveIsSameAsAttacker(BATTLE_PARTNER(battlerAtk), battlerDef, move, aiData->partnerMove))
                 ADJUST_SCORE(-10);
             break;
-        case EFFECT_THROAT_CHOP:
-            break;
         case EFFECT_HEAL_BLOCK:
             if (gDisableStructs[battlerDef].healBlockTimer != 0
               || PartnerMoveIsSameAsAttacker(BATTLE_PARTNER(battlerAtk), battlerDef, move, aiData->partnerMove))
@@ -2475,7 +2476,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 if (instructedMove == MOVE_NONE
                   || gBattleMoves[instructedMove].instructBanned
                   || gBattleMoves[instructedMove].twoTurnMove
-                  || gBattleMoves[instructedMove].effect == EFFECT_RECHARGE
+                  || MoveHasMoveEffectSelf(instructedMove, MOVE_EFFECT_RECHARGE)
                   || IsZMove(instructedMove)
                   || (gLockedMoves[battlerDef] != 0 && gLockedMoves[battlerDef] != 0xFFFF)
                   || gBattleMons[battlerDef].status2 & STATUS2_MULTIPLETURNS
@@ -2565,10 +2566,6 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 ADJUST_SCORE(-1);
             if (aiData->hpPercents[battlerDef] < 50)
                 ADJUST_SCORE(-1);
-            break;
-        case EFFECT_VITAL_THROW:
-            if (AI_STRIKES_FIRST(battlerAtk, battlerDef, move) && aiData->hpPercents[battlerAtk] < 40)
-                ADJUST_SCORE(-1);    // don't want to move last
             break;
         case EFFECT_FLAIL:
             if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_SLOWER // Opponent should go first
@@ -2700,7 +2697,7 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         case EFFECT_PERISH_SONG:
             if (!(gBattleMons[battlerDef].status2 & (STATUS2_ESCAPE_PREVENTION | STATUS2_WRAPPED)))
             {
-                if (IsTrappingMoveEffect(effect) || predictedMove == MOVE_INGRAIN)
+                if (IsTrappingMove(aiData->partnerMove) || predictedMove == MOVE_INGRAIN)
                     ADJUST_SCORE(1);
             }
             break;
@@ -3549,7 +3546,6 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
         break;
     case EFFECT_TOXIC:
     case EFFECT_POISON:
-    case EFFECT_BARB_BARRAGE:
         IncreasePoisonScore(battlerAtk, battlerDef, move, &score);
         break;
     case EFFECT_LIGHT_SCREEN:
@@ -3591,14 +3587,8 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
         if (gStatuses3[battlerAtk] & STATUS3_ALWAYS_HITS)
             ADJUST_SCORE(5);
         break;
-    case EFFECT_TRAP:
-        if (HasMoveEffect(battlerDef, EFFECT_RAPID_SPIN))
-            break;
-        //fallthrough
     case EFFECT_MEAN_LOOK:
-        if (IsBattlerTrapped(battlerDef, TRUE))
-            break; // in this case its a bad attacking move
-        else if (ShouldTrap(battlerAtk, battlerDef, move))
+        if (!IsBattlerTrapped(battlerDef, TRUE) && ShouldTrap(battlerAtk, battlerDef, move))
             ADJUST_SCORE(5);
         break;
     case EFFECT_MIST:
@@ -3847,15 +3837,10 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
         break;
 
     case EFFECT_SPIKES:
-    case EFFECT_HIT_SET_ENTRY_HAZARD:
     case EFFECT_STEALTH_ROCK:
     case EFFECT_STICKY_WEB:
     case EFFECT_TOXIC_SPIKES:
-        if (aiData->abilities[battlerDef] == ABILITY_MAGIC_BOUNCE || CountUsablePartyMons(battlerDef) == 0)
-            break;
-        if (gDisableStructs[battlerAtk].isFirstTurn)
-            ADJUST_SCORE(2);
-        //TODO - track entire opponent party data to determine hazard effectiveness
+        score += AI_ShouldSetUpHazards(aiData, battlerAtk, battlerDef);
         break;
     case EFFECT_FORESIGHT:
         if (aiData->abilities[battlerAtk] == ABILITY_SCRAPPY || aiData->abilities[battlerAtk] == ABILITY_MINDS_EYE)
@@ -4522,10 +4507,6 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             break;
         }*/
         break;
-    case EFFECT_FEINT:
-        if (gBattleMoves[predictedMove].effect == EFFECT_PROTECT)
-            ADJUST_SCORE(3);
-        break;
     case EFFECT_EMBARGO:
         if (aiData->holdEffects[battlerDef] != HOLD_EFFECT_NONE)
             ADJUST_SCORE(1);
@@ -4538,12 +4519,6 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
         if (HasMoveWithLowAccuracy(battlerAtk, battlerDef, 90, FALSE, aiData->abilities[battlerAtk], aiData->abilities[battlerDef], aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef])
           || !IsBattlerGrounded(battlerDef))
             ADJUST_SCORE(1);
-        break;
-    case EFFECT_THROAT_CHOP:
-        if (predictedMove != MOVE_NONE && gBattleMoves[predictedMove].soundMove && AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER)
-            ADJUST_SCORE(3); // Ai goes first and predicts the target will use a sound move
-        else if (HasSoundMove(battlerDef))
-            ADJUST_SCORE(3);
         break;
     case EFFECT_HEAL_BLOCK:
         if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER && predictedMove != MOVE_NONE && IsHealingMoveEffect(gBattleMoves[predictedMove].effect))
@@ -4622,16 +4597,6 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
         if (predictedMove != MOVE_NONE && AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER // Attacker goes first
           && !IS_MOVE_STATUS(move) && AI_GetTypeEffectiveness(predictedMove, battlerDef, battlerAtk) != AI_EFFECTIVENESS_x0)
             ADJUST_SCORE(1);
-        break;
-    case EFFECT_FLAME_BURST:
-        if (isDoubleBattle)
-        {
-            if (IsBattlerAlive(BATTLE_PARTNER(battlerDef))
-              && aiData->hpPercents[BATTLE_PARTNER(battlerDef)] < 12
-              && aiData->abilities[BATTLE_PARTNER(battlerDef)] != ABILITY_MAGIC_GUARD
-              && !IS_BATTLER_OF_TYPE(BATTLE_PARTNER(battlerDef), TYPE_FIRE))
-                ADJUST_SCORE(1);
-        }
         break;
     case EFFECT_TOXIC_THREAD:
         IncreasePoisonScore(battlerAtk, battlerDef, move, &score);
@@ -4859,6 +4824,34 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
                         break;
                     }
                     break;
+                case MOVE_EFFECT_STEALTH_ROCK:
+                case MOVE_EFFECT_SPIKES:
+                    score += AI_ShouldSetUpHazards(aiData, battlerAtk, battlerDef);
+                    break;
+                case MOVE_EFFECT_FEINT:
+                    if (gBattleMoves[predictedMove].effect == EFFECT_PROTECT)
+                        ADJUST_SCORE(3);
+                    break;
+                case MOVE_EFFECT_THROAT_CHOP:
+                    if (predictedMove != MOVE_NONE && gBattleMoves[predictedMove].soundMove && AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER)
+                        ADJUST_SCORE(3); // Ai goes first and predicts the target will use a sound move
+                    else if (HasSoundMove(battlerDef))
+                        ADJUST_SCORE(3);
+                    break;
+                case MOVE_EFFECT_FLAME_BURST:
+                    if (isDoubleBattle)
+                    {
+                        if (IsBattlerAlive(BATTLE_PARTNER(battlerDef))
+                        && aiData->hpPercents[BATTLE_PARTNER(battlerDef)] < 12
+                        && aiData->abilities[BATTLE_PARTNER(battlerDef)] != ABILITY_MAGIC_GUARD
+                        && !IS_BATTLER_OF_TYPE(BATTLE_PARTNER(battlerDef), TYPE_FIRE))
+                            ADJUST_SCORE(1);
+                    }
+                    break;
+                case MOVE_EFFECT_WRAP:
+                    if (!HasMoveEffect(battlerDef, EFFECT_RAPID_SPIN) && !IsBattlerTrapped(battlerDef, TRUE) && ShouldTrap(battlerAtk, battlerDef, move))
+                        ADJUST_SCORE(5);
+                    break;
             }
         }
     }
@@ -4869,6 +4862,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
 // Effects that are encouraged on the first turn of battle
 static s32 AI_SetupFirstTurn(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 {
+    u8 i;
     if (IS_TARGETING_PARTNER(battlerAtk, battlerDef)
       || gBattleResults.battleTurnCounter != 0)
         return score;
@@ -4967,11 +4961,24 @@ static s32 AI_SetupFirstTurn(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     case EFFECT_SNOWSCAPE:
     case EFFECT_GEOMANCY:
     case EFFECT_VICTORY_DANCE:
-    case EFFECT_HIT_SET_ENTRY_HAZARD:
         ADJUST_SCORE(2);
         break;
     default:
         break;
+    }
+
+    // Consider move effects
+    for (i = 0; i < gBattleMoves[move].numAdditionalEffects; i++)
+    {
+        switch (gBattleMoves[move].additionalEffects[i].moveEffect)
+        {
+            case MOVE_EFFECT_STEALTH_ROCK:
+            case MOVE_EFFECT_SPIKES:
+                ADJUST_SCORE(2);
+                break;
+            default:
+                break;
+        }
     }
 
     return score;
@@ -4980,6 +4987,7 @@ static s32 AI_SetupFirstTurn(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
 // Adds score bonus to 'riskier' move effects and high crit moves
 static s32 AI_Risky(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 {
+    u8 i;
     if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
         return score;
 
@@ -5000,7 +5008,6 @@ static s32 AI_Risky(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     case EFFECT_SWAGGER:
     case EFFECT_ATTRACT:
     case EFFECT_PRESENT:
-    case EFFECT_ALL_STATS_UP_HIT:
     case EFFECT_BELLY_DRUM:
     case EFFECT_MIRROR_COAT:
     case EFFECT_FOCUS_PUNCH:
@@ -5011,6 +5018,20 @@ static s32 AI_Risky(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         break;
     default:
         break;
+    }
+
+    // Consider move effects
+    for (i = 0; i < gBattleMoves[move].numAdditionalEffects; i++)
+    {
+        switch (gBattleMoves[move].additionalEffects[i].moveEffect)
+        {
+            case MOVE_EFFECT_ALL_STATS_UP:
+                if (Random() & 1)
+                    ADJUST_SCORE(2);
+                break;
+            default:
+                break;
+        }
     }
 
     return score;

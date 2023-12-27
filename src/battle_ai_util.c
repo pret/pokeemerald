@@ -954,15 +954,17 @@ static bool32 AI_IsMoveEffectInMinus(u32 battlerAtk, u32 battlerDef, u32 move, s
     u32 abilityDef = AI_DATA->abilities[battlerDef];
     u8 i;
 
+    // recoil
+    if (gBattleMoves[move].recoil > 0 && AI_IsDamagedByRecoil(battlerAtk))
+        return TRUE;
+
     switch (gBattleMoves[move].effect)
     {
-    case EFFECT_RECHARGE:
     case EFFECT_MAKE_IT_RAIN:
     case EFFECT_MIND_BLOWN:
     case EFFECT_STEEL_BEAM:
         return TRUE;
     case EFFECT_RECOIL_IF_MISS:
-    case EFFECT_RECOIL:
         if (AI_IsDamagedByRecoil(battlerAtk))
             return TRUE;
         break;
@@ -985,6 +987,8 @@ static bool32 AI_IsMoveEffectInMinus(u32 battlerAtk, u32 battlerDef, u32 move, s
                         || (noOfHitsToKo != 1 && abilityDef == ABILITY_CONTRARY && !IsMoldBreakerTypeAbility(abilityAtk)))
                         return TRUE;
                     break;
+                case MOVE_EFFECT_RECHARGE:
+                    return gBattleMoves[move].additionalEffects[i].self;
             }
         }
         break;
@@ -1494,7 +1498,6 @@ bool32 IsMoveEncouragedToHit(u32 battlerAtk, u32 battlerDef, u32 move)
     // increased accuracy but don't always hit
     if ((((weather & B_WEATHER_RAIN) && (gBattleMoves[move].effect == EFFECT_THUNDER || gBattleMoves[move].effect == EFFECT_HURRICANE))
             || (((weather & (B_WEATHER_HAIL | B_WEATHER_SNOW)) && move == MOVE_BLIZZARD)))
-        || (gBattleMoves[move].effect == EFFECT_VITAL_THROW)
         || (B_MINIMIZE_DMG_ACC >= GEN_6 && (gStatuses3[battlerDef] & STATUS3_MINIMIZED) && gBattleMoves[move].minimizeDoubleDamage)
         || (gBattleMoves[move].accuracy == 0))
     {
@@ -2080,18 +2083,17 @@ bool32 HasHealingEffect(u32 battlerId)
     return FALSE;
 }
 
-bool32 IsTrappingMoveEffect(u32 effect)
+bool32 IsTrappingMove(u32 move)
 {
-    switch (effect)
+    switch (gBattleMoves[move].effect)
     {
     case EFFECT_MEAN_LOOK:
-    case EFFECT_TRAP:
-    case EFFECT_HIT_PREVENT_ESCAPE:
     case EFFECT_FAIRY_LOCK:
     //case EFFECT_NO_RETREAT:   // TODO
         return TRUE;
     default:
-        return FALSE;
+        return MoveHasMoveEffect(move, MOVE_EFFECT_PREVENT_ESCAPE, FALSE)
+            || MoveHasMoveEffect(move, MOVE_EFFECT_WRAP, FALSE);
     }
 }
 
@@ -2102,7 +2104,7 @@ bool32 HasTrappingMoveEffect(u32 battler)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && IsTrappingMoveEffect(gBattleMoves[moves[i]].effect))
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && IsTrappingMove(moves[i]))
             return TRUE;
     }
 
@@ -3666,8 +3668,8 @@ void IncreasePoisonScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
         if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_STALL && HasMoveEffect(battlerAtk, EFFECT_PROTECT))
             ADJUST_SCORE_PTR(1);    // stall tactic
 
-        if (HasMoveEffect(battlerAtk, EFFECT_VENOSHOCK)
-          || HasMoveEffect(battlerAtk, EFFECT_HEX)
+        if ((HasMoveEffect(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS)
+            && gBattleMoves[move].argument & STATUS1_PSN_ANY)
           || HasMoveEffect(battlerAtk, EFFECT_VENOM_DRENCH)
           || AI_DATA->abilities[battlerAtk] == ABILITY_MERCILESS)
             ADJUST_SCORE_PTR(2);
@@ -3691,7 +3693,10 @@ void IncreaseBurnScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
                 ADJUST_SCORE_PTR(2); // burning the target to stay alive is cool
         }
 
-        if (HasMoveEffect(battlerAtk, EFFECT_HEX) || HasMoveEffect(BATTLE_PARTNER(battlerAtk), EFFECT_HEX))
+        if ((HasMoveEffect(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS)
+            && gBattleMoves[move].argument & STATUS1_BURN)
+          || (HasMoveEffect(BATTLE_PARTNER(battlerAtk), EFFECT_DOUBLE_POWER_ON_ARG_STATUS)
+            && gBattleMoves[move].argument & STATUS1_BURN))
             ADJUST_SCORE_PTR(1);
     }
 }
@@ -3708,7 +3713,8 @@ void IncreaseParalyzeScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
         u32 defSpeed = AI_DATA->speedStats[battlerDef];
 
         if ((defSpeed >= atkSpeed && defSpeed / 2 < atkSpeed) // You'll go first after paralyzing foe
-          || HasMoveEffect(battlerAtk, EFFECT_HEX)
+          || (HasMoveEffect(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS)
+            && gBattleMoves[move].argument & STATUS1_PARALYSIS)
           || HasMoveWithMoveEffect(battlerAtk, MOVE_EFFECT_FLINCH, TRUE) // filter out Fake Out
           || gBattleMons[battlerDef].status2 & STATUS2_INFATUATION
           || gBattleMons[battlerDef].status2 & STATUS2_CONFUSION)
@@ -3733,7 +3739,10 @@ void IncreaseSleepScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
       && !(HasMoveEffect(battlerDef, EFFECT_SNORE) || HasMoveEffect(battlerDef, EFFECT_SLEEP_TALK)))
         ADJUST_SCORE_PTR(1);
 
-    if (HasMoveEffect(battlerAtk, EFFECT_HEX) || HasMoveEffect(BATTLE_PARTNER(battlerAtk), EFFECT_HEX))
+    if ((HasMoveEffect(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS)
+        && gBattleMoves[move].argument & STATUS1_SLEEP)
+      || (HasMoveEffect(BATTLE_PARTNER(battlerAtk), EFFECT_DOUBLE_POWER_ON_ARG_STATUS)
+        && gBattleMoves[move].argument & STATUS1_SLEEP))
         ADJUST_SCORE_PTR(1);
 }
 
@@ -3770,7 +3779,10 @@ void IncreaseFrostbiteScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score
                 ADJUST_SCORE_PTR(2); // frostbiting the target to stay alive is cool
         }
 
-        if (HasMoveEffect(battlerAtk, EFFECT_HEX) || HasMoveEffect(BATTLE_PARTNER(battlerAtk), EFFECT_HEX))
+        if ((HasMoveEffect(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS)
+            && gBattleMoves[move].argument & STATUS1_FROSTBITE)
+          || (HasMoveEffect(BATTLE_PARTNER(battlerAtk), EFFECT_DOUBLE_POWER_ON_ARG_STATUS)
+            && gBattleMoves[move].argument & STATUS1_FROSTBITE))
             ADJUST_SCORE_PTR(1);
     }
 }
@@ -3855,4 +3867,13 @@ bool32 AI_ShouldCopyStatChanges(u32 battlerAtk, u32 battlerDef)
     }
 
     return FALSE;
+}
+
+//TODO - track entire opponent party data to determine hazard effectiveness
+u32 AI_ShouldSetUpHazards(struct AiLogicData *aiData, u32 battlerAtk, u32 battlerDef)
+{
+    if (aiData->abilities[battlerDef] == ABILITY_MAGIC_BOUNCE || CountUsablePartyMons(battlerDef) == 0)
+        return 0;
+
+    return 2 * gDisableStructs[battlerAtk].isFirstTurn;
 }

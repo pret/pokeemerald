@@ -110,7 +110,7 @@ static const u16 sWeatherChangingMoves[] = {
     MOVE_SUNNY_DAY,
 };
 
-// EFFECT_RECHARGE, EFFECT_RECOIL
+// MOVE_EFFECT_RECHARGE, recoil
 static const u16 sPowerfulNormalMoves[] = {
     MOVE_HYPER_BEAM,
     MOVE_GIGA_IMPACT,

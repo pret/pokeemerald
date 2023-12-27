@@ -121,13 +121,11 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
 //    [EFFECT_RAZOR_WIND]               = 1,
     [EFFECT_SUPER_FANG]                 = 5,
     [EFFECT_DRAGON_RAGE]                = 2,
-    [EFFECT_TRAP]                       = 4,
 //    [EFFECT_HIGH_CRITICAL]            = 1,
 //    [EFFECT_DOUBLE_HIT]               = 1,
     [EFFECT_RECOIL_IF_MISS]             = 1,
     [EFFECT_MIST]                       = 5,
     [EFFECT_FOCUS_ENERGY]               = 1,
-    [EFFECT_RECOIL]                     = 2,
     [EFFECT_CONFUSE]                    = 4,
     [EFFECT_ATTACK_UP_2]                = 1,
     [EFFECT_DEFENSE_UP_2]               = 1,
@@ -149,9 +147,7 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_PARALYZE]                   = 4,
 //    [EFFECT_SKY_ATTACK]               = 4,
 //    [EFFECT_TWINEEDLE]                = 1,
-    [EFFECT_VITAL_THROW]                = 1,
     [EFFECT_SUBSTITUTE]                 = 4,
-    [EFFECT_RECHARGE]                   = 5,
     [EFFECT_RAGE]                       = 2,
     [EFFECT_MIMIC]                      = 4,
     [EFFECT_METRONOME]                  = 1,
@@ -175,7 +171,6 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_HEAL_BELL]                  = 5,
 //    [EFFECT_QUICK_ATTACK]             = 1,
     [EFFECT_TRIPLE_KICK]                = 1,
-    [EFFECT_THIEF]                      = 4,
     [EFFECT_MEAN_LOOK]                  = 5,
     [EFFECT_NIGHTMARE]                  = 3,
     [EFFECT_MINIMIZE]                   = 1,
@@ -194,7 +189,6 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_PRESENT]                    = 1,
     [EFFECT_FRUSTRATION]                = 1,
     [EFFECT_SAFEGUARD]                  = 5,
-//    [EFFECT_THAW_HIT]                 = 1, Now unused
     [EFFECT_MAGNITUDE]                  = 1,
     [EFFECT_BATON_PASS]                 = 7,
     [EFFECT_PURSUIT]                    = 2,
@@ -235,7 +229,7 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_MEMENTO]                    = 7,
     [EFFECT_FACADE]                     = 1,
     [EFFECT_FOCUS_PUNCH]                = 7,
-    [EFFECT_SMELLING_SALTS]             = 1,
+    [EFFECT_DOUBLE_POWER_ON_ARG_STATUS] = 1,
     [EFFECT_FOLLOW_ME]                  = 5,
     [EFFECT_NATURE_POWER]               = 0,
     [EFFECT_CHARGE]                     = 4,
@@ -260,7 +254,6 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_GRUDGE]                     = 1,
     [EFFECT_SNATCH]                     = 1,
     [EFFECT_LOW_KICK]                   = 1,
-    [EFFECT_SECRET_POWER]               = 1,
     [EFFECT_TEETER_DANCE]               = 6,
 //    [EFFECT_BLAZE_KICK]               = 1,
     [EFFECT_MUD_SPORT]                  = 4,
@@ -277,9 +270,7 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_PLEDGE]                     = 0, // TODO: Assign points
     [EFFECT_FLING]                      = 0, // TODO: Assign points
     [EFFECT_NATURAL_GIFT]               = 0, // TODO: Assign points
-    [EFFECT_WAKE_UP_SLAP]               = 0, // TODO: Assign points
     [EFFECT_WRING_OUT]                  = 0, // TODO: Assign points
-    [EFFECT_HEX]                        = 0, // TODO: Assign points
     [EFFECT_ASSURANCE]                  = 0, // TODO: Assign points
     [EFFECT_TRUMP_CARD]                 = 0, // TODO: Assign points
     [EFFECT_ACROBATICS]                 = 0, // TODO: Assign points
@@ -292,7 +283,6 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_PAYBACK]                    = 0, // TODO: Assign points
     [EFFECT_ROUND]                      = 0, // TODO: Assign points
     [EFFECT_BRINE]                      = 0, // TODO: Assign points
-    [EFFECT_VENOSHOCK]                  = 0, // TODO: Assign points
     [EFFECT_RETALIATE]                  = 0, // TODO: Assign points
     [EFFECT_BULLDOZE]                   = 0, // TODO: Assign points
     [EFFECT_FOUL_PLAY]                  = 0, // TODO: Assign points
@@ -356,23 +346,17 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_COPYCAT]                    = 0, // TODO: Assign points
     [EFFECT_DEFOG]                      = 0, // TODO: Assign points
     [EFFECT_HIT_ENEMY_HEAL_ALLY]        = 0, // TODO: Assign points
-    [EFFECT_SMACK_DOWN]                 = 0, // TODO: Assign points
     [EFFECT_SYNCHRONOISE]               = 0, // TODO: Assign points
     [EFFECT_PSYCHO_SHIFT]               = 0, // TODO: Assign points
     [EFFECT_POWER_TRICK]                = 0, // TODO: Assign points
-    [EFFECT_FLAME_BURST]                = 0, // TODO: Assign points
     [EFFECT_AFTER_YOU]                  = 0, // TODO: Assign points
     [EFFECT_BESTOW]                     = 0, // TODO: Assign points
     [EFFECT_ROTOTILLER]                 = 0, // TODO: Assign points
     [EFFECT_FLOWER_SHIELD]              = 0, // TODO: Assign points
-    [EFFECT_HIT_PREVENT_ESCAPE]         = 0, // TODO: Assign points
     [EFFECT_SPEED_SWAP]                 = 0, // TODO: Assign points
-    [EFFECT_DEFENSE_UP2_HIT]            = 0, // TODO: Assign points
     [EFFECT_REVELATION_DANCE]           = 0, // TODO: Assign points
     [EFFECT_AURORA_VEIL]                = 0, // TODO: Assign points
     [EFFECT_THIRD_TYPE]                 = 0, // TODO: Assign points
-    [EFFECT_FEINT]                      = 0, // TODO: Assign points
-    [EFFECT_SPARKLING_ARIA]             = 0, // TODO: Assign points
     [EFFECT_ACUPRESSURE]                = 0, // TODO: Assign points
     [EFFECT_AROMATIC_MIST]              = 0, // TODO: Assign points
     [EFFECT_POWDER]                     = 0, // TODO: Assign points
@@ -381,16 +365,12 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_MAT_BLOCK]                  = 0, // TODO: Assign points
     [EFFECT_STOMPING_TANTRUM]           = 0, // TODO: Assign points
     [EFFECT_INSTRUCT]                   = 0, // TODO: Assign points
-    [EFFECT_THROAT_CHOP]                = 0, // TODO: Assign points
     [EFFECT_LASER_FOCUS]                = 0, // TODO: Assign points
     [EFFECT_MAGNETIC_FLUX]              = 0, // TODO: Assign points
     [EFFECT_GEAR_UP]                    = 0, // TODO: Assign points
-    [EFFECT_INCINERATE]                 = 0, // TODO: Assign points
-    [EFFECT_BUG_BITE]                   = 0, // TODO: Assign points
     [EFFECT_STRENGTH_SAP]               = 0, // TODO: Assign points
     [EFFECT_MIND_BLOWN]                 = 0, // TODO: Assign points
     [EFFECT_PURIFY]                     = 0, // TODO: Assign points
-    [EFFECT_BURN_UP]                    = 0, // TODO: Assign points
     [EFFECT_SHORE_UP]                   = 0, // TODO: Assign points
     [EFFECT_GEOMANCY]                   = 0, // TODO: Assign points
     [EFFECT_FAIRY_LOCK]                 = 0, // TODO: Assign points
@@ -1129,7 +1109,7 @@ void BattleTv_SetDataBasedOnMove(u16 move, u16 weatherFlags, struct DisableStruc
     tvPtr->pos[defSide][GetBattlerPosition(gBattlerAttacker) / 2].attackedByMonId = gBattlerPartyIndexes[gBattlerAttacker] + 1;
     tvPtr->pos[defSide][GetBattlerPosition(gBattlerAttacker) / 2].attackedByMoveSlot = moveSlot;
     tvPtr->side[atkSide].usedMoveSlot = moveSlot;
-    AddMovePoints(PTS_MOVE_EFFECT, moveSlot, gBattleMoves[move].effect, 0);
+    AddMovePoints(PTS_MOVE_EFFECT, moveSlot, move, 0);
     AddPointsBasedOnWeather(weatherFlags, move, moveSlot);
     if (disableStructPtr->chargeTimer != 0)
         AddMovePoints(PTS_ELECTRIC, move, moveSlot, 0);
@@ -1291,7 +1271,26 @@ static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3)
 
     switch (caseId)
     {
-    case PTS_MOVE_EFFECT:
+    case PTS_MOVE_EFFECT: //arg1 == moveSlot, arg2 == move
+    {
+        u8 baseFromEffect = sPointsArray[caseId][gBattleMoves[arg2].effect];
+
+        // various cases add/remove points
+        if (gBattleMoves[arg2].recoil > 0)
+            baseFromEffect++; // recoil moves
+        if (MoveHasMoveEffect(arg2, MOVE_EFFECT_SP_ATK_TWO_DOWN, FALSE)
+            || MoveHasMoveEffect(arg2, MOVE_EFFECT_ATK_DEF_DOWN, FALSE))
+            baseFromEffect += 2; // Overheat etc & Superpower
+        if (MoveHasMoveEffect(arg2, MOVE_EFFECT_STEAL_ITEM, FALSE))
+            baseFromEffect += 3;
+        if (MoveHasMoveEffect(arg2, MOVE_EFFECT_WRAP, FALSE))
+            baseFromEffect += 3;
+        if (MoveHasMoveEffect(arg2, MOVE_EFFECT_RECHARGE, FALSE))
+            baseFromEffect += 4;
+
+        movePoints->points[atkSide][gBattlerPartyIndexes[gBattlerAttacker] * 4 + arg1] += baseFromEffect;
+        break;
+    }
     case PTS_EFFECTIVENESS:
     case PTS_CRITICAL_HIT:
     case PTS_STAT_INCREASE_1:

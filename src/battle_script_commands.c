@@ -971,20 +971,16 @@ static const u16 sProtectSuccessRates[] = {USHRT_MAX, USHRT_MAX / 2, USHRT_MAX /
 
 static const u16 sFinalStrikeOnlyEffects[] =
 {
-    EFFECT_RELIC_SONG,
-    EFFECT_BUG_BITE,
-    EFFECT_THIEF,
-    EFFECT_BURN_UP,
-    EFFECT_DOUBLE_SHOCK,
-    EFFECT_SECRET_POWER,
-    EFFECT_SMACK_DOWN,
-    EFFECT_SPARKLING_ARIA,
-    EFFECT_SMELLING_SALTS,
-    EFFECT_WAKE_UP_SLAP,
-    EFFECT_HIT_ESCAPE,
-    EFFECT_RECOIL_HP_25,
-    EFFECT_HIT_PREVENT_ESCAPE,
-    EFFECT_HIT_SWITCH_TARGET,
+    MOVE_EFFECT_BUG_BITE,
+    MOVE_EFFECT_STEAL_ITEM,
+    MOVE_EFFECT_BURN_UP,
+    MOVE_EFFECT_DOUBLE_SHOCK,
+    MOVE_EFFECT_SECRET_POWER,
+    MOVE_EFFECT_SMACK_DOWN,
+    MOVE_EFFECT_REMOVE_STATUS,
+    MOVE_EFFECT_RECOIL_HP_25,
+    MOVE_EFFECT_PREVENT_ESCAPE,
+    MOVE_EFFECT_WRAP,
 };
 
 static const u16 sNaturePowerMoves[BATTLE_TERRAIN_COUNT] =
@@ -1600,12 +1596,6 @@ static bool32 AccuracyCalcHelper(u16 move)
             JumpIfMoveFailed(7, move);
             return TRUE;
         }
-    }
-
-    if (gBattleMoves[move].effect == EFFECT_VITAL_THROW)
-    {
-        JumpIfMoveFailed(7, move);
-        return TRUE;
     }
 
     if (B_MINIMIZE_DMG_ACC >= GEN_6
@@ -2769,7 +2759,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
 
     if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_1ST_HIT
         && gBattleMons[gBattlerTarget].hp != 0
-        && IsFinalStrikeEffect(gCurrentMove))
+        && IsFinalStrikeEffect(gBattleScripting.moveEffect))
     {
         gBattlescriptCurrInstr++;
         return;
@@ -5413,14 +5403,12 @@ static void Cmd_moveend(void)
                 && IsBattlerAlive(gBattlerAttacker)
                 && gBattleScripting.savedDmg != 0) // Some checks may be redundant alongside this one
             {
-                switch (gBattleMoves[gCurrentMove].effect)
+                if (gBattleMoves[gCurrentMove].recoil > 0)
                 {
-                case EFFECT_RECOIL:
                     gBattleMoveDamage = max(1, gBattleScripting.savedDmg * max(1, gBattleMoves[gCurrentMove].recoil) / 100);
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_MoveEffectRecoil;
                     effect = TRUE;
-                    break;
                 }
             }
             gBattleScripting.moveendState++;
@@ -9549,7 +9537,7 @@ static void Cmd_various(void)
     {
         VARIOUS_ARGS(const u8 *failInstr);
         u16 move = gLastPrintedMoves[gBattlerTarget];
-        if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || gBattleMoves[move].effect == EFFECT_RECHARGE
+        if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || MoveHasMoveEffectSelf(move, MOVE_EFFECT_RECHARGE)
          || gBattleMoves[move].instructBanned || gBattleMoves[move].twoTurnMove || IsDynamaxed(gBattlerTarget))
         {
             gBattlescriptCurrInstr = cmd->failInstr;
