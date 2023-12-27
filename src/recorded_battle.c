@@ -87,7 +87,7 @@ void RecordedBattle_Init(u8 mode)
             for (j = 0; j < BATTLER_RECORD_SIZE; j++)
                 sBattleRecords[i][j] = 0xFF;
             sBattleFlags = gBattleTypeFlags;
-            sAI_Scripts = gBattleResources->ai->aiFlags;
+            sAI_Scripts = gBattleResources->ai->aiFlags[B_POSITION_OPPONENT_LEFT];
         }
     }
 }

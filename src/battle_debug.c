@@ -1901,8 +1901,8 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         data->modifyArrows.typeOfVal = VAL_BITFIELD_32;
         goto CASE_ITEM_STATUS;
     case LIST_ITEM_AI:
-        data->modifyArrows.modifiedValPtr = &gBattleResources->ai->aiFlags;
-        data->modifyArrows.currValue = GetBitfieldValue(gBattleResources->ai->aiFlags, data->bitfield[data->currentSecondaryListItemId].currBit, data->bitfield[data->currentSecondaryListItemId].bitsCount);
+        data->modifyArrows.modifiedValPtr = &gBattleResources->ai->aiFlags[data->battlerId];
+        data->modifyArrows.currValue = GetBitfieldValue(gBattleResources->ai->aiFlags[data->battlerId], data->bitfield[data->currentSecondaryListItemId].currBit, data->bitfield[data->currentSecondaryListItemId].bitsCount);
         data->modifyArrows.typeOfVal = VAL_BITFIELD_32;
         goto CASE_ITEM_STATUS;
     CASE_ITEM_STATUS:
