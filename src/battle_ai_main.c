@@ -143,7 +143,7 @@ static u32 GetWildAiFlags(void)
 static u32 GetAiFlags(u16 trainerId)
 {
     u32 flags = 0;
-    
+
     if (!(gBattleTypeFlags & BATTLE_TYPE_HAS_AI) && !IsWildMonSmart())
         return 0;
     if (trainerId == 0xFFFF)
@@ -167,26 +167,26 @@ static u32 GetAiFlags(u16 trainerId)
         else
             flags = gTrainers[trainerId].aiFlags;
     }
-    
+
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         flags |= AI_FLAG_DOUBLE_BATTLE;
-    
+
     return flags;
 }
 
 void BattleAI_SetupFlags(void)
 {
     AI_THINKING_STRUCT->aiFlags[B_POSITION_PLAYER_LEFT] = 0; // player has no AI
-    
+
 #if DEBUG_OVERWORLD_MENU == TRUE
     if (gIsDebugBattle)
     {
         AI_THINKING_STRUCT->aiFlags[B_POSITION_OPPONENT_LEFT] = gDebugAIFlags;
         AI_THINKING_STRUCT->aiFlags[B_POSITION_OPPONENT_RIGHT] = gDebugAIFlags;
         return;
-    }   
+    }
 #endif
-    
+
     if (IsWildMonSmart() && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER)))
     {
         // smart wild AI
@@ -201,7 +201,7 @@ void BattleAI_SetupFlags(void)
         else
             AI_THINKING_STRUCT->aiFlags[B_POSITION_OPPONENT_RIGHT] = AI_THINKING_STRUCT->aiFlags[B_POSITION_OPPONENT_LEFT];
     }
-    
+
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     {
         AI_THINKING_STRUCT->aiFlags[B_POSITION_PLAYER_RIGHT] = GetAiFlags(gPartnerTrainerId - TRAINER_PARTNER(PARTNER_NONE));
@@ -1699,6 +1699,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 ADJUST_SCORE(-6);
             break;
         case EFFECT_BELLY_DRUM:
+        case EFFECT_FILLET_AWAY:
             if (aiData->abilities[battlerAtk] == ABILITY_CONTRARY)
                 ADJUST_SCORE(-10);
             else if (aiData->hpPercents[battlerAtk] <= 60)
@@ -5043,6 +5044,7 @@ static s32 AI_Risky(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     case EFFECT_FOCUS_PUNCH:
     case EFFECT_REVENGE:
     case EFFECT_TEETER_DANCE:
+    case EFFECT_FILLET_AWAY:
         if (Random() & 1)
             ADJUST_SCORE(2);
         break;
@@ -5193,6 +5195,7 @@ static s32 AI_HPAware(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             case EFFECT_CONVERSION_2:
             case EFFECT_SAFEGUARD:
             case EFFECT_BELLY_DRUM:
+            case EFFECT_FILLET_AWAY:
                 ADJUST_SCORE(-2);
                 break;
             default:
@@ -5228,6 +5231,7 @@ static s32 AI_HPAware(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             case EFFECT_HAIL:
             case EFFECT_SNOWSCAPE:
             case EFFECT_RAIN_DANCE:
+            case EFFECT_FILLET_AWAY:
                 ADJUST_SCORE(-2);
                 break;
             default:

@@ -13293,7 +13293,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_FILLET_AWAY] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_FILLET_AWAY
+        .effect = EFFECT_FILLET_AWAY,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,

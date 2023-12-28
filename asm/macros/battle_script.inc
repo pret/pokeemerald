@@ -980,7 +980,7 @@
 	.byte 0xbb
 	.endm
 
-	.macro maxattackhalvehp failInstr:req
+	.macro halvehp failInstr:req
 	.byte 0xbc
 	.4byte \failInstr
 	.endm
