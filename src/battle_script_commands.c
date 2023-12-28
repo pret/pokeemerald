@@ -355,6 +355,7 @@ void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBat
 static void RemoveAllTerrains(void);
 static bool8 CanAbilityPreventStatLoss(u16 abilityDef, bool8 isIntimidate);
 static bool8 CanBurnHitThaw(u16 move);
+static u32 GetNextTarget(u32 moveTarget, bool32 excludeCurrent);
 
 static void Cmd_attackcanceler(void);
 static void Cmd_accuracycheck(void);
@@ -3192,8 +3193,15 @@ void SetMoveEffect(bool32 primary, u32 certain)
                     if (payday > gPaydayMoney)
                         gPaydayMoney = 0xFFFF;
 
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_MoveEffectPayDay;
+                    // For a move that hits multiple targets (i.e. Make it Rain)
+                    // we only want to print the message on the final hit
+                    if (GetNextTarget(gBattleMoves[gCurrentMove].target, TRUE) == MAX_BATTLERS_COUNT)
+                    {
+                        BattleScriptPush(gBattlescriptCurrInstr + 1);
+                        gBattlescriptCurrInstr = BattleScript_MoveEffectPayDay;
+                    }
+                    else
+                        gBattlescriptCurrInstr++;
                 }
                 else
                 {
@@ -3719,22 +3727,28 @@ static void Cmd_seteffectwithchance(void)
         }
         else if (gBattleMoves[gCurrentMove].numAdditionalEffects > gBattleStruct->additionalEffectsCounter)
         {
-            u32 percentChance = CalcSecondaryEffectChance(
-                gBattlerAttacker,
-                &gBattleMoves[gCurrentMove].additionalEffects[gBattleStruct->additionalEffectsCounter]
-            );
             const u8 *currentPtr = gBattlescriptCurrInstr;
-
-            // Activate effect if it's primary (chance == 0) or if RNGesus says so
-            if ((percentChance == 0) || RandomPercentage(RNG_SECONDARY_EFFECT + gBattleStruct->additionalEffectsCounter, percentChance))
+            // self-targeting move effects cannot occur multiple times per turn
+            // only occur on the last setmoveeffect when there are multiple targets
+            if (!(gBattleMoves[gCurrentMove].additionalEffects[gBattleStruct->additionalEffectsCounter].self
+              && GetNextTarget(gBattleMoves[gCurrentMove].target, TRUE) != MAX_BATTLERS_COUNT))
             {
-                gBattleScripting.moveEffect = gBattleMoves[gCurrentMove].additionalEffects[gBattleStruct->additionalEffectsCounter].moveEffect
-                    | (MOVE_EFFECT_AFFECTS_USER * (gBattleMoves[gCurrentMove].additionalEffects[gBattleStruct->additionalEffectsCounter].self));
-
-                SetMoveEffect(
-                    percentChance == 0, // a primary effect
-                    MOVE_EFFECT_CERTAIN * (percentChance >= 100) // certain to happen
+                u32 percentChance = CalcSecondaryEffectChance(
+                    gBattlerAttacker,
+                    &gBattleMoves[gCurrentMove].additionalEffects[gBattleStruct->additionalEffectsCounter]
                 );
+
+                // Activate effect if it's primary (chance == 0) or if RNGesus says so
+                if ((percentChance == 0) || RandomPercentage(RNG_SECONDARY_EFFECT + gBattleStruct->additionalEffectsCounter, percentChance))
+                {
+                    gBattleScripting.moveEffect = gBattleMoves[gCurrentMove].additionalEffects[gBattleStruct->additionalEffectsCounter].moveEffect
+                        | (MOVE_EFFECT_AFFECTS_USER * (gBattleMoves[gCurrentMove].additionalEffects[gBattleStruct->additionalEffectsCounter].self));
+
+                    SetMoveEffect(
+                        percentChance == 0, // a primary effect
+                        MOVE_EFFECT_CERTAIN * (percentChance >= 100) // certain to happen
+                    );
+                }
             }
 
             // Move script along if we haven't jumped elsewhere
@@ -3742,13 +3756,11 @@ static void Cmd_seteffectwithchance(void)
                 gBattlescriptCurrInstr = cmd->nextInstr;
 
             // Call seteffectwithchance again in the case of a move with multiple effects
-            if (gBattleMoves[gCurrentMove].numAdditionalEffects - 1 > gBattleStruct->additionalEffectsCounter)
-            {
-                gBattleStruct->additionalEffectsCounter++;
+            gBattleStruct->additionalEffectsCounter++;
+            if (gBattleMoves[gCurrentMove].numAdditionalEffects > gBattleStruct->additionalEffectsCounter)
                 gBattleScripting.moveEffect = MOVE_EFFECT_CONTINUE;
-            }
             else
-                gBattleScripting.moveEffect = 0;
+                gBattleScripting.moveEffect = gBattleStruct->additionalEffectsCounter = 0;
         }
         else
         {
@@ -5230,12 +5242,13 @@ static bool32 TryKnockOffBattleScript(u32 battlerDef)
     && gBattleMons[battler].hp != 0                                \
     && gBattleMons[ally].hp != 0
 
-static u32 GetNextTarget(u32 moveTarget)
+static u32 GetNextTarget(u32 moveTarget, bool32 excludeCurrent)
 {
     u32 i;
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         if (i != gBattlerAttacker
+            && !(excludeCurrent && i == gBattlerTarget)
             && IsBattlerAlive(i)
             && !(gBattleStruct->targetsDone[gBattlerAttacker] & gBitTable[i])
             && (GetBattlerSide(i) != GetBattlerSide(gBattlerAttacker) || moveTarget == MOVE_TARGET_FOES_AND_ALLY))
@@ -5769,7 +5782,7 @@ static void Cmd_moveend(void)
                     || moveTarget == MOVE_TARGET_FOES_AND_ALLY)
                 && !(gHitMarker & HITMARKER_NO_ATTACKSTRING))
             {
-                u32 nextTarget = GetNextTarget(moveTarget);
+                u32 nextTarget = GetNextTarget(moveTarget, FALSE);
                 gHitMarker |= HITMARKER_NO_PPDEDUCT;
 
                 if (nextTarget != MAX_BATTLERS_COUNT)
@@ -5790,7 +5803,7 @@ static void Cmd_moveend(void)
                     gBattleStruct->targetsDone[gBattlerAttacker] |= gBitTable[originalBounceTarget];
                     gBattleStruct->targetsDone[originalBounceTarget] = 0;
 
-                    nextTarget = GetNextTarget(moveTarget);
+                    nextTarget = GetNextTarget(moveTarget, FALSE);
                     if (nextTarget != MAX_BATTLERS_COUNT)
                     {
                         // We found another target for the original move user.

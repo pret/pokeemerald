@@ -362,17 +362,16 @@
 #define EFFECT_UNUSED_358                   358
 #define EFFECT_TAKE_HEART                   359
 #define EFFECT_COLLISION_COURSE             360
-#define EFFECT_MAKE_IT_RAIN                 361
-#define EFFECT_CORROSIVE_GAS                362
-#define EFFECT_POPULATION_BOMB              363
-#define EFFECT_SALT_CURE                    364
-#define EFFECT_CHILLY_RECEPTION             365
-#define EFFECT_MAX_MOVE                     366
-#define EFFECT_GLAIVE_RUSH                  367
-#define EFFECT_RAGING_BULL                  368
-#define EFFECT_RAGE_FIST                    369
-#define EFFECT_DOODLE                       370
+#define EFFECT_CORROSIVE_GAS                361
+#define EFFECT_POPULATION_BOMB              362
+#define EFFECT_SALT_CURE                    363
+#define EFFECT_CHILLY_RECEPTION             364
+#define EFFECT_MAX_MOVE                     365
+#define EFFECT_GLAIVE_RUSH                  366
+#define EFFECT_RAGING_BULL                  367
+#define EFFECT_RAGE_FIST                    368
+#define EFFECT_DOODLE                       369
 
-#define NUM_BATTLE_MOVE_EFFECTS             371
+#define NUM_BATTLE_MOVE_EFFECTS             370
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

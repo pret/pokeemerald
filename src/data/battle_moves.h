@@ -13167,7 +13167,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_MAKE_IT_RAIN] =
     {
-        .effect = EFFECT_MAKE_IT_RAIN,
+        .effect = EFFECT_HIT,
         .power = 120,
         .type = TYPE_STEEL,
         .accuracy = 100,
@@ -13176,7 +13176,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .metronomeBanned = TRUE,
-        // additional effects handled in script due to weird behaviour in doubles
+        ADDITIONAL_EFFECTS(
+            PRIMARY_EFFECT(MOVE_EFFECT_PAYDAY),
+            PRIMARY_EFFECT_SELF(MOVE_EFFECT_SP_ATK_MINUS_1)
+        ),
     },
 
     [MOVE_RUINATION] =
