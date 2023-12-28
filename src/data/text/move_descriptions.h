@@ -3284,6 +3284,54 @@ static const u8 sIvyCudgelDescription[] = _(
     "Type changes with held mask.\n"
     "High critical-hit ratio.");
 
+static const u8 sElectroShotDescription[] = _(
+    "Absorbs electricity in one turn,\n"
+    "then attacks next turn.");
+
+static const u8 sTeraStarstormDescription[] = _(
+    "Damages all opponents if user is\n"
+    "Stellar form Terapagos.");
+
+static const u8 sFickleBeamDescription[] = _(
+    "Shoots a beam of light. Sometimes\n"
+    "twice as strong.");
+
+static const u8 sBurningBulwarkDescription[] = _(
+    "Evades attack, and burns\n"
+    "the foe if struck.");
+
+static const u8 sTachyonCutterDescription[] = _(
+    "Launches particle blades at\n"
+    "the target. Strikes twice.");
+
+static const u8 sDragonCheerDescription[] = _(
+    "Increases allies' critical hit\n"
+    "ration, especially if Dragons.");
+
+static const u8 sAlluringVoiceDescription[] = _(
+    "Confuses the target if their\n"
+    "stats were boosted this turn.");
+
+static const u8 sTemperFlareDescription[] = _(
+    "A desperation attack. Power\n"
+    "doubles if last move failed.");
+
+static const u8 sSupercellSlamDescription[] = _(
+    "An electrified slam. If it\n"
+    "misses, the user is hurt.");
+
+static const u8 sPsychicNoiseDescription[] = _(
+    "Unpleasant sound waves that\n"
+    "damage and prevent healing.");
+
+static const u8 sUpperHandDescription[] = _(
+    "Makes the target flinch if\n"
+    "readying a priority move.");
+
+static const u8 sMalignantChainDescription[] = _(
+    "A corrosive chain attack\n"
+    "that may badly poison.");
+
 const u8 gNotDoneYetDescription[] = _(
     "This move can't be used. Its\n"
     "effect is in development.");
@@ -4127,4 +4175,19 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_MATCHA_GOTCHA - 1] = sMatchaGotchaDescription,
     [MOVE_SYRUP_BOMB - 1] = sSyrupBombDescription,
     [MOVE_IVY_CUDGEL - 1] = sIvyCudgelDescription,
+    [MOVE_ELECTRO_SHOT - 1] = sElectroShotDescription,
+    [MOVE_TERA_STARSTORM - 1] = sTeraStarstormDescription,
+    [MOVE_FICKLE_BEAM - 1] = sFickleBeamDescription,
+    [MOVE_BURNING_BULWARK - 1] = sBurningBulwarkDescription,
+    [MOVE_THUNDERCLAP - 1] = sSuckerPunchDescription,
+    [MOVE_MIGHTY_CLEAVE - 1] = sFeintDescription,
+    [MOVE_TACHYON_CUTTER - 1] = sTachyonCutterDescription,
+    [MOVE_HARD_PRESS - 1] = sWringOutDescription,
+    [MOVE_DRAGON_CHEER - 1] = sDragonCheerDescription,
+    [MOVE_ALLURING_VOICE - 1] = sAlluringVoiceDescription,
+    [MOVE_TEMPER_FLARE - 1] = sTemperFlareDescription,
+    [MOVE_SUPERCELL_SLAM - 1] = sSupercellSlamDescription,
+    [MOVE_PSYCHIC_NOISE - 1] = sPsychicNoiseDescription,
+    [MOVE_UPPER_HAND - 1] = sUpperHandDescription,
+    [MOVE_MALIGNANT_CHAIN - 1] = sMalignantChainDescription,
 };
