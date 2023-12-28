@@ -177,15 +177,15 @@ AI_SINGLE_BATTLE_TEST("AI chooses moves with secondary effect that have a 100% c
         AI_LOG;
         ASSUME(gBattleMoves[MOVE_SHADOW_BALL].effect == EFFECT_SPECIAL_DEFENSE_DOWN_HIT);
         ASSUME(gBattleMoves[MOVE_SHADOW_BALL].secondaryEffectChance == 20);
-        ASSUME(gBattleMoves[MOVE_LUSTER_PURGE].effect == EFFECT_SPECIAL_DEFENSE_DOWN_HIT);
-        ASSUME(gBattleMoves[MOVE_LUSTER_PURGE].secondaryEffectChance == 50);
+        ASSUME(gBattleMoves[MOVE_OCTAZOOKA].effect == EFFECT_ACCURACY_DOWN_HIT);
+        ASSUME(gBattleMoves[MOVE_OCTAZOOKA].secondaryEffectChance == 50);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_REGICE);
-        OPPONENT(SPECIES_REGIROCK) { Ability(ability); Moves(MOVE_SHADOW_BALL, MOVE_LUSTER_PURGE); }
+        OPPONENT(SPECIES_REGIROCK) { Ability(ability); Moves(MOVE_SHADOW_BALL, MOVE_OCTAZOOKA); }
     } WHEN {
         if (ability == ABILITY_NONE)
             TURN { EXPECT_MOVE(opponent, MOVE_SHADOW_BALL); }
         else
-            TURN { EXPECT_MOVES(opponent, MOVE_LUSTER_PURGE); }
+            TURN { EXPECT_MOVES(opponent, MOVE_OCTAZOOKA); }
     }
 }
