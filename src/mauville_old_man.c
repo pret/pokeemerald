@@ -320,11 +320,7 @@ static void InitGiddyTaleList(void)
     // Shuffle question list
     for (i = 0; i < GIDDY_MAX_QUESTIONS; i++)
         giddy->questionList[i] = i;
-    for (i = 0; i < GIDDY_MAX_QUESTIONS; i++)
-    {
-        var = Random() % (i + 1);
-        SWAP(giddy->questionList[i], giddy->questionList[var], temp);
-    }
+    Shuffle(giddy->questionList, GIDDY_MAX_QUESTIONS, sizeof(giddy->questionList[0]));
 
     // Count total number of words in above word groups
     totalWords = 0;
@@ -1265,27 +1261,12 @@ static void StorytellerRecordNewStat(u32 player, u32 stat)
     sStorytellerPtr->language[player] = gGameLanguage;
 }
 
-static void ScrambleStatList(u8 *arr, s32 count)
-{
-    s32 i;
-
-    for (i = 0; i < count; i++)
-        arr[i] = i;
-    for (i = 0; i < count; i++)
-    {
-        u32 a = Random() % count;
-        u32 b = Random() % count;
-        u8 temp;
-        SWAP(arr[a], arr[b], temp);
-    }
-}
-
 static bool8 StorytellerInitializeRandomStat(void)
 {
     u8 storyIds[sNumStories];
     s32 i, j;
 
-    ScrambleStatList(storyIds, sNumStories);
+    Shuffle(storyIds, sNumStories, sizeof(storyIds[0]));
     for (i = 0; i < sNumStories; i++)
     {
         u8 stat = sStorytellerStories[storyIds[i]].stat;
@@ -1427,4 +1408,3 @@ bool8 Script_StorytellerInitializeRandomStat(void)
     sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
     return StorytellerInitializeRandomStat();
 }
-
