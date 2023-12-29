@@ -663,6 +663,9 @@ const u32 gItemIconPalette_UnremarkableTeacup[] = INCBIN_U32("graphics/items/ico
 const u32 gItemIcon_MasterpieceTeacup[] = INCBIN_U32("graphics/items/icons/masterpiece_teacup.4bpp.lz");
 const u32 gItemIconPalette_MasterpieceTeacup[] = INCBIN_U32("graphics/items/icon_palettes/masterpiece_teacup.gbapal.lz");
 
+const u32 gItemIcon_MetalAlloy[] = INCBIN_U32("graphics/items/icons/metal_alloy.4bpp.lz");
+const u32 gItemIconPalette_MetalAlloy[] = INCBIN_U32("graphics/items/icon_palettes/metal_alloy.gbapal.lz");
+
 // Nectars
 
 const u32 gItemIcon_RedNectar[] = INCBIN_U32("graphics/items/icons/red_nectar.4bpp.lz");

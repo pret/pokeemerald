@@ -207,3 +207,24 @@ DOUBLE_BATTLE_TEST("Ally Switch increases the Protect-like moves counter")
         EXPECT(gDisableStructs[B_POSITION_PLAYER_RIGHT].protectUses == 1);
     }
 }
+
+DOUBLE_BATTLE_TEST("Ally Switch works if ally used two-turn move like Dig")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerRight, MOVE_DIG, target:opponentRight); }
+        TURN { MOVE(playerLeft, MOVE_ALLY_SWITCH); SKIP_TURN(playerRight); }
+    } SCENE {
+        MESSAGE("Wynaut used Dig!");
+        MESSAGE("Wobbuffet used Ally Switch!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, playerLeft);
+        MESSAGE("Wobbuffet and Wynaut switched places!");
+        NOT MESSAGE("Wynaut used -!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DIG);
+        HP_BAR(opponentRight);
+    }
+}

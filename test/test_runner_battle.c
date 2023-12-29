@@ -1587,6 +1587,7 @@ static u32 GenerateNature(u32 nature, u32 offset)
 void ClosePokemon(u32 sourceLine)
 {
     s32 i;
+    u32 data;
     INVALID_IF(DATA.hasExplicitSpeeds && !(DATA.explicitSpeeds[DATA.currentSide] & (1 << DATA.currentPartyIndex)), "Speed required");
     for (i = 0; i < STATE->battlersCount; i++)
     {
@@ -1596,6 +1597,8 @@ void ClosePokemon(u32 sourceLine)
             INVALID_IF(GetMonData(DATA.currentMon, MON_DATA_HP) == 0, "Battlers cannot be fainted");
         }
     }
+    data = FALSE;
+    SetMonData(DATA.currentMon, MON_DATA_IS_SHINY, &data);
     UpdateMonPersonality(&DATA.currentMon->box, GenerateNature(DATA.nature, DATA.gender % NUM_NATURES) | DATA.gender);
     DATA.currentMon = NULL;
 }
@@ -1766,8 +1769,32 @@ void Status1_(u32 sourceLine, u32 status1)
 
 void OTName_(u32 sourceLine, const u8 *otName)
 {
-    INVALID_IF(!DATA.currentMon, "Traded outside of PLAYER/OPPONENT");
+    INVALID_IF(!DATA.currentMon, "OTName outside of PLAYER/OPPONENT");
     SetMonData(DATA.currentMon, MON_DATA_OT_NAME, &otName);
+}
+
+void DynamaxLevel_(u32 sourceLine, u32 dynamaxLevel)
+{
+    INVALID_IF(!DATA.currentMon, "DynamaxLevel outside of PLAYER/OPPONENT");
+    SetMonData(DATA.currentMon, MON_DATA_DYNAMAX_LEVEL, &dynamaxLevel);
+}
+
+void GigantamaxFactor_(u32 sourceLine, bool32 gigantamaxFactor)
+{
+    INVALID_IF(!DATA.currentMon, "GigantamaxFactor outside of PLAYER/OPPONENT");
+    SetMonData(DATA.currentMon, MON_DATA_GIGANTAMAX_FACTOR, &gigantamaxFactor);
+}
+
+void TeraType_(u32 sourceLine, u32 teraType)
+{
+    INVALID_IF(!DATA.currentMon, "TeraType outside of PLAYER/OPPONENT");
+    SetMonData(DATA.currentMon, MON_DATA_TERA_TYPE, &teraType);
+}
+
+void Shadow_(u32 sourceLine, bool32 isShadow)
+{
+    INVALID_IF(!DATA.currentMon, "Shadow outside of PLAYER/OPPONENT");
+    SetMonData(DATA.currentMon, MON_DATA_IS_SHADOW, &isShadow);
 }
 
 static const char *const sBattlerIdentifiersSingles[] =

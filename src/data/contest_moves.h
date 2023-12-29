@@ -6074,6 +6074,36 @@ const struct ContestMove gContestMoves[MOVES_COUNT] =
     [MOVE_SYRUP_BOMB] = {0}, // TODO
 
     [MOVE_IVY_CUDGEL] = {0}, // TODO
+
+    [MOVE_ELECTRO_SHOT] = {0}, // TODO
+
+    [MOVE_TERA_STARSTORM] = {0}, // TODO
+
+    [MOVE_FICKLE_BEAM] = {0}, // TODO
+
+    [MOVE_BURNING_BULWARK] = {0}, // TODO
+
+    [MOVE_THUNDERCLAP] = {0}, // TODO
+
+    [MOVE_MIGHTY_CLEAVE] = {0}, // TODO
+
+    [MOVE_TACHYON_CUTTER] = {0}, // TODO
+
+    [MOVE_HARD_PRESS] = {0}, // TODO
+
+    [MOVE_DRAGON_CHEER] = {0}, // TODO
+
+    [MOVE_ALLURING_VOICE] = {0}, // TODO
+
+    [MOVE_TEMPER_FLARE] = {0}, // TODO
+
+    [MOVE_SUPERCELL_SLAM] = {0}, // TODO
+
+    [MOVE_PSYCHIC_NOISE] = {0}, // TODO
+
+    [MOVE_UPPER_HAND] = {0}, // TODO
+
+    [MOVE_MALIGNANT_CHAIN] = {0}, // TODO
 };
 
 const struct ContestEffect gContestEffects[] =

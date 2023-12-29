@@ -4152,6 +4152,7 @@ static bool32 IsDomeComboMoveEffect(u32 effect)
     case EFFECT_CHARGE:
     case EFFECT_BULK_UP:
     case EFFECT_ATTACK_ACCURACY_UP:
+    case EFFECT_FILLET_AWAY:
     // Others
     case EFFECT_FOCUS_ENERGY:
     case EFFECT_LOCK_ON:
@@ -4343,7 +4344,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                     move = gSaveBlock2Ptr->frontier.domePlayerPartyData[i].moves[j];
                 else
                     move = gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].moves[j];
-                
+
                 switch (k)
                 {
                 case MOVE_POINTS_COMBO:

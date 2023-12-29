@@ -16,6 +16,7 @@
 #include "party_menu.h"
 #include "pokedex.h"
 #include "pokemon.h"
+#include "pokemon_storage_system.h"
 #include "random.h"
 #include "script.h"
 #include "sprite.h"
@@ -27,35 +28,30 @@
 
 static void CB2_ReturnFromChooseHalfParty(void);
 static void CB2_ReturnFromChooseBattleFrontierParty(void);
+static void HealPlayerBoxes(void);
 
 void HealPlayerParty(void)
 {
-    u8 i, j;
-    u8 ppBonuses;
-    u8 arg[4];
+    u32 i;
+    for (i = 0; i < gPlayerPartyCount; i++)
+        HealPokemon(&gPlayerParty[i]);
+    if (OW_PC_HEAL >= GEN_8)
+        HealPlayerBoxes();
+}
 
-    // restore HP.
-    for(i = 0; i < gPlayerPartyCount; i++)
+static void HealPlayerBoxes(void)
+{
+    int boxId, boxPosition;
+    struct BoxPokemon *boxMon;
+
+    for (boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
     {
-        u16 maxHP = GetMonData(&gPlayerParty[i], MON_DATA_MAX_HP);
-        arg[0] = maxHP;
-        arg[1] = maxHP >> 8;
-        SetMonData(&gPlayerParty[i], MON_DATA_HP, arg);
-        ppBonuses = GetMonData(&gPlayerParty[i], MON_DATA_PP_BONUSES);
-
-        // restore PP.
-        for(j = 0; j < MAX_MON_MOVES; j++)
+        for (boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
         {
-            arg[0] = CalculatePPWithBonus(GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + j), ppBonuses, j);
-            SetMonData(&gPlayerParty[i], MON_DATA_PP1 + j, arg);
+            boxMon = &gPokemonStoragePtr->boxes[boxId][boxPosition];
+            if (GetBoxMonData(boxMon, MON_DATA_SANITY_HAS_SPECIES))
+                HealBoxPokemon(boxMon);
         }
-
-        // since status is u32, the four 0 assignments here are probably for safety to prevent undefined data from reaching SetMonData.
-        arg[0] = 0;
-        arg[1] = 0;
-        arg[2] = 0;
-        arg[3] = 0;
-        SetMonData(&gPlayerParty[i], MON_DATA_STATUS, arg);
     }
 }
 
@@ -272,4 +268,73 @@ void ReducePlayerPartyToSelectedMons(void)
         gPlayerParty[i] = party[i];
 
     CalculatePlayerPartyCount();
+}
+
+void CanHyperTrain(struct ScriptContext *ctx)
+{
+    u32 stat = ScriptReadByte(ctx);
+    u32 partyIndex = VarGet(ScriptReadHalfword(ctx));
+    if (stat < NUM_STATS
+     && partyIndex < PARTY_SIZE
+     && !GetMonData(&gPlayerParty[partyIndex], MON_DATA_HYPER_TRAINED_HP + stat)
+     && GetMonData(&gPlayerParty[partyIndex], MON_DATA_HP_IV + stat) < MAX_PER_STAT_IVS)
+    {
+        gSpecialVar_Result = TRUE;
+    }
+    else
+    {
+        gSpecialVar_Result = FALSE;
+    }
+}
+
+void HyperTrain(struct ScriptContext *ctx)
+{
+    u32 stat = ScriptReadByte(ctx);
+    u32 partyIndex = VarGet(ScriptReadHalfword(ctx));
+    if (stat < NUM_STATS && partyIndex < PARTY_SIZE)
+    {
+        bool32 data = TRUE;
+        SetMonData(&gPlayerParty[partyIndex], MON_DATA_HYPER_TRAINED_HP + stat, &data);
+        CalculateMonStats(&gPlayerParty[partyIndex]);
+    }
+}
+
+void HasGigantamaxFactor(struct ScriptContext *ctx)
+{
+    u32 partyIndex = VarGet(ScriptReadHalfword(ctx));
+    if (partyIndex < PARTY_SIZE)
+        gSpecialVar_Result = GetMonData(&gPlayerParty[partyIndex], MON_DATA_GIGANTAMAX_FACTOR);
+    else
+        gSpecialVar_Result = FALSE;
+}
+
+static const u16 sGigantaxFactorLockedSpecies[] =
+{
+    SPECIES_MELMETAL,
+};
+
+void ToggleGigantamaxFactor(struct ScriptContext *ctx)
+{
+    u32 i;
+    u32 partyIndex = VarGet(ScriptReadHalfword(ctx));
+    u32 species;
+
+    gSpecialVar_Result = FALSE;
+
+    if (partyIndex < PARTY_SIZE)
+    {
+        bool32 gigantamaxFactor;
+
+        species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES);
+        for (i = 0; i < ARRAY_COUNT(sGigantaxFactorLockedSpecies); i++)
+        {
+            if (species == sGigantaxFactorLockedSpecies[i])
+                return;
+        }
+
+        gigantamaxFactor = GetMonData(&gPlayerParty[partyIndex], MON_DATA_GIGANTAMAX_FACTOR);
+        gigantamaxFactor = !gigantamaxFactor;
+        SetMonData(&gPlayerParty[partyIndex], MON_DATA_GIGANTAMAX_FACTOR, &gigantamaxFactor);
+        gSpecialVar_Result = TRUE;
+    }
 }
