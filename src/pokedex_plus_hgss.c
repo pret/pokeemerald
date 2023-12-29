@@ -6043,21 +6043,21 @@ static void PrintStatsScreen_Abilities(u8 taskId)
     if (gTasks[taskId].data[5] == 0)
     {
         ability0 = sPokedexView->sPokemonStats.ability0;
-        PrintStatsScreenTextSmallWhite(WIN_STATS_ABILITIES, gAbilityNames[ability0], abilities_x, abilities_y);
-        PrintStatsScreenTextSmall(WIN_STATS_ABILITIES, gAbilityDescriptionPointers[ability0], abilities_x, abilities_y + 14);
+        PrintStatsScreenTextSmallWhite(WIN_STATS_ABILITIES, gAbilities[ability0].name, abilities_x, abilities_y);
+        PrintStatsScreenTextSmall(WIN_STATS_ABILITIES, gAbilities[ability0].description, abilities_x, abilities_y + 14);
 
         ability1 = sPokedexView->sPokemonStats.ability1;
         if (ability1 != ABILITY_NONE && ability1 != ability0)
         {
-            PrintStatsScreenTextSmallWhite(WIN_STATS_ABILITIES, gAbilityNames[ability1], abilities_x, abilities_y + 30);
-            PrintStatsScreenTextSmall(WIN_STATS_ABILITIES, gAbilityDescriptionPointers[ability1], abilities_x, abilities_y + 44);
+            PrintStatsScreenTextSmallWhite(WIN_STATS_ABILITIES, gAbilities[ability1].name, abilities_x, abilities_y + 30);
+            PrintStatsScreenTextSmall(WIN_STATS_ABILITIES, gAbilities[ability1].description, abilities_x, abilities_y + 44);
         }
     }
     else //Hidden abilities
     {
         abilityHidden = sPokedexView->sPokemonStats.abilityHidden;
-        PrintStatsScreenTextSmallWhite(WIN_STATS_ABILITIES, gAbilityNames[abilityHidden], abilities_x, abilities_y);
-        PrintStatsScreenTextSmall(WIN_STATS_ABILITIES, gAbilityDescriptionPointers[abilityHidden], abilities_x, abilities_y + 14);
+        PrintStatsScreenTextSmallWhite(WIN_STATS_ABILITIES, gAbilities[abilityHidden].name, abilities_x, abilities_y);
+        PrintStatsScreenTextSmall(WIN_STATS_ABILITIES, gAbilities[abilityHidden].description, abilities_x, abilities_y + 14);
     }
 }
 

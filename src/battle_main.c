@@ -409,8 +409,6 @@ static const u16 sTrainerBallTable[TRAINER_CLASS_COUNT] =
 };
 #endif
 
-#include "data/text/abilities.h"
-
 static void (* const sTurnActionsFuncsTable[])(void) =
 {
     [B_ACTION_USE_MOVE]               = HandleAction_UseMove,

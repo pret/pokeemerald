@@ -87,6 +87,7 @@ EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManagers[MON_SPR_GF
 EWRAM_DATA static u8 sTriedEvolving = 0;
 
 #include "data/battle_moves.h"
+#include "data/abilities.h"
 
 // Used in an unreferenced function in RS.
 // Unreferenced here and in FRLG.

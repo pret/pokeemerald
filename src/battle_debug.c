@@ -864,7 +864,7 @@ static void PutAiInfoText(struct BattleDebugMenu *data)
             u16 holdEffect = AI_DATA->holdEffects[i];
             u16 item = AI_DATA->items[i];
             u8 x = (i == B_POSITION_PLAYER_LEFT) ? 83 + (i) * 75 : 83 + (i-1) * 75;
-            AddTextPrinterParameterized(data->aiMovesWindowId, FONT_SMALL, gAbilityNames[ability], x, 0, 0, NULL);
+            AddTextPrinterParameterized(data->aiMovesWindowId, FONT_SMALL, gAbilities[ability].name, x, 0, 0, NULL);
             AddTextPrinterParameterized(data->aiMovesWindowId, FONT_SMALL, ItemId_GetName(item), x, 15, 0, NULL);
             AddTextPrinterParameterized(data->aiMovesWindowId, FONT_SMALL, GetHoldEffectName(holdEffect), x, 30, 0, NULL);
         }
@@ -897,7 +897,7 @@ static void PutAiPartyText(struct BattleDebugMenu *data)
             AddTextPrinterParameterized5(data->aiMovesWindowId, FONT_SMALL_NARROW, text, i * 41, 0, 0, NULL, 0, 0);
         }
 
-        txtPtr = StringCopyN(text, gAbilityNames[aiMons[i].ability], 7); // The screen is too small to fit the whole string, so we need to drop the last letters.
+        txtPtr = StringCopyN(text, gAbilities[aiMons[i].ability].name, 7); // The screen is too small to fit the whole string, so we need to drop the last letters.
         *txtPtr = EOS;
         AddTextPrinterParameterized5(data->aiMovesWindowId, FONT_SMALL_NARROW, text, i * 41, 15, 0, NULL, 0, 0);
 
@@ -1433,7 +1433,7 @@ static void PrintSecondaryEntries(struct BattleDebugMenu *data)
         }
         break;
     case LIST_ITEM_ABILITY:
-        PadString(gAbilityNames[gBattleMons[data->battlerId].ability], text);
+        PadString(gAbilities[gBattleMons[data->battlerId].ability].name, text);
         printer.currentY = printer.y = sSecondaryListTemplate.upText_Y;
         AddTextPrinter(&printer, 0, NULL);
         break;
