@@ -16993,21 +16993,6 @@ Move_MALIGNANT_CHAIN::
 Move_NONE:
 Move_MIRROR_MOVE:
 Move_POUND:
-Move_833:
-Move_834:
-Move_835:
-Move_836:
-Move_837:
-Move_838:
-Move_839:
-Move_840:
-Move_841:
-Move_842:
-Move_843:
-Move_844:
-Move_845:
-Move_846:
-Move_847:
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_TARGET
 	setalpha 12, 8
