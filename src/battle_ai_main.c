@@ -50,6 +50,10 @@ static s32 AI_Roaming(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_Safari(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_FirstBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
+static s32 AI_TryToClearStats(u32 battlerAtk, u32 battlerDef, bool32 isDoubleBattle);
+static bool32 AI_ShouldCopyStatChanges(u32 battlerAtk, u32 battlerDef);
+static s32 AI_ShouldSetUpHazards(u32 battlerAtk, u32 battlerDef, struct AiLogicData *aiData);
+
 
 static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
 {
@@ -2665,6 +2669,51 @@ static s32 AI_TryToFaint(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     return score;
 }
 
+static s32 AI_TryToClearStats(u32 battlerAtk, u32 battlerDef, bool32 isDoubleBattle)
+{
+    if (isDoubleBattle)
+        return min(CountPositiveStatStages(battlerDef) + CountPositiveStatStages(BATTLE_PARTNER(battlerDef)), 7);
+    else
+        return min(CountPositiveStatStages(battlerDef), 4);
+}
+
+static bool32 AI_ShouldCopyStatChanges(u32 battlerAtk, u32 battlerDef)
+{
+    u8 i;
+    // Want to copy positive stat changes
+    for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
+    {
+        if (gBattleMons[battlerDef].statStages[i] > gBattleMons[battlerAtk].statStages[i])
+        {
+            switch (i)
+            {
+            case STAT_ATK:
+                return (HasMoveWithCategory(battlerAtk, BATTLE_CATEGORY_PHYSICAL));
+            case STAT_SPATK:
+                return (HasMoveWithCategory(battlerAtk, BATTLE_CATEGORY_SPECIAL));
+            case STAT_ACC:
+            case STAT_EVASION:
+            case STAT_SPEED:
+                return TRUE;
+            case STAT_DEF:
+            case STAT_SPDEF:
+                return (AI_THINKING_STRUCT->aiFlags & AI_FLAG_STALL);
+            }
+        }
+    }
+
+    return FALSE;
+}
+
+//TODO - track entire opponent party data to determine hazard effectiveness
+static s32 AI_ShouldSetUpHazards(u32 battlerAtk, u32 battlerDef, struct AiLogicData *aiData)
+{
+    if (aiData->abilities[battlerDef] == ABILITY_MAGIC_BOUNCE || CountUsablePartyMons(battlerDef) == 0)
+        return 0;
+
+    return 2 * gDisableStructs[battlerAtk].isFirstTurn;
+}
+
 // double battle logic
 static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 {
@@ -3487,13 +3536,15 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             ADJUST_SCORE(-3);
             break;
         }
+        score += AI_TryToClearStats(battlerAtk, battlerDef, isDoubleBattle);
         break;
     case EFFECT_ROAR:
-        if (aiData->abilities[battlerDef] == ABILITY_SOUNDPROOF || aiData->abilities[battlerDef] == ABILITY_SUCTION_CUPS)
+        if ((gBattleMoves[move].soundMove && aiData->abilities[battlerDef] == ABILITY_SOUNDPROOF) || aiData->abilities[battlerDef] == ABILITY_SUCTION_CUPS)
         {
             ADJUST_SCORE(-3);
             break;
         }
+        score += AI_TryToClearStats(battlerAtk, battlerDef, FALSE);
         break;
     case EFFECT_MULTI_HIT:
     case EFFECT_TRIPLE_KICK:
@@ -3840,7 +3891,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     case EFFECT_STEALTH_ROCK:
     case EFFECT_STICKY_WEB:
     case EFFECT_TOXIC_SPIKES:
-        score += AI_ShouldSetUpHazards(aiData, battlerAtk, battlerDef);
+        score += AI_ShouldSetUpHazards(battlerAtk, battlerDef, aiData);
         break;
     case EFFECT_FORESIGHT:
         if (aiData->abilities[battlerAtk] == ABILITY_SCRAPPY || aiData->abilities[battlerAtk] == ABILITY_MINDS_EYE)
@@ -4672,7 +4723,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     for (i = 0; i < gBattleMoves[move].numAdditionalEffects; i++)
     {
         // Only consider effects with a guaranteed chance to happen
-        if (!MoveEffectIsGuaranteed(AI_CalcSecondaryEffectChance(battlerAtk, gBattleMoves[move].additionalEffects[i].chance)))
+        if (!MoveEffectIsGuaranteed(battlerAtk, aiData->abilities[battlerAtk], &gBattleMoves[move].additionalEffects[i]))
             continue;
 
         // Consider move effects that target self
@@ -4689,6 +4740,8 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
                 case MOVE_EFFECT_DEF_PLUS_1:
                 case MOVE_EFFECT_SP_ATK_PLUS_1:
                 case MOVE_EFFECT_SP_DEF_PLUS_1:
+                case MOVE_EFFECT_ACC_PLUS_1:
+                case MOVE_EFFECT_EVS_PLUS_1:
                     IncreaseStatUpScore(
                         battlerAtk,
                         battlerDef,
@@ -4696,7 +4749,25 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
                         &score
                     );
                     break;
+                case MOVE_EFFECT_ATK_PLUS_2:
+                case MOVE_EFFECT_DEF_PLUS_2:
+                case MOVE_EFFECT_SP_ATK_PLUS_2:
+                case MOVE_EFFECT_SP_DEF_PLUS_2:
+                case MOVE_EFFECT_ACC_PLUS_2:
+                case MOVE_EFFECT_EVS_PLUS_2:
+                    IncreaseStatUpScore(
+                        battlerAtk,
+                        battlerDef,
+                        STAT_ATK + gBattleMoves[move].additionalEffects[i].moveEffect - MOVE_EFFECT_ATK_PLUS_2,
+                        &score
+                    );
+                    break;
                 // Effects that lower stat(s) - only need to consider Contrary 
+                case MOVE_EFFECT_ATK_MINUS_1:
+                case MOVE_EFFECT_DEF_MINUS_1:
+                case MOVE_EFFECT_SPD_MINUS_1:
+                case MOVE_EFFECT_SP_ATK_MINUS_1:
+                case MOVE_EFFECT_SP_DEF_MINUS_1:
                 case MOVE_EFFECT_V_CREATE:
                 case MOVE_EFFECT_DEF_SPDEF_DOWN:
                 case MOVE_EFFECT_ATK_DEF_DOWN:
@@ -4714,6 +4785,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
                     score += ShouldTryToFlinch(battlerAtk, battlerDef, aiData->abilities[battlerAtk], aiData->abilities[battlerDef], move);
                     break;
                 case MOVE_EFFECT_SPD_MINUS_1:
+                case MOVE_EFFECT_SPD_MINUS_2:
                     if (!ShouldLowerSpeed(battlerAtk, battlerDef, aiData->abilities[battlerDef]))
                         break;
                 case MOVE_EFFECT_ATK_MINUS_1:
@@ -4725,11 +4797,20 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
                     if (aiData->abilities[battlerDef] != ABILITY_CONTRARY)
                         ADJUST_SCORE(2);
                     break;
+                case MOVE_EFFECT_ATK_MINUS_2:
+                case MOVE_EFFECT_DEF_MINUS_2:
+                case MOVE_EFFECT_SP_ATK_MINUS_2:
+                case MOVE_EFFECT_SP_DEF_MINUS_2:
+                case MOVE_EFFECT_ACC_MINUS_2:
+                case MOVE_EFFECT_EVS_MINUS_2:
+                    if (aiData->abilities[battlerDef] != ABILITY_CONTRARY)
+                        ADJUST_SCORE(3);
+                    break;
                 case MOVE_EFFECT_POISON:
                     IncreasePoisonScore(battlerAtk, battlerDef, move, &score);
                     break;
                 case MOVE_EFFECT_CLEAR_SMOG:
-                    score += min(CountPositiveStatStages(battlerDef), 4);
+                    score += AI_TryToClearStats(battlerAtk, battlerDef, FALSE);
                     break;
                 case MOVE_EFFECT_SPECTRAL_THIEF:
                     score += AI_ShouldCopyStatChanges(battlerAtk, battlerDef);
@@ -4822,7 +4903,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
                     break;
                 case MOVE_EFFECT_STEALTH_ROCK:
                 case MOVE_EFFECT_SPIKES:
-                    score += AI_ShouldSetUpHazards(aiData, battlerAtk, battlerDef);
+                    score += AI_ShouldSetUpHazards(battlerAtk, battlerDef, aiData);
                     break;
                 case MOVE_EFFECT_FEINT:
                     if (gBattleMoves[predictedMove].effect == EFFECT_PROTECT)

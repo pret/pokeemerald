@@ -64,9 +64,6 @@ bool32 AI_IsAbilityOnSide(u32 battlerId, u32 ability);
 bool32 AI_MoveMakesContact(u32 ability, u32 holdEffect, u32 move);
 u32 AI_GetBattlerMoveTargetType(u32 battlerId, u32 move);
 bool32 ShouldUseZMove(u32 battlerAtk, u32 battlerDef, u32 chosenMove);
-u32 AI_CalcSecondaryEffectChance(u32 battler, u32 secondaryEffectChance);
-bool32 AI_ShouldCopyStatChanges(u32 battlerAtk, u32 battlerDef);
-u32 AI_ShouldSetUpHazards(struct AiLogicData *aiData, u32 battlerAtk, u32 battlerDef);
 
 // stat stage checks
 bool32 AnyStatIsRaised(u32 battlerId);
@@ -104,6 +101,7 @@ bool32 HasOnlyMovesWithCategory(u32 battlerId, u32 category, bool32 onlyOffensiv
 bool32 HasMoveWithCategory(u32 battler, u32 category);
 bool32 HasMoveWithType(u32 battler, u32 type);
 bool32 HasMoveEffect(u32 battlerId, u32 moveEffect);
+bool32 HasMoveEffectANDArg(u32 battlerId, u32 effect, u32 argument);
 bool32 HasMoveWithMoveEffect(u32 battlerId, u32 moveEffect, u32 effectHitOnly);
 bool32 HasMoveWithLowAccuracy(u32 battlerAtk, u32 battlerDef, u32 accCheck, bool32 ignoreStatus, u32 atkAbility, u32 defAbility, u32 atkHoldEffect, u32 defHoldEffect);
 bool32 IsAromaVeilProtectedMove(u32 move);

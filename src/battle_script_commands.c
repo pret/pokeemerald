@@ -976,7 +976,6 @@ static const u16 sFinalStrikeOnlyEffects[] =
     MOVE_EFFECT_STEAL_ITEM,
     MOVE_EFFECT_BURN_UP,
     MOVE_EFFECT_DOUBLE_SHOCK,
-    MOVE_EFFECT_SECRET_POWER,
     MOVE_EFFECT_SMACK_DOWN,
     MOVE_EFFECT_REMOVE_STATUS,
     MOVE_EFFECT_RECOIL_HP_25,
@@ -3696,7 +3695,86 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 }
                 break;
             case MOVE_EFFECT_SECRET_POWER:
-                gBattleScripting.moveEffect = GetSecretPowerMoveEffect();
+                if (gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
+                {
+                    switch (gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
+                    {
+                    case STATUS_FIELD_MISTY_TERRAIN:
+                        gBattleScripting.moveEffect = MOVE_EFFECT_SP_ATK_MINUS_1;
+                        break;
+                    case STATUS_FIELD_GRASSY_TERRAIN:
+                        gBattleScripting.moveEffect = MOVE_EFFECT_SLEEP;
+                        break;
+                    case STATUS_FIELD_ELECTRIC_TERRAIN:
+                        gBattleScripting.moveEffect = MOVE_EFFECT_PARALYSIS;
+                        break;
+                    case STATUS_FIELD_PSYCHIC_TERRAIN:
+                        gBattleScripting.moveEffect = MOVE_EFFECT_SPD_MINUS_1;
+                        break;
+                    default:
+                        gBattleScripting.moveEffect = MOVE_EFFECT_PARALYSIS;
+                        break;
+                    }
+                }
+                else
+                {
+                    switch (gBattleTerrain)
+                    {
+                    case BATTLE_TERRAIN_GRASS:
+                        gBattleScripting.moveEffect = (B_SECRET_POWER_EFFECT >= GEN_4 ? MOVE_EFFECT_SLEEP : MOVE_EFFECT_POISON);
+                        break;
+                    case BATTLE_TERRAIN_UNDERWATER:
+                        gBattleScripting.moveEffect = (B_SECRET_POWER_EFFECT >= GEN_6 ? MOVE_EFFECT_ATK_MINUS_1 : MOVE_EFFECT_DEF_MINUS_1);
+                        break;
+                    case BATTLE_TERRAIN_POND:
+                        gBattleScripting.moveEffect = (B_SECRET_POWER_EFFECT >= GEN_4 ? MOVE_EFFECT_ATK_MINUS_1 : MOVE_EFFECT_SPD_MINUS_1);
+                        break;
+                    case BATTLE_TERRAIN_MOUNTAIN:
+                        if (B_SECRET_POWER_EFFECT >= GEN_5)
+                            gBattleScripting.moveEffect = MOVE_EFFECT_ACC_MINUS_1;
+                        else if (B_SECRET_POWER_EFFECT >= GEN_4)
+                            gBattleScripting.moveEffect = MOVE_EFFECT_FLINCH;
+                        else
+                            gBattleScripting.moveEffect = MOVE_EFFECT_CONFUSION;
+                        break;
+                    case BATTLE_TERRAIN_PUDDLE:
+                        gBattleScripting.moveEffect = (B_SECRET_POWER_EFFECT >= GEN_5 ? MOVE_EFFECT_SPD_MINUS_1 : MOVE_EFFECT_ACC_MINUS_1);
+                        break;
+                    case BATTLE_TERRAIN_LONG_GRASS:
+                        gBattleScripting.moveEffect = MOVE_EFFECT_SLEEP;
+                        break;
+                    case BATTLE_TERRAIN_SAND:
+                        gBattleScripting.moveEffect = MOVE_EFFECT_ACC_MINUS_1;
+                        break;
+                    case BATTLE_TERRAIN_WATER:
+                        gBattleScripting.moveEffect = MOVE_EFFECT_ATK_MINUS_1;
+                        break;
+                    case BATTLE_TERRAIN_CAVE:
+                    case BATTLE_TERRAIN_BURIAL_GROUND:
+                    case BATTLE_TERRAIN_SPACE:
+                        gBattleScripting.moveEffect = MOVE_EFFECT_FLINCH;
+                        break;
+                    case BATTLE_TERRAIN_SOARING:
+                    case BATTLE_TERRAIN_SKY_PILLAR:
+                    case BATTLE_TERRAIN_MARSH:
+                    case BATTLE_TERRAIN_SWAMP:
+                        gBattleScripting.moveEffect = MOVE_EFFECT_SPD_MINUS_1;
+                        break;
+                    case BATTLE_TERRAIN_SNOW:
+                    case BATTLE_TERRAIN_ICE:
+                        gBattleScripting.moveEffect = (B_USE_FROSTBITE == TRUE ? MOVE_EFFECT_FROSTBITE : MOVE_EFFECT_FREEZE);
+                        break;
+                    case BATTLE_TERRAIN_VOLCANO:
+                        gBattleScripting.moveEffect = MOVE_EFFECT_BURN;
+                        break;
+                    case BATTLE_TERRAIN_ULTRA_SPACE:
+                        gBattleScripting.moveEffect = MOVE_EFFECT_DEF_MINUS_1;
+                        break;
+                    default:
+                        gBattleScripting.moveEffect = MOVE_EFFECT_PARALYSIS;
+                        break;
+                    }
+                }
                 SetMoveEffect(FALSE, 0);
                 break;
             }
@@ -3735,6 +3813,7 @@ static void Cmd_seteffectwithchance(void)
             {
                 u32 percentChance = CalcSecondaryEffectChance(
                     gBattlerAttacker,
+                    GetBattlerAbility(gBattlerAttacker),
                     &gBattleMoves[gCurrentMove].additionalEffects[gBattleStruct->additionalEffectsCounter]
                 );
 
@@ -14350,93 +14429,6 @@ static void Cmd_jumpifhasnohp(void)
 
 static void Cmd_unused0xe4(void)
 {
-}
-
-u16 GetSecretPowerMoveEffect(void)
-{
-    u16 moveEffect;
-    u32 fieldTerrain = gFieldStatuses & STATUS_FIELD_TERRAIN_ANY;
-    if (fieldTerrain)
-    {
-        switch (fieldTerrain)
-        {
-        case STATUS_FIELD_MISTY_TERRAIN:
-            moveEffect = MOVE_EFFECT_SP_ATK_MINUS_1;
-            break;
-        case STATUS_FIELD_GRASSY_TERRAIN:
-            moveEffect = MOVE_EFFECT_SLEEP;
-            break;
-        case STATUS_FIELD_ELECTRIC_TERRAIN:
-            moveEffect = MOVE_EFFECT_PARALYSIS;
-            break;
-        case STATUS_FIELD_PSYCHIC_TERRAIN:
-            moveEffect = MOVE_EFFECT_SPD_MINUS_1;
-            break;
-        default:
-            moveEffect = MOVE_EFFECT_PARALYSIS;
-            break;
-        }
-    }
-    else
-    {
-        switch (gBattleTerrain)
-        {
-        case BATTLE_TERRAIN_GRASS:
-            moveEffect = (B_SECRET_POWER_EFFECT >= GEN_4 ? MOVE_EFFECT_SLEEP : MOVE_EFFECT_POISON);
-            break;
-        case BATTLE_TERRAIN_UNDERWATER:
-            moveEffect = (B_SECRET_POWER_EFFECT >= GEN_6 ? MOVE_EFFECT_ATK_MINUS_1 : MOVE_EFFECT_DEF_MINUS_1);
-            break;
-        case BATTLE_TERRAIN_POND:
-            moveEffect = (B_SECRET_POWER_EFFECT >= GEN_4 ? MOVE_EFFECT_ATK_MINUS_1 : MOVE_EFFECT_SPD_MINUS_1);
-            break;
-        case BATTLE_TERRAIN_MOUNTAIN:
-            if (B_SECRET_POWER_EFFECT >= GEN_5)
-                moveEffect = MOVE_EFFECT_ACC_MINUS_1;
-            else if (B_SECRET_POWER_EFFECT >= GEN_4)
-                moveEffect = MOVE_EFFECT_FLINCH;
-            else
-                moveEffect = MOVE_EFFECT_CONFUSION;
-            break;
-        case BATTLE_TERRAIN_PUDDLE:
-            moveEffect = (B_SECRET_POWER_EFFECT >= GEN_5 ? MOVE_EFFECT_SPD_MINUS_1 : MOVE_EFFECT_ACC_MINUS_1);
-            break;
-        case BATTLE_TERRAIN_LONG_GRASS:
-            moveEffect = MOVE_EFFECT_SLEEP;
-            break;
-        case BATTLE_TERRAIN_SAND:
-            moveEffect = MOVE_EFFECT_ACC_MINUS_1;
-            break;
-        case BATTLE_TERRAIN_WATER:
-            moveEffect = MOVE_EFFECT_ATK_MINUS_1;
-            break;
-        case BATTLE_TERRAIN_CAVE:
-        case BATTLE_TERRAIN_BURIAL_GROUND:
-        case BATTLE_TERRAIN_SPACE:
-            moveEffect = MOVE_EFFECT_FLINCH;
-            break;
-        case BATTLE_TERRAIN_SOARING:
-        case BATTLE_TERRAIN_SKY_PILLAR:
-        case BATTLE_TERRAIN_MARSH:
-        case BATTLE_TERRAIN_SWAMP:
-            moveEffect = MOVE_EFFECT_SPD_MINUS_1;
-            break;
-        case BATTLE_TERRAIN_SNOW:
-        case BATTLE_TERRAIN_ICE:
-            moveEffect = (B_USE_FROSTBITE == TRUE ? MOVE_EFFECT_FROSTBITE : MOVE_EFFECT_FREEZE);
-            break;
-        case BATTLE_TERRAIN_VOLCANO:
-            moveEffect = MOVE_EFFECT_BURN;
-            break;
-        case BATTLE_TERRAIN_ULTRA_SPACE:
-            moveEffect = MOVE_EFFECT_DEF_MINUS_1;
-            break;
-        default:
-            moveEffect = MOVE_EFFECT_PARALYSIS;
-            break;
-        }
-    }
-    return moveEffect;
 }
 
 static void Cmd_pickup(void)

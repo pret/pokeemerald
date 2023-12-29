@@ -845,7 +845,6 @@ static bool32 AI_IsMoveEffectInPlus(u32 battlerAtk, u32 battlerDef, u32 move, s3
     u32 abilityDef = AI_DATA->abilities[battlerDef];
     u32 abilityAtk = AI_DATA->abilities[battlerAtk];
 
-
     switch (gBattleMoves[move].effect)
     {
     case EFFECT_HIT_ESCAPE:
@@ -1962,6 +1961,22 @@ bool32 HasMoveEffect(u32 battlerId, u32 effect)
     {
         if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE
             && gBattleMoves[moves[i]].effect == effect)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool32 HasMoveEffectANDArg(u32 battlerId, u32 effect, u32 argument)
+{
+    s32 i;
+    u16 *moves = GetMovesArray(battlerId);
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE
+            && gBattleMoves[moves[i]].effect == effect
+            && (gBattleMoves[moves[i]].argument & argument))
             return TRUE;
     }
 
@@ -3667,8 +3682,7 @@ void IncreasePoisonScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
         if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_STALL && HasMoveEffect(battlerAtk, EFFECT_PROTECT))
             ADJUST_SCORE_PTR(1);    // stall tactic
 
-        if ((HasMoveEffect(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS)
-            && gBattleMoves[move].argument & STATUS1_PSN_ANY)
+        if (HasMoveEffectANDArg(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS, STATUS1_PSN_ANY)
           || HasMoveEffect(battlerAtk, EFFECT_VENOM_DRENCH)
           || AI_DATA->abilities[battlerAtk] == ABILITY_MERCILESS)
             ADJUST_SCORE_PTR(2);
@@ -3692,10 +3706,8 @@ void IncreaseBurnScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
                 ADJUST_SCORE_PTR(2); // burning the target to stay alive is cool
         }
 
-        if ((HasMoveEffect(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS)
-            && gBattleMoves[move].argument & STATUS1_BURN)
-          || (HasMoveEffect(BATTLE_PARTNER(battlerAtk), EFFECT_DOUBLE_POWER_ON_ARG_STATUS)
-            && gBattleMoves[move].argument & STATUS1_BURN))
+        if (HasMoveEffectANDArg(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS, STATUS1_BURN)
+          || HasMoveEffectANDArg(BATTLE_PARTNER(battlerAtk), EFFECT_DOUBLE_POWER_ON_ARG_STATUS, STATUS1_BURN))
             ADJUST_SCORE_PTR(1);
     }
 }
@@ -3712,8 +3724,7 @@ void IncreaseParalyzeScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
         u32 defSpeed = AI_DATA->speedStats[battlerDef];
 
         if ((defSpeed >= atkSpeed && defSpeed / 2 < atkSpeed) // You'll go first after paralyzing foe
-          || (HasMoveEffect(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS)
-            && gBattleMoves[move].argument & STATUS1_PARALYSIS)
+          || HasMoveEffectANDArg(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS, STATUS1_PARALYSIS)
           || HasMoveWithMoveEffect(battlerAtk, MOVE_EFFECT_FLINCH, TRUE) // filter out Fake Out
           || gBattleMons[battlerDef].status2 & STATUS2_INFATUATION
           || gBattleMons[battlerDef].status2 & STATUS2_CONFUSION)
@@ -3738,10 +3749,8 @@ void IncreaseSleepScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
       && !(HasMoveEffect(battlerDef, EFFECT_SNORE) || HasMoveEffect(battlerDef, EFFECT_SLEEP_TALK)))
         ADJUST_SCORE_PTR(1);
 
-    if ((HasMoveEffect(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS)
-        && gBattleMoves[move].argument & STATUS1_SLEEP)
-      || (HasMoveEffect(BATTLE_PARTNER(battlerAtk), EFFECT_DOUBLE_POWER_ON_ARG_STATUS)
-        && gBattleMoves[move].argument & STATUS1_SLEEP))
+    if (HasMoveEffectANDArg(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS, STATUS1_SLEEP)
+      || HasMoveEffectANDArg(BATTLE_PARTNER(battlerAtk), EFFECT_DOUBLE_POWER_ON_ARG_STATUS, STATUS1_SLEEP))
         ADJUST_SCORE_PTR(1);
 }
 
@@ -3778,10 +3787,8 @@ void IncreaseFrostbiteScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score
                 ADJUST_SCORE_PTR(2); // frostbiting the target to stay alive is cool
         }
 
-        if ((HasMoveEffect(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS)
-            && gBattleMoves[move].argument & STATUS1_FROSTBITE)
-          || (HasMoveEffect(BATTLE_PARTNER(battlerAtk), EFFECT_DOUBLE_POWER_ON_ARG_STATUS)
-            && gBattleMoves[move].argument & STATUS1_FROSTBITE))
+        if (HasMoveEffectANDArg(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS, STATUS1_FROSTBITE)
+          || HasMoveEffectANDArg(BATTLE_PARTNER(battlerAtk), EFFECT_DOUBLE_POWER_ON_ARG_STATUS, STATUS1_FROSTBITE))
             ADJUST_SCORE_PTR(1);
     }
 }
@@ -3830,49 +3837,4 @@ bool32 ShouldUseZMove(u32 battlerAtk, u32 battlerDef, u32 chosenMove)
 bool32 AI_IsBattlerAsleepOrComatose(u32 battlerId)
 {
     return (gBattleMons[battlerId].status1 & STATUS1_SLEEP) || AI_DATA->abilities[battlerId] == ABILITY_COMATOSE;
-}
-
-u32 AI_CalcSecondaryEffectChance(u32 battler, u32 secondaryEffectChance)
-{
-    if (AI_DATA->abilities[battler] == ABILITY_SERENE_GRACE)
-        secondaryEffectChance *= 2;
-
-    return secondaryEffectChance;
-}
-
-bool32 AI_ShouldCopyStatChanges(u32 battlerAtk, u32 battlerDef)
-{
-    u8 i;
-    // Want to copy positive stat changes
-    for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
-    {
-        if (gBattleMons[battlerDef].statStages[i] > gBattleMons[battlerAtk].statStages[i])
-        {
-            switch (i)
-            {
-            case STAT_ATK:
-                return (HasMoveWithCategory(battlerAtk, BATTLE_CATEGORY_PHYSICAL));
-            case STAT_SPATK:
-                return (HasMoveWithCategory(battlerAtk, BATTLE_CATEGORY_SPECIAL));
-            case STAT_ACC:
-            case STAT_EVASION:
-            case STAT_SPEED:
-                return TRUE;
-            case STAT_DEF:
-            case STAT_SPDEF:
-                return (AI_THINKING_STRUCT->aiFlags & AI_FLAG_STALL);
-            }
-        }
-    }
-
-    return FALSE;
-}
-
-//TODO - track entire opponent party data to determine hazard effectiveness
-u32 AI_ShouldSetUpHazards(struct AiLogicData *aiData, u32 battlerAtk, u32 battlerDef)
-{
-    if (aiData->abilities[battlerDef] == ABILITY_MAGIC_BOUNCE || CountUsablePartyMons(battlerDef) == 0)
-        return 0;
-
-    return 2 * gDisableStructs[battlerAtk].isFirstTurn;
 }

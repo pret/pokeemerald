@@ -11381,9 +11381,9 @@ bool32 AreBattlersOfSameGender(u32 battler1, u32 battler2)
     return (gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS && gender1 == gender2);
 }
 
-u32 CalcSecondaryEffectChance(u32 battler, const struct AdditionalEffect *additionalEffect)
+u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct AdditionalEffect *additionalEffect)
 {
-    bool8 hasSereneGrace = (GetBattlerAbility(battler) == ABILITY_SERENE_GRACE);
+    bool8 hasSereneGrace = (battlerAbility == ABILITY_SERENE_GRACE);
     bool8 hasRainbow = (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_RAINBOW) != 0;
     u16 secondaryEffectChance = additionalEffect->chance;
 
@@ -11398,6 +11398,11 @@ u32 CalcSecondaryEffectChance(u32 battler, const struct AdditionalEffect *additi
     return secondaryEffectChance;
 }
 
+bool32 MoveEffectIsGuaranteed(u32 battler, u32 battlerAbility, const struct AdditionalEffect *additionalEffect)
+{
+    return additionalEffect->chance == 0 || CalcSecondaryEffectChance(battler, battlerAbility, additionalEffect) >= 100;
+}
+
 bool32 IsAlly(u32 battlerAtk, u32 battlerDef)
 {
     return (GetBattlerSide(battlerAtk) == GetBattlerSide(battlerDef));
@@ -11410,11 +11415,6 @@ bool32 IsGen6ExpShareEnabled(void)
 #else
     return FlagGet(I_EXP_SHARE_FLAG);
 #endif
-}
-
-bool32 MoveEffectIsGuaranteed(u32 secondaryEffectChance)
-{
-    return secondaryEffectChance == 0 || secondaryEffectChance >= 100;
 }
 
 bool32 MoveHasMoveEffect(u32 move, u32 moveEffect, bool32 effectHitOnly)
