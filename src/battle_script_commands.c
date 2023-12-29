@@ -585,7 +585,7 @@ static void Cmd_trysetsnatch(void);
 static void Cmd_unused2(void);
 static void Cmd_switchoutabilities(void);
 static void Cmd_jumpifhasnohp(void);
-static void Cmd_unused0xe4(void);
+static void Cmd_jumpifnotcurrentmoveargtype(void);
 static void Cmd_pickup(void);
 static void Cmd_unused3(void);
 static void Cmd_unused4(void);
@@ -844,7 +844,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_unused2,                                 //0xE1
     Cmd_switchoutabilities,                      //0xE2
     Cmd_jumpifhasnohp,                           //0xE3
-    Cmd_unused0xe4,                              //0xE4
+    Cmd_jumpifnotcurrentmoveargtype,                              //0xE4
     Cmd_pickup,                                  //0xE5
     Cmd_unused3,                                 //0xE6
     Cmd_unused4,                                 //0xE7
@@ -974,8 +974,7 @@ static const u16 sFinalStrikeOnlyEffects[] =
 {
     MOVE_EFFECT_BUG_BITE,
     MOVE_EFFECT_STEAL_ITEM,
-    MOVE_EFFECT_BURN_UP,
-    MOVE_EFFECT_DOUBLE_SHOCK,
+    MOVE_EFFECT_REMOVE_ARG_TYPE,
     MOVE_EFFECT_SMACK_DOWN,
     MOVE_EFFECT_REMOVE_STATUS,
     MOVE_EFFECT_RECOIL_HP_25,
@@ -3640,15 +3639,20 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 gBattleMons[gBattlerTarget].status2 |= STATUS2_ESCAPE_PREVENTION;
                 gBattleMons[gBattlerAttacker].status2 |= STATUS2_ESCAPE_PREVENTION;
                 break;
-            case MOVE_EFFECT_BURN_UP:
+            case MOVE_EFFECT_REMOVE_ARG_TYPE:
                 // This seems unnecessary but is done to make it work properly with Parental Bond
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = BattleScript_BurnUpRemoveType;
-                break;
-            case MOVE_EFFECT_DOUBLE_SHOCK:
-                // This seems unnecessary but is done to make it work properly with Parental Bond
-                BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = BattleScript_DoubleShockRemoveType;
+                switch (gBattleMoves[gCurrentMove].argument)
+                {
+                    case TYPE_FIRE:
+                        gBattlescriptCurrInstr = BattleScript_RemoveFireType;
+                        break;
+                    case TYPE_ELECTRIC:
+                        gBattlescriptCurrInstr = BattleScript_RemoveElectricType;
+                        break;
+                    default: // to do - add a generic case
+                        break;
+                }
                 break;
             case MOVE_EFFECT_ROUND:
                 TryUpdateRoundTurnOrder(); // If another Pokémon uses Round before the user this turn, the user will use Round directly after it
@@ -14427,8 +14431,17 @@ static void Cmd_jumpifhasnohp(void)
         gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-static void Cmd_unused0xe4(void)
+static void Cmd_jumpifnotcurrentmoveargtype(void)
 {
+    CMD_ARGS(u8 battler, const u8 *failInstr);
+
+    u8 battler = GetBattlerForBattleScript(cmd->battler);
+    const u8 *failInstr = cmd->failInstr;
+
+    if (!IS_BATTLER_OF_TYPE(battler, gBattleMoves[gCurrentMove].argument))
+        gBattlescriptCurrInstr = failInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_pickup(void)

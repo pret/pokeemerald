@@ -303,7 +303,7 @@
 #define EFFECT_STRENGTH_SAP                 299
 #define EFFECT_MIND_BLOWN                   300
 #define EFFECT_PURIFY                       301
-#define EFFECT_BURN_UP                      302
+#define EFFECT_FAIL_IF_NOT_ARG_TYPE         302
 #define EFFECT_SHORE_UP                     303
 #define EFFECT_GEOMANCY                     304
 #define EFFECT_FAIRY_LOCK                   305
@@ -348,7 +348,7 @@
 #define EFFECT_EXTREME_EVOBOOST             344
 #define EFFECT_HIT_SET_REMOVE_TERRAIN       345
 #define EFFECT_DARK_VOID                    346
-#define EFFECT_DOUBLE_SHOCK                 347
+#define EFFECT_UNUSED_347                   347
 #define EFFECT_VICTORY_DANCE                348
 #define EFFECT_TEATIME                      349
 #define EFFECT_ATTACK_UP_USER_ALLY          350

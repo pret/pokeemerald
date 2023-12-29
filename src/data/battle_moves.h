@@ -10635,7 +10635,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_BURN_UP] =
     {
-        .effect = EFFECT_BURN_UP,
+        .effect = EFFECT_FAIL_IF_NOT_ARG_TYPE,
         .power = 130,
         .type = TYPE_FIRE,
         .accuracy = 100,
@@ -10644,6 +10644,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .thawsUser = TRUE,
+        .argument = TYPE_FIRE,
+        ADDITIONAL_EFFECTS(
+            PRIMARY_EFFECT_SELF(MOVE_EFFECT_REMOVE_ARG_TYPE)
+        ),
     },
 
     [MOVE_SPEED_SWAP] =
@@ -13414,7 +13418,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_DOUBLE_SHOCK] =
     {
-        .effect = EFFECT_DOUBLE_SHOCK,
+        .effect = EFFECT_FAIL_IF_NOT_ARG_TYPE,
         .power = 120,
         .type = TYPE_ELECTRIC,
         .accuracy = 100,
@@ -13424,6 +13428,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .metronomeBanned = TRUE,
+        .argument = TYPE_ELECTRIC,
+        ADDITIONAL_EFFECTS(
+            PRIMARY_EFFECT_SELF(MOVE_EFFECT_REMOVE_ARG_TYPE)
+        ),
     },
 
     [MOVE_GIGATON_HAMMER] =

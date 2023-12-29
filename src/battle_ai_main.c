@@ -2022,12 +2022,8 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
               || DoesPartnerHaveSameMoveEffect(BATTLE_PARTNER(battlerAtk), battlerDef, move, aiData->partnerMove))
                 ADJUST_SCORE(-9);
             break;
-        case EFFECT_BURN_UP:
-            if (!IS_BATTLER_OF_TYPE(battlerAtk, TYPE_FIRE))
-                ADJUST_SCORE(-10);
-            break;
-        case EFFECT_DOUBLE_SHOCK:
-            if (!IS_BATTLER_OF_TYPE(battlerAtk, TYPE_ELECTRIC))
+        case EFFECT_FAIL_IF_NOT_ARG_TYPE:
+            if (!IS_BATTLER_OF_TYPE(battlerAtk, gBattleMoves[move].argument))
                 ADJUST_SCORE(-10);
             break;
         case EFFECT_DEFOG:

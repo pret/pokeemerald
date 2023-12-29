@@ -343,7 +343,7 @@
 #define MOVE_EFFECT_SP_DEF_MINUS_1      26
 #define MOVE_EFFECT_ACC_MINUS_1         27
 #define MOVE_EFFECT_EVS_MINUS_1         28
-#define MOVE_EFFECT_BURN_UP             29
+#define MOVE_EFFECT_REMOVE_ARG_TYPE     29
 #define MOVE_EFFECT_RECHARGE            30
 #define MOVE_EFFECT_RAGE                31
 #define MOVE_EFFECT_STEAL_ITEM          32
@@ -385,17 +385,16 @@
 #define MOVE_EFFECT_BUG_BITE            68
 #define MOVE_EFFECT_RECOIL_HP_25        69
 #define MOVE_EFFECT_TRAP_BOTH           70
-#define MOVE_EFFECT_DOUBLE_SHOCK        71
-#define MOVE_EFFECT_ROUND               72
-#define MOVE_EFFECT_STOCKPILE_WORE_OFF  73
-#define MOVE_EFFECT_DIRE_CLAW           74
-#define MOVE_EFFECT_STEALTH_ROCK        75
-#define MOVE_EFFECT_SPIKES              76
-#define MOVE_EFFECT_SYRUP_BOMB          77
-#define MOVE_EFFECT_FLORAL_HEALING      78
-#define MOVE_EFFECT_SECRET_POWER        79
+#define MOVE_EFFECT_ROUND               71
+#define MOVE_EFFECT_STOCKPILE_WORE_OFF  72
+#define MOVE_EFFECT_DIRE_CLAW           73
+#define MOVE_EFFECT_STEALTH_ROCK        74
+#define MOVE_EFFECT_SPIKES              75
+#define MOVE_EFFECT_SYRUP_BOMB          76
+#define MOVE_EFFECT_FLORAL_HEALING      77
+#define MOVE_EFFECT_SECRET_POWER        78
 
-#define NUM_MOVE_EFFECTS                80
+#define NUM_MOVE_EFFECTS                79
 
 #define MOVE_EFFECT_AFFECTS_USER        0x2000
 #define MOVE_EFFECT_CERTAIN             0x4000

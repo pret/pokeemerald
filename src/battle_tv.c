@@ -415,7 +415,6 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_EXTREME_EVOBOOST]           = 0, // TODO: Assign points
     [EFFECT_HIT_SET_REMOVE_TERRAIN]     = 0, // TODO: Assign points
     [EFFECT_DARK_VOID]                  = 0, // TODO: Assign points
-    [EFFECT_DOUBLE_SHOCK]               = 0, // TODO: Assign points
     [EFFECT_VICTORY_DANCE]              = 0, // TODO: Assign points
 };
 

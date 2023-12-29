@@ -1177,8 +1177,10 @@
 	.4byte \jumpInstr
 	.endm
 
-	.macro unused_0xe4
+	.macro jumpifnotcurrentmoveargtype battler:req, failInstr:req
 	.byte 0xe4
+	.byte \battler
+	.4byte \failInstr
 	.endm
 
 	.macro pickup

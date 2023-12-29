@@ -324,7 +324,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectStrengthSap             @ EFFECT_STRENGTH_SAP
 	.4byte BattleScript_EffectMindBlown               @ EFFECT_MIND_BLOWN
 	.4byte BattleScript_EffectPurify                  @ EFFECT_PURIFY
-	.4byte BattleScript_EffectBurnUp                  @ EFFECT_BURN_UP
+	.4byte BattleScript_FailIfNotArgType              @ EFFECT_FAIL_IF_NOT_ARG_TYPE
 	.4byte BattleScript_EffectShoreUp                 @ EFFECT_SHORE_UP
 	.4byte BattleScript_EffectGeomancy                @ EFFECT_GEOMANCY
 	.4byte BattleScript_EffectFairyLock               @ EFFECT_FAIRY_LOCK
@@ -369,7 +369,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectExtremeEvoboost         @ EFFECT_EXTREME_EVOBOOST
 	.4byte BattleScript_EffectHitSetRemoveTerrain     @ EFFECT_HIT_SET_REMOVE_TERRAIN
 	.4byte BattleScript_EffectDarkVoid                @ EFFECT_DARK_VOID
-	.4byte BattleScript_EffectDoubleShock             @ EFFECT_DOUBLE_SHOCK
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_347
 	.4byte BattleScript_EffectVictoryDance            @ EFFECT_VICTORY_DANCE
 	.4byte BattleScript_EffectTeatime                 @ EFFECT_TEATIME
 	.4byte BattleScript_EffectAttackUpUserAlly        @ EFFECT_ATTACK_UP_USER_ALLY
@@ -1413,37 +1413,21 @@ BattleScript_EffectFairyLock:
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectBurnUp:
+BattleScript_FailIfNotArgType:
 	attackcanceler
 	attackstring
 	ppreduce
-	jumpiftype BS_ATTACKER, TYPE_FIRE, BattleScript_BurnUpWorks
-	goto BattleScript_ButItFailed
-
-BattleScript_BurnUpWorks:
-	setmoveeffect MOVE_EFFECT_BURN_UP | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+	jumpifnotcurrentmoveargtype BS_ATTACKER, BattleScript_ButItFailed
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	goto BattleScript_HitFromCritCalc
 
-BattleScript_BurnUpRemoveType::
+BattleScript_RemoveFireType::
 	losetype BS_ATTACKER, TYPE_FIRE
 	printstring STRINGID_ATTACKERLOSTFIRETYPE
 	waitmessage B_WAIT_TIME_LONG
 	return
 
-BattleScript_EffectDoubleShock:
-	attackcanceler
-	attackstring
-	ppreduce
-	jumpiftype BS_ATTACKER, TYPE_ELECTRIC, BattleScript_DoubleShockWorks
-	goto BattleScript_ButItFailed
-
-BattleScript_DoubleShockWorks:
-	setmoveeffect MOVE_EFFECT_DOUBLE_SHOCK | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	goto BattleScript_HitFromCritCalc
-
-BattleScript_DoubleShockRemoveType::
+BattleScript_RemoveElectricType::
 	losetype BS_ATTACKER, TYPE_ELECTRIC
 	printstring STRINGID_ATTACKERLOSTELECTRICTYPE
 	waitmessage B_WAIT_TIME_LONG

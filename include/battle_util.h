@@ -224,6 +224,7 @@ bool32 IsGen6ExpShareEnabled(void);
 bool32 MoveHasMoveEffect(u32 move, u32 moveEffect, bool32 effectHitOnly);
 bool32 MoveHasMoveEffectWithChance(u32 move, u32 moveEffect, u32 chance);
 bool32 MoveHasMoveEffectSelf(u32 move, u32 moveEffect);
+bool32 MoveHasMoveEffectSelfArg(u32 move, u32 moveEffect, u32 argument);
 
 // Ability checks
 bool32 IsSkillSwapBannedAbility(u16 ability);
