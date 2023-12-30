@@ -93,7 +93,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_PAYDAY)
         ),
     },
@@ -111,7 +111,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .punchingMove = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 10)
         ),
     },
@@ -129,7 +129,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .punchingMove = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FREEZE_OR_FROSTBITE, 10)
         ),
     },
@@ -147,7 +147,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .punchingMove = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 10)
         ),
     },
@@ -326,7 +326,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .ignoresKingsRock = B_UPDATED_MOVE_FLAGS < GEN_3,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_WRAP)
         ),
     },
@@ -380,7 +380,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .sheerForceBoost = TRUE,
         .minimizeDoubleDamage = TRUE,
         .skyBattleBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 30)
         ),
     },
@@ -447,7 +447,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .ignoresKingsRock = B_UPDATED_MOVE_FLAGS < GEN_3,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 30)
         ),
     },
@@ -478,7 +478,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 30)
         ),
     },
@@ -557,7 +557,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .sheerForceBoost = TRUE,
         .minimizeDoubleDamage = B_UPDATED_MOVE_FLAGS >= GEN_6,
         .skyBattleBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 30)
         ),
     },
@@ -573,7 +573,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_WRAP)
         ),
     },
@@ -609,7 +609,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .instructBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_THRASH)
         ),
     },
@@ -653,7 +653,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_POISON, 30)
         ),
     },
@@ -671,7 +671,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .sheerForceBoost = TRUE,
         .ignoresKingsRock = B_UPDATED_MOVE_FLAGS < GEN_5, // && B_UPDATED_MOVE_FLAGS > GEN_2
         .strikeCount = 2,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_POISON, 20)
         ),
     },
@@ -720,7 +720,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .bitingMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 30)
         ),
     },
@@ -842,11 +842,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         #if B_UPDATED_MOVE_DATA >= GEN_4
-            ADDITIONAL_EFFECTS(
+            .additionalEffects = ADDITIONAL_EFFECTS(
                 SECONDARY_EFFECT(MOVE_EFFECT_SP_DEF_MINUS_1, 10)
             ),
         #else
-            ADDITIONAL_EFFECTS(
+            .additionalEffects = ADDITIONAL_EFFECTS(
                 SECONDARY_EFFECT(MOVE_EFFECT_DEF_MINUS_1, 10)
             ),
         #endif
@@ -863,7 +863,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 10)
         ),
     },
@@ -883,7 +883,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 10)
         ),
     },
@@ -971,7 +971,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FREEZE_OR_FROSTBITE, 10)
         ),
     },
@@ -992,7 +992,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .windMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FREEZE_OR_FROSTBITE, 10)
         ),
     },
@@ -1008,7 +1008,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_CONFUSION, 10)
         ),
     },
@@ -1024,7 +1024,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SPD_MINUS_1, 10)
         ),
     },
@@ -1040,7 +1040,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_ATK_MINUS_1, 10)
         ),
     },
@@ -1056,7 +1056,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .ignoresKingsRock = B_UPDATED_MOVE_FLAGS < GEN_3,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_RECHARGE)
         ),
     },
@@ -1332,7 +1332,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .danceMove = TRUE,
         .instructBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_THRASH)
         ),
     },
@@ -1380,7 +1380,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .ignoresKingsRock = B_UPDATED_MOVE_FLAGS < GEN_3,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_WRAP)
         ),
     },
@@ -1396,7 +1396,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 10)
         ),
     },
@@ -1416,7 +1416,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 10)
         ),
     },
@@ -1455,7 +1455,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .damagesAirborne = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 30)
         ),
     },
@@ -1548,7 +1548,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_CONFUSION, 10)
         ),
     },
@@ -1564,7 +1564,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SP_DEF_MINUS_1, 10)
         ),
     },
@@ -2028,7 +2028,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 30)
         ),
     },
@@ -2048,7 +2048,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_POISON, 40)
         ),
     },
@@ -2064,7 +2064,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_POISON, 30)
         ),
     },
@@ -2080,7 +2080,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 10)
         ),
     },
@@ -2100,7 +2100,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 10)
         ),
     },
@@ -2118,7 +2118,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         #if B_UPDATED_MOVE_DATA >= GEN_4
             .sheerForceBoost = TRUE,
-            ADDITIONAL_EFFECTS(
+            .additionalEffects = ADDITIONAL_EFFECTS(
                 SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 20)
             ),
         #endif
@@ -2136,7 +2136,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .ignoresKingsRock = B_UPDATED_MOVE_FLAGS < GEN_3,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_WRAP)
         ),
     },
@@ -2198,7 +2198,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SPD_MINUS_1, 10)
         ),
     },
@@ -2392,7 +2392,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .sheerForceBoost = TRUE,
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 30)
         ),
     },
@@ -2433,7 +2433,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SPD_MINUS_1, 10)
         ),
     },
@@ -2451,7 +2451,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .punchingMove = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_CONFUSION, 20)
         ),
     },
@@ -2634,7 +2634,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 30)
         ),
     },
@@ -2652,7 +2652,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .bitingMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 10)
         ),
     },
@@ -2700,7 +2700,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_TRI_ATTACK, 20)
         ),
     },
@@ -2757,7 +2757,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
             .effect = EFFECT_RECOIL_HP_25,
             .accuracy = 0,
             .mirrorMoveBanned = TRUE,
-            ADDITIONAL_EFFECTS(
+            .additionalEffects = ADDITIONAL_EFFECTS(
                 PRIMARY_EFFECT_SELF(MOVE_EFFECT_RECOIL_HP_25)
             ),
         #else
@@ -2840,7 +2840,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .metronomeBanned = TRUE,
         .copycatBanned = TRUE,
         .assistBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_STEAL_ITEM)
         ),
     },
@@ -2908,7 +2908,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .thawsUser = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 10)
         ),
     },
@@ -2931,7 +2931,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .sheerForceBoost = TRUE,
         .soundMove = TRUE,
         .metronomeBanned = B_UPDATED_MOVE_FLAGS >= GEN_5,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 30)
         ),
     },
@@ -3060,7 +3060,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FREEZE_OR_FROSTBITE, 10)
         ),
     },
@@ -3179,7 +3179,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .ballisticMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_POISON, 30)
         ),
     },
@@ -3195,7 +3195,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_ACC_MINUS_1, 100)
         ),
     },
@@ -3212,7 +3212,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .ballisticMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_ACC_MINUS_1, 50)
         ),
     },
@@ -3251,7 +3251,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .ballisticMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 100)
         ),
     },
@@ -3323,7 +3323,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .windMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SPD_MINUS_1, 100)
         ),
     },
@@ -3404,7 +3404,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .instructBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_THRASH)
         ),
     },
@@ -3563,7 +3563,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 30)
         ),
     },
@@ -3600,7 +3600,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT_SELF(MOVE_EFFECT_DEF_PLUS_1, 10)
         ),
     },
@@ -3755,7 +3755,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .sheerForceBoost = TRUE,
         .thawsUser = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 50)
         ),
     },
@@ -3787,7 +3787,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .punchingMove = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_CONFUSION, 100)
         ),
     },
@@ -3817,7 +3817,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .ignoresKingsRock = B_UPDATED_MOVE_FLAGS < GEN_3,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 30)
         ),
     },
@@ -3878,7 +3878,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_RAPIDSPIN)
             #if B_SPEED_BUFFING_RAPID_SPIN >= GEN_8
                 , SECONDARY_EFFECT_SELF(MOVE_EFFECT_SPD_PLUS_1, 100)
@@ -3916,7 +3916,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_DEF_MINUS_1, 30)
         ),
     },
@@ -3933,7 +3933,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT_SELF(MOVE_EFFECT_ATK_PLUS_1, 10)
         ),
     },
@@ -4045,7 +4045,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .sheerForceBoost = TRUE,
         .damagesAirborneDoubleDamage = TRUE,
         .windMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 20)
         ),
     },
@@ -4094,11 +4094,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .sheerForceBoost = TRUE,
         .bitingMove = TRUE,
         #if B_UPDATED_MOVE_DATA >= GEN_4
-            ADDITIONAL_EFFECTS(
+            .additionalEffects = ADDITIONAL_EFFECTS(
                 SECONDARY_EFFECT(MOVE_EFFECT_DEF_MINUS_1, 10)
             ),
         #else
-            ADDITIONAL_EFFECTS(
+            .additionalEffects = ADDITIONAL_EFFECTS(
                 SECONDARY_EFFECT(MOVE_EFFECT_SP_DEF_MINUS_1, 10)
             ),
         #endif
@@ -4166,7 +4166,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .makesContact = B_UPDATED_MOVE_DATA < GEN_4,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT_SELF(MOVE_EFFECT_ALL_STATS_UP, 10)
         ),
     },
@@ -4183,7 +4183,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .ballisticMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SP_DEF_MINUS_1, 20)
         ),
     },
@@ -4228,7 +4228,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_DEF_MINUS_1, 50)
         ),
     },
@@ -4244,7 +4244,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .damagesUnderwater = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_WRAP)
         ),
     },
@@ -4284,7 +4284,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 100)
         ),
     },
@@ -4303,7 +4303,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .soundMove = TRUE,
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_UPROAR)
         ),
     },
@@ -4378,7 +4378,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .windMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 10)
         ),
     },
@@ -4503,7 +4503,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .argument = STATUS1_PARALYSIS,
         .makesContact = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_REMOVE_STATUS)
         ),
     },
@@ -4697,7 +4697,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_ATK_DEF_DOWN)
         ),
     },
@@ -4784,7 +4784,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_KNOCK_OFF)
         ),
     },
@@ -4908,7 +4908,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SECRET_POWER, 30)
         ),
     },
@@ -4991,7 +4991,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SP_DEF_MINUS_1, 50)
         ),
     },
@@ -5008,7 +5008,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .ballisticMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SP_ATK_MINUS_1, 50)
         ),
     },
@@ -5056,7 +5056,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 10)
         ),
     },
@@ -5106,7 +5106,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .minimizeDoubleDamage = B_UPDATED_MOVE_FLAGS < GEN_4,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 30)
         ),
     },
@@ -5159,7 +5159,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .bitingMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_TOXIC, B_UPDATED_MOVE_DATA >= GEN_6 ? 50 : 30)
         ),
     },
@@ -5176,7 +5176,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_DEF_MINUS_1, 50)
         ),
     },
@@ -5191,7 +5191,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_RECHARGE)
         ),
     },
@@ -5206,7 +5206,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_RECHARGE)
         ),
     },
@@ -5229,7 +5229,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .punchingMove = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT_SELF(MOVE_EFFECT_ATK_PLUS_1, 20)
         ),
     },
@@ -5247,7 +5247,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .minimizeDoubleDamage = B_UPDATED_MOVE_FLAGS < GEN_4,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 30)
         ),
     },
@@ -5325,7 +5325,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .makesContact = B_UPDATED_MOVE_DATA < GEN_4,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_SP_ATK_TWO_DOWN)
         ),
     },
@@ -5366,7 +5366,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SPD_MINUS_1, 100)
         ),
     },
@@ -5383,7 +5383,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .windMove = B_EXTRAPOLATED_MOVE_FLAGS,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT_SELF(MOVE_EFFECT_ALL_STATS_UP, 10)
         ),
     },
@@ -5473,7 +5473,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_CONFUSION, 10)
         ),
     },
@@ -5508,7 +5508,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .minimizeDoubleDamage = B_UPDATED_MOVE_FLAGS < GEN_4,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 10)
         ),
     },
@@ -5538,7 +5538,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_WRAP)
         ),
     },
@@ -5571,7 +5571,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .skyBattleBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_ACC_MINUS_1, 30)
         ),
     },
@@ -5699,7 +5699,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .skyBattleBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_RECHARGE)
         ),
     },
@@ -5737,7 +5737,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
         .assistBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 30)
         ),
     },
@@ -5753,7 +5753,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SPD_MINUS_1, 100)
         ),
     },
@@ -5771,7 +5771,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_POISON, 10)
         ),
     },
@@ -5791,7 +5791,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .metronomeBanned = TRUE,
         .copycatBanned = TRUE,
         .assistBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_STEAL_ITEM)
         ),
     },
@@ -5810,7 +5810,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         #if B_UPDATED_MOVE_DATA >= GEN_4
             .sheerForceBoost = TRUE,
-            ADDITIONAL_EFFECTS(
+            .additionalEffects = ADDITIONAL_EFFECTS(
                 SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 10)
             ),
         #endif
@@ -5937,7 +5937,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .pulseMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_CONFUSION, 20)
         ),
     },
@@ -5971,7 +5971,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_SP_ATK_TWO_DOWN)
         ),
     },
@@ -6040,7 +6040,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .argument = STATUS1_SLEEP,
         .makesContact = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_REMOVE_STATUS)
         ),
     },
@@ -6057,7 +6057,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .punchingMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_SPD_MINUS_1)
         ),
     },
@@ -6131,7 +6131,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .metronomeBanned = TRUE,
         .copycatBanned = TRUE,
         .assistBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_FEINT)
         ),
     },
@@ -6147,7 +6147,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_BUG_BITE)
         ),
     },
@@ -6226,7 +6226,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_DEF_SPDEF_DOWN)
         ),
     },
@@ -6605,7 +6605,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .thawsUser = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 10)
         ),
     },
@@ -6622,7 +6622,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 30)
         ),
     },
@@ -6673,7 +6673,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_POISON, 30)
         ),
     },
@@ -6690,7 +6690,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .pulseMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 20)
         ),
     },
@@ -6752,7 +6752,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .slicingMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 30)
         ),
     },
@@ -6784,7 +6784,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .sheerForceBoost = TRUE,
         .soundMove = TRUE,
         .ignoresSubstitute = B_UPDATED_MOVE_FLAGS >= GEN_6,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SP_DEF_MINUS_1, 10)
         ),
     },
@@ -6819,7 +6819,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .minimizeDoubleDamage = B_UPDATED_MOVE_FLAGS >= GEN_6,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 20)
         ),
     },
@@ -6884,7 +6884,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .ballisticMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SP_DEF_MINUS_1, 10)
         ),
     },
@@ -6905,7 +6905,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .ballisticMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SP_DEF_MINUS_1, 10)
         ),
     },
@@ -6936,7 +6936,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .skyBattleBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SP_DEF_MINUS_1, 10)
         ),
     },
@@ -6968,7 +6968,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_RECHARGE)
         ),
     },
@@ -7056,7 +7056,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .bitingMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 10),
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 10)
         ),
@@ -7075,7 +7075,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .bitingMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FREEZE_OR_FROSTBITE, 10),
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 10)
         ),
@@ -7095,7 +7095,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .bitingMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 10),
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 10)
         ),
@@ -7126,7 +7126,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .ballisticMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_ACC_MINUS_1, 30)
         ),
     },
@@ -7157,7 +7157,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 20)
         ),
     },
@@ -7173,7 +7173,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_ACC_MINUS_1, 30)
         ),
     },
@@ -7189,7 +7189,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SP_DEF_MINUS_1, 10)
         ),
     },
@@ -7206,7 +7206,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_CONFUSION, 20)
         ),
     },
@@ -7250,7 +7250,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_SP_ATK_TWO_DOWN)
         ),
     },
@@ -7266,7 +7266,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 30)
         ),
     },
@@ -7282,7 +7282,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 30)
         ),
     },
@@ -7297,7 +7297,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_SP_ATK_TWO_DOWN)
         ),
     },
@@ -7326,7 +7326,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .ballisticMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_RECHARGE)
         ),
     },
@@ -7345,7 +7345,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .slicingMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_POISON, 10)
         ),
     },
@@ -7365,7 +7365,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_POISON, 30)
         ),
     },
@@ -7382,7 +7382,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 30)
         ),
     },
@@ -7486,7 +7486,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
         .assistBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_CONFUSION, CHATTER_EFFECT_CHANCE)
         ),
     },
@@ -7515,7 +7515,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_BUG_BITE)
         ),
     },
@@ -7531,7 +7531,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT_SELF(MOVE_EFFECT_SP_ATK_PLUS_1, 70)
         ),
     },
@@ -7647,7 +7647,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_RECHARGE)
         ),
     },
@@ -7713,7 +7713,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_WRAP)
         ),
     },
@@ -7747,7 +7747,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SP_DEF_MINUS_2, 40)
         ),
     },
@@ -7764,7 +7764,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .windMove = B_EXTRAPOLATED_MOVE_FLAGS,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT_SELF(MOVE_EFFECT_ALL_STATS_UP, 10)
         ),
     },
@@ -7786,7 +7786,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
         .assistBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_FEINT)
         ),
     },
@@ -7981,7 +7981,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .damagesAirborne = TRUE,
         .skyBattleBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_SMACK_DOWN)
         ),
     },
@@ -8014,7 +8014,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_FLAME_BURST)
         ),
     },
@@ -8030,7 +8030,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_POISON, 10)
         ),
     },
@@ -8123,7 +8123,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT_SELF(MOVE_EFFECT_SPD_PLUS_1, 100)
         ),
     },
@@ -8160,7 +8160,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SPD_MINUS_1, 100)
         ),
     },
@@ -8177,7 +8177,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .ballisticMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SP_DEF_MINUS_2, 100)
         ),
     },
@@ -8252,7 +8252,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .ignoresSubstitute = B_UPDATED_MOVE_FLAGS >= GEN_6,
         .soundMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_ROUND)
         ),
     },
@@ -8295,7 +8295,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_CLEAR_SMOG)
         ),
     },
@@ -8362,7 +8362,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .thawsUser = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 30)
         ),
     },
@@ -8476,7 +8476,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_INCINERATE)
         ),
     },
@@ -8579,7 +8579,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 100)
         ),
     },
@@ -8662,7 +8662,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SP_ATK_MINUS_1, 100)
         ),
     },
@@ -8679,7 +8679,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .sheerForceBoost = TRUE,
         .skyBattleBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SPD_MINUS_1, 100)
         ),
     },
@@ -8743,7 +8743,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SPD_MINUS_1, 100)
         ),
     },
@@ -8802,7 +8802,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 30)
         ),
     },
@@ -8853,7 +8853,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .slicingMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_DEF_MINUS_1, 50)
         ),
     },
@@ -8884,7 +8884,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         //.windMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_ACC_MINUS_1, 50)
         ),
     },
@@ -8902,7 +8902,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .minimizeDoubleDamage = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 30)
         ),
     },
@@ -8934,7 +8934,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_ACC_MINUS_1, 40)
         ),
     },
@@ -8981,7 +8981,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .sheerForceBoost = TRUE,
         .windMove = TRUE,
         .damagesAirborne = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_CONFUSION, 30)
         ),
     },
@@ -9026,7 +9026,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .ballisticMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 30)
         ),
     },
@@ -9064,7 +9064,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .ignoresSubstitute = B_UPDATED_MOVE_FLAGS >= GEN_6,
         .soundMove = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SLEEP, 10)
         ),
     },
@@ -9094,7 +9094,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SPD_MINUS_1, 100)
         ),
     },
@@ -9111,7 +9111,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 20)
         ),
     },
@@ -9127,7 +9127,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 20)
         ),
     },
@@ -9144,7 +9144,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .danceMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT_SELF(MOVE_EFFECT_SP_ATK_PLUS_1, 50)
         ),
     },
@@ -9164,7 +9164,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .metronomeBanned = TRUE,
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 30)
         ),
     },
@@ -9184,7 +9184,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .metronomeBanned = TRUE,
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 30)
         ),
     },
@@ -9203,7 +9203,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .ignoresSubstitute = B_UPDATED_MOVE_FLAGS >= GEN_6,
         .soundMove = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SP_ATK_MINUS_1, 100)
         ),
     },
@@ -9219,7 +9219,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 30)
         ),
     },
@@ -9236,7 +9236,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_V_CREATE)
         ),
     },
@@ -9395,7 +9395,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
         .assistBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_FEINT)
         ),
     },
@@ -9502,7 +9502,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FREEZE_OR_FROSTBITE, 10)
         ),
     },
@@ -9659,7 +9659,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_ATK_MINUS_1, 10)
         ),
     },
@@ -9688,7 +9688,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SP_ATK_MINUS_1, 30)
         ),
     },
@@ -9786,7 +9786,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .sheerForceBoost = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT_SELF(B_UPDATED_MOVE_DATA >= GEN_7 ? MOVE_EFFECT_DEF_PLUS_2:  MOVE_EFFECT_DEF_PLUS_1, 50)
         ),
     },
@@ -9804,7 +9804,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .sheerForceBoost = TRUE,
         .thawsUser = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 30)
         ),
     },
@@ -9822,7 +9822,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .ignoresProtect = TRUE,
         .ignoresSubstitute = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_FEINT)
         ),
     },
@@ -9859,7 +9859,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SP_ATK_MINUS_1, 100)
         ),
     },
@@ -10087,7 +10087,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 100)
         ),
     },
@@ -10116,7 +10116,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .makesContact = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_WRAP)
         ),
     },
@@ -10134,7 +10134,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .punchingMove = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT_SELF(MOVE_EFFECT_ATK_PLUS_1, 100)
         ),
     },
@@ -10167,7 +10167,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .ignoreTypeIfFlyingAndUngrounded = TRUE,
         .metronomeBanned = TRUE,
         .skyBattleBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_SMACK_DOWN)
         ),
     },
@@ -10184,7 +10184,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .metronomeBanned = TRUE,
         .skyBattleBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_PREVENT_ESCAPE)
         ),
     },
@@ -10255,7 +10255,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_DEF_SPDEF_DOWN)
         ),
     },
@@ -10273,7 +10273,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .ignoresProtect = TRUE,
         .ignoresSubstitute = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             // Feint move effect handled in script as it goes before animation
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_DEF_MINUS_1)
         ),
@@ -10343,7 +10343,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PREVENT_ESCAPE, 100)
         ),
     },
@@ -10376,7 +10376,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .sheerForceBoost = TRUE,
         .ignoresSubstitute = B_UPDATED_MOVE_FLAGS >= GEN_6,
         .soundMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_REMOVE_STATUS, 100)
         ),
     },
@@ -10393,7 +10393,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .punchingMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_SPD_MINUS_1)
         ),
     },
@@ -10549,7 +10549,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_THROAT_CHOP, 100)
         ),
     },
@@ -10579,7 +10579,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PREVENT_ESCAPE, 100)
         ),
     },
@@ -10611,7 +10611,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_ATK_MINUS_1, 100)
         ),
     },
@@ -10628,7 +10628,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_DEF_MINUS_1, 100)
         ),
     },
@@ -10658,7 +10658,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .thawsUser = TRUE,
         .argument = TYPE_FIRE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_REMOVE_ARG_TYPE)
         ),
     },
@@ -10730,7 +10730,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .zMove = { .powerOverride = 140 },
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_CORE_ENFORCER)
         ),
     },
@@ -10747,7 +10747,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_ATK_MINUS_1, 100)
         ),
     },
@@ -10801,7 +10801,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .ignoresSubstitute = B_UPDATED_MOVE_FLAGS >= GEN_6,
         .soundMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_DEF_MINUS_1)
         ),
     },
@@ -10878,7 +10878,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_SP_ATK_TWO_DOWN)
         ),
     },
@@ -10922,7 +10922,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_DEF_MINUS_1, 20)
         ),
     },
@@ -10952,7 +10952,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_DEF_MINUS_1, 20)
         ),
     },
@@ -10967,7 +10967,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_RECHARGE)
         ),
     },
@@ -10985,7 +10985,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .ignoresSubstitute = TRUE,
         .makesContact = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_SPECTRAL_THIEF)
         ),
     },
@@ -11045,7 +11045,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 30)
         ),
     },
@@ -11139,7 +11139,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .alwaysCriticalHit = TRUE,
         .metronomeBanned = TRUE,
         #if B_UPDATED_MOVE_DATA >= GEN_8
-            ADDITIONAL_EFFECTS(
+            .additionalEffects = ADDITIONAL_EFFECTS(
                 SECONDARY_EFFECT(MOVE_EFFECT_EVS_PLUS_1, 100)
             ),
         #endif
@@ -11158,7 +11158,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .sheerForceBoost = TRUE,
         .mirrorMoveBanned = B_UPDATED_MOVE_FLAGS < GEN_8,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 30)
         ),
     },
@@ -11178,7 +11178,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .mirrorMoveBanned = B_UPDATED_MOVE_FLAGS < GEN_8,
         .gravityBanned = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 30)
         ),
     },
@@ -11235,7 +11235,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .mirrorMoveBanned = B_UPDATED_MOVE_FLAGS < GEN_8,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 100)
         ),
     },
@@ -11259,7 +11259,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .mirrorMoveBanned = B_UPDATED_MOVE_FLAGS < GEN_8,
         .thawsUser = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 100)
         ),
     },
@@ -11394,7 +11394,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .strikeCount = 2,
         .minimizeDoubleDamage = B_UPDATED_MOVE_FLAGS < GEN_8,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 30)
         ),
     },
@@ -11445,7 +11445,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .bitingMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_TRAP_BOTH)
         ),
     },
@@ -11649,7 +11649,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .sheerForceBoost = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SPD_MINUS_1, 100)
         ),
     },
@@ -11667,7 +11667,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .metronomeBanned = TRUE,
         .skyBattleBanned = B_EXTRAPOLATED_MOVE_FLAGS,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_WRAP)
         ),
     },
@@ -11686,7 +11686,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .thawsUser = TRUE,
         .ballisticMove = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 10)
         ),
     },
@@ -11738,7 +11738,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .sheerForceBoost = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT_SELF(MOVE_EFFECT_SPD_PLUS_1, 100)
         ),
     },
@@ -11756,7 +11756,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_ATK_MINUS_1, 100)
         ),
     },
@@ -11802,7 +11802,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SP_DEF_MINUS_1, 100)
         ),
     },
@@ -11819,7 +11819,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .sheerForceBoost = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_DEF_MINUS_1, 100)
         ),
     },
@@ -11837,7 +11837,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SP_ATK_MINUS_1, 100)
         ),
     },
@@ -11854,7 +11854,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_CONFUSION, 20)
         ),
     },
@@ -11920,7 +11920,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .metronomeBanned = TRUE,
         .instructBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_RECHARGE)
         ),
     },
@@ -11936,7 +11936,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_RECHARGE)
         ),
     },
@@ -12019,7 +12019,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_POISON, 20)
         ),
     },
@@ -12091,7 +12091,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SP_ATK_MINUS_1, 100)
         ),
     },
@@ -12106,7 +12106,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 100)
         ),
     },
@@ -12217,7 +12217,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .thawsUser = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 30)
         ),
     },
@@ -12287,7 +12287,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_WRAP)
         ),
     },
@@ -12317,7 +12317,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FREEZE_OR_FROSTBITE, 10)
         ),
     },
@@ -12333,7 +12333,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 20)
         ),
     },
@@ -12351,7 +12351,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_DEF_MINUS_1, 100)
         ),
     },
@@ -12417,7 +12417,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_DIRE_CLAW, 50)
         ),
     },
@@ -12434,7 +12434,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT_SELF(MOVE_EFFECT_DEF_PLUS_1, 100)
         ),
     },
@@ -12468,7 +12468,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .slicingMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_STEALTH_ROCK, 100)
         ),
     },
@@ -12490,7 +12490,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .sheerForceBoost = TRUE,
         .windMove = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_ATK_MINUS_1, 30)
         ),
     },
@@ -12506,7 +12506,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT_SELF(MOVE_EFFECT_SP_ATK_PLUS_1, 100)
         ),
     },
@@ -12522,7 +12522,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_THRASH)
         ),
     },
@@ -12565,7 +12565,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 30)
         ),
     },
@@ -12598,7 +12598,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .punchingMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_DEF_SPDEF_DOWN)
         ),
     },
@@ -12615,7 +12615,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .sheerForceBoost = TRUE,
         .argument = STATUS1_PSN_ANY,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_POISON, 50)
         ),
     },
@@ -12637,7 +12637,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT_SELF(MOVE_EFFECT_SPD_PLUS_1, 100)
         ),
     },
@@ -12657,7 +12657,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_ATK_MINUS_1, 100)
         ),
     },
@@ -12694,7 +12694,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_DEF_MINUS_1, 50),
             SECONDARY_EFFECT(MOVE_EFFECT_FLINCH, 30)
         ),
@@ -12712,7 +12712,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .argument = STATUS1_ANY,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 30)
         ),
     },
@@ -12730,7 +12730,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .slicingMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SPIKES, 100)
         ),
     },
@@ -12752,7 +12752,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .windMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SPD_MINUS_1, 30)
         ),
     },
@@ -12774,7 +12774,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .windMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 20)
         ),
     },
@@ -12796,7 +12796,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
         .windMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 20)
         ),
     },
@@ -12874,7 +12874,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_CONFUSION, 30)
         ),
     },
@@ -12903,7 +12903,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SP_DEF_MINUS_2, 100)
         ),
     },
@@ -12965,7 +12965,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .skyBattleBanned = B_EXTRAPOLATED_MOVE_FLAGS,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_SPD_MINUS_2)
         ),
     },
@@ -13070,7 +13070,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .sheerForceBoost = TRUE,
         .makesContact = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_RAPIDSPIN),
             SECONDARY_EFFECT(MOVE_EFFECT_POISON, 100)
         ),
@@ -13148,7 +13148,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .sheerForceBoost = TRUE,
         .soundMove = TRUE,
         .ignoresSubstitute = B_UPDATED_MOVE_FLAGS >= GEN_6,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT_SELF(MOVE_EFFECT_SP_ATK_PLUS_1, 100)
         ),
     },
@@ -13166,7 +13166,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
         .danceMove = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT_SELF(MOVE_EFFECT_SPD_PLUS_1, 100)
         ),
     },
@@ -13196,7 +13196,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT(MOVE_EFFECT_PAYDAY),
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_SP_ATK_MINUS_1)
         ),
@@ -13319,7 +13319,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .sheerForceBoost = TRUE,
         .makesContact = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SPD_MINUS_1, 100)
         ),
     },
@@ -13336,7 +13336,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT_SELF(MOVE_EFFECT_SPD_PLUS_1, 100)
         ),
     },
@@ -13352,7 +13352,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_ATK_MINUS_1, 100)
         ),
     },
@@ -13412,7 +13412,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_DEF_SPDEF_DOWN)
         ),
     },
@@ -13445,7 +13445,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .metronomeBanned = TRUE,
         .argument = TYPE_ELECTRIC,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_REMOVE_ARG_TYPE)
         ),
     },
@@ -13512,7 +13512,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .instructBanned = TRUE,
         .encoreBanned = TRUE,
         .assistBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 30)
         ),
     },
@@ -13537,7 +13537,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .instructBanned = TRUE,
         .encoreBanned = TRUE,
         .assistBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SLEEP, 10)
         ),
     },
@@ -13562,7 +13562,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .instructBanned = TRUE,
         .encoreBanned = TRUE,
         .assistBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_POISON, 30)
         ),
     },
@@ -13587,7 +13587,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .instructBanned = TRUE,
         .encoreBanned = TRUE,
         .assistBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 30)
         ),
     },
@@ -13612,7 +13612,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .instructBanned = TRUE,
         .encoreBanned = TRUE,
         .assistBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_CONFUSION, 30)
         ),
     },
@@ -13670,7 +13670,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .thawsUser = TRUE,
         .metronomeBanned = TRUE,
         .healBlockBanned = B_EXTRAPOLATED_MOVE_FLAGS,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 20)
         ),
     },
@@ -13687,7 +13687,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .ballisticMove = TRUE,
         .metronomeBanned = TRUE,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SYRUP_BOMB, 100)
         ),
     },
@@ -13940,7 +13940,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 100)
         ),
     },
@@ -14046,7 +14046,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_SPECIAL,
         .soundMove = TRUE,
         .ignoresSubstitute = B_UPDATED_MOVE_FLAGS >= GEN_6,
-        ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT_SELF(MOVE_EFFECT_ALL_STATS_UP, 100)
         ),
     },
