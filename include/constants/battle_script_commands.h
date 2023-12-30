@@ -140,7 +140,7 @@
 #define VARIOUS_TRY_SOAK                             48
 #define VARIOUS_HANDLE_MEGA_EVO                      49
 #define VARIOUS_TRY_LAST_RESORT                      50
-#define VARIOUS_UNUSED_51                            51
+#define VARIOUS_SET_ARG_TO_BATTLE_DAMAGE             51
 #define VARIOUS_TRY_HIT_SWITCH_TARGET                52
 #define VARIOUS_TRY_AUTOTOMIZE                       53
 #define VARIOUS_ABILITY_POPUP                        54

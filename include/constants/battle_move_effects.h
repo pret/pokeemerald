@@ -35,7 +35,7 @@
 #define EFFECT_OHKO                         31
 #define EFFECT_FUSION_COMBO                 32
 #define EFFECT_SUPER_FANG                   33
-#define EFFECT_DRAGON_RAGE                  34
+#define EFFECT_ARG_FIXED_DAMAGE             34
 #define EFFECT_UNUSED_35                    35
 #define EFFECT_HEAL_BLOCK                   36
 #define EFFECT_RECOIL_IF_MISS               37
@@ -111,7 +111,7 @@
 #define EFFECT_BATON_PASS                   107
 #define EFFECT_PURSUIT                      108
 #define EFFECT_RAPID_SPIN                   109
-#define EFFECT_SONICBOOM                    110
+#define EFFECT_UNUSED_110                   110
 #define EFFECT_CAPTIVATE                    111
 #define EFFECT_MORNING_SUN                  112
 #define EFFECT_SYNTHESIS                    113

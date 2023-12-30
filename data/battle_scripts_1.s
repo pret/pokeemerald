@@ -56,7 +56,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectOHKO                    @ EFFECT_OHKO
 	.4byte BattleScript_EffectHit                     @ EFFECT_FUSION_COMBO
 	.4byte BattleScript_EffectSuperFang               @ EFFECT_SUPER_FANG
-	.4byte BattleScript_EffectDragonRage              @ EFFECT_DRAGON_RAGE
+	.4byte BattleScript_EffectArgFixedDamage          @ EFFECT_ARG_FIXED_DAMAGE
 	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_35
 	.4byte BattleScript_EffectHealBlock               @ EFFECT_HEAL_BLOCK
 	.4byte BattleScript_EffectRecoilIfMiss            @ EFFECT_RECOIL_IF_MISS
@@ -132,7 +132,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectBatonPass               @ EFFECT_BATON_PASS
 	.4byte BattleScript_EffectHit                     @ EFFECT_PURSUIT
 	.4byte BattleScript_EffectRapidSpin               @ EFFECT_RAPID_SPIN
-	.4byte BattleScript_EffectSonicboom               @ EFFECT_SONICBOOM
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_110
 	.4byte BattleScript_EffectCaptivate               @ EFFECT_CAPTIVATE
 	.4byte BattleScript_EffectMorningSun              @ EFFECT_MORNING_SUN
 	.4byte BattleScript_EffectSynthesis               @ EFFECT_SYNTHESIS
@@ -3827,17 +3827,6 @@ BattleScript_EffectSuperFang::
 	damagetohalftargethp
 	goto BattleScript_HitFromAtkAnimation
 
-BattleScript_EffectDragonRage::
-	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	attackstring
-	ppreduce
-	typecalc
-	bichalfword gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
-	setword gBattleMoveDamage, 40
-	adjustdamage
-	goto BattleScript_HitFromAtkAnimation
-
 BattleScript_EffectRecoilIfMiss::
 	attackcanceler
 	accuracycheck BattleScript_MoveMissedDoDamage, ACC_CURR_MOVE
@@ -4854,14 +4843,14 @@ BattleScript_EffectRapidSpinEnd::
 	goto BattleScript_EffectHit
 .endif
 
-BattleScript_EffectSonicboom::
+BattleScript_EffectArgFixedDamage::
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
 	ppreduce
 	typecalc
 	bichalfword gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
-	setword gBattleMoveDamage, 20
+	setargtobattledamage
 	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 

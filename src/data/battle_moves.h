@@ -795,7 +795,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_SONIC_BOOM] =
     {
-        .effect = EFFECT_SONICBOOM,
+        .effect = EFFECT_ARG_FIXED_DAMAGE,
         .power = 1,
         .type = TYPE_NORMAL,
         .accuracy = 90,
@@ -803,6 +803,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
+        .argument = 20,
     },
 
     [MOVE_DISABLE] =
@@ -1350,7 +1351,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_DRAGON_RAGE] =
     {
-        .effect = EFFECT_DRAGON_RAGE,
+        .effect = EFFECT_ARG_FIXED_DAMAGE,
         .power = 1,
         .type = TYPE_DRAGON,
         .accuracy = 100,
@@ -1359,6 +1360,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .ignoresKingsRock = (B_UPDATED_MOVE_FLAGS == GEN_4) || (B_UPDATED_MOVE_FLAGS < GEN_3),
+        .argument = 40,
     },
 
     [MOVE_FIRE_SPIN] =

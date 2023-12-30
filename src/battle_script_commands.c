@@ -9597,6 +9597,12 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr = cmd->failInstr;
         return;
     }
+    case VARIOUS_SET_ARG_TO_BATTLE_DAMAGE:
+    {
+        VARIOUS_ARGS();
+        gBattleMoveDamage = gBattleMoves[gCurrentMove].argument;
+        break;
+    }
     case VARIOUS_TRY_HIT_SWITCH_TARGET:
     {
         VARIOUS_ARGS(const u8 *failInstr);

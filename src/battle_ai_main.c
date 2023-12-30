@@ -1381,7 +1381,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         //case EFFECT_BIDE:
         //case EFFECT_COUNTER:
         case EFFECT_PRESENT:
-        case EFFECT_SONICBOOM:
+        case EFFECT_ARG_FIXED_DAMAGE:
         //case EFFECT_MIRROR_COAT:
         case EFFECT_FOCUS_PUNCH:
         //case EFFECT_ENDEAVOR:
