@@ -42,25 +42,25 @@ void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value)
         switch (attributeId)
         {
         case BG_ANIM_SCREEN_SIZE:
-            ((struct BgCnt *)&bgCnt)->screenSize = value;
+            ((vBgCnt *)&bgCnt)->screenSize = value;
             break;
         case BG_ANIM_AREA_OVERFLOW_MODE:
-            ((struct BgCnt *)&bgCnt)->areaOverflowMode = value;
+            ((vBgCnt *)&bgCnt)->areaOverflowMode = value;
             break;
         case BG_ANIM_MOSAIC:
-            ((struct BgCnt *)&bgCnt)->mosaic = value;
+            ((vBgCnt *)&bgCnt)->mosaic = value;
             break;
         case BG_ANIM_CHAR_BASE_BLOCK:
-            ((struct BgCnt *)&bgCnt)->charBaseBlock = value;
+            ((vBgCnt *)&bgCnt)->charBaseBlock = value;
             break;
         case BG_ANIM_PRIORITY:
-            ((struct BgCnt *)&bgCnt)->priority = value;
+            ((vBgCnt *)&bgCnt)->priority = value;
             break;
         case BG_ANIM_PALETTES_MODE:
-            ((struct BgCnt *)&bgCnt)->palettes = value;
+            ((vBgCnt *)&bgCnt)->palettes = value;
             break;
         case BG_ANIM_SCREEN_BASE_BLOCK:
-            ((struct BgCnt *)&bgCnt)->screenBaseBlock = value;
+            ((vBgCnt *)&bgCnt)->screenBaseBlock = value;
             break;
         }
 
@@ -78,19 +78,19 @@ int GetAnimBgAttribute(u8 bgId, u8 attributeId)
         switch (attributeId)
         {
         case BG_ANIM_SCREEN_SIZE:
-            return ((struct BgCnt *)&bgCnt)->screenSize;
+            return ((vBgCnt *)&bgCnt)->screenSize;
         case BG_ANIM_AREA_OVERFLOW_MODE:
-            return ((struct BgCnt *)&bgCnt)->areaOverflowMode;
+            return ((vBgCnt *)&bgCnt)->areaOverflowMode;
         case BG_ANIM_MOSAIC:
-            return ((struct BgCnt *)&bgCnt)->mosaic;
+            return ((vBgCnt *)&bgCnt)->mosaic;
         case BG_ANIM_CHAR_BASE_BLOCK:
-            return ((struct BgCnt *)&bgCnt)->charBaseBlock;
+            return ((vBgCnt *)&bgCnt)->charBaseBlock;
         case BG_ANIM_PRIORITY:
-            return ((struct BgCnt *)&bgCnt)->priority;
+            return ((vBgCnt *)&bgCnt)->priority;
         case BG_ANIM_PALETTES_MODE:
-            return ((struct BgCnt *)&bgCnt)->palettes;
+            return ((vBgCnt *)&bgCnt)->palettes;
         case BG_ANIM_SCREEN_BASE_BLOCK:
-            return ((struct BgCnt *)&bgCnt)->screenBaseBlock;
+            return ((vBgCnt *)&bgCnt)->screenBaseBlock;
         }
     }
 
