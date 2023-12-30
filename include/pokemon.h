@@ -513,6 +513,7 @@ struct Ability
 {
     u8 name[ABILITY_NAME_LENGTH + 1];
     const u8 *description;
+    s8 aiRating;
 };
 
 #define SPINDA_SPOT_WIDTH 16
