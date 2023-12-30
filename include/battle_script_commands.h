@@ -29,7 +29,7 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
 u8 GetBattlerTurnOrderNum(u8 battlerId);
 bool32 NoAliveMonsForPlayer(void);
 bool32 NoAliveMonsForEitherParty(void);
-void SetMoveEffect(bool32 primary, u32 certain);
+void SetMoveEffect(bool32 primary, bool32 certain);
 bool32 CanBattlerSwitch(u32 battlerId);
 void BattleDestroyYesNoCursorAt(u8 cursorPosition);
 void BattleCreateYesNoCursorAt(u8 cursorPosition);

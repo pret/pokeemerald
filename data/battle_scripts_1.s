@@ -45,7 +45,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectEvasionDown             @ EFFECT_EVASION_DOWN
 	.4byte BattleScript_EffectHaze                    @ EFFECT_HAZE
 	.4byte BattleScript_EffectBide                    @ EFFECT_BIDE
-	.4byte BattleScript_EffectRampage                 @ EFFECT_RAMPAGE
+	.4byte BattleScript_EffectHit                     @ EFFECT_UNUSED_23
 	.4byte BattleScript_EffectRoar                    @ EFFECT_ROAR
 	.4byte BattleScript_EffectHit                     @ EFFECT_MULTI_HIT
 	.4byte BattleScript_EffectConversion              @ EFFECT_CONVERSION
@@ -2056,7 +2056,7 @@ BattleScript_EffectFinalGambit:
 	dmgtocurrattackerhp
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
-	seteffectwithchance
+	setadditionaleffects
 	tryfaintmon BS_ATTACKER
 	tryfaintmon BS_TARGET
 	jumpifmovehadnoeffect BattleScript_MoveEnd
@@ -3070,7 +3070,7 @@ BattleScript_Hit_RetFromAtkAnimation::
 	waitmessage B_WAIT_TIME_LONG
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
-	seteffectwithchance
+	setadditionaleffects
 	return
 
 BattleScript_EffectNaturalGift:
@@ -3557,16 +3557,6 @@ BattleScript_EffectBide::
 	setbide
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectRampage::
-	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	attackstring
-	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_EffectRampage2
-	ppreduce
-BattleScript_EffectRampage2:
-	confuseifrepeatingattackends
-	goto BattleScript_HitFromCritCalc
-
 BattleScript_EffectRoar::
 	attackcanceler
 	attackstring
@@ -3634,7 +3624,7 @@ BattleScript_MultiHitPrintStrings::
 	return
 
 BattleScript_MultiHitEnd::
-	seteffectwithchance
+	setadditionaleffects
 	tryfaintmon BS_TARGET
 	moveendcase MOVEEND_SYNCHRONIZE_TARGET
 	moveendfrom MOVEEND_STATUS_IMMUNITY_ABILITIES
@@ -5586,7 +5576,7 @@ BattleScript_BrickBreakDoHit::
 	waitmessage B_WAIT_TIME_LONG
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
-	seteffectwithchance
+	setadditionaleffects
 	tryfaintmon BS_TARGET
 	goto BattleScript_MoveEnd
 

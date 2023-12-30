@@ -24,7 +24,7 @@
 #define EFFECT_EVASION_DOWN                 20
 #define EFFECT_HAZE                         21
 #define EFFECT_BIDE                         22
-#define EFFECT_RAMPAGE                      23
+#define EFFECT_UNUSED_23                    23
 #define EFFECT_ROAR                         24
 #define EFFECT_MULTI_HIT                    25
 #define EFFECT_CONVERSION                   26

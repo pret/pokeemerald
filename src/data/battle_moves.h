@@ -601,7 +601,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
             .power = 90,
             .pp = 20,
         #endif
-        .effect = EFFECT_RAMPAGE,
+        .effect = EFFECT_HIT,
         .type = TYPE_NORMAL,
         .accuracy = 100,
         .target = MOVE_TARGET_RANDOM,
@@ -609,6 +609,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .instructBanned = TRUE,
+        ADDITIONAL_EFFECTS(
+            PRIMARY_EFFECT_SELF(MOVE_EFFECT_THRASH)
+        ),
     },
 
     [MOVE_DOUBLE_EDGE] =
@@ -1320,7 +1323,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
             .power = 70,
             .pp = 20,
         #endif
-        .effect = EFFECT_RAMPAGE,
+        .effect = EFFECT_HIT,
         .type = TYPE_GRASS,
         .accuracy = 100,
         .target = MOVE_TARGET_RANDOM,
@@ -1329,6 +1332,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .danceMove = TRUE,
         .instructBanned = TRUE,
+        ADDITIONAL_EFFECTS(
+            PRIMARY_EFFECT_SELF(MOVE_EFFECT_THRASH)
+        ),
     },
 
     [MOVE_STRING_SHOT] =
@@ -3390,7 +3396,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
             .power = 90,
             .pp = 15,
         #endif
-        .effect = EFFECT_RAMPAGE,
+        .effect = EFFECT_HIT,
         .type = TYPE_DRAGON,
         .accuracy = 100,
         .target = MOVE_TARGET_RANDOM,
@@ -3398,6 +3404,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .instructBanned = TRUE,
+        ADDITIONAL_EFFECTS(
+            PRIMARY_EFFECT_SELF(MOVE_EFFECT_THRASH)
+        ),
     },
 
     [MOVE_SANDSTORM] =
@@ -12504,7 +12513,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_RAGING_FURY] =
     {
-        .effect = EFFECT_RAMPAGE,
+        .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_9 ? 120 : 90,
         .type = TYPE_FIRE,
         .accuracy = 100,
@@ -12513,6 +12522,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .metronomeBanned = TRUE,
+        ADDITIONAL_EFFECTS(
+            PRIMARY_EFFECT_SELF(MOVE_EFFECT_THRASH)
+        ),
     },
 
     [MOVE_WAVE_CRASH] =

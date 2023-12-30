@@ -109,7 +109,6 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_EVASION_DOWN]               = 1,
     [EFFECT_HAZE]                       = 5,
     [EFFECT_BIDE]                       = 5,
-    [EFFECT_RAMPAGE]                    = 4,
     [EFFECT_ROAR]                       = 5,
     [EFFECT_MULTI_HIT]                  = 1,
     [EFFECT_CONVERSION]                 = 3,
@@ -1282,7 +1281,8 @@ static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3)
             baseFromEffect += 2; // Overheat etc & Superpower
         if (MoveHasMoveEffect(arg2, MOVE_EFFECT_STEAL_ITEM))
             baseFromEffect += 3;
-        if (MoveHasMoveEffect(arg2, MOVE_EFFECT_WRAP))
+        if (MoveHasMoveEffect(arg2, MOVE_EFFECT_WRAP)
+          || MoveHasMoveEffectSelf(arg2, MOVE_EFFECT_THRASH))
             baseFromEffect += 3;
         if (MoveHasMoveEffect(arg2, MOVE_EFFECT_RECHARGE))
             baseFromEffect += 4;
