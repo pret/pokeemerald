@@ -442,6 +442,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDoodle                  @ EFFECT_DOODLE
 	.4byte BattleScript_EffectFilletAway              @ EFFECT_FILLET_AWAY
 	.4byte BattleScript_EffectHit                     @ EFFECT_IVY_CUDGEL
+	.4byte BattleScript_EffectHit                     @ EFFECT_FICKLE_BEAM
 
 BattleScript_EffectFilletAway:
 	attackcanceler
@@ -1062,11 +1063,24 @@ BattleScript_EffectMeteorBeam::
 	@ DecideTurn
 	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_TwoTurnMovesSecondTurn
 	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING, BattleScript_TwoTurnMovesSecondTurn
-	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_METEOR_BEAM
+	jumpifmove MOVE_METEOR_BEAM, BattleScript_SetStringMeteorBeam
+	jumpifmove MOVE_ELECTRO_SHOT, BattleScript_SetStringElectroShock
+BattleScript_TryCharging:
 	call BattleScript_FirstChargingTurnMeteorBeam
+	jumpifmove MOVE_METEOR_BEAM, BattleScript_TryMeteorBeam
+	jumpifweatheraffected BS_ATTACKER, B_WEATHER_RAIN, BattleScript_TwoTurnMovesSecondTurn @ Check for move Electro Shot
+BattleScript_TryMeteorBeam:
 	jumpifnoholdeffect BS_ATTACKER, HOLD_EFFECT_POWER_HERB, BattleScript_MoveEnd
 	call BattleScript_PowerHerbActivation
 	goto BattleScript_TwoTurnMovesSecondTurn
+
+BattleScript_SetStringMeteorBeam:
+	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_METEOR_BEAM
+	goto BattleScript_TryCharging
+
+BattleScript_SetStringElectroShock:
+	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_ELECTRO_SHOCK
+	goto BattleScript_TryCharging
 
 BattleScript_FirstChargingTurnMeteorBeam::
 	attackcanceler

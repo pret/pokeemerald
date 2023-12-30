@@ -8496,6 +8496,8 @@ bool32 IsBattlerProtected(u32 battler, u32 move)
         return TRUE;
     else if (gProtectStructs[battler].banefulBunkered)
         return TRUE;
+    else if (gProtectStructs[battler].burningBulwarked)
+        return TRUE;
     else if ((gProtectStructs[battler].obstructed || gProtectStructs[battler].silkTrapped) && !IS_MOVE_STATUS(move))
         return TRUE;
     else if (gProtectStructs[battler].spikyShielded)
@@ -9001,6 +9003,10 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
     case EFFECT_RAGE_FIST:
         basePower += 50 * gBattleStruct->timesGotHit[GetBattlerSide(battlerAtk)][gBattlerPartyIndexes[battlerAtk]];
         basePower = (basePower > 350) ? 350 : basePower;
+        break;
+    case EFFECT_FICKLE_BEAM:
+        if (RandomPercentage(RNG_FICKLE_BEAM, 30))
+            basePower *= 2;
         break;
     }
 
