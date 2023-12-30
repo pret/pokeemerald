@@ -5929,7 +5929,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && RandomWeighted(RNG_STENCH, 9, 1)
              && !IS_MOVE_STATUS(move)
-             && !MoveHasMoveEffect(gCurrentMove, MOVE_EFFECT_FLINCH, FALSE))
+             && !MoveHasMoveEffect(gCurrentMove, MOVE_EFFECT_FLINCH))
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_FLINCH;
                 BattleScriptPushCursor();
@@ -11417,13 +11417,13 @@ bool32 IsGen6ExpShareEnabled(void)
 #endif
 }
 
-bool32 MoveHasMoveEffect(u32 move, u32 moveEffect, bool32 effectHitOnly)
+bool32 MoveHasMoveEffect(u32 move, u32 moveEffect)
 {
     u8 i;
     for (i = 0; i < gBattleMoves[move].numAdditionalEffects; i++)
     {
         if (gBattleMoves[move].additionalEffects[i].moveEffect == moveEffect
-            && !(effectHitOnly && gBattleMoves[move].effect != EFFECT_HIT))
+            && gBattleMoves[move].additionalEffects[i].self == FALSE)
             return TRUE;
     }
     return FALSE;

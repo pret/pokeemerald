@@ -1980,7 +1980,7 @@ bool32 HasMoveEffectANDArg(u32 battlerId, u32 effect, u32 argument)
     return FALSE;
 }
 
-bool32 HasMoveWithMoveEffect(u32 battlerId, u32 moveEffect, u32 effectHitOnly)
+bool32 HasMoveWithMoveEffect(u32 battlerId, u32 moveEffect)
 {
     s32 i;
     u16 *moves = GetMovesArray(battlerId);
@@ -1988,7 +1988,23 @@ bool32 HasMoveWithMoveEffect(u32 battlerId, u32 moveEffect, u32 effectHitOnly)
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE
-            && MoveHasMoveEffect(moves[i], moveEffect, effectHitOnly))
+            && MoveHasMoveEffect(moves[i], moveEffect))
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool32 HasMoveWithMoveEffectExcept(u32 battlerId, u32 moveEffect, u32 exception)
+{
+    s32 i;
+    u16 *moves = GetMovesArray(battlerId);
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE
+            && gBattleMoves[moves[i]].effect != exception
+            && MoveHasMoveEffect(moves[i], moveEffect))
             return TRUE;
     }
 
@@ -2103,8 +2119,8 @@ bool32 IsTrappingMove(u32 move)
     //case EFFECT_NO_RETREAT:   // TODO
         return TRUE;
     default:
-        return MoveHasMoveEffect(move, MOVE_EFFECT_PREVENT_ESCAPE, FALSE)
-            || MoveHasMoveEffect(move, MOVE_EFFECT_WRAP, FALSE);
+        return MoveHasMoveEffect(move, MOVE_EFFECT_PREVENT_ESCAPE)
+            || MoveHasMoveEffect(move, MOVE_EFFECT_WRAP);
     }
 }
 
@@ -3722,7 +3738,7 @@ void IncreaseParalyzeScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
 
         if ((defSpeed >= atkSpeed && defSpeed / 2 < atkSpeed) // You'll go first after paralyzing foe
           || HasMoveEffectANDArg(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS, STATUS1_PARALYSIS)
-          || HasMoveWithMoveEffect(battlerAtk, MOVE_EFFECT_FLINCH, TRUE) // filter out Fake Out
+          || (HasMoveWithMoveEffectExcept(battlerAtk, MOVE_EFFECT_FLINCH, EFFECT_FAKE_OUT)) // filter out Fake Out
           || gBattleMons[battlerDef].status2 & STATUS2_INFATUATION
           || gBattleMons[battlerDef].status2 & STATUS2_CONFUSION)
             ADJUST_SCORE_PTR(4);
@@ -3763,7 +3779,7 @@ void IncreaseConfusionScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score
     {
         if (gBattleMons[battlerDef].status1 & STATUS1_PARALYSIS
           || gBattleMons[battlerDef].status2 & STATUS2_INFATUATION
-          || (AI_DATA->abilities[battlerAtk] == ABILITY_SERENE_GRACE && HasMoveWithMoveEffect(battlerAtk, MOVE_EFFECT_FLINCH, TRUE)))
+          || (AI_DATA->abilities[battlerAtk] == ABILITY_SERENE_GRACE && HasMoveWithMoveEffectExcept(battlerAtk, MOVE_EFFECT_FLINCH, EFFECT_FAKE_OUT)))
             ADJUST_SCORE_PTR(3);
         else
             ADJUST_SCORE_PTR(2);

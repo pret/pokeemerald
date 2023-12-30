@@ -1275,16 +1275,16 @@ static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3)
         // various cases add/remove points
         if (gBattleMoves[arg2].recoil > 0)
             baseFromEffect++; // recoil moves
-        if (MoveHasMoveEffect(arg2, MOVE_EFFECT_RAPIDSPIN, FALSE))
+        if (MoveHasMoveEffect(arg2, MOVE_EFFECT_RAPIDSPIN))
             baseFromEffect++;
-        if (MoveHasMoveEffect(arg2, MOVE_EFFECT_SP_ATK_TWO_DOWN, FALSE)
-            || MoveHasMoveEffect(arg2, MOVE_EFFECT_ATK_DEF_DOWN, FALSE))
+        if (MoveHasMoveEffect(arg2, MOVE_EFFECT_SP_ATK_TWO_DOWN)
+            || MoveHasMoveEffect(arg2, MOVE_EFFECT_ATK_DEF_DOWN))
             baseFromEffect += 2; // Overheat etc & Superpower
-        if (MoveHasMoveEffect(arg2, MOVE_EFFECT_STEAL_ITEM, FALSE))
+        if (MoveHasMoveEffect(arg2, MOVE_EFFECT_STEAL_ITEM))
             baseFromEffect += 3;
-        if (MoveHasMoveEffect(arg2, MOVE_EFFECT_WRAP, FALSE))
+        if (MoveHasMoveEffect(arg2, MOVE_EFFECT_WRAP))
             baseFromEffect += 3;
-        if (MoveHasMoveEffect(arg2, MOVE_EFFECT_RECHARGE, FALSE))
+        if (MoveHasMoveEffect(arg2, MOVE_EFFECT_RECHARGE))
             baseFromEffect += 4;
 
         movePoints->points[atkSide][gBattlerPartyIndexes[gBattlerAttacker] * 4 + arg1] += baseFromEffect;

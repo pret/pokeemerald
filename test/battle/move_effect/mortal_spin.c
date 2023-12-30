@@ -4,7 +4,7 @@
 ASSUMPTIONS
 {
     ASSUME(MoveHasMoveEffectSelf(MOVE_MORTAL_SPIN, MOVE_EFFECT_RAPIDSPIN) == TRUE);
-    ASSUME(MoveHasMoveEffect(MOVE_MORTAL_SPIN, MOVE_EFFECT_POISON, FALSE) == TRUE);
+    ASSUME(MoveHasMoveEffect(MOVE_MORTAL_SPIN, MOVE_EFFECT_POISON) == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Mortal Spin blows away Wrap, hazards and poisons foe")

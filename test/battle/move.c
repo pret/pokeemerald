@@ -27,7 +27,7 @@ SINGLE_BATTLE_TEST("AdditionalEffect.chance controls the proportion of secondary
     PARAMETRIZE { move = MOVE_THUNDER_SHOCK; }
     PARAMETRIZE { move = MOVE_DISCHARGE; }
     PARAMETRIZE { move = MOVE_NUZZLE; }
-    ASSUME(MoveHasMoveEffect(move, MOVE_EFFECT_PARALYSIS, FALSE) == TRUE);
+    ASSUME(MoveHasMoveEffect(move, MOVE_EFFECT_PARALYSIS) == TRUE);
     ASSUME(0 < gBattleMoves[move].additionalEffects[0].chance && gBattleMoves[move].additionalEffects[0].chance <= 100);
     PASSES_RANDOMLY(gBattleMoves[move].additionalEffects[0].chance, 100, RNG_SECONDARY_EFFECT);
     GIVEN {
