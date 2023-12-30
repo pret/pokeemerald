@@ -1268,7 +1268,7 @@ static void TryHealMons(u8 healCount)
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
         indices[i] = i;
 
-    // Only 'healCount' number of pokemon will be healed.
+    // Only 'healCount' number of Pokémon will be healed.
     // The order in which they're (attempted to be) healed is random,
     Shuffle(indices, FRONTIER_PARTY_SIZE, sizeof(indices[0]));
 
