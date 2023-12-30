@@ -165,6 +165,9 @@ struct Benchmark { s32 ticks; };
 static inline void BenchmarkStart(void)
 {
     gTestRunnerState.inBenchmark = TRUE;
+    // Wait for a v-blank so that comparing two benchmarks is not affected
+    // by the v-count (different numbers of IRQs may run).
+    VBlankIntrWait();
     REG_TM3CNT = (TIMER_ENABLE | TIMER_64CLK) << 16;
 }
 
