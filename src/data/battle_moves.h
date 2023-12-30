@@ -13726,11 +13726,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .type = TYPE_ELECTRIC,
         .accuracy = 100,
         .pp = 10,
-        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
-        //.sheerForceBoost = TRUE, (uncomment when effect is implemented, otherwise it breaks the Sheer Force Test)
+        .sheerForceBoost = TRUE,
     },
 
     [MOVE_TERA_STARSTORM] =
@@ -13740,7 +13739,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .type = TYPE_NORMAL, // Stellar type if used by Terapagos-Stellar
         .accuracy = 100,
         .pp = 5,
-        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED, // MOVE_TARGET_BOTH if used by Terapagos-Stellar
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
@@ -13757,7 +13755,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .type = TYPE_DRAGON,
         .accuracy = 100,
         .pp = 5,
-        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
@@ -13770,7 +13767,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .type = TYPE_FIRE,
         .accuracy = 0,
         .pp = 10,
-        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_USER,
         .priority = 4,
         .category = BATTLE_CATEGORY_STATUS,
@@ -13790,7 +13786,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .type = TYPE_ELECTRIC,
         .accuracy = 100,
         .pp = 5,
-        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 1,
         .category = BATTLE_CATEGORY_SPECIAL,
@@ -13798,17 +13793,20 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_MIGHTY_CLEAVE] =
     {
-        .effect = EFFECT_FEINT,
+        .effect = EFFECT_HIT,
         .power = 95,
         .type = TYPE_ROCK,
         .accuracy = 100,
         .pp = 5,
-        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
+        .ignoresProtect = TRUE,
         .slicingMove = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS(
+            PRIMARY_EFFECT(MOVE_EFFECT_FEINT)
+        ),
     },
 
     [MOVE_TACHYON_CUTTER] =
@@ -13818,7 +13816,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .type = TYPE_STEEL,
         .accuracy = 0,
         .pp = 10,
-        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
@@ -13833,7 +13830,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .type = TYPE_STEEL,
         .accuracy = 100,
         .pp = 10,
-        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
@@ -13847,7 +13843,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .type = TYPE_DRAGON,
         .accuracy = 0,
         .pp = 15,
-        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_ALLY,
         .priority = 0,
         .category = BATTLE_CATEGORY_STATUS,
@@ -13861,7 +13856,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .type = TYPE_FAIRY,
         .accuracy = 100,
         .pp = 10,
-        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
@@ -13876,7 +13870,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .type = TYPE_FIRE,
         .accuracy = 100,
         .pp = 10,
-        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
@@ -13890,7 +13883,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .type = TYPE_ELECTRIC,
         .accuracy = 95,
         .pp = 15,
-        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
@@ -13904,7 +13896,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .type = TYPE_PSYCHIC,
         .accuracy = 100,
         .pp = 10,
-        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
@@ -13919,7 +13910,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .type = TYPE_FIGHTING,
         .accuracy = 100,
         .pp = 15,
-        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 3,
         .category = BATTLE_CATEGORY_PHYSICAL,
@@ -13928,15 +13918,17 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_MALIGNANT_CHAIN] =
     {
-        .effect = EFFECT_POISON_FANG,
+        .effect = EFFECT_HIT,
         .power = 100,
         .type = TYPE_POISON,
         .accuracy = 100,
         .pp = 5,
-        .secondaryEffectChance = 50,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS(
+            SECONDARY_EFFECT(MOVE_EFFECT_TOXIC, 50)
+        ),
     },
 
     // Z-Moves

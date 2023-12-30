@@ -2720,23 +2720,16 @@ static bool32 AI_ShouldCopyStatChanges(u32 battlerAtk, u32 battlerDef)
             switch (i)
             {
             case STAT_ATK:
-                if (HasMoveWithCategory(battlerAtk, BATTLE_CATEGORY_PHYSICAL))
-                    ADJUST_SCORE(1);
-                break;
+                return (HasMoveWithCategory(battlerAtk, BATTLE_CATEGORY_PHYSICAL));
             case STAT_SPATK:
-                if (HasMoveWithCategory(battlerAtk, BATTLE_CATEGORY_SPECIAL))
-                    ADJUST_SCORE(1);
-                break;
+                return (HasMoveWithCategory(battlerAtk, BATTLE_CATEGORY_SPECIAL));
             case STAT_ACC:
             case STAT_EVASION:
             case STAT_SPEED:
-                ADJUST_SCORE(1);
-                break;
+                return TRUE;
             case STAT_DEF:
             case STAT_SPDEF:
-                if (AI_THINKING_STRUCT->aiFlags[battlerAtk] & AI_FLAG_STALL)
-                    ADJUST_SCORE(1);
-                break;
+                return (AI_THINKING_STRUCT->aiFlags[battlerAtk] & AI_FLAG_STALL);
             }
         }
     }

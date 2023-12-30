@@ -8,7 +8,8 @@ SINGLE_BATTLE_TEST("Sheer Force boosts power, but removes secondary effects of m
 
     for (j = 1; j < MOVES_COUNT; j++)
     {
-        if (gBattleMoves[j].sheerForceBoost && j != MOVE_ORDER_UP && j != MOVE_AURA_WHEEL)
+        if (gBattleMoves[j].sheerForceBoost && j != MOVE_ORDER_UP && j != MOVE_AURA_WHEEL
+          && gBattleMoves[j].effect != EFFECT_PLACEHOLDER)
         {
             PARAMETRIZE { ability = ABILITY_ANGER_POINT; move = j; }
             PARAMETRIZE { ability = ABILITY_SHEER_FORCE; move = j; }
