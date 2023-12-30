@@ -926,6 +926,7 @@ static bool32 AI_IsMoveEffectInPlus(u32 battlerAtk, u32 battlerDef, u32 move, s3
         if (ShouldLowerStat(battlerDef, abilityDef, STAT_DEF) && noOfHitsToKo != 1)
             return TRUE;
         break;
+    case EFFECT_BULLDOZE:
     case EFFECT_SPEED_DOWN_HIT:
         if (ShouldLowerStat(battlerDef, abilityDef, STAT_SPEED) && noOfHitsToKo != 1)
             return TRUE;
