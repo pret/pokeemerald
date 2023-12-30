@@ -910,13 +910,11 @@ BattleScript_FirstChargingTurnMeteorBeam::
 	attackanimation
 	waitanimation
 	orword gHitMarker, HITMARKER_CHARGING
-	setmoveeffect MOVE_EFFECT_CHARGING | MOVE_EFFECT_AFFECTS_USER
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_CHARGING | MOVE_EFFECT_AFFECTS_USER
 	copybyte cMULTISTRING_CHOOSER, sTWOTURN_STRINGID
 	printfromtable gFirstTurnOfTwoStringIds
 	waitmessage B_WAIT_TIME_LONG
-	setmoveeffect MOVE_EFFECT_SP_ATK_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
-	seteffectsecondary
+	seteffectsecondary MOVE_EFFECT_SP_ATK_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
 	return
 
 BattleScript_EffectSkyDrop:
@@ -967,8 +965,7 @@ BattleScript_SkyDropChangedTarget:
 	goto BattleScript_MoveEnd
 
 BattleScript_SkyDropFlyingConfuseLock:
-	setmoveeffect MOVE_EFFECT_CONFUSION
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_CONFUSION
 BattleScript_SkyDropFlyingAlreadyConfused:
 	setmoveeffect MOVE_EFFECT_THRASH
 	clearstatusfromeffect BS_TARGET
@@ -1028,16 +1025,13 @@ BattleScript_FlingFailConsumeItem::
 	goto BattleScript_FailedFromAtkString
 
 BattleScript_FlingFlameOrb:
-	setmoveeffect MOVE_EFFECT_BURN | MOVE_EFFECT_CERTAIN
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_BURN
 	goto BattleScript_FlingEnd
 BattleScript_FlingFlinch:
-	setmoveeffect MOVE_EFFECT_FLINCH | MOVE_EFFECT_CERTAIN
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_FLINCH
 	goto BattleScript_FlingEnd
 BattleScript_FlingLightBall:
-	setmoveeffect MOVE_EFFECT_PARALYSIS | MOVE_EFFECT_CERTAIN
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_PARALYSIS
 	goto BattleScript_FlingEnd
 BattleScript_FlingMentalHerb:
 	curecertainstatuses BS_TARGET
@@ -1050,12 +1044,10 @@ BattleScript_FlingMentalHerb:
 	restoretarget
 	goto BattleScript_FlingEnd
 BattleScript_FlingPoisonBarb:
-	setmoveeffect MOVE_EFFECT_POISON | MOVE_EFFECT_CERTAIN
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_POISON
 	goto BattleScript_FlingEnd
 BattleScript_FlingToxicOrb:
-	setmoveeffect MOVE_EFFECT_TOXIC | MOVE_EFFECT_CERTAIN
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_TOXIC
 	goto BattleScript_FlingEnd
 BattleScript_FlingWhiteHerb:
 	tryresetnegativestatstages BS_TARGET
@@ -1173,8 +1165,7 @@ BattleScript_EffectNoRetreat:
 	waitanimation
 	call BattleScript_AllStatsUp
 	jumpifstatus2 BS_TARGET, STATUS2_ESCAPE_PREVENTION, BattleScript_MoveEnd
-	setmoveeffect MOVE_EFFECT_PREVENT_ESCAPE | MOVE_EFFECT_AFFECTS_USER
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_PREVENT_ESCAPE | MOVE_EFFECT_AFFECTS_USER
 	printstring STRINGID_CANTESCAPEDUETOUSEDMOVE
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
@@ -1195,8 +1186,7 @@ BattleScript_EffectHyperspaceFuryUnbound::
 	attackstring
 	pause B_WAIT_TIME_LONG
 	ppreduce
-	setmoveeffect MOVE_EFFECT_FEINT
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_FEINT
 	goto BattleScript_HitFromCritCalc
 
 BattleScript_ButHoopaCantUseIt:
@@ -1374,10 +1364,6 @@ BattleScript_JungleHealingTryRestoreAlly:
 	jumpifnoally BS_TARGET, BattleScript_MoveEnd
 	setallytonexttarget JungleHealing_RestoreTargetHealth
 	goto BattleScript_MoveEnd
-
-BattleScript_NoMoveEffect:
-	setmoveeffect 0
-	goto BattleScript_EffectHit
 
 BattleScript_EffectRelicSong:
 	call BattleScript_EffectHit_Ret
@@ -2119,8 +2105,7 @@ BattleScript_ToxicThreadPrintString::
 	printfromtable gStatDownStringIds
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_ToxicThreadTryPsn::
-	setmoveeffect MOVE_EFFECT_POISON
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_POISON
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectVenomDrench:
@@ -3145,8 +3130,7 @@ BattleScript_EffectSleep::
 	jumpifsafeguard BattleScript_SafeguardProtected
 	attackanimation
 	waitanimation
-	setmoveeffect MOVE_EFFECT_SLEEP
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_SLEEP
 	goto BattleScript_MoveEnd
 
 BattleScript_TerrainPreventsEnd2::
@@ -3702,8 +3686,7 @@ BattleScript_EffectToxic::
 	jumpifsafeguard BattleScript_SafeguardProtected
 	attackanimation
 	waitanimation
-	setmoveeffect MOVE_EFFECT_TOXIC
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_TOXIC
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
@@ -3813,8 +3796,7 @@ BattleScriptFirstChargingTurnAfterAttackString:
 	attackanimation
 	waitanimation
 	orword gHitMarker, HITMARKER_CHARGING
-	setmoveeffect MOVE_EFFECT_CHARGING | MOVE_EFFECT_AFFECTS_USER
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_CHARGING | MOVE_EFFECT_AFFECTS_USER
 	return
 
 BattleScript_EffectSuperFang::
@@ -3908,8 +3890,7 @@ BattleScript_EffectConfuse:
 	jumpifsafeguard BattleScript_SafeguardProtected
 	attackanimation
 	waitanimation
-	setmoveeffect MOVE_EFFECT_CONFUSION
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_CONFUSION
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
@@ -4032,8 +4013,7 @@ BattleScript_EffectPoison::
 	jumpifsafeguard BattleScript_SafeguardProtected
 	attackanimation
 	waitanimation
-	setmoveeffect MOVE_EFFECT_POISON
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_POISON
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
@@ -4062,8 +4042,7 @@ BattleScript_BattleScript_EffectParalyzeNoTypeCalc:
 	bichalfword gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	attackanimation
 	waitanimation
-	setmoveeffect MOVE_EFFECT_PARALYSIS
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_PARALYSIS
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
@@ -4195,9 +4174,7 @@ BattleScript_MoveUsedMustRecharge::
 BattleScript_EffectRage::
 	attackcanceler
 	accuracycheck BattleScript_RageMiss, ACC_CURR_MOVE
-	setmoveeffect MOVE_EFFECT_RAGE
-	seteffectprimary
-	setmoveeffect 0
+	seteffectprimary MOVE_EFFECT_RAGE
 	goto BattleScript_HitFromAtkString
 BattleScript_RageMiss::
 	setmoveeffect MOVE_EFFECT_RAGE
@@ -4266,8 +4243,7 @@ BattleScript_EffectCelebrate:
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 BattleScript_EffectHappyHour:
-	setmoveeffect MOVE_EFFECT_HAPPY_HOUR
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_HAPPY_HOUR
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectDisable::
@@ -4520,8 +4496,7 @@ BattleScript_EffectMeanLook::
 .endif
 	attackanimation
 	waitanimation
-	setmoveeffect MOVE_EFFECT_PREVENT_ESCAPE
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_PREVENT_ESCAPE
 	printstring STRINGID_TARGETCANTESCAPENOW
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
@@ -4538,8 +4513,7 @@ BattleScript_EffectNightmare::
 BattleScript_NightmareWorked::
 	attackanimation
 	waitanimation
-	setmoveeffect MOVE_EFFECT_NIGHTMARE
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_NIGHTMARE
 	printstring STRINGID_PKMNFELLINTONIGHTMARE
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
@@ -4714,8 +4688,7 @@ BattleScript_EffectSwagger::
 BattleScript_SwaggerTryConfuse:
 	jumpifability BS_TARGET, ABILITY_OWN_TEMPO, BattleScript_OwnTempoPrevents
 	jumpifsafeguard BattleScript_SafeguardProtected
-	setmoveeffect MOVE_EFFECT_CONFUSION
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_CONFUSION
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectFuryCutter:
@@ -5015,8 +4988,7 @@ BattleScript_SolarBeamDecideTurn::
 	goto BattleScript_TwoTurnMovesSecondTurn
 BattleScript_SolarBeamOnFirstTurn::
 	orword gHitMarker, HITMARKER_CHARGING
-	setmoveeffect MOVE_EFFECT_CHARGING | MOVE_EFFECT_AFFECTS_USER
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_CHARGING | MOVE_EFFECT_AFFECTS_USER
 	ppreduce
 	goto BattleScript_TwoTurnMovesSecondTurn
 
@@ -5332,8 +5304,7 @@ BattleScript_EffectFlatter::
 BattleScript_FlatterTryConfuse::
 	jumpifability BS_TARGET, ABILITY_OWN_TEMPO, BattleScript_OwnTempoPrevents
 	jumpifsafeguard BattleScript_SafeguardProtected
-	setmoveeffect MOVE_EFFECT_CONFUSION
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_CONFUSION
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectWillOWisp::
@@ -5356,8 +5327,7 @@ BattleScript_EffectWillOWisp::
 	jumpifsafeguard BattleScript_SafeguardProtected
 	attackanimation
 	waitanimation
-	setmoveeffect MOVE_EFFECT_BURN
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_BURN
 	goto BattleScript_MoveEnd
 
 BattleScript_WaterVeilPrevents::
@@ -6866,8 +6836,7 @@ BattleScript_GulpMissileNoDmgGorging:
 	playanimation BS_TARGET, B_ANIM_FORM_CHANGE
 	waitanimation
 	swapattackerwithtarget
-	setmoveeffect MOVE_EFFECT_PARALYSIS
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_PARALYSIS
 	swapattackerwithtarget
 	return
 BattleScript_GulpMissileNoSecondEffectGorging:
@@ -8976,7 +8945,6 @@ BattleScript_KingsShieldEffect::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
 	bichalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
 	seteffectsecondary
-	setmoveeffect 0
 	copybyte sBATTLER, gBattlerTarget
 	copybyte gBattlerTarget, gBattlerAttacker
 	copybyte gBattlerAttacker, sBATTLER
@@ -8987,7 +8955,6 @@ BattleScript_BanefulBunkerEffect::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_STATUS_ABILITY_EFFECT | HITMARKER_PASSIVE_DAMAGE
 	bichalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
 	seteffectsecondary
-	setmoveeffect 0
 	orhalfword gMoveResultFlags, MOVE_RESULT_MISSED
 	return
 
@@ -9095,8 +9062,7 @@ BattleScript_TruantLoafingAround::
 BattleScript_IgnoresAndFallsAsleep::
 	printstring STRINGID_PKMNBEGANTONAP
 	waitmessage B_WAIT_TIME_LONG
-	setmoveeffect MOVE_EFFECT_SLEEP | MOVE_EFFECT_AFFECTS_USER
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_SLEEP | MOVE_EFFECT_AFFECTS_USER
 	moveendto MOVEEND_NEXT_TARGET
 	end
 
@@ -9393,8 +9359,7 @@ BattleScript_BerryConfuseHealEnd2_Anim:
 	datahpupdate BS_SCRIPTING
 	printstring STRINGID_FORXCOMMAYZ
 	waitmessage B_WAIT_TIME_LONG
-	setmoveeffect MOVE_EFFECT_CONFUSION | MOVE_EFFECT_AFFECTS_USER
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_CONFUSION | MOVE_EFFECT_AFFECTS_USER
 	removeitem BS_SCRIPTING
 	end2
 
@@ -9412,8 +9377,7 @@ BattleScript_BerryConfuseHealRet_Anim:
 	datahpupdate BS_SCRIPTING
 	printstring STRINGID_FORXCOMMAYZ
 	waitmessage B_WAIT_TIME_LONG
-	setmoveeffect MOVE_EFFECT_CONFUSION | MOVE_EFFECT_CERTAIN
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_CONFUSION | MOVE_EFFECT_CERTAIN
 	removeitem BS_TARGET
 	return
 
@@ -10364,8 +10328,7 @@ BattleScript_BerserkGeneRet_Anim:
 BattleScript_BerserkGeneRet_TryConfuse:
 	jumpifability BS_SCRIPTING, ABILITY_OWN_TEMPO, BattleScript_BerserkGeneRet_OwnTempoPrevents
 	jumpifsafeguard BattleScript_BerserkGeneRet_SafeguardProtected
-	setmoveeffect MOVE_EFFECT_CONFUSION
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_CONFUSION
 	goto BattleScript_BerserkGeneRet_End
 BattleScript_BerserkGeneRet_SafeguardProtected::
 	pause B_WAIT_TIME_SHORT
