@@ -27,7 +27,8 @@ static const struct TrainerMon sTestParty1[] =
         .lvl = 67,
         .moves = {MOVE_AIR_SLASH, MOVE_BARRIER, MOVE_SOLAR_BEAM, MOVE_EXPLOSION},
         .nature = TRAINER_PARTY_NATURE(NATURE_HASTY),
-        .nickname = COMPOUND_STRING("Bubbles")
+        .nickname = COMPOUND_STRING("Bubbles"),
+        .dynamaxLevel = 5,
     },
     {
         .species = SPECIES_WOBBUFFET,
@@ -109,6 +110,9 @@ TEST("CreateNPCTrainerPartyForTrainer generates customized Pokémon")
 
     EXPECT(GetMonGender(&testParty[0]) == MON_FEMALE);
     EXPECT(GetNature(&testParty[0]) == NATURE_HASTY);
+
+    EXPECT_EQ(GetMonData(&testParty[0], MON_DATA_DYNAMAX_LEVEL), 5);
+    EXPECT_EQ(GetMonData(&testParty[1], MON_DATA_DYNAMAX_LEVEL), 0);
 
     Free(testParty);
 }

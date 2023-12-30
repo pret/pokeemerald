@@ -6127,7 +6127,9 @@ static const union AnimCmd sAnim_Regigigas_1[] =
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
+#endif //P_FAMILY_REGIGIGAS
 
+#if P_FAMILY_GIRATINA
 static const union AnimCmd sAnim_GiratinaAltered_1[] =
 {
     ANIMCMD_FRAME(0, 12),
@@ -6145,7 +6147,7 @@ static const union AnimCmd sAnim_GiratinaOrigin_1[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_REGIGIGAS
+#endif //P_FAMILY_GIRATINA
 
 #if P_FAMILY_CRESSELIA
 static const union AnimCmd sAnim_Cresselia_1[] =

@@ -34,6 +34,8 @@ TEST("Form change tables contain only forms in the form species ID table")
 
     for (i = 0; formChangeTable[i].method != FORM_CHANGE_TERMINATOR; i++)
     {
+        if (formChangeTable[i].targetSpecies == SPECIES_NONE)
+            continue;
         for (j = 0; formSpeciesIdTable[j] != FORM_SPECIES_END; j++)
         {
             if (formChangeTable[i].targetSpecies == formSpeciesIdTable[j])

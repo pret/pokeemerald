@@ -8,7 +8,7 @@
 
 // The purpose of this struct is for outside applications to be
 // able to access parts of the ROM or its save file, like a public API.
-// In vanilla, it was used by Colosseum and XD to access pokemon graphics.
+// In vanilla, it was used by Colosseum and XD to access Pokémon graphics.
 //
 // If this struct is rearranged in any way, it defeats the purpose of
 // having it at all. Applications like PKHex or streaming HUDs may find
@@ -151,8 +151,8 @@ static const struct GFRomHeader sGFRomHeader = {
     .externalEventDataOffset = offsetof(struct SaveBlock1, externalEventData),
     .unk18 = 0x00000000,
     .speciesInfo = gSpeciesInfo,
-    .abilityNames = gAbilityNames,
-    .abilityDescriptions = gAbilityDescriptionPointers,
+    //.abilityNames = gAbilityNames, //handled in gAbilities
+    //.abilityDescriptions = gAbilityDescriptionPointers, //handled in gAbilities
     .items = gItems,
     .moves = gBattleMoves,
     .ballGfx = gBallSpriteSheets,

@@ -64,3 +64,5 @@ SINGLE_BATTLE_TEST("Max Elixir restores the PP of all of a battler's moves fully
         EXPECT_EQ(player->pp[3], 40);
     }
 }
+
+TO_DO_BATTLE_TEST("Ether won't work if the selected move has all its PP")

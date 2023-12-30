@@ -1,5 +1,5 @@
-#define SQUARE(n)(n * n)
-#define CUBE(n)(n * n * n)
+#define SQUARE(n)((n) * (n))
+#define CUBE(n)((n) * (n) * (n))
 
 #define EXP_SLOW(n)((5 * CUBE(n)) / 4) // (5 * (n)^3) / 4
 #define EXP_FAST(n)((4 * CUBE(n)) / 5) // (4 * (n)^3) / 5
