@@ -3860,12 +3860,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_RAPID_SPIN] =
     {
-        #if B_UPDATED_MOVE_DATA >= GEN_8
-            .power = 50,
-        #else
-            .power = 20,
-        #endif
-        .effect = EFFECT_RAPID_SPIN,
+        .effect = EFFECT_HIT,
+        .power = B_UPDATED_MOVE_DATA >= GEN_8 ? 50 : 20,
         .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 40,
@@ -3873,6 +3869,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
+        ADDITIONAL_EFFECTS(
+            PRIMARY_EFFECT_SELF(MOVE_EFFECT_RAPIDSPIN)
+            #if B_SPEED_BUFFING_RAPID_SPIN >= GEN_8
+                , SECONDARY_EFFECT_SELF(MOVE_EFFECT_SPD_PLUS_1, 100)
+            #endif
+        ),
     },
 
     [MOVE_SWEET_SCENT] =

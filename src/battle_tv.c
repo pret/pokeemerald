@@ -191,7 +191,6 @@ static const u16 sPoints_MoveEffect[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_MAGNITUDE]                  = 1,
     [EFFECT_BATON_PASS]                 = 7,
     [EFFECT_PURSUIT]                    = 2,
-    [EFFECT_RAPID_SPIN]                 = 2,
     [EFFECT_ARG_FIXED_DAMAGE]           = 1,
     [EFFECT_MORNING_SUN]                = 4,
     [EFFECT_SYNTHESIS]                  = 4,
@@ -1276,6 +1275,8 @@ static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3)
         // various cases add/remove points
         if (gBattleMoves[arg2].recoil > 0)
             baseFromEffect++; // recoil moves
+        if (MoveHasMoveEffect(arg2, MOVE_EFFECT_RAPIDSPIN, FALSE))
+            baseFromEffect++;
         if (MoveHasMoveEffect(arg2, MOVE_EFFECT_SP_ATK_TWO_DOWN, FALSE)
             || MoveHasMoveEffect(arg2, MOVE_EFFECT_ATK_DEF_DOWN, FALSE))
             baseFromEffect += 2; // Overheat etc & Superpower

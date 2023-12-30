@@ -110,7 +110,7 @@
 #define EFFECT_MAGNITUDE                    106
 #define EFFECT_BATON_PASS                   107
 #define EFFECT_PURSUIT                      108
-#define EFFECT_RAPID_SPIN                   109
+#define EFFECT_UNUSED_109                   109
 #define EFFECT_UNUSED_110                   110
 #define EFFECT_CAPTIVATE                    111
 #define EFFECT_MORNING_SUN                  112
