@@ -229,7 +229,6 @@ static void StorePokemonInDaycare(struct Pokemon *mon, struct DaycareMon *daycar
     }
 
     daycareMon->mon = mon->box;
-    BoxMonRestorePP(&daycareMon->mon);
     daycareMon->steps = 0;
     ZeroMonData(mon);
     CompactPartySlots();

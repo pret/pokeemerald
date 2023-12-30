@@ -2990,21 +2990,17 @@ static void FillPartnerParty(u16 trainerId)
             else
                 otID = ((firstIdPart % 72) * 1000) + ((secondIdPart % 23) * 10) + (thirdIdPart % 37) % 65536;
 
-            do
-            {
-                personality = Random32();
-            } while (IsShinyOtIdPersonality(otID, personality));
-
+            personality = Random32();
             if (partyData[i].gender == TRAINER_MON_MALE)
                 personality = (personality & 0xFFFFFF00) | GeneratePersonalityForGender(MON_MALE, partyData[i].species);
             else if (partyData[i].gender == TRAINER_MON_FEMALE)
                 personality = (personality & 0xFFFFFF00) | GeneratePersonalityForGender(MON_FEMALE, partyData[i].species);
             if (partyData[i].nature != 0)
                 ModifyPersonalityForNature(&personality, partyData[i].nature - 1);
-            if (partyData[i].isShiny)
-                otID ^= GET_SHINY_VALUE(otID, personality) << 16;
 
             CreateMon(&gPlayerParty[i + 3], partyData[i].species, partyData[i].lvl, 0, TRUE, personality, OT_ID_PRESET, otID);
+            j = partyData[i].isShiny;
+            SetMonData(&gPlayerParty[i + 3], MON_DATA_IS_SHINY, &j);
             SetMonData(&gPlayerParty[i + 3], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
             CustomTrainerPartyAssignMoves(&gPlayerParty[i + 3], &partyData[i]);
 

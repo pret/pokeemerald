@@ -1956,7 +1956,6 @@ void AlertTVThatPlayerPlayedRoulette(u16 nCoinsSpent)
 static void SecretBaseVisit_CalculateDecorationData(TVShow *show)
 {
     u8 i, j;
-    u16 k;
     u8 n;
     u8 decoration;
 
@@ -2002,12 +2001,7 @@ static void SecretBaseVisit_CalculateDecorationData(TVShow *show)
         break;
     default:
         // More than 1 decoration, randomize the full list
-        for (k = 0; k < n * n; k++)
-        {
-            decoration = Random() % n;
-            j = Random() % n;
-            SWAP(sTV_DecorationsBuffer[decoration], sTV_DecorationsBuffer[j], i);
-        }
+        Shuffle(sTV_DecorationsBuffer, n, sizeof(sTV_DecorationsBuffer[0]));
 
         // Pick the first decorations in the randomized list to talk about on the show
         for (i = 0; i < show->secretBaseVisit.numDecorations; i++)

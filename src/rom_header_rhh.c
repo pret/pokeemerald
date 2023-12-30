@@ -1,5 +1,8 @@
 #include "global.h"
+#include "constants/abilities.h"
 #include "constants/expansion.h"
+#include "constants/moves.h"
+#include "constants/species.h"
 
 // Similar to the GF ROM header, this struct allows external programs to
 // detect details about Expansion.
@@ -14,6 +17,10 @@ struct RHHRomHeader
     /*0x07*/ u8 expansionVersionMinor;
     /*0x08*/ u8 expansionVersionPatch;
     /*0x09*/ u8 expansionVersionFlags;
+    /*0x0C*/ u32 movesCount;
+    /*0x10*/ u32 numSpecies;
+    /*0x14*/ u32 abilitiesCount;
+    /*0x18*/ const struct Ability *abilities;
 };
 
 static const struct RHHRomHeader sRHHRomHeader =
@@ -23,4 +30,8 @@ static const struct RHHRomHeader sRHHRomHeader =
     .expansionVersionMinor = EXPANSION_VERSION_MINOR,
     .expansionVersionPatch = EXPANSION_VERSION_PATCH,
     .expansionVersionFlags = (EXPANSION_TAGGED_RELEASE << 0),
+    .movesCount = MOVES_COUNT,
+    .numSpecies = NUM_SPECIES,
+    .abilitiesCount = ABILITIES_COUNT,
+    .abilities = gAbilities,
 };

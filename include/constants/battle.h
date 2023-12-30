@@ -104,7 +104,10 @@
 #define B_OUTCOME_LINK_BATTLE_RAN      (1 << 7) // 128
 
 // Non-volatile status conditions
-// These persist remain outside of battle and after switching out
+// These remain outside of battle and after switching out.
+// If a new STATUS1 is added here, it should also be added to
+// sCompressedStatuses in src/pokemon.c or else it will be lost outside
+// of battle.
 #define STATUS1_NONE             0
 #define STATUS1_SLEEP            (1 << 0 | 1 << 1 | 1 << 2) // First 3 bits (Number of turns to sleep)
 #define STATUS1_SLEEP_TURN(num)  ((num) << 0) // Just for readability (or if rearranging statuses)

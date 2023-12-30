@@ -226,16 +226,16 @@ static u16 GetPrevBall(u16 ballId)
     return gBagPockets[BALLS_POCKET].itemSlots[i].itemId;
 }
 
-static u16 GetNextBall(u16 ballId)
+static u32 GetNextBall(u32 ballId)
 {
-    u16 ballNext = 0;
+    u32 ballNext = ITEM_NONE;
     s32 i;
     CompactItemsInBagPocket(&gBagPockets[BALLS_POCKET]);
-    for (i = 0; i < gBagPockets[BALLS_POCKET].capacity; i++)
+    for (i = 1; i < gBagPockets[BALLS_POCKET].capacity; i++)
     {
-        if (ballId == gBagPockets[BALLS_POCKET].itemSlots[i].itemId)
+        if (ballId == gBagPockets[BALLS_POCKET].itemSlots[i-1].itemId)
         {
-            ballNext = gBagPockets[BALLS_POCKET].itemSlots[i+1].itemId;
+            ballNext = gBagPockets[BALLS_POCKET].itemSlots[i].itemId;
             break;
         }
     }
@@ -1730,7 +1730,7 @@ static void MoveSelectionDisplayMoveType(u32 battler)
 {
     u8 *txtPtr;
     u8 type;
-    u32 itemId;
+    u32 speciesId;
     struct Pokemon *mon;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
 
@@ -1742,10 +1742,12 @@ static void MoveSelectionDisplayMoveType(u32 battler)
     if (moveInfo->moves[gMoveSelectionCursor[battler]] == MOVE_IVY_CUDGEL)
     {
         mon = &GetSideParty(GetBattlerSide(battler))[gBattlerPartyIndexes[battler]];
-        itemId = GetMonData(mon, MON_DATA_HELD_ITEM);
+        speciesId = GetMonData(mon, MON_DATA_SPECIES);
 
-        if (ItemId_GetHoldEffect(itemId) == HOLD_EFFECT_MASK)
-            type = ItemId_GetSecondaryId(itemId);
+        if (speciesId == SPECIES_OGERPON_WELLSPRING_MASK || speciesId == SPECIES_OGERPON_WELLSPRING_MASK_TERA
+            || speciesId == SPECIES_OGERPON_HEARTHFLAME_MASK || speciesId == SPECIES_OGERPON_HEARTHFLAME_MASK_TERA
+            || speciesId == SPECIES_OGERPON_CORNERSTONE_MASK || speciesId == SPECIES_OGERPON_CORNERSTONE_MASK_TERA)
+            type = gBattleMons[battler].type2;
         else
             type = gBattleMoves[MOVE_IVY_CUDGEL].type;
     }

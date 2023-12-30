@@ -345,7 +345,9 @@
 #define EFFECT_RAGING_BULL                  341
 #define EFFECT_RAGE_FIST                    342
 #define EFFECT_DOODLE                       343
+#define EFFECT_FILLET_AWAY                  344
+#define EFFECT_IVY_CUDGEL                   345
 
-#define NUM_BATTLE_MOVE_EFFECTS             344
+#define NUM_BATTLE_MOVE_EFFECTS             346
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

@@ -187,3 +187,37 @@ SINGLE_BATTLE_TEST("Contrary raises a stat after using a move which would normal
         EXPECT_MUL_EQ(results[1].damage, Q_4_12(2.125), results[0].damage);
     }
 }
+
+SINGLE_BATTLE_TEST("Contrary lowers a stat after using a move which would normally raise it: Belly Drum", s16 damageBefore, s16 damageAfter)
+{
+    u32 ability;
+    PARAMETRIZE { ability = ABILITY_CONTRARY; }
+    PARAMETRIZE { ability = ABILITY_TANGLED_FEET; }
+    GIVEN {
+        ASSUME(gBattleMoves[MOVE_BELLY_DRUM].effect == EFFECT_BELLY_DRUM);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_SPINDA) { Ability(ability); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(opponent, MOVE_BELLY_DRUM); }
+        TURN { MOVE(opponent, MOVE_TACKLE); }
+    } SCENE {
+        MESSAGE("Foe Spinda used Tackle!");
+        HP_BAR(player, captureDamage: &results[i].damageBefore);
+
+        if (ability == ABILITY_CONTRARY) {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+            MESSAGE("Foe Spinda cut its own HP and maximized ATTACK!"); //Message stays the same
+        }
+        else {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+            MESSAGE("Foe Spinda cut its own HP and maximized ATTACK!");
+        }
+
+        HP_BAR(player, captureDamage: &results[i].damageAfter);
+    }
+    FINALLY {
+        EXPECT_MUL_EQ(results[0].damageBefore, UQ_4_12(0.25), results[0].damageAfter);
+        EXPECT_MUL_EQ(results[1].damageBefore, UQ_4_12(4.0), results[1].damageAfter);
+    }
+}

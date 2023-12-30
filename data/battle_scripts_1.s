@@ -366,6 +366,42 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectBrickBreak              @ EFFECT_RAGING_BULL
 	.4byte BattleScript_EffectHit                     @ EFFECT_RAGE_FIST
 	.4byte BattleScript_EffectDoodle                  @ EFFECT_DOODLE
+	.4byte BattleScript_EffectFilletAway              @ EFFECT_FILLET_AWAY
+	.4byte BattleScript_EffectHit                     @ EFFECT_IVY_CUDGEL
+
+BattleScript_EffectFilletAway:
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_ATK, MAX_STAT_STAGE, BattleScript_FilletAwayTryAttack
+	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPATK, MAX_STAT_STAGE, BattleScript_FilletAwayTryAttack
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPEED, MAX_STAT_STAGE, BattleScript_ButItFailed
+BattleScript_FilletAwayTryAttack::
+	halvehp BattleScript_ButItFailed
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	attackanimation
+	waitanimation
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_ATTACKER, BIT_ATK | BIT_SPATK | BIT_SPEED, STAT_CHANGE_BY_TWO
+	setstatchanger STAT_ATK, 2, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_FilletAwayTrySpAtk
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_FilletAwayTrySpAtk::
+	setstatchanger STAT_SPATK, 2, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_FilletAwayTrySpeed
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_FilletAwayTrySpeed::
+	setstatchanger STAT_SPEED, 2, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_FilletAwayEnd
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_FilletAwayEnd::
+	bichalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectDoodle:
 	attackcanceler
@@ -1042,15 +1078,8 @@ BattleScript_EffectShellSideArm:
 	goto BattleScript_EffectHit
 
 BattleScript_EffectPhotonGeyser:
-	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	attackstring
-	ppreduce
-	critcalc
-	damagecalc
-	adjustdamage
-	photongeysercheck BS_ATTACKER
-	goto BattleScript_HitFromAtkAnimation
+	setphotongeysercategory
+	goto BattleScript_EffectHit
 
 BattleScript_EffectAuraWheel: @ Aura Wheel can only be used by Morpeko
 	jumpifspecies BS_ATTACKER, SPECIES_MORPEKO_FULL_BELLY, BattleScript_EffectHit
@@ -1447,14 +1476,27 @@ BattleScript_StrengthSapTryHp:
 	attackanimation
 	waitanimation
 BattleScript_StrengthSapHp:
+	jumpifability BS_TARGET, ABILITY_LIQUID_OOZE, BattleScript_StrengthSapManipulateDmg
 	jumpifstatus3 BS_ATTACKER, STATUS3_HEAL_BLOCK, BattleScript_MoveEnd
 	jumpiffullhp BS_ATTACKER, BattleScript_MoveEnd
+BattleScript_StrengthSapManipulateDmg:
 	manipulatedamage DMG_BIG_ROOT
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	jumpifability BS_TARGET, ABILITY_LIQUID_OOZE, BattleScript_StrengthSapLiquidOoze
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	printstring STRINGID_PKMNENERGYDRAINED
 	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+BattleScript_StrengthSapLiquidOoze:
+	call BattleScript_AbilityPopUpTarget
+	manipulatedamage DMG_CHANGE_SIGN
+	setbyte cMULTISTRING_CHOOSER, B_MSG_ABSORB_OOZE
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	printfromtable gAbsorbDrainStringIds
+	waitmessage B_WAIT_TIME_LONG
+	tryfaintmon BS_ATTACKER
 	goto BattleScript_MoveEnd
 BattleScript_StrengthSapMustLower:
 	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_MoveEnd
@@ -4877,12 +4919,16 @@ BattleScript_EffectBellyDrum::
 	attackcanceler
 	attackstring
 	ppreduce
-	maxattackhalvehp BattleScript_ButItFailed
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_ATK, MAX_STAT_STAGE, BattleScript_ButItFailed
+	halvehp BattleScript_ButItFailed
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	attackanimation
 	waitanimation
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
+	playstatchangeanimation BS_ATTACKER, BIT_ATK, STAT_CHANGE_BY_TWO
+	setstatchanger STAT_ATK, MAX_STAT_STAGE, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_MoveEnd
 	printstring STRINGID_PKMNCUTHPMAXEDATTACK
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
@@ -7542,6 +7588,7 @@ BattleScript_IllusionOff::
 	return
 
 BattleScript_CottonDownActivates::
+	copybyte sSAVED_BATTLER, gBattlerAttacker
 	showabilitypopup BS_TARGET
 	pause B_WAIT_TIME_LONG
 	destroyabilitypopup
@@ -7566,6 +7613,7 @@ BattleScript_CottonDownLoopIncrement:
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_CottonDownLoop
 BattleScript_CottonDownReturn:
 	swapattackerwithtarget
+	copybyte gBattlerAttacker, sSAVED_BATTLER
 	return
 
 BattleScript_AnticipationActivates::

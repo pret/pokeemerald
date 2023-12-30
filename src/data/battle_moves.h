@@ -12,6 +12,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .metronomeBanned = TRUE,
         .mirrorMoveBanned = TRUE,
+        .sketchBanned = TRUE,
     },
 
     [MOVE_POUND] =
@@ -2780,6 +2781,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .instructBanned = TRUE,
         .encoreBanned = TRUE,
         .assistBanned = TRUE,
+        .sketchBanned = TRUE,
     },
 
     [MOVE_SKETCH] =
@@ -2803,6 +2805,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .instructBanned = TRUE,
         .encoreBanned = TRUE,
         .assistBanned = TRUE,
+        .sketchBanned = TRUE,
     },
 
     [MOVE_TRIPLE_KICK] =
@@ -2996,6 +2999,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
+        .windMove = TRUE,
     },
 
     [MOVE_COTTON_SPORE] =
@@ -4983,7 +4987,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
     [MOVE_LUSTER_PURGE] =
     {
         .effect = EFFECT_HIT,
-        .power = 70,
+        .power = (B_UPDATED_MOVE_DATA >= GEN_9) ? 95 : 70,
         .type = TYPE_PSYCHIC,
         .accuracy = 100,
         .pp = 5,
@@ -4999,7 +5003,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
     [MOVE_MIST_BALL] =
     {
         .effect = EFFECT_HIT,
-        .power = 70,
+        .power = (B_UPDATED_MOVE_DATA >= GEN_9) ? 95 : 70,
         .type = TYPE_PSYCHIC,
         .accuracy = 100,
         .pp = 5,
@@ -7734,6 +7738,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_STATUS,
         .zMove = { .effect = Z_EFFECT_RESET_STATS },
         .magicCoatAffected = TRUE,
+        .sketchBanned = (B_SKETCH_BANS >= GEN_9),
     },
 
     [MOVE_SEED_FLARE] =
@@ -10273,6 +10278,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .ignoresProtect = TRUE,
         .ignoresSubstitute = TRUE,
         .metronomeBanned = TRUE,
+        .sketchBanned = (B_SKETCH_BANS >= GEN_9),
         .additionalEffects = ADDITIONAL_EFFECTS(
             // Feint move effect handled in script as it goes before animation
             PRIMARY_EFFECT_SELF(MOVE_EFFECT_DEF_MINUS_1)
@@ -11116,7 +11122,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .type = TYPE_PSYCHIC,
         .accuracy = 100,
         .pp = 5,
-        .target = MOVE_TARGET_FOES_AND_ALLY,
+        .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .ignoresTargetAbility = TRUE,
@@ -13028,6 +13034,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .ignoresProtect = TRUE,
         .mirrorMoveBanned = TRUE,
         .metronomeBanned = TRUE,
+        .healBlockBanned = TRUE,
+        .sketchBanned = (B_SKETCH_BANS >= GEN_9),
     },
 
     [MOVE_SALT_CURE] =
@@ -13093,7 +13101,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_FILLET_AWAY] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_FILLET_AWAY
+        .effect = EFFECT_FILLET_AWAY,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
@@ -13429,7 +13437,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .category = BATTLE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         .slicingMove = TRUE,
-        .healBlockBanned = B_EXTRAPOLATED_MOVE_FLAGS,
+        .healBlockBanned = TRUE,
     },
 
     [MOVE_DOUBLE_SHOCK] =
@@ -13512,6 +13520,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .instructBanned = TRUE,
         .encoreBanned = TRUE,
         .assistBanned = TRUE,
+        .sketchBanned = (B_SKETCH_BANS >= GEN_9),
         .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_BURN, 30)
         ),
@@ -13537,6 +13546,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .instructBanned = TRUE,
         .encoreBanned = TRUE,
         .assistBanned = TRUE,
+        .sketchBanned = (B_SKETCH_BANS >= GEN_9),
         .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_SLEEP, 10)
         ),
@@ -13562,6 +13572,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .instructBanned = TRUE,
         .encoreBanned = TRUE,
         .assistBanned = TRUE,
+        .sketchBanned = (B_SKETCH_BANS >= GEN_9),
         .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_POISON, 30)
         ),
@@ -13587,6 +13598,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .instructBanned = TRUE,
         .encoreBanned = TRUE,
         .assistBanned = TRUE,
+        .sketchBanned = (B_SKETCH_BANS >= GEN_9),
         .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_PARALYSIS, 30)
         ),
@@ -13612,6 +13624,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .instructBanned = TRUE,
         .encoreBanned = TRUE,
         .assistBanned = TRUE,
+        .sketchBanned = (B_SKETCH_BANS >= GEN_9),
         .additionalEffects = ADDITIONAL_EFFECTS(
             SECONDARY_EFFECT(MOVE_EFFECT_CONFUSION, 30)
         ),
@@ -13694,7 +13707,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_IVY_CUDGEL] =
     {
-        .effect = EFFECT_CHANGE_TYPE_ON_ITEM,
+        .effect = EFFECT_IVY_CUDGEL,
         .power = 100,
         .type = TYPE_GRASS,
         .accuracy = 100,
@@ -13703,8 +13716,227 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_PHYSICAL,
-        .argument = HOLD_EFFECT_MASK,
         .metronomeBanned = TRUE,
+    },
+
+    [MOVE_ELECTRO_SHOT] =
+    {
+        .effect = EFFECT_PLACEHOLDER, //EFFECT_ELECTRO_SHOT
+        .power = 130,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = BATTLE_CATEGORY_SPECIAL,
+        //.sheerForceBoost = TRUE, (uncomment when effect is implemented, otherwise it breaks the Sheer Force Test)
+    },
+
+    [MOVE_TERA_STARSTORM] =
+    {
+        .effect = EFFECT_PLACEHOLDER, //EFFECT_TERA_STARSTORM
+        .power = 120,
+        .type = TYPE_NORMAL, // Stellar type if used by Terapagos-Stellar
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED, // MOVE_TARGET_BOTH if used by Terapagos-Stellar
+        .priority = 0,
+        .category = BATTLE_CATEGORY_SPECIAL,
+        .assistBanned = TRUE,
+        .copycatBanned = TRUE,
+        .mimicBanned = TRUE,
+        .sketchBanned = (B_SKETCH_BANS >= GEN_9),
+    },
+
+    [MOVE_FICKLE_BEAM] =
+    {
+        .effect = EFFECT_PLACEHOLDER, //EFFECT_FICKLE_BEAM
+        .power = 80,
+        .type = TYPE_DRAGON,
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = BATTLE_CATEGORY_SPECIAL,
+    },
+
+    [MOVE_BURNING_BULWARK] =
+    {
+        .effect = EFFECT_PROTECT, // NEEDS ACTUAL PROTECT SIDE EFFECT
+        .power = 0,
+        .type = TYPE_FIRE,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
+        .priority = 4,
+        .category = BATTLE_CATEGORY_STATUS,
+        .zMove = { .effect = Z_EFFECT_RESET_STATS },
+        .protectionMove = TRUE,
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .metronomeBanned = TRUE,
+        .copycatBanned = TRUE,
+        .assistBanned = TRUE,
+    },
+
+    [MOVE_THUNDERCLAP] =
+    {
+        .effect = EFFECT_SUCKER_PUNCH,
+        .power = 70,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 1,
+        .category = BATTLE_CATEGORY_SPECIAL,
+    },
+
+    [MOVE_MIGHTY_CLEAVE] =
+    {
+        .effect = EFFECT_FEINT,
+        .power = 95,
+        .type = TYPE_ROCK,
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = BATTLE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .slicingMove = TRUE,
+    },
+
+    [MOVE_TACHYON_CUTTER] =
+    {
+        .effect = EFFECT_HIT,
+        .power = 50,
+        .type = TYPE_STEEL,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = BATTLE_CATEGORY_SPECIAL,
+        .strikeCount = 2,
+        .slicingMove = TRUE,
+    },
+
+    [MOVE_HARD_PRESS] =
+    {
+        .effect = EFFECT_WRING_OUT,
+        .power = 1,
+        .type = TYPE_STEEL,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = BATTLE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+    },
+
+    [MOVE_DRAGON_CHEER] =
+    {
+        .effect = EFFECT_PLACEHOLDER, //EFFECT_DRAGON_CHEER
+        .power = 0,
+        .type = TYPE_DRAGON,
+        .accuracy = 0,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_ALLY,
+        .priority = 0,
+        .category = BATTLE_CATEGORY_STATUS,
+        .ignoresSubstitute = TRUE,
+    },
+
+    [MOVE_ALLURING_VOICE] =
+    {
+        .effect = EFFECT_PLACEHOLDER, //EFFECT_ALLURING_VOICE
+        .power = 80,
+        .type = TYPE_FAIRY,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = BATTLE_CATEGORY_SPECIAL,
+        .soundMove = TRUE,
+        .ignoresSubstitute = TRUE,
+    },
+
+    [MOVE_TEMPER_FLARE] =
+    {
+        .effect = EFFECT_STOMPING_TANTRUM,
+        .power = 75,
+        .type = TYPE_FIRE,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = BATTLE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+    },
+
+    [MOVE_SUPERCELL_SLAM] =
+    {
+        .effect = EFFECT_RECOIL_IF_MISS,
+        .power = 100,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 95,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = BATTLE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+    },
+
+    [MOVE_PSYCHIC_NOISE] =
+    {
+        .effect = EFFECT_PLACEHOLDER, //EFFECT_PSYCHIC_NOISE
+        .power = 75,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = BATTLE_CATEGORY_SPECIAL,
+        .soundMove = TRUE,
+        .ignoresSubstitute = TRUE,
+    },
+
+    [MOVE_UPPER_HAND] =
+    {
+        .effect = EFFECT_PLACEHOLDER, //EFFECT_UPPER_HAND
+        .power = 65,
+        .type = TYPE_FIGHTING,
+        .accuracy = 100,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 3,
+        .category = BATTLE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+    },
+
+    [MOVE_MALIGNANT_CHAIN] =
+    {
+        .effect = EFFECT_POISON_FANG,
+        .power = 100,
+        .type = TYPE_POISON,
+        .accuracy = 100,
+        .pp = 5,
+        .secondaryEffectChance = 50,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = BATTLE_CATEGORY_SPECIAL,
     },
 
     // Z-Moves

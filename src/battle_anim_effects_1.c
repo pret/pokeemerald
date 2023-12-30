@@ -6575,12 +6575,14 @@ static void AnimTask_AllySwitchDataSwap(u8 taskId)
     SwapStructData(&gProtectStructs[battlerAtk], &gProtectStructs[battlerPartner], data, sizeof(struct ProtectStruct));
     SwapStructData(&gBattleSpritesDataPtr->battlerData[battlerAtk], &gBattleSpritesDataPtr->battlerData[battlerPartner], data, sizeof(struct BattleSpriteInfo));
 
+    SWAP(gBattleSpritesDataPtr->battlerData[battlerAtk].invisible, gBattleSpritesDataPtr->battlerData[battlerPartner].invisible, temp);
     SWAP(gTransformedPersonalities[battlerAtk], gTransformedPersonalities[battlerPartner], temp);
-    SWAP(gTransformedOtIds[battlerAtk], gTransformedOtIds[battlerPartner], temp);
+    SWAP(gTransformedShininess[battlerAtk], gTransformedShininess[battlerPartner], temp);
     SWAP(gStatuses3[battlerAtk], gStatuses3[battlerPartner], temp);
     SWAP(gStatuses4[battlerAtk], gStatuses4[battlerPartner], temp);
     SWAP(gBattleStruct->chosenMovePositions[battlerAtk], gBattleStruct->chosenMovePositions[battlerPartner], temp);
     SWAP(gChosenMoveByBattler[battlerAtk], gChosenMoveByBattler[battlerPartner], temp);
+    SWAP(gLockedMoves[battlerAtk], gLockedMoves[battlerPartner], temp);
     SWAP(gBattleStruct->moveTarget[battlerAtk], gBattleStruct->moveTarget[battlerPartner], temp);
     SWAP(gMoveSelectionCursor[battlerAtk], gMoveSelectionCursor[battlerPartner], temp);
     // Swap turn order, so that all the battlers take action
@@ -6688,6 +6690,12 @@ void AnimTask_AllySwitchAttacker(u8 taskId)
     PrepareDoubleTeamAnim(taskId, ANIM_ATTACKER, TRUE);
     gSprites[gBattlerSpriteIds[gBattlerAttacker]].invisible = TRUE;
     gSprites[gBattlerSpriteIds[BATTLE_PARTNER(gBattlerAttacker)]].invisible = TRUE;
+    // Edge case: Partner's sprite is invisible(i.e. after using Dig).
+    if (gBattleSpritesDataPtr->battlerData[BATTLE_PARTNER(gBattlerAttacker)].invisible)
+    {
+        gBattleSpritesDataPtr->battlerData[BATTLE_PARTNER(gBattlerAttacker)].invisible = FALSE;
+        gBattleSpritesDataPtr->battlerData[gBattlerAttacker].invisible = TRUE;
+    }
 }
 
 void AnimTask_AllySwitchPartner(u8 taskId)

@@ -65,7 +65,7 @@ struct ResourceFlags
 struct DisableStruct
 {
     u32 transformedMonPersonality;
-    u32 transformedMonOtId;
+    bool8 transformedMonShininess;
     u16 disabledMove;
     u16 encoredMove;
     u8 protectUses:4;
@@ -336,7 +336,7 @@ struct AI_ThinkingStruct
     u16 moveConsidered;
     s32 score[MAX_MON_MOVES];
     u32 funcResult;
-    u32 aiFlags;
+    u32 aiFlags[MAX_BATTLERS_COUNT];
     u8 aiAction;
     u8 aiLogicId;
     struct AI_SavedBattleMon saved[MAX_BATTLERS_COUNT];
@@ -1065,7 +1065,7 @@ extern u8 gBattlerStatusSummaryTaskId[MAX_BATTLERS_COUNT];
 extern u8 gBattlerInMenuId;
 extern bool8 gDoingBattleAnim;
 extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT];
-extern u32 gTransformedOtIds[MAX_BATTLERS_COUNT];
+extern bool8 gTransformedShininess[MAX_BATTLERS_COUNT];
 extern u8 gPlayerDpadHoldFrames;
 extern struct BattleSpriteData *gBattleSpritesDataPtr;
 extern struct MonSpritesGfx *gMonSpritesGfxPtr;
