@@ -4211,7 +4211,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .frontAnimFrames = sAnims_Duraludon,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         BACK_PIC(Duraludon, 64, 64),
-        .backPicYOffset = 1,
+        .backPicYOffset = 0,
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(Duraludon),
         ICON(Duraludon, 0),

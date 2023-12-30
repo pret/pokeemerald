@@ -2860,7 +2860,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .frontAnimFrames = sAnims_Tyrantrum,
         .frontAnimId = ANIM_V_SHAKE,
         BACK_PIC(Tyrantrum, 64, 56),
-        .backPicYOffset = 11,
+        .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
         PALETTES(Tyrantrum),
         ICON(Tyrantrum, 0),
