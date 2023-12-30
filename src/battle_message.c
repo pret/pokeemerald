@@ -2924,7 +2924,7 @@ void BufferStringBattle(u16 stringID, u32 battler)
             }
         }
         break;
-    case STRINGID_USEDMOVE: // pokemon used a move msg
+    case STRINGID_USEDMOVE: // Pokémon used a move msg
         if (gBattleStruct->zmove.active && gBattleStruct->zmove.activeCategory != BATTLE_CATEGORY_STATUS)
             StringCopy(gBattleTextBuff3, GetZMoveName(gBattleMsgDataPtr->currentMove));
         else if (IsMaxMove(gBattleMsgDataPtr->currentMove))
@@ -3239,7 +3239,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
 {
     u32 dstID = 0; // if they used dstID, why not use srcID as well?
     const u8 *toCpy = NULL;
-    // This buffer may hold either the name of a trainer, pokemon, or item.
+    // This buffer may hold either the name of a trainer, Pokémon, or item.
     u8 text[max(max(max(32, TRAINER_NAME_LENGTH + 1), POKEMON_NAME_LENGTH + 1), ITEM_NAME_LENGTH)];
     u8 multiplayerId;
 

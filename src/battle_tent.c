@@ -309,7 +309,7 @@ static void GenerateInitialRentalMons(void)
     i = 0;
     while (i != PARTY_SIZE)
     {
-        // Cannot have two pokemon of the same species.
+        // Cannot have two Pokémon of the same species.
         monSetId = Random() % NUM_SLATEPORT_TENT_MONS;
         for (j = firstMonId; j < firstMonId + i; j++)
         {
@@ -390,7 +390,7 @@ static void GenerateOpponentMons(void)
     {
         sRandMonId = monSet[Random() % numMons];
 
-        // Ensure none of the opponent's pokemon are the same as the potential rental pokemon for the player
+        // Ensure none of the opponent's Pokémon are the same as the potential rental Pokémon for the player
         for (j = 0; j < (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.rentalMons); j++)
         {
             if (gFacilityTrainerMons[sRandMonId].species == gFacilityTrainerMons[gSaveBlock2Ptr->frontier.rentalMons[j].monId].species)
