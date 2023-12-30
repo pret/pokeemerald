@@ -497,7 +497,7 @@ static void Cmd_setdrainedhp(void);
 static void Cmd_statbuffchange(void);
 static void Cmd_normalisebuffs(void);
 static void Cmd_setbide(void);
-static void Cmd_confuseifrepeatingattackends(void);
+static void Cmd_unused0x8C(void);
 static void Cmd_setmultihitcounter(void);
 static void Cmd_initmultihitstring(void);
 static void Cmd_forcerandomswitch(void);
@@ -748,7 +748,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_trysetrest,                              //0x81
     Cmd_jumpifnotfirstturn,                      //0x82
     Cmd_setmiracleeye,                           //0x83
-    Cmd_jumpifuproarwakes,                    //0x84
+    Cmd_jumpifuproarwakes,                       //0x84
     Cmd_stockpile,                               //0x85
     Cmd_stockpiletobasedamage,                   //0x86
     Cmd_stockpiletohpheal,                       //0x87
@@ -756,7 +756,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_statbuffchange,                          //0x89
     Cmd_normalisebuffs,                          //0x8A
     Cmd_setbide,                                 //0x8B
-    Cmd_confuseifrepeatingattackends,            //0x8C
+    Cmd_unused0x8C,                              //0x8C
     Cmd_setmultihitcounter,                      //0x8D
     Cmd_initmultihitstring,                      //0x8E
     Cmd_forcerandomswitch,                       //0x8F
@@ -11681,14 +11681,8 @@ static void Cmd_setbide(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-static void Cmd_confuseifrepeatingattackends(void)
+static void Cmd_unused0x8C(void)
 {
-    CMD_ARGS();
-
-    if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_LOCK_CONFUSE) && !gSpecialStatuses[gBattlerAttacker].dancerUsedMove)
-        gBattleScripting.moveEffect = (MOVE_EFFECT_THRASH | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN);
-
-    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_setmultihitcounter(void)

@@ -772,7 +772,7 @@
 	.byte 0x8b
 	.endm
 
-	.macro confuseifrepeatingattackends
+	.macro unused0x8C
 	.byte 0x8c
 	.endm
 
