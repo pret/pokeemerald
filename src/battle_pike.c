@@ -1097,8 +1097,7 @@ static u16 GetNPCRoomGraphicsId(void)
     return sNPCTable[sNpcId].graphicsId;
 }
 
-// Unused
-static u8 GetInWildMonRoom(void)
+static bool8 UNUSED GetInWildMonRoom(void)
 {
     return sInWildMonRoom;
 }
@@ -1268,7 +1267,7 @@ static void TryHealMons(u8 healCount)
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
         indices[i] = i;
 
-    // Only 'healCount' number of pokemon will be healed.
+    // Only 'healCount' number of Pokémon will be healed.
     // The order in which they're (attempted to be) healed is random,
     // and determined by performing 10 random swaps to this index array.
     for (k = 0; k < 10; k++)

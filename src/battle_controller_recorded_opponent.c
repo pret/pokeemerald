@@ -186,7 +186,7 @@ static void CompleteOnBattlerSpriteCallbackDummy(void)
         RecordedOpponentBufferExecCompleted();
 }
 
-static void CompleteOnBankSpriteCallbackDummy2(void)
+static void UNUSED CompleteOnBankSpriteCallbackDummy2(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         RecordedOpponentBufferExecCompleted();
@@ -515,7 +515,7 @@ static void RecordedOpponentBufferExecCompleted(void)
 
 static void RecordedOpponentHandleGetMonData(void)
 {
-    u8 monData[sizeof(struct Pokemon) * 2 + 56]; // this allows to get full data of two pokemon, trying to get more will result in overwriting data
+    u8 monData[sizeof(struct Pokemon) * 2 + 56]; // this allows to get full data of two Pokémon, trying to get more will result in overwriting data
     u32 size = 0;
     u8 monToCheck;
     s32 i;

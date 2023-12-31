@@ -571,7 +571,7 @@ static void IsTrainerHillChallengeActive(void)
         gSpecialVar_Result = TRUE;
 }
 
-static void TrainerHillDummy_Unused(void)
+static void UNUSED TrainerHillDummy_Unused(void)
 {
 
 }
@@ -650,7 +650,7 @@ void LoadTrainerHillObjectEventTemplates(void)
         eventTemplates[i].localId = i + 1;
         eventTemplates[i].graphicsId = FacilityClassToGraphicsId(sHillData->floors[floorId].trainers[i].facilityClass);
         eventTemplates[i].x = sHillData->floors[floorId].map.trainerCoords[i] & 0xF;
-        eventTemplates[i].y = ((sHillData->floors[floorId].map.trainerCoords[i] >> 4) & 0xF) + 5;
+        eventTemplates[i].y = ((sHillData->floors[floorId].map.trainerCoords[i] >> 4) & 0xF) + HILL_FLOOR_HEIGHT_MARGIN;
         bits = i << 2;
         eventTemplates[i].movementType = ((sHillData->floors[floorId].map.trainerDirections >> bits) & 0xF) + MOVEMENT_TYPE_FACE_UP;
         eventTemplates[i].trainerRange_berryTreeId = (sHillData->floors[floorId].map.trainerRanges >> bits) & 0xF;
@@ -769,8 +769,7 @@ u8 GetCurrentTrainerHillMapId(void)
     return mapId;
 }
 
-// Unused
-static bool32 OnTrainerHillRoof(void)
+static bool32 UNUSED OnTrainerHillRoof(void)
 {
     bool32 onRoof;
 

@@ -194,7 +194,7 @@ static void SwapMoveDescAndContestTilemaps(void);
 #define CONTESTANT_TEXT_COLOR_START 10
 
 enum {
-// The "{Pokemon Name} / {Trainer Name}" windows.
+// The "{Pokémon Name} / {Trainer Name}" windows.
     WIN_CONTESTANT0_NAME,
     WIN_CONTESTANT1_NAME,
     WIN_CONTESTANT2_NAME,
@@ -3251,8 +3251,7 @@ static void DrawMoveEffectSymbol(u16 move, u8 contestant)
     }
 }
 
-// Unused
-static void DrawMoveEffectSymbols(void)
+static void UNUSED DrawMoveEffectSymbols(void)
 {
     s32 i;
 
@@ -3435,11 +3434,11 @@ static void RankContestants(void)
 
     // For each contestant, find the best rank with their point total.
     // Normally, each point total is different, and this will output the
-    // rankings as expected. However, if two pokemon are tied, then they
+    // rankings as expected. However, if two Pokémon are tied, then they
     // both get the best rank for that point total.
     //
     // For example if the point totals are [100, 80, 80, 50], the ranks will
-    // be [1, 2, 2, 4]. The pokemon with a point total of 80 stop looking
+    // be [1, 2, 2, 4]. The Pokémon with a point total of 80 stop looking
     // when they see the first 80 in the array, so they both share the '2'
     // rank.
     for (i = 0; i < CONTESTANT_COUNT; i++)
@@ -4221,8 +4220,7 @@ static void SpriteCB_EndBlinkContestantBox(struct Sprite *sprite)
     ResetBlendForContestantBoxBlink();
 }
 
-// Unused.
-static void ContestDebugTogglePointTotal(void)
+static void UNUSED ContestDebugTogglePointTotal(void)
 {
     if(eContestDebugMode == CONTEST_DEBUG_MODE_PRINT_POINT_TOTAL)
         eContestDebugMode = CONTEST_DEBUG_MODE_OFF;
@@ -4592,10 +4590,10 @@ void MakeContestantNervous(u8 p)
 // ContestantStatus::nextTurnOrder field of each contestant. The remaining
 // turns are assigned such that the turn order will reverse.
 //
-// For example, if no pokemon have a defined nextTurnOrder, then the 4th
+// For example, if no Pokémon have a defined nextTurnOrder, then the 4th
 // will become 1st, the 3rd will become 2nd, etc.
 //
-// Note: This function assumes that multiple pokemon cannot have the same
+// Note: This function assumes that multiple Pokémon cannot have the same
 // nextTurnOrder value.
 static void ApplyNextTurnOrder(void)
 {
@@ -4876,15 +4874,13 @@ static void Task_ShowAndUpdateApplauseMeter(u8 taskId)
     }
 }
 
-// Unused.
-static void HideApplauseMeterNoAnim(void)
+static void UNUSED HideApplauseMeterNoAnim(void)
 {
     gSprites[eContest.applauseMeterSpriteId].x2 = 0;
     gSprites[eContest.applauseMeterSpriteId].invisible = FALSE;
 }
 
-// Unused.
-static void ShowApplauseMeterNoAnim(void)
+static void UNUSED ShowApplauseMeterNoAnim(void)
 {
     gSprites[eContest.applauseMeterSpriteId].invisible = TRUE;
 }

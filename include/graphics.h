@@ -32,7 +32,7 @@ extern const u32 gBallGfx_Premier[];
 extern const u32 gBallPal_Premier[];
 extern const u32 gOpenPokeballGfx[];
 
-// pokemon gfx
+// Pokémon gfx
 extern const u32 gMonFrontPic_Bulbasaur[];
 extern const u32 gMonPalette_Bulbasaur[];
 extern const u32 gMonBackPic_Bulbasaur[];
@@ -881,13 +881,13 @@ extern const u32 gMonShinyPalette_Starmie[];
 extern const u32 gMonStillFrontPic_Starmie[];
 extern const u8 gMonIcon_Starmie[];
 extern const u8 gMonFootprint_Starmie[];
-extern const u32 gMonFrontPic_Mrmime[];
-extern const u32 gMonPalette_Mrmime[];
-extern const u32 gMonBackPic_Mrmime[];
-extern const u32 gMonShinyPalette_Mrmime[];
-extern const u32 gMonStillFrontPic_Mrmime[];
-extern const u8 gMonIcon_Mrmime[];
-extern const u8 gMonFootprint_Mrmime[];
+extern const u32 gMonFrontPic_MrMime[];
+extern const u32 gMonPalette_MrMime[];
+extern const u32 gMonBackPic_MrMime[];
+extern const u32 gMonShinyPalette_MrMime[];
+extern const u32 gMonStillFrontPic_MrMime[];
+extern const u8 gMonIcon_MrMime[];
+extern const u8 gMonFootprint_MrMime[];
 extern const u32 gMonFrontPic_Scyther[];
 extern const u32 gMonPalette_Scyther[];
 extern const u32 gMonBackPic_Scyther[];
@@ -3282,7 +3282,7 @@ extern const u32 gBattleTerrainPalette_StadiumGlacia[];
 extern const u32 gBattleTerrainPalette_StadiumDrake[];
 extern const u32 gBattleTerrainPalette_StadiumWallace[];
 
-// pokedex
+// Pokédex
 extern const u32 gPokedexInterface_Gfx[];
 extern const u16 gPokedexBgHoenn_Pal[];
 extern const u32 gPokedexMenu_Gfx[];
@@ -4005,7 +4005,7 @@ extern const u32 gBerryPalette_Starf[];
 extern const u32 gBerryPic_Enigma[];
 extern const u32 gBerryPalette_Enigma[];
 
-//pokenav
+//PokéNav
 extern const u16 gPokenavCondition_Pal[];
 extern const u32 gPokenavCondition_Gfx[];
 extern const u32 gPokenavCondition_Tilemap[];
@@ -4879,11 +4879,11 @@ extern const u16 gSlotMachineReelTimePikachu_Pal[];
 extern const u32 gBattleAnimBgTilemap_Sandstorm[];
 extern const u32 gBattleAnimBgImage_Sandstorm[];
 
-// Pokedex Area Screen
+// Pokédex Area Screen
 extern const u32 gPokedexAreaScreenAreaUnknown_Gfx[];
 extern const u16 gPokedexAreaScreenAreaUnknown_Pal[];
 
-// Pokemon Storage System
+// Pokémon Storage System
 extern const u32 gStorageSystemMenu_Gfx[];
 extern const u16 gStorageSystemPartyMenu_Pal[];
 extern const u32 gStorageSystemPartyMenu_Tilemap[];
@@ -5011,7 +5011,7 @@ extern const u32 gBerryCrush_Crusher_Gfx[];
 extern const u16 gBerryCrush_Crusher_Pal[];
 extern const u32 gBerryCrush_TextWindows_Tilemap[];
 
-// Pokenav
+// PokéNav
 extern const u32 gPokenavMessageBox_Gfx[];
 extern const u32 gPokenavMessageBox_Tilemap[];
 extern const u16 gPokenavMessageBox_Pal[];

@@ -1374,7 +1374,7 @@ u8 Unref_TryInitLocalObjectEvent(u8 localId)
         if (InBattlePyramid())
             objectEventCount = GetNumBattlePyramidObjectEvents();
         else if (InTrainerHill())
-            objectEventCount = 2;
+            objectEventCount = HILL_TRAINERS_PER_FLOOR;
         else
             objectEventCount = gMapHeader.events->objectEventCount;
 
@@ -2278,7 +2278,7 @@ void TrySpawnObjectEvents(s16 cameraX, s16 cameraY)
         if (InBattlePyramid())
             objectCount = GetNumBattlePyramidObjectEvents();
         else if (InTrainerHill())
-            objectCount = 2;
+            objectCount = HILL_TRAINERS_PER_FLOOR;
         else
             objectCount = gMapHeader.events->objectEventCount;
 
@@ -2673,8 +2673,7 @@ u8 LoadObjectEventPalette(u16 paletteTag)
     return LoadSpritePaletteIfTagExists(&sObjectEventSpritePalettes[i]);
 }
 
-// Unused
-static void LoadObjectEventPaletteSet(u16 *paletteTags)
+static void UNUSED LoadObjectEventPaletteSet(u16 *paletteTags)
 {
     u8 i;
 
@@ -2757,8 +2756,7 @@ static void _PatchObjectPalette(u16 tag, u8 slot)
     PatchObjectPalette(tag, slot);
 }
 
-// Unused
-static void IncrementObjectEventCoords(struct ObjectEvent *objectEvent, s16 x, s16 y)
+static void UNUSED IncrementObjectEventCoords(struct ObjectEvent *objectEvent, s16 x, s16 y)
 {
     objectEvent->previousCoords.x = objectEvent->currentCoords.x;
     objectEvent->previousCoords.y = objectEvent->currentCoords.y;
@@ -2957,8 +2955,7 @@ void CameraObjectSetFollowedSpriteId(u8 spriteId)
     }
 }
 
-// Unused
-static u8 CameraObjectGetFollowedSpriteId(void)
+static u8 UNUSED CameraObjectGetFollowedSpriteId(void)
 {
     struct Sprite *camera;
 
@@ -3058,8 +3055,7 @@ static u16 GetObjectEventFlagIdByObjectEventId(u8 objectEventId)
     return GetObjectEventFlagIdByLocalIdAndMap(gObjectEvents[objectEventId].localId, gObjectEvents[objectEventId].mapNum, gObjectEvents[objectEventId].mapGroup);
 }
 
-// Unused
-static u8 GetObjectTrainerTypeByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
+static u8 UNUSED GetObjectTrainerTypeByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 objectEventId;
 
@@ -3069,8 +3065,7 @@ static u8 GetObjectTrainerTypeByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup
     return gObjectEvents[objectEventId].trainerType;
 }
 
-// Unused
-static u8 GetObjectTrainerTypeByObjectEventId(u8 objectEventId)
+static u8 UNUSED GetObjectTrainerTypeByObjectEventId(u8 objectEventId)
 {
     return gObjectEvents[objectEventId].trainerType;
 }
@@ -5814,8 +5809,7 @@ void MoveCoords(u8 direction, s16 *x, s16 *y)
     *y += sDirectionToVectors[direction].y;
 }
 
-// Unused
-static void MoveCoordsInMapCoordIncrement(u8 direction, s16 *x, s16 *y)
+static void UNUSED MoveCoordsInMapCoordIncrement(u8 direction, s16 *x, s16 *y)
 {
     *x += sDirectionToVectors[direction].x << 4;
     *y += sDirectionToVectors[direction].y << 4;
@@ -8961,7 +8955,13 @@ static void UpdateObjectEventElevationAndPriority(struct ObjectEvent *objEvent, 
         // keep subspriteMode synced with player's
         // so that it disappears under bridges when they do
         sprite->subspriteMode |= gSprites[gPlayerAvatar.spriteId].subspriteMode & SUBSPRITES_IGNORE_PRIORITY;
+        if (!objEvent->currentElevation)
+            objEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     }
+    #else
+    // if transitioning between elevations, use the player's elevation
+    if (!objEvent->currentElevation && objEvent->localId == OBJ_EVENT_ID_FOLLOWER)
+        objEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     #endif
 
     sprite->subspriteTableNum = sElevationToSubspriteTableNum[objEvent->previousElevation];
@@ -9014,6 +9014,10 @@ static void ObjectEventUpdateSubpriority(struct ObjectEvent *objEvent, struct Sp
 {
     if (objEvent->fixedPriority)
         return;
+
+    // If transitioning between elevations, use the player's elevation
+    if (!objEvent->currentElevation && objEvent->localId == OBJ_EVENT_ID_FOLLOWER)
+        objEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     SetObjectSubpriorityByElevation(objEvent->previousElevation, sprite, 1);
 }
@@ -9180,10 +9184,10 @@ static void DoTracksGroundEffect_BikeTireTracks(struct ObjectEvent *objEvent, st
     //  each byte in that row is for the next direction of the bike in the order
     //  of down, up, left, right.
     static const u8 bikeTireTracks_Transitions[4][4] = {
-        1, 2, 7, 8,
-        1, 2, 6, 5,
-        5, 8, 3, 4,
-        6, 7, 3, 4,
+        {1, 2, 7, 8},
+        {1, 2, 6, 5},
+        {5, 8, 3, 4},
+        {6, 7, 3, 4},
     };
 
     if (objEvent->currentCoords.x != objEvent->previousCoords.x || objEvent->currentCoords.y != objEvent->previousCoords.y)
@@ -9899,8 +9903,7 @@ static void SpriteCB_VirtualObject(struct Sprite *sprite)
     UpdateObjectEventSpriteInvisibility(sprite, sprite->sInvisible);
 }
 
-// Unused
-static void DestroyVirtualObjects(void)
+static void UNUSED DestroyVirtualObjects(void)
 {
     int i;
 

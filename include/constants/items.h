@@ -23,7 +23,7 @@
 #define FIRST_BALL ITEM_MASTER_BALL
 #define LAST_BALL  ITEM_PREMIER_BALL
 
-// Pokemon Items
+// Pokémon Items
 #define ITEM_POTION 13
 #define ITEM_ANTIDOTE 14
 #define ITEM_BURN_HEAL 15
@@ -476,7 +476,7 @@
 #define ITEM_B_USE_MEDICINE 1
 #define ITEM_B_USE_OTHER    2
 
-// Check if the item is one that can be used on a Pokemon.
+// Check if the item is one that can be used on a Pokémon.
 #define ITEM_HAS_EFFECT(item) ((item) >= ITEM_POTION && (item) <= MAX_BERRY_INDEX)
 
 #endif  // GUARD_CONSTANTS_ITEMS_H

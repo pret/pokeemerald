@@ -385,7 +385,7 @@ void CFile::TryConvertIncbin()
 
             if (m_buffer[m_pos] == '\\')
                 RaiseError("unexpected escape in path string");
-            
+
             m_pos++;
         }
 
@@ -424,7 +424,7 @@ void CFile::TryConvertIncbin()
 
         m_pos++;
     }
-    
+
     if (m_buffer[m_pos] != ')')
         RaiseError("expected ')'");
 
