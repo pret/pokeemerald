@@ -845,12 +845,12 @@ const u32 gMonShinyPalette_Starmie[] = INCBIN_U32("graphics/pokemon/starmie/shin
 const u8 gMonIcon_Starmie[] = INCBIN_U8("graphics/pokemon/starmie/icon.4bpp");
 const u8 gMonFootprint_Starmie[] = INCBIN_U8("graphics/pokemon/starmie/footprint.1bpp");
 
-const u32 gMonStillFrontPic_Mrmime[] = INCBIN_U32("graphics/pokemon/mr_mime/front.4bpp.lz");
-const u32 gMonPalette_Mrmime[] = INCBIN_U32("graphics/pokemon/mr_mime/normal.gbapal.lz");
-const u32 gMonBackPic_Mrmime[] = INCBIN_U32("graphics/pokemon/mr_mime/back.4bpp.lz");
-const u32 gMonShinyPalette_Mrmime[] = INCBIN_U32("graphics/pokemon/mr_mime/shiny.gbapal.lz");
-const u8 gMonIcon_Mrmime[] = INCBIN_U8("graphics/pokemon/mr_mime/icon.4bpp");
-const u8 gMonFootprint_Mrmime[] = INCBIN_U8("graphics/pokemon/mr_mime/footprint.1bpp");
+const u32 gMonStillFrontPic_MrMime[] = INCBIN_U32("graphics/pokemon/mr_mime/front.4bpp.lz");
+const u32 gMonPalette_MrMime[] = INCBIN_U32("graphics/pokemon/mr_mime/normal.gbapal.lz");
+const u32 gMonBackPic_MrMime[] = INCBIN_U32("graphics/pokemon/mr_mime/back.4bpp.lz");
+const u32 gMonShinyPalette_MrMime[] = INCBIN_U32("graphics/pokemon/mr_mime/shiny.gbapal.lz");
+const u8 gMonIcon_MrMime[] = INCBIN_U8("graphics/pokemon/mr_mime/icon.4bpp");
+const u8 gMonFootprint_MrMime[] = INCBIN_U8("graphics/pokemon/mr_mime/footprint.1bpp");
 
 const u32 gMonStillFrontPic_Scyther[] = INCBIN_U32("graphics/pokemon/scyther/front.4bpp.lz");
 const u32 gMonPalette_Scyther[] = INCBIN_U32("graphics/pokemon/scyther/normal.gbapal.lz");

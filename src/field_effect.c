@@ -254,7 +254,7 @@ static const u32 sHofMonitorBig_Gfx[] = INCBIN_U32("graphics/field_effects/pics/
 static const u8 sHofMonitorSmall_Gfx[] = INCBIN_U8("graphics/field_effects/pics/hof_monitor_small.4bpp");
 static const u16 sHofMonitor_Pal[16] = INCBIN_U16("graphics/field_effects/palettes/hof_monitor.gbapal");
 
-// Graphics for the lights streaking past your Pokemon when it uses a field move.
+// Graphics for the lights streaking past your Pokémon when it uses a field move.
 static const u32 sFieldMoveStreaksOutdoors_Gfx[] = INCBIN_U32("graphics/field_effects/pics/field_move_streaks.4bpp");
 static const u16 sFieldMoveStreaksOutdoors_Pal[16] = INCBIN_U16("graphics/field_effects/pics/field_move_streaks.gbapal");
 static const u16 sFieldMoveStreaksOutdoors_Tilemap[320] = INCBIN_U16("graphics/field_effects/pics/field_move_streaks.bin");
@@ -900,8 +900,7 @@ u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buf
     return CreateSprite(&spriteTemplate, x, y, subpriority);
 }
 
-// Unused
-static void LoadTrainerGfx_TrainerCard(u8 gender, u16 palOffset, u8 *dest)
+static void UNUSED LoadTrainerGfx_TrainerCard(u8 gender, u16 palOffset, u8 *dest)
 {
     LZDecompressVram(gTrainerFrontPicTable[gender].data, dest);
     LoadCompressedPalette(gTrainerFrontPicPaletteTable[gender].data, palOffset, PLTT_SIZE_4BPP);
@@ -2626,7 +2625,7 @@ static void FieldMoveShowMonOutdoorsEffect_Init(struct Task *task)
 {
     task->data[11] = REG_WININ;
     task->data[12] = REG_WINOUT;
-    StoreWordInTwoHalfwords(&task->data[13], (u32)gMain.vblankCallback);
+    StoreWordInTwoHalfwords((u16*) &task->data[13], (u32)gMain.vblankCallback);
     task->tWinHoriz = WIN_RANGE(DISPLAY_WIDTH, DISPLAY_WIDTH + 1);
     task->tWinVert = WIN_RANGE(DISPLAY_HEIGHT / 2, DISPLAY_HEIGHT / 2 + 1);
     task->tWinIn = WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR;

@@ -11,7 +11,7 @@
 
 #define PICS_COUNT 8
 
-// Needs to be large enough to store either a decompressed pokemon pic or trainer pic
+// Needs to be large enough to store either a decompressed Pokémon pic or trainer pic
 #define PIC_SPRITE_SIZE max(MON_PIC_SIZE, TRAINER_PIC_SIZE)
 #define MAX_PIC_FRAMES  max(MAX_MON_PIC_FRAMES, MAX_TRAINER_PIC_FRAMES)
 
@@ -342,8 +342,7 @@ u16 FreeAndDestroyMonPicSpriteNoPalette(u16 spriteId)
       return FreeAndDestroyPicSpriteInternal(spriteId, FALSE);
 }
 
-// Unused
-static u16 LoadMonPicInWindow(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u8 paletteSlot, u8 windowId)
+static u16 UNUSED LoadMonPicInWindow(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u8 paletteSlot, u8 windowId)
 {
     return LoadPicSpriteInWindow(species, otId, personality, isFrontPic, paletteSlot, windowId, FALSE);
 }
@@ -364,8 +363,7 @@ u16 FreeAndDestroyTrainerPicSprite(u16 spriteId)
     return FreeAndDestroyPicSpriteInternal(spriteId, TRUE);
 }
 
-// Unused
-static u16 LoadTrainerPicInWindow(u16 species, bool8 isFrontPic, u8 paletteSlot, u8 windowId)
+static u16 UNUSED LoadTrainerPicInWindow(u16 species, bool8 isFrontPic, u8 paletteSlot, u8 windowId)
 {
     return LoadPicSpriteInWindow(species, 0, 0, isFrontPic, paletteSlot, windowId, TRUE);
 }

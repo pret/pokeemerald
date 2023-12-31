@@ -156,8 +156,7 @@ void FadeOutAndFadeInNewMapMusic(u16 songNum, u8 fadeOutSpeed, u8 fadeInSpeed)
     sMapMusicFadeInSpeed = fadeInSpeed;
 }
 
-// Unused
-static void FadeInNewMapMusic(u16 songNum, u8 speed)
+static void UNUSED FadeInNewMapMusic(u16 songNum, u8 speed)
 {
     FadeInNewBGM(songNum, speed);
     sCurrentMapMusic = songNum;
@@ -464,9 +463,9 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     SetPokemonCryChorus(chorus);
     SetPokemonCryPriority(priority);
 
-    // This is a fancy way to get a cry of a pokemon.
+    // This is a fancy way to get a cry of a Pokémon.
     // It creates 4 sets of 128 mini cry tables.
-    // If you wish to expand pokemon, you need to
+    // If you wish to expand Pokémon, you need to
     // append new cases to the switch.
     species = SpeciesToCryId(species);
     index = species % 128;

@@ -238,7 +238,7 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 			{
 				FATAL_ERROR("More than one MARK Chunk in file!\n");
 			}
-			
+
 			markers = calloc(num_markers, sizeof(struct Marker));
 
 			// Read each marker.
@@ -289,7 +289,7 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 				// Skip NoLooping sustain loop.
 				pos += 4;
 			}
-			
+
 			// Skip release loop, we don't need it.
 			pos += 6;
 		}
@@ -303,7 +303,7 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 			{
 				uint8_t *sample_data = (uint8_t *)malloc(num_samples * sizeof(uint8_t));
 				memcpy(sample_data, &aif->data[pos], num_samples);
-	
+
 				aif_data->samples8 = sample_data;
 				aif_data->real_num_samples = num_samples;
 			}
@@ -316,7 +316,7 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 				{
 					sample_data_swapped[i] = __builtin_bswap16(sample_data[i]);
 				}
-	
+
 				aif_data->samples16 = sample_data_swapped;
 				aif_data->real_num_samples = num_samples;
 				free(sample_data);
@@ -329,12 +329,12 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 			pos += chunk_size;
 		}
 	}
-	
+
 	if (markers)
 	{
 		// Resolve loop points.
 		struct Marker *cur_marker = markers;
-	
+
 		// Grab loop start point.
 		for (int i = 0; i < num_markers; i++, cur_marker++)
 		{
@@ -573,7 +573,7 @@ void aif2pcm(const char *aif_filename, const char *pcm_filename, bool compress)
 	struct Bytes *aif = read_bytearray(aif_filename);
 	AifData aif_data = {0};
 	read_aif(aif, &aif_data);
-	
+
 	// Convert 16-bit to 8-bit if necessary
 	if (aif_data.sample_size == 16)
 	{

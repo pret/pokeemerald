@@ -535,7 +535,7 @@ static void SlideMonToOriginalPos_Step(struct Sprite *sprite)
 }
 
 // Linearly translates a mon to a target offset. The horizontal offset
-// is mirrored for the opponent's pokemon, and the vertical offset
+// is mirrored for the opponent's Pokémon, and the vertical offset
 // is only mirrored if arg 3 is set to 1.
 // arg 0: 0 = attacker, 1 = target
 // arg 1: target x pixel offset

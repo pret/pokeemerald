@@ -169,7 +169,7 @@ extern const struct SpriteTemplate gAncientPowerRockSpriteTemplate[];
 #define TIMER_START_LEGENDARIES          43
 
 static EWRAM_DATA u16 sIntroCharacterGender = 0;
-static EWRAM_DATA u16 sUnusedVar = 0;
+static EWRAM_DATA u16 UNUSED sUnusedVar = 0;
 static EWRAM_DATA u16 sFlygonYOffset = 0;
 
 u32 gIntroFrameCounter;
@@ -178,7 +178,7 @@ struct GcmbStruct gMultibootProgramStruct;
 static const u16 sIntroDrops_Pal[]            = INCBIN_U16("graphics/intro/scene_1/drops.gbapal");
 static const u16 sIntroLogo_Pal[]             = INCBIN_U16("graphics/intro/scene_1/logo.gbapal");
 static const u32 sIntroDropsLogo_Gfx[]        = INCBIN_U32("graphics/intro/scene_1/drops_logo.4bpp.lz");
-static const u16 sIntro1Bg_Pal[16][16]        = INCBIN_U16("graphics/intro/scene_1/bg.gbapal");
+static const u16 sIntro1Bg_Pal[]              = INCBIN_U16("graphics/intro/scene_1/bg.gbapal"); // 16 x 16
 static const u32 sIntro1Bg0_Tilemap[]         = INCBIN_U32("graphics/intro/scene_1/bg0_map.bin.lz");
 static const u32 sIntro1Bg1_Tilemap[]         = INCBIN_U32("graphics/intro/scene_1/bg1_map.bin.lz");
 static const u32 sIntro1Bg2_Tilemap[]         = INCBIN_U32("graphics/intro/scene_1/bg2_map.bin.lz");

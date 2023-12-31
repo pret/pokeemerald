@@ -48,6 +48,14 @@
 #include "constants/trainers.h"
 #include "constants/union_room.h"
 
+#define DAY_EVO_HOUR_BEGIN       12
+#define DAY_EVO_HOUR_END         HOURS_PER_DAY
+
+#define NIGHT_EVO_HOUR_BEGIN     0
+#define NIGHT_EVO_HOUR_END       12
+
+#define FRIENDSHIP_EVO_THRESHOLD 220
+
 struct SpeciesItem
 {
     u16 species;
@@ -62,7 +70,7 @@ static void Task_PlayMapChosenOrBattleBGM(u8 taskId);
 static bool8 ShouldGetStatBadgeBoost(u16 flagId, u8 battlerId);
 static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static bool8 ShouldSkipFriendshipChange(void);
-static u8 SendMonToPC(struct Pokemon *mon);
+static u8 CopyMonToPC(struct Pokemon *mon);
 
 EWRAM_DATA static u8 sLearningMoveTableID = 0;
 EWRAM_DATA u8 gPlayerPartyCount = 0;
@@ -1346,10 +1354,10 @@ static const u16 sHoennToNationalOrder[NUM_SPECIES - 1] =
 
 const struct SpindaSpot gSpindaSpotGraphics[] =
 {
-    {.x = 16, .y = 7, .image = INCBIN_U16("graphics/spinda_spots/spot_0.1bpp")},
-    {.x = 40, .y = 8, .image = INCBIN_U16("graphics/spinda_spots/spot_1.1bpp")},
-    {.x = 22, .y = 25, .image = INCBIN_U16("graphics/spinda_spots/spot_2.1bpp")},
-    {.x = 34, .y = 26, .image = INCBIN_U16("graphics/spinda_spots/spot_3.1bpp")}
+    {.x = 16, .y =  7, .image = INCBIN_U16("graphics/pokemon/spinda/spots/spot_0.1bpp")},
+    {.x = 40, .y =  8, .image = INCBIN_U16("graphics/pokemon/spinda/spots/spot_1.1bpp")},
+    {.x = 22, .y = 25, .image = INCBIN_U16("graphics/pokemon/spinda/spots/spot_2.1bpp")},
+    {.x = 34, .y = 26, .image = INCBIN_U16("graphics/pokemon/spinda/spots/spot_3.1bpp")}
 };
 
 #include "data/pokemon/item_effects.h"
@@ -4479,14 +4487,14 @@ u8 GiveMonToPlayer(struct Pokemon *mon)
     }
 
     if (i >= PARTY_SIZE)
-        return SendMonToPC(mon);
+        return CopyMonToPC(mon);
 
     CopyMon(&gPlayerParty[i], mon, sizeof(*mon));
     gPlayerPartyCount = i + 1;
     return MON_GIVEN_TO_PARTY;
 }
 
-static u8 SendMonToPC(struct Pokemon *mon)
+static u8 CopyMonToPC(struct Pokemon *mon)
 {
     s32 boxNo, boxPos;
 
@@ -5575,17 +5583,17 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem)
             switch (gEvolutionTable[species][i].method)
             {
             case EVO_FRIENDSHIP:
-                if (friendship >= 220)
+                if (friendship >= FRIENDSHIP_EVO_THRESHOLD)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_FRIENDSHIP_DAY:
                 RtcCalcLocalTime();
-                if (gLocalTime.hours >= 12 && gLocalTime.hours < 24 && friendship >= 220)
+                if (gLocalTime.hours >= DAY_EVO_HOUR_BEGIN && gLocalTime.hours < DAY_EVO_HOUR_END && friendship >= FRIENDSHIP_EVO_THRESHOLD)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_FRIENDSHIP_NIGHT:
                 RtcCalcLocalTime();
-                if (gLocalTime.hours >= 0 && gLocalTime.hours < 12 && friendship >= 220)
+                if (gLocalTime.hours >= NIGHT_EVO_HOUR_BEGIN && gLocalTime.hours < NIGHT_EVO_HOUR_END && friendship >= FRIENDSHIP_EVO_THRESHOLD)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL:
@@ -5837,7 +5845,7 @@ u16 SpeciesToCryId(u16 species)
 
 // Same as DrawSpindaSpots but attempts to discern for itself whether or
 // not it's the front pic.
-static void DrawSpindaSpotsUnused(u16 species, u32 personality, u8 *dest)
+static void UNUSED DrawSpindaSpotsUnused(u16 species, u32 personality, u8 *dest)
 {
     if (species == SPECIES_SPINDA
         && dest != gMonSpritesGfxPtr->sprites.ptr[B_POSITION_PLAYER_LEFT]
@@ -6920,9 +6928,9 @@ void BattleAnimateBackSprite(struct Sprite *sprite, u16 species)
     }
 }
 
-// Unused, identical to GetOpposingLinkMultiBattlerId but for the player
+// Identical to GetOpposingLinkMultiBattlerId but for the player
 // "rightSide" from that team's perspective, i.e. B_POSITION_*_RIGHT
-static u8 GetOwnOpposingLinkMultiBattlerId(bool8 rightSide)
+static u8 UNUSED GetOwnOpposingLinkMultiBattlerId(bool8 rightSide)
 {
     s32 i;
     s32 battlerId = 0;

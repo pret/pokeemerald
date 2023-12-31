@@ -1043,8 +1043,8 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             id = ListMenu_ProcessInput(data->listTaskId);
             if (JOY_NEW(A_BUTTON) && id != LIST_NOTHING_CHOSEN)
             {
-                // this unused variable along with the assignment is needed to match
-                u32 activity = data->playerList->players[id].rfu.data.activity;
+                // Needed to match
+                u32 UNUSED activity = data->playerList->players[id].rfu.data.activity;
 
                 if (data->playerList->players[id].groupScheduledAnim == UNION_ROOM_SPAWN_IN && !data->playerList->players[id].rfu.data.startedActivity)
                 {
@@ -2149,8 +2149,8 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
             id = ListMenu_ProcessInput(data->listTaskId);
             if (JOY_NEW(A_BUTTON) && id != LIST_NOTHING_CHOSEN)
             {
-                // this unused variable along with the assignment is needed to match
-                u32 activity = data->playerList->players[id].rfu.data.activity;
+                // Needed to match
+                u32 UNUSED activity = data->playerList->players[id].rfu.data.activity;
 
                 if (data->playerList->players[id].groupScheduledAnim == UNION_ROOM_SPAWN_IN && !data->playerList->players[id].rfu.data.startedActivity)
                 {

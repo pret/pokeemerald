@@ -606,8 +606,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
     return FALSE;
 }
 
-// Unused
-static void ClearFriendshipStepCounter(void)
+static void UNUSED ClearFriendshipStepCounter(void)
 {
     VarSet(VAR_FRIENDSHIP_STEP_COUNTER, 0);
 }

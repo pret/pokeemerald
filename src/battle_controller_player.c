@@ -330,7 +330,7 @@ static void HandleInputChooseAction(void)
     }
 }
 
-static void UnusedEndBounceEffect(void)
+static void UNUSED UnusedEndBounceEffect(void)
 {
     EndBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX);
     EndBounceEffect(gActiveBattler, BOUNCE_MON);
@@ -615,7 +615,7 @@ static void HandleInputChooseMove(void)
     }
 }
 
-static u32 HandleMoveInputUnused(void)
+static u32 UNUSED HandleMoveInputUnused(void)
 {
     u32 var = 0;
 
@@ -982,12 +982,12 @@ static void Intro_TryShinyAnimShowHealthbox(void)
     bool32 bgmRestored = FALSE;
     bool32 battlerAnimsDone = FALSE;
 
-    // Start shiny animation if applicable for 1st pokemon
+    // Start shiny animation if applicable for 1st Pokémon
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim
      && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive)
         TryShinyAnimation(gActiveBattler, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
 
-    // Start shiny animation if applicable for 2nd pokemon
+    // Start shiny animation if applicable for 2nd Pokémon
     if (!gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(gActiveBattler)].triedShinyMonAnim
      && !gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(gActiveBattler)].ballAnimActive)
         TryShinyAnimation(BATTLE_PARTNER(gActiveBattler), &gPlayerParty[gBattlerPartyIndexes[BATTLE_PARTNER(gActiveBattler)]]);
@@ -1582,7 +1582,7 @@ static void PrintLinkStandbyMsg(void)
 
 static void PlayerHandleGetMonData(void)
 {
-    u8 monData[sizeof(struct Pokemon) * 2 + 56]; // this allows to get full data of two pokemon, trying to get more will result in overwriting data
+    u8 monData[sizeof(struct Pokemon) * 2 + 56]; // this allows to get full data of two Pokémon, trying to get more will result in overwriting data
     u32 size = 0;
     u8 monToCheck;
     s32 i;
