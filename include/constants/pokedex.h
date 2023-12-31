@@ -1,7 +1,7 @@
 #ifndef GUARD_CONSTANTS_POKEDEX_H
 #define GUARD_CONSTANTS_POKEDEX_H
 
-// National Pokedex order.
+// National Pokédex order
 // These constants are NOT disabled by P_GEN_X_POKEMON to keep pokedex_orders.h clean.
 enum {
     NATIONAL_DEX_NONE,
@@ -1062,7 +1062,7 @@ enum {
 
 #define POKEMON_SLOTS_NUMBER (NATIONAL_DEX_COUNT + 1)
 
-// Hoenn Pokedex order
+// Hoenn Pokédex order
 enum {
     HOENN_DEX_NONE,
     HOENN_DEX_TREECKO,

@@ -347,7 +347,8 @@
 #define EFFECT_DOODLE                       343
 #define EFFECT_FILLET_AWAY                  344
 #define EFFECT_IVY_CUDGEL                   345
+#define EFFECT_FICKLE_BEAM                  346
 
-#define NUM_BATTLE_MOVE_EFFECTS             346
+#define NUM_BATTLE_MOVE_EFFECTS             347
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

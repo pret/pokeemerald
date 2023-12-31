@@ -2870,7 +2870,7 @@ u8 DoBattlerEndTurnEffects(void)
             {
                 MAGIC_GUARD_CHECK;
                 // R/S does not perform this sleep check, which causes the nightmare effect to
-                // persist even after the affected Pokemon has been awakened by Shed Skin.
+                // persist even after the affected Pokémon has been awakened by Shed Skin.
                 if (gBattleMons[battler].status1 & STATUS1_SLEEP)
                 {
                     gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 4;
@@ -2959,7 +2959,7 @@ u8 DoBattlerEndTurnEffects(void)
                 }
                 if (gBattlerAttacker != gBattlersCount)
                 {
-                    effect = 2;  // a pokemon was awaken
+                    effect = 2;  // a Pokémon was awaken
                     break;
                 }
                 else
@@ -3023,7 +3023,7 @@ u8 DoBattlerEndTurnEffects(void)
                     if (gDisableStructs[battler].disabledMove == gBattleMons[battler].moves[i])
                         break;
                 }
-                if (i == MAX_MON_MOVES)  // pokemon does not have the disabled move anymore
+                if (i == MAX_MON_MOVES)  // Pokémon does not have the disabled move anymore
                 {
                     gDisableStructs[battler].disabledMove = 0;
                     gDisableStructs[battler].disableTimer = 0;
@@ -3040,7 +3040,7 @@ u8 DoBattlerEndTurnEffects(void)
         case ENDTURN_ENCORE:  // encore
             if (gDisableStructs[battler].encoreTimer != 0)
             {
-                if (gBattleMons[battler].moves[gDisableStructs[battler].encoredMovePos] != gDisableStructs[battler].encoredMove)  // pokemon does not have the encored move anymore
+                if (gBattleMons[battler].moves[gDisableStructs[battler].encoredMovePos] != gDisableStructs[battler].encoredMove)  // Pokémon does not have the encored move anymore
                 {
                     gDisableStructs[battler].encoredMove = 0;
                     gDisableStructs[battler].encoreTimer = 0;
@@ -6144,7 +6144,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             if (gBattleMons[i].ability == ABILITY_TRACE && (gBattleResources->flags->flags[i] & RESOURCE_FLAG_TRACED))
             {
                 u32 chosenTarget;
-                u32 side = (BATTLE_OPPOSITE(GetBattlerPosition(i))) & BIT_SIDE; // side of the opposing pokemon
+                u32 side = (BATTLE_OPPOSITE(GetBattlerPosition(i))) & BIT_SIDE; // side of the opposing Pokémon
                 u32 target1 = GetBattlerAtPosition(side);
                 u32 target2 = GetBattlerAtPosition(side + BIT_FLANK);
 
@@ -8494,6 +8494,8 @@ bool32 IsBattlerProtected(u32 battler, u32 move)
         return TRUE;
     else if (gProtectStructs[battler].banefulBunkered)
         return TRUE;
+    else if (gProtectStructs[battler].burningBulwarked)
+        return TRUE;
     else if ((gProtectStructs[battler].obstructed || gProtectStructs[battler].silkTrapped) && !IS_MOVE_STATUS(move))
         return TRUE;
     else if (gProtectStructs[battler].spikyShielded)
@@ -8991,6 +8993,10 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
     case EFFECT_RAGE_FIST:
         basePower += 50 * gBattleStruct->timesGotHit[GetBattlerSide(battlerAtk)][gBattlerPartyIndexes[battlerAtk]];
         basePower = (basePower > 350) ? 350 : basePower;
+        break;
+    case EFFECT_FICKLE_BEAM:
+        if (RandomPercentage(RNG_FICKLE_BEAM, 30))
+            basePower *= 2;
         break;
     }
 

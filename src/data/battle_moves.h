@@ -13721,7 +13721,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_ELECTRO_SHOT] =
     {
-        .effect = EFFECT_PLACEHOLDER, //EFFECT_ELECTRO_SHOT
+        .effect = EFFECT_METEOR_BEAM,
         .power = 130,
         .type = TYPE_ELECTRIC,
         .accuracy = 100,
@@ -13750,7 +13750,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_FICKLE_BEAM] =
     {
-        .effect = EFFECT_PLACEHOLDER, //EFFECT_FICKLE_BEAM
+        .effect = EFFECT_FICKLE_BEAM,
         .power = 80,
         .type = TYPE_DRAGON,
         .accuracy = 100,
@@ -13762,7 +13762,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_BURNING_BULWARK] =
     {
-        .effect = EFFECT_PROTECT, // NEEDS ACTUAL PROTECT SIDE EFFECT
+        .effect = EFFECT_PROTECT,
         .power = 0,
         .type = TYPE_FIRE,
         .accuracy = 0,
@@ -13851,7 +13851,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_ALLURING_VOICE] =
     {
-        .effect = EFFECT_PLACEHOLDER, //EFFECT_ALLURING_VOICE
+        .effect = EFFECT_HIT,
         .power = 80,
         .type = TYPE_FAIRY,
         .accuracy = 100,
@@ -13860,7 +13860,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .soundMove = TRUE,
+        .sheerForceBoost = TRUE,
         .ignoresSubstitute = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS(
+            SECONDARY_EFFECT(MOVE_EFFECT_CONFUSION, 100)
+        ),
     },
 
     [MOVE_TEMPER_FLARE] =
