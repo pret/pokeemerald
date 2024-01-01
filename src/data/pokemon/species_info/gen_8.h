@@ -1938,6 +1938,54 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         ICON(Dipplin, 1),
         //.footprint = gMonFootprint_Dipplin,
         LEARNSETS(Dipplin),
+        .evolutions = EVOLUTION({EVO_MOVE, MOVE_DRAGON_CHEER, SPECIES_HYDRAPPLE}),
+    },
+
+    [SPECIES_HYDRAPPLE] =
+    {
+        .baseHP        = 106,
+        .baseAttack    = 80,
+        .baseDefense   = 110,
+        .baseSpeed     = 44,
+        .baseSpAttack  = 120,
+        .baseSpDefense = 80,
+        .types = { TYPE_GRASS, TYPE_DRAGON },
+        .catchRate = 10,
+        .expYield = 170, //Currently unknown
+        .evYield_SpAttack = 3,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_ERRATIC,
+        .eggGroups = { EGG_GROUP_GRASS, EGG_GROUP_DRAGON },
+        .abilities = { ABILITY_SUPERSWEET_SYRUP, ABILITY_REGENERATOR, ABILITY_STICKY_HOLD },
+        .bodyColor = BODY_COLOR_GREEN,
+        .speciesName = _("Hydrapple"),
+        //.cryId = CRY_HYDRAPPLE,
+        .natDexNum = NATIONAL_DEX_HYDRAPPLE,
+        .categoryName = _("Apple Hydra"),
+        .height = 18,
+        .weight = 930,
+        .description = COMPOUND_STRING(
+            "These capricious syrpents have\n"
+            "banded together. On the rare\n"
+            "occasion that their moods align,\n"
+            "their true power is unleashed."),
+        .pokemonScale = 356,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        //FRONT_PIC(Hydrapple, 64, 64),
+        .frontPicYOffset = 0,
+        .frontAnimFrames = sAnims_Hydrapple,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        //BACK_PIC(Hydrapple, 64, 64),
+        .backPicYOffset = 0,
+        //.backAnimId = BACK_ANIM_NONE,
+        //PALETTES(Hydrapple),
+        //ICON(Hydrapple, 0),
+        //.footprint = gMonFootprint_Hydrapple,
+        LEARNSETS(Hydrapple),
     },
 #endif //P_GEN_9_CROSS_EVOS
 #endif //P_FAMILY_APPLIN
@@ -4215,6 +4263,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(Duraludon),
         ICON(Duraludon, 0),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_METAL_ALLOY, SPECIES_ARCHALUDON}),
     },
 
 #if P_GIGANTAMAX_FORMS
@@ -4244,6 +4293,55 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .isGigantamax = TRUE,
     },
 #endif //P_GIGANTAMAX_FORMS
+
+#if P_GEN_9_CROSS_EVOS
+    [SPECIES_ARCHALUDON] =
+    {
+        .baseHP        = 90,
+        .baseAttack    = 105,
+        .baseDefense   = 130,
+        .baseSpeed     = 85,
+        .baseSpAttack  = 125,
+        .baseSpDefense = 65,
+        .types = { TYPE_STEEL, TYPE_DRAGON },
+        .catchRate = 10,
+        .expYield = 187, //Currently unknown
+        .evYield_Defense = 3,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 30,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_DRAGON },
+        .abilities = { ABILITY_STAMINA, ABILITY_STURDY, ABILITY_STALWART },
+        .bodyColor = BODY_COLOR_WHITE,
+        .speciesName = _("Archaludon"),
+        //.cryId = CRY_ARCHALUDON,
+        .natDexNum = NATIONAL_DEX_ARCHALUDON,
+        .categoryName = _("Alloy"),
+        .height = 20,
+        .weight = 600,
+        .description = COMPOUND_STRING(
+            "It gathers static electricity\n"
+            "from its surroundings. The beams\n"
+            "it launches when down on all fours\n"
+            "are tremendously powerful."),
+        .pokemonScale = 267,
+        .pokemonOffset = 2,
+        .trainerScale = 286,
+        .trainerOffset = 1,
+        //FRONT_PIC(Archaludon, 64, 64),
+        .frontPicYOffset = 0,
+        .frontAnimFrames = sAnims_Archaludon,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        //BACK_PIC(Archaludon, 64, 64),
+        .backPicYOffset = 0,
+        //.backAnimId = BACK_ANIM_NONE,
+        //PALETTES(Archaludon),
+        //ICON(Archaludon, 0),
+        //.footprint = gMonFootprint_Archaludon,
+        LEARNSETS(Archaludon),
+    },
+#endif //P_GEN_9_CROSS_EVOS
 #endif //P_FAMILY_DURALUDON
 
 #if P_FAMILY_DREEPY
