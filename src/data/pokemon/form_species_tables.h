@@ -1761,3 +1761,12 @@ static const u16 sOgerponFormSpeciesIdTable[] = {
     FORM_SPECIES_END,
 };
 #endif //P_FAMILY_OGERPON
+
+#if P_FAMILY_TERAPAGOS
+static const u16 sTerapagosFormSpeciesIdTable[] = {
+    SPECIES_TERAPAGOS_NORMAL,
+    SPECIES_TERAPAGOS_TERASTAL,
+    SPECIES_TERAPAGOS_STELLAR,
+    FORM_SPECIES_END,
+};
+#endif //P_FAMILY_TERAPAGOS

@@ -33821,6 +33821,10 @@ static const u16 sAppletunTeachableLearnset[] = {
 static const u16 sDipplinTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
+
+static const u16 sHydrappleTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
 #endif //P_GEN_9_CROSS_EVOS
 #endif //P_FAMILY_APPLIN
 
@@ -34654,6 +34658,12 @@ static const u16 sDuraludonTeachableLearnset[] = {
     MOVE_THUNDER_WAVE,
     MOVE_UNAVAILABLE,
 };
+
+#if P_GEN_9_CROSS_EVOS
+static const u16 sArchaludonTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+#endif //P_GEN_9_CROSS_EVOS
 #endif //P_FAMILY_DURALUDON
 
 #if P_FAMILY_DREEPY
@@ -39114,3 +39124,39 @@ static const u16 sOgerponTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 #endif //P_FAMILY_OGERPON
+
+#if P_FAMILY_GOUGING_FIRE
+static const u16 sGougingFireTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+#endif //P_FAMILY_GOUGING_FIRE
+
+#if P_FAMILY_RAGING_BOLT
+static const u16 sRagingBoltTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+#endif //P_FAMILY_RAGING_BOLT
+
+#if P_FAMILY_IRON_BOULDER
+static const u16 sIronBoulderTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+#endif //P_FAMILY_IRON_BOULDER
+
+#if P_FAMILY_IRON_CROWN
+static const u16 sIronCrownTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+#endif //P_FAMILY_IRON_CROWN
+
+#if P_FAMILY_TERAPAGOS
+static const u16 sTerapagosTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+#endif //P_FAMILY_TERAPAGOS
+
+#if P_FAMILY_PECHARUNT
+static const u16 sPecharuntTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+#endif //P_FAMILY_PECHARUNT
