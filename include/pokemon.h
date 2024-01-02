@@ -517,16 +517,11 @@ struct BattleMove
 
 #define EFFECTS_ARR(...) (const struct AdditionalEffect[]) {__VA_ARGS__}
 
-#define PRIMARY_EFFECT(_moveEffect) {.self = FALSE, .chance = 0, .moveEffect = _moveEffect}
-#define PRIMARY_EFFECT_SELF(_moveEffect) {.self = TRUE, .chance = 0, .moveEffect = _moveEffect}
-#define SECONDARY_EFFECT(_moveEffect, _chance) {.self = FALSE, .chance = _chance, .moveEffect = _moveEffect}
-#define SECONDARY_EFFECT_SELF(_moveEffect, _chance) {.self = TRUE, .chance = _chance, .moveEffect = _moveEffect}
-
 struct AdditionalEffect
 {
     u8 self:1;
-    u8 onChargeTurnOnly:1;
     u8 onlyIfTargetRaisedStats:1;
+    u8 onChargeTurnOnly:1;
     u8 chance; // 0% = effect certain, primary effect
     u16 moveEffect;
 };

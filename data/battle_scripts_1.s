@@ -938,7 +938,7 @@ BattleScript_FirstChargingTurnMeteorBeam::
 	copybyte cMULTISTRING_CHOOSER, sTWOTURN_STRINGID
 	printfromtable gFirstTurnOfTwoStringIds
 	waitmessage B_WAIT_TIME_LONG
-	seteffectprimary MOVE_EFFECT_SP_ATK_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
+	setadditionaleffects @ only onChargeTurnOnly effects will work here
 	return
 
 BattleScript_EffectSkyDrop:

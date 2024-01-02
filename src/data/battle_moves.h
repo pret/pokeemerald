@@ -3947,6 +3947,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         #if B_SPEED_BUFFING_RAPID_SPIN >= GEN_8
             ,{
                 .moveEffect = MOVE_EFFECT_SPD_PLUS_1,
+                .self = TRUE,
                 .chance = 100,
             }
         #endif
@@ -14017,6 +14018,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
         .sheerForceBoost = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_SP_ATK_PLUS_1,
+            .self = TRUE,
+            .onChargeTurnOnly = TRUE,
+        }),
     },
 
     [MOVE_TERA_STARSTORM] =
