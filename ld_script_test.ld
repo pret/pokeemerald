@@ -12,32 +12,15 @@ MEMORY
 }
 
 SECTIONS {
-
-    .ewram ORIGIN(EWRAM) : AT (__ewram_lma)
+    ewram 0x2000000 (NOLOAD) :
     ALIGN(4)
     {
-        __ewram_start = .;
-        *(.ewram*)
-        __ewram_end = .;
+        src/*.o(ewram_data);
+        gflib/*.o(ewram_data);
+        test/*.o(ewram_data);
     } > EWRAM
 
-    .ewram.sbss (NOLOAD) :
-    ALIGN(4)
-    {
-        src/*.o(.sbss);
-        gflib/*.o(.sbss);
-        test/*.o(.sbss);
-    } > EWRAM
-
-    .iwram ORIGIN(IWRAM) : AT (__iwram_lma)
-    ALIGN(4)
-    {
-        __iwram_start = .;
-        *(.iwram*);
-        __iwram_end = .;
-    } > IWRAM
-
-    .iwram.sbss (NOLOAD) :
+    iwram 0x3000000 (NOLOAD) :
     ALIGN(4)
     {
         src/*.o(.bss);
@@ -113,20 +96,6 @@ SECTIONS {
         *libc.a:*.o(.data*);
         src/libisagbprn.o(.rodata);
     } > ROM =0
-
-    .data.iwram :
-    ALIGN(4)
-    {
-        __iwram_lma = .;
-        . = . + (__iwram_end - __iwram_start);
-    } > ROM = 0
-
-    .data.ewram :
-    ALIGN(4)
-    {
-        __ewram_lma = .;
-        . = . + (__ewram_end - __ewram_start);
-    } > ROM = 0
 
     tests :
     ALIGN(4)
