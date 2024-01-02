@@ -64,12 +64,12 @@ enum {
 
 struct CreditsData
 {
-    u16 monToShow[NUM_MON_SLIDES]; // List of Pokemon species ids that will show during the credits
+    u16 monToShow[NUM_MON_SLIDES]; // List of Pokémon species ids that will show during the credits
     u16 imgCounter; //how many mon images have been shown
     u16 nextImgPos; //if the next image spawns left/center/right
     u16 currShownMon; //index into monToShow
-    u16 numMonToShow; //number of pokemon to show, always NUM_MON_SLIDES after determine function
-    u16 caughtMonIds[NATIONAL_DEX_COUNT]; //temporary location to hold a condensed array of all caught pokemon
+    u16 numMonToShow; //number of Pokémon to show, always NUM_MON_SLIDES after determine function
+    u16 caughtMonIds[NATIONAL_DEX_COUNT]; //temporary location to hold a condensed array of all caught Pokémon
     u16 numCaughtMon; //count of filled spaces in caughtMonIds
     u16 unused[7];
 };
@@ -1556,8 +1556,8 @@ static void DeterminePokemonToShow(void)
     u16 dexNum;
     u16 j;
 
-    // Go through the Pokedex, and anything that has gotten caught we put into our massive array.
-    // This basically packs all of the caught pokemon into the front of the array
+    // Go through the Pokédex, and anything that has gotten caught we put into our massive array.
+    // This basically packs all of the caught Pokémon into the front of the array
     for (dexNum = 1, j = 0; dexNum < NATIONAL_DEX_COUNT; dexNum++)
     {
         if (GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT))
@@ -1571,14 +1571,14 @@ static void DeterminePokemonToShow(void)
     for (dexNum = j; dexNum < NATIONAL_DEX_COUNT; dexNum++)
         sCreditsData->caughtMonIds[dexNum] = NATIONAL_DEX_NONE;
 
-    // Cap the number of pokemon we care about to NUM_MON_SLIDES, the max we show in the credits scene (-1 for the starter)
+    // Cap the number of Pokémon we care about to NUM_MON_SLIDES, the max we show in the credits scene (-1 for the starter)
     sCreditsData->numCaughtMon = j;
     if (sCreditsData->numCaughtMon < NUM_MON_SLIDES)
         sCreditsData->numMonToShow = j;
     else
         sCreditsData->numMonToShow = NUM_MON_SLIDES;
 
-    // Loop through our list of caught pokemon and select randomly from it to fill the images to show
+    // Loop through our list of caught Pokémon and select randomly from it to fill the images to show
     j = 0;
     do
     {
@@ -1599,7 +1599,7 @@ static void DeterminePokemonToShow(void)
     }
     while (sCreditsData->numCaughtMon != 0 && j < NUM_MON_SLIDES);
 
-    // If we don't have enough pokemon in the dex to fill everything, copy the selected mon into the end of the array, so it loops
+    // If we don't have enough Pokémon in the dex to fill everything, copy the selected mon into the end of the array, so it loops
     if (sCreditsData->numMonToShow < NUM_MON_SLIDES)
     {
         for (j = sCreditsData->numMonToShow, page = 0; j < NUM_MON_SLIDES; j++)
@@ -1610,7 +1610,7 @@ static void DeterminePokemonToShow(void)
             if (page == sCreditsData->numMonToShow)
                 page = 0;
         }
-        // Ensure the last pokemon is our starter
+        // Ensure the last Pokémon is our starter
         sCreditsData->monToShow[NUM_MON_SLIDES - 1] = starter;
     }
     else
@@ -1618,7 +1618,7 @@ static void DeterminePokemonToShow(void)
         // Check to see if our starter has already appeared in this list, break if it has
         for (dexNum = 0; sCreditsData->monToShow[dexNum] != starter && dexNum < NUM_MON_SLIDES; dexNum++);
 
-        // If it has, swap it with the last pokemon, to ensure our starter is the last image
+        // If it has, swap it with the last Pokémon, to ensure our starter is the last image
         if (dexNum < sCreditsData->numMonToShow - 1)
         {
             sCreditsData->monToShow[dexNum] = sCreditsData->monToShow[NUM_MON_SLIDES-1];
@@ -1626,7 +1626,7 @@ static void DeterminePokemonToShow(void)
         }
         else
         {
-            // Ensure the last pokemon is our starter
+            // Ensure the last Pokémon is our starter
             sCreditsData->monToShow[NUM_MON_SLIDES - 1] = starter;
         }
     }

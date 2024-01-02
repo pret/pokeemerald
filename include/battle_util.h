@@ -222,16 +222,6 @@ void RecalcBattlerStats(u32 battler, struct Pokemon *mon);
 bool32 IsAlly(u32 battlerAtk, u32 battlerDef);
 bool32 IsGen6ExpShareEnabled(void);
 
-// Ability checks
-bool32 IsSkillSwapBannedAbility(u16 ability);
-bool32 IsRolePlayDoodleBannedAbility(u16 ability);
-bool32 IsRolePlayDoodleBannedAbilityAttacker(u16 ability);
-bool32 IsWorrySeedBannedAbility(u16 ability);
-bool32 IsGastroAcidBannedAbility(u16 ability);
-bool32 IsEntrainmentBannedAbility(u16 ability);
-bool32 IsEntrainmentBannedAbilityAttacker(u16 ability);
-bool32 IsSimpleBeamBannedAbility(u16 ability);
-
 bool32 CanSleep(u32 battler);
 bool32 CanBePoisoned(u32 battlerAttacker, u32 battlerTarget);
 bool32 CanBeBurned(u32 battler);

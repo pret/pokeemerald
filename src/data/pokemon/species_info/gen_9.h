@@ -5026,7 +5026,9 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .height = 35,
         .weight = 2800,
         .description = COMPOUND_STRING(
-            "Ecology under research."),
+            "This ferocious creature is shrouded in\n"
+            "mystery. It's named after an aquatic\n"
+            "monster mentioned in an old journal."),
         .pokemonScale = 356,
         .pokemonOffset = 17,
         .trainerScale = 256,
@@ -5073,7 +5075,9 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .height = 15,
         .weight = 1250,
         .description = COMPOUND_STRING(
-            "Ecology under analysis."),
+            "According to the few eyewitness accounts\n"
+            "that exist, it used its shining blades\n"
+            "to julienne large trees and boulders."),
         .pokemonScale = 356,
         .pokemonOffset = 17,
         .trainerScale = 256,
@@ -5427,6 +5431,376 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
 #endif //P_TERA_FORMS
 
 #endif //P_FAMILY_OGERPON
+
+#if P_FAMILY_GOUGING_FIRE
+    [SPECIES_GOUGING_FIRE] =
+    {
+        .baseHP        = 105,
+        .baseAttack    = 115,
+        .baseDefense   = 121,
+        .baseSpeed     = 91,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 93,
+        .types = { TYPE_FIRE, TYPE_DRAGON },
+        .catchRate = 10,
+        .expYield = 261, //Currently unknown
+        .evYield_Defense = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED },
+        .abilities = { ABILITY_PROTOSYNTHESIS, ABILITY_NONE },
+        .bodyColor = BODY_COLOR_BROWN,
+        .isParadoxForm = TRUE,
+        .speciesName = _("GouginFire"),
+        //.cryId = CRY_GOUGING_FIRE,
+        .natDexNum = NATIONAL_DEX_GOUGING_FIRE,
+        .categoryName = _("Paradox"),
+        .height = 35,
+        .weight = 5900,
+        .description = COMPOUND_STRING(
+            "There are scant few reports of\n"
+            "this creature being sighted.\n"
+            "One short video shows it rampaging,\n"
+            "and spouting pillars of flame."),
+        .pokemonScale = 259,
+        .pokemonOffset = 0,
+        .trainerScale = 345,
+        .trainerOffset = 7,
+        //FRONT_PIC(GougingFire, 64, 64),
+        .frontPicYOffset = 0,
+        .frontAnimFrames = sAnims_GougingFire,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        //BACK_PIC(GougingFire, 64, 64),
+        .backPicYOffset = 0,
+        //.backAnimId = BACK_ANIM_NONE,
+        //PALETTES(GougingFire),
+        //ICON(GougingFire, 0),
+        //.footprint = gMonFootprint_GougingFire,
+        LEARNSETS(GougingFire),
+    },
+#endif //P_FAMILY_GOUGING_FIRE
+
+#if P_FAMILY_RAGING_BOLT
+    [SPECIES_RAGING_BOLT] =
+    {
+        .baseHP        = 125,
+        .baseAttack    = 73,
+        .baseDefense   = 91,
+        .baseSpeed     = 75,
+        .baseSpAttack  = 137,
+        .baseSpDefense = 89,
+        .types = { TYPE_ELECTRIC, TYPE_DRAGON },
+        .catchRate = 10,
+        .expYield = 261, //Currently unknown
+        .evYield_SpAttack = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED },
+        .abilities = { ABILITY_PROTOSYNTHESIS, ABILITY_NONE },
+        .bodyColor = BODY_COLOR_YELLOW,
+        .isParadoxForm = TRUE,
+        .speciesName = _("RagingBolt"),
+        //.cryId = CRY_RAGING_BOLT,
+        .natDexNum = NATIONAL_DEX_RAGING_BOLT,
+        .categoryName = _("Paradox"),
+        .height = 52,
+        .weight = 4800,
+        .description = COMPOUND_STRING(
+            "It bears resemblance to a Pokémon\n"
+            "that became a hot topic for a short\n"
+            "while after a paranomal magazine\n"
+            "touted it as Raikou's ancestor."),
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 345,
+        .trainerOffset = 7,
+        //FRONT_PIC(RagingBolt, 64, 64),
+        .frontPicYOffset = 0,
+        .frontAnimFrames = sAnims_RagingBolt,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        //BACK_PIC(RagingBolt, 64, 64),
+        .backPicYOffset = 0,
+        //.backAnimId = BACK_ANIM_NONE,
+        //PALETTES(RagingBolt),
+        //ICON(RagingBolt, 0),
+        //.footprint = gMonFootprint_RagingBolt,
+        LEARNSETS(RagingBolt),
+    },
+#endif //P_FAMILY_RAGING_BOLT
+
+#if P_FAMILY_IRON_BOULDER
+    [SPECIES_IRON_BOULDER] =
+    {
+        .baseHP        = 90,
+        .baseAttack    = 120,
+        .baseDefense   = 80,
+        .baseSpeed     = 124,
+        .baseSpAttack  = 68,
+        .baseSpDefense = 108,
+        .types = { TYPE_ROCK, TYPE_PSYCHIC },
+        .catchRate = 10,
+        .expYield = 261, //Currently unknown
+        .evYield_Speed = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED },
+        .abilities = { ABILITY_QUARK_DRIVE, ABILITY_NONE },
+        .bodyColor = BODY_COLOR_GRAY,
+        .isParadoxForm = TRUE,
+        .speciesName = _("IronBouldr"),
+        //.cryId = CRY_IRON_BOULDER,
+        .natDexNum = NATIONAL_DEX_IRON_BOULDER,
+        .categoryName = _("Paradox"),
+        .height = 15,
+        .weight = 1625,
+        .description = COMPOUND_STRING(
+            "It was named after a mysterious\n"
+            "object recorded in an old book.\n"
+            "Its body seems to be metallic."),
+        .pokemonScale = 256,
+        .pokemonOffset = 1,
+        .trainerScale = 336,
+        .trainerOffset = 4,
+        //FRONT_PIC(IronBoulder, 64, 64),
+        .frontPicYOffset = 0,
+        .frontAnimFrames = sAnims_IronBoulder,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        //BACK_PIC(IronBoulder, 64, 64),
+        .backPicYOffset = 0,
+        //.backAnimId = BACK_ANIM_NONE,
+        //PALETTES(IronBoulder),
+        //ICON(IronBoulder, 0),
+        //.footprint = gMonFootprint_IronBoulder,
+        LEARNSETS(IronBoulder),
+    },
+#endif //P_FAMILY_IRON_BOULDER
+
+#if P_FAMILY_IRON_CROWN
+    [SPECIES_IRON_CROWN] =
+    {
+        .baseHP        = 90,
+        .baseAttack    = 72,
+        .baseDefense   = 100,
+        .baseSpeed     = 98,
+        .baseSpAttack  = 122,
+        .baseSpDefense = 108,
+        .types = { TYPE_STEEL, TYPE_PSYCHIC },
+        .catchRate = 10,
+        .expYield = 261, //Currently unknown
+        .evYield_SpAttack = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED },
+        .abilities = { ABILITY_QUARK_DRIVE, ABILITY_NONE },
+        .bodyColor = BODY_COLOR_BLUE,
+        .isParadoxForm = TRUE,
+        .speciesName = _("Iron Crown"),
+        //.cryId = CRY_IRON_CROWN,
+        .natDexNum = NATIONAL_DEX_IRON_CROWN,
+        .categoryName = _("Paradox"),
+        .height = 16,
+        .weight = 1560,
+        .description = COMPOUND_STRING(
+            "It resembles a mysterious object\n"
+            "introduced in a paranormal magazine\n"
+            "as a cutting-edge weapon\n"
+            "shaped like Cobalion."),
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 365,
+        .trainerOffset = 7,
+        //FRONT_PIC(IronCrown, 64, 64),
+        .frontPicYOffset = 0,
+        .frontAnimFrames = sAnims_IronCrown,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        //BACK_PIC(IronCrown, 64, 64),
+        .backPicYOffset = 0,
+        //.backAnimId = BACK_ANIM_NONE,
+        //PALETTES(IronCrown),
+        //ICON(IronCrown, 0),
+        //.footprint = gMonFootprint_IronCrown,
+        LEARNSETS(IronCrown),
+    },
+#endif //P_FAMILY_IRON_CROWN
+
+#if P_FAMILY_TERAPAGOS
+#define TERAPAGOS_MISC_INFO                                                             \
+        .types = { TYPE_NORMAL, TYPE_NORMAL },                                          \
+        .catchRate = 255,                                                               \
+        .expYield = 275,                                                                \
+        .genderRatio = PERCENT_FEMALE(50),                                              \
+        .eggCycles = 20,                                                                \
+        .friendship = STANDARD_FRIENDSHIP,                                              \
+        .growthRate = GROWTH_SLOW,                                                      \
+        .eggGroups = { EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED },    \
+        .bodyColor = BODY_COLOR_BLUE,                                                   \
+        .speciesName = _("Terapagos"),                                                  \
+        .natDexNum = NATIONAL_DEX_TERAPAGOS,                                            \
+        .categoryName = _("Tera"),                                                      \
+        LEARNSETS(Terapagos),                                                           \
+        .formSpeciesIdTable = sTerapagosFormSpeciesIdTable,                             \
+        .formChangeTable = sTerapagosFormChangeTable,                                   \
+        .isLegendary = TRUE
+        //.cryId = CRY_TERAPAGOS,
+        //.footprint = gMonFootprint_Terapagos,
+
+    [SPECIES_TERAPAGOS_NORMAL] =
+    {
+        TERAPAGOS_MISC_INFO,
+        .baseHP        = 90,
+        .baseAttack    = 65,
+        .baseDefense   = 85,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 85,
+        .evYield_Defense = 1,
+        .abilities = { ABILITY_TERA_SHIFT, ABILITY_NONE },
+        .height = 2,
+        .weight = 65,
+        .description = COMPOUND_STRING(
+            "Terapagos protects itself using its\n"
+            "power to transform energy into hard\n"
+            "crystals. This Pokémon is the source\n"
+            "of the Terastal phenomenon."),
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 365,
+        .trainerOffset = 7,
+        //FRONT_PIC(TerapagosNormal, 64, 64),
+        .frontPicYOffset = 0,
+        .frontAnimFrames = sAnims_TerapagosNormal,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        //BACK_PIC(TerapagosNormal, 64, 64),
+        .backPicYOffset = 0,
+        //.backAnimId = BACK_ANIM_NONE,
+        //PALETTES(TerapagosNormal),
+        //ICON(TerapagosNormal, 0),
+    },
+
+    [SPECIES_TERAPAGOS_TERASTAL] =
+    {
+        TERAPAGOS_MISC_INFO,
+        .baseHP        = 95,
+        .baseAttack    = 95,
+        .baseDefense   = 110,
+        .baseSpeed     = 85,
+        .baseSpAttack  = 105,
+        .baseSpDefense = 110,
+        .evYield_Defense = 2,
+        .abilities = { ABILITY_TERA_SHELL, ABILITY_NONE },
+        .height = 3,
+        .weight = 160,
+        .description = COMPOUND_STRING(
+            "The shell is made of crystallized\n"
+            "Terastal energy. When struck by a move,\n"
+            "this shell absorbs the move's energy\n"
+            "and transfers it to Terapagos."),
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 365,
+        .trainerOffset = 7,
+        //FRONT_PIC(TerapagosTerastal, 64, 64),
+        .frontPicYOffset = 0,
+        .frontAnimFrames = sAnims_TerapagosTerastal,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        //BACK_PIC(TerapagosTerastal, 64, 64),
+        .backPicYOffset = 0,
+        //.backAnimId = BACK_ANIM_NONE,
+        //PALETTES(TerapagosTerastal),
+        //ICON(TerapagosTerastal, 0),
+    },
+
+    [SPECIES_TERAPAGOS_STELLAR] =
+    {
+        TERAPAGOS_MISC_INFO,
+        .baseHP        = 160,
+        .baseAttack    = 105,
+        .baseDefense   = 110,
+        .baseSpeed     = 85,
+        .baseSpAttack  = 130,
+        .baseSpDefense = 110,
+        .evYield_HP = 3,
+        .abilities = { ABILITY_TERAFORM_ZERO, ABILITY_NONE },
+        .height = 17,
+        .weight = 770,
+        .description = COMPOUND_STRING(
+            "An old expedition journal describes the\n"
+            "sight of this Pokémon buried in the,\n"
+            "depths of the earth as resembling a\n"
+            "planet floating in space."),
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 365,
+        .trainerOffset = 7,
+        //FRONT_PIC(TerapagosStellar, 64, 64),
+        .frontPicYOffset = 0,
+        .frontAnimFrames = sAnims_TerapagosStellar,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        //BACK_PIC(TerapagosStellar, 64, 64),
+        .backPicYOffset = 0,
+        //.backAnimId = BACK_ANIM_NONE,
+        //PALETTES(TerapagosStellar),
+        //ICON(TerapagosStellar, 0),
+    },
+#endif //P_FAMILY_TERAPAGOS
+
+#if P_FAMILY_PECHARUNT
+    [SPECIES_PECHARUNT] =
+    {
+        .baseHP        = 88,
+        .baseAttack    = 88,
+        .baseDefense   = 160,
+        .baseSpeed     = 88,
+        .baseSpAttack  = 88,
+        .baseSpDefense = 88,
+        .types = { TYPE_POISON, TYPE_GHOST },
+        .catchRate = 3,
+        .expYield = 261, //Currently unknown
+        .evYield_Defense = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 50,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = { EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED },
+        .abilities = { ABILITY_POISON_PUPPETEER, ABILITY_NONE },
+        .bodyColor = BODY_COLOR_PURPLE,
+        .isMythical = TRUE,
+        .speciesName = _("Pecharunt"),
+        //.cryId = CRY_PECHARUNT,
+        .natDexNum = NATIONAL_DEX_PECHARUNT,
+        .categoryName = _("Subjugation"),
+        .height = 3,
+        .weight = 3,
+        .description = COMPOUND_STRING(
+            "It feeds others toxic mochi that\n"
+            "draw out desires and capabilities.\n"
+            "Those who eat the mochi fall under\n"
+            "Pecharunt's control, chained to its will."),
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 365,
+        .trainerOffset = 7,
+        //FRONT_PIC(Pecharunt, 64, 64),
+        .frontPicYOffset = 0,
+        .frontAnimFrames = sAnims_Pecharunt,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        //BACK_PIC(Pecharunt, 64, 64),
+        .backPicYOffset = 0,
+        //.backAnimId = BACK_ANIM_NONE,
+        //PALETTES(Pecharunt),
+        //ICON(Pecharunt, 0),
+        //.footprint = gMonFootprint_Pecharunt,
+        LEARNSETS(Pecharunt),
+    },
+#endif //P_FAMILY_PECHARUNT
 
 #ifdef __INTELLISENSE__
 };

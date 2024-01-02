@@ -1492,6 +1492,7 @@ static void DebugTask_HandleMenuInput_FlagsVars(u8 taskId)
         PlaySE(SE_SELECT);
         if ((func = sDebugMenu_Actions_Flags[input]) != NULL)
         {
+            Debug_RedrawListMenu(taskId);
             func(taskId);
 
             // Remove TRUE/FALSE window for functions that haven't been assigned flags
@@ -1501,8 +1502,6 @@ static void DebugTask_HandleMenuInput_FlagsVars(u8 taskId)
                 RemoveWindow(gTasks[taskId].tSubWindowId);
                 Free(sDebugMenuListData);
             }
-            else
-                Debug_RedrawListMenu(taskId);
         }
     }
     else if (JOY_NEW(B_BUTTON))

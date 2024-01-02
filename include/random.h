@@ -177,6 +177,7 @@ enum RandomTag
     RNG_QUICK_DRAW,
     RNG_QUICK_CLAW,
     RNG_TRACE,
+    RNG_FICKLE_BEAM,
 };
 
 #define RandomWeighted(tag, ...) \
