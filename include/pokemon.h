@@ -515,7 +515,7 @@ struct BattleMove
 
 #define ADDITIONAL_EFFECTS(...) EFFECTS_ARR( __VA_ARGS__ ), .numAdditionalEffects = ARRAY_COUNT(EFFECTS_ARR( __VA_ARGS__ ))
 
-#define EFFECTS_ARR(...) (const struct AdditionalEffect[]) { __VA_ARGS__ }
+#define EFFECTS_ARR(...) (const struct AdditionalEffect[]) {__VA_ARGS__}
 
 #define PRIMARY_EFFECT(_moveEffect) {.self = FALSE, .chance = 0, .moveEffect = _moveEffect}
 #define PRIMARY_EFFECT_SELF(_moveEffect) {.self = TRUE, .chance = 0, .moveEffect = _moveEffect}
@@ -524,7 +524,9 @@ struct BattleMove
 
 struct AdditionalEffect
 {
-    bool8 self;
+    u8 self:1;
+    u8 onChargeTurnOnly:1;
+    u8 onlyIfTargetRaisedStats:1;
     u8 chance; // 0% = effect certain, primary effect
     u16 moveEffect;
 };

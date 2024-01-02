@@ -2893,9 +2893,6 @@ void SetMoveEffect(bool32 primary, bool32 certain)
             statusChanged = TRUE;
             break;
         case STATUS1_BURN:
-            if (gCurrentMove == MOVE_BURNING_JEALOUSY && !gProtectStructs[gEffectBattler].statRaised)
-                break;
-
             if ((battlerAbility == ABILITY_WATER_VEIL || battlerAbility == ABILITY_WATER_BUBBLE)
               && (primary == TRUE || certain == TRUE))
             {
@@ -3127,9 +3124,6 @@ void SetMoveEffect(bool32 primary, bool32 certain)
             switch (gBattleScripting.moveEffect)
             {
             case MOVE_EFFECT_CONFUSION:
-                if (gCurrentMove == MOVE_ALLURING_VOICE && !gProtectStructs[gEffectBattler].statRaised)
-                    break;
-
                 if (!CanBeConfused(gEffectBattler))
                 {
                     gBattlescriptCurrInstr++;
@@ -3804,23 +3798,23 @@ static void Cmd_setadditionaleffects(void)
     {
         if (gBattleMoves[gCurrentMove].numAdditionalEffects > gBattleStruct->additionalEffectsCounter)
         {
+            u32 percentChance;
             const u8 *currentPtr = gBattlescriptCurrInstr;
+            const struct AdditionalEffect *additionalEffect = &gBattleMoves[gCurrentMove].additionalEffects[gBattleStruct->additionalEffectsCounter];
+
+            // Check additional effect flags
             // self-targeting move effects cannot occur multiple times per turn
             // only occur on the last setmoveeffect when there are multiple targets
             if (!(gBattleMoves[gCurrentMove].additionalEffects[gBattleStruct->additionalEffectsCounter].self
+              && !(additionalEffect->onlyIfTargetRaisedStats && !gProtectStructs[gBattlerTarget].statRaised)
               && GetNextTarget(gBattleMoves[gCurrentMove].target, TRUE) != MAX_BATTLERS_COUNT))
             {
-                u32 percentChance = CalcSecondaryEffectChance(
-                    gBattlerAttacker,
-                    GetBattlerAbility(gBattlerAttacker),
-                    &gBattleMoves[gCurrentMove].additionalEffects[gBattleStruct->additionalEffectsCounter]
-                );
+                percentChance = CalcSecondaryEffectChance(gBattlerAttacker, GetBattlerAbility(gBattlerAttacker), additionalEffect);
 
                 // Activate effect if it's primary (chance == 0) or if RNGesus says so
                 if ((percentChance == 0) || RandomPercentage(RNG_SECONDARY_EFFECT + gBattleStruct->additionalEffectsCounter, percentChance))
                 {
-                    gBattleScripting.moveEffect = gBattleMoves[gCurrentMove].additionalEffects[gBattleStruct->additionalEffectsCounter].moveEffect
-                        | (MOVE_EFFECT_AFFECTS_USER * (gBattleMoves[gCurrentMove].additionalEffects[gBattleStruct->additionalEffectsCounter].self));
+                    gBattleScripting.moveEffect = additionalEffect->moveEffect | (MOVE_EFFECT_AFFECTS_USER * (additionalEffect->self));
 
                     SetMoveEffect(
                         percentChance == 0, // a primary effect

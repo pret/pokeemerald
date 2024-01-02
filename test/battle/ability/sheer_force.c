@@ -20,7 +20,7 @@ SINGLE_BATTLE_TEST("Sheer Force boosts power, but removes secondary effects of m
         PLAYER(SPECIES_TAUROS) { Ability(ability); Status1(move == MOVE_SNORE ? STATUS1_SLEEP : STATUS1_NONE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        if (move == MOVE_ALLURING_VOICE) // Alluring Voice requires the target to boost stats to have an effect
+        if (move == MOVE_ALLURING_VOICE || move == MOVE_BURNING_JEALOUSY) // Alluring Voice requires the target to boost stats to have an effect
             TURN { MOVE(opponent, MOVE_AGILITY); MOVE(player, move); }
         else
             TURN { MOVE(player, move); }
@@ -35,8 +35,7 @@ SINGLE_BATTLE_TEST("Sheer Force boosts power, but removes secondary effects of m
         if (ability == ABILITY_SHEER_FORCE) {
             NONE_OF {
                 ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-                if (move != MOVE_ALLURING_VOICE)
-                    ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+                ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
                 STATUS_ICON(opponent, STATUS1_FREEZE);
                 STATUS_ICON(opponent, STATUS1_POISON);
                 STATUS_ICON(opponent, STATUS1_BURN);
