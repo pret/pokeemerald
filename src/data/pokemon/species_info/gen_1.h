@@ -3723,19 +3723,21 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .formSpeciesIdTable = sDiglettFormSpeciesIdTable,   \
         DIGLETT_FAMILY_MISC_INFO
 
-#define DUGTRIO_MISC_INFO                   \
-        .catchRate = 50,                    \
-        .expYield = 149,                    \
-        .evYield_Speed = 2,                 \
-        .speciesName = _("Dugtrio"),        \
-        .cryId = CRY_DUGTRIO,               \
-        .natDexNum = NATIONAL_DEX_DUGTRIO,  \
-        .categoryName = _("Mole"),          \
-        .height = 7,                        \
-        .pokemonScale = 406,                \
-        .pokemonOffset = 18,                \
-        .trainerScale = 256,                \
-        .trainerOffset = 0,                 \
+#define DUGTRIO_MISC_INFO                                   \
+        .catchRate = 50,                                    \
+        .expYield = 149,                                    \
+        .evYield_Speed = 2,                                 \
+        .speciesName = _("Dugtrio"),                        \
+        .cryId = CRY_DUGTRIO,                               \
+        .natDexNum = NATIONAL_DEX_DUGTRIO,                  \
+        .categoryName = _("Mole"),                          \
+        .height = 7,                                        \
+        .pokemonScale = 406,                                \
+        .pokemonOffset = 18,                                \
+        .trainerScale = 256,                                \
+        .trainerOffset = 0,                                 \
+        .footprint = gMonFootprint_Dugtrio,                 \
+        .formSpeciesIdTable = sDugtrioFormSpeciesIdTable,   \
         DIGLETT_FAMILY_MISC_INFO
 
 #define DUGTRIO_ATTACK (P_UPDATED_STATS >= GEN_7 ? 100 : 80)
