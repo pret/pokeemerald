@@ -322,7 +322,6 @@ static void SummaryScreen_DestroyAnimDelayTask(void);
 
 // const rom data
 #include "data/text/move_descriptions.h"
-#include "data/text/nature_names.h"
 
 static const struct BgTemplate sBgTemplates[] =
 {

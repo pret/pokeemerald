@@ -49,7 +49,7 @@ DOUBLE_BATTLE_TEST("Doodle can't copy a banned ability")
 DOUBLE_BATTLE_TEST("Doodle fails if user has a banned Ability")
 {
     GIVEN {
-        PLAYER(SPECIES_GREAT_TUSK) { Ability(ABILITY_PROTOSYNTHESIS); }
+        PLAYER(SPECIES_CRAMORANT) { Ability(ABILITY_GULP_MISSILE); }
         PLAYER(SPECIES_WYNAUT) { Ability(ABILITY_SHADOW_TAG); }
         OPPONENT(SPECIES_TORCHIC) { Ability(ABILITY_BLAZE); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -59,7 +59,7 @@ DOUBLE_BATTLE_TEST("Doodle fails if user has a banned Ability")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DOODLE, playerLeft);
         MESSAGE("But it failed!");
     } THEN {
-        EXPECT(playerLeft->ability == ABILITY_PROTOSYNTHESIS);
+        EXPECT(playerLeft->ability == ABILITY_GULP_MISSILE);
         EXPECT(playerRight->ability == ABILITY_SHADOW_TAG);
     }
 }
@@ -68,7 +68,7 @@ DOUBLE_BATTLE_TEST("Doodle fails if partner has a banned Ability")
 {
     GIVEN {
         PLAYER(SPECIES_WYNAUT) { Ability(ABILITY_SHADOW_TAG); }
-        PLAYER(SPECIES_GREAT_TUSK) { Ability(ABILITY_PROTOSYNTHESIS); }
+        PLAYER(SPECIES_CRAMORANT) { Ability(ABILITY_GULP_MISSILE); }
         OPPONENT(SPECIES_TORCHIC) { Ability(ABILITY_BLAZE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -78,6 +78,6 @@ DOUBLE_BATTLE_TEST("Doodle fails if partner has a banned Ability")
         MESSAGE("But it failed!");
     } THEN {
         EXPECT(playerLeft->ability == ABILITY_SHADOW_TAG);
-        EXPECT(playerRight->ability == ABILITY_PROTOSYNTHESIS);
+        EXPECT(playerRight->ability == ABILITY_GULP_MISSILE);
     }
 }
