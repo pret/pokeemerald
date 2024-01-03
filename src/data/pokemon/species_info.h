@@ -217,6 +217,12 @@ const u8 gOgerponCornerstoneMaskPokedexText[] = _(
         .levelUpLearnset = s ## learn##LevelUpLearnset,     \
         .teachableLearnset = s ## learn##TeachableLearnset
 
+#if P_FOOTPRINTS
+#define FOOTPRINT(sprite) .footprint = gMonFootprint_## sprite
+#else
+#define FOOTPRINT(sprite) .footprint = NULL
+#endif
+
 // Maximum value for a female Pokémon is 254 (MON_FEMALE) which is 100% female.
 // 255 (MON_GENDERLESS) is reserved for genderless Pokémon.
 #define PERCENT_FEMALE(percent) min(254, ((percent * 255) / 100))
@@ -330,7 +336,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //PALETTE_FEMALE(CircledQuestionMark),
         ICON(QuestionMark, 0),
         //ICON_FEMALE(QuestionMark, 1),
-        //.footprint = gMonFootprint_None,
+        //FOOTPRINT(None),
         LEARNSETS(None),
         .evolutions = EVOLUTION({EVO_LEVEL, 100, SPECIES_NONE},
                                 {EVO_ITEM, ITEM_MOOMOO_MILK, SPECIES_NONE}),

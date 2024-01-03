@@ -810,6 +810,9 @@ static void DrawFootprintCustom(u8 windowId, u16 species)
     const u8 *footprintGfx = gSpeciesInfo[species].footprint;
     u32 i, j, tileIdx = 0;
 
+    if (P_FOOTPRINTS == FALSE)
+        return;
+
     if (footprintGfx != NULL)
     {
         for (i = 0; i < 32; i++)
