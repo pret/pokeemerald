@@ -6481,13 +6481,37 @@ static u8 PrintPreEvolutions(u8 taskId, u16 species)
     u16 preEvolutionTwo = 0;
     u8 numPreEvolutions = 0;
 
-    bool8 isMega = FALSE;
+    u16 baseFormSpecies;
     sPokedexView->sEvoScreenData.isMega = FALSE;
+
+    //Check if it's a mega
+    baseFormSpecies = GetFormSpeciesId(species, 0);
+    if (baseFormSpecies != species)
+    {
+        const struct FormChange *formChanges = GetSpeciesFormChanges(baseFormSpecies);
+        for (i = 0; formChanges != NULL && formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
+        {
+            if (formChanges[i].method == FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM
+                && formChanges[i].targetSpecies == species)
+            {
+                preEvolutionOne = baseFormSpecies;
+                numPreEvolutions += 1;
+                sPokedexView->numPreEvolutions = numPreEvolutions;
+                sPokedexView->sEvoScreenData.numAllEvolutions += numPreEvolutions;
+                sPokedexView->sEvoScreenData.isMega = TRUE;
+
+                CopyItemName(GetSpeciesFormChanges(species)->param1, gStringVar2); //item
+                CreateCaughtBallEvolutionScreen(preEvolutionOne, base_x - 9 - 8, base_y + base_y_offset*(numPreEvolutions - 1), 0);
+                HandlePreEvolutionSpeciesPrint(taskId, preEvolutionOne, species, base_x - 8, base_y, base_y_offset, numPreEvolutions - 1);
+                return numPreEvolutions;
+            }
+        }
+    }
 
     //Calculate previous evolution
     for (i = 0; i < NUM_SPECIES; i++)
     {
-        const struct Evolution *evolutions = GetSpeciesEvolutions(species);
+        const struct Evolution *evolutions = GetSpeciesEvolutions(i);
         if (evolutions == NULL)
             continue;
 
@@ -6497,27 +6521,9 @@ static u8 PrintPreEvolutions(u8 taskId, u16 species)
             {
                 preEvolutionOne = i;
                 numPreEvolutions += 1;
-                
-                if (GetSpeciesFormChanges(species) != NULL
-                 && GetSpeciesFormChanges(species)->method == FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM)
-                {
-                    CopyItemName(GetSpeciesFormChanges(species)->param1, gStringVar2); //item
-                    isMega = TRUE;
-                }
                 break;
             }
         }
-    }
-
-    if (isMega)
-    {
-        sPokedexView->numPreEvolutions = numPreEvolutions;
-        sPokedexView->sEvoScreenData.numAllEvolutions += numPreEvolutions;
-        sPokedexView->sEvoScreenData.isMega = isMega;
-
-        CreateCaughtBallEvolutionScreen(preEvolutionOne, base_x - 9 - 8, base_y + base_y_offset*(numPreEvolutions - 1), 0);
-        HandlePreEvolutionSpeciesPrint(taskId, preEvolutionOne, species, base_x - 8, base_y, base_y_offset, numPreEvolutions - 1);
-        return numPreEvolutions;
     }
 
     //Calculate if previous evolution also has a previous evolution
@@ -6525,7 +6531,7 @@ static u8 PrintPreEvolutions(u8 taskId, u16 species)
     {
         for (i = 0; i < NUM_SPECIES; i++)
         {
-            const struct Evolution *evolutions = GetSpeciesEvolutions(species);
+            const struct Evolution *evolutions = GetSpeciesEvolutions(i);
             if (evolutions == NULL)
                 continue;
 
