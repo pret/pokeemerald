@@ -179,6 +179,15 @@ u32 ScriptReadWord(struct ScriptContext *ctx)
     return (((((value3 << 8) + value2) << 8) + value1) << 8) + value0;
 }
 
+u32 ScriptPeekWord(struct ScriptContext *ctx)
+{
+    u32 value0 = *(ctx->scriptPtr);
+    u32 value1 = *(ctx->scriptPtr + 1);
+    u32 value2 = *(ctx->scriptPtr + 2);
+    u32 value3 = *(ctx->scriptPtr + 3);
+    return (((((value3 << 8) + value2) << 8) + value1) << 8) + value0;
+}
+
 void LockPlayerFieldControls(void)
 {
     sLockFieldControls = TRUE;
