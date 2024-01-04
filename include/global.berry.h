@@ -4,10 +4,6 @@
 #define BERRY_NAME_LENGTH 6
 #define BERRY_ITEM_EFFECT_COUNT 18
 
-// water up to 15 (4 bits)
-// weeds up to 7 * 0.5 (3 bits), 0 => 0.1
-// pests up to 7 * 0.5 (3 bits), 0 => 0.2
-
 struct Berry
 {
     const u8 name[BERRY_NAME_LENGTH + 1];
