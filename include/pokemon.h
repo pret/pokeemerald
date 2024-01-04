@@ -403,7 +403,9 @@ struct SpeciesInfo /*0x8C*/
  /* 0x64 */ const u32 *shinyPaletteFemale;
  /* 0x68 */ const u8 *iconSprite;
  /* 0x6C */ const u8 *iconSpriteFemale;
+#if P_FOOTPRINTS
  /* 0x70 */ const u8 *footprint;
+#endif
             // All Pokémon pics are 64x64, but this data table defines where in this 64x64 frame the sprite's non-transparent pixels actually are.
  /* 0x74 */ u8 frontPicSize; // The dimensions of this drawn pixel area.
  /* 0x74 */ u8 frontPicSizeFemale; // The dimensions of this drawn pixel area.
@@ -513,6 +515,14 @@ struct Ability
 {
     u8 name[ABILITY_NAME_LENGTH + 1];
     const u8 *description;
+    s8 aiRating;
+    u8 cantBeCopied:1; // cannot be copied by Role Play or Doodle
+    u8 cantBeSwapped:1; // cannot be swapped with Skill Swap or Wandering Spirit
+    u8 cantBeTraced:1; // cannot be copied by Trace - same as cantBeCopied except for Wonder Guard
+    u8 cantBeSuppressed:1; // cannot be negated by Gastro Acid or Neutralizing Gas
+    u8 cantBeOverwritten:1; // cannot be overwritten by Entrainment, Worry Seed or Simple Beam (but can be by Mummy) - same as cantBeSuppressed except for Truant
+    u8 breakable:1; // can be bypassed by Mold Breaker and clones
+    u8 failsOnImposter:1; // doesn't work on an Imposter mon; when can we actually use this?
 };
 
 #define SPINDA_SPOT_WIDTH 16

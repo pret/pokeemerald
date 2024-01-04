@@ -1658,19 +1658,19 @@
 #define SPECIES_OGERPON_CORNERSTONE_MASK_TERA           GEN9_START + 135
 #define SPECIES_URSALUNA_BLOODMOON                      GEN9_START + 136
 // Indigo Disk
-#define SPECIES_1018                                    GEN9_START + 137
-#define SPECIES_1019                                    GEN9_START + 138
-#define SPECIES_1020                                    GEN9_START + 139
-#define SPECIES_1021                                    GEN9_START + 140
-#define SPECIES_1022                                    GEN9_START + 141
-#define SPECIES_1023                                    GEN9_START + 142
-#define SPECIES_1024                                    SPECIES_1024_FORM_1
-#define SPECIES_1024_FORM_1                             GEN9_START + 143
-#define SPECIES_1024_FORM_2                             GEN9_START + 144
-#define SPECIES_1024_FORM_3                             GEN9_START + 145
-#define SPECIES_1025                                    GEN9_START + 146
+#define SPECIES_ARCHALUDON                              GEN9_START + 137
+#define SPECIES_HYDRAPPLE                               GEN9_START + 138
+#define SPECIES_GOUGING_FIRE                            GEN9_START + 139
+#define SPECIES_RAGING_BOLT                             GEN9_START + 140
+#define SPECIES_IRON_BOULDER                            GEN9_START + 141
+#define SPECIES_IRON_CROWN                              GEN9_START + 142
+#define SPECIES_TERAPAGOS                               SPECIES_TERAPAGOS_NORMAL
+#define SPECIES_TERAPAGOS_NORMAL                        GEN9_START + 143
+#define SPECIES_TERAPAGOS_TERASTAL                      GEN9_START + 144
+#define SPECIES_TERAPAGOS_STELLAR                       GEN9_START + 145
+#define SPECIES_PECHARUNT                               GEN9_START + 146
 
-#define PLACEHOLDER_START                               SPECIES_1025
+#define PLACEHOLDER_START                               SPECIES_PECHARUNT
 // XD: Gale of Darkness
 #define SPECIES_LUGIA_SHADOW                            PLACEHOLDER_START + 1
 // Diamond & Pearl

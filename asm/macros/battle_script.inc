@@ -1566,6 +1566,10 @@
 	callnative BS_TryTriggerStatusForm
 	.endm
 
+	.macro setphotongeysercategory
+	callnative BS_SetPhotonGeyserCategory
+	.endm
+
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
@@ -2132,10 +2136,6 @@
 	.macro cutonethirdhpraisestats failInstr:req
 	various BS_ATTACKER, VARIOUS_CUT_1_3_HP_RAISE_STATS
 	.4byte \failInstr
-	.endm
-
-	.macro photongeysercheck battler:req
-	various \battler, VARIOUS_PHOTON_GEYSER_CHECK
 	.endm
 
 	.macro shellsidearmcheck

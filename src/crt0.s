@@ -6,22 +6,28 @@
 
 	.align 2, 0
 Init::
+@ Set up location for IRQ stack
 	mov r0, #PSR_IRQ_MODE
 	msr cpsr_cf, r0
 	ldr sp, sp_irq
+@ Set up location for system stack
 	mov r0, #PSR_SYS_MODE
 	msr cpsr_cf, r0
 	ldr sp, sp_sys
+@ Prepare for interrupt handling
 	ldr r1, =INTR_VECTOR
 	adr r0, IntrMain
 	str r0, [r1]
-	.if MODERN
+@ Dispatch memory reset request to hardware
 	mov r0, #255 @ RESET_ALL
 	svc #1 << 16
-	.endif @ MODERN
+@ Fill RAM areas with appropriate data
+	bl InitializeWorkingMemory
+@ Jump to AgbMain
 	ldr r1, =AgbMain + 1
 	mov lr, pc
 	bx r1
+@ Re-init if AgbMain exits
 	b Init
 
 	.align 2, 0
@@ -119,6 +125,57 @@ IntrMain_RetAddr:
 	strh r2, [r3, #OFFSET_REG_IE - 0x200]
 	strh r1, [r3, #OFFSET_REG_IME - 0x200]
 	msr spsr_cf, r0
+	bx lr
+
+	.pool
+
+	.align 2, 0 @ Don't pad with nop.
+
+@ Fills initialized IWRAM and EWRAM sections in RAM from LMA areas in ROM
+InitializeWorkingMemory:
+	push {r0-r3,lr}
+	ldr r0, =__iwram_lma
+	ldr r1, =__iwram_start
+	ldr r2, =__iwram_end
+	cmp r1, r2
+	beq skip_iwram_copy
+	bl CopyMemory_DMA
+skip_iwram_copy:
+	ldr r0, =__ewram_lma
+	ldr r1, =__ewram_start
+	ldr r2, =__ewram_end
+	cmp r1, r2
+	beq skip_ewram_copy
+	bl CopyMemory_DMA
+skip_ewram_copy:
+	pop {r0-r3,lr}
+	bx lr
+
+@ Uses a DMA transfer to load from r0 into r1 until r2
+CopyMemory_DMA:
+	subs r2, r2, r1
+	lsr r2, r2, #2
+	mov r4, #0x80000000
+	orr r4, r4, #(1 << 26)
+	orr r2, r2, r4
+	ldr r3, =REG_DMA3
+	stmia r3, {r0, r1, r2}
+	bx lr
+
+.thumb
+@ Called from C code to reinitialize working memory after a link connection failure
+ReInitializeEWRAM::
+	ldr r0, =__ewram_lma
+	ldr r1, =__ewram_start
+	ldr r2, =__ewram_end
+	cmp r1, r2
+	beq EndReinitializeEWRAM
+	subs r2, r1
+	movs r3, #1
+	lsls r3, r3, #26
+	orrs r2, r2, r3
+	swi 0x0B
+EndReinitializeEWRAM:
 	bx lr
 
 	.pool

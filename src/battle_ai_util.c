@@ -35,267 +35,6 @@
 static u32 AI_GetEffectiveness(uq4_12_t multiplier);
 
 // Const Data
-static const s8 sAiAbilityRatings[ABILITIES_COUNT] =
-{
-    [ABILITY_ADAPTABILITY] = 8,
-    [ABILITY_AFTERMATH] = 5,
-    [ABILITY_AERILATE] = 8,
-    [ABILITY_AIR_LOCK] = 5,
-    [ABILITY_ANALYTIC] = 5,
-    [ABILITY_ANGER_POINT] = 4,
-    [ABILITY_ANTICIPATION] = 2,
-    [ABILITY_ARENA_TRAP] = 9,
-    [ABILITY_AROMA_VEIL] = 3,
-    [ABILITY_AURA_BREAK] = 3,
-    [ABILITY_BAD_DREAMS] = 4,
-    [ABILITY_BATTERY] = 0,
-    [ABILITY_BATTLE_ARMOR] = 2,
-    [ABILITY_BATTLE_BOND] = 6,
-    [ABILITY_BEAST_BOOST] = 7,
-    [ABILITY_BERSERK] = 5,
-    [ABILITY_BIG_PECKS] = 1,
-    [ABILITY_BLAZE] = 5,
-    [ABILITY_BULLETPROOF] = 7,
-    [ABILITY_CHEEK_POUCH] = 4,
-    [ABILITY_CHLOROPHYLL] = 6,
-    [ABILITY_CLEAR_BODY] = 4,
-    [ABILITY_CLOUD_NINE] = 5,
-    [ABILITY_COLOR_CHANGE] = 2,
-    [ABILITY_COMATOSE] = 6,
-    [ABILITY_COMPETITIVE] = 5,
-    [ABILITY_COMPOUND_EYES] = 7,
-    [ABILITY_CONTRARY] = 8,
-    [ABILITY_CORROSION] = 5,
-    [ABILITY_CURSED_BODY] = 4,
-    [ABILITY_CUTE_CHARM] = 2,
-    [ABILITY_DAMP] = 2,
-    [ABILITY_DANCER] = 5,
-    [ABILITY_DARK_AURA] = 6,
-    [ABILITY_DAZZLING] = 5,
-    [ABILITY_DEFEATIST] = -1,
-    [ABILITY_DEFIANT] = 5,
-    [ABILITY_DELTA_STREAM] = 10,
-    [ABILITY_DESOLATE_LAND] = 10,
-    [ABILITY_DISGUISE] = 8,
-    [ABILITY_DOWNLOAD] = 7,
-    [ABILITY_DRIZZLE] = 9,
-    [ABILITY_DROUGHT] = 9,
-    [ABILITY_DRY_SKIN] = 6,
-    [ABILITY_EARLY_BIRD] = 4,
-    [ABILITY_EFFECT_SPORE] = 4,
-    [ABILITY_ELECTRIC_SURGE] = 8,
-    [ABILITY_EMERGENCY_EXIT] = 3,
-    [ABILITY_FAIRY_AURA] = 6,
-    [ABILITY_FILTER] = 6,
-    [ABILITY_FLAME_BODY] = 4,
-    [ABILITY_FLARE_BOOST] = 5,
-    [ABILITY_FLASH_FIRE] = 6,
-    [ABILITY_FLOWER_GIFT] = 4,
-    [ABILITY_FLOWER_VEIL] = 0,
-    [ABILITY_FLUFFY] = 5,
-    [ABILITY_FORECAST] = 6,
-    [ABILITY_FOREWARN] = 2,
-    [ABILITY_FRIEND_GUARD] = 0,
-    [ABILITY_FRISK] = 3,
-    [ABILITY_FULL_METAL_BODY] = 4,
-    [ABILITY_FUR_COAT] = 7,
-    [ABILITY_GALE_WINGS] = 6,
-    [ABILITY_GALVANIZE] = 8,
-    [ABILITY_GLUTTONY] = 3,
-    [ABILITY_GOOEY] = 5,
-    [ABILITY_GRASS_PELT] = 2,
-    [ABILITY_GRASSY_SURGE] = 8,
-    [ABILITY_GUTS] = 6,
-    [ABILITY_HARVEST] = 5,
-    [ABILITY_HEALER] = 0,
-    [ABILITY_HEATPROOF] = 5,
-    [ABILITY_HEAVY_METAL] = -1,
-    [ABILITY_HONEY_GATHER] = 0,
-    [ABILITY_HUGE_POWER] = 10,
-    [ABILITY_HUSTLE] = 7,
-    [ABILITY_HYDRATION] = 4,
-    [ABILITY_HYPER_CUTTER] = 3,
-    [ABILITY_ICE_BODY] = 3,
-    [ABILITY_ILLUMINATE] = 0,
-    [ABILITY_ILLUSION] = 8,
-    [ABILITY_IMMUNITY] = 4,
-    [ABILITY_IMPOSTER] = 9,
-    [ABILITY_INFILTRATOR] = 6,
-    [ABILITY_INNARDS_OUT] = 5,
-    [ABILITY_INNER_FOCUS] = 2,
-    [ABILITY_INSOMNIA] = 4,
-    [ABILITY_INTIMIDATE] = 7,
-    [ABILITY_IRON_BARBS] = 6,
-    [ABILITY_IRON_FIST] = 6,
-    [ABILITY_JUSTIFIED] = 4,
-    [ABILITY_KEEN_EYE] = 1,
-    [ABILITY_KLUTZ] = -1,
-    [ABILITY_LEAF_GUARD] = 2,
-    [ABILITY_LEVITATE] = 7,
-    [ABILITY_LIGHT_METAL] = 2,
-    [ABILITY_LIGHTNING_ROD] = 7,
-    [ABILITY_LIMBER] = 3,
-    [ABILITY_LIQUID_OOZE] = 3,
-    [ABILITY_LIQUID_VOICE] = 5,
-    [ABILITY_LONG_REACH] = 3,
-    [ABILITY_MAGIC_BOUNCE] = 9,
-    [ABILITY_MAGIC_GUARD] = 9,
-    [ABILITY_MAGICIAN] = 3,
-    [ABILITY_MAGMA_ARMOR] = 1,
-    [ABILITY_MAGNET_PULL] = 9,
-    [ABILITY_MARVEL_SCALE] = 5,
-    [ABILITY_MEGA_LAUNCHER] = 7,
-    [ABILITY_MERCILESS] = 4,
-    [ABILITY_MINUS] = 0,
-    [ABILITY_MISTY_SURGE] = 8,
-    [ABILITY_MOLD_BREAKER] = 7,
-    [ABILITY_MOODY] = 10,
-    [ABILITY_MOTOR_DRIVE] = 6,
-    [ABILITY_MOXIE] = 7,
-    [ABILITY_MULTISCALE] = 8,
-    [ABILITY_MULTITYPE] = 8,
-    [ABILITY_MUMMY] = 5,
-    [ABILITY_NATURAL_CURE] = 7,
-    [ABILITY_NEUROFORCE] = 6,
-    [ABILITY_NO_GUARD] = 8,
-    [ABILITY_NORMALIZE] = -1,
-    [ABILITY_OBLIVIOUS] = 2,
-    [ABILITY_OVERCOAT] = 5,
-    [ABILITY_OVERGROW] = 5,
-    [ABILITY_OWN_TEMPO] = 3,
-    [ABILITY_PARENTAL_BOND] = 10,
-    [ABILITY_PICKUP] = 1,
-    [ABILITY_PICKPOCKET] = 3,
-    [ABILITY_PIXILATE] = 8,
-    [ABILITY_PLUS] = 0,
-    [ABILITY_POISON_HEAL] = 8,
-    [ABILITY_POISON_POINT] = 4,
-    [ABILITY_POISON_TOUCH] = 4,
-    [ABILITY_POWER_CONSTRUCT] = 10,
-    [ABILITY_POWER_OF_ALCHEMY] = 0,
-    [ABILITY_PRANKSTER] = 8,
-    [ABILITY_PRESSURE] = 5,
-    [ABILITY_PRIMORDIAL_SEA] = 10,
-    [ABILITY_PRISM_ARMOR] = 6,
-    [ABILITY_PROTEAN] = 8,
-    [ABILITY_PSYCHIC_SURGE] = 8,
-    [ABILITY_PURE_POWER] = 10,
-    [ABILITY_QUEENLY_MAJESTY] = 6,
-    [ABILITY_QUICK_FEET] = 5,
-    [ABILITY_RAIN_DISH] = 3,
-    [ABILITY_RATTLED] = 3,
-    [ABILITY_RECEIVER] = 0,
-    [ABILITY_RECKLESS] = 6,
-    [ABILITY_REFRIGERATE] = 8,
-    [ABILITY_REGENERATOR] = 8,
-    [ABILITY_RIVALRY] = 1,
-    [ABILITY_RKS_SYSTEM] = 8,
-    [ABILITY_ROCK_HEAD] = 5,
-    [ABILITY_ROUGH_SKIN] = 6,
-    [ABILITY_RUN_AWAY] = 0,
-    [ABILITY_SAND_FORCE] = 4,
-    [ABILITY_SAND_RUSH] = 6,
-    [ABILITY_SAND_STREAM] = 9,
-    [ABILITY_SAND_VEIL] = 3,
-    [ABILITY_SAP_SIPPER] = 7,
-    [ABILITY_SCHOOLING] = 6,
-    [ABILITY_SCRAPPY] = 6,
-    [ABILITY_SERENE_GRACE] = 8,
-    [ABILITY_SHADOW_SHIELD] = 8,
-    [ABILITY_SHADOW_TAG] = 10,
-    [ABILITY_SHED_SKIN] = 7,
-    [ABILITY_SHEER_FORCE] = 8,
-    [ABILITY_SHELL_ARMOR] = 2,
-    [ABILITY_SHIELD_DUST] = 5,
-    [ABILITY_SHIELDS_DOWN] = 6,
-    [ABILITY_SIMPLE] = 8,
-    [ABILITY_SKILL_LINK] = 7,
-    [ABILITY_SLOW_START] = -2,
-    [ABILITY_SLUSH_RUSH] = 5,
-    [ABILITY_SNIPER] = 3,
-    [ABILITY_SNOW_CLOAK] = 3,
-    [ABILITY_SNOW_WARNING] = 8,
-    [ABILITY_SOLAR_POWER] = 3,
-    [ABILITY_SOLID_ROCK] = 6,
-    [ABILITY_SOUL_HEART] = 7,
-    [ABILITY_SOUNDPROOF] = 4,
-    [ABILITY_SPEED_BOOST] = 9,
-    [ABILITY_STAKEOUT] = 6,
-    [ABILITY_STALL] = -1,
-    [ABILITY_STAMINA] = 6,
-    [ABILITY_STANCE_CHANGE] = 10,
-    [ABILITY_STATIC] = 4,
-    [ABILITY_STEADFAST] = 2,
-    [ABILITY_STEELWORKER] = 6,
-    [ABILITY_STENCH] = 1,
-    [ABILITY_STICKY_HOLD] = 3,
-    [ABILITY_STORM_DRAIN] = 7,
-    [ABILITY_STRONG_JAW] = 6,
-    [ABILITY_STURDY] = 6,
-    [ABILITY_SUCTION_CUPS] = 2,
-    [ABILITY_SUPER_LUCK] = 3,
-    [ABILITY_SURGE_SURFER] = 4,
-    [ABILITY_SWARM] = 5,
-    [ABILITY_SWEET_VEIL] = 4,
-    [ABILITY_SWIFT_SWIM] = 6,
-    [ABILITY_SYMBIOSIS] = 0,
-    [ABILITY_SYNCHRONIZE] = 4,
-    [ABILITY_TANGLED_FEET] = 2,
-    [ABILITY_TANGLING_HAIR] = 5,
-    [ABILITY_TECHNICIAN] = 8,
-    [ABILITY_TELEPATHY] = 0,
-    [ABILITY_TERAVOLT] = 7,
-    [ABILITY_THICK_FAT] = 7,
-    [ABILITY_TINTED_LENS] = 7,
-    [ABILITY_TORRENT] = 5,
-    [ABILITY_TOXIC_BOOST] = 6,
-    [ABILITY_TOUGH_CLAWS] = 7,
-    [ABILITY_TRACE] = 6,
-    [ABILITY_TRIAGE] = 7,
-    [ABILITY_TRUANT] = -2,
-    [ABILITY_TURBOBLAZE] = 7,
-    [ABILITY_UNAWARE] = 6,
-    [ABILITY_UNBURDEN] = 7,
-    [ABILITY_UNNERVE] = 3,
-    [ABILITY_VICTORY_STAR] = 6,
-    [ABILITY_VITAL_SPIRIT] = 4,
-    [ABILITY_VOLT_ABSORB] = 7,
-    [ABILITY_WATER_ABSORB] = 7,
-    [ABILITY_WATER_BUBBLE] = 8,
-    [ABILITY_WATER_COMPACTION] = 4,
-    [ABILITY_WATER_VEIL] = 4,
-    [ABILITY_WEAK_ARMOR] = 2,
-    [ABILITY_WHITE_SMOKE] = 4,
-    [ABILITY_WIMP_OUT] = 3,
-    [ABILITY_WONDER_GUARD] = 10,
-    [ABILITY_WONDER_SKIN] = 4,
-    [ABILITY_ZEN_MODE] = -1,
-    [ABILITY_INTREPID_SWORD] = 3,
-    [ABILITY_DAUNTLESS_SHIELD] = 3,
-    [ABILITY_BALL_FETCH] = 0,
-    [ABILITY_COTTON_DOWN] = 3,
-    [ABILITY_MIRROR_ARMOR] = 6,
-    [ABILITY_GULP_MISSILE] = 3,
-    [ABILITY_STALWART] = 2,
-    [ABILITY_PROPELLER_TAIL] = 2,
-    [ABILITY_STEAM_ENGINE] = 3,
-    [ABILITY_PUNK_ROCK] = 2,
-    [ABILITY_SAND_SPIT] = 5,
-    [ABILITY_ICE_SCALES] = 7,
-    [ABILITY_RIPEN] = 4,
-    [ABILITY_ICE_FACE] = 4,
-    [ABILITY_POWER_SPOT] = 2,
-    [ABILITY_MIMICRY] = 2,
-    [ABILITY_SCREEN_CLEANER] = 3,
-    [ABILITY_NEUTRALIZING_GAS] = 5,
-    [ABILITY_HUNGER_SWITCH] = 2,
-    [ABILITY_PASTEL_VEIL] = 4,
-    [ABILITY_STEELY_SPIRIT] = 2,
-    [ABILITY_PERISH_BODY] = -1,
-    [ABILITY_WANDERING_SPIRIT] = 2,
-    [ABILITY_GORILLA_TACTICS] = 4,
-};
-
 static const u16 sEncouragedEncoreEffects[] =
 {
     EFFECT_DREAM_EATER,
@@ -710,11 +449,14 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
         gBattleStruct->zmove.baseMoves[battlerAtk] = move;
         gBattleStruct->zmove.active = TRUE;
     }
+    else if (gBattleMoves[move].effect == EFFECT_PHOTON_GEYSER)
+        gBattleStruct->swapDamageCategory = (GetCategoryBasedOnStats(gBattlerAttacker) == BATTLE_CATEGORY_PHYSICAL);
+
+    if (gBattleMoves[move].effect == EFFECT_NATURE_POWER)
+        move = GetNaturePowerMove();
 
     gBattleStruct->dynamicMoveType = 0;
 
-    if (move == MOVE_NATURE_POWER)
-        move = GetNaturePowerMove();
 
     SetTypeBeforeUsingMove(move, battlerAtk);
     GET_MOVE_TYPE(move, moveType);
@@ -826,6 +568,7 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
     // convert multiper to AI_EFFECTIVENESS_xX
     *typeEffectiveness = AI_GetEffectiveness(effectivenessMultiplier);
 
+    gBattleStruct->swapDamageCategory = FALSE;
     gBattleStruct->zmove.active = FALSE;
     gBattleStruct->zmove.baseMoves[battlerAtk] = MOVE_NONE;
     return dmg;
@@ -2030,28 +1773,9 @@ bool32 HasSleepMoveWithLowAccuracy(u32 battlerAtk, u32 battlerDef)
     return FALSE;
 }
 
-bool32 IsHealingMoveEffect(u32 effect)
+bool32 IsHealingMove(u32 move)
 {
-    switch (effect)
-    {
-    case EFFECT_RESTORE_HP:
-    case EFFECT_MORNING_SUN:
-    case EFFECT_SYNTHESIS:
-    case EFFECT_MOONLIGHT:
-    case EFFECT_SOFTBOILED:
-    case EFFECT_ROOST:
-    case EFFECT_SWALLOW:
-    case EFFECT_WISH:
-    case EFFECT_HEALING_WISH:
-    case EFFECT_HEAL_PULSE:
-    case EFFECT_REST:
-    case EFFECT_JUNGLE_HEALING:
-    case EFFECT_ABSORB:
-    case EFFECT_DREAM_EATER:
-        return TRUE;
-    default:
-        return FALSE;
-    }
+    return gBattleMoves[move].healBlockBanned;
 }
 
 bool32 HasHealingEffect(u32 battlerId)
@@ -2061,7 +1785,7 @@ bool32 HasHealingEffect(u32 battlerId)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && IsHealingMoveEffect(gBattleMoves[moves[i]].effect))
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && IsHealingMove(moves[i]))
             return TRUE;
     }
 
@@ -3485,14 +3209,9 @@ bool32 SideHasMoveCategory(u32 battlerId, u32 category)
 
 bool32 IsAbilityOfRating(u32 ability, s8 rating)
 {
-    if (sAiAbilityRatings[ability] >= rating)
+    if (gAbilities[ability].aiRating >= rating)
         return TRUE;
     return FALSE;
-}
-
-s8 GetAbilityRating(u32 ability)
-{
-    return sAiAbilityRatings[ability];
 }
 
 static const u16 sRecycleEncouragedItems[] =

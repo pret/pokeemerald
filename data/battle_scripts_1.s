@@ -441,6 +441,8 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_RAGE_FIST
 	.4byte BattleScript_EffectDoodle                  @ EFFECT_DOODLE
 	.4byte BattleScript_EffectFilletAway              @ EFFECT_FILLET_AWAY
+	.4byte BattleScript_EffectHit                     @ EFFECT_IVY_CUDGEL
+	.4byte BattleScript_EffectHit                     @ EFFECT_FICKLE_BEAM
 
 BattleScript_EffectFilletAway:
 	attackcanceler
@@ -1061,11 +1063,24 @@ BattleScript_EffectMeteorBeam::
 	@ DecideTurn
 	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_TwoTurnMovesSecondTurn
 	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING, BattleScript_TwoTurnMovesSecondTurn
-	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_METEOR_BEAM
+	jumpifmove MOVE_METEOR_BEAM, BattleScript_SetStringMeteorBeam
+	jumpifmove MOVE_ELECTRO_SHOT, BattleScript_SetStringElectroShock
+BattleScript_TryCharging:
 	call BattleScript_FirstChargingTurnMeteorBeam
+	jumpifmove MOVE_METEOR_BEAM, BattleScript_TryMeteorBeam
+	jumpifweatheraffected BS_ATTACKER, B_WEATHER_RAIN, BattleScript_TwoTurnMovesSecondTurn @ Check for move Electro Shot
+BattleScript_TryMeteorBeam:
 	jumpifnoholdeffect BS_ATTACKER, HOLD_EFFECT_POWER_HERB, BattleScript_MoveEnd
 	call BattleScript_PowerHerbActivation
 	goto BattleScript_TwoTurnMovesSecondTurn
+
+BattleScript_SetStringMeteorBeam:
+	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_METEOR_BEAM
+	goto BattleScript_TryCharging
+
+BattleScript_SetStringElectroShock:
+	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_ELECTRO_SHOCK
+	goto BattleScript_TryCharging
 
 BattleScript_FirstChargingTurnMeteorBeam::
 	attackcanceler
@@ -1242,28 +1257,8 @@ BattleScript_EffectShellSideArm:
 	goto BattleScript_EffectHit
 
 BattleScript_EffectPhotonGeyser:
-	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	attackstring
-	ppreduce
-	critcalc
-	damagecalc
-	adjustdamage
-	photongeysercheck BS_ATTACKER
-	attackanimation
-	waitanimation
-	effectivenesssound
-	hitanimation BS_TARGET
-	waitstate
-	healthbarupdate BS_TARGET
-	datahpupdate BS_TARGET
-	critmessage
-	waitmessage B_WAIT_TIME_LONG
-	resultmessage
-	waitmessage B_WAIT_TIME_LONG
-	seteffectwithchance
-	tryfaintmon BS_TARGET
-	goto BattleScript_MoveEnd
+	setphotongeysercategory
+	goto BattleScript_EffectHit
 
 BattleScript_EffectAuraWheel: @ Aura Wheel can only be used by Morpeko
 	jumpifspecies BS_ATTACKER, SPECIES_MORPEKO_FULL_BELLY, BattleScript_EffectSpeedUpHit
@@ -1696,14 +1691,27 @@ BattleScript_StrengthSapTryHp:
 	attackanimation
 	waitanimation
 BattleScript_StrengthSapHp:
+	jumpifability BS_TARGET, ABILITY_LIQUID_OOZE, BattleScript_StrengthSapManipulateDmg
 	jumpifstatus3 BS_ATTACKER, STATUS3_HEAL_BLOCK, BattleScript_MoveEnd
 	jumpiffullhp BS_ATTACKER, BattleScript_MoveEnd
+BattleScript_StrengthSapManipulateDmg:
 	manipulatedamage DMG_BIG_ROOT
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	jumpifability BS_TARGET, ABILITY_LIQUID_OOZE, BattleScript_StrengthSapLiquidOoze
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	printstring STRINGID_PKMNENERGYDRAINED
 	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+BattleScript_StrengthSapLiquidOoze:
+	call BattleScript_AbilityPopUpTarget
+	manipulatedamage DMG_CHANGE_SIGN
+	setbyte cMULTISTRING_CHOOSER, B_MSG_ABSORB_OOZE
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	printfromtable gAbsorbDrainStringIds
+	waitmessage B_WAIT_TIME_LONG
+	tryfaintmon BS_ATTACKER
 	goto BattleScript_MoveEnd
 BattleScript_StrengthSapMustLower:
 	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_MoveEnd
@@ -8103,6 +8111,7 @@ BattleScript_IllusionOff::
 	return
 
 BattleScript_CottonDownActivates::
+	copybyte sSAVED_BATTLER, gBattlerAttacker
 	showabilitypopup BS_TARGET
 	pause B_WAIT_TIME_LONG
 	destroyabilitypopup
@@ -8127,6 +8136,7 @@ BattleScript_CottonDownLoopIncrement:
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_CottonDownLoop
 BattleScript_CottonDownReturn:
 	swapattackerwithtarget
+	copybyte gBattlerAttacker, sSAVED_BATTLER
 	return
 
 BattleScript_AnticipationActivates::
