@@ -4,12 +4,6 @@
 #include "pokemon.h"
 #include "data.h"
 
-struct TrainerMoney
-{
-    u8 classId;
-    u8 value;
-};
-
 // For displaying a multi battle partner's Pokémon in the party menu
 struct MultiPartnerMenuPokemon
 {
@@ -83,7 +77,6 @@ extern const struct SpriteTemplate gUnusedBattleInitSprite;
 extern const struct OamData gOamData_BattleSpriteOpponentSide;
 extern const struct OamData gOamData_BattleSpritePlayerSide;
 extern const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1];
-extern const struct TrainerMoney gTrainerMoneyTable[];
 
 extern const u8 gStatusConditionString_PoisonJpn[8];
 extern const u8 gStatusConditionString_SleepJpn[8];

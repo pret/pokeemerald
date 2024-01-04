@@ -7362,9 +7362,9 @@ static void Cmd_hitanimation(void)
 
 static u32 GetTrainerMoneyToGive(u16 trainerId)
 {
-    u32 i = 0;
     u32 lastMonLevel = 0;
     u32 moneyReward;
+    u8 trainerMoney;
 
     if (trainerId == TRAINER_SECRET_BASE)
     {
@@ -7374,19 +7374,14 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     {
         const struct TrainerMon *party = gTrainers[trainerId].party;
         lastMonLevel = party[gTrainers[trainerId].partySize - 1].lvl;
-
-        for (; gTrainerMoneyTable[i].classId != 0xFF; i++)
-        {
-            if (gTrainerMoneyTable[i].classId == gTrainers[trainerId].trainerClass)
-                break;
-        }
+        trainerMoney = gTrainerClasses[gTrainers[trainerId].trainerClass].money;
 
         if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-            moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * gTrainerMoneyTable[i].value;
+            moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * trainerMoney;
         else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-            moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * 2 * gTrainerMoneyTable[i].value;
+            moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * 2 * trainerMoney;
         else
-            moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * gTrainerMoneyTable[i].value;
+            moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * trainerMoney;
     }
 
     return moneyReward;

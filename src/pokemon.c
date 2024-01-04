@@ -5791,11 +5791,11 @@ void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)
 const u8 *GetTrainerClassNameFromId(u16 trainerId)
 {
     if (trainerId > TRAINER_PARTNER(PARTNER_NONE))
-        return gTrainerClassNames[gBattlePartners[trainerId].trainerClass];
+        return gTrainerClasses[gBattlePartners[trainerId].trainerClass].name;
     else if (trainerId < TRAINERS_COUNT)
-        return gTrainerClassNames[gTrainers[trainerId].trainerClass];
+        return gTrainerClasses[gTrainers[trainerId].trainerClass].name;
 
-    return gTrainerClassNames[gTrainers[TRAINER_NONE].trainerClass];
+    return gTrainerClasses[gTrainers[TRAINER_NONE].trainerClass].name;
 }
 
 const u8 *GetTrainerNameFromId(u16 trainerId)
