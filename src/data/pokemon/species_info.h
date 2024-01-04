@@ -218,9 +218,9 @@ const u8 gOgerponCornerstoneMaskPokedexText[] = _(
         .teachableLearnset = s ## learn##TeachableLearnset
 
 #if P_FOOTPRINTS
-#define FOOTPRINT(sprite) .footprint = gMonFootprint_## sprite
+#define FOOTPRINT(sprite) .footprint = gMonFootprint_## sprite,
 #else
-#define FOOTPRINT(sprite) .footprint = NULL
+#define FOOTPRINT(sprite)
 #endif
 
 // Maximum value for a female Pokémon is 254 (MON_FEMALE) which is 100% female.
@@ -336,7 +336,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //PALETTE_FEMALE(CircledQuestionMark),
         ICON(QuestionMark, 0),
         //ICON_FEMALE(QuestionMark, 1),
-        //FOOTPRINT(None),
+        //FOOTPRINT(None)
         LEARNSETS(None),
         .evolutions = EVOLUTION({EVO_LEVEL, 100, SPECIES_NONE},
                                 {EVO_ITEM, ITEM_MOOMOO_MILK, SPECIES_NONE}),
