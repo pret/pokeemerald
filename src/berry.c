@@ -1667,12 +1667,6 @@ const struct BerryCrushBerryData gBerryCrush_BerryData[] = {
 
 const struct BerryTree gBlankBerryTree = {};
 
-// unused
-void ClearEnigmaBerries(void)
-{
-    CpuFill16(0, &gSaveBlock1Ptr->enigmaBerry, sizeof(gSaveBlock1Ptr->enigmaBerry));
-}
-
 void SetEnigmaBerry(u8 *src)
 {
     u32 i;
