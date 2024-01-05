@@ -3279,7 +3279,7 @@ static void DebugAction_Give_Pokemon_SelectShiny(u8 taskId)
     if (JOY_NEW(DPAD_ANY))
     {
         PlaySE(SE_SELECT);
-        gTasks[taskId].tInput ^= JOY_NEW(DPAD_UP | DPAD_DOWN);
+        gTasks[taskId].tInput ^= JOY_NEW(DPAD_UP | DPAD_DOWN) > 0;
         txtStr = (gTasks[taskId].tInput == TRUE) ? sDebugText_True : sDebugText_False;
         StringCopyPadded(gStringVar2, txtStr, CHAR_SPACE, 15);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 0);
