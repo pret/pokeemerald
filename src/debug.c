@@ -6,9 +6,11 @@
 //AsparagusEduardo:     https://github.com/AsparagusEduardo/pokeemerald/tree/InfusedEmerald_v2
 //Ghoulslash:           https://github.com/ghoulslash/pokeemerald
 //Jaizu:                https://jaizu.moe/
+//AND OTHER RHH POKEEMERALD-EXPANSION CONTRIBUTORS
 #include "global.h"
 #include "battle.h"
 #include "battle_setup.h"
+#include "berry.h"
 #include "clock.h"
 #include "coins.h"
 #include "credits.h"
@@ -96,6 +98,7 @@ enum UtilMenu
     DEBUG_UTIL_MENU_ITEM_PLAYER_ID,
     DEBUG_UTIL_MENU_ITEM_CHEAT,
     DEBUG_UTIL_MENU_ITEM_EXPANSION_VER,
+    DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS,
 };
 
 enum PartyBoxesMenu
@@ -217,6 +220,15 @@ enum SoundMenu
     DEBUG_SOUND_MENU_ITEM_MUS,
 };
 
+enum BerryFunctionsMenu
+{
+    DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL,
+    DEBUG_BERRY_FUNCTIONS_MENU_READY,
+    DEBUG_BERRY_FUNCTIONS_MENU_NEXT_STAGE,
+    DEBUG_BERRY_FUNCTIONS_MENU_WEEDS,
+    DEBUG_BERRY_FUNCTIONS_MENU_PESTS,
+};
+
 // *******************************
 // Constants
 #define DEBUG_MENU_FONT FONT_NORMAL
@@ -333,6 +345,7 @@ static void DebugTask_HandleMenuInput_Battle(u8 taskId);
 static void DebugTask_HandleMenuInput_Give(u8 taskId);
 static void DebugTask_HandleMenuInput_Fill(u8 taskId);
 static void DebugTask_HandleMenuInput_Sound(u8 taskId);
+static void DebugTask_HandleMenuInput_BerryFunctions(u8 taskId);
 
 static void DebugAction_Util_Fly(u8 taskId);
 static void DebugAction_Util_Warp_Warp(u8 taskId);
@@ -351,6 +364,7 @@ static void DebugAction_Util_Player_Gender(u8 taskId);
 static void DebugAction_Util_Player_Id(u8 taskId);
 static void DebugAction_Util_CheatStart(u8 taskId);
 static void DebugAction_Util_ExpansionVersion(u8 taskId);
+static void DebugAction_Util_BerryFunctions(u8 taskId);
 
 static void DebugAction_PartyBoxes_AccessPC(u8 taskId);
 static void DebugAction_PartyBoxes_MoveReminder(u8 taskId);
@@ -416,6 +430,11 @@ static void DebugAction_Sound_SE_SelectId(u8 taskId);
 static void DebugAction_Sound_MUS(u8 taskId);
 static void DebugAction_Sound_MUS_SelectId(u8 taskId);
 
+static void DebugAction_BerryFunctions_ClearAll(u8 taskId);
+static void DebugAction_BerryFunctions_Ready(u8 taskId);
+static void DebugAction_BerryFunctions_NextStage(u8 taskId);
+static void DebugAction_BerryFunctions_Pests(u8 taskId);
+static void DebugAction_BerryFunctions_Weeds(u8 taskId);
 
 extern const u8 Debug_FlagsNotSetOverworldConfigMessage[];
 extern const u8 Debug_FlagsNotSetBattleConfigMessage[];
@@ -441,6 +460,9 @@ extern const u8 Debug_CheckSaveBlock[];
 extern const u8 Debug_CheckROMSpace[];
 extern const u8 Debug_BoxFilledMessage[];
 extern const u8 Debug_ShowExpansionVersion[];
+
+extern const u8 Debug_BerryPestsDisabled[];
+extern const u8 Debug_BerryWeedsDisabled[];
 
 extern const u8 FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon[];
 
@@ -493,6 +515,7 @@ static const u8 sDebugText_Util_Player_Gender[] =            _("Toggle gender");
 static const u8 sDebugText_Util_Player_Id[] =                _("New Trainer ID");
 static const u8 sDebugText_Util_CheatStart[] =               _("Cheat start");
 static const u8 sDebugText_Util_ExpansionVersion[] =         _("Expansion Version");
+static const u8 sDebugText_Util_BerryFunctions[] =           _("Berry Functions…{CLEAR_TO 110}{RIGHT_ARROW}");
 // Party/Boxes Menu
 static const u8 sDebugText_PartyBoxes_AccessPC[] =           _("Access PC");
 static const u8 sDebugText_PartyBoxes_MoveReminder[] =       _("Move Reminder");
@@ -605,6 +628,12 @@ static const u8 sDebugText_Sound_SFX[] =                _("SFX…{CLEAR_TO 110}{
 static const u8 sDebugText_Sound_SFX_ID[] =   	        _("SFX ID: {STR_VAR_3}   {START_BUTTON} Stop\n{STR_VAR_1}    \n{STR_VAR_2}");
 static const u8 sDebugText_Sound_Music[] =              _("Music…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Sound_Music_ID[] =           _("Music ID: {STR_VAR_3}   {START_BUTTON} Stop\n{STR_VAR_1}    \n{STR_VAR_2}");
+// Berry Function Menu
+static const u8 sDebugText_BerryFunctions_ClearAll[] =  _("Clear map trees");
+static const u8 sDebugText_BerryFunctions_Ready[] =     _("Ready map trees");
+static const u8 sDebugText_BerryFunctions_NextStage[] = _("Grow map trees");
+static const u8 sDebugText_BerryFunctions_Pests[] =     _("Give map trees pests");
+static const u8 sDebugText_BerryFunctions_Weeds[] =     _("Give map trees weeds");
 
 static const u8 sDebugText_Digit_1[] =        _("{LEFT_ARROW}+1{RIGHT_ARROW}        ");
 static const u8 sDebugText_Digit_10[] =       _("{LEFT_ARROW}+10{RIGHT_ARROW}       ");
@@ -657,19 +686,20 @@ static const struct ListMenuItem sDebugMenu_Items_Main[] =
 
 static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
 {
-    [DEBUG_UTIL_MENU_ITEM_FLY]            = {sDebugText_Util_FlyToMap,       DEBUG_UTIL_MENU_ITEM_FLY},
-    [DEBUG_UTIL_MENU_ITEM_WARP]           = {sDebugText_Util_WarpToMap,      DEBUG_UTIL_MENU_ITEM_WARP},
-    [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]      = {sDebugText_Util_SaveBlockSpace, DEBUG_UTIL_MENU_ITEM_SAVEBLOCK},
-    [DEBUG_UTIL_MENU_ITEM_ROM_SPACE]      = {sDebugText_Util_ROMSpace,       DEBUG_UTIL_MENU_ITEM_ROM_SPACE},
-    [DEBUG_UTIL_MENU_ITEM_WEATHER]        = {sDebugText_Util_Weather,        DEBUG_UTIL_MENU_ITEM_WEATHER},
-    [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK] = {sDebugText_Util_CheckWallClock, DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK},
-    [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]   = {sDebugText_Util_SetWallClock,   DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK},
-    [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]   = {sDebugText_Util_WatchCredits,   DEBUG_UTIL_MENU_ITEM_WATCHCREDITS},
-    [DEBUG_UTIL_MENU_ITEM_PLAYER_NAME]    = {sDebugText_Util_Player_Name,    DEBUG_UTIL_MENU_ITEM_PLAYER_NAME},
-    [DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER]  = {sDebugText_Util_Player_Gender,  DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER},
-    [DEBUG_UTIL_MENU_ITEM_PLAYER_ID]      = {sDebugText_Util_Player_Id,      DEBUG_UTIL_MENU_ITEM_PLAYER_ID},
-    [DEBUG_UTIL_MENU_ITEM_CHEAT]          = {sDebugText_Util_CheatStart,     DEBUG_UTIL_MENU_ITEM_CHEAT},
-    [DEBUG_UTIL_MENU_ITEM_EXPANSION_VER]  = {sDebugText_Util_ExpansionVersion,DEBUG_UTIL_MENU_ITEM_EXPANSION_VER},
+    [DEBUG_UTIL_MENU_ITEM_FLY]             = {sDebugText_Util_FlyToMap,         DEBUG_UTIL_MENU_ITEM_FLY},
+    [DEBUG_UTIL_MENU_ITEM_WARP]            = {sDebugText_Util_WarpToMap,        DEBUG_UTIL_MENU_ITEM_WARP},
+    [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]       = {sDebugText_Util_SaveBlockSpace,   DEBUG_UTIL_MENU_ITEM_SAVEBLOCK},
+    [DEBUG_UTIL_MENU_ITEM_ROM_SPACE]       = {sDebugText_Util_ROMSpace,         DEBUG_UTIL_MENU_ITEM_ROM_SPACE},
+    [DEBUG_UTIL_MENU_ITEM_WEATHER]         = {sDebugText_Util_Weather,          DEBUG_UTIL_MENU_ITEM_WEATHER},
+    [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK]  = {sDebugText_Util_CheckWallClock,   DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK},
+    [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]    = {sDebugText_Util_SetWallClock,     DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK},
+    [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]    = {sDebugText_Util_WatchCredits,     DEBUG_UTIL_MENU_ITEM_WATCHCREDITS},
+    [DEBUG_UTIL_MENU_ITEM_PLAYER_NAME]     = {sDebugText_Util_Player_Name,      DEBUG_UTIL_MENU_ITEM_PLAYER_NAME},
+    [DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER]   = {sDebugText_Util_Player_Gender,    DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER},
+    [DEBUG_UTIL_MENU_ITEM_PLAYER_ID]       = {sDebugText_Util_Player_Id,        DEBUG_UTIL_MENU_ITEM_PLAYER_ID},
+    [DEBUG_UTIL_MENU_ITEM_CHEAT]           = {sDebugText_Util_CheatStart,       DEBUG_UTIL_MENU_ITEM_CHEAT},
+    [DEBUG_UTIL_MENU_ITEM_EXPANSION_VER]   = {sDebugText_Util_ExpansionVersion, DEBUG_UTIL_MENU_ITEM_EXPANSION_VER},
+    [DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS] = {sDebugText_Util_BerryFunctions,   DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_PartyBoxes[] =
@@ -791,6 +821,15 @@ static const struct ListMenuItem sDebugMenu_Items_Sound[] =
     [DEBUG_SOUND_MENU_ITEM_MUS] = {sDebugText_Sound_Music, DEBUG_SOUND_MENU_ITEM_MUS},
 };
 
+static const struct ListMenuItem sDebugMenu_Items_BerryFunctions[] =
+{
+    [DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL]  = {sDebugText_BerryFunctions_ClearAll, DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL},
+    [DEBUG_BERRY_FUNCTIONS_MENU_READY]      = {sDebugText_BerryFunctions_Ready, DEBUG_BERRY_FUNCTIONS_MENU_READY},
+    [DEBUG_BERRY_FUNCTIONS_MENU_NEXT_STAGE] = {sDebugText_BerryFunctions_NextStage, DEBUG_BERRY_FUNCTIONS_MENU_NEXT_STAGE},
+    [DEBUG_BERRY_FUNCTIONS_MENU_PESTS]      = {sDebugText_BerryFunctions_Pests, DEBUG_BERRY_FUNCTIONS_MENU_PESTS},
+    [DEBUG_BERRY_FUNCTIONS_MENU_WEEDS]      = {sDebugText_BerryFunctions_Weeds, DEBUG_BERRY_FUNCTIONS_MENU_WEEDS},
+};
+
 // *******************************
 // Menu Actions
 static void (*const sDebugMenu_Actions_Main[])(u8) =
@@ -808,19 +847,20 @@ static void (*const sDebugMenu_Actions_Main[])(u8) =
 
 static void (*const sDebugMenu_Actions_Utilities[])(u8) =
 {
-    [DEBUG_UTIL_MENU_ITEM_FLY]            = DebugAction_Util_Fly,
-    [DEBUG_UTIL_MENU_ITEM_WARP]           = DebugAction_Util_Warp_Warp,
-    [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]      = DebugAction_Util_CheckSaveBlock,
-    [DEBUG_UTIL_MENU_ITEM_ROM_SPACE]      = DebugAction_Util_CheckROMSpace,
-    [DEBUG_UTIL_MENU_ITEM_WEATHER]        = DebugAction_Util_Weather,
-    [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK] = DebugAction_Util_CheckWallClock,
-    [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]   = DebugAction_Util_SetWallClock,
-    [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]   = DebugAction_Util_WatchCredits,
-    [DEBUG_UTIL_MENU_ITEM_PLAYER_NAME]    = DebugAction_Util_Player_Name,
-    [DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER]  = DebugAction_Util_Player_Gender,
-    [DEBUG_UTIL_MENU_ITEM_PLAYER_ID]      = DebugAction_Util_Player_Id,
-    [DEBUG_UTIL_MENU_ITEM_CHEAT]          = DebugAction_Util_CheatStart,
-    [DEBUG_UTIL_MENU_ITEM_EXPANSION_VER]  = DebugAction_Util_ExpansionVersion,
+    [DEBUG_UTIL_MENU_ITEM_FLY]             = DebugAction_Util_Fly,
+    [DEBUG_UTIL_MENU_ITEM_WARP]            = DebugAction_Util_Warp_Warp,
+    [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]       = DebugAction_Util_CheckSaveBlock,
+    [DEBUG_UTIL_MENU_ITEM_ROM_SPACE]       = DebugAction_Util_CheckROMSpace,
+    [DEBUG_UTIL_MENU_ITEM_WEATHER]         = DebugAction_Util_Weather,
+    [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK]  = DebugAction_Util_CheckWallClock,
+    [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]    = DebugAction_Util_SetWallClock,
+    [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]    = DebugAction_Util_WatchCredits,
+    [DEBUG_UTIL_MENU_ITEM_PLAYER_NAME]     = DebugAction_Util_Player_Name,
+    [DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER]   = DebugAction_Util_Player_Gender,
+    [DEBUG_UTIL_MENU_ITEM_PLAYER_ID]       = DebugAction_Util_Player_Id,
+    [DEBUG_UTIL_MENU_ITEM_CHEAT]           = DebugAction_Util_CheatStart,
+    [DEBUG_UTIL_MENU_ITEM_EXPANSION_VER]   = DebugAction_Util_ExpansionVersion,
+    [DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS] = DebugAction_Util_BerryFunctions,
 };
 
 static void (*const sDebugMenu_Actions_PartyBoxes[])(u8) =
@@ -893,6 +933,15 @@ static void (*const sDebugMenu_Actions_Sound[])(u8) =
 {
     [DEBUG_SOUND_MENU_ITEM_SE]  = DebugAction_Sound_SE,
     [DEBUG_SOUND_MENU_ITEM_MUS] = DebugAction_Sound_MUS,
+};
+
+static void (*const sDebugMenu_Actions_BerryFunctions[])(u8) =
+{
+    [DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL]  = DebugAction_BerryFunctions_ClearAll,
+    [DEBUG_BERRY_FUNCTIONS_MENU_READY]      = DebugAction_BerryFunctions_Ready,
+    [DEBUG_BERRY_FUNCTIONS_MENU_NEXT_STAGE] = DebugAction_BerryFunctions_NextStage,
+    [DEBUG_BERRY_FUNCTIONS_MENU_PESTS]      = DebugAction_BerryFunctions_Pests,
+    [DEBUG_BERRY_FUNCTIONS_MENU_WEEDS]      = DebugAction_BerryFunctions_Weeds,
 };
 
 // *******************************
@@ -1031,6 +1080,12 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Sound =
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_Sound),
 };
 
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_BerryFunctions =
+{
+    .items = sDebugMenu_Items_BerryFunctions,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_BerryFunctions),
+};
 
 // *******************************
 // Functions universal
@@ -1681,6 +1736,25 @@ static void DebugTask_HandleMenuInput_Sound(u8 taskId)
     }
 }
 
+static void DebugTask_HandleMenuInput_BerryFunctions(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Actions_BerryFunctions[input]) != NULL)
+            func(taskId);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        Debug_ReShowMainMenu();
+    }
+}
+
 // *******************************
 // Open sub-menus
 static void DebugAction_OpenUtilitiesMenu(u8 taskId)
@@ -1708,7 +1782,6 @@ static void DebugAction_OpenFlagsVarsMenu(u8 taskId)
     Debug_ShowMenu(DebugTask_HandleMenuInput_FlagsVars, gMultiuseListMenuTemplate);
 }
 
-
 static void DebugAction_OpenGiveMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
@@ -1725,6 +1798,12 @@ static void DebugAction_OpenSoundMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_Sound, sDebugMenu_ListTemplate_Sound);
+}
+
+static void DebugAction_Util_BerryFunctions(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_BerryFunctions, sDebugMenu_ListTemplate_BerryFunctions);
 }
 
 // *******************************
@@ -4790,6 +4869,111 @@ static const u8 *const sSENames[] =
 SOUND_LIST_SE
 };
 #undef X
+
+// *******************************
+// Actions BerryFunctions
+
+static void DebugAction_BerryFunctions_ClearAll(u8 taskId)
+{
+    u8 i;
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
+        {
+            RemoveBerryTree(GetObjectEventBerryTreeId(i));
+            SetBerryTreeJustPicked(gObjectEvents[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+        }
+    }
+
+    ScriptContext_Enable();
+    Debug_DestroyMenu_Full(taskId);
+}
+
+static void DebugAction_BerryFunctions_Ready(u8 taskId)
+{
+    u8 i;
+    struct BerryTree *tree;
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
+        {
+            tree = &gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(i)];
+            if (tree->stage != BERRY_STAGE_NO_BERRY)
+            {
+                tree->stage = BERRY_STAGE_BERRIES - 1;
+                BerryTreeGrow(tree);
+            }
+        }
+    }
+
+    ScriptContext_Enable();
+    Debug_DestroyMenu_Full(taskId);
+}
+
+static void DebugAction_BerryFunctions_NextStage(u8 taskId)
+{
+    u8 i;
+    struct BerryTree *tree;
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
+        {
+            tree = &gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(i)];
+            BerryTreeGrow(tree);
+        }
+    }
+
+    ScriptContext_Enable();
+    Debug_DestroyMenu_Full(taskId);
+}
+
+static void DebugAction_BerryFunctions_Pests(u8 taskId)
+{
+    u8 i;
+
+    if (!OW_BERRY_PESTS)
+    {
+        Debug_DestroyMenu_Full_Script(taskId, Debug_BerryPestsDisabled);
+        return;
+    }
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
+        {
+            if (gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(i)].stage != BERRY_STAGE_PLANTED)
+                gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(i)].pests = TRUE;
+        }
+    }
+
+    ScriptContext_Enable();
+    Debug_DestroyMenu_Full(taskId);
+}
+
+static void DebugAction_BerryFunctions_Weeds(u8 taskId)
+{
+    u8 i;
+
+    if (!OW_BERRY_WEEDS)
+    {
+        Debug_DestroyMenu_Full_Script(taskId, Debug_BerryWeedsDisabled);
+        return;
+    }
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
+        {
+            gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(i)].weeds = TRUE;
+        }
+    }
+
+    ScriptContext_Enable();
+    Debug_DestroyMenu_Full(taskId);
+}
 
 // *******************************
 // Actions Party/Boxes

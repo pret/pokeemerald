@@ -144,6 +144,10 @@ static const u8 sTeraShardDesc[]      = _("These shards may\n"
                                           "form when a Tera\n"
                                           "Pokémon faints.");
 
+static const u8 sGenericMulchDesc[]   = _("A fertilizer that\n"
+                                          "is unsuitable for\n"
+                                          "local soil.");
+
 const struct Item gItems[] =
 {
     [ITEM_NONE] =
@@ -2676,12 +2680,17 @@ const struct Item gItems[] =
     {
         .name = _("Growth Mulch"),
         .price = 200,
+#if OW_BERRY_MULCH_USAGE == TRUE
         .description = COMPOUND_STRING("A fertilizer that\n"
                                        "accelerates the\n"
                                        "growth of Berries."),
+#else
+        .description = sGenericMulchDesc,
+#endif
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = ITEM_TO_MULCH(ITEM_GROWTH_MULCH),
         .flingPower = 30,
     },
 
@@ -2689,12 +2698,17 @@ const struct Item gItems[] =
     {
         .name = _("Damp Mulch"),
         .price = 200,
+#if OW_BERRY_MULCH_USAGE == TRUE
         .description = COMPOUND_STRING("A fertilizer that\n"
                                        "decelerates the\n"
                                        "growth of Berries."),
+#else
+        .description = sGenericMulchDesc,
+#endif
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = ITEM_TO_MULCH(ITEM_DAMP_MULCH),
         .flingPower = 30,
     },
 
@@ -2702,12 +2716,17 @@ const struct Item gItems[] =
     {
         .name = _("Stable Mulch"),
         .price = 200,
+#if OW_BERRY_MULCH_USAGE == TRUE
         .description = COMPOUND_STRING("A fertilizer that\n"
                                        "ups the life time\n"
                                        "of Berry trees."),
+#else
+        .description = sGenericMulchDesc,
+#endif
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = ITEM_TO_MULCH(ITEM_STABLE_MULCH),
         .flingPower = 30,
     },
 
@@ -2715,12 +2734,17 @@ const struct Item gItems[] =
     {
         .name = _("Gooey Mulch"),
         .price = 200,
+#if OW_BERRY_MULCH_USAGE == TRUE
         .description = COMPOUND_STRING("A fertilizer that\n"
                                        "makes more Berries\n"
                                        "regrow after fall."),
+#else
+        .description = sGenericMulchDesc,
+#endif
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = ITEM_TO_MULCH(ITEM_GOOEY_MULCH),
         .flingPower = 30,
     },
 
@@ -2728,12 +2752,17 @@ const struct Item gItems[] =
     {
         .name = _("Rich Mulch"),
         .price = 200,
+#if OW_BERRY_MULCH_USAGE == TRUE
         .description = COMPOUND_STRING("A fertilizer that\n"
                                        "ups the number of\n"
                                        "Berries harvested."),
+#else
+        .description = sGenericMulchDesc,
+#endif
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = ITEM_TO_MULCH(ITEM_RICH_MULCH),
         .flingPower = 30,
     },
 
@@ -2741,12 +2770,17 @@ const struct Item gItems[] =
     {
         .name = _("SurprseMulch"),
         .price = 200,
+#if OW_BERRY_MULCH_USAGE == TRUE
         .description = COMPOUND_STRING("A fertilizer that\n"
                                        "ups the chance of\n"
                                        "Berry mutations."),
+#else
+        .description = sGenericMulchDesc,
+#endif
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = ITEM_TO_MULCH(ITEM_SURPRISE_MULCH),
         .flingPower = 30,
     },
 
@@ -2754,12 +2788,17 @@ const struct Item gItems[] =
     {
         .name = _("Boost Mulch"),
         .price = 200,
+#if OW_BERRY_MULCH_USAGE == TRUE
         .description = COMPOUND_STRING("A fertilizer that\n"
                                        "ups the dry speed\n"
                                        "of soft soil."),
+#else
+        .description = sGenericMulchDesc,
+#endif
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = ITEM_TO_MULCH(ITEM_BOOST_MULCH),
         .flingPower = 30,
     },
 
@@ -2767,12 +2806,17 @@ const struct Item gItems[] =
     {
         .name = _("Amaze Mulch"),
         .price = 200,
+#if OW_BERRY_MULCH_USAGE == TRUE
         .description = COMPOUND_STRING("A fertilizer Rich\n"
                                        "Surprising and\n"
                                        "Boosting as well."),
+#else
+        .description = sGenericMulchDesc,
+#endif
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = ITEM_TO_MULCH(ITEM_AMAZE_MULCH),
         .flingPower = 30,
     },
 
