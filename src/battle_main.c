@@ -4932,6 +4932,8 @@ static void TurnValuesCleanUp(bool8 var0)
     gSideStatuses[B_SIDE_OPPONENT] &= ~(SIDE_STATUS_QUICK_GUARD | SIDE_STATUS_WIDE_GUARD | SIDE_STATUS_CRAFTY_SHIELD | SIDE_STATUS_MAT_BLOCK);
     gSideTimers[B_SIDE_PLAYER].followmeTimer = 0;
     gSideTimers[B_SIDE_OPPONENT].followmeTimer = 0;
+    
+    gBattleStruct->pledgeMove = FALSE; // combined pledge move may not have been used due to a canceller
 }
 
 void SpecialStatusesClear(void)
