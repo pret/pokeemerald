@@ -875,7 +875,11 @@ static u16 SanitizeItemId(u16 itemId)
 
 const u8 *ItemId_GetName(u16 itemId)
 {
+    #if (DECAP_ENABLED) && (DECAP_MIRRORING) && !(DECAP_ITEM_NAMES)
+    return ROM_MIRROR_PTR(gItems[SanitizeItemId(itemId)].name);
+    #else
     return gItems[SanitizeItemId(itemId)].name;
+    #endif
 }
 
 u32 ItemId_GetPrice(u16 itemId)
