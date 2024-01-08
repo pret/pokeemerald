@@ -5497,7 +5497,11 @@ static void InitBoxTitle(u8 boxId)
     sStorage->wallpaperPalBits |= (1 << 16) << tagIndex;
 
     StringCopyPadded(sStorage->boxTitleText, GetBoxNamePtr(boxId), 0, BOX_NAME_LENGTH);
+    #if (DECAP_ENABLED) && (DECAP_MIRRORING)
+    DrawTextWindowAndBufferTiles(MirrorPtr(sStorage->boxTitleText), sStorage->boxTitleTiles, 0, 0, 2);
+    #else
     DrawTextWindowAndBufferTiles(sStorage->boxTitleText, sStorage->boxTitleTiles, 0, 0, 2);
+    #endif
     LoadSpriteSheet(&spriteSheet);
     x = GetBoxTitleBaseX(GetBoxNamePtr(boxId));
 
@@ -9519,7 +9523,11 @@ struct BoxPokemon *GetBoxedMonPtr(u8 boxId, u8 boxPosition)
 u8 *GetBoxNamePtr(u8 boxId)
 {
     if (boxId < TOTAL_BOXES_COUNT)
+        #if (DECAP_ENABLED) && (DECAP_MIRRORING)
+        return MirrorPtr(gPokemonStoragePtr->boxNames[boxId]);
+        #else
         return gPokemonStoragePtr->boxNames[boxId];
+        #endif
     else
         return NULL;
 }

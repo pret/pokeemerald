@@ -95,7 +95,12 @@ void AgbMain()
 #endif //MODERN
     *(vu16 *)BG_PLTT = RGB_WHITE; // Set the backdrop to white on startup
     InitGpuRegManager();
+    // Setup waitstates for all ROM mirrors
+    #if (DECAP_ENABLED) && (DECAP_MIRRORING)
+    REG_WAITCNT = WAITCNT_PREFETCH_ENABLE | 0x5B4; // WAITCNT_WSX_S_1 | WAITCNT_WSX_N_3
+    #else
     REG_WAITCNT = WAITCNT_PREFETCH_ENABLE | WAITCNT_WS0_S_1 | WAITCNT_WS0_N_3;
+    #endif
     InitKeys();
     InitIntrHandlers();
     m4aSoundInit();

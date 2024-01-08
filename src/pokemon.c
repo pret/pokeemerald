@@ -3773,6 +3773,10 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         }
         else
         {
+            #if (DECAP_ENABLED) && !(DECAP_NICKNAMES)
+            if (IsStringAddrSafe(data, POKEMON_NAME_LENGTH))
+                *data++ = CHAR_FIXED_CASE;
+            #endif
             for (retVal = 0;
                 retVal < POKEMON_NAME_LENGTH;
                 data[retVal] = boxMon->nickname[retVal], retVal++){}
@@ -3797,8 +3801,12 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
     {
         retVal = 0;
 
-        while (retVal < PLAYER_NAME_LENGTH)
-        {
+        #if (DECAP_ENABLED) && !(DECAP_NICKNAMES)
+        if (IsStringAddrSafe(data, PLAYER_NAME_LENGTH))
+            *data++ = CHAR_FIXED_CASE;
+        #endif
+
+        while (retVal < PLAYER_NAME_LENGTH) {
             data[retVal] = boxMon->otName[retVal];
             retVal++;
         }
