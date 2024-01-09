@@ -35,14 +35,14 @@ SINGLE_BATTLE_TEST("Teatime causes the user to consume its Berry, even in the pr
     }
 }
 
-SINGLE_BATTLE_TEST("Teatime causes the user to consume its Berry, even under the effects of Wonder Room")
+SINGLE_BATTLE_TEST("Teatime causes the user to consume its Berry, even under the effects of Magic Room")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_LIECHI_BERRY); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN {
-            MOVE(opponent, MOVE_WONDER_ROOM);
+            MOVE(opponent, MOVE_MAGIC_ROOM);
             MOVE(player, MOVE_TEATIME);
         }
     } SCENE {
