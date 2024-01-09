@@ -12,6 +12,7 @@
 #include "random.h"
 #include "test/battle.h"
 #include "window.h"
+#include "text.h"
 #include "constants/trainers.h"
 
 #if defined(__INTELLISENSE__)
@@ -1185,6 +1186,13 @@ static s32 TryMessage(s32 i, s32 n, const u8 *string)
                 if (string[j] == CHAR_PROMPT_CLEAR)
                     j++;
             }
+            #if DECAP_ENABLED
+            // ignore case-fixing characters in string
+            if (string[j] == CHAR_FIXED_CASE || string[j] == CHAR_UNFIX_CASE) {
+                k--; // will be incremented in 'continue'
+                continue;
+            }
+            #endif
             if (string[j] != event->pattern[k])
             {
                 break;
