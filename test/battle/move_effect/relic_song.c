@@ -5,7 +5,6 @@ ASSUMPTIONS
 {
     ASSUME(gBattleMoves[MOVE_RELIC_SONG].effect == EFFECT_RELIC_SONG);
     ASSUME(MoveHasMoveEffect(MOVE_RELIC_SONG, MOVE_EFFECT_SLEEP) == TRUE);
-    ASSUME(P_GEN_5_POKEMON == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Relic Song has a 10% chance to put the target to sleep")

@@ -72,23 +72,22 @@ AI_SINGLE_BATTLE_TEST("AI sees increased base power of Wake Up Slap")
     }
 }
 
-// Underlying AI calcs are broken and need fixing
 // AI_SINGLE_BATTLE_TEST("AI sees increased base power of Grav Apple")
 // {
 //     u32 movePlayer;
 //     u16 expectedMove;
 
-//     PARAMETRIZE { movePlayer = MOVE_CELEBRATE; expectedMove = MOVE_TROP_KICK; }
+//     PARAMETRIZE { movePlayer = MOVE_CELEBRATE; expectedMove = MOVE_POWER_WHIP; }
 //     PARAMETRIZE { movePlayer = MOVE_GRAVITY; expectedMove = MOVE_GRAV_APPLE; }
 
 //     GIVEN {
 //         ASSUME(gBattleMoves[MOVE_GRAV_APPLE].effect == EFFECT_GRAV_APPLE);
-//         ASSUME(MoveHasMoveEffect(MOVE_TROP_KICK, MOVE_EFFECT_ATK_MINUS_1) == TRUE);
+//         ASSUME(MoveHasMoveEffect(MOVE_GRAV_APPLE, MOVE_EFFECT_DEF_MINUS_1) == TRUE);
 //         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
 //         PLAYER(SPECIES_WOBBUFFET) { HP(81); Speed(20); }
-//         OPPONENT(SPECIES_WOBBUFFET) { Speed(10); Moves(MOVE_TROP_KICK, MOVE_GRAV_APPLE); }
+//         OPPONENT(SPECIES_WOBBUFFET) { Speed(10); Moves(MOVE_POWER_WHIP, MOVE_GRAV_APPLE); }
 //     } WHEN {
-//         TURN { MOVE(player, movePlayer); EXPECT_MOVE(opponent, MOVE_TROP_KICK); }
+//         TURN { MOVE(player, movePlayer); EXPECT_MOVE(opponent, MOVE_POWER_WHIP); }
 //         TURN { MOVE(player, MOVE_CELEBRATE); EXPECT_MOVE(opponent, expectedMove); }
 //     } SCENE {
 //         if (expectedMove == MOVE_GRAV_APPLE)

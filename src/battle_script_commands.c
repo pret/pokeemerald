@@ -3224,7 +3224,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                     static const u8 sTriAttackEffects[] =
                     {
                         MOVE_EFFECT_BURN,
-                        B_USE_FROSTBITE == TRUE ? MOVE_EFFECT_FROSTBITE : MOVE_EFFECT_FREEZE,
+                        MOVE_EFFECT_FREEZE_OR_FROSTBITE,
                         MOVE_EFFECT_PARALYSIS
                     };
                     gBattleScripting.moveEffect = RandomElement(RNG_TRI_ATTACK, sTriAttackEffects);
@@ -3768,7 +3768,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                         break;
                     case BATTLE_TERRAIN_SNOW:
                     case BATTLE_TERRAIN_ICE:
-                        gBattleScripting.moveEffect = (B_USE_FROSTBITE == TRUE ? MOVE_EFFECT_FROSTBITE : MOVE_EFFECT_FREEZE);
+                        gBattleScripting.moveEffect = MOVE_EFFECT_FREEZE_OR_FROSTBITE;
                         break;
                     case BATTLE_TERRAIN_VOLCANO:
                         gBattleScripting.moveEffect = MOVE_EFFECT_BURN;

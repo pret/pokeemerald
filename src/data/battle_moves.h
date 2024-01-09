@@ -2420,6 +2420,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .effect = EFFECT_TWO_TURNS_ATTACK,
         .power = 140,
         .type = TYPE_FLYING,
+        .criticalHitStage = 1,
         .accuracy = 90,
         .pp = 5,
         .target = MOVE_TARGET_SELECTED,
@@ -14097,9 +14098,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .ignoresProtect = TRUE,
         .slicingMove = TRUE,
-        .additionalEffects = ADDITIONAL_EFFECTS({
-            .moveEffect = MOVE_EFFECT_FEINT,
-        }),
     },
 
     [MOVE_TACHYON_CUTTER] =
