@@ -10,6 +10,7 @@
 
 extern const struct SpriteTemplate gFlashingHitSplatSpriteTemplate;
 
+static void AnimEllipticalGustCentered(struct Sprite *sprite);
 static void AnimEllipticalGust_Step(struct Sprite *);
 static void AnimGustToTarget(struct Sprite *);
 static void AnimGustToTarget_Step(struct Sprite *);
@@ -31,6 +32,17 @@ static void AnimSkyAttackBird(struct Sprite *);
 static void AnimSkyAttackBird_Step(struct Sprite *);
 static void AnimTask_AnimateGustTornadoPalette_Step(u8);
 static void AnimTask_LoadWindstormBackground_Step(u8 taskId);
+
+const struct SpriteTemplate gEllipticalGustCenteredSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_GUST,
+    .paletteTag = ANIM_TAG_GUST,
+    .oam = &gOamData_AffineOff_ObjNormal_32x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimEllipticalGustCentered,
+};
 
 const struct SpriteTemplate gEllipticalGustSpriteTemplate =
 {
@@ -344,6 +356,15 @@ const struct SpriteTemplate gSkyAttackBirdSpriteTemplate =
     .callback = AnimSkyAttackBird,
 };
 
+// same as AnimEllipticalGust but centered on targets
+static void AnimEllipticalGustCentered(struct Sprite *sprite)
+{
+    InitSpritePosToAnimTargetsCentre(sprite, FALSE);
+    sprite->y += 20;
+    sprite->data[1] = 191;
+    sprite->callback = AnimEllipticalGust_Step;
+    sprite->callback(sprite);
+}
 
 void AnimEllipticalGust(struct Sprite *sprite)
 {
