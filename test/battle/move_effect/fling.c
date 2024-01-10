@@ -201,46 +201,115 @@ SINGLE_BATTLE_TEST("Fling doesn't consume the item if pokemon is asleep/frozen/p
     }
 }
 
-SINGLE_BATTLE_TEST("Fling applies special effects when throwing specific Items")
+SINGLE_BATTLE_TEST("Fling applies special effects when throwing specific Items - but is blocked by Shield Dust")
 {
-    u16 item, effect;
+    u16 item, ability;
 
-    PARAMETRIZE {item = ITEM_FLAME_ORB; effect = MOVE_EFFECT_BURN; }
-    PARAMETRIZE {item = ITEM_TOXIC_ORB; effect = MOVE_EFFECT_TOXIC; }
-    PARAMETRIZE {item = ITEM_POISON_BARB; effect = MOVE_EFFECT_POISON; }
-    PARAMETRIZE {item = ITEM_LIGHT_BALL; effect = MOVE_EFFECT_PARALYSIS; }
-    PARAMETRIZE {item = ITEM_RAZOR_FANG; effect = MOVE_EFFECT_FLINCH; }
-    PARAMETRIZE {item = ITEM_KINGS_ROCK; effect = MOVE_EFFECT_FLINCH; }
+    PARAMETRIZE {item = ITEM_FLAME_ORB; ability = ABILITY_TELEPATHY; }
+    PARAMETRIZE {item = ITEM_FLAME_ORB; ability = ABILITY_SHIELD_DUST; }
+    PARAMETRIZE {item = ITEM_LIGHT_BALL; ability = ABILITY_TELEPATHY; }
+    PARAMETRIZE {item = ITEM_LIGHT_BALL; ability = ABILITY_SHIELD_DUST; }
+    PARAMETRIZE {item = ITEM_POISON_BARB; ability = ABILITY_TELEPATHY; }
+    PARAMETRIZE {item = ITEM_POISON_BARB; ability = ABILITY_SHIELD_DUST; }
+    PARAMETRIZE {item = ITEM_TOXIC_ORB; ability = ABILITY_TELEPATHY; }
+    PARAMETRIZE {item = ITEM_TOXIC_ORB; ability = ABILITY_SHIELD_DUST; }
+    PARAMETRIZE {item = ITEM_RAZOR_FANG; ability = ABILITY_TELEPATHY; }
+    PARAMETRIZE {item = ITEM_RAZOR_FANG; ability = ABILITY_SHIELD_DUST; }
+    PARAMETRIZE {item = ITEM_KINGS_ROCK; ability = ABILITY_TELEPATHY; }
+    PARAMETRIZE {item = ITEM_KINGS_ROCK; ability = ABILITY_SHIELD_DUST; }
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(item); }
-        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Ability(ability); }
     } WHEN {
         TURN { MOVE(player, MOVE_FLING); }
     } SCENE {
         MESSAGE("Wobbuffet used Fling!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, player);
         HP_BAR(opponent);
-        switch (effect)
+        switch (item)
         {
-        case MOVE_EFFECT_BURN:
-            MESSAGE("Foe Wobbuffet was burned!");
-            STATUS_ICON(opponent, STATUS1_BURN);
+        case ITEM_FLAME_ORB:
+            if (ability != ABILITY_SHIELD_DUST)
+            {
+                MESSAGE("Foe Wobbuffet was burned!");
+                STATUS_ICON(opponent, STATUS1_BURN);
+            }
+            else
+            {
+                NONE_OF {
+                    MESSAGE("Foe Wobbuffet was burned!");
+                    STATUS_ICON(opponent, STATUS1_BURN);
+                }
+                MESSAGE("The Flame Orb was used up...");
+            }
             break;
-        case MOVE_EFFECT_PARALYSIS:
-            MESSAGE("Foe Wobbuffet is paralyzed! It may be unable to move!");
-            STATUS_ICON(opponent, STATUS1_PARALYSIS);
+        case ITEM_LIGHT_BALL:
+            if (ability != ABILITY_SHIELD_DUST)
+            {
+                MESSAGE("Foe Wobbuffet is paralyzed! It may be unable to move!");
+                STATUS_ICON(opponent, STATUS1_PARALYSIS);
+            }
+            else
+            {
+                NONE_OF {
+                    MESSAGE("Foe Wobbuffet is paralyzed! It may be unable to move!");
+                    STATUS_ICON(opponent, STATUS1_PARALYSIS);
+                }
+                MESSAGE("The Light Ball was used up...");
+            }
             break;
-        case MOVE_EFFECT_POISON:
-            MESSAGE("Foe Wobbuffet was poisoned!");
-            STATUS_ICON(opponent, STATUS1_POISON);
+        case ITEM_POISON_BARB:
+            if (ability != ABILITY_SHIELD_DUST)
+            {
+                MESSAGE("Foe Wobbuffet was poisoned!");
+                STATUS_ICON(opponent, STATUS1_POISON);
+            }
+            else
+            {
+                NONE_OF {
+                    MESSAGE("Foe Wobbuffet was poisoned!");
+                    STATUS_ICON(opponent, STATUS1_POISON);
+                }
+                MESSAGE("The Poison Barb was used up...");
+            }
             break;
-        case MOVE_EFFECT_TOXIC:
-            MESSAGE("Foe Wobbuffet is badly poisoned!");
-            STATUS_ICON(opponent, STATUS1_TOXIC_POISON);
+        case ITEM_TOXIC_ORB:
+            if (ability != ABILITY_SHIELD_DUST)
+            {
+                MESSAGE("Foe Wobbuffet is badly poisoned!");
+                STATUS_ICON(opponent, STATUS1_TOXIC_POISON);
+            }
+            else
+            {
+                NONE_OF {
+                    MESSAGE("Foe Wobbuffet is badly poisoned!");
+                    STATUS_ICON(opponent, STATUS1_TOXIC_POISON);
+                }
+                MESSAGE("The Toxic Orb was used up...");
+            }
             break;
-        case MOVE_EFFECT_FLINCH:
-            MESSAGE("Foe Wobbuffet flinched!");
+        case ITEM_RAZOR_FANG:
+        case ITEM_KINGS_ROCK:
+            if (ability != ABILITY_SHIELD_DUST)
+            {
+                MESSAGE("Foe Wobbuffet flinched!");
+            }
+            else
+            {
+                NONE_OF {
+                    MESSAGE("Foe Wobbuffet flinched!");
+                }
+                switch (item)
+                {
+                    case ITEM_RAZOR_FANG:
+                        MESSAGE("The Razor Fang was used up...");
+                        break;
+                    case ITEM_KINGS_ROCK:
+                        MESSAGE("The King's Rock was used up...");
+                        break;
+                }
+            }
             break;
         }
     }

@@ -3228,7 +3228,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                         MOVE_EFFECT_PARALYSIS
                     };
                     gBattleScripting.moveEffect = RandomElement(RNG_TRI_ATTACK, sTriAttackEffects);
-                    SetMoveEffect(FALSE, certain);
+                    SetMoveEffect(primary, certain);
                 }
                 break;
             case MOVE_EFFECT_CHARGING:
@@ -3665,7 +3665,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                 {
                     static const u8 sDireClawEffects[] = { MOVE_EFFECT_POISON, MOVE_EFFECT_PARALYSIS, MOVE_EFFECT_SLEEP };
                     gBattleScripting.moveEffect = RandomElement(RNG_DIRE_CLAW, sDireClawEffects);
-                    SetMoveEffect(FALSE, certain);
+                    SetMoveEffect(primary, certain);
                 }
                 break;
             case MOVE_EFFECT_STEALTH_ROCK:
@@ -3781,7 +3781,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                         break;
                     }
                 }
-                SetMoveEffect(FALSE, certain);
+                SetMoveEffect(primary, certain);
                 break;
             }
         }

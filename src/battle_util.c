@@ -11430,7 +11430,7 @@ bool32 IsGen6ExpShareEnabled(void)
 
 bool32 MoveHasMoveEffect(u32 move, u32 moveEffect)
 {
-    u8 i;
+    u32 i;
     for (i = 0; i < gBattleMoves[move].numAdditionalEffects; i++)
     {
         if (gBattleMoves[move].additionalEffects[i].moveEffect == moveEffect
@@ -11442,7 +11442,7 @@ bool32 MoveHasMoveEffect(u32 move, u32 moveEffect)
 
 bool32 MoveHasMoveEffectWithChance(u32 move, u32 moveEffect, u32 chance)
 {
-    u8 i;
+    u32 i;
     for (i = 0; i < gBattleMoves[move].numAdditionalEffects; i++)
     {
         if (gBattleMoves[move].additionalEffects[i].moveEffect == moveEffect
@@ -11454,7 +11454,7 @@ bool32 MoveHasMoveEffectWithChance(u32 move, u32 moveEffect, u32 chance)
 
 bool32 MoveHasMoveEffectSelf(u32 move, u32 moveEffect)
 {
-    u8 i;
+    u32 i;
     for (i = 0; i < gBattleMoves[move].numAdditionalEffects; i++)
     {
         if (gBattleMoves[move].additionalEffects[i].moveEffect == moveEffect

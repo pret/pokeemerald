@@ -1287,9 +1287,6 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         case EFFECT_HIT: // only applies to Vital Throw
             if (gBattleMoves[move].priority < 0 && AI_STRIKES_FIRST(battlerAtk, battlerDef, move) && aiData->hpPercents[battlerAtk] < 40)
                 ADJUST_SCORE(-2);    // don't want to move last
-            
-            // TEMPORARY - should applied to all moves regardless of effect
-            score = AI_CheckMoveEffects(battlerAtk, battlerDef, move, score, aiData, predictedMove, isDoubleBattle);
             break;
         default:
             break;  // check move damage
@@ -3540,6 +3537,8 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     switch (moveEffect)
     {
     case EFFECT_HIT:
+        // TEMPORARY - should be applied to all moves regardless of effect
+        score = AI_CheckMoveEffects(battlerAtk, battlerDef, move, score, aiData, predictedMove, isDoubleBattle);
         break;
     case EFFECT_SLEEP:
     case EFFECT_YAWN:
