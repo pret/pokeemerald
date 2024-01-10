@@ -127,9 +127,7 @@ struct TextPrinter
     u8 scrollDistance;
     u8 minLetterSpacing;  // 0x20
     u8 japanese;
-    #if DECAP_ENABLED
     u8 lastChar; // used to determine whether to decap strings
-    #endif
 };
 
 struct FontInfo
@@ -173,18 +171,14 @@ extern TextFlags gTextFlags;
 extern u8 gDisableTextPrinters;
 extern struct TextGlyph gCurGlyph;
 
-#if DECAP_ENABLED
 extern const u16 gLowercaseDiffTable[];
 #define IS_UPPER(x) (gLowercaseDiffTable[(x) & 0xFF])
 #define TO_LOWER(x) (((x) + gLowercaseDiffTable[(x)]) & 0xFF)
 
-#if DECAP_MIRRORING
 void * UnmirrorPtr(const void * ptr);
 void * MirrorPtr(const void * ptr);
 bool32 IsMirrorPtr(const void *ptr);
 u16 AddTextPrinterFixedCaseParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
-#endif
-#endif
 
 void DeactivateAllTextPrinters(void);
 u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));

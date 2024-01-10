@@ -117,12 +117,12 @@ bool8 ShowFieldMessageFromBuffer(void)
 
 static void ExpandStringAndStartDrawFieldMessage(const u8 *str, bool32 allowSkippingDelayWithButtonPress)
 {
-    #if (DECAP_ENABLED) && (DECAP_MIRRORING) && !(DECAP_FIELD_MSG)
-    gStringVar4[0] = CHAR_FIXED_CASE;
-    StringExpandPlaceholders(gStringVar4+1, str);
-    #else
-    StringExpandPlaceholders(gStringVar4, str);
-    #endif
+    if (DECAP_ENABLED && DECAP_MIRRORING && !DECAP_FIELD_MSG) {
+        gStringVar4[0] = CHAR_FIXED_CASE;
+        StringExpandPlaceholders(gStringVar4+1, str);
+    } else {
+        StringExpandPlaceholders(gStringVar4, str);
+    }
     AddTextPrinterForMessage(allowSkippingDelayWithButtonPress);
     CreateTask_DrawFieldMessage();
 }
