@@ -5070,4 +5070,8 @@ extern const u8 gMailTilemap_Retro[];
 extern const u8 gMonMarkingsMenu_Gfx[];
 extern const u16 gMonMarkingsMenu_Pal[];
 
+// BSBob map pop-ups
+extern const u8 gPopUpWindowBorder_Tiles[];
+extern const u16 gPopUpWindowBorder_Palette[];
+
 #endif //GUARD_GRAPHICS_H
