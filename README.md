@@ -1,11 +1,13 @@
-# Pokémon Emerald
+# pokeemerald branches
 
-This is a decompilation of Pokémon Emerald.
+This is a feature branch repo for [pret's](https://pret.github.io/) pokeemerald decomp.
 
-It builds the following ROM:
+# Branches
 
-* [**pokeemerald.gba**](https://datomatic.no-intro.org/index.php?page=show_record&s=23&n=1961) `sha1: f3ae088181bf583e55daf962a92bb46f4f1d07b7`
+## bsbob_map_popups
 
-To set up the repository, see [INSTALL.md](INSTALL.md).
+This is a port of BSBob's map pop-ups from [Vanadium Version](https://github.com/nielsmittertreiner/pokeemerald/tree/vanadium). If you pull this, please credit him.
 
-For contacts and other pret projects, see [pret.github.io](https://pret.github.io/).
+![bsbob_map_popup.gif](bsbob_map_popup.gif)
+
+NOTE: This currently only builds on modern, not agbcc. I'm working on it.
