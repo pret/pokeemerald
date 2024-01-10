@@ -31,7 +31,6 @@
 #define P_CUSTOM_GENDER_DIFF_ICONS  TRUE        // If TRUE, will give more Pokémon custom icons for their female forms, i.e. Hippopotas and Hippowdon
 #define P_LEGENDARY_PERFECT_IVS     GEN_LATEST  // Since Gen 6, Legendaries, Mythicals and Ultra Beasts found in the wild or given through gifts have at least 3 perfect IVs.
 #define P_EV_CAP                    GEN_LATEST  // Since Gen 6, the max EVs per stat is 252 instead of 255.
-#define P_CATCH_CURVE               GEN_LATEST  // Since Gen 6, the capture rate curve was changed to make pokeballs more effective on lower level pokemon
 
 // Flag settings
 // To use the following features in scripting, replace the 0s with the flag ID you're assigning it to.

@@ -14969,7 +14969,7 @@ static void Cmd_handleballthrow(void)
         if (gBattleResults.catchAttempts[gLastUsedItem - FIRST_BALL] < 255)
             gBattleResults.catchAttempts[gLastUsedItem - FIRST_BALL]++;
 
-        if (odds >= 255) // mon caught
+        if (odds > 254) // mon caught
         {
             BtlController_EmitBallThrowAnim(gBattlerAttacker, BUFFER_A, BALL_3_SHAKES_SUCCESS);
             MarkBattlerForControllerExec(gBattlerAttacker);
@@ -15014,16 +15014,8 @@ static void Cmd_handleballthrow(void)
             }
             else
             {
-                if (P_CATCH_CURVE >= GEN_6)
-                {
-                    odds = (255 * 255 * 255) / (odds * odds * odds);
-                    odds = 65536 / Sqrt(Sqrt(Sqrt(Sqrt(odds))));
-                }
-                else
-                {
-                    odds = Sqrt(Sqrt(16711680 / odds));
-                    odds = 1048560 / odds;
-                }
+                odds = Sqrt(Sqrt(16711680 / odds));
+                odds = 1048560 / odds;
                 for (shakes = 0; shakes < maxShakes && Random() < odds; shakes++);
             }
 
