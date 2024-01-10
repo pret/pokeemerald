@@ -1017,6 +1017,7 @@
 #define ITEM_TO_BERRY(itemId)(((itemId) - FIRST_BERRY_INDEX) + 1)
 #define ITEM_TO_MAIL(itemId)((itemId) - FIRST_MAIL_INDEX)
 #define MAIL_NONE 0xFF
+#define ITEM_TO_MULCH(itemId)(((itemId) - ITEM_GROWTH_MULCH) + 1)
 
 #define NUM_TECHNICAL_MACHINES 100
 #define NUM_HIDDEN_MACHINES 8

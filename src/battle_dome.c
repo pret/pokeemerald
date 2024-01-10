@@ -4262,8 +4262,8 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     else
         j = GetFrontierOpponentClass(trainerId);
 
-    for (;gTrainerClassNames[j][i] != EOS; i++)
-        gStringVar1[i] = gTrainerClassNames[j][i];
+    for (;gTrainerClasses[j].name[i] != EOS; i++)
+        gStringVar1[i] = gTrainerClasses[j].name[i];
     gStringVar1[i] = CHAR_SPACE;
     gStringVar1[i + 1] = EOS;
 

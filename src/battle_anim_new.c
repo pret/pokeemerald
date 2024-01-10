@@ -7247,7 +7247,7 @@ static void InitSpritePosToGivenTarget(struct Sprite *sprite, u8 target)
     sprite->y2 = gBattleAnimArgs[1];
 }
 
-static void InitSpritePosToAnimTargetsCentre(struct Sprite *sprite, bool8 respectMonPicOffsets)
+void InitSpritePosToAnimTargetsCentre(struct Sprite *sprite, bool32 respectMonPicOffsets)
 {
     if (!respectMonPicOffsets)
     {

@@ -17,6 +17,7 @@
 #include "field_weather.h"
 #include "graphics.h"
 #include "item.h"
+#include "level_caps.h"
 #include "link.h"
 #include "main.h"
 #include "overworld.h"
@@ -354,10 +355,10 @@ static const u16 sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
 
 const struct SpindaSpot gSpindaSpotGraphics[] =
 {
-    {.x = 16, .y =  7, .image = INCBIN_U16("graphics/pokemon/spinda/spots/spot_0.1bpp")},
-    {.x = 40, .y =  8, .image = INCBIN_U16("graphics/pokemon/spinda/spots/spot_1.1bpp")},
-    {.x = 22, .y = 25, .image = INCBIN_U16("graphics/pokemon/spinda/spots/spot_2.1bpp")},
-    {.x = 34, .y = 26, .image = INCBIN_U16("graphics/pokemon/spinda/spots/spot_3.1bpp")}
+    {.x = 16, .y =  7, .image = INCBIN_U16("graphics/pokemon/gen_3/spinda/spots/spot_0.1bpp")},
+    {.x = 40, .y =  8, .image = INCBIN_U16("graphics/pokemon/gen_3/spinda/spots/spot_1.1bpp")},
+    {.x = 22, .y = 25, .image = INCBIN_U16("graphics/pokemon/gen_3/spinda/spots/spot_2.1bpp")},
+    {.x = 34, .y = 26, .image = INCBIN_U16("graphics/pokemon/gen_3/spinda/spots/spot_3.1bpp")}
 };
 
 #include "data/pokemon/item_effects.h"
@@ -5054,7 +5055,7 @@ bool8 TryIncrementMonLevel(struct Pokemon *mon)
         expPoints = gExperienceTables[gSpeciesInfo[species].growthRate][MAX_LEVEL];
         SetMonData(mon, MON_DATA_EXP, &expPoints);
     }
-    if (nextLevel > MAX_LEVEL || expPoints < gExperienceTables[gSpeciesInfo[species].growthRate][nextLevel])
+    if (nextLevel > GetCurrentLevelCap() || expPoints < gExperienceTables[gSpeciesInfo[species].growthRate][nextLevel])
     {
         return FALSE;
     }
@@ -5791,11 +5792,11 @@ void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)
 const u8 *GetTrainerClassNameFromId(u16 trainerId)
 {
     if (trainerId > TRAINER_PARTNER(PARTNER_NONE))
-        return gTrainerClassNames[gBattlePartners[trainerId].trainerClass];
+        return gTrainerClasses[gBattlePartners[trainerId].trainerClass].name;
     else if (trainerId < TRAINERS_COUNT)
-        return gTrainerClassNames[gTrainers[trainerId].trainerClass];
+        return gTrainerClasses[gTrainers[trainerId].trainerClass].name;
 
-    return gTrainerClassNames[gTrainers[TRAINER_NONE].trainerClass];
+    return gTrainerClasses[gTrainers[TRAINER_NONE].trainerClass].name;
 }
 
 const u8 *GetTrainerNameFromId(u16 trainerId)
@@ -6263,7 +6264,7 @@ u16 SanitizeSpeciesId(u16 species)
 
 bool32 IsSpeciesEnabled(u16 species)
 {
-    return gSpeciesInfo[species].baseHP > 0;
+    return gSpeciesInfo[species].baseHP > 0 || species == SPECIES_EGG;
 }
 
 void TryToSetBattleFormChangeMoves(struct Pokemon *mon, u16 method)

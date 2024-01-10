@@ -769,6 +769,7 @@ static void Task_ShowAiPoints(u8 taskId)
     u32 i, count;
     struct WindowTemplate winTemplate;
     struct BattleDebugMenu *data = GetStructPtr(taskId);
+    struct Pokemon *mon;
 
     switch (data->aiViewState)
     {
@@ -800,8 +801,11 @@ static void Task_ShowAiPoints(u8 taskId)
                 data->spriteIds.aiIconSpriteIds[i] = 0xFF;
             }
         }
+
+        mon = &GetBattlerParty(data->aiBattlerId)[gBattlerPartyIndexes[data->aiBattlerId]];
+
         data->aiMonSpriteId = CreateMonPicSprite(gBattleMons[data->aiBattlerId].species,
-                                                 gBattleMons[data->aiBattlerId].isShiny,
+                                                 GetMonData(mon, MON_DATA_IS_SHINY),
                                                  gBattleMons[data->aiBattlerId].personality,
                                                  TRUE,
                                                  39, 130, 15, TAG_NONE);
@@ -926,6 +930,7 @@ static void Task_ShowAiKnowledge(u8 taskId)
     u32 i, count;
     struct WindowTemplate winTemplate;
     struct BattleDebugMenu *data = GetStructPtr(taskId);
+    struct Pokemon *mon;
 
     switch (data->aiViewState)
     {
@@ -957,8 +962,11 @@ static void Task_ShowAiKnowledge(u8 taskId)
                 data->spriteIds.aiIconSpriteIds[i] = 0xFF;
             }
         }
+
+        mon = &GetBattlerParty(data->aiBattlerId)[gBattlerPartyIndexes[data->aiBattlerId]];
+
         data->aiMonSpriteId = CreateMonPicSprite(gBattleMons[data->aiBattlerId].species,
-                                                 gBattleMons[data->aiBattlerId].isShiny,
+                                                 GetMonData(mon, MON_DATA_IS_SHINY),
                                                  gBattleMons[data->aiBattlerId].personality,
                                                  TRUE,
                                                  39, 130, 15, TAG_NONE);

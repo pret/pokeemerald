@@ -1105,6 +1105,8 @@ static const union AnimCmd *const sAnimTable_BerryTree[] = {
     [BERRY_STAGE_PLANTED - 1] = sAnim_BerryTreeStage0,
     [BERRY_STAGE_SPROUTED - 1] = sAnim_BerryTreeStage1,
     [BERRY_STAGE_TALLER - 1] = sAnim_BerryTreeStage2,
+    [BERRY_STAGE_TRUNK - 1] = sAnim_BerryTreeStage2,
+    [BERRY_STAGE_BUDDING - 1] = sAnim_BerryTreeStage2,
     [BERRY_STAGE_FLOWERING - 1] = sAnim_BerryTreeStage3,
     [BERRY_STAGE_BERRIES - 1] = sAnim_BerryTreeStage4,
 };
