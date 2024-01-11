@@ -5301,6 +5301,8 @@ BattleScript_EffectSpecialAttackUpHit::
 	goto BattleScript_EffectHit
 
 BattleScript_EffectAllStatsUpHit::
+	@ Handle clangorous soulblaze boosting itself twice in doubles
+	jumpifword CMP_NO_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING | HITMARKER_NO_PPDEDUCT, BattleScript_NoMoveEffect
 	setmoveeffect MOVE_EFFECT_ALL_STATS_UP | MOVE_EFFECT_AFFECTS_USER
 	goto BattleScript_EffectHit
 
