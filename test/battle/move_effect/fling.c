@@ -257,7 +257,7 @@ SINGLE_BATTLE_TEST("Fling applies special effects when throwing specific Items")
     }
 }
 
-SINGLE_BATTLE_TEST("Fling's effects are blocked by Shield Dust")
+SINGLE_BATTLE_TEST("Fling's secondary effects are blocked by Shield Dust")
 {
     u16 item;
 

@@ -2753,17 +2753,6 @@ void StealTargetItem(u8 battlerStealer, u8 battlerItem)
     return;                                     \
 }
 
-// For a future update...
-// #define INCREMENT_RETURN_ON_PARENTAL_BOND_1ST_HIT                                       \
-// {                                                                                       \
-//     if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_1ST_HIT   \
-//       && gBattleMons[gEffectBattler].hp != 0)                                           \
-//     {                                                                                   \
-//         gBattlescriptCurrInstr++;                                                       \
-//         return;                                                                         \
-//     }                                                                                   \
-// }
-
 void SetMoveEffect(bool32 primary, bool32 certain)
 {
     s32 i, affectsUser = 0;
@@ -3666,7 +3655,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                     case TYPE_FIRE: // Burn Up
                         gBattlescriptCurrInstr = BattleScript_RemoveFireType;
                         break;
-                    case TYPE_ELECTRIC: // Electro Shot
+                    case TYPE_ELECTRIC: // Double Shot
                         gBattlescriptCurrInstr = BattleScript_RemoveElectricType;
                         break;
                     default:
