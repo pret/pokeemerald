@@ -16,6 +16,7 @@
 #define I_SELL_VALUE_FRACTION           GEN_LATEST  // In Gen9+, items sell for 1/4 of their value instead of 1/2.
 #define I_PRICE                         GEN_LATEST  // Some items have varied in value across generations.
 #define I_BERRY_PRICE                   GEN_7       // Since Berries have become unplantable (Gen8+), their price has gone up.
+#define I_POWER_ITEM_BOOST              GEN_LATEST  // In Gen7+, Power Items grant 8 EVs instead of 4 EVs.
 
 // TM config
 #define I_REUSABLE_TMS          FALSE       // In Gen5-8, TMs are reusable. Setting this to TRUE will make all vanilla TMs reusable, though they can also be cherry-picked by setting their importance to 1.

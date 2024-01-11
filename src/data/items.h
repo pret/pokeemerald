@@ -20,6 +20,12 @@
     #define TYPE_BOOST_PARAM 10
 #endif
 
+#if I_POWER_ITEM_BOOST >= GEN_7
+    #define POWER_ITEM_BOOST 8
+#else
+    #define POWER_ITEM_BOOST 4
+#endif
+
 #define X_ITEM_STAGES (B_X_ITEMS_BUFF >= GEN_7) ? 2 : 1
 
 #define TREASURE_FACTOR (I_SELL_VALUE_FRACTION >= GEN_9) ? 2: 1
@@ -6067,7 +6073,7 @@ const struct Item gItems[] =
         .name = _("Power Weight"),
         .price = (I_PRICE >= GEN_9) ? 10000 : 3000,
         .holdEffect = HOLD_EFFECT_POWER_ITEM,
-        .holdEffectParam = 8,
+        .holdEffectParam = POWER_ITEM_BOOST,
         .description = COMPOUND_STRING("A hold item that\n"
                                        "promotes HP gain,\n"
                                        "but reduces Speed."),
@@ -6083,7 +6089,7 @@ const struct Item gItems[] =
         .name = _("Power Bracer"),
         .price = (I_PRICE >= GEN_9) ? 10000 : 3000,
         .holdEffect = HOLD_EFFECT_POWER_ITEM,
-        .holdEffectParam = 8,
+        .holdEffectParam = POWER_ITEM_BOOST,
         .description = COMPOUND_STRING("A hold item that\n"
                                        "promotes Atk gain,\n"
                                        "but reduces Speed."),
@@ -6099,7 +6105,7 @@ const struct Item gItems[] =
         .name = _("Power Belt"),
         .price = (I_PRICE >= GEN_9) ? 10000 : 3000,
         .holdEffect = HOLD_EFFECT_POWER_ITEM,
-        .holdEffectParam = 8,
+        .holdEffectParam = POWER_ITEM_BOOST,
         .description = COMPOUND_STRING("A hold item that\n"
                                        "promotes Def gain,\n"
                                        "but reduces Speed."),
@@ -6115,7 +6121,7 @@ const struct Item gItems[] =
         .name = _("Power Lens"),
         .price = (I_PRICE >= GEN_9) ? 10000 : 3000,
         .holdEffect = HOLD_EFFECT_POWER_ITEM,
-        .holdEffectParam = 8,
+        .holdEffectParam = POWER_ITEM_BOOST,
         .description = COMPOUND_STRING("Hold item that pro-\n"
                                        "motes Sp. Atk gain,\n"
                                        "but reduces Speed."),
@@ -6131,7 +6137,7 @@ const struct Item gItems[] =
         .name = _("Power Band"),
         .price = (I_PRICE >= GEN_9) ? 10000 : 3000,
         .holdEffect = HOLD_EFFECT_POWER_ITEM,
-        .holdEffectParam = 8,
+        .holdEffectParam = POWER_ITEM_BOOST,
         .description = COMPOUND_STRING("Hold item that pro-\n"
                                        "motes Sp. Def gain,\n"
                                        "but reduces Speed."),
@@ -6147,7 +6153,7 @@ const struct Item gItems[] =
         .name = _("Power Anklet"),
         .price = (I_PRICE >= GEN_9) ? 10000 : 3000,
         .holdEffect = HOLD_EFFECT_POWER_ITEM,
-        .holdEffectParam = 8,
+        .holdEffectParam = POWER_ITEM_BOOST,
         .description = COMPOUND_STRING("A hold item that\n"
                                        "promotes Spd gain,\n"
                                        "but reduces Speed."),
