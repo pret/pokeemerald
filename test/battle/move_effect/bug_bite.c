@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_BUG_BITE].effect == EFFECT_BUG_BITE);
+    ASSUME(MoveHasMoveEffect(MOVE_BUG_BITE, MOVE_EFFECT_BUG_BITE));
     ASSUME(gBattleMoves[MOVE_BUG_BITE].pp == 20);
 }
 

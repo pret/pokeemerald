@@ -4041,11 +4041,10 @@ static bool32 IsDomePopularMove(u32 move)
     }
 }
 
-static bool32 IsDomeStatusMoveEffect(u32 effect)
+static bool32 IsDomeStatusMoveEffect(u32 move)
 {
-    switch(effect)
+    switch(gBattleMoves[move].effect)
     {
-    case EFFECT_TRAP:
     case EFFECT_SLEEP:
     case EFFECT_CONFUSE:
     case EFFECT_DISABLE:
@@ -4063,7 +4062,7 @@ static bool32 IsDomeStatusMoveEffect(u32 effect)
     case EFFECT_CURSE:
         return TRUE;
     default:
-        return FALSE;
+        return MoveHasMoveEffect(move, MOVE_EFFECT_WRAP);
     }
 }
 
@@ -4366,7 +4365,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                     allocatedArray[k] = IsDomeRiskyMoveEffect(gBattleMoves[move].effect) ? 1 : 0;
                     break;
                 case MOVE_POINTS_STATUS:
-                    allocatedArray[k] = IsDomeStatusMoveEffect(gBattleMoves[move].effect) ? 1 : 0;
+                    allocatedArray[k] = IsDomeStatusMoveEffect(move);
                     break;
                 case MOVE_POINTS_DMG:
                     allocatedArray[k] = (gBattleMoves[move].power != 0) ? 1 : 0;
@@ -4393,7 +4392,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                     allocatedArray[k] = (gBattleMoves[move].pp <= 5) ? 1 : 0;
                     break;
                 case MOVE_POINTS_EFFECT:
-                    allocatedArray[k] = (gBattleMoves[move].secondaryEffectChance > 0) ? 1 : 0;
+                    allocatedArray[k] = gBattleMoves[move].sheerForceBoost;
                     break;
                 }
             }

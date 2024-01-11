@@ -4,7 +4,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_BODY_SLAM].effect == EFFECT_PARALYZE_HIT);
+    ASSUME(MoveHasMoveEffect(MOVE_BODY_SLAM, MOVE_EFFECT_PARALYSIS) == TRUE);
 }
 
 AI_SINGLE_BATTLE_TEST("AI sees increased base power of Facade")
@@ -36,7 +36,8 @@ AI_SINGLE_BATTLE_TEST("AI sees increased base power of Smelling Salt")
 
     GIVEN {
         ASSUME(B_UPDATED_MOVE_DATA >= GEN_6);
-        ASSUME(gBattleMoves[MOVE_SMELLING_SALTS].effect == EFFECT_SMELLING_SALTS);
+        ASSUME(gBattleMoves[MOVE_SMELLING_SALTS].effect == EFFECT_DOUBLE_POWER_ON_ARG_STATUS);
+        ASSUME(gBattleMoves[MOVE_SMELLING_SALTS].argument == STATUS1_PARALYSIS);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { HP(60); Status1(status1); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_BODY_SLAM, MOVE_SMELLING_SALTS); }
@@ -57,7 +58,8 @@ AI_SINGLE_BATTLE_TEST("AI sees increased base power of Wake Up Slap")
 
     GIVEN {
         ASSUME(B_UPDATED_MOVE_DATA >= GEN_6);
-        ASSUME(gBattleMoves[MOVE_WAKE_UP_SLAP].effect == EFFECT_WAKE_UP_SLAP);
+        ASSUME(gBattleMoves[MOVE_WAKE_UP_SLAP].effect == EFFECT_DOUBLE_POWER_ON_ARG_STATUS);
+        ASSUME(gBattleMoves[MOVE_WAKE_UP_SLAP].argument == STATUS1_SLEEP);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_MEGANIUM) { HP(35); Status1(status1); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_BODY_SLAM, MOVE_WAKE_UP_SLAP); }
@@ -74,17 +76,18 @@ AI_SINGLE_BATTLE_TEST("AI sees increased base power of Grav Apple")
     u32 movePlayer;
     u16 expectedMove;
 
-    PARAMETRIZE { movePlayer = MOVE_CELEBRATE; expectedMove = MOVE_TROP_KICK; }
+    PARAMETRIZE { movePlayer = MOVE_CELEBRATE; expectedMove = MOVE_DRUM_BEATING; }
     PARAMETRIZE { movePlayer = MOVE_GRAVITY; expectedMove = MOVE_GRAV_APPLE; }
 
     GIVEN {
         ASSUME(gBattleMoves[MOVE_GRAV_APPLE].effect == EFFECT_GRAV_APPLE);
-        ASSUME(gBattleMoves[MOVE_TROP_KICK].effect == EFFECT_ATTACK_DOWN_HIT);
+        ASSUME(gBattleMoves[MOVE_GRAV_APPLE].power == gBattleMoves[MOVE_DRUM_BEATING].power);
+        ASSUME(MoveHasMoveEffect(MOVE_DRUM_BEATING, MOVE_EFFECT_SPD_MINUS_1) == TRUE);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { HP(81); Speed(20); }
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(10); Moves(MOVE_TROP_KICK, MOVE_GRAV_APPLE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(10); Moves(MOVE_DRUM_BEATING, MOVE_GRAV_APPLE); }
     } WHEN {
-        TURN { MOVE(player, movePlayer); EXPECT_MOVE(opponent, MOVE_TROP_KICK); }
+        TURN { MOVE(player, movePlayer); EXPECT_MOVE(opponent, MOVE_DRUM_BEATING); }
         TURN { MOVE(player, MOVE_CELEBRATE); EXPECT_MOVE(opponent, expectedMove); }
     } SCENE {
         if (expectedMove == MOVE_GRAV_APPLE)
@@ -175,10 +178,8 @@ AI_SINGLE_BATTLE_TEST("AI chooses moves with secondary effect that have a 100% c
 
     GIVEN {
         AI_LOG;
-        ASSUME(gBattleMoves[MOVE_SHADOW_BALL].effect == EFFECT_SPECIAL_DEFENSE_DOWN_HIT);
-        ASSUME(gBattleMoves[MOVE_SHADOW_BALL].secondaryEffectChance == 20);
-        ASSUME(gBattleMoves[MOVE_OCTAZOOKA].effect == EFFECT_ACCURACY_DOWN_HIT);
-        ASSUME(gBattleMoves[MOVE_OCTAZOOKA].secondaryEffectChance == 50);
+        ASSUME(MoveHasMoveEffectWithChance(MOVE_SHADOW_BALL, MOVE_EFFECT_SP_DEF_MINUS_1, 20));
+        ASSUME(MoveHasMoveEffectWithChance(MOVE_OCTAZOOKA, MOVE_EFFECT_ACC_MINUS_1, 50));
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_REGICE);
         OPPONENT(SPECIES_REGIROCK) { Ability(ability); Moves(MOVE_SHADOW_BALL, MOVE_OCTAZOOKA); }

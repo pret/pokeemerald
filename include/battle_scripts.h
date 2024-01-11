@@ -303,8 +303,6 @@ extern const u8 BattleScript_StickyWebDefog[];
 extern const u8 BattleScript_StealthRockDefog[];
 extern const u8 BattleScript_MegaEvolution[];
 extern const u8 BattleScript_WishMegaEvolution[];
-extern const u8 BattleScript_MoveEffectRecoilWithStatus[];
-extern const u8 BattleScript_EffectWithChance[];
 extern const u8 BattleScript_MoveEffectClearSmog[];
 extern const u8 BattleScript_SideStatusWoreOffReturn[];
 extern const u8 BattleScript_MoveEffectSmackDown[];
@@ -444,9 +442,9 @@ extern const u8 BattleScript_AffectionBasedStatusHeal[];
 extern const u8 BattleScript_AffectionBasedEndurance[];
 extern const u8 BattleScript_SymbiosisActivates[];
 extern const u8 BattleScript_MultiHitPrintStrings[];
-extern const u8 BattleScript_BurnUpRemoveType[];
+extern const u8 BattleScript_RemoveFireType[];
 extern const u8 BattleScript_TargetAbilityStatRaiseRet[];
-extern const u8 BattleScript_DoubleShockRemoveType[];
+extern const u8 BattleScript_RemoveElectricType[];
 extern const u8 BattleScript_SeedSowerActivates[];
 extern const u8 BattleScript_AngerShellActivates[];
 extern const u8 BattleScript_WellBakedBodyActivates[];
@@ -525,6 +523,7 @@ extern const u8 BattleScript_EffectRaiseCritAlliesAnim[];
 extern const u8 BattleScript_EffectHealOneSixthAllies[];
 extern const u8 BattleScript_EffectCureStatusAllies[];
 extern const u8 BattleScript_EffectRecycleBerriesAllies[];
+extern const u8 BattleScript_RemoveGenericType[];
 
 // dynamax and max raids
 extern const u8 BattleScript_DynamaxBegins[];

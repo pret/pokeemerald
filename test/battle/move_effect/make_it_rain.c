@@ -3,7 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_MAKE_IT_RAIN].effect == EFFECT_MAKE_IT_RAIN);
+    ASSUME(MoveHasMoveEffect(MOVE_MAKE_IT_RAIN, MOVE_EFFECT_PAYDAY));
+    ASSUME(MoveHasMoveEffectSelf(MOVE_MAKE_IT_RAIN, MOVE_EFFECT_SP_ATK_MINUS_1));
 }
 
 SINGLE_BATTLE_TEST("Make It Rain lowers special attack by one stage")

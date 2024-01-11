@@ -63,7 +63,6 @@ bool32 AI_IsAbilityOnSide(u32 battlerId, u32 ability);
 bool32 AI_MoveMakesContact(u32 ability, u32 holdEffect, u32 move);
 u32 AI_GetBattlerMoveTargetType(u32 battlerId, u32 move);
 bool32 ShouldUseZMove(u32 battlerAtk, u32 battlerDef, u32 chosenMove);
-u32 AI_CalcSecondaryEffectChance(u32 battler, u32 secondaryEffectChance);
 
 // stat stage checks
 bool32 AnyStatIsRaised(u32 battlerId);
@@ -101,6 +100,9 @@ bool32 HasOnlyMovesWithCategory(u32 battlerId, u32 category, bool32 onlyOffensiv
 bool32 HasMoveWithCategory(u32 battler, u32 category);
 bool32 HasMoveWithType(u32 battler, u32 type);
 bool32 HasMoveEffect(u32 battlerId, u32 moveEffect);
+bool32 HasMoveEffectANDArg(u32 battlerId, u32 effect, u32 argument);
+bool32 HasMoveWithMoveEffect(u32 battlerId, u32 moveEffect);
+bool32 HasMoveWithMoveEffectExcept(u32 battlerId, u32 moveEffect, u32 exception);
 bool32 HasMoveWithLowAccuracy(u32 battlerAtk, u32 battlerDef, u32 accCheck, bool32 ignoreStatus, u32 atkAbility, u32 defAbility, u32 atkHoldEffect, u32 defHoldEffect);
 bool32 IsAromaVeilProtectedMove(u32 move);
 bool32 IsNonVolatileStatusMoveEffect(u32 moveEffect);
@@ -119,7 +121,7 @@ bool32 ShouldSetSun(u32 battlerAtk, u32 atkAbility, u32 holdEffect);
 bool32 HasSleepMoveWithLowAccuracy(u32 battlerAtk, u32 battlerDef);
 bool32 IsHealingMove(u32 move);
 bool32 HasHealingEffect(u32 battler);
-bool32 IsTrappingMoveEffect(u32 effect);
+bool32 IsTrappingMove(u32 move);
 bool32 HasTrappingMoveEffect(u32 battler);
 bool32 ShouldFakeOut(u32 battlerAtk, u32 battlerDef, u32 move);
 bool32 HasThawingMove(u32 battler);
@@ -188,5 +190,9 @@ void IncreaseConfusionScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score
 void IncreaseFrostbiteScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score);
 
 s32 AI_CalcPartyMonDamage(u32 move, u32 battlerAtk, u32 battlerDef, struct BattlePokemon switchinCandidate, bool8 isPartyMonAttacker);
+s32 AI_CheckMoveEffects(u32 battlerAtk, u32 battlerDef, u32 move, s32 score, struct AiLogicData *aiData, u32 predictedMove, bool32 isDoubleBattle);
+s32 AI_TryToClearStats(u32 battlerAtk, u32 battlerDef, bool32 isDoubleBattle);
+bool32 AI_ShouldCopyStatChanges(u32 battlerAtk, u32 battlerDef);
+s32 AI_ShouldSetUpHazards(u32 battlerAtk, u32 battlerDef, struct AiLogicData *aiData);
 
 #endif //GUARD_BATTLE_AI_UTIL_H

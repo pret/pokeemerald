@@ -170,7 +170,7 @@ SINGLE_BATTLE_TEST("Red Card does not activate if stolen by a move")
     bool32 activate;
     PARAMETRIZE { item = ITEM_NONE; activate = FALSE; }
     PARAMETRIZE { item = ITEM_POTION; activate = TRUE; }
-    ASSUME(gBattleMoves[MOVE_THIEF].effect == EFFECT_THIEF);
+    ASSUME(MoveHasMoveEffect(MOVE_THIEF, MOVE_EFFECT_STEAL_ITEM) == TRUE);
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_RED_CARD); }
