@@ -39,7 +39,7 @@ SINGLE_BATTLE_TEST("Ember cannot burn a Fire-type Pokémon")
     }
 }
 
-DOUBLE_BATTLE_TEST("Lava Plume inflicts burn to every battler on the field")
+DOUBLE_BATTLE_TEST("Lava Plume inflicts burn to all adjacent battlers")
 {
     GIVEN {
         ASSUME(MoveHasMoveEffect(MOVE_LAVA_PLUME, MOVE_EFFECT_BURN) == TRUE);

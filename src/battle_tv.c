@@ -1267,22 +1267,20 @@ static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3)
 
     switch (caseId)
     {
-    case PTS_MOVE_EFFECT: //arg1 == moveSlot, arg2 == move
+    case PTS_MOVE_EFFECT: // arg1 -> move slot, arg2 -> move
     {
         u8 baseFromEffect = sPointsArray[caseId][gBattleMoves[arg2].effect];
 
-        // various cases add/remove points
+        // Various cases to add/remove points
         if (gBattleMoves[arg2].recoil > 0)
-            baseFromEffect++; // recoil moves
+            baseFromEffect++; // Recoil moves
         if (MoveHasMoveEffect(arg2, MOVE_EFFECT_RAPIDSPIN))
             baseFromEffect++;
-        if (MoveHasMoveEffect(arg2, MOVE_EFFECT_SP_ATK_TWO_DOWN)
-            || MoveHasMoveEffect(arg2, MOVE_EFFECT_ATK_DEF_DOWN))
-            baseFromEffect += 2; // Overheat etc & Superpower
+        if (MoveHasMoveEffect(arg2, MOVE_EFFECT_SP_ATK_TWO_DOWN) || MoveHasMoveEffect(arg2, MOVE_EFFECT_ATK_DEF_DOWN))
+            baseFromEffect += 2; // Overheat, Superpower, etc.
         if (MoveHasMoveEffect(arg2, MOVE_EFFECT_STEAL_ITEM))
             baseFromEffect += 3;
-        if (MoveHasMoveEffect(arg2, MOVE_EFFECT_WRAP)
-          || MoveHasMoveEffectSelf(arg2, MOVE_EFFECT_THRASH))
+        if (MoveHasMoveEffect(arg2, MOVE_EFFECT_WRAP) || MoveHasMoveEffectSelf(arg2, MOVE_EFFECT_THRASH))
             baseFromEffect += 3;
         if (MoveHasMoveEffect(arg2, MOVE_EFFECT_RECHARGE))
             baseFromEffect += 4;
