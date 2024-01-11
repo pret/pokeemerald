@@ -7659,7 +7659,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(VoltorbHisuian, 0),
         LEARNSETS(VoltorbHisuian),
         .isHisuianForm = TRUE,
-        .evolutions = EVOLUTION({EVO_LEVEL, ITEM_LEAF_STONE, SPECIES_ELECTRODE_HISUIAN}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_LEAF_STONE, SPECIES_ELECTRODE_HISUIAN}),
     },
 
     [SPECIES_ELECTRODE_HISUIAN] =
@@ -10161,12 +10161,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 
 #if P_FAMILY_TAUROS
 #define TAUROS_MISC_INFO                                    \
-        .baseHP        = 75,                                \
-        .baseAttack    = 100,                               \
-        .baseDefense   = 95,                                \
-        .baseSpeed     = 110,                               \
-        .baseSpAttack  = 40,                                \
-        .baseSpDefense = 70,                                \
         .catchRate = 45,                                    \
         .expYield = 172,                                    \
         .genderRatio = MON_MALE,                            \
@@ -10189,6 +10183,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     [SPECIES_TAUROS] =
     {
         TAUROS_MISC_INFO,
+        .baseHP        = 75,
+        .baseAttack    = 100,
+        .baseDefense   = 95,
+        .baseSpeed     = 110,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 70,
         .types = { TYPE_NORMAL, TYPE_NORMAL },
         .evYield_Attack = 1,
         .evYield_Speed = 1,
@@ -10214,9 +10214,17 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     },
 
 #if P_PALDEAN_FORMS
+#define PALDEAN_TAUROS_BASE_STATS                           \
+        .baseHP        = 75,                                \
+        .baseAttack    = 110,                               \
+        .baseDefense   = 105,                               \
+        .baseSpeed     = 100,                               \
+        .baseSpAttack  = 30,                                \
+        .baseSpDefense = 70
     [SPECIES_TAUROS_PALDEAN_COMBAT_BREED] =
     {
         TAUROS_MISC_INFO,
+        PALDEAN_TAUROS_BASE_STATS,
         .types = { TYPE_FIGHTING, TYPE_FIGHTING },
         .evYield_Attack = 2,
         .abilities = { ABILITY_INTIMIDATE, ABILITY_ANGER_POINT, ABILITY_CUD_CHEW },
@@ -10243,6 +10251,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] =
     {
         TAUROS_MISC_INFO,
+        PALDEAN_TAUROS_BASE_STATS,
         .types = { TYPE_FIGHTING, TYPE_FIRE },
         .evYield_Attack = 2,
         .abilities = { ABILITY_INTIMIDATE, ABILITY_ANGER_POINT, ABILITY_CUD_CHEW },
@@ -10269,6 +10278,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     [SPECIES_TAUROS_PALDEAN_AQUA_BREED] =
     {
         TAUROS_MISC_INFO,
+        PALDEAN_TAUROS_BASE_STATS,
         .types = { TYPE_FIGHTING, TYPE_WATER },
         .evYield_Attack = 2,
         .abilities = { ABILITY_INTIMIDATE, ABILITY_ANGER_POINT, ABILITY_CUD_CHEW },
