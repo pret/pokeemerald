@@ -247,5 +247,6 @@ bool32 MoveEffectIsGuaranteed(u32 battler, u32 battlerAbility, const struct Addi
 u8 GetBattlerType(u32 battler, u8 typeIndex);
 bool8 CanMonParticipateInSkyBattle(struct Pokemon *mon);
 bool8 IsMonBannedFromSkyBattles(u16 species);
+void RemoveBattlerType(u32 battler, u8 type);
 
 #endif // GUARD_BATTLE_UTIL_H

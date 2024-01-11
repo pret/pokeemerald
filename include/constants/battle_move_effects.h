@@ -34,7 +34,7 @@
 #define EFFECT_OHKO                         30
 #define EFFECT_FUSION_COMBO                 31
 #define EFFECT_SUPER_FANG                   32
-#define EFFECT_ARG_FIXED_DAMAGE             33
+#define EFFECT_FIXED_DAMAGE_ARG             33
 #define EFFECT_HEAL_BLOCK                   34
 #define EFFECT_RECOIL_IF_MISS               35
 #define EFFECT_MIST                         36

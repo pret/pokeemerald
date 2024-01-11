@@ -11073,3 +11073,13 @@ u8 GetBattlerType(u32 battler, u8 typeIndex)
 
     return types[typeIndex];
 }
+
+void RemoveBattlerType(u32 battler, u8 type)
+{
+    u32 i;
+    for (i = 0; i < 3; i++)
+    {
+        if (*(u8 *)(&gBattleMons[battler].type1 + i) == type)
+            *(u8 *)(&gBattleMons[battler].type1 + i) = TYPE_MYSTERY;
+    }
+}

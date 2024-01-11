@@ -55,7 +55,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectOHKO                    @ EFFECT_OHKO
 	.4byte BattleScript_EffectHit                     @ EFFECT_FUSION_COMBO
 	.4byte BattleScript_EffectSuperFang               @ EFFECT_SUPER_FANG
-	.4byte BattleScript_EffectArgFixedDamage          @ EFFECT_ARG_FIXED_DAMAGE
+	.4byte BattleScript_EffectFixedDamageArg          @ EFFECT_FIXED_DAMAGE_ARG
 	.4byte BattleScript_EffectHealBlock               @ EFFECT_HEAL_BLOCK
 	.4byte BattleScript_EffectRecoilIfMiss            @ EFFECT_RECOIL_IF_MISS
 	.4byte BattleScript_EffectMist                    @ EFFECT_MIST
@@ -1430,14 +1430,17 @@ BattleScript_FailIfNotArgType:
 	goto BattleScript_HitFromCritCalc
 
 BattleScript_RemoveFireType::
-	losetype BS_ATTACKER, TYPE_FIRE
 	printstring STRINGID_ATTACKERLOSTFIRETYPE
 	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_RemoveElectricType::
-	losetype BS_ATTACKER, TYPE_ELECTRIC
 	printstring STRINGID_ATTACKERLOSTELECTRICTYPE
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_RemoveGenericType::
+	printstring STRINGID_ATTACKERLOSTITSTYPE
 	waitmessage B_WAIT_TIME_LONG
 	return
 
@@ -4816,7 +4819,7 @@ BattleScript_EffectBatonPass::
 	switchineffects BS_ATTACKER
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectArgFixedDamage::
+BattleScript_EffectFixedDamageArg::
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring

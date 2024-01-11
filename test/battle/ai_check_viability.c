@@ -55,7 +55,6 @@ AI_SINGLE_BATTLE_TEST("AI sees increased base power of Wake Up Slap")
 
     PARAMETRIZE { status1 = STATUS1_NONE; expectedMove = MOVE_BODY_SLAM; }
     PARAMETRIZE { status1 = STATUS1_SLEEP; expectedMove = MOVE_WAKE_UP_SLAP; }
-    PARAMETRIZE { status1 = STATUS1_SLEEP; expectedMove = MOVE_WAKE_UP_SLAP; }
 
     GIVEN {
         ASSUME(B_UPDATED_MOVE_DATA >= GEN_6);
@@ -82,6 +81,7 @@ AI_SINGLE_BATTLE_TEST("AI sees increased base power of Grav Apple")
 
     GIVEN {
         ASSUME(gBattleMoves[MOVE_GRAV_APPLE].effect == EFFECT_GRAV_APPLE);
+        ASSUME(gBattleMoves[MOVE_GRAV_APPLE].power == gBattleMoves[MOVE_DRUM_BEATING].power);
         ASSUME(MoveHasMoveEffect(MOVE_DRUM_BEATING, MOVE_EFFECT_SPD_MINUS_1) == TRUE);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { HP(81); Speed(20); }

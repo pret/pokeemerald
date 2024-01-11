@@ -2753,6 +2753,17 @@ void StealTargetItem(u8 battlerStealer, u8 battlerItem)
     return;                                     \
 }
 
+// For a future update...
+// #define INCREMENT_RETURN_ON_PARENTAL_BOND_1ST_HIT                                       \
+// {                                                                                       \
+//     if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_1ST_HIT   \
+//       && gBattleMons[gEffectBattler].hp != 0)                                           \
+//     {                                                                                   \
+//         gBattlescriptCurrInstr++;                                                       \
+//         return;                                                                         \
+//     }                                                                                   \
+// }
+
 void SetMoveEffect(bool32 primary, bool32 certain)
 {
     s32 i, affectsUser = 0;
@@ -3652,15 +3663,17 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 switch (gBattleMoves[gCurrentMove].argument)
                 {
-                    case TYPE_FIRE:
+                    case TYPE_FIRE: // Burn Up
                         gBattlescriptCurrInstr = BattleScript_RemoveFireType;
                         break;
-                    case TYPE_ELECTRIC:
+                    case TYPE_ELECTRIC: // Electro Shot
                         gBattlescriptCurrInstr = BattleScript_RemoveElectricType;
                         break;
-                    default: // to do - add a generic case
+                    default:
+                        gBattlescriptCurrInstr = BattleScript_RemoveGenericType;
                         break;
                 }
+                RemoveBattlerType(gEffectBattler, gBattleMoves[gCurrentMove].argument);
                 break;
             case MOVE_EFFECT_ROUND:
                 TryUpdateRoundTurnOrder(); // If another Pokémon uses Round before the user this turn, the user will use Round directly after it
@@ -9694,11 +9707,7 @@ static void Cmd_various(void)
     case VARIOUS_LOSE_TYPE:
     {
         VARIOUS_ARGS(u8 type);
-        for (i = 0; i < 3; i++)
-        {
-            if (*(u8 *)(&gBattleMons[battler].type1 + i) == cmd->type)
-                *(u8 *)(&gBattleMons[battler].type1 + i) = TYPE_MYSTERY;
-        }
+        RemoveBattlerType(battler, cmd->type);
         gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }

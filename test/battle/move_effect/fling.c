@@ -201,26 +201,20 @@ SINGLE_BATTLE_TEST("Fling doesn't consume the item if pokemon is asleep/frozen/p
     }
 }
 
-SINGLE_BATTLE_TEST("Fling applies special effects when throwing specific Items - but is blocked by Shield Dust")
+SINGLE_BATTLE_TEST("Fling applies special effects when throwing specific Items")
 {
-    u16 item, ability;
+    u16 item;
 
-    PARAMETRIZE {item = ITEM_FLAME_ORB; ability = ABILITY_TELEPATHY; }
-    PARAMETRIZE {item = ITEM_FLAME_ORB; ability = ABILITY_SHIELD_DUST; }
-    PARAMETRIZE {item = ITEM_LIGHT_BALL; ability = ABILITY_TELEPATHY; }
-    PARAMETRIZE {item = ITEM_LIGHT_BALL; ability = ABILITY_SHIELD_DUST; }
-    PARAMETRIZE {item = ITEM_POISON_BARB; ability = ABILITY_TELEPATHY; }
-    PARAMETRIZE {item = ITEM_POISON_BARB; ability = ABILITY_SHIELD_DUST; }
-    PARAMETRIZE {item = ITEM_TOXIC_ORB; ability = ABILITY_TELEPATHY; }
-    PARAMETRIZE {item = ITEM_TOXIC_ORB; ability = ABILITY_SHIELD_DUST; }
-    PARAMETRIZE {item = ITEM_RAZOR_FANG; ability = ABILITY_TELEPATHY; }
-    PARAMETRIZE {item = ITEM_RAZOR_FANG; ability = ABILITY_SHIELD_DUST; }
-    PARAMETRIZE {item = ITEM_KINGS_ROCK; ability = ABILITY_TELEPATHY; }
-    PARAMETRIZE {item = ITEM_KINGS_ROCK; ability = ABILITY_SHIELD_DUST; }
+    PARAMETRIZE {item = ITEM_FLAME_ORB; }
+    PARAMETRIZE {item = ITEM_LIGHT_BALL; }
+    PARAMETRIZE {item = ITEM_POISON_BARB; }
+    PARAMETRIZE {item = ITEM_TOXIC_ORB; }
+    PARAMETRIZE {item = ITEM_RAZOR_FANG; }
+    PARAMETRIZE {item = ITEM_KINGS_ROCK; }
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(item); }
-        OPPONENT(SPECIES_WOBBUFFET) { Ability(ability); }
+        OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_FLING); }
     } SCENE {
@@ -230,12 +224,62 @@ SINGLE_BATTLE_TEST("Fling applies special effects when throwing specific Items -
         switch (item)
         {
         case ITEM_FLAME_ORB:
-            if (ability != ABILITY_SHIELD_DUST)
             {
                 MESSAGE("Foe Wobbuffet was burned!");
                 STATUS_ICON(opponent, STATUS1_BURN);
             }
-            else
+            break;
+        case ITEM_LIGHT_BALL:
+            {
+                MESSAGE("Foe Wobbuffet is paralyzed! It may be unable to move!");
+                STATUS_ICON(opponent, STATUS1_PARALYSIS);
+            }
+            break;
+        case ITEM_POISON_BARB:
+            {
+                MESSAGE("Foe Wobbuffet was poisoned!");
+                STATUS_ICON(opponent, STATUS1_POISON);
+            }
+            break;
+        case ITEM_TOXIC_ORB:
+            {
+                MESSAGE("Foe Wobbuffet is badly poisoned!");
+                STATUS_ICON(opponent, STATUS1_TOXIC_POISON);
+            }
+            break;
+        case ITEM_RAZOR_FANG:
+        case ITEM_KINGS_ROCK:
+            {
+                MESSAGE("Foe Wobbuffet flinched!");
+            }
+            break;
+        }
+    }
+}
+
+SINGLE_BATTLE_TEST("Fling's effects are blocked by Shield Dust")
+{
+    u16 item;
+
+    PARAMETRIZE {item = ITEM_FLAME_ORB; }
+    PARAMETRIZE {item = ITEM_LIGHT_BALL; }
+    PARAMETRIZE {item = ITEM_POISON_BARB; }
+    PARAMETRIZE {item = ITEM_TOXIC_ORB; }
+    PARAMETRIZE {item = ITEM_RAZOR_FANG; }
+    PARAMETRIZE {item = ITEM_KINGS_ROCK; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Item(item); }
+        OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_SHIELD_DUST); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_FLING); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Fling!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, player);
+        HP_BAR(opponent);
+        switch (item)
+        {
+        case ITEM_FLAME_ORB:
             {
                 NONE_OF {
                     MESSAGE("Foe Wobbuffet was burned!");
@@ -245,12 +289,6 @@ SINGLE_BATTLE_TEST("Fling applies special effects when throwing specific Items -
             }
             break;
         case ITEM_LIGHT_BALL:
-            if (ability != ABILITY_SHIELD_DUST)
-            {
-                MESSAGE("Foe Wobbuffet is paralyzed! It may be unable to move!");
-                STATUS_ICON(opponent, STATUS1_PARALYSIS);
-            }
-            else
             {
                 NONE_OF {
                     MESSAGE("Foe Wobbuffet is paralyzed! It may be unable to move!");
@@ -260,12 +298,6 @@ SINGLE_BATTLE_TEST("Fling applies special effects when throwing specific Items -
             }
             break;
         case ITEM_POISON_BARB:
-            if (ability != ABILITY_SHIELD_DUST)
-            {
-                MESSAGE("Foe Wobbuffet was poisoned!");
-                STATUS_ICON(opponent, STATUS1_POISON);
-            }
-            else
             {
                 NONE_OF {
                     MESSAGE("Foe Wobbuffet was poisoned!");
@@ -275,12 +307,6 @@ SINGLE_BATTLE_TEST("Fling applies special effects when throwing specific Items -
             }
             break;
         case ITEM_TOXIC_ORB:
-            if (ability != ABILITY_SHIELD_DUST)
-            {
-                MESSAGE("Foe Wobbuffet is badly poisoned!");
-                STATUS_ICON(opponent, STATUS1_TOXIC_POISON);
-            }
-            else
             {
                 NONE_OF {
                     MESSAGE("Foe Wobbuffet is badly poisoned!");
@@ -291,11 +317,6 @@ SINGLE_BATTLE_TEST("Fling applies special effects when throwing specific Items -
             break;
         case ITEM_RAZOR_FANG:
         case ITEM_KINGS_ROCK:
-            if (ability != ABILITY_SHIELD_DUST)
-            {
-                MESSAGE("Foe Wobbuffet flinched!");
-            }
-            else
             {
                 NONE_OF {
                     MESSAGE("Foe Wobbuffet flinched!");

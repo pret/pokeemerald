@@ -4,7 +4,7 @@
 ASSUMPTIONS
 {
     ASSUME(gItems[ITEM_PETAYA_BERRY].holdEffect == HOLD_EFFECT_SP_ATTACK_UP);
-    ASSUME(gBattleMoves[MOVE_DRAGON_RAGE].effect == EFFECT_ARG_FIXED_DAMAGE);
+    ASSUME(gBattleMoves[MOVE_DRAGON_RAGE].effect == EFFECT_FIXED_DAMAGE_ARG);
     ASSUME(gBattleMoves[MOVE_DRAGON_RAGE].argument == 40);
 }
 

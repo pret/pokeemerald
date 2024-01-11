@@ -436,7 +436,7 @@ static u8 GetMaxPowerTier(u16 move)
         case EFFECT_TERRAIN_PULSE:
         case EFFECT_PUNISHMENT:
         case EFFECT_TRUMP_CARD:
-        case EFFECT_ARG_FIXED_DAMAGE:
+        case EFFECT_FIXED_DAMAGE_ARG:
         case EFFECT_SPIT_UP:
         case EFFECT_NATURAL_GIFT:
         case EFFECT_MIRROR_COAT:
