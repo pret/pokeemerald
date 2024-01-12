@@ -66,6 +66,7 @@ enum WindowIds
     WINDOW_1,
     WINDOW_2,
     WINDOW_3,
+    WINDOW_4,
 };
 
 //==========EWRAM==========//
@@ -93,19 +94,19 @@ static const struct BgTemplate sMenuBgTemplates[] =
     {
         .bg = 0,    // windows, etc
         .charBaseIndex = 0,
-        .mapBaseIndex = 31,
+        .mapBaseIndex = 30,
         .priority = 1
     }, 
     {
         .bg = 1,    // this bg loads the UI tilemap
         .charBaseIndex = 3,
-        .mapBaseIndex = 30,
+        .mapBaseIndex = 28,
         .priority = 2
     },
     {
         .bg = 2,    // this bg loads the UI tilemap
         .charBaseIndex = 0,
-        .mapBaseIndex = 28,
+        .mapBaseIndex = 26,
         .priority = 0
     }
 };
@@ -125,9 +126,9 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
     [WINDOW_2] = 
     {
         .bg = 0,            // which bg to print text on
-        .tilemapLeft = 17,   // position from left (per 8 pixels)
+        .tilemapLeft = 11,   // position from left (per 8 pixels)
         .tilemapTop = 2,    // position from top (per 8 pixels)
-        .width = 12,        // width (per 8 pixels)
+        .width = 18,        // width (per 8 pixels)
         .height = 17,        // height (per 8 pixels)
         .paletteNum = 15,   // palette index to use for text
         .baseBlock = 1 + 23,     // tile start in VRAM
@@ -140,7 +141,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .width = 7,        // width (per 8 pixels)
         .height = 9,        // height (per 8 pixels)
         .paletteNum = 15,   // palette index to use for text
-        .baseBlock = 1 + 23 + 204,     // tile start in VRAM
+        .baseBlock = 1 + 23 + 102 + 204,     // tile start in VRAM
     },
 };
 
@@ -200,7 +201,6 @@ static const union AnimCmd sSpriteAnim_Selector1[] =
 {
     ANIMCMD_FRAME(32, 32),
     ANIMCMD_FRAME(32, 32),
-    ANIMCMD_FRAME(48, 10),
     ANIMCMD_JUMP(0),
 };
 
@@ -208,7 +208,13 @@ static const union AnimCmd sSpriteAnim_Selector2[] =
 {
     ANIMCMD_FRAME(16, 32),
     ANIMCMD_FRAME(16, 32),
-    ANIMCMD_FRAME(48, 10),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sSpriteAnim_Selector3[] =
+{
+    ANIMCMD_FRAME(0, 32),
+    ANIMCMD_FRAME(0, 32),
     ANIMCMD_JUMP(0),
 };
 
@@ -217,6 +223,7 @@ static const union AnimCmd *const sSpriteAnimTable_Selector[] =
     sSpriteAnim_Selector0,
     sSpriteAnim_Selector1,
     sSpriteAnim_Selector2,
+    sSpriteAnim_Selector3,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Selector =
@@ -350,7 +357,6 @@ static bool8 Menu_DoGfxSetup(void)
         gMain.state++;
         break;
     case 5:
-        LoadMessageBoxAndBorderGfx();
         Menu_InitWindows();
         PrintToWindow(WINDOW_1, FONT_WHITE);
         PrintMonStats();
@@ -472,31 +478,16 @@ static void Menu_InitWindows(void)
     ScheduleBgCopyTilemapToVram(0);
     
     FillWindowPixelBuffer(WINDOW_1, 0);
-    LoadUserWindowBorderGfx(WINDOW_1, 720, 14 * 16);
     PutWindowTilemap(WINDOW_1);
     CopyWindowToVram(WINDOW_1, 3);
     
     ScheduleBgCopyTilemapToVram(2);
 }
 
-static const u8 sText_MyMenu[] = _("My Menu");
-static void PrintToWindow(u8 windowId, u8 colorIdx)
-{
-    u8 x = 1;
-    u8 y = 1;
-    
-    
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    
-    PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 3);
-}
-
-
 #define DISTANCE_BETWEEN_STATS_Y 16
 #define SECOND_COLUMN ((8 * 4))
 #define THIRD_COLUMN ((8 * 8))
-#define STARTING_X 12
+#define STARTING_X 12 + 48
 #define STARTING_Y 6 + 20
 
 struct MonPrintData {
@@ -550,6 +541,18 @@ static const u8 sGenderColors[2][3] =
     {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_RED}
 };
 
+static const u8 sText_MenuTitle[] = _("Stat Editor");
+static const u8 sText_MenuHP[] = _("HP");
+static const u8 sText_MenuAttack[] = _("Attack");
+static const u8 sText_MenuSpAttack[] = _("Sp. Atk");
+static const u8 sText_MenuDefense[] = _("Defense");
+static const u8 sText_MenuSpDefense[] = _("Sp. Def");
+static const u8 sText_MenuSpeed[] = _("Speed");
+static const u8 sText_MenuTotal[] = _("Total");
+static const u8 sText_MenuStat[] = _("Stat");
+static const u8 sText_MenuActual[] = _("Actual");
+static const u8 sText_MenuEV[] = _("EV");
+static const u8 sText_MenuIV[] = _("IV");
 static const u8 sText_MonLevel[]         = _("Lv.{CLEAR 1}{STR_VAR_1}");
 static void PrintMonStats()
 {
@@ -569,6 +572,19 @@ static void PrintMonStats()
     sMenuDataPtr->normalTotal = 0;
     sMenuDataPtr->evTotal = 0;
     sMenuDataPtr->ivTotal = 0;
+
+    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, 18, 7, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_MenuStat);
+    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, STARTING_X - 6, 7, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_MenuActual);
+    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, STARTING_X + SECOND_COLUMN + 4, 7, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_MenuEV);
+    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, STARTING_X + THIRD_COLUMN + 5, 7, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_MenuIV);
+
+    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, 24, STARTING_Y + (DISTANCE_BETWEEN_STATS_Y * 0), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_MenuHP);
+    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, 12, STARTING_Y + (DISTANCE_BETWEEN_STATS_Y * 1), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_MenuAttack);
+    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, 12, STARTING_Y + (DISTANCE_BETWEEN_STATS_Y * 2), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_MenuSpAttack);
+    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, 10, STARTING_Y + (DISTANCE_BETWEEN_STATS_Y * 3), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_MenuDefense);
+    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, 12, STARTING_Y + (DISTANCE_BETWEEN_STATS_Y * 4), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_MenuSpDefense);
+    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, 16, STARTING_Y + (DISTANCE_BETWEEN_STATS_Y * 5), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_MenuSpeed);
+    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, 16, STARTING_Y + (DISTANCE_BETWEEN_STATS_Y * 6), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_MenuTotal);
 
     // Print Mon Stats
     for(i = 0; i < 6; i++)
@@ -614,9 +630,6 @@ static void PrintMonStats()
     StringCopy(gStringVar2, gSpeciesNames[sMenuDataPtr->speciesID]);
     AddTextPrinterParameterized4(WINDOW_3, FONT_NARROW, 4, 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
 
-    ConvertIntToDecimalStringN(gStringVar2, currentStat, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    AddTextPrinterParameterized4(WINDOW_2, 1, StatPrintData[statsToPrintIVs[i]].x, StatPrintData[statsToPrintIVs[i]].y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
-
     ConvertIntToDecimalStringN(gStringVar1, level, STR_CONV_MODE_RIGHT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar2, sText_MonLevel);
     AddTextPrinterParameterized4(WINDOW_3, FONT_SMALL_NARROW, 4, 18, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar2);
@@ -644,6 +657,18 @@ static void PrintMonStats()
     PutWindowTilemap(WINDOW_2);
     CopyWindowToVram(WINDOW_2, 3);
 }
+
+static void PrintToWindow(u8 windowId, u8 colorIdx)
+{
+    u8 x = 1;
+    u8 y = 0;
+    
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    AddTextPrinterParameterized4(WINDOW_1, FONT_NORMAL, x, y, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_MenuTitle);
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, 3);
+}
+
 
 struct SpriteCordsStruct {
     u8 x;
@@ -701,6 +726,7 @@ static void Task_MenuMain(u8 taskId)
     if (JOY_NEW(A_BUTTON))
     {
         sMenuDataPtr->editingStat = GetMonData(&gPlayerParty[0], selectedStatToStatEnum[sMenuDataPtr->selectedStat]);
+        StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 3);
         gTasks[taskId].func = Task_MenuEditingStat;
         return;
     }
@@ -734,6 +760,13 @@ static void Task_MenuMain(u8 taskId)
 
 }
 
+static void ChangeAndUpdateStat()
+{
+    SetMonData(&gPlayerParty[0], selectedStatToStatEnum[sMenuDataPtr->selectedStat], &(sMenuDataPtr->editingStat));
+    CalculateMonStats(&gPlayerParty[0]);
+    PrintMonStats();
+}
+
 static void Task_MenuEditingStat(u8 taskId)
 {
     if (JOY_NEW(B_BUTTON))
@@ -756,11 +789,9 @@ static void Task_MenuEditingStat(u8 taskId)
             if((sMenuDataPtr->editingStat == 0))
                 StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 1);
             else
-                StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 0);
+                StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 3);
     
-            SetMonData(&gPlayerParty[0], selectedStatToStatEnum[sMenuDataPtr->selectedStat], &(sMenuDataPtr->editingStat));
-            CalculateMonStats(&gPlayerParty[0]);
-            PrintMonStats();
+            ChangeAndUpdateStat();
         }
         else
         {
@@ -774,11 +805,9 @@ static void Task_MenuEditingStat(u8 taskId)
             if((sMenuDataPtr->editingStat == 0))
                 StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 1);
             else
-                StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 0);
+                StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 3);
 
-            SetMonData(&gPlayerParty[0], selectedStatToStatEnum[sMenuDataPtr->selectedStat], &(sMenuDataPtr->editingStat));
-            CalculateMonStats(&gPlayerParty[0]);
-            PrintMonStats();
+            ChangeAndUpdateStat();
         }
         
     }
@@ -796,11 +825,9 @@ static void Task_MenuEditingStat(u8 taskId)
             if((sMenuDataPtr->editingStat == 255))
                 StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 2);
             else
-                StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 0);
+                StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 3);
     
-            SetMonData(&gPlayerParty[0], selectedStatToStatEnum[sMenuDataPtr->selectedStat], &(sMenuDataPtr->editingStat));
-            CalculateMonStats(&gPlayerParty[0]);
-            PrintMonStats();
+            ChangeAndUpdateStat();
 
         }
         else
@@ -815,11 +842,9 @@ static void Task_MenuEditingStat(u8 taskId)
             if((sMenuDataPtr->editingStat == 31))
                 StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 2);
             else
-                StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 0);
+                StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 3);
     
-            SetMonData(&gPlayerParty[0], selectedStatToStatEnum[sMenuDataPtr->selectedStat], &(sMenuDataPtr->editingStat));
-            CalculateMonStats(&gPlayerParty[0]);
-            PrintMonStats();
+            ChangeAndUpdateStat();
         }
         
     }
@@ -840,9 +865,7 @@ static void Task_MenuEditingStat(u8 taskId)
                 sMenuDataPtr->editingStat = 255;
     
             StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 2);    
-            SetMonData(&gPlayerParty[0], selectedStatToStatEnum[sMenuDataPtr->selectedStat], &(sMenuDataPtr->editingStat));
-            CalculateMonStats(&gPlayerParty[0]);
-            PrintMonStats();
+            ChangeAndUpdateStat();
 
         }
         else
@@ -856,9 +879,7 @@ static void Task_MenuEditingStat(u8 taskId)
             sMenuDataPtr->editingStat = 31;
             StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 2);    
     
-            SetMonData(&gPlayerParty[0], selectedStatToStatEnum[sMenuDataPtr->selectedStat], &(sMenuDataPtr->editingStat));
-            CalculateMonStats(&gPlayerParty[0]);
-            PrintMonStats();
+            ChangeAndUpdateStat();
         }
         
     }
@@ -871,12 +892,10 @@ static void Task_MenuEditingStat(u8 taskId)
             StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 1);
             return;
         }
-
+        
         sMenuDataPtr->editingStat = 0;
-        StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 1);    
-        SetMonData(&gPlayerParty[0], selectedStatToStatEnum[sMenuDataPtr->selectedStat], &(sMenuDataPtr->editingStat));
-        CalculateMonStats(&gPlayerParty[0]);
-        PrintMonStats();        
+        StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 1);  
+        ChangeAndUpdateStat(); 
     }
 
 }
