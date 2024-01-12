@@ -269,6 +269,7 @@ PlayersHouse_2F_EventScript_Notebook::
 	end
 
 PlayersHouse_2F_EventScript_GameCube::
+	givemon SPECIES_SWAMPERT, 50, ITEM_MYSTIC_WATER
 	msgbox PlayersHouse_2F_Text_ItsAGameCube, MSGBOX_SIGN
 	end
 
