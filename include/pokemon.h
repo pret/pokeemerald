@@ -497,7 +497,7 @@ struct BattleMove
     u32 forcePressure:1;
     u32 cantUseTwice:1;
     u32 gravityBanned:1;
-    u32 healBlockBanned:1;
+    u32 healingMove:1;
     u32 meFirstBanned:1;
     u32 mimicBanned:1;
     u32 metronomeBanned:1;
