@@ -1498,7 +1498,7 @@ bool32 IsHealBlockPreventingMove(u32 battler, u32 move)
     if (!(gStatuses3[battler] & STATUS3_HEAL_BLOCK))
         return FALSE;
 
-    return gBattleMoves[move].healingMove;
+    return gBattleMoves[move].healBlockBanned;
 }
 
 static bool32 IsBelchPreventingMove(u32 battler, u32 move)
