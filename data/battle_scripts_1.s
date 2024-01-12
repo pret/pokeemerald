@@ -254,7 +254,6 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectPsychicTerrain          @ EFFECT_PSYCHIC_TERRAIN
 	.4byte BattleScript_EffectAttackAccUp             @ EFFECT_ATTACK_ACCURACY_UP
 	.4byte BattleScript_EffectAttackSpAttackUp        @ EFFECT_ATTACK_SPATK_UP
-	.4byte BattleScript_EffectHit                     @ EFFECT_HURRICANE
 	.4byte BattleScript_EffectHit                     @ EFFECT_TWO_TYPED_MOVE
 	.4byte BattleScript_EffectMeFirst                 @ EFFECT_ME_FIRST
 	.4byte BattleScript_EffectQuiverDance             @ EFFECT_QUIVER_DANCE
@@ -369,6 +368,8 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectFilletAway              @ EFFECT_FILLET_AWAY
 	.4byte BattleScript_EffectHit                     @ EFFECT_IVY_CUDGEL
 	.4byte BattleScript_EffectHit                     @ EFFECT_FICKLE_BEAM
+	.4byte BattleScript_EffectHit                     @ EFFECT_BLIZZARD
+	.4byte BattleScript_EffectHit                     @ EFFECT_RAIN_ALWAYS_HIT
 
 BattleScript_EffectFilletAway:
 	attackcanceler

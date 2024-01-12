@@ -1,3 +1,11 @@
+#include "battle_dynamax.h"
+#include "constants/battle.h"
+#include "constants/battle_move_effects.h"
+#include "constants/battle_script_commands.h"
+#include "constants/battle_z_move_effects.h"
+#include "constants/hold_effects.h"
+#include "constants/moves.h"
+
 const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 {
     [MOVE_NONE] =
@@ -1002,7 +1010,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         #else
             .power = 120,
         #endif
-        .effect = EFFECT_HIT,
+        .effect = B_BLIZZARD_HAIL >= GEN_4 ? EFFECT_BLIZZARD : EFFECT_HIT,
         .type = TYPE_ICE,
         .accuracy = 70,
         .pp = 5,
@@ -9144,7 +9152,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         #else
             .power = 120,
         #endif
-        .effect = EFFECT_HURRICANE,
+        .effect = EFFECT_THUNDER,
         .type = TYPE_FLYING,
         .accuracy = 70,
         .pp = 10,
@@ -13009,7 +13017,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
             .power = 95,
             .pp = 5,
         #endif
-        .effect = EFFECT_HIT,
+        .effect = EFFECT_RAIN_ALWAYS_HIT,
         .type = TYPE_FLYING,
         .accuracy = 80,
         .target = MOVE_TARGET_BOTH,
@@ -13032,7 +13040,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
             .power = 95,
             .pp = 5,
         #endif
-        .effect = EFFECT_HIT,
+        .effect = EFFECT_RAIN_ALWAYS_HIT,
         .type = TYPE_ELECTRIC,
         .accuracy = 80,
         .target = MOVE_TARGET_BOTH,
@@ -13055,7 +13063,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
             .power = 95,
             .pp = 5,
         #endif
-        .effect = EFFECT_HIT,
+        .effect = EFFECT_RAIN_ALWAYS_HIT,
         .type = TYPE_GROUND,
         .accuracy = 80,
         .target = MOVE_TARGET_BOTH,

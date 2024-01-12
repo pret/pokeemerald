@@ -2239,7 +2239,7 @@ static void CreateDomeOpponentMon(u8 monPartyId, u16 tournamentTrainerId, u8 tou
     {
         SetMonMoveSlot(&gEnemyParty[monPartyId],
                        gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]].moves[i], i);
-        if (gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]].moves[i] == MOVE_FRUSTRATION)
+        if (gBattleMoves[gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]].moves[i]].effect == EFFECT_FRUSTRATION)
             friendship = 0;
     }
 
@@ -4108,8 +4108,7 @@ static bool32 IsDomeComboMoveEffect(u32 effect)
     case EFFECT_MOONLIGHT:
     case EFFECT_SHORE_UP:
     case EFFECT_THUNDER:
-    case EFFECT_HURRICANE:
-    //case EFFECT_BLIZZARD: (needs a unique effect in gBattleMoves!)
+    case EFFECT_BLIZZARD:
     case EFFECT_SOLAR_BEAM:
     case EFFECT_GROWTH:
     case EFFECT_AURORA_VEIL:
@@ -5154,8 +5153,7 @@ static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roun
                 movePower = 40;
             else if (movePower == 1)
                 movePower = 60;
-            else if (moveIds[i * MAX_MON_MOVES + j] == MOVE_SELF_DESTRUCT
-                  || moveIds[i * MAX_MON_MOVES + j] == MOVE_EXPLOSION)
+            else if (gBattleMoves[moveIds[i * MAX_MON_MOVES + j]].effect == EFFECT_EXPLOSION)
                 movePower /= 2;
 
             for (k = 0; k < FRONTIER_PARTY_SIZE; k++)

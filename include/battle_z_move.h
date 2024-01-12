@@ -1,7 +1,7 @@
 #ifndef GUARD_BATTLE_Z_MOVE_H
 #define GUARD_BATTLE_Z_MOVE_H
 
-#include "constants/z_move_effects.h"
+#include "constants/battle_z_move_effects.h"
 
 #define MOVE_Z_STATUS   0xFFFF
 
