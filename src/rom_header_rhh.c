@@ -23,6 +23,7 @@ struct RHHRomHeader
     /*0x18*/ const struct Ability *abilities;
 };
 
+__attribute__((section(".text.consts")))
 static const struct RHHRomHeader sRHHRomHeader =
 {
     .rhh_magic = { 'R', 'H', 'H', 'E', 'X', 'P' },
