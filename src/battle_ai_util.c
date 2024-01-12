@@ -2024,7 +2024,7 @@ bool32 HasSleepMoveWithLowAccuracy(u32 battlerAtk, u32 battlerDef)
 
 bool32 IsHealingMove(u32 move)
 {
-    return gBattleMoves[move].healBlockBanned;
+    return gBattleMoves[move].healingMove;
 }
 
 bool32 HasHealingEffect(u32 battlerId)
