@@ -16,6 +16,7 @@ struct RHHRomHeader
     /*0x09*/ u8 expansionVersionFlags;
 };
 
+__attribute__((section(".text.consts")))
 static const struct RHHRomHeader sRHHRomHeader =
 {
     .rhh_magic = { 'R', 'H', 'H', 'E', 'X', 'P' },
