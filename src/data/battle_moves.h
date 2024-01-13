@@ -3249,7 +3249,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .power = B_UPDATED_MOVE_DATA >= GEN_5 ? 75 : 60,
         .type = TYPE_GRASS,
         .accuracy = 100,
-        .pp =  B_UPDATED_MOVE_DATA >= GEN_4 ? 10 : 5,
+        .pp = B_UPDATED_MOVE_DATA >= GEN_4 ? 10 : 5,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = BATTLE_CATEGORY_SPECIAL,
