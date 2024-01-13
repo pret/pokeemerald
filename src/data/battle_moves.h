@@ -2428,7 +2428,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .effect = EFFECT_TWO_TURNS_ATTACK,
         .power = 140,
         .type = TYPE_FLYING,
-        .criticalHitStage = 1,
         .accuracy = 90,
         .pp = 5,
         .target = MOVE_TARGET_SELECTED,
@@ -4177,13 +4176,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         #if B_UPDATED_MOVE_DATA >= GEN_4
             .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_DEF_MINUS_1,
-            .chance = 10,
+            .chance = 20,
         }
             ),
         #else
             .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_SP_DEF_MINUS_1,
-            .chance = 10,
+            .chance = 20,
         }
             ),
         #endif
@@ -12348,6 +12347,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .effect = EFFECT_HIT,
         .power = 70,
         .type = TYPE_FIRE,
+        .accuracy = 100,
         .pp = 5,
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
