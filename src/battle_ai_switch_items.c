@@ -2052,7 +2052,7 @@ static bool32 ShouldUseItem(u32 battler)
         item = gBattleResources->battleHistory->trainerItems[i];
         if (item == ITEM_NONE)
             continue;
-        itemEffects = GetItemEffect(item);
+        itemEffects = ItemId_GetEffect(item);
         if (itemEffects == NULL)
             continue;
 

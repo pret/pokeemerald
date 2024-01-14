@@ -23,6 +23,7 @@ static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
 
 EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
 
+#include "data/pokemon/item_effects.h"
 #include "data/items.h"
 
 static u16 GetBagItemQuantity(u16 *quantity)
@@ -883,6 +884,14 @@ u32 ItemId_GetPrice(u16 itemId)
     return gItems[SanitizeItemId(itemId)].price;
 }
 
+const u8 *ItemId_GetEffect(u32 itemId)
+{
+    if (itemId == ITEM_ENIGMA_BERRY_E_READER)
+        return gSaveBlock1Ptr->enigmaBerry.itemEffect;
+    else
+        return gItems[SanitizeItemId(itemId)].effect;
+}
+
 u32 ItemId_GetHoldEffect(u32 itemId)
 {
     return gItems[SanitizeItemId(itemId)].holdEffect;
@@ -963,7 +972,7 @@ u32 ItemId_GetFlingPower(u32 itemId)
 
 u32 GetItemStatus1Mask(u16 itemId)
 {
-    const u8 *effect = GetItemEffect(itemId);
+    const u8 *effect = ItemId_GetEffect(itemId);
     switch (effect[3])
     {
         case ITEM3_PARALYSIS:
@@ -984,7 +993,7 @@ u32 GetItemStatus1Mask(u16 itemId)
 
 u32 GetItemStatus2Mask(u16 itemId)
 {
-    const u8 *effect = GetItemEffect(itemId);
+    const u8 *effect = ItemId_GetEffect(itemId);
     if (effect[3] & ITEM3_STATUS_ALL)
         return STATUS2_INFATUATION | STATUS2_CONFUSION;
     else if (effect[0] & ITEM0_INFATUATION)

@@ -13,6 +13,7 @@ struct Item
     u16 secondaryId;
     ItemUseFunc fieldUseFunc;
     const u8 *description;
+    const u8 *effect;
     u8 name[ITEM_NAME_LENGTH];
     u8 holdEffect;
     u8 holdEffectParam;
@@ -63,6 +64,7 @@ bool8 AddPyramidBagItem(u16 itemId, u16 count);
 bool8 RemovePyramidBagItem(u16 itemId, u16 count);
 const u8 *ItemId_GetName(u16 itemId);
 u32 ItemId_GetPrice(u16 itemId);
+const u8 *ItemId_GetEffect(u32 itemId);
 u32 ItemId_GetHoldEffect(u32 itemId);
 u32 ItemId_GetHoldEffectParam(u32 itemId);
 const u8 *ItemId_GetDescription(u16 itemId);
