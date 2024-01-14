@@ -17,10 +17,10 @@ struct RHHRomHeader
     /*0x07*/ u8 expansionVersionMinor;
     /*0x08*/ u8 expansionVersionPatch;
     /*0x09*/ u8 expansionVersionFlags;
-    /*0x0C*/ u32 movesCount;
-    /*0x10*/ u32 numSpecies;
-    /*0x14*/ u32 abilitiesCount;
-    /*0x18*/ const struct Ability *abilities;
+    /*0x0A*/ u16 movesCount;
+    /*0x0C*/ u16 numSpecies;
+    /*0x0E*/ u16 abilitiesCount;
+    /*0x10*/ const struct Ability *abilities;
 };
 
 __attribute__((section(".text.consts")))
