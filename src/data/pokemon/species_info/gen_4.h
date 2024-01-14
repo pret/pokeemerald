@@ -4381,7 +4381,6 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
 #define SHAYMIN_MISC_INFO                                                               \
         .catchRate = 45,                                                                \
         .expYield = 270,                                                                \
-        .evYield_HP = 3,                                                                \
         .itemCommon = ITEM_LUM_BERRY,                                                   \
         .itemRare = ITEM_LUM_BERRY,                                                     \
         .genderRatio = MON_GENDERLESS,                                                  \
@@ -4407,6 +4406,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .baseSpeed     = 100,
         .baseSpAttack  = 100,
         .baseSpDefense = 100,
+        .evYield_HP = 3,
         .types = { TYPE_GRASS, TYPE_GRASS },
         .abilities = { ABILITY_NATURAL_CURE, ABILITY_NONE },
         .cryId = CRY_SHAYMIN_LAND,
@@ -4442,6 +4442,11 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .baseSpeed     = 127,
         .baseSpAttack  = 120,
         .baseSpDefense = 75,
+    #if P_UPDATED_EVS >= GEN_5
+        .evYield_Speed = 3,
+    #else
+        .evYield_HP = 3,
+    #endif
         .types = { TYPE_GRASS, TYPE_FLYING },
         .abilities = { ABILITY_SERENE_GRACE, ABILITY_NONE },
         .noFlip = TRUE,

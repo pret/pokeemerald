@@ -2065,8 +2065,13 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .baseSpeed     = 60,
         .baseSpAttack  = AEGISLASH_MAIN_STAT,
         .baseSpDefense = 50,
+    #if P_UPDATED_EVS >= GEN_7
         .evYield_Attack = 2,
         .evYield_SpAttack = 1,
+    #else
+        .evYield_Defense = 2,
+        .evYield_SpDefense = 1,
+    #endif
         .description = COMPOUND_STRING(
             "Once upon a time, a king with an\n"
             "Aegislash reigned over the land. His\n"
