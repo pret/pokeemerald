@@ -2181,7 +2181,7 @@ void HBlankCB_DoublePopupWindow(void)
     if (scanline < 80 || scanline > 160)
     {
         REG_BG0VOFS = offset;
-        if(MAP_POPUP_ALPHA_BLEND)
+        if(MAPPOPUP_ALPHA_BLEND)
             REG_BLDALPHA = BLDALPHA_BLEND(15, 5);
     }
     else
