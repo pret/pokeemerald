@@ -1535,4 +1535,3 @@ static const u8 sUnused2[]       = {0x02};
 static const u8 sEmpty5[0x3242]  = {0};
 static const u8 sUnused3[]       = {0x40};
 static const u8 sEmpty6[0x13]    = {0};
-
