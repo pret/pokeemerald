@@ -110,7 +110,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .baseSpDefense = 75,
         .types = { TYPE_GRASS, TYPE_FIGHTING },
         .catchRate = 45,
-        .expYield = 239,
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 265 : 239,
         .evYield_Defense = 3,
         .genderRatio = PERCENT_FEMALE(12.5),
         .eggCycles = 20,
@@ -255,7 +255,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .baseSpDefense = 100,
         .types = { TYPE_FIRE, TYPE_PSYCHIC },
         .catchRate = 45,
-        .expYield = 240,
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 267 : 240,
         .evYield_SpAttack = 3,
         .genderRatio = PERCENT_FEMALE(12.5),
         .eggCycles = 20,
@@ -390,21 +390,21 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_GRENINJA}),
     },
 
-#define GRENINJA_NORMAL_MISC_INFO           \
-        .baseHP        = 72,                \
-        .baseAttack    = 95,                \
-        .baseDefense   = 67,                \
-        .baseSpeed     = 122,               \
-        .baseSpAttack  = 103,               \
-        .baseSpDefense = 71,                \
-        .expYield = 239,                    \
-        .description = gGreninjaPokedexText,\
-        FRONT_PIC(Greninja, 64, 56),        \
-        .frontPicYOffset = 7,               \
-        .frontAnimFrames = sAnims_Greninja, \
-        BACK_PIC(Greninja, 64, 48),         \
-        .backPicYOffset = 11,               \
-        PALETTES(Greninja),                 \
+#define GRENINJA_NORMAL_MISC_INFO                               \
+        .baseHP        = 72,                                    \
+        .baseAttack    = 95,                                    \
+        .baseDefense   = 67,                                    \
+        .baseSpeed     = 122,                                   \
+        .baseSpAttack  = 103,                                   \
+        .baseSpDefense = 71,                                    \
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 265 : 239,\
+        .description = gGreninjaPokedexText,                    \
+        FRONT_PIC(Greninja, 64, 56),                            \
+        .frontPicYOffset = 7,                                   \
+        .frontAnimFrames = sAnims_Greninja,                     \
+        BACK_PIC(Greninja, 64, 48),                             \
+        .backPicYOffset = 11,                                   \
+        PALETTES(Greninja),                                     \
         ICON(Greninja, 0)
 
 #define GRENINJA_MISC_INFO                              \
@@ -834,7 +834,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .baseSpDefense = 50,                                                                \
         .types = { TYPE_BUG, TYPE_FLYING },                                                 \
         .catchRate = 45,                                                                    \
-        .expYield = 185,                                                                    \
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 206 : 185,                            \
         .evYield_HP = 1,                                                                    \
         .evYield_Speed = 1,                                                                 \
         .evYield_SpAttack = 1,                                                              \
@@ -1366,7 +1366,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .baseSpDefense = 154,                                                   \
         .types = { TYPE_FAIRY, TYPE_FAIRY },                                    \
         .catchRate = 45,                                                        \
-        .expYield = 248,                                                        \
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 276 : 248,                \
         .evYield_SpDefense = 3,                                                 \
         .genderRatio = MON_FEMALE,                                              \
         .eggCycles = 20,                                                        \
@@ -2003,7 +2003,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 #define AEGISLASH_MISC_INFO                                     \
         .types = { TYPE_STEEL, TYPE_GHOST },                    \
         .catchRate = 45,                                        \
-        .expYield = 234,                                        \
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 250 : 234,\
         .genderRatio = PERCENT_FEMALE(50),                      \
         .eggCycles = 20,                                        \
         .friendship = STANDARD_FRIENDSHIP,                      \
@@ -3232,7 +3232,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 
 #define GOODRA_MISC_INFO                                        \
         .catchRate = 45,                                        \
-        .expYield = 270,                                        \
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 300 : 270,\
         .evYield_SpDefense = 3,                                 \
         .genderRatio = PERCENT_FEMALE(50),                      \
         .eggCycles = 40,                                        \
@@ -4045,7 +4045,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .baseSpDefense = 98,                                                            \
         .types = { TYPE_FAIRY, TYPE_FAIRY },                                            \
         .catchRate = 45,                                                                \
-        .expYield = 306,                                                                \
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 340 : 306,                        \
         .evYield_HP = 3,                                                                \
         .genderRatio = MON_GENDERLESS,                                                  \
         .eggCycles = 120,                                                               \
@@ -4096,7 +4096,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .baseSpDefense = 98,
         .types = { TYPE_DARK, TYPE_FLYING },
         .catchRate = 45,
-        .expYield = 306,
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 340 : 306,
         .evYield_HP = 3,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 120,
@@ -4164,7 +4164,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .baseSpeed     = 95,                                    \
         .baseSpAttack  = 81,                                    \
         .baseSpDefense = 95,                                    \
-        .expYield = 270,                                        \
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 300 : 270,\
         .bodyColor = BODY_COLOR_GREEN,                          \
         .cryId = CRY_ZYGARDE_50,                                \
         .height = 50,                                           \
@@ -4199,7 +4199,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .baseSpeed     = 115,                                   \
         .baseSpAttack  = 61,                                    \
         .baseSpDefense = 85,                                    \
-        .expYield = 219,                                        \
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 243 : 219,\
         .bodyColor = BODY_COLOR_BLACK,                          \
         .cryId = CRY_ZYGARDE_10,                                \
         .height = 12,                                           \
@@ -4239,7 +4239,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .baseSpeed     = 85,
         .baseSpAttack  = 91,
         .baseSpDefense = 95,
-        .expYield = 319,
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 354 : 319,
         .bodyColor = BODY_COLOR_BLACK,
         .cryId = CRY_ZYGARDE_COMPLETE,
         .height = 45,
@@ -4296,7 +4296,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .baseSpeed     = 50,
         .baseSpAttack  = 100,
         .baseSpDefense = 150,
-        .expYield = 270,
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 300 : 270,
         .abilities = { ABILITY_CLEAR_BODY, ABILITY_NONE },
         .cryId = CRY_DIANCIE,
         .height = 7,
@@ -4362,7 +4362,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 #if P_FAMILY_HOOPA
 #define HOOPA_MISC_INFO                                                                 \
         .catchRate = 3,                                                                 \
-        .expYield = 270,                                                                \
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 300 : 270,                        \
         .evYield_SpAttack = 3,                                                          \
         .genderRatio = MON_GENDERLESS,                                                  \
         .eggCycles = 120,                                                               \
@@ -4463,7 +4463,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .baseSpDefense = 90,
         .types = { TYPE_FIRE, TYPE_WATER },
         .catchRate = 3,
-        .expYield = 270,
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 300 : 270,
         .evYield_SpAttack = 3,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 120,
