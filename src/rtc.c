@@ -358,9 +358,8 @@ void FormatDecimalTimeWithoutSeconds(u8 *txtPtr, s8 hour, s8 minute, bool8 is24H
         break;
     case FALSE:
         if (hour == 0)
-            hour = 12;
-
-        if (hour < 13)
+            txtPtr = ConvertIntToDecimalStringN(txtPtr, 12, STR_CONV_MODE_LEADING_ZEROS, 2);
+        else if (hour < 13)
             txtPtr = ConvertIntToDecimalStringN(txtPtr, hour, STR_CONV_MODE_LEADING_ZEROS, 2);
         else
             txtPtr = ConvertIntToDecimalStringN(txtPtr, hour - 12, STR_CONV_MODE_LEADING_ZEROS, 2);
@@ -368,7 +367,7 @@ void FormatDecimalTimeWithoutSeconds(u8 *txtPtr, s8 hour, s8 minute, bool8 is24H
         *txtPtr++ = CHAR_COLON;
         txtPtr = ConvertIntToDecimalStringN(txtPtr, minute, STR_CONV_MODE_LEADING_ZEROS, 2);
         txtPtr = StringAppend(txtPtr, gText_Space);
-        if (hour < 13)
+        if (hour < 12)
             txtPtr = StringAppend(txtPtr, gText_AM);
         else
             txtPtr = StringAppend(txtPtr, gText_PM);

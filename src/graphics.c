@@ -1536,6 +1536,3 @@ static const u8 sEmpty5[0x3242]  = {0};
 static const u8 sUnused3[]       = {0x40};
 static const u8 sEmpty6[0x13]    = {0};
 
-// BSBob map pop-ups
-const u8 gPopUpWindowBorder_Tiles[] = INCBIN_U8("graphics/interface/map_popup_tiles.4bpp");
-const u16 gPopUpWindowBorder_Palette[] = INCBIN_U16("graphics/interface/map_popup_palette.gbapal");
