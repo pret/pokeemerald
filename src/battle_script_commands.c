@@ -3192,13 +3192,15 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                 if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER && gSpecialStatuses[gBattlerAttacker].parentalBondState!= PARENTAL_BOND_2ND_HIT)
                 {
                     u16 payday = gPaydayMoney;
+                    u16 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove);
                     gPaydayMoney += (gBattleMons[gBattlerAttacker].level * 5);
                     if (payday > gPaydayMoney)
                         gPaydayMoney = 0xFFFF;
 
                     // For a move that hits multiple targets (i.e. Make it Rain)
                     // we only want to print the message on the final hit
-                    if (GetNextTarget(gBattleMoves[gCurrentMove].target, TRUE) == MAX_BATTLERS_COUNT)
+                    if (!((moveTarget == MOVE_TARGET_BOTH || moveTarget == MOVE_TARGET_FOES_AND_ALLY)
+                        && GetNextTarget(moveTarget, TRUE) != MAX_BATTLERS_COUNT))
                     {
                         BattleScriptPush(gBattlescriptCurrInstr + 1);
                         gBattlescriptCurrInstr = BattleScript_MoveEffectPayDay;
@@ -3807,6 +3809,7 @@ static void Cmd_setadditionaleffects(void)
         if (gBattleMoves[gCurrentMove].numAdditionalEffects > gBattleStruct->additionalEffectsCounter)
         {
             u32 percentChance;
+            u16 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove);
             const u8 *currentPtr = gBattlescriptCurrInstr;
             const struct AdditionalEffect *additionalEffect = &gBattleMoves[gCurrentMove].additionalEffects[gBattleStruct->additionalEffectsCounter];
 
@@ -3814,7 +3817,8 @@ static void Cmd_setadditionaleffects(void)
             // self-targeting move effects cannot occur multiple times per turn
             // only occur on the last setmoveeffect when there are multiple targets
             if (!(gBattleMoves[gCurrentMove].additionalEffects[gBattleStruct->additionalEffectsCounter].self
-                && GetNextTarget(gBattleMoves[gCurrentMove].target, TRUE) != MAX_BATTLERS_COUNT)
+                && (moveTarget == MOVE_TARGET_BOTH || moveTarget == MOVE_TARGET_FOES_AND_ALLY)
+                && GetNextTarget(moveTarget, TRUE) != MAX_BATTLERS_COUNT)
               && !(additionalEffect->onlyIfTargetRaisedStats && !gProtectStructs[gBattlerTarget].statRaised)
               && additionalEffect->onChargeTurnOnly == gProtectStructs[gBattlerAttacker].chargingTurn)
             {
