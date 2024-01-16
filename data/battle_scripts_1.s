@@ -371,6 +371,11 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_BLIZZARD
 	.4byte BattleScript_EffectHit                     @ EFFECT_RAIN_ALWAYS_HIT
 
+BattleScript_EffectPsychicNoise::
+	printstring STRINGID_PKMNPREVENTEDFROMHEALING
+	waitmessage B_WAIT_TIME_LONG
+	return
+
 BattleScript_EffectFilletAway:
 	attackcanceler
 	attackstring

@@ -3793,6 +3793,21 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                 }
                 SetMoveEffect(primary, certain);
                 break;
+            case MOVE_EFFECT_PSYCHIC_NOISE:
+                if (GetBattlerAbility(gEffectBattler) == ABILITY_AROMA_VEIL || GetBattlerAbility(BATTLE_PARTNER(gEffectBattler)) == ABILITY_AROMA_VEIL)
+                {
+                    gBattlerAbility = gEffectBattler;
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_AromaVeilProtectsRet;
+                }
+                else if (!(gStatuses3[gEffectBattler] & STATUS3_HEAL_BLOCK))
+                {
+                    gStatuses3[gEffectBattler] |= STATUS3_HEAL_BLOCK;
+                    gDisableStructs[gEffectBattler].healBlockTimer = 2;
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_EffectPsychicNoise;
+                }
+                break;
             }
         }
     }

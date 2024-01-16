@@ -490,6 +490,8 @@ extern const u8 BattleScript_TheRainbowDisappeared[];
 extern const u8 BattleScript_HurtByTheSeaOfFire[];
 extern const u8 BattleScript_TheSeaOfFireDisappeared[];
 extern const u8 BattleScript_TheSwampDisappeared[];
+extern const u8 BattleScript_EffectPsychicNoise[];
+extern const u8 BattleScript_AromaVeilProtectsRet[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];
