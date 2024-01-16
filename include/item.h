@@ -15,6 +15,7 @@ struct Item
     const u8 *description;
     const u8 *effect;
     u8 name[ITEM_NAME_LENGTH];
+    u8 pluralName[ITEM_NAME_PLURAL_LENGTH];
     u8 holdEffect;
     u8 holdEffectParam;
     u8 importance;

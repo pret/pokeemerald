@@ -20,6 +20,8 @@
 
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
+static const u8 *ItemId_GetPluralName(u16);
+static bool32 DoesItemHavePluralName(u16);
 
 EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
 
@@ -93,8 +95,8 @@ void CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity)
     if (quantity < 2)
         return;
 
-    if (ItemId_GetPocket(itemId) == POCKET_BERRIES)
-        GetBerryCountString(dst, gBerries[itemId - FIRST_BERRY_INDEX].name, quantity);
+    if (DoesItemHavePluralName(itemId))
+        StringCopy(dst, ItemId_GetPluralName(itemId));
     else
         StringAppend(end, sText_s);
 }
@@ -885,6 +887,16 @@ const u8 *ItemId_GetName(u16 itemId)
 u32 ItemId_GetPrice(u16 itemId)
 {
     return gItems[SanitizeItemId(itemId)].price;
+}
+
+static bool32 DoesItemHavePluralName(u16 itemId)
+{
+    return (gItems[SanitizeItemId(itemId)].pluralName[0] != '\0');
+}
+
+static const u8 *ItemId_GetPluralName(u16 itemId)
+{
+    return gItems[SanitizeItemId(itemId)].pluralName;
 }
 
 const u8 *ItemId_GetEffect(u32 itemId)
