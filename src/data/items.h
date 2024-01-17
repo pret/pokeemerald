@@ -3529,7 +3529,7 @@ const struct Item gItems[] =
     [ITEM_REAPER_CLOTH] =
     {
         .name = _("Reaper Cloth"),
-        .pluralName = _("Reaper Clothes"),
+        .pluralName = _("Reaper Cloths"),
         .price = (I_PRICE >= GEN_7) ? 2000 * TREASURE_FACTOR : 2100,
         .description = COMPOUND_STRING("Loved by a certain\n"
                                        "Pokémon. Imbued with\n"
@@ -10315,7 +10315,7 @@ const struct Item gItems[] =
     [ITEM_REINS_OF_UNITY] =
     {
         .name = _("ReinsOfUnity"),
-        .pluralName = _("ReinsOfUnities"),
+        .pluralName = _("ReinsOfUnity"),
         .price = 0,
         .importance = 1,
         .description = COMPOUND_STRING("Reins that unite\n"
