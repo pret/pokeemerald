@@ -1,6 +1,6 @@
 # Instructions
 
-These instructions explain how to set up the tools required to build **pokeemerald**, which assembles the source files into a ROM.
+These instructions explain how to set up the tools required to build **pokeemerald Expansion**, which assembles the source files into a ROM (pokeemerald.gba).
 
 These instructions come with notes which can be expanded by clicking the "<i>Note...</i>" text.
 In general, you should not need to open these unless if you get an error or if you need additional clarification.
@@ -27,10 +27,10 @@ All of the Windows instructions assume that the default drive is C:\\. If this d
 **A note of caution**: As Windows 7 is officially unsupported by Microsoft and Windows 8 has very little usage, some maintainers are unwilling to maintain the Windows 7/8 instructions. Thus, these instructions may break in the future with fixes taking longer than fixes to the Windows 10 instructions.
 
 ## Windows 10/11 (WSL1)
-WSL1 is the preferred terminal to build **pokeemerald**. The following instructions will explain how to install WSL1 (referred to interchangeably as WSL).
+WSL1 is the preferred terminal to build **pokeemerald Expansion**. The following instructions will explain how to install WSL1 (referred to interchangeably as WSL).
 - If WSL (Debian or Ubuntu) is **not installed**, then go to [Installing WSL1](#Installing-WSL1).
 - Otherwise, if WSL is installed, but it **hasn't previously been set up for another decompilation project**, then go to [Setting up WSL1](#Setting-up-WSL1).
-- Otherwise, **open WSL** and go to [Choosing where to store pokeemerald (WSL1)](#Choosing-where-to-store-pokeemerald-WSL1).
+- Otherwise, **open WSL** and go to [Choosing where to store pokeemerald Expansion (WSL1)](#Choosing-where-to-store-pokeemerald-expansion-WSL1).
 
 ### Installing WSL1
 1. Open [Windows Powershell **as Administrator**](https://i.imgur.com/QKmVbP9.png), and run the following command (Right Click or Shift+Insert is paste in the Powershell).
@@ -79,7 +79,7 @@ Some tips before proceeding:
 
 > Note: If the repository you plan to build has an **[older revision of the INSTALL.md](https://github.com/pret/pokeemerald/blob/571c598/INSTALL.md)**, then follow the [legacy WSL1 instructions](docs/legacy_WSL1_INSTALL.md) from here.
 
-4. Certain packages are required to build pokeemerald. Install these packages by running the following command:
+4. Certain packages are required to build pokeemerald Expansion. Install these packages by running the following command:
 
     ```bash
     sudo apt install build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi git libpng-dev
@@ -89,12 +89,39 @@ Some tips before proceeding:
 
     >   If the above command does not work, try the above command but replacing `apt` with `apt-get`.
     </details>
-    This will install GCC v10 on Ubuntu 22.04. pokeemerald-expansion works with GCC v10, but remote repositories and the RHH Team use GCC v13 for stricter error-checking. If you want to upgrade from v10 to v13, also follow the devkitpro install instructions.
+    This will install GCC v10 on Ubuntu 22.04. pokeemerald Expansion works with GCC v10, but remote repositories and the RHH Team use GCC v13 for stricter error-checking. If you want to upgrade from v10 to v13, also follow the devkitpro install instructions.
 
-### Choosing where to store pokeemerald (WSL1)
-WSL has its own file system that's not natively accessible from Windows, but Windows files *are* accessible from WSL. So you're going to want to store pokeemerald within Windows.
+### Installing devkitARM on WSL1
 
-For example, say you want to store pokeemerald (and agbcc) in **C:\Users\\_\<user>_\Desktop\decomps**. First, ensure that the folder already exists. Then, enter this command to **change directory** to said folder, where *\<user>* is your **Windows** username:
+1. Change directory to somewhere you can download a package, such as **C:\Users\\_\<user>_\Downloads** (the Downloads location for most users). To do so, enter this command, where *\<user> is your **Windows** username:
+
+    ```bash
+    cd /mnt/c/Users/<user>/Downloads
+    ```
+
+2. Once the directory has been changed, run the following commands to install devkitARM.
+
+    ```bash
+    sudo apt install wget
+    wget https://apt.devkitpro.org/install-devkitpro-pacman
+    chmod +x ./install-devkitpro-pacman
+    sudo ./install-devkitpro-pacman
+    sudo dkp-pacman -S gba-dev
+    ```
+    The last command will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation.
+
+3. Run the following command to set devkitPro related environment variables (alternatively, close and re-open WSL):
+
+    ```bash
+    source /etc/profile.d/devkit-env.sh
+    ```
+
+devkitARM is now installed.
+
+### Choosing where to store pokeemerald Expansion (WSL1)
+WSL has its own file system that's not natively accessible from Windows, but Windows files *are* accessible from WSL. So you're going to want to store pokeemerald Expansion within Windows.
+
+For example, say you want to store pokeemerald Expansion in **C:\Users\\_\<user>_\Desktop\decomps**. First, ensure that the folder already exists. Then, enter this command to **change directory** to said folder, where *\<user>* is your **Windows** username:
 
 ```bash
 cd /mnt/c/Users/<user>/Desktop/decomps
@@ -116,7 +143,7 @@ Otherwise, ask for help on Discord or IRC (see [README.md](README.md)), or conti
 
 - If devkitARM is **not installed**, then go to [Installing devkitARM](#installing-devkitarm).
 - If devkitARM is installed, but msys2 **hasn't previously been set up for another decompilation project**, then go to [Setting up msys2](#setting-up-msys2).
-- Otherwise, **open msys2** and go to [Choosing where to store pokeemerald (msys2)](#choosing-where-to-store-pokeemerald-msys2).
+- Otherwise, **open msys2** and go to [Choosing where to store pokeemerald Expansion (msys2)](#choosing-where-to-store-pokeemerald-expansion-msys2).
 
 ### Installing devkitARM
 1. Download the devkitPro installer [here](https://github.com/devkitPro/installer/releases).
@@ -128,7 +155,7 @@ Note that in msys2, Copy is Ctrl+Insert and Paste is Shift+Insert.
 
 1. Open msys2 at C:\devkitPro\msys2\msys2_shell.bat.
 
-2. Certain packages are required to build pokeemerald. Install these by running the following two commands:
+2. Certain packages are required to build pokeemerald Expansion. Install these by running the following two commands:
 
     ```bash
     pacman -Sy msys2-keyring
@@ -173,10 +200,10 @@ Note that in msys2, Copy is Ctrl+Insert and Paste is Shift+Insert.
     cd
     ```
 
-### Choosing where to store pokeemerald (msys2)
-At this point, you can choose a folder to store pokeemerald into. If you're okay with storing pokeemerald in the user profile folder, then proceed to [Installation](#installation). Otherwise, you'll need to account for where pokeemerald is stored when changing directory to the pokeemerald folder.
+### Choosing where to store pokeemerald Expansion (msys2)
+At this point, you can choose a folder to store pokeemerald Expansion into. If you're okay with storing pokeemerald Expansion in the user profile folder, then proceed to [Installation](#installation). Otherwise, you'll need to account for where pokeemerald Expansion is stored when changing directory to the pokeemerald-expansion folder.
 
-For example, if you want to store pokeemerald (and agbcc) in **C:\Users\\_\<user>_\Desktop\decomps** (where *\<user>* is your **Windows** username), enter this command:
+For example, if you want to store pokeemerald Expansion in **C:\Users\\_\<user>_\Desktop\decomps** (where *\<user>* is your **Windows** username), enter this command:
 
 ```bash
 cd Desktop/decomps
@@ -192,7 +219,7 @@ Otherwise, ask for help on Discord or IRC (see [README.md](README.md)), or conti
 2.
     - If Cygwin is **not installed**, or does not have all of the required packages installed, then go to [Installing Cygwin](#installing-cygwin).
     - If Cygwin is installed, but **is not configured to work with devkitARM**, then go to [Configuring devkitARM for Cygwin](#configuring-devkitarm-for-cygwin).
-    - Otherwise, **open Cygwin** and go to [Choosing where to store pokeemerald (Cygwin)](#choosing-where-to-store-pokeemerald-cygwin)
+    - Otherwise, **open Cygwin** and go to [Choosing where to store pokeemerald Expansion (Cygwin)](#choosing-where-to-store-pokeemerald-expansion-cygwin)
 
 ### Installing Cygwin
 1. Download [Cygwin](https://cygwin.com/install.html): setup-x86_64.exe for 64-bit Windows, setup-x86.exe for 32-bit.
@@ -235,15 +262,15 @@ Note that in Cygwin, Copy is Ctrl+Insert and Paste is Shift+Insert.
     >   Replace the drive letter c with the actual drive letter if it is not c.
     </details>
 
-### Choosing where to store pokeemerald (Cygwin)
+### Choosing where to store pokeemerald Expansion (Cygwin)
 
-Cygwin has its own file system that's within Windows, at **C:\cygwin64\home\\_\<user>_**. If you don't want to store pokeemerald there, you'll need to account for where pokeemerald is stored when **changing directory** to the pokeemerald folder.
+Cygwin has its own file system that's within Windows, at **C:\cygwin64\home\\_\<user>_**. If you don't want to store pokeemerald Expansion there, you'll need to account for where ppokeemerald Expansion is stored when **changing directory** to the pokeemerald-expansion folder.
 
-For example, if you want to store pokeemerald (and agbcc) in **C:\Users\\_\<user>_\Desktop\decomps**, enter this command, where *\<user>* is your **Windows** username:
+For example, if you want to store pokeemerald Expansion in **C:\Users\\_\<user>_\Desktop\decomps**, enter this command, where *\<user>* is your **Windows** username:
 ```bash
 cd c:/Users/<user>/Desktop/decomps
 ```
-Note that the directory **must exist** in Windows. If you want to store pokeemerald in a dedicated folder that doesn't exist (e.g. the example provided above), then create the folder (e.g. using Windows Explorer) before executing the `cd` command.
+Note that the directory **must exist** in Windows. If you want to store pokeemerald Expansion in a dedicated folder that doesn't exist (e.g. the example provided above), then create the folder (e.g. using Windows Explorer) before executing the `cd` command.
 
 <details>
     <summary><i>Notes...</i></summary>
@@ -263,7 +290,7 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
 
 2.  - If libpng is **not installed**, then go to [Installing libpng (macOS)](#installing-libpng-macos).
     - If devkitARM is **not installed**, then go to [Installing devkitARM (macOS)](#installing-devkitarm-macos).
-    - Otherwise, **open the Terminal** and go to [Choosing where to store pokeemerald (macOS)](#choosing-where-to-store-pokeemerald-macos)
+    - Otherwise, **open the Terminal** and go to [Choosing where to store pokeemerald Expansion (macOS)](#choosing-where-to-store-pokeemerald-expansion-macos)
 
 ### Installing libpng (macOS)
 <details>
@@ -281,7 +308,7 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
     ```
     libpng is now installed.
 
-    Continue to [Installing devkitARM (macOS)](#installing-devkitarm-macos) if **devkitARM is not installed**, otherwise, go to [Choosing where to store pokeemerald (macOS)](#choosing-where-to-store-pokeemerald-macos).
+    Continue to [Installing devkitARM (macOS)](#installing-devkitarm-macos) if **devkitARM is not installed**, otherwise, go to [Choosing where to store pokeemerald Expansion (macOS)](#choosing-where-to-store-pokeemerald-expansion-macos).
 
 ### Installing devkitARM (macOS)
 1. Download the `devkitpro-pacman-installer.pkg` package from [here](https://github.com/devkitPro/pacman/releases).
@@ -307,14 +334,14 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
     echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile
     ```
 
-### Choosing where to store pokeemerald (macOS)
-At this point, you can choose a folder to store pokeemerald into. If you're okay with storing pokeemerald in the user folder, then proceed to [Installation](#installation). Otherwise, you'll need to account for where pokeemerald is stored when changing directory to the pokeemerald folder.
+### Choosing where to store pokeemerald Expansion (macOS)
+At this point, you can choose a folder to store pokeemerald Expansion into. If you're okay with storing pokeemerald Expansion in the user folder, then proceed to [Installation](#installation). Otherwise, you'll need to account for where pokeemerald Expansion is stored when changing directory to the pokeemerald-expansion folder.
 
-For example, if you want to store pokeemerald (and agbcc) in **~/Desktop/decomps**, enter this command to **change directory** to the desired folder:
+For example, if you want to store pokeemerald Expansion in **~/Desktop/decomps**, enter this command to **change directory** to the desired folder:
 ```bash
 cd Desktop/decomps
 ```
-Note that the directory **must exist** in the folder system. If you want to store pokeemerald in a dedicated folder that doesn't exist (e.g. the example provided above), then create the folder (e.g. using Finder) before executing the `cd` command.
+Note that the directory **must exist** in the folder system. If you want to store pokeemerald Expansion in a dedicated folder that doesn't exist (e.g. the example provided above), then create the folder (e.g. using Finder) before executing the `cd` command.
 
 <details>
     <summary><i>Note..</i>.</summary>
@@ -332,7 +359,7 @@ Run the following command to install the necessary packages:
 ```bash
 sudo apt install build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi git libpng-dev
 ```
-Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to-store-pokeemerald-linux).
+Then proceed to [Choosing where to store pokeemerald Expansion (Linux)](#choosing-where-to-store-pokeemerald-expansion-linux).
 <details>
     <summary><i>Note for legacy repos...</i></summary>
 
@@ -341,19 +368,51 @@ Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to
 >   [install devkitARM on Debian/Ubuntu-based distributions](#installing-devkitarm-on-debianubuntu-based-distributions).
 </details>
 
+### Installing devkitARM on Debian/Ubuntu-based distributions
+
+1. Change directory to somewhere you can download a packages, like a Downloads folder. Then, run the following commands to install devkitARM:
+
+    ```bash
+    wget https://apt.devkitpro.org/install-devkitpro-pacman
+    chmod +x ./install-devkitpro-pacman
+    sudo ./install-devkitpro-pacman
+    sudo dkp-pacman -S gba-dev
+    ```
+    The last command will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation.
+
+4. Run the following command to set devkitPro related environment variables (alternatively, close and re-open the Terminal):
+
+    ```bash
+    source /etc/profile.d/devkit-env.sh
+    ```
+
+devkitARM is now installed.
+
 ### Arch Linux
 Run this command as root to install the necessary packages:
 ```bash
 pacman -S base-devel arm-none-eabi-binutils arm-none-eabi-gcc arm-none-eabi-newlib git libpng
 ```
-Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to-store-pokeemerald-linux).
-<details>
-    <summary><i>Note for legacy repos...</i></summary>
 
->   If the repository you plan to build has an **[older revision of the INSTALL.md](https://github.com/pret/pokeemerald/blob/571c598/INSTALL.md)**,
->   then you will have to install devkitARM. Install all the above packages except for the arm-none-eabi packages, and follow the instructions to
->   [install devkitARM on Arch Linux](#installing-devkitarm-on-arch-linux).
-</details>
+### Installing devkitARM on Arch Linux
+
+1. Follow [devkitPro's instructions](https://devkitpro.org/wiki/devkitPro_pacman#Customising_Existing_Pacman_Install) to configure `pacman` to download devkitPro packages.
+2. Install `gba-dev`: run the following command as root.
+
+    ```console
+    pacman -S gba-dev
+    ```
+    This will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation.
+
+3. Run the following command to set devkitPro related environment variables (alternatively, close and re-open the Terminal):
+
+    ```bash
+    source /etc/profile.d/devkit-env.sh
+    ```
+
+devkitARM is now installed.
+
+Then proceed to [Choosing where to store pokeemerald Expansion (Linux)](#choosing-where-to-store-pokeemerald-expansion-linux).
 
 ### Other distributions
 _(Specific instructions for other distributions would be greatly appreciated!)_
@@ -375,8 +434,8 @@ _(Specific instructions for other distributions would be greatly appreciated!)_
 
     The last command will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation.
 
-### Choosing where to store pokeemerald (Linux)
-At this point, you can choose a folder to store pokeemerald (and agbcc) into. If so, you'll have to account for the modified folder path when changing directory to the pokeemerald folder.
+### Choosing where to store pokeemerald Expansion (Linux)
+At this point, you can choose a folder to store pokeemerald Expansion into. If so, you'll have to account for the modified folder path when changing directory to the pokeemerald-expansion folder.
 
 If this works, then proceed to [Installation](#installation). Otherwise, ask for help on Discord or IRC (see [README.md](README.md)).
 
@@ -385,12 +444,12 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
 <details>
     <summary><i>Note for Windows users...</i></summary>
 
->   Consider adding an exception for the `pokeemerald` and/or `decomps` folder in Windows Security using
+>   Consider adding an exception for the `pokeemerald-expansion` and/or `decomps` folder in Windows Security using
 >   [these instructions](https://support.microsoft.com/help/4028485). This prevents Microsoft Defender from
 >   scanning them which might improve performance while building.
 </details>
 
-1. If pokeemerald is not already downloaded (some users may prefer to download pokeemerald via a git client like GitHub Desktop), run:
+1. If pokeemerald Expansion is not already downloaded (some users may prefer to download pokeemerald Expansion via a git client like GitHub Desktop), run:
 
     ```bash
     git clone https://github.com/rh-hideout/pokeemerald-expansion
@@ -404,57 +463,18 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
     >   cd
     >   sudo umount /mnt/c
     >   sudo mount -t drvfs C: /mnt/c -o metadata,noatime
-    >   cd <folder where pokeemerald is to be stored>
+    >   cd <folder where pokeemerald-expansion is to be stored>
     >   ```
-    >   Where *\<folder where pokeemerald is to be stored>* is the path of the folder [where you chose to store pokeemerald](#Choosing-where-to-store-pokeemerald-WSL1). Then run the `git clone` command again.
+    >   Where *\<folder where pokeemerald-expansion is to be stored>* is the path of the folder [where you chose to store pokeemerald Expansion](#Choosing-where-to-store-pokeemerald-expansion-WSL1). Then run the `git clone` command again.
     </details>
+    
+Now you're ready to build pokeemerald Expansion.
 
-<details>
-    <summary><i>Depreciated; installing agbcc is optional since 1.7.0</i>.</summary>
-2. Install agbcc into pokeemerald. The commands to run depend on certain conditions. **You should only follow one of the listed instructions**:
-- If agbcc has **not been built before** in the folder where you chose to store pokeemerald, run the following commands to build and install it into pokeemerald:
+## Build pokeemerald Expansion
 
-    ```bash
-    git clone https://github.com/pret/agbcc
-    cd agbcc
-    ./build.sh
-    ./install.sh ../pokeemerald
-    ```
-
-- **Otherwise**, if agbcc has been built before (e.g. if the git clone above fails), but was **last built on a different terminal** than the one currently used (only relevant to Windows, e.g. switching from msys2 to WSL1), then run the following commands to build and install it into pokeemerald:
-
-    ```bash
-    cd agbcc
-    git clean -fX
-    ./build.sh
-    ./install.sh ../pokeemerald
-    ```
-
-- **Otherwise**, if agbcc has been built before on the same terminal, run the following commands to install agbcc into pokeemerald:
-
-    ```bash
-    cd agbcc
-    ./install.sh ../pokeemerald
-    ```
-
-    <details>
-        <summary><i>Note...</i></summary>
-
-        > If building agbcc or pokeemerald results in an error, try deleting the agbcc folder and re-installing agbcc as if it has not been built before.
-    </details>
-
-3. Once agbcc is installed, change directory back to the base directory where pokeemerald and agbcc are stored:
-
-    ```bash
-    cd ..
-    ```
-</details>
-
-Now you're ready to [build **pokeemerald**](#build-pokeemerald)
-## Build pokeemerald
-If you aren't in the pokeemerald directory already, then **change directory** to the pokeemerald folder:
+If you aren't in the pokeemerald-expansion directory already, then **change directory** to the pokeemerald-expansion folder:
 ```bash
-cd pokeemerald
+cd pokeemerald-expansion
 ```
 To build **pokeemerald.gba** (Note: to speed up builds, see [Parallel builds](#parallel-builds)):
 ```bash
@@ -484,116 +504,6 @@ Replace `<output of nproc>` with the number that the `nproc` command returned.
 
 `nproc` is not available on macOS. The alternative is `sysctl -n hw.ncpu` ([relevant Stack Overflow thread](https://stackoverflow.com/questions/1715580)).
 
-## Compare ROM to the original
-
-For contributing, or if you'd simply like to verify that your ROM is identical to the original game, run:
-```bash
-make compare
-```
-If it matches, you will see the following at the end of the output:
-```bash
-pokeemerald.gba: OK
-```
-If there are any changes from the original game, you will instead see:
-```bash
-pokeemerald.gba: FAILED
-shasum: WARNING: 1 computed checksum did NOT match
-```
-
-## devkitARM's C compiler
-
-This project supports the `arm-none-eabi-gcc` compiler included with devkitARM. If devkitARM (a.k.a. gba-dev) has already been installed as part of the platform-specific instructions, simply run:
-```bash
-make modern
-```
-Otherwise, follow the instructions below to install devkitARM.
-### Installing devkitARM on WSL1
-
-1. `gdebi-core` must be installed beforehand in order to install devkitPro pacman (which facilitates the installation of devkitARM). Install this with the following command:
-
-    ```bash
-    sudo apt install gdebi-core
-    ```
-    <details>
-        <summary><i>Note...</i></summary>
-
-    >   If the above command does not work, try the above command but replacing `apt` with `apt-get`.
-    </details>
-
-2. Once `gdebi-core` is done installing, download the devkitPro pacman package [here](https://github.com/devkitPro/pacman/releases). The file to download is `devkitpro-pacman.amd64.deb`.
-3. Change directory to where the package was downloaded. For example, if the package file was saved to **C:\Users\\_\<user>_\Downloads** (the Downloads location for most users), enter this command, where *\<user> is your **Windows** username:
-
-    ```bash
-    cd /mnt/c/Users/<user>/Downloads
-    ```
-
-4. Once the directory has been changed to the folder containing the devkitPro pacman package, run the following commands to install devkitARM.
-
-    ```bash
-    sudo gdebi devkitpro-pacman.amd64.deb
-    sudo dkp-pacman -Sy
-    sudo dkp-pacman -S gba-dev
-    ```
-    The last command will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation.
-
-    <details>
-        <summary><i>Note...</i></summary>
-
-    > Note: `devkitpro-pacman.amd64.deb` is the expected filename of the devkitPro package downloaded (for the first command). If the downloaded package filename differs, then use that filename instead.
-    </details>
-
-5. Run the following command to set devkitPro related environment variables (alternatively, close and re-open WSL):
-
-    ```bash
-    source /etc/profile.d/devkit-env.sh
-    ```
-
-devkitARM is now installed.
-
-### Installing devkitARM on Debian/Ubuntu-based distributions
-1. If `gdebi-core` is not installed, run the following command:
-
-    ```bash
-    sudo apt install gdebi-core
-    ```
-2. Download the devkitPro pacman package [here](https://github.com/devkitPro/pacman/releases). The file to download is `devkitpro-pacman.amd64.deb`.
-3. Change directory to where the package was downloaded. Then, run the following commands to install devkitARM:
-
-    ```bash
-    sudo gdebi devkitpro-pacman.amd64.deb
-    sudo dkp-pacman -Sy
-    sudo dkp-pacman -S gba-dev
-    ```
-    The last command will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation.
-
-    > Note: `devkitpro-pacman.amd64.deb` is the expected filename of the devkitPro package downloaded (for the first command). If the downloaded package filename differs, then use that filename instead.
-
-4. Run the following command to set devkitPro related environment variables (alternatively, close and re-open the Terminal):
-
-    ```bash
-    source /etc/profile.d/devkit-env.sh
-    ```
-
-devkitARM is now installed.
-
-### Installing devkitARM on Arch Linux
-
-1. Follow [devkitPro's instructions](https://devkitpro.org/wiki/devkitPro_pacman#Customising_Existing_Pacman_Install) to configure `pacman` to download devkitPro packages.
-2. Install `gba-dev`: run the following command as root.
-
-    ```console
-    pacman -S gba-dev
-    ```
-    This will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation.
-
-3. Run the following command to set devkitPro related environment variables (alternatively, close and re-open the Terminal):
-
-    ```bash
-    source /etc/profile.d/devkit-env.sh
-    ```
-
-devkitARM is now installed.
-
 ### Other toolchains
 
 To build using a toolchain other than devkitARM, override the `TOOLCHAIN` environment variable with the path to your toolchain, which must contain the subdirectory `bin`.
@@ -606,13 +516,61 @@ make TOOLCHAIN="/usr/local/arm-none-eabi"
 ```
 To compile the `modern` target with this toolchain, the subdirectories `lib`, `include`, and `arm-none-eabi` must also be present.
 
-### Building with debug info under a modern toolchain
+### Building with debug info
 
 To build **pokeemerald.elf** with debug symbols under a modern toolchain:
 ```bash
-make modern DINFO=1
+make DINFO=1
 ```
-Note that this is not necessary for a non-modern build since those are built with debug symbols by default.
+Note that this is not necessary for a non-modern (agbcc) build since those are built with debug symbols by default.
+
+### agbcc
+
+<details>
+    <summary><i>Deprecated; installing agbcc is optional since 1.7.0</i>.</summary>
+2. Install agbcc into pokeemerald-expansion. The commands to run depend on certain conditions. **You should only follow one of the listed instructions**:
+- If agbcc has **not been built before** in the folder where you chose to store pokeemerald Expansion, run the following commands to build and install it into pokeemerald-expansion:
+
+    ```bash
+    git clone https://github.com/pret/agbcc
+    cd agbcc
+    ./build.sh
+    ./install.sh ../pokeemerald-expansion
+    ```
+
+- **Otherwise**, if agbcc has been built before (e.g. if the git clone above fails), but was **last built on a different terminal** than the one currently used (only relevant to Windows, e.g. switching from msys2 to WSL1), then run the following commands to build and install it into pokeemerald-expansion:
+
+    ```bash
+    cd agbcc
+    git clean -fX
+    ./build.sh
+    ./install.sh ../pokeemerald-expansion
+    ```
+
+- **Otherwise**, if agbcc has been built before on the same terminal, run the following commands to install agbcc into pokeemerald-expansion:
+
+    ```bash
+    cd agbcc
+    ./install.sh ../pokeemerald-expansion
+    ```
+
+    <details>
+        <summary><i>Note...</i></summary>
+
+        > If building agbcc or pokeemerald results in an error, try deleting the agbcc folder and re-installing agbcc as if it has not been built before.
+    </details>
+
+3. Once agbcc is installed, change directory back to the base directory where pokeemerald-expansion and agbcc are stored:
+
+    ```bash
+    cd ..
+    ```
+    
+4. To compile with agbcc:
+
+    ```make agbcc```
+
+</details>
 
 # Useful additional tools
 

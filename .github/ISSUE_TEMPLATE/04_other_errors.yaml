@@ -23,8 +23,10 @@ body:
       label: Version
       description: What version of pokeemerald-expansion are you using as a base?
       options:
-        - 1.7.1 (Default)
+        - 1.7.2 (Latest release)
+        - master (default when pulling, unreleased bugfixes)
         - upcoming (Edge)
+        - 1.7.1
         - 1.7.0
         - 1.6.2
         - 1.6.1
@@ -35,8 +37,8 @@ body:
   - type: input
     id: upcomingversion
     attributes:
-      label: Upcoming Version
-      description: If you're using the upcoming branch, please specify what was the commit hash you pulled from.
+      label: Upcoming/master Version
+      description: If you're using the upcoming or master branches directly, please specify what was the commit hash you pulled from.
     validations:
       required: false
   - type: input
