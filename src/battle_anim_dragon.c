@@ -12,6 +12,7 @@ static void UpdateDragonDanceScanlineEffect(struct Task *);
 static void AnimDragonRushStep(struct Sprite *sprite);
 static void AnimSpinningDracoMeteor(struct Sprite *sprite);
 static void AnimSpinningDracoMeteorFinish(struct Sprite *sprite);
+static void AnimDracoMeteorRock_Step(struct Sprite *sprite);
 
 EWRAM_DATA static u16 sUnusedOverheatData[7] = {0};
 
@@ -183,6 +184,30 @@ const struct SpriteTemplate gOverheatFlameSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimOverheatFlame,
+};
+
+// Draco Meteor Rocks
+const struct SpriteTemplate gDracoMeteorRocksSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_ROCKS,
+    .paletteTag = ANIM_TAG_FAIRY_LOCK_CHAINS,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimDracoMeteorRock,
+};
+
+// Draco Meteor Tail
+const struct SpriteTemplate gDracoMeteorTailSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_WATER_GUN,
+    .paletteTag = ANIM_TAG_WATER_GUN,
+    .oam = &gOamData_AffineDouble_ObjBlend_16x16,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sSpriteAffineAnimTable_HydroCannonBall,
+    .callback = AnimDracoMeteorRock,
 };
 
 const union AnimCmd gDragonRushAnimCmds[] =
@@ -565,4 +590,40 @@ static void AnimOverheatFlame_Step(struct Sprite *sprite)
     sprite->y2 = sprite->data[5] / 10;
     if (++sprite->data[0] > sprite->data[3])
         DestroyAnimSprite(sprite);
+}
+
+void AnimDracoMeteorRock(struct Sprite *sprite)
+{
+	if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
+	{
+		sprite->data[0] = sprite->x - gBattleAnimArgs[0];
+		sprite->data[2] = sprite->x - gBattleAnimArgs[2];
+	}
+	else
+	{
+		sprite->data[0] = sprite->x + gBattleAnimArgs[0];
+		sprite->data[2] = sprite->x + gBattleAnimArgs[2];
+	}
+
+	sprite->data[1] = sprite->y + gBattleAnimArgs[1];
+	sprite->data[3] = sprite->y + gBattleAnimArgs[3];
+	sprite->data[4] = gBattleAnimArgs[4];
+
+	sprite->data[6] = gBattleAnimArgs[2];
+	sprite->data[7] = gBattleAnimArgs[3];
+
+	sprite->x = sprite->data[0];
+	sprite->y = sprite->data[1];
+	sprite->callback = AnimDracoMeteorRock_Step;
+}
+
+static void AnimDracoMeteorRock_Step(struct Sprite *sprite)
+{
+	sprite->x2 = ((sprite->data[2] - sprite->data[0]) * sprite->data[5]) / sprite->data[4];
+	sprite->y2 = ((sprite->data[3] - sprite->data[1]) * sprite->data[5]) / sprite->data[4];
+
+	if (sprite->data[5] == sprite->data[4])
+		DestroyAnimSprite(sprite);
+
+	sprite->data[5]++;
 }

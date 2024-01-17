@@ -174,6 +174,17 @@ const struct SpriteTemplate gIceCrystalSpiralInwardSmall =
     .callback = AnimIcePunchSwirlingParticle,
 };
 
+const struct SpriteTemplate gIceCrystalSpinSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_ICE_CRYSTALS,
+    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
+    .oam = &gOamData_AffineDouble_ObjBlend_8x16,
+    .anims = gAnims_IceCrystalLarge,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimParticleInVortex,
+};
+
 static const union AffineAnimCmd sAffineAnim_IceBeamInnerCrystal[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 10, 1),
