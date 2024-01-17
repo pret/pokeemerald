@@ -241,23 +241,30 @@ static void SetFontsPointer(const struct FontInfo *fonts)
     gFonts = fonts;
 }
 
-void * MirrorPtr(const void *ptr) {
-    if (((u32)ptr) >> 27) // ROM
+// Any ROM address must have bit 27 set (0x8000000)
+// so this is used to check if a pointer points to ROM
+#define IS_ROM_PTR(ptr) (((u32)ptr) >> 27)
+
+void * MirrorPtr(const void *ptr)
+{
+    if (IS_ROM_PTR(ptr)) // ROM
         return ROM_MIRROR_PTR(ptr);
     else // RAM
         return RAM_MIRROR_PTR(ptr);
 }
 
-void * UnmirrorPtr(const void *ptr) {
+void * UnmirrorPtr(const void *ptr)
+{
     u32 value = (u32) ptr;
-    if (value >> 27) // ROM
+    if (IS_ROM_PTR(ptr)) // ROM
         return (void*)(value & ~ROM_MIRROR_MASK);
     else // RAM
         return (void*)(value & ~RAM_MIRROR_MASK);
 }
 
-bool32 IsMirrorPtr(const void *ptr) {
-    if (((u32)ptr) >> 27)
+bool32 IsMirrorPtr(const void *ptr)
+{
+    if (IS_ROM_PTR(ptr))
         return ((u32)ptr) & ROM_MIRROR_MASK;
     else
         return ((u32)ptr) & RAM_MIRROR_MASK;
@@ -290,7 +297,8 @@ u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 
     return AddTextPrinter(&printerTemplate, speed, callback);
 }
 
-u16 AddTextPrinterFixedCaseParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16)) {
+u16 AddTextPrinterFixedCaseParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
+{
     return AddTextPrinterParameterized(windowId, fontId, MirrorPtr(str), x, y, speed, callback);
 }
 
@@ -307,16 +315,14 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
     sTempTextPrinter.textSpeed = speed;
     sTempTextPrinter.delayCounter = 0;
     sTempTextPrinter.scrollDistance = 0;
-    if (DECAP_ENABLED) {
-        if (DECAP_MIRRORING) {
-            // string address is mirrored; treat it as a fixed-case string
-            if (IsMirrorPtr(printerTemplate->currentChar)) {
-                sTempTextPrinter.lastChar = CHAR_FIXED_CASE;
-                // Techhnically, unmirroring isn't necessary;
-                // but older emulators may not support mirroring
-                // printerTemplate->currentChar = UnmirrorPtr(printerTemplate->currentChar);
-            }
-        }
+    if (DECAP_ENABLED)
+    {
+        // string address is mirrored; treat it as a fixed-case string
+        // Technically, unmirroring isn't necessary;
+        // but older emulators may not support mirroring
+        // printerTemplate->currentChar = UnmirrorPtr(printerTemplate->currentChar);
+        if (DECAP_MIRRORING && IsMirrorPtr(printerTemplate->currentChar))
+            sTempTextPrinter.lastChar = CHAR_FIXED_CASE;
         sTempTextPrinter.lastChar = 0;
     }
 
@@ -976,8 +982,8 @@ const u16 gLowercaseDiffTable[] = {
     [CHAR_SPACER]                           = 0,
     [CHAR_A ... CHAR_Z]                     = CHAR_a - CHAR_A,
     // é treated as uppercase so POKéDEX, POKéMON, etc. decapped
-    [CHAR_e_ACUTE]                          = 0x100,
-    [CHAR_SGL_QUOTE_RIGHT]                  = 0x100,
+    [CHAR_e_ACUTE]                          = 0 | MARK_UPPER_FLAG,
+    [CHAR_SGL_QUOTE_RIGHT]                  = 0 | MARK_UPPER_FLAG,
     // International
     [CHAR_A_GRAVE ... CHAR_A_ACUTE]         = CHAR_a_GRAVE - CHAR_A_GRAVE,
     [CHAR_A_CIRCUMFLEX]                     = CHAR_a_CIRCUMFLEX,
@@ -1020,7 +1026,8 @@ static u16 RenderText(struct TextPrinter *textPrinter)
 
         currChar = *textPrinter->printerTemplate.currentChar;
         textPrinter->printerTemplate.currentChar++;
-        if (DECAP_ENABLED) {
+        if (DECAP_ENABLED)
+        {
             lastChar = textPrinter->lastChar;
             if (lastChar != CHAR_FIXED_CASE)
                 textPrinter->lastChar = currChar;
@@ -1184,7 +1191,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
                 // Clear fixed case
                 textPrinter->lastChar = currChar;
             return RENDER_FINISH;
-        #if DECAP_ENABLED
+    #if DECAP_ENABLED
         // Disable/enable decapitalization
         // In vanilla these are 1-2 pixel spaces
         case CHAR_FIXED_CASE:
@@ -1212,14 +1219,15 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             if (lastChar == CHAR_P) // PC, PP, PM
                 lastChar = 0;
             break;
+    #endif
         }
 
         // If not Japanese or fixed case, try to decap
-        if (!textPrinter->japanese && lastChar != CHAR_FIXED_CASE) {
+        if (DECAP_ENABLED && !textPrinter->japanese && lastChar != CHAR_FIXED_CASE)
+        {
             // Two consecutive uppercase chars; lowercase this one
             if (IS_UPPER(currChar) && IS_UPPER(lastChar))
                 currChar = TO_LOWER(currChar);
-        #endif
         }
 
         switch (subStruct->fontId)

@@ -1186,12 +1186,12 @@ static s32 TryMessage(s32 i, s32 n, const u8 *string)
                 if (string[j] == CHAR_PROMPT_CLEAR)
                     j++;
             }
-            if (DECAP_ENABLED) {
-                // ignore case-fixing characters in string
-                if (string[j] == CHAR_FIXED_CASE || string[j] == CHAR_UNFIX_CASE) {
-                    k--; // will be incremented in 'continue'
-                    continue;
-                }
+            if (DECAP_ENABLED && (string[j] == CHAR_FIXED_CASE || string[j] == CHAR_UNFIX_CASE))
+            {
+                // Ignores case-fixing characters in string
+                // k will be incremented in 'continue'
+                k--;
+                continue;
             }
             if (string[j] != event->pattern[k])
             {

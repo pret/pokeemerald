@@ -7,40 +7,13 @@
 // loaded at once but not copied to vram yet.
 #define TEXT_SKIP_DRAW 0xFF
 
-/*
-Enable automatic decapitalization of *all* text
-Exceptions:
-- Several bigrams: TV, TM, HP, HM, PC, PP, PM
-- Player names, nicknames, box names
-- Strings beginning with {FIXED_CASE}:
-  - C strings that use `_C` or `__C`
-  - ASM strings that use `.fixstr`
-- If mirroring enabled, string addresses passed through MirrorPtr
-*/
-#define DECAP_ENABLED TRUE
-// Enables signaling that a string's case should be preserved
-// by *mirroring* its address: i.e 08xxxxxx to 0Axxxxxx
-#define DECAP_MIRRORING TRUE
+// See include/config/decap.h for decap configuration
 #if DECAP_MIRRORING
 #define ROM_MIRROR_MASK (0x02000000)
 #define RAM_MIRROR_MASK (0x00800000)
 #define ROM_MIRROR_PTR(x) ((void*)(((u32)(x)) | ROM_MIRROR_MASK))
 #define RAM_MIRROR_PTR(x) ((void*)(((u32)(x)) | RAM_MIRROR_MASK))
 #endif
-
-// If TRUE, *all* Pokemon nicknames and player names will be decapitalized.
-// Otherwise, their case will be preserved. Default FALSE
-#define DECAP_NICKNAMES     FALSE
-
-#define DECAP_MAIN_MENU     TRUE // main menu options
-#define DECAP_OPTION_MENU   TRUE // Option menu texts
-#define DECAP_START_MENU    TRUE // Start menu options/save menu text
-#define DECAP_PARTY_MENU    TRUE  // Party menu texts
-#define DECAP_MAP_NAMES     TRUE // Map/location names
-#define DECAP_EASY_CHAT     TRUE // Both words and interface
-#define DECAP_FIELD_MSG     TRUE // Field messages (including scripts!)
-#define DECAP_SUMMARY       TRUE // Summary interface
-#define DECAP_ITEM_NAMES    TRUE // Via ItemId_GetName
 
 enum {
     FONT_SMALL,
@@ -172,8 +145,12 @@ extern u8 gDisableTextPrinters;
 extern struct TextGlyph gCurGlyph;
 
 extern const u16 gLowercaseDiffTable[];
-#define IS_UPPER(x) (gLowercaseDiffTable[(x) & 0xFF])
-#define TO_LOWER(x) (((x) + gLowercaseDiffTable[(x)]) & 0xFF)
+// in gLowercaseDiffTable, 0x100 represents a character treated as uppercase,
+// but that maps to itself; only the lower 8 bits are used for mapping
+#define MARK_UPPER_FLAG 0x100
+#define LOWERCASE_DIFF_MASK 0xFF
+#define IS_UPPER(x) (gLowercaseDiffTable[(x) & LOWERCASE_DIFF_MASK])
+#define TO_LOWER(x) (((x) + gLowercaseDiffTable[(x)]) & LOWERCASE_DIFF_MASK)
 
 void * UnmirrorPtr(const void * ptr);
 void * MirrorPtr(const void * ptr);
