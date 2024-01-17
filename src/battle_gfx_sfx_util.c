@@ -25,6 +25,8 @@
 #include "constants/songs.h"
 #include "constants/rgb.h"
 #include "constants/battle_palace.h"
+#include "constants/battle_move_effects.h"
+
 
 extern const u8 gBattlePalaceNatureToMoveTarget[];
 extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
@@ -1000,7 +1002,7 @@ void LoadBattleMonGfxAndAnimate(u8 battler, bool8 loadMonSprite, u8 spriteId)
 
 void TrySetBehindSubstituteSpriteBit(u8 battler, u16 move)
 {
-    if (move == MOVE_SUBSTITUTE)
+    if (gBattleMoves[move].effect == EFFECT_SUBSTITUTE || gBattleMoves[move].effect == EFFECT_SHED_TAIL)
         gBattleSpritesDataPtr->battlerData[battler].behindSubstitute = 1;
 }
 
