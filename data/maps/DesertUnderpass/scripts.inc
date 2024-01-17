@@ -18,12 +18,14 @@ DesertUnderpass_EventScript_Fossil::
 
 DesertUnderpass_EventScript_GiveClawFossil::
 	giveitem ITEM_CLAW_FOSSIL
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	removeobject LOCALID_FOSSIL
 	release
 	end
 
 DesertUnderpass_EventScript_GiveRootFossil::
 	giveitem ITEM_ROOT_FOSSIL
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	removeobject LOCALID_FOSSIL
 	release
 	end
