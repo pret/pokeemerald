@@ -75,8 +75,8 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "VictoryRoad_1F_EventScript_ItemMaxElixir",
+      "trainer_sight_or_berry_tree_id": "ITEM_MAX_ELIXIR",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_VICTORY_ROAD_1F_MAX_ELIXIR"
     },
     {
@@ -88,8 +88,8 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "VictoryRoad_1F_EventScript_ItemPPUp",
+      "trainer_sight_or_berry_tree_id": "ITEM_PP_UP",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_VICTORY_ROAD_1F_PP_UP"
     },
     {

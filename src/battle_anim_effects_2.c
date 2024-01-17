@@ -15,6 +15,7 @@
 #include "util.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "constants/moves.h"
 
 static void AnimCirclingFinger(struct Sprite *);
 static void AnimBouncingMusicNote(struct Sprite *);
@@ -1703,7 +1704,7 @@ void AnimTask_AirCutterProjectile(u8 taskId)
     }
     else
     {
-        if (GET_BATTLER_SIDE2(gBattleAnimTarget) == B_SIDE_PLAYER)
+        if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
         {
             gTasks[taskId].data[4] = 1;
             gBattleAnimArgs[0] = -gBattleAnimArgs[0];
@@ -2587,8 +2588,8 @@ static void AnimPencil_Step(struct Sprite *sprite)
 static void AnimBlendThinRing(struct Sprite *sprite)
 {
     u8 battler = 0;
-    u16 sp0 = 0;
-    u16 sp1 = 0;
+    s16 x = 0;
+    s16 y = 0;
     u8 r4;
 
     if (gBattleAnimArgs[2] == 0)
@@ -2599,16 +2600,16 @@ static void AnimBlendThinRing(struct Sprite *sprite)
     r4 = gBattleAnimArgs[3] ^ 1;
     if (IsDoubleBattle() && IsBattlerSpriteVisible(BATTLE_PARTNER(battler)))
     {
-        SetAverageBattlerPositions(battler, r4, &sp0, &sp1);
+        SetAverageBattlerPositions(battler, r4, &x, &y);
         if (r4 == 0)
             r4 = GetBattlerSpriteCoord(battler, BATTLER_COORD_X);
         else
             r4 = GetBattlerSpriteCoord(battler, BATTLER_COORD_X_2);
 
         if (GetBattlerSide(battler) != B_SIDE_PLAYER)
-            gBattleAnimArgs[0] -= (sp0 - r4) - gBattleAnimArgs[0];  // This is weird.
+            gBattleAnimArgs[0] -= (x - r4) - gBattleAnimArgs[0];  // This is weird.
         else
-            gBattleAnimArgs[0] = sp0 - r4;
+            gBattleAnimArgs[0] = x - r4;
     }
 
     sprite->callback = AnimSpriteOnMonPos;
@@ -3150,7 +3151,7 @@ static void AnimTask_FakeOut_Step2(u8 taskId)
     {
         gTasks[taskId].data[11] = 0x88;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG3 | BLDCNT_EFFECT_LIGHTEN);
-        BlendPalettes(GetBattlePalettesMask(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE), 16, RGB(31, 31, 31));
+        BlendPalettes(GetBattlePalettesMask(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE), 16, RGB_WHITE);
     }
     else if (gTasks[taskId].data[10] > 4)
     {
@@ -3358,6 +3359,12 @@ static void AnimTask_HeartsBackground_Step(u8 taskId)
 void AnimTask_ScaryFace(u8 taskId)
 {
     struct BattleAnimBgData animBg;
+    bool32 onPlayer;
+
+    if (gAnimMoveIndex == MOVE_BITTER_MALICE)
+        onPlayer = GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER;
+    else
+        onPlayer = GetBattlerSide(gBattleAnimTarget) == B_SIDE_OPPONENT;
 
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
@@ -3373,7 +3380,7 @@ void AnimTask_ScaryFace(u8 taskId)
     GetBattleAnimBg1Data(&animBg);
     if (IsContest())
         AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimBgTilemap_ScaryFaceContest, FALSE);
-    else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_OPPONENT)
+    else if (onPlayer)
         AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimBgTilemap_ScaryFacePlayer, FALSE);
     else
         AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimBgTilemap_ScaryFaceOpponent, FALSE);

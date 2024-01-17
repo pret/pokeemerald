@@ -164,8 +164,8 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_EventScript_ItemMaxRepel",
+      "trainer_sight_or_berry_tree_id": "ITEM_MAX_REPEL",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_LILYCOVE_CITY_MAX_REPEL"
     },
     {

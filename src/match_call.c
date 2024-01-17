@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "battle_setup.h"
 #include "bg.h"
+#include "birch_pc.h"
 #include "data.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -1777,7 +1778,7 @@ static void PopulateSpeciesFromTrainerLocation(int matchCallId, u8 *destStr)
 
             if (numSpecies)
             {
-                StringCopy(destStr, gSpeciesNames[species[Random() % numSpecies]]);
+                StringCopy(destStr, GetSpeciesName(species[Random() % numSpecies]));
                 return;
             }
         }
@@ -1789,33 +1790,14 @@ static void PopulateSpeciesFromTrainerLocation(int matchCallId, u8 *destStr)
 static void PopulateSpeciesFromTrainerParty(int matchCallId, u8 *destStr)
 {
     u16 trainerId;
-    union TrainerMonPtr party;
+    const struct TrainerMon *party;
     u8 monId;
     const u8 *speciesName;
 
     trainerId = GetLastBeatenRematchTrainerId(sMatchCallTrainers[matchCallId].trainerId);
     party = gTrainers[trainerId].party;
     monId = Random() % gTrainers[trainerId].partySize;
-
-    switch (gTrainers[trainerId].partyFlags)
-    {
-    case 0:
-    default:
-        speciesName = gSpeciesNames[party.NoItemDefaultMoves[monId].species];
-        break;
-    case F_TRAINER_PARTY_CUSTOM_MOVESET:
-        speciesName = gSpeciesNames[party.NoItemCustomMoves[monId].species];
-        break;
-    case F_TRAINER_PARTY_HELD_ITEM:
-        speciesName = gSpeciesNames[party.ItemDefaultMoves[monId].species];
-        break;
-    case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
-        speciesName = gSpeciesNames[party.ItemCustomMoves[monId].species];
-        break;
-    case F_TRAINER_PARTY_EVERYTHING_CUSTOMIZED:
-        speciesName = gSpeciesNames[party.EverythingCustomized[monId].species];
-        break;
-    }
+    speciesName = GetSpeciesName(party[monId].species);
 
     StringCopy(destStr, speciesName);
 }
@@ -1984,90 +1966,10 @@ static u16 GetFrontierStreakInfo(u16 facilityId, u32 *topicTextId)
     return streak;
 }
 
-static u8 GetPokedexRatingLevel(u16 numSeen)
-{
-    if (numSeen < 10)
-        return 0;
-    if (numSeen < 20)
-        return 1;
-    if (numSeen < 30)
-        return 2;
-    if (numSeen < 40)
-        return 3;
-    if (numSeen < 50)
-        return 4;
-    if (numSeen < 60)
-        return 5;
-    if (numSeen < 70)
-        return 6;
-    if (numSeen < 80)
-        return 7;
-    if (numSeen < 90)
-        return 8;
-    if (numSeen < 100)
-        return 9;
-    if (numSeen < 110)
-        return 10;
-    if (numSeen < 120)
-        return 11;
-    if (numSeen < 130)
-        return 12;
-    if (numSeen < 140)
-        return 13;
-    if (numSeen < 150)
-        return 14;
-    if (numSeen < 160)
-        return 15;
-    if (numSeen < 170)
-        return 16;
-    if (numSeen < 180)
-        return 17;
-    if (numSeen < 190)
-        return 18;
-    if (numSeen < 200)
-        return 19;
-
-    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_DEOXYS), FLAG_GET_CAUGHT))
-        numSeen--;
-    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_JIRACHI), FLAG_GET_CAUGHT))
-        numSeen--;
-
-    if (numSeen < 200)
-        return 19;
-    else
-        return 20;
-}
-
-static const u8 *const sBirchDexRatingTexts[] =
-{
-    gBirchDexRatingText_LessThan10,
-    gBirchDexRatingText_LessThan20,
-    gBirchDexRatingText_LessThan30,
-    gBirchDexRatingText_LessThan40,
-    gBirchDexRatingText_LessThan50,
-    gBirchDexRatingText_LessThan60,
-    gBirchDexRatingText_LessThan70,
-    gBirchDexRatingText_LessThan80,
-    gBirchDexRatingText_LessThan90,
-    gBirchDexRatingText_LessThan100,
-    gBirchDexRatingText_LessThan110,
-    gBirchDexRatingText_LessThan120,
-    gBirchDexRatingText_LessThan130,
-    gBirchDexRatingText_LessThan140,
-    gBirchDexRatingText_LessThan150,
-    gBirchDexRatingText_LessThan160,
-    gBirchDexRatingText_LessThan170,
-    gBirchDexRatingText_LessThan180,
-    gBirchDexRatingText_LessThan190,
-    gBirchDexRatingText_LessThan200,
-    gBirchDexRatingText_DexCompleted,
-};
-
 void BufferPokedexRatingForMatchCall(u8 *destStr)
 {
     int numSeen, numCaught;
     u8 *str;
-    u8 dexRatingLevel;
 
     u8 *buffer = Alloc(sizeof(gStringVar4));
     if (!buffer)
@@ -2080,12 +1982,11 @@ void BufferPokedexRatingForMatchCall(u8 *destStr)
     numCaught = GetHoennPokedexCount(FLAG_GET_CAUGHT);
     ConvertIntToDecimalStringN(gStringVar1, numSeen, STR_CONV_MODE_LEFT_ALIGN, 3);
     ConvertIntToDecimalStringN(gStringVar2, numCaught, STR_CONV_MODE_LEFT_ALIGN, 3);
-    dexRatingLevel = GetPokedexRatingLevel(numCaught);
     str = StringCopy(buffer, gBirchDexRatingText_AreYouCurious);
     *(str++) = CHAR_PROMPT_CLEAR;
     str = StringCopy(str, gBirchDexRatingText_SoYouveSeenAndCaught);
     *(str++) = CHAR_PROMPT_CLEAR;
-    StringCopy(str, sBirchDexRatingTexts[dexRatingLevel]);
+    StringCopy(str, GetPokedexRatingText(numCaught));
     str = StringExpandPlaceholders(destStr, buffer);
 
     if (IsNationalPokedexEnabled())
@@ -2093,8 +1994,8 @@ void BufferPokedexRatingForMatchCall(u8 *destStr)
         *(str++) = CHAR_PROMPT_CLEAR;
         numSeen = GetNationalPokedexCount(FLAG_GET_SEEN);
         numCaught = GetNationalPokedexCount(FLAG_GET_CAUGHT);
-        ConvertIntToDecimalStringN(gStringVar1, numSeen, STR_CONV_MODE_LEFT_ALIGN, 3);
-        ConvertIntToDecimalStringN(gStringVar2, numCaught, STR_CONV_MODE_LEFT_ALIGN, 3);
+        ConvertIntToDecimalStringN(gStringVar1, numSeen, STR_CONV_MODE_LEFT_ALIGN, 4);
+        ConvertIntToDecimalStringN(gStringVar2, numCaught, STR_CONV_MODE_LEFT_ALIGN, 4);
         StringExpandPlaceholders(str, gBirchDexRatingText_OnANationwideBasis);
     }
 

@@ -2,6 +2,7 @@
 #define GUARD_RECORDED_BATTLE_H
 
 #include "constants/battle.h"
+#include "random.h"
 
 #define BATTLER_RECORD_SIZE 664
 
@@ -13,7 +14,7 @@ struct RecordedBattleSave
     u8 playersGender[MAX_BATTLERS_COUNT];
     u32 playersTrainerId[MAX_BATTLERS_COUNT];
     u8 playersLanguage[MAX_BATTLERS_COUNT];
-    u32 rngSeed;
+    rng_value_t rngSeed;
     u32 battleFlags;
     u8 playersBattlers[MAX_BATTLERS_COUNT];
     u16 opponentA;
@@ -49,8 +50,8 @@ enum
     RECORDED_ITEM_MOVE,
 };
 
-extern u32 gRecordedBattleRngSeed;
-extern u32 gBattlePalaceMoveSelectionRngValue;
+extern rng_value_t gRecordedBattleRngSeed;
+extern rng_value_t gBattlePalaceMoveSelectionRngValue;
 extern u8 gRecordedBattleMultiplayerId;
 
 #define B_RECORD_MODE_RECORDING 1
@@ -65,18 +66,19 @@ u8 RecordedBattle_BufferNewBattlerData(u8 *dst);
 void RecordedBattle_RecordAllBattlerData(u8 *data);
 bool32 CanCopyRecordedBattleSaveData(void);
 bool32 MoveRecordedBattleToSaveData(void);
+void SetPartiesFromRecordedSave(struct RecordedBattleSave *src);
 void SetVariablesForRecordedBattle(struct RecordedBattleSave *);
 void PlayRecordedBattle(void (*CB2_After)(void));
 u8 GetRecordedBattleFrontierFacility(void);
 u8 GetRecordedBattleFronterBrainSymbol(void);
 void RecordedBattle_SaveParties(void);
-u8 GetActiveBattlerLinkPlayerGender(void);
+u8 GetBattlerLinkPlayerGender(u32 battler);
 void RecordedBattle_ClearFrontierPassFlag(void);
 void RecordedBattle_SetFrontierPassFlagFromHword(u16 flags);
 u8 RecordedBattle_GetFrontierPassFlag(void);
 u8 GetBattleSceneInRecordedBattle(void);
 u8 GetTextSpeedInRecordedBattle(void);
-void RecordedBattle_CopyBattlerMoves(void);
+void RecordedBattle_CopyBattlerMoves(u32 battler);
 void RecordedBattle_CheckMovesetChanges(u8 mode);
 u32 GetAiScriptsInRecordedBattle(void);
 void RecordedBattle_SetPlaybackFinished(void);

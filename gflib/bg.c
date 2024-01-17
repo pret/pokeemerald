@@ -377,6 +377,9 @@ u16 LoadBgTiles(u8 bg, const void *src, u16 size, u16 destOffset)
     u16 tileOffset;
     u8 cursor;
 
+    if (bg > 3)
+        return -1;
+
     if (GetBgControlAttribute(bg, BG_CTRL_ATTR_PALETTEMODE) == 0)
     {
         tileOffset = (sGpuBgConfigs2[bg].baseTile + destOffset) * 0x20;
@@ -421,13 +424,11 @@ u16 Unused_LoadBgPalette(u8 bg, const void *src, u16 size, u16 destOffset)
 
     if (!IsInvalidBg32(bg))
     {
-        u16 paletteOffset = (sGpuBgConfigs2[bg].basePalette * 0x20) + (destOffset * 2);
+        u16 paletteOffset = PLTT_OFFSET_4BPP(sGpuBgConfigs2[bg].basePalette) + (destOffset * 2);
         cursor = RequestDma3Copy(src, (void *)(paletteOffset + BG_PLTT), size, 0);
 
         if (cursor == -1)
-        {
             return -1;
-        }
     }
     else
     {

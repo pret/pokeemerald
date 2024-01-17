@@ -524,7 +524,7 @@ extern const u8 gText_Speed[];
 extern const u8 gText_Dash[];
 extern const u8 gText_Plus[];
 
-//pokedex text
+//Pokédex text
 extern const u8 gText_CryOf[];
 extern const u8 gText_SizeComparedTo[];
 extern const u8 gText_PokedexRegistration[];
@@ -944,6 +944,7 @@ extern const u8 gText_UsedVar2WildLured[];
 extern const u8 gText_UsedVar2WildRepelled[];
 extern const u8 gText_BoxFull[];
 extern const u8 gText_WontHaveEffect[];
+extern const u8 gText_NextFusionMon[];
 
 extern const u8 gText_LevelSymbol[];
 extern const u8 gText_PkmnInfo[];
@@ -1129,7 +1130,7 @@ extern const u8 gTrickHouse_Mechadoll_Six2[];
 extern const u8 gTrickHouse_Mechadoll_Seven2[];
 extern const u8 gTrickHouse_Mechadoll_Eight2[];
 
-// Pokedex strings
+// Pokédex strings
 extern const u8 gText_SearchForPkmnBasedOnParameters[];
 extern const u8 gText_SwitchPokedexListings[];
 extern const u8 gText_ReturnToPokedex[];
@@ -1318,6 +1319,19 @@ extern const u8 CableClub_Text_YouMayTradeHere[];
 extern const u8 CableClub_Text_YouMayBattleHere[];
 extern const u8 CableClub_Text_CanMixRecords[];
 extern const u8 CableClub_Text_CanMakeBerryPowder[];
+
+// Rotom Catalog text
+extern const u8 gText_LightBulb[];
+extern const u8 gText_MicrowaveOven[];
+extern const u8 gText_WashingMachine[];
+extern const u8 gText_Refrigerator[];
+extern const u8 gText_ElectricFan[];
+extern const u8 gText_LawnMower[];
+extern const u8 gText_Exit[];
+
+// Zygarde Cube text
+extern const u8 gText_ChangeForm[];
+extern const u8 gText_ChangeAbility[];
 
 // Frontier records.
 extern const u8 gText_WinStreak[];
@@ -2130,6 +2144,7 @@ extern const u8 gText_BoostPp[];
 extern const u8 gText_DoWhatWithItem[];
 extern const u8 gText_DoWhatWithMail[];
 extern const u8 gText_AlreadyHoldingOne[];
+extern const u8 gText_WhichAppliance[];
 extern const u8 gText_NoUse[];
 extern const u8 gText_Able[];
 extern const u8 gText_First_PM[];
@@ -2882,7 +2897,7 @@ extern const u8 gText_WantToPlayAgain[];
 extern const u8 gText_CommunicationStandby3[];
 extern const u8 gText_SomeoneDroppedOut[];
 
-// Pokemon jump
+// Pokémon jump
 extern const u8 gText_WantToPlayAgain2[];
 extern const u8 gText_SomeoneDroppedOut2[];
 extern const u8 gText_CommunicationStandby4[];
@@ -2957,7 +2972,7 @@ extern const u8 gText_CutenessContest[];
 extern const u8 gText_SmartnessContest[];
 extern const u8 gText_ToughnessContest[];
 
-// Pokenav Match Call
+// PokéNav Match Call
 extern const u8 gText_CallCantBeMadeHere[];
 extern const u8 gText_NumberRegistered[];
 extern const u8 gText_NumberOfBattles[];
@@ -2967,7 +2982,7 @@ extern const u8 gText_Call[];
 extern const u8 gText_Check[];
 extern const u8 gText_Cancel6[];
 
-// Pokenav Menu Handler
+// PokéNav Menu Handler
 extern const u8 gText_CheckMapOfHoenn[];
 extern const u8 gText_CheckPokemonInDetail[];
 extern const u8 gText_CallRegisteredTrainer[];
@@ -2984,7 +2999,7 @@ extern const u8 gText_FindToughPokemon[];
 extern const u8 gText_ReturnToConditionMenu[];
 extern const u8 gText_NoRibbonWinners[];
 
-// Pokenav
+// PokéNav
 extern const u8 gText_NumberIndex[];
 extern const u8 gText_RibbonsF700[];
 
@@ -3033,5 +3048,14 @@ extern const u8 gText_YourName[];
 extern const u8 gText_BoxName[];
 extern const u8 gText_PkmnsNickname[];
 extern const u8 gText_TellHimTheWords[];
+
+// Exp. Share
+extern const u8 gText_ExpShareOn[];
+extern const u8 gText_ExpShareOff[];
+
+extern const u8 gText_BasePointsResetToZero[];
+
+extern const u8 gText_Fertilize[];
+extern const u8 gText_PlantBerry[];
 
 #endif // GUARD_STRINGS_H

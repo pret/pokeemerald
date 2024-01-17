@@ -1,3 +1,4 @@
+#include "config.h"
 #include "config/battle.h"
 #include "config/item.h"
 #include "constants/global.h"
@@ -947,6 +948,10 @@ gText_PlayerFoundOneTMHM::
 	.string "{PLAYER} found one {STR_VAR_1}\n"
 	.string "{STR_VAR_2}!$"
 
+gText_PlayerFoundTMHMs::
+	.string "{PLAYER} found {STR_VAR_3} {STR_VAR_1}\n"
+	.string "{STR_VAR_2}!$"
+
 gText_Sudowoodo_Attacked::
 	.string "The weird tree doesn't like the\n"
 	.string "WAILMER PAIL!\p"
@@ -1003,6 +1008,13 @@ Common_EventScript_LegendaryFlewAway::
 	bufferspeciesname STR_VAR_1, VAR_0x8004
 	msgbox gText_LegendaryFlewAway, MSGBOX_DEFAULT
 	release
+	end
+
+EventScript_VsSeekerChargingDone::
+	special VsSeekerFreezeObjectsAfterChargeComplete
+	waitstate
+	special VsSeekerResetObjectMovementAfterChargeComplete
+	releaseall
 	end
 
 	.include "data/scripts/pc_transfer.inc"

@@ -195,8 +195,7 @@ static bool32 CheckSioErrored(u8 taskId)
     return FALSE;
 }
 
-// Unused
-static void Task_DelayedBlockRequest(u8 taskId)
+static void UNUSED Task_DelayedBlockRequest(u8 taskId)
 {
     gTasks[taskId].data[0]++;
     if (gTasks[taskId].data[0] == 10)
@@ -446,13 +445,13 @@ bool32 AreBattleTowerLinkSpeciesSame(u16 *speciesList1, u16 *speciesList2)
             {
                 if (numSameSpecies == 0)
                 {
-                    StringCopy(gStringVar1, gSpeciesNames[speciesList1[i]]);
+                    StringCopy(gStringVar1, GetSpeciesName(speciesList1[i]));
                     haveSameSpecies = TRUE;
                 }
 
                 if (numSameSpecies == 1)
                 {
-                    StringCopy(gStringVar2, gSpeciesNames[speciesList1[i]]);
+                    StringCopy(gStringVar2, GetSpeciesName(speciesList1[i]));
                     haveSameSpecies = TRUE;
                 }
 
@@ -725,7 +724,7 @@ void TryContestEModeLinkup(void)
 u8 CreateTask_ReestablishCableClubLink(void)
 {
     if (FuncIsActiveTask(Task_ReestablishLink) != FALSE)
-        return 0xFF;
+        return TASK_NONE;
 
     switch (gSpecialVar_0x8004)
     {
@@ -1166,14 +1165,13 @@ void PlayerEnteredTradeSeat(void)
         CreateTask_EnterCableClubSeat(Task_StartWiredTrade);
 }
 
-// Unused
-static void CreateTask_StartWiredTrade(void)
+static void UNUSED CreateTask_StartWiredTrade(void)
 {
     CreateTask(Task_StartWiredTrade, 80);
 }
 
-// Unused, implemented in Ruby/Sapphire
-void Script_StartWiredTrade(void)
+// Implemented in Ruby/Sapphire
+void UNUSED Script_StartWiredTrade(void)
 {
     // CreateTask_StartWiredTrade();
     // ScriptContext_Stop();
@@ -1189,10 +1187,9 @@ void ColosseumPlayerSpotTriggered(void)
         CreateTask_EnterCableClubSeat(Task_StartWiredCableClubBattle);
 }
 
-// Unused
-static void CreateTask_EnterCableClubSeatNoFollowup(void)
+static UNUSED void CreateTask_EnterCableClubSeatNoFollowup(void)
 {
-    u8 taskId = CreateTask(Task_EnterCableClubSeat, 80);
+    u8 UNUSED taskId = CreateTask(Task_EnterCableClubSeat, 80);
     ScriptContext_Stop();
 }
 
@@ -1262,8 +1259,7 @@ static void Task_WaitExitToScript(u8 taskId)
     }
 }
 
-// Unused
-static void ExitLinkToScript(u8 taskId)
+static void UNUSED ExitLinkToScript(u8 taskId)
 {
     SetCloseLinkCallback();
     gTasks[taskId].func = Task_WaitExitToScript;

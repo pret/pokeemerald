@@ -13,6 +13,7 @@
 #include "gba/flash_internal.h"
 #include "decoration_inventory.h"
 #include "agb_flash.h"
+#include "event_data.h"
 #include "constants/event_objects.h"
 
 static void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey);
@@ -127,7 +128,7 @@ void MoveSaveBlocks_ResetHeap(void)
     gMain.vblankCallback = vblankCB;
 
     // create a new encryption key
-    encryptionKey = (Random() << 16) + (Random());
+    encryptionKey = Random32();
     ApplyNewEncryptionKeyToAllEncryptedData(encryptionKey);
     gSaveBlock2Ptr->encryptionKey = encryptionKey;
 }
@@ -175,7 +176,17 @@ void LoadPlayerParty(void)
     gPlayerPartyCount = gSaveBlock1Ptr->playerPartyCount;
 
     for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u32 data;
         gPlayerParty[i] = gSaveBlock1Ptr->playerParty[i];
+
+        // TODO: Turn this into a save migration once those are available.
+        // At which point we can remove hp and status from Pokemon entirely.
+        data = gPlayerParty[i].maxHP - gPlayerParty[i].hp;
+        SetBoxMonData(&gPlayerParty[i].box, MON_DATA_HP_LOST, &data);
+        data = gPlayerParty[i].status;
+        SetBoxMonData(&gPlayerParty[i].box, MON_DATA_STATUS, &data);
+    }
 }
 
 void SaveObjectEvents(void)

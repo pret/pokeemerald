@@ -16,20 +16,20 @@ struct Time gLocalTime;
 
 static const struct SiiRtcInfo sRtcDummy = {0, MONTH_JAN, 1}; // 2000 Jan 1
 
-static const s32 sNumDaysInMonths[12] =
+static const s32 sNumDaysInMonths[MONTH_COUNT] =
 {
-    31,
-    28,
-    31,
-    30,
-    31,
-    30,
-    31,
-    31,
-    30,
-    31,
-    30,
-    31,
+    [MONTH_JAN - 1] = 31,
+    [MONTH_FEB - 1] = 28,
+    [MONTH_MAR - 1] = 31,
+    [MONTH_APR - 1] = 30,
+    [MONTH_MAY - 1] = 31,
+    [MONTH_JUN - 1] = 30,
+    [MONTH_JUL - 1] = 31,
+    [MONTH_AUG - 1] = 31,
+    [MONTH_SEP - 1] = 30,
+    [MONTH_OCT - 1] = 31,
+    [MONTH_NOV - 1] = 30,
+    [MONTH_DEC - 1] = 31,
 };
 
 void RtcDisableInterrupts(void)
@@ -171,7 +171,7 @@ u16 RtcCheckInfo(struct SiiRtcInfo *rtc)
 
     month = ConvertBcdToBinary(rtc->month);
 
-    if (month == 0xFF || month == 0 || month > 12)
+    if (month == 0xFF || month == 0 || month > MONTH_COUNT)
         errorFlags |= RTC_ERR_INVALID_MONTH;
 
     value = ConvertBcdToBinary(rtc->day);
@@ -192,17 +192,17 @@ u16 RtcCheckInfo(struct SiiRtcInfo *rtc)
 
     value = ConvertBcdToBinary(rtc->hour);
 
-    if (value > 24)
+    if (value > HOURS_PER_DAY)
         errorFlags |= RTC_ERR_INVALID_HOUR;
 
     value = ConvertBcdToBinary(rtc->minute);
 
-    if (value > 60)
+    if (value > MINUTES_PER_HOUR)
         errorFlags |= RTC_ERR_INVALID_MINUTE;
 
     value = ConvertBcdToBinary(rtc->second);
 
-    if (value > 60)
+    if (value > SECONDS_PER_MINUTE)
         errorFlags |= RTC_ERR_INVALID_SECOND;
 
     return errorFlags;
@@ -270,19 +270,19 @@ void RtcCalcTimeDifference(struct SiiRtcInfo *rtc, struct Time *result, struct T
 
     if (result->seconds < 0)
     {
-        result->seconds += 60;
+        result->seconds += SECONDS_PER_MINUTE;
         --result->minutes;
     }
 
     if (result->minutes < 0)
     {
-        result->minutes += 60;
+        result->minutes += MINUTES_PER_HOUR;
         --result->hours;
     }
 
     if (result->hours < 0)
     {
-        result->hours += 24;
+        result->hours += HOURS_PER_DAY;
         --result->days;
     }
 }
@@ -291,6 +291,26 @@ void RtcCalcLocalTime(void)
 {
     RtcGetInfo(&sRtc);
     RtcCalcTimeDifference(&sRtc, &gLocalTime, &gSaveBlock2Ptr->localTimeOffset);
+}
+
+bool8 IsBetweenHours(s32 hours, s32 begin, s32 end)
+{
+    if (end < begin)
+        return hours >= begin || hours < end;
+    else
+        return hours >= begin && hours < end;
+}
+
+u8 GetTimeOfDay(void)
+{
+    RtcCalcLocalTime();
+    if (IsBetweenHours(gLocalTime.hours, MORNING_HOUR_BEGIN, MORNING_HOUR_END))
+        return TIME_MORNING;
+    else if (IsBetweenHours(gLocalTime.hours, EVENING_HOUR_BEGIN, EVENING_HOUR_END))
+        return TIME_EVENING;
+    else if (IsBetweenHours(gLocalTime.hours, NIGHT_HOUR_BEGIN, NIGHT_HOUR_END))
+        return TIME_NIGHT;
+    return TIME_DAY;
 }
 
 void RtcInitLocalTimeOffset(s32 hour, s32 minute)
@@ -317,19 +337,19 @@ void CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2)
 
     if (result->seconds < 0)
     {
-        result->seconds += 60;
+        result->seconds += SECONDS_PER_MINUTE;
         --result->minutes;
     }
 
     if (result->minutes < 0)
     {
-        result->minutes += 60;
+        result->minutes += MINUTES_PER_HOUR;
         --result->hours;
     }
 
     if (result->hours < 0)
     {
-        result->hours += 24;
+        result->hours += HOURS_PER_DAY;
         --result->days;
     }
 }
@@ -337,7 +357,7 @@ void CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2)
 u32 RtcGetMinuteCount(void)
 {
     RtcGetInfo(&sRtc);
-    return (24 * 60) * RtcGetDayCount(&sRtc) + 60 * sRtc.hour + sRtc.minute;
+    return (HOURS_PER_DAY * MINUTES_PER_HOUR) * RtcGetDayCount(&sRtc) + MINUTES_PER_HOUR * sRtc.hour + sRtc.minute;
 }
 
 u32 RtcGetLocalDayCount(void)

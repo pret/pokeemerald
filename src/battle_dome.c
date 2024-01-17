@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle_dome.h"
 #include "battle.h"
+#include "battle_ai_util.h"
 #include "battle_main.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
@@ -32,6 +33,7 @@
 #include "script_pokemon_util.h"
 #include "graphics.h"
 #include "constants/battle_dome.h"
+#include "constants/battle_move_effects.h"
 #include "constants/frontier_util.h"
 #include "constants/moves.h"
 #include "constants/trainers.h"
@@ -39,6 +41,8 @@
 #include "constants/songs.h"
 #include "constants/battle_frontier.h"
 #include "constants/rgb.h"
+
+#define TAG_BUTTONS 0
 
 // Enough space to hold 2 match info cards worth of trainers and their parties
 #define NUM_INFOCARD_SPRITES ((FRONTIER_PARTY_SIZE + 1) * 4)
@@ -56,7 +60,7 @@ struct TourneyTreeLineSection
 {
     u8 x;
     u8 y;
-    u16 src;
+    u16 tile;
 };
 
 #define DOME_TRAINERS gSaveBlock2Ptr->frontier.domeTrainers
@@ -157,371 +161,8 @@ static void BufferLastDomeWinnerName(void);
 static void InitRandomTourneyTreeResults(void);
 static void InitDomeTrainers(void);
 
-EWRAM_DATA u32 gPlayerPartyLostHP = 0; // never read
-static EWRAM_DATA u32 sPlayerPartyMaxHP = 0; // never read
 static EWRAM_DATA struct TourneyTreeInfoCard *sInfoCard = {0};
 static EWRAM_DATA u8 *sTilemapBuffer = NULL;
-
-// Each move has an array of points for different move characteristics which contribute to a tourney trainers listed battle style (see sBattleStyleThresholds)
-// All move points are either 1 or 0, so theyre essentially flags saying whether or not the move has that characteristic
-static const u8 sBattleStyleMovePoints[MOVES_COUNT][NUM_MOVE_POINT_TYPES] =
-{
-    [MOVE_NONE]          = {0},
-    [MOVE_POUND]         = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_KARATE_CHOP]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_DOUBLE_SLAP]   = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_COMET_PUNCH]   = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_MEGA_PUNCH]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_PAY_DAY]       = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_FIRE_PUNCH]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_ICE_PUNCH]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_THUNDER_PUNCH] = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SCRATCH]       = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_VISE_GRIP]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_GUILLOTINE]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_RAZOR_WIND]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SWORDS_DANCE]  = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_POPULAR] = 1},
-    [MOVE_CUT]           = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_GUST]          = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_WING_ATTACK]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_WHIRLWIND]     = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FLY]           = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_BIND]          = {[MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SLAM]          = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_VINE_WHIP]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_STOMP]         = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_DOUBLE_KICK]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_MEGA_KICK]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_JUMP_KICK]     = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_ROLLING_KICK]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SAND_ATTACK]   = {[MOVE_POINTS_STAT_LOWER] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_HEADBUTT]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_HORN_ATTACK]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FURY_ATTACK]   = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_HORN_DRILL]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_TACKLE]        = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_BODY_SLAM]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_WRAP]          = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_TAKE_DOWN]     = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_THRASH]        = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_DOUBLE_EDGE]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_TAIL_WHIP]     = {[MOVE_POINTS_STAT_LOWER] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_POISON_STING]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_TWINEEDLE]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_PIN_MISSILE]   = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_LEER]          = {[MOVE_POINTS_STAT_LOWER] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_BITE]          = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_GROWL]         = {[MOVE_POINTS_STAT_LOWER] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_ROAR]          = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SING]          = {[MOVE_POINTS_STATUS] = 1},
-    [MOVE_SUPERSONIC]    = {[MOVE_POINTS_STATUS] = 1},
-    [MOVE_SONIC_BOOM]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_DISABLE]       = {[MOVE_POINTS_STATUS] = 1},
-    [MOVE_ACID]          = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_EMBER]         = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_FLAMETHROWER]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POPULAR] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_MIST]          = {0},
-    [MOVE_WATER_GUN]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_HYDRO_PUMP]    = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_SURF]          = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POPULAR] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_ICE_BEAM]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POPULAR] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_BLIZZARD]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_PSYBEAM]       = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_BUBBLE_BEAM]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_AURORA_BEAM]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_HYPER_BEAM]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_POPULAR] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_PECK]          = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_DRILL_PECK]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SUBMISSION]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_LOW_KICK]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_COUNTER]       = {[MOVE_POINTS_DEF] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LUCK] = 1},
-    [MOVE_SEISMIC_TOSS]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_STRENGTH]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_ABSORB]        = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_MEGA_DRAIN]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_LEECH_SEED]    = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_STATUS] = 1},
-    [MOVE_GROWTH]        = {[MOVE_POINTS_STAT_RAISE] = 1},
-    [MOVE_RAZOR_LEAF]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_SOLAR_BEAM]    = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_POPULAR] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_POISON_POWDER] = {[MOVE_POINTS_STATUS] = 1},
-    [MOVE_STUN_SPORE]    = {[MOVE_POINTS_STATUS] = 1},
-    [MOVE_SLEEP_POWDER]  = {[MOVE_POINTS_STATUS] = 1},
-    [MOVE_PETAL_DANCE]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_STRING_SHOT]   = {[MOVE_POINTS_STAT_LOWER] = 1},
-    [MOVE_DRAGON_RAGE]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FIRE_SPIN]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_THUNDER_SHOCK] = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_THUNDERBOLT]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POPULAR] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_THUNDER_WAVE]  = {[MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_THUNDER]       = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_ROCK_THROW]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_EARTHQUAKE]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_POPULAR] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_FISSURE]       = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_LUCK] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_DIG]           = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_TOXIC]         = {[MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_CONFUSION]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_PSYCHIC]       = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POPULAR] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_HYPNOSIS]      = {[MOVE_POINTS_COMBO] = 1},
-    [MOVE_MEDITATE]      = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_STAT_RAISE] = 1},
-    [MOVE_AGILITY]       = {[MOVE_POINTS_STAT_RAISE] = 1},
-    [MOVE_QUICK_ATTACK]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_RAGE]          = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_TELEPORT]      = {0},
-    [MOVE_NIGHT_SHADE]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_MIMIC]         = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SCREECH]       = {[MOVE_POINTS_STAT_LOWER] = 1},
-    [MOVE_DOUBLE_TEAM]   = {[MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_DEF] = 1},
-    [MOVE_RECOVER]       = {0},
-    [MOVE_HARDEN]        = {[MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_DEF] = 1},
-    [MOVE_MINIMIZE]      = {[MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_DEF] = 1},
-    [MOVE_SMOKESCREEN]   = {[MOVE_POINTS_STAT_LOWER] = 1, [MOVE_POINTS_DEF] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_CONFUSE_RAY]   = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_WITHDRAW]      = {[MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_DEF] = 1},
-    [MOVE_DEFENSE_CURL]  = {[MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_DEF] = 1},
-    [MOVE_BARRIER]       = {[MOVE_POINTS_DEF] = 1},
-    [MOVE_LIGHT_SCREEN]  = {[MOVE_POINTS_DEF] = 1},
-    [MOVE_HAZE]          = {0},
-    [MOVE_REFLECT]       = {[MOVE_POINTS_DEF] = 1},
-    [MOVE_FOCUS_ENERGY]  = {[MOVE_POINTS_COMBO] = 1},
-    [MOVE_BIDE]          = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_METRONOME]     = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_LUCK] = 1},
-    [MOVE_MIRROR_MOVE]   = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_LUCK] = 1},
-    [MOVE_SELF_DESTRUCT] = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_EGG_BOMB]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_LICK]          = {[MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SMOG]          = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SLUDGE]        = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_BONE_CLUB]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_FIRE_BLAST]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_WATERFALL]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_CLAMP]         = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SWIFT]         = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_SKULL_BASH]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_SPIKE_CANNON]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_CONSTRICT]     = {[MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_AMNESIA]       = {[MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_DEF] = 1},
-    [MOVE_KINESIS]       = {[MOVE_POINTS_STAT_LOWER] = 1},
-    [MOVE_SOFT_BOILED]   = {[MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_HIGH_JUMP_KICK]  = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_GLARE]         = {[MOVE_POINTS_STAT_LOWER] = 1},
-    [MOVE_DREAM_EATER]   = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_RARE] = 1, [MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_POISON_GAS]    = {[MOVE_POINTS_STATUS] = 1},
-    [MOVE_BARRAGE]       = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_LEECH_LIFE]    = {[MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_LOVELY_KISS]   = {[MOVE_POINTS_STATUS] = 1},
-    [MOVE_SKY_ATTACK]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_TRANSFORM]     = {[MOVE_POINTS_RARE] = 1},
-    [MOVE_BUBBLE]        = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_DIZZY_PUNCH]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SPORE]         = {[MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FLASH]         = {0},
-    [MOVE_PSYWAVE]       = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_SPLASH]        = {[MOVE_POINTS_RARE] = 1},
-    [MOVE_ACID_ARMOR]    = {[MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_DEF] = 1},
-    [MOVE_CRABHAMMER]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_EXPLOSION]     = {[MOVE_POINTS_RISKY] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_POPULAR] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_FURY_SWIPES]   = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_BONEMERANG]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_REST]          = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_HEAL] = 1},
-    [MOVE_ROCK_SLIDE]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_HYPER_FANG]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SHARPEN]       = {[MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_DEF] = 1},
-    [MOVE_CONVERSION]    = {[MOVE_POINTS_DEF] = 1},
-    [MOVE_TRI_ATTACK]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SUPER_FANG]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_SLASH]         = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SUBSTITUTE]    = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_DEF] = 1},
-    [MOVE_STRUGGLE]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1}, // Odd that this is assigned qualities
-    [MOVE_SKETCH]        = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_LUCK] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_TRIPLE_KICK]   = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_THIEF]         = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SPIDER_WEB]    = {[MOVE_POINTS_STAT_LOWER] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_MIND_READER]   = {[MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_NIGHTMARE]     = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FLAME_WHEEL]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SNORE]         = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_CURSE]         = {[MOVE_POINTS_STATUS] = 1},
-    [MOVE_FLAIL]         = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_CONVERSION_2]  = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_AEROBLAST]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_COTTON_SPORE]  = {[MOVE_POINTS_STAT_LOWER] = 1},
-    [MOVE_REVERSAL]      = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SPITE]         = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_RISKY] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_POWDER_SNOW]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_PROTECT]       = {[MOVE_POINTS_DEF] = 1, [MOVE_POINTS_POPULAR] = 1},
-    [MOVE_MACH_PUNCH]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SCARY_FACE]    = {0},
-    [MOVE_FEINT_ATTACK]  = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_SWEET_KISS]    = {0},
-    [MOVE_BELLY_DRUM]    = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_STAT_RAISE] = 1},
-    [MOVE_SLUDGE_BOMB]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_MUD_SLAP]      = {[MOVE_POINTS_STAT_LOWER] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_OCTAZOOKA]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SPIKES]        = {[MOVE_POINTS_COMBO] = 1},
-    [MOVE_ZAP_CANNON]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_LUCK] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_FORESIGHT]     = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_DESTINY_BOND]  = {[MOVE_POINTS_RISKY] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_PERISH_SONG]   = {[MOVE_POINTS_RISKY] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_ICY_WIND]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_DETECT]        = {[MOVE_POINTS_DEF] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_BONE_RUSH]     = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_LOCK_ON]       = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_OUTRAGE]       = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SANDSTORM]     = {0},
-    [MOVE_GIGA_DRAIN]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_ENDURE]        = {[MOVE_POINTS_DEF] = 1},
-    [MOVE_CHARM]         = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_ROLLOUT]       = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_FALSE_SWIPE]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SWAGGER]       = {[MOVE_POINTS_EFFECT] = 1},
-    [MOVE_MILK_DRINK]    = {[MOVE_POINTS_HEAL] = 1},
-    [MOVE_SPARK]         = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_FURY_CUTTER]   = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_STEEL_WING]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_MEAN_LOOK]     = {[MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_ATTRACT]       = {[MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SLEEP_TALK]    = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_LUCK] = 1},
-    [MOVE_HEAL_BELL]     = {[MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_RETURN]        = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_PRESENT]       = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_LUCK] = 1},
-    [MOVE_FRUSTRATION]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SAFEGUARD]     = {[MOVE_POINTS_DEF] = 1},
-    [MOVE_PAIN_SPLIT]    = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SACRED_FIRE]   = {[MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_MAGNITUDE]     = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_DYNAMIC_PUNCH] = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_LUCK] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_MEGAHORN]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_DRAGON_BREATH] = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_BATON_PASS]    = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_RARE] = 1},
-    [MOVE_ENCORE]        = {[MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_PURSUIT]       = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_RAPID_SPIN]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SWEET_SCENT]   = {[MOVE_POINTS_STAT_LOWER] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_IRON_TAIL]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_METAL_CLAW]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_VITAL_THROW]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_MORNING_SUN]   = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_SYNTHESIS]     = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_MOONLIGHT]     = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_HIDDEN_POWER]  = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_CROSS_CHOP]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_TWISTER]       = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_RAIN_DANCE]    = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_SUNNY_DAY]     = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_CRUNCH]        = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_MIRROR_COAT]   = {[MOVE_POINTS_DEF] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_PSYCH_UP]      = {[MOVE_POINTS_STAT_RAISE] = 1},
-    [MOVE_EXTREME_SPEED] = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_ANCIENT_POWER] = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SHADOW_BALL]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_FUTURE_SIGHT]  = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_DMG] = 1},
-    [MOVE_ROCK_SMASH]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_WHIRLPOOL]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_BEAT_UP]       = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FAKE_OUT]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_UPROAR]        = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_STOCKPILE]     = {[MOVE_POINTS_COMBO] = 1},
-    [MOVE_SPIT_UP]       = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_SWALLOW]       = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_HEAL] = 1},
-    [MOVE_HEAT_WAVE]     = {[MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_HAIL]          = {0},
-    [MOVE_TORMENT]       = {[MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FLATTER]       = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_WILL_O_WISP]   = {[MOVE_POINTS_STATUS] = 1},
-    [MOVE_MEMENTO]       = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FACADE]        = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FOCUS_PUNCH]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_SMELLING_SALTS] = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FOLLOW_ME]     = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_NATURE_POWER]  = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_CHARGE]        = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_TAUNT]         = {[MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_HELPING_HAND]  = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_TRICK]         = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_ROLE_PLAY]     = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_WISH]          = {[MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_ASSIST]        = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LUCK] = 1},
-    [MOVE_INGRAIN]       = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_DEF] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SUPERPOWER]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_MAGIC_COAT]    = {[MOVE_POINTS_DEF] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LUCK] = 1},
-    [MOVE_RECYCLE]       = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_REVENGE]       = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LUCK] = 1},
-    [MOVE_BRICK_BREAK]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_YAWN]          = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_KNOCK_OFF]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_ENDEAVOR]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_ERUPTION]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_SKILL_SWAP]    = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_IMPRISON]      = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LUCK] = 1},
-    [MOVE_REFRESH]       = {[MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_GRUDGE]        = {[MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_SNATCH]        = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LUCK] = 1},
-    [MOVE_SECRET_POWER]  = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_DIVE]          = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_ARM_THRUST]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_CAMOUFLAGE]    = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_TAIL_GLOW]     = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_LUSTER_PURGE]  = {[MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_MIST_BALL]     = {[MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_FEATHER_DANCE] = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_TEETER_DANCE]  = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_BLAZE_KICK]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_MUD_SPORT]     = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_ICE_BALL]      = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_NEEDLE_ARM]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SLACK_OFF]     = {[MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_HYPER_VOICE]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_POISON_FANG]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_CRUSH_CLAW]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_BLAST_BURN]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_HYDRO_CANNON]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_METEOR_MASH]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_ASTONISH]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_WEATHER_BALL]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_AROMATHERAPY]  = {[MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_FAKE_TEARS]    = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_AIR_CUTTER]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_OVERHEAT]      = {[MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_ODOR_SLEUTH]   = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_ROCK_TOMB]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SILVER_WIND]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_METAL_SOUND]   = {0},
-    [MOVE_GRASS_WHISTLE] = {0},
-    [MOVE_TICKLE]        = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_COSMIC_POWER]  = {0},
-    [MOVE_WATER_SPOUT]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_SIGNAL_BEAM]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SHADOW_PUNCH]  = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_EXTRASENSORY]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SKY_UPPERCUT]  = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_SAND_TOMB]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SHEER_COLD]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_LUCK] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_MUDDY_WATER]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_BULLET_SEED]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_AERIAL_ACE]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_ICICLE_SPEAR]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_IRON_DEFENSE]  = {[MOVE_POINTS_DEF] = 1},
-    [MOVE_BLOCK]         = {[MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_HOWL]          = {0},
-    [MOVE_DRAGON_CLAW]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FRENZY_PLANT]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_BULK_UP]       = {[MOVE_POINTS_COMBO] = 1},
-    [MOVE_BOUNCE]        = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_MUD_SHOT]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_POISON_TAIL]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_COVET]         = {[MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_VOLT_TACKLE]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_MAGICAL_LEAF]  = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_WATER_SPORT]   = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_CALM_MIND]     = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_STAT_RAISE] = 1},
-    [MOVE_LEAF_BLADE]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_DRAGON_DANCE]  = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_STAT_RAISE] = 1},
-    [MOVE_ROCK_BLAST]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_SHOCK_WAVE]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_WATER_PULSE]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_DOOM_DESIRE]   = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_PSYCHO_BOOST]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-};
 
 // This array is searched in-order to determine what battle style a tourney trainer uses.
 // If the sum of the points for the party's moves meets/exceeds all the point totals of an element, then they use that battle style
@@ -904,14 +545,14 @@ static const struct ScanlineEffectParams sTourneyTreeScanlineEffectParams =
 
 static const struct CompressedSpriteSheet sTourneyTreeButtonsSpriteSheet[] =
 {
-    {gDomeTourneyTreeButtons_Gfx, 0x0600, 0x0000},
+    {.data = gDomeTourneyTreeButtons_Gfx, .size = 0x0600, .tag = TAG_BUTTONS},
     {},
 };
 
 // Unused
 static const struct CompressedSpritePalette sTourneyTreeButtonsSpritePal[] =
 {
-    {gDomeTourneyTreeButtons_Pal, 0x0000},
+    {.data = gDomeTourneyTreeButtons_Pal, .tag = TAG_BUTTONS},
     {},
 };
 
@@ -1004,7 +645,7 @@ static const union AnimCmd * const sSpriteAnimTable_TourneyTreePokeball[] =
 // Sprite template for the pokeballs on the tourney tree that act as buttons to view a trainer/match info card
 static const struct SpriteTemplate sTourneyTreePokeballSpriteTemplate =
 {
-    .tileTag = 0x0000,
+    .tileTag = TAG_BUTTONS,
     .paletteTag = TAG_NONE,
     .oam = &sOamData_TourneyTreePokeball,
     .anims = sSpriteAnimTable_TourneyTreePokeball,
@@ -1033,7 +674,7 @@ static const union AnimCmd * const sSpriteAnimTable_TourneyTreeCancelButton[] =
 
 static const struct SpriteTemplate sCancelButtonSpriteTemplate =
 {
-    .tileTag = 0x0000,
+    .tileTag = TAG_BUTTONS,
     .paletteTag = TAG_NONE,
     .oam = &sOamData_TourneyTreeCloseButton,
     .anims = sSpriteAnimTable_TourneyTreeCancelButton,
@@ -1062,7 +703,7 @@ static const union AnimCmd * const sSpriteAnimTable_TourneyTreeExitButton[] =
 
 static const struct SpriteTemplate sExitButtonSpriteTemplate =
 {
-    .tileTag = 0x0000,
+    .tileTag = TAG_BUTTONS,
     .paletteTag = TAG_NONE,
     .oam = &sOamData_TourneyTreeCloseButton,
     .anims = sSpriteAnimTable_TourneyTreeExitButton,
@@ -1109,7 +750,7 @@ static const union AnimCmd * const sSpriteAnimTable_HorizontalScrollArrow[] =
 
 static const struct SpriteTemplate sHorizontalScrollArrowSpriteTemplate =
 {
-    .tileTag = 0x0000,
+    .tileTag = TAG_BUTTONS,
     .paletteTag = TAG_NONE,
     .oam = &sOamData_HorizontalScrollArrow,
     .anims = sSpriteAnimTable_HorizontalScrollArrow,
@@ -1120,7 +761,7 @@ static const struct SpriteTemplate sHorizontalScrollArrowSpriteTemplate =
 
 static const struct SpriteTemplate sVerticalScrollArrowSpriteTemplate =
 {
-    .tileTag = 0x0000,
+    .tileTag = TAG_BUTTONS,
     .paletteTag = TAG_NONE,
     .oam = &sOamData_VerticalScrollArrow,
     .anims = sSpriteAnimTable_VerticalScrollArrow,
@@ -1482,589 +1123,617 @@ static const u8 sTourneyTreePokeballCoords[DOME_TOURNAMENT_TRAINERS_COUNT + DOME
     {120,  89}, // Final match
 };
 
+// Tile values from tourney_tree.png for the highlighted lines of the tourney tree.
+// These tiles will be used to replace the existing, unhighlighted line tiles on the tourney tree tilemap.
+#define LINE_PAL           (6 << 12)
+#define LINE_H             (LINE_PAL | 0x21) // Horizontal
+#define LINE_CORNER_R      (LINE_PAL | 0x23) // Horizontal into a right-side vertical
+#define LINE_CORNER_L      (LINE_PAL | 0x25) // Horizontal into a left-side vertical
+#define LINE_V_R           (LINE_PAL | 0x27) // Right-side vertical
+#define LINE_V_L           (LINE_PAL | 0x29) // Left-side vertical
+#define LINE_H_BOTTOM      (LINE_PAL | 0x2B) // Horizontal on the bottom of the tree
+#define LINE_H_LOGO1       (LINE_PAL | 0x2C) // Horizontal, logo behind
+#define LINE_H_LOGO2       (LINE_PAL | 0x2D) // Horizontal, logo behind
+#define LINE_H_LOGO3       (LINE_PAL | 0x2E) // Horizontal, logo behind
+#define LINE_H_LOGO4       (LINE_PAL | 0x2F) // Horizontal, logo behind
+#define LINE_V_R_LOGO1     (LINE_PAL | 0x30) // Right-side vertical, logo behind
+#define LINE_V_R_LOGO2     (LINE_PAL | 0x31) // Right-side vertical, logo behind
+#define LINE_V_R_LOGO3     (LINE_PAL | 0x32) // Right-side vertical, logo behind
+#define LINE_V_R_LOGO4     (LINE_PAL | 0x33) // Right-side vertical, logo behind
+#define LINE_V_L_LOGO1     (LINE_PAL | 0x35) // Left-side vertical, logo behind
+#define LINE_V_L_LOGO2     (LINE_PAL | 0x36) // Left-side vertical, logo behind
+#define LINE_V_L_LOGO3     (LINE_PAL | 0x37) // Left-side vertical, logo behind
+#define LINE_V_L_LOGO4     (LINE_PAL | 0x38) // Left-side vertical, logo behind
+#define LINE_V_R_HALF_LOGO (LINE_PAL | 0x3B) // Right-side vertical, half lit from the top, logo behind
+#define LINE_V_L_HALF_LOGO (LINE_PAL | 0x3C) // Left-side vertical, half lit from the top, logo behind
+#define LINE_CORNER_R_HALF (LINE_PAL | 0x43) // Lit horizontal, unlit right-side vertical
+#define LINE_CORNER_L_HALF (LINE_PAL | 0x45) // Lit horizontal, unlit left-side vertical
+#define LINE_V_R_HALF      (LINE_PAL | 0x47) // Right-side vertical, half lit from the top
+#define LINE_V_L_HALF      (LINE_PAL | 0x49) // Left-side vertical, half lit from the top
+
 // Each of these line sections define the position of the advancement line on the tourney tree for the victor of that round
 // The trainers here are numbered by tourney ID (rank/seed) and ordered according to where they start on the tourney tree
-#define LINESECTION_ROUND1_TRAINER1(lastSrc) \
-    {.src = 0x6021,  .y = 0x04, .x = 0x09},  \
-    {.src = 0x6023,  .y = 0x04, .x = 0x0a},  \
-    {.src = 0x6047,  .y = 0x05, .x = 0x0a},  \
-    {.src = lastSrc, .y = 0x05, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER1(lastTile) \
+    {.tile = LINE_H,        .y =  4, .x =  9}, \
+    {.tile = LINE_CORNER_R, .y =  4, .x = 10}, \
+    {.tile = LINE_V_R_HALF, .y =  5, .x = 10}, \
+    {.tile = lastTile,      .y =  5, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER9(lastSrc) \
-    {.src = 0x6021,  .y = 0x06, .x = 0x09},  \
-    {.src = 0x6021,  .y = 0x06, .x = 0x0a},  \
-    {.src = 0x6027,  .y = 0x05, .x = 0x0a},  \
-    {.src = lastSrc, .y = 0x05, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER9(lastTile) \
+    {.tile = LINE_H,   .y =  6, .x =  9}, \
+    {.tile = LINE_H,   .y =  6, .x = 10}, \
+    {.tile = LINE_V_R, .y =  5, .x = 10}, \
+    {.tile = lastTile, .y =  5, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER13(lastSrc) \
-    {.src = 0x6021,  .y = 0x08, .x = 0x09},   \
-    {.src = 0x6023,  .y = 0x08, .x = 0x0a},   \
-    {.src = 0x6047,  .y = 0x09, .x = 0x0a},   \
-    {.src = lastSrc, .y = 0x09, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER13(lastTile) \
+    {.tile = LINE_H,        .y =  8, .x =  9}, \
+    {.tile = LINE_CORNER_R, .y =  8, .x = 10}, \
+    {.tile = LINE_V_R_HALF, .y =  9, .x = 10}, \
+    {.tile = lastTile,      .y =  9, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER5(lastSrc) \
-    {.src = 0x6021,  .y = 0x0a, .x = 0x09},  \
-    {.src = 0x6021,  .y = 0x0a, .x = 0x0a},  \
-    {.src = 0x6027,  .y = 0x09, .x = 0x0a},  \
-    {.src = lastSrc, .y = 0x09, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER5(lastTile) \
+    {.tile = LINE_H,   .y = 10, .x =  9}, \
+    {.tile = LINE_H,   .y = 10, .x = 10}, \
+    {.tile = LINE_V_R, .y =  9, .x = 10}, \
+    {.tile = lastTile, .y =  9, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER8(lastSrc) \
-    {.src = 0x6021,  .y = 0x0c, .x = 0x09},  \
-    {.src = 0x6023,  .y = 0x0c, .x = 0x0a},  \
-    {.src = 0x6047,  .y = 0x0d, .x = 0x0a},  \
-    {.src = lastSrc, .y = 0x0d, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER8(lastTile) \
+    {.tile = LINE_H,        .y = 12, .x =  9}, \
+    {.tile = LINE_CORNER_R, .y = 12, .x = 10}, \
+    {.tile = LINE_V_R_HALF, .y = 13, .x = 10}, \
+    {.tile = lastTile,      .y = 13, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER16(lastSrc) \
-    {.src = 0x6021,  .y = 0x0e, .x = 0x09},   \
-    {.src = 0x6021,  .y = 0x0e, .x = 0x0a},   \
-    {.src = 0x6027,  .y = 0x0d, .x = 0x0a},   \
-    {.src = lastSrc, .y = 0x0d, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER16(lastTile) \
+    {.tile = LINE_H,   .y = 14, .x =  9}, \
+    {.tile = LINE_H,   .y = 14, .x = 10}, \
+    {.tile = LINE_V_R, .y = 13, .x = 10}, \
+    {.tile = lastTile, .y = 13, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER12(lastSrc) \
-    {.src = 0x6021,  .y = 0x10, .x = 0x09},   \
-    {.src = 0x6023,  .y = 0x10, .x = 0x0a},   \
-    {.src = 0x6047,  .y = 0x11, .x = 0x0a},   \
-    {.src = lastSrc, .y = 0x11, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER12(lastTile) \
+    {.tile = LINE_H,        .y = 16, .x =  9}, \
+    {.tile = LINE_CORNER_R, .y = 16, .x = 10}, \
+    {.tile = LINE_V_R_HALF, .y = 17, .x = 10}, \
+    {.tile = lastTile,      .y = 17, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER4(lastSrc) \
-    {.src = 0x602b,  .y = 0x12, .x = 0x09},  \
-    {.src = 0x602b,  .y = 0x12, .x = 0x0a},  \
-    {.src = 0x6027,  .y = 0x11, .x = 0x0a},  \
-    {.src = lastSrc, .y = 0x11, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER4(lastTile) \
+    {.tile = LINE_H_BOTTOM, .y = 18, .x =  9}, \
+    {.tile = LINE_H_BOTTOM, .y = 18, .x = 10}, \
+    {.tile = LINE_V_R,      .y = 17, .x = 10}, \
+    {.tile = lastTile,      .y = 17, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER3(lastSrc) \
-    {.src = 0x6021,  .y = 0x04, .x = 0x14},  \
-    {.src = 0x6025,  .y = 0x04, .x = 0x13},  \
-    {.src = 0x6049,  .y = 0x05, .x = 0x13},  \
-    {.src = lastSrc, .y = 0x05, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER3(lastTile) \
+    {.tile = LINE_H,        .y =  4, .x = 20}, \
+    {.tile = LINE_CORNER_L, .y =  4, .x = 19}, \
+    {.tile = LINE_V_L_HALF, .y =  5, .x = 19}, \
+    {.tile = lastTile,      .y =  5, .x = 18},
 
-#define LINESECTION_ROUND1_TRAINER11(lastSrc) \
-    {.src = 0x6021,  .y = 0x06, .x = 0x14},   \
-    {.src = 0x6021,  .y = 0x06, .x = 0x13},   \
-    {.src = 0x6029,  .y = 0x05, .x = 0x13},   \
-    {.src = lastSrc, .y = 0x05, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER11(lastTile) \
+    {.tile = LINE_H,   .y =  6, .x = 20}, \
+    {.tile = LINE_H,   .y =  6, .x = 19}, \
+    {.tile = LINE_V_L, .y =  5, .x = 19}, \
+    {.tile = lastTile, .y =  5, .x = 18},
 
-#define LINESECTION_ROUND1_TRAINER15(lastSrc) \
-    {.src = 0x6021,  .y = 0x08, .x = 0x14},   \
-    {.src = 0x6025,  .y = 0x08, .x = 0x13},   \
-    {.src = 0x6049,  .y = 0x09, .x = 0x13},   \
-    {.src = lastSrc, .y = 0x09, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER15(lastTile) \
+    {.tile = LINE_H,        .y =  8, .x = 20}, \
+    {.tile = LINE_CORNER_L, .y =  8, .x = 19}, \
+    {.tile = LINE_V_L_HALF, .y =  9, .x = 19}, \
+    {.tile = lastTile,      .y =  9, .x = 18},
 
-#define LINESECTION_ROUND1_TRAINER7(lastSrc) \
-    {.src = 0x6021,  .y = 0x0a, .x = 0x14},  \
-    {.src = 0x6021,  .y = 0x0a, .x = 0x13},  \
-    {.src = 0x6029,  .y = 0x09, .x = 0x13},  \
-    {.src = lastSrc, .y = 0x09, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER7(lastTile) \
+    {.tile = LINE_H,   .y = 10, .x = 20}, \
+    {.tile = LINE_H,   .y = 10, .x = 19}, \
+    {.tile = LINE_V_L, .y =  9, .x = 19}, \
+    {.tile = lastTile, .y =  9, .x = 18},
 
-#define LINESECTION_ROUND1_TRAINER6(lastSrc) \
-    {.src = 0x6021,  .y = 0x0c, .x = 0x14},  \
-    {.src = 0x6025,  .y = 0x0c, .x = 0x13},  \
-    {.src = 0x6049,  .y = 0x0d, .x = 0x13},  \
-    {.src = lastSrc, .y = 0x0d, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER6(lastTile) \
+    {.tile = LINE_H,        .y = 12, .x = 20}, \
+    {.tile = LINE_CORNER_L, .y = 12, .x = 19}, \
+    {.tile = LINE_V_L_HALF, .y = 13, .x = 19}, \
+    {.tile = lastTile,      .y = 13, .x = 18},
 
-#define LINESECTION_ROUND1_TRAINER14(lastSrc) \
-    {.src = 0x6021,  .y = 0x0e, .x = 0x14},   \
-    {.src = 0x6021,  .y = 0x0e, .x = 0x13},   \
-    {.src = 0x6029,  .y = 0x0d, .x = 0x13},   \
-    {.src = lastSrc, .y = 0x0d, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER14(lastTile) \
+    {.tile = LINE_H,   .y = 14, .x = 20}, \
+    {.tile = LINE_H,   .y = 14, .x = 19}, \
+    {.tile = LINE_V_L, .y = 13, .x = 19}, \
+    {.tile = lastTile, .y = 13, .x = 18},
 
-#define LINESECTION_ROUND1_TRAINER10(lastSrc) \
-    {.src = 0x6021,  .y = 0x10, .x = 0x14},   \
-    {.src = 0x6025,  .y = 0x10, .x = 0x13},   \
-    {.src = 0x6049,  .y = 0x11, .x = 0x13},   \
-    {.src = lastSrc, .y = 0x11, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER10(lastTile) \
+    {.tile = LINE_H,        .y = 16, .x = 20}, \
+    {.tile = LINE_CORNER_L, .y = 16, .x = 19}, \
+    {.tile = LINE_V_L_HALF, .y = 17, .x = 19}, \
+    {.tile = lastTile,      .y = 17, .x = 18},
 
-#define LINESECTION_ROUND1_TRAINER2(lastSrc) \
-    {.src = 0x602b,  .y = 0x12, .x = 0x14},  \
-    {.src = 0x602b,  .y = 0x12, .x = 0x13},  \
-    {.src = 0x6029,  .y = 0x11, .x = 0x13},  \
-    {.src = lastSrc, .y = 0x11, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER2(lastTile) \
+    {.tile = LINE_H_BOTTOM, .y = 18, .x = 20}, \
+    {.tile = LINE_H_BOTTOM, .y = 18, .x = 19}, \
+    {.tile = LINE_V_L,      .y = 17, .x = 19}, \
+    {.tile = lastTile,      .y = 17, .x = 18},
 
-#define LINESECTION_ROUND2_MATCH1(lastSrc)  \
-    {.src = 0x6027,  .y = 0x06, .x = 0x0b}, \
-    {.src = 0x6047,  .y = 0x07, .x = 0x0b}, \
-    {.src = lastSrc, .y = 0x07, .x = 0x0c},
+#define LINESECTION_ROUND2_MATCH1(lastTile) \
+    {.tile = LINE_V_R,      .y =  6, .x = 11}, \
+    {.tile = LINE_V_R_HALF, .y =  7, .x = 11}, \
+    {.tile = lastTile,      .y =  7, .x = 12},
 
-#define LINESECTION_ROUND2_MATCH2(lastSrc)  \
-    {.src = 0x6027,  .y = 0x08, .x = 0x0b}, \
-    {.src = 0x6027,  .y = 0x07, .x = 0x0b}, \
-    {.src = lastSrc, .y = 0x07, .x = 0x0c},
+#define LINESECTION_ROUND2_MATCH2(lastTile) \
+    {.tile = LINE_V_R, .y =  8, .x = 11}, \
+    {.tile = LINE_V_R, .y =  7, .x = 11}, \
+    {.tile = lastTile, .y =  7, .x = 12},
 
-#define LINESECTION_ROUND2_MATCH3(lastSrc)  \
-    {.src = 0x6027,  .y = 0x0e, .x = 0x0b}, \
-    {.src = 0x6047,  .y = 0x0f, .x = 0x0b}, \
-    {.src = lastSrc, .y = 0x0f, .x = 0x0c},
+#define LINESECTION_ROUND2_MATCH3(lastTile) \
+    {.tile = LINE_V_R,      .y = 14, .x = 11}, \
+    {.tile = LINE_V_R_HALF, .y = 15, .x = 11}, \
+    {.tile = lastTile,      .y = 15, .x = 12},
 
-#define LINESECTION_ROUND2_MATCH4(lastSrc)  \
-    {.src = 0x6027,  .y = 0x10, .x = 0x0b}, \
-    {.src = 0x6027,  .y = 0x0f, .x = 0x0b}, \
-    {.src = lastSrc, .y = 0x0f, .x = 0x0c},
+#define LINESECTION_ROUND2_MATCH4(lastTile) \
+    {.tile = LINE_V_R, .y = 16, .x = 11}, \
+    {.tile = LINE_V_R, .y = 15, .x = 11}, \
+    {.tile = lastTile, .y = 15, .x = 12},
 
-#define LINESECTION_ROUND2_MATCH5(lastSrc)  \
-    {.src = 0x6029,  .y = 0x06, .x = 0x12}, \
-    {.src = 0x6049,  .y = 0x07, .x = 0x12}, \
-    {.src = lastSrc, .y = 0x07, .x = 0x11},
+#define LINESECTION_ROUND2_MATCH5(lastTile) \
+    {.tile = LINE_V_L,      .y =  6, .x = 18}, \
+    {.tile = LINE_V_L_HALF, .y =  7, .x = 18}, \
+    {.tile = lastTile,      .y =  7, .x = 17},
 
-#define LINESECTION_ROUND2_MATCH6(lastSrc)  \
-    {.src = 0x6029,  .y = 0x08, .x = 0x12}, \
-    {.src = 0x6029,  .y = 0x07, .x = 0x12}, \
-    {.src = lastSrc, .y = 0x07, .x = 0x11},
+#define LINESECTION_ROUND2_MATCH6(lastTile) \
+    {.tile = LINE_V_L, .y =  8, .x = 18}, \
+    {.tile = LINE_V_L, .y =  7, .x = 18}, \
+    {.tile = lastTile, .y =  7, .x = 17},
 
-#define LINESECTION_ROUND2_MATCH7(lastSrc)  \
-    {.src = 0x6029,  .y = 0x0e, .x = 0x12}, \
-    {.src = 0x6049,  .y = 0x0f, .x = 0x12}, \
-    {.src = lastSrc, .y = 0x0f, .x = 0x11},
+#define LINESECTION_ROUND2_MATCH7(lastTile) \
+    {.tile = LINE_V_L,      .y = 14, .x = 18}, \
+    {.tile = LINE_V_L_HALF, .y = 15, .x = 18}, \
+    {.tile = lastTile,      .y = 15, .x = 17},
 
-#define LINESECTION_ROUND2_MATCH8(lastSrc)  \
-    {.src = 0x6029,  .y = 0x10, .x = 0x12}, \
-    {.src = 0x6029,  .y = 0x0f, .x = 0x12}, \
-    {.src = lastSrc, .y = 0x0f, .x = 0x11},
+#define LINESECTION_ROUND2_MATCH8(lastTile) \
+    {.tile = LINE_V_L, .y = 16, .x = 18}, \
+    {.tile = LINE_V_L, .y = 15, .x = 18}, \
+    {.tile = lastTile, .y = 15, .x = 17},
 
-#define LINESECTION_SEMIFINAL_TOP_LEFT     \
-    {.src = 0x6027, .y = 0x08, .x = 0x0c}, \
-    {.src = 0x6027, .y = 0x09, .x = 0x0c}, \
-    {.src = 0x6027, .y = 0x0a, .x = 0x0c}, \
-    {.src = 0x603b, .y = 0x0b, .x = 0x0c},
+#define LINESECTION_SEMIFINAL_TOP_LEFT \
+    {.tile = LINE_V_R,           .y =  8, .x = 12}, \
+    {.tile = LINE_V_R,           .y =  9, .x = 12}, \
+    {.tile = LINE_V_R,           .y = 10, .x = 12}, \
+    {.tile = LINE_V_R_HALF_LOGO, .y = 11, .x = 12},
 
-#define LINESECTION_SEMIFINAL_BOTTOM_LEFT  \
-    {.src = 0x6033, .y = 0x0e, .x = 0x0c}, \
-    {.src = 0x6032, .y = 0x0d, .x = 0x0c}, \
-    {.src = 0x6031, .y = 0x0c, .x = 0x0c}, \
-    {.src = 0x6030, .y = 0x0b, .x = 0x0c},
+#define LINESECTION_SEMIFINAL_BOTTOM_LEFT \
+    {.tile = LINE_V_R_LOGO4, .y = 14, .x = 12}, \
+    {.tile = LINE_V_R_LOGO3, .y = 13, .x = 12}, \
+    {.tile = LINE_V_R_LOGO2, .y = 12, .x = 12}, \
+    {.tile = LINE_V_R_LOGO1, .y = 11, .x = 12},
 
-#define LINESECTION_SEMIFINAL_TOP_RIGHT    \
-    {.src = 0x6029, .y = 0x08, .x = 0x11}, \
-    {.src = 0x6029, .y = 0x09, .x = 0x11}, \
-    {.src = 0x6029, .y = 0x0a, .x = 0x11}, \
-    {.src = 0x603c, .y = 0x0b, .x = 0x11},
+#define LINESECTION_SEMIFINAL_TOP_RIGHT \
+    {.tile = LINE_V_L,           .y =  8, .x = 17}, \
+    {.tile = LINE_V_L,           .y =  9, .x = 17}, \
+    {.tile = LINE_V_L,           .y = 10, .x = 17}, \
+    {.tile = LINE_V_L_HALF_LOGO, .y = 11, .x = 17},
 
 #define LINESECTION_SEMIFINAL_BOTTOM_RIGHT \
-    {.src = 0x6038, .y = 0x0e, .x = 0x11}, \
-    {.src = 0x6037, .y = 0x0d, .x = 0x11}, \
-    {.src = 0x6036, .y = 0x0c, .x = 0x11}, \
-    {.src = 0x6035, .y = 0x0b, .x = 0x11},
+    {.tile = LINE_V_L_LOGO4, .y = 14, .x = 17}, \
+    {.tile = LINE_V_L_LOGO3, .y = 13, .x = 17}, \
+    {.tile = LINE_V_L_LOGO2, .y = 12, .x = 17}, \
+    {.tile = LINE_V_L_LOGO1, .y = 11, .x = 17},
 
-#define LINESECTION_FINAL_LEFT             \
-    {.src = 0x602c, .y = 0x0b, .x = 0x0d}, \
-    {.src = 0x602d, .y = 0x0b, .x = 0x0e},
+#define LINESECTION_FINAL_LEFT \
+    {.tile = LINE_H_LOGO1, .y = 11, .x = 13}, \
+    {.tile = LINE_H_LOGO2, .y = 11, .x = 14},
 
-#define LINESECTION_FINAL_RIGHT            \
-    {.src = 0x602f, .y = 0x0b, .x = 0x10}, \
-    {.src = 0x602e, .y = 0x0b, .x = 0x0f},
+#define LINESECTION_FINAL_RIGHT \
+    {.tile = LINE_H_LOGO4, .y = 11, .x = 16}, \
+    {.tile = LINE_H_LOGO3, .y = 11, .x = 15},
 
 
 static const struct TourneyTreeLineSection sLineSectionTrainer1Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER1(0x6043)
+    LINESECTION_ROUND1_TRAINER1(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer1Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER1(0x6023)
-    LINESECTION_ROUND2_MATCH1(0x6043)
+    LINESECTION_ROUND1_TRAINER1(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH1(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer1Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER1(0x6023)
-    LINESECTION_ROUND2_MATCH1(0x6023)
+    LINESECTION_ROUND1_TRAINER1(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH1(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer1Final[] =
 {
-    LINESECTION_ROUND1_TRAINER1(0x6023)
-    LINESECTION_ROUND2_MATCH1(0x6023)
+    LINESECTION_ROUND1_TRAINER1(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH1(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer9Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER9(0x6043)
+    LINESECTION_ROUND1_TRAINER9(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer9Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER9(0x6023)
-    LINESECTION_ROUND2_MATCH1(0x6043)
+    LINESECTION_ROUND1_TRAINER9(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH1(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer9Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER9(0x6023)
-    LINESECTION_ROUND2_MATCH1(0x6023)
+    LINESECTION_ROUND1_TRAINER9(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH1(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer9Final[] =
 {
-    LINESECTION_ROUND1_TRAINER9(0x6023)
-    LINESECTION_ROUND2_MATCH1(0x6023)
+    LINESECTION_ROUND1_TRAINER9(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH1(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer13Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER13(0x6021)
+    LINESECTION_ROUND1_TRAINER13(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer13Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER13(0x6021)
-    LINESECTION_ROUND2_MATCH2(0x6043)
+    LINESECTION_ROUND1_TRAINER13(LINE_H)
+    LINESECTION_ROUND2_MATCH2(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer13Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER13(0x6021)
-    LINESECTION_ROUND2_MATCH2(0x6023)
+    LINESECTION_ROUND1_TRAINER13(LINE_H)
+    LINESECTION_ROUND2_MATCH2(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer13Final[] =
 {
-    LINESECTION_ROUND1_TRAINER13(0x6021)
-    LINESECTION_ROUND2_MATCH2(0x6023)
+    LINESECTION_ROUND1_TRAINER13(LINE_H)
+    LINESECTION_ROUND2_MATCH2(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer5Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER5(0x6021)
+    LINESECTION_ROUND1_TRAINER5(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer5Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER5(0x6021)
-    LINESECTION_ROUND2_MATCH2(0x6043)
+    LINESECTION_ROUND1_TRAINER5(LINE_H)
+    LINESECTION_ROUND2_MATCH2(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer5Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER5(0x6021)
-    LINESECTION_ROUND2_MATCH2(0x6023)
+    LINESECTION_ROUND1_TRAINER5(LINE_H)
+    LINESECTION_ROUND2_MATCH2(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer5Final[] =
 {
-    LINESECTION_ROUND1_TRAINER5(0x6021)
-    LINESECTION_ROUND2_MATCH2(0x6023)
+    LINESECTION_ROUND1_TRAINER5(LINE_H)
+    LINESECTION_ROUND2_MATCH2(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer8Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER8(0x6043)
+    LINESECTION_ROUND1_TRAINER8(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer8Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER8(0x6023)
-    LINESECTION_ROUND2_MATCH3(0x6021)
+    LINESECTION_ROUND1_TRAINER8(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH3(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer8Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER8(0x6023)
-    LINESECTION_ROUND2_MATCH3(0x6021)
+    LINESECTION_ROUND1_TRAINER8(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH3(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer8Final[] =
 {
-    LINESECTION_ROUND1_TRAINER8(0x6023)
-    LINESECTION_ROUND2_MATCH3(0x6021)
+    LINESECTION_ROUND1_TRAINER8(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH3(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer16Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER16(0x6043)
+    LINESECTION_ROUND1_TRAINER16(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer16Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER16(0x6023)
-    LINESECTION_ROUND2_MATCH3(0x6021)
+    LINESECTION_ROUND1_TRAINER16(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH3(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer16Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER16(0x6023)
-    LINESECTION_ROUND2_MATCH3(0x6021)
+    LINESECTION_ROUND1_TRAINER16(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH3(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer16Final[] =
 {
-    LINESECTION_ROUND1_TRAINER16(0x6023)
-    LINESECTION_ROUND2_MATCH3(0x6021)
+    LINESECTION_ROUND1_TRAINER16(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH3(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer12Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER12(0x6021)
+    LINESECTION_ROUND1_TRAINER12(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer12Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER12(0x6021)
-    LINESECTION_ROUND2_MATCH4(0x6021)
+    LINESECTION_ROUND1_TRAINER12(LINE_H)
+    LINESECTION_ROUND2_MATCH4(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer12Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER12(0x6021)
-    LINESECTION_ROUND2_MATCH4(0x6021)
+    LINESECTION_ROUND1_TRAINER12(LINE_H)
+    LINESECTION_ROUND2_MATCH4(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer12Final[] =
 {
-    LINESECTION_ROUND1_TRAINER12(0x6021)
-    LINESECTION_ROUND2_MATCH4(0x6021)
+    LINESECTION_ROUND1_TRAINER12(LINE_H)
+    LINESECTION_ROUND2_MATCH4(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer4Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER4(0x6021)
+    LINESECTION_ROUND1_TRAINER4(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer4Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER4(0x6021)
-    LINESECTION_ROUND2_MATCH4(0x6021)
+    LINESECTION_ROUND1_TRAINER4(LINE_H)
+    LINESECTION_ROUND2_MATCH4(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer4Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER4(0x6021)
-    LINESECTION_ROUND2_MATCH4(0x6021)
+    LINESECTION_ROUND1_TRAINER4(LINE_H)
+    LINESECTION_ROUND2_MATCH4(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer4Final[] =
 {
-    LINESECTION_ROUND1_TRAINER4(0x6021)
-    LINESECTION_ROUND2_MATCH4(0x6021)
+    LINESECTION_ROUND1_TRAINER4(LINE_H)
+    LINESECTION_ROUND2_MATCH4(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer3Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER3(0x6045)
+    LINESECTION_ROUND1_TRAINER3(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer3Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER3(0x6025)
-    LINESECTION_ROUND2_MATCH5(0x6045)
+    LINESECTION_ROUND1_TRAINER3(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH5(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer3Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER3(0x6025)
-    LINESECTION_ROUND2_MATCH5(0x6025)
+    LINESECTION_ROUND1_TRAINER3(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH5(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer3Final[] =
 {
-    LINESECTION_ROUND1_TRAINER3(0x6025)
-    LINESECTION_ROUND2_MATCH5(0x6025)
+    LINESECTION_ROUND1_TRAINER3(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH5(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
     LINESECTION_FINAL_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer11Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER11(0x6045)
+    LINESECTION_ROUND1_TRAINER11(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer11Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER11(0x6025)
-    LINESECTION_ROUND2_MATCH5(0x6045)
+    LINESECTION_ROUND1_TRAINER11(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH5(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer11Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER11(0x6025)
-    LINESECTION_ROUND2_MATCH5(0x6025)
+    LINESECTION_ROUND1_TRAINER11(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH5(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer11Final[] =
 {
-    LINESECTION_ROUND1_TRAINER11(0x6025)
-    LINESECTION_ROUND2_MATCH5(0x6025)
+    LINESECTION_ROUND1_TRAINER11(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH5(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
     LINESECTION_FINAL_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer15Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER15(0x6021)
+    LINESECTION_ROUND1_TRAINER15(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer15Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER15(0x6021)
-    LINESECTION_ROUND2_MATCH6(0x6045)
+    LINESECTION_ROUND1_TRAINER15(LINE_H)
+    LINESECTION_ROUND2_MATCH6(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer15Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER15(0x6021)
-    LINESECTION_ROUND2_MATCH6(0x6025)
+    LINESECTION_ROUND1_TRAINER15(LINE_H)
+    LINESECTION_ROUND2_MATCH6(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer15Final[] =
 {
-    LINESECTION_ROUND1_TRAINER15(0x6021)
-    LINESECTION_ROUND2_MATCH6(0x6025)
+    LINESECTION_ROUND1_TRAINER15(LINE_H)
+    LINESECTION_ROUND2_MATCH6(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
     LINESECTION_FINAL_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer7Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER7(0x6021)
+    LINESECTION_ROUND1_TRAINER7(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer7Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER7(0x6021)
-    LINESECTION_ROUND2_MATCH6(0x6045)
+    LINESECTION_ROUND1_TRAINER7(LINE_H)
+    LINESECTION_ROUND2_MATCH6(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer7Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER7(0x6021)
-    LINESECTION_ROUND2_MATCH6(0x6025)
+    LINESECTION_ROUND1_TRAINER7(LINE_H)
+    LINESECTION_ROUND2_MATCH6(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer7Final[] =
 {
-    LINESECTION_ROUND1_TRAINER7(0x6021)
-    LINESECTION_ROUND2_MATCH6(0x6025)
+    LINESECTION_ROUND1_TRAINER7(LINE_H)
+    LINESECTION_ROUND2_MATCH6(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
     LINESECTION_FINAL_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer6Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER6(0x6045)
+    LINESECTION_ROUND1_TRAINER6(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer6Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER6(0x6025)
-    LINESECTION_ROUND2_MATCH7(0x6021)
+    LINESECTION_ROUND1_TRAINER6(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH7(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer6Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER6(0x6025)
-    LINESECTION_ROUND2_MATCH7(0x6021)
+    LINESECTION_ROUND1_TRAINER6(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH7(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer6Final[] =
 {
-    LINESECTION_ROUND1_TRAINER6(0x6025)
-    LINESECTION_ROUND2_MATCH7(0x6021)
+    LINESECTION_ROUND1_TRAINER6(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH7(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
     LINESECTION_FINAL_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer14Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER14(0x6045)
+    LINESECTION_ROUND1_TRAINER14(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer14Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER14(0x6025)
-    LINESECTION_ROUND2_MATCH7(0x6021)
+    LINESECTION_ROUND1_TRAINER14(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH7(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer14Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER14(0x6025)
-    LINESECTION_ROUND2_MATCH7(0x6021)
+    LINESECTION_ROUND1_TRAINER14(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH7(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer14Final[] =
 {
-    LINESECTION_ROUND1_TRAINER14(0x6025)
-    LINESECTION_ROUND2_MATCH7(0x6021)
+    LINESECTION_ROUND1_TRAINER14(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH7(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
     LINESECTION_FINAL_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer10Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER10(0x6021)
+    LINESECTION_ROUND1_TRAINER10(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer10Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER10(0x6021)
-    LINESECTION_ROUND2_MATCH8(0x6021)
+    LINESECTION_ROUND1_TRAINER10(LINE_H)
+    LINESECTION_ROUND2_MATCH8(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer10Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER10(0x6021)
-    LINESECTION_ROUND2_MATCH8(0x6021)
+    LINESECTION_ROUND1_TRAINER10(LINE_H)
+    LINESECTION_ROUND2_MATCH8(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer10Final[] =
 {
-    LINESECTION_ROUND1_TRAINER10(0x6021)
-    LINESECTION_ROUND2_MATCH8(0x6021)
+    LINESECTION_ROUND1_TRAINER10(LINE_H)
+    LINESECTION_ROUND2_MATCH8(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
     LINESECTION_FINAL_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer2Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER2(0x6021)
+    LINESECTION_ROUND1_TRAINER2(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer2Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER2(0x6021)
-    LINESECTION_ROUND2_MATCH8(0x6021)
+    LINESECTION_ROUND1_TRAINER2(LINE_H)
+    LINESECTION_ROUND2_MATCH8(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer2Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER2(0x6021)
-    LINESECTION_ROUND2_MATCH8(0x6021)
+    LINESECTION_ROUND1_TRAINER2(LINE_H)
+    LINESECTION_ROUND2_MATCH8(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer2Final[] =
 {
-    LINESECTION_ROUND1_TRAINER2(0x6021)
-    LINESECTION_ROUND2_MATCH8(0x6021)
+    LINESECTION_ROUND1_TRAINER2(LINE_H)
+    LINESECTION_ROUND2_MATCH8(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
     LINESECTION_FINAL_RIGHT
 };
@@ -2544,9 +2213,6 @@ static void BufferDomeOpponentName(void)
 
 static void InitDomeOpponentParty(void)
 {
-    gPlayerPartyLostHP = 0;
-    sPlayerPartyMaxHP =  GetMonData(&gPlayerParty[0], MON_DATA_MAX_HP, NULL);
-    sPlayerPartyMaxHP += GetMonData(&gPlayerParty[1], MON_DATA_MAX_HP, NULL);
     CalculatePlayerPartyCount();
     CreateDomeOpponentMons(TrainerIdToTournamentId(gTrainerBattleOpponent_A));
 }
@@ -2558,7 +2224,7 @@ static void CreateDomeOpponentMon(u8 monPartyId, u16 tournamentTrainerId, u8 tou
     #ifdef BUGFIX
     u8 fixedIv = GetDomeTrainerMonIvs(DOME_TRAINERS[tournamentTrainerId].trainerId);
     #else
-    u8 fixedIv = GetDomeTrainerMonIvs(tournamentTrainerId); // BUG: Using the wrong ID. As a result, all Pokemon have ivs of 3.
+    u8 fixedIv = GetDomeTrainerMonIvs(tournamentTrainerId); // BUG: Using the wrong ID. As a result, all Pokémon have ivs of 3.
     #endif
     u8 level = SetFacilityPtrsGetLevel();
     CreateMonWithEVSpreadNatureOTID(&gEnemyParty[monPartyId],
@@ -2573,7 +2239,7 @@ static void CreateDomeOpponentMon(u8 monPartyId, u16 tournamentTrainerId, u8 tou
     {
         SetMonMoveSlot(&gEnemyParty[monPartyId],
                        gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]].moves[i], i);
-        if (gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]].moves[i] == MOVE_FRUSTRATION)
+        if (gBattleMoves[gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]].moves[i]].effect == EFFECT_FRUSTRATION)
             friendship = 0;
     }
 
@@ -2620,13 +2286,13 @@ static void CreateDomeOpponentMons(u16 tournamentTrainerId)
     }
 }
 
-// Returns a bitmask representing which 2 of the trainer's 3 pokemon to select.
+// Returns a bitmask representing which 2 of the trainer's 3 Pokémon to select.
 // The choice is calculated solely depending on the type effectiveness of their
-// movesets against the player's pokemon.
+// movesets against the player's Pokémon.
 // There is a 50% chance of either a "good" or "bad" selection mode being used.
 // In the good mode movesets are preferred which are more effective against the
-// player, and in the bad mode the opposite is true. If all 3 pokemon tie, the
-// other mode will be tried. If they tie again, the pokemon selection is random.
+// player, and in the bad mode the opposite is true. If all 3 Pokémon tie, the
+// other mode will be tried. If they tie again, the Pokémon selection is random.
 int GetDomeTrainerSelectedMons(u16 tournamentTrainerId)
 {
     int selectedMonBits;
@@ -2771,7 +2437,6 @@ static int SelectOpponentMonsFromParty(int *partyMovePoints, bool8 allowRandom)
 static int GetTypeEffectivenessPoints(int move, int targetSpecies, int mode)
 {
     int defType1, defType2, defAbility, moveType;
-    int i = 0;
     int typePower = TYPE_x1;
 
     if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || IS_MOVE_STATUS(move))
@@ -2973,7 +2638,7 @@ static void SetDomeOpponentGraphicsId(void)
 static void SaveDomeChallenge(void)
 {
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
-    VarSet(VAR_TEMP_0, 0);
+    VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();
 }
@@ -4263,6 +3928,244 @@ static u8 Task_GetInfoCardInput(u8 taskId)
 
 #undef tUsingAlternateSlot
 
+static bool32 IsDomeHealingMove(u32 move)
+{
+    if (IsHealingMove(move))
+        return TRUE;
+    // Check extra effects not considered plain healing by AI
+    switch (gBattleMoves[move].effect)
+    {
+        case EFFECT_INGRAIN:
+        case EFFECT_REFRESH:
+        case EFFECT_AQUA_RING:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+static bool32 IsDomeDefensiveMoveEffect(u32 effect)
+{
+    switch(effect)
+    {
+    case EFFECT_COUNTER:
+    case EFFECT_EVASION_UP:
+    case EFFECT_DEFENSE_UP:
+    case EFFECT_DEFENSE_UP_2:
+    case EFFECT_SPECIAL_DEFENSE_UP:
+    case EFFECT_SPECIAL_DEFENSE_UP_2:
+    case EFFECT_MINIMIZE:
+    case EFFECT_ACCURACY_DOWN:
+    case EFFECT_DEFENSE_CURL:
+    case EFFECT_LIGHT_SCREEN:
+    case EFFECT_REFLECT:
+    case EFFECT_AURORA_VEIL:
+    case EFFECT_CONVERSION:
+    case EFFECT_PROTECT:
+    case EFFECT_MAT_BLOCK:
+    case EFFECT_ENDURE:
+    case EFFECT_SAFEGUARD:
+    case EFFECT_MIRROR_COAT:
+    case EFFECT_MAGIC_COAT:
+    case EFFECT_INGRAIN:
+    case EFFECT_AQUA_RING:
+    case EFFECT_SUBSTITUTE:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+static bool32 IsDomeRiskyMoveEffect(u32 effect)
+{
+    switch(effect)
+    {
+    case EFFECT_EXPLOSION:
+    case EFFECT_SPITE:
+    case EFFECT_DESTINY_BOND:
+    case EFFECT_PERISH_SONG:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+static bool32 IsDomeLuckyMove(u32 move)
+{
+    if (gBattleMoves[move].accuracy <= 50)
+        return TRUE;
+    switch(gBattleMoves[move].effect)
+    {
+    case EFFECT_COUNTER:
+    case EFFECT_OHKO: // Technically redundant because of the above accuracy check
+    case EFFECT_METRONOME:
+    case EFFECT_MIRROR_MOVE:
+    case EFFECT_SKETCH:
+    case EFFECT_SLEEP_TALK:
+    case EFFECT_PRESENT:
+    case EFFECT_ASSIST:
+    case EFFECT_MAGIC_COAT:
+    case EFFECT_REVENGE:
+    case EFFECT_IMPRISON:
+    case EFFECT_SNATCH:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+static bool32 IsDomePopularMove(u32 move)
+{
+    u8 i;
+    for (i = 0; i < NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES; i++)
+    {
+        if (ItemIdToBattleMoveId(ITEM_TM01 + i) == move)
+            return TRUE;
+    }
+    if (i == NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES)
+        return FALSE;
+    // Filter in TMs/HMs
+    if (gBattleMoves[move].power >= 90)
+        return TRUE;
+
+    switch(gBattleMoves[move].effect)
+    {
+    case EFFECT_PROTECT:
+    case EFFECT_MAT_BLOCK:
+    case EFFECT_ATTACK_UP_2:
+    case EFFECT_SPECIAL_ATTACK_UP_2:
+    case EFFECT_SPECIAL_ATTACK_UP_3:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+static bool32 IsDomeStatusMoveEffect(u32 move)
+{
+    switch(gBattleMoves[move].effect)
+    {
+    case EFFECT_SLEEP:
+    case EFFECT_CONFUSE:
+    case EFFECT_DISABLE:
+    case EFFECT_POISON:
+    case EFFECT_PARALYZE:
+    case EFFECT_TOXIC:
+    case EFFECT_LEECH_SEED:
+    case EFFECT_TAUNT:
+    case EFFECT_TORMENT:
+    case EFFECT_WILL_O_WISP:
+    case EFFECT_ENCORE:
+    case EFFECT_ATTRACT:
+    case EFFECT_NIGHTMARE:
+    case EFFECT_YAWN:
+    case EFFECT_CURSE:
+        return TRUE;
+    default:
+        return MoveHasMoveEffect(move, MOVE_EFFECT_WRAP);
+    }
+}
+
+static bool32 IsDomeRareMove(u32 move)
+{
+    u16 i, j;
+    u16 species = 0;
+    for(i = 0; i < NUM_SPECIES; i++)
+    {
+        const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(i);
+        for(j = 0; learnset[j].move != LEVEL_UP_MOVE_END; j++)
+        {
+            if (learnset[j].move == move)
+            {
+                species++;
+                break;
+            }
+        }
+        if (species >= NUM_SPECIES / 20) // At least 5% of all mons can learn this move
+            return FALSE;
+    }
+    return TRUE;
+}
+
+static bool32 IsDomeComboMoveEffect(u32 effect)
+{
+    switch(effect)
+    {
+    // Weather moves
+    case EFFECT_SUNNY_DAY:
+    case EFFECT_RAIN_DANCE:
+    case EFFECT_SANDSTORM:
+    case EFFECT_HAIL:
+    case EFFECT_SNOWSCAPE:
+    // Terrain moves
+    case EFFECT_GRASSY_TERRAIN:
+    case EFFECT_ELECTRIC_TERRAIN:
+    case EFFECT_MISTY_TERRAIN:
+    case EFFECT_PSYCHIC_TERRAIN:
+    // Moves dependent on weather
+    case EFFECT_SYNTHESIS:
+    case EFFECT_MORNING_SUN:
+    case EFFECT_MOONLIGHT:
+    case EFFECT_SHORE_UP:
+    case EFFECT_THUNDER:
+    case EFFECT_BLIZZARD:
+    case EFFECT_SOLAR_BEAM:
+    case EFFECT_GROWTH:
+    case EFFECT_AURORA_VEIL:
+    case EFFECT_WEATHER_BALL:
+    // Moves dependent on terrain
+    case EFFECT_EXPANDING_FORCE:
+    case EFFECT_GRASSY_GLIDE:
+    //case EFFECT_MISTY_EXPLOSION: (needs a unique effect in gBattleMoves!)
+    case EFFECT_PSYBLADE:
+    case EFFECT_RISING_VOLTAGE:
+    case EFFECT_TERRAIN_PULSE:
+    // Stockpile group
+    case EFFECT_STOCKPILE:
+    case EFFECT_SPIT_UP:
+    case EFFECT_SWALLOW:
+    // Entry hazards & cleaners
+    case EFFECT_SPIKES:
+    case EFFECT_TOXIC_SPIKES:
+    case EFFECT_STEALTH_ROCK:
+    case EFFECT_STICKY_WEB:
+    // Inflicting sleep & related effects
+    case EFFECT_SLEEP:
+    case EFFECT_YAWN:
+    case EFFECT_DREAM_EATER:
+    case EFFECT_NIGHTMARE:
+    case EFFECT_REST:
+    case EFFECT_SLEEP_TALK:
+    case EFFECT_SNORE:
+    // Anything that ups offensive stats by more than one
+    case EFFECT_ATTACK_UP:
+    case EFFECT_ATTACK_UP_2:
+    case EFFECT_ATTACK_SPATK_UP:
+    case EFFECT_SPECIAL_ATTACK_UP:
+    case EFFECT_SPECIAL_ATTACK_UP_2:
+    case EFFECT_SPECIAL_ATTACK_UP_3:
+    case EFFECT_CALM_MIND:
+    case EFFECT_DRAGON_DANCE:
+    case EFFECT_BELLY_DRUM:
+    case EFFECT_CHARGE:
+    case EFFECT_BULK_UP:
+    case EFFECT_ATTACK_ACCURACY_UP:
+    case EFFECT_FILLET_AWAY:
+    // Others
+    case EFFECT_FOCUS_ENERGY:
+    case EFFECT_LOCK_ON:
+    case EFFECT_FLAIL:
+    case EFFECT_BATON_PASS:
+    case EFFECT_INGRAIN:
+    case EFFECT_AQUA_RING:
+    case EFFECT_LEECH_SEED:
+    case EFFECT_ROAR:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
 // allocatedArray below needs to be large enough to hold stat totals for each mon, or totals of each type of move points
 #define ALLOC_ARRAY_SIZE max(NUM_STATS * FRONTIER_PARTY_SIZE, NUM_MOVE_POINT_TYPES)
 
@@ -4358,8 +4261,8 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     else
         j = GetFrontierOpponentClass(trainerId);
 
-    for (;gTrainerClassNames[j][i] != EOS; i++)
-        gStringVar1[i] = gTrainerClassNames[j][i];
+    for (;gTrainerClasses[j].name[i] != EOS; i++)
+        gStringVar1[i] = gTrainerClasses[j].name[i];
     gStringVar1[i] = CHAR_SPACE;
     gStringVar1[i + 1] = EOS;
 
@@ -4392,11 +4295,11 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     {
         textPrinter.currentY = sSpeciesNameTextYCoords[i];
         if (trainerId == TRAINER_PLAYER)
-            textPrinter.currentChar = gSpeciesNames[DOME_MONS[trainerTourneyId][i]];
+            textPrinter.currentChar = GetSpeciesName(DOME_MONS[trainerTourneyId][i]);
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
-            textPrinter.currentChar = gSpeciesNames[DOME_MONS[trainerTourneyId][i]];
+            textPrinter.currentChar = GetSpeciesName(DOME_MONS[trainerTourneyId][i]);
         else
-            textPrinter.currentChar = gSpeciesNames[gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].species];
+            textPrinter.currentChar = GetSpeciesName(gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].species);
 
         textPrinter.windowId = WIN_TRAINER_MON1_NAME + i + windowId;
         if (i == 1)
@@ -4432,12 +4335,65 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
         {
             for (k = 0; k < NUM_MOVE_POINT_TYPES; k++)
             {
+                u16 move;
                 if (trainerId == TRAINER_FRONTIER_BRAIN)
-                    allocatedArray[k] += sBattleStyleMovePoints[GetFrontierBrainMonMove(i, j)][k];
+                    move = GetFrontierBrainMonMove(i, j);
                 else if (trainerId == TRAINER_PLAYER)
-                    allocatedArray[k] += sBattleStyleMovePoints[gSaveBlock2Ptr->frontier.domePlayerPartyData[i].moves[j]][k];
+                    move = gSaveBlock2Ptr->frontier.domePlayerPartyData[i].moves[j];
                 else
-                    allocatedArray[k] += sBattleStyleMovePoints[gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].moves[j]][k];
+                    move = gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].moves[j];
+
+                switch (k)
+                {
+                case MOVE_POINTS_COMBO:
+                    allocatedArray[k] = IsDomeComboMoveEffect(gBattleMoves[move].effect) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_STAT_RAISE:
+                    allocatedArray[k] = IsStatRaisingEffect(gBattleMoves[move].effect) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_STAT_LOWER:
+                    allocatedArray[k] = IsStatLoweringEffect(gBattleMoves[move].effect) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_RARE:
+                    allocatedArray[k] = IsDomeRareMove(move) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_HEAL:
+                    allocatedArray[k] = IsDomeHealingMove(move) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_RISKY:
+                    allocatedArray[k] = IsDomeRiskyMoveEffect(gBattleMoves[move].effect) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_STATUS:
+                    allocatedArray[k] = IsDomeStatusMoveEffect(move);
+                    break;
+                case MOVE_POINTS_DMG:
+                    allocatedArray[k] = (gBattleMoves[move].power != 0) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_DEF:
+                    allocatedArray[k] = IsDomeDefensiveMoveEffect(gBattleMoves[move].effect) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_ACCURATE:
+                    allocatedArray[k] = (gBattleMoves[move].accuracy == 0 || gBattleMoves[move].accuracy == 100) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_POWERFUL:
+                    allocatedArray[k] = (gBattleMoves[move].power >= 100) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_POPULAR:
+                    allocatedArray[k] = IsDomePopularMove(move) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_LUCK:
+                    allocatedArray[k] = IsDomeLuckyMove(move) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_STRONG:
+                    allocatedArray[k] = (gBattleMoves[move].power >= 90) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_LOW_PP:
+                    allocatedArray[k] = (gBattleMoves[move].pp <= 5) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_EFFECT:
+                    allocatedArray[k] = gBattleMoves[move].sheerForceBoost;
+                    break;
+                }
             }
         }
     }
@@ -4789,7 +4745,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     if (lost[1])
         gSprites[sInfoCard->spriteIds[1 + arrId]].oam.paletteNum = 3;
 
-    // Draw left trainer's pokemon icons.
+    // Draw left trainer's Pokémon icons.
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         if (trainerIds[0] == TRAINER_PLAYER)
@@ -4829,7 +4785,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         }
     }
 
-    // Draw right trainer's pokemon icons.
+    // Draw right trainer's Pokémon icons.
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         if (trainerIds[1] == TRAINER_PLAYER)
@@ -5180,7 +5136,7 @@ static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roun
     int movePower = 0;
     SetFacilityPtrsGetLevel();
 
-    // Calc move points of all 4 moves for all 3 pokemon hitting all 3 target mons.
+    // Calc move points of all 4 moves for all 3 Pokémon hitting all 3 target mons.
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         for (j = 0; j < MAX_MON_MOVES; j++)
@@ -5197,8 +5153,7 @@ static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roun
                 movePower = 40;
             else if (movePower == 1)
                 movePower = 60;
-            else if (moveIds[i * MAX_MON_MOVES + j] == MOVE_SELF_DESTRUCT
-                  || moveIds[i * MAX_MON_MOVES + j] == MOVE_EXPLOSION)
+            else if (gBattleMoves[moveIds[i * MAX_MON_MOVES + j]].effect == EFFECT_EXPLOSION)
                 movePower /= 2;
 
             for (k = 0; k < FRONTIER_PARTY_SIZE; k++)
@@ -5206,7 +5161,7 @@ static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roun
                 u32 personality = 0;
                 u32 targetSpecies = 0;
                 u32 targetAbility = 0;
-                u32 typeMultiplier = 0;
+                uq4_12_t typeMultiplier = 0;
                 do
                 {
                     personality = Random32();
@@ -5520,7 +5475,7 @@ static void DrawTourneyAdvancementLine(u8 tournamentId, u8 roundId)
     const struct TourneyTreeLineSection *lineSection = sTourneyTreeLineSections[tournamentId][roundId];
 
     for (i = 0; i < sTourneyTreeLineSectionArrayCounts[tournamentId][roundId]; i++)
-        CopyToBgTilemapBufferRect_ChangePalette(1, &lineSection[i].src, lineSection[i].x, lineSection[i].y, 1, 1, 17);
+        CopyToBgTilemapBufferRect_ChangePalette(1, &lineSection[i].tile, lineSection[i].x, lineSection[i].y, 1, 1, 17);
 
     CopyBgTilemapBufferToVram(1);
 }
@@ -5992,7 +5947,7 @@ static void DecideRoundWinners(u8 roundId)
             gSaveBlock2Ptr->frontier.domeWinningMoves[tournamentId2] = GetWinningMove(tournamentId1, tournamentId2, roundId);
         }
         // Frontier Brain always wins, check tournamentId2.
-        else if (DOME_TRAINERS[tournamentId2].trainerId == TRAINER_FRONTIER_BRAIN && tournamentId1 != 0xFF)
+        else if (tournamentId2 != 0xFF && DOME_TRAINERS[tournamentId2].trainerId == TRAINER_FRONTIER_BRAIN && tournamentId1 != 0xFF)
         {
             DOME_TRAINERS[tournamentId1].isEliminated = TRUE;
             DOME_TRAINERS[tournamentId1].eliminatedAt = roundId;

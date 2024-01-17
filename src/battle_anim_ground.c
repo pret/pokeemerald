@@ -499,10 +499,10 @@ static void SetDigScanlineEffect(u8 useBG1, s16 y, s16 endY)
         y++;
     }
 
-    while (y < 160)
+    while (y < DISPLAY_HEIGHT)
     {
-        gScanlineEffectRegBuffers[0][y] = bgX + 240;
-        gScanlineEffectRegBuffers[1][y] = bgX + 240;
+        gScanlineEffectRegBuffers[0][y] = bgX + DISPLAY_WIDTH;
+        gScanlineEffectRegBuffers[1][y] = bgX + DISPLAY_WIDTH;
         y++;
     }
 
@@ -750,7 +750,7 @@ static void SetBattlersXOffsetForShake(struct Task *task)
 
 void AnimTask_IsPowerOver99(u8 taskId)
 {
-    gBattleAnimArgs[15] = gAnimMovePower > 99;
+    gBattleAnimArgs[ARG_RET_ID] = gAnimMovePower > 99;
     DestroyAnimVisualTask(taskId);
 }
 

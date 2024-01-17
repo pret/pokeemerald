@@ -6,8 +6,10 @@
 #define TRUE  1
 #define FALSE 0
 
-#define IWRAM_DATA __attribute__((section("iwram_data")))
-#define EWRAM_DATA __attribute__((section("ewram_data")))
+#define IWRAM_DATA __attribute__((section(".bss")))
+#define EWRAM_DATA __attribute__((section(".sbss")))
+#define IWRAM_INIT __attribute__((section(".iwram")))
+#define EWRAM_INIT __attribute__((section(".ewram")))
 #define UNUSED __attribute__((unused))
 
 #if MODERN
@@ -17,6 +19,7 @@
 #endif
 
 #define ALIGNED(n) __attribute__((aligned(n)))
+#define PACKED __attribute__((packed))
 
 #define SOUND_INFO_PTR (*(struct SoundInfo **)0x3007FF0)
 #define INTR_CHECK     (*(u16 *)0x3007FF8)

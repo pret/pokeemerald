@@ -718,8 +718,8 @@ static void HandleInitBackgrounds(void)
 static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
 {
     u16 species;
-    u32 personality, trainerId;
-    const struct CompressedSpritePalette *palette;
+    u32 personality;
+    bool32 isShiny;
 
     switch (sPokeblockFeed->loadGfxState)
     {
@@ -734,11 +734,9 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
         // Load mon palette
         species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
         personality = GetMonData(mon, MON_DATA_PERSONALITY);
-        trainerId = GetMonData(mon, MON_DATA_OT_ID);
-        palette = GetMonSpritePalStructFromOtIdPersonality(species, trainerId, personality);
-
-        LoadCompressedSpritePalette(palette);
-        SetMultiuseSpriteTemplateToPokemon(palette->tag, B_POSITION_OPPONENT_LEFT);
+        isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
+        LoadCompressedSpritePaletteWithTag(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), species);
+        SetMultiuseSpriteTemplateToPokemon(species, B_POSITION_OPPONENT_LEFT);
         sPokeblockFeed->loadGfxState++;
         break;
     case 2:

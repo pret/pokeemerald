@@ -62,7 +62,7 @@
 #define DEPT_STORE_FLOORNUM_11F      14
 #define DEPT_STORE_FLOORNUM_ROOFTOP  15
 
-// Lilycove Pokemon Trainer Fan Club
+// Lilycove Pokémon Trainer Fan Club
 #define NUM_TRAINER_FAN_CLUB_MEMBERS  8
 
 #define FANCLUB_GOT_FIRST_FANS 7

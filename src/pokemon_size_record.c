@@ -84,7 +84,7 @@ static u32 GetMonSize(u16 species, u16 b)
     u32 height;
     u32 var;
 
-    height = GetPokedexHeightWeight(SpeciesToNationalPokedexNum(species), 0);
+    height = GetSpeciesWeight(species);
     var = TranslateBigMonSizeTableIndex(b);
     unk0 = sBigMonSizeTable[var].unk0;
     unk2 = sBigMonSizeTable[var].unk2;
@@ -148,7 +148,7 @@ static void GetMonSizeRecordInfo(u16 species, u16 *sizeRecord)
     u32 size = GetMonSize(species, *sizeRecord);
 
     FormatMonSizeRecord(gStringVar3, size);
-    StringCopy(gStringVar1, gSpeciesNames[species]);
+    StringCopy(gStringVar1, GetSpeciesName(species));
     if (*sizeRecord == DEFAULT_MAX_SIZE)
         StringCopy(gStringVar2, gText_Marco);
     else

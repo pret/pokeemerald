@@ -27,8 +27,6 @@
 #include "constants/battle_move_effects.h"
 #include "gba/io_reg.h"
 
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
-
 EWRAM_DATA static u8 sMailboxWindowIds[MAILBOXWIN_COUNT] = {0};
 EWRAM_DATA static struct ListMenuItem *sMailboxList = NULL;
 
@@ -237,8 +235,7 @@ void MailboxMenu_RemoveWindow(u8 windowIdx)
     sMailboxWindowIds[windowIdx] = WINDOW_NONE;
 }
 
-// Unused
-static u8 MailboxMenu_GetWindowId(u8 windowIdx)
+static u8 UNUSED MailboxMenu_GetWindowId(u8 windowIdx)
 {
     return sMailboxWindowIds[windowIdx];
 }
@@ -589,7 +586,7 @@ static void ConditionGraph_CalcRightHalf(struct ConditionGraph *graph)
     // No need for conditional, positions on the Beauty line are always above the Cute line
     ConditionGraph_CalcLine(graph, graph->scanlineRight[0], &graph->curPositions[GRAPH_BEAUTY], &graph->curPositions[GRAPH_CUTE], TRUE, NULL);
 
-    // Calculate Cute -> Tough line (includes left scanline because this crosses the halfway point)
+    // Calculate Cute -> Smart line (includes left scanline because this crosses the halfway point)
     i = (graph->curPositions[GRAPH_CUTE].y <= graph->curPositions[GRAPH_SMART].y);
     ConditionGraph_CalcLine(graph, graph->scanlineRight[0], &graph->curPositions[GRAPH_CUTE], &graph->curPositions[GRAPH_SMART], i, graph->scanlineLeft[0]);
 
@@ -923,7 +920,7 @@ static u8 *GetConditionMenuMonString(u8 *dst, u16 boxId, u16 monId)
     *(dst++) = TEXT_COLOR_TRANSPARENT;
     *(dst++) = TEXT_COLOR_LIGHT_BLUE;
     if (GetBoxOrPartyMonData(box, mon, MON_DATA_IS_EGG, NULL))
-        return StringCopyPadded(dst, gText_EggNickname, 0, 12);
+        return StringCopyPadded(dst, gText_EggNickname, 0, POKEMON_NAME_LENGTH + 2);
     GetBoxOrPartyMonData(box, mon, MON_DATA_NICKNAME, dst);
     StringGet_Nickname(dst);
     species = GetBoxOrPartyMonData(box, mon, MON_DATA_SPECIES, NULL);
@@ -939,7 +936,7 @@ static u8 *GetConditionMenuMonString(u8 *dst, u16 boxId, u16 monId)
         level = GetLevelFromBoxMonExp(boxMon);
     }
 
-    if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && !StringCompare(dst, gSpeciesNames[species]))
+    if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && !StringCompare(dst, GetSpeciesName(species)))
         gender = MON_GENDERLESS;
 
     for (str = dst; *str != EOS; str++)
@@ -1025,7 +1022,7 @@ void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u16 boxId
         locationDst[3] = TEXT_COLOR_TRANSPARENT;
         locationDst[4] = TEXT_COLOR_LIGHT_BLUE;
         if (box == TOTAL_BOXES_COUNT) // Party mon.
-            BufferConditionMenuSpacedStringN(&locationDst[5], gText_InParty, 8);
+            BufferConditionMenuSpacedStringN(&locationDst[5], gText_InParty, BOX_NAME_LENGTH);
         else
             BufferConditionMenuSpacedStringN(&locationDst[5], GetBoxNamePtr(box), BOX_NAME_LENGTH);
     }
@@ -1034,7 +1031,7 @@ void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u16 boxId
         for (i = 0; i < POKEMON_NAME_LENGTH + 2; i++)
             nameDst[i] = CHAR_SPACE;
         nameDst[i] = EOS;
-        for (i = 0; i < 8; i++)
+        for (i = 0; i < BOX_NAME_LENGTH; i++)
             locationDst[i] = CHAR_SPACE;
         locationDst[i] = EOS;
     }
@@ -1078,11 +1075,11 @@ void GetConditionMenuMonGfx(void *tilesDst, void *palDst, u16 boxId, u16 monId, 
     if (partyId != numMons)
     {
         u16 species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES_OR_EGG, NULL);
-        u32 trainerId = GetBoxOrPartyMonData(boxId, monId, MON_DATA_OT_ID, NULL);
+        bool8 isShiny = GetBoxOrPartyMonData(boxId, monId, MON_DATA_IS_SHINY, NULL);
         u32 personality = GetBoxOrPartyMonData(boxId, monId, MON_DATA_PERSONALITY, NULL);
 
         LoadSpecialPokePic(tilesDst, species, personality, TRUE);
-        LZ77UnCompWram(GetMonSpritePalFromSpeciesAndPersonality(species, trainerId, personality), palDst);
+        LZ77UnCompWram(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), palDst);
     }
 }
 

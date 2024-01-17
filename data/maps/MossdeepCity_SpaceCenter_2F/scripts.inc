@@ -257,14 +257,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle::
 	goto MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt
 
 MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle::
-	special ReducePlayerPartyToSelectedMons
-	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
-	setvar VAR_0x8004, SPECIAL_BATTLE_STEVEN
-	setvar VAR_0x8005, 0
-	special DoSpecialTrainerBattle
-	waitstate
-	frontier_saveparty
-	special LoadPlayerParty
+	multi_2_vs_2 TRAINER_MAXIE_MOSSDEEP, MossdeepCity_SpaceCenter_2F_Text_JustWantToExpandLand, TRAINER_TABITHA_MOSSDEEP, MossdeepCity_SpaceCenter_Text_TabithaDefeat, PARTNER_STEVEN, TRAINER_BACK_PIC_STEVEN
 	switch VAR_RESULT
 	case 1, MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha
 	fadescreen FADE_TO_BLACK
@@ -335,14 +328,6 @@ MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayerSouth::
 MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayerWest::
 	turnobject LOCALID_STEVEN, DIR_EAST
 	return
-
-MossdeepCity_SpaceCenter_2F_EventScript_MaxieTrainer::
-	trainerbattle TRAINER_BATTLE_SET_TRAINER_A, TRAINER_MAXIE_MOSSDEEP, 0, MossdeepCity_SpaceCenter_2F_Text_JustWantToExpandLand, MossdeepCity_SpaceCenter_2F_Text_JustWantToExpandLand
-	end
-
-MossdeepCity_SpaceCenter_2F_EventScript_TabithaTrainer::
-	trainerbattle TRAINER_BATTLE_SET_TRAINER_B, TRAINER_TABITHA_MOSSDEEP, 0, MossdeepCity_SpaceCenter_Text_TabithaDefeat, MossdeepCity_SpaceCenter_Text_TabithaDefeat
-	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_RivalRayquazaCall::
 	lockall

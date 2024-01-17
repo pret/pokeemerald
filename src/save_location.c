@@ -119,9 +119,9 @@ void TrySetMapSaveWarpStatus(void)
     TrySetUnknownWarpStatus();
 }
 
-// In FRLG, only bits 0, 4, and 5 are set when the pokedex is received.
+// In FRLG, only bits 0, 4, and 5 are set when the Pokédex is received.
 // Bits 1, 2, 3, and 15 are instead set by SetPostgameFlags.
-// These flags are read by Pokemon Colosseum/XD for linking. XD Additionally requires FLAG_SYS_GAME_CLEAR
+// These flags are read by Pokémon Colosseum/XD for linking. XD Additionally requires FLAG_SYS_GAME_CLEAR
 void SetUnlockedPokedexFlags(void)
 {
     gSaveBlock2Ptr->gcnLinkFlags |= (1 << 15);

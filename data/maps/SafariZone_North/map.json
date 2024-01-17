@@ -143,8 +143,8 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "SafariZone_North_EventScript_ItemCalcium",
+      "trainer_sight_or_berry_tree_id": "ITEM_CALCIUM",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_SAFARI_ZONE_NORTH_CALCIUM"
     }
   ],

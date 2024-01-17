@@ -102,7 +102,6 @@ extern const struct OamData gObjectEventBaseOam_32x32;
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 extern const u8 gReflectionEffectPaletteMap[];
 
-extern const u8 *const gBerryTreeObjectEventGraphicsIdTablePointers[];
 extern const struct SpriteFrameImage *const gBerryTreePicTablePointers[];
 extern const u8 *const gBerryTreePaletteSlotTablePointers[];
 
@@ -470,5 +469,8 @@ void SetVirtualObjectInvisibility(u8 virtualObjId, bool32 invisible);
 bool32 IsVirtualObjectInvisible(u8 virtualObjId);
 void SetVirtualObjectSpriteAnim(u8 virtualObjId, u8 animNum);
 bool32 IsVirtualObjectAnimating(u8 virtualObjId);
+
+bool8 MovementAction_EmoteX_Step0(struct ObjectEvent *, struct Sprite *);
+bool8 MovementAction_EmoteDoubleExclamationMark_Step0(struct ObjectEvent *, struct Sprite *);
 
 #endif //GUARD_EVENT_OBJECT_MOVEMENT_H

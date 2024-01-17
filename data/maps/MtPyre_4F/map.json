@@ -36,8 +36,8 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "MtPyre_4F_EventScript_ItemSeaIncense",
+      "trainer_sight_or_berry_tree_id": "ITEM_SEA_INCENSE",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_MT_PYRE_4F_SEA_INCENSE"
     }
   ],

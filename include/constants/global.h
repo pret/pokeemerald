@@ -9,9 +9,9 @@
 
 // Invalid Versions show as "----------" in Gen 4 and Gen 5's summary screen.
 // In Gens 6 and 7, invalid versions instead show "a distant land" in the summary screen.
-// In Gen 4 only, migrated Pokemon with Diamond, Pearl, or Platinum's ID show as "----------".
+// In Gen 4 only, migrated Pokémon with Diamond, Pearl, or Platinum's ID show as "----------".
 // Gen 5 and up read Diamond, Pearl, or Platinum's ID as "Sinnoh".
-// In Gen 4 and up, migrated Pokemon with HeartGold or SoulSilver's ID show the otherwise unused "Johto" string.
+// In Gen 4 and up, migrated Pokémon with HeartGold or SoulSilver's ID show the otherwise unused "Johto" string.
 #define VERSION_SAPPHIRE 1
 #define VERSION_RUBY 2
 #define VERSION_EMERALD 3
@@ -23,6 +23,8 @@
 #define VERSION_PEARL 11
 #define VERSION_PLATINUM 12
 #define VERSION_GAMECUBE 15
+
+#define NUM_VERSIONS 15
 
 #define LANGUAGE_JAPANESE 1
 #define LANGUAGE_ENGLISH  2
@@ -87,6 +89,7 @@
 
 #define TRAINER_ID_LENGTH 4
 #define MAX_MON_MOVES 4
+#define ALL_MOVES_MASK ((1 << MAX_MON_MOVES) - 1)
 
 #define CONTESTANT_COUNT 4
 #define CONTEST_CATEGORY_COOL     0
@@ -98,7 +101,9 @@
 
 // string lengths
 #define ITEM_NAME_LENGTH 14
+#define ITEM_NAME_PLURAL_LENGTH ITEM_NAME_LENGTH + 2 // 2 is used for the instance where a word's suffix becomes y->ies
 #define POKEMON_NAME_LENGTH 10
+#define POKEMON_NAME_BUFFER_SIZE max(20, POKEMON_NAME_LENGTH + 1) // Frequently used buffer size. Larger than necessary
 #define PLAYER_NAME_LENGTH 7
 #define MAIL_WORDS_COUNT 9
 #define EASY_CHAT_BATTLE_WORDS_COUNT 6

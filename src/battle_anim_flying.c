@@ -10,6 +10,7 @@
 
 extern const struct SpriteTemplate gFlashingHitSplatSpriteTemplate;
 
+static void AnimEllipticalGustCentered(struct Sprite *sprite);
 static void AnimEllipticalGust_Step(struct Sprite *);
 static void AnimGustToTarget(struct Sprite *);
 static void AnimGustToTarget_Step(struct Sprite *);
@@ -31,6 +32,17 @@ static void AnimSkyAttackBird(struct Sprite *);
 static void AnimSkyAttackBird_Step(struct Sprite *);
 static void AnimTask_AnimateGustTornadoPalette_Step(u8);
 static void AnimTask_LoadWindstormBackground_Step(u8 taskId);
+
+const struct SpriteTemplate gEllipticalGustCenteredSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_GUST,
+    .paletteTag = ANIM_TAG_GUST,
+    .oam = &gOamData_AffineOff_ObjNormal_32x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimEllipticalGustCentered,
+};
 
 const struct SpriteTemplate gEllipticalGustSpriteTemplate =
 {
@@ -157,7 +169,7 @@ static const union AnimCmd sAnim_FallingFeather_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd *const sAnims_FallingFeather[] =
+const union AnimCmd *const gAnims_FallingFeather[] =
 {
     sAnim_FallingFeather_0,
     sAnim_FallingFeather_1,
@@ -168,7 +180,7 @@ const struct SpriteTemplate gFallingFeatherSpriteTemplate =
     .tileTag = ANIM_TAG_WHITE_FEATHER,
     .paletteTag = ANIM_TAG_WHITE_FEATHER,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
-    .anims = sAnims_FallingFeather,
+    .anims = gAnims_FallingFeather,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimFallingFeather,
@@ -344,6 +356,15 @@ const struct SpriteTemplate gSkyAttackBirdSpriteTemplate =
     .callback = AnimSkyAttackBird,
 };
 
+// same as AnimEllipticalGust but centered on targets
+static void AnimEllipticalGustCentered(struct Sprite *sprite)
+{
+    InitSpritePosToAnimTargetsCentre(sprite, FALSE);
+    sprite->y += 20;
+    sprite->data[1] = 191;
+    sprite->callback = AnimEllipticalGust_Step;
+    sprite->callback(sprite);
+}
 
 void AnimEllipticalGust(struct Sprite *sprite)
 {
@@ -1216,8 +1237,7 @@ void AnimSkyAttackBird_Step(struct Sprite *sprite)
         DestroySpriteAndMatrix(sprite);
 }
 
-// Unused
-static void AnimTask_SetAttackerVisibility(u8 taskId)
+static void UNUSED AnimTask_SetAttackerVisibility(u8 taskId)
 {
     if (gBattleAnimArgs[0] == 0)
     {

@@ -23,8 +23,8 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "ArtisanCave_B1F_EventScript_ItemHPUp",
+      "trainer_sight_or_berry_tree_id": "ITEM_HP_UP",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_ARTISAN_CAVE_B1F_HP_UP"
     }
   ],

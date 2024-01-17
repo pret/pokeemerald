@@ -118,7 +118,7 @@ const u8 gMiscBlank_Gfx[] = INCBIN_U8("graphics/interface/blank.4bpp");
 
 u8 CreateInvisibleSpriteWithCallback(void (*callback)(struct Sprite *))
 {
-    u8 sprite = CreateSprite(&sInvisibleSpriteTemplate, 248, 168, 14);
+    u8 sprite = CreateSprite(&sInvisibleSpriteTemplate, DISPLAY_WIDTH + 8, DISPLAY_HEIGHT + 8, 14);
     gSprites[sprite].invisible = TRUE;
     gSprites[sprite].callback = callback;
     return sprite;
@@ -158,7 +158,7 @@ void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
 {
     u8 x, y;
     s8 i, j;
-    u8 xflip[32];
+    u8 ALIGNED(4) xflip[32];
     u8 h = sSpriteDimensions[shape][size][1];
     u8 w = sSpriteDimensions[shape][size][0];
 
@@ -261,7 +261,7 @@ u32 CalcByteArraySum(const u8 *data, u32 length)
     return sum;
 }
 
-void BlendPalette(u16 palOffset, u16 numEntries, u8 coeff, u16 blendColor)
+void BlendPalette(u16 palOffset, u16 numEntries, u8 coeff, u32 blendColor)
 {
     u16 i;
     for (i = 0; i < numEntries; i++)

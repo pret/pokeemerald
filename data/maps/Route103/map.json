@@ -190,8 +190,8 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route103_EventScript_ItemGuardSpec",
+      "trainer_sight_or_berry_tree_id": "ITEM_GUARD_SPEC",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_ROUTE_103_GUARD_SPEC"
     },
     {
@@ -281,8 +281,8 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route103_EventScript_ItemPPUp",
+      "trainer_sight_or_berry_tree_id": "ITEM_PP_UP",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_ROUTE_103_PP_UP"
     }
   ],

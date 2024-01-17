@@ -49,10 +49,12 @@
 #include "trainer_see.h"
 #include "tv.h"
 #include "window.h"
+#include "list_menu.h"
+#include "malloc.h"
 #include "constants/event_objects.h"
 
 typedef u16 (*SpecialFunc)(void);
-typedef void (*NativeFunc)(void);
+typedef void (*NativeFunc)(struct ScriptContext *ctx);
 
 EWRAM_DATA const u8 *gRamScriptRetAddr = NULL;
 static EWRAM_DATA u32 sAddressOffset = 0; // For relative addressing in vgoto etc., used by saved scripts (e.g. Mystery Event)
@@ -63,13 +65,14 @@ static EWRAM_DATA u16 sMovingNpcMapNum = 0;
 static EWRAM_DATA u16 sFieldEffectScriptId = 0;
 
 static u8 sBrailleWindowId;
-static bool8 gIsScriptedWildDouble;
+static bool8 sIsScriptedWildDouble;
 
 extern const SpecialFunc gSpecials[];
 extern const u8 *gStdScripts[];
 extern const u8 *gStdScripts_End[];
 
 static void CloseBrailleWindow(void);
+static void DynamicMultichoiceSortList(struct ListMenuItem *items, u32 count);
 
 // This is defined in here so the optimizer can't see its value when compiling
 // script.c.
@@ -78,12 +81,12 @@ void * const gNullScriptPtr = NULL;
 static const u8 sScriptConditionTable[6][3] =
 {
 //  <  =  >
-    1, 0, 0, // <
-    0, 1, 0, // =
-    0, 0, 1, // >
-    1, 1, 0, // <=
-    0, 1, 1, // >=
-    1, 0, 1, // !=
+    {1, 0, 0}, // <
+    {0, 1, 0}, // =
+    {0, 0, 1}, // >
+    {1, 1, 0}, // <=
+    {0, 1, 1}, // >=
+    {1, 0, 1}, // !=
 };
 
 static u8 *const sScriptStringVars[] =
@@ -136,8 +139,9 @@ bool8 ScrCmd_specialvar(struct ScriptContext *ctx)
 
 bool8 ScrCmd_callnative(struct ScriptContext *ctx)
 {
-    u32 func = ScriptReadWord(ctx);
-    ((NativeFunc) func)();
+    NativeFunc func = (NativeFunc)ScriptReadWord(ctx);
+
+    func(ctx);
     return FALSE;
 }
 
@@ -498,7 +502,7 @@ bool8 ScrCmd_additem(struct ScriptContext *ctx)
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = AddBagItem(itemId, (u8)quantity);
+    gSpecialVar_Result = AddBagItem(itemId, quantity);
     return FALSE;
 }
 
@@ -507,7 +511,7 @@ bool8 ScrCmd_removeitem(struct ScriptContext *ctx)
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = RemoveBagItem(itemId, (u8)quantity);
+    gSpecialVar_Result = RemoveBagItem(itemId, quantity);
     return FALSE;
 }
 
@@ -516,7 +520,7 @@ bool8 ScrCmd_checkitemspace(struct ScriptContext *ctx)
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = CheckBagHasSpace(itemId, (u8)quantity);
+    gSpecialVar_Result = CheckBagHasSpace(itemId, quantity);
     return FALSE;
 }
 
@@ -525,7 +529,7 @@ bool8 ScrCmd_checkitem(struct ScriptContext *ctx)
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = CheckBagHasItem(itemId, (u8)quantity);
+    gSpecialVar_Result = CheckBagHasItem(itemId, quantity);
     return FALSE;
 }
 
@@ -791,8 +795,8 @@ bool8 ScrCmd_warphole(struct ScriptContext *ctx)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
-    u16 x;
-    u16 y;
+    s16 x;
+    s16 y;
 
     PlayerGetDestCoords(&x, &y);
     if (mapGroup == MAP_GROUP(UNDEFINED) && mapNum == MAP_NUM(UNDEFINED))
@@ -1393,6 +1397,101 @@ bool8 ScrCmd_yesnobox(struct ScriptContext *ctx)
     }
 }
 
+static void DynamicMultichoiceSortList(struct ListMenuItem *items, u32 count)
+{
+    u32 i,j;
+    struct ListMenuItem tmp;
+    for (i = 0; i < count - 1; ++i)
+    {
+        for (j = 0; j < count - i - 1; ++j)
+        {
+            if (items[j].id > items[j+1].id)
+            {
+                tmp = items[j];
+                items[j] = items[j+1];
+                items[j+1] = tmp;
+            }
+        }
+    }
+}
+
+#define DYN_MULTICHOICE_DEFAULT_MAX_BEFORE_SCROLL 6
+
+bool8 ScrCmd_dynmultichoice(struct ScriptContext *ctx)
+{
+    u32 i;
+    u32 left = VarGet(ScriptReadHalfword(ctx));
+    u32 top = VarGet(ScriptReadHalfword(ctx));
+    bool32 ignoreBPress = ScriptReadByte(ctx);
+    u32 maxBeforeScroll = ScriptReadByte(ctx);
+    bool32 shouldSort = ScriptReadByte(ctx);
+    u32 initialSelected = VarGet(ScriptReadHalfword(ctx));
+    u32 callbackSet = ScriptReadByte(ctx);
+    u32 initialRow = 0;
+    // Read vararg
+    u32 argc = ScriptReadByte(ctx);
+    struct ListMenuItem *items;
+
+    if (argc == 0)
+        return FALSE;
+
+    if (maxBeforeScroll == 0xFF)
+        maxBeforeScroll = DYN_MULTICHOICE_DEFAULT_MAX_BEFORE_SCROLL;
+
+    if ((const u8*) ScriptPeekWord(ctx) != NULL)
+    {
+        items = AllocZeroed(sizeof(struct ListMenuItem) * argc);
+        for (i = 0; i < argc; ++i)
+        {
+            u8 *nameBuffer = Alloc(100);
+            const u8 *arg = (const u8 *) ScriptReadWord(ctx);
+            StringExpandPlaceholders(nameBuffer, arg);
+            items[i].name = nameBuffer;
+            items[i].id = i;
+            if (i == initialSelected)
+                initialRow = i;
+        }
+    }
+    else
+    {
+        argc = MultichoiceDynamic_StackSize();
+        items = AllocZeroed(sizeof(struct ListMenuItem) * argc);
+        for (i = 0; i < argc; ++i)
+        {
+            struct ListMenuItem *currentItem = MultichoiceDynamic_PeekElementAt(i);
+            items[i] = *currentItem;
+            if (currentItem->id == initialSelected)
+                initialRow = i;
+        }
+        if (shouldSort)
+            DynamicMultichoiceSortList(items, argc);
+        MultichoiceDynamic_DestroyStack();
+    }
+
+    if (ScriptMenu_MultichoiceDynamic(left, top, argc, items, ignoreBPress, maxBeforeScroll, initialRow, callbackSet))
+    {
+        ScriptContext_Stop();
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+bool8 ScrCmd_dynmultipush(struct ScriptContext *ctx)
+{
+    u8 *nameBuffer = Alloc(100);
+    const u8 *name = (const u8*) ScriptReadWord(ctx);
+    u32 id = VarGet(ScriptReadHalfword(ctx));
+    struct ListMenuItem item;
+    StringExpandPlaceholders(nameBuffer, name);
+    item.name = nameBuffer;
+    item.id = id;
+    MultichoiceDynamic_PushElement(item);
+    return FALSE;
+}
+
 bool8 ScrCmd_multichoice(struct ScriptContext *ctx)
 {
     u8 left = ScriptReadByte(ctx);
@@ -1462,10 +1561,10 @@ bool8 ScrCmd_multichoicegrid(struct ScriptContext *ctx)
 
 bool8 ScrCmd_erasebox(struct ScriptContext *ctx)
 {
-    u8 left = ScriptReadByte(ctx);
-    u8 top = ScriptReadByte(ctx);
-    u8 right = ScriptReadByte(ctx);
-    u8 bottom = ScriptReadByte(ctx);
+    u8 UNUSED left = ScriptReadByte(ctx);
+    u8 UNUSED top = ScriptReadByte(ctx);
+    u8 UNUSED right = ScriptReadByte(ctx);
+    u8 UNUSED bottom = ScriptReadByte(ctx);
 
     // Menu_EraseWindowRect(left, top, right, bottom);
     return FALSE;
@@ -1473,10 +1572,10 @@ bool8 ScrCmd_erasebox(struct ScriptContext *ctx)
 
 bool8 ScrCmd_drawboxtext(struct ScriptContext *ctx)
 {
-    u8 left = ScriptReadByte(ctx);
-    u8 top = ScriptReadByte(ctx);
-    u8 multichoiceId = ScriptReadByte(ctx);
-    bool8 ignoreBPress = ScriptReadByte(ctx);
+    u8 UNUSED left = ScriptReadByte(ctx);
+    u8 UNUSED top = ScriptReadByte(ctx);
+    u8 UNUSED multichoiceId = ScriptReadByte(ctx);
+    bool8 UNUSED ignoreBPress = ScriptReadByte(ctx);
 
     /*if (Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
     {
@@ -1594,7 +1693,7 @@ bool8 ScrCmd_bufferspeciesname(struct ScriptContext *ctx)
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 species = VarGet(ScriptReadHalfword(ctx)) & ((1 << 10) - 1); // ignore possible shiny / form bits
 
-    StringCopy(sScriptStringVars[stringVarIndex], gSpeciesNames[species]);
+    StringCopy(sScriptStringVars[stringVarIndex], GetSpeciesName(species));
     return FALSE;
 }
 
@@ -1605,7 +1704,7 @@ bool8 ScrCmd_bufferleadmonspeciesname(struct ScriptContext *ctx)
     u8 *dest = sScriptStringVars[stringVarIndex];
     u8 partyIndex = GetLeadMonIndex();
     u32 species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES, NULL);
-    StringCopy(dest, gSpeciesNames[species]);
+    StringCopy(dest, GetSpeciesName(species));
     return FALSE;
 }
 
@@ -1834,8 +1933,8 @@ bool8 ScrCmd_hidemoneybox(struct ScriptContext *ctx)
 
 bool8 ScrCmd_updatemoneybox(struct ScriptContext *ctx)
 {
-    u8 x = ScriptReadByte(ctx);
-    u8 y = ScriptReadByte(ctx);
+    u8 UNUSED x = ScriptReadByte(ctx);
+    u8 UNUSED y = ScriptReadByte(ctx);
     u8 ignore = ScriptReadByte(ctx);
 
     if (!ignore)
@@ -1854,8 +1953,8 @@ bool8 ScrCmd_showcoinsbox(struct ScriptContext *ctx)
 
 bool8 ScrCmd_hidecoinsbox(struct ScriptContext *ctx)
 {
-    u8 x = ScriptReadByte(ctx);
-    u8 y = ScriptReadByte(ctx);
+    u8 UNUSED x = ScriptReadByte(ctx);
+    u8 UNUSED y = ScriptReadByte(ctx);
 
     HideCoinsWindow();
     return FALSE;
@@ -1863,8 +1962,8 @@ bool8 ScrCmd_hidecoinsbox(struct ScriptContext *ctx)
 
 bool8 ScrCmd_updatecoinsbox(struct ScriptContext *ctx)
 {
-    u8 x = ScriptReadByte(ctx);
-    u8 y = ScriptReadByte(ctx);
+    u8 UNUSED x = ScriptReadByte(ctx);
+    u8 UNUSED y = ScriptReadByte(ctx);
 
     PrintCoinsString(GetCoins());
     return FALSE;
@@ -1930,12 +2029,12 @@ bool8 ScrCmd_setwildbattle(struct ScriptContext *ctx)
     if(species2 == SPECIES_NONE)
     {
         CreateScriptedWildMon(species, level, item);
-        gIsScriptedWildDouble = FALSE;
+        sIsScriptedWildDouble = FALSE;
     }
     else
     {
         CreateScriptedDoubleWildMon(species, level, item, species2, level2, item2);
-        gIsScriptedWildDouble = TRUE;
+        sIsScriptedWildDouble = TRUE;
     }
 
     return FALSE;
@@ -1943,7 +2042,7 @@ bool8 ScrCmd_setwildbattle(struct ScriptContext *ctx)
 
 bool8 ScrCmd_dowildbattle(struct ScriptContext *ctx)
 {
-    if (gIsScriptedWildDouble == FALSE)
+    if (sIsScriptedWildDouble == FALSE)
         BattleSetup_StartScriptedWildBattle();
     else
         BattleSetup_StartScriptedDoubleWildBattle();
@@ -2186,10 +2285,10 @@ bool8 ScrCmd_setdoorclosed(struct ScriptContext *ctx)
 // Below two are functions for elevators in RS, do nothing in Emerald
 bool8 ScrCmd_addelevmenuitem(struct ScriptContext *ctx)
 {
-    u8 v3 = ScriptReadByte(ctx);
-    u16 v5 = VarGet(ScriptReadHalfword(ctx));
-    u16 v7 = VarGet(ScriptReadHalfword(ctx));
-    u16 v9 = VarGet(ScriptReadHalfword(ctx));
+    u8 UNUSED v3 = ScriptReadByte(ctx);
+    u16 UNUSED v5 = VarGet(ScriptReadHalfword(ctx));
+    u16 UNUSED v7 = VarGet(ScriptReadHalfword(ctx));
+    u16 UNUSED v9 = VarGet(ScriptReadHalfword(ctx));
 
     //ScriptAddElevatorMenuItem(v3, v5, v7, v9);
     return FALSE;

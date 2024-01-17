@@ -248,7 +248,7 @@ static void HoldContestPainting(void)
         if ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON)))
         {
             sHoldState++;
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB(0, 0, 0));
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         }
 
         if (sVarsInitialized)
@@ -363,7 +363,7 @@ static void VBlankCB_ContestPainting(void)
 
 static void InitContestMonPixels(u16 species, bool8 backPic)
 {
-    const void *pal = GetMonSpritePalFromSpeciesAndPersonality(species, gContestPaintingWinner->trainerId, gContestPaintingWinner->personality);
+    const void *pal = GetMonSpritePalFromSpeciesAndPersonality(species, gContestPaintingWinner->isShiny, gContestPaintingWinner->personality);
     LZDecompressVram(pal, gContestPaintingMonPalette);
     if (!backPic)
     {

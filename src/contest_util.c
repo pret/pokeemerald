@@ -879,9 +879,8 @@ static void Task_ShowWinnerMonBanner(u8 taskId)
     int i;
     u8 spriteId;
     u16 species;
-    u32 otId;
+    bool8 isShiny;
     u32 personality;
-    const struct CompressedSpritePalette *pokePal;
 
     switch (gTasks[taskId].tState)
     {
@@ -892,16 +891,15 @@ static void Task_ShowWinnerMonBanner(u8 taskId)
         GET_CONTEST_WINNER_ID(i);
         species = gContestMons[i].species;
         personality = gContestMons[i].personality;
-        otId = gContestMons[i].otId;
+        isShiny = gContestMons[i].isShiny;
         HandleLoadSpecialPokePic(TRUE,
                                 gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
                                 species,
                                 personality);
 
-        pokePal = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
-        LoadCompressedSpritePalette(pokePal);
+        LoadCompressedSpritePaletteWithTag(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), species);
         SetMultiuseSpriteTemplateToPokemon(species, B_POSITION_OPPONENT_LEFT);
-        gMultiuseSpriteTemplate.paletteTag = pokePal->tag;
+        gMultiuseSpriteTemplate.paletteTag = species;
         spriteId = CreateSprite(&gMultiuseSpriteTemplate, DISPLAY_WIDTH + 32, DISPLAY_HEIGHT / 2, 10);
         gSprites[spriteId].data[1] = species;
         gSprites[spriteId].oam.priority = 0;
@@ -1127,7 +1125,7 @@ static void LoadAllContestMonIconPalettes(void)
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         species = gContestMons[i].species;
-        LoadPalette(gMonIconPalettes[gMonIconPaletteIndices[GetIconSpecies(species, 0)]], BG_PLTT_ID(10 + i), PLTT_SIZE_4BPP);
+        LoadPalette(gMonIconPalettes[gSpeciesInfo[GetIconSpecies(species, 0)].iconPalIndex], BG_PLTT_ID(10 + i), PLTT_SIZE_4BPP);
     }
 }
 
@@ -1994,7 +1992,7 @@ void GiveMonContestRibbon(void)
     {
     case CONTEST_CATEGORY_COOL:
         ribbonData = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_COOL_RIBBON);
-        if (ribbonData <= gSpecialVar_ContestRank && ribbonData < 4)
+        if (ribbonData <= gSpecialVar_ContestRank && ribbonData <= CONTEST_RANK_MASTER)
         {
             ribbonData++;
             SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_COOL_RIBBON, &ribbonData);
@@ -2004,7 +2002,7 @@ void GiveMonContestRibbon(void)
         break;
     case CONTEST_CATEGORY_BEAUTY:
         ribbonData = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_BEAUTY_RIBBON);
-        if (ribbonData <= gSpecialVar_ContestRank && ribbonData < 4)
+        if (ribbonData <= gSpecialVar_ContestRank && ribbonData <= CONTEST_RANK_MASTER)
         {
             ribbonData++;
             SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_BEAUTY_RIBBON, &ribbonData);
@@ -2014,7 +2012,7 @@ void GiveMonContestRibbon(void)
         break;
     case CONTEST_CATEGORY_CUTE:
         ribbonData = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_CUTE_RIBBON);
-        if (ribbonData <= gSpecialVar_ContestRank && ribbonData < 4)
+        if (ribbonData <= gSpecialVar_ContestRank && ribbonData <= CONTEST_RANK_MASTER)
         {
             ribbonData++;
             SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_CUTE_RIBBON, &ribbonData);
@@ -2024,7 +2022,7 @@ void GiveMonContestRibbon(void)
         break;
     case CONTEST_CATEGORY_SMART:
         ribbonData = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SMART_RIBBON);
-        if (ribbonData <= gSpecialVar_ContestRank && ribbonData < 4)
+        if (ribbonData <= gSpecialVar_ContestRank && ribbonData <= CONTEST_RANK_MASTER)
         {
             ribbonData++;
             SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SMART_RIBBON, &ribbonData);
@@ -2034,7 +2032,7 @@ void GiveMonContestRibbon(void)
         break;
     case CONTEST_CATEGORY_TOUGH:
         ribbonData = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_TOUGH_RIBBON);
-        if (ribbonData <= gSpecialVar_ContestRank && ribbonData < 4)
+        if (ribbonData <= gSpecialVar_ContestRank && ribbonData <= CONTEST_RANK_MASTER)
         {
             ribbonData++;
             SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_TOUGH_RIBBON, &ribbonData);
@@ -2560,12 +2558,12 @@ bool8 IsContestDebugActive(void)
 
 void ShowContestEntryMonPic(void)
 {
-    const struct CompressedSpritePalette *palette;
-    u32 personality, otId;
+    u32 personality;
     u16 species;
     u8 spriteId;
     u8 taskId;
     u8 left, top;
+    bool32 isShiny;
 
     if (FindTaskIdByFunc(Task_ShowContestEntryMonPic) == TASK_NONE)
     {
@@ -2574,16 +2572,15 @@ void ShowContestEntryMonPic(void)
         top = 3;
         species = gContestMons[gSpecialVar_0x8006].species;
         personality = gContestMons[gSpecialVar_0x8006].personality;
-        otId = gContestMons[gSpecialVar_0x8006].otId;
+        isShiny = gContestMons[gSpecialVar_0x8006].isShiny;
         taskId = CreateTask(Task_ShowContestEntryMonPic, 0x50);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = species;
         HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT], species, personality);
 
-        palette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
-        LoadCompressedSpritePalette(palette);
+        LoadCompressedSpritePaletteWithTag(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), species);
         SetMultiuseSpriteTemplateToPokemon(species, B_POSITION_OPPONENT_LEFT);
-        gMultiuseSpriteTemplate.paletteTag = palette->tag;
+        gMultiuseSpriteTemplate.paletteTag = species;
         spriteId = CreateSprite(&gMultiuseSpriteTemplate, (left + 1) * 8 + 32, (top * 8) + 40, 0);
 
         if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
@@ -2665,8 +2662,7 @@ void GenerateContestRand(void)
 
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
-        gContestRngValue = ISO_RANDOMIZE1(gContestRngValue);
-        random = gContestRngValue >> 16;
+        random = LocalRandom(&gContestRngValue);
         result = &gSpecialVar_Result;
     }
     else
@@ -2679,8 +2675,7 @@ void GenerateContestRand(void)
 
 u16 GetContestRand(void)
 {
-    gContestRngValue = ISO_RANDOMIZE1(gContestRngValue);
-    return gContestRngValue >> 16;
+    return LocalRandom(&gContestRngValue);
 }
 
 bool8 LinkContestWaitForConnection(void)

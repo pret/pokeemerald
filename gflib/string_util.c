@@ -2,6 +2,7 @@
 #include "string_util.h"
 #include "text.h"
 #include "strings.h"
+#include "union_room_chat.h"
 
 EWRAM_DATA u8 gStringVar1[0x100] = {0};
 EWRAM_DATA u8 gStringVar2[0x100] = {0};
@@ -298,7 +299,7 @@ u8 *ConvertIntToHexStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 
 
         if (state == WRITING_DIGITS)
         {
-            char *out = dest++;
+            u8 *out = dest++;
 
             if (digit <= 0xF)
                 c = sDigits[digit];
@@ -309,7 +310,7 @@ u8 *ConvertIntToHexStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 
         }
         else if (digit != 0 || powerOfSixteen == 1)
         {
-            char *out;
+            u8 *out;
             state = WRITING_DIGITS;
             out = dest++;
 
@@ -778,4 +779,20 @@ void StripExtCtrlCodes(u8 *str)
         }
     }
     str[destIndex] = EOS;
+}
+
+u8 *StringCopyUppercase(u8 *dest, const u8 *src)
+{
+    while (*src != EOS)
+    {
+        if (*src >= CHAR_a && *src <= CHAR_z)
+            *dest = gCaseToggleTable[*src];
+        else
+            *dest = *src;
+        dest++;
+        src++;
+    }
+
+    *dest = EOS;
+    return dest;
 }

@@ -6,6 +6,7 @@
 #define IN_BOX_COLUMNS          6 // Number of columns, 5 Pokémon per column
 #define IN_BOX_COUNT            (IN_BOX_ROWS * IN_BOX_COLUMNS)
 #define BOX_NAME_LENGTH         8
+#define MAX_FUSION_STORAGE      4
 
 /*
             COLUMNS
@@ -22,6 +23,7 @@ struct PokemonStorage
     /*0x0001*/ struct BoxPokemon boxes[TOTAL_BOXES_COUNT][IN_BOX_COUNT];
     /*0x8344*/ u8 boxNames[TOTAL_BOXES_COUNT][BOX_NAME_LENGTH + 1];
     /*0x83C2*/ u8 boxWallpapers[TOTAL_BOXES_COUNT];
+    /*0x8432*/ struct Pokemon fusions[MAX_FUSION_STORAGE];
 };
 
 extern struct PokemonStorage *gPokemonStoragePtr;

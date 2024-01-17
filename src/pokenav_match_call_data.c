@@ -164,7 +164,7 @@ static const match_call_text_data_t sMrStoneTextScripts[] = {
     { MatchCall_Text_MrStone2,  FLAG_ENABLE_MR_STONE_POKENAV,        0xFFFF },
     { MatchCall_Text_MrStone3,  FLAG_DELIVERED_STEVEN_LETTER,        0xFFFF },
     { MatchCall_Text_MrStone4,  FLAG_RECEIVED_EXP_SHARE,             0xFFFF },
-    { MatchCall_Text_MrStone5,  FLAG_RECEIVED_HM04,                  0xFFFF },
+    { MatchCall_Text_MrStone5,  FLAG_RECEIVED_HM_STRENGTH,           0xFFFF },
     { MatchCall_Text_MrStone6,  FLAG_DEFEATED_PETALBURG_GYM,         0xFFFF },
     { MatchCall_Text_MrStone7,  FLAG_RECEIVED_CASTFORM,              0xFFFF },
     { MatchCall_Text_MrStone8,  FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, 0xFFFF },
@@ -260,7 +260,7 @@ static const match_call_text_data_t sMayTextScripts[] = {
     { MatchCall_Text_May2,  FLAG_DEFEATED_DEWFORD_GYM,           0xFFFF },
     { MatchCall_Text_May3,  FLAG_DELIVERED_DEVON_GOODS,          0xFFFF },
     { MatchCall_Text_May4,  FLAG_HIDE_MAUVILLE_CITY_WALLY,       0xFFFF },
-    { MatchCall_Text_May5,  FLAG_RECEIVED_HM04,                  0xFFFF },
+    { MatchCall_Text_May5,  FLAG_RECEIVED_HM_STRENGTH,           0xFFFF },
     { MatchCall_Text_May6,  FLAG_DEFEATED_LAVARIDGE_GYM,         0xFFFF },
     { MatchCall_Text_May7,  FLAG_DEFEATED_PETALBURG_GYM,         0xFFFF },
     { MatchCall_Text_May8,  FLAG_RECEIVED_CASTFORM,              0xFFFF },
@@ -289,7 +289,7 @@ static const match_call_text_data_t sBrendanTextScripts[] = {
     { MatchCall_Text_Brendan2,  FLAG_DEFEATED_DEWFORD_GYM,           0xFFFF },
     { MatchCall_Text_Brendan3,  FLAG_DELIVERED_DEVON_GOODS,          0xFFFF },
     { MatchCall_Text_Brendan4,  FLAG_HIDE_MAUVILLE_CITY_WALLY,       0xFFFF },
-    { MatchCall_Text_Brendan5,  FLAG_RECEIVED_HM04,                  0xFFFF },
+    { MatchCall_Text_Brendan5,  FLAG_RECEIVED_HM_STRENGTH,           0xFFFF },
     { MatchCall_Text_Brendan6,  FLAG_DEFEATED_LAVARIDGE_GYM,         0xFFFF },
     { MatchCall_Text_Brendan7,  FLAG_DEFEATED_PETALBURG_GYM,         0xFFFF },
     { MatchCall_Text_Brendan8,  FLAG_RECEIVED_CASTFORM,              0xFFFF },
@@ -1088,7 +1088,7 @@ static void MatchCall_GetNameAndDesc_Birch(match_call_t matchCall, const u8 **de
 static void MatchCall_GetNameAndDescByRematchIdx(u32 idx, const u8 **desc, const u8 **name)
 {
     const struct Trainer *trainer = gTrainers + GetTrainerIdxByRematchIdx(idx);
-    *desc = gTrainerClassNames[trainer->trainerClass];
+    *desc = gTrainerClasses[trainer->trainerClass].name;
     *name = trainer->trainerName;
 }
 

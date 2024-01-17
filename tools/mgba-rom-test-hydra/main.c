@@ -2,9 +2,9 @@
  * parses the output to display human-readable progress.
  *
  * Output lines starting with "GBA Debug: :" are parsed as commands to
- * Hydra, other output lines starting with "GBA Debug: " are parsed as
- * output from the current test, and any other lines are parsed as
- * output from the mgba-rom-test process itself.
+ * Hydra, other output lines starting with "GBA Debug: " or with "GBA: "
+ * are parsed as output from the current test, and any other lines are
+ * parsed as output from the mgba-rom-test process itself.
  *
  * COMMANDS
  * N: Sets the test name to the remainder of the line.
@@ -15,7 +15,9 @@
  *    passes/known fails/assumption fails/fails.
  */
 #include <fcntl.h>
+#include <math.h>
 #include <poll.h>
+#include <regex.h>
 #include <signal.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -30,7 +32,13 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-#define MAX_PROCESSES 32 // See also test/test.h
+#define min(a, b) ((a) < (b) ? (a) : (b))
+
+#define MAX_PROCESSES               32 // See also test/test.h
+#define MAX_FAILED_TESTS_TO_LIST    100
+#define MAX_TEST_LIST_BUFFER_LENGTH 256
+
+#define ARRAY_COUNT(arr) (sizeof((arr)) / sizeof((arr)[0]))
 
 struct Runner
 {
@@ -50,12 +58,14 @@ struct Runner
     int assumptionFails;
     int fails;
     int results;
+    char failedTestNames[MAX_FAILED_TESTS_TO_LIST][MAX_TEST_LIST_BUFFER_LENGTH];
 };
 
 static unsigned nrunners = 0;
+static unsigned runners_digits = 0;
 static struct Runner *runners = NULL;
 
-static void handle_read(struct Runner *runner)
+static void handle_read(int i, struct Runner *runner)
 {
     char *sol = runner->input_buffer;
     char *eol;
@@ -65,10 +75,17 @@ static void handle_read(struct Runner *runner)
     {
         eol++;
         size_t n = eol - sol;
-        if (runner->input_buffer_size >= strlen("GBA Debug: ")
-         && !strncmp(sol, "GBA Debug: ", strlen("GBA Debug: ")))
+        char *soc;
+        if (runner->input_buffer_size >= strlen("GBA: ")
+         && !strncmp(sol, "GBA: ", strlen("GBA: ")))
         {
-            char *soc = sol + strlen("GBA Debug: ");
+            soc = sol + strlen("GBA: ");
+            goto buffer_output;
+        }
+        else if (runner->input_buffer_size >= strlen("GBA Debug: ")
+              && !strncmp(sol, "GBA Debug: ", strlen("GBA Debug: ")))
+        {
+            soc = sol + strlen("GBA Debug: ");
             if (soc[0] == ':')
             {
                 switch (soc[1])
@@ -97,11 +114,13 @@ static void handle_read(struct Runner *runner)
                     runner->assumptionFails++;
                     goto add_to_results;
                 case 'F':
+                    if (runner->fails < MAX_FAILED_TESTS_TO_LIST)
+                        strcpy(runner->failedTestNames[runner->fails], runner->test_name);
                     runner->fails++;
 add_to_results:
                     runner->results++;
                     soc += 2;
-                    fprintf(stdout, "%s: ", runner->test_name);
+                    fprintf(stdout, "[%0*d] %s: ", runners_digits, i, runner->test_name);
                     fwrite(soc, 1, eol - soc, stdout);
                     fwrite(runner->output_buffer, 1, runner->output_buffer_size, stdout);
                     strcpy(runner->test_name, "WAITING...");
@@ -166,7 +185,11 @@ static void unlink_roms(void)
         if (runners[i].rom_path[0])
         {
             if (unlink(runners[i].rom_path) == -1)
-                perror("unlink rom_path failed");
+            {
+                int fd;
+                if ((fd = open(runners[i].rom_path, O_RDONLY)) != -1)
+                    perror("unlink rom_path failed");
+            }
         }
     }
 }
@@ -174,6 +197,14 @@ static void unlink_roms(void)
 static void exit2(int _)
 {
     exit(2);
+}
+
+int compare_strings(const void * a, const void * b)
+{
+    const char *arg1 = (const char *) a;
+    const char *arg2 = (const char *) b;
+
+    return strcmp(arg1, arg2);
 }
 
 int main(int argc, char *argv[])
@@ -227,9 +258,32 @@ int main(int argc, char *argv[])
         exit(2);
     }
 
-    nrunners = sysconf(_SC_NPROCESSORS_ONLN);
+    nrunners = 1;
+    const char *makeflags = getenv("MAKEFLAGS");
+    if (makeflags)
+    {
+        int e;
+        regex_t preg;
+        regmatch_t pmatch[4];
+        if ((e = regcomp(&preg, "(^| )-j([0-9]*)($| )", REG_EXTENDED)) != 0)
+        {
+            char errbuf[256];
+            regerror(e, &preg, errbuf, sizeof(errbuf));
+            fprintf(stderr, "regcomp failed: '%s'\n", errbuf);
+            exit(2);
+        }
+        if (regexec(&preg, makeflags, ARRAY_COUNT(pmatch), pmatch, 0) != REG_NOMATCH)
+        {
+            if (pmatch[2].rm_so == pmatch[2].rm_eo)
+                nrunners = sysconf(_SC_NPROCESSORS_ONLN);
+            else
+                sscanf(makeflags + pmatch[2].rm_so, "%d", &nrunners);
+        }
+        regfree(&preg);
+    }
     if (nrunners > MAX_PROCESSES)
         nrunners = MAX_PROCESSES;
+    runners_digits = ceil(log10(nrunners));
     runners = calloc(nrunners, sizeof(*runners));
     if (!runners)
     {
@@ -244,7 +298,7 @@ int main(int argc, char *argv[])
         runners[i].output_buffer = malloc(runners[i].output_buffer_capacity);
         strcpy(runners[i].test_name, "WAITING...");
         if (tty)
-            fprintf(stdout, "%s\n", runners[i].test_name);
+            fprintf(stdout, "[%0*d] %s\n", runners_digits, i, runners[i].test_name);
     }
     fflush(stdout);
     atexit(unlink_roms);
@@ -293,7 +347,7 @@ int main(int argc, char *argv[])
                 _exit(2);
             }
             char rom_path[FILENAME_MAX];
-            sprintf(rom_path, "/tmp/file%05d", getpid());
+            sprintf(rom_path, "/tmp/mgba-rom-test-hydra-%05d", getpid());
             int tmpfd;
             if ((tmpfd = open(rom_path, O_WRONLY | O_CREAT | O_EXCL, S_IRUSR | S_IWUSR)) == -1)
             {
@@ -375,7 +429,7 @@ int main(int argc, char *argv[])
             }
         } else {
             runners[i].pid = pid;
-            sprintf(runners[i].rom_path, "/tmp/file%05d", runners[i].pid);
+            sprintf(runners[i].rom_path, "/tmp/mgba-rom-test-hydra-%05d", runners[i].pid);
             runners[i].outfd = pipefds[0];
             if (close(pipefds[1]) == -1)
             {
@@ -412,7 +466,7 @@ int main(int argc, char *argv[])
             for (int i = 0; i < nrunners; i++)
             {
                 if (runners[i].outfd >= 0)
-                    scrollback += (strlen(runners[i].test_name) + winsize.ws_col - 1) / winsize.ws_col;
+                    scrollback += (3 + runners_digits + strlen(runners[i].test_name) + winsize.ws_col - 1) / winsize.ws_col;
             }
             if (scrollback > 0)
                 fprintf(stdout, "\e[%dF\e[J", scrollback);
@@ -434,7 +488,7 @@ int main(int argc, char *argv[])
                     exit(2);
                 }
                 runners[i].input_buffer_size += n;
-                handle_read(&runners[i]);
+                handle_read(i, &runners[i]);
             }
 
             if (pollfds[i].revents & (POLLERR | POLLHUP))
@@ -454,7 +508,7 @@ int main(int argc, char *argv[])
             for (int i = 0; i < nrunners; i++)
             {
                 if (runners[i].outfd >= 0)
-                    fprintf(stdout, "%s\n", runners[i].test_name);
+                    fprintf(stdout, "[%0*d] %s\n", runners_digits, i, runners[i].test_name);
             }
 
             fflush(stdout);
@@ -469,6 +523,9 @@ int main(int argc, char *argv[])
     int assumptionFails = 0;
     int fails = 0;
     int results = 0;
+
+    char failedTestNames[MAX_FAILED_TESTS_TO_LIST * MAX_PROCESSES][MAX_TEST_LIST_BUFFER_LENGTH];
+
     for (int i = 0; i < nrunners; i++)
     {
         int wstatus;
@@ -485,9 +542,16 @@ int main(int argc, char *argv[])
         knownFails += runners[i].knownFails;
         todos += runners[i].todos;
         assumptionFails += runners[i].assumptionFails;
-        fails += runners[i].fails;
+        for (int j = 0; j < runners[i].fails; j++)
+        {
+            if (j < MAX_FAILED_TESTS_TO_LIST)
+                strcpy(failedTestNames[fails], runners[i].failedTestNames[j]);
+            fails++;
+        }
         results += runners[i].results;
     }
+
+    qsort(failedTestNames, min(fails, MAX_FAILED_TESTS_TO_LIST), sizeof(char) * MAX_TEST_LIST_BUFFER_LENGTH, compare_strings);
 
     if (results == 0)
     {
@@ -495,16 +559,28 @@ int main(int argc, char *argv[])
     }
     else
     {
-        fprintf(stdout, "\n- Tests TOTAL:         %d\n", results);
+        if (fails > 0)
+        {
+            fprintf(stdout, "\n- Tests \e[31mFAILED\e[0m :       %d    Add TESTS='X' to run tests with the defined prefix.\n", fails);
+            for (int i = 0; i < fails; i++)
+            {
+                if (i >= MAX_FAILED_TESTS_TO_LIST)
+                {
+                    fprintf(stdout, "  - \e[31mand %d more...\e[0m\n", fails - MAX_FAILED_TESTS_TO_LIST);
+                    break;
+                }
+                fprintf(stdout, "  - \e[31m%s\e[0m.\n", failedTestNames[i]);
+            }
+        }
         fprintf(stdout, "- Tests \e[32mPASSED\e[0m:        %d\n", passes);
         if (knownFails > 0)
             fprintf(stdout, "- Tests \e[33mKNOWN_FAILING\e[0m: %d\n", knownFails);
         if (todos > 0)
             fprintf(stdout, "- Tests \e[33mTO_DO\e[0m:         %d\n", todos);
-        if (fails > 0)
-            fprintf(stdout, "- Tests \e[31mFAILED\e[0m :       %d\n", fails);
         if (assumptionFails > 0)
             fprintf(stdout, "- \e[33mASSUMPTIONS_FAILED\e[0m:  %d\n", assumptionFails);
+
+        fprintf(stdout, "- Tests \e[34mTOTAL\e[0m:         %d\n", results);
     }
     fprintf(stdout, "\n");
 

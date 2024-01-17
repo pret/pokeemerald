@@ -29,6 +29,7 @@
 #include "load_save.h"
 #include "battle_dome.h"
 #include "constants/battle_frontier.h"
+#include "constants/battle_move_effects.h"
 #include "constants/battle_pike.h"
 #include "constants/frontier_util.h"
 #include "constants/trainers.h"
@@ -326,7 +327,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
     },
     [FRONTIER_FACILITY_FACTORY] =
     {
-        // Because Factory's pokemon are random, this facility's Brain also uses random pokemon.
+        // Because Factory's Pokémon are random, this facility's Brain also uses random Pokémon.
         // What is interesting, this team is actually the one Steven uses in the multi tag battle alongside the player.
         {
             {
@@ -624,8 +625,16 @@ static const u8 sFrontierBrainObjEventGfx[NUM_FRONTIER_FACILITIES][2] =
 
 const u16 gFrontierBannedSpecies[] =
 {
-    SPECIES_MEW, SPECIES_MEWTWO, SPECIES_HO_OH, SPECIES_LUGIA, SPECIES_CELEBI,
-    SPECIES_KYOGRE, SPECIES_GROUDON, SPECIES_RAYQUAZA, SPECIES_JIRACHI, SPECIES_DEOXYS, 0xFFFF
+    SPECIES_MEW, SPECIES_MEWTWO,
+    SPECIES_HO_OH, SPECIES_LUGIA, SPECIES_CELEBI,
+    SPECIES_KYOGRE, SPECIES_GROUDON, SPECIES_RAYQUAZA, SPECIES_JIRACHI, SPECIES_DEOXYS,
+    SPECIES_DIALGA, SPECIES_PALKIA, SPECIES_GIRATINA, SPECIES_MANAPHY, SPECIES_PHIONE, SPECIES_DARKRAI, SPECIES_SHAYMIN, SPECIES_ARCEUS,
+    SPECIES_VICTINI, SPECIES_RESHIRAM, SPECIES_ZEKROM, SPECIES_KYUREM, SPECIES_KELDEO, SPECIES_MELOETTA, SPECIES_GENESECT,
+    SPECIES_XERNEAS, SPECIES_YVELTAL, SPECIES_ZYGARDE, SPECIES_DIANCIE, SPECIES_HOOPA, SPECIES_VOLCANION,
+    SPECIES_COSMOG, SPECIES_COSMOEM, SPECIES_SOLGALEO, SPECIES_LUNALA, SPECIES_NECROZMA, SPECIES_MAGEARNA, SPECIES_MARSHADOW, SPECIES_ZERAORA, SPECIES_MELTAN, SPECIES_MELMETAL,
+    SPECIES_ZACIAN, SPECIES_ZAMAZENTA, SPECIES_ETERNATUS, SPECIES_CALYREX, SPECIES_ZARUDE,
+    SPECIES_KORAIDON, SPECIES_MIRAIDON,
+    0xFFFF
 };
 
 static const u8 *const sRecordsWindowChallengeTexts[][2] =
@@ -644,8 +653,8 @@ static const u8 *const sRecordsWindowChallengeTexts[][2] =
 
 static const u8 *const sLevelModeText[] =
 {
-    gText_RecordsLv50,
-    gText_RecordsOpenLevel,
+    [FRONTIER_LVL_50]   = gText_RecordsLv50,
+    [FRONTIER_LVL_OPEN] = gText_RecordsOpenLevel,
 };
 
 static const u8 *const sHallFacilityToRecordsText[] =
@@ -735,28 +744,28 @@ void CallFrontierUtilFunc(void)
     sFrontierUtilFuncs[gSpecialVar_0x8004]();
 }
 
-// Buffers into VAR_TEMP_0 specifically because this is used to react to the status in OnFrame map scripts
+// VAR_TEMP_CHALLENGE_STATUS is used to react to the status in OnFrame map scripts
 static void GetChallengeStatus(void)
 {
-    VarSet(VAR_TEMP_0, 0xFF);
+    VarSet(VAR_TEMP_CHALLENGE_STATUS, 0xFF);
     switch (gSaveBlock2Ptr->frontier.challengeStatus)
     {
     case 0:
         break;
     case CHALLENGE_STATUS_SAVING:
         FrontierGamblerSetWonOrLost(FALSE);
-        VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.challengeStatus);
+        VarSet(VAR_TEMP_CHALLENGE_STATUS, gSaveBlock2Ptr->frontier.challengeStatus);
         break;
     case CHALLENGE_STATUS_LOST:
         FrontierGamblerSetWonOrLost(FALSE);
-        VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.challengeStatus);
+        VarSet(VAR_TEMP_CHALLENGE_STATUS, gSaveBlock2Ptr->frontier.challengeStatus);
         break;
     case CHALLENGE_STATUS_WON:
         FrontierGamblerSetWonOrLost(TRUE);
-        VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.challengeStatus);
+        VarSet(VAR_TEMP_CHALLENGE_STATUS, gSaveBlock2Ptr->frontier.challengeStatus);
         break;
     case CHALLENGE_STATUS_PAUSED:
-        VarSet(VAR_TEMP_0, gSaveBlock2Ptr->frontier.challengeStatus);
+        VarSet(VAR_TEMP_CHALLENGE_STATUS, gSaveBlock2Ptr->frontier.challengeStatus);
         break;
     }
 }
@@ -1878,40 +1887,25 @@ static void CheckBattleTypeFlag(void)
         gSpecialVar_Result = FALSE;
 }
 
+#define SPECIES_PER_LINE 3
+
 static u8 AppendCaughtBannedMonSpeciesName(u16 species, u8 count, s32 numBannedMonsCaught)
 {
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
     {
         count++;
-        switch (count)
+        if (numBannedMonsCaught == count)
+            StringAppend(gStringVar1, gText_SpaceAndSpace);
+        else if (numBannedMonsCaught > count)
+            StringAppend(gStringVar1, gText_CommaSpace);
+        if ((count % SPECIES_PER_LINE) == 0)
         {
-        case 1:
-        case 3:
-        case 5:
-        case 7:
-        case 9:
-        case 11:
-            if (numBannedMonsCaught == count)
-                StringAppend(gStringVar1, gText_SpaceAndSpace);
-            else if (numBannedMonsCaught > count)
-                StringAppend(gStringVar1, gText_CommaSpace);
-            break;
-        case 2:
-            if (count == numBannedMonsCaught)
-                StringAppend(gStringVar1, gText_SpaceAndSpace);
+            if (count == SPECIES_PER_LINE)
+                StringAppend(gStringVar1, gText_NewLine);
             else
-                StringAppend(gStringVar1, gText_CommaSpace);
-            StringAppend(gStringVar1, gText_NewLine);
-            break;
-        default:
-            if (count == numBannedMonsCaught)
-                StringAppend(gStringVar1, gText_SpaceAndSpace);
-            else
-                StringAppend(gStringVar1, gText_CommaSpace);
-            StringAppend(gStringVar1, gText_LineBreak);
-            break;
+                StringAppend(gStringVar1, gText_LineBreak);
         }
-        StringAppend(gStringVar1, gSpeciesNames[species]);
+        StringAppend(gStringVar1, GetSpeciesName(species));
     }
 
     return count;
@@ -1924,7 +1918,9 @@ static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monL
     if (species == SPECIES_EGG || species == SPECIES_NONE)
         return;
 
-    for (i = 0; gFrontierBannedSpecies[i] != 0xFFFF && gFrontierBannedSpecies[i] != species; i++)
+    for (i = 0; gFrontierBannedSpecies[i] != 0xFFFF
+      && gFrontierBannedSpecies[i] != GET_BASE_SPECIES_ID(species)
+      && IsSpeciesEnabled(gFrontierBannedSpecies[i]); i++)
         ;
 
     if (gFrontierBannedSpecies[i] != 0xFFFF)
@@ -1952,7 +1948,7 @@ static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monL
 
 // gSpecialVar_Result is the level mode before and after calls to this function
 // gSpecialVar_0x8004 is used to store the return value instead (TRUE if there are insufficient eligible mons)
-// The names of ineligible pokemon that have been caught are also buffered to print
+// The names of ineligible Pokémon that have been caught are also buffered to print
 static void CheckPartyIneligibility(void)
 {
     u16 speciesArray[PARTY_SIZE];
@@ -2034,7 +2030,7 @@ static void CheckPartyIneligibility(void)
         }
         else
         {
-            if (count & 1)
+            if (count % SPECIES_PER_LINE == SPECIES_PER_LINE - 1)
                 StringAppend(gStringVar1, gText_LineBreak);
             else
                 StringAppend(gStringVar1, gText_Space2);
@@ -2048,6 +2044,8 @@ static void CheckPartyIneligibility(void)
     }
     #undef numEligibleMons
 }
+
+#undef SPECIES_PER_LINE
 
 static void ValidateVisitingTrainer(void)
 {
@@ -2465,10 +2463,7 @@ void CreateFrontierBrainPokemon(void)
 
         do
         {
-            do
-            {
-                j = Random32(); //should just be one while loop, but that doesn't match
-            } while (IsShinyOtIdPersonality(FRONTIER_BRAIN_OTID, j));
+            j = Random32(); //should just be one while loop, but that doesn't match
         } while (sFrontierBrainsMons[facility][symbol][i].nature != GetNatureFromPersonality(j));
         CreateMon(&gEnemyParty[monPartyId],
                   sFrontierBrainsMons[facility][symbol][i].species,
@@ -2483,10 +2478,12 @@ void CreateFrontierBrainPokemon(void)
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
             SetMonMoveSlot(&gEnemyParty[monPartyId], sFrontierBrainsMons[facility][symbol][i].moves[j], j);
-            if (sFrontierBrainsMons[facility][symbol][i].moves[j] == MOVE_FRUSTRATION)
+            if (gBattleMoves[sFrontierBrainsMons[facility][symbol][i].moves[j]].effect == EFFECT_FRUSTRATION)
                 friendship = 0;
         }
         SetMonData(&gEnemyParty[monPartyId], MON_DATA_FRIENDSHIP, &friendship);
+        j = FALSE;
+        SetMonData(&gPlayerParty[MULTI_PARTY_SIZE + i], MON_DATA_IS_SHINY, &j);
         CalculateMonStats(&gEnemyParty[monPartyId]);
         monPartyId++;
     }
