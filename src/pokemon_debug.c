@@ -8,6 +8,7 @@
 #include "constants/songs.h"
 #include "data.h"
 #include "decompress.h"
+#include "event_object_movement.h"
 #include "field_weather.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -38,6 +39,7 @@
 #include "trainer_pokemon_sprites.h"
 
 #include "constants/items.h"
+#include "constants/event_objects.h"
 
 #if DEBUG_POKEMON_MENU == TRUE
 extern const struct BattleBackground sBattleTerrainTable[];
@@ -1119,6 +1121,10 @@ void CB2_Debug_Pokemon(void)
             data->iconspriteId = CreateMonIcon(species, SpriteCB_MonIcon, DEBUG_ICON_X, DEBUG_ICON_Y, 4, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
             gSprites[data->iconspriteId].oam.priority = 0;
 
+            //Follower Sprite
+            data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species, SpriteCallbackDummy, DEBUG_FOLLOWER_X, DEBUG_FOLLOWER_Y, 0);
+            gSprites[data->followerspriteId].oam.priority = 0;
+
             //Modify Arrows
             SetUpModifyArrows(data);
             PrintDigitChars(data);
@@ -1625,6 +1631,7 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     DestroySprite(&gSprites[data->frontspriteId]);
     DestroySprite(&gSprites[data->backspriteId]);
     DestroySprite(&gSprites[data->iconspriteId]);
+    DestroySprite(&gSprites[data->followerspriteId]);
 
     FreeMonSpritesGfx();
     ResetSpriteData();
@@ -1668,6 +1675,10 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     //Icon Sprite
     data->iconspriteId = CreateMonIcon(species, SpriteCB_MonIcon, DEBUG_ICON_X, DEBUG_ICON_Y, 4, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
     gSprites[data->iconspriteId].oam.priority = 0;
+
+    //Follower Sprite
+    data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species, SpriteCallbackDummy, DEBUG_FOLLOWER_X, DEBUG_FOLLOWER_Y, 0);
+    gSprites[data->followerspriteId].oam.priority = 0;
 
     //Modify Arrows
     LoadSpritePalette(&gSpritePalette_Arrow);
