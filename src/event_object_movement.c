@@ -1683,7 +1683,7 @@ static void CopyObjectGraphicsInfoToSpriteTemplate_WithMovementType(u16 graphics
     CopyObjectGraphicsInfoToSpriteTemplate(graphicsId, sMovementTypeCallbacks[movementType], spriteTemplate, subspriteTables);
 }
 
-static void MakeSpriteTemplateFromObjectEventTemplate(const struct ObjectEventTemplate *objectEventTemplate, struct SpriteTemplate *spriteTemplate, const struct SubspriteTable **subspriteTables)
+static void UNUSED MakeSpriteTemplateFromObjectEventTemplate(const struct ObjectEventTemplate *objectEventTemplate, struct SpriteTemplate *spriteTemplate, const struct SubspriteTable **subspriteTables)
 {
     CopyObjectGraphicsInfoToSpriteTemplate_WithMovementType(objectEventTemplate->graphicsId, objectEventTemplate->movementType, spriteTemplate, subspriteTables);
 }
@@ -1694,10 +1694,9 @@ static u8 LoadDynamicFollowerPaletteFromGraphicsId(u16 graphicsId, bool8 shiny, 
 {
     u16 species = ((graphicsId & OBJ_EVENT_GFX_SPECIES_MASK) - OBJ_EVENT_GFX_MON_BASE);
     u8 form = (graphicsId >> OBJ_EVENT_GFX_SPECIES_BITS);
-    const struct CompressedSpritePalette *spritePalette = &(shiny ? gMonShinyPaletteTable : gMonPaletteTable)[species];
     u8 paletteNum = LoadDynamicFollowerPalette(species, form, shiny);
     if (template)
-        template->paletteTag = spritePalette->tag;
+        template->paletteTag = species;
     return paletteNum;
 }
 
@@ -1709,7 +1708,7 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
     const struct ObjectEventGraphicsInfo *graphicsInfo;
     struct Sprite *sprite;
     u8 spriteId;
-    u32 paletteNum;
+    u32 UNUSED paletteNum;
 
     spriteTemplate = Alloc(sizeof(struct SpriteTemplate));
     CopyObjectGraphicsInfoToSpriteTemplate(graphicsId, callback, spriteTemplate, &subspriteTables);
@@ -1854,12 +1853,12 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool8 shiny)
     u8 paletteNum;
     // Note that the shiny palette tag is `species + SPECIES_SHINY_TAG`, which must be increased with more pokemon
     // so that palette tags do not overlap
-    const struct CompressedSpritePalette *spritePalette = &(shiny ? gMonShinyPaletteTable : gMonPaletteTable)[species];
-    if ((paletteNum = IndexOfSpritePaletteTag(spritePalette->tag)) == 0xFF)
+    const u32 *palette = GetMonSpritePalFromSpecies(species, shiny, FALSE); //ETODO
+    if ((paletteNum = IndexOfSpritePaletteTag(species)) == 0xFF)
     {
         // Load compressed palette
-        LoadCompressedSpritePalette(spritePalette);
-        paletteNum = IndexOfSpritePaletteTag(spritePalette->tag); // Tag is always present
+        LoadCompressedSpritePaletteWithTag(palette, species);
+        paletteNum = IndexOfSpritePaletteTag(species); // Tag is always present
         if (gWeatherPtr->currWeather != WEATHER_FOG_HORIZONTAL) // don't want to weather blend in fog
             UpdateSpritePaletteWithWeather(paletteNum);
     }
@@ -1931,39 +1930,21 @@ static void RefreshFollowerGraphics(struct ObjectEvent *objEvent)
     #endif
 }
 
-// Like vanilla's CastformDataTypeChange, but for overworld weather
-static u8 GetOverworldCastformForm(void)
+static u16 GetOverworldCastformSpecies(void)
 {
     switch (GetCurrentWeather())
     {
     case WEATHER_SUNNY_CLOUDS:
     case WEATHER_DROUGHT:
-        return CASTFORM_FIRE;
+        return SPECIES_CASTFORM_SUNNY;
     case WEATHER_RAIN:
     case WEATHER_RAIN_THUNDERSTORM:
     case WEATHER_DOWNPOUR:
-        return CASTFORM_WATER;
+        return SPECIES_CASTFORM_RAINY;
     case WEATHER_SNOW:
-        return CASTFORM_ICE;
+        return SPECIES_CASTFORM_SNOWY;
     }
-    return CASTFORM_NORMAL;
-}
-
-static u16 GetOverworldCastformSpecies(void)
-{
-    switch(GetOverworldCastformForm())
-    {
-        case CASTFORM_FIRE:
-            return SPECIES_CASTFORM_SUNNY;
-            break;
-        case CASTFORM_WATER:
-            return SPECIES_CASTFORM_RAINY;
-            break;
-        case CASTFORM_ICE:
-            return SPECIES_CASTFORM_SNOWY;
-            break;
-    }
-    return SPECIES_CASTFORM;
+    return SPECIES_CASTFORM_NORMAL;
 }
 
 static bool8 GetMonInfo(struct Pokemon * mon, u16 *species, u8 *form, u8 *shiny)
@@ -1998,12 +1979,12 @@ static bool8 GetFollowerInfo(u16 *species, u8 *form, u8 *shiny)
 
 void UpdateFollowingPokemon(void) { // Update following pokemon if any
   struct ObjectEvent *objEvent = GetFollowerObject();
-  struct Sprite *sprite;
   u16 species;
   bool8 shiny;
   u8 form;
   // Avoid spawning large (>32x32) follower pokemon inside buildings
-  if (GetFollowerInfo(&species, &form, &shiny) && !(gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(species, 0)->height > 32) && !FlagGet(FLAG_TEMP_HIDE_FOLLOWER)) {
+  if (GetFollowerInfo(&species, &form, &shiny) && !(gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(species, 0)->height > 32) && !FlagGet(FLAG_TEMP_HIDE_FOLLOWER))
+  {
     if (objEvent == NULL) { // Spawn follower
       struct ObjectEventTemplate template = {
         .localId = OBJ_EVENT_ID_FOLLOWER,
@@ -2024,6 +2005,7 @@ void UpdateFollowingPokemon(void) { // Update following pokemon if any
     {
         RemoveFollowingPokemon();
     }
+  }
 }
 
 // Remove follower object. Idempotent.
@@ -2075,6 +2057,7 @@ static u8 RandomWeightedIndex(u8 *weights, u8 length)
         if (random_value <= cum_weight)
             return i;
     }
+    return length;
 }
 
 // Pool of "unconditional" follower messages TODO: Should this be elsewhere ?
@@ -2765,7 +2748,7 @@ u8 LoadPlayerObjectEventPalette(u8 gender)
             paletteTag = FLDEFF_PAL_TAG_MAY;
             break;
     }
-    LoadObjectEventPalette(paletteTag);
+    return LoadObjectEventPalette(paletteTag);
 }
 
 static void UNUSED LoadObjectEventPaletteSet(u16 *paletteTags)
@@ -2846,7 +2829,7 @@ void LoadSpecialObjectReflectionPalette(u16 tag, u8 slot)
     }
 }
 
-static void _PatchObjectPalette(u16 tag, u8 slot)
+static void UNUSED _PatchObjectPalette(u16 tag, u8 slot)
 {
     PatchObjectPalette(tag, slot);
 }
@@ -5108,7 +5091,6 @@ static bool8 EndFollowerTransformEffect(struct ObjectEvent *objectEvent, struct 
 
 static bool8 TryStartFollowerTransformEffect(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    u32 multi;
     if (GET_BASE_SPECIES_ID(OW_SPECIES(objectEvent)) == SPECIES_CASTFORM
         && OW_SPECIES(objectEvent) != GetOverworldCastformSpecies())
     {
@@ -5814,6 +5796,7 @@ bool8 ScrFunc_IsFollowerFieldMoveUser(struct ScriptContext *ctx)
     {
         return FALSE;
     }
+    return FALSE;
 }
 
 void SetTrainerMovementType(struct ObjectEvent *objectEvent, u8 movementType)
@@ -9383,10 +9366,10 @@ static void DoTracksGroundEffect_SlitherTracks(struct ObjectEvent *objEvent, str
 	//  each byte in that row is for the next direction of the bike in the order
 	//  of down, up, left, right.
 	static const u8 slitherTracks_Transitions[4][4] = {
-		1, 2, 7, 8,
-		1, 2, 6, 5,
-		5, 8, 3, 4,
-		6, 7, 3, 4,
+		{1, 2, 7, 8},
+		{1, 2, 6, 5},
+		{5, 8, 3, 4},
+		{6, 7, 3, 4},
 	};
 
 	if (objEvent->currentCoords.x != objEvent->previousCoords.x || objEvent->currentCoords.y != objEvent->previousCoords.y)
@@ -9514,7 +9497,7 @@ static void (*const sGroundEffectFuncs[])(struct ObjectEvent *objEvent, struct S
     GroundEffect_Seaweed                // GROUND_EFFECT_FLAG_SEAWEED
 };
 
-static void GroundEffect_Shadow(struct ObjectEvent *objEvent, struct Sprite *sprite)
+static void UNUSED GroundEffect_Shadow(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
     SetUpShadow(objEvent, sprite);
 }

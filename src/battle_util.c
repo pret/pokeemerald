@@ -9927,11 +9927,11 @@ static uq4_12_t GetInverseTypeMultiplier(uq4_12_t multiplier)
     }
 }
 
-u16 GetTypeEffectiveness(struct Pokemon *mon, u8 moveType)
+uq4_12_t GetTypeEffectiveness(struct Pokemon *mon, u8 moveType)
 {
-    u16 modifier = UQ_4_12(1.0);
+    uq4_12_t modifier = UQ_4_12(1.0);
     u16 abilityDef = GetMonAbility(mon);
-    u16 speciesDef = GetMonData(&mon, MON_DATA_SPECIES);
+    u16 speciesDef = GetMonData(mon, MON_DATA_SPECIES);
     u8 type1 = gSpeciesInfo[speciesDef].types[0];
     u8 type2 = gSpeciesInfo[speciesDef].types[1];
 

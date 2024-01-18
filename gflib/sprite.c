@@ -1576,7 +1576,6 @@ void FreeAllSpritePalettes(void)
 u8 LoadSpritePalette(const struct SpritePalette *palette)
 {
     u8 index = IndexOfSpritePaletteTag(palette->tag);
-    u8 i;
 
     if (index != 0xFF)
         return index;

@@ -678,29 +678,6 @@ static void UpdateBattlerValue(struct PokemonDebugMenu *data)
     }
 }
 
-//Sprite functions
-static const u32 *GetMonSpritePalStructCustom(u16 species, bool8 isFemale, bool8 isShiny)
-{
-    if (isShiny)
-    {
-        if (gSpeciesInfo[species].shinyPaletteFemale != NULL && isFemale)
-            return gSpeciesInfo[species].shinyPaletteFemale;
-        else if (gSpeciesInfo[species].shinyPalette != NULL)
-            return gSpeciesInfo[species].shinyPalette;
-        else
-            return gSpeciesInfo[SPECIES_NONE].shinyPalette;
-    }
-    else
-    {
-        if (gSpeciesInfo[species].paletteFemale != NULL && isFemale)
-            return gSpeciesInfo[species].paletteFemale;
-        else if (gSpeciesInfo[species].palette != NULL)
-            return gSpeciesInfo[species].palette;
-        else
-            return gSpeciesInfo[SPECIES_NONE].palette;
-    }
-}
-
 static void BattleLoadOpponentMonSpriteGfxCustom(u16 species, bool8 isFemale, bool8 isShiny, u8 battlerId)
 {
     const void *lzPaletteData;
@@ -1111,7 +1088,7 @@ void CB2_Debug_Pokemon(void)
             PrintInstructionsOnWindow(data);
 
             //Palettes
-            palette = GetMonSpritePalStructCustom(species, data->isFemale, data->isShiny);
+            palette = GetMonSpritePalFromSpecies(species, data->isShiny, data->isFemale);
             LoadCompressedSpritePaletteWithTag(palette, species);
             //Front
             HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->sprites.ptr[1], species, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
@@ -1663,7 +1640,7 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     PrintInstructionsOnWindow(data);
 
     //Palettes
-    palette = GetMonSpritePalStructCustom(species, data->isFemale, data->isShiny);
+    palette = GetMonSpritePalFromSpecies(species, data->isShiny, data->isFemale);
     LoadCompressedSpritePaletteWithTag(palette, species);
     //Front
     HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->sprites.ptr[1], species, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));

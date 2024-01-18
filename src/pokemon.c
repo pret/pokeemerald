@@ -5384,6 +5384,28 @@ const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, bool32 isShiny,
     }
 }
 
+const u32 *GetMonSpritePalFromSpecies(u16 species, bool32 isShiny, bool32 isFemale)
+{
+    if (isShiny)
+    {
+        if (gSpeciesInfo[species].shinyPaletteFemale != NULL && isFemale)
+            return gSpeciesInfo[species].shinyPaletteFemale;
+        else if (gSpeciesInfo[species].shinyPalette != NULL)
+            return gSpeciesInfo[species].shinyPalette;
+        else
+            return gSpeciesInfo[SPECIES_NONE].shinyPalette;
+    }
+    else
+    {
+        if (gSpeciesInfo[species].paletteFemale != NULL && isFemale)
+            return gSpeciesInfo[species].paletteFemale;
+        else if (gSpeciesInfo[species].palette != NULL)
+            return gSpeciesInfo[species].palette;
+        else
+            return gSpeciesInfo[SPECIES_NONE].palette;
+    }
+}
+
 bool8 IsMoveHM(u16 move)
 {
     int i = 0;
