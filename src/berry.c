@@ -1982,11 +1982,6 @@ void GetBerryNameByBerryType(u8 berry, u8 *string)
     string[BERRY_NAME_LENGTH] = EOS;
 }
 
-void GetBerryCountStringByBerryType(u8 berry, u8 *dest, u32 berryCount)
-{
-    GetBerryCountString(dest, GetBerryInfo(berry)->name, berryCount);
-}
-
 void AllowBerryTreeGrowth(u8 id)
 {
     GetBerryTreeInfo(id)->stopGrowth = FALSE;
@@ -2122,7 +2117,7 @@ void ObjectEventInteractionGetBerryTreeData(void)
         gSpecialVar_0x8004 = GetStageByBerryTreeId(id);
     gSpecialVar_0x8005 = GetNumStagesWateredByBerryTreeId(id);
     gSpecialVar_0x8006 = GetBerryCountByBerryTreeId(id);
-    GetBerryCountStringByBerryType(berry, gStringVar1, gSpecialVar_0x8006);
+    CopyItemNameHandlePlural(BerryTypeToItemId(berry), gStringVar1, gSpecialVar_0x8006);
 }
 
 void ObjectEventInteractionGetBerryName(void)
@@ -2136,12 +2131,12 @@ void ObjectEventInteractionGetBerryCountString(void)
     u8 treeId = GetObjectEventBerryTreeId(gSelectedObjectEvent);
     u8 berry = GetBerryTypeByBerryTreeId(treeId);
     u8 count = GetBerryCountByBerryTreeId(treeId);
-    GetBerryCountStringByBerryType(berry, gStringVar1, count);
+    CopyItemNameHandlePlural(BerryTypeToItemId(berry), gStringVar1, count);
     berry = GetTreeMutationValue(treeId);
     if (berry > 0)
     {
         count = 1;
-        GetBerryCountStringByBerryType(berry, gStringVar3, count);
+        CopyItemNameHandlePlural(BerryTypeToItemId(berry), gStringVar3, count);
         gSpecialVar_Result = TRUE;
     }
     else
