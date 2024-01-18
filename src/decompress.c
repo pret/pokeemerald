@@ -29,6 +29,35 @@ u16 LoadCompressedSpriteSheet(const struct CompressedSpriteSheet *src)
     return LoadSpriteSheet(&dest);
 }
 
+// This can be used for either compressed or uncompressed sprite sheets
+u16 LoadCompressedSpriteSheetByTemplate(const struct SpriteTemplate *template, s32 offset) {
+    struct SpriteTemplate myTemplate;
+    struct SpriteFrameImage myImage;
+    const u8 *data = template->images->data;
+    u32 size;
+
+    // (Heuristic) Check for LZ77 header
+    // See https://problemkaputt.de/gbatek.htm#biosdecompressionfunctions
+    // data[3] could be nonzero; but this would mean data >= 65536 bytes,
+    // which is 2048 tiles, far too big in practice
+    if (data[0] != 0x10 || data[3] != 0) // not compressed
+        return LoadSpriteSheetByTemplate(template, 0, offset);
+
+    // read uncompressed size from header
+    size = T1_READ_16(&data[1]);
+    // too big for compression buffer, so probably not compressed
+    if (size >= ARRAY_COUNT(gDecompressionBuffer))
+        return LoadSpriteSheetByTemplate(template, 0, offset);
+
+    LZ77UnCompWram(template->images->data, gDecompressionBuffer);
+    myImage.data = gDecompressionBuffer;
+    myImage.size = size + offset;
+    myTemplate.images = &myImage;
+    myTemplate.tileTag = template->tileTag;
+
+    return LoadSpriteSheetByTemplate(&myTemplate, 0, offset);
+}
+
 void LoadCompressedSpriteSheetOverrideBuffer(const struct CompressedSpriteSheet *src, void *buffer)
 {
     struct SpriteSheet dest;
