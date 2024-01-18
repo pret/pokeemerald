@@ -56,6 +56,37 @@ static struct PokemonDebugMenu *GetStructPtr(u8 taskId)
     return (struct PokemonDebugMenu*)(T1_READ_PTR(taskDataPtr));
 }
 
+static const union AnimCmd sAnim_Follower_1[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(2, 30),
+    ANIMCMD_FRAME(3, 30),
+    ANIMCMD_FRAME(2, 30),
+    ANIMCMD_FRAME(3, 30),
+    ANIMCMD_FRAME(2, 10),
+    ANIMCMD_FRAME(4, 30),
+    ANIMCMD_FRAME(5, 30),
+    ANIMCMD_FRAME(4, 30),
+    ANIMCMD_FRAME(5, 30),
+    ANIMCMD_FRAME(4, 10),
+    ANIMCMD_FRAME(4, 30, .hFlip = TRUE),
+    ANIMCMD_FRAME(5, 30, .hFlip = TRUE),
+    ANIMCMD_FRAME(4, 30, .hFlip = TRUE),
+    ANIMCMD_FRAME(5, 30, .hFlip = TRUE),
+    ANIMCMD_FRAME(4, 10, .hFlip = TRUE),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sAnims_Follower[] =
+{
+    sAnim_GeneralFrame0,
+    sAnim_Follower_1,
+};
+
 //BgTemplates
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -743,6 +774,35 @@ static void SpriteCB_EnemyShadowCustom(struct Sprite *shadowSprite)
     shadowSprite->x2 = battlerSprite->x2;
 }
 
+static void SpriteCB_Follower(struct Sprite *sprite)
+{
+    if (sprite->animDelayCounter == 0)
+    {
+        sprite->animDelayCounter = 60;
+        switch (sprite->animNum)
+        {
+            default:
+            case 0:
+            case 1:
+                StartSpriteAnim(sprite, GetFaceDirectionAnimNum(DIR_NORTH));
+                break;
+            case 2:
+                StartSpriteAnim(sprite, GetFaceDirectionAnimNum(DIR_WEST));
+                break;
+            case 3:
+                StartSpriteAnim(sprite, GetFaceDirectionAnimNum(DIR_EAST));
+                break;
+            case 4:
+                StartSpriteAnim(sprite, GetFaceDirectionAnimNum(DIR_SOUTH));
+                break;
+        }
+    }
+    else
+    {
+        sprite->animDelayCounter--;
+    }
+}
+
 static void LoadAndCreateEnemyShadowSpriteCustom(struct PokemonDebugMenu *data, u16 species)
 {
     u8 x, y;
@@ -1103,8 +1163,9 @@ void CB2_Debug_Pokemon(void)
             gSprites[data->iconspriteId].oam.priority = 0;
 
             //Follower Sprite
-            data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species, SpriteCallbackDummy, DEBUG_FOLLOWER_X, DEBUG_FOLLOWER_Y, 0);
+            data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species, SpriteCB_Follower, DEBUG_FOLLOWER_X, DEBUG_FOLLOWER_Y, 0);
             gSprites[data->followerspriteId].oam.priority = 0;
+            gSprites[data->followerspriteId].anims = sAnims_Follower;
 
             //Modify Arrows
             SetUpModifyArrows(data);
@@ -1658,8 +1719,9 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     gSprites[data->iconspriteId].oam.priority = 0;
 
     //Follower Sprite
-    data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species, SpriteCallbackDummy, DEBUG_FOLLOWER_X, DEBUG_FOLLOWER_Y, 0);
+    data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species, SpriteCB_Follower, DEBUG_FOLLOWER_X, DEBUG_FOLLOWER_Y, 0);
     gSprites[data->followerspriteId].oam.priority = 0;
+    gSprites[data->followerspriteId].anims = sAnims_Follower;
 
     //Modify Arrows
     LoadSpritePalette(&gSpritePalette_Arrow);
