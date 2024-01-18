@@ -682,31 +682,12 @@ static void UpdateBattlerValue(struct PokemonDebugMenu *data)
 
 static void BattleLoadOpponentMonSpriteGfxCustom(u16 species, bool8 isFemale, bool8 isShiny, u8 battlerId)
 {
-    const void *lzPaletteData;
-    u16 paletteOffset = 0x100 + battlerId * 16;;
-
-    if (isShiny)
-    {
-        if (gSpeciesInfo[species].shinyPaletteFemale != NULL && isFemale)
-            lzPaletteData = gSpeciesInfo[species].shinyPaletteFemale;
-        else if (gSpeciesInfo[species].shinyPalette != NULL)
-            lzPaletteData = gSpeciesInfo[species].shinyPalette;
-        else
-            lzPaletteData = gSpeciesInfo[SPECIES_NONE].shinyPalette;
-    }
-    else
-    {
-        if (gSpeciesInfo[species].paletteFemale != NULL && isFemale)
-            lzPaletteData = gSpeciesInfo[species].paletteFemale;
-        else if (gSpeciesInfo[species].palette != NULL)
-            lzPaletteData = gSpeciesInfo[species].palette;
-        else
-            lzPaletteData = gSpeciesInfo[SPECIES_NONE].palette;
-    }
+    const u32 *lzPaletteData = GetMonSpritePalFromSpecies(species, isShiny, isFemale);
+    u16 paletteOffset = OBJ_PLTT_ID(battlerId);
 
     LZDecompressWram(lzPaletteData, gDecompressionBuffer);
-    LoadPalette(gDecompressionBuffer, paletteOffset, 0x20);
-    LoadPalette(gDecompressionBuffer, 0x80 + battlerId * 16, 0x20);
+    LoadPalette(gDecompressionBuffer, paletteOffset, PLTT_SIZE_4BPP);
+    LoadPalette(gDecompressionBuffer, BG_PLTT_ID(8) + BG_PLTT_ID(battlerId), PLTT_SIZE_4BPP);
 }
 
 static void SetConstSpriteValues(struct PokemonDebugMenu *data)

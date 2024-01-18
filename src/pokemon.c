@@ -5362,30 +5362,13 @@ const u32 *GetMonFrontSpritePal(struct Pokemon *mon)
 
 const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, bool32 isShiny, u32 personality)
 {
-    species = SanitizeSpeciesId(species);
-
-    if (isShiny)
-    {
-        if (gSpeciesInfo[species].shinyPaletteFemale != NULL && IsPersonalityFemale(species, personality))
-            return gSpeciesInfo[species].shinyPaletteFemale;
-        else if (gSpeciesInfo[species].shinyPalette != NULL)
-            return gSpeciesInfo[species].shinyPalette;
-        else
-            return gSpeciesInfo[SPECIES_NONE].shinyPalette;
-    }
-    else
-    {
-        if (gSpeciesInfo[species].paletteFemale != NULL && IsPersonalityFemale(species, personality))
-            return gSpeciesInfo[species].paletteFemale;
-        else if (gSpeciesInfo[species].palette != NULL)
-            return gSpeciesInfo[species].palette;
-        else
-            return gSpeciesInfo[SPECIES_NONE].palette;
-    }
+    return GetMonSpritePalFromSpecies(species, isShiny, IsPersonalityFemale(species, personality));
 }
 
 const u32 *GetMonSpritePalFromSpecies(u16 species, bool32 isShiny, bool32 isFemale)
 {
+    species = SanitizeSpeciesId(species);
+
     if (isShiny)
     {
         if (gSpeciesInfo[species].shinyPaletteFemale != NULL && isFemale)
