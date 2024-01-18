@@ -3324,7 +3324,8 @@ static void SpriteCB_FlashMatchingLines(struct Sprite *sprite)
                 if (sprite->sNumFullFlashes)
                     sprite->sNumFullFlashes--;
             }
-            else if (sprite->sColor >= maxColorChange) {
+            else if (sprite->sColor >= maxColorChange)
+            {
                 // Reached peak darkness, reverse
                 sprite->sColorIncr = -sprite->sColorIncr;
             }
