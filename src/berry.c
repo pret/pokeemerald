@@ -39,7 +39,7 @@ static void AddTreeBonus(struct BerryTree *tree, u8 bonus);
 #error "OW_BERRY_GROWTH_RATE must be between GEN_3 and GEN_7!"
 #endif
 
-#if OW_BERRY_YIELD_RATE < GEN_3 || (OW_BERRY_YIELD_RATE > GEN_6 && OW_BERRY_GROWTH_RATE != GEN_6_ORAS)
+#if OW_BERRY_YIELD_RATE < GEN_3 || (OW_BERRY_YIELD_RATE > GEN_6 && OW_BERRY_YIELD_RATE != GEN_6_ORAS)
 #error "OW_BERRY_YIELD_RATE must be between GEN_3 and GEN_6!"
 #elif OW_BERRY_YIELD_RATE == GEN_5
 #error "OW_BERRY_YIELD_RATE can not be GEN_5!"
