@@ -66,4 +66,4 @@ def apply_front_palettes(ow_dir, project_root=''):
 
 
 if __name__ == '__main__':
-    apply_front_palettes('overworld')
+    apply_front_palettes('graphics/object_events/pics/pokemon')
