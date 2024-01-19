@@ -507,6 +507,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .pokemonOffset = 17,                                \
         .trainerScale = 256,                                \
         .trainerOffset = 0,                                 \
+        .teachableLearnset = sOinkologneTeachableLearnset,  \
         .formSpeciesIdTable = sOinkologneFormSpeciesIdTable
 
     [SPECIES_OINKOLOGNE_MALE] =
@@ -535,8 +536,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         PALETTES(OinkologneMale),
         ICON(OinkologneMale, 1),
         //.footprint = gMonFootprint_Oinkologne,
-        LEARNSETS(OinkologneMale),
-
+        .levelUpLearnset = sOinkologneMaleLevelUpLearnset,
     },
 
     [SPECIES_OINKOLOGNE_FEMALE] =
@@ -566,7 +566,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         PALETTES(OinkologneFemale),
         ICON(OinkologneFemale, 2),
         //.footprint = gMonFootprint_Oinkologne,
-        LEARNSETS(OinkologneFemale),
+        .levelUpLearnset = sOinkologneFemaleLevelUpLearnset,
     },
 #endif //P_FAMILY_LECHONK
 
