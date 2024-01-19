@@ -889,11 +889,10 @@ void BeginAnim(struct Sprite *sprite)
         if (!(sprite->oam.affineMode & ST_OAM_AFFINE_ON_MASK))
             SetSpriteOamFlipBits(sprite, hFlip, vFlip);
 
-        if (sprite->usingSheet) {
-            #if OW_GFX_COMPRESS
-            if (sprite->sheetSpan)
+        if (sprite->usingSheet)
+        {
+            if (OW_GFX_COMPRESS && sprite->sheetSpan)
                 imageValue = (imageValue + 1) << sprite->sheetSpan;
-            #endif
             sprite->oam.tileNum = sprite->sheetTileStart + imageValue;
         } else
             RequestSpriteFrameImageCopy(imageValue, sprite->oam.tileNum, sprite->images);
@@ -946,10 +945,8 @@ void AnimCmd_frame(struct Sprite *sprite)
         SetSpriteOamFlipBits(sprite, hFlip, vFlip);
 
     if (sprite->usingSheet) {
-        #if OW_GFX_COMPRESS
-        if (sprite->sheetSpan)
+        if (OW_GFX_COMPRESS && sprite->sheetSpan)
             imageValue = (imageValue + 1) << sprite->sheetSpan;
-        #endif
         sprite->oam.tileNum = sprite->sheetTileStart + imageValue;
     } else
         RequestSpriteFrameImageCopy(imageValue, sprite->oam.tileNum, sprite->images);
@@ -984,10 +981,8 @@ void AnimCmd_jump(struct Sprite *sprite)
         SetSpriteOamFlipBits(sprite, hFlip, vFlip);
 
     if (sprite->usingSheet) {
-        #if OW_GFX_COMPRESS
-        if (sprite->sheetSpan)
+        if (OW_GFX_COMPRESS && sprite->sheetSpan)
             imageValue = (imageValue + 1) << sprite->sheetSpan;
-        #endif
         sprite->oam.tileNum = sprite->sheetTileStart + imageValue;
     } else
         RequestSpriteFrameImageCopy(imageValue, sprite->oam.tileNum, sprite->images);
@@ -1369,10 +1364,8 @@ void SetSpriteSheetFrameTileNum(struct Sprite *sprite)
     if (sprite->usingSheet)
     {
         s16 tileOffset = sprite->anims[sprite->animNum][sprite->animCmdIndex].frame.imageValue;
-        #if OW_GFX_COMPRESS
-        if (sprite->sheetSpan)
+        if (OW_GFX_COMPRESS && sprite->sheetSpan)
             tileOffset = (tileOffset + 1) << sprite->sheetSpan;
-        #endif
         if (tileOffset < 0)
             tileOffset = 0;
         sprite->oam.tileNum = sprite->sheetTileStart + tileOffset;
