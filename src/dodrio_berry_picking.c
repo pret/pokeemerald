@@ -1091,32 +1091,39 @@ static void InitResults_Member(void)
 {
     u8 i;
 
-    switch (sGame->state) {
+    switch (sGame->state)
+    {
     case 0:
-        if (SendBlock(0, sGame->berryResults[sGame->timer], sizeof(sGame->berryResults))) {
+        if (SendBlock(0, sGame->berryResults[sGame->timer], sizeof(sGame->berryResults)))
+        {
             sGame->playersReceived = 0;
             sGame->state++;
         }
         break;
     case 1:
-        if (IsLinkTaskFinished()) {
+        if (IsLinkTaskFinished())
+        {
             sGame->state++;
         }
         break;
     case 2:
-        if (AllLinkBlocksReceived()) {
-            for (i = 0; i < sGame->numPlayers; i++) {
+        if (AllLinkBlocksReceived())
+        {
+            for (i = 0; i < sGame->numPlayers; i++)
+            {
                 memcpy(sGame->berryResults, gBlockRecvBuffer, sizeof(sGame->berryResults));
                 sGame->playersReceived = sGame->numPlayers;
             }
         }
-        if (sGame->playersReceived >= sGame->numPlayers) {
+        if (sGame->playersReceived >= sGame->numPlayers)
+        {
             sGame->timer++;
             sGame->state++;
         }
         break;
     default:
-        if (WaitFanfare(TRUE)) {
+        if (WaitFanfare(TRUE))
+        {
             sGame->maxBerriesPickedInRow = sGame->berryResults[sGame->multiplayerId][BERRY_IN_ROW];
             SetGameFunc(FUNC_RESULTS);
             FadeOutAndPlayNewMapMusic(MUS_RG_VICTORY_WILD, 4);
