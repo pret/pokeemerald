@@ -2095,12 +2095,12 @@ static const struct SpriteFrameImage sPicTable_Starmie[] = {
     overworld_frame(gObjectEventPic_Starmie, 4, 4, 5),
 };
 static const struct SpriteFrameImage sPicTable_Mr_Mime[] = {
-    overworld_frame(gObjectEventPic_Mr_Mime, 4, 4, 0),
-    overworld_frame(gObjectEventPic_Mr_Mime, 4, 4, 1),
-    overworld_frame(gObjectEventPic_Mr_Mime, 4, 4, 2),
-    overworld_frame(gObjectEventPic_Mr_Mime, 4, 4, 3),
-    overworld_frame(gObjectEventPic_Mr_Mime, 4, 4, 4),
-    overworld_frame(gObjectEventPic_Mr_Mime, 4, 4, 5),
+    overworld_frame(gObjectEventPic_MrMime, 4, 4, 0),
+    overworld_frame(gObjectEventPic_MrMime, 4, 4, 1),
+    overworld_frame(gObjectEventPic_MrMime, 4, 4, 2),
+    overworld_frame(gObjectEventPic_MrMime, 4, 4, 3),
+    overworld_frame(gObjectEventPic_MrMime, 4, 4, 4),
+    overworld_frame(gObjectEventPic_MrMime, 4, 4, 5),
 };
 static const struct SpriteFrameImage sPicTable_Scyther[] = {
     overworld_frame(gObjectEventPic_Scyther, 4, 4, 0),
@@ -2935,20 +2935,20 @@ static const struct SpriteFrameImage sPicTable_Unown_Z[] = {
     overworld_frame(gObjectEventPic_Unown_Z, 4, 4, 5),
 };
 static const struct SpriteFrameImage sPicTable_Unown_Exclamation[] = {
-    overworld_frame(gObjectEventPic_Unown_Exclamation, 4, 4, 0),
-    overworld_frame(gObjectEventPic_Unown_Exclamation, 4, 4, 1),
-    overworld_frame(gObjectEventPic_Unown_Exclamation, 4, 4, 2),
-    overworld_frame(gObjectEventPic_Unown_Exclamation, 4, 4, 3),
-    overworld_frame(gObjectEventPic_Unown_Exclamation, 4, 4, 4),
-    overworld_frame(gObjectEventPic_Unown_Exclamation, 4, 4, 5),
+    overworld_frame(gObjectEventPic_UnownExclamation, 4, 4, 0),
+    overworld_frame(gObjectEventPic_UnownExclamation, 4, 4, 1),
+    overworld_frame(gObjectEventPic_UnownExclamation, 4, 4, 2),
+    overworld_frame(gObjectEventPic_UnownExclamation, 4, 4, 3),
+    overworld_frame(gObjectEventPic_UnownExclamation, 4, 4, 4),
+    overworld_frame(gObjectEventPic_UnownExclamation, 4, 4, 5),
 };
 static const struct SpriteFrameImage sPicTable_Unown_Question[] = {
-    overworld_frame(gObjectEventPic_Unown_Question, 4, 4, 0),
-    overworld_frame(gObjectEventPic_Unown_Question, 4, 4, 1),
-    overworld_frame(gObjectEventPic_Unown_Question, 4, 4, 2),
-    overworld_frame(gObjectEventPic_Unown_Question, 4, 4, 3),
-    overworld_frame(gObjectEventPic_Unown_Question, 4, 4, 4),
-    overworld_frame(gObjectEventPic_Unown_Question, 4, 4, 5),
+    overworld_frame(gObjectEventPic_UnownQuestion, 4, 4, 0),
+    overworld_frame(gObjectEventPic_UnownQuestion, 4, 4, 1),
+    overworld_frame(gObjectEventPic_UnownQuestion, 4, 4, 2),
+    overworld_frame(gObjectEventPic_UnownQuestion, 4, 4, 3),
+    overworld_frame(gObjectEventPic_UnownQuestion, 4, 4, 4),
+    overworld_frame(gObjectEventPic_UnownQuestion, 4, 4, 5),
 };
 static const struct SpriteFrameImage sPicTable_Wobbuffet[] = {
     overworld_frame(gObjectEventPic_Wobbuffet, 4, 4, 0),
@@ -3335,12 +3335,12 @@ static const struct SpriteFrameImage sPicTable_Lugia[] = {
     overworld_frame(gObjectEventPic_Lugia, 8, 8, 5),
 };
 static const struct SpriteFrameImage sPicTable_Ho_oh[] = {
-    overworld_frame(gObjectEventPic_Ho_oh, 8, 8, 0),
-    overworld_frame(gObjectEventPic_Ho_oh, 8, 8, 1),
-    overworld_frame(gObjectEventPic_Ho_oh, 8, 8, 2),
-    overworld_frame(gObjectEventPic_Ho_oh, 8, 8, 3),
-    overworld_frame(gObjectEventPic_Ho_oh, 8, 8, 4),
-    overworld_frame(gObjectEventPic_Ho_oh, 8, 8, 5),
+    overworld_frame(gObjectEventPic_HoOh, 8, 8, 0),
+    overworld_frame(gObjectEventPic_HoOh, 8, 8, 1),
+    overworld_frame(gObjectEventPic_HoOh, 8, 8, 2),
+    overworld_frame(gObjectEventPic_HoOh, 8, 8, 3),
+    overworld_frame(gObjectEventPic_HoOh, 8, 8, 4),
+    overworld_frame(gObjectEventPic_HoOh, 8, 8, 5),
 };
 static const struct SpriteFrameImage sPicTable_Celebi[] = {
     overworld_frame(gObjectEventPic_Celebi, 4, 4, 0),
@@ -4454,6 +4454,5657 @@ static const struct SpriteFrameImage sPicTable_Deoxys[] = {
     overworld_frame(gObjectEventPic_Deoxys, 4, 4, 4),
     overworld_frame(gObjectEventPic_Deoxys, 4, 4, 5),
 };
+// static const struct SpriteFrameImage sPicTable_turtwig[] = {
+//     overworld_frame(gObjectEventPic_Turtwig, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Turtwig, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Turtwig, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Turtwig, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Turtwig, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Turtwig, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_grotle[] = {
+//     overworld_frame(gObjectEventPic_Grotle, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Grotle, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Grotle, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Grotle, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Grotle, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Grotle, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_torterra[] = {
+//     overworld_frame(gObjectEventPic_Torterra, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Torterra, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Torterra, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Torterra, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Torterra, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Torterra, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_chimchar[] = {
+//     overworld_frame(gObjectEventPic_Chimchar, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Chimchar, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Chimchar, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Chimchar, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Chimchar, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Chimchar, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_monferno[] = {
+//     overworld_frame(gObjectEventPic_Monferno, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Monferno, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Monferno, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Monferno, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Monferno, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Monferno, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_infernape[] = {
+//     overworld_frame(gObjectEventPic_Infernape, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Infernape, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Infernape, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Infernape, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Infernape, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Infernape, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_piplup[] = {
+//     overworld_frame(gObjectEventPic_Piplup, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Piplup, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Piplup, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Piplup, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Piplup, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Piplup, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_prinplup[] = {
+//     overworld_frame(gObjectEventPic_Prinplup, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Prinplup, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Prinplup, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Prinplup, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Prinplup, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Prinplup, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_empoleon[] = {
+//     overworld_frame(gObjectEventPic_Empoleon, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Empoleon, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Empoleon, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Empoleon, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Empoleon, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Empoleon, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_starly[] = {
+//     overworld_frame(gObjectEventPic_Starly, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Starly, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Starly, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Starly, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Starly, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Starly, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_staravia[] = {
+//     overworld_frame(gObjectEventPic_Staravia, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Staravia, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Staravia, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Staravia, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Staravia, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Staravia, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_staraptor[] = {
+//     overworld_frame(gObjectEventPic_Staraptor, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Staraptor, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Staraptor, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Staraptor, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Staraptor, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Staraptor, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_bidoof[] = {
+//     overworld_frame(gObjectEventPic_Bidoof, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Bidoof, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Bidoof, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Bidoof, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Bidoof, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Bidoof, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_bibarel[] = {
+//     overworld_frame(gObjectEventPic_Bibarel, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Bibarel, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Bibarel, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Bibarel, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Bibarel, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Bibarel, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_kricketot[] = {
+//     overworld_frame(gObjectEventPic_Kricketot, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Kricketot, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Kricketot, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Kricketot, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Kricketot, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Kricketot, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_kricketune[] = {
+//     overworld_frame(gObjectEventPic_Kricketune, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Kricketune, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Kricketune, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Kricketune, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Kricketune, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Kricketune, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_shinx[] = {
+//     overworld_frame(gObjectEventPic_Shinx, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Shinx, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Shinx, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Shinx, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Shinx, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Shinx, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_luxio[] = {
+//     overworld_frame(gObjectEventPic_Luxio, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Luxio, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Luxio, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Luxio, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Luxio, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Luxio, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_luxray[] = {
+//     overworld_frame(gObjectEventPic_Luxray, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Luxray, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Luxray, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Luxray, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Luxray, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Luxray, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_budew[] = {
+//     overworld_frame(gObjectEventPic_Budew, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Budew, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Budew, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Budew, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Budew, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Budew, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_roserade[] = {
+//     overworld_frame(gObjectEventPic_Roserade, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Roserade, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Roserade, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Roserade, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Roserade, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Roserade, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_cranidos[] = {
+//     overworld_frame(gObjectEventPic_Cranidos, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Cranidos, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Cranidos, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Cranidos, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Cranidos, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Cranidos, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_rampardos[] = {
+//     overworld_frame(gObjectEventPic_Rampardos, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Rampardos, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Rampardos, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Rampardos, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Rampardos, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Rampardos, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_shieldon[] = {
+//     overworld_frame(gObjectEventPic_Shieldon, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Shieldon, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Shieldon, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Shieldon, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Shieldon, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Shieldon, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_bastiodon[] = {
+//     overworld_frame(gObjectEventPic_Bastiodon, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Bastiodon, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Bastiodon, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Bastiodon, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Bastiodon, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Bastiodon, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_burmy[] = {
+//     overworld_frame(gObjectEventPic_Burmy, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Burmy, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Burmy, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Burmy, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Burmy, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Burmy, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_wormadam[] = {
+//     overworld_frame(gObjectEventPic_Wormadam, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Wormadam, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Wormadam, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Wormadam, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Wormadam, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Wormadam, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_mothim[] = {
+//     overworld_frame(gObjectEventPic_Mothim, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Mothim, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Mothim, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Mothim, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Mothim, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Mothim, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_combee[] = {
+//     overworld_frame(gObjectEventPic_Combee, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Combee, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Combee, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Combee, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Combee, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Combee, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_combee_f[] = {
+//     overworld_frame(gObjectEventPic_Combee_f, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Combee_f, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Combee_f, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Combee_f, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Combee_f, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Combee_f, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vespiquen[] = {
+//     overworld_frame(gObjectEventPic_Vespiquen, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Vespiquen, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Vespiquen, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Vespiquen, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Vespiquen, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Vespiquen, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_pachirisu[] = {
+//     overworld_frame(gObjectEventPic_Pachirisu, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Pachirisu, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Pachirisu, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Pachirisu, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Pachirisu, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Pachirisu, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_buizel[] = {
+//     overworld_frame(gObjectEventPic_Buizel, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Buizel, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Buizel, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Buizel, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Buizel, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Buizel, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_floatzel[] = {
+//     overworld_frame(gObjectEventPic_Floatzel, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Floatzel, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Floatzel, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Floatzel, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Floatzel, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Floatzel, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_cherubi[] = {
+//     overworld_frame(gObjectEventPic_Cherubi, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Cherubi, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Cherubi, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Cherubi, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Cherubi, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Cherubi, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_cherrim[] = {
+//     overworld_frame(gObjectEventPic_Cherrim, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Cherrim, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Cherrim, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Cherrim, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Cherrim, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Cherrim, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_shellos[] = {
+//     overworld_frame(gObjectEventPic_Shellos, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Shellos, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Shellos, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Shellos, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Shellos, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Shellos, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_gastrodon[] = {
+//     overworld_frame(gObjectEventPic_Gastrodon, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Gastrodon, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Gastrodon, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Gastrodon, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Gastrodon, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Gastrodon, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_ambipom[] = {
+//     overworld_frame(gObjectEventPic_Ambipom, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Ambipom, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Ambipom, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Ambipom, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Ambipom, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Ambipom, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_drifloon[] = {
+//     overworld_frame(gObjectEventPic_Drifloon, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Drifloon, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Drifloon, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Drifloon, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Drifloon, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Drifloon, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_drifblim[] = {
+//     overworld_frame(gObjectEventPic_Drifblim, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Drifblim, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Drifblim, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Drifblim, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Drifblim, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Drifblim, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_buneary[] = {
+//     overworld_frame(gObjectEventPic_Buneary, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Buneary, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Buneary, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Buneary, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Buneary, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Buneary, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_lopunny[] = {
+//     overworld_frame(gObjectEventPic_Lopunny, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Lopunny, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Lopunny, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Lopunny, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Lopunny, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Lopunny, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_mismagius[] = {
+//     overworld_frame(gObjectEventPic_Mismagius, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Mismagius, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Mismagius, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Mismagius, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Mismagius, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Mismagius, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_honchkrow[] = {
+//     overworld_frame(gObjectEventPic_Honchkrow, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Honchkrow, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Honchkrow, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Honchkrow, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Honchkrow, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Honchkrow, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_glameow[] = {
+//     overworld_frame(gObjectEventPic_Glameow, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Glameow, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Glameow, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Glameow, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Glameow, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Glameow, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_purugly[] = {
+//     overworld_frame(gObjectEventPic_Purugly, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Purugly, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Purugly, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Purugly, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Purugly, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Purugly, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_chingling[] = {
+//     overworld_frame(gObjectEventPic_Chingling, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Chingling, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Chingling, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Chingling, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Chingling, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Chingling, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_stunky[] = {
+//     overworld_frame(gObjectEventPic_Stunky, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Stunky, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Stunky, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Stunky, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Stunky, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Stunky, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_skuntank[] = {
+//     overworld_frame(gObjectEventPic_Skuntank, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Skuntank, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Skuntank, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Skuntank, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Skuntank, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Skuntank, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_bronzor[] = {
+//     overworld_frame(gObjectEventPic_Bronzor, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Bronzor, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Bronzor, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Bronzor, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Bronzor, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Bronzor, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_bronzong[] = {
+//     overworld_frame(gObjectEventPic_Bronzong, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Bronzong, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Bronzong, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Bronzong, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Bronzong, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Bronzong, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_bonsly[] = {
+//     overworld_frame(gObjectEventPic_Bonsly, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Bonsly, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Bonsly, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Bonsly, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Bonsly, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Bonsly, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_mime_jr[] = {
+//     overworld_frame(gObjectEventPic_MimeJr, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_MimeJr, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_MimeJr, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_MimeJr, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_MimeJr, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_MimeJr, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_happiny[] = {
+//     overworld_frame(gObjectEventPic_Happiny, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Happiny, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Happiny, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Happiny, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Happiny, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Happiny, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_chatot[] = {
+//     overworld_frame(gObjectEventPic_Chatot, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Chatot, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Chatot, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Chatot, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Chatot, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Chatot, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_spiritomb[] = {
+//     overworld_frame(gObjectEventPic_Spiritomb, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Spiritomb, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Spiritomb, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Spiritomb, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Spiritomb, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Spiritomb, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_gible[] = {
+//     overworld_frame(gObjectEventPic_Gible, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Gible, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Gible, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Gible, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Gible, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Gible, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_gabite[] = {
+//     overworld_frame(gObjectEventPic_Gabite, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Gabite, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Gabite, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Gabite, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Gabite, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Gabite, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_garchomp[] = {
+//     overworld_frame(gObjectEventPic_Garchomp, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Garchomp, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Garchomp, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Garchomp, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Garchomp, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Garchomp, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_munchlax[] = {
+//     overworld_frame(gObjectEventPic_Munchlax, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Munchlax, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Munchlax, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Munchlax, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Munchlax, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Munchlax, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_riolu[] = {
+//     overworld_frame(gObjectEventPic_Riolu, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Riolu, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Riolu, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Riolu, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Riolu, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Riolu, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_lucario[] = {
+//     overworld_frame(gObjectEventPic_Lucario, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Lucario, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Lucario, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Lucario, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Lucario, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Lucario, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_hippopotas[] = {
+//     overworld_frame(gObjectEventPic_Hippopotas, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Hippopotas, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Hippopotas, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Hippopotas, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Hippopotas, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Hippopotas, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_hippopotas_f[] = {
+//     overworld_frame(gObjectEventPic_Hippopotas_f, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Hippopotas_f, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Hippopotas_f, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Hippopotas_f, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Hippopotas_f, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Hippopotas_f, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_hippowdon[] = {
+//     overworld_frame(gObjectEventPic_Hippowdon, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Hippowdon, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Hippowdon, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Hippowdon, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Hippowdon, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Hippowdon, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_hippowdon_f[] = {
+//     overworld_frame(gObjectEventPic_Hippowdon_f, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Hippowdon_f, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Hippowdon_f, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Hippowdon_f, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Hippowdon_f, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Hippowdon_f, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_skorupi[] = {
+//     overworld_frame(gObjectEventPic_Skorupi, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Skorupi, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Skorupi, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Skorupi, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Skorupi, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Skorupi, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_drapion[] = {
+//     overworld_frame(gObjectEventPic_Drapion, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Drapion, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Drapion, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Drapion, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Drapion, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Drapion, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_croagunk[] = {
+//     overworld_frame(gObjectEventPic_Croagunk, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Croagunk, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Croagunk, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Croagunk, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Croagunk, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Croagunk, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_toxicroak[] = {
+//     overworld_frame(gObjectEventPic_Toxicroak, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Toxicroak, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Toxicroak, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Toxicroak, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Toxicroak, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Toxicroak, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_carnivine[] = {
+//     overworld_frame(gObjectEventPic_Carnivine, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Carnivine, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Carnivine, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Carnivine, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Carnivine, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Carnivine, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_finneon[] = {
+//     overworld_frame(gObjectEventPic_Finneon, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Finneon, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Finneon, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Finneon, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Finneon, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Finneon, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_lumineon[] = {
+//     overworld_frame(gObjectEventPic_Lumineon, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Lumineon, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Lumineon, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Lumineon, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Lumineon, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Lumineon, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_mantyke[] = {
+//     overworld_frame(gObjectEventPic_Mantyke, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Mantyke, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Mantyke, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Mantyke, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Mantyke, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Mantyke, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_snover[] = {
+//     overworld_frame(gObjectEventPic_Snover, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Snover, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Snover, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Snover, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Snover, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Snover, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_abomasnow[] = {
+//     overworld_frame(gObjectEventPic_Abomasnow, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Abomasnow, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Abomasnow, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Abomasnow, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Abomasnow, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Abomasnow, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_weavile[] = {
+//     overworld_frame(gObjectEventPic_Weavile, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Weavile, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Weavile, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Weavile, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Weavile, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Weavile, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_magnezone[] = {
+//     overworld_frame(gObjectEventPic_Magnezone, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Magnezone, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Magnezone, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Magnezone, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Magnezone, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Magnezone, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_lickilicky[] = {
+//     overworld_frame(gObjectEventPic_Lickilicky, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Lickilicky, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Lickilicky, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Lickilicky, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Lickilicky, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Lickilicky, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_rhyperior[] = {
+//     overworld_frame(gObjectEventPic_Rhyperior, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Rhyperior, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Rhyperior, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Rhyperior, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Rhyperior, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Rhyperior, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_tangrowth[] = {
+//     overworld_frame(gObjectEventPic_Tangrowth, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Tangrowth, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Tangrowth, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Tangrowth, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Tangrowth, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Tangrowth, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_electivire[] = {
+//     overworld_frame(gObjectEventPic_Electivire, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Electivire, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Electivire, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Electivire, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Electivire, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Electivire, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_magmortar[] = {
+//     overworld_frame(gObjectEventPic_Magmortar, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Magmortar, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Magmortar, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Magmortar, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Magmortar, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Magmortar, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_togekiss[] = {
+//     overworld_frame(gObjectEventPic_Togekiss, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Togekiss, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Togekiss, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Togekiss, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Togekiss, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Togekiss, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_yanmega[] = {
+//     overworld_frame(gObjectEventPic_Yanmega, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Yanmega, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Yanmega, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Yanmega, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Yanmega, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Yanmega, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_leafeon[] = {
+//     overworld_frame(gObjectEventPic_Leafeon, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Leafeon, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Leafeon, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Leafeon, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Leafeon, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Leafeon, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_glaceon[] = {
+//     overworld_frame(gObjectEventPic_Glaceon, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Glaceon, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Glaceon, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Glaceon, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Glaceon, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Glaceon, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_gliscor[] = {
+//     overworld_frame(gObjectEventPic_Gliscor, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Gliscor, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Gliscor, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Gliscor, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Gliscor, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Gliscor, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_mamoswine[] = {
+//     overworld_frame(gObjectEventPic_Mamoswine, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Mamoswine, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Mamoswine, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Mamoswine, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Mamoswine, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Mamoswine, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_porygon_z[] = {
+//     overworld_frame(gObjectEventPic_Porygon_z, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Porygon_z, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Porygon_z, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Porygon_z, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Porygon_z, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Porygon_z, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_gallade[] = {
+//     overworld_frame(gObjectEventPic_Gallade, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Gallade, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Gallade, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Gallade, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Gallade, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Gallade, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_probopass[] = {
+//     overworld_frame(gObjectEventPic_Probopass, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Probopass, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Probopass, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Probopass, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Probopass, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Probopass, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_dusknoir[] = {
+//     overworld_frame(gObjectEventPic_Dusknoir, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Dusknoir, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Dusknoir, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Dusknoir, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Dusknoir, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Dusknoir, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_froslass[] = {
+//     overworld_frame(gObjectEventPic_Froslass, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Froslass, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Froslass, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Froslass, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Froslass, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Froslass, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_rotom[] = {
+//     overworld_frame(gObjectEventPic_Rotom, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Rotom, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Rotom, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Rotom, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Rotom, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Rotom, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_uxie[] = {
+//     overworld_frame(gObjectEventPic_Uxie, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Uxie, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Uxie, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Uxie, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Uxie, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Uxie, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_mesprit[] = {
+//     overworld_frame(gObjectEventPic_Mesprit, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Mesprit, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Mesprit, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Mesprit, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Mesprit, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Mesprit, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_azelf[] = {
+//     overworld_frame(gObjectEventPic_Azelf, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Azelf, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Azelf, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Azelf, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Azelf, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Azelf, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_dialga[] = {
+//     overworld_frame(gObjectEventPic_Dialga, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_Dialga, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_Dialga, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_Dialga, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_Dialga, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_Dialga, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_palkia[] = {
+//     overworld_frame(gObjectEventPic_Palkia, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_Palkia, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_Palkia, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_Palkia, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_Palkia, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_Palkia, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_heatran[] = {
+//     overworld_frame(gObjectEventPic_Heatran, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Heatran, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Heatran, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Heatran, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Heatran, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Heatran, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_regigigas[] = {
+//     overworld_frame(gObjectEventPic_Regigigas, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_Regigigas, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_Regigigas, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_Regigigas, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_Regigigas, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_Regigigas, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_giratina[] = {
+//     overworld_frame(gObjectEventPic_Giratina, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_Giratina, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_Giratina, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_Giratina, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_Giratina, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_Giratina, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_cresselia[] = {
+//     overworld_frame(gObjectEventPic_Cresselia, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Cresselia, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Cresselia, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Cresselia, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Cresselia, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Cresselia, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_phione[] = {
+//     overworld_frame(gObjectEventPic_Phione, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Phione, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Phione, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Phione, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Phione, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Phione, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_manaphy[] = {
+//     overworld_frame(gObjectEventPic_Manaphy, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Manaphy, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Manaphy, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Manaphy, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Manaphy, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Manaphy, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_darkrai[] = {
+//     overworld_frame(gObjectEventPic_Darkrai, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Darkrai, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Darkrai, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Darkrai, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Darkrai, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Darkrai, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_shaymin[] = {
+//     overworld_frame(gObjectEventPic_Shaymin, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Shaymin, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Shaymin, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Shaymin, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Shaymin, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Shaymin, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_arceus[] = {
+//     overworld_frame(gObjectEventPic_Arceus, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_Arceus, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_Arceus, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_Arceus, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_Arceus, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_Arceus, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_victini[] = {
+//     overworld_frame(gObjectEventPic_Victini, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Victini, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Victini, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Victini, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Victini, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Victini, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_snivy[] = {
+//     overworld_frame(gObjectEventPic_Snivy, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Snivy, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Snivy, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Snivy, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Snivy, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Snivy, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_servine[] = {
+//     overworld_frame(gObjectEventPic_Servine, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Servine, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Servine, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Servine, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Servine, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Servine, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_serperior[] = {
+//     overworld_frame(gObjectEventPic_Serperior, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Serperior, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Serperior, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Serperior, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Serperior, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Serperior, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_tepig[] = {
+//     overworld_frame(gObjectEventPic_Tepig, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Tepig, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Tepig, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Tepig, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Tepig, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Tepig, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_pignite[] = {
+//     overworld_frame(gObjectEventPic_Pignite, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Pignite, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Pignite, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Pignite, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Pignite, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Pignite, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_emboar[] = {
+//     overworld_frame(gObjectEventPic_Emboar, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Emboar, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Emboar, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Emboar, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Emboar, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Emboar, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_oshawott[] = {
+//     overworld_frame(gObjectEventPic_Oshawott, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Oshawott, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Oshawott, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Oshawott, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Oshawott, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Oshawott, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_dewott[] = {
+//     overworld_frame(gObjectEventPic_Dewott, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Dewott, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Dewott, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Dewott, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Dewott, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Dewott, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_samurott[] = {
+//     overworld_frame(gObjectEventPic_Samurott, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Samurott, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Samurott, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Samurott, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Samurott, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Samurott, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_patrat[] = {
+//     overworld_frame(gObjectEventPic_Patrat, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Patrat, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Patrat, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Patrat, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Patrat, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Patrat, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_watchog[] = {
+//     overworld_frame(gObjectEventPic_Watchog, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Watchog, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Watchog, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Watchog, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Watchog, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Watchog, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_lillipup[] = {
+//     overworld_frame(gObjectEventPic_Lillipup, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Lillipup, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Lillipup, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Lillipup, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Lillipup, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Lillipup, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_herdier[] = {
+//     overworld_frame(gObjectEventPic_Herdier, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Herdier, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Herdier, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Herdier, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Herdier, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Herdier, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_stoutland[] = {
+//     overworld_frame(gObjectEventPic_Stoutland, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Stoutland, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Stoutland, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Stoutland, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Stoutland, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Stoutland, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_purrloin[] = {
+//     overworld_frame(gObjectEventPic_Purrloin, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Purrloin, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Purrloin, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Purrloin, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Purrloin, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Purrloin, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_liepard[] = {
+//     overworld_frame(gObjectEventPic_Liepard, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Liepard, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Liepard, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Liepard, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Liepard, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Liepard, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_pansage[] = {
+//     overworld_frame(gObjectEventPic_Pansage, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Pansage, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Pansage, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Pansage, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Pansage, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Pansage, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_simisage[] = {
+//     overworld_frame(gObjectEventPic_Simisage, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Simisage, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Simisage, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Simisage, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Simisage, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Simisage, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_pansear[] = {
+//     overworld_frame(gObjectEventPic_Pansear, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Pansear, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Pansear, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Pansear, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Pansear, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Pansear, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_simisear[] = {
+//     overworld_frame(gObjectEventPic_Simisear, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Simisear, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Simisear, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Simisear, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Simisear, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Simisear, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_panpour[] = {
+//     overworld_frame(gObjectEventPic_Panpour, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Panpour, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Panpour, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Panpour, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Panpour, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Panpour, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_simipour[] = {
+//     overworld_frame(gObjectEventPic_Simipour, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Simipour, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Simipour, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Simipour, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Simipour, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Simipour, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_munna[] = {
+//     overworld_frame(gObjectEventPic_Munna, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Munna, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Munna, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Munna, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Munna, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Munna, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_musharna[] = {
+//     overworld_frame(gObjectEventPic_Musharna, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Musharna, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Musharna, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Musharna, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Musharna, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Musharna, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_pidove[] = {
+//     overworld_frame(gObjectEventPic_Pidove, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Pidove, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Pidove, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Pidove, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Pidove, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Pidove, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_tranquill[] = {
+//     overworld_frame(gObjectEventPic_Tranquill, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Tranquill, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Tranquill, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Tranquill, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Tranquill, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Tranquill, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_unfezant[] = {
+//     overworld_frame(gObjectEventPic_Unfezant, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Unfezant, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Unfezant, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Unfezant, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Unfezant, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Unfezant, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_unfezant_f[] = {
+//     overworld_frame(gObjectEventPic_Unfezant_f, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Unfezant_f, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Unfezant_f, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Unfezant_f, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Unfezant_f, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Unfezant_f, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_blitzle[] = {
+//     overworld_frame(gObjectEventPic_Blitzle, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Blitzle, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Blitzle, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Blitzle, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Blitzle, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Blitzle, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_zebstrika[] = {
+//     overworld_frame(gObjectEventPic_Zebstrika, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Zebstrika, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Zebstrika, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Zebstrika, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Zebstrika, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Zebstrika, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_roggenrola[] = {
+//     overworld_frame(gObjectEventPic_Roggenrola, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Roggenrola, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Roggenrola, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Roggenrola, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Roggenrola, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Roggenrola, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_boldore[] = {
+//     overworld_frame(gObjectEventPic_Boldore, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Boldore, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Boldore, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Boldore, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Boldore, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Boldore, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_gigalith[] = {
+//     overworld_frame(gObjectEventPic_Gigalith, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Gigalith, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Gigalith, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Gigalith, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Gigalith, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Gigalith, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_woobat[] = {
+//     overworld_frame(gObjectEventPic_Woobat, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Woobat, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Woobat, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Woobat, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Woobat, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Woobat, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_swoobat[] = {
+//     overworld_frame(gObjectEventPic_Swoobat, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Swoobat, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Swoobat, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Swoobat, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Swoobat, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Swoobat, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_drilbur[] = {
+//     overworld_frame(gObjectEventPic_Drilbur, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Drilbur, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Drilbur, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Drilbur, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Drilbur, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Drilbur, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_excadrill[] = {
+//     overworld_frame(gObjectEventPic_Excadrill, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Excadrill, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Excadrill, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Excadrill, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Excadrill, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Excadrill, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_audino[] = {
+//     overworld_frame(gObjectEventPic_Audino, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Audino, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Audino, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Audino, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Audino, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Audino, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_timburr[] = {
+//     overworld_frame(gObjectEventPic_Timburr, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Timburr, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Timburr, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Timburr, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Timburr, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Timburr, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_gurdurr[] = {
+//     overworld_frame(gObjectEventPic_Gurdurr, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Gurdurr, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Gurdurr, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Gurdurr, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Gurdurr, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Gurdurr, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_conkeldurr[] = {
+//     overworld_frame(gObjectEventPic_Conkeldurr, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Conkeldurr, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Conkeldurr, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Conkeldurr, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Conkeldurr, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Conkeldurr, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_tympole[] = {
+//     overworld_frame(gObjectEventPic_Tympole, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Tympole, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Tympole, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Tympole, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Tympole, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Tympole, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_palpitoad[] = {
+//     overworld_frame(gObjectEventPic_Palpitoad, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Palpitoad, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Palpitoad, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Palpitoad, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Palpitoad, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Palpitoad, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_seismitoad[] = {
+//     overworld_frame(gObjectEventPic_Seismitoad, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Seismitoad, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Seismitoad, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Seismitoad, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Seismitoad, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Seismitoad, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_throh[] = {
+//     overworld_frame(gObjectEventPic_Throh, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Throh, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Throh, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Throh, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Throh, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Throh, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_sawk[] = {
+//     overworld_frame(gObjectEventPic_Sawk, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Sawk, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Sawk, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Sawk, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Sawk, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Sawk, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_sewaddle[] = {
+//     overworld_frame(gObjectEventPic_Sewaddle, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Sewaddle, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Sewaddle, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Sewaddle, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Sewaddle, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Sewaddle, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_swadloon[] = {
+//     overworld_frame(gObjectEventPic_Swadloon, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Swadloon, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Swadloon, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Swadloon, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Swadloon, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Swadloon, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_leavanny[] = {
+//     overworld_frame(gObjectEventPic_Leavanny, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Leavanny, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Leavanny, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Leavanny, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Leavanny, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Leavanny, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_venipede[] = {
+//     overworld_frame(gObjectEventPic_Venipede, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Venipede, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Venipede, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Venipede, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Venipede, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Venipede, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_whirlipede[] = {
+//     overworld_frame(gObjectEventPic_Whirlipede, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Whirlipede, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Whirlipede, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Whirlipede, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Whirlipede, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Whirlipede, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_scolipede[] = {
+//     overworld_frame(gObjectEventPic_Scolipede, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Scolipede, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Scolipede, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Scolipede, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Scolipede, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Scolipede, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_cottonee[] = {
+//     overworld_frame(gObjectEventPic_Cottonee, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Cottonee, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Cottonee, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Cottonee, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Cottonee, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Cottonee, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_whimsicott[] = {
+//     overworld_frame(gObjectEventPic_Whimsicott, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Whimsicott, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Whimsicott, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Whimsicott, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Whimsicott, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Whimsicott, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_petilil[] = {
+//     overworld_frame(gObjectEventPic_Petilil, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Petilil, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Petilil, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Petilil, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Petilil, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Petilil, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_lilligant[] = {
+//     overworld_frame(gObjectEventPic_Lilligant, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Lilligant, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Lilligant, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Lilligant, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Lilligant, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Lilligant, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_basculin[] = {
+//     overworld_frame(gObjectEventPic_Basculin, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Basculin, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Basculin, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Basculin, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Basculin, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Basculin, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_sandile[] = {
+//     overworld_frame(gObjectEventPic_Sandile, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Sandile, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Sandile, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Sandile, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Sandile, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Sandile, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_krokorok[] = {
+//     overworld_frame(gObjectEventPic_Krokorok, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Krokorok, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Krokorok, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Krokorok, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Krokorok, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Krokorok, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_krookodile[] = {
+//     overworld_frame(gObjectEventPic_Krookodile, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Krookodile, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Krookodile, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Krookodile, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Krookodile, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Krookodile, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_darumaka[] = {
+//     overworld_frame(gObjectEventPic_Darumaka, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Darumaka, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Darumaka, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Darumaka, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Darumaka, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Darumaka, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_darmanitan[] = {
+//     overworld_frame(gObjectEventPic_Darmanitan, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Darmanitan, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Darmanitan, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Darmanitan, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Darmanitan, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Darmanitan, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_maractus[] = {
+//     overworld_frame(gObjectEventPic_Maractus, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Maractus, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Maractus, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Maractus, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Maractus, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Maractus, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_dwebble[] = {
+//     overworld_frame(gObjectEventPic_Dwebble, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Dwebble, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Dwebble, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Dwebble, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Dwebble, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Dwebble, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_crustle[] = {
+//     overworld_frame(gObjectEventPic_Crustle, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Crustle, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Crustle, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Crustle, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Crustle, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Crustle, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_scraggy[] = {
+//     overworld_frame(gObjectEventPic_Scraggy, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Scraggy, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Scraggy, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Scraggy, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Scraggy, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Scraggy, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_scrafty[] = {
+//     overworld_frame(gObjectEventPic_Scrafty, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Scrafty, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Scrafty, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Scrafty, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Scrafty, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Scrafty, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_sigilyph[] = {
+//     overworld_frame(gObjectEventPic_Sigilyph, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Sigilyph, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Sigilyph, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Sigilyph, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Sigilyph, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Sigilyph, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_yamask[] = {
+//     overworld_frame(gObjectEventPic_Yamask, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Yamask, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Yamask, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Yamask, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Yamask, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Yamask, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_cofagrigus[] = {
+//     overworld_frame(gObjectEventPic_Cofagrigus, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Cofagrigus, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Cofagrigus, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Cofagrigus, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Cofagrigus, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Cofagrigus, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_tirtouga[] = {
+//     overworld_frame(gObjectEventPic_Tirtouga, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Tirtouga, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Tirtouga, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Tirtouga, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Tirtouga, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Tirtouga, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_carracosta[] = {
+//     overworld_frame(gObjectEventPic_Carracosta, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Carracosta, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Carracosta, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Carracosta, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Carracosta, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Carracosta, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_archen[] = {
+//     overworld_frame(gObjectEventPic_Archen, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Archen, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Archen, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Archen, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Archen, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Archen, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_archeops[] = {
+//     overworld_frame(gObjectEventPic_Archeops, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Archeops, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Archeops, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Archeops, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Archeops, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Archeops, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_trubbish[] = {
+//     overworld_frame(gObjectEventPic_Trubbish, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Trubbish, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Trubbish, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Trubbish, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Trubbish, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Trubbish, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_garbodor[] = {
+//     overworld_frame(gObjectEventPic_Garbodor, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Garbodor, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Garbodor, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Garbodor, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Garbodor, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Garbodor, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_zorua[] = {
+//     overworld_frame(gObjectEventPic_Zorua, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Zorua, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Zorua, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Zorua, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Zorua, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Zorua, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_zoroark[] = {
+//     overworld_frame(gObjectEventPic_Zoroark, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Zoroark, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Zoroark, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Zoroark, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Zoroark, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Zoroark, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_minccino[] = {
+//     overworld_frame(gObjectEventPic_Minccino, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Minccino, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Minccino, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Minccino, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Minccino, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Minccino, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_cinccino[] = {
+//     overworld_frame(gObjectEventPic_Cinccino, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Cinccino, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Cinccino, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Cinccino, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Cinccino, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Cinccino, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_gothita[] = {
+//     overworld_frame(gObjectEventPic_Gothita, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Gothita, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Gothita, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Gothita, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Gothita, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Gothita, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_gothorita[] = {
+//     overworld_frame(gObjectEventPic_Gothorita, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Gothorita, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Gothorita, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Gothorita, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Gothorita, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Gothorita, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_gothitelle[] = {
+//     overworld_frame(gObjectEventPic_Gothitelle, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Gothitelle, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Gothitelle, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Gothitelle, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Gothitelle, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Gothitelle, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_solosis[] = {
+//     overworld_frame(gObjectEventPic_Solosis, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Solosis, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Solosis, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Solosis, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Solosis, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Solosis, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_duosion[] = {
+//     overworld_frame(gObjectEventPic_Duosion, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Duosion, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Duosion, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Duosion, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Duosion, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Duosion, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_reuniclus[] = {
+//     overworld_frame(gObjectEventPic_Reuniclus, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Reuniclus, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Reuniclus, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Reuniclus, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Reuniclus, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Reuniclus, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_ducklett[] = {
+//     overworld_frame(gObjectEventPic_Ducklett, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Ducklett, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Ducklett, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Ducklett, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Ducklett, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Ducklett, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_swanna[] = {
+//     overworld_frame(gObjectEventPic_Swanna, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Swanna, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Swanna, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Swanna, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Swanna, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Swanna, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vanillite[] = {
+//     overworld_frame(gObjectEventPic_Vanillite, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Vanillite, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Vanillite, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Vanillite, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Vanillite, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Vanillite, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vanillish[] = {
+//     overworld_frame(gObjectEventPic_Vanillish, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Vanillish, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Vanillish, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Vanillish, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Vanillish, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Vanillish, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vanilluxe[] = {
+//     overworld_frame(gObjectEventPic_Vanilluxe, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Vanilluxe, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Vanilluxe, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Vanilluxe, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Vanilluxe, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Vanilluxe, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_deerling[] = {
+//     overworld_frame(gObjectEventPic_Deerling, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Deerling, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Deerling, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Deerling, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Deerling, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Deerling, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_sawsbuck[] = {
+//     overworld_frame(gObjectEventPic_Sawsbuck, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Sawsbuck, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Sawsbuck, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Sawsbuck, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Sawsbuck, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Sawsbuck, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_emolga[] = {
+//     overworld_frame(gObjectEventPic_Emolga, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Emolga, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Emolga, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Emolga, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Emolga, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Emolga, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_karrablast[] = {
+//     overworld_frame(gObjectEventPic_Karrablast, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Karrablast, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Karrablast, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Karrablast, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Karrablast, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Karrablast, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_escavalier[] = {
+//     overworld_frame(gObjectEventPic_Escavalier, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Escavalier, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Escavalier, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Escavalier, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Escavalier, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Escavalier, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_foongus[] = {
+//     overworld_frame(gObjectEventPic_Foongus, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Foongus, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Foongus, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Foongus, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Foongus, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Foongus, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_amoonguss[] = {
+//     overworld_frame(gObjectEventPic_Amoonguss, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Amoonguss, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Amoonguss, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Amoonguss, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Amoonguss, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Amoonguss, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_frillish[] = {
+//     overworld_frame(gObjectEventPic_Frillish, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Frillish, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Frillish, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Frillish, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Frillish, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Frillish, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_frillish_f[] = {
+//     overworld_frame(gObjectEventPic_Frillish_f, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Frillish_f, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Frillish_f, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Frillish_f, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Frillish_f, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Frillish_f, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_jellicent[] = {
+//     overworld_frame(gObjectEventPic_Jellicent, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Jellicent, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Jellicent, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Jellicent, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Jellicent, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Jellicent, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_jellicent_f[] = {
+//     overworld_frame(gObjectEventPic_Jellicent_f, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Jellicent_f, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Jellicent_f, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Jellicent_f, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Jellicent_f, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Jellicent_f, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_alomomola[] = {
+//     overworld_frame(gObjectEventPic_Alomomola, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Alomomola, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Alomomola, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Alomomola, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Alomomola, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Alomomola, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_joltik[] = {
+//     overworld_frame(gObjectEventPic_Joltik, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Joltik, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Joltik, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Joltik, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Joltik, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Joltik, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_galvantula[] = {
+//     overworld_frame(gObjectEventPic_Galvantula, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Galvantula, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Galvantula, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Galvantula, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Galvantula, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Galvantula, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_ferroseed[] = {
+//     overworld_frame(gObjectEventPic_Ferroseed, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Ferroseed, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Ferroseed, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Ferroseed, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Ferroseed, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Ferroseed, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_ferrothorn[] = {
+//     overworld_frame(gObjectEventPic_Ferrothorn, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Ferrothorn, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Ferrothorn, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Ferrothorn, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Ferrothorn, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Ferrothorn, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_klink[] = {
+//     overworld_frame(gObjectEventPic_Klink, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Klink, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Klink, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Klink, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Klink, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Klink, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_klang[] = {
+//     overworld_frame(gObjectEventPic_Klang, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Klang, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Klang, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Klang, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Klang, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Klang, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_klinklang[] = {
+//     overworld_frame(gObjectEventPic_Klinklang, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Klinklang, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Klinklang, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Klinklang, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Klinklang, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Klinklang, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_tynamo[] = {
+//     overworld_frame(gObjectEventPic_Tynamo, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Tynamo, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Tynamo, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Tynamo, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Tynamo, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Tynamo, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_eelektrik[] = {
+//     overworld_frame(gObjectEventPic_Eelektrik, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Eelektrik, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Eelektrik, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Eelektrik, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Eelektrik, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Eelektrik, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_eelektross[] = {
+//     overworld_frame(gObjectEventPic_Eelektross, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Eelektross, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Eelektross, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Eelektross, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Eelektross, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Eelektross, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_elgyem[] = {
+//     overworld_frame(gObjectEventPic_Elgyem, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Elgyem, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Elgyem, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Elgyem, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Elgyem, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Elgyem, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_beheeyem[] = {
+//     overworld_frame(gObjectEventPic_Beheeyem, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Beheeyem, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Beheeyem, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Beheeyem, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Beheeyem, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Beheeyem, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_litwick[] = {
+//     overworld_frame(gObjectEventPic_Litwick, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Litwick, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Litwick, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Litwick, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Litwick, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Litwick, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_lampent[] = {
+//     overworld_frame(gObjectEventPic_Lampent, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Lampent, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Lampent, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Lampent, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Lampent, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Lampent, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_chandelure[] = {
+//     overworld_frame(gObjectEventPic_Chandelure, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Chandelure, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Chandelure, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Chandelure, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Chandelure, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Chandelure, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_axew[] = {
+//     overworld_frame(gObjectEventPic_Axew, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Axew, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Axew, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Axew, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Axew, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Axew, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_fraxure[] = {
+//     overworld_frame(gObjectEventPic_Fraxure, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Fraxure, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Fraxure, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Fraxure, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Fraxure, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Fraxure, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_haxorus[] = {
+//     overworld_frame(gObjectEventPic_Haxorus, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Haxorus, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Haxorus, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Haxorus, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Haxorus, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Haxorus, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_cubchoo[] = {
+//     overworld_frame(gObjectEventPic_Cubchoo, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Cubchoo, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Cubchoo, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Cubchoo, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Cubchoo, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Cubchoo, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_beartic[] = {
+//     overworld_frame(gObjectEventPic_Beartic, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Beartic, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Beartic, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Beartic, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Beartic, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Beartic, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_cryogonal[] = {
+//     overworld_frame(gObjectEventPic_Cryogonal, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Cryogonal, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Cryogonal, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Cryogonal, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Cryogonal, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Cryogonal, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_shelmet[] = {
+//     overworld_frame(gObjectEventPic_Shelmet, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Shelmet, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Shelmet, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Shelmet, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Shelmet, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Shelmet, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_accelgor[] = {
+//     overworld_frame(gObjectEventPic_Accelgor, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Accelgor, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Accelgor, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Accelgor, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Accelgor, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Accelgor, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_stunfisk[] = {
+//     overworld_frame(gObjectEventPic_Stunfisk, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Stunfisk, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Stunfisk, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Stunfisk, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Stunfisk, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Stunfisk, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_mienfoo[] = {
+//     overworld_frame(gObjectEventPic_Mienfoo, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Mienfoo, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Mienfoo, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Mienfoo, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Mienfoo, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Mienfoo, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_mienshao[] = {
+//     overworld_frame(gObjectEventPic_Mienshao, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Mienshao, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Mienshao, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Mienshao, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Mienshao, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Mienshao, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_druddigon[] = {
+//     overworld_frame(gObjectEventPic_Druddigon, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Druddigon, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Druddigon, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Druddigon, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Druddigon, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Druddigon, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_golett[] = {
+//     overworld_frame(gObjectEventPic_Golett, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Golett, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Golett, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Golett, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Golett, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Golett, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_golurk[] = {
+//     overworld_frame(gObjectEventPic_Golurk, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Golurk, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Golurk, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Golurk, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Golurk, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Golurk, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_pawniard[] = {
+//     overworld_frame(gObjectEventPic_Pawniard, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Pawniard, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Pawniard, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Pawniard, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Pawniard, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Pawniard, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_bisharp[] = {
+//     overworld_frame(gObjectEventPic_Bisharp, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Bisharp, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Bisharp, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Bisharp, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Bisharp, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Bisharp, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_bouffalant[] = {
+//     overworld_frame(gObjectEventPic_Bouffalant, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Bouffalant, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Bouffalant, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Bouffalant, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Bouffalant, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Bouffalant, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_rufflet[] = {
+//     overworld_frame(gObjectEventPic_Rufflet, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Rufflet, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Rufflet, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Rufflet, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Rufflet, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Rufflet, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_braviary[] = {
+//     overworld_frame(gObjectEventPic_Braviary, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Braviary, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Braviary, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Braviary, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Braviary, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Braviary, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vullaby[] = {
+//     overworld_frame(gObjectEventPic_Vullaby, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Vullaby, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Vullaby, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Vullaby, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Vullaby, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Vullaby, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_mandibuzz[] = {
+//     overworld_frame(gObjectEventPic_Mandibuzz, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Mandibuzz, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Mandibuzz, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Mandibuzz, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Mandibuzz, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Mandibuzz, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_heatmor[] = {
+//     overworld_frame(gObjectEventPic_Heatmor, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Heatmor, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Heatmor, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Heatmor, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Heatmor, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Heatmor, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_durant[] = {
+//     overworld_frame(gObjectEventPic_Durant, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Durant, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Durant, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Durant, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Durant, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Durant, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_deino[] = {
+//     overworld_frame(gObjectEventPic_Deino, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Deino, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Deino, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Deino, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Deino, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Deino, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_zweilous[] = {
+//     overworld_frame(gObjectEventPic_Zweilous, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Zweilous, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Zweilous, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Zweilous, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Zweilous, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Zweilous, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_hydreigon[] = {
+//     overworld_frame(gObjectEventPic_Hydreigon, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Hydreigon, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Hydreigon, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Hydreigon, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Hydreigon, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Hydreigon, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_larvesta[] = {
+//     overworld_frame(gObjectEventPic_Larvesta, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Larvesta, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Larvesta, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Larvesta, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Larvesta, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Larvesta, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_volcarona[] = {
+//     overworld_frame(gObjectEventPic_Volcarona, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Volcarona, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Volcarona, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Volcarona, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Volcarona, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Volcarona, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_cobalion[] = {
+//     overworld_frame(gObjectEventPic_Cobalion, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Cobalion, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Cobalion, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Cobalion, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Cobalion, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Cobalion, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_terrakion[] = {
+//     overworld_frame(gObjectEventPic_Terrakion, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Terrakion, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Terrakion, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Terrakion, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Terrakion, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Terrakion, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_virizion[] = {
+//     overworld_frame(gObjectEventPic_Virizion, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Virizion, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Virizion, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Virizion, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Virizion, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Virizion, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_tornadus[] = {
+//     overworld_frame(gObjectEventPic_Tornadus, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Tornadus, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Tornadus, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Tornadus, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Tornadus, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Tornadus, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_thundurus[] = {
+//     overworld_frame(gObjectEventPic_Thundurus, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Thundurus, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Thundurus, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Thundurus, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Thundurus, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Thundurus, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_reshiram[] = {
+//     overworld_frame(gObjectEventPic_Reshiram, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_Reshiram, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_Reshiram, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_Reshiram, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_Reshiram, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_Reshiram, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_zekrom[] = {
+//     overworld_frame(gObjectEventPic_Zekrom, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_Zekrom, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_Zekrom, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_Zekrom, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_Zekrom, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_Zekrom, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_landorus[] = {
+//     overworld_frame(gObjectEventPic_Landorus, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Landorus, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Landorus, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Landorus, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Landorus, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Landorus, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_kyurem[] = {
+//     overworld_frame(gObjectEventPic_Kyurem, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_Kyurem, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_Kyurem, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_Kyurem, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_Kyurem, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_Kyurem, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_keldeo[] = {
+//     overworld_frame(gObjectEventPic_Keldeo, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Keldeo, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Keldeo, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Keldeo, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Keldeo, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Keldeo, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_meloetta[] = {
+//     overworld_frame(gObjectEventPic_Meloetta, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Meloetta, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Meloetta, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Meloetta, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Meloetta, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Meloetta, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_genesect[] = {
+//     overworld_frame(gObjectEventPic_Genesect, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Genesect, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Genesect, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Genesect, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Genesect, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Genesect, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_chespin[] = {
+//     overworld_frame(gObjectEventPic_Chespin, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Chespin, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Chespin, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Chespin, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Chespin, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Chespin, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_quilladin[] = {
+//     overworld_frame(gObjectEventPic_Quilladin, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Quilladin, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Quilladin, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Quilladin, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Quilladin, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Quilladin, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_chesnaught[] = {
+//     overworld_frame(gObjectEventPic_Chesnaught, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Chesnaught, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Chesnaught, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Chesnaught, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Chesnaught, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Chesnaught, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_fennekin[] = {
+//     overworld_frame(gObjectEventPic_Fennekin, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Fennekin, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Fennekin, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Fennekin, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Fennekin, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Fennekin, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_braixen[] = {
+//     overworld_frame(gObjectEventPic_Braixen, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Braixen, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Braixen, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Braixen, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Braixen, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Braixen, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_delphox[] = {
+//     overworld_frame(gObjectEventPic_Delphox, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Delphox, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Delphox, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Delphox, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Delphox, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Delphox, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_froakie[] = {
+//     overworld_frame(gObjectEventPic_Froakie, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Froakie, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Froakie, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Froakie, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Froakie, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Froakie, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_frogadier[] = {
+//     overworld_frame(gObjectEventPic_Frogadier, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Frogadier, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Frogadier, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Frogadier, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Frogadier, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Frogadier, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_greninja[] = {
+//     overworld_frame(gObjectEventPic_Greninja, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Greninja, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Greninja, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Greninja, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Greninja, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Greninja, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_bunnelby[] = {
+//     overworld_frame(gObjectEventPic_Bunnelby, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Bunnelby, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Bunnelby, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Bunnelby, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Bunnelby, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Bunnelby, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_diggersby[] = {
+//     overworld_frame(gObjectEventPic_Diggersby, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Diggersby, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Diggersby, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Diggersby, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Diggersby, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Diggersby, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_fletchling[] = {
+//     overworld_frame(gObjectEventPic_Fletchling, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Fletchling, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Fletchling, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Fletchling, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Fletchling, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Fletchling, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_fletchinder[] = {
+//     overworld_frame(gObjectEventPic_Fletchinder, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Fletchinder, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Fletchinder, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Fletchinder, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Fletchinder, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Fletchinder, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_talonflame[] = {
+//     overworld_frame(gObjectEventPic_Talonflame, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Talonflame, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Talonflame, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Talonflame, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Talonflame, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Talonflame, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_scatterbug[] = {
+//     overworld_frame(gObjectEventPic_Scatterbug, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Scatterbug, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Scatterbug, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Scatterbug, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Scatterbug, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Scatterbug, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_spewpa[] = {
+//     overworld_frame(gObjectEventPic_Spewpa, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Spewpa, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Spewpa, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Spewpa, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Spewpa, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Spewpa, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vivillon[] = {
+//     overworld_frame(gObjectEventPic_Vivillon, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Vivillon, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Vivillon, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Vivillon, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Vivillon, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Vivillon, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_litleo[] = {
+//     overworld_frame(gObjectEventPic_Litleo, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Litleo, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Litleo, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Litleo, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Litleo, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Litleo, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_pyroar[] = {
+//     overworld_frame(gObjectEventPic_Pyroar, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Pyroar, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Pyroar, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Pyroar, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Pyroar, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Pyroar, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_pyroar_f[] = {
+//     overworld_frame(gObjectEventPic_Pyroar_f, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Pyroar_f, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Pyroar_f, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Pyroar_f, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Pyroar_f, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Pyroar_f, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_flabebe[] = {
+//     overworld_frame(gObjectEventPic_Flabebe, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Flabebe, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Flabebe, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Flabebe, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Flabebe, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Flabebe, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_floette[] = {
+//     overworld_frame(gObjectEventPic_Floette, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Floette, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Floette, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Floette, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Floette, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Floette, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_florges[] = {
+//     overworld_frame(gObjectEventPic_Florges, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Florges, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Florges, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Florges, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Florges, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Florges, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_skiddo[] = {
+//     overworld_frame(gObjectEventPic_Skiddo, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Skiddo, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Skiddo, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Skiddo, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Skiddo, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Skiddo, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_gogoat[] = {
+//     overworld_frame(gObjectEventPic_Gogoat, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Gogoat, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Gogoat, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Gogoat, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Gogoat, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Gogoat, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_pancham[] = {
+//     overworld_frame(gObjectEventPic_Pancham, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Pancham, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Pancham, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Pancham, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Pancham, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Pancham, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_pangoro[] = {
+//     overworld_frame(gObjectEventPic_Pangoro, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Pangoro, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Pangoro, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Pangoro, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Pangoro, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Pangoro, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_furfrou[] = {
+//     overworld_frame(gObjectEventPic_Furfrou, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Furfrou, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Furfrou, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Furfrou, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Furfrou, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Furfrou, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_espurr[] = {
+//     overworld_frame(gObjectEventPic_Espurr, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Espurr, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Espurr, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Espurr, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Espurr, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Espurr, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_meowstic[] = {
+//     overworld_frame(gObjectEventPic_Meowstic, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Meowstic, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Meowstic, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Meowstic, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Meowstic, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Meowstic, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_meowstic_female[] = {
+//     overworld_frame(gObjectEventPic_MeowsticFemale, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_MeowsticFemale, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_MeowsticFemale, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_MeowsticFemale, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_MeowsticFemale, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_MeowsticFemale, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_honedge[] = {
+//     overworld_frame(gObjectEventPic_Honedge, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Honedge, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Honedge, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Honedge, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Honedge, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Honedge, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_doublade[] = {
+//     overworld_frame(gObjectEventPic_Doublade, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Doublade, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Doublade, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Doublade, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Doublade, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Doublade, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_aegislash[] = {
+//     overworld_frame(gObjectEventPic_Aegislash, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Aegislash, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Aegislash, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Aegislash, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Aegislash, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Aegislash, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_spritzee[] = {
+//     overworld_frame(gObjectEventPic_Spritzee, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Spritzee, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Spritzee, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Spritzee, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Spritzee, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Spritzee, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_aromatisse[] = {
+//     overworld_frame(gObjectEventPic_Aromatisse, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Aromatisse, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Aromatisse, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Aromatisse, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Aromatisse, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Aromatisse, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_swirlix[] = {
+//     overworld_frame(gObjectEventPic_Swirlix, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Swirlix, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Swirlix, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Swirlix, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Swirlix, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Swirlix, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_slurpuff[] = {
+//     overworld_frame(gObjectEventPic_Slurpuff, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Slurpuff, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Slurpuff, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Slurpuff, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Slurpuff, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Slurpuff, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_inkay[] = {
+//     overworld_frame(gObjectEventPic_Inkay, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Inkay, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Inkay, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Inkay, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Inkay, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Inkay, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_malamar[] = {
+//     overworld_frame(gObjectEventPic_Malamar, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Malamar, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Malamar, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Malamar, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Malamar, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Malamar, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_binacle[] = {
+//     overworld_frame(gObjectEventPic_Binacle, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Binacle, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Binacle, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Binacle, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Binacle, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Binacle, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_barbaracle[] = {
+//     overworld_frame(gObjectEventPic_Barbaracle, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Barbaracle, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Barbaracle, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Barbaracle, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Barbaracle, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Barbaracle, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_skrelp[] = {
+//     overworld_frame(gObjectEventPic_Skrelp, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Skrelp, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Skrelp, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Skrelp, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Skrelp, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Skrelp, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_dragalge[] = {
+//     overworld_frame(gObjectEventPic_Dragalge, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Dragalge, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Dragalge, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Dragalge, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Dragalge, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Dragalge, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_clauncher[] = {
+//     overworld_frame(gObjectEventPic_Clauncher, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Clauncher, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Clauncher, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Clauncher, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Clauncher, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Clauncher, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_clawitzer[] = {
+//     overworld_frame(gObjectEventPic_Clawitzer, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Clawitzer, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Clawitzer, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Clawitzer, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Clawitzer, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Clawitzer, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_helioptile[] = {
+//     overworld_frame(gObjectEventPic_Helioptile, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Helioptile, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Helioptile, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Helioptile, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Helioptile, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Helioptile, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_heliolisk[] = {
+//     overworld_frame(gObjectEventPic_Heliolisk, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Heliolisk, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Heliolisk, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Heliolisk, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Heliolisk, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Heliolisk, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_tyrunt[] = {
+//     overworld_frame(gObjectEventPic_Tyrunt, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Tyrunt, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Tyrunt, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Tyrunt, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Tyrunt, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Tyrunt, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_tyrantrum[] = {
+//     overworld_frame(gObjectEventPic_Tyrantrum, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Tyrantrum, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Tyrantrum, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Tyrantrum, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Tyrantrum, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Tyrantrum, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_amaura[] = {
+//     overworld_frame(gObjectEventPic_Amaura, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Amaura, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Amaura, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Amaura, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Amaura, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Amaura, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_aurorus[] = {
+//     overworld_frame(gObjectEventPic_Aurorus, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Aurorus, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Aurorus, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Aurorus, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Aurorus, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Aurorus, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_sylveon[] = {
+//     overworld_frame(gObjectEventPic_Sylveon, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Sylveon, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Sylveon, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Sylveon, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Sylveon, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Sylveon, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_hawlucha[] = {
+//     overworld_frame(gObjectEventPic_Hawlucha, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Hawlucha, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Hawlucha, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Hawlucha, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Hawlucha, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Hawlucha, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_dedenne[] = {
+//     overworld_frame(gObjectEventPic_Dedenne, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Dedenne, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Dedenne, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Dedenne, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Dedenne, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Dedenne, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_carbink[] = {
+//     overworld_frame(gObjectEventPic_Carbink, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Carbink, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Carbink, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Carbink, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Carbink, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Carbink, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_goomy[] = {
+//     overworld_frame(gObjectEventPic_Goomy, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Goomy, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Goomy, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Goomy, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Goomy, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Goomy, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_sliggoo[] = {
+//     overworld_frame(gObjectEventPic_Sliggoo, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Sliggoo, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Sliggoo, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Sliggoo, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Sliggoo, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Sliggoo, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_goodra[] = {
+//     overworld_frame(gObjectEventPic_Goodra, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Goodra, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Goodra, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Goodra, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Goodra, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Goodra, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_klefki[] = {
+//     overworld_frame(gObjectEventPic_Klefki, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Klefki, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Klefki, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Klefki, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Klefki, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Klefki, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_phantump[] = {
+//     overworld_frame(gObjectEventPic_Phantump, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Phantump, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Phantump, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Phantump, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Phantump, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Phantump, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_trevenant[] = {
+//     overworld_frame(gObjectEventPic_Trevenant, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Trevenant, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Trevenant, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Trevenant, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Trevenant, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Trevenant, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_pumpkaboo[] = {
+//     overworld_frame(gObjectEventPic_Pumpkaboo, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Pumpkaboo, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Pumpkaboo, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Pumpkaboo, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Pumpkaboo, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Pumpkaboo, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_gourgeist[] = {
+//     overworld_frame(gObjectEventPic_Gourgeist, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Gourgeist, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Gourgeist, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Gourgeist, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Gourgeist, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Gourgeist, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_bergmite[] = {
+//     overworld_frame(gObjectEventPic_Bergmite, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Bergmite, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Bergmite, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Bergmite, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Bergmite, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Bergmite, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_avalugg[] = {
+//     overworld_frame(gObjectEventPic_Avalugg, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Avalugg, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Avalugg, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Avalugg, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Avalugg, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Avalugg, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_noibat[] = {
+//     overworld_frame(gObjectEventPic_Noibat, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Noibat, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Noibat, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Noibat, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Noibat, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Noibat, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_noivern[] = {
+//     overworld_frame(gObjectEventPic_Noivern, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Noivern, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Noivern, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Noivern, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Noivern, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Noivern, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_xerneas[] = {
+//     overworld_frame(gObjectEventPic_Xerneas, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_Xerneas, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_Xerneas, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_Xerneas, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_Xerneas, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_Xerneas, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_yveltal[] = {
+//     overworld_frame(gObjectEventPic_Yveltal, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_Yveltal, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_Yveltal, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_Yveltal, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_Yveltal, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_Yveltal, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_zygarde[] = {
+//     overworld_frame(gObjectEventPic_Zygarde, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_Zygarde, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_Zygarde, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_Zygarde, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_Zygarde, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_Zygarde, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_diancie[] = {
+//     overworld_frame(gObjectEventPic_Diancie, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Diancie, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Diancie, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Diancie, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Diancie, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Diancie, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_hoopa[] = {
+//     overworld_frame(gObjectEventPic_Hoopa, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Hoopa, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Hoopa, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Hoopa, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Hoopa, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Hoopa, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_volcanion[] = {
+//     overworld_frame(gObjectEventPic_Volcanion, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Volcanion, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Volcanion, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Volcanion, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Volcanion, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Volcanion, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_pichu_spiky_eared[] = {
+//     overworld_frame(gObjectEventPic_PichuSpikyEared, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_PichuSpikyEared, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_PichuSpikyEared, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_PichuSpikyEared, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_PichuSpikyEared, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_PichuSpikyEared, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_deoxys_attack[] = {
+//     overworld_frame(gObjectEventPic_DeoxysAttack, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_DeoxysAttack, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_DeoxysAttack, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_DeoxysAttack, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_DeoxysAttack, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_DeoxysAttack, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_deoxys_defense[] = {
+//     overworld_frame(gObjectEventPic_DeoxysDefense, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_DeoxysDefense, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_DeoxysDefense, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_DeoxysDefense, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_DeoxysDefense, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_DeoxysDefense, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_deoxys_speed[] = {
+//     overworld_frame(gObjectEventPic_DeoxysSpeed, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_DeoxysSpeed, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_DeoxysSpeed, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_DeoxysSpeed, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_DeoxysSpeed, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_DeoxysSpeed, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_burmy_sandy_cloak[] = {
+//     overworld_frame(gObjectEventPic_BurmySandyCloak, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_BurmySandyCloak, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_BurmySandyCloak, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_BurmySandyCloak, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_BurmySandyCloak, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_BurmySandyCloak, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_burmy_trash_cloak[] = {
+//     overworld_frame(gObjectEventPic_BurmyTrashCloak, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_BurmyTrashCloak, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_BurmyTrashCloak, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_BurmyTrashCloak, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_BurmyTrashCloak, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_BurmyTrashCloak, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_wormadam_sandy_cloak[] = {
+//     overworld_frame(gObjectEventPic_WormadamSandyCloak, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_WormadamSandyCloak, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_WormadamSandyCloak, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_WormadamSandyCloak, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_WormadamSandyCloak, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_WormadamSandyCloak, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_wormadam_trash_cloak[] = {
+//     overworld_frame(gObjectEventPic_WormadamTrashCloak, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_WormadamTrashCloak, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_WormadamTrashCloak, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_WormadamTrashCloak, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_WormadamTrashCloak, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_WormadamTrashCloak, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_shellos_east_sea[] = {
+//     overworld_frame(gObjectEventPic_ShellosEastSea, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_ShellosEastSea, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_ShellosEastSea, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_ShellosEastSea, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_ShellosEastSea, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_ShellosEastSea, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_gastrodon_east_sea[] = {
+//     overworld_frame(gObjectEventPic_GastrodonEastSea, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_GastrodonEastSea, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_GastrodonEastSea, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_GastrodonEastSea, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_GastrodonEastSea, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_GastrodonEastSea, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_rotom_heat[] = {
+//     overworld_frame(gObjectEventPic_RotomHeat, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_RotomHeat, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_RotomHeat, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_RotomHeat, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_RotomHeat, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_RotomHeat, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_rotom_wash[] = {
+//     overworld_frame(gObjectEventPic_RotomWash, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_RotomWash, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_RotomWash, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_RotomWash, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_RotomWash, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_RotomWash, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_rotom_frost[] = {
+//     overworld_frame(gObjectEventPic_RotomFrost, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_RotomFrost, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_RotomFrost, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_RotomFrost, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_RotomFrost, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_RotomFrost, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_rotom_fan[] = {
+//     overworld_frame(gObjectEventPic_RotomFan, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_RotomFan, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_RotomFan, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_RotomFan, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_RotomFan, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_RotomFan, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_rotom_mow[] = {
+//     overworld_frame(gObjectEventPic_RotomMow, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_RotomMow, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_RotomMow, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_RotomMow, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_RotomMow, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_RotomMow, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_giratina_origin[] = {
+//     overworld_frame(gObjectEventPic_GiratinaOrigin, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_GiratinaOrigin, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_GiratinaOrigin, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_GiratinaOrigin, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_GiratinaOrigin, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_GiratinaOrigin, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_arceus_fighting[] = {
+//     overworld_frame(gObjectEventPic_ArceusFighting, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_ArceusFighting, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_ArceusFighting, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_ArceusFighting, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_ArceusFighting, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_ArceusFighting, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_arceus_flying[] = {
+//     overworld_frame(gObjectEventPic_ArceusFlying, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_ArceusFlying, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_ArceusFlying, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_ArceusFlying, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_ArceusFlying, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_ArceusFlying, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_arceus_poison[] = {
+//     overworld_frame(gObjectEventPic_ArceusPoison, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_ArceusPoison, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_ArceusPoison, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_ArceusPoison, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_ArceusPoison, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_ArceusPoison, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_arceus_ground[] = {
+//     overworld_frame(gObjectEventPic_ArceusGround, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_ArceusGround, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_ArceusGround, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_ArceusGround, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_ArceusGround, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_ArceusGround, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_arceus_rock[] = {
+//     overworld_frame(gObjectEventPic_ArceusRock, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_ArceusRock, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_ArceusRock, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_ArceusRock, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_ArceusRock, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_ArceusRock, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_arceus_bug[] = {
+//     overworld_frame(gObjectEventPic_ArceusBug, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_ArceusBug, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_ArceusBug, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_ArceusBug, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_ArceusBug, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_ArceusBug, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_arceus_ghost[] = {
+//     overworld_frame(gObjectEventPic_ArceusGhost, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_ArceusGhost, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_ArceusGhost, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_ArceusGhost, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_ArceusGhost, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_ArceusGhost, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_arceus_steel[] = {
+//     overworld_frame(gObjectEventPic_ArceusSteel, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_ArceusSteel, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_ArceusSteel, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_ArceusSteel, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_ArceusSteel, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_ArceusSteel, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_arceus_fire[] = {
+//     overworld_frame(gObjectEventPic_ArceusFire, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_ArceusFire, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_ArceusFire, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_ArceusFire, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_ArceusFire, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_ArceusFire, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_arceus_water[] = {
+//     overworld_frame(gObjectEventPic_ArceusWater, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_ArceusWater, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_ArceusWater, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_ArceusWater, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_ArceusWater, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_ArceusWater, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_arceus_grass[] = {
+//     overworld_frame(gObjectEventPic_ArceusGrass, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_ArceusGrass, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_ArceusGrass, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_ArceusGrass, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_ArceusGrass, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_ArceusGrass, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_arceus_electric[] = {
+//     overworld_frame(gObjectEventPic_ArceusElectric, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_ArceusElectric, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_ArceusElectric, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_ArceusElectric, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_ArceusElectric, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_ArceusElectric, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_arceus_psychic[] = {
+//     overworld_frame(gObjectEventPic_ArceusPsychic, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_ArceusPsychic, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_ArceusPsychic, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_ArceusPsychic, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_ArceusPsychic, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_ArceusPsychic, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_arceus_ice[] = {
+//     overworld_frame(gObjectEventPic_ArceusIce, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_ArceusIce, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_ArceusIce, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_ArceusIce, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_ArceusIce, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_ArceusIce, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_arceus_dragon[] = {
+//     overworld_frame(gObjectEventPic_ArceusDragon, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_ArceusDragon, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_ArceusDragon, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_ArceusDragon, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_ArceusDragon, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_ArceusDragon, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_arceus_dark[] = {
+//     overworld_frame(gObjectEventPic_ArceusDark, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_ArceusDark, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_ArceusDark, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_ArceusDark, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_ArceusDark, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_ArceusDark, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_arceus_fairy[] = {
+//     overworld_frame(gObjectEventPic_ArceusFairy, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_ArceusFairy, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_ArceusFairy, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_ArceusFairy, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_ArceusFairy, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_ArceusFairy, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_basculin_blue_striped[] = {
+//     overworld_frame(gObjectEventPic_BasculinBlueStriped, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_BasculinBlueStriped, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_BasculinBlueStriped, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_BasculinBlueStriped, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_BasculinBlueStriped, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_BasculinBlueStriped, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_deerling_autumn[] = {
+//     overworld_frame(gObjectEventPic_DeerlingAutumn, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_DeerlingAutumn, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_DeerlingAutumn, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_DeerlingAutumn, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_DeerlingAutumn, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_DeerlingAutumn, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_deerling_summer[] = {
+//     overworld_frame(gObjectEventPic_DeerlingSummer, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_DeerlingSummer, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_DeerlingSummer, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_DeerlingSummer, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_DeerlingSummer, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_DeerlingSummer, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_deerling_winter[] = {
+//     overworld_frame(gObjectEventPic_DeerlingWinter, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_DeerlingWinter, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_DeerlingWinter, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_DeerlingWinter, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_DeerlingWinter, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_DeerlingWinter, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_sawsbuck_autumn[] = {
+//     overworld_frame(gObjectEventPic_SawsbuckAutumn, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_SawsbuckAutumn, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_SawsbuckAutumn, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_SawsbuckAutumn, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_SawsbuckAutumn, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_SawsbuckAutumn, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_sawsbuck_summer[] = {
+//     overworld_frame(gObjectEventPic_SawsbuckSummer, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_SawsbuckSummer, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_SawsbuckSummer, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_SawsbuckSummer, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_SawsbuckSummer, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_SawsbuckSummer, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_sawsbuck_winter[] = {
+//     overworld_frame(gObjectEventPic_SawsbuckWinter, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_SawsbuckWinter, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_SawsbuckWinter, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_SawsbuckWinter, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_SawsbuckWinter, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_SawsbuckWinter, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_meloetta_pirouette[] = {
+//     overworld_frame(gObjectEventPic_MeloettaPirouette, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_MeloettaPirouette, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_MeloettaPirouette, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_MeloettaPirouette, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_MeloettaPirouette, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_MeloettaPirouette, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vivillon_polar[] = {
+//     overworld_frame(gObjectEventPic_VivillonPolar, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_VivillonPolar, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_VivillonPolar, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_VivillonPolar, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_VivillonPolar, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_VivillonPolar, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vivillon_tundra[] = {
+//     overworld_frame(gObjectEventPic_VivillonTundra, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_VivillonTundra, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_VivillonTundra, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_VivillonTundra, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_VivillonTundra, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_VivillonTundra, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vivillon_continental[] = {
+//     overworld_frame(gObjectEventPic_VivillonContinental, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_VivillonContinental, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_VivillonContinental, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_VivillonContinental, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_VivillonContinental, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_VivillonContinental, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vivillon_garden[] = {
+//     overworld_frame(gObjectEventPic_VivillonGarden, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_VivillonGarden, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_VivillonGarden, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_VivillonGarden, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_VivillonGarden, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_VivillonGarden, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vivillon_elegant[] = {
+//     overworld_frame(gObjectEventPic_VivillonElegant, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_VivillonElegant, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_VivillonElegant, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_VivillonElegant, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_VivillonElegant, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_VivillonElegant, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vivillon_modern[] = {
+//     overworld_frame(gObjectEventPic_VivillonModern, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_VivillonModern, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_VivillonModern, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_VivillonModern, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_VivillonModern, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_VivillonModern, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vivillon_marine[] = {
+//     overworld_frame(gObjectEventPic_VivillonMarine, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_VivillonMarine, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_VivillonMarine, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_VivillonMarine, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_VivillonMarine, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_VivillonMarine, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vivillon_archipelago[] = {
+//     overworld_frame(gObjectEventPic_VivillonArchipelago, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_VivillonArchipelago, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_VivillonArchipelago, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_VivillonArchipelago, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_VivillonArchipelago, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_VivillonArchipelago, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vivillon_high_plains[] = {
+//     overworld_frame(gObjectEventPic_VivillonHighPlains, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_VivillonHighPlains, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_VivillonHighPlains, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_VivillonHighPlains, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_VivillonHighPlains, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_VivillonHighPlains, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vivillon_sandstorm[] = {
+//     overworld_frame(gObjectEventPic_VivillonSandstorm, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_VivillonSandstorm, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_VivillonSandstorm, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_VivillonSandstorm, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_VivillonSandstorm, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_VivillonSandstorm, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vivillon_river[] = {
+//     overworld_frame(gObjectEventPic_VivillonRiver, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_VivillonRiver, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_VivillonRiver, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_VivillonRiver, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_VivillonRiver, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_VivillonRiver, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vivillon_monsoon[] = {
+//     overworld_frame(gObjectEventPic_VivillonMonsoon, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_VivillonMonsoon, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_VivillonMonsoon, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_VivillonMonsoon, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_VivillonMonsoon, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_VivillonMonsoon, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vivillon_savanna[] = {
+//     overworld_frame(gObjectEventPic_VivillonSavanna, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_VivillonSavanna, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_VivillonSavanna, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_VivillonSavanna, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_VivillonSavanna, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_VivillonSavanna, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vivillon_sun[] = {
+//     overworld_frame(gObjectEventPic_VivillonSun, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_VivillonSun, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_VivillonSun, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_VivillonSun, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_VivillonSun, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_VivillonSun, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vivillon_ocean[] = {
+//     overworld_frame(gObjectEventPic_VivillonOcean, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_VivillonOcean, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_VivillonOcean, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_VivillonOcean, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_VivillonOcean, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_VivillonOcean, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vivillon_jungle[] = {
+//     overworld_frame(gObjectEventPic_VivillonJungle, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_VivillonJungle, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_VivillonJungle, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_VivillonJungle, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_VivillonJungle, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_VivillonJungle, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vivillon_fancy[] = {
+//     overworld_frame(gObjectEventPic_VivillonFancy, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_VivillonFancy, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_VivillonFancy, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_VivillonFancy, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_VivillonFancy, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_VivillonFancy, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vivillon_poke_ball[] = {
+//     overworld_frame(gObjectEventPic_VivillonPokeBall, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_VivillonPokeBall, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_VivillonPokeBall, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_VivillonPokeBall, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_VivillonPokeBall, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_VivillonPokeBall, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vivillon_meadow[] = {
+//     overworld_frame(gObjectEventPic_VivillonMeadow, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_VivillonMeadow, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_VivillonMeadow, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_VivillonMeadow, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_VivillonMeadow, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_VivillonMeadow, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_flabebe_yellow_flower[] = {
+//     overworld_frame(gObjectEventPic_FlabebeYellowFlower, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FlabebeYellowFlower, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FlabebeYellowFlower, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FlabebeYellowFlower, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FlabebeYellowFlower, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FlabebeYellowFlower, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_flabebe_blue_flower[] = {
+//     overworld_frame(gObjectEventPic_FlabebeBlueFlower, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FlabebeBlueFlower, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FlabebeBlueFlower, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FlabebeBlueFlower, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FlabebeBlueFlower, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FlabebeBlueFlower, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_flabebe_orange_flower[] = {
+//     overworld_frame(gObjectEventPic_FlabebeOrangeFlower, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FlabebeOrangeFlower, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FlabebeOrangeFlower, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FlabebeOrangeFlower, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FlabebeOrangeFlower, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FlabebeOrangeFlower, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_flabebe_white_flower[] = {
+//     overworld_frame(gObjectEventPic_FlabebeWhiteFlower, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FlabebeWhiteFlower, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FlabebeWhiteFlower, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FlabebeWhiteFlower, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FlabebeWhiteFlower, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FlabebeWhiteFlower, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_floette_yellow_flower[] = {
+//     overworld_frame(gObjectEventPic_FloetteYellowFlower, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FloetteYellowFlower, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FloetteYellowFlower, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FloetteYellowFlower, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FloetteYellowFlower, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FloetteYellowFlower, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_floette_blue_flower[] = {
+//     overworld_frame(gObjectEventPic_FloetteBlueFlower, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FloetteBlueFlower, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FloetteBlueFlower, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FloetteBlueFlower, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FloetteBlueFlower, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FloetteBlueFlower, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_floette_orange_flower[] = {
+//     overworld_frame(gObjectEventPic_FloetteOrangeFlower, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FloetteOrangeFlower, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FloetteOrangeFlower, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FloetteOrangeFlower, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FloetteOrangeFlower, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FloetteOrangeFlower, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_floette_white_flower[] = {
+//     overworld_frame(gObjectEventPic_FloetteWhiteFlower, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FloetteWhiteFlower, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FloetteWhiteFlower, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FloetteWhiteFlower, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FloetteWhiteFlower, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FloetteWhiteFlower, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_floette_eternal_flower[] = {
+//     overworld_frame(gObjectEventPic_FloetteEternalFlower, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FloetteEternalFlower, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FloetteEternalFlower, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FloetteEternalFlower, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FloetteEternalFlower, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FloetteEternalFlower, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_florges_yellow_flower[] = {
+//     overworld_frame(gObjectEventPic_FlorgesYellowFlower, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FlorgesYellowFlower, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FlorgesYellowFlower, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FlorgesYellowFlower, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FlorgesYellowFlower, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FlorgesYellowFlower, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_florges_blue_flower[] = {
+//     overworld_frame(gObjectEventPic_FlorgesBlueFlower, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FlorgesBlueFlower, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FlorgesBlueFlower, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FlorgesBlueFlower, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FlorgesBlueFlower, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FlorgesBlueFlower, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_florges_orange_flower[] = {
+//     overworld_frame(gObjectEventPic_FlorgesOrangeFlower, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FlorgesOrangeFlower, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FlorgesOrangeFlower, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FlorgesOrangeFlower, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FlorgesOrangeFlower, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FlorgesOrangeFlower, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_florges_white_flower[] = {
+//     overworld_frame(gObjectEventPic_FlorgesWhiteFlower, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FlorgesWhiteFlower, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FlorgesWhiteFlower, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FlorgesWhiteFlower, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FlorgesWhiteFlower, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FlorgesWhiteFlower, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_furfrou_heart_trim[] = {
+//     overworld_frame(gObjectEventPic_FurfrouHeartTrim, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FurfrouHeartTrim, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FurfrouHeartTrim, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FurfrouHeartTrim, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FurfrouHeartTrim, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FurfrouHeartTrim, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_furfrou_star_trim[] = {
+//     overworld_frame(gObjectEventPic_FurfrouStarTrim, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FurfrouStarTrim, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FurfrouStarTrim, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FurfrouStarTrim, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FurfrouStarTrim, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FurfrouStarTrim, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_furfrou_diamond_trim[] = {
+//     overworld_frame(gObjectEventPic_FurfrouDiamondTrim, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FurfrouDiamondTrim, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FurfrouDiamondTrim, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FurfrouDiamondTrim, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FurfrouDiamondTrim, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FurfrouDiamondTrim, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_furfrou_debutante_trim[] = {
+//     overworld_frame(gObjectEventPic_FurfrouDebutanteTrim, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FurfrouDebutanteTrim, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FurfrouDebutanteTrim, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FurfrouDebutanteTrim, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FurfrouDebutanteTrim, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FurfrouDebutanteTrim, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_furfrou_matron_trim[] = {
+//     overworld_frame(gObjectEventPic_FurfrouMatronTrim, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FurfrouMatronTrim, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FurfrouMatronTrim, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FurfrouMatronTrim, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FurfrouMatronTrim, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FurfrouMatronTrim, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_furfrou_dandy_trim[] = {
+//     overworld_frame(gObjectEventPic_FurfrouDandyTrim, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FurfrouDandyTrim, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FurfrouDandyTrim, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FurfrouDandyTrim, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FurfrouDandyTrim, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FurfrouDandyTrim, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_furfrou_la_reine_trim[] = {
+//     overworld_frame(gObjectEventPic_FurfrouLaReineTrim, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FurfrouLaReineTrim, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FurfrouLaReineTrim, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FurfrouLaReineTrim, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FurfrouLaReineTrim, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FurfrouLaReineTrim, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_furfrou_kabuki_trim[] = {
+//     overworld_frame(gObjectEventPic_FurfrouKabukiTrim, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FurfrouKabukiTrim, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FurfrouKabukiTrim, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FurfrouKabukiTrim, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FurfrouKabukiTrim, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FurfrouKabukiTrim, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_furfrou_pharaoh_trim[] = {
+//     overworld_frame(gObjectEventPic_FurfrouPharaohTrim, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FurfrouPharaohTrim, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FurfrouPharaohTrim, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FurfrouPharaohTrim, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FurfrouPharaohTrim, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FurfrouPharaohTrim, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_hoopa_unbound[] = {
+//     overworld_frame(gObjectEventPic_HoopaUnbound, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_HoopaUnbound, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_HoopaUnbound, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_HoopaUnbound, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_HoopaUnbound, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_HoopaUnbound, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_rattata_alolan[] = {
+//     overworld_frame(gObjectEventPic_RattataAlolan, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_RattataAlolan, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_RattataAlolan, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_RattataAlolan, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_RattataAlolan, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_RattataAlolan, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_raticate_alolan[] = {
+//     overworld_frame(gObjectEventPic_RaticateAlolan, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_RaticateAlolan, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_RaticateAlolan, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_RaticateAlolan, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_RaticateAlolan, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_RaticateAlolan, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_raichu_alolan[] = {
+//     overworld_frame(gObjectEventPic_RaichuAlolan, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_RaichuAlolan, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_RaichuAlolan, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_RaichuAlolan, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_RaichuAlolan, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_RaichuAlolan, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_sandshrew_alolan[] = {
+//     overworld_frame(gObjectEventPic_SandshrewAlolan, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_SandshrewAlolan, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_SandshrewAlolan, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_SandshrewAlolan, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_SandshrewAlolan, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_SandshrewAlolan, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_sandslash_alolan[] = {
+//     overworld_frame(gObjectEventPic_SandslashAlolan, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_SandslashAlolan, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_SandslashAlolan, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_SandslashAlolan, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_SandslashAlolan, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_SandslashAlolan, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_vulpix_alolan[] = {
+//     overworld_frame(gObjectEventPic_VulpixAlolan, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_VulpixAlolan, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_VulpixAlolan, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_VulpixAlolan, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_VulpixAlolan, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_VulpixAlolan, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_ninetales_alolan[] = {
+//     overworld_frame(gObjectEventPic_NinetalesAlolan, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_NinetalesAlolan, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_NinetalesAlolan, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_NinetalesAlolan, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_NinetalesAlolan, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_NinetalesAlolan, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_diglett_alolan[] = {
+//     overworld_frame(gObjectEventPic_DiglettAlolan, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_DiglettAlolan, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_DiglettAlolan, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_DiglettAlolan, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_DiglettAlolan, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_DiglettAlolan, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_dugtrio_alolan[] = {
+//     overworld_frame(gObjectEventPic_DugtrioAlolan, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_DugtrioAlolan, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_DugtrioAlolan, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_DugtrioAlolan, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_DugtrioAlolan, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_DugtrioAlolan, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_meowth_alolan[] = {
+//     overworld_frame(gObjectEventPic_MeowthAlolan, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_MeowthAlolan, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_MeowthAlolan, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_MeowthAlolan, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_MeowthAlolan, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_MeowthAlolan, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_persian_alolan[] = {
+//     overworld_frame(gObjectEventPic_PersianAlolan, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_PersianAlolan, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_PersianAlolan, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_PersianAlolan, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_PersianAlolan, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_PersianAlolan, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_geodude_alolan[] = {
+//     overworld_frame(gObjectEventPic_GeodudeAlolan, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_GeodudeAlolan, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_GeodudeAlolan, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_GeodudeAlolan, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_GeodudeAlolan, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_GeodudeAlolan, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_graveler_alolan[] = {
+//     overworld_frame(gObjectEventPic_GravelerAlolan, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_GravelerAlolan, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_GravelerAlolan, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_GravelerAlolan, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_GravelerAlolan, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_GravelerAlolan, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_golem_alolan[] = {
+//     overworld_frame(gObjectEventPic_GolemAlolan, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_GolemAlolan, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_GolemAlolan, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_GolemAlolan, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_GolemAlolan, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_GolemAlolan, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_grimer_alolan[] = {
+//     overworld_frame(gObjectEventPic_GrimerAlolan, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_GrimerAlolan, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_GrimerAlolan, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_GrimerAlolan, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_GrimerAlolan, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_GrimerAlolan, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_muk_alolan[] = {
+//     overworld_frame(gObjectEventPic_MukAlolan, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_MukAlolan, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_MukAlolan, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_MukAlolan, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_MukAlolan, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_MukAlolan, 4, 4, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_exeggutor_alolan[] = {
+//     overworld_frame(gObjectEventPic_ExeggutorAlolan, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_ExeggutorAlolan, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_ExeggutorAlolan, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_ExeggutorAlolan, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_ExeggutorAlolan, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_ExeggutorAlolan, 8, 8, 5),
+// };
+// static const struct SpriteFrameImage sPicTable_marowak_alolan[] = {
+//     overworld_frame(gObjectEventPic_MarowakAlolan, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_MarowakAlolan, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_MarowakAlolan, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_MarowakAlolan, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_MarowakAlolan, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_MarowakAlolan, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_rowlet[] = {
+//     overworld_frame(gObjectEventPic_Rowlet, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Rowlet, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Rowlet, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Rowlet, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Rowlet, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Rowlet, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_dartrix[] = {
+//     overworld_frame(gObjectEventPic_Dartrix, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Dartrix, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Dartrix, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Dartrix, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Dartrix, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Dartrix, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_decidueye[] = {
+//     overworld_frame(gObjectEventPic_Decidueye, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Decidueye, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Decidueye, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Decidueye, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Decidueye, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Decidueye, 4, 4, 5),
+// };
+
+
+
+// static const struct SpriteFrameImage sPicTable_litten[] = {
+//     overworld_frame(gObjectEventPic_Litten, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Litten, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Litten, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Litten, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Litten, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Litten, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_torracat[] = {
+//     overworld_frame(gObjectEventPic_Torracat, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Torracat, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Torracat, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Torracat, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Torracat, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Torracat, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_incineroar[] = {
+//     overworld_frame(gObjectEventPic_Incineroar, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Incineroar, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Incineroar, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Incineroar, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Incineroar, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Incineroar, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_popplio[] = {
+//     overworld_frame(gObjectEventPic_Popplio, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Popplio, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Popplio, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Popplio, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Popplio, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Popplio, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_brionne[] = {
+//     overworld_frame(gObjectEventPic_Brionne, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Brionne, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Brionne, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Brionne, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Brionne, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Brionne, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_primarina[] = {
+//     overworld_frame(gObjectEventPic_Primarina, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Primarina, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Primarina, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Primarina, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Primarina, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Primarina, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_pikipek[] = {
+//     overworld_frame(gObjectEventPic_Pikipek, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Pikipek, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Pikipek, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Pikipek, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Pikipek, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Pikipek, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_trumbeak[] = {
+//     overworld_frame(gObjectEventPic_Trumbeak, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Trumbeak, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Trumbeak, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Trumbeak, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Trumbeak, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Trumbeak, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_toucannon[] = {
+//     overworld_frame(gObjectEventPic_Toucannon, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Toucannon, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Toucannon, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Toucannon, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Toucannon, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Toucannon, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_yungoos[] = {
+//     overworld_frame(gObjectEventPic_Yungoos, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Yungoos, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Yungoos, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Yungoos, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Yungoos, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Yungoos, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_gumshoos[] = {
+//     overworld_frame(gObjectEventPic_Gumshoos, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Gumshoos, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Gumshoos, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Gumshoos, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Gumshoos, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Gumshoos, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_grubbin[] = {
+//     overworld_frame(gObjectEventPic_Grubbin, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Grubbin, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Grubbin, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Grubbin, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Grubbin, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Grubbin, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_charjabug[] = {
+//     overworld_frame(gObjectEventPic_Charjabug, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Charjabug, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Charjabug, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Charjabug, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Charjabug, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Charjabug, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_vikavolt[] = {
+//     overworld_frame(gObjectEventPic_Vikavolt, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Vikavolt, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Vikavolt, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Vikavolt, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Vikavolt, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Vikavolt, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_crabrawler[] = {
+//     overworld_frame(gObjectEventPic_Crabrawler, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Crabrawler, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Crabrawler, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Crabrawler, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Crabrawler, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Crabrawler, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_crabominable[] = {
+//     overworld_frame(gObjectEventPic_Crabominable, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Crabominable, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Crabominable, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Crabominable, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Crabominable, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Crabominable, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_oricorio[] = {
+//     overworld_frame(gObjectEventPic_Oricorio, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Oricorio, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Oricorio, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Oricorio, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Oricorio, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Oricorio, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_cutiefly[] = {
+//     overworld_frame(gObjectEventPic_Cutiefly, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Cutiefly, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Cutiefly, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Cutiefly, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Cutiefly, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Cutiefly, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_ribombee[] = {
+//     overworld_frame(gObjectEventPic_Ribombee, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Ribombee, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Ribombee, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Ribombee, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Ribombee, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Ribombee, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_rockruff[] = {
+//     overworld_frame(gObjectEventPic_Rockruff, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Rockruff, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Rockruff, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Rockruff, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Rockruff, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Rockruff, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_lycanroc[] = {
+//     overworld_frame(gObjectEventPic_Lycanroc, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Lycanroc, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Lycanroc, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Lycanroc, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Lycanroc, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Lycanroc, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_lycanroc_dusk[] = {
+//     overworld_frame(gObjectEventPic_LycanrocDusk, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_LycanrocDusk, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_LycanrocDusk, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_LycanrocDusk, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_LycanrocDusk, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_LycanrocDusk, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_lycanroc_midnight[] = {
+//     overworld_frame(gObjectEventPic_LycanrocMidnight, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_LycanrocMidnight, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_LycanrocMidnight, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_LycanrocMidnight, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_LycanrocMidnight, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_LycanrocMidnight, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_wishiwashi[] = {
+//     overworld_frame(gObjectEventPic_Wishiwashi, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Wishiwashi, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Wishiwashi, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Wishiwashi, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Wishiwashi, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Wishiwashi, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_mareanie[] = {
+//     overworld_frame(gObjectEventPic_Mareanie, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Mareanie, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Mareanie, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Mareanie, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Mareanie, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Mareanie, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_toxapex[] = {
+//     overworld_frame(gObjectEventPic_Toxapex, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Toxapex, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Toxapex, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Toxapex, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Toxapex, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Toxapex, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_mudbray[] = {
+//     overworld_frame(gObjectEventPic_Mudbray, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Mudbray, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Mudbray, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Mudbray, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Mudbray, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Mudbray, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_mudsdale[] = {
+//     overworld_frame(gObjectEventPic_Mudsdale, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Mudsdale, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Mudsdale, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Mudsdale, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Mudsdale, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Mudsdale, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_dewpider[] = {
+//     overworld_frame(gObjectEventPic_Dewpider, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Dewpider, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Dewpider, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Dewpider, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Dewpider, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Dewpider, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_araquanid[] = {
+//     overworld_frame(gObjectEventPic_Araquanid, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Araquanid, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Araquanid, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Araquanid, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Araquanid, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Araquanid, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_fomantis[] = {
+//     overworld_frame(gObjectEventPic_Fomantis, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Fomantis, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Fomantis, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Fomantis, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Fomantis, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Fomantis, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_lurantis[] = {
+//     overworld_frame(gObjectEventPic_Lurantis, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Lurantis, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Lurantis, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Lurantis, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Lurantis, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Lurantis, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_morelull[] = {
+//     overworld_frame(gObjectEventPic_Morelull, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Morelull, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Morelull, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Morelull, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Morelull, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Morelull, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_shiinotic[] = {
+//     overworld_frame(gObjectEventPic_Shiinotic, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Shiinotic, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Shiinotic, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Shiinotic, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Shiinotic, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Shiinotic, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_salandit[] = {
+//     overworld_frame(gObjectEventPic_Salandit, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Salandit, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Salandit, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Salandit, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Salandit, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Salandit, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_salazzle[] = {
+//     overworld_frame(gObjectEventPic_Salazzle, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Salazzle, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Salazzle, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Salazzle, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Salazzle, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Salazzle, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_stufful[] = {
+//     overworld_frame(gObjectEventPic_Stufful, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Stufful, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Stufful, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Stufful, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Stufful, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Stufful, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_bewear[] = {
+//     overworld_frame(gObjectEventPic_Bewear, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Bewear, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Bewear, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Bewear, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Bewear, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Bewear, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_bounsweet[] = {
+//     overworld_frame(gObjectEventPic_Bounsweet, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Bounsweet, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Bounsweet, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Bounsweet, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Bounsweet, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Bounsweet, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_steenee[] = {
+//     overworld_frame(gObjectEventPic_Steenee, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Steenee, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Steenee, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Steenee, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Steenee, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Steenee, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_tsareena[] = {
+//     overworld_frame(gObjectEventPic_Tsareena, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Tsareena, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Tsareena, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Tsareena, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Tsareena, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Tsareena, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_comfey[] = {
+//     overworld_frame(gObjectEventPic_Comfey, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Comfey, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Comfey, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Comfey, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Comfey, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Comfey, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_oranguru[] = {
+//     overworld_frame(gObjectEventPic_Oranguru, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Oranguru, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Oranguru, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Oranguru, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Oranguru, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Oranguru, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_passimian[] = {
+//     overworld_frame(gObjectEventPic_Passimian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Passimian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Passimian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Passimian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Passimian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Passimian, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_wimpod[] = {
+//     overworld_frame(gObjectEventPic_Wimpod, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Wimpod, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Wimpod, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Wimpod, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Wimpod, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Wimpod, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_golisopod[] = {
+//     overworld_frame(gObjectEventPic_Golisopod, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Golisopod, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Golisopod, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Golisopod, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Golisopod, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Golisopod, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_sandygast[] = {
+//     overworld_frame(gObjectEventPic_Sandygast, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Sandygast, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Sandygast, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Sandygast, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Sandygast, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Sandygast, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_palossand[] = {
+//     overworld_frame(gObjectEventPic_Palossand, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Palossand, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Palossand, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Palossand, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Palossand, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Palossand, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_pyukumuku[] = {
+//     overworld_frame(gObjectEventPic_Pyukumuku, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Pyukumuku, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Pyukumuku, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Pyukumuku, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Pyukumuku, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Pyukumuku, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_typenull[] = {
+//     overworld_frame(gObjectEventPic_Typenull, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Typenull, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Typenull, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Typenull, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Typenull, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Typenull, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_silvally[] = {
+//     overworld_frame(gObjectEventPic_Silvally, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Silvally, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Silvally, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Silvally, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Silvally, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Silvally, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_minior[] = {
+//     overworld_frame(gObjectEventPic_Minior, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Minior, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Minior, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Minior, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Minior, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Minior, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_komala[] = {
+//     overworld_frame(gObjectEventPic_Komala, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Komala, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Komala, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Komala, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Komala, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Komala, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_turtonator[] = {
+//     overworld_frame(gObjectEventPic_Turtonator, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Turtonator, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Turtonator, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Turtonator, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Turtonator, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Turtonator, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_togedemaru[] = {
+//     overworld_frame(gObjectEventPic_Togedemaru, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Togedemaru, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Togedemaru, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Togedemaru, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Togedemaru, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Togedemaru, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_mimikyu[] = {
+//     overworld_frame(gObjectEventPic_Mimikyu, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Mimikyu, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Mimikyu, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Mimikyu, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Mimikyu, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Mimikyu, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_bruxish[] = {
+//     overworld_frame(gObjectEventPic_Bruxish, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Bruxish, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Bruxish, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Bruxish, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Bruxish, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Bruxish, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_drampa[] = {
+//     overworld_frame(gObjectEventPic_Drampa, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Drampa, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Drampa, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Drampa, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Drampa, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Drampa, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_dhelmise[] = {
+//     overworld_frame(gObjectEventPic_Dhelmise, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Dhelmise, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Dhelmise, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Dhelmise, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Dhelmise, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Dhelmise, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_jangmo_o[] = {
+//     overworld_frame(gObjectEventPic_Jangmo_o, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Jangmo_o, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Jangmo_o, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Jangmo_o, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Jangmo_o, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Jangmo_o, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_hakamo_o[] = {
+//     overworld_frame(gObjectEventPic_Hakamo_o, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Hakamo_o, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Hakamo_o, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Hakamo_o, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Hakamo_o, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Hakamo_o, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_kommo_o[] = {
+//     overworld_frame(gObjectEventPic_Kommo_o, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Kommo_o, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Kommo_o, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Kommo_o, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Kommo_o, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Kommo_o, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_tapukoko[] = {
+//     overworld_frame(gObjectEventPic_Tapukoko, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Tapukoko, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Tapukoko, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Tapukoko, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Tapukoko, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Tapukoko, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_tapulele[] = {
+//     overworld_frame(gObjectEventPic_Tapulele, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Tapulele, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Tapulele, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Tapulele, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Tapulele, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Tapulele, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_tapubulu[] = {
+//     overworld_frame(gObjectEventPic_Tapubulu, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Tapubulu, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Tapubulu, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Tapubulu, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Tapubulu, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Tapubulu, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_tapufini[] = {
+//     overworld_frame(gObjectEventPic_Tapufini, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Tapufini, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Tapufini, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Tapufini, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Tapufini, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Tapufini, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_cosmog[] = {
+//     overworld_frame(gObjectEventPic_Cosmog, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Cosmog, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Cosmog, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Cosmog, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Cosmog, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Cosmog, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_cosmoem[] = {
+//     overworld_frame(gObjectEventPic_Cosmoem, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Cosmoem, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Cosmoem, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Cosmoem, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Cosmoem, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Cosmoem, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_solgaleo[] = {
+//     overworld_frame(gObjectEventPic_Solgaleo, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Solgaleo, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Solgaleo, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Solgaleo, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Solgaleo, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Solgaleo, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_lunala[] = {
+//     overworld_frame(gObjectEventPic_Lunala, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Lunala, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Lunala, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Lunala, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Lunala, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Lunala, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_nihilego[] = {
+//     overworld_frame(gObjectEventPic_Nihilego, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Nihilego, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Nihilego, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Nihilego, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Nihilego, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Nihilego, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_buzzwole[] = {
+//     overworld_frame(gObjectEventPic_Buzzwole, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Buzzwole, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Buzzwole, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Buzzwole, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Buzzwole, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Buzzwole, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_pheromosa[] = {
+//     overworld_frame(gObjectEventPic_Pheromosa, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Pheromosa, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Pheromosa, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Pheromosa, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Pheromosa, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Pheromosa, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_xurkitree[] = {
+//     overworld_frame(gObjectEventPic_Xurkitree, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Xurkitree, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Xurkitree, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Xurkitree, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Xurkitree, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Xurkitree, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_celesteela[] = {
+//     overworld_frame(gObjectEventPic_Celesteela, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Celesteela, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Celesteela, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Celesteela, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Celesteela, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Celesteela, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_kartana[] = {
+//     overworld_frame(gObjectEventPic_Kartana, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Kartana, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Kartana, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Kartana, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Kartana, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Kartana, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_guzzlord[] = {
+//     overworld_frame(gObjectEventPic_Guzzlord, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Guzzlord, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Guzzlord, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Guzzlord, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Guzzlord, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Guzzlord, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_necrozma[] = {
+//     overworld_frame(gObjectEventPic_Necrozma, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Necrozma, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Necrozma, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Necrozma, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Necrozma, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Necrozma, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_necrozma_dusk_mane[] = {
+//     overworld_frame(gObjectEventPic_NecrozmaDuskMane, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_NecrozmaDuskMane, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_NecrozmaDuskMane, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_NecrozmaDuskMane, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_NecrozmaDuskMane, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_NecrozmaDuskMane, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_necrozma_dawn_wings[] = {
+//     overworld_frame(gObjectEventPic_NecrozmaDawnWings, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_NecrozmaDawnWings, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_NecrozmaDawnWings, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_NecrozmaDawnWings, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_NecrozmaDawnWings, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_NecrozmaDawnWings, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_magearna[] = {
+//     overworld_frame(gObjectEventPic_Magearna, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Magearna, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Magearna, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Magearna, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Magearna, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Magearna, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_marshadow[] = {
+//     overworld_frame(gObjectEventPic_Marshadow, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Marshadow, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Marshadow, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Marshadow, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Marshadow, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Marshadow, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_poipole[] = {
+//     overworld_frame(gObjectEventPic_Poipole, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Poipole, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Poipole, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Poipole, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Poipole, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Poipole, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_naganadel[] = {
+//     overworld_frame(gObjectEventPic_Naganadel, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Naganadel, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Naganadel, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Naganadel, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Naganadel, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Naganadel, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_stakataka[] = {
+//     overworld_frame(gObjectEventPic_Stakataka, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Stakataka, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Stakataka, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Stakataka, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Stakataka, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Stakataka, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_blacephalon[] = {
+//     overworld_frame(gObjectEventPic_Blacephalon, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Blacephalon, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Blacephalon, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Blacephalon, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Blacephalon, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Blacephalon, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_zeraora[] = {
+//     overworld_frame(gObjectEventPic_Zeraora, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Zeraora, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Zeraora, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Zeraora, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Zeraora, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Zeraora, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_meltan[] = {
+//     overworld_frame(gObjectEventPic_Meltan, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Meltan, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Meltan, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Meltan, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Meltan, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Meltan, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_melmetal[] = {
+//     overworld_frame(gObjectEventPic_Melmetal, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Melmetal, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Melmetal, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Melmetal, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Melmetal, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Melmetal, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_grookey[] = {
+//     overworld_frame(gObjectEventPic_Grookey, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Grookey, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Grookey, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Grookey, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Grookey, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Grookey, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_thwackey[] = {
+//     overworld_frame(gObjectEventPic_Thwackey, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Thwackey, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Thwackey, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Thwackey, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Thwackey, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Thwackey, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_rillaboom[] = {
+//     overworld_frame(gObjectEventPic_Rillaboom, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Rillaboom, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Rillaboom, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Rillaboom, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Rillaboom, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Rillaboom, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_scorbunny[] = {
+//     overworld_frame(gObjectEventPic_Scorbunny, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Scorbunny, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Scorbunny, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Scorbunny, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Scorbunny, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Scorbunny, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_raboot[] = {
+//     overworld_frame(gObjectEventPic_Raboot, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Raboot, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Raboot, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Raboot, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Raboot, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Raboot, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_cinderace[] = {
+//     overworld_frame(gObjectEventPic_Cinderace, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Cinderace, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Cinderace, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Cinderace, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Cinderace, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Cinderace, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_sobble[] = {
+//     overworld_frame(gObjectEventPic_Sobble, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Sobble, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Sobble, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Sobble, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Sobble, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Sobble, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_drizzile[] = {
+//     overworld_frame(gObjectEventPic_Drizzile, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Drizzile, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Drizzile, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Drizzile, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Drizzile, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Drizzile, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_inteleon[] = {
+//     overworld_frame(gObjectEventPic_Inteleon, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Inteleon, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Inteleon, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Inteleon, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Inteleon, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Inteleon, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_skwovet[] = {
+//     overworld_frame(gObjectEventPic_Skwovet, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Skwovet, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Skwovet, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Skwovet, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Skwovet, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Skwovet, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_greedent[] = {
+//     overworld_frame(gObjectEventPic_Greedent, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Greedent, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Greedent, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Greedent, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Greedent, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Greedent, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_rookidee[] = {
+//     overworld_frame(gObjectEventPic_Rookidee, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Rookidee, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Rookidee, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Rookidee, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Rookidee, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Rookidee, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_corvisquire[] = {
+//     overworld_frame(gObjectEventPic_Corvisquire, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Corvisquire, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Corvisquire, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Corvisquire, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Corvisquire, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Corvisquire, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_corviknight[] = {
+//     overworld_frame(gObjectEventPic_Corviknight, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Corviknight, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Corviknight, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Corviknight, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Corviknight, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Corviknight, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_blipbug[] = {
+//     overworld_frame(gObjectEventPic_Blipbug, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Blipbug, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Blipbug, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Blipbug, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Blipbug, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Blipbug, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_dottler[] = {
+//     overworld_frame(gObjectEventPic_Dottler, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Dottler, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Dottler, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Dottler, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Dottler, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Dottler, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_orbeetle[] = {
+//     overworld_frame(gObjectEventPic_Orbeetle, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Orbeetle, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Orbeetle, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Orbeetle, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Orbeetle, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Orbeetle, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_nickit[] = {
+//     overworld_frame(gObjectEventPic_Nickit, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Nickit, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Nickit, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Nickit, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Nickit, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Nickit, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_thievul[] = {
+//     overworld_frame(gObjectEventPic_Thievul, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Thievul, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Thievul, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Thievul, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Thievul, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Thievul, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_gossifleur[] = {
+//     overworld_frame(gObjectEventPic_Gossifleur, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Gossifleur, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Gossifleur, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Gossifleur, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Gossifleur, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Gossifleur, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_eldegoss[] = {
+//     overworld_frame(gObjectEventPic_Eldegoss, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Eldegoss, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Eldegoss, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Eldegoss, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Eldegoss, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Eldegoss, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_wooloo[] = {
+//     overworld_frame(gObjectEventPic_Wooloo, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Wooloo, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Wooloo, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Wooloo, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Wooloo, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Wooloo, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_dubwool[] = {
+//     overworld_frame(gObjectEventPic_Dubwool, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Dubwool, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Dubwool, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Dubwool, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Dubwool, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Dubwool, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_chewtle[] = {
+//     overworld_frame(gObjectEventPic_Chewtle, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Chewtle, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Chewtle, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Chewtle, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Chewtle, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Chewtle, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_drednaw[] = {
+//     overworld_frame(gObjectEventPic_Drednaw, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Drednaw, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Drednaw, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Drednaw, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Drednaw, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Drednaw, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_yamper[] = {
+//     overworld_frame(gObjectEventPic_Yamper, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Yamper, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Yamper, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Yamper, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Yamper, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Yamper, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_boltund[] = {
+//     overworld_frame(gObjectEventPic_Boltund, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Boltund, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Boltund, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Boltund, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Boltund, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Boltund, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_rolycoly[] = {
+//     overworld_frame(gObjectEventPic_Rolycoly, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Rolycoly, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Rolycoly, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Rolycoly, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Rolycoly, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Rolycoly, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_carkol[] = {
+//     overworld_frame(gObjectEventPic_Carkol, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Carkol, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Carkol, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Carkol, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Carkol, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Carkol, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_coalossal[] = {
+//     overworld_frame(gObjectEventPic_Coalossal, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Coalossal, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Coalossal, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Coalossal, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Coalossal, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Coalossal, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_applin[] = {
+//     overworld_frame(gObjectEventPic_Applin, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Applin, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Applin, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Applin, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Applin, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Applin, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_flapple[] = {
+//     overworld_frame(gObjectEventPic_Flapple, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Flapple, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Flapple, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Flapple, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Flapple, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Flapple, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_appletun[] = {
+//     overworld_frame(gObjectEventPic_Appletun, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Appletun, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Appletun, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Appletun, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Appletun, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Appletun, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_silicobra[] = {
+//     overworld_frame(gObjectEventPic_Silicobra, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Silicobra, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Silicobra, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Silicobra, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Silicobra, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Silicobra, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_sandaconda[] = {
+//     overworld_frame(gObjectEventPic_Sandaconda, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Sandaconda, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Sandaconda, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Sandaconda, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Sandaconda, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Sandaconda, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_cramorant[] = {
+//     overworld_frame(gObjectEventPic_Cramorant, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Cramorant, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Cramorant, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Cramorant, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Cramorant, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Cramorant, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_arrokuda[] = {
+//     overworld_frame(gObjectEventPic_Arrokuda, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Arrokuda, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Arrokuda, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Arrokuda, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Arrokuda, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Arrokuda, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_barraskewda[] = {
+//     overworld_frame(gObjectEventPic_Barraskewda, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Barraskewda, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Barraskewda, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Barraskewda, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Barraskewda, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Barraskewda, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_toxel[] = {
+//     overworld_frame(gObjectEventPic_Toxel, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Toxel, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Toxel, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Toxel, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Toxel, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Toxel, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_toxtricity[] = {
+//     overworld_frame(gObjectEventPic_Toxtricity, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Toxtricity, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Toxtricity, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Toxtricity, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Toxtricity, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Toxtricity, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_toxtricity_lowkey[] = {
+//     overworld_frame(gObjectEventPic_ToxtricityLowkey, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_ToxtricityLowkey, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_ToxtricityLowkey, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_ToxtricityLowkey, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_ToxtricityLowkey, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_ToxtricityLowkey, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_sizzlipede[] = {
+//     overworld_frame(gObjectEventPic_Sizzlipede, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Sizzlipede, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Sizzlipede, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Sizzlipede, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Sizzlipede, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Sizzlipede, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_centiskorch[] = {
+//     overworld_frame(gObjectEventPic_Centiskorch, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Centiskorch, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Centiskorch, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Centiskorch, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Centiskorch, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Centiskorch, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_clobbopus[] = {
+//     overworld_frame(gObjectEventPic_Clobbopus, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Clobbopus, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Clobbopus, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Clobbopus, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Clobbopus, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Clobbopus, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_grapploct[] = {
+//     overworld_frame(gObjectEventPic_Grapploct, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Grapploct, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Grapploct, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Grapploct, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Grapploct, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Grapploct, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_sinistea[] = {
+//     overworld_frame(gObjectEventPic_Sinistea, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Sinistea, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Sinistea, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Sinistea, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Sinistea, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Sinistea, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_polteageist[] = {
+//     overworld_frame(gObjectEventPic_Polteageist, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Polteageist, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Polteageist, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Polteageist, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Polteageist, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Polteageist, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_hatenna[] = {
+//     overworld_frame(gObjectEventPic_Hatenna, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Hatenna, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Hatenna, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Hatenna, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Hatenna, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Hatenna, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_hattrem[] = {
+//     overworld_frame(gObjectEventPic_Hattrem, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Hattrem, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Hattrem, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Hattrem, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Hattrem, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Hattrem, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_hatterene[] = {
+//     overworld_frame(gObjectEventPic_Hatterene, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Hatterene, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Hatterene, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Hatterene, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Hatterene, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Hatterene, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_impidimp[] = {
+//     overworld_frame(gObjectEventPic_Impidimp, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Impidimp, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Impidimp, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Impidimp, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Impidimp, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Impidimp, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_morgrem[] = {
+//     overworld_frame(gObjectEventPic_Morgrem, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Morgrem, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Morgrem, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Morgrem, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Morgrem, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Morgrem, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_grimmsnarl[] = {
+//     overworld_frame(gObjectEventPic_Grimmsnarl, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Grimmsnarl, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Grimmsnarl, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Grimmsnarl, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Grimmsnarl, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Grimmsnarl, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_obstagoon[] = {
+//     overworld_frame(gObjectEventPic_Obstagoon, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Obstagoon, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Obstagoon, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Obstagoon, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Obstagoon, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Obstagoon, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_perrserker[] = {
+//     overworld_frame(gObjectEventPic_Perrserker, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Perrserker, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Perrserker, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Perrserker, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Perrserker, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Perrserker, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_cursola[] = {
+//     overworld_frame(gObjectEventPic_Cursola, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Cursola, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Cursola, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Cursola, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Cursola, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Cursola, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_sirfetchd[] = {
+//     overworld_frame(gObjectEventPic_Sirfetchd, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Sirfetchd, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Sirfetchd, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Sirfetchd, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Sirfetchd, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Sirfetchd, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_mr_rime[] = {
+//     overworld_frame(gObjectEventPic_MrRime, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_MrRime, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_MrRime, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_MrRime, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_MrRime, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_MrRime, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_runerigus[] = {
+//     overworld_frame(gObjectEventPic_Runerigus, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Runerigus, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Runerigus, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Runerigus, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Runerigus, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Runerigus, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_milcery[] = {
+//     overworld_frame(gObjectEventPic_Milcery, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Milcery, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Milcery, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Milcery, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Milcery, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Milcery, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_alcremie[] = {
+//     overworld_frame(gObjectEventPic_Alcremie, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Alcremie, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Alcremie, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Alcremie, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Alcremie, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Alcremie, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_falinks[] = {
+//     overworld_frame(gObjectEventPic_Falinks, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Falinks, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Falinks, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Falinks, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Falinks, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Falinks, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_pincurchin[] = {
+//     overworld_frame(gObjectEventPic_Pincurchin, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Pincurchin, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Pincurchin, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Pincurchin, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Pincurchin, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Pincurchin, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_snom[] = {
+//     overworld_frame(gObjectEventPic_Snom, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Snom, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Snom, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Snom, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Snom, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Snom, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_frosmoth[] = {
+//     overworld_frame(gObjectEventPic_Frosmoth, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Frosmoth, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Frosmoth, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Frosmoth, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Frosmoth, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Frosmoth, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_stonjourner[] = {
+//     overworld_frame(gObjectEventPic_Stonjourner, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Stonjourner, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Stonjourner, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Stonjourner, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Stonjourner, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Stonjourner, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_eiscue[] = {
+//     overworld_frame(gObjectEventPic_Eiscue, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Eiscue, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Eiscue, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Eiscue, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Eiscue, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Eiscue, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_indeedee[] = {
+//     overworld_frame(gObjectEventPic_Indeedee, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Indeedee, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Indeedee, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Indeedee, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Indeedee, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Indeedee, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_morpeko[] = {
+//     overworld_frame(gObjectEventPic_Morpeko, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Morpeko, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Morpeko, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Morpeko, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Morpeko, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Morpeko, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_cufant[] = {
+//     overworld_frame(gObjectEventPic_Cufant, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Cufant, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Cufant, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Cufant, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Cufant, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Cufant, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_copperajah[] = {
+//     overworld_frame(gObjectEventPic_Copperajah, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Copperajah, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Copperajah, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Copperajah, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Copperajah, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Copperajah, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_dracozolt[] = {
+//     overworld_frame(gObjectEventPic_Dracozolt, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Dracozolt, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Dracozolt, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Dracozolt, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Dracozolt, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Dracozolt, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_arctozolt[] = {
+//     overworld_frame(gObjectEventPic_Arctozolt, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Arctozolt, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Arctozolt, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Arctozolt, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Arctozolt, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Arctozolt, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_dracovish[] = {
+//     overworld_frame(gObjectEventPic_Dracovish, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Dracovish, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Dracovish, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Dracovish, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Dracovish, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Dracovish, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_arctovish[] = {
+//     overworld_frame(gObjectEventPic_Arctovish, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Arctovish, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Arctovish, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Arctovish, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Arctovish, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Arctovish, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_duraludon[] = {
+//     overworld_frame(gObjectEventPic_Duraludon, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Duraludon, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Duraludon, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Duraludon, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Duraludon, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Duraludon, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_dreepy[] = {
+//     overworld_frame(gObjectEventPic_Dreepy, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Dreepy, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Dreepy, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Dreepy, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Dreepy, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Dreepy, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_drakloak[] = {
+//     overworld_frame(gObjectEventPic_Drakloak, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Drakloak, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Drakloak, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Drakloak, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Drakloak, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Drakloak, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_dragapult[] = {
+//     overworld_frame(gObjectEventPic_Dragapult, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Dragapult, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Dragapult, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Dragapult, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Dragapult, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Dragapult, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_zacian[] = {
+//     overworld_frame(gObjectEventPic_Zacian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Zacian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Zacian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Zacian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Zacian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Zacian, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_zamazenta[] = {
+//     overworld_frame(gObjectEventPic_Zamazenta, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Zamazenta, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Zamazenta, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Zamazenta, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Zamazenta, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Zamazenta, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_eternatus[] = {
+//     overworld_frame(gObjectEventPic_Eternatus, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_Eternatus, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_Eternatus, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_Eternatus, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_Eternatus, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_Eternatus, 8, 8, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_kubfu[] = {
+//     overworld_frame(gObjectEventPic_Kubfu, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Kubfu, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Kubfu, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Kubfu, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Kubfu, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Kubfu, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_urshifu[] = {
+//     overworld_frame(gObjectEventPic_Urshifu, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Urshifu, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Urshifu, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Urshifu, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Urshifu, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Urshifu, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_zarude[] = {
+//     overworld_frame(gObjectEventPic_Zarude, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Zarude, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Zarude, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Zarude, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Zarude, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Zarude, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_regieleki[] = {
+//     overworld_frame(gObjectEventPic_Regieleki, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Regieleki, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Regieleki, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Regieleki, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Regieleki, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Regieleki, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_regidrago[] = {
+//     overworld_frame(gObjectEventPic_Regidrago, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Regidrago, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Regidrago, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Regidrago, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Regidrago, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Regidrago, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_glastrier[] = {
+//     overworld_frame(gObjectEventPic_Glastrier, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Glastrier, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Glastrier, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Glastrier, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Glastrier, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Glastrier, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_spectrier[] = {
+//     overworld_frame(gObjectEventPic_Spectrier, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Spectrier, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Spectrier, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Spectrier, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Spectrier, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Spectrier, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_calyrex[] = {
+//     overworld_frame(gObjectEventPic_Calyrex, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Calyrex, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Calyrex, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Calyrex, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Calyrex, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Calyrex, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_meowth_galarian[] = {
+//     overworld_frame(gObjectEventPic_MeowthGalarian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_MeowthGalarian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_MeowthGalarian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_MeowthGalarian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_MeowthGalarian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_MeowthGalarian, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_ponyta_galarian[] = {
+//     overworld_frame(gObjectEventPic_PonytaGalarian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_PonytaGalarian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_PonytaGalarian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_PonytaGalarian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_PonytaGalarian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_PonytaGalarian, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_rapidash_galarian[] = {
+//     overworld_frame(gObjectEventPic_RapidashGalarian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_RapidashGalarian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_RapidashGalarian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_RapidashGalarian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_RapidashGalarian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_RapidashGalarian, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_slowpoke_galarian[] = {
+//     overworld_frame(gObjectEventPic_SlowpokeGalarian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_SlowpokeGalarian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_SlowpokeGalarian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_SlowpokeGalarian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_SlowpokeGalarian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_SlowpokeGalarian, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_slowbro_galarian[] = {
+//     overworld_frame(gObjectEventPic_SlowbroGalarian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_SlowbroGalarian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_SlowbroGalarian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_SlowbroGalarian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_SlowbroGalarian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_SlowbroGalarian, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_farfetchd_galarian[] = {
+//     overworld_frame(gObjectEventPic_FarfetchdGalarian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_FarfetchdGalarian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_FarfetchdGalarian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_FarfetchdGalarian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_FarfetchdGalarian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_FarfetchdGalarian, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_weezing_galarian[] = {
+//     overworld_frame(gObjectEventPic_WeezingGalarian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_WeezingGalarian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_WeezingGalarian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_WeezingGalarian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_WeezingGalarian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_WeezingGalarian, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_mr_mime_galarian[] = {
+//     overworld_frame(gObjectEventPic_MrMimeGalarian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_MrMimeGalarian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_MrMimeGalarian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_MrMimeGalarian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_MrMimeGalarian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_MrMimeGalarian, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_articuno_galarian[] = {
+//     overworld_frame(gObjectEventPic_ArticunoGalarian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_ArticunoGalarian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_ArticunoGalarian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_ArticunoGalarian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_ArticunoGalarian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_ArticunoGalarian, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_moltres_galarian[] = {
+//     overworld_frame(gObjectEventPic_MoltresGalarian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_MoltresGalarian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_MoltresGalarian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_MoltresGalarian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_MoltresGalarian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_MoltresGalarian, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_slowking_galarian[] = {
+//     overworld_frame(gObjectEventPic_SlowkingGalarian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_SlowkingGalarian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_SlowkingGalarian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_SlowkingGalarian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_SlowkingGalarian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_SlowkingGalarian, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_corsola_galarian[] = {
+//     overworld_frame(gObjectEventPic_CorsolaGalarian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_CorsolaGalarian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_CorsolaGalarian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_CorsolaGalarian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_CorsolaGalarian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_CorsolaGalarian, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_zigzagoon_galarian[] = {
+//     overworld_frame(gObjectEventPic_ZigzagoonGalarian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_ZigzagoonGalarian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_ZigzagoonGalarian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_ZigzagoonGalarian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_ZigzagoonGalarian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_ZigzagoonGalarian, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_linoone_galarian[] = {
+//     overworld_frame(gObjectEventPic_LinooneGalarian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_LinooneGalarian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_LinooneGalarian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_LinooneGalarian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_LinooneGalarian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_LinooneGalarian, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_darumaka_galarian[] = {
+//     overworld_frame(gObjectEventPic_DarumakaGalarian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_DarumakaGalarian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_DarumakaGalarian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_DarumakaGalarian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_DarumakaGalarian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_DarumakaGalarian, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_darmanitan_galarian[] = {
+//     overworld_frame(gObjectEventPic_DarmanitanGalarian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_DarmanitanGalarian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_DarmanitanGalarian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_DarmanitanGalarian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_DarmanitanGalarian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_DarmanitanGalarian, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_yamask_galarian[] = {
+//     overworld_frame(gObjectEventPic_YamaskGalarian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_YamaskGalarian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_YamaskGalarian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_YamaskGalarian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_YamaskGalarian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_YamaskGalarian, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_stunfisk_galarian[] = {
+//     overworld_frame(gObjectEventPic_StunfiskGalarian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_StunfiskGalarian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_StunfiskGalarian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_StunfiskGalarian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_StunfiskGalarian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_StunfiskGalarian, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_zapdos_galarian[] = {
+//     overworld_frame(gObjectEventPic_ZapdosGalarian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_ZapdosGalarian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_ZapdosGalarian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_ZapdosGalarian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_ZapdosGalarian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_ZapdosGalarian, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_calyrex_ice_rider[] = {
+//     overworld_frame(gObjectEventPic_CalyrexIceRider, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_CalyrexIceRider, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_CalyrexIceRider, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_CalyrexIceRider, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_CalyrexIceRider, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_CalyrexIceRider, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_calyrex_shadow_rider[] = {
+//     overworld_frame(gObjectEventPic_CalyrexShadowRider, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_CalyrexShadowRider, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_CalyrexShadowRider, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_CalyrexShadowRider, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_CalyrexShadowRider, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_CalyrexShadowRider, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_zacian_crowned[] = {
+//     overworld_frame(gObjectEventPic_ZacianCrowned, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_ZacianCrowned, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_ZacianCrowned, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_ZacianCrowned, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_ZacianCrowned, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_ZacianCrowned, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_zamazenta_crowned[] = {
+//     overworld_frame(gObjectEventPic_ZamazentaCrowned, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_ZamazentaCrowned, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_ZamazentaCrowned, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_ZamazentaCrowned, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_ZamazentaCrowned, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_ZamazentaCrowned, 4, 4, 5),
+// };
+
+// static const struct SpriteFrameImage sPicTable_wyrdeer[] = {
+//     overworld_frame(gObjectEventPic_Wyrdeer, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Wyrdeer, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Wyrdeer, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Wyrdeer, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Wyrdeer, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Wyrdeer, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_kleavor[] = {
+//     overworld_frame(gObjectEventPic_Kleavor, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Kleavor, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Kleavor, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Kleavor, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Kleavor, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Kleavor, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_ursaluna[] = {
+//     overworld_frame(gObjectEventPic_Ursaluna, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Ursaluna, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Ursaluna, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Ursaluna, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Ursaluna, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Ursaluna, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_basculegion[] = {
+//     overworld_frame(gObjectEventPic_Basculegion, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Basculegion, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Basculegion, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Basculegion, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Basculegion, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Basculegion, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_basculegion_female[] = {
+//     overworld_frame(gObjectEventPic_BasculegionFemale, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_BasculegionFemale, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_BasculegionFemale, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_BasculegionFemale, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_BasculegionFemale, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_BasculegionFemale, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_sneasel_hisuian[] = {
+//     overworld_frame(gObjectEventPic_SneaselHisuian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_SneaselHisuian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_SneaselHisuian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_SneaselHisuian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_SneaselHisuian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_SneaselHisuian, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_sneasler[] = {
+//     overworld_frame(gObjectEventPic_Sneasler, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Sneasler, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Sneasler, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Sneasler, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Sneasler, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Sneasler, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_overqwil[] = {
+//     overworld_frame(gObjectEventPic_Overqwil, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_Overqwil, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_Overqwil, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_Overqwil, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_Overqwil, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_Overqwil, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_enamorus[] = {
+//     overworld_frame(gObjectEventPic_Enamorus, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_Enamorus, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_Enamorus, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_Enamorus, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_Enamorus, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_Enamorus, 8, 8, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_enamorus_therian[] = {
+//     overworld_frame(gObjectEventPic_EnamorusTherian, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_EnamorusTherian, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_EnamorusTherian, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_EnamorusTherian, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_EnamorusTherian, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_EnamorusTherian, 8, 8, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_growlithe_hisuian[] = {
+//     overworld_frame(gObjectEventPic_GrowlitheHisuian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_GrowlitheHisuian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_GrowlitheHisuian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_GrowlitheHisuian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_GrowlitheHisuian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_GrowlitheHisuian, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_arcanine_hisuian[] = {
+//     overworld_frame(gObjectEventPic_ArcanineHisuian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_ArcanineHisuian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_ArcanineHisuian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_ArcanineHisuian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_ArcanineHisuian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_ArcanineHisuian, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_voltorb_hisuian[] = {
+//     overworld_frame(gObjectEventPic_VoltorbHisuian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_VoltorbHisuian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_VoltorbHisuian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_VoltorbHisuian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_VoltorbHisuian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_VoltorbHisuian, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_electrode_hisuian[] = {
+//     overworld_frame(gObjectEventPic_ElectrodeHisuian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_ElectrodeHisuian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_ElectrodeHisuian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_ElectrodeHisuian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_ElectrodeHisuian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_ElectrodeHisuian, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_braviary_hisuian[] = {
+//     overworld_frame(gObjectEventPic_BraviaryHisuian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_BraviaryHisuian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_BraviaryHisuian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_BraviaryHisuian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_BraviaryHisuian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_BraviaryHisuian, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_qwilfish_hisuian[] = {
+//     overworld_frame(gObjectEventPic_QwilfishHisuian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_QwilfishHisuian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_QwilfishHisuian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_QwilfishHisuian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_QwilfishHisuian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_QwilfishHisuian, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_zorua_hisuian[] = {
+//     overworld_frame(gObjectEventPic_ZoruaHisuian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_ZoruaHisuian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_ZoruaHisuian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_ZoruaHisuian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_ZoruaHisuian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_ZoruaHisuian, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_zoroark_hisuian[] = {
+//     overworld_frame(gObjectEventPic_ZoroarkHisuian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_ZoroarkHisuian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_ZoroarkHisuian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_ZoroarkHisuian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_ZoroarkHisuian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_ZoroarkHisuian, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_sliggoo_hisuian[] = {
+//     overworld_frame(gObjectEventPic_SliggooHisuian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_SliggooHisuian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_SliggooHisuian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_SliggooHisuian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_SliggooHisuian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_SliggooHisuian, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_goodra_hisuian[] = {
+//     overworld_frame(gObjectEventPic_GoodraHisuian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_GoodraHisuian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_GoodraHisuian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_GoodraHisuian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_GoodraHisuian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_GoodraHisuian, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_avalugg_hisuian[] = {
+//     overworld_frame(gObjectEventPic_AvaluggHisuian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_AvaluggHisuian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_AvaluggHisuian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_AvaluggHisuian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_AvaluggHisuian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_AvaluggHisuian, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_decidueye_hisuian[] = {
+//     overworld_frame(gObjectEventPic_DecidueyeHisuian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_DecidueyeHisuian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_DecidueyeHisuian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_DecidueyeHisuian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_DecidueyeHisuian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_DecidueyeHisuian, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_typhlosion_hisuian[] = {
+//     overworld_frame(gObjectEventPic_TyphlosionHisuian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_TyphlosionHisuian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_TyphlosionHisuian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_TyphlosionHisuian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_TyphlosionHisuian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_TyphlosionHisuian, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_samurott_hisuian[] = {
+//     overworld_frame(gObjectEventPic_SamurottHisuian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_SamurottHisuian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_SamurottHisuian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_SamurottHisuian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_SamurottHisuian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_SamurottHisuian, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_lilligant_hisuian[] = {
+//     overworld_frame(gObjectEventPic_LilligantHisuian, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_LilligantHisuian, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_LilligantHisuian, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_LilligantHisuian, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_LilligantHisuian, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_LilligantHisuian, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_basculin_white_stripe[] = {
+//     overworld_frame(gObjectEventPic_BasculinWhiteStripe, 4, 4, 0),
+//     overworld_frame(gObjectEventPic_BasculinWhiteStripe, 4, 4, 1),
+//     overworld_frame(gObjectEventPic_BasculinWhiteStripe, 4, 4, 2),
+//     overworld_frame(gObjectEventPic_BasculinWhiteStripe, 4, 4, 3),
+//     overworld_frame(gObjectEventPic_BasculinWhiteStripe, 4, 4, 4),
+//     overworld_frame(gObjectEventPic_BasculinWhiteStripe, 4, 4, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_dialga_origin[] = {
+//     overworld_frame(gObjectEventPic_DialgaOrigin, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_DialgaOrigin, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_DialgaOrigin, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_DialgaOrigin, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_DialgaOrigin, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_DialgaOrigin, 8, 8, 5)
+// };
+
+// static const struct SpriteFrameImage sPicTable_palkia_origin[] = {
+//     overworld_frame(gObjectEventPic_PalkiaOrigin, 8, 8, 0),
+//     overworld_frame(gObjectEventPic_PalkiaOrigin, 8, 8, 1),
+//     overworld_frame(gObjectEventPic_PalkiaOrigin, 8, 8, 2),
+//     overworld_frame(gObjectEventPic_PalkiaOrigin, 8, 8, 3),
+//     overworld_frame(gObjectEventPic_PalkiaOrigin, 8, 8, 4),
+//     overworld_frame(gObjectEventPic_PalkiaOrigin, 8, 8, 5)
+// };
 
 static const struct SpriteFrameImage sPicTable_DeoxysOld[] = {
     overworld_frame(gObjectEventPic_DeoxysOld, 4, 4, 0),

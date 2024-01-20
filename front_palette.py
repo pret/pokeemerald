@@ -9,6 +9,7 @@ from glob import glob
 import png
 from tqdm import tqdm
 
+import shutil
 
 def stack_sprite(name, path):
     frames = [joinp(path, 'down', name), joinp(path, 'down', 'frame2', name),
@@ -46,23 +47,30 @@ def apply_palette(palette_file, input_file, output_file):  # Apply one file's pa
 
 def apply_front_palettes(ow_dir, project_root=''):
     mon_graphics = joinp(project_root, 'graphics', 'pokemon')
-    t = tqdm(sorted(glob(joinp(ow_dir, '*.png'))))
-    spaces = 0
-    for path in t:
-        name, _ = os.path.splitext(os.path.basename(path))
-        spaces = min(max(len(name), spaces), 10)
-        t.set_description(name + ' '*(spaces-len(name)))
-        output_path = joinp(project_root, 'graphics', 'object_events', 'pics', 'pokemon', f'{name}.png')
-        if 'unown' in name:
-            palette_path = joinp(mon_graphics, 'unown', 'a', 'anim_front.png')
-        elif name == 'castform':
-            palette_path = joinp(mon_graphics, name, 'anim_front_normal_form.png')
-        else:
+    for x in os.walk(ow_dir):
+        current_dir = x[0]
+        sub_dir = current_dir[len(ow_dir) + 1:1000]
+        t = tqdm(sorted(glob(joinp(current_dir, '*.png'))))
+        spaces = 0
+        for path in t:
+            name, _ = os.path.splitext(os.path.basename(path))
+            name = joinp(sub_dir, name)
+            # old_path = joinp(project_root, 'graphics', 'object_events', 'pics', 'pokemon', f'{name}.png')
+            # new_path = joinp(project_root, 'graphics', 'object_events', 'pics', 'pokemon', name, 'follower.png')
+            # os.mkdir(joinp(project_root, 'graphics', 'object_events', 'pics', 'pokemon', name))
+            # shutil.move(old_path, new_path)
+            spaces = min(max(len(name), spaces), 10)
+            t.set_description(name + ' '*(spaces-len(name)))
+            output_path = joinp(project_root, 'graphics', 'object_events', 'pics', 'pokemon', f'{name}.png')
             palette_path = joinp(mon_graphics, name, 'anim_front.png')
-        try:
-            apply_palette(palette_path, path, output_path)
-        except Exception as e:
-            t.write(f'{name}: {e.__class__.__name__}: {e}', file=sys.stderr)
+            try:
+                apply_palette(palette_path, path, output_path)
+            except Exception as e:
+                palette_path = joinp(mon_graphics, name, 'front.png')
+                try:
+                    apply_palette(palette_path, path, output_path)
+                except Exception as e2:
+                    t.write(f'{name}: {e2.__class__.__name__}: {e2}', file=sys.stderr)
 
 
 if __name__ == '__main__':
