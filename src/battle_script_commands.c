@@ -3793,9 +3793,11 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                 SetMoveEffect(primary, certain);
                 break;
             case MOVE_EFFECT_PSYCHIC_NOISE:
-                if (GetBattlerAbility(gEffectBattler) == ABILITY_AROMA_VEIL || GetBattlerAbility(BATTLE_PARTNER(gEffectBattler)) == ABILITY_AROMA_VEIL)
+                battlerAbility = IsAbilityOnSide(gEffectBattler, ABILITY_AROMA_VEIL);
+
+                if (battlerAbility)
                 {
-                    gBattlerAbility = gEffectBattler;
+                    gBattlerAbility = battlerAbility - 1;
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_AromaVeilProtectsRet;
                 }
