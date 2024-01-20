@@ -430,4 +430,21 @@ SINGLE_BATTLE_TEST("Red Card is consumed after dragged out replacement has its S
     }
 }
 
+SINGLE_BATTLE_TEST("Red Card does not cause the dragged out mon to lose hp due to it's held Life Orb")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT) { Item(ITEM_LIFE_ORB); }
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_RED_CARD); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
+        MESSAGE("Foe Wobbuffet held up its Red Card against Wobbuffet!");
+        MESSAGE("Wynaut was dragged out!");
+        NOT MESSAGE("Wynaut was hurt by its Life Orb!");
+    }
+}
+
 // SINGLE_BATTLE_TEST("Red Card activates but fails if the attacker has Dynamaxed")
