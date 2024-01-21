@@ -285,6 +285,10 @@
 // will display correctly under bridges, etc.
 #define LARGE_OW_SUPPORT TRUE
 
+// Followers will emerge from the pokeball they are stored in,
+// instead of a normal pokeball
+#define OW_MON_POKEBALLS TRUE
+
 #define SHADOW_SIZE_S   0
 #define SHADOW_SIZE_M   1
 #define SHADOW_SIZE_L   2

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "malloc.h"
+#include "battle_anim.h"
 #include "battle_pyramid.h"
 #include "battle_script_commands.h"
 #include "berry.h"
@@ -23,6 +24,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "pokemon.h"
+#include "pokeball.h"
 #include "random.h"
 #include "region_map.h"
 #include "script.h"
@@ -483,6 +485,41 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #define OBJ_EVENT_PAL_TAG_CASTFORM_SUNNY          0x1125
 #define OBJ_EVENT_PAL_TAG_CASTFORM_RAINY          0x1126
 #define OBJ_EVENT_PAL_TAG_CASTFORM_SNOWY          0x1127
+#if OW_MON_POKEBALLS
+// Vanilla
+#define OBJ_EVENT_PAL_TAG_BALL_MASTER             0x1150
+#define OBJ_EVENT_PAL_TAG_BALL_ULTRA              0x1151
+#define OBJ_EVENT_PAL_TAG_BALL_GREAT              0x1152
+#define OBJ_EVENT_PAL_TAG_BALL_SAFARI             0x1153
+#define OBJ_EVENT_PAL_TAG_BALL_NET                0x1154
+#define OBJ_EVENT_PAL_TAG_BALL_DIVE               0x1155
+#define OBJ_EVENT_PAL_TAG_BALL_NEST               0x1156
+#define OBJ_EVENT_PAL_TAG_BALL_REPEAT             0x1157
+#define OBJ_EVENT_PAL_TAG_BALL_TIMER              0x1158
+#define OBJ_EVENT_PAL_TAG_BALL_LUXURY             0x1159
+#define OBJ_EVENT_PAL_TAG_BALL_PREMIER            0x115A
+// Gen IV/Sinnoh
+#define OBJ_EVENT_PAL_TAG_BALL_DUSK               0x115B
+#define OBJ_EVENT_PAL_TAG_BALL_HEAL               0x115C
+#define OBJ_EVENT_PAL_TAG_BALL_QUICK              0x115D
+#define OBJ_EVENT_PAL_TAG_BALL_CHERISH            0x115E
+#define OBJ_EVENT_PAL_TAG_BALL_PARK               0x115F
+// Gen II/Johto Apricorns
+#define OBJ_EVENT_PAL_TAG_BALL_FAST               0x1160
+#define OBJ_EVENT_PAL_TAG_BALL_LEVEL              0x1161
+#define OBJ_EVENT_PAL_TAG_BALL_LURE               0x1162
+#define OBJ_EVENT_PAL_TAG_BALL_HEAVY              0x1163
+#define OBJ_EVENT_PAL_TAG_BALL_LOVE               0x1164
+#define OBJ_EVENT_PAL_TAG_BALL_FRIEND             0x1165
+#define OBJ_EVENT_PAL_TAG_BALL_MOON               0x1166
+#define OBJ_EVENT_PAL_TAG_BALL_SPORT              0x1167
+// Gen V
+#define OBJ_EVENT_PAL_TAG_BALL_DREAM              0x1168
+// Gen VII
+#define OBJ_EVENT_PAL_TAG_BALL_BEAST              0x1169
+// Gen VIII
+#define OBJ_EVENT_PAL_TAG_BALL_STRANGE            0x116A
+#endif
 #define OBJ_EVENT_PAL_TAG_EMOTES                  0x8002
 // Not a real OW palette tag; used for the white flash applied to followers
 #define OBJ_EVENT_PAL_TAG_WHITE                   (OBJ_EVENT_PAL_TAG_NONE - 1)
@@ -536,6 +573,53 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_CastformSunny, OBJ_EVENT_PAL_TAG_CASTFORM_SUNNY},
     {gObjectEventPal_CastformRainy, OBJ_EVENT_PAL_TAG_CASTFORM_RAINY},
     {gObjectEventPal_CastformSnowy, OBJ_EVENT_PAL_TAG_CASTFORM_SNOWY},
+    #if OW_MON_POKEBALLS
+    // Vanilla
+    {gObjectEventPal_MasterBall,            OBJ_EVENT_PAL_TAG_BALL_MASTER},
+    {gObjectEventPal_UltraBall,             OBJ_EVENT_PAL_TAG_BALL_ULTRA},
+    {gObjectEventPal_GreatBall,             OBJ_EVENT_PAL_TAG_BALL_GREAT},
+    {gObjectEventPal_SafariBall,            OBJ_EVENT_PAL_TAG_BALL_SAFARI},
+    {gObjectEventPal_NetBall,               OBJ_EVENT_PAL_TAG_BALL_NET},
+    {gObjectEventPal_DiveBall,              OBJ_EVENT_PAL_TAG_BALL_DIVE},
+    {gObjectEventPal_NestBall,              OBJ_EVENT_PAL_TAG_BALL_NEST},
+    {gObjectEventPal_RepeatBall,            OBJ_EVENT_PAL_TAG_BALL_REPEAT},
+    {gObjectEventPal_TimerBall,             OBJ_EVENT_PAL_TAG_BALL_TIMER},
+    {gObjectEventPal_LuxuryBall,            OBJ_EVENT_PAL_TAG_BALL_LUXURY},
+    {gObjectEventPal_PremierBall,           OBJ_EVENT_PAL_TAG_BALL_PREMIER},
+    // Gen IV/Sinnoh pokeballs
+    #ifdef ITEM_DUSK_BALL
+    {gObjectEventPal_DuskBall,              OBJ_EVENT_PAL_TAG_BALL_DUSK},
+    {gObjectEventPal_HealBall,              OBJ_EVENT_PAL_TAG_BALL_HEAL},
+    {gObjectEventPal_QuickBall,             OBJ_EVENT_PAL_TAG_BALL_QUICK},
+    {gObjectEventPal_CherishBall,           OBJ_EVENT_PAL_TAG_BALL_CHERISH},
+    #endif
+    #ifdef ITEM_PARK_BALL
+    {gObjectEventPal_ParkBall,              OBJ_EVENT_PAL_TAG_BALL_PARK},
+    #endif
+    // Gen II/Johto Apricorn pokeballs
+    #ifdef ITEM_FAST_BALL
+    {gObjectEventPal_FastBall,              OBJ_EVENT_PAL_TAG_BALL_FAST},
+    {gObjectEventPal_LevelBall,             OBJ_EVENT_PAL_TAG_BALL_LEVEL},
+    {gObjectEventPal_LureBall,              OBJ_EVENT_PAL_TAG_BALL_LURE},
+    {gObjectEventPal_HeavyBall,             OBJ_EVENT_PAL_TAG_BALL_HEAVY},
+    {gObjectEventPal_LoveBall,              OBJ_EVENT_PAL_TAG_BALL_LOVE},
+    {gObjectEventPal_FriendBall,            OBJ_EVENT_PAL_TAG_BALL_FRIEND},
+    {gObjectEventPal_MoonBall,              OBJ_EVENT_PAL_TAG_BALL_MOON},
+    {gObjectEventPal_SportBall,             OBJ_EVENT_PAL_TAG_BALL_SPORT},
+    #endif
+    // Gen V
+    #ifdef ITEM_DREAM_BALL
+    {gObjectEventPal_DreamBall,             OBJ_EVENT_PAL_TAG_BALL_DREAM},
+    #endif
+    // Gen VII
+    #ifdef ITEM_BEAST_BALL
+    {gObjectEventPal_BeastBall,             OBJ_EVENT_PAL_TAG_BALL_BEAST},
+    #endif
+    // Gen VIII
+    #ifdef ITEM_STRANGE_BALL
+    {gObjectEventPal_StrangeBall,           OBJ_EVENT_PAL_TAG_BALL_STRANGE},
+    #endif
+    #endif
     {gObjectEventPaletteEmotes, OBJ_EVENT_PAL_TAG_EMOTES},
     {NULL,                  OBJ_EVENT_PAL_TAG_NONE},
 };
@@ -6669,6 +6753,26 @@ static u8 LoadFillColorPalette(u16 color, u16 paletteTag, struct Sprite *sprite)
   return UpdateSpritePalette(&dynamicPalette, sprite);
 }
 
+static void ObjectEventSetPokeballGfx(struct ObjectEvent *objEvent) {
+    #if OW_MON_POKEBALLS
+    u32 ball = BALL_POKE;
+    if (objEvent->localId == OBJ_EVENT_ID_FOLLOWER) {
+        struct Pokemon *mon = GetFirstLiveMon();
+        if (mon)
+            ball = ItemIdToBallId(GetMonData(mon, MON_DATA_POKEBALL));
+    }
+
+    if (ball != BALL_POKE && ball < POKEBALL_COUNT) {
+        const struct ObjectEventGraphicsInfo *info = &gPokeballGraphics[ball];
+        if (info->tileTag == TAG_NONE) {
+            ObjectEventSetGraphics(objEvent, info);
+            return;
+        }
+    }
+    #endif
+    ObjectEventSetGraphicsId(objEvent, OBJ_EVENT_GFX_ANIMATED_BALL);
+}
+
 bool8 MovementAction_ExitPokeball_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite) {
     u8 direction = gObjectEvents[gPlayerAvatar.objectEventId].facingDirection;
     objectEvent->invisible = FALSE;
@@ -6682,7 +6786,7 @@ bool8 MovementAction_ExitPokeball_Step0(struct ObjectEvent *objectEvent, struct 
         sprite->data[6] = 1; // slow speed
     }
     sprite->data[6] |= (direction == DIR_EAST ? 1 : 0) << 4;
-    ObjectEventSetGraphicsId(objectEvent, OBJ_EVENT_GFX_ANIMATED_BALL);
+    ObjectEventSetPokeballGfx(objectEvent);
     objectEvent->inanimate = FALSE;
     return MovementAction_ExitPokeball_Step1(objectEvent, sprite);
 }
@@ -6801,7 +6905,7 @@ bool8 MovementAction_EnterPokeball_Step1(struct ObjectEvent *objectEvent, struct
         sprite->affineAnimEnded = TRUE;
         FreeSpriteOamMatrix(sprite);
         sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
-        ObjectEventSetGraphicsId(objectEvent, OBJ_EVENT_GFX_ANIMATED_BALL);
+        ObjectEventSetPokeballGfx(objectEvent);
         objectEvent->inanimate = FALSE;
     }
     return FALSE;
