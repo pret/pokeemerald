@@ -4211,11 +4211,14 @@ static uq4_12_t GetSupremeOverlordModifier(u32 battler)
     return modifier;
 }
 
-static bool32 HadMoreThanHalfHpNowHasLess(u32 battler)
+static inline bool32 HadMoreThanHalfHpNowHasLess(u32 battler)
 {
+    u32 cutoff = gBattleMons[battler].maxHP / 2;
+    if (gBattleMons[battler].maxHP % 2 == 1)
+        cutoff++;
     // Had more than half of hp before, now has less
-     return (gBattleStruct->hpBefore[battler] >= gBattleMons[battler].maxHP / 2
-             && gBattleMons[battler].hp < gBattleMons[battler].maxHP / 2);
+     return (gBattleStruct->hpBefore[battler] >= cutoff
+             && gBattleMons[battler].hp < cutoff);
 }
 
 u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 moveArg)
@@ -5271,8 +5274,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && TARGET_TURN_DAMAGED
              && IsBattlerAlive(battler)
             // Had more than half of hp before, now has less
-             && gBattleStruct->hpBefore[battler] > gBattleMons[battler].maxHP / 2
-             && gBattleMons[battler].hp < gBattleMons[battler].maxHP / 2
+             && HadMoreThanHalfHpNowHasLess(battler)
              && (gMultiHitCounter == 0 || gMultiHitCounter == 1)
              && !(TestSheerForceFlag(gBattlerAttacker, gCurrentMove))
              && (CanBattlerSwitch(battler) || !(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
