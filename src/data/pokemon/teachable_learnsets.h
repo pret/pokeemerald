@@ -663,7 +663,6 @@ static const u16 sRattataTeachableLearnset[] = {
 static const u16 sRaticateTeachableLearnset[] = {
     MOVE_ATTRACT,
     MOVE_BLIZZARD,
-    MOVE_BULK_UP,
     MOVE_CUT,
     MOVE_DIG,
     MOVE_DOUBLE_TEAM,
@@ -689,7 +688,6 @@ static const u16 sRaticateTeachableLearnset[] = {
     MOVE_THIEF,
     MOVE_THUNDER,
     MOVE_THUNDERBOLT,
-    MOVE_TORMENT,
     MOVE_TOXIC,
     MOVE_BODY_SLAM,
     MOVE_COUNTER,
@@ -930,7 +928,6 @@ static const u16 sPikachuTeachableLearnset[] = {
     MOVE_DOUBLE_TEAM,
     MOVE_FACADE,
     MOVE_FLASH,
-    MOVE_FLY,
     MOVE_FOCUS_PUNCH,
     MOVE_FRUSTRATION,
     MOVE_HIDDEN_POWER,
@@ -7942,7 +7939,6 @@ static const u16 sPorygonTeachableLearnset[] = {
     MOVE_THUNDER,
     MOVE_THUNDERBOLT,
     MOVE_TOXIC,
-    MOVE_DEFENSE_CURL,
     MOVE_DOUBLE_EDGE,
     MOVE_DREAM_EATER,
     MOVE_ENDURE,
@@ -12566,9 +12562,6 @@ static const u16 sWyrdeerTeachableLearnset[] = {
 
 #if P_FAMILY_SMEARGLE
 static const u16 sSmeargleTeachableLearnset[] = {
-    MOVE_FLAMETHROWER,
-    MOVE_SEISMIC_TOSS,
-    MOVE_SLEEP_TALK,
     MOVE_UNAVAILABLE,
 };
 #endif //P_FAMILY_SMEARGLE
@@ -14883,7 +14876,6 @@ static const u16 sShedinjaTeachableLearnset[] = {
     MOVE_SNORE,
     MOVE_SUBSTITUTE,
     MOVE_SWAGGER,
-    MOVE_SWORDS_DANCE,
     MOVE_UNAVAILABLE,
 };
 #endif //P_FAMILY_NINCADA
