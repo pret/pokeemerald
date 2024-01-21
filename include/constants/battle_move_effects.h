@@ -383,7 +383,7 @@
 #define EFFECT_RISING_VOLTAGE               377
 #define EFFECT_BEAK_BLAST                   378
 #define EFFECT_COURT_CHANGE                 379
-#define EFFECT_STEEL_BEAM                   380
+#define EFFECT_MAX_HP_50_RECOIL             380
 #define EFFECT_EXTREME_EVOBOOST             381
 #define EFFECT_HIT_SET_REMOVE_TERRAIN       382 // genesis supernova
 #define EFFECT_DARK_VOID                    383

@@ -972,7 +972,7 @@ static bool32 AI_IsMoveEffectInMinus(u32 battlerAtk, u32 battlerDef, u32 move, s
     case EFFECT_OVERHEAT:
     case EFFECT_MAKE_IT_RAIN:
     case EFFECT_MIND_BLOWN:
-    case EFFECT_STEEL_BEAM:
+    case EFFECT_MAX_HP_50_RECOIL:
         return TRUE;
     case EFFECT_RECOIL_25:
     case EFFECT_RECOIL_IF_MISS:
