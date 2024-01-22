@@ -802,7 +802,7 @@ extern const u8 BattleScript_EffectClangorousSoul[];
 extern const u8 BattleScript_EffectSkyDrop[];
 extern const u8 BattleScript_EffectMeteorBeam[];
 extern const u8 BattleScript_EffectCourtChange[];
-extern const u8 BattleScript_EffectSteelBeam[];
+extern const u8 BattleScript_EffectMaxHp50Recoil[];
 extern const u8 BattleScript_EffectExtremeEvoboost[];
 extern const u8 BattleScript_EffectHitSetRemoveTerrain[];
 extern const u8 BattleScript_EffectDarkVoid[];

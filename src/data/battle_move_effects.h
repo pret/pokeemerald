@@ -2048,9 +2048,9 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 0, // TODO: Assign points
     },
 
-    [EFFECT_STEEL_BEAM] =
+    [EFFECT_MAX_HP_50_RECOIL] =
     {
-        .battleScript = BattleScript_EffectSteelBeam,
+        .battleScript = BattleScript_EffectMaxHp50Recoil,
         .battleTvScore = 0, // TODO: Assign points
     },
 

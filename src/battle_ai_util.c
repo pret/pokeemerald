@@ -632,7 +632,7 @@ static bool32 AI_IsMoveEffectInMinus(u32 battlerAtk, u32 battlerDef, u32 move, s
     switch (gBattleMoves[move].effect)
     {
     case EFFECT_MIND_BLOWN:
-    case EFFECT_STEEL_BEAM:
+    case EFFECT_MAX_HP_50_RECOIL:
         return TRUE;
     case EFFECT_RECOIL_IF_MISS:
         if (AI_IsDamagedByRecoil(battlerAtk))
@@ -2483,17 +2483,11 @@ bool32 AI_CanPutToSleep(u32 battlerAtk, u32 battlerDef, u32 defAbility, u32 move
     return TRUE;
 }
 
-static bool32 AI_CanPoisonType(u32 battlerAttacker, u32 battlerTarget, u32 move)
-{
-    return ((AI_DATA->abilities[battlerAttacker] == ABILITY_CORROSION && gBattleMoves[move].category == BATTLE_CATEGORY_STATUS)
-            || !(IS_BATTLER_OF_TYPE(battlerTarget, TYPE_POISON) || IS_BATTLER_OF_TYPE(battlerTarget, TYPE_STEEL)));
-}
-
 static bool32 AI_CanBePoisoned(u32 battlerAtk, u32 battlerDef, u32 move)
 {
     u32 ability = AI_DATA->abilities[battlerDef];
 
-    if (!(AI_CanPoisonType(battlerAtk, battlerDef, move))
+    if (!(CanPoisonType(battlerAtk, battlerDef))
      || gSideStatuses[GetBattlerSide(battlerDef)] & SIDE_STATUS_SAFEGUARD
      || gBattleMons[battlerDef].status1 & STATUS1_ANY
      || ability == ABILITY_IMMUNITY

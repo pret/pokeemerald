@@ -11591,7 +11591,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_STEEL_BEAM] =
     {
-        .effect = EFFECT_STEEL_BEAM,
+        .effect = EFFECT_MAX_HP_50_RECOIL,
         .power = 140,
         .type = TYPE_STEEL,
         .accuracy = 95,
@@ -12194,7 +12194,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_CHLOROBLAST] =
     {
-        .effect = EFFECT_STEEL_BEAM,
+        .effect = EFFECT_MAX_HP_50_RECOIL,
         .power = B_UPDATED_MOVE_DATA >= GEN_9 ? 150 : 120,
         .type = TYPE_GRASS,
         .accuracy = 95,

@@ -524,7 +524,7 @@ BattleScript_EffectShellTrap::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectSteelBeam::
+BattleScript_EffectMaxHp50Recoil::
 	attackcanceler
 	attackstring
 	ppreduce
@@ -3046,6 +3046,7 @@ BattleScript_MindBlownDamp:
 	goto BattleScript_DampStopsExplosion
 BattleScript_EffectMindBlown_HpDown:
 	setbyte sMULTIHIT_EFFECT, 1 @ Note to not faint the attacker
+	jumpifability BS_ATTACKER, ABILITY_MAGIC_GUARD, BattleScript_EffectMindBlown_AnimDmgNoFaint
 	dmg_1_2_attackerhp
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
