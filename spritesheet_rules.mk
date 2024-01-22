@@ -731,3259 +731,3259 @@ $(FLDEFFGFXDIR)/secret_power_tree.4bpp: %.4bpp: %.png
 $(FLDEFFGFXDIR)/record_mix_lights.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 1
 
-$(OBJEVENTGFXDIR)/pokemon/bulbasaur.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/bulbasaur/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/ivysaur.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ivysaur/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/venusaur.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/venusaur/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/charmander.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/charmander/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/charmeleon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/charmeleon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/charizard.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/charizard/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/squirtle.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/squirtle/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/wartortle.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/wartortle/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/blastoise.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/blastoise/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/caterpie.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/caterpie/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/metapod.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/metapod/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/butterfree.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/butterfree/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/weedle.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/weedle/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/kakuna.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/kakuna/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/beedrill.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/beedrill/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pidgey.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pidgey/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pidgeotto.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pidgeotto/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pidgeot.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pidgeot/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/rattata.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/rattata/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/raticate.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/raticate/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/spearow.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/spearow/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/fearow.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/fearow/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/ekans.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ekans/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/arbok.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arbok/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pikachu.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pikachu/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/raichu.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/raichu/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sandshrew.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sandshrew/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sandslash.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sandslash/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/nidoran_f.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/nidoran_f/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/nidorina.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/nidorina/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/nidoqueen.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/nidoqueen/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/nidoran_m.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/nidoran_m/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/nidorino.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/nidorino/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/nidoking.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/nidoking/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/clefairy.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/clefairy/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/clefable.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/clefable/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vulpix.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vulpix/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/ninetales.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ninetales/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/jigglypuff.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/jigglypuff/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/wigglytuff.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/wigglytuff/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/zubat.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/zubat/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/golbat.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/golbat/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/oddish.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/oddish/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gloom.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gloom/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vileplume.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vileplume/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/paras.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/paras/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/parasect.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/parasect/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/venonat.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/venonat/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/venomoth.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/venomoth/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/diglett.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/diglett/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dugtrio.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dugtrio/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/meowth.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/meowth/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/persian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/persian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/psyduck.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/psyduck/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/golduck.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/golduck/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mankey.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mankey/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/primeape.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/primeape/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/growlithe.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/growlithe/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/arcanine.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arcanine/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/poliwag.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/poliwag/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/poliwhirl.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/poliwhirl/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/poliwrath.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/poliwrath/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/abra.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/abra/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/kadabra.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/kadabra/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/alakazam.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/alakazam/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/machop.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/machop/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/machoke.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/machoke/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/machamp.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/machamp/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/bellsprout.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/bellsprout/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/weepinbell.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/weepinbell/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/victreebel.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/victreebel/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/tentacool.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/tentacool/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/tentacruel.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/tentacruel/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/geodude.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/geodude/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/graveler.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/graveler/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/golem.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/golem/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/ponyta.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ponyta/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/rapidash.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/rapidash/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/slowpoke.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/slowpoke/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/slowbro.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/slowbro/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/magnemite.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/magnemite/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/magneton.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/magneton/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/farfetchd.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/farfetchd/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/doduo.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/doduo/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dodrio.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dodrio/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/seel.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/seel/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dewgong.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dewgong/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/grimer.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/grimer/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/muk.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/muk/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/shellder.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/shellder/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cloyster.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cloyster/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gastly.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gastly/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/haunter.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/haunter/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gengar.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gengar/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/onix.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/onix/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/drowzee.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/drowzee/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/hypno.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/hypno/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/krabby.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/krabby/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/kingler.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/kingler/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/voltorb.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/voltorb/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/electrode.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/electrode/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/exeggcute.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/exeggcute/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/exeggutor.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/exeggutor/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cubone.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cubone/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/marowak.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/marowak/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/hitmonlee.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/hitmonlee/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/hitmonchan.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/hitmonchan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lickitung.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lickitung/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/koffing.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/koffing/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/weezing.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/weezing/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/rhyhorn.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/rhyhorn/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/rhydon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/rhydon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/chansey.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/chansey/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/tangela.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/tangela/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/kangaskhan.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/kangaskhan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/horsea.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/horsea/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/seadra.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/seadra/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/goldeen.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/goldeen/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/seaking.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/seaking/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/staryu.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/staryu/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/starmie.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/starmie/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mr_mime.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mr_mime/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/scyther.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/scyther/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/jynx.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/jynx/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/electabuzz.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/electabuzz/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/magmar.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/magmar/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pinsir.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pinsir/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/tauros.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/tauros/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/magikarp.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/magikarp/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gyarados.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gyarados/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lapras.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lapras/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/ditto.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ditto/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/eevee.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/eevee/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vaporeon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vaporeon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/jolteon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/jolteon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/flareon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/flareon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/porygon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/porygon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/omanyte.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/omanyte/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/omastar.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/omastar/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/kabuto.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/kabuto/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/kabutops.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/kabutops/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/aerodactyl.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/aerodactyl/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/snorlax.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/snorlax/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/articuno.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/articuno/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/zapdos.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/zapdos/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/moltres.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/moltres/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dratini.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dratini/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dragonair.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dragonair/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dragonite.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dragonite/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mewtwo.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mewtwo/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mew.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mew/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/chikorita.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/chikorita/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/bayleef.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/bayleef/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/meganium.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/meganium/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cyndaquil.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cyndaquil/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/quilava.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/quilava/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/typhlosion.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/typhlosion/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/totodile.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/totodile/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/croconaw.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/croconaw/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/feraligatr.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/feraligatr/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sentret.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sentret/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/furret.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/furret/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/hoothoot.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/hoothoot/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/noctowl.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/noctowl/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/ledyba.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ledyba/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/ledian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ledian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/spinarak.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/spinarak/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/ariados.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ariados/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/crobat.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/crobat/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/chinchou.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/chinchou/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lanturn.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lanturn/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pichu.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pichu/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cleffa.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cleffa/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/igglybuff.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/igglybuff/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/togepi.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/togepi/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/togetic.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/togetic/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/natu.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/natu/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/xatu.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/xatu/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mareep.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mareep/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/flaaffy.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/flaaffy/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/ampharos.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ampharos/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/bellossom.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/bellossom/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/marill.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/marill/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/azumarill.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/azumarill/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sudowoodo.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sudowoodo/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/politoed.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/politoed/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/hoppip.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/hoppip/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/skiploom.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/skiploom/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/jumpluff.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/jumpluff/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/aipom.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/aipom/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sunkern.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sunkern/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sunflora.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sunflora/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/yanma.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/yanma/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/wooper.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/wooper/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/quagsire.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/quagsire/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/espeon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/espeon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/umbreon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/umbreon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/murkrow.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/murkrow/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/slowking.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/slowking/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/misdreavus.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/misdreavus/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_a.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_b.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/b/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_c.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/c/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_d.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/d/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_e.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/e/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_f.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/f/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_g.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/g/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_h.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/h/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_i.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/i/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_j.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/j/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_k.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/k/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_l.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/l/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_m.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/m/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_n.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/n/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_o.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/o/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_p.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/p/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_q.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/q/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_r.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/r/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_s.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/s/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_t.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/t/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_u.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/u/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_v.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/v/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_w.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/w/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_x.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/x/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_y.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/y/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_z.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/z/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_exclamation.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/exclamation/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown_question.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/question/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/wobbuffet.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/wobbuffet/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/girafarig.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/girafarig/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pineco.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pineco/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/forretress.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/forretress/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dunsparce.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dunsparce/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gligar.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gligar/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/steelix.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/steelix/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/snubbull.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/snubbull/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/granbull.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/granbull/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/qwilfish.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/qwilfish/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/scizor.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/scizor/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/shuckle.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/shuckle/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/heracross.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/heracross/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sneasel.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sneasel/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/teddiursa.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/teddiursa/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/ursaring.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ursaring/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/slugma.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/slugma/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/magcargo.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/magcargo/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/swinub.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/swinub/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/piloswine.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/piloswine/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/corsola.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/corsola/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/remoraid.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/remoraid/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/octillery.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/octillery/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/delibird.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/delibird/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mantine.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mantine/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/skarmory.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/skarmory/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/houndour.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/houndour/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/houndoom.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/houndoom/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/kingdra.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/kingdra/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/phanpy.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/phanpy/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/donphan.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/donphan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/porygon2.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/porygon2/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/stantler.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/stantler/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/smeargle.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/smeargle/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/tyrogue.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/tyrogue/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/hitmontop.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/hitmontop/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/smoochum.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/smoochum/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/elekid.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/elekid/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/magby.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/magby/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/miltank.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/miltank/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/blissey.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/blissey/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/raikou.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/raikou/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/entei.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/entei/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/suicune.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/suicune/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/larvitar.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/larvitar/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pupitar.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pupitar/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/tyranitar.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/tyranitar/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lugia.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lugia/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/ho_oh.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ho_oh/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/celebi.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/celebi/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/treecko.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/treecko/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/grovyle.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/grovyle/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sceptile.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sceptile/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/torchic.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/torchic/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/combusken.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/combusken/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/blaziken.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/blaziken/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mudkip.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mudkip/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/marshtomp.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/marshtomp/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/swampert.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/swampert/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/poochyena.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/poochyena/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mightyena.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mightyena/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/zigzagoon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/zigzagoon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/linoone.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/linoone/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/wurmple.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/wurmple/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/silcoon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/silcoon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/beautifly.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/beautifly/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cascoon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cascoon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dustox.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dustox/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lotad.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lotad/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lombre.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lombre/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/ludicolo.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ludicolo/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/seedot.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/seedot/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/nuzleaf.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/nuzleaf/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/shiftry.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/shiftry/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/taillow.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/taillow/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/swellow.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/swellow/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/wingull.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/wingull/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pelipper.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pelipper/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/ralts.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ralts/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/kirlia.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/kirlia/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gardevoir.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gardevoir/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/surskit.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/surskit/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/masquerain.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/masquerain/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/shroomish.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/shroomish/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/breloom.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/breloom/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/slakoth.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/slakoth/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vigoroth.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vigoroth/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/slaking.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/slaking/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/nincada.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/nincada/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/ninjask.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ninjask/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/shedinja.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/shedinja/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/whismur.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/whismur/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/loudred.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/loudred/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/exploud.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/exploud/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/makuhita.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/makuhita/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/hariyama.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/hariyama/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/azurill.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/azurill/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/nosepass.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/nosepass/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/skitty.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/skitty/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/delcatty.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/delcatty/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sableye.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sableye/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mawile.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mawile/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/aron.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/aron/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lairon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lairon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/aggron.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/aggron/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/meditite.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/meditite/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/medicham.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/medicham/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/electrike.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/electrike/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/manectric.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/manectric/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/plusle.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/plusle/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/minun.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/minun/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/volbeat.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/volbeat/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/illumise.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/illumise/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/roselia.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/roselia/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gulpin.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gulpin/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/swalot.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/swalot/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/carvanha.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/carvanha/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sharpedo.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sharpedo/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/wailmer.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/wailmer/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/wailord.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/wailord/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/numel.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/numel/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/camerupt.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/camerupt/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/torkoal.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/torkoal/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/spoink.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/spoink/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/grumpig.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/grumpig/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/spinda.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/spinda/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/trapinch.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/trapinch/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vibrava.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vibrava/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/flygon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/flygon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cacnea.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cacnea/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cacturne.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cacturne/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/swablu.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/swablu/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/altaria.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/altaria/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/zangoose.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/zangoose/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/seviper.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/seviper/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lunatone.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lunatone/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/solrock.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/solrock/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/barboach.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/barboach/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/whiscash.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/whiscash/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/corphish.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/corphish/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/crawdaunt.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/crawdaunt/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/baltoy.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/baltoy/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/claydol.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/claydol/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lileep.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lileep/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cradily.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cradily/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/anorith.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/anorith/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/armaldo.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/armaldo/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/feebas.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/feebas/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/milotic.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/milotic/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/castform.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/castform/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/castform_sunny.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/castform/sunny/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/castform_rainy.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/castform/rainy/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/castform_snowy.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/castform/snowy/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/kecleon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/kecleon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/shuppet.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/shuppet/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/banette.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/banette/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/duskull.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/duskull/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dusclops.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dusclops/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/tropius.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/tropius/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/chimecho.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/chimecho/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/absol.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/absol/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/wynaut.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/wynaut/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/snorunt.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/snorunt/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/glalie.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/glalie/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/spheal.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/spheal/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sealeo.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sealeo/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/walrein.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/walrein/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/clamperl.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/clamperl/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/huntail.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/huntail/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gorebyss.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gorebyss/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/relicanth.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/relicanth/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/luvdisc.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/luvdisc/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/bagon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/bagon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/shelgon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/shelgon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/salamence.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/salamence/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/beldum.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/beldum/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/metang.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/metang/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/metagross.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/metagross/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/regirock.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/regirock/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/regice.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/regice/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/registeel.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/registeel/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/latias.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/latias/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/latios.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/latios/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/kyogre.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/kyogre/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/groudon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/groudon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/rayquaza.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/rayquaza/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/jirachi.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/jirachi/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/deoxys.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/deoxys/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/turtwig.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/turtwig/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/grotle.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/grotle/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/torterra.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/torterra/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/chimchar.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/chimchar/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/monferno.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/monferno/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/infernape.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/infernape/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/piplup.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/piplup/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/prinplup.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/prinplup/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/empoleon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/empoleon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/starly.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/starly/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/staravia.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/staravia/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/staraptor.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/staraptor/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/bidoof.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/bidoof/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/bibarel.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/bibarel/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/kricketot.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/kricketot/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/kricketune.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/kricketune/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/shinx.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/shinx/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/luxio.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/luxio/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/luxray.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/luxray/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/budew.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/budew/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/roserade.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/roserade/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cranidos.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cranidos/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/rampardos.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/rampardos/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/shieldon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/shieldon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/bastiodon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/bastiodon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/burmy.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/burmy/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/wormadam.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/wormadam/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mothim.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mothim/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/combee.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/combee/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vespiquen.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vespiquen/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pachirisu.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pachirisu/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/buizel.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/buizel/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/floatzel.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/floatzel/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cherubi.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cherubi/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cherrim.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cherrim/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/shellos.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/shellos/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gastrodon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gastrodon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/ambipom.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ambipom/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/drifloon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/drifloon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/drifblim.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/drifblim/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/buneary.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/buneary/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lopunny.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lopunny/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mismagius.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mismagius/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/honchkrow.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/honchkrow/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/glameow.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/glameow/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/purugly.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/purugly/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/chingling.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/chingling/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/stunky.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/stunky/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/skuntank.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/skuntank/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/bronzor.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/bronzor/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/bronzong.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/bronzong/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/bonsly.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/bonsly/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mime_jr.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mime_jr/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/happiny.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/happiny/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/chatot.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/chatot/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/spiritomb.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/spiritomb/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gible.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gible/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gabite.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gabite/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/garchomp.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/garchomp/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/munchlax.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/munchlax/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/riolu.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/riolu/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lucario.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lucario/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/hippopotas.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/hippopotas/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/hippowdon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/hippowdon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/skorupi.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/skorupi/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/drapion.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/drapion/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/croagunk.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/croagunk/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/toxicroak.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/toxicroak/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/carnivine.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/carnivine/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/finneon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/finneon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lumineon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lumineon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mantyke.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mantyke/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/snover.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/snover/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/abomasnow.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/abomasnow/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/weavile.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/weavile/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/magnezone.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/magnezone/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lickilicky.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lickilicky/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/rhyperior.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/rhyperior/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/tangrowth.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/tangrowth/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/electivire.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/electivire/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/magmortar.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/magmortar/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/togekiss.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/togekiss/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/yanmega.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/yanmega/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/leafeon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/leafeon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/glaceon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/glaceon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gliscor.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gliscor/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mamoswine.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mamoswine/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/porygon_z.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/porygon_z/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gallade.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gallade/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/probopass.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/probopass/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dusknoir.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dusknoir/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/froslass.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/froslass/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/rotom.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/rotom/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/uxie.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/uxie/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mesprit.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mesprit/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/azelf.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/azelf/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dialga.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dialga/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/palkia.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/palkia/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/heatran.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/heatran/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/regigigas.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/regigigas/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/giratina.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/giratina/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/cresselia.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cresselia/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/phione.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/phione/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/manaphy.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/manaphy/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/darkrai.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/darkrai/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/shaymin.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/shaymin/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/arceus.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arceus/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/victini.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/victini/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/snivy.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/snivy/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/servine.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/servine/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/serperior.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/serperior/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/tepig.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/tepig/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pignite.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pignite/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/emboar.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/emboar/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/oshawott.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/oshawott/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dewott.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dewott/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/samurott.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/samurott/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/patrat.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/patrat/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/watchog.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/watchog/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lillipup.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lillipup/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/herdier.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/herdier/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/stoutland.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/stoutland/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/purrloin.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/purrloin/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/liepard.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/liepard/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pansage.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pansage/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/simisage.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/simisage/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pansear.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pansear/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/simisear.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/simisear/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/panpour.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/panpour/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/simipour.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/simipour/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/munna.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/munna/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/musharna.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/musharna/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pidove.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pidove/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/tranquill.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/tranquill/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unfezant.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unfezant/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/blitzle.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/blitzle/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/zebstrika.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/zebstrika/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/roggenrola.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/roggenrola/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/boldore.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/boldore/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gigalith.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gigalith/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/woobat.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/woobat/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/swoobat.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/swoobat/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/drilbur.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/drilbur/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/excadrill.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/excadrill/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/audino.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/audino/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/timburr.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/timburr/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gurdurr.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gurdurr/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/conkeldurr.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/conkeldurr/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/tympole.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/tympole/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/palpitoad.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/palpitoad/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/seismitoad.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/seismitoad/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/throh.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/throh/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sawk.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sawk/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sewaddle.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sewaddle/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/swadloon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/swadloon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/leavanny.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/leavanny/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/venipede.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/venipede/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/whirlipede.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/whirlipede/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/scolipede.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/scolipede/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cottonee.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cottonee/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/whimsicott.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/whimsicott/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/petilil.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/petilil/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lilligant.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lilligant/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/basculin.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/basculin/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sandile.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sandile/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/krokorok.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/krokorok/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/krookodile.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/krookodile/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/darumaka.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/darumaka/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/darmanitan.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/darmanitan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/maractus.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/maractus/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dwebble.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dwebble/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/crustle.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/crustle/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/scraggy.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/scraggy/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/scrafty.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/scrafty/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sigilyph.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sigilyph/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/yamask.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/yamask/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cofagrigus.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cofagrigus/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/tirtouga.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/tirtouga/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/carracosta.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/carracosta/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/archen.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/archen/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/archeops.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/archeops/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/trubbish.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/trubbish/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/garbodor.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/garbodor/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/zorua.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/zorua/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/zoroark.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/zoroark/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/minccino.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/minccino/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cinccino.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cinccino/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gothita.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gothita/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gothorita.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gothorita/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gothitelle.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gothitelle/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/solosis.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/solosis/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/duosion.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/duosion/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/reuniclus.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/reuniclus/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/ducklett.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ducklett/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/swanna.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/swanna/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vanillite.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vanillite/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vanillish.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vanillish/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vanilluxe.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vanilluxe/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/deerling.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/deerling/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sawsbuck.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sawsbuck/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/emolga.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/emolga/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/karrablast.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/karrablast/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/escavalier.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/escavalier/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/foongus.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/foongus/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/amoonguss.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/amoonguss/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/frillish.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/frillish/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/jellicent.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/jellicent/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/alomomola.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/alomomola/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/joltik.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/joltik/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/galvantula.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/galvantula/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/ferroseed.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ferroseed/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/ferrothorn.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ferrothorn/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/klink.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/klink/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/klang.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/klang/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/klinklang.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/klinklang/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/tynamo.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/tynamo/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/eelektrik.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/eelektrik/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/eelektross.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/eelektross/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/elgyem.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/elgyem/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/beheeyem.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/beheeyem/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/litwick.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/litwick/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lampent.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lampent/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/chandelure.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/chandelure/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/axew.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/axew/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/fraxure.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/fraxure/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/haxorus.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/haxorus/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cubchoo.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cubchoo/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/beartic.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/beartic/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cryogonal.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cryogonal/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/shelmet.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/shelmet/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/accelgor.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/accelgor/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/stunfisk.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/stunfisk/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mienfoo.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mienfoo/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mienshao.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mienshao/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/druddigon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/druddigon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/golett.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/golett/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/golurk.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/golurk/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pawniard.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pawniard/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/bisharp.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/bisharp/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/bouffalant.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/bouffalant/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/rufflet.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/rufflet/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/braviary.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/braviary/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vullaby.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vullaby/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mandibuzz.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mandibuzz/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/heatmor.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/heatmor/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/durant.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/durant/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/deino.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/deino/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/zweilous.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/zweilous/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/hydreigon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/hydreigon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/larvesta.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/larvesta/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/volcarona.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/volcarona/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cobalion.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cobalion/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/terrakion.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/terrakion/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/virizion.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/virizion/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/tornadus.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/tornadus/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/thundurus.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/thundurus/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/reshiram.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/reshiram/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/zekrom.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/zekrom/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/landorus.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/landorus/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/kyurem.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/kyurem/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/keldeo.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/keldeo/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/meloetta.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/meloetta/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/genesect.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/genesect/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/chespin.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/chespin/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/quilladin.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/quilladin/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/chesnaught.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/chesnaught/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/fennekin.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/fennekin/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/braixen.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/braixen/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/delphox.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/delphox/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/froakie.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/froakie/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/frogadier.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/frogadier/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/greninja.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/greninja/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/bunnelby.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/bunnelby/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/diggersby.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/diggersby/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/fletchling.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/fletchling/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/fletchinder.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/fletchinder/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/talonflame.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/talonflame/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/scatterbug.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/scatterbug/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/spewpa.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/spewpa/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vivillon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vivillon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/litleo.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/litleo/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pyroar.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pyroar/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/flabebe.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/flabebe/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/floette.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/floette/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/florges.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/florges/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/skiddo.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/skiddo/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gogoat.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gogoat/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pancham.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pancham/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pangoro.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pangoro/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/furfrou.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/furfrou/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/espurr.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/espurr/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/meowstic.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/meowstic/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/honedge.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/honedge/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/doublade.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/doublade/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/aegislash.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/aegislash/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/spritzee.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/spritzee/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/aromatisse.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/aromatisse/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/swirlix.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/swirlix/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/slurpuff.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/slurpuff/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/inkay.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/inkay/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/malamar.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/malamar/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/binacle.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/binacle/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/barbaracle.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/barbaracle/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/skrelp.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/skrelp/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dragalge.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dragalge/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/clauncher.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/clauncher/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/clawitzer.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/clawitzer/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/helioptile.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/helioptile/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/heliolisk.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/heliolisk/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/tyrunt.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/tyrunt/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/tyrantrum.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/tyrantrum/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/amaura.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/amaura/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/aurorus.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/aurorus/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sylveon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sylveon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/hawlucha.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/hawlucha/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dedenne.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dedenne/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/carbink.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/carbink/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/goomy.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/goomy/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sliggoo.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sliggoo/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/goodra.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/goodra/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/klefki.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/klefki/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/phantump.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/phantump/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/trevenant.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/trevenant/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pumpkaboo.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pumpkaboo/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gourgeist.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gourgeist/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/bergmite.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/bergmite/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/avalugg.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/avalugg/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/noibat.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/noibat/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/noivern.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/noivern/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/xerneas.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/xerneas/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/yveltal.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/yveltal/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/zygarde.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/zygarde/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/diancie.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/diancie/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/hoopa.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/hoopa/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/volcanion.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/volcanion/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/rowlet.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/rowlet/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dartrix.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dartrix/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/decidueye.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/decidueye/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/litten.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/litten/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/torracat.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/torracat/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/incineroar.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/incineroar/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/popplio.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/popplio/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/brionne.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/brionne/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/primarina.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/primarina/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pikipek.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pikipek/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/trumbeak.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/trumbeak/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/toucannon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/toucannon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/yungoos.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/yungoos/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gumshoos.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gumshoos/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/grubbin.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/grubbin/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/charjabug.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/charjabug/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vikavolt.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vikavolt/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/crabrawler.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/crabrawler/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/crabominable.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/crabominable/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/oricorio.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/oricorio/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cutiefly.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cutiefly/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/ribombee.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ribombee/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/rockruff.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/rockruff/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lycanroc.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lycanroc/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lycanroc_dusk.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lycanroc/dusk/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lycanroc_midnight.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lycanroc/midnight/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/wishiwashi.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/wishiwashi/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mareanie.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mareanie/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/toxapex.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/toxapex/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mudbray.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mudbray/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mudsdale.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mudsdale/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dewpider.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dewpider/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/araquanid.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/araquanid/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/fomantis.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/fomantis/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lurantis.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lurantis/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/morelull.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/morelull/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/shiinotic.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/shiinotic/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/salandit.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/salandit/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/salazzle.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/salazzle/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/stufful.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/stufful/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/bewear.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/bewear/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/bounsweet.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/bounsweet/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/steenee.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/steenee/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/tsareena.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/tsareena/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/comfey.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/comfey/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/oranguru.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/oranguru/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/passimian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/passimian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/wimpod.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/wimpod/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/golisopod.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/golisopod/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sandygast.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sandygast/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/palossand.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/palossand/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pyukumuku.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pyukumuku/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/typenull.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/typenull/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/silvally.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/silvally/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/minior.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/minior/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/komala.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/komala/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/turtonator.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/turtonator/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/togedemaru.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/togedemaru/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mimikyu.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mimikyu/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/bruxish.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/bruxish/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/drampa.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/drampa/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dhelmise.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dhelmise/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/jangmo-o.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/jangmo_o.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/hakamo-o.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/hakamo_o.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/kommo-o.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/kommo_o.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/tapukoko.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/tapu_koko/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/tapulele.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/tapu_lele/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/tapubulu.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/tapu_bulu/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/tapufini.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/tapu_fini/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cosmog.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cosmog/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cosmoem.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cosmoem/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/solgaleo.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/solgaleo/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lunala.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lunala/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/nihilego.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/nihilego/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/buzzwole.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/buzzwole/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pheromosa.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pheromosa/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/xurkitree.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/xurkitree/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/celesteela.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/celesteela/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/kartana.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/kartana/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/guzzlord.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/guzzlord/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/necrozma.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/necrozma/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/necrozma_dawn_wings.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/necrozma/dawn_wings/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/necrozma_dusk_mane.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/necrozma/dusk_mane/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/magearna.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/magearna/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/marshadow.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/marshadow/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/poipole.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/poipole/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/naganadel.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/naganadel/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/stakataka.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/stakataka/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/blacephalon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/blacephalon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/zeraora.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/zeraora/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/meltan.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/meltan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/melmetal.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/melmetal/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/grookey.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/grookey/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/thwackey.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/thwackey/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/rillaboom.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/rillaboom/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/scorbunny.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/scorbunny/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/raboot.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/raboot/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cinderace.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cinderace/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sobble.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sobble/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/drizzile.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/drizzile/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/inteleon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/inteleon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/skwovet.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/skwovet/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/greedent.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/greedent/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/rookidee.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/rookidee/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/corvisquire.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/corvisquire/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/corviknight.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/corviknight/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/blipbug.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/blipbug/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dottler.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dottler/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/orbeetle.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/orbeetle/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/nickit.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/nickit/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/thievul.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/thievul/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gossifleur.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gossifleur/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/eldegoss.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/eldegoss/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/wooloo.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/wooloo/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dubwool.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dubwool/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/chewtle.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/chewtle/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/drednaw.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/drednaw/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/yamper.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/yamper/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/boltund.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/boltund/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/rolycoly.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/rolycoly/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/carkol.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/carkol/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/coalossal.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/coalossal/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/applin.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/applin/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/flapple.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/flapple/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/appletun.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/appletun/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/silicobra.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/silicobra/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sandaconda.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sandaconda/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cramorant.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cramorant/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/arrokuda.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arrokuda/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/barraskewda.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/barraskewda/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/toxel.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/toxel/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/toxtricity.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/toxtricity/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/toxtricity_lowkey.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/toxtricity/low_key/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sizzlipede.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sizzlipede/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/centiskorch.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/centiskorch/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/clobbopus.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/clobbopus/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/grapploct.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/grapploct/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sinistea.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sinistea/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/polteageist.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/polteageist/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/hatenna.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/hatenna/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/hattrem.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/hattrem/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/hatterene.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/hatterene/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/impidimp.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/impidimp/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/morgrem.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/morgrem/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/grimmsnarl.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/grimmsnarl/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/obstagoon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/obstagoon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/perrserker.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/perrserker/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cursola.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cursola/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sirfetchd.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sirfetchd/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mr_rime.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mr_rime/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/runerigus.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/runerigus/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/milcery.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/milcery/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/alcremie.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/alcremie/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/falinks.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/falinks/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/pincurchin.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pincurchin/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/snom.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/snom/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/frosmoth.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/frosmoth/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/stonjourner.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/stonjourner/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/eiscue.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/eiscue/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/indeedee.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/indeedee/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/morpeko.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/morpeko/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/cufant.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/cufant/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/copperajah.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/copperajah/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dracozolt.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dracozolt/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/arctozolt.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arctozolt/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dracovish.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dracovish/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/arctovish.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arctovish/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/duraludon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/duraludon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dreepy.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dreepy/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/drakloak.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/drakloak/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dragapult.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dragapult/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/zacian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/zacian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/zacian_crowned.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/zacian/crowned_sword/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/zamazenta.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/zamazenta/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/zamazenta_crowned.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/zamazenta/crowned_shield/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/eternatus.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/eternatus/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/kubfu.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/kubfu/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/urshifu.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/urshifu/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/zarude.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/zarude/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/regieleki.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/regieleki/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/regidrago.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/regidrago/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/glastrier.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/glastrier/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/spectrier.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/spectrier/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/calyrex.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/calyrex/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/calyrex_shadow_rider.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/calyrex_shadow_rider/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/calyrex_ice_rider.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/calyrex_ice_rider/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/zapdos_galarian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/zapdos/galarian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/meowth_galarian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/meowth/galarian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/ponyta_galarian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ponyta/galarian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/rapidash_galarian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/rapidash/galarian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/slowpoke_galarian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/slowpoke/galarian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/slowbro_galarian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/slowbro/galarian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/farfetchd_galarian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/farfetchd/galarian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/weezing_galarian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/weezing/galarian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/mr_mime_galarian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/mr_mime/galarian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/articuno_galarian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/articuno/galarian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/moltres_galarian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/moltres/galarian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/slowking_galarian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/slowking/galarian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/corsola_galarian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/corsola/galarian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/zigzagoon_galarian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/zigzagoon/galarian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/linoone_galarian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/linoone/galarian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/darumaka_galarian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/darumaka/galarian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/darmanitan_galarian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/darmanitan/galarian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/yamask_galarian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/yamask/galarian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/stunfisk_galarian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/stunfisk/galarian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/growlithe_hisuian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/growlithe/hisuian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/arcanine_hisuian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arcanine/hisuian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/voltorb_hisuian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/voltorb/hisuian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/electrode_hisuian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/electrode/hisuian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/braviary_hisuian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/braviary/hisuian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/qwilfish_hisuian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/qwilfish/hisuian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sneasel_hisuian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sneasel/hisuian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/zorua_hisuian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/zorua/hisuian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/zoroark_hisuian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/zoroark/hisuian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/samurott_hisuian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/samurott/hisuian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/lilligant_hisuian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/lilligant/hisuian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sliggoo_hisuian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sliggoo/hisuian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/goodra_hisuian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/goodra/hisuian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/avalugg_hisuian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/avalugg/hisuian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/decidueye_hisuian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/decidueye/hisuian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/typhlosion_hisuian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/typhlosion/hisuian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/dialga_origin.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dialga/origin/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/palkia_origin.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/palkia/origin/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/wyrdeer.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/wyrdeer/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/kleavor.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/kleavor/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/basculin_hisuian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/basculin/white_striped/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/basculegion.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/basculegion/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/basculegion_female.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/basculegion/female/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/ursaluna.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ursaluna/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sneasler.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sneasler/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/overqwil.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/overqwil/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/enamorus.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/enamorus/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/enamorus_therian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/enamorus/therian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/pichu_spiky_eared.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/pichu/spiky_eared/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/deoxys_attack.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/deoxys/attack/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/deoxys_defense.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/deoxys/defense/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/deoxys_speed.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/deoxys/speed/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/burmy_sandy_cloak.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/burmy/sandy_cloak/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/burmy_trash_cloak.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/burmy/trash_cloak/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/wormadam_sandy_cloak.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/wormadam/sandy_cloak/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/wormadam_trash_cloak.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/wormadam/trash_cloak/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/shellos_east_sea.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/shellos/east_sea/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/gastrodon_east_sea.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/gastrodon/east_sea/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/rotom_heat.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/rotom/heat/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/rotom_wash.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/rotom/wash/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/rotom_frost.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/rotom/frost/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/rotom_fan.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/rotom/fan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/rotom_mow.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/rotom/mow/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/giratina_origin.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/giratina/origin/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/arceus_fighting.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arceus/fighting/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/arceus_flying.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arceus/flying/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/arceus_poison.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arceus/poison/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/arceus_ground.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arceus/ground/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/arceus_rock.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arceus/rock/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/arceus_bug.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arceus/bug/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/arceus_ghost.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arceus/ghost/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/arceus_steel.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arceus/steel/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/arceus_fire.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arceus/fire/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/arceus_water.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arceus/water/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/arceus_grass.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arceus/grass/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/arceus_electric.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arceus/electric/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/arceus_psychic.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arceus/psychic/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/arceus_ice.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arceus/ice/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/arceus_dragon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arceus/dragon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/arceus_dark.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arceus/dark/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/arceus_fairy.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/arceus/fairy/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/basculin_blue_striped.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/basculin/blue_striped/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/deerling_autumn.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/deerling/autumn/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/deerling_summer.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/deerling/summer/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/deerling_winter.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/deerling/winter/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sawsbuck_autumn.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sawsbuck/autumn/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sawsbuck_summer.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sawsbuck/summer/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/sawsbuck_winter.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sawsbuck/winter/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/meloetta_pirouette.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/meloetta/pirouette/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vivillon_polar.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vivillon/polar/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vivillon_tundra.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vivillon/tundra/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vivillon_continental.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vivillon/continental/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vivillon_garden.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vivillon/garden/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vivillon_elegant.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vivillon/elegant/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vivillon_modern.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vivillon/modern/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vivillon_marine.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vivillon/marine/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vivillon_archipelago.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vivillon/archipelago/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vivillon_high_plains.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vivillon/high_plains/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vivillon_sandstorm.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vivillon/sandstorm/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vivillon_river.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vivillon/river/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vivillon_monsoon.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vivillon/monsoon/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vivillon_savanna.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vivillon/savanna/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vivillon_sun.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vivillon/sun/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vivillon_ocean.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vivillon/ocean/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vivillon_jungle.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vivillon/jungle/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vivillon_fancy.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vivillon/fancy/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vivillon_poke_ball.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vivillon/poke_ball/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/vivillon_meadow.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vivillon/meadow/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/flabebe_yellow_flower.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/flabebe/yellow_flower/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/flabebe_blue_flower.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/flabebe/blue_flower/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/flabebe_orange_flower.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/flabebe/orange_flower/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/flabebe_white_flower.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/flabebe/white_flower/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/floette_yellow_flower.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/floette/yellow_flower/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/floette_blue_flower.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/floette/blue_flower/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/floette_orange_flower.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/floette/orange_flower/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/floette_white_flower.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/floette/white_flower/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/floette_eternal_flower.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/floette/eternal_flower/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/florges_yellow_flower.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/florges/yellow_flower/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/florges_blue_flower.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/florges/blue_flower/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/florges_orange_flower.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/florges/orange_flower/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/florges_white_flower.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/florges/white_flower/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/furfrou_heart_trim.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/furfrou/heart_trim/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/furfrou_star_trim.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/furfrou/star_trim/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/furfrou_diamond_trim.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/furfrou/diamond_trim/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/furfrou_debutante_trim.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/furfrou/debutante_trim/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/furfrou_matron_trim.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/furfrou/matron_trim/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/furfrou_dandy_trim.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/furfrou/dandy_trim/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/furfrou_la_reine_trim.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/furfrou/la_reine_trim/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/furfrou_kabuki_trim.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/furfrou/kabuki_trim/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/furfrou_pharaoh_trim.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/furfrou/pharaoh_trim/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/hoopa_unbound.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/hoopa/unbound/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/alolan_rattata.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/rattata/alolan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/alolan_raticate.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/raticate/alolan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/alolan_raichu.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/raichu/alolan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/alolan_sandshrew.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sandshrew/alolan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/alolan_sandslash.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/sandslash/alolan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/alolan_vulpix.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/vulpix/alolan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/alolan_ninetales.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/ninetales/alolan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/alolan_diglett.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/diglett/alolan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/alolan_dugtrio.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/dugtrio/alolan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/alolan_meowth.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/meowth/alolan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/alolan_persian.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/persian/alolan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/alolan_geodude.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/geodude/alolan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/alolan_graveler.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/graveler/alolan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/alolan_golem.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/golem/alolan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/alolan_grimer.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/grimer/alolan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/alolan_muk.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/muk/alolan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/alolan_exeggutor.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/exeggutor/alolan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
-$(OBJEVENTGFXDIR)/pokemon/alolan_marowak.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/marowak/alolan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
 $(MISCGFXDIR)/emotes.4bpp: %.4bpp: %.png

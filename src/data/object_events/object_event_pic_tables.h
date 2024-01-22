@@ -2452,7 +2452,7 @@ static const struct SpriteFrameImage sPicTable_combee[] = {
     overworld_ascending_frames(gObjectEventPic_Combee, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_combee_f[] = {
-    overworld_ascending_frames(gObjectEventPic_Combee_f, 4, 4),
+    overworld_ascending_frames(gObjectEventPic_CombeeF, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_vespiquen[] = {
     overworld_ascending_frames(gObjectEventPic_Vespiquen, 4, 4),
