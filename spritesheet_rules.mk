@@ -1409,10 +1409,10 @@ $(OBJEVENTGFXDIR)/pokemon/unown/y/follower.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/pokemon/unown/z/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown/exclamation/follower.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/exclamation_mark/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/unown/question/follower.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/unown/question_mark/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
 $(OBJEVENTGFXDIR)/pokemon/wobbuffet/follower.4bpp: %.4bpp: %.png
@@ -3140,7 +3140,7 @@ $(OBJEVENTGFXDIR)/pokemon/palossand/follower.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/pokemon/pyukumuku/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/typenull/follower.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/type_null/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
 $(OBJEVENTGFXDIR)/pokemon/silvally/follower.4bpp: %.4bpp: %.png
