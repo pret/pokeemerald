@@ -182,7 +182,8 @@ void SaveObjectEvents(void)
 {
     int i;
 
-    for (i = 0; i < OBJECT_EVENTS_COUNT; i++) {
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
         gSaveBlock1Ptr->objectEvents[i] = gObjectEvents[i];
         // To avoid crash on vanilla, save follower as inactive
         if (gObjectEvents[i].localId == OBJ_EVENT_ID_FOLLOWER) 
@@ -194,12 +195,11 @@ void LoadObjectEvents(void)
 {
     int i;
 
-    for (i = 0; i < OBJECT_EVENTS_COUNT; i++) {
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
         gObjectEvents[i] = gSaveBlock1Ptr->objectEvents[i];
         // Try to restore saved inactive follower
-        if (gObjectEvents[i].localId == OBJ_EVENT_ID_FOLLOWER &&
-            !gObjectEvents[i].active &&
-            gObjectEvents[i].extra.asU16)
+        if (gObjectEvents[i].localId == OBJ_EVENT_ID_FOLLOWER && !gObjectEvents[i].active && gObjectEvents[i].extra.asU16)
             gObjectEvents[i].active = TRUE;
     }
 }
