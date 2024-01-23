@@ -989,7 +989,23 @@
 #define ITEM_METAL_ALLOY 814
 #define ITEM_STELLAR_TERA_SHARD 815
 
-#define ITEMS_COUNT 816
+#define ITEM_JUBILIFE_MUFFIN 816
+#define ITEM_REMEDY 817
+#define ITEM_FINE_REMEDY 818
+#define ITEM_SUPERB_REMEDY 819
+#define ITEM_AUX_EVASION 820
+#define ITEM_AUX_GUARD 821
+#define ITEM_AUX_POWER 822
+#define ITEM_AUX_POWERGUARD 823
+#define ITEM_CHOICE_DUMPLING 824
+#define ITEM_SWAP_SNACK 825
+#define ITEM_TWICE_SPICED_RADISH 826
+#define ITEM_POKESHI_DOLL 827
+
+// HOPO BERRY
+// LEGEND PLATE
+
+#define ITEMS_COUNT 828
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations
