@@ -157,6 +157,8 @@ AI_SINGLE_BATTLE_TEST("AI can choose Counter or Mirror Coat if the predicted mov
     GIVEN {
         ASSUME(gBattleMoves[MOVE_COUNTER].effect == EFFECT_COUNTER);
         ASSUME(gBattleMoves[MOVE_MIRROR_COAT].effect == EFFECT_MIRROR_COAT);
+        ASSUME(gBattleMoves[MOVE_STRENGTH].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gBattleMoves[MOVE_POWER_GEM].category == BATTLE_CATEGORY_SPECIAL);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
         OPPONENT(SPECIES_WOBBUFFET) { HP(102); Speed(100); Moves(opponentMove, MOVE_STRENGTH); }

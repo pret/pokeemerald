@@ -313,6 +313,7 @@ DOUBLE_BATTLE_TEST("Damage calculation: Combined pledge move")
     PARAMETRIZE { expectedDamage = 136; }
     PARAMETRIZE { expectedDamage = 135; }
     GIVEN {
+        ASSUME(gBattleMoves[MOVE_GRASS_PLEDGE].category == BATTLE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
         PLAYER(SPECIES_WOBBUFFET) { HP(521); SpDefense(152); Speed(3); }
         OPPONENT(SPECIES_CHARIZARD) { Speed(8); }

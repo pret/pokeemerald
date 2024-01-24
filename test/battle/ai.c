@@ -110,6 +110,15 @@ AI_SINGLE_BATTLE_TEST("AI prefers moves with better accuracy, but only if they b
         ASSUME(gBattleMoves[MOVE_SHOCK_WAVE].accuracy == 0);
         ASSUME(gBattleMoves[MOVE_THUNDERBOLT].accuracy == 100);
         ASSUME(gBattleMoves[MOVE_ICY_WIND].accuracy != 100);
+        ASSUME(gBattleMoves[MOVE_SLAM].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gBattleMoves[MOVE_STRENGTH].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gBattleMoves[MOVE_TACKLE].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gBattleMoves[MOVE_MEGA_KICK].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gBattleMoves[MOVE_SWIFT].category == BATTLE_CATEGORY_SPECIAL);
+        ASSUME(gBattleMoves[MOVE_SHOCK_WAVE].category == BATTLE_CATEGORY_SPECIAL);
+        ASSUME(gBattleMoves[MOVE_ICY_WIND].category == BATTLE_CATEGORY_SPECIAL);
+        ASSUME(gBattleMoves[MOVE_THUNDERBOLT].category == BATTLE_CATEGORY_SPECIAL);
+        ASSUME(gBattleMoves[MOVE_GUST].category == BATTLE_CATEGORY_SPECIAL);
         OPPONENT(SPECIES_EXPLOUD) { Moves(move1, move2, move3, move4); Ability(abilityAtk); SpAttack(50); } // Low Sp.Atk, so Swift deals less damage than Strength.
     } WHEN {
             switch (turns)
@@ -157,6 +166,10 @@ AI_SINGLE_BATTLE_TEST("AI prefers moves which deal more damage instead of moves 
     PARAMETRIZE { move1 = MOVE_POISON_JAB; move2 = MOVE_WATER_GUN; expectedMove = MOVE_POISON_JAB; abilityDef = ABILITY_IMMUNITY; turns = 3; }
 
     GIVEN {
+        ASSUME(gBattleMoves[MOVE_WATERFALL].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gBattleMoves[MOVE_SCALD].category == BATTLE_CATEGORY_SPECIAL);
+        ASSUME(gBattleMoves[MOVE_POISON_JAB].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gBattleMoves[MOVE_WATER_GUN].category == BATTLE_CATEGORY_SPECIAL);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_TYPHLOSION) { Ability(abilityDef); }
         PLAYER(SPECIES_WOBBUFFET);
@@ -183,6 +196,8 @@ AI_SINGLE_BATTLE_TEST("AI prefers Earthquake over Drill Run if both require the 
 {
     // Drill Run has less accuracy than E-quake, but can score a higher crit. However the chance is too small, so AI should ignore it.
     GIVEN {
+        ASSUME(gBattleMoves[MOVE_EARTHQUAKE].category == BATTLE_CATEGORY_PHYSICAL); // Added because Geodude has to KO Typhlosion
+        ASSUME(gBattleMoves[MOVE_DRILL_RUN].category == BATTLE_CATEGORY_PHYSICAL);  // Added because Geodude has to KO Typhlosion
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_TYPHLOSION);
         PLAYER(SPECIES_WOBBUFFET);
@@ -207,6 +222,8 @@ AI_SINGLE_BATTLE_TEST("AI prefers a weaker move over a one with a downside effec
     PARAMETRIZE { move1 = MOVE_OVERHEAT; move2 = MOVE_FLAMETHROWER; hp = 250; expectedMove = MOVE_OVERHEAT; turns = 1; }
 
     GIVEN {
+        ASSUME(gBattleMoves[MOVE_FLAMETHROWER].category == BATTLE_CATEGORY_SPECIAL); // Added because Typhlosion has to KO Wobbuffet
+        ASSUME(gBattleMoves[MOVE_OVERHEAT].category == BATTLE_CATEGORY_SPECIAL);     // Added because Typhlosion has to KO Wobbuffet
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { HP(hp); }
         PLAYER(SPECIES_WOBBUFFET);
@@ -245,6 +262,8 @@ AI_SINGLE_BATTLE_TEST("AI prefers moves with the best possible score, chosen ran
 AI_SINGLE_BATTLE_TEST("AI can choose a status move that boosts the attack by two")
 {
     GIVEN {
+        ASSUME(gBattleMoves[MOVE_STRENGTH].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gBattleMoves[MOVE_HORN_ATTACK].category == BATTLE_CATEGORY_PHYSICAL);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { HP(277); };
         PLAYER(SPECIES_WOBBUFFET);
@@ -308,6 +327,8 @@ AI_SINGLE_BATTLE_TEST("AI won't use Solar Beam if there is no Sun up or the user
     PARAMETRIZE { }
 
     GIVEN {
+        ASSUME(gBattleMoves[MOVE_SOLAR_BEAM].category == BATTLE_CATEGORY_SPECIAL);
+        ASSUME(gBattleMoves[MOVE_GRASS_PLEDGE].category == BATTLE_CATEGORY_SPECIAL);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { HP(211); }
         PLAYER(SPECIES_WOBBUFFET);
@@ -331,14 +352,15 @@ AI_SINGLE_BATTLE_TEST("AI won't use Solar Beam if there is no Sun up or the user
 AI_SINGLE_BATTLE_TEST("AI won't use ground type attacks against flying type Pokemon unless Gravity is in effect")
 {
     GIVEN {
+        ASSUME(gBattleMoves[MOVE_EARTHQUAKE].category == BATTLE_CATEGORY_PHYSICAL); // Otherwise, it doesn't KO Crobat
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_CROBAT);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_NIDOQUEEN) { Moves(MOVE_EARTHQUAKE, MOVE_TACKLE, MOVE_POISON_STING, MOVE_GUST); }
     } WHEN {
-            TURN { NOT_EXPECT_MOVE(opponent, MOVE_EARTHQUAKE); }
-            TURN { MOVE(player, MOVE_GRAVITY); NOT_EXPECT_MOVE(opponent, MOVE_EARTHQUAKE); }
-            TURN { EXPECT_MOVE(opponent, MOVE_EARTHQUAKE); SEND_OUT(player, 1); }
+        TURN { NOT_EXPECT_MOVE(opponent, MOVE_EARTHQUAKE); }
+        TURN { MOVE(player, MOVE_GRAVITY); NOT_EXPECT_MOVE(opponent, MOVE_EARTHQUAKE); }
+        TURN { EXPECT_MOVE(opponent, MOVE_EARTHQUAKE); SEND_OUT(player, 1); }
     } SCENE {
         MESSAGE("Gravity intensified!");
     }
@@ -492,6 +514,11 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: AI will not switch in a Pokemo
     PARAMETRIZE{ speedAlakazm = 400; alakazamFirst = TRUE; aiSmartSwitchFlags = AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES; } // AI_FLAG_SMART_MON_CHOICES recognizes that Alakazam is faster and can KO, and will switch it in
 
     GIVEN {
+        ASSUME(gBattleMoves[MOVE_PSYCHIC].category == BATTLE_CATEGORY_SPECIAL);
+        ASSUME(gBattleMoves[MOVE_FOCUS_BLAST].category == BATTLE_CATEGORY_SPECIAL);
+        ASSUME(gBattleMoves[MOVE_BUBBLE_BEAM].category == BATTLE_CATEGORY_SPECIAL);
+        ASSUME(gBattleMoves[MOVE_WATER_GUN].category == BATTLE_CATEGORY_SPECIAL);
+        ASSUME(gBattleMoves[MOVE_STRENGTH].category == BATTLE_CATEGORY_PHYSICAL);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | aiSmartSwitchFlags);
         PLAYER(SPECIES_WEAVILE) { Speed(300); Ability(ABILITY_SHADOW_TAG); } // Weavile has Shadow Tag, so AI can't switch on the first turn, but has to do it after fainting.
         OPPONENT(SPECIES_KADABRA) { Speed(200); Moves(MOVE_PSYCHIC, MOVE_DISABLE, MOVE_TAUNT, MOVE_CALM_MIND); }
@@ -523,32 +550,6 @@ AI_SINGLE_BATTLE_TEST("AI switches if Perish Song is about to kill")
             TURN { EXPECT_SWITCH(opponent, 1); }
     } SCENE {
         MESSAGE("{PKMN} TRAINER LEAF sent out Crobat!");
-    }
-}
-
-AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: AI will not switch in a Pokemon which is slower and gets 1HKOed after fainting")
-{
-    bool32 alakazamFaster;
-    u32 speedAlakazm;
-
-    PARAMETRIZE{ speedAlakazm = 200; alakazamFaster = FALSE; }
-    PARAMETRIZE{ speedAlakazm = 400; alakazamFaster = TRUE; }
-
-    GIVEN {
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_MON_CHOICES);
-        PLAYER(SPECIES_WEAVILE) { Speed(300); Ability(ABILITY_SHADOW_TAG); } // Weavile has Shadow Tag, so AI can't switch on the first turn, but has to do it after fainting.
-        OPPONENT(SPECIES_KADABRA) { Speed(200); Moves(MOVE_PSYCHIC, MOVE_DISABLE, MOVE_TAUNT, MOVE_CALM_MIND); }
-        OPPONENT(SPECIES_ALAKAZAM) { Speed(speedAlakazm); Moves(MOVE_FOCUS_BLAST, MOVE_PSYCHIC); } // Alakazam has a move which OHKOes Weavile, but it doesn't matter if he's getting KO-ed first.
-        OPPONENT(SPECIES_BLASTOISE) { Speed(200); Moves(MOVE_BUBBLE_BEAM, MOVE_WATER_GUN, MOVE_LEER, MOVE_STRENGTH); } // Can't OHKO, but survives a hit from Weavile's Night Slash.
-    } WHEN {
-            TURN { MOVE(player, MOVE_NIGHT_SLASH) ; EXPECT_SEND_OUT(opponent, alakazamFaster ? 1 : 2); }
-    } SCENE {
-        MESSAGE("Foe Kadabra fainted!");
-        if (alakazamFaster) {
-            MESSAGE("{PKMN} TRAINER LEAF sent out Alakazam!");
-        } else {
-            MESSAGE("{PKMN} TRAINER LEAF sent out Blastoise!");
-        }
     }
 }
 
@@ -643,20 +644,24 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will not switch out if Pokemo
     PARAMETRIZE{move1 = MOVE_RAPID_SPIN; }
 
     GIVEN {
+        ASSUME(gBattleMoves[MOVE_TACKLE].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gBattleMoves[MOVE_RAPID_SPIN].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gBattleMoves[MOVE_EARTHQUAKE].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gBattleMoves[MOVE_HEADBUTT].category == BATTLE_CATEGORY_PHYSICAL);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING);
         PLAYER(SPECIES_HITMONTOP) { Level(30); Moves(MOVE_CHARM, MOVE_TACKLE, MOVE_STEALTH_ROCK, MOVE_EARTHQUAKE); Ability(ABILITY_INTIMIDATE); Speed(5); }
         OPPONENT(SPECIES_GRIMER) { Level(30); Moves(MOVE_TACKLE); Item(ITEM_FOCUS_SASH); Speed(4); }
         OPPONENT(SPECIES_PONYTA) { Level(30); Moves(MOVE_HEADBUTT, move1); Speed(4); }
     } WHEN {
-            TURN { MOVE(player, MOVE_STEALTH_ROCK) ;}
-            TURN { MOVE(player, MOVE_EARTHQUAKE) ;}
-            TURN { MOVE(player, MOVE_CHARM) ;}
-            TURN { // If the AI has a mon that can remove hazards, don't prevent them switching out
-                MOVE(player, MOVE_CHARM);
-                if (move1 == MOVE_RAPID_SPIN)
-                    EXPECT_SWITCH(opponent, 1);
-                else if (move1 == MOVE_TACKLE)
-                    EXPECT_MOVE(opponent, MOVE_TACKLE);
-            }
+        TURN { MOVE(player, MOVE_STEALTH_ROCK) ;}
+        TURN { MOVE(player, MOVE_EARTHQUAKE) ;}
+        TURN { MOVE(player, MOVE_CHARM) ;}
+        TURN { // If the AI has a mon that can remove hazards, don't prevent them switching out
+            MOVE(player, MOVE_CHARM);
+            if (move1 == MOVE_RAPID_SPIN)
+                EXPECT_SWITCH(opponent, 1);
+            else if (move1 == MOVE_TACKLE)
+                EXPECT_MOVE(opponent, MOVE_TACKLE);
+        }
     }
 }
