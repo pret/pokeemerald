@@ -229,6 +229,7 @@ const u8 gOgerponCornerstoneMaskPokedexText[] = _(
 // Set .compressed = OW_GFX_COMPRESS
 #define COMP OW_GFX_COMPRESS
 
+#if P_FOLLOWERS
 #define FOLLOWER(name, _size, shadow, _tracks)                                              \
 .followerData = {                                                                           \
     .tileTag = TAG_NONE,                                                                    \
@@ -248,6 +249,9 @@ const u8 gOgerponCornerstoneMaskPokedexText[] = _(
     .images = sPicTable_##name,                                                             \
     .affineAnims = gDummySpriteAffineAnimTable,                                             \
 },
+#else
+#define FOLLOWER(name, _size, shadow, _tracks)
+#endif
 
 // Maximum value for a female Pokémon is 254 (MON_FEMALE) which is 100% female.
 // 255 (MON_GENDERLESS) is reserved for genderless Pokémon.
@@ -284,6 +288,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backAnimId = BACK_ANIM_NONE,
         PALETTES(CircledQuestionMark),
         ICON(QuestionMark, 0),
+        .followerData = {TAG_NONE, OBJ_EVENT_PAL_TAG_DYNAMIC, OBJ_EVENT_PAL_TAG_NONE, 512, 32, 32, 2, SHADOW_SIZE_M, FALSE, COMP, TRACKS_FOOT, &gObjectEventBaseOam_32x32, sOamTables_32x32, sAnimTable_Following, sPicTable_None, gDummySpriteAffineAnimTable},
         LEARNSETS(None),
     },
 

@@ -12,6 +12,9 @@ const u8 gMonIcon_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/ico
 #if P_FOOTPRINTS
 const u8 gMonFootprint_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/footprint.1bpp");
 #endif //P_FOOTPRINTS
+//#if P_FOLLOWERS
+    const u32 gObjectEventPic_None[] = INCBIN_COMP("graphics/pokemon/porygon/follower.4bpp");
+//#endif //P_FOLLOWERS
 
 #if P_FAMILY_BULBASAUR
     const u32 gMonFrontPic_Bulbasaur[] = INCBIN_U32("graphics/pokemon/bulbasaur/anim_front.4bpp.lz");

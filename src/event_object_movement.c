@@ -1781,14 +1781,14 @@ static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species,
     if (OW_GFX_COMPRESS)
     {
         if (graphicsInfo->tileTag == 0 && species < NUM_SPECIES)
-            return &gSpeciesInfo[SPECIES_PORYGON].followerData;
+            return &gSpeciesInfo[SPECIES_NONE].followerData;
         else if (graphicsInfo->tileTag != TAG_NONE && species >= NUM_SPECIES)
-            return &gSpeciesInfo[SPECIES_PORYGON].followerData;
+            return &gSpeciesInfo[SPECIES_NONE].followerData;
         else
             return graphicsInfo;
     }
     else
-        return graphicsInfo->tileTag == TAG_NONE ? graphicsInfo : &gSpeciesInfo[SPECIES_PORYGON].followerData;
+        return graphicsInfo->tileTag == TAG_NONE ? graphicsInfo : &gSpeciesInfo[SPECIES_NONE].followerData;
 }
 
 // Find, or load, the palette for the specified pokemon info
