@@ -783,6 +783,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         ICON(Kricketot, 2),
         FOOTPRINT(Kricketot)
         LEARNSETS(Kricketot),
+        .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL, 10, SPECIES_KRICKETUNE}),
     },
 
@@ -1222,6 +1223,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .backAnimId = BACK_ANIM_H_SHAKE,                                    \
         FOOTPRINT(Burmy)                                                    \
         LEARNSETS(Burmy),                                                   \
+        .tmIlliterate = TRUE,                                               \
         .formSpeciesIdTable = sBurmyFormSpeciesIdTable,                     \
         .formChangeTable = sBurmyFormChangeTable
 
@@ -1484,6 +1486,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         ICON(Combee, 0),
         FOOTPRINT(Combee)
         LEARNSETS(Combee),
+        .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL_FEMALE, 21, SPECIES_VESPIQUEN}),
     },
 

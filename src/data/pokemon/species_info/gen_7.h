@@ -3666,6 +3666,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         ICON(Cosmog, 2),
         FOOTPRINT(Cosmog)
         LEARNSETS(Cosmog),
+        .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL, 43, SPECIES_COSMOEM}),
     },
 
@@ -3717,6 +3718,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         ICON(Cosmoem, 0),
         FOOTPRINT(Cosmoem)
         LEARNSETS(Cosmoem),
+        .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL_DAY, 53, SPECIES_SOLGALEO},
                                 {EVO_LEVEL_NIGHT, 53, SPECIES_LUNALA}),
     },

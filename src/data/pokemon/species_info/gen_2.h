@@ -2624,6 +2624,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         ICON(Unown ##letter, 0),                                        \
         FOOTPRINT(Unown)                                                \
         LEARNSETS(Unown),                                               \
+        .tmIlliterate = TRUE,                                           \
         .formSpeciesIdTable = sUnownFormSpeciesIdTable
 
     [SPECIES_UNOWN] =
@@ -2917,6 +2918,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         ICON(Wynaut, 0),
         FOOTPRINT(Wynaut)
         LEARNSETS(Wynaut),
+        .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL, 15, SPECIES_WOBBUFFET}),
     },
 #endif //P_GEN_3_CROSS_EVOS
@@ -2971,6 +2973,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
     #endif
         FOOTPRINT(Wobbuffet)
         LEARNSETS(Wobbuffet),
+        .tmIlliterate = TRUE,
     },
 #endif //P_FAMILY_WOBBUFFET
 
@@ -5267,6 +5270,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         ICON(Smeargle, 1),
         FOOTPRINT(Smeargle)
         LEARNSETS(Smeargle),
+        .tmIlliterate = TRUE,
     },
 #endif //P_FAMILY_SMEARGLE
 

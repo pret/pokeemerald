@@ -953,6 +953,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         ICON(Wurmple, 0),
         FOOTPRINT(Wurmple)
         LEARNSETS(Wurmple),
+        .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL_SILCOON, 7, SPECIES_SILCOON},
                                 {EVO_LEVEL_CASCOON, 7, SPECIES_CASCOON}),
     },
@@ -1002,6 +1003,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         ICON(Silcoon, 2),
         FOOTPRINT(Silcoon)
         LEARNSETS(Silcoon),
+        .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL, 10, SPECIES_BEAUTIFLY}),
     },
 
@@ -1115,6 +1117,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         ICON(Cascoon, 2),
         FOOTPRINT(Cascoon)
         LEARNSETS(Cascoon),
+        .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL, 10, SPECIES_DUSTOX}),
     },
 
@@ -7529,6 +7532,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         ICON(Beldum, 0),
         FOOTPRINT(Beldum)
         LEARNSETS(Beldum),
+        .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_METANG}),
     },
 
