@@ -1083,7 +1083,7 @@ static const union AnimCmd *const sAnimTable_Standard[] = {
     [ANIM_STD_GO_FASTEST_EAST] = sAnim_GoFastestEast,
 };
 
-static const union AnimCmd *const sAnimTable_Following[] = {
+const union AnimCmd *const sAnimTable_Following[] = {
     sAnim_FaceSouth,
     sAnim_FaceNorth2F,
     sAnim_FaceWest2F,

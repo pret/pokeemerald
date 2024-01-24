@@ -4687,6 +4687,6 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Follower = {
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Following,
-    .images = sPicTable_Togetic,
+    .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
 };

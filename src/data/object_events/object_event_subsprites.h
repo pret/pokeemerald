@@ -272,7 +272,7 @@ static const struct Subsprite sOamTable_32x32_4[] = {
     }
 };
 
-static const struct SubspriteTable sOamTables_32x32[] = {
+const struct SubspriteTable sOamTables_32x32[] = {
     {},
     {ARRAY_COUNT(sOamTable_32x32_0), sOamTable_32x32_0},
     {ARRAY_COUNT(sOamTable_32x32_1), sOamTable_32x32_1},
@@ -371,7 +371,7 @@ static const struct Subsprite sOamTable_64x64_3[] = {
     }
 };
 
-static const struct SubspriteTable sOamTables_64x64[] = {
+const struct SubspriteTable sOamTables_64x64[] = {
     {},
     {ARRAY_COUNT(sOamTable_64x64_0), sOamTable_64x64_0},
     {ARRAY_COUNT(sOamTable_64x64_1), sOamTable_64x64_1},

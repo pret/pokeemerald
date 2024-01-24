@@ -1290,7 +1290,7 @@ static const union AnimCmd *const sAnimTable_RayquazaSpotlightEffect[] = {
 };
 
 static const struct SpriteFrameImage sPicTable_RayquazaSpotlightEffect[] = {
-    overworld_frame(gObjectEventPic_Rayquaza, 4, 4, 0),
+    overworld_frame(gObjectEventPic_RayquazaCutscene, 4, 4, 0),
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_Rayquaza = {
