@@ -348,7 +348,6 @@ u32 RtcGetLocalDayCount(void)
 
 void FormatDecimalTimeWithoutSeconds(u8 *txtPtr, s8 hour, s8 minute, bool8 is24Hour)
 {
-    RtcCalcLocalTime();
     switch (is24Hour)
     {
     case TRUE:

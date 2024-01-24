@@ -4,6 +4,7 @@
 #include "blit.h"
 #include "dma3.h"
 #include "event_data.h"
+#include "field_weather.h"
 #include "graphics.h"
 #include "main.h"
 #include "map_name_popup.h"
@@ -2181,7 +2182,7 @@ void HBlankCB_DoublePopupWindow(void)
     if (scanline < 80 || scanline > 160)
     {
         REG_BG0VOFS = offset;
-        if(MAPPOPUP_ALPHA_BLEND)
+        if(MAPPOPUP_ALPHA_BLEND && !IsWeatherAlphaBlend())
             REG_BLDALPHA = BLDALPHA_BLEND(15, 5);
     }
     else

@@ -2,6 +2,7 @@
 #include "battle_pyramid.h"
 #include "bg.h"
 #include "event_data.h"
+#include "field_weather.h"
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "international_string_util.h"
@@ -201,7 +202,7 @@ void ShowMapNamePopup(void)
             // New pop up window
             gPopupTaskId = CreateTask(Task_MapNamePopUpWindow, 100);
 
-            if (MAPPOPUP_ALPHA_BLEND)
+            if (MAPPOPUP_ALPHA_BLEND && !IsWeatherAlphaBlend())
                 SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
 
             gTasks[gPopupTaskId].tState = STATE_PRINT;
@@ -297,7 +298,7 @@ void HideMapNamePopUpWindow(void)
         SetHBlankCallback(NULL);
         SetGpuReg_ForcedBlank(REG_OFFSET_BG0VOFS, 0);
 
-        if (MAPPOPUP_ALPHA_BLEND)
+        if (MAPPOPUP_ALPHA_BLEND && !IsWeatherAlphaBlend())
         {
             SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ);
             SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
@@ -320,7 +321,7 @@ static void ShowMapNamePopUpWindow(void)
     timeX = 5;
     timeY = 8;
 
-    if (MAPPOPUP_ALPHA_BLEND)
+    if (MAPPOPUP_ALPHA_BLEND && !IsWeatherAlphaBlend())
         SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR);
 
     primaryPopUpWindowId = AddPrimaryPopUpWindow();
@@ -351,9 +352,11 @@ static void ShowMapNamePopUpWindow(void)
     mapDisplayHeader[0] = EXT_CTRL_CODE_BEGIN;
     mapDisplayHeader[1] = EXT_CTRL_CODE_HIGHLIGHT;
     mapDisplayHeader[2] = TEXT_COLOR_TRANSPARENT;
-
     AddTextPrinterParameterized(primaryPopUpWindowId, FONT_SHORT, mapDisplayHeader, mapNameX, mapNameY, TEXT_SKIP_DRAW, NULL);
+    
+    RtcCalcLocalTime();
     FormatDecimalTimeWithoutSeconds(withoutPrefixPtr, gLocalTime.hours, gLocalTime.minutes, MAPPOPUP_24_HOUR_TIME);
+
     AddTextPrinterParameterized(secondaryPopUpWindowId, FONT_SMALL, mapDisplayHeader, GetStringRightAlignXOffset(FONT_SMALL, mapDisplayHeader, DISPLAY_WIDTH) - timeX, timeY, TEXT_SKIP_DRAW, NULL);
 
     CopyWindowToVram(primaryPopUpWindowId, COPYWIN_FULL);
