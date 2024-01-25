@@ -261,7 +261,6 @@ static void DestroySelector(void)
 // UI loader template
 void Task_OpenMenuFromStartMenu(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
@@ -314,7 +313,6 @@ static void Menu_VBlankCB(void)
 
 static bool8 Menu_DoGfxSetup(void)
 {
-    u8 taskId;
     switch (gMain.state)
     {
     case 0:
@@ -364,7 +362,7 @@ static bool8 Menu_DoGfxSetup(void)
         gMain.state++;
         break;
     case 6:
-        taskId = CreateTask(Task_MenuWaitFadeIn, 0);
+        CreateTask(Task_MenuWaitFadeIn, 0);
         BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
         gMain.state++;
         break;
@@ -464,15 +462,13 @@ static bool8 Menu_LoadGraphics(void)
 static void SampleUi_DrawMonIcon(u16 dexNum)
 {
     u16 speciesId = dexNum;
-    sMenuDataPtr->monIconSpriteId = CreateMonPicSprite_HandleDeoxys(speciesId, 0, 0x8000, TRUE, MON_ICON_X, MON_ICON_Y, 0, gMonPaletteTable[speciesId].tag);
+    sMenuDataPtr->monIconSpriteId = CreateMonPicSprite_Affine(speciesId, 0, 0x8000, TRUE, MON_ICON_X, MON_ICON_Y, 0, TAG_NONE);
 
     gSprites[sMenuDataPtr->monIconSpriteId].oam.priority = 0;
 }
 
 static void Menu_InitWindows(void)
 {
-    u32 i;
-
     InitWindows(sMenuWindowTemplates);
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
@@ -556,8 +552,6 @@ static const u8 sText_MenuIV[] = _("IV");
 static const u8 sText_MonLevel[]         = _("Lv.{CLEAR 1}{STR_VAR_1}");
 static void PrintMonStats()
 {
-    u8 x = 68;
-    u8 y = 6;
     u8 i;
     u16 currentStat;
     u16 nature;
@@ -627,7 +621,7 @@ static void PrintMonStats()
 
     // Print ability / nature / name / level / gender
 
-    StringCopy(gStringVar2, gSpeciesNames[sMenuDataPtr->speciesID]);
+    StringCopy(gStringVar2, GetSpeciesName(sMenuDataPtr->speciesID));
     AddTextPrinterParameterized4(WINDOW_3, FONT_NARROW, 4, 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
 
     ConvertIntToDecimalStringN(gStringVar1, level, STR_CONV_MODE_RIGHT_ALIGN, 3);
@@ -703,7 +697,7 @@ static void Task_MenuWaitFadeIn(u8 taskId)
 
 static void Task_MenuTurnOff(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    // s16 *data = gTasks[taskId].data;
 
     if (!gPaletteFade.active)
     {
