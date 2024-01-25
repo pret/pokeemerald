@@ -1261,6 +1261,7 @@ static bool32 InitSaveWindowAfterLinkBattle(u8 *state)
     case 0:
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0);
         SetVBlankCallback(NULL);
+        ScanlineEffect_Clear();
         ScanlineEffect_Stop();
         DmaClear16(3, PLTT, PLTT_SIZE);
         DmaFillLarge16(3, 0, (void *)VRAM, VRAM_SIZE, 0x1000);

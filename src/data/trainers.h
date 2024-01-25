@@ -5112,7 +5112,7 @@ const struct Trainer gTrainers[] = {
         .party = TRAINER_PARTY(sParty_Jocelyn),
     },
 
-    [TRAINER_LAURA] =
+    [TRAINER_RANDOM_BATTLE] =
     {
         .trainerClass = TRAINER_CLASS_BATTLE_GIRL,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE,
@@ -5121,7 +5121,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = TRAINER_PARTY(sParty_Laura),
+        .party = TRAINER_PARTY(sParty_RandomBattle),
     },
 
     [TRAINER_CYNDY_1] =

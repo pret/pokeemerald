@@ -38,6 +38,7 @@
 #include "pokedex.h"
 #include "trainer_pokemon_sprites.h"
 #include "field_effect.h"
+#include "field_screen_effect.h"
 
 /*
  * 
@@ -317,6 +318,8 @@ static bool8 Menu_DoGfxSetup(void)
     {
     case 0:
         DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000)
+        ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
+        ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN1_ON);
         SetVBlankHBlankCallbacksToNull();
         ClearScheduledBgCopiesToVram();
         gMain.state++;

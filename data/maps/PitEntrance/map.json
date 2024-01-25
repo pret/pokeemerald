@@ -1,0 +1,43 @@
+{
+  "id": "MAP_PIT_ENTRANCE",
+  "name": "PitEntrance",
+  "layout": "LAYOUT_PIT_ENTRANCE",
+  "music": "MUS_ABANDONED_SHIP",
+  "region_map_section": "MAPSEC_NONE",
+  "requires_flash": true,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+
+  ],
+  "warp_events": [
+
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 7,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "PitEntrance_Warp"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PitEntrance_EventScript_Sign"
+    }
+  ]
+}
