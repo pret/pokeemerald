@@ -94,7 +94,7 @@ const struct BardSound gBardSounds_Moves[MOVES_COUNT][6] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    [MOVE_VICE_GRIP] = {
+    [MOVE_VISE_GRIP] = {
         { .songLengthId = 20 },
         { .songLengthId = 17 },
         { .songLengthId = 51 },
@@ -1094,7 +1094,7 @@ const struct BardSound gBardSounds_Moves[MOVES_COUNT][6] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    [MOVE_HI_JUMP_KICK] = {
+    [MOVE_HIGH_JUMP_KICK] = {
         { .songLengthId = 18 },
         { .songLengthId = 44 },
         { .songLengthId = 17 },
@@ -1486,7 +1486,7 @@ const struct BardSound gBardSounds_Moves[MOVES_COUNT][6] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    [MOVE_FAINT_ATTACK] = {
+    [MOVE_FEINT_ATTACK] = {
         { .songLengthId =  3 },
         { .songLengthId = 42 },
         { .songLengthId =  0 },
@@ -2126,7 +2126,7 @@ const struct BardSound gBardSounds_Moves[MOVES_COUNT][6] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    [MOVE_SMELLING_SALT] = {
+    [MOVE_SMELLING_SALTS] = {
         { .songLengthId = 9 },
         { .songLengthId = 12 },
         { .songLengthId = 27 },

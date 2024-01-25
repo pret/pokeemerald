@@ -377,6 +377,9 @@ u16 LoadBgTiles(u8 bg, const void *src, u16 size, u16 destOffset)
     u16 tileOffset;
     u8 cursor;
 
+    if (bg > 3)
+        return -1;
+
     if (GetBgControlAttribute(bg, BG_CTRL_ATTR_PALETTEMODE) == 0)
     {
         tileOffset = (sGpuBgConfigs2[bg].baseTile + destOffset) * 0x20;
@@ -928,7 +931,7 @@ void CopyToBgTilemapBufferRect(u8 bg, const void *src, u8 destX, u8 destY, u8 wi
         }
         case BG_TYPE_AFFINE:
         {
-            const u8 * srcCopy = src;
+            const u8 *srcCopy = src;
             mode = GetBgMetricAffineMode(bg, 0x1);
             for (destY16 = destY; destY16 < (destY + height); destY16++)
             {

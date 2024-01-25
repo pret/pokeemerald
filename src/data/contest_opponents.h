@@ -964,7 +964,7 @@ const struct ContestPokemon gContestOpponents[] =
             MOVE_BITE,
             MOVE_SAND_ATTACK,
             MOVE_DIG,
-            MOVE_FAINT_ATTACK
+            MOVE_FEINT_ATTACK
         },
         .cool = 75,
         .beauty = 25,
@@ -1760,7 +1760,7 @@ const struct ContestPokemon gContestOpponents[] =
         .otId = CONTEST_AI_TRAINER_ID,
     },
     [CONTEST_OPPONENT_FELICIA] = {
-        .species = SPECIES_CASTFORM,
+        .species = SPECIES_CASTFORM_NORMAL,
         .nickname = _("CASTER"),
         .trainerName = _("FELICIA"),
         .trainerGfxId = OBJ_EVENT_GFX_LASS,
@@ -2195,7 +2195,7 @@ const struct ContestPokemon gContestOpponents[] =
         {
             MOVE_ROAR,
             MOVE_FLAMETHROWER,
-            MOVE_FAINT_ATTACK,
+            MOVE_FEINT_ATTACK,
             MOVE_SUNNY_DAY
         },
         .cool = 100,
@@ -2307,7 +2307,7 @@ const struct ContestPokemon gContestOpponents[] =
         {
             MOVE_ATTRACT,
             MOVE_ASSIST,
-            MOVE_FAINT_ATTACK,
+            MOVE_FEINT_ATTACK,
             MOVE_TAIL_WHIP
         },
         .cool = 40,
@@ -2446,7 +2446,7 @@ const struct ContestPokemon gContestOpponents[] =
         .moves =
         {
             MOVE_MEAN_LOOK,
-            MOVE_FAINT_ATTACK,
+            MOVE_FEINT_ATTACK,
             MOVE_KNOCK_OFF,
             MOVE_CONFUSE_RAY
         },

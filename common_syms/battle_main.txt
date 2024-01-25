@@ -2,8 +2,6 @@ gPreBattleCallback1
 gBattleMainFunc
 gBattleResults
 gLeveledUpInBattle
-gBattlerControllerFuncs
 gHealthboxSpriteIds
 gMultiUsePlayerCursor
 gNumberOfMovesToChoose
-gBattleControllerData
