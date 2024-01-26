@@ -8,27 +8,13 @@
     #define EVO_HELD_ITEM_FIELD_FUNC ItemUseOutOfBattle_CannotUse
 #endif
 
-#if I_GEM_BOOST_POWER >= GEN_6
-    #define GEM_BOOST_PARAM 30
-#else
-    #define GEM_BOOST_PARAM 50
-#endif
+#define GEM_BOOST_PARAM ((I_GEM_BOOST_POWER >= GEN_6) ? 30 : 50)
+#define TYPE_BOOST_PARAM ((I_TYPE_BOOST_POWER >= GEN_4) ? 20 : 10) // For non Pokémon-specific type-boosting held items.
+#define POWER_ITEM_BOOST ((I_POWER_ITEM_BOOST >= GEN_7) ? 8 : 4)
 
-#if I_TYPE_BOOST_POWER >= GEN_4 // For non Pokémon-specific type-boosting held items.
-    #define TYPE_BOOST_PARAM 20
-#else
-    #define TYPE_BOOST_PARAM 10
-#endif
+#define X_ITEM_STAGES ((B_X_ITEMS_BUFF >= GEN_7) ? 2 : 1)
 
-#if I_POWER_ITEM_BOOST >= GEN_7
-    #define POWER_ITEM_BOOST 8
-#else
-    #define POWER_ITEM_BOOST 4
-#endif
-
-#define X_ITEM_STAGES (B_X_ITEMS_BUFF >= GEN_7) ? 2 : 1
-
-#define TREASURE_FACTOR (I_SELL_VALUE_FRACTION >= GEN_9) ? 2: 1
+#define TREASURE_FACTOR ((I_SELL_VALUE_FRACTION >= GEN_9) ? 2 : 1)
 
 // Shared Item Description entries
 

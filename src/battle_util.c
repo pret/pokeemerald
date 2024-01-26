@@ -1164,8 +1164,7 @@ void PrepareStringBattle(u16 stringId, u32 battler)
         else
             SET_STATCHANGER(STAT_SPATK, 2, FALSE);
     }
-#if  B_UPDATED_INTIMIDATE >= GEN_8
-    else if (stringId == STRINGID_PKMNCUTSATTACKWITH && targetAbility == ABILITY_RATTLED
+    else if (B_UPDATED_INTIMIDATE >= GEN_8 && stringId == STRINGID_PKMNCUTSATTACKWITH && targetAbility == ABILITY_RATTLED
             && CompareStat(gBattlerTarget, STAT_SPEED, MAX_STAT_STAGE, CMP_LESS_THAN))
     {
         gBattlerAbility = gBattlerTarget;
@@ -1173,7 +1172,6 @@ void PrepareStringBattle(u16 stringId, u32 battler)
         gBattlescriptCurrInstr = BattleScript_AbilityRaisesDefenderStat;
         SET_STATCHANGER(STAT_SPEED, 1, FALSE);
     }
-#endif
 
     // Signal for the trainer slide-in system.
     if ((stringId == STRINGID_ITDOESNTAFFECT || stringId == STRINGID_PKMNWASNTAFFECTED || stringId == STRINGID_PKMNUNAFFECTED)
@@ -8802,11 +8800,12 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
         break;
     case ABILITY_TRANSISTOR:
         if (moveType == TYPE_ELECTRIC)
-        #if B_TRANSISTOR_BOOST >= GEN_9
-            modifier = uq4_12_multiply(modifier, UQ_4_12(5325 / 4096));
-        #else
-            modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
-        #endif
+        {
+            if (B_TRANSISTOR_BOOST >= GEN_9)
+                modifier = uq4_12_multiply(modifier, UQ_4_12(5325 / 4096));
+            else
+                modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
+        }
         break;
     case ABILITY_DRAGONS_MAW:
         if (moveType == TYPE_DRAGON)
@@ -10958,11 +10957,10 @@ bool32 IsAlly(u32 battlerAtk, u32 battlerDef)
 
 bool32 IsGen6ExpShareEnabled(void)
 {
-#if I_EXP_SHARE_FLAG <= TEMP_FLAGS_END
-    return FALSE;
-#else
+    if (I_EXP_SHARE_FLAG <= TEMP_FLAGS_END)
+        return FALSE;
+
     return FlagGet(I_EXP_SHARE_FLAG);
-#endif
 }
 
 bool32 MoveHasMoveEffect(u32 move, u32 moveEffect)

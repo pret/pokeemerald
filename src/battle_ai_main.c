@@ -133,10 +133,8 @@ static u32 GetWildAiFlags(void)
     if (avgLevel >= 80)
         flags |= AI_FLAG_HP_AWARE;
 
-#if B_VAR_WILD_AI_FLAGS != 0
-    if (VarGet(B_VAR_WILD_AI_FLAGS) != 0)
+    if (B_VAR_WILD_AI_FLAGS != 0 && VarGet(B_VAR_WILD_AI_FLAGS) != 0)
         flags |= VarGet(B_VAR_WILD_AI_FLAGS);
-#endif
 
     return flags;
 }

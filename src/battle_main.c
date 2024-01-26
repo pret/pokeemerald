@@ -2027,13 +2027,11 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             }
             CalculateMonStats(&party[i]);
 
-        #if B_TRAINER_CLASS_POKE_BALLS >= GEN_7
-            if (ball == -1)
+            if (B_TRAINER_CLASS_POKE_BALLS >= GEN_7 && ball == -1)
             {
                 ball = gTrainerClasses[trainer->trainerClass].ball ?: ITEM_POKE_BALL;
                 SetMonData(&party[i], MON_DATA_POKEBALL, &ball);
             }
-        #endif
         }
     }
 
