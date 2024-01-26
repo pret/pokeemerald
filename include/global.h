@@ -537,7 +537,7 @@ struct SaveBlock2
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 
-extern bool8 IsAccurateGBA(void);
+extern u8 UpdateSpritePaletteWithTime(u8);
 
 struct SecretBaseParty
 {
