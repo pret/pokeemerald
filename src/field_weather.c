@@ -1109,3 +1109,11 @@ void ResetPreservedPalettesInWeather(void)
 {
     sPaletteColorMapTypes = sBasePaletteColorMapTypes;
 }
+
+bool8 IsWeatherAlphaBlend(void)
+{
+    return gWeatherPtr->currWeather == WEATHER_FOG_HORIZONTAL || 
+           gWeatherPtr->currWeather == WEATHER_FOG_DIAGONAL   ||
+           gWeatherPtr->currWeather == WEATHER_UNDERWATER_BUBBLES ||
+           gWeatherPtr->currWeather == WEATHER_UNDERWATER;
+}

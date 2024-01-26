@@ -1062,7 +1062,7 @@ enum {
 
 #define POKEMON_SLOTS_NUMBER (NATIONAL_DEX_COUNT + 1)
 
-// Hoenn Pokedex order
+// Hoenn Pokédex order
 enum {
     HOENN_DEX_NONE,
     HOENN_DEX_TREECKO,

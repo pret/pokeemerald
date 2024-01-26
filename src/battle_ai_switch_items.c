@@ -247,7 +247,7 @@ static bool8 ShouldSwitchIfWonderGuard(u32 battler)
     if (GetBattlerAbility(GetBattlerAtPosition(opposingPosition)) != ABILITY_WONDER_GUARD)
         return FALSE;
 
-    // Check if Pokemon has a super effective move.
+    // Check if Pokémon has a super effective move.
     for (opposingBattler = GetBattlerAtPosition(opposingPosition), i = 0; i < MAX_MON_MOVES; i++)
     {
         move = gBattleMons[battler].moves[i];
@@ -266,7 +266,7 @@ static bool8 ShouldSwitchIfWonderGuard(u32 battler)
     else
         party = gEnemyParty;
 
-    // Find a Pokemon in the party that has a super effective move.
+    // Find a Pokémon in the party that has a super effective move.
     for (i = firstId; i < lastId; i++)
     {
         if (!IsValidForBattle(&party[i]))
@@ -292,7 +292,7 @@ static bool8 ShouldSwitchIfWonderGuard(u32 battler)
         }
     }
 
-    return FALSE; // There is not a single Pokemon in the party that has a super effective move against a mon with Wonder Guard.
+    return FALSE; // There is not a single Pokémon in the party that has a super effective move against a mon with Wonder Guard.
 }
 
 static bool8 FindMonThatAbsorbsOpponentsMove(u32 battler)
