@@ -861,8 +861,6 @@ u32 NoOfHitsForTargetToFaintAI(u32 battlerDef, u32 battlerAtk)
         {
             if (currNumberOfHits < leastNumberOfHits)
                 leastNumberOfHits = currNumberOfHits;
-            else if (leastNumberOfHits == UNKNOWN_NO_OF_HITS)
-                leastNumberOfHits = currNumberOfHits;
         }
     }
     return leastNumberOfHits;
