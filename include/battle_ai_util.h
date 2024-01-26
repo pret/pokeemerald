@@ -1,10 +1,6 @@
 #ifndef GUARD_BATTLE_AI_UTIL_H
 #define GUARD_BATTLE_AI_UTIL_H
 
-// for AI_WhoStrikesFirst
-#define AI_IS_FASTER   1
-#define AI_IS_SLOWER   -1
-
 #define FOE(battler) ((BATTLE_OPPOSITE(battler)) & BIT_SIDE)
 
 #define AI_STRIKES_FIRST(battlerAi, battlerDef, move)((AI_WhoStrikesFirst(battlerAi, battlerDef, move) == AI_IS_FASTER))
@@ -32,6 +28,8 @@ u32 GetHealthPercentage(u32 battler);
 bool32 IsBattlerTrapped(u32 battler, bool32 switching);
 s32 AI_WhoStrikesFirst(u32 battlerAI, u32 battler2, u32 moveConsidered);
 bool32 CanTargetFaintAi(u32 battlerDef, u32 battlerAtk);
+u32 NoOfHitsForTargetToFaintAI(u32 battlerDef, u32 battlerAtk);
+u32 GetBestDmgMoveFromTarget(u32 battlerAtk, u32 battlerDef);
 bool32 CanTargetMoveFaintAi(u32 move, u32 battlerDef, u32 battlerAtk, u32 nHits);
 bool32 CanTargetFaintAiWithMod(u32 battlerDef, u32 battlerAtk, s32 hpMod, s32 dmgMod);
 s32 AI_DecideKnownAbilityForTurn(u32 battlerId);
@@ -130,7 +128,6 @@ bool32 IsAttackBoostMoveEffect(u32 effect);
 bool32 IsUngroundingEffect(u32 effect);
 bool32 IsSemiInvulnerable(u32 battlerDef, u32 move);
 bool32 HasSubstituteIgnoringMove(u32 battler);
-bool32 HasSoundMove(u32 battler);
 bool32 HasHighCritRatioMove(u32 battler);
 bool32 HasMagicCoatAffectedMove(u32 battler);
 bool32 HasSnatchAffectedMove(u32 battler);

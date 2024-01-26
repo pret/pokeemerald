@@ -4804,7 +4804,6 @@ s32 GetWhichBattlerFasterArgs(u32 battler1, u32 battler2, bool32 ignoreChosenMov
     {
         strikesFirst = 1; // battler1's move has greater priority
     }
-
     return strikesFirst;
 }
 
