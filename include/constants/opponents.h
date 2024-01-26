@@ -514,10 +514,10 @@
 #define TRAINER_HUDSON                      510
 #define TRAINER_CONOR                       511
 #define TRAINER_EDWIN_1                     512
-#define TRAINER_RANDOM_BATTLE               513
-#define TRAINER_RANDOM_BATTLE_2            	514
-#define TRAINER_RANDOM_BATTLE_3             515
-#define TRAINER_RANDOM_BATTLE_4                     516
+#define TRAINER_RANDOM_BATTLE_0               513
+#define TRAINER_RANDOM_BATTLE_1            	514
+#define TRAINER_RANDOM_BATTLE_2             515
+#define TRAINER_RANDOM_BATTLE_3                     516
 #define TRAINER_EDWIN_4                     517
 #define TRAINER_EDWIN_5                     518
 #define TRAINER_WALLY_VR_1                  519

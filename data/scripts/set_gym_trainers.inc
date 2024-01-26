@@ -19,7 +19,7 @@ RustboroCity_Gym_SetGymTrainers::
 DewfordTown_Gym_SetGymTrainers::
 	settrainerflag TRAINER_TAKAO
 	settrainerflag TRAINER_JOCELYN
-	settrainerflag TRAINER_RANDOM_BATTLE
+	settrainerflag TRAINER_RANDOM_BATTLE_0
 	settrainerflag TRAINER_BRENDEN
 	settrainerflag TRAINER_CRISTIAN
 	settrainerflag TRAINER_LILITH

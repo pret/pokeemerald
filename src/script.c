@@ -8,6 +8,7 @@
 #include "main_menu.h"
 #include "main.h"
 #include "random.h"
+#include "battle_setup.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
@@ -483,10 +484,75 @@ void StartTimer1Script()
     StartTimer1();
 }
 
-void SetRandomTrainerGraphics()
+struct RandomTrainerNPC 
 {
-    VarSet(VAR_OBJ_GFX_ID_0, (Random() % 53) + 5);
-    VarSet(VAR_OBJ_GFX_ID_1, (Random() % 53) + 5);
-    FlagSet(FLAG_TRAINER_2);
-    FlagSet(FLAG_TRAINER_3);
+    u16 gfxid;
+    u16 objectflag;
+    u16 trainerflag;
+};
+
+static const struct RandomTrainerNPC RandomNPCTrainers[] = 
+{
+    [0] = {VAR_OBJ_GFX_ID_0, FLAG_TRAINER_0, TRAINER_RANDOM_BATTLE_0},
+    [1] = {VAR_OBJ_GFX_ID_1, FLAG_TRAINER_1, TRAINER_RANDOM_BATTLE_1},
+    [2] = {VAR_OBJ_GFX_ID_2, FLAG_TRAINER_2, TRAINER_RANDOM_BATTLE_2},
+    [3] = {VAR_OBJ_GFX_ID_3, FLAG_TRAINER_3, TRAINER_RANDOM_BATTLE_3},
+};
+
+u16 ReturnNumberOfTrainersForFloor()
+{
+    if(VarGet(VAR_PIT_FLOOR) < 2)
+        return 1;
+    if(VarGet(VAR_PIT_FLOOR) < 5)
+        return 2;
+    if(VarGet(VAR_PIT_FLOOR) < 7)
+        return 3;
+    if(VarGet(VAR_PIT_FLOOR) >= 7)
+        return 4;
+    return 0;
+}
+
+void SetRandomTrainers()
+{
+    u16 iterator = 0;
+    u16 trainerCount = ReturnNumberOfTrainersForFloor();
+    u16 trainers[4] = {0, 0, 0, 0};
+
+    // Handle Random Trainers That Are Spawned
+    for (iterator = 0; iterator < trainerCount; iterator++)
+    {
+        u16 newTrainer = (Random() % 4);
+        while(trainers[newTrainer])
+        {
+            newTrainer = (Random() % 4);
+        }
+        trainers[newTrainer] = 1;
+        VarSet(RandomNPCTrainers[newTrainer].gfxid, (Random() % 53) + 5);
+        ClearTrainerFlag(RandomNPCTrainers[newTrainer].trainerflag); 
+        FlagClear(RandomNPCTrainers[newTrainer].objectflag); 
+    }
+
+    // Handle Random Trainer Objects That Aren't Spawned
+    for (iterator = 0; iterator < 4; iterator++)
+    {
+        if (!trainers[iterator])
+        {
+            FlagSet(RandomNPCTrainers[iterator].objectflag);
+            SetTrainerFlag(RandomNPCTrainers[iterator].trainerflag);
+        }
+    }
+    
+}
+
+void CheckFloorCleared()
+{
+    u16 iterator = 0;
+    u16 trainerDefeated = 0;
+    for (iterator = 0; iterator < 4; iterator++)
+    {
+        trainerDefeated = (u8) FlagGet(TRAINER_FLAGS_START + RandomNPCTrainers[iterator].trainerflag) + trainerDefeated;
+    }
+    if (trainerDefeated == 4)
+        FlagSet(FLAG_FLOOR_CLEARED);
+    return;
 }

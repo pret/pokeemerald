@@ -6156,7 +6156,7 @@ const struct Trainer gTrainers[] = {
         .party = TRAINER_PARTY(sParty_Edwin1),
     },
 
-    [TRAINER_RANDOM_BATTLE] =
+    [TRAINER_RANDOM_BATTLE_0] =
     {
         .trainerClass = TRAINER_CLASS_COLLECTOR,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS,
@@ -6168,7 +6168,7 @@ const struct Trainer gTrainers[] = {
         .party = TRAINER_PARTY(sParty_RandomBattle),
     },
 
-    [TRAINER_RANDOM_BATTLE_2] =
+    [TRAINER_RANDOM_BATTLE_1] =
     {
         .trainerClass = TRAINER_CLASS_MAGMA_ADMIN,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MAGMA,
@@ -6180,7 +6180,7 @@ const struct Trainer gTrainers[] = {
         .party = TRAINER_PARTY(sParty_RandomBattle),
     },
 
-    [TRAINER_RANDOM_BATTLE_3] =
+    [TRAINER_RANDOM_BATTLE_2] =
     {
         .trainerClass = TRAINER_CLASS_COLLECTOR,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS,
@@ -6192,7 +6192,7 @@ const struct Trainer gTrainers[] = {
         .party = TRAINER_PARTY(sParty_RandomBattle),
     },
 
-    [TRAINER_RANDOM_BATTLE_4] =
+    [TRAINER_RANDOM_BATTLE_3] =
     {
         .trainerClass = TRAINER_CLASS_COLLECTOR,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS,

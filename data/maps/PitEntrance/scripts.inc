@@ -26,7 +26,7 @@ PitEntrance_Warp::
 	setflag FLAG_PIT_ENTERED
 	addvar VAR_PIT_FLOOR, 1
 	callnative InitTrainerIdAndNameData
-	callnative SetRandomTrainerGraphics
+	callnative SetRandomTrainers
 	warpteleport MAP_PIT_ARENA, 9, 7
 	waitstate
 	releaseall
