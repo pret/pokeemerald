@@ -5112,7 +5112,7 @@ const struct Trainer gTrainers[] = {
         .party = TRAINER_PARTY(sParty_Jocelyn),
     },
 
-    [TRAINER_RANDOM_BATTLE] =
+    [TRAINER_RANDOM_BATTLE_OLD] =
     {
         .trainerClass = TRAINER_CLASS_BATTLE_GIRL,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE,
@@ -6156,7 +6156,7 @@ const struct Trainer gTrainers[] = {
         .party = TRAINER_PARTY(sParty_Edwin1),
     },
 
-    [TRAINER_HECTOR] =
+    [TRAINER_RANDOM_BATTLE] =
     {
         .trainerClass = TRAINER_CLASS_COLLECTOR,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS,
@@ -6165,10 +6165,10 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = TRAINER_PARTY(sParty_Hector),
+        .party = TRAINER_PARTY(sParty_RandomBattle),
     },
 
-    [TRAINER_TABITHA_MOSSDEEP] =
+    [TRAINER_RANDOM_BATTLE_2] =
     {
         .trainerClass = TRAINER_CLASS_MAGMA_ADMIN,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MAGMA,
@@ -6177,10 +6177,10 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = TRAINER_PARTY(sParty_TabithaMossdeep),
+        .party = TRAINER_PARTY(sParty_RandomBattle),
     },
 
-    [TRAINER_EDWIN_2] =
+    [TRAINER_RANDOM_BATTLE_3] =
     {
         .trainerClass = TRAINER_CLASS_COLLECTOR,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS,
@@ -6189,10 +6189,10 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = TRAINER_PARTY(sParty_Edwin2),
+        .party = TRAINER_PARTY(sParty_RandomBattle),
     },
 
-    [TRAINER_EDWIN_3] =
+    [TRAINER_RANDOM_BATTLE_4] =
     {
         .trainerClass = TRAINER_CLASS_COLLECTOR,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS,
@@ -6201,7 +6201,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = TRAINER_PARTY(sParty_Edwin3),
+        .party = TRAINER_PARTY(sParty_RandomBattle),
     },
 
     [TRAINER_EDWIN_4] =

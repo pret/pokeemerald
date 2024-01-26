@@ -3,11 +3,30 @@ PitEntrance_MapScripts::
 	.byte 0
 
 PitArena_Entrance:
+	setvar VAR_PIT_FLOOR, 0
+	setflag FLAG_PIT_STARTED
+	setflag	FLAG_DEFEATED_RUSTBORO_GYM
+	setflag FLAG_DEFEATED_DEWFORD_GYM
+	setflag FLAG_DEFEATED_MAUVILLE_GYM
+	setflag FLAG_DEFEATED_LAVARIDGE_GYM
+	setflag FLAG_DEFEATED_PETALBURG_GYM
+	setflag FLAG_DEFEATED_FORTREE_GYM
+	setflag FLAG_DEFEATED_MOSSDEEP_GYM
+	setflag FLAG_DEFEATED_SOOTOPOLIS_GYM
+	setflag FLAG_SYS_NATIONAL_DEX
+	special EnableNationalPokedex
+	setflag FLAG_RECEIVED_RUNNING_SHOES
+	setflag FLAG_SYS_B_DASH
+	callnative StartTimer1Script
 	setflashlevel 0
 	return
 
 PitEntrance_Warp::
 	lockall
+	setflag FLAG_PIT_ENTERED
+	addvar VAR_PIT_FLOOR, 1
+	callnative InitTrainerIdAndNameData
+	callnative SetRandomTrainerGraphics
 	warpteleport MAP_PIT_ARENA, 9, 7
 	waitstate
 	releaseall

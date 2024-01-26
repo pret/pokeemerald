@@ -5,6 +5,9 @@
 #include "util.h"
 #include "constants/event_objects.h"
 #include "constants/map_scripts.h"
+#include "main_menu.h"
+#include "main.h"
+#include "random.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
@@ -467,4 +470,23 @@ void InitRamScript_NoObjectEvent(u8 *script, u16 scriptSize)
     if (scriptSize > sizeof(gSaveBlock1Ptr->ramScript.data.script))
         scriptSize = sizeof(gSaveBlock1Ptr->ramScript.data.script);
     InitRamScript(script, scriptSize, MAP_GROUP(UNDEFINED), MAP_NUM(UNDEFINED), NO_OBJECT);
+}
+
+void InitTrainerIdAndNameData()
+{
+    SeedRngAndSetTrainerId();
+    NewGameBirchSpeech_SetDefaultPlayerName(Random() % 19);
+}
+
+void StartTimer1Script()
+{
+    StartTimer1();
+}
+
+void SetRandomTrainerGraphics()
+{
+    VarSet(VAR_OBJ_GFX_ID_0, (Random() % 53) + 5);
+    VarSet(VAR_OBJ_GFX_ID_1, (Random() % 53) + 5);
+    FlagSet(FLAG_TRAINER_2);
+    FlagSet(FLAG_TRAINER_3);
 }

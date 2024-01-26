@@ -427,7 +427,7 @@
 #define TRAINER_LAO_4                       423
 #define TRAINER_LAO_5                       424
 #define TRAINER_JOCELYN                     425
-#define TRAINER_RANDOM_BATTLE                       426
+#define TRAINER_RANDOM_BATTLE_OLD                       426
 #define TRAINER_CYNDY_1                     427
 #define TRAINER_CORA                        428
 #define TRAINER_PAULA                       429
@@ -514,10 +514,10 @@
 #define TRAINER_HUDSON                      510
 #define TRAINER_CONOR                       511
 #define TRAINER_EDWIN_1                     512
-#define TRAINER_HECTOR                      513
-#define TRAINER_TABITHA_MOSSDEEP            514
-#define TRAINER_EDWIN_2                     515
-#define TRAINER_EDWIN_3                     516
+#define TRAINER_RANDOM_BATTLE               513
+#define TRAINER_RANDOM_BATTLE_2            	514
+#define TRAINER_RANDOM_BATTLE_3             515
+#define TRAINER_RANDOM_BATTLE_4                     516
 #define TRAINER_EDWIN_4                     517
 #define TRAINER_EDWIN_5                     518
 #define TRAINER_WALLY_VR_1                  519
