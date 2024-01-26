@@ -220,9 +220,9 @@ enum {
     PALTAG_MON_ICON_0 = 56000,
     PALTAG_MON_ICON_1, // Used implicitly in CreateMonIconSprite
     PALTAG_MON_ICON_2, // Used implicitly in CreateMonIconSprite
-    PALTAG_3, // Unused
-    PALTAG_4, // Unused
-    PALTAG_5, // Unused
+    PALTAG_MON_ICON_3, // Used implicitly in CreateMonIconSprite
+    PALTAG_MON_ICON_4, // Used implicitly in CreateMonIconSprite
+    PALTAG_MON_ICON_5, // Used implicitly in CreateMonIconSprite
     PALTAG_DISPLAY_MON,
     PALTAG_MISC_1,
     PALTAG_MARKING_COMBO,
