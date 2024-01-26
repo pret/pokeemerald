@@ -99,7 +99,7 @@ DOUBLE_BATTLE_TEST("Intimidate doesn't activate on an empty field in a double ba
 SINGLE_BATTLE_TEST("Intimidate and Eject Button force the opponent to Attack")
 {
     GIVEN {
-        ASSUME(gItems[ITEM_EJECT_BUTTON].holdEffect == HOLD_EFFECT_EJECT_BUTTON);
+        ASSUME(gItemsInfo[ITEM_EJECT_BUTTON].holdEffect == HOLD_EFFECT_EJECT_BUTTON);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); }
         OPPONENT(SPECIES_HITMONTOP) { Moves(MOVE_TACKLE); }

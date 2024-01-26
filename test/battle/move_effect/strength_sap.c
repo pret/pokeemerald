@@ -149,7 +149,7 @@ SINGLE_BATTLE_TEST("Strength Sap restores more HP if Big Root is held", s16 hp)
     PARAMETRIZE { item = ITEM_BIG_ROOT; }
 
     GIVEN {
-        ASSUME(gItems[ITEM_BIG_ROOT].holdEffect == HOLD_EFFECT_BIG_ROOT);
+        ASSUME(gItemsInfo[ITEM_BIG_ROOT].holdEffect == HOLD_EFFECT_BIG_ROOT);
         PLAYER(SPECIES_WOBBUFFET) { HP(200); Item(item); }
         OPPONENT(SPECIES_WOBBUFFET) { Attack(100); }
     } WHEN {

@@ -9308,7 +9308,7 @@ static void Cmd_various(void)
         if (IsBattlerAlive(gBattlerAbility)
             && (i == ABILITY_RECEIVER || i == ABILITY_POWER_OF_ALCHEMY)
             && GetBattlerHoldEffect(battler, TRUE) != HOLD_EFFECT_ABILITY_SHIELD
-            && !gAbilities[gBattleMons[battler].ability].cantBeCopied)
+            && !gAbilitiesInfo[gBattleMons[battler].ability].cantBeCopied)
         {
             gBattleStruct->tracedAbility[gBattlerAbility] = gBattleMons[battler].ability; // re-using the variable for trace
             gBattleScripting.battler = battler;
@@ -9412,7 +9412,7 @@ static void Cmd_various(void)
     case VARIOUS_SET_SIMPLE_BEAM:
     {
         VARIOUS_ARGS(const u8 *failInstr);
-        if (gAbilities[gBattleMons[gBattlerTarget].ability].cantBeOverwritten
+        if (gAbilitiesInfo[gBattleMons[gBattlerTarget].ability].cantBeOverwritten
             || gBattleMons[gBattlerTarget].ability == ABILITY_SIMPLE)
         {
             RecordAbilityBattle(gBattlerTarget, gBattleMons[gBattlerTarget].ability);
@@ -9436,8 +9436,8 @@ static void Cmd_various(void)
     case VARIOUS_TRY_ENTRAINMENT:
     {
         VARIOUS_ARGS(const u8 *failInstr);
-        if (gAbilities[gBattleMons[gBattlerAttacker].ability].cantBeCopied
-          || gAbilities[gBattleMons[gBattlerTarget].ability].cantBeOverwritten)
+        if (gAbilitiesInfo[gBattleMons[gBattlerAttacker].ability].cantBeCopied
+          || gAbilitiesInfo[gBattleMons[gBattlerTarget].ability].cantBeOverwritten)
         {
             RecordAbilityBattle(gBattlerTarget, gBattleMons[gBattlerTarget].ability);
             gBattlescriptCurrInstr = cmd->failInstr;
@@ -13988,9 +13988,9 @@ static void Cmd_trycopyability(void)
 
     if (gBattleMons[battler].ability == defAbility
       || defAbility == ABILITY_NONE
-      || gAbilities[gBattleMons[battler].ability].cantBeSuppressed
-      || gAbilities[gBattleMons[BATTLE_PARTNER(battler)].ability].cantBeSuppressed
-      || gAbilities[defAbility].cantBeCopied)
+      || gAbilitiesInfo[gBattleMons[battler].ability].cantBeSuppressed
+      || gAbilitiesInfo[gBattleMons[BATTLE_PARTNER(battler)].ability].cantBeSuppressed
+      || gAbilitiesInfo[defAbility].cantBeCopied)
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
@@ -14066,7 +14066,7 @@ static void Cmd_setgastroacid(void)
 {
     CMD_ARGS(const u8 *failInstr);
 
-    if (gAbilities[gBattleMons[gBattlerTarget].ability].cantBeSuppressed)
+    if (gAbilitiesInfo[gBattleMons[gBattlerTarget].ability].cantBeSuppressed)
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
@@ -14166,8 +14166,8 @@ static void Cmd_tryswapabilities(void)
 {
     CMD_ARGS(const u8 *failInstr);
 
-    if (gAbilities[gBattleMons[gBattlerAttacker].ability].cantBeSwapped
-      || gAbilities[gBattleMons[gBattlerTarget].ability].cantBeSwapped)
+    if (gAbilitiesInfo[gBattleMons[gBattlerAttacker].ability].cantBeSwapped
+      || gAbilitiesInfo[gBattleMons[gBattlerTarget].ability].cantBeSwapped)
     {
         RecordAbilityBattle(gBattlerTarget, gBattleMons[gBattlerTarget].ability);
         gBattlescriptCurrInstr = cmd->failInstr;
@@ -15446,7 +15446,7 @@ static void Cmd_tryworryseed(void)
 {
     CMD_ARGS(const u8 *failInstr);
 
-    if (gAbilities[gBattleMons[gBattlerTarget].ability].cantBeOverwritten
+    if (gAbilitiesInfo[gBattleMons[gBattlerTarget].ability].cantBeOverwritten
       || gBattleMons[gBattlerTarget].ability == ABILITY_INSOMNIA)
     {
         RecordAbilityBattle(gBattlerTarget, gBattleMons[gBattlerTarget].ability);

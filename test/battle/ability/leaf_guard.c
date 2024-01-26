@@ -33,8 +33,8 @@ SINGLE_BATTLE_TEST("Leaf Guard prevents status conditions from Flame Orb and Tox
     PARAMETRIZE { item = ITEM_FLAME_ORB; }
     PARAMETRIZE { item = ITEM_TOXIC_ORB; }
     GIVEN {
-        ASSUME(gItems[ITEM_FLAME_ORB].holdEffect == HOLD_EFFECT_FLAME_ORB);
-        ASSUME(gItems[ITEM_TOXIC_ORB].holdEffect == HOLD_EFFECT_TOXIC_ORB);
+        ASSUME(gItemsInfo[ITEM_FLAME_ORB].holdEffect == HOLD_EFFECT_FLAME_ORB);
+        ASSUME(gItemsInfo[ITEM_TOXIC_ORB].holdEffect == HOLD_EFFECT_TOXIC_ORB);
         PLAYER(SPECIES_LEAFEON) { Ability(ABILITY_LEAF_GUARD); Item(item); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

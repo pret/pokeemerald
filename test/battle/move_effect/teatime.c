@@ -4,7 +4,7 @@
 ASSUMPTIONS
 {
     ASSUME(gBattleMoves[MOVE_TEATIME].effect == EFFECT_TEATIME);
-    ASSUME(gItems[ITEM_LIECHI_BERRY].holdEffect == HOLD_EFFECT_ATTACK_UP);
+    ASSUME(gItemsInfo[ITEM_LIECHI_BERRY].holdEffect == HOLD_EFFECT_ATTACK_UP);
 }
 
 SINGLE_BATTLE_TEST("Teatime causes the user to consume its Berry, ignoring HP requirements")

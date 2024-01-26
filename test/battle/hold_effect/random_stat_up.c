@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gItems[ITEM_STARF_BERRY].holdEffect == HOLD_EFFECT_RANDOM_STAT_UP);
+    ASSUME(gItemsInfo[ITEM_STARF_BERRY].holdEffect == HOLD_EFFECT_RANDOM_STAT_UP);
 }
 
 TO_DO_BATTLE_TEST("Starf Berry randomly raises the holder's Attack, Defense, Sp. Atk, Sp. Def, or Speed by two stages when the holder's HP drop to 1/4 or below")

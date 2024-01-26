@@ -73,8 +73,8 @@ SINGLE_BATTLE_TEST("Corrosion can poison Poison- and Steel-type targets if it us
 
     GIVEN {
         ASSUME(gBattleMoves[MOVE_FLING].effect == EFFECT_FLING);
-        ASSUME(gItems[ITEM_POISON_BARB].holdEffect == HOLD_EFFECT_POISON_POWER);
-        ASSUME(gItems[ITEM_TOXIC_ORB].holdEffect == HOLD_EFFECT_TOXIC_ORB);
+        ASSUME(gItemsInfo[ITEM_POISON_BARB].holdEffect == HOLD_EFFECT_POISON_POWER);
+        ASSUME(gItemsInfo[ITEM_TOXIC_ORB].holdEffect == HOLD_EFFECT_TOXIC_ORB);
         PLAYER(SPECIES_SALANDIT) { Ability(ABILITY_CORROSION); Item(heldItem); }
         OPPONENT(SPECIES_ODDISH);
     } WHEN {
@@ -93,7 +93,7 @@ SINGLE_BATTLE_TEST("Corrosion can poison Poison- and Steel-type targets if it us
 SINGLE_BATTLE_TEST("If a Poison- or Steel-type Pokémon with Corrosion holds a Toxic Orb, it will badly poison itself")
 {
     GIVEN {
-        ASSUME(gItems[ITEM_TOXIC_ORB].holdEffect == HOLD_EFFECT_TOXIC_ORB);
+        ASSUME(gItemsInfo[ITEM_TOXIC_ORB].holdEffect == HOLD_EFFECT_TOXIC_ORB);
         PLAYER(SPECIES_SALANDIT) { Ability(ABILITY_CORROSION); Item(ITEM_TOXIC_ORB); }
         OPPONENT(SPECIES_ODDISH);
     } WHEN {

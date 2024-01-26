@@ -157,7 +157,7 @@ SINGLE_BATTLE_TEST("Primal reversion happens after a switch-in caused by Eject B
 {
     GIVEN {
         ASSUME(gBattleMoves[MOVE_TACKLE].power != 0);
-        ASSUME(gItems[ITEM_EJECT_BUTTON].holdEffect == HOLD_EFFECT_EJECT_BUTTON);
+        ASSUME(gItemsInfo[ITEM_EJECT_BUTTON].holdEffect == HOLD_EFFECT_EJECT_BUTTON);
         PLAYER(SPECIES_WOBBUFFET) {Item(ITEM_EJECT_BUTTON); }
         PLAYER(SPECIES_GROUDON) { Item(ITEM_RED_ORB); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -178,7 +178,7 @@ SINGLE_BATTLE_TEST("Primal reversion happens after a switch-in caused by Red Car
 {
     GIVEN {
         ASSUME(gBattleMoves[MOVE_TACKLE].power != 0);
-        ASSUME(gItems[ITEM_RED_CARD].holdEffect == HOLD_EFFECT_RED_CARD);
+        ASSUME(gItemsInfo[ITEM_RED_CARD].holdEffect == HOLD_EFFECT_RED_CARD);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_GROUDON) { Item(ITEM_RED_ORB); }
         OPPONENT(SPECIES_WOBBUFFET) {Item(ITEM_RED_CARD); }

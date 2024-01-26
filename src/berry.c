@@ -2166,7 +2166,7 @@ void ObjectEventInteractionApplyMulch(void)
     u8 mulch = ITEM_TO_MULCH(gSpecialVar_ItemId);
 
     gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].mulch = mulch;
-    StringExpandPlaceholders(gStringVar1, gItems[gSpecialVar_ItemId].name);
+    StringExpandPlaceholders(gStringVar1, gItemsInfo[gSpecialVar_ItemId].name);
 }
 
 void ObjectEventInteractionPickBerryTree(void)

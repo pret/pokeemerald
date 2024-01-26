@@ -610,7 +610,7 @@ extern const u16 gUnionRoomFacilityClasses[];
 extern const struct SpriteTemplate gBattlerSpriteTemplates[];
 extern const s8 gNatureStatTable[][5];
 extern const u32 sExpCandyExperienceTable[];
-extern const struct Ability gAbilities[];
+extern const struct Ability gAbilitiesInfo[];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);

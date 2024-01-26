@@ -104,7 +104,7 @@ SINGLE_BATTLE_TEST("Multi hit Moves hit at least four times with Loaded Dice")
     PASSES_RANDOMLY(50, 100, RNG_LOADED_DICE);
 
     GIVEN {
-        ASSUME(gItems[ITEM_LOADED_DICE].holdEffect == HOLD_EFFECT_LOADED_DICE);
+        ASSUME(gItemsInfo[ITEM_LOADED_DICE].holdEffect == HOLD_EFFECT_LOADED_DICE);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_LOADED_DICE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -123,7 +123,7 @@ SINGLE_BATTLE_TEST("Multi hit Moves hit five times 50 Percent of the time with L
     PASSES_RANDOMLY(50, 100, RNG_LOADED_DICE);
 
     GIVEN {
-        ASSUME(gItems[ITEM_LOADED_DICE].holdEffect == HOLD_EFFECT_LOADED_DICE);
+        ASSUME(gItemsInfo[ITEM_LOADED_DICE].holdEffect == HOLD_EFFECT_LOADED_DICE);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_LOADED_DICE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

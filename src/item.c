@@ -867,24 +867,24 @@ static u16 SanitizeItemId(u16 itemId)
 const u8 *ItemId_GetName(u16 itemId)
 {
     if (DECAP_ENABLED && DECAP_MIRRORING && !DECAP_ITEM_NAMES)
-        return ROM_MIRROR_PTR(gItems[SanitizeItemId(itemId)].name);
+        return ROM_MIRROR_PTR(gItemsInfo[SanitizeItemId(itemId)].name);
     else
-        return gItems[SanitizeItemId(itemId)].name;
+        return gItemsInfo[SanitizeItemId(itemId)].name;
 }
 
 u32 ItemId_GetPrice(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].price;
+    return gItemsInfo[SanitizeItemId(itemId)].price;
 }
 
 static bool32 DoesItemHavePluralName(u16 itemId)
 {
-    return (gItems[SanitizeItemId(itemId)].pluralName[0] != '\0');
+    return (gItemsInfo[SanitizeItemId(itemId)].pluralName[0] != '\0');
 }
 
 static const u8 *ItemId_GetPluralName(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].pluralName;
+    return gItemsInfo[SanitizeItemId(itemId)].pluralName;
 }
 
 const u8 *ItemId_GetEffect(u32 itemId)
@@ -892,42 +892,42 @@ const u8 *ItemId_GetEffect(u32 itemId)
     if (itemId == ITEM_ENIGMA_BERRY_E_READER)
         return gSaveBlock1Ptr->enigmaBerry.itemEffect;
     else
-        return gItems[SanitizeItemId(itemId)].effect;
+        return gItemsInfo[SanitizeItemId(itemId)].effect;
 }
 
 u32 ItemId_GetHoldEffect(u32 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].holdEffect;
+    return gItemsInfo[SanitizeItemId(itemId)].holdEffect;
 }
 
 u32 ItemId_GetHoldEffectParam(u32 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].holdEffectParam;
+    return gItemsInfo[SanitizeItemId(itemId)].holdEffectParam;
 }
 
 const u8 *ItemId_GetDescription(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].description;
+    return gItemsInfo[SanitizeItemId(itemId)].description;
 }
 
 u8 ItemId_GetImportance(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].importance;
+    return gItemsInfo[SanitizeItemId(itemId)].importance;
 }
 
 u8 ItemId_GetPocket(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].pocket;
+    return gItemsInfo[SanitizeItemId(itemId)].pocket;
 }
 
 u8 ItemId_GetType(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].type;
+    return gItemsInfo[SanitizeItemId(itemId)].type;
 }
 
 ItemUseFunc ItemId_GetFieldFunc(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].fieldUseFunc;
+    return gItemsInfo[SanitizeItemId(itemId)].fieldUseFunc;
 }
 
 // Returns an item's battle effect script ID.
@@ -959,17 +959,17 @@ u8 ItemId_GetBattleUsage(u16 itemId)
         }
     }
     else
-        return gItems[item].battleUsage;
+        return gItemsInfo[item].battleUsage;
 }
 
 u8 ItemId_GetSecondaryId(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].secondaryId;
+    return gItemsInfo[SanitizeItemId(itemId)].secondaryId;
 }
 
 u32 ItemId_GetFlingPower(u32 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].flingPower;
+    return gItemsInfo[SanitizeItemId(itemId)].flingPower;
 }
 
 

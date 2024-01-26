@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gItems[ITEM_BERSERK_GENE].holdEffect == HOLD_EFFECT_BERSERK_GENE);
+    ASSUME(gItemsInfo[ITEM_BERSERK_GENE].holdEffect == HOLD_EFFECT_BERSERK_GENE);
 }
 
 SINGLE_BATTLE_TEST("Berserk Gene sharply raises attack at the start of a single battle", s16 damage)

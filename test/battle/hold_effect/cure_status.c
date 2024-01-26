@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gItems[ITEM_LUM_BERRY].holdEffect == HOLD_EFFECT_CURE_STATUS);
+    ASSUME(gItemsInfo[ITEM_LUM_BERRY].holdEffect == HOLD_EFFECT_CURE_STATUS);
 }
 
 SINGLE_BATTLE_TEST("Pecha and Lum Berries cure poison")
@@ -14,7 +14,7 @@ SINGLE_BATTLE_TEST("Pecha and Lum Berries cure poison")
     PARAMETRIZE { item = ITEM_LUM_BERRY; }
 
     GIVEN {
-        ASSUME(gItems[ITEM_PECHA_BERRY].holdEffect == HOLD_EFFECT_CURE_PSN);
+        ASSUME(gItemsInfo[ITEM_PECHA_BERRY].holdEffect == HOLD_EFFECT_CURE_PSN);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Item(item); }
     } WHEN {
@@ -36,7 +36,7 @@ SINGLE_BATTLE_TEST("Pecha and Lum Berries cure bad poison")
     PARAMETRIZE { item = ITEM_LUM_BERRY; }
 
     GIVEN {
-        ASSUME(gItems[ITEM_PECHA_BERRY].holdEffect == HOLD_EFFECT_CURE_PSN);
+        ASSUME(gItemsInfo[ITEM_PECHA_BERRY].holdEffect == HOLD_EFFECT_CURE_PSN);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Item(item); }
     } WHEN {
@@ -58,7 +58,7 @@ SINGLE_BATTLE_TEST("Rawst and Lum Berries cure burn")
     PARAMETRIZE { item = ITEM_LUM_BERRY; }
 
     GIVEN {
-        ASSUME(gItems[ITEM_RAWST_BERRY].holdEffect == HOLD_EFFECT_CURE_BRN);
+        ASSUME(gItemsInfo[ITEM_RAWST_BERRY].holdEffect == HOLD_EFFECT_CURE_BRN);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Item(item); }
     } WHEN {
@@ -80,7 +80,7 @@ SINGLE_BATTLE_TEST("Aspear and Lum Berries cure freeze")
     PARAMETRIZE { item = ITEM_LUM_BERRY; }
 
     GIVEN {
-        ASSUME(gItems[ITEM_ASPEAR_BERRY].holdEffect == HOLD_EFFECT_CURE_FRZ);
+        ASSUME(gItemsInfo[ITEM_ASPEAR_BERRY].holdEffect == HOLD_EFFECT_CURE_FRZ);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Item(item); }
     } WHEN {
@@ -102,7 +102,7 @@ SINGLE_BATTLE_TEST("Chesto and Lum Berries cure sleep")
     PARAMETRIZE { item = ITEM_LUM_BERRY; }
 
     GIVEN {
-        ASSUME(gItems[ITEM_CHESTO_BERRY].holdEffect == HOLD_EFFECT_CURE_SLP);
+        ASSUME(gItemsInfo[ITEM_CHESTO_BERRY].holdEffect == HOLD_EFFECT_CURE_SLP);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Item(item); }
     } WHEN {
@@ -124,7 +124,7 @@ SINGLE_BATTLE_TEST("Cheri and Lum Berries cure paralysis")
     PARAMETRIZE { item = ITEM_LUM_BERRY; }
 
     GIVEN {
-        ASSUME(gItems[ITEM_CHERI_BERRY].holdEffect == HOLD_EFFECT_CURE_PAR);
+        ASSUME(gItemsInfo[ITEM_CHERI_BERRY].holdEffect == HOLD_EFFECT_CURE_PAR);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Item(item); }
     } WHEN {
@@ -146,7 +146,7 @@ SINGLE_BATTLE_TEST("Perism and Lum Berries cure confusion")
     PARAMETRIZE { item = ITEM_LUM_BERRY; }
 
     GIVEN {
-        ASSUME(gItems[ITEM_PERSIM_BERRY].holdEffect == HOLD_EFFECT_CURE_CONFUSION);
+        ASSUME(gItemsInfo[ITEM_PERSIM_BERRY].holdEffect == HOLD_EFFECT_CURE_CONFUSION);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Item(item); }
     } WHEN {
@@ -171,11 +171,11 @@ SINGLE_BATTLE_TEST("Berry hold effect cures status if a pokemon enters a battle"
     PARAMETRIZE{ status = STATUS1_SLEEP; item = ITEM_CHESTO_BERRY; }
 
     GIVEN {
-        ASSUME(gItems[ITEM_RAWST_BERRY].holdEffect == HOLD_EFFECT_CURE_BRN);
-        ASSUME(gItems[ITEM_ASPEAR_BERRY].holdEffect == HOLD_EFFECT_CURE_FRZ);
-        ASSUME(gItems[ITEM_CHERI_BERRY].holdEffect == HOLD_EFFECT_CURE_PAR);
-        ASSUME(gItems[ITEM_PECHA_BERRY].holdEffect == HOLD_EFFECT_CURE_PSN);
-        ASSUME(gItems[ITEM_CHESTO_BERRY].holdEffect == HOLD_EFFECT_CURE_SLP);
+        ASSUME(gItemsInfo[ITEM_RAWST_BERRY].holdEffect == HOLD_EFFECT_CURE_BRN);
+        ASSUME(gItemsInfo[ITEM_ASPEAR_BERRY].holdEffect == HOLD_EFFECT_CURE_FRZ);
+        ASSUME(gItemsInfo[ITEM_CHERI_BERRY].holdEffect == HOLD_EFFECT_CURE_PAR);
+        ASSUME(gItemsInfo[ITEM_PECHA_BERRY].holdEffect == HOLD_EFFECT_CURE_PSN);
+        ASSUME(gItemsInfo[ITEM_CHESTO_BERRY].holdEffect == HOLD_EFFECT_CURE_SLP);
         PLAYER(SPECIES_WOBBUFFET) { Status1(status); Item(ITEM_LUM_BERRY); }
         OPPONENT(SPECIES_WOBBUFFET) { Status1(status); Item(item); }
     } WHEN {
@@ -194,8 +194,8 @@ SINGLE_BATTLE_TEST("Opponent Pokemon can be further poisoned with Toxic spikes a
     PARAMETRIZE { item = ITEM_LUM_BERRY; }
 
     GIVEN {
-        ASSUME(gItems[ITEM_PECHA_BERRY].holdEffect == HOLD_EFFECT_CURE_PSN);
-        ASSUME(gItems[ITEM_LUM_BERRY].holdEffect == HOLD_EFFECT_CURE_STATUS);
+        ASSUME(gItemsInfo[ITEM_PECHA_BERRY].holdEffect == HOLD_EFFECT_CURE_PSN);
+        ASSUME(gItemsInfo[ITEM_LUM_BERRY].holdEffect == HOLD_EFFECT_CURE_STATUS);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WYNAUT) { Item(item); }
@@ -234,8 +234,8 @@ SINGLE_BATTLE_TEST("Player Pokemon can be further poisoned with Toxic spikes aft
     PARAMETRIZE { item = ITEM_LUM_BERRY; }
 
     GIVEN {
-        ASSUME(gItems[ITEM_PECHA_BERRY].holdEffect == HOLD_EFFECT_CURE_PSN);
-        ASSUME(gItems[ITEM_LUM_BERRY].holdEffect == HOLD_EFFECT_CURE_STATUS);
+        ASSUME(gItemsInfo[ITEM_PECHA_BERRY].holdEffect == HOLD_EFFECT_CURE_PSN);
+        ASSUME(gItemsInfo[ITEM_LUM_BERRY].holdEffect == HOLD_EFFECT_CURE_STATUS);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET) {Item(item); }
         PLAYER(SPECIES_WYNAUT);

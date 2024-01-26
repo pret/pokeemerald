@@ -181,7 +181,7 @@ SINGLE_BATTLE_TEST("Scope Lens increases the critical hit ratio by one stage")
 {
     PASSES_RANDOMLY(1, 8, RNG_CRITICAL_HIT);
     GIVEN {
-        ASSUME(gItems[ITEM_SCOPE_LENS].holdEffect == HOLD_EFFECT_SCOPE_LENS);
+        ASSUME(gItemsInfo[ITEM_SCOPE_LENS].holdEffect == HOLD_EFFECT_SCOPE_LENS);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_SCOPE_LENS); };
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -196,7 +196,7 @@ SINGLE_BATTLE_TEST("High crit rate, Super Luck and Scope Lens cause the move to 
 {
     GIVEN {
         ASSUME(gBattleMoves[MOVE_SLASH].criticalHitStage == 1);
-        ASSUME(gItems[ITEM_SCOPE_LENS].holdEffect == HOLD_EFFECT_SCOPE_LENS);
+        ASSUME(gItemsInfo[ITEM_SCOPE_LENS].holdEffect == HOLD_EFFECT_SCOPE_LENS);
         PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_SUPER_LUCK); Item(ITEM_SCOPE_LENS); };
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -221,8 +221,8 @@ SINGLE_BATTLE_TEST("Signature items Leek and Lucky Punch increase the critical h
     PARAMETRIZE { species = SPECIES_CHANSEY; item = ITEM_LUCKY_PUNCH; }
 
     GIVEN {
-        ASSUME(gItems[ITEM_LEEK].holdEffect == HOLD_EFFECT_LEEK);
-        ASSUME(gItems[ITEM_LUCKY_PUNCH].holdEffect == HOLD_EFFECT_LUCKY_PUNCH);
+        ASSUME(gItemsInfo[ITEM_LEEK].holdEffect == HOLD_EFFECT_LEEK);
+        ASSUME(gItemsInfo[ITEM_LUCKY_PUNCH].holdEffect == HOLD_EFFECT_LUCKY_PUNCH);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(species) { Item(item); }
     } WHEN {
@@ -237,7 +237,7 @@ SINGLE_BATTLE_TEST("Dire Hit increases a battler's critical hit chance by 2 stag
 {
     PASSES_RANDOMLY(1, 2, RNG_CRITICAL_HIT);
     GIVEN {
-        ASSUME(gItems[ITEM_DIRE_HIT].battleUsage == EFFECT_ITEM_SET_FOCUS_ENERGY);
+        ASSUME(gItemsInfo[ITEM_DIRE_HIT].battleUsage == EFFECT_ITEM_SET_FOCUS_ENERGY);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

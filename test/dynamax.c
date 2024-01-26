@@ -176,7 +176,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by phazing move
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by Red Card")
 {
     GIVEN {
-        ASSUME(gItems[ITEM_RED_CARD].holdEffect == HOLD_EFFECT_RED_CARD);
+        ASSUME(gItemsInfo[ITEM_RED_CARD].holdEffect == HOLD_EFFECT_RED_CARD);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_RED_CARD); }
@@ -502,7 +502,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by Choice items
     PARAMETRIZE { item = ITEM_CHOICE_BAND; }
     PARAMETRIZE { item = ITEM_NONE; }
     GIVEN {
-        ASSUME(gItems[ITEM_CHOICE_BAND].holdEffect == HOLD_EFFECT_CHOICE_BAND);
+        ASSUME(gItemsInfo[ITEM_CHOICE_BAND].holdEffect == HOLD_EFFECT_CHOICE_BAND);
         PLAYER(SPECIES_WOBBUFFET) { Item(item); };
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -520,7 +520,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by Choice items
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon cannot use Max Guard while holding Assault Vest")
 {
     GIVEN {
-        ASSUME(gItems[ITEM_ASSAULT_VEST].holdEffect == HOLD_EFFECT_ASSAULT_VEST);
+        ASSUME(gItemsInfo[ITEM_ASSAULT_VEST].holdEffect == HOLD_EFFECT_ASSAULT_VEST);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_ASSAULT_VEST); };
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -602,7 +602,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Sitrus Berries heal based on a Pokemon's non-Dynam
     PARAMETRIZE { dynamax = FALSE; }
     GIVEN {
         ASSUME(I_SITRUS_BERRY_HEAL >= GEN_4);
-        ASSUME(gItems[ITEM_SITRUS_BERRY].holdEffect == HOLD_EFFECT_RESTORE_PCT_HP);
+        ASSUME(gItemsInfo[ITEM_SITRUS_BERRY].holdEffect == HOLD_EFFECT_RESTORE_PCT_HP);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_SITRUS_BERRY); }
     } WHEN {

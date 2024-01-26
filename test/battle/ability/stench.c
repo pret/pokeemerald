@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("Stench does not stack with King's Rock")
 {
     PASSES_RANDOMLY(1, 10, RNG_STENCH);
     GIVEN {
-        ASSUME(gItems[ITEM_KINGS_ROCK].holdEffect == HOLD_EFFECT_FLINCH);
+        ASSUME(gItemsInfo[ITEM_KINGS_ROCK].holdEffect == HOLD_EFFECT_FLINCH);
         ASSUME(gBattleMoves[MOVE_TACKLE].power > 0);
 
         PLAYER(SPECIES_GRIMER) { Ability(ABILITY_STENCH); Item(ITEM_KINGS_ROCK); }

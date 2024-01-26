@@ -38,7 +38,7 @@ static const struct RHHRomHeader sRHHRomHeader =
     .movesCount = MOVES_COUNT,
     .numSpecies = NUM_SPECIES,
     .abilitiesCount = ABILITIES_COUNT,
-    .abilities = gAbilities,
+    .abilities = gAbilitiesInfo,
     .itemsCount = ITEMS_COUNT,
     .itemNameLength = ITEM_NAME_LENGTH,
 };

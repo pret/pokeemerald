@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("Items can restore a battler's HP by a fixed amount")
     PARAMETRIZE { item = ITEM_SITRUS_BERRY; hp = 30; }
 #endif
     GIVEN {
-        ASSUME(gItems[item].battleUsage == EFFECT_ITEM_RESTORE_HP);
+        ASSUME(gItemsInfo[item].battleUsage == EFFECT_ITEM_RESTORE_HP);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); MaxHP(400); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -37,7 +37,7 @@ SINGLE_BATTLE_TEST("Items can restore a battler's HP by a percentage")
     PARAMETRIZE { item = ITEM_SITRUS_BERRY; percentage = 25; }
 #endif
     GIVEN {
-        ASSUME(gItems[item].battleUsage == EFFECT_ITEM_RESTORE_HP);
+        ASSUME(gItemsInfo[item].battleUsage == EFFECT_ITEM_RESTORE_HP);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); MaxHP(400); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

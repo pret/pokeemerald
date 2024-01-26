@@ -2125,8 +2125,8 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         case EFFECT_ROLE_PLAY:
             if (aiData->abilities[battlerAtk] == aiData->abilities[battlerDef]
               || aiData->abilities[battlerDef] == ABILITY_NONE
-              || gAbilities[aiData->abilities[battlerAtk]].cantBeSuppressed
-              || gAbilities[aiData->abilities[battlerDef]].cantBeCopied)
+              || gAbilitiesInfo[aiData->abilities[battlerAtk]].cantBeSuppressed
+              || gAbilitiesInfo[aiData->abilities[battlerDef]].cantBeCopied)
                 ADJUST_SCORE(-10);
             else if (IsAbilityOfRating(aiData->abilities[battlerAtk], 5))
                 ADJUST_SCORE(-4);
@@ -2155,32 +2155,32 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             break;
         case EFFECT_SKILL_SWAP:
             if (aiData->abilities[battlerAtk] == ABILITY_NONE || aiData->abilities[battlerDef] == ABILITY_NONE
-              || gAbilities[aiData->abilities[battlerAtk]].cantBeSwapped
-              || gAbilities[aiData->abilities[battlerDef]].cantBeSwapped
+              || gAbilitiesInfo[aiData->abilities[battlerAtk]].cantBeSwapped
+              || gAbilitiesInfo[aiData->abilities[battlerDef]].cantBeSwapped
               || aiData->holdEffects[battlerDef] == HOLD_EFFECT_ABILITY_SHIELD)
                 ADJUST_SCORE(-10);
             break;
         case EFFECT_WORRY_SEED:
             if (aiData->abilities[battlerDef] == ABILITY_INSOMNIA
-              || gAbilities[aiData->abilities[battlerDef]].cantBeOverwritten
+              || gAbilitiesInfo[aiData->abilities[battlerDef]].cantBeOverwritten
               || aiData->holdEffects[battlerDef] == HOLD_EFFECT_ABILITY_SHIELD)
                 ADJUST_SCORE(-10);
             break;
         case EFFECT_GASTRO_ACID:
             if (gStatuses3[battlerDef] & STATUS3_GASTRO_ACID
-              || gAbilities[aiData->abilities[battlerDef]].cantBeSuppressed)
+              || gAbilitiesInfo[aiData->abilities[battlerDef]].cantBeSuppressed)
                 ADJUST_SCORE(-10);
             break;
         case EFFECT_ENTRAINMENT:
             if (aiData->abilities[battlerAtk] == ABILITY_NONE
-              || gAbilities[aiData->abilities[battlerAtk]].cantBeCopied
-              || gAbilities[aiData->abilities[battlerDef]].cantBeOverwritten
+              || gAbilitiesInfo[aiData->abilities[battlerAtk]].cantBeCopied
+              || gAbilitiesInfo[aiData->abilities[battlerDef]].cantBeOverwritten
               || aiData->holdEffects[battlerAtk] == HOLD_EFFECT_ABILITY_SHIELD)
                 ADJUST_SCORE(-10);
             break;
         case EFFECT_SIMPLE_BEAM:
             if (aiData->abilities[battlerDef] == ABILITY_SIMPLE
-              || gAbilities[aiData->abilities[battlerDef]].cantBeOverwritten
+              || gAbilitiesInfo[aiData->abilities[battlerDef]].cantBeOverwritten
               || aiData->holdEffects[battlerDef] == HOLD_EFFECT_ABILITY_SHIELD)
                 ADJUST_SCORE(-10);
             break;
@@ -2695,8 +2695,8 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     u32 atkPartnerAbility = aiData->abilities[BATTLE_PARTNER(battlerAtk)];
     u32 atkPartnerHoldEffect = aiData->holdEffects[BATTLE_PARTNER(battlerAtk)];
     bool32 partnerProtecting = (gBattleMoves[aiData->partnerMove].effect == EFFECT_PROTECT);
-    bool32 attackerHasBadAbility = (gAbilities[aiData->abilities[battlerAtk]].aiRating < 0);
-    bool32 partnerHasBadAbility = (gAbilities[atkPartnerAbility].aiRating < 0);
+    bool32 attackerHasBadAbility = (gAbilitiesInfo[aiData->abilities[battlerAtk]].aiRating < 0);
+    bool32 partnerHasBadAbility = (gAbilitiesInfo[atkPartnerAbility].aiRating < 0);
     u32 predictedMove = aiData->predictedMoves[battlerDef];
 
     SetTypeBeforeUsingMove(move, battlerAtk);
@@ -4074,8 +4074,8 @@ static u32 AI_CalcMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
         }
         break;
     case EFFECT_ROLE_PLAY:
-        if (!gAbilities[aiData->abilities[battlerAtk]].cantBeSuppressed
-          && !gAbilities[aiData->abilities[battlerDef]].cantBeCopied
+        if (!gAbilitiesInfo[aiData->abilities[battlerAtk]].cantBeSuppressed
+          && !gAbilitiesInfo[aiData->abilities[battlerDef]].cantBeCopied
           && !IsAbilityOfRating(aiData->abilities[battlerAtk], 5)
           && IsAbilityOfRating(aiData->abilities[battlerDef], 5))
             ADJUST_SCORE(2);
@@ -4117,7 +4117,7 @@ static u32 AI_CalcMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
             ADJUST_SCORE(2);
         break;
     case EFFECT_SKILL_SWAP:
-        if (gAbilities[aiData->abilities[battlerDef]].aiRating > gAbilities[aiData->abilities[battlerAtk]].aiRating)
+        if (gAbilitiesInfo[aiData->abilities[battlerDef]].aiRating > gAbilitiesInfo[aiData->abilities[battlerAtk]].aiRating)
             ADJUST_SCORE(2);
         break;
     case EFFECT_WORRY_SEED:
@@ -4127,7 +4127,7 @@ static u32 AI_CalcMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
             ADJUST_SCORE(2);
         break;
     case EFFECT_ENTRAINMENT:
-        if (IsAbilityOfRating(aiData->abilities[battlerDef], 5) || gAbilities[aiData->abilities[battlerAtk]].aiRating <= 0)
+        if (IsAbilityOfRating(aiData->abilities[battlerDef], 5) || gAbilitiesInfo[aiData->abilities[battlerAtk]].aiRating <= 0)
         {
             if (aiData->abilities[battlerDef] != aiData->abilities[battlerAtk] && !(gStatuses3[battlerDef] & STATUS3_GASTRO_ACID))
                 ADJUST_SCORE(2);

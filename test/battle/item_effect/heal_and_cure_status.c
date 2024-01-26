@@ -11,7 +11,7 @@ SINGLE_BATTLE_TEST("Full Restore restores a battler's HP and cures any primary s
     PARAMETRIZE{ status = STATUS1_TOXIC_POISON; }
     PARAMETRIZE{ status = STATUS1_SLEEP; }
     GIVEN {
-        ASSUME(gItems[ITEM_FULL_RESTORE].battleUsage == EFFECT_ITEM_HEAL_AND_CURE_STATUS);
+        ASSUME(gItemsInfo[ITEM_FULL_RESTORE].battleUsage == EFFECT_ITEM_HEAL_AND_CURE_STATUS);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); MaxHP(300); Status1(status); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -27,7 +27,7 @@ SINGLE_BATTLE_TEST("Full Restore restores a battler's HP and cures any primary s
 SINGLE_BATTLE_TEST("Full Restore restores a battler's HP and cures confusion")
 {
     GIVEN {
-        ASSUME(gItems[ITEM_FULL_RESTORE].battleUsage == EFFECT_ITEM_HEAL_AND_CURE_STATUS);
+        ASSUME(gItemsInfo[ITEM_FULL_RESTORE].battleUsage == EFFECT_ITEM_HEAL_AND_CURE_STATUS);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); MaxHP(300); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

@@ -44,7 +44,7 @@ SINGLE_BATTLE_TEST("Shed Tail fails if the user doesn't have enough HP")
 SINGLE_BATTLE_TEST("Shed Tail's HP cost can trigger a berry before the user switches out")
 {
     GIVEN {
-        ASSUME(gItems[ITEM_SITRUS_BERRY].battleUsage == EFFECT_ITEM_RESTORE_HP);
+        ASSUME(gItemsInfo[ITEM_SITRUS_BERRY].battleUsage == EFFECT_ITEM_RESTORE_HP);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_SITRUS_BERRY); }
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET);

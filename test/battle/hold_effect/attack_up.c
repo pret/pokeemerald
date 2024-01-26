@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gItems[ITEM_LIECHI_BERRY].holdEffect == HOLD_EFFECT_ATTACK_UP);
+    ASSUME(gItemsInfo[ITEM_LIECHI_BERRY].holdEffect == HOLD_EFFECT_ATTACK_UP);
     ASSUME(gBattleMoves[MOVE_DRAGON_RAGE].effect == EFFECT_FIXED_DAMAGE_ARG);
     ASSUME(gBattleMoves[MOVE_DRAGON_RAGE].argument == 40);
 }

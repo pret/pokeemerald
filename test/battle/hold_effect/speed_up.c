@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gItems[ITEM_SALAC_BERRY].holdEffect == HOLD_EFFECT_SPEED_UP);
+    ASSUME(gItemsInfo[ITEM_SALAC_BERRY].holdEffect == HOLD_EFFECT_SPEED_UP);
     ASSUME(gBattleMoves[MOVE_DRAGON_RAGE].effect == EFFECT_FIXED_DAMAGE_ARG);
     ASSUME(gBattleMoves[MOVE_DRAGON_RAGE].argument == 40);
 }

@@ -43,7 +43,7 @@ SINGLE_BATTLE_TEST("Substitute fails if the user doesn't have enough HP")
 SINGLE_BATTLE_TEST("Substitute's HP cost can trigger a berry")
 {
     GIVEN {
-        ASSUME(gItems[ITEM_SITRUS_BERRY].battleUsage == EFFECT_ITEM_RESTORE_HP);
+        ASSUME(gItemsInfo[ITEM_SITRUS_BERRY].battleUsage == EFFECT_ITEM_RESTORE_HP);
         PLAYER(SPECIES_WOBBUFFET) { HP(300); Item(ITEM_SITRUS_BERRY); }
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET);

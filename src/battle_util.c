@@ -5138,7 +5138,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && gBattleStruct->overwrittenAbilities[gBattlerAttacker] != GetBattlerAbility(gBattlerTarget)
              && gBattleMons[gBattlerTarget].ability != ABILITY_MUMMY
              && gBattleMons[gBattlerTarget].ability != ABILITY_LINGERING_AROMA
-             && !gAbilities[gBattleMons[gBattlerTarget].ability].cantBeSuppressed)
+             && !gAbilitiesInfo[gBattleMons[gBattlerTarget].ability].cantBeSuppressed)
             {
                 if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_ABILITY_SHIELD)
                 {
@@ -5159,7 +5159,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && TARGET_TURN_DAMAGED
              && IsMoveMakingContact(move, gBattlerAttacker)
              && !IsDynamaxed(gBattlerTarget)
-             && !gAbilities[gBattleMons[gBattlerAttacker].ability].cantBeSwapped)
+             && !gAbilitiesInfo[gBattleMons[gBattlerAttacker].ability].cantBeSwapped)
             {
                 if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_ABILITY_SHIELD)
                 {
@@ -5796,17 +5796,17 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
 
                 if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
                 {
-                    if (!gAbilities[gBattleMons[target1].ability].cantBeTraced && gBattleMons[target1].hp != 0
-                     && !gAbilities[gBattleMons[target2].ability].cantBeTraced && gBattleMons[target2].hp != 0)
+                    if (!gAbilitiesInfo[gBattleMons[target1].ability].cantBeTraced && gBattleMons[target1].hp != 0
+                     && !gAbilitiesInfo[gBattleMons[target2].ability].cantBeTraced && gBattleMons[target2].hp != 0)
                         chosenTarget = GetBattlerAtPosition((RandomPercentage(RNG_TRACE, 50) * 2) | side), effect++;
-                    else if (!gAbilities[gBattleMons[target1].ability].cantBeTraced && gBattleMons[target1].hp != 0)
+                    else if (!gAbilitiesInfo[gBattleMons[target1].ability].cantBeTraced && gBattleMons[target1].hp != 0)
                         chosenTarget = target1, effect++;
-                    else if (!gAbilities[gBattleMons[target2].ability].cantBeTraced && gBattleMons[target2].hp != 0)
+                    else if (!gAbilitiesInfo[gBattleMons[target2].ability].cantBeTraced && gBattleMons[target2].hp != 0)
                         chosenTarget = target2, effect++;
                 }
                 else
                 {
-                    if (!gAbilities[gBattleMons[target1].ability].cantBeTraced && gBattleMons[target1].hp != 0)
+                    if (!gAbilitiesInfo[gBattleMons[target1].ability].cantBeTraced && gBattleMons[target1].hp != 0)
                         chosenTarget = target1, effect++;
                 }
 
@@ -6001,7 +6001,7 @@ bool32 IsMoldBreakerTypeAbility(u32 ability)
 
 u32 GetBattlerAbility(u32 battler)
 {
-    if (gAbilities[gBattleMons[battler].ability].cantBeSuppressed)
+    if (gAbilitiesInfo[gBattleMons[battler].ability].cantBeSuppressed)
         return gBattleMons[battler].ability;
 
     if (gStatuses3[battler] & STATUS3_GASTRO_ACID)
@@ -6016,7 +6016,7 @@ u32 GetBattlerAbility(u32 battler)
     if (((IsMoldBreakerTypeAbility(gBattleMons[gBattlerAttacker].ability)
             && !(gStatuses3[gBattlerAttacker] & STATUS3_GASTRO_ACID))
             || gBattleMoves[gCurrentMove].ignoresTargetAbility)
-            && gAbilities[gBattleMons[battler].ability].breakable
+            && gAbilitiesInfo[gBattleMons[battler].ability].breakable
             && gBattlerByTurnOrder[gCurrentTurnActionNumber] == gBattlerAttacker
             && gActionsByTurnOrder[gBattlerByTurnOrder[gBattlerAttacker]] == B_ACTION_USE_MOVE
             && gCurrentTurnActionNumber < gBattlersCount)
