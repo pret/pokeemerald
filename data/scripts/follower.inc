@@ -30,17 +30,6 @@ EventScript_Follower::
   bufferlivemonnickname 0
   playfirstmoncry
   callfunc ScrFunc_getfolloweraction
-  checkpartymove MOVE_FLY
-  compare VAR_RESULT 6
-  goto_if_eq EventScript_FollowerEnd
-  bufferlivemonnickname 0
-  msgbox gText_WantsToFly, MSGBOX_YESNO
-  switch VAR_RESULT
-  case NO, EventScript_FollowerEnd
-  case YES, EventScript_FollowerFly
-  case MULTI_B_PRESSED, EventScript_FollowerEnd
-EventScript_FollowerFly::
-  callfunc ScrFunc_followerfly
 EventScript_FollowerEnd::
   waitfieldeffect FLDEFF_EMOTE
   release

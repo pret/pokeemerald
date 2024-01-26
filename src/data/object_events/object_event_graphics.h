@@ -392,6 +392,7 @@ const u32 gObjectEventPic_StrangeBall[] = INCBIN_U32("graphics/object_events/pic
 #endif
 #endif
 
+const u32 gObjectEventPic_Substitute[] = INCBIN_U32("graphics/object_events/pics/pokemon/substitute.4bpp");
 const u32 gObjectEventPic_Bulbasaur[] = INCBIN_U32("graphics/object_events/pics/pokemon/bulbasaur.4bpp");
 const u32 gObjectEventPic_Ivysaur[] = INCBIN_U32("graphics/object_events/pics/pokemon/ivysaur.4bpp");
 const u32 gObjectEventPic_Venusaur[] = INCBIN_U32("graphics/object_events/pics/pokemon/venusaur.4bpp");
@@ -835,6 +836,8 @@ const u32 gObjectEventPic_RayquazaCutscene[] = INCBIN_U32("graphics/object_event
 
 const u16 gObjectEventPal_HoOh[] = INCBIN_U16("graphics/object_events/palettes/ho_oh.gbapal");
 const u16 gObjectEventPal_Lugia[] = INCBIN_U16("graphics/object_events/palettes/lugia.gbapal");
+
+const u16 gObjectEventPal_Substitute[] = INCBIN_U16("graphics/object_events/pics/pokemon/substitute.gbapal");
 
 const u16 gObjectEventPaletteEmotes[] = INCBIN_U16("graphics/misc/emotes.gbapal");
 

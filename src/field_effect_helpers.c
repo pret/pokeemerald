@@ -55,10 +55,10 @@ u32 FldEff_Shadow(void);
 #define sIsStillReflection          data[7]
 
 void SetUpShadow(struct ObjectEvent *objectEvent, struct Sprite *sprite) {
-  gFieldEffectArguments[0] = objectEvent->localId;
-  gFieldEffectArguments[1] = gSaveBlock1Ptr->location.mapNum;
-  gFieldEffectArguments[2] = gSaveBlock1Ptr->location.mapGroup;
-  FldEff_Shadow();
+    gFieldEffectArguments[0] = objectEvent->localId;
+    gFieldEffectArguments[1] = gSaveBlock1Ptr->location.mapNum;
+    gFieldEffectArguments[2] = gSaveBlock1Ptr->location.mapGroup;
+    FldEff_Shadow();
 }
 
 void SetUpReflection(struct ObjectEvent *objectEvent, struct Sprite *sprite, bool8 stillReflection)

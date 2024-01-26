@@ -125,5 +125,6 @@ enum {
 };
 
 extern const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT];
+extern const struct FollowerMessagePool gFollowerBasicMessages[FOLLOWER_EMOTION_LENGTH];
 
 #endif //GUARD_FOLLOWER_HELPER_H

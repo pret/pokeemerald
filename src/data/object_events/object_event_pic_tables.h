@@ -2117,6 +2117,14 @@ static const struct SpriteFrameImage sPicTable_Ball_STRANGE[] = {
 
 #endif
 
+static const struct SpriteFrameImage sPicTable_Substitute[] = {
+    overworld_frame(gObjectEventPic_Substitute, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Substitute, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Substitute, 4, 4, 2),
+    overworld_frame(gObjectEventPic_Substitute, 4, 4, 3),
+    overworld_frame(gObjectEventPic_Substitute, 4, 4, 4),
+    overworld_frame(gObjectEventPic_Substitute, 4, 4, 5),
+};
 static const struct SpriteFrameImage sPicTable_Bulbasaur[] = {
     overworld_frame(gObjectEventPic_Bulbasaur, 4, 4, 0),
     overworld_frame(gObjectEventPic_Bulbasaur, 4, 4, 1),

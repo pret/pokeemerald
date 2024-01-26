@@ -297,6 +297,7 @@ void InitSpriteAffineAnim(struct Sprite *sprite);
 void SetOamMatrixRotationScaling(u8 matrixNum, s16 xScale, s16 yScale, u16 rotation);
 u16 LoadSpriteSheet(const struct SpriteSheet *sheet);
 void LoadSpriteSheets(const struct SpriteSheet *sheets);
+s16 AllocSpriteTiles(u16 tileCount);
 u16 AllocTilesForSpriteSheet(struct SpriteSheet *sheet);
 void AllocTilesForSpriteSheets(struct SpriteSheet *sheets);
 void LoadTilesForSpriteSheet(const struct SpriteSheet *sheet);

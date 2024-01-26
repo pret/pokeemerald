@@ -50,7 +50,7 @@ static const u8 sHappyMsg27[] = _("Your POKéMON is smelling the scent\nof flowe
 static const u8 sHappyMsg28[] = _("{STR_VAR_1} seems very happy to see\nyou!");
 static const u8 sHappyMsg29[] = _("{STR_VAR_1} faced this way and\ngrinned.");
 static const u8 sHappyMsg30[] = _("{STR_VAR_1} happily cuddled up to\nyou!");
-  // Conditional messages begin here, index 31
+// Conditional messages begin here, index 31
 static const u8 sHappyMsg31[] = _("Your POKéMON seems happy about the\ngreat weather.");
 static const u8 sHappyMsg32[] = _("{STR_VAR_1} is very composed and\nsure of itself!");
 
@@ -106,7 +106,7 @@ const struct FollowerMsgInfo gFollowerNeutralMessages[] = {
 static const u8 sSadMsg00[] = _("{STR_VAR_1} is dizzy.");
 static const u8 sSadMsg01[] = _("{STR_VAR_1} is stepping on your\nfeet!");
 static const u8 sSadMsg02[] = _("{STR_VAR_1} seems a little tired.");
-  // Conditional messages begin, index 3
+// Conditional messages begin, index 3
 static const u8 sSadMsg03[] = _("{STR_VAR_1} is not happy.");
 static const u8 sSadMsg04[] = _("{STR_VAR_1} is going to fall down!\n");
 static const u8 sSadMsg05[] = _("{STR_VAR_1} seems to be about to\nfall over!");
@@ -123,7 +123,7 @@ const struct FollowerMsgInfo gFollowerSadMessages[] = {
 static const u8 sUpsetMsg00[] = _("{STR_VAR_1} seems unhappy somehow…");
 static const u8 sUpsetMsg01[] = _("{STR_VAR_1} is making an unhappy\nface.");
 static const u8 sUpsetMsg02[] = _("…Your POKéMON seems a little\ncold.");
-  // Conditional messages, index 3
+// Conditional messages, index 3
 static const u8 sUpsetMsg03[] = _("{STR_VAR_1} is taking shelter in the\ngrass from the rain.");
 
 const struct FollowerMsgInfo gFollowerUpsetMessages[] = {
@@ -225,7 +225,7 @@ static const u8 sSurpriseMsg16[] = _("{STR_VAR_1} sensed something strange\nand 
 static const u8 sSurpriseMsg17[] = _("{STR_VAR_1} is scared and snuggled\nup to you!");
 static const u8 sSurpriseMsg18[] = _("{STR_VAR_1} is feeling an unusual\npresence…");
 static const u8 sSurpriseMsg19[] = _("{STR_VAR_1} is getting tense with\nnervous energy.");
-  // Conditional messages, index 20
+// Conditional messages, index 20
 static const u8 sSurpriseMsg20[] = _("{STR_VAR_1} seems to be very\nsurprised that it is raining!");
 
 const struct FollowerMsgInfo gFollowerSurpriseMessages[] = {

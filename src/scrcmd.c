@@ -2074,9 +2074,9 @@ bool8 ScrCmd_playmoncry(struct ScriptContext *ctx)
 
 bool8 ScrFunc_playfirstmoncry(struct ScriptContext *ctx)
 {
-  u16 species = GetMonData(GetFirstLiveMon(), MON_DATA_SPECIES);
-  PlayCry_Script(species, 0);
-  return FALSE;
+    u16 species = GetMonData(GetFirstLiveMon(), MON_DATA_SPECIES);
+    PlayCry_Script(species, 0);
+    return FALSE;
 }
 
 bool8 ScrCmd_waitmoncry(struct ScriptContext *ctx)
