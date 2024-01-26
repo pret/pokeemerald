@@ -203,14 +203,14 @@ SINGLE_BATTLE_TEST("Fling doesn't consume the item if pokemon is asleep/frozen/p
 
 SINGLE_BATTLE_TEST("Fling applies special effects when throwing specific Items")
 {
-    u16 item, effect;
+    u16 item;
 
-    PARAMETRIZE {item = ITEM_FLAME_ORB; effect = EFFECT_WILL_O_WISP; }
-    PARAMETRIZE {item = ITEM_TOXIC_ORB; effect = EFFECT_TOXIC; }
-    PARAMETRIZE {item = ITEM_POISON_BARB; effect = EFFECT_POISON; }
-    PARAMETRIZE {item = ITEM_LIGHT_BALL; effect = EFFECT_PARALYZE; }
-    PARAMETRIZE {item = ITEM_RAZOR_FANG; effect = EFFECT_FLINCH_HIT; }
-    PARAMETRIZE {item = ITEM_KINGS_ROCK; effect = EFFECT_FLINCH_HIT; }
+    PARAMETRIZE {item = ITEM_FLAME_ORB; }
+    PARAMETRIZE {item = ITEM_LIGHT_BALL; }
+    PARAMETRIZE {item = ITEM_POISON_BARB; }
+    PARAMETRIZE {item = ITEM_TOXIC_ORB; }
+    PARAMETRIZE {item = ITEM_RAZOR_FANG; }
+    PARAMETRIZE {item = ITEM_KINGS_ROCK; }
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(item); }
@@ -221,26 +221,116 @@ SINGLE_BATTLE_TEST("Fling applies special effects when throwing specific Items")
         MESSAGE("Wobbuffet used Fling!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, player);
         HP_BAR(opponent);
-        switch (effect)
+        switch (item)
         {
-        case EFFECT_WILL_O_WISP:
-            MESSAGE("Foe Wobbuffet was burned!");
-            STATUS_ICON(opponent, STATUS1_BURN);
+        case ITEM_FLAME_ORB:
+            {
+                MESSAGE("Foe Wobbuffet was burned!");
+                STATUS_ICON(opponent, STATUS1_BURN);
+            }
             break;
-        case EFFECT_PARALYZE:
-            MESSAGE("Foe Wobbuffet is paralyzed! It may be unable to move!");
-            STATUS_ICON(opponent, STATUS1_PARALYSIS);
+        case ITEM_LIGHT_BALL:
+            {
+                MESSAGE("Foe Wobbuffet is paralyzed! It may be unable to move!");
+                STATUS_ICON(opponent, STATUS1_PARALYSIS);
+            }
             break;
-        case EFFECT_POISON:
-            MESSAGE("Foe Wobbuffet was poisoned!");
-            STATUS_ICON(opponent, STATUS1_POISON);
+        case ITEM_POISON_BARB:
+            {
+                MESSAGE("Foe Wobbuffet was poisoned!");
+                STATUS_ICON(opponent, STATUS1_POISON);
+            }
             break;
-        case EFFECT_TOXIC:
-            MESSAGE("Foe Wobbuffet is badly poisoned!");
-            STATUS_ICON(opponent, STATUS1_TOXIC_POISON);
+        case ITEM_TOXIC_ORB:
+            {
+                MESSAGE("Foe Wobbuffet is badly poisoned!");
+                STATUS_ICON(opponent, STATUS1_TOXIC_POISON);
+            }
             break;
-        case EFFECT_FLINCH_HIT:
-            MESSAGE("Foe Wobbuffet flinched!");
+        case ITEM_RAZOR_FANG:
+        case ITEM_KINGS_ROCK:
+            {
+                MESSAGE("Foe Wobbuffet flinched!");
+            }
+            break;
+        }
+    }
+}
+
+SINGLE_BATTLE_TEST("Fling's secondary effects are blocked by Shield Dust")
+{
+    u16 item;
+
+    PARAMETRIZE {item = ITEM_FLAME_ORB; }
+    PARAMETRIZE {item = ITEM_LIGHT_BALL; }
+    PARAMETRIZE {item = ITEM_POISON_BARB; }
+    PARAMETRIZE {item = ITEM_TOXIC_ORB; }
+    PARAMETRIZE {item = ITEM_RAZOR_FANG; }
+    PARAMETRIZE {item = ITEM_KINGS_ROCK; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Item(item); }
+        OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_SHIELD_DUST); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_FLING); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Fling!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, player);
+        HP_BAR(opponent);
+        switch (item)
+        {
+        case ITEM_FLAME_ORB:
+            {
+                NONE_OF {
+                    MESSAGE("Foe Wobbuffet was burned!");
+                    STATUS_ICON(opponent, STATUS1_BURN);
+                }
+                MESSAGE("The Flame Orb was used up...");
+            }
+            break;
+        case ITEM_LIGHT_BALL:
+            {
+                NONE_OF {
+                    MESSAGE("Foe Wobbuffet is paralyzed! It may be unable to move!");
+                    STATUS_ICON(opponent, STATUS1_PARALYSIS);
+                }
+                MESSAGE("The Light Ball was used up...");
+            }
+            break;
+        case ITEM_POISON_BARB:
+            {
+                NONE_OF {
+                    MESSAGE("Foe Wobbuffet was poisoned!");
+                    STATUS_ICON(opponent, STATUS1_POISON);
+                }
+                MESSAGE("The Poison Barb was used up...");
+            }
+            break;
+        case ITEM_TOXIC_ORB:
+            {
+                NONE_OF {
+                    MESSAGE("Foe Wobbuffet is badly poisoned!");
+                    STATUS_ICON(opponent, STATUS1_TOXIC_POISON);
+                }
+                MESSAGE("The Toxic Orb was used up...");
+            }
+            break;
+        case ITEM_RAZOR_FANG:
+        case ITEM_KINGS_ROCK:
+            {
+                NONE_OF {
+                    MESSAGE("Foe Wobbuffet flinched!");
+                }
+                switch (item)
+                {
+                    case ITEM_RAZOR_FANG:
+                        MESSAGE("The Razor Fang was used up...");
+                        break;
+                    case ITEM_KINGS_ROCK:
+                        MESSAGE("The King's Rock was used up...");
+                        break;
+                }
+            }
             break;
         }
     }
@@ -272,6 +362,7 @@ SINGLE_BATTLE_TEST("Fling - thrown berry's effect activates for the target even 
     PARAMETRIZE { item = ITEM_SALAC_BERRY; effect = HOLD_EFFECT_SPEED_UP; statId = STAT_SPEED; }
 
     GIVEN {
+        ASSUME(gBattleMoves[MOVE_FLING].category == BATTLE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET) { Item(item); Attack(1); }
         OPPONENT(SPECIES_WOBBUFFET) { Status1(status1); HP(399); MaxHP(400); MovesWithPP({MOVE_CELEBRATE, 35}); }
     } WHEN {

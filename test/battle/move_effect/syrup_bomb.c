@@ -164,3 +164,51 @@ SINGLE_BATTLE_TEST("Sticky syrup will not decrease speed further then minus six"
         }
     }
 }
+
+SINGLE_BATTLE_TEST("Sticky Syrup is removed when the user switches out")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SYRUP_BOMB); }
+        TURN { SWITCH(player, 1); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SYRUP_BOMB, player);
+        HP_BAR(opponent);
+        MESSAGE("Foe Wobbuffet got covered in sticky syrup!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SYRUP_BOMB_SPEED_DROP, opponent);
+        MESSAGE("Foe Wobbuffet's Speed fell!");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SYRUP_BOMB_SPEED_DROP, opponent);
+            MESSAGE("Foe Wobbuffet's Speed fell!");
+        }
+    }
+}
+
+SINGLE_BATTLE_TEST("Sticky Syrup is removed when the user faints")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); }
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SYRUP_BOMB);
+               MOVE(opponent, MOVE_TACKLE);
+               SEND_OUT(player, 1);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SYRUP_BOMB, player);
+        HP_BAR(opponent);
+        MESSAGE("Foe Wobbuffet got covered in sticky syrup!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        HP_BAR(player);
+        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Go! Wynaut!");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SYRUP_BOMB_SPEED_DROP, opponent);
+            MESSAGE("Foe Wobbuffet's Speed fell!");
+        }
+    }
+}

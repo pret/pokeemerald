@@ -4,7 +4,8 @@
 ASSUMPTIONS
 {
     ASSUME(gItems[ITEM_LANSAT_BERRY].holdEffect == HOLD_EFFECT_CRITICAL_UP);
-    ASSUME(gBattleMoves[MOVE_DRAGON_RAGE].effect == EFFECT_DRAGON_RAGE);
+    ASSUME(gBattleMoves[MOVE_DRAGON_RAGE].effect == EFFECT_FIXED_DAMAGE_ARG);
+    ASSUME(gBattleMoves[MOVE_DRAGON_RAGE].argument == 40);
 }
 
 SINGLE_BATTLE_TEST("Lansat Berry raises the holder's critical-hit-ratio by two stages when HP drops to 1/4 or below")

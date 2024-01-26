@@ -3,7 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_HEX].effect == EFFECT_HEX);
+    ASSUME(gBattleMoves[MOVE_HEX].effect == EFFECT_DOUBLE_POWER_ON_ARG_STATUS);
+    ASSUME(gBattleMoves[MOVE_HEX].argument == STATUS1_ANY);
 }
 
 SINGLE_BATTLE_TEST("Hex deals double damage to foes with a status", s16 damage)

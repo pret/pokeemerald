@@ -73,8 +73,8 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route133_EventScript_ItemBigPearl",
+      "trainer_sight_or_berry_tree_id": "ITEM_BIG_PEARL",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_ROUTE_133_BIG_PEARL"
     },
     {
@@ -86,8 +86,8 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route133_EventScript_ItemStarPiece",
+      "trainer_sight_or_berry_tree_id": "ITEM_STAR_PIECE",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_ROUTE_133_STAR_PIECE"
     },
     {
@@ -151,8 +151,8 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route133_EventScript_ItemMaxRevive",
+      "trainer_sight_or_berry_tree_id": "ITEM_MAX_REVIVE",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_ROUTE_133_MAX_REVIVE"
     }
   ],

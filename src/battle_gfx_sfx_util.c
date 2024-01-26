@@ -25,6 +25,8 @@
 #include "constants/songs.h"
 #include "constants/rgb.h"
 #include "constants/battle_palace.h"
+#include "constants/battle_move_effects.h"
+
 
 extern const u8 gBattlePalaceNatureToMoveTarget[];
 extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
@@ -635,8 +637,12 @@ void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battler)
     // dynamax tint
     if (IsDynamaxed(battler))
     {
-        BlendPalette(paletteOffset, 16, 4, RGB(31, 0, 12));
-        CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
+        // Calyrex and its forms have a blue dynamax aura instead of red.
+        if (GET_BASE_SPECIES_ID(species) == SPECIES_CALYREX)
+            BlendPalette(paletteOffset, 16, 4, RGB(12, 0, 31));
+        else
+            BlendPalette(paletteOffset, 16, 4, RGB(31, 0, 12));
+        CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, PLTT_SIZEOF(16));
     }
 }
 
@@ -996,7 +1002,7 @@ void LoadBattleMonGfxAndAnimate(u8 battler, bool8 loadMonSprite, u8 spriteId)
 
 void TrySetBehindSubstituteSpriteBit(u8 battler, u16 move)
 {
-    if (move == MOVE_SUBSTITUTE)
+    if (gBattleMoves[move].effect == EFFECT_SUBSTITUTE || gBattleMoves[move].effect == EFFECT_SHED_TAIL)
         gBattleSpritesDataPtr->battlerData[battler].behindSubstitute = 1;
 }
 

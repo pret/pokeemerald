@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_HURRICANE].effect == EFFECT_HURRICANE);
+    ASSUME(gBattleMoves[MOVE_HURRICANE].effect == EFFECT_THUNDER);
     ASSUME(gBattleMoves[MOVE_HURRICANE].accuracy == 70);
 }
 

@@ -989,7 +989,23 @@
 #define ITEM_METAL_ALLOY 814
 #define ITEM_STELLAR_TERA_SHARD 815
 
-#define ITEMS_COUNT 816
+#define ITEM_JUBILIFE_MUFFIN 816
+#define ITEM_REMEDY 817
+#define ITEM_FINE_REMEDY 818
+#define ITEM_SUPERB_REMEDY 819
+#define ITEM_AUX_EVASION 820
+#define ITEM_AUX_GUARD 821
+#define ITEM_AUX_POWER 822
+#define ITEM_AUX_POWERGUARD 823
+#define ITEM_CHOICE_DUMPLING 824
+#define ITEM_SWAP_SNACK 825
+#define ITEM_TWICE_SPICED_RADISH 826
+#define ITEM_POKESHI_DOLL 827
+
+// HOPO BERRY
+// LEGEND PLATE
+
+#define ITEMS_COUNT 828
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations
@@ -1022,13 +1038,12 @@
 #define NUM_TECHNICAL_MACHINES 100
 #define NUM_HIDDEN_MACHINES 8
 
-#define MAX_BAG_ITEM_CAPACITY  99
-#define MAX_PC_ITEM_CAPACITY   999
-#define MAX_BERRY_CAPACITY     999
+#define MAX_BAG_ITEM_CAPACITY         999
+#define MAX_PC_ITEM_CAPACITY          999
+#define MAX_PYRAMID_BAG_ITEM_CAPACITY  99 // Values higher than 255 require free SaveBlock2 space.
 
-#define BAG_ITEM_CAPACITY_DIGITS 2
-#define BERRY_CAPACITY_DIGITS 3
-#define MAX_ITEM_DIGITS BERRY_CAPACITY_DIGITS
+#define MAX_ITEM_DIGITS         ((MAX_BAG_ITEM_CAPACITY > 99) ? 3 : 2)
+#define MAX_PYRAMID_ITEM_DIGITS ((MAX_PYRAMID_BAG_ITEM_CAPACITY > 99) ? 3 : 2)
 
 // Secondary IDs for rods
 #define OLD_ROD   0

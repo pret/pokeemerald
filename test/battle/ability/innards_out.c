@@ -15,6 +15,7 @@ SINGLE_BATTLE_TEST("Innards Out deal dmg on fainting equal to the amount of dmg 
         OPPONENT(SPECIES_WOBBUFFET) { HP(70); SpAttack(1000); }
         OPPONENT(SPECIES_WOBBUFFET);
         ASSUME(gBattleMoves[MOVE_PSYCHIC].power != 0);
+        ASSUME(gBattleMoves[MOVE_PSYCHIC].category == BATTLE_CATEGORY_SPECIAL);
     } WHEN {
         TURN { MOVE(opponent, MOVE_PSYCHIC); SEND_OUT(player, 1); if (hp == 100) { SEND_OUT(opponent, 1); } }
     } SCENE {

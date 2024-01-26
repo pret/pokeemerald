@@ -9,7 +9,7 @@ SINGLE_BATTLE_TEST("Alluring Voice confuses the target if the target raised a st
     PARAMETRIZE { move = MOVE_SWORDS_DANCE; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_ALLURING_VOICE].effect == EFFECT_CONFUSE_HIT);
+        ASSUME(MoveHasMoveEffect(MOVE_ALLURING_VOICE, MOVE_EFFECT_CONFUSION));
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -33,7 +33,7 @@ SINGLE_BATTLE_TEST("Alluring Voice confuses the target if the target raised a st
 SINGLE_BATTLE_TEST("Alluring Voice confuse effect is removed if it is Sheer Force boosted")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_ALLURING_VOICE].effect == EFFECT_CONFUSE_HIT);
+        ASSUME(MoveHasMoveEffect(MOVE_ALLURING_VOICE, MOVE_EFFECT_CONFUSION));
         PLAYER(SPECIES_NIDOKING) { Ability(ABILITY_SHEER_FORCE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

@@ -62,8 +62,8 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route110_TrickHousePuzzle7_EventScript_ItemTropicMail",
+      "trainer_sight_or_berry_tree_id": "ITEM_TROPIC_MAIL",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_TRICK_HOUSE_PUZZLE_7_TROPIC_MAIL"
     },
     {

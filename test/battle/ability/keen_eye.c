@@ -174,7 +174,7 @@ SINGLE_BATTLE_TEST("Keen Eye & Gen9+ Illuminate don't prevent Spectral Thief fro
 
     GIVEN {
         ASSUME(gBattleMoves[MOVE_HONE_CLAWS].effect == EFFECT_ATTACK_ACCURACY_UP);
-        ASSUME(gBattleMoves[MOVE_SPECTRAL_THIEF].effect == EFFECT_SPECTRAL_THIEF);
+        ASSUME(MoveHasMoveEffect(MOVE_SPECTRAL_THIEF, MOVE_EFFECT_SPECTRAL_THIEF) == TRUE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(species) { Ability(ability); }
     } WHEN {

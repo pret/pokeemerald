@@ -170,7 +170,7 @@ SINGLE_BATTLE_TEST("Red Card does not activate if stolen by a move")
     bool32 activate;
     PARAMETRIZE { item = ITEM_NONE; activate = FALSE; }
     PARAMETRIZE { item = ITEM_POTION; activate = TRUE; }
-    ASSUME(gBattleMoves[MOVE_THIEF].effect == EFFECT_THIEF);
+    ASSUME(MoveHasMoveEffect(MOVE_THIEF, MOVE_EFFECT_STEAL_ITEM) == TRUE);
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_RED_CARD); }
@@ -427,6 +427,23 @@ SINGLE_BATTLE_TEST("Red Card is consumed after dragged out replacement has its S
         }
     } THEN {
         EXPECT(opponent->item == ITEM_NONE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Red Card does not cause the dragged out mon to lose hp due to it's held Life Orb")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT) { Item(ITEM_LIFE_ORB); }
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_RED_CARD); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
+        MESSAGE("Foe Wobbuffet held up its Red Card against Wobbuffet!");
+        MESSAGE("Wynaut was dragged out!");
+        NOT MESSAGE("Wynaut was hurt by its Life Orb!");
     }
 }
 

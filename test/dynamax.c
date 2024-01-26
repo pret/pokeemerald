@@ -701,6 +701,8 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) Max Knuckle raises both allies' attack")
     s16 damage[4];
     GIVEN {
         ASSUME(gBattleMoves[MOVE_MAX_KNUCKLE].argument == MAX_EFFECT_RAISE_TEAM_ATTACK);
+        ASSUME(gBattleMoves[MOVE_CLOSE_COMBAT].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gBattleMoves[MOVE_TACKLE].category == BATTLE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -1271,6 +1273,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Snooze makes only the target drowsy")
     PASSES_RANDOMLY(1, 2, RNG_G_MAX_SNOOZE);
     GIVEN {
         ASSUME(gBattleMoves[MOVE_G_MAX_SNOOZE].argument == MAX_EFFECT_YAWN_FOE);
+        ASSUME(gBattleMoves[MOVE_DARK_PULSE].category == BATTLE_CATEGORY_SPECIAL); // Otherwise, Blissey faints.
         PLAYER(SPECIES_GRIMMSNARL) { GigantamaxFactor(TRUE); }
         PLAYER(SPECIES_IMPIDIMP);
         OPPONENT(SPECIES_BLISSEY);
@@ -1391,6 +1394,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Chi Strike boosts allies' crit chance")
 DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Depletion takes away 2 PP from the target's last move")
 {
     GIVEN {
+        ASSUME(gBattleMoves[MOVE_DRAGON_CLAW].category == BATTLE_CATEGORY_PHYSICAL); // Otherwise Sableye faints.
         ASSUME(gBattleMoves[MOVE_G_MAX_DEPLETION].argument == MAX_EFFECT_SPITE);
         PLAYER(SPECIES_DURALUDON) { GigantamaxFactor(TRUE); }
         PLAYER(SPECIES_WYNAUT);

@@ -130,6 +130,7 @@ SINGLE_BATTLE_TEST("Rage Fist base power is not increased if a substitute was hi
     s16 timesGotHit[2];
 
     GIVEN {
+        ASSUME(gBattleMoves[MOVE_CRUNCH].category == BATTLE_CATEGORY_PHYSICAL); // Substitute doesn't fade otherwise
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_REGIROCK);
     } WHEN {

@@ -105,3 +105,16 @@ DOUBLE_BATTLE_TEST("Mind Blown causes everyone to faint in a double battle")
         MESSAGE("Wobbuffet fainted!");
     }
 }
+
+SINGLE_BATTLE_TEST("Mind Blown hp loss is prevented by Magic Guard")
+{
+    GIVEN {
+        PLAYER(SPECIES_CLEFAIRY) { Ability(ABILITY_MAGIC_GUARD); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_MIND_BLOWN); }
+    } SCENE {
+        NOT HP_BAR(player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_MIND_BLOWN, player);
+    }
+}

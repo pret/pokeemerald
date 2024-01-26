@@ -280,11 +280,11 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Skeledirge, 64, 64),
-        .frontPicYOffset = 7,
+        .frontPicYOffset = 5,
         .frontAnimFrames = sAnims_Skeledirge,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         BACK_PIC(Skeledirge, 64, 64),
-        .backPicYOffset = 0,
+        .backPicYOffset = 8,
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(Skeledirge),
         ICON(Skeledirge, 0),
@@ -507,6 +507,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .pokemonOffset = 17,                                \
         .trainerScale = 256,                                \
         .trainerOffset = 0,                                 \
+        .teachableLearnset = sOinkologneTeachableLearnset,  \
         .formSpeciesIdTable = sOinkologneFormSpeciesIdTable
 
     [SPECIES_OINKOLOGNE_MALE] =
@@ -535,8 +536,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         PALETTES(OinkologneMale),
         ICON(OinkologneMale, 1),
         //FOOTPRINT(Oinkologne)
-        LEARNSETS(OinkologneMale),
-
+        .levelUpLearnset = sOinkologneMaleLevelUpLearnset,
     },
 
     [SPECIES_OINKOLOGNE_FEMALE] =
@@ -566,7 +566,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         PALETTES(OinkologneFemale),
         ICON(OinkologneFemale, 2),
         //FOOTPRINT(Oinkologne)
-        LEARNSETS(OinkologneFemale),
+        .levelUpLearnset = sOinkologneFemaleLevelUpLearnset,
     },
 #endif //P_FAMILY_LECHONK
 
@@ -1622,7 +1622,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .growthRate = GROWTH_SLOW,
         .eggGroups = { EGG_GROUP_HUMAN_LIKE, EGG_GROUP_HUMAN_LIKE },
         .abilities = { ABILITY_FLASH_FIRE, ABILITY_NONE, ABILITY_WEAK_ARMOR },
-        .bodyColor = BODY_COLOR_BLUE,
+        .bodyColor = BODY_COLOR_PURPLE,
         .speciesName = _("Ceruledge"),
         .cryId = CRY_CERULEDGE,
         .natDexNum = NATIONAL_DEX_CERULEDGE,
@@ -1688,7 +1688,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Tadbulb, 64, 64),
-        .frontPicYOffset = 11,
+        .frontPicYOffset = 4,
         .frontAnimFrames = sAnims_Tadbulb,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         .enemyMonElevation = 12,
@@ -3670,7 +3670,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
     [SPECIES_TATSUGIRI_CURLY] =
     {
         TATSUGIRI_MISC_INFO,
-        .bodyColor = BODY_COLOR_PINK,
+        .bodyColor = BODY_COLOR_RED,
         .cryId = CRY_TATSUGIRI_CURLY,
         .description = COMPOUND_STRING(
             "This is a small dragon Pokémon. It\n"
@@ -3686,7 +3686,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
     [SPECIES_TATSUGIRI_DROOPY] =
     {
         TATSUGIRI_MISC_INFO,
-        .bodyColor = BODY_COLOR_RED,
+        .bodyColor = BODY_COLOR_PINK,
         .cryId = CRY_TATSUGIRI_DROOPY,
         .description = COMPOUND_STRING(
             "This Pokémon tricks its opponents\n"
@@ -3801,11 +3801,11 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(ScreamTail, 64, 64),
-        .frontPicYOffset = 7,
+        .frontPicYOffset = 10,
         .frontAnimFrames = sAnims_ScreamTail,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         BACK_PIC(ScreamTail, 64, 64),
-        .backPicYOffset = 0,
+        .backPicYOffset = 10,
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(ScreamTail),
         ICON(ScreamTail, 0),
@@ -3833,7 +3833,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .growthRate = GROWTH_SLOW,
         .eggGroups = { EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED },
         .abilities = { ABILITY_PROTOSYNTHESIS, ABILITY_NONE },
-        .bodyColor = BODY_COLOR_GRAY,
+        .bodyColor = BODY_COLOR_WHITE,
         .isParadoxForm = TRUE,
         .speciesName = _("BruteBonet"),
         .cryId = CRY_BRUTE_BONNET,
@@ -3851,11 +3851,11 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(BruteBonnet, 64, 64),
-        .frontPicYOffset = 5,
+        .frontPicYOffset = 7,
         .frontAnimFrames = sAnims_BruteBonnet,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         BACK_PIC(BruteBonnet, 64, 64),
-        .backPicYOffset = 12,
+        .backPicYOffset = 13,
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(BruteBonnet),
         ICON(BruteBonnet, 1),
@@ -3903,12 +3903,12 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(FlutterMane, 64, 64),
-        .frontPicYOffset = 5,
+        .frontPicYOffset = 8,
         .frontAnimFrames = sAnims_FlutterMane,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .enemyMonElevation = 5,
+        .enemyMonElevation = 18,
         BACK_PIC(FlutterMane, 64, 64),
-        .backPicYOffset = 10,
+        .backPicYOffset = 1,
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(FlutterMane),
         ICON(FlutterMane, 4),
@@ -3936,7 +3936,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .growthRate = GROWTH_SLOW,
         .eggGroups = { EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED },
         .abilities = { ABILITY_PROTOSYNTHESIS, ABILITY_NONE },
-        .bodyColor = BODY_COLOR_RED,
+        .bodyColor = BODY_COLOR_WHITE,
         .isParadoxForm = TRUE,
         .speciesName = _("SlithrWing"),
         .cryId = CRY_SLITHER_WING,
@@ -3957,7 +3957,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .frontAnimFrames = sAnims_SlitherWing,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         BACK_PIC(SlitherWing, 64, 64),
-        .backPicYOffset = 0,
+        .backPicYOffset = 5,
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(SlitherWing),
         ICON(SlitherWing, 3),
@@ -4003,11 +4003,11 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(SandyShocks, 64, 64),
-        .frontPicYOffset = 1,
+        .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_SandyShocks,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         BACK_PIC(SandyShocks, 64, 64),
-        .backPicYOffset = 10,
+        .backPicYOffset = 4,
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(SandyShocks),
         ICON(SandyShocks, 0),
@@ -4103,11 +4103,11 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(IronBundle, 64, 64),
-        .frontPicYOffset = 4,
+        .frontPicYOffset = 8,
         .frontAnimFrames = sAnims_IronBundle,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         BACK_PIC(IronBundle, 64, 64),
-        .backPicYOffset = 9,
+        .backPicYOffset = 6,
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(IronBundle),
         ICON(IronBundle, 0),
@@ -4236,7 +4236,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .growthRate = GROWTH_SLOW,
         .eggGroups = { EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED },
         .abilities = { ABILITY_QUARK_DRIVE, ABILITY_NONE },
-        .bodyColor = BODY_COLOR_YELLOW,
+        .bodyColor = BODY_COLOR_WHITE,
         .isParadoxForm = TRUE,
         .speciesName = _("Iron Moth"),
         .cryId = CRY_IRON_MOTH,
@@ -4385,7 +4385,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .growthRate = GROWTH_SLOW,
         .eggGroups = { EGG_GROUP_DRAGON, EGG_GROUP_MINERAL },
         .abilities = { ABILITY_THERMAL_EXCHANGE, ABILITY_NONE, ABILITY_ICE_BODY },
-        .bodyColor = BODY_COLOR_GRAY,
+        .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Arctibax"),
         .cryId = CRY_ARCTIBAX,
         .natDexNum = NATIONAL_DEX_ARCTIBAX,
@@ -4433,7 +4433,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .growthRate = GROWTH_SLOW,
         .eggGroups = { EGG_GROUP_DRAGON, EGG_GROUP_MINERAL },
         .abilities = { ABILITY_THERMAL_EXCHANGE, ABILITY_NONE, ABILITY_ICE_BODY },
-        .bodyColor = BODY_COLOR_GRAY,
+        .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Baxcalibur"),
         .cryId = CRY_BAXCALIBUR,
         .natDexNum = NATIONAL_DEX_BAXCALIBUR,
@@ -4495,7 +4495,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .baseSpAttack  = 75,
         .baseSpDefense = 70,
         .abilities = { ABILITY_RATTLED, ABILITY_NONE },
-        .bodyColor = BODY_COLOR_BROWN,
+        .bodyColor = BODY_COLOR_RED,
         .categoryName = _("Coin Chest"),
         .height = 3,
         .weight = 50,
@@ -4526,7 +4526,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .baseSpAttack  = 75,
         .baseSpDefense = 45,
         .abilities = { ABILITY_RUN_AWAY, ABILITY_NONE },
-        .bodyColor = BODY_COLOR_BLUE,
+        .bodyColor = BODY_COLOR_GRAY,
         .categoryName = _("Coin Hunter"),
         .height = 1,
         .weight = 1,
@@ -4785,9 +4785,9 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .frontPicYOffset = 10,
         .frontAnimFrames = sAnims_ChiYu,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .enemyMonElevation = 9,
+        .enemyMonElevation = 15,
         BACK_PIC(ChiYu, 64, 64),
-        .backPicYOffset = 0,
+        .backPicYOffset = 14,
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(ChiYu),
         ICON(ChiYu, 0),
@@ -4815,7 +4815,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .growthRate = GROWTH_SLOW,
         .eggGroups = { EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED },
         .abilities = { ABILITY_PROTOSYNTHESIS, ABILITY_NONE },
-        .bodyColor = BODY_COLOR_GREEN,
+        .bodyColor = BODY_COLOR_BLUE,
         .isParadoxForm = TRUE,
         .speciesName = _("RoarngMoon"),
         .cryId = CRY_ROARING_MOON,
@@ -4966,7 +4966,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .growthRate = GROWTH_SLOW,
         .eggGroups = { EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED },
         .abilities = { ABILITY_HADRON_ENGINE, ABILITY_NONE, ABILITY_NONE },
-        .bodyColor = BODY_COLOR_BLUE,
+        .bodyColor = BODY_COLOR_PURPLE,
         .isLegendary = TRUE,
         .isParadoxForm = TRUE,
         .speciesName = _("Miraidon"),
@@ -5443,7 +5443,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .baseSpDefense = 93,
         .types = { TYPE_FIRE, TYPE_DRAGON },
         .catchRate = 10,
-        .expYield = 261, //Currently unknown
+        .expYield = 295,
         .evYield_Defense = 3,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 50,
@@ -5493,7 +5493,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .baseSpDefense = 89,
         .types = { TYPE_ELECTRIC, TYPE_DRAGON },
         .catchRate = 10,
-        .expYield = 261, //Currently unknown
+        .expYield = 295,
         .evYield_SpAttack = 3,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 50,
@@ -5543,7 +5543,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .baseSpDefense = 108,
         .types = { TYPE_ROCK, TYPE_PSYCHIC },
         .catchRate = 10,
-        .expYield = 261, //Currently unknown
+        .expYield = 295,
         .evYield_Speed = 3,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 50,
@@ -5592,7 +5592,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .baseSpDefense = 108,
         .types = { TYPE_STEEL, TYPE_PSYCHIC },
         .catchRate = 10,
-        .expYield = 261, //Currently unknown
+        .expYield = 295,
         .evYield_SpAttack = 3,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 50,
@@ -5635,9 +5635,8 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
 #define TERAPAGOS_MISC_INFO                                                             \
         .types = { TYPE_NORMAL, TYPE_NORMAL },                                          \
         .catchRate = 255,                                                               \
-        .expYield = 275,                                                                \
         .genderRatio = PERCENT_FEMALE(50),                                              \
-        .eggCycles = 20,                                                                \
+        .eggCycles = 5,                                                                 \
         .friendship = STANDARD_FRIENDSHIP,                                              \
         .growthRate = GROWTH_SLOW,                                                      \
         .eggGroups = { EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED },    \
@@ -5661,6 +5660,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .baseSpeed     = 60,
         .baseSpAttack  = 65,
         .baseSpDefense = 85,
+        .expYield = 90,
         .evYield_Defense = 1,
         .abilities = { ABILITY_TERA_SHIFT, ABILITY_NONE },
         .height = 2,
@@ -5694,7 +5694,9 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .baseSpeed     = 85,
         .baseSpAttack  = 105,
         .baseSpDefense = 110,
+        .expYield = 120,
         .evYield_Defense = 2,
+        .evYield_SpDefense = 2,
         .abilities = { ABILITY_TERA_SHELL, ABILITY_NONE },
         .height = 3,
         .weight = 160,
@@ -5727,6 +5729,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .baseSpeed     = 85,
         .baseSpAttack  = 130,
         .baseSpDefense = 110,
+        .expYield = 140,
         .evYield_HP = 3,
         .abilities = { ABILITY_TERAFORM_ZERO, ABILITY_NONE },
         .height = 17,
@@ -5763,10 +5766,10 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .baseSpDefense = 88,
         .types = { TYPE_POISON, TYPE_GHOST },
         .catchRate = 3,
-        .expYield = 261, //Currently unknown
+        .expYield = 300,
         .evYield_Defense = 3,
         .genderRatio = MON_GENDERLESS,
-        .eggCycles = 50,
+        .eggCycles = 20,
         .friendship = 0,
         .growthRate = GROWTH_SLOW,
         .eggGroups = { EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED },

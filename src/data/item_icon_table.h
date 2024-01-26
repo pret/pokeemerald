@@ -861,6 +861,18 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_GLIMMERING_CHARM] = {gItemIcon_GlimmeringCharm, gItemIconPalette_GlimmeringCharm},
     [ITEM_METAL_ALLOY] =  {gItemIcon_MetalAlloy, gItemIconPalette_MetalAlloy},
     [ITEM_STELLAR_TERA_SHARD] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, //{gItemIcon_TeraShard, gItemIconPalette_StellarTeraShard},
+    [ITEM_JUBILIFE_MUFFIN] = {gItemIcon_JubilifeMuffin, gItemIconPalette_JubilifeMuffin},
+    [ITEM_REMEDY] = {gItemIcon_Remedy, gItemIconPalette_Remedy},
+    [ITEM_FINE_REMEDY] = {gItemIcon_FineRemedy, gItemIconPalette_FineRemedy},
+    [ITEM_SUPERB_REMEDY] = {gItemIcon_SuperbRemedy, gItemIconPalette_SuperbRemedy},
+    [ITEM_AUX_EVASION] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // {gItemIcon_AuxEvasion, gItemIconPalette_AuxEvasion},
+    [ITEM_AUX_GUARD] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // {gItemIcon_AuxGuard, gItemIconPalette_AuxGuard},
+    [ITEM_AUX_POWER] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // {gItemIcon_AuxPower, gItemIconPalette_AuxPower},
+    [ITEM_AUX_POWERGUARD] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark}, // {gItemIcon_AuxPowerguard, gItemIconPalette_AuxPowerguard},
+    [ITEM_CHOICE_DUMPLING] = {gItemIcon_ChoiceDumpling, gItemIconPalette_ChoiceDumpling},
+    [ITEM_SWAP_SNACK] = {gItemIcon_SwapSnack, gItemIconPalette_SwapSnack},
+    [ITEM_TWICE_SPICED_RADISH] = {gItemIcon_TwiceSpicedRadish, gItemIconPalette_TwiceSpicedRadish},
+    [ITEM_POKESHI_DOLL] = {gItemIcon_PokeshiDoll, gItemIconPalette_PokeshiDoll},
     // Return to field arrow
     [ITEMS_COUNT] = {gItemIcon_ReturnToFieldArrow, gItemIconPalette_ReturnToFieldArrow},
 };
