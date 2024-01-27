@@ -440,7 +440,7 @@ static void PlayerPartnerHandleIntroTrainerBallThrow(u32 battler)
     const u32 *trainerPal;
 
     if (gPartnerTrainerId == TRAINER_STEVEN_PARTNER)
-        trainerPal = gTrainerBackPicPaletteTable[TRAINER_STEVEN_PARTNER].data;
+        trainerPal = gTrainerBackPicPaletteTable[TRAINER_BACK_PIC_STEVEN].data;
     else if (gPartnerTrainerId >= TRAINER_CUSTOM_PARTNER) // Custom multi battle.
         trainerPal = gTrainerBackPicPaletteTable[gPartnerSpriteId].data;
     else if (IsAiVsAiBattle())
