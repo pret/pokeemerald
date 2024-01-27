@@ -3,7 +3,7 @@
   "name": "LittlerootTown",
   "layout": "LAYOUT_LITTLEROOT_TOWN",
   "music": "MUS_LITTLEROOT",
-  "region_map_section": "MAPSEC_LITTLEROOT_TOWN",
+  "region_map_section": "MAPSEC_PIT_ENTRANCE",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
   "map_type": "MAP_TYPE_TOWN",

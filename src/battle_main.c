@@ -1900,10 +1900,21 @@ u32 GeneratePersonalityForGender(u32 gender, u32 species)
         return speciesInfo->genderRatio / 2;
 }
 
-void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon *partyEntry)
+void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon *partyEntry, bool8 isPlayer)
 {
     bool32 noMoveSet = TRUE;
     u32 j;
+
+    if (!isPlayer)
+    {
+        for (j = 0; j < MAX_MON_MOVES; j++)
+        {
+            u16 move = GetRandomMove(partyEntry->moves[j], partyEntry->species);
+            SetMonData(mon, MON_DATA_MOVE1 + j, &move);
+            SetMonData(mon, MON_DATA_PP1 + j, &gBattleMoves[move].pp);
+        }
+        return;
+    }
 
     for (j = 0; j < MAX_MON_MOVES; ++j)
     {
@@ -1923,7 +1934,7 @@ void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon 
     }
 }
 
-u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer *trainer, bool32 firstTrainer, u32 battleTypeFlags)
+u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer *trainer, bool32 firstTrainer, u32 battleTypeFlags, bool8 isPlayer)
 {
     u32 personalityValue;
     s32 i, j;
@@ -1974,10 +1985,13 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 otIdType = OT_ID_PRESET;
                 fixedOtId = HIHALF(personalityValue) ^ LOHALF(personalityValue);
             }
-            CreateMon(&party[i], partyData[i].species, partyData[i].lvl, 0, TRUE, personalityValue, otIdType, fixedOtId);
+            if (isPlayer)
+                CreateMon(&party[i], partyData[i].species, partyData[i].lvl, 0, TRUE, personalityValue, otIdType, fixedOtId);
+            else
+                CreateMon(&party[i], GetSpeciesRandomSeeded(partyData[i].species, 0, 0), VarGet(VAR_PIT_FLOOR) < 5 ? 5 : VarGet(VAR_PIT_FLOOR), 0, TRUE, personalityValue, otIdType, fixedOtId);
             SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
 
-            CustomTrainerPartyAssignMoves(&party[i], &partyData[i]);
+            CustomTrainerPartyAssignMoves(&party[i], &partyData[i], isPlayer);
             SetMonData(&party[i], MON_DATA_IVS, &(partyData[i].iv));
             if (partyData[i].ev != NULL)
             {
@@ -2030,7 +2044,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     u8 retVal;
     if (trainerNum == TRAINER_SECRET_BASE)
         return 0;
-    retVal = CreateNPCTrainerPartyFromTrainer(party, &gTrainers[trainerNum], firstTrainer, gBattleTypeFlags);
+    retVal = CreateNPCTrainerPartyFromTrainer(party, &gTrainers[trainerNum], firstTrainer, gBattleTypeFlags, FALSE);
 
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
                                                                         | BATTLE_TYPE_EREADER_TRAINER
@@ -2045,7 +2059,7 @@ void CreateTrainerPartyForPlayer(void)
 {
     ZeroPlayerPartyMons();
     gPartnerTrainerId = gSpecialVar_0x8004;
-    CreateNPCTrainerPartyFromTrainer(gPlayerParty, &gTrainers[gSpecialVar_0x8004], TRUE, BATTLE_TYPE_TRAINER);
+    CreateNPCTrainerPartyFromTrainer(gPlayerParty, &gTrainers[gSpecialVar_0x8004], TRUE, BATTLE_TYPE_TRAINER, TRUE);
 }
 
 void VBlankCB_Battle(void)

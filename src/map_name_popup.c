@@ -24,7 +24,8 @@
 // enums
 enum MapPopUp_Themes
 {
-    MAPPOPUP_THEME_BLACK
+    MAPPOPUP_THEME_BLACK,
+    MAPPOPUP_THEME_TRANSPARENT,
 };
 
 // static functions
@@ -39,8 +40,8 @@ static const u16 sMapPopUpTilesPalette_Black[16] = INCBIN_U16("graphics/map_popu
 
 static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping[] =
 {
-    [MAPSEC_LITTLEROOT_TOWN] = MAPPOPUP_THEME_BLACK,
-    [MAPSEC_OLDALE_TOWN] = MAPPOPUP_THEME_BLACK,
+    [MAPSEC_PIT_ENTRANCE] = MAPPOPUP_THEME_BLACK,
+    [MAPSEC_PIT_FLOORS] = MAPPOPUP_THEME_TRANSPARENT,
     [MAPSEC_DEWFORD_TOWN] = MAPPOPUP_THEME_BLACK,
     [MAPSEC_LAVARIDGE_TOWN] = MAPPOPUP_THEME_BLACK,
     [MAPSEC_FALLARBOR_TOWN] = MAPPOPUP_THEME_BLACK,
@@ -302,7 +303,10 @@ void HideMapNamePopUpWindow(void)
         {
             SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ);
             SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
-            SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 10));
+            if (sRegionMapSectionId_To_PopUpThemeIdMapping[gMapHeader.regionMapSectionId] == MAPPOPUP_THEME_TRANSPARENT)
+                SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 10));
+            else
+                SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 10));
         }
 
         DestroyTask(gPopupTaskId);
@@ -347,6 +351,8 @@ static void ShowMapNamePopUpWindow(void)
     {
         withoutPrefixPtr = &(mapDisplayHeader[3]);
         GetMapName(withoutPrefixPtr, gMapHeader.regionMapSectionId, 0);
+        StringCopy(gStringVar2, withoutPrefixPtr);
+        StringExpandPlaceholders(withoutPrefixPtr, gStringVar2);
     }
 
     mapDisplayHeader[0] = EXT_CTRL_CODE_BEGIN;
@@ -384,6 +390,9 @@ static void LoadMapNamePopUpWindowBgs(void)
             LoadPalette(sMapPopUpTilesPalette_Black, BG_PLTT_ID(14), sizeof(sMapPopUpTilesPalette_Black));
             CopyToWindowPixelBuffer(primaryPopUpWindowId, sMapPopUpTilesPrimary_Black, sizeof(sMapPopUpTilesPrimary_Black), 0);
             CopyToWindowPixelBuffer(secondaryPopUpWindowId, sMapPopUpTilesSecondary_Black, sizeof(sMapPopUpTilesSecondary_Black), 0);
+            break;
+        case MAPPOPUP_THEME_TRANSPARENT:
+            LoadPalette(sMapPopUpTilesPalette_Black, BG_PLTT_ID(14), sizeof(sMapPopUpTilesPalette_Black));
             break;
         // add additional themes here
         default:

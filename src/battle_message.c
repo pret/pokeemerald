@@ -33,6 +33,10 @@
 #include "constants/trainers.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
+#include "event_data.h"
+#include "constants/event_objects.h"
+#include "script.h"
+#include "random.h"
 
 struct BattleWindowText
 {
@@ -3087,6 +3091,120 @@ static void GetBattlerNick(u32 battler, u8 *dst)
     GetBattlerNick(battler, text);                                    \
     toCpy = text;
 
+#define TRAINER_NAME_COUNT 24 
+static const u8 gRandomTrainerNamesM[][12] =
+{
+    _("Sawyer"),
+    _("Marcel"),
+    _("Alberto"),
+    _("Ed"),
+    _("Declan"),
+    _("Frederick"),
+    _("Matt"),
+    _("Zander"),
+    _("Felix"),
+    _("Dusty"),
+    _("Chip"),
+    _("Foster"),
+    _("Jake"),
+    _("John"),
+    _("Steve"),
+    _("Paul"),
+    _("Smith"),
+    _("Blake"),
+    _("Ben"),
+    _("Shane"),
+    _("Hagan"),
+    _("Hayden"),
+    _("Ian"),
+    _("Nick"),
+};
+
+static const u8 gRandomTrainerNamesF[][12] =
+{
+    _("Rose"),
+    _("Gabby"),
+    _("Brittney"),
+    _("Gwen"),
+    _("Mary"),
+    _("Wendy"),
+    _("Keira"),
+    _("Jennifer"),
+    _("Hope"),
+    _("Shannon"),
+    _("Caroline"),
+    _("Julie"),
+    _("Shay"),
+    _("Jess"),
+    _("Katy"),
+    _("Catherine"),
+    _("Sandy"),
+    _("Hannah"),
+    _("Emily"),
+    _("Sadie"),
+    _("Sabrina"),
+    _("Sherry"),
+    _("Carrie"),
+    _("Rachel"),
+};
+
+static const u16 ObjectEventToGender [] =
+{
+    [OBJ_EVENT_GFX_NINJA_BOY]   =    MALE,
+    [OBJ_EVENT_GFX_TWIN]        =    MALE,
+    [OBJ_EVENT_GFX_BOY_1]       =    MALE,
+    [OBJ_EVENT_GFX_GIRL_1]      =    FEMALE,
+    [OBJ_EVENT_GFX_BOY_2]       =    MALE,
+    [OBJ_EVENT_GFX_GIRL_2]      =   FEMALE,
+    [OBJ_EVENT_GFX_LITTLE_BOY]  =   MALE,
+    [OBJ_EVENT_GFX_LITTLE_GIRL] =   FEMALE,
+    [OBJ_EVENT_GFX_BOY_3]       =   MALE,
+    [OBJ_EVENT_GFX_GIRL_3]      =   FEMALE,
+    [OBJ_EVENT_GFX_RICH_BOY]    =   MALE,
+    [OBJ_EVENT_GFX_WOMAN_1]     =   FEMALE,
+    [OBJ_EVENT_GFX_FAT_MAN]     =   MALE,
+    [OBJ_EVENT_GFX_POKEFAN_F]   =   FEMALE,
+    [OBJ_EVENT_GFX_MAN_1]       =   MALE,
+    [OBJ_EVENT_GFX_WOMAN_2]     =   FEMALE,
+    [OBJ_EVENT_GFX_EXPERT_M]    =   MALE,
+    [OBJ_EVENT_GFX_EXPERT_F]    =   FEMALE,
+    [OBJ_EVENT_GFX_MAN_2]       =   MALE,
+    [OBJ_EVENT_GFX_WOMAN_3]     =   FEMALE,
+    [OBJ_EVENT_GFX_POKEFAN_M]   =   MALE,
+    [OBJ_EVENT_GFX_WOMAN_4]     =   FEMALE,
+    [OBJ_EVENT_GFX_COOK]        =   MALE,
+    [OBJ_EVENT_GFX_LINK_RECEPTIONIST] = FEMALE,
+    [OBJ_EVENT_GFX_OLD_MAN]     =   MALE,
+    [OBJ_EVENT_GFX_OLD_WOMAN]   =   FEMALE,
+    [OBJ_EVENT_GFX_CAMPER]      =   MALE,
+    [OBJ_EVENT_GFX_PICNICKER]   =   MALE,
+    [OBJ_EVENT_GFX_MAN_3]       =   MALE,
+    [OBJ_EVENT_GFX_WOMAN_5]     =   FEMALE,
+    [OBJ_EVENT_GFX_YOUNGSTER]   =   MALE,
+    [OBJ_EVENT_GFX_BUG_CATCHER] =   MALE,
+    [OBJ_EVENT_GFX_PSYCHIC_M]   =   MALE,
+    [OBJ_EVENT_GFX_SCHOOL_KID_M]=   MALE,
+    [OBJ_EVENT_GFX_MANIAC]      =   MALE,
+    [OBJ_EVENT_GFX_HEX_MANIAC]  =   FEMALE,
+    [OBJ_EVENT_GFX_ANABEL]      =   FEMALE,
+    [OBJ_EVENT_GFX_SWIMMER_M]   =   MALE,
+    [OBJ_EVENT_GFX_SWIMMER_F]   =   FEMALE,
+    [OBJ_EVENT_GFX_BLACK_BELT]  =   MALE,
+    [OBJ_EVENT_GFX_BEAUTY]      =   FEMALE,
+    [OBJ_EVENT_GFX_SCIENTIST_1] =   MALE,
+    [OBJ_EVENT_GFX_LASS]        =   FEMALE,
+    [OBJ_EVENT_GFX_GENTLEMAN]   =   MALE,
+    [OBJ_EVENT_GFX_SAILOR]      =   MALE,
+    [OBJ_EVENT_GFX_FISHERMAN]   =   MALE,
+    [OBJ_EVENT_GFX_RUNNING_TRIATHLETE_M] =        MALE,
+    [OBJ_EVENT_GFX_RUNNING_TRIATHLETE_F] =        FEMALE,
+    [OBJ_EVENT_GFX_TUBER_F]     =    FEMALE,
+    [OBJ_EVENT_GFX_TUBER_M]     =    MALE,
+    [OBJ_EVENT_GFX_HIKER]       =    MALE,
+    [OBJ_EVENT_GFX_CYCLING_TRIATHLETE_M]  =        MALE,
+    [OBJ_EVENT_GFX_CYCLING_TRIATHLETE_F] =        FEMALE,
+};
+
 static const u8 *BattleStringGetOpponentNameByTrainerId(u16 trainerId, u8 *text, u8 multiplayerId, u8 battler)
 {
     const u8 *toCpy = NULL;
@@ -3133,7 +3251,8 @@ static const u8 *BattleStringGetOpponentNameByTrainerId(u16 trainerId, u8 *text,
     }
     else
     {
-        toCpy = gTrainers[trainerId].trainerName;
+        #define SEED_TRAINER_NAME (trainerId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x + (100 * gSaveBlock1Ptr->pos.y))
+        toCpy = ObjectEventToGender[ReturnLastSpokenVarObjGfxId()] == MALE ? gRandomTrainerNamesM[RandomSeededModulo2(SEED_TRAINER_NAME, TRAINER_NAME_COUNT)] : gRandomTrainerNamesF[RandomSeededModulo2(SEED_TRAINER_NAME, TRAINER_NAME_COUNT)];
     }
 
     return toCpy;

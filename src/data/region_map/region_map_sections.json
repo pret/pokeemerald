@@ -1,16 +1,16 @@
 {
   "map_sections": [
     {
-      "map_section": "MAPSEC_LITTLEROOT_TOWN",
-      "name": "LITTLEROOT TOWN",
+      "map_section": "MAPSEC_PIT_ENTRANCE",
+      "name": "Pit of 100 Trials",
       "x": 4,
       "y": 11,
       "width": 1,
       "height": 1
     },
     {
-      "map_section": "MAPSEC_OLDALE_TOWN",
-      "name": "OLDALE TOWN",
+      "map_section": "MAPSEC_PIT_FLOORS",
+      "name": "Floor {STR_VAR_1}",
       "x": 4,
       "y": 9,
       "width": 1,

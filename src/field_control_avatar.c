@@ -100,7 +100,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
     {
         if (GetPlayerSpeed() != PLAYER_SPEED_FASTEST)
         {
-            if (newKeys & START_BUTTON)
+            if (newKeys & START_BUTTON && FlagGet(FLAG_PIT_ENTERED))
                 input->pressedStartButton = TRUE;
             if (newKeys & SELECT_BUTTON)
                 input->pressedSelectButton = TRUE;

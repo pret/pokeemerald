@@ -659,10 +659,10 @@
 #define FLAG_TRAINER_1  0x268 // Unused Flag
 #define FLAG_TRAINER_2  0x269 // Unused Flag
 #define FLAG_TRAINER_3  0x26A // Unused Flag
-#define FLAG_UNUSED_0x26B  0x26B // Unused Flag
-#define FLAG_UNUSED_0x26C  0x26C // Unused Flag
-#define FLAG_UNUSED_0x26D  0x26D // Unused Flag
-#define FLAG_UNUSED_0x26E  0x26E // Unused Flag
+#define FLAG_HEAL_NPC  0x26B // Unused Flag
+#define FLAG_REWARD_ITEM_1  0x26C // Unused Flag
+#define FLAG_REWARD_ITEM_2  0x26D // Unused Flag
+#define FLAG_GIVE_REWARDS 0x26E // Unused Flag
 #define FLAG_UNUSED_0x26F  0x26F // Unused Flag
 #define FLAG_UNUSED_0x270  0x270 // Unused Flag
 #define FLAG_UNUSED_0x271  0x271 // Unused Flag

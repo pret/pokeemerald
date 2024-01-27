@@ -76,6 +76,11 @@ u32 ItemId_GetFlingPower(u32 itemId);
 u32 GetItemStatus1Mask(u16 itemId);
 u32 GetItemStatus2Mask(u16 itemId);
 
+//tx_randomizer_and_challenges
+u16 RandomItemId(u16 itemId);
+u16 RandomItem(void);
+u16 RandomItemHidden(void);
+
 /* Expands to:
  * enum
  * {

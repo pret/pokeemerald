@@ -1612,36 +1612,66 @@ static const u8 *ReturnEmptyStringIfNull(const u8 *string)
         return string;
 }
 
+
+static const u8 *const sRandomTrainerWonTexts[14] =
+{
+    [0]    = gText_AnabelWonSilver,
+    [1]    = gText_TuckerWonSilver,
+    [2]    = gText_SpenserWonSilver,
+    [3]    = gText_GretaWonSilver,
+    [4]    = gText_NolandWonSilver,
+    [5]    = gText_LucyWonSilver,
+    [6]    = gText_BrandonWonSilver,
+    [7]    = gText_AnabelWonGold,
+    [8]    = gText_TuckerWonGold,
+    [9]    = gText_SpenserWonGold,
+    [10]   = gText_GretaWonGold,
+    [11]   = gText_NolandWonGold,
+    [12]   = gText_LucyWonGold,
+    [13]   = gText_BrandonWonGold,
+};
+
+static const u8 *const sRandomTrainerLossTexts[14] =
+{
+    [0]    = gText_AnabelDefeatSilver,
+    [1]    = gText_TuckerDefeatSilver,
+    [2]    = gText_SpenserDefeatSilver,
+    [3]    = gText_GretaDefeatSilver,
+    [4]    = gText_NolandDefeatSilver,
+    [5]    = gText_LucyDefeatSilver,
+    [6]    = gText_BrandonDefeatSilver,
+    [7]    = gText_AnabelDefeatGold,
+    [8]    = gText_TuckerDefeatGold,
+    [9]    = gText_SpenserDefeatGold,
+    [10]   = gText_GretaDefeatGold,
+    [11]   = gText_NolandDefeatGold,
+    [12]   = gText_LucyDefeatGold,
+    [13]   = gText_BrandonDefeatGold,
+};
+
 static const u8 *GetIntroSpeechOfApproachingTrainer(void)
 {
     if (gApproachingTrainerId == 0)
-        return ReturnEmptyStringIfNull(sTrainerAIntroSpeech);
+        return ReturnEmptyStringIfNull(sRandomTrainerWonTexts[Random() % 14]);
     else
-        return ReturnEmptyStringIfNull(sTrainerBIntroSpeech);
+        return ReturnEmptyStringIfNull(sRandomTrainerWonTexts[Random() % 14]);
 }
 
 const u8 *GetTrainerALoseText(void)
 {
-    const u8 *string;
-
-    if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
-        string = GetSecretBaseTrainerLoseText();
-    else
-        string = sTrainerADefeatSpeech;
-
-    StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(string));
+    StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(sRandomTrainerLossTexts[Random() % 14]));
     return gStringVar4;
 }
 
 const u8 *GetTrainerBLoseText(void)
 {
-    StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(sTrainerBDefeatSpeech));
+    StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(sRandomTrainerLossTexts[Random() % 14]));
     return gStringVar4;
 }
 
 const u8 *GetTrainerWonSpeech(void)
 {
-    return ReturnEmptyStringIfNull(sTrainerVictorySpeech);
+    return ReturnEmptyStringIfNull(sRandomTrainerWonTexts[Random() % 14]);
 }
 
 static const u8 *GetTrainerCantBattleSpeech(void)

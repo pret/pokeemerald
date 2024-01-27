@@ -21,7 +21,7 @@ gText_TuckerDefeatSilver::
 	.string "What the…$"
 
 gText_TuckerWonGold::
-	.string "My DOME ACE title isn't just for show!$"
+	.string "My title isn't just for show!$"
 
 gText_TuckerDefeatGold::
 	.string "Ahahaha!\n"
@@ -37,8 +37,7 @@ gText_NolandDefeatSilver::
 	.string "You know what you're doing!$"
 
 gText_NolandWonGold::
-	.string "Hey, hey, hey!\n"
-	.string "You're finished already?$"
+	.string "Hey, hey, hey!$"
 
 gText_NolandDefeatGold::
 	.string "What happened here?$"
@@ -59,7 +58,7 @@ gText_LucyDefeatGold::
 @ Battle Arena
 gText_GretaWonSilver::
 	.string "Oh, come on!\n"
-	.string "You have to try harder than that!$"
+	.string "You have to try hard!$"
 
 gText_GretaDefeatSilver::
 	.string "No way!\n"

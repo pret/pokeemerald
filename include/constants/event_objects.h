@@ -42,7 +42,7 @@
 #define OBJ_EVENT_GFX_SCHOOL_KID_M                38
 #define OBJ_EVENT_GFX_MANIAC                      39
 #define OBJ_EVENT_GFX_HEX_MANIAC                  40
-#define OBJ_EVENT_GFX_NURSE                       41
+#define OBJ_EVENT_GFX_ANABEL                      41
 #define OBJ_EVENT_GFX_SWIMMER_M                   42
 #define OBJ_EVENT_GFX_SWIMMER_F                   43
 #define OBJ_EVENT_GFX_BLACK_BELT                  44
@@ -66,7 +66,7 @@
 #define OBJ_EVENT_GFX_REPORTER_M                  62
 #define OBJ_EVENT_GFX_REPORTER_F                  63
 #define OBJ_EVENT_GFX_BARD                        64
-#define OBJ_EVENT_GFX_ANABEL                      65
+#define OBJ_EVENT_GFX_NURSE                       65
 #define OBJ_EVENT_GFX_TUCKER                      66
 #define OBJ_EVENT_GFX_GRETA                       67
 #define OBJ_EVENT_GFX_SPENSER                     68

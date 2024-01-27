@@ -2205,6 +2205,11 @@ void UpdateObjectEventsForCameraUpdate(s16 x, s16 y)
     RemoveObjectEventsOutsideView();
 }
 
+void UpdateObjectEventsFromScript()
+{
+    TrySpawnObjectEvents(0, 0);
+}
+
 #define sLinkedSpriteId data[0]
 #define sState          data[1]
 

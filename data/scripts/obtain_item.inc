@@ -2,9 +2,14 @@
 .set AMOUNT, VAR_0x8001
 
 Std_ObtainItem::
+	call Std_RandomItem
 	additem ITEMID, AMOUNT
 	copyvar VAR_0x8007, VAR_RESULT
 	call EventScript_ObtainItemMessage
+	return
+
+Std_RandomItem::
+	callnative RandomItem
 	return
 
 EventScript_ObtainItemMessage::
@@ -96,6 +101,7 @@ Std_FindItem::
 	lock
 	faceplayer
 	waitse
+	call Std_RandomItem
 	copyvar VAR_0x8004, ITEMID
 	copyvar VAR_0x8005, AMOUNT
 	checkitemspace ITEMID, AMOUNT

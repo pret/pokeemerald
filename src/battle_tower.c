@@ -3071,7 +3071,7 @@ static void FillPartnerParty(u16 trainerId)
 
             CreateMon(&gPlayerParty[i + 3], partyData[i].species, partyData[i].lvl, 0, TRUE, personality, otIdType, otID);
             SetMonData(&gPlayerParty[i + 3], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
-            CustomTrainerPartyAssignMoves(&gPlayerParty[i+3], &partyData[i]);
+            CustomTrainerPartyAssignMoves(&gPlayerParty[i+3], &partyData[i], TRUE);
 
             SetMonData(&gPlayerParty[i+3], MON_DATA_IVS, &(partyData[i].iv));
             if (partyData[i].ev != NULL)

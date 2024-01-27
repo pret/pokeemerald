@@ -67,10 +67,12 @@ u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 u
     struct Pokemon mon;
     u16 targetSpecies;
 
+    species = GetSpeciesRandomSeeded(species, 0, 0);
+
     if (OW_SYNCHRONIZE_NATURE >= GEN_6 && (gSpeciesInfo[species].eggGroups[0] == EGG_GROUP_NO_EGGS_DISCOVERED || OW_SYNCHRONIZE_NATURE == GEN_7))
-        CreateMonWithNature(&mon, species, level, USE_RANDOM_IVS, PickWildMonNature());
+        CreateMonWithNature(&mon, species, level, MAX_PER_STAT_IVS, PickWildMonNature());
     else
-        CreateMon(&mon, species, level, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
+        CreateMon(&mon, species, level, MAX_PER_STAT_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
 
     heldItem[0] = item;
     heldItem[1] = item >> 8;

@@ -9,6 +9,8 @@
 #include "main.h"
 #include "random.h"
 #include "battle_setup.h"
+#include "string_util.h"
+#include "strings.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
@@ -499,15 +501,27 @@ static const struct RandomTrainerNPC RandomNPCTrainers[] =
     [3] = {VAR_OBJ_GFX_ID_3, FLAG_TRAINER_3, TRAINER_RANDOM_BATTLE_3},
 };
 
+u16 ReturnLastSpokenVarObjGfxId()
+{
+    return VarGet(RandomNPCTrainers[gSpecialVar_LastTalked - 1].gfxid);
+}
+
 u16 ReturnNumberOfTrainersForFloor()
 {
-    if(VarGet(VAR_PIT_FLOOR) < 2)
+    if((VarGet(VAR_PIT_FLOOR) % 5) == 0) // Heal Floor
+    {
+        FlagClear(FLAG_HEAL_NPC);
+        return 0;
+    }
+    FlagSet(FLAG_HEAL_NPC);
+
+    if(VarGet(VAR_PIT_FLOOR) < 11)
         return 1;
-    if(VarGet(VAR_PIT_FLOOR) < 5)
+    if(VarGet(VAR_PIT_FLOOR) < 36)
         return 2;
-    if(VarGet(VAR_PIT_FLOOR) < 7)
+    if(VarGet(VAR_PIT_FLOOR) < 75)
         return 3;
-    if(VarGet(VAR_PIT_FLOOR) >= 7)
+    if(VarGet(VAR_PIT_FLOOR) >= 75)
         return 4;
     return 0;
 }
@@ -555,4 +569,9 @@ void CheckFloorCleared()
     if (trainerDefeated == 4)
         FlagSet(FLAG_FLOOR_CLEARED);
     return;
+}
+
+void BufferMapFloorString()
+{
+    ConvertIntToDecimalStringN(gStringVar1, VarGet(VAR_PIT_FLOOR), STR_CONV_MODE_LEFT_ALIGN, 3);
 }

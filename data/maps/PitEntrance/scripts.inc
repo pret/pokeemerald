@@ -25,8 +25,15 @@ PitEntrance_Warp::
 	lockall
 	setflag FLAG_PIT_ENTERED
 	addvar VAR_PIT_FLOOR, 1
+	callnative BufferMapFloorString
 	callnative InitTrainerIdAndNameData
 	callnative SetRandomTrainers
+	setvar VAR_REWARD_STATE, 0
+	givemon SPECIES_MUDKIP, 5
+	givemon SPECIES_TREECKO, 5
+	givemon SPECIES_TORCHIC, 5
+	additem ITEM_RARE_CANDY, 99
+	setflag FLAG_SYS_POKEMON_GET
 	warpteleport MAP_PIT_ARENA, 9, 7
 	waitstate
 	releaseall
