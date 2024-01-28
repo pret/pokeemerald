@@ -11,6 +11,7 @@
 #include "battle_setup.h"
 #include "string_util.h"
 #include "strings.h"
+#include "pokemon_storage_system.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
@@ -547,6 +548,18 @@ u16 ReturnNumberOfTrainersForFloor()
     if(VarGet(VAR_PIT_FLOOR) >= 75)
         return 4;
     return 0;
+}
+
+void PlayerPartyCountToResultVar()
+{
+    VarSet(VAR_RESULT, gPlayerPartyCount);
+}
+
+void RemovePartyPokemon()
+{
+    ZeroMonData(&gPlayerParty[VarGet(VAR_RESULT)]);
+    CompactPartySlots();
+    CalculatePlayerPartyCount();
 }
 
 void SetRandomTrainers()

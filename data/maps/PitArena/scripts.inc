@@ -22,8 +22,8 @@ PitArena_OnFrameRewardDrop::
 	setvar VAR_REWARD_STATE, 2
 	clearflag FLAG_REWARD_ITEM_1
 	clearflag FLAG_REWARD_ITEM_2
-	additem 6
-	additem 7
+	addobject 6
+	addobject 7
 	callnative UpdateObjectEventsFromScript
 	releaseall
 	end
@@ -133,7 +133,7 @@ PitArena_TrainerBattleFinished::
 PitArena_Debug::
 	setflag FLAG_FLOOR_CLEARED
 	setmetatile 9, 9, METATILE_Cave_FLOOR_COMPLETE, FALSE
-	setvar VAR_PIT_FLOOR, 99
+	setvar VAR_PIT_FLOOR, 24
 	additem ITEM_RARE_CANDY, 99
 	special DrawWholeMapView
 	end
@@ -141,7 +141,7 @@ PitArena_Debug::
 PitArena_Debug2::
 	setflag FLAG_FLOOR_CLEARED
 	setmetatile 9, 9, METATILE_Cave_FLOOR_COMPLETE, FALSE
-	addvar VAR_PIT_FLOOR, 4
+	addvar VAR_PIT_FLOOR, 24
 	special DrawWholeMapView
 	end
 
@@ -169,9 +169,13 @@ PitArena_RewardDrop2::
 
 PitArena_NewMon::
 	lockall
+	callnative PlayerPartyCountToResultVar
+	goto_if_eq VAR_RESULT, 6, PitArena_PartyFullRemoveOne
+PitArenaNewMon2::
 	givemon VAR_PIT_FLOOR, 0
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, PitArena_EventScript_ReceiveMonParty
 	goto Common_EventScript_NoMoreRoomForPokemon
+	release
 	end
 
 PitArena_EventScript_ReceiveMonParty::
@@ -183,6 +187,31 @@ PitArena_EventScript_ReceiveMonParty::
 	removeobject 8
 	releaseall
 	end
+
+PitArena_PartyFullRemoveOne::
+	message PitArena_GiveMonFullNothingChosen_Text1
+	waitbuttonpress
+	msgbox PitArena_GiveMonFullNothingChosen_Text2, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, PitArena_FullPartyNothingChosen
+	special ChoosePartyMon
+	waitstate
+	copyvar VAR_RESULT, VAR_0x8004
+	goto_if_eq VAR_RESULT, PARTY_NOTHING_CHOSEN, PitArena_FullPartyNothingChosen
+	callnative RemovePartyPokemon
+	goto PitArenaNewMon2
+	release
+	end
+
+PitArena_FullPartyNothingChosen::
+	release
+	end
+
+PitArena_GiveMonFullNothingChosen_Text1:
+	.string "Your party is too full.$"
+
+PitArena_GiveMonFullNothingChosen_Text2:
+	.string "Do you want to get rid\n"
+	.string "of a party member?$"
 
 PitArena_Text_ReceivedMon:
 	.string "{PLAYER} pulled a {STR_VAR_2}\n"
@@ -243,6 +272,7 @@ PitArena_Mart_EvoItems:
     .2byte ITEM_SHINY_STONE
     .2byte ITEM_DUSK_STONE
     .2byte ITEM_DAWN_STONE
+	.2byte ITEM_LINKING_CORD
     .2byte ITEM_SWEET_APPLE
     .2byte ITEM_TART_APPLE
     .2byte ITEM_CRACKED_POT
