@@ -15,6 +15,11 @@ SECTIONS {
     ewram 0x2000000 (NOLOAD) :
     ALIGN(4)
     {
+        /* 
+           We link malloc.o here to prevent `gHeap` from landing in the middle of EWRAM.
+           Otherwise this causes corruption issues on some ld versions
+        */
+        gflib/malloc.o(ewram_data);
         src/*.o(ewram_data);
         gflib/*.o(ewram_data);
 
