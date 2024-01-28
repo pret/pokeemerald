@@ -37,6 +37,8 @@ PitEntrance_Warp::
 	additem ITEM_FULL_RESTORE, 1
 	additem ITEM_REVIVE, 1
 	additem ITEM_FULL_HEAL, 3
+	additem ITEM_ETHER, 2
+	additem ITEM_ELIXIR, 1
 	setflag FLAG_SYS_POKEMON_GET
 	warpteleport MAP_PIT_ARENA, 9, 7
 	waitstate
