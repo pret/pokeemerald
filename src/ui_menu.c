@@ -60,6 +60,7 @@ struct MenuResources
     u16 normalTotal;
     u16 evTotal;
     u16 ivTotal;
+    u16 partyid;
 };
 
 enum WindowIds
@@ -81,13 +82,14 @@ static bool8 Menu_InitBgs(void);
 static void Menu_FadeAndBail(void);
 static bool8 Menu_LoadGraphics(void);
 static void Menu_InitWindows(void);
-static void PrintToWindow(u8 windowId, u8 colorIdx);
+static void PrintTitleToWindowMainState();
 static void Task_MenuWaitFadeIn(u8 taskId);
 static void Task_MenuMain(u8 taskId);
 static void Task_MenuEditingStat(u8 taskId);
 static void SampleUi_DrawMonIcon(u16 dexNum);
 static void PrintMonStats(void);
 static void SelectorCallback(struct Sprite *sprite);
+static struct Pokemon *ReturnPartyMon();
 
 //==========CONST=DATA==========//
 static const struct BgTemplate sMenuBgTemplates[] =
@@ -119,7 +121,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .bg = 0,            // which bg to print text on
         .tilemapLeft = 1,   // position from left (per 8 pixels)
         .tilemapTop = 0,    // position from top (per 8 pixels)
-        .width = 10,        // width (per 8 pixels)
+        .width = 30,        // width (per 8 pixels)
         .height = 2,        // height (per 8 pixels)
         .paletteNum = 15,   // palette index to use for text
         .baseBlock = 1,     // tile start in VRAM
@@ -132,17 +134,17 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .width = 18,        // width (per 8 pixels)
         .height = 17,        // height (per 8 pixels)
         .paletteNum = 15,   // palette index to use for text
-        .baseBlock = 1 + 23,     // tile start in VRAM
+        .baseBlock = 1 + 23 + 16 + 12 + 9,     // tile start in VRAM
     },
     [WINDOW_3] = 
     {
         .bg = 0,            // which bg to print text on
         .tilemapLeft = 1,   // position from left (per 8 pixels)
         .tilemapTop = 11,    // position from top (per 8 pixels)
-        .width = 7,        // width (per 8 pixels)
+        .width = 8,        // width (per 8 pixels)
         .height = 9,        // height (per 8 pixels)
         .paletteNum = 15,   // palette index to use for text
-        .baseBlock = 1 + 23 + 102 + 204,     // tile start in VRAM
+        .baseBlock = 1 + 23 + 16 + 102 + 204 + 12 + 9,     // tile start in VRAM
     },
 };
 
@@ -169,6 +171,10 @@ static const u8 sMenuWindowFontColors[][3] =
 
 static const u16 sSelector_Pal[] = INCBIN_U16("graphics/ui_menu/selector.gbapal");
 static const u32 sSelector_Gfx[] = INCBIN_U32("graphics/ui_menu/selector.4bpp.lz");
+static const u8 sA_ButtonGfx[]         = INCBIN_U8("graphics/ui_menu/a_button.4bpp");
+static const u8 sB_ButtonGfx[]         = INCBIN_U8("graphics/ui_menu/b_button.4bpp");
+static const u8 sR_ButtonGfx[]         = INCBIN_U8("graphics/ui_menu/r_button.4bpp");
+static const u8 sDPad_ButtonGfx[]         = INCBIN_U8("graphics/ui_menu/dpad_button.4bpp");
 
 static const struct OamData sOamData_Selector =
 {
@@ -349,7 +355,7 @@ static bool8 Menu_DoGfxSetup(void)
             gMain.state++;
         break;
     case 4:
-        sMenuDataPtr->speciesID = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES);
+        sMenuDataPtr->speciesID = GetMonData(ReturnPartyMon(), MON_DATA_SPECIES);
         FreeMonIconPalettes();
         LoadMonIconPalettes();
         LoadCompressedSpriteSheet(&sSpriteSheet_Selector);
@@ -359,7 +365,7 @@ static bool8 Menu_DoGfxSetup(void)
         break;
     case 5:
         Menu_InitWindows();
-        PrintToWindow(WINDOW_1, FONT_WHITE);
+        PrintTitleToWindowMainState();
         PrintMonStats();
         CreateSelector();
         gMain.state++;
@@ -460,6 +466,11 @@ static bool8 Menu_LoadGraphics(void)
     return FALSE;
 }
 
+static struct Pokemon *ReturnPartyMon()
+{
+    return &gPlayerParty[sMenuDataPtr->partyid];
+}
+
 #define MON_ICON_X     32 + 8
 #define MON_ICON_Y     32 + 24
 static void SampleUi_DrawMonIcon(u16 dexNum)
@@ -553,14 +564,53 @@ static const u8 sText_MenuActual[] = _("Actual");
 static const u8 sText_MenuEV[] = _("EV");
 static const u8 sText_MenuIV[] = _("IV");
 static const u8 sText_MonLevel[]         = _("Lv.{CLEAR 1}{STR_VAR_1}");
+
+static const u8 sText_MenuLRButtonTextMain[]   = _("Cycle Party");
+static const u8 sText_MenuAButtonTextMain[]    = _("Edit Stats");
+static const u8 sText_MenuBButtonTextMain[]    = _("Back");
+static const u8 sText_MenuDPadButtonTextMain[] = _("Change Stat");
+
+#define BUTTON_Y 4
+static void PrintTitleToWindowMainState()
+{
+    FillWindowPixelBuffer(WINDOW_1, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    
+    AddTextPrinterParameterized4(WINDOW_1, FONT_NORMAL, 1, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_MenuTitle);
+
+    BlitBitmapToWindow(WINDOW_1, sR_ButtonGfx, 75, (BUTTON_Y), 24, 8);
+    AddTextPrinterParameterized4(WINDOW_1, FONT_NARROW, 102, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_MenuLRButtonTextMain);
+
+    BlitBitmapToWindow(WINDOW_1, sA_ButtonGfx, 160, (BUTTON_Y), 8, 8);
+    AddTextPrinterParameterized4(WINDOW_1, FONT_NARROW, 172, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_MenuAButtonTextMain);
+
+    PutWindowTilemap(WINDOW_1);
+    CopyWindowToVram(WINDOW_1, 3);
+}
+
+static void PrintTitleToWindowEditState()
+{
+    FillWindowPixelBuffer(WINDOW_1, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    
+    AddTextPrinterParameterized4(WINDOW_1, FONT_NORMAL, 1, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_MenuTitle);
+
+    BlitBitmapToWindow(WINDOW_1, sDPad_ButtonGfx, 75, (BUTTON_Y), 24, 8);
+    AddTextPrinterParameterized4(WINDOW_1, FONT_NARROW, 102, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_MenuDPadButtonTextMain);
+
+    BlitBitmapToWindow(WINDOW_1, sB_ButtonGfx, 160, (BUTTON_Y), 8, 8);
+    AddTextPrinterParameterized4(WINDOW_1, FONT_NARROW, 172, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_MenuBButtonTextMain);
+
+    PutWindowTilemap(WINDOW_1);
+    CopyWindowToVram(WINDOW_1, 3);
+}
+
 static void PrintMonStats()
 {
     u8 i;
     u16 currentStat;
     u16 nature;
     u8 text[2];
-    u16 level = GetMonData(&gPlayerParty[0], MON_DATA_LEVEL);
-    u16 personality = GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY);
+    u16 level = GetMonData(ReturnPartyMon(), MON_DATA_LEVEL);
+    u16 personality = GetMonData(ReturnPartyMon(), MON_DATA_PERSONALITY);
     u16 gender = GetGenderFromSpeciesAndPersonality(sMenuDataPtr->speciesID, personality);
 
     FillWindowPixelBuffer(WINDOW_2, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
@@ -586,7 +636,7 @@ static void PrintMonStats()
     // Print Mon Stats
     for(i = 0; i < 6; i++)
     {
-        currentStat = GetMonData(&gPlayerParty[0], statsToPrintActual[i]);
+        currentStat = GetMonData(ReturnPartyMon(), statsToPrintActual[i]);
         sMenuDataPtr->normalTotal += currentStat;
         DebugPrintf("Stat: %d", currentStat);
         ConvertIntToDecimalStringN(gStringVar2, currentStat, STR_CONV_MODE_RIGHT_ALIGN, 3);
@@ -595,7 +645,7 @@ static void PrintMonStats()
 
     for(i = 0; i < 6; i++)
     {
-        currentStat = GetMonData(&gPlayerParty[0], statsToPrintEVs[i]);
+        currentStat = GetMonData(ReturnPartyMon(), statsToPrintEVs[i]);
         sMenuDataPtr->evTotal += currentStat;
         DebugPrintf("Stat: %d", currentStat);
         ConvertIntToDecimalStringN(gStringVar2, currentStat, STR_CONV_MODE_RIGHT_ALIGN, 3);
@@ -604,7 +654,7 @@ static void PrintMonStats()
 
     for(i = 0; i < 6; i++)
     {
-        currentStat = GetMonData(&gPlayerParty[0], statsToPrintIVs[i]);
+        currentStat = GetMonData(ReturnPartyMon(), statsToPrintIVs[i]);
         sMenuDataPtr->ivTotal += currentStat;
         DebugPrintf("Stat: %d", currentStat);
         ConvertIntToDecimalStringN(gStringVar2, currentStat, STR_CONV_MODE_RIGHT_ALIGN, 3);
@@ -612,8 +662,8 @@ static void PrintMonStats()
     }
 
     // Calc Totals
-    ConvertIntToDecimalStringN(gStringVar2, sMenuDataPtr->normalTotal, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    AddTextPrinterParameterized4(WINDOW_2, 1, STARTING_X, STARTING_Y + (DISTANCE_BETWEEN_STATS_Y * 6), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
+    ConvertIntToDecimalStringN(gStringVar2, sMenuDataPtr->normalTotal, STR_CONV_MODE_RIGHT_ALIGN, 4);
+    AddTextPrinterParameterized4(WINDOW_2, 1, STARTING_X - 6, STARTING_Y + (DISTANCE_BETWEEN_STATS_Y * 6), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
 
     ConvertIntToDecimalStringN(gStringVar2, sMenuDataPtr->evTotal, STR_CONV_MODE_RIGHT_ALIGN, 3);
     AddTextPrinterParameterized4(WINDOW_2, 1, STARTING_X + SECOND_COLUMN, STARTING_Y + (DISTANCE_BETWEEN_STATS_Y * 6), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
@@ -641,11 +691,11 @@ static void PrintMonStats()
         AddTextPrinterParameterized4(WINDOW_3, FONT_NORMAL, 41 + 8, 19, 0, 0, sGenderColors[(gender == MON_FEMALE)], TEXT_SKIP_DRAW, text);
     }
 
-    nature = GetNature(&gPlayerParty[0]);
+    nature = GetNature(ReturnPartyMon());
     StringCopy(gStringVar2, gNatureNamePointers[nature]);
     AddTextPrinterParameterized4(WINDOW_3, FONT_SMALL_NARROW, 4, 50, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
 
-    StringCopy(gStringVar2, gAbilityNames[gSpeciesInfo[sMenuDataPtr->speciesID].abilities[GetMonData(&gPlayerParty[0], MON_DATA_ABILITY_NUM)]]);
+    StringCopy(gStringVar2, gAbilityNames[gSpeciesInfo[sMenuDataPtr->speciesID].abilities[GetMonData(ReturnPartyMon(), MON_DATA_ABILITY_NUM)]]);
     AddTextPrinterParameterized4(WINDOW_3, FONT_SMALL_NARROW, 4, 34, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
 
     PutWindowTilemap(WINDOW_3);
@@ -654,18 +704,6 @@ static void PrintMonStats()
     PutWindowTilemap(WINDOW_2);
     CopyWindowToVram(WINDOW_2, 3);
 }
-
-static void PrintToWindow(u8 windowId, u8 colorIdx)
-{
-    u8 x = 1;
-    u8 y = 0;
-    
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    AddTextPrinterParameterized4(WINDOW_1, FONT_NORMAL, x, y, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_MenuTitle);
-    PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 3);
-}
-
 
 struct SpriteCordsStruct {
     u8 x;
@@ -715,17 +753,69 @@ static const u16 selectedStatToStatEnum[] = {
         MON_DATA_SPATK_EV, MON_DATA_SPATK_IV, MON_DATA_SPDEF_EV, MON_DATA_SPDEF_IV, MON_DATA_SPEED_EV, MON_DATA_SPEED_IV,
 };
 
+static void Task_DelayedSpriteLoad(u8 taskId)
+{   
+    if (gTasks[taskId].data[11] >= 4)
+    {
+        SampleUi_DrawMonIcon(sMenuDataPtr->speciesID);
+        PrintMonStats();
+        gTasks[taskId].func = Task_MenuMain;
+        return;
+    }
+    else
+    {
+        gTasks[taskId].data[11]++;
+    }
+}
 
+static void ReloadNewPokemon(u8 taskId)
+{
+    gSprites[sMenuDataPtr->monIconSpriteId].invisible = TRUE;
+    FreeResourcesAndDestroySprite(&gSprites[sMenuDataPtr->monIconSpriteId], sMenuDataPtr->monIconSpriteId);
+    sMenuDataPtr->speciesID = GetMonData(ReturnPartyMon(), MON_DATA_SPECIES);
+    gTasks[taskId].func = Task_DelayedSpriteLoad;
+    gTasks[taskId].data[11] = 0;
+}
 
 /* This is the meat of the UI. This is where you wait for player inputs and can branch to other tasks accordingly */
 static void Task_MenuMain(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON))
     {
-        sMenuDataPtr->editingStat = GetMonData(&gPlayerParty[0], selectedStatToStatEnum[sMenuDataPtr->selectedStat]);
+        sMenuDataPtr->editingStat = GetMonData(ReturnPartyMon(), selectedStatToStatEnum[sMenuDataPtr->selectedStat]);
         StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 3);
+        PlaySE(SE_SELECT);
+        PrintTitleToWindowEditState();
         gTasks[taskId].func = Task_MenuEditingStat;
+        if(sMenuDataPtr->editingStat == 0)
+            StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 1);
+        if((sMenuDataPtr->editingStat == 255 || (sMenuDataPtr->evTotal == 510)) && (sMenuDataPtr->selector_x == 0))
+            StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 2);
+        if((sMenuDataPtr->editingStat == 31) && (sMenuDataPtr->selector_x == 1))
+            StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 2);
         return;
+    }
+    if (JOY_NEW(L_BUTTON))
+    {
+        u16 partyid = sMenuDataPtr->partyid;
+        if (partyid == 0)
+            partyid = gPlayerPartyCount - 1;
+        else
+            partyid -= 1;
+        sMenuDataPtr->partyid = partyid;
+        PlaySE(SE_SELECT);
+        ReloadNewPokemon(taskId);
+    }
+    if (JOY_NEW(R_BUTTON))
+    {
+        u16 partyid = sMenuDataPtr->partyid;
+        if (partyid == gPlayerPartyCount - 1)
+            partyid = 0;
+        else
+            partyid += 1;
+        sMenuDataPtr->partyid = partyid;
+        PlaySE(SE_SELECT);
+        ReloadNewPokemon(taskId);
     }
     if (JOY_NEW(B_BUTTON))
     {
@@ -759,17 +849,19 @@ static void Task_MenuMain(u8 taskId)
 
 static void ChangeAndUpdateStat()
 {
-    SetMonData(&gPlayerParty[0], selectedStatToStatEnum[sMenuDataPtr->selectedStat], &(sMenuDataPtr->editingStat));
-    CalculateMonStats(&gPlayerParty[0]);
+    SetMonData(ReturnPartyMon(), selectedStatToStatEnum[sMenuDataPtr->selectedStat], &(sMenuDataPtr->editingStat));
+    CalculateMonStats(ReturnPartyMon());
     PrintMonStats();
 }
 
-static void Task_MenuEditingStat(u8 taskId)
+static void Task_MenuEditingStat(u8 taskId) // This function should be refactored to not be a hot mess
 {
     if (JOY_NEW(B_BUTTON))
     {
         gTasks[taskId].func = Task_MenuMain;
         StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 0);
+        PlaySE(SE_SELECT);
+        PrintTitleToWindowMainState();
         return;
     }
     if (JOY_NEW(DPAD_LEFT))
@@ -846,7 +938,7 @@ static void Task_MenuEditingStat(u8 taskId)
         
     }
 
-    if (JOY_NEW(DPAD_UP))
+    if (JOY_NEW(DPAD_UP) || JOY_NEW(R_BUTTON))
     {
         if(sMenuDataPtr->selector_x == 0)
         {
@@ -881,7 +973,7 @@ static void Task_MenuEditingStat(u8 taskId)
         
     }
 
-    if (JOY_NEW(DPAD_DOWN))
+    if (JOY_NEW(DPAD_DOWN) || JOY_NEW(L_BUTTON))
     {
 
         if((sMenuDataPtr->editingStat == 0))
