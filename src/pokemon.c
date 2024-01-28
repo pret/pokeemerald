@@ -3625,7 +3625,7 @@ u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
 {
     int i;
 
-    species = GetSpeciesRandomSeeded(species, TX_RANDOM_T_ABILITY, 0);
+    species = GetSpeciesRandomSeededActuallySeeded(species);
     if ((gSpeciesInfo[species].abilities[1] == ABILITY_NONE) && (abilityNum == 1))
         abilityNum = 0;
 
@@ -9117,6 +9117,11 @@ static u16 GetRandomSpecies(u16 species, u8 mapBased, u8 type, u16 additionalOff
         return sRandomSpeciesLegendary[RandomSeededModulo(species + mapOffset + additionalOffset, RANDOM_SPECIES_COUNT_LEGENDARY)];
 
     return sRandomSpecies[RandomSeededModulo(species + mapOffset + additionalOffset, RANDOM_SPECIES_COUNT)];
+}
+
+u16 GetSpeciesRandomSeededActuallySeeded(u16 species) //if you're reading this and confused, you should be
+{
+    return sRandomSpeciesLegendary[RandomSeededModulo2(species, RANDOM_SPECIES_COUNT_LEGENDARY)];
 }
 
 u16 GetSpeciesRandomSeeded(u16 species, u8 type, u16 additionalOffset)

@@ -1278,11 +1278,11 @@ static const u16 sRandomValidItems[] =
     //ITEM_SERIOUS_MINT,
     // Candy
     ITEM_RARE_CANDY,
-    //ITEM_EXP_CANDY_XS,
-    //ITEM_EXP_CANDY_S,
-    //ITEM_EXP_CANDY_M,
-    //ITEM_EXP_CANDY_L,
-    //ITEM_EXP_CANDY_XL,
+    ITEM_EXP_CANDY_XS,
+    ITEM_EXP_CANDY_S,
+    ITEM_EXP_CANDY_M,
+    ITEM_EXP_CANDY_L,
+    ITEM_EXP_CANDY_XL,
     //ITEM_DYNAMAX_CANDY,
     // Medicinal Flutes
     ITEM_BLUE_FLUTE,

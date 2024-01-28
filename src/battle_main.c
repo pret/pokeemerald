@@ -1958,8 +1958,19 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             monsCount = trainer->partySize;
         }
 
-        for (i = 0; i < monsCount; i++)
+        if(!isPlayer)
         {
+            if (VarGet(VAR_PIT_FLOOR) < 25)
+                monsCount = 3;
+            else if (VarGet(VAR_PIT_FLOOR) < 50)
+                monsCount = 4;
+            else if (VarGet(VAR_PIT_FLOOR) < 75)
+                monsCount = 5;
+            else
+                monsCount = 6;
+        }
+        for (i = 0; i < monsCount; i++)
+        {   
             s32 ball = -1;
             u32 personalityHash = GeneratePartyHash(trainer, i);
             const struct TrainerMon *partyData = trainer->party;
@@ -1988,7 +1999,12 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             if (isPlayer)
                 CreateMon(&party[i], partyData[i].species, partyData[i].lvl, 0, TRUE, personalityValue, otIdType, fixedOtId);
             else
-                CreateMon(&party[i], GetSpeciesRandomSeeded(partyData[i].species, 0, 0), VarGet(VAR_PIT_FLOOR) < 5 ? 5 : VarGet(VAR_PIT_FLOOR), 0, TRUE, personalityValue, otIdType, fixedOtId);
+            {
+                u16 monLevel = VarGet(VAR_PIT_FLOOR) < 5 ? 5 : VarGet(VAR_PIT_FLOOR);
+                if (monLevel > 100)
+                    monLevel = 100;
+                CreateMon(&party[i], GetSpeciesRandomSeeded(partyData[i].species, 0, 0), monLevel, 0, TRUE, personalityValue, otIdType, fixedOtId);
+            }
             SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
 
             CustomTrainerPartyAssignMoves(&party[i], &partyData[i], isPlayer);

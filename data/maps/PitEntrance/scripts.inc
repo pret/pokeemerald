@@ -3,6 +3,7 @@ PitEntrance_MapScripts::
 	.byte 0
 
 PitArena_Entrance:
+	callnative SetDefaultOptions
 	setvar VAR_PIT_FLOOR, 0
 	setflag FLAG_PIT_STARTED
 	setflag	FLAG_DEFEATED_RUSTBORO_GYM
@@ -24,7 +25,7 @@ PitArena_Entrance:
 PitEntrance_Warp::
 	lockall
 	setflag FLAG_PIT_ENTERED
-	addvar VAR_PIT_FLOOR, 1
+	setvar VAR_PIT_FLOOR, 1
 	callnative BufferMapFloorString
 	callnative InitTrainerIdAndNameData
 	callnative SetRandomTrainers
@@ -32,7 +33,10 @@ PitEntrance_Warp::
 	givemon SPECIES_MUDKIP, 5
 	givemon SPECIES_TREECKO, 5
 	givemon SPECIES_TORCHIC, 5
-	additem ITEM_RARE_CANDY, 99
+	additem ITEM_POTION, 5
+	additem ITEM_FULL_RESTORE, 1
+	additem ITEM_REVIVE, 1
+	additem ITEM_FULL_HEAL, 3
 	setflag FLAG_SYS_POKEMON_GET
 	warpteleport MAP_PIT_ARENA, 9, 7
 	waitstate

@@ -517,12 +517,26 @@ u16 ReturnLastSpokenVarObjGfxId()
 
 u16 ReturnNumberOfTrainersForFloor()
 {
+
+    if(VarGet(VAR_PIT_FLOOR) == 100)
+        FlagClear(FLAG_END_GAME_STATUE);
+    else
+        FlagSet(FLAG_END_GAME_STATUE);
+
     if((VarGet(VAR_PIT_FLOOR) % 5) == 0) // Heal Floor
     {
         FlagClear(FLAG_HEAL_NPC);
+        FlagClear(FLAG_SHOP_NPC);
+        
+        if((VarGet(VAR_PIT_FLOOR) % 25) == 0) // New Mon Floor
+        {
+            FlagClear(FLAG_GIVE_POKEMON);
+        }
         return 0;
     }
     FlagSet(FLAG_HEAL_NPC);
+    FlagSet(FLAG_SHOP_NPC);
+    FlagSet(FLAG_GIVE_POKEMON);
 
     if(VarGet(VAR_PIT_FLOOR) < 11)
         return 1;

@@ -69,6 +69,8 @@ u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 u
 
     species = GetSpeciesRandomSeeded(species, 0, 0);
 
+    VarSet(VAR_0x800A, species);
+
     if (OW_SYNCHRONIZE_NATURE >= GEN_6 && (gSpeciesInfo[species].eggGroups[0] == EGG_GROUP_NO_EGGS_DISCOVERED || OW_SYNCHRONIZE_NATURE == GEN_7))
         CreateMonWithNature(&mon, species, level, MAX_PER_STAT_IVS, PickWildMonNature());
     else

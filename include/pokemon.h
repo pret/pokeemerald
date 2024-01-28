@@ -723,5 +723,6 @@ u16 GetSpeciesRandomSeeded(u16 species, u8 type, u16 additionalOffset);
 u16 GetRandomMove(u16 input_move, u16 species);
 u8 GetRandomType(void);
 u8 EvolutionBlockedByEvoLimit(u16 species);
+u16 GetSpeciesRandomSeededActuallySeeded(u16 species);
 
 #endif // GUARD_POKEMON_H

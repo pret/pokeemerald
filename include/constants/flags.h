@@ -663,10 +663,10 @@
 #define FLAG_REWARD_ITEM_1  0x26C // Unused Flag
 #define FLAG_REWARD_ITEM_2  0x26D // Unused Flag
 #define FLAG_GIVE_REWARDS 0x26E // Unused Flag
-#define FLAG_UNUSED_0x26F  0x26F // Unused Flag
-#define FLAG_UNUSED_0x270  0x270 // Unused Flag
-#define FLAG_UNUSED_0x271  0x271 // Unused Flag
-#define FLAG_UNUSED_0x272  0x272 // Unused Flag
+#define FLAG_GIVE_POKEMON  0x26F // Unused Flag
+#define FLAG_SHOP_NPC  0x270 // Unused Flag
+#define FLAG_END_GAME_STATUE  0x271 // Unused Flag
+#define FLAG_END_TEXT_FINISHED  0x272 // Unused Flag
 #define FLAG_UNUSED_0x273  0x273 // Unused Flag
 #define FLAG_UNUSED_0x274  0x274 // Unused Flag
 #define FLAG_UNUSED_0x275  0x275 // Unused Flag
