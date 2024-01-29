@@ -384,6 +384,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectTwoTurnsAttack,
         .battleTvScore = 0, // TODO: Assign points
+        .twoTurnEffect = TRUE,
     },
 
     [EFFECT_SUBSTITUTE] =
@@ -752,6 +753,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectSkullBash,
         .battleTvScore = 3,
+        .twoTurnEffect = TRUE,
     },
 
     [EFFECT_EARTHQUAKE] =
@@ -777,6 +779,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectSolarBeam,
         .battleTvScore = 1,
+        .twoTurnEffect = TRUE,
     },
 
     [EFFECT_THUNDER] =
@@ -801,6 +804,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectSemiInvulnerable,
         .battleTvScore = 3,
+        .twoTurnEffect = TRUE,
     },
 
     [EFFECT_DEFENSE_CURL] =
@@ -1814,6 +1818,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectGeomancy,
         .battleTvScore = 0, // TODO: Assign points
+        .twoTurnEffect = TRUE,
     },
 
     [EFFECT_FAIRY_LOCK] =
@@ -2016,6 +2021,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectSkyDrop,
         .battleTvScore = 0, // TODO: Assign points
+        .twoTurnEffect = TRUE,
     },
 
     [EFFECT_EXPANDING_FORCE] =
@@ -2028,6 +2034,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectMeteorBeam,
         .battleTvScore = 0, // TODO: Assign points
+        .twoTurnEffect = TRUE,
     },
 
     [EFFECT_RISING_VOLTAGE] =

@@ -54,10 +54,12 @@ struct __attribute__((packed, aligned(2))) BattleMoveEffect
     const u8 *battleScript;
     u16 battleTvScore:3;
     u16 encourageEncore:1;
-    u16 flags:12; // coming soon...
+    u16 twoTurnEffect:1;
+    u16 padding:11;
 };
 
-#define GET_MOVE_BATTLESCRIPT(move) gBattleMoveEffects[gMovesInfo[move].effect].battleScript
+#define GET_MOVE_EFFECT(move) gBattleMoveEffects[gMovesInfo[move].effect]
+#define GET_MOVE_BATTLESCRIPT(move) GET_MOVE_EFFECT(move).battleScript
 
 struct ResourceFlags
 {
@@ -794,6 +796,7 @@ STATIC_ASSERT(sizeof(((struct BattleStruct *)0)->palaceFlags) * 8 >= MAX_BATTLER
 #define IS_MOVE_STATUS(move)(gMovesInfo[move].category == DAMAGE_CATEGORY_STATUS)
 
 #define IS_MOVE_RECOIL(move)(gMovesInfo[move].recoil > 0 || gMovesInfo[move].effect == EFFECT_RECOIL_IF_MISS)
+#define MOVE_USES_PROTECT_COUNTER(move)(gMovesInfo[move].effect == EFFECT_ENDURE || gMovesInfo[move].effect == EFFECT_PROTECT)
 
 #define BATTLER_MAX_HP(battlerId)(gBattleMons[battlerId].hp == gBattleMons[battlerId].maxHP)
 #define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0) || (gBattleStruct->enduredDamage & gBitTable[gBattlerTarget]))
