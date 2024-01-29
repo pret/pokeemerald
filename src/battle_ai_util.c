@@ -1375,9 +1375,9 @@ void ProtectChecks(u32 battlerAtk, u32 battlerDef, u32 move, u32 predictedMove, 
     if (uses == 0)
     {
         if (predictedMove != MOVE_NONE && predictedMove != 0xFFFF && !IS_MOVE_STATUS(predictedMove))
-            ADJUST_SCORE_PTR(2);
+            ADJUST_SCORE_PTR(DECENT_EFFECT);
         else if (Random() % 256 < 100)
-            ADJUST_SCORE_PTR(1);
+            ADJUST_SCORE_PTR(WEAK_EFFECT);
     }
     else
     {
@@ -1397,7 +1397,7 @@ void ProtectChecks(u32 battlerAtk, u32 battlerDef, u32 move, u32 predictedMove, 
     if (gBattleMons[battlerDef].status1 & STATUS1_TOXIC_POISON
       || gBattleMons[battlerDef].status2 & (STATUS2_CURSED | STATUS2_INFATUATION)
       || gStatuses3[battlerDef] & (STATUS3_PERISH_SONG | STATUS3_LEECHSEED | STATUS3_YAWN))
-        ADJUST_SCORE_PTR(2);
+        ADJUST_SCORE_PTR(DECENT_EFFECT);
 }
 
 // stat stages
@@ -3309,53 +3309,53 @@ void IncreaseStatUpScore(u32 battlerAtk, u32 battlerDef, u32 statId, s32 *score)
     {
     case STAT_CHANGE_ATK:
         if (HasMoveWithCategory(battlerAtk, BATTLE_CATEGORY_PHYSICAL) && shouldSetUp)
-            ADJUST_SCORE_PTR(2);
+            ADJUST_SCORE_PTR(DECENT_EFFECT);
         break;
     case STAT_CHANGE_DEF:
         if (HasMoveWithCategory(battlerDef, BATTLE_CATEGORY_PHYSICAL) || !HasMoveWithCategory(battlerDef, BATTLE_CATEGORY_SPECIAL))
-            ADJUST_SCORE_PTR(2);
+            ADJUST_SCORE_PTR(DECENT_EFFECT);
         break;
     case STAT_CHANGE_SPEED:
         if ((noOfHitsToFaint >= 3 && !aiIsFaster) || noOfHitsToFaint == 0)
-            ADJUST_SCORE_PTR(2);
+            ADJUST_SCORE_PTR(DECENT_EFFECT);
         break;
     case STAT_CHANGE_SPATK:
         if (HasMoveWithCategory(battlerAtk, BATTLE_CATEGORY_SPECIAL) && shouldSetUp)
-            ADJUST_SCORE_PTR(2);
+            ADJUST_SCORE_PTR(DECENT_EFFECT);
         break;
     case STAT_CHANGE_SPDEF:
         if (HasMoveWithCategory(battlerDef, BATTLE_CATEGORY_SPECIAL) || !HasMoveWithCategory(battlerDef, BATTLE_CATEGORY_PHYSICAL))
-            ADJUST_SCORE_PTR(2);
+            ADJUST_SCORE_PTR(DECENT_EFFECT);
         break;
     case STAT_CHANGE_ATK_2:
         if (HasMoveWithCategory(battlerAtk, BATTLE_CATEGORY_PHYSICAL) && shouldSetUp)
-            ADJUST_SCORE_PTR(4);
+            ADJUST_SCORE_PTR(GOOD_EFFECT);
         break;
     case STAT_CHANGE_DEF_2:
         if (HasMoveWithCategory(battlerDef, BATTLE_CATEGORY_PHYSICAL) || !HasMoveWithCategory(battlerDef, BATTLE_CATEGORY_SPECIAL))
-            ADJUST_SCORE_PTR(4);
+            ADJUST_SCORE_PTR(GOOD_EFFECT);
         break;
     case STAT_CHANGE_SPEED_2:
         if ((noOfHitsToFaint >= 3 && !aiIsFaster) || noOfHitsToFaint == 0)
-            ADJUST_SCORE_PTR(4);
+            ADJUST_SCORE_PTR(GOOD_EFFECT);
         break;
     case STAT_CHANGE_SPATK_2:
         if (HasMoveWithCategory(battlerAtk, BATTLE_CATEGORY_SPECIAL) && shouldSetUp)
-            ADJUST_SCORE_PTR(4);
+            ADJUST_SCORE_PTR(GOOD_EFFECT);
         break;
     case STAT_CHANGE_SPDEF_2:
         if (HasMoveWithCategory(battlerDef, BATTLE_CATEGORY_SPECIAL) || !HasMoveWithCategory(battlerDef, BATTLE_CATEGORY_PHYSICAL))
-            ADJUST_SCORE_PTR(4);
+            ADJUST_SCORE_PTR(GOOD_EFFECT);
         break;
     case STAT_CHANGE_ACC:
         if (gBattleMons[battlerAtk].statStages[STAT_ACC] <= 3) // Increase only if necessary
-            ADJUST_SCORE_PTR(2);
+            ADJUST_SCORE_PTR(DECENT_EFFECT);
         break;
     case STAT_CHANGE_EVASION:
         if (GetBattlerSecondaryDamage(battlerAtk) && ((noOfHitsToFaint > 3) || noOfHitsToFaint == 0))
-            ADJUST_SCORE_PTR(4);
+            ADJUST_SCORE_PTR(GOOD_EFFECT);
         else
-            ADJUST_SCORE_PTR(2);
+            ADJUST_SCORE_PTR(DECENT_EFFECT);
         break;
     }
 }
@@ -3369,17 +3369,17 @@ void IncreasePoisonScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
     if (AI_CanPoison(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], move, AI_DATA->partnerMove) && AI_DATA->hpPercents[battlerDef] > 20)
     {
         if (!HasDamagingMove(battlerDef))
-            ADJUST_SCORE_PTR(2);
+            ADJUST_SCORE_PTR(DECENT_EFFECT);
 
         if (AI_THINKING_STRUCT->aiFlags[battlerAtk] & AI_FLAG_STALL && HasMoveEffect(battlerAtk, EFFECT_PROTECT))
-            ADJUST_SCORE_PTR(1);    // stall tactic
+            ADJUST_SCORE_PTR(WEAK_EFFECT);    // stall tactic
 
         if (HasMoveEffectANDArg(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS, STATUS1_PSN_ANY)
           || HasMoveEffect(battlerAtk, EFFECT_VENOM_DRENCH)
           || AI_DATA->abilities[battlerAtk] == ABILITY_MERCILESS)
-            ADJUST_SCORE_PTR(2);
+            ADJUST_SCORE_PTR(DECENT_EFFECT);
         else
-            ADJUST_SCORE_PTR(1);
+            ADJUST_SCORE_PTR(WEAK_EFFECT);
     }
 }
 
@@ -3391,16 +3391,16 @@ void IncreaseBurnScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
 
     if (AI_CanBurn(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], BATTLE_PARTNER(battlerAtk), move, AI_DATA->partnerMove))
     {
-        ADJUST_SCORE_PTR(1); // burning is good
+        ADJUST_SCORE_PTR(WEAK_EFFECT); // burning is good
         if (HasMoveWithCategory(battlerDef, BATTLE_CATEGORY_PHYSICAL))
         {
             if (CanTargetFaintAi(battlerDef, battlerAtk))
-                ADJUST_SCORE_PTR(2); // burning the target to stay alive is cool
+                ADJUST_SCORE_PTR(DECENT_EFFECT); // burning the target to stay alive is cool
         }
 
         if (HasMoveEffectANDArg(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS, STATUS1_BURN)
           || HasMoveEffectANDArg(BATTLE_PARTNER(battlerAtk), EFFECT_DOUBLE_POWER_ON_ARG_STATUS, STATUS1_BURN))
-            ADJUST_SCORE_PTR(1);
+            ADJUST_SCORE_PTR(WEAK_EFFECT);
     }
 }
 
@@ -3420,9 +3420,9 @@ void IncreaseParalyzeScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
           || (HasMoveWithMoveEffectExcept(battlerAtk, MOVE_EFFECT_FLINCH, EFFECT_FAKE_OUT)) // filter out Fake Out
           || gBattleMons[battlerDef].status2 & STATUS2_INFATUATION
           || gBattleMons[battlerDef].status2 & STATUS2_CONFUSION)
-            ADJUST_SCORE_PTR(4);
+            ADJUST_SCORE_PTR(GOOD_EFFECT);
         else
-            ADJUST_SCORE_PTR(2);
+            ADJUST_SCORE_PTR(DECENT_EFFECT);
     }
 }
 
@@ -3433,17 +3433,17 @@ void IncreaseSleepScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
         return;
 
     if (AI_CanPutToSleep(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], move, AI_DATA->partnerMove))
-        ADJUST_SCORE_PTR(2);
+        ADJUST_SCORE_PTR(DECENT_EFFECT);
     else
         return;
 
     if ((HasMoveEffect(battlerAtk, EFFECT_DREAM_EATER) || HasMoveEffect(battlerAtk, EFFECT_NIGHTMARE))
       && !(HasMoveEffect(battlerDef, EFFECT_SNORE) || HasMoveEffect(battlerDef, EFFECT_SLEEP_TALK)))
-        ADJUST_SCORE_PTR(1);
+        ADJUST_SCORE_PTR(WEAK_EFFECT);
 
     if (HasMoveEffectANDArg(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS, STATUS1_SLEEP)
       || HasMoveEffectANDArg(BATTLE_PARTNER(battlerAtk), EFFECT_DOUBLE_POWER_ON_ARG_STATUS, STATUS1_SLEEP))
-        ADJUST_SCORE_PTR(1);
+        ADJUST_SCORE_PTR(WEAK_EFFECT);
 }
 
 void IncreaseConfusionScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
@@ -3459,9 +3459,9 @@ void IncreaseConfusionScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score
         if (gBattleMons[battlerDef].status1 & STATUS1_PARALYSIS
           || gBattleMons[battlerDef].status2 & STATUS2_INFATUATION
           || (AI_DATA->abilities[battlerAtk] == ABILITY_SERENE_GRACE && HasMoveWithMoveEffectExcept(battlerAtk, MOVE_EFFECT_FLINCH, EFFECT_FAKE_OUT)))
-            ADJUST_SCORE_PTR(3);
+            ADJUST_SCORE_PTR(GOOD_EFFECT);
         else
-            ADJUST_SCORE_PTR(2);
+            ADJUST_SCORE_PTR(DECENT_EFFECT);
     }
 }
 
@@ -3472,16 +3472,16 @@ void IncreaseFrostbiteScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score
 
     if (AI_CanGiveFrostbite(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], BATTLE_PARTNER(battlerAtk), move, AI_DATA->partnerMove))
     {
-        ADJUST_SCORE_PTR(1); // frostbite is good
+        ADJUST_SCORE_PTR(WEAK_EFFECT); // frostbite is good
         if (HasMoveWithCategory(battlerDef, BATTLE_CATEGORY_SPECIAL))
         {
             if (CanTargetFaintAi(battlerDef, battlerAtk))
-                ADJUST_SCORE_PTR(2); // frostbiting the target to stay alive is cool
+                ADJUST_SCORE_PTR(DECENT_EFFECT); // frostbiting the target to stay alive is cool
         }
 
         if (HasMoveEffectANDArg(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS, STATUS1_FROSTBITE)
           || HasMoveEffectANDArg(BATTLE_PARTNER(battlerAtk), EFFECT_DOUBLE_POWER_ON_ARG_STATUS, STATUS1_FROSTBITE))
-            ADJUST_SCORE_PTR(1);
+            ADJUST_SCORE_PTR(WEAK_EFFECT);
     }
 }
 
