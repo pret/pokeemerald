@@ -17,6 +17,7 @@ jobs:
       GAME_LANGUAGE: ENGLISH
       MODERN: 0
       COMPARE: 0
+      UNUSED_ERROR: 1
     steps:
       - name: Checkout
         uses: actions/checkout@v2

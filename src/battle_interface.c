@@ -3070,14 +3070,19 @@ static void ClearAbilityName(u8 spriteId1, u8 spriteId2)
                         7, 9, 1);
 }
 
-static void PrintBattlerOnAbilityPopUp(u8 battlerId, u8 spriteId1, u8 spriteId2)
+static void PrintBattlerOnAbilityPopUp(u8 battlerId, u8 spriteId1, u8 spriteId2, u8 prueba4)
 {
+    u8 prueba1;
+    u8 prueba2 = 2;
+    const u8 prueba3 = 3;
+    u8 prueba5;
     int i;
     u8 lastChar;
     u8* textPtr;
     u8 monName[POKEMON_NAME_LENGTH + 3] = {0};
     u8* nick = gBattleMons[battlerId].nickname; // This needs to be updated for Illusion support
 
+    prueba5 = 5;
     for (i = 0; i < POKEMON_NAME_LENGTH; ++i)
     {
         monName[i] = nick[i];
@@ -3309,7 +3314,7 @@ void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
     StartSpriteAnim(&gSprites[spriteId1], 0);
     StartSpriteAnim(&gSprites[spriteId2], 0);
 
-    PrintBattlerOnAbilityPopUp(battlerId, spriteId1, spriteId2);
+    PrintBattlerOnAbilityPopUp(battlerId, spriteId1, spriteId2, 0);
     PrintAbilityOnAbilityPopUp(ability, spriteId1, spriteId2);
     RestoreOverwrittenPixels((void*)(OBJ_VRAM0) + (gSprites[spriteId1].oam.tileNum * 32));
 }
