@@ -30,7 +30,6 @@ void TestRunner_Battle(const struct Test *);
 
 static bool32 MgbaOpen_(void);
 static void MgbaExit_(u8 exitCode);
-static s32 MgbaPuts_(const char *s);
 static s32 MgbaVPrintf_(const char *fmt, va_list va);
 static void Intr_Timer2(void);
 
@@ -293,12 +292,6 @@ top:
                 color = "";
             }
 
-            if (gTestRunnerState.result == TEST_RESULT_PASS
-             && gTestRunnerState.result != gTestRunnerState.expectedResult)
-            {
-                MgbaPuts_("\e[31mPlease remove KNOWN_FAILING if this test intentionally PASSes\e[0m");
-            }
-
             switch (gTestRunnerState.result)
             {
             case TEST_RESULT_FAIL:
@@ -313,7 +306,10 @@ top:
                 }
                 break;
             case TEST_RESULT_PASS:
-                result = "PASS";
+                if (gTestRunnerState.result != gTestRunnerState.expectedResult)
+                    result = "KNOWN_FAILING_PASS";
+                else
+                    result = "PASS";
                 break;
             case TEST_RESULT_ASSUMPTION_FAIL:
                 result = "ASSUMPTION_FAIL";
@@ -341,7 +337,12 @@ top:
             }
 
             if (gTestRunnerState.result == TEST_RESULT_PASS)
-                MgbaPrintf_(":P%s%s\e[0m", color, result);
+            {
+                if (gTestRunnerState.result != gTestRunnerState.expectedResult)
+                    MgbaPrintf_(":U%s%s\e[0m", color, result);
+                else
+                    MgbaPrintf_(":P%s%s\e[0m", color, result);
+            }
             else if (gTestRunnerState.result == TEST_RESULT_ASSUMPTION_FAIL)
                 MgbaPrintf_(":A%s%s\e[0m", color, result);
             else if (gTestRunnerState.result == TEST_RESULT_TODO)
@@ -501,11 +502,6 @@ static void MgbaExit_(u8 exitCode)
 {
     register u32 _exitCode asm("r0") = exitCode;
     asm("swi 0x3" :: "r" (_exitCode));
-}
-
-static s32 MgbaPuts_(const char *s)
-{
-    return MgbaPrintf_("%s", s);
 }
 
 s32 MgbaPrintf_(const char *fmt, ...)
