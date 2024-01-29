@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_BELLY_DRUM].effect == EFFECT_BELLY_DRUM);
+    ASSUME(gMovesInfo[MOVE_BELLY_DRUM].effect == EFFECT_BELLY_DRUM);
 }
 
 SINGLE_BATTLE_TEST("Belly Drum cuts the user's HP in half")
@@ -25,7 +25,7 @@ SINGLE_BATTLE_TEST("Belly Drum maximizes the user's Attack stat", s16 damage)
     PARAMETRIZE { raiseAttack = FALSE; }
     PARAMETRIZE { raiseAttack = TRUE; }
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TACKLE].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -64,7 +64,7 @@ SINGLE_BATTLE_TEST("Belly Drum fails if user's current HP is half or less than h
 SINGLE_BATTLE_TEST("Belly Drum fails if the user's Attack is already at +6")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SWORDS_DANCE].effect == EFFECT_ATTACK_UP_2);
+        ASSUME(gMovesInfo[MOVE_SWORDS_DANCE].effect == EFFECT_ATTACK_UP_2);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

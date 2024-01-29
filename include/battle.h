@@ -57,7 +57,7 @@ struct __attribute__((packed, aligned(2))) BattleMoveEffect
     u16 flags:12; // coming soon...
 };
 
-#define GET_MOVE_BATTLESCRIPT(move) gBattleMoveEffects[gBattleMoves[move].effect].battleScript
+#define GET_MOVE_BATTLESCRIPT(move) gBattleMoveEffects[gMovesInfo[move].effect].battleScript
 
 struct ResourceFlags
 {
@@ -786,14 +786,14 @@ STATIC_ASSERT(sizeof(((struct BattleStruct *)0)->palaceFlags) * 8 >= MAX_BATTLER
     if (gBattleStruct->dynamicMoveType)                               \
         typeArg = gBattleStruct->dynamicMoveType & DYNAMIC_TYPE_MASK; \
     else                                                              \
-        typeArg = gBattleMoves[move].type;                            \
+        typeArg = gMovesInfo[move].type;                            \
 }
 
-#define IS_MOVE_PHYSICAL(move)(GetBattleMoveCategory(move) == BATTLE_CATEGORY_PHYSICAL)
-#define IS_MOVE_SPECIAL(move)(GetBattleMoveCategory(move) == BATTLE_CATEGORY_SPECIAL)
-#define IS_MOVE_STATUS(move)(gBattleMoves[move].category == BATTLE_CATEGORY_STATUS)
+#define IS_MOVE_PHYSICAL(move)(GetBattleMoveCategory(move) == DAMAGE_CATEGORY_PHYSICAL)
+#define IS_MOVE_SPECIAL(move)(GetBattleMoveCategory(move) == DAMAGE_CATEGORY_SPECIAL)
+#define IS_MOVE_STATUS(move)(gMovesInfo[move].category == DAMAGE_CATEGORY_STATUS)
 
-#define IS_MOVE_RECOIL(move)(gBattleMoves[move].recoil > 0 || gBattleMoves[move].effect == EFFECT_RECOIL_IF_MISS)
+#define IS_MOVE_RECOIL(move)(gMovesInfo[move].recoil > 0 || gMovesInfo[move].effect == EFFECT_RECOIL_IF_MISS)
 
 #define BATTLER_MAX_HP(battlerId)(gBattleMons[battlerId].hp == gBattleMons[battlerId].maxHP)
 #define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0) || (gBattleStruct->enduredDamage & gBitTable[gBattlerTarget]))

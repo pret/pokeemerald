@@ -3,8 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_TACKLE].category == BATTLE_CATEGORY_PHYSICAL);
-    ASSUME(gBattleMoves[MOVE_ROUND].category == BATTLE_CATEGORY_SPECIAL);
+    ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
+    ASSUME(gMovesInfo[MOVE_ROUND].category == DAMAGE_CATEGORY_SPECIAL);
 }
 
 SINGLE_BATTLE_TEST("Quark Drive boosts the highest stat")

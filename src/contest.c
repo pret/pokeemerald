@@ -1537,12 +1537,12 @@ static void Task_ShowMoveSelectScreen(u8 taskId)
         }
         else if (move != MOVE_NONE
                  && eContestantStatus[gContestPlayerMonIndex].prevMove == move
-                 && gContestMoves[move].effect != CONTEST_EFFECT_REPETITION_NOT_BORING)
+                 && gMovesInfo[move].contestEffect != CONTEST_EFFECT_REPETITION_NOT_BORING)
         {
             // Gray the text because it's a repeated move
             moveNameBuffer = StringCopy(moveName, gText_ColorBlue);
         }
-        moveNameBuffer = StringCopy(moveNameBuffer, gMoveNames[move]);
+        moveNameBuffer = StringCopy(moveNameBuffer, GetMoveName(move));
 
         FillWindowPixelBuffer(i + MOVE_WINDOWS_START, PIXEL_FILL(0));
         Contest_PrintTextToBg0WindowAt(i + MOVE_WINDOWS_START, moveName, 5, 1, FONT_NARROW);
@@ -1810,7 +1810,7 @@ static void Task_DoAppeals(u8 taskId)
             ContestClearGeneralTextWindow();
             StringCopy(gStringVar1, gContestMons[contestant].nickname);
             if (eContestantStatus[contestant].currMove < MOVES_COUNT)
-                StringCopy(gStringVar2, gMoveNames[eContestantStatus[contestant].currMove]);
+                StringCopy(gStringVar2, GetMoveName(eContestantStatus[contestant].currMove));
             else
                 StringCopy(gStringVar2, sInvalidContestMoveNames[eContestantStatus[contestant].moveCategory]);
             StringExpandPlaceholders(gStringVar4, gText_MonAppealedWithMove);
@@ -2204,11 +2204,11 @@ static void Task_DoAppeals(u8 taskId)
             if (eContestantStatus[contestant].overrideCategoryExcitementMod)
             {
                 r3 = 1;
-                StringCopy(gStringVar3, gMoveNames[eContestantStatus[contestant].currMove]);
+                StringCopy(gStringVar3, GetMoveName(eContestantStatus[contestant].currMove));
             }
             else
             {
-                StringCopy(gStringVar3, sContestConditions[gContestMoves[eContestantStatus[contestant].currMove].contestCategory]);
+                StringCopy(gStringVar3, sContestConditions[gMovesInfo[eContestantStatus[contestant].currMove].contestCategory]);
             }
 
             if (r3 > 0 && eContestantStatus[contestant].repeatedMove)
@@ -2339,7 +2339,7 @@ static void Task_DoAppeals(u8 taskId)
         ContestClearGeneralTextWindow();
         StringCopy(gStringVar3, gContestMons[eContestExcitement.freezer].nickname);
         StringCopy(gStringVar1, gContestMons[contestant].nickname);
-        StringCopy(gStringVar2, gMoveNames[eContestantStatus[contestant].currMove]);
+        StringCopy(gStringVar2, GetMoveName(eContestantStatus[contestant].currMove));
         StringExpandPlaceholders(gStringVar4, gText_CrowdContinuesToWatchMon);
         Contest_StartTextPrinter(gStringVar4, TRUE);
         gTasks[taskId].tState = APPEALSTATE_PRINT_MON_MOVE_IGNORED_MSG;
@@ -2365,7 +2365,7 @@ static void Task_DoAppeals(u8 taskId)
             eContestantStatus[contestant].hasJudgesAttention = FALSE;
         StartStopFlashJudgeAttentionEye(contestant);
         StringCopy(gStringVar1, gContestMons[contestant].nickname);
-        StringCopy(gStringVar2, gMoveNames[eContestantStatus[contestant].currMove]);
+        StringCopy(gStringVar2, GetMoveName(eContestantStatus[contestant].currMove));
         StringExpandPlaceholders(gStringVar4, gText_MonWasTooNervousToMove);
         Contest_StartTextPrinter(gStringVar4, TRUE);
         gTasks[taskId].tState = APPEALSTATE_WAIT_TOO_NERVOUS_MSG;
@@ -3163,7 +3163,7 @@ static u16 GetMoveEffectSymbolTileOffset(u16 move, u8 contestant)
 {
     u16 offset;
 
-    switch (gContestEffects[gContestMoves[move].effect].effectType)
+    switch (gContestEffects[gMovesInfo[move].contestEffect].effectType)
     {
     case 0:
     case 1:
@@ -3189,7 +3189,7 @@ static void PrintContestMoveDescription(u16 move)
     u8 numHearts;
 
     // The contest category icon is implemented as a 5x2 group of tiles.
-    category = gContestMoves[move].contestCategory;
+    category = gMovesInfo[move].contestCategory;
     if      (category == CONTEST_CATEGORY_COOL)
         categoryTile = 0x4040;
     else if (category == CONTEST_CATEGORY_BEAUTY)
@@ -3205,27 +3205,27 @@ static void PrintContestMoveDescription(u16 move)
     ContestBG_FillBoxWithIncrementingTile(0, categoryTile + 0x10, 0x0b, 0x20, 0x05, 0x01, 0x11, 0x01);
 
     // Appeal hearts
-    if (gContestEffects[gContestMoves[move].effect].appeal == 0xFF)
+    if (gContestEffects[gMovesInfo[move].contestEffect].appeal == 0xFF)
         numHearts = 0;
     else
-        numHearts = gContestEffects[gContestMoves[move].effect].appeal / 10;
+        numHearts = gContestEffects[gMovesInfo[move].contestEffect].appeal / 10;
     if (numHearts > MAX_CONTEST_MOVE_HEARTS)
         numHearts = MAX_CONTEST_MOVE_HEARTS;
     ContestBG_FillBoxWithTile(0, TILE_EMPTY_APPEAL_HEART, 0x15, 0x1f, MAX_CONTEST_MOVE_HEARTS, 0x01, 0x11);
     ContestBG_FillBoxWithTile(0, TILE_FILLED_APPEAL_HEART, 0x15, 0x1f, numHearts, 0x01, 0x11);
 
     // Jam hearts
-    if (gContestEffects[gContestMoves[move].effect].jam == 0xFF)
+    if (gContestEffects[gMovesInfo[move].contestEffect].jam == 0xFF)
         numHearts = 0;
     else
-        numHearts = gContestEffects[gContestMoves[move].effect].jam / 10;
+        numHearts = gContestEffects[gMovesInfo[move].contestEffect].jam / 10;
     if (numHearts > MAX_CONTEST_MOVE_HEARTS)
         numHearts = MAX_CONTEST_MOVE_HEARTS;
     ContestBG_FillBoxWithTile(0, TILE_EMPTY_JAM_HEART, 0x15, 0x20, MAX_CONTEST_MOVE_HEARTS, 0x01, 0x11);
     ContestBG_FillBoxWithTile(0, TILE_FILLED_JAM_HEART, 0x15, 0x20, numHearts, 0x01, 0x11);
 
     FillWindowPixelBuffer(WIN_MOVE_DESCRIPTION, PIXEL_FILL(0));
-    Contest_PrintTextToBg0WindowStd(WIN_MOVE_DESCRIPTION, gContestEffectDescriptionPointers[gContestMoves[move].effect]);
+    Contest_PrintTextToBg0WindowStd(WIN_MOVE_DESCRIPTION, gContestEffectDescriptionPointers[gMovesInfo[move].contestEffect]);
     Contest_PrintTextToBg0WindowStd(WIN_SLASH, gText_Slash);
 }
 
@@ -4426,9 +4426,9 @@ static void CalculateAppealMoveImpact(u8 contestant)
         return;
 
     move = eContestantStatus[contestant].currMove;
-    effect = gContestMoves[move].effect;
+    effect = gMovesInfo[move].contestEffect;
 
-    eContestantStatus[contestant].moveCategory = gContestMoves[eContestantStatus[contestant].currMove].contestCategory;
+    eContestantStatus[contestant].moveCategory = gMovesInfo[eContestantStatus[contestant].currMove].contestCategory;
     if (eContestantStatus[contestant].currMove == eContestantStatus[contestant].prevMove && eContestantStatus[contestant].currMove != MOVE_NONE)
     {
         eContestantStatus[contestant].repeatedMove = TRUE;
@@ -4479,7 +4479,7 @@ static void CalculateAppealMoveImpact(u8 contestant)
         }
         else
         {
-            if (gContestMoves[eContestantStatus[contestant].currMove].comboStarterId != 0)
+            if (gMovesInfo[eContestantStatus[contestant].currMove].contestComboStarterId != 0)
             {
                 eContestantStatus[contestant].hasJudgesAttention = TRUE;
                 eContestantStatus[contestant].usedComboMove = TRUE;
@@ -4558,14 +4558,14 @@ void SetStartledString(u8 contestant, u8 jam)
 static void PrintAppealMoveResultText(u8 contestant, u8 stringId)
 {
     StringCopy(gStringVar1, gContestMons[contestant].nickname);
-    StringCopy(gStringVar2, gMoveNames[eContestantStatus[contestant].currMove]);
-    if      (gContestMoves[eContestantStatus[eContestAppealResults.contestant].currMove].contestCategory == CONTEST_CATEGORY_COOL)
+    StringCopy(gStringVar2, GetMoveName(eContestantStatus[contestant].currMove));
+    if      (gMovesInfo[eContestantStatus[eContestAppealResults.contestant].currMove].contestCategory == CONTEST_CATEGORY_COOL)
         StringCopy(gStringVar3, gText_Contest_Shyness);
-    else if (gContestMoves[eContestantStatus[eContestAppealResults.contestant].currMove].contestCategory == CONTEST_CATEGORY_BEAUTY)
+    else if (gMovesInfo[eContestantStatus[eContestAppealResults.contestant].currMove].contestCategory == CONTEST_CATEGORY_BEAUTY)
         StringCopy(gStringVar3, gText_Contest_Anxiety);
-    else if (gContestMoves[eContestantStatus[eContestAppealResults.contestant].currMove].contestCategory == CONTEST_CATEGORY_CUTE)
+    else if (gMovesInfo[eContestantStatus[eContestAppealResults.contestant].currMove].contestCategory == CONTEST_CATEGORY_CUTE)
         StringCopy(gStringVar3, gText_Contest_Laziness);
-    else if (gContestMoves[eContestantStatus[eContestAppealResults.contestant].currMove].contestCategory == CONTEST_CATEGORY_SMART)
+    else if (gMovesInfo[eContestantStatus[eContestAppealResults.contestant].currMove].contestCategory == CONTEST_CATEGORY_SMART)
         StringCopy(gStringVar3, gText_Contest_Hesitancy);
     else
         StringCopy(gStringVar3, gText_Contest_Fear);
@@ -4738,7 +4738,7 @@ static void UpdateApplauseMeter(void)
 
 s8 Contest_GetMoveExcitement(u16 move)
 {
-    return sContestExcitementTable[gSpecialVar_ContestCategory][gContestMoves[move].contestCategory];
+    return sContestExcitementTable[gSpecialVar_ContestCategory][gMovesInfo[move].contestCategory];
 }
 
 static u8 StartApplauseOverflowAnimation(void)

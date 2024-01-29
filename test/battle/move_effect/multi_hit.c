@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_BULLET_SEED].effect == EFFECT_MULTI_HIT);
+    ASSUME(gMovesInfo[MOVE_BULLET_SEED].effect == EFFECT_MULTI_HIT);
 }
 
 SINGLE_BATTLE_TEST("Multi hit Moves hit the maximum amount with Skill Link")
@@ -141,7 +141,7 @@ SINGLE_BATTLE_TEST("Multi hit Moves hit five times 50 Percent of the time with L
 SINGLE_BATTLE_TEST("Scale Shot decreases defense and increases speed after final hit")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SCALE_SHOT].effect == EFFECT_MULTI_HIT);
+        ASSUME(gMovesInfo[MOVE_SCALE_SHOT].effect == EFFECT_MULTI_HIT);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -163,8 +163,8 @@ SINGLE_BATTLE_TEST("Scale Shot decreases defense and increases speed after final
 SINGLE_BATTLE_TEST("Endure does not prevent multiple hits and stat changes occur at the end of the turn")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SCALE_SHOT].effect == EFFECT_MULTI_HIT);
-        ASSUME(gBattleMoves[MOVE_ENDURE].effect == EFFECT_ENDURE);
+        ASSUME(gMovesInfo[MOVE_SCALE_SHOT].effect == EFFECT_MULTI_HIT);
+        ASSUME(gMovesInfo[MOVE_ENDURE].effect == EFFECT_ENDURE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { HP(1); }
     } WHEN {

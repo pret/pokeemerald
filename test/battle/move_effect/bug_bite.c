@@ -4,7 +4,7 @@
 ASSUMPTIONS
 {
     ASSUME(MoveHasMoveEffect(MOVE_BUG_BITE, MOVE_EFFECT_BUG_BITE));
-    ASSUME(gBattleMoves[MOVE_BUG_BITE].pp == 20);
+    ASSUME(gMovesInfo[MOVE_BUG_BITE].pp == 20);
 }
 
 // Pretty much copy/paste of the Berry Fling Test.

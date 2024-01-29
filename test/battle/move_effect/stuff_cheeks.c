@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_STUFF_CHEEKS].effect == EFFECT_STUFF_CHEEKS);
+    ASSUME(gMovesInfo[MOVE_STUFF_CHEEKS].effect == EFFECT_STUFF_CHEEKS);
     ASSUME(gItemsInfo[ITEM_LIECHI_BERRY].pocket == POCKET_BERRIES);
     ASSUME(gItemsInfo[ITEM_LIECHI_BERRY].holdEffect == HOLD_EFFECT_ATTACK_UP);
 }
@@ -92,7 +92,7 @@ SINGLE_BATTLE_TEST("Stuff Cheeks can be used even if Magic Room is active")
 SINGLE_BATTLE_TEST("Stuff Cheeks fails if the user's berry is removed before they use the move")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_KNOCK_OFF].effect == EFFECT_KNOCK_OFF);
+        ASSUME(gMovesInfo[MOVE_KNOCK_OFF].effect == EFFECT_KNOCK_OFF);
         PLAYER(SPECIES_SKWOVET) { Item(ITEM_LIECHI_BERRY); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

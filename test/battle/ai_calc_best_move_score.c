@@ -10,9 +10,9 @@ AI_SINGLE_BATTLE_TEST("AI will not further increase Attack / Sp. Atk stat if it 
     PARAMETRIZE { move = MOVE_CALM_MIND; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SKY_UPPERCUT].power == 85);
-        ASSUME(gBattleMoves[MOVE_HOWL].effect == EFFECT_ATTACK_UP_USER_ALLY);
-        ASSUME(gBattleMoves[MOVE_CALM_MIND].effect == EFFECT_CALM_MIND);
+        ASSUME(gMovesInfo[MOVE_SKY_UPPERCUT].power == 85);
+        ASSUME(gMovesInfo[MOVE_HOWL].effect == EFFECT_ATTACK_UP_USER_ALLY);
+        ASSUME(gMovesInfo[MOVE_CALM_MIND].effect == EFFECT_CALM_MIND);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_COMBUSKEN) { Speed(15); Moves(MOVE_SKY_UPPERCUT, MOVE_CELEBRATE); };
         OPPONENT(SPECIES_KANGASKHAN) { Speed(20); Moves(MOVE_CHIP_AWAY, MOVE_SWIFT, move); }
@@ -30,9 +30,9 @@ AI_SINGLE_BATTLE_TEST("AI will not further increase Attack / Sp. Atk stat if it 
     PARAMETRIZE { move = MOVE_CALM_MIND; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SKY_UPPERCUT].power == 85);
-        ASSUME(gBattleMoves[MOVE_HOWL].effect == EFFECT_ATTACK_UP_USER_ALLY);
-        ASSUME(gBattleMoves[MOVE_CALM_MIND].effect == EFFECT_CALM_MIND);
+        ASSUME(gMovesInfo[MOVE_SKY_UPPERCUT].power == 85);
+        ASSUME(gMovesInfo[MOVE_HOWL].effect == EFFECT_ATTACK_UP_USER_ALLY);
+        ASSUME(gMovesInfo[MOVE_CALM_MIND].effect == EFFECT_CALM_MIND);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_COMBUSKEN) { Speed(20); Moves(MOVE_DOUBLE_KICK, MOVE_CELEBRATE); };
         OPPONENT(SPECIES_KANGASKHAN) { Speed(15); Moves(MOVE_CHIP_AWAY, MOVE_SWIFT, move); }
@@ -63,9 +63,9 @@ AI_SINGLE_BATTLE_TEST("AI will correctly predict what move the opposing mon goin
 
     KNOWN_FAILING;
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SKY_UPPERCUT].power == 85);
-        ASSUME(gBattleMoves[MOVE_HOWL].effect == EFFECT_ATTACK_UP_USER_ALLY);
-        ASSUME(gBattleMoves[MOVE_CALM_MIND].effect == EFFECT_CALM_MIND);
+        ASSUME(gMovesInfo[MOVE_SKY_UPPERCUT].power == 85);
+        ASSUME(gMovesInfo[MOVE_HOWL].effect == EFFECT_ATTACK_UP_USER_ALLY);
+        ASSUME(gMovesInfo[MOVE_CALM_MIND].effect == EFFECT_CALM_MIND);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
         PLAYER(SPECIES_COMBUSKEN) { Speed(15); Moves(MOVE_SKY_UPPERCUT, MOVE_DOUBLE_KICK, MOVE_FLAME_WHEEL, MOVE_CELEBRATE); };
         OPPONENT(SPECIES_KANGASKHAN) { Speed(20); Moves(MOVE_CHIP_AWAY, MOVE_SWIFT, move); }
@@ -78,10 +78,10 @@ AI_SINGLE_BATTLE_TEST("AI will correctly predict what move the opposing mon goin
 AI_SINGLE_BATTLE_TEST("AI will not use Throat Chop if opposing mon has a better move")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_PSYCHIC_FANGS].power == 85);
-        ASSUME(gBattleMoves[MOVE_THROAT_CHOP].power == 80);
-        ASSUME(gBattleMoves[MOVE_DISARMING_VOICE].power == 40);
-        ASSUME(gBattleMoves[MOVE_FLAME_BURST].power == 70);
+        ASSUME(gMovesInfo[MOVE_PSYCHIC_FANGS].power == 85);
+        ASSUME(gMovesInfo[MOVE_THROAT_CHOP].power == 80);
+        ASSUME(gMovesInfo[MOVE_DISARMING_VOICE].power == 40);
+        ASSUME(gMovesInfo[MOVE_FLAME_BURST].power == 70);
         ASSUME(MoveHasMoveEffect(MOVE_THROAT_CHOP, MOVE_EFFECT_THROAT_CHOP) == TRUE);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_REGIROCK) { Speed(15); Moves(MOVE_DISARMING_VOICE, MOVE_FLAME_BURST); };
@@ -97,10 +97,10 @@ AI_SINGLE_BATTLE_TEST("AI will select Throat Chop if the sound move is the best 
 {
     GIVEN {
         ASSUME(MoveHasMoveEffect(MOVE_THROAT_CHOP, MOVE_EFFECT_THROAT_CHOP) == TRUE);
-        ASSUME(gBattleMoves[MOVE_PSYCHIC_FANGS].power == 85);
-        ASSUME(gBattleMoves[MOVE_THROAT_CHOP].power == 80);
-        ASSUME(gBattleMoves[MOVE_FLAME_BURST].power == 70);
-        ASSUME(gBattleMoves[MOVE_HYPER_VOICE].power == 90);
+        ASSUME(gMovesInfo[MOVE_PSYCHIC_FANGS].power == 85);
+        ASSUME(gMovesInfo[MOVE_THROAT_CHOP].power == 80);
+        ASSUME(gMovesInfo[MOVE_FLAME_BURST].power == 70);
+        ASSUME(gMovesInfo[MOVE_HYPER_VOICE].power == 90);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_REGIROCK) { Speed(15); Moves(MOVE_HYPER_VOICE, MOVE_FLAME_BURST); };
         OPPONENT(SPECIES_WOBBUFFET) { Speed(20); Moves(MOVE_THROAT_CHOP, MOVE_PSYCHIC_FANGS); }

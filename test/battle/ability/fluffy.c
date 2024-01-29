@@ -3,11 +3,11 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_TACKLE].makesContact);
-    ASSUME(gBattleMoves[MOVE_EMBER].type == TYPE_FIRE);
-    ASSUME(gBattleMoves[MOVE_TACKLE].makesContact);
-    ASSUME(gBattleMoves[MOVE_FIRE_PUNCH].makesContact);
-    ASSUME(gBattleMoves[MOVE_FIRE_PUNCH].type == TYPE_FIRE);
+    ASSUME(gMovesInfo[MOVE_TACKLE].makesContact);
+    ASSUME(gMovesInfo[MOVE_EMBER].type == TYPE_FIRE);
+    ASSUME(gMovesInfo[MOVE_TACKLE].makesContact);
+    ASSUME(gMovesInfo[MOVE_FIRE_PUNCH].makesContact);
+    ASSUME(gMovesInfo[MOVE_FIRE_PUNCH].type == TYPE_FIRE);
 }
 
 SINGLE_BATTLE_TEST("Fluffy halves damage taken from moves that make direct contact", s16 damage)

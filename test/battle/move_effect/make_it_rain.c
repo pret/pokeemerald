@@ -12,7 +12,7 @@ SINGLE_BATTLE_TEST("Make It Rain lowers special attack by one stage")
     s16 damage[2];
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_MAKE_IT_RAIN].category == BATTLE_CATEGORY_SPECIAL);
+        ASSUME(gMovesInfo[MOVE_MAKE_IT_RAIN].category == DAMAGE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

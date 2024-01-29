@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_FICKLE_BEAM].effect == EFFECT_FICKLE_BEAM);
+    ASSUME(gMovesInfo[MOVE_FICKLE_BEAM].effect == EFFECT_FICKLE_BEAM);
 }
 
 SINGLE_BATTLE_TEST("Fickle Beam deals double damage 30% of the time")
@@ -12,8 +12,8 @@ SINGLE_BATTLE_TEST("Fickle Beam deals double damage 30% of the time")
 
     PASSES_RANDOMLY(30, 100, RNG_FICKLE_BEAM);
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_POWER_GEM].power == 80);
-        ASSUME(gBattleMoves[MOVE_FICKLE_BEAM].power == 80);
+        ASSUME(gMovesInfo[MOVE_POWER_GEM].power == 80);
+        ASSUME(gMovesInfo[MOVE_FICKLE_BEAM].power == 80);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

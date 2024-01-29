@@ -12,7 +12,7 @@ SINGLE_BATTLE_TEST("Mirror Herb copies all of foe's positive stat changes in a t
     PARAMETRIZE { item = ITEM_NONE; }
     PARAMETRIZE { item = ITEM_MIRROR_HERB; }
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TACKLE].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(5); Item(item); }
     } WHEN {

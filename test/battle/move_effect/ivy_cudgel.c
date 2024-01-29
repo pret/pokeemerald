@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_IVY_CUDGEL].effect == EFFECT_IVY_CUDGEL);
+    ASSUME(gMovesInfo[MOVE_IVY_CUDGEL].effect == EFFECT_IVY_CUDGEL);
 }
 
 SINGLE_BATTLE_TEST("Ivy Cudgel changes the move type depending on the form of Ogerpon")

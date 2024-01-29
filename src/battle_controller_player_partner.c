@@ -360,9 +360,9 @@ static void PlayerPartnerHandleChooseMove(u32 battler)
     }
     else
     {
-        if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED))
+        if (gMovesInfo[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED))
             gBattlerTarget = battler;
-        if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_BOTH)
+        if (gMovesInfo[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_BOTH)
         {
             gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
             if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])

@@ -3,8 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_WATER_GUN].category == BATTLE_CATEGORY_SPECIAL);
-    ASSUME(gBattleMoves[MOVE_ENTRAINMENT].effect == EFFECT_ENTRAINMENT);
+    ASSUME(gMovesInfo[MOVE_WATER_GUN].category == DAMAGE_CATEGORY_SPECIAL);
+    ASSUME(gMovesInfo[MOVE_ENTRAINMENT].effect == EFFECT_ENTRAINMENT);
 }
 
 SINGLE_BATTLE_TEST("Vessel of Ruin reduces Sp. Atk if opposing mon's ability doesn't match")

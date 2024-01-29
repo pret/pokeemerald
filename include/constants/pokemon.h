@@ -216,9 +216,9 @@
 #define EV_ITEM_RAISE_LIMIT ((I_VITAMIN_EV_CAP >= GEN_8) ? MAX_PER_STAT_EVS : 100)
 
 // Move category defines.
-#define BATTLE_CATEGORY_PHYSICAL    0
-#define BATTLE_CATEGORY_SPECIAL     1
-#define BATTLE_CATEGORY_STATUS      2
+#define DAMAGE_CATEGORY_PHYSICAL    0
+#define DAMAGE_CATEGORY_SPECIAL     1
+#define DAMAGE_CATEGORY_STATUS      2
 
 // Growth rates
 #define GROWTH_MEDIUM_FAST  0

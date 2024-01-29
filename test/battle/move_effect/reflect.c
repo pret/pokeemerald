@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_REFLECT].effect == EFFECT_REFLECT);
+    ASSUME(gMovesInfo[MOVE_REFLECT].effect == EFFECT_REFLECT);
 }
 
 SINGLE_BATTLE_TEST("Reflect reduces physical damage", s16 damage)
@@ -12,7 +12,7 @@ SINGLE_BATTLE_TEST("Reflect reduces physical damage", s16 damage)
     PARAMETRIZE { move = MOVE_CELEBRATE; }
     PARAMETRIZE { move = MOVE_REFLECT; }
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TACKLE].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -30,7 +30,7 @@ SINGLE_BATTLE_TEST("Reflect applies for 5 turns")
 {
     s16 damage[6];
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TACKLE].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

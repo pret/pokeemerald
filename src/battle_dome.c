@@ -2239,7 +2239,7 @@ static void CreateDomeOpponentMon(u8 monPartyId, u16 tournamentTrainerId, u8 tou
     {
         SetMonMoveSlot(&gEnemyParty[monPartyId],
                        gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]].moves[i], i);
-        if (gBattleMoves[gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]].moves[i]].effect == EFFECT_FRUSTRATION)
+        if (gMovesInfo[gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]].moves[i]].effect == EFFECT_FRUSTRATION)
             friendship = 0;
     }
 
@@ -2445,7 +2445,7 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int mode)
     defType1 = gSpeciesInfo[targetSpecies].types[0];
     defType2 = gSpeciesInfo[targetSpecies].types[1];
     defAbility = gSpeciesInfo[targetSpecies].abilities[0];
-    moveType = gBattleMoves[move].type;
+    moveType = gMovesInfo[move].type;
 
     if (defAbility == ABILITY_LEVITATE && moveType == TYPE_GROUND)
     {
@@ -3933,7 +3933,7 @@ static bool32 IsDomeHealingMove(u32 move)
     if (IsHealingMove(move))
         return TRUE;
     // Check extra effects not considered plain healing by AI
-    switch (gBattleMoves[move].effect)
+    switch (gMovesInfo[move].effect)
     {
         case EFFECT_INGRAIN:
         case EFFECT_REFRESH:
@@ -3992,9 +3992,9 @@ static bool32 IsDomeRiskyMoveEffect(u32 effect)
 
 static bool32 IsDomeLuckyMove(u32 move)
 {
-    if (gBattleMoves[move].accuracy <= 50)
+    if (gMovesInfo[move].accuracy <= 50)
         return TRUE;
-    switch(gBattleMoves[move].effect)
+    switch(gMovesInfo[move].effect)
     {
     case EFFECT_COUNTER:
     case EFFECT_OHKO: // Technically redundant because of the above accuracy check
@@ -4025,10 +4025,10 @@ static bool32 IsDomePopularMove(u32 move)
     if (i == NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES)
         return FALSE;
     // Filter in TMs/HMs
-    if (gBattleMoves[move].power >= 90)
+    if (gMovesInfo[move].power >= 90)
         return TRUE;
 
-    switch(gBattleMoves[move].effect)
+    switch(gMovesInfo[move].effect)
     {
     case EFFECT_PROTECT:
     case EFFECT_MAT_BLOCK:
@@ -4043,7 +4043,7 @@ static bool32 IsDomePopularMove(u32 move)
 
 static bool32 IsDomeStatusMoveEffect(u32 move)
 {
-    switch(gBattleMoves[move].effect)
+    switch(gMovesInfo[move].effect)
     {
     case EFFECT_SLEEP:
     case EFFECT_CONFUSE:
@@ -4116,7 +4116,7 @@ static bool32 IsDomeComboMoveEffect(u32 effect)
     // Moves dependent on terrain
     case EFFECT_EXPANDING_FORCE:
     case EFFECT_GRASSY_GLIDE:
-    //case EFFECT_MISTY_EXPLOSION: (needs a unique effect in gBattleMoves!)
+    //case EFFECT_MISTY_EXPLOSION: (needs a unique effect in gMovesInfo!)
     case EFFECT_PSYBLADE:
     case EFFECT_RISING_VOLTAGE:
     case EFFECT_TERRAIN_PULSE:
@@ -4346,13 +4346,13 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                 switch (k)
                 {
                 case MOVE_POINTS_COMBO:
-                    allocatedArray[k] = IsDomeComboMoveEffect(gBattleMoves[move].effect) ? 1 : 0;
+                    allocatedArray[k] = IsDomeComboMoveEffect(gMovesInfo[move].effect) ? 1 : 0;
                     break;
                 case MOVE_POINTS_STAT_RAISE:
-                    allocatedArray[k] = IsStatRaisingEffect(gBattleMoves[move].effect) ? 1 : 0;
+                    allocatedArray[k] = IsStatRaisingEffect(gMovesInfo[move].effect) ? 1 : 0;
                     break;
                 case MOVE_POINTS_STAT_LOWER:
-                    allocatedArray[k] = IsStatLoweringEffect(gBattleMoves[move].effect) ? 1 : 0;
+                    allocatedArray[k] = IsStatLoweringEffect(gMovesInfo[move].effect) ? 1 : 0;
                     break;
                 case MOVE_POINTS_RARE:
                     allocatedArray[k] = IsDomeRareMove(move) ? 1 : 0;
@@ -4361,22 +4361,22 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                     allocatedArray[k] = IsDomeHealingMove(move) ? 1 : 0;
                     break;
                 case MOVE_POINTS_RISKY:
-                    allocatedArray[k] = IsDomeRiskyMoveEffect(gBattleMoves[move].effect) ? 1 : 0;
+                    allocatedArray[k] = IsDomeRiskyMoveEffect(gMovesInfo[move].effect) ? 1 : 0;
                     break;
                 case MOVE_POINTS_STATUS:
                     allocatedArray[k] = IsDomeStatusMoveEffect(move);
                     break;
                 case MOVE_POINTS_DMG:
-                    allocatedArray[k] = (gBattleMoves[move].power != 0) ? 1 : 0;
+                    allocatedArray[k] = (gMovesInfo[move].power != 0) ? 1 : 0;
                     break;
                 case MOVE_POINTS_DEF:
-                    allocatedArray[k] = IsDomeDefensiveMoveEffect(gBattleMoves[move].effect) ? 1 : 0;
+                    allocatedArray[k] = IsDomeDefensiveMoveEffect(gMovesInfo[move].effect) ? 1 : 0;
                     break;
                 case MOVE_POINTS_ACCURATE:
-                    allocatedArray[k] = (gBattleMoves[move].accuracy == 0 || gBattleMoves[move].accuracy == 100) ? 1 : 0;
+                    allocatedArray[k] = (gMovesInfo[move].accuracy == 0 || gMovesInfo[move].accuracy == 100) ? 1 : 0;
                     break;
                 case MOVE_POINTS_POWERFUL:
-                    allocatedArray[k] = (gBattleMoves[move].power >= 100) ? 1 : 0;
+                    allocatedArray[k] = (gMovesInfo[move].power >= 100) ? 1 : 0;
                     break;
                 case MOVE_POINTS_POPULAR:
                     allocatedArray[k] = IsDomePopularMove(move) ? 1 : 0;
@@ -4385,13 +4385,13 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                     allocatedArray[k] = IsDomeLuckyMove(move) ? 1 : 0;
                     break;
                 case MOVE_POINTS_STRONG:
-                    allocatedArray[k] = (gBattleMoves[move].power >= 90) ? 1 : 0;
+                    allocatedArray[k] = (gMovesInfo[move].power >= 90) ? 1 : 0;
                     break;
                 case MOVE_POINTS_LOW_PP:
-                    allocatedArray[k] = (gBattleMoves[move].pp <= 5) ? 1 : 0;
+                    allocatedArray[k] = (gMovesInfo[move].pp <= 5) ? 1 : 0;
                     break;
                 case MOVE_POINTS_EFFECT:
-                    allocatedArray[k] = gBattleMoves[move].sheerForceBoost;
+                    allocatedArray[k] = gMovesInfo[move].sheerForceBoost;
                     break;
                 }
             }
@@ -4655,7 +4655,7 @@ static int BufferDomeWinString(u8 matchNum, u8 *tournamentIds)
             if (DOME_TRAINERS[tournamentId].eliminatedAt == sCompetitorRangeByMatch[matchNum][2])
             {
                 // Set initial winStringId offset
-                StringCopy(gStringVar2, gMoveNames[gSaveBlock2Ptr->frontier.domeWinningMoves[tournamentId]]);
+                StringCopy(gStringVar2, GetMoveName(gSaveBlock2Ptr->frontier.domeWinningMoves[tournamentId]));
                 winStringId = DOME_TRAINERS[tournamentId].forfeited * 2; // (DOME_TEXT_WON_USING_MOVE - 1) or (DOME_TEXT_WON_ON_FORFEIT - 1)
 
                 if (gSaveBlock2Ptr->frontier.domeWinningMoves[tournamentId] == MOVE_NONE && DOME_TRAINERS[tournamentId].forfeited == FALSE)
@@ -5148,12 +5148,12 @@ static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roun
             else
                 moveIds[i * MAX_MON_MOVES + j] = gFacilityTrainerMons[DOME_MONS[winnerTournamentId][i]].moves[j];
 
-            movePower = gBattleMoves[moveIds[i * MAX_MON_MOVES + j]].power;
+            movePower = gMovesInfo[moveIds[i * MAX_MON_MOVES + j]].power;
             if (movePower == 0)
                 movePower = 40;
             else if (movePower == 1)
                 movePower = 60;
-            else if (gBattleMoves[moveIds[i * MAX_MON_MOVES + j]].effect == EFFECT_EXPLOSION)
+            else if (gMovesInfo[moveIds[i * MAX_MON_MOVES + j]].effect == EFFECT_EXPLOSION)
                 movePower /= 2;
 
             for (k = 0; k < FRONTIER_PARTY_SIZE; k++)

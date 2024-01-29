@@ -845,16 +845,16 @@ void TestRunner_Battle_CheckChosenMove(u32 battlerId, u32 moveId, u32 target)
             u32 moveSlot = GetMoveSlot(gBattleMons[battlerId].moves, moveId);
             PrintAiMoveLog(battlerId, moveSlot, moveId, gBattleStruct->aiFinalScore[battlerId][expectedAction->target][moveSlot]);
             if (countExpected > 1)
-                Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: Unmatched EXPECT_MOVES %S, got %S", filename, expectedAction->sourceLine, gMoveNames[expectedMoveId], gMoveNames[moveId]);
+                Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: Unmatched EXPECT_MOVES %S, got %S", filename, expectedAction->sourceLine, GetMoveName(expectedMoveId), GetMoveName(moveId));
             else
-                Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: Unmatched EXPECT_MOVE %S, got %S", filename, expectedAction->sourceLine, gMoveNames[expectedMoveId], gMoveNames[moveId]);
+                Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: Unmatched EXPECT_MOVE %S, got %S", filename, expectedAction->sourceLine, GetMoveName(expectedMoveId), GetMoveName(moveId));
         }
         if (expectedAction->notMove && !movePasses)
         {
             if (countExpected > 1)
-                Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: Unmatched NOT_EXPECT_MOVES %S", filename, expectedAction->sourceLine, gMoveNames[expectedMoveId]);
+                Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: Unmatched NOT_EXPECT_MOVES %S", filename, expectedAction->sourceLine, GetMoveName(expectedMoveId));
             else
-                Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: Unmatched NOT_EXPECT_MOVE %S", filename, expectedAction->sourceLine, gMoveNames[expectedMoveId]);
+                Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: Unmatched NOT_EXPECT_MOVE %S", filename, expectedAction->sourceLine, GetMoveName(expectedMoveId));
         }
     }
     // Turn passed, clear logs from the turn
@@ -935,7 +935,7 @@ static void CheckIfMaxScoreEqualExpectMove(u32 battlerId, s32 target, struct Exp
             && !(aiAction->moveSlots & gBitTable[bestScoreId]))
         {
             Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: EXPECT_MOVE %S has the same best score(%d) as not expected MOVE %S", filename,
-                                aiAction->sourceLine, gMoveNames[moves[i]], scores[i], gMoveNames[moves[bestScoreId]]);
+                                aiAction->sourceLine, GetMoveName(moves[i]), scores[i], GetMoveName(moves[bestScoreId]));
         }
         // We DO NOT expect move 'i', but it has the same best score as another move.
         if (scores[i] == scores[bestScoreId]
@@ -944,7 +944,7 @@ static void CheckIfMaxScoreEqualExpectMove(u32 battlerId, s32 target, struct Exp
             && !(aiAction->moveSlots & gBitTable[bestScoreId]))
         {
             Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: NOT_EXPECT_MOVE %S has the same best score(%d) as MOVE %S", filename,
-                                aiAction->sourceLine, gMoveNames[moves[i]], scores[i], gMoveNames[moves[bestScoreId]]);
+                                aiAction->sourceLine, GetMoveName(moves[i]), scores[i], GetMoveName(moves[bestScoreId]));
         }
     }
 }
@@ -957,7 +957,7 @@ static void PrintAiMoveLog(u32 battlerId, u32 moveSlot, u32 moveId, s32 totalSco
     if (DATA.aiLogPrintedForMove[battlerId] & gBitTable[moveSlot]) return;
 
     DATA.aiLogPrintedForMove[battlerId] |= gBitTable[moveSlot];
-    MgbaPrintf_("Score Log for move %S:\n", gMoveNames[moveId]);
+    MgbaPrintf_("Score Log for move %S:\n", GetMoveName(moveId));
     for (i = 0; i < MAX_AI_LOG_LINES; i++)
     {
         struct AILogLine *log = &DATA.aiLogLines[battlerId][moveSlot][i];
@@ -1025,7 +1025,7 @@ void TestRunner_Battle_CheckAiMoveScores(u32 battlerId)
                 if (!CheckComparision(scores[scoreCtx->moveSlot1], scoreCtx->value, scoreCtx->cmp))
                 {
                     Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: Unmatched SCORE_%s_VAL %S %d, got %d",
-                                        filename, scoreCtx->sourceLine, sCmpToStringTable[scoreCtx->cmp], gMoveNames[moveId1], scoreCtx->value, scores[scoreCtx->moveSlot1]);
+                                        filename, scoreCtx->sourceLine, sCmpToStringTable[scoreCtx->cmp], GetMoveName(moveId1), scoreCtx->value, scores[scoreCtx->moveSlot1]);
                 }
             }
             else
@@ -1036,7 +1036,7 @@ void TestRunner_Battle_CheckAiMoveScores(u32 battlerId)
                 if (!CheckComparision(scores[scoreCtx->moveSlot1], scores[scoreCtx->moveSlot2], scoreCtx->cmp))
                 {
                     Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: Unmatched SCORE_%s, got %S: %d, %S: %d",
-                                        filename, scoreCtx->sourceLine, sCmpToStringTable[scoreCtx->cmp], gMoveNames[moveId1], scores[scoreCtx->moveSlot1], gMoveNames[moveId2], scores[scoreCtx->moveSlot2]);
+                                        filename, scoreCtx->sourceLine, sCmpToStringTable[scoreCtx->cmp], GetMoveName(moveId1), scores[scoreCtx->moveSlot1], GetMoveName(moveId2), scores[scoreCtx->moveSlot2]);
                 }
             }
         }
@@ -1742,7 +1742,7 @@ void Moves_(u32 sourceLine, u16 moves[MAX_MON_MOVES])
             break;
         INVALID_IF(moves[i] >= MOVES_COUNT, "Illegal move: %d", moves[i]);
         SetMonData(DATA.currentMon, MON_DATA_MOVE1 + i, &moves[i]);
-        SetMonData(DATA.currentMon, MON_DATA_PP1 + i, &gBattleMoves[moves[i]].pp);
+        SetMonData(DATA.currentMon, MON_DATA_PP1 + i, &gMovesInfo[moves[i]].pp);
     }
     DATA.explicitMoves[DATA.currentSide] |= 1 << DATA.currentPartyIndex;
 }
@@ -1988,7 +1988,7 @@ s32 MoveGetTarget(s32 battlerId, u32 moveId, struct MoveContext *ctx, u32 source
     }
     else
     {
-        const struct BattleMove *move = &gBattleMoves[moveId];
+        const struct MoveInfo *move = &gMovesInfo[moveId];
         if (move->target == MOVE_TARGET_RANDOM
          || move->target == MOVE_TARGET_BOTH
          || move->target == MOVE_TARGET_DEPENDS
@@ -2003,7 +2003,7 @@ s32 MoveGetTarget(s32 battlerId, u32 moveId, struct MoveContext *ctx, u32 source
             // In AI Doubles not specified target allows any target for EXPECT_MOVE.
             if (GetBattleTest()->type != BATTLE_TEST_AI_DOUBLES)
             {
-                INVALID_IF(STATE->battlersCount > 2, "%S requires explicit target", gMoveNames[moveId]);
+                INVALID_IF(STATE->battlersCount > 2, "%S requires explicit target", GetMoveName(moveId));
             }
 
             target = BATTLE_OPPOSITE(battlerId);
@@ -2021,7 +2021,7 @@ s32 MoveGetTarget(s32 battlerId, u32 moveId, struct MoveContext *ctx, u32 source
             // In AI Doubles not specified target allows any target for EXPECT_MOVE.
             if (GetBattleTest()->type != BATTLE_TEST_AI_DOUBLES)
             {
-                INVALID("%S requires explicit target", gMoveNames[moveId]);
+                INVALID("%S requires explicit target", GetMoveName(moveId));
             }
         }
     }
@@ -2046,9 +2046,9 @@ void MoveGetIdAndSlot(s32 battlerId, struct MoveContext *ctx, u32 *moveId, u32 *
             }
             else if (*moveId == MOVE_NONE)
             {
-                INVALID_IF(DATA.explicitMoves[battlerId & BIT_SIDE] & (1 << DATA.currentMonIndexes[battlerId]), "Missing explicit %S", gMoveNames[ctx->move]);
+                INVALID_IF(DATA.explicitMoves[battlerId & BIT_SIDE] & (1 << DATA.currentMonIndexes[battlerId]), "Missing explicit %S", GetMoveName(ctx->move));
                 SetMonData(mon, MON_DATA_MOVE1 + i, &ctx->move);
-                SetMonData(DATA.currentMon, MON_DATA_PP1 + i, &gBattleMoves[ctx->move].pp);
+                SetMonData(DATA.currentMon, MON_DATA_PP1 + i, &gMovesInfo[ctx->move].pp);
                 *moveSlot = i;
                 *moveId = ctx->move;
                 break;
@@ -2209,7 +2209,7 @@ s32 GetAiMoveTargetForScoreCompare(u32 battlerId, u32 moveId, struct MoveContext
     else
     {
         // TODO: Fix ai targeting self in double battles.
-        INVALID_IF(!ctx->explicitTarget, "%S requires explicit target for score comparison in doubles", gMoveNames[moveId]);
+        INVALID_IF(!ctx->explicitTarget, "%S requires explicit target for score comparison in doubles", GetMoveName(moveId));
         target = MoveGetTarget(battlerId, moveId, ctx, sourceLine);
     }
     return target;

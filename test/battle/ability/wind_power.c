@@ -3,16 +3,16 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_THUNDERBOLT].power != 0);
-    ASSUME(gBattleMoves[MOVE_THUNDERBOLT].type == TYPE_ELECTRIC);
-    ASSUME(gBattleMoves[MOVE_TACKLE].power != 0);
-    ASSUME(gBattleMoves[MOVE_AIR_CUTTER].power != 0);
-    ASSUME(gBattleMoves[MOVE_AIR_CUTTER].target == MOVE_TARGET_BOTH);
-    ASSUME(gBattleMoves[MOVE_AIR_CUTTER].windMove == TRUE);
-    ASSUME(gBattleMoves[MOVE_PETAL_BLIZZARD].power != 0);
-    ASSUME(gBattleMoves[MOVE_PETAL_BLIZZARD].target == MOVE_TARGET_FOES_AND_ALLY);
-    ASSUME(gBattleMoves[MOVE_PETAL_BLIZZARD].windMove == TRUE);
-    ASSUME(gBattleMoves[MOVE_TACKLE].windMove == FALSE);
+    ASSUME(gMovesInfo[MOVE_THUNDERBOLT].power != 0);
+    ASSUME(gMovesInfo[MOVE_THUNDERBOLT].type == TYPE_ELECTRIC);
+    ASSUME(gMovesInfo[MOVE_TACKLE].power != 0);
+    ASSUME(gMovesInfo[MOVE_AIR_CUTTER].power != 0);
+    ASSUME(gMovesInfo[MOVE_AIR_CUTTER].target == MOVE_TARGET_BOTH);
+    ASSUME(gMovesInfo[MOVE_AIR_CUTTER].windMove == TRUE);
+    ASSUME(gMovesInfo[MOVE_PETAL_BLIZZARD].power != 0);
+    ASSUME(gMovesInfo[MOVE_PETAL_BLIZZARD].target == MOVE_TARGET_FOES_AND_ALLY);
+    ASSUME(gMovesInfo[MOVE_PETAL_BLIZZARD].windMove == TRUE);
+    ASSUME(gMovesInfo[MOVE_TACKLE].windMove == FALSE);
 }
 
 SINGLE_BATTLE_TEST("Wind Power sets up Charge for player when hit by a wind move")
@@ -193,7 +193,7 @@ DOUBLE_BATTLE_TEST("Wind Power activates correctly when Tailwind is used")
     PARAMETRIZE {opponentSide = FALSE;}
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TAILWIND].effect == EFFECT_TAILWIND);
+        ASSUME(gMovesInfo[MOVE_TAILWIND].effect == EFFECT_TAILWIND);
         PLAYER(SPECIES_WATTREL) { Ability(ABILITY_WIND_POWER); Speed(10); }
         PLAYER(SPECIES_WATTREL) { Ability(ABILITY_WIND_POWER); Speed(5); }
         OPPONENT(SPECIES_WATTREL) { Ability(ABILITY_WIND_POWER); Speed(20); }

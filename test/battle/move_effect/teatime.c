@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_TEATIME].effect == EFFECT_TEATIME);
+    ASSUME(gMovesInfo[MOVE_TEATIME].effect == EFFECT_TEATIME);
     ASSUME(gItemsInfo[ITEM_LIECHI_BERRY].holdEffect == HOLD_EFFECT_ATTACK_UP);
 }
 

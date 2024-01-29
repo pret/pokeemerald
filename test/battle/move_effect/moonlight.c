@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_MOONLIGHT].effect == EFFECT_MOONLIGHT);
+    ASSUME(gMovesInfo[MOVE_MOONLIGHT].effect == EFFECT_MOONLIGHT);
 }
 
 SINGLE_BATTLE_TEST("Moonlight recovers 1/2 of the user's max HP")

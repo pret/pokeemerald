@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_EMBARGO].effect == EFFECT_EMBARGO);
+    ASSUME(gMovesInfo[MOVE_EMBARGO].effect == EFFECT_EMBARGO);
 }
 
 SINGLE_BATTLE_TEST("Embargo blocks the effect of an affected Pokémon's held item")

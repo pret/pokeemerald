@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_FLING].effect == EFFECT_FLING);
+    ASSUME(gMovesInfo[MOVE_FLING].effect == EFFECT_FLING);
 }
 
 SINGLE_BATTLE_TEST("Fling fails if pokemon holds no item")
@@ -38,8 +38,8 @@ SINGLE_BATTLE_TEST("Fling fails if pokemon is under the effects of Embargo or Ma
     PARAMETRIZE {move = MOVE_MAGIC_ROOM; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_EMBARGO].effect == EFFECT_EMBARGO);
-        ASSUME(gBattleMoves[MOVE_MAGIC_ROOM].effect == EFFECT_MAGIC_ROOM);
+        ASSUME(gMovesInfo[MOVE_EMBARGO].effect == EFFECT_EMBARGO);
+        ASSUME(gMovesInfo[MOVE_MAGIC_ROOM].effect == EFFECT_MAGIC_ROOM);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_RAZOR_CLAW); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -83,7 +83,7 @@ SINGLE_BATTLE_TEST("Fling fails for pokemon with Klutz ability")
 SINGLE_BATTLE_TEST("Fling's thrown item can be regained with Recycle")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_RECYCLE].effect == EFFECT_RECYCLE);
+        ASSUME(gMovesInfo[MOVE_RECYCLE].effect == EFFECT_RECYCLE);
         PLAYER(SPECIES_WOBBUFFET) {Item(ITEM_RAZOR_CLAW); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -106,7 +106,7 @@ SINGLE_BATTLE_TEST("Fling's thrown item can be regained with Recycle")
 SINGLE_BATTLE_TEST("Fling - Item is lost even when there is no target")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SELF_DESTRUCT].effect == EFFECT_EXPLOSION);
+        ASSUME(gMovesInfo[MOVE_SELF_DESTRUCT].effect == EFFECT_EXPLOSION);
         PLAYER(SPECIES_WOBBUFFET) {Item(ITEM_RAZOR_CLAW); Speed(2); }
         OPPONENT(SPECIES_WOBBUFFET) {Speed(5); }
         OPPONENT(SPECIES_WOBBUFFET) {Speed(5); }
@@ -131,7 +131,7 @@ SINGLE_BATTLE_TEST("Fling - Item is lost even when there is no target")
 SINGLE_BATTLE_TEST("Fling - Item is lost when target protects itself")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_PROTECT].effect == EFFECT_PROTECT);
+        ASSUME(gMovesInfo[MOVE_PROTECT].effect == EFFECT_PROTECT);
         PLAYER(SPECIES_WOBBUFFET) {Item(ITEM_RAZOR_CLAW); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -362,7 +362,7 @@ SINGLE_BATTLE_TEST("Fling - thrown berry's effect activates for the target even 
     PARAMETRIZE { item = ITEM_SALAC_BERRY; effect = HOLD_EFFECT_SPEED_UP; statId = STAT_SPEED; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_FLING].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gMovesInfo[MOVE_FLING].category == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET) { Item(item); Attack(1); }
         OPPONENT(SPECIES_WOBBUFFET) { Status1(status1); HP(399); MaxHP(400); MovesWithPP({MOVE_CELEBRATE, 35}); }
     } WHEN {
@@ -441,7 +441,7 @@ SINGLE_BATTLE_TEST("Fling deals damage based on items fling power")
     s16 damage[2];
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_CRUNCH].power == 80);
+        ASSUME(gMovesInfo[MOVE_CRUNCH].power == 80);
         ASSUME(gItemsInfo[ITEM_VENUSAURITE].flingPower == 80);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_VENUSAURITE); }
         OPPONENT(SPECIES_REGIROCK);

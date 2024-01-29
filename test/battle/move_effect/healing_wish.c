@@ -3,8 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_HEALING_WISH].effect == EFFECT_HEALING_WISH);
-    ASSUME(gBattleMoves[MOVE_LUNAR_DANCE].effect == EFFECT_HEALING_WISH);
+    ASSUME(gMovesInfo[MOVE_HEALING_WISH].effect == EFFECT_HEALING_WISH);
+    ASSUME(gMovesInfo[MOVE_LUNAR_DANCE].effect == EFFECT_HEALING_WISH);
 }
 
 SINGLE_BATTLE_TEST("Healing Wish causes the user to faint and fully heals the replacement")

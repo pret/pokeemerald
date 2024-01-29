@@ -9,7 +9,7 @@ ASSUMPTIONS
 SINGLE_BATTLE_TEST("Side effected by Lucky Chant blocks critical hits")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_LUCKY_CHANT].effect == EFFECT_LUCKY_CHANT);
+        ASSUME(gMovesInfo[MOVE_LUCKY_CHANT].effect == EFFECT_LUCKY_CHANT);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -48,7 +48,7 @@ SINGLE_BATTLE_TEST("Flag ignoresTargetAbility ignores Battle Armor and Shell Arm
     PARAMETRIZE { species = SPECIES_ARMALDO; ability = ABILITY_BATTLE_ARMOR; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SUNSTEEL_STRIKE].ignoresTargetAbility == TRUE);
+        ASSUME(gMovesInfo[MOVE_SUNSTEEL_STRIKE].ignoresTargetAbility == TRUE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(species) { Ability(ability); }
     } WHEN {
@@ -105,7 +105,7 @@ SINGLE_BATTLE_TEST("Mold Breaker, Teravolt and Turboblaze ignore Battle Armor an
 SINGLE_BATTLE_TEST("User effected by Laser Focus causes moves to result in a critical hit")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_LASER_FOCUS].effect == EFFECT_LASER_FOCUS);
+        ASSUME(gMovesInfo[MOVE_LASER_FOCUS].effect == EFFECT_LASER_FOCUS);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -135,7 +135,7 @@ SINGLE_BATTLE_TEST("Focus Energy increases the user's critical hit ratio by two 
 {
     PASSES_RANDOMLY(1, 2, RNG_CRITICAL_HIT);
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_FOCUS_ENERGY].effect == EFFECT_FOCUS_ENERGY);
+        ASSUME(gMovesInfo[MOVE_FOCUS_ENERGY].effect == EFFECT_FOCUS_ENERGY);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -152,7 +152,7 @@ SINGLE_BATTLE_TEST("High crit rate increases the critical hit ratio by one stage
 {
     PASSES_RANDOMLY(1, 8, RNG_CRITICAL_HIT);
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SLASH].criticalHitStage == 1);
+        ASSUME(gMovesInfo[MOVE_SLASH].criticalHitStage == 1);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -195,7 +195,7 @@ SINGLE_BATTLE_TEST("Scope Lens increases the critical hit ratio by one stage")
 SINGLE_BATTLE_TEST("High crit rate, Super Luck and Scope Lens cause the move to result in a critical hit")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SLASH].criticalHitStage == 1);
+        ASSUME(gMovesInfo[MOVE_SLASH].criticalHitStage == 1);
         ASSUME(gItemsInfo[ITEM_SCOPE_LENS].holdEffect == HOLD_EFFECT_SCOPE_LENS);
         PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_SUPER_LUCK); Item(ITEM_SCOPE_LENS); };
         OPPONENT(SPECIES_WOBBUFFET);

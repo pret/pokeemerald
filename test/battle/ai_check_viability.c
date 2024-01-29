@@ -15,7 +15,7 @@ AI_SINGLE_BATTLE_TEST("AI sees increased base power of Facade")
     PARAMETRIZE { status1 = STATUS1_BURN; expectedMove = MOVE_FACADE; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_FACADE].effect == EFFECT_FACADE);
+        ASSUME(gMovesInfo[MOVE_FACADE].effect == EFFECT_FACADE);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { HP(60); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_BODY_SLAM, MOVE_FACADE); Status1(status1); }
@@ -36,8 +36,8 @@ AI_SINGLE_BATTLE_TEST("AI sees increased base power of Smelling Salt")
 
     GIVEN {
         ASSUME(B_UPDATED_MOVE_DATA >= GEN_6);
-        ASSUME(gBattleMoves[MOVE_SMELLING_SALTS].effect == EFFECT_DOUBLE_POWER_ON_ARG_STATUS);
-        ASSUME(gBattleMoves[MOVE_SMELLING_SALTS].argument == STATUS1_PARALYSIS);
+        ASSUME(gMovesInfo[MOVE_SMELLING_SALTS].effect == EFFECT_DOUBLE_POWER_ON_ARG_STATUS);
+        ASSUME(gMovesInfo[MOVE_SMELLING_SALTS].argument == STATUS1_PARALYSIS);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { HP(60); Status1(status1); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_BODY_SLAM, MOVE_SMELLING_SALTS); }
@@ -58,8 +58,8 @@ AI_SINGLE_BATTLE_TEST("AI sees increased base power of Wake Up Slap")
 
     GIVEN {
         ASSUME(B_UPDATED_MOVE_DATA >= GEN_6);
-        ASSUME(gBattleMoves[MOVE_WAKE_UP_SLAP].effect == EFFECT_DOUBLE_POWER_ON_ARG_STATUS);
-        ASSUME(gBattleMoves[MOVE_WAKE_UP_SLAP].argument == STATUS1_SLEEP);
+        ASSUME(gMovesInfo[MOVE_WAKE_UP_SLAP].effect == EFFECT_DOUBLE_POWER_ON_ARG_STATUS);
+        ASSUME(gMovesInfo[MOVE_WAKE_UP_SLAP].argument == STATUS1_SLEEP);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_MEGANIUM) { HP(35); Status1(status1); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_BODY_SLAM, MOVE_WAKE_UP_SLAP); }
@@ -80,8 +80,8 @@ AI_SINGLE_BATTLE_TEST("AI sees increased base power of Grav Apple")
     PARAMETRIZE { movePlayer = MOVE_GRAVITY; expectedMove = MOVE_GRAV_APPLE; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_GRAV_APPLE].effect == EFFECT_GRAV_APPLE);
-        ASSUME(gBattleMoves[MOVE_GRAV_APPLE].power == gBattleMoves[MOVE_DRUM_BEATING].power);
+        ASSUME(gMovesInfo[MOVE_GRAV_APPLE].effect == EFFECT_GRAV_APPLE);
+        ASSUME(gMovesInfo[MOVE_GRAV_APPLE].power == gMovesInfo[MOVE_DRUM_BEATING].power);
         ASSUME(MoveHasMoveEffect(MOVE_DRUM_BEATING, MOVE_EFFECT_SPD_MINUS_1) == TRUE);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { HP(81); Speed(20); }
@@ -103,7 +103,7 @@ AI_SINGLE_BATTLE_TEST("AI sees increased base power of Flail")
     PARAMETRIZE { hp = 5; expectedMove = MOVE_FLAIL; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_FLAIL].effect == EFFECT_FLAIL);
+        ASSUME(gMovesInfo[MOVE_FLAIL].effect == EFFECT_FLAIL);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { Speed(10); }
         OPPONENT(SPECIES_WOBBUFFET) { HP(hp); MaxHP(490); Speed(20); Moves(MOVE_BODY_SLAM, MOVE_FLAIL); }
@@ -134,8 +134,8 @@ AI_SINGLE_BATTLE_TEST("AI will only use Dream Eater if target is asleep")
 AI_SINGLE_BATTLE_TEST("AI sees increased base power of Spit Up")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_STOCKPILE].effect == EFFECT_STOCKPILE);
-        ASSUME(gBattleMoves[MOVE_SPIT_UP].effect == EFFECT_SPIT_UP);
+        ASSUME(gMovesInfo[MOVE_STOCKPILE].effect == EFFECT_STOCKPILE);
+        ASSUME(gMovesInfo[MOVE_SPIT_UP].effect == EFFECT_SPIT_UP);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { HP(43); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_STOCKPILE, MOVE_SPIT_UP, MOVE_TACKLE); }
@@ -155,10 +155,10 @@ AI_SINGLE_BATTLE_TEST("AI can choose Counter or Mirror Coat if the predicted mov
     PARAMETRIZE { playerMove = MOVE_POWER_GEM; opponentMove = MOVE_MIRROR_COAT; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_COUNTER].effect == EFFECT_COUNTER);
-        ASSUME(gBattleMoves[MOVE_MIRROR_COAT].effect == EFFECT_MIRROR_COAT);
-        ASSUME(gBattleMoves[MOVE_STRENGTH].category == BATTLE_CATEGORY_PHYSICAL);
-        ASSUME(gBattleMoves[MOVE_POWER_GEM].category == BATTLE_CATEGORY_SPECIAL);
+        ASSUME(gMovesInfo[MOVE_COUNTER].effect == EFFECT_COUNTER);
+        ASSUME(gMovesInfo[MOVE_MIRROR_COAT].effect == EFFECT_MIRROR_COAT);
+        ASSUME(gMovesInfo[MOVE_STRENGTH].category == DAMAGE_CATEGORY_PHYSICAL);
+        ASSUME(gMovesInfo[MOVE_POWER_GEM].category == DAMAGE_CATEGORY_SPECIAL);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
         OPPONENT(SPECIES_WOBBUFFET) { HP(102); Speed(100); Moves(opponentMove, MOVE_STRENGTH); }

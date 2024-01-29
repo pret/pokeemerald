@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_SHED_TAIL].effect == EFFECT_SHED_TAIL);
+    ASSUME(gMovesInfo[MOVE_SHED_TAIL].effect == EFFECT_SHED_TAIL);
 }
 
 SINGLE_BATTLE_TEST("Shed Tail creates a Substitute at the cost of 1/2 users maximum HP and switches the user out")

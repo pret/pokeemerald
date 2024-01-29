@@ -74,7 +74,7 @@ SINGLE_BATTLE_TEST("Ultra Burst affects turn order")
 DOUBLE_BATTLE_TEST("Ultra Burst happens after switching, but before Focus Punch-like Moves")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_FOCUS_PUNCH].effect == EFFECT_FOCUS_PUNCH);
+        ASSUME(gMovesInfo[MOVE_FOCUS_PUNCH].effect == EFFECT_FOCUS_PUNCH);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_NECROZMA_DUSK_MANE) { Item(ITEM_ULTRANECROZIUM_Z); }
         OPPONENT(SPECIES_WYNAUT);

@@ -3,8 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_SOLAR_BEAM].effect == EFFECT_SOLAR_BEAM);
-    ASSUME(gBattleMoves[MOVE_SOLAR_BLADE].effect == EFFECT_SOLAR_BEAM);
+    ASSUME(gMovesInfo[MOVE_SOLAR_BEAM].effect == EFFECT_SOLAR_BEAM);
+    ASSUME(gMovesInfo[MOVE_SOLAR_BLADE].effect == EFFECT_SOLAR_BEAM);
 }
 
 SINGLE_BATTLE_TEST("Solar Beam and Solar Blade can be used instantly in Sunlight")

@@ -739,7 +739,7 @@ static void PutMovesPointsText(struct BattleDebugMenu *data)
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         text[0] = CHAR_SPACE;
-        StringCopy(text + 1, gMoveNames[gBattleMons[data->aiBattlerId].moves[i]]);
+        StringCopy(text + 1, GetMoveName(gBattleMons[data->aiBattlerId].moves[i]));
         AddTextPrinterParameterized(data->aiMovesWindowId, FONT_NORMAL, text, 0, i * 15, 0, NULL);
         for (count = 0, j = 0; j < MAX_BATTLERS_COUNT; j++)
         {
@@ -907,7 +907,7 @@ static void PutAiPartyText(struct BattleDebugMenu *data)
 
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
-            txtPtr = StringCopyN(text, gMoveNames[aiMons[i].moves[j]], 8);
+            txtPtr = StringCopyN(text, GetMoveName(aiMons[i].moves[j]), 8);
             *txtPtr = EOS;
             AddTextPrinterParameterized5(data->aiMovesWindowId, FONT_SMALL_NARROW, text, i * 41, 35 + j * 15, 0, NULL, 0, 0);
         }
@@ -1428,7 +1428,7 @@ static void PrintSecondaryEntries(struct BattleDebugMenu *data)
     case LIST_ITEM_PP:
         for (i = 0; i < 4; i++)
         {
-            PadString(gMoveNames[gBattleMons[data->battlerId].moves[i]], text);
+            PadString(GetMoveName(gBattleMons[data->battlerId].moves[i]), text);
             printer.currentY = printer.y = (i * yMultiplier) + sSecondaryListTemplate.upText_Y;
             AddTextPrinter(&printer, 0, NULL);
         }

@@ -24,7 +24,7 @@ SINGLE_BATTLE_TEST("Damage calculation matches Gen5+")
     PARAMETRIZE { expectedDamage = 168; }
     PARAMETRIZE { expectedDamage = 168; }
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_ICE_FANG].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gMovesInfo[MOVE_ICE_FANG].category == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_GLACEON) { Level(75); Attack(123); }
         OPPONENT(SPECIES_GARCHOMP) { Defense(163); }
     } WHEN {
@@ -62,7 +62,7 @@ SINGLE_BATTLE_TEST("Damage calculation matches Gen5+ (Muscle Band, crit)")
     PARAMETRIZE { expectedDamage = 276; }
     PARAMETRIZE { expectedDamage = 268; }
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_ICE_FANG].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gMovesInfo[MOVE_ICE_FANG].category == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_GLACEON) { Level(75); Attack(123); Item(ITEM_MUSCLE_BAND); }
         OPPONENT(SPECIES_GARCHOMP) { Defense(163); }
     } WHEN {
@@ -100,7 +100,7 @@ SINGLE_BATTLE_TEST("Damage calculation matches Gen5+ (Marshadow vs Mawile)")
     PARAMETRIZE { expectedDamage = 124; }
     PARAMETRIZE { expectedDamage = 123; }
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SPECTRAL_THIEF].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gMovesInfo[MOVE_SPECTRAL_THIEF].category == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_MARSHADOW) { Level(100); Attack(286); }
         OPPONENT(SPECIES_MAWILE) { Level(100); Defense(226); HP(241); }
     } WHEN {

@@ -401,7 +401,7 @@ SINGLE_BATTLE_TEST("Red Card activates before Emergency Exit")
 SINGLE_BATTLE_TEST("Red Card is consumed after dragged out replacement has its Speed lowered by Sticky Web")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_STICKY_WEB].effect == EFFECT_STICKY_WEB);
+        ASSUME(gMovesInfo[MOVE_STICKY_WEB].effect == EFFECT_STICKY_WEB);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT) { Moves(MOVE_TACKLE); }
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_RED_CARD); }

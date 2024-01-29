@@ -3,14 +3,14 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_GLAIVE_RUSH].effect == EFFECT_GLAIVE_RUSH);
+    ASSUME(gMovesInfo[MOVE_GLAIVE_RUSH].effect == EFFECT_GLAIVE_RUSH);
 }
 
 SINGLE_BATTLE_TEST("If Glaive Rush is successful moves targeted at the user do not check accuracy")
 {
     PASSES_RANDOMLY(100, 100, RNG_ACCURACY);
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_MEGA_PUNCH].accuracy == 85);
+        ASSUME(gMovesInfo[MOVE_MEGA_PUNCH].accuracy == 85);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

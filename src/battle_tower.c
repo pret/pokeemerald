@@ -1708,7 +1708,7 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
             SetMonMoveSlot(&gEnemyParty[i + firstMonId], gFacilityTrainerMons[monId].moves[j], j);
-            if (gBattleMoves[gFacilityTrainerMons[monId].moves[j]].effect == EFFECT_FRUSTRATION)
+            if (gMovesInfo[gFacilityTrainerMons[monId].moves[j]].effect == EFFECT_FRUSTRATION)
                 friendship = 0;  // Frustration is more powerful the lower the pokemon's friendship is.
         }
 
@@ -1746,7 +1746,7 @@ static void UNUSED Unused_CreateApprenticeMons(u16 trainerId, u8 firstMonId)
         friendship = MAX_FRIENDSHIP;
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
-            if (gBattleMoves[apprentice->party[i].moves[j]].effect == EFFECT_FRUSTRATION)
+            if (gMovesInfo[apprentice->party[i].moves[j]].effect == EFFECT_FRUSTRATION)
                 friendship = 0;
         }
         SetMonData(&gEnemyParty[firstMonId + i], MON_DATA_FRIENDSHIP, &friendship);
@@ -1874,7 +1874,7 @@ static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId)
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
             SetMonMoveAvoidReturn(&gEnemyParty[firstMonId + i], gFacilityTrainerMons[monId].moves[j], j);
-            if (gBattleMoves[gFacilityTrainerMons[monId].moves[j]].effect == EFFECT_FRUSTRATION)
+            if (gMovesInfo[gFacilityTrainerMons[monId].moves[j]].effect == EFFECT_FRUSTRATION)
                 friendship = 0;
         }
 
@@ -2436,7 +2436,7 @@ static void GetPotentialPartnerMoveAndSpecies(u16 trainerId, u16 monId)
         }
     }
 
-    StringCopy(gStringVar1, gMoveNames[move]);
+    StringCopy(gStringVar1, GetMoveName(move));
     StringCopy(gStringVar2, GetSpeciesName(species));
 }
 
@@ -3069,7 +3069,7 @@ static void FillPartnerParty(u16 trainerId)
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 SetMonMoveSlot(&gPlayerParty[MULTI_PARTY_SIZE + i], gFacilityTrainerMons[monId].moves[j], j);
-                if (gBattleMoves[gFacilityTrainerMons[monId].moves[j]].effect == EFFECT_FRUSTRATION)
+                if (gMovesInfo[gFacilityTrainerMons[monId].moves[j]].effect == EFFECT_FRUSTRATION)
                     friendship = 0;
             }
             SetMonData(&gPlayerParty[MULTI_PARTY_SIZE + i], MON_DATA_FRIENDSHIP, &friendship);
@@ -3504,7 +3504,7 @@ static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
             SetMonMoveSlot(&gEnemyParty[i + firstMonId], gFacilityTrainerMons[monId].moves[j], j);
-            if (gBattleMoves[gFacilityTrainerMons[monId].moves[j]].effect == EFFECT_FRUSTRATION)
+            if (gMovesInfo[gFacilityTrainerMons[monId].moves[j]].effect == EFFECT_FRUSTRATION)
                 friendship = 0;  // Frustration is more powerful the lower the pokemon's friendship is.
         }
 

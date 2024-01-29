@@ -3,11 +3,11 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_BRICK_BREAK].effect == EFFECT_BRICK_BREAK);
-    ASSUME(gBattleMoves[MOVE_SNOWSCAPE].effect == EFFECT_SNOWSCAPE);
-    ASSUME(gBattleMoves[MOVE_LIGHT_SCREEN].effect == EFFECT_LIGHT_SCREEN);
-    ASSUME(gBattleMoves[MOVE_REFLECT].effect == EFFECT_REFLECT);
-    ASSUME(gBattleMoves[MOVE_AURORA_VEIL].effect == EFFECT_AURORA_VEIL);
+    ASSUME(gMovesInfo[MOVE_BRICK_BREAK].effect == EFFECT_BRICK_BREAK);
+    ASSUME(gMovesInfo[MOVE_SNOWSCAPE].effect == EFFECT_SNOWSCAPE);
+    ASSUME(gMovesInfo[MOVE_LIGHT_SCREEN].effect == EFFECT_LIGHT_SCREEN);
+    ASSUME(gMovesInfo[MOVE_REFLECT].effect == EFFECT_REFLECT);
+    ASSUME(gMovesInfo[MOVE_AURORA_VEIL].effect == EFFECT_AURORA_VEIL);
 }
 
 SINGLE_BATTLE_TEST("Brick Break removes Light Screen, Reflect and Aurora Veil from the target's side of the field")

@@ -112,7 +112,7 @@ SINGLE_BATTLE_TEST("Metronome Item counts charging turn of moves for its attacki
     PARAMETRIZE {item = ITEM_NONE; }
     PARAMETRIZE {item = ITEM_METRONOME; }
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SOLAR_BEAM].effect == EFFECT_SOLAR_BEAM);
+        ASSUME(gMovesInfo[MOVE_SOLAR_BEAM].effect == EFFECT_SOLAR_BEAM);
         PLAYER(SPECIES_WOBBUFFET) { Item(item); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -134,7 +134,7 @@ SINGLE_BATTLE_TEST("Metronome Item doesn't increase damage per hit of multi-hit 
 {
     s16 damage[3];
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_FURY_ATTACK].effect == EFFECT_MULTI_HIT);
+        ASSUME(gMovesInfo[MOVE_FURY_ATTACK].effect == EFFECT_MULTI_HIT);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_METRONOME); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

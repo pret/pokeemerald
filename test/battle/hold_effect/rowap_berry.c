@@ -15,8 +15,8 @@ SINGLE_BATTLE_TEST("Rowap Berry causes the attacker to lose 1/8 of its max HP if
     PARAMETRIZE { move = MOVE_TACKLE; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SWIFT].category == BATTLE_CATEGORY_SPECIAL);
-        ASSUME(gBattleMoves[MOVE_TACKLE].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gMovesInfo[MOVE_SWIFT].category == DAMAGE_CATEGORY_SPECIAL);
+        ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_ROWAP_BERRY); }
     } WHEN {
@@ -43,7 +43,7 @@ SINGLE_BATTLE_TEST("Rowap Berry causes the attacker to lose 1/8 of its max HP if
 SINGLE_BATTLE_TEST("Rowap Berry is not triggered by a physical move")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TACKLE].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_ROWAP_BERRY); }
     } WHEN {

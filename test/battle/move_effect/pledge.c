@@ -3,9 +3,9 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_WATER_PLEDGE].effect == EFFECT_PLEDGE);
-    ASSUME(gBattleMoves[MOVE_FIRE_PLEDGE].effect == EFFECT_PLEDGE);
-    ASSUME(gBattleMoves[MOVE_GRASS_PLEDGE].effect == EFFECT_PLEDGE);
+    ASSUME(gMovesInfo[MOVE_WATER_PLEDGE].effect == EFFECT_PLEDGE);
+    ASSUME(gMovesInfo[MOVE_FIRE_PLEDGE].effect == EFFECT_PLEDGE);
+    ASSUME(gMovesInfo[MOVE_GRASS_PLEDGE].effect == EFFECT_PLEDGE);
 }
 
 DOUBLE_BATTLE_TEST("Water and Fire Pledge create a rainbow on the user's side of the field for four turns")
@@ -189,7 +189,7 @@ DOUBLE_BATTLE_TEST("The base power of a combined pledge move effect is 150")
     s16 combinedPledgeDamage;
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_HYPER_BEAM].power == 150);
+        ASSUME(gMovesInfo[MOVE_HYPER_BEAM].power == 150);
         PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
         PLAYER(SPECIES_WYNAUT) { Speed(3); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(8); }
@@ -313,7 +313,7 @@ DOUBLE_BATTLE_TEST("Damage calculation: Combined pledge move")
     PARAMETRIZE { expectedDamage = 136; }
     PARAMETRIZE { expectedDamage = 135; }
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_GRASS_PLEDGE].category == BATTLE_CATEGORY_SPECIAL);
+        ASSUME(gMovesInfo[MOVE_GRASS_PLEDGE].category == DAMAGE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
         PLAYER(SPECIES_WOBBUFFET) { HP(521); SpDefense(152); Speed(3); }
         OPPONENT(SPECIES_CHARIZARD) { Speed(8); }

@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_MIRROR_MOVE].effect == EFFECT_MIRROR_MOVE);
+    ASSUME(gMovesInfo[MOVE_MIRROR_MOVE].effect == EFFECT_MIRROR_MOVE);
 }
 
 SINGLE_BATTLE_TEST("Mirror Move copies the last used move by the target")
@@ -41,9 +41,9 @@ SINGLE_BATTLE_TEST("Mirror Move fails if no move was used before")
 SINGLE_BATTLE_TEST("Mirror Move's called powder move fails against Grass Types")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_STUN_SPORE].powderMove);
+        ASSUME(gMovesInfo[MOVE_STUN_SPORE].powderMove);
         ASSUME(gSpeciesInfo[SPECIES_ODDISH].types[0] == TYPE_GRASS);
-        ASSUME(gBattleMoves[MOVE_STUN_SPORE].effect == EFFECT_PARALYZE);
+        ASSUME(gMovesInfo[MOVE_STUN_SPORE].effect == EFFECT_PARALYZE);
         PLAYER(SPECIES_ODDISH);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -62,7 +62,7 @@ SINGLE_BATTLE_TEST("Mirror Move's called powder move fails against Grass Types")
 SINGLE_BATTLE_TEST("Mirror Move's called multi-hit move hits multiple times")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_BULLET_SEED].effect == EFFECT_MULTI_HIT);
+        ASSUME(gMovesInfo[MOVE_BULLET_SEED].effect == EFFECT_MULTI_HIT);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

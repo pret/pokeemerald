@@ -12,8 +12,8 @@ SINGLE_BATTLE_TEST("Maranga Berry raises the holder's Sp. Def by one stage when 
     PARAMETRIZE { move = MOVE_TACKLE; }
     PARAMETRIZE { move = MOVE_SWIFT; }
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TACKLE].category == BATTLE_CATEGORY_PHYSICAL);
-        ASSUME(gBattleMoves[MOVE_SWIFT].category == BATTLE_CATEGORY_SPECIAL);
+        ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
+        ASSUME(gMovesInfo[MOVE_SWIFT].category == DAMAGE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_MARANGA_BERRY); }
     } WHEN {
@@ -40,7 +40,7 @@ SINGLE_BATTLE_TEST("Maranga Berry raises the holder's Sp. Def by one stage when 
 SINGLE_BATTLE_TEST("Maranga Berry raises the holder's Sp. Def by two stages with Ripen when hit by a special move")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SWIFT].category == BATTLE_CATEGORY_SPECIAL);
+        ASSUME(gMovesInfo[MOVE_SWIFT].category == DAMAGE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_APPLIN) { Item(ITEM_MARANGA_BERRY); Ability(ABILITY_RIPEN); }
     } WHEN {

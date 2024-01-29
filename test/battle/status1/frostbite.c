@@ -7,7 +7,7 @@ SINGLE_BATTLE_TEST("Frostbite reduces the special attack by 50 percent")
     s16 normaleDamage;
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SWIFT].category == BATTLE_CATEGORY_SPECIAL);
+        ASSUME(gMovesInfo[MOVE_SWIFT].category == DAMAGE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Status1(STATUS1_FROSTBITE); }
     } WHEN {

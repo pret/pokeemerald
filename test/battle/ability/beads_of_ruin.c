@@ -3,8 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_WATER_GUN].category == BATTLE_CATEGORY_SPECIAL);
-    ASSUME(gBattleMoves[MOVE_ROLE_PLAY].effect == EFFECT_ROLE_PLAY);
+    ASSUME(gMovesInfo[MOVE_WATER_GUN].category == DAMAGE_CATEGORY_SPECIAL);
+    ASSUME(gMovesInfo[MOVE_ROLE_PLAY].effect == EFFECT_ROLE_PLAY);
 }
 
 SINGLE_BATTLE_TEST("Beads of Ruin reduces Sp. Def if opposing mon's ability doesn't match")

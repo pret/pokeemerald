@@ -705,13 +705,13 @@ static void HandleInputChooseMove(u32 battler)
 
             QueueZMove(battler, chosenMove);
             gBattleStruct->zmove.viewing = FALSE;
-            if (gBattleMoves[moveInfo->moves[gMoveSelectionCursor[battler]]].category != BATTLE_CATEGORY_STATUS)
+            if (gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].category != DAMAGE_CATEGORY_STATUS)
                 moveTarget = MOVE_TARGET_SELECTED;  //damaging z moves always have selected target
         }
 
         // Status moves turn into Max Guard when Dynamaxed, targets user.
         if ((IsDynamaxed(battler) || gBattleStruct->dynamax.playerSelect))
-            moveTarget = gBattleMoves[GetMaxMove(battler, moveInfo->moves[gMoveSelectionCursor[battler]])].target;
+            moveTarget = gMovesInfo[GetMaxMove(battler, moveInfo->moves[gMoveSelectionCursor[battler]])].target;
 
         if (moveTarget & MOVE_TARGET_USER)
             gMultiUsePlayerCursor = battler;
@@ -1694,9 +1694,9 @@ static void MoveSelectionDisplayMoveNames(u32 battler)
         MoveSelectionDestroyCursorAt(i);
         if ((gBattleStruct->dynamax.playerSelect && CanDynamax(battler))
             || IsDynamaxed(battler))
-            StringCopy(gDisplayedStringBattle, gMoveNames[GetMaxMove(battler, moveInfo->moves[i])]);
+            StringCopy(gDisplayedStringBattle, GetMoveName(GetMaxMove(battler, moveInfo->moves[i])));
         else
-            StringCopy(gDisplayedStringBattle, gMoveNames[moveInfo->moves[i]]);
+            StringCopy(gDisplayedStringBattle, GetMoveName(moveInfo->moves[i]));
         // Prints on windows B_WIN_MOVE_NAME_1, B_WIN_MOVE_NAME_2, B_WIN_MOVE_NAME_3, B_WIN_MOVE_NAME_4
         BattlePutTextOnWindow(gDisplayedStringBattle, i + B_WIN_MOVE_NAME_1);
         if (moveInfo->moves[i] != MOVE_NONE)
@@ -1750,10 +1750,10 @@ static void MoveSelectionDisplayMoveType(u32 battler)
             || speciesId == SPECIES_OGERPON_CORNERSTONE_MASK || speciesId == SPECIES_OGERPON_CORNERSTONE_MASK_TERA)
             type = gBattleMons[battler].type2;
         else
-            type = gBattleMoves[MOVE_IVY_CUDGEL].type;
+            type = gMovesInfo[MOVE_IVY_CUDGEL].type;
     }
     else
-        type = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[battler]]].type;
+        type = gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].type;
 
     StringCopy(txtPtr, gTypeNames[type]);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);

@@ -5,7 +5,7 @@
 AI_SINGLE_BATTLE_TEST("AI prefers priority moves if it's slower and can kill target")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_QUICK_ATTACK].priority == 1);
+        ASSUME(gMovesInfo[MOVE_QUICK_ATTACK].priority == 1);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); Speed(100); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(100); }
@@ -20,7 +20,7 @@ AI_SINGLE_BATTLE_TEST("AI prefers priority moves if it's slower and can kill tar
 AI_SINGLE_BATTLE_TEST("AI will choose a random move if it's faster and can kill target")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_QUICK_ATTACK].priority == 1);
+        ASSUME(gMovesInfo[MOVE_QUICK_ATTACK].priority == 1);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); Speed(1); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
@@ -35,7 +35,7 @@ AI_SINGLE_BATTLE_TEST("AI will choose a random move if it's faster and can kill 
 AI_SINGLE_BATTLE_TEST("AI will choose a priority move if it is slower then the target and will be killed")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_QUICK_ATTACK].priority == 1);
+        ASSUME(gMovesInfo[MOVE_QUICK_ATTACK].priority == 1);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { Speed(100); }
         OPPONENT(SPECIES_WOBBUFFET) { HP(60); Speed(1); Moves(MOVE_QUICK_ATTACK, MOVE_STRENGTH); }

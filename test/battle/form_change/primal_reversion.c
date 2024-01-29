@@ -120,7 +120,7 @@ DOUBLE_BATTLE_TEST("Primal reversion's order is determined by Speed - player fas
 SINGLE_BATTLE_TEST("Primal reversion happens after a mon is sent out after a mon is fainted")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TACKLE].power != 0);
+        ASSUME(gMovesInfo[MOVE_TACKLE].power != 0);
         PLAYER(SPECIES_WOBBUFFET) {HP(1); }
         PLAYER(SPECIES_GROUDON) { Item(ITEM_RED_ORB); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -156,7 +156,7 @@ SINGLE_BATTLE_TEST("Primal reversion happens after a mon is switched in")
 SINGLE_BATTLE_TEST("Primal reversion happens after a switch-in caused by Eject Button")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TACKLE].power != 0);
+        ASSUME(gMovesInfo[MOVE_TACKLE].power != 0);
         ASSUME(gItemsInfo[ITEM_EJECT_BUTTON].holdEffect == HOLD_EFFECT_EJECT_BUTTON);
         PLAYER(SPECIES_WOBBUFFET) {Item(ITEM_EJECT_BUTTON); }
         PLAYER(SPECIES_GROUDON) { Item(ITEM_RED_ORB); }
@@ -177,7 +177,7 @@ SINGLE_BATTLE_TEST("Primal reversion happens after a switch-in caused by Eject B
 SINGLE_BATTLE_TEST("Primal reversion happens after a switch-in caused by Red Card")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TACKLE].power != 0);
+        ASSUME(gMovesInfo[MOVE_TACKLE].power != 0);
         ASSUME(gItemsInfo[ITEM_RED_CARD].holdEffect == HOLD_EFFECT_RED_CARD);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_GROUDON) { Item(ITEM_RED_ORB); }
@@ -197,7 +197,7 @@ SINGLE_BATTLE_TEST("Primal reversion happens after a switch-in caused by Red Car
 SINGLE_BATTLE_TEST("Primal reversion happens after the entry hazards damage")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SPIKES].effect == EFFECT_SPIKES);
+        ASSUME(gMovesInfo[MOVE_SPIKES].effect == EFFECT_SPIKES);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_GROUDON) { Item(ITEM_RED_ORB); }
         OPPONENT(SPECIES_WOBBUFFET);

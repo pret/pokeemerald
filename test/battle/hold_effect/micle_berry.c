@@ -4,8 +4,8 @@
 ASSUMPTIONS
 {
     ASSUME(gItemsInfo[ITEM_MICLE_BERRY].holdEffect == HOLD_EFFECT_MICLE_BERRY);
-    ASSUME(gBattleMoves[MOVE_DRAGON_RAGE].effect == EFFECT_FIXED_DAMAGE_ARG);
-    ASSUME(gBattleMoves[MOVE_DRAGON_RAGE].argument == 40);
+    ASSUME(gMovesInfo[MOVE_DRAGON_RAGE].effect == EFFECT_FIXED_DAMAGE_ARG);
+    ASSUME(gMovesInfo[MOVE_DRAGON_RAGE].argument == 40);
 }
 
 SINGLE_BATTLE_TEST("Micle Berry raises the holder's accuracy by 1.2 when HP drops to 1/4 or below")
@@ -52,7 +52,7 @@ SINGLE_BATTLE_TEST("Micle Berry raises the holder's accuracy by 1.2")
 {
     PASSES_RANDOMLY(24, 25, RNG_ACCURACY);
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SUBMISSION].accuracy == 80);
+        ASSUME(gMovesInfo[MOVE_SUBMISSION].accuracy == 80);
         PLAYER(SPECIES_WOBBUFFET) { MaxHP(160); HP(80); Item(ITEM_MICLE_BERRY); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

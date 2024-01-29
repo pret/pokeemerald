@@ -30,8 +30,8 @@ SINGLE_BATTLE_TEST("Corrosion can poison or badly poison a Steel type with a sta
     PARAMETRIZE { move = MOVE_TOXIC; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_POISON_POWDER].effect == EFFECT_POISON);
-        ASSUME(gBattleMoves[MOVE_TOXIC].effect == EFFECT_TOXIC);
+        ASSUME(gMovesInfo[MOVE_POISON_POWDER].effect == EFFECT_POISON);
+        ASSUME(gMovesInfo[MOVE_TOXIC].effect == EFFECT_TOXIC);
         PLAYER(SPECIES_SALANDIT) { Ability(ABILITY_CORROSION); }
         OPPONENT(SPECIES_BELDUM);
     } WHEN {
@@ -72,7 +72,7 @@ SINGLE_BATTLE_TEST("Corrosion can poison Poison- and Steel-type targets if it us
     PARAMETRIZE { heldItem = ITEM_TOXIC_ORB; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_FLING].effect == EFFECT_FLING);
+        ASSUME(gMovesInfo[MOVE_FLING].effect == EFFECT_FLING);
         ASSUME(gItemsInfo[ITEM_POISON_BARB].holdEffect == HOLD_EFFECT_POISON_POWER);
         ASSUME(gItemsInfo[ITEM_TOXIC_ORB].holdEffect == HOLD_EFFECT_TOXIC_ORB);
         PLAYER(SPECIES_SALANDIT) { Ability(ABILITY_CORROSION); Item(heldItem); }
@@ -107,7 +107,7 @@ SINGLE_BATTLE_TEST("If a Poison- or Steel-type Pokémon with Corrosion holds a T
 SINGLE_BATTLE_TEST("If a Poison- or Steel-type Pokémon with Corrosion poisons a target with Synchronize, Synchronize will not poison Poison- or Steel-type Pokémon")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TOXIC].effect == EFFECT_TOXIC);
+        ASSUME(gMovesInfo[MOVE_TOXIC].effect == EFFECT_TOXIC);
         PLAYER(SPECIES_SALANDIT) { Ability(ABILITY_CORROSION); }
         OPPONENT(SPECIES_ABRA) { Ability(ABILITY_SYNCHRONIZE); }
     } WHEN {
