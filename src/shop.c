@@ -38,6 +38,7 @@
 #include "constants/metatile_behaviors.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "event_data.h"
 
 #define TAG_SCROLL_ARROW   2100
 #define TAG_ITEM_ICON_BASE 2110
@@ -338,35 +339,34 @@ static const u8 sShopBuyMenuTextColors[][3] =
 
 static u8 CreateShopMenu(u8 martType)
 {
-    int numMenuItems;
+    //int numMenuItems;
 
     LockPlayerFieldControls();
     sMartInfo.martType = martType;
 
-    if (martType == MART_TYPE_NORMAL)
+    struct WindowTemplate winTemplate = sShopMenuWindowTemplates[WIN_BUY_SELL_QUIT];
+    winTemplate.width = GetMaxWidthInMenuTable(sShopMenuActions_BuySellQuit, ARRAY_COUNT(sShopMenuActions_BuySellQuit));
+    sMartInfo.windowId = AddWindow(&winTemplate);
+    sMartInfo.menuActions = sShopMenuActions_BuySellQuit;
+    //numMenuItems = ARRAY_COUNT(sShopMenuActions_BuySellQuit);
+
+
+    if (FlagGet(FLAG_BUY_FROM_MART))
     {
-        struct WindowTemplate winTemplate = sShopMenuWindowTemplates[WIN_BUY_SELL_QUIT];
-        winTemplate.width = GetMaxWidthInMenuTable(sShopMenuActions_BuySellQuit, ARRAY_COUNT(sShopMenuActions_BuySellQuit));
-        sMartInfo.windowId = AddWindow(&winTemplate);
-        sMartInfo.menuActions = sShopMenuActions_BuySellQuit;
-        numMenuItems = ARRAY_COUNT(sShopMenuActions_BuySellQuit);
+        FlagClear(FLAG_SELL_FROM_MART);
+        FlagClear(FLAG_BUY_FROM_MART);
+        return CreateTask(Task_HandleShopMenuBuy, 8);
+    }
+    else if (FlagGet(FLAG_SELL_FROM_MART))
+    {
+        FlagClear(FLAG_SELL_FROM_MART);
+        FlagClear(FLAG_BUY_FROM_MART);
+        return CreateTask(Task_HandleShopMenuSell, 8);
     }
     else
     {
-        struct WindowTemplate winTemplate = sShopMenuWindowTemplates[WIN_BUY_QUIT];
-        winTemplate.width = GetMaxWidthInMenuTable(sShopMenuActions_BuyQuit, ARRAY_COUNT(sShopMenuActions_BuyQuit));
-        sMartInfo.windowId = AddWindow(&winTemplate);
-        sMartInfo.menuActions = sShopMenuActions_BuyQuit;
-        numMenuItems = ARRAY_COUNT(sShopMenuActions_BuyQuit);
-    }
-
-    SetStandardWindowBorderStyle(sMartInfo.windowId, FALSE);
-    PrintMenuTable(sMartInfo.windowId, numMenuItems, sMartInfo.menuActions);
-    InitMenuInUpperLeftCornerNormal(sMartInfo.windowId, numMenuItems, 0);
-    PutWindowTilemap(sMartInfo.windowId);
-    CopyWindowToVram(sMartInfo.windowId, COPYWIN_MAP);
-
-    return CreateTask(Task_ShopMenu, 8);
+        return CreateTask(Task_HandleShopMenuQuit, 8);
+    }       
 }
 
 static void SetShopMenuCallback(void (* callback)(void))
@@ -389,7 +389,7 @@ static void SetShopItemsForSale(const u16 *items)
     }
 }
 
-static void Task_ShopMenu(u8 taskId)
+static void UNUSED Task_ShopMenu(u8 taskId)
 {
     s8 inputCode = Menu_ProcessInputNoWrap();
     switch (inputCode)
@@ -438,7 +438,7 @@ void CB2_ExitSellMenu(void)
 
 static void Task_HandleShopMenuQuit(u8 taskId)
 {
-    ClearStdWindowAndFrameToTransparent(sMartInfo.windowId, 2); // Incorrect use, making it not copy it to vram.
+    ClearStdWindowAndFrameToTransparent(sMartInfo.windowId, 1); // Incorrect use, making it not copy it to vram.
     RemoveWindow(sMartInfo.windowId);
     TryPutSmartShopperOnAir();
     UnlockPlayerFieldControls();
@@ -461,24 +461,27 @@ static void Task_GoToBuyOrSellMenu(u8 taskId)
 static void MapPostLoadHook_ReturnToShopMenu(void)
 {
     FadeInFromBlack();
-    CreateTask(Task_ReturnToShopMenu, 8);
+
+    CreateTask(ShowShopMenuAfterExitingBuyOrSellMenu, 8);
 }
 
-static void Task_ReturnToShopMenu(u8 taskId)
+static void UNUSED Task_ReturnToShopMenu(u8 taskId)
 {
     if (IsWeatherNotFadingIn() == TRUE)
     {
-        if (sMartInfo.martType == MART_TYPE_DECOR2)
-            DisplayItemMessageOnField(taskId, gText_CanIHelpWithAnythingElse, ShowShopMenuAfterExitingBuyOrSellMenu);
-        else
-            DisplayItemMessageOnField(taskId, gText_AnythingElseICanHelp, ShowShopMenuAfterExitingBuyOrSellMenu);
+        //if (sMartInfo.martType == MART_TYPE_DECOR2)
+        //    DisplayItemMessageOnField(taskId, gText_CanIHelpWithAnythingElse, ShowShopMenuAfterExitingBuyOrSellMenu);
+        //else
+        //    DisplayItemMessageOnField(taskId, gText_AnythingElseICanHelp, ShowShopMenuAfterExitingBuyOrSellMenu);
     }
 }
 
 static void ShowShopMenuAfterExitingBuyOrSellMenu(u8 taskId)
 {
-    CreateShopMenu(sMartInfo.martType);
-    DestroyTask(taskId);
+    if (IsWeatherNotFadingIn() == TRUE)
+    {
+        CreateShopMenu(sMartInfo.martType);
+        DestroyTask(taskId);    }
 }
 
 static void CB2_BuyMenu(void)
