@@ -2740,13 +2740,13 @@ void StealTargetItem(u8 battlerStealer, u8 battlerItem)
 #define INCREMENT_RESET_RETURN                  \
 {                                               \
     gBattlescriptCurrInstr++;                   \
-    gBattleScripting.moveEffect = 0; \
+    gBattleScripting.moveEffect = 0;            \
     return;                                     \
 }
 
 #define RESET_RETURN                            \
 {                                               \
-    gBattleScripting.moveEffect = 0; \
+    gBattleScripting.moveEffect = 0;            \
     return;                                     \
 }
 
@@ -2758,6 +2758,10 @@ void SetMoveEffect(bool32 primary, bool32 certain)
     u32 flags = 0;
     u16 battlerAbility;
     bool8 activateAfterFaint = FALSE;
+
+    // NULL move effect
+    if (gBattleScripting.moveEffect == 0)
+        return;
 
     if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_1ST_HIT
         && gBattleMons[gBattlerTarget].hp != 0

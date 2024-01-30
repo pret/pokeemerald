@@ -527,6 +527,9 @@ struct MoveInfo
 #define EFFECTS_ARR(...) (const struct AdditionalEffect[]) {__VA_ARGS__}
 #define ADDITIONAL_EFFECTS(...) EFFECTS_ARR( __VA_ARGS__ ), .numAdditionalEffects = ARRAY_COUNT(EFFECTS_ARR( __VA_ARGS__ ))
 
+// Just a hack to make a move boosted by Sheer Force despite having no secondary effects affected
+#define SHEER_FORCE_HACK { .moveEffect = 0, .chance = 100, }
+
 struct AdditionalEffect
 {
     u8 self:1;
