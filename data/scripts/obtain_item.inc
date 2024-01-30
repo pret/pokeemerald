@@ -56,8 +56,11 @@ EventScript_BufferBerriesPocket::
 
 EventScript_ObtainedItem::
 	message gText_ObtainedTheItem
+	delay 10
+	showitemdesc
 	waitfanfare
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
+	hideitemdesc
 	setvar VAR_RESULT, TRUE
 	return
 
@@ -120,6 +123,8 @@ EventScript_PickUpItem::
 	specialvar VAR_RESULT, BufferTMHMMoveName
 	copyvar VAR_0x8008, VAR_RESULT
 	call_if_eq VAR_0x8008, TRUE, EventScript_FoundTMHM
+	delay 10
+	showitemdesc
 	call_if_eq VAR_0x8008, FALSE, EventScript_FoundItem
 	waitfanfare
 	waitmessage
@@ -127,6 +132,7 @@ EventScript_PickUpItem::
 	pyramid_inchallenge
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PutBattlePyramidItemInBag
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
+	hideitemdesc
 	return
 
 EventScript_PutBattlePyramidItemInBag::
