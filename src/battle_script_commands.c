@@ -1836,7 +1836,7 @@ static void Cmd_ppreduce(void)
     if (moveTarget == MOVE_TARGET_BOTH
         || moveTarget == MOVE_TARGET_FOES_AND_ALLY
         || moveTarget == MOVE_TARGET_ALL_BATTLERS
-        || gMovesInfo[gCurrentMove].forcePressure)
+        || GET_MOVE_EFFECT(gCurrentMove).forcePressure)
     {
         for (i = 0; i < gBattlersCount; i++)
         {
@@ -10717,7 +10717,7 @@ static void TryResetProtectUseCounter(u32 battler)
 {
     u32 lastMove = gLastResultingMoves[battler];
     if (lastMove == MOVE_UNAVAILABLE
-        || (!MOVE_USES_PROTECT_COUNTER(lastMove) && (B_ALLY_SWITCH_FAIL_CHANCE >= GEN_9 && gMovesInfo[lastMove].effect != EFFECT_ALLY_SWITCH)))
+        || (!GET_MOVE_EFFECT(lastMove).usesProtectCounter && (B_ALLY_SWITCH_FAIL_CHANCE >= GEN_9 && gMovesInfo[lastMove].effect != EFFECT_ALLY_SWITCH)))
         gDisableStructs[battler].protectUses = 0;
 }
 

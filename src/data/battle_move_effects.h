@@ -570,12 +570,14 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectProtect,
         .battleTvScore = 5,
         .encourageEncore = TRUE,
+        .usesProtectCounter = TRUE,
     },
 
     [EFFECT_SPIKES] =
     {
         .battleScript = BattleScript_EffectSpikes,
         .battleTvScore = 4,
+        .forcePressure = TRUE,
     },
 
     [EFFECT_FORESIGHT] =
@@ -604,6 +606,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectEndure,
         .battleTvScore = 3,
         .encourageEncore = TRUE,
+        .usesProtectCounter = TRUE,
     },
 
     [EFFECT_ROLLOUT] =
@@ -1039,6 +1042,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectImprison,
         .battleTvScore = 6,
         .encourageEncore = TRUE,
+        .forcePressure = TRUE,
     },
 
     [EFFECT_REFRESH] =
@@ -1059,6 +1063,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectSnatch,
         .battleTvScore = 1,
+        .forcePressure = TRUE,
     },
 
     [EFFECT_LOW_KICK] =
@@ -1339,6 +1344,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectToxicSpikes,
         .battleTvScore = 0, // TODO: Assign points
+        .forcePressure = TRUE,
     },
 
     [EFFECT_GASTRO_ACID] =
@@ -1352,6 +1358,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectStealthRock,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
+        .forcePressure = TRUE,
     },
 
     [EFFECT_TELEKINESIS] =

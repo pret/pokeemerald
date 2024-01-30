@@ -468,21 +468,6 @@ struct MoveInfo
     u32 alwaysCriticalHit:1;
     u32 numAdditionalEffects:2; // limited to 3 - don't want to get too crazy
 
-    // Ban flags
-    u32 gravityBanned:1;
-    u32 mirrorMoveBanned:1;
-    u32 meFirstBanned:1;
-    u32 mimicBanned:1;
-    u32 metronomeBanned:1;
-    u32 copycatBanned:1;
-    u32 assistBanned:1; // Matches same moves as copycatBanned + semi-invulnerable moves and Mirror Coat.
-    u32 sleepTalkBanned:1;
-    u32 instructBanned:1;
-    u32 encoreBanned:1;
-    u32 parentalBondBanned:1;
-    u32 skyBattleBanned:1;
-    u32 sketchBanned:1;
-
     // Flags
     u32 makesContact:1;
     u32 ignoresProtect:1;
@@ -498,6 +483,7 @@ struct MoveInfo
     u32 danceMove:1;
     u32 windMove:1;
     u32 slicingMove:1;
+    u32 healingMove:1;
     u32 minimizeDoubleDamage:1;
     u32 ignoresTargetAbility:1;
     u32 ignoresTargetDefenseEvasionStages:1;
@@ -508,9 +494,22 @@ struct MoveInfo
     u32 ignoreTypeIfFlyingAndUngrounded:1;
     u32 thawsUser:1;
     u32 ignoresSubstitute:1;
-    u32 forcePressure:1;
     u32 cantUseTwice:1;
-    u32 healingMove:1;
+
+    // Ban flags
+    u32 gravityBanned:1;
+    u32 mirrorMoveBanned:1;
+    u32 meFirstBanned:1;
+    u32 mimicBanned:1;
+    u32 metronomeBanned:1;
+    u32 copycatBanned:1;
+    u32 assistBanned:1; // Matches same moves as copycatBanned + semi-invulnerable moves and Mirror Coat.
+    u32 sleepTalkBanned:1;
+    u32 instructBanned:1;
+    u32 encoreBanned:1;
+    u32 parentalBondBanned:1;
+    u32 skyBattleBanned:1;
+    u32 sketchBanned:1;
 
     u32 argument;
 
@@ -532,11 +531,11 @@ struct MoveInfo
 
 struct AdditionalEffect
 {
+    u16 moveEffect;
     u8 self:1;
     u8 onlyIfTargetRaisedStats:1;
     u8 onChargeTurnOnly:1;
     u8 chance; // 0% = effect certain, primary effect
-    u16 moveEffect;
 };
 
 struct Ability
