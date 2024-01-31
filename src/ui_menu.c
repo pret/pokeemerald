@@ -78,10 +78,10 @@ static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 //==========STATIC=DEFINES==========//
 static void Menu_RunSetup(void);
 static bool8 Menu_DoGfxSetup(void);
-static bool8 Menu_InitBgs(void);
+static bool8 StatEditor_InitBgs(void);
 static void Menu_FadeAndBail(void);
 static bool8 Menu_LoadGraphics(void);
-static void Menu_InitWindows(void);
+static void StatEditor_InitWindows(void);
 static void PrintTitleToWindowMainState();
 static void Task_MenuWaitFadeIn(u8 taskId);
 static void Task_MenuMain(u8 taskId);
@@ -271,13 +271,13 @@ void Task_OpenMenuFromStartMenu(u8 taskId)
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        Menu_Init(CB2_ReturnToFieldWithOpenMenu);
+        StatEditor_Init(CB2_ReturnToFieldWithOpenMenu);
         DestroyTask(taskId);
     }
 }
 
 // This is our main initialization function if you want to call the menu from elsewhere
-void Menu_Init(MainCallback callback)
+void StatEditor_Init(MainCallback callback)
 {
     if ((sMenuDataPtr = AllocZeroed(sizeof(struct MenuResources))) == NULL)
     {
@@ -289,6 +289,7 @@ void Menu_Init(MainCallback callback)
     sMenuDataPtr->gfxLoadState = 0;
     sMenuDataPtr->savedCallback = callback;
     sMenuDataPtr->selectorSpriteId = 0xFF;
+    sMenuDataPtr->partyid = gSpecialVar_0x8004;
     
     SetMainCallback2(Menu_RunSetup);
 }
@@ -338,7 +339,7 @@ static bool8 Menu_DoGfxSetup(void)
         gMain.state++;
         break;
     case 2:
-        if (Menu_InitBgs())
+        if (StatEditor_InitBgs())
         {
             sMenuDataPtr->gfxLoadState = 0;
             gMain.state++;
@@ -363,7 +364,7 @@ static bool8 Menu_DoGfxSetup(void)
         gMain.state++;
         break;
     case 5:
-        Menu_InitWindows();
+        StatEditor_InitWindows();
         PrintTitleToWindowMainState();
         PrintMonStats();
         CreateSelector();
@@ -420,7 +421,7 @@ static void Menu_FadeAndBail(void)
     SetMainCallback2(Menu_MainCB);
 }
 
-static bool8 Menu_InitBgs(void)
+static bool8 StatEditor_InitBgs(void)
 {
     ResetAllBgsCoordinates();
     sBg1TilemapBuffer = Alloc(0x800);
@@ -481,7 +482,7 @@ static void SampleUi_DrawMonIcon(u16 dexNum)
     gSprites[sMenuDataPtr->monIconSpriteId].oam.priority = 0;
 }
 
-static void Menu_InitWindows(void)
+static void StatEditor_InitWindows(void)
 {
     InitWindows(sMenuWindowTemplates);
     DeactivateAllTextPrinters();

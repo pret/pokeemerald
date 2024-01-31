@@ -338,7 +338,6 @@ static void BuildNormalStartMenu(void)
     {
         AddStartMenuAction(MENU_ACTION_POKEMON);
     }
-    AddStartMenuAction(MENU_ACTION_UI_MENU);
     AddStartMenuAction(MENU_ACTION_BAG);
 
     if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
