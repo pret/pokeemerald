@@ -65,7 +65,7 @@ void GetAIPartyIndexes(u32 battler, s32 *firstId, s32 *lastId)
 }
 
 // Note that as many return statements as possible are INTENTIONALLY put after all of the loops;
-// the function can take a max of about 0.06s to run, and this prevents the player from identifying 
+// the function can take a max of about 0.06s to run, and this prevents the player from identifying
 // whether the mon will switch or not by seeing how long the delay is before they select a move
 static bool8 HasBadOdds(u32 battler)
 
@@ -82,12 +82,12 @@ static bool8 HasBadOdds(u32 battler)
         return FALSE;
 
     // Won't bother configuring this for double battles
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE) 
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         return FALSE;
-	
+
 	opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(battler));
     opposingBattler = GetBattlerAtPosition(opposingPosition);
-	
+
     // Gets types of player (opposingBattler) and computer (battler)
 	atkType1 = gBattleMons[opposingBattler].type1;
 	atkType2 = gBattleMons[opposingBattler].type2;
@@ -102,7 +102,7 @@ static bool8 HasBadOdds(u32 battler)
         if (aiMove != MOVE_NONE)
         {
             // Check if mon has an "important" status move
-            if (aiMoveEffect == EFFECT_REFLECT || aiMoveEffect == EFFECT_LIGHT_SCREEN 
+            if (aiMoveEffect == EFFECT_REFLECT || aiMoveEffect == EFFECT_LIGHT_SCREEN
             || aiMoveEffect == EFFECT_SPIKES || aiMoveEffect == EFFECT_TOXIC_SPIKES || aiMoveEffect == EFFECT_STEALTH_ROCK || aiMoveEffect == EFFECT_STICKY_WEB || aiMoveEffect == EFFECT_LEECH_SEED
             || aiMoveEffect == EFFECT_EXPLOSION
             || aiMoveEffect == EFFECT_SLEEP || aiMoveEffect == EFFECT_YAWN || aiMoveEffect == EFFECT_TOXIC || aiMoveEffect == EFFECT_WILL_O_WISP || aiMoveEffect == EFFECT_PARALYZE
@@ -168,23 +168,23 @@ static bool8 HasBadOdds(u32 battler)
     }
 
     // If we don't have any other viable options, don't switch out
-    if (AI_DATA->mostSuitableMonId == PARTY_SIZE)
+    if (AI_DATA->mostSuitableMonId[battler] == PARTY_SIZE)
         return FALSE;
 
     // Start assessing whether or not mon has bad odds
     // Jump straight to swtiching out in cases where mon gets OHKO'd
     if (((getsOneShot && gBattleMons[opposingBattler].speed > gBattleMons[battler].speed) // If the player OHKOs and outspeeds OR OHKOs, doesn't outspeed but isn't 2HKO'd
-            || (getsOneShot && gBattleMons[opposingBattler].speed <= gBattleMons[battler].speed && maxDamageDealt < gBattleMons[opposingBattler].hp / 2)) 
+            || (getsOneShot && gBattleMons[opposingBattler].speed <= gBattleMons[battler].speed && maxDamageDealt < gBattleMons[opposingBattler].hp / 2))
         && (gBattleMons[battler].hp >= gBattleMons[battler].maxHP / 2 // And the current mon has at least 1/2 their HP, or 1/4 HP and Regenerator
-            || (aiAbility == ABILITY_REGENERATOR 
-            && gBattleMons[battler].hp >= gBattleMons[battler].maxHP / 4))) 
+            || (aiAbility == ABILITY_REGENERATOR
+            && gBattleMons[battler].hp >= gBattleMons[battler].maxHP / 4)))
     {
         // 50% chance to stay in regardless
-        if (Random() % 2 == 0) 
+        if (Random() % 2 == 0)
             return FALSE;
 
         // Switch mon out
-        *(gBattleStruct->AI_monToSwitchIntoId + battler) = PARTY_SIZE; 
+        *(gBattleStruct->AI_monToSwitchIntoId + battler) = PARTY_SIZE;
         BtlController_EmitTwoReturnValues(battler, 1, B_ACTION_SWITCH, 0);
         return TRUE;
     }
@@ -194,19 +194,19 @@ static bool8 HasBadOdds(u32 battler)
 	{
 		if (!hasSuperEffectiveMove // If the AI doesn't have a super effective move
 		&& (gBattleMons[battler].hp >= gBattleMons[battler].maxHP / 2 // And the current mon has at least 1/2 their HP, or 1/4 HP and Regenerator
-            || (aiAbility == ABILITY_REGENERATOR 
-            && gBattleMons[battler].hp >= gBattleMons[battler].maxHP / 4))) 
+            || (aiAbility == ABILITY_REGENERATOR
+            && gBattleMons[battler].hp >= gBattleMons[battler].maxHP / 4)))
 		{
             // Then check if they have an important status move, which is worth using even in a bad matchup
             if(hasStatusMove)
                 return FALSE;
 
             // 50% chance to stay in regardless
-            if (Random() % 2 == 0) 
+            if (Random() % 2 == 0)
                 return FALSE;
 
             // Switch mon out
-			*(gBattleStruct->AI_monToSwitchIntoId + battler) = PARTY_SIZE; 
+			*(gBattleStruct->AI_monToSwitchIntoId + battler) = PARTY_SIZE;
 			BtlController_EmitTwoReturnValues(battler, 1, B_ACTION_SWITCH, 0);
 			return TRUE;
 		}
@@ -593,12 +593,12 @@ static bool8 ShouldSwitchIfAbilityBenefit(u32 battler)
             moduloChance = 4; //25%
             //Attempt to cure bad ailment
             if (gBattleMons[battler].status1 & (STATUS1_SLEEP | STATUS1_FREEZE | STATUS1_TOXIC_POISON)
-                && AI_DATA->mostSuitableMonId != PARTY_SIZE)
+                && AI_DATA->mostSuitableMonId[battler] != PARTY_SIZE)
                 break;
             //Attempt to cure lesser ailment
             if ((gBattleMons[battler].status1 & STATUS1_ANY)
                 && (gBattleMons[battler].hp >= gBattleMons[battler].maxHP / 2)
-                && AI_DATA->mostSuitableMonId != PARTY_SIZE
+                && AI_DATA->mostSuitableMonId[battler] != PARTY_SIZE
                 && Random() % (moduloChance*chanceReducer) == 0)
                 break;
 
@@ -610,7 +610,7 @@ static bool8 ShouldSwitchIfAbilityBenefit(u32 battler)
             if (gBattleMons[battler].status1 & STATUS1_ANY)
                 return FALSE;
             if ((gBattleMons[battler].hp <= ((gBattleMons[battler].maxHP * 2) / 3))
-                 && AI_DATA->mostSuitableMonId != PARTY_SIZE
+                 && AI_DATA->mostSuitableMonId[battler] != PARTY_SIZE
                  && Random() % (moduloChance*chanceReducer) == 0)
                 break;
 
@@ -785,7 +785,7 @@ static bool32 CanMonSurviveHazardSwitchin(u32 battler)
 
     if (ability == ABILITY_REGENERATOR)
         battlerHp = (battlerHp * 133) / 100; // Account for Regenerator healing
-    
+
     hazardDamage = GetSwitchinHazardsDamage(battler, &gBattleMons[battler]);
 
     // Battler will faint to hazards, check to see if another mon can clear them
@@ -840,13 +840,13 @@ static bool32 CanMonSurviveHazardSwitchin(u32 battler)
 }
 
 static bool32 ShouldSwitchIfEncored(u32 battler)
-{   
+{
     // Only use this if AI_FLAG_SMART_SWITCHING is set for the trainer
     if (!(AI_THINKING_STRUCT->aiFlags & AI_FLAG_SMART_SWITCHING))
         return FALSE;
 
     // If not Encored or if no good switchin, don't switch
-    if (gDisableStructs[battler].encoredMove == MOVE_NONE || AI_DATA->mostSuitableMonId == PARTY_SIZE)
+    if (gDisableStructs[battler].encoredMove == MOVE_NONE || AI_DATA->mostSuitableMonId[battler] == PARTY_SIZE)
         return FALSE;
 
     // Otherwise 50% chance to switch out
@@ -879,7 +879,7 @@ static bool8 AreAttackingStatsLowered(u32 battler)
         // 50% chance if attack at -2 and have a good candidate mon
         else if (attackingStage == DEFAULT_STAT_STAGE - 2)
         {
-            if (AI_DATA->mostSuitableMonId != PARTY_SIZE && (Random() & 1))
+            if (AI_DATA->mostSuitableMonId[battler] != PARTY_SIZE && (Random() & 1))
             {
                 *(gBattleStruct->AI_monToSwitchIntoId + battler) = PARTY_SIZE;
                 BtlController_EmitTwoReturnValues(battler, 1, B_ACTION_SWITCH, 0);
@@ -904,7 +904,7 @@ static bool8 AreAttackingStatsLowered(u32 battler)
         // 50% chance if attack at -2 and have a good candidate mon
         else if (spAttackingStage == DEFAULT_STAT_STAGE - 2)
         {
-            if (AI_DATA->mostSuitableMonId != PARTY_SIZE && (Random() & 1))
+            if (AI_DATA->mostSuitableMonId[battler] != PARTY_SIZE && (Random() & 1))
             {
                 *(gBattleStruct->AI_monToSwitchIntoId + battler) = PARTY_SIZE;
                 BtlController_EmitTwoReturnValues(battler, 1, B_ACTION_SWITCH, 0);
@@ -1053,7 +1053,7 @@ void AI_TrySwitchOrUseItem(u32 battler)
         {
             if (*(gBattleStruct->AI_monToSwitchIntoId + battler) == PARTY_SIZE)
             {
-                s32 monToSwitchId = AI_DATA->mostSuitableMonId;
+                s32 monToSwitchId = AI_DATA->mostSuitableMonId[battler];
                 if (monToSwitchId == PARTY_SIZE)
                 {
                     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
@@ -1367,7 +1367,7 @@ static s32 GetSwitchinWeatherImpact(void)
 
 // Gets one turn of recurring healing
 static u32 GetSwitchinRecurringHealing(void)
-{  
+{
     u32 recurringHealing = 0, maxHP = AI_DATA->switchinCandidate.battleMon.maxHP, ability = AI_DATA->switchinCandidate.battleMon.ability;
     u16 item = AI_DATA->switchinCandidate.battleMon.item;
 
@@ -1439,9 +1439,9 @@ static u32 GetSwitchinStatusDamage(u32 battler)
     u32 statusDamage = 0;
 
     // Status condition damage
-    if ((status != 0) && AI_DATA->switchinCandidate.battleMon.ability != ABILITY_MAGIC_GUARD) 
+    if ((status != 0) && AI_DATA->switchinCandidate.battleMon.ability != ABILITY_MAGIC_GUARD)
     {
-        if (status & STATUS1_BURN) 
+        if (status & STATUS1_BURN)
         {
             #if B_BURN_DAMAGE >= GEN_7
                 statusDamage = maxHP / 16;
@@ -1484,7 +1484,7 @@ static u32 GetSwitchinStatusDamage(u32 battler)
     if (tSpikesLayers != 0 && (defType1 != TYPE_POISON && defType2 != TYPE_POISON
         && ability != ABILITY_IMMUNITY && ability != ABILITY_POISON_HEAL
         && status == 0
-        && !(heldItemEffect == HOLD_EFFECT_HEAVY_DUTY_BOOTS 
+        && !(heldItemEffect == HOLD_EFFECT_HEAVY_DUTY_BOOTS
             && (((gFieldStatuses & STATUS_FIELD_MAGIC_ROOM) || ability == ABILITY_KLUTZ)))
         && heldItemEffect != HOLD_EFFECT_CURE_PSN && heldItemEffect != HOLD_EFFECT_CURE_STATUS
         && IsMonGrounded(heldItemEffect, ability, defType1, defType2)))
@@ -1559,7 +1559,7 @@ static u32 GetSwitchinHitsToKO(s32 damageTaken, u32 battler)
                         singleUseItemHeal = 1;
                 }
             }
-            else if (currentHP < maxHP / CONFUSE_BERRY_HP_FRACTION 
+            else if (currentHP < maxHP / CONFUSE_BERRY_HP_FRACTION
                 && opposingAbility != ABILITY_UNNERVE
                 && (item == ITEM_AGUAV_BERRY || item == ITEM_FIGY_BERRY || item == ITEM_IAPAPA_BERRY || item == ITEM_MAGO_BERRY || item == ITEM_WIKI_BERRY))
             {
@@ -1608,7 +1608,7 @@ static u16 GetSwitchinTypeMatchup(u32 opposingBattler, struct BattlePokemon batt
 
     // Check type matchup
     u16 typeEffectiveness = UQ_4_12(1.0);
-    u8 atkType1 = gSpeciesInfo[gBattleMons[opposingBattler].species].types[0], atkType2 = gSpeciesInfo[gBattleMons[opposingBattler].species].types[1], 
+    u8 atkType1 = gSpeciesInfo[gBattleMons[opposingBattler].species].types[0], atkType2 = gSpeciesInfo[gBattleMons[opposingBattler].species].types[1],
     defType1 = battleMon.type1, defType2 = battleMon.type2;
 
     // Multiply type effectiveness by a factor depending on type matchup
@@ -1669,7 +1669,7 @@ static s32 GetMaxDamagePlayerCouldDealToSwitchin(u32 battler, u32 opposingBattle
 // the Type Matchup code will prioritize switching into a mon with the best type matchup and also a super effective move, or just best type matchup if no super effective move is found
 // the Most Defensive code will prioritize switching into the mon that takes the most hits to KO, with a minimum of 4 hits required to be considered a valid option
 // the Baton Pass code will prioritize switching into a mon with Baton Pass if it can get in, boost, and BP out without being KO'd, and randomizes between multiple valid options
-// the Revenge Killer code will prioritize, in order, OHKO and outspeeds / OHKO, slower but not 2HKO'd / 2HKO, outspeeds and not OHKO'd / 2HKO, slower but not 3HKO'd 
+// the Revenge Killer code will prioritize, in order, OHKO and outspeeds / OHKO, slower but not 2HKO'd / 2HKO, outspeeds and not OHKO'd / 2HKO, slower but not 3HKO'd
 // the Most Damage code will prioritize switching into whatever mon deals the most damage, which is generally not as good as having a good Type Matchup
 // Everything runs in the same loop to minimize computation time. This makes it harder to read, but hopefully the comments can guide you!
 
@@ -1712,7 +1712,7 @@ static u32 GetBestMonIntegrated(struct Pokemon *party, int firstId, int lastId, 
         InitializeSwitchinCandidate(&party[i]);
 
         // While not really invalid per say, not really wise to switch into this mon
-        if (AI_DATA->switchinCandidate.battleMon.ability == ABILITY_TRUANT && IsTruantMonVulnerable(battler, opposingBattler)) 
+        if (AI_DATA->switchinCandidate.battleMon.ability == ABILITY_TRUANT && IsTruantMonVulnerable(battler, opposingBattler))
             continue;
 
         // Get max number of hits for player to KO AI mon
@@ -1748,7 +1748,7 @@ static u32 GetBestMonIntegrated(struct Pokemon *party, int firstId, int lastId, 
             // Only do damage calc if switching after KO, don't need it otherwise and saves ~0.02s per turn
             if (isSwitchAfterKO && aiMove != MOVE_NONE && gBattleMoves[aiMove].power != 0)
                 damageDealt = AI_CalcPartyMonDamage(aiMove, battler, opposingBattler, AI_DATA->switchinCandidate.battleMon, TRUE);
-            
+
             // Check for Baton Pass; hitsToKO requirements mean mon can boost and BP without dying whether it's slower or not
             if (aiMove == MOVE_BATON_PASS && ((hitsToKO > hitsToKOThreshold + 1 && AI_DATA->switchinCandidate.battleMon.speed < playerMonSpeed) || (hitsToKO > hitsToKOThreshold && AI_DATA->switchinCandidate.battleMon.speed > playerMonSpeed)))
                 bits |= gBitTable[i];
@@ -1857,7 +1857,7 @@ static u32 GetBestMonIntegrated(struct Pokemon *party, int firstId, int lastId, 
 
         else if (typeMatchupId != PARTY_SIZE)
             return typeMatchupId;
-        
+
         else if (batonPassId != PARTY_SIZE)
             return batonPassId;
 
@@ -1932,7 +1932,7 @@ u8 GetMostSuitableMonToSwitchInto(u32 battler, bool32 switchAfterMonKOd)
     if (AI_THINKING_STRUCT->aiFlags & AI_FLAG_SMART_MON_CHOICES)
     {
         bestMonId = GetBestMonIntegrated(party, firstId, lastId, battler, opposingBattler, battlerIn1, battlerIn2, switchAfterMonKOd);
-        return bestMonId;           
+        return bestMonId;
     }
 
     // This all handled by the GetBestMonIntegrated function if the AI_FLAG_SMART_MON_CHOICES flag is set
