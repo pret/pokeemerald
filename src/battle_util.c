@@ -5638,7 +5638,8 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             switch (GetBattlerAbility(battler))
             {
             case ABILITY_OPPORTUNIST:
-                if (gProtectStructs[battler].activateOpportunist == 2) {
+                if (gProtectStructs[battler].activateOpportunist == 2)
+                {
                     gBattleScripting.savedBattler = gBattlerAttacker;
                     gBattleScripting.battler = gBattlerAttacker = gBattlerAbility = battler;
                     gProtectStructs[battler].activateOpportunist--;
@@ -6624,14 +6625,18 @@ static u8 TryConsumeMirrorHerb(u32 battler, bool32 execute)
 {
     u8 effect = 0;
 
-    if (gProtectStructs[battler].eatMirrorHerb) {
+    if (gProtectStructs[battler].eatMirrorHerb)
+    {
         gLastUsedItem = gBattleMons[battler].item;
         gBattleScripting.savedBattler = gBattlerAttacker;
         gBattleScripting.battler = gBattlerAttacker = battler;
         gProtectStructs[battler].eatMirrorHerb = 0;
-        if (execute) {
+        if (execute)
+        {
             BattleScriptExecute(BattleScript_MirrorHerbCopyStatChangeEnd2);
-        } else {
+        }
+        else
+        {
             BattleScriptPushCursor();
             gBattlescriptCurrInstr = BattleScript_MirrorHerbCopyStatChange;
         }
@@ -6885,7 +6890,8 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
     u8 atkHoldEffectParam;
     u16 atkItem;
 
-    if (caseID != ITEMEFFECT_USE_LAST_ITEM) {
+    if (caseID != ITEMEFFECT_USE_LAST_ITEM)
+    {
         gLastUsedItem = gBattleMons[battler].item;
         battlerHoldEffect = GetBattlerHoldEffect(battler, TRUE);
     }

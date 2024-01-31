@@ -597,7 +597,8 @@ static bool32 ShouldSwitchIfAbilityBenefit(u32 battler, bool32 emitResult)
         ||IsNeutralizingGasOnField())
         return FALSE;
 
-    switch(AI_DATA->abilities[battler]) {
+    switch(AI_DATA->abilities[battler])
+    {
         case ABILITY_NATURAL_CURE:
             moduloChance = 4; //25%
             //Attempt to cure bad ailment
@@ -1999,7 +2000,8 @@ static bool32 AiExpectsToFaintPlayer(u32 battler)
 
     if (GetBattlerSide(target) != GetBattlerSide(battler)
       && CanIndexMoveFaintTarget(battler, target, gBattleStruct->aiMoveOrAction[battler], 0)
-      && AI_WhoStrikesFirst(battler, target, GetAIChosenMove(battler)) == AI_IS_FASTER) {
+      && AI_WhoStrikesFirst(battler, target, GetAIChosenMove(battler)) == AI_IS_FASTER)
+    {
         // We expect to faint the target and move first -> dont use an item
         return TRUE;
     }
@@ -2125,7 +2127,8 @@ static bool32 AI_ShouldHeal(u32 battler, u32 healAmount)
 
     if (gBattleMons[battler].hp < gBattleMons[battler].maxHP / 4
      || gBattleMons[battler].hp == 0
-     || (healAmount != 0 && gBattleMons[battler].maxHP - gBattleMons[battler].hp > healAmount)) {
+     || (healAmount != 0 && gBattleMons[battler].maxHP - gBattleMons[battler].hp > healAmount))
+    {
         // We have low enough HP to consider healing
         shouldHeal = !AI_OpponentCanFaintAiWithMod(battler, healAmount); // if target can kill us even after we heal, why bother
     }
@@ -2137,12 +2140,12 @@ static bool32 AI_OpponentCanFaintAiWithMod(u32 battler, u32 healAmount)
 {
     u32 i;
     // Check special cases to NOT heal
-    for (i = 0; i < gBattlersCount; i++) {
-        if (GetBattlerSide(i) == B_SIDE_PLAYER) {
-            if (CanTargetFaintAiWithMod(i, battler, healAmount, 0)) {
-                // Target is expected to faint us
-                return TRUE;
-            }
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        if (GetBattlerSide(i) == B_SIDE_PLAYER && CanTargetFaintAiWithMod(i, battler, healAmount, 0))
+        {
+            // Target is expected to faint us
+            return TRUE;
         }
     }
     return FALSE;

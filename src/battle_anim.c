@@ -447,18 +447,21 @@ static u8 GetBattleAnimMoveTargets(u8 battlerArgIndex, u8 *targets)
     switch (GetBattlerMoveTargetType(gBattleAnimAttacker, gAnimMoveIndex))
     {
     case MOVE_TARGET_FOES_AND_ALLY:
-        if (IS_ALIVE_AND_PRESENT(BATTLE_PARTNER(BATTLE_OPPOSITE(battler)))) {
+        if (IS_ALIVE_AND_PRESENT(BATTLE_PARTNER(BATTLE_OPPOSITE(battler))))
+        {
             targets[idx++] = BATTLE_PARTNER(BATTLE_OPPOSITE(battler));
             numTargets++;
         }
         // fallthrough
     case MOVE_TARGET_BOTH:
-        if (IS_ALIVE_AND_PRESENT(battler)) {
+        if (IS_ALIVE_AND_PRESENT(battler))
+        {
             targets[idx++] = battler;
             numTargets++;
         }
         battler = BATTLE_PARTNER(battler);
-        if (IS_ALIVE_AND_PRESENT(battler)) {
+        if (IS_ALIVE_AND_PRESENT(battler))
+        {
             targets[idx++] = battler;
             numTargets++;
         }
@@ -555,8 +558,8 @@ static void CreateSpriteOnTargets(const struct SpriteTemplate *template, u8 argV
     if (ntargets == 0)
         return;
 
-    for (i = 0; i < ntargets; i++) {
-
+    for (i = 0; i < ntargets; i++)
+    {
         if (overwriteAnimTgt)
             gBattleAnimArgs[battlerArgIndex] = targets[i];
 
@@ -673,7 +676,8 @@ static void Cmd_createvisualtaskontargets(void)
     sBattleAnimScriptPtr++;
 
     // copy task arguments
-    for (i = 0; i < numArgs; i++) {
+    for (i = 0; i < numArgs; i++)
+    {
         gBattleAnimArgs[i] = T1_READ_16(sBattleAnimScriptPtr);
         sBattleAnimScriptPtr += 2;
     }

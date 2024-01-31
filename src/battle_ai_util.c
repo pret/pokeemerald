@@ -469,7 +469,8 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
                     u32 i;
                     gBattleStruct->beatUpSlot = 0;
                     dmg = 0;
-                    for (i = 0; i < partyCount; i++) {
+                    for (i = 0; i < partyCount; i++)
+                    {
                         dmg += CalculateMoveDamage(move, battlerAtk, battlerDef, moveType, 0, FALSE, FALSE, FALSE);
                     }
                     gBattleStruct->beatUpSlot = 0;

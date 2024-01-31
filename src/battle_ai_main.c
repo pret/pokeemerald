@@ -546,9 +546,9 @@ static u32 ChooseMoveOrAction_Singles(u32 battlerAi)
         AI_THINKING_STRUCT->aiLogicId++;
     }
 
-    for (i = 0; i < MAX_MON_MOVES; i++) {
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
         gBattleStruct->aiFinalScore[battlerAi][gBattlerTarget][i] = AI_THINKING_STRUCT->score[i];
-
     }
 
     // Check special AI actions.
@@ -674,7 +674,8 @@ static u32 ChooseMoveOrAction_Doubles(u32 battlerAi)
                 }
             }
 
-            for (j = 0; j < MAX_MON_MOVES; j++) {
+            for (j = 0; j < MAX_MON_MOVES; j++)
+            {
                 gBattleStruct->aiFinalScore[battlerAi][gBattlerTarget][j] = AI_THINKING_STRUCT->score[j];
             }
         }
