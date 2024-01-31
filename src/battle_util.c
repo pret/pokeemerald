@@ -6794,7 +6794,7 @@ static u8 ItemHealHp(u32 battler, u32 itemId, bool32 end2, bool32 percentHeal)
             gBattlescriptCurrInstr = BattleScript_ItemHealHP_RemoveItemRet;
         }
         if (gBattleResources->flags->flags[battler] & RESOURCE_FLAG_EMERGENCY_EXIT
-         && GetNonDynamaxMaxHP(battler) > gBattleMons[battler].maxHP / 2)
+         && GetNonDynamaxHP(battler) >= GetNonDynamaxMaxHP(battler)  / 2)
             gBattleResources->flags->flags[battler] &= ~RESOURCE_FLAG_EMERGENCY_EXIT;
 
         return ITEM_HP_CHANGE;
