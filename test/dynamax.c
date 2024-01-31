@@ -58,7 +58,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamax expires after three turns", u16 hp)
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon cannot be flinched")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_FAKE_OUT].effect == EFFECT_FAKE_OUT);
+        ASSUME(gMovesInfo[MOVE_FAKE_OUT].effect == EFFECT_FIRST_TURN_ONLY);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

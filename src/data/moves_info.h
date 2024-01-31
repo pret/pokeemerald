@@ -6188,7 +6188,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             "that causes flinching."),
         .priority = B_UPDATED_MOVE_DATA >= GEN_5 ? 3 : 1,
         .makesContact = B_UPDATED_MOVE_DATA >= GEN_4,
-        .effect = EFFECT_FAKE_OUT,
+        .effect = EFFECT_FIRST_TURN_ONLY,
         .power = 40,
         .type = TYPE_NORMAL,
         .accuracy = 100,
@@ -14987,7 +14987,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "Hits hard and first.\n"
             "Only works first turn."),
-        .effect = EFFECT_FAKE_OUT,
+        .effect = EFFECT_FIRST_TURN_ONLY,
         .power = 90,
         .type = TYPE_BUG,
         .accuracy = 100,

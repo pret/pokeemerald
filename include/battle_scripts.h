@@ -648,7 +648,7 @@ extern const u8 BattleScript_EffectBeatUp[];
 extern const u8 BattleScript_EffectSemiInvulnerable[];
 extern const u8 BattleScript_EffectDefenseCurl[];
 extern const u8 BattleScript_EffectSoftboiled[];
-extern const u8 BattleScript_EffectFakeOut[];
+extern const u8 BattleScript_EffectFirstTurnOnly[];
 extern const u8 BattleScript_EffectUproar[];
 extern const u8 BattleScript_EffectStockpile[];
 extern const u8 BattleScript_EffectSpitUp[];

@@ -128,7 +128,7 @@ enum {
     EFFECT_SEMI_INVULNERABLE,
     EFFECT_DEFENSE_CURL,
     EFFECT_SOFTBOILED, // differences vs Recover - can be used outside of battle to restore HP
-    EFFECT_FAKE_OUT,
+    EFFECT_FIRST_TURN_ONLY,
     EFFECT_UPROAR,
     EFFECT_STOCKPILE,
     EFFECT_SPIT_UP,

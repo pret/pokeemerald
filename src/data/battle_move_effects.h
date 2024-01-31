@@ -817,9 +817,9 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .encourageEncore = TRUE,
     },
 
-    [EFFECT_FAKE_OUT] =
+    [EFFECT_FIRST_TURN_ONLY] =
     {
-        .battleScript = BattleScript_EffectFakeOut,
+        .battleScript = BattleScript_EffectFirstTurnOnly,
         .battleTvScore = 4,
         .encourageEncore = TRUE,
     },

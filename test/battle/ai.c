@@ -569,7 +569,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: AI considers hazard damage whe
         OPPONENT(SPECIES_TYPHLOSION) { Speed(200); Moves(MOVE_FLAMETHROWER); SpAttack(317); SpDefense(207); MaxHP(297); } // Outspeends and 2HKOs Meganium
     } WHEN {
             TURN { MOVE(player, MOVE_STEALTH_ROCK) ;}
-            TURN { MOVE(player, MOVE_SURF) ; EXPECT_SEND_OUT(opponent, aiIsSmart ? 2 : 1); } // AI sends out Typhlosion to get the KO with the flag rather than Charizard
+            TURN { MOVE(player, MOVE_SURF); EXPECT_SEND_OUT(opponent, aiIsSmart ? 2 : 1); } // AI sends out Typhlosion to get the KO with the flag rather than Charizard
     }
 }
 
@@ -593,7 +593,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: Mid-battle switches prioritize
         OPPONENT(SPECIES_LOMBRE) { Level(30); Moves(move2); Speed(4); }
         OPPONENT(SPECIES_HARIYAMA) { Level(30); Moves(MOVE_VITAL_THROW); Speed(4); }
     } WHEN {
-            TURN { MOVE(player, MOVE_GROWL) ; EXPECT_SWITCH(opponent, expectedIndex); }
+            TURN { MOVE(player, MOVE_GROWL); EXPECT_SWITCH(opponent, expectedIndex); }
     }
 }
 
@@ -606,7 +606,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: Mid-battle switches prioritize
         OPPONENT(SPECIES_ARON) { Level(30); Moves(MOVE_HEADBUTT); Speed(4); } // Mid battle, AI sends out Aron
         OPPONENT(SPECIES_ELECTRODE) { Level(30); Moves(MOVE_CHARGE_BEAM); Speed(6); }
     } WHEN {
-            TURN { MOVE(player, MOVE_WING_ATTACK) ; EXPECT_SWITCH(opponent, 1); }
+            TURN { MOVE(player, MOVE_WING_ATTACK); EXPECT_SWITCH(opponent, 1); }
     }
 }
 
@@ -619,7 +619,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: Post-KO switches prioritize of
         OPPONENT(SPECIES_ARON) { Level(30); Moves(MOVE_HEADBUTT); Speed(4); } // Mid battle, AI sends out Aron
         OPPONENT(SPECIES_ELECTRODE) { Level(30); Moves(MOVE_CHARGE_BEAM); Speed(6); }
     } WHEN {
-            TURN { MOVE(player, MOVE_WING_ATTACK) ; EXPECT_SEND_OUT(opponent, 2); }
+            TURN { MOVE(player, MOVE_WING_ATTACK); EXPECT_SEND_OUT(opponent, 2); }
     }
 }
 
@@ -631,8 +631,8 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI switches out after sufficient
         OPPONENT(SPECIES_GRIMER) { Level(30); Moves(MOVE_TACKLE); Speed(4); }
         OPPONENT(SPECIES_PONYTA) { Level(30); Moves(MOVE_HEADBUTT); Speed(4); }
     } WHEN {
-            TURN { MOVE(player, MOVE_CHARM) ;}
-            TURN { MOVE(player, MOVE_TACKLE) ; EXPECT_SWITCH(opponent, 1); }
+        TURN { MOVE(player, MOVE_CHARM); }
+        TURN { MOVE(player, MOVE_TACKLE); EXPECT_SWITCH(opponent, 1); }
     }
 }
 
@@ -640,8 +640,8 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will not switch out if Pokemo
 {
     u32 move1;
 
-    PARAMETRIZE{move1 = MOVE_TACKLE; }
-    PARAMETRIZE{move1 = MOVE_RAPID_SPIN; }
+    PARAMETRIZE{ move1 = MOVE_TACKLE; }
+    PARAMETRIZE{ move1 = MOVE_RAPID_SPIN; }
 
     GIVEN {
         ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
@@ -653,9 +653,9 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will not switch out if Pokemo
         OPPONENT(SPECIES_GRIMER) { Level(30); Moves(MOVE_TACKLE); Item(ITEM_FOCUS_SASH); Speed(4); }
         OPPONENT(SPECIES_PONYTA) { Level(30); Moves(MOVE_HEADBUTT, move1); Speed(4); }
     } WHEN {
-        TURN { MOVE(player, MOVE_STEALTH_ROCK) ;}
-        TURN { MOVE(player, MOVE_EARTHQUAKE) ;}
-        TURN { MOVE(player, MOVE_CHARM) ;}
+        TURN { MOVE(player, MOVE_STEALTH_ROCK); }
+        TURN { MOVE(player, MOVE_EARTHQUAKE); }
+        TURN { MOVE(player, MOVE_CHARM); }
         TURN { // If the AI has a mon that can remove hazards, don't prevent them switching out
             MOVE(player, MOVE_CHARM);
             if (move1 == MOVE_RAPID_SPIN)
@@ -663,5 +663,42 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will not switch out if Pokemo
             else if (move1 == MOVE_TACKLE)
                 EXPECT_MOVE(opponent, MOVE_TACKLE);
         }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("First Impression is preferred on the first turn of the species if it's the best dmg move")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_FIRST_IMPRESSION].effect == EFFECT_FIRST_TURN_ONLY);
+        ASSUME(gMovesInfo[MOVE_FIRST_IMPRESSION].power == 90);
+        ASSUME(gMovesInfo[MOVE_LUNGE].power == 80);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_KANGASKHAN);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_FIRST_IMPRESSION, MOVE_LUNGE); }
+    } WHEN {
+        TURN { EXPECT_MOVE(opponent, MOVE_FIRST_IMPRESSION); }
+        TURN { EXPECT_MOVE(opponent, MOVE_LUNGE); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("First Impression is not chosen if it's blocked by certain abilities")
+{
+    u16 species;
+    u16 ability;
+
+    PARAMETRIZE { species = SPECIES_BRUXISH; ability = ABILITY_DAZZLING; }
+    PARAMETRIZE { species = SPECIES_FARIGIRAF; ability = ABILITY_ARMOR_TAIL; }
+    PARAMETRIZE { species = SPECIES_TSAREENA; ability = ABILITY_QUEENLY_MAJESTY; }
+
+    KNOWN_FAILING; // Fails because the Omniscient flag is currently broken. It should pass after it is fixed
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_FIRST_IMPRESSION].effect == EFFECT_FIRST_TURN_ONLY);
+        ASSUME(gMovesInfo[MOVE_FIRST_IMPRESSION].power == 90);
+        ASSUME(gMovesInfo[MOVE_LUNGE].power == 80);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(species) { Ability(ability); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_FIRST_IMPRESSION, MOVE_LUNGE); }
+    } WHEN {
+        TURN { EXPECT_MOVE(opponent, MOVE_LUNGE); }
     }
 }

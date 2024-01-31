@@ -867,20 +867,20 @@ u32 NoOfHitsForTargetToFaintAI(u32 battlerDef, u32 battlerAtk)
     return leastNumberOfHits;
 }
 
-u32 GetBestDmgMoveFromTarget(u32 battlerDef, u32 battlerAtk)
+u32 GetBestDmgMoveFromBattler(u32 battlerAtk, u32 battlerDef)
 {
     u32 i;
     u32 move = 0;
     u32 bestDmg = 0;
-    u32 unusable = AI_DATA->moveLimitations[battlerDef];
-    u16 *moves = GetMovesArray(battlerDef);
+    u32 unusable = AI_DATA->moveLimitations[battlerAtk];
+    u16 *moves = GetMovesArray(battlerAtk);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && !(unusable & gBitTable[i])
-            && bestDmg < AI_DATA->simulatedDmg[battlerDef][battlerAtk][i])
+            && bestDmg < AI_DATA->simulatedDmg[battlerAtk][battlerDef][i])
         {
-            bestDmg = AI_DATA->simulatedDmg[battlerDef][battlerAtk][i];
+            bestDmg = AI_DATA->simulatedDmg[battlerAtk][battlerDef][i];
             move = moves[i];
         }
     }
@@ -2724,7 +2724,7 @@ bool32 ShouldTrap(u32 battlerAtk, u32 battlerDef, u32 move)
 
 bool32 ShouldFakeOut(u32 battlerAtk, u32 battlerDef, u32 move)
 {
-    if (!gDisableStructs[battlerAtk].isFirstTurn
+    if ((!gDisableStructs[battlerAtk].isFirstTurn && MoveHasMoveEffectWithChance(move, MOVE_EFFECT_FLINCH, 100))
     || AI_DATA->abilities[battlerAtk] == ABILITY_GORILLA_TACTICS
     || AI_DATA->holdEffects[battlerAtk] == HOLD_EFFECT_CHOICE_BAND
     || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_COVERT_CLOAK
@@ -3418,7 +3418,7 @@ void IncreaseParalyzeScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
 
         if ((defSpeed >= atkSpeed && defSpeed / 2 < atkSpeed) // You'll go first after paralyzing foe
           || HasMoveEffectANDArg(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS, STATUS1_PARALYSIS)
-          || (HasMoveWithMoveEffectExcept(battlerAtk, MOVE_EFFECT_FLINCH, EFFECT_FAKE_OUT)) // filter out Fake Out
+          || (HasMoveWithMoveEffectExcept(battlerAtk, MOVE_EFFECT_FLINCH, EFFECT_FIRST_TURN_ONLY)) // filter out Fake Out
           || gBattleMons[battlerDef].status2 & STATUS2_INFATUATION
           || gBattleMons[battlerDef].status2 & STATUS2_CONFUSION)
             ADJUST_SCORE_PTR(GOOD_EFFECT);
@@ -3459,7 +3459,7 @@ void IncreaseConfusionScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score
     {
         if (gBattleMons[battlerDef].status1 & STATUS1_PARALYSIS
           || gBattleMons[battlerDef].status2 & STATUS2_INFATUATION
-          || (AI_DATA->abilities[battlerAtk] == ABILITY_SERENE_GRACE && HasMoveWithMoveEffectExcept(battlerAtk, MOVE_EFFECT_FLINCH, EFFECT_FAKE_OUT)))
+          || (AI_DATA->abilities[battlerAtk] == ABILITY_SERENE_GRACE && HasMoveWithMoveEffectExcept(battlerAtk, MOVE_EFFECT_FLINCH, EFFECT_FIRST_TURN_ONLY)))
             ADJUST_SCORE_PTR(GOOD_EFFECT);
         else
             ADJUST_SCORE_PTR(DECENT_EFFECT);
