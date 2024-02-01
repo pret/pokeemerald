@@ -10691,9 +10691,11 @@ bool32 IsBattlerAffectedByHazards(u32 battler, bool32 toxicSpikes)
 bool32 MoveIsAffectedBySheerForce(u16 move)
 {
     u32 i;
-    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+    GET_ADDITIONAL_EFFECTS_AND_COUNT(move, additionalEffectsCount, additionalEffects);
+
+    for (i = 0; i < additionalEffectsCount; i++)
     {
-        if (gMovesInfo[move].additionalEffects[i].chance > 0)
+        if (additionalEffects[i].chance > 0)
             return TRUE;
     }
 
@@ -10975,10 +10977,11 @@ bool32 IsGen6ExpShareEnabled(void)
 bool32 MoveHasMoveEffect(u32 move, u32 moveEffect)
 {
     u32 i;
-    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+    GET_ADDITIONAL_EFFECTS_AND_COUNT(move, count, effects);
+
+    for (i = 0; i < count; i++)
     {
-        if (gMovesInfo[move].additionalEffects[i].moveEffect == moveEffect
-            && gMovesInfo[move].additionalEffects[i].self == FALSE)
+        if (effects[i].moveEffect == moveEffect && effects[i].self == FALSE)
             return TRUE;
     }
     return FALSE;
@@ -10987,10 +10990,11 @@ bool32 MoveHasMoveEffect(u32 move, u32 moveEffect)
 bool32 MoveHasMoveEffectWithChance(u32 move, u32 moveEffect, u32 chance)
 {
     u32 i;
-    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+    GET_ADDITIONAL_EFFECTS_AND_COUNT(move, count, effects);
+
+    for (i = 0; i < count; i++)
     {
-        if (gMovesInfo[move].additionalEffects[i].moveEffect == moveEffect
-            && gMovesInfo[move].additionalEffects[i].chance == chance)
+        if (effects[i].moveEffect == moveEffect && effects[i].chance == chance)
             return TRUE;
     }
     return FALSE;
@@ -10999,10 +11003,11 @@ bool32 MoveHasMoveEffectWithChance(u32 move, u32 moveEffect, u32 chance)
 bool32 MoveHasMoveEffectSelf(u32 move, u32 moveEffect)
 {
     u32 i;
-    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+    GET_ADDITIONAL_EFFECTS_AND_COUNT(move, count, effects);
+
+    for (i = 0; i < count; i++)
     {
-        if (gMovesInfo[move].additionalEffects[i].moveEffect == moveEffect
-            && gMovesInfo[move].additionalEffects[i].self == TRUE)
+        if (effects[i].moveEffect == moveEffect && effects[i].self == TRUE)
             return TRUE;
     }
     return FALSE;

@@ -3820,34 +3820,47 @@ void SetMoveEffect(bool32 primary, bool32 certain)
     gBattleScripting.moveEffect = 0;
 }
 
+static bool32 CanApplyAdditionalEffect(const struct AdditionalEffect *additionalEffect)
+{
+    // Self-targeting move effects only apply after the last mon has been hit
+    u16 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove);
+    if (additionalEffect->self
+      && (moveTarget == MOVE_TARGET_BOTH || moveTarget == MOVE_TARGET_FOES_AND_ALLY)
+      && GetNextTarget(moveTarget, TRUE) != MAX_BATTLERS_COUNT)
+        return FALSE;
+
+    // Certain move effects only apply if the target raised stats this turn (e.g. Burning Jealousy)
+    if (additionalEffect->onlyIfTargetRaisedStats && !gProtectStructs[gBattlerTarget].statRaised)
+        return FALSE;
+
+    // Certain additional effects only apply on a two-turn move's charge turn
+    if (additionalEffect->onChargeTurnOnly != gProtectStructs[gBattlerAttacker].chargingTurn)
+        return FALSE;
+
+    return TRUE;
+}
+
 static void Cmd_setadditionaleffects(void)
 {
     CMD_ARGS();
 
     if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
     {
-        if (gMovesInfo[gCurrentMove].numAdditionalEffects > gBattleStruct->additionalEffectsCounter)
+        GET_ADDITIONAL_EFFECTS_AND_COUNT(gCurrentMove, additionalEffectsCount, additionalEffects);
+        if (additionalEffectsCount > gBattleStruct->additionalEffectsCounter)
         {
-            u32 percentChance;
-            u16 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove);
+            u32 percentChance, i = gBattleStruct->additionalEffectsCounter;
             const u8 *currentPtr = gBattlescriptCurrInstr;
-            const struct AdditionalEffect *additionalEffect = &gMovesInfo[gCurrentMove].additionalEffects[gBattleStruct->additionalEffectsCounter];
 
-            // Check additional effect flags
-            // self-targeting move effects cannot occur multiple times per turn
-            // only occur on the last setmoveeffect when there are multiple targets
-            if (!(gMovesInfo[gCurrentMove].additionalEffects[gBattleStruct->additionalEffectsCounter].self
-                && (moveTarget == MOVE_TARGET_BOTH || moveTarget == MOVE_TARGET_FOES_AND_ALLY)
-                && GetNextTarget(moveTarget, TRUE) != MAX_BATTLERS_COUNT)
-              && !(additionalEffect->onlyIfTargetRaisedStats && !gProtectStructs[gBattlerTarget].statRaised)
-              && additionalEffect->onChargeTurnOnly == gProtectStructs[gBattlerAttacker].chargingTurn)
+            // Various checks for if this move effect can be applied this turn
+            if (CanApplyAdditionalEffect(&additionalEffects[i]))
             {
-                percentChance = CalcSecondaryEffectChance(gBattlerAttacker, GetBattlerAbility(gBattlerAttacker), additionalEffect);
+                percentChance = CalcSecondaryEffectChance(gBattlerAttacker, GetBattlerAbility(gBattlerAttacker), &additionalEffects[i]);
 
                 // Activate effect if it's primary (chance == 0) or if RNGesus says so
-                if ((percentChance == 0) || RandomPercentage(RNG_SECONDARY_EFFECT + gBattleStruct->additionalEffectsCounter, percentChance))
+                if ((percentChance == 0) || RandomPercentage(RNG_SECONDARY_EFFECT + i, percentChance))
                 {
-                    gBattleScripting.moveEffect = additionalEffect->moveEffect | (MOVE_EFFECT_AFFECTS_USER * (additionalEffect->self));
+                    gBattleScripting.moveEffect = additionalEffects[i].moveEffect | (MOVE_EFFECT_AFFECTS_USER * (additionalEffects[i].self));
 
                     SetMoveEffect(
                         percentChance == 0, // a primary effect
@@ -3862,7 +3875,7 @@ static void Cmd_setadditionaleffects(void)
 
             // Call setadditionaleffects again in the case of a move with multiple effects
             gBattleStruct->additionalEffectsCounter++;
-            if (gMovesInfo[gCurrentMove].numAdditionalEffects > gBattleStruct->additionalEffectsCounter)
+            if (additionalEffectsCount > gBattleStruct->additionalEffectsCounter)
                 gBattleScripting.moveEffect = MOVE_EFFECT_CONTINUE;
             else
                 gBattleScripting.moveEffect = gBattleStruct->additionalEffectsCounter = 0;
@@ -15677,12 +15690,13 @@ static bool8 CanAbilityPreventStatLoss(u16 abilityDef, bool8 byIntimidate)
 static bool8 CanBurnHitThaw(u16 move)
 {
     u8 i;
+    GET_ADDITIONAL_EFFECTS_AND_COUNT(move, additionalEffectsCount, additionalEffects);
 
     if (B_BURN_HIT_THAW >= GEN_6)
     {
-        for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+        for (i = 0; i < additionalEffectsCount; i++)
         {
-            if (gMovesInfo[move].additionalEffects[i].moveEffect == MOVE_EFFECT_BURN)
+            if (additionalEffects[i].moveEffect == MOVE_EFFECT_BURN)
                 return TRUE;
         }
     }

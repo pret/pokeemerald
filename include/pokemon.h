@@ -463,10 +463,9 @@ struct MoveInfo
 
     s32 priority:4;
     u32 recoil:7;
-    u32 strikeCount:4;  // Max 15 hits. Defaults to 1 if not set. May apply its effect on each hit.
+    u32 strikeCount:4; // Max 15 hits. Defaults to 1 if not set. May apply its effect on each hit.
     u32 criticalHitStage:2;
     u32 alwaysCriticalHit:1;
-    u32 numAdditionalEffects:2; // limited to 3 - don't want to get too crazy
 
     // Flags
     u32 makesContact:1;
@@ -514,7 +513,7 @@ struct MoveInfo
     u32 argument;
 
     // primary/secondary effects
-    const struct AdditionalEffect *additionalEffects;
+    uintptr_t additionalEffects;
 
     // contest parameters
     u8 contestEffect;
@@ -524,7 +523,12 @@ struct MoveInfo
 };
 
 #define EFFECTS_ARR(...) (const struct AdditionalEffect[]) {__VA_ARGS__}
-#define ADDITIONAL_EFFECTS(...) EFFECTS_ARR( __VA_ARGS__ ), .numAdditionalEffects = ARRAY_COUNT(EFFECTS_ARR( __VA_ARGS__ ))
+#define ADDITIONAL_EFFECTS(...) ((ARRAY_COUNT(EFFECTS_ARR( __VA_ARGS__ )) % 0xF) << 28) + (uintptr_t)(EFFECTS_ARR( __VA_ARGS__ ))
+
+// Retrieve a move's additional effects and the count thereof
+#define GET_ADDITIONAL_EFFECTS_AND_COUNT(move, _count, _effects) u32 _count = GET_ADDITIONAL_EFFECTS_COUNT(move); const struct AdditionalEffect *_effects = GET_ADDITIONAL_EFFECTS(move)
+#define GET_ADDITIONAL_EFFECTS(move) (void *)(gMovesInfo[move].additionalEffects & 0x8FFFFFF)
+#define GET_ADDITIONAL_EFFECTS_COUNT(move) (gMovesInfo[move].additionalEffects >> 28)
 
 // Just a hack to make a move boosted by Sheer Force despite having no secondary effects affected
 #define SHEER_FORCE_HACK { .moveEffect = 0, .chance = 100, }
