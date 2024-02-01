@@ -5170,7 +5170,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         ICON(Stantler, 2),
         FOOTPRINT(Stantler)
         LEARNSETS(Stantler),
-        .evolutions = EVOLUTION({EVO_MOVE, MOVE_PSYSHIELD_BASH, SPECIES_WYRDEER}),
+        .evolutions = EVOLUTION({EVO_LEVEL_MOVE_TWENTY_TIMES, MOVE_PSYSHIELD_BASH, SPECIES_WYRDEER}),
     },
 
 #if P_GEN_8_CROSS_EVOS
