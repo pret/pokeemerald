@@ -2223,4 +2223,10 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectShedTail,
         .battleTvScore = 0, // TODO: Assign points
     },
+
+    [EFFECT_UPPER_HAND] =
+    {
+        .battleScript = BattleScript_EffectUpperHand,
+        .battleTvScore = 0, // TODO: Assign points
+    },
 };

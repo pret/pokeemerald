@@ -351,6 +351,7 @@ enum {
     EFFECT_BLIZZARD,
     EFFECT_RAIN_ALWAYS_HIT, // Unlike EFFECT_THUNDER, it doesn't get its accuracy reduced under sun.
     EFFECT_SHED_TAIL,
+    EFFECT_UPPER_HAND,
     NUM_BATTLE_MOVE_EFFECTS,
 };
 

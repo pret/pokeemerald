@@ -20,6 +20,11 @@
 
 	.section script_data, "aw", %progbits
 
+BattleScript_EffectUpperHand::
+	attackcanceler
+	tryupperhand BattleScript_FailedFromAtkString
+	goto BattleScript_HitFromAccCheck
+
 BattleScript_EffectShedTail::
 	attackcanceler
 	attackstring
