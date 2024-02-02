@@ -15,7 +15,6 @@
 #include "constants/event_object_movement.h"
 #include "constants/items.h"
 
-static u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry);
 static u16 BerryTypeToItemId(u16 berry);
 static u8 BerryTreeGetNumStagesWatered(struct BerryTree *tree);
 static u8 GetNumStagesWateredByBerryTreeId(u8 id);
@@ -1678,9 +1677,9 @@ void SetEnigmaBerry(u8 *src)
 #endif //FREE_ENIGMA_BERRY
 }
 
+#if FREE_ENIGMA_BERRY == FALSE
 static u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry)
 {
-#if FREE_ENIGMA_BERRY == FALSE
     u32 i;
     u32 checksum;
     u8 *dest;
@@ -1691,10 +1690,8 @@ static u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry)
         checksum += dest[i];
 
     return checksum;
-#else
-    return 0;
-#endif //FREE_ENIGMA_BERRY
 }
+#endif //FREE_ENIGMA_BERRY
 
 bool32 IsEnigmaBerryValid(void)
 {
