@@ -2,7 +2,7 @@
 #define GUARD_CONFIG_SAVE_H
 
 // free saveblock 1 defines
-#define FREE_EXTRA_SEEN_FLAGS               FALSE   //free up extra pokedex seen flags. Frees up 104 bytes
+#define FREE_EXTRA_SEEN_FLAGS               FALSE   // Free up unused Pokédex seen flags (52 bytes).
 #define FREE_TRAINER_HILL                   FALSE   //frees up trainer hill data. 28 bytes.                          WARNING THIS HAS BEEN SHOWN TO BREAK MULTI BATTLES
 #define FREE_MYSTERY_EVENT_BUFFERS          FALSE   //frees up mystery event and ramScript. roughly 1880 bytes       Needed by FREE_BATTLE_TOWER_E_READER
 #define FREE_MATCH_CALL                     FALSE   //frees up match call data. 104 bytes

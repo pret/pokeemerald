@@ -33,9 +33,7 @@ struct GFRomHeader
     u32 flagsOffset;
     u32 varsOffset;
     u32 pokedexOffset;
-#if FREE_EXTRA_SEEN_FLAGS == FALSE
     u32 seen1Offset;
-#endif //FREE_EXTRA_SEEN_FLAGS
     u32 seen2Offset;
     u32 pokedexVar;
     u32 pokedexFlag;
