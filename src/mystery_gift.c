@@ -13,14 +13,18 @@
 
 static EWRAM_DATA bool32 sStatsEnabled = FALSE;
 
+#if FREE_BATTLE_TOWER_E_READER == FALSE
 static void ClearSavedWonderNewsMetadata(void);
+#endif //FREE_BATTLE_TOWER_E_READER
 static void ClearSavedWonderNews(void);
+#if FREE_BATTLE_TOWER_E_READER == FALSE
 static void ClearSavedWonderCard(void);
 static bool32 ValidateWonderNews(const struct WonderNews *);
 static bool32 ValidateWonderCard(const struct WonderCard *);
 static void ClearSavedWonderCardMetadata(void);
 static void ClearSavedTrainerIds(void);
 static void IncrementCardStatForNewTrainer(u32, u32, u32 *, int);
+#endif //FREE_BATTLE_TOWER_E_READER
 
 #define CALC_CRC(data) CalcCRC16WithTable((void *)&(data), sizeof(data))
 
@@ -37,6 +41,8 @@ struct WonderNews *GetSavedWonderNews(void)
 {
 #if FREE_BATTLE_TOWER_E_READER == FALSE
     return &gSaveBlock1Ptr->mysteryGift.news;
+#else
+    return NULL;
 #endif //FREE_BATTLE_TOWER_E_READER
 }
 
@@ -44,6 +50,8 @@ struct WonderCard *GetSavedWonderCard(void)
 {
 #if FREE_BATTLE_TOWER_E_READER == FALSE
     return &gSaveBlock1Ptr->mysteryGift.card;
+#else
+    return NULL;
 #endif //FREE_BATTLE_TOWER_E_READER
 }
 
@@ -51,6 +59,8 @@ struct WonderCardMetadata *GetSavedWonderCardMetadata(void)
 {
 #if FREE_BATTLE_TOWER_E_READER == FALSE
     return &gSaveBlock1Ptr->mysteryGift.cardMetadata;
+#else
+    return NULL;
 #endif //FREE_BATTLE_TOWER_E_READER
 }
 
@@ -58,6 +68,8 @@ struct WonderNewsMetadata *GetSavedWonderNewsMetadata(void)
 {
 #if FREE_BATTLE_TOWER_E_READER == FALSE
     return &gSaveBlock1Ptr->mysteryGift.newsMetadata;
+#else
+    return NULL;
 #endif //FREE_BATTLE_TOWER_E_READER
 }
 
@@ -65,6 +77,8 @@ u16 *GetQuestionnaireWordsPtr(void)
 {
 #if FREE_BATTLE_TOWER_E_READER == FALSE
     return gSaveBlock1Ptr->mysteryGift.questionnaireWords;
+#else
+    return NULL;
 #endif //FREE_BATTLE_TOWER_E_READER
 }
 
@@ -103,6 +117,7 @@ bool32 ValidateSavedWonderNews(void)
 #endif //FREE_BATTLE_TOWER_E_READER
 }
 
+#if FREE_BATTLE_TOWER_E_READER == FALSE
 static bool32 ValidateWonderNews(const struct WonderNews *news)
 {
     if (news->id == 0)
@@ -110,6 +125,7 @@ static bool32 ValidateWonderNews(const struct WonderNews *news)
 
     return TRUE;
 }
+#endif //FREE_BATTLE_TOWER_E_READER
 
 bool32 IsSendingSavedWonderNewsAllowed(void)
 {
@@ -132,13 +148,13 @@ static void ClearSavedWonderNews(void)
 #endif //FREE_BATTLE_TOWER_E_READER
 }
 
+#if FREE_BATTLE_TOWER_E_READER == FALSE
 static void ClearSavedWonderNewsMetadata(void)
 {
-#if FREE_BATTLE_TOWER_E_READER == FALSE
     CpuFill32(0, GetSavedWonderNewsMetadata(), sizeof(gSaveBlock1Ptr->mysteryGift.newsMetadata));
     WonderNews_Reset();
-#endif //FREE_BATTLE_TOWER_E_READER
 }
+#endif //FREE_BATTLE_TOWER_E_READER
 
 bool32 IsWonderNewsSameAsSaved(const u8 *news)
 {
@@ -207,6 +223,7 @@ bool32 ValidateSavedWonderCard(void)
 #endif //FREE_BATTLE_TOWER_E_READER
 }
 
+#if FREE_BATTLE_TOWER_E_READER == FALSE
 static bool32 ValidateWonderCard(const struct WonderCard *card)
 {
     if (card->flagId == 0)
@@ -224,6 +241,7 @@ static bool32 ValidateWonderCard(const struct WonderCard *card)
 
     return TRUE;
 }
+#endif //FREE_BATTLE_TOWER_E_READER
 
 bool32 IsSendingSavedWonderCardAllowed(void)
 {
@@ -238,21 +256,19 @@ bool32 IsSendingSavedWonderCardAllowed(void)
 #endif //FREE_BATTLE_TOWER_E_READER
 }
 
+#if FREE_BATTLE_TOWER_E_READER == FALSE
 static void ClearSavedWonderCard(void)
 {
-#if FREE_BATTLE_TOWER_E_READER == FALSE
     CpuFill32(0, &gSaveBlock1Ptr->mysteryGift.card, sizeof(gSaveBlock1Ptr->mysteryGift.card));
     gSaveBlock1Ptr->mysteryGift.cardCrc = 0;
-#endif //FREE_BATTLE_TOWER_E_READER
 }
 
 static void ClearSavedWonderCardMetadata(void)
 {
-#if FREE_BATTLE_TOWER_E_READER == FALSE
     CpuFill32(0, GetSavedWonderCardMetadata(), sizeof(gSaveBlock1Ptr->mysteryGift.cardMetadata));
     gSaveBlock1Ptr->mysteryGift.cardMetadataCrc = 0;
-#endif //FREE_BATTLE_TOWER_E_READER
 }
+#endif //FREE_BATTLE_TOWER_E_READER
 
 u16 GetWonderCardFlagID(void)
 {
@@ -342,6 +358,7 @@ static bool32 IsStampInMetadata(const struct WonderCardMetadata *metadata, const
     return FALSE;
 }
 
+#if FREE_BATTLE_TOWER_E_READER == FALSE
 static bool32 ValidateStamp(const u16 *stamp)
 {
     if (stamp[STAMP_ID] == 0)
@@ -359,16 +376,13 @@ static int GetNumStampsInSavedCard(void)
     if (!ValidateSavedWonderCard())
         return 0;
 
-#if FREE_BATTLE_TOWER_E_READER == FALSE
     card = &gSaveBlock1Ptr->mysteryGift.card;
     if (card->type != CARD_TYPE_STAMP)
         return 0;
 
     return GetNumStampsInMetadata(&gSaveBlock1Ptr->mysteryGift.cardMetadata, card->maxStamps);
-#else
-    return 0;
-#endif //FREE_BATTLE_TOWER_E_READER
 }
+#endif //FREE_BATTLE_TOWER_E_READER
 
 bool32 MysteryGift_TrySaveStamp(const u16 *stamp)
 {
@@ -543,9 +557,9 @@ u16 MysteryGift_GetCardStatFromLinkData(const struct MysteryGiftLinkGameData *da
     }
 }
 
+#if FREE_BATTLE_TOWER_E_READER == FALSE
 static void IncrementCardStat(u32 statType)
 {
-#if FREE_BATTLE_TOWER_E_READER == FALSE
     struct WonderCard *card = &gSaveBlock1Ptr->mysteryGift.card;
     if (card->type == CARD_TYPE_LINK_STAT)
     {
@@ -575,8 +589,8 @@ static void IncrementCardStat(u32 statType)
             *stat = MAX_WONDER_CARD_STAT;
         }
     }
-#endif //FREE_BATTLE_TOWER_E_READER
 }
+#endif //FREE_BATTLE_TOWER_E_READER
 
 u16 MysteryGift_GetCardStat(u32 stat)
 {
@@ -690,11 +704,10 @@ void MysteryGift_TryIncrementStat(u32 stat, u32 trainerId)
 #endif //FREE_BATTLE_TOWER_E_READER
 }
 
+#if FREE_BATTLE_TOWER_E_READER == FALSE
 static void ClearSavedTrainerIds(void)
 {
-#if FREE_BATTLE_TOWER_E_READER == FALSE
     CpuFill32(0, gSaveBlock1Ptr->mysteryGift.trainerIds, sizeof(gSaveBlock1Ptr->mysteryGift.trainerIds));
-#endif //FREE_BATTLE_TOWER_E_READER
 }
 
 // Returns TRUE if it's a new trainer id, FALSE if an existing one.
@@ -734,3 +747,4 @@ static void IncrementCardStatForNewTrainer(u32 stat, u32 trainerId, u32 *trainer
     if (RecordTrainerId(trainerId, trainerIds, size))
         IncrementCardStat(stat);
 }
+#endif //FREE_BATTLE_TOWER_E_READER
