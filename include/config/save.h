@@ -9,17 +9,18 @@
 #define FREE_UNION_ROOM_CHAT                FALSE   // Frees up union room chat (212 bytes).
 #define FREE_ENIGMA_BERRY                   FALSE   // Frees up E-Reader Enigma Berry data (52 bytes).
 #define FREE_LINK_BATTLE_RECORDS            FALSE   // Frees up link battle record data (88 bytes).
+#define FREE_MYSTERY_GIFT                   FALSE   // Frees up Mystery Gift data (876 bytes). WARNING THIS HAS BEEN SHOWN TO BREAK THE POKÉ MARTS' QUESTIONNAIRE
                                             // saveblock1 total: 1846 bytes
 //free saveblock 2 defines
-#define FREE_BATTLE_TOWER_E_READER          FALSE   // Frees up Battle Tower E-Reader data (188 bytes). WARNING THIS HAS BEEN SHOWN TO BREAK THE POKÉ MARTS' QUESTIONNAIRE
+#define FREE_BATTLE_TOWER_E_READER          FALSE   // Frees up Battle Tower E-Reader data (188 bytes).
 #define FREE_POKEMON_JUMP                   FALSE   // Frees up Pokémon Jump data (16 bytes).
 #define FREE_RECORD_MIXING_HALL_RECORDS     FALSE   // Frees up hall records for record mixing (1032 bytes).
                                         // saveblock2 total: 1236 bytes
 
                                         //grand total: 3082
 
-#if (FREE_MYSTERY_EVENT_BUFFERS == TRUE) && (FREE_BATTLE_TOWER_E_READER == FALSE)
-#error "FREE_BATTLE_TOWER_E_READER must be enabled for FREE_MYSTERY_EVENT_BUFFERS to work"
-#endif
+//#if (FREE_MYSTERY_EVENT_BUFFERS == TRUE) && (FREE_BATTLE_TOWER_E_READER == FALSE)
+//#error "FREE_BATTLE_TOWER_E_READER must be enabled for FREE_MYSTERY_EVENT_BUFFERS to work"
+//#endif
 
-#endif // GUARD_CONFIG_DECAP_H
+#endif // GUARD_CONFIG_SAVE_H
