@@ -18,4 +18,8 @@
 
                                         //grand total: 3082
 
+#if (FREE_MYSTERY_EVENT_BUFFERS == FALSE) && (FREE_BATTLE_TOWER_E_READER == TRUE)
+#error "FREE_MYSTERY_EVENT_BUFFERS must be enabled for FREE_BATTLE_TOWER_E_READER to work"
+#endif
+
 #endif // GUARD_CONFIG_DECAP_H
