@@ -7,6 +7,6 @@
 
 // FALSE if this this version of Expansion is not a tagged commit, i.e.
 // it contains unreleased changes.
-#define EXPANSION_TAGGED_RELEASE TRUE
+#define EXPANSION_TAGGED_RELEASE FALSE
 
 #endif
