@@ -11574,10 +11574,10 @@ const u8 gMonFootprint_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mar
 #endif //P_GIGANTAMAX_FORMS
 
 #if P_GEN_9_CROSS_EVOS
-    // const u32 gMonFrontPic_Archaludon[] = INCBIN_U32("graphics/pokemon/archaludon/front.4bpp.lz");
-    // const u32 gMonPalette_Archaludon[] = INCBIN_U32("graphics/pokemon/archaludon/normal.gbapal.lz");
-    // const u32 gMonBackPic_Archaludon[] = INCBIN_U32("graphics/pokemon/archaludon/back.4bpp.lz");
-    // const u32 gMonShinyPalette_Archaludon[] = INCBIN_U32("graphics/pokemon/archaludon/shiny.gbapal.lz");
+    const u32 gMonFrontPic_Archaludon[] = INCBIN_U32("graphics/pokemon/archaludon/front.4bpp.lz");
+    const u32 gMonPalette_Archaludon[] = INCBIN_U32("graphics/pokemon/archaludon/normal.gbapal.lz");
+    const u32 gMonBackPic_Archaludon[] = INCBIN_U32("graphics/pokemon/archaludon/back.4bpp.lz");
+    const u32 gMonShinyPalette_Archaludon[] = INCBIN_U32("graphics/pokemon/archaludon/shiny.gbapal.lz");
     // const u8 gMonIcon_Archaludon[] = INCBIN_U8("graphics/pokemon/archaludon/icon.4bpp");
 #if P_FOOTPRINTS
     // const u8 gMonFootprint_Archaludon[] = INCBIN_U8("graphics/pokemon/archaludon/footprint.1bpp");
