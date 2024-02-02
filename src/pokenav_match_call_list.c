@@ -490,6 +490,7 @@ static bool32 UNUSED HasRematchEntry(void)
         }
     }
 #endif //FREE_MATCH_CALL
+
     return FALSE;
 }
 

@@ -1680,7 +1680,7 @@ static bool32 IsRematchForbidden(s32 rematchTableId)
 static void SetRematchIdForTrainer(const struct RematchTrainer *table, u32 tableId)
 {
     s32 i;
-    
+
 #if FREE_MATCH_CALL == FALSE
     for (i = 1; i < REMATCHES_COUNT; i++)
     {
@@ -1745,7 +1745,7 @@ void UpdateRematchIfDefeated(s32 rematchTableId)
 static bool32 DoesSomeoneWantRematchIn_(const struct RematchTrainer *table, u16 mapGroup, u16 mapNum)
 {
     s32 i;
-    
+
 #if FREE_MATCH_CALL == FALSE
     for (i = 0; i < REMATCH_TABLE_ENTRIES; i++)
     {
@@ -1753,6 +1753,7 @@ static bool32 DoesSomeoneWantRematchIn_(const struct RematchTrainer *table, u16 
             return TRUE;
     }
 #endif //FREE_MATCH_CALL
+
     return FALSE;
 }
 
@@ -1781,6 +1782,7 @@ static bool8 IsFirstTrainerIdReadyForRematch(const struct RematchTrainer *table,
     if (gSaveBlock1Ptr->trainerRematches[tableId] == 0)
         return FALSE;
 #endif //FREE_MATCH_CALL
+
     return TRUE;
 }
 
@@ -1796,6 +1798,7 @@ static bool8 IsTrainerReadyForRematch_(const struct RematchTrainer *table, u16 t
     if (gSaveBlock1Ptr->trainerRematches[tableId] == 0)
         return FALSE;
 #endif //FREE_MATCH_CALL
+
     return TRUE;
 }
 

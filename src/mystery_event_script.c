@@ -260,6 +260,7 @@ bool8 MEScrCmd_setenigmaberry(struct ScriptContext *ctx)
     else
         ctx->mStatus = MEVENT_STATUS_LOAD_ERROR;
 #endif //FREE_ENIGMA_BERRY
+
     return FALSE;
 }
 

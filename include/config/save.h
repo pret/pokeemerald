@@ -15,7 +15,7 @@
 #define FREE_POKEMON_JUMP                   FALSE   //frees up pokemon jump data. 16 bytes
 #define FREE_RECORD_MIXING_HALL_RECORDS     FALSE   //frees up hall records for record mixing. 1032 bytes
                                         // saveblock2 total: 1236 bytes
-                                        
+
                                         //grand total: 3082
 
 #endif // GUARD_CONFIG_DECAP_H

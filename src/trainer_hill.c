@@ -527,6 +527,7 @@ static void TrainerHillGetChallengeStatus(void)
 static void BufferChallengeTime(void)
 {
     s32 total, minutes, secondsWhole, secondsFraction;
+
 #if FREE_TRAINER_HILL == FALSE
     total = gSaveBlock1Ptr->trainerHill.timer;
     if (total >= HILL_MAX_TIME)
@@ -608,6 +609,7 @@ void PrintOnTrainerHillRecordsWindow(void)
 {
     s32 i, x, y;
     u32 total, minutes, secondsWhole, secondsFraction;
+
 #if FREE_TRAINER_HILL == FALSE
     SetUpDataStruct();
     FillWindowPixelBuffer(0, PIXEL_FILL(0));

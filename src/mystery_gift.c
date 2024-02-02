@@ -260,7 +260,7 @@ u16 GetWonderCardFlagID(void)
     if (ValidateSavedWonderCard())
         return gSaveBlock1Ptr->mysteryGift.card.flagId;
 #endif //FREE_BATTLE_TOWER_E_READER
-    
+
     return 0;
 }
 
@@ -393,6 +393,7 @@ bool32 MysteryGift_TrySaveStamp(const u16 *stamp)
         }
     }
 #endif //FREE_BATTLE_TOWER_E_READER
+
     return FALSE;
 }
 
@@ -628,6 +629,7 @@ u16 MysteryGift_GetCardStat(u32 stat)
     }
     }
 #endif //FREE_BATTLE_TOWER_E_READER
+
     AGB_ASSERT(0);
     return 0;
 }
