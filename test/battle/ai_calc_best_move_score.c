@@ -61,7 +61,6 @@ AI_SINGLE_BATTLE_TEST("AI will correctly predict what move the opposing mon goin
     PARAMETRIZE { move = MOVE_HOWL; }
     PARAMETRIZE { move = MOVE_CALM_MIND; }
 
-    KNOWN_FAILING;
     GIVEN {
         ASSUME(gMovesInfo[MOVE_SKY_UPPERCUT].power == 85);
         ASSUME(gMovesInfo[MOVE_HOWL].effect == EFFECT_ATTACK_UP_USER_ALLY);
