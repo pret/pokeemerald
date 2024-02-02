@@ -4341,7 +4341,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_NONE,
         PALETTES(Archaludon),
-        // ICON(Archaludon, 0),
+        //ICON(Archaludon, 0),
         //FOOTPRINT(Archaludon)
         LEARNSETS(Archaludon),
     },

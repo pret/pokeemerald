@@ -5476,7 +5476,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_NONE,
         PALETTES(GougingFire),
-        // ICON(GougingFire, 0),
+        //ICON(GougingFire, 0),
         //FOOTPRINT(GougingFire)
         LEARNSETS(GougingFire),
     },
@@ -5526,7 +5526,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_NONE,
         PALETTES(RagingBolt),
-        // ICON(RagingBolt, 0),
+        //ICON(RagingBolt, 0),
         //FOOTPRINT(RagingBolt)
         LEARNSETS(RagingBolt),
     },
@@ -5575,7 +5575,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_NONE,
         PALETTES(IronBoulder),
-        // ICON(IronBoulder, 0),
+        //ICON(IronBoulder, 0),
         //FOOTPRINT(IronBoulder)
         LEARNSETS(IronBoulder),
     },
@@ -5625,7 +5625,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_NONE,
         PALETTES(IronCrown),
-        // ICON(IronCrown, 0),
+        //ICON(IronCrown, 0),
         //FOOTPRINT(IronCrown)
         LEARNSETS(IronCrown),
     },
