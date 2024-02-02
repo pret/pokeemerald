@@ -8,7 +8,7 @@
 #define FREE_MATCH_CALL                     FALSE   // Frees up match call and rematch data. (104 bytes).
 #define FREE_UNION_ROOM_CHAT                FALSE   // Frees up union room chat (212 bytes).
 #define FREE_ENIGMA_BERRY                   FALSE   // Frees up E-Reader Enigma Berry data (52 bytes).
-#define FREE_LINK_BATTLE_RECORDS            FALSE   //frees link battle record data. 88 bytes
+#define FREE_LINK_BATTLE_RECORDS            FALSE   // Frees up link battle record data (88 bytes).
                                             // saveblock1 total: 1846 bytes
 //free saveblock 2 defines
 #define FREE_BATTLE_TOWER_E_READER          FALSE   //frees up battle tower e reader trainer data. 188 bytes.        WARNING THIS HAS BEEN SHOWN TO BREAK THE POKÉ MARTS' QUESTIONNAIRE
