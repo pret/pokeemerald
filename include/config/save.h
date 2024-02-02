@@ -13,7 +13,7 @@
 //free saveblock 2 defines
 #define FREE_BATTLE_TOWER_E_READER          FALSE   //frees up battle tower e reader trainer data. 188 bytes.        WARNING THIS HAS BEEN SHOWN TO BREAK THE POKÉ MARTS' QUESTIONNAIRE
 #define FREE_POKEMON_JUMP                   FALSE   // Frees up Pokémon Jump data (16 bytes).
-#define FREE_RECORD_MIXING_HALL_RECORDS     FALSE   //frees up hall records for record mixing. 1032 bytes
+#define FREE_RECORD_MIXING_HALL_RECORDS     FALSE   // Frees up hall records for record mixing (1032 bytes).
                                         // saveblock2 total: 1236 bytes
 
                                         //grand total: 3082
