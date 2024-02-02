@@ -842,22 +842,22 @@ static bool32 MatchCall_IsRematchable_NPC(match_call_t matchCall)
 
 static bool32 MatchCall_IsRematchable_Trainer(match_call_t matchCall)
 {
-    #ifndef FREE_MATCH_CALL
+#if FREE_MATCH_CALL == FALSE
     if (matchCall.trainer->rematchTableIdx >= REMATCH_ELITE_FOUR_ENTRIES)
         return FALSE;
     return gSaveBlock1Ptr->trainerRematches[matchCall.trainer->rematchTableIdx] ? TRUE : FALSE;
-    #else
+#else
     return FALSE;
-    #endif
+#endif //FREE_MATCH_CALL
 }
 
 static bool32 MatchCall_IsRematchable_Wally(match_call_t matchCall)
 {
-    #ifndef FREE_MATCH_CALL
+#if FREE_MATCH_CALL == FALSE
     return gSaveBlock1Ptr->trainerRematches[matchCall.wally->rematchTableIdx] ? TRUE : FALSE;
-    #else
+#else
     return FALSE;
-    #endif
+#endif //FREE_MATCH_CALL
 }
 
 static bool32 MatchCall_IsRematchable_Rival(match_call_t matchCall)
@@ -1012,7 +1012,7 @@ static void MatchCall_BufferCallMessageText(const match_call_text_data_t *textDa
 
 static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_data_t *textData, u16 idx, u8 *dest)
 {
-    #ifndef FREE_MATCH_CALL
+#if FREE_MATCH_CALL == FALSE
     u32 i;
     for (i = 0; textData[i].text != NULL; i++)
     {
@@ -1046,7 +1046,7 @@ static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_d
 
         StringExpandPlaceholders(dest, textData[i].text);
     }
-    #endif
+#endif //FREE_MATCH_CALL
 }
 
 void MatchCall_GetNameAndDesc(u32 idx, const u8 **desc, const u8 **name)

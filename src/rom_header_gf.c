@@ -33,9 +33,9 @@ struct GFRomHeader
     u32 flagsOffset;
     u32 varsOffset;
     u32 pokedexOffset;
-    #ifndef FREE_EXTRA_SEEN_FLAGS
+#if FREE_EXTRA_SEEN_FLAGS == FALSE
     u32 seen1Offset;
-    #endif
+#endif //FREE_EXTRA_SEEN_FLAGS
     u32 seen2Offset;
     u32 pokedexVar;
     u32 pokedexFlag;
@@ -89,10 +89,10 @@ struct GFRomHeader
     u8 pcItemsCount;
     u32 pcItemsOffset;
     u32 giftRibbonsOffset;
-    #ifndef FREE_ENIGMA_BERRY
+#if FREE_ENIGMA_BERRY == FALSE
     u32 enigmaBerryOffset;
     u32 enigmaBerrySize;
-    #endif
+#endif //FREE_ENIGMA_BERRY
     const u8 *moveDescriptions;
     u32 unk20;
 };
@@ -172,10 +172,10 @@ static const struct GFRomHeader sGFRomHeader = {
     .pcItemsCount = PC_ITEMS_COUNT,
     .pcItemsOffset = offsetof(struct SaveBlock1, pcItems),
     .giftRibbonsOffset = offsetof(struct SaveBlock1, giftRibbons),
-    #ifndef FREE_ENIGMA_BERRY
+#if FREE_ENIGMA_BERRY == FALSE
     .enigmaBerryOffset = offsetof(struct SaveBlock1, enigmaBerry),
     .enigmaBerrySize = sizeof(struct EnigmaBerry),
-    #endif
+#endif //FREE_ENIGMA_BERRY
     .moveDescriptions = NULL,
     .unk20 = 0x00000000, // 0xFFFFFFFF in FRLG
 };

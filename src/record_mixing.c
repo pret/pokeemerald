@@ -1200,7 +1200,7 @@ static void ReceiveApprenticeData(struct Apprentice *records, size_t recordSize,
 
 static void GetNewHallRecords(struct RecordMixingHallRecords *dst, void *records, size_t recordSize, u32 multiplayerId, s32 linkPlayerCount)
 {
-    #ifndef FREE_RECORD_MIXING_HALL_RECORDS
+#if FREE_RECORD_MIXING_HALL_RECORDS == FALSE
     s32 i, j, k, l;
     s32 repeatTrainers;
 
@@ -1276,7 +1276,7 @@ static void GetNewHallRecords(struct RecordMixingHallRecords *dst, void *records
                 dst->hallRecords2P[j][k + HALL_RECORDS_COUNT] = sPartnerHallRecords[k]->twoPlayers[j];
         }
     }
-    #endif
+#endif //FREE_RECORD_MIXING_HALL_RECORDS
 }
 
 static void FillWinStreakRecords1P(struct RankingHall1P *playerRecords, struct RankingHall1P *mixRecords)
@@ -1337,7 +1337,7 @@ static void FillWinStreakRecords2P(struct RankingHall2P *playerRecords, struct R
 
 static void SaveHighestWinStreakRecords(struct RecordMixingHallRecords *mixHallRecords)
 {
-    #ifndef FREE_RECORD_MIXING_HALL_RECORDS
+#if FREE_RECORD_MIXING_HALL_RECORDS == FALSE
     s32 i, j;
 
     for (i = 0; i < HALL_FACILITIES_COUNT; i++)
@@ -1348,12 +1348,12 @@ static void SaveHighestWinStreakRecords(struct RecordMixingHallRecords *mixHallR
 
     for (j = 0; j < FRONTIER_LVL_MODE_COUNT; j++)
         FillWinStreakRecords2P(gSaveBlock2Ptr->hallRecords2P[j], mixHallRecords->hallRecords2P[j]);
-    #endif
+#endif //FREE_RECORD_MIXING_HALL_RECORDS
 }
 
 static void ReceiveRankingHallRecords(struct PlayerHallRecords *records, size_t recordSize, u32 multiplayerId)
 {
-    #ifndef FREE_RECORD_MIXING_HALL_RECORDS
+#if FREE_RECORD_MIXING_HALL_RECORDS == FALSE
     u8 linkPlayerCount = GetLinkPlayerCount();
     struct RecordMixingHallRecords *mixHallRecords = AllocZeroed(sizeof(*mixHallRecords));
 
@@ -1361,7 +1361,7 @@ static void ReceiveRankingHallRecords(struct PlayerHallRecords *records, size_t 
     SaveHighestWinStreakRecords(mixHallRecords);
 
     Free(mixHallRecords);
-    #endif
+#endif //FREE_RECORD_MIXING_HALL_RECORDS
 }
 
 static void GetRecordMixingDaycareMail(struct RecordMixingDaycareMail *dst)

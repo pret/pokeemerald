@@ -3995,11 +3995,11 @@ u8 *UseStatIncreaseItem(u16 itemId)
         if (gMain.inBattle)
             itemEffect = gEnigmaBerries[gBattlerInMenuId].itemEffect;
         else
-            #ifndef FREE_ENIGMA_BERRY
+        #if FREE_ENIGMA_BERRY == FALSE
             itemEffect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
-            #else
+        #else
             itemEffect = 0;
-            #endif
+        #endif //FREE_ENIGMA_BERRY
     }
     else
     {
@@ -4104,11 +4104,11 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
     }
 
     if (heldItem == ITEM_ENIGMA_BERRY_E_READER)
-        #ifndef FREE_ENIGMA_BERRY
+    #if FREE_ENIGMA_BERRY == FALSE
         holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
-        #else
+    #else
         holdEffect = 0;
-        #endif
+    #endif //FREE_ENIGMA_BERRY
     else
         holdEffect = ItemId_GetHoldEffect(heldItem);
 
@@ -4786,11 +4786,11 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
         if (gMain.inBattle)
             holdEffect = gEnigmaBerries[0].holdEffect;
         else
-            #ifndef FREE_ENIGMA_BERRY
+        #if FREE_ENIGMA_BERRY == FALSE
             holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
-            #else
+        #else
             holdEffect = 0;
-            #endif
+        #endif //FREE_ENIGMA_BERRY
     }
     else
     {

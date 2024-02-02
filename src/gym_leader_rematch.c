@@ -46,7 +46,7 @@ static void UpdateGymLeaderRematchFromArray(const u16 *data, size_t size, u32 ma
     s32 lowestRematchIndex = 5;
     u32 i;
     s32 rematchIndex;
-    #ifndef FREE_MATCH_CALL
+#if FREE_MATCH_CALL == FALSE
     for (i = 0; i < size; i++)
     {
         if (!gSaveBlock1Ptr->trainerRematches[data[i]])
@@ -90,7 +90,7 @@ static void UpdateGymLeaderRematchFromArray(const u16 *data, size_t size, u32 ma
             }
         }
     }
-    #endif
+#endif //FREE_MATCH_CALL
 }
 
 static s32 GetRematchIndex(u32 trainerIdx)

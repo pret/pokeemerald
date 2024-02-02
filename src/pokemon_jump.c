@@ -4334,14 +4334,14 @@ static bool32 RecvPacket_MemberStateToMember(struct PokemonJump_Player *player, 
 
 static struct PokemonJumpRecords *GetPokeJumpRecords(void)
 {
-    #ifndef FREE_POKEMON_JUMP
+#if FREE_POKEMON_JUMP == FALSE
     return &gSaveBlock2Ptr->pokeJump;
-    #endif
+#endif //FREE_POKEMON_JUMP
 }
 
 void ResetPokemonJumpRecords(void)
 {
-    #ifndef FREE_POKEMON_JUMP
+#if FREE_POKEMON_JUMP == FALSE
     struct PokemonJumpRecords *records = GetPokeJumpRecords();
     records->jumpsInRow = 0;
     records->bestJumpScore = 0;
@@ -4349,12 +4349,12 @@ void ResetPokemonJumpRecords(void)
     records->gamesWithMaxPlayers = 0;
     records->unused2 = 0;
     records->unused1 = 0;
-    #endif
+#endif //FREE_POKEMON_JUMP
 }
 
 static bool32 TryUpdateRecords(u32 jumpScore, u16 jumpsInRow, u16 excellentsInRow)
 {
-    #ifndef FREE_POKEMON_JUMP
+#if FREE_POKEMON_JUMP == FALSE
     struct PokemonJumpRecords *records = GetPokeJumpRecords();
     bool32 newRecord = FALSE;
 
@@ -4366,18 +4366,18 @@ static bool32 TryUpdateRecords(u32 jumpScore, u16 jumpsInRow, u16 excellentsInRo
         records->excellentsInRow = excellentsInRow, newRecord = TRUE;
 
     return newRecord;
-    #else
+#else
     return FALSE;
-    #endif
+#endif //FREE_POKEMON_JUMP
 }
 
 static void IncrementGamesWithMaxPlayers(void)
 {
-    #ifndef FREE_POKEMON_JUMP
+#if FREE_POKEMON_JUMP == FALSE
     struct PokemonJumpRecords *records = GetPokeJumpRecords();
     if (records->gamesWithMaxPlayers < 9999)
         records->gamesWithMaxPlayers++;
-    #endif
+#endif //FREE_POKEMON_JUMP
 }
 
 void ShowPokemonJumpRecords(void)
@@ -4457,7 +4457,7 @@ static void Task_ShowPokemonJumpRecords(u8 taskId)
 
 static void PrintRecordsText(u16 windowId, int width)
 {
-    #ifndef FREE_POKEMON_JUMP
+#if FREE_POKEMON_JUMP == FALSE
     int i, x;
     int recordNums[3];
     struct PokemonJumpRecords *records = GetPokeJumpRecords();
@@ -4478,7 +4478,7 @@ static void PrintRecordsText(u16 windowId, int width)
         AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar1, x, 25 + (i * 16), TEXT_SKIP_DRAW, NULL);
     }
     PutWindowTilemap(windowId);
-    #endif
+#endif //FREE_POKEMON_JUMP
 }
 
 static void TruncateToFirstWordOnly(u8 *str)
