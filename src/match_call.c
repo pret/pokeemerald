@@ -1462,6 +1462,8 @@ static bool32 TrainerIsEligibleForRematch(int matchCallId)
 {
 #if FREE_MATCH_CALL == FALSE
     return gSaveBlock1Ptr->trainerRematches[matchCallId] > 0;
+#else
+    return FALSE;
 #endif //FREE_MATCH_CALL
 }
 

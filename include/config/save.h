@@ -5,7 +5,7 @@
 #define FREE_EXTRA_SEEN_FLAGS               FALSE   // Free up unused Pokédex seen flags (52 bytes).
 #define FREE_TRAINER_HILL                   FALSE   //frees up trainer hill data. 28 bytes.                          WARNING THIS HAS BEEN SHOWN TO BREAK MULTI BATTLES
 #define FREE_MYSTERY_EVENT_BUFFERS          FALSE   //frees up mystery event and ramScript. roughly 1880 bytes       Needed by FREE_BATTLE_TOWER_E_READER
-#define FREE_MATCH_CALL                     FALSE   //frees up match call data. 104 bytes
+#define FREE_MATCH_CALL                     FALSE   // Frees up match call and rematch data. (104 bytes).
 #define FREE_UNION_ROOM_CHAT                FALSE   //frees up field unk3C88. 210 bytes
 #define FREE_ENIGMA_BERRY                   FALSE   //frees up enigma berry. 52 bytes
 #define FREE_LINK_BATTLE_RECORDS            FALSE   //frees link battle record data. 88 bytes
