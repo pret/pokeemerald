@@ -71,10 +71,14 @@ static void TrainerHillSetMode(void);
 static void SetUpDataStruct(void);
 static void FreeDataStruct(void);
 static void TrainerHillDummy(void);
+#if FREE_TRAINER_HILL == FALSE
 static void SetTimerValue(u32 *dst, u32 val);
 static u32 GetTimerValue(u32 *src);
+#endif //FREE_TRAINER_HILL
 static void SetTrainerHillMonLevel(struct Pokemon *mon, u8 level);
+#if FREE_TRAINER_HILL == FALSE
 static u16 GetPrizeItemId(void);
+#endif //FREE_TRAINER_HILL
 
 // const data
 #include "data/battle_frontier/trainer_hill.h"
@@ -279,7 +283,9 @@ void CallTrainerHillFunction(void)
 
 void ResetTrainerHillResults(void)
 {
+#if FREE_TRAINER_HILL == FALSE
     s32 i;
+#endif //FREE_TRAINER_HILL
 
     gSaveBlock2Ptr->frontier.savedGame = 0;
     gSaveBlock2Ptr->frontier.unk_EF9 = 0;
@@ -526,9 +532,9 @@ static void TrainerHillGetChallengeStatus(void)
 
 static void BufferChallengeTime(void)
 {
+#if FREE_TRAINER_HILL == FALSE
     s32 total, minutes, secondsWhole, secondsFraction;
 
-#if FREE_TRAINER_HILL == FALSE
     total = gSaveBlock1Ptr->trainerHill.timer;
     if (total >= HILL_MAX_TIME)
         total = HILL_MAX_TIME;
@@ -584,6 +590,8 @@ bool8 InTrainerHillChallenge(void)
         return TRUE;
     else
         return FALSE;
+#else
+    return FALSE;
 #endif //FREE_TRAINER_HILL
 }
 
@@ -607,10 +615,10 @@ static void TrainerHillDummy(void)
 
 void PrintOnTrainerHillRecordsWindow(void)
 {
+#if FREE_TRAINER_HILL == FALSE
     s32 i, x, y;
     u32 total, minutes, secondsWhole, secondsFraction;
 
-#if FREE_TRAINER_HILL == FALSE
     SetUpDataStruct();
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     x = GetStringCenterAlignXOffset(FONT_NORMAL, gText_TimeBoard, 0xD0);
@@ -644,6 +652,7 @@ void PrintOnTrainerHillRecordsWindow(void)
 
 // Leftover from Fire Red / Leaf Green as in these games,
 // the timer had to be xored by the encryption key in Sav2.
+#if FREE_TRAINER_HILL == FALSE
 static u32 GetTimerValue(u32 *src)
 {
     return *src;
@@ -653,6 +662,7 @@ static void SetTimerValue(u32 *dst, u32 val)
 {
     *dst = val;
 }
+#endif //FREE_TRAINER_HILL
 
 void LoadTrainerHillObjectEventTemplates(void)
 {
@@ -1027,6 +1037,7 @@ static void TrainerHillSetMode(void)
 }
 
 // Determines which prize list to use from the set of prize lists.
+#if FREE_TRAINER_HILL == FALSE
 static u8 GetPrizeListId(bool8 allowTMs)
 {
     u8 prizeListId, i, modBy;
@@ -1081,7 +1092,6 @@ static u16 GetPrizeItemId(void)
     else
         i = GetPrizeListId(FALSE);
 
-#if FREE_TRAINER_HILL == FALSE
     // 1 is added to Expert mode's prize list selection because otherwise it has the same prizes as Variety
     if (gSaveBlock1Ptr->trainerHill.mode == HILL_MODE_EXPERT)
         i = (i + 1) % NUM_TRAINER_HILL_PRIZE_LISTS;
@@ -1116,7 +1126,7 @@ static u16 GetPrizeItemId(void)
         id = 4; // ITEM_FLUFFY_TAIL
     else
         id = 5; // ITEM_GREAT_BALL
-#endif //FREE_TRAINER_HILL
 
     return prizeList[id];
 }
+#endif //FREE_TRAINER_HILL
