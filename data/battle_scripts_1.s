@@ -7983,6 +7983,49 @@ BattleScript_IntimidateInReverse:
 	call BattleScript_TryAdrenalineOrb
 	goto BattleScript_IntimidateLoopIncrement
 
+BattleScript_SupersweetSyrupActivates::
+	showabilitypopup BS_ATTACKER
+	pause B_WAIT_TIME_LONG
+	destroyabilitypopup
+	printstring STRINGID_SUPERSWEETAROMAWAFTS
+	waitmessage B_WAIT_TIME_LONG
+	setbyte gBattlerTarget, 0
+BattleScript_SupersweetSyrupLoop:
+	jumpifbyteequal gBattlerTarget, gBattlerAttacker, BattleScript_SupersweetSyrupLoopIncrement
+	jumpiftargetally BattleScript_SupersweetSyrupLoopIncrement
+	jumpifabsent BS_TARGET, BattleScript_SupersweetSyrupLoopIncrement
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_SupersweetSyrupLoopIncrement
+BattleScript_SupersweetSyrupEffect:
+	copybyte sBATTLER, gBattlerAttacker
+	setstatchanger STAT_EVASION, 1, TRUE
+	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | STAT_CHANGE_ALLOW_PTR, BattleScript_SupersweetSyrupLoopIncrement
+	setgraphicalstatchangevalues
+	jumpifability BS_TARGET, ABILITY_CONTRARY, BattleScript_SupersweetSyrupContrary
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatDownStringIds
+BattleScript_SupersweetSyrupEffect_WaitString:
+	waitmessage B_WAIT_TIME_LONG
+	copybyte sBATTLER, gBattlerTarget
+	call BattleScript_TryAdrenalineOrb
+BattleScript_SupersweetSyrupLoopIncrement:
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_SupersweetSyrupLoop
+BattleScript_SupersweetSyrupEnd:
+	copybyte sBATTLER, gBattlerAttacker
+	destroyabilitypopup
+	pause B_WAIT_TIME_MED
+	end3
+
+BattleScript_SupersweetSyrupContrary:
+	call BattleScript_AbilityPopUpTarget
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_SupersweetSyrupContrary_WontIncrease
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	goto BattleScript_SupersweetSyrupEffect_WaitString
+BattleScript_SupersweetSyrupContrary_WontIncrease:
+	printstring STRINGID_TARGETSTATWONTGOHIGHER
+	goto BattleScript_SupersweetSyrupEffect_WaitString
+
 BattleScript_DroughtActivates::
 	pause B_WAIT_TIME_SHORT
 	call BattleScript_AbilityPopUp

@@ -767,9 +767,8 @@ struct BattleStruct
     u8 timesGotHit[NUM_BATTLE_SIDES][PARTY_SIZE];
     u8 enduredDamage;
     u8 transformZeroToHero[NUM_BATTLE_SIDES];
-    u8 intrepidSwordBoost[NUM_BATTLE_SIDES];
-    u8 dauntlessShieldBoost[NUM_BATTLE_SIDES];
     u8 stickySyrupdBy[MAX_BATTLERS_COUNT];
+    u8 abilityActivated[NUM_BATTLE_SIDES];
 };
 
 // The palaceFlags member of struct BattleStruct contains 1 flag per move to indicate which moves the AI should consider,
