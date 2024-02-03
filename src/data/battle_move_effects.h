@@ -2229,4 +2229,11 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectUpperHand,
         .battleTvScore = 0, // TODO: Assign points
     },
+
+    [EFFECT_DRAGON_CHEER] =
+    {
+        .battleScript = BattleScript_EffectFocusEnergy,
+        .battleTvScore = 1,
+        .encourageEncore = TRUE,
+    },
 };

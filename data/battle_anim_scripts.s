@@ -17159,7 +17159,7 @@ Move_RAGING_BULL::
 	restorebg
 	waitbgfadein
 	end
-	
+
 @ Credits to Z-nogyroP. Simple anim that combines Force Palm + Fake Out
 Move_UPPER_HAND::
 	loadspritegfx ANIM_TAG_SHADOW_BALL
