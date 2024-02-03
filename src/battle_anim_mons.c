@@ -1025,8 +1025,8 @@ void InitSpriteDataForLinearTranslation(struct Sprite *sprite)
 {
     s16 x = (sprite->data[2] - sprite->data[1]) << 8;
     s16 y = (sprite->data[4] - sprite->data[3]) << 8;
-    sprite->data[1] = x / sprite->data[0];
-    sprite->data[2] = y / sprite->data[0];
+    sprite->data[1] = SAFE_DIV(x, sprite->data[0]);
+    sprite->data[2] = SAFE_DIV(y, sprite->data[0]);
     sprite->data[4] = 0;
     sprite->data[3] = 0;
 }
