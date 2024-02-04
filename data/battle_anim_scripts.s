@@ -9210,13 +9210,12 @@ Boomburst_Doubles:
 	goto Boomburst_Last
 
 Move_FAIRY_LOCK::
-	loadspritegfx ANIM_TAG_CHAIN_LINK @Chain Colour
-	loadspritegfx ANIM_TAG_FAIRY_LOCK_CHAINS @AnimTask is missing for Fairy Lock Chain
+	loadspritegfx ANIM_TAG_FAIRY_LOCK_CHAINS
 	setalpha 8, 8
 	monbg ANIM_ATK_PARTNER
 	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x0, 0x8, 0x6B1F
 	waitforvisualfinish
-	loopsewithpan SE_M_SCRATCH, SOUND_PAN_TARGET, 0x6, 0x4
+	loopsewithpan SE_M_SCRATCH, SOUND_PAN_TARGET, 0x6, 0x9
 	createvisualtask AnimTask_VoltTackleBolt, 0x5, 0x7
 	createvisualtask AnimTask_VoltTackleBolt, 0x5, 0x33
 	createvisualtask AnimTask_VoltTackleBolt, 0x5, 0x2
