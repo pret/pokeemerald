@@ -54,7 +54,8 @@ struct __attribute__((packed, aligned(2))) BattleMoveEffect
     const u8 *battleScript;
     u16 battleTvScore:3;
     u16 encourageEncore:1;
-    u16 flags:12; // coming soon...
+    u16 semiInvulnerableEffect:1;
+    u16 flags:11; // coming soon...
 };
 
 #define GET_MOVE_BATTLESCRIPT(move) gBattleMoveEffects[gMovesInfo[move].effect].battleScript
@@ -846,10 +847,10 @@ struct BattleScripting
     s32 bideDmg;
     u8 multihitString[6];
     bool8 expOnCatch;
-    u8 twoTurnsMoveStringId;
+    u8 unused;
     u8 animArg1;
     u8 animArg2;
-    u16 tripleKickPower;
+    u16 savedStringId;
     u8 moveendState;
     u8 savedStatChanger; // For further use, if attempting to change stat two times(ex. Moody)
     u8 shiftSwitched; // When the game tells you the next enemy's pokemon and you switch. Option for noobs but oh well.

@@ -72,6 +72,10 @@
 	.2byte \id
 	.endm
 
+	.macro printsavedstring
+	printstring 0
+	.endm
+
 	.macro printselectionstring id:req
 	.byte 0x11
 	.2byte \id
@@ -776,8 +780,21 @@
 	.byte 0x8b
 	.endm
 
-	.macro unused0x8C
+	.macro twoturnmoveschargestringandanimation
 	.byte 0x8c
+	.4byte 1f @animation then attack string
+	@default - attack string then animation
+	printsavedstring
+	waitmessage B_WAIT_TIME_LONG
+	attackanimation
+	waitanimation
+	goto 2f
+	1:
+	attackanimation
+	waitanimation
+	printsavedstring
+	waitmessage B_WAIT_TIME_LONG
+	2:
 	.endm
 
 	.macro setmultihitcounter value:req
@@ -1035,12 +1052,20 @@
 	.4byte \failInstr
 	.endm
 
-	.macro setsemiinvulnerablebit
+	.macro setsemiinvulnerablebit clear=FALSE
 	.byte 0xc5
+	.byte \clear
 	.endm
 
 	.macro clearsemiinvulnerablebit
+	setsemiinvulnerablebit TRUE
+	.endm
+
+	.macro jumpifweathercheckchargeeffects battler:req, checkChargeTurnEffects:req, jumpInstr:req
 	.byte 0xc6
+	.byte \battler
+	.byte \checkChargeTurnEffects
+	.4byte \jumpInstr
 	.endm
 
 	.macro setminimize
@@ -1334,13 +1359,6 @@
 	
 	.macro allyswitchfailchance jumpInstr:req
 	callnative BS_AllySwitchFailChance
-	.4byte \jumpInstr
-	.endm
-
-	.macro jumpifholdeffect battler:req, holdEffect:req, jumpInstr:req
-	callnative BS_JumpIfHoldEffect
-	.byte \battler
-	.2byte \holdEffect
 	.4byte \jumpInstr
 	.endm
 
@@ -2005,10 +2023,15 @@
 	.4byte \jumpInstr
 	.endm
 
-	.macro jumpifnoholdeffect battler:req, holdEffect:req, jumpInstr:req
-	various \battler, VARIOUS_JUMP_IF_NO_HOLD_EFFECT
+	.macro jumpifholdeffect battler:req, holdEffect:req, jumpInstr:req, equal=TRUE
+	various \battler, VARIOUS_JUMP_IF_HOLD_EFFECT
 	.byte \holdEffect
 	.4byte \jumpInstr
+	.byte \equal
+	.endm
+
+	.macro jumpifnoholdeffect battler:req, holdEffect:req, jumpInstr:req
+	jumpifholdeffect \battler, \holdEffect, \jumpInstr, FALSE
 	.endm
 
 	.macro infatuatewithbattler battler:req, infatuateWith:req

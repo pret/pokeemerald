@@ -3192,7 +3192,6 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
             gBattleMons[gBattlerAttacker].status2 &= ~STATUS2_DESTINY_BOND;
             gStatuses3[gBattlerAttacker] &= ~STATUS3_GRUDGE;
             gStatuses4[gBattlerAttacker] &= ~ STATUS4_GLAIVE_RUSH;
-            gBattleScripting.tripleKickPower = 0;
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_SKY_DROP:
@@ -11048,6 +11047,17 @@ bool32 MoveHasMoveEffectSelf(u32 move, u32 moveEffect)
 bool32 MoveHasMoveEffectSelfArg(u32 move, u32 moveEffect, u32 argument)
 {
     return (gMovesInfo[move].argument == argument) && MoveHasMoveEffectSelf(move, moveEffect);
+}
+
+bool32 MoveHasChargeTurnMoveEffect(u32 move)
+{
+    u8 i = 0;
+    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+    {
+        if (gMovesInfo[move].additionalEffects[i].onChargeTurnOnly)
+            return TRUE;
+    }
+    return FALSE;
 }
 
 bool8 CanMonParticipateInSkyBattle(struct Pokemon *mon)

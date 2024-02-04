@@ -225,6 +225,7 @@ bool32 MoveHasMoveEffect(u32 move, u32 moveEffect);
 bool32 MoveHasMoveEffectWithChance(u32 move, u32 moveEffect, u32 chance);
 bool32 MoveHasMoveEffectSelf(u32 move, u32 moveEffect);
 bool32 MoveHasMoveEffectSelfArg(u32 move, u32 moveEffect, u32 argument);
+bool32 MoveHasChargeTurnMoveEffect(u32 move);
 
 bool32 CanSleep(u32 battler);
 bool32 CanBePoisoned(u32 battlerAttacker, u32 battlerTarget);
