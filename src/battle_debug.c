@@ -764,6 +764,22 @@ static void PutMovesPointsText(struct BattleDebugMenu *data)
     Free(text);
 }
 
+static void CleanUpAiInfoWindow(u8 taskId)
+{
+    u32 i;
+    struct BattleDebugMenu *data = GetStructPtr(taskId);
+
+    FreeMonIconPalettes();
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    {
+        if (data->spriteIds.aiIconSpriteIds[i] != 0xFF)
+            FreeAndDestroyMonIconSprite(&gSprites[data->spriteIds.aiIconSpriteIds[i]]);
+    }
+    FreeAndDestroyMonPicSprite(data->aiMonSpriteId);
+    ClearWindowTilemap(data->aiMovesWindowId);
+    RemoveWindow(data->aiMovesWindowId);
+}
+
 static void Task_ShowAiPoints(u8 taskId)
 {
     u32 i, count;
@@ -784,6 +800,7 @@ static void Task_ShowAiPoints(u8 taskId)
             if (++data->aiBattlerId >= gBattlersCount)
                 data->aiBattlerId = 0;
         }
+        data->battlerId = data->aiBattlerId;
 
         LoadMonIconPalettes();
         for (count = 0, i = 0; i < MAX_BATTLERS_COUNT; i++)
@@ -822,7 +839,27 @@ static void Task_ShowAiPoints(u8 taskId)
         break;
     // Input
     case 2:
-        if (JOY_NEW(SELECT_BUTTON | B_BUTTON))
+        if (JOY_NEW(R_BUTTON) && IsDoubleBattle())
+        {
+            CleanUpAiInfoWindow(taskId);
+            do {
+                data->battlerId++;
+                data->battlerId %= gBattlersCount;
+            } while (!IsBattlerAlive(data->battlerId));
+            data->aiViewState = 0;
+        }
+        else if (JOY_NEW(L_BUTTON) && IsDoubleBattle())
+        {
+            CleanUpAiInfoWindow(taskId);
+            do {
+                if (data->battlerId == 0)
+                    data->battlerId = gBattlersCount - 1;
+                else
+                    data->battlerId--;
+            } while (!IsBattlerAlive(data->battlerId) || !BattlerHasAi(data->battlerId));
+            data->aiViewState = 0;
+        }
+        else if (JOY_NEW(SELECT_BUTTON | B_BUTTON))
         {
             SwitchToDebugView(taskId);
             HideBg(1);
@@ -1093,19 +1130,7 @@ static void SwitchToDebugViewFromAiParty(u8 taskId)
 
 static void SwitchToDebugView(u8 taskId)
 {
-    u32 i;
-    struct BattleDebugMenu *data = GetStructPtr(taskId);
-
-    FreeMonIconPalettes();
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-    {
-        if (data->spriteIds.aiIconSpriteIds[i] != 0xFF)
-            FreeAndDestroyMonIconSprite(&gSprites[data->spriteIds.aiIconSpriteIds[i]]);
-    }
-    FreeAndDestroyMonPicSprite(data->aiMonSpriteId);
-    ClearWindowTilemap(data->aiMovesWindowId);
-    RemoveWindow(data->aiMovesWindowId);
-
+    CleanUpAiInfoWindow(taskId);
     gTasks[taskId].func = Task_DebugMenuProcessInput;
 }
 
