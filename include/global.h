@@ -6,6 +6,7 @@
 #include "config.h" // we need to define config before gba headers as print stuff needs the functions nulled before defines.
 #include "gba/gba.h"
 #include "fpmath.h"
+#include "metaprogram.h"
 #include "constants/global.h"
 #include "constants/flags.h"
 #include "constants/vars.h"
@@ -122,19 +123,6 @@
 #define NUM_DEX_FLAG_BYTES ROUND_BITS_TO_BYTES(POKEMON_SLOTS_NUMBER)
 #define NUM_FLAG_BYTES ROUND_BITS_TO_BYTES(FLAGS_COUNT)
 #define NUM_TRENDY_SAYING_BYTES ROUND_BITS_TO_BYTES(NUM_TRENDY_SAYINGS)
-
-// Calls m0/m1/.../m8 depending on how many arguments are passed.
-#define VARARG_8(m, ...) CAT(m, NARG_8(__VA_ARGS__))(__VA_ARGS__)
-
-// This returns the number of arguments passed to it (up to 8).
-#define NARG_8(...) NARG_8_(_, ##__VA_ARGS__, 8, 7, 6, 5, 4, 3, 2, 1, 0)
-#define NARG_8_(_, a, b, c, d, e, f, g, h, N, ...) N
-
-#define CAT(a, b) CAT_(a, b)
-#define CAT_(a, b) a ## b
-
-#define STR(...) STR_(__VA_ARGS__)
-#define STR_(...) #__VA_ARGS__
 
 // Converts a string to a compound literal, essentially making it a pointer to const u8
 #define COMPOUND_STRING(str) (const u8[]) _(str)

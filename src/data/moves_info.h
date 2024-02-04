@@ -9,9 +9,8 @@
 
 // The Gen. 4+ contest data comes from urpg's contest movedex.
 
-#define FIRST(a, ...) a
 #if B_EXPANDED_MOVE_NAMES == TRUE
-#define HANDLE_EXPANDED_MOVE_NAME(_name, ...) COMPOUND_STRING(FIRST(__VA_OPT__(__VA_ARGS__, ) _name))
+#define HANDLE_EXPANDED_MOVE_NAME(_name, ...) COMPOUND_STRING(DEFAULT(_name, __VA_ARGS__))
 #else
 #define HANDLE_EXPANDED_MOVE_NAME(_name, ...) COMPOUND_STRING(_name)
 #endif
