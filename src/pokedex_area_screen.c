@@ -107,9 +107,11 @@ static void CreateAreaUnknownSprites(void);
 static void Task_HandlePokedexAreaScreenInput(u8);
 static void ResetPokedexAreaMapBg(void);
 static void DestroyAreaScreenSprites(void);
+static void LoadHGSSScreenSelectBarSubmenu(void);
 
 static const u32 sAreaGlow_Pal[] = INCBIN_U32("graphics/pokedex/area_glow.gbapal");
 static const u32 sAreaGlow_Gfx[] = INCBIN_U32("graphics/pokedex/area_glow.4bpp.lz");
+static const u32 sPokedexPlusHGSS_ScreenSelectBarSubmenu_Tilemap[] = INCBIN_U32("graphics/pokedex/hgss/SelectBar.bin.lz");
 
 static const u16 sSpeciesHiddenFromAreaScreen[] = { SPECIES_WYNAUT };
 
@@ -639,6 +641,9 @@ static void Task_ShowPokedexAreaScreen(u8 taskId)
         BeginNormalPaletteFade(PALETTES_ALL & ~(0x14), 0, 16, 0, RGB_BLACK);
         break;
     case 10:
+        if (POKEDEX_PLUS_HGSS)
+            LoadHGSSScreenSelectBarSubmenu();
+
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_ALL);
         StartAreaGlow();
         ShowBg(2);
@@ -805,4 +810,10 @@ static void CreateAreaUnknownSprites(void)
             }
         }
     }
+}
+
+static void LoadHGSSScreenSelectBarSubmenu(void)
+{
+    CopyToBgTilemapBuffer(1, sPokedexPlusHGSS_ScreenSelectBarSubmenu_Tilemap, 0, 0);
+    CopyBgTilemapBufferToVram(1);
 }
