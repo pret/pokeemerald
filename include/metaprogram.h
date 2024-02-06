@@ -17,6 +17,9 @@
 #define STR(...) STR_(__VA_ARGS__)
 #define STR_(...) #__VA_ARGS__
 
+/* Converts a string to a compound literal, essentially making it a pointer to const u8 */
+#define COMPOUND_STRING(str) (const u8[]) _(str)
+
 /* Expands to the first/second/third/fourth argument. */
 #define FIRST(a, ...) a
 #define SECOND(a, ...) __VA_OPT__(FIRST(__VA_ARGS__))
