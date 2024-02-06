@@ -307,13 +307,13 @@ static void PlayerPartnerHandleDrawTrainerPic(u32 battler)
     {
         trainerPicId = gTrainers[gPartnerTrainerId].trainerPic;
         xPos = 60;
-        yPos = (8 - gTrainerSprites[trainerPicId].y_offset) * 4 + 80;
+        yPos = 80;
     }
     else
     {
         trainerPicId = GetFrontierTrainerFrontSpriteId(gPartnerTrainerId);
         xPos = 32;
-        yPos = (8 - gTrainerSprites[trainerPicId].y_offset) * 4 + 80;
+        yPos = 80;
     }
 
     // Use back pic only if the partner Steven or is custom.
