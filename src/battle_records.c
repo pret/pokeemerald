@@ -324,10 +324,8 @@ static void PrintLinkBattleRecord(struct LinkBattleRecord *record, u8 y, s32 lan
 
 void ShowLinkBattleRecords(void)
 {
-    s32 x;
 #if FREE_LINK_BATTLE_RECORDS == FALSE
-    s32 i;
-#endif //FREE_LINK_BATTLE_RECORDS
+    s32 x, i;
 
     gRecordsWindowId = AddWindow(&sLinkBattleRecordsWindow);
     DrawStdWindowFrame(gRecordsWindowId, FALSE);
@@ -336,7 +334,6 @@ void ShowLinkBattleRecords(void)
 
     x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 208);
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar4, x, 1, 0, NULL);
-#if FREE_LINK_BATTLE_RECORDS == FALSE
     PrintLinkBattleWinsLossesDraws(gSaveBlock1Ptr->linkBattleRecords.entries);
 
     StringExpandPlaceholders(gStringVar4, gText_WinLoseDraw);
@@ -346,10 +343,10 @@ void ShowLinkBattleRecords(void)
     {
         PrintLinkBattleRecord(&gSaveBlock1Ptr->linkBattleRecords.entries[i], 7 + (i * 2), gSaveBlock1Ptr->linkBattleRecords.languages[i]);
     }
-#endif //FREE_LINK_BATTLE_RECORDS
 
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
+#endif //FREE_LINK_BATTLE_RECORDS
 }
 
 void RemoveRecordsWindow(void)
