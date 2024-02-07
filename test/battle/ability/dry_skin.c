@@ -11,7 +11,7 @@ SINGLE_BATTLE_TEST("Dry Skin causes 1/8th Max HP damage in Sun")
     } SCENE {
         ABILITY_POPUP(player, ABILITY_DRY_SKIN);
         HP_BAR(player, damage: 200 / 8);
-        MESSAGE("The Parasect's Dry Skin takes its toll!");
+        MESSAGE("Parasect's Dry Skin takes its toll!");
     }
 }
 

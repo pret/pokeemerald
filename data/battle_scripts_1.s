@@ -3718,9 +3718,9 @@ BattleScript_PowerHerbActivation:
 BattleScript_EffectTwoTurnsAttack::
 	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_TwoTurnMovesSecondTurn
 	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING, BattleScript_TwoTurnMovesSecondTurn
-	jumpifweathercheckchargeeffects BS_ATTACKER, TRUE, BattleScript_EffectHit
+	tryfiretwoturnmovewithoutcharging BS_ATTACKER, BattleScript_EffectHit @ e.g. Solar Beam
 	call BattleScript_FirstChargingTurn
-	jumpifweathercheckchargeeffects BS_ATTACKER, FALSE, BattleScript_TwoTurnMovesSecondTurn
+	tryfiretwoturnmoveaftercharging BS_ATTACKER, BattleScript_TwoTurnMovesSecondTurn @ e.g. Electro Shot
 	jumpifholdeffect BS_ATTACKER, HOLD_EFFECT_POWER_HERB, BattleScript_TwoTurnMovesSecondPowerHerbActivates
 	goto BattleScript_MoveEnd
 
@@ -3766,7 +3766,8 @@ BattleScript_GeomancyEnd::
 
 BattleScript_FirstChargingTurn::
 	attackcanceler
-.if B_UPDATED_MOVE_DATA >= GEN_5 @ before Gen 5, charge moves did not print an attack string on the charge turn
+@ before Gen 5, charge moves did not print an attack string on the charge turn
+.if B_UPDATED_MOVE_DATA >= GEN_5
 	flushtextbox
 	attackstring
 	waitmessage B_WAIT_TIME_LONG
@@ -3784,7 +3785,8 @@ BattleScript_TwoTurnMovesSecondPowerHerbActivates:
 	call BattleScript_PowerHerbActivation
 	call BattleScript_TwoTurnMovesSecondTurnRet
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-.if B_UPDATED_MOVE_DATA < GEN_5 @ before Gen 5, charge moves did not print an attack string on the charge turn
+@ before Gen 5, charge moves did not print an attack string on the charge turn
+.if B_UPDATED_MOVE_DATA < GEN_5
 	attackstring
 .endif
 	goto BattleScript_HitFromCritCalc
