@@ -118,9 +118,6 @@ Based off RHH's pokeemerald-expansion v1.7.3 https://github.com/rh-hideout/pokee
     - Berserk Gene
     - Most battle items from Gen 4+
     - Existing item data but missing effects:
-        - Mints
-        - Dynamax Candy
-        - Mulches
         - Gimmighoul Coin
         - Booster Energy
         - Tera Shards
@@ -141,6 +138,7 @@ Based off RHH's pokeemerald-expansion v1.7.3 https://github.com/rh-hideout/pokee
             - *Dark Mode*.
     - [Nature Colors](https://github.com/DizzyEggg/pokeemerald/tree/nature_color) in summary screen by @DizzyEggg
     - [Dynamic Multichoice](https://github.com/SBird1337/pokeemerald/tree/feature/dynmulti) by @SBird1337
+    - [Guillotine](https://github.com/aarant/pokeemerald/tree/guillotine) (Decapitalization) by @aarant
 - ***Other features***
     - Pressing B while holding a Pokémon drops them like in modern games (configurable).
     - Running indoors (configurable).

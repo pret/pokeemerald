@@ -1061,11 +1061,19 @@
 	setsemiinvulnerablebit TRUE
 	.endm
 
-	.macro jumpifweathercheckchargeeffects battler:req, checkChargeTurnEffects:req, jumpInstr:req
+	.macro tryfiretwoturnmovenowbyeffect battler:req, checkChargeTurnEffects:req, jumpInstr:req
 	.byte 0xc6
 	.byte \battler
 	.byte \checkChargeTurnEffects
 	.4byte \jumpInstr
+	.endm
+
+	.macro tryfiretwoturnmovewithoutcharging battler:req, jumpInstr:req
+	tryfiretwoturnmovenowbyeffect \battler, TRUE, \jumpInstr
+	.endm
+
+	.macro tryfiretwoturnmoveaftercharging battler:req, jumpInstr:req
+	tryfiretwoturnmovenowbyeffect \battler, FALSE, \jumpInstr
 	.endm
 
 	.macro setminimize

@@ -393,7 +393,7 @@ static void RecordedPlayerHandleDrawTrainerPic(u32 battler)
         if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
         {
             xPos = 90;
-            yPos = (8 - gTrainerSprites[trainerPicId].y_offset) * 4 + 80;
+            yPos = 80;
         }
         else
         {

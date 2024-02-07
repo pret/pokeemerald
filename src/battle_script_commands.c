@@ -556,7 +556,7 @@ static void Cmd_selectfirstvalidtarget(void);
 static void Cmd_trysetfutureattack(void);
 static void Cmd_trydobeatup(void);
 static void Cmd_setsemiinvulnerablebit(void);
-static void Cmd_jumpifweathercheckchargeeffects(void);
+static void Cmd_tryfiretwoturnmovenowbyeffect(void);
 static void Cmd_setminimize(void);
 static void Cmd_sethail(void);
 static void Cmd_trymemento(void);
@@ -815,7 +815,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_trysetfutureattack,                      //0xC3
     Cmd_trydobeatup,                             //0xC4
     Cmd_setsemiinvulnerablebit,                  //0xC5
-    Cmd_jumpifweathercheckchargeeffects,         //0xC6
+    Cmd_tryfiretwoturnmovenowbyeffect,           //0xC6
     Cmd_setminimize,                             //0xC7
     Cmd_sethail,                                 //0xC8
     Cmd_trymemento,                              //0xC9
@@ -13668,16 +13668,31 @@ static void Cmd_setsemiinvulnerablebit(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-static void Cmd_jumpifweathercheckchargeeffects(void)
+static bool32 CheckIfCanFireTwoTurnMoveNow(u8 battler, bool8 checkChargeTurnEffects)
+{
+    // Semi-invulnerable moves cannot skip their charge turn (except with Power Herb)
+    if (gBattleMoveEffects[gMovesInfo[gCurrentMove].effect].semiInvulnerableEffect == TRUE)
+        return FALSE;
+
+    // If this move has charge turn effects, it must charge, activate them, then try to fire
+    if (checkChargeTurnEffects && MoveHasChargeTurnMoveEffect(gCurrentMove))
+        return FALSE;
+
+    // Insert custom conditions here
+
+    // Certain two-turn moves may fire on the first turn in the right weather (Solar Beam, Electro Shot)
+    // By default, all two-turn moves have the option of adding weather to their argument
+    if (IsBattlerWeatherAffected(battler, HIHALF(gMovesInfo[gCurrentMove].argument)))
+        return TRUE;
+
+    return FALSE;
+}
+
+static void Cmd_tryfiretwoturnmovenowbyeffect(void)
 {
     CMD_ARGS(u8 battler, bool8 checkChargeTurnEffects, const u8 *jumpInstr);
 
-    /* If this is NOT semi-invulnerable move and we don't have charge turn effects
-    yet to fire, we can fire the move right away so long as the weather matches
-    the argument and the battler is affected by it (not blocked by Cloud Nine etc) */
-    if (gBattleMoveEffects[gMovesInfo[gCurrentMove].effect].semiInvulnerableEffect == FALSE
-      && !(cmd->checkChargeTurnEffects && MoveHasChargeTurnMoveEffect(gCurrentMove))
-      && IsBattlerWeatherAffected(cmd->battler, HIHALF(gMovesInfo[gCurrentMove].argument)))
+    if (CheckIfCanFireTwoTurnMoveNow(cmd->battler, cmd->checkChargeTurnEffects) == TRUE)
     {
         gBattleScripting.animTurn = 1;
         gBattlescriptCurrInstr = cmd->jumpInstr;
