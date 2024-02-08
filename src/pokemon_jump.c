@@ -415,7 +415,7 @@ static void DoPokeJumpCountdown(void);
 static void Msg_CommunicationStandby(void);
 static void Task_ShowPokemonJumpRecords(u8);
 static void PrintRecordsText(u16, int);
-static void TruncateToFirstWordOnly(u8 *);
+static inline void TruncateToFirstWordOnly(u8 *);
 
 EWRAM_DATA static struct PokemonJump *sPokemonJump = NULL;
 EWRAM_DATA static struct PokemonJumpGfx *sPokemonJumpGfx = NULL;
@@ -4332,13 +4332,16 @@ static bool32 RecvPacket_MemberStateToMember(struct PokemonJump_Player *player, 
     return TRUE;
 }
 
+#if FREE_POKEMON_JUMP == FALSE
 static struct PokemonJumpRecords *GetPokeJumpRecords(void)
 {
     return &gSaveBlock2Ptr->pokeJump;
 }
+#endif //FREE_POKEMON_JUMP
 
 void ResetPokemonJumpRecords(void)
 {
+#if FREE_POKEMON_JUMP == FALSE
     struct PokemonJumpRecords *records = GetPokeJumpRecords();
     records->jumpsInRow = 0;
     records->bestJumpScore = 0;
@@ -4346,10 +4349,12 @@ void ResetPokemonJumpRecords(void)
     records->gamesWithMaxPlayers = 0;
     records->unused2 = 0;
     records->unused1 = 0;
+#endif //FREE_POKEMON_JUMP
 }
 
 static bool32 TryUpdateRecords(u32 jumpScore, u16 jumpsInRow, u16 excellentsInRow)
 {
+#if FREE_POKEMON_JUMP == FALSE
     struct PokemonJumpRecords *records = GetPokeJumpRecords();
     bool32 newRecord = FALSE;
 
@@ -4361,13 +4366,18 @@ static bool32 TryUpdateRecords(u32 jumpScore, u16 jumpsInRow, u16 excellentsInRo
         records->excellentsInRow = excellentsInRow, newRecord = TRUE;
 
     return newRecord;
+#else
+    return FALSE;
+#endif //FREE_POKEMON_JUMP
 }
 
 static void IncrementGamesWithMaxPlayers(void)
 {
+#if FREE_POKEMON_JUMP == FALSE
     struct PokemonJumpRecords *records = GetPokeJumpRecords();
     if (records->gamesWithMaxPlayers < 9999)
         records->gamesWithMaxPlayers++;
+#endif //FREE_POKEMON_JUMP
 }
 
 void ShowPokemonJumpRecords(void)
@@ -4447,6 +4457,7 @@ static void Task_ShowPokemonJumpRecords(u8 taskId)
 
 static void PrintRecordsText(u16 windowId, int width)
 {
+#if FREE_POKEMON_JUMP == FALSE
     int i, x;
     int recordNums[3];
     struct PokemonJumpRecords *records = GetPokeJumpRecords();
@@ -4467,9 +4478,10 @@ static void PrintRecordsText(u16 windowId, int width)
         AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar1, x, 25 + (i * 16), TEXT_SKIP_DRAW, NULL);
     }
     PutWindowTilemap(windowId);
+#endif //FREE_POKEMON_JUMP
 }
 
-static void TruncateToFirstWordOnly(u8 *str)
+static inline void TruncateToFirstWordOnly(u8 *str)
 {
     for (;*str != EOS; str++)
     {
