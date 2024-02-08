@@ -850,8 +850,30 @@ static void Task_MenuMain(u8 taskId)
 
 static void ChangeAndUpdateStat()
 {
-    SetMonData(ReturnPartyMon(), selectedStatToStatEnum[sMenuDataPtr->selectedStat], &(sMenuDataPtr->editingStat));
+    u16 currentStatEnum = selectedStatToStatEnum[sMenuDataPtr->selectedStat];
+    u32 currentHP = 0;
+    u32 oldMaxHP = 0;
+    u32 amountHPLost = 0;
+
+    if (currentStatEnum == MON_DATA_HP_EV || currentStatEnum == MON_DATA_HP_IV)
+    {
+        currentHP = GetMonData(ReturnPartyMon(), MON_DATA_HP);
+        oldMaxHP = GetMonData(ReturnPartyMon(), MON_DATA_MAX_HP);
+        amountHPLost = oldMaxHP - currentHP;
+    }
+
+    SetMonData(ReturnPartyMon(), currentStatEnum, &(sMenuDataPtr->editingStat));
     CalculateMonStats(ReturnPartyMon());
+
+    if ((amountHPLost > 0) && (currentHP != 0))
+    {
+        s32 tempDifference = GetMonData(ReturnPartyMon(), MON_DATA_MAX_HP) - amountHPLost;
+        if (tempDifference < 0)
+            tempDifference = 0;
+        u32 newDifference = (u32) tempDifference;
+        SetMonData(ReturnPartyMon(), MON_DATA_HP, &newDifference);
+    }
+
     PrintMonStats();
 }
 
