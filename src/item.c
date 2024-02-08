@@ -1284,7 +1284,6 @@ static const u16 sRandomValidItems[] =
     // Misc. Held Items
     ITEM_BRIGHT_POWDER,
     ITEM_WHITE_HERB,
-    ITEM_EXP_SHARE,
     ITEM_QUICK_CLAW,
     ITEM_SOOTHE_BELL,
     ITEM_MENTAL_HERB,
