@@ -420,7 +420,27 @@ const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 
 #include "data/pokemon/trainer_class_lookups.h"
 #include "data/pokemon/experience_tables.h"
-#include "data/pokemon/level_up_learnsets.h"
+
+#if P_LVL_UP_LEARNSETS >= GEN_9
+#include "data/pokemon/level_up_learnsets/gen_9.h"
+#elif P_LVL_UP_LEARNSETS >= GEN_8
+#include "data/pokemon/level_up_learnsets/gen_8.h"
+#elif P_LVL_UP_LEARNSETS >= GEN_7
+#include "data/pokemon/level_up_learnsets/gen_7.h"
+#elif P_LVL_UP_LEARNSETS >= GEN_6
+#include "data/pokemon/level_up_learnsets/gen_6.h"
+#elif P_LVL_UP_LEARNSETS >= GEN_5
+#include "data/pokemon/level_up_learnsets/gen_5.h"
+#elif P_LVL_UP_LEARNSETS >= GEN_4
+#include "data/pokemon/level_up_learnsets/gen_4.h"
+#elif P_LVL_UP_LEARNSETS >= GEN_3
+#include "data/pokemon/level_up_learnsets/gen_3.h"
+#elif P_LVL_UP_LEARNSETS >= GEN_2
+#include "data/pokemon/level_up_learnsets/gen_2.h"
+#elif P_LVL_UP_LEARNSETS >= GEN_1
+#include "data/pokemon/level_up_learnsets/gen_1.h"
+#endif
+
 #include "data/pokemon/teachable_learnsets.h"
 #include "data/pokemon/form_species_tables.h"
 #include "data/pokemon/form_change_tables.h"
