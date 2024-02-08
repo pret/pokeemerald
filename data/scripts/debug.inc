@@ -95,6 +95,48 @@ Debug_BoxFilledMessage::
 Debug_BoxFilledMessage_Text:
 	.string "Storage boxes filled!$"
 
+Debug_EventScript_CheckEV::
+	lockall
+	getpartysize
+	goto_if_eq VAR_RESULT, 0, Debug_HatchAnEgg_NoPokemon
+	special ChoosePartyMon
+	waitstate
+	goto_if_ge VAR_0x8004, PARTY_SIZE, Debug_EventScript_CheckEV_End
+	callnative Script_GetChosenMonOffensiveEV
+	msgbox Debug_EventScript_Text_OffensiveEV, MSGBOX_DEFAULT
+	callnative Script_GetChosenMonDefensiveEV
+	msgbox Debug_EventScript_Text_DefensiveEV, MSGBOX_DEFAULT
+Debug_EventScript_CheckEV_End::
+	releaseall
+	end
+
+Debug_EventScript_Text_OffensiveEV:
+	.string "ATK EV: {STR_VAR_1}, SPATK EV: {STR_VAR_2}, SPEED EV: {STR_VAR_3}$"
+
+Debug_EventScript_Text_DefensiveEV:
+	.string "HP EV: {STR_VAR_1}, DEF EV: {STR_VAR_2}, SPDEF EV: {STR_VAR_3}$"
+
+Debug_EventScript_CheckIV::
+	lockall
+	getpartysize
+	goto_if_eq VAR_RESULT, 0, Debug_HatchAnEgg_NoPokemon
+	special ChoosePartyMon
+	waitstate
+	goto_if_ge VAR_0x8004, PARTY_SIZE, Debug_EventScript_CheckIV_End
+	callnative Script_GetChosenMonOffensiveIV
+	msgbox Debug_EventScript_Text_OffensiveIV, MSGBOX_DEFAULT
+	callnative Script_GetChosenMonDefensiveIV
+	msgbox Debug_EventScript_Text_DefensiveIV, MSGBOX_DEFAULT
+Debug_EventScript_CheckIV_End::
+	releaseall
+	end
+
+Debug_EventScript_Text_OffensiveIV:
+	.string "ATK IV: {STR_VAR_1}, SPATK IV: {STR_VAR_2}, SPEED IV: {STR_VAR_3}$"
+
+Debug_EventScript_Text_DefensiveIV:
+	.string "HP IV: {STR_VAR_1}, DEF IV: {STR_VAR_2}, SPDEF IV: {STR_VAR_3}$"
+
 Debug_EventScript_Script_1::
 	end
 
@@ -247,4 +289,3 @@ Debug_FlagsAndVarNotSetBattleConfigMessage_Text:
 	.string "Feature unavailable! Please define a\n"
 	.string "usable flag and a usable var in:\l"
 	.string "'include/config/battle.h'!$"
-
