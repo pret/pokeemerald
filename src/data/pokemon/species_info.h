@@ -227,6 +227,9 @@ const u8 gOgerponCornerstoneMaskPokedexText[] = _(
 // 255 (MON_GENDERLESS) is reserved for genderless Pokémon.
 #define PERCENT_FEMALE(percent) min(254, ((percent * 255) / 100))
 
+#define MON_TYPES(type1, ...) { type1, DEFAULT(type1, __VA_ARGS__) }
+#define MON_EGG_GROUPS(group1, ...) { group1, DEFAULT(group1, __VA_ARGS__) }
+
 #define FLIP    0
 #define NO_FLIP 1
 
@@ -294,7 +297,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpeed     = 1,
         .baseSpAttack  = 1,
         .baseSpDefense = 1,
-        .types = { TYPE_MYSTERY, TYPE_MYSTERY },
+        .types = MON_TYPES(TYPE_MYSTERY),
         .catchRate = 255,
         .expYield = 67,
         .evYield_HP = 1,
@@ -304,7 +307,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = { EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED },
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
         .abilities = { ABILITY_NONE, ABILITY_CURSED_BODY, ABILITY_DAMP },
         .bodyColor = BODY_COLOR_BLACK,
         .speciesName = _("??????????"),
