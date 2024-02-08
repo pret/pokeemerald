@@ -173,24 +173,33 @@ for move in tm_moves + tutor_moves:
     if len(move) > longest_move_name:
         longest_move_name = len(move)
 longest_move_name += 2 # + 2 for a hyphen and a space
-if longest_move_name < len("Found near-universal moves:"):
-    longest_move_name = len("Found near-universal moves:")
+
+universal_title = "Near-universal moves found in sUniversalMoves:"
+tmhm_title = "TM/HM moves found in \"include/constants/tms_hms.h\":"
+tutor_title = "Tutor moves found in map scripts:"
+
+if longest_move_name < len(universal_title):
+    longest_move_name = len(universal_title)
+if longest_move_name < len(tmhm_title):
+    longest_move_name = len(tmhm_title)
+if longest_move_name < len(tutor_title):
+    longest_move_name = len(tutor_title)
 
 def header_print(str):
     global header
     header += "// " + str + " " * (longest_move_name - len(str)) + " //\n"
 
 header += "// " + longest_move_name * "*" + " //\n"
-header_print("Found TM/HM moves:")
+header_print(tmhm_title)
 for move in tm_moves:
     header_print("- " + move)
 header += "// " + longest_move_name * "*" + " //\n"
-header_print("Found tutor moves:")
+header_print(tutor_title)
 tutor_moves.sort() # alphabetically sort tutor moves for easier referencing
 for move in tutor_moves: 
     header_print("- " + move)
 header += "// " + longest_move_name * "*" + " //\n"
-header_print("Found near-universal moves:")
+header_print(universal_title)
 universal_moves.sort() # alphabetically sort near-universal moves for easier referencing
 for move in universal_moves:
     header_print("- " + move)
