@@ -88,13 +88,17 @@ static void GatherNearbyTrainerInfo(void);
 static void Task_VsSeeker_ShowResponseToPlayer(u8 taskId);
 static bool8 CanUseVsSeeker(void);
 static u8 GetVsSeekerResponseInArea(void);
+#if FREE_MATCH_CALL == FALSE
 static u8 GetResponseMovementTypeFromTrainerGraphicsId(u8 graphicsId);
+#endif //FREE_MATCH_CALL
 static u16 GetTrainerFlagFromScript(const u8 * script);
 static void ClearAllTrainerRematchStates(void);
+#if FREE_MATCH_CALL == FALSE
 static bool8 IsTrainerVisibleOnScreen(struct VsSeekerTrainerInfo * trainerInfo);
 static u32 GetRematchableTrainerLocalId(void);
 static void StartTrainerObjectMovementScript(struct VsSeekerTrainerInfo * trainerInfo, const u8 * script);
 static u8 GetCurVsSeekerResponse(s32 vsSeekerIdx, u16 trainerIdx);
+#endif //FREE_MATCH_CALL
 static void StartAllRespondantIdleMovements(void);
 static bool8 ObjectEventIdIsSane(u8 objectEventId);
 static u8 GetRandomFaceDirectionMovementType();
@@ -221,6 +225,7 @@ void VsSeekerResetObjectMovementAfterChargeComplete(void)
 
 bool8 UpdateVsSeekerStepCounter(void)
 {
+#if FREE_MATCH_CALL == FALSE
     u8 x = 0;
 
     if (!I_VS_SEEKER_CHARGING) return FALSE;
@@ -246,6 +251,7 @@ bool8 UpdateVsSeekerStepCounter(void)
             return TRUE;
         }
     }
+#endif //FREE_MATCH_CALL
 
     return FALSE;
 }
@@ -284,12 +290,16 @@ static void ResetMovementOfRematchableTrainers(void)
 
 static void VsSeekerResetInBagStepCounter(void)
 {
+#if FREE_MATCH_CALL == FALSE
     gSaveBlock1Ptr->trainerRematchStepCounter &= 0xFF00;
+#endif //FREE_MATCH_CALL
 }
 
 static void VsSeekerResetChargingStepCounter(void)
 {
+#if FREE_MATCH_CALL == FALSE
     gSaveBlock1Ptr->trainerRematchStepCounter &= 0x00FF;
+#endif //FREE_MATCH_CALL
 }
 
 void Task_InitVsSeekerAndCheckForTrainersOnScreen(u8 taskId)
@@ -403,6 +413,7 @@ static void Task_VsSeeker_ShowResponseToPlayer(u8 taskId)
 
 static u8 CanUseVsSeeker(void)
 {
+#if FREE_MATCH_CALL == FALSE
     u8 vsSeekerChargeSteps = gSaveBlock1Ptr->trainerRematchStepCounter;
 
     if ((vsSeekerChargeSteps == VSSEEKER_RECHARGE_STEPS) && (GetRematchableTrainerLocalId() == 0xFF))
@@ -413,10 +424,14 @@ static u8 CanUseVsSeeker(void)
 
     ConvertIntToDecimalStringN(gStringVar1, (VSSEEKER_RECHARGE_STEPS - vsSeekerChargeSteps), STR_CONV_MODE_LEFT_ALIGN, 3);
     return VSSEEKER_NOT_CHARGED;
+#else
+    return VSSEEKER_NO_ONE_IN_RANGE;
+#endif //FREE_MATCH_CALL
 }
 
 static u8 GetVsSeekerResponseInArea(void)
 {
+#if FREE_MATCH_CALL == FALSE
     u16 trainerIdx = 0;
     u8 response = 0, rematchTrainerIdx;
     s32 vsSeekerIdx = 0, randomValue = 0;
@@ -486,6 +501,7 @@ static u8 GetVsSeekerResponseInArea(void)
 
     if (sVsSeeker->trainerHasNotYetBeenFought)
         return VSSEEKER_RESPONSE_UNFOUGHT_TRAINERS;
+#endif //FREE_MATCH_CALL
 
     return VSSEEKER_RESPONSE_NO_RESPONSE;
 }
@@ -589,6 +605,7 @@ static u8 GetRandomFaceDirectionMovementType()
     }
 }
 
+#if FREE_MATCH_CALL == FALSE
 static bool32 IsRegularLandTrainer(u8 graphicsId)
 {
     u32 i;
@@ -677,6 +694,7 @@ static u8 GetResponseMovementTypeFromTrainerGraphicsId(u8 graphicsId)
 
     return MOVEMENT_TYPE_FACE_DOWN;
 }
+#endif //FREE_MATCH_CALL
 
 static u16 GetTrainerFlagFromScript(const u8 *script)
     /*
@@ -701,6 +719,7 @@ static u16 GetTrainerFlagFromScript(const u8 *script)
 
 static void ClearAllTrainerRematchStates(void)
 {
+#if FREE_MATCH_CALL == FALSE
     u32 i;
 
     if (!CheckBagHasItem(ITEM_VS_SEEKER, 1))
@@ -708,8 +727,10 @@ static void ClearAllTrainerRematchStates(void)
 
     for (i = 0; i < ARRAY_COUNT(gSaveBlock1Ptr->trainerRematches); i++)
         gSaveBlock1Ptr->trainerRematches[i] = 0;
+#endif //FREE_MATCH_CALL
 }
 
+#if FREE_MATCH_CALL == FALSE
 static bool8 IsTrainerVisibleOnScreen(struct VsSeekerTrainerInfo * trainerInfo)
 {
     s16 x;
@@ -769,9 +790,11 @@ static u8 GetCurVsSeekerResponse(s32 vsSeekerIdx, u16 trainerIdx)
     }
     return VSSEEKER_SINGLE_RESP_RAND;
 }
+#endif //FREE_MATCH_CALL
 
 static void StartAllRespondantIdleMovements(void)
 {
+#if FREE_MATCH_CALL == FALSE
     s32 i;
     s32 j;
 
@@ -790,4 +813,5 @@ static void StartAllRespondantIdleMovements(void)
             }
         }
     }
+#endif //FREE_MATCH_CALL
 }

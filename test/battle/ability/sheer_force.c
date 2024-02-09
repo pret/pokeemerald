@@ -30,10 +30,11 @@ SINGLE_BATTLE_TEST("Sheer Force boosts power, but removes secondary effects of m
     } WHEN {
         if (move == MOVE_ALLURING_VOICE || move == MOVE_BURNING_JEALOUSY) // Alluring Voice requires the target to boost stats to have an effect
             TURN { MOVE(opponent, MOVE_AGILITY); MOVE(player, move); }
+        else if (move == MOVE_UPPER_HAND) // Upper Hand requires the target to be using a damaging priority move
+            TURN { MOVE(opponent, MOVE_QUICK_ATTACK); MOVE(player, move); }
         else
             TURN { MOVE(player, move); }
-        if (gMovesInfo[move].effect == EFFECT_TWO_TURNS_ATTACK || gMovesInfo[move].effect == EFFECT_SEMI_INVULNERABLE
-          || gMovesInfo[move].effect == EFFECT_METEOR_BEAM) {
+        if (gMovesInfo[move].effect == EFFECT_TWO_TURNS_ATTACK || gMovesInfo[move].effect == EFFECT_SEMI_INVULNERABLE) {
                 TURN { SKIP_TURN(player); }
                 TURN { ; }
         }

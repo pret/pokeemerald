@@ -1192,7 +1192,7 @@ bool32 CannotUseItemsInBattle(u16 itemId, struct Pokemon *mon)
             cannotUse = TRUE;
         break;
     case EFFECT_ITEM_SET_FOCUS_ENERGY:
-        if (gBattleMons[gBattlerInMenuId].status2 & STATUS2_FOCUS_ENERGY)
+        if (gBattleMons[gBattlerInMenuId].status2 & STATUS2_FOCUS_ENERGY_ANY)
             cannotUse = TRUE;
         break;
     case EFFECT_ITEM_SET_MIST:

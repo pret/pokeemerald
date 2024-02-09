@@ -75,7 +75,8 @@ bool32 BattlerHasAi(u32 battlerId)
 
 bool32 IsAiBattlerAware(u32 battlerId)
 {
-    if (AI_THINKING_STRUCT->aiFlags[battlerId] & AI_FLAG_OMNISCIENT)
+    if (AI_THINKING_STRUCT->aiFlags[B_POSITION_OPPONENT_LEFT] & AI_FLAG_OMNISCIENT
+     || AI_THINKING_STRUCT->aiFlags[B_POSITION_OPPONENT_RIGHT] & AI_FLAG_OMNISCIENT)
         return TRUE;
 
     return BattlerHasAi(battlerId);
@@ -469,7 +470,8 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
                     u32 i;
                     gBattleStruct->beatUpSlot = 0;
                     dmg = 0;
-                    for (i = 0; i < partyCount; i++) {
+                    for (i = 0; i < partyCount; i++)
+                    {
                         dmg += CalculateMoveDamage(move, battlerAtk, battlerDef, moveType, 0, FALSE, FALSE, FALSE);
                     }
                     gBattleStruct->beatUpSlot = 0;
@@ -871,20 +873,20 @@ u32 NoOfHitsForTargetToFaintAI(u32 battlerDef, u32 battlerAtk)
     return leastNumberOfHits;
 }
 
-u32 GetBestDmgMoveFromTarget(u32 battlerDef, u32 battlerAtk)
+u32 GetBestDmgMoveFromBattler(u32 battlerAtk, u32 battlerDef)
 {
     u32 i;
     u32 move = 0;
     u32 bestDmg = 0;
-    u32 unusable = AI_DATA->moveLimitations[battlerDef];
-    u16 *moves = GetMovesArray(battlerDef);
+    u32 unusable = AI_DATA->moveLimitations[battlerAtk];
+    u16 *moves = GetMovesArray(battlerAtk);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && !(unusable & gBitTable[i])
-            && bestDmg < AI_DATA->simulatedDmg[battlerDef][battlerAtk][i])
+            && bestDmg < AI_DATA->simulatedDmg[battlerAtk][battlerDef][i])
         {
-            bestDmg = AI_DATA->simulatedDmg[battlerDef][battlerAtk][i];
+            bestDmg = AI_DATA->simulatedDmg[battlerAtk][battlerDef][i];
             move = moves[i];
         }
     }
@@ -2019,17 +2021,14 @@ bool32 HasSnatchAffectedMove(u32 battler)
     CHECK_MOVE_FLAG(snatchAffected);
 }
 
-bool32 IsChargingMove(u32 battlerAtk, u32 effect)
+bool32 IsTwoTurnNotSemiInvulnerableMove(u32 battlerAtk, u32 move)
 {
-    switch (effect)
+    switch (gMovesInfo[move].effect)
     {
     case EFFECT_SOLAR_BEAM:
-        if (AI_GetWeather(AI_DATA) & B_WEATHER_SUN)
-            return FALSE;
-    case EFFECT_SKULL_BASH:
-    case EFFECT_METEOR_BEAM:
     case EFFECT_TWO_TURNS_ATTACK:
-        return !(AI_DATA->holdEffects[battlerAtk] == HOLD_EFFECT_POWER_HERB);
+        return !(AI_DATA->holdEffects[battlerAtk] == HOLD_EFFECT_POWER_HERB
+          || (AI_GetWeather(AI_DATA) & gMovesInfo[move].argument));
     default:
         return FALSE;
     }
@@ -2728,7 +2727,7 @@ bool32 ShouldTrap(u32 battlerAtk, u32 battlerDef, u32 move)
 
 bool32 ShouldFakeOut(u32 battlerAtk, u32 battlerDef, u32 move)
 {
-    if (!gDisableStructs[battlerAtk].isFirstTurn
+    if ((!gDisableStructs[battlerAtk].isFirstTurn && MoveHasMoveEffectWithChance(move, MOVE_EFFECT_FLINCH, 100))
     || AI_DATA->abilities[battlerAtk] == ABILITY_GORILLA_TACTICS
     || AI_DATA->holdEffects[battlerAtk] == HOLD_EFFECT_CHOICE_BAND
     || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_COVERT_CLOAK
@@ -3422,7 +3421,7 @@ void IncreaseParalyzeScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
 
         if ((defSpeed >= atkSpeed && defSpeed / 2 < atkSpeed) // You'll go first after paralyzing foe
           || HasMoveEffectANDArg(battlerAtk, EFFECT_DOUBLE_POWER_ON_ARG_STATUS, STATUS1_PARALYSIS)
-          || (HasMoveWithMoveEffectExcept(battlerAtk, MOVE_EFFECT_FLINCH, EFFECT_FAKE_OUT)) // filter out Fake Out
+          || (HasMoveWithMoveEffectExcept(battlerAtk, MOVE_EFFECT_FLINCH, EFFECT_FIRST_TURN_ONLY)) // filter out Fake Out
           || gBattleMons[battlerDef].status2 & STATUS2_INFATUATION
           || gBattleMons[battlerDef].status2 & STATUS2_CONFUSION)
             ADJUST_SCORE_PTR(GOOD_EFFECT);
@@ -3463,7 +3462,7 @@ void IncreaseConfusionScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score
     {
         if (gBattleMons[battlerDef].status1 & STATUS1_PARALYSIS
           || gBattleMons[battlerDef].status2 & STATUS2_INFATUATION
-          || (AI_DATA->abilities[battlerAtk] == ABILITY_SERENE_GRACE && HasMoveWithMoveEffectExcept(battlerAtk, MOVE_EFFECT_FLINCH, EFFECT_FAKE_OUT)))
+          || (AI_DATA->abilities[battlerAtk] == ABILITY_SERENE_GRACE && HasMoveWithMoveEffectExcept(battlerAtk, MOVE_EFFECT_FLINCH, EFFECT_FIRST_TURN_ONLY)))
             ADJUST_SCORE_PTR(GOOD_EFFECT);
         else
             ADJUST_SCORE_PTR(DECENT_EFFECT);

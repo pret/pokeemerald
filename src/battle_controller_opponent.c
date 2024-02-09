@@ -484,9 +484,7 @@ static void OpponentHandleDrawTrainerPic(u32 battler)
         xPos = 176;
     }
 
-    BtlController_HandleDrawTrainerPic(battler, trainerPicId, TRUE,
-                                       xPos, 40 + 4 * (8 - gTrainerSprites[trainerPicId].y_offset),
-                                       -1);
+    BtlController_HandleDrawTrainerPic(battler, trainerPicId, TRUE, xPos, 40, -1);
 }
 
 static void OpponentHandleTrainerSlide(u32 battler)

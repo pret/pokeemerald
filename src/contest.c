@@ -688,6 +688,97 @@ static const u16 sText_Pal[] = INCBIN_U16("graphics/contest/text.gbapal");
 
 #include "data/contest_text_tables.h"
 
+const u8 *const gContestEffectDescriptionPointers[] =
+{
+    [CONTEST_EFFECT_HIGHLY_APPEALING]                      = COMPOUND_STRING("A highly appealing move."),
+    [CONTEST_EFFECT_USER_MORE_EASILY_STARTLED]             = COMPOUND_STRING("After this move, the user is\nmore easily startled."),
+    [CONTEST_EFFECT_GREAT_APPEAL_BUT_NO_MORE_MOVES]        = COMPOUND_STRING("Makes a great appeal, but\nallows no more to the end."),
+    [CONTEST_EFFECT_REPETITION_NOT_BORING]                 = COMPOUND_STRING("Can be repeatedly used\nwithout boring the JUDGE."),
+    [CONTEST_EFFECT_AVOID_STARTLE_ONCE]                    = COMPOUND_STRING("Can avoid being startled\nby others once."),
+    [CONTEST_EFFECT_AVOID_STARTLE]                         = COMPOUND_STRING("Can avoid being startled\nby others."),
+    [CONTEST_EFFECT_AVOID_STARTLE_SLIGHTLY]                = COMPOUND_STRING("Can avoid being startled\nby others a little."),
+    [CONTEST_EFFECT_USER_LESS_EASILY_STARTLED]             = COMPOUND_STRING("After this move, the user is\nless likely to be startled."),
+    [CONTEST_EFFECT_STARTLE_FRONT_MON]                     = COMPOUND_STRING("Slightly startles the\nPOKéMON in front."),
+    [CONTEST_EFFECT_SLIGHTLY_STARTLE_PREV_MONS]            = COMPOUND_STRING("Slightly startles those\nthat have made appeals."),
+    [CONTEST_EFFECT_STARTLE_PREV_MON]                      = COMPOUND_STRING("Startles the POKéMON that\nappealed before the user."),
+    [CONTEST_EFFECT_STARTLE_PREV_MONS]                     = COMPOUND_STRING("Startles all POKéMON that\nhave done their appeals."),
+    [CONTEST_EFFECT_BADLY_STARTLE_FRONT_MON]               = COMPOUND_STRING("Badly startles the\nPOKéMON in front."),
+    [CONTEST_EFFECT_BADLY_STARTLE_PREV_MONS]               = COMPOUND_STRING("Badly startles those that\nhave made appeals."),
+    [CONTEST_EFFECT_STARTLE_PREV_MON_2]                    = COMPOUND_STRING("Startles the POKéMON that\nappealed before the user."),
+    [CONTEST_EFFECT_STARTLE_PREV_MONS_2]                   = COMPOUND_STRING("Startles all POKéMON that\nhave done their appeals."),
+    [CONTEST_EFFECT_SHIFT_JUDGE_ATTENTION]                 = COMPOUND_STRING("Shifts the JUDGE's\nattention from others."),
+    [CONTEST_EFFECT_STARTLE_MON_WITH_JUDGES_ATTENTION]     = COMPOUND_STRING("Startles the POKéMON that\nhas the JUDGE's attention."),
+    [CONTEST_EFFECT_JAMS_OTHERS_BUT_MISS_ONE_TURN]         = COMPOUND_STRING("Jams the others, and misses\none turn of appeals."),
+    [CONTEST_EFFECT_STARTLE_MONS_SAME_TYPE_APPEAL]         = COMPOUND_STRING("Startles POKéMON that\nmade a same-type appeal."),
+    [CONTEST_EFFECT_STARTLE_MONS_COOL_APPEAL]              = COMPOUND_STRING("Badly startles POKéMON\nthat made COOL appeals."),
+    [CONTEST_EFFECT_STARTLE_MONS_BEAUTY_APPEAL]            = COMPOUND_STRING("Badly startles POKéMON\nthat made BEAUTY appeals."),
+    [CONTEST_EFFECT_STARTLE_MONS_CUTE_APPEAL]              = COMPOUND_STRING("Badly startles POKéMON\nthat made CUTE appeals."),
+    [CONTEST_EFFECT_STARTLE_MONS_SMART_APPEAL]             = COMPOUND_STRING("Badly startles POKéMON\nthat made SMART appeals."),
+    [CONTEST_EFFECT_STARTLE_MONS_TOUGH_APPEAL]             = COMPOUND_STRING("Badly startles POKéMON\nthat made TOUGH appeals."),
+    [CONTEST_EFFECT_MAKE_FOLLOWING_MON_NERVOUS]            = COMPOUND_STRING("Makes one POKéMON after\nthe user nervous."),
+    [CONTEST_EFFECT_MAKE_FOLLOWING_MONS_NERVOUS]           = COMPOUND_STRING("Makes all POKéMON after\nthe user nervous."),
+    [CONTEST_EFFECT_WORSEN_CONDITION_OF_PREV_MONS]         = COMPOUND_STRING("Worsens the condition of\nthose that made appeals."),
+    [CONTEST_EFFECT_BADLY_STARTLES_MONS_IN_GOOD_CONDITION] = COMPOUND_STRING("Badly startles POKéMON in\ngood condition."),
+    [CONTEST_EFFECT_BETTER_IF_FIRST]                       = COMPOUND_STRING("The appeal works great if\nperformed first."),
+    [CONTEST_EFFECT_BETTER_IF_LAST]                        = COMPOUND_STRING("The appeal works great if\nperformed last."),
+    [CONTEST_EFFECT_APPEAL_AS_GOOD_AS_PREV_ONES]           = COMPOUND_STRING("Makes the appeal as good\nas those before it."),
+    [CONTEST_EFFECT_APPEAL_AS_GOOD_AS_PREV_ONE]            = COMPOUND_STRING("Makes the appeal as good\nas the one before it."),
+    [CONTEST_EFFECT_BETTER_WHEN_LATER]                     = COMPOUND_STRING("The appeal works better\nthe later it is performed."),
+    [CONTEST_EFFECT_QUALITY_DEPENDS_ON_TIMING]             = COMPOUND_STRING("The appeal's quality varies\ndepending on its timing."),
+    [CONTEST_EFFECT_BETTER_IF_SAME_TYPE]                   = COMPOUND_STRING("Works well if it's the same\ntype as the one before."),
+    [CONTEST_EFFECT_BETTER_IF_DIFF_TYPE]                   = COMPOUND_STRING("Works well if different in\ntype than the one before."),
+    [CONTEST_EFFECT_AFFECTED_BY_PREV_APPEAL]               = COMPOUND_STRING("Affected by how well the\nappeal in front goes."),
+    [CONTEST_EFFECT_IMPROVE_CONDITION_PREVENT_NERVOUSNESS] = COMPOUND_STRING("Ups the user's condition.\nHelps prevent nervousness."),
+    [CONTEST_EFFECT_BETTER_WITH_GOOD_CONDITION]            = COMPOUND_STRING("The appeal works well if the\nuser's condition is good."),
+    [CONTEST_EFFECT_NEXT_APPEAL_EARLIER]                   = COMPOUND_STRING("The next appeal can be\nmade earlier next turn."),
+    [CONTEST_EFFECT_NEXT_APPEAL_LATER]                     = COMPOUND_STRING("The next appeal can be\nmade later next turn."),
+    [CONTEST_EFFECT_MAKE_SCRAMBLING_TURN_ORDER_EASIER]     = COMPOUND_STRING("Makes the next turn's order\nmore easily scrambled."),
+    [CONTEST_EFFECT_SCRAMBLE_NEXT_TURN_ORDER]              = COMPOUND_STRING("Scrambles the order of\nappeals on the next turn."),
+    [CONTEST_EFFECT_EXCITE_AUDIENCE_IN_ANY_CONTEST]        = COMPOUND_STRING("An appeal that excites the\naudience in any CONTEST."),
+    [CONTEST_EFFECT_BADLY_STARTLE_MONS_WITH_GOOD_APPEALS]  = COMPOUND_STRING("Badly startles all POKéMON\nthat made good appeals."),
+    [CONTEST_EFFECT_BETTER_WHEN_AUDIENCE_EXCITED]          = COMPOUND_STRING("The appeal works best the\nmore the crowd is excited."),
+    [CONTEST_EFFECT_DONT_EXCITE_AUDIENCE]                  = COMPOUND_STRING("Temporarily stops the\ncrowd from growing excited."),
+};
+
+const u8 *const gContestMoveTypeTextPointers[] =
+{
+    [CONTEST_CATEGORY_COOL]   = COMPOUND_STRING("COOL"),
+    [CONTEST_CATEGORY_BEAUTY] = COMPOUND_STRING("BEAUTY"),
+    [CONTEST_CATEGORY_CUTE]   = COMPOUND_STRING("CUTE"),
+    [CONTEST_CATEGORY_SMART]  = COMPOUND_STRING("SMART"),
+    [CONTEST_CATEGORY_TOUGH]  = COMPOUND_STRING("TOUGH"),
+};
+
+static const u8 *const sContestConditions[] =
+{
+    [CONTEST_CATEGORY_COOL]   = COMPOUND_STRING("coolness"),
+    [CONTEST_CATEGORY_BEAUTY] = COMPOUND_STRING("beauty"),
+    [CONTEST_CATEGORY_CUTE]   = COMPOUND_STRING("cuteness"),
+    [CONTEST_CATEGORY_SMART]  = COMPOUND_STRING("smartness"),
+    [CONTEST_CATEGORY_TOUGH]  = COMPOUND_STRING("toughness"),
+};
+
+static const u8 *const sInvalidContestMoveNames[] =
+{
+    [CONTEST_CATEGORY_COOL]    = COMPOUND_STRING("COOL Move"),
+    [CONTEST_CATEGORY_BEAUTY]  = COMPOUND_STRING("BEAUTY Move"),
+    [CONTEST_CATEGORY_CUTE]    = COMPOUND_STRING("CUTE Move"),
+    [CONTEST_CATEGORY_SMART]   = COMPOUND_STRING("SMART Move"),
+    [CONTEST_CATEGORY_TOUGH]   = COMPOUND_STRING("TOUGH Move"),
+    [CONTEST_CATEGORIES_COUNT] = COMPOUND_STRING("???"),
+};
+
+// Takes the .attentionLevel of a contestant as an index.
+static const u8 *const sRoundResultTexts[] =
+{
+    COMPOUND_STRING("{STR_VAR_1} failed to\nstand out at all…{PAUSE_UNTIL_PRESS}"),
+    COMPOUND_STRING("{STR_VAR_1} didn't stand\nout very much…{PAUSE_UNTIL_PRESS}"),
+    COMPOUND_STRING("{STR_VAR_1} caught a\nlittle attention.{PAUSE_UNTIL_PRESS}"),
+    COMPOUND_STRING("{STR_VAR_1} attracted a\nlot of attention.{PAUSE_UNTIL_PRESS}"),
+    COMPOUND_STRING("{STR_VAR_1} commanded\ntotal attention.{PAUSE_UNTIL_PRESS}"),
+    COMPOUND_STRING("{STR_VAR_1} hasn't made\nits appeal.{PAUSE_UNTIL_PRESS}"),
+};
+
 static const struct BgTemplate sContestBgTemplates[] =
 {
     {

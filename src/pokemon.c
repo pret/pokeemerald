@@ -420,7 +420,27 @@ const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 
 #include "data/pokemon/trainer_class_lookups.h"
 #include "data/pokemon/experience_tables.h"
-#include "data/pokemon/level_up_learnsets.h"
+
+#if P_LVL_UP_LEARNSETS >= GEN_9
+#include "data/pokemon/level_up_learnsets/gen_9.h"
+#elif P_LVL_UP_LEARNSETS >= GEN_8
+#include "data/pokemon/level_up_learnsets/gen_8.h"
+#elif P_LVL_UP_LEARNSETS >= GEN_7
+#include "data/pokemon/level_up_learnsets/gen_7.h"
+#elif P_LVL_UP_LEARNSETS >= GEN_6
+#include "data/pokemon/level_up_learnsets/gen_6.h"
+#elif P_LVL_UP_LEARNSETS >= GEN_5
+#include "data/pokemon/level_up_learnsets/gen_5.h"
+#elif P_LVL_UP_LEARNSETS >= GEN_4
+#include "data/pokemon/level_up_learnsets/gen_4.h"
+#elif P_LVL_UP_LEARNSETS >= GEN_3
+#include "data/pokemon/level_up_learnsets/gen_3.h"
+#elif P_LVL_UP_LEARNSETS >= GEN_2
+#include "data/pokemon/level_up_learnsets/gen_2.h"
+#elif P_LVL_UP_LEARNSETS >= GEN_1
+#include "data/pokemon/level_up_learnsets/gen_1.h"
+#endif
+
 #include "data/pokemon/teachable_learnsets.h"
 #include "data/pokemon/form_species_tables.h"
 #include "data/pokemon/form_change_tables.h"
@@ -1927,7 +1947,7 @@ void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerPicId, u8 battlerPosition
             gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
         else
             gMultiuseSpriteTemplate = gBattlerSpriteTemplates[battlerPosition];
-        gMultiuseSpriteTemplate.anims = gTrainerSprites[trainerPicId].animation;
+        gMultiuseSpriteTemplate.anims = sAnims_Trainer;
     }
 }
 
@@ -1939,7 +1959,7 @@ void SetMultiuseSpriteTemplateToTrainerFront(u16 trainerPicId, u8 battlerPositio
         gMultiuseSpriteTemplate = gBattlerSpriteTemplates[battlerPosition];
 
     gMultiuseSpriteTemplate.paletteTag = trainerPicId;
-    gMultiuseSpriteTemplate.anims = gTrainerSprites[trainerPicId].animation;
+    gMultiuseSpriteTemplate.anims = sAnims_Trainer;
 }
 
 static void EncryptBoxMon(struct BoxPokemon *boxMon)
@@ -2087,6 +2107,19 @@ u32 GetMonData2(struct Pokemon *mon, s32 field)
     return GetMonData3(mon, field, NULL);
 }
 
+struct EvolutionTrackerBitfield
+{
+    u16 a: 5;
+    u16 b: 4;
+    u16 unused: 7;
+};
+
+union EvolutionTracker
+{
+    u16 value;
+    struct EvolutionTrackerBitfield asField;
+};
+
 /* GameFreak called GetBoxMonData with either 2 or 3 arguments, for type
  * safety we have a GetBoxMonData macro (in include/pokemon.h) which
  * dispatches to either GetBoxMonData2 or GetBoxMonData3 based on the
@@ -2099,6 +2132,7 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
     struct PokemonSubstruct1 *substruct1 = NULL;
     struct PokemonSubstruct2 *substruct2 = NULL;
     struct PokemonSubstruct3 *substruct3 = NULL;
+    union EvolutionTracker evoTracker;
 
     // Any field greater than MON_DATA_ENCRYPT_SEPARATOR is encrypted and must be treated as such
     if (field > MON_DATA_ENCRYPT_SEPARATOR)
@@ -2479,6 +2513,11 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
             }
             break;
         }
+        case MON_DATA_EVOLUTION_TRACKER:
+            evoTracker.asField.a = substruct1->evolutionTracker1;
+            evoTracker.asField.b = substruct1->evolutionTracker2;
+            retVal = evoTracker.value;
+            break;
         default:
             break;
         }
@@ -2892,6 +2931,16 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             u32 teraType;
             SET8(teraType);
             substruct0->teraType = 1 + teraType;
+            break;
+        }
+        case MON_DATA_EVOLUTION_TRACKER:
+        {
+            union EvolutionTracker evoTracker;
+            u32 evoTrackerValue;
+            SET32(evoTrackerValue);
+            evoTracker.value = evoTrackerValue;
+            substruct1->evolutionTracker1 = evoTracker.asField.a;
+            substruct1->evolutionTracker2 = evoTracker.asField.b;
             break;
         }
         default:
@@ -3409,7 +3458,11 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
     // Get item hold effect
     heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
     if (heldItem == ITEM_ENIGMA_BERRY_E_READER)
+    #if FREE_ENIGMA_BERRY == FALSE
         holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
+    #else
+        holdEffect = 0;
+    #endif //FREE_ENIGMA_BERRY
     else
         holdEffect = ItemId_GetHoldEffect(heldItem);
 
@@ -3966,7 +4019,11 @@ u8 *UseStatIncreaseItem(u16 itemId)
         if (gMain.inBattle)
             itemEffect = gEnigmaBerries[gBattlerInMenuId].itemEffect;
         else
+        #if FREE_ENIGMA_BERRY == FALSE
             itemEffect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
+        #else
+            itemEffect = 0;
+        #endif //FREE_ENIGMA_BERRY
     }
     else
     {
@@ -4047,6 +4104,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
     u16 upperPersonality = personality >> 16;
     u32 holdEffect, currentMap, partnerSpecies, partnerHeldItem, partnerHoldEffect;
     bool32 consumeItem = FALSE;
+    u16 evolutionTracker = GetMonData(mon, MON_DATA_EVOLUTION_TRACKER, 0);
     const struct Evolution *evolutions = GetSpeciesEvolutions(species);
 
     if (evolutions == NULL)
@@ -4058,7 +4116,11 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
         partnerHeldItem = GetMonData(tradePartner, MON_DATA_HELD_ITEM, 0);
 
         if (partnerHeldItem == ITEM_ENIGMA_BERRY_E_READER)
+        #if FREE_ENIGMA_BERRY == FALSE
             partnerHoldEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
+        #else
+            partnerHoldEffect = 0;
+        #endif //FREE_ENIGMA_BERRY
         else
             partnerHoldEffect = ItemId_GetHoldEffect(partnerHeldItem);
     }
@@ -4070,7 +4132,11 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
     }
 
     if (heldItem == ITEM_ENIGMA_BERRY_E_READER)
+    #if FREE_ENIGMA_BERRY == FALSE
         holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
+    #else
+        holdEffect = 0;
+    #endif //FREE_ENIGMA_BERRY
     else
         holdEffect = ItemId_GetHoldEffect(heldItem);
 
@@ -4306,6 +4372,18 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     targetSpecies = evolutions[i].targetSpecies;
                     consumeItem = TRUE;
                 }
+                break;
+            case EVO_LEVEL_MOVE_TWENTY_TIMES:
+                if (evolutionTracker >= 20)
+                    targetSpecies = evolutions[i].targetSpecies;
+                break;
+            case EVO_LEVEL_RECOIL_DAMAGE_MALE:
+                if (evolutionTracker >= evolutions[i].param && GetMonGender(mon) == MON_MALE)
+                    targetSpecies = evolutions[i].targetSpecies;
+                break;
+            case EVO_LEVEL_RECOIL_DAMAGE_FEMALE:
+                if (evolutionTracker >= evolutions[i].param && GetMonGender(mon) == MON_FEMALE)
+                    targetSpecies = evolutions[i].targetSpecies;
                 break;
             }
         }
@@ -4736,7 +4814,11 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
         if (gMain.inBattle)
             holdEffect = gEnigmaBerries[0].holdEffect;
         else
+        #if FREE_ENIGMA_BERRY == FALSE
             holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
+        #else
+            holdEffect = 0;
+        #endif //FREE_ENIGMA_BERRY
     }
     else
     {
@@ -4793,7 +4875,11 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
         if (gMain.inBattle)
             holdEffect = gEnigmaBerries[0].holdEffect;
         else
+        #if FREE_ENIGMA_BERRY == FALSE
             holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
+        #else
+            holdEffect = 0;
+        #endif //FREE_ENIGMA_BERRY
     }
     else
     {
@@ -5085,27 +5171,19 @@ u8 CanLearnTeachableMove(u16 species, u16 move)
         switch (move)
         {
         case MOVE_BADDY_BAD:
-        case MOVE_BLAST_BURN:
         case MOVE_BOUNCY_BUBBLE:
         case MOVE_BUZZY_BUZZ:
-        case MOVE_DRACO_METEOR:
         case MOVE_DRAGON_ASCENT:
-        case MOVE_FIRE_PLEDGE:
         case MOVE_FLOATY_FALL:
         case MOVE_FREEZY_FROST:
-        case MOVE_FRENZY_PLANT:
         case MOVE_GLITZY_GLOW:
-        case MOVE_GRASS_PLEDGE:
-        case MOVE_HYDRO_CANNON:
         case MOVE_RELIC_SONG:
         case MOVE_SAPPY_SEED:
         case MOVE_SECRET_SWORD:
         case MOVE_SIZZLY_SLIDE:
         case MOVE_SPARKLY_SWIRL:
         case MOVE_SPLISHY_SPLASH:
-        case MOVE_STEEL_BEAM:
         case MOVE_VOLT_TACKLE:
-        case MOVE_WATER_PLEDGE:
         case MOVE_ZIPPY_ZAP:
             return FALSE;
         default:

@@ -2,6 +2,7 @@
 #include "constants/battle.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_script_commands.h"
+#include "constants/battle_string_ids.h"
 #include "constants/battle_z_move_effects.h"
 #include "constants/hold_effects.h"
 #include "constants/moves.h"
@@ -9,9 +10,8 @@
 
 // The Gen. 4+ contest data comes from urpg's contest movedex.
 
-#define FIRST(a, ...) a
 #if B_EXPANDED_MOVE_NAMES == TRUE
-#define HANDLE_EXPANDED_MOVE_NAME(_name, ...) COMPOUND_STRING(FIRST(__VA_OPT__(__VA_ARGS__, ) _name))
+#define HANDLE_EXPANDED_MOVE_NAME(_name, ...) COMPOUND_STRING(DEFAULT(_name, __VA_ARGS__))
 #else
 #define HANDLE_EXPANDED_MOVE_NAME(_name, ...) COMPOUND_STRING(_name)
 #endif
@@ -21,6 +21,11 @@
 #else
 #define BINDING_TURNS "2 to 5"
 #endif
+
+/* First arg is the charge turn string id, second arg depends on effect
+EFFECT_SEMI_INVULNERABLE/EFFECT_SKY_DROP: semi-invulnerable STATUS3 to apply to battler
+EFFECT_TWO_TURNS_ATTACK/EFFECT_SOLAR_BEAM: weather in which to skip charge turn */
+#define TWO_TURN_ARG(stringid, ...) (stringid) __VA_OPT__(| ((__VA_ARGS__) << 16))
 
 // Shared Move Description entries
 
@@ -424,6 +429,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
         .windMove = B_EXTRAPOLATED_MOVE_FLAGS,
+        .argument = TWO_TURN_ARG(STRINGID_PKMNWHIPPEDWHIRLWIND),
         .contestEffect = CONTEST_EFFECT_AFFECTED_BY_PREV_APPEAL,
         .contestCategory = CONTEST_CATEGORY_COOL,
         .contestComboStarterId = 0,
@@ -481,7 +487,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "Strikes the foe with a gust\n"
             "of wind whipped up by wings."),
-        .effect = EFFECT_GUST,
+        .effect = EFFECT_HIT,
         .power = 40,
         .type = TYPE_FLYING,
         .accuracy = 100,
@@ -565,6 +571,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
         .assistBanned = TRUE,
+        .argument = TWO_TURN_ARG(STRINGID_PKMNFLEWHIGH, COMPRESS_BITS(STATUS3_ON_AIR)),
         .contestEffect = CONTEST_EFFECT_AVOID_STARTLE,
         .contestCategory = CONTEST_CATEGORY_SMART,
         .contestComboStarterId = 0,
@@ -1912,6 +1919,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .category = DAMAGE_CATEGORY_SPECIAL,
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
+        .argument = TWO_TURN_ARG(STRINGID_PKMNTOOKSUNLIGHT, B_WEATHER_SUN),
         .contestEffect = CONTEST_EFFECT_HIGHLY_APPEALING,
         .contestCategory = CONTEST_CATEGORY_COOL,
         .contestComboStarterId = 0,
@@ -2267,6 +2275,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .instructBanned = TRUE,
         .assistBanned = TRUE,
         .skyBattleBanned = TRUE,
+        .argument = TWO_TURN_ARG(STRINGID_PKMNDUGHOLE, COMPRESS_BITS(STATUS3_UNDERGROUND)),
         .contestEffect = CONTEST_EFFECT_AVOID_STARTLE,
         .contestCategory = CONTEST_CATEGORY_SMART,
         .contestComboStarterId = 0,
@@ -2857,6 +2866,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
         .zMove = { .effect = Z_EFFECT_ACC_UP_1 },
+        .argument = STATUS2_FOCUS_ENERGY,
         .ignoresProtect = TRUE,
         .mirrorMoveBanned = TRUE,
         .snatchAffected = TRUE,
@@ -3188,7 +3198,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "Tucks in the head, then\n"
             "attacks on the next turn."),
-        .effect = EFFECT_SKULL_BASH,
+        .effect = EFFECT_TWO_TURNS_ATTACK,
         .power = B_UPDATED_MOVE_DATA >= GEN_6 ? 130 : 100,
         .type = TYPE_NORMAL,
         .accuracy = 100,
@@ -3199,6 +3209,12 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .makesContact = TRUE,
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
+        .argument = TWO_TURN_ARG(STRINGID_PKMNLOWEREDHEAD),
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_DEF_PLUS_1,
+            .self = TRUE,
+            .onChargeTurnOnly = TRUE,
+        }),
         .contestEffect = CONTEST_EFFECT_BADLY_STARTLE_FRONT_MON,
         .contestCategory = CONTEST_CATEGORY_TOUGH,
         .contestComboStarterId = 0,
@@ -3506,9 +3522,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
-        .criticalHitStage = B_UPDATED_MOVE_DATA >= GEN_3 ? 1 : 0,
+        .criticalHitStage = B_UPDATED_MOVE_DATA >= GEN_3,
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
+        .argument = TWO_TURN_ARG(B_UPDATED_MOVE_DATA >= GEN_4 ? STRINGID_CLOAKEDINAHARSHLIGHT : STRINGID_PKMNISGLOWING),
     #if B_UPDATED_MOVE_DATA >= GEN_3
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_FLINCH,
@@ -6122,7 +6139,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             "that causes flinching."),
         .priority = B_UPDATED_MOVE_DATA >= GEN_5 ? 3 : 1,
         .makesContact = B_UPDATED_MOVE_DATA >= GEN_4,
-        .effect = EFFECT_FAKE_OUT,
+        .effect = EFFECT_FIRST_TURN_ONLY,
         .power = 40,
         .type = TYPE_NORMAL,
         .accuracy = 100,
@@ -7068,6 +7085,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .instructBanned = TRUE,
         .assistBanned = TRUE,
         .skyBattleBanned = TRUE,
+        .argument = TWO_TURN_ARG(STRINGID_PKMNHIDUNDERWATER, COMPRESS_BITS(STATUS3_UNDERWATER)),
         .contestEffect = CONTEST_EFFECT_AVOID_STARTLE_ONCE,
         .contestCategory = CONTEST_CATEGORY_BEAUTY,
         .contestComboStarterId = COMBO_STARTER_DIVE,
@@ -7916,7 +7934,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "An uppercut thrown as if\n"
             "leaping into the sky."),
-        .effect = EFFECT_SKY_UPPERCUT,
+        .effect = EFFECT_HIT,
         .power = 85,
         .type = TYPE_FIGHTING,
         .accuracy = 90,
@@ -8225,6 +8243,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
         .assistBanned = TRUE,
+        .argument = TWO_TURN_ARG(STRINGID_PKMNSPRANGUP, COMPRESS_BITS(STATUS3_ON_AIR)),
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_PARALYSIS,
             .chance = 30,
@@ -11195,6 +11214,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
         .assistBanned = TRUE,
+        .argument = TWO_TURN_ARG(STRINGID_VANISHEDINSTANTLY, COMPRESS_BITS(STATUS3_PHANTOM_FORCE)),
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_FEINT,
         }),
@@ -12120,6 +12140,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
         .assistBanned = TRUE,
+        .argument = TWO_TURN_ARG(STRINGID_PKMNTOOKTARGETHIGH, COMPRESS_BITS(STATUS3_ON_AIR)),
         .contestEffect = CONTEST_EFFECT_AVOID_STARTLE,
         .contestCategory = CONTEST_CATEGORY_SMART,
         .contestComboStarterId = 0,
@@ -13168,6 +13189,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .metronomeBanned = TRUE,
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
+        .argument = TWO_TURN_ARG(STRINGID_CLOAKEDINAFREEZINGLIGHT),
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_PARALYSIS,
             .chance = 30,
@@ -13195,6 +13217,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .metronomeBanned = TRUE,
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
+        .argument = TWO_TURN_ARG(STRINGID_CLOAKEDINAFREEZINGLIGHT),
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_BURN,
             .chance = 30,
@@ -13493,6 +13516,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
         .assistBanned = TRUE,
+        .argument = TWO_TURN_ARG(STRINGID_VANISHEDINSTANTLY, COMPRESS_BITS(STATUS3_PHANTOM_FORCE)),
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_FEINT,
         }),
@@ -14311,6 +14335,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
         .skyBattleBanned = TRUE,
+        .argument = TWO_TURN_ARG(STRINGID_PKNMABSORBINGPOWER),
         .contestEffect = CONTEST_EFFECT_IMPROVE_CONDITION_PREVENT_NERVOUSNESS,
         .contestCategory = CONTEST_CATEGORY_CUTE,
         .contestComboStarterId = 0,
@@ -14778,9 +14803,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .ignoresSubstitute = TRUE,
         .metronomeBanned = TRUE,
         .sketchBanned = (B_SKETCH_BANS >= GEN_9),
-        .additionalEffects = ADDITIONAL_EFFECTS(
+        .additionalEffects = ADDITIONAL_EFFECTS({
             // Feint move effect handled in script as it goes before animation
-        {
             .moveEffect = MOVE_EFFECT_DEF_MINUS_1,
             .self = TRUE,
         }),
@@ -14821,7 +14845,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "Hits hard and first.\n"
             "Only works first turn."),
-        .effect = EFFECT_FAKE_OUT,
+        .effect = EFFECT_FIRST_TURN_ONLY,
         .power = 90,
         .type = TYPE_BUG,
         .accuracy = 100,
@@ -15048,6 +15072,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .slicingMove = TRUE,
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
+        .argument = TWO_TURN_ARG(STRINGID_PKMNTOOKSUNLIGHT, B_WEATHER_SUN),
         .contestEffect = CONTEST_EFFECT_HIGHLY_APPEALING,
         .contestCategory = CONTEST_CATEGORY_TOUGH,
         .contestComboStarterId = 0,
@@ -17268,7 +17293,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "A 2-turn move that raises\n"
             "Sp. Attack before attacking."),
-        .effect = EFFECT_METEOR_BEAM,
+        .effect = EFFECT_TWO_TURNS_ATTACK,
         .power = 120,
         .type = TYPE_ROCK,
         .accuracy = 90,
@@ -17277,6 +17302,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .instructBanned = TRUE,
+        .argument = TWO_TURN_ARG(STRINGID_METEORBEAMCHARGING),
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_SP_ATK_PLUS_1,
             .self = TRUE,
@@ -19485,7 +19511,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "Absorbs electricity in one turn,\n"
             "then attacks next turn."),
-        .effect = EFFECT_METEOR_BEAM,
+        .effect = EFFECT_TWO_TURNS_ATTACK,
         .power = 130,
         .type = TYPE_ELECTRIC,
         .accuracy = 100,
@@ -19493,6 +19519,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
+        .argument = TWO_TURN_ARG(STRINGID_ELECTROSHOTCHARGING, B_WEATHER_RAIN),
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_SP_ATK_PLUS_1,
             .self = TRUE,
@@ -19628,7 +19655,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "Increases allies' critical hit\n"
             "ratio, especially if Dragons."),
-        .effect = EFFECT_PLACEHOLDER, //EFFECT_DRAGON_CHEER
+        .effect = EFFECT_DRAGON_CHEER,
         .power = 0,
         .type = TYPE_DRAGON,
         .accuracy = 0,
@@ -19720,11 +19747,11 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_UPPER_HAND] =
     {
+        .effect = EFFECT_UPPER_HAND,
         .name = COMPOUND_STRING("Upper Hand"),
         .description = COMPOUND_STRING(
             "Makes the target flinch if\n"
             "readying a priority move."),
-        .effect = EFFECT_PLACEHOLDER, //EFFECT_UPPER_HAND
         .power = 65,
         .type = TYPE_FIGHTING,
         .accuracy = 100,
@@ -19733,6 +19760,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .priority = 3,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_FLINCH,
+            .chance = 100,
+        }),
     },
 
     [MOVE_MALIGNANT_CHAIN] =

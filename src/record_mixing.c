@@ -97,7 +97,9 @@ static void *sApprenticesSave;
 static void *sBattleTowerSave_Duplicate;
 static u32 sRecordStructSize;
 static u8 sDaycareMailRandSum;
+#if FREE_RECORD_MIXING_HALL_RECORDS == FALSE
 static struct PlayerHallRecords *sPartnerHallRecords[HALL_RECORDS_COUNT];
+#endif //FREE_RECORD_MIXING_HALL_RECORDS
 
 static EWRAM_DATA struct RecordMixingDaycareMail sRecordMixMail = {0};
 static EWRAM_DATA union PlayerRecord *sReceivedRecords = NULL;
@@ -1198,6 +1200,7 @@ static void ReceiveApprenticeData(struct Apprentice *records, size_t recordSize,
     }
 }
 
+#if FREE_RECORD_MIXING_HALL_RECORDS == FALSE
 static void GetNewHallRecords(struct RecordMixingHallRecords *dst, void *records, size_t recordSize, u32 multiplayerId, s32 linkPlayerCount)
 {
     s32 i, j, k, l;
@@ -1342,12 +1345,15 @@ static void SaveHighestWinStreakRecords(struct RecordMixingHallRecords *mixHallR
         for (j = 0; j < FRONTIER_LVL_MODE_COUNT; j++)
             FillWinStreakRecords1P(gSaveBlock2Ptr->hallRecords1P[i][j], mixHallRecords->hallRecords1P[i][j]);
     }
+
     for (j = 0; j < FRONTIER_LVL_MODE_COUNT; j++)
         FillWinStreakRecords2P(gSaveBlock2Ptr->hallRecords2P[j], mixHallRecords->hallRecords2P[j]);
 }
+#endif //FREE_RECORD_MIXING_HALL_RECORDS
 
 static void ReceiveRankingHallRecords(struct PlayerHallRecords *records, size_t recordSize, u32 multiplayerId)
 {
+#if FREE_RECORD_MIXING_HALL_RECORDS == FALSE
     u8 linkPlayerCount = GetLinkPlayerCount();
     struct RecordMixingHallRecords *mixHallRecords = AllocZeroed(sizeof(*mixHallRecords));
 
@@ -1355,6 +1361,7 @@ static void ReceiveRankingHallRecords(struct PlayerHallRecords *records, size_t 
     SaveHighestWinStreakRecords(mixHallRecords);
 
     Free(mixHallRecords);
+#endif //FREE_RECORD_MIXING_HALL_RECORDS
 }
 
 static void GetRecordMixingDaycareMail(struct RecordMixingDaycareMail *dst)

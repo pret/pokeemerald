@@ -606,7 +606,7 @@ void SetZEffect(void)
         }
         break;
     case Z_EFFECT_BOOST_CRITS:
-        if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY))
+        if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY_ANY))
         {
             gBattleMons[gBattlerAttacker].status2 |= STATUS2_FOCUS_ENERGY;
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_Z_BOOST_CRITS;

@@ -54,3 +54,22 @@ SINGLE_BATTLE_TEST("Maranga Berry raises the holder's Sp. Def by two stages with
         EXPECT_EQ(opponent->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE + 2);
     }
 }
+
+SINGLE_BATTLE_TEST("Maranga Berry doesn't trigger if the item hold user used a special move")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_MARANGA_BERRY); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SWIFT); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SWIFT, player);
+        HP_BAR(opponent);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
+            MESSAGE("Using Maranga Berry, the Sp. Def of Applin sharply rose!");
+        }
+    } THEN {
+        EXPECT_EQ(player->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE);
+    }
+}

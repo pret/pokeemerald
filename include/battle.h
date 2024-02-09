@@ -55,9 +55,10 @@ struct __attribute__((packed, aligned(2))) BattleMoveEffect
     u16 battleTvScore:3;
     u16 encourageEncore:1;
     u16 twoTurnEffect:1;
+    u16 semiInvulnerableEffect:1;
     u16 usesProtectCounter:1;
     u16 forcePressure:1;
-    u16 padding:9;
+    u16 padding:8;
 };
 
 #define GET_MOVE_EFFECT(move) gBattleMoveEffects[gMovesInfo[move].effect]
@@ -341,7 +342,7 @@ struct AiLogicData
     bool8 shouldSwitchMon; // Because all available moves have no/little effect. Each bit per battler.
     u8 monToSwitchId[MAX_BATTLERS_COUNT]; // ID of the mon to switch.
     bool8 weatherHasEffect; // The same as WEATHER_HAS_EFFECT. Stored here, so it's called only once.
-    u8 mostSuitableMonId; // Stores result of GetMostSuitableMonToSwitchInto, which decides which generic mon the AI would switch into if they decide to switch. This can be overruled by specific mons found in ShouldSwitch; the final resulting mon is stored in AI_monToSwitchIntoId.
+    u8 mostSuitableMonId[MAX_BATTLERS_COUNT]; // Stores result of GetMostSuitableMonToSwitchInto, which decides which generic mon the AI would switch into if they decide to switch. This can be overruled by specific mons found in ShouldSwitch; the final resulting mon is stored in AI_monToSwitchIntoId.
     struct SwitchinCandidate switchinCandidate; // Struct used for deciding which mon to switch to in battle_ai_switch_items.c
 };
 
@@ -771,9 +772,8 @@ struct BattleStruct
     u8 timesGotHit[NUM_BATTLE_SIDES][PARTY_SIZE];
     u8 enduredDamage;
     u8 transformZeroToHero[NUM_BATTLE_SIDES];
-    u8 intrepidSwordBoost[NUM_BATTLE_SIDES];
-    u8 dauntlessShieldBoost[NUM_BATTLE_SIDES];
     u8 stickySyrupdBy[MAX_BATTLERS_COUNT];
+    u8 abilityActivated[NUM_BATTLE_SIDES];
 };
 
 // The palaceFlags member of struct BattleStruct contains 1 flag per move to indicate which moves the AI should consider,
@@ -851,10 +851,10 @@ struct BattleScripting
     s32 bideDmg;
     u8 multihitString[6];
     bool8 expOnCatch;
-    u8 twoTurnsMoveStringId;
+    u8 unused;
     u8 animArg1;
     u8 animArg2;
-    u16 tripleKickPower;
+    u16 savedStringId;
     u8 moveendState;
     u8 savedStatChanger; // For further use, if attempting to change stat two times(ex. Moody)
     u8 shiftSwitched; // When the game tells you the next enemy's pokemon and you switch. Option for noobs but oh well.
