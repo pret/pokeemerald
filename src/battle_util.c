@@ -3055,7 +3055,7 @@ bool32 HandleWishPerishSongOnTurnEnd(void)
     return FALSE;
 }
 
-#define FAINTED_ACTIONS_MAX_CASE 8
+#define FAINTED_ACTIONS_MAX_CASE 7
 
 bool32 HandleFaintedMonActions(void)
 {
@@ -3139,19 +3139,7 @@ bool32 HandleFaintedMonActions(void)
             else
                 gBattleStruct->faintedActionsState = 4;
             break;
-        case 6: // All battlers switch-in abilities happen here to prevent them happening against an empty field.
-            for (i = 0; i < gBattlersCount; i++)
-            {
-                if (gBattleStruct->switchInAbilityPostponed & gBitTable[i])
-                {
-                    if (DoSwitchInAbilitiesItems(i))
-                        return TRUE;
-                    gBattleStruct->switchInAbilityPostponed &= ~(gBitTable[i]);
-                }
-            }
-            gBattleStruct->faintedActionsState++;
-            break;
-        case 7:
+        case 6:
             if (ItemBattleEffects(ITEMEFFECT_NORMAL, 0, TRUE))
                 return TRUE;
             gBattleStruct->faintedActionsState++;
@@ -4471,8 +4459,8 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
         case ABILITY_INTIMIDATE:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
-                gBattlerAttacker = battler;
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                gBattlerAttacker = battler;
                 SET_STATCHANGER(STAT_ATK, 1, TRUE);
                 BattleScriptPushCursorAndCallback(BattleScript_IntimidateActivates);
                 effect++;
@@ -5622,7 +5610,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && gBattleMons[gBattlerTarget].hp != 0
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && RandomWeighted(RNG_STENCH, 9, 1)
-             && !IS_MOVE_STATUS(move)
+             && TARGET_TURN_DAMAGED
              && !MoveHasMoveEffect(gCurrentMove, MOVE_EFFECT_FLINCH))
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_FLINCH;
