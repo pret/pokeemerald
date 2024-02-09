@@ -5792,7 +5792,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && gBattleMons[gBattlerTarget].hp != 0
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && RandomWeighted(RNG_STENCH, 9, 1)
-             && !IS_MOVE_STATUS(move)
+             && TARGET_TURN_DAMAGED
              && gBattleMoves[gCurrentMove].effect != EFFECT_FLINCH_HIT
              && gBattleMoves[gCurrentMove].effect != EFFECT_FLINCH_STATUS
              && gBattleMoves[gCurrentMove].effect != EFFECT_TRIPLE_ARROWS)
