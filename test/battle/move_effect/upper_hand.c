@@ -99,12 +99,12 @@ SINGLE_BATTLE_TEST("Upper Hand fails if the target moves first")
     }
 }
 
-SINGLE_BATTLE_TEST("Upper Hand is boosted by Sheer Force")
+SINGLE_BATTLE_TEST("Upper Hand is boosted by Sheer Force") // why does this move need a special test?
 {
     GIVEN {
         ASSUME(gMovesInfo[MOVE_EXTREME_SPEED].category == DAMAGE_CATEGORY_PHYSICAL);
         ASSUME(gMovesInfo[MOVE_EXTREME_SPEED].priority == 2);
-        ASSUME(gMovesInfo[MOVE_UPPER_HAND].sheerForceBoost == TRUE);
+        ASSUME(MoveIsAffectedBySheerForce(MOVE_UPPER_HAND) == TRUE);
         PLAYER(SPECIES_HARIYAMA) { Ability(ABILITY_SHEER_FORCE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
