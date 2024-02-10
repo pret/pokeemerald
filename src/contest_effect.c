@@ -138,7 +138,8 @@ static void ContestEffect_StartleFrontMon(void)
     u8 idx = 0;
     u8 a = eContestAppealResults.contestant;
 
-    if (eContestAppealResults.turnOrder[a] != 0) {
+    if (eContestAppealResults.turnOrder[a] != 0)
+    {
         int i;
 
         for (i = 0; i < CONTESTANT_COUNT; i++)
