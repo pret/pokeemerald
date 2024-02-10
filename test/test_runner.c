@@ -120,6 +120,7 @@ top:
         MoveSaveBlocks_ResetHeap();
         ClearSav1();
         ClearSav2();
+        ClearSav3();
 
         gIntrTable[7] = Intr_Timer2;
 
