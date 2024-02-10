@@ -18634,7 +18634,6 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
-        .metronomeBanned = TRUE, // Only since it isn't implemented yet
         .forcePressure = TRUE,
     },
 
@@ -18686,7 +18685,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "This move deals more damage\n"
             "for each defeated ally."),
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_LAST_RESPECTS
+        .effect = EFFECT_LAST_RESPECTS,
         .power = 50,
         .type = TYPE_GHOST,
         .accuracy = 100,
@@ -18694,7 +18693,6 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
-        .metronomeBanned = TRUE, // Only since it isn't implemented yet
     },
 
     [MOVE_LUMINA_CRASH] =
@@ -18851,7 +18849,6 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
-        .metronomeBanned = TRUE, // Only since it isn't implemented yet
     },
 
     [MOVE_REVIVAL_BLESSING] =
