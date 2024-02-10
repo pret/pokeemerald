@@ -106,6 +106,24 @@ DOUBLE_BATTLE_TEST("Opportunist raises Attack only once when partner has Intimid
     }
 }
 
+SINGLE_BATTLE_TEST("Opportunist does not accumulate opposing mon's stat changes")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_ESPATHRA) { Ability(ABILITY_OPPORTUNIST); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SWORDS_DANCE); }
+        TURN { MOVE(player, MOVE_SWORDS_DANCE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SWORDS_DANCE, player);
+        ABILITY_POPUP(opponent, ABILITY_OPPORTUNIST);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SWORDS_DANCE, player);
+        ABILITY_POPUP(opponent, ABILITY_OPPORTUNIST);
+    } THEN {
+        EXPECT_EQ(opponent->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 4);
+    }
+}
+
 TO_DO_BATTLE_TEST("Opportunist doesn't copy ally stat increases");
 TO_DO_BATTLE_TEST("Opportunist doesn't copy foe stat increases gained via Opportunist");
 TO_DO_BATTLE_TEST("Opportunist copies foe stat increased gained via Swagger and Flatter");
