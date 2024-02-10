@@ -7833,6 +7833,7 @@ BattleScript_IntimidateInReverse:
 
 BattleScript_SupersweetSyrupActivates::
 	showabilitypopup BS_ATTACKER
+ 	copybyte sSAVED_BATTLER, gBattlerTarget
 	pause B_WAIT_TIME_LONG
 	destroyabilitypopup
 	printstring STRINGID_SUPERSWEETAROMAWAFTS
@@ -7861,6 +7862,7 @@ BattleScript_SupersweetSyrupLoopIncrement:
 BattleScript_SupersweetSyrupEnd:
 	copybyte sBATTLER, gBattlerAttacker
 	destroyabilitypopup
+ 	copybyte gBattlerTarget, sSAVED_BATTLER
 	pause B_WAIT_TIME_MED
 	end3
 
