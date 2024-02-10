@@ -5667,6 +5667,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && TARGET_TURN_DAMAGED
              && IsBattlerAlive(battler))
             {
+                // TODO: Convert this to a proper FORM_CHANGE type.
                 if (gBattleMons[gBattlerTarget].species == SPECIES_CRAMORANT_GORGING)
                 {
                     gBattleMons[gBattlerTarget].species = SPECIES_CRAMORANT;
@@ -6109,6 +6110,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && !(gBattleMons[battler].status2 & STATUS2_TRANSFORMED)
              && gBattleStruct->allowedToChangeFormInWeather[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)])
             {
+                // TODO: Convert this to a proper FORM_CHANGE type.
                 gBattleStruct->allowedToChangeFormInWeather[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)] = FALSE;
                 gBattleMons[battler].species = SPECIES_EISCUE_ICE_FACE;
                 BattleScriptPushCursorAndCallback(BattleScript_BattlerFormChangeWithStringEnd3);
