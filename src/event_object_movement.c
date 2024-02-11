@@ -2095,6 +2095,78 @@ static u32 FindMetatileBehaviorWithinRange(s32 x, s32 y, u32 mb, u8 distance) {
     return DIR_NONE;
 }
 
+// Check a single follower message condition
+bool32 CheckMsgCondition(const struct MsgCondition *cond, struct Pokemon *mon, u32 species, struct ObjectEvent *obj) {
+    u32 multi;
+    if (species == SPECIES_NONE)
+        species = GetMonData(mon, MON_DATA_SPECIES);
+
+    switch (cond->type)
+    {
+    case MSG_COND_SPECIES:
+        return (cond->data.raw == species);
+    case MSG_COND_TYPE:
+        multi = (SpeciesHasType(species, cond->data.bytes[0]) ||
+                 SpeciesHasType(species, cond->data.bytes[1]));
+        // if bytes[2] == TYPE_NONE,
+        // invert; check that mon has *neither* type!
+        if (cond->data.bytes[2] == 0)
+            return multi;
+        else
+            return !multi;
+        break;
+    case MSG_COND_STATUS:
+        return (cond->data.raw & mon->status);
+    case MSG_COND_MAPSEC:
+        return (cond->data.raw == gMapHeader.regionMapSectionId);
+    case MSG_COND_MAP:
+        return (gSaveBlock1Ptr->location.mapGroup == cond->data.bytes[0] &&
+                gSaveBlock1Ptr->location.mapNum == cond->data.bytes[1]);
+    case MSG_COND_ON_MB:
+        return (obj->currentMetatileBehavior == cond->data.bytes[0] ||
+                obj->currentMetatileBehavior == cond->data.bytes[1]);
+    case MSG_COND_WEATHER:
+        multi = GetCurrentWeather();
+        return (multi == cond->data.bytes[0] || multi == cond->data.bytes[1]);
+    case MSG_COND_MUSIC:
+        return (cond->data.raw == GetCurrentMapMusic());
+    // Added on `lighting` branch
+    // case MSG_COND_TIME_OF_DAY:
+    //     break;
+    case MSG_COND_NEAR_MB:
+        multi = FindMetatileBehaviorWithinRange(
+                    obj->currentCoords.x, obj->currentCoords.y, 
+                    cond->data.bytes[0], cond->data.bytes[1]);
+        if (multi)
+            gSpecialVar_Result = multi;
+        return multi;
+    case MSG_COND_NONE:
+    // fallthrough
+    default:
+        return TRUE;
+    }
+}
+
+// Check if follower info can be displayed in the current situation;
+// i.e, if all its conditions match
+bool32 CheckMsgInfo(const struct FollowerMsgInfoExtended *info, struct Pokemon *mon, u32 species, struct ObjectEvent *obj) {
+    u32 i;
+
+    // any condition matches
+    if (info->orFlag) {
+        for (i = 0; i < ARRAY_COUNT(info->conditions) && info->conditions[i].type; i++)
+            if (CheckMsgCondition(&info->conditions[i], mon, species, obj))
+                return TRUE;
+        return FALSE;
+    // all conditions must match
+    } else {
+        for (i = 0; i < ARRAY_COUNT(info->conditions) && info->conditions[i].type; i++)
+            if (!CheckMsgCondition(&info->conditions[i], mon, species, obj))
+                return FALSE;
+        return TRUE;
+    }
+}
+
 // Call an applicable follower message script
 bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big switch for follower messages
 {
@@ -2226,41 +2298,8 @@ bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big 
     // (50% chance) Match *scripted* conditional messages, from follower_helper.c
     for (i = (Random() & 1) ? COND_MSG_COUNT : 0, j = 1; i < COND_MSG_COUNT; i++) {
         const struct FollowerMsgInfoExtended *info = &gFollowerConditionalMessages[i];
-        if (info->stFlags == 1 && species != info->st.species)
+        if (!CheckMsgInfo(info, mon, species, objEvent))
             continue;
-        if (info->stFlags == 2 &&
-            (info->st.types.type2 >= NUMBER_OF_MON_TYPES ?
-                SpeciesHasType(species, info->st.types.type1) :
-                !(SpeciesHasType(species, info->st.types.type1) || SpeciesHasType(species, info->st.types.type2)))
-           )
-            continue;
-        if (info->stFlags == 3 && !(mon->status & info->st.status))
-            continue;
-        if (info->mmFlags == 1 && gMapHeader.regionMapSectionId != info->mm.mapSec.mapSec)
-            continue;
-        if (info->mmFlags == 2 &&
-            !(gSaveBlock1Ptr->location.mapNum == info->mm.map.mapNum &&
-              gSaveBlock1Ptr->location.mapGroup == info->mm.map.mapGroup)
-           )
-        continue;
-        if (info->mmFlags == 3 &&
-            !(objEvent->currentMetatileBehavior == info->mm.mb.behavior1 ||
-              objEvent->currentMetatileBehavior == info->mm.mb.behavior2)
-           )
-            continue;
-        if (info->wtFlags == 1 &&
-            !(GetCurrentWeather() == info->wt.weather.weather1 ||
-              GetCurrentWeather() == info->wt.weather.weather2)
-           )
-            continue;
-        if (info->wtFlags == 2 && GetCurrentMapMusic() != info->wt.song)
-            continue;
-        if (info->nearFlags == 1) {
-            if ((multi2 = FindMetatileBehaviorWithinRange(objEvent->currentCoords.x, objEvent->currentCoords.y, info->near.mb.behavior, info->near.mb.distance)))
-                gSpecialVar_Result = multi2;
-            else
-                continue;
-        }
 
         // replace choice with weight/j chance
         if (Random() < (0x10000 / (j++)) * (info->weight ? info->weight : 1)) {
