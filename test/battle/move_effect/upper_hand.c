@@ -99,7 +99,7 @@ SINGLE_BATTLE_TEST("Upper Hand fails if the target moves first")
     }
 }
 
-SINGLE_BATTLE_TEST("Upper Hand is boosted by Sheer Force") // why does this move need a special test?
+SINGLE_BATTLE_TEST("Upper Hand is boosted by Sheer Force")
 {
     GIVEN {
         ASSUME(gMovesInfo[MOVE_EXTREME_SPEED].category == DAMAGE_CATEGORY_PHYSICAL);
