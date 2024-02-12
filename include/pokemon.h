@@ -451,11 +451,10 @@ struct MoveInfo
     const u8 *name;
     const u8 *description;
     u16 effect;
-    u8 power;
-    u8 accuracy;
-
     u16 type:5;
     u16 category:2;
+    u16 power:9; // up to 511
+    u16 accuracy:7;
     u16 target:9;
     u8 pp;
     union {
@@ -468,6 +467,7 @@ struct MoveInfo
     u32 strikeCount:4; // Max 15 hits. Defaults to 1 if not set. May apply its effect on each hit.
     u32 criticalHitStage:2;
     u32 alwaysCriticalHit:1;
+    // 14 bits left to complete this word - continues into flags
 
     // Flags
     u32 makesContact:1;
