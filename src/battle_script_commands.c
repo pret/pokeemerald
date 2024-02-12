@@ -3865,7 +3865,7 @@ static void Cmd_setadditionaleffects(void)
                 percentChance = CalcSecondaryEffectChance(gBattlerAttacker, GetBattlerAbility(gBattlerAttacker), &additionalEffects[i]);
 
                 // Activate effect if it's primary (chance == 0) or if RNGesus says so
-                if ((percentChance == 0) || RandomPercentage(RNG_SECONDARY_EFFECT + i, percentChance))
+                if ((percentChance == 0) || RandomPercentage(RNG_SECONDARY_EFFECT + (i % 3), percentChance))
                 {
                     gBattleScripting.moveEffect = additionalEffects[i].moveEffect | (MOVE_EFFECT_AFFECTS_USER * (additionalEffects[i].self));
 

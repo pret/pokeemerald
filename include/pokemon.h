@@ -525,7 +525,7 @@ struct MoveInfo
 };
 
 #define EFFECTS_ARR(...) (const struct AdditionalEffect[]) {__VA_ARGS__}
-#define ADDITIONAL_EFFECTS(...) ((ARRAY_COUNT(EFFECTS_ARR( __VA_ARGS__ )) % 0xF) << 28) + (uintptr_t)(EFFECTS_ARR( __VA_ARGS__ ))
+#define ADDITIONAL_EFFECTS(...) ((min(ARRAY_COUNT(EFFECTS_ARR( __VA_ARGS__ )), 15)) << 28) + (uintptr_t)(EFFECTS_ARR( __VA_ARGS__ ))
 
 // Retrieve a move's additional effects and the count thereof
 #define GET_ADDITIONAL_EFFECTS_AND_COUNT(move, _count, _effects) u32 _count = GET_ADDITIONAL_EFFECTS_COUNT(move); const struct AdditionalEffect *_effects = GET_ADDITIONAL_EFFECTS(move)
