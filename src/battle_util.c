@@ -8504,8 +8504,8 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
         if ((gBattleMons[battlerDef].status1 | (STATUS1_SLEEP * (abilityDef == ABILITY_COMATOSE))) & gMovesInfo[move].argument)
             basePower *= 2;
         break;
-    case EFFECT_WRING_OUT:
-        basePower = 120 * gBattleMons[battlerDef].hp / gBattleMons[battlerDef].maxHP;
+    case EFFECT_VARY_POWER_BASED_ON_HP:
+        basePower = gMovesInfo[move].argument * gBattleMons[battlerDef].hp / gBattleMons[battlerDef].maxHP;
         break;
     case EFFECT_ASSURANCE:
         if (gProtectStructs[battlerDef].physicalDmg != 0 || gProtectStructs[battlerDef].specialDmg != 0 || gProtectStructs[battlerDef].confusionSelfDmg)
