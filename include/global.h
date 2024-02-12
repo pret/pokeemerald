@@ -167,6 +167,12 @@ struct UCoords32
     u32 y;
 };
 
+struct SaveBlock3
+{
+};
+
+extern struct SaveBlock3 *gSaveBlock3Ptr;
+
 struct Time
 {
     /*0x00*/ s16 days;

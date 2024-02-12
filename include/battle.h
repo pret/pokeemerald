@@ -734,7 +734,6 @@ struct BattleStruct
     u8 quickClawBattlerId;
     struct LostItem itemLost[PARTY_SIZE];  // Player's team that had items consumed or stolen (two bytes per party member)
     u8 forcedSwitch:4; // For each battler
-    u8 switchInAbilityPostponed:4; // To not activate against an empty field, each bit for battler
     u8 blunderPolicy:1; // should blunder policy activate
     u8 swapDamageCategory:1; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
     u8 additionalEffectsCounter:4; // A counter for the additionalEffects applied by the current move in Cmd_setadditionaleffects
@@ -753,7 +752,6 @@ struct BattleStruct
     u8 storedHealingWish:4; // Each battler as a bit.
     u8 storedLunarDance:4; // Each battler as a bit.
     u8 bonusCritStages[MAX_BATTLERS_COUNT]; // G-Max Chi Strike boosts crit stages of allies.
-    uq4_12_t supremeOverlordModifier[MAX_BATTLERS_COUNT];
     u8 itemPartyIndex[MAX_BATTLERS_COUNT];
     u8 itemMoveIndex[MAX_BATTLERS_COUNT];
     u8 trainerSlideFirstCriticalHitMsgState:2;
@@ -773,7 +771,10 @@ struct BattleStruct
     u8 enduredDamage;
     u8 transformZeroToHero[NUM_BATTLE_SIDES];
     u8 stickySyrupdBy[MAX_BATTLERS_COUNT];
-    u8 abilityActivated[NUM_BATTLE_SIDES];
+    u8 intrepidSwordBoost[NUM_BATTLE_SIDES];
+    u8 dauntlessShieldBoost[NUM_BATTLE_SIDES];
+    u8 supersweetSyrup[NUM_BATTLE_SIDES];
+    u8 supremeOverlordCounter[MAX_BATTLERS_COUNT];
 };
 
 // The palaceFlags member of struct BattleStruct contains 1 flag per move to indicate which moves the AI should consider,

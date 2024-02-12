@@ -130,7 +130,7 @@ Based off RHH's pokeemerald-expansion v1.7.3 https://github.com/rh-hideout/pokee
         - Accesible by pressing `R + Start` in the overworld by default.
         - **Additional features**:
             - *Clear Boxes*: cleans every Pokémon from the Boxes.
-            - *Hatch an Egg*: lets you choose an Egg in your party and immediatly hatch it.
+            - *Hatch an Egg*: lets you choose an Egg in your party and immediately hatch it.
     - [HGSS Pokédex](https://github.com/TheXaman/pokeemerald/tree/tx_pokedexPlus_hgss) by @TheXaman
         - May be disabled.
         - **Additional features**:

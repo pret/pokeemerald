@@ -46,6 +46,24 @@ SINGLE_BATTLE_TEST("Antidote heals a battler from being badly poisoned")
     }
 }
 
+SINGLE_BATTLE_TEST("Antidote resets Toxic Counter")
+{
+    GIVEN {
+        ASSUME(gItemsInfo[ITEM_ANTIDOTE].battleUsage == EFFECT_ITEM_CURE_STATUS);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_TOXIC); }
+        TURN { ; }
+        TURN { USE_ITEM(player, ITEM_ANTIDOTE, partyIndex: 0); }
+    } SCENE {
+        MESSAGE("Foe Wobbuffet used Toxic!");
+        MESSAGE("Wobbuffet had its status healed!");
+    } THEN {
+        EXPECT_EQ(player->status1, STATUS1_NONE);
+    }
+}
+
 SINGLE_BATTLE_TEST("Awakening heals a battler from being asleep")
 {
     GIVEN {

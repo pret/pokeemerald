@@ -82,17 +82,19 @@ DOUBLE_BATTLE_TEST("Intimidate doesn't activate on an empty field in a double ba
         MESSAGE("Go! Abra!");
         MESSAGE("2 sent out Wynaut!");
 
-        ABILITY_POPUP(playerLeft, ABILITY_INTIMIDATE);
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-        MESSAGE("Ekans's Intimidate cuts Foe Arbok's attack!");
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-        MESSAGE("Ekans's Intimidate cuts Foe Wynaut's attack!");
+        NONE_OF {
+            ABILITY_POPUP(playerLeft, ABILITY_INTIMIDATE);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
+            MESSAGE("Ekans's Intimidate cuts Foe Arbok's attack!");
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
+            MESSAGE("Ekans's Intimidate cuts Foe Wynaut's attack!");
 
-        ABILITY_POPUP(opponentLeft, ABILITY_INTIMIDATE);
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Foe Arbok's Intimidate cuts Ekans's attack!");
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Foe Arbok's Intimidate cuts Abra's attack!");
+            ABILITY_POPUP(opponentLeft, ABILITY_INTIMIDATE);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
+            MESSAGE("Foe Arbok's Intimidate cuts Ekans's attack!");
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
+            MESSAGE("Foe Arbok's Intimidate cuts Abra's attack!");
+        }
     }
 }
 
@@ -157,5 +159,28 @@ DOUBLE_BATTLE_TEST("Intimidate activates on an empty slot")
         }
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
         MESSAGE("Hitmontop's Intimidate cuts Foe Azurill's attack!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("Intimidate activates immediately after the mon was switched in as long as one opposing mon is alive")
+{
+    GIVEN {
+        PLAYER(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); };
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_EKANS) { Ability(ABILITY_INTIMIDATE); Item(ITEM_ELECTRIC_SEED); }
+        OPPONENT(SPECIES_WYNAUT) { HP(1); }
+        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_U_TURN, target: opponentLeft); SEND_OUT(playerLeft, 2); SEND_OUT(opponentLeft, 2); }
+    } SCENE {
+        ABILITY_POPUP(playerLeft, ABILITY_ELECTRIC_SURGE);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_U_TURN, playerLeft);
+        HP_BAR(opponentLeft);
+        ABILITY_POPUP(playerLeft, ABILITY_INTIMIDATE);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerLeft);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
+    } THEN {
+        EXPECT_EQ(playerLeft->statStages[STAT_DEF], DEFAULT_STAT_STAGE + 1);
     }
 }

@@ -18408,7 +18408,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "If the user's Terastallized,\n"
             "it hits with its Tera-type."),
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_TERA_BLAST,
+        .effect = EFFECT_PLACEHOLDER, // EFFECT_TERA_BLAST, // .forcePressure = TRUE,
         .power = 80,
         .accuracy = 100,
         .type = TYPE_NORMAL,
@@ -18465,7 +18465,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "This move deals more damage\n"
             "for each defeated ally."),
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_LAST_RESPECTS
+        .effect = EFFECT_LAST_RESPECTS,
         .power = 50,
         .accuracy = 100,
         .type = TYPE_GHOST,
@@ -18627,7 +18627,6 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .pp = 5,
         .priority = 0,
         .makesContact = TRUE,
-        .metronomeBanned = TRUE, // Only since it isn't implemented yet
     },
 
     [MOVE_REVIVAL_BLESSING] =
