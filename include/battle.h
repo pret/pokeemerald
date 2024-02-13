@@ -57,8 +57,7 @@ struct __attribute__((packed, aligned(2))) BattleMoveEffect
     u16 twoTurnEffect:1;
     u16 semiInvulnerableEffect:1;
     u16 usesProtectCounter:1;
-    u16 forcePressure:1;
-    u16 padding:8;
+    u16 padding:9;
 };
 
 #define GET_MOVE_EFFECT(move) gBattleMoveEffects[gMovesInfo[move].effect]
