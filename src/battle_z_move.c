@@ -151,7 +151,7 @@ void QueueZMove(u8 battler, u16 baseMove)
     if (gBattleStruct->zmove.chosenZMove == MOVE_LIGHT_THAT_BURNS_THE_SKY)
         gBattleStruct->zmove.categories[battler] = GetCategoryBasedOnStats(battler);
     else
-        gBattleStruct->zmove.categories[battler] = gBattleMoves[baseMove].category;
+        gBattleStruct->zmove.categories[battler] = gMovesInfo[baseMove].category;
 }
 
 bool32 IsViableZMove(u8 battler, u16 move)
@@ -192,7 +192,7 @@ bool32 IsViableZMove(u8 battler, u16 move)
             return TRUE;
         }
 
-        if (move != MOVE_NONE && zMove != MOVE_Z_STATUS && gBattleMoves[move].type == ItemId_GetSecondaryId(item))
+        if (move != MOVE_NONE && zMove != MOVE_Z_STATUS && gMovesInfo[move].type == ItemId_GetSecondaryId(item))
         {
             gBattleStruct->zmove.chosenZMove = GetTypeBasedZMove(move, battler);
             return TRUE;
@@ -376,7 +376,7 @@ static u16 GetSignatureZMove(u16 move, u16 species, u16 item)
 
 static u16 GetTypeBasedZMove(u16 move, u8 battler)
 {
-    u8 moveType = gBattleMoves[move].type;
+    u8 moveType = gMovesInfo[move].type;
 
     // Get z move from type
     if (moveType < TYPE_FIRE)
@@ -407,7 +407,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove, u32 battler)
 
         if (IS_MOVE_STATUS(move))
         {
-            u8 zEffect = gBattleMoves[move].zMove.effect;
+            u8 zEffect = gMovesInfo[move].zMove.effect;
 
             gDisplayedStringBattle[0] = EOS;
 
@@ -486,19 +486,19 @@ bool32 MoveSelectionDisplayZMove(u16 zmove, u32 battler)
             BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_NAME_3);
             gDisplayedStringBattle[0] = CHAR_Z;
             gDisplayedStringBattle[1] = CHAR_HYPHEN;
-            StringCopy(gDisplayedStringBattle + 2, gMoveNames[move]);
+            StringCopy(gDisplayedStringBattle + 2, GetMoveName(move));
         }
         else if (zmove == MOVE_EXTREME_EVOBOOST)
         {
             // Damaging move -> status z move
             StringCopy(gDisplayedStringBattle, sText_StatsPlus2);
             BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_NAME_3);
-            StringCopy(gDisplayedStringBattle, GetZMoveName(zmove));
+            StringCopy(gDisplayedStringBattle, GetMoveName(zmove));
         }
         else
         {
             ZMoveSelectionDisplayPower(move, zmove);
-            StringCopy(gDisplayedStringBattle, GetZMoveName(zmove));
+            StringCopy(gDisplayedStringBattle, GetMoveName(zmove));
         }
         BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_NAME_1);
 
@@ -517,9 +517,9 @@ static void ZMoveSelectionDisplayPower(u16 move, u16 zMove)
     u16 power = GetZMovePower(move);
 
     if (zMove >= MOVE_CATASTROPIKA)
-        power = gBattleMoves[zMove].power;
+        power = gMovesInfo[zMove].power;
 
-    if (gBattleMoves[move].category != BATTLE_CATEGORY_STATUS)
+    if (gMovesInfo[move].category != DAMAGE_CATEGORY_STATUS)
     {
         txtPtr = StringCopy(gDisplayedStringBattle, sText_PowerColon);
         ConvertIntToDecimalStringN(txtPtr, power, STR_CONV_MODE_LEFT_ALIGN, 3);
@@ -555,14 +555,6 @@ static void ZMoveSelectionDisplayMoveType(u16 zMove, u32 battler)
 
     StringCopy(txtPtr, gTypeNames[zMoveType]);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);
-}
-
-const u8 *GetZMoveName(u16 move)
-{
-    if (IsZMove(move))
-        return gZMoveNames[move - FIRST_Z_MOVE];
-    else
-        return gZMoveNames[0];   // Failsafe
 }
 
 #define Z_EFFECT_BS_LENGTH  5
@@ -614,7 +606,7 @@ void SetZEffect(void)
         }
         break;
     case Z_EFFECT_BOOST_CRITS:
-        if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY))
+        if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY_ANY))
         {
             gBattleMons[gBattlerAttacker].status2 |= STATUS2_FOCUS_ENERGY;
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_Z_BOOST_CRITS;
@@ -688,32 +680,32 @@ static bool32 AreStatsMaxed(u8 battler, u8 n)
 
 u16 GetZMovePower(u16 move)
 {
-    if (gBattleMoves[move].category == BATTLE_CATEGORY_STATUS)
+    if (gMovesInfo[move].category == DAMAGE_CATEGORY_STATUS)
         return 0;
-    if (gBattleMoves[move].effect == EFFECT_OHKO)
+    if (gMovesInfo[move].effect == EFFECT_OHKO)
         return 180;
 
-    if (gBattleMoves[move].zMove.powerOverride > 0)
-        return gBattleMoves[move].zMove.powerOverride;
+    if (gMovesInfo[move].zMove.powerOverride > 0)
+        return gMovesInfo[move].zMove.powerOverride;
     else
     {
-        if (gBattleMoves[move].power >= 140)
+        if (gMovesInfo[move].power >= 140)
             return 200;
-        else if (gBattleMoves[move].power >= 130)
+        else if (gMovesInfo[move].power >= 130)
             return 195;
-        else if (gBattleMoves[move].power >= 120)
+        else if (gMovesInfo[move].power >= 120)
             return 190;
-        else if (gBattleMoves[move].power >= 110)
+        else if (gMovesInfo[move].power >= 110)
             return 185;
-        else if (gBattleMoves[move].power >= 100)
+        else if (gMovesInfo[move].power >= 100)
             return 180;
-        else if (gBattleMoves[move].power >= 90)
+        else if (gMovesInfo[move].power >= 90)
             return 175;
-        else if (gBattleMoves[move].power >= 80)
+        else if (gMovesInfo[move].power >= 80)
             return 160;
-        else if (gBattleMoves[move].power >= 70)
+        else if (gMovesInfo[move].power >= 70)
             return 140;
-        else if (gBattleMoves[move].power >= 60)
+        else if (gMovesInfo[move].power >= 60)
             return 120;
         else
             return 100;

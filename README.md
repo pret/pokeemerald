@@ -7,7 +7,7 @@ pokeemerald-expansion is a decomp hack base project based off pret's [pokeemeral
 If you use pokeemerald-expansion in your hack, please add RHH (Rom Hacking Hideout) to your credits list. Optionally, you can list the version used, so it can help players know what features to expect.
 You can phrase it as the following:
 ```
-Based off RHH's pokeemerald-expansion v1.7.2 https://github.com/rh-hideout/pokeemerald-expansion/
+Based off RHH's pokeemerald-expansion v1.7.3 https://github.com/rh-hideout/pokeemerald-expansion/
 ```
 
 ## What features are included?
@@ -118,9 +118,6 @@ Based off RHH's pokeemerald-expansion v1.7.2 https://github.com/rh-hideout/pokee
     - Berserk Gene
     - Most battle items from Gen 4+
     - Existing item data but missing effects:
-        - Mints
-        - Dynamax Candy
-        - Mulches
         - Gimmighoul Coin
         - Booster Energy
         - Tera Shards
@@ -133,7 +130,7 @@ Based off RHH's pokeemerald-expansion v1.7.2 https://github.com/rh-hideout/pokee
         - Accesible by pressing `R + Start` in the overworld by default.
         - **Additional features**:
             - *Clear Boxes*: cleans every Pokémon from the Boxes.
-            - *Hatch an Egg*: lets you choose an Egg in your party and immediatly hatch it.
+            - *Hatch an Egg*: lets you choose an Egg in your party and immediately hatch it.
     - [HGSS Pokédex](https://github.com/TheXaman/pokeemerald/tree/tx_pokedexPlus_hgss) by @TheXaman
         - May be disabled.
         - **Additional features**:
@@ -141,6 +138,7 @@ Based off RHH's pokeemerald-expansion v1.7.2 https://github.com/rh-hideout/pokee
             - *Dark Mode*.
     - [Nature Colors](https://github.com/DizzyEggg/pokeemerald/tree/nature_color) in summary screen by @DizzyEggg
     - [Dynamic Multichoice](https://github.com/SBird1337/pokeemerald/tree/feature/dynmulti) by @SBird1337
+    - [Guillotine](https://github.com/aarant/pokeemerald/tree/guillotine) (Decapitalization) by @aarant
 - ***Other features***
     - Pressing B while holding a Pokémon drops them like in modern games (configurable).
     - Running indoors (configurable).
@@ -167,7 +165,7 @@ With this, you'll get the latest version of pokeemerald-expansion, plus a couple
 
 ## **How do I update my version of pokeemerald-expansion?**
 - If you haven't set up a remote, run the command `git remote add RHH https://github.com/rh-hideout/pokeemerald-expansion`.
-- Once you have your remote set up, run the command `git pull RHH expansion/1.7.2`.
+- Once you have your remote set up, run the command `git pull RHH expansion/1.7.3`.
 
 ### Please consider crediting the entire [list of contributors](https://github.com/rh-hideout/pokeemerald-expansion/wiki/Credits) in your project, as they have all worked hard to develop this project :)
 

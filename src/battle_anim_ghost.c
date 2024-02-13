@@ -474,8 +474,8 @@ void AnimShadowBall(struct Sprite *sprite)
     sprite->data[3] = gBattleAnimArgs[2];
     sprite->data[4] = sprite->x << 4;
     sprite->data[5] = sprite->y << 4;
-    sprite->data[6] = ((oldPosX - sprite->x) << 4) / (gBattleAnimArgs[0] << 1);
-    sprite->data[7] = ((oldPosY - sprite->y) << 4) / (gBattleAnimArgs[0] << 1);
+    sprite->data[6] = SAFE_DIV(((oldPosX - sprite->x) << 4), (gBattleAnimArgs[0] << 1));
+    sprite->data[7] = SAFE_DIV(((oldPosY - sprite->y) << 4), (gBattleAnimArgs[0] << 1));
     sprite->callback = AnimShadowBall_Step;
 }
 
@@ -694,11 +694,13 @@ static void AnimTask_SpiteTargetShadow_Step1(u8 taskId)
                 task->data[3] = 16;
                 task->data[13] = GetAnimBattlerSpriteId(ANIM_TARGET);
                 task->data[4] = OBJ_PLTT_ID2(gSprites[task->data[13]].oam.paletteNum);
-                if (position == 1) {
+                if (position == 1)
+                {
                     u16 mask = DISPCNT_BG1_ON;
                     mask2 = mask;
                 }
-                else {
+                else
+                {
                     u16 mask = DISPCNT_BG2_ON;
                     mask2 = mask;
                 }

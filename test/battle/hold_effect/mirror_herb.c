@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gItems[ITEM_MIRROR_HERB].holdEffect == HOLD_EFFECT_MIRROR_HERB);
+    ASSUME(gItemsInfo[ITEM_MIRROR_HERB].holdEffect == HOLD_EFFECT_MIRROR_HERB);
 }
 
 SINGLE_BATTLE_TEST("Mirror Herb copies all of foe's positive stat changes in a turn", s16 damage)
@@ -12,6 +12,7 @@ SINGLE_BATTLE_TEST("Mirror Herb copies all of foe's positive stat changes in a t
     PARAMETRIZE { item = ITEM_NONE; }
     PARAMETRIZE { item = ITEM_MIRROR_HERB; }
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(5); Item(item); }
     } WHEN {
@@ -37,7 +38,7 @@ SINGLE_BATTLE_TEST("Mirror Herb copies all of foe's positive stat changes in a t
 SINGLE_BATTLE_TEST("Mirror Herb copies all of Stuff Cheeks' stat boosts")
 {
     GIVEN {
-        ASSUME(gItems[ITEM_LIECHI_BERRY].holdEffect == HOLD_EFFECT_ATTACK_UP);
+        ASSUME(gItemsInfo[ITEM_LIECHI_BERRY].holdEffect == HOLD_EFFECT_ATTACK_UP);
         PLAYER(SPECIES_SKWOVET) { Item(ITEM_LIECHI_BERRY); }
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_MIRROR_HERB); }
     } WHEN {

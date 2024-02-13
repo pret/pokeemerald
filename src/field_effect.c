@@ -3977,7 +3977,8 @@ static void UseVsSeeker_DoPlayerAnimation(struct Task *task)
     task->data[0]++;
 }
 
-static void UseVsSeeker_ResetPlayerGraphics(struct Task *task) {
+static void UseVsSeeker_ResetPlayerGraphics(struct Task *task)
+{
     struct ObjectEvent* playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     if (!ObjectEventClearHeldMovementIfFinished(playerObj))

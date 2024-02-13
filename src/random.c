@@ -28,7 +28,7 @@ static inline u32 _SFC32_Next_Stream(struct Sfc32State *state, const u8 stream)
     return result;
 }
 
-static void SFC32_Seed(struct Sfc32State *state, u16 seed, u8 stream)
+static void SFC32_Seed(struct Sfc32State *state, u32 seed, u8 stream)
 {
     u32 i;
     state->a = state->b = 0;
@@ -75,7 +75,7 @@ u32 Random2_32(void)
     return _SFC32_Next_Stream(&gRng2Value, STREAM2);
 }
 
-void SeedRng(u16 seed)
+void SeedRng(u32 seed)
 {
     struct Sfc32State state;
     SFC32_Seed(&state, seed, STREAM1);
@@ -85,7 +85,7 @@ void SeedRng(u16 seed)
     sRngLoopUnlocked = TRUE;
 }
 
-void SeedRng2(u16 seed)
+void SeedRng2(u32 seed)
 {
     SFC32_Seed(&gRng2Value, seed, STREAM2);
 }

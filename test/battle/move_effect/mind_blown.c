@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_MIND_BLOWN].effect == EFFECT_MIND_BLOWN);
+    ASSUME(gMovesInfo[MOVE_MIND_BLOWN].effect == EFFECT_MIND_BLOWN);
 }
 
 SINGLE_BATTLE_TEST("Mind Blown makes the user lose 1/2 of its HP")
@@ -103,5 +103,18 @@ DOUBLE_BATTLE_TEST("Mind Blown causes everyone to faint in a double battle")
         HP_BAR(opponentRight, hp: 0);
         MESSAGE("Foe Kadabra fainted!");
         MESSAGE("Wobbuffet fainted!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Mind Blown hp loss is prevented by Magic Guard")
+{
+    GIVEN {
+        PLAYER(SPECIES_CLEFAIRY) { Ability(ABILITY_MAGIC_GUARD); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_MIND_BLOWN); }
+    } SCENE {
+        NOT HP_BAR(player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_MIND_BLOWN, player);
     }
 }

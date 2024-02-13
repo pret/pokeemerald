@@ -59,6 +59,9 @@ static inline u16 Random(void)
     return Random32() >> 16;
 }
 
+void SeedRng(u32 seed);
+void SeedRng2(u32 seed);
+
 static inline u16 Random2(void)
 {
     return Random2_32() >> 16;
@@ -73,6 +76,10 @@ typedef u32 rng_value_t;
 //Returns a 16-bit pseudorandom number
 u16 Random(void);
 u16 Random2(void);
+
+//Sets the initial seed value of the pseudorandom number generator
+void SeedRng(u16 seed);
+void SeedRng2(u16 seed);
 
 //Returns a 32-bit pseudorandom number
 #define Random32() (Random() | (Random() << 16))
@@ -93,10 +100,6 @@ static inline void AdvanceRandom(void)
 
 extern rng_value_t gRngValue;
 extern rng_value_t gRng2Value;
-
-//Sets the initial seed value of the pseudorandom number generator
-void SeedRng(u16 seed);
-void SeedRng2(u16 seed);
 
 void Shuffle8(void *data, size_t n);
 void Shuffle16(void *data, size_t n);

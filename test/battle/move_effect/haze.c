@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_HAZE].effect == EFFECT_HAZE);
+    ASSUME(gMovesInfo[MOVE_HAZE].effect == EFFECT_HAZE);
 }
 
 SINGLE_BATTLE_TEST("Haze resets stat changes", s16 damage)
@@ -12,8 +12,8 @@ SINGLE_BATTLE_TEST("Haze resets stat changes", s16 damage)
     PARAMETRIZE { haze = FALSE; }
     PARAMETRIZE { haze = TRUE; }
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_MEDITATE].effect == EFFECT_ATTACK_UP);
-        ASSUME(gBattleMoves[MOVE_TACKLE].category == BATTLE_CATEGORY_PHYSICAL);
+        ASSUME(gMovesInfo[MOVE_MEDITATE].effect == EFFECT_ATTACK_UP);
+        ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

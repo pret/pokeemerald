@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_SPIKES].effect == EFFECT_SPIKES);
+    ASSUME(gMovesInfo[MOVE_SPIKES].effect == EFFECT_SPIKES);
 }
 
 SINGLE_BATTLE_TEST("Spikes damage on switch in")

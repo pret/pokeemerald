@@ -64,3 +64,33 @@ SINGLE_BATTLE_TEST("Intrepid Sword activates when it's no longer effected by Neu
     }
 }
 
+SINGLE_BATTLE_TEST("Intrepid Sword and Dauntless Shield both can be Skill Swapped and active their effects on the Skill Swap user")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_SKILL_SWAP].effect == EFFECT_SKILL_SWAP);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_ZACIAN) { Ability(ABILITY_INTREPID_SWORD); }
+        OPPONENT(SPECIES_ZAMAZENTA) { Ability(ABILITY_DAUNTLESS_SHIELD); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SKILL_SWAP); }
+        TURN { SWITCH(opponent, 1); MOVE(player, MOVE_SKILL_SWAP); }
+    } SCENE {
+        ABILITY_POPUP(opponent, ABILITY_INTREPID_SWORD);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+        MESSAGE("Foe Zacian's Intrepid Sword raised its Attack!");
+
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SKILL_SWAP, player);
+        ABILITY_POPUP(player, ABILITY_INTREPID_SWORD);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        MESSAGE("Wobbuffet's Intrepid Sword raised its Attack!");
+
+        ABILITY_POPUP(opponent, ABILITY_DAUNTLESS_SHIELD);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+        MESSAGE("Foe Zamazenta's Dauntless Shield raised its Defense!");
+
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SKILL_SWAP, player);
+        ABILITY_POPUP(player, ABILITY_DAUNTLESS_SHIELD);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        MESSAGE("Wobbuffet's Dauntless Shield raised its Defense!");
+    }
+}

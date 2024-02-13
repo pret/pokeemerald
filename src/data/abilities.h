@@ -1,4 +1,4 @@
-const struct Ability gAbilities[ABILITIES_COUNT] =
+const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 {
     [ABILITY_NONE] =
     {

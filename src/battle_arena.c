@@ -363,17 +363,17 @@ void BattleArena_AddMindPoints(u8 battler)
 // All moves with power == 0 give 0 points, with the following exceptions:
 //    - Protect, Detect, and Endure subtract 1 point
 
-    if (gBattleMoves[gCurrentMove].effect == EFFECT_FAKE_OUT
-     || gBattleMoves[gCurrentMove].effect == EFFECT_PROTECT
-     || gBattleMoves[gCurrentMove].effect == EFFECT_ENDURE)
+    if (gMovesInfo[gCurrentMove].effect == EFFECT_FIRST_TURN_ONLY
+     || gMovesInfo[gCurrentMove].effect == EFFECT_PROTECT
+     || gMovesInfo[gCurrentMove].effect == EFFECT_ENDURE)
     {
         gBattleStruct->arenaMindPoints[battler]--;
     }
-    else if (gBattleMoves[gCurrentMove].power != 0
-          && gBattleMoves[gCurrentMove].effect != EFFECT_COUNTER
-          && gBattleMoves[gCurrentMove].effect != EFFECT_MIRROR_COAT
-          && gBattleMoves[gCurrentMove].effect != EFFECT_METAL_BURST
-          && gBattleMoves[gCurrentMove].effect != EFFECT_BIDE)
+    else if (gMovesInfo[gCurrentMove].power != 0
+          && gMovesInfo[gCurrentMove].effect != EFFECT_COUNTER
+          && gMovesInfo[gCurrentMove].effect != EFFECT_MIRROR_COAT
+          && gMovesInfo[gCurrentMove].effect != EFFECT_METAL_BURST
+          && gMovesInfo[gCurrentMove].effect != EFFECT_BIDE)
     {
         gBattleStruct->arenaMindPoints[battler]++;
     }

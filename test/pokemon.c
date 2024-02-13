@@ -180,3 +180,114 @@ TEST("togglegigantamaxfactor fails for Melmetal")
     EXPECT(!VarGet(VAR_RESULT));
     EXPECT(!GetMonData(&gPlayerParty[0], MON_DATA_GIGANTAMAX_FACTOR));
 }
+
+TEST("givemon [simple]")
+{
+    ZeroPlayerPartyMons();
+
+    RUN_OVERWORLD_SCRIPT(
+        givemon SPECIES_WOBBUFFET, 100;
+    );
+
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPECIES), SPECIES_WOBBUFFET);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_LEVEL), 100);
+}
+
+TEST("givemon [all]")
+{
+    ZeroPlayerPartyMons();
+
+    RUN_OVERWORLD_SCRIPT(
+        givemon SPECIES_WOBBUFFET, 100, item=ITEM_LEFTOVERS, ball=ITEM_MASTER_BALL, nature=NATURE_BOLD, abilityNum=2, gender=MON_MALE, hpEv=1, atkEv=2, defEv=3, speedEv=4, spAtkEv=5, spDefEv=6, hpIv=7, atkIv=8, defIv=9, speedIv=10, spAtkIv=11, spDefIv=12, move1=MOVE_TACKLE, move2=MOVE_SPLASH, move3=MOVE_CELEBRATE, move4=MOVE_EXPLOSION, isShiny=TRUE, ggMaxFactor=TRUE, teraType=TYPE_FIRE;
+    );
+
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPECIES), SPECIES_WOBBUFFET);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_LEVEL), 100);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HELD_ITEM), ITEM_LEFTOVERS);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_POKEBALL), ITEM_MASTER_BALL);
+    EXPECT_EQ(GetNature(&gPlayerParty[0]), NATURE_BOLD);
+    EXPECT_EQ(GetMonAbility(&gPlayerParty[0]), gSpeciesInfo[SPECIES_WOBBUFFET].abilities[2]);
+    EXPECT_EQ(GetMonGender(&gPlayerParty[0]), MON_MALE);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), 1);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_ATK_EV), 2);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_DEF_EV), 3);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPEED_EV), 4);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPATK_EV), 5);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPDEF_EV), 6);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_IV), 7);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_ATK_IV), 8);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_DEF_IV), 9);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPEED_IV), 10);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPATK_IV), 11);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPDEF_IV), 12);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE1), MOVE_TACKLE);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE2), MOVE_SPLASH);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE3), MOVE_CELEBRATE);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE4), MOVE_EXPLOSION);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_IS_SHINY), TRUE);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_GIGANTAMAX_FACTOR), TRUE);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_TERA_TYPE), TYPE_FIRE);
+}
+
+TEST("givemon [vars]")
+{
+    ZeroPlayerPartyMons();
+
+    VarSet(VAR_TEMP_C, SPECIES_WOBBUFFET);
+    VarSet(VAR_TEMP_D, 100);
+    VarSet(VAR_0x8000, ITEM_LEFTOVERS);
+    VarSet(VAR_0x8001, ITEM_MASTER_BALL);
+    VarSet(VAR_0x8002, NATURE_BOLD);
+    VarSet(VAR_0x8003, 2);
+    VarSet(VAR_0x8004, MON_MALE);
+    VarSet(VAR_0x8005, 1);
+    VarSet(VAR_0x8006, 2);
+    VarSet(VAR_0x8007, 3);
+    VarSet(VAR_0x8008, 4);
+    VarSet(VAR_0x8009, 5);
+    VarSet(VAR_0x800A, 6);
+    VarSet(VAR_0x800B, 7);
+    VarSet(VAR_TEMP_0, 8);
+    VarSet(VAR_TEMP_1, 9);
+    VarSet(VAR_TEMP_2, 10);
+    VarSet(VAR_TEMP_3, 11);
+    VarSet(VAR_TEMP_4, 12);
+    VarSet(VAR_TEMP_5, MOVE_TACKLE);
+    VarSet(VAR_TEMP_6, MOVE_SPLASH);
+    VarSet(VAR_TEMP_7, MOVE_CELEBRATE);
+    VarSet(VAR_TEMP_8, MOVE_EXPLOSION);
+    VarSet(VAR_TEMP_9, TRUE);
+    VarSet(VAR_TEMP_A, TRUE);
+    VarSet(VAR_TEMP_B, TYPE_FIRE);
+
+    RUN_OVERWORLD_SCRIPT(
+        givemon VAR_TEMP_C, VAR_TEMP_D, item=VAR_0x8000, ball=VAR_0x8001, nature=VAR_0x8002, abilityNum=VAR_0x8003, gender=VAR_0x8004, hpEv=VAR_0x8005, atkEv=VAR_0x8006, defEv=VAR_0x8007, speedEv=VAR_0x8008, spAtkEv=VAR_0x8009, spDefEv=VAR_0x800A, hpIv=VAR_0x800B, atkIv=VAR_TEMP_0, defIv=VAR_TEMP_1, speedIv=VAR_TEMP_2, spAtkIv=VAR_TEMP_3, spDefIv=VAR_TEMP_4, move1=VAR_TEMP_5, move2=VAR_TEMP_6, move3=VAR_TEMP_7, move4=VAR_TEMP_8, isShiny=VAR_TEMP_9, ggMaxFactor=VAR_TEMP_A, teraType=VAR_TEMP_B;
+    );
+
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPECIES), SPECIES_WOBBUFFET);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_LEVEL), 100);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HELD_ITEM), ITEM_LEFTOVERS);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_POKEBALL), ITEM_MASTER_BALL);
+    EXPECT_EQ(GetNature(&gPlayerParty[0]), NATURE_BOLD);
+    EXPECT_EQ(GetMonAbility(&gPlayerParty[0]), gSpeciesInfo[SPECIES_WOBBUFFET].abilities[2]);
+    EXPECT_EQ(GetMonGender(&gPlayerParty[0]), MON_MALE);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), 1);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_ATK_EV), 2);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_DEF_EV), 3);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPEED_EV), 4);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPATK_EV), 5);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPDEF_EV), 6);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_IV), 7);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_ATK_IV), 8);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_DEF_IV), 9);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPEED_IV), 10);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPATK_IV), 11);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPDEF_IV), 12);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE1), MOVE_TACKLE);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE2), MOVE_SPLASH);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE3), MOVE_CELEBRATE);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE4), MOVE_EXPLOSION);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_IS_SHINY), TRUE);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_GIGANTAMAX_FACTOR), TRUE);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_TERA_TYPE), TYPE_FIRE);
+}

@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_TRIPLE_KICK].effect == EFFECT_TRIPLE_KICK);
+    ASSUME(gMovesInfo[MOVE_TRIPLE_KICK].effect == EFFECT_TRIPLE_KICK);
 }
 
 SINGLE_BATTLE_TEST("Triple Kick damage is increased by its base damage for each hit")

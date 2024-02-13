@@ -82,6 +82,8 @@ struct TrainerMon
     bool8 isShiny : 1;
     u8 dynamaxLevel : 4;
     bool8 gigantamaxFactor : 1;
+    bool8 shouldDynamax : 1;
+    bool8 shouldTerastal : 1;
 };
 
 #define TRAINER_PARTY(partyArray) partyArray, .partySize = ARRAY_COUNT(partyArray)
@@ -147,6 +149,7 @@ extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteContest[];
 extern const union AnimCmd sAnim_GeneralFrame0[];
 extern const union AnimCmd sAnim_GeneralFrame3[];
 extern const union AnimCmd *const gAnims_MonPic[];
+extern const union AnimCmd *const sAnims_Trainer[];
 extern const struct TrainerSprite gTrainerSprites[];
 extern const struct TrainerBacksprite gTrainerBacksprites[];
 
@@ -154,9 +157,6 @@ extern const struct Trainer gTrainers[];
 extern const struct Trainer gBattlePartners[];
 
 extern const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT];
-extern const u8 gMoveNames[MOVES_COUNT_DYNAMAX][MOVE_NAME_LENGTH + 1];
-extern const u8 *const gZMoveNames[];
-extern const u8 *const gMaxMoveNames[];
 
 // Follower text messages
 extern const struct FollowerMsgInfo gFollowerHappyMessages[];

@@ -18,12 +18,12 @@ DOUBLE_BATTLE_TEST("Hospitality user restores 25% of ally's health")
     } SCENE {
         if (health == 75) {
             ABILITY_POPUP(playerLeft, ABILITY_HOSPITALITY);
-            MESSAGE("The Wobbuffet drank down all the matcha that Sinistcha made!");
+            MESSAGE("Wobbuffet drank down all the matcha that Ptchageist made!");
             HP_BAR(playerRight, damage: -25);
         } else {
             NONE_OF {
                 ABILITY_POPUP(playerLeft, ABILITY_HOSPITALITY);
-                MESSAGE("The Wobbuffet drank down all the matcha that Sinistcha made!");
+                MESSAGE("Wobbuffet drank down all the matcha that Ptchageist made!");
                 HP_BAR(playerRight, damage: -25);
             }
         }
@@ -44,7 +44,7 @@ DOUBLE_BATTLE_TEST("Hospitality user restores 25% of ally's health on switch-in"
         MESSAGE("Wobbuffet, that's enough! Come back!");
         MESSAGE("Go! Ptchageist!");
         ABILITY_POPUP(playerLeft, ABILITY_HOSPITALITY);
-        MESSAGE("The Wobbuffet drank down all the matcha that Sinistcha made!");
+        MESSAGE("Wobbuffet drank down all the matcha that Ptchageist made!");
         HP_BAR(playerRight, damage: -25);
     }
 }
@@ -65,6 +65,6 @@ DOUBLE_BATTLE_TEST("Hospitality ignores Substitute")
         MESSAGE("Wobbuffet, that's enough! Come back!");
         MESSAGE("Go! Ptchageist!");
         ABILITY_POPUP(playerLeft, ABILITY_HOSPITALITY);
-        MESSAGE("The Wobbuffet drank down all the matcha that Sinistcha made!");
+        MESSAGE("Wobbuffet drank down all the matcha that Ptchageist made!");
     }
 }

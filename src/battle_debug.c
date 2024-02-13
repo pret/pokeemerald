@@ -739,7 +739,7 @@ static void PutMovesPointsText(struct BattleDebugMenu *data)
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         text[0] = CHAR_SPACE;
-        StringCopy(text + 1, gMoveNames[gBattleMons[data->aiBattlerId].moves[i]]);
+        StringCopy(text + 1, GetMoveName(gBattleMons[data->aiBattlerId].moves[i]));
         AddTextPrinterParameterized(data->aiMovesWindowId, FONT_NORMAL, text, 0, i * 15, 0, NULL);
         for (count = 0, j = 0; j < MAX_BATTLERS_COUNT; j++)
         {
@@ -764,6 +764,22 @@ static void PutMovesPointsText(struct BattleDebugMenu *data)
     Free(text);
 }
 
+static void CleanUpAiInfoWindow(u8 taskId)
+{
+    u32 i;
+    struct BattleDebugMenu *data = GetStructPtr(taskId);
+
+    FreeMonIconPalettes();
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    {
+        if (data->spriteIds.aiIconSpriteIds[i] != 0xFF)
+            FreeAndDestroyMonIconSprite(&gSprites[data->spriteIds.aiIconSpriteIds[i]]);
+    }
+    FreeAndDestroyMonPicSprite(data->aiMonSpriteId);
+    ClearWindowTilemap(data->aiMovesWindowId);
+    RemoveWindow(data->aiMovesWindowId);
+}
+
 static void Task_ShowAiPoints(u8 taskId)
 {
     u32 i, count;
@@ -784,6 +800,7 @@ static void Task_ShowAiPoints(u8 taskId)
             if (++data->aiBattlerId >= gBattlersCount)
                 data->aiBattlerId = 0;
         }
+        data->battlerId = data->aiBattlerId;
 
         LoadMonIconPalettes();
         for (count = 0, i = 0; i < MAX_BATTLERS_COUNT; i++)
@@ -822,7 +839,27 @@ static void Task_ShowAiPoints(u8 taskId)
         break;
     // Input
     case 2:
-        if (JOY_NEW(SELECT_BUTTON | B_BUTTON))
+        if (JOY_NEW(R_BUTTON) && IsDoubleBattle())
+        {
+            CleanUpAiInfoWindow(taskId);
+            do {
+                data->battlerId++;
+                data->battlerId %= gBattlersCount;
+            } while (!IsBattlerAlive(data->battlerId));
+            data->aiViewState = 0;
+        }
+        else if (JOY_NEW(L_BUTTON) && IsDoubleBattle())
+        {
+            CleanUpAiInfoWindow(taskId);
+            do {
+                if (data->battlerId == 0)
+                    data->battlerId = gBattlersCount - 1;
+                else
+                    data->battlerId--;
+            } while (!IsBattlerAlive(data->battlerId) || !BattlerHasAi(data->battlerId));
+            data->aiViewState = 0;
+        }
+        else if (JOY_NEW(SELECT_BUTTON | B_BUTTON))
         {
             SwitchToDebugView(taskId);
             HideBg(1);
@@ -868,7 +905,7 @@ static void PutAiInfoText(struct BattleDebugMenu *data)
             u16 holdEffect = AI_DATA->holdEffects[i];
             u16 item = AI_DATA->items[i];
             u8 x = (i == B_POSITION_PLAYER_LEFT) ? 83 + (i) * 75 : 83 + (i-1) * 75;
-            AddTextPrinterParameterized(data->aiMovesWindowId, FONT_SMALL, gAbilities[ability].name, x, 0, 0, NULL);
+            AddTextPrinterParameterized(data->aiMovesWindowId, FONT_SMALL, gAbilitiesInfo[ability].name, x, 0, 0, NULL);
             AddTextPrinterParameterized(data->aiMovesWindowId, FONT_SMALL, ItemId_GetName(item), x, 15, 0, NULL);
             AddTextPrinterParameterized(data->aiMovesWindowId, FONT_SMALL, GetHoldEffectName(holdEffect), x, 30, 0, NULL);
         }
@@ -901,13 +938,13 @@ static void PutAiPartyText(struct BattleDebugMenu *data)
             AddTextPrinterParameterized5(data->aiMovesWindowId, FONT_SMALL_NARROW, text, i * 41, 0, 0, NULL, 0, 0);
         }
 
-        txtPtr = StringCopyN(text, gAbilities[aiMons[i].ability].name, 7); // The screen is too small to fit the whole string, so we need to drop the last letters.
+        txtPtr = StringCopyN(text, gAbilitiesInfo[aiMons[i].ability].name, 7); // The screen is too small to fit the whole string, so we need to drop the last letters.
         *txtPtr = EOS;
         AddTextPrinterParameterized5(data->aiMovesWindowId, FONT_SMALL_NARROW, text, i * 41, 15, 0, NULL, 0, 0);
 
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
-            txtPtr = StringCopyN(text, gMoveNames[aiMons[i].moves[j]], 8);
+            txtPtr = StringCopyN(text, GetMoveName(aiMons[i].moves[j]), 8);
             *txtPtr = EOS;
             AddTextPrinterParameterized5(data->aiMovesWindowId, FONT_SMALL_NARROW, text, i * 41, 35 + j * 15, 0, NULL, 0, 0);
         }
@@ -1093,19 +1130,7 @@ static void SwitchToDebugViewFromAiParty(u8 taskId)
 
 static void SwitchToDebugView(u8 taskId)
 {
-    u32 i;
-    struct BattleDebugMenu *data = GetStructPtr(taskId);
-
-    FreeMonIconPalettes();
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-    {
-        if (data->spriteIds.aiIconSpriteIds[i] != 0xFF)
-            FreeAndDestroyMonIconSprite(&gSprites[data->spriteIds.aiIconSpriteIds[i]]);
-    }
-    FreeAndDestroyMonPicSprite(data->aiMonSpriteId);
-    ClearWindowTilemap(data->aiMovesWindowId);
-    RemoveWindow(data->aiMovesWindowId);
-
+    CleanUpAiInfoWindow(taskId);
     gTasks[taskId].func = Task_DebugMenuProcessInput;
 }
 
@@ -1428,7 +1453,7 @@ static void PrintSecondaryEntries(struct BattleDebugMenu *data)
     case LIST_ITEM_PP:
         for (i = 0; i < 4; i++)
         {
-            PadString(gMoveNames[gBattleMons[data->battlerId].moves[i]], text);
+            PadString(GetMoveName(gBattleMons[data->battlerId].moves[i]), text);
             printer.currentY = printer.y = (i * yMultiplier) + sSecondaryListTemplate.upText_Y;
             AddTextPrinter(&printer, 0, NULL);
         }
@@ -1441,7 +1466,7 @@ static void PrintSecondaryEntries(struct BattleDebugMenu *data)
         }
         break;
     case LIST_ITEM_ABILITY:
-        PadString(gAbilities[gBattleMons[data->battlerId].ability].name, text);
+        PadString(gAbilitiesInfo[gBattleMons[data->battlerId].ability].name, text);
         printer.currentY = printer.y = sSecondaryListTemplate.upText_Y;
         AddTextPrinter(&printer, 0, NULL);
         break;

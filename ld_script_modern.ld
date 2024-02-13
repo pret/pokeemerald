@@ -18,6 +18,11 @@ SECTIONS {
     ALIGN(4)
     {
         __ewram_start = .;
+        /* 
+           We link malloc.o here to prevent `gHeap` from landing in the middle of EWRAM.
+           Otherwise this causes corruption issues on some ld versions
+        */
+        gflib/malloc.o(ewram_data);
         *(.ewram*)
         __ewram_end = .;
     } > EWRAM
@@ -52,6 +57,7 @@ SECTIONS {
         gflib/*.o(COMMON);
         *libc.a:*.o(COMMON);
         *libnosys.a:*.o(COMMON);
+        gStackBase = .;
     } > IWRAM
 
     /* BEGIN ROM DATA */

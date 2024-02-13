@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_DREAM_EATER].effect == EFFECT_DREAM_EATER);
+    ASSUME(gMovesInfo[MOVE_DREAM_EATER].effect == EFFECT_DREAM_EATER);
 }
 
 SINGLE_BATTLE_TEST("Dream Eater recovers 50% of the damage dealt")

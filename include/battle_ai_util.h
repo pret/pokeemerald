@@ -1,10 +1,6 @@
 #ifndef GUARD_BATTLE_AI_UTIL_H
 #define GUARD_BATTLE_AI_UTIL_H
 
-// for AI_WhoStrikesFirst
-#define AI_IS_FASTER   1
-#define AI_IS_SLOWER   -1
-
 #define FOE(battler) ((BATTLE_OPPOSITE(battler)) & BIT_SIDE)
 
 #define AI_STRIKES_FIRST(battlerAi, battlerDef, move)((AI_WhoStrikesFirst(battlerAi, battlerDef, move) == AI_IS_FASTER))
@@ -32,6 +28,8 @@ u32 GetHealthPercentage(u32 battler);
 bool32 IsBattlerTrapped(u32 battler, bool32 switching);
 s32 AI_WhoStrikesFirst(u32 battlerAI, u32 battler2, u32 moveConsidered);
 bool32 CanTargetFaintAi(u32 battlerDef, u32 battlerAtk);
+u32 NoOfHitsForTargetToFaintAI(u32 battlerDef, u32 battlerAtk);
+u32 GetBestDmgMoveFromBattler(u32 battlerAtk, u32 battlerDef);
 bool32 CanTargetMoveFaintAi(u32 move, u32 battlerDef, u32 battlerAtk, u32 nHits);
 bool32 CanTargetFaintAiWithMod(u32 battlerDef, u32 battlerAtk, s32 hpMod, s32 dmgMod);
 s32 AI_DecideKnownAbilityForTurn(u32 battlerId);
@@ -110,8 +108,7 @@ bool32 IsStatLoweringMoveEffect(u32 moveEffect);
 bool32 IsMoveRedirectionPrevented(u32 move, u32 atkAbility);
 bool32 IsMoveEncouragedToHit(u32 battlerAtk, u32 battlerDef, u32 move);
 bool32 IsHazardMoveEffect(u32 moveEffect);
-bool32 IsEncoreEncouragedEffect(u32 moveEffect);
-bool32 IsChargingMove(u32 battlerAtk, u32 effect);
+bool32 IsTwoTurnNotSemiInvulnerableMove(u32 battlerAtk, u32 move);
 void ProtectChecks(u32 battlerAtk, u32 battlerDef, u32 move, u32 predictedMove, s32 *score);
 bool32 ShouldSetSandstorm(u32 battler, u32 ability, u32 holdEffect);
 bool32 ShouldSetHail(u32 battler, u32 ability, u32 holdEffect);
@@ -131,7 +128,6 @@ bool32 IsAttackBoostMoveEffect(u32 effect);
 bool32 IsUngroundingEffect(u32 effect);
 bool32 IsSemiInvulnerable(u32 battlerDef, u32 move);
 bool32 HasSubstituteIgnoringMove(u32 battler);
-bool32 HasSoundMove(u32 battler);
 bool32 HasHighCritRatioMove(u32 battler);
 bool32 HasMagicCoatAffectedMove(u32 battler);
 bool32 HasSnatchAffectedMove(u32 battler);

@@ -3,13 +3,13 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_PLASMA_FISTS].effect == EFFECT_PLASMA_FISTS);
+    ASSUME(gMovesInfo[MOVE_PLASMA_FISTS].effect == EFFECT_PLASMA_FISTS);
 }
 
 SINGLE_BATTLE_TEST("Ion Duldge turns normal moves into electric for the remainder of the current turn")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_ION_DELUGE].effect == EFFECT_ION_DELUGE);
+        ASSUME(gMovesInfo[MOVE_ION_DELUGE].effect == EFFECT_ION_DELUGE);
         PLAYER(SPECIES_KRABBY);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

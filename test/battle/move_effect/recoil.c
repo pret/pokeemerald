@@ -7,7 +7,7 @@ SINGLE_BATTLE_TEST("Take Down deals 25% of recoil damage to the user")
     s16 recoilDamage;
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TAKE_DOWN].recoil == 25);
+        ASSUME(gMovesInfo[MOVE_TAKE_DOWN].recoil == 25);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -27,7 +27,7 @@ SINGLE_BATTLE_TEST("Double Edge deals 33% of recoil damage to the user")
     s16 recoilDamage;
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_DOUBLE_EDGE].recoil == 33);
+        ASSUME(gMovesInfo[MOVE_DOUBLE_EDGE].recoil == 33);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -47,7 +47,7 @@ SINGLE_BATTLE_TEST("Head Smash deals 50% of recoil damage to the user")
     s16 recoilDamage;
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_HEAD_SMASH].recoil == 50);
+        ASSUME(gMovesInfo[MOVE_HEAD_SMASH].recoil == 50);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -67,8 +67,8 @@ SINGLE_BATTLE_TEST("Flare Blitz deals 33% of recoil damage to the user and can b
     s16 recoilDamage;
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_FLARE_BLITZ].recoil == 33);
-        ASSUME(gBattleMoves[MOVE_FLARE_BLITZ].argument == STATUS1_BURN);
+        ASSUME(gMovesInfo[MOVE_FLARE_BLITZ].recoil == 33);
+        ASSUME(gMovesInfo[MOVE_FLARE_BLITZ].argument == STATUS1_BURN);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

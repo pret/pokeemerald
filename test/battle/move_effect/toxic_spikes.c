@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_TOXIC_SPIKES].effect == EFFECT_TOXIC_SPIKES);
+    ASSUME(gMovesInfo[MOVE_TOXIC_SPIKES].effect == EFFECT_TOXIC_SPIKES);
 }
 
 SINGLE_BATTLE_TEST("Toxic Spikes inflicts poison on switch in")
@@ -212,7 +212,7 @@ SINGLE_BATTLE_TEST("Toxic Spikes are removed by Poison-type Pokémon affected by
 SINGLE_BATTLE_TEST("Toxic Spikes inflicts poison on switch in after Primal Reversed mon fainted") // Oddly specific, but encountered during testing
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_MEMENTO].effect == EFFECT_MEMENTO); // Faints the user.
+        ASSUME(gMovesInfo[MOVE_MEMENTO].effect == EFFECT_MEMENTO); // Faints the user.
         PLAYER(SPECIES_WOBBUFFET) {Speed(5); }
         PLAYER(SPECIES_GROUDON) { Item(ITEM_RED_ORB); Speed(1); }
         PLAYER(SPECIES_WYNAUT) {Speed(5); }

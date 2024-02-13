@@ -108,7 +108,7 @@ SINGLE_BATTLE_TEST("Abilities replaced by Mega Evolution do not affect turn orde
 DOUBLE_BATTLE_TEST("Mega Evolution happens after switching, but before Focus Punch-like Moves")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_FOCUS_PUNCH].effect == EFFECT_FOCUS_PUNCH);
+        ASSUME(gMovesInfo[MOVE_FOCUS_PUNCH].effect == EFFECT_FOCUS_PUNCH);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_VENUSAUR) { Item(ITEM_VENUSAURITE); }
         OPPONENT(SPECIES_WYNAUT);

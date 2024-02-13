@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_TAIL_GLOW].effect == EFFECT_SPECIAL_ATTACK_UP_3);
+    ASSUME(gMovesInfo[MOVE_TAIL_GLOW].effect == EFFECT_SPECIAL_ATTACK_UP_3);
 }
 
 SINGLE_BATTLE_TEST("Tail Glow drastically raises Special Attack", s16 damage)
@@ -12,7 +12,7 @@ SINGLE_BATTLE_TEST("Tail Glow drastically raises Special Attack", s16 damage)
     PARAMETRIZE { raiseSpecialAttack = FALSE; }
     PARAMETRIZE { raiseSpecialAttack = TRUE; }
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_GUST].category == BATTLE_CATEGORY_SPECIAL);
+        ASSUME(gMovesInfo[MOVE_GUST].category == DAMAGE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

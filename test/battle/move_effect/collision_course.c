@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_COLLISION_COURSE].effect == EFFECT_COLLISION_COURSE);
+    ASSUME(gMovesInfo[MOVE_COLLISION_COURSE].effect == EFFECT_COLLISION_COURSE);
 }
 
 SINGLE_BATTLE_TEST("Collision Course damage is increased by 33 Percent if super effective", s16 damage)

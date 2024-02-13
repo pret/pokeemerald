@@ -8,10 +8,10 @@ SINGLE_BATTLE_TEST("Sheer Force boosts power, but removes secondary effects of m
 
     for (j = 1; j < MOVES_COUNT; j++)
     {
-        if (gBattleMoves[j].sheerForceBoost
-          //&& gBattleMoves[j].effect != EFFECT_ORDER_UP
-          && gBattleMoves[j].effect != EFFECT_AURA_WHEEL
-          && gBattleMoves[j].effect != EFFECT_PLACEHOLDER)
+        if (gMovesInfo[j].sheerForceBoost
+          //&& gMovesInfo[j].effect != EFFECT_ORDER_UP
+          && gMovesInfo[j].effect != EFFECT_AURA_WHEEL
+          && gMovesInfo[j].effect != EFFECT_PLACEHOLDER)
         {
             PARAMETRIZE { ability = ABILITY_ANGER_POINT; move = j; }
             PARAMETRIZE { ability = ABILITY_SHEER_FORCE; move = j; }
@@ -24,10 +24,11 @@ SINGLE_BATTLE_TEST("Sheer Force boosts power, but removes secondary effects of m
     } WHEN {
         if (move == MOVE_ALLURING_VOICE || move == MOVE_BURNING_JEALOUSY) // Alluring Voice requires the target to boost stats to have an effect
             TURN { MOVE(opponent, MOVE_AGILITY); MOVE(player, move); }
+        else if (move == MOVE_UPPER_HAND) // Upper Hand requires the target to be using a damaging priority move
+            TURN { MOVE(opponent, MOVE_QUICK_ATTACK); MOVE(player, move); }
         else
             TURN { MOVE(player, move); }
-        if (gBattleMoves[move].effect == EFFECT_TWO_TURNS_ATTACK || gBattleMoves[move].effect == EFFECT_SEMI_INVULNERABLE
-          || gBattleMoves[move].effect == EFFECT_METEOR_BEAM) {
+        if (gMovesInfo[move].effect == EFFECT_TWO_TURNS_ATTACK || gMovesInfo[move].effect == EFFECT_SEMI_INVULNERABLE) {
                 TURN { SKIP_TURN(player); }
                 TURN { ; }
         }
@@ -47,7 +48,7 @@ SINGLE_BATTLE_TEST("Sheer Force boosts power, but removes secondary effects of m
                 MESSAGE("Wobbuffet flinched!");
             }
             // Volt Tackle/Flare Blitz edge case: recoil happens, but target isn't statused
-            if (gBattleMoves[move].recoil > 0)
+            if (gMovesInfo[move].recoil > 0)
             {
                 HP_BAR(player);
                 MESSAGE("Tauros is hit with recoil!");

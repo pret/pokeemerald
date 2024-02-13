@@ -11,8 +11,14 @@
 <!-- Format: "Fixes #2345, fixes #4523, fixes #2222." -->
 <!-- If it doesn't apply, feel free to remove this section. -->
 
+## **People who collaborated with me in this PR**
+<!-- Please credit everyone else that contributed to this PR, be it code and/or assets. -->
+<!-- Use their GitHub tag if they have one. -->
+<!-- If it doesn't apply, feel free to remove this section. -->
+
 ## Feature(s) this PR does NOT handle:
 <!-- If your PR contains any unfinished features that are not considered merge-blocking, please list them here for clarity so no one can forget. -->
+<!-- If it doesn't apply, feel free to remove this section. -->
 
 ## **Discord contact info**
 <!--- formatted as name#numbers, e.g. Lunos#4026 -->

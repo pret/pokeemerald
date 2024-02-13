@@ -118,6 +118,17 @@ Some tips before proceeding:
 
 devkitARM is now installed.
 
+### Installing Python on WSL1
+
+To install Python on WSL1, simply run the following commands:
+
+    ```bash
+    sudo apt update && upgrade
+    sudo apt install python3
+    ```
+
+Python is now installed.
+
 ### Choosing where to store pokeemerald Expansion (WSL1)
 WSL has its own file system that's not natively accessible from Windows, but Windows files *are* accessible from WSL. So you're going to want to store pokeemerald Expansion within Windows.
 
@@ -199,6 +210,16 @@ Note that in msys2, Copy is Ctrl+Insert and Paste is Shift+Insert.
     ```bash
     cd
     ```
+
+### Installing Python on msys2
+
+To install Python on WSL1, simply run the following commands:
+
+    ```bash
+    pacman -S mingw-w64-x86_64-python3
+    ```
+
+Python is now installed.
 
 ### Choosing where to store pokeemerald Expansion (msys2)
 At this point, you can choose a folder to store pokeemerald Expansion into. If you're okay with storing pokeemerald Expansion in the user profile folder, then proceed to [Installation](#installation). Otherwise, you'll need to account for where pokeemerald Expansion is stored when changing directory to the pokeemerald-expansion folder.
@@ -334,6 +355,12 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
     echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile
     ```
 
+### Installing Python (macOS)
+1. Download the latest Python package from [here](https://www.python.org/downloads/).
+2. Open the package to install Python.
+
+Python is now installed.
+
 ### Choosing where to store pokeemerald Expansion (macOS)
 At this point, you can choose a folder to store pokeemerald Expansion into. If you're okay with storing pokeemerald Expansion in the user folder, then proceed to [Installation](#installation). Otherwise, you'll need to account for where pokeemerald Expansion is stored when changing directory to the pokeemerald-expansion folder.
 
@@ -433,6 +460,9 @@ _(Specific instructions for other distributions would be greatly appreciated!)_
     ```
 
     The last command will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation.
+
+### Installing Python in Linux
+Installing Python depends on your distribution, please refere to the instructions [here](https://docs.python-guide.org/starting/install3/linux/).
 
 ### Choosing where to store pokeemerald Expansion (Linux)
 At this point, you can choose a folder to store pokeemerald Expansion into. If so, you'll have to account for the modified folder path when changing directory to the pokeemerald-expansion folder.

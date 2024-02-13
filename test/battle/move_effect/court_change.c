@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_COURT_CHANGE].effect == EFFECT_COURT_CHANGE);
+    ASSUME(gMovesInfo[MOVE_COURT_CHANGE].effect == EFFECT_COURT_CHANGE);
 }
 
 DOUBLE_BATTLE_TEST("Court Change swaps entry hazards used by the opponent")

@@ -6,10 +6,10 @@
 #define sBIDE_DMG                    (gBattleScripting + 0x04) // bideDmg
 #define sMULTIHIT_STRING             (gBattleScripting + 0x08) // multihitString
 #define sEXP_CATCH                   (gBattleScripting + 0x0E) // expOnCatch
-#define sTWOTURN_STRINGID            (gBattleScripting + 0x0F) // twoTurnsMoveStringId
+#define sUNUSED                      (gBattleScripting + 0x0F) // unused
 #define sB_ANIM_ARG1                 (gBattleScripting + 0x10) // animArg1
 #define sB_ANIM_ARG2                 (gBattleScripting + 0x11) // animArg2
-#define sTRIPLE_KICK_POWER           (gBattleScripting + 0x12) // tripleKickPower
+#define sSAVED_STRINID               (gBattleScripting + 0x12) // savedStringId
 #define sMOVEEND_STATE               (gBattleScripting + 0x14) // moveendState
 #define sSAVED_STAT_CHANGER          (gBattleScripting + 0x15) // savedStatChanger
 #define sSHIFT_SWITCHED              (gBattleScripting + 0x16) // shiftSwitched
@@ -181,7 +181,7 @@
 #define VARIOUS_TRY_FAIRY_LOCK                       89
 #define VARIOUS_JUMP_IF_NO_ALLY                      90
 #define VARIOUS_POISON_TYPE_IMMUNITY                 91
-#define VARIOUS_JUMP_IF_NO_HOLD_EFFECT               92
+#define VARIOUS_JUMP_IF_HOLD_EFFECT                  92
 #define VARIOUS_INFATUATE_WITH_BATTLER               93
 #define VARIOUS_SET_LAST_USED_ITEM                   94
 #define VARIOUS_PARALYZE_TYPE_IMMUNITY               95
@@ -220,25 +220,24 @@
 #define VARIOUS_SET_SKY_DROP                         128
 #define VARIOUS_CLEAR_SKY_DROP                       129
 #define VARIOUS_SKY_DROP_YAWN                        130
-#define VARIOUS_JUMP_IF_HOLD_EFFECT                  131
-#define VARIOUS_CURE_CERTAIN_STATUSES                132
-#define VARIOUS_TRY_RESET_NEGATIVE_STAT_STAGES       133
-#define VARIOUS_JUMP_IF_LAST_USED_ITEM_BERRY         134
-#define VARIOUS_JUMP_IF_LAST_USED_ITEM_HOLD_EFFECT   135
-#define VARIOUS_SAVE_BATTLER_ITEM                    136
-#define VARIOUS_RESTORE_BATTLER_ITEM                 137
-#define VARIOUS_BATTLER_ITEM_TO_LAST_USED_ITEM       138
-#define VARIOUS_SET_BEAK_BLAST                       139
-#define VARIOUS_SWAP_SIDE_STATUSES                   140
-#define VARIOUS_SWAP_STATS                           141
-#define VARIOUS_TEATIME_INVUL                        142
-#define VARIOUS_TEATIME_TARGETS                      143
-#define VARIOUS_TRY_WIND_RIDER_POWER                 144
-#define VARIOUS_ACTIVATE_WEATHER_CHANGE_ABILITIES    145
-#define VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES    146
-#define VARIOUS_STORE_HEALING_WISH                   147
-#define VARIOUS_HIT_SWITCH_TARGET_FAILED             148
-#define VARIOUS_TRY_REVIVAL_BLESSING                 149
+#define VARIOUS_CURE_CERTAIN_STATUSES                131
+#define VARIOUS_TRY_RESET_NEGATIVE_STAT_STAGES       132
+#define VARIOUS_JUMP_IF_LAST_USED_ITEM_BERRY         133
+#define VARIOUS_JUMP_IF_LAST_USED_ITEM_HOLD_EFFECT   134
+#define VARIOUS_SAVE_BATTLER_ITEM                    135
+#define VARIOUS_RESTORE_BATTLER_ITEM                 136
+#define VARIOUS_BATTLER_ITEM_TO_LAST_USED_ITEM       137
+#define VARIOUS_SET_BEAK_BLAST                       138
+#define VARIOUS_SWAP_SIDE_STATUSES                   139
+#define VARIOUS_SWAP_STATS                           140
+#define VARIOUS_TEATIME_INVUL                        141
+#define VARIOUS_TEATIME_TARGETS                      142
+#define VARIOUS_TRY_WIND_RIDER_POWER                 143
+#define VARIOUS_ACTIVATE_WEATHER_CHANGE_ABILITIES    144
+#define VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES    145
+#define VARIOUS_STORE_HEALING_WISH                   146
+#define VARIOUS_HIT_SWITCH_TARGET_FAILED             147
+#define VARIOUS_TRY_REVIVAL_BLESSING                 148
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
@@ -316,8 +315,9 @@
 #define MOVEEND_SYMBIOSIS                         34
 #define MOVEEND_OPPORTUNIST                       35    // Occurs after other stat change items/abilities to try and copy the boosts
 #define MOVEEND_SAME_MOVE_TURNS                   36
-#define MOVEEND_CLEAR_BITS                        37
-#define MOVEEND_COUNT                             38
+#define MOVEEND_SET_EVOLUTION_TRACKER             37
+#define MOVEEND_CLEAR_BITS                        38
+#define MOVEEND_COUNT                             39
 
 // switch cases
 #define B_SWITCH_NORMAL     0
