@@ -3028,7 +3028,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .frontAnimFrames = sAnims_Basculegion,                                              \
         .frontPicYOffset = 0,                                                               \
         .enemyMonElevation = 5,                                                             \
-        .backPicYOffset = 0,                                                                \
+        .backPicYOffset = 8,                                                                \
         LEARNSETS(Basculegion),                                                             \
         .formSpeciesIdTable = sBasculegionFormSpeciesIdTable
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
