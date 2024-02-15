@@ -323,8 +323,8 @@
 #define NUM_NORMAL_ABILITY_SLOTS 2
 #define NUM_HIDDEN_ABILITY_SLOTS 1
 
-// Used as a signal for givemon to generate a default ability in the vanilla Pokémon Emerald way.
-#define NUM_ABILITY_VANILLA 0xFF
+// Used as a signal for givemon to generate a default ability by personality.
+#define NUM_ABILITY_PERSONALITY 0xFF
 
 #define LEGENDARY_PERFECT_IV_COUNT 3
 
