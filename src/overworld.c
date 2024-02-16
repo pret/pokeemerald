@@ -1490,8 +1490,7 @@ void CB2_Overworld(void)
     if (fading)
         SetVBlankCallback(NULL);
     OverworldBasic();
-    if (fading)
-    {
+    if (fading) {
         SetFieldVBlankCallback();
         return;
     }

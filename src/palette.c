@@ -444,27 +444,18 @@ static u8 UpdateTimeOfDayPaletteFade(void) // Like normal, but respects sprite p
         paletteOffset = 256;
     }
 
-    for (paletteNum = 0; paletteNum < 16; paletteNum++, selectedPalettes >>= 1, paletteOffset += 16)
-    {
-        if (selectedPalettes & 1)
-        {
-            if (gPaletteFade.yDec)
-            {
+    for (paletteNum = 0; paletteNum < 16; paletteNum++, selectedPalettes >>= 1, paletteOffset += 16) {
+        if (selectedPalettes & 1) {
+            if (gPaletteFade.yDec) {
                 // sprite palettes
-                if (gPaletteFade.objPaletteToggle)
-                {
+                if (gPaletteFade.objPaletteToggle) {
                     if (gPaletteFade.y >= gPaletteFade.targetY || GetSpritePaletteTagByPaletteNum(paletteNum) & 0x8000)
                         BlendPalette(paletteOffset, 16, gPaletteFade.y, gPaletteFade.blendColor);
-                
-                }
                 // tile palettes
-                else if (gPaletteFade.y >= gPaletteFade.targetY || (paletteNum >= 13 && paletteNum <= 15))
-                {
+                } else if (gPaletteFade.y >= gPaletteFade.targetY || (paletteNum >= 13 && paletteNum <= 15)) {
                     BlendPalette(paletteOffset, 16, gPaletteFade.y, gPaletteFade.blendColor);
                 }
-            }
-            else
-            {
+            } else {
                 BlendPalette(paletteOffset, 16, gPaletteFade.y, gPaletteFade.blendColor);
             }
         }

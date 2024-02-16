@@ -687,8 +687,7 @@ static void Task_DoDoorWarp(u8 taskId)
         FreezeObjectEvents();
         PlayerGetDestCoords(x, y);
         PlaySE(GetDoorSoundEffect(*x, *y - 1));
-        if (followerObject)
-        {
+        if (followerObject) {
             // Put follower into pokeball
             ClearObjectEventMovement(followerObject, &gSprites[followerObject->spriteId]);
             ObjectEventSetHeldMovement(followerObject, MOVEMENT_ACTION_ENTER_POKEBALL);

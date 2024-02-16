@@ -54,8 +54,7 @@ u32 FldEff_Shadow(void);
 #define sReflectionVerticalOffset   data[2]
 #define sIsStillReflection          data[7]
 
-void SetUpShadow(struct ObjectEvent *objectEvent, struct Sprite *sprite)
-{
+void SetUpShadow(struct ObjectEvent *objectEvent, struct Sprite *sprite) {
     gFieldEffectArguments[0] = objectEvent->localId;
     gFieldEffectArguments[1] = gSaveBlock1Ptr->location.mapNum;
     gFieldEffectArguments[2] = gSaveBlock1Ptr->location.mapGroup;
@@ -326,8 +325,7 @@ u32 FldEff_Shadow(void)
     const struct ObjectEventGraphicsInfo *graphicsInfo;
     u8 spriteId;
     u8 i;
-    for (i = 0; i < MAX_SPRITES; i++)
-    {
+    for (i = 0; i < MAX_SPRITES; i++) {
         // Return early if a shadow sprite already exists
         if (gSprites[i].data[0] == gFieldEffectArguments[0] && gSprites[i].callback == UpdateShadowFieldEffect)
             return 0;

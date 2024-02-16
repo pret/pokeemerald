@@ -3821,9 +3821,7 @@ bool8 FieldCallback_PrepareFadeInFromMenu(void)
     return TRUE;
 }
 
-// same as above, but removes follower pokemon
-bool8 FieldCallback_PrepareFadeInForTeleport(void)
-{
+bool8 FieldCallback_PrepareFadeInForTeleport(void) { // same as above, but removes follower pokemon
     RemoveFollowingPokemon();
     return FieldCallback_PrepareFadeInFromMenu();
 }
