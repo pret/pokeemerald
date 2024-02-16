@@ -1578,9 +1578,7 @@ static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEven
     return objectEventId;
 }
 
-static u8
-TrySpawnObjectEventTemplate(const struct ObjectEventTemplate *objectEventTemplate,
-                            u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY) {
+static u8 TrySpawnObjectEventTemplate(const struct ObjectEventTemplate *objectEventTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY) {
     u8 objectEventId;
     struct SpriteTemplate spriteTemplate;
     struct SpriteFrameImage spriteFrameImage;
@@ -1832,7 +1830,8 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool8 shiny) {
     // Note that the shiny palette tag is `species + SPECIES_SHINY_TAG`, which must be increased with more pokemon
     // so that palette tags do not overlap
     const struct CompressedSpritePalette *spritePalette = &(shiny ? gMonShinyPaletteTable : gMonPaletteTable)[species];
-    if ((paletteNum = IndexOfSpritePaletteTag(spritePalette->tag)) == 0xFF) { // Load compressed palette
+    if ((paletteNum = IndexOfSpritePaletteTag(spritePalette->tag)) == 0xFF) {
+        // Load compressed palette
         LoadCompressedSpritePalette(spritePalette);
         paletteNum = IndexOfSpritePaletteTag(spritePalette->tag); // Tag is always present
         if (gWeatherPtr->currWeather != WEATHER_FOG_HORIZONTAL) // don't want to weather blend in fog
@@ -1850,15 +1849,18 @@ static void FollowerSetGraphics(struct ObjectEvent *objEvent, u16 species, u8 fo
     objEvent->extra.mon.species = species;
     objEvent->extra.mon.form = form;
     objEvent->extra.mon.shiny = shiny;
-    if (graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC) { // Use palette from species palette table
+    if (graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC) {
+        // Use palette from species palette table
         struct Sprite *sprite = &gSprites[objEvent->spriteId];
         // Free palette if otherwise unused
         sprite->inUse = FALSE;
         FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
         sprite->inUse = TRUE;
         sprite->oam.paletteNum = LoadDynamicFollowerPalette(species, form, shiny);
-    } else if (gWeatherPtr->currWeather != WEATHER_FOG_HORIZONTAL) // don't want to weather blend in fog
+    } else if (gWeatherPtr->currWeather != WEATHER_FOG_HORIZONTAL) {
+        // don't want to weather blend in fog
         UpdateSpritePaletteWithWeather(gSprites[objEvent->spriteId].oam.paletteNum);
+    }
 }
 
 // Free a sprite's current tiles and reallocate with a new size
@@ -1967,7 +1969,8 @@ static bool8 GetFollowerInfo(u16 *species, u8 *form, u8 *shiny) {
     return TRUE;
 }
 
-void UpdateFollowingPokemon(void) { // Update following pokemon if any
+void UpdateFollowingPokemon(void) {
+    // Update following pokemon if any
     struct ObjectEvent *objEvent = GetFollowerObject();
     struct Sprite *sprite;
     u16 species;
@@ -2018,7 +2021,8 @@ void UpdateFollowingPokemon(void) { // Update following pokemon if any
     objEvent->extra.mon.form = form;
 }
 
-void RemoveFollowingPokemon(void) { // Remove follower object. Idempotent.
+// Remove follower object. Idempotent.
+void RemoveFollowingPokemon(void) {
     struct ObjectEvent *objectEvent = GetFollowerObject();
     if (objectEvent == NULL)
         return;
@@ -2071,7 +2075,8 @@ bool8 ScrFunc_emote(struct ScriptContext *ctx) {
     return FALSE;
 }
 
-struct SpecialEmote { // Used for storing conditional emotes
+// Used for storing conditional emotes
+struct SpecialEmote {
     u16 index;
     u8 emotion;
 };
@@ -2079,16 +2084,20 @@ struct SpecialEmote { // Used for storing conditional emotes
 // Find and return direction of metatile behavior within distance
 static u32 FindMetatileBehaviorWithinRange(s32 x, s32 y, u32 mb, u8 distance) {
     s32 i;
-    for (i = y+1; i <= y + distance; i++)
+
+    for (i = y + 1; i <= y + distance; i++)
         if (MapGridGetMetatileBehaviorAt(x, i) == mb)
             return DIR_SOUTH;
-    for (i = y-1; i >= y - distance; i--)
+
+    for (i = y - 1; i >= y - distance; i--)
         if (MapGridGetMetatileBehaviorAt(x, i) == mb)
             return DIR_NORTH;
-    for (i = x+1; i <= x + distance; i++)
+
+    for (i = x + 1; i <= x + distance; i++)
         if (MapGridGetMetatileBehaviorAt(i, y) == mb)
             return DIR_EAST;
-    for (i = x-1; i >= x - distance; i--)
+
+    for (i = x - 1; i >= x - distance; i--)
         if (MapGridGetMetatileBehaviorAt(i, y) == mb)
             return DIR_WEST;
 
@@ -2314,9 +2323,10 @@ bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big 
         ctx->data[0] = (u32) gFollowerConditionalMessages[multi].text;
         // text choices are spread across array; pick a random one
         if (gFollowerConditionalMessages[multi].textSpread) {
-            for (i = 0; i < 4; i++)
+            for (i = 0; i < 4; i++) {
                 if (!((u32*)gFollowerConditionalMessages[multi].text)[i])
                     break;
+            }
             ctx->data[0] = i ? ((u32*)gFollowerConditionalMessages[multi].text)[Random() % i] : 0;
         }
         ScriptCall(ctx, gFollowerConditionalMessages[multi].script ? gFollowerConditionalMessages[multi].script : gFollowerBasicMessages[emotion].script);
@@ -2438,10 +2448,10 @@ static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y)
     spriteFrameImage.size = graphicsInfo->size;
     CopyObjectGraphicsInfoToSpriteTemplate_WithMovementType(objectEvent->graphicsId, objectEvent->movementType, &spriteTemplate, &subspriteTables);
     spriteTemplate.images = &spriteFrameImage;
-    if (spriteTemplate.paletteTag != TAG_NONE) {
-      LoadObjectEventPalette(spriteTemplate.paletteTag);
-    }
+    if (spriteTemplate.paletteTag != TAG_NONE)
+        LoadObjectEventPalette(spriteTemplate.paletteTag);
     i = CreateSprite(&spriteTemplate, 0, 0, 0);
+
     if (i != MAX_SPRITES)
     {
         sprite = &gSprites[i];
@@ -3084,9 +3094,8 @@ void SetObjectEventDirection(struct ObjectEvent *objectEvent, u8 direction)
 
 static const u8 *GetObjectEventScriptPointerByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
-    if (localId == OBJ_EVENT_ID_FOLLOWER) {
-      return EventScript_Follower;
-    }
+    if (localId == OBJ_EVENT_ID_FOLLOWER)
+        return EventScript_Follower;
     return GetObjectEventTemplateByLocalIdAndMap(localId, mapNum, mapGroup)->script;
 }
 
@@ -5128,16 +5137,25 @@ movement_type_def(MovementType_FollowPlayer, gMovementTypeFuncs_FollowPlayer)
 bool8 MovementType_FollowPlayer_Shadow(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     ClearObjectEventMovement(objectEvent, sprite);
-    if (!IsFollowerVisible()) { // Shadow player's position
+    if (!IsFollowerVisible()) {
+        // Shadow player's position
         objectEvent->invisible = TRUE;
-        MoveObjectEventToMapCoords(objectEvent, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
+        MoveObjectEventToMapCoords(
+            objectEvent,
+            gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x,
+            gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y
+        );
         objectEvent->triggerGroundEffectsOnMove = FALSE; // Stop endless reflection spawning
         return FALSE;
     }
     // Move follower to player, in case we end up in the shadowing state for only 1 frame
     // This way the player cannot talk to the invisible follower before it appears
     if (objectEvent->invisible) {
-        MoveObjectEventToMapCoords(objectEvent, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
+        MoveObjectEventToMapCoords(
+            objectEvent,
+            gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x,
+            gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y
+        );
         objectEvent->triggerGroundEffectsOnMove = FALSE; // Stop endless reflection spawning
     }
     sprite->sTypeFuncId = 1; // Enter active state; if the player moves the follower will appear
@@ -5147,7 +5165,8 @@ bool8 MovementType_FollowPlayer_Shadow(struct ObjectEvent *objectEvent, struct S
 bool8 MovementType_FollowPlayer_Active(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     if (!IsFollowerVisible()) {
-        if (objectEvent->invisible) { // Return to shadowing state
+        if (objectEvent->invisible) {
+            // Return to shadowing state
             sprite->sTypeFuncId = 0;
             return FALSE;
         }
@@ -5176,31 +5195,25 @@ bool8 MovementType_FollowPlayer_Moving(struct ObjectEvent *objectEvent, struct S
             sprite->sTypeFuncId = 1;
     } else if (objectEvent->movementActionId < MOVEMENT_ACTION_EXIT_POKEBALL) {
         UpdateFollowerTransformEffect(objectEvent, sprite);
-        #if OW_MON_BOBBING
-        if ((sprite->data[5] & 7) == 2)
+        if (OW_MON_BOBBING == TRUE && (sprite->data[5] & 7) == 2)
             sprite->y2 ^= -1;
-        #endif
     }
     return FALSE;
 }
 
 bool8 FollowablePlayerMovement_Idle(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
-    if (!objectEvent->singleMovementActive)
-    { // walk in place
+    if (!objectEvent->singleMovementActive) {
+        // walk in place
       ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkInPlaceNormalMovementAction(objectEvent->facingDirection));
       sprite->sTypeFuncId = 1;
       objectEvent->singleMovementActive = 1;
       return TRUE;
-    }
-    else if (ObjectEventExecSingleMovementAction(objectEvent, sprite))
-    { // finish movement action
+    } else if (ObjectEventExecSingleMovementAction(objectEvent, sprite)) {
+        // finish movement action
         objectEvent->singleMovementActive = 0;
-    }
-    #if OW_MON_BOBBING
-    else if ((sprite->data[3] & 7) == 2)
+    } else if (OW_MON_BOBBING == TRUE && (sprite->data[3] & 7) == 2)
         sprite->y2 ^= -1;
-    #endif
     UpdateFollowerTransformEffect(objectEvent, sprite);
     return FALSE;
 }
@@ -5228,7 +5241,8 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
     y = objectEvent->currentCoords.y;
     ClearObjectEventMovement(objectEvent, sprite);
 
-    if (objectEvent->invisible) { // Animate exiting pokeball
+    if (objectEvent->invisible) {
+        // Animate exiting pokeball
         // Player is jumping, but follower is invisible
         if (PlayerGetCopyableMovement() == COPY_MOVE_JUMP2) {
             sprite->sTypeFuncId = 0; // return to shadowing state
@@ -5238,11 +5252,11 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
         ObjectEventSetSingleMovement(objectEvent, sprite, MOVEMENT_ACTION_EXIT_POKEBALL);
         objectEvent->singleMovementActive = 1;
         sprite->sTypeFuncId = 2;
-        #if OW_MON_BOBBING
-        sprite->y2 = 0;
-        #endif
+        if (OW_MON_BOBBING == TRUE)
+            sprite->y2 = 0;
         return TRUE;
-    } else if (x == targetX && y == targetY) { // don't move if already in the player's last position
+    } else if (x == targetX && y == targetY) {
+        // don't move if already in the player's last position
         return FALSE;
     }
 
@@ -5251,40 +5265,41 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
     MoveCoords(direction, &x, &y);
     #ifdef MB_SIDEWAYS_STAIRS_RIGHT_SIDE // https://github.com/ghoulslash/pokeemerald/tree/sideways_stairs
     GetCollisionAtCoords(objectEvent, x, y, direction); // Sets directionOverwrite for stairs
-    if (GetLedgeJumpDirection(x, y, direction) != DIR_NONE) // InitJumpRegular will set the proper speed
+    if (GetLedgeJumpDirection(x, y, direction) != DIR_NONE) {
+        // InitJumpRegular will set the proper speed
         ObjectEventSetSingleMovement(objectEvent, sprite, GetJump2MovementAction(direction));
-    else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH)) { // Set follow speed according to player's speed
+    } else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH)) {
+        // Set follow speed according to player's speed
         if (playerAction >= MOVEMENT_ACTION_RUN_DOWN_SLOW && playerAction <= MOVEMENT_ACTION_RUN_RIGHT_SLOW)
             objectEvent->movementActionId = GetWalkNormalMovementAction(direction);
         else
             objectEvent->movementActionId = GetWalkFastMovementAction(direction);
-
     } else if (PlayerGetCopyableMovement() == COPY_MOVE_JUMP2) {
         ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkSlowMovementAction(direction));
     } else {
-        if (playerAction >= MOVEMENT_ACTION_WALK_SLOW_DOWN && playerAction <= MOVEMENT_ACTION_WALK_SLOW_RIGHT)
+        if (playerAction >= MOVEMENT_ACTION_WALK_SLOW_DOWN && playerAction <= MOVEMENT_ACTION_WALK_SLOW_RIGHT) {
             ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkSlowMovementAction(direction));
-        else {
+        } else {
             objectEvent->movementActionId = GetWalkNormalMovementAction(direction);
-            #if OW_MON_BOBBING
-            sprite->y2 = -1;
-            #endif
+            if (OW_MON_BOBBING == TRUE)
+                sprite->y2 = -1;
         }
     }
     sprite->sActionFuncId = 0;
     #else
-    if (GetLedgeJumpDirection(x, y, direction) != DIR_NONE) // InitJumpRegular will set the proper speed
+    if (GetLedgeJumpDirection(x, y, direction) != DIR_NONE) {
+        // InitJumpRegular will set the proper speed
         ObjectEventSetSingleMovement(objectEvent, sprite, GetJump2MovementAction(direction));
-    else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH)) // Set follow speed according to player's speed
+    } else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH)) {
+        // Set follow speed according to player's speed
         ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkFastMovementAction(direction));
-    // If *player* jumps, make step take twice as long
-    else if (PlayerGetCopyableMovement() == COPY_MOVE_JUMP2)
+    } else if (PlayerGetCopyableMovement() == COPY_MOVE_JUMP2) {
+        // If *player* jumps, make step take twice as long
         ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkSlowMovementAction(direction));
-    else {
+    } else {
         ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkNormalMovementAction(direction));
-        #if OW_MON_BOBBING
-        sprite->y2 = -1;
-        #endif
+        if (OW_MON_BOBBING == TRUE)
+            sprite->y2 = -1;
     }
     #endif
     objectEvent->singleMovementActive = 1;
