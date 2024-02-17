@@ -19,6 +19,7 @@
 #include "fieldmap.h"
 #include "follower_helper.h"
 #include "gpu_regs.h"
+#include "graphics.h"
 #include "mauville_old_man.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
@@ -189,7 +190,7 @@ static u8 DoJumpSpecialSpriteMovement(struct Sprite *);
 static void CreateLevitateMovementTask(struct ObjectEvent *);
 static void DestroyLevitateMovementTask(u8);
 static bool8 GetFollowerInfo(u16 *species, u8 *form, u8 *shiny);
-static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool8 shiny);
+static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny);
 static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species, u8 form);
 static bool8 NpcTakeStep(struct Sprite *);
 static bool8 IsElevationMismatchAt(u8, s16, s16);
@@ -1698,7 +1699,7 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
     u16 species;
     u8 form;
     bool8 shiny;
-    u8 paletteNum;
+    u32 paletteNum;
 
     spriteTemplate = Alloc(sizeof(struct SpriteTemplate));
     if (graphicsId == OBJ_EVENT_GFX_OW_MON && GetFollowerInfo(&species, &form, &shiny)) {
@@ -1715,9 +1716,8 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
         CopyObjectGraphicsInfoToSpriteTemplate(graphicsId, callback, spriteTemplate, &subspriteTables);
 
     if (spriteTemplate->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC) {
-        const struct CompressedSpritePalette *spritePalette = &(shiny ? gMonShinyPaletteTable : gMonPaletteTable)[species];
         paletteNum = LoadDynamicFollowerPalette(species, form, shiny);
-        spriteTemplate->paletteTag = spritePalette->tag;
+        spriteTemplate->paletteTag = GetSpritePaletteTagByPaletteNum(paletteNum);
     } else if (spriteTemplate->paletteTag != TAG_NONE)
         LoadObjectEventPalette(spriteTemplate->paletteTag);
 
@@ -1825,18 +1825,31 @@ static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species,
 }
 
 // Find, or load, the palette for the specified pokemon info
-static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool8 shiny) {
+static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny) {
     u32 paletteNum;
     // Note that the shiny palette tag is `species + SPECIES_SHINY_TAG`, which must be increased with more pokemon
     // so that palette tags do not overlap
-    const struct CompressedSpritePalette *spritePalette = &(shiny ? gMonShinyPaletteTable : gMonPaletteTable)[species];
-    if ((paletteNum = IndexOfSpritePaletteTag(spritePalette->tag)) == 0xFF) {
-        // Load compressed palette
-        LoadCompressedSpritePalette(spritePalette);
-        paletteNum = IndexOfSpritePaletteTag(spritePalette->tag); // Tag is always present
-        if (gWeatherPtr->currWeather != WEATHER_FOG_HORIZONTAL) // don't want to weather blend in fog
-            UpdateSpritePaletteWithWeather(paletteNum);
+    struct SpritePalette spritePalette = {.tag = shiny ? (species + SPECIES_SHINY_TAG) : species};
+    // palette already loaded
+    if ((paletteNum = IndexOfSpritePaletteTag(spritePalette.tag)) < 16)
+        return paletteNum;
+
+    // Use matching front sprite's normal/shiny palettes
+    spritePalette.data = (u16*)((shiny ? gMonShinyPaletteTable : gMonPaletteTable)[species].data);
+    // Use standalone palette, unless entry is OOB or NULL (fallback to front-sprite-based)
+    if (species < ARRAY_COUNT(gFollowerPalettes) && gFollowerPalettes[species][shiny & 1])
+        spritePalette.data = gFollowerPalettes[species][shiny & 1];
+
+    // Check if pal data must be decompressed
+    if (IsLZ77Data(spritePalette.data, PLTT_SIZE_4BPP, PLTT_SIZE_4BPP)) {
+        // IsLZ77Data guarantees word-alignment, so casting this is safe
+        LZ77UnCompWram((u32*)spritePalette.data, gDecompressionBuffer);
+        spritePalette.data = (void*)gDecompressionBuffer;
     }
+
+    paletteNum = LoadSpritePalette(&spritePalette);
+    if (gWeatherPtr->currWeather != WEATHER_FOG_HORIZONTAL) // don't want to weather blend in fog
+        UpdateSpritePaletteWithWeather(paletteNum);
     return paletteNum;
 }
 

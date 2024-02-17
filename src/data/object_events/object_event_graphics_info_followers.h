@@ -426,6 +426,17 @@ const struct ObjectEventGraphicsInfo gCastformObjectGraphics[] =
     {TAG_NONE, OBJ_EVENT_PAL_TAG_CASTFORM_SNOWY, OBJ_EVENT_PAL_TAG_NONE, 512, 32, 32, 2, SHADOW_SIZE_M, FALSE, FALSE, TRACKS_NONE, &gObjectEventBaseOam_32x32, sOamTables_32x32, sAnimTable_Following, sPicTable_CastformSnowy, gDummySpriteAffineAnimTable},
 };
 
+// Standalone follower palettes
+// If not NULL, entries here override the front-sprite-based pals
+// used by OBJ_EVENT_PAL_TAG_DYNAMIC
+// Palette data may be compressed, or not
+const void* const gFollowerPalettes[][2] =
+{
+    // Must have at least one entry, or ARRAY_COUNT comparison fails
+    // (SPECIES_NONE does not use OBJ_EVENT_PAL_TAG_DYNAMIC anyway)
+    [SPECIES_NONE] = {gMonPalette_CircledQuestionMark, gMonShinyPalette_CircledQuestionMark},
+};
+
 #if OW_MON_POKEBALLS
 
 #define POKEBALL_GFX_INFO(NAME)                                     \
