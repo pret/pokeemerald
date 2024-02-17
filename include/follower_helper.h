@@ -16,81 +16,67 @@ enum {
   FOLLOWER_EMOTION_LENGTH,
 };
 
-// This struct is optimized for size
-// Each "section" can be used to combine multiple conditions,
-// i.e, species and map
-// Just set the flags accordingly and use the right union member
-struct __attribute__((packed)) FollowerMsgInfoExtended {
+// Can be either 3 bytes, a u16 and a byte, or a 24-bit value
+union __attribute__((packed)) MsgConditionData {
+    u8 bytes[3];
+    struct __attribute__((packed)) {
+        u16 hw;
+        u8 b;
+    } split;
+    u32 raw:24;
+}; // size = 0x3
+
+struct __attribute__((packed)) MsgCondition {
+    u32 type:8;
+    union MsgConditionData data;
+}; // size = 0x4
+
+struct FollowerMsgInfoExtended {
     const u8 *text;
     const u8 *script;
 
-    union __attribute__((packed)) {
-        u16 species:10;
-        struct __attribute__((packed)) {
-            u16 type1:5;
-            u16 type2:5; // if >= NUMBER_OF_MON_TYPES, inverts checking for type1
-        } types;
-        u16 status:10;
-    } st;
-    u16 stFlags:2; // 0 = no matching, 1 = species matching, 2 = type matching, 3 = status
-    u16 emotion:4; // emotion for this message
-
-    union __attribute__((packed)) {
-        struct __attribute__((packed)) {
-            u16 mapSec:8;
-        } mapSec;
-        struct __attribute__((packed)) {
-            u16 mapNum:8;
-            u16 mapGroup:6;
-        } map;
-        struct __attribute__((packed)) {
-            u16 behavior1:8;
-            u16 behavior2:6; // not full; only goes up to 0x3F
-        } mb;
-    } mm;
-    u16 mmFlags:2; // 1 = map sec, 2 = map, 3 = metatile behavior
-
-    union __attribute__((packed)) {
-        struct __attribute__((packed)) {
-            u16 weather1:5;
-            u16 weather2:5;
-        } weather;
-        u16 song:10;
-        u16 timeOfDay:10;
-    } wt;
-    u16 wtFlags:2; // 1 = weather matching, 2 = song, 3 = time
-    u16 weight:3;
+    u32 emotion:4;
+    u32 weight:3;
     // if set, `text` is treated as an array of up to 4 texts instead
-    u16 textSpread:1;
+    // which one is displayed is chosen at random
+    u32 textSpread:1;
+    u32 orFlag:1; // if set, *any* condition can match, rather than all
 
-    union __attribute__((packed)) {
-        struct __attribute__((packed)) {
-            u16 behavior:8;
-            u16 distance:6;
-        } mb;
-    } near;
-    u16 nearFlags:2; // 1 = mb within '+'-shaped distance away
-};
+    struct MsgCondition conditions[5];
+}; // size = 8 + 4 + 5*4 = 32, 0x20
 
-enum {
-    ST_FLAGS_SPECIES = 1,
-    ST_FLAGS_TYPE,
-    ST_FLAGS_STATUS,
-};
+// Follower message conditions
+#define MSG_COND_NONE           0
+#define MSG_COND_SPECIES        1
+#define MSG_COND_TYPE           2
+#define MSG_COND_STATUS         3
+#define MSG_COND_MAPSEC         4
+#define MSG_COND_MAP            5
+#define MSG_COND_ON_MB          6
+#define MSG_COND_WEATHER        7
+#define MSG_COND_MUSIC          8
+#define MSG_COND_TIME_OF_DAY    9
+#define MSG_COND_NEAR_MB        10
 
-enum {
-    MM_FLAGS_MAPSEC = 1,
-    MM_FLAGS_MAP,
-    MM_FLAGS_MB, // (m)etatile (b)ehavior
-};
+#define MATCH_U24(type, value) {type, {.raw = value}}
+#define MATCH_U16(type, value1, value2) {type, {.split = {.hw = value1, .b = value2}}}
+#define MATCH_U8(type, v1, v2, v3) {type, {.bytes = {v1, v2, v3}}}
 
-enum {
-    WT_FLAGS_WEATHER = 1,
-    WT_FLAGS_MUSIC,
-    WT_FLAGS_TIME,
-};
-
-#define NEAR_FLAGS_MB 1
+#define MATCH_SPECIES(species) MATCH_U24(MSG_COND_SPECIES, species)
+#define MATCH_TYPES(type1, type2) MATCH_U8(MSG_COND_TYPE, type1, type2, 0)
+// Checks that follower has *neither* of the two types
+#define MATCH_NOT_TYPES(type1, type2) MATCH_U8(MSG_COND_TYPE, type1, type2, TYPE_NONE)
+#define MATCH_STATUS(status) MATCH_U24(MSG_COND_STATUS, status)
+#define MATCH_MAPSEC(mapsec) MATCH_U24(MSG_COND_MAPSEC, mapsec)
+#define MATCH_MAP_RAW(mapGroup, mapNum) MATCH_U8(MSG_COND_MAP, mapGroup, mapNum, 0)
+#define MATCH_MAP(map) MATCH_U8(MSG_COND_MAP, MAP_GROUP(map), MAP_NUM(map), 0)
+// Matches one of two metatile behaviors follower is standing on
+#define MATCH_ON_MB(mb1, mb2) MATCH_U8(MSG_COND_ON_MB, mb1, mb2, 0)
+#define MATCH_WEATHER(weather1, weather2) MATCH_U8(MSG_COND_WEATHER, weather1, weather2, 0)
+#define MATCH_MUSIC(song) MATCH_U24(MSG_COND_MUSIC, song)
+#define MATCH_TIME_OF_DAY(time) MATCH_U24(MSG_COND_TIME_OF_DAY, time)
+// Matches metatile behavior within a '+' shape of size `distance`
+#define MATCH_NEAR_MB(mb, distance) MATCH_U8(MSG_COND_NEAR_MB, mb, distance, 0)
 
 enum {
     COND_MSG_CELEBI,
@@ -125,5 +111,6 @@ enum {
 };
 
 extern const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT];
+extern const struct FollowerMessagePool gFollowerBasicMessages[FOLLOWER_EMOTION_LENGTH];
 
 #endif //GUARD_FOLLOWER_HELPER_H

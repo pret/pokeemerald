@@ -3079,7 +3079,7 @@ static void SurfFieldEffect_End(struct Task *task)
         gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_CONTROLLABLE;
         ObjectEventSetHeldMovement(objectEvent, GetFaceDirectionMovementAction(objectEvent->movementDirection));
         if (followerObject)
-          ObjectEventClearHeldMovementIfFinished(followerObject);
+            ObjectEventClearHeldMovementIfFinished(followerObject);
         SetSurfBlob_BobState(objectEvent->fieldEffectSpriteId, BOB_PLAYER_AND_MON);
         UnfreezeObjectEvents();
         UnlockPlayerFieldControls();

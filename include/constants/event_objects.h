@@ -297,6 +297,10 @@
 // (You should not use 48x48 sprites/tables for compressed gfx)
 // 16x32, 32x32, 64x64 etc are fine
 
+// Followers will emerge from the pokeball they are stored in,
+// instead of a normal pokeball
+#define OW_MON_POKEBALLS TRUE
+
 #define SHADOW_SIZE_S   0
 #define SHADOW_SIZE_M   1
 #define SHADOW_SIZE_L   2

@@ -55,7 +55,7 @@ DesertRuins_EventScript_CaveEntranceSide::
 	end
 
 DesertRuins_EventScript_Regirock::
-  bufferspeciesname 0, SPECIES_REGIROCK
+	bufferspeciesname 0, SPECIES_REGIROCK
 	lock
 	faceplayer
 	waitse
@@ -84,3 +84,4 @@ DesertRuins_EventScript_RanFromRegirock::
 	setvar VAR_0x8004, SPECIES_REGIROCK
 	goto Common_EventScript_LegendaryFlewAway
 	end
+

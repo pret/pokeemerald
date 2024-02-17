@@ -19,6 +19,24 @@ void LZDecompressVram(const u32 *src, void *dest)
     LZ77UnCompVram(src, dest);
 }
 
+// Checks if `ptr` is likely LZ77 data
+// Checks word-alignment, min/max size, and header byte
+bool32 IsLZ77Data(const void *ptr, u32 minSize, u32 maxSize) {
+    const u8 *data = ptr;
+    u32 size;
+    // Compressed data must be word aligned
+    if (((u32)ptr) & 3)
+        return FALSE;
+    // Check LZ77 header byte
+    // See https://problemkaputt.de/gbatek.htm#biosdecompressionfunctions
+    if (data[0] != 0x10)
+        return FALSE;
+
+    // Read 24-bit uncompressed size
+    size = data[1] | (data[2] << 8) | (data[3] << 16);
+    return (size >= minSize && size <= maxSize);
+}
+
 u16 LoadCompressedSpriteSheet(const struct CompressedSpriteSheet *src)
 {
     struct SpriteSheet dest;
