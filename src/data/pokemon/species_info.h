@@ -291,7 +291,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backAnimId = BACK_ANIM_NONE,
         PALETTES(CircledQuestionMark),
         ICON(QuestionMark, 0),
-        .followerData = {TAG_NONE, OBJ_EVENT_PAL_TAG_DYNAMIC, OBJ_EVENT_PAL_TAG_NONE, 512, 32, 32, 2, SHADOW_SIZE_M, FALSE, COMP, TRACKS_FOOT, &gObjectEventBaseOam_32x32, sOamTables_32x32, sAnimTable_Following, sPicTable_None, gDummySpriteAffineAnimTable},
+        .followerData = {TAG_NONE, OBJ_EVENT_PAL_TAG_SUBSTITUTE, OBJ_EVENT_PAL_TAG_NONE, 512, 32, 32, 2, SHADOW_SIZE_M, FALSE, COMP, TRACKS_FOOT, &gObjectEventBaseOam_32x32, sOamTables_32x32, sAnimTable_Following, sPicTable_Substitute, gDummySpriteAffineAnimTable},
         LEARNSETS(None),
     },
 
@@ -379,4 +379,17 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .allPerfectIVs = TRUE,
     },
     */
+};
+
+
+
+// Standalone follower palettes
+// If not NULL, entries here override the front-sprite-based pals
+// used by OBJ_EVENT_PAL_TAG_DYNAMIC
+// Palette data may be compressed, or not
+const void* const gFollowerPalettes[NUM_SPECIES][2] =
+{
+    // Must have at least one entry, or ARRAY_COUNT comparison fails
+    // (SPECIES_NONE does not use OBJ_EVENT_PAL_TAG_DYNAMIC anyway)
+    [SPECIES_NONE] = {gMonPalette_CircledQuestionMark, gMonShinyPalette_CircledQuestionMark},
 };

@@ -300,6 +300,10 @@
 // (You should not use 48x48 sprites/tables for compressed gfx)
 // 16x32, 32x32, 64x64 etc are fine
 
+// Followers will emerge from the pokeball they are stored in,
+// instead of a normal pokeball
+#define OW_MON_POKEBALLS TRUE
+
 #define SHADOW_SIZE_S    0
 #define SHADOW_SIZE_M    1
 #define SHADOW_SIZE_L    2
@@ -392,6 +396,44 @@
 #define OBJ_EVENT_PAL_TAG_RS_BRENDAN              0x1122
 #define OBJ_EVENT_PAL_TAG_RS_MAY                  0x1123
 #define OBJ_EVENT_PAL_TAG_DYNAMIC                 0x1124
+
+#if OW_MON_POKEBALLS
+// Vanilla
+#define OBJ_EVENT_PAL_TAG_BALL_MASTER             0x1150
+#define OBJ_EVENT_PAL_TAG_BALL_ULTRA              0x1151
+#define OBJ_EVENT_PAL_TAG_BALL_GREAT              0x1152
+#define OBJ_EVENT_PAL_TAG_BALL_SAFARI             0x1153
+#define OBJ_EVENT_PAL_TAG_BALL_NET                0x1154
+#define OBJ_EVENT_PAL_TAG_BALL_DIVE               0x1155
+#define OBJ_EVENT_PAL_TAG_BALL_NEST               0x1156
+#define OBJ_EVENT_PAL_TAG_BALL_REPEAT             0x1157
+#define OBJ_EVENT_PAL_TAG_BALL_TIMER              0x1158
+#define OBJ_EVENT_PAL_TAG_BALL_LUXURY             0x1159
+#define OBJ_EVENT_PAL_TAG_BALL_PREMIER            0x115A
+// Gen IV/Sinnoh
+#define OBJ_EVENT_PAL_TAG_BALL_DUSK               0x115B
+#define OBJ_EVENT_PAL_TAG_BALL_HEAL               0x115C
+#define OBJ_EVENT_PAL_TAG_BALL_QUICK              0x115D
+#define OBJ_EVENT_PAL_TAG_BALL_CHERISH            0x115E
+#define OBJ_EVENT_PAL_TAG_BALL_PARK               0x115F
+// Gen II/Johto Apricorns
+#define OBJ_EVENT_PAL_TAG_BALL_FAST               0x1160
+#define OBJ_EVENT_PAL_TAG_BALL_LEVEL              0x1161
+#define OBJ_EVENT_PAL_TAG_BALL_LURE               0x1162
+#define OBJ_EVENT_PAL_TAG_BALL_HEAVY              0x1163
+#define OBJ_EVENT_PAL_TAG_BALL_LOVE               0x1164
+#define OBJ_EVENT_PAL_TAG_BALL_FRIEND             0x1165
+#define OBJ_EVENT_PAL_TAG_BALL_MOON               0x1166
+#define OBJ_EVENT_PAL_TAG_BALL_SPORT              0x1167
+// Gen V
+#define OBJ_EVENT_PAL_TAG_BALL_DREAM              0x1168
+// Gen VII
+#define OBJ_EVENT_PAL_TAG_BALL_BEAST              0x1169
+// Gen VIII
+#define OBJ_EVENT_PAL_TAG_BALL_STRANGE            0x116A
+#endif
+// Used as a placeholder follower graphic
+#define OBJ_EVENT_PAL_TAG_SUBSTITUTE              0x7611
 #define OBJ_EVENT_PAL_TAG_EMOTES                  0x8002
 // Not a real OW palette tag; used for the white flash applied to followers
 #define OBJ_EVENT_PAL_TAG_WHITE                   (OBJ_EVENT_PAL_TAG_NONE - 1)

@@ -1016,9 +1016,9 @@ bool8 ScrCmd_applymovement(struct ScriptContext *ctx)
     }
     ScriptMovement_StartObjectMovementScript(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, movementScript);
     sMovingNpcId = localId;
+    // Force follower into pokeball
     if (localId != OBJ_EVENT_ID_FOLLOWER && !FlagGet(FLAG_SAFE_FOLLOWER_MOVEMENT))
     {
-        // Force follower into pokeball
         objEvent = GetFollowerObject();
         // return early if no follower or in shadowing state
         if (objEvent == NULL || gSprites[objEvent->spriteId].data[1] == 0)
@@ -2181,7 +2181,7 @@ bool8 ScrCmd_playmoncry(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrFunc_playfirstmoncry(struct ScriptContext *ctx)
+bool8   ScrFunc_playfirstmoncry(struct ScriptContext *ctx)
 {
     u16 species = GetMonData(GetFirstLiveMon(), MON_DATA_SPECIES);
     PlayCry_Script(species, 0);
