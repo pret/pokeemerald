@@ -229,7 +229,7 @@ const u8 gOgerponCornerstoneMaskPokedexText[] = _(
 // Set .compressed = OW_GFX_COMPRESS
 #define COMP OW_GFX_COMPRESS
 
-#if P_FOLLOWERS
+#if OW_FOLLOWERS_ENABLED
 #define FOLLOWER(name, _size, shadow, _tracks)                                              \
 .followerData = {                                                                           \
     .tileTag = TAG_NONE,                                                                    \
@@ -380,8 +380,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
     },
     */
 };
-
-
 
 // Standalone follower palettes
 // If not NULL, entries here override the front-sprite-based pals
