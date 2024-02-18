@@ -1709,7 +1709,7 @@ bool32 HasMoveEffectANDArg(u32 battlerId, u32 effect, u32 argument)
     return FALSE;
 }
 
-bool32 HasMoveWithMoveEffect(u32 battlerId, u32 moveEffect)
+bool32 HasMoveWithAdditionalEffect(u32 battlerId, u32 moveEffect)
 {
     s32 i;
     u16 *moves = GetMovesArray(battlerId);
@@ -1718,6 +1718,21 @@ bool32 HasMoveWithMoveEffect(u32 battlerId, u32 moveEffect)
     {
         if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE
             && MoveHasMoveEffect(moves[i], moveEffect))
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool32 HasMoveWithCriticalHitChance(u32 battlerId)
+{
+    s32 i;
+    u16 *moves = GetMovesArray(battlerId);
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE
+            && gMovesInfo[moves[i]].criticalHitStage > 0)
             return TRUE;
     }
 
@@ -3595,9 +3610,27 @@ bool32 AI_ShouldSetUpHazards(u32 battlerAtk, u32 battlerDef, struct AiLogicData 
 {
     if (aiData->abilities[battlerDef] == ABILITY_MAGIC_BOUNCE
      || CountUsablePartyMons(battlerDef) == 0
-     || HasMoveWithMoveEffect(battlerDef, MOVE_EFFECT_RAPID_SPIN)
+     || HasMoveWithAdditionalEffect(battlerDef, MOVE_EFFECT_RAPID_SPIN)
      || HasMoveEffect(battlerDef, EFFECT_DEFOG))
         return FALSE;
 
     return TRUE;
+}
+
+void IncreaseTidyUpScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score)
+{
+    if (gSideStatuses[GetBattlerSide(battlerAtk)] & SIDE_STATUS_HAZARDS_ANY && CountUsablePartyMons(battlerAtk) != 0)
+        ADJUST_SCORE_PTR(GOOD_EFFECT);
+    if (gSideStatuses[GetBattlerSide(battlerDef)] & SIDE_STATUS_HAZARDS_ANY && CountUsablePartyMons(battlerDef) != 0)
+        ADJUST_SCORE_PTR(-2);
+
+    if (gBattleMons[battlerAtk].status2 & STATUS2_SUBSTITUTE && AI_STRIKES_FIRST(battlerAtk, battlerDef, move))
+        ADJUST_SCORE_PTR(-10);
+    if (gBattleMons[battlerDef].status2 & STATUS2_SUBSTITUTE)
+        ADJUST_SCORE_PTR(GOOD_EFFECT);
+
+    if (gStatuses3[battlerAtk] & STATUS3_LEECHSEED)
+        ADJUST_SCORE_PTR(DECENT_EFFECT);
+    if (gStatuses3[battlerDef] & STATUS3_LEECHSEED)
+        ADJUST_SCORE_PTR(-2);
 }

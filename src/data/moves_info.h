@@ -19207,7 +19207,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "User tidies up hazards and\n"
             "raises its Attack and Speed."),
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_TIDY_UP
+        .effect = EFFECT_TIDY_UP,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
