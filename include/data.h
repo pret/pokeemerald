@@ -52,7 +52,6 @@ struct TrainerBacksprite
 #define GET_MON_COORDS_HEIGHT(size)((size & 0xF) * 8)
 #define TRAINER_PARTY_IVS(hp, atk, def, speed, spatk, spdef) (hp | (atk << 5) | (def << 10) | (speed << 15) | (spatk << 20) | (spdef << 25))
 #define TRAINER_PARTY_EVS(hp, atk, def, speed, spatk, spdef) ((const u8[6]){hp,atk,def,spatk,spdef,speed})
-#define TRAINER_PARTY_NATURE(nature) (nature+1)
 
 struct TrainerMon
 {
