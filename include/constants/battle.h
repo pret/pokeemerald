@@ -354,7 +354,7 @@
 #define MOVE_EFFECT_PREVENT_ESCAPE      33
 #define MOVE_EFFECT_NIGHTMARE           34
 #define MOVE_EFFECT_ALL_STATS_UP        35
-#define MOVE_EFFECT_RAPIDSPIN           36
+#define MOVE_EFFECT_RAPID_SPIN          36
 #define MOVE_EFFECT_REMOVE_STATUS       37
 #define MOVE_EFFECT_ATK_DEF_DOWN        38
 #define MOVE_EFFECT_ATK_PLUS_2          39

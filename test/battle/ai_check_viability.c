@@ -179,7 +179,6 @@ AI_SINGLE_BATTLE_TEST("AI chooses moves with secondary effect that have a 100% c
     PARAMETRIZE { ability = ABILITY_SERENE_GRACE; }
 
     GIVEN {
-        AI_LOG;
         ASSUME(MoveHasMoveEffectWithChance(MOVE_SHADOW_BALL, MOVE_EFFECT_SP_DEF_MINUS_1, 20));
         ASSUME(MoveHasMoveEffectWithChance(MOVE_OCTAZOOKA, MOVE_EFFECT_ACC_MINUS_1, 50));
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
