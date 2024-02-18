@@ -286,6 +286,8 @@
 #define OW_SPECIES(x) (((x)->graphicsId & OBJ_EVENT_GFX_SPECIES_MASK) - OBJ_EVENT_GFX_MON_BASE)
 #define OW_FORM(x) ((x)->graphicsId >> OBJ_EVENT_GFX_SPECIES_BITS)
 
+#define OW_FOLLOWERS_ENABLED  FALSE
+
 // If true, follower pokemon will bob up and down
 // during their idle & walking animations
 #define OW_MON_BOBBING  TRUE
