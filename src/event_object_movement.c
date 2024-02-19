@@ -1836,7 +1836,8 @@ struct ObjectEvent * GetFollowerObject(void)
 // Return graphicsInfo for a pokemon species & form
 static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species, u8 form)
 {
-    const struct ObjectEventGraphicsInfo *graphicsInfo;
+    const struct ObjectEventGraphicsInfo *graphicsInfo = NULL;
+#if OW_FOLLOWERS_ENABLED
     switch (species)
     {
     case SPECIES_UNOWN: // Letters >A are defined as species >= NUM_SPECIES, so are not contiguous with A
@@ -1852,8 +1853,8 @@ static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species,
         return &gSpeciesInfo[SPECIES_NONE].followerData;
     else if (graphicsInfo->tileTag != TAG_NONE && species >= NUM_SPECIES)
         return &gSpeciesInfo[SPECIES_NONE].followerData;
-    else
-        return graphicsInfo;
+#endif
+    return graphicsInfo;
 }
 
 // Find, or load, the palette for the specified pokemon info
@@ -2023,9 +2024,10 @@ void UpdateFollowingPokemon(void)
     // 1. GetFollowerInfo returns FALSE
     // 2. Map is indoors and gfx is larger than 32x32
     // 3. flag is set
-    if (!GetFollowerInfo(&species, &form, &shiny) ||
-        (gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(species, 0)->oam->size > ST_OAM_SIZE_2) ||
-        FlagGet(FLAG_TEMP_HIDE_FOLLOWER))
+    if (OW_FOLLOWERS_ENABLED == FALSE
+        || !GetFollowerInfo(&species, &form, &shiny)
+        || (gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(species, 0)->oam->size > ST_OAM_SIZE_2)
+        || FlagGet(FLAG_TEMP_HIDE_FOLLOWER))
     {
         RemoveFollowingPokemon();
         return;
@@ -2080,8 +2082,6 @@ void RemoveFollowingPokemon(void)
 // Determine whether follower *should* be visible
 static bool32 IsFollowerVisible(void)
 {
-    if (OW_FOLLOWERS_ENABLED == FALSE)
-        return FALSE;
     return
     !(TestPlayerAvatarFlags(FOLLOWER_INVISIBLE_FLAGS)
     || MetatileBehavior_IsSurfableWaterOrUnderwater(gObjectEvents[gPlayerAvatar.objectEventId].previousMetatileBehavior)
