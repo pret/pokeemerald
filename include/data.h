@@ -63,7 +63,6 @@ struct TrainerBacksprite
 #define GET_MON_COORDS_HEIGHT(size)((size & 0xF) * 8)
 #define TRAINER_PARTY_IVS(hp, atk, def, speed, spatk, spdef) (hp | (atk << 5) | (def << 10) | (speed << 15) | (spatk << 20) | (spdef << 25))
 #define TRAINER_PARTY_EVS(hp, atk, def, speed, spatk, spdef) ((const u8[6]){hp,atk,def,spatk,spdef,speed})
-#define TRAINER_PARTY_NATURE(nature) (nature+1)
 
 struct TrainerMon
 {
@@ -99,7 +98,7 @@ struct Trainer
     /*0x13*/ u8 trainerName[TRAINER_NAME_LENGTH + 1];
     /*0x1E*/ bool8 doubleBattle:1;
              bool8 mugshotEnabled:1;
-             u8 padding:6;
+             u8 startingStatus:6;    // this trainer starts a battle with a given status. see include/constants/battle.h for values
     /*0x1F*/ u8 mugshotColor;
     /*0x20*/ u8 partySize;
 };

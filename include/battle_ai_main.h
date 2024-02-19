@@ -29,7 +29,8 @@
 #define STAT_CHANGE_ACC        10
 #define STAT_CHANGE_EVASION    11
 
-#define BEST_DAMAGE_MOVE 1 // Move with the most amount of hits with the best accuracy/effect
+#define BEST_DAMAGE_MOVE     1  // Move with the most amount of hits with the best accuracy/effect
+#define POWERFUL_STATUS_MOVE 10 // Moves with this score will be chosen over a move that faints target
 
 // Temporary scores that are added together to determine a final score at the at of AI_CalcMoveScore
 #define WEAK_EFFECT      1

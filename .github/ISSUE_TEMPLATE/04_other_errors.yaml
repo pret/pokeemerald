@@ -23,9 +23,10 @@ body:
       label: Version
       description: What version of pokeemerald-expansion are you using as a base?
       options:
-        - 1.7.3 (Latest release)
+        - 1.7.4 (Latest release)
         - master (default when pulling, unreleased bugfixes)
         - upcoming (Edge)
+        - 1.7.3
         - 1.7.2
         - 1.7.1
         - 1.7.0
