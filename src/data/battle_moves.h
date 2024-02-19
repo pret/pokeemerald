@@ -5340,7 +5340,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_TEETER_DANCE] =
     {
-        .effect = EFFECT_TEETER_DANCE,
+        .effect = EFFECT_CONFUSE,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 100,
