@@ -7314,7 +7314,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "Confuses all Pokémon on\n"
             "the scene."),
-        .effect = EFFECT_TEETER_DANCE,
+        .effect = EFFECT_CONFUSE,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 100,

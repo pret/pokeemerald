@@ -681,7 +681,6 @@ extern const u8 BattleScript_EffectImprison[];
 extern const u8 BattleScript_EffectRefresh[];
 extern const u8 BattleScript_EffectGrudge[];
 extern const u8 BattleScript_EffectSnatch[];
-extern const u8 BattleScript_EffectTeeterDance[];
 extern const u8 BattleScript_EffectHitEscape[];
 extern const u8 BattleScript_EffectMudSport[];
 extern const u8 BattleScript_EffectTickle[];

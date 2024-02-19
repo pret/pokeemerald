@@ -1844,11 +1844,11 @@ Cry_Teddiursa::
 Cry_Ursaring::
 	.incbin "sound/direct_sound_samples/cries/ursaring.bin"
 
-.if P_GEN_9_CROSS_EVOS == TRUE
+.if P_GEN_8_CROSS_EVOS == TRUE
 	.align 2
 Cry_Ursaluna::
 	.incbin "sound/direct_sound_samples/cries/ursaluna.bin"
-.endif @ P_GEN_9_CROSS_EVOS
+.endif @ P_GEN_8_CROSS_EVOS
 .endif @ P_FAMILY_TEDDIURSA
 
 .if P_FAMILY_SLUGMA == TRUE

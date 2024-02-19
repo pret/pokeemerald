@@ -1052,12 +1052,6 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 1,
     },
 
-    [EFFECT_TEETER_DANCE] =
-    {
-        .battleScript = BattleScript_EffectTeeterDance,
-        .battleTvScore = 6,
-    },
-
     [EFFECT_HIT_ESCAPE] =
     {
         .battleScript = BattleScript_EffectHitEscape,

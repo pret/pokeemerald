@@ -4990,7 +4990,7 @@ static void TurnValuesCleanUp(bool8 var0)
         else
         {
             memset(&gProtectStructs[i], 0, sizeof(struct ProtectStruct));
-            memset(&gQueuedStatBoosts[i], 0, sizeof(gQueuedStatBoosts));
+            memset(&gQueuedStatBoosts[i], 0, sizeof(struct QueuedStatBoost));
 
             if (gDisableStructs[i].isFirstTurn)
                 gDisableStructs[i].isFirstTurn--;
