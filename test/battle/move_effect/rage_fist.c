@@ -274,7 +274,6 @@ SINGLE_BATTLE_TEST("Rage Fist number of hits is copied by Transform")
 {
     s16 timesGotHit[2];
 
-    // KNOWN_FAILING; // After Transform , wrong move is used by transformed mon
     GIVEN {
         PLAYER(SPECIES_REGIROCK);
         OPPONENT(SPECIES_REGIROCK) { Moves(MOVE_RAGE_FIST, MOVE_CELEBRATE); }

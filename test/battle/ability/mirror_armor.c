@@ -195,3 +195,20 @@ DOUBLE_BATTLE_TEST("Mirror Armor lowers Speed of the partner Pokemon after Court
         MESSAGE("Wobbuffet's Speed fell!");
     }
 }
+
+SINGLE_BATTLE_TEST("Mirror Armor reflects Tangling Hair speed drop")
+{
+    KNOWN_FAILING;
+    GIVEN {
+        PLAYER(SPECIES_DUGTRIO) { Ability(ABILITY_TANGLING_HAIR); }
+        OPPONENT(SPECIES_CORVIKNIGHT) { Ability(ABILITY_MIRROR_ARMOR); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_TACKLE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ABILITY_POPUP(player, ABILITY_TANGLING_HAIR);
+        NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+        ABILITY_POPUP(opponent, ABILITY_MIRROR_ARMOR);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+    }
+}
