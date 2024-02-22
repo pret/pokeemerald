@@ -305,7 +305,7 @@ static void PlayerPartnerHandleDrawTrainerPic(u32 battler)
     }
     else if (IsAiVsAiBattle())
     {
-        trainerPicId = gTrainers[gPartnerTrainerId].trainerPic;
+        trainerPicId = GetTrainerPicFromId(gPartnerTrainerId);
         xPos = 60;
         yPos = 80;
     }
@@ -437,7 +437,7 @@ static void PlayerPartnerHandleIntroTrainerBallThrow(u32 battler)
     if (gPartnerTrainerId > TRAINER_PARTNER(PARTNER_NONE))
         trainerPal = gTrainerBacksprites[gPartnerSpriteId].palette.data;
     else if (IsAiVsAiBattle())
-        trainerPal = gTrainerSprites[gTrainers[gPartnerTrainerId].trainerPic].palette.data;
+        trainerPal = gTrainerSprites[GetTrainerPicFromId(gPartnerTrainerId)].palette.data;
     else
         trainerPal = gTrainerSprites[GetFrontierTrainerFrontSpriteId(gPartnerTrainerId)].palette.data; // 2 vs 2 multi battle in Battle Frontier, load front sprite and pal.
 

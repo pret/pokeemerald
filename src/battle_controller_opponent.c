@@ -455,13 +455,13 @@ static u32 OpponentGetTrainerPicId(u32 battlerId)
     else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
     {
         if (battlerId != 1)
-            trainerPicId = gTrainers[gTrainerBattleOpponent_B].trainerPic;
+            trainerPicId = GetTrainerPicFromId(gTrainerBattleOpponent_B);
         else
-            trainerPicId = gTrainers[gTrainerBattleOpponent_A].trainerPic;
+            trainerPicId = GetTrainerPicFromId(gTrainerBattleOpponent_A);
     }
     else
     {
-        trainerPicId = gTrainers[gTrainerBattleOpponent_A].trainerPic;
+        trainerPicId = GetTrainerPicFromId(gTrainerBattleOpponent_A);
     }
 
     return trainerPicId;
@@ -549,7 +549,10 @@ static void OpponentHandleChooseMove(u32 battler)
                     u16 chosenMove = moveInfo->moves[chosenMoveId];
                     bool32 isSecondTrainer = (GetBattlerPosition(battler) == B_POSITION_OPPONENT_RIGHT) && (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) && !BATTLE_TWO_VS_ONE_OPPONENT;
                     u16 trainerId = isSecondTrainer ? gTrainerBattleOpponent_B : gTrainerBattleOpponent_A;
-                    const struct TrainerMon *party = gTrainers[trainerId].party;
+                    const struct TrainerMon *party = GetTrainerPartyFromId(trainerId);
+                    bool32 shouldDynamax = FALSE;
+                    if (party != NULL)
+                        shouldDynamax = party[isSecondTrainer ? gBattlerPartyIndexes[battler] - MULTI_PARTY_SIZE : gBattlerPartyIndexes[battler]].shouldDynamax;
 
                     if (GetBattlerMoveTargetType(battler, chosenMove) & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
                         gBattlerTarget = battler;
@@ -568,7 +571,7 @@ static void OpponentHandleChooseMove(u32 battler)
                     else if (CanUltraBurst(battler))
                         BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_ULTRA_BURST) | (gBattlerTarget << 8));
                     // If opponent can Dynamax and is allowed in the partydata, do it.
-                    else if (CanDynamax(battler) && party[isSecondTrainer ? gBattlerPartyIndexes[battler] - MULTI_PARTY_SIZE : gBattlerPartyIndexes[battler]].shouldDynamax)
+                    else if (CanDynamax(battler) && shouldDynamax)
                         BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_DYNAMAX) | (gBattlerTarget << 8));
                     else
                         BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));

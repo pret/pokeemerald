@@ -1693,7 +1693,7 @@ static void PopulateTrainerName(int matchCallId, u8 *destStr)
         }
     }
 
-    StringCopy(destStr, gTrainers[trainerId].trainerName);
+    StringCopy(destStr, GetTrainerNameFromId(trainerId));
 }
 
 static void PopulateMapName(int matchCallId, u8 *destStr)
@@ -1799,9 +1799,12 @@ static void PopulateSpeciesFromTrainerParty(int matchCallId, u8 *destStr)
     const u8 *speciesName;
 
     trainerId = GetLastBeatenRematchTrainerId(sMatchCallTrainers[matchCallId].trainerId);
-    party = gTrainers[trainerId].party;
-    monId = Random() % gTrainers[trainerId].partySize;
-    speciesName = GetSpeciesName(party[monId].species);
+    party = GetTrainerPartyFromId(trainerId);
+    monId = Random() % GetTrainerPartySizeFromId(trainerId);
+    if (party != NULL)
+        speciesName = GetSpeciesName(party[monId].species);
+    else
+        speciesName = GetSpeciesName(SPECIES_NONE);
 
     StringCopy(destStr, speciesName);
 }
