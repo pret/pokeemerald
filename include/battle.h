@@ -60,8 +60,7 @@ struct __attribute__((packed, aligned(2))) BattleMoveEffect
     u16 padding:9;
 };
 
-#define GET_MOVE_EFFECT(move) gBattleMoveEffects[gMovesInfo[move].effect]
-#define GET_MOVE_BATTLESCRIPT(move) GET_MOVE_EFFECT(move).battleScript
+#define GET_MOVE_BATTLESCRIPT(move) gBattleMoveEffects[gMovesInfo[move].effect].battleScript
 
 struct ResourceFlags
 {
