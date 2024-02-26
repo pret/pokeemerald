@@ -529,9 +529,9 @@ struct MoveInfo
 #define ADDITIONAL_EFFECTS(...) ((min(ARRAY_COUNT(EFFECTS_ARR( __VA_ARGS__ )), 15)) << 28) + (uintptr_t)(EFFECTS_ARR( __VA_ARGS__ ))
 
 // Retrieve a move's additional effects and the count thereof
-#define GET_ADDITIONAL_EFFECTS_AND_COUNT(move, _count, _effects) u32 _count = GET_ADDITIONAL_EFFECTS_COUNT(move); const struct AdditionalEffect *_effects = GET_ADDITIONAL_EFFECTS(move)
 #define GET_ADDITIONAL_EFFECTS(move) (void *)(gMovesInfo[move].additionalEffects & 0x8FFFFFF)
 #define GET_ADDITIONAL_EFFECTS_COUNT(move) (gMovesInfo[move].additionalEffects >> 28)
+#define GET_ADDITIONAL_EFFECTS_AND_COUNT(move, _count, _effects) u32 _count = GET_ADDITIONAL_EFFECTS_COUNT(move); const struct AdditionalEffect *_effects = GET_ADDITIONAL_EFFECTS(move)
 
 // Just a hack to make a move boosted by Sheer Force despite having no secondary effects affected
 #define SHEER_FORCE_HACK { .moveEffect = 0, .chance = 100, }

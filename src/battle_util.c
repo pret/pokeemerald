@@ -11084,7 +11084,7 @@ bool32 IsGen6ExpShareEnabled(void)
 
 /* Quick way of checking if a move has move effects with match a few
 comma-separated conditions. Each condition has to check a field of AdditionalEffect. */
-#define RETURN_HAS_MOVE_ADDITIONAL_EFFECT(condition1, ...)           \
+#define RETURN_HAS_MOVE_ADDITIONAL_EFFECT(condition1, ...)          \
     u32 i;                                                          \
     GET_ADDITIONAL_EFFECTS_AND_COUNT(move, count, effects);         \
     for (i = 0; i < count; i++)                                     \
