@@ -52,7 +52,6 @@ struct TrainerBacksprite
 #define GET_MON_COORDS_HEIGHT(size)((size & 0xF) * 8)
 #define TRAINER_PARTY_IVS(hp, atk, def, speed, spatk, spdef) (hp | (atk << 5) | (def << 10) | (speed << 15) | (spatk << 20) | (spdef << 25))
 #define TRAINER_PARTY_EVS(hp, atk, def, speed, spatk, spdef) ((const u8[6]){hp,atk,def,spatk,spdef,speed})
-#define TRAINER_PARTY_NATURE(nature) (nature+1)
 
 struct TrainerMon
 {
@@ -88,7 +87,7 @@ struct Trainer
     /*0x13*/ u8 trainerName[TRAINER_NAME_LENGTH + 1];
     /*0x1E*/ bool8 doubleBattle:1;
              bool8 mugshotEnabled:1;
-             u8 padding:6;
+             u8 startingStatus:6;    // this trainer starts a battle with a given status. see include/constants/battle.h for values
     /*0x1F*/ u8 mugshotColor;
     /*0x20*/ u8 partySize;
 };
@@ -99,8 +98,6 @@ struct TrainerClass
     u8 money;
     u16 ball;
 };
-
-#define TRAINER_ENCOUNTER_MUSIC(trainer)((gTrainers[trainer].encounterMusic_gender & 0x7F))
 
 extern const u16 gMinigameDigits_Pal[];
 extern const u32 gMinigameDigits_Gfx[];
@@ -133,5 +130,81 @@ extern const struct Trainer gTrainers[];
 extern const struct Trainer gBattlePartners[];
 
 extern const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT];
+
+static inline u16 SanitizeTrainerId(u16 trainerId)
+{
+    if (trainerId >= TRAINERS_COUNT)
+        return TRAINER_NONE;
+    return trainerId;
+}
+
+static inline const struct Trainer *GetTrainerStructFromId(u16 trainerId)
+{
+    return &gTrainers[SanitizeTrainerId(trainerId)];
+}
+
+static inline const u8 GetTrainerClassFromId(u16 trainerId)
+{
+    return gTrainers[SanitizeTrainerId(trainerId)].trainerClass;
+}
+
+static inline const u8 *GetTrainerClassNameFromId(u16 trainerId)
+{
+    if (trainerId > TRAINER_PARTNER(PARTNER_NONE))
+        return gTrainerClasses[gBattlePartners[trainerId].trainerClass].name;
+    return gTrainerClasses[GetTrainerClassFromId(trainerId)].name;
+}
+
+static inline const u8 *GetTrainerNameFromId(u16 trainerId)
+{
+    if (trainerId > TRAINER_PARTNER(PARTNER_NONE))
+        return gBattlePartners[trainerId].trainerName;
+    return gTrainers[SanitizeTrainerId(trainerId)].trainerName;
+}
+
+static inline const u8 GetTrainerPicFromId(u16 trainerId)
+{
+    return gTrainers[SanitizeTrainerId(trainerId)].trainerPic;
+}
+
+static inline const u8 GetTrainerStartingStatusFromId(u16 trainerId)
+{
+    return gTrainers[SanitizeTrainerId(trainerId)].startingStatus;
+}
+
+static inline const bool32 IsTrainerDoubleBattle(u16 trainerId)
+{
+    return gTrainers[SanitizeTrainerId(trainerId)].doubleBattle;
+}
+
+static inline const u8 GetTrainerPartySizeFromId(u16 trainerId)
+{
+    return gTrainers[SanitizeTrainerId(trainerId)].partySize;
+}
+
+static inline const bool32 DoesTrainerHaveMugshot(u16 trainerId)
+{
+    return gTrainers[SanitizeTrainerId(trainerId)].mugshotEnabled;
+}
+
+static inline const u8 GetTrainerMugshotColorFromId(u16 trainerId)
+{
+    return gTrainers[SanitizeTrainerId(trainerId)].mugshotColor;
+}
+
+static inline const u16 *GetTrainerItemsFromId(u16 trainerId)
+{
+    return gTrainers[SanitizeTrainerId(trainerId)].items;
+}
+
+static inline const struct TrainerMon *GetTrainerPartyFromId(u16 trainerId)
+{
+    return gTrainers[SanitizeTrainerId(trainerId)].party;
+}
+
+static inline const bool32 GetTrainerAIFlagsFromId(u16 trainerId)
+{
+    return gTrainers[SanitizeTrainerId(trainerId)].aiFlags;
+}
 
 #endif // GUARD_DATA_H

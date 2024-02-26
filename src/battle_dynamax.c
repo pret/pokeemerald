@@ -451,7 +451,7 @@ static u8 GetMaxPowerTier(u16 move)
         case EFFECT_GYRO_BALL:
             return MAX_POWER_TIER_5;
         case EFFECT_MAGNITUDE:
-        case EFFECT_WRING_OUT:
+        case EFFECT_VARY_POWER_BASED_ON_HP:
             return MAX_POWER_TIER_6;
         case EFFECT_FLAIL:
         case EFFECT_LOW_KICK:

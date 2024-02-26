@@ -1057,12 +1057,6 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 1,
     },
 
-    [EFFECT_TEETER_DANCE] =
-    {
-        .battleScript = BattleScript_EffectTeeterDance,
-        .battleTvScore = 6,
-    },
-
     [EFFECT_HIT_ESCAPE] =
     {
         .battleScript = BattleScript_EffectHitEscape,
@@ -1150,7 +1144,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .encourageEncore = TRUE,
     },
 
-    [EFFECT_WRING_OUT] =
+    [EFFECT_VARY_POWER_BASED_ON_HP] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
@@ -2207,12 +2201,14 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectShedTail,
         .battleTvScore = 0, // TODO: Assign points
+        .encourageEncore = TRUE,
     },
 
     [EFFECT_UPPER_HAND] =
     {
         .battleScript = BattleScript_EffectUpperHand,
         .battleTvScore = 0, // TODO: Assign points
+        .encourageEncore = TRUE,
     },
 
     [EFFECT_DRAGON_CHEER] =
@@ -2226,5 +2222,12 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+    },
+
+    [EFFECT_TIDY_UP] =
+    {
+        .battleScript = BattleScript_EffectTidyUp,
+        .battleTvScore = 0, // TODO: Assign points
+        .encourageEncore = TRUE,
     },
 };

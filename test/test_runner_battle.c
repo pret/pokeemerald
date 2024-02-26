@@ -1533,7 +1533,7 @@ void SetFlagForTest(u32 sourceLine, u16 flagId)
 
 void ClearFlagAfterTest(void)
 {
-    if (DATA.flagId != 0) 
+    if (DATA.flagId != 0)
     {
         FlagClear(DATA.flagId);
         DATA.flagId = 0;
