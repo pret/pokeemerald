@@ -5,7 +5,7 @@ ASSUMPTIONS
 {
     ASSUME(gMovesInfo[MOVE_UPPER_HAND].effect == EFFECT_UPPER_HAND);
     ASSUME(gMovesInfo[MOVE_UPPER_HAND].priority == 3);
-    ASSUME(MoveHasMoveEffect(MOVE_UPPER_HAND, MOVE_EFFECT_FLINCH) == TRUE);
+    ASSUME(MoveHasAdditionalEffect(MOVE_UPPER_HAND, MOVE_EFFECT_FLINCH) == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Upper Hand succeeds if the target is using a priority attacking move and causes it to flinch")

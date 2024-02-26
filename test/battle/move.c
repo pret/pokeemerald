@@ -27,7 +27,7 @@ SINGLE_BATTLE_TEST("AdditionalEffect.chance controls the proportion of secondary
     PARAMETRIZE { move = MOVE_THUNDER_SHOCK; chance = 10; }
     PARAMETRIZE { move = MOVE_DISCHARGE; chance = 30; }
     PARAMETRIZE { move = MOVE_NUZZLE; chance = 100; }
-    ASSUME(MoveHasMoveEffectWithChance(move, MOVE_EFFECT_PARALYSIS, chance) == TRUE);
+    ASSUME(MoveHasAdditionalEffectWithChance(move, MOVE_EFFECT_PARALYSIS, chance) == TRUE);
     PASSES_RANDOMLY(chance, 100, RNG_SECONDARY_EFFECT);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);

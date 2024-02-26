@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(MoveHasMoveEffectSelf(MOVE_THRASH, MOVE_EFFECT_THRASH) == TRUE);
+    ASSUME(MoveHasAdditionalEffectSelf(MOVE_THRASH, MOVE_EFFECT_THRASH) == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Thrash lasts for 2 or 3 turns")

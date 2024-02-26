@@ -135,7 +135,7 @@ SINGLE_BATTLE_TEST("White Herb wont have time to activate if it is knocked off o
 
     KNOWN_FAILING; // Knock off fails, Thief is fine
     GIVEN {
-        ASSUME(MoveHasMoveEffect(MOVE_THIEF, MOVE_EFFECT_STEAL_ITEM) == TRUE);
+        ASSUME(MoveHasAdditionalEffect(MOVE_THIEF, MOVE_EFFECT_STEAL_ITEM) == TRUE);
         ASSUME(gMovesInfo[MOVE_KNOCK_OFF].effect == EFFECT_KNOCK_OFF);
         PLAYER(SPECIES_SLUGMA) {  Ability(ABILITY_WEAK_ARMOR); Item(ITEM_WHITE_HERB); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -190,7 +190,7 @@ SINGLE_BATTLE_TEST("White Herb wont have time to activate if Pickpocket steals i
 {
     KNOWN_FAILING; // White Herb is activated
     GIVEN {
-        ASSUME(MoveHasMoveEffectSelf(MOVE_LEAF_STORM, MOVE_EFFECT_SP_ATK_TWO_DOWN));
+        ASSUME(MoveHasAdditionalEffectSelf(MOVE_LEAF_STORM, MOVE_EFFECT_SP_ATK_TWO_DOWN));
         PLAYER(SPECIES_SLUGMA) {  Ability(ABILITY_WEAK_ARMOR); Item(ITEM_WHITE_HERB); }
         OPPONENT(SPECIES_SNEASEL) { Ability(ABILITY_PICKPOCKET); }
     } WHEN {

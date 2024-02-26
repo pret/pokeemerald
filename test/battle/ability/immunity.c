@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Immunity prevents Poison Sting poison")
 {
     GIVEN {
-        ASSUME(MoveHasMoveEffect(MOVE_POISON_STING, MOVE_EFFECT_POISON) == TRUE);
+        ASSUME(MoveHasAdditionalEffect(MOVE_POISON_STING, MOVE_EFFECT_POISON) == TRUE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_SNORLAX) { Ability(ABILITY_IMMUNITY); }
     } WHEN {

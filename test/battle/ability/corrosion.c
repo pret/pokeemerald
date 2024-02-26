@@ -9,7 +9,7 @@ SINGLE_BATTLE_TEST("Corrosion can poison or badly poison a Pokemon regardless of
     PARAMETRIZE { species = SPECIES_BELDUM; }
 
     GIVEN {
-        ASSUME(MoveHasMoveEffect(MOVE_TWINEEDLE, MOVE_EFFECT_POISON) == TRUE);
+        ASSUME(MoveHasAdditionalEffect(MOVE_TWINEEDLE, MOVE_EFFECT_POISON) == TRUE);
         PLAYER(SPECIES_SALANDIT) { Ability(ABILITY_CORROSION); }
         OPPONENT(species);
     } WHEN {
@@ -49,7 +49,7 @@ SINGLE_BATTLE_TEST("Corrosion can poison or badly poison a Steel type with a sta
 SINGLE_BATTLE_TEST("Corrosion does not effect poison type damaging moves if the target is immune to it")
 {
     GIVEN {
-        ASSUME(MoveHasMoveEffect(MOVE_SLUDGE_BOMB, MOVE_EFFECT_POISON) == TRUE);
+        ASSUME(MoveHasAdditionalEffect(MOVE_SLUDGE_BOMB, MOVE_EFFECT_POISON) == TRUE);
         PLAYER(SPECIES_SALANDIT) { Ability(ABILITY_CORROSION); }
         OPPONENT(SPECIES_BELDUM);
     } WHEN {

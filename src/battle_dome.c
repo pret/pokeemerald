@@ -4062,7 +4062,7 @@ static bool32 IsDomeStatusMoveEffect(u32 move)
     case EFFECT_CURSE:
         return TRUE;
     default:
-        return MoveHasMoveEffect(move, MOVE_EFFECT_WRAP);
+        return MoveHasAdditionalEffect(move, MOVE_EFFECT_WRAP);
     }
 }
 

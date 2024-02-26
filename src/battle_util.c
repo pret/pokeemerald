@@ -3445,7 +3445,7 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
         case CANCELLER_THAW: // move thawing
             if (gBattleMons[gBattlerAttacker].status1 & STATUS1_FREEZE)
             {
-                if (!(MoveHasMoveEffectSelfArg(gCurrentMove, MOVE_EFFECT_REMOVE_ARG_TYPE, TYPE_FIRE) && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_FIRE)))
+                if (!(MoveHasAdditionalEffectSelfArg(gCurrentMove, MOVE_EFFECT_REMOVE_ARG_TYPE, TYPE_FIRE) && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_FIRE)))
                 {
                     gBattleMons[gBattlerAttacker].status1 &= ~STATUS1_FREEZE;
                     BattleScriptPushCursor();
@@ -3456,7 +3456,7 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
             }
             if (gBattleMons[gBattlerAttacker].status1 & STATUS1_FROSTBITE && gMovesInfo[gCurrentMove].thawsUser)
             {
-                if (!(MoveHasMoveEffectSelfArg(gCurrentMove, MOVE_EFFECT_REMOVE_ARG_TYPE, TYPE_FIRE) && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_FIRE)))
+                if (!(MoveHasAdditionalEffectSelfArg(gCurrentMove, MOVE_EFFECT_REMOVE_ARG_TYPE, TYPE_FIRE) && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_FIRE)))
                 {
                     gBattleMons[gBattlerAttacker].status1 &= ~STATUS1_FROSTBITE;
                     BattleScriptPushCursor();
@@ -5609,7 +5609,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && RandomWeighted(RNG_STENCH, 9, 1)
              && TARGET_TURN_DAMAGED
-             && !MoveHasMoveEffect(gCurrentMove, MOVE_EFFECT_FLINCH))
+             && !MoveHasAdditionalEffect(gCurrentMove, MOVE_EFFECT_FLINCH))
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_FLINCH;
                 BattleScriptPushCursor();
@@ -11007,7 +11007,7 @@ bool32 IsGen6ExpShareEnabled(void)
 
 /* Quick way of checking if a move has move effects with match a few
 comma-separated conditions. Each condition has to check a field of AdditionalEffect. */
-#define RETURN_MOVE_HAS_MOVE_EFFECT_WITH(condition1, ...)           \
+#define RETURN_HAS_MOVE_ADDITIONAL_EFFECT(condition1, ...)           \
     u32 i;                                                          \
     GET_ADDITIONAL_EFFECTS_AND_COUNT(move, count, effects);         \
     for (i = 0; i < count; i++)                                     \
@@ -11018,34 +11018,34 @@ comma-separated conditions. Each condition has to check a field of AdditionalEff
     return FALSE;
 
 
-bool32 MoveHasMoveEffect(u32 move, u32 moveEffect)
+bool32 MoveHasAdditionalEffect(u32 move, u32 moveEffect)
 {
-    RETURN_MOVE_HAS_MOVE_EFFECT_WITH(moveEffect == moveEffect, self == FALSE)
+    RETURN_HAS_MOVE_ADDITIONAL_EFFECT(moveEffect == moveEffect, self == FALSE)
 }
 
-bool32 MoveHasMoveEffectWithChance(u32 move, u32 moveEffect, u32 chance)
+bool32 MoveHasAdditionalEffectWithChance(u32 move, u32 moveEffect, u32 chance)
 {
-    RETURN_MOVE_HAS_MOVE_EFFECT_WITH(moveEffect == moveEffect, chance == chance)
+    RETURN_HAS_MOVE_ADDITIONAL_EFFECT(moveEffect == moveEffect, chance == chance)
 }
 
-bool32 MoveHasMoveEffectSelf(u32 move, u32 moveEffect)
+bool32 MoveHasAdditionalEffectSelf(u32 move, u32 moveEffect)
 {
-    RETURN_MOVE_HAS_MOVE_EFFECT_WITH(moveEffect == moveEffect, self == TRUE)
+    RETURN_HAS_MOVE_ADDITIONAL_EFFECT(moveEffect == moveEffect, self == TRUE)
 }
 
-bool32 MoveHasMoveEffectSelfArg(u32 move, u32 moveEffect, u32 argument)
+bool32 MoveHasAdditionalEffectSelfArg(u32 move, u32 moveEffect, u32 argument)
 {
-    return (gMovesInfo[move].argument == argument) && MoveHasMoveEffectSelf(move, moveEffect);
+    return (gMovesInfo[move].argument == argument) && MoveHasAdditionalEffectSelf(move, moveEffect);
 }
 
-bool32 MoveHasChargeTurnMoveEffect(u32 move)
+bool32 MoveHasChargeTurnAdditionalEffect(u32 move)
 {
-    RETURN_MOVE_HAS_MOVE_EFFECT_WITH(onChargeTurnOnly == TRUE)
+    RETURN_HAS_MOVE_ADDITIONAL_EFFECT(onChargeTurnOnly == TRUE)
 }
 
 bool32 MoveIsAffectedBySheerForce(u16 move)
 {
-    RETURN_MOVE_HAS_MOVE_EFFECT_WITH(chance > 0)
+    RETURN_HAS_MOVE_ADDITIONAL_EFFECT(chance > 0)
 }
 
 bool8 CanMonParticipateInSkyBattle(struct Pokemon *mon)

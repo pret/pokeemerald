@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(MoveHasMoveEffectSelf(MOVE_CLANGING_SCALES, MOVE_EFFECT_DEF_MINUS_1) == TRUE);
+    ASSUME(MoveHasAdditionalEffectSelf(MOVE_CLANGING_SCALES, MOVE_EFFECT_DEF_MINUS_1) == TRUE);
 }
 
 DOUBLE_BATTLE_TEST("Clanging Scales lowers defense by one stage if it hits both targets")
