@@ -5172,7 +5172,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && IsBattlerAlive(battler)
              && HadMoreThanHalfHpNowHasLess(battler)
              && (gMultiHitCounter == 0 || gMultiHitCounter == 1)
-             && !(TestSheerForceFlag(gBattlerAttacker, gCurrentMove))
+             && !(TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove))
              && CompareStat(battler, STAT_SPATK, MAX_STAT_STAGE, CMP_LESS_THAN))
             {
                 gEffectBattler = battler;
@@ -5190,7 +5190,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             // Had more than half of hp before, now has less
              && HadMoreThanHalfHpNowHasLess(battler)
              && (gMultiHitCounter == 0 || gMultiHitCounter == 1)
-             && !(TestSheerForceFlag(gBattlerAttacker, gCurrentMove))
+             && !(TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove))
              && (CanBattlerSwitch(battler) || !(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
              && !(gBattleTypeFlags & BATTLE_TYPE_ARENA)
              && CountUsablePartyMons(battler) > 0
@@ -5621,7 +5621,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && (gMultiHitCounter == 0 || gMultiHitCounter == 1) // Activates after all hits from a multi-hit move.
              && IsBattlerAlive(gBattlerTarget)
              && HadMoreThanHalfHpNowHasLess(gBattlerTarget)
-             && !(TestSheerForceFlag(gBattlerAttacker, gCurrentMove)))
+             && !(TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove)))
             {
                 gBattlerAttacker = gBattlerTarget;
                 BattleScriptPushCursor();
@@ -7649,7 +7649,7 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
             break;
         case HOLD_EFFECT_LIFE_ORB:
             if (IsBattlerAlive(gBattlerAttacker)
-                && !(TestSheerForceFlag(gBattlerAttacker, gCurrentMove))
+                && !(TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove))
                 && GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD
                 && !gSpecialStatuses[gBattlerAttacker].preventLifeOrbDamage
                 && gSpecialStatuses[gBattlerAttacker].damagedMons)
@@ -10807,7 +10807,7 @@ bool32 IsBattlerAffectedByHazards(u32 battler, bool32 toxicSpikes)
     return ret;
 }
 
-bool32 TestSheerForceFlag(u32 battler, u16 move)
+bool32 TestIfSheerForceAffected(u32 battler, u16 move)
 {
     return GetBattlerAbility(battler) == ABILITY_SHEER_FORCE && MoveIsAffectedBySheerForce(move);
 }

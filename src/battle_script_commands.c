@@ -2831,7 +2831,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
         && !primary && gBattleScripting.moveEffect <= MOVE_EFFECT_CONFUSION)
         INCREMENT_RESET_RETURN
 
-    if (TestSheerForceFlag(gBattlerAttacker, gCurrentMove) && !primary && gBattleScripting.moveEffect != MOVE_EFFECT_CHARGING)
+    if (TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove) && !primary && gBattleScripting.moveEffect != MOVE_EFFECT_CHARGING)
         INCREMENT_RESET_RETURN
 
     if (gBattleMons[gEffectBattler].hp == 0 && !activateAfterFaint)
@@ -5778,7 +5778,7 @@ static void Cmd_moveend(void)
                 && GetBattlerSide(gBattlerTarget) != GetBattlerSide(gBattlerAttacker)
                 && gProtectStructs[gBattlerTarget].physicalDmg
                 && gProtectStructs[gBattlerTarget].physicalBattlerId == gBattlerAttacker
-                && !TestSheerForceFlag(gBattlerAttacker, gCurrentMove))
+                && !TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove))
             {
                 gProtectStructs[gBattlerTarget].shellTrap = TRUE;
                 // Change move order in double battles, so the hit mon with shell trap moves immediately after being hit.
@@ -6009,7 +6009,7 @@ static void Cmd_moveend(void)
         case MOVEEND_EJECT_BUTTON:
             if (gMovesInfo[gCurrentMove].effect != EFFECT_HIT_SWITCH_TARGET
               && IsBattlerAlive(gBattlerAttacker)
-              && !TestSheerForceFlag(gBattlerAttacker, gCurrentMove)
+              && !TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove)
               && (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER || (gBattleTypeFlags & BATTLE_TYPE_TRAINER)))
             {
                 // Since we check if battler was damaged, we don't need to check move result.
@@ -6042,7 +6042,7 @@ static void Cmd_moveend(void)
         case MOVEEND_RED_CARD:
             if ((gMovesInfo[gCurrentMove].effect != EFFECT_HIT_SWITCH_TARGET || gBattleStruct->hitSwitchTargetFailed)
               && IsBattlerAlive(gBattlerAttacker)
-              && !TestSheerForceFlag(gBattlerAttacker, gCurrentMove)
+              && !TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove)
               && GetBattlerAbility(gBattlerAttacker) != ABILITY_GUARD_DOG)
             {
                 // Since we check if battler was damaged, we don't need to check move result.
@@ -6112,7 +6112,7 @@ static void Cmd_moveend(void)
             if (IsBattlerAlive(gBattlerAttacker)
               && gBattleMons[gBattlerAttacker].item != ITEM_NONE        // Attacker must be holding an item
               && !(gWishFutureKnock.knockedOffMons[GetBattlerSide(gBattlerAttacker)] & gBitTable[gBattlerPartyIndexes[gBattlerAttacker]])   // But not knocked off
-              && !(TestSheerForceFlag(gBattlerAttacker, gCurrentMove))  // Pickpocket doesn't activate for sheer force
+              && !(TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove))  // Pickpocket doesn't activate for sheer force
               && IsMoveMakingContact(gCurrentMove, gBattlerAttacker)    // Pickpocket requires contact
               && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))           // Obviously attack needs to have worked
             {

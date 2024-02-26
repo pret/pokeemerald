@@ -202,7 +202,7 @@ bool32 HasEnoughHpToEatBerry(u32 battler, u32 hpFraction, u32 itemId);
 bool32 IsPartnerMonFromSameTrainer(u32 battler);
 u8 GetCategoryBasedOnStats(u32 battler);
 bool32 MoveIsAffectedBySheerForce(u16 move);
-bool32 TestSheerForceFlag(u32 battler, u16 move);
+bool32 TestIfSheerForceAffected(u32 battler, u16 move);
 void TryRestoreHeldItems(void);
 bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item);
 void TrySaveExchangedItem(u32 battler, u16 stolenItem);
