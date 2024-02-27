@@ -68,7 +68,7 @@ SINGLE_BATTLE_TEST("Flare Blitz deals 33% of recoil damage to the user and can b
 
     GIVEN {
         ASSUME(gMovesInfo[MOVE_FLARE_BLITZ].recoil == 33);
-        ASSUME(gMovesInfo[MOVE_FLARE_BLITZ].argument == STATUS1_BURN);
+        ASSUME(MoveHasAdditionalEffect(MOVE_FLARE_BLITZ, MOVE_EFFECT_BURN));
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

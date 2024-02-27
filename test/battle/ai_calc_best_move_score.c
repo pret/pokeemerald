@@ -81,7 +81,7 @@ AI_SINGLE_BATTLE_TEST("AI will not use Throat Chop if opposing mon has a better 
         ASSUME(gMovesInfo[MOVE_THROAT_CHOP].power == 80);
         ASSUME(gMovesInfo[MOVE_DISARMING_VOICE].power == 40);
         ASSUME(gMovesInfo[MOVE_FLAME_BURST].power == 70);
-        ASSUME(MoveHasMoveEffect(MOVE_THROAT_CHOP, MOVE_EFFECT_THROAT_CHOP) == TRUE);
+        ASSUME(MoveHasAdditionalEffect(MOVE_THROAT_CHOP, MOVE_EFFECT_THROAT_CHOP) == TRUE);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_REGIROCK) { Speed(15); Moves(MOVE_DISARMING_VOICE, MOVE_FLAME_BURST); };
         OPPONENT(SPECIES_WOBBUFFET) { Speed(20); Moves(MOVE_THROAT_CHOP, MOVE_PSYCHIC_FANGS); }
@@ -95,7 +95,7 @@ AI_SINGLE_BATTLE_TEST("AI will not use Throat Chop if opposing mon has a better 
 AI_SINGLE_BATTLE_TEST("AI will select Throat Chop if the sound move is the best damaging move from opposing mon")
 {
     GIVEN {
-        ASSUME(MoveHasMoveEffect(MOVE_THROAT_CHOP, MOVE_EFFECT_THROAT_CHOP) == TRUE);
+        ASSUME(MoveHasAdditionalEffect(MOVE_THROAT_CHOP, MOVE_EFFECT_THROAT_CHOP) == TRUE);
         ASSUME(gMovesInfo[MOVE_PSYCHIC_FANGS].power == 85);
         ASSUME(gMovesInfo[MOVE_THROAT_CHOP].power == 80);
         ASSUME(gMovesInfo[MOVE_FLAME_BURST].power == 70);

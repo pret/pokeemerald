@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(MoveHasMoveEffect(MOVE_THUNDER_SHOCK, MOVE_EFFECT_PARALYSIS) == TRUE);
+    ASSUME(MoveHasAdditionalEffect(MOVE_THUNDER_SHOCK, MOVE_EFFECT_PARALYSIS) == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Thunder Shock inflicts paralysis")
@@ -48,7 +48,7 @@ SINGLE_BATTLE_TEST("Body Slam shouldn't paralyze Normal-types")
 {
     GIVEN {
         ASSUME(gSpeciesInfo[SPECIES_TAUROS].types[0] == TYPE_NORMAL);
-        ASSUME(MoveHasMoveEffect(MOVE_BODY_SLAM, MOVE_EFFECT_PARALYSIS) == TRUE);
+        ASSUME(MoveHasAdditionalEffect(MOVE_BODY_SLAM, MOVE_EFFECT_PARALYSIS) == TRUE);
         ASSUME(gMovesInfo[MOVE_BODY_SLAM].type == TYPE_NORMAL);
         PLAYER(SPECIES_TAUROS);
         OPPONENT(SPECIES_TAUROS);

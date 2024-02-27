@@ -4059,7 +4059,7 @@ static bool32 IsDomeStatusMoveEffect(u32 move)
     case EFFECT_CURSE:
         return TRUE;
     default:
-        return MoveHasMoveEffect(move, MOVE_EFFECT_WRAP);
+        return MoveHasAdditionalEffect(move, MOVE_EFFECT_WRAP);
     }
 }
 
@@ -4388,7 +4388,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                     allocatedArray[k] = (gMovesInfo[move].pp <= 5) ? 1 : 0;
                     break;
                 case MOVE_POINTS_EFFECT:
-                    allocatedArray[k] = gMovesInfo[move].sheerForceBoost;
+                    allocatedArray[k] = MoveIsAffectedBySheerForce(move);
                     break;
                 }
             }

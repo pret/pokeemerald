@@ -2507,8 +2507,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 
                 if (instructedMove == MOVE_NONE
                   || gMovesInfo[instructedMove].instructBanned
-                  || gMovesInfo[instructedMove].twoTurnMove
-                  || MoveHasMoveEffectSelf(instructedMove, MOVE_EFFECT_RECHARGE)
+                  || MoveHasAdditionalEffectSelf(instructedMove, MOVE_EFFECT_RECHARGE)
                   || IsZMove(instructedMove)
                   || (gLockedMoves[battlerDef] != 0 && gLockedMoves[battlerDef] != 0xFFFF)
                   || gBattleMons[battlerDef].status2 & STATUS2_MULTIPLETURNS
@@ -3228,6 +3227,9 @@ static u32 AI_CalcMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
     struct AiLogicData *aiData = AI_DATA;
     u32 movesetIndex = AI_THINKING_STRUCT->movesetIndex;
     u32 effectiveness = aiData->effectiveness[battlerAtk][battlerDef][movesetIndex];
+
+    // additional effects
+    GET_ADDITIONAL_EFFECTS_AND_COUNT(move, additionalEffectsCount, additionalEffects);
 
     s32 score = 0;
     u32 predictedMove = aiData->predictedMoves[battlerDef];
@@ -4458,19 +4460,19 @@ static u32 AI_CalcMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
     } // move effect checks
 
     // check move additional effects that are likely to happen
-    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+    for (i = 0; i < additionalEffectsCount; i++)
     {
         // Only consider effects with a guaranteed chance to happen
-        if (!MoveEffectIsGuaranteed(battlerAtk, aiData->abilities[battlerAtk], &gMovesInfo[move].additionalEffects[i]))
+        if (!MoveEffectIsGuaranteed(battlerAtk, aiData->abilities[battlerAtk], &additionalEffects[i]))
             continue;
 
         // Consider move effects that target self
-        if (gMovesInfo[move].additionalEffects[i].self)
+        if (additionalEffects[i].self)
         {
-            u32 oneStageStatId = STAT_CHANGE_ATK + gMovesInfo[move].additionalEffects[i].moveEffect - MOVE_EFFECT_ATK_PLUS_1;
-            u32 twoStageStatId = STAT_CHANGE_ATK_2 + gMovesInfo[move].additionalEffects[i].moveEffect - MOVE_EFFECT_ATK_PLUS_1;
+            u32 oneStageStatId = STAT_CHANGE_ATK + additionalEffects[i].moveEffect - MOVE_EFFECT_ATK_PLUS_1;
+            u32 twoStageStatId = STAT_CHANGE_ATK_2 + additionalEffects[i].moveEffect - MOVE_EFFECT_ATK_PLUS_1;
 
-            switch (gMovesInfo[move].additionalEffects[i].moveEffect)
+            switch (additionalEffects[i].moveEffect)
             {
                 case MOVE_EFFECT_SPD_PLUS_2:
                 case MOVE_EFFECT_SPD_PLUS_1:
@@ -4521,7 +4523,7 @@ static u32 AI_CalcMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
         }
         else // consider move effects that hinder the target
         {
-            switch (gMovesInfo[move].additionalEffects[i].moveEffect)
+            switch (additionalEffects[i].moveEffect)
             {
                 case MOVE_EFFECT_FLINCH:
                     score += ShouldTryToFlinch(battlerAtk, battlerDef, aiData->abilities[battlerAtk], aiData->abilities[battlerDef], move);
@@ -4805,11 +4807,13 @@ static s32 AI_SetupFirstTurn(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
         ADJUST_SCORE(DECENT_EFFECT);
         break;
     case EFFECT_HIT:
+    {
         // TEMPORARY - should applied to all moves regardless of EFFECT
         // Consider move effects
-        for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+        GET_ADDITIONAL_EFFECTS_AND_COUNT(move, additionalEffectsCount, additionalEffects);
+        for (i = 0; i < additionalEffectsCount; i++)
         {
-            switch (gMovesInfo[move].additionalEffects[i].moveEffect)
+            switch (additionalEffects[i].moveEffect)
             {
                 case MOVE_EFFECT_STEALTH_ROCK:
                 case MOVE_EFFECT_SPIKES:
@@ -4819,6 +4823,7 @@ static s32 AI_SetupFirstTurn(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
                     break;
             }
         }
+    }
     default:
         break;
     }
@@ -4859,11 +4864,13 @@ static s32 AI_Risky(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             ADJUST_SCORE(DECENT_EFFECT);
         break;
     case EFFECT_HIT:
+    {
         // TEMPORARY - should applied to all moves regardless of EFFECT
         // Consider move effects
-        for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+        GET_ADDITIONAL_EFFECTS_AND_COUNT(move, additionalEffectsCount, additionalEffects);
+        for (i = 0; i < additionalEffectsCount; i++)
         {
-            switch (gMovesInfo[move].additionalEffects[i].moveEffect)
+            switch (additionalEffects[i].moveEffect)
             {
                 case MOVE_EFFECT_ALL_STATS_UP:
                     if (Random() & 1)
@@ -4873,6 +4880,7 @@ static s32 AI_Risky(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                     break;
             }
         }
+    }
     default:
         break;
     }

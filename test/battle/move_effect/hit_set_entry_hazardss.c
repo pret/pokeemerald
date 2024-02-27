@@ -3,8 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(MoveHasMoveEffect(MOVE_STONE_AXE, MOVE_EFFECT_STEALTH_ROCK) == TRUE);
-    ASSUME(MoveHasMoveEffect(MOVE_CEASELESS_EDGE, MOVE_EFFECT_SPIKES) == TRUE);
+    ASSUME(MoveHasAdditionalEffect(MOVE_STONE_AXE, MOVE_EFFECT_STEALTH_ROCK) == TRUE);
+    ASSUME(MoveHasAdditionalEffect(MOVE_CEASELESS_EDGE, MOVE_EFFECT_SPIKES) == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Stone Axe / Ceaseless Edge set up hazards after hitting the target")

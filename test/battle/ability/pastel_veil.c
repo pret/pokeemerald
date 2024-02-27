@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Pastel Veil prevents Poison Sting poison")
 {
     GIVEN {
-        ASSUME(MoveHasMoveEffect(MOVE_POISON_STING, MOVE_EFFECT_POISON) == TRUE);
+        ASSUME(MoveHasAdditionalEffect(MOVE_POISON_STING, MOVE_EFFECT_POISON) == TRUE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_PONYTA_GALARIAN) { Ability(ABILITY_PASTEL_VEIL); }
     } WHEN {
@@ -18,7 +18,7 @@ SINGLE_BATTLE_TEST("Pastel Veil prevents Poison Sting poison")
 DOUBLE_BATTLE_TEST("Pastel Veil prevents Poison Sting poison on partner")
 {
     GIVEN {
-        ASSUME(MoveHasMoveEffect(MOVE_POISON_STING, MOVE_EFFECT_POISON) == TRUE);
+        ASSUME(MoveHasAdditionalEffect(MOVE_POISON_STING, MOVE_EFFECT_POISON) == TRUE);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_PONYTA_GALARIAN) { Ability(ABILITY_PASTEL_VEIL); }

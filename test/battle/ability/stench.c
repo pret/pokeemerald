@@ -35,7 +35,7 @@ DOUBLE_BATTLE_TEST("Stench only triggers if target takes damage")
 {
     GIVEN {
         ASSUME(gMovesInfo[MOVE_TACKLE].power > 0);
-        ASSUME(MoveHasMoveEffectWithChance(MOVE_FAKE_OUT, MOVE_EFFECT_FLINCH, 100));
+        ASSUME(MoveHasAdditionalEffectWithChance(MOVE_FAKE_OUT, MOVE_EFFECT_FLINCH, 100));
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_GRIMER) { Ability(ABILITY_STENCH); }
@@ -59,7 +59,7 @@ DOUBLE_BATTLE_TEST("Stench doesn't trigger if partner uses a move")
 {
     GIVEN {
         ASSUME(gMovesInfo[MOVE_TACKLE].power > 0);
-        ASSUME(MoveHasMoveEffectWithChance(MOVE_FAKE_OUT, MOVE_EFFECT_FLINCH, 100));
+        ASSUME(MoveHasAdditionalEffectWithChance(MOVE_FAKE_OUT, MOVE_EFFECT_FLINCH, 100));
         PLAYER(SPECIES_WOBBUFFET) { Speed(20); }
         PLAYER(SPECIES_WYNAUT) { Speed(10); }
         OPPONENT(SPECIES_GRIMER) { Speed(100); Ability(ABILITY_STENCH); }

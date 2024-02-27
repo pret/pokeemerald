@@ -4,7 +4,7 @@
 ASSUMPTIONS
 {
     ASSUME(gMovesInfo[MOVE_AXE_KICK].effect == EFFECT_RECOIL_IF_MISS);
-    ASSUME(MoveHasMoveEffect(MOVE_AXE_KICK, MOVE_EFFECT_CONFUSION) == TRUE);
+    ASSUME(MoveHasAdditionalEffect(MOVE_AXE_KICK, MOVE_EFFECT_CONFUSION) == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Axe Kick confuses the target")

@@ -3445,7 +3445,7 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
         case CANCELLER_THAW: // move thawing
             if (gBattleMons[gBattlerAttacker].status1 & STATUS1_FREEZE)
             {
-                if (!(MoveHasMoveEffectSelfArg(gCurrentMove, MOVE_EFFECT_REMOVE_ARG_TYPE, TYPE_FIRE) && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_FIRE)))
+                if (!(MoveHasAdditionalEffectSelfArg(gCurrentMove, MOVE_EFFECT_REMOVE_ARG_TYPE, TYPE_FIRE) && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_FIRE)))
                 {
                     gBattleMons[gBattlerAttacker].status1 &= ~STATUS1_FREEZE;
                     BattleScriptPushCursor();
@@ -3456,7 +3456,7 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
             }
             if (gBattleMons[gBattlerAttacker].status1 & STATUS1_FROSTBITE && gMovesInfo[gCurrentMove].thawsUser)
             {
-                if (!(MoveHasMoveEffectSelfArg(gCurrentMove, MOVE_EFFECT_REMOVE_ARG_TYPE, TYPE_FIRE) && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_FIRE)))
+                if (!(MoveHasAdditionalEffectSelfArg(gCurrentMove, MOVE_EFFECT_REMOVE_ARG_TYPE, TYPE_FIRE) && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_FIRE)))
                 {
                     gBattleMons[gBattlerAttacker].status1 &= ~STATUS1_FROSTBITE;
                     BattleScriptPushCursor();
@@ -5172,7 +5172,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && IsBattlerAlive(battler)
              && HadMoreThanHalfHpNowHasLess(battler)
              && (gMultiHitCounter == 0 || gMultiHitCounter == 1)
-             && !(TestSheerForceFlag(gBattlerAttacker, gCurrentMove))
+             && !(TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove))
              && CompareStat(battler, STAT_SPATK, MAX_STAT_STAGE, CMP_LESS_THAN))
             {
                 gEffectBattler = battler;
@@ -5190,7 +5190,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             // Had more than half of hp before, now has less
              && HadMoreThanHalfHpNowHasLess(battler)
              && (gMultiHitCounter == 0 || gMultiHitCounter == 1)
-             && !(TestSheerForceFlag(gBattlerAttacker, gCurrentMove))
+             && !(TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove))
              && (CanBattlerSwitch(battler) || !(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
              && !(gBattleTypeFlags & BATTLE_TYPE_ARENA)
              && CountUsablePartyMons(battler) > 0
@@ -5320,7 +5320,6 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && IsMoveMakingContact(move, gBattlerAttacker))
             {
                 SET_STATCHANGER(STAT_SPEED, 1, TRUE);
-                gBattleScripting.moveEffect = MOVE_EFFECT_SPD_MINUS_1;
                 PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_GooeyActivates;
@@ -5621,7 +5620,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && (gMultiHitCounter == 0 || gMultiHitCounter == 1) // Activates after all hits from a multi-hit move.
              && IsBattlerAlive(gBattlerTarget)
              && HadMoreThanHalfHpNowHasLess(gBattlerTarget)
-             && !(TestSheerForceFlag(gBattlerAttacker, gCurrentMove)))
+             && !(TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove)))
             {
                 gBattlerAttacker = gBattlerTarget;
                 BattleScriptPushCursor();
@@ -5686,7 +5685,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && RandomWeighted(RNG_STENCH, 9, 1)
              && TARGET_TURN_DAMAGED
-             && !MoveHasMoveEffect(gCurrentMove, MOVE_EFFECT_FLINCH))
+             && !MoveHasAdditionalEffect(gCurrentMove, MOVE_EFFECT_FLINCH))
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_FLINCH;
                 BattleScriptPushCursor();
@@ -7649,7 +7648,7 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
             break;
         case HOLD_EFFECT_LIFE_ORB:
             if (IsBattlerAlive(gBattlerAttacker)
-                && !(TestSheerForceFlag(gBattlerAttacker, gCurrentMove))
+                && !(TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove))
                 && GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD
                 && !gSpecialStatuses[gBattlerAttacker].preventLifeOrbDamage
                 && gSpecialStatuses[gBattlerAttacker].damagedMons)
@@ -8851,7 +8850,7 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.2));
         break;
     case ABILITY_SHEER_FORCE:
-        if (gMovesInfo[move].sheerForceBoost)
+        if (MoveIsAffectedBySheerForce(move))
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
         break;
     case ABILITY_SAND_FORCE:
@@ -10807,12 +10806,9 @@ bool32 IsBattlerAffectedByHazards(u32 battler, bool32 toxicSpikes)
     return ret;
 }
 
-bool32 TestSheerForceFlag(u32 battler, u16 move)
+bool32 TestIfSheerForceAffected(u32 battler, u16 move)
 {
-    if (GetBattlerAbility(battler) == ABILITY_SHEER_FORCE && gMovesInfo[move].sheerForceBoost)
-        return TRUE;
-    else
-        return FALSE;
+    return GetBattlerAbility(battler) == ABILITY_SHEER_FORCE && MoveIsAffectedBySheerForce(move);
 }
 
 // This function is the body of "jumpifstat", but can be used dynamically in a function
@@ -11082,56 +11078,50 @@ bool32 IsGen6ExpShareEnabled(void)
     return FlagGet(I_EXP_SHARE_FLAG);
 }
 
-bool32 MoveHasMoveEffect(u32 move, u32 moveEffect)
-{
-    u32 i;
-    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
-    {
-        if (gMovesInfo[move].additionalEffects[i].moveEffect == moveEffect
-            && gMovesInfo[move].additionalEffects[i].self == FALSE)
-            return TRUE;
-    }
+#define R_CHECK_MOVE_EFFECT(...) RECURSIVELY(R_FOR_EACH(CHECK_MOVE_EFFECT, __VA_ARGS__))
+#define CHECK_MOVE_EFFECT(_condition) && effects[i]._condition
+
+/* Quick way of checking if a move has move effects with match a few
+comma-separated conditions. Each condition has to check a field of AdditionalEffect. */
+#define RETURN_HAS_MOVE_ADDITIONAL_EFFECT(condition1, ...)          \
+    u32 i;                                                          \
+    GET_ADDITIONAL_EFFECTS_AND_COUNT(move, count, effects);         \
+    for (i = 0; i < count; i++)                                     \
+    {                                                               \
+        if (effects[i].condition1 R_CHECK_MOVE_EFFECT(__VA_ARGS__)) \
+            return TRUE;                                            \
+    }                                                               \
     return FALSE;
+
+
+bool32 MoveHasAdditionalEffect(u32 move, u32 moveEffect)
+{
+    RETURN_HAS_MOVE_ADDITIONAL_EFFECT(moveEffect == moveEffect, self == FALSE)
 }
 
-bool32 MoveHasMoveEffectWithChance(u32 move, u32 moveEffect, u32 chance)
+bool32 MoveHasAdditionalEffectWithChance(u32 move, u32 moveEffect, u32 chance)
 {
-    u32 i;
-    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
-    {
-        if (gMovesInfo[move].additionalEffects[i].moveEffect == moveEffect
-            && gMovesInfo[move].additionalEffects[i].chance == chance)
-            return TRUE;
-    }
-    return FALSE;
+    RETURN_HAS_MOVE_ADDITIONAL_EFFECT(moveEffect == moveEffect, chance == chance)
 }
 
-bool32 MoveHasMoveEffectSelf(u32 move, u32 moveEffect)
+bool32 MoveHasAdditionalEffectSelf(u32 move, u32 moveEffect)
 {
-    u32 i;
-    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
-    {
-        if (gMovesInfo[move].additionalEffects[i].moveEffect == moveEffect
-            && gMovesInfo[move].additionalEffects[i].self == TRUE)
-            return TRUE;
-    }
-    return FALSE;
+    RETURN_HAS_MOVE_ADDITIONAL_EFFECT(moveEffect == moveEffect, self == TRUE)
 }
 
-bool32 MoveHasMoveEffectSelfArg(u32 move, u32 moveEffect, u32 argument)
+bool32 MoveHasAdditionalEffectSelfArg(u32 move, u32 moveEffect, u32 argument)
 {
-    return (gMovesInfo[move].argument == argument) && MoveHasMoveEffectSelf(move, moveEffect);
+    return (gMovesInfo[move].argument == argument) && MoveHasAdditionalEffectSelf(move, moveEffect);
 }
 
-bool32 MoveHasChargeTurnMoveEffect(u32 move)
+bool32 MoveHasChargeTurnAdditionalEffect(u32 move)
 {
-    u8 i = 0;
-    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
-    {
-        if (gMovesInfo[move].additionalEffects[i].onChargeTurnOnly)
-            return TRUE;
-    }
-    return FALSE;
+    RETURN_HAS_MOVE_ADDITIONAL_EFFECT(onChargeTurnOnly == TRUE)
+}
+
+bool32 MoveIsAffectedBySheerForce(u16 move)
+{
+    RETURN_HAS_MOVE_ADDITIONAL_EFFECT(chance > 0)
 }
 
 bool8 CanMonParticipateInSkyBattle(struct Pokemon *mon)

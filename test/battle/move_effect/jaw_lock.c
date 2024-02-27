@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(MoveHasMoveEffect(MOVE_JAW_LOCK, MOVE_EFFECT_TRAP_BOTH) == TRUE);
+    ASSUME(MoveHasAdditionalEffect(MOVE_JAW_LOCK, MOVE_EFFECT_TRAP_BOTH) == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Jaw Lock traps both opponents")

@@ -44,7 +44,7 @@ SINGLE_BATTLE_TEST("Own Tempo prevents confusion from moves by the opponent")
 SINGLE_BATTLE_TEST("Own Tempo prevents confusion from moves by the user")
 {
     GIVEN {
-        ASSUME(MoveHasMoveEffectSelf(MOVE_PETAL_DANCE, MOVE_EFFECT_THRASH));
+        ASSUME(MoveHasAdditionalEffectSelf(MOVE_PETAL_DANCE, MOVE_EFFECT_THRASH));
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_SLOWPOKE) { Ability(ABILITY_OWN_TEMPO); };
     } WHEN {
