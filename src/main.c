@@ -215,15 +215,37 @@ void SetMainCallback2(MainCallback callback)
 
 void StartTimer1(void)
 {
-    REG_TM1CNT_H = 0x80;
+    if (HQ_RANDOM)
+    {
+        REG_TM2CNT_L = 0;
+        REG_TM2CNT_H = TIMER_ENABLE | TIMER_COUNTUP;
+    }
+
+    REG_TM1CNT_H = TIMER_ENABLE;
 }
 
 void SeedRngAndSetTrainerId(void)
 {
-    u16 val = REG_TM1CNT_L;
-    SeedRng(val);
-    REG_TM1CNT_H = 0;
-    sTrainerId = val;
+    u32 val;
+
+    if (HQ_RANDOM)
+    {
+        REG_TM1CNT_H = 0;
+        REG_TM2CNT_H = 0;
+        val = ((u32)REG_TM2CNT_L) << 16;
+        val |= REG_TM1CNT_L;
+        SeedRng(val);
+        sTrainerId = Random();
+    }
+    else
+    {
+        // Do it exactly like it was originally done, including not stopping
+        // the timer beforehand.
+        val = REG_TM1CNT_L;
+        SeedRng((u16)val);
+        REG_TM1CNT_H = 0;
+        sTrainerId = val;
+    }
 }
 
 u16 GetGeneratedTrainerIdLower(void)
