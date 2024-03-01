@@ -486,3 +486,27 @@ void Script_GetChosenMonDefensiveIV(void)
     ConvertIntToDecimalStringN(gStringVar2, GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_IV), STR_CONV_MODE_LEFT_ALIGN, 3);
     ConvertIntToDecimalStringN(gStringVar3, GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_IV), STR_CONV_MODE_LEFT_ALIGN, 3);
 }
+
+void Script_SetStatus1(struct ScriptContext *ctx)
+{
+    u32 status1 = VarGet(ScriptReadHalfword(ctx));
+    u32 slot = VarGet(ScriptReadHalfword(ctx));
+
+    if (slot >= PARTY_SIZE)
+    {
+        u16 species;
+
+        for (slot = 0; slot < PARTY_SIZE; slot++)
+        {
+            species = GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES);
+            if (species != SPECIES_NONE
+             && species != SPECIES_EGG
+             && GetMonData(&gPlayerParty[slot], MON_DATA_HP) != 0)
+                SetMonData(&gPlayerParty[slot], MON_DATA_STATUS, &status1);
+        }
+    }
+    else
+    {        
+        SetMonData(&gPlayerParty[slot], MON_DATA_STATUS, &status1);
+    }
+}
