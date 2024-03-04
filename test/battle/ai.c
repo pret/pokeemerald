@@ -752,3 +752,28 @@ AI_DOUBLE_BATTLE_TEST("AI will not try to switch for the same pokemon for 2 spot
         }
     }
 }
+
+AI_SINGLE_BATTLE_TEST("AI will not choose Burn Up if the user lost the Fire typing")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_BURN_UP].effect == EFFECT_FAIL_IF_NOT_ARG_TYPE);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_CYNDAQUIL) { Moves(MOVE_BURN_UP, MOVE_EXTRASENSORY, MOVE_FLAMETHROWER); }
+    } WHEN {
+        TURN { EXPECT_MOVE(opponent, MOVE_BURN_UP); }
+        TURN { EXPECT_MOVE(opponent, MOVE_FLAMETHROWER); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI will choose Surf over Thunderbolt and Ice Beam if the opposing mon has Volt Absorb")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_THUNDERBOLT].type == TYPE_ELECTRIC);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_LANTURN) { Ability(ABILITY_VOLT_ABSORB); };
+        OPPONENT(SPECIES_LANTURN) { Moves(MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_SURF); }
+    } WHEN {
+        TURN { EXPECT_MOVE(opponent, MOVE_SURF); }
+    }
+}
