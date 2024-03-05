@@ -215,6 +215,8 @@ static inline struct Benchmark BenchmarkStop(void)
 
 #define PARAMETRIZE if (gFunctionTestRunnerState->parameters++ == gFunctionTestRunnerState->runParameter)
 
+#define PARAMETRIZE_LABEL(f, label) if (gFunctionTestRunnerState->parameters++ == gFunctionTestRunnerState->runParameter && (MgbaPrintf_(":N%s: " f " (%d/%d)", gTestRunnerState.test->name, label, gFunctionTestRunnerState->runParameter + 1, gFunctionTestRunnerState->parameters), 1))
+
 #define TO_DO \
     do { \
         Test_ExpectedResult(TEST_RESULT_TODO); \
