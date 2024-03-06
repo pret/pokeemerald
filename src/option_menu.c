@@ -545,7 +545,7 @@ static u8 FrameType_ProcessInput(u8 selection)
 
 static void FrameType_DrawChoices(u8 selection)
 {
-    u8 text[16];
+    u8 text[16] = {EOS};
     u8 n = selection + 1;
     u16 i;
 

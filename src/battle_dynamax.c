@@ -637,7 +637,7 @@ void BS_SetMaxMoveEffect(void)
         case MAX_EFFECT_SANDSTORM:
         case MAX_EFFECT_HAIL:
         {
-            u8 weather, msg;
+            u8 weather = 0, msg = 0;
             switch (maxEffect)
             {
                 case MAX_EFFECT_SUN:
