@@ -3870,7 +3870,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .pokemonOffset = 18,                                \
         .trainerScale = 256,                                \
         .trainerOffset = 0,                                 \
-        .footprint = gMonFootprint_Dugtrio,                 \
+        FOOTPRINT(Dugtrio)                                  \
         .formSpeciesIdTable = sDugtrioFormSpeciesIdTable,   \
         DIGLETT_FAMILY_MISC_INFO
 
