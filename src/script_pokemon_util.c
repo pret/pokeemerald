@@ -313,6 +313,10 @@ u32 ScriptGiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 natu
         CreateMonWithNature(&mon, species, level, 32, nature);
 
     // shininess
+    if (P_FLAG_FORCE_SHINY != 0 && FlagGet(P_FLAG_FORCE_SHINY))
+        isShiny = TRUE;
+    else if (P_FLAG_FORCE_NO_SHINY != 0 && FlagGet(P_FLAG_FORCE_NO_SHINY))
+        isShiny = FALSE;
     SetMonData(&mon, MON_DATA_IS_SHINY, &isShiny);
 
     // gigantamax factor
