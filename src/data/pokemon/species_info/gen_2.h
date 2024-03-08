@@ -2325,7 +2325,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_V_STRETCH,
         PALETTES(WooperPaldean),
-        //ICON(WooperPaldean, 0),
+        ICON(WooperPaldean, 2),
         LEARNSETS(WooperPaldean),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_CLODSIRE}),
     },
