@@ -4,7 +4,7 @@ BattleFrontier_BattlePikeThreePathRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_BattlePikeRoom_OnResume
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePikeThreePathRoom_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeThreePathRoom_OnWarp
-	.byte 0
+	end_map_scripts
 
 BattleFrontier_BattlePikeThreePathRoom_OnFrame:
 	map_script_2 VAR_TEMP_CHALLENGE_STATUS, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_GetChallengeStatus
@@ -12,11 +12,11 @@ BattleFrontier_BattlePikeThreePathRoom_OnFrame:
 	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_PAUSED, BattleFrontier_BattlePikeThreePathRoom_EventScript_ResumeChallenge
 	map_script_2 VAR_TEMP_5, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_SetHintRoom
 	map_script_2 VAR_TEMP_5, 1, BattleFrontier_BattlePikeThreePathRoom_EventScript_GivePikeQueenHint
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_BattlePikeThreePathRoom_OnWarp:
 	map_script_2 VAR_TEMP_4, 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_TurnPlayerNorth
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_TurnPlayerNorth::
 	setvar VAR_TEMP_4, 1

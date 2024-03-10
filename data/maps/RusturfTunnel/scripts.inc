@@ -7,12 +7,12 @@
 RusturfTunnel_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, RusturfTunnel_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, RusturfTunnel_OnFrame
-	.byte 0
+	end_map_scripts
 
 RusturfTunnel_OnFrame:
 	map_script_2 VAR_RUSTURF_TUNNEL_STATE, 4, RusturfTunnel_EventScript_ClearTunnelScene
 	map_script_2 VAR_RUSTURF_TUNNEL_STATE, 5, RusturfTunnel_EventScript_ClearTunnelScene
-	.2byte 0
+	end_map_script_table
 
 RusturfTunnel_OnTransition:
 	call_if_eq VAR_RUSTURF_TUNNEL_STATE, 2, RusturfTunnel_EventScript_SetAquaGruntAndPeekoPos

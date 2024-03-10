@@ -5,7 +5,7 @@ FarawayIsland_Interior_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, FarawayIsland_Interior_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, FarawayIsland_Interior_OnFrame
 	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, FarawayIsland_Interior_OnReturnToField
-	.byte 0
+	end_map_scripts
 
 FarawayIsland_Interior_OnReturnToField:
 	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, FarawayIsland_Interior_EventScript_TrySetMewAboveGrass
@@ -48,7 +48,7 @@ FarawayIsland_Interior_EventScript_TryShowMew::
 
 FarawayIsland_Interior_OnFrame:
 	map_script_2 VAR_TEMP_1, 0, FarawayIsland_Interior_EventScript_FindMew
-	.2byte 0
+	end_map_script_table
 
 FarawayIsland_Interior_EventScript_FindMew::
 	lockall

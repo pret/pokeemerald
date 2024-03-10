@@ -1,5 +1,5 @@
 Route107_MapScripts::
-	.byte 0
+	end_map_scripts
 
 Route107_EventScript_Darrin::
 	trainerbattle_single TRAINER_DARRIN, Route107_Text_DarrinIntro, Route107_Text_DarrinDefeated

@@ -1,6 +1,6 @@
 Route110_SeasideCyclingRoadSouthEntrance_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route110_SeasideCyclingRoadSouthEntrance_OnTransition
-	.byte 0
+	end_map_scripts
 
 Route110_SeasideCyclingRoadSouthEntrance_OnTransition:
 	call_if_eq VAR_CYCLING_CHALLENGE_STATE, 3, Route110_SeasideCyclingRoadSouthEntrance_EventScript_RestartChallenge

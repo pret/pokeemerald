@@ -1,5 +1,5 @@
 SootopolisCity_LotadAndSeedotHouse_MapScripts::
-	.byte 0
+	end_map_scripts
 
 SootopolisCity_LotadAndSeedotHouse_EventScript_SeedotBrother::
 	special GetSeedotSizeRecordInfo

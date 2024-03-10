@@ -3,7 +3,7 @@
 LilycoveCity_LilycoveMuseum_2F_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, LilycoveCity_LilycoveMuseum_2F_OnLoad
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, LilycoveCity_LilycoveMuseum_2F_OnFrame
-	.byte 0
+	end_map_scripts
 
 LilycoveCity_LilycoveMuseum_2F_OnLoad:
 	goto_if_set FLAG_COOL_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_SetCoolPainting
@@ -60,7 +60,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_SetToughPainting::
 
 LilycoveCity_LilycoveMuseum_2F_OnFrame:
 	map_script_2 VAR_LILYCOVE_MUSEUM_2F_STATE, 0, LilycoveCity_LilycoveMuseum_2F_EventScript_ShowExhibitHall
-	.2byte 0
+	end_map_script_table
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_ShowExhibitHall::
 	lockall

@@ -1,5 +1,5 @@
 LavaridgeTown_HerbShop_MapScripts::
-	.byte 0
+	end_map_scripts
 
 LavaridgeTown_HerbShop_EventScript_Clerk::
 	lock

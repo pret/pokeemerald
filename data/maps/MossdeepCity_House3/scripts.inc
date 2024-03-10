@@ -1,5 +1,5 @@
 MossdeepCity_House3_MapScripts::
-	.byte 0
+	end_map_scripts
 
 MossdeepCity_House3_EventScript_SuperRodFisherman::
 	lock

@@ -2,7 +2,7 @@
 @  These are labeled in DewfordTown/scripts.inc
 
 Route109_MapScripts::
-	.byte 0
+	end_map_scripts
 
 Route109_EventScript_StartDepartForDewford::
 	call EventScript_BackupMrBrineyLocation

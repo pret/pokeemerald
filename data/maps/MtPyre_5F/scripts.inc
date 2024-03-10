@@ -1,5 +1,5 @@
 MtPyre_5F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 @ Seems like the scripts for the 4F and 5F were swapped
 

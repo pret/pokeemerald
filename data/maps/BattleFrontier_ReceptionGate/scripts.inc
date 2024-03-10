@@ -5,7 +5,7 @@
 BattleFrontier_ReceptionGate_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_ReceptionGate_OnFrame
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_ReceptionGate_OnTransition
-	.byte 0
+	end_map_scripts
 
 BattleFrontier_ReceptionGate_OnTransition:
 	setflag FLAG_LANDMARK_BATTLE_FRONTIER
@@ -13,7 +13,7 @@ BattleFrontier_ReceptionGate_OnTransition:
 
 BattleFrontier_ReceptionGate_OnFrame:
 	map_script_2 VAR_HAS_ENTERED_BATTLE_FRONTIER, 0, BattleFrontier_ReceptionGate_EventScript_FirstTimeEntering
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_ReceptionGate_EventScript_FirstTimeEntering::
 	lockall

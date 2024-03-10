@@ -1,6 +1,6 @@
 Route110_TrickHousePuzzle1_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, Route110_TrickHousePuzzle1_OnLoad
-	.byte 0
+	end_map_scripts
 
 Route110_TrickHousePuzzle1_OnLoad:
 	goto_if_eq VAR_TRICK_HOUSE_PUZZLE_1_STATE, 2, Route110_TrickHousePuzzle1_EventScript_OpenDoor

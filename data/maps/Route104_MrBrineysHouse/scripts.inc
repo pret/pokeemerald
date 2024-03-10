@@ -3,7 +3,7 @@
 
 Route104_MrBrineysHouse_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route104_MrBrineysHouse_OnTransition
-	.byte 0
+	end_map_scripts
 
 Route104_MrBrineysHouse_OnTransition:
 	setflag FLAG_LANDMARK_MR_BRINEY_HOUSE

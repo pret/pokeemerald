@@ -3,11 +3,11 @@
 PetalburgCity_WallysHouse_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, PetalburgCity_WallysHouse_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PetalburgCity_WallysHouse_OnWarp
-	.byte 0
+	end_map_scripts
 
 PetalburgCity_WallysHouse_OnWarp:
 	map_script_2 VAR_PETALBURG_CITY_STATE, 4, PetalburgCity_WallysHouse_EventScript_PlayerWallysDadFaceEachOther
-	.2byte 0
+	end_map_script_table
 
 PetalburgCity_WallysHouse_EventScript_PlayerWallysDadFaceEachOther::
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_EAST
@@ -16,7 +16,7 @@ PetalburgCity_WallysHouse_EventScript_PlayerWallysDadFaceEachOther::
 
 PetalburgCity_WallysHouse_OnFrame:
 	map_script_2 VAR_PETALBURG_CITY_STATE, 4, PetalburgCity_WallysHouse_EventScript_GiveHMSurf
-	.2byte 0
+	end_map_script_table
 
 PetalburgCity_WallysHouse_EventScript_GiveHMSurf::
 	lockall

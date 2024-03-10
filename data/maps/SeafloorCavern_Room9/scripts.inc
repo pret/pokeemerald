@@ -6,7 +6,7 @@
 .set LOCALID_KYOGRE_SLEEPING, 7
 
 SeafloorCavern_Room9_MapScripts::
-	.byte 0
+	end_map_scripts
 
 SeafloorCavern_Room9_EventScript_ArchieAwakenKyogre::
 	lockall

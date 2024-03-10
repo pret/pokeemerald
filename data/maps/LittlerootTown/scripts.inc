@@ -7,7 +7,7 @@ LittlerootTown_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, LittlerootTown_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LittlerootTown_OnWarp
-	.byte 0
+	end_map_scripts
 
 	@ State descriptions for VAR_LITTLEROOT_TOWN_STATE
 	@ 1: Met Rival
@@ -110,7 +110,7 @@ LittlerootTown_OnFrame:
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 1, LittlerootTown_EventScript_StepOffTruckMale
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 2, LittlerootTown_EventScript_StepOffTruckFemale
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_EventScript_BeginDexUpgradeScene
-	.2byte 0
+	end_map_script_table
 
 LittlerootTown_EventScript_StepOffTruckMale::
 	lockall
@@ -226,7 +226,7 @@ LittlerootTown_EventScript_BeginDexUpgradeScene::
 
 LittlerootTown_OnWarp:
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_EventScript_SetRivalBirchPosForDexUpgrade
-	.2byte 0
+	end_map_script_table
 
 LittlerootTown_EventScript_SetRivalBirchPosForDexUpgrade::
 	addobject LOCALID_BIRCH

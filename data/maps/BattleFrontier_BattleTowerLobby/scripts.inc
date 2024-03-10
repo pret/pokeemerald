@@ -10,7 +10,7 @@ BattleFrontier_BattleTowerLobby_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleTowerLobby_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleTowerLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerLobby_OnWarp
-	.byte 0
+	end_map_scripts
 
 BattleFrontier_BattleTowerLobby_OnResume:
 	special TryHideBattleTowerReporter
@@ -33,7 +33,7 @@ BattleFrontier_BattleTowerLobby_EventScript_HideApprentice::
 
 BattleFrontier_BattleTowerLobby_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerLobby_EventScript_PlayerFaceNorth
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_BattleTowerLobby_EventScript_PlayerFaceNorth::
 	setvar VAR_TEMP_1, 1
@@ -46,7 +46,7 @@ BattleFrontier_BattleTowerLobby_OnFrame:
 	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_PAUSED, BattleFrontier_BattleTowerLobby_EventScript_ResumeChallenge
 	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_WON, BattleFrontier_BattleTowerLobby_EventScript_WonChallenge
 	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST, BattleFrontier_BattleTowerLobby_EventScript_LostChallenge
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_BattleTowerLobby_EventScript_GetChallengeStatus::
 	frontier_getstatus

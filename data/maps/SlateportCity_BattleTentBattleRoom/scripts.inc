@@ -5,7 +5,7 @@ SlateportCity_BattleTentBattleRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_BattleTentBattleRoom_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SlateportCity_BattleTentBattleRoom_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SlateportCity_BattleTentBattleRoom_OnFrame
-	.byte 0
+	end_map_scripts
 
 	@ On this map the player (OBJ_EVENT_ID_PLAYER) is hidden
 	@ The player is represented instead by LOCALID_PLAYER, which has the gfx id VAR_OBJ_GFX_ID_1
@@ -30,7 +30,7 @@ SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale::
 
 SlateportCity_BattleTentBattleRoom_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, SlateportCity_BattleTentBattleRoom_EventScript_SetUpObjects
-	.2byte 0
+	end_map_script_table
 
 SlateportCity_BattleTentBattleRoom_EventScript_SetUpObjects::
 	setvar VAR_TEMP_1, 1
@@ -40,7 +40,7 @@ SlateportCity_BattleTentBattleRoom_EventScript_SetUpObjects::
 
 SlateportCity_BattleTentBattleRoom_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, SlateportCity_BattleTentBattleRoom_EventScript_EnterRoom
-	.2byte 0
+	end_map_script_table
 
 SlateportCity_BattleTentBattleRoom_EventScript_EnterRoom::
 	applymovement LOCALID_PLAYER, SlateportCity_BattleTentBattleRoom_Movement_PlayerEnter

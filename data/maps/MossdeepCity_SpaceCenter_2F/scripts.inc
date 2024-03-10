@@ -12,7 +12,7 @@
 MossdeepCity_SpaceCenter_2F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_SpaceCenter_2F_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, MossdeepCity_SpaceCenter_2F_OnFrame
-	.byte 0
+	end_map_scripts
 
 MossdeepCity_SpaceCenter_2F_OnTransition:
 	call_if_eq VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_2F_EventScript_MoveCivilians
@@ -37,7 +37,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_MoveDefeatedGrunts::
 
 MossdeepCity_SpaceCenter_2F_OnFrame:
 	map_script_2 VAR_MOSSDEEP_SPACE_CENTER_STATE, 1, MossdeepCity_SpaceCenter_2F_EventScript_ThreeMagmaGrunts
-	.2byte 0
+	end_map_script_table
 
 MossdeepCity_SpaceCenter_2F_EventScript_ThreeMagmaGrunts::
 	playse SE_PIN

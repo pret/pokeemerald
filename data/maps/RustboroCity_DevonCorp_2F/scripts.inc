@@ -2,7 +2,7 @@
 
 RustboroCity_DevonCorp_2F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_DevonCorp_2F_OnTransition
-	.byte 0
+	end_map_scripts
 
 RustboroCity_DevonCorp_2F_OnTransition:
 	call_if_eq VAR_FOSSIL_RESURRECTION_STATE, 1, RustboroCity_DevonCorp_2F_EventScript_SetFossilReady

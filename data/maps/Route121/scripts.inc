@@ -3,7 +3,7 @@
 .set LOCALID_GRUNT_3, 14
 
 Route121_MapScripts::
-	.byte 0
+	end_map_scripts
 
 Route121_EventScript_Woman::
 	msgbox Route121_Text_AheadLoomsMtPyre, MSGBOX_NPC

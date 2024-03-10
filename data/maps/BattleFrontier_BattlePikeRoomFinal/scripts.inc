@@ -3,11 +3,11 @@
 BattleFrontier_BattlePikeRoomFinal_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePikeRoomFinal_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeRoomFinal_OnWarp
-	.byte 0
+	end_map_scripts
 
 BattleFrontier_BattlePikeRoomFinal_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePikeRoomFinal_EventScript_EnterRoom
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_BattlePikeRoomFinal_EventScript_EnterRoom::
 	delay 16
@@ -29,7 +29,7 @@ BattleFrontier_BattlePikeRoomFinal_Movement_AttendantApproachPlayer:
 
 BattleFrontier_BattlePikeRoomFinal_OnWarp:
 	map_script_2 VAR_TEMP_4, 0, BattleFrontier_BattlePikeRoomFinal_EventScript_TurnPlayerNorth
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_BattlePikeRoomFinal_EventScript_TurnPlayerNorth::
 	setvar VAR_TEMP_4, 1

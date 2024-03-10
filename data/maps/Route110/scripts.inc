@@ -7,7 +7,7 @@ Route110_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, Route110_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, Route110_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route110_OnFrame
-	.byte 0
+	end_map_scripts
 
 Route110_OnResume:
 	special UpdateCyclingRoadState
@@ -25,7 +25,7 @@ Route110_EventScript_SaveCyclingMusic::
 
 Route110_OnFrame:
 	map_script_2 VAR_CYCLING_CHALLENGE_STATE, 1, Route110_EventScript_BeginCylcingRoadChallenge
-	.2byte 0
+	end_map_script_table
 
 Route110_EventScript_BeginCylcingRoadChallenge::
 	special Special_BeginCyclingRoadChallenge

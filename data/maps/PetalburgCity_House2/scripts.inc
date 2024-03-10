@@ -1,5 +1,5 @@
 PetalburgCity_House2_MapScripts::
-	.byte 0
+	end_map_scripts
 
 PetalburgCity_House2_EventScript_Woman::
 	msgbox PetalburgCity_House2_Text_NormanBecameGymLeader, MSGBOX_NPC

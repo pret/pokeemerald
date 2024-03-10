@@ -1,5 +1,5 @@
 SafariZone_RestHouse_MapScripts::
-	.byte 0
+	end_map_scripts
 
 SafariZone_RestHouse_EventScript_Youngster::
 	msgbox SafariZone_RestHouse_Text_Youngster, MSGBOX_NPC

@@ -4,7 +4,7 @@ JaggedPass_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, JaggedPass_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, JaggedPass_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, JaggedPass_OnLoad
-	.byte 0
+	end_map_scripts
 
 JaggedPass_OnResume:
 	setstepcallback STEP_CB_ASH

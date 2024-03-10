@@ -1,6 +1,6 @@
 LilycoveCity_DepartmentStoreRooftop_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_DepartmentStoreRooftop_OnTransition
-	.byte 0
+	end_map_scripts
 
 LilycoveCity_DepartmentStoreRooftop_OnTransition:
 	getpokenewsactive POKENEWS_LILYCOVE
@@ -42,7 +42,7 @@ LilycoveCity_DepartmentStoreRooftop_PokemartDecor_ClearOutSale:
 	.2byte DECOR_CUTE_TV
 	.2byte DECOR_WAILMER_DOLL
 	.2byte DECOR_RHYDON_DOLL
-	.2byte 0
+	end_map_script_table
 	release
 	end
 

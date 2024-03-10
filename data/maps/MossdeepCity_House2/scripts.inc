@@ -1,7 +1,7 @@
 .set LOCALID_WINGULL, 3
 
 MossdeepCity_House2_MapScripts::
-	.byte 0
+	end_map_scripts
 
 MossdeepCity_House2_EventScript_Man::
 	msgbox MossdeepCity_House2_Text_SisterMailsBoyfriendInFortree, MSGBOX_NPC

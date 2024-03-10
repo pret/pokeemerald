@@ -2,7 +2,7 @@ SkyPillar_2F_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, CaveHole_CheckFallDownHole
 	map_script MAP_SCRIPT_ON_TRANSITION, SkyPillar_2F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, SkyPillar_2F_SetHoleWarp
-	.byte 0
+	end_map_scripts
 
 SkyPillar_2F_OnTransition:
 	call_if_lt VAR_SKY_PILLAR_STATE, 2, SkyPillar_2F_EventScript_CleanFloor

@@ -8,11 +8,11 @@ BattleFrontier_BattlePikeRoomNormal_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattlePikeRoom_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePikeRoomNormal_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeRoom_OnWarp
-	.byte 0
+	end_map_scripts
 
 BattleFrontier_BattlePikeRoomNormal_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePikeRoomNormal_EventScript_EnterRoom
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_EnterRoom::
 	setvar VAR_TEMP_0, 1

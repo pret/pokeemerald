@@ -3,7 +3,7 @@
 LittlerootTown_BrendansHouse_2F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_BrendansHouse_2F_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LittlerootTown_BrendansHouse_2F_OnWarp
-	.byte 0
+	end_map_scripts
 
 LittlerootTown_BrendansHouse_2F_OnTransition:
 	call_if_lt VAR_LITTLEROOT_RIVAL_STATE, 2, LittlerootTown_BrendansHouse_2F_EventScript_CheckSetReadyToMeetBrendan
@@ -41,7 +41,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_SetReadyToMeetBrendan::
 
 LittlerootTown_BrendansHouse_2F_OnWarp:
 	map_script_2 VAR_SECRET_BASE_INITIALIZED, 0, LittlerootTown_BrendansHouse_2F_EventScript_CheckInitDecor
-	.2byte 0
+	end_map_script_table
 
 LittlerootTown_BrendansHouse_2F_EventScript_CheckInitDecor::
 	checkplayergender

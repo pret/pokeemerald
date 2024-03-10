@@ -4,7 +4,7 @@ RustboroCity_DevonCorp_3F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_DevonCorp_3F_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, RustboroCity_DevonCorp_3F_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, RustboroCity_DevonCorp_3F_OnFrame
-	.byte 0
+	end_map_scripts
 
 RustboroCity_DevonCorp_3F_OnTransition:
 	call_if_eq VAR_DEVON_CORP_3F_STATE, 0, RustboroCity_DevonCorp_3F_EventScript_SetEmployeePos
@@ -17,7 +17,7 @@ RustboroCity_DevonCorp_3F_EventScript_SetEmployeePos::
 
 RustboroCity_DevonCorp_3F_OnWarp:
 	map_script_2 VAR_DEVON_CORP_3F_STATE, 0, RustboroCity_DevonCorp_3F_EventScript_PlayerFaceEast
-	.2byte 0
+	end_map_script_table
 
 RustboroCity_DevonCorp_3F_EventScript_PlayerFaceEast::
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_EAST
@@ -25,7 +25,7 @@ RustboroCity_DevonCorp_3F_EventScript_PlayerFaceEast::
 
 RustboroCity_DevonCorp_3F_OnFrame:
 	map_script_2 VAR_DEVON_CORP_3F_STATE, 0, RustboroCity_DevonCorp_3F_EventScript_MeetPresident
-	.2byte 0
+	end_map_script_table
 
 RustboroCity_DevonCorp_3F_EventScript_MeetPresident::
 	lockall

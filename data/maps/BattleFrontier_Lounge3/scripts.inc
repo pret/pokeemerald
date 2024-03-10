@@ -1,5 +1,5 @@
 BattleFrontier_Lounge3_MapScripts::
-	.byte 0
+	end_map_scripts
 
 	.set BET_AMOUNT_5,  5
 	.set BET_AMOUNT_10, 10

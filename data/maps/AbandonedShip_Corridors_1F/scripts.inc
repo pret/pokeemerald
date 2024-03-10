@@ -1,5 +1,5 @@
 AbandonedShip_Corridors_1F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 AbandonedShip_Corridors_1F_EventScript_Youngster::
 	msgbox AbandonedShip_Corridors_1F_Text_IsntItFunHere, MSGBOX_NPC

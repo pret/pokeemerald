@@ -1,6 +1,6 @@
 FieryPath_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, FieryPath_OnTransition
-	.byte 0
+	end_map_scripts
 
 FieryPath_OnTransition:
 	call_if_unset FLAG_LANDMARK_FIERY_PATH, FieryPath_EventScript_MoveScottToFallarbor

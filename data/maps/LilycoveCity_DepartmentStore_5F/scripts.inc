@@ -2,7 +2,7 @@
 
 LilycoveCity_DepartmentStore_5F_MapScripts::
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LilycoveCity_DepartmentStore_5F_OnWarp
-	.byte 0
+	end_map_scripts
 
 @ During the abnormal weather from Kyogre/Groudon awakening the dept store rooftop is inaccessible
 @ Likely done to avoid dealing with showing the weather. Technically the rooftop is indoors
@@ -10,7 +10,7 @@ LilycoveCity_DepartmentStore_5F_OnWarp:
 	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, 1, LilycoveCity_DepartmentStore_5F_EventScript_BlockRoofStairs
 	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, 2, LilycoveCity_DepartmentStore_5F_EventScript_BlockRoofStairs
 	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, 3, LilycoveCity_DepartmentStore_5F_EventScript_BlockRoofStairs
-	.2byte 0
+	end_map_script_table
 
 LilycoveCity_DepartmentStore_5F_EventScript_BlockRoofStairs::
 	setobjectxy LOCALID_WOMAN, 16, 2

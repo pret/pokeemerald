@@ -1,5 +1,5 @@
 Route110_SeasideCyclingRoadNorthEntrance_MapScripts::
-	.byte 0
+	end_map_scripts
 
 Route110_SeasideCyclingRoadNorthEntrance_EventScript_Clerk::
 	lock

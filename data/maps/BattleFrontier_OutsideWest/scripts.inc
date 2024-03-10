@@ -9,7 +9,7 @@
 
 BattleFrontier_OutsideWest_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_OutsideWest_OnTransition
-	.byte 0
+	end_map_scripts
 
 BattleFrontier_OutsideWest_OnTransition:
 	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0

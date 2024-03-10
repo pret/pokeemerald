@@ -2,7 +2,7 @@
 .set LOCALID_DEVON_EMPLOYEE, 4
 
 PetalburgWoods_MapScripts::
-	.byte 0
+	end_map_scripts
 
 PetalburgWoods_EventScript_DevonResearcherLeft::
 	lockall

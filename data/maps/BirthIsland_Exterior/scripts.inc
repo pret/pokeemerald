@@ -6,7 +6,7 @@ BirthIsland_Exterior_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, BirthIsland_Exterior_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, BirthIsland_Exterior_OnResume
 	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, BirthIsland_Exterior_OnReturnToField
-	.byte 0
+	end_map_scripts
 
 BirthIsland_Exterior_OnReturnToField:
 	special SetDeoxysRockPalette

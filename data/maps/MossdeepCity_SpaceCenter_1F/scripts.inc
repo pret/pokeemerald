@@ -8,7 +8,7 @@
 MossdeepCity_SpaceCenter_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, MossdeepCity_SpaceCenter_1F_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_SpaceCenter_1F_OnTransition
-	.byte 0
+	end_map_scripts
 
 MossdeepCity_SpaceCenter_1F_OnTransition:
 	goto_if_eq VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_1F_EventScript_MoveObjectsForTeamMagma

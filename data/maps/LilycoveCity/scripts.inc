@@ -4,7 +4,7 @@
 LilycoveCity_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, LilycoveCity_OnLoad
-	.byte 0
+	end_map_scripts
 
 LilycoveCity_OnTransition:
 	setflag FLAG_VISITED_LILYCOVE_CITY

@@ -5,7 +5,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleTowerMultiPartnerRoom_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerMultiPartnerRoom_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleTowerMultiPartnerRoom_OnFrame
-	.byte 0
+	end_map_scripts
 
 BattleFrontier_BattleTowerMultiPartnerRoom_OnResume:
 	pyramid_resetparty
@@ -40,7 +40,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_ChosePartner::
 
 BattleFrontier_BattleTowerMultiPartnerRoom_OnWarp:
 	map_script_2 VAR_TEMP_3, 1, BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_TurnPlayerNorth
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_TurnPlayerNorth::
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
@@ -49,7 +49,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_TurnPlayerNorth::
 BattleFrontier_BattleTowerMultiPartnerRoom_OnFrame:
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_EnterRoom
 	map_script_2 VAR_TEMP_3, 1, BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_ExitRoom
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_ExitRoom::
 	lockall

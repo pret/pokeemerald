@@ -4,7 +4,7 @@
 .set LOCALID_GRUNT_2, 4
 
 SlateportCity_OceanicMuseum_2F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 SlateportCity_OceanicMuseum_2F_EventScript_CaptStern::
 	lock

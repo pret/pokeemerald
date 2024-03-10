@@ -6,7 +6,7 @@ BattleFrontier_BattlePyramidTop_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePyramidTop_OnFrame
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattlePyramidTop_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePyramidTop_OnWarp
-	.byte 0
+	end_map_scripts
 
 BattleFrontier_BattlePyramidTop_OnTransition:
 	pyramid_updatelight 200, PYRAMID_LIGHT_SET_RADIUS
@@ -15,7 +15,7 @@ BattleFrontier_BattlePyramidTop_OnTransition:
 
 BattleFrontier_BattlePyramidTop_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattlePyramidTop_EventScript_SetUpObjects
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_BattlePyramidTop_EventScript_SetUpObjects::
 	setvar VAR_TEMP_1, 1
@@ -45,7 +45,7 @@ BattleFrontier_BattlePyramidTop_EventScript_CheckChallengeStatus::
 BattleFrontier_BattlePyramidTop_OnFrame:
 	map_script_2 VAR_TEMP_PLAYING_PYRAMID_MUSIC, 0, BattleFrontier_BattlePyramidTop_EventScript_PlayPyramidMusic
 	map_script_2 VAR_TEMP_F, 1, BattleFrontier_BattlePyramidTop_EventScript_ShowMapName
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_BattlePyramidTop_EventScript_PlayPyramidMusic::
 	playbgm MUS_B_PYRAMID_TOP, FALSE

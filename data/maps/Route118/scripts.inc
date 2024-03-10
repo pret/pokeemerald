@@ -4,7 +4,7 @@ Route118_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route118_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route118_OnLoad
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route118_OnFrame
-	.byte 0
+	end_map_scripts
 
 Route118_OnTransition:
 	call GabbyAndTy_EventScript_UpdateLocation
@@ -20,7 +20,7 @@ Route118_OnLoad:
 
 Route118_OnFrame:
 	map_script_2 VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_EndEventAndCleanup_1
-	.2byte 0
+	end_map_script_table
 
 Route118_EventScript_GoodRodFisherman::
 	lock

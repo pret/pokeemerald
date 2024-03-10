@@ -1,7 +1,7 @@
 .set LOCALID_OWNER, 1
 
 LilycoveCity_CoveLilyMotel_1F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 LilycoveCity_CoveLilyMotel_1F_EventScript_MotelOwner::
 	lockall

@@ -28,7 +28,7 @@
 .set LOCALID_CUTE_AUDIENCE_2, 31
 
 LilycoveCity_ContestHall_MapScripts::
-	.byte 0
+	end_map_scripts
 
 LilycoveCity_ContestHall_EventScript_Boy1::
 	msgbox LilycoveCity_ContestHall_Text_TodayWonSmartnessContest, MSGBOX_NPC

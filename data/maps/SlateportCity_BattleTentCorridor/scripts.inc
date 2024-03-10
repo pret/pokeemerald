@@ -3,13 +3,13 @@
 SlateportCity_BattleTentCorridor_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SlateportCity_BattleTentCorridor_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SlateportCity_BattleTentCorridor_OnWarp
-	.byte 0
+	end_map_scripts
 
 	@ This is Slateport Tent's version of the Battle Factory Pre-Battle Room
 
 SlateportCity_BattleTentCorridor_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, SlateportCity_BattleTentCorridor_EventScript_SetUpObjects
-	.2byte 0
+	end_map_script_table
 
 SlateportCity_BattleTentCorridor_EventScript_SetUpObjects::
 	setvar VAR_TEMP_1, 1
@@ -22,7 +22,7 @@ SlateportCity_BattleTentCorridor_EventScript_TurnPlayerNorth::
 
 SlateportCity_BattleTentCorridor_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, SlateportCity_BattleTentCorridor_EventScript_EnterCorridor
-	.2byte 0
+	end_map_script_table
 
 SlateportCity_BattleTentCorridor_EventScript_EnterCorridor::
 	goto_if_eq VAR_0x8006, 1, SlateportCity_BattleTentCorridor_EventScript_ReturnToRoomFromBattle

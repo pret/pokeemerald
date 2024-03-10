@@ -3,7 +3,7 @@
 SootopolisCity_MysteryEventsHouse_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_MysteryEventsHouse_1F_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SootopolisCity_MysteryEventsHouse_1F_OnFrame
-	.byte 0
+	end_map_scripts
 
 SootopolisCity_MysteryEventsHouse_1F_OnTransition:
 	frontier_checkvisittrainer
@@ -27,7 +27,7 @@ SootopolisCity_MysteryEventsHouse_1F_OnFrame:
 	map_script_2 VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_OldManCommentOnBattle
 	map_script_2 VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 2, SootopolisCity_MysteryEventsHouse_1F_EventScript_OldManCommentOnBattle
 	map_script_2 VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 3, SootopolisCity_MysteryEventsHouse_1F_EventScript_OldManCommentOnBattle
-	.2byte 0
+	end_map_script_table
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_OldManCommentOnBattle::
 	lockall

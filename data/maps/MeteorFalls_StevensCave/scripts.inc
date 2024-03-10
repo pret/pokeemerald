@@ -1,7 +1,7 @@
 .set LOCALID_STEVEN, 1
 
 MeteorFalls_StevensCave_MapScripts::
-	.byte 0
+	end_map_scripts
 
 MeteorFalls_StevensCave_EventScript_Steven::
 	lock

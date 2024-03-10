@@ -1,5 +1,5 @@
 Route102_MapScripts::
-	.byte 0
+	end_map_scripts
 
 Route102_EventScript_LittleBoy::
 	msgbox Route102_Text_ImNotVeryTall, MSGBOX_NPC

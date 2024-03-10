@@ -1,7 +1,7 @@
 Route110_TrickHousePuzzle2_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, Route110_TrickHousePuzzle2_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle2_OnTransition
-	.byte 0
+	end_map_scripts
 
 Route110_TrickHousePuzzle2_OnResume:
 	call_if_eq VAR_TEMP_1, 1, Route110_TrickHousePuzzle2_EventScript_PressButton1

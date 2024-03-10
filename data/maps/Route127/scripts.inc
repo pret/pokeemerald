@@ -2,7 +2,7 @@ Route127_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route127_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route127_OnLoad
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route127_OnFrame
-	.byte 0
+	end_map_scripts
 
 Route127_OnTransition:
 	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAbnormalWeather
@@ -18,7 +18,7 @@ Route127_OnLoad:
 
 Route127_OnFrame:
 	map_script_2 VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_EndEventAndCleanup_1
-	.2byte 0
+	end_map_script_table
 
 Route127_EventScript_Camden::
 	trainerbattle_single TRAINER_CAMDEN, Route127_Text_CamdenIntro, Route127_Text_CamdenDefeat

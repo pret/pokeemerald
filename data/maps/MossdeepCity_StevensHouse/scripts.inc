@@ -5,7 +5,7 @@ MossdeepCity_StevensHouse_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, MossdeepCity_StevensHouse_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_StevensHouse_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, MossdeepCity_StevensHouse_OnFrame
-	.byte 0
+	end_map_scripts
 
 MossdeepCity_StevensHouse_OnLoad:
 	call_if_unset FLAG_SYS_GAME_CLEAR, MossdeepCity_StevensHouse_EventScript_HideStevensNote
@@ -26,7 +26,7 @@ MossdeepCity_StevensHouse_EventScript_SetStevenPos::
 
 MossdeepCity_StevensHouse_OnFrame:
 	map_script_2 VAR_STEVENS_HOUSE_STATE, 1, MossdeepCity_StevensHouse_EventScript_StevenGivesDive
-	.2byte 0
+	end_map_script_table
 
 MossdeepCity_StevensHouse_EventScript_StevenGivesDive::
 	lockall

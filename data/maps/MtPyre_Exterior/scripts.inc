@@ -1,6 +1,6 @@
 MtPyre_Exterior_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, MtPyre_Exterior_OnTransition
-	.byte 0
+	end_map_scripts
 
 MtPyre_Exterior_OnTransition:
 	call MtPyre_Exterior_EventScript_CheckEnterFromSummit

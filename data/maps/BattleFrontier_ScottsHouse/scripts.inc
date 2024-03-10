@@ -1,7 +1,7 @@
 .set LOCALID_SCOTT, 1
 
 BattleFrontier_ScottsHouse_MapScripts::
-	.byte 0
+	end_map_scripts
 
 BattleFrontier_ScottsHouse_EventScript_Scott::
 	lock

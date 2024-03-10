@@ -6,7 +6,7 @@ Route120_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, Route120_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, Route120_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route120_OnLoad
-	.byte 0
+	end_map_scripts
 
 Route120_OnResume:
 	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, Route120_EventScript_RemoveKecleonObject

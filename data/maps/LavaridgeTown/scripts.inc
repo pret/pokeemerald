@@ -4,7 +4,7 @@
 LavaridgeTown_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LavaridgeTown_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, LavaridgeTown_OnFrame
-	.byte 0
+	end_map_scripts
 
 LavaridgeTown_OnTransition:
 	setflag FLAG_VISITED_LAVARIDGE_TOWN
@@ -42,7 +42,7 @@ LavaridgeTown_EventScript_HideMapNamePopup::
 
 LavaridgeTown_OnFrame:
 	map_script_2 VAR_LAVARIDGE_TOWN_STATE, 1, LavaridgeTown_EventScript_RivalGiveGoGoggles
-	.2byte 0
+	end_map_script_table
 
 LavaridgeTown_EventScript_RivalGiveGoGoggles::
 	lockall

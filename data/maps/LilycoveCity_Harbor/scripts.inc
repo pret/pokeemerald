@@ -5,7 +5,7 @@
 
 LilycoveCity_Harbor_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_Harbor_OnTransition
-	.byte 0
+	end_map_scripts
 
 LilycoveCity_Harbor_OnTransition:
 	setescapewarp MAP_LILYCOVE_CITY, 12, 33

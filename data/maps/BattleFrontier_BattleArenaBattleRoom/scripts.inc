@@ -12,7 +12,7 @@ BattleFrontier_BattleArenaBattleRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleArenaBattleRoom_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleArenaBattleRoom_OnWarp
 	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_BattleArenaBattleRoom_OnResume
-	.byte 0
+	end_map_scripts
 
 	@ On this map the player (OBJ_EVENT_ID_PLAYER) is hidden
 	@ The player is represented instead by LOCALID_PLAYER, which has the gfx id VAR_OBJ_GFX_ID_1
@@ -42,7 +42,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_SetPlayerGfxFemale::
 
 BattleFrontier_BattleArenaBattleRoom_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleArenaBattleRoom_EventScript_EnterRoom
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_EnterRoom::
 	lockall
@@ -466,7 +466,7 @@ BattleFrontier_BattleArenaBattleRoom_Movement_WalkInPlaceRight2:
 
 BattleFrontier_BattleArenaBattleRoom_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleArenaBattleRoom_EventScript_SetUpRoomObjects
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_SetUpRoomObjects::
 	hideobjectat LOCALID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM

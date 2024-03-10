@@ -1,6 +1,6 @@
 AbandonedShip_Rooms_B1F_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, AbandonedShip_Rooms_B1F_OnResume
-	.byte 0
+	end_map_scripts
 
 AbandonedShip_Rooms_B1F_OnResume:
 	setdivewarp MAP_ABANDONED_SHIP_UNDERWATER2, 17, 4

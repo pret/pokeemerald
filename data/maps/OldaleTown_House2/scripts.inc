@@ -1,5 +1,5 @@
 OldaleTown_House2_MapScripts::
-	.byte 0
+	end_map_scripts
 
 OldaleTown_House2_EventScript_Woman::
 	msgbox OldaleTown_House2_Text_PokemonLevelUp, MSGBOX_NPC

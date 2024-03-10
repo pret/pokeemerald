@@ -7,7 +7,7 @@
 LilycoveCity_ContestLobby_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_ContestLobby_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, LilycoveCity_ContestLobby_OnFrame
-	.byte 0
+	end_map_scripts
 
 @ Some scripts for this room are split into data/scripts/contest_hall and data/scripts/berry_blender
 
@@ -31,7 +31,7 @@ LilycoveCity_ContestLobby_EventScript_ShowBlendMaster::
 LilycoveCity_ContestLobby_OnFrame:
 	map_script_2 VAR_LILYCOVE_CONTEST_LOBBY_STATE, 1, LilycoveCity_ContestLobby_EventScript_TryDoContestArtist
 	map_script_2 VAR_LILYCOVE_CONTEST_LOBBY_STATE, 2, LilycoveCity_ContestLobby_EventScript_TryDoLinkContestArtist
-	.2byte 0
+	end_map_script_table
 
 LilycoveCity_ContestLobby_EventScript_TryDoContestArtist::
 	goto_if_set FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR, LilycoveCity_ContestLobby_EventScript_ContestArtist

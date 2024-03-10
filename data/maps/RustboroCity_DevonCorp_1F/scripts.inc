@@ -2,7 +2,7 @@
 
 RustboroCity_DevonCorp_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_DevonCorp_1F_OnTransition
-	.byte 0
+	end_map_scripts
 
 RustboroCity_DevonCorp_1F_OnTransition:
 	call_if_unset FLAG_RETURNED_DEVON_GOODS, RustboroCity_DevonCorp_1F_EventScript_BlockStairs

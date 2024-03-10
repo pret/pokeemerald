@@ -3,7 +3,7 @@
 MtChimney_CableCarStation_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, MtChimney_CableCarStation_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, MtChimney_CableCarStation_OnFrame
-	.byte 0
+	end_map_scripts
 
 MtChimney_CableCarStation_OnTransition:
 	call_if_eq VAR_CABLE_CAR_STATION_STATE, 1, MtChimney_CableCarStation_EventScript_MoveAttendantAside
@@ -16,7 +16,7 @@ MtChimney_CableCarStation_EventScript_MoveAttendantAside::
 
 MtChimney_CableCarStation_OnFrame:
 	map_script_2 VAR_CABLE_CAR_STATION_STATE, 1, MtChimney_CableCarStation_EventScript_ExitCableCar
-	.2byte 0
+	end_map_script_table
 
 MtChimney_CableCarStation_EventScript_ExitCableCar::
 	lockall
