@@ -378,13 +378,13 @@ static u16 GetTypeBasedZMove(u16 move, u8 battler)
 {
     u8 moveType = gMovesInfo[move].type;
 
-    // Get z move from type
-    if (moveType < TYPE_FIRE)
-        return MOVE_BREAKNECK_BLITZ + moveType;
-    else if (moveType >= TYPE_FAIRY)
-        return MOVE_TWINKLE_TACKLE + (moveType - TYPE_FAIRY);
-    else
-        return MOVE_BREAKNECK_BLITZ + (moveType - 1);
+    if (moveType >= NUMBER_OF_MON_TYPES)
+        moveType = TYPE_MYSTERY;
+
+    // Get Z-Move from type
+    if (gTypesInfo[moveType].zMove == MOVE_NONE) // failsafe
+        return gTypesInfo[0].zMove;
+    return gTypesInfo[moveType].zMove;
 }
 
 bool32 MoveSelectionDisplayZMove(u16 zmove, u32 battler)

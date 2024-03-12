@@ -104,7 +104,7 @@ struct TypeInfo
     u8 name[TYPE_NAME_LENGTH + 1];
     u8 generic[17];
     u8 palette;
-    //u16 zMove;
+    u16 zMove;
     u16 maxMove;
     //u16 enhanceItem;
     //u16 berry;
@@ -113,6 +113,7 @@ struct TypeInfo
     //u16 memory;
     //u16 zCrystal;
     //u16 teraShard;
+    //u16 arceusForm;
 };
 
 extern const u16 gMinigameDigits_Pal[];
