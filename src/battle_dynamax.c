@@ -24,29 +24,6 @@
 
 static u8 GetMaxPowerTier(u16 move);
 
-// Constant Data
-static const u16 sMaxMoveTable[NUMBER_OF_MON_TYPES] =
-{
-    [TYPE_NORMAL] = MOVE_MAX_STRIKE,
-    [TYPE_FIGHTING] = MOVE_MAX_KNUCKLE,
-    [TYPE_FLYING] = MOVE_MAX_AIRSTREAM,
-    [TYPE_POISON] = MOVE_MAX_OOZE,
-    [TYPE_GROUND] = MOVE_MAX_QUAKE,
-    [TYPE_ROCK] = MOVE_MAX_ROCKFALL,
-    [TYPE_BUG] = MOVE_MAX_FLUTTERBY,
-    [TYPE_GHOST] = MOVE_MAX_PHANTASM,
-    [TYPE_STEEL] = MOVE_MAX_STEELSPIKE,
-    [TYPE_FIRE] = MOVE_MAX_FLARE,
-    [TYPE_WATER] = MOVE_MAX_GEYSER,
-    [TYPE_GRASS] = MOVE_MAX_OVERGROWTH,
-    [TYPE_ELECTRIC] = MOVE_MAX_LIGHTNING,
-    [TYPE_PSYCHIC] = MOVE_MAX_MINDSTORM,
-    [TYPE_ICE] = MOVE_MAX_HAILSTORM,
-    [TYPE_DRAGON] = MOVE_MAX_WYRMWIND,
-    [TYPE_DARK] = MOVE_MAX_DARKNESS,
-    [TYPE_FAIRY] = MOVE_MAX_STARFALL,
-};
-
 struct GMaxMove
 {
     u16 species;
@@ -305,9 +282,9 @@ static u16 GetTypeBasedMaxMove(u16 battlerId, u16 type)
     }
 
     // Regular Max Move
-    if (sMaxMoveTable[type] == MOVE_NONE) // failsafe
-        return sMaxMoveTable[0];
-    return sMaxMoveTable[type];
+    if (gTypesInfo[type].maxMove == MOVE_NONE) // failsafe
+        return gTypesInfo[0].maxMove;
+    return gTypesInfo[type].maxMove;
 }
 
 // Returns the appropriate Max Move or G-Max Move for a battler to use.
