@@ -11,7 +11,7 @@ Exceptions:
 - ASM strings that use `.fixstr`
 - If mirroring enabled, string addresses passed through MirrorPtr
 */
-#define DECAP_ENABLED TRUE
+#define DECAP_ENABLED FALSE
 // Enables signaling that a string's case should be preserved
 // by *mirroring* its address: i.e 08xxxxxx to 0Axxxxxx
 // Unless you are targeting a different platform than the GBA,

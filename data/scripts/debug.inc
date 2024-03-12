@@ -95,47 +95,47 @@ Debug_BoxFilledMessage::
 Debug_BoxFilledMessage_Text:
 	.string "Storage boxes filled!$"
 
-Debug_EventScript_CheckEV::
+Debug_EventScript_CheckEVs::
 	lockall
 	getpartysize
 	goto_if_eq VAR_RESULT, 0, Debug_NoPokemon
 	special ChoosePartyMon
 	waitstate
-	goto_if_ge VAR_0x8004, PARTY_SIZE, Debug_EventScript_CheckEV_End
-	callnative Script_GetChosenMonOffensiveEV
-	msgbox Debug_EventScript_Text_OffensiveEV, MSGBOX_DEFAULT
-	callnative Script_GetChosenMonDefensiveEV
-	msgbox Debug_EventScript_Text_DefensiveEV, MSGBOX_DEFAULT
-Debug_EventScript_CheckEV_End::
+	goto_if_ge VAR_0x8004, PARTY_SIZE, Debug_EventScript_CheckEVs_End
+	callnative Script_GetChosenMonOffensiveEVs
+	msgbox Debug_EventScript_Text_OffensiveEVs, MSGBOX_DEFAULT
+	callnative Script_GetChosenMonDefensiveEVs
+	msgbox Debug_EventScript_Text_DefensiveEVs, MSGBOX_DEFAULT
+Debug_EventScript_CheckEVs_End::
 	releaseall
 	end
 
-Debug_EventScript_Text_OffensiveEV:
-	.string "ATK EV: {STR_VAR_1}, SPATK EV: {STR_VAR_2}, SPEED EV: {STR_VAR_3}$"
+Debug_EventScript_Text_OffensiveEVs:
+	.string "ATK EVs: {STR_VAR_1}, SPATK EVs: {STR_VAR_2}, SPEED EVs: {STR_VAR_3}$"
 
-Debug_EventScript_Text_DefensiveEV:
-	.string "HP EV: {STR_VAR_1}, DEF EV: {STR_VAR_2}, SPDEF EV: {STR_VAR_3}$"
+Debug_EventScript_Text_DefensiveEVs:
+	.string "HP EVs: {STR_VAR_1}, DEF EVs: {STR_VAR_2}, SPDEF EVs: {STR_VAR_3}$"
 
-Debug_EventScript_CheckIV::
+Debug_EventScript_CheckIVs::
 	lockall
 	getpartysize
 	goto_if_eq VAR_RESULT, 0, Debug_NoPokemon
 	special ChoosePartyMon
 	waitstate
-	goto_if_ge VAR_0x8004, PARTY_SIZE, Debug_EventScript_CheckIV_End
-	callnative Script_GetChosenMonOffensiveIV
-	msgbox Debug_EventScript_Text_OffensiveIV, MSGBOX_DEFAULT
-	callnative Script_GetChosenMonDefensiveIV
-	msgbox Debug_EventScript_Text_DefensiveIV, MSGBOX_DEFAULT
-Debug_EventScript_CheckIV_End::
+	goto_if_ge VAR_0x8004, PARTY_SIZE, Debug_EventScript_CheckIVs_End
+	callnative Script_GetChosenMonOffensiveIVs
+	msgbox Debug_EventScript_Text_OffensiveIVs, MSGBOX_DEFAULT
+	callnative Script_GetChosenMonDefensiveIVs
+	msgbox Debug_EventScript_Text_DefensiveIVs, MSGBOX_DEFAULT
+Debug_EventScript_CheckIVs_End::
 	releaseall
 	end
 
-Debug_EventScript_Text_OffensiveIV:
-	.string "ATK IV: {STR_VAR_1}, SPATK IV: {STR_VAR_2}, SPEED IV: {STR_VAR_3}$"
+Debug_EventScript_Text_OffensiveIVs:
+	.string "ATK IVs: {STR_VAR_1}, SPATK IVs: {STR_VAR_2}, SPEED IVs: {STR_VAR_3}$"
 
-Debug_EventScript_Text_DefensiveIV:
-	.string "HP IV: {STR_VAR_1}, DEF IV: {STR_VAR_2}, SPDEF IV: {STR_VAR_3}$"
+Debug_EventScript_Text_DefensiveIVs:
+	.string "HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2}, SPDEF IVs: {STR_VAR_3}$"
 
 Debug_EventScript_Script_1::
 	end

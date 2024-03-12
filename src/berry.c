@@ -2295,8 +2295,6 @@ bool8 PlayerHasMulch(void)
 }
 
 #if OW_BERRY_MUTATIONS == TRUE
-#define BERRY_MUTATION_CHANCE 25
-
 static const u8 sBerryMutations[][3] = {
     {ITEM_TO_BERRY(ITEM_IAPAPA_BERRY), ITEM_TO_BERRY(ITEM_MAGO_BERRY),   ITEM_TO_BERRY(ITEM_POMEG_BERRY)},
     {ITEM_TO_BERRY(ITEM_CHESTO_BERRY), ITEM_TO_BERRY(ITEM_PERSIM_BERRY), ITEM_TO_BERRY(ITEM_KELPSY_BERRY)},
@@ -2353,7 +2351,7 @@ static u8 TryForMutation(u8 berryTreeId, u8 berry)
         {
             x2 = gObjectEvents[j].currentCoords.x;
             y2 = gObjectEvents[j].currentCoords.y;
-            if (Random() % 100 < (BERRY_MUTATION_CHANCE * (mulch == ITEM_TO_MULCH(ITEM_SURPRISE_MULCH) || mulch == ITEM_TO_MULCH(ITEM_AMAZE_MULCH))) && (
+            if (Random() % 100 < (OW_BERRY_MUTATION_CHANCE * (mulch == ITEM_TO_MULCH(ITEM_SURPRISE_MULCH) || mulch == ITEM_TO_MULCH(ITEM_AMAZE_MULCH))) && (
                 (x1 == x2 && y1 == y2 - 1) ||
                 (x1 == x2 && y1 == y2 + 1) ||
                 (x1 == x2 - 1 && y1 == y2) ||
