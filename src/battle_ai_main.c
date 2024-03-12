@@ -3769,9 +3769,9 @@ static u32 AI_CalcMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
         IncreaseStatUpScore(battlerAtk, battlerDef, STAT_CHANGE_DEF, &score);
         break;
     case EFFECT_FIRST_TURN_ONLY:
-        if (ShouldFakeOut(battlerAtk, battlerDef, move))
+        if (ShouldFakeOut(battlerAtk, battlerDef, move) && MoveHasAdditionalEffectWithChance(move, MOVE_EFFECT_FLINCH, 100))
             ADJUST_SCORE(GOOD_EFFECT);
-        else if (gMovesInfo[move].argument == MOVE_FIRST_IMPRESSION && gDisableStructs[battlerAtk].isFirstTurn && GetBestDmgMoveFromBattler(battlerAtk, battlerDef) == move)
+        else if (gDisableStructs[battlerAtk].isFirstTurn && GetBestDmgMoveFromBattler(battlerAtk, battlerDef) == move)
             ADJUST_SCORE(BEST_EFFECT);
         break;
     case EFFECT_STOCKPILE:
