@@ -4206,7 +4206,7 @@ void Task_DisplayCaughtMonDexPageHGSS(u8 taskId)
     case 6:
         if (!gPaletteFade.active)
         {
-            PlayCry_Normal(NationalPokedexNumToSpeciesHGSS(dexNum), 0);
+            PlayCry_Normal(species, 0);
             gTasks[taskId].tPalTimer = 0;
             gTasks[taskId].func = Task_HandleCaughtMonPageInput;
         }
