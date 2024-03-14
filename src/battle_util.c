@@ -11078,35 +11078,41 @@ bool32 IsGen6ExpShareEnabled(void)
     return FlagGet(I_EXP_SHARE_FLAG);
 }
 
-#define R_CHECK_MOVE_EFFECT(...) RECURSIVELY(R_FOR_EACH(CHECK_MOVE_EFFECT, __VA_ARGS__))
-#define CHECK_MOVE_EFFECT(_condition) && effects[i]._condition
-
-/* Quick way of checking if a move has move effects with match a few
-comma-separated conditions. Each condition has to check a field of AdditionalEffect. */
-#define RETURN_HAS_MOVE_ADDITIONAL_EFFECT(condition1, ...)          \
-    u32 i;                                                          \
-    GET_ADDITIONAL_EFFECTS_AND_COUNT(move, count, effects);         \
-    for (i = 0; i < count; i++)                                     \
-    {                                                               \
-        if (effects[i].condition1 R_CHECK_MOVE_EFFECT(__VA_ARGS__)) \
-            return TRUE;                                            \
-    }                                                               \
-    return FALSE;
-
 
 bool32 MoveHasAdditionalEffect(u32 move, u32 moveEffect)
 {
-    RETURN_HAS_MOVE_ADDITIONAL_EFFECT(moveEffect == moveEffect, self == FALSE)
+    u32 i;
+    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+    {
+        if (gMovesInfo[move].additionalEffects[i].moveEffect == moveEffect
+         && gMovesInfo[move].additionalEffects[i].self == FALSE)
+            return TRUE;
+    }
+    return FALSE;
 }
 
 bool32 MoveHasAdditionalEffectWithChance(u32 move, u32 moveEffect, u32 chance)
 {
-    RETURN_HAS_MOVE_ADDITIONAL_EFFECT(moveEffect == moveEffect, chance == chance)
+    u32 i;
+    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+    {
+        if (gMovesInfo[move].additionalEffects[i].moveEffect == moveEffect
+         && gMovesInfo[move].additionalEffects[i].chance == chance)
+            return TRUE;
+    }
+    return FALSE;
 }
 
 bool32 MoveHasAdditionalEffectSelf(u32 move, u32 moveEffect)
 {
-    RETURN_HAS_MOVE_ADDITIONAL_EFFECT(moveEffect == moveEffect, self == TRUE)
+    u32 i;
+    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+    {
+        if (gMovesInfo[move].additionalEffects[i].moveEffect == moveEffect
+         && gMovesInfo[move].additionalEffects[i].self == TRUE)
+            return TRUE;
+    }
+    return FALSE;
 }
 
 bool32 MoveHasAdditionalEffectSelfArg(u32 move, u32 moveEffect, u32 argument)
@@ -11116,12 +11122,24 @@ bool32 MoveHasAdditionalEffectSelfArg(u32 move, u32 moveEffect, u32 argument)
 
 bool32 MoveHasChargeTurnAdditionalEffect(u32 move)
 {
-    RETURN_HAS_MOVE_ADDITIONAL_EFFECT(onChargeTurnOnly == TRUE)
+    u32 i;
+    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+    {
+        if (gMovesInfo[move].additionalEffects[i].onChargeTurnOnly)
+            return TRUE;
+    }
+    return FALSE;
 }
 
-bool32 MoveIsAffectedBySheerForce(u16 move)
+bool32 MoveIsAffectedBySheerForce(u32 move)
 {
-    RETURN_HAS_MOVE_ADDITIONAL_EFFECT(chance > 0)
+    u32 i;
+    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+    {
+        if (gMovesInfo[move].additionalEffects[i].chance > 0)
+            return TRUE;
+    }
+    return FALSE;
 }
 
 bool8 CanMonParticipateInSkyBattle(struct Pokemon *mon)
