@@ -181,42 +181,6 @@ const u8 gOgerponCornerstoneMaskPokedexText[] = _(
 
 #define EVOLUTION(...) (const struct Evolution[]) { __VA_ARGS__, { EVOLUTIONS_END }, }
 
-#define FRONT_PIC(sprite, width, height)                    \
-        .frontPic = gMonFrontPic_## sprite,                 \
-        .frontPicSize = MON_COORDS_SIZE(width, height)
-
-#define FRONT_PIC_FEMALE(sprite, width, height)             \
-        .frontPicFemale = gMonFrontPic_## sprite##F,        \
-        .frontPicSizeFemale = MON_COORDS_SIZE(width, height)
-
-#define BACK_PIC(sprite, width, height)                     \
-        .backPic = gMonBackPic_## sprite,                   \
-        .backPicSize = MON_COORDS_SIZE(width, height)
-
-#define BACK_PIC_FEMALE(sprite, width, height)              \
-        .backPicFemale = gMonBackPic_## sprite##F,          \
-        .backPicSizeFemale = MON_COORDS_SIZE(width, height)
-
-#define PALETTES(pal)                                       \
-        .palette = gMonPalette_## pal,                      \
-        .shinyPalette = gMonShinyPalette_## pal
-
-#define PALETTE_FEMALE(pal)                                 \
-        .paletteFemale = gMonPalette_## pal##F,             \
-        .shinyPaletteFemale = gMonShinyPalette_## pal##F
-
-#define ICON(sprite, palId)                                 \
-        .iconSprite = gMonIcon_## sprite,                   \
-        .iconPalIndex = palId
-
-#define ICON_FEMALE(sprite, palId)                          \
-        .iconSpriteFemale = gMonIcon_## sprite##F,          \
-        .iconPalIndexFemale = palId
-
-#define LEARNSETS(learn)                                    \
-        .levelUpLearnset = s ## learn##LevelUpLearnset,     \
-        .teachableLearnset = s ## learn##TeachableLearnset
-
 #if P_FOOTPRINTS
 #define FOOTPRINT(sprite) .footprint = gMonFootprint_## sprite,
 #else
@@ -252,16 +216,21 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
-        FRONT_PIC(CircledQuestionMark, 40, 40),
+        .frontPic = gMonFrontPic_CircledQuestionMark,
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 12,
         .frontAnimFrames = sAnims_None,
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(CircledQuestionMark, 40, 40),
+        .backPic = gMonBackPic_CircledQuestionMark,
+        .backPicSize = MON_COORDS_SIZE(40, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_NONE,
-        PALETTES(CircledQuestionMark),
-        ICON(QuestionMark, 0),
-        LEARNSETS(None),
+        .palette = gMonPalette_CircledQuestionMark,
+        .shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        .iconSprite = gMonIcon_QuestionMark,
+        .iconPalIndex = 0,
+        .levelUpLearnset = sNoneLevelUpLearnset,
+        .teachableLearnset = sNoneTeachableLearnset,
     },
 
     #include "species_info/gen_1.h"
@@ -276,14 +245,16 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_EGG] =
     {
-        FRONT_PIC(Egg, 24, 24),
+        .frontPic = gMonFrontPic_Egg,
+        .frontPicSize = MON_COORDS_SIZE(24, 24),
         .frontPicYOffset = 20,
         .backPic = gMonFrontPic_Egg,
         .backPicSize = MON_COORDS_SIZE(24, 24),
         .backPicYOffset = 20,
         .palette = gMonPalette_Egg,
         .shinyPalette = gMonPalette_Egg,
-        ICON(Egg, 1),
+        .iconSprite = gMonIcon_Egg,
+        .iconPalIndex = 1,
     },
 
     /* You may add any custom species below this point based on the following structure: */
@@ -325,22 +296,30 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
-        FRONT_PIC(CircledQuestionMark, 64, 64),
-        //FRONT_PIC_FEMALE(CircledQuestionMark, 64, 64),
+        .frontPic = gMonFrontPic_CircledQuestionMark,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        //.frontPicFemale = gMonFrontPic_CircledQuestionMark,
+        //.frontPicSizeFemale = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_None,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .enemyMonElevation = 0,
-        BACK_PIC(CircledQuestionMark, 64, 64),
-        //BACK_PIC_FEMALE(CircledQuestionMark, 64, 64),
+        .backPic = gMonBackPic_CircledQuestionMark,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        //.backPicFemale = gMonBackPic_CircledQuestionMarkF,
+        //.backPicSizeFemale = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_NONE,
-        PALETTES(CircledQuestionMark),
-        //PALETTE_FEMALE(CircledQuestionMark),
-        ICON(QuestionMark, 0),
-        //ICON_FEMALE(QuestionMark, 1),
+        .palette = gMonPalette_CircledQuestionMark,
+        .shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        //.paletteFemale = gMonPalette_CircledQuestionMarkF,
+        .shinyPaletteFemale = gMonShinyPalette_CircledQuestionMarkF,
+        .iconSprite = gMonIcon_QuestionMark,
+        .iconPalIndex = 0,
+        //.iconSpriteFemale = gMonIcon_QuestionMarkF,
+        //.iconPalIndexFemale = 1,
         //FOOTPRINT(None)
-        LEARNSETS(None),
+        .levelUpLearnset = sNoneLevelUpLearnset,
+        .teachableLearnset = sNoneTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 100, SPECIES_NONE},
                                 {EVO_ITEM, ITEM_MOOMOO_MILK, SPECIES_NONE}),
         //.formSpeciesIdTable = sNoneFormSpeciesIdTable,
