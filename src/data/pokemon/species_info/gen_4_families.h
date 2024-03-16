@@ -1378,7 +1378,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .formSpeciesIdTable = sBurmyFormSpeciesIdTable,
         .formChangeTable = sBurmyFormChangeTable,
         .evolutions = EVOLUTION({EVO_LEVEL_FEMALE, 20, SPECIES_WORMADAM_PLANT_CLOAK},
-                                {EVO_LEVEL_MALE, 20, SPECIES_MOTHIM}),
+                                {EVO_LEVEL_MALE, 20, SPECIES_MOTHIM_PLANT_CLOAK}),
     },
 
     [SPECIES_BURMY_SANDY_CLOAK] =
@@ -1436,7 +1436,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .formSpeciesIdTable = sBurmyFormSpeciesIdTable,
         .formChangeTable = sBurmyFormChangeTable,
         .evolutions = EVOLUTION({EVO_LEVEL_FEMALE, 20, SPECIES_WORMADAM_SANDY_CLOAK},
-                                {EVO_LEVEL_MALE, 20, SPECIES_MOTHIM}),
+                                {EVO_LEVEL_MALE, 20, SPECIES_MOTHIM_SANDY_CLOAK}),
     },
 
     [SPECIES_BURMY_TRASH_CLOAK] =
@@ -1494,7 +1494,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .formSpeciesIdTable = sBurmyFormSpeciesIdTable,
         .formChangeTable = sBurmyFormChangeTable,
         .evolutions = EVOLUTION({EVO_LEVEL_FEMALE, 20, SPECIES_WORMADAM_TRASH_CLOAK},
-                                {EVO_LEVEL_MALE, 20, SPECIES_MOTHIM}),
+                                {EVO_LEVEL_MALE, 20, SPECIES_MOTHIM_TRASH_CLOAK}),
     },
 
     [SPECIES_WORMADAM_PLANT_CLOAK] =
@@ -1663,60 +1663,61 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .formSpeciesIdTable = sWormadamFormSpeciesIdTable,
     },
 
-    [SPECIES_MOTHIM] =
-    {
-        .baseHP        = 70,
-        .baseAttack    = 94,
-        .baseDefense   = 50,
-        .baseSpeed     = 66,
-        .baseSpAttack  = 94,
-        .baseSpDefense = 50,
-        .types = MON_TYPES(TYPE_BUG, TYPE_FLYING),
-        .catchRate = 45,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 148 : 159,
-        .evYield_Attack = 1,
-        .evYield_SpAttack = 1,
-        .itemRare = ITEM_SILVER_POWDER,
-        .genderRatio = MON_MALE,
-        .eggCycles = 15,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = { ABILITY_SWARM, ABILITY_NONE, ABILITY_TINTED_LENS },
-        .bodyColor = BODY_COLOR_YELLOW,
-        .speciesName = _("Mothim"),
-        .cryId = CRY_MOTHIM,
-        .natDexNum = NATIONAL_DEX_MOTHIM,
-        .categoryName = _("Moth"),
-        .height = 9,
-        .weight = 233,
-        .description = COMPOUND_STRING(
-            "It does not keep a nest. While it\n"
-            "loves floral honey, it won't gather\n"
-            "any itself. Instead, it plots to steal\n"
-            "honey collected by Combee."),
-        .pokemonScale = 338,
-        .pokemonOffset = 8,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        .frontPic = gMonFrontPic_Mothim,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
-        .frontPicYOffset = 12,
-        .frontAnimFrames = sAnims_Mothim,
-        .frontAnimId = ANIM_H_SLIDE_WOBBLE,
-        .enemyMonElevation = 10,
-        .backPic = gMonBackPic_Mothim,
-        .backPicSize = MON_COORDS_SIZE(64, 56),
-        .backPicYOffset = 8,
-        .backAnimId = BACK_ANIM_H_SHAKE,
-        .palette = gMonPalette_Mothim,
-        .shinyPalette = gMonShinyPalette_Mothim,
-        .iconSprite = gMonIcon_Mothim,
-        .iconPalIndex = 0,
-        FOOTPRINT(Mothim)
-        .levelUpLearnset = sMothimLevelUpLearnset,
-        .teachableLearnset = sMothimTeachableLearnset,
-    },
+#define MOTHIM_SPECIES_INFO                                                 \
+    {                                                                       \
+        .baseHP        = 70,                                                \
+        .baseAttack    = 94,                                                \
+        .baseDefense   = 50,                                                \
+        .baseSpeed     = 66,                                                \
+        .baseSpAttack  = 94,                                                \
+        .baseSpDefense = 50,                                                \
+        .types = MON_TYPES(TYPE_BUG, TYPE_FLYING),                          \
+        .catchRate = 45,                                                    \
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 148 : 159,            \
+        .evYield_Attack = 1,                                                \
+        .evYield_SpAttack = 1,                                              \
+        .itemRare = ITEM_SILVER_POWDER,                                     \
+        .genderRatio = MON_MALE,                                            \
+        .eggCycles = 15,                                                    \
+        .friendship = STANDARD_FRIENDSHIP,                                  \
+        .growthRate = GROWTH_MEDIUM_FAST,                                   \
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),                         \
+        .abilities = { ABILITY_SWARM, ABILITY_NONE, ABILITY_TINTED_LENS },  \
+        .bodyColor = BODY_COLOR_YELLOW,                                     \
+        .speciesName = _("Mothim"),                                         \
+        .cryId = CRY_MOTHIM,                                                \
+        .natDexNum = NATIONAL_DEX_MOTHIM,                                   \
+        .categoryName = _("Moth"),                                          \
+        .height = 9,                                                        \
+        .weight = 233,                                                      \
+        .description = gMothimPokedexText,                                  \
+        .pokemonScale = 338,                                                \
+        .pokemonOffset = 8,                                                 \
+        .trainerScale = 256,                                                \
+        .trainerOffset = 0,                                                 \
+        .frontPic = gMonFrontPic_Mothim,                                    \
+        .frontPicSize = MON_COORDS_SIZE(64, 64),                            \
+        .frontPicYOffset = 12,                                              \
+        .frontAnimFrames = sAnims_Mothim,                                   \
+        .frontAnimId = ANIM_H_SLIDE_WOBBLE,                                 \
+        .enemyMonElevation = 10,                                            \
+        .backPic = gMonBackPic_Mothim,                                      \
+        .backPicSize = MON_COORDS_SIZE(64, 56),                             \
+        .backPicYOffset = 8,                                                \
+        .backAnimId = BACK_ANIM_H_SHAKE,                                    \
+        .palette = gMonPalette_Mothim,                                      \
+        .shinyPalette = gMonShinyPalette_Mothim,                            \
+        .iconSprite = gMonIcon_Mothim,                                      \
+        .iconPalIndex = 0,                                                  \
+        FOOTPRINT(Mothim)                                                   \
+        .levelUpLearnset = sMothimLevelUpLearnset,                          \
+        .teachableLearnset = sMothimTeachableLearnset,                      \
+        .formSpeciesIdTable = sMothimFormSpeciesIdTable,                    \
+    }
+
+    [SPECIES_MOTHIM_PLANT_CLOAK] = MOTHIM_SPECIES_INFO,
+    [SPECIES_MOTHIM_SANDY_CLOAK] = MOTHIM_SPECIES_INFO,
+    [SPECIES_MOTHIM_TRASH_CLOAK] = MOTHIM_SPECIES_INFO,
 #endif //P_FAMILY_BURMY
 
 #if P_FAMILY_COMBEE
@@ -2020,7 +2021,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY, EGG_GROUP_GRASS),
-        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_NONE },
+        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_PINK,
         .speciesName = _("Cherubi"),
         .cryId = CRY_CHERUBI,
@@ -2074,7 +2075,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY, EGG_GROUP_GRASS),
-        .abilities = { ABILITY_FLOWER_GIFT, ABILITY_NONE },
+        .abilities = { ABILITY_FLOWER_GIFT, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_PURPLE,
         .speciesName = _("Cherrim"),
         .cryId = CRY_CHERRIM,
@@ -2129,7 +2130,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY, EGG_GROUP_GRASS),
-        .abilities = { ABILITY_FLOWER_GIFT, ABILITY_NONE },
+        .abilities = { ABILITY_FLOWER_GIFT, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_PINK,
         .speciesName = _("Cherrim"),
         .cryId = CRY_CHERRIM,
@@ -3860,7 +3861,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_GRASS),
-        .abilities = { ABILITY_LEVITATE, ABILITY_NONE },
+        .abilities = { ABILITY_LEVITATE, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Carnivine"),
         .cryId = CRY_CARNIVINE,
@@ -4208,7 +4209,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_AMORPHOUS),
-        .abilities = { ABILITY_LEVITATE, ABILITY_NONE },
+        .abilities = { ABILITY_LEVITATE, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Rotom"),
         .cryId = CRY_ROTOM,
@@ -4272,7 +4273,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_AMORPHOUS),
-        .abilities = { ABILITY_LEVITATE, ABILITY_NONE },
+        .abilities = { ABILITY_LEVITATE, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Rotom"),
         .cryId = CRY_ROTOM,
@@ -4328,7 +4329,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_AMORPHOUS),
-        .abilities = { ABILITY_LEVITATE, ABILITY_NONE },
+        .abilities = { ABILITY_LEVITATE, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_RED,
         .noFlip = TRUE,
         .speciesName = _("Rotom"),
@@ -4385,7 +4386,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_AMORPHOUS),
-        .abilities = { ABILITY_LEVITATE, ABILITY_NONE },
+        .abilities = { ABILITY_LEVITATE, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Rotom"),
         .cryId = CRY_ROTOM,
@@ -4441,7 +4442,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_AMORPHOUS),
-        .abilities = { ABILITY_LEVITATE, ABILITY_NONE },
+        .abilities = { ABILITY_LEVITATE, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Rotom"),
         .cryId = CRY_ROTOM,
@@ -4498,7 +4499,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_AMORPHOUS),
-        .abilities = { ABILITY_LEVITATE, ABILITY_NONE },
+        .abilities = { ABILITY_LEVITATE, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Rotom"),
         .cryId = CRY_ROTOM,
@@ -4562,7 +4563,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = 140,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
-        .abilities = { ABILITY_LEVITATE, ABILITY_NONE },
+        .abilities = { ABILITY_LEVITATE, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_YELLOW,
         .speciesName = _("Uxie"),
         .cryId = CRY_UXIE,
@@ -4626,7 +4627,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = 140,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
-        .abilities = { ABILITY_LEVITATE, ABILITY_NONE },
+        .abilities = { ABILITY_LEVITATE, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_PINK,
         .speciesName = _("Mesprit"),
         .cryId = CRY_MESPRIT,
@@ -4689,7 +4690,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = 140,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
-        .abilities = { ABILITY_LEVITATE, ABILITY_NONE },
+        .abilities = { ABILITY_LEVITATE, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Azelf"),
         .cryId = CRY_AZELF,
@@ -5052,7 +5053,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = 0,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
-        .abilities = { ABILITY_SLOW_START, ABILITY_NONE },
+        .abilities = { ABILITY_SLOW_START, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Regigigas"),
         .cryId = CRY_REGIGIGAS,
@@ -5234,7 +5235,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = 100,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
-        .abilities = { ABILITY_LEVITATE, ABILITY_NONE },
+        .abilities = { ABILITY_LEVITATE, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_YELLOW,
         .speciesName = _("Cresselia"),
         .cryId = CRY_CRESSELIA,
@@ -5296,7 +5297,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_FAIRY),
-        .abilities = { ABILITY_HYDRATION, ABILITY_NONE },
+        .abilities = { ABILITY_HYDRATION, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Phione"),
         .cryId = CRY_PHIONE,
@@ -5356,7 +5357,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_FAIRY),
-        .abilities = { ABILITY_HYDRATION, ABILITY_NONE },
+        .abilities = { ABILITY_HYDRATION, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Manaphy"),
         .cryId = CRY_MANAPHY,
@@ -5419,7 +5420,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = 0,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
-        .abilities = { ABILITY_BAD_DREAMS, ABILITY_NONE },
+        .abilities = { ABILITY_BAD_DREAMS, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_BLACK,
         .speciesName = _("Darkrai"),
         .cryId = CRY_DARKRAI,
@@ -5485,7 +5486,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = 100,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
-        .abilities = { ABILITY_NATURAL_CURE, ABILITY_NONE },
+        .abilities = { ABILITY_NATURAL_CURE, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Shaymin"),
         .cryId = CRY_SHAYMIN_LAND,
@@ -5546,7 +5547,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = 100,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
-        .abilities = { ABILITY_SERENE_GRACE, ABILITY_NONE },
+        .abilities = { ABILITY_SERENE_GRACE, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = TRUE,
         .speciesName = _("Shaymin"),
@@ -5595,55 +5596,55 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
     #define ARCEUS_EXP_YIELD 255
 #endif
 
-#define ARCEUS_SPECIES_INFO(type, typeName)                                             \
-    {                                                                                   \
-        .baseHP        = 120,                                                           \
-        .baseAttack    = 120,                                                           \
-        .baseDefense   = 120,                                                           \
-        .baseSpeed     = 120,                                                           \
-        .baseSpAttack  = 120,                                                           \
-        .baseSpDefense = 120,                                                           \
-        .types = MON_TYPES(type),                                                       \
-        .catchRate = 3,                                                                 \
-        .expYield = ARCEUS_EXP_YIELD,                                                   \
-        .evYield_HP = 3,                                                                \
-        .genderRatio = MON_GENDERLESS,                                                  \
-        .eggCycles = 120,                                                               \
-        .friendship = 0,                                                                \
-        .growthRate = GROWTH_SLOW,                                                      \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),                      \
-        .abilities = { ABILITY_MULTITYPE, ABILITY_NONE },                               \
-        .bodyColor = BODY_COLOR_WHITE,                                                  \
-        .speciesName = _("Arceus"),                                                     \
-        .cryId = CRY_ARCEUS,                                                            \
-        .natDexNum = NATIONAL_DEX_ARCEUS,                                               \
-        .categoryName = _("Alpha"),                                                     \
-        .height = 32,                                                                   \
-        .weight = 3200,                                                                 \
-        .description = gArceusPokedexText,                                              \
-        .pokemonScale = 256,                                                            \
-        .pokemonOffset = 0,                                                             \
-        .trainerScale = 495,                                                            \
-        .trainerOffset = 10,                                                            \
-        .frontPic = gMonFrontPic_Arceus,                                                \
-        .frontPicSize = MON_COORDS_SIZE(64, 64),                                        \
-        .frontPicYOffset = 0,                                                           \
-        .frontAnimFrames = sAnims_Arceus,                                               \
-        .frontAnimId = ANIM_GROW_VIBRATE,                                               \
-        .backPic = gMonBackPic_Arceus,                                                  \
-        .backPicSize = MON_COORDS_SIZE(64, 64),                                         \
-        .backPicYOffset = 3,                                                            \
-        .backAnimId = BACK_ANIM_GROW_STUTTER,                                           \
-        .palette = gMonPalette_Arceus ##typeName,                                       \
-        .shinyPalette = gMonShinyPalette_Arceus ##typeName,                             \
-        .iconSprite = gMonIcon_Arceus,                                                  \
-        .iconPalIndex = 1,                                                              \
-        FOOTPRINT(Arceus)                                                               \
-        .levelUpLearnset = sArceusLevelUpLearnset,                                      \
-        .teachableLearnset = sArceusTeachableLearnset,                                  \
-        .formSpeciesIdTable = sArceusFormSpeciesIdTable,                                \
-        .formChangeTable = sArceusFormChangeTable,                                      \
-        .isMythical = TRUE,                                                             \
+#define ARCEUS_SPECIES_INFO(type, typeName)                             \
+    {                                                                   \
+        .baseHP        = 120,                                           \
+        .baseAttack    = 120,                                           \
+        .baseDefense   = 120,                                           \
+        .baseSpeed     = 120,                                           \
+        .baseSpAttack  = 120,                                           \
+        .baseSpDefense = 120,                                           \
+        .types = MON_TYPES(type),                                       \
+        .catchRate = 3,                                                 \
+        .expYield = ARCEUS_EXP_YIELD,                                   \
+        .evYield_HP = 3,                                                \
+        .genderRatio = MON_GENDERLESS,                                  \
+        .eggCycles = 120,                                               \
+        .friendship = 0,                                                \
+        .growthRate = GROWTH_SLOW,                                      \
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),      \
+        .abilities = { ABILITY_MULTITYPE, ABILITY_NONE, ABILITY_NONE }, \
+        .bodyColor = BODY_COLOR_WHITE,                                  \
+        .speciesName = _("Arceus"),                                     \
+        .cryId = CRY_ARCEUS,                                            \
+        .natDexNum = NATIONAL_DEX_ARCEUS,                               \
+        .categoryName = _("Alpha"),                                     \
+        .height = 32,                                                   \
+        .weight = 3200,                                                 \
+        .description = gArceusPokedexText,                              \
+        .pokemonScale = 256,                                            \
+        .pokemonOffset = 0,                                             \
+        .trainerScale = 495,                                            \
+        .trainerOffset = 10,                                            \
+        .frontPic = gMonFrontPic_Arceus,                                \
+        .frontPicSize = MON_COORDS_SIZE(64, 64),                        \
+        .frontPicYOffset = 0,                                           \
+        .frontAnimFrames = sAnims_Arceus,                               \
+        .frontAnimId = ANIM_GROW_VIBRATE,                               \
+        .backPic = gMonBackPic_Arceus,                                  \
+        .backPicSize = MON_COORDS_SIZE(64, 64),                         \
+        .backPicYOffset = 3,                                            \
+        .backAnimId = BACK_ANIM_GROW_STUTTER,                           \
+        .palette = gMonPalette_Arceus ##typeName,                       \
+        .shinyPalette = gMonShinyPalette_Arceus ##typeName,             \
+        .iconSprite = gMonIcon_Arceus,                                  \
+        .iconPalIndex = 1,                                              \
+        FOOTPRINT(Arceus)                                               \
+        .levelUpLearnset = sArceusLevelUpLearnset,                      \
+        .teachableLearnset = sArceusTeachableLearnset,                  \
+        .formSpeciesIdTable = sArceusFormSpeciesIdTable,                \
+        .formChangeTable = sArceusFormChangeTable,                      \
+        .isMythical = TRUE,                                             \
     }
 
     [SPECIES_ARCEUS_NORMAL]   = ARCEUS_SPECIES_INFO(TYPE_NORMAL,   Normal),

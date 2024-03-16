@@ -252,9 +252,13 @@ SINGLE_BATTLE_TEST("Rage Fist base power is not increased if move had no affect"
 SINGLE_BATTLE_TEST("Rage Fist base power is increased if Disguise breaks")
 {
     s16 timesGotHit[2];
+    u16 species = SPECIES_NONE;
+
+    PARAMETRIZE { species = SPECIES_MIMIKYU_DISGUISED; }
+    PARAMETRIZE { species = SPECIES_MIMIKYU_TOTEM_DISGUISED; }
 
     GIVEN {
-        PLAYER(SPECIES_MIMIKYU_DISGUISED) { Ability(ABILITY_DISGUISE); }
+        PLAYER(species) { Ability(ABILITY_DISGUISE); }
         OPPONENT(SPECIES_REGIROCK);
     } WHEN {
         TURN { MOVE(player, MOVE_RAGE_FIST); MOVE(opponent, MOVE_ROCK_THROW); }

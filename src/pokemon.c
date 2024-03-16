@@ -953,7 +953,8 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         else if (P_LEGENDARY_PERFECT_IVS >= GEN_6
          && (gSpeciesInfo[species].isLegendary
           || gSpeciesInfo[species].isMythical
-          || gSpeciesInfo[species].isUltraBeast))
+          || gSpeciesInfo[species].isUltraBeast
+          || gSpeciesInfo[species].isTotem))
         {
             iv = MAX_PER_STAT_IVS;
             // Initialize a list of IV indices.
