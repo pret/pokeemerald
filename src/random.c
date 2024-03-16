@@ -91,6 +91,13 @@ void SeedRng2(u32 seed)
     SFC32_Seed(&gRng2Value, seed, STREAM2);
 }
 
+rng_value_t LocalRandomSeed(u32 seed)
+{
+    rng_value_t result;
+    SFC32_Seed(&result, seed, STREAM1);
+    return result;
+}
+
 void AdvanceRandom(void)
 {
     if (sRngLoopUnlocked == TRUE)
