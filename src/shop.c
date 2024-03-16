@@ -216,7 +216,8 @@ static const struct ListMenuTemplate sShopBuyMenuListTemplate =
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NARROW,
-    .cursorKind = CURSOR_BLACK_ARROW
+    .cursorKind = CURSOR_BLACK_ARROW,
+    .textNarrowWidth = 84,
 };
 
 static const struct BgTemplate sShopBuyMenuBgTemplates[] =
