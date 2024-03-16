@@ -2,6 +2,7 @@
 #define GUARD_CONFIG_ITEM_H
 
 // Item config
+#define I_EXPANDED_ITEM_NAMES           FALSE      // If set to TRUE, item names are increased from 14 characters to 20 characters.
 #define I_SHINY_CHARM_ADDITIONAL_ROLLS  2           // Amount of additional shiny rolls if the player has the Shiny Charm. Set it to 0 to disable Shiny Charm's effects.
 #define I_KEY_FOSSILS                   GEN_LATEST  // In Gen4+, all Gen 3 fossils became regular items.
 #define I_KEY_ESCAPE_ROPE               GEN_LATEST  // In Gen8, Escape Rope became a Key Item. Keep in mind, this will make it free to buy in marts.
