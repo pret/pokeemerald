@@ -36,20 +36,12 @@ const u8 gItemEffect_MaxPotion[7] = {
 
 const u8 gItemEffect_HyperPotion[7] = {
     [4] = ITEM4_HEAL_HP,
-#if I_HEALTH_RECOVERY >= GEN_7
-    [6] = 120, // Amount of HP to recover
-#else
-    [6] = 200, // Amount of HP to recover
-#endif
+    [6] = I_HEALTH_RECOVERY >= GEN_7 ? 120 : 200, // Amount of HP to recover
 };
 
 const u8 gItemEffect_SuperPotion[7] = {
     [4] = ITEM4_HEAL_HP,
-#if I_HEALTH_RECOVERY >= GEN_7
-    [6] = 60, // Amount of HP to recover
-#else
-    [6] = 50, // Amount of HP to recover
-#endif
+    [6] = I_HEALTH_RECOVERY >= GEN_7 ? 60 : 50, // Amount of HP to recover
 };
 
 const u8 gItemEffect_FullHeal[6] = {
@@ -68,29 +60,17 @@ const u8 gItemEffect_MaxRevive[7] = {
 
 const u8 gItemEffect_FreshWater[7] = {
     [4] = ITEM4_HEAL_HP,
-#if I_HEALTH_RECOVERY >= GEN_7
-    [6] = 30, // Amount of HP to recover
-#else
-    [6] = 50, // Amount of HP to recover
-#endif
+    [6] = I_HEALTH_RECOVERY >= GEN_7 ? 30 : 50, // Amount of HP to recover
 };
 
 const u8 gItemEffect_SodaPop[7] = {
     [4] = ITEM4_HEAL_HP,
-#if I_HEALTH_RECOVERY >= GEN_7
-    [6] = 50, // Amount of HP to recover
-#else
-    [6] = 60, // Amount of HP to recover
-#endif
+    [6] = I_HEALTH_RECOVERY >= GEN_7 ? 50 : 60, // Amount of HP to recover
 };
 
 const u8 gItemEffect_Lemonade[7] = {
     [4] = ITEM4_HEAL_HP,
-#if I_HEALTH_RECOVERY >= GEN_7
-    [6] = 70, // Amount of HP to recover
-#else
-    [6] = 80, // Amount of HP to recover
-#endif
+    [6] = I_HEALTH_RECOVERY >= GEN_7 ? 70 : 80, // Amount of HP to recover
 };
 
 const u8 gItemEffect_MoomooMilk[7] = {
@@ -101,11 +81,7 @@ const u8 gItemEffect_MoomooMilk[7] = {
 const u8 gItemEffect_EnergyPowder[10] = {
     [4] = ITEM4_HEAL_HP,
     [5] = ITEM5_FRIENDSHIP_ALL,
-#if I_HEALTH_RECOVERY >= GEN_7
-    [6] = 60, // Amount of HP to recover
-#else
-    [6] = 50, // Amount of HP to recover
-#endif
+    [6] = I_HEALTH_RECOVERY >= GEN_7 ? 60 : 50, // Amount of HP to recover
     [7] = -5, // Friendship change, low
     [8] = -5, // Friendship change, mid
     [9] = -10, // Friendship change, high
@@ -114,11 +90,7 @@ const u8 gItemEffect_EnergyPowder[10] = {
 const u8 gItemEffect_EnergyRoot[10] = {
     [4] = ITEM4_HEAL_HP,
     [5] = ITEM5_FRIENDSHIP_ALL,
-#if I_HEALTH_RECOVERY >= GEN_7
-    [6] = 120, // Amount of HP to recover
-#else
-    [6] = 200, // Amount of HP to recover
-#endif
+    [6] = I_HEALTH_RECOVERY >= GEN_7 ? 120 : 200, // Amount of HP to recover
     [7] = -10, // Friendship change, low
     [8] = -10, // Friendship change, mid
     [9] = -15, // Friendship change, high
@@ -136,6 +108,33 @@ const u8 gItemEffect_RevivalHerb[10] = {
     [4] = ITEM4_REVIVE | ITEM4_HEAL_HP,
     [5] = ITEM5_FRIENDSHIP_ALL,
     [6] = ITEM6_HEAL_HP_FULL,
+    [7] = -15, // Friendship change, low
+    [8] = -15, // Friendship change, mid
+    [9] = -20, // Friendship change, high
+};
+
+const u8 gItemEffect_Remedy[10] = {
+    [4] = ITEM4_HEAL_HP,
+    [5] = ITEM5_FRIENDSHIP_ALL,
+    [6] = 20, // Amount of HP to recover
+    [7] = -5, // Friendship change, low
+    [8] = -5, // Friendship change, mid
+    [9] = -10, // Friendship change, high
+};
+
+const u8 gItemEffect_FineRemedy[10] = {
+    [4] = ITEM4_HEAL_HP,
+    [5] = ITEM5_FRIENDSHIP_ALL,
+    [6] = I_HEALTH_RECOVERY >= GEN_7 ? 60 : 50, // Amount of HP to recover
+    [7] = -10, // Friendship change, low
+    [8] = -10, // Friendship change, mid
+    [9] = -15, // Friendship change, high
+};
+
+const u8 gItemEffect_SuperbRemedy[10] = {
+    [4] = ITEM4_HEAL_HP,
+    [5] = ITEM5_FRIENDSHIP_ALL,
+    [6] = I_HEALTH_RECOVERY >= GEN_7 ? 120 : 200, // Amount of HP to recover
     [7] = -15, // Friendship change, low
     [8] = -15, // Friendship change, mid
     [9] = -20, // Friendship change, high
@@ -161,21 +160,12 @@ const u8 gItemEffect_MaxElixir[7] = {
     [6] = ITEM6_HEAL_PP_FULL,
 };
 
-const u8 gItemEffect_BlueFlute[6] = {
-    [3] = ITEM3_SLEEP,
-};
-
 const u8 gItemEffect_YellowFlute[6] = {
     [3] = ITEM3_CONFUSION,
 };
 
 const u8 gItemEffect_RedFlute[6] = {
     [0] = ITEM0_INFATUATION,
-};
-
-const u8 gItemEffect_BerryJuice[7] = {
-    [4] = ITEM4_HEAL_HP,
-    [6] = 20, // Amount of HP to recover
 };
 
 const u8 gItemEffect_SacredAsh[7] = {
@@ -404,26 +394,6 @@ const u8 gItemEffect_EvoItem[6] = {
     [4] = ITEM4_EVO_STONE,
 };
 
-const u8 gItemEffect_CheriBerry[6] = {
-    [3] = ITEM3_PARALYSIS,
-};
-
-const u8 gItemEffect_ChestoBerry[6] = {
-    [3] = ITEM3_SLEEP,
-};
-
-const u8 gItemEffect_PechaBerry[6] = {
-    [3] = ITEM3_POISON,
-};
-
-const u8 gItemEffect_RawstBerry[6] = {
-    [3] = ITEM3_BURN,
-};
-
-const u8 gItemEffect_AspearBerry[6] = {
-    [3] = ITEM3_FREEZE,
-};
-
 const u8 gItemEffect_LeppaBerry[7] = {
     [4] = ITEM4_HEAL_PP_ONE | ITEM4_HEAL_PP,
     [6] = 10, // Amount of PP to recover
@@ -488,164 +458,4 @@ const u8 gItemEffect_TamatoBerry[10] = {
     [5] = ITEM5_EV_SPEED | ITEM5_FRIENDSHIP_ALL,
     [6] = ITEM6_SUBTRACT_EV,
     EV_BERRY_FRIENDSHIP_CHANGE,
-};
-
-const u8 *const gItemEffectTable[ITEMS_COUNT] =
-{
-    // Medicine
-    [ITEM_POTION]             = gItemEffect_Potion,
-    [ITEM_SUPER_POTION]       = gItemEffect_SuperPotion,
-    [ITEM_HYPER_POTION]       = gItemEffect_HyperPotion,
-    [ITEM_MAX_POTION]         = gItemEffect_MaxPotion,
-    [ITEM_FULL_RESTORE]       = gItemEffect_FullRestore,
-    [ITEM_REVIVE]             = gItemEffect_Revive,
-    [ITEM_MAX_REVIVE]         = gItemEffect_MaxRevive,
-    [ITEM_FRESH_WATER]        = gItemEffect_FreshWater,
-    [ITEM_SODA_POP]           = gItemEffect_SodaPop,
-    [ITEM_LEMONADE]           = gItemEffect_Lemonade,
-    [ITEM_MOOMOO_MILK]        = gItemEffect_MoomooMilk,
-    [ITEM_ENERGY_POWDER]      = gItemEffect_EnergyPowder,
-    [ITEM_ENERGY_ROOT]        = gItemEffect_EnergyRoot,
-    [ITEM_HEAL_POWDER]        = gItemEffect_HealPowder,
-    [ITEM_REVIVAL_HERB]       = gItemEffect_RevivalHerb,
-    [ITEM_ANTIDOTE]           = gItemEffect_Antidote,
-    [ITEM_PARALYZE_HEAL]      = gItemEffect_ParalyzeHeal,
-    [ITEM_BURN_HEAL]          = gItemEffect_BurnHeal,
-    [ITEM_ICE_HEAL]           = gItemEffect_IceHeal,
-    [ITEM_AWAKENING]          = gItemEffect_Awakening,
-    [ITEM_FULL_HEAL]          = gItemEffect_FullHeal,
-    [ITEM_ETHER]              = gItemEffect_Ether,
-    [ITEM_MAX_ETHER]          = gItemEffect_MaxEther,
-    [ITEM_ELIXIR]             = gItemEffect_Elixir,
-    [ITEM_MAX_ELIXIR]         = gItemEffect_MaxElixir,
-    [ITEM_BERRY_JUICE]        = gItemEffect_BerryJuice,
-    [ITEM_SACRED_ASH]         = gItemEffect_SacredAsh,
-    [ITEM_SWEET_HEART]        = gItemEffect_Potion,
-    [ITEM_MAX_HONEY]          = gItemEffect_MaxRevive,
-
-    // Regional Specialties
-    [ITEM_PEWTER_CRUNCHIES]   = gItemEffect_FullHeal,
-    [ITEM_RAGE_CANDY_BAR]     = gItemEffect_FullHeal,
-    [ITEM_LAVA_COOKIE]        = gItemEffect_FullHeal,
-    [ITEM_OLD_GATEAU]         = gItemEffect_FullHeal,
-    [ITEM_CASTELIACONE]       = gItemEffect_FullHeal,
-    [ITEM_LUMIOSE_GALETTE]    = gItemEffect_FullHeal,
-    [ITEM_SHALOUR_SABLE]      = gItemEffect_FullHeal,
-    [ITEM_BIG_MALASADA]       = gItemEffect_FullHeal,
-
-    // Vitamins
-    [ITEM_HP_UP]              = gItemEffect_HPUp,
-    [ITEM_PROTEIN]            = gItemEffect_Protein,
-    [ITEM_IRON]               = gItemEffect_Iron,
-    [ITEM_CALCIUM]            = gItemEffect_Calcium,
-    [ITEM_ZINC]               = gItemEffect_Zinc,
-    [ITEM_CARBOS]             = gItemEffect_Carbos,
-    [ITEM_PP_UP]              = gItemEffect_PPUp,
-    [ITEM_PP_MAX]             = gItemEffect_PPMax,
-
-    // EV Feathers
-    [ITEM_HEALTH_FEATHER]     = gItemEffect_HpFeather,
-    [ITEM_MUSCLE_FEATHER]     = gItemEffect_AtkFeather,
-    [ITEM_RESIST_FEATHER]     = gItemEffect_DefFeather,
-    [ITEM_GENIUS_FEATHER]     = gItemEffect_SpatkFeather,
-    [ITEM_CLEVER_FEATHER]     = gItemEffect_SpdefFeather,
-    [ITEM_SWIFT_FEATHER]      = gItemEffect_SpeedFeather,
-
-    //Mochi
-    [ITEM_HEALTH_MOCHI]       = gItemEffect_HpMochi,
-    [ITEM_MUSCLE_MOCHI]       = gItemEffect_AtkMochi,
-    [ITEM_RESIST_MOCHI]       = gItemEffect_DefMochi,
-    [ITEM_GENIUS_MOCHI]       = gItemEffect_SpatkMochi,
-    [ITEM_CLEVER_MOCHI]       = gItemEffect_SpdefMochi,
-    [ITEM_SWIFT_MOCHI]        = gItemEffect_SpeedMochi,
-    [ITEM_FRESH_START_MOCHI]  = gItemEffect_ResetMochi,
-
-    // Candy
-    [ITEM_RARE_CANDY]         = gItemEffect_RareCandy,
-    [ITEM_EXP_CANDY_XS]       = gItemEffect_RareCandy,
-    [ITEM_EXP_CANDY_S]        = gItemEffect_RareCandy,
-    [ITEM_EXP_CANDY_M]        = gItemEffect_RareCandy,
-    [ITEM_EXP_CANDY_L]        = gItemEffect_RareCandy,
-    [ITEM_EXP_CANDY_XL]       = gItemEffect_RareCandy,
-    //[ITEM_DYNAMAX_CANDY]      = gItemEffect_DynamaxCandy, // Todo
-
-    // Medicinal Flutes
-    [ITEM_BLUE_FLUTE]         = gItemEffect_BlueFlute,
-    [ITEM_YELLOW_FLUTE]       = gItemEffect_YellowFlute,
-    [ITEM_RED_FLUTE]          = gItemEffect_RedFlute,
-
-    // X Items
-    [ITEM_X_ATTACK]           = gItemEffect_XAttack,
-    [ITEM_X_DEFENSE]          = gItemEffect_XDefense,
-    [ITEM_X_SPEED]            = gItemEffect_XSpeed,
-    [ITEM_X_ACCURACY]         = gItemEffect_XAccuracy,
-    [ITEM_X_SP_ATK]           = gItemEffect_XSpecialAttack,
-    [ITEM_X_SP_DEF]           = gItemEffect_XSpecialDefense,
-
-    [ITEM_DIRE_HIT]           = gItemEffect_DireHit,
-    [ITEM_GUARD_SPEC]         = gItemEffect_GuardSpec,
-
-    // Evolution Items
-    [ITEM_FIRE_STONE]         = gItemEffect_EvoItem,
-    [ITEM_WATER_STONE]        = gItemEffect_EvoItem,
-    [ITEM_THUNDER_STONE]      = gItemEffect_EvoItem,
-    [ITEM_LEAF_STONE]         = gItemEffect_EvoItem,
-    [ITEM_ICE_STONE]          = gItemEffect_EvoItem,
-    [ITEM_SUN_STONE]          = gItemEffect_EvoItem,
-    [ITEM_MOON_STONE]         = gItemEffect_EvoItem,
-    [ITEM_SHINY_STONE]        = gItemEffect_EvoItem,
-    [ITEM_DUSK_STONE]         = gItemEffect_EvoItem,
-    [ITEM_DAWN_STONE]         = gItemEffect_EvoItem,
-    [ITEM_SWEET_APPLE]        = gItemEffect_EvoItem,
-    [ITEM_TART_APPLE]         = gItemEffect_EvoItem,
-    [ITEM_CRACKED_POT]        = gItemEffect_EvoItem,
-    [ITEM_CHIPPED_POT]        = gItemEffect_EvoItem,
-    [ITEM_GALARICA_CUFF]      = gItemEffect_EvoItem,
-    [ITEM_GALARICA_WREATH]    = gItemEffect_EvoItem,
-    [ITEM_DRAGON_SCALE]       = gItemEffect_EvoItem,
-    [ITEM_UPGRADE]            = gItemEffect_EvoItem,
-    [ITEM_PROTECTOR]          = gItemEffect_EvoItem,
-    [ITEM_ELECTIRIZER]        = gItemEffect_EvoItem,
-    [ITEM_MAGMARIZER]         = gItemEffect_EvoItem,
-    [ITEM_DUBIOUS_DISC]       = gItemEffect_EvoItem,
-    [ITEM_REAPER_CLOTH]       = gItemEffect_EvoItem,
-    [ITEM_PRISM_SCALE]        = gItemEffect_EvoItem,
-    [ITEM_WHIPPED_DREAM]      = gItemEffect_EvoItem,
-    [ITEM_SACHET]             = gItemEffect_EvoItem,
-    [ITEM_OVAL_STONE]         = gItemEffect_EvoItem,
-    [ITEM_DEEP_SEA_SCALE]     = gItemEffect_EvoItem,
-    [ITEM_DEEP_SEA_TOOTH]     = gItemEffect_EvoItem,
-    [ITEM_METAL_COAT]         = gItemEffect_EvoItem,
-    [ITEM_KINGS_ROCK]         = gItemEffect_EvoItem,
-    [ITEM_RAZOR_CLAW]         = gItemEffect_EvoItem,
-    [ITEM_RAZOR_FANG]         = gItemEffect_EvoItem,
-    [ITEM_AUSPICIOUS_ARMOR]   = gItemEffect_EvoItem,
-    [ITEM_MALICIOUS_ARMOR]    = gItemEffect_EvoItem,
-    [ITEM_SCROLL_OF_DARKNESS] = gItemEffect_EvoItem,
-    [ITEM_SCROLL_OF_WATERS]   = gItemEffect_EvoItem,
-    [ITEM_BLACK_AUGURITE]     = gItemEffect_EvoItem,
-    [ITEM_LINKING_CORD]       = gItemEffect_EvoItem,
-    [ITEM_PEAT_BLOCK]         = gItemEffect_EvoItem,
-    [ITEM_SYRUPY_APPLE]       = gItemEffect_EvoItem,
-    [ITEM_UNREMARKABLE_TEACUP] = gItemEffect_EvoItem,
-    [ITEM_MASTERPIECE_TEACUP] = gItemEffect_EvoItem,
-
-    // Berries
-    [ITEM_CHERI_BERRY]        = gItemEffect_CheriBerry,
-    [ITEM_CHESTO_BERRY]       = gItemEffect_ChestoBerry,
-    [ITEM_PECHA_BERRY]        = gItemEffect_PechaBerry,
-    [ITEM_RAWST_BERRY]        = gItemEffect_RawstBerry,
-    [ITEM_ASPEAR_BERRY]       = gItemEffect_AspearBerry,
-    [ITEM_LEPPA_BERRY]        = gItemEffect_LeppaBerry,
-    [ITEM_ORAN_BERRY]         = gItemEffect_OranBerry,
-    [ITEM_PERSIM_BERRY]       = gItemEffect_PersimBerry,
-    [ITEM_LUM_BERRY]          = gItemEffect_FullHeal,
-    [ITEM_SITRUS_BERRY]       = gItemEffect_SitrusBerry,
-    [ITEM_POMEG_BERRY]        = gItemEffect_PomegBerry,
-    [ITEM_KELPSY_BERRY]       = gItemEffect_KelpsyBerry,
-    [ITEM_QUALOT_BERRY]       = gItemEffect_QualotBerry,
-    [ITEM_HONDEW_BERRY]       = gItemEffect_HondewBerry,
-    [ITEM_GREPA_BERRY]        = gItemEffect_GrepaBerry,
-    [ITEM_TAMATO_BERRY]       = gItemEffect_TamatoBerry,
-    [LAST_BERRY_INDEX]        = NULL,
 };

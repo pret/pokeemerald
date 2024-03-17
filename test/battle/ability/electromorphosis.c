@@ -10,12 +10,12 @@ SINGLE_BATTLE_TEST("Electromorphosis sets up Charge when hit by any move")
     PARAMETRIZE {move = MOVE_GUST; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TACKLE].power != 0);
-        ASSUME(gBattleMoves[MOVE_GUST].power != 0);
-        ASSUME(gBattleMoves[MOVE_GUST].split == SPLIT_SPECIAL);
-        ASSUME(gBattleMoves[MOVE_TACKLE].split == SPLIT_PHYSICAL);
-        ASSUME(gBattleMoves[MOVE_THUNDER_SHOCK].power != 0);
-        ASSUME(gBattleMoves[MOVE_THUNDER_SHOCK].type == TYPE_ELECTRIC);
+        ASSUME(gMovesInfo[MOVE_TACKLE].power != 0);
+        ASSUME(gMovesInfo[MOVE_GUST].power != 0);
+        ASSUME(gMovesInfo[MOVE_GUST].category == DAMAGE_CATEGORY_SPECIAL);
+        ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
+        ASSUME(gMovesInfo[MOVE_THUNDER_SHOCK].power != 0);
+        ASSUME(gMovesInfo[MOVE_THUNDER_SHOCK].type == TYPE_ELECTRIC);
 
         PLAYER(SPECIES_BELLIBOLT) { Ability(ABILITY_ELECTROMORPHOSIS); Speed(10); }
         OPPONENT(SPECIES_WOBBUFFET) {Ability(ABILITY_LIMBER); Speed(5) ;} // Limber, so it doesn't get paralyzed.

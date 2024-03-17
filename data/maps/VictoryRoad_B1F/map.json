@@ -244,8 +244,8 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "VictoryRoad_B1F_EventScript_ItemTMPsychic",
+      "trainer_sight_or_berry_tree_id": "ITEM_TM_PSYCHIC",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_VICTORY_ROAD_B1F_TM_PSYCHIC"
     },
     {
@@ -257,8 +257,8 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "VictoryRoad_B1F_EventScript_ItemFullRestore",
+      "trainer_sight_or_berry_tree_id": "ITEM_FULL_RESTORE",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_VICTORY_ROAD_B1F_FULL_RESTORE"
     },
     {

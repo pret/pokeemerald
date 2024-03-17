@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_PURSUIT].effect == EFFECT_PURSUIT);
+    ASSUME(gMovesInfo[MOVE_PURSUIT].effect == EFFECT_PURSUIT);
 }
 
 SINGLE_BATTLE_TEST("Pursuited mon correctly switches out after it got hit and activated ability Tangling Hair")

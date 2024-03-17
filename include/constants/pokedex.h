@@ -1,7 +1,7 @@
 #ifndef GUARD_CONSTANTS_POKEDEX_H
 #define GUARD_CONSTANTS_POKEDEX_H
 
-// National Pokedex order.
+// National Pokédex order
 // These constants are NOT disabled by P_GEN_X_POKEMON to keep pokedex_orders.h clean.
 enum {
     NATIONAL_DEX_NONE,
@@ -1031,21 +1031,21 @@ enum {
     NATIONAL_DEX_MUNKIDORI,
     NATIONAL_DEX_FEZANDIPITI,
     NATIONAL_DEX_OGERPON,
-    NATIONAL_DEX_1018,
-    NATIONAL_DEX_1019,
-    NATIONAL_DEX_1020,
-    NATIONAL_DEX_1021,
-    NATIONAL_DEX_1022,
-    NATIONAL_DEX_1023,
-    NATIONAL_DEX_1024,
-    NATIONAL_DEX_1025,
+    NATIONAL_DEX_ARCHALUDON,
+    NATIONAL_DEX_HYDRAPPLE,
+    NATIONAL_DEX_GOUGING_FIRE,
+    NATIONAL_DEX_RAGING_BOLT,
+    NATIONAL_DEX_IRON_BOULDER,
+    NATIONAL_DEX_IRON_CROWN,
+    NATIONAL_DEX_TERAPAGOS,
+    NATIONAL_DEX_PECHARUNT,
 };
 
 #define KANTO_DEX_COUNT     NATIONAL_DEX_MEW
 #define JOHTO_DEX_COUNT     NATIONAL_DEX_CELEBI
 
 #if P_GEN_9_POKEMON == TRUE
-    #define NATIONAL_DEX_COUNT  NATIONAL_DEX_1025
+    #define NATIONAL_DEX_COUNT  NATIONAL_DEX_PECHARUNT
 #elif P_GEN_8_POKEMON == TRUE
     #define NATIONAL_DEX_COUNT  NATIONAL_DEX_ENAMORUS
 #elif P_GEN_7_POKEMON == TRUE
@@ -1062,7 +1062,7 @@ enum {
 
 #define POKEMON_SLOTS_NUMBER (NATIONAL_DEX_COUNT + 1)
 
-// Hoenn Pokedex order
+// Hoenn Pokédex order
 enum {
     HOENN_DEX_NONE,
     HOENN_DEX_TREECKO,
@@ -1306,5 +1306,25 @@ enum {
 };
 
 #define HOENN_DEX_COUNT (HOENN_DEX_DEOXYS + 1)
+
+#define DECAGRAMS_IN_POUND             4536
+#define CM_PER_INCH                    2.54
+#define CM_PER_INCH_FACTOR             (CM_PER_INCH * 100)
+#define INCHES_IN_FOOT                 12
+#define INCHES_IN_ONE_AND_HALF_FOOT    (INCHES_IN_FOOT * 1.5)
+#define INCHES_IN_FOOT_FACTOR          (INCHES_IN_FOOT * 10)
+
+#define WEIGHT_HEIGHT_STR_LEN          16
+#define WEIGHT_HEIGHT_STR_MEM          (WEIGHT_HEIGHT_STR_LEN * sizeof(u8))
+
+#define DEX_HEADER_X                   96
+#define DEX_Y_TOP                      57
+#define DEX_Y_BOTTOM                   73
+#define DEX_MEASUREMENT_X              129
+
+#define DEX_HGSS_HEADER_X_PADDING      59
+#define DEX_HGSS_Y_TOP_PADDING         7
+#define DEX_HGSS_Y_BOTTOM_PADDING      4
+#define DEX_HGSS_MEASUREMENT_X_PADDING 51
 
 #endif // GUARD_CONSTANTS_POKEDEX_H

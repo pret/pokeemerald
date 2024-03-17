@@ -62,209 +62,8 @@ extern const u32 gBallGfx_Cherish[];
 extern const u32 gBallPal_Cherish[];
 extern const u32 gOpenPokeballGfx[];
 
-// pokemon gfx
+// Pokémon gfx
 extern const u16 gMonIconPalettes[][16];
-
-// trainer sprites
-extern const u32 gTrainerFrontPic_Hiker[];
-extern const u32 gTrainerFrontPic_AquaGruntM[];
-extern const u32 gTrainerFrontPic_PokemonBreederF[];
-extern const u32 gTrainerFrontPic_CoolTrainerM[];
-extern const u32 gTrainerFrontPic_BirdKeeper[];
-extern const u32 gTrainerFrontPic_Collector[];
-extern const u32 gTrainerFrontPic_AquaGruntF[];
-extern const u32 gTrainerFrontPic_SwimmerM[];
-extern const u32 gTrainerFrontPic_MagmaGruntM[];
-extern const u32 gTrainerFrontPic_ExpertM[];
-extern const u32 gTrainerFrontPic_AquaAdminM[];
-extern const u32 gTrainerFrontPic_BlackBelt[];
-extern const u32 gTrainerFrontPic_AquaAdminF[];
-extern const u32 gTrainerFrontPic_AquaLeaderArchie[];
-extern const u32 gTrainerFrontPic_HexManiac[];
-extern const u32 gTrainerFrontPic_AromaLady[];
-extern const u32 gTrainerFrontPic_RuinManiac[];
-extern const u32 gTrainerFrontPic_Interviewer[];
-extern const u32 gTrainerFrontPic_TuberF[];
-extern const u32 gTrainerFrontPic_TuberM[];
-extern const u32 gTrainerFrontPic_CoolTrainerF[];
-extern const u32 gTrainerFrontPic_Lady[];
-extern const u32 gTrainerFrontPic_Beauty[];
-extern const u32 gTrainerFrontPic_RichBoy[];
-extern const u32 gTrainerFrontPic_ExpertF[];
-extern const u32 gTrainerFrontPic_Pokemaniac[];
-extern const u32 gTrainerFrontPic_MagmaGruntF[];
-extern const u32 gTrainerFrontPic_Guitarist[];
-extern const u32 gTrainerFrontPic_Kindler[];
-extern const u32 gTrainerFrontPic_Camper[];
-extern const u32 gTrainerFrontPic_Picnicker[];
-extern const u32 gTrainerFrontPic_BugManiac[];
-extern const u32 gTrainerFrontPic_PokemonBreederM[];
-extern const u32 gTrainerFrontPic_PsychicM[];
-extern const u32 gTrainerFrontPic_PsychicF[];
-extern const u32 gTrainerFrontPic_Gentleman[];
-extern const u32 gTrainerFrontPic_EliteFourSidney[];
-extern const u32 gTrainerFrontPic_EliteFourPhoebe[];
-extern const u32 gTrainerFrontPic_EliteFourGlacia[];
-extern const u32 gTrainerFrontPic_EliteFourDrake[];
-extern const u32 gTrainerFrontPic_LeaderRoxanne[];
-extern const u32 gTrainerFrontPic_LeaderBrawly[];
-extern const u32 gTrainerFrontPic_LeaderWattson[];
-extern const u32 gTrainerFrontPic_LeaderFlannery[];
-extern const u32 gTrainerFrontPic_LeaderNorman[];
-extern const u32 gTrainerFrontPic_LeaderWinona[];
-extern const u32 gTrainerFrontPic_LeaderTateAndLiza[];
-extern const u32 gTrainerFrontPic_LeaderJuan[];
-extern const u32 gTrainerFrontPic_SchoolKidM[];
-extern const u32 gTrainerFrontPic_SchoolKidF[];
-extern const u32 gTrainerFrontPic_SrAndJr[];
-extern const u32 gTrainerFrontPic_PokefanM[];
-extern const u32 gTrainerFrontPic_PokefanF[];
-extern const u32 gTrainerFrontPic_Youngster[];
-extern const u32 gTrainerFrontPic_ChampionWallace[];
-extern const u32 gTrainerFrontPic_Fisherman[];
-extern const u32 gTrainerFrontPic_CyclingTriathleteM[];
-extern const u32 gTrainerFrontPic_CyclingTriathleteF[];
-extern const u32 gTrainerFrontPic_RunningTriathleteM[];
-extern const u32 gTrainerFrontPic_RunningTriathleteF[];
-extern const u32 gTrainerFrontPic_SwimmingTriathleteM[];
-extern const u32 gTrainerFrontPic_SwimmingTriathleteF[];
-extern const u32 gTrainerFrontPic_DragonTamer[];
-extern const u32 gTrainerFrontPic_NinjaBoy[];
-extern const u32 gTrainerFrontPic_BattleGirl[];
-extern const u32 gTrainerFrontPic_ParasolLady[];
-extern const u32 gTrainerFrontPic_SwimmerF[];
-extern const u32 gTrainerFrontPic_Twins[];
-extern const u32 gTrainerFrontPic_Sailor[];
-extern const u32 gTrainerFrontPic_MagmaAdmin[];
-extern const u32 gTrainerFrontPic_Wally[];
-extern const u32 gTrainerFrontPic_Brendan[];
-extern const u32 gTrainerFrontPic_May[];
-extern const u32 gTrainerFrontPic_BugCatcher[];
-extern const u32 gTrainerFrontPic_PokemonRangerM[];
-extern const u32 gTrainerFrontPic_PokemonRangerF[];
-extern const u32 gTrainerFrontPic_MagmaLeaderMaxie[];
-extern const u32 gTrainerFrontPic_Lass[];
-extern const u32 gTrainerFrontPic_YoungCouple[];
-extern const u32 gTrainerFrontPic_OldCouple[];
-extern const u32 gTrainerFrontPic_SisAndBro[];
-extern const u32 gTrainerFrontPic_Steven[];
-extern const u32 gTrainerFrontPic_SalonMaidenAnabel[];
-extern const u32 gTrainerFrontPic_DomeAceTucker[];
-extern const u32 gTrainerFrontPic_PalaceMavenSpenser[];
-extern const u32 gTrainerFrontPic_ArenaTycoonGreta[];
-extern const u32 gTrainerFrontPic_FactoryHeadNoland[];
-extern const u32 gTrainerFrontPic_PikeQueenLucy[];
-extern const u32 gTrainerFrontPic_PyramidKingBrandon[];
-extern const u32 gTrainerFrontPic_Red[];
-extern const u32 gTrainerFrontPic_Leaf[];
-extern const u32 gTrainerFrontPic_RubySapphireBrendan[];
-extern const u32 gTrainerFrontPic_RubySapphireMay[];
-
-extern const u32 gTrainerPalette_Hiker[];
-extern const u32 gTrainerPalette_AquaGruntM[];
-extern const u32 gTrainerPalette_PokemonBreederF[];
-extern const u32 gTrainerPalette_CoolTrainerM[];
-extern const u32 gTrainerPalette_BirdKeeper[];
-extern const u32 gTrainerPalette_Collector[];
-extern const u32 gTrainerPalette_AquaGruntF[];
-extern const u32 gTrainerPalette_SwimmerM[];
-extern const u32 gTrainerPalette_MagmaGruntM[];
-extern const u32 gTrainerPalette_ExpertM[];
-extern const u32 gTrainerPalette_AquaAdminM[];
-extern const u32 gTrainerPalette_BlackBelt[];
-extern const u32 gTrainerPalette_AquaAdminF[];
-extern const u32 gTrainerPalette_AquaLeaderArchie[];
-extern const u32 gTrainerPalette_HexManiac[];
-extern const u32 gTrainerPalette_AromaLady[];
-extern const u32 gTrainerPalette_RuinManiac[];
-extern const u32 gTrainerPalette_Interviewer[];
-extern const u32 gTrainerPalette_TuberF[];
-extern const u32 gTrainerPalette_TuberM[];
-extern const u32 gTrainerPalette_CoolTrainerF[];
-extern const u32 gTrainerPalette_Lady[];
-extern const u32 gTrainerPalette_Beauty[];
-extern const u32 gTrainerPalette_RichBoy[];
-extern const u32 gTrainerPalette_ExpertF[];
-extern const u32 gTrainerPalette_Pokemaniac[];
-extern const u32 gTrainerPalette_MagmaGruntF[];
-extern const u32 gTrainerPalette_Guitarist[];
-extern const u32 gTrainerPalette_Kindler[];
-extern const u32 gTrainerPalette_Camper[];
-extern const u32 gTrainerPalette_Picnicker[];
-extern const u32 gTrainerPalette_BugManiac[];
-extern const u32 gTrainerPalette_PokemonBreederM[];
-extern const u32 gTrainerPalette_PsychicM[];
-extern const u32 gTrainerPalette_PsychicF[];
-extern const u32 gTrainerPalette_Gentleman[];
-extern const u32 gTrainerPalette_EliteFourSidney[];
-extern const u32 gTrainerPalette_EliteFourPhoebe[];
-extern const u32 gTrainerPalette_EliteFourGlacia[];
-extern const u32 gTrainerPalette_EliteFourDrake[];
-extern const u32 gTrainerPalette_LeaderRoxanne[];
-extern const u32 gTrainerPalette_LeaderBrawly[];
-extern const u32 gTrainerPalette_LeaderWattson[];
-extern const u32 gTrainerPalette_LeaderFlannery[];
-extern const u32 gTrainerPalette_LeaderNorman[];
-extern const u32 gTrainerPalette_LeaderWinona[];
-extern const u32 gTrainerPalette_LeaderTateAndLiza[];
-extern const u32 gTrainerPalette_LeaderJuan[];
-extern const u32 gTrainerPalette_SchoolKidM[];
-extern const u32 gTrainerPalette_SchoolKidF[];
-extern const u32 gTrainerPalette_SrAndJr[];
-extern const u32 gTrainerPalette_PokefanM[];
-extern const u32 gTrainerPalette_PokefanF[];
-extern const u32 gTrainerPalette_Youngster[];
-extern const u32 gTrainerPalette_ChampionWallace[];
-extern const u32 gTrainerPalette_Fisherman[];
-extern const u32 gTrainerPalette_CyclingTriathleteM[];
-extern const u32 gTrainerPalette_CyclingTriathleteF[];
-extern const u32 gTrainerPalette_RunningTriathleteM[];
-extern const u32 gTrainerPalette_RunningTriathleteF[];
-extern const u32 gTrainerPalette_SwimmingTriathleteM[];
-extern const u32 gTrainerPalette_SwimmingTriathleteF[];
-extern const u32 gTrainerPalette_DragonTamer[];
-extern const u32 gTrainerPalette_NinjaBoy[];
-extern const u32 gTrainerPalette_BattleGirl[];
-extern const u32 gTrainerPalette_ParasolLady[];
-extern const u32 gTrainerPalette_SwimmerF[];
-extern const u32 gTrainerPalette_Twins[];
-extern const u32 gTrainerPalette_Sailor[];
-extern const u32 gTrainerPalette_MagmaAdmin[];
-extern const u32 gTrainerPalette_Wally[];
-extern const u32 gTrainerPalette_Brendan[];
-extern const u32 gTrainerPalette_May[];
-extern const u32 gTrainerPalette_BugCatcher[];
-extern const u32 gTrainerPalette_PokemonRangerM[];
-extern const u32 gTrainerPalette_PokemonRangerF[];
-extern const u32 gTrainerPalette_MagmaLeaderMaxie[];
-extern const u32 gTrainerPalette_Lass[];
-extern const u32 gTrainerPalette_YoungCouple[];
-extern const u32 gTrainerPalette_OldCouple[];
-extern const u32 gTrainerPalette_SisAndBro[];
-extern const u32 gTrainerPalette_Steven[];
-extern const u32 gTrainerPalette_SalonMaidenAnabel[];
-extern const u32 gTrainerPalette_DomeAceTucker[];
-extern const u32 gTrainerPalette_PalaceMavenSpenser[];
-extern const u32 gTrainerPalette_ArenaTycoonGreta[];
-extern const u32 gTrainerPalette_FactoryHeadNoland[];
-extern const u32 gTrainerPalette_PikeQueenLucy[];
-extern const u32 gTrainerPalette_PyramidKingBrandon[];
-extern const u32 gTrainerPalette_Red[];
-extern const u32 gTrainerPalette_Leaf[];
-extern const u32 gTrainerPalette_RubySapphireBrendan[];
-extern const u32 gTrainerPalette_RubySapphireMay[];
-
-extern const u8 gTrainerBackPic_Brendan[];
-extern const u8 gTrainerBackPic_May[];
-extern const u8 gTrainerBackPic_Red[];
-extern const u8 gTrainerBackPic_Leaf[];
-extern const u8 gTrainerBackPic_RubySapphireBrendan[];
-extern const u8 gTrainerBackPic_RubySapphireMay[];
-extern const u8 gTrainerBackPic_Wally[];
-extern const u8 gTrainerBackPic_Steven[];
-
-extern const u32 gTrainerBackPicPalette_Red[];
-extern const u32 gTrainerBackPicPalette_Leaf[];
 
 // pokeblock
 extern const u32 gMenuPokeblock_Gfx[];
@@ -479,7 +278,7 @@ extern const u32 gBattleTerrainPalette_StadiumGlacia[];
 extern const u32 gBattleTerrainPalette_StadiumDrake[];
 extern const u32 gBattleTerrainPalette_StadiumWallace[];
 
-// pokedex
+// Pokédex
 extern const u32 gPokedexInterface_Gfx[];
 extern const u16 gPokedexBgHoenn_Pal[];
 extern const u32 gPokedexMenu_Gfx[];
@@ -986,6 +785,8 @@ extern const u32 gItemIcon_UnremarkableTeacup[];
 extern const u32 gItemIconPalette_UnremarkableTeacup[];
 extern const u32 gItemIcon_MasterpieceTeacup[];
 extern const u32 gItemIconPalette_MasterpieceTeacup[];
+extern const u32 gItemIcon_MetalAlloy[];
+extern const u32 gItemIconPalette_MetalAlloy[];
 // Nectars
 extern const u32 gItemIcon_RedNectar[];
 extern const u32 gItemIconPalette_RedNectar[];
@@ -1908,6 +1709,29 @@ extern const u32 gItemIconPalette_HearthflameMask[];
 extern const u32 gItemIcon_CornerstoneMask[];
 extern const u32 gItemIconPalette_CornerstoneMask[];
 
+extern const u32 gItemIcon_Remedy[];
+extern const u32 gItemIconPalette_Remedy[];
+extern const u32 gItemIcon_FineRemedy[];
+extern const u32 gItemIconPalette_FineRemedy[];
+extern const u32 gItemIcon_SuperbRemedy[];
+extern const u32 gItemIconPalette_SuperbRemedy[];
+extern const u32 gItemIcon_AuxBottle[];
+extern const u32 gItemIconPalette_AuxEvasion[];
+extern const u32 gItemIconPalette_AuxGuard[];
+extern const u32 gItemIconPalette_AuxPower[];
+extern const u32 gItemIcon_AuxPowerguard[];
+extern const u32 gItemIconPalette_AuxPowerguard[];
+extern const u32 gItemIcon_ChoiceDumpling[];
+extern const u32 gItemIconPalette_ChoiceDumpling[];
+extern const u32 gItemIcon_JubilifeMuffin[];
+extern const u32 gItemIconPalette_JubilifeMuffin[];
+extern const u32 gItemIcon_PokeshiDoll[];
+extern const u32 gItemIconPalette_PokeshiDoll[];
+extern const u32 gItemIcon_SwapSnack[];
+extern const u32 gItemIconPalette_SwapSnack[];
+extern const u32 gItemIcon_TwiceSpicedRadish[];
+extern const u32 gItemIconPalette_TwiceSpicedRadish[];
+
 extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u32 gItemIconPalette_ReturnToFieldArrow[];
 
@@ -2110,7 +1934,7 @@ extern const u32 gBerryPalette_Rowap[];
 extern const u32 gBerryPalette_Kee[];
 extern const u32 gBerryPalette_Maranga[];
 
-//pokenav
+//PokéNav
 extern const u16 gPokenavCondition_Pal[];
 extern const u32 gPokenavCondition_Gfx[];
 extern const u32 gPokenavCondition_Tilemap[];
@@ -3332,11 +3156,11 @@ extern const u32 gBattleAnimBgImage_Rainbow[];
 extern const u32 gBattleAnimBGPalette_Rainbow[];
 extern const u32 gBattleAnimBgTilemap_Rainbow[];
 
-// Pokedex Area Screen
+// Pokédex Area Screen
 extern const u32 gPokedexAreaScreenAreaUnknown_Gfx[];
 extern const u16 gPokedexAreaScreenAreaUnknown_Pal[];
 
-// Pokemon Storage System
+// Pokémon Storage System
 extern const u32 gStorageSystemMenu_Gfx[];
 extern const u16 gStorageSystemPartyMenu_Pal[];
 extern const u32 gStorageSystemPartyMenu_Tilemap[];
@@ -3464,7 +3288,7 @@ extern const u32 gBerryCrush_Crusher_Gfx[];
 extern const u16 gBerryCrush_Crusher_Pal[];
 extern const u32 gBerryCrush_TextWindows_Tilemap[];
 
-// Pokenav
+// PokéNav
 extern const u32 gPokenavMessageBox_Gfx[];
 extern const u32 gPokenavMessageBox_Tilemap[];
 extern const u16 gPokenavMessageBox_Pal[];

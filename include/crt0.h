@@ -3,4 +3,6 @@
 
 extern u32 IntrMain[];
 
+extern void ReInitializeEWRAM();
+
 #endif //GUARD_CRT0_H

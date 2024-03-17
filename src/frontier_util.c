@@ -29,6 +29,7 @@
 #include "load_save.h"
 #include "battle_dome.h"
 #include "constants/battle_frontier.h"
+#include "constants/battle_move_effects.h"
 #include "constants/battle_pike.h"
 #include "constants/frontier_util.h"
 #include "constants/trainers.h"
@@ -326,7 +327,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
     },
     [FRONTIER_FACILITY_FACTORY] =
     {
-        // Because Factory's pokemon are random, this facility's Brain also uses random pokemon.
+        // Because Factory's Pokémon are random, this facility's Brain also uses random Pokémon.
         // What is interesting, this team is actually the one Steven uses in the multi tag battle alongside the player.
         {
             {
@@ -1651,9 +1652,13 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
     switch (whichText)
     {
     case FRONTIER_BEFORE_TEXT:
+    #if FREE_BATTLE_TOWER_E_READER == FALSE
         if (trainerId == TRAINER_EREADER)
             FrontierSpeechToString(gSaveBlock2Ptr->frontier.ereaderTrainer.greeting);
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
+    #else
+        if (trainerId == TRAINER_FRONTIER_BRAIN)
+    #endif //FREE_BATTLE_TOWER_E_READER
             CopyFrontierBrainText(FALSE);
         else if (trainerId < FRONTIER_TRAINERS_COUNT)
             FrontierSpeechToString(gFacilityTrainers[trainerId].speechBefore);
@@ -1663,11 +1668,15 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
             BufferApprenticeChallengeText(trainerId - TRAINER_RECORD_MIXING_APPRENTICE);
         break;
     case FRONTIER_PLAYER_LOST_TEXT:
+    #if FREE_BATTLE_TOWER_E_READER == FALSE
         if (trainerId == TRAINER_EREADER)
         {
             FrontierSpeechToString(gSaveBlock2Ptr->frontier.ereaderTrainer.farewellPlayerLost);
         }
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
+    #else
+        if (trainerId == TRAINER_FRONTIER_BRAIN)
+    #endif //FREE_BATTLE_TOWER_E_READER
         {
             CopyFrontierBrainText(FALSE);
         }
@@ -1693,7 +1702,9 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
     case FRONTIER_PLAYER_WON_TEXT:
         if (trainerId == TRAINER_EREADER)
         {
+        #if FREE_BATTLE_TOWER_E_READER == FALSE
             FrontierSpeechToString(gSaveBlock2Ptr->frontier.ereaderTrainer.farewellPlayerWon);
+        #endif //FREE_BATTLE_TOWER_E_READER
         }
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
         {
@@ -1947,7 +1958,7 @@ static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monL
 
 // gSpecialVar_Result is the level mode before and after calls to this function
 // gSpecialVar_0x8004 is used to store the return value instead (TRUE if there are insufficient eligible mons)
-// The names of ineligible pokemon that have been caught are also buffered to print
+// The names of ineligible Pokémon that have been caught are also buffered to print
 static void CheckPartyIneligibility(void)
 {
     u16 speciesArray[PARTY_SIZE];
@@ -2212,6 +2223,7 @@ static void Print2PRecord(s32 position, s32 x, s32 y, struct RankingHall2P *hall
 
 static void Fill1PRecords(struct RankingHall1P *dst, s32 hallFacilityId, s32 lvlMode)
 {
+#if FREE_RECORD_MIXING_HALL_RECORDS == FALSE
     s32 i, j;
     struct RankingHall1P record1P[HALL_RECORDS_COUNT + 1];
     struct PlayerHallRecords *playerHallRecords = AllocZeroed(sizeof(struct PlayerHallRecords));
@@ -2242,10 +2254,12 @@ static void Fill1PRecords(struct RankingHall1P *dst, s32 hallFacilityId, s32 lvl
     }
 
     Free(playerHallRecords);
+#endif //FREE_RECORD_MIXING_HALL_RECORDS
 }
 
 static void Fill2PRecords(struct RankingHall2P *dst, s32 lvlMode)
 {
+#if FREE_RECORD_MIXING_HALL_RECORDS == FALSE
     s32 i, j;
     struct RankingHall2P record2P[HALL_RECORDS_COUNT + 1];
     struct PlayerHallRecords *playerHallRecords = AllocZeroed(sizeof(struct PlayerHallRecords));
@@ -2276,6 +2290,7 @@ static void Fill2PRecords(struct RankingHall2P *dst, s32 lvlMode)
     }
 
     Free(playerHallRecords);
+#endif //FREE_RECORD_MIXING_HALL_RECORDS
 }
 
 static void PrintHallRecords(s32 hallFacilityId, s32 lvlMode)
@@ -2325,6 +2340,7 @@ void ScrollRankingHallRecordsWindow(void)
 
 void ClearRankingHallRecords(void)
 {
+#if FREE_RECORD_MIXING_HALL_RECORDS == FALSE
     s32 i, j, k;
 
     // UB: Passing 0 as a pointer instead of a pointer holding a value of 0.
@@ -2359,6 +2375,7 @@ void ClearRankingHallRecords(void)
             gSaveBlock2Ptr->hallRecords2P[j][k].winStreak = 0;
         }
     }
+#endif //FREE_RECORD_MIXING_HALL_RECORDS
 }
 
 void SaveGameFrontier(void)
@@ -2392,7 +2409,7 @@ u8 GetFrontierBrainTrainerPicIndex(void)
     else
         facility = VarGet(VAR_FRONTIER_FACILITY);
 
-    return gTrainers[sFrontierBrainTrainerIds[facility]].trainerPic;
+    return GetTrainerPicFromId(sFrontierBrainTrainerIds[facility]);
 }
 
 u8 GetFrontierBrainTrainerClass(void)
@@ -2404,21 +2421,23 @@ u8 GetFrontierBrainTrainerClass(void)
     else
         facility = VarGet(VAR_FRONTIER_FACILITY);
 
-    return gTrainers[sFrontierBrainTrainerIds[facility]].trainerClass;
+    return GetTrainerClassFromId(sFrontierBrainTrainerIds[facility]);
 }
 
 void CopyFrontierBrainTrainerName(u8 *dst)
 {
     s32 i;
     s32 facility;
+    const u8 *trainerName;
 
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         facility = GetRecordedBattleFrontierFacility();
     else
         facility = VarGet(VAR_FRONTIER_FACILITY);
 
+    trainerName = GetTrainerNameFromId(sFrontierBrainTrainerIds[facility]);
     for (i = 0; i < PLAYER_NAME_LENGTH; i++)
-        dst[i] = gTrainers[sFrontierBrainTrainerIds[facility]].trainerName[i];
+        dst[i] = trainerName[i];
 
     dst[i] = EOS;
 }
@@ -2462,10 +2481,7 @@ void CreateFrontierBrainPokemon(void)
 
         do
         {
-            do
-            {
-                j = Random32(); //should just be one while loop, but that doesn't match
-            } while (IsShinyOtIdPersonality(FRONTIER_BRAIN_OTID, j));
+            j = Random32(); //should just be one while loop, but that doesn't match
         } while (sFrontierBrainsMons[facility][symbol][i].nature != GetNatureFromPersonality(j));
         CreateMon(&gEnemyParty[monPartyId],
                   sFrontierBrainsMons[facility][symbol][i].species,
@@ -2480,10 +2496,12 @@ void CreateFrontierBrainPokemon(void)
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
             SetMonMoveSlot(&gEnemyParty[monPartyId], sFrontierBrainsMons[facility][symbol][i].moves[j], j);
-            if (sFrontierBrainsMons[facility][symbol][i].moves[j] == MOVE_FRUSTRATION)
+            if (gMovesInfo[sFrontierBrainsMons[facility][symbol][i].moves[j]].effect == EFFECT_FRUSTRATION)
                 friendship = 0;
         }
         SetMonData(&gEnemyParty[monPartyId], MON_DATA_FRIENDSHIP, &friendship);
+        j = FALSE;
+        SetMonData(&gPlayerParty[MULTI_PARTY_SIZE + i], MON_DATA_IS_SHINY, &j);
         CalculateMonStats(&gEnemyParty[monPartyId]);
         monPartyId++;
     }

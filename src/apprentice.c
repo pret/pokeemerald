@@ -207,14 +207,7 @@ static void ShuffleApprenticeSpecies(void)
     for (i = 0; i < ARRAY_COUNT(species); i++)
         species[i] = i;
 
-    // Shuffle the possible species an arbitrary 50 times
-    for (i = 0; i < 50; i++)
-    {
-        u8 temp;
-        u8 rand1 = Random() % ARRAY_COUNT(species);
-        u8 rand2 = Random() % ARRAY_COUNT(species);
-        SWAP(species[rand1], species[rand2], temp);
-    }
+    Shuffle(species, APPRENTICE_SPECIES_COUNT, sizeof(species[0]));
 
     for (i = 0; i < MULTI_PARTY_SIZE; i++)
         PLAYER_APPRENTICE.speciesIds[i] = ((species[i * 2] & 0xF) << 4) | ((species[i * 2 + 1]) & 0xF);
@@ -254,33 +247,19 @@ static void SetRandomQuestionData(void)
     u8 questionOrder[APPRENTICE_MAX_QUESTIONS + 1];
     u8 partyOrder[MULTI_PARTY_SIZE];
     u8 partySlot;
+    u8 rand;
     u8 i, j;
-    u8 rand1, rand2;
     u8 id;
 
     for (i = 0; i < ARRAY_COUNT(partyOrder); i++)
         partyOrder[i] = i;
 
-    // Shuffle the party an arbitrary 10 times
-    for (i = 0; i < 10; i++)
-    {
-        u8 temp;
-        rand1 = Random() % ARRAY_COUNT(partyOrder);
-        rand2 = Random() % ARRAY_COUNT(partyOrder);
-        SWAP(partyOrder[rand1], partyOrder[rand2], temp);
-    }
+    Shuffle(partyOrder, MULTI_PARTY_SIZE, sizeof(partyOrder[0]));
 
     for (i = 0; i < ARRAY_COUNT(questionOrder); i++)
         questionOrder[i] = sQuestionPossibilities[i];
 
-    // Shuffle the questions an arbitrary 50 times
-    for (i = 0; i < 50; i++)
-    {
-        u8 temp;
-        rand1 = Random() % ARRAY_COUNT(questionOrder);
-        rand2 = Random() % ARRAY_COUNT(questionOrder);
-        SWAP(questionOrder[rand1], questionOrder[rand2], temp);
-    }
+    Shuffle(questionOrder, APPRENTICE_MAX_QUESTIONS + 1, sizeof(questionOrder[0]));
 
     gApprenticePartyMovesData = AllocZeroed(sizeof(*gApprenticePartyMovesData));
     gApprenticePartyMovesData->moveCounter = 0;
@@ -302,16 +281,16 @@ static void SetRandomQuestionData(void)
             {
                 do
                 {
-                    rand1 = Random() % MAX_MON_MOVES;
+                    rand = Random() % MAX_MON_MOVES;
                     for (j = 0; j < gApprenticePartyMovesData->moveCounter + 1; j++)
                     {
-                        if (gApprenticePartyMovesData->moveSlots[id][j] == rand1)
+                        if (gApprenticePartyMovesData->moveSlots[id][j] == rand)
                             break;
                     }
                 } while (j != gApprenticePartyMovesData->moveCounter + 1);
 
-                gApprenticePartyMovesData->moveSlots[id][gApprenticePartyMovesData->moveCounter] = rand1;
-                PLAYER_APPRENTICE.questions[i].moveSlot = rand1;
+                gApprenticePartyMovesData->moveSlots[id][gApprenticePartyMovesData->moveCounter] = rand;
+                PLAYER_APPRENTICE.questions[i].moveSlot = rand;
                 PLAYER_APPRENTICE.questions[i].data = GetRandomAlternateMove(PLAYER_APPRENTICE.questions[i].monId);
             }
         }
@@ -605,8 +584,8 @@ static void CreateApprenticeMenu(u8 menu)
     case APPRENTICE_ASK_MOVES:
         left = 17;
         top = 8;
-        strings[0] = gMoveNames[gApprenticeQuestionData->moveId1];
-        strings[1] = gMoveNames[gApprenticeQuestionData->moveId2];
+        strings[0] = GetMoveName(gApprenticeQuestionData->moveId1);
+        strings[1] = GetMoveName(gApprenticeQuestionData->moveId2);
         break;
     case APPRENTICE_ASK_GIVE:
         left = 18;
@@ -1062,10 +1041,10 @@ static void ApprenticeBufferString(void)
         StringCopy(stringDst, GetSpeciesName(gApprenticeQuestionData->speciesId));
         break;
     case APPRENTICE_BUFF_MOVE1:
-        StringCopy(stringDst, gMoveNames[gApprenticeQuestionData->moveId1]);
+        StringCopy(stringDst, GetMoveName(gApprenticeQuestionData->moveId1));
         break;
     case APPRENTICE_BUFF_MOVE2:
-        StringCopy(stringDst, gMoveNames[gApprenticeQuestionData->moveId2]);
+        StringCopy(stringDst, GetMoveName(gApprenticeQuestionData->moveId2));
         break;
     case APPRENTICE_BUFF_ITEM:
         StringCopy(stringDst, ItemId_GetName(PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].data));

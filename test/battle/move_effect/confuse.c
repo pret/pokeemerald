@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_TEETER_DANCE].effect == EFFECT_CONFUSE);
+    ASSUME(gMovesInfo[MOVE_TEETER_DANCE].effect == EFFECT_CONFUSE);
 }
 
 SINGLE_BATTLE_TEST("Teeter Dance confuses target")

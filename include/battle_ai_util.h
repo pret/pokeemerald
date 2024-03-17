@@ -1,10 +1,6 @@
 #ifndef GUARD_BATTLE_AI_UTIL_H
 #define GUARD_BATTLE_AI_UTIL_H
 
-// for AI_WhoStrikesFirst
-#define AI_IS_FASTER   0
-#define AI_IS_SLOWER   1
-
 #define FOE(battler) ((BATTLE_OPPOSITE(battler)) & BIT_SIDE)
 
 #define AI_STRIKES_FIRST(battlerAi, battlerDef, move)((AI_WhoStrikesFirst(battlerAi, battlerDef, move) == AI_IS_FASTER))
@@ -30,8 +26,10 @@ bool32 IsTruantMonVulnerable(u32 battlerAI, u32 opposingBattler);
 bool32 AtMaxHp(u32 battler);
 u32 GetHealthPercentage(u32 battler);
 bool32 IsBattlerTrapped(u32 battler, bool32 switching);
-u32 AI_WhoStrikesFirst(u32 battlerAI, u32 battler2, u32 moveConsidered);
+s32 AI_WhoStrikesFirst(u32 battlerAI, u32 battler2, u32 moveConsidered);
 bool32 CanTargetFaintAi(u32 battlerDef, u32 battlerAtk);
+u32 NoOfHitsForTargetToFaintAI(u32 battlerDef, u32 battlerAtk);
+u32 GetBestDmgMoveFromBattler(u32 battlerAtk, u32 battlerDef);
 bool32 CanTargetMoveFaintAi(u32 move, u32 battlerDef, u32 battlerAtk, u32 nHits);
 bool32 CanTargetFaintAiWithMod(u32 battlerDef, u32 battlerAtk, s32 hpMod, s32 dmgMod);
 s32 AI_DecideKnownAbilityForTurn(u32 battlerId);
@@ -59,12 +57,10 @@ bool32 ShouldRestoreHpBerry(u32 battlerAtk, u32 item);
 bool32 IsStatBoostingBerry(u32 item);
 bool32 CanKnockOffItem(u32 battler, u32 item);
 bool32 IsAbilityOfRating(u32 ability, s8 rating);
-s8 GetAbilityRating(u32 ability);
 bool32 AI_IsAbilityOnSide(u32 battlerId, u32 ability);
 bool32 AI_MoveMakesContact(u32 ability, u32 holdEffect, u32 move);
 u32 AI_GetBattlerMoveTargetType(u32 battlerId, u32 move);
 bool32 ShouldUseZMove(u32 battlerAtk, u32 battlerDef, u32 chosenMove);
-u32 AI_CalcSecondaryEffectChance(u32 battler, u32 secondaryEffectChance);
 
 // stat stage checks
 bool32 AnyStatIsRaised(u32 battlerId);
@@ -84,8 +80,8 @@ bool32 ShouldLowerEvasion(u32 battlerAtk, u32 battlerDef, u32 defAbility);
 
 // move checks
 bool32 IsAffectedByPowder(u32 battler, u32 ability, u32 holdEffect);
-bool32 MovesWithSplitUnusable(u32 attacker, u32 target, u32 split);
-u32 AI_WhichMoveBetter(u32 move1, u32 move2, u32 battlerAtk, u32 battlerDef, s32 noOfHitsToKo);
+bool32 MovesWithCategoryUnusable(u32 attacker, u32 target, u32 category);
+s32 AI_WhichMoveBetter(u32 move1, u32 move2, u32 battlerAtk, u32 battlerDef, s32 noOfHitsToKo);
 s32 AI_CalcDamageSaveBattlers(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectiveness, bool32 considerZPower);
 s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectiveness, bool32 considerZPower, u32 weather);
 bool32 AI_IsDamagedByRecoil(u32 battler);
@@ -98,11 +94,14 @@ u32 AI_GetMoveEffectiveness(u32 move, u32 battlerAtk, u32 battlerDef);
 u16 *GetMovesArray(u32 battler);
 bool32 IsConfusionMoveEffect(u32 moveEffect);
 bool32 HasMove(u32 battlerId, u32 move);
-bool32 HasOnlyMovesWithSplit(u32 battlerId, u32 split, bool32 onlyOffensive);
-bool32 HasMoveWithSplit(u32 battler, u32 split);
+bool32 HasOnlyMovesWithCategory(u32 battlerId, u32 category, bool32 onlyOffensive);
+bool32 HasMoveWithCategory(u32 battler, u32 category);
 bool32 HasMoveWithType(u32 battler, u32 type);
-bool32 HasMoveWithTypeAndSplit(u32 battler, u32 type, u32 split);
 bool32 HasMoveEffect(u32 battlerId, u32 moveEffect);
+bool32 HasMoveEffectANDArg(u32 battlerId, u32 effect, u32 argument);
+bool32 HasMoveWithAdditionalEffect(u32 battlerId, u32 moveEffect);
+bool32 HasMoveWithCriticalHitChance(u32 battlerId);
+bool32 HasMoveWithMoveEffectExcept(u32 battlerId, u32 moveEffect, u32 exception);
 bool32 HasMoveWithLowAccuracy(u32 battlerAtk, u32 battlerDef, u32 accCheck, bool32 ignoreStatus, u32 atkAbility, u32 defAbility, u32 atkHoldEffect, u32 defHoldEffect);
 bool32 IsAromaVeilProtectedMove(u32 move);
 bool32 IsNonVolatileStatusMoveEffect(u32 moveEffect);
@@ -110,8 +109,7 @@ bool32 IsStatLoweringMoveEffect(u32 moveEffect);
 bool32 IsMoveRedirectionPrevented(u32 move, u32 atkAbility);
 bool32 IsMoveEncouragedToHit(u32 battlerAtk, u32 battlerDef, u32 move);
 bool32 IsHazardMoveEffect(u32 moveEffect);
-bool32 IsEncoreEncouragedEffect(u32 moveEffect);
-bool32 IsChargingMove(u32 battlerAtk, u32 effect);
+bool32 IsTwoTurnNotSemiInvulnerableMove(u32 battlerAtk, u32 move);
 void ProtectChecks(u32 battlerAtk, u32 battlerDef, u32 move, u32 predictedMove, s32 *score);
 bool32 ShouldSetSandstorm(u32 battler, u32 ability, u32 holdEffect);
 bool32 ShouldSetHail(u32 battler, u32 ability, u32 holdEffect);
@@ -121,7 +119,7 @@ bool32 ShouldSetSun(u32 battlerAtk, u32 atkAbility, u32 holdEffect);
 bool32 HasSleepMoveWithLowAccuracy(u32 battlerAtk, u32 battlerDef);
 bool32 IsHealingMove(u32 move);
 bool32 HasHealingEffect(u32 battler);
-bool32 IsTrappingMoveEffect(u32 effect);
+bool32 IsTrappingMove(u32 move);
 bool32 HasTrappingMoveEffect(u32 battler);
 bool32 ShouldFakeOut(u32 battlerAtk, u32 battlerDef, u32 move);
 bool32 HasThawingMove(u32 battler);
@@ -131,7 +129,6 @@ bool32 IsAttackBoostMoveEffect(u32 effect);
 bool32 IsUngroundingEffect(u32 effect);
 bool32 IsSemiInvulnerable(u32 battlerDef, u32 move);
 bool32 HasSubstituteIgnoringMove(u32 battler);
-bool32 HasSoundMove(u32 battler);
 bool32 HasHighCritRatioMove(u32 battler);
 bool32 HasMagicCoatAffectedMove(u32 battler);
 bool32 HasSnatchAffectedMove(u32 battler);
@@ -177,8 +174,8 @@ struct BattlePokemon *AllocSaveBattleMons(void);
 void FreeRestoreBattleMons(struct BattlePokemon *savedBattleMons);
 s32 CountUsablePartyMons(u32 battlerId);
 bool32 IsPartyFullyHealedExceptBattler(u32 battler);
-bool32 PartyHasMoveSplit(u32 battlerId, u32 split);
-bool32 SideHasMoveSplit(u32 battlerId, u32 split);
+bool32 PartyHasMoveCategory(u32 battlerId, u32 category);
+bool32 SideHasMoveCategory(u32 battlerId, u32 category);
 
 // score increases
 void IncreaseStatUpScore(u32 battlerAtk, u32 battlerDef, u32 statId, s32 *score);
@@ -190,5 +187,10 @@ void IncreaseConfusionScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score
 void IncreaseFrostbiteScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score);
 
 s32 AI_CalcPartyMonDamage(u32 move, u32 battlerAtk, u32 battlerDef, struct BattlePokemon switchinCandidate, bool8 isPartyMonAttacker);
+s32 AI_CheckMoveEffects(u32 battlerAtk, u32 battlerDef, u32 move, s32 score, struct AiLogicData *aiData, u32 predictedMove, bool32 isDoubleBattle);
+s32 AI_TryToClearStats(u32 battlerAtk, u32 battlerDef, bool32 isDoubleBattle);
+bool32 AI_ShouldCopyStatChanges(u32 battlerAtk, u32 battlerDef);
+bool32 AI_ShouldSetUpHazards(u32 battlerAtk, u32 battlerDef, struct AiLogicData *aiData);
+void IncreaseTidyUpScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score);
 
 #endif //GUARD_BATTLE_AI_UTIL_H

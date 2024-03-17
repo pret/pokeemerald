@@ -30,6 +30,7 @@ struct LoadedSaveData
 };
 
 // EWRAM DATA
+EWRAM_DATA struct SaveBlock3 gSaveblock3 = {};
 EWRAM_DATA struct SaveBlock2ASLR gSaveblock2 = {0};
 EWRAM_DATA struct SaveBlock1ASLR gSaveblock1 = {0};
 EWRAM_DATA struct PokemonStorageASLR gPokemonStorage = {0};
@@ -41,6 +42,7 @@ EWRAM_DATA u32 gLastEncryptionKey = 0;
 bool32 gFlashMemoryPresent;
 struct SaveBlock1 *gSaveBlock1Ptr;
 struct SaveBlock2 *gSaveBlock2Ptr;
+IWRAM_INIT struct SaveBlock3 *gSaveBlock3Ptr = &gSaveblock3;
 struct PokemonStorage *gPokemonStoragePtr;
 
 // code
@@ -55,6 +57,11 @@ void CheckForFlashMemory(void)
     {
         gFlashMemoryPresent = FALSE;
     }
+}
+
+void ClearSav3(void)
+{
+    CpuFill16(0, &gSaveblock3, sizeof(struct SaveBlock3));
 }
 
 void ClearSav2(void)
@@ -127,7 +134,7 @@ void MoveSaveBlocks_ResetHeap(void)
     gMain.vblankCallback = vblankCB;
 
     // create a new encryption key
-    encryptionKey = (Random() << 16) + (Random());
+    encryptionKey = Random32();
     ApplyNewEncryptionKeyToAllEncryptedData(encryptionKey);
     gSaveBlock2Ptr->encryptionKey = encryptionKey;
 }
@@ -175,7 +182,17 @@ void LoadPlayerParty(void)
     gPlayerPartyCount = gSaveBlock1Ptr->playerPartyCount;
 
     for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u32 data;
         gPlayerParty[i] = gSaveBlock1Ptr->playerParty[i];
+
+        // TODO: Turn this into a save migration once those are available.
+        // At which point we can remove hp and status from Pokemon entirely.
+        data = gPlayerParty[i].maxHP - gPlayerParty[i].hp;
+        SetBoxMonData(&gPlayerParty[i].box, MON_DATA_HP_LOST, &data);
+        data = gPlayerParty[i].status;
+        SetBoxMonData(&gPlayerParty[i].box, MON_DATA_STATUS, &data);
+    }
 }
 
 void SaveObjectEvents(void)

@@ -120,6 +120,7 @@ top:
         MoveSaveBlocks_ResetHeap();
         ClearSav1();
         ClearSav2();
+        ClearSav3();
 
         gIntrTable[7] = Intr_Timer2;
 
@@ -404,11 +405,21 @@ static void FunctionTest_TearDown(void *data)
     FREE_AND_SET_NULL(gFunctionTestRunnerState);
 }
 
+static bool32 FunctionTest_CheckProgress(void *data)
+{
+    bool32 madeProgress;
+    (void)data;
+    madeProgress = gFunctionTestRunnerState->checkProgressParameter < gFunctionTestRunnerState->runParameter;
+    gFunctionTestRunnerState->checkProgressParameter = gFunctionTestRunnerState->runParameter;
+    return madeProgress;
+}
+
 const struct TestRunner gFunctionTestRunner =
 {
     .setUp = FunctionTest_SetUp,
     .run = FunctionTest_Run,
     .tearDown = FunctionTest_TearDown,
+    .checkProgress = FunctionTest_CheckProgress,
 };
 
 static void Assumptions_Run(void *data)

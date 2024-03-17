@@ -18,7 +18,7 @@ SINGLE_BATTLE_TEST("Sand Veil increases evasion during sandstorm")
 {
     PASSES_RANDOMLY(4, 5, RNG_ACCURACY);
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_POUND].accuracy == 100);
+        ASSUME(gMovesInfo[MOVE_POUND].accuracy == 100);
         PLAYER(SPECIES_SANDSHREW) { Ability(ABILITY_SAND_VEIL); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

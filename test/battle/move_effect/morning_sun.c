@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_MORNING_SUN].effect == EFFECT_MORNING_SUN);
+    ASSUME(gMovesInfo[MOVE_MORNING_SUN].effect == EFFECT_MORNING_SUN);
 }
 
 SINGLE_BATTLE_TEST("Morning Sun recovers 1/2 of the user's max HP")

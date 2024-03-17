@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_THUNDER_SHOCK].effect == EFFECT_PARALYZE_HIT);
+    ASSUME(MoveHasAdditionalEffect(MOVE_THUNDER_SHOCK, MOVE_EFFECT_PARALYSIS) == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Thunder Shock inflicts paralysis")
@@ -37,5 +37,34 @@ SINGLE_BATTLE_TEST("Thunder Shock cannot paralyze an Electric-type")
             ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponent);
             STATUS_ICON(opponent, paralysis: TRUE);
         }
+    }
+}
+
+#if B_STATUS_TYPE_IMMUNITY > GEN_1
+SINGLE_BATTLE_TEST("Body Slam should paralyze Normal-types")
+#else
+SINGLE_BATTLE_TEST("Body Slam shouldn't paralyze Normal-types")
+#endif
+{
+    GIVEN {
+        ASSUME(gSpeciesInfo[SPECIES_TAUROS].types[0] == TYPE_NORMAL);
+        ASSUME(MoveHasAdditionalEffect(MOVE_BODY_SLAM, MOVE_EFFECT_PARALYSIS) == TRUE);
+        ASSUME(gMovesInfo[MOVE_BODY_SLAM].type == TYPE_NORMAL);
+        PLAYER(SPECIES_TAUROS);
+        OPPONENT(SPECIES_TAUROS);
+    } WHEN {
+        TURN { MOVE(player, MOVE_BODY_SLAM); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_BODY_SLAM, player);
+        HP_BAR(opponent);
+        #if B_STATUS_TYPE_IMMUNITY > GEN_1
+            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponent);
+            STATUS_ICON(opponent, paralysis: TRUE);
+        #else
+            NONE_OF {
+                ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponent);
+                STATUS_ICON(opponent, paralysis: TRUE);
+            }
+        #endif
     }
 }

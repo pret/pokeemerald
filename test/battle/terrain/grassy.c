@@ -18,8 +18,8 @@ SINGLE_BATTLE_TEST("Grassy Terrain recovers 1/16th HP at end of turn")
 SINGLE_BATTLE_TEST("Grassy Terrain activates Grassy Seed and Mimicry")
 {
     GIVEN {
-        ASSUME(gItems[ITEM_GRASSY_SEED].holdEffect == HOLD_EFFECT_SEEDS);
-        ASSUME(gItems[ITEM_GRASSY_SEED].holdEffectParam == HOLD_EFFECT_PARAM_GRASSY_TERRAIN);
+        ASSUME(gItemsInfo[ITEM_GRASSY_SEED].holdEffect == HOLD_EFFECT_SEEDS);
+        ASSUME(gItemsInfo[ITEM_GRASSY_SEED].holdEffectParam == HOLD_EFFECT_PARAM_GRASSY_TERRAIN);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_GRASSY_SEED); }
         OPPONENT(SPECIES_STUNFISK_GALARIAN) { Ability(ABILITY_MIMICRY); }
     } WHEN {
@@ -67,8 +67,8 @@ SINGLE_BATTLE_TEST("Grassy Terrain decreases power of Earthquake and Bulldoze by
     PARAMETRIZE { terrain = FALSE; move = MOVE_BULLDOZE; } // 2
     PARAMETRIZE { terrain = TRUE; move = MOVE_BULLDOZE; } // 3
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_EARTHQUAKE].effect == EFFECT_EARTHQUAKE);
-        ASSUME(gBattleMoves[MOVE_BULLDOZE].effect == EFFECT_BULLDOZE);
+        ASSUME(gMovesInfo[MOVE_EARTHQUAKE].effect == EFFECT_EARTHQUAKE);
+        ASSUME(gMovesInfo[MOVE_BULLDOZE].effect == EFFECT_BULLDOZE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Revive restores a fainted battler's HP to half")
 {
     GIVEN {
-        ASSUME(gItems[ITEM_REVIVE].battleUsage == EFFECT_ITEM_REVIVE);
+        ASSUME(gItemsInfo[ITEM_REVIVE].battleUsage == EFFECT_ITEM_REVIVE);
         PLAYER(SPECIES_WYNAUT) { HP(1); MaxHP(200); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -22,7 +22,7 @@ SINGLE_BATTLE_TEST("Revive restores a fainted battler's HP to half")
 SINGLE_BATTLE_TEST("Max Revive restores a fainted battler's HP fully")
 {
     GIVEN {
-        ASSUME(gItems[ITEM_MAX_REVIVE].battleUsage == EFFECT_ITEM_REVIVE);
+        ASSUME(gItemsInfo[ITEM_MAX_REVIVE].battleUsage == EFFECT_ITEM_REVIVE);
         PLAYER(SPECIES_WYNAUT) { HP(1); MaxHP(200); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -40,7 +40,7 @@ SINGLE_BATTLE_TEST("Max Revive restores a fainted battler's HP fully")
 SINGLE_BATTLE_TEST("Revival Herb restores a fainted battler's HP fully")
 {
     GIVEN {
-        ASSUME(gItems[ITEM_REVIVAL_HERB].battleUsage == EFFECT_ITEM_REVIVE);
+        ASSUME(gItemsInfo[ITEM_REVIVAL_HERB].battleUsage == EFFECT_ITEM_REVIVE);
         PLAYER(SPECIES_WYNAUT) { HP(1); MaxHP(200); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -58,7 +58,7 @@ SINGLE_BATTLE_TEST("Revival Herb restores a fainted battler's HP fully")
 SINGLE_BATTLE_TEST("Max Honey restores a fainted battler's HP fully")
 {
     GIVEN {
-        ASSUME(gItems[ITEM_MAX_HONEY].battleUsage == EFFECT_ITEM_REVIVE);
+        ASSUME(gItemsInfo[ITEM_MAX_HONEY].battleUsage == EFFECT_ITEM_REVIVE);
         PLAYER(SPECIES_WYNAUT) { HP(1); MaxHP(200); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);

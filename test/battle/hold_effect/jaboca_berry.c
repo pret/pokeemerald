@@ -3,8 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gItems[ITEM_JABOCA_BERRY].holdEffect == HOLD_EFFECT_JABOCA_BERRY);
-    ASSUME(gBattleMoves[MOVE_TACKLE].split == SPLIT_PHYSICAL);
+    ASSUME(gItemsInfo[ITEM_JABOCA_BERRY].holdEffect == HOLD_EFFECT_JABOCA_BERRY);
+    ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
 }
 
 SINGLE_BATTLE_TEST("Jaboca Berry causes the attacker to lose 1/8 of its max HP if a physical move was used")
@@ -16,7 +16,7 @@ SINGLE_BATTLE_TEST("Jaboca Berry causes the attacker to lose 1/8 of its max HP i
     PARAMETRIZE { move = MOVE_TACKLE; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SWIFT].split == SPLIT_SPECIAL);
+        ASSUME(gMovesInfo[MOVE_SWIFT].category == DAMAGE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_JABOCA_BERRY); }
     } WHEN {
@@ -44,7 +44,7 @@ SINGLE_BATTLE_TEST("Jaboca Berry tirggers before Bug Bite can steal it")
 {
     KNOWN_FAILING;
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_BUG_BITE].split == SPLIT_PHYSICAL);
+        ASSUME(gMovesInfo[MOVE_BUG_BITE].category == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_JABOCA_BERRY); }
     } WHEN {

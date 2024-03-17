@@ -104,7 +104,10 @@
 #define B_OUTCOME_LINK_BATTLE_RAN      (1 << 7) // 128
 
 // Non-volatile status conditions
-// These persist remain outside of battle and after switching out
+// These remain outside of battle and after switching out.
+// If a new STATUS1 is added here, it should also be added to
+// sCompressedStatuses in src/pokemon.c or else it will be lost outside
+// of battle.
 #define STATUS1_NONE             0
 #define STATUS1_SLEEP            (1 << 0 | 1 << 1 | 1 << 2) // First 3 bits (Number of turns to sleep)
 #define STATUS1_SLEEP_TURN(num)  ((num) << 0) // Just for readability (or if rearranging statuses)
@@ -126,7 +129,7 @@
 #define STATUS2_FLINCHED              (1 << 3)
 #define STATUS2_UPROAR                (1 << 4 | 1 << 5 | 1 << 6)
 #define STATUS2_UPROAR_TURN(num)      ((num) << 4)
-#define STATUS2_UNUSED                (1 << 7)
+#define STATUS2_TORMENT               (1 << 7)
 #define STATUS2_BIDE                  (1 << 8 | 1 << 9)
 #define STATUS2_BIDE_TURN(num)        (((num) << 8) & STATUS2_BIDE)
 #define STATUS2_LOCK_CONFUSE          (1 << 10 | 1 << 11) // e.g. Thrash
@@ -136,7 +139,7 @@
 #define STATUS2_POWDER                (1 << 14)
 #define STATUS2_INFATUATION           (1 << 16 | 1 << 17 | 1 << 18 | 1 << 19)  // 4 bits, one for every battler
 #define STATUS2_INFATUATED_WITH(battler) (gBitTable[battler] << 16)
-#define STATUS2_FOCUS_ENERGY          (1 << 20)
+#define STATUS2_DEFENSE_CURL          (1 << 20)
 #define STATUS2_TRANSFORMED           (1 << 21)
 #define STATUS2_RECHARGE              (1 << 22)
 #define STATUS2_RAGE                  (1 << 23)
@@ -146,8 +149,9 @@
 #define STATUS2_NIGHTMARE             (1 << 27)
 #define STATUS2_CURSED                (1 << 28)
 #define STATUS2_FORESIGHT             (1 << 29)
-#define STATUS2_DEFENSE_CURL          (1 << 30)
-#define STATUS2_TORMENT               (1 << 31)
+#define STATUS2_DRAGON_CHEER          (1 << 30)
+#define STATUS2_FOCUS_ENERGY          (1 << 31)
+#define STATUS2_FOCUS_ENERGY_ANY      (STATUS2_DRAGON_CHEER | STATUS2_FOCUS_ENERGY)
 
 #define STATUS3_LEECHSEED_BATTLER       (1 << 0 | 1 << 1) // The battler to receive HP from Leech Seed
 #define STATUS3_LEECHSEED               (1 << 2)
@@ -321,6 +325,7 @@
 #define MOVE_EFFECT_TOXIC               6
 #define MOVE_EFFECT_FROSTBITE           7
 #define PRIMARY_STATUS_MOVE_EFFECT      MOVE_EFFECT_FROSTBITE // All above move effects apply primary status
+#define MOVE_EFFECT_FREEZE_OR_FROSTBITE (B_USE_FROSTBITE == TRUE ? MOVE_EFFECT_FROSTBITE : MOVE_EFFECT_FREEZE)
 #define MOVE_EFFECT_CONFUSION           8
 #define MOVE_EFFECT_FLINCH              9
 #define MOVE_EFFECT_TRI_ATTACK          10
@@ -342,14 +347,14 @@
 #define MOVE_EFFECT_SP_DEF_MINUS_1      26
 #define MOVE_EFFECT_ACC_MINUS_1         27
 #define MOVE_EFFECT_EVS_MINUS_1         28
-#define MOVE_EFFECT_BURN_UP             29
+#define MOVE_EFFECT_REMOVE_ARG_TYPE     29
 #define MOVE_EFFECT_RECHARGE            30
 #define MOVE_EFFECT_RAGE                31
 #define MOVE_EFFECT_STEAL_ITEM          32
 #define MOVE_EFFECT_PREVENT_ESCAPE      33
 #define MOVE_EFFECT_NIGHTMARE           34
 #define MOVE_EFFECT_ALL_STATS_UP        35
-#define MOVE_EFFECT_RAPIDSPIN           36
+#define MOVE_EFFECT_RAPID_SPIN          36
 #define MOVE_EFFECT_REMOVE_STATUS       37
 #define MOVE_EFFECT_ATK_DEF_DOWN        38
 #define MOVE_EFFECT_ATK_PLUS_2          39
@@ -384,20 +389,21 @@
 #define MOVE_EFFECT_BUG_BITE            68
 #define MOVE_EFFECT_RECOIL_HP_25        69
 #define MOVE_EFFECT_TRAP_BOTH           70
-#define MOVE_EFFECT_DOUBLE_SHOCK        71
-#define MOVE_EFFECT_ROUND               72
-#define MOVE_EFFECT_STOCKPILE_WORE_OFF  73
-#define MOVE_EFFECT_DIRE_CLAW           74
-#define MOVE_EFFECT_STEALTH_ROCK        75
-#define MOVE_EFFECT_SPIKES              76
-#define MOVE_EFFECT_TRIPLE_ARROWS       77
-#define MOVE_EFFECT_SYRUP_BOMB          78
-#define MOVE_EFFECT_FLORAL_HEALING      79
+#define MOVE_EFFECT_ROUND               71
+#define MOVE_EFFECT_STOCKPILE_WORE_OFF  72
+#define MOVE_EFFECT_DIRE_CLAW           73
+#define MOVE_EFFECT_STEALTH_ROCK        74
+#define MOVE_EFFECT_SPIKES              75
+#define MOVE_EFFECT_SYRUP_BOMB          76
+#define MOVE_EFFECT_FLORAL_HEALING      77
+#define MOVE_EFFECT_SECRET_POWER        78
+#define MOVE_EFFECT_PSYCHIC_NOISE       79
 
 #define NUM_MOVE_EFFECTS                80
 
-#define MOVE_EFFECT_AFFECTS_USER        0x4000
-#define MOVE_EFFECT_CERTAIN             0x8000
+#define MOVE_EFFECT_AFFECTS_USER        0x2000
+#define MOVE_EFFECT_CERTAIN             0x4000
+#define MOVE_EFFECT_CONTINUE            0x8000
 
 // Battle terrain defines for gBattleTerrain.
 #define BATTLE_TERRAIN_GRASS            0
@@ -510,5 +516,18 @@
 
 // Constants for Torment
 #define PERMANENT_TORMENT   0xF
+
+// Constants for B_VAR_STARTING_STATUS
+// Timer value controlled by B_VAR_STARTING_STATUS_TIMER
+#define STARTING_STATUS_NONE                0
+#define STARTING_STATUS_ELECTRIC_TERRAIN    1
+#define STARTING_STATUS_MISTY_TERRAIN       2
+#define STARTING_STATUS_GRASSY_TERRAIN      3
+#define STARTING_STATUS_PSYCHIC_TERRAIN     4
+#define STARTING_STATUS_TRICK_ROOM          5
+#define STARTING_STATUS_MAGIC_ROOM          6
+#define STARTING_STATUS_WONDER_ROOM         7
+#define STARTING_STATUS_TAILWIND_PLAYER     8
+#define STARTING_STATUS_TAILWIND_OPPONENT   9
 
 #endif // GUARD_CONSTANTS_BATTLE_H

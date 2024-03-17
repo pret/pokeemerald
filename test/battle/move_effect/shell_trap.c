@@ -3,10 +3,10 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_SHELL_TRAP].effect == EFFECT_SHELL_TRAP);
-    ASSUME(gBattleMoves[MOVE_TACKLE].split == SPLIT_PHYSICAL);
-    ASSUME(gBattleMoves[MOVE_WATER_GUN].split == SPLIT_SPECIAL);
-    ASSUME(gBattleMoves[MOVE_LEER].split == SPLIT_STATUS);
+    ASSUME(gMovesInfo[MOVE_SHELL_TRAP].effect == EFFECT_SHELL_TRAP);
+    ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
+    ASSUME(gMovesInfo[MOVE_WATER_GUN].category == DAMAGE_CATEGORY_SPECIAL);
+    ASSUME(gMovesInfo[MOVE_LEER].category == DAMAGE_CATEGORY_STATUS);
 }
 
 SINGLE_BATTLE_TEST("Shell Trap activates only if hit by a physical move")
@@ -98,7 +98,7 @@ SINGLE_BATTLE_TEST("Shell Trap does not activate if battler faints before being 
 DOUBLE_BATTLE_TEST("Shell Trap activates immediately after being hit on turn 1 and attacks both opponents")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SHELL_TRAP].target == MOVE_TARGET_BOTH);
+        ASSUME(gMovesInfo[MOVE_SHELL_TRAP].target == MOVE_TARGET_BOTH);
         PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(2); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }
@@ -122,7 +122,7 @@ DOUBLE_BATTLE_TEST("Shell Trap activates immediately after being hit on turn 1 a
 DOUBLE_BATTLE_TEST("Shell Trap activates immediately after being hit on turn 2 and attacks both opponents")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SHELL_TRAP].target == MOVE_TARGET_BOTH);
+        ASSUME(gMovesInfo[MOVE_SHELL_TRAP].target == MOVE_TARGET_BOTH);
         PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(2); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }
@@ -146,7 +146,7 @@ DOUBLE_BATTLE_TEST("Shell Trap activates immediately after being hit on turn 2 a
 DOUBLE_BATTLE_TEST("Shell Trap activates immediately after being hit on turn 3 and attacks both opponents")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SHELL_TRAP].target == MOVE_TARGET_BOTH);
+        ASSUME(gMovesInfo[MOVE_SHELL_TRAP].target == MOVE_TARGET_BOTH);
         PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(7); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }

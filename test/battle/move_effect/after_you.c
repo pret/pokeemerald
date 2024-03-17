@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_AFTER_YOU].effect == EFFECT_AFTER_YOU);
+    ASSUME(gMovesInfo[MOVE_AFTER_YOU].effect == EFFECT_AFTER_YOU);
 }
 
 DOUBLE_BATTLE_TEST("After You makes the target move after user")

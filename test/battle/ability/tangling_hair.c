@@ -3,9 +3,9 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_TACKLE].effect == EFFECT_HIT);
-    ASSUME(gBattleMoves[MOVE_TACKLE].power > 0);
-    ASSUME(gBattleMoves[MOVE_TACKLE].makesContact == TRUE);
+    ASSUME(gMovesInfo[MOVE_TACKLE].effect == EFFECT_HIT);
+    ASSUME(gMovesInfo[MOVE_TACKLE].power > 0);
+    ASSUME(gMovesInfo[MOVE_TACKLE].makesContact == TRUE);
 }
 
 
@@ -17,7 +17,7 @@ SINGLE_BATTLE_TEST("Tangling Hair drops opposing mon's speed if ability user got
     PARAMETRIZE { move = MOVE_SWIFT; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SWIFT].makesContact == FALSE);
+        ASSUME(gMovesInfo[MOVE_SWIFT].makesContact == FALSE);
         PLAYER(SPECIES_DUGTRIO) { Ability(ABILITY_TANGLING_HAIR); }
         OPPONENT(SPECIES_WYNAUT);
     } WHEN {
@@ -35,7 +35,7 @@ SINGLE_BATTLE_TEST("Tangling Hair drops opposing mon's speed if ability user got
 SINGLE_BATTLE_TEST("Tangling Hair does not cause Rocky Helmet miss activation")
 {
     GIVEN {
-        ASSUME(gItems[ITEM_ROCKY_HELMET].holdEffect == HOLD_EFFECT_ROCKY_HELMET);
+        ASSUME(gItemsInfo[ITEM_ROCKY_HELMET].holdEffect == HOLD_EFFECT_ROCKY_HELMET);
         PLAYER(SPECIES_DUGTRIO) { Ability(ABILITY_TANGLING_HAIR); Item(ITEM_ROCKY_HELMET); }
         OPPONENT(SPECIES_WYNAUT);
     } WHEN {

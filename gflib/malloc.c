@@ -7,7 +7,7 @@
 static void *sHeapStart;
 static u32 sHeapSize;
 
-EWRAM_DATA u8 gHeap[HEAP_SIZE] = {0};
+ALIGNED(4) EWRAM_DATA u8 gHeap[HEAP_SIZE] = {0};
 
 void PutMemBlockHeader(void *block, struct MemBlock *prev, struct MemBlock *next, u32 size)
 {
@@ -38,18 +38,24 @@ void *AllocInternal(void *heapStart, u32 size, const char *location)
     if (size & 3)
         size = 4 * ((size / 4) + 1);
 
-    for (;;) {
+    for (;;)
+    {
         // Loop through the blocks looking for unused block that's big enough.
 
-        if (!pos->allocated) {
+        if (!pos->allocated)
+        {
             foundBlockSize = pos->size;
 
-            if (foundBlockSize >= size) {
-                if (foundBlockSize - size < 2 * sizeof(struct MemBlock)) {
+            if (foundBlockSize >= size)
+            {
+                if (foundBlockSize - size < 2 * sizeof(struct MemBlock))
+                {
                     // The block isn't much bigger than the requested size,
                     // so just use it.
                     pos->allocated = TRUE;
-                } else {
+                }
+                else
+                {
                     // The block is significantly bigger than the requested
                     // size, so split the rest into a separate block.
                     foundBlockSize -= sizeof(struct MemBlock);
@@ -104,15 +110,18 @@ void *AllocInternal(void *heapStart, u32 size, const char *location)
 
 void FreeInternal(void *heapStart, void *pointer)
 {
-    if (pointer) {
+    if (pointer)
+    {
         struct MemBlock *head = (struct MemBlock *)heapStart;
         struct MemBlock *block = (struct MemBlock *)((u8 *)pointer - sizeof(struct MemBlock));
         block->allocated = FALSE;
 
         // If the freed block isn't the last one, merge with the next block
         // if it's not in use.
-        if (block->next != head) {
-            if (!block->next->allocated) {
+        if (block->next != head)
+        {
+            if (!block->next->allocated)
+            {
                 block->size += sizeof(struct MemBlock) + block->next->size;
                 block->next->magic = 0;
                 block->next = block->next->next;
@@ -123,8 +132,10 @@ void FreeInternal(void *heapStart, void *pointer)
 
         // If the freed block isn't the first one, merge with the previous block
         // if it's not in use.
-        if (block != head) {
-            if (!block->prev->allocated) {
+        if (block != head)
+        {
+            if (!block->prev->allocated)
+            {
                 block->prev->next = block->next;
 
                 if (block->next != head)
@@ -141,7 +152,8 @@ void *AllocZeroedInternal(void *heapStart, u32 size, const char *location)
 {
     void *mem = AllocInternal(heapStart, size, location);
 
-    if (mem != NULL) {
+    if (mem != NULL)
+    {
         if (size & 3)
             size = 4 * ((size / 4) + 1);
 

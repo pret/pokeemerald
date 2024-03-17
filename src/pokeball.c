@@ -1204,10 +1204,10 @@ static u8 LaunchBallFadeMonTaskForPokeball(bool8 unFadeLater, u8 spritePalNum, u
     return LaunchBallFadeMonTask(unFadeLater, spritePalNum, selectedPalettes, BALL_POKE);
 }
 
-// Sprite data for the pokemon
+// Sprite data for the Pokémon
 #define sSpecies data[7]
 
-// Sprite data for the pokeball
+// Sprite data for the Poké Ball
 #define sMonSpriteId data[0]
 #define sDelay       data[1]
 #define sMonPalNum   data[2]
@@ -1217,7 +1217,7 @@ static u8 LaunchBallFadeMonTaskForPokeball(bool8 unFadeLater, u8 spritePalNum, u
 #define sFinalMonY   data[6]
 #define sTrigIdx     data[7]
 
-// Pokeball in Birch intro, and when receiving via trade
+// Poké Ball in Birch intro, and when receiving via trade
 void CreatePokeballSpriteToReleaseMon(u8 monSpriteId, u8 monPalNum, u8 x, u8 y, u8 oamPriority, u8 subpriority, u8 delay, u32 fadePalettes, u16 species)
 {
     u8 spriteId;

@@ -1,24 +1,112 @@
 #ifndef GUARD_RANDOM_H
 #define GUARD_RANDOM_H
 
-extern u32 gRngValue;
-extern u32 gRng2Value;
-
-//Returns a 16-bit pseudorandom number
-u16 Random(void);
-u16 Random2(void);
-
-//Returns a 32-bit pseudorandom number
-#define Random32() (Random() | (Random() << 16))
-
 // The number 1103515245 comes from the example implementation of rand and srand
 // in the ISO C standard.
 #define ISO_RANDOMIZE1(val)(1103515245 * (val) + 24691)
 #define ISO_RANDOMIZE2(val)(1103515245 * (val) + 12345)
 
+/* Some functions have been added to support HQ_RANDOM.
+*
+* If using HQ_RANDOM, you cannot call Random() in interrupt handlers safely.
+* AdvanceRandom() is provided to handle burning numbers in the VBlank handler
+* if you choose to do that, and can be used regardless of HQ_RANDOM setting.
+* If you need to use random numbers in the VBlank handler, a local state
+* should be used instead.
+*
+* LocalRandom(*val) allows you to have local random states that are the same
+* type as the global states regardless of HQ_RANDOM setting, which is useful
+* if you want to be able to set them from or assign them to gRngValue.
+* LocalRandomSeed(u32) returns a properly seeded rng_value_t.
+*
+* Random2_32() was added to HQ_RANDOM because the output of the generator is
+* always 32 bits and Random()/Random2() are just wrappers in that mode. It is
+* also available in non-HQ mode for consistency.
+*/
+
+#if HQ_RANDOM == TRUE
+struct Sfc32State {
+    u32 a;
+    u32 b;
+    u32 c;
+    u32 ctr;
+};
+
+typedef struct Sfc32State rng_value_t;
+
+#define RNG_VALUE_EMPTY {}
+
+// Calling this function directly is discouraged.
+// Use LocalRandom() instead.
+static inline u32 _SFC32_Next(struct Sfc32State *state)
+{
+    const u32 result = state->a + state->b + state->ctr++;
+    state->a = state->b ^ (state->b >> 9);
+    state->b = state->c * 9;
+    state->c = result + ((state->c << 21) | (state->c >> 11));
+    return result;
+}
+
+static inline u16 LocalRandom(rng_value_t *val)
+{
+    return _SFC32_Next(val) >> 16;
+}
+
+u32 Random32(void);
+u32 Random2_32(void);
+
+static inline u16 Random(void)
+{
+    return Random32() >> 16;
+}
+
+void SeedRng(u32 seed);
+void SeedRng2(u32 seed);
+rng_value_t LocalRandomSeed(u32 seed);
+
+static inline u16 Random2(void)
+{
+    return Random2_32() >> 16;
+}
+
+void AdvanceRandom(void);
+#else
+typedef u32 rng_value_t;
+
+#define RNG_VALUE_EMPTY 0
+
+//Returns a 16-bit pseudorandom number
+u16 Random(void);
+u16 Random2(void);
+
 //Sets the initial seed value of the pseudorandom number generator
 void SeedRng(u16 seed);
 void SeedRng2(u16 seed);
+
+//Returns a 32-bit pseudorandom number
+#define Random32() (Random() | (Random() << 16))
+#define Random2_32() (Random2() | (Random2() << 16))
+
+static inline u16 LocalRandom(rng_value_t *val)
+{
+    *val = ISO_RANDOMIZE1(*val);
+    return *val >> 16;
+}
+
+static inline void AdvanceRandom(void)
+{
+    Random();
+}
+
+static inline rng_value_t LocalRandomSeed(u32 seed)
+{
+    return seed;
+}
+
+#endif
+
+extern rng_value_t gRngValue;
+extern rng_value_t gRng2Value;
 
 void Shuffle8(void *data, size_t n);
 void Shuffle16(void *data, size_t n);
@@ -89,16 +177,17 @@ enum RandomTag
     RNG_POISON_POINT,
     RNG_RAMPAGE_TURNS,
     RNG_SECONDARY_EFFECT,
+    RNG_SECONDARY_EFFECT_2,
+    RNG_SECONDARY_EFFECT_3,
     RNG_SLEEP_TURNS,
     RNG_SPEED_TIE,
     RNG_STATIC,
     RNG_STENCH,
     RNG_TRI_ATTACK,
-    RNG_TRIPLE_ARROWS_DEFENSE_DOWN,
-    RNG_TRIPLE_ARROWS_FLINCH,
     RNG_QUICK_DRAW,
     RNG_QUICK_CLAW,
     RNG_TRACE,
+    RNG_FICKLE_BEAM,
 };
 
 #define RandomWeighted(tag, ...) \

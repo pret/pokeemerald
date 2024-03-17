@@ -2,6 +2,7 @@
 #define GUARD_LOAD_SAVE_H
 
 #include "pokemon_storage_system.h"
+#include "save.h"
 
 #define SAVEBLOCK_MOVE_RANGE    128
 
@@ -27,6 +28,7 @@ struct PokemonStorageASLR {
 
 extern struct SaveBlock1ASLR gSaveblock1;
 extern struct SaveBlock2ASLR gSaveblock2;
+extern struct SaveBlock3 gSaveblock3;
 extern struct PokemonStorageASLR gPokemonStorage;
 
 extern bool32 gFlashMemoryPresent;
@@ -35,6 +37,7 @@ extern struct SaveBlock2 *gSaveBlock2Ptr;
 extern struct PokemonStorage *gPokemonStoragePtr;
 
 void CheckForFlashMemory(void);
+void ClearSav3(void);
 void ClearSav2(void);
 void ClearSav1(void);
 void SetSaveBlocksPointers(u16 offset);

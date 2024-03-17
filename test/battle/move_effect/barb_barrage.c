@@ -3,7 +3,9 @@
 
 ASSUMPTIONS
 {
-    //ASSUME(gBattleMoves[MOVE_BARB_BARRAGE].effect == EFFECT_BARB_BARRAGE);
+    ASSUME(gMovesInfo[MOVE_BARB_BARRAGE].effect == EFFECT_DOUBLE_POWER_ON_ARG_STATUS);
+    ASSUME(gMovesInfo[MOVE_BARB_BARRAGE].argument == STATUS1_PSN_ANY);
+    ASSUME(MoveHasAdditionalEffect(MOVE_BARB_BARRAGE, MOVE_EFFECT_POISON) == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Barb Barrage inflicts poison")

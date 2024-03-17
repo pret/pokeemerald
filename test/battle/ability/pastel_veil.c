@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Pastel Veil prevents Poison Sting poison")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_POISON_STING].effect == EFFECT_POISON_HIT);
+        ASSUME(MoveHasAdditionalEffect(MOVE_POISON_STING, MOVE_EFFECT_POISON) == TRUE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_PONYTA_GALARIAN) { Ability(ABILITY_PASTEL_VEIL); }
     } WHEN {
@@ -18,7 +18,7 @@ SINGLE_BATTLE_TEST("Pastel Veil prevents Poison Sting poison")
 DOUBLE_BATTLE_TEST("Pastel Veil prevents Poison Sting poison on partner")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_POISON_STING].effect == EFFECT_POISON_HIT);
+        ASSUME(MoveHasAdditionalEffect(MOVE_POISON_STING, MOVE_EFFECT_POISON) == TRUE);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_PONYTA_GALARIAN) { Ability(ABILITY_PASTEL_VEIL); }
@@ -35,7 +35,7 @@ SINGLE_BATTLE_TEST("Pastel Veil immediately cures Mold Breaker poison")
 {
     KNOWN_FAILING;
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TOXIC].effect == EFFECT_TOXIC);
+        ASSUME(gMovesInfo[MOVE_TOXIC].effect == EFFECT_TOXIC);
         PLAYER(SPECIES_PINSIR) { Ability(ABILITY_MOLD_BREAKER); }
         OPPONENT(SPECIES_PONYTA_GALARIAN) { Ability(ABILITY_PASTEL_VEIL); }
     } WHEN {
@@ -53,7 +53,7 @@ SINGLE_BATTLE_TEST("Pastel Veil immediately cures Mold Breaker poison")
 DOUBLE_BATTLE_TEST("Pastel Veil does not cure Mold Breaker poison on partner")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TOXIC].effect == EFFECT_TOXIC);
+        ASSUME(gMovesInfo[MOVE_TOXIC].effect == EFFECT_TOXIC);
         PLAYER(SPECIES_PINSIR) { Ability(ABILITY_MOLD_BREAKER); }
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_PONYTA_GALARIAN) { Ability(ABILITY_PASTEL_VEIL); }
@@ -70,7 +70,7 @@ DOUBLE_BATTLE_TEST("Pastel Veil does not cure Mold Breaker poison on partner")
 SINGLE_BATTLE_TEST("Pastel Veil prevents Toxic bad poison")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TOXIC].effect == EFFECT_TOXIC);
+        ASSUME(gMovesInfo[MOVE_TOXIC].effect == EFFECT_TOXIC);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_PONYTA_GALARIAN) { Ability(ABILITY_PASTEL_VEIL); }
     } WHEN {
@@ -86,7 +86,7 @@ SINGLE_BATTLE_TEST("Pastel Veil prevents Toxic bad poison")
 DOUBLE_BATTLE_TEST("Pastel Veil prevents Toxic bad poison on partner")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TOXIC].effect == EFFECT_TOXIC);
+        ASSUME(gMovesInfo[MOVE_TOXIC].effect == EFFECT_TOXIC);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_PONYTA_GALARIAN) { Ability(ABILITY_PASTEL_VEIL); }
@@ -104,7 +104,7 @@ DOUBLE_BATTLE_TEST("Pastel Veil prevents Toxic bad poison on partner")
 SINGLE_BATTLE_TEST("Pastel Veil prevents Toxic Spikes poison")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TOXIC_SPIKES].effect == EFFECT_TOXIC_SPIKES);
+        ASSUME(gMovesInfo[MOVE_TOXIC_SPIKES].effect == EFFECT_TOXIC_SPIKES);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_PONYTA_GALARIAN) { Ability(ABILITY_PASTEL_VEIL); }
@@ -120,7 +120,7 @@ SINGLE_BATTLE_TEST("Pastel Veil prevents Toxic Spikes poison")
 DOUBLE_BATTLE_TEST("Pastel Veil prevents Toxic Spikes poison on partner")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TOXIC_SPIKES].effect == EFFECT_TOXIC_SPIKES);
+        ASSUME(gMovesInfo[MOVE_TOXIC_SPIKES].effect == EFFECT_TOXIC_SPIKES);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_PONYTA_GALARIAN) { Ability(ABILITY_PASTEL_VEIL); }

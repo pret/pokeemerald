@@ -385,6 +385,28 @@ static const struct FormChange sRayquazaFormChangeTable[] = {
 };
 #endif //P_FAMILY_RAYQUAZA
 
+#if P_FAMILY_DEOXYS
+static const struct FormChange sDeoxysNormalFormChangeTable[] = {
+    {FORM_CHANGE_ITEM_USE, SPECIES_DEOXYS_ATTACK,  ITEM_METEORITE},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sDeoxysAttackFormChangeTable[] = {
+    {FORM_CHANGE_ITEM_USE, SPECIES_DEOXYS_DEFENSE,  ITEM_METEORITE},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sDeoxysDefenseFormChangeTable[] = {
+    {FORM_CHANGE_ITEM_USE, SPECIES_DEOXYS_SPEED,  ITEM_METEORITE},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sDeoxysSpeedFormChangeTable[] = {
+    {FORM_CHANGE_ITEM_USE, SPECIES_DEOXYS_NORMAL,  ITEM_METEORITE},
+    {FORM_CHANGE_TERMINATOR},
+};
+#endif //P_FAMILY_DEOXYS
+
 #if P_FAMILY_BURMY
 static const struct FormChange sBurmyFormChangeTable[] = {
     {FORM_CHANGE_END_BATTLE_TERRAIN, SPECIES_BURMY_PLANT_CLOAK, BATTLE_TERRAIN_GRASS},
@@ -813,6 +835,12 @@ static const struct FormChange sMimikyuFormChangeTable[] = {
     {FORM_CHANGE_END_BATTLE,    SPECIES_MIMIKYU_DISGUISED},
     {FORM_CHANGE_TERMINATOR},
 };
+
+static const struct FormChange sMimikyuTotemFormChangeTable[] = {
+    {FORM_CHANGE_FAINT,         SPECIES_MIMIKYU_TOTEM_DISGUISED},
+    {FORM_CHANGE_END_BATTLE,    SPECIES_MIMIKYU_TOTEM_DISGUISED},
+    {FORM_CHANGE_TERMINATOR},
+};
 #endif //P_FAMILY_MIMIKYU
 
 #if P_FAMILY_NECROZMA
@@ -1069,6 +1097,15 @@ static const struct FormChange sOgerponFormChangeTable[] = {
     {FORM_CHANGE_TERMINATOR},
 };
 #endif //P_FAMILY_OGERPON
+
+#if P_FAMILY_TERAPAGOS
+static const struct FormChange sTerapagosFormChangeTable[] = {
+    {FORM_CHANGE_BEGIN_BATTLE, SPECIES_TERAPAGOS_TERASTAL}, //needs to be tied to the ability
+    //{FORM_CHANGE_TERASTALLIZATION, SPECIES_TERAPAGOS_STELLAR},
+    {FORM_CHANGE_END_BATTLE,   SPECIES_TERAPAGOS_NORMAL},
+    {FORM_CHANGE_TERMINATOR},
+};
+#endif //P_FAMILY_TERAPAGOS
 
 #undef WHEN_LEARNED
 #undef WHEN_FORGOTTEN

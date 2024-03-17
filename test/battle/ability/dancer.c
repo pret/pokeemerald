@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Dancer can copy a dance move immediately after it was used and allow the user of Dancer to still use its move")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_QUIVER_DANCE].danceMove == TRUE);
+        ASSUME(gMovesInfo[MOVE_QUIVER_DANCE].danceMove == TRUE);
         PLAYER(SPECIES_WOBBUFFET)
         OPPONENT(SPECIES_ORICORIO) { Ability(ABILITY_DANCER); }
     } WHEN {
@@ -22,7 +22,7 @@ SINGLE_BATTLE_TEST("Dancer can copy a dance move immediately after it was used a
 SINGLE_BATTLE_TEST("Dancer can copy Teeter Dance")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TEETER_DANCE].danceMove == TRUE);
+        ASSUME(gMovesInfo[MOVE_TEETER_DANCE].danceMove == TRUE);
         PLAYER(SPECIES_WOBBUFFET)
         OPPONENT(SPECIES_ORICORIO) { Ability(ABILITY_DANCER); Item(ITEM_LUM_BERRY); }
     } WHEN {
@@ -31,5 +31,25 @@ SINGLE_BATTLE_TEST("Dancer can copy Teeter Dance")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEETER_DANCE, player);
         ABILITY_POPUP(opponent, ABILITY_DANCER);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEETER_DANCE, opponent);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Dancer can copy Teeter Dance and confuse both opposing targets")
+{
+    KNOWN_FAILING; // Fails because copied move that targets both opposing mons, targets only one when copied by Dancer
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_TEETER_DANCE].danceMove == TRUE);
+        PLAYER(SPECIES_WOBBUFFET)
+        PLAYER(SPECIES_WYNAUT)
+        OPPONENT(SPECIES_ORICORIO) { Ability(ABILITY_DANCER); Item(ITEM_LUM_BERRY); }
+        OPPONENT(SPECIES_SLOWPOKE) { Ability(ABILITY_OWN_TEMPO); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_TEETER_DANCE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TEETER_DANCE, playerLeft);
+        ABILITY_POPUP(opponentLeft, ABILITY_DANCER);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TEETER_DANCE, opponentLeft);
+        MESSAGE("Wobbuffet became confused!");
+        MESSAGE("Wynaut became confusef!");
     }
 }

@@ -663,6 +663,9 @@ const u32 gItemIconPalette_UnremarkableTeacup[] = INCBIN_U32("graphics/items/ico
 const u32 gItemIcon_MasterpieceTeacup[] = INCBIN_U32("graphics/items/icons/masterpiece_teacup.4bpp.lz");
 const u32 gItemIconPalette_MasterpieceTeacup[] = INCBIN_U32("graphics/items/icon_palettes/masterpiece_teacup.gbapal.lz");
 
+const u32 gItemIcon_MetalAlloy[] = INCBIN_U32("graphics/items/icons/metal_alloy.4bpp.lz");
+const u32 gItemIconPalette_MetalAlloy[] = INCBIN_U32("graphics/items/icon_palettes/metal_alloy.gbapal.lz");
+
 // Nectars
 
 const u32 gItemIcon_RedNectar[] = INCBIN_U32("graphics/items/icons/red_nectar.4bpp.lz");
@@ -2058,3 +2061,35 @@ const u32 gItemIconPalette_BerserkGene[] = INCBIN_U32("graphics/items/icon_palet
 
 const u32 gItemIcon_FairyFeather[] = INCBIN_U32("graphics/items/icons/fairy_feather.4bpp.lz");
 const u32 gItemIconPalette_FairyFeather[] = INCBIN_U32("graphics/items/icon_palettes/fairy_feather.gbapal.lz");
+
+const u32 gItemIcon_Remedy[] = INCBIN_U32("graphics/items/icons/remedy.4bpp.lz");
+const u32 gItemIconPalette_Remedy[] = INCBIN_U32("graphics/items/icon_palettes/remedy.gbapal.lz");
+
+const u32 gItemIcon_FineRemedy[] = INCBIN_U32("graphics/items/icons/fine_remedy.4bpp.lz");
+const u32 gItemIconPalette_FineRemedy[] = INCBIN_U32("graphics/items/icon_palettes/fine_remedy.gbapal.lz");
+
+const u32 gItemIcon_SuperbRemedy[] = INCBIN_U32("graphics/items/icons/superb_remedy.4bpp.lz");
+const u32 gItemIconPalette_SuperbRemedy[] = INCBIN_U32("graphics/items/icon_palettes/superb_remedy.gbapal.lz");
+
+const u32 gItemIcon_AuxBottle[] = INCBIN_U32("graphics/items/icons/aux_bottle.4bpp.lz");
+const u32 gItemIconPalette_AuxEvasion[] = INCBIN_U32("graphics/items/icon_palettes/aux_evasion.gbapal.lz");
+const u32 gItemIconPalette_AuxGuard[] = INCBIN_U32("graphics/items/icon_palettes/aux_guard.gbapal.lz");
+const u32 gItemIconPalette_AuxPower[] = INCBIN_U32("graphics/items/icon_palettes/aux_power.gbapal.lz");
+
+const u32 gItemIcon_AuxPowerguard[] = INCBIN_U32("graphics/items/icons/aux_powerguard.4bpp.lz");
+const u32 gItemIconPalette_AuxPowerguard[] = INCBIN_U32("graphics/items/icon_palettes/aux_powerguard.gbapal.lz");
+
+const u32 gItemIcon_ChoiceDumpling[] = INCBIN_U32("graphics/items/icons/choice_dumpling.4bpp.lz");
+const u32 gItemIconPalette_ChoiceDumpling[] = INCBIN_U32("graphics/items/icon_palettes/choice_dumpling.gbapal.lz");
+
+const u32 gItemIcon_JubilifeMuffin[] = INCBIN_U32("graphics/items/icons/jubilife_muffin.4bpp.lz");
+const u32 gItemIconPalette_JubilifeMuffin[] = INCBIN_U32("graphics/items/icon_palettes/jubilife_muffin.gbapal.lz");
+
+const u32 gItemIcon_PokeshiDoll[] = INCBIN_U32("graphics/items/icons/pokeshi_doll.4bpp.lz");
+const u32 gItemIconPalette_PokeshiDoll[] = INCBIN_U32("graphics/items/icon_palettes/pokeshi_doll.gbapal.lz");
+
+const u32 gItemIcon_SwapSnack[] = INCBIN_U32("graphics/items/icons/swap_snack.4bpp.lz");
+const u32 gItemIconPalette_SwapSnack[] = INCBIN_U32("graphics/items/icon_palettes/swap_snack.gbapal.lz");
+
+const u32 gItemIcon_TwiceSpicedRadish[] = INCBIN_U32("graphics/items/icons/twice_spiced_radish.4bpp.lz");
+const u32 gItemIconPalette_TwiceSpicedRadish[] = INCBIN_U32("graphics/items/icon_palettes/twice_spiced_radish.gbapal.lz");

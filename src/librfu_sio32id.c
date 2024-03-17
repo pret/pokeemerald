@@ -24,7 +24,7 @@ s32 AgbRFU_checkID(u8 maxTries)
 {
     u16 ieBak;
     vu16 *regTMCNTL;
-    s32 id;
+    s32 id = 0;
 
     // Interrupts must be enabled
     if (REG_IME == 0)

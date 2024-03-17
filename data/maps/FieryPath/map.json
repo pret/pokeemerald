@@ -23,8 +23,8 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "FieryPath_EventScript_ItemTMToxic",
+      "trainer_sight_or_berry_tree_id": "ITEM_TM_TOXIC",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_FIERY_PATH_TM_TOXIC"
     },
     {
@@ -114,8 +114,8 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "FieryPath_EventScript_ItemFireStone",
+      "trainer_sight_or_berry_tree_id": "ITEM_FIRE_STONE",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_FIERY_PATH_FIRE_STONE"
     }
   ],

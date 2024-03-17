@@ -3,12 +3,12 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_THUNDER_FANG].effect == EFFECT_FLINCH_STATUS);
-    ASSUME(gBattleMoves[MOVE_THUNDER_FANG].argument == STATUS1_PARALYSIS);
-    ASSUME(gBattleMoves[MOVE_ICE_FANG].effect == EFFECT_FLINCH_STATUS);
-    ASSUME(gBattleMoves[MOVE_ICE_FANG].argument == STATUS1_FREEZE);
-    ASSUME(gBattleMoves[MOVE_FIRE_FANG].effect == EFFECT_FLINCH_STATUS);
-    ASSUME(gBattleMoves[MOVE_FIRE_FANG].argument == STATUS1_BURN);
+    ASSUME(MoveHasAdditionalEffect(MOVE_THUNDER_FANG, MOVE_EFFECT_PARALYSIS) == TRUE);
+    ASSUME(MoveHasAdditionalEffect(MOVE_THUNDER_FANG, MOVE_EFFECT_FLINCH) == TRUE);
+    ASSUME(MoveHasAdditionalEffect(MOVE_ICE_FANG, MOVE_EFFECT_FREEZE) == TRUE);
+    ASSUME(MoveHasAdditionalEffect(MOVE_ICE_FANG, MOVE_EFFECT_FLINCH) == TRUE);
+    ASSUME(MoveHasAdditionalEffect(MOVE_FIRE_FANG, MOVE_EFFECT_BURN) == TRUE);
+    ASSUME(MoveHasAdditionalEffect(MOVE_FIRE_FANG, MOVE_EFFECT_FLINCH) == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Thunder, Ice and Fire Fang inflict status 10% of the time")
@@ -49,7 +49,7 @@ SINGLE_BATTLE_TEST("Thunder, Ice and Fire Fang cause the opponent to flinch 10% 
     PARAMETRIZE { move = MOVE_ICE_FANG; }
     PARAMETRIZE { move = MOVE_FIRE_FANG; }
 
-    PASSES_RANDOMLY(10, 100, RNG_SECONDARY_EFFECT);
+    PASSES_RANDOMLY(10, 100, RNG_SECONDARY_EFFECT_2);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Speed(100); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(1); }

@@ -2,14 +2,6 @@
 #define GUARD_CONTEST_EFFECT_H
 #define MAX_COMBO_MOVES 5
 
-struct ContestMove
-{
-    u8 effect;
-    u8 contestCategory:3;
-    u8 comboStarterId;
-    u8 comboMoves[MAX_COMBO_MOVES];
-};
-
 struct ContestEffect
 {
     u8 effectType;
@@ -17,7 +9,6 @@ struct ContestEffect
     u8 jam;
 };
 
-extern const struct ContestMove gContestMoves[];
 extern const struct ContestEffect gContestEffects[];
 extern const u8 *const gContestEffectDescriptionPointers[];
 extern const u8 *const gContestMoveTypeTextPointers[];

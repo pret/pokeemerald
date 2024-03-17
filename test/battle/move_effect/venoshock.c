@@ -3,7 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_VENOSHOCK].effect == EFFECT_VENOSHOCK);
+    ASSUME(gMovesInfo[MOVE_VENOSHOCK].effect == EFFECT_DOUBLE_POWER_ON_ARG_STATUS);
+    ASSUME(gMovesInfo[MOVE_VENOSHOCK].argument == STATUS1_PSN_ANY);
 }
 
 SINGLE_BATTLE_TEST("Venoshock's power doubles if the target is poisoned/badly poisoned", s16 damage)

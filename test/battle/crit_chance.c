@@ -9,7 +9,7 @@ ASSUMPTIONS
 SINGLE_BATTLE_TEST("Side effected by Lucky Chant blocks critical hits")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_LUCKY_CHANT].effect == EFFECT_LUCKY_CHANT);
+        ASSUME(gMovesInfo[MOVE_LUCKY_CHANT].effect == EFFECT_LUCKY_CHANT);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -48,7 +48,7 @@ SINGLE_BATTLE_TEST("Flag ignoresTargetAbility ignores Battle Armor and Shell Arm
     PARAMETRIZE { species = SPECIES_ARMALDO; ability = ABILITY_BATTLE_ARMOR; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SUNSTEEL_STRIKE].ignoresTargetAbility == TRUE);
+        ASSUME(gMovesInfo[MOVE_SUNSTEEL_STRIKE].ignoresTargetAbility == TRUE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(species) { Ability(ability); }
     } WHEN {
@@ -105,7 +105,7 @@ SINGLE_BATTLE_TEST("Mold Breaker, Teravolt and Turboblaze ignore Battle Armor an
 SINGLE_BATTLE_TEST("User effected by Laser Focus causes moves to result in a critical hit")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_LASER_FOCUS].effect == EFFECT_LASER_FOCUS);
+        ASSUME(gMovesInfo[MOVE_LASER_FOCUS].effect == EFFECT_LASER_FOCUS);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -135,7 +135,7 @@ SINGLE_BATTLE_TEST("Focus Energy increases the user's critical hit ratio by two 
 {
     PASSES_RANDOMLY(1, 2, RNG_CRITICAL_HIT);
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_FOCUS_ENERGY].effect == EFFECT_FOCUS_ENERGY);
+        ASSUME(gMovesInfo[MOVE_FOCUS_ENERGY].effect == EFFECT_FOCUS_ENERGY);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -148,11 +148,11 @@ SINGLE_BATTLE_TEST("Focus Energy increases the user's critical hit ratio by two 
     }
 }
 
-SINGLE_BATTLE_TEST("Flag highCritRatio increases the critical hit ratio by one stage")
+SINGLE_BATTLE_TEST("High crit rate increases the critical hit ratio by one stage")
 {
     PASSES_RANDOMLY(1, 8, RNG_CRITICAL_HIT);
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SLASH].highCritRatio == TRUE);
+        ASSUME(gMovesInfo[MOVE_SLASH].criticalHitStage == 1);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -181,7 +181,7 @@ SINGLE_BATTLE_TEST("Scope Lens increases the critical hit ratio by one stage")
 {
     PASSES_RANDOMLY(1, 8, RNG_CRITICAL_HIT);
     GIVEN {
-        ASSUME(gItems[ITEM_SCOPE_LENS].holdEffect == HOLD_EFFECT_SCOPE_LENS);
+        ASSUME(gItemsInfo[ITEM_SCOPE_LENS].holdEffect == HOLD_EFFECT_SCOPE_LENS);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_SCOPE_LENS); };
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -192,11 +192,11 @@ SINGLE_BATTLE_TEST("Scope Lens increases the critical hit ratio by one stage")
     }
 }
 
-SINGLE_BATTLE_TEST("Flag highCritRatio, Super Luck and Scope Lens cause the move to result in a critical hit")
+SINGLE_BATTLE_TEST("High crit rate, Super Luck and Scope Lens cause the move to result in a critical hit")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SLASH].highCritRatio == TRUE);
-        ASSUME(gItems[ITEM_SCOPE_LENS].holdEffect == HOLD_EFFECT_SCOPE_LENS);
+        ASSUME(gMovesInfo[MOVE_SLASH].criticalHitStage == 1);
+        ASSUME(gItemsInfo[ITEM_SCOPE_LENS].holdEffect == HOLD_EFFECT_SCOPE_LENS);
         PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_SUPER_LUCK); Item(ITEM_SCOPE_LENS); };
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -212,7 +212,6 @@ SINGLE_BATTLE_TEST("Signature items Leek and Lucky Punch increase the critical h
     u32 species;
     u32 item;
 
-    ASSUME(B_CRIT_CHANCE >= GEN_7);
     PASSES_RANDOMLY(1, 2, RNG_CRITICAL_HIT);
 
     PARAMETRIZE { species = SPECIES_FARFETCHD; item = ITEM_LEEK; }
@@ -221,8 +220,8 @@ SINGLE_BATTLE_TEST("Signature items Leek and Lucky Punch increase the critical h
     PARAMETRIZE { species = SPECIES_CHANSEY; item = ITEM_LUCKY_PUNCH; }
 
     GIVEN {
-        ASSUME(gItems[ITEM_LEEK].holdEffect == HOLD_EFFECT_LEEK);
-        ASSUME(gItems[ITEM_LUCKY_PUNCH].holdEffect == HOLD_EFFECT_LUCKY_PUNCH);
+        ASSUME(gItemsInfo[ITEM_LEEK].holdEffect == HOLD_EFFECT_LEEK);
+        ASSUME(gItemsInfo[ITEM_LUCKY_PUNCH].holdEffect == HOLD_EFFECT_LUCKY_PUNCH);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(species) { Item(item); }
     } WHEN {
@@ -237,7 +236,7 @@ SINGLE_BATTLE_TEST("Dire Hit increases a battler's critical hit chance by 2 stag
 {
     PASSES_RANDOMLY(1, 2, RNG_CRITICAL_HIT);
     GIVEN {
-        ASSUME(gItems[ITEM_DIRE_HIT].battleUsage == EFFECT_ITEM_SET_FOCUS_ENERGY);
+        ASSUME(gItemsInfo[ITEM_DIRE_HIT].battleUsage == EFFECT_ITEM_SET_FOCUS_ENERGY);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -248,5 +247,95 @@ SINGLE_BATTLE_TEST("Dire Hit increases a battler's critical hit chance by 2 stag
         MESSAGE("Wobbuffet used Dire Hit to get pumped!");
         MESSAGE("Wobbuffet used Scratch!");
         MESSAGE("A critical hit!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Focus Energy increases critical hit ratio by two")
+{
+    PASSES_RANDOMLY(8, 8, RNG_CRITICAL_HIT);
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_SLASH].criticalHitStage == 1);
+        ASSUME(gMovesInfo[MOVE_FOCUS_ENERGY].effect == EFFECT_FOCUS_ENERGY);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_FOCUS_ENERGY); }
+        TURN { MOVE(player, MOVE_SLASH); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FOCUS_ENERGY, player);
+        MESSAGE("Wobbuffet is getting pumped!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SLASH, player);
+        MESSAGE("A critical hit!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Dragon Cheer fails in a single battle")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_DRAGON_CHEER].effect == EFFECT_DRAGON_CHEER);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_DRAGON_CHEER); }
+    } SCENE {
+        MESSAGE("But it failed!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("Dragon Cheer increases critical hit ratio by one on non Dragon types")
+{
+    PASSES_RANDOMLY(1, 8, RNG_CRITICAL_HIT);
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_TACKLE].criticalHitStage == 0);
+        ASSUME(gMovesInfo[MOVE_DRAGON_CHEER].effect == EFFECT_DRAGON_CHEER);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_DRAGON_CHEER, target: playerRight); MOVE(playerRight, MOVE_TACKLE, target: opponentLeft); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_CHEER, playerLeft);
+        MESSAGE("Wynaut is getting pumped!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerRight);
+        MESSAGE("A critical hit!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("Dragon Cheer increases critical hit ratio by two on Dragon types")
+{
+    PASSES_RANDOMLY(1, 2, RNG_CRITICAL_HIT);
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_TACKLE].criticalHitStage == 0);
+        ASSUME(gMovesInfo[MOVE_DRAGON_CHEER].effect == EFFECT_DRAGON_CHEER);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_DRATINI);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_DRAGON_CHEER, target: playerRight); MOVE(playerRight, MOVE_TACKLE, target: opponentLeft); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_CHEER, playerLeft);
+        MESSAGE("Dratini is getting pumped!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerRight);
+        MESSAGE("A critical hit!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("Dragon Cheer fails if critical hit stage was already increased by Focus Energy")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_SLASH].criticalHitStage == 1);
+        ASSUME(gMovesInfo[MOVE_FOCUS_ENERGY].effect == EFFECT_FOCUS_ENERGY);
+        ASSUME(gMovesInfo[MOVE_DRAGON_CHEER].effect == EFFECT_DRAGON_CHEER);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_FOCUS_ENERGY); MOVE(playerRight, MOVE_DRAGON_CHEER, target: playerLeft); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FOCUS_ENERGY, playerLeft);
+        MESSAGE("But it failed!");
     }
 }

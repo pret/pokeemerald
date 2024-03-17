@@ -39,6 +39,7 @@
 #define ABILITYEFFECT_SWITCH_IN_TERRAIN          16
 #define ABILITYEFFECT_SWITCH_IN_WEATHER          17
 #define ABILITYEFFECT_OPPORTUNIST                18
+#define ABILITYEFFECT_SWITCH_IN_STATUSES         19
 // Special cases
 #define ABILITYEFFECT_MUD_SPORT                  252 // Only used if B_SPORT_TURNS >= GEN_6
 #define ABILITYEFFECT_WATER_SPORT                253 // Only used if B_SPORT_TURNS >= GEN_6
@@ -193,14 +194,15 @@ struct Pokemon *GetIllusionMonPtr(u32 battler);
 void ClearIllusionMon(u32 battler);
 bool32 SetIllusionMon(struct Pokemon *mon, u32 battler);
 bool32 ShouldGetStatBadgeBoost(u16 flagId, u32 battler);
-u8 GetBattleMoveSplit(u32 moveId);
+u8 GetBattleMoveCategory(u32 moveId);
 bool32 CanFling(u32 battler);
 bool32 IsTelekinesisBannedSpecies(u16 species);
 bool32 IsHealBlockPreventingMove(u32 battler, u32 move);
 bool32 HasEnoughHpToEatBerry(u32 battler, u32 hpFraction, u32 itemId);
 bool32 IsPartnerMonFromSameTrainer(u32 battler);
-u8 GetSplitBasedOnStats(u32 battler);
-bool32 TestSheerForceFlag(u32 battler, u16 move);
+u8 GetCategoryBasedOnStats(u32 battler);
+bool32 MoveIsAffectedBySheerForce(u32 move);
+bool32 TestIfSheerForceAffected(u32 battler, u16 move);
 void TryRestoreHeldItems(void);
 bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item);
 void TrySaveExchangedItem(u32 battler, u16 stolenItem);
@@ -221,15 +223,11 @@ void CopyMonAbilityAndTypesToBattleMon(u32 battler, struct Pokemon *mon);
 void RecalcBattlerStats(u32 battler, struct Pokemon *mon);
 bool32 IsAlly(u32 battlerAtk, u32 battlerDef);
 bool32 IsGen6ExpShareEnabled(void);
-
-// Ability checks
-bool32 IsRolePlayBannedAbilityAtk(u16 ability);
-bool32 IsRolePlayBannedAbility(u16 ability);
-bool32 IsSkillSwapBannedAbility(u16 ability);
-bool32 IsWorrySeedBannedAbility(u16 ability);
-bool32 IsGastroAcidBannedAbility(u16 ability);
-bool32 IsEntrainmentBannedAbilityAttacker(u16 ability);
-bool32 IsEntrainmentTargetOrSimpleBeamBannedAbility(u16 ability);
+bool32 MoveHasAdditionalEffect(u32 move, u32 moveEffect);
+bool32 MoveHasAdditionalEffectWithChance(u32 move, u32 moveEffect, u32 chance);
+bool32 MoveHasAdditionalEffectSelf(u32 move, u32 moveEffect);
+bool32 MoveHasAdditionalEffectSelfArg(u32 move, u32 moveEffect, u32 argument);
+bool32 MoveHasChargeTurnAdditionalEffect(u32 move);
 
 bool32 CanSleep(u32 battler);
 bool32 CanBePoisoned(u32 battlerAttacker, u32 battlerTarget);
@@ -247,9 +245,11 @@ void RemoveConfusionStatus(u32 battler);
 u8 GetBattlerGender(u32 battler);
 bool32 AreBattlersOfOppositeGender(u32 battler1, u32 battler2);
 bool32 AreBattlersOfSameGender(u32 battler1, u32 battler2);
-u32 CalcSecondaryEffectChance(u32 battler, u8 secondaryEffectChance, u16 moveEffect);
+u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct AdditionalEffect *additionalEffect);
+bool32 MoveEffectIsGuaranteed(u32 battler, u32 battlerAbility, const struct AdditionalEffect *additionalEffect);
 u8 GetBattlerType(u32 battler, u8 typeIndex);
 bool8 CanMonParticipateInSkyBattle(struct Pokemon *mon);
 bool8 IsMonBannedFromSkyBattles(u16 species);
+void RemoveBattlerType(u32 battler, u8 type);
 
 #endif // GUARD_BATTLE_UTIL_H

@@ -3,8 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_DRAGON_TAIL].effect == EFFECT_HIT_SWITCH_TARGET);
-    ASSUME(gBattleMoves[MOVE_LOCK_ON].effect == EFFECT_LOCK_ON);
+    ASSUME(gMovesInfo[MOVE_DRAGON_TAIL].effect == EFFECT_HIT_SWITCH_TARGET);
+    ASSUME(gMovesInfo[MOVE_LOCK_ON].effect == EFFECT_LOCK_ON);
 }
 
 SINGLE_BATTLE_TEST("Dragon Tail switches the target with a random non-fainted replacement")

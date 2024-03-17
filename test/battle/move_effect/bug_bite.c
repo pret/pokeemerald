@@ -3,8 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_BUG_BITE].effect == EFFECT_BUG_BITE);
-    ASSUME(gBattleMoves[MOVE_BUG_BITE].pp == 20);
+    ASSUME(MoveHasAdditionalEffect(MOVE_BUG_BITE, MOVE_EFFECT_BUG_BITE));
+    ASSUME(gMovesInfo[MOVE_BUG_BITE].pp == 20);
 }
 
 // Pretty much copy/paste of the Berry Fling Test.
@@ -117,8 +117,8 @@ SINGLE_BATTLE_TEST("Bug Bite eats the target's berry and immediately gains its e
 SINGLE_BATTLE_TEST("Tanga Berry activates before Bug Bite")
 {
     GIVEN {
-        ASSUME(gItems[ITEM_TANGA_BERRY].holdEffect == HOLD_EFFECT_RESIST_BERRY);
-        ASSUME(gItems[ITEM_TANGA_BERRY].holdEffectParam == TYPE_BUG);
+        ASSUME(gItemsInfo[ITEM_TANGA_BERRY].holdEffect == HOLD_EFFECT_RESIST_BERRY);
+        ASSUME(gItemsInfo[ITEM_TANGA_BERRY].holdEffectParam == TYPE_BUG);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) {Item(ITEM_TANGA_BERRY); }
     } WHEN {

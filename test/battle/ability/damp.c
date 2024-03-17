@@ -60,7 +60,7 @@ SINGLE_BATTLE_TEST("Damp prevents explosion-like moves from self")
 SINGLE_BATTLE_TEST("Damp prevents damage from aftermath")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TACKLE].makesContact);
+        ASSUME(gMovesInfo[MOVE_TACKLE].makesContact);
         PLAYER(SPECIES_PARAS) { Ability(ABILITY_DAMP); }
         OPPONENT(SPECIES_VOLTORB) { Ability(ABILITY_AFTERMATH); HP(1); }
         OPPONENT(SPECIES_WOBBUFFET);

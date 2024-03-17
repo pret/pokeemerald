@@ -9,8 +9,8 @@ SINGLE_BATTLE_TEST("Accuracy controls the proportion of misses")
     PARAMETRIZE { move = MOVE_HYDRO_PUMP; }
     PARAMETRIZE { move = MOVE_RAZOR_LEAF; }
     PARAMETRIZE { move = MOVE_SCRATCH; }
-    ASSUME(0 < gBattleMoves[move].accuracy && gBattleMoves[move].accuracy <= 100);
-    PASSES_RANDOMLY(gBattleMoves[move].accuracy, 100, RNG_ACCURACY);
+    ASSUME(0 < gMovesInfo[move].accuracy && gMovesInfo[move].accuracy <= 100);
+    PASSES_RANDOMLY(gMovesInfo[move].accuracy, 100, RNG_ACCURACY);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -21,15 +21,14 @@ SINGLE_BATTLE_TEST("Accuracy controls the proportion of misses")
     }
 }
 
-SINGLE_BATTLE_TEST("Secondary Effect Chance controls the proportion of secondary effects")
+SINGLE_BATTLE_TEST("AdditionalEffect.chance controls the proportion of secondary effects")
 {
-    u32 move;
-    PARAMETRIZE { move = MOVE_THUNDER_SHOCK; }
-    PARAMETRIZE { move = MOVE_DISCHARGE; }
-    PARAMETRIZE { move = MOVE_NUZZLE; }
-    ASSUME(gBattleMoves[move].effect == EFFECT_PARALYZE_HIT);
-    ASSUME(0 < gBattleMoves[move].secondaryEffectChance && gBattleMoves[move].secondaryEffectChance <= 100);
-    PASSES_RANDOMLY(gBattleMoves[move].secondaryEffectChance, 100, RNG_SECONDARY_EFFECT);
+    u32 move, chance;
+    PARAMETRIZE { move = MOVE_THUNDER_SHOCK; chance = 10; }
+    PARAMETRIZE { move = MOVE_DISCHARGE; chance = 30; }
+    PARAMETRIZE { move = MOVE_NUZZLE; chance = 100; }
+    ASSUME(MoveHasAdditionalEffect(move, MOVE_EFFECT_PARALYSIS) == TRUE);
+    PASSES_RANDOMLY(chance, 100, RNG_SECONDARY_EFFECT);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -43,7 +42,7 @@ SINGLE_BATTLE_TEST("Secondary Effect Chance controls the proportion of secondary
 SINGLE_BATTLE_TEST("Turn order is determined by priority")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_QUICK_ATTACK].priority > gBattleMoves[MOVE_TACKLE].priority);
+        ASSUME(gMovesInfo[MOVE_QUICK_ATTACK].priority > gMovesInfo[MOVE_TACKLE].priority);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -99,7 +98,7 @@ SINGLE_BATTLE_TEST("Critical hits occur at a 1/24 rate")
 SINGLE_BATTLE_TEST("Slash's critical hits occur at a 1/8 rate")
 {
     ASSUME(B_CRIT_CHANCE >= GEN_7);
-    ASSUME(gBattleMoves[MOVE_SLASH].highCritRatio);
+    ASSUME(gMovesInfo[MOVE_SLASH].criticalHitStage == 1);
     PASSES_RANDOMLY(1, 8, RNG_CRITICAL_HIT);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -136,7 +135,7 @@ SINGLE_BATTLE_TEST("Critical hits do not ignore positive stat stages", s16 damag
     PARAMETRIZE { move = MOVE_HOWL; }
     PARAMETRIZE { move = MOVE_TAIL_WHIP; }
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SCRATCH].split == SPLIT_PHYSICAL);
+        ASSUME(gMovesInfo[MOVE_SCRATCH].category == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -157,7 +156,7 @@ SINGLE_BATTLE_TEST("Critical hits ignore negative stat stages", s16 damage)
     PARAMETRIZE { move = MOVE_HARDEN; }
     PARAMETRIZE { move = MOVE_GROWL; }
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SCRATCH].split == SPLIT_PHYSICAL);
+        ASSUME(gMovesInfo[MOVE_SCRATCH].category == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

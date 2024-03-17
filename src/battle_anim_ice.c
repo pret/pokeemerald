@@ -174,6 +174,17 @@ const struct SpriteTemplate gIceCrystalSpiralInwardSmall =
     .callback = AnimIcePunchSwirlingParticle,
 };
 
+const struct SpriteTemplate gIceCrystalSpinSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_ICE_CRYSTALS,
+    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
+    .oam = &gOamData_AffineDouble_ObjBlend_8x16,
+    .anims = gAnims_IceCrystalLarge,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimParticleInVortex,
+};
+
 static const union AffineAnimCmd sAffineAnim_IceBeamInnerCrystal[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 10, 1),
@@ -1292,7 +1303,7 @@ static void InitPoisonGasCloudAnim(struct Sprite *sprite)
     sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
     sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
 
-#if B_UPDATED_MOVE_DATA >= GEN_5
+    if (B_UPDATED_MOVE_DATA >= GEN_5)
     {
         s16 x, y;
         SetAverageBattlerPositions(gBattleAnimTarget, gBattleAnimArgs[7], &x, &y);
@@ -1302,8 +1313,7 @@ static void InitPoisonGasCloudAnim(struct Sprite *sprite)
         sprite->data[4] = y + gBattleAnimArgs[4];
         sprite->data[7] |= GetBattlerSpriteBGPriority(gBattleAnimTarget) << 8;
     }
-#else
-    if (gBattleAnimArgs[7])
+    else if (gBattleAnimArgs[7])
     {
         sprite->data[1] = sprite->x + gBattleAnimArgs[1];
         sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) + gBattleAnimArgs[3];
@@ -1319,7 +1329,6 @@ static void InitPoisonGasCloudAnim(struct Sprite *sprite)
         sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y) + gBattleAnimArgs[4];
         sprite->data[7] |= GetBattlerSpriteBGPriority(gBattleAnimTarget) << 8;
     }
-#endif
 
     if (IsContest())
     {

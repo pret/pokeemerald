@@ -13,19 +13,35 @@ MEMORY
 
 SECTIONS {
 
-    ewram 0x2000000 (NOLOAD) :
+    .ewram ORIGIN(EWRAM) : AT (__ewram_lma)
+    ALIGN(4)
+    {
+        __ewram_start = .;
+        *(.ewram*)
+        __ewram_end = .;
+    } > EWRAM
+
+    .ewram.sbss (NOLOAD) :
     ALIGN(4)
     {
         INCLUDE "sym_ewram.ld"
-        src/*.o(ewram_data);
-        gflib/*.o(ewram_data);
+        src/*.o(.sbss);
+        gflib/*.o(.sbss);
 
         *libc.a:impure.o(.data);
         *libc.a:locale.o(.data);
         *libc.a:mallocr.o(.data);
     } > EWRAM
 
-    iwram 0x3000000 (NOLOAD) :
+    .iwram ORIGIN(IWRAM) : AT (__iwram_lma)
+    ALIGN(4)
+    {
+        __iwram_start = .;
+        *(.iwram*);
+        __iwram_end = .;
+    } > IWRAM
+
+    .iwram.bss (NOLOAD) :
     ALIGN(4)
     {
         /* .bss starts at 0x3000000 */
@@ -40,6 +56,7 @@ SECTIONS {
         /* COMMON starts at 0x30022A8 */
         INCLUDE "sym_common.ld"
         *libc.a:sbrkr.o(COMMON);
+        gStackBase = .;
     } > IWRAM
 
     /* BEGIN ROM DATA */
@@ -1322,6 +1339,20 @@ SECTIONS {
         src/*.o(.rodata);
         gflib/*.o(.rodata);
         data/*.o(.rodata);
+    } > ROM = 0
+
+    .data.iwram :
+    ALIGN(4)
+    {
+        __iwram_lma = .;
+        . = . + (__iwram_end - __iwram_start);
+    } > ROM = 0
+
+    .data.ewram :
+    ALIGN(4)
+    {
+        __ewram_lma = .;
+        . = . + (__ewram_end - __ewram_start);
     } > ROM = 0
 
     __rom_end = .;

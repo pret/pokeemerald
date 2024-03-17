@@ -3,13 +3,13 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_DOUBLE_TEAM].effect == EFFECT_EVASION_UP);
+    ASSUME(gMovesInfo[MOVE_DOUBLE_TEAM].effect == EFFECT_EVASION_UP);
 }
 
 SINGLE_BATTLE_TEST("Double Team raises Evasion")
 {
-    ASSUME(gBattleMoves[MOVE_SCRATCH].accuracy == 100);
-    PASSES_RANDOMLY(gBattleMoves[MOVE_SCRATCH].accuracy * 3 / 4, 100, RNG_ACCURACY);
+    ASSUME(gMovesInfo[MOVE_SCRATCH].accuracy == 100);
+    PASSES_RANDOMLY(gMovesInfo[MOVE_SCRATCH].accuracy * 3 / 4, 100, RNG_ACCURACY);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);

@@ -3,8 +3,9 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gItems[ITEM_GANLON_BERRY].holdEffect == HOLD_EFFECT_DEFENSE_UP);
-    ASSUME(gBattleMoves[MOVE_DRAGON_RAGE].effect == EFFECT_DRAGON_RAGE);
+    ASSUME(gItemsInfo[ITEM_GANLON_BERRY].holdEffect == HOLD_EFFECT_DEFENSE_UP);
+    ASSUME(gMovesInfo[MOVE_DRAGON_RAGE].effect == EFFECT_FIXED_DAMAGE_ARG);
+    ASSUME(gMovesInfo[MOVE_DRAGON_RAGE].argument == 40);
 }
 
 SINGLE_BATTLE_TEST("Ganlon Berry raises the holder's Defense by one stage when HP drops to 1/4 or below")

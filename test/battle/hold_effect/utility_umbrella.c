@@ -4,9 +4,9 @@
 // Please add Utility Umbrella interactions with move, item and ability effects on their respective files.
 ASSUMPTIONS
 {
-    ASSUME(gItems[ITEM_UTILITY_UMBRELLA].holdEffect == HOLD_EFFECT_UTILITY_UMBRELLA);
-    ASSUME(gBattleMoves[MOVE_EMBER].type == TYPE_FIRE);
-    ASSUME(gBattleMoves[MOVE_WATER_GUN].type == TYPE_WATER);
+    ASSUME(gItemsInfo[ITEM_UTILITY_UMBRELLA].holdEffect == HOLD_EFFECT_UTILITY_UMBRELLA);
+    ASSUME(gMovesInfo[MOVE_EMBER].type == TYPE_FIRE);
+    ASSUME(gMovesInfo[MOVE_WATER_GUN].type == TYPE_WATER);
 }
 
 SINGLE_BATTLE_TEST("Utility Umbrella blocks Sun damage modifiers", s16 damage)

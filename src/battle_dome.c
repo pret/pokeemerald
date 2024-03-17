@@ -126,9 +126,6 @@ static void VblankCb_TourneyInfoCard(void);
 static void DisplayMatchInfoOnCard(u8, u8);
 static void DisplayTrainerInfoOnCard(u8, u8);
 static int BufferDomeWinString(u8, u8 *);
-static u8 GetDomeBrainTrainerPicId(void);
-static u8 GetDomeBrainTrainerClass(void);
-static void CopyDomeBrainTrainerName(u8 *);
 static void CopyDomeTrainerName(u8 *, u16);
 static void HblankCb_TourneyTree(void);
 static void VblankCb_TourneyTree(void);
@@ -200,17 +197,6 @@ static const u8 sBattleStyleThresholds[NUM_BATTLE_STYLES - 1][NUM_MOVE_POINT_TYP
     [DOME_BATTLE_STYLE_UNUSED2]         = {0},
     [DOME_BATTLE_STYLE_UNUSED3]         = {0},
   //[DOME_BATTLE_STYLE_UNUSED4]         = {0}, // Excluded here, presumably was meant to be a style just for Dome Ace Tucker
-};
-static const u8 sUnusedArray[] =
-{
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0,
-    0, 0, 3, 0, 0, 0, 0, 0, 3, 2, 0, 0, 0, 0, 0, 2,
-    0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0,
-    0, 2, 253, 0, 0, 0, 0, 0, 253, 0, 0, 0, 0, 0, 253, 0,
-    0, 0, 0, 0, 253, 0, 0, 0, 0, 0, 253, 254, 0, 0, 0, 0,
-    0, 254, 0, 0, 0, 0, 0, 254, 0, 0, 0, 0, 0, 254, 0, 0,
-    0, 0, 0, 254, 0, 0, 0, 0, 0,
 };
 
 // 1st array is for cursor position (sprite id): cursor can be on a trainer info button, a match info button, or the exit/cancel button
@@ -2224,7 +2210,7 @@ static void CreateDomeOpponentMon(u8 monPartyId, u16 tournamentTrainerId, u8 tou
     #ifdef BUGFIX
     u8 fixedIv = GetDomeTrainerMonIvs(DOME_TRAINERS[tournamentTrainerId].trainerId);
     #else
-    u8 fixedIv = GetDomeTrainerMonIvs(tournamentTrainerId); // BUG: Using the wrong ID. As a result, all Pokemon have ivs of 3.
+    u8 fixedIv = GetDomeTrainerMonIvs(tournamentTrainerId); // BUG: Using the wrong ID. As a result, all Pokémon have ivs of 3.
     #endif
     u8 level = SetFacilityPtrsGetLevel();
     CreateMonWithEVSpreadNatureOTID(&gEnemyParty[monPartyId],
@@ -2239,7 +2225,7 @@ static void CreateDomeOpponentMon(u8 monPartyId, u16 tournamentTrainerId, u8 tou
     {
         SetMonMoveSlot(&gEnemyParty[monPartyId],
                        gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]].moves[i], i);
-        if (gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]].moves[i] == MOVE_FRUSTRATION)
+        if (gMovesInfo[gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]].moves[i]].effect == EFFECT_FRUSTRATION)
             friendship = 0;
     }
 
@@ -2286,13 +2272,13 @@ static void CreateDomeOpponentMons(u16 tournamentTrainerId)
     }
 }
 
-// Returns a bitmask representing which 2 of the trainer's 3 pokemon to select.
+// Returns a bitmask representing which 2 of the trainer's 3 Pokémon to select.
 // The choice is calculated solely depending on the type effectiveness of their
-// movesets against the player's pokemon.
+// movesets against the player's Pokémon.
 // There is a 50% chance of either a "good" or "bad" selection mode being used.
 // In the good mode movesets are preferred which are more effective against the
-// player, and in the bad mode the opposite is true. If all 3 pokemon tie, the
-// other mode will be tried. If they tie again, the pokemon selection is random.
+// player, and in the bad mode the opposite is true. If all 3 Pokémon tie, the
+// other mode will be tried. If they tie again, the Pokémon selection is random.
 int GetDomeTrainerSelectedMons(u16 tournamentTrainerId)
 {
     int selectedMonBits;
@@ -2445,7 +2431,7 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int mode)
     defType1 = gSpeciesInfo[targetSpecies].types[0];
     defType2 = gSpeciesInfo[targetSpecies].types[1];
     defAbility = gSpeciesInfo[targetSpecies].abilities[0];
-    moveType = gBattleMoves[move].type;
+    moveType = gMovesInfo[move].type;
 
     if (defAbility == ABILITY_LEVITATE && moveType == TYPE_GROUND)
     {
@@ -3933,7 +3919,7 @@ static bool32 IsDomeHealingMove(u32 move)
     if (IsHealingMove(move))
         return TRUE;
     // Check extra effects not considered plain healing by AI
-    switch (gBattleMoves[move].effect)
+    switch (gMovesInfo[move].effect)
     {
         case EFFECT_INGRAIN:
         case EFFECT_REFRESH:
@@ -3992,9 +3978,9 @@ static bool32 IsDomeRiskyMoveEffect(u32 effect)
 
 static bool32 IsDomeLuckyMove(u32 move)
 {
-    if (gBattleMoves[move].accuracy <= 50)
+    if (gMovesInfo[move].accuracy <= 50)
         return TRUE;
-    switch(gBattleMoves[move].effect)
+    switch(gMovesInfo[move].effect)
     {
     case EFFECT_COUNTER:
     case EFFECT_OHKO: // Technically redundant because of the above accuracy check
@@ -4025,10 +4011,10 @@ static bool32 IsDomePopularMove(u32 move)
     if (i == NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES)
         return FALSE;
     // Filter in TMs/HMs
-    if (gBattleMoves[move].power >= 90)
+    if (gMovesInfo[move].power >= 90)
         return TRUE;
 
-    switch(gBattleMoves[move].effect)
+    switch(gMovesInfo[move].effect)
     {
     case EFFECT_PROTECT:
     case EFFECT_MAT_BLOCK:
@@ -4041,11 +4027,10 @@ static bool32 IsDomePopularMove(u32 move)
     }
 }
 
-static bool32 IsDomeStatusMoveEffect(u32 effect)
+static bool32 IsDomeStatusMoveEffect(u32 move)
 {
-    switch(effect)
+    switch(gMovesInfo[move].effect)
     {
-    case EFFECT_TRAP:
     case EFFECT_SLEEP:
     case EFFECT_CONFUSE:
     case EFFECT_DISABLE:
@@ -4063,7 +4048,7 @@ static bool32 IsDomeStatusMoveEffect(u32 effect)
     case EFFECT_CURSE:
         return TRUE;
     default:
-        return FALSE;
+        return MoveHasAdditionalEffect(move, MOVE_EFFECT_WRAP);
     }
 }
 
@@ -4109,8 +4094,7 @@ static bool32 IsDomeComboMoveEffect(u32 effect)
     case EFFECT_MOONLIGHT:
     case EFFECT_SHORE_UP:
     case EFFECT_THUNDER:
-    case EFFECT_HURRICANE:
-    //case EFFECT_BLIZZARD: (needs a unique effect in gBattleMoves!)
+    case EFFECT_BLIZZARD:
     case EFFECT_SOLAR_BEAM:
     case EFFECT_GROWTH:
     case EFFECT_AURORA_VEIL:
@@ -4118,7 +4102,7 @@ static bool32 IsDomeComboMoveEffect(u32 effect)
     // Moves dependent on terrain
     case EFFECT_EXPANDING_FORCE:
     case EFFECT_GRASSY_GLIDE:
-    //case EFFECT_MISTY_EXPLOSION: (needs a unique effect in gBattleMoves!)
+    //case EFFECT_MISTY_EXPLOSION: (needs a unique effect in gMovesInfo!)
     case EFFECT_PSYBLADE:
     case EFFECT_RISING_VOLTAGE:
     case EFFECT_TERRAIN_PULSE:
@@ -4152,6 +4136,7 @@ static bool32 IsDomeComboMoveEffect(u32 effect)
     case EFFECT_CHARGE:
     case EFFECT_BULK_UP:
     case EFFECT_ATTACK_ACCURACY_UP:
+    case EFFECT_FILLET_AWAY:
     // Others
     case EFFECT_FOCUS_ENERGY:
     case EFFECT_LOCK_ON:
@@ -4198,7 +4183,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     if (trainerId == TRAINER_PLAYER)
         sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), TRUE, x + 48, y + 64, palSlot + 12, TAG_NONE);
     else if (trainerId == TRAINER_FRONTIER_BRAIN)
-        sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(GetDomeBrainTrainerPicId(), TRUE, x + 48, y + 64, palSlot + 12, TAG_NONE);
+        sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(GetFrontierBrainTrainerPicIndex(), TRUE, x + 48, y + 64, palSlot + 12, TAG_NONE);
     else
         sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerId), TRUE, x + 48, y + 64, palSlot + 12, TAG_NONE);
 
@@ -4258,12 +4243,12 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     if (trainerId == TRAINER_PLAYER)
         j = gFacilityClassToTrainerClass[FACILITY_CLASS_BRENDAN];
     else if (trainerId == TRAINER_FRONTIER_BRAIN)
-        j = GetDomeBrainTrainerClass();
+        j = GetFrontierBrainTrainerClass();
     else
         j = GetFrontierOpponentClass(trainerId);
 
-    for (;gTrainerClassNames[j][i] != EOS; i++)
-        gStringVar1[i] = gTrainerClassNames[j][i];
+    for (;gTrainerClasses[j].name[i] != EOS; i++)
+        gStringVar1[i] = gTrainerClasses[j].name[i];
     gStringVar1[i] = CHAR_SPACE;
     gStringVar1[i + 1] = EOS;
 
@@ -4273,7 +4258,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     }
     else if (trainerId == TRAINER_FRONTIER_BRAIN)
     {
-        CopyDomeBrainTrainerName(gStringVar2);
+        CopyFrontierBrainTrainerName(gStringVar2);
         StringAppend(gStringVar1, gStringVar2);
     }
     else
@@ -4347,13 +4332,13 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                 switch (k)
                 {
                 case MOVE_POINTS_COMBO:
-                    allocatedArray[k] = IsDomeComboMoveEffect(gBattleMoves[move].effect) ? 1 : 0;
+                    allocatedArray[k] = IsDomeComboMoveEffect(gMovesInfo[move].effect) ? 1 : 0;
                     break;
                 case MOVE_POINTS_STAT_RAISE:
-                    allocatedArray[k] = IsStatRaisingEffect(gBattleMoves[move].effect) ? 1 : 0;
+                    allocatedArray[k] = IsStatRaisingEffect(gMovesInfo[move].effect) ? 1 : 0;
                     break;
                 case MOVE_POINTS_STAT_LOWER:
-                    allocatedArray[k] = IsStatLoweringEffect(gBattleMoves[move].effect) ? 1 : 0;
+                    allocatedArray[k] = IsStatLoweringEffect(gMovesInfo[move].effect) ? 1 : 0;
                     break;
                 case MOVE_POINTS_RARE:
                     allocatedArray[k] = IsDomeRareMove(move) ? 1 : 0;
@@ -4362,22 +4347,22 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                     allocatedArray[k] = IsDomeHealingMove(move) ? 1 : 0;
                     break;
                 case MOVE_POINTS_RISKY:
-                    allocatedArray[k] = IsDomeRiskyMoveEffect(gBattleMoves[move].effect) ? 1 : 0;
+                    allocatedArray[k] = IsDomeRiskyMoveEffect(gMovesInfo[move].effect) ? 1 : 0;
                     break;
                 case MOVE_POINTS_STATUS:
-                    allocatedArray[k] = IsDomeStatusMoveEffect(gBattleMoves[move].effect) ? 1 : 0;
+                    allocatedArray[k] = IsDomeStatusMoveEffect(move);
                     break;
                 case MOVE_POINTS_DMG:
-                    allocatedArray[k] = (gBattleMoves[move].power != 0) ? 1 : 0;
+                    allocatedArray[k] = (gMovesInfo[move].power != 0) ? 1 : 0;
                     break;
                 case MOVE_POINTS_DEF:
-                    allocatedArray[k] = IsDomeDefensiveMoveEffect(gBattleMoves[move].effect) ? 1 : 0;
+                    allocatedArray[k] = IsDomeDefensiveMoveEffect(gMovesInfo[move].effect) ? 1 : 0;
                     break;
                 case MOVE_POINTS_ACCURATE:
-                    allocatedArray[k] = (gBattleMoves[move].accuracy == 0 || gBattleMoves[move].accuracy == 100) ? 1 : 0;
+                    allocatedArray[k] = (gMovesInfo[move].accuracy == 0 || gMovesInfo[move].accuracy == 100) ? 1 : 0;
                     break;
                 case MOVE_POINTS_POWERFUL:
-                    allocatedArray[k] = (gBattleMoves[move].power >= 100) ? 1 : 0;
+                    allocatedArray[k] = (gMovesInfo[move].power >= 100) ? 1 : 0;
                     break;
                 case MOVE_POINTS_POPULAR:
                     allocatedArray[k] = IsDomePopularMove(move) ? 1 : 0;
@@ -4386,13 +4371,13 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                     allocatedArray[k] = IsDomeLuckyMove(move) ? 1 : 0;
                     break;
                 case MOVE_POINTS_STRONG:
-                    allocatedArray[k] = (gBattleMoves[move].power >= 90) ? 1 : 0;
+                    allocatedArray[k] = (gMovesInfo[move].power >= 90) ? 1 : 0;
                     break;
                 case MOVE_POINTS_LOW_PP:
-                    allocatedArray[k] = (gBattleMoves[move].pp <= 5) ? 1 : 0;
+                    allocatedArray[k] = (gMovesInfo[move].pp <= 5) ? 1 : 0;
                     break;
                 case MOVE_POINTS_EFFECT:
-                    allocatedArray[k] = (gBattleMoves[move].secondaryEffectChance > 0) ? 1 : 0;
+                    allocatedArray[k] = MoveIsAffectedBySheerForce(move);
                     break;
                 }
             }
@@ -4632,7 +4617,7 @@ static int BufferDomeWinString(u8 matchNum, u8 *tournamentIds)
             if (DOME_TRAINERS[tournamentId].trainerId == TRAINER_PLAYER)
                 StringCopy(gStringVar1, gSaveBlock2Ptr->playerName);
             else if (DOME_TRAINERS[tournamentId].trainerId == TRAINER_FRONTIER_BRAIN)
-                CopyDomeBrainTrainerName(gStringVar1);
+                CopyFrontierBrainTrainerName(gStringVar1);
             else
                 CopyDomeTrainerName(gStringVar1, DOME_TRAINERS[tournamentId].trainerId);
             count++;
@@ -4656,7 +4641,7 @@ static int BufferDomeWinString(u8 matchNum, u8 *tournamentIds)
             if (DOME_TRAINERS[tournamentId].eliminatedAt == sCompetitorRangeByMatch[matchNum][2])
             {
                 // Set initial winStringId offset
-                StringCopy(gStringVar2, gMoveNames[gSaveBlock2Ptr->frontier.domeWinningMoves[tournamentId]]);
+                StringCopy(gStringVar2, GetMoveName(gSaveBlock2Ptr->frontier.domeWinningMoves[tournamentId]));
                 winStringId = DOME_TRAINERS[tournamentId].forfeited * 2; // (DOME_TEXT_WON_USING_MOVE - 1) or (DOME_TEXT_WON_ON_FORFEIT - 1)
 
                 if (gSaveBlock2Ptr->frontier.domeWinningMoves[tournamentId] == MOVE_NONE && DOME_TRAINERS[tournamentId].forfeited == FALSE)
@@ -4667,7 +4652,7 @@ static int BufferDomeWinString(u8 matchNum, u8 *tournamentIds)
                 if (DOME_TRAINERS[tournamentId].trainerId == TRAINER_PLAYER)
                     StringCopy(gStringVar1, gSaveBlock2Ptr->playerName);
                 else if (DOME_TRAINERS[tournamentId].trainerId == TRAINER_FRONTIER_BRAIN)
-                    CopyDomeBrainTrainerName(gStringVar1);
+                    CopyFrontierBrainTrainerName(gStringVar1);
                 else
                     CopyDomeTrainerName(gStringVar1, DOME_TRAINERS[tournamentId].trainerId);
             }
@@ -4724,7 +4709,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     if (trainerIds[0] == TRAINER_PLAYER)
         sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), TRUE, x + 48, y + 88, palSlot + 12, TAG_NONE);
     else if (trainerIds[0] == TRAINER_FRONTIER_BRAIN)
-        sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(GetDomeBrainTrainerPicId(), TRUE, x + 48, y + 88, palSlot + 12, TAG_NONE);
+        sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(GetFrontierBrainTrainerPicIndex(), TRUE, x + 48, y + 88, palSlot + 12, TAG_NONE);
     else
         sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerIds[0]), TRUE, x + 48, y + 88, palSlot + 12, TAG_NONE);
 
@@ -4737,7 +4722,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     if (trainerIds[1] == TRAINER_PLAYER)
         sInfoCard->spriteIds[1 + arrId] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), TRUE, x + 192, y + 88, palSlot + 13, TAG_NONE);
     else if (trainerIds[1] == TRAINER_FRONTIER_BRAIN)
-        sInfoCard->spriteIds[1 + arrId] = CreateTrainerPicSprite(GetDomeBrainTrainerPicId(), TRUE, x + 192, y + 88, palSlot + 13, TAG_NONE);
+        sInfoCard->spriteIds[1 + arrId] = CreateTrainerPicSprite(GetFrontierBrainTrainerPicIndex(), TRUE, x + 192, y + 88, palSlot + 13, TAG_NONE);
     else
         sInfoCard->spriteIds[1 + arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerIds[1]), TRUE, x + 192, y + 88, palSlot + 13, TAG_NONE);
 
@@ -4746,7 +4731,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     if (lost[1])
         gSprites[sInfoCard->spriteIds[1 + arrId]].oam.paletteNum = 3;
 
-    // Draw left trainer's pokemon icons.
+    // Draw left trainer's Pokémon icons.
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         if (trainerIds[0] == TRAINER_PLAYER)
@@ -4786,7 +4771,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         }
     }
 
-    // Draw right trainer's pokemon icons.
+    // Draw right trainer's Pokémon icons.
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         if (trainerIds[1] == TRAINER_PLAYER)
@@ -4851,7 +4836,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     if (trainerIds[0] == TRAINER_PLAYER)
         StringCopy(gStringVar1, gSaveBlock2Ptr->playerName);
     else if (trainerIds[0] == TRAINER_FRONTIER_BRAIN)
-        CopyDomeBrainTrainerName(gStringVar1);
+        CopyFrontierBrainTrainerName(gStringVar1);
     else
         CopyDomeTrainerName(gStringVar1, trainerIds[0]);
 
@@ -4869,7 +4854,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     if (trainerIds[1] == TRAINER_PLAYER)
         StringCopy(gStringVar1, gSaveBlock2Ptr->playerName);
     else if (trainerIds[1] == TRAINER_FRONTIER_BRAIN)
-        CopyDomeBrainTrainerName(gStringVar1);
+        CopyFrontierBrainTrainerName(gStringVar1);
     else
         CopyDomeTrainerName(gStringVar1, trainerIds[1]);
 
@@ -5137,7 +5122,7 @@ static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roun
     int movePower = 0;
     SetFacilityPtrsGetLevel();
 
-    // Calc move points of all 4 moves for all 3 pokemon hitting all 3 target mons.
+    // Calc move points of all 4 moves for all 3 Pokémon hitting all 3 target mons.
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         for (j = 0; j < MAX_MON_MOVES; j++)
@@ -5149,13 +5134,12 @@ static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roun
             else
                 moveIds[i * MAX_MON_MOVES + j] = gFacilityTrainerMons[DOME_MONS[winnerTournamentId][i]].moves[j];
 
-            movePower = gBattleMoves[moveIds[i * MAX_MON_MOVES + j]].power;
+            movePower = gMovesInfo[moveIds[i * MAX_MON_MOVES + j]].power;
             if (movePower == 0)
                 movePower = 40;
             else if (movePower == 1)
                 movePower = 60;
-            else if (moveIds[i * MAX_MON_MOVES + j] == MOVE_SELF_DESTRUCT
-                  || moveIds[i * MAX_MON_MOVES + j] == MOVE_EXPLOSION)
+            else if (gMovesInfo[moveIds[i * MAX_MON_MOVES + j]].effect == EFFECT_EXPLOSION)
                 movePower /= 2;
 
             for (k = 0; k < FRONTIER_PARTY_SIZE; k++)
@@ -6047,7 +6031,7 @@ static void CopyDomeTrainerName(u8 *str, u16 trainerId)
 
     if (trainerId == TRAINER_FRONTIER_BRAIN)
     {
-        CopyDomeBrainTrainerName(str);
+        CopyFrontierBrainTrainerName(str);
     }
     else
     {
@@ -6063,23 +6047,4 @@ static void CopyDomeTrainerName(u8 *str, u16 trainerId)
         }
         str[i] = EOS;
     }
-}
-
-static u8 GetDomeBrainTrainerPicId(void)
-{
-    return gTrainers[TRAINER_TUCKER].trainerPic;
-}
-
-static u8 GetDomeBrainTrainerClass(void)
-{
-    return gTrainers[TRAINER_TUCKER].trainerClass;
-}
-
-static void CopyDomeBrainTrainerName(u8 *str)
-{
-    int i;
-
-    for (i = 0; i < PLAYER_NAME_LENGTH; i++)
-        str[i] = gTrainers[TRAINER_TUCKER].trainerName[i];
-    str[i] = EOS;
 }
