@@ -25,24 +25,23 @@ Based off RHH's pokeemerald-expansion v1.7.3 https://github.com/rh-hideout/pokee
     - Physical/Special/Status Category (configurable).
     - New moves and abilities up to Scarlet and Violet.
         - Custom Contest data up to SwSh, newer moves are WIP. ([source](https://pokemonurpg.com/info/contests/rse-move-list/))
-    - Mega Evolution
-    - Primal Reversion
-    - Ultra Burst
-    - Z-Moves
-        - Gen 8+ damaging moves are given power extrapolated from Gen 7.
-        - Gen 8+ status moves have no additional effects, like Healing Wish.
-    - Dynamax
-        - Gigantamax forms
+    - Battle gimmick support:
+        - Mega Evolution
+        - Primal Reversion
+        - Ultra Burst
+        - Z-Moves
+            - Gen 8+ damaging moves are given power extrapolated from Gen 7.
+            - Gen 8+ status moves have no additional effects, like Healing Wish.
+        - Dynamax and Gigantamax
     - Initial battle parameters
         - Queueing stat boosts (aka, Totem Boosts)
         - Setting Terrains.
     - Mid-turn speed recalculation.
     - Quick Poké Ball selection in Wild Battles
-        - Press `R` to use last selected Poké Ball.
         - Hold `R` to change selection with the D-Pad.
+        - Press `R` to use last selected Poké Ball.
     - Run option shortcut
-    - Faster battle intro
-        - Message and animation/cry happens at the same time.
+    - Faster battle intro - Message and animation/cry happens at the same time.
     - Faster HP drain.
     - Battle Debug menu.
         - Accessed by pressing `Select` on the "Fight/Bag/Pokémon/Run" menu.
@@ -105,7 +104,8 @@ Based off RHH's pokeemerald-expansion v1.7.3 https://github.com/rh-hideout/pokee
     - HP Threshold (eg. Darmanitan)
     - Weather (eg. Castform)
     - End of turn (eg. Morpeko)
-    - Time of day (Shaymin)
+    - Time of day (eg. Shaymin)
+    - Fusions (eg. Kyurem)
 - ***Breeding Improvements***
     - Incense Baby Pokémon now happen automatically (configurable).
     - Level 1 eggs (configurable).
@@ -138,7 +138,6 @@ Based off RHH's pokeemerald-expansion v1.7.3 https://github.com/rh-hideout/pokee
             - *Dark Mode*.
     - [Nature Colors](https://github.com/DizzyEggg/pokeemerald/tree/nature_color) in summary screen by @DizzyEggg
     - [Dynamic Multichoice](https://github.com/SBird1337/pokeemerald/tree/feature/dynmulti) by @SBird1337
-    - [Guillotine](https://github.com/aarant/pokeemerald/tree/guillotine) (Decapitalization) by @aarant
 - ***Other features***
     - Pressing B while holding a Pokémon drops them like in modern games (configurable).
     - Running indoors (configurable).
@@ -165,7 +164,7 @@ With this, you'll get the latest version of pokeemerald-expansion, plus a couple
 
 ## **How do I update my version of pokeemerald-expansion?**
 - If you haven't set up a remote, run the command `git remote add RHH https://github.com/rh-hideout/pokeemerald-expansion`.
-- Once you have your remote set up, run the command `git pull RHH expansion/1.7.4`.
+- Once you have your remote set up, run the command `git pull RHH expansion/1.8.0`.
 
 ### Please consider crediting the entire [list of contributors](https://github.com/rh-hideout/pokeemerald-expansion/wiki/Credits) in your project, as they have all worked hard to develop this project :)
 
