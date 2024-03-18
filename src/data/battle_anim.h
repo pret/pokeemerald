@@ -12,7 +12,6 @@ const struct OamData gOamData_AffineOff_ObjNormal_8x8 =
     .paletteNum = 0,
 };
 
-
 const struct OamData gOamData_AffineOff_ObjNormal_16x16 =
 {
     .y = 0,

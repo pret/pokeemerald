@@ -222,6 +222,7 @@ const union AnimCmd *const gAnims_MonPic[MAX_MON_PIC_FRAMES] =
 
 const union AnimCmd *const sAnims_Trainer[] ={
     sAnim_GeneralFrame0,
+    sAnim_GeneralFrame0,
 };
 
 #include "data/trainer_parties.h"

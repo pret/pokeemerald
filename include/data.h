@@ -110,6 +110,23 @@ struct TrainerClass
     u16 ball;
 };
 
+struct TypeInfo
+{
+    u8 name[TYPE_NAME_LENGTH + 1];
+    u8 generic[17];
+    u8 palette;
+    u16 zMove;
+    u16 maxMove;
+    //u16 enhanceItem;
+    //u16 berry;
+    //u16 gem;
+    //u16 plate;
+    //u16 memory;
+    //u16 zCrystal;
+    //u16 teraShard;
+    //u16 arceusForm;
+};
+
 struct FollowerMsgInfo {
     const u8 *text;
     const u8 *script;
@@ -121,7 +138,6 @@ struct FollowerMessagePool
     const u8 * script;
     u16 length;
 };
-
 
 extern const u16 gMinigameDigits_Pal[];
 extern const u32 gMinigameDigits_Gfx[];

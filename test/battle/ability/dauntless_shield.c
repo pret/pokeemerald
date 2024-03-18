@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(B_PROTEAN_LIBERO == GEN_9);
 }
 
-SINGLE_BATTLE_TEST("Dauntless Shield raises Attack by one stage")
+SINGLE_BATTLE_TEST("Dauntless Shield raises Defense by one stage")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -22,7 +22,7 @@ SINGLE_BATTLE_TEST("Dauntless Shield raises Attack by one stage")
     }
 }
 
-SINGLE_BATTLE_TEST("Dauntless Shield raises Attack by one stage only once per battle")
+SINGLE_BATTLE_TEST("Dauntless Shield raises Defense by one stage only once per battle")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);

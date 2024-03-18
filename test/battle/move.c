@@ -23,13 +23,12 @@ SINGLE_BATTLE_TEST("Accuracy controls the proportion of misses")
 
 SINGLE_BATTLE_TEST("AdditionalEffect.chance controls the proportion of secondary effects")
 {
-    u32 move;
-    PARAMETRIZE { move = MOVE_THUNDER_SHOCK; }
-    PARAMETRIZE { move = MOVE_DISCHARGE; }
-    PARAMETRIZE { move = MOVE_NUZZLE; }
-    ASSUME(MoveHasMoveEffect(move, MOVE_EFFECT_PARALYSIS) == TRUE);
-    ASSUME(0 < gMovesInfo[move].additionalEffects[0].chance && gMovesInfo[move].additionalEffects[0].chance <= 100);
-    PASSES_RANDOMLY(gMovesInfo[move].additionalEffects[0].chance, 100, RNG_SECONDARY_EFFECT);
+    u32 move, chance;
+    PARAMETRIZE { move = MOVE_THUNDER_SHOCK; chance = 10; }
+    PARAMETRIZE { move = MOVE_DISCHARGE; chance = 30; }
+    PARAMETRIZE { move = MOVE_NUZZLE; chance = 100; }
+    ASSUME(MoveHasAdditionalEffect(move, MOVE_EFFECT_PARALYSIS) == TRUE);
+    PASSES_RANDOMLY(chance, 100, RNG_SECONDARY_EFFECT);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);

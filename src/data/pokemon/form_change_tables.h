@@ -835,6 +835,12 @@ static const struct FormChange sMimikyuFormChangeTable[] = {
     {FORM_CHANGE_END_BATTLE,    SPECIES_MIMIKYU_DISGUISED},
     {FORM_CHANGE_TERMINATOR},
 };
+
+static const struct FormChange sMimikyuTotemFormChangeTable[] = {
+    {FORM_CHANGE_FAINT,         SPECIES_MIMIKYU_TOTEM_DISGUISED},
+    {FORM_CHANGE_END_BATTLE,    SPECIES_MIMIKYU_TOTEM_DISGUISED},
+    {FORM_CHANGE_TERMINATOR},
+};
 #endif //P_FAMILY_MIMIKYU
 
 #if P_FAMILY_NECROZMA

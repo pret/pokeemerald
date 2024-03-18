@@ -137,7 +137,6 @@ EWRAM_DATA u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT] = {0};
 EWRAM_DATA u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT + 13] = {0};   // expanded for stupidly long z move names
 EWRAM_DATA u32 gBattleTypeFlags = 0;
 EWRAM_DATA u8 gBattleTerrain = 0;
-EWRAM_DATA u32 gUnusedFirstBattleVar1 = 0; // Never read
 EWRAM_DATA struct MultiPartnerMenuPokemon gMultiPartnerParty[MULTI_PARTY_SIZE] = {0};
 EWRAM_DATA static struct MultiPartnerMenuPokemon* sMultiPartnerPartyBuffer = NULL;
 EWRAM_DATA u8 *gBattleAnimBgTileBuffer = NULL;
@@ -186,7 +185,6 @@ EWRAM_DATA u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gMoveResultFlags = 0;
 EWRAM_DATA u32 gHitMarker = 0;
 EWRAM_DATA u8 gBideTarget[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA u8 gUnusedFirstBattleVar2 = 0; // Never read
 EWRAM_DATA u32 gSideStatuses[NUM_BATTLE_SIDES] = {0};
 EWRAM_DATA struct SideTimer gSideTimers[NUM_BATTLE_SIDES] = {0};
 EWRAM_DATA u32 gStatuses3[MAX_BATTLERS_COUNT] = {0};
@@ -218,8 +216,6 @@ EWRAM_DATA bool8 gTransformedShininess[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gPlayerDpadHoldFrames = 0;
 EWRAM_DATA struct BattleSpriteData *gBattleSpritesDataPtr = NULL;
 EWRAM_DATA struct MonSpritesGfx *gMonSpritesGfxPtr = NULL;
-EWRAM_DATA struct BattleHealthboxInfo *gBattleControllerOpponentHealthboxData = NULL; // Never read
-EWRAM_DATA struct BattleHealthboxInfo *gBattleControllerOpponentFlankHealthboxData = NULL; // Never read
 EWRAM_DATA u16 gBattleMovePower = 0;
 EWRAM_DATA u16 gMoveToLearn = 0;
 EWRAM_DATA u32 gFieldStatuses = 0;
@@ -299,27 +295,308 @@ const struct OamData gOamData_BattleSpritePlayerSide =
 
 static const s8 sCenterToCornerVecXs[8] ={-32, -16, -16, -32, -32};
 
-const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1] =
+// .generic is large enough that the text for TYPE_ELECTRIC will exceed TEXT_BUFF_ARRAY_COUNT.
+const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
 {
-    [TYPE_NORMAL] = _("Normal"),
-    [TYPE_FIGHTING] = _("Fight"),
-    [TYPE_FLYING] = _("Flying"),
-    [TYPE_POISON] = _("Poison"),
-    [TYPE_GROUND] = _("Ground"),
-    [TYPE_ROCK] = _("Rock"),
-    [TYPE_BUG] = _("Bug"),
-    [TYPE_GHOST] = _("Ghost"),
-    [TYPE_STEEL] = _("Steel"),
-    [TYPE_MYSTERY] = _("???"),
-    [TYPE_FIRE] = _("Fire"),
-    [TYPE_WATER] = _("Water"),
-    [TYPE_GRASS] = _("Grass"),
-    [TYPE_ELECTRIC] = _("Electr"),
-    [TYPE_PSYCHIC] = _("Psychc"),
-    [TYPE_ICE] = _("Ice"),
-    [TYPE_DRAGON] = _("Dragon"),
-    [TYPE_DARK] = _("Dark"),
-    [TYPE_FAIRY] = _("Fairy"),
+    [TYPE_NORMAL] =
+    {
+        .name = _("Normal"),
+        .generic = _("a NORMAL move"),
+        .palette = 13,
+        .zMove = MOVE_BREAKNECK_BLITZ,
+        .maxMove = MOVE_MAX_STRIKE,
+        //.enhanceItem = ITEM_SILK_SCARF,
+        //.berry = ITEM_CHILAN_BERRY,
+        //.gem = ITEM_NORMAL_GEM,
+        //.zCrystal = ITEM_NORMALIUM_Z,
+        //.teraShard = ITEM_NORMAL_TERA_SHARD,
+        //.arceusForm = SPECIES_ARCEUS_NORMAL,
+    },
+    [TYPE_FIGHTING] =
+    {
+        .name = _("Fight"),
+        .generic = _("a FIGHTING move"),
+        .palette = 13,
+        .zMove = MOVE_ALL_OUT_PUMMELING,
+        .maxMove = MOVE_MAX_KNUCKLE,
+        //.enhanceItem = ITEM_BLACK_BELT,
+        //.berry = ITEM_CHOPLE_BERRY,
+        //.gem = ITEM_FIGHTING_GEM,
+        //.zCrystal = ITEM_FIGHTINIUM_Z,
+        //.plate= ITEM_FIST_PLATE,
+        //.memory = ITEM_FIGHTING_MEMORY,
+        //.teraShard = ITEM_FIGHTING_TERA_SHARD,
+        //.arceusForm = SPECIES_ARCEUS_FIGHTING,
+    },
+    [TYPE_FLYING] =
+    {
+        .name = _("Flying"),
+        .generic = _("a FLYING move"),
+        .palette = 14,
+        .zMove = MOVE_SUPERSONIC_SKYSTRIKE,
+        .maxMove = MOVE_MAX_AIRSTREAM,
+        //.enhanceItem = ITEM_SHARP_BEAK,
+        //.berry = ITEM_COBA_BERRY,
+        //.gem = ITEM_FLYING_GEM,
+        //.zCrystal = ITEM_FLYINIUM_Z,
+        //.plate= ITEM_SKY_PLATE,
+        //.memory = ITEM_FLYING_MEMORY,
+        //.teraShard = ITEM_FLYING_TERA_SHARD,
+        //.arceusForm = SPECIES_ARCEUS_FLYING,
+    },
+    [TYPE_POISON] =
+    {
+        .name = _("Poison"),
+        .generic = _("a POISON move"),
+        .palette = 14,
+        .zMove = MOVE_ACID_DOWNPOUR,
+        .maxMove = MOVE_MAX_OOZE,
+        //.enhanceItem = ITEM_POISON_BARB,
+        //.berry = ITEM_KEBIA_BERRY,
+        //.gem = ITEM_POISON_GEM,
+        //.zCrystal = ITEM_POISONIUM_Z,
+        //.plate= ITEM_TOXIC_PLATE,
+        //.memory = ITEM_POISON_MEMORY,
+        //.teraShard = ITEM_POISON_TERA_SHARD,
+        //.arceusForm = SPECIES_ARCEUS_POISON,
+    },
+    [TYPE_GROUND] =
+    {
+        .name = _("Ground"),
+        .generic = _("a GROUND move"),
+        .palette = 13,
+        .zMove = MOVE_TECTONIC_RAGE,
+        .maxMove = MOVE_MAX_QUAKE,
+        //.enhanceItem = ITEM_SOFT_SAND,
+        //.berry = ITEM_SHUCA_BERRY,
+        //.gem = ITEM_GROUND_GEM,
+        //.zCrystal = ITEM_GROUNDIUM_Z,
+        //.plate= ITEM_EARTH_PLATE,
+        //.memory = ITEM_GROUND_MEMORY,
+        //.teraShard = ITEM_GROUND_TERA_SHARD,
+        //.arceusForm = SPECIES_ARCEUS_GROUND,
+    },
+    [TYPE_ROCK] =
+    {
+        .name = _("Rock"),
+        .generic = _("a ROCK move"),
+        .palette = 13,
+        .zMove = MOVE_CONTINENTAL_CRUSH,
+        .maxMove = MOVE_MAX_ROCKFALL,
+        //.enhanceItem = ITEM_HARD_STONE,
+        //.berry = ITEM_CHARTI_BERRY,
+        //.gem = ITEM_ROCK_GEM,
+        //.zCrystal = ITEM_ROCKIUM_Z,
+        //.plate= ITEM_STONE_PLATE,
+        //.memory = ITEM_ROCK_MEMORY,
+        //.teraShard = ITEM_ROCK_TERA_SHARD,
+        //.arceusForm = SPECIES_ARCEUS_ROCK,
+    },
+    [TYPE_BUG] =
+    {
+        .name = _("Bug"),
+        .generic = _("a BUG move"),
+        .palette = 15,
+        .zMove = MOVE_SAVAGE_SPIN_OUT,
+        .maxMove = MOVE_MAX_FLUTTERBY,
+        //.enhanceItem = ITEM_SILVER_POWDER,
+        //.berry = ITEM_TANGA_BERRY,
+        //.gem = ITEM_BUG_GEM,
+        //.zCrystal = ITEM_BUGINIUM_Z,
+        //.plate= ITEM_INSECT_PLATE,
+        //.memory = ITEM_BUG_MEMORY,
+        //.teraShard = ITEM_BUG_TERA_SHARD,
+        //.arceusForm = SPECIES_ARCEUS_BUG,
+    },
+    [TYPE_GHOST] =
+    {
+        .name = _("Ghost"),
+        .generic = _("a GHOST move"),
+        .palette = 14,
+        .zMove = MOVE_NEVER_ENDING_NIGHTMARE,
+        .maxMove = MOVE_MAX_PHANTASM,
+        //.enhanceItem = ITEM_SPELL_TAG,
+        //.berry = ITEM_KASIB_BERRY,
+        //.gem = ITEM_GHOST_GEM,
+        //.zCrystal = ITEM_GHOSTIUM_Z,
+        //.plate= ITEM_SPOOKY_PLATE,
+        //.memory = ITEM_GHOST_MEMORY,
+        //.teraShard = ITEM_GHOST_TERA_SHARD,
+        //.arceusForm = SPECIES_ARCEUS_GHOST,
+    },
+    [TYPE_STEEL] =
+    {
+        .name = _("Steel"),
+        .generic = _("a STEEL move"),
+        .palette = 13,
+        .zMove = MOVE_CORKSCREW_CRASH,
+        .maxMove = MOVE_MAX_STEELSPIKE,
+        //.enhanceItem = ITEM_METAL_COAT,
+        //.berry = ITEM_BABIRI_BERRY,
+        //.gem = ITEM_STEEL_GEM,
+        //.zCrystal = ITEM_STEELIUM_Z,
+        //.plate= ITEM_IRON_PLATE,
+        //.memory = ITEM_STEEL_MEMORY,
+        //.teraShard = ITEM_STEEL_TERA_SHARD,
+        //.arceusForm = SPECIES_ARCEUS_STEEL,
+    },
+    [TYPE_MYSTERY] =
+    {
+        .name = _("???"),
+        .generic = _("a ??? move"),
+        .palette = 15,
+    },
+    [TYPE_FIRE] =
+    {
+        .name = _("Fire"),
+        .generic = _("a FIRE move"),
+        .palette = 13,
+        .zMove = MOVE_INFERNO_OVERDRIVE,
+        .maxMove = MOVE_MAX_FLARE,
+        //.enhanceItem = ITEM_CHARCOAL,
+        //.berry = ITEM_OCCA_BERRY,
+        //.gem = ITEM_FIRE_GEM,
+        //.zCrystal = ITEM_FIRIUM_Z,
+        //.plate= ITEM_FLAME_PLATE,
+        //.memory = ITEM_FIRE_MEMORY,
+        //.teraShard = ITEM_FIRE_TERA_SHARD,
+        //.arceusForm = SPECIES_ARCEUS_FIRE,
+    },
+    [TYPE_WATER] =
+    {
+        .name = _("Water"),
+        .generic = _("a WATER move"),
+        .palette = 14,
+        .zMove = MOVE_HYDRO_VORTEX,
+        .maxMove = MOVE_MAX_GEYSER,
+        //.enhanceItem = ITEM_MYSTIC_WATER,
+        //.berry = ITEM_PASSHO_BERRY,
+        //.gem = ITEM_WATER_GEM,
+        //.zCrystal = ITEM_WATERIUM_Z,
+        //.plate= ITEM_SPLASH_PLATE,
+        //.memory = ITEM_WATER_MEMORY,
+        //.teraShard = ITEM_WATER_TERA_SHARD,
+        //.arceusForm = SPECIES_ARCEUS_WATER,
+    },
+    [TYPE_GRASS] =
+    {
+        .name = _("Grass"),
+        .generic = _("a GRASS move"),
+        .palette = 15,
+        .zMove = MOVE_BLOOM_DOOM,
+        .maxMove = MOVE_MAX_OVERGROWTH,
+        //.enhanceItem = ITEM_MIRACLE_SEED,
+        //.berry = ITEM_RINDO_BERRY,
+        //.gem = ITEM_GRASS_GEM,
+        //.zCrystal = ITEM_GRASSIUM_Z,
+        //.plate= ITEM_MEADOW_PLATE,
+        //.memory = ITEM_GRASS_MEMORY,
+        //.teraShard = ITEM_GRASS_TERA_SHARD,
+        //.arceusForm = SPECIES_ARCEUS_GRASS,
+    },
+    [TYPE_ELECTRIC] =
+    {
+        .name = _("Electr"),
+        .generic = _("an ELECTRIC move"),
+        .palette = 13,
+        .zMove = MOVE_GIGAVOLT_HAVOC,
+        .maxMove = MOVE_MAX_LIGHTNING,
+        //.enhanceItem = ITEM_MAGNET,
+        //.berry = ITEM_WACAN_BERRY,
+        //.gem = ITEM_ELECTRIC_GEM,
+        //.zCrystal = ITEM_ELECTRIUM_Z,
+        //.plate= ITEM_ZAP_PLATE,
+        //.memory = ITEM_ELECTRIC_MEMORY,
+        //.teraShard = ITEM_ELECTRIC_TERA_SHARD,
+        //.arceusForm = SPECIES_ARCEUS_ELECTRIC,
+    },
+    [TYPE_PSYCHIC] =
+    {
+        .name = _("Psychc"),
+        .generic = _("a PSYCHIC move"),
+        .palette = 14,
+        .zMove = MOVE_SHATTERED_PSYCHE,
+        .maxMove = MOVE_MAX_MINDSTORM,
+        //.enhanceItem = ITEM_TWISTED_SPOON,
+        //.berry = ITEM_PAYAPA_BERRY,
+        //.gem = ITEM_PSYCHIC_GEM,
+        //.zCrystal = ITEM_PSYCHIUM_Z,
+        //.plate= ITEM_MIND_PLATE,
+        //.memory = ITEM_PSYCHIC_MEMORY,
+        //.teraShard = ITEM_PSYCHIC_TERA_SHARD,
+        //.arceusForm = SPECIES_ARCEUS_PSYCHIC,
+    },
+    [TYPE_ICE] =
+    {
+        .name = _("Ice"),
+        .generic = _("an ICE move"),
+        .palette = 14,
+        .zMove = MOVE_SUBZERO_SLAMMER,
+        .maxMove = MOVE_MAX_HAILSTORM,
+        //.enhanceItem = ITEM_NEVER_MELT_ICE,
+        //.berry = ITEM_YACHE_BERRY,
+        //.gem = ITEM_ICE_GEM,
+        //.zCrystal = ITEM_ICIUM_Z,
+        //.plate= ITEM_ICICLE_PLATE,
+        //.memory = ITEM_ICE_MEMORY,
+        //.teraShard = ITEM_ICE_TERA_SHARD,
+        //.arceusForm = SPECIES_ARCEUS_ICE,
+    },
+    [TYPE_DRAGON] =
+    {
+        .name = _("Dragon"),
+        .generic = _("a DRAGON move"),
+        .palette = 15,
+        .zMove = MOVE_DEVASTATING_DRAKE,
+        .maxMove = MOVE_MAX_WYRMWIND,
+        //.enhanceItem = ITEM_DRAGON_FANG,
+        //.berry = ITEM_HABAN_BERRY,
+        //.gem = ITEM_DRAGON_GEM,
+        //.zCrystal = ITEM_DRAGONIUM_Z,
+        //.plate= ITEM_DRACO_PLATE,
+        //.memory = ITEM_DRAGON_MEMORY,
+        //.teraShard = ITEM_DRAGON_TERA_SHARD,
+        //.arceusForm = SPECIES_ARCEUS_DRAGON,
+    },
+    [TYPE_DARK] =
+    {
+        .name = _("Dark"),
+        .generic = _("a DARK move"),
+        .palette = 13,
+        .zMove = MOVE_BLACK_HOLE_ECLIPSE,
+        .maxMove = MOVE_MAX_DARKNESS,
+        //.enhanceItem = ITEM_BLACK_GLASSES,
+        //.berry = ITEM_COLBUR_BERRY,
+        //.gem = ITEM_DARK_GEM,
+        //.zCrystal = ITEM_DARKINIUM_Z,
+        //.plate= ITEM_DREAD_PLATE,
+        //.memory = ITEM_DARK_MEMORY,
+        //.teraShard = ITEM_DARK_TERA_SHARD,
+        //.arceusForm = SPECIES_ARCEUS_DARK,
+    },
+    [TYPE_FAIRY] =
+    {
+        .name = _("Fairy"),
+        .generic = _("a FAIRY move"),
+        .palette = 14,
+        .zMove = MOVE_TWINKLE_TACKLE,
+        .maxMove = MOVE_MAX_STARFALL,
+        //.enhanceItem = ITEM_FAIRY_FEATHER,
+        //.berry = ITEM_ROSELI_BERRY,
+        //.gem = ITEM_FAIRY_GEM,
+        //.zCrystal = ITEM_FAIRIUM_Z,
+        //.plate= ITEM_PIXIE_PLATE,
+        //.memory = ITEM_FAIRY_MEMORY,
+        //.teraShard = ITEM_FAIRY_TERA_SHARD,
+        //.arceusForm = SPECIES_ARCEUS_FAIRY,
+    },
+    /*
+    [TYPE_STELLAR] =
+    {
+        .name = _("Stellar"),
+        .teraShard = ITEM_STELLAR_TERA_SHARD,
+    },
+    */
 };
 
 // extra args are money and ball
@@ -547,6 +824,13 @@ static void CB2_InitBattleInternal(void)
     }
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         gBattleTerrain = BATTLE_TERRAIN_BUILDING;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
+                                                                        | BATTLE_TYPE_EREADER_TRAINER
+                                                                        | BATTLE_TYPE_TRAINER_HILL)))
+    {
+        gBattleTypeFlags |= (IsTrainerDoubleBattle(gTrainerBattleOpponent_A) ? BATTLE_TYPE_DOUBLE : 0);
+    }
 
     InitBattleBgsVideo();
     LoadBattleTextboxAndBackground();
@@ -2056,13 +2340,6 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     if (trainerNum == TRAINER_SECRET_BASE)
         return 0;
     retVal = CreateNPCTrainerPartyFromTrainer(party, GetTrainerStructFromId(trainerNum), firstTrainer, gBattleTypeFlags);
-
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
-                                                                        | BATTLE_TYPE_EREADER_TRAINER
-                                                                        | BATTLE_TYPE_TRAINER_HILL)))
-    {
-        gBattleTypeFlags |= (IsTrainerDoubleBattle(trainerNum) ? BATTLE_TYPE_DOUBLE : 0);
-    }
     return retVal;
 }
 
@@ -2743,7 +3020,7 @@ static void SpriteCB_AnimFaintOpponent(struct Sprite *sprite)
         }
         else // Erase bottom part of the sprite to create a smooth illusion of mon falling down.
         {
-            u8 *dst = gMonSpritesGfxPtr->sprites.byte[GetBattlerPosition(sprite->sBattler)] + (sprite->data[3] << 8);
+            u8 *dst = &gMonSpritesGfxPtr->spritesGfx[GetBattlerPosition(sprite->sBattler)][(sprite->data[3] << 8)];
 
             for (i = 0; i < 0x100; i++)
                 *(dst++) = 0;
@@ -3734,7 +4011,7 @@ static void DoBattleIntro(void)
             gBattleStruct->overworldWeatherDone = FALSE;
             SetAiLogicDataForTurn(AI_DATA); // get assumed abilities, hold effects, etc of all battlers
             Ai_InitPartyStruct(); // Save mons party counts, and first 2/4 mons on the battlefield.
-            
+
             // Try to set a status to start the battle with
             gBattleStruct->startingStatus = 0;
             if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && GetTrainerStartingStatusFromId(gTrainerBattleOpponent_B))
@@ -4966,6 +5243,8 @@ static void SetActionsAndBattlersTurnOrder(void)
                 {
                     gActionsByTurnOrder[turnOrderId] = gChosenActionByBattler[battler];
                     gBattlerByTurnOrder[turnOrderId] = battler;
+                    gBattleStruct->quickClawRandom[battler] = RandomPercentage(RNG_QUICK_CLAW, GetBattlerHoldEffectParam(battler));
+                    gBattleStruct->quickDrawRandom[battler] = RandomPercentage(RNG_QUICK_DRAW, 30);
                     turnOrderId++;
                 }
             }
@@ -5172,21 +5451,21 @@ static void TryChangingTurnOrderEffects(u32 battler1, u32 battler2)
 
     // Battler 1
     // Quick Draw
-    if (ability1 == ABILITY_QUICK_DRAW && !IS_MOVE_STATUS(gChosenMoveByBattler[battler1]) && RandomPercentage(RNG_QUICK_DRAW, 30))
+    if (ability1 == ABILITY_QUICK_DRAW && !IS_MOVE_STATUS(gChosenMoveByBattler[battler1]) && gBattleStruct->quickDrawRandom[battler1])
         gProtectStructs[battler1].quickDraw = TRUE;
     // Quick Claw and Custap Berry
     if (!gProtectStructs[battler1].quickDraw
-     && ((holdEffectBattler1 == HOLD_EFFECT_QUICK_CLAW && RandomPercentage(RNG_QUICK_CLAW, GetBattlerHoldEffectParam(battler1)))
+     && ((holdEffectBattler1 == HOLD_EFFECT_QUICK_CLAW && gBattleStruct->quickClawRandom[battler1])
      || (holdEffectBattler1 == HOLD_EFFECT_CUSTAP_BERRY && HasEnoughHpToEatBerry(battler1, 4, gBattleMons[battler1].item))))
         gProtectStructs[battler1].usedCustapBerry = TRUE;
 
     // Battler 2
     // Quick Draw
-    if (ability2 == ABILITY_QUICK_DRAW && !IS_MOVE_STATUS(gChosenMoveByBattler[battler2]) && RandomPercentage(RNG_QUICK_DRAW, 30))
+    if (ability2 == ABILITY_QUICK_DRAW && !IS_MOVE_STATUS(gChosenMoveByBattler[battler2]) && gBattleStruct->quickDrawRandom[battler2])
         gProtectStructs[battler2].quickDraw = TRUE;
     // Quick Claw and Custap Berry
     if (!gProtectStructs[battler2].quickDraw
-     && ((holdEffectBattler2 == HOLD_EFFECT_QUICK_CLAW && RandomPercentage(RNG_QUICK_CLAW, GetBattlerHoldEffectParam(battler2)))
+     && ((holdEffectBattler2 == HOLD_EFFECT_QUICK_CLAW && gBattleStruct->quickClawRandom[battler2])
      || (holdEffectBattler2 == HOLD_EFFECT_CUSTAP_BERRY && HasEnoughHpToEatBerry(battler2, 4, gBattleMons[battler2].item))))
         gProtectStructs[battler2].usedCustapBerry = TRUE;
 }
@@ -5592,16 +5871,23 @@ static void TryEvolvePokemon(void)
             {
                 u16 species;
                 u8 levelUpBits = gLeveledUpInBattle;
+                bool32 evoModeNormal = TRUE;
 
                 levelUpBits &= ~(gBitTable[i]);
                 gLeveledUpInBattle = levelUpBits;
 
-                species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_NORMAL, levelUpBits, NULL);
+                species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_NORMAL, ITEM_NONE, NULL);
+                if (species == SPECIES_NONE)
+                {
+                    species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_CANT_STOP, ITEM_NONE, NULL);
+                    evoModeNormal = FALSE;
+                }
+
                 if (species != SPECIES_NONE)
                 {
                     FreeAllWindowBuffers();
                     gBattleMainFunc = WaitForEvoSceneToFinish;
-                    EvolutionScene(&gPlayerParty[i], species, TRUE, i);
+                    EvolutionScene(&gPlayerParty[i], species, evoModeNormal, i);
                     return;
                 }
             }
