@@ -18,7 +18,15 @@
 #define COMP OW_GFX_COMPRESS
 
 #if OW_FOLLOWERS_ENABLED
-#define FOLLOWER(name, _size, shadow, _tracks)                                              \
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+#define FOLLOWER_PAL(...)                                   \
+    .followerPalette = DEFAULT(NULL, __VA_ARGS__),          \
+    .followerShinyPalette = DEFAULT_2(NULL, __VA_ARGS__),
+#else
+#define FOLLOWER_PAL(...)
+#endif
+
+#define FOLLOWER(name, _size, shadow, _tracks, ...)                                         \
 .followerData = {                                                                           \
     .tileTag = TAG_NONE,                                                                    \
     .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,                                                \
@@ -36,9 +44,10 @@
     .anims = sAnimTable_Following,                                                          \
     .images = sPicTable_##name,                                                             \
     .affineAnims = gDummySpriteAffineAnimTable,                                             \
-},
+},                                                                                          \
+    FOLLOWER_PAL(__VA_ARGS__)
 #else
-#define FOLLOWER(name, _size, shadow, _tracks)
+#define FOLLOWER(name, _size, shadow, _tracks, ...)
 #endif
 
 // Maximum value for a female Pokémon is 254 (MON_FEMALE) which is 100% female.
