@@ -179,8 +179,13 @@ static const struct WindowTemplate sStartMenuWindowTemplates[] =
 
 // Main Background
 static const u32 sStartMenuTiles[] = INCBIN_U32("graphics/ui_startmenu_full/menu_tiles.4bpp.lz");
-static const u32 sStartMenuTilemap[] = INCBIN_U32("graphics/ui_startmenu_full/menu_tilemap.bin.lz");
 static const u16 sStartMenuPalette[] = INCBIN_U16("graphics/ui_startmenu_full/menu.gbapal");
+
+#if (FLAG_CLOCK_MODE != 0)
+static const u32 sStartMenuTilemap[] = INCBIN_U32("graphics/ui_startmenu_full/menu_tilemap_alt.bin.lz");
+#else
+static const u32 sStartMenuTilemap[] = INCBIN_U32("graphics/ui_startmenu_full/menu_tilemap.bin.lz");
+#endif
 
 // Alternate Main Background for Female Player
 static const u32 sStartMenuTilesAlt[] = INCBIN_U32("graphics/ui_startmenu_full/menu_tiles_alt.4bpp.lz");
@@ -1546,17 +1551,18 @@ static void Task_StartMenuFullMain(u8 taskId)
         gTasks[taskId].func = Task_HandleSaveConfirmation;
     }
 
+#if (FLAG_CLOCK_MODE != 0)
     if (JOY_NEW(SELECT_BUTTON)) // switch between clock modes
     {
-#if (FLAG_CLOCK_MODE != 0)
         if (FlagGet(FLAG_CLOCK_MODE))
             FlagClear(FLAG_CLOCK_MODE);
         else
             FlagSet(FLAG_CLOCK_MODE);
-#endif
+
         PrintMapNameAndTime();
         PlaySE(SE_SUCCESS);
     }
+#endif
 
     if(gTasks[taskId].sFrameToSecondTimer >= 60) // every 60 frames update the time
     {
