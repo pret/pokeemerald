@@ -1,6 +1,7 @@
 # Pokeemerald-Expansion Changelogs
 
 ## 1.8.x
+- ### [Version 1.8.1](docs/changelogs/1.8.1.md) - HOTFIX Release 🔥
 - ### [Version 1.8.0](docs/changelogs/1.8.0.md) - Feature Release ✨
 
 ## 1.7.x
