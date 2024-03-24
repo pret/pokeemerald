@@ -56,6 +56,12 @@
 
 */
 
+// This config unlocks the ability to switch between 24-hours clock and
+// 12-hours clock.
+// User need to set this toggle with an unused scripting flag such as
+// FLAG_UNUSED_0x020 replacing the 0 to be able to use the clock modes.
+#define FLAG_CLOCK_MODE 0
+
 struct StartMenuResources
 {
     MainCallback savedCallback;     // determines callback to run when we exit. e.g. where do we want to go after closing the menu
@@ -1205,7 +1211,7 @@ static void PrintSaveConfirmToWindow()
 
 
 //
-//  Print Time, Location, and Dayof Week
+//  Print Time, Location, Day of Week and Time Indicator
 //
 static const u8 sText_Sunday[] = _("Sun.");
 static const u8 sText_Monday[] = _("Mon.");
@@ -1225,12 +1231,15 @@ static const u8 * const sDayOfWeekStrings[7] =
     sText_Saturday,
 };
 
+static const u8 sText_AM[] = _("AM");
+static const u8 sText_PM[] = _("PM");
+
 static void PrintMapNameAndTime(void) //this code is ripped froom different parts of pokeemerald and is a mess because of that, but it all works
 {
     u8 mapDisplayHeader[24];
     u8 *withoutPrefixPtr;
     u8 x;
-    const u8 *str;
+    const u8 *str, *suffix = NULL;
     u8 sTimeTextColors[] = {TEXT_COLOR_TRANSPARENT, 2, 3};
 
     u16 hours;
@@ -1250,7 +1259,31 @@ static void PrintMapNameAndTime(void) //this code is ripped froom different part
     AddTextPrinterParameterized(WINDOW_TOP_BAR, FONT_NARROW, mapDisplayHeader, x + 152, 1, TEXT_SKIP_DRAW, NULL); // Print Map Name
 
     RtcCalcLocalTime();
+
     hours = gLocalTime.hours;
+
+#if (FLAG_CLOCK_MODE != 0)
+    if (FlagGet(FLAG_CLOCK_MODE)) // true: 12-hours, false: 24-hours
+    {
+        if (gLocalTime.hours < 12)
+        {
+            hours = (gLocalTime.hours == 0) ? 12 : gLocalTime.hours;
+            suffix = sText_AM;
+        }
+        else if (gLocalTime.hours == 12)
+        {
+            hours = 12;
+            if (suffix == sText_AM)
+                suffix = sText_PM;
+        }
+        else
+        {
+            hours = gLocalTime.hours - 12;
+            suffix = sText_PM;
+        }
+    }
+#endif
+
     minutes = gLocalTime.minutes;
     dayOfWeek = gLocalTime.days % 7;
     if (hours > 999)
@@ -1279,6 +1312,16 @@ static void PrintMapNameAndTime(void) //this code is ripped froom different part
     x += width;
     ConvertIntToDecimalStringN(gStringVar4, minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
     AddTextPrinterParameterized3(WINDOW_TOP_BAR, FONT_NORMAL, x, y, sTimeTextColors, TEXT_SKIP_DRAW, gStringVar4);
+
+#if (FLAG_CLOCK_MODE != 0)
+    if (suffix != NULL)
+    {
+        width = GetStringWidth(FONT_NORMAL, gStringVar4, 0) + 3; // CHAR_SPACE is 3 pixels wide
+        x += width;
+        StringExpandPlaceholders(gStringVar4, suffix);
+        AddTextPrinterParameterized3(WINDOW_TOP_BAR, FONT_NORMAL, x, y, sTimeTextColors, TEXT_SKIP_DRAW, gStringVar4);
+    }
+#endif
 
     PutWindowTilemap(WINDOW_TOP_BAR);
     CopyWindowToVram(WINDOW_TOP_BAR, COPYWIN_FULL);
@@ -1501,6 +1544,18 @@ static void Task_StartMenuFullMain(u8 taskId)
     {
         PrintSaveConfirmToWindow();
         gTasks[taskId].func = Task_HandleSaveConfirmation;
+    }
+
+    if (JOY_NEW(SELECT_BUTTON)) // switch between clock modes
+    {
+#if (FLAG_CLOCK_MODE != 0)
+        if (FlagGet(FLAG_CLOCK_MODE))
+            FlagClear(FLAG_CLOCK_MODE);
+        else
+            FlagSet(FLAG_CLOCK_MODE);
+#endif
+        PrintMapNameAndTime();
+        PlaySE(SE_SUCCESS);
     }
 
     if(gTasks[taskId].sFrameToSecondTimer >= 60) // every 60 frames update the time
