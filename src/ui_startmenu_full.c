@@ -181,11 +181,11 @@ static const struct WindowTemplate sStartMenuWindowTemplates[] =
 static const u32 sStartMenuTiles[] = INCBIN_U32("graphics/ui_startmenu_full/menu_tiles.4bpp.lz");
 static const u16 sStartMenuPalette[] = INCBIN_U16("graphics/ui_startmenu_full/menu.gbapal");
 
-#if (FLAG_CLOCK_MODE != 0)
-static const u32 sStartMenuTilemap[] = INCBIN_U32("graphics/ui_startmenu_full/menu_tilemap_alt.bin.lz");
-#else
+//#if (FLAG_CLOCK_MODE != 0)
+//static const u32 sStartMenuTilemap[] = INCBIN_U32("graphics/ui_startmenu_full/menu_tilemap_alt.bin.lz");
+//#else
 static const u32 sStartMenuTilemap[] = INCBIN_U32("graphics/ui_startmenu_full/menu_tilemap.bin.lz");
-#endif
+//#endif
 
 // Alternate Main Background for Female Player
 static const u32 sStartMenuTilesAlt[] = INCBIN_U32("graphics/ui_startmenu_full/menu_tiles_alt.4bpp.lz");
