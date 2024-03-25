@@ -757,6 +757,9 @@ static void PrintTextToBottomBar(u8 textId)
         case 2:
             str = sText_RecievedMon;
             break;
+        default:
+            str = sText_ChooseMon;
+            break;
     } 
     AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x, y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, str);
 
