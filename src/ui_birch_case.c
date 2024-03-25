@@ -476,7 +476,6 @@ static void BirchCase_GiveMon() // Function that calls the GiveMon function pull
 // UI loader template functions by Ghoulslash
 void Task_OpenBirchCase(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
@@ -536,7 +535,6 @@ static void BirchCaseVBlankCB(void)
 
 static bool8 BirchCaseDoGfxSetup(void)
 {
-    u8 taskId;
     switch (gMain.state)
     {
     case 0:
@@ -579,7 +577,7 @@ static bool8 BirchCaseDoGfxSetup(void)
         CreatePokeballSprites(); // Create Sprites and Print Text
         CreateHandSprite();
         PrintTextToBottomBar(CHOOSE_MON);
-        taskId = CreateTask(Task_BirchCaseWaitFadeIn, 0);
+        CreateTask(Task_BirchCaseWaitFadeIn, 0);
         BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
         gMain.state++;
         break;
@@ -638,8 +636,6 @@ static void Task_BirchCaseWaitFadeIn(u8 taskId)
 
 static void Task_BirchCaseTurnOff(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
-
     if (!gPaletteFade.active)
     {
         SetMainCallback2(sBirchCaseDataPtr->savedCallback);
@@ -711,8 +707,6 @@ static bool8 BirchCaseLoadGraphics(void) // load tilesets, tilemaps, spritesheet
 
 static void BirchCase_InitWindows(void)
 {
-    u32 i;
-
     InitWindows(sMenuWindowTemplates);
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
@@ -734,34 +728,34 @@ static const u8 sText_AreYouSure[] = _("Are you sure?    {A_BUTTON} Yes  {B_BUTT
 static const u8 sText_RecievedMon[] = _("Give your Pokémon a Nickname?   {A_BUTTON} Yes  {B_BUTTON} No");
 static void PrintTextToBottomBar(u8 textId)
 {
-    u16 species = sStarterChoices[sBirchCaseDataPtr->handPosition].species;
-    u16 dexNum = SpeciesToNationalPokedexNum(species);
-    u8 strArray[16];
-    u8 strArray2[4];
+    u8 speciesNameArray[16];
+    const u8 *mainBarAlternatingText;
+    const u8 * speciesCategoryText;
 
-    const u8 *str;
-    const u8 * str2;
     u8 x = 1 + 4;
-    u8 y = 1 + 16 + 2;
+    u8 y = 1 + 18;
+
+    u16 species = sStarterChoices[sBirchCaseDataPtr->handPosition].species;
+    u16 dexNum = SpeciesToNationalPokedexNum(species);    
 
     FillWindowPixelBuffer(WINDOW_BOTTOM_BAR, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     switch(textId)
     {
         case 0:
-            str = sText_ChooseMon;
+            mainBarAlternatingText = sText_ChooseMon;
             break;
         case 1:
-            str = sText_AreYouSure;
+            mainBarAlternatingText = sText_AreYouSure;
             break;
         case 2:
-            str = sText_RecievedMon;
+            mainBarAlternatingText = sText_RecievedMon;
             break;
         default:
-            str = sText_ChooseMon;
+            mainBarAlternatingText = sText_ChooseMon;
             break;
     } 
-    AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x, y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, str);
+    AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x, y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, mainBarAlternatingText);
 
     if(sStarterChoices[sBirchCaseDataPtr->handPosition].species == SPECIES_NONE)
     {
@@ -779,20 +773,20 @@ static void PrintTextToBottomBar(u8 textId)
     AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x + 32, 1 + 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gText_Dash);
 
 #ifdef POKEMON_EXPANSION
-    StringCopy(&strArray[0], GetSpeciesName(species));
+    StringCopy(&speciesNameArray[0], GetSpeciesName(species));
 #else
-    StringCopy(&strArray[0], &gSpeciesNames[species][0]);
+    StringCopy(&speciesNameArray[0], &gSpeciesNames[species][0]);
 #endif
-    AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x + 40, 1 + 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, &strArray[0]);
+    AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x + 40, 1 + 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, &speciesNameArray[0]);
 
     if(textId != 2)
     {
 #ifdef POKEMON_EXPANSION
-        str2 = GetSpeciesCategory(species);
+        speciesCategoryText = GetSpeciesCategory(species);
 #else
-        str2 = GetPokedexCategoryName(dexNum);
+        speciesCategoryText = GetPokedexCategoryName(dexNum);
 #endif
-        AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NARROW, x + 178 + GetStringCenterAlignXOffset(FONT_NARROW, str2, 52), y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, str2);
+        AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NARROW, x + 178 + GetStringCenterAlignXOffset(FONT_NARROW, speciesCategoryText, 52), y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, speciesCategoryText);
     }
 
     PutWindowTilemap(WINDOW_BOTTOM_BAR);
