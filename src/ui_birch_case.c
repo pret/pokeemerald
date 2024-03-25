@@ -460,9 +460,9 @@ static void ChangePositionUpdateSpriteAnims(u16 oldPosition, u8 taskId) // turn 
 
 static void BirchCase_GiveMon() // Function that calls the GiveMon function pulled from Expansion by Lunos and Ghoulslash
 {
-    u8 *evs = sStarterChoices[sBirchCaseDataPtr->handPosition].evs;
-    u8 *ivs = sStarterChoices[sBirchCaseDataPtr->handPosition].ivs;
-    u16 *moves = sStarterChoices[sBirchCaseDataPtr->handPosition].moves;
+    u8 *evs = (u8 *) sStarterChoices[sBirchCaseDataPtr->handPosition].evs;
+    u8 *ivs = (u8 *) sStarterChoices[sBirchCaseDataPtr->handPosition].ivs;
+    u16 *moves = (u16 *) sStarterChoices[sBirchCaseDataPtr->handPosition].moves;
     FlagSet(FLAG_SYS_POKEMON_GET);
     gSpecialVar_Result = BirchCase_GiveMonParameterized(sStarterChoices[sBirchCaseDataPtr->handPosition].species, sStarterChoices[sBirchCaseDataPtr->handPosition].level, \
                 sStarterChoices[sBirchCaseDataPtr->handPosition].item, sStarterChoices[sBirchCaseDataPtr->handPosition].ball, \
