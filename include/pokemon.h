@@ -438,7 +438,7 @@ struct SpeciesInfo /*0x8C*/
             u32 allPerfectIVs:1;
             u32 dexForceRequired:1; // This species will be taken into account for Pokédex ratings even if they have the "isMythical" flag set.
             u32 tmIlliterate:1; // This species will be unable to learn the universal moves.
-            u32 padding4:16;
+            u32 padding4:15;
             // Move Data
  /* 0x80 */ const struct LevelUpMove *levelUpLearnset;
  /* 0x84 */ const u16 *teachableLearnset;

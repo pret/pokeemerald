@@ -167,7 +167,7 @@
 #define STATUS3_YAWN_TURN(num)          (((num) << 11) & STATUS3_YAWN)
 #define STATUS3_IMPRISONED_OTHERS       (1 << 13)
 #define STATUS3_GRUDGE                  (1 << 14)
-#define STATUS3_CANT_SCORE_A_CRIT       (1 << 15)
+#define STATUS3___UNUSED                (1 << 15)
 #define STATUS3_GASTRO_ACID             (1 << 16)
 #define STATUS3_EMBARGO                 (1 << 17)
 #define STATUS3_UNDERWATER              (1 << 18)
