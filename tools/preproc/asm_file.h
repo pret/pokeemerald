@@ -24,6 +24,7 @@
 #include <cstdarg>
 #include <cstdint>
 #include <string>
+#include <set>
 #include "preproc.h"
 
 enum class Directive
@@ -34,6 +35,16 @@ enum class Directive
     Unknown
 };
 
+enum class LabelType
+{
+    Nonlocal,
+    Local,
+    Global,
+    NotALabel
+};
+
+class LocalLabelInfo;
+
 class AsmFile
 {
 public:
@@ -42,13 +53,15 @@ public:
     AsmFile(const AsmFile&) = delete;
     ~AsmFile();
     Directive GetDirective();
-    std::string GetGlobalLabel();
+    LabelType TryParseLabel(std::string& returnLabel);
+    void FindAndReplaceLocalLabels(std::string& outputLine);
     std::string ReadPath();
     int ReadString(unsigned char* s);
     int ReadBraille(unsigned char* s);
     bool IsAtEnd();
     void OutputLine();
     void OutputLocation();
+    void FindUndefinedLocalLabelsThenClear();
 
 private:
     char* m_buffer;
@@ -57,6 +70,12 @@ private:
     long m_lineNum;
     long m_lineStart;
     std::string m_filename;
+    std::string m_curNonLocalLabel;
+    bool m_nonLocalLabelFound;
+    std::map<std::string, LocalLabelInfo> m_localLabels;
+    bool m_identified = false;
+    //struct 
+    //std::vector<
 
     bool ConsumeComma();
     int ReadPadLength();
@@ -65,9 +84,24 @@ private:
     void SkipWhitespace();
     void ExpectEmptyRestOfLine();
     void ReportDiagnostic(const char* type, const char* format, std::va_list args);
-    void RaiseError(const char* format, ...);
+    void ReportDiagnosticWhere(const char* type, long lineNum, const char* format, std::va_list args);
+    void RaiseError(const char * format, ...);
+    void RaiseErrorWhereButContinue(long lineNum, const char * format, ...);
+    void RaiseErrorButContinue(const char * format, ...);
     void RaiseWarning(const char* format, ...);
+    void TryPrintErrorHeaderMessage();
     void VerifyStringLength(int length);
+};
+
+class LocalLabelInfo
+{
+    public:
+        LocalLabelInfo();
+        LocalLabelInfo(long lineNum);
+        //~LocalLabelInfo();
+
+        bool defined;
+        std::set<long> lineNums;
 };
 
 #endif // ASM_FILE_H
