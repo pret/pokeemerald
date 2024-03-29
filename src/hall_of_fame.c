@@ -452,8 +452,8 @@ static void Task_Hof_InitMonData(u8 taskId)
             sHofMonPtr->mon[i].isShiny = GetMonData(&gPlayerParty[i], MON_DATA_IS_SHINY);
             sHofMonPtr->mon[i].personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
             sHofMonPtr->mon[i].lvl = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
-            GetMonData(&gPlayerParty[i], MON_DATA_NICKNAME, nickname);
-            for (j = 0; j < POKEMON_NAME_LENGTH; j++)
+            GetMonData(&gPlayerParty[i], MON_DATA_NICKNAME10, nickname);
+            for (j = 0; j < VANILLA_POKEMON_NAME_LENGTH; j++)
                 sHofMonPtr->mon[i].nickname[j] = nickname[j];
             gTasks[taskId].tMonNumber++;
         }
