@@ -21,6 +21,7 @@ void CreateZMoveTriggerSprite(u8, bool8);
 void HideZMoveTriggerSprite(void);
 bool32 IsZMoveTriggerSpriteActive(void);
 void DestroyZMoveTriggerSprite(void);
+u16 GetTypeBasedZMove(u16 move, u8 battler);
 bool32 MoveSelectionDisplayZMove(u16 zmove, u32 battler);
 void SetZEffect(void);
 bool32 IsZMoveUsable(u8 battler, u16 moveIndex);

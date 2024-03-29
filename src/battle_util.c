@@ -3518,6 +3518,9 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
         case CANCELLER_Z_MOVES:
             if (gBattleStruct->zmove.toBeUsed[gBattlerAttacker] != MOVE_NONE)
             {
+                // For Z-Mirror Move, so it doesn't play the animation twice.
+                bool32 alreadyUsed = (gBattleStruct->zmove.used[gBattlerAttacker] == TRUE);
+
                 //attacker has a queued z move
                 gBattleStruct->zmove.active = TRUE;
                 gBattleStruct->zmove.activeCategory = gBattleStruct->zmove.categories[gBattlerAttacker];
@@ -3530,13 +3533,19 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
                 if (gBattleStruct->zmove.activeCategory == DAMAGE_CATEGORY_STATUS)
                 {
                     gBattleStruct->zmove.effect = gMovesInfo[gBattleStruct->zmove.baseMoves[gBattlerAttacker]].zMove.effect;
-                    BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_ZMoveActivateStatus;
+                    if (!alreadyUsed)
+                    {
+                        BattleScriptPushCursor();
+                        gBattlescriptCurrInstr = BattleScript_ZMoveActivateStatus;
+                    }
                 }
                 else
                 {
-                    BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_ZMoveActivateDamaging;
+                    if (!alreadyUsed)
+                    {
+                        BattleScriptPushCursor();
+                        gBattlescriptCurrInstr = BattleScript_ZMoveActivateDamaging;
+                    }
                 }
                 effect = 1;
             }
