@@ -43,11 +43,11 @@ void PrintAsmBytes(unsigned char *s, int length)
     }
 }
 
-void PreprocAsmFile(std::string filename)
+void PreprocAsmFile(std::string filename, bool isStdin)
 {
     std::stack<AsmFile> stack;
 
-    stack.push(AsmFile(filename));
+    stack.push(AsmFile(filename, isStdin));
 
     for (;;)
     {
@@ -66,7 +66,7 @@ void PreprocAsmFile(std::string filename)
         switch (directive)
         {
         case Directive::Include:
-            stack.push(AsmFile(stack.top().ReadPath()));
+            stack.push(AsmFile(stack.top().ReadPath(), false));
             stack.top().OutputLocation();
             break;
         case Directive::String:
@@ -145,8 +145,18 @@ int main(int argc, char **argv)
     if (!extension)
         FATAL_ERROR("\"%s\" has no file extension.\n", argv[1]);
 
-    if ((extension[0] == 's') && extension[1] == 0)
-        PreprocAsmFile(argv[1]);
+    if ((extension[0] == 's') && extension[1] == 0) {
+        if (argc == 4) {
+            if (argv[3][0] == '-' && argv[3][1] == 'i' && argv[3][2] == '\0') {
+                PreprocAsmFile(argv[1], true);
+            } else {
+                FATAL_ERROR("unknown argument flag \"%s\".\n", argv[3]);
+            }
+        } else {
+            PreprocAsmFile(argv[1], false);
+        }
+        
+    }
     else if ((extension[0] == 'c' || extension[0] == 'i') && extension[1] == 0) {
         if (argc == 4) {
             if (argv[3][0] == '-' && argv[3][1] == 'i' && argv[3][2] == '\0') {

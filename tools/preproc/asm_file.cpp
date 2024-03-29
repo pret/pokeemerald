@@ -27,33 +27,11 @@
 #include "utf8.h"
 #include "string_parser.h"
 #include "../../gflib/characters.h"
+#include "io.h"
 
-AsmFile::AsmFile(std::string filename) : m_filename(filename)
+AsmFile::AsmFile(std::string filename, bool isStdin) : m_filename(filename)
 {
-    FILE *fp = std::fopen(filename.c_str(), "rb");
-
-    if (fp == NULL)
-        FATAL_ERROR("Failed to open \"%s\" for reading.\n", filename.c_str());
-
-    std::fseek(fp, 0, SEEK_END);
-
-    m_size = std::ftell(fp);
-
-    if (m_size < 0)
-        FATAL_ERROR("File size of \"%s\" is less than zero.\n", filename.c_str());
-    else if (m_size == 0)
-        return; // Empty file
-
-    m_buffer = new char[m_size + 1];
-
-    std::rewind(fp);
-
-    if (std::fread(m_buffer, m_size, 1, fp) != 1)
-        FATAL_ERROR("Failed to read \"%s\".\n", filename.c_str());
-
-    m_buffer[m_size] = 0;
-
-    std::fclose(fp);
+    m_buffer = ReadFileToBuffer(filename.c_str(), isStdin, &m_size);
 
     m_pos = 0;
     m_lineNum = 1;

@@ -37,7 +37,7 @@ enum class Directive
 class AsmFile
 {
 public:
-    AsmFile(std::string filename);
+    AsmFile(std::string filename, bool isStdin);
     AsmFile(AsmFile&& other);
     AsmFile(const AsmFile&) = delete;
     ~AsmFile();
