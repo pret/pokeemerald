@@ -551,7 +551,7 @@ static void CursorCallback(struct Sprite *sprite) // Sprite callback for the cur
     sprite->x = spriteCords[sStartMenuDataPtr->selector_y][sStartMenuDataPtr->selector_x].x;
     sprite->y = spriteCords[sStartMenuDataPtr->selector_y][sStartMenuDataPtr->selector_x].y;
 
-    DebugPrintf("%d", sStartMenuDataPtr->selectedStat);
+
 }
 
 static void InitCursorInPlace()
