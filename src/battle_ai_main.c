@@ -4258,7 +4258,7 @@ static u32 AI_CalcMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
             ADJUST_SCORE(DECENT_EFFECT);
         break;
     case EFFECT_SOAK:
-        if (HasMoveWithType(battlerAtk, TYPE_ELECTRIC) || HasMoveWithType(battlerAtk, TYPE_GRASS) || HasMoveEffect(battlerAtk, EFFECT_FREEZE_DRY))
+        if (HasMoveWithType(battlerAtk, TYPE_ELECTRIC) || HasMoveWithType(battlerAtk, TYPE_GRASS) || (HasMoveEffect(battlerAtk, EFFECT_SUPER_EFFECTIVE_ON_ARG) && gMovesInfo[move].argument == TYPE_WATER) )
             ADJUST_SCORE(DECENT_EFFECT); // Get some super effective moves
         break;
     case EFFECT_THIRD_TYPE:
