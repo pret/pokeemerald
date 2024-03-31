@@ -48,6 +48,7 @@ void PreprocAsmFile(std::string filename, bool isStdin)
     std::stack<AsmFile> stack;
 
     stack.push(AsmFile(filename, isStdin));
+    std::printf("# 1 \"%s\"\n", filename.c_str());
 
     for (;;)
     {
@@ -81,6 +82,12 @@ void PreprocAsmFile(std::string filename, bool isStdin)
             unsigned char s[kMaxStringLength];
             int length = stack.top().ReadBraille(s);
             PrintAsmBytes(s, length);
+            break;
+        }
+        case Directive::Enum:
+        {
+            if (!stack.top().ParseEnum())
+                stack.top().OutputLine();
             break;
         }
         case Directive::Unknown:

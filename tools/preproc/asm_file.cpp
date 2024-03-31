@@ -152,6 +152,8 @@ Directive AsmFile::GetDirective()
         return Directive::String;
     else if (CheckForDirective(".braille"))
         return Directive::Braille;
+    else if (CheckForDirective("enum"))
+        return Directive::Enum;
     else
         return Directive::Unknown;
 }
@@ -505,6 +507,63 @@ void AsmFile::OutputLine()
     }
 }
 
+// parses an assumed C `enum`. Returns false if `enum { ...` is not matched
+bool AsmFile::ParseEnum()
+{
+    long fallbackPosition = m_pos;
+    std::string headerFilename = "";
+    long currentHeaderLine = SkipWhitespaceAndEol();
+    std::string enumName = ReadIdentifier();
+    currentHeaderLine += SkipWhitespaceAndEol();
+    long enumCounter = 0;
+    long symbolCount = 0;
+
+    if (m_buffer[m_pos] != '{') // assume assembly macro, otherwise assume enum and report errors accordingly
+    {
+        m_pos = fallbackPosition - 4;
+        return false;
+    }
+
+    currentHeaderLine += FindLastLineNumber(headerFilename);
+    m_pos++;
+    for (;;)
+    {
+        currentHeaderLine += SkipWhitespaceAndEol();
+        std::string currentIdentName = ReadIdentifier();
+        if (currentIdentName.empty() && symbolCount == 0)
+        {
+            RaiseError("%s:%ld: empty enum is invalid", headerFilename.c_str(), currentHeaderLine);
+        }
+        std::printf("# %ld \"%s\"\n", currentHeaderLine, headerFilename.c_str());
+        currentHeaderLine += SkipWhitespaceAndEol();
+        if (m_buffer[m_pos] == '=')
+        {
+            m_pos++;
+            currentHeaderLine += SkipWhitespaceAndEol();
+            enumCounter = ReadInteger(headerFilename, currentHeaderLine);
+            currentHeaderLine += SkipWhitespaceAndEol();
+        }
+        
+        std::printf(".equiv %s, %ld\n", currentIdentName.c_str(), enumCounter);
+        enumCounter++;
+        if (m_buffer[m_pos] != ',')
+        {
+            currentHeaderLine += SkipWhitespaceAndEol();
+            if (m_buffer[m_pos++] == '}' && m_buffer[m_pos++] == ';')
+            {
+                ExpectEmptyRestOfLine();
+                break;
+            }
+            else
+            {
+                RaiseError("unterminated enum from included file %s:%ld", headerFilename.c_str(), currentHeaderLine);
+            }
+        }
+        m_pos++;
+    }
+    return true;
+}
+
 // Asserts that the rest of the line is empty and moves to the next one.
 void AsmFile::ExpectEmptyRestOfLine()
 {
@@ -576,4 +635,131 @@ void AsmFile::RaiseError(const char* format, ...)
 void AsmFile::RaiseWarning(const char* format, ...)
 {
     DO_REPORT("warning");
+}
+
+// Skips Whitespace including newlines and returns the amount of newlines skipped
+int AsmFile::SkipWhitespaceAndEol()
+{
+    int newlines = 0;
+    while (m_buffer[m_pos] == '\t' || m_buffer[m_pos] == ' ' || m_buffer[m_pos] == '\n')
+    {
+        if (m_buffer[m_pos] == '\n')
+            newlines++;
+        m_pos++;
+    }
+    return newlines;
+}
+
+// returns the last line indicator and its corresponding file name without modifying the token index
+int AsmFile::FindLastLineNumber(std::string& filename)
+{
+    long pos = m_pos;
+    long linebreaks = 0;
+    while (m_buffer[pos] != '#' && pos >= 0)
+    {
+        if (m_buffer[pos] == '\n')
+            linebreaks++;
+        pos--;
+    }
+
+    if (pos < 0)
+        RaiseError("line indicator for header file not found before `enum`");
+    
+    pos++;
+    while (m_buffer[pos] == ' ' || m_buffer[pos] == '\t')
+        pos++;
+
+    if (!IsAsciiDigit(m_buffer[pos]))
+        RaiseError("malformatted line indicator found before `enum`, expected line number");
+    
+    unsigned n = 0;
+    int digit = 0;
+    while ((digit = ConvertDigit(m_buffer[pos++], 10)) != -1)
+        n = 10 * n + digit;
+
+    while (m_buffer[pos] == ' ' || m_buffer[pos] == '\t')
+        pos++;
+
+    if (m_buffer[pos++] != '"')
+        RaiseError("malformatted line indicator found before `enum`, expected filename");
+
+    while (m_buffer[pos] != '"')
+    {
+        unsigned char c = m_buffer[pos++];
+
+        if (c == 0)
+        {
+            if (pos >= m_size)
+                RaiseError("unexpected EOF in line indicator");
+            else
+                RaiseError("unexpected null character in line indicator");
+        }
+
+        if (!IsAsciiPrintable(c))
+            RaiseError("unexpected character '\\x%02X' in line indicator", c);
+
+        if (c == '\\')
+        {
+            c = m_buffer[pos];
+            RaiseError("unexpected escape '\\%c' in line indicator", c);
+        }
+
+        filename += c;
+    }
+    
+    return n + linebreaks - 1;
+}
+
+std::string AsmFile::ReadIdentifier()
+{
+    long start = m_pos;
+    if (!IsIdentifierStartingChar(m_buffer[m_pos]))
+        return std::string();
+
+    m_pos++;
+
+    while (IsIdentifierChar(m_buffer[m_pos]))
+        m_pos++;
+
+    return std::string(&m_buffer[start], m_pos - start);
+}
+
+long AsmFile::ReadInteger(std::string filename, long line)
+{
+    bool negate = false;
+    int radix = 10;
+    if (!IsAsciiDigit(m_buffer[m_pos]))
+    {
+        if (m_buffer[m_pos++] == '-')
+            negate = true;
+        else
+            RaiseError("expected number in included file %s:%ld", filename.c_str(), line);
+    }
+
+    if (m_buffer[m_pos] == '0' && m_buffer[m_pos + 1] == 'x')
+    {
+        radix = 16;
+        m_pos += 2;
+    }
+    else if (m_buffer[m_pos] == '0' && m_buffer[m_pos + 1] == 'b')
+    {
+        radix = 2;
+        m_pos += 2;
+    }
+    else if (m_buffer[m_pos] == '0' && IsAsciiDigit(m_buffer[m_pos+1]))
+    {
+        radix = 8;
+        m_pos++;
+    }
+
+    long n = 0;
+    int digit;
+
+    while ((digit = ConvertDigit(m_buffer[m_pos], radix)) != -1)
+    {
+        n = n * radix + digit;
+        m_pos++;
+    }
+
+    return negate ? -n : n;
 }

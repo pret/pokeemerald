@@ -31,6 +31,7 @@ enum class Directive
     Include,
     String,
     Braille,
+    Enum,
     Unknown
 };
 
@@ -49,6 +50,7 @@ public:
     bool IsAtEnd();
     void OutputLine();
     void OutputLocation();
+    bool ParseEnum();
 
 private:
     char* m_buffer;
@@ -68,6 +70,10 @@ private:
     void RaiseError(const char* format, ...);
     void RaiseWarning(const char* format, ...);
     void VerifyStringLength(int length);
+    int SkipWhitespaceAndEol();
+    int FindLastLineNumber(std::string& filename);
+    std::string ReadIdentifier();
+    long ReadInteger(std::string filename, long line);
 };
 
 #endif // ASM_FILE_H
