@@ -6594,13 +6594,13 @@ const u8 gMonFootprint_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mar
 #if P_FAMILY_ARCEUS
     const u32 gMonFrontPic_Arceus[] = INCBIN_U32("graphics/pokemon/arceus/anim_front.4bpp.lz");
     const u32 gMonBackPic_Arceus[] = INCBIN_U32("graphics/pokemon/arceus/back.4bpp.lz");
-    const u8 gMonIcon_Arceus[] = INCBIN_U8("graphics/pokemon/arceus/icon.4bpp");
 #if P_FOOTPRINTS
     const u8 gMonFootprint_Arceus[] = INCBIN_U8("graphics/pokemon/arceus/footprint.1bpp");
 #endif //P_FOOTPRINTS
 
     const u32 gMonPalette_ArceusNormal[] = INCBIN_U32("graphics/pokemon/arceus/normal.gbapal.lz");
     const u32 gMonShinyPalette_ArceusNormal[] = INCBIN_U32("graphics/pokemon/arceus/shiny.gbapal.lz");
+    const u8 gMonIcon_ArceusNormal[] = INCBIN_U8("graphics/pokemon/arceus/icon.4bpp");
 
     const u32 gMonPalette_ArceusFighting[] = INCBIN_U32("graphics/pokemon/arceus/fighting/normal.gbapal.lz");
     const u32 gMonShinyPalette_ArceusFighting[] = INCBIN_U32("graphics/pokemon/arceus/fighting/shiny.gbapal.lz");
@@ -6652,6 +6652,26 @@ const u8 gMonFootprint_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mar
 
     const u32 gMonPalette_ArceusFairy[] = INCBIN_U32("graphics/pokemon/arceus/fairy/normal.gbapal.lz");
     const u32 gMonShinyPalette_ArceusFairy[] = INCBIN_U32("graphics/pokemon/arceus/fairy/shiny.gbapal.lz");
+
+#if P_ARCEUS_UNIQUE_FORM_ICONS >= GEN_9
+    const u8 gMonIcon_ArceusFighting[] = INCBIN_U8("graphics/pokemon/arceus/fighting/icon.4bpp");
+    const u8 gMonIcon_ArceusFlying[] = INCBIN_U8("graphics/pokemon/arceus/flying/icon.4bpp");
+    const u8 gMonIcon_ArceusPoison[] = INCBIN_U8("graphics/pokemon/arceus/poison/icon.4bpp");
+    const u8 gMonIcon_ArceusGround[] = INCBIN_U8("graphics/pokemon/arceus/ground/icon.4bpp");
+    const u8 gMonIcon_ArceusRock[] = INCBIN_U8("graphics/pokemon/arceus/rock/icon.4bpp");
+    const u8 gMonIcon_ArceusBug[] = INCBIN_U8("graphics/pokemon/arceus/bug/icon.4bpp");
+    const u8 gMonIcon_ArceusGhost[] = INCBIN_U8("graphics/pokemon/arceus/ghost/icon.4bpp");
+    const u8 gMonIcon_ArceusSteel[] = INCBIN_U8("graphics/pokemon/arceus/steel/icon.4bpp");
+    const u8 gMonIcon_ArceusFire[] = INCBIN_U8("graphics/pokemon/arceus/fire/icon.4bpp");
+    const u8 gMonIcon_ArceusWater[] = INCBIN_U8("graphics/pokemon/arceus/water/icon.4bpp");
+    const u8 gMonIcon_ArceusGrass[] = INCBIN_U8("graphics/pokemon/arceus/grass/icon.4bpp");
+    const u8 gMonIcon_ArceusElectric[] = INCBIN_U8("graphics/pokemon/arceus/electric/icon.4bpp");
+    const u8 gMonIcon_ArceusPsychic[] = INCBIN_U8("graphics/pokemon/arceus/psychic/icon.4bpp");
+    const u8 gMonIcon_ArceusIce[] = INCBIN_U8("graphics/pokemon/arceus/ice/icon.4bpp");
+    const u8 gMonIcon_ArceusDragon[] = INCBIN_U8("graphics/pokemon/arceus/dragon/icon.4bpp");
+    const u8 gMonIcon_ArceusDark[] = INCBIN_U8("graphics/pokemon/arceus/dark/icon.4bpp");
+    const u8 gMonIcon_ArceusFairy[] = INCBIN_U8("graphics/pokemon/arceus/fairy/icon.4bpp");
+#endif //P_ARCEUS_UNIQUE_FORM_ICONS
 #endif //P_FAMILY_ARCEUS
 
 #if P_FAMILY_VICTINI
