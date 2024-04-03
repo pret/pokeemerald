@@ -5341,8 +5341,18 @@ static bool32 TryKnockOffBattleScript(u32 battlerDef)
             gBattleMons[battlerDef].item = 0;
             if (gBattleMons[battlerDef].ability != ABILITY_GORILLA_TACTICS)
                 gBattleStruct->choicedMove[battlerDef] = 0;
-            gWishFutureKnock.knockedOffMons[side] |= gBitTable[gBattlerPartyIndexes[battlerDef]];
             CheckSetUnburden(battlerDef);
+
+            // In Gen 5+, Knock Off removes the target's item rather than rendering it unusable.
+            if (B_KNOCK_OFF_REMOVAL >= GEN_5)
+            {
+                BtlController_EmitSetMonData(battlerDef, BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[battlerDef].item), &gBattleMons[battlerDef].item);
+                MarkBattlerForControllerExec(battlerDef);
+            }
+            else
+            {
+                gWishFutureKnock.knockedOffMons[side] |= gBitTable[gBattlerPartyIndexes[battlerDef]];
+            }
 
             BattleScriptPushCursor();
             gBattlescriptCurrInstr = BattleScript_KnockedOff;
