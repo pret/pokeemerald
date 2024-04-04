@@ -1530,7 +1530,7 @@ static u32 GetSwitchinHitsToKO(s32 damageTaken, u32 battler)
     s32 currentHP = startingHP;
 
     // No damage being dealt
-    if (damageTaken + statusDamage + recurringDamage == 0)
+    if (damageTaken + statusDamage + recurringDamage < recurringHealing)
         return startingHP;
 
     // Mon fainted to hazards
@@ -1589,7 +1589,7 @@ static u32 GetSwitchinHitsToKO(s32 damageTaken, u32 battler)
         }
 
         // Healing from items occurs before status so we can do the rest in one line
-        if (currentHP != 0)
+        if (currentHP >= 0)
             currentHP = currentHP + recurringHealing - recurringDamage - statusDamage;
 
         // Recalculate toxic damage if needed
