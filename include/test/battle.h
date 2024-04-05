@@ -723,27 +723,8 @@ struct BattleTestRunnerState
 extern const struct TestRunner gBattleTestRunner;
 extern struct BattleTestRunnerState *const gBattleTestRunnerState;
 
-#define MEMBERS(...) VARARG_8(MEMBERS_, __VA_ARGS__)
-#define MEMBERS_0()
-#define MEMBERS_1(a) a;
-#define MEMBERS_2(a, b) a; b;
-#define MEMBERS_3(a, b, c) a; b; c;
-#define MEMBERS_4(a, b, c, d) a; b; c; d;
-#define MEMBERS_5(a, b, c, d, e) a; b; c; d; e;
-#define MEMBERS_6(a, b, c, d, e, f) a; b; c; d; e; f;
-#define MEMBERS_7(a, b, c, d, e, f, g) a; b; c; d; e; f; g;
-#define MEMBERS_8(a, b, c, d, e, f, g, h) a; b; c; d; e; f; g; h;
-
-#define APPEND_TRUE(...) VARARG_8(APPEND_TRUE_, __VA_ARGS__)
-#define APPEND_TRUE_0()
-#define APPEND_TRUE_1(a) a, TRUE
-#define APPEND_TRUE_2(a, b) a, TRUE, b, TRUE
-#define APPEND_TRUE_3(a, b, c) a, TRUE, b, TRUE, c, TRUE
-#define APPEND_TRUE_4(a, b, c, d) a, TRUE, b, TRUE, c, TRUE, d, TRUE
-#define APPEND_TRUE_5(a, b, c, d, e) a, TRUE, b, TRUE, c, TRUE, d, TRUE, e, TRUE
-#define APPEND_TRUE_6(a, b, c, d, e, f) a, TRUE, b, TRUE, c, TRUE, d, TRUE, e, TRUE, f, TRUE
-#define APPEND_TRUE_7(a, b, c, d, e, f, g) a, TRUE, b, TRUE, c, TRUE, d, TRUE, e, TRUE, f, TRUE, g, TRUE
-#define APPEND_TRUE_8(a, b, c, d, e, f, g, h) a, TRUE, b, TRUE, c, TRUE, d, TRUE, e, TRUE, f, TRUE, g, TRUE, h, TRUE
+#define APPEND_COMMA_TRUE(a) , a, TRUE
+#define R_APPEND_TRUE(...) __VA_OPT__(FIRST(__VA_ARGS__), TRUE RECURSIVELY(R_FOR_EACH(APPEND_COMMA_TRUE, EXCEPT_1(__VA_ARGS__))))
 
 /* Test */
 
@@ -754,7 +735,7 @@ extern struct BattleTestRunnerState *const gBattleTestRunnerState;
     }
 
 #define BATTLE_TEST_ARGS_SINGLE(_name, _type, ...) \
-    struct CAT(Result, __LINE__) { MEMBERS(__VA_ARGS__) }; \
+    struct CAT(Result, __LINE__) { RECURSIVELY(R_FOR_EACH(APPEND_SEMICOLON, __VA_ARGS__)) }; \
     static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *, const u32, struct BattlePokemon *, struct BattlePokemon *); \
     __attribute__((section(".tests"))) static const struct Test CAT(sTest, __LINE__) = \
     { \
@@ -772,7 +753,7 @@ extern struct BattleTestRunnerState *const gBattleTestRunnerState;
     static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *results, const u32 i, struct BattlePokemon *player, struct BattlePokemon *opponent)
 
 #define BATTLE_TEST_ARGS_DOUBLE(_name, _type, ...) \
-    struct CAT(Result, __LINE__) { MEMBERS(__VA_ARGS__) }; \
+    struct CAT(Result, __LINE__) { RECURSIVELY(R_FOR_EACH(APPEND_SEMICOLON, __VA_ARGS__)) }; \
     static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *, const u32, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *); \
     __attribute__((section(".tests"))) static const struct Test CAT(sTest, __LINE__) = \
     { \
@@ -911,28 +892,28 @@ enum { TURN_CLOSED, TURN_OPEN, TURN_CLOSING };
 
 #define TURN for (OpenTurn(__LINE__); gBattleTestRunnerState->data.turnState == TURN_OPEN; CloseTurn(__LINE__))
 
-#define MOVE(battler, ...) Move(__LINE__, battler, (struct MoveContext) { APPEND_TRUE(__VA_ARGS__) })
+#define MOVE(battler, ...) Move(__LINE__, battler, (struct MoveContext) { R_APPEND_TRUE(__VA_ARGS__) })
 
-#define EXPECT_MOVE(battler, ...) ExpectMove(__LINE__, battler, (struct MoveContext) { APPEND_TRUE(__VA_ARGS__) })
+#define EXPECT_MOVE(battler, ...) ExpectMove(__LINE__, battler, (struct MoveContext) { R_APPEND_TRUE(__VA_ARGS__) })
 #define NOT_EXPECT_MOVE(battler, _move) ExpectMove(__LINE__, battler, (struct MoveContext) { .move = _move, .explicitMove = TRUE, .notExpected = TRUE, .explicitNotExpected = TRUE, })
 #define EXPECT_MOVES(battler, ...) ExpectMoves(__LINE__, battler, FALSE, (struct FourMoves) {{ __VA_ARGS__ }})
 #define NOT_EXPECT_MOVES(battler, ...) ExpectMoves(__LINE__, battler, TRUE, (struct FourMoves) {{ __VA_ARGS__ }})
 #define EXPECT_SEND_OUT(battler, partyIndex) ExpectSendOut(__LINE__, battler, partyIndex)
 #define EXPECT_SWITCH(battler, partyIndex) ExpectSwitch(__LINE__, battler, partyIndex)
-#define SCORE_EQ(battler, ...) Score(__LINE__, battler, CMP_EQUAL, FALSE, (struct TestAIScoreStruct) { APPEND_TRUE(__VA_ARGS__) } )
-#define SCORE_NE(battler, ...) Score(__LINE__, battler, CMP_NOT_EQUAL, FALSE, (struct TestAIScoreStruct) { APPEND_TRUE(__VA_ARGS__) } )
-#define SCORE_GT(battler, ...) Score(__LINE__, battler, CMP_GREATER_THAN, FALSE, (struct TestAIScoreStruct) { APPEND_TRUE(__VA_ARGS__) } )
-#define SCORE_LT(battler, ...) Score(__LINE__, battler, CMP_LESS_THAN, FALSE, (struct TestAIScoreStruct) { APPEND_TRUE(__VA_ARGS__) } )
-#define SCORE_EQ_VAL(battler, ...) Score(__LINE__, battler, CMP_EQUAL, TRUE, (struct TestAIScoreStruct) { APPEND_TRUE(__VA_ARGS__) } )
-#define SCORE_NE_VAL(battler, ...) Score(__LINE__, battler, CMP_NOT_EQUAL, TRUE, (struct TestAIScoreStruct) { APPEND_TRUE(__VA_ARGS__) } )
-#define SCORE_GT_VAL(battler, ...) Score(__LINE__, battler, CMP_GREATER_THAN, TRUE, (struct TestAIScoreStruct) { APPEND_TRUE(__VA_ARGS__) } )
-#define SCORE_LT_VAL(battler, ...) Score(__LINE__, battler, CMP_LESS_THAN, TRUE, (struct TestAIScoreStruct) { APPEND_TRUE(__VA_ARGS__) } )
+#define SCORE_EQ(battler, ...) Score(__LINE__, battler, CMP_EQUAL, FALSE, (struct TestAIScoreStruct) { R_APPEND_TRUE(__VA_ARGS__) } )
+#define SCORE_NE(battler, ...) Score(__LINE__, battler, CMP_NOT_EQUAL, FALSE, (struct TestAIScoreStruct) { R_APPEND_TRUE(__VA_ARGS__) } )
+#define SCORE_GT(battler, ...) Score(__LINE__, battler, CMP_GREATER_THAN, FALSE, (struct TestAIScoreStruct) { R_APPEND_TRUE(__VA_ARGS__) } )
+#define SCORE_LT(battler, ...) Score(__LINE__, battler, CMP_LESS_THAN, FALSE, (struct TestAIScoreStruct) { R_APPEND_TRUE(__VA_ARGS__) } )
+#define SCORE_EQ_VAL(battler, ...) Score(__LINE__, battler, CMP_EQUAL, TRUE, (struct TestAIScoreStruct) { R_APPEND_TRUE(__VA_ARGS__) } )
+#define SCORE_NE_VAL(battler, ...) Score(__LINE__, battler, CMP_NOT_EQUAL, TRUE, (struct TestAIScoreStruct) { R_APPEND_TRUE(__VA_ARGS__) } )
+#define SCORE_GT_VAL(battler, ...) Score(__LINE__, battler, CMP_GREATER_THAN, TRUE, (struct TestAIScoreStruct) { R_APPEND_TRUE(__VA_ARGS__) } )
+#define SCORE_LT_VAL(battler, ...) Score(__LINE__, battler, CMP_LESS_THAN, TRUE, (struct TestAIScoreStruct) { R_APPEND_TRUE(__VA_ARGS__) } )
 
 #define FORCED_MOVE(battler) ForcedMove(__LINE__, battler)
 #define SWITCH(battler, partyIndex) Switch(__LINE__, battler, partyIndex)
 #define SKIP_TURN(battler) SkipTurn(__LINE__, battler)
 #define SEND_OUT(battler, partyIndex) SendOut(__LINE__, battler, partyIndex)
-#define USE_ITEM(battler, ...) UseItem(__LINE__, battler, (struct ItemContext) { APPEND_TRUE(__VA_ARGS__) })
+#define USE_ITEM(battler, ...) UseItem(__LINE__, battler, (struct ItemContext) { R_APPEND_TRUE(__VA_ARGS__) })
 #define WITH_RNG(tag, value) rng: ((struct TurnRNG) { tag, value })
 
 struct MoveContext
@@ -998,8 +979,8 @@ void SendOut(u32 sourceLine, struct BattlePokemon *, u32 partyIndex);
 
 #define ABILITY_POPUP(battler, ...) QueueAbility(__LINE__, battler, (struct AbilityEventContext) { __VA_ARGS__ })
 #define ANIMATION(type, id, ...) QueueAnimation(__LINE__, type, id, (struct AnimationEventContext) { __VA_ARGS__ })
-#define HP_BAR(battler, ...) QueueHP(__LINE__, battler, (struct HPEventContext) { APPEND_TRUE(__VA_ARGS__) })
-#define EXPERIENCE_BAR(battler, ...) QueueExp(__LINE__, battler, (struct ExpEventContext) { APPEND_TRUE(__VA_ARGS__) })
+#define HP_BAR(battler, ...) QueueHP(__LINE__, battler, (struct HPEventContext) { R_APPEND_TRUE(__VA_ARGS__) })
+#define EXPERIENCE_BAR(battler, ...) QueueExp(__LINE__, battler, (struct ExpEventContext) { R_APPEND_TRUE(__VA_ARGS__) })
 // Static const is needed to make the modern compiler put the pattern variable in the .rodata section, instead of putting it on stack(which can break the game).
 #define MESSAGE(pattern) do {static const u8 msg[] = _(pattern); QueueMessage(__LINE__, msg);} while (0)
 #define STATUS_ICON(battler, status) QueueStatus(__LINE__, battler, (struct StatusEventContext) { status })
