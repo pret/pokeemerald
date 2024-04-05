@@ -21,7 +21,7 @@ SINGLE_BATTLE_TEST("Booster Energy will activate Quark Drive after Electric Terr
         ABILITY_POPUP(opponent, ABILITY_ELECTRIC_SURGE);
         NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
-            MESSAGE("Iron Moth's Booster Energy to activate Quark Drive!");
+            MESSAGE("Iron Moth used its Booster Energy to activate Quark Drive!");
             MESSAGE("Iron Moth's Sp. Atk was heightened!");
         }
         ABILITY_POPUP(player, ABILITY_QUARK_DRIVE);
@@ -30,7 +30,7 @@ SINGLE_BATTLE_TEST("Booster Energy will activate Quark Drive after Electric Terr
         MESSAGE("The electricity disappeared from the battlefield.");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
         ABILITY_POPUP(player, ABILITY_QUARK_DRIVE);
-        MESSAGE("Iron Moth's used its Booster Energy to activate Quark Drive!");
+        MESSAGE("Iron Moth used its Booster Energy to activate Quark Drive!");
         MESSAGE("Iron Moth's Sp. Atk was heightened!");
     }
 }
@@ -50,7 +50,7 @@ SINGLE_BATTLE_TEST("Booster Energy will activate Protosynthesis after harsh sunl
         ABILITY_POPUP(opponent, ABILITY_DROUGHT);
         NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
-            MESSAGE("RagingBolt's used its Booster Energy to activate Protosynthesis!");
+            MESSAGE("RagingBolt used its Booster Energy to activate Protosynthesis!");
             MESSAGE("RagingBolt's Sp. Atk was heightened!");
         }
         ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
@@ -59,7 +59,7 @@ SINGLE_BATTLE_TEST("Booster Energy will activate Protosynthesis after harsh sunl
         MESSAGE("The sunlight faded.");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
         ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
-        MESSAGE("RagingBolt's used its Booster Energy to activate Protosynthesis!");
+        MESSAGE("RagingBolt used its Booster Energy to activate Protosynthesis!");
         MESSAGE("RagingBolt's Sp. Atk was heightened!");
     }
 }
@@ -82,7 +82,7 @@ SINGLE_BATTLE_TEST("Booster Energy activates Protosynthesis and increases highes
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
         ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
-        MESSAGE("RagingBolt's used its Booster Energy to activate Protosynthesis!");
+        MESSAGE("RagingBolt used its Booster Energy to activate Protosynthesis!");
         if (attack == 110)
             MESSAGE("RagingBolt's Attack was heightened!");
         else if (defense == 110)
