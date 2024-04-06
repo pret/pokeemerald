@@ -170,4 +170,8 @@
 #define CONNECTION_DIVE     5
 #define CONNECTION_EMERGE   6
 
+#if TESTING
+#include "config/test.h"
+#endif
+
 #endif // GUARD_CONSTANTS_GLOBAL_H

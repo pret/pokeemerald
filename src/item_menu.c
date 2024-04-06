@@ -109,7 +109,7 @@ struct ListBuffer1 {
 };
 
 struct ListBuffer2 {
-    u8 name[MAX_POCKET_ITEMS][ITEM_NAME_LENGTH + 10];
+    u8 name[MAX_POCKET_ITEMS][max(ITEM_NAME_LENGTH, MOVE_NAME_LENGTH + 3) + 10];
 };
 
 struct TempWallyBag {
@@ -905,10 +905,19 @@ static void LoadBagItemListBuffers(u8 pocketId)
 
 static void GetItemName(u8 *dest, u16 itemId)
 {
+    u32 fontId;
     switch (gBagPosition.pocket)
     {
     case TMHM_POCKET:
         StringCopy(gStringVar2, GetMoveName(ItemIdToBattleMoveId(itemId)));
+        fontId = GetFontIdToFit(gStringVar2, FONT_NARROW, 0, 73);
+        if (fontId != FONT_NARROW)
+        {
+            gStringVar2[0] = EXT_CTRL_CODE_BEGIN;
+            gStringVar2[1] = EXT_CTRL_CODE_FONT;
+            gStringVar2[2] = fontId;
+            StringCopy(&gStringVar2[3], GetMoveName(ItemIdToBattleMoveId(itemId)));
+        }
         if (itemId >= ITEM_HM01)
         {
             // Get HM number

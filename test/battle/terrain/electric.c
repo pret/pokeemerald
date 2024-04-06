@@ -10,7 +10,7 @@ SINGLE_BATTLE_TEST("Electric Terrain protects grounded battlers from falling asl
         TURN { MOVE(player, MOVE_ELECTRIC_TERRAIN); MOVE(opponent, MOVE_SPORE); }
         TURN { MOVE(player, MOVE_SPORE); }
     } SCENE {
-        MESSAGE("Wobbuffet used ElctrcTrrain!");
+        MESSAGE("Wobbuffet used Electric Terrain!");
         MESSAGE("Foe Claydol used Spore!");
         MESSAGE("Wobbuffet surrounds itself with electrified terrain!");
         MESSAGE("Wobbuffet used Spore!");
@@ -51,7 +51,7 @@ SINGLE_BATTLE_TEST("Electric Terrain increases power of Electric-type moves by 3
             TURN { MOVE(player, MOVE_ELECTRIC_TERRAIN); }
         TURN { MOVE(player, MOVE_THUNDER_SHOCK); }
     } SCENE {
-        MESSAGE("Wobbuffet used ThunderShock!");
+        MESSAGE("Wobbuffet used Thunder Shock!");
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {
         if (B_TERRAIN_TYPE_BOOST >= GEN_8)

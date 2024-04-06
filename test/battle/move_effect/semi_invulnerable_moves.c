@@ -58,7 +58,7 @@ SINGLE_BATTLE_TEST("Semi-invulnerable moves make the user semi-invulnerable turn
                     break;
                 case MOVE_PHANTOM_FORCE:
                     NOT MESSAGE("Wobbuffet vanished instantly!");
-                    MESSAGE("Wobbuffet used PhantomForce!");
+                    MESSAGE("Wobbuffet used Phantom Force!");
                     break;
                 case MOVE_SHADOW_FORCE:
                     NOT MESSAGE("Wobbuffet vanished instantly!");
@@ -112,7 +112,7 @@ SINGLE_BATTLE_TEST("Semi-invulnerable moves make the user semi-invulnerable turn
                 MESSAGE("Wobbuffet used Dive!");
                 break;
             case MOVE_PHANTOM_FORCE:
-                MESSAGE("Wobbuffet used PhantomForce!");
+                MESSAGE("Wobbuffet used Phantom Force!");
                 break;
             case MOVE_SHADOW_FORCE:
                 MESSAGE("Wobbuffet used Shadow Force!");
@@ -163,7 +163,7 @@ SINGLE_BATTLE_TEST("Semi-invulnerable moves don't need to charge with Power Herb
                     break;
                 case MOVE_PHANTOM_FORCE:
                     NOT MESSAGE("Wobbuffet vanished instantly!");
-                    MESSAGE("Wobbuffet used PhantomForce!");
+                    MESSAGE("Wobbuffet used Phantom Force!");
                     break;
                 case MOVE_SHADOW_FORCE:
                     NOT MESSAGE("Wobbuffet vanished instantly!");
@@ -215,7 +215,7 @@ SINGLE_BATTLE_TEST("Semi-invulnerable moves don't need to charge with Power Herb
                     MESSAGE("Wobbuffet used Dive!");
                     break;
                 case MOVE_PHANTOM_FORCE:
-                    MESSAGE("Wobbuffet used PhantomForce!");
+                    MESSAGE("Wobbuffet used Phantom Force!");
                     break;
                 case MOVE_SHADOW_FORCE:
                     MESSAGE("Wobbuffet used Shadow Force!");
