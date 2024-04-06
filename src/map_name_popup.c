@@ -290,10 +290,15 @@ void HideMapNamePopUpWindow(void)
 {
     if (FuncIsActiveTask(Task_MapNamePopUpWindow))
     {
-        ClearStdWindowAndFrame(GetPrimaryPopUpWindowId(), TRUE);
-        ClearStdWindowAndFrame(GetSecondaryPopUpWindowId(), TRUE);
-        RemovePrimaryPopUpWindow();
-        RemoveSecondaryPopUpWindow();
+    #ifdef UBFIX
+        if (GetPrimaryPopUpWindowId() != WINDOW_NONE && GetSecondaryPopUpWindowId() != WINDOW_NONE)
+    #endif // UBFIX
+        {
+            ClearStdWindowAndFrame(GetPrimaryPopUpWindowId(), TRUE);
+            ClearStdWindowAndFrame(GetSecondaryPopUpWindowId(), TRUE);
+            RemovePrimaryPopUpWindow();
+            RemoveSecondaryPopUpWindow();
+        }
         DisableInterrupts(INTR_FLAG_HBLANK);
         SetHBlankCallback(NULL);
         SetGpuReg_ForcedBlank(REG_OFFSET_BG0VOFS, 0);

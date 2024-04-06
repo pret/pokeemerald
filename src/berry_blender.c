@@ -2050,7 +2050,8 @@ static void UpdateSpeedFromHit(u16 cmd)
     switch (cmd)
     {
     case LINKCMD_BLENDER_SCORE_BEST:
-        if (sBerryBlender->speed < 1500) {
+        if (sBerryBlender->speed < 1500)
+        {
             sBerryBlender->speed += (384 / sNumPlayersToSpeedDivisor[sBerryBlender->numPlayers]);
         }
         else

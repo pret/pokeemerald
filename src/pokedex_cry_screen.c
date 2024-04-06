@@ -362,7 +362,7 @@ static void BufferCryWaveformSegment(void)
     else
         baseBuffer = gSoundInfo.pcmBuffer + (gSoundInfo.pcmDmaPeriod + 1 - gPcmDmaCounter) * gSoundInfo.pcmSamplesPerVBlank;
 
-    buffer = baseBuffer + 0x630;
+    buffer = baseBuffer + PCM_DMA_BUF_SIZE;
     for (i = 0; i < ARRAY_COUNT(sDexCryScreen->cryWaveformBuffer); i++)
         sDexCryScreen->cryWaveformBuffer[i] = buffer[i * 2] * 2;
 }
