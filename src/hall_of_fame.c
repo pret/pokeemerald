@@ -452,8 +452,8 @@ static void Task_Hof_InitMonData(u8 taskId)
             sHofMonPtr->mon[i].isShiny = GetMonData(&gPlayerParty[i], MON_DATA_IS_SHINY);
             sHofMonPtr->mon[i].personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
             sHofMonPtr->mon[i].lvl = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
-            GetMonData(&gPlayerParty[i], MON_DATA_NICKNAME10, nickname);
-            for (j = 0; j < VANILLA_POKEMON_NAME_LENGTH; j++)
+            GetMonData(&gPlayerParty[i], MON_DATA_NICKNAME, nickname);
+            for (j = 0; j < POKEMON_NAME_LENGTH; j++)
                 sHofMonPtr->mon[i].nickname[j] = nickname[j];
             gTasks[taskId].tMonNumber++;
         }
@@ -1167,11 +1167,15 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u
     }
     else
     {
-        width = GetStringRightAlignXOffset(FONT_NORMAL, text, 0x80);
-        AddTextPrinterParameterized3(0, FONT_NORMAL, width, 1, sMonInfoTextColors, TEXT_SKIP_DRAW, text);
+        u32 fontId = GetFontIdToFit(text, FONT_NORMAL, 0, 66);
+        width = GetStringRightAlignXOffset(fontId, text, 0x80);
+        AddTextPrinterParameterized3(0, fontId, width, 1, sMonInfoTextColors, TEXT_SKIP_DRAW, text);
 
         text[0] = CHAR_SLASH;
-        stringPtr = StringCopy(text + 1, GetSpeciesName(currMon->species));
+        text[1] = EXT_CTRL_CODE_BEGIN;
+        text[2] = EXT_CTRL_CODE_FONT;
+        text[3] = fontId;
+        stringPtr = StringCopy(text + 4, GetSpeciesName(currMon->species));
 
         if (currMon->species != SPECIES_NIDORAN_M && currMon->species != SPECIES_NIDORAN_F)
         {

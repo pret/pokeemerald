@@ -2339,21 +2339,13 @@ static void CreatePokedexList(u8 dexMode, u8 order)
 
 static void PrintMonDexNum(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top)
 {
-    u8 color[3];
-
-    color[0] = TEXT_COLOR_TRANSPARENT;
-    color[1] = TEXT_DYNAMIC_COLOR_6;
-    color[2] = TEXT_COLOR_LIGHT_GRAY;
+    static const u8 color[3] = { TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_LIGHT_GRAY };
     AddTextPrinterParameterized4(windowId, fontId, left * 8, (top * 8) + 1, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
 static void PrintMonName(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top)
 {
-    u8 color[3];
-
-    color[0] = TEXT_COLOR_TRANSPARENT;
-    color[1] = TEXT_DYNAMIC_COLOR_6;
-    color[2] = TEXT_COLOR_LIGHT_GRAY;
+    static const u8 color[3] = { TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_LIGHT_GRAY };
     fontId = GetFontIdToFit(str, fontId, 0, 50);
     AddTextPrinterParameterized4(windowId, fontId, left * 8, (top * 8) + 1, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
@@ -4682,7 +4674,7 @@ static void UNUSED UnusedPrintNum(u8 windowId, u16 num, u8 left, u8 top)
 
 static u8 PrintCryScreenSpeciesName(u8 windowId, u16 num, u8 left, u8 top)
 {
-    u8 str[POKEMON_NAME_LENGTH + 1];
+    u8 str[POKEMON_NAME_BUFFER_SIZE];
     u8 i;
 
     for (i = 0; i < ARRAY_COUNT(str); i++)
@@ -4693,6 +4685,7 @@ static u8 PrintCryScreenSpeciesName(u8 windowId, u16 num, u8 left, u8 top)
     default:
         for (i = 0; GetSpeciesName(num)[i] != EOS && i < POKEMON_NAME_LENGTH; i++)
             str[i] = GetSpeciesName(num)[i];
+        WrapFontIdToFit(str, str + i, FONT_NORMAL, 60);
         break;
     case 0:
         for (i = 0; i < 5; i++)

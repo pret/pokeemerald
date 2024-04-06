@@ -334,6 +334,21 @@ TEST("Species names fit on Pokedex Screen")
     EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
 }
 
+TEST("Species names fit on Pokedex Screen - Cries")
+{
+    u32 i;
+    const u32 fontId = FONT_NARROWER, widthPx = 60;
+    u32 species = SPECIES_NONE;
+    for (i = 1; i < NUM_SPECIES; i++)
+    {
+        if (IsSpeciesEnabled(i))
+        {
+            PARAMETRIZE_LABEL("%S", gSpeciesInfo[i].speciesName) { species = i; }
+        }
+    }
+    EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
+}
+
 TEST("Species names fit on Pokemon Storage System")
 {
     u32 i;
@@ -353,6 +368,126 @@ TEST("Species names fit on Contest Screen")
 {
     u32 i;
     const u32 fontId = FONT_NARROWER, widthPx = 50;
+    u32 species = SPECIES_NONE;
+    for (i = 1; i < NUM_SPECIES; i++)
+    {
+        if (IsSpeciesEnabled(i))
+        {
+            PARAMETRIZE_LABEL("%S", gSpeciesInfo[i].speciesName) { species = i; }
+        }
+    }
+    EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
+}
+
+TEST("Species names fit on Contest Screen - Rankings")
+{
+    u32 i;
+    const u32 fontId = FONT_NARROWER, widthPx = 49;
+    u32 species = SPECIES_NONE;
+    for (i = 1; i < NUM_SPECIES; i++)
+    {
+        if (IsSpeciesEnabled(i))
+        {
+            PARAMETRIZE_LABEL("%S", gSpeciesInfo[i].speciesName) { species = i; }
+        }
+    }
+    EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
+}
+
+TEST("Species names fit on Battle Dome Screen")
+{
+    u32 i;
+    const u32 fontId = FONT_SHORT_NARROW, widthPx = 60;
+    u32 species = SPECIES_NONE;
+    for (i = 1; i < NUM_SPECIES; i++)
+    {
+        if (IsSpeciesEnabled(i))
+        {
+            PARAMETRIZE_LABEL("%S", gSpeciesInfo[i].speciesName) { species = i; }
+        }
+    }
+    EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
+}
+
+TEST("Species names fit on Hall of Fame")
+{
+    u32 i;
+    const u32 fontId = FONT_NARROWER, widthPx = 66;
+    u32 species = SPECIES_NONE;
+    for (i = 1; i < NUM_SPECIES; i++)
+    {
+        if (IsSpeciesEnabled(i))
+        {
+            PARAMETRIZE_LABEL("%S", gSpeciesInfo[i].speciesName) { species = i; }
+        }
+    }
+    EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
+}
+
+TEST("Species names fit on Naming Screen")
+{
+    u32 i;
+    const u32 fontId = FONT_NARROWER, widthPx = 64;
+    u32 species = SPECIES_NONE;
+    for (i = 1; i < NUM_SPECIES; i++)
+    {
+        if (IsSpeciesEnabled(i))
+        {
+            PARAMETRIZE_LABEL("%S", gSpeciesInfo[i].speciesName) { species = i; }
+        }
+    }
+    EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
+}
+
+TEST("Species names fit on PokeNav Condition Screen")
+{
+    u32 i;
+    const u32 fontId = FONT_NARROWER, widthPx = 57;
+    u32 species = SPECIES_NONE;
+    for (i = 1; i < NUM_SPECIES; i++)
+    {
+        if (IsSpeciesEnabled(i))
+        {
+            PARAMETRIZE_LABEL("%S", gSpeciesInfo[i].speciesName) { species = i; }
+        }
+    }
+    EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
+}
+
+TEST("Species names fit on PokeNav Condition Search Screen")
+{
+    u32 i;
+    const u32 fontId = FONT_NARROWER, widthPx = 60;
+    u32 species = SPECIES_NONE;
+    for (i = 1; i < NUM_SPECIES; i++)
+    {
+        if (IsSpeciesEnabled(i))
+        {
+            PARAMETRIZE_LABEL("%S", gSpeciesInfo[i].speciesName) { species = i; }
+        }
+    }
+    EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
+}
+
+TEST("Species names fit on PokeNav Ribbon Screen")
+{
+    u32 i;
+    const u32 fontId = FONT_NARROWER, widthPx = 60;
+    u32 species = SPECIES_NONE;
+    for (i = 1; i < NUM_SPECIES; i++)
+    {
+        if (IsSpeciesEnabled(i))
+        {
+            PARAMETRIZE_LABEL("%S", gSpeciesInfo[i].speciesName) { species = i; }
+        }
+    }
+    EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
+}
+
+TEST("Species names fit on PokeNav Ribbon List Screen")
+{
+    u32 i;
+    const u32 fontId = FONT_NARROWER, widthPx = 60;
     u32 species = SPECIES_NONE;
     for (i = 1; i < NUM_SPECIES; i++)
     {
