@@ -1347,7 +1347,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Centiferno traps both opponents in Fire Spin
         TURN { SWITCH(playerLeft, 2); }
     } SCENE {
         // turn 1
-        MESSAGE("Centiskorc used G-Max Centiferno!");
+        MESSAGE("Centiskorch used G-Max Centiferno!");
         MESSAGE("Foe Wobbuffet is hurt by Fire Spin!");
         HP_BAR(opponentLeft);
         MESSAGE("Foe Wynaut is hurt by Fire Spin!");

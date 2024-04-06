@@ -269,3 +269,97 @@ TEST("Item names fit on Shop Screen")
     }
     EXPECT_LE(GetStringWidth(fontId, gItemsInfo[item].name, 0), widthPx);
 }
+
+TEST("Species names fit on Battle Screen HP box")
+{
+    u32 i, genderWidthPx;
+    const u32 fontId = FONT_SMALL_NARROWER, widthPx = 54;
+    u32 species = SPECIES_NONE;
+    genderWidthPx = GetStringWidth(fontId, COMPOUND_STRING("♂"), 0);
+    for (i = 1; i < NUM_SPECIES; i++)
+    {
+        if (IsSpeciesEnabled(i))
+        {
+            PARAMETRIZE_LABEL("%S", gSpeciesInfo[i].speciesName) { species = i; }
+        }
+    }
+    if (gSpeciesInfo[i].genderRatio != MON_GENDERLESS)
+        EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0) - genderWidthPx, widthPx);
+    else
+        EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
+}
+
+TEST("Species names fit on Party Screen")
+{
+    u32 i;
+    const u32 fontId = FONT_SMALL_NARROWER, widthPx = 50;
+    u32 species = SPECIES_NONE;
+    for (i = 1; i < NUM_SPECIES; i++)
+    {
+        if (IsSpeciesEnabled(i))
+        {
+            PARAMETRIZE_LABEL("%S", gSpeciesInfo[i].speciesName) { species = i; }
+        }
+    }
+    EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
+}
+
+TEST("Species names fit on Pokemon Summary Screen")
+{
+    u32 i;
+    const u32 fontId = FONT_NARROWER, widthPx = 63;
+    u32 species = SPECIES_NONE;
+    for (i = 1; i < NUM_SPECIES; i++)
+    {
+        if (IsSpeciesEnabled(i))
+        {
+            PARAMETRIZE_LABEL("%S", gSpeciesInfo[i].speciesName) { species = i; }
+        }
+    }
+    EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
+}
+
+TEST("Species names fit on Pokedex Screen")
+{
+    u32 i;
+    const u32 fontId = FONT_NARROWER, widthPx = 50;
+    u32 species = SPECIES_NONE;
+    for (i = 1; i < NUM_SPECIES; i++)
+    {
+        if (IsSpeciesEnabled(i))
+        {
+            PARAMETRIZE_LABEL("%S", gSpeciesInfo[i].speciesName) { species = i; }
+        }
+    }
+    EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
+}
+
+TEST("Species names fit on Pokemon Storage System")
+{
+    u32 i;
+    u32 species = SPECIES_NONE;
+    for (i = 1; i < NUM_SPECIES; i++)
+    {
+        if (IsSpeciesEnabled(i))
+        {
+            PARAMETRIZE_LABEL("%S", gSpeciesInfo[i].speciesName) { species = i; }
+        }
+    }
+    EXPECT_LE(GetStringWidth(FONT_NARROWER, gSpeciesInfo[species].speciesName, 0), 66);
+    EXPECT_LE(GetStringWidth(FONT_SHORT_NARROW, gSpeciesInfo[species].speciesName, 0), 60);
+}
+
+TEST("Species names fit on Contest Screen")
+{
+    u32 i;
+    const u32 fontId = FONT_NARROWER, widthPx = 50;
+    u32 species = SPECIES_NONE;
+    for (i = 1; i < NUM_SPECIES; i++)
+    {
+        if (IsSpeciesEnabled(i))
+        {
+            PARAMETRIZE_LABEL("%S", gSpeciesInfo[i].speciesName) { species = i; }
+        }
+    }
+    EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
+}

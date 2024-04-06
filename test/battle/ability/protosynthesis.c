@@ -17,8 +17,8 @@ SINGLE_BATTLE_TEST("Protosynthesis boosts the highest stat")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUNNY_DAY, player);
         ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
-        MESSAGE("The harsh sunlight activated WalkngWake's Protosynthesis!");
-        MESSAGE("WalkngWake's Sp. Atk was heightened!");
+        MESSAGE("The harsh sunlight activated Walking Wake's Protosynthesis!");
+        MESSAGE("Walking Wake's Sp. Atk was heightened!");
     }
 }
 
@@ -68,19 +68,19 @@ SINGLE_BATTLE_TEST("Protosynthesis ability pop up activates only once during the
     } SCENE {
         ABILITY_POPUP(opponent, ABILITY_DROUGHT);
         ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
-        MESSAGE("The harsh sunlight activated WalkngWake's Protosynthesis!");
-        MESSAGE("WalkngWake's Sp. Atk was heightened!");
+        MESSAGE("The harsh sunlight activated Walking Wake's Protosynthesis!");
+        MESSAGE("Walking Wake's Sp. Atk was heightened!");
         NONE_OF {
             for (turns = 0; turns < 4; turns++) {
                 ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
-                MESSAGE("The harsh sunlight activated WalkngWake's Protosynthesis!");
-                MESSAGE("WalkngWake's Sp. Atk was heightened!");
+                MESSAGE("The harsh sunlight activated Walking Wake's Protosynthesis!");
+                MESSAGE("Walking Wake's Sp. Atk was heightened!");
             }
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUNNY_DAY, opponent);
         ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
-        MESSAGE("The harsh sunlight activated WalkngWake's Protosynthesis!");
-        MESSAGE("WalkngWake's Sp. Atk was heightened!");
+        MESSAGE("The harsh sunlight activated Walking Wake's Protosynthesis!");
+        MESSAGE("Walking Wake's Sp. Atk was heightened!");
     }
 }
 
@@ -95,7 +95,7 @@ SINGLE_BATTLE_TEST("Protosynthesis activates on switch-in")
     } SCENE {
         ABILITY_POPUP(opponent, ABILITY_DROUGHT);
         ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
-        MESSAGE("The harsh sunlight activated RoarngMoon's Protosynthesis!");
-        MESSAGE("RoarngMoon's Attack was heightened!");
+        MESSAGE("The harsh sunlight activated Roaring Moon's Protosynthesis!");
+        MESSAGE("Roaring Moon's Attack was heightened!");
     }
 }
