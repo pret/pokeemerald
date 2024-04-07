@@ -1528,7 +1528,7 @@ static void fprint_species(FILE *f, const char *prefix, struct String s)
         for (int i = 0; i < s.string_n; i++)
         {
             unsigned char c = s.string[i];
-            if ('A' <= c && c <= 'Z')
+            if (('A' <= c && c <= 'Z') || ('0' <= c && c <= '9'))
             {
                 if (underscore)
                     fputc('_', f);
