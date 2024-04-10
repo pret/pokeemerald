@@ -6912,7 +6912,7 @@ static u8 ItemEffectMoveEnd(u32 battler, u16 holdEffect)
         {
             gBattleMons[battler].status1 &= ~STATUS1_FROSTBITE;
             BattleScriptPushCursor();
-            gBattlescriptCurrInstr = BattleScript_BerryCureFsbRet;
+            gBattlescriptCurrInstr = BattleScript_BerryCureFrbRet;
             effect = ITEM_STATUS_CHANGE;
         }
         break;
@@ -7152,7 +7152,7 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                     && !UnnerveOn(battler, gLastUsedItem))
                 {
                     gBattleMons[battler].status1 &= ~STATUS1_FROSTBITE;
-                    BattleScriptExecute(BattleScript_BerryCureFsbEnd2);
+                    BattleScriptExecute(BattleScript_BerryCureFrbEnd2);
                     effect = ITEM_STATUS_CHANGE;
                 }
                 break;
@@ -7444,7 +7444,7 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                 if (gBattleMons[battler].status1 & STATUS1_FROSTBITE && !UnnerveOn(battler, gLastUsedItem))
                 {
                     gBattleMons[battler].status1 &= ~STATUS1_FROSTBITE;
-                    BattleScriptExecute(BattleScript_BerryCureFsbEnd2);
+                    BattleScriptExecute(BattleScript_BerryCureFrbEnd2);
                     effect = ITEM_STATUS_CHANGE;
                 }
                 break;

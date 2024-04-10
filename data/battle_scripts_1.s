@@ -521,7 +521,7 @@ BattleScript_AffectionBasedStatus_HealFreezeString:
 	printstring STRINGID_ATTACKERMELTEDTHEICE
 	goto BattleScript_AffectionBasedStatusHeal_Continue
 BattleScript_AffectionBasedStatus_HealFrostbiteString:
-	printstring STRINGID_ATTACKERHEALEDITSFROSTBITE
+	printstring STRINGID_ATTACKERMELTEDTHEICE
 BattleScript_AffectionBasedStatusHeal_Continue:
 	waitmessage B_WAIT_TIME_LONG
 	clearstatus BS_ATTACKER
@@ -8720,11 +8720,11 @@ BattleScript_BerryCureFrzRet::
 	removeitem BS_SCRIPTING
 	return
 
-BattleScript_BerryCureFsbEnd2::
+BattleScript_BerryCureFrbEnd2::
 	call BattleScript_BerryCureFrzRet
 	end2
 
-BattleScript_BerryCureFsbRet::
+BattleScript_BerryCureFrbRet::
 	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT
 	printstring STRINGID_PKMNSITEMHEALEDFROSTBITE
 	waitmessage B_WAIT_TIME_LONG
