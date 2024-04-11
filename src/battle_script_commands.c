@@ -10391,6 +10391,7 @@ static void Cmd_various(void)
         if (cmd->fromBattler)
             gLastUsedItem = gBattleMons[battler].item;
 
+        gBattleStruct->ateBerry[battler & BIT_SIDE] |= gBitTable[gBattlerPartyIndexes[battler]];
         gBattleScripting.battler = gEffectBattler = gBattlerTarget = battler;    // Cover all berry effect battler cases. e.g. ChangeStatBuffs uses target ID
         if (ItemBattleEffects(ITEMEFFECT_USE_LAST_ITEM, battler, FALSE))
             return;
