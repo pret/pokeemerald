@@ -4942,10 +4942,12 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 }
                 break;
             case ABILITY_CUD_CHEW:
-                if (ItemId_GetPocket(GetUsedHeldItem(battler)) == POCKET_BERRIES && gDisableStructs[battler].cudChew == TRUE)
+                if (gDisableStructs[battler].cudChew == TRUE)
                 {
-                    gLastUsedItem = gBattleStruct->usedHeldItems[battler][GetBattlerSide(battler)];
-                    gBattleStruct->usedHeldItems[battler][GetBattlerSide(battler)] = ITEM_NONE;
+                    gBattleScripting.battler = battler;
+                    gDisableStructs[battler].cudChew = FALSE;
+                    gLastUsedItem = gBattleStruct->usedHeldItems[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)];
+                    gBattleStruct->usedHeldItems[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)] = ITEM_NONE;
                     BattleScriptPushCursorAndCallback(BattleScript_CudChewActivates);
                     effect++;
                 }
