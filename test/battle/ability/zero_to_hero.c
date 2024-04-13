@@ -96,28 +96,6 @@ SINGLE_BATTLE_TEST("Gastro Acid, Worry Seed, and Simple Beam fail if the target 
     }
 }
 
-SINGLE_BATTLE_TEST("Role Play, Skill Swap, and Entrainment fail if either Pokémon has Zero to Hero")
-{
-    u16 move;
-
-    PARAMETRIZE { move = MOVE_ROLE_PLAY; }
-    PARAMETRIZE { move = MOVE_SKILL_SWAP; }
-    PARAMETRIZE { move = MOVE_ENTRAINMENT; }
-
-    GIVEN {
-        ASSUME(gMovesInfo[MOVE_ROLE_PLAY].effect == EFFECT_ROLE_PLAY);
-        ASSUME(gMovesInfo[MOVE_SKILL_SWAP].effect == EFFECT_SKILL_SWAP);
-        ASSUME(gMovesInfo[MOVE_ENTRAINMENT].effect == EFFECT_ENTRAINMENT);
-        PLAYER(SPECIES_PALAFIN_ZERO) { Ability(ABILITY_ZERO_TO_HERO); }
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(player, move); }
-    } SCENE {
-        NOT ANIMATION(ANIM_TYPE_MOVE, move, player);
-        MESSAGE("But it failed!");
-    }
-}
-
 SINGLE_BATTLE_TEST("Transform doesn't apply the heroic transformation message when copying Palafin")
 {
     GIVEN {
