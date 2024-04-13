@@ -648,7 +648,6 @@ void AnimTask_Rollout(u8 taskId)
 {
     u16 var0, var1, var2, var3;
     u8 rolloutCounter;
-    int var5;
     s16 pan1, pan2;
     struct Task *task;
 
@@ -672,13 +671,7 @@ void AnimTask_Rollout(u8 taskId)
     task->data[11] = 0;
     task->data[9] = 0;
     task->data[12] = 1;
-
-    var5 = task->data[8];
-    if (var5 < 0)
-        var5 += 7;
-
-    task->data[10] = (var5 >> 3) - 1;
-
+    task->data[10] = (task->data[8] / 8) - 1;
     task->data[2] = var0 * 8;
     task->data[3] = var1 * 8;
     task->data[4] = ((var2 - var0) * 8) / task->data[8];

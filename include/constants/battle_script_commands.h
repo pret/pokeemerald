@@ -304,9 +304,9 @@
 #define MOVEEND_DEFROST                           23
 #define MOVEEND_RECOIL                            24
 #define MOVEEND_MAGICIAN                          25    // Occurs after final multi-hit strike, and after other items/abilities would activate
-#define MOVEEND_EJECT_BUTTON                      26
-#define MOVEEND_RED_CARD                          27
-#define MOVEEND_EJECT_PACK                        28
+#define MOVEEND_EJECT_ITEMS                       26
+#define MOVEEND_WHITE_HERB                        27
+#define MOVEEND_RED_CARD                          28
 #define MOVEEND_LIFEORB_SHELLBELL                 29    // Includes shell bell, throat spray, etc
 #define MOVEEND_CHANGED_ITEMS                     30
 #define MOVEEND_PICKPOCKET                        31
