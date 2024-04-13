@@ -266,7 +266,6 @@ SINGLE_BATTLE_TEST("Forecast transforms Castform back to normal when Sandstorm i
 
 SINGLE_BATTLE_TEST("Forecast transforms Castform back to normal under Air Lock")
 {
-    KNOWN_FAILING;
     GIVEN {
         PLAYER(SPECIES_CASTFORM_NORMAL) { Ability(ABILITY_FORECAST); }
         OPPONENT(SPECIES_WOBBUFFET);
