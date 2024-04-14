@@ -6041,7 +6041,7 @@ void RandomlyGivePartyPokerus(struct Pokemon *party)
             rnd = Random() % PARTY_SIZE;
             mon = &party[rnd];
         }
-        while (!GetMonData(mon, MON_DATA_SPECIES, SPECIES_NONE) || GetMonData(mon, MON_DATA_IS_EGG, 0));
+        while (!GetMonData(mon, MON_DATA_SPECIES, 0) || GetMonData(mon, MON_DATA_IS_EGG, 0));
 
         if (!(CheckPartyHasHadPokerus(party, gBitTable[rnd])))
         {
