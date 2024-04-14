@@ -24,3 +24,20 @@ SINGLE_BATTLE_TEST("Eject Pack does not cause the new pokemon to lose hp due to 
         NOT MESSAGE("Wynaut was hurt by its Life Orb!");
     }
 }
+
+SINGLE_BATTLE_TEST("Eject Pack does not activate if there are no pokemon left to battle")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_PACK); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(0); }
+        OPPONENT(SPECIES_EKANS) { Ability(ABILITY_INTIMIDATE); }
+    } WHEN {
+        TURN { }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
+            MESSAGE("Wobbuffet is switched out with the Eject Pack!");
+        }
+    }
+}
