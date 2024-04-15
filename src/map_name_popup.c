@@ -23,139 +23,6 @@
 #include "config/map_name_popup.h"
 #include "config.h"
 
-#if MAP_POPUP_GENERATION != GEN_3 && MAP_POPUP_GENERATION != GEN_5
-#error "Invalid choice for MAP_POPUP_GENERATION, must be one of [GEN_3, GEN_5]"
-#endif
-
-// static functions
-static void Task_MapNamePopUpWindow(u8 taskId);
-static void ShowMapNamePopUpWindow(void);
-static void LoadMapNamePopUpWindowBg(void);
-
-// EWRAM
-EWRAM_DATA u8 gPopupTaskId = 0;
-
-#if MAP_POPUP_GENERATION == GEN_5
-// enums
-enum MapPopUp_Themes
-{
-    MAPPOPUP_THEME_DEFAULT,
-};
-
-// .rodata
-static const u8 sMapPopUpTilesPrimary_BW[] = INCBIN_U8("graphics/map_popup/bw/bw_primary.4bpp");
-static const u8 sMapPopUpTilesSecondary_BW[] = INCBIN_U8("graphics/map_popup/bw/bw_secondary.4bpp");
-static const u16 sMapPopUpTilesPalette_BW_Black[16] = INCBIN_U16("graphics/map_popup/bw/black.gbapal");
-static const u16 sMapPopUpTilesPalette_BW_White[16] = INCBIN_U16("graphics/map_popup/bw/white.gbapal");
-
-static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping[] =
-{
-    [MAPSEC_LITTLEROOT_TOWN] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_OLDALE_TOWN] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_DEWFORD_TOWN] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_LAVARIDGE_TOWN] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_FALLARBOR_TOWN] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_VERDANTURF_TOWN] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_PACIFIDLOG_TOWN] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_PETALBURG_CITY] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_SLATEPORT_CITY] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_MAUVILLE_CITY] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_RUSTBORO_CITY] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_FORTREE_CITY] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_LILYCOVE_CITY] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_MOSSDEEP_CITY] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_SOOTOPOLIS_CITY] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_EVER_GRANDE_CITY] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_101] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_102] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_103] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_104] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_105] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_106] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_107] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_108] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_109] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_110] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_111] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_112] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_113] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_114] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_115] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_116] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_117] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_118] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_119] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_120] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_121] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_122] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_123] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_124] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_125] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_126] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_127] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_128] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_129] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_130] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_131] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_132] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_133] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ROUTE_134] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_UNDERWATER_124] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_UNDERWATER_126] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_UNDERWATER_127] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_UNDERWATER_128] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_UNDERWATER_SOOTOPOLIS] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_GRANITE_CAVE] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_MT_CHIMNEY] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_SAFARI_ZONE] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_BATTLE_FRONTIER] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_PETALBURG_WOODS] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_RUSTURF_TUNNEL] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ABANDONED_SHIP] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_NEW_MAUVILLE] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_METEOR_FALLS] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_METEOR_FALLS2] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_MT_PYRE] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_AQUA_HIDEOUT_OLD] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_SHOAL_CAVE] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_SEAFLOOR_CAVERN] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_UNDERWATER_SEAFLOOR_CAVERN] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_VICTORY_ROAD] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_MIRAGE_ISLAND] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_CAVE_OF_ORIGIN] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_SOUTHERN_ISLAND] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_FIERY_PATH] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_FIERY_PATH2] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_JAGGED_PASS] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_JAGGED_PASS2] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_SEALED_CHAMBER] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_UNDERWATER_SEALED_CHAMBER] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_SCORCHED_SLAB] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ISLAND_CAVE] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_DESERT_RUINS] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ANCIENT_TOMB] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_INSIDE_OF_TRUCK] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_SKY_PILLAR] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_SECRET_BASE] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_DYNAMIC] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_AQUA_HIDEOUT - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_MAGMA_HIDEOUT - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_MIRAGE_TOWER - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_BIRTH_ISLAND - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_FARAWAY_ISLAND - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ARTISAN_CAVE - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_MARINE_CAVE - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_UNDERWATER_MARINE_CAVE - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_TERRA_CAVE - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_UNDERWATER_105 - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_UNDERWATER_125 - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_UNDERWATER_129 - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_DESERT_UNDERPASS - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_ALTERING_CAVE - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_NAVEL_ROCK - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
-    [MAPSEC_TRAINER_HILL - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
-};
-#else
 // enums
 enum MapPopUp_Themes
 {
@@ -166,6 +33,19 @@ enum MapPopUp_Themes
     MAPPOPUP_THEME_UNDERWATER,
     MAPPOPUP_THEME_STONE2,
 };
+
+enum MapPopUp_Themes_BW
+{
+    MAPPOPUP_THEME_DEFAULT,
+};
+
+// static functions
+static void Task_MapNamePopUpWindow(u8 taskId);
+static void ShowMapNamePopUpWindow(void);
+static void LoadMapNamePopUpWindowBg(void);
+
+// EWRAM
+EWRAM_DATA u8 gPopupTaskId = 0;
 
 // .rodata
 static const u8 sMapPopUp_Table[][960] =
@@ -307,7 +187,120 @@ static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping[] =
     [MAPSEC_NAVEL_ROCK - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_STONE,
     [MAPSEC_TRAINER_HILL - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_MARBLE
 };
-#endif
+
+// gen 5 assets
+static const u8 sMapPopUpTilesPrimary_BW[] = INCBIN_U8("graphics/map_popup/bw/bw_primary.4bpp");
+static const u8 sMapPopUpTilesSecondary_BW[] = INCBIN_U8("graphics/map_popup/bw/bw_secondary.4bpp");
+static const u16 sMapPopUpTilesPalette_BW_Black[16] = INCBIN_U16("graphics/map_popup/bw/black.gbapal");
+static const u16 sMapPopUpTilesPalette_BW_White[16] = INCBIN_U16("graphics/map_popup/bw/white.gbapal");
+
+static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping_BW[] =
+{
+    [MAPSEC_LITTLEROOT_TOWN] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_OLDALE_TOWN] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_DEWFORD_TOWN] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_LAVARIDGE_TOWN] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_FALLARBOR_TOWN] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_VERDANTURF_TOWN] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_PACIFIDLOG_TOWN] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_PETALBURG_CITY] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_SLATEPORT_CITY] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_MAUVILLE_CITY] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_RUSTBORO_CITY] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_FORTREE_CITY] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_LILYCOVE_CITY] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_MOSSDEEP_CITY] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_SOOTOPOLIS_CITY] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_EVER_GRANDE_CITY] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_101] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_102] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_103] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_104] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_105] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_106] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_107] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_108] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_109] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_110] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_111] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_112] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_113] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_114] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_115] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_116] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_117] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_118] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_119] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_120] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_121] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_122] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_123] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_124] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_125] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_126] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_127] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_128] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_129] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_130] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_131] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_132] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_133] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ROUTE_134] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_UNDERWATER_124] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_UNDERWATER_126] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_UNDERWATER_127] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_UNDERWATER_128] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_UNDERWATER_SOOTOPOLIS] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_GRANITE_CAVE] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_MT_CHIMNEY] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_SAFARI_ZONE] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_BATTLE_FRONTIER] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_PETALBURG_WOODS] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_RUSTURF_TUNNEL] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ABANDONED_SHIP] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_NEW_MAUVILLE] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_METEOR_FALLS] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_METEOR_FALLS2] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_MT_PYRE] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_AQUA_HIDEOUT_OLD] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_SHOAL_CAVE] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_SEAFLOOR_CAVERN] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_UNDERWATER_SEAFLOOR_CAVERN] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_VICTORY_ROAD] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_MIRAGE_ISLAND] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_CAVE_OF_ORIGIN] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_SOUTHERN_ISLAND] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_FIERY_PATH] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_FIERY_PATH2] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_JAGGED_PASS] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_JAGGED_PASS2] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_SEALED_CHAMBER] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_UNDERWATER_SEALED_CHAMBER] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_SCORCHED_SLAB] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ISLAND_CAVE] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_DESERT_RUINS] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ANCIENT_TOMB] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_INSIDE_OF_TRUCK] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_SKY_PILLAR] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_SECRET_BASE] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_DYNAMIC] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_AQUA_HIDEOUT - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_MAGMA_HIDEOUT - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_MIRAGE_TOWER - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_BIRTH_ISLAND - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_FARAWAY_ISLAND - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ARTISAN_CAVE - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_MARINE_CAVE - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_UNDERWATER_MARINE_CAVE - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_TERRA_CAVE - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_UNDERWATER_105 - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_UNDERWATER_125 - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_UNDERWATER_129 - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_DESERT_UNDERPASS - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_ALTERING_CAVE - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_NAVEL_ROCK - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
+    [MAPSEC_TRAINER_HILL - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_DEFAULT,
+};
 
 static const u8 sText_PyramidFloor1[] = _("PYRAMID FLOOR 1");
 static const u8 sText_PyramidFloor2[] = _("PYRAMID FLOOR 2");
@@ -364,15 +357,18 @@ void ShowMapNamePopup(void)
         if (!FuncIsActiveTask(Task_MapNamePopUpWindow))
         {
             // New pop up window
-        #if MAP_POPUP_GENERATION == GEN_5
-            gPopupTaskId = CreateTask(Task_MapNamePopUpWindow, 100);
+            if (MAP_POPUP_GENERATION == GEN_5)
+            {
+                gPopupTaskId = CreateTask(Task_MapNamePopUpWindow, 100);
 
-            if (MAP_POPUP_BW_ALPHA_BLEND && !IsWeatherAlphaBlend())
-                SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
-        #else
-            gPopupTaskId = CreateTask(Task_MapNamePopUpWindow, 90);
-            SetGpuReg(REG_OFFSET_BG0VOFS, POPUP_OFFSCREEN_Y);
-        #endif
+                if (MAP_POPUP_BW_ALPHA_BLEND && !IsWeatherAlphaBlend())
+                    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
+            }
+            else
+            {
+                gPopupTaskId = CreateTask(Task_MapNamePopUpWindow, 90);
+                SetGpuReg(REG_OFFSET_BG0VOFS, POPUP_OFFSCREEN_Y);
+            }
 
             gTasks[gPopupTaskId].tState = STATE_PRINT;
             gTasks[gPopupTaskId].tYOffset = POPUP_OFFSCREEN_Y;
@@ -401,10 +397,11 @@ static void Task_MapNamePopUpWindow(u8 taskId)
             task->tState = STATE_SLIDE_IN;
             task->tPrintTimer = 0;
             ShowMapNamePopUpWindow();
-        #if MAP_POPUP_GENERATION == GEN_5
-            EnableInterrupts(INTR_FLAG_HBLANK);
-            SetHBlankCallback(HBlankCB_DoublePopupWindow);
-        #endif
+            if (MAP_POPUP_GENERATION == GEN_5)
+            {
+                EnableInterrupts(INTR_FLAG_HBLANK);
+                SetHBlankCallback(HBlankCB_DoublePopupWindow);
+            }
         }
         break;
     case STATE_SLIDE_IN:
@@ -448,18 +445,16 @@ static void Task_MapNamePopUpWindow(u8 taskId)
         break;
     case STATE_ERASE:
         ClearStdWindowAndFrame(GetMapNamePopUpWindowId(), TRUE);
-    #if MAP_POPUP_GENERATION == GEN_5
-        ClearStdWindowAndFrame(GetSecondaryPopUpWindowId(), TRUE);
-    #endif
+        if (MAP_POPUP_GENERATION == GEN_5)
+            ClearStdWindowAndFrame(GetSecondaryPopUpWindowId(), TRUE);
         task->tState = STATE_END;
         break;
     case STATE_END:
         HideMapNamePopUpWindow();
         return;
     }
-#if MAP_POPUP_GENERATION != GEN_5
+if (MAP_POPUP_GENERATION != GEN_5)
     SetGpuReg(REG_OFFSET_BG0VOFS, task->tYOffset);
-#endif
 }
 
 void HideMapNamePopUpWindow(void)
@@ -474,25 +469,27 @@ void HideMapNamePopUpWindow(void)
             RemoveMapNamePopUpWindow();
         }
 
-    #if MAP_POPUP_GENERATION == GEN_5
-    #ifdef UBFIX
-        if (GetSecondaryPopUpWindowId() != WINDOW_NONE)
-    #endif // UBFIX   
+        if (MAP_POPUP_GENERATION == GEN_5)
         {
-            ClearStdWindowAndFrame(GetSecondaryPopUpWindowId(), TRUE);
-            RemoveSecondaryPopUpWindow();
+        #ifdef UBFIX
+            if (GetSecondaryPopUpWindowId() != WINDOW_NONE)
+        #endif // UBFIX   
+            {
+                ClearStdWindowAndFrame(GetSecondaryPopUpWindowId(), TRUE);
+                RemoveSecondaryPopUpWindow();
+            }
+
+            DisableInterrupts(INTR_FLAG_HBLANK);
+            SetHBlankCallback(NULL);
+
+            if (MAP_POPUP_BW_ALPHA_BLEND && !IsWeatherAlphaBlend())
+            {
+                SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ);
+                SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
+                SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 10));
+            }
         }
 
-        DisableInterrupts(INTR_FLAG_HBLANK);
-        SetHBlankCallback(NULL);
-
-        if (MAP_POPUP_BW_ALPHA_BLEND && !IsWeatherAlphaBlend())
-        {
-            SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ);
-            SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
-            SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 10));
-        }
-    #endif
         SetGpuReg_ForcedBlank(REG_OFFSET_BG0VOFS, 0);
         DestroyTask(gPopupTaskId);
     }
@@ -502,12 +499,9 @@ static void ShowMapNamePopUpWindow(void)
 {
     u8 mapDisplayHeader[24];
     u8 *withoutPrefixPtr;
-    const u8 *mapDisplayHeaderSource;
-#if MAP_POPUP_GENERATION == GEN_5
-    u8 mapNamePopUpWindowId, secondaryPopUpWindowId;
-#else
     u8 x;
-#endif
+    const u8 *mapDisplayHeaderSource;
+    u8 mapNamePopUpWindowId, secondaryPopUpWindowId;
 
     if (InBattlePyramid())
     {
@@ -529,15 +523,18 @@ static void ShowMapNamePopUpWindow(void)
         GetMapName(withoutPrefixPtr, gMapHeader.regionMapSectionId, 0);
     }
 
-#if MAP_POPUP_GENERATION == GEN_5
-    if (MAP_POPUP_BW_ALPHA_BLEND && !IsWeatherAlphaBlend())
-        SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR);
+    if (MAP_POPUP_GENERATION == GEN_5)
+    {
+        if (MAP_POPUP_BW_ALPHA_BLEND && !IsWeatherAlphaBlend())
+            SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR);
 
-    mapNamePopUpWindowId = AddMapNamePopUpWindow();
-    secondaryPopUpWindowId = AddSecondaryPopUpWindow();
-#else
-    AddMapNamePopUpWindow();
-#endif
+        mapNamePopUpWindowId = AddMapNamePopUpWindow();
+        secondaryPopUpWindowId = AddSecondaryPopUpWindow();
+    }
+    else
+    {
+        AddMapNamePopUpWindow();
+    }
 
     LoadMapNamePopUpWindowBg();
 
@@ -545,26 +542,28 @@ static void ShowMapNamePopUpWindow(void)
     mapDisplayHeader[1] = EXT_CTRL_CODE_HIGHLIGHT;
     mapDisplayHeader[2] = TEXT_COLOR_TRANSPARENT;
 
-#if MAP_POPUP_GENERATION == GEN_5
-    AddTextPrinterParameterized(mapNamePopUpWindowId, FONT_SHORT, mapDisplayHeader, 8, 2, TEXT_SKIP_DRAW, NULL);
-    
-    if (MAP_POPUP_BW_TIME_MODE != MAP_POPUP_BW_TIME_NONE)
+    if (MAP_POPUP_GENERATION == GEN_5)
     {
-        RtcCalcLocalTime();
-        FormatDecimalTimeWithoutSeconds(withoutPrefixPtr, gLocalTime.hours, gLocalTime.minutes, MAP_POPUP_BW_TIME_MODE == MAP_POPUP_BW_TIME_24_HR);
-        AddTextPrinterParameterized(secondaryPopUpWindowId, FONT_SMALL, mapDisplayHeader, GetStringRightAlignXOffset(FONT_SMALL, mapDisplayHeader, DISPLAY_WIDTH) - 5, 8, TEXT_SKIP_DRAW, NULL);
-    }
+        AddTextPrinterParameterized(mapNamePopUpWindowId, FONT_SHORT, mapDisplayHeader, 8, 2, TEXT_SKIP_DRAW, NULL);
+        
+        if (MAP_POPUP_BW_TIME_MODE != MAP_POPUP_BW_TIME_NONE)
+        {
+            RtcCalcLocalTime();
+            FormatDecimalTimeWithoutSeconds(withoutPrefixPtr, gLocalTime.hours, gLocalTime.minutes, MAP_POPUP_BW_TIME_MODE == MAP_POPUP_BW_TIME_24_HR);
+            AddTextPrinterParameterized(secondaryPopUpWindowId, FONT_SMALL, mapDisplayHeader, GetStringRightAlignXOffset(FONT_SMALL, mapDisplayHeader, DISPLAY_WIDTH) - 5, 8, TEXT_SKIP_DRAW, NULL);
+        }
 
-    CopyWindowToVram(mapNamePopUpWindowId, COPYWIN_FULL);
-    CopyWindowToVram(secondaryPopUpWindowId, COPYWIN_FULL);
-#else
-    x = GetStringCenterAlignXOffset(FONT_NARROW, withoutPrefixPtr, 80);
-    AddTextPrinterParameterized(GetMapNamePopUpWindowId(), FONT_NARROW, mapDisplayHeader, x, 3, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(GetMapNamePopUpWindowId(), COPYWIN_FULL);
-#endif
+        CopyWindowToVram(mapNamePopUpWindowId, COPYWIN_FULL);
+        CopyWindowToVram(secondaryPopUpWindowId, COPYWIN_FULL);
+    }
+    else
+    {
+        x = GetStringCenterAlignXOffset(FONT_NARROW, withoutPrefixPtr, 80);
+        AddTextPrinterParameterized(GetMapNamePopUpWindowId(), FONT_NARROW, mapDisplayHeader, x, 3, TEXT_SKIP_DRAW, NULL);
+        CopyWindowToVram(GetMapNamePopUpWindowId(), COPYWIN_FULL);
+    }
 }
 
-#if MAP_POPUP_GENERATION != GEN_5
 #define TILE_TOP_EDGE_START 0x21D
 #define TILE_TOP_EDGE_END   0x228
 #define TILE_LEFT_EDGE_TOP  0x229
@@ -596,16 +595,16 @@ static void DrawMapNamePopUpFrame(u8 bg, u8 x, u8 y, u8 deltaX, u8 deltaY, u8 un
     for (i = 0; i < 1 + TILE_BOT_EDGE_END - TILE_BOT_EDGE_START; i++)
         FillBgTilemapBufferRect(bg, TILE_BOT_EDGE_START + i, i - 1 + x, y + deltaY, 1, 1, 14);
 }
-#endif
 
 static void LoadMapNamePopUpWindowBg(void)
 {
     u8 popUpThemeId;
     u8 popupWindowId = GetMapNamePopUpWindowId();
     u16 regionMapSectionId = gMapHeader.regionMapSectionId;
-#if MAP_POPUP_GENERATION == GEN_5
-    u8 secondaryPopUpWindowId = GetSecondaryPopUpWindowId();
-#endif
+    u8 secondaryPopUpWindowId;
+
+    if (MAP_POPUP_GENERATION == GEN_5)
+        secondaryPopUpWindowId = GetSecondaryPopUpWindowId();
 
     if (regionMapSectionId >= KANTO_MAPSEC_START)
     {
@@ -614,32 +613,36 @@ static void LoadMapNamePopUpWindowBg(void)
         else
             regionMapSectionId = 0; // Discard kanto region sections;
     }
-    popUpThemeId = sRegionMapSectionId_To_PopUpThemeIdMapping[regionMapSectionId];
 
-#if MAP_POPUP_GENERATION == GEN_5
-    switch (popUpThemeId) {
-        // add more themes as case statements here
-        default:
-            if (MAP_POPUP_BW_COLOR == MAP_POPUP_BW_COLOR_WHITE)
-                LoadPalette(sMapPopUpTilesPalette_BW_White, BG_PLTT_ID(14), sizeof(sMapPopUpTilesPalette_BW_White));
-            else
-                LoadPalette(sMapPopUpTilesPalette_BW_Black, BG_PLTT_ID(14), sizeof(sMapPopUpTilesPalette_BW_Black));
+    if (MAP_POPUP_GENERATION == GEN_5)
+    {
+        popUpThemeId = sRegionMapSectionId_To_PopUpThemeIdMapping_BW[regionMapSectionId];
+        switch (popUpThemeId) {
+            // add more themes as case statements here
+            default:
+                if (MAP_POPUP_BW_COLOR == MAP_POPUP_BW_COLOR_WHITE)
+                    LoadPalette(sMapPopUpTilesPalette_BW_White, BG_PLTT_ID(14), sizeof(sMapPopUpTilesPalette_BW_White));
+                else
+                    LoadPalette(sMapPopUpTilesPalette_BW_Black, BG_PLTT_ID(14), sizeof(sMapPopUpTilesPalette_BW_Black));
 
-            CopyToWindowPixelBuffer(popupWindowId, sMapPopUpTilesPrimary_BW, sizeof(sMapPopUpTilesPrimary_BW), 0);
-            CopyToWindowPixelBuffer(secondaryPopUpWindowId, sMapPopUpTilesSecondary_BW, sizeof(sMapPopUpTilesSecondary_BW), 0);
-            break;
+                CopyToWindowPixelBuffer(popupWindowId, sMapPopUpTilesPrimary_BW, sizeof(sMapPopUpTilesPrimary_BW), 0);
+                CopyToWindowPixelBuffer(secondaryPopUpWindowId, sMapPopUpTilesSecondary_BW, sizeof(sMapPopUpTilesSecondary_BW), 0);
+                break;
+        }
+
+        PutWindowTilemap(popupWindowId);
+        PutWindowTilemap(secondaryPopUpWindowId);
     }
-
-    PutWindowTilemap(popupWindowId);
-    PutWindowTilemap(secondaryPopUpWindowId);
-#else
-    LoadBgTiles(GetWindowAttribute(popupWindowId, WINDOW_BG), sMapPopUp_OutlineTable[popUpThemeId], 0x400, 0x21D);
-    CallWindowFunction(popupWindowId, DrawMapNamePopUpFrame);
-    PutWindowTilemap(popupWindowId);
-    if (gMapHeader.weather == WEATHER_UNDERWATER_BUBBLES)
-        LoadPalette(&sMapPopUp_Palette_Underwater, BG_PLTT_ID(14), sizeof(sMapPopUp_Palette_Underwater));
     else
-        LoadPalette(sMapPopUp_PaletteTable[popUpThemeId], BG_PLTT_ID(14), sizeof(sMapPopUp_PaletteTable[0]));
-    BlitBitmapToWindow(popupWindowId, sMapPopUp_Table[popUpThemeId], 0, 0, 80, 24);
-#endif
+    {
+        popUpThemeId = sRegionMapSectionId_To_PopUpThemeIdMapping[regionMapSectionId];
+        LoadBgTiles(GetWindowAttribute(popupWindowId, WINDOW_BG), sMapPopUp_OutlineTable[popUpThemeId], 0x400, 0x21D);
+        CallWindowFunction(popupWindowId, DrawMapNamePopUpFrame);
+        PutWindowTilemap(popupWindowId);
+        if (gMapHeader.weather == WEATHER_UNDERWATER_BUBBLES)
+            LoadPalette(&sMapPopUp_Palette_Underwater, BG_PLTT_ID(14), sizeof(sMapPopUp_Palette_Underwater));
+        else
+            LoadPalette(sMapPopUp_PaletteTable[popUpThemeId], BG_PLTT_ID(14), sizeof(sMapPopUp_PaletteTable[0]));
+        BlitBitmapToWindow(popupWindowId, sMapPopUp_Table[popUpThemeId], 0, 0, 80, 24);
+    }
 }

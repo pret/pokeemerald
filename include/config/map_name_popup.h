@@ -3,7 +3,7 @@
 
 // General map pop-up config
 #define MAP_POPUP_GENERATION        GEN_3   // Different generations display location names in overworld pop-ups differently
-                                            // current vaid choices are GEN_3 and GEN_5
+                                            // only current other choice is GEN_5, all others will default to gen 3 pop-ups
 
 // Gen 5 specific pop-up config
 // Constants

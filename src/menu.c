@@ -65,9 +65,7 @@ static void task_free_buf_after_copying_tile_data_to_vram(u8 taskId);
 
 static EWRAM_DATA u8 sStartMenuWindowId = 0;
 static EWRAM_DATA u8 sMapNamePopupWindowId = 0;
-#if MAP_POPUP_GENERATION == GEN_5
 static EWRAM_DATA u8 sSecondaryPopupWindowId = 0;
-#endif
 static EWRAM_DATA struct Menu sMenu = {0};
 static EWRAM_DATA u16 sTileNum = 0;
 static EWRAM_DATA u8 sPaletteNum = 0;
@@ -151,9 +149,8 @@ void InitStandardTextBoxWindows(void)
     InitWindows(sStandardTextBox_WindowTemplates);
     sStartMenuWindowId = WINDOW_NONE;
     sMapNamePopupWindowId = WINDOW_NONE;
-#if MAP_POPUP_GENERATION == GEN_5
-    sSecondaryPopupWindowId = WINDOW_NONE;
-#endif
+    if (MAP_POPUP_GENERATION == GEN_5)
+        sSecondaryPopupWindowId = WINDOW_NONE;
 }
 
 void FreeAllOverworldWindowBuffers(void)
@@ -531,11 +528,10 @@ u8 AddMapNamePopUpWindow(void)
 {
     if (sMapNamePopupWindowId == WINDOW_NONE)
     {
-    #if MAP_POPUP_GENERATION == GEN_5
-        sMapNamePopupWindowId = AddWindowParameterized(0, 0, 0, 30, 3, 14, 0x107);
-    #else
-        sMapNamePopupWindowId = AddWindowParameterized(0, 1, 1, 10, 3, 14, 0x107);
-    #endif
+        if (MAP_POPUP_GENERATION == GEN_5)
+            sMapNamePopupWindowId = AddWindowParameterized(0, 0, 0, 30, 3, 14, 0x107);
+        else
+            sMapNamePopupWindowId = AddWindowParameterized(0, 1, 1, 10, 3, 14, 0x107);
     }
     return sMapNamePopupWindowId;
 }
@@ -2162,7 +2158,6 @@ void BufferSaveMenuText(u8 textId, u8 *dest, u8 color)
 }
 
 // BW map pop-ups
-#if MAP_POPUP_GENERATION == GEN_5
 u8 AddSecondaryPopUpWindow(void)
 {
     if (sSecondaryPopupWindowId == WINDOW_NONE)
@@ -2200,4 +2195,3 @@ void HBlankCB_DoublePopupWindow(void)
         REG_BG0VOFS = 512 - offset;
     }
 }
-#endif
