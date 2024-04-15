@@ -1,6 +1,9 @@
 #ifndef GUARD_CONFIG_SPECIES_ENABLED_H
 #define GUARD_CONFIG_SPECIES_ENABLED_H
 
+// WARNING: For some reason, using 1/0 instead of TRUE/FALSE causes cry IDs to be shifted.
+// Please use TRUE/FALSE when using the family toggles.
+
 // Modifying the latest generation WILL change the saveblock due to Dex flags and will require a new save file.
 // Generations of Pokémon are defined by the first member introduced,
 // so Pikachu depends on the Gen 1 setting despite Pichu being the lowest member of the evolution tree.
