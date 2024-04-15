@@ -471,9 +471,7 @@ void HideMapNamePopUpWindow(void)
 
         if (MAP_POPUP_GENERATION == GEN_5)
         {
-        #ifdef UBFIX
             if (GetSecondaryPopUpWindowId() != WINDOW_NONE)
-        #endif // UBFIX   
             {
                 ClearStdWindowAndFrame(GetSecondaryPopUpWindowId(), TRUE);
                 RemoveSecondaryPopUpWindow();
