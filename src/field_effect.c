@@ -2496,7 +2496,7 @@ static void TeleportWarpInFieldEffect_SpinEnter(struct Task *task)
         if (task->data[13] == 0)
         {
             task->data[13]++;
-            objectEvent->triggerGroundEffectsOnMove = 1;
+            objectEvent->triggerGroundEffectsOnMove = TRUE;
             sprite->subspriteMode = task->data[14];
         }
     } else
