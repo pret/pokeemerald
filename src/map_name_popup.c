@@ -359,10 +359,12 @@ static void ShowMapNamePopUpWindow(void)
     mapDisplayHeader[2] = TEXT_COLOR_TRANSPARENT;
     AddTextPrinterParameterized(primaryPopUpWindowId, FONT_SHORT, mapDisplayHeader, mapNameX, mapNameY, TEXT_SKIP_DRAW, NULL);
     
-    RtcCalcLocalTime();
-    FormatDecimalTimeWithoutSeconds(withoutPrefixPtr, gLocalTime.hours, gLocalTime.minutes, MAPPOPUP_24_HOUR_TIME);
-
-    AddTextPrinterParameterized(secondaryPopUpWindowId, FONT_SMALL, mapDisplayHeader, GetStringRightAlignXOffset(FONT_SMALL, mapDisplayHeader, DISPLAY_WIDTH) - timeX, timeY, TEXT_SKIP_DRAW, NULL);
+    if (MAP_POPUP_TIME_MODE != MAP_POPUP_TIME_NONE)
+    {
+        RtcCalcLocalTime();
+        FormatDecimalTimeWithoutSeconds(withoutPrefixPtr, gLocalTime.hours, gLocalTime.minutes, MAP_POPUP_TIME_MODE == MAP_POPUP_TIME_24_HR);
+        AddTextPrinterParameterized(secondaryPopUpWindowId, FONT_SMALL, mapDisplayHeader, GetStringRightAlignXOffset(FONT_SMALL, mapDisplayHeader, DISPLAY_WIDTH) - timeX, timeY, TEXT_SKIP_DRAW, NULL);
+    }
 
     CopyWindowToVram(primaryPopUpWindowId, COPYWIN_FULL);
     CopyWindowToVram(secondaryPopUpWindowId, COPYWIN_FULL);
