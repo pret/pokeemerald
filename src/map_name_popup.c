@@ -36,7 +36,7 @@ enum MapPopUp_Themes
 
 enum MapPopUp_Themes_BW
 {
-    MAPPOPUP_THEME_DEFAULT,
+    MAPPOPUP_THEME_BW_DEFAULT,
 };
 
 // static functions
@@ -615,9 +615,10 @@ static void LoadMapNamePopUpWindowBg(void)
     if (MAP_POPUP_GENERATION == GEN_5)
     {
         popUpThemeId = sRegionMapSectionId_To_PopUpThemeIdMapping_BW[regionMapSectionId];
-        switch (popUpThemeId) {
-            // add more themes as case statements here
-            default:
+        switch (popUpThemeId) 
+        {
+            // add additional themes as cases here
+            case MAPPOPUP_THEME_BW_DEFAULT:
                 if (MAP_POPUP_BW_COLOR == MAP_POPUP_BW_COLOR_WHITE)
                     LoadPalette(sMapPopUpTilesPalette_BW_White, BG_PLTT_ID(14), sizeof(sMapPopUpTilesPalette_BW_White));
                 else
