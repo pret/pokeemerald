@@ -155,6 +155,11 @@
 #define DIR_SOUTHEAST   6
 #define DIR_NORTHWEST   7
 #define DIR_NORTHEAST   8
+#define CARDINAL_DIRECTION_COUNT DIR_SOUTHWEST
+
+#define AXIS_X     0
+#define AXIS_Y     1
+#define AXIS_COUNT 2
 
 #define CONNECTION_INVALID -1
 #define CONNECTION_NONE     0
