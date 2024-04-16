@@ -453,10 +453,18 @@ static void Task_MainMenuWaitFadeIn(u8 taskId)
 
 static void Task_MainMenuTurnOff(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
-
     if (!gPaletteFade.active)
     {
+        SetGpuReg(REG_OFFSET_DISPCNT, 0);
+        SetGpuReg(REG_OFFSET_WIN0H, 0);
+        SetGpuReg(REG_OFFSET_WIN0V, 0);
+        SetGpuReg(REG_OFFSET_WIN1H, 0);
+        SetGpuReg(REG_OFFSET_WIN1V, 0);
+        SetGpuReg(REG_OFFSET_WININ, 0);
+        SetGpuReg(REG_OFFSET_WINOUT, 0);
+        SetGpuReg(REG_OFFSET_BLDCNT, 0);
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+        SetGpuReg(REG_OFFSET_BLDY, 0);
         SetMainCallback2(sMainMenuDataPtr->savedCallback);
         MainMenu_FreeResources();
         DestroyTask(taskId);
@@ -469,7 +477,6 @@ static void Task_MainMenuTurnOff(u8 taskId)
 //
 static bool8 MainMenu_DoGfxSetup(void)
 {
-    u8 taskId;
     switch (gMain.state)
     {
     case 0:
@@ -522,7 +529,7 @@ static bool8 MainMenu_DoGfxSetup(void)
         CreateIconShadow();
         CreatePartyMonIcons();
         CreateMugshot();
-        taskId = CreateTask(Task_MainMenuWaitFadeIn, 0);
+        CreateTask(Task_MainMenuWaitFadeIn, 0);
         BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
         gMain.state++;
         break;
@@ -724,6 +731,11 @@ static void CreateIconShadow()
         gSprites[sMainMenuDataPtr->iconBoxSpriteIds[i]].invisible = FALSE;
         StartSpriteAnim(&gSprites[sMainMenuDataPtr->iconBoxSpriteIds[i]], 0);
         gSprites[sMainMenuDataPtr->iconBoxSpriteIds[i]].oam.priority = 1;
+    }
+
+    for(i = gPlayerPartyCount; i < 6; i++) // Hide Shadows For Mons that don't exist
+    {
+        gSprites[sMainMenuDataPtr->iconBoxSpriteIds[i]].invisible = TRUE;
     }
 
     return;
