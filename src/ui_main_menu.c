@@ -166,7 +166,7 @@ static const struct WindowTemplate sMainMenuWindowTemplates[] =
         .tilemapLeft = 8,          // position from left (per 8 pixels)
         .tilemapTop = 4,           // position from top (per 8 pixels)
         .width = 18,               // width (per 8 pixels)
-        .height = 6,               // height (per 8 pixels)
+        .height = 7,               // height (per 8 pixels)
         .paletteNum = 0,           // palette index to use for text
         .baseBlock = 1 + (18 * 2), // tile start in VRAM
     },
