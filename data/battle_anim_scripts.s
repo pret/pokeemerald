@@ -1032,6 +1032,7 @@ gBattleAnims_General::
 	.4byte General_WonderRoom               @ B_ANIM_WONDER_ROOM
 	.4byte General_MagicRoom                @ B_ANIM_MAGIC_ROOM
 	.4byte General_Tailwind                 @ B_ANIM_TAILLWIND
+	.4byte General_Fog                      @ B_ANIM_FOG_CONTINUES
 
 	.align 2
 gBattleAnims_Special::
@@ -17424,7 +17425,7 @@ Move_LAST_RESPECTS::
 	restorebg
 	waitbgfadein
 	end
-	
+
 Move_TIDY_UP::
 	loadspritegfx ANIM_TAG_PINK_CLOUD
 	monbg ANIM_ATTACKER
@@ -17445,7 +17446,7 @@ Move_TIDY_UP::
 	clearmonbg ANIM_ATTACKER
 	blendoff
 	end
-	
+
 Move_KOWTOW_CLEAVE::
 	loadspritegfx ANIM_TAG_SLASH
 	loadspritegfx ANIM_TAG_CROSS_IMPACT
@@ -17739,7 +17740,7 @@ Move_HYDRO_STEAM::
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 3, 9, 0, RGB_RED
 	waitforvisualfinish
 	end
-	
+
 Move_POUNCE::
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_TARGET
@@ -27351,6 +27352,7 @@ Move_WEATHER_BALL:
 	jumpreteq ANIM_WEATHER_SANDSTORM, WeatherBallSandstorm
 	jumpreteq ANIM_WEATHER_HAIL, WeatherBallIce
 	jumpreteq ANIM_WEATHER_SNOW, WeatherBallIce
+	jumpreteq ANIM_WEATHER_FOG, WeatherBallNormal
 WeatherBallNormal:
 	loadspritegfx ANIM_TAG_IMPACT
 	createsprite gWeatherBallNormalDownSpriteTemplate, ANIM_TARGET, 2, -30, -100, 25, 1, 0, 0
@@ -28096,6 +28098,9 @@ General_Hail:
 
 General_Snow:
 	goto Move_SNOWSCAPE
+
+General_Fog:
+	goto Move_HAZE
 
 General_LeechSeedDrain:
 	createvisualtask AnimTask_GetBattlersFromArg, 5
