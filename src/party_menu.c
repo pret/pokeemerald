@@ -4141,7 +4141,7 @@ static void CreatePartyMonHeldItemSprite(struct Pokemon *mon, struct PartyMenuBo
 {
     if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
     {
-        menuBox->itemSpriteId = CreateSprite(&sSpriteTemplate_HeldItem, menuBox->spriteCoords[2], menuBox->spriteCoords[3], 0);
+        menuBox->itemSpriteId = CreateSprite(&sSpriteTemplate_HeldItem, menuBox->spriteCoords[2] + 4, menuBox->spriteCoords[3], 0);
         UpdatePartyMonHeldItemSprite(mon, menuBox);
     }
 }
@@ -4150,7 +4150,7 @@ static void CreatePartyMonHeldItemSpriteParameterized(u16 species, u16 item, str
 {
     if (species != SPECIES_NONE)
     {
-        menuBox->itemSpriteId = CreateSprite(&sSpriteTemplate_HeldItem, menuBox->spriteCoords[2], menuBox->spriteCoords[3], 0);
+        menuBox->itemSpriteId = CreateSprite(&sSpriteTemplate_HeldItem, menuBox->spriteCoords[2] + 4, menuBox->spriteCoords[3], 0);
         gSprites[menuBox->itemSpriteId].oam.priority = 0;
         ShowOrHideHeldItemSprite(item, menuBox);
     }
