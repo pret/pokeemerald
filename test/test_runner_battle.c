@@ -808,7 +808,7 @@ void TestRunner_Battle_CheckChosenMove(u32 battlerId, u32 moveId, u32 target)
         bool32 movePasses = FALSE;
 
         if (expectedAction->type != B_ACTION_USE_MOVE)
-            Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: Expected MOVE, got %s", filename, expectedAction->sourceLine, sBattleActionNames[expectedAction->type]);
+            Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: Expected %s, got MOVE", filename, expectedAction->sourceLine, sBattleActionNames[expectedAction->type]);
 
         if (expectedAction->explicitTarget && expectedAction->target != target)
             Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: Expected target %s, got %s", filename, expectedAction->sourceLine, BattlerIdentifier(expectedAction->target), BattlerIdentifier(target));
@@ -874,7 +874,7 @@ void TestRunner_Battle_CheckSwitch(u32 battlerId, u32 partyIndex)
     if (!expectedAction->pass)
     {
         if (expectedAction->type != B_ACTION_SWITCH)
-            Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: Expected SWITCH/SEND_OUT, got %s", filename, expectedAction->sourceLine, sBattleActionNames[expectedAction->type]);
+            Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: Expected %s, got SWITCH/SEND_OUT", filename, expectedAction->sourceLine, sBattleActionNames[expectedAction->type]);
 
         if (expectedAction->target != partyIndex)
             Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: Expected partyIndex %d, got %d", filename, expectedAction->sourceLine, expectedAction->target, partyIndex);
