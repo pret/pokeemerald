@@ -10837,7 +10837,7 @@ void TryRestoreHeldItems(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (B_RESTORE_HELD_BATTLE_ITEMS == TRUE || gBattleStruct->itemLost[i].stolen)
+        if (B_RESTORE_HELD_BATTLE_ITEMS >= GEN_9 || gBattleStruct->itemLost[i].stolen)
         {
             lostItem = gBattleStruct->itemLost[i].originalItem;
             if (lostItem != ITEM_NONE && ItemId_GetPocket(lostItem) != POCKET_BERRIES)
