@@ -40,6 +40,7 @@
 #include "battle_pyramid_bag.h"
 #include "safari_zone.h"
 #include "field_specials.h"
+#include "ui_menu.h"
 
 static void Task_ExitNonAnimDoor(u8);
 static void Task_ExitNonDoor(u8);

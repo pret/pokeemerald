@@ -15,6 +15,7 @@ PitArena_Entrance:
 	setflag FLAG_DEFEATED_MOSSDEEP_GYM
 	setflag FLAG_DEFEATED_SOOTOPOLIS_GYM
 	setflag FLAG_SYS_NATIONAL_DEX
+	setflag FLAG_SYS_POKEDEX_GET
 	special EnableNationalPokedex
 	setflag FLAG_RECEIVED_RUNNING_SHOES
 	setflag FLAG_SYS_B_DASH
