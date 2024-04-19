@@ -2452,7 +2452,7 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
             u16 i;
             for (i=0; i<1000; i++)
             {
-                if (gBattleMoves[move].power <= 1)
+                if (gMovesInfo[move].power <= 1)
                 {
                     move = sRandomValidMoves[Random() % RANDOM_MOVES_COUNT];
                 }

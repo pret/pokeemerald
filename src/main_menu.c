@@ -1258,7 +1258,7 @@ static void HighlightSelectedMainMenuItem(u8 menuType, u8 selectedMenuItem, s16 
 
 static void Task_NewGameBirchSpeech_Init2(u8 taskId)
 {
-    SeedRngAndSetTrainerId();
+    //SeedRngAndSetTrainerId();
     ScanlineEffect_Stop();
     RtcCalcLocalTime();
     SeedRngWithRtc();

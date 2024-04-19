@@ -1,12 +1,12 @@
 #ifndef GUARD_RANDOM_H
 #define GUARD_RANDOM_H
 
-extern u32 gRngValue;
-extern u32 gRng2Value;
+//extern u32 gRngValue;
+//extern u32 gRng2Value;
 
 //Returns a 16-bit pseudorandom number
-u16 Random(void);
-u16 Random2(void);
+//u16 Random(void);
+//u16 Random2(void);
 
 //tx_randomizer_and_challenges
 u16 RandomSeeded(u16 value);
@@ -41,7 +41,7 @@ u16 RandomSeededModulo2(u32 value, u16 modulo);
 * also available in non-HQ mode for consistency.
 */
 
-#if HQ_RANDOM == FALSE
+#if HQ_RANDOM == TRUE
 struct Sfc32State {
     u32 a;
     u32 b;
@@ -101,8 +101,8 @@ void SeedRng(u16 seed);
 void SeedRng2(u16 seed);
 
 //Returns a 32-bit pseudorandom number
-//#define Random32() (Random() | (Random() << 16))
-//#define Random2_32() (Random2() | (Random2() << 16))
+#define Random32() (Random() | (Random() << 16))
+#define Random2_32() (Random2() | (Random2() << 16))
 
 static inline u16 LocalRandom(rng_value_t *val)
 {

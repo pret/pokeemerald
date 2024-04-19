@@ -15,6 +15,7 @@
 #include "ui_birch_case.h"
 #include "task.h"
 #include "field_weather.h"
+#include "new_game.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
@@ -514,7 +515,10 @@ void InitRamScript_NoObjectEvent(u8 *script, u16 scriptSize)
 
 void InitTrainerIdAndNameData()
 {
+    u32 trainerId = 0;
     SeedRngAndSetTrainerId();
+    trainerId = (Random() << 16) | GetGeneratedTrainerIdLower();
+    SetTrainerId(trainerId, gSaveBlock2Ptr->playerTrainerId);
     NewGameBirchSpeech_SetDefaultPlayerName(Random() % 19);
 }
 

@@ -3,6 +3,7 @@ PitEntrance_MapScripts::
 	.byte 0
 
 PitArena_Entrance:
+	goto_if_set FLAG_PIT_STARTED, PitArena_EntranceEnd
 	callnative SetDefaultOptions
 	setvar VAR_PIT_FLOOR, 0
 	setflag FLAG_PIT_STARTED
@@ -21,6 +22,7 @@ PitArena_Entrance:
 	setflag FLAG_SYS_B_DASH
 	callnative StartTimer1Script
 	setflashlevel 0
+PitArena_EntranceEnd:
 	return
 
 PitEntrance_Warp::
@@ -29,12 +31,9 @@ PitEntrance_Warp::
 	setvar VAR_PIT_FLOOR, 1
 	setvar VAR_REWARD_STATE, 0
 	setflag FLAG_EXP_SHARE
-	callnative StartNewPokeballCaseUI
-   	waitstate
 	callnative BufferMapFloorString
-	callnative InitTrainerIdAndNameData
 	callnative SetRandomTrainers
-	msgbox PitEntrance_Sign_Luck, MSGBOX_DEFAULT
+	@msgbox PitEntrance_Sign_Luck, MSGBOX_DEFAULT
 	additem ITEM_POTION, 5
 	additem ITEM_SUPER_POTION, 3
 	additem ITEM_HYPER_POTION, 1
@@ -56,6 +55,17 @@ PitEntrance_Warp::
 
 PitEntrance_Sign_Luck:
 	.string "Good Luck$"
+
+
+PitEntrance_StartBag::
+	lockall
+	callnative InitTrainerIdAndNameData
+	callnative StartNewPokeballCaseUI
+   	waitstate
+	removeobject 1
+	setflag FLAG_STARTER_CHOICE_BAG
+	releaseall
+	end
 
 PitEntrance_EventScript_Sign::
 	lockall

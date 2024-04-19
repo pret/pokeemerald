@@ -92,7 +92,7 @@ TEST("BuildOamBuffer faster with max sprites (random y/subpriority)")
 {
     u32 i;
     ResetSpriteData_();
-    SeedRng(0);
+    //SeedRng(0);
     for (i = 0; i < MAX_SPRITES; i++)
         CreateSprite(&gDummySpriteTemplate, 0, Random() % 256, Random() % 256);
     BenchmarkBuildOamBuffer(FALSE);
@@ -102,7 +102,7 @@ TEST("BuildOamBuffer faster on already-sorted max sprites")
 {
     u32 i;
     ResetSpriteData_();
-    SeedRng(0);
+    //SeedRng(0);
     for (i = 0; i < MAX_SPRITES; i++)
         CreateSprite(&gDummySpriteTemplate, 0, Random() % 256, Random() % 256);
     BenchmarkBuildOamBuffer(TRUE);
@@ -112,7 +112,7 @@ TEST("BuildOamBuffer faster with mix of sprites")
 {
     u32 i;
     ResetSpriteData_();
-    SeedRng(0);
+    //SeedRng(0);
     for (i = 0; i < MAX_SPRITES / 2; i++)
     {
         u32 spriteId = CreateSprite(&gDummySpriteTemplate, 0, Random() % 256, Random() % 256);

@@ -275,7 +275,7 @@ TEST("Thumb and C SFC32 implementations produce the same results")
     thumbSum = 0;
     cSum = 0;
 
-    SeedRng(0);
+    //SeedRng(0);
     localState = gRngValue;
 
     for(i = 0; i < 32; i++)
