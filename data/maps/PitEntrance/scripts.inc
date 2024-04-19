@@ -27,14 +27,14 @@ PitEntrance_Warp::
 	lockall
 	setflag FLAG_PIT_ENTERED
 	setvar VAR_PIT_FLOOR, 1
+	setvar VAR_REWARD_STATE, 0
+	setflag FLAG_EXP_SHARE
+	callnative StartNewPokeballCaseUI
+   	waitstate
 	callnative BufferMapFloorString
 	callnative InitTrainerIdAndNameData
 	callnative SetRandomTrainers
-	setvar VAR_REWARD_STATE, 0
-	setflag FLAG_EXP_SHARE
-	givemon SPECIES_MUDKIP, 5
-	givemon SPECIES_TREECKO, 5
-	givemon SPECIES_TORCHIC, 5
+	msgbox PitEntrance_Sign_Luck, MSGBOX_DEFAULT
 	additem ITEM_POTION, 5
 	additem ITEM_SUPER_POTION, 3
 	additem ITEM_HYPER_POTION, 1
@@ -53,6 +53,9 @@ PitEntrance_Warp::
 	waitstate
 	releaseall
 	end
+
+PitEntrance_Sign_Luck:
+	.string "Good Luck$"
 
 PitEntrance_EventScript_Sign::
 	lockall

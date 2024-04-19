@@ -295,7 +295,7 @@ u32 BirchCase_GiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 
     // check whether to use a specific nature or a random one
     if (nature >= NUM_NATURES)
     {
-#ifdef POKEMON_EXPANSION
+#ifdef FPOKEMON_EXPANSIONF
         if (OW_SYNCHRONIZE_NATURE >= GEN_6
          && (gSpeciesInfo[species].eggGroups[0] == EGG_GROUP_NO_EGGS_DISCOVERED || OW_SYNCHRONIZE_NATURE == GEN_7))
             nature = PickWildMonNature();
@@ -317,7 +317,7 @@ u32 BirchCase_GiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 
     else
         CreateMonWithNature(&mon, species, level, 32, nature);
 
-#ifdef POKEMON_EXPANSION // the Expansion shiny code doesn't work in vanilla
+#ifdef FPOKEMON_EXPANSIONF // the Expansion shiny code doesn't work in vanilla
     // shininess
     if (P_FLAG_FORCE_SHINY != 0 && FlagGet(P_FLAG_FORCE_SHINY))
         isShinyExpansion = TRUE;
@@ -376,7 +376,7 @@ u32 BirchCase_GiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 
     // held item
     SetMonData(&mon, MON_DATA_HELD_ITEM, &item);
 
-#ifdef POKEMON_EXPANSION
+#ifdef FPOKEMON_EXPANSIONF
     // In case a mon with a form changing item is given. Eg: SPECIES_ARCEUS_NORMAL with ITEM_SPLASH_PLATE will transform into SPECIES_ARCEUS_WATER upon gifted.
     targetSpecies = GetFormChangeTargetSpecies(&mon, FORM_CHANGE_ITEM_HOLD, 0);
     if (targetSpecies != SPECIES_NONE)
