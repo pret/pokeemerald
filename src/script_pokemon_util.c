@@ -349,7 +349,9 @@ u32 ScriptGiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 natu
     // moves
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moves[i] == MOVE_NONE || moves[i] >= MOVES_COUNT)
+        if (moves[0] == MOVE_NONE)
+            break;
+        if (moves[i] >= MOVES_COUNT)
             continue;
         SetMonMoveSlot(&mon, moves[i], i);
     }
@@ -402,7 +404,7 @@ u32 ScriptGiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 natu
     }
 
     // set pokédex flags
-    nationalDexNum = SpeciesToNationalPokedexNum(species); 
+    nationalDexNum = SpeciesToNationalPokedexNum(species);
     switch (sentToPc)
     {
     case MON_GIVEN_TO_PARTY:
@@ -525,7 +527,7 @@ void Script_SetStatus1(struct ScriptContext *ctx)
         }
     }
     else
-    {        
+    {
         SetMonData(&gPlayerParty[slot], MON_DATA_STATUS, &status1);
     }
 }
