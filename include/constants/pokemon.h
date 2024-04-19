@@ -331,5 +331,7 @@
 #define NUM_HIDDEN_ABILITY_SLOTS 1
 
 #define LEGENDARY_PERFECT_IV_COUNT 3
+// Used as a signal for givemon to generate a default ability by personality.
+#define NUM_ABILITY_PERSONALITY 0xFF
 
 #endif // GUARD_CONSTANTS_POKEMON_H

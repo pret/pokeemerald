@@ -12,6 +12,9 @@
 #include "string_util.h"
 #include "strings.h"
 #include "pokemon_storage_system.h"
+#include "ui_birch_case.h"
+#include "task.h"
+#include "field_weather.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
@@ -610,4 +613,10 @@ void CheckFloorCleared()
 void BufferMapFloorString()
 {
     ConvertIntToDecimalStringN(gStringVar1, VarGet(VAR_PIT_FLOOR), STR_CONV_MODE_LEFT_ALIGN, 3);
+}
+
+void StartNewPokeballCaseUI(void)
+{
+    FadeScreen(FADE_TO_BLACK, 0);
+    CreateTask(Task_OpenBirchCase, 0);
 }
