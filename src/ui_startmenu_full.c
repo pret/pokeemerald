@@ -1115,14 +1115,7 @@ static bool8 StartMenuFull_LoadGraphics(void) // Load the Tilesets, Tilemaps, Sp
     {
     case 0:
         ResetTempTileDataBuffers();
-        if (gSaveBlock2Ptr->playerGender == FEMALE)
-        {
-            DecompressAndCopyTileDataToVram(1, sStartMenuTilesAlt, 0, 0, 0);
-        }
-        else
-        {
-            DecompressAndCopyTileDataToVram(1, sStartMenuTiles, 0, 0, 0);
-        }
+        DecompressAndCopyTileDataToVram(1, sStartMenuTiles, 0, 0, 0);
         DecompressAndCopyTileDataToVram(2, sScrollBgTiles, 0, 0, 0);
         sStartMenuDataPtr->gfxLoadState++;
         break;
@@ -1137,17 +1130,8 @@ static bool8 StartMenuFull_LoadGraphics(void) // Load the Tilesets, Tilemaps, Sp
     case 2:
     {
         struct SpritePalette cursorPal = {sSpritePal_Cursor.data, sSpritePal_Cursor.tag};
-        if (gSaveBlock2Ptr->playerGender == FEMALE)
-        {
-            LoadPalette(sStartMenuPaletteAlt, 0, 16);
-            LoadPalette(sHP_PalAlt, 32, 16);
-            cursorPal.data = sCursor_PalAlt;
-        }
-        else
-        {
-            LoadPalette(sStartMenuPalette, 0, 16);
-            LoadPalette(sHP_Pal, 32, 16);
-        }
+        LoadPalette(sStartMenuPalette, 0, 16);
+        LoadPalette(sHP_Pal, 32, 16);
         LoadPalette(sScrollBgPalette, 16, 16);
 
         LoadCompressedSpriteSheet(&sSpriteSheet_IconBox);
