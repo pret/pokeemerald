@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_CHILLY_RECEPTION].effect == EFFECT_CHILLY_RECEPTION);
+    ASSUME(gMovesInfo[MOVE_CHILLY_RECEPTION].effect == EFFECT_CHILLY_RECEPTION);
 }
 
 SINGLE_BATTLE_TEST("Chilly Reception sets up snow and switches the user out")

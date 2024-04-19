@@ -7,8 +7,8 @@ SINGLE_BATTLE_TEST("MinimizeDoubleDamage flag makes moves cause double damage to
     PARAMETRIZE { useMinimize = FALSE; }
     PARAMETRIZE { useMinimize = TRUE; }
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_MINIMIZE].effect == EFFECT_MINIMIZE);
-        ASSUME(gBattleMoves[MOVE_STEAMROLLER].minimizeDoubleDamage);
+        ASSUME(gMovesInfo[MOVE_MINIMIZE].effect == EFFECT_MINIMIZE);
+        ASSUME(gMovesInfo[MOVE_STEAMROLLER].minimizeDoubleDamage);
         PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(2); }
     } WHEN {

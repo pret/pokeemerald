@@ -6,9 +6,11 @@
 //AsparagusEduardo:     https://github.com/AsparagusEduardo/pokeemerald/tree/InfusedEmerald_v2
 //Ghoulslash:           https://github.com/ghoulslash/pokeemerald
 //Jaizu:                https://jaizu.moe/
+//AND OTHER RHH POKEEMERALD-EXPANSION CONTRIBUTORS
 #include "global.h"
 #include "battle.h"
 #include "battle_setup.h"
+#include "berry.h"
 #include "clock.h"
 #include "coins.h"
 #include "credits.h"
@@ -71,17 +73,17 @@
 enum DebugMenu
 {
     DEBUG_MENU_ITEM_UTILITIES,
-    DEBUG_MENU_ITEM_PARTY_BOXES,
+    DEBUG_MENU_ITEM_PCBAG,
+    DEBUG_MENU_ITEM_PARTY,
     DEBUG_MENU_ITEM_GIVE,
     DEBUG_MENU_ITEM_SCRIPTS,
     DEBUG_MENU_ITEM_FLAGVAR,
-    DEBUG_MENU_ITEM_FILL,
     //DEBUG_MENU_ITEM_BATTLE,
     DEBUG_MENU_ITEM_SOUND,
     DEBUG_MENU_ITEM_CANCEL,
 };
 
-enum UtilMenu
+enum UtilDebugMenu
 {
     DEBUG_UTIL_MENU_ITEM_FLY,
     DEBUG_UTIL_MENU_ITEM_WARP,
@@ -96,19 +98,41 @@ enum UtilMenu
     DEBUG_UTIL_MENU_ITEM_PLAYER_ID,
     DEBUG_UTIL_MENU_ITEM_CHEAT,
     DEBUG_UTIL_MENU_ITEM_EXPANSION_VER,
+    DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS,
 };
 
-enum PartyBoxesMenu
+enum GivePCBagDebugMenu
 {
-    DEBUG_PARTY_BOXES_MENU_ITEM_ACCESS_PC,
-    DEBUG_PARTY_BOXES_MENU_ITEM_MOVE_REMINDER,
-    DEBUG_PARTY_BOXES_MENU_ITEM_HATCH_AN_EGG,
-    DEBUG_PARTY_BOXES_MENU_ITEM_HEAL_PARTY,
-    DEBUG_PARTY_BOXES_MENU_ITEM_POISON_MONS,
-    DEBUG_PARTY_BOXES_MENU_ITEM_CLEAR_BOXES,
+    DEBUG_PCBAG_MENU_ITEM_ACCESS_PC,
+    DEBUG_PCBAG_MENU_ITEM_FILL,
+    DEBUG_PCBAG_MENU_ITEM_CLEAR_BAG,
+    DEBUG_PCBAG_MENU_ITEM_CLEAR_BOXES,
 };
 
-enum ScriptMenu
+enum GivePCBagFillDebugMenu
+{
+    DEBUG_PCBAG_MENU_ITEM_FILL_PC_BOXES_FAST,
+    DEBUG_PCBAG_MENU_ITEM_FILL_PC_BOXES_SLOW,
+    DEBUG_PCBAG_MENU_ITEM_FILL_PC_ITEMS,
+    DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_ITEMS,
+    DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_BALLS,
+    DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_TMHM,
+    DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_BERRIES,
+    DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_KEY_ITEMS,
+};
+
+enum PartyDebugMenu
+{
+    DEBUG_PARTY_MENU_ITEM_MOVE_REMINDER,
+    DEBUG_PARTY_MENU_ITEM_HATCH_AN_EGG,
+    DEBUG_PARTY_MENU_ITEM_HEAL_PARTY,
+    DEBUG_PARTY_MENU_ITEM_INFLICT_STATUS1,
+    DEBUG_PARTY_MENU_ITEM_CHECK_EVS,
+    DEBUG_PARTY_MENU_ITEM_CHECK_IVS,
+    DEBUG_PARTY_MENU_ITEM_CLEAR_PARTY,
+};
+
+enum ScriptDebugMenu
 {
     DEBUG_UTIL_MENU_ITEM_SCRIPT_1,
     DEBUG_UTIL_MENU_ITEM_SCRIPT_2,
@@ -120,7 +144,7 @@ enum ScriptMenu
     DEBUG_UTIL_MENU_ITEM_SCRIPT_8,
 };
 
-enum FlagsVarsMenu
+enum FlagsVarsDebugMenu
 {
     DEBUG_FLAGVAR_MENU_ITEM_FLAGS,
     DEBUG_FLAGVAR_MENU_ITEM_VARS,
@@ -187,10 +211,9 @@ enum BattleTerrain
     DEBUG_BATTLE_2_MENU_ITEM_TERRAIN_9,
 };
 
-enum GiveMenu
+enum GiveDebugMenu
 {
     DEBUG_GIVE_MENU_ITEM_ITEM_X,
-    DEBUG_GIVE_MENU_ITEM_ALLTMS,
     DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE,
     DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX,
     DEBUG_GIVE_MENU_ITEM_MAX_MONEY,
@@ -199,29 +222,26 @@ enum GiveMenu
     DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG,
 };
 
-enum GiveFillMenu
-{
-    DEBUG_FILL_MENU_ITEM_PC_BOXES_FAST,
-    DEBUG_FILL_MENU_ITEM_PC_BOXES_SLOW,
-    DEBUG_FILL_MENU_ITEM_PC_ITEMS,
-    DEBUG_FILL_MENU_ITEM_POCKET_ITEMS,
-    DEBUG_FILL_MENU_ITEM_POCKET_BALLS,
-    DEBUG_FILL_MENU_ITEM_POCKET_TMHM,
-    DEBUG_FILL_MENU_ITEM_POCKET_BERRIES,
-    DEBUG_FILL_MENU_ITEM_POCKET_KEY_ITEMS,
-};
-
-enum SoundMenu
+enum SoundDebugMenu
 {
     DEBUG_SOUND_MENU_ITEM_SE,
     DEBUG_SOUND_MENU_ITEM_MUS,
+};
+
+enum BerryFunctionsMenu
+{
+    DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL,
+    DEBUG_BERRY_FUNCTIONS_MENU_READY,
+    DEBUG_BERRY_FUNCTIONS_MENU_NEXT_STAGE,
+    DEBUG_BERRY_FUNCTIONS_MENU_WEEDS,
+    DEBUG_BERRY_FUNCTIONS_MENU_PESTS,
 };
 
 // *******************************
 // Constants
 #define DEBUG_MENU_FONT FONT_NORMAL
 
-#define DEBUG_MENU_WIDTH_MAIN 16
+#define DEBUG_MENU_WIDTH_MAIN 17
 #define DEBUG_MENU_HEIGHT_MAIN 9
 
 #define DEBUG_MENU_WIDTH_EXTRA 10
@@ -265,6 +285,12 @@ struct DebugMonData
     u16 mon_move_1;
     u16 mon_move_2;
     u16 mon_move_3;
+    u8  mon_ev_hp;
+    u8  mon_ev_atk;
+    u8  mon_ev_def;
+    u8  mon_ev_speed;
+    u8  mon_ev_satk;
+    u8  mon_ev_sdef;
 };
 
 struct DebugMenuListData
@@ -311,22 +337,24 @@ static void DebugAction_Util_Script_7(u8 taskId);
 static void DebugAction_Util_Script_8(u8 taskId);
 
 static void DebugAction_OpenUtilitiesMenu(u8 taskId);
-static void DebugAction_OpenPartyBoxesMenu(u8 taskId);
+static void DebugAction_OpenPCBagMenu(u8 taskId);
+static void DebugAction_OpenPartyMenu(u8 taskId);
 static void DebugAction_OpenScriptsMenu(u8 taskId);
 static void DebugAction_OpenFlagsVarsMenu(u8 taskId);
 static void DebugAction_OpenGiveMenu(u8 taskId);
-static void DebugAction_OpenFillMenu(u8 taskId);
 static void DebugAction_OpenSoundMenu(u8 taskId);
 
 static void DebugTask_HandleMenuInput_Main(u8 taskId);
 static void DebugTask_HandleMenuInput_Utilities(u8 taskId);
-static void DebugTask_HandleMenuInput_PartyBoxes(u8 taskId);
+static void DebugTask_HandleMenuInput_PCBag(u8 taskId);
+static void DebugTask_HandleMenuInput_PCBag_Fill(u8 taskId);
+static void DebugTask_HandleMenuInput_Party(u8 taskId);
 static void DebugTask_HandleMenuInput_Scripts(u8 taskId);
 static void DebugTask_HandleMenuInput_FlagsVars(u8 taskId);
 static void DebugTask_HandleMenuInput_Battle(u8 taskId);
 static void DebugTask_HandleMenuInput_Give(u8 taskId);
-static void DebugTask_HandleMenuInput_Fill(u8 taskId);
 static void DebugTask_HandleMenuInput_Sound(u8 taskId);
+static void DebugTask_HandleMenuInput_BerryFunctions(u8 taskId);
 
 static void DebugAction_Util_Fly(u8 taskId);
 static void DebugAction_Util_Warp_Warp(u8 taskId);
@@ -345,13 +373,28 @@ static void DebugAction_Util_Player_Gender(u8 taskId);
 static void DebugAction_Util_Player_Id(u8 taskId);
 static void DebugAction_Util_CheatStart(u8 taskId);
 static void DebugAction_Util_ExpansionVersion(u8 taskId);
+static void DebugAction_Util_BerryFunctions(u8 taskId);
 
-static void DebugAction_PartyBoxes_AccessPC(u8 taskId);
-static void DebugAction_PartyBoxes_MoveReminder(u8 taskId);
-static void DebugAction_PartyBoxes_HatchAnEgg(u8 taskId);
-static void DebugAction_PartyBoxes_HealParty(u8 taskId);
-static void DebugAction_PartyBoxes_PoisonMons(u8 taskId);
-static void DebugAction_PartyBoxes_ClearBoxes(u8 taskId);
+static void DebugAction_OpenPCBagFillMenu(u8 taskId);
+static void DebugAction_PCBag_Fill_PCBoxes_Fast(u8 taskId);
+static void DebugAction_PCBag_Fill_PCBoxes_Slow(u8 taskId);
+static void DebugAction_PCBag_Fill_PCItemStorage(u8 taskId);
+static void DebugAction_PCBag_Fill_PocketItems(u8 taskId);
+static void DebugAction_PCBag_Fill_PocketPokeBalls(u8 taskId);
+static void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId);
+static void DebugAction_PCBag_Fill_PocketBerries(u8 taskId);
+static void DebugAction_PCBag_Fill_PocketKeyItems(u8 taskId);
+static void DebugAction_PCBag_AccessPC(u8 taskId);
+static void DebugAction_PCBag_ClearBag(u8 taskId);
+static void DebugAction_PCBag_ClearBoxes(u8 taskId);
+
+static void DebugAction_Party_MoveReminder(u8 taskId);
+static void DebugAction_Party_HatchAnEgg(u8 taskId);
+static void DebugAction_Party_HealParty(u8 taskId);
+static void DebugAction_Party_InflictStatus1(u8 taskId);
+static void DebugAction_Party_CheckEVs(u8 taskId);
+static void DebugAction_Party_CheckIVs(u8 taskId);
+static void DebugAction_Party_ClearParty(u8 taskId);
 
 static void DebugAction_FlagsVars_Flags(u8 taskId);
 static void DebugAction_FlagsVars_FlagsSelect(u8 taskId);
@@ -379,7 +422,6 @@ static void Debug_InitializeBattle(u8 taskId);
 static void DebugAction_Give_Item(u8 taskId);
 static void DebugAction_Give_Item_SelectId(u8 taskId);
 static void DebugAction_Give_Item_SelectQuantity(u8 taskId);
-static void DebugAction_Give_AllTMs(u8 taskId);
 static void DebugAction_Give_PokemonSimple(u8 taskId);
 static void DebugAction_Give_PokemonComplex(u8 taskId);
 static void DebugAction_Give_Pokemon_SelectId(u8 taskId);
@@ -388,6 +430,7 @@ static void DebugAction_Give_Pokemon_SelectShiny(u8 taskId);
 static void DebugAction_Give_Pokemon_SelectNature(u8 taskId);
 static void DebugAction_Give_Pokemon_SelectAbility(u8 taskId);
 static void DebugAction_Give_Pokemon_SelectIVs(u8 taskId);
+static void DebugAction_Give_Pokemon_SelectEVs(u8 taskId);
 static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId);
 static void DebugAction_Give_Pokemon_Move(u8 taskId);
 static void DebugAction_Give_MaxMoney(u8 taskId);
@@ -395,24 +438,23 @@ static void DebugAction_Give_MaxCoins(u8 taskId);
 static void DebugAction_Give_MaxBattlePoints(u8 taskId);
 static void DebugAction_Give_DayCareEgg(u8 taskId);
 
-static void DebugAction_Fill_PCBoxes_Fast(u8 taskId);
-static void DebugAction_Fill_PCBoxes_Slow(u8 taskId);
-static void DebugAction_Fill_PCItemStorage(u8 taskId);
-static void DebugAction_Fill_PocketItems(u8 taskId);
-static void DebugAction_Fill_PocketPokeBalls(u8 taskId);
-static void DebugAction_Fill_PocketTMHM(u8 taskId);
-static void DebugAction_Fill_PocketBerries(u8 taskId);
-static void DebugAction_Fill_PocketKeyItems(u8 taskId);
-
 static void DebugAction_Sound_SE(u8 taskId);
 static void DebugAction_Sound_SE_SelectId(u8 taskId);
 static void DebugAction_Sound_MUS(u8 taskId);
 static void DebugAction_Sound_MUS_SelectId(u8 taskId);
 
+static void DebugAction_BerryFunctions_ClearAll(u8 taskId);
+static void DebugAction_BerryFunctions_Ready(u8 taskId);
+static void DebugAction_BerryFunctions_NextStage(u8 taskId);
+static void DebugAction_BerryFunctions_Pests(u8 taskId);
+static void DebugAction_BerryFunctions_Weeds(u8 taskId);
 
 extern const u8 Debug_FlagsNotSetOverworldConfigMessage[];
 extern const u8 Debug_FlagsNotSetBattleConfigMessage[];
 extern const u8 Debug_FlagsAndVarNotSetBattleConfigMessage[];
+extern const u8 Debug_EventScript_CheckEVs[];
+extern const u8 Debug_EventScript_CheckIVs[];
+extern const u8 Debug_EventScript_InflictStatus1[];
 extern const u8 Debug_EventScript_Script_1[];
 extern const u8 Debug_EventScript_Script_2[];
 extern const u8 Debug_EventScript_Script_3[];
@@ -435,6 +477,9 @@ extern const u8 Debug_CheckROMSpace[];
 extern const u8 Debug_BoxFilledMessage[];
 extern const u8 Debug_ShowExpansionVersion[];
 
+extern const u8 Debug_BerryPestsDisabled[];
+extern const u8 Debug_BerryWeedsDisabled[];
+
 extern const u8 FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon[];
 
 #include "data/map_group_count.h"
@@ -449,24 +494,24 @@ static const u8 sDebugText_Dashes[] =        _("---");
 static const u8 sDebugText_Empty[] =         _("");
 static const u8 sDebugText_Continue[] =      _("Continue…{CLEAR_TO 110}{RIGHT_ARROW}");
 // Main Menu
-static const u8 sDebugText_Utilities[] =        _("Utilities…{CLEAR_TO 110}{RIGHT_ARROW}");
-static const u8 sDebugText_PartyBoxes[] =       _("Party/Boxes…{CLEAR_TO 110}{RIGHT_ARROW}");
-static const u8 sDebugText_Scripts[] =          _("Scripts…{CLEAR_TO 110}{RIGHT_ARROW}");
-static const u8 sDebugText_FlagsVars[] =        _("Flags & Vars…{CLEAR_TO 110}{RIGHT_ARROW}");
-static const u8 sDebugText_Battle[] =           _("Battle Test{CLEAR_TO 110}{RIGHT_ARROW}");
-static const u8 sDebugText_Give[] =             _("Give X…{CLEAR_TO 110}{RIGHT_ARROW}");
-static const u8 sDebugText_Fill[] =             _("Fill PC/Pockets…{CLEAR_TO 110}{RIGHT_ARROW}");
-static const u8 sDebugText_Sound[] =            _("Sound…{CLEAR_TO 110}{RIGHT_ARROW}");
-static const u8 sDebugText_Cancel[] =           _("Cancel");
+static const u8 sDebugText_Utilities[] =     _("Utilities…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_PCBag[] =         _("PC/Bag…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Party[] =         _("Party…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Scripts[] =       _("Scripts…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_FlagsVars[] =     _("Flags & Vars…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Battle[] =        _("Battle Test{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Give[] =          _("Give X…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Sound[] =         _("Sound…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Cancel[] =        _("Cancel");
 // Script menu
-static const u8 sDebugText_Util_Script_1[] =               _("Script 1");
-static const u8 sDebugText_Util_Script_2[] =               _("Script 2");
-static const u8 sDebugText_Util_Script_3[] =               _("Script 3");
-static const u8 sDebugText_Util_Script_4[] =               _("Script 4");
-static const u8 sDebugText_Util_Script_5[] =               _("Script 5");
-static const u8 sDebugText_Util_Script_6[] =               _("Script 6");
-static const u8 sDebugText_Util_Script_7[] =               _("Script 7");
-static const u8 sDebugText_Util_Script_8[] =               _("Script 8");
+static const u8 sDebugText_Util_Script_1[] = _("Script 1");
+static const u8 sDebugText_Util_Script_2[] = _("Script 2");
+static const u8 sDebugText_Util_Script_3[] = _("Script 3");
+static const u8 sDebugText_Util_Script_4[] = _("Script 4");
+static const u8 sDebugText_Util_Script_5[] = _("Script 5");
+static const u8 sDebugText_Util_Script_6[] = _("Script 6");
+static const u8 sDebugText_Util_Script_7[] = _("Script 7");
+static const u8 sDebugText_Util_Script_8[] = _("Script 8");
 // Util Menu
 static const u8 sDebugText_Util_FlyToMap[] =                 _("Fly to map…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Util_WarpToMap[] =                _("Warp to map warp…{CLEAR_TO 110}{RIGHT_ARROW}");
@@ -474,48 +519,63 @@ static const u8 sDebugText_Util_WarpToMap_SelectMapGroup[] = _("Group: {STR_VAR_
 static const u8 sDebugText_Util_WarpToMap_SelectMap[] =      _("Map: {STR_VAR_1}{CLEAR_TO 90}\nMapSec:{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}\n{STR_VAR_3}{CLEAR_TO 90}");
 static const u8 sDebugText_Util_WarpToMap_SelectWarp[] =     _("Warp:{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_3}{CLEAR_TO 90}");
 static const u8 sDebugText_Util_WarpToMap_SelMax[] =         _("{STR_VAR_1} / {STR_VAR_2}");
-static const u8 sDebugText_Util_SaveBlockSpace[] =           _("SaveBlock Space…{CLEAR_TO 110}{RIGHT_ARROW}");
-static const u8 sDebugText_Util_ROMSpace[] =                 _("ROM Space…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Util_SaveBlockSpace[] =           _("Save Block space…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Util_ROMSpace[] =                 _("ROM space…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Util_Weather[] =                  _("Set weather…{CLEAR_TO 110}{RIGHT_ARROW}");
-static const u8 sDebugText_Util_Weather_ID[] =               _("Weather Id: {STR_VAR_3}\n{STR_VAR_1}\n{STR_VAR_2}");
-static const u8 sDebugText_Util_CheckWallClock[] =           _("Check Wall Clock…{CLEAR_TO 110}{RIGHT_ARROW}");
-static const u8 sDebugText_Util_SetWallClock[] =             _("Set Wall Clock…{CLEAR_TO 110}{RIGHT_ARROW}");
-static const u8 sDebugText_Util_WatchCredits[] =             _("Watch Credits…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Util_Weather_ID[] =               _("Weather ID: {STR_VAR_3}\n{STR_VAR_1}\n{STR_VAR_2}");
+static const u8 sDebugText_Util_CheckWallClock[] =           _("Check wall clock…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Util_SetWallClock[] =             _("Set wall clock…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Util_WatchCredits[] =             _("Watch credits…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Util_Player_Name[] =              _("Player name");
-static const u8 sDebugText_Util_Player_Gender[] =            _("Toggle Gender");
-static const u8 sDebugText_Util_Player_Id[] =                _("New Trainer Id");
-static const u8 sDebugText_Util_CheatStart[] =               _("CHEAT Start");
+static const u8 sDebugText_Util_Player_Gender[] =            _("Toggle gender");
+static const u8 sDebugText_Util_Player_Id[] =                _("New Trainer ID");
+static const u8 sDebugText_Util_CheatStart[] =               _("Cheat start");
 static const u8 sDebugText_Util_ExpansionVersion[] =         _("Expansion Version");
+static const u8 sDebugText_Util_BerryFunctions[] =           _("Berry Functions…{CLEAR_TO 110}{RIGHT_ARROW}");
+// PC/Bag Menu
+static const u8 sDebugText_PCBag_Fill[] =                    _("Fill…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_PCBag_Fill_Pc_Fast[] =            _("Fill PC Boxes Fast");
+static const u8 sDebugText_PCBag_Fill_Pc_Slow[] =            _("Fill PC Boxes Slow (LAG!)");
+static const u8 sDebugText_PCBag_Fill_Pc_Items[] =           _("Fill PC Items");
+static const u8 sDebugText_PCBag_Fill_PocketItems[] =        _("Fill Pocket Items");
+static const u8 sDebugText_PCBag_Fill_PocketPokeBalls[] =    _("Fill Pocket Poké Balls");
+static const u8 sDebugText_PCBag_Fill_PocketTMHM[] =         _("Fill Pocket TMHM");
+static const u8 sDebugText_PCBag_Fill_PocketBerries[] =      _("Fill Pocket Berries");
+static const u8 sDebugText_PCBag_Fill_PocketKeyItems[] =     _("Fill Pocket Key Items");
+static const u8 sDebugText_PCBag_AccessPC[] =                _("Access PC");
+static const u8 sDebugText_PCBag_ClearBag[] =                _("Clear Bag");
+static const u8 sDebugText_PCBag_ClearBoxes[] =              _("Clear Storage Boxes");
 // Party/Boxes Menu
-static const u8 sDebugText_PartyBoxes_AccessPC[] =           _("Access PC");
-static const u8 sDebugText_PartyBoxes_MoveReminder[] =       _("Move Reminder");
-static const u8 sDebugText_PartyBoxes_HatchAnEgg[] =         _("Hatch an Egg");
-static const u8 sDebugText_PartyBoxes_HealParty[] =          _("Heal Party");
-static const u8 sDebugText_PartyBoxes_PoisonParty[] =        _("Poison party");
-static const u8 sDebugText_PartyBoxes_ClearBoxes[] =         _("Clear Storage Boxes");
+static const u8 sDebugText_Party_MoveReminder[] =            _("Move Reminder");
+static const u8 sDebugText_Party_HatchAnEgg[] =              _("Hatch an Egg");
+static const u8 sDebugText_Party_HealParty[] =               _("Heal party");
+static const u8 sDebugText_Party_InflictStatus1[] =          _("Inflict Status1");
+static const u8 sDebugText_Party_CheckEVs[] =                _("Check EVs");
+static const u8 sDebugText_Party_CheckIVs[] =                _("Check IVs");
+static const u8 sDebugText_Party_ClearParty[] =              _("Clear Party");
 // Flags/Vars Menu
-static const u8 sDebugText_FlagsVars_Flags[] =                  _("Set Flag XYZ…{CLEAR_TO 110}{RIGHT_ARROW}");
-static const u8 sDebugText_FlagsVars_Flag[] =                   _("Flag: {STR_VAR_1}{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}\n{STR_VAR_3}");
-static const u8 sDebugText_FlagsVars_FlagHex[] =                _("{STR_VAR_1}{CLEAR_TO 90}\n0x{STR_VAR_2}{CLEAR_TO 90}");
-static const u8 sDebugText_FlagsVars_Vars[] =                   _("Set Var XYZ…{CLEAR_TO 110}{RIGHT_ARROW}");
-static const u8 sDebugText_FlagsVars_VariableHex[] =            _("{STR_VAR_1}{CLEAR_TO 90}\n0x{STR_VAR_2}{CLEAR_TO 90}");
-static const u8 sDebugText_FlagsVars_Variable[] =               _("Var: {STR_VAR_1}{CLEAR_TO 90}\nVal: {STR_VAR_3}{CLEAR_TO 90}\n{STR_VAR_2}");
-static const u8 sDebugText_FlagsVars_VariableValueSet[] =       _("Var: {STR_VAR_1}{CLEAR_TO 90}\nVal: {STR_VAR_3}{CLEAR_TO 90}\n{STR_VAR_2}");
-static const u8 sDebugText_FlagsVars_PokedexFlags_All[] =       _("Pokédex Flags All");
-static const u8 sDebugText_FlagsVars_PokedexFlags_Reset[] =     _("Pokédex Flags Reset");
-static const u8 sDebugText_FlagsVars_SwitchDex[] =              _("Toggle {STR_VAR_1}Pokédex");
-static const u8 sDebugText_FlagsVars_SwitchNationalDex[] =      _("Toggle {STR_VAR_1}NatDex");
-static const u8 sDebugText_FlagsVars_SwitchPokeNav[] =          _("Toggle {STR_VAR_1}PokéNav");
-static const u8 sDebugText_FlagsVars_SwitchMatchCall[] =        _("Toggle {STR_VAR_1}Match Call");
-static const u8 sDebugText_FlagsVars_RunningShoes[] =           _("Toggle {STR_VAR_1}Running Shoes");
-static const u8 sDebugText_FlagsVars_ToggleFlyFlags[] =         _("Toggle {STR_VAR_1}Fly Flags");
-static const u8 sDebugText_FlagsVars_ToggleAllBadges[] =        _("Toggle {STR_VAR_1}All badges");
-static const u8 sDebugText_FlagsVars_ToggleFrontierPass[] =     _("Toggle {STR_VAR_1}Frontier Pass");
-static const u8 sDebugText_FlagsVars_SwitchCollision[] =        _("Toggle {STR_VAR_1}Collision OFF");
-static const u8 sDebugText_FlagsVars_SwitchEncounter[] =        _("Toggle {STR_VAR_1}Encounter OFF");
-static const u8 sDebugText_FlagsVars_SwitchTrainerSee[] =       _("Toggle {STR_VAR_1}TrainerSee OFF");
-static const u8 sDebugText_FlagsVars_SwitchBagUse[] =           _("Toggle {STR_VAR_1}BagUse OFF");
-static const u8 sDebugText_FlagsVars_SwitchCatching[] =         _("Toggle {STR_VAR_1}Catching OFF");
+static const u8 sDebugText_FlagsVars_Flags[] =               _("Set Flag XYZ…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_FlagsVars_Flag[] =                _("Flag: {STR_VAR_1}{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}\n{STR_VAR_3}");
+static const u8 sDebugText_FlagsVars_FlagHex[] =             _("{STR_VAR_1}{CLEAR_TO 90}\n0x{STR_VAR_2}{CLEAR_TO 90}");
+static const u8 sDebugText_FlagsVars_Vars[] =                _("Set Var XYZ…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_FlagsVars_VariableHex[] =         _("{STR_VAR_1}{CLEAR_TO 90}\n0x{STR_VAR_2}{CLEAR_TO 90}");
+static const u8 sDebugText_FlagsVars_Variable[] =            _("Var: {STR_VAR_1}{CLEAR_TO 90}\nVal: {STR_VAR_3}{CLEAR_TO 90}\n{STR_VAR_2}");
+static const u8 sDebugText_FlagsVars_VariableValueSet[] =    _("Var: {STR_VAR_1}{CLEAR_TO 90}\nVal: {STR_VAR_3}{CLEAR_TO 90}\n{STR_VAR_2}");
+static const u8 sDebugText_FlagsVars_PokedexFlags_All[] =    _("Pokédex Flags All");
+static const u8 sDebugText_FlagsVars_PokedexFlags_Reset[] =  _("Pokédex Flags Reset");
+static const u8 sDebugText_FlagsVars_SwitchDex[] =           _("Toggle {STR_VAR_1}Pokédex");
+static const u8 sDebugText_FlagsVars_SwitchNationalDex[] =   _("Toggle {STR_VAR_1}National Dex");
+static const u8 sDebugText_FlagsVars_SwitchPokeNav[] =       _("Toggle {STR_VAR_1}PokéNav");
+static const u8 sDebugText_FlagsVars_SwitchMatchCall[] =     _("Toggle {STR_VAR_1}Match Call");
+static const u8 sDebugText_FlagsVars_RunningShoes[] =        _("Toggle {STR_VAR_1}Running Shoes");
+static const u8 sDebugText_FlagsVars_ToggleFlyFlags[] =      _("Toggle {STR_VAR_1}Fly Flags");
+static const u8 sDebugText_FlagsVars_ToggleAllBadges[] =     _("Toggle {STR_VAR_1}All badges");
+static const u8 sDebugText_FlagsVars_ToggleFrontierPass[] =  _("Toggle {STR_VAR_1}Frontier Pass");
+static const u8 sDebugText_FlagsVars_SwitchCollision[] =     _("Toggle {STR_VAR_1}Collision OFF");
+static const u8 sDebugText_FlagsVars_SwitchEncounter[] =     _("Toggle {STR_VAR_1}Encounter OFF");
+static const u8 sDebugText_FlagsVars_SwitchTrainerSee[] =    _("Toggle {STR_VAR_1}Trainer See OFF");
+static const u8 sDebugText_FlagsVars_SwitchBagUse[] =        _("Toggle {STR_VAR_1}Bag Use OFF");
+static const u8 sDebugText_FlagsVars_SwitchCatching[] =      _("Toggle {STR_VAR_1}Catching OFF");
 // Battle
 static const u8 sDebugText_Battle_0_Wild[] =        _("Wild…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Battle_0_WildDouble[] =  _("Wild Double…{CLEAR_TO 110}{RIGHT_ARROW}");
@@ -528,10 +588,10 @@ static const u8 sDebugText_Battle_1_AIFlag_02[] =   _("{STR_VAR_1}Check viabilit
 static const u8 sDebugText_Battle_1_AIFlag_03[] =   _("{STR_VAR_1}Setup first turn");
 static const u8 sDebugText_Battle_1_AIFlag_04[] =   _("{STR_VAR_1}Risky");
 static const u8 sDebugText_Battle_1_AIFlag_05[] =   _("{STR_VAR_1}Prefer strongest move");
-static const u8 sDebugText_Battle_1_AIFlag_06[] =   _("{STR_VAR_1}Prefer baton pass");
+static const u8 sDebugText_Battle_1_AIFlag_06[] =   _("{STR_VAR_1}Prefer Baton Pass");
 static const u8 sDebugText_Battle_1_AIFlag_07[] =   _("{STR_VAR_1}Double battle");
-static const u8 sDebugText_Battle_1_AIFlag_08[] =   _("{STR_VAR_1}Hp aware");
-static const u8 sDebugText_Battle_1_AIFlag_09[] =   _("{STR_VAR_1}Negate unaware");
+static const u8 sDebugText_Battle_1_AIFlag_08[] =   _("{STR_VAR_1}HP aware");
+static const u8 sDebugText_Battle_1_AIFlag_09[] =   _("{STR_VAR_1}Negate Unaware");
 static const u8 sDebugText_Battle_1_AIFlag_10[] =   _("{STR_VAR_1}Will suicide");
 static const u8 sDebugText_Battle_1_AIFlag_11[] =   _("{STR_VAR_1}Help partner");
 static const u8 sDebugText_Battle_1_AIFlag_12[] =   _("{STR_VAR_1}Prefer status moves");
@@ -553,22 +613,28 @@ static const u8 sDebugText_Battle_2_Terrain_9[] =   _("Plain…{CLEAR_TO 110}{RI
 // Give Menu
 static const u8 sDebugText_Give_GiveItem[] =            _("Give item XYZ…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_ItemQuantity[] =             _("Quantity:{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n\n{STR_VAR_2}");
-static const u8 sDebugText_ItemID[] =                   _("Item Id: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 90}\n\n{STR_VAR_2}");
-static const u8 sDebugText_Give_AllTMs[] =              _("Give all TMs");
-static const u8 sDebugText_Give_GivePokemonSimple[] =   _("Pkm (lvl)…{CLEAR_TO 110}{RIGHT_ARROW}");
-static const u8 sDebugText_Give_GivePokemonComplex[] =  _("Pkm (l,s,n,a,IV,mov)…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_ItemID[] =                   _("Item ID: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 90}\n\n{STR_VAR_2}");
+static const u8 sDebugText_Give_GivePokemonSimple[] =   _("Pokémon (Basic){CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Give_GivePokemonComplex[] =  _("Pokémon (Complex){CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_PokemonID[] =                _("Species: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 90}\n\n{STR_VAR_2}{CLEAR_TO 90}");
 static const u8 sDebugText_PokemonLevel[] =             _("Level:{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
 static const u8 sDebugText_PokemonShiny[] =             _("Shiny:{CLEAR_TO 90}\n   {STR_VAR_2}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{CLEAR_TO 90}");
-static const u8 sDebugText_PokemonNature[] =            _("NatureId: {STR_VAR_3}{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
-static const u8 sDebugText_PokemonAbility[] =           _("AbilityNum: {STR_VAR_3}{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
+static const u8 sDebugText_PokemonNature[] =            _("Nature ID: {STR_VAR_3}{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
+static const u8 sDebugText_PokemonAbility[] =           _("Ability Num: {STR_VAR_3}{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
 static const u8 sDebugText_PokemonIVs[] =               _("All IVs:{CLEAR_TO 90}\n    {STR_VAR_3}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
+static const u8 sDebugText_PokemonEVs[] =               _("All EVs:{CLEAR_TO 90}\n    {STR_VAR_3}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
 static const u8 sDebugText_IV_HP[] =                    _("IV HP:{CLEAR_TO 90}\n    {STR_VAR_3}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
 static const u8 sDebugText_IV_Attack[] =                _("IV Attack:{CLEAR_TO 90}\n    {STR_VAR_3}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
 static const u8 sDebugText_IV_Defense[] =               _("IV Defense:{CLEAR_TO 90}\n    {STR_VAR_3}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
 static const u8 sDebugText_IV_Speed[] =                 _("IV Speed:{CLEAR_TO 90}\n    {STR_VAR_3}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
 static const u8 sDebugText_IV_SpAttack[] =              _("IV Sp. Attack:{CLEAR_TO 90}\n    {STR_VAR_3}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
 static const u8 sDebugText_IV_SpDefense[] =             _("IV Sp. Defense:{CLEAR_TO 90}\n    {STR_VAR_3}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
+static const u8 sDebugText_EV_HP[] =                    _("EV HP:{CLEAR_TO 90}\n    {STR_VAR_3}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
+static const u8 sDebugText_EV_Attack[] =                _("EV Attack:{CLEAR_TO 90}\n    {STR_VAR_3}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
+static const u8 sDebugText_EV_Defense[] =               _("EV Defense:{CLEAR_TO 90}\n    {STR_VAR_3}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
+static const u8 sDebugText_EV_Speed[] =                 _("EV Speed:{CLEAR_TO 90}\n    {STR_VAR_3}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
+static const u8 sDebugText_EV_SpAttack[] =              _("EV Sp. Attack:{CLEAR_TO 90}\n    {STR_VAR_3}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
+static const u8 sDebugText_EV_SpDefense[] =             _("EV Sp. Defense:{CLEAR_TO 90}\n    {STR_VAR_3}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
 static const u8 sDebugText_PokemonMove_0[] =            _("Move 0: {STR_VAR_3}{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
 static const u8 sDebugText_PokemonMove_1[] =            _("Move 1: {STR_VAR_3}{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
 static const u8 sDebugText_PokemonMove_2[] =            _("Move 2: {STR_VAR_3}{CLEAR_TO 90}\n{STR_VAR_1}{CLEAR_TO 90}\n{CLEAR_TO 90}\n{STR_VAR_2}{CLEAR_TO 90}");
@@ -577,20 +643,17 @@ static const u8 sDebugText_Give_MaxMoney[] =            _("Max Money");
 static const u8 sDebugText_Give_MaxCoins[] =            _("Max Coins");
 static const u8 sDebugText_Give_BattlePoints[] =        _("Max Battle Points");
 static const u8 sDebugText_Give_DaycareEgg[] =          _("Daycare Egg");
-// Fill Menu
-static const u8 sDebugText_Fill_Pc_Fast[] =             _("Fill PCBoxes Fast");
-static const u8 sDebugText_Fill_Pc_Slow[] =             _("Fill PCBoxes Slow (LAG!)");
-static const u8 sDebugText_Fill_Pc_Items[] =            _("Fill PCItems");
-static const u8 sDebugText_Fill_PocketItems[] =         _("Fill Pocket Items");
-static const u8 sDebugText_Fill_PocketPokeBalls[] =     _("Fill Pocket PokeBalls");
-static const u8 sDebugText_Fill_PocketTMHM[] =          _("Fill Pocket TMHM");
-static const u8 sDebugText_Fill_PocketBerries[] =       _("Fill Pocket Berries");
-static const u8 sDebugText_Fill_PocketKeyItems[] =      _("Fill Pocket KeyItems");
 // Sound Menu
 static const u8 sDebugText_Sound_SFX[] =                _("SFX…{CLEAR_TO 110}{RIGHT_ARROW}");
-static const u8 sDebugText_Sound_SFX_ID[] =   	        _("SFX Id: {STR_VAR_3}   {START_BUTTON} Stop\n{STR_VAR_1}    \n{STR_VAR_2}");
+static const u8 sDebugText_Sound_SFX_ID[] =   	        _("SFX ID: {STR_VAR_3}   {START_BUTTON} Stop\n{STR_VAR_1}    \n{STR_VAR_2}");
 static const u8 sDebugText_Sound_Music[] =              _("Music…{CLEAR_TO 110}{RIGHT_ARROW}");
-static const u8 sDebugText_Sound_Music_ID[] =           _("Music Id: {STR_VAR_3}   {START_BUTTON} Stop\n{STR_VAR_1}    \n{STR_VAR_2}");
+static const u8 sDebugText_Sound_Music_ID[] =           _("Music ID: {STR_VAR_3}   {START_BUTTON} Stop\n{STR_VAR_1}    \n{STR_VAR_2}");
+// Berry Function Menu
+static const u8 sDebugText_BerryFunctions_ClearAll[] =  _("Clear map trees");
+static const u8 sDebugText_BerryFunctions_Ready[] =     _("Ready map trees");
+static const u8 sDebugText_BerryFunctions_NextStage[] = _("Grow map trees");
+static const u8 sDebugText_BerryFunctions_Pests[] =     _("Give map trees pests");
+static const u8 sDebugText_BerryFunctions_Weeds[] =     _("Give map trees weeds");
 
 static const u8 sDebugText_Digit_1[] =        _("{LEFT_ARROW}+1{RIGHT_ARROW}        ");
 static const u8 sDebugText_Digit_10[] =       _("{LEFT_ARROW}+10{RIGHT_ARROW}       ");
@@ -631,11 +694,11 @@ static const s32 sPowersOfTen[] =
 static const struct ListMenuItem sDebugMenu_Items_Main[] =
 {
     [DEBUG_MENU_ITEM_UTILITIES]     = {sDebugText_Utilities,    DEBUG_MENU_ITEM_UTILITIES},
-    [DEBUG_MENU_ITEM_PARTY_BOXES]   = {sDebugText_PartyBoxes,   DEBUG_MENU_ITEM_PARTY_BOXES},
+    [DEBUG_MENU_ITEM_PCBAG]         = {sDebugText_PCBag,        DEBUG_MENU_ITEM_PCBAG},
+    [DEBUG_MENU_ITEM_PARTY]         = {sDebugText_Party,        DEBUG_MENU_ITEM_PARTY},
     [DEBUG_MENU_ITEM_GIVE]          = {sDebugText_Give,         DEBUG_MENU_ITEM_GIVE},
     [DEBUG_MENU_ITEM_SCRIPTS]       = {sDebugText_Scripts,      DEBUG_MENU_ITEM_SCRIPTS},
     [DEBUG_MENU_ITEM_FLAGVAR]       = {sDebugText_FlagsVars,    DEBUG_MENU_ITEM_FLAGVAR},
-    [DEBUG_MENU_ITEM_FILL]          = {sDebugText_Fill,         DEBUG_MENU_ITEM_FILL},
     //[DEBUG_MENU_ITEM_BATTLE]        = {sDebugText_Battle,       DEBUG_MENU_ITEM_BATTLE},
     [DEBUG_MENU_ITEM_SOUND]         = {sDebugText_Sound,        DEBUG_MENU_ITEM_SOUND},
     [DEBUG_MENU_ITEM_CANCEL]        = {sDebugText_Cancel,       DEBUG_MENU_ITEM_CANCEL},
@@ -643,29 +706,51 @@ static const struct ListMenuItem sDebugMenu_Items_Main[] =
 
 static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
 {
-    [DEBUG_UTIL_MENU_ITEM_FLY]            = {sDebugText_Util_FlyToMap,       DEBUG_UTIL_MENU_ITEM_FLY},
-    [DEBUG_UTIL_MENU_ITEM_WARP]           = {sDebugText_Util_WarpToMap,      DEBUG_UTIL_MENU_ITEM_WARP},
-    [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]      = {sDebugText_Util_SaveBlockSpace, DEBUG_UTIL_MENU_ITEM_SAVEBLOCK},
-    [DEBUG_UTIL_MENU_ITEM_ROM_SPACE]      = {sDebugText_Util_ROMSpace,       DEBUG_UTIL_MENU_ITEM_ROM_SPACE},
-    [DEBUG_UTIL_MENU_ITEM_WEATHER]        = {sDebugText_Util_Weather,        DEBUG_UTIL_MENU_ITEM_WEATHER},
-    [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK] = {sDebugText_Util_CheckWallClock, DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK},
-    [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]   = {sDebugText_Util_SetWallClock,   DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK},
-    [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]   = {sDebugText_Util_WatchCredits,   DEBUG_UTIL_MENU_ITEM_WATCHCREDITS},
-    [DEBUG_UTIL_MENU_ITEM_PLAYER_NAME]    = {sDebugText_Util_Player_Name,    DEBUG_UTIL_MENU_ITEM_PLAYER_NAME},
-    [DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER]  = {sDebugText_Util_Player_Gender,  DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER},
-    [DEBUG_UTIL_MENU_ITEM_PLAYER_ID]      = {sDebugText_Util_Player_Id,      DEBUG_UTIL_MENU_ITEM_PLAYER_ID},
-    [DEBUG_UTIL_MENU_ITEM_CHEAT]          = {sDebugText_Util_CheatStart,     DEBUG_UTIL_MENU_ITEM_CHEAT},
-    [DEBUG_UTIL_MENU_ITEM_EXPANSION_VER]  = {sDebugText_Util_ExpansionVersion,DEBUG_UTIL_MENU_ITEM_EXPANSION_VER},
+    [DEBUG_UTIL_MENU_ITEM_FLY]             = {sDebugText_Util_FlyToMap,         DEBUG_UTIL_MENU_ITEM_FLY},
+    [DEBUG_UTIL_MENU_ITEM_WARP]            = {sDebugText_Util_WarpToMap,        DEBUG_UTIL_MENU_ITEM_WARP},
+    [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]       = {sDebugText_Util_SaveBlockSpace,   DEBUG_UTIL_MENU_ITEM_SAVEBLOCK},
+    [DEBUG_UTIL_MENU_ITEM_ROM_SPACE]       = {sDebugText_Util_ROMSpace,         DEBUG_UTIL_MENU_ITEM_ROM_SPACE},
+    [DEBUG_UTIL_MENU_ITEM_WEATHER]         = {sDebugText_Util_Weather,          DEBUG_UTIL_MENU_ITEM_WEATHER},
+    [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK]  = {sDebugText_Util_CheckWallClock,   DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK},
+    [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]    = {sDebugText_Util_SetWallClock,     DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK},
+    [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]    = {sDebugText_Util_WatchCredits,     DEBUG_UTIL_MENU_ITEM_WATCHCREDITS},
+    [DEBUG_UTIL_MENU_ITEM_PLAYER_NAME]     = {sDebugText_Util_Player_Name,      DEBUG_UTIL_MENU_ITEM_PLAYER_NAME},
+    [DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER]   = {sDebugText_Util_Player_Gender,    DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER},
+    [DEBUG_UTIL_MENU_ITEM_PLAYER_ID]       = {sDebugText_Util_Player_Id,        DEBUG_UTIL_MENU_ITEM_PLAYER_ID},
+    [DEBUG_UTIL_MENU_ITEM_CHEAT]           = {sDebugText_Util_CheatStart,       DEBUG_UTIL_MENU_ITEM_CHEAT},
+    [DEBUG_UTIL_MENU_ITEM_EXPANSION_VER]   = {sDebugText_Util_ExpansionVersion, DEBUG_UTIL_MENU_ITEM_EXPANSION_VER},
+    [DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS] = {sDebugText_Util_BerryFunctions,   DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS},
 };
 
-static const struct ListMenuItem sDebugMenu_Items_PartyBoxes[] =
+static const struct ListMenuItem sDebugMenu_Items_PCBag[] =
 {
-    [DEBUG_PARTY_BOXES_MENU_ITEM_ACCESS_PC]      = {sDebugText_PartyBoxes_AccessPC,       DEBUG_PARTY_BOXES_MENU_ITEM_ACCESS_PC},
-    [DEBUG_PARTY_BOXES_MENU_ITEM_MOVE_REMINDER]  = {sDebugText_PartyBoxes_MoveReminder,   DEBUG_PARTY_BOXES_MENU_ITEM_MOVE_REMINDER},
-    [DEBUG_PARTY_BOXES_MENU_ITEM_HATCH_AN_EGG]   = {sDebugText_PartyBoxes_HatchAnEgg,     DEBUG_PARTY_BOXES_MENU_ITEM_HATCH_AN_EGG},
-    [DEBUG_PARTY_BOXES_MENU_ITEM_HEAL_PARTY]     = {sDebugText_PartyBoxes_HealParty,      DEBUG_PARTY_BOXES_MENU_ITEM_HEAL_PARTY},
-    [DEBUG_PARTY_BOXES_MENU_ITEM_POISON_MONS]    = {sDebugText_PartyBoxes_PoisonParty,    DEBUG_PARTY_BOXES_MENU_ITEM_POISON_MONS},
-    [DEBUG_PARTY_BOXES_MENU_ITEM_CLEAR_BOXES]    = {sDebugText_PartyBoxes_ClearBoxes,     DEBUG_PARTY_BOXES_MENU_ITEM_CLEAR_BOXES},
+    [DEBUG_PCBAG_MENU_ITEM_ACCESS_PC]             = {sDebugText_PCBag_AccessPC,             DEBUG_PCBAG_MENU_ITEM_ACCESS_PC},
+    [DEBUG_PCBAG_MENU_ITEM_FILL]                  = {sDebugText_PCBag_Fill,                 DEBUG_PCBAG_MENU_ITEM_FILL},
+    [DEBUG_PCBAG_MENU_ITEM_CLEAR_BAG]             = {sDebugText_PCBag_ClearBag,             DEBUG_PCBAG_MENU_ITEM_CLEAR_BAG},
+    [DEBUG_PCBAG_MENU_ITEM_CLEAR_BOXES]           = {sDebugText_PCBag_ClearBoxes,           DEBUG_PCBAG_MENU_ITEM_CLEAR_BOXES},
+};
+
+static const struct ListMenuItem sDebugMenu_Items_PCBag_Fill[] =
+{
+    [DEBUG_PCBAG_MENU_ITEM_FILL_PC_BOXES_FAST]    = {sDebugText_PCBag_Fill_Pc_Fast,         DEBUG_PCBAG_MENU_ITEM_FILL_PC_BOXES_FAST},
+    [DEBUG_PCBAG_MENU_ITEM_FILL_PC_BOXES_SLOW]    = {sDebugText_PCBag_Fill_Pc_Slow,         DEBUG_PCBAG_MENU_ITEM_FILL_PC_BOXES_SLOW},
+    [DEBUG_PCBAG_MENU_ITEM_FILL_PC_ITEMS]         = {sDebugText_PCBag_Fill_Pc_Items ,       DEBUG_PCBAG_MENU_ITEM_FILL_PC_ITEMS},
+    [DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_ITEMS]     = {sDebugText_PCBag_Fill_PocketItems,     DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_ITEMS},
+    [DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_BALLS]     = {sDebugText_PCBag_Fill_PocketPokeBalls, DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_BALLS},
+    [DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_TMHM]      = {sDebugText_PCBag_Fill_PocketTMHM,      DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_TMHM},
+    [DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_BERRIES]   = {sDebugText_PCBag_Fill_PocketBerries,   DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_BERRIES},
+    [DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_KEY_ITEMS] = {sDebugText_PCBag_Fill_PocketKeyItems,  DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_KEY_ITEMS},
+};
+
+static const struct ListMenuItem sDebugMenu_Items_Party[] =
+{
+    [DEBUG_PARTY_MENU_ITEM_MOVE_REMINDER]   = {sDebugText_Party_MoveReminder,   DEBUG_PARTY_MENU_ITEM_MOVE_REMINDER},
+    [DEBUG_PARTY_MENU_ITEM_HATCH_AN_EGG]    = {sDebugText_Party_HatchAnEgg,     DEBUG_PARTY_MENU_ITEM_HATCH_AN_EGG},
+    [DEBUG_PARTY_MENU_ITEM_HEAL_PARTY]      = {sDebugText_Party_HealParty,      DEBUG_PARTY_MENU_ITEM_HEAL_PARTY},
+    [DEBUG_PARTY_MENU_ITEM_INFLICT_STATUS1] = {sDebugText_Party_InflictStatus1, DEBUG_PARTY_MENU_ITEM_INFLICT_STATUS1},
+    [DEBUG_PARTY_MENU_ITEM_CHECK_EVS]       = {sDebugText_Party_CheckEVs,       DEBUG_PARTY_MENU_ITEM_CHECK_EVS},
+    [DEBUG_PARTY_MENU_ITEM_CHECK_IVS]       = {sDebugText_Party_CheckIVs,       DEBUG_PARTY_MENU_ITEM_CHECK_IVS},
+    [DEBUG_PARTY_MENU_ITEM_CLEAR_PARTY]     = {sDebugText_Party_ClearParty,     DEBUG_PARTY_MENU_ITEM_CLEAR_PARTY},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_Scripts[] =
@@ -750,7 +835,6 @@ static const struct ListMenuItem sDebugMenu_Items_Battle_2[] =
 static const struct ListMenuItem sDebugMenu_Items_Give[] =
 {
     [DEBUG_GIVE_MENU_ITEM_ITEM_X]            = {sDebugText_Give_GiveItem,           DEBUG_GIVE_MENU_ITEM_ITEM_X},
-    [DEBUG_GIVE_MENU_ITEM_ALLTMS]            = {sDebugText_Give_AllTMs,             DEBUG_GIVE_MENU_ITEM_ALLTMS},
     [DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE]    = {sDebugText_Give_GivePokemonSimple,  DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE},
     [DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX]   = {sDebugText_Give_GivePokemonComplex, DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX},
     [DEBUG_GIVE_MENU_ITEM_MAX_MONEY]         = {sDebugText_Give_MaxMoney,           DEBUG_GIVE_MENU_ITEM_MAX_MONEY},
@@ -759,22 +843,19 @@ static const struct ListMenuItem sDebugMenu_Items_Give[] =
     [DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG]       = {sDebugText_Give_DaycareEgg,         DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG},
 };
 
-static const struct ListMenuItem sDebugMenu_Items_Fill[] =
-{
-    [DEBUG_FILL_MENU_ITEM_PC_BOXES_FAST]    = {sDebugText_Fill_Pc_Fast,         DEBUG_FILL_MENU_ITEM_PC_BOXES_FAST},
-    [DEBUG_FILL_MENU_ITEM_PC_BOXES_SLOW]    = {sDebugText_Fill_Pc_Slow,         DEBUG_FILL_MENU_ITEM_PC_BOXES_SLOW},
-    [DEBUG_FILL_MENU_ITEM_PC_ITEMS]         = {sDebugText_Fill_Pc_Items ,       DEBUG_FILL_MENU_ITEM_PC_ITEMS},
-    [DEBUG_FILL_MENU_ITEM_POCKET_ITEMS]     = {sDebugText_Fill_PocketItems,     DEBUG_FILL_MENU_ITEM_POCKET_ITEMS},
-    [DEBUG_FILL_MENU_ITEM_POCKET_BALLS]     = {sDebugText_Fill_PocketPokeBalls, DEBUG_FILL_MENU_ITEM_POCKET_BALLS},
-    [DEBUG_FILL_MENU_ITEM_POCKET_TMHM]      = {sDebugText_Fill_PocketTMHM,      DEBUG_FILL_MENU_ITEM_POCKET_TMHM},
-    [DEBUG_FILL_MENU_ITEM_POCKET_BERRIES]   = {sDebugText_Fill_PocketBerries,   DEBUG_FILL_MENU_ITEM_POCKET_BERRIES},
-    [DEBUG_FILL_MENU_ITEM_POCKET_KEY_ITEMS] = {sDebugText_Fill_PocketKeyItems,  DEBUG_FILL_MENU_ITEM_POCKET_KEY_ITEMS},
-};
-
 static const struct ListMenuItem sDebugMenu_Items_Sound[] =
 {
     [DEBUG_SOUND_MENU_ITEM_SE]  = {sDebugText_Sound_SFX,  DEBUG_SOUND_MENU_ITEM_SE},
     [DEBUG_SOUND_MENU_ITEM_MUS] = {sDebugText_Sound_Music, DEBUG_SOUND_MENU_ITEM_MUS},
+};
+
+static const struct ListMenuItem sDebugMenu_Items_BerryFunctions[] =
+{
+    [DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL]  = {sDebugText_BerryFunctions_ClearAll, DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL},
+    [DEBUG_BERRY_FUNCTIONS_MENU_READY]      = {sDebugText_BerryFunctions_Ready, DEBUG_BERRY_FUNCTIONS_MENU_READY},
+    [DEBUG_BERRY_FUNCTIONS_MENU_NEXT_STAGE] = {sDebugText_BerryFunctions_NextStage, DEBUG_BERRY_FUNCTIONS_MENU_NEXT_STAGE},
+    [DEBUG_BERRY_FUNCTIONS_MENU_PESTS]      = {sDebugText_BerryFunctions_Pests, DEBUG_BERRY_FUNCTIONS_MENU_PESTS},
+    [DEBUG_BERRY_FUNCTIONS_MENU_WEEDS]      = {sDebugText_BerryFunctions_Weeds, DEBUG_BERRY_FUNCTIONS_MENU_WEEDS},
 };
 
 // *******************************
@@ -782,11 +863,11 @@ static const struct ListMenuItem sDebugMenu_Items_Sound[] =
 static void (*const sDebugMenu_Actions_Main[])(u8) =
 {
     [DEBUG_MENU_ITEM_UTILITIES]     = DebugAction_OpenUtilitiesMenu,
-    [DEBUG_MENU_ITEM_PARTY_BOXES]   = DebugAction_OpenPartyBoxesMenu,
+    [DEBUG_MENU_ITEM_PCBAG]         = DebugAction_OpenPCBagMenu,
+    [DEBUG_MENU_ITEM_PARTY]         = DebugAction_OpenPartyMenu,
     [DEBUG_MENU_ITEM_GIVE]          = DebugAction_OpenGiveMenu,
     [DEBUG_MENU_ITEM_SCRIPTS]       = DebugAction_OpenScriptsMenu,
     [DEBUG_MENU_ITEM_FLAGVAR]       = DebugAction_OpenFlagsVarsMenu,
-    [DEBUG_MENU_ITEM_FILL]          = DebugAction_OpenFillMenu,
     //[DEBUG_MENU_ITEM_BATTLE]        = DebugAction_OpenBattleMenu,
     [DEBUG_MENU_ITEM_SOUND]         = DebugAction_OpenSoundMenu,
     [DEBUG_MENU_ITEM_CANCEL]        = DebugAction_Cancel
@@ -794,29 +875,51 @@ static void (*const sDebugMenu_Actions_Main[])(u8) =
 
 static void (*const sDebugMenu_Actions_Utilities[])(u8) =
 {
-    [DEBUG_UTIL_MENU_ITEM_FLY]            = DebugAction_Util_Fly,
-    [DEBUG_UTIL_MENU_ITEM_WARP]           = DebugAction_Util_Warp_Warp,
-    [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]      = DebugAction_Util_CheckSaveBlock,
-    [DEBUG_UTIL_MENU_ITEM_ROM_SPACE]      = DebugAction_Util_CheckROMSpace,
-    [DEBUG_UTIL_MENU_ITEM_WEATHER]        = DebugAction_Util_Weather,
-    [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK] = DebugAction_Util_CheckWallClock,
-    [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]   = DebugAction_Util_SetWallClock,
-    [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]   = DebugAction_Util_WatchCredits,
-    [DEBUG_UTIL_MENU_ITEM_PLAYER_NAME]    = DebugAction_Util_Player_Name,
-    [DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER]  = DebugAction_Util_Player_Gender,
-    [DEBUG_UTIL_MENU_ITEM_PLAYER_ID]      = DebugAction_Util_Player_Id,
-    [DEBUG_UTIL_MENU_ITEM_CHEAT]          = DebugAction_Util_CheatStart,
-    [DEBUG_UTIL_MENU_ITEM_EXPANSION_VER]  = DebugAction_Util_ExpansionVersion,
+    [DEBUG_UTIL_MENU_ITEM_FLY]             = DebugAction_Util_Fly,
+    [DEBUG_UTIL_MENU_ITEM_WARP]            = DebugAction_Util_Warp_Warp,
+    [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]       = DebugAction_Util_CheckSaveBlock,
+    [DEBUG_UTIL_MENU_ITEM_ROM_SPACE]       = DebugAction_Util_CheckROMSpace,
+    [DEBUG_UTIL_MENU_ITEM_WEATHER]         = DebugAction_Util_Weather,
+    [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK]  = DebugAction_Util_CheckWallClock,
+    [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]    = DebugAction_Util_SetWallClock,
+    [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]    = DebugAction_Util_WatchCredits,
+    [DEBUG_UTIL_MENU_ITEM_PLAYER_NAME]     = DebugAction_Util_Player_Name,
+    [DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER]   = DebugAction_Util_Player_Gender,
+    [DEBUG_UTIL_MENU_ITEM_PLAYER_ID]       = DebugAction_Util_Player_Id,
+    [DEBUG_UTIL_MENU_ITEM_CHEAT]           = DebugAction_Util_CheatStart,
+    [DEBUG_UTIL_MENU_ITEM_EXPANSION_VER]   = DebugAction_Util_ExpansionVersion,
+    [DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS] = DebugAction_Util_BerryFunctions,
 };
 
-static void (*const sDebugMenu_Actions_PartyBoxes[])(u8) =
+static void (*const sDebugMenu_Actions_PCBag[])(u8) =
 {
-    [DEBUG_PARTY_BOXES_MENU_ITEM_ACCESS_PC]     = DebugAction_PartyBoxes_AccessPC,
-    [DEBUG_PARTY_BOXES_MENU_ITEM_MOVE_REMINDER] = DebugAction_PartyBoxes_MoveReminder,
-    [DEBUG_PARTY_BOXES_MENU_ITEM_HATCH_AN_EGG]  = DebugAction_PartyBoxes_HatchAnEgg,
-    [DEBUG_PARTY_BOXES_MENU_ITEM_HEAL_PARTY]    = DebugAction_PartyBoxes_HealParty,
-    [DEBUG_PARTY_BOXES_MENU_ITEM_POISON_MONS]   = DebugAction_PartyBoxes_PoisonMons,
-    [DEBUG_PARTY_BOXES_MENU_ITEM_CLEAR_BOXES]   = DebugAction_PartyBoxes_ClearBoxes,
+    [DEBUG_PCBAG_MENU_ITEM_ACCESS_PC]             = DebugAction_PCBag_AccessPC,
+    [DEBUG_PCBAG_MENU_ITEM_FILL]                  = DebugAction_OpenPCBagFillMenu,
+    [DEBUG_PCBAG_MENU_ITEM_CLEAR_BAG]             = DebugAction_PCBag_ClearBag,
+    [DEBUG_PCBAG_MENU_ITEM_CLEAR_BOXES]           = DebugAction_PCBag_ClearBoxes,
+};
+
+static void (*const sDebugMenu_Actions_PCBag_Fill[])(u8) =
+{
+    [DEBUG_PCBAG_MENU_ITEM_FILL_PC_BOXES_FAST]    = DebugAction_PCBag_Fill_PCBoxes_Fast,
+    [DEBUG_PCBAG_MENU_ITEM_FILL_PC_BOXES_SLOW]    = DebugAction_PCBag_Fill_PCBoxes_Slow,
+    [DEBUG_PCBAG_MENU_ITEM_FILL_PC_ITEMS]         = DebugAction_PCBag_Fill_PCItemStorage,
+    [DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_ITEMS]     = DebugAction_PCBag_Fill_PocketItems,
+    [DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_BALLS]     = DebugAction_PCBag_Fill_PocketPokeBalls,
+    [DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_TMHM]      = DebugAction_PCBag_Fill_PocketTMHM,
+    [DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_BERRIES]   = DebugAction_PCBag_Fill_PocketBerries,
+    [DEBUG_PCBAG_MENU_ITEM_FILL_POCKET_KEY_ITEMS] = DebugAction_PCBag_Fill_PocketKeyItems,
+};
+
+static void (*const sDebugMenu_Actions_Party[])(u8) =
+{
+    [DEBUG_PARTY_MENU_ITEM_MOVE_REMINDER]   = DebugAction_Party_MoveReminder,
+    [DEBUG_PARTY_MENU_ITEM_HATCH_AN_EGG]    = DebugAction_Party_HatchAnEgg,
+    [DEBUG_PARTY_MENU_ITEM_HEAL_PARTY]      = DebugAction_Party_HealParty,
+    [DEBUG_PARTY_MENU_ITEM_INFLICT_STATUS1] = DebugAction_Party_InflictStatus1,
+    [DEBUG_PARTY_MENU_ITEM_CHECK_EVS]       = DebugAction_Party_CheckEVs,
+    [DEBUG_PARTY_MENU_ITEM_CHECK_IVS]       = DebugAction_Party_CheckIVs,
+    [DEBUG_PARTY_MENU_ITEM_CLEAR_PARTY]     = DebugAction_Party_ClearParty,
 };
 
 static void (*const sDebugMenu_Actions_Scripts[])(u8) =
@@ -854,7 +957,6 @@ static void (*const sDebugMenu_Actions_Flags[])(u8) =
 static void (*const sDebugMenu_Actions_Give[])(u8) =
 {
     [DEBUG_GIVE_MENU_ITEM_ITEM_X]            = DebugAction_Give_Item,
-    [DEBUG_GIVE_MENU_ITEM_ALLTMS]            = DebugAction_Give_AllTMs,
     [DEBUG_GIVE_MENU_ITEM_POKEMON_SIMPLE]    = DebugAction_Give_PokemonSimple,
     [DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX]   = DebugAction_Give_PokemonComplex,
     [DEBUG_GIVE_MENU_ITEM_MAX_MONEY]         = DebugAction_Give_MaxMoney,
@@ -863,22 +965,19 @@ static void (*const sDebugMenu_Actions_Give[])(u8) =
     [DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG]       = DebugAction_Give_DayCareEgg,
 };
 
-static void (*const sDebugMenu_Actions_Fill[])(u8) =
-{
-    [DEBUG_FILL_MENU_ITEM_PC_BOXES_FAST]    = DebugAction_Fill_PCBoxes_Fast,
-    [DEBUG_FILL_MENU_ITEM_PC_BOXES_SLOW]    = DebugAction_Fill_PCBoxes_Slow,
-    [DEBUG_FILL_MENU_ITEM_PC_ITEMS]         = DebugAction_Fill_PCItemStorage,
-    [DEBUG_FILL_MENU_ITEM_POCKET_ITEMS]     = DebugAction_Fill_PocketItems,
-    [DEBUG_FILL_MENU_ITEM_POCKET_BALLS]     = DebugAction_Fill_PocketPokeBalls,
-    [DEBUG_FILL_MENU_ITEM_POCKET_TMHM]      = DebugAction_Fill_PocketTMHM,
-    [DEBUG_FILL_MENU_ITEM_POCKET_BERRIES]   = DebugAction_Fill_PocketBerries,
-    [DEBUG_FILL_MENU_ITEM_POCKET_KEY_ITEMS] = DebugAction_Fill_PocketKeyItems,
-};
-
 static void (*const sDebugMenu_Actions_Sound[])(u8) =
 {
     [DEBUG_SOUND_MENU_ITEM_SE]  = DebugAction_Sound_SE,
     [DEBUG_SOUND_MENU_ITEM_MUS] = DebugAction_Sound_MUS,
+};
+
+static void (*const sDebugMenu_Actions_BerryFunctions[])(u8) =
+{
+    [DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL]  = DebugAction_BerryFunctions_ClearAll,
+    [DEBUG_BERRY_FUNCTIONS_MENU_READY]      = DebugAction_BerryFunctions_Ready,
+    [DEBUG_BERRY_FUNCTIONS_MENU_NEXT_STAGE] = DebugAction_BerryFunctions_NextStage,
+    [DEBUG_BERRY_FUNCTIONS_MENU_PESTS]      = DebugAction_BerryFunctions_Pests,
+    [DEBUG_BERRY_FUNCTIONS_MENU_WEEDS]      = DebugAction_BerryFunctions_Weeds,
 };
 
 // *******************************
@@ -954,11 +1053,25 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Utilities =
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_Utilities),
 };
 
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_PartyBoxes =
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_PCBag =
 {
-    .items = sDebugMenu_Items_PartyBoxes,
+    .items = sDebugMenu_Items_PCBag,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_PartyBoxes),
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_PCBag),
+};
+
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_PCBag_Fill =
+{
+    .items = sDebugMenu_Items_PCBag_Fill,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_PCBag_Fill),
+};
+
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_Party =
+{
+    .items = sDebugMenu_Items_Party,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Party),
 };
 
 static const struct ListMenuTemplate sDebugMenu_ListTemplate_Scripts =
@@ -1003,13 +1116,6 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Give =
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_Give),
 };
 
-static const struct ListMenuTemplate sDebugMenu_ListTemplate_Fill =
-{
-    .items = sDebugMenu_Items_Fill,
-    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Fill),
-};
-
 static const struct ListMenuTemplate sDebugMenu_ListTemplate_Sound =
 {
     .items = sDebugMenu_Items_Sound,
@@ -1017,6 +1123,12 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Sound =
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_Sound),
 };
 
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_BerryFunctions =
+{
+    .items = sDebugMenu_Items_BerryFunctions,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_BerryFunctions),
+};
 
 // *******************************
 // Functions universal
@@ -1389,7 +1501,7 @@ static void DebugTask_HandleMenuInput_Utilities(u8 taskId)
     }
 }
 
-static void DebugTask_HandleMenuInput_PartyBoxes(u8 taskId)
+static void DebugTask_HandleMenuInput_PCBag(u8 taskId)
 {
     void (*func)(u8);
     u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
@@ -1397,7 +1509,45 @@ static void DebugTask_HandleMenuInput_PartyBoxes(u8 taskId)
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        if ((func = sDebugMenu_Actions_PartyBoxes[input]) != NULL)
+        if ((func = sDebugMenu_Actions_PCBag[input]) != NULL)
+            func(taskId);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        Debug_ReShowMainMenu();
+    }
+}
+
+static void DebugTask_HandleMenuInput_PCBag_Fill(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Actions_PCBag_Fill[input]) != NULL)
+            func(taskId);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_PCBag, sDebugMenu_ListTemplate_PCBag);
+    }
+}
+
+static void DebugTask_HandleMenuInput_Party(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Actions_Party[input]) != NULL)
             func(taskId);
     }
     else if (JOY_NEW(B_BUTTON))
@@ -1637,25 +1787,6 @@ static void DebugTask_HandleMenuInput_Give(u8 taskId)
     }
 }
 
-static void DebugTask_HandleMenuInput_Fill(u8 taskId)
-{
-    void (*func)(u8);
-    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
-
-    if (JOY_NEW(A_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        if ((func = sDebugMenu_Actions_Fill[input]) != NULL)
-            func(taskId);
-    }
-    else if (JOY_NEW(B_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        Debug_DestroyMenu(taskId);
-        Debug_ReShowMainMenu();
-    }
-}
-
 static void DebugTask_HandleMenuInput_Sound(u8 taskId)
 {
     void (*func)(u8);
@@ -1675,6 +1806,25 @@ static void DebugTask_HandleMenuInput_Sound(u8 taskId)
     }
 }
 
+static void DebugTask_HandleMenuInput_BerryFunctions(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Actions_BerryFunctions[input]) != NULL)
+            func(taskId);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        Debug_ReShowMainMenu();
+    }
+}
+
 // *******************************
 // Open sub-menus
 static void DebugAction_OpenUtilitiesMenu(u8 taskId)
@@ -1683,10 +1833,16 @@ static void DebugAction_OpenUtilitiesMenu(u8 taskId)
     Debug_ShowMenu(DebugTask_HandleMenuInput_Utilities, sDebugMenu_ListTemplate_Utilities);
 }
 
-static void DebugAction_OpenPartyBoxesMenu(u8 taskId)
+static void DebugAction_OpenPCBagMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_PartyBoxes, sDebugMenu_ListTemplate_PartyBoxes);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_PCBag, sDebugMenu_ListTemplate_PCBag);
+}
+
+static void DebugAction_OpenPartyMenu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_Party, sDebugMenu_ListTemplate_Party);
 }
 
 static void DebugAction_OpenScriptsMenu(u8 taskId)
@@ -1702,23 +1858,22 @@ static void DebugAction_OpenFlagsVarsMenu(u8 taskId)
     Debug_ShowMenu(DebugTask_HandleMenuInput_FlagsVars, gMultiuseListMenuTemplate);
 }
 
-
 static void DebugAction_OpenGiveMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
 }
 
-static void DebugAction_OpenFillMenu(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_Fill, sDebugMenu_ListTemplate_Fill);
-}
-
 static void DebugAction_OpenSoundMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_Sound, sDebugMenu_ListTemplate_Sound);
+}
+
+static void DebugAction_Util_BerryFunctions(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_BerryFunctions, sDebugMenu_ListTemplate_BerryFunctions);
 }
 
 // *******************************
@@ -1934,6 +2089,7 @@ void CheckSaveBlock1Size(struct ScriptContext *ctx)
     ConvertIntToDecimalStringN(gStringVar1, currSb1Size, STR_CONV_MODE_LEFT_ALIGN, 6);
     ConvertIntToDecimalStringN(gStringVar2, maxSb1Size, STR_CONV_MODE_LEFT_ALIGN, 6);
     ConvertIntToDecimalStringN(gStringVar3, maxSb1Size - currSb1Size, STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar4, 1, STR_CONV_MODE_LEFT_ALIGN, 6);
 }
 
 void CheckSaveBlock2Size(struct ScriptContext *ctx)
@@ -1943,6 +2099,15 @@ void CheckSaveBlock2Size(struct ScriptContext *ctx)
     ConvertIntToDecimalStringN(gStringVar1, currSb2Size, STR_CONV_MODE_LEFT_ALIGN, 6);
     ConvertIntToDecimalStringN(gStringVar2, maxSb2Size, STR_CONV_MODE_LEFT_ALIGN, 6);
     ConvertIntToDecimalStringN(gStringVar3, maxSb2Size - currSb2Size, STR_CONV_MODE_LEFT_ALIGN, 6);
+}
+
+void CheckSaveBlock3Size(struct ScriptContext *ctx)
+{
+    u32 currSb3Size = (sizeof(struct SaveBlock3));
+    u32 maxSb3Size = SAVE_BLOCK_3_CHUNK_SIZE * NUM_SECTORS_PER_SLOT;
+    ConvertIntToDecimalStringN(gStringVar1, currSb3Size, STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar2, maxSb3Size, STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar3, maxSb3Size - currSb3Size, STR_CONV_MODE_LEFT_ALIGN, 6);
 }
 
 void CheckPokemonStorageSize(struct ScriptContext *ctx)
@@ -2151,7 +2316,7 @@ static void DebugAction_Util_Player_Gender(u8 taskId)
 
 static void DebugAction_Util_Player_Id(u8 taskId)
 {
-    u32 trainerId = ((Random() << 16) | Random());
+    u32 trainerId = Random32();
     SetTrainerId(trainerId, gSaveBlock2Ptr->playerTrainerId);
     Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
@@ -2870,10 +3035,9 @@ static void DebugAction_Give_Item_SelectQuantity(u8 taskId)
 
         if (JOY_NEW(DPAD_UP))
         {
-            u32 maxCapacity = (ItemId_GetPocket(itemId) - 1 == BERRIES_POCKET) ? MAX_BERRY_CAPACITY : MAX_BAG_ITEM_CAPACITY;
             gTasks[taskId].tInput += sPowersOfTen[gTasks[taskId].tDigit];
-            if (gTasks[taskId].tInput > maxCapacity)
-                gTasks[taskId].tInput = maxCapacity;
+            if (gTasks[taskId].tInput > MAX_BAG_ITEM_CAPACITY)
+                gTasks[taskId].tInput = MAX_BAG_ITEM_CAPACITY;
         }
         if (JOY_NEW(DPAD_DOWN))
         {
@@ -2888,7 +3052,7 @@ static void DebugAction_Give_Item_SelectQuantity(u8 taskId)
         }
         if (JOY_NEW(DPAD_RIGHT))
         {
-            if (gTasks[taskId].tDigit < 2)
+            if (gTasks[taskId].tDigit < MAX_ITEM_DIGITS)
                 gTasks[taskId].tDigit += 1;
         }
 
@@ -2906,7 +3070,7 @@ static void DebugAction_Give_Item_SelectQuantity(u8 taskId)
         FreeSpriteOamMatrix(&gSprites[gTasks[taskId].tSpriteId]);   //Destroy item icon
         DestroySprite(&gSprites[gTasks[taskId].tSpriteId]);         //Destroy item icon
 
-        PlaySE(MUS_OBTAIN_ITEM);
+        PlaySE(MUS_LEVEL_UP);
         AddBagItem(itemId, gTasks[taskId].tInput);
         DebugAction_DestroyExtraWindow(taskId);
     }
@@ -2925,27 +3089,12 @@ static void DebugAction_Give_Item_SelectQuantity(u8 taskId)
 #undef tItemId
 #undef tSpriteId
 
-//TMs
-static void DebugAction_Give_AllTMs(u8 taskId)
-{
-    u16 i;
-    PlayFanfare(MUS_OBTAIN_TMHM);
-    for (i = ITEM_TM01; i <= ITEM_HM08; i++)
-    {
-        if (ItemIdToBattleMoveId(i) != MOVE_NONE && !CheckBagHasItem(i, 1))
-            AddBagItem(i, 1);
-    }
-
-    Debug_DestroyMenu_Full(taskId);
-    ScriptContext_Enable();
-}
-
 //Pokemon
 static void ResetMonDataStruct(struct DebugMonData *sDebugMonData)
 {
     sDebugMonData->species          = 1;
     sDebugMonData->level            = MIN_LEVEL;
-    sDebugMonData->isShiny          = 0;
+    sDebugMonData->isShiny          = FALSE;
     sDebugMonData->nature           = 0;
     sDebugMonData->abilityNum       = 0;
     sDebugMonData->mon_iv_hp        = 0;
@@ -2954,6 +3103,12 @@ static void ResetMonDataStruct(struct DebugMonData *sDebugMonData)
     sDebugMonData->mon_iv_speed     = 0;
     sDebugMonData->mon_iv_satk      = 0;
     sDebugMonData->mon_iv_sdef      = 0;
+    sDebugMonData->mon_ev_hp        = 0;
+    sDebugMonData->mon_ev_atk       = 0;
+    sDebugMonData->mon_ev_def       = 0;
+    sDebugMonData->mon_ev_speed     = 0;
+    sDebugMonData->mon_ev_satk      = 0;
+    sDebugMonData->mon_ev_sdef      = 0;
 }
 
 #define tIsComplex  data[5]
@@ -3116,8 +3271,8 @@ static void DebugAction_Give_Pokemon_SelectLevel(u8 taskId)
         if (JOY_NEW(DPAD_UP))
         {
             gTasks[taskId].tInput += sPowersOfTen[gTasks[taskId].tDigit];
-            if (gTasks[taskId].tInput > 100)
-                gTasks[taskId].tInput = 100;
+            if (gTasks[taskId].tInput > MAX_LEVEL)
+                gTasks[taskId].tInput = MAX_LEVEL;
         }
         if (JOY_NEW(DPAD_DOWN))
         {
@@ -3150,7 +3305,7 @@ static void DebugAction_Give_Pokemon_SelectLevel(u8 taskId)
         if (gTasks[taskId].tIsComplex == FALSE)
         {
             PlaySE(MUS_LEVEL_UP);
-            ScriptGiveMon(sDebugMonData->species, gTasks[taskId].tInput, ITEM_NONE, 0, 0, 0);
+            ScriptGiveMon(sDebugMonData->species, gTasks[taskId].tInput, ITEM_NONE);
             // Set flag for user convenience
             FlagSet(FLAG_SYS_POKEMON_GET);
             Free(sDebugMonData);
@@ -3183,27 +3338,14 @@ static void DebugAction_Give_Pokemon_SelectLevel(u8 taskId)
 
 static void DebugAction_Give_Pokemon_SelectShiny(u8 taskId)
 {
+    static const u8 *txtStr;
+
     if (JOY_NEW(DPAD_ANY))
     {
         PlaySE(SE_SELECT);
-
-        if (JOY_NEW(DPAD_UP))
-        {
-            gTasks[taskId].tInput += sPowersOfTen[gTasks[taskId].tDigit];
-            if (gTasks[taskId].tInput > 1)
-                gTasks[taskId].tInput = 1;
-        }
-        if (JOY_NEW(DPAD_DOWN))
-        {
-            gTasks[taskId].tInput -= sPowersOfTen[gTasks[taskId].tDigit];
-            if (gTasks[taskId].tInput < 0)
-                gTasks[taskId].tInput = 0;
-        }
-
-        if (gTasks[taskId].tInput == 1)
-            StringCopyPadded(gStringVar2, sDebugText_True, CHAR_SPACE, 15);
-        else
-            StringCopyPadded(gStringVar2, sDebugText_False, CHAR_SPACE, 15);
+        gTasks[taskId].tInput ^= JOY_NEW(DPAD_UP | DPAD_DOWN) > 0;
+        txtStr = (gTasks[taskId].tInput == TRUE) ? sDebugText_True : sDebugText_False;
+        StringCopyPadded(gStringVar2, txtStr, CHAR_SPACE, 15);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 0);
         StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
         StringExpandPlaceholders(gStringVar4, sDebugText_PokemonShiny);
@@ -3271,7 +3413,7 @@ static void DebugAction_Give_Pokemon_SelectNature(u8 taskId)
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 2);
         StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
         abilityId = GetAbilityBySpecies(sDebugMonData->species, 0);
-        StringCopy(gStringVar1, gAbilityNames[abilityId]);
+        StringCopy(gStringVar1, gAbilitiesInfo[abilityId].name);
         StringExpandPlaceholders(gStringVar4, sDebugText_PokemonAbility);
         AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
 
@@ -3316,7 +3458,7 @@ static void DebugAction_Give_Pokemon_SelectAbility(u8 taskId)
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 2);
         StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
-        StringCopy(gStringVar1, gAbilityNames[abilityId]);
+        StringCopy(gStringVar1, gAbilitiesInfo[abilityId].name);
         StringExpandPlaceholders(gStringVar4, sDebugText_PokemonAbility);
         AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
     }
@@ -3352,8 +3494,8 @@ static void DebugAction_Give_Pokemon_SelectIVs(u8 taskId)
         if (JOY_NEW(DPAD_UP))
         {
             gTasks[taskId].tInput += sPowersOfTen[gTasks[taskId].tDigit];
-            if (gTasks[taskId].tInput > 31)
-                gTasks[taskId].tInput = 31;
+            if (gTasks[taskId].tInput > MAX_PER_STAT_IVS)
+                gTasks[taskId].tInput = MAX_PER_STAT_IVS;
         }
         if (JOY_NEW(DPAD_DOWN))
         {
@@ -3466,13 +3608,184 @@ static void DebugAction_Give_Pokemon_SelectIVs(u8 taskId)
             gTasks[taskId].tIterator = 0;
 
             StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
-            StringCopy(gStringVar1, gMoveNames[gTasks[taskId].tInput]);
-            StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
             ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 3);
-            StringExpandPlaceholders(gStringVar4, sDebugText_PokemonMove_0);
+            StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
+            StringExpandPlaceholders(gStringVar4, sDebugText_EV_HP);
+            AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
+            gTasks[taskId].func = DebugAction_Give_Pokemon_SelectEVs;
+        }
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        Free(sDebugMonData);
+        DebugAction_DestroyExtraWindow(taskId);
+    }
+}
+
+static u32 GetDebugPokemonTotalEV(void)
+{
+    return (sDebugMonData->mon_ev_hp
+          + sDebugMonData->mon_ev_atk
+          + sDebugMonData->mon_ev_def
+          + sDebugMonData->mon_ev_speed
+          + sDebugMonData->mon_ev_satk
+          + sDebugMonData->mon_ev_sdef);
+}
+
+static void DebugAction_Give_Pokemon_SelectEVs(u8 taskId)
+{
+    u16 totalEV = GetDebugPokemonTotalEV();
+
+    if (JOY_NEW(DPAD_ANY))
+    {
+        PlaySE(SE_SELECT);
+
+        if (JOY_NEW(DPAD_UP))
+        {
+            gTasks[taskId].tInput += sPowersOfTen[gTasks[taskId].tDigit];
+            if (gTasks[taskId].tInput > MAX_PER_STAT_EVS)
+                gTasks[taskId].tInput = MAX_PER_STAT_EVS;
+        }
+        if (JOY_NEW(DPAD_DOWN))
+        {
+            gTasks[taskId].tInput -= sPowersOfTen[gTasks[taskId].tDigit];
+            if (gTasks[taskId].tInput < 0)
+                gTasks[taskId].tInput = 0;
+        }
+        if (JOY_NEW(DPAD_LEFT))
+        {
+            if (gTasks[taskId].tDigit > 0)
+                gTasks[taskId].tDigit -= 1;
+        }
+        if (JOY_NEW(DPAD_RIGHT))
+        {
+            if (gTasks[taskId].tDigit < 3)
+                gTasks[taskId].tDigit += 1;
+        }
+
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
+        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 3);
+        StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
+        switch (gTasks[taskId].tIterator)
+        {
+        case STAT_HP:
+            StringExpandPlaceholders(gStringVar4, sDebugText_EV_HP);
+            break;
+        case STAT_ATK:
+            StringExpandPlaceholders(gStringVar4, sDebugText_EV_Attack);
+            break;
+        case STAT_DEF:
+            StringExpandPlaceholders(gStringVar4, sDebugText_EV_Defense);
+            break;
+        case STAT_SPEED:
+            StringExpandPlaceholders(gStringVar4, sDebugText_EV_Speed);
+            break;
+        case STAT_SPATK:
+            StringExpandPlaceholders(gStringVar4, sDebugText_EV_SpAttack);
+            break;
+        case STAT_SPDEF:
+            StringExpandPlaceholders(gStringVar4, sDebugText_EV_SpDefense);
+            break;
+        }
+        AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
+    }
+
+    //If A or B button
+    if (JOY_NEW(A_BUTTON))
+    {
+        switch (gTasks[taskId].tIterator)
+        {
+        case STAT_HP:
+            sDebugMonData->mon_ev_hp = gTasks[taskId].tInput;
+            break;
+        case STAT_ATK:
+            sDebugMonData->mon_ev_atk = gTasks[taskId].tInput;
+            break;
+        case STAT_DEF:
+            sDebugMonData->mon_ev_def = gTasks[taskId].tInput;
+            break;
+        case STAT_SPEED:
+            sDebugMonData->mon_ev_speed = gTasks[taskId].tInput;
+            break;
+        case STAT_SPATK:
+            sDebugMonData->mon_ev_satk = gTasks[taskId].tInput;
+            break;
+        case STAT_SPDEF:
+            sDebugMonData->mon_ev_sdef = gTasks[taskId].tInput;
+            break;
+        }
+
+        //Check if all EVs set
+        if (gTasks[taskId].tIterator != NUM_STATS - 1)
+        {
+            gTasks[taskId].tIterator++;
+            gTasks[taskId].tInput = 0;
+            gTasks[taskId].tDigit = 0;
+
+            StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
+            ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 3);
+            StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
+            switch (gTasks[taskId].tIterator)
+            {
+            case STAT_HP:
+                StringExpandPlaceholders(gStringVar4, sDebugText_EV_HP);
+                break;
+            case STAT_ATK:
+                StringExpandPlaceholders(gStringVar4, sDebugText_EV_Attack);
+                break;
+            case STAT_DEF:
+                StringExpandPlaceholders(gStringVar4, sDebugText_EV_Defense);
+                break;
+            case STAT_SPEED:
+                StringExpandPlaceholders(gStringVar4, sDebugText_EV_Speed);
+                break;
+            case STAT_SPATK:
+                StringExpandPlaceholders(gStringVar4, sDebugText_EV_SpAttack);
+                break;
+            case STAT_SPDEF:
+                StringExpandPlaceholders(gStringVar4, sDebugText_EV_SpDefense);
+                break;
+            }
             AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
 
-            gTasks[taskId].func = DebugAction_Give_Pokemon_Move;
+            gTasks[taskId].func = DebugAction_Give_Pokemon_SelectEVs;
+        }
+        else
+        {
+            gTasks[taskId].tInput = 0;
+            gTasks[taskId].tDigit = 0;
+            gTasks[taskId].tIterator = 0;
+
+            if (totalEV > MAX_TOTAL_EVS)
+            {
+                sDebugMonData->mon_ev_hp = 0;
+                sDebugMonData->mon_ev_atk = 0;
+                sDebugMonData->mon_ev_def = 0;
+                sDebugMonData->mon_ev_speed = 0;
+                sDebugMonData->mon_ev_satk = 0;
+                sDebugMonData->mon_ev_sdef = 0;
+
+                PlaySE(SE_FAILURE);
+                StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
+                ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 3);
+                StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
+                StringExpandPlaceholders(gStringVar4, sDebugText_EV_HP);
+                AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
+
+                gTasks[taskId].func = DebugAction_Give_Pokemon_SelectEVs;
+            }
+            else
+            {
+                StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
+                StringCopy(gStringVar1, GetMoveName(gTasks[taskId].tInput));
+                StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
+                ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 3);
+                StringExpandPlaceholders(gStringVar4, sDebugText_PokemonMove_0);
+                AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
+
+                gTasks[taskId].func = DebugAction_Give_Pokemon_Move;
+            }
         }
     }
     else if (JOY_NEW(B_BUTTON))
@@ -3513,7 +3826,7 @@ static void DebugAction_Give_Pokemon_Move(u8 taskId)
         }
 
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
-        StringCopy(gStringVar1, gMoveNames[gTasks[taskId].tInput]);
+        StringCopy(gStringVar1, GetMoveName(gTasks[taskId].tInput));
         StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 3);
         switch (gTasks[taskId].tIterator)
@@ -3565,7 +3878,7 @@ static void DebugAction_Give_Pokemon_Move(u8 taskId)
             gTasks[taskId].tDigit = 0;
 
             StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
-            StringCopy(gStringVar1, gMoveNames[gTasks[taskId].tInput]);
+            StringCopy(gStringVar1, GetMoveName(gTasks[taskId].tInput));
             StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
             ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 3);
             switch (gTasks[taskId].tIterator)
@@ -3613,9 +3926,11 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
     u16 moves[4];
     u8 IVs[6];
     u8 iv_val;
+    u8 EVs[6];
+    u8 ev_val;
     u16 species     = sDebugMonData->species;
     u8 level        = sDebugMonData->level;
-    u8 isShiny      = sDebugMonData->isShiny; //Shiny: no 0, yes 1
+    bool8 isShiny   = sDebugMonData->isShiny;
     u8 nature       = sDebugMonData->nature;
     u8 abilityNum   = sDebugMonData->abilityNum;
     moves[0]        = sDebugMonData->mon_move_0;
@@ -3628,30 +3943,20 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
     IVs[3]          = sDebugMonData->mon_iv_speed;
     IVs[4]          = sDebugMonData->mon_iv_satk;
     IVs[5]          = sDebugMonData->mon_iv_sdef;
+    EVs[0]          = sDebugMonData->mon_ev_hp;
+    EVs[1]          = sDebugMonData->mon_ev_atk;
+    EVs[2]          = sDebugMonData->mon_ev_def;
+    EVs[3]          = sDebugMonData->mon_ev_speed;
+    EVs[4]          = sDebugMonData->mon_ev_satk;
+    EVs[5]          = sDebugMonData->mon_ev_sdef;
 
     //Nature
     if (nature == NUM_NATURES || nature == 0xFF)
         nature = Random() % NUM_NATURES;
+    CreateMonWithNature(&mon, species, level, 32, nature);
 
     //Shininess
-    if (isShiny == 1)
-    {
-        u32 personality;
-        u32 otid = gSaveBlock2Ptr->playerTrainerId[0]
-            | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
-            | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
-            | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
-
-        do
-        {
-            personality = Random32();
-            personality = ((((Random() % 8) ^ (HIHALF(otid) ^ LOHALF(otid))) ^ LOHALF(personality)) << 16) | LOHALF(personality);
-        } while (nature != GetNatureFromPersonality(personality));
-
-        CreateMon(&mon, species, level, 32, 1, personality, OT_ID_PRESET, otid);
-    }
-    else
-        CreateMonWithNature(&mon, species, level, 32, nature);
+    SetMonData(&mon, MON_DATA_IS_SHINY, &isShiny);
 
     //IVs
     for (i = 0; i < NUM_STATS; i++)
@@ -3660,7 +3965,14 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
         if (iv_val != 32 && iv_val != 0xFF)
             SetMonData(&mon, MON_DATA_HP_IV + i, &iv_val);
     }
-    CalculateMonStats(&mon);
+
+    //EVs
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        ev_val = EVs[i];
+        if (ev_val)
+            SetMonData(&mon, MON_DATA_HP_EV + i, &ev_val);
+    }
 
     //Moves
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -3680,6 +3992,9 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
     }
 
     SetMonData(&mon, MON_DATA_ABILITY_NUM, &abilityNum);
+
+    //Update mon stats before giving it to the player
+    CalculateMonStats(&mon);
 
     // give player the mon
     SetMonData(&mon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
@@ -3752,8 +4067,15 @@ static void DebugAction_Give_DayCareEgg(u8 taskId)
 }
 
 // *******************************
-// Actions Fill
-static void DebugAction_Fill_PCBoxes_Fast(u8 taskId) //Credit: Sierraffinity
+// Actions PCBag
+
+static void DebugAction_OpenPCBagFillMenu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_PCBag_Fill, sDebugMenu_ListTemplate_PCBag_Fill);
+}
+
+static void DebugAction_PCBag_Fill_PCBoxes_Fast(u8 taskId) //Credit: Sierraffinity
 {
     int boxId, boxPosition;
     u32 personality;
@@ -3786,7 +4108,7 @@ static void DebugAction_Fill_PCBoxes_Fast(u8 taskId) //Credit: Sierraffinity
     ScriptContext_Enable();
 }
 
-static void DebugAction_Fill_PCBoxes_Slow(u8 taskId)
+static void DebugAction_PCBag_Fill_PCBoxes_Slow(u8 taskId)
 {
     int boxId, boxPosition;
     struct BoxPokemon boxMon;
@@ -3817,7 +4139,7 @@ static void DebugAction_Fill_PCBoxes_Slow(u8 taskId)
     Debug_DestroyMenu_Full_Script(taskId, Debug_BoxFilledMessage);
 }
 
-static void DebugAction_Fill_PCItemStorage(u8 taskId)
+static void DebugAction_PCBag_Fill_PCItemStorage(u8 taskId)
 {
     u16 itemId;
 
@@ -3828,7 +4150,7 @@ static void DebugAction_Fill_PCItemStorage(u8 taskId)
     }
 }
 
-static void DebugAction_Fill_PocketItems(u8 taskId)
+static void DebugAction_PCBag_Fill_PocketItems(u8 taskId)
 {
     u16 itemId;
 
@@ -3839,7 +4161,7 @@ static void DebugAction_Fill_PocketItems(u8 taskId)
     }
 }
 
-static void DebugAction_Fill_PocketPokeBalls(u8 taskId)
+static void DebugAction_PCBag_Fill_PocketPokeBalls(u8 taskId)
 {
     u16 itemId;
 
@@ -3850,7 +4172,7 @@ static void DebugAction_Fill_PocketPokeBalls(u8 taskId)
     }
 }
 
-static void DebugAction_Fill_PocketTMHM(u8 taskId)
+static void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId)
 {
     u16 itemId;
 
@@ -3861,18 +4183,18 @@ static void DebugAction_Fill_PocketTMHM(u8 taskId)
     }
 }
 
-static void DebugAction_Fill_PocketBerries(u8 taskId)
+static void DebugAction_PCBag_Fill_PocketBerries(u8 taskId)
 {
     u16 itemId;
 
     for (itemId = FIRST_BERRY_INDEX; itemId < LAST_BERRY_INDEX; itemId++)
     {
-        if (CheckBagHasSpace(itemId, MAX_BERRY_CAPACITY))
-            AddBagItem(itemId, MAX_BERRY_CAPACITY);
+        if (CheckBagHasSpace(itemId, MAX_BAG_ITEM_CAPACITY))
+            AddBagItem(itemId, MAX_BAG_ITEM_CAPACITY);
     }
 }
 
-static void DebugAction_Fill_PocketKeyItems(u8 taskId)
+static void DebugAction_PCBag_Fill_PocketKeyItems(u8 taskId)
 {
     u16 itemId;
 
@@ -3881,6 +4203,24 @@ static void DebugAction_Fill_PocketKeyItems(u8 taskId)
         if (ItemId_GetPocket(itemId) == POCKET_KEY_ITEMS && CheckBagHasSpace(itemId, 1))
             AddBagItem(itemId, 1);
     }
+}
+
+static void DebugAction_PCBag_AccessPC(u8 taskId)
+{
+    Debug_DestroyMenu_Full_Script(taskId, EventScript_PC);
+}
+
+static void DebugAction_PCBag_ClearBag(u8 taskId)
+{
+    PlaySE(MUS_LEVEL_UP);
+    ClearBag();
+}
+
+static void DebugAction_PCBag_ClearBoxes(u8 taskId)
+{
+    ResetPokemonStorageSystem();
+    Debug_DestroyMenu_Full(taskId);
+    ScriptContext_Enable();
 }
 
 // *******************************
@@ -4620,24 +4960,124 @@ SOUND_LIST_SE
 #undef X
 
 // *******************************
-// Actions Party/Boxes
+// Actions BerryFunctions
 
-static void DebugAction_PartyBoxes_AccessPC(u8 taskId)
+static void DebugAction_BerryFunctions_ClearAll(u8 taskId)
 {
-    Debug_DestroyMenu_Full_Script(taskId, EventScript_PC);
+    u8 i;
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
+        {
+            RemoveBerryTree(GetObjectEventBerryTreeId(i));
+            SetBerryTreeJustPicked(gObjectEvents[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+        }
+    }
+
+    ScriptContext_Enable();
+    Debug_DestroyMenu_Full(taskId);
 }
 
-static void DebugAction_PartyBoxes_MoveReminder(u8 taskId)
+static void DebugAction_BerryFunctions_Ready(u8 taskId)
+{
+    u8 i;
+    struct BerryTree *tree;
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
+        {
+            tree = &gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(i)];
+            if (tree->stage != BERRY_STAGE_NO_BERRY)
+            {
+                tree->stage = BERRY_STAGE_BERRIES - 1;
+                BerryTreeGrow(tree);
+            }
+        }
+    }
+
+    ScriptContext_Enable();
+    Debug_DestroyMenu_Full(taskId);
+}
+
+static void DebugAction_BerryFunctions_NextStage(u8 taskId)
+{
+    u8 i;
+    struct BerryTree *tree;
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
+        {
+            tree = &gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(i)];
+            BerryTreeGrow(tree);
+        }
+    }
+
+    ScriptContext_Enable();
+    Debug_DestroyMenu_Full(taskId);
+}
+
+static void DebugAction_BerryFunctions_Pests(u8 taskId)
+{
+    u8 i;
+
+    if (!OW_BERRY_PESTS)
+    {
+        Debug_DestroyMenu_Full_Script(taskId, Debug_BerryPestsDisabled);
+        return;
+    }
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
+        {
+            if (gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(i)].stage != BERRY_STAGE_PLANTED)
+                gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(i)].pests = TRUE;
+        }
+    }
+
+    ScriptContext_Enable();
+    Debug_DestroyMenu_Full(taskId);
+}
+
+static void DebugAction_BerryFunctions_Weeds(u8 taskId)
+{
+    u8 i;
+
+    if (!OW_BERRY_WEEDS)
+    {
+        Debug_DestroyMenu_Full_Script(taskId, Debug_BerryWeedsDisabled);
+        return;
+    }
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
+        {
+            gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(i)].weeds = TRUE;
+        }
+    }
+
+    ScriptContext_Enable();
+    Debug_DestroyMenu_Full(taskId);
+}
+
+// *******************************
+// Actions Party/Boxes
+
+static void DebugAction_Party_MoveReminder(u8 taskId)
 {
     Debug_DestroyMenu_Full_Script(taskId, FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon);
 }
 
-static void DebugAction_PartyBoxes_HatchAnEgg(u8 taskId)
+static void DebugAction_Party_HatchAnEgg(u8 taskId)
 {
     Debug_DestroyMenu_Full_Script(taskId, Debug_HatchAnEgg);
 }
 
-static void DebugAction_PartyBoxes_HealParty(u8 taskId)
+static void DebugAction_Party_HealParty(u8 taskId)
 {
     PlaySE(SE_USE_ITEM);
     HealPlayerParty();
@@ -4645,29 +5085,26 @@ static void DebugAction_PartyBoxes_HealParty(u8 taskId)
     Debug_DestroyMenu_Full(taskId);
 }
 
-static void DebugAction_PartyBoxes_PoisonMons(u8 taskId)
+static void DebugAction_Party_InflictStatus1(u8 taskId)
 {
-    int i;
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, 0)
-            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
-            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
-        {
-            u32 curStatus = STATUS1_POISON;
-            SetMonData(&gPlayerParty[i], MON_DATA_STATUS, &curStatus);
-        }
-    }
-    PlaySE(SE_FIELD_POISON);
-    ScriptContext_Enable();
-    Debug_DestroyMenu_Full(taskId);
+    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_InflictStatus1);
 }
 
-static void DebugAction_PartyBoxes_ClearBoxes(u8 taskId)
+static void DebugAction_Party_CheckEVs(u8 taskId)
 {
-    ResetPokemonStorageSystem();
-    Debug_DestroyMenu_Full(taskId);
+    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_CheckEVs);
+}
+
+static void DebugAction_Party_CheckIVs(u8 taskId)
+{
+    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_CheckIVs);
+}
+
+static void DebugAction_Party_ClearParty(u8 taskId)
+{
+    ZeroPlayerPartyMons();
     ScriptContext_Enable();
+    Debug_DestroyMenu_Full(taskId);
 }
 
 #endif //DEBUG_OVERWORLD_MENU == TRUE

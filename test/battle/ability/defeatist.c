@@ -3,8 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_TACKLE].split == SPLIT_PHYSICAL);
-    ASSUME(gBattleMoves[MOVE_ECHOED_VOICE].split == SPLIT_SPECIAL);
+    ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
+    ASSUME(gMovesInfo[MOVE_ECHOED_VOICE].category == DAMAGE_CATEGORY_SPECIAL);
 }
 
 SINGLE_BATTLE_TEST("Defeatist halves Attack when HP <= 50%", s16 damage)

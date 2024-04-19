@@ -30,7 +30,7 @@ SINGLE_BATTLE_TEST("Own Tempo prevents intimidate")
 SINGLE_BATTLE_TEST("Own Tempo prevents confusion from moves by the opponent")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_CONFUSE_RAY].effect == EFFECT_CONFUSE);
+        ASSUME(gMovesInfo[MOVE_CONFUSE_RAY].effect == EFFECT_CONFUSE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_SLOWPOKE) { Ability(ABILITY_OWN_TEMPO); };
     } WHEN {
@@ -44,7 +44,7 @@ SINGLE_BATTLE_TEST("Own Tempo prevents confusion from moves by the opponent")
 SINGLE_BATTLE_TEST("Own Tempo prevents confusion from moves by the user")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_PETAL_DANCE].effect == EFFECT_RAMPAGE);
+        ASSUME(MoveHasAdditionalEffectSelf(MOVE_PETAL_DANCE, MOVE_EFFECT_THRASH));
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_SLOWPOKE) { Ability(ABILITY_OWN_TEMPO); };
     } WHEN {
@@ -65,7 +65,7 @@ SINGLE_BATTLE_TEST("Own Tempo cures confusion obtained from an opponent with Mol
 {
     KNOWN_FAILING;
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_CONFUSE_RAY].effect == EFFECT_CONFUSE);
+        ASSUME(gMovesInfo[MOVE_CONFUSE_RAY].effect == EFFECT_CONFUSE);
         PLAYER(SPECIES_PINSIR) { Ability(ABILITY_MOLD_BREAKER); };
         OPPONENT(SPECIES_SLOWPOKE) { Ability(ABILITY_OWN_TEMPO); };
     } WHEN {
@@ -84,8 +84,8 @@ SINGLE_BATTLE_TEST("Own Tempo cures confusion obtained from an opponent with Mol
 SINGLE_BATTLE_TEST("Own Tempo cures confusion if it's obtained via Skill Swap")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_CONFUSE_RAY].effect == EFFECT_CONFUSE);
-        ASSUME(gBattleMoves[MOVE_SKILL_SWAP].effect == EFFECT_SKILL_SWAP);
+        ASSUME(gMovesInfo[MOVE_CONFUSE_RAY].effect == EFFECT_CONFUSE);
+        ASSUME(gMovesInfo[MOVE_SKILL_SWAP].effect == EFFECT_SKILL_SWAP);
         PLAYER(SPECIES_SLOWPOKE) { Ability(ABILITY_OWN_TEMPO); };
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -106,7 +106,7 @@ SINGLE_BATTLE_TEST("Own Tempo cures confusion if it's obtained via Skill Swap")
 SINGLE_BATTLE_TEST("Own Tempo prevents confusion from items")
 {
     GIVEN {
-        ASSUME(gItems[ITEM_BERSERK_GENE].holdEffect == HOLD_EFFECT_BERSERK_GENE);
+        ASSUME(gItemsInfo[ITEM_BERSERK_GENE].holdEffect == HOLD_EFFECT_BERSERK_GENE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_SLOWPOKE) { Ability(ABILITY_OWN_TEMPO); Item(ITEM_BERSERK_GENE); };
     } WHEN {

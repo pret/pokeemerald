@@ -6,8 +6,10 @@
 #define TRUE  1
 #define FALSE 0
 
-#define IWRAM_DATA __attribute__((section("iwram_data")))
-#define EWRAM_DATA __attribute__((section("ewram_data")))
+#define IWRAM_DATA __attribute__((section(".bss")))
+#define EWRAM_DATA __attribute__((section(".sbss")))
+#define IWRAM_INIT __attribute__((section(".iwram")))
+#define EWRAM_INIT __attribute__((section(".ewram")))
 #define UNUSED __attribute__((unused))
 
 #if MODERN

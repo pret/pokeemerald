@@ -375,7 +375,11 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
 
 static u8 GetTrainerHillUnkVal(void)
 {
+#if FREE_TRAINER_HILL == FALSE
     return (gSaveBlock1Ptr->trainerHill.unused + 1) % 256;
+#else
+    return 0;
+#endif //FREE_TRAINER_HILL
 }
 
 static bool32 ValidateTrainerChecksum(struct EReaderTrainerHillTrainer * hillTrainer)

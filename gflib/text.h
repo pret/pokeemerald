@@ -7,6 +7,14 @@
 // loaded at once but not copied to vram yet.
 #define TEXT_SKIP_DRAW 0xFF
 
+// See include/config/decap.h for decap configuration
+#if DECAP_MIRRORING
+#define ROM_MIRROR_MASK (0x02000000)
+#define RAM_MIRROR_MASK (0x00800000)
+#define ROM_MIRROR_PTR(x) ((void*)(((u32)(x)) | ROM_MIRROR_MASK))
+#define RAM_MIRROR_PTR(x) ((void*)(((u32)(x)) | RAM_MIRROR_MASK))
+#endif
+
 enum {
     FONT_SMALL,
     FONT_NORMAL,
@@ -92,6 +100,7 @@ struct TextPrinter
     u8 scrollDistance;
     u8 minLetterSpacing;  // 0x20
     u8 japanese;
+    u8 lastChar; // used to determine whether to decap strings
 };
 
 struct FontInfo
@@ -135,11 +144,24 @@ extern TextFlags gTextFlags;
 extern u8 gDisableTextPrinters;
 extern struct TextGlyph gCurGlyph;
 
+extern const u16 gLowercaseDiffTable[];
+// in gLowercaseDiffTable, 0x100 represents a character treated as uppercase,
+// but that maps to itself; only the lower 8 bits are used for mapping
+#define MARK_UPPER_FLAG 0x100
+#define LOWERCASE_DIFF_MASK 0xFF
+#define IS_UPPER(x) (gLowercaseDiffTable[(x) & LOWERCASE_DIFF_MASK])
+#define TO_LOWER(x) (((x) + gLowercaseDiffTable[(x)]) & LOWERCASE_DIFF_MASK)
+
+void * UnmirrorPtr(const void * ptr);
+void * MirrorPtr(const void * ptr);
+bool32 IsMirrorPtr(const void *ptr);
+u16 AddTextPrinterFixedCaseParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
+
 void DeactivateAllTextPrinters(void);
 u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
-bool16 AddTextPrinter(struct TextPrinterTemplate *template, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
+bool32 AddTextPrinter(struct TextPrinterTemplate *template, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
 void RunTextPrinters(void);
-bool16 IsTextPrinterActive(u8 id);
+bool32 IsTextPrinterActive(u8 id);
 void GenerateFontHalfRowLookupTable(u8 fgColor, u8 bgColor, u8 shadowColor);
 void SaveTextColors(u8 *fgColor, u8 *bgColor, u8 *shadowColor);
 void RestoreTextColors(u8 *fgColor, u8 *bgColor, u8 *shadowColor);
@@ -150,10 +172,10 @@ void ClearTextSpan(struct TextPrinter *textPrinter, u32 width);
 void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter);
 void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter);
 void TextPrinterClearDownArrow(struct TextPrinter *textPrinter);
-bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter);
-bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter);
-bool16 TextPrinterWait(struct TextPrinter *textPrinter);
-void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *counter, u8 *yCoordIndex);
+bool32 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter);
+bool32 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter);
+bool32 TextPrinterWait(struct TextPrinter *textPrinter);
+void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool32 drawArrow, u8 *counter, u8 *yCoordIndex);
 s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing);
 u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str);
 u8 DrawKeypadIcon(u8 windowId, u8 keypadIconId, u16 x, u16 y);

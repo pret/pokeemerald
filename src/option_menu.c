@@ -24,6 +24,11 @@
 #define tButtonMode data[5]
 #define tWindowFrameType data[6]
 
+#if (DECAP_ENABLED) && (DECAP_MIRRORING) && !(DECAP_OPTION_MENU)
+#define AddTextPrinterParameterized3(a, b, c, d, e, f, str) AddTextPrinterParameterized3(a, b, c, d, e, f, MirrorPtr(str))
+#define AddTextPrinterParameterized4(a, b, c, d, e, f, g, h, str) AddTextPrinterParameterized4(a, b, c, d, e, f, g, h, MirrorPtr(str))
+#endif
+
 enum
 {
     MENUITEM_TEXTSPEED,
@@ -540,7 +545,7 @@ static u8 FrameType_ProcessInput(u8 selection)
 
 static void FrameType_DrawChoices(u8 selection)
 {
-    u8 text[16];
+    u8 text[16] = {EOS};
     u8 n = selection + 1;
     u16 i;
 

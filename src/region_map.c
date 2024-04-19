@@ -1570,6 +1570,9 @@ u8 *GetMapName(u8 *dest, u16 regionMapId, u16 padLength)
     u8 *str;
     u16 i;
 
+    if (DECAP_ENABLED && !DECAP_MAP_NAMES)
+        *dest++ = CHAR_FIXED_CASE;
+
     if (regionMapId == MAPSEC_SECRET_BASE)
     {
         str = GetSecretBaseMapName(dest);

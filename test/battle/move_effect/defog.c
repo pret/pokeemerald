@@ -3,20 +3,20 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_DEFOG].effect == EFFECT_DEFOG);
-    ASSUME(gBattleMoves[MOVE_REFLECT].effect == EFFECT_REFLECT);
-    ASSUME(gBattleMoves[MOVE_LIGHT_SCREEN].effect == EFFECT_LIGHT_SCREEN);
-    ASSUME(gBattleMoves[MOVE_MIST].effect == EFFECT_MIST);
-    ASSUME(gBattleMoves[MOVE_SAFEGUARD].effect == EFFECT_SAFEGUARD);
-    ASSUME(gBattleMoves[MOVE_AURORA_VEIL].effect == EFFECT_AURORA_VEIL);
-    ASSUME(gBattleMoves[MOVE_STEALTH_ROCK].effect == EFFECT_STEALTH_ROCK);
-    ASSUME(gBattleMoves[MOVE_SPIKES].effect == EFFECT_SPIKES);
-    ASSUME(gBattleMoves[MOVE_TOXIC_SPIKES].effect == EFFECT_TOXIC_SPIKES);
-    ASSUME(gBattleMoves[MOVE_STICKY_WEB].effect == EFFECT_STICKY_WEB);
-    ASSUME(gBattleMoves[MOVE_TOXIC].effect == EFFECT_TOXIC);
-    ASSUME(gBattleMoves[MOVE_SCREECH].effect == EFFECT_DEFENSE_DOWN_2);
-    ASSUME(gBattleMoves[MOVE_TACKLE].split == SPLIT_PHYSICAL);
-    ASSUME(gBattleMoves[MOVE_GUST].split == SPLIT_SPECIAL);
+    ASSUME(gMovesInfo[MOVE_DEFOG].effect == EFFECT_DEFOG);
+    ASSUME(gMovesInfo[MOVE_REFLECT].effect == EFFECT_REFLECT);
+    ASSUME(gMovesInfo[MOVE_LIGHT_SCREEN].effect == EFFECT_LIGHT_SCREEN);
+    ASSUME(gMovesInfo[MOVE_MIST].effect == EFFECT_MIST);
+    ASSUME(gMovesInfo[MOVE_SAFEGUARD].effect == EFFECT_SAFEGUARD);
+    ASSUME(gMovesInfo[MOVE_AURORA_VEIL].effect == EFFECT_AURORA_VEIL);
+    ASSUME(gMovesInfo[MOVE_STEALTH_ROCK].effect == EFFECT_STEALTH_ROCK);
+    ASSUME(gMovesInfo[MOVE_SPIKES].effect == EFFECT_SPIKES);
+    ASSUME(gMovesInfo[MOVE_TOXIC_SPIKES].effect == EFFECT_TOXIC_SPIKES);
+    ASSUME(gMovesInfo[MOVE_STICKY_WEB].effect == EFFECT_STICKY_WEB);
+    ASSUME(gMovesInfo[MOVE_TOXIC].effect == EFFECT_TOXIC);
+    ASSUME(gMovesInfo[MOVE_SCREECH].effect == EFFECT_DEFENSE_DOWN_2);
+    ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
+    ASSUME(gMovesInfo[MOVE_GUST].category == DAMAGE_CATEGORY_SPECIAL);
 }
 
 SINGLE_BATTLE_TEST("Defog lowers evasiveness by 1")
@@ -296,7 +296,7 @@ DOUBLE_BATTLE_TEST("Defog lowers evasiveness by 1 and removes Aurora Veil from p
     PARAMETRIZE { move = MOVE_DEFOG; }
     PARAMETRIZE { move = MOVE_CELEBRATE; }
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_HAIL].effect == EFFECT_HAIL);
+        ASSUME(gMovesInfo[MOVE_HAIL].effect == EFFECT_HAIL);
         ASSUME(gSpeciesInfo[SPECIES_GLALIE].types[0] == TYPE_ICE);
         PLAYER(SPECIES_GLALIE) { Speed(4); }
         PLAYER(SPECIES_GLALIE) { Speed(3); }
@@ -328,7 +328,7 @@ DOUBLE_BATTLE_TEST("Defog lowers evasiveness by 1 and removes Aurora Veil from p
 DOUBLE_BATTLE_TEST("Defog lowers evasiveness by 1 and removes everything it can")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_HAIL].effect == EFFECT_HAIL);
+        ASSUME(gMovesInfo[MOVE_HAIL].effect == EFFECT_HAIL);
         ASSUME(gSpeciesInfo[SPECIES_GLALIE].types[0] == TYPE_ICE);
         PLAYER(SPECIES_GLALIE) { Speed(4); }
         PLAYER(SPECIES_GLALIE) { Speed(3); }

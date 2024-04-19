@@ -42,7 +42,8 @@ void *AllocInternal(void *heapStart, u32 size, const char *location)
     {
         // Loop through the blocks looking for unused block that's big enough.
 
-        if (!pos->allocated) {
+        if (!pos->allocated)
+        {
             foundBlockSize = pos->size;
 
             if (foundBlockSize >= size)
@@ -52,7 +53,9 @@ void *AllocInternal(void *heapStart, u32 size, const char *location)
                     // The block isn't much bigger than the requested size,
                     // so just use it.
                     pos->allocated = TRUE;
-                } else {
+                }
+                else
+                {
                     // The block is significantly bigger than the requested
                     // size, so split the rest into a separate block.
                     foundBlockSize -= sizeof(struct MemBlock);
@@ -115,8 +118,10 @@ void FreeInternal(void *heapStart, void *pointer)
 
         // If the freed block isn't the last one, merge with the next block
         // if it's not in use.
-        if (block->next != head) {
-            if (!block->next->allocated) {
+        if (block->next != head)
+        {
+            if (!block->next->allocated)
+            {
                 block->size += sizeof(struct MemBlock) + block->next->size;
                 block->next->magic = 0;
                 block->next = block->next->next;
@@ -127,8 +132,10 @@ void FreeInternal(void *heapStart, void *pointer)
 
         // If the freed block isn't the first one, merge with the previous block
         // if it's not in use.
-        if (block != head) {
-            if (!block->prev->allocated) {
+        if (block != head)
+        {
+            if (!block->prev->allocated)
+            {
                 block->prev->next = block->next;
 
                 if (block->next != head)

@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_TAKE_HEART].effect == EFFECT_TAKE_HEART);
+    ASSUME(gMovesInfo[MOVE_TAKE_HEART].effect == EFFECT_TAKE_HEART);
 }
 
 SINGLE_BATTLE_TEST("Take Heart increases Sp. Atk and Sp. Def by one stage")

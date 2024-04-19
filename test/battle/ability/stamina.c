@@ -24,10 +24,10 @@ SINGLE_BATTLE_TEST("Stamina raises Defense by 1 when hit by a move")
     PARAMETRIZE {move = MOVE_GUST; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TACKLE].power != 0);
-        ASSUME(gBattleMoves[MOVE_GUST].power != 0);
-        ASSUME(gBattleMoves[MOVE_GUST].split == SPLIT_SPECIAL);
-        ASSUME(gBattleMoves[MOVE_TACKLE].split == SPLIT_PHYSICAL);
+        ASSUME(gMovesInfo[MOVE_TACKLE].power != 0);
+        ASSUME(gMovesInfo[MOVE_GUST].power != 0);
+        ASSUME(gMovesInfo[MOVE_GUST].category == DAMAGE_CATEGORY_SPECIAL);
+        ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_STAMINA); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -56,7 +56,7 @@ DOUBLE_BATTLE_TEST("Stamina activates correctly for every battler with the abili
     PARAMETRIZE {abilityLeft = ABILITY_STAMINA, abilityRight = ABILITY_STAMINA; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_EARTHQUAKE].target == MOVE_TARGET_FOES_AND_ALLY);
+        ASSUME(gMovesInfo[MOVE_EARTHQUAKE].target == MOVE_TARGET_FOES_AND_ALLY);
         PLAYER(SPECIES_WOBBUFFET) { Ability(abilityLeft); Speed(10); }
         PLAYER(SPECIES_WOBBUFFET) { Ability(abilityRight); Speed(5); }
         OPPONENT(SPECIES_WOBBUFFET) {Speed(20); }

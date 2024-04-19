@@ -365,6 +365,7 @@ static const struct ScanlineEffectParams sPokenavMainMenuScanlineEffectParams =
 
 static bool32 AreAnyTrainerRematchesNearby(void)
 {
+#if FREE_MATCH_CALL == FALSE
     s32 i;
 
     for (i = 0; i < REMATCH_TABLE_ENTRIES; i++)
@@ -374,6 +375,7 @@ static bool32 AreAnyTrainerRematchesNearby(void)
             && gSaveBlock1Ptr->trainerRematches[i])
             return TRUE;
     }
+#endif //FREE_MATCH_CALL
 
     return FALSE;
 }

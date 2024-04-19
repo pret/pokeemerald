@@ -1974,7 +1974,7 @@ static void BufferMovesString(u8 *str, u8 whichParty, u8 partyIdx)
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
             if (moves[i] != MOVE_NONE)
-                StringAppend(str, gMoveNames[moves[i]]);
+                StringAppend(str, GetMoveName(moves[i]));
 
             StringAppend(str, sText_NewLine);
         }
@@ -2788,7 +2788,7 @@ static void LoadTradeMonPic(u8 whichParty, u8 state)
     case 0:
         personality = GetMonData(mon, MON_DATA_PERSONALITY);
 
-        HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->sprites.ptr[whichParty * 2 + B_POSITION_OPPONENT_LEFT], species, personality);
+        HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->spritesGfx[whichParty * 2 + B_POSITION_OPPONENT_LEFT], species, personality);
 
         LoadCompressedSpritePaletteWithTag(GetMonFrontSpritePal(mon), species);
         sTradeAnim->monSpecies[whichParty] = species;
@@ -3784,7 +3784,7 @@ static bool8 DoTradeAnim_Cable(void)
         if (gSprites[sTradeAnim->bouncingPokeballSpriteId].callback == SpriteCallbackDummy)
         {
             HandleLoadSpecialPokePic(TRUE,
-                                     gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_RIGHT],
+                                     gMonSpritesGfxPtr->spritesGfx[B_POSITION_OPPONENT_RIGHT],
                                      sTradeAnim->monSpecies[TRADE_PARTNER],
                                      sTradeAnim->monPersonalities[TRADE_PARTNER]);
             sTradeAnim->state++;
@@ -4281,7 +4281,7 @@ static bool8 DoTradeAnim_Wireless(void)
         if (gSprites[sTradeAnim->bouncingPokeballSpriteId].callback == SpriteCallbackDummy)
         {
             HandleLoadSpecialPokePic(TRUE,
-                                      gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_RIGHT],
+                                      gMonSpritesGfxPtr->spritesGfx[B_POSITION_OPPONENT_RIGHT],
                                       sTradeAnim->monSpecies[TRADE_PARTNER],
                                       sTradeAnim->monPersonalities[TRADE_PARTNER]);
             sTradeAnim->state++;
@@ -4842,7 +4842,7 @@ static void CheckPartnersMonForRibbons(void)
 {
     u8 i;
     u8 numRibbons = 0;
-    for (i = 0; i < (MON_DATA_UNUSED_RIBBONS - MON_DATA_CHAMPION_RIBBON); i++)
+    for (i = 0; i < (MON_DATA_WORLD_RIBBON - MON_DATA_CHAMPION_RIBBON + 1); i++)
         numRibbons += GetMonData(&gEnemyParty[gSelectedTradeMonPositions[TRADE_PARTNER] % PARTY_SIZE], MON_DATA_CHAMPION_RIBBON + i);
 
     if (numRibbons != 0)

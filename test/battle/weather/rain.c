@@ -4,8 +4,8 @@
 // Please add Rain interactions with move, item and ability effects on their respective files.
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_EMBER].type == TYPE_FIRE);
-    ASSUME(gBattleMoves[MOVE_WATER_GUN].type == TYPE_WATER);
+    ASSUME(gMovesInfo[MOVE_EMBER].type == TYPE_FIRE);
+    ASSUME(gMovesInfo[MOVE_WATER_GUN].type == TYPE_WATER);
 }
 
 SINGLE_BATTLE_TEST("Rain multiplies the power of Fire-type moves by 0.5x", s16 damage)

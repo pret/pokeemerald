@@ -3,10 +3,10 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gItems[ITEM_AIR_BALLOON].holdEffect == HOLD_EFFECT_AIR_BALLOON);
-    ASSUME(gBattleMoves[MOVE_EARTHQUAKE].type == TYPE_GROUND);
-    ASSUME(gBattleMoves[MOVE_TACKLE].type != TYPE_GROUND);
-    ASSUME(gBattleMoves[MOVE_RECYCLE].effect == EFFECT_RECYCLE);
+    ASSUME(gItemsInfo[ITEM_AIR_BALLOON].holdEffect == HOLD_EFFECT_AIR_BALLOON);
+    ASSUME(gMovesInfo[MOVE_EARTHQUAKE].type == TYPE_GROUND);
+    ASSUME(gMovesInfo[MOVE_TACKLE].type != TYPE_GROUND);
+    ASSUME(gMovesInfo[MOVE_RECYCLE].effect == EFFECT_RECYCLE);
 }
 
 SINGLE_BATTLE_TEST("Air Balloon prevents the holder from taking damage from ground type moves")
@@ -109,7 +109,7 @@ SINGLE_BATTLE_TEST("Air Balloon pops before it can be stolen with Thief or Covet
     PARAMETRIZE { move = MOVE_THIEF; }
     PARAMETRIZE { move = MOVE_COVET; }
     GIVEN {
-        ASSUME(gBattleMoves[move].effect == EFFECT_THIEF);
+        ASSUME(MoveHasAdditionalEffect(move, MOVE_EFFECT_STEAL_ITEM) == TRUE);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_AIR_BALLOON); };
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

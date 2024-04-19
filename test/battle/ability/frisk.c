@@ -42,7 +42,7 @@ DOUBLE_BATTLE_TEST("Frisk triggers for player in a Double Battle after switching
     PARAMETRIZE { targetLeft = FALSE; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_POUND].power != 0);
+        ASSUME(gMovesInfo[MOVE_POUND].power != 0);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); }
         PLAYER(SPECIES_WOBBUFFET) { HP(1); }
         PLAYER(SPECIES_FURRET) { Ability(ABILITY_FRISK); };
@@ -65,7 +65,7 @@ DOUBLE_BATTLE_TEST("Frisk triggers for opponent in a Double Battle after switchi
     PARAMETRIZE { targetLeft = FALSE; }
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_POUND].power != 0);
+        ASSUME(gMovesInfo[MOVE_POUND].power != 0);
         PLAYER(SPECIES_WYNAUT) { Item(ITEM_POTION); }
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET) { HP(1); }

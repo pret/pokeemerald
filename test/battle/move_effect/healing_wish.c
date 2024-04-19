@@ -3,8 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_HEALING_WISH].effect == EFFECT_HEALING_WISH);
-    ASSUME(gBattleMoves[MOVE_LUNAR_DANCE].effect == EFFECT_HEALING_WISH);
+    ASSUME(gMovesInfo[MOVE_HEALING_WISH].effect == EFFECT_HEALING_WISH);
+    ASSUME(gMovesInfo[MOVE_LUNAR_DANCE].effect == EFFECT_HEALING_WISH);
 }
 
 SINGLE_BATTLE_TEST("Healing Wish causes the user to faint and fully heals the replacement")
@@ -69,7 +69,6 @@ SINGLE_BATTLE_TEST("Healing Wish effect activates only if the switched pokemon c
             MESSAGE("Wynaut regained health!");
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_U_TURN, player);
-        MESSAGE("Do it! Wynaut!");
         MESSAGE("The healing wish came true for Wynaut!");
         HP_BAR(player, hp: 100);
         STATUS_ICON(player, none: TRUE);

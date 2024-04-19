@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_BIDE].effect == EFFECT_BIDE);
+    ASSUME(gMovesInfo[MOVE_BIDE].effect == EFFECT_BIDE);
 }
 
 SINGLE_BATTLE_TEST("Bide deals twice the taken damage over two turns")

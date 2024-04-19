@@ -4,8 +4,8 @@
 SINGLE_BATTLE_TEST("Magician does not get self-damage recoil after stealing Life Orb")
 {
     GIVEN {
-        ASSUME(gItems[ITEM_LIFE_ORB].holdEffect == HOLD_EFFECT_LIFE_ORB);
-        ASSUME(gBattleMoves[MOVE_TACKLE].power != 0);
+        ASSUME(gItemsInfo[ITEM_LIFE_ORB].holdEffect == HOLD_EFFECT_LIFE_ORB);
+        ASSUME(gMovesInfo[MOVE_TACKLE].power != 0);
         PLAYER(SPECIES_DELPHOX) { Ability(ABILITY_MAGICIAN); Item(ITEM_NONE); }
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_LIFE_ORB); }
     } WHEN {

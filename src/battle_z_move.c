@@ -57,45 +57,47 @@ static void ZMoveSelectionDisplayMoveType(u16 zMove, u32 battler);
 // Const Data
 static const struct SignatureZMove sSignatureZMoves[] =
 {
-    {SPECIES_PIKACHU_COSPLAY,       ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
-    {SPECIES_PIKACHU_ROCK_STAR,     ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
-    {SPECIES_PIKACHU_BELLE,         ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
-    {SPECIES_PIKACHU_POP_STAR,      ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
-    {SPECIES_PIKACHU_PH_D,          ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
-    {SPECIES_PIKACHU_LIBRE,         ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
+    {SPECIES_PIKACHU_COSPLAY,         ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
+    {SPECIES_PIKACHU_ROCK_STAR,       ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
+    {SPECIES_PIKACHU_BELLE,           ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
+    {SPECIES_PIKACHU_POP_STAR,        ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
+    {SPECIES_PIKACHU_PH_D,            ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
+    {SPECIES_PIKACHU_LIBRE,           ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
 
-    {SPECIES_RAICHU_ALOLAN,         ITEM_ALORAICHIUM_Z,        MOVE_THUNDERBOLT,         MOVE_STOKED_SPARKSURFER},
-    {SPECIES_DECIDUEYE,             ITEM_DECIDIUM_Z,           MOVE_SPIRIT_SHACKLE,      MOVE_SINISTER_ARROW_RAID},
-    {SPECIES_INCINEROAR,            ITEM_INCINIUM_Z,           MOVE_DARKEST_LARIAT,      MOVE_MALICIOUS_MOONSAULT},
-    {SPECIES_KOMMO_O,               ITEM_KOMMONIUM_Z,          MOVE_CLANGING_SCALES,     MOVE_CLANGOROUS_SOULBLAZE},
-    {SPECIES_LUNALA,                ITEM_LUNALIUM_Z,           MOVE_MOONGEIST_BEAM,      MOVE_MENACING_MOONRAZE_MAELSTROM},
-    {SPECIES_NECROZMA_DAWN_WINGS,   ITEM_LUNALIUM_Z,           MOVE_MOONGEIST_BEAM,      MOVE_MENACING_MOONRAZE_MAELSTROM},
-    {SPECIES_LYCANROC_MIDDAY,       ITEM_LYCANIUM_Z,           MOVE_STONE_EDGE,          MOVE_SPLINTERED_STORMSHARDS},
-    {SPECIES_LYCANROC_MIDNIGHT,     ITEM_LYCANIUM_Z,           MOVE_STONE_EDGE,          MOVE_SPLINTERED_STORMSHARDS},
-    {SPECIES_LYCANROC_DUSK,         ITEM_LYCANIUM_Z,           MOVE_STONE_EDGE,          MOVE_SPLINTERED_STORMSHARDS},
-    {SPECIES_MARSHADOW,             ITEM_MARSHADIUM_Z,         MOVE_SPECTRAL_THIEF,      MOVE_SOUL_STEALING_7_STAR_STRIKE},
-    {SPECIES_MIMIKYU_DISGUISED,     ITEM_MIMIKIUM_Z,           MOVE_PLAY_ROUGH,          MOVE_LETS_SNUGGLE_FOREVER},
-    {SPECIES_MIMIKYU_BUSTED,        ITEM_MIMIKIUM_Z,           MOVE_PLAY_ROUGH,          MOVE_LETS_SNUGGLE_FOREVER},
-    {SPECIES_PIKACHU_ORIGINAL_CAP,  ITEM_PIKASHUNIUM_Z,        MOVE_THUNDERBOLT,         MOVE_10000000_VOLT_THUNDERBOLT},
-    {SPECIES_PIKACHU_HOENN_CAP,     ITEM_PIKASHUNIUM_Z,        MOVE_THUNDERBOLT,         MOVE_10000000_VOLT_THUNDERBOLT},
-    {SPECIES_PIKACHU_SINNOH_CAP,    ITEM_PIKASHUNIUM_Z,        MOVE_THUNDERBOLT,         MOVE_10000000_VOLT_THUNDERBOLT},
-    {SPECIES_PIKACHU_UNOVA_CAP,     ITEM_PIKASHUNIUM_Z,        MOVE_THUNDERBOLT,         MOVE_10000000_VOLT_THUNDERBOLT},
-    {SPECIES_PIKACHU_KALOS_CAP,     ITEM_PIKASHUNIUM_Z,        MOVE_THUNDERBOLT,         MOVE_10000000_VOLT_THUNDERBOLT},
-    {SPECIES_PIKACHU_ALOLA_CAP,     ITEM_PIKASHUNIUM_Z,        MOVE_THUNDERBOLT,         MOVE_10000000_VOLT_THUNDERBOLT},
-    {SPECIES_PIKACHU_PARTNER_CAP,   ITEM_PIKASHUNIUM_Z,        MOVE_THUNDERBOLT,         MOVE_10000000_VOLT_THUNDERBOLT},
-    {SPECIES_PIKACHU_WORLD_CAP,     ITEM_PIKASHUNIUM_Z,        MOVE_THUNDERBOLT,         MOVE_10000000_VOLT_THUNDERBOLT},
-    {SPECIES_PRIMARINA,             ITEM_PRIMARIUM_Z,          MOVE_SPARKLING_ARIA,      MOVE_OCEANIC_OPERETTA},
-    {SPECIES_SOLGALEO,              ITEM_SOLGANIUM_Z,          MOVE_SUNSTEEL_STRIKE,     MOVE_SEARING_SUNRAZE_SMASH},
-    {SPECIES_NECROZMA_DUSK_MANE,    ITEM_SOLGANIUM_Z,          MOVE_SUNSTEEL_STRIKE,     MOVE_SEARING_SUNRAZE_SMASH},
-    {SPECIES_TAPU_KOKO,             ITEM_TAPUNIUM_Z,           MOVE_NATURES_MADNESS,     MOVE_GUARDIAN_OF_ALOLA},
-    {SPECIES_TAPU_BULU,             ITEM_TAPUNIUM_Z,           MOVE_NATURES_MADNESS,     MOVE_GUARDIAN_OF_ALOLA},
-    {SPECIES_TAPU_LELE,             ITEM_TAPUNIUM_Z,           MOVE_NATURES_MADNESS,     MOVE_GUARDIAN_OF_ALOLA},
-    {SPECIES_TAPU_FINI,             ITEM_TAPUNIUM_Z,           MOVE_NATURES_MADNESS,     MOVE_GUARDIAN_OF_ALOLA},
-    {SPECIES_NECROZMA_ULTRA,        ITEM_ULTRANECROZIUM_Z,     MOVE_PHOTON_GEYSER,       MOVE_LIGHT_THAT_BURNS_THE_SKY},
-    {SPECIES_MEW,                   ITEM_MEWNIUM_Z,            MOVE_PSYCHIC,             MOVE_GENESIS_SUPERNOVA},
-    {SPECIES_PIKACHU,               ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
-    {SPECIES_EEVEE,                 ITEM_EEVIUM_Z,             MOVE_LAST_RESORT,         MOVE_EXTREME_EVOBOOST},
-    {SPECIES_SNORLAX,               ITEM_SNORLIUM_Z,           MOVE_GIGA_IMPACT,         MOVE_PULVERIZING_PANCAKE},
+    {SPECIES_RAICHU_ALOLAN,           ITEM_ALORAICHIUM_Z,        MOVE_THUNDERBOLT,         MOVE_STOKED_SPARKSURFER},
+    {SPECIES_DECIDUEYE,               ITEM_DECIDIUM_Z,           MOVE_SPIRIT_SHACKLE,      MOVE_SINISTER_ARROW_RAID},
+    {SPECIES_INCINEROAR,              ITEM_INCINIUM_Z,           MOVE_DARKEST_LARIAT,      MOVE_MALICIOUS_MOONSAULT},
+    {SPECIES_KOMMO_O,                 ITEM_KOMMONIUM_Z,          MOVE_CLANGING_SCALES,     MOVE_CLANGOROUS_SOULBLAZE},
+    {SPECIES_LUNALA,                  ITEM_LUNALIUM_Z,           MOVE_MOONGEIST_BEAM,      MOVE_MENACING_MOONRAZE_MAELSTROM},
+    {SPECIES_NECROZMA_DAWN_WINGS,     ITEM_LUNALIUM_Z,           MOVE_MOONGEIST_BEAM,      MOVE_MENACING_MOONRAZE_MAELSTROM},
+    {SPECIES_LYCANROC_MIDDAY,         ITEM_LYCANIUM_Z,           MOVE_STONE_EDGE,          MOVE_SPLINTERED_STORMSHARDS},
+    {SPECIES_LYCANROC_MIDNIGHT,       ITEM_LYCANIUM_Z,           MOVE_STONE_EDGE,          MOVE_SPLINTERED_STORMSHARDS},
+    {SPECIES_LYCANROC_DUSK,           ITEM_LYCANIUM_Z,           MOVE_STONE_EDGE,          MOVE_SPLINTERED_STORMSHARDS},
+    {SPECIES_MARSHADOW,               ITEM_MARSHADIUM_Z,         MOVE_SPECTRAL_THIEF,      MOVE_SOUL_STEALING_7_STAR_STRIKE},
+    {SPECIES_MIMIKYU_DISGUISED,       ITEM_MIMIKIUM_Z,           MOVE_PLAY_ROUGH,          MOVE_LETS_SNUGGLE_FOREVER},
+    {SPECIES_MIMIKYU_BUSTED,          ITEM_MIMIKIUM_Z,           MOVE_PLAY_ROUGH,          MOVE_LETS_SNUGGLE_FOREVER},
+    {SPECIES_MIMIKYU_TOTEM_DISGUISED, ITEM_MIMIKIUM_Z,           MOVE_PLAY_ROUGH,          MOVE_LETS_SNUGGLE_FOREVER},
+    {SPECIES_MIMIKYU_TOTEM_BUSTED,    ITEM_MIMIKIUM_Z,           MOVE_PLAY_ROUGH,          MOVE_LETS_SNUGGLE_FOREVER},
+    {SPECIES_PIKACHU_ORIGINAL_CAP,    ITEM_PIKASHUNIUM_Z,        MOVE_THUNDERBOLT,         MOVE_10000000_VOLT_THUNDERBOLT},
+    {SPECIES_PIKACHU_HOENN_CAP,       ITEM_PIKASHUNIUM_Z,        MOVE_THUNDERBOLT,         MOVE_10000000_VOLT_THUNDERBOLT},
+    {SPECIES_PIKACHU_SINNOH_CAP,      ITEM_PIKASHUNIUM_Z,        MOVE_THUNDERBOLT,         MOVE_10000000_VOLT_THUNDERBOLT},
+    {SPECIES_PIKACHU_UNOVA_CAP,       ITEM_PIKASHUNIUM_Z,        MOVE_THUNDERBOLT,         MOVE_10000000_VOLT_THUNDERBOLT},
+    {SPECIES_PIKACHU_KALOS_CAP,       ITEM_PIKASHUNIUM_Z,        MOVE_THUNDERBOLT,         MOVE_10000000_VOLT_THUNDERBOLT},
+    {SPECIES_PIKACHU_ALOLA_CAP,       ITEM_PIKASHUNIUM_Z,        MOVE_THUNDERBOLT,         MOVE_10000000_VOLT_THUNDERBOLT},
+    {SPECIES_PIKACHU_PARTNER_CAP,     ITEM_PIKASHUNIUM_Z,        MOVE_THUNDERBOLT,         MOVE_10000000_VOLT_THUNDERBOLT},
+    {SPECIES_PIKACHU_WORLD_CAP,       ITEM_PIKASHUNIUM_Z,        MOVE_THUNDERBOLT,         MOVE_10000000_VOLT_THUNDERBOLT},
+    {SPECIES_PRIMARINA,               ITEM_PRIMARIUM_Z,          MOVE_SPARKLING_ARIA,      MOVE_OCEANIC_OPERETTA},
+    {SPECIES_SOLGALEO,                ITEM_SOLGANIUM_Z,          MOVE_SUNSTEEL_STRIKE,     MOVE_SEARING_SUNRAZE_SMASH},
+    {SPECIES_NECROZMA_DUSK_MANE,      ITEM_SOLGANIUM_Z,          MOVE_SUNSTEEL_STRIKE,     MOVE_SEARING_SUNRAZE_SMASH},
+    {SPECIES_TAPU_KOKO,               ITEM_TAPUNIUM_Z,           MOVE_NATURES_MADNESS,     MOVE_GUARDIAN_OF_ALOLA},
+    {SPECIES_TAPU_BULU,               ITEM_TAPUNIUM_Z,           MOVE_NATURES_MADNESS,     MOVE_GUARDIAN_OF_ALOLA},
+    {SPECIES_TAPU_LELE,               ITEM_TAPUNIUM_Z,           MOVE_NATURES_MADNESS,     MOVE_GUARDIAN_OF_ALOLA},
+    {SPECIES_TAPU_FINI,               ITEM_TAPUNIUM_Z,           MOVE_NATURES_MADNESS,     MOVE_GUARDIAN_OF_ALOLA},
+    {SPECIES_NECROZMA_ULTRA,          ITEM_ULTRANECROZIUM_Z,     MOVE_PHOTON_GEYSER,       MOVE_LIGHT_THAT_BURNS_THE_SKY},
+    {SPECIES_MEW,                     ITEM_MEWNIUM_Z,            MOVE_PSYCHIC,             MOVE_GENESIS_SUPERNOVA},
+    {SPECIES_PIKACHU,                 ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
+    {SPECIES_EEVEE,                   ITEM_EEVIUM_Z,             MOVE_LAST_RESORT,         MOVE_EXTREME_EVOBOOST},
+    {SPECIES_SNORLAX,                 ITEM_SNORLIUM_Z,           MOVE_GIGA_IMPACT,         MOVE_PULVERIZING_PANCAKE},
 };
 
 static const u8 sText_ResetStats[] = _("Reset Lowered Stats");
@@ -149,9 +151,9 @@ void QueueZMove(u8 battler, u16 baseMove)
     gBattleStruct->zmove.toBeUsed[battler] = gBattleStruct->zmove.chosenZMove;
     gBattleStruct->zmove.baseMoves[battler] = baseMove;
     if (gBattleStruct->zmove.chosenZMove == MOVE_LIGHT_THAT_BURNS_THE_SKY)
-        gBattleStruct->zmove.splits[battler] = GetSplitBasedOnStats(battler);
+        gBattleStruct->zmove.categories[battler] = GetCategoryBasedOnStats(battler);
     else
-        gBattleStruct->zmove.splits[battler] = gBattleMoves[baseMove].split;
+        gBattleStruct->zmove.categories[battler] = gMovesInfo[baseMove].category;
 }
 
 bool32 IsViableZMove(u8 battler, u16 move)
@@ -192,7 +194,7 @@ bool32 IsViableZMove(u8 battler, u16 move)
             return TRUE;
         }
 
-        if (move != MOVE_NONE && zMove != MOVE_Z_STATUS && gBattleMoves[move].type == ItemId_GetSecondaryId(item))
+        if (move != MOVE_NONE && zMove != MOVE_Z_STATUS && gMovesInfo[move].type == ItemId_GetSecondaryId(item))
         {
             gBattleStruct->zmove.chosenZMove = GetTypeBasedZMove(move, battler);
             return TRUE;
@@ -376,15 +378,15 @@ static u16 GetSignatureZMove(u16 move, u16 species, u16 item)
 
 static u16 GetTypeBasedZMove(u16 move, u8 battler)
 {
-    u8 moveType = gBattleMoves[move].type;
+    u8 moveType = gMovesInfo[move].type;
 
-    // Get z move from type
-    if (moveType < TYPE_FIRE)
-        return MOVE_BREAKNECK_BLITZ + moveType;
-    else if (moveType >= TYPE_FAIRY)
-        return MOVE_TWINKLE_TACKLE + (moveType - TYPE_FAIRY);
-    else
-        return MOVE_BREAKNECK_BLITZ + (moveType - 1);
+    if (moveType >= NUMBER_OF_MON_TYPES)
+        moveType = TYPE_MYSTERY;
+
+    // Get Z-Move from type
+    if (gTypesInfo[moveType].zMove == MOVE_NONE) // failsafe
+        return gTypesInfo[0].zMove;
+    return gTypesInfo[moveType].zMove;
 }
 
 bool32 MoveSelectionDisplayZMove(u16 zmove, u32 battler)
@@ -407,7 +409,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove, u32 battler)
 
         if (IS_MOVE_STATUS(move))
         {
-            u8 zEffect = gBattleMoves[move].zMoveEffect;
+            u8 zEffect = gMovesInfo[move].zMove.effect;
 
             gDisplayedStringBattle[0] = EOS;
 
@@ -486,19 +488,19 @@ bool32 MoveSelectionDisplayZMove(u16 zmove, u32 battler)
             BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_NAME_3);
             gDisplayedStringBattle[0] = CHAR_Z;
             gDisplayedStringBattle[1] = CHAR_HYPHEN;
-            StringCopy(gDisplayedStringBattle + 2, gMoveNames[move]);
+            StringCopy(gDisplayedStringBattle + 2, GetMoveName(move));
         }
         else if (zmove == MOVE_EXTREME_EVOBOOST)
         {
             // Damaging move -> status z move
             StringCopy(gDisplayedStringBattle, sText_StatsPlus2);
             BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_NAME_3);
-            StringCopy(gDisplayedStringBattle, GetZMoveName(zmove));
+            StringCopy(gDisplayedStringBattle, GetMoveName(zmove));
         }
         else
         {
             ZMoveSelectionDisplayPower(move, zmove);
-            StringCopy(gDisplayedStringBattle, GetZMoveName(zmove));
+            StringCopy(gDisplayedStringBattle, GetMoveName(zmove));
         }
         BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_NAME_1);
 
@@ -517,9 +519,9 @@ static void ZMoveSelectionDisplayPower(u16 move, u16 zMove)
     u16 power = GetZMovePower(move);
 
     if (zMove >= MOVE_CATASTROPIKA)
-        power = gBattleMoves[zMove].power;
+        power = gMovesInfo[zMove].power;
 
-    if (gBattleMoves[move].split != SPLIT_STATUS)
+    if (gMovesInfo[move].category != DAMAGE_CATEGORY_STATUS)
     {
         txtPtr = StringCopy(gDisplayedStringBattle, sText_PowerColon);
         ConvertIntToDecimalStringN(txtPtr, power, STR_CONV_MODE_LEFT_ALIGN, 3);
@@ -553,16 +555,8 @@ static void ZMoveSelectionDisplayMoveType(u16 zMove, u32 battler)
     *(txtPtr)++ = EXT_CTRL_CODE_FONT;
     *(txtPtr)++ = FONT_NORMAL;
 
-    StringCopy(txtPtr, gTypeNames[zMoveType]);
+    StringCopy(txtPtr, gTypesInfo[zMoveType].name);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);
-}
-
-const u8 *GetZMoveName(u16 move)
-{
-    if (IsZMove(move))
-        return gZMoveNames[move - FIRST_Z_MOVE];
-    else
-        return gZMoveNames[0];   // Failsafe
 }
 
 #define Z_EFFECT_BS_LENGTH  5
@@ -614,7 +608,7 @@ void SetZEffect(void)
         }
         break;
     case Z_EFFECT_BOOST_CRITS:
-        if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY))
+        if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY_ANY))
         {
             gBattleMons[gBattlerAttacker].status2 |= STATUS2_FOCUS_ENERGY;
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_Z_BOOST_CRITS;
@@ -688,43 +682,35 @@ static bool32 AreStatsMaxed(u8 battler, u8 n)
 
 u16 GetZMovePower(u16 move)
 {
-    if (gBattleMoves[move].split == SPLIT_STATUS)
+    if (gMovesInfo[move].category == DAMAGE_CATEGORY_STATUS)
         return 0;
-    if (gBattleMoves[move].effect == EFFECT_OHKO)
+    if (gMovesInfo[move].effect == EFFECT_OHKO)
         return 180;
 
-    switch (move)
+    if (gMovesInfo[move].zMove.powerOverride > 0)
+        return gMovesInfo[move].zMove.powerOverride;
+    else
     {
-        case MOVE_MEGA_DRAIN:    return 120;
-        case MOVE_CORE_ENFORCER: return 140;
-        case MOVE_WEATHER_BALL:  return 160;
-        case MOVE_HEX:           return 160;
-        case MOVE_FLYING_PRESS:  return 170;
-        case MOVE_GEAR_GRIND:    return 180;
-        case MOVE_V_CREATE:      return 220;
-        default:
-        {
-            if (gBattleMoves[move].power >= 140)
-                return 200;
-            else if (gBattleMoves[move].power >= 130)
-                return 195;
-            else if (gBattleMoves[move].power >= 120)
-                return 190;
-            else if (gBattleMoves[move].power >= 110)
-                return 185;
-            else if (gBattleMoves[move].power >= 100)
-                return 180;
-            else if (gBattleMoves[move].power >= 90)
-                return 175;
-            else if (gBattleMoves[move].power >= 80)
-                return 160;
-            else if (gBattleMoves[move].power >= 70)
-                return 140;
-            else if (gBattleMoves[move].power >= 60)
-                return 120;
-            else
-                return 100;
-        }
+        if (gMovesInfo[move].power >= 140)
+            return 200;
+        else if (gMovesInfo[move].power >= 130)
+            return 195;
+        else if (gMovesInfo[move].power >= 120)
+            return 190;
+        else if (gMovesInfo[move].power >= 110)
+            return 185;
+        else if (gMovesInfo[move].power >= 100)
+            return 180;
+        else if (gMovesInfo[move].power >= 90)
+            return 175;
+        else if (gMovesInfo[move].power >= 80)
+            return 160;
+        else if (gMovesInfo[move].power >= 70)
+            return 140;
+        else if (gMovesInfo[move].power >= 60)
+            return 120;
+        else
+            return 100;
     }
 }
 

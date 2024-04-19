@@ -3,7 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_TRIPLE_ARROWS].effect == EFFECT_TRIPLE_ARROWS);
+    ASSUME(MoveHasAdditionalEffect(MOVE_TRIPLE_ARROWS, MOVE_EFFECT_DEF_MINUS_1) == TRUE);
+    ASSUME(MoveHasAdditionalEffect(MOVE_TRIPLE_ARROWS, MOVE_EFFECT_FLINCH) == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Triple Arrows may lower Defense by one stage")
@@ -12,7 +13,7 @@ SINGLE_BATTLE_TEST("Triple Arrows may lower Defense by one stage")
     u32 chance;
     PARAMETRIZE { ability = ABILITY_HUSTLE; chance = 50; }
     PARAMETRIZE { ability = ABILITY_SERENE_GRACE; chance = 100; }
-    PASSES_RANDOMLY(chance, 100, RNG_TRIPLE_ARROWS_DEFENSE_DOWN);
+    PASSES_RANDOMLY(chance, 100, RNG_SECONDARY_EFFECT);
     GIVEN {
         PLAYER(SPECIES_TOGEPI) { Ability(ability); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -31,7 +32,7 @@ SINGLE_BATTLE_TEST("Triple Arrows makes the foe flinch 30% of the time")
     u32 chance;
     PARAMETRIZE { ability = ABILITY_HUSTLE; chance = 30; }
     PARAMETRIZE { ability = ABILITY_SERENE_GRACE; chance = 60; }
-    PASSES_RANDOMLY(chance, 100, RNG_TRIPLE_ARROWS_FLINCH);
+    PASSES_RANDOMLY(chance, 100, RNG_SECONDARY_EFFECT_2);
     GIVEN {
         PLAYER(SPECIES_TOGEPI) { Ability(ability); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -46,7 +47,7 @@ SINGLE_BATTLE_TEST("Triple Arrows makes the foe flinch 30% of the time")
 SINGLE_BATTLE_TEST("Triple Arrows lands a critical hit")
 {
     ASSUME(B_CRIT_CHANCE >= GEN_7);
-    ASSUME(gBattleMoves[MOVE_TRIPLE_ARROWS].highCritRatio == TRUE);
+    ASSUME(gMovesInfo[MOVE_TRIPLE_ARROWS].criticalHitStage == 1);
     PASSES_RANDOMLY(1, 8, RNG_CRITICAL_HIT);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);

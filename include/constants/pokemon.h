@@ -146,6 +146,8 @@
 #define MIN_LEVEL 1
 #define MAX_LEVEL 100
 
+#define MAX_DYNAMAX_LEVEL 10
+
 #define OT_ID_PLAYER_ID       0
 #define OT_ID_PRESET          1
 #define OT_ID_RANDOM_NO_SHINY 2
@@ -200,11 +202,7 @@
 #define AFFECTION_FIVE_HEARTS   5 // Max friendship
 
 // Friendship value that the majority of species use.
-#if P_UPDATED_FRIENDSHIP >= GEN_8
-#define STANDARD_FRIENDSHIP 50
-#else
-#define STANDARD_FRIENDSHIP 70
-#endif
+#define STANDARD_FRIENDSHIP ((P_UPDATED_FRIENDSHIP >= GEN_8) ? 50 : 70)
 
 #define MAX_FRIENDSHIP  255
 #define MAX_SHEEN       255
@@ -213,22 +211,14 @@
 #define MAX_PER_STAT_IVS 31
 #define MAX_IV_MASK 31
 #define USE_RANDOM_IVS (MAX_PER_STAT_IVS + 1)
-#if P_EV_CAP >= GEN_6
-#define MAX_PER_STAT_EVS 252
-#else
-#define MAX_PER_STAT_EVS 255
-#endif
+#define MAX_PER_STAT_EVS ((P_EV_CAP >= GEN_6) ? 252 : 255)
 #define MAX_TOTAL_EVS 510
-#if I_VITAMIN_EV_CAP >= GEN_8
-#define EV_ITEM_RAISE_LIMIT MAX_PER_STAT_EVS
-#else
-#define EV_ITEM_RAISE_LIMIT 100
-#endif
+#define EV_ITEM_RAISE_LIMIT ((I_VITAMIN_EV_CAP >= GEN_8) ? MAX_PER_STAT_EVS : 100)
 
-// Split defines.
-#define SPLIT_PHYSICAL  0x0
-#define SPLIT_SPECIAL   0x1
-#define SPLIT_STATUS    0x2
+// Move category defines.
+#define DAMAGE_CATEGORY_PHYSICAL    0
+#define DAMAGE_CATEGORY_SPECIAL     1
+#define DAMAGE_CATEGORY_STATUS      2
 
 // Growth rates
 #define GROWTH_MEDIUM_FAST  0
@@ -301,6 +291,9 @@
 #define EVO_MOVE_THREE_SEGMENT            44     // Pokémon levels up, knows specified move, has a personality value with a modulus of 1-99
 #define EVO_LEVEL_FAMILY_OF_THREE         45     // Pokémon reaches the specified level with a personality value with a modulus of 0
 #define EVO_LEVEL_FAMILY_OF_FOUR          46     // Pokémon reaches the specified level with a personality value with a modulus of 1-99
+#define EVO_LEVEL_MOVE_TWENTY_TIMES       47     // Pokémon levels up after having used a move for at least 20 times
+#define EVO_LEVEL_RECOIL_DAMAGE_MALE      48     // Pokémon levels up after having suffered specified amount of non-fainting recoil damage as a male
+#define EVO_LEVEL_RECOIL_DAMAGE_FEMALE    49     // Pokémon levels up after having suffered specified amount of non-fainting recoil damage as a female
 
 // Evolution 'modes,' for GetEvolutionTargetSpecies
 #define EVO_MODE_NORMAL            0
@@ -329,6 +322,9 @@
 #define NUM_ABILITY_SLOTS (NUM_NORMAL_ABILITY_SLOTS + NUM_HIDDEN_ABILITY_SLOTS)
 #define NUM_NORMAL_ABILITY_SLOTS 2
 #define NUM_HIDDEN_ABILITY_SLOTS 1
+
+// Used as a signal for givemon to generate a default ability by personality.
+#define NUM_ABILITY_PERSONALITY 0xFF
 
 #define LEGENDARY_PERFECT_IV_COUNT 3
 // Used as a signal for givemon to generate a default ability by personality.

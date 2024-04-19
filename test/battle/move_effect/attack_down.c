@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_GROWL].effect == EFFECT_ATTACK_DOWN);
+    ASSUME(gMovesInfo[MOVE_GROWL].effect == EFFECT_ATTACK_DOWN);
 }
 
 SINGLE_BATTLE_TEST("Growl lowers Attack", s16 damage)
@@ -12,7 +12,7 @@ SINGLE_BATTLE_TEST("Growl lowers Attack", s16 damage)
     PARAMETRIZE { lowerAttack = FALSE; }
     PARAMETRIZE { lowerAttack = TRUE; }
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_TACKLE].split == SPLIT_PHYSICAL);
+        ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

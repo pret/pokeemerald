@@ -4,7 +4,7 @@
 ASSUMPTIONS
 {
     ASSUME(gSpeciesInfo[SPECIES_UMBREON].types[0] == TYPE_DARK);
-    ASSUME(gBattleMoves[MOVE_CONFUSE_RAY].split == SPLIT_STATUS);
+    ASSUME(gMovesInfo[MOVE_CONFUSE_RAY].category == DAMAGE_CATEGORY_STATUS);
 }
 
 SINGLE_BATTLE_TEST("Prankster-affected moves don't affect Dark-type Pokémon")
@@ -135,7 +135,7 @@ SINGLE_BATTLE_TEST("Prankster is blocked by Quick Guard in Gen5+")
 DOUBLE_BATTLE_TEST("Prankster-affected moves that target all Pokémon are successful regardless of the presence of Dark-type Pokémon")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_CAPTIVATE].target == MOVE_TARGET_BOTH);
+        ASSUME(gMovesInfo[MOVE_CAPTIVATE].target == MOVE_TARGET_BOTH);
         PLAYER(SPECIES_VOLBEAT) { Ability(ABILITY_PRANKSTER); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_UMBREON);

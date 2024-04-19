@@ -61,6 +61,7 @@ struct FunctionTestRunnerState
 {
     u16 parameters;
     u16 runParameter;
+    u16 checkProgressParameter;
 };
 
 extern const struct TestRunner gFunctionTestRunner;

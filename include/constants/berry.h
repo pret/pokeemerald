@@ -10,6 +10,13 @@
 #define BERRY_FIRMNESS_VERY_HARD   4
 #define BERRY_FIRMNESS_SUPER_HARD  5
 
+#define BERRY_COLOR_RED    0
+#define BERRY_COLOR_BLUE   1
+#define BERRY_COLOR_PURPLE 2
+#define BERRY_COLOR_GREEN  3
+#define BERRY_COLOR_YELLOW 4
+#define BERRY_COLOR_PINK   5
+
 #define FLAVOR_SPICY   0
 #define FLAVOR_DRY     1
 #define FLAVOR_SWEET   2
@@ -23,6 +30,8 @@
 #define BERRY_STAGE_TALLER      3
 #define BERRY_STAGE_FLOWERING   4
 #define BERRY_STAGE_BERRIES     5
+#define BERRY_STAGE_TRUNK       6 // These follow BERRY_STAGE_BERRIES to preserve save compatibility
+#define BERRY_STAGE_BUDDING     7
 #define BERRY_STAGE_SPARKLING   255
 
 // Berries can be watered in the following stages:

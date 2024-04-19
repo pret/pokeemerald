@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "data.h"
 #include "graphics.h"
+#include "battle_transition.h"
 #include "constants/abilities.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -47,79 +48,13 @@ const struct SpriteFrameImage gBattlerPicTable_OpponentRight[] =
     {BATTLER_OFFSET(15), MON_PIC_SIZE},
 };
 
-const struct SpriteFrameImage gTrainerBackPicTable_Brendan[] =
-{
-    {gTrainerBackPic_Brendan + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Brendan + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Brendan + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Brendan + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
-};
-
-const struct SpriteFrameImage gTrainerBackPicTable_May[] =
-{
-    {gTrainerBackPic_May + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_May + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_May + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_May + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
-};
-
-const struct SpriteFrameImage gTrainerBackPicTable_Red[] =
-{
-    {gTrainerBackPic_Red + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Red + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Red + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Red + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Red + TRAINER_PIC_SIZE * 4, TRAINER_PIC_SIZE},
-};
-
-const struct SpriteFrameImage gTrainerBackPicTable_Leaf[] =
-{
-    {gTrainerBackPic_Leaf + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Leaf + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Leaf + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Leaf + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Leaf + TRAINER_PIC_SIZE * 4, TRAINER_PIC_SIZE},
-};
-
-const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireBrendan[] =
-{
-    {gTrainerBackPic_RubySapphireBrendan + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_RubySapphireBrendan + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_RubySapphireBrendan + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_RubySapphireBrendan + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
-};
-
-const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireMay[] =
-{
-    {gTrainerBackPic_RubySapphireMay + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_RubySapphireMay + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_RubySapphireMay + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_RubySapphireMay + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
-};
-
-const struct SpriteFrameImage gTrainerBackPicTable_Wally[] =
-{
-    {gTrainerBackPic_Wally + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Wally + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Wally + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Wally + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
-};
-
-const struct SpriteFrameImage gTrainerBackPicTable_Steven[] =
-{
-    {gTrainerBackPic_Steven + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Steven + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Steven + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Steven + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
-};
-
 const union AnimCmd sAnim_GeneralFrame0[] =
 {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_GeneralFrame3[] =
+const union AnimCmd sAnim_GeneralFrame3[] =
 {
     ANIMCMD_FRAME(3, 0),
     ANIMCMD_END,
@@ -285,12 +220,10 @@ const union AnimCmd *const gAnims_MonPic[MAX_MON_PIC_FRAMES] =
     sAnim_MonPic_1,
 };
 
-#include "data/trainer_graphics/front_pic_anims.h"
-#include "data/trainer_graphics/front_pic_tables.h"
-#include "data/trainer_graphics/back_pic_anims.h"
-#include "data/trainer_graphics/back_pic_tables.h"
+const union AnimCmd *const sAnims_Trainer[] ={
+    sAnim_GeneralFrame0,
+    sAnim_GeneralFrame0,
+};
 
 #include "data/trainer_parties.h"
-#include "data/text/trainer_class_names.h"
 #include "data/trainers.h"
-#include "data/text/move_names.h"

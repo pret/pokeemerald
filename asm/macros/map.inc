@@ -28,6 +28,10 @@
 	.2byte \x, \y
 	.byte \elevation
 	.byte \movement_type
+	.if \x_radius > 15
+		@ This warning is relevant for GetItemBallIdAndAmountFromTemplate
+		.error "movementRangeX has a bitfield of 4 bytes, so values over 15 will overflow. Use a custom script for item balls that should give the player more than 15 items."
+	.endif
 	.byte ((\y_radius << 4) | \x_radius)
 	.space 1  @ Padding
 	.2byte \trainer_type

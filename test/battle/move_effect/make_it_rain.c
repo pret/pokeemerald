@@ -3,7 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_MAKE_IT_RAIN].effect == EFFECT_MAKE_IT_RAIN);
+    ASSUME(MoveHasAdditionalEffect(MOVE_MAKE_IT_RAIN, MOVE_EFFECT_PAYDAY));
+    ASSUME(MoveHasAdditionalEffectSelf(MOVE_MAKE_IT_RAIN, MOVE_EFFECT_SP_ATK_MINUS_1));
 }
 
 SINGLE_BATTLE_TEST("Make It Rain lowers special attack by one stage")
@@ -11,6 +12,7 @@ SINGLE_BATTLE_TEST("Make It Rain lowers special attack by one stage")
     s16 damage[2];
 
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_MAKE_IT_RAIN].category == DAMAGE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Water Absorb heals 25% when hit by water type moves")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_BUBBLE].type == TYPE_WATER);
+        ASSUME(gMovesInfo[MOVE_BUBBLE].type == TYPE_WATER);
         PLAYER(SPECIES_POLIWAG) { Ability(ABILITY_WATER_ABSORB); HP(1); MaxHP(100); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("Water Absorb heals 25% when hit by water type moves")
 SINGLE_BATTLE_TEST("Water Absorb does not activate if protected")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_BUBBLE].type == TYPE_WATER);
+        ASSUME(gMovesInfo[MOVE_BUBBLE].type == TYPE_WATER);
         PLAYER(SPECIES_POLIWAG) { Ability(ABILITY_WATER_ABSORB); HP(1); MaxHP(100); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -32,8 +32,8 @@ SINGLE_BATTLE_TEST("Water Absorb does not activate if protected")
 SINGLE_BATTLE_TEST("Water Absorb activates on status moves")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_SOAK].type == TYPE_WATER);
-        ASSUME(gBattleMoves[MOVE_SOAK].split == SPLIT_STATUS);
+        ASSUME(gMovesInfo[MOVE_SOAK].type == TYPE_WATER);
+        ASSUME(gMovesInfo[MOVE_SOAK].category == DAMAGE_CATEGORY_STATUS);
         PLAYER(SPECIES_POLIWAG) { Ability(ABILITY_WATER_ABSORB); HP(1); MaxHP(100); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -48,8 +48,8 @@ SINGLE_BATTLE_TEST("Water Absorb activates on status moves")
 SINGLE_BATTLE_TEST("Water Absorb is only triggered once on multi strike moves")
 {
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_WATER_SHURIKEN].type == TYPE_WATER);
-        ASSUME(gBattleMoves[MOVE_WATER_SHURIKEN].effect == EFFECT_MULTI_HIT);
+        ASSUME(gMovesInfo[MOVE_WATER_SHURIKEN].type == TYPE_WATER);
+        ASSUME(gMovesInfo[MOVE_WATER_SHURIKEN].effect == EFFECT_MULTI_HIT);
         PLAYER(SPECIES_POLIWAG) { Ability(ABILITY_WATER_ABSORB); HP(1); MaxHP(100); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -67,7 +67,7 @@ SINGLE_BATTLE_TEST("Water Absorb prevents Absorb Bulb and Luminous Moss from act
     PARAMETRIZE { item = ITEM_ABSORB_BULB; }
     PARAMETRIZE { item = ITEM_LUMINOUS_MOSS; }
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_BUBBLE].type == TYPE_WATER);
+        ASSUME(gMovesInfo[MOVE_BUBBLE].type == TYPE_WATER);
         PLAYER(SPECIES_POLIWAG) { Ability(ABILITY_WATER_ABSORB); HP(1); MaxHP(100); Item(item); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

@@ -542,6 +542,14 @@ const union AffineAnimCmd gGrowAndShrinkAffineAnimCmds[] =
     AFFINEANIMCMD_END,
 };
 
+const union AffineAnimCmd gShrinkAndGrowAffineAnimCmds[] =
+{
+    AFFINEANIMCMD_FRAME(4, 5, 0, 12),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 24),
+    AFFINEANIMCMD_FRAME(-4, -5, 0, 6),
+    AFFINEANIMCMD_END,
+};
+
 const union AnimCmd gBreathPuffAnimCmds1[] =
 {
     ANIMCMD_FRAME(0, 4, .hFlip = TRUE),
@@ -2282,6 +2290,16 @@ static void AnimTask_GrowAndShrink_Step(u8 taskId)
     struct Task *task = &gTasks[taskId];
     if (!RunAffineAnimFromTaskData(task))
         DestroyAnimVisualTask(taskId);
+}
+
+// Shrinks, pauses, then grows the attacking mon.
+// No args.
+void AnimTask_ShrinkAndGrow(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
+    PrepareAffineAnimInTaskData(task, spriteId, gShrinkAndGrowAffineAnimCmds);
+    task->func = AnimTask_GrowAndShrink_Step;
 }
 
 // Animates a little puff of the mon's breath.

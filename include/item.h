@@ -13,7 +13,9 @@ struct Item
     u16 secondaryId;
     ItemUseFunc fieldUseFunc;
     const u8 *description;
+    const u8 *effect;
     u8 name[ITEM_NAME_LENGTH];
+    u8 pluralName[ITEM_NAME_PLURAL_LENGTH];
     u8 holdEffect;
     u8 holdEffectParam;
     u8 importance;
@@ -29,7 +31,7 @@ struct BagPocket
     u8 capacity;
 };
 
-extern const struct Item gItems[];
+extern const struct Item gItemsInfo[];
 extern struct BagPocket gBagPockets[];
 
 void ApplyNewEncryptionKeyToBagItems(u32 newKey);
@@ -37,11 +39,11 @@ void ApplyNewEncryptionKeyToBagItems_(u32 newKey);
 void SetBagItemsPointers(void);
 void CopyItemName(u16 itemId, u8 *dst);
 void CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity);
-void GetBerryCountString(u8 *dst, const u8 *berryName, u32 quantity);
 bool8 IsBagPocketNonEmpty(u8 pocket);
 bool8 CheckBagHasItem(u16 itemId, u16 count);
 bool8 HasAtLeastOneBerry(void);
 bool8 CheckBagHasSpace(u16 itemId, u16 count);
+u32 GetFreeSpaceForItemInBag(u16 itemId);
 bool8 AddBagItem(u16 itemId, u16 count);
 bool8 RemoveBagItem(u16 itemId, u16 count);
 u8 GetPocketByItemId(u16 itemId);
@@ -62,7 +64,8 @@ u16 CountTotalItemQuantityInBag(u16 itemId);
 bool8 AddPyramidBagItem(u16 itemId, u16 count);
 bool8 RemovePyramidBagItem(u16 itemId, u16 count);
 const u8 *ItemId_GetName(u16 itemId);
-u16 ItemId_GetPrice(u16 itemId);
+u32 ItemId_GetPrice(u16 itemId);
+const u8 *ItemId_GetEffect(u32 itemId);
 u32 ItemId_GetHoldEffect(u32 itemId);
 u32 ItemId_GetHoldEffectParam(u32 itemId);
 const u8 *ItemId_GetDescription(u16 itemId);

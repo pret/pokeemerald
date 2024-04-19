@@ -26,11 +26,13 @@ struct SpriteFrameImage
 {
     const void *data;
     u16 size;
+    bool8 relativeFrames;
 };
 
 #define obj_frame_tiles(ptr) {.data = (u8 *)ptr, .size = sizeof ptr}
 
 #define overworld_frame(ptr, width, height, frame) {.data = (u8 *)ptr + (width * height * frame * 64)/2, .size = (width * height * 64)/2}
+#define overworld_ascending_frames(ptr, width, height) {.data = (u8 *)ptr, .size = (width * height * 64)/2, .relativeFrames=TRUE}
 
 struct SpritePalette
 {
@@ -265,12 +267,12 @@ extern bool8 gAffineAnimsDisabled;
 void ResetSpriteData(void);
 void AnimateSprites(void);
 void BuildOamBuffer(void);
-u8 CreateSprite(const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
-u8 CreateSpriteAtEnd(const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
-u8 CreateInvisibleSprite(void (*callback)(struct Sprite *));
-u8 CreateSpriteAndAnimate(const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
+u32 CreateSprite(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority);
+u32 CreateSpriteAtEnd(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority);
+u32 CreateInvisibleSprite(void (*callback)(struct Sprite *));
+u32 CreateSpriteAndAnimate(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority);
 void DestroySprite(struct Sprite *sprite);
-void ResetOamRange(u8 start, u8 end);
+void ResetOamRange(u32 start, u32 end);
 void LoadOam(void);
 void SetOamMatrix(u8 matrixNum, u16 a, u16 b, u16 c, u16 d);
 void CalcCenterToCornerVec(struct Sprite *sprite, u8 shape, u8 size, u8 affineMode);

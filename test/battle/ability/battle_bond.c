@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gBattleMoves[MOVE_WATER_GUN].power != 0);
+    ASSUME(gMovesInfo[MOVE_WATER_GUN].power != 0);
 }
 
 SINGLE_BATTLE_TEST("Battle Bond does not transform species other than Greninja")

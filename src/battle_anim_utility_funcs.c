@@ -40,11 +40,6 @@ static void AnimTask_WaitAndRestoreVisibility(u8);
 
 static const u16 sCurseLinesPalette[] = { RGB_WHITE };
 
-// These belong in battle_intro.c, but putting them there causes 2 bytes of alignment padding
-// between the two .rodata segments. Perhaps battle_intro.c actually belongs in this file, too.
-const u8 gBattleAnimBgCntSet[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT};
-const u8 gBattleAnimBgCntGet[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT};
-
 void AnimTask_BlendBattleAnimPal(u8 taskId)
 {
     u32 selectedPalettes = UnpackSelectedBattlePalettes(gBattleAnimArgs[0]);

@@ -29,7 +29,7 @@
  *
  *   ASSUMPTIONS
  *   {
- *       ASSUME(gBattleMoves[MOVE_STUN_SPORE].effect == EFFECT_PARALYZE);
+ *       ASSUME(gMovesInfo[MOVE_STUN_SPORE].effect == EFFECT_PARALYZE);
  *   }
  *
  *   SINGLE_BATTLE_TEST("Stun Spore inflicts paralysis")
@@ -87,7 +87,7 @@
  *   SINGLE_BATTLE_TEST("Stun Spore does not affect Grass-types")
  *   {
  *       GIVEN {
- *           ASSUME(gBattleMoves[MOVE_STUN_SPORE].powderMove);
+ *           ASSUME(gMovesInfo[MOVE_STUN_SPORE].powderMove);
  *           ASSUME(gSpeciesInfo[SPECIES_ODDISH].types[0] == TYPE_GRASS);
  *           PLAYER(SPECIES_ODDISH); // 1.
  *           OPPONENT(SPECIES_ODDISH); // 2.
@@ -129,7 +129,7 @@
  *        PARAMETRIZE { raiseAttack = FALSE; }
  *        PARAMETRIZE { raiseAttack = TRUE; }
  *        GIVEN {
- *            ASSUME(gBattleMoves[MOVE_TACKLE].split == SPLIT_PHYSICAL);
+ *            ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
  *            PLAYER(SPECIES_WOBBUFFET);
  *            OPPONENT(SPECIES_WOBBUFFET);
  *        } WHEN {
@@ -176,7 +176,7 @@
  * Pokémon we can observe the damage of a physical attack with and
  * without the burn. To document that this test assumes the attack is
  * physical we can use:
- *     ASSUME(gBattleMoves[MOVE_WHATEVER].split == SPLIT_PHYSICAL);
+ *     ASSUME(gMovesInfo[MOVE_WHATEVER].category == DAMAGE_CATEGORY_PHYSICAL);
  *
  * ASSUMPTIONS
  * Should be placed immediately after any #includes and contain any
@@ -186,7 +186,7 @@
  * move_effect_poison_hit.c should be:
  *     ASSUMPTIONS
  *     {
- *         ASSUME(gBattleMoves[MOVE_POISON_STING].effect == EFFECT_POISON_HIT);
+ *         ASSUME(gMovesInfo[MOVE_POISON_STING].effect == EFFECT_POISON_HIT);
  *     }
  *
  * SINGLE_BATTLE_TEST(name, results...) and DOUBLE_BATTLE_TEST(name, results...)
@@ -228,7 +228,7 @@
  *         PARAMETRIZE { hp = 99; }
  *         PARAMETRIZE { hp = 33; }
  *         GIVEN {
- *             ASSUME(gBattleMoves[MOVE_EMBER].type == TYPE_FIRE);
+ *             ASSUME(gMovesInfo[MOVE_EMBER].type == TYPE_FIRE);
  *             PLAYER(SPECIES_CHARMANDER) { Ability(ABILITY_BLAZE); MaxHP(99); HP(hp); }
  *             OPPONENT(SPECIES_WOBBUFFET);
  *         } WHEN {
@@ -265,7 +265,7 @@
  *
  * If the tag is not provided, runs the test 50 times and computes an
  * approximate pass ratio.
- *     PASSES_RANDOMLY(gBattleMoves[move].accuracy, 100);
+ *     PASSES_RANDOMLY(gMovesInfo[move].accuracy, 100);
  * Note that this mode of PASSES_RANDOMLY makes the tests run very
  * slowly and should be avoided where possible. If the mechanic you are
  * testing is missing its tag, you should add it.
@@ -279,6 +279,13 @@
  * Example:
  *     GIVEN {
  *         RNGSeed(0xC0DEIDEA);
+ *
+ * FLAG_SET(flagId)
+ * Sets the specified flag. Can currently only set one flag at a time.
+ * Cleared between perameters and at the end of the test.
+ * Example:
+ *     GIVEN {
+ *         FLAG_SET(FLAG_SYS_EXAMPLE_FLAG);
  *
  * PLAYER(species) and OPPONENT(species)
  * Adds the species to the player's or opponent's party respectively.
@@ -489,6 +496,7 @@
 #include "constants/battle_ai.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_move_effects.h"
+#include "constants/flags.h"
 #include "constants/hold_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -681,6 +689,7 @@ struct BattleTestData
     struct ExpectedAiScore expectedAiScores[MAX_BATTLERS_COUNT][MAX_TURNS][MAX_AI_SCORE_COMPARISION_PER_TURN]; // Max 4 comparisions per turn
     struct AILogLine aiLogLines[MAX_BATTLERS_COUNT][MAX_MON_MOVES][MAX_AI_LOG_LINES];
     u8 aiLogPrintedForMove[MAX_BATTLERS_COUNT]; // Marks ai score log as printed for move, so the same log isn't displayed multiple times.
+    u16 flagId;
 };
 
 struct BattleTestRunnerState
@@ -818,6 +827,8 @@ struct moveWithPP {
 #define AI_FLAGS(flags) AIFlags_(__LINE__, flags)
 #define AI_LOG AILogScores(__LINE__)
 
+#define FLAG_SET(flagId) SetFlagForTest(__LINE__, flagId)
+
 #define PLAYER(species) for (OpenPokemon(__LINE__, B_SIDE_PLAYER, species); gBattleTestRunnerState->data.currentMon; ClosePokemon(__LINE__))
 #define OPPONENT(species) for (OpenPokemon(__LINE__, B_SIDE_OPPONENT, species); gBattleTestRunnerState->data.currentMon; ClosePokemon(__LINE__))
 
@@ -838,11 +849,17 @@ struct moveWithPP {
 #define Friendship(friendship) Friendship_(__LINE__, friendship)
 #define Status1(status1) Status1_(__LINE__, status1)
 #define OTName(otName) do {static const u8 otName_[] = _(otName); OTName_(__LINE__, otName_);} while (0)
+#define DynamaxLevel(dynamaxLevel) DynamaxLevel_(__LINE__, dynamaxLevel)
+#define GigantamaxFactor(gigantamaxFactor) GigantamaxFactor_(__LINE__, gigantamaxFactor)
+#define TeraType(teraType) TeraType_(__LINE__, teraType)
+#define Shadow(isShadow) Shadow_(__LINE__, shadow)
 
+void SetFlagForTest(u32 sourceLine, u16 flagId);
+void ClearFlagAfterTest(void);
 void OpenPokemon(u32 sourceLine, u32 side, u32 species);
 void ClosePokemon(u32 sourceLine);
 
-void RNGSeed_(u32 sourceLine, u32 seed);
+void RNGSeed_(u32 sourceLine, rng_value_t seed);
 void AIFlags_(u32 sourceLine, u32 flags);
 void AILogScores(u32 sourceLine);
 void Gender_(u32 sourceLine, u32 gender);
@@ -862,6 +879,10 @@ void MovesWithPP_(u32 sourceLine, struct moveWithPP moveWithPP[MAX_MON_MOVES]);
 void Friendship_(u32 sourceLine, u32 friendship);
 void Status1_(u32 sourceLine, u32 status1);
 void OTName_(u32 sourceLine, const u8 *otName);
+void DynamaxLevel_(u32 sourceLine, u32 dynamaxLevel);
+void GigantamaxFactor_(u32 sourceLine, bool32 gigantamaxFactor);
+void TeraType_(u32 sourceLine, u32 teraType);
+void Shadow_(u32 sourceLine, bool32 isShadow);
 
 // Created for easy use of EXPECT_MOVES, so the user can provide 1, 2, 3 or 4 moves for AI which can pass the test.
 struct FourMoves
