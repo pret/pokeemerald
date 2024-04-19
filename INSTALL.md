@@ -122,10 +122,10 @@ devkitARM is now installed.
 
 To install Python on WSL1, simply run the following commands:
 
-    ```bash
-    sudo apt update && upgrade
-    sudo apt install python3
-    ```
+```bash
+sudo apt update && sudo apt upgrade
+sudo apt install python3
+```
 
 Python is now installed.
 
@@ -213,7 +213,7 @@ Note that in msys2, Copy is Ctrl+Insert and Paste is Shift+Insert.
 
 ### Installing Python on msys2
 
-To install Python on WSL1, simply run the following commands:
+To install Python on msys2, simply run the following commands:
 
     ```bash
     pacman -S mingw-w64-x86_64-python3
