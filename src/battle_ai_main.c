@@ -175,7 +175,7 @@ static u32 GetAiFlags(u16 trainerId)
         flags |= AI_FLAG_DOUBLE_BATTLE;
     }
 
-    // Automatically add smart choice flag to smart switching to greatly improve its behavior
+    // Automatically includes AI_FLAG_SMART_MON_CHOICES to improve smart switching
     if (flags & AI_FLAG_SMART_SWITCHING)
         flags |= AI_FLAG_SMART_MON_CHOICES;
 
