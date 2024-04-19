@@ -4583,29 +4583,24 @@ static void ShrinkGrowVibrate(struct Sprite *sprite)
     }
     else
     {
-        u8 posY_unsigned;
-        s8 posY_signed;
-        s32 posY;
-        s16 index = (u16)(sprite->data[2] % sprite->data[6] * 256) / sprite->data[6] % 256;
+        s8 sinY;
+        u16 y;
+        s16 index = ((u16)(sprite->data[2] % sprite->data[6] * 256) / sprite->data[6]) % 256;
         if (sprite->data[2] % 2 == 0)
         {
             sprite->data[4] = Sin(index, 32) + 256;
             sprite->data[5] = Sin(index, 32) + 256;
-            posY_unsigned = Sin(index, 32);
-            posY_signed = posY_unsigned;
+            sinY = Sin(index, 32);
         }
         else
         {
             sprite->data[4] = Sin(index, 8) + 256;
             sprite->data[5] = Sin(index, 8) + 256;
-            posY_unsigned = Sin(index, 8);
-            posY_signed = posY_unsigned;
+            sinY = Sin(index, 8);
         }
 
-        posY = posY_signed;
-        if (posY < 0)
-            posY += 7;
-        sprite->y2 = (u32)(posY) >> 3;
+        y = sinY / 8;
+        sprite->y2 = y;
         HandleSetAffineData(sprite, sprite->data[4], sprite->data[5], 0);
     }
 
