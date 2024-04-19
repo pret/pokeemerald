@@ -214,3 +214,23 @@ SINGLE_BATTLE_TEST("Primal reversion happens after the entry hazards damage")
         EXPECT_EQ(player->species, SPECIES_GROUDON_PRIMAL);
     }
 }
+
+SINGLE_BATTLE_TEST("Primal reversion happens immediately if it was brought in by U-turn")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_GROUDON) { Item(ITEM_RED_ORB); }
+        OPPONENT(SPECIES_WYNAUT) { HP(1); }
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(player, MOVE_U_TURN); SEND_OUT(player, 1); SEND_OUT(opponent, 1); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_U_TURN, player);
+        HP_BAR(opponent);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_PRIMAL_REVERSION, player);
+        MESSAGE("Groudon's Primal Reversion! It reverted to its primal form!");
+        MESSAGE("2 sent out Wynaut!");
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_GROUDON_PRIMAL);
+    }
+}

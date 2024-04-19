@@ -10157,9 +10157,9 @@ const u8 gMonFootprint_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mar
     const u32 gMonBackPic_Squawkabilly[] = INCBIN_U32("graphics/pokemon/squawkabilly/back.4bpp.lz");
     // const u8 gMonFootprint_Squawkabilly[] = INCBIN_U8("graphics/pokemon/squawkabilly/footprint.1bpp");
 
-    const u32 gMonPalette_SquawkabillyGreenPlumage[] = INCBIN_U32("graphics/pokemon/squawkabilly/green_plumage/normal.gbapal.lz");
-    const u32 gMonShinyPalette_SquawkabillyGreenPlumage[] = INCBIN_U32("graphics/pokemon/squawkabilly/green_plumage/shiny.gbapal.lz");
-    const u8 gMonIcon_SquawkabillyGreenPlumage[] = INCBIN_U8("graphics/pokemon/squawkabilly/green_plumage/icon.4bpp");
+    const u32 gMonPalette_SquawkabillyGreenPlumage[] = INCBIN_U32("graphics/pokemon/squawkabilly/normal.gbapal.lz");
+    const u32 gMonShinyPalette_SquawkabillyGreenPlumage[] = INCBIN_U32("graphics/pokemon/squawkabilly/shiny.gbapal.lz");
+    const u8 gMonIcon_SquawkabillyGreenPlumage[] = INCBIN_U8("graphics/pokemon/squawkabilly/icon.4bpp");
 
     const u32 gMonPalette_SquawkabillyBluePlumage[] = INCBIN_U32("graphics/pokemon/squawkabilly/blue_plumage/normal.gbapal.lz");
     const u32 gMonShinyPalette_SquawkabillyBluePlumage[] = INCBIN_U32("graphics/pokemon/squawkabilly/blue_plumage/shiny.gbapal.lz");
@@ -10553,11 +10553,11 @@ const u8 gMonFootprint_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mar
 #endif //P_FAMILY_DONDOZO
 
 #if P_FAMILY_TATSUGIRI
-    const u32 gMonFrontPic_TatsugiriCurly[] = INCBIN_U32("graphics/pokemon/tatsugiri/curly/front.4bpp.lz");
-    const u32 gMonPalette_TatsugiriCurly[] = INCBIN_U32("graphics/pokemon/tatsugiri/curly/normal.gbapal.lz");
-    const u32 gMonBackPic_TatsugiriCurly[] = INCBIN_U32("graphics/pokemon/tatsugiri/curly/back.4bpp.lz");
-    const u32 gMonShinyPalette_TatsugiriCurly[] = INCBIN_U32("graphics/pokemon/tatsugiri/curly/shiny.gbapal.lz");
-    const u8 gMonIcon_TatsugiriCurly[] = INCBIN_U8("graphics/pokemon/tatsugiri/curly/icon.4bpp");
+    const u32 gMonFrontPic_TatsugiriCurly[] = INCBIN_U32("graphics/pokemon/tatsugiri/front.4bpp.lz");
+    const u32 gMonPalette_TatsugiriCurly[] = INCBIN_U32("graphics/pokemon/tatsugiri/normal.gbapal.lz");
+    const u32 gMonBackPic_TatsugiriCurly[] = INCBIN_U32("graphics/pokemon/tatsugiri/back.4bpp.lz");
+    const u32 gMonShinyPalette_TatsugiriCurly[] = INCBIN_U32("graphics/pokemon/tatsugiri/shiny.gbapal.lz");
+    const u8 gMonIcon_TatsugiriCurly[] = INCBIN_U8("graphics/pokemon/tatsugiri/icon.4bpp");
     // const u8 gMonFootprint_Tatsugiri[] = INCBIN_U8("graphics/pokemon/tatsugiri/footprint.1bpp");
 
     const u32 gMonFrontPic_TatsugiriDroopy[] = INCBIN_U32("graphics/pokemon/tatsugiri/droopy/front.4bpp.lz");
@@ -10863,26 +10863,26 @@ const u8 gMonFootprint_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mar
     const u32 gMonFrontPic_OgerponTealMask[] = INCBIN_U32("graphics/pokemon/ogerpon/front.4bpp.lz");
     const u32 gMonPalette_OgerponTealMask[] = INCBIN_U32("graphics/pokemon/ogerpon/normal.gbapal.lz");
     const u32 gMonBackPic_OgerponTealMask[] = INCBIN_U32("graphics/pokemon/ogerpon/back.4bpp.lz");
-    // const u32 gMonShinyPalette_OgerponTealMask[] = INCBIN_U32("graphics/pokemon/ogerpon/shiny.gbapal.lz");
+    const u32 gMonShinyPalette_OgerponTealMask[] = INCBIN_U32("graphics/pokemon/ogerpon/shiny.gbapal.lz");
     const u8 gMonIcon_OgerponTealMask[] = INCBIN_U8("graphics/pokemon/ogerpon/icon.4bpp");
     // const u8 gMonFootprint_Ogerpon[] = INCBIN_U8("graphics/pokemon/ogerpon/footprint.1bpp");
 
     const u32 gMonFrontPic_OgerponWellspringMask[] = INCBIN_U32("graphics/pokemon/ogerpon/wellspring/front.4bpp.lz");
     const u32 gMonPalette_OgerponWellspringMask[] = INCBIN_U32("graphics/pokemon/ogerpon/wellspring/normal.gbapal.lz");
     const u32 gMonBackPic_OgerponWellspringMask[] = INCBIN_U32("graphics/pokemon/ogerpon/wellspring/back.4bpp.lz");
-    // const u32 gMonShinyPalette_OgerponWellspringMask[] = INCBIN_U32("graphics/pokemon/ogerpon/wellspring/shiny.gbapal.lz");
+    const u32 gMonShinyPalette_OgerponWellspringMask[] = INCBIN_U32("graphics/pokemon/ogerpon/wellspring/shiny.gbapal.lz");
     // const u8 gMonIcon_OgerponWellspringMask[] = INCBIN_U8("graphics/pokemon/ogerpon/wellspring/icon.4bpp");
 
     const u32 gMonFrontPic_OgerponHearthflameMask[] = INCBIN_U32("graphics/pokemon/ogerpon/hearthflame/front.4bpp.lz");
     const u32 gMonPalette_OgerponHearthflameMask[] = INCBIN_U32("graphics/pokemon/ogerpon/hearthflame/normal.gbapal.lz");
     const u32 gMonBackPic_OgerponHearthflameMask[] = INCBIN_U32("graphics/pokemon/ogerpon/hearthflame/back.4bpp.lz");
-    // const u32 gMonShinyPalette_OgerponHearthflameMask[] = INCBIN_U32("graphics/pokemon/ogerpon/hearthflame/shiny.gbapal.lz");
+    const u32 gMonShinyPalette_OgerponHearthflameMask[] = INCBIN_U32("graphics/pokemon/ogerpon/hearthflame/shiny.gbapal.lz");
     // const u8 gMonIcon_OgerponHearthflameMask[] = INCBIN_U8("graphics/pokemon/ogerpon/hearthflame/icon.4bpp");
 
     const u32 gMonFrontPic_OgerponCornerstoneMask[] = INCBIN_U32("graphics/pokemon/ogerpon/cornerstone/front.4bpp.lz");
     const u32 gMonPalette_OgerponCornerstoneMask[] = INCBIN_U32("graphics/pokemon/ogerpon/cornerstone/normal.gbapal.lz");
     const u32 gMonBackPic_OgerponCornerstoneMask[] = INCBIN_U32("graphics/pokemon/ogerpon/cornerstone/back.4bpp.lz");
-    // const u32 gMonShinyPalette_OgerponCornerstoneMask[] = INCBIN_U32("graphics/pokemon/ogerpon/cornerstone/shiny.gbapal.lz");
+    const u32 gMonShinyPalette_OgerponCornerstoneMask[] = INCBIN_U32("graphics/pokemon/ogerpon/cornerstone/shiny.gbapal.lz");
     // const u8 gMonIcon_OgerponCornerstoneMask[] = INCBIN_U8("graphics/pokemon/ogerpon/cornerstone/icon.4bpp");
 
     // const u32 gMonFrontPic_OgerponTealMaskTera[] = INCBIN_U32("graphics/pokemon/ogerpon/tera/front.4bpp.lz");
