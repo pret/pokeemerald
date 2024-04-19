@@ -423,6 +423,7 @@ MauvilleCity_EventScript_Wattson::
 	goto_if_set FLAG_GOT_BASEMENT_KEY_FROM_WATTSON, MauvilleCity_EventScript_BegunNewMauville
 	msgbox MauvilleCity_Text_WattsonNeedFavorTakeKey, MSGBOX_DEFAULT
 	giveitem ITEM_BASEMENT_KEY
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_GOT_BASEMENT_KEY_FROM_WATTSON
 	msgbox MauvilleCity_Text_WattsonWontBeChallenge, MSGBOX_DEFAULT
 	release

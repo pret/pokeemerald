@@ -448,6 +448,7 @@ MtChimney_EventScript_MeteoriteMachine::
 	goto_if_eq VAR_RESULT, NO, MtChimney_EventScript_LeaveMeteoriteAlone
 	msgbox MtChimney_Text_PlayerRemovedMeteorite, MSGBOX_DEFAULT
 	giveitem ITEM_METEORITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_METEORITE
 	releaseall
 	end
