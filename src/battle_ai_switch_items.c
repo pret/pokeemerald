@@ -80,7 +80,7 @@ static bool32 HasBadOdds(u32 battler, bool32 emitResult)
     if (!(AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_SMART_SWITCHING))
         return FALSE;
 
-    // Won't bother configuring this for double battles
+    // Double Battles aren't included in AI_FLAG_SMART_MON_CHOICE. Defaults to regular switch in logic
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         return FALSE;
 
@@ -1535,7 +1535,7 @@ static u32 GetSwitchinHitsToKO(s32 damageTaken, u32 battler)
     s32 currentHP = startingHP;
 
     // No damage being dealt
-    if (damageTaken + statusDamage + recurringDamage < recurringHealing)
+    if ((damageTaken + statusDamage + recurringDamage < recurringHealing) || damageTaken + statusDamage + recurringDamage == 0)
         return startingHP;
 
     // Mon fainted to hazards
@@ -1943,7 +1943,7 @@ u8 GetMostSuitableMonToSwitchInto(u32 battler, bool32 switchAfterMonKOd)
 
     // Split ideal mon decision between after previous mon KO'd (prioritize offensive options) and after switching active mon out (prioritize defensive options), and expand the scope of both.
     // Only use better mon selection if AI_FLAG_SMART_MON_CHOICES is set for the trainer.
-    if (AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_SMART_MON_CHOICES)
+    if (AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_SMART_MON_CHOICES && !(gBattleTypeFlags & BATTLE_TYPE_DOUBLE)) // Double Battles aren't included in AI_FLAG_SMART_MON_CHOICE. Defaults to regular switch in logic
     {
         bestMonId = GetBestMonIntegrated(party, firstId, lastId, battler, opposingBattler, battlerIn1, battlerIn2, switchAfterMonKOd);
         return bestMonId;
