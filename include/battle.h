@@ -787,6 +787,7 @@ struct BattleStruct
     u8 trainerSlideDynamaxMsgDone:1;
     u8 pledgeMove:1;
     u8 isSkyBattle:1;
+    u8 poisonPuppeteerConfusion:1;
     u32 aiDelayTimer; // Counts number of frames AI takes to choose an action.
     u32 aiDelayFrames; // Number of frames it took to choose an action.
     u8 timesGotHit[NUM_BATTLE_SIDES][PARTY_SIZE];
