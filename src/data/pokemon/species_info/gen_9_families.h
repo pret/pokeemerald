@@ -3580,7 +3580,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .palette = gMonPalette_Revavroom,
         .shinyPalette = gMonShinyPalette_Revavroom,
         .iconSprite = gMonIcon_Revavroom,
-        .iconPalIndex = 2,
+        .iconPalIndex = 0,
         //FOOTPRINT(Revavroom)
         .levelUpLearnset = sRevavroomLevelUpLearnset,
         .teachableLearnset = sRevavroomTeachableLearnset,
@@ -4942,7 +4942,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .palette = gMonPalette_IronMoth,
         .shinyPalette = gMonShinyPalette_IronMoth,
         .iconSprite = gMonIcon_IronMoth,
-        .iconPalIndex = 0,
+        .iconPalIndex = 3,
         //FOOTPRINT(IronMoth)
         .isParadoxForm = TRUE,
         .levelUpLearnset = sIronMothLevelUpLearnset,
