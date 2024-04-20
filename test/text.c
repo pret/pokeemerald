@@ -2,6 +2,7 @@
 #include "test/test.h"
 #include "item.h"
 #include "text.h"
+#include "constants/abilities.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 
@@ -497,4 +498,28 @@ TEST("Species names fit on PokeNav Ribbon List Screen")
         }
     }
     EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
+}
+
+TEST("Ability names fit on Pokemon Summary Screen")
+{
+    u32 i;
+    const u32 fontId = FONT_NORMAL, widthPx = 144;
+    u32 ability = ABILITY_NONE;
+    for (i = 1; i < ABILITIES_COUNT; i++)
+    {
+        PARAMETRIZE_LABEL("%S", gAbilitiesInfo[i].name) { ability = i; }
+    }
+    EXPECT_LE(GetStringWidth(fontId, gAbilitiesInfo[ability].name, 0), widthPx);
+}
+
+TEST("Ability names fit on Ability Pop-Up")
+{
+    u32 i;
+    const u32 fontId = FONT_SMALL_NARROWER, widthPx = 76;
+    u32 ability = ABILITY_NONE;
+    for (i = 1; i < ABILITIES_COUNT; i++)
+    {
+        PARAMETRIZE_LABEL("%S", gAbilitiesInfo[i].name) { ability = i; }
+    }
+    EXPECT_LE(GetStringWidth(fontId, gAbilitiesInfo[ability].name, 0), widthPx);
 }
