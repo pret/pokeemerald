@@ -122,10 +122,10 @@ devkitARM is now installed.
 
 To install Python on WSL1, simply run the following commands:
 
-    ```bash
-    sudo apt update && upgrade
-    sudo apt install python3
-    ```
+```bash
+sudo apt update && sudo apt upgrade
+sudo apt install python3
+```
 
 Python is now installed.
 
@@ -213,7 +213,7 @@ Note that in msys2, Copy is Ctrl+Insert and Paste is Shift+Insert.
 
 ### Installing Python on msys2
 
-To install Python on WSL1, simply run the following commands:
+To install Python on msys2, simply run the following commands:
 
     ```bash
     pacman -S mingw-w64-x86_64-python3
@@ -310,6 +310,7 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
     ```
 
 2.  - If libpng is **not installed**, then go to [Installing libpng (macOS)](#installing-libpng-macos).
+    - If pkg-config is **not installed**, then go to [Installing pkg-config (macos)](#installing-pkg-config-macos).
     - If devkitARM is **not installed**, then go to [Installing devkitARM (macOS)](#installing-devkitarm-macos).
     - Otherwise, **open the Terminal** and go to [Choosing where to store pokeemerald Expansion (macOS)](#choosing-where-to-store-pokeemerald-expansion-macos)
 
@@ -328,6 +329,26 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
     brew install libpng
     ```
     libpng is now installed.
+
+    Continue to [Installing pkg-config (macOS)](#installing-pkg-config-macos) if **pkg-config is not installed**. Otherwise, continue to [Installing devkitARM (macOS)](#installing-devkitarm-macos) if **devkitARM is not installed**.
+    
+    If both pkg-config and devkitARM are already installed, go to [Choosing where to store pokeemerald Expansion (macOS)](#choosing-where-to-store-pokeemerald-expansion-macos).
+
+### Installing pkg-config (macOS)
+<details>
+    <summary><i>Note for advanced users...</i></summary>
+
+>   This guide installs pkg-config via Homebrew as it is the easiest method, however advanced users can install pkg-config through other means if they so desire.
+</details>
+
+1. Open the Terminal.
+2. If Homebrew is not installed, then install [Homebrew](https://brew.sh/) by following the instructions on the website.
+3. Run the following command to install libpng.
+
+    ```bash
+    brew install pkg-config
+    ```
+    pkg-config is now installed.
 
     Continue to [Installing devkitARM (macOS)](#installing-devkitarm-macos) if **devkitARM is not installed**, otherwise, go to [Choosing where to store pokeemerald Expansion (macOS)](#choosing-where-to-store-pokeemerald-expansion-macos).
 
@@ -348,12 +369,25 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
 
     ```bash
     export DEVKITPRO=/opt/devkitpro
+    echo "export DEVKITPRO=$DEVKITPRO" >> ~/.zshrc
+    export DEVKITARM=$DEVKITPRO/devkitARM
+    echo "export DEVKITARM=$DEVKITARM" >> ~/.zshrc
+
+    echo "if [ -f ~/.zshrc ]; then . ~/.zshrc; fi" >> ~/.zprofile
+    ```
+    *Note: Starting with macOS 10.15, the default Unix shell is now zsh. If you migrated from an older version of macOS, you might still be using bash. You can check my running `echo $0` in the terminal.*
+    <details>
+        <summary><i>If your terminal is using bash instead of zsh...</i></summary>
+
+    ```bash
+    export DEVKITPRO=/opt/devkitpro
     echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
     export DEVKITARM=$DEVKITPRO/devkitARM
     echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
 
     echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile
     ```
+    </details>
 
 ### Installing Python (macOS)
 1. Download the latest Python package from [here](https://www.python.org/downloads/).

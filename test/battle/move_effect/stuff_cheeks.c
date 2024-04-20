@@ -104,3 +104,28 @@ SINGLE_BATTLE_TEST("Stuff Cheeks fails if the user's berry is removed before the
     }
 }
 
+SINGLE_BATTLE_TEST("Belch cannot be used if the user has not eaten a berry")
+{
+    u16 item = 0;
+    PARAMETRIZE { item = ITEM_NONE; }
+    PARAMETRIZE { item = ITEM_ORAN_BERRY; }
+    GIVEN {
+        PLAYER(SPECIES_SKWOVET) { Item(item); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        if (item == ITEM_NONE)
+            TURN { MOVE(player, MOVE_BELCH, allowed: FALSE); MOVE(player, MOVE_CELEBRATE); }
+        else {
+            TURN { MOVE(player, MOVE_STUFF_CHEEKS); }
+            TURN { MOVE(player, MOVE_BELCH); }
+        }
+    } SCENE {
+        if (item == ITEM_NONE) {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, player);
+        }
+        else {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_STUFF_CHEEKS, player);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_BELCH, player);
+        }
+    }
+}

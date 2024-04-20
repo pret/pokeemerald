@@ -389,9 +389,9 @@ struct SpeciesInfo /*0x8C*/
  /* 0x38 */ u16 trainerScale;
  /* 0x3A */ u16 trainerOffset;
  /* 0x3C */ const u8 *description;
- /* 0x40 */ u8 bodyColor : 7;
+ /* 0x40 */ u8 bodyColor:7;
             // Graphical Data
-            u8 noFlip : 1;
+            u8 noFlip:1;
  /* 0x41 */ u8 frontAnimDelay;
  /* 0x42 */ u8 frontAnimId;
  /* 0x43 */ u8 backAnimId;
@@ -438,7 +438,7 @@ struct SpeciesInfo /*0x8C*/
             u32 allPerfectIVs:1;
             u32 dexForceRequired:1; // This species will be taken into account for Pokédex ratings even if they have the "isMythical" flag set.
             u32 tmIlliterate:1; // This species will be unable to learn the universal moves.
-            u32 padding4:16;
+            u32 padding4:15;
             // Move Data
  /* 0x80 */ const struct LevelUpMove *levelUpLearnset;
  /* 0x84 */ const u16 *teachableLearnset;

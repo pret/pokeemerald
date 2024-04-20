@@ -42,10 +42,10 @@
 #define AI_FLAG_HELP_PARTNER          (1 << 12)  // AI can try to help partner. If not set, will tend not to target partner
 #define AI_FLAG_PREFER_STATUS_MOVES   (1 << 13)  // AI gets a score bonus for status moves. Should be combined with AI_FLAG_CHECK_BAD_MOVE to prevent using only status moves
 #define AI_FLAG_STALL                 (1 << 14)  // AI stalls battle and prefers secondary damage/trapping/etc. TODO not finished
-#define AI_FLAG_SMART_SWITCHING       (1 << 15)  // AI includes a lot more switching checks
+#define AI_FLAG_SMART_SWITCHING       (1 << 15)  // AI includes a lot more switching checks. Automatically includes AI_FLAG_SMART_MON_CHOICES.
 #define AI_FLAG_ACE_POKEMON           (1 << 16)  // AI has an Ace Pokemon. The last Pokemon in the party will not be used until it's the last one remaining.
 #define AI_FLAG_OMNISCIENT            (1 << 17)  // AI has full knowledge of player moves, abilities, hold items
-#define AI_FLAG_SMART_MON_CHOICES     (1 << 18)  // AI will make smarter decisions when choosing which mon to send out mid-battle and after a KO, which are separate decisions. Pairs very well with AI_FLAG_SMART_SWITCHING.
+#define AI_FLAG_SMART_MON_CHOICES     (1 << 18)  // AI will make smarter decisions when choosing which mon to send out mid-battle and after a KO, which are separate decisions. Automatically included by AI_FLAG_SMART_SWITCHING.
 
 #define AI_FLAG_COUNT                       19
 

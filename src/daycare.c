@@ -713,10 +713,10 @@ static void InheritPokeball(struct Pokemon *egg, struct BoxPokemon *father, stru
 
 static void InheritAbility(struct Pokemon *egg, struct BoxPokemon *father, struct BoxPokemon *mother)
 {
-    u8 fatherAbility = GetBoxMonData(father, MON_DATA_ABILITY_NUM);
-    u8 motherAbility = GetBoxMonData(mother, MON_DATA_ABILITY_NUM);
-    u8 motherSpecies = GetBoxMonData(mother, MON_DATA_SPECIES);
-    u8 inheritAbility = motherAbility;
+    u16 fatherAbility = GetBoxMonData(father, MON_DATA_ABILITY_NUM);
+    u16 motherAbility = GetBoxMonData(mother, MON_DATA_ABILITY_NUM);
+    u16 motherSpecies = GetBoxMonData(mother, MON_DATA_SPECIES);
+    u16 inheritAbility = motherAbility;
 
     if (motherSpecies == SPECIES_DITTO)
     {

@@ -26,6 +26,9 @@
 #define STR(...) STR_(__VA_ARGS__)
 #define STR_(...) #__VA_ARGS__
 
+/* You'll never guess what this one does */
+#define APPEND_SEMICOLON(a) a;
+
 /* Converts a string to a compound literal, essentially making it a pointer to const u8 */
 #define COMPOUND_STRING(str) (const u8[]) _(str)
 
