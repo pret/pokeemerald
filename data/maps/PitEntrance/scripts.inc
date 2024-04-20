@@ -33,7 +33,6 @@ PitEntrance_Warp::
 	setflag FLAG_EXP_SHARE
 	callnative BufferMapFloorString
 	callnative SetRandomTrainers
-	@msgbox PitEntrance_Sign_Luck, MSGBOX_DEFAULT
 	additem ITEM_POTION, 5
 	additem ITEM_SUPER_POTION, 3
 	additem ITEM_HYPER_POTION, 1
@@ -56,14 +55,16 @@ PitEntrance_Warp::
 PitEntrance_Sign_Luck:
 	.string "Good Luck$"
 
-
 PitEntrance_StartBag::
 	lockall
+	setflag FLAG_CASE_STARTER_MODE
 	callnative InitTrainerIdAndNameData
 	callnative StartNewPokeballCaseUI
    	waitstate
+	clearflag FLAG_CASE_STARTER_MODE
 	removeobject 1
 	setflag FLAG_STARTER_CHOICE_BAG
+	msgbox PitEntrance_Sign_Luck, MSGBOX_DEFAULT
 	releaseall
 	end
 

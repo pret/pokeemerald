@@ -172,18 +172,13 @@ PitArena_NewMon::
 	callnative PlayerPartyCountToResultVar
 	goto_if_eq VAR_RESULT, 6, PitArena_PartyFullRemoveOne
 PitArenaNewMon2::
-	givemon VAR_PIT_FLOOR, 0
-	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, PitArena_EventScript_ReceiveMonParty
-	goto Common_EventScript_NoMoreRoomForPokemon
+	callnative StartNewPokeballCaseUI
+   	waitstate
+	goto PitArena_EventScript_ReceiveMonParty
 	release
 	end
 
 PitArena_EventScript_ReceiveMonParty::
-	bufferspeciesname STR_VAR_2, VAR_0x800A
-	playfanfare MUS_OBTAIN_ITEM
-	message PitArena_Text_ReceivedMon
-	waitmessage
-	waitfanfare
 	removeobject 8
 	releaseall
 	end

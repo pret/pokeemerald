@@ -311,12 +311,12 @@ u32 ScriptGiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 natu
     }
 
     // create a Pokémon with basic data
-    if ((gender == MON_MALE && genderRatio != MON_FEMALE && genderRatio != MON_GENDERLESS)
-     || (gender == MON_FEMALE && genderRatio != MON_MALE && genderRatio != MON_GENDERLESS)
-     || (gender == MON_GENDERLESS && genderRatio == MON_GENDERLESS))
-        CreateMonWithGenderNatureLetter(&mon, species, level, 32, gender, nature, 0);
-    else
-        CreateMonWithNature(&mon, species, level, 32, nature);
+    // if ((gender == MON_MALE && genderRatio != MON_FEMALE && genderRatio != MON_GENDERLESS)
+    //  || (gender == MON_FEMALE && genderRatio != MON_MALE && genderRatio != MON_GENDERLESS)
+    //  || (gender == MON_GENDERLESS && genderRatio == MON_GENDERLESS))
+    //     CreateMonWithGenderNatureLetter(&mon, species, level, 32, gender, nature, 0);
+    // else
+    CreateMonWithNature(&mon, species, level, 32, nature);
 
     // shininess
     if (P_FLAG_FORCE_SHINY != 0 && FlagGet(P_FLAG_FORCE_SHINY))
@@ -372,9 +372,11 @@ u32 ScriptGiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 natu
     // ball
     if (ball >= POKEBALL_COUNT)
         ball = ITEM_POKE_BALL;
+    ball = (Random() % (LAST_BALL - 1)) + 1;
     SetMonData(&mon, MON_DATA_POKEBALL, &ball);
 
     // held item
+    item = RandomItemId(0xFF);
     SetMonData(&mon, MON_DATA_HELD_ITEM, &item);
 
     // In case a mon with a form changing item is given. Eg: SPECIES_ARCEUS_NORMAL with ITEM_SPLASH_PLATE will transform into SPECIES_ARCEUS_WATER upon gifted.

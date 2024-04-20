@@ -62,6 +62,7 @@ struct MenuResources
     u16 selector_x;
     u16 selector_y;
     u16 movingSelector;
+    u16 monState;
 
 };
 
@@ -75,6 +76,9 @@ enum TextIds
     CHOOSE_MON,
     CONFIRM_SELECTION,
     RECIEVED_MON,
+    CHOOSE_FIRST_MON,
+    CHOOSE_SECOND_MON,
+    CHOOSE_THIRD_MON,
 };
 
 enum Colors
@@ -132,23 +136,33 @@ struct MonChoiceData{ // This is the format used to define a mon, everything lef
 //
 static const struct MonChoiceData sStarterChoices[9] = 
 {
-    [BALL_TOP_FIRST]        = {SPECIES_MUDKIP, 5, ITEM_POTION, BALL_NET, NATURE_JOLLY, 1, MON_MALE, {255, 255, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {MOVE_FIRE_BLAST, MOVE_SHEER_COLD, MOVE_WATER_GUN, MOVE_THUNDER}, 0, 0, 0},
-    [BALL_TOP_SECOND]       = {SPECIES_TREECKO, 5},
-    [BALL_MIDDLE_FIRST]     = {SPECIES_TORCHIC, 5},
+    [BALL_TOP_FIRST]        = {SPECIES_MUDKIP, 5, ITEM_POTION, BALL_NET, NUM_NATURES, 3, 0, {0, 0, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {0, 0, 0, 0}, 0, NUMBER_OF_MON_TYPES, 0},
+    [BALL_TOP_SECOND]       = {SPECIES_TREECKO, 5, ITEM_POTION, BALL_NET, NUM_NATURES, 3, 0, {0, 0, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {0, 0, 0, 0}, 0, NUMBER_OF_MON_TYPES, 0},
+    [BALL_MIDDLE_FIRST]     = {SPECIES_TORCHIC, 5, ITEM_POTION, BALL_NET, NUM_NATURES, 3, 0, {0, 0, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {0, 0, 0, 0}, 0, NUMBER_OF_MON_TYPES, 0},
 
-    [BALL_TOP_THIRD]        = {SPECIES_CHIKORITA, 5},
-    [BALL_TOP_FOURTH]       = {SPECIES_NONE, 5},
-    [BALL_MIDDLE_THIRD]     = {SPECIES_CYNDAQUIL, 5},
+    [BALL_TOP_THIRD]        = {SPECIES_CYNDAQUIL, 5, ITEM_POTION, BALL_NET, NUM_NATURES, 3, 0, {0, 0, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {0, 0, 0, 0}, 0, NUMBER_OF_MON_TYPES, 0},
+    [BALL_TOP_FOURTH]       = {SPECIES_TOTODILE, 5, ITEM_POTION, BALL_NET, NUM_NATURES, 3, 0, {0, 0, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {0, 0, 0, 0}, 0, NUMBER_OF_MON_TYPES, 0},
+    [BALL_MIDDLE_THIRD]     = {SPECIES_CHIKORITA, 5, ITEM_POTION, BALL_NET, NUM_NATURES, 3, 0, {0, 0, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {0, 0, 0, 0}, 0, NUMBER_OF_MON_TYPES, 0},
 
-    [BALL_MIDDLE_SECOND]    = {SPECIES_BULBASAUR, 5},
-    [BALL_BOTTOM_FIRST]     = {SPECIES_CHARMANDER, 5},
-    [BALL_BOTTOM_SECOND]    = {SPECIES_NONE, 5},
+    [BALL_MIDDLE_SECOND]    = {SPECIES_CHARMANDER, 5, ITEM_POTION, BALL_NET, NUM_NATURES, 3, 0, {0, 0, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {0, 0, 0, 0},  0, NUMBER_OF_MON_TYPES,0},
+    [BALL_BOTTOM_FIRST]     = {SPECIES_SQUIRTLE, 5, ITEM_POTION, BALL_NET, NUM_NATURES, 3, 0, {0, 0, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {0, 0, 0, 0},     0,NUMBER_OF_MON_TYPES, 0},
+    [BALL_BOTTOM_SECOND]    = {SPECIES_BULBASAUR, 5, ITEM_POTION, BALL_NET, NUM_NATURES, 3, 0, {0, 0, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {0, 0, 0, 0},   0, NUMBER_OF_MON_TYPES,0},
 };
+
+static u32 ReturnRandomSpeciesByPokeballIndex(u32 index)
+{   
+    u16 species = sStarterChoices[index].species;
+
+    species = GetSpeciesRandomSeededActuallySeeded(species * GetSpeciesRandomSeededActuallySeeded(VarGet(VAR_PIT_FLOOR) + 1));
+
+    return species;
+}
 
 //==========EWRAM==========//
 static EWRAM_DATA struct MenuResources *sBirchCaseDataPtr = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
+static EWRAM_DATA u8 sMonChosenAlready[9] = {0};
 
 //==========STATIC=DEFINES==========//
 static void BirchCaseRunSetup(void);
@@ -336,7 +350,7 @@ static void CreateHandSprite()
 
     for(i=0; i<9; i++)
     {
-        if(sStarterChoices[i].species == SPECIES_NONE) // Choose Non Empty Slot To Start In
+        if(sStarterChoices[i].species == SPECIES_NONE || sMonChosenAlready[i]) // Choose Non Empty Slot To Start In
             continue;
     
         if(sBirchCaseDataPtr->handPosition <= 3)
@@ -365,7 +379,7 @@ static void CreateHandSprite()
     gSprites[sBirchCaseDataPtr->handSpriteId].callback = CursorCallback;
     StartSpriteAnim(&gSprites[sBirchCaseDataPtr->handSpriteId], 2);
     StartSpriteAnim(&gSprites[sBirchCaseDataPtr->pokeballSpriteIds[sBirchCaseDataPtr->handPosition]], 1);
-    SampleUi_DrawMonIcon(sStarterChoices[sBirchCaseDataPtr->handPosition].species);
+    SampleUi_DrawMonIcon(ReturnRandomSpeciesByPokeballIndex(sBirchCaseDataPtr->handPosition));
     
     return;
 }
@@ -390,7 +404,7 @@ static void CreatePokeballSprites()
     for(i=0; i<9; i++)
     {
         u16 x, y;
-        if(sStarterChoices[i].species == SPECIES_NONE)
+        if(sStarterChoices[i].species == SPECIES_NONE || sMonChosenAlready[i])
             continue;
 
         if(i <= 3)
@@ -455,7 +469,10 @@ static void ChangePositionUpdateSpriteAnims(u16 oldPosition, u8 taskId) // turn 
     StartSpriteAnim(&gSprites[sBirchCaseDataPtr->pokeballSpriteIds[oldPosition]], 0);
     StartSpriteAnim(&gSprites[sBirchCaseDataPtr->pokeballSpriteIds[sBirchCaseDataPtr->handPosition]], 1);
     ReloadNewPokemon(taskId);
-    PrintTextToBottomBar(CHOOSE_MON);
+    if(!FlagGet(FLAG_CASE_STARTER_MODE))
+        PrintTextToBottomBar(CHOOSE_MON);
+    else
+         PrintTextToBottomBar(sBirchCaseDataPtr->monState + CHOOSE_FIRST_MON);
 }
 
 static void BirchCase_GiveMon() // Function that calls the GiveMon function pulled from Expansion by Lunos and Ghoulslash
@@ -463,8 +480,17 @@ static void BirchCase_GiveMon() // Function that calls the GiveMon function pull
     u8 *evs = (u8 *) sStarterChoices[sBirchCaseDataPtr->handPosition].evs;
     u8 *ivs = (u8 *) sStarterChoices[sBirchCaseDataPtr->handPosition].ivs;
     u16 *moves = (u16 *) sStarterChoices[sBirchCaseDataPtr->handPosition].moves;
+    u8 level;
+    if (VarGet(VAR_PIT_FLOOR) > 5)
+    {
+        level = VarGet(VAR_PIT_FLOOR) > 100 ? 100 : VarGet(VAR_PIT_FLOOR);
+    }
+    else{
+        level = 5;
+    }
+
     FlagSet(FLAG_SYS_POKEMON_GET);
-    gSpecialVar_Result = ScriptGiveMonParameterized(sStarterChoices[sBirchCaseDataPtr->handPosition].species, sStarterChoices[sBirchCaseDataPtr->handPosition].level, \
+    gSpecialVar_Result = ScriptGiveMonParameterized(ReturnRandomSpeciesByPokeballIndex(sBirchCaseDataPtr->handPosition), level, \
                 sStarterChoices[sBirchCaseDataPtr->handPosition].item, sStarterChoices[sBirchCaseDataPtr->handPosition].ball, \
                 sStarterChoices[sBirchCaseDataPtr->handPosition].nature, sStarterChoices[sBirchCaseDataPtr->handPosition].abilityNum, \
                 sStarterChoices[sBirchCaseDataPtr->handPosition].gender, evs, ivs, moves, \
@@ -576,7 +602,10 @@ static bool8 BirchCaseDoGfxSetup(void)
     case 5:
         CreatePokeballSprites(); // Create Sprites and Print Text
         CreateHandSprite();
-        PrintTextToBottomBar(CHOOSE_MON);
+        if(!FlagGet(FLAG_CASE_STARTER_MODE))
+            PrintTextToBottomBar(CHOOSE_MON);
+        else
+            PrintTextToBottomBar(sBirchCaseDataPtr->monState + CHOOSE_FIRST_MON);
         CreateTask(Task_BirchCaseWaitFadeIn, 0);
         BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
         gMain.state++;
@@ -601,6 +630,7 @@ static bool8 BirchCaseDoGfxSetup(void)
 
 static void BirchCaseFreeResources(void)
 {
+    u8 i;
     try_free(sBirchCaseDataPtr);
     try_free(sBg1TilemapBuffer);
     try_free(sBg2TilemapBuffer);
@@ -608,6 +638,11 @@ static void BirchCaseFreeResources(void)
     DestroyPokeballSprites();
     DestroyHandSprite();
     FreeAllWindowBuffers();
+
+    for(i = 0; i < 9; i++)
+    {
+        sMonChosenAlready[i] = 0;
+    }
 }
 
 static void Task_BirchCaseWaitFadeAndBail(u8 taskId)
@@ -725,7 +760,10 @@ static void BirchCase_InitWindows(void)
 //
 static const u8 sText_ChooseMon[] = _("Release a Pokémon!");
 static const u8 sText_AreYouSure[] = _("Are you sure?    {A_BUTTON} Yes  {B_BUTTON} No");
-static const u8 sText_RecievedMon[] = _("Give your Pokémon a Nickname?   {A_BUTTON} Yes  {B_BUTTON} No");
+static const u8 sText_RecievedMon[] = _("You recieved the Mon!");
+static const u8 sText_Choose1Mon[] = _("Choose your 1st Mon!");
+static const u8 sText_Choose2Mon[] = _("Choose your 2nd Mon!");
+static const u8 sText_Choose3Mon[] = _("Choose your 3rd Mon!");
 static void PrintTextToBottomBar(u8 textId)
 {
     u8 speciesNameArray[16];
@@ -735,7 +773,7 @@ static void PrintTextToBottomBar(u8 textId)
     u8 x = 1 + 4;
     u8 y = 1 + 18;
 
-    u16 species = sStarterChoices[sBirchCaseDataPtr->handPosition].species;
+    u16 species = ReturnRandomSpeciesByPokeballIndex(sBirchCaseDataPtr->handPosition);
     u16 dexNum = SpeciesToNationalPokedexNum(species);    
 
     FillWindowPixelBuffer(WINDOW_BOTTOM_BAR, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
@@ -751,13 +789,22 @@ static void PrintTextToBottomBar(u8 textId)
         case 2:
             mainBarAlternatingText = sText_RecievedMon;
             break;
+        case 3:
+            mainBarAlternatingText = sText_Choose1Mon;
+            break;
+        case 4:
+            mainBarAlternatingText = sText_Choose2Mon;
+            break;
+        case 5:
+            mainBarAlternatingText = sText_Choose3Mon;
+            break;
         default:
             mainBarAlternatingText = sText_ChooseMon;
             break;
     } 
     AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x, y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, mainBarAlternatingText);
 
-    if(sStarterChoices[sBirchCaseDataPtr->handPosition].species == SPECIES_NONE)
+    if(sStarterChoices[sBirchCaseDataPtr->handPosition].species == SPECIES_NONE || sMonChosenAlready[sBirchCaseDataPtr->handPosition])
     {
         PutWindowTilemap(WINDOW_BOTTOM_BAR);
         CopyWindowToVram(WINDOW_BOTTOM_BAR, 3);
@@ -805,8 +852,8 @@ static void Task_DelayedSpriteLoad(u8 taskId) // wait 4 frames after changing th
 {   
     if (gTasks[taskId].data[11] >= 4)
     {
-        if(sStarterChoices[sBirchCaseDataPtr->handPosition].species != SPECIES_NONE)
-            SampleUi_DrawMonIcon(sStarterChoices[sBirchCaseDataPtr->handPosition].species);
+        if(sStarterChoices[sBirchCaseDataPtr->handPosition].species != SPECIES_NONE && !sMonChosenAlready[sBirchCaseDataPtr->handPosition])
+            SampleUi_DrawMonIcon(ReturnRandomSpeciesByPokeballIndex(sBirchCaseDataPtr->handPosition));
         gTasks[taskId].func = Task_BirchCaseMain;
         sBirchCaseDataPtr->movingSelector = FALSE;
         return;
@@ -817,34 +864,30 @@ static void Task_DelayedSpriteLoad(u8 taskId) // wait 4 frames after changing th
     }
 }
 
-static void Task_WaitForFadeAndOpenNamingScreen(u8 taskId)
-{   
-    if (!gPaletteFade.active)
-    {
-        SetMainCallback2(sBirchCaseDataPtr->savedCallback);
-        BirchCaseFreeResources();
-        DestroyTask(taskId);
-        VarSet(VAR_0x8004, gPlayerPartyCount - 1);
-        ChangePokemonNickname();
-    }
-}
-
 static void Task_BirchCaseRecievedMon(u8 taskId)
 {
-    if(JOY_NEW(A_BUTTON))
+    if(JOY_NEW(A_BUTTON) || gTasks[taskId].data[12] > 80)
     {
-        PlaySE(SE_SELECT);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_WaitForFadeAndOpenNamingScreen;
-        return;
+        if(FlagGet(FLAG_CASE_STARTER_MODE) && (sBirchCaseDataPtr->monState < 2))
+        {
+            DestroySprite(&gSprites[sBirchCaseDataPtr->pokeballSpriteIds[sBirchCaseDataPtr->handPosition]]);
+            sBirchCaseDataPtr->pokeballSpriteIds[sBirchCaseDataPtr->handPosition] = SPRITE_NONE;
+            sMonChosenAlready[sBirchCaseDataPtr->handPosition] = TRUE;
+            sBirchCaseDataPtr->monState++;
+            PrintTextToBottomBar(CHOOSE_FIRST_MON + sBirchCaseDataPtr->monState);
+            gTasks[taskId].data[12] = 0;
+            ReloadNewPokemon(taskId);
+        }
+        else
+        {
+            PlaySE(SE_SELECT);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            gTasks[taskId].func = Task_BirchCaseTurnOff;
+            gTasks[taskId].data[12] = 0;
+            return;
+        }
     }
-    if (JOY_NEW(B_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_BirchCaseTurnOff;
-        return;
-    }
+    gTasks[taskId].data[12]++;
 }
 
 static void Task_BirchCaseConfirmSelection(u8 taskId)
@@ -860,7 +903,10 @@ static void Task_BirchCaseConfirmSelection(u8 taskId)
     if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        PrintTextToBottomBar(CHOOSE_MON);
+        if(!FlagGet(FLAG_CASE_STARTER_MODE))
+            PrintTextToBottomBar(CHOOSE_MON);
+        else
+            PrintTextToBottomBar(sBirchCaseDataPtr->monState + CHOOSE_FIRST_MON);
         gTasks[taskId].func = Task_BirchCaseMain;
         return;
     }
@@ -982,7 +1028,7 @@ static void Task_BirchCaseMain(u8 taskId)
     }
     if(JOY_NEW(A_BUTTON))
     {
-        if(sStarterChoices[sBirchCaseDataPtr->handPosition].species != SPECIES_NONE) // If spot empty don't go to next control flow state
+        if(sStarterChoices[sBirchCaseDataPtr->handPosition].species != SPECIES_NONE && !sMonChosenAlready[sBirchCaseDataPtr->handPosition]) // If spot empty don't go to next control flow state
         {
             PlaySE(SE_SELECT);
             PrintTextToBottomBar(CONFIRM_SELECTION);
