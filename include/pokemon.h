@@ -448,8 +448,8 @@ struct SpeciesInfo /*0x8C*/
 #if OW_FOLLOWERS_ENABLED
             struct ObjectEventGraphicsInfo followerData;
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-            const u32 *followerPalette;
-            const u32 *followerShinyPalette;
+            const void* followerPalette;
+            const void* followerShinyPalette;
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 };
@@ -621,7 +621,6 @@ extern const struct MoveInfo gMovesInfo[];
 extern const u8 gFacilityClassToPicIndex[];
 extern const u8 gFacilityClassToTrainerClass[];
 extern const struct SpeciesInfo gSpeciesInfo[];
-extern const void* const gFollowerPalettes[NUM_SPECIES][2];
 extern const u32 gExperienceTables[][MAX_LEVEL + 1];
 extern const u8 gPPUpGetMask[];
 extern const u8 gPPUpClearMask[];

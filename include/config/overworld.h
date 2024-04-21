@@ -37,7 +37,7 @@
 #define OW_FOLLOWERS_ENABLED           TRUE       // Enables follower Pokémon, HGSS style.
 #define OW_MON_BOBBING                 TRUE       // If true, follower pokemon will bob up and down during their idle & walking animations
 #define LARGE_OW_SUPPORT               TRUE       // If true, adds a small amount of overhead to OW code so that large (48x48, 64x64) OWs will display correctly under bridges, etc.
-#define OW_FOLLOWERS_SHARE_PALETTE     TRUE       // If true, follower palettes are taken from battle sprites.
+#define OW_FOLLOWERS_SHARE_PALETTE     FALSE      // [WIP!! NOT ALL PALETTES HAVE BEEN ADJUSTED FOR THIS!!] If TRUE, follower palettes are taken from battle sprites.
 #define OW_MON_POKEBALLS               TRUE       // Followers will emerge from the pokeball they are stored in, instead of a normal pokeball
 #define OW_GFX_COMPRESS                TRUE       // Adds support for compressed OW graphics, (Also compresses pokemon follower graphics).
                                                   // Compressed gfx are incompatible with non-power-of-two sprite sizes:

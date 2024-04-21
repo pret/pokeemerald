@@ -1875,13 +1875,19 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
         return paletteNum;
 
     // Use standalone palette, unless entry is OOB or NULL (fallback to front-sprite-based)
-    if (gFollowerPalettes[species][shiny & 1])
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    if ((shiny && gSpeciesInfo[species].followerPalette)
+    || (!shiny && gSpeciesInfo[species].followerShinyPalette))
     {
         struct SpritePalette spritePalette = {.tag = shiny ? (species + SPECIES_SHINY_TAG) : species};
-        spritePalette.data = gFollowerPalettes[species][shiny & 1];
+        if (shiny)
+            spritePalette.data = gSpeciesInfo[species].followerShinyPalette;
+        else
+            spritePalette.data = gSpeciesInfo[species].followerPalette;
         
         // Check if pal data must be decompressed
-        if (IsLZ77Data(spritePalette.data, PLTT_SIZE_4BPP, PLTT_SIZE_4BPP)) {
+        if (IsLZ77Data(spritePalette.data, PLTT_SIZE_4BPP, PLTT_SIZE_4BPP))
+        {
             // IsLZ77Data guarantees word-alignment, so casting this is safe
             LZ77UnCompWram((u32*)spritePalette.data, gDecompressionBuffer);
             spritePalette.data = (void*)gDecompressionBuffer;
@@ -1889,12 +1895,12 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
         paletteNum = LoadSpritePalette(&spritePalette);
     }
     else
+#endif //OW_FOLLOWERS_SHARE_PALETTE
     {
         // Use matching front sprite's normal/shiny palettes
         // Load compressed palette
         LoadCompressedSpritePaletteWithTag(palette, species);
         paletteNum = IndexOfSpritePaletteTag(species); // Tag is always present
-
     }
 
     if (gWeatherPtr->currWeather != WEATHER_FOG_HORIZONTAL) // don't want to weather blend in fog
