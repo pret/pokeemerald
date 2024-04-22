@@ -65,7 +65,6 @@ EventScript_ObtainedItemMessage:
 	delay 10
 	showitemdesc
 EventScript_ContinueObtainedItem:
-	waitfanfare
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	hideitemdesc
 	setvar VAR_RESULT, TRUE
@@ -133,7 +132,6 @@ EventScript_PickUpItem::
 	delay 10
 	showitemdesc
 	call_if_eq VAR_0x8008, FALSE, EventScript_FoundItem
-	waitfanfare
 	waitmessage
 	bufferitemnameplural STR_VAR_2, VAR_0x8004, VAR_0x8005
 	pyramid_inchallenge
