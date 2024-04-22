@@ -1689,7 +1689,7 @@ void GiveBoxMonInitialMoveset_Fast(struct BoxPokemon *boxMon) //Credit: Asparagu
     u16 species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
     s32 level = GetLevelFromBoxMonExp(boxMon);
     s32 i;
-    u16 moves[MAX_MON_MOVES] = {0};
+    u16 moves[MAX_MON_MOVES] = {MOVE_NONE};
     u8 addedMoves = 0;
     const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
 
@@ -1703,13 +1703,15 @@ void GiveBoxMonInitialMoveset_Fast(struct BoxPokemon *boxMon) //Credit: Asparagu
         if (learnset[i].level == 0)
             continue;
 
-        for (j = 0; j < addedMoves + 1; j++)
+        for (j = 0; j < addedMoves; j++)
+        {
             if (moves[j] == learnset[i].move)
             {
                 alreadyKnown = TRUE;
                 break;
             }
-    
+        }
+
         if (!alreadyKnown)
         {
             if (addedMoves < MAX_MON_MOVES)
