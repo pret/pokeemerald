@@ -1435,7 +1435,7 @@ u8 GetFrontierOpponentClass(u16 trainerId)
     }
     else if (trainerId > TRAINER_PARTNER(PARTNER_NONE))
     {
-        trainerClass = gBattlePartners[GetTrainerClassFromId(trainerId - TRAINER_PARTNER(PARTNER_NONE))].trainerClass;
+        trainerClass = gBattlePartners[trainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerClass;
     }
     else if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
