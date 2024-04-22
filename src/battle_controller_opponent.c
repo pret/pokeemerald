@@ -411,7 +411,7 @@ static void OpponentHandleSwitchInAnim(u32 battler)
 static const u16 ObjectEventToTrainerPic [] =
 {
     [OBJ_EVENT_GFX_NINJA_BOY]   =    TRAINER_PIC_NINJA_BOY,
-    [OBJ_EVENT_GFX_TWIN]        =    TRAINER_PIC_YOUNGSTER,
+    [OBJ_EVENT_GFX_TWIN]        =    TRAINER_PIC_SCHOOL_KID_F,
     [OBJ_EVENT_GFX_BOY_1]       =    TRAINER_PIC_YOUNGSTER,
     [OBJ_EVENT_GFX_GIRL_1]      =    TRAINER_PIC_SCHOOL_KID_F,
     [OBJ_EVENT_GFX_BOY_2]       =    TRAINER_PIC_YOUNGSTER,

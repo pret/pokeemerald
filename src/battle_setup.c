@@ -1603,65 +1603,192 @@ static const u8 *ReturnEmptyStringIfNull(const u8 *string)
 }
 
 
-static const u8 *const sRandomTrainerWonTexts[14] =
+static const u8 *const sRandomTrainerApproachTexts[77] =
 {
-    [0]    = gText_AnabelWonSilver,
-    [1]    = gText_TuckerWonSilver,
-    [2]    = gText_SpenserWonSilver,
-    [3]    = gText_GretaWonSilver,
-    [4]    = gText_NolandWonSilver,
-    [5]    = gText_LucyWonSilver,
-    [6]    = gText_BrandonWonSilver,
-    [7]    = gText_AnabelWonGold,
-    [8]    = gText_TuckerWonGold,
-    [9]    = gText_SpenserWonGold,
-    [10]   = gText_GretaWonGold,
-    [11]   = gText_NolandWonGold,
-    [12]   = gText_LucyWonGold,
-    [13]   = gText_BrandonWonGold,
+    gText_TylerApproach,
+    gText_JuliaApproach,
+    gText_AlexApproach,
+    gText_RachelApproach,
+    gText_ConnorApproach,
+    gText_SarahApproach,
+    gText_MaxApproach,
+    gText_IsabellaApproach,
+    gText_LeonApproach,
+    gText_EvaApproach,
+    gText_JasonApproach,
+    gText_MeganApproach,
+    gText_SamApproach,
+    gText_KateApproach,
+    gText_LukeApproach,
+    gText_MiaApproach,
+    gText_JackApproach,
+    gText_AnnaApproach,
+    gText_DylanApproach,
+    gText_LilyApproach,
+    gText_CalebApproach,
+    gText_EllaApproach,
+    gText_BenApproach,
+    gText_SophiaApproach,
+    gText_MasonApproach,
+    gText_ChloeApproach,
+    gText_GraysonApproach,
+    gText_AmeliaApproach,
+    gText_OwenApproach,
+    gText_GraceApproach,
+    gText_LoganApproach,
+    gText_VictoriaApproach,
+    gText_CooperApproach,
+    gText_RubyApproach,
+    gText_ColeApproach,
+    gText_AubreyApproach,
+    gText_RyderApproach,
+    gText_CamilaApproach,
+    gText_AsherApproach,
+    gText_AriaApproach,
+    gText_HudsonApproach,
+    gText_LaurenApproach,
+    gText_GavinApproach,
+    gText_BellaApproach,
+    gText_LeoApproach,
+    gText_NatalieApproach,
+    gText_JaxonApproach,
+    gText_VioletApproach,
+    gText_AidenApproach,
+    gText_SophieApproach,
+    gText_EthanApproach,
+    gText_CharlotteApproach,
+    gText_ConnorApproach,
+    gText_AubreeApproach,
+    gText_TannerApproach,
+    gText_PeytonApproach,
+    gText_AndrewApproach,
+    gText_LaylaApproach,
+    gText_SawyerApproach,
+    gText_ZoeApproach,
+    gText_NathanApproach,
+    gText_EmilyApproach,
+    gText_LiamApproach,
+    gText_EvelynApproach,
+    gText_WilliamApproach,
+    gText_CoraApproach,
+    gText_JoshuaApproach,
+    gText_MadelynApproach,
+    gText_BrandonApproach,
+    gText_MayaApproach,
+    gText_AveryApproach,
+    gText_LeahApproach,
+    gText_BradenApproach,
+    gText_NoraApproach,
+    gText_HunterApproach,
+    gText_AinsleyApproach,
+    gText_GriffinApproach,
 };
 
-static const u8 *const sRandomTrainerLossTexts[14] =
+static const u8 *const sRandomTrainerDefeatTexts[77] =
 {
-    [0]    = gText_AnabelDefeatSilver,
-    [1]    = gText_TuckerDefeatSilver,
-    [2]    = gText_SpenserDefeatSilver,
-    [3]    = gText_GretaDefeatSilver,
-    [4]    = gText_NolandDefeatSilver,
-    [5]    = gText_LucyDefeatSilver,
-    [6]    = gText_BrandonDefeatSilver,
-    [7]    = gText_AnabelDefeatGold,
-    [8]    = gText_TuckerDefeatGold,
-    [9]    = gText_SpenserDefeatGold,
-    [10]   = gText_GretaDefeatGold,
-    [11]   = gText_NolandDefeatGold,
-    [12]   = gText_LucyDefeatGold,
-    [13]   = gText_BrandonDefeatGold,
+    gText_TylerDefeat,
+    gText_JuliaDefeat,
+    gText_AlexDefeat,
+    gText_RachelDefeat,
+    gText_ConnorDefeat,
+    gText_SarahDefeat,
+    gText_MaxDefeat,
+    gText_IsabellaDefeat,
+    gText_LeonDefeat,
+    gText_EvaDefeat,
+    gText_JasonDefeat,
+    gText_MeganDefeat,
+    gText_SamDefeat,
+    gText_KateDefeat,
+    gText_LukeDefeat,
+    gText_MiaDefeat,
+    gText_JackDefeat,
+    gText_AnnaDefeat,
+    gText_DylanDefeat,
+    gText_LilyDefeat,
+    gText_CalebDefeat,
+    gText_EllaDefeat,
+    gText_BenDefeat,
+    gText_SophiaDefeat,
+    gText_MasonDefeat,
+    gText_ChloeDefeat,
+    gText_GraysonDefeat,
+    gText_AmeliaDefeat,
+    gText_OwenDefeat,
+    gText_GraceDefeat,
+    gText_LoganDefeat,
+    gText_VictoriaDefeat,
+    gText_CooperDefeat,
+    gText_RubyDefeat,
+    gText_ColeDefeat,
+    gText_AubreyDefeat,
+    gText_RyderDefeat,
+    gText_CamilaDefeat,
+    gText_AsherDefeat,
+    gText_AriaDefeat,
+    gText_HudsonDefeat,
+    gText_LaurenDefeat,
+    gText_GavinDefeat,
+    gText_BellaDefeat,
+    gText_LeoDefeat,
+    gText_NatalieDefeat,
+    gText_JaxonDefeat,
+    gText_VioletDefeat,
+    gText_AidenDefeat,
+    gText_SophieDefeat,
+    gText_EthanDefeat,
+    gText_CharlotteDefeat,
+    gText_ConnorDefeat,
+    gText_AubreeDefeat,
+    gText_TannerDefeat,
+    gText_PeytonDefeat,
+    gText_AndrewDefeat,
+    gText_LaylaDefeat,
+    gText_SawyerDefeat,
+    gText_ZoeDefeat,
+    gText_NathanDefeat,
+    gText_EmilyDefeat,
+    gText_LiamDefeat,
+    gText_EvelynDefeat,
+    gText_WilliamDefeat,
+    gText_CoraDefeat,
+    gText_JoshuaDefeat,
+    gText_MadelynDefeat,
+    gText_BrandonDefeat,
+    gText_MayaDefeat,
+    gText_AveryDefeat,
+    gText_LeahDefeat,
+    gText_BradenDefeat,
+    gText_NoraDefeat,
+    gText_HunterDefeat,
+    gText_AinsleyDefeat,
+    gText_GriffinDefeat,
 };
+
 
 static const u8 *GetIntroSpeechOfApproachingTrainer(void)
 {
     if (gApproachingTrainerId == 0)
-        return ReturnEmptyStringIfNull(sRandomTrainerWonTexts[Random() % 14]);
+        return ReturnEmptyStringIfNull(sRandomTrainerApproachTexts[Random() % 77]);
     else
-        return ReturnEmptyStringIfNull(sRandomTrainerWonTexts[Random() % 14]);
+        return ReturnEmptyStringIfNull(sRandomTrainerApproachTexts[Random() % 77]);
 }
 
 const u8 *GetTrainerALoseText(void)
 {
-    StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(sRandomTrainerLossTexts[Random() % 14]));
+    StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(sRandomTrainerDefeatTexts[Random() % 77]));
     return gStringVar4;
 }
 
 const u8 *GetTrainerBLoseText(void)
 {
-    StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(sRandomTrainerLossTexts[Random() % 14]));
+    StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(sRandomTrainerDefeatTexts[Random() % 77]));
     return gStringVar4;
 }
 
 const u8 *GetTrainerWonSpeech(void)
 {
-    return ReturnEmptyStringIfNull(sRandomTrainerWonTexts[Random() % 14]);
+    return ReturnEmptyStringIfNull(sRandomTrainerApproachTexts[Random() % 70]);
 }
 
 static const u8 *GetTrainerCantBattleSpeech(void)
