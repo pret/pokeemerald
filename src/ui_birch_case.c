@@ -136,9 +136,9 @@ struct MonChoiceData{ // This is the format used to define a mon, everything lef
 //
 static const struct MonChoiceData sStarterChoices[9] = 
 {
-    [BALL_TOP_FIRST]        = {SPECIES_MUDKIP, 5, ITEM_POTION, BALL_NET, NUM_NATURES, 3, 0, {0, 0, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {0, 0, 0, 0}, 0, NUMBER_OF_MON_TYPES, 0},
-    [BALL_TOP_SECOND]       = {SPECIES_TREECKO, 5, ITEM_POTION, BALL_NET, NUM_NATURES, 3, 0, {0, 0, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {0, 0, 0, 0}, 0, NUMBER_OF_MON_TYPES, 0},
-    [BALL_MIDDLE_FIRST]     = {SPECIES_TORCHIC, 5, ITEM_POTION, BALL_NET, NUM_NATURES, 3, 0, {0, 0, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {0, 0, 0, 0}, 0, NUMBER_OF_MON_TYPES, 0},
+    [BALL_TOP_FIRST]        = {SPECIES_MUDKIP, 100, ITEM_POTION, BALL_NET, NUM_NATURES, 3, 0, {0, 0, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {0, 0, 0, 0}, 0, NUMBER_OF_MON_TYPES, 0},
+    [BALL_TOP_SECOND]       = {SPECIES_TREECKO, 100, ITEM_POTION, BALL_NET, NUM_NATURES, 3, 0, {0, 0, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {0, 0, 0, 0}, 0, NUMBER_OF_MON_TYPES, 0},
+    [BALL_MIDDLE_FIRST]     = {SPECIES_TORCHIC, 100, ITEM_POTION, BALL_NET, NUM_NATURES, 3, 0, {0, 0, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {0, 0, 0, 0}, 0, NUMBER_OF_MON_TYPES, 0},
 
     [BALL_TOP_THIRD]        = {SPECIES_CYNDAQUIL, 5, ITEM_POTION, BALL_NET, NUM_NATURES, 3, 0, {0, 0, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {0, 0, 0, 0}, 0, NUMBER_OF_MON_TYPES, 0},
     [BALL_TOP_FOURTH]       = {SPECIES_TOTODILE, 5, ITEM_POTION, BALL_NET, NUM_NATURES, 3, 0, {0, 0, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {0, 0, 0, 0}, 0, NUMBER_OF_MON_TYPES, 0},
@@ -486,7 +486,7 @@ static void BirchCase_GiveMon() // Function that calls the GiveMon function pull
         level = VarGet(VAR_PIT_FLOOR) > 100 ? 100 : VarGet(VAR_PIT_FLOOR);
     }
     else{
-        level = 5;
+        level = 100;
     }
 
     FlagSet(FLAG_SYS_POKEMON_GET);

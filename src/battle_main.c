@@ -2332,6 +2332,14 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 ball = partyData[i].ball;
                 SetMonData(&party[i], MON_DATA_POKEBALL, &ball);
             }
+
+            // ball
+            if (!isPlayer)
+            {
+                ball = (Random() % (LAST_BALL - 1)) + 1;
+                SetMonData(&party[i], MON_DATA_POKEBALL, &ball);
+            }
+
             if (partyData[i].nickname != NULL)
             {
                 SetMonData(&party[i], MON_DATA_NICKNAME, partyData[i].nickname);
