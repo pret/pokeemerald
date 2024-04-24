@@ -1719,7 +1719,11 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     gSprites[data->iconspriteId].oam.priority = 0;
 
     //Follower Sprite
-    data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species, SpriteCB_Follower, DEBUG_FOLLOWER_X, DEBUG_FOLLOWER_Y, 0);
+    data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species + (data->isShiny ? SPECIES_SHINY_TAG : 0),
+                                                        SpriteCB_Follower,
+                                                        DEBUG_FOLLOWER_X,
+                                                        DEBUG_FOLLOWER_Y,
+                                                        0);
     gSprites[data->followerspriteId].oam.priority = 0;
     gSprites[data->followerspriteId].anims = sAnims_Follower;
 

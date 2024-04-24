@@ -1728,16 +1728,17 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
     struct Sprite *sprite;
     u8 spriteId;
     u32 UNUSED paletteNum;
+    bool32 isShiny = graphicsId >= SPECIES_SHINY_TAG + OBJ_EVENT_GFX_MON_BASE;
+
+    if (isShiny)
+        graphicsId -= SPECIES_SHINY_TAG;
 
     spriteTemplate = Alloc(sizeof(struct SpriteTemplate));
     CopyObjectGraphicsInfoToSpriteTemplate(graphicsId, callback, spriteTemplate, &subspriteTables);
 
     if (spriteTemplate->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC)
     {
-        struct ObjectEvent *obj = GetFollowerObject();
-        // Use shininess info from follower object
-        // in future this should be passed in
-        paletteNum = LoadDynamicFollowerPaletteFromGraphicsId(graphicsId, obj ? obj->shiny : FALSE, spriteTemplate);
+        paletteNum = LoadDynamicFollowerPaletteFromGraphicsId(graphicsId, isShiny, spriteTemplate);
         spriteTemplate->paletteTag = GetSpritePaletteTagByPaletteNum(paletteNum);
     }
     else if (spriteTemplate->paletteTag != TAG_NONE)
@@ -1867,19 +1868,17 @@ static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species,
 static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
 {
     u32 paletteNum;
-    // Note that the shiny palette tag is `species + SPECIES_SHINY_TAG`, which must be increased with more pokemon
-    // so that palette tags do not overlap
-    const u32 *palette = GetMonSpritePalFromSpecies(species, shiny, FALSE); //ETODO
-    // palette already loaded
-    if ((paletteNum = IndexOfSpritePaletteTag(species)) < 16)
-        return paletteNum;
-
     // Use standalone palette, unless entry is OOB or NULL (fallback to front-sprite-based)
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     if ((shiny && gSpeciesInfo[species].followerPalette)
     || (!shiny && gSpeciesInfo[species].followerShinyPalette))
     {
-        struct SpritePalette spritePalette = {.tag = shiny ? (species + SPECIES_SHINY_TAG) : species};
+        struct SpritePalette spritePalette;
+        u16 palTag = shiny ? (species + SPECIES_SHINY_TAG + OBJ_EVENT_PAL_TAG_DYNAMIC) : (species + OBJ_EVENT_PAL_TAG_DYNAMIC);
+        // palette already loaded
+        if ((paletteNum = IndexOfSpritePaletteTag(palTag)) < 16)
+            return paletteNum;
+        spritePalette.tag = palTag;
         if (shiny)
             spritePalette.data = gSpeciesInfo[species].followerShinyPalette;
         else
@@ -1897,6 +1896,12 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
     else
 #endif //OW_FOLLOWERS_SHARE_PALETTE
     {
+        // Note that the shiny palette tag is `species + SPECIES_SHINY_TAG`, which must be increased with more pokemon
+        // so that palette tags do not overlap
+        const u32 *palette = GetMonSpritePalFromSpecies(species, shiny, FALSE); //ETODO
+        // palette already loaded
+        if ((paletteNum = IndexOfSpritePaletteTag(species)) < 16)
+            return paletteNum;
         // Use matching front sprite's normal/shiny palettes
         // Load compressed palette
         LoadCompressedSpritePaletteWithTag(palette, species);
