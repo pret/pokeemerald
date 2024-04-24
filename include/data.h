@@ -71,6 +71,7 @@ struct TrainerMon
     bool8 gender:2;
     bool8 isShiny:1;
     u8 dynamaxLevel:4;
+    u8 teraType:5;
     bool8 gigantamaxFactor:1;
     bool8 shouldDynamax:1;
     bool8 shouldTerastal:1;

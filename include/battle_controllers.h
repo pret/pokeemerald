@@ -101,6 +101,7 @@ enum {
 #define RET_MEGA_EVOLUTION (1 << 7)
 #define RET_ULTRA_BURST    (1 << 6)
 #define RET_DYNAMAX        (1 << 5)
+#define RET_TERASTAL       (1 << 4)
 
 struct UnusedControllerStruct
 {

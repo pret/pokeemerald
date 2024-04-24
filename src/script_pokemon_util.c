@@ -7,6 +7,7 @@
 #include "decompress.h"
 #include "event_data.h"
 #include "international_string_util.h"
+#include "item.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "main.h"
@@ -38,6 +39,10 @@ void HealPlayerParty(void)
         HealPokemon(&gPlayerParty[i]);
     if (OW_PC_HEAL >= GEN_8)
         HealPlayerBoxes();
+
+    // Recharge Tera Orb, if possible.
+    if (B_FLAG_TERA_ORB_CHARGED != 0 && CheckBagHasItem(ITEM_TERA_ORB, 1))
+        FlagSet(B_FLAG_TERA_ORB_CHARGED);
 }
 
 static void HealPlayerBoxes(void)

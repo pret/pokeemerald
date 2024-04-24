@@ -499,6 +499,8 @@ extern const u8 BattleScript_TheSwampDisappeared[];
 extern const u8 BattleScript_ItemRestoreHP_Party[];
 extern const u8 BattleScript_EffectPsychicNoise[];
 extern const u8 BattleScript_AromaVeilProtectsRet[];
+extern const u8 BattleScript_LowerAtkSpAtk[];
+extern const u8 BattleScript_Terastallization[];
 extern const u8 BattleScript_BoosterEnergyEnd2[];
 
 // zmoves

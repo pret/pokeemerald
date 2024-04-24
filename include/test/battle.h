@@ -935,6 +935,8 @@ struct MoveContext
     // TODO: u8 zMove:1;
     u16 dynamax:1;
     u16 explicitDynamax:1;
+    u16 tera:1;
+    u16 explicitTera:1;
     u16 allowed:1;
     u16 explicitAllowed:1;
     u16 notExpected:1; // Has effect only with EXPECT_MOVE

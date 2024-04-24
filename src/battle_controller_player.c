@@ -454,6 +454,8 @@ static void HandleInputChooseTarget(u32 battler)
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | RET_ULTRA_BURST | (gMultiUsePlayerCursor << 8));
         else if (gBattleStruct->dynamax.playerSelect)
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | RET_DYNAMAX | (gMultiUsePlayerCursor << 8));
+        else if (gBattleStruct->tera.playerSelect)
+            BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | RET_TERASTAL | (gMultiUsePlayerCursor << 8));
         else
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | (gMultiUsePlayerCursor << 8));
         EndBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX);
@@ -616,6 +618,8 @@ static void HandleInputShowEntireFieldTargets(u32 battler)
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | RET_ULTRA_BURST | (gMultiUsePlayerCursor << 8));
         else if (gBattleStruct->dynamax.playerSelect)
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | RET_DYNAMAX | (gMultiUsePlayerCursor << 8));
+        else if (gBattleStruct->tera.playerSelect)
+            BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | RET_TERASTAL | (gMultiUsePlayerCursor << 8));
         else
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | (gMultiUsePlayerCursor << 8));
         HideTriggerSprites();
@@ -648,6 +652,8 @@ static void HandleInputShowTargets(u32 battler)
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | RET_ULTRA_BURST | (gMultiUsePlayerCursor << 8));
         else if (gBattleStruct->dynamax.playerSelect)
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | RET_DYNAMAX | (gMultiUsePlayerCursor << 8));
+        else if (gBattleStruct->tera.playerSelect)
+            BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | RET_TERASTAL | (gMultiUsePlayerCursor << 8));
         else
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | (gMultiUsePlayerCursor << 8));
         HideTriggerSprites();
@@ -772,6 +778,8 @@ static void HandleInputChooseMove(u32 battler)
                 BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | RET_ULTRA_BURST | (gMultiUsePlayerCursor << 8));
             else if (gBattleStruct->dynamax.playerSelect)
                 BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | RET_DYNAMAX | (gMultiUsePlayerCursor << 8));
+            else if (gBattleStruct->tera.playerSelect)
+                BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | RET_TERASTAL | (gMultiUsePlayerCursor << 8));
             else
                 BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | (gMultiUsePlayerCursor << 8));
             HideTriggerSprites();
@@ -810,6 +818,7 @@ static void HandleInputChooseMove(u32 battler)
             gBattleStruct->mega.playerSelect = FALSE;
             gBattleStruct->burst.playerSelect = FALSE;
             gBattleStruct->dynamax.playerSelect = FALSE;
+            gBattleStruct->tera.playerSelect = FALSE;
             gBattleStruct->zmove.viable = FALSE;
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, 0xFFFF);
             HideTriggerSprites();
@@ -918,6 +927,12 @@ static void HandleInputChooseMove(u32 battler)
             ChangeDynamaxTriggerSprite(gBattleStruct->dynamax.triggerSpriteId, gBattleStruct->dynamax.playerSelect);
             PlaySE(SE_SELECT);
         }
+        else if (CanTerastallize(battler))
+        {
+            gBattleStruct->tera.playerSelect ^= 1;
+            ChangeTeraTriggerSprite(gBattleStruct->tera.triggerSpriteId, gBattleStruct->tera.playerSelect);
+            PlaySE(SE_SELECT);
+        }
     }
 }
 
@@ -926,6 +941,7 @@ static void ReloadMoveNames(u32 battler)
     gBattleStruct->mega.playerSelect = FALSE;
     gBattleStruct->burst.playerSelect = FALSE;
     gBattleStruct->dynamax.playerSelect = FALSE;
+    gBattleStruct->tera.playerSelect = FALSE;
     gBattleStruct->zmove.viewing = FALSE;
     MoveSelectionDestroyCursorAt(battler);
     MoveSelectionDisplayMoveNames(battler);
@@ -2059,6 +2075,7 @@ static void PlayerHandleChooseMove(u32 battler)
         gBattleStruct->mega.playerSelect = FALSE;
         gBattleStruct->burst.playerSelect = FALSE;
         gBattleStruct->dynamax.playerSelect = FALSE;
+        gBattleStruct->tera.playerSelect = FALSE;
         if (!IsMegaTriggerSpriteActive())
             gBattleStruct->mega.triggerSpriteId = 0xFF;
         if (CanMegaEvolve(battler))
@@ -2073,6 +2090,10 @@ static void PlayerHandleChooseMove(u32 battler)
             CreateDynamaxTriggerSprite(battler, 0);
         if (!IsZMoveTriggerSpriteActive())
             gBattleStruct->zmove.triggerSpriteId = 0xFF;
+        if (!IsTeraTriggerSpriteActive())
+            gBattleStruct->tera.triggerSpriteId = 0xFF;
+        if (CanTerastallize(battler))
+            CreateTeraTriggerSprite(battler, 0);
 
         GetUsableZMoves(battler, moveInfo->moves);
         gBattleStruct->zmove.viable = IsZMoveUsable(battler, gMoveSelectionCursor[battler]);

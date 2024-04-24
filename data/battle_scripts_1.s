@@ -20,6 +20,34 @@
 
 	.section script_data, "aw", %progbits
 
+BattleScript_Terastallization::
+	@ TODO: no string prints in S/V, but right now this helps with clarity
+	printstring STRINGID_PKMNTERASTALLIZEDINTO
+	@ TODO: replace this animation
+	playanimation BS_ATTACKER, B_ANIM_TOTEM_FLARE
+	waitanimation
+	end3
+
+BattleScript_LowerAtkSpAtk::
+	jumpifstat BS_EFFECT_BATTLER, CMP_GREATER_THAN, STAT_ATK, MIN_STAT_STAGE, BattleScript_LowerAtkSpAtkDoAnim
+	jumpifstat BS_EFFECT_BATTLER, CMP_EQUAL, STAT_SPATK, MIN_STAT_STAGE, BattleScript_LowerAtkSpAtkEnd
+BattleScript_LowerAtkSpAtkDoAnim::
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_EFFECT_BATTLER, BIT_ATK | BIT_SPATK, STAT_CHANGE_NEGATIVE
+	setstatchanger STAT_ATK, 1, TRUE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_LowerAtkSpAtkTrySpAtk
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_LowerAtkSpAtkTrySpAtk
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_LowerAtkSpAtkTrySpAtk::
+	setstatchanger STAT_SPATK, 1, TRUE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_LowerAtkSpAtkEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_LowerAtkSpAtkEnd
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_LowerAtkSpAtkEnd:
+	return
+
 BattleScript_EffectTidyUp::
 	attackcanceler
 	attackstring
