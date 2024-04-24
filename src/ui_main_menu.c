@@ -379,8 +379,8 @@ void MainMenu_Init(MainCallback callback)
     sMainMenuDataPtr->savedCallback = callback;
     for(i = 0; i < 6; i++)
     {
-        sMainMenuDataPtr->iconBoxSpriteIds[6] = SPRITE_NONE;
-        sMainMenuDataPtr->iconMonSpriteIds[6] = SPRITE_NONE;
+        sMainMenuDataPtr->iconBoxSpriteIds[i] = SPRITE_NONE;
+        sMainMenuDataPtr->iconMonSpriteIds[i] = SPRITE_NONE;
     }
     
     SetMainCallback2(MainMenu_RunSetup);
