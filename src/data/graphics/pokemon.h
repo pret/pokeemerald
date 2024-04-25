@@ -11846,16 +11846,25 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #if P_FOOTPRINTS
     const u8 gMonFootprint_Unfezant[] = INCBIN_U8("graphics/pokemon/unfezant/footprint.1bpp");
 #endif //P_FOOTPRINTS
+#if OW_FOLLOWERS_ENABLED
+    const u32 gObjectEventPic_Unfezant[] = INCBIN_COMP("graphics/pokemon/unfezant/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    const u32 gFollowerPalette_Unfezant[] = INCBIN_U32("graphics/pokemon/unfezant/follow_normal.gbapal.lz");
+    const u32 gShinyFollowerPalette_Unfezant[] = INCBIN_U32("graphics/pokemon/unfezant/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
+#endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnfezantF[] = INCBIN_U32("graphics/pokemon/unfezant/anim_frontf.4bpp.lz");
     const u32 gMonPalette_UnfezantF[] = INCBIN_U32("graphics/pokemon/unfezant/normalf.gbapal.lz");
     const u32 gMonBackPic_UnfezantF[] = INCBIN_U32("graphics/pokemon/unfezant/backf.4bpp.lz");
     const u32 gMonShinyPalette_UnfezantF[] = INCBIN_U32("graphics/pokemon/unfezant/shinyf.gbapal.lz");
     const u8 gMonIcon_UnfezantF[] = INCBIN_U8("graphics/pokemon/unfezant/iconf.4bpp");
-
 #if OW_FOLLOWERS_ENABLED
-    const u32 gObjectEventPic_Unfezant[] = INCBIN_COMP("graphics/pokemon/unfezant/follower.4bpp");
     const u32 gObjectEventPic_UnfezantF[] = INCBIN_COMP("graphics/pokemon/unfezant_f/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    // const u32 gFollowerPalette_UnfezantF[] = INCBIN_U32("graphics/pokemon/unfezant_f/follow_normal.gbapal.lz");
+    // const u32 gShinyFollowerPalette_UnfezantF[] = INCBIN_U32("graphics/pokemon/unfezant_f/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_FAMILY_PIDOVE
 
@@ -14256,6 +14265,13 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #if P_FOOTPRINTS
     const u8 gMonFootprint_Tornadus[] = INCBIN_U8("graphics/pokemon/tornadus/footprint.1bpp");
 #endif //P_FOOTPRINTS
+#if OW_FOLLOWERS_ENABLED
+    const u32 gObjectEventPic_TornadusIncarnate[] = INCBIN_COMP("graphics/pokemon/tornadus/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    const u32 gFollowerPalette_TornadusIncarnate[] = INCBIN_U32("graphics/pokemon/tornadus/follow_normal.gbapal.lz");
+    const u32 gShinyFollowerPalette_TornadusIncarnate[] = INCBIN_U32("graphics/pokemon/tornadus/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
+#endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_TornadusTherian[] = INCBIN_U32("graphics/pokemon/tornadus/therian/anim_front.4bpp.lz");
     const u32 gMonPalette_TornadusTherian[] = INCBIN_U32("graphics/pokemon/tornadus/therian/normal.gbapal.lz");
@@ -14263,8 +14279,11 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gMonShinyPalette_TornadusTherian[] = INCBIN_U32("graphics/pokemon/tornadus/therian/shiny.gbapal.lz");
     const u8 gMonIcon_TornadusTherian[] = INCBIN_U8("graphics/pokemon/tornadus/therian/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
-    const u32 gObjectEventPic_TornadusIncarnate[] = INCBIN_COMP("graphics/pokemon/tornadus/follower.4bpp");
-    // const u32 gObjectEventPic_TornadusTherian[] = INCBIN_COMP("graphics/pokemon/tornadus/therian/follower.4bpp");
+    //const u32 gObjectEventPic_TornadusTherian[] = INCBIN_COMP("graphics/pokemon/tornadus/therian/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    //const u32 gFollowerPalette_TornadusTherian[] = INCBIN_U32("graphics/pokemon/tornadus/therian/follow_normal.gbapal.lz");
+    //const u32 gShinyFollowerPalette_TornadusTherian[] = INCBIN_U32("graphics/pokemon/tornadus/therian/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_FAMILY_TORNADUS
 
@@ -14277,16 +14296,25 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #if P_FOOTPRINTS
     const u8 gMonFootprint_Thundurus[] = INCBIN_U8("graphics/pokemon/thundurus/footprint.1bpp");
 #endif //P_FOOTPRINTS
+#if OW_FOLLOWERS_ENABLED
+    const u32 gObjectEventPic_ThundurusIncarnate[] = INCBIN_COMP("graphics/pokemon/thundurus/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    const u32 gFollowerPalette_ThundurusIncarnate[] = INCBIN_U32("graphics/pokemon/thundurus/follow_normal.gbapal.lz");
+    const u32 gShinyFollowerPalette_ThundurusIncarnate[] = INCBIN_U32("graphics/pokemon/thundurus/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
+#endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_ThundurusTherian[] = INCBIN_U32("graphics/pokemon/thundurus/therian/anim_front.4bpp.lz");
     const u32 gMonPalette_ThundurusTherian[] = INCBIN_U32("graphics/pokemon/thundurus/therian/normal.gbapal.lz");
     const u32 gMonBackPic_ThundurusTherian[] = INCBIN_U32("graphics/pokemon/thundurus/therian/back.4bpp.lz");
     const u32 gMonShinyPalette_ThundurusTherian[] = INCBIN_U32("graphics/pokemon/thundurus/therian/shiny.gbapal.lz");
     const u8 gMonIcon_ThundurusTherian[] = INCBIN_U8("graphics/pokemon/thundurus/therian/icon.4bpp");
-
 #if OW_FOLLOWERS_ENABLED
-    const u32 gObjectEventPic_ThundurusIncarnate[] = INCBIN_COMP("graphics/pokemon/thundurus/follower.4bpp");
-    // const u32 gObjectEventPic_ThundurusTherian[] = INCBIN_COMP("graphics/pokemon/thundurus/therian/follower.4bpp");
+    //const u32 gObjectEventPic_ThundurusTherian[] = INCBIN_COMP("graphics/pokemon/thundurus/therian/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    //const u32 gFollowerPalette_ThundurusTherian[] = INCBIN_U32("graphics/pokemon/thundurus/therian/follow_normal.gbapal.lz");
+    //const u32 gShinyFollowerPalette_ThundurusTherian[] = INCBIN_U32("graphics/pokemon/thundurus/therian/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_FAMILY_THUNDURUS
 
@@ -14335,16 +14363,25 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #if P_FOOTPRINTS
     const u8 gMonFootprint_Landorus[] = INCBIN_U8("graphics/pokemon/landorus/footprint.1bpp");
 #endif //P_FOOTPRINTS
+#if OW_FOLLOWERS_ENABLED
+    const u32 gObjectEventPic_LandorusIncarnate[] = INCBIN_COMP("graphics/pokemon/landorus/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    const u32 gFollowerPalette_LandorusIncarnate[] = INCBIN_U32("graphics/pokemon/landorus/follow_normal.gbapal.lz");
+    const u32 gShinyFollowerPalette_LandorusIncarnate[] = INCBIN_U32("graphics/pokemon/landorus/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
+#endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_LandorusTherian[] = INCBIN_U32("graphics/pokemon/landorus/therian/anim_front.4bpp.lz");
     const u32 gMonPalette_LandorusTherian[] = INCBIN_U32("graphics/pokemon/landorus/therian/normal.gbapal.lz");
     const u32 gMonBackPic_LandorusTherian[] = INCBIN_U32("graphics/pokemon/landorus/therian/back.4bpp.lz");
     const u32 gMonShinyPalette_LandorusTherian[] = INCBIN_U32("graphics/pokemon/landorus/therian/shiny.gbapal.lz");
     const u8 gMonIcon_LandorusTherian[] = INCBIN_U8("graphics/pokemon/landorus/therian/icon.4bpp");
-
 #if OW_FOLLOWERS_ENABLED
-    const u32 gObjectEventPic_LandorusIncarnate[] = INCBIN_COMP("graphics/pokemon/landorus/follower.4bpp");
-    // const u32 gObjectEventPic_LandorusTherian[] = INCBIN_COMP("graphics/pokemon/landorus/therian/follower.4bpp");
+    //const u32 gObjectEventPic_LandorusTherian[] = INCBIN_COMP("graphics/pokemon/landorus/therian/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    //const u32 gFollowerPalette_LandorusTherian[] = INCBIN_U32("graphics/pokemon/landorus/therian/follow_normal.gbapal.lz");
+    //const u32 gShinyFollowerPalette_LandorusTherian[] = INCBIN_U32("graphics/pokemon/landorus/therian/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_FAMILY_LANDORUS
 
@@ -15595,16 +15632,25 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #if P_FOOTPRINTS
     const u8 gMonFootprint_Aegislash[] = INCBIN_U8("graphics/pokemon/aegislash/footprint.1bpp");
 #endif //P_FOOTPRINTS
+#if OW_FOLLOWERS_ENABLED
+    const u32 gObjectEventPic_AegislashShield[] = INCBIN_COMP("graphics/pokemon/aegislash/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    const u32 gFollowerPalette_AegislashShield[] = INCBIN_U32("graphics/pokemon/aegislash/follow_normal.gbapal.lz");
+    const u32 gShinyFollowerPalette_AegislashShield[] = INCBIN_U32("graphics/pokemon/aegislash/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
+#endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_AegislashBlade[] = INCBIN_U32("graphics/pokemon/aegislash/blade/anim_front.4bpp.lz");
     const u32 gMonPalette_AegislashBlade[] = INCBIN_U32("graphics/pokemon/aegislash/blade/normal.gbapal.lz");
     const u32 gMonBackPic_AegislashBlade[] = INCBIN_U32("graphics/pokemon/aegislash/blade/back.4bpp.lz");
     const u32 gMonShinyPalette_AegislashBlade[] = INCBIN_U32("graphics/pokemon/aegislash/blade/shiny.gbapal.lz");
     const u8 gMonIcon_AegislashBlade[] = INCBIN_U8("graphics/pokemon/aegislash/blade/icon.4bpp");
-
 #if OW_FOLLOWERS_ENABLED
-    const u32 gObjectEventPic_AegislashShield[] = INCBIN_COMP("graphics/pokemon/aegislash/follower.4bpp");
     // const u32 gObjectEventPic_AegislashBlade[] = INCBIN_COMP("graphics/pokemon/aegislash/blade/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    // const u32 gFollowerPalette_AegislashBlade[] = INCBIN_U32("graphics/pokemon/aegislash/blade/follow_normal.gbapal.lz");
+    // const u32 gShinyFollowerPalette_AegislashBlade[] = INCBIN_U32("graphics/pokemon/aegislash/blade/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_FAMILY_HONEDGE
 
@@ -16120,6 +16166,11 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gMonFrontPic_PumpkabooSuper[] = INCBIN_U32("graphics/pokemon/pumpkaboo/super/anim_front.4bpp.lz");
     const u32 gMonBackPic_PumpkabooSuper[] = INCBIN_U32("graphics/pokemon/pumpkaboo/super/back.4bpp.lz");
 
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    const u32 gFollowerPalette_Pumpkaboo[] = INCBIN_U32("graphics/pokemon/pumpkaboo/follow_normal.gbapal.lz");
+    const u32 gShinyFollowerPalette_Pumpkaboo[] = INCBIN_U32("graphics/pokemon/pumpkaboo/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
+
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_PumpkabooAverage[] = INCBIN_COMP("graphics/pokemon/pumpkaboo/follower.4bpp");
     // const u32 gObjectEventPic_PumpkabooSmall[] = INCBIN_COMP("graphics/pokemon/pumpkaboo/small/follower.4bpp");
@@ -16145,6 +16196,11 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 
     const u32 gMonFrontPic_GourgeistSuper[] = INCBIN_U32("graphics/pokemon/gourgeist/super/anim_front.4bpp.lz");
     const u32 gMonBackPic_GourgeistSuper[] = INCBIN_U32("graphics/pokemon/gourgeist/super/back.4bpp.lz");
+
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    const u32 gFollowerPalette_Gourgeist[] = INCBIN_U32("graphics/pokemon/gourgeist/follow_normal.gbapal.lz");
+    const u32 gShinyFollowerPalette_Gourgeist[] = INCBIN_U32("graphics/pokemon/gourgeist/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
 
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_GourgeistAverage[] = INCBIN_COMP("graphics/pokemon/gourgeist/follower.4bpp");
@@ -16246,6 +16302,13 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #if P_FOOTPRINTS
     const u8 gMonFootprint_Xerneas[] = INCBIN_U8("graphics/pokemon/xerneas/footprint.1bpp");
 #endif //P_FOOTPRINTS
+#if OW_FOLLOWERS_ENABLED
+    const u32 gObjectEventPic_XerneasNeutral[] = INCBIN_COMP("graphics/pokemon/xerneas/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    const u32 gFollowerPalette_XerneasNeutral[] = INCBIN_U32("graphics/pokemon/xerneas/follow_normal.gbapal.lz");
+    const u32 gShinyFollowerPalette_XerneasNeutral[] = INCBIN_U32("graphics/pokemon/xerneas/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
+#endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_XerneasActive[] = INCBIN_U32("graphics/pokemon/xerneas/active/anim_front.4bpp.lz");
     const u32 gMonPalette_XerneasActive[] = INCBIN_U32("graphics/pokemon/xerneas/active/normal.gbapal.lz");
@@ -16253,8 +16316,11 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gMonShinyPalette_XerneasActive[] = INCBIN_U32("graphics/pokemon/xerneas/active/shiny.gbapal.lz");
     const u8 gMonIcon_XerneasActive[] = INCBIN_U8("graphics/pokemon/xerneas/active/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
-    const u32 gObjectEventPic_XerneasNeutral[] = INCBIN_COMP("graphics/pokemon/xerneas/follower.4bpp");
     // const u32 gObjectEventPic_XerneasActive[] = INCBIN_COMP("graphics/pokemon/xerneas/active/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    // const u32 gFollowerPalette_XerneasActive[] = INCBIN_U32("graphics/pokemon/xerneas/active/follow_normal.gbapal.lz");
+    // const u32 gShinyFollowerPalette_XerneasActive[] = INCBIN_U32("graphics/pokemon/xerneas/active/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_FAMILY_XERNEAS
 
@@ -16286,22 +16352,38 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonFootprint_Zygarde[] = INCBIN_U8("graphics/pokemon/zygarde/footprint.1bpp");
 #endif //P_FOOTPRINTS
 
+#if OW_FOLLOWERS_ENABLED
+    const u32 gObjectEventPic_Zygarde50[] = INCBIN_COMP("graphics/pokemon/zygarde/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    const u32 gFollowerPalette_Zygarde50[] = INCBIN_U32("graphics/pokemon/zygarde/follow_normal.gbapal.lz");
+    const u32 gShinyFollowerPalette_Zygarde50[] = INCBIN_U32("graphics/pokemon/zygarde/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
+#endif //OW_FOLLOWERS_ENABLED
+
     const u32 gMonFrontPic_Zygarde10[] = INCBIN_U32("graphics/pokemon/zygarde/10_percent/anim_front.4bpp.lz");
     const u32 gMonPalette_Zygarde10[] = INCBIN_U32("graphics/pokemon/zygarde/10_percent/normal.gbapal.lz");
     const u32 gMonBackPic_Zygarde10[] = INCBIN_U32("graphics/pokemon/zygarde/10_percent/back.4bpp.lz");
     const u32 gMonShinyPalette_Zygarde10[] = INCBIN_U32("graphics/pokemon/zygarde/10_percent/shiny.gbapal.lz");
     const u8 gMonIcon_Zygarde10[] = INCBIN_U8("graphics/pokemon/zygarde/10_percent/icon.4bpp");
+#if OW_FOLLOWERS_ENABLED
+    //const u32 gObjectEventPic_Zygarde10[] = INCBIN_COMP("graphics/pokemon/zygarde/10_percent/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    //const u32 gFollowerPalette_Zygarde10[] = INCBIN_U32("graphics/pokemon/zygarde/10_percent/follow_normal.gbapal.lz");
+    //const u32 gShinyFollowerPalette_Zygarde10[] = INCBIN_U32("graphics/pokemon/zygarde/10_percent/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
+#endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_ZygardeComplete[] = INCBIN_U32("graphics/pokemon/zygarde/complete/anim_front.4bpp.lz");
     const u32 gMonPalette_ZygardeComplete[] = INCBIN_U32("graphics/pokemon/zygarde/complete/normal.gbapal.lz");
     const u32 gMonBackPic_ZygardeComplete[] = INCBIN_U32("graphics/pokemon/zygarde/complete/back.4bpp.lz");
     const u32 gMonShinyPalette_ZygardeComplete[] = INCBIN_U32("graphics/pokemon/zygarde/complete/shiny.gbapal.lz");
     const u8 gMonIcon_ZygardeComplete[] = INCBIN_U8("graphics/pokemon/zygarde/complete/icon.4bpp");
-
 #if OW_FOLLOWERS_ENABLED
-    const u32 gObjectEventPic_Zygarde50[] = INCBIN_COMP("graphics/pokemon/zygarde/follower.4bpp");
-    //const u32 gObjectEventPic_Zygarde10[] = INCBIN_COMP("graphics/pokemon/zygarde/10_percent/follower.4bpp");
     //const u32 gObjectEventPic_ZygardeComplete[] = INCBIN_COMP("graphics/pokemon/zygarde/complete/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    //const u32 gFollowerPalette_ZygardeComplete[] = INCBIN_U32("graphics/pokemon/zygarde/complete/follow_normal.gbapal.lz");
+    //const u32 gShinyFollowerPalette_ZygardeComplete[] = INCBIN_U32("graphics/pokemon/zygarde/complete/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_FAMILY_ZYGARDE
 
