@@ -1,5 +1,6 @@
 #include "global.h"
 #include "test/test.h"
+#include "battle_main.h"
 #include "item.h"
 #include "text.h"
 #include "constants/abilities.h"
@@ -522,4 +523,28 @@ TEST("Ability names fit on Ability Pop-Up")
         PARAMETRIZE_LABEL("%S", gAbilitiesInfo[i].name) { ability = i; }
     }
     EXPECT_LE(GetStringWidth(fontId, gAbilitiesInfo[ability].name, 0), widthPx);
+}
+
+TEST("Type names fit on Battle Screen")
+{
+    u32 i;
+    const u32 fontId = FONT_NARROWER, widthPx = 39;
+    u32 type = TYPE_NORMAL;
+    for (i = 0; i < NUMBER_OF_MON_TYPES; i++)
+    {
+        PARAMETRIZE_LABEL("%S", gTypesInfo[i].name) { type = i; }
+    }
+    EXPECT_LE(GetStringWidth(fontId, gTypesInfo[type].name, 0), widthPx);
+}
+
+TEST("Type names fit on Pokedex Search Screen")
+{
+    u32 i;
+    const u32 fontId = FONT_NARROWER, widthPx = 38;
+    u32 type = TYPE_NORMAL;
+    for (i = 0; i < NUMBER_OF_MON_TYPES; i++)
+    {
+        PARAMETRIZE_LABEL("%S", gTypesInfo[i].name) { type = i; }
+    }
+    EXPECT_LE(GetStringWidth(fontId, gTypesInfo[type].name, 0), widthPx);
 }

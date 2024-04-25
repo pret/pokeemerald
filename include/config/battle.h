@@ -39,7 +39,7 @@
 #define B_MULTIPLE_TARGETS_DMG      GEN_LATEST // In Gen4+, damage dealt by moves that hit multiple targets at once is reduced to 75%. Before, it was 50%.
 
 // Type settings
-#define B_EXPANDED_TYPE_NAMES       FALSE      // If TRUE, type names are increased from 6 characters to 8 characters.
+#define B_EXPANDED_TYPE_NAMES       TRUE       // If TRUE, type names are increased from 6 characters to 8 characters.
 #define B_GHOSTS_ESCAPE             GEN_LATEST // In Gen6+, abilities like Shadow Tag or moves like Mean Look fail on Ghost-type Pokémon. They can also escape any Wild Battle.
 #define B_PARALYZE_ELECTRIC         GEN_LATEST // In Gen6+, Electric-type Pokémon can't be paralyzed.
 #define B_POWDER_GRASS              GEN_LATEST // In Gen6+, Grass-type Pokémon are immune to powder and spore moves.
