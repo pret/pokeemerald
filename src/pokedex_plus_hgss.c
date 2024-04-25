@@ -385,7 +385,7 @@ struct PokemonStats
     u8  eggGroup1;
     u8  eggGroup2;
     u8  eggCycles;
-    u16  expYield;
+    u16 expYield;
     u8  friendship;
     u16 ability0;
     u16 ability1;
