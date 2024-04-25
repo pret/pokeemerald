@@ -16,7 +16,7 @@ SINGLE_BATTLE_TEST("Safety Goggles block powder and spore moves")
         TURN { MOVE(player, MOVE_STUN_SPORE); }
     } SCENE {
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_STUN_SPORE, player);
-        MESSAGE("Foe Abra is not affected thanks to its SafetyGoggles!");
+        MESSAGE("Foe Abra is not affected thanks to its Safety Goggles!");
     }
 }
 

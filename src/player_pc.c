@@ -293,6 +293,7 @@ static const struct ListMenuTemplate sListMenuTemplate_ItemStorage =
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NARROW,
     .cursorKind = CURSOR_BLACK_ARROW,
+    .textNarrowWidth = 74,
 };
 
 static const struct WindowTemplate sWindowTemplates_ItemStorage[ITEMPC_WIN_COUNT] =
@@ -1349,6 +1350,7 @@ static void ItemStorage_PrintItemQuantity(u8 windowId, u16 value, u32 mode, u8 x
 // Start an item Withdraw/Toss
 static void ItemStorage_DoItemAction(u8 taskId)
 {
+    u8 *end;
     s16 *data = gTasks[taskId].data;
     u16 pos = gPlayerPCItemPageInfo.cursorPos + gPlayerPCItemPageInfo.itemsAbove;
     ItemStorage_RemoveScrollIndicator();
@@ -1364,7 +1366,8 @@ static void ItemStorage_DoItemAction(u8 taskId)
         }
 
         // Withdrawing multiple items, show "how many" message
-        CopyItemName(gSaveBlock1Ptr->pcItems[pos].itemId, gStringVar1);
+        end = CopyItemNameHandlePlural(gSaveBlock1Ptr->pcItems[pos].itemId, gStringVar1, 2);
+        WrapFontIdToFit(gStringVar1, end, FONT_NORMAL, WindowWidthPx(ITEMPC_WIN_MESSAGE) - 6);
         ItemStorage_PrintMessage(ItemStorage_GetMessage(MSG_HOW_MANY_TO_WITHDRAW));
     }
     else
@@ -1377,7 +1380,8 @@ static void ItemStorage_DoItemAction(u8 taskId)
         }
 
         // Tossing multiple items, show "how many" message
-        CopyItemName(gSaveBlock1Ptr->pcItems[pos].itemId, gStringVar1);
+        end = CopyItemNameHandlePlural(gSaveBlock1Ptr->pcItems[pos].itemId, gStringVar1, 2);
+        WrapFontIdToFit(gStringVar1, end, FONT_NORMAL, WindowWidthPx(ITEMPC_WIN_MESSAGE) - 6);
         ItemStorage_PrintMessage(ItemStorage_GetMessage(MSG_HOW_MANY_TO_TOSS));
     }
 
@@ -1426,7 +1430,8 @@ static void ItemStorage_DoItemWithdraw(u8 taskId)
     if (AddBagItem(gSaveBlock1Ptr->pcItems[pos].itemId, tQuantity) == TRUE)
     {
         // Item withdrawn
-        CopyItemName(gSaveBlock1Ptr->pcItems[pos].itemId, gStringVar1);
+        u8 *end = CopyItemNameHandlePlural(gSaveBlock1Ptr->pcItems[pos].itemId, gStringVar1, tQuantity);
+        WrapFontIdToFit(gStringVar1, end, FONT_NORMAL, WindowWidthPx(ITEMPC_WIN_MESSAGE) - 6);
         ConvertIntToDecimalStringN(gStringVar2, tQuantity, STR_CONV_MODE_LEFT_ALIGN, 3);
         ItemStorage_PrintMessage(ItemStorage_GetMessage(MSG_WITHDREW_ITEM));
         gTasks[taskId].func = ItemStorage_HandleRemoveItem;
@@ -1448,7 +1453,8 @@ static void ItemStorage_DoItemToss(u8 taskId)
     if (!ItemId_GetImportance(gSaveBlock1Ptr->pcItems[pos].itemId))
     {
         // Show toss confirmation prompt
-        CopyItemName(gSaveBlock1Ptr->pcItems[pos].itemId, gStringVar1);
+        u8 *end = CopyItemNameHandlePlural(gSaveBlock1Ptr->pcItems[pos].itemId, gStringVar1, tQuantity);
+        WrapFontIdToFit(gStringVar1, end, FONT_NORMAL, WindowWidthPx(ITEMPC_WIN_MESSAGE) - 6);
         ConvertIntToDecimalStringN(gStringVar2, tQuantity, STR_CONV_MODE_LEFT_ALIGN, 3);
         ItemStorage_PrintMessage(ItemStorage_GetMessage(MSG_OKAY_TO_THROW_AWAY));
         CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates_ItemStorage[ITEMPC_WIN_YESNO], 1, 0, 1, 0x214, 0xE, &ItemTossYesNoFuncs);

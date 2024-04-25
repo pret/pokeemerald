@@ -295,6 +295,12 @@ const struct OamData gOamData_BattleSpritePlayerSide =
 
 static const s8 sCenterToCornerVecXs[8] ={-32, -16, -16, -32, -32};
 
+#if B_EXPANDED_TYPE_NAMES == TRUE
+#define HANDLE_EXPANDED_TYPE_NAME(_name, ...) _(DEFAULT(_name, __VA_ARGS__))
+#else
+#define HANDLE_EXPANDED_TYPE_NAME(_name) _(_name)
+#endif
+
 // .generic is large enough that the text for TYPE_ELECTRIC will exceed TEXT_BUFF_ARRAY_COUNT.
 const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
 {
@@ -314,7 +320,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_FIGHTING] =
     {
-        .name = _("Fight"),
+        .name = HANDLE_EXPANDED_TYPE_NAME("Fight", "Fighting"),
         .generic = _("a FIGHTING move"),
         .palette = 13,
         .zMove = MOVE_ALL_OUT_PUMMELING,
@@ -496,7 +502,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_ELECTRIC] =
     {
-        .name = _("Electr"),
+        .name = HANDLE_EXPANDED_TYPE_NAME("Electr", "Electric"),
         .generic = _("an ELECTRIC move"),
         .palette = 13,
         .zMove = MOVE_GIGAVOLT_HAVOC,
@@ -512,7 +518,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_PSYCHIC] =
     {
-        .name = _("Psychc"),
+        .name = HANDLE_EXPANDED_TYPE_NAME("Psychc", "Psychic"),
         .generic = _("a PSYCHIC move"),
         .palette = 14,
         .zMove = MOVE_SHATTERED_PSYCHE,
@@ -592,7 +598,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_STELLAR] =
     {
-        .name = _("Stellr"),
+        .name = HANDLE_EXPANDED_TYPE_NAME("Stellr", "Stellar"),
         .generic = _("a STELLAR move"),
         .palette = 15,
         .zMove = MOVE_BREAKNECK_BLITZ,
