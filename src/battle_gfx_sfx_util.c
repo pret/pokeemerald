@@ -1108,27 +1108,36 @@ void SetBattlerSpriteAffineMode(u8 affineMode)
 
 #define tBattlerId data[0]
 
-void LoadAndCreateEnemyShadowSprites(void)
+void CreateEnemyShadowSprite(u32 battler)
 {
-    u8 battler;
-
-    LoadCompressedSpriteSheet(&gSpriteSheet_EnemyShadow);
-
-    battler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
     gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow,
                                                                                     GetBattlerSpriteCoord(battler, BATTLER_COORD_X),
                                                                                     GetBattlerSpriteCoord(battler, BATTLER_COORD_Y) + 29,
                                                                                     0xC8);
-    gSprites[gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteId].data[0] = battler;
+    if (gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteId < MAX_SPRITES)
+        gSprites[gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteId].data[0] = battler;
+}
 
+void LoadAndCreateEnemyShadowSprites(void)
+{
+    u8 battler;
+    u32 i;
+
+    LoadCompressedSpriteSheet(&gSpriteSheet_EnemyShadow);
+    
+    // initialize shadow sprite ids
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        gBattleSpritesDataPtr->healthBoxesData[i].shadowSpriteId = MAX_SPRITES;
+    }
+
+    battler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+    CreateEnemyShadowSprite(battler);
+    
     if (IsDoubleBattle())
     {
         battler = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-        gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow,
-                                                                                        GetBattlerSpriteCoord(battler, BATTLER_COORD_X),
-                                                                                        GetBattlerSpriteCoord(battler, BATTLER_COORD_Y) + 29,
-                                                                                        0xC8);
-        gSprites[gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteId].data[0] = battler;
+        CreateEnemyShadowSprite(battler);
     }
 }
 
@@ -1168,6 +1177,8 @@ void SetBattlerShadowSpriteCallback(u8 battler, u16 species)
 {
     // The player's shadow is never seen.
     if (GetBattlerSide(battler) == B_SIDE_PLAYER || gBattleScripting.monCaught)
+        return;
+    if (gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteId >= MAX_SPRITES)
         return;
 
     if (gBattleSpritesDataPtr->battlerData[battler].transformSpecies != SPECIES_NONE)
