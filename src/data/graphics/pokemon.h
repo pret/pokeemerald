@@ -16811,30 +16811,51 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #if P_FOOTPRINTS
     const u8 gMonFootprint_Oricorio[] = INCBIN_U8("graphics/pokemon/oricorio/footprint.1bpp");
 #endif //P_FOOTPRINTS
+#if OW_FOLLOWERS_ENABLED
+    const u32 gObjectEventPic_OricorioBaile[] = INCBIN_COMP("graphics/pokemon/oricorio/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    const u32 gFollowerPalette_OricorioBaile[] = INCBIN_U32("graphics/pokemon/oricorio/follow_normal.gbapal.lz");
+    const u32 gShinyFollowerPalette_OricorioBaile[] = INCBIN_U32("graphics/pokemon/oricorio/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
+#endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_OricorioPomPom[] = INCBIN_U32("graphics/pokemon/oricorio/pom_pom/front.4bpp.lz");
     const u32 gMonPalette_OricorioPomPom[] = INCBIN_U32("graphics/pokemon/oricorio/pom_pom/normal.gbapal.lz");
     const u32 gMonBackPic_OricorioPomPom[] = INCBIN_U32("graphics/pokemon/oricorio/pom_pom/back.4bpp.lz");
     const u32 gMonShinyPalette_OricorioPomPom[] = INCBIN_U32("graphics/pokemon/oricorio/pom_pom/shiny.gbapal.lz");
     const u8 gMonIcon_OricorioPomPom[] = INCBIN_U8("graphics/pokemon/oricorio/pom_pom/icon.4bpp");
+#if OW_FOLLOWERS_ENABLED
+    // const u32 gObjectEventPic_OricorioPomPom[] = INCBIN_COMP("graphics/pokemon/oricorio/pom_pom/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    // const u32 gFollowerPalette_OricorioPomPom[] = INCBIN_U32("graphics/pokemon/oricorio/pom_pom/follow_normal.gbapal.lz");
+    // const u32 gShinyFollowerPalette_OricorioPomPom[] = INCBIN_U32("graphics/pokemon/oricorio/pom_pom/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
+#endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_OricorioPau[] = INCBIN_U32("graphics/pokemon/oricorio/pau/front.4bpp.lz");
     const u32 gMonPalette_OricorioPau[] = INCBIN_U32("graphics/pokemon/oricorio/pau/normal.gbapal.lz");
     const u32 gMonBackPic_OricorioPau[] = INCBIN_U32("graphics/pokemon/oricorio/pau/back.4bpp.lz");
     const u32 gMonShinyPalette_OricorioPau[] = INCBIN_U32("graphics/pokemon/oricorio/pau/shiny.gbapal.lz");
     const u8 gMonIcon_OricorioPau[] = INCBIN_U8("graphics/pokemon/oricorio/pau/icon.4bpp");
+#if OW_FOLLOWERS_ENABLED
+    // const u32 gObjectEventPic_OricorioPau[] = INCBIN_COMP("graphics/pokemon/oricorio/pau/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    // const u32 gFollowerPalette_OricorioPau[] = INCBIN_U32("graphics/pokemon/oricorio/pau/follow_normal.gbapal.lz");
+    // const u32 gShinyFollowerPalette_OricorioPau[] = INCBIN_U32("graphics/pokemon/oricorio/pau/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
+#endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_OricorioSensu[] = INCBIN_U32("graphics/pokemon/oricorio/sensu/front.4bpp.lz");
     const u32 gMonPalette_OricorioSensu[] = INCBIN_U32("graphics/pokemon/oricorio/sensu/normal.gbapal.lz");
     const u32 gMonBackPic_OricorioSensu[] = INCBIN_U32("graphics/pokemon/oricorio/sensu/back.4bpp.lz");
     const u32 gMonShinyPalette_OricorioSensu[] = INCBIN_U32("graphics/pokemon/oricorio/sensu/shiny.gbapal.lz");
     const u8 gMonIcon_OricorioSensu[] = INCBIN_U8("graphics/pokemon/oricorio/sensu/icon.4bpp");
-
 #if OW_FOLLOWERS_ENABLED
-    const u32 gObjectEventPic_OricorioBaile[] = INCBIN_COMP("graphics/pokemon/oricorio/follower.4bpp");
-    // const u32 gObjectEventPic_OricorioPomPom[] = INCBIN_COMP("graphics/pokemon/oricorio/pom_pom/follower.4bpp");
-    // const u32 gObjectEventPic_OricorioPau[] = INCBIN_COMP("graphics/pokemon/oricorio/pau/follower.4bpp");
     // const u32 gObjectEventPic_OricorioSensu[] = INCBIN_COMP("graphics/pokemon/oricorio/sensu/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    // const u32 gFollowerPalette_OricorioSensu[] = INCBIN_U32("graphics/pokemon/oricorio/sensu/follow_normal.gbapal.lz");
+    // const u32 gShinyFollowerPalette_OricorioSensu[] = INCBIN_U32("graphics/pokemon/oricorio/sensu/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_FAMILY_ORICORIO
 

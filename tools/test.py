@@ -47,6 +47,8 @@ def construct_compatibility_dict():
         newname = newname.replace("vivillon_", "vivillon/")
         newname = newname.replace("wormadam_", "wormadam/")
 
+        if (os.path.exists('followers/' + newname) == False):
+            os.mkdir('followers/' + newname)
         os.rename('followers/' + name + '.png', 'followers/' + newname + '/follower.png')
         #os.popen('cp followers/' + name + '.png followers/' + name + '/follower.png')
         #os.remove('followers/' + name + '.png')
