@@ -7078,6 +7078,29 @@ BattleScript_AttackerFormChangeEnd3NoPopup::
 	call BattleScript_AttackerFormChangeNoPopup
 	end3
 
+BattleScript_AttackerFormChangeWithString::
+	pause 5
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
+	flushtextbox
+BattleScript_AttackerFormChangeWithStringNoPopup::
+	handleformchange BS_ATTACKER, 0
+	handleformchange BS_ATTACKER, 1
+	playanimation BS_ATTACKER, B_ANIM_FORM_CHANGE
+	waitanimation
+	handleformchange BS_ATTACKER, 2
+	printstring STRINGID_PKMNTRANSFORMED
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_AttackerFormChangeWithStringEnd3::
+	call BattleScript_AttackerFormChangeWithString
+	end3
+
+BattleScript_AttackerFormChangeWithStringEnd3NoPopup::
+	call BattleScript_AttackerFormChangeWithStringNoPopup
+	end3
+
 BattleScript_AttackerFormChangeMoveEffect::
 	waitmessage 1
 	handleformchange BS_ATTACKER, 0
@@ -8356,6 +8379,13 @@ BattleScript_ProteanActivates::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
+BattleScript_TeraShellDistortingTypeMatchups::
+	pause B_WAIT_TIME_SHORTEST
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNMADESHELLGLEAM
+	waitmessage B_WAIT_TIME_LONG
+	return
+
 BattleScript_CursedBodyActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_CUSEDBODYDISABLED
@@ -9259,6 +9289,25 @@ BattleScript_AnnounceAirLockCloudNine::
 	printstring STRINGID_AIRLOCKACTIVATES
 	waitmessage B_WAIT_TIME_LONG
 	call BattleScript_ActivateWeatherAbilities
+	end3
+
+BattleScript_ActivateTeraformZero::
+	call BattleScript_AbilityPopUp
+	waitmessage B_WAIT_TIME_LONG
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_ANY, BattleScript_ActivateTeraformZero_RemoveWeather
+	jumpifhalfword CMP_COMMON_BITS, gFieldStatuses, STATUS_FIELD_TERRAIN_ANY, BattleScript_ActivateTeraformZero_RemoveTerrain
+	goto BattleScript_ActivateTeraformZero_End
+BattleScript_ActivateTeraformZero_RemoveWeather:
+	removeweather
+	printfromtable gWeatherEndsStringIds
+	waitmessage B_WAIT_TIME_LONG
+	jumpifhalfword CMP_NO_COMMON_BITS, gFieldStatuses, STATUS_FIELD_TERRAIN_ANY, BattleScript_ActivateTeraformZero_End
+BattleScript_ActivateTeraformZero_RemoveTerrain:
+	removeterrain
+	playanimation BS_ATTACKER, B_ANIM_RESTORE_BG
+	printfromtable gTerrainStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_ActivateTeraformZero_End:
 	end3
 
 BattleScript_QuickClawActivation::

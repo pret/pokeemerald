@@ -20,7 +20,7 @@ SINGLE_BATTLE_TEST("Zero to Hero transforms Palafin when it switches out")
     } THEN { EXPECT_EQ(player->species, SPECIES_PALAFIN_HERO); }
 }
 
-SINGLE_BATTLE_TEST("Zero to Hero can't be surpressed by Neutralizing Gas")
+SINGLE_BATTLE_TEST("Zero to Hero can't be suppressed by Neutralizing Gas")
 {
     GIVEN {
         PLAYER(SPECIES_PALAFIN_ZERO) { Ability(ABILITY_ZERO_TO_HERO); }

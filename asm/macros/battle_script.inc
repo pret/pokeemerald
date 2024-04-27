@@ -1638,6 +1638,10 @@
 	.4byte \failInstr
 	.endm
 
+	.macro removeweather
+	callnative BS_RemoveWeather
+	.endm
+
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES

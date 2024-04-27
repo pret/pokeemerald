@@ -1268,7 +1268,7 @@ static const struct FormChange sOgerponFormChangeTable[] = {
 
 #if P_FAMILY_TERAPAGOS
 static const struct FormChange sTerapagosFormChangeTable[] = {
-    {FORM_CHANGE_BEGIN_BATTLE, SPECIES_TERAPAGOS_TERASTAL}, //needs to be tied to the ability
+    {FORM_CHANGE_BATTLE_SWITCH, SPECIES_TERAPAGOS_TERASTAL, ABILITY_TERA_SHIFT},
 #if P_TERA_FORMS
     //{FORM_CHANGE_TERASTALLIZATION, SPECIES_TERAPAGOS_STELLAR},
 #endif
