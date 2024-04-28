@@ -1869,7 +1869,7 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
 {
     u32 paletteNum;
     // Use standalone palette, unless entry is OOB or NULL (fallback to front-sprite-based)
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+#if OW_FOLLOWERS_ENABLED == TRUE && OW_FOLLOWERS_SHARE_PALETTE == FALSE
     if ((shiny && gSpeciesInfo[species].followerPalette)
     || (!shiny && gSpeciesInfo[species].followerShinyPalette))
     {
