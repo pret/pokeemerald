@@ -7040,6 +7040,8 @@ static void SetDmgHazardsBattlescript(u8 battler, u8 multistringId)
         gBattlescriptCurrInstr = BattleScript_DmgHazardsOnTarget;
     else if (gBattlescriptCurrInstr[1] == BS_ATTACKER)
         gBattlescriptCurrInstr = BattleScript_DmgHazardsOnAttacker;
+    else if (gBattlescriptCurrInstr[1] == BS_SCRIPTING)
+        gBattlescriptCurrInstr = BattleScript_DmgHazardsOnBattlerScripting;
     else
         gBattlescriptCurrInstr = BattleScript_DmgHazardsOnFaintedBattler;
 }
