@@ -109,6 +109,7 @@ struct TypeInfo
     u8 palette;
     u16 zMove;
     u16 maxMove;
+    const u32 *const paletteTMHM;
     //u16 enhanceItem;
     //u16 berry;
     //u16 gem;
