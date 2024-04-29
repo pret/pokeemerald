@@ -2172,3 +2172,16 @@
 	.2byte \status1
 	.2byte \slot
 	.endm
+
+	@ Sets VAR_RESULT to the Pokémon in \slot's Tera Type
+	.macro checkteratype slot:req
+	callnative CheckTeraType
+	.2byte \slot
+	.endm
+
+	@ Sets the Pokémon in \slot's Tera Type
+	.macro setteratype type:req, slot:req
+	callnative SetTeraType
+	.byte \type
+	.2byte \slot
+	.endm

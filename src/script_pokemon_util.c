@@ -294,6 +294,25 @@ void ToggleGigantamaxFactor(struct ScriptContext *ctx)
     }
 }
 
+void CheckTeraType(struct ScriptContext *ctx)
+{
+    u32 partyIndex = VarGet(ScriptReadHalfword(ctx));
+
+    gSpecialVar_Result = TYPE_NONE;
+
+    if (partyIndex < PARTY_SIZE)
+        gSpecialVar_Result = GetMonData(&gPlayerParty[partyIndex], MON_DATA_TERA_TYPE);
+}
+
+void SetTeraType(struct ScriptContext *ctx)
+{
+    u32 type = ScriptReadByte(ctx);
+    u32 partyIndex = VarGet(ScriptReadHalfword(ctx));
+
+    if (type < NUMBER_OF_MON_TYPES && partyIndex < PARTY_SIZE)
+        SetMonData(&gPlayerParty[partyIndex], MON_DATA_TERA_TYPE, &type);
+}
+
 u32 ScriptGiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 nature, u8 abilityNum, u8 gender, u8 *evs, u8 *ivs, u16 *moves, bool8 isShiny, bool8 ggMaxFactor, u8 teraType)
 {
     u16 nationalDexNum;
