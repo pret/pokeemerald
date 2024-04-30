@@ -4416,7 +4416,15 @@ static void Cmd_getexp(void)
                         gBattleMoveDamage += GetSoftLevelCapExpValue(gPlayerParty[*expMonId].level, gBattleStruct->expShareExpValue);;
                     }
 
-                    ApplyExperienceMultipliers(&gBattleMoveDamage, *expMonId, gBattlerFainted);
+                    if (EXP_CAP_HARD && gBattleMoveDamage != 0)
+                    {
+                        u32 growthRate = gSpeciesInfo[GetMonData(&gPlayerParty[*expMonId], MON_DATA_SPECIES)].growthRate;
+                        if (gExperienceTables[growthRate][GetCurrentLevelCap()] < gExperienceTables[growthRate][GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL)] + gBattleMoveDamage)
+                            gBattleMoveDamage = gExperienceTables[growthRate][GetCurrentLevelCap()];
+                    }
+
+                    if (!EXP_CAP_HARD || gBattleMoveDamage != 0) // Edge case for hard level caps. Prevents mons from getting 1 exp
+                        ApplyExperienceMultipliers(&gBattleMoveDamage, *expMonId, gBattlerFainted);
 
                     if (IsTradedMon(&gPlayerParty[*expMonId]))
                     {
@@ -15987,6 +15995,7 @@ void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBat
 
         value *= sExperienceScalingFactors[(faintedLevel * 2) + 10];
         value /= sExperienceScalingFactors[faintedLevel + expGetterLevel + 10];
+
         *expAmount = value + 1;
     }
 }
