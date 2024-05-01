@@ -170,6 +170,7 @@ static const struct WindowTemplate sMainMenuWindowTemplates[] =
         .paletteNum = 0,           // palette index to use for text
         .baseBlock = 1 + (18 * 2), // tile start in VRAM
     },
+    DUMMY_WIN_TEMPLATE
 };
 
 //  Positions of Hardware/GPU Windows
