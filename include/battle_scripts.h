@@ -80,6 +80,7 @@ extern const u8 BattleScript_EncoredNoMore[];
 extern const u8 BattleScript_DestinyBondTakesLife[];
 extern const u8 BattleScript_DmgHazardsOnAttacker[];
 extern const u8 BattleScript_DmgHazardsOnTarget[];
+extern const u8 BattleScript_DmgHazardsOnBattlerScripting[];
 extern const u8 BattleScript_DmgHazardsOnFaintedBattler[];
 extern const u8 BattleScript_PerishSongTakesLife[];
 extern const u8 BattleScript_PerishSongCountGoesDown[];
