@@ -85,7 +85,7 @@ DOUBLE_BATTLE_TEST("Hospitality does not trigger if there is no ally on the fiel
         MESSAGE("Wobbuffet fainted!");
         HP_BAR(playerRight);
         MESSAGE("Wobbuffet fainted!");
-        MESSAGE("Go! Ptchageist!");
+        MESSAGE("Go! Poltchageist!");
         NOT ABILITY_POPUP(playerLeft, ABILITY_HOSPITALITY);
     }
 }
