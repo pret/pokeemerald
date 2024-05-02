@@ -3581,7 +3581,6 @@ const u8* FaintClearSetData(u32 battler)
     gProtectStructs[battler].flinchImmobility = FALSE;
     gProtectStructs[battler].notFirstStrike = FALSE;
     gProtectStructs[battler].usedHealBlockedMove = FALSE;
-    gProtectStructs[battler].usesBouncedMove = FALSE;
     gProtectStructs[battler].usedGravityPreventedMove = FALSE;
     gProtectStructs[battler].usedThroatChopPreventedMove = FALSE;
     gProtectStructs[battler].statRaised = FALSE;

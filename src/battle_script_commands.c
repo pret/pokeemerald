@@ -1394,9 +1394,9 @@ static void Cmd_attackcanceler(void)
 
     if (gProtectStructs[gBattlerTarget].bounceMove
         && gMovesInfo[gCurrentMove].magicCoatAffected
-        && !gProtectStructs[gBattlerAttacker].usesBouncedMove)
+        && !gBattleStruct->bouncedMoveIsUsed)
     {
-        gProtectStructs[gBattlerTarget].usesBouncedMove = TRUE;
+        gBattleStruct->bouncedMoveIsUsed = TRUE;
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
         // Edge case for bouncing a powder move against a grass type pokemon.
         SetAtkCancellerForCalledMove();
@@ -1413,18 +1413,33 @@ static void Cmd_attackcanceler(void)
         }
         return;
     }
-    else if (GetBattlerAbility(gBattlerTarget) == ABILITY_MAGIC_BOUNCE
-             && gMovesInfo[gCurrentMove].magicCoatAffected
-             && !gProtectStructs[gBattlerAttacker].usesBouncedMove)
+    else if (gMovesInfo[gCurrentMove].magicCoatAffected && !gBattleStruct->bouncedMoveIsUsed)
     {
-        gProtectStructs[gBattlerTarget].usesBouncedMove = TRUE;
-        gBattleCommunication[MULTISTRING_CHOOSER] = 1;
-        // Edge case for bouncing a powder move against a grass type pokemon.
-        SetAtkCancellerForCalledMove();
-        BattleScriptPushCursor();
-        gBattlescriptCurrInstr = BattleScript_MagicCoatBounce;
-        gBattlerAbility = gBattlerTarget;
-        return;
+        u32 battler = gBattlerTarget;
+
+        if (GetBattlerAbility(gBattlerTarget) == ABILITY_MAGIC_BOUNCE)
+        {
+            battler = gBattlerTarget;
+            gBattleStruct->bouncedMoveIsUsed = TRUE;
+        }
+        else if (IsDoubleBattle()
+              && gMovesInfo[gCurrentMove].target == MOVE_TARGET_OPPONENTS_FIELD
+              && GetBattlerAbility(BATTLE_PARTNER(gBattlerTarget)) == ABILITY_MAGIC_BOUNCE)
+        {
+            gBattlerTarget = battler = BATTLE_PARTNER(gBattlerTarget);
+            gBattleStruct->bouncedMoveIsUsed = TRUE;
+        }
+
+        if (gBattleStruct->bouncedMoveIsUsed)
+        {
+            gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+            // Edge case for bouncing a powder move against a grass type pokemon.
+            SetAtkCancellerForCalledMove();
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_MagicCoatBounce;
+            gBattlerAbility = battler;
+            return;
+        }
     }
 
     // Z-moves and Max Moves bypass protection, but deal reduced damage (factored in AccumulateOtherModifiers)
@@ -5920,9 +5935,10 @@ static void Cmd_moveend(void)
                     return;
                 }
                 // Check if the move used was actually a bounced move. If so, we need to go back to the original attacker and make sure, its move hits all 2 or 3 pokemon.
-                else if (gProtectStructs[gBattlerAttacker].usesBouncedMove)
+                else if (gBattleStruct->bouncedMoveIsUsed)
                 {
                     u8 originalBounceTarget = gBattlerAttacker;
+                    gBattleStruct->bouncedMoveIsUsed = FALSE;
                     gBattlerAttacker = gBattleStruct->attackerBeforeBounce;
                     gBattleStruct->targetsDone[gBattlerAttacker] |= gBitTable[originalBounceTarget];
                     gBattleStruct->targetsDone[originalBounceTarget] = 0;
@@ -6221,7 +6237,7 @@ static void Cmd_moveend(void)
 
                 if (!(gBattleStruct->lastMoveFailed & gBitTable[gBattlerAttacker]
                     || (!gSpecialStatuses[gBattlerAttacker].dancerUsedMove
-                        && gProtectStructs[gBattlerAttacker].usesBouncedMove)))
+                        && gBattleStruct->bouncedMoveIsUsed)))
                 {   // Dance move succeeds
                     // Set target for other Dancer mons; set bit so that mon cannot activate Dancer off of its own move
                     if (!gSpecialStatuses[gBattlerAttacker].dancerUsedMove)
@@ -6316,7 +6332,6 @@ static void Cmd_moveend(void)
                 CancelMultiTurnMoves(gBattlerAttacker); // Cancel it
 
             gBattleStruct->targetsDone[gBattlerAttacker] = 0;
-            gProtectStructs[gBattlerAttacker].usesBouncedMove = FALSE;
             gProtectStructs[gBattlerAttacker].targetAffected = FALSE;
             gProtectStructs[gBattlerAttacker].shellTrap = FALSE;
             gBattleStruct->ateBoost[gBattlerAttacker] = 0;
@@ -6333,6 +6348,7 @@ static void Cmd_moveend(void)
             gBattleStruct->hitSwitchTargetFailed = FALSE;
             gBattleStruct->isAtkCancelerForCalledMove = FALSE;
             gBattleStruct->swapDamageCategory = FALSE;
+            gBattleStruct->bouncedMoveIsUsed = FALSE;
             gBattleStruct->enduredDamage = 0;
             gBattleStruct->additionalEffectsCounter = 0;
             gBattleScripting.moveendState++;

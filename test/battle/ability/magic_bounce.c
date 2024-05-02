@@ -81,3 +81,54 @@ DOUBLE_BATTLE_TEST("Magic Bounce bounces back moves hitting both foes at two foe
         MESSAGE("Foe Wynaut's Defense fell!");
     }
 }
+
+DOUBLE_BATTLE_TEST("Magic Bounce bounces back moves hitting foes field")
+{
+    u32 battlerOne, battlerTwo, abilityBattlerOne, abilityBattlerTwo;
+
+    PARAMETRIZE { battlerOne = SPECIES_NATU; abilityBattlerOne = ABILITY_MAGIC_BOUNCE;
+                  battlerTwo = SPECIES_ESPEON; abilityBattlerTwo = ABILITY_SYNCHRONIZE; }
+    PARAMETRIZE { battlerOne = SPECIES_NATU; abilityBattlerOne = ABILITY_KEEN_EYE;
+                  battlerTwo = SPECIES_ESPEON; abilityBattlerTwo = ABILITY_MAGIC_BOUNCE; }
+
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_STEALTH_ROCK].target == MOVE_TARGET_OPPONENTS_FIELD);
+        PLAYER(SPECIES_ABRA);
+        PLAYER(SPECIES_KADABRA);
+        OPPONENT(battlerOne) { Ability(abilityBattlerOne); }
+        OPPONENT(battlerTwo) { Ability(abilityBattlerTwo); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_STEALTH_ROCK); }
+    } SCENE {
+        if (abilityBattlerOne == ABILITY_MAGIC_BOUNCE)
+            ABILITY_POPUP(opponentLeft, ABILITY_MAGIC_BOUNCE);
+        else
+            ABILITY_POPUP(opponentRight, ABILITY_MAGIC_BOUNCE);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_STEALTH_ROCK, playerLeft);
+        if (abilityBattlerOne == ABILITY_MAGIC_BOUNCE) {
+            MESSAGE("Abra's Stealth Rock was bounced back by Foe Natu's Magic Bounce!");
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_STEALTH_ROCK, opponentLeft);
+        } else {
+            MESSAGE("Abra's Stealth Rock was bounced back by Foe Espeon's Magic Bounce!");
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_STEALTH_ROCK, opponentRight);
+        }
+    }
+}
+
+SINGLE_BATTLE_TEST("Magic Bounce bounced back status moves can not be bounced back by Magic Bounce")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_TOXIC].effect == EFFECT_TOXIC);
+        PLAYER(SPECIES_ESPEON) { Ability(ABILITY_MAGIC_BOUNCE); }
+        OPPONENT(SPECIES_ESPEON) { Ability(ABILITY_MAGIC_BOUNCE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_TOXIC); }
+    } SCENE {
+        ABILITY_POPUP(opponent, ABILITY_MAGIC_BOUNCE);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC, player);
+        MESSAGE("Espeon's Toxic was bounced back by Foe Espeon's Magic Bounce!");
+        NOT ABILITY_POPUP(player, ABILITY_MAGIC_BOUNCE);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC, opponent);
+        STATUS_ICON(player, badPoison: TRUE);
+    }
+}
