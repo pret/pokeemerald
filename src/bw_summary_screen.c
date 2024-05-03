@@ -3967,7 +3967,7 @@ static void BufferAndPrintStats_HandleState(u8 mode)
     u16 hp, hp2, atk, def, spA, spD, spe;
     u8 *currentHPString = Alloc(20);
     u8 *maxHPString = Alloc(20);
-    const s8 *natureMod = gNatureStatTable[sMonSummaryScreen->summary.nature];
+    const s8 *natureMod = gNatureStatTable[sMonSummaryScreen->summary.mintNature];
 
     switch (mode)
     {
@@ -4068,7 +4068,7 @@ static void PrintHPStats(u8 mode)
 
 static void BufferNonHPStats(void)
 {
-    const s8 *natureMod = gNatureStatTable[sMonSummaryScreen->summary.nature];
+    const s8 *natureMod = gNatureStatTable[sMonSummaryScreen->summary.mintNature];
     DynamicPlaceholderTextUtil_Reset();
     BufferStat(gStringVar1, natureMod[STAT_ATK - 1], sMonSummaryScreen->summary.atk, 0, 3);
     BufferStat(gStringVar2, natureMod[STAT_DEF - 1], sMonSummaryScreen->summary.def, 1, 3);
