@@ -27,8 +27,7 @@ void PrepareBattlerForTera(u32 battler)
 
     // Remove Tera Orb charge.    
     if (B_FLAG_TERA_ORB_CHARGED != 0
-        && B_FLAG_TERA_ORB_NO_COST != 0
-        && !FlagGet(B_FLAG_TERA_ORB_NO_COST)
+        && (B_FLAG_TERA_ORB_NO_COST == 0 || !FlagGet(B_FLAG_TERA_ORB_NO_COST))
         && side == B_SIDE_PLAYER
         && !(gBattleTypeFlags & BATTLE_TYPE_DOUBLE && !IsPartnerMonFromSameTrainer(battler)))
     {
@@ -47,10 +46,10 @@ bool32 CanTerastallize(u32 battler)
     u32 holdEffect = GetBattlerHoldEffect(battler, FALSE);
 
     // Check if Player has Tera Orb and has charge.
-    if (B_FLAG_TERA_ORB_CHARGED != 0
-        && (battler == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && battler == B_POSITION_PLAYER_RIGHT))
-        && !(CheckBagHasItem(ITEM_TERA_ORB, 1)
-        && FlagGet(B_FLAG_TERA_ORB_CHARGED)))
+    if (!CheckBagHasItem(ITEM_TERA_ORB, 1)
+        || !((B_FLAG_TERA_ORB_NO_COST != 0 && FlagGet(B_FLAG_TERA_ORB_NO_COST))
+        || (B_FLAG_TERA_ORB_CHARGED != 0 && FlagGet(B_FLAG_TERA_ORB_CHARGED)
+        && ((battler == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && battler == B_POSITION_PLAYER_RIGHT))))))
     {
         return FALSE;
     }
