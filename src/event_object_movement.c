@@ -1966,7 +1966,10 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny) {
         spritePalette.data = gFollowerPalettes[species][shiny & 1];
 
     // Check if pal data must be decompressed
+    /* // There goes Castform making this harder than it needs to be...
     if (IsLZ77Data(spritePalette.data, PLTT_SIZE_4BPP, PLTT_SIZE_4BPP)) {
+    */
+    if (IsLZ77Data(spritePalette.data, PLTT_SIZE_4BPP, PLTT_SIZE_4BPP * NUM_CASTFORM_FORMS)) {
         // IsLZ77Data guarantees word-alignment, so casting this is safe
         LZ77UnCompWram((u32*)spritePalette.data, gDecompressionBuffer);
         spritePalette.data = (void*)gDecompressionBuffer;
