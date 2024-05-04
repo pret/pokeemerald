@@ -132,6 +132,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .metronomeBanned = TRUE,
         .mirrorMoveBanned = TRUE,
         .sketchBanned = TRUE,
+        .assistBanned = TRUE,
     },
 
     [MOVE_POUND] =
