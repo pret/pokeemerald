@@ -447,4 +447,25 @@ SINGLE_BATTLE_TEST("Red Card does not cause the dragged out mon to lose hp due t
     }
 }
 
+SINGLE_BATTLE_TEST("Red Card does not activate if holder is switched in mid-turn")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); Item(ITEM_EJECT_BUTTON); }
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_RED_CARD); }
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(player, MOVE_ENDURE); MOVE(opponent, MOVE_TACKLE); SEND_OUT(player, 1); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ENDURE, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
+        MESSAGE("Wobbuffet is switched out with the Eject Button!");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
+            MESSAGE("Wobbuffet held up its Red Card against Foe Wobbuffet!");
+        }
+    }
+}
+
 // SINGLE_BATTLE_TEST("Red Card activates but fails if the attacker has Dynamaxed")
