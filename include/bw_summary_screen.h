@@ -19,6 +19,7 @@
 #define BW_SUMMARY_CATEGORY_ICONS                   TRUE                // determines whether category (split) icons are shown or not
 #define BW_SUMMARY_IV_EV_DISPLAY                    BW_IV_EV_HIDDEN     // determines how to show IVs and EVs
 #define BW_SUMMARY_DECAP                            FALSE               // indicates if summary screen-specific strings should be decapitalized
+#define BW_SUMMARY_SHOW_FRIENDSHIP                  FALSE               // show a heart that fills up to indicate friendship value
 #define BW_SUMMARY_BW_TYPE_ICONS                    TRUE                // use Gen 5 style type icons instead of the default ones.
                                                                         // out of the box the vanilla icons don't fit well, this is mostly a compatibility
                                                                         // option for people who already use custom icons everywhere else
@@ -26,7 +27,6 @@
 //ravetodo
 // - hidden power
 // - extended move desc window
-// - friendship heart that fills up
 
 void ShowPokemonSummaryScreen_BW(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void));
 void ShowSelectMovePokemonSummaryScreen_BW(struct Pokemon *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void), u16 newMove);

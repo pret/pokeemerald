@@ -128,6 +128,7 @@ enum BWSummarySprites
     SPRITE_ARR_ID_STATUS,
     SPRITE_ARR_ID_SHINY,
     SPRITE_ARR_ID_POKERUS_CURED,
+    SPRITE_ARR_ID_FRIENDSHIP,
     SPRITE_ARR_ID_CATEGORY,
     SPRITE_ARR_ID_HP_GRADE,
     SPRITE_ARR_ID_ATK_GRADE,
@@ -317,7 +318,7 @@ static void PrintHMMovesCantBeForgotten(void);
 static void ResetSpriteIds(void);
 static void SetSpriteInvisibility(u8, bool8);
 static void HidePageSpecificSprites(void);
-static void SetTypeAndPokerusIcons(void);
+static void SetTypeIcons(void);
 static void CreateMoveTypeIcons(void);
 static void SetMonTypeIcons(void);
 static void SetMoveTypeIcons(void);
@@ -339,7 +340,7 @@ static void SetMainMoveSelectorColor(u8);
 static void KeepMoveSelectorVisible(u8);
 static void SummaryScreen_DestroyAnimDelayTask(void);
 static void CreateMonShinySprite(struct Pokemon *);
-static void SetPokerusCuredSprite();
+static void SetPokerusCuredSprite(void);
 static void HandleMonShinyIcon(bool8);
 static void HandleStatusSprite(struct Pokemon *);
 static u8 AddWindowFromTemplateList(const struct WindowTemplate*, u8);
@@ -358,6 +359,8 @@ static void DestroyGradeIcons(void);
 static void ChangeSummaryState(s16*, u8);
 static void DrawNextSkillsButtonPrompt(u8);
 static void BufferAndPrintStats_HandleState(u8);
+static void SetFriendshipSprite(void);
+static void TrySetInfoPageIcons(void);
 
 // const rom data
 
@@ -433,6 +436,8 @@ static const u16 sCategoryIcons_Pal[]                       = INCBIN_U16("graphi
 static const u32 sCategoryIcons_Gfx[]                       = INCBIN_U32("graphics/summary_screen/bw/category_icons.4bpp.lz");
 static const u16 sStatGrades_Pal[]                          = INCBIN_U16("graphics/summary_screen/bw/stat_grades.gbapal");
 static const u32 sStatGrades_Gfx[]                          = INCBIN_U32("graphics/summary_screen/bw/stat_grades.4bpp.lz");
+static const u16 sFriendshipIcon_Pal[]                      = INCBIN_U16("graphics/summary_screen/bw/heart.gbapal");
+static const u32 sFriendshipIcon_Gfx[]                      = INCBIN_U32("graphics/summary_screen/bw/heart.4bpp.lz");
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -754,6 +759,7 @@ static void (*const sTextPrinterTasks[])(u8 taskId) =
 #define TAG_MON_POKERUS_CURED_ICON 30005
 #define TAG_CATEGORY_ICONS 30006
 #define TAG_STAT_GRADES 30007
+#define TAG_FRIENDSHIP_ICON 30008
 
 enum BWCategoryIcon
 {
@@ -949,6 +955,100 @@ static const struct SpriteTemplate sSpriteTemplate_StatGrades =
     .paletteTag = TAG_STAT_GRADES,
     .oam = &sOamData_StatGrades,
     .anims = sSpriteAnimTable_StatGrades,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+enum FriendshipLevels
+{
+    FRIENDSHIP_LEVEL_0,
+    FRIENDSHIP_LEVEL_1,
+    FRIENDSHIP_LEVEL_2,
+    FRIENDSHIP_LEVEL_3,
+    FRIENDSHIP_LEVEL_4,
+    FRIENDSHIP_LEVEL_5,
+    FRIENDSHIP_LEVEL_MAX,
+    FRIENDSHIP_LEVEL_COUNT,
+};
+
+// edit these to change what friendship value the heart icon changes at
+static const u8 sFriendshipLevelToThreshold[FRIENDSHIP_LEVEL_COUNT] = 
+{
+    [FRIENDSHIP_LEVEL_0]    = 0,
+    [FRIENDSHIP_LEVEL_1]    = 44,
+    [FRIENDSHIP_LEVEL_2]    = 88,
+    [FRIENDSHIP_LEVEL_3]    = 132,
+    [FRIENDSHIP_LEVEL_4]    = 176,
+    [FRIENDSHIP_LEVEL_5]    = 220,
+    [FRIENDSHIP_LEVEL_MAX]  = MAX_FRIENDSHIP,
+};
+
+static const struct OamData sOamData_FriendshipIcon =
+{
+    .size = SPRITE_SIZE(8x8),
+    .shape = SPRITE_SHAPE(8x8),
+    .priority = 0,
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_FriendshipIcon =
+{
+    .data = sFriendshipIcon_Gfx,
+    .size = FRIENDSHIP_LEVEL_COUNT * (8 * 8),
+    .tag = TAG_FRIENDSHIP_ICON,
+};
+
+static const struct SpritePalette sSpritePal_FriendshipIcon =
+{
+    .data = sFriendshipIcon_Pal,
+    .tag = TAG_FRIENDSHIP_ICON
+};
+
+static const union AnimCmd sSpriteAnim_FriendshipIcon0[] = {
+    ANIMCMD_FRAME(FRIENDSHIP_LEVEL_0, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_FriendshipIcon1[] = {
+    ANIMCMD_FRAME(FRIENDSHIP_LEVEL_1, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_FriendshipIcon2[] = {
+    ANIMCMD_FRAME(FRIENDSHIP_LEVEL_2, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_FriendshipIcon3[] = {
+    ANIMCMD_FRAME(FRIENDSHIP_LEVEL_3, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_FriendshipIcon4[] = {
+    ANIMCMD_FRAME(FRIENDSHIP_LEVEL_4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_FriendshipIcon5[] = {
+    ANIMCMD_FRAME(FRIENDSHIP_LEVEL_5, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_FriendshipIconMax[] = {
+    ANIMCMD_FRAME(FRIENDSHIP_LEVEL_MAX, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_FriendshipIcon[FRIENDSHIP_LEVEL_COUNT] = {
+    [FRIENDSHIP_LEVEL_0]    = sSpriteAnim_FriendshipIcon0,
+    [FRIENDSHIP_LEVEL_1]    = sSpriteAnim_FriendshipIcon1,
+    [FRIENDSHIP_LEVEL_2]    = sSpriteAnim_FriendshipIcon2,
+    [FRIENDSHIP_LEVEL_3]    = sSpriteAnim_FriendshipIcon3,
+    [FRIENDSHIP_LEVEL_4]    = sSpriteAnim_FriendshipIcon4,
+    [FRIENDSHIP_LEVEL_5]    = sSpriteAnim_FriendshipIcon5,
+    [FRIENDSHIP_LEVEL_MAX]  = sSpriteAnim_FriendshipIconMax,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_FriendshipIcon =
+{
+    .tileTag = TAG_FRIENDSHIP_ICON,
+    .paletteTag = TAG_FRIENDSHIP_ICON,
+    .oam = &sOamData_FriendshipIcon,
+    .anims = sSpriteAnimTable_FriendshipIcon,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
@@ -1563,7 +1663,8 @@ static bool8 LoadGraphics(void)
         gMain.state++;
         break;
     case 22:
-        SetTypeAndPokerusIcons();
+        SetTypeIcons();
+        TrySetInfoPageIcons();
         gMain.state++;
         break;
     case 23:
@@ -1703,6 +1804,16 @@ static bool8 DecompressGraphics(void)
         sMonSummaryScreen->switchCounter++;
         break;
     case 20:
+        if (BW_SUMMARY_SHOW_FRIENDSHIP)
+            LoadCompressedSpriteSheet(&sSpriteSheet_FriendshipIcon);
+        sMonSummaryScreen->switchCounter++;
+        break;
+    case 21:
+        if (BW_SUMMARY_SHOW_FRIENDSHIP)
+            LoadSpritePalette(&sSpritePal_FriendshipIcon);
+        sMonSummaryScreen->switchCounter++;
+        break;
+    case 22:
     #if BW_SUMMARY_BW_TYPE_ICONS == TRUE
         LoadCompressedPalette(sMoveTypes_Pal_BW, OBJ_PLTT_ID(13), 3 * PLTT_SIZE_4BPP);
     #else
@@ -2138,7 +2249,8 @@ static void Task_ChangeSummaryMon(u8 taskId)
         data[1] = 0;
         break;
     case 9:
-        SetTypeAndPokerusIcons();
+        SetTypeIcons();
+        TrySetInfoPageIcons();
         break;
     case 10:
         PrintMonPortraitInfo();
@@ -2321,7 +2433,8 @@ static void PssScrollRightEnd(u8 taskId) // display right
     }
 
     PutPageWindowTilemaps(sMonSummaryScreen->currPageIndex);
-    SetTypeAndPokerusIcons();
+    SetTypeIcons();
+    TrySetInfoPageIcons();
     TryDrawHPBar();
     TryDrawExperienceProgressBar();
     if (sMonSummaryScreen->currPageIndex == PSS_PAGE_SKILLS && BW_SUMMARY_IV_EV_DISPLAY == BW_IV_EV_GRADED)
@@ -2395,7 +2508,8 @@ static void PssScrollLeftEnd(u8 taskId) // display left
     }
 
     PutPageWindowTilemaps(sMonSummaryScreen->currPageIndex);
-    SetTypeAndPokerusIcons();
+    SetTypeIcons();
+    TrySetInfoPageIcons();
     TryDrawHPBar();
     TryDrawExperienceProgressBar();
     if (sMonSummaryScreen->currPageIndex == PSS_PAGE_SKILLS && BW_SUMMARY_IV_EV_DISPLAY == BW_IV_EV_GRADED)
@@ -4529,13 +4643,12 @@ static void HidePageSpecificSprites(void)
     }
 }
 
-static void SetTypeAndPokerusIcons(void)
+static void SetTypeIcons(void)
 {
     switch (sMonSummaryScreen->currPageIndex)
     {
     case PSS_PAGE_INFO:
         SetMonTypeIcons();
-        SetPokerusCuredSprite();
         break;
     case PSS_PAGE_BATTLE_MOVES:
         SetMoveTypeIcons();
@@ -4545,6 +4658,16 @@ static void SetTypeAndPokerusIcons(void)
         SetContestMoveTypeIcons();
         SetNewMoveTypeIcon();
         break;
+    }
+}
+
+static void TrySetInfoPageIcons(void)
+{
+    if (sMonSummaryScreen->currPageIndex == PSS_PAGE_INFO)
+    { 
+        SetPokerusCuredSprite();
+        if (BW_SUMMARY_SHOW_FRIENDSHIP)
+            SetFriendshipSprite();
     }
 }
 
@@ -4810,7 +4933,7 @@ static void CreateMonMarkingsSprite(struct Pokemon *mon)
     }
 }
 
-static void SetPokerusCuredSprite()
+static void SetPokerusCuredSprite(void)
 {
     struct Pokemon *mon;
     if (sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_POKERUS_CURED] == SPRITE_NONE)
@@ -4818,6 +4941,23 @@ static void SetPokerusCuredSprite()
 
     mon = &sMonSummaryScreen->currentMon;
     gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_POKERUS_CURED]].invisible = (CheckPartyPokerus(mon, 0) || !CheckPartyHasHadPokerus(mon, 0));
+}
+
+static void SetFriendshipSprite(void)
+{
+    u8 level = FRIENDSHIP_LEVEL_0;
+    
+    if (sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_FRIENDSHIP] == SPRITE_NONE)
+        sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_FRIENDSHIP] = CreateSprite(&sSpriteTemplate_FriendshipIcon, 153, 25, 0);
+
+    gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_FRIENDSHIP]].invisible = FALSE;
+    
+    // don't even think about swapping the order of the conditions here or the compiler will smite you for your arrogance
+    // I have no idea why it works that way
+    while (level < FRIENDSHIP_LEVEL_MAX && sMonSummaryScreen->summary.friendship >= sFriendshipLevelToThreshold[level + 1])
+        level++;
+
+    StartSpriteAnim(&gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_FRIENDSHIP]], level);
 }
 
 static void CreateMonShinySprite(struct Pokemon *mon)
