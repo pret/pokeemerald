@@ -172,6 +172,7 @@ enum
 
 static const u8 *GetHealthboxElementGfxPtr(u8);
 static u8 *AddTextPrinterAndCreateWindowOnHealthbox(const u8 *, u32, u32, u32, u32 *);
+static u8 *AddTextPrinterAndCreateWindowOnHealthboxToFit(const u8 *, u32, u32, u32, u32 *, u32);
 
 static void RemoveWindowOnHealthbox(u32 windowId);
 static void UpdateHpTextInHealthboxInDoubles(u32 healthboxSpriteId, u32 maxOrCurrent, s16 currHp, s16 maxHp);
@@ -854,6 +855,9 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
     // Create mega indicator sprite.
     MegaIndicator_CreateSprite(battlerId, healthboxLeftSpriteId);
 
+    // Create tera indicator sprites.
+    TeraIndicator_CreateSprite(battlerId, healthboxLeftSpriteId);
+
     gBattleStruct->ballSpriteIds[0] = MAX_SPRITES;
     gBattleStruct->ballSpriteIds[1] = MAX_SPRITES;
 
@@ -937,6 +941,7 @@ void SetHealthboxSpriteInvisible(u8 healthboxSpriteId)
     gSprites[gSprites[healthboxSpriteId].hMain_HealthBarSpriteId].invisible = TRUE;
     gSprites[gSprites[healthboxSpriteId].oam.affineParam].invisible = TRUE;
     MegaIndicator_SetVisibilities(healthboxSpriteId, TRUE);
+    TeraIndicator_SetVisibilities(healthboxSpriteId, TRUE);
 }
 
 void SetHealthboxSpriteVisible(u8 healthboxSpriteId)
@@ -945,6 +950,7 @@ void SetHealthboxSpriteVisible(u8 healthboxSpriteId)
     gSprites[gSprites[healthboxSpriteId].hMain_HealthBarSpriteId].invisible = FALSE;
     gSprites[gSprites[healthboxSpriteId].oam.affineParam].invisible = FALSE;
     MegaIndicator_SetVisibilities(healthboxSpriteId, FALSE);
+    TeraIndicator_SetVisibilities(healthboxSpriteId, FALSE);
 }
 
 static void UpdateSpritePos(u8 spriteId, s16 x, s16 y)
@@ -971,6 +977,7 @@ static void TryToggleHealboxVisibility(u32 priority, u32 healthboxLeftSpriteId, 
     gSprites[healthboxRightSpriteId].invisible = invisible;
     gSprites[healthbarSpriteId].invisible = invisible;
     MegaIndicator_SetVisibilities(healthboxLeftSpriteId, invisible);
+    TeraIndicator_SetVisibilities(healthboxLeftSpriteId, invisible);
 }
 
 void UpdateOamPriorityInAllHealthboxes(u8 priority, bool32 hideHPBoxes)
@@ -988,6 +995,7 @@ void UpdateOamPriorityInAllHealthboxes(u8 priority, bool32 hideHPBoxes)
         gSprites[healthbarSpriteId].oam.priority = priority;
 
         MegaIndicator_UpdateOamPriority(healthboxLeftSpriteId, priority);
+        TeraIndicator_UpdateOamPriorities(healthboxLeftSpriteId, priority);
 
         if (B_HIDE_HEALTHBOX_IN_ANIMS == TRUE && hideHPBoxes && IsBattlerAlive(i))
             TryToggleHealboxVisibility(priority, healthboxLeftSpriteId, healthboxRightSpriteId, healthbarSpriteId);
@@ -1049,6 +1057,13 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
         xPos = 5 * (3 - (objVram - (text + 2))) - 1;
         MegaIndicator_UpdateLevel(healthboxSpriteId, lvl);
         MegaIndicator_SetVisibilities(healthboxSpriteId, FALSE);
+    }
+    else if (IsTerastallized(battler))
+    {
+        objVram = ConvertIntToDecimalStringN(text, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
+        xPos = 5 * (3 - (objVram - (text + 2))) - 1;
+        TeraIndicator_UpdateLevel(healthboxSpriteId, lvl);
+        TeraIndicator_SetVisibilities(healthboxSpriteId, FALSE);
     }
     else
     {
@@ -1473,6 +1488,7 @@ void HideTriggerSprites(void)
     HideBurstTriggerSprite();
     HideZMoveTriggerSprite();
     HideDynamaxTriggerSprite();
+    HideTeraTriggerSprite();
 }
 
 void DestroyMegaTriggerSprite(void)
@@ -2281,23 +2297,20 @@ static void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
     if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && StringCompare(nickname, GetSpeciesName(species)) == 0)
         gender = 100;
 
-    // AddTextPrinterAndCreateWindowOnHealthbox's arguments are the same in all 3 cases.
-    // It's possible they may have been different in early development phases.
     switch (gender)
     {
     default:
         StringCopy(ptr, gText_HealthboxGender_None);
-        windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(gDisplayedStringBattle, 0, 3, 2, &windowId);
         break;
     case MON_MALE:
         StringCopy(ptr, gText_HealthboxGender_Male);
-        windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(gDisplayedStringBattle, 0, 3, 2, &windowId);
         break;
     case MON_FEMALE:
         StringCopy(ptr, gText_HealthboxGender_Female);
-        windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(gDisplayedStringBattle, 0, 3, 2, &windowId);
         break;
     }
+
+    windowTileData = AddTextPrinterAndCreateWindowOnHealthboxToFit(gDisplayedStringBattle, 0, 3, 2, &windowId, 54);
 
     spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum * TILE_SIZE_4BPP;
 
@@ -2532,6 +2545,10 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
     u32 battlerId = gSprites[healthboxSpriteId].hMain_Battler;
     s32 maxHp = GetMonData(mon, MON_DATA_MAX_HP);
     s32 currHp = GetMonData(mon, MON_DATA_HP);
+    
+    // This fixes a bug that should likely never happen involving switching between two Teras.
+    if (elementId == HEALTHBOX_ALL)
+        TeraIndicator_UpdateType(battlerId, healthboxSpriteId);
 
     if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
     {
@@ -2887,7 +2904,7 @@ u8 GetHPBarLevel(s16 hp, s16 maxhp)
     return result;
 }
 
-static u8 *AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y, u32 bgColor, u32 *windowId)
+static u8 *AddTextPrinterAndCreateWindowOnHealthboxWithFont(const u8 *str, u32 x, u32 y, u32 bgColor, u32 *windowId, u32 fontId)
 {
     u16 winId;
     u8 color[3];
@@ -2900,10 +2917,21 @@ static u8 *AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y,
     color[1] = 1;
     color[2] = 3;
 
-    AddTextPrinterParameterized4(winId, FONT_SMALL, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
+    AddTextPrinterParameterized4(winId, fontId, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
 
     *windowId = winId;
     return (u8 *)(GetWindowAttribute(winId, WINDOW_TILE_DATA));
+}
+
+static u8 *AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y, u32 bgColor, u32 *windowId)
+{
+    return AddTextPrinterAndCreateWindowOnHealthboxWithFont(str, x, y, bgColor, windowId, FONT_SMALL);
+}
+
+static u8 *AddTextPrinterAndCreateWindowOnHealthboxToFit(const u8 *str, u32 x, u32 y, u32 bgColor, u32 *windowId, u32 width)
+{
+    u32 fontId = GetFontIdToFit(str, FONT_SMALL, 0, width);
+    return AddTextPrinterAndCreateWindowOnHealthboxWithFont(str, x, y, bgColor, windowId, fontId);
 }
 
 static void RemoveWindowOnHealthbox(u32 windowId)
@@ -3010,6 +3038,7 @@ static const s16 sAbilityPopUpCoordsSingles[MAX_BATTLERS_COUNT][2] =
 
 static u8* AddTextPrinterAndCreateWindowOnAbilityPopUp(const u8 *str, u32 x, u32 y, u32 color1, u32 color2, u32 color3, u32 *windowId)
 {
+    u32 fontId;
     u8 color[3] = {color1, color2, color3};
     struct WindowTemplate winTemplate = {0};
     winTemplate.width = POPUP_WINDOW_WIDTH;
@@ -3018,7 +3047,8 @@ static u8* AddTextPrinterAndCreateWindowOnAbilityPopUp(const u8 *str, u32 x, u32
     *windowId = AddWindow(&winTemplate);
     FillWindowPixelBuffer(*windowId, PIXEL_FILL(color1));
 
-    AddTextPrinterParameterized4(*windowId, FONT_SMALL, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
+    fontId = GetFontIdToFit(str, FONT_SMALL, 0, 76);
+    AddTextPrinterParameterized4(*windowId, fontId, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
     return (u8 *)(GetWindowAttribute(*windowId, WINDOW_TILE_DATA));
 }
 
@@ -3114,6 +3144,7 @@ static void PrintBattlerOnAbilityPopUp(u8 battlerId, u8 spriteId1, u8 spriteId2)
 
 static void PrintAbilityOnAbilityPopUp(u32 ability, u8 spriteId1, u8 spriteId2)
 {
+    ClearAbilityName(spriteId1, spriteId2);
     PrintOnAbilityPopUp(gAbilitiesInfo[ability].name,
                         (void*)(OBJ_VRAM0) + (gSprites[spriteId1].oam.tileNum * 32) + 256,
                         (void*)(OBJ_VRAM0) + (gSprites[spriteId2].oam.tileNum * 32) + 256,
@@ -3243,15 +3274,15 @@ void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
     if (B_ABILITY_POP_UP == FALSE)
         return;
 
+    if (gBattleScripting.abilityPopupOverwrite != 0)
+        ability = gBattleScripting.abilityPopupOverwrite;
+
     if (gTestRunnerEnabled)
     {
         TestRunner_Battle_RecordAbilityPopUp(battlerId, ability);
         if (gTestRunnerHeadless)
             return;
     }
-
-    if (gBattleScripting.abilityPopupOverwrite != 0)
-        ability = gBattleScripting.abilityPopupOverwrite;
 
     if (!gBattleStruct->activeAbilityPopUps)
     {
@@ -3320,7 +3351,6 @@ void UpdateAbilityPopup(u8 battlerId)
     u8 spriteId2 = gBattleStruct->abilityPopUpSpriteIds[battlerId][1];
     u16 ability = (gBattleScripting.abilityPopupOverwrite != 0) ? gBattleScripting.abilityPopupOverwrite : gBattleMons[battlerId].ability;
 
-    ClearAbilityName(spriteId1, spriteId2);
     PrintAbilityOnAbilityPopUp(ability, spriteId1, spriteId2);
     RestoreOverwrittenPixels((void*)(OBJ_VRAM0) + (gSprites[spriteId1].oam.tileNum * 32));
 }

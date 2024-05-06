@@ -29,3 +29,27 @@ SINGLE_BATTLE_TEST("Hail damage does not affect Ice-type Pokémon")
         NOT MESSAGE("Foe Glalie is pelted by HAIL!");
     }
 }
+
+SINGLE_BATTLE_TEST("Hail fails if Desolate Land or Primordial Sea are active")
+{
+    u32 species;
+    u32 item;
+
+    PARAMETRIZE { species = SPECIES_WOBBUFFET; item = ITEM_NONE; }
+    PARAMETRIZE { species = SPECIES_GROUDON; item = ITEM_RED_ORB; }
+    PARAMETRIZE { species = SPECIES_KYOGRE; item = ITEM_BLUE_ORB; }
+
+    GIVEN {
+        PLAYER(species) { Item(item); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_HAIL); }
+    } SCENE {
+        if (item == ITEM_RED_ORB || item == ITEM_BLUE_ORB) {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_PRIMAL_REVERSION, player);
+            NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_HAIL, opponent);
+        } else {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_HAIL, opponent);
+        }
+    }
+}

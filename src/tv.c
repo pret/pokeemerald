@@ -1455,7 +1455,7 @@ void BravoTrainerPokemonProfile_BeforeInterview2(u8 contestStandingPlace)
         show->bravoTrainer.contestCategory = gSpecialVar_ContestCategory;
         show->bravoTrainer.contestRank = gSpecialVar_ContestRank;
         show->bravoTrainer.species = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SPECIES, NULL);
-        GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_NICKNAME, show->bravoTrainer.pokemonNickname);
+        GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_NICKNAME10, show->bravoTrainer.pokemonNickname);
         StripExtCtrlCodes(show->bravoTrainer.pokemonNickname);
         show->bravoTrainer.pokemonNameLanguage = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_LANGUAGE);
     }
@@ -1536,7 +1536,7 @@ void PutNameRaterShowOnTheAir(void)
             show->nameRaterShow.random2 = Random() % 2;
             show->nameRaterShow.randomSpecies = GetRandomDifferentSpeciesSeenByPlayer(show->nameRaterShow.species);
             StringCopy(show->nameRaterShow.trainerName, gSaveBlock2Ptr->playerName);
-            GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, show->nameRaterShow.pokemonName);
+            GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME10, show->nameRaterShow.pokemonName);
             StripExtCtrlCodes(show->nameRaterShow.pokemonName);
             StorePlayerIdInNormalShow(show);
             show->nameRaterShow.language = gGameLanguage;
@@ -1612,7 +1612,7 @@ static void InterviewAfter_PkmnFanClubOpinions(void)
     show->fanclubOpinions.friendshipHighNybble = GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_FRIENDSHIP, NULL) >> 4;
     show->fanclubOpinions.questionAsked = gSpecialVar_0x8007;
     StringCopy(show->fanclubOpinions.playerName, gSaveBlock2Ptr->playerName);
-    GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_NICKNAME, show->fanclubOpinions.nickname);
+    GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_NICKNAME10, show->fanclubOpinions.nickname);
     StripExtCtrlCodes(show->fanclubOpinions.nickname);
     show->fanclubOpinions.species = GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, NULL);
     StorePlayerIdInNormalShow(show);
@@ -2229,7 +2229,7 @@ void TryPutSpotTheCutiesOnAir(struct Pokemon *pokemon, u8 ribbonMonDataIdx)
         show->cuties.kind = TVSHOW_CUTIES;
         show->cuties.active = FALSE; // NOTE: Show is not active until passed via Record Mix.
         StringCopy(show->cuties.playerName, gSaveBlock2Ptr->playerName);
-        GetMonData(pokemon, MON_DATA_NICKNAME, show->cuties.nickname);
+        GetMonData(pokemon, MON_DATA_NICKNAME10, show->cuties.nickname);
         StripExtCtrlCodes(show->cuties.nickname);
         show->cuties.nRibbons = GetRibbonCount(pokemon);
         show->cuties.selectedRibbon = MonDataIdxToRibbon(ribbonMonDataIdx);

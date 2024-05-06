@@ -15687,6 +15687,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Mewtwo)
         FOLLOWER(Mewtwo, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Mewtwo, gShinyFollowerPalette_Mewtwo)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sMewtwoLevelUpLearnset,
         .teachableLearnset = sMewtwoTeachableLearnset,
         .formSpeciesIdTable = sMewtwoFormSpeciesIdTable,
@@ -15744,6 +15745,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Mewtwo)
         .isLegendary = TRUE,
         .isMegaEvolution = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sMewtwoLevelUpLearnset,
         .teachableLearnset = sMewtwoTeachableLearnset,
         .formSpeciesIdTable = sMewtwoFormSpeciesIdTable,
@@ -15801,6 +15803,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Mewtwo)
         .isLegendary = TRUE,
         .isMegaEvolution = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sMewtwoLevelUpLearnset,
         .teachableLearnset = sMewtwoTeachableLearnset,
         .formSpeciesIdTable = sMewtwoFormSpeciesIdTable,
@@ -15869,6 +15872,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Mew)
         FOLLOWER(Mew, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE, gFollowerPalette_Mew, gShinyFollowerPalette_Mew)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sMewLevelUpLearnset,
         .teachableLearnset = sMewTeachableLearnset,
     },

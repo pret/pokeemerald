@@ -1351,7 +1351,7 @@ void ConvertPokemonToBattleTowerPokemon(struct Pokemon *mon, struct BattleTowerP
     dest->spDefenseIV  = GetMonData(mon, MON_DATA_SPDEF_IV, NULL);
     dest->abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
     dest->personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
-    GetMonData(mon, MON_DATA_NICKNAME, dest->nickname);
+    GetMonData(mon, MON_DATA_NICKNAME10, dest->nickname);
 }
 
 static void CreateEventMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
@@ -1681,35 +1681,12 @@ void GiveMonInitialMoveset(struct Pokemon *mon)
     GiveBoxMonInitialMoveset(&mon->box);
 }
 
-void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
+void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon) //Credit: AsparagusEduardo
 {
     u16 species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
     s32 level = GetLevelFromBoxMonExp(boxMon);
     s32 i;
-    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
-
-    for (i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
-    {
-        if (learnset[i].level > level)
-            break;
-        if (learnset[i].level == 0)
-            continue;
-        if (GiveMoveToBoxMon(boxMon, learnset[i].move) == MON_HAS_MAX_MOVES)
-            DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, learnset[i].move);
-    }
-}
-
-void GiveMonInitialMoveset_Fast(struct Pokemon *mon)
-{
-    GiveBoxMonInitialMoveset_Fast(&mon->box);
-}
-
-void GiveBoxMonInitialMoveset_Fast(struct BoxPokemon *boxMon) //Credit: AsparagusEduardo
-{
-    u16 species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
-    s32 level = GetLevelFromBoxMonExp(boxMon);
-    s32 i;
-    u16 moves[MAX_MON_MOVES] = {0};
+    u16 moves[MAX_MON_MOVES] = {MOVE_NONE};
     u8 addedMoves = 0;
     const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
 
@@ -1723,13 +1700,15 @@ void GiveBoxMonInitialMoveset_Fast(struct BoxPokemon *boxMon) //Credit: Asparagu
         if (learnset[i].level == 0)
             continue;
 
-        for (j = 0; j < addedMoves + 1; j++)
+        for (j = 0; j < addedMoves; j++)
+        {
             if (moves[j] == learnset[i].move)
             {
                 alreadyKnown = TRUE;
                 break;
             }
-    
+        }
+
         if (!alreadyKnown)
         {
             if (addedMoves < MAX_MON_MOVES)
@@ -2193,6 +2172,7 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         switch (field)
         {
         case MON_DATA_NICKNAME:
+        case MON_DATA_NICKNAME10:
         {
             if (boxMon->isBadEgg)
             {
@@ -2235,7 +2215,7 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
                 // so if both are 0 we assume that this is a vanilla
                 // Pokémon and replace them with EOS. This means that
                 // two CHAR_SPACE at the end of a nickname are trimmed.
-                if (POKEMON_NAME_LENGTH >= 12)
+                if (field != MON_DATA_NICKNAME10 && POKEMON_NAME_LENGTH >= 12)
                 {
                     if (substruct0->nickname11 == 0 && substruct0->nickname12 == 0)
                     {
@@ -2730,14 +2710,23 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         switch (field)
         {
         case MON_DATA_NICKNAME:
+        case MON_DATA_NICKNAME10:
         {
             s32 i;
             for (i = 0; i < min(sizeof(boxMon->nickname), POKEMON_NAME_LENGTH); i++)
                 boxMon->nickname[i] = data[i];
-            if (POKEMON_NAME_LENGTH >= 11)
-                substruct0->nickname11 = data[10];
-            if (POKEMON_NAME_LENGTH >= 12)
-                substruct0->nickname12 = data[11];
+            if (field != MON_DATA_NICKNAME10)
+            {
+                if (POKEMON_NAME_LENGTH >= 11)
+                    substruct0->nickname11 = data[10];
+                if (POKEMON_NAME_LENGTH >= 12)
+                    substruct0->nickname12 = data[11];
+            }
+            else
+            {
+                substruct0->nickname11 = EOS;
+                substruct0->nickname12 = EOS;
+            }
             break;
         }
         case MON_DATA_SPECIES:
@@ -3548,8 +3537,17 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                 {
                     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
                     dataUnsigned = sExpCandyExperienceTable[param - 1] + GetMonData(mon, MON_DATA_EXP, NULL);
-                    if (dataUnsigned > gExperienceTables[gSpeciesInfo[species].growthRate][MAX_LEVEL])
+
+                    if (B_RARE_CANDY_CAP && EXP_CAP_HARD)
+                    {
+                        u32 currentLevelCap = GetCurrentLevelCap();
+                        if (dataUnsigned > gExperienceTables[gSpeciesInfo[species].growthRate][currentLevelCap])
+                            dataUnsigned = gExperienceTables[gSpeciesInfo[species].growthRate][currentLevelCap];
+                    }
+                    else if (dataUnsigned > gExperienceTables[gSpeciesInfo[species].growthRate][MAX_LEVEL])
+                    {
                         dataUnsigned = gExperienceTables[gSpeciesInfo[species].growthRate][MAX_LEVEL];
+                    }
                 }
 
                 if (dataUnsigned != 0) // Failsafe

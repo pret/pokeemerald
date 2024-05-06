@@ -40,8 +40,9 @@ struct ListMenuTemplate
     const struct ListMenuItem *items;
     void (* moveCursorFunc)(s32 itemIndex, bool8 onInit, struct ListMenu *list);
     void (* itemPrintFunc)(u8 windowId, u32 itemId, u8 y);
-    u16 totalItems;
-    u16 maxShowed;
+    u16 totalItems:12;
+    u16 maxShowed:12;
+    u16 textNarrowWidth:8;
     u8 windowId;
     u8 header_X;
     u8 item_X;

@@ -2075,6 +2075,9 @@ void MoveGetIdAndSlot(s32 battlerId, struct MoveContext *ctx, u32 *moveId, u32 *
 
     if (ctx->explicitDynamax && ctx->dynamax)
         *moveSlot |= RET_DYNAMAX;
+    
+    if (ctx->explicitTera && ctx->tera)
+        *moveSlot |= RET_TERASTAL;
 }
 
 void Move(u32 sourceLine, struct BattlePokemon *battler, struct MoveContext ctx)

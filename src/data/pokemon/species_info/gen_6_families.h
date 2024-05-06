@@ -780,7 +780,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
         .abilities = { ABILITY_FLAME_BODY, ABILITY_NONE, ABILITY_GALE_WINGS },
         .bodyColor = BODY_COLOR_RED,
-        .speciesName = _("Flechinder"),
+        .speciesName = HANDLE_EXPANDED_SPECIES_NAME("Flechinder", "Fletchinder"),
         .cryId = CRY_FLETCHINDER,
         .natDexNum = NATIONAL_DEX_FLETCHINDER,
         .categoryName = _("Ember"),
@@ -4752,6 +4752,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         //FOLLOWER(XerneasNeutral, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_XerneasNeutral, gShinyFollowerPalette_XerneasNeutral)
         FOLLOWER(XerneasNeutral, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sXerneasLevelUpLearnset,
         .teachableLearnset = sXerneasTeachableLearnset,
         .formSpeciesIdTable = sXerneasFormSpeciesIdTable,
@@ -4804,6 +4805,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         FOOTPRINT(Xerneas)
         FOLLOWER(XerneasNeutral, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_XerneasNeutral, gShinyFollowerPalette_XerneasNeutral)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sXerneasLevelUpLearnset,
         .teachableLearnset = sXerneasTeachableLearnset,
         .formSpeciesIdTable = sXerneasFormSpeciesIdTable,
@@ -4863,6 +4865,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         FOOTPRINT(Yveltal)
         FOLLOWER(Yveltal, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Yveltal, gShinyFollowerPalette_Yveltal)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sYveltalLevelUpLearnset,
         .teachableLearnset = sYveltalTeachableLearnset,
     },
@@ -4916,6 +4919,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         FOOTPRINT(Zygarde)
         FOLLOWER(Zygarde50, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Zygarde50, gShinyFollowerPalette_Zygarde50)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sZygardeLevelUpLearnset,
         .teachableLearnset = sZygardeTeachableLearnset,
         .formSpeciesIdTable = sZygardeFormSpeciesIdTable,
@@ -4968,6 +4972,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         FOOTPRINT(Zygarde)
         FOLLOWER(Zygarde50, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Zygarde50, gShinyFollowerPalette_Zygarde50)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sZygardeLevelUpLearnset,
         .teachableLearnset = sZygardeTeachableLearnset,
         .formSpeciesIdTable = sZygardeFormSpeciesIdTable,
@@ -5020,6 +5025,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         FOOTPRINT(Zygarde)
         //FOLLOWER(Zygarde10, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Zygarde10, gShinyFollowerPalette_Zygarde10)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sZygardeLevelUpLearnset,
         .teachableLearnset = sZygardeTeachableLearnset,
         .formSpeciesIdTable = sZygardeFormSpeciesIdTable,
@@ -5073,6 +5079,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         FOOTPRINT(Zygarde)
         //FOLLOWER(Zygarde10, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Zygarde10, gShinyFollowerPalette_Zygarde10)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sZygardeLevelUpLearnset,
         .teachableLearnset = sZygardeTeachableLearnset,
         .formSpeciesIdTable = sZygardeFormSpeciesIdTable,
@@ -5130,6 +5137,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         FOOTPRINT(Zygarde)
         //FOLLOWER(ZygardeComplete, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_ZygardeComplete, gShinyFollowerPalette_ZygardeComplete)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sZygardeLevelUpLearnset,
         .teachableLearnset = sZygardeTeachableLearnset,
         .formSpeciesIdTable = sZygardeFormSpeciesIdTable,
@@ -5189,6 +5197,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         FOOTPRINT(Diancie)
         FOLLOWER(Diancie, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Diancie, gShinyFollowerPalette_Diancie)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sDiancieLevelUpLearnset,
         .teachableLearnset = sDiancieTeachableLearnset,
         .formSpeciesIdTable = sDiancieFormSpeciesIdTable,
@@ -5247,6 +5256,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         FOOTPRINT(Diancie)
         .isMythical = TRUE,
         .isMegaEvolution = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sDiancieLevelUpLearnset,
         .teachableLearnset = sDiancieTeachableLearnset,
         .formSpeciesIdTable = sDiancieFormSpeciesIdTable,
@@ -5307,6 +5317,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         FOOTPRINT(Hoopa)
         FOLLOWER(HoopaConfined, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_HoopaConfined, gShinyFollowerPalette_HoopaConfined)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sHoopaConfinedLevelUpLearnset,
         .teachableLearnset = sHoopaConfinedTeachableLearnset,
         .formSpeciesIdTable = sHoopaFormSpeciesIdTable,
@@ -5364,6 +5375,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         FOOTPRINT(Hoopa)
         FOLLOWER(HoopaUnbound, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_HoopaUnbound, gShinyFollowerPalette_HoopaUnbound)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sHoopaUnboundLevelUpLearnset,
         .teachableLearnset = sHoopaUnboundTeachableLearnset,
         .formSpeciesIdTable = sHoopaFormSpeciesIdTable,
@@ -5422,6 +5434,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         FOOTPRINT(Volcanion)
         FOLLOWER(Volcanion, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Volcanion, gShinyFollowerPalette_Volcanion)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sVolcanionLevelUpLearnset,
         .teachableLearnset = sVolcanionTeachableLearnset,
     },

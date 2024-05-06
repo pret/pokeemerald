@@ -143,6 +143,12 @@ static bool is_literal_string(struct String s1, const char *s2)
     }
 }
 
+static bool starts_with(struct String s, const char *prefix)
+{
+    int n = strlen(prefix);
+    return strncmp((const char *)s.string, prefix, n) == 0;
+}
+
 static bool ends_with(struct String s, const char *suffix)
 {
     int n = strlen(suffix);
@@ -1194,7 +1200,7 @@ static bool parse_trainer(struct Parser *p, const struct Parsed *parsed, struct 
         while (match_empty_line(p)) {}
         if (!parse_pokemon_header(p, &nickname, &species, &gender, &item))
         {
-            if (i > 0 || is_literal_string(trainer->id, "TRAINER_NONE"))
+            if (i > 0 || ends_with(trainer->id, "_NONE"))
                 break;
             if (!p->error)
                 set_parse_error(p, p->location, "expected nickname or species");
@@ -1614,7 +1620,10 @@ static void fprint_trainers(const char *output_path, FILE *f, struct Parsed *par
         {
             fprintf(f, "#line %d\n", trainer->pic_line);
             fprintf(f, "        .trainerPic = ");
-            fprint_constant(f, "TRAINER_PIC", trainer->pic);
+            if (starts_with(trainer->id, "PARTNER_"))
+                fprint_constant(f, "TRAINER_BACK_PIC", trainer->pic);
+            else
+                fprint_constant(f, "TRAINER_PIC", trainer->pic);
             fprintf(f, ",\n");
         }
 
@@ -1813,12 +1822,18 @@ static void fprint_trainers(const char *output_path, FILE *f, struct Parsed *par
                 fprintf(f, ",\n");
             }
 
+            if (pokemon->dynamax_level_line || pokemon->gigantamax_factor_line)
+            {
+                fprintf(f, "            .shouldDynamax = TRUE,\n");
+            }
+
             if (pokemon->tera_type_line)
             {
                 fprintf(f, "#line %d\n", pokemon->tera_type_line);
                 fprintf(f, "            .teraType = ");
                 fprint_constant(f, "TYPE", pokemon->tera_type);
                 fprintf(f, ",\n");
+                fprintf(f, "            .shouldTerastal = TRUE,\n");
             }
 
             if (pokemon->moves_n > 0)

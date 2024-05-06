@@ -5,6 +5,8 @@
 #include "malloc.h"
 #include "sprite.h"
 #include "constants/items.h"
+#include "item.h"
+#include "battle_main.h"
 
 // EWRAM vars
 EWRAM_DATA u8 *gItemIconDecompressionBuffer = NULL;
@@ -163,6 +165,12 @@ const void *GetItemIconPicOrPalette(u16 itemId, u8 which)
         itemId = ITEMS_COUNT; // Use last icon, the "return to field" arrow
     else if (itemId >= ITEMS_COUNT)
         itemId = 0;
+    else if (itemId >= ITEM_TM01 && itemId <= ITEM_HM08 && which)
+        return gTypesInfo[gMovesInfo[gItemsInfo[itemId].secondaryId].type].paletteTMHM;
+    else if (itemId >= ITEM_TM01 && itemId < ITEM_HM01)
+        return gItemIcon_TM;
+    else if (itemId >= ITEM_HM01 && itemId <= ITEM_HM08)
+        return gItemIcon_HM;
 
     return gItemIconTable[itemId][which];
 }

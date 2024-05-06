@@ -2230,4 +2230,16 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
     },
+
+    [EFFECT_TERA_BLAST] =
+    {
+        .battleScript = BattleScript_EffectPhotonGeyser,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+
+    [EFFECT_TERA_STARSTORM] =
+    {
+        .battleScript = BattleScript_EffectPhotonGeyser,
+        .battleTvScore = 0, // TODO: Assign points
+    },
 };

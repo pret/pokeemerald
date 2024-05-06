@@ -2169,7 +2169,7 @@ static const u16 sOgerponFormSpeciesIdTable[] = {
 static const u16 sTerapagosFormSpeciesIdTable[] = {
     SPECIES_TERAPAGOS_NORMAL,
     SPECIES_TERAPAGOS_TERASTAL,
-#if P_TERA_FORMS    
+#if P_TERA_FORMS
     SPECIES_TERAPAGOS_STELLAR,
 #endif
     FORM_SPECIES_END,

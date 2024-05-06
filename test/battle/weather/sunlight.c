@@ -45,3 +45,25 @@ SINGLE_BATTLE_TEST("Sunlight multiplies the power of Water-type moves by 0.5x", 
         EXPECT_MUL_EQ(results[0].damage, Q_4_12(0.5), results[1].damage);
     }
 }
+
+SINGLE_BATTLE_TEST("Sunny Day fails if Primordial Sea is active")
+{
+    u32 item;
+
+    PARAMETRIZE { item = ITEM_NONE; }
+    PARAMETRIZE { item = ITEM_BLUE_ORB; }
+
+    GIVEN {
+        PLAYER(SPECIES_KYOGRE) { Item(item); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SUNNY_DAY); }
+    } SCENE {
+        if (item == ITEM_BLUE_ORB) {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_PRIMAL_REVERSION, player);
+            NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_SUNNY_DAY, opponent);
+        } else {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_SUNNY_DAY, opponent);
+        }
+    }
+}

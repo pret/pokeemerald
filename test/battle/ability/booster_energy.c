@@ -50,17 +50,17 @@ SINGLE_BATTLE_TEST("Booster Energy will activate Protosynthesis after harsh sunl
         ABILITY_POPUP(opponent, ABILITY_DROUGHT);
         NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
-            MESSAGE("RagingBolt used its Booster Energy to activate Protosynthesis!");
-            MESSAGE("RagingBolt's Sp. Atk was heightened!");
+            MESSAGE("Raging Bolt used its Booster Energy to activate Protosynthesis!");
+            MESSAGE("Raging Bolt's Sp. Atk was heightened!");
         }
         ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
-        MESSAGE("The harsh sunlight activated RagingBolt's Protosynthesis!");
-        MESSAGE("RagingBolt's Sp. Atk was heightened!");
+        MESSAGE("The harsh sunlight activated Raging Bolt's Protosynthesis!");
+        MESSAGE("Raging Bolt's Sp. Atk was heightened!");
         MESSAGE("The sunlight faded.");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
         ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
-        MESSAGE("RagingBolt used its Booster Energy to activate Protosynthesis!");
-        MESSAGE("RagingBolt's Sp. Atk was heightened!");
+        MESSAGE("Raging Bolt used its Booster Energy to activate Protosynthesis!");
+        MESSAGE("Raging Bolt's Sp. Atk was heightened!");
     }
 }
 
@@ -82,17 +82,17 @@ SINGLE_BATTLE_TEST("Booster Energy activates Protosynthesis and increases highes
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
         ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
-        MESSAGE("RagingBolt used its Booster Energy to activate Protosynthesis!");
+        MESSAGE("Raging Bolt used its Booster Energy to activate Protosynthesis!");
         if (attack == 110)
-            MESSAGE("RagingBolt's Attack was heightened!");
+            MESSAGE("Raging Bolt's Attack was heightened!");
         else if (defense == 110)
-            MESSAGE("RagingBolt's Defense was heightened!");
+            MESSAGE("Raging Bolt's Defense was heightened!");
         else if (speed == 110)
-            MESSAGE("RagingBolt's Speed was heightened!");
+            MESSAGE("Raging Bolt's Speed was heightened!");
         else if (spAttack == 110)
-            MESSAGE("RagingBolt's Sp. Atk was heightened!");
+            MESSAGE("Raging Bolt's Sp. Atk was heightened!");
         else if (spDefense == 110)
-            MESSAGE("RagingBolt's Sp. Def was heightened!");
+            MESSAGE("Raging Bolt's Sp. Def was heightened!");
     } THEN {
         EXPECT(player->item == ITEM_NONE);
     }
@@ -185,7 +185,7 @@ SINGLE_BATTLE_TEST("Booster Energy increases special defense by 30% if it is the
 SINGLE_BATTLE_TEST("Booster Energy can't be flung if a Paradox species is involved")
 {
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_IRON_MOTH].isParadoxForm == TRUE);
+        ASSUME(gSpeciesInfo[SPECIES_IRON_MOTH].isParadox == TRUE);
         PLAYER(SPECIES_IRON_MOTH);
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_BOOSTER_ENERGY); }
     } WHEN {
@@ -199,7 +199,7 @@ SINGLE_BATTLE_TEST("Booster Energy can't be flung if a Paradox species is involv
 SINGLE_BATTLE_TEST("Booster Energy can't be tricked if a Paradox species is involved")
 {
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_IRON_MOTH].isParadoxForm == TRUE);
+        ASSUME(gSpeciesInfo[SPECIES_IRON_MOTH].isParadox == TRUE);
         PLAYER(SPECIES_IRON_MOTH) { Item(ITEM_BERRY_JUICE); }
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_BOOSTER_ENERGY); }
     } WHEN {

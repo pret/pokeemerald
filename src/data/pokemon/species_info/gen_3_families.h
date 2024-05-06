@@ -9482,6 +9482,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         FOOTPRINT(Kyogre)
         FOLLOWER(Kyogre, SIZE_64x64, SHADOW_SIZE_M, TRACKS_NONE, gFollowerPalette_Kyogre, gShinyFollowerPalette_Kyogre)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sKyogreLevelUpLearnset,
         .teachableLearnset = sKyogreTeachableLearnset,
         .formSpeciesIdTable = sKyogreFormSpeciesIdTable,
@@ -9538,6 +9539,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         FOOTPRINT(Kyogre)
         .isLegendary = TRUE,
         .isPrimalReversion = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sKyogreLevelUpLearnset,
         .teachableLearnset = sKyogreTeachableLearnset,
         .formSpeciesIdTable = sKyogreFormSpeciesIdTable,
@@ -9603,6 +9605,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         FOOTPRINT(Groudon)
         FOLLOWER(Groudon, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Groudon, gShinyFollowerPalette_Groudon)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sGroudonLevelUpLearnset,
         .teachableLearnset = sGroudonTeachableLearnset,
         .formSpeciesIdTable = sGroudonFormSpeciesIdTable,
@@ -9660,6 +9663,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         FOOTPRINT(Groudon)
         .isLegendary = TRUE,
         .isPrimalReversion = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sGroudonLevelUpLearnset,
         .teachableLearnset = sGroudonTeachableLearnset,
         .formSpeciesIdTable = sGroudonFormSpeciesIdTable,
@@ -9728,6 +9732,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         FOOTPRINT(Rayquaza)
         FOLLOWER(Rayquaza, SIZE_64x64, SHADOW_SIZE_M, TRACKS_NONE, gFollowerPalette_Rayquaza, gShinyFollowerPalette_Rayquaza)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sRayquazaLevelUpLearnset,
         .teachableLearnset = sRayquazaTeachableLearnset,
         .formSpeciesIdTable = sRayquazaFormSpeciesIdTable,
@@ -9787,6 +9792,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         FOOTPRINT(Rayquaza)
         .isLegendary = TRUE,
         .isMegaEvolution = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sRayquazaLevelUpLearnset,
         .teachableLearnset = sRayquazaTeachableLearnset,
         .formSpeciesIdTable = sRayquazaFormSpeciesIdTable,
@@ -9855,6 +9861,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         FOOTPRINT(Jirachi)
         FOLLOWER(Jirachi, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE, gFollowerPalette_Jirachi, gShinyFollowerPalette_Jirachi)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sJirachiLevelUpLearnset,
         .teachableLearnset = sJirachiTeachableLearnset,
     },
@@ -9917,6 +9924,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         FOOTPRINT(Deoxys)
         FOLLOWER(DeoxysNormal, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_DeoxysNormal, gShinyFollowerPalette_DeoxysNormal)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sDeoxysNormalLevelUpLearnset,
         .teachableLearnset = sDeoxysNormalTeachableLearnset,
         .formSpeciesIdTable = sDeoxysFormSpeciesIdTable,
@@ -9970,6 +9978,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         FOOTPRINT(Deoxys)
         FOLLOWER(DeoxysAttack, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_DeoxysAttack, gShinyFollowerPalette_DeoxysAttack)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sDeoxysAttackLevelUpLearnset,
         .teachableLearnset = sDeoxysAttackTeachableLearnset,
         .formSpeciesIdTable = sDeoxysFormSpeciesIdTable,
@@ -10023,6 +10032,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         FOOTPRINT(Deoxys)
         FOLLOWER(DeoxysDefense, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_DeoxysDefense, gShinyFollowerPalette_DeoxysDefense)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sDeoxysDefenseLevelUpLearnset,
         .teachableLearnset = sDeoxysDefenseTeachableLearnset,
         .formSpeciesIdTable = sDeoxysFormSpeciesIdTable,
@@ -10076,6 +10086,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         FOOTPRINT(Deoxys)
         FOLLOWER(DeoxysSpeed, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_DeoxysSpeed, gShinyFollowerPalette_DeoxysSpeed)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sDeoxysSpeedLevelUpLearnset,
         .teachableLearnset = sDeoxysSpeedTeachableLearnset,
         .formSpeciesIdTable = sDeoxysFormSpeciesIdTable,

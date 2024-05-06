@@ -834,9 +834,9 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Mindstorm sets up Psychic Terrain")
         TURN { MOVE(opponent, MOVE_EXTREME_SPEED); MOVE(player, MOVE_PSYCHIC, dynamax: TRUE); }
         TURN { MOVE(opponent, MOVE_EXTREME_SPEED); MOVE(player, MOVE_PSYCHIC); }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used ExtremeSpeed!");
+        MESSAGE("Foe Wobbuffet used Extreme Speed!");
         MESSAGE("Wobbuffet used Max Mindstorm!");
-        MESSAGE("Foe Wobbuffet cannot use ExtremeSpeed!");
+        MESSAGE("Foe Wobbuffet cannot use Extreme Speed!");
         MESSAGE("Wobbuffet used Max Mindstorm!");
     }
 }
@@ -1347,7 +1347,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Centiferno traps both opponents in Fire Spin
         TURN { SWITCH(playerLeft, 2); }
     } SCENE {
         // turn 1
-        MESSAGE("Centiskorc used G-Max Centiferno!");
+        MESSAGE("Centiskorch used G-Max Centiferno!");
         MESSAGE("Foe Wobbuffet is hurt by Fire Spin!");
         HP_BAR(opponentLeft);
         MESSAGE("Foe Wynaut is hurt by Fire Spin!");

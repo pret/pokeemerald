@@ -366,7 +366,7 @@ static inline s32 LowestRollDmg(s32 dmg)
     return dmg;
 }
 
-bool32 IsDamageMoveUsable(u32 move, u32 battlerAtk, u32 battlerDef)
+bool32 IsDamageMoveUnusable(u32 move, u32 battlerAtk, u32 battlerDef)
 {
     s32 moveType;
     struct AiLogicData *aiData = AI_DATA;
@@ -438,6 +438,10 @@ bool32 IsDamageMoveUsable(u32 move, u32 battlerAtk, u32 battlerDef)
         if (!IS_BATTLER_OF_TYPE(battlerAtk, gMovesInfo[move].argument))
             return TRUE;
         break;
+    case EFFECT_HIT_SET_REMOVE_TERRAIN:
+        if (!(gFieldStatuses & STATUS_FIELD_TERRAIN_ANY) && gMovesInfo[move].argument == ARG_TRY_REMOVE_TERRAIN_FAIL)
+            return TRUE;
+        break;
     }
 
     return FALSE;
@@ -448,14 +452,16 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
     s32 dmg, moveType;
     uq4_12_t effectivenessMultiplier;
     bool32 isDamageMoveUnusable = FALSE;
+    bool32 toggledDynamax = FALSE;
+    bool32 toggledTera = FALSE;
     struct AiLogicData *aiData = AI_DATA;
 
     SetBattlerData(battlerAtk);
     SetBattlerData(battlerDef);
 
+    // Temporarily enable Z-Moves for damage calcs
     if (considerZPower && IsViableZMove(battlerAtk, move))
     {
-        //temporarily enable z moves for damage calcs
         gBattleStruct->zmove.baseMoves[battlerAtk] = move;
         gBattleStruct->zmove.active = TRUE;
     }
@@ -465,6 +471,18 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
     if (gMovesInfo[move].effect == EFFECT_NATURE_POWER)
         move = GetNaturePowerMove();
 
+    // Temporarily enable other gimmicks for damage calcs if planned
+    if (AI_DATA->shouldDynamax[battlerAtk])
+    {
+        toggledDynamax = TRUE;
+        gBattleStruct->dynamax.dynamaxed[battlerAtk] = TRUE;
+    }
+    if (AI_DATA->shouldTerastal[battlerAtk])
+    {
+        toggledTera = TRUE;
+        gBattleStruct->tera.isTerastallized[GetBattlerSide(battlerAtk)] |= gBitTable[gBattlerPartyIndexes[battlerAtk]];
+    }
+
     gBattleStruct->dynamicMoveType = 0;
 
 
@@ -472,7 +490,7 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
     GET_MOVE_TYPE(move, moveType);
 
     if (gMovesInfo[move].power)
-        isDamageMoveUnusable = IsDamageMoveUsable(move, battlerAtk, battlerDef);
+        isDamageMoveUnusable = IsDamageMoveUnusable(move, battlerAtk, battlerDef);
 
     effectivenessMultiplier = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, aiData->abilities[battlerDef], FALSE);
     if (gMovesInfo[move].power && !isDamageMoveUnusable)
@@ -582,6 +600,10 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
     gBattleStruct->swapDamageCategory = FALSE;
     gBattleStruct->zmove.active = FALSE;
     gBattleStruct->zmove.baseMoves[battlerAtk] = MOVE_NONE;
+    if (toggledDynamax)
+        gBattleStruct->dynamax.dynamaxed[battlerAtk] = FALSE;
+    if (toggledTera)
+        gBattleStruct->tera.isTerastallized[GetBattlerSide(battlerAtk)] &= ~(gBitTable[gBattlerPartyIndexes[battlerAtk]]);
 
     return dmg;
 }

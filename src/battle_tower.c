@@ -699,7 +699,10 @@ static const u8 *const *const sPartnerApprenticeTextTables[NUM_APPRENTICES] =
 #include "data/battle_frontier/battle_tent.h"
 
 #include "data/partner_parties.h"
+const struct Trainer gBattlePartners[] =
+{
 #include "data/battle_partners.h"
+};
 
 static void (* const sBattleTowerFuncs[])(void) =
 {
@@ -1368,7 +1371,7 @@ u8 GetFrontierOpponentClass(u16 trainerId)
     }
     else if (trainerId > TRAINER_PARTNER(PARTNER_NONE))
     {
-        trainerClass = gBattlePartners[GetTrainerClassFromId(trainerId - TRAINER_PARTNER(PARTNER_NONE))].trainerClass;
+        trainerClass = gBattlePartners[trainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerClass;
     }
     else if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
@@ -2681,7 +2684,7 @@ static void SetTowerInterviewData(void)
     GetBattleTowerTrainerLanguage(&gSaveBlock2Ptr->frontier.towerInterview.opponentLanguage, gTrainerBattleOpponent_A);
     gSaveBlock2Ptr->frontier.towerInterview.opponentSpecies = GetMonData(&gEnemyParty[gBattlerPartyIndexes[1]], MON_DATA_SPECIES, NULL);
     gSaveBlock2Ptr->frontier.towerInterview.playerSpecies = GetMonData(&gPlayerParty[gBattlerPartyIndexes[0]], MON_DATA_SPECIES, NULL);
-    for (i = 0; i < POKEMON_NAME_LENGTH + 1; i++)
+    for (i = 0; i < VANILLA_POKEMON_NAME_LENGTH + 1; i++)
         gSaveBlock2Ptr->frontier.towerInterview.opponentMonNickname[i] = gBattleMons[0].nickname[i];
     gSaveBlock2Ptr->frontier.towerBattleOutcome = gBattleOutcome;
 }

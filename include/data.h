@@ -82,6 +82,7 @@ struct TrainerMon
     bool8 gender:2;
     bool8 isShiny:1;
     u8 dynamaxLevel:4;
+    u8 teraType:5;
     bool8 gigantamaxFactor:1;
     bool8 shouldDynamax:1;
     bool8 shouldTerastal:1;
@@ -119,6 +120,7 @@ struct TypeInfo
     u8 palette;
     u16 zMove;
     u16 maxMove;
+    const u32 *const paletteTMHM;
     //u16 enhanceItem;
     //u16 berry;
     //u16 gem;
@@ -206,14 +208,14 @@ static inline const u8 GetTrainerClassFromId(u16 trainerId)
 static inline const u8 *GetTrainerClassNameFromId(u16 trainerId)
 {
     if (trainerId > TRAINER_PARTNER(PARTNER_NONE))
-        return gTrainerClasses[gBattlePartners[trainerId].trainerClass].name;
+        return gTrainerClasses[gBattlePartners[trainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerClass].name;
     return gTrainerClasses[GetTrainerClassFromId(trainerId)].name;
 }
 
 static inline const u8 *GetTrainerNameFromId(u16 trainerId)
 {
     if (trainerId > TRAINER_PARTNER(PARTNER_NONE))
-        return gBattlePartners[trainerId].trainerName;
+        return gBattlePartners[trainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerName;
     return gTrainers[SanitizeTrainerId(trainerId)].trainerName;
 }
 

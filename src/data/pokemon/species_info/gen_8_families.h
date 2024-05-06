@@ -849,7 +849,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
         .abilities = { ABILITY_KEEN_EYE, ABILITY_UNNERVE, ABILITY_BIG_PECKS },
         .bodyColor = BODY_COLOR_BLUE,
-        .speciesName = _("Corvisquir"),
+        .speciesName = HANDLE_EXPANDED_SPECIES_NAME("Corvisquir", "Corvisquire"),
         .cryId = CRY_CORVISQUIRE,
         .natDexNum = NATIONAL_DEX_CORVISQUIRE,
         .categoryName = _("Raven"),
@@ -904,7 +904,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
         .abilities = { ABILITY_PRESSURE, ABILITY_UNNERVE, ABILITY_MIRROR_ARMOR },
         .bodyColor = BODY_COLOR_PURPLE,
-        .speciesName = _("Corviknigh"),
+        .speciesName = HANDLE_EXPANDED_SPECIES_NAME("Corviknigh", "Corviknight"),
         .cryId = CRY_CORVIKNIGHT,
         .natDexNum = NATIONAL_DEX_CORVIKNIGHT,
         .categoryName = _("Raven"),
@@ -2840,7 +2840,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2),
         .abilities = { ABILITY_SWIFT_SWIM, ABILITY_NONE, ABILITY_PROPELLER_TAIL },
         .bodyColor = BODY_COLOR_BROWN,
-        .speciesName = _("Barraskewd"),
+        .speciesName = HANDLE_EXPANDED_SPECIES_NAME("Barraskewd", "Barraskewda"),
         .cryId = CRY_BARRASKEWDA,
         .natDexNum = NATIONAL_DEX_BARRASKEWDA,
         .categoryName = _("Skewer"),
@@ -3221,7 +3221,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
         .abilities = { ABILITY_FLASH_FIRE, ABILITY_WHITE_SMOKE, ABILITY_FLAME_BODY },
         .bodyColor = BODY_COLOR_RED,
-        .speciesName = _("Centiskorc"),
+        .speciesName = HANDLE_EXPANDED_SPECIES_NAME("Centiskorc", "Centiskorch"),
         .cryId = CRY_CENTISKORCH,
         .natDexNum = NATIONAL_DEX_CENTISKORCH,
         .categoryName = _("Radiator"),
@@ -3554,7 +3554,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL, EGG_GROUP_AMORPHOUS),
         .abilities = { ABILITY_WEAK_ARMOR, ABILITY_NONE, ABILITY_CURSED_BODY },
         .bodyColor = BODY_COLOR_PURPLE,
-        .speciesName = _("Polteageis"),
+        .speciesName = HANDLE_EXPANDED_SPECIES_NAME("Polteageis", "Polteageist"),
         .cryId = CRY_POLTEAGEIST,
         .natDexNum = NATIONAL_DEX_POLTEAGEIST,
         .categoryName = _("Black Tea"),
@@ -3608,7 +3608,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL, EGG_GROUP_AMORPHOUS),
         .abilities = { ABILITY_WEAK_ARMOR, ABILITY_NONE, ABILITY_CURSED_BODY },
         .bodyColor = BODY_COLOR_PURPLE,
-        .speciesName = _("Polteageis"),
+        .speciesName = HANDLE_EXPANDED_SPECIES_NAME("Polteageis", "Polteageist"),
         .cryId = CRY_POLTEAGEIST,
         .natDexNum = NATIONAL_DEX_POLTEAGEIST,
         .categoryName = _("Black Tea"),
@@ -4548,7 +4548,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL),
         .abilities = { ABILITY_POWER_SPOT, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_GRAY,
-        .speciesName = _("Stonjourne"),
+        .speciesName = HANDLE_EXPANDED_SPECIES_NAME("Stonjourne", "Stonjourner"),
         .cryId = CRY_STONJOURNER,
         .natDexNum = NATIONAL_DEX_STONJOURNER,
         .categoryName = _("Big Rock"),
@@ -5686,6 +5686,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         FOOTPRINT(Zacian)
         FOLLOWER(ZacianHeroOfManyBattles, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sZacianLevelUpLearnset,
         .teachableLearnset = sZacianTeachableLearnset,
         .formSpeciesIdTable = sZacianFormSpeciesIdTable,
@@ -5742,6 +5743,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         FOOTPRINT(Zacian)
         FOLLOWER(ZacianCrownedSword, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sZacianLevelUpLearnset,
         .teachableLearnset = sZacianTeachableLearnset,
         .formSpeciesIdTable = sZacianFormSpeciesIdTable,
@@ -5799,6 +5801,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconPalIndex = 2,
         FOOTPRINT(Zamazenta)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sZamazentaLevelUpLearnset,
         .teachableLearnset = sZamazentaTeachableLearnset,
         .formSpeciesIdTable = sZamazentaFormSpeciesIdTable,
@@ -5855,6 +5858,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         FOOTPRINT(Zamazenta)
         FOLLOWER(ZamazentaCrownedShield, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sZamazentaLevelUpLearnset,
         .teachableLearnset = sZamazentaTeachableLearnset,
         .formSpeciesIdTable = sZamazentaFormSpeciesIdTable,
@@ -5914,6 +5918,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         FOOTPRINT(Eternatus)
         FOLLOWER(Eternatus, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sEternatusLevelUpLearnset,
         .teachableLearnset = sEternatusTeachableLearnset,
         .formSpeciesIdTable = sEternatusFormSpeciesIdTable,
@@ -5969,6 +5974,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconPalIndex = 0,
         FOOTPRINT(Eternatus)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sEternatusLevelUpLearnset,
         .teachableLearnset = sEternatusTeachableLearnset,
         .formSpeciesIdTable = sEternatusFormSpeciesIdTable,
@@ -6311,6 +6317,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         FOOTPRINT(Zarude)
         FOLLOWER(Zarude, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sZarudeLevelUpLearnset,
         .teachableLearnset = sZarudeTeachableLearnset,
         .formSpeciesIdTable = sZarudeFormSpeciesIdTable,
@@ -6364,6 +6371,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconPalIndex = 1,
         FOOTPRINT(Zarude)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sZarudeLevelUpLearnset,
         .teachableLearnset = sZarudeTeachableLearnset,
         .formSpeciesIdTable = sZarudeFormSpeciesIdTable,
@@ -6646,6 +6654,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         FOOTPRINT(Calyrex)
         FOLLOWER(Calyrex, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sCalyrexLevelUpLearnset,
         .teachableLearnset = sCalyrexTeachableLearnset,
         .formSpeciesIdTable = sCalyrexFormSpeciesIdTable,
@@ -6703,6 +6712,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         FOLLOWER(CalyrexIceRider, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         .isLegendary = TRUE,
         .cannotBeTraded = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sCalyrexIceRiderLevelUpLearnset,
         .teachableLearnset = sCalyrexIceRiderTeachableLearnset,
         .formSpeciesIdTable = sCalyrexFormSpeciesIdTable,
@@ -6759,6 +6769,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         FOLLOWER(CalyrexShadowRider, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         .isLegendary = TRUE,
         .cannotBeTraded = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sCalyrexShadowRiderLevelUpLearnset,
         .teachableLearnset = sCalyrexShadowRiderTeachableLearnset,
         .formSpeciesIdTable = sCalyrexFormSpeciesIdTable,

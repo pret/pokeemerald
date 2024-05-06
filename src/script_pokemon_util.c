@@ -7,6 +7,7 @@
 #include "decompress.h"
 #include "event_data.h"
 #include "international_string_util.h"
+#include "item.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "main.h"
@@ -38,6 +39,10 @@ void HealPlayerParty(void)
         HealPokemon(&gPlayerParty[i]);
     if (OW_PC_HEAL >= GEN_8)
         HealPlayerBoxes();
+
+    // Recharge Tera Orb, if possible.
+    if (B_FLAG_TERA_ORB_CHARGED != 0 && CheckBagHasItem(ITEM_TERA_ORB, 1))
+        FlagSet(B_FLAG_TERA_ORB_CHARGED);
 }
 
 static void HealPlayerBoxes(void)
@@ -287,6 +292,25 @@ void ToggleGigantamaxFactor(struct ScriptContext *ctx)
         SetMonData(&gPlayerParty[partyIndex], MON_DATA_GIGANTAMAX_FACTOR, &gigantamaxFactor);
         gSpecialVar_Result = TRUE;
     }
+}
+
+void CheckTeraType(struct ScriptContext *ctx)
+{
+    u32 partyIndex = VarGet(ScriptReadHalfword(ctx));
+
+    gSpecialVar_Result = TYPE_NONE;
+
+    if (partyIndex < PARTY_SIZE)
+        gSpecialVar_Result = GetMonData(&gPlayerParty[partyIndex], MON_DATA_TERA_TYPE);
+}
+
+void SetTeraType(struct ScriptContext *ctx)
+{
+    u32 type = ScriptReadByte(ctx);
+    u32 partyIndex = VarGet(ScriptReadHalfword(ctx));
+
+    if (type < NUMBER_OF_MON_TYPES && partyIndex < PARTY_SIZE)
+        SetMonData(&gPlayerParty[partyIndex], MON_DATA_TERA_TYPE, &type);
 }
 
 u32 ScriptGiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 nature, u8 abilityNum, u8 gender, u8 *evs, u8 *ivs, u16 *moves, bool8 isShiny, bool8 ggMaxFactor, u8 teraType)

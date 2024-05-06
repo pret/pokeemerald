@@ -6523,6 +6523,11 @@ void PrepareDoubleTeamAnim(u32 taskId, u32 animBattler, bool32 forAllySwitch)
             gSprites[spriteId].sBattlerFlank = (animBattler != ANIM_ATTACKER);
         else
             gSprites[spriteId].sBattlerFlank = (animBattler == ANIM_ATTACKER);
+        
+        // correct direction on opponent side
+        if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
+            gSprites[spriteId].sBattlerFlank ^= 1;
+        
         gSprites[spriteId].callback = AnimDoubleTeam;
         task->tBlendSpritesCount++;
     }
@@ -6548,11 +6553,21 @@ static inline void SwapStructData(void *s1, void *s2, void *data, u32 size)
 
 static void ReloadBattlerSprites(u32 battler, struct Pokemon *party)
 {
-    BattleLoadMonSpriteGfx(&party[gBattlerPartyIndexes[battler]], battler);
+    struct Pokemon *mon = &party[gBattlerPartyIndexes[battler]];
+    BattleLoadMonSpriteGfx(mon, battler);
     CreateBattlerSprite(battler);
-    UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &party[gBattlerPartyIndexes[battler]], HEALTHBOX_ALL);
+    UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], mon, HEALTHBOX_ALL);
     // If battler is mega evolved / primal reversed, hide the sprite until the move animation finishes.
     MegaIndicator_SetVisibilities(gHealthboxSpriteIds[battler], TRUE);
+    
+    // Try to recreate shadow sprite
+    if (gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteId < MAX_SPRITES)
+    {
+        DestroySprite(&gSprites[gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteId]);
+        gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteId = MAX_SPRITES;
+        CreateEnemyShadowSprite(battler);
+        SetBattlerShadowSpriteCallback(battler, GetMonData(mon, MON_DATA_SPECIES));
+    }
 }
 
 static void AnimTask_AllySwitchDataSwap(u8 taskId)

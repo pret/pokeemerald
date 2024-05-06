@@ -2436,6 +2436,11 @@ static void DisplayPartyPokemonBarDetail(u8 windowId, const u8 *str, u8 color, c
     AddTextPrinterParameterized3(windowId, FONT_SMALL, align[0], align[1], sFontColorTable[color], 0, str);
 }
 
+static void DisplayPartyPokemonBarDetailToFit(u8 windowId, const u8 *str, u8 color, const u8 *align, u32 width)
+{
+    AddTextPrinterParameterized3(windowId, GetFontIdToFit(str, FONT_SMALL, 0, width), align[0], align[1], sFontColorTable[color], 0, str);
+}
+
 static void DisplayPartyPokemonNickname(struct Pokemon *mon, struct PartyMenuBox *menuBox, u8 c)
 {
     u8 nickname[POKEMON_NAME_LENGTH + 1];
@@ -2445,7 +2450,7 @@ static void DisplayPartyPokemonNickname(struct Pokemon *mon, struct PartyMenuBox
         if (c == 1)
             menuBox->infoRects->blitFunc(menuBox->windowId, menuBox->infoRects->dimensions[0] >> 3, menuBox->infoRects->dimensions[1] >> 3, menuBox->infoRects->dimensions[2] >> 3, menuBox->infoRects->dimensions[3] >> 3, FALSE);
         GetMonNickname(mon, nickname);
-        DisplayPartyPokemonBarDetail(menuBox->windowId, nickname, 0, menuBox->infoRects->dimensions);
+        DisplayPartyPokemonBarDetailToFit(menuBox->windowId, nickname, 0, menuBox->infoRects->dimensions, 50);
     }
 }
 
@@ -4603,7 +4608,8 @@ void ItemUseCB_BattleScript(u8 taskId, TaskFunc task)
         gBattleStruct->itemPartyIndex[gBattlerInMenuId] = GetPartyIdFromBattleSlot(gPartyMenu.slotId);
         gPartyMenuUseExitCallback = TRUE;
         PlaySE(SE_SELECT);
-        RemoveBagItem(gSpecialVar_ItemId, 1);
+        if (!IsItemFlute(gSpecialVar_ItemId))
+            RemoveBagItem(gSpecialVar_ItemId, 1);
         ScheduleBgCopyTilemapToVram(2);
         gTasks[taskId].func = task;
     }
@@ -6929,8 +6935,7 @@ static u8 GetPartySlotEntryStatus(s8 slot)
 
 static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
 {
-    u16 i = 0;
-    u16 species;
+    u32 species;
 
     if (GetMonData(mon, MON_DATA_IS_EGG)
         || GetMonData(mon, MON_DATA_LEVEL) > GetBattleEntryLevelCap()
@@ -6951,11 +6956,8 @@ static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
         return TRUE;
     default: // Battle Frontier
         species = GetMonData(mon, MON_DATA_SPECIES);
-        for (; gFrontierBannedSpecies[i] != 0xFFFF; i++)
-        {
-            if (gFrontierBannedSpecies[i] == GET_BASE_SPECIES_ID(species))
-                return FALSE;
-        }
+        if (gSpeciesInfo[species].isFrontierBanned)
+            return FALSE;
         return TRUE;
     }
 }

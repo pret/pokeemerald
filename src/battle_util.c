@@ -707,7 +707,7 @@ void HandleAction_NothingIsFainted(void)
 
 void HandleAction_ActionFinished(void)
 {
-    u32 i, j;
+    u32 i, j, moveType;
     bool32 afterYouActive = gSpecialStatuses[gBattlerByTurnOrder[gCurrentTurnActionNumber + 1]].afterYou;
     *(gBattleStruct->monToSwitchIntoId + gBattlerByTurnOrder[gCurrentTurnActionNumber]) = gSelectedMonPartyId = PARTY_SIZE;
     gCurrentTurnActionNumber++;
@@ -717,6 +717,16 @@ void HandleAction_ActionFinished(void)
                     | HITMARKER_NO_PPDEDUCT | HITMARKER_STATUS_ABILITY_EFFECT | HITMARKER_PASSIVE_DAMAGE
                     | HITMARKER_OBEYS | HITMARKER_WAKE_UP_CLEAR | HITMARKER_SYNCHRONISE_EFFECT
                     | HITMARKER_CHARGING | HITMARKER_NEVER_SET | HITMARKER_IGNORE_DISGUISE);
+
+    // check if Stellar type boost should be used up
+    GET_MOVE_TYPE(gCurrentMove, moveType);
+    if (IsTerastallized(gBattlerAttacker)
+        && GetBattlerTeraType(gBattlerAttacker) == TYPE_STELLAR
+        && gMovesInfo[gCurrentMove].category != DAMAGE_CATEGORY_STATUS
+        && IsTypeStellarBoosted(gBattlerAttacker, moveType))
+    {
+        ExpendTypeStellarBoost(gBattlerAttacker, moveType);
+    }
 
     gCurrentMove = 0;
     gBattleMoveDamage = 0;
@@ -896,36 +906,36 @@ static const uq4_12_t sPercentToModifier[] =
 #define X UQ_4_12
 #define ______ X(1.0) // Regular effectiveness.
 
+// Type matchup updates.                                                Attacker      Defender
+#define STL_RS (B_UPDATED_TYPE_MATCHUPS >= GEN_6 ? X(1.0) : X(0.5))  // Ghost/Dark -> Steel
+#define PSN_RS (B_UPDATED_TYPE_MATCHUPS >= GEN_2 ? X(0.5) : X(2.0))  // Bug        -> Poison
+#define BUG_RS (B_UPDATED_TYPE_MATCHUPS >= GEN_2 ? X(1.0) : X(2.0))  // Poison     -> Bug
+#define PSY_RS (B_UPDATED_TYPE_MATCHUPS >= GEN_2 ? X(2.0) : X(0.0))  // Ghost      -> Psychic
+#define FIR_RS (B_UPDATED_TYPE_MATCHUPS >= GEN_2 ? X(0.5) : X(1.0))  // Ice        -> Fire
+
 static const uq4_12_t sTypeEffectivenessTable[NUMBER_OF_MON_TYPES][NUMBER_OF_MON_TYPES] =
 {//                   Defender -->
- //  Attacker         Normal  Fighting Flying  Poison  Ground   Rock    Bug     Ghost   Steel  Mystery  Fire   Water   Grass  Electric Psychic   Ice   Dragon   Dark   Fairy
-    [TYPE_NORMAL]   = {______, ______, ______, ______, ______, X(0.5), ______, X(0.0), X(0.5), ______, ______, ______, ______, ______, ______, ______, ______, ______, ______},
-    [TYPE_FIGHTING] = {X(2.0), ______, X(0.5), X(0.5), ______, X(2.0), X(0.5), X(0.0), X(2.0), ______, ______, ______, ______, ______, X(0.5), X(2.0), ______, X(2.0), X(0.5)},
-    [TYPE_FLYING]   = {______, X(2.0), ______, ______, ______, X(0.5), X(2.0), ______, X(0.5), ______, ______, ______, X(2.0), X(0.5), ______, ______, ______, ______, ______},
-    [TYPE_POISON]   = {______, ______, ______, X(0.5), X(0.5), X(0.5), ______, X(0.5), X(0.0), ______, ______, ______, X(2.0), ______, ______, ______, ______, ______, X(2.0)},
-    [TYPE_GROUND]   = {______, ______, X(0.0), X(2.0), ______, X(2.0), X(0.5), ______, X(2.0), ______, X(2.0), ______, X(0.5), X(2.0), ______, ______, ______, ______, ______},
-    [TYPE_ROCK]     = {______, X(0.5), X(2.0), ______, X(0.5), ______, X(2.0), ______, X(0.5), ______, X(2.0), ______, ______, ______, ______, X(2.0), ______, ______, ______},
-    [TYPE_BUG]      = {______, X(0.5), X(0.5), X(0.5), ______, ______, ______, X(0.5), X(0.5), ______, X(0.5), ______, X(2.0), ______, X(2.0), ______, ______, X(2.0), X(0.5)},
-#if B_STEEL_RESISTANCES >= GEN_6
-    [TYPE_GHOST]    = {X(0.0), ______, ______, ______, ______, ______, ______, X(2.0), ______, ______, ______, ______, ______, ______, X(2.0), ______, ______, X(0.5), ______},
-#else
-    [TYPE_GHOST]    = {X(0.0), ______, ______, ______, ______, ______, ______, X(2.0), X(0.5), ______, ______, ______, ______, ______, X(2.0), ______, ______, X(0.5), ______},
-#endif
-    [TYPE_STEEL]    = {______, ______, ______, ______, ______, X(2.0), ______, ______, X(0.5), ______, X(0.5), X(0.5), ______, X(0.5), ______, X(2.0), ______, ______, X(2.0)},
-    [TYPE_MYSTERY]  = {______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______},
-    [TYPE_FIRE]     = {______, ______, ______, ______, ______, X(0.5), X(2.0), ______, X(2.0), ______, X(0.5), X(0.5), X(2.0), ______, ______, X(2.0), X(0.5), ______, ______},
-    [TYPE_WATER]    = {______, ______, ______, ______, X(2.0), X(2.0), ______, ______, ______, ______, X(2.0), X(0.5), X(0.5), ______, ______, ______, X(0.5), ______, ______},
-    [TYPE_GRASS]    = {______, ______, X(0.5), X(0.5), X(2.0), X(2.0), X(0.5), ______, X(0.5), ______, X(0.5), X(2.0), X(0.5), ______, ______, ______, X(0.5), ______, ______},
-    [TYPE_ELECTRIC] = {______, ______, X(2.0), ______, X(0.0), ______, ______, ______, ______, ______, ______, X(2.0), X(0.5), X(0.5), ______, ______, X(0.5), ______, ______},
-    [TYPE_PSYCHIC]  = {______, X(2.0), ______, X(2.0), ______, ______, ______, ______, X(0.5), ______, ______, ______, ______, ______, X(0.5), ______, ______, X(0.0), ______},
-    [TYPE_ICE]      = {______, ______, X(2.0), ______, X(2.0), ______, ______, ______, X(0.5), ______, X(0.5), X(0.5), X(2.0), ______, ______, X(0.5), X(2.0), ______, ______},
-    [TYPE_DRAGON]   = {______, ______, ______, ______, ______, ______, ______, ______, X(0.5), ______, ______, ______, ______, ______, ______, ______, X(2.0), ______, X(0.0)},
-#if B_STEEL_RESISTANCES >= GEN_6
-    [TYPE_DARK]     = {______, X(0.5), ______, ______, ______, ______, ______, X(2.0), ______, ______, ______, ______, ______, ______, X(2.0), ______, ______, X(0.5), X(0.5)},
-#else
-    [TYPE_DARK]     = {______, X(0.5), ______, ______, ______, ______, ______, X(2.0), X(0.5), ______, ______, ______, ______, ______, X(2.0), ______, ______, X(0.5), X(0.5)},
-#endif
-    [TYPE_FAIRY]    = {______, X(2.0), ______, X(0.5), ______, ______, ______, ______, X(0.5), ______, X(0.5), ______, ______, ______, ______, ______, X(2.0), X(2.0), ______},
+ //  Attacker         Normal  Fighting Flying  Poison  Ground   Rock    Bug     Ghost   Steel  Mystery  Fire   Water   Grass  Electric Psychic   Ice   Dragon   Dark   Fairy   Stellar
+    [TYPE_NORMAL]   = {______, ______, ______, ______, ______, X(0.5), ______, X(0.0), X(0.5), ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______},
+    [TYPE_FIGHTING] = {X(2.0), ______, X(0.5), X(0.5), ______, X(2.0), X(0.5), X(0.0), X(2.0), ______, ______, ______, ______, ______, X(0.5), X(2.0), ______, X(2.0), X(0.5), ______},
+    [TYPE_FLYING]   = {______, X(2.0), ______, ______, ______, X(0.5), X(2.0), ______, X(0.5), ______, ______, ______, X(2.0), X(0.5), ______, ______, ______, ______, ______, ______},
+    [TYPE_POISON]   = {______, ______, ______, X(0.5), X(0.5), X(0.5), BUG_RS, X(0.5), X(0.0), ______, ______, ______, X(2.0), ______, ______, ______, ______, ______, X(2.0), ______},
+    [TYPE_GROUND]   = {______, ______, X(0.0), X(2.0), ______, X(2.0), X(0.5), ______, X(2.0), ______, X(2.0), ______, X(0.5), X(2.0), ______, ______, ______, ______, ______, ______},
+    [TYPE_ROCK]     = {______, X(0.5), X(2.0), ______, X(0.5), ______, X(2.0), ______, X(0.5), ______, X(2.0), ______, ______, ______, ______, X(2.0), ______, ______, ______, ______},
+    [TYPE_BUG]      = {______, X(0.5), X(0.5), PSN_RS, ______, ______, ______, X(0.5), X(0.5), ______, X(0.5), ______, X(2.0), ______, X(2.0), ______, ______, X(2.0), X(0.5), ______},
+    [TYPE_GHOST]    = {X(0.0), ______, ______, ______, ______, ______, ______, X(2.0), STL_RS, ______, ______, ______, ______, ______, PSY_RS, ______, ______, X(0.5), ______, ______},
+    [TYPE_STEEL]    = {______, ______, ______, ______, ______, X(2.0), ______, ______, X(0.5), ______, X(0.5), X(0.5), ______, X(0.5), ______, X(2.0), ______, ______, X(2.0), ______},
+    [TYPE_MYSTERY]  = {______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______},
+    [TYPE_FIRE]     = {______, ______, ______, ______, ______, X(0.5), X(2.0), ______, X(2.0), ______, X(0.5), X(0.5), X(2.0), ______, ______, X(2.0), X(0.5), ______, ______, ______},
+    [TYPE_WATER]    = {______, ______, ______, ______, X(2.0), X(2.0), ______, ______, ______, ______, X(2.0), X(0.5), X(0.5), ______, ______, ______, X(0.5), ______, ______, ______},
+    [TYPE_GRASS]    = {______, ______, X(0.5), X(0.5), X(2.0), X(2.0), X(0.5), ______, X(0.5), ______, X(0.5), X(2.0), X(0.5), ______, ______, ______, X(0.5), ______, ______, ______},
+    [TYPE_ELECTRIC] = {______, ______, X(2.0), ______, X(0.0), ______, ______, ______, ______, ______, ______, X(2.0), X(0.5), X(0.5), ______, ______, X(0.5), ______, ______, ______},
+    [TYPE_PSYCHIC]  = {______, X(2.0), ______, X(2.0), ______, ______, ______, ______, X(0.5), ______, ______, ______, ______, ______, X(0.5), ______, ______, X(0.0), ______, ______},
+    [TYPE_ICE]      = {______, ______, X(2.0), ______, X(2.0), ______, ______, ______, X(0.5), ______, FIR_RS, X(0.5), X(2.0), ______, ______, X(0.5), X(2.0), ______, ______, ______},
+    [TYPE_DRAGON]   = {______, ______, ______, ______, ______, ______, ______, ______, X(0.5), ______, ______, ______, ______, ______, ______, ______, X(2.0), ______, X(0.0), ______},
+    [TYPE_DARK]     = {______, X(0.5), ______, ______, ______, ______, ______, X(2.0), STL_RS, ______, ______, ______, ______, ______, X(2.0), ______, ______, X(0.5), X(0.5), ______},
+    [TYPE_FAIRY]    = {______, X(2.0), ______, X(0.5), ______, ______, ______, ______, X(0.5), ______, X(0.5), ______, ______, ______, ______, ______, X(2.0), X(2.0), ______, ______},
+    [TYPE_STELLAR]  = {______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______},
 };
 
 #undef ______
@@ -1276,7 +1286,7 @@ static bool32 IsBelchPreventingMove(u32 battler, u32 move)
 u32 TrySetCantSelectMoveBattleScript(u32 battler)
 {
     u32 limitations = 0;
-    u8 moveId = gBattleResources->bufferB[battler][2] & ~(RET_MEGA_EVOLUTION | RET_ULTRA_BURST | RET_DYNAMAX);
+    u8 moveId = gBattleResources->bufferB[battler][2] & ~(RET_MEGA_EVOLUTION | RET_ULTRA_BURST | RET_DYNAMAX | RET_TERASTAL);
     u32 move = gBattleMons[battler].moves[moveId];
     u32 holdEffect = GetBattlerHoldEffect(battler, TRUE);
     u16 *choicedMove = &gBattleStruct->choicedMove[battler];
@@ -3508,10 +3518,7 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
                 if (effect != 0)
                     gBattlescriptCurrInstr = BattleScript_PowderMoveNoEffect;
             }
-            if (gProtectStructs[gBattlerAttacker].usesBouncedMove) // Edge case for bouncing a powder move against a grass type pokemon.
-                gBattleStruct->atkCancellerTracker = CANCELLER_END;
-            else
-                gBattleStruct->atkCancellerTracker++;
+            gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_POWDER_STATUS:
             if (gBattleMons[gBattlerAttacker].status2 & STATUS2_POWDER)
@@ -4608,6 +4615,14 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 effect++;
             }
             break;
+        case ABILITY_TERAFORM_ZERO:
+            if (!gSpecialStatuses[battler].switchInAbilityDone
+             && gBattleMons[battler].species == SPECIES_TERAPAGOS_STELLAR)
+            {
+                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                BattleScriptPushCursorAndCallback(BattleScript_ActivateTeraformZero);
+                effect++;
+            }
         case ABILITY_SCHOOLING:
             if (gBattleMons[battler].level < 20)
                 break;
@@ -4732,6 +4747,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && CountBattlerStatIncreases(BATTLE_PARTNER(battler), FALSE))
             {
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                gBattlerAttacker = battler;
                 for (i = 0; i < NUM_BATTLE_STATS; i++)
                     gBattleMons[battler].statStages[i] = gBattleMons[BATTLE_PARTNER(battler)].statStages[i];
                 gBattlerTarget = BATTLE_PARTNER(battler);
@@ -4748,6 +4764,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && !(gBattleStruct->transformZeroToHero[side] & gBitTable[gBattlerPartyIndexes[battler]]))
             {
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                gBattlerAttacker = battler;
                 gBattleStruct->transformZeroToHero[side] |= gBitTable[gBattlerPartyIndexes[battler]];
                 BattleScriptPushCursorAndCallback(BattleScript_ZeroToHeroActivates);
                 effect++;
@@ -4756,7 +4773,10 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
         case ABILITY_HOSPITALITY:
             partner = BATTLE_PARTNER(battler);
 
-            if (!gSpecialStatuses[battler].switchInAbilityDone && IsDoubleBattle() && gBattleMons[partner].hp < gBattleMons[partner].maxHP)
+            if (!gSpecialStatuses[battler].switchInAbilityDone
+             && IsDoubleBattle()
+             && gBattleMons[partner].hp < gBattleMons[partner].maxHP
+             && IsBattlerAlive(partner))
             {
                 gBattlerTarget = partner;
                 gBattlerAttacker = battler;
@@ -4766,22 +4786,22 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 effect++;
             }
             break;
-        case ABILITY_EMBODY_ASPECT_TEAL:
-        case ABILITY_EMBODY_ASPECT_HEARTHFLAME:
-        case ABILITY_EMBODY_ASPECT_WELLSPRING:
-        case ABILITY_EMBODY_ASPECT_CORNERSTONE:
+        case ABILITY_EMBODY_ASPECT_TEAL_MASK:
+        case ABILITY_EMBODY_ASPECT_HEARTHFLAME_MASK:
+        case ABILITY_EMBODY_ASPECT_WELLSPRING_MASK:
+        case ABILITY_EMBODY_ASPECT_CORNERSTONE_MASK:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
-                u32 stat = STAT_SPATK;
+                u32 stat;
 
-                if (gLastUsedAbility == ABILITY_EMBODY_ASPECT_TEAL)
-                    stat = STAT_SPATK;
-                else if (gLastUsedAbility == ABILITY_EMBODY_ASPECT_HEARTHFLAME)
+                if (gLastUsedAbility == ABILITY_EMBODY_ASPECT_HEARTHFLAME_MASK)
                     stat = STAT_ATK;
-                else if (gLastUsedAbility == ABILITY_EMBODY_ASPECT_WELLSPRING)
+                else if (gLastUsedAbility == ABILITY_EMBODY_ASPECT_WELLSPRING_MASK)
                     stat = STAT_SPDEF;
-                else if (gLastUsedAbility == ABILITY_EMBODY_ASPECT_CORNERSTONE)
+                else if (gLastUsedAbility == ABILITY_EMBODY_ASPECT_CORNERSTONE_MASK)
                     stat = STAT_DEF;
+                else //ABILITY_EMBODY_ASPECT_TEAL_MASK
+                    stat = STAT_SPEED;
 
                 if (CompareStat(battler, stat, MAX_STAT_STAGE, CMP_EQUAL))
                     break;
@@ -4791,6 +4811,18 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
                 SET_STATCHANGER(stat, 1, FALSE);
                 BattleScriptPushCursorAndCallback(BattleScript_BattlerAbilityStatRaiseOnSwitchIn);
+                effect++;
+            }
+            break;
+        case ABILITY_TERA_SHIFT:
+            if (!gSpecialStatuses[battler].switchInAbilityDone
+             && gBattleMons[battler].species == SPECIES_TERAPAGOS_NORMAL
+             && TryBattleFormChange(battler, FORM_CHANGE_BATTLE_SWITCH))
+            {
+                gBattlerAttacker = battler;
+                gBattleScripting.abilityPopupOverwrite = gLastUsedAbility = ABILITY_TERA_SHIFT;
+                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeWithStringEnd3);
                 effect++;
             }
             break;
@@ -5349,6 +5381,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && gMovesInfo[move].power != 0
              && TARGET_TURN_DAMAGED
              && !IS_BATTLER_OF_TYPE(battler, moveType)
+             && moveType != TYPE_STELLAR
              && gBattleMons[battler].hp != 0)
             {
                 SET_BATTLER_TYPE(battler, moveType);
@@ -5762,6 +5795,18 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 effect++;
             }
             break;
+        case ABILITY_POISON_PUPPETEER:
+            if (gBattleMons[gBattlerAttacker].species == SPECIES_PECHARUNT
+             && gBattleStruct->poisonPuppeteerConfusion == TRUE
+             && CanBeConfused(gBattlerTarget))
+            {
+                gBattleStruct->poisonPuppeteerConfusion = FALSE;
+                gBattleScripting.moveEffect = MOVE_EFFECT_CONFUSION;
+                PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_AbilityStatusEffect;
+                effect++;
+            }
         }
         break;
     case ABILITYEFFECT_MOVE_END_OTHER: // Abilities that activate on *another* battler's moveend: Dancer, Soul-Heart, Receiver, Symbiosis
@@ -5782,6 +5827,9 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
 
                 // Set the target to the original target of the mon that first used a Dance move
                 gBattlerTarget = gBattleScripting.savedBattler & 0x3;
+
+                // Edge case for dance moves that hit multiply targets
+                gHitMarker &= ~HITMARKER_NO_ATTACKSTRING;
 
                 // Make sure that the target isn't an ally - if it is, target the original user
                 if (GetBattlerSide(gBattlerTarget) == GetBattlerSide(gBattlerAttacker))
@@ -8016,10 +8064,6 @@ u32 GetMoveTarget(u16 move, u8 setTarget)
     else
         moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, move);
 
-    // Special cases
-    if (move == MOVE_CURSE && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
-        moveTarget = MOVE_TARGET_USER;
-
     switch (moveTarget)
     {
     case MOVE_TARGET_SELECTED:
@@ -8830,6 +8874,10 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
         if (RandomPercentage(RNG_FICKLE_BEAM, 30))
             basePower *= 2;
         break;
+    case EFFECT_TERA_BLAST:
+        if (IsTerastallized(battlerAtk) && GetBattlerTeraType(battlerAtk) == TYPE_STELLAR)
+            basePower = 100;
+        break;
     case EFFECT_LAST_RESPECTS:
         basePower += (basePower * min(100, GetBattlerSideFaintCounter(battlerAtk)));
         break;
@@ -9198,6 +9246,19 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.1));
         break;
     }
+
+    // Terastallization boosts weak, non-priority, non-multi hit moves after modifiers to 60 BP.
+    if (IsTerastallized(battlerAtk)
+        && (moveType == GetBattlerTeraType(battlerAtk)
+        || (GetBattlerTeraType(battlerAtk) == TYPE_STELLAR && IsTypeStellarBoosted(battlerAtk, moveType)))
+        && uq4_12_multiply_by_int_half_down(modifier, basePower) < 60
+        && gMovesInfo[move].strikeCount < 2
+        && gMovesInfo[move].effect != EFFECT_MULTI_HIT
+        && gMovesInfo[move].priority == 0)
+    {
+        return 60;
+    }
+
     return uq4_12_multiply_by_int_half_down(modifier, basePower);
 }
 
@@ -9900,7 +9961,10 @@ static inline s32 DoMoveDamageCalcVars(u32 move, u32 battlerAtk, u32 battlerDef,
         dmg /= 100;
     }
 
-    DAMAGE_APPLY_MODIFIER(GetSameTypeAttackBonusModifier(battlerAtk, moveType, move, abilityAtk));
+    if (IsTerastallized(battlerAtk))
+        DAMAGE_APPLY_MODIFIER(GetTeraMultiplier(battlerAtk, moveType));
+    else
+        DAMAGE_APPLY_MODIFIER(GetSameTypeAttackBonusModifier(battlerAtk, moveType, move, abilityAtk));
     DAMAGE_APPLY_MODIFIER(typeEffectivenessModifier);
     DAMAGE_APPLY_MODIFIER(GetBurnOrFrostBiteModifier(battlerAtk, move, abilityAtk));
     DAMAGE_APPLY_MODIFIER(GetZMaxMoveAgainstProtectionModifier(battlerDef, move));
@@ -10057,12 +10121,21 @@ static inline void MulByTypeEffectiveness(uq4_12_t *modifier, u32 move, u32 move
         mod = UQ_4_12(1.0);
     if (moveType == TYPE_FIRE && gDisableStructs[battlerDef].tarShot)
         mod = UQ_4_12(2.0);
+    if (moveType == TYPE_STELLAR && IsTerastallized(battlerDef))
+        mod = UQ_4_12(2.0);
 
     // B_WEATHER_STRONG_WINDS weakens Super Effective moves against Flying-type Pokémon
     if (gBattleWeather & B_WEATHER_STRONG_WINDS && WEATHER_HAS_EFFECT)
     {
         if (defType == TYPE_FLYING && mod >= UQ_4_12(2.0))
             mod = UQ_4_12(1.0);
+    }
+
+    if (gBattleStruct->distortedTypeMatchups & gBitTable[battlerDef])
+    {
+        mod = UQ_4_12(0.5);
+        if (recordAbilities)
+            RecordAbilityBattle(battlerDef, GetBattlerAbility(battlerDef));
     }
 
     *modifier = uq4_12_multiply(*modifier, mod);
@@ -10107,12 +10180,12 @@ static inline uq4_12_t CalcTypeEffectivenessMultiplierInternal(u32 move, u32 mov
 {
     u32 illusionSpecies;
 
-    MulByTypeEffectiveness(&modifier, move, moveType, battlerDef, GetBattlerType(battlerDef, 0), battlerAtk, recordAbilities);
-    if (GetBattlerType(battlerDef, 1) != GetBattlerType(battlerDef, 0))
-        MulByTypeEffectiveness(&modifier, move, moveType, battlerDef, GetBattlerType(battlerDef, 1), battlerAtk, recordAbilities);
-    if (GetBattlerType(battlerDef, 2) != TYPE_MYSTERY && GetBattlerType(battlerDef, 2) != GetBattlerType(battlerDef, 1)
-        && GetBattlerType(battlerDef, 2) != GetBattlerType(battlerDef, 0))
-        MulByTypeEffectiveness(&modifier, move, moveType, battlerDef, GetBattlerType(battlerDef, 2), battlerAtk, recordAbilities);
+    MulByTypeEffectiveness(&modifier, move, moveType, battlerDef, GetBattlerType(battlerDef, 0, FALSE), battlerAtk, recordAbilities);
+    if (GetBattlerType(battlerDef, 1, FALSE) != GetBattlerType(battlerDef, 0, FALSE))
+        MulByTypeEffectiveness(&modifier, move, moveType, battlerDef, GetBattlerType(battlerDef, 1, FALSE), battlerAtk, recordAbilities);
+    if (GetBattlerType(battlerDef, 2, FALSE) != TYPE_MYSTERY && GetBattlerType(battlerDef, 2, FALSE) != GetBattlerType(battlerDef, 1, FALSE)
+        && GetBattlerType(battlerDef, 2, FALSE) != GetBattlerType(battlerDef, 0, FALSE))
+        MulByTypeEffectiveness(&modifier, move, moveType, battlerDef, GetBattlerType(battlerDef, 2, FALSE), battlerAtk, recordAbilities);
 
     if (recordAbilities && (illusionSpecies = GetIllusionMonSpecies(battlerDef)))
         TryNoticeIllusionInTypeEffectiveness(move, moveType, battlerAtk, battlerDef, modifier, illusionSpecies);
@@ -10515,7 +10588,8 @@ u16 GetBattleFormChangeTargetSpecies(u32 battler, u16 method)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_CHANGE_BATTLE_SWITCH:
-                    targetSpecies = formChanges[i].targetSpecies;
+                    if (formChanges[i].param1 == GetBattlerAbility(battler) || formChanges[i].param1 == ABILITY_NONE)
+                        targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_CHANGE_BATTLE_HP_PERCENT:
                     if (formChanges[i].param1 == GetBattlerAbility(battler))
@@ -10651,8 +10725,8 @@ bool32 TryBattleFormChange(u32 battler, u16 method)
 bool32 DoBattlersShareType(u32 battler1, u32 battler2)
 {
     s32 i;
-    u8 types1[3] = {GetBattlerType(battler1, 0), GetBattlerType(battler1, 1), GetBattlerType(battler1, 2)};
-    u8 types2[3] = {GetBattlerType(battler2, 0), GetBattlerType(battler2, 1), GetBattlerType(battler2, 2)};
+    u8 types1[3] = {GetBattlerType(battler1, 0, FALSE), GetBattlerType(battler1, 1, FALSE), GetBattlerType(battler1, 2, FALSE)};
+    u8 types2[3] = {GetBattlerType(battler2, 0, FALSE), GetBattlerType(battler2, 1, FALSE), GetBattlerType(battler2, 2, FALSE)};
 
     if (types1[2] == TYPE_MYSTERY)
         types1[2] = types1[0];
@@ -10681,7 +10755,7 @@ bool32 CanBattlerGetOrLoseItem(u32 battler, u16 itemId)
     else if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)
         return FALSE;
     else if (holdEffect == HOLD_EFFECT_BOOSTER_ENERGY
-         && (gSpeciesInfo[gBattleMons[gBattlerAttacker].species].isParadoxForm || gSpeciesInfo[gBattleMons[gBattlerTarget].species].isParadoxForm))
+         && (gSpeciesInfo[gBattleMons[gBattlerAttacker].species].isParadox || gSpeciesInfo[gBattleMons[gBattlerTarget].species].isParadox))
         return FALSE;
     else
         return TRUE;
@@ -10834,7 +10908,7 @@ static bool32 IsUnnerveAbilityOnOpposingSide(u32 battler)
     return FALSE;
 }
 
-// Photon geyser & light that burns the sky
+// Photon Geyser, Light That Burns the Sky, Tera Blast
 u8 GetCategoryBasedOnStats(u32 battler)
 {
     u32 attack = gBattleMons[battler].attack;
@@ -11145,11 +11219,17 @@ bool32 IsBattlerWeatherAffected(u32 battler, u32 weatherFlags)
 // Possible return values are defined in battle.h following MOVE_TARGET_SELECTED
 u32 GetBattlerMoveTargetType(u32 battler, u32 move)
 {
-    if (gMovesInfo[move].effect == EFFECT_EXPANDING_FORCE
+    if (move == MOVE_CURSE
+        && !IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
+        return MOVE_TARGET_USER;
+    else if (gMovesInfo[move].effect == EFFECT_EXPANDING_FORCE
         && IsBattlerTerrainAffected(battler, STATUS_FIELD_PSYCHIC_TERRAIN))
         return MOVE_TARGET_BOTH;
-    else
-        return gMovesInfo[move].target;
+    else if (gMovesInfo[move].effect == EFFECT_TERA_STARSTORM
+        && gBattleMons[battler].species == SPECIES_TERAPAGOS_STELLAR)
+        return MOVE_TARGET_BOTH;
+
+    return gMovesInfo[move].target;
 }
 
 bool32 CanTargetBattler(u32 battlerAtk, u32 battlerDef, u16 move)
@@ -11392,17 +11472,23 @@ bool8 IsMonBannedFromSkyBattles(u16 species)
     }
 }
 
-u8 GetBattlerType(u32 battler, u8 typeIndex)
+u8 GetBattlerType(u32 battler, u8 typeIndex, bool32 ignoreTera)
 {
+    u32 teraType = GetBattlerTeraType(battler);
     u16 types[3] = {0};
     types[0] = gBattleMons[battler].type1;
     types[1] = gBattleMons[battler].type2;
     types[2] = gBattleMons[battler].type3;
 
+    // Handle Terastallization
+    if (IsTerastallized(battler) && teraType != TYPE_STELLAR && !ignoreTera)
+        return GetBattlerTeraType(battler);
+
     // Handle Roost's Flying-type suppression
     if (typeIndex == 0 || typeIndex == 1)
     {
-        if (gBattleResources->flags->flags[battler] & RESOURCE_FLAG_ROOST)
+        if (gBattleResources->flags->flags[battler] & RESOURCE_FLAG_ROOST
+            && !IsTerastallized(battler))
         {
             if (types[0] == TYPE_FLYING && types[1] == TYPE_FLYING)
                 return B_ROOST_PURE_FLYING >= GEN_5 ? TYPE_NORMAL : TYPE_MYSTERY;
@@ -11417,6 +11503,8 @@ u8 GetBattlerType(u32 battler, u8 typeIndex)
 void RemoveBattlerType(u32 battler, u8 type)
 {
     u32 i;
+    if (IsTerastallized(battler)) // don't remove type if Terastallized
+        return;
     for (i = 0; i < 3; i++)
     {
         if (*(u8 *)(&gBattleMons[battler].type1 + i) == type)

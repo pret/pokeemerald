@@ -54,6 +54,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         FOOTPRINT(Victini)
         FOLLOWER(Victini, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Victini, gShinyFollowerPalette_Victini)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sVictiniLevelUpLearnset,
         .teachableLearnset = sVictiniTeachableLearnset,
     },
@@ -3526,7 +3527,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2),
         .abilities = { ABILITY_SWIFT_SWIM, ABILITY_ADAPTABILITY, ABILITY_MOLD_BREAKER },
         .bodyColor = BODY_COLOR_GREEN,
-        .speciesName = _("Bsculegion"),
+        .speciesName = HANDLE_EXPANDED_SPECIES_NAME("Bsculegion", "Basculegion"),
         .cryId = CRY_BASCULEGION,
         .natDexNum = NATIONAL_DEX_BASCULEGION,
         .categoryName = _("Big Fish"),
@@ -3582,7 +3583,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2),
         .abilities = { ABILITY_SWIFT_SWIM, ABILITY_ADAPTABILITY, ABILITY_MOLD_BREAKER },
         .bodyColor = BODY_COLOR_GREEN,
-        .speciesName = _("Bsculegion"),
+        .speciesName = HANDLE_EXPANDED_SPECIES_NAME("Bsculegion", "Basculegion"),
         .cryId = CRY_BASCULEGION,
         .natDexNum = NATIONAL_DEX_BASCULEGION,
         .categoryName = _("Big Fish"),
@@ -9925,6 +9926,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         FOOTPRINT(Reshiram)
         FOLLOWER(Reshiram, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Reshiram, gShinyFollowerPalette_Reshiram)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sReshiramLevelUpLearnset,
         .teachableLearnset = sReshiramTeachableLearnset,
     },
@@ -9981,6 +9983,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         FOOTPRINT(Zekrom)
         FOLLOWER(Zekrom, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Zekrom, gShinyFollowerPalette_Zekrom)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sZekromLevelUpLearnset,
         .teachableLearnset = sZekromTeachableLearnset,
     },
@@ -10154,6 +10157,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         FOOTPRINT(Kyurem)
         FOLLOWER(Kyurem, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_Kyurem, gShinyFollowerPalette_Kyurem)
         .isLegendary = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sKyuremLevelUpLearnset,
         .teachableLearnset = sKyuremTeachableLearnset,
         .formSpeciesIdTable = sKyuremFormSpeciesIdTable,
@@ -10217,6 +10221,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         FOOTPRINT(Kyurem)
         .isLegendary = TRUE,
         .cannotBeTraded = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sKyuremWhiteLevelUpLearnset,
         .teachableLearnset = sKyuremTeachableLearnset,
         .formSpeciesIdTable = sKyuremFormSpeciesIdTable,
@@ -10279,6 +10284,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         FOOTPRINT(Kyurem)
         .isLegendary = TRUE,
         .cannotBeTraded = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sKyuremBlackLevelUpLearnset,
         .teachableLearnset = sKyuremTeachableLearnset,
         .formSpeciesIdTable = sKyuremFormSpeciesIdTable,
@@ -10337,6 +10343,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         FOOTPRINT(Keldeo)
         FOLLOWER(KeldeoOrdinary, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_KeldeoOrdinary, gShinyFollowerPalette_KeldeoOrdinary)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sKeldeoLevelUpLearnset,
         .teachableLearnset = sKeldeoTeachableLearnset,
         .formSpeciesIdTable = sKeldeoFormSpeciesIdTable,
@@ -10393,6 +10400,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .iconPalIndex = 0,
         FOOTPRINT(Keldeo)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sKeldeoLevelUpLearnset,
         .teachableLearnset = sKeldeoTeachableLearnset,
         .formSpeciesIdTable = sKeldeoFormSpeciesIdTable,
@@ -10457,6 +10465,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         FOOTPRINT(Meloetta)
         FOLLOWER(MeloettaAria, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_MeloettaAria, gShinyFollowerPalette_MeloettaAria)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sMeloettaLevelUpLearnset,
         .teachableLearnset = sMeloettaTeachableLearnset,
         .formSpeciesIdTable = sMeloettaFormSpeciesIdTable,
@@ -10518,6 +10527,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         FOOTPRINT(Meloetta)
         FOLLOWER(MeloettaPirouette, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, gFollowerPalette_MeloettaPirouette, gShinyFollowerPalette_MeloettaPirouette)
         .isMythical = TRUE,
+        .isFrontierBanned = TRUE,
         .levelUpLearnset = sMeloettaLevelUpLearnset,
         .teachableLearnset = sMeloettaTeachableLearnset,
         .formSpeciesIdTable = sMeloettaFormSpeciesIdTable,
@@ -10578,6 +10588,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .formSpeciesIdTable = sGenesectFormSpeciesIdTable,              \
         .formChangeTable = sGenesectFormChangeTable,                    \
         .isMythical = TRUE,                                             \
+        .isFrontierBanned = TRUE,                                       \
     }
 
     [SPECIES_GENESECT]             = GENESECT_SPECIES_INFO(Genesect),

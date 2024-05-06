@@ -28,6 +28,7 @@ enum {
     MON_DATA_HP_LOST,
     MON_DATA_ENCRYPT_SEPARATOR,
     MON_DATA_NICKNAME,
+    MON_DATA_NICKNAME10,
     MON_DATA_SPECIES,
     MON_DATA_HELD_ITEM,
     MON_DATA_MOVE1,
@@ -424,8 +425,8 @@ struct SpeciesInfo /*0x8C*/
  /* 0x7A */ u32 isLegendary:1;
             u32 isMythical:1;
             u32 isUltraBeast:1;
+            u32 isParadox:1;
             u32 isTotem:1;
-            u32 isParadoxForm:1;
             u32 isMegaEvolution:1;
             u32 isPrimalReversion:1;
             u32 isUltraBurst:1;
@@ -437,8 +438,9 @@ struct SpeciesInfo /*0x8C*/
             u32 cannotBeTraded:1;
             u32 allPerfectIVs:1;
             u32 dexForceRequired:1; // This species will be taken into account for Pokédex ratings even if they have the "isMythical" flag set.
-            u32 tmIlliterate:1; // This species will be unable to learn the universal moves.
-            u32 padding4:15;
+            u32 tmIlliterate:1;     // This species will be unable to learn the universal moves.
+            u32 isFrontierBanned:1; // This species is not allowed to participate in Battle Frontier facilities.
+            u32 padding4:14;
             // Move Data
  /* 0x80 */ const struct LevelUpMove *levelUpLearnset;
  /* 0x84 */ const u16 *teachableLearnset;
@@ -664,8 +666,6 @@ void SetMonMoveSlot(struct Pokemon *mon, u16 move, u8 slot);
 void SetBattleMonMoveSlot(struct BattlePokemon *mon, u16 move, u8 slot);
 void GiveMonInitialMoveset(struct Pokemon *mon);
 void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon);
-void GiveMonInitialMoveset_Fast(struct Pokemon *mon);
-void GiveBoxMonInitialMoveset_Fast(struct BoxPokemon *boxMon);
 u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove);
 void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u16 move);
 void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
