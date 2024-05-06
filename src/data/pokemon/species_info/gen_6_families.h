@@ -1415,7 +1415,13 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .iconSprite = gMonIcon_Flabebe##Form##Flower,                           \
         .iconPalIndex = iconPal,                                                \
         FOOTPRINT(Flabebe)                                                      \
-        FOLLOWER(Flabebe##Form##Flower, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT) \
+        FOLLOWER(                                                               \
+            Flabebe##Form##Flower,                                              \
+            SIZE_32x32,                                                         \
+            SHADOW_SIZE_M,                                                      \
+            TRACKS_FOOT,                                                        \
+            gFollowerPalette_Flabebe##Form##Flower,                             \
+            gShinyFollowerPalette_Flabebe##Form##Flower)                        \
         .levelUpLearnset = sFlabebeLevelUpLearnset,                             \
         .teachableLearnset = sFlabebeTeachableLearnset,                         \
         .formSpeciesIdTable = sFlabebeFormSpeciesIdTable,                       \
@@ -1494,7 +1500,13 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .iconSprite = gMonIcon_Floette##form##Flower,                           \
         .iconPalIndex = iconPal,                                                \
         FOOTPRINT(Floette)                                                      \
-        FOLLOWER(Floette##form##Flower, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT) \
+        FOLLOWER(                                                               \
+            Floette ##form##Flower,                                             \
+            SIZE_32x32,                                                         \
+            SHADOW_SIZE_M,                                                      \
+            TRACKS_FOOT,                                                        \
+            gFollowerPalette_Floette ##form##Flower,                            \
+            gShinyFollowerPalette_Floette ##form##Flower)                       \
         .formSpeciesIdTable = sFloetteFormSpeciesIdTable
 
 #define FLOETTE_NORMAL_INFO(form, FORM, iconPal)                                                \
@@ -1634,7 +1646,13 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .iconSprite = gMonIcon_Florges##Form##Flower,                           \
         .iconPalIndex = iconPal,                                                \
         FOOTPRINT(Florges)                                                      \
-        FOLLOWER(Florges##Form##Flower, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT) \
+        FOLLOWER(                                                               \
+            Florges ##Form##Flower,                                             \
+            SIZE_32x32,                                                         \
+            SHADOW_SIZE_M,                                                      \
+            TRACKS_FOOT,                                                        \
+            gFollowerPalette_Florges ##Form##Flower,                            \
+            gShinyFollowerPalette_Florges ##Form##Flower)                       \
         .levelUpLearnset = sFlorgesLevelUpLearnset,                             \
         .teachableLearnset = sFlorgesTeachableLearnset,                         \
         .formSpeciesIdTable = sFlorgesFormSpeciesIdTable
