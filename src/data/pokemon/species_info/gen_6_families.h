@@ -1969,7 +1969,13 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .iconSprite = gMonIcon_Furfrou##_form,                                                          \
         .iconPalIndex = _iconIdx,                                                                       \
         FOOTPRINT(Furfrou)                                                                              \
-        FOLLOWER(Furfrou##_form, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)                                \
+        FOLLOWER(                                                                                       \
+            Furfrou##_form,                                                                             \
+            SIZE_32x32,                                                                                 \
+            SHADOW_SIZE_M,                                                                              \
+            TRACKS_FOOT,                                                                                \
+            gFollowerPalette_Furfrou##_form,                                                            \
+            gShinyFollowerPalette_Furfrou##_form)                                                       \
         .levelUpLearnset = sFurfrouLevelUpLearnset,                                                     \
         .teachableLearnset = sFurfrouTeachableLearnset,                                                 \
         .formSpeciesIdTable = sFurfrouFormSpeciesIdTable,                                               \
