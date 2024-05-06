@@ -11365,6 +11365,44 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_ArceusDragon[] = INCBIN_COMP("graphics/pokemon/arceus/follower.4bpp");
     const u32 gObjectEventPic_ArceusDark[] = INCBIN_COMP("graphics/pokemon/arceus/follower.4bpp");
     const u32 gObjectEventPic_ArceusFairy[] = INCBIN_COMP("graphics/pokemon/arceus/follower.4bpp");
+#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    const u32 gFollowerPalette_ArceusNormal[] = INCBIN_U32("graphics/pokemon/arceus/follow_normal.gbapal.lz");
+    const u32 gFollowerPalette_ArceusFighting[] = INCBIN_U32("graphics/pokemon/arceus/fighting/follow_normal.gbapal.lz");
+    const u32 gFollowerPalette_ArceusFlying[] = INCBIN_U32("graphics/pokemon/arceus/flying/follow_normal.gbapal.lz");
+    const u32 gFollowerPalette_ArceusPoison[] = INCBIN_U32("graphics/pokemon/arceus/poison/follow_normal.gbapal.lz");
+    const u32 gFollowerPalette_ArceusGround[] = INCBIN_U32("graphics/pokemon/arceus/ground/follow_normal.gbapal.lz");
+    const u32 gFollowerPalette_ArceusRock[] = INCBIN_U32("graphics/pokemon/arceus/rock/follow_normal.gbapal.lz");
+    const u32 gFollowerPalette_ArceusBug[] = INCBIN_U32("graphics/pokemon/arceus/bug/follow_normal.gbapal.lz");
+    const u32 gFollowerPalette_ArceusGhost[] = INCBIN_U32("graphics/pokemon/arceus/ghost/follow_normal.gbapal.lz");
+    const u32 gFollowerPalette_ArceusSteel[] = INCBIN_U32("graphics/pokemon/arceus/steel/follow_normal.gbapal.lz");
+    const u32 gFollowerPalette_ArceusFire[] = INCBIN_U32("graphics/pokemon/arceus/fire/follow_normal.gbapal.lz");
+    const u32 gFollowerPalette_ArceusWater[] = INCBIN_U32("graphics/pokemon/arceus/water/follow_normal.gbapal.lz");
+    const u32 gFollowerPalette_ArceusGrass[] = INCBIN_U32("graphics/pokemon/arceus/grass/follow_normal.gbapal.lz");
+    const u32 gFollowerPalette_ArceusElectric[] = INCBIN_U32("graphics/pokemon/arceus/electric/follow_normal.gbapal.lz");
+    const u32 gFollowerPalette_ArceusPsychic[] = INCBIN_U32("graphics/pokemon/arceus/psychic/follow_normal.gbapal.lz");
+    const u32 gFollowerPalette_ArceusIce[] = INCBIN_U32("graphics/pokemon/arceus/ice/follow_normal.gbapal.lz");
+    const u32 gFollowerPalette_ArceusDragon[] = INCBIN_U32("graphics/pokemon/arceus/dragon/follow_normal.gbapal.lz");
+    const u32 gFollowerPalette_ArceusDark[] = INCBIN_U32("graphics/pokemon/arceus/dark/follow_normal.gbapal.lz");
+    const u32 gFollowerPalette_ArceusFairy[] = INCBIN_U32("graphics/pokemon/arceus/fairy/follow_normal.gbapal.lz");
+    const u32 gShinyFollowerPalette_ArceusNormal[] = INCBIN_U32("graphics/pokemon/arceus/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_ArceusFighting[] = INCBIN_U32("graphics/pokemon/arceus/fighting/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_ArceusFlying[] = INCBIN_U32("graphics/pokemon/arceus/flying/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_ArceusPoison[] = INCBIN_U32("graphics/pokemon/arceus/poison/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_ArceusGround[] = INCBIN_U32("graphics/pokemon/arceus/ground/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_ArceusRock[] = INCBIN_U32("graphics/pokemon/arceus/rock/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_ArceusBug[] = INCBIN_U32("graphics/pokemon/arceus/bug/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_ArceusGhost[] = INCBIN_U32("graphics/pokemon/arceus/ghost/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_ArceusSteel[] = INCBIN_U32("graphics/pokemon/arceus/steel/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_ArceusFire[] = INCBIN_U32("graphics/pokemon/arceus/fire/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_ArceusWater[] = INCBIN_U32("graphics/pokemon/arceus/water/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_ArceusGrass[] = INCBIN_U32("graphics/pokemon/arceus/grass/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_ArceusElectric[] = INCBIN_U32("graphics/pokemon/arceus/electric/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_ArceusPsychic[] = INCBIN_U32("graphics/pokemon/arceus/psychic/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_ArceusIce[] = INCBIN_U32("graphics/pokemon/arceus/ice/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_ArceusDragon[] = INCBIN_U32("graphics/pokemon/arceus/dragon/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_ArceusDark[] = INCBIN_U32("graphics/pokemon/arceus/dark/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_ArceusFairy[] = INCBIN_U32("graphics/pokemon/arceus/fairy/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_FAMILY_ARCEUS
 

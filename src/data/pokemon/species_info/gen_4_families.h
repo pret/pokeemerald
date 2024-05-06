@@ -5753,7 +5753,13 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .shinyPalette = gMonShinyPalette_Arceus ##typeName,                 \
         ARCEUS_ICON(typeName, iconPal)                                      \
         FOOTPRINT(Arceus)                                                   \
-        FOLLOWER(Arceus ##typeName, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT) \
+        FOLLOWER(                                                           \
+            Arceus ##typeName,                                              \
+            SIZE_64x64,                                                     \
+            SHADOW_SIZE_M,                                                  \
+            TRACKS_FOOT,                                                    \
+            gFollowerPalette_Arceus ##typeName,                             \
+            gShinyFollowerPalette_Arceus ##typeName)                        \
         .levelUpLearnset = sArceusLevelUpLearnset,                          \
         .teachableLearnset = sArceusTeachableLearnset,                      \
         .formSpeciesIdTable = sArceusFormSpeciesIdTable,                    \
