@@ -7,7 +7,7 @@
 ```
 
 ## 🌋 *IMPORTANT CHANGES* 🌋
-* We deleted the whole repo LOL by @AsparagusEduardo in https://github.com/rh-hideout/pokeemerald-expansion/pull/3367
+* N/A
 
 ## 💥 *Softlock/Crash fixes* 💥
 * N/A
@@ -119,7 +119,7 @@
 
 
 ## New Contributors
-* Tony
+* N/A
 
 **Full Changelog**: https://github.com/rh-hideout/pokeemerald-expansion/compare/expansion/1.Y.Z...expansion/1.Y.Z
 
