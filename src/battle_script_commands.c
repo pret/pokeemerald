@@ -6,6 +6,7 @@
 #include "battle_ai_util.h"
 #include "battle_scripts.h"
 #include "battle_z_move.h"
+#include "bw_summary_screen.h"
 #include "constants/moves.h"
 #include "constants/abilities.h"
 #include "item.h"
@@ -317,7 +318,16 @@ static const s32 sExperienceScalingFactors[] =
 
 static const u16 sTrappingMoves[NUM_TRAPPING_MOVES] =
 {
-    MOVE_BIND, MOVE_WRAP, MOVE_FIRE_SPIN, MOVE_CLAMP, MOVE_WHIRLPOOL, MOVE_SAND_TOMB, MOVE_MAGMA_STORM, MOVE_INFESTATION, MOVE_SNAP_TRAP,
+    MOVE_BIND,
+    MOVE_WRAP,
+    MOVE_FIRE_SPIN,
+    MOVE_CLAMP,
+    MOVE_WHIRLPOOL,
+    MOVE_SAND_TOMB,
+    MOVE_MAGMA_STORM,
+    MOVE_INFESTATION,
+    MOVE_SNAP_TRAP,
+    MOVE_THUNDER_CAGE
 };
 
 static const u16 sBadgeFlags[8] = {
@@ -1385,9 +1395,9 @@ static void Cmd_attackcanceler(void)
 
     if (gProtectStructs[gBattlerTarget].bounceMove
         && gMovesInfo[gCurrentMove].magicCoatAffected
-        && !gProtectStructs[gBattlerAttacker].usesBouncedMove)
+        && !gBattleStruct->bouncedMoveIsUsed)
     {
-        gProtectStructs[gBattlerTarget].usesBouncedMove = TRUE;
+        gBattleStruct->bouncedMoveIsUsed = TRUE;
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
         // Edge case for bouncing a powder move against a grass type pokemon.
         SetAtkCancellerForCalledMove();
@@ -1404,18 +1414,33 @@ static void Cmd_attackcanceler(void)
         }
         return;
     }
-    else if (GetBattlerAbility(gBattlerTarget) == ABILITY_MAGIC_BOUNCE
-             && gMovesInfo[gCurrentMove].magicCoatAffected
-             && !gProtectStructs[gBattlerAttacker].usesBouncedMove)
+    else if (gMovesInfo[gCurrentMove].magicCoatAffected && !gBattleStruct->bouncedMoveIsUsed)
     {
-        gProtectStructs[gBattlerTarget].usesBouncedMove = TRUE;
-        gBattleCommunication[MULTISTRING_CHOOSER] = 1;
-        // Edge case for bouncing a powder move against a grass type pokemon.
-        SetAtkCancellerForCalledMove();
-        BattleScriptPushCursor();
-        gBattlescriptCurrInstr = BattleScript_MagicCoatBounce;
-        gBattlerAbility = gBattlerTarget;
-        return;
+        u32 battler = gBattlerTarget;
+
+        if (GetBattlerAbility(gBattlerTarget) == ABILITY_MAGIC_BOUNCE)
+        {
+            battler = gBattlerTarget;
+            gBattleStruct->bouncedMoveIsUsed = TRUE;
+        }
+        else if (IsDoubleBattle()
+              && gMovesInfo[gCurrentMove].target == MOVE_TARGET_OPPONENTS_FIELD
+              && GetBattlerAbility(BATTLE_PARTNER(gBattlerTarget)) == ABILITY_MAGIC_BOUNCE)
+        {
+            gBattlerTarget = battler = BATTLE_PARTNER(gBattlerTarget);
+            gBattleStruct->bouncedMoveIsUsed = TRUE;
+        }
+
+        if (gBattleStruct->bouncedMoveIsUsed)
+        {
+            gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+            // Edge case for bouncing a powder move against a grass type pokemon.
+            SetAtkCancellerForCalledMove();
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_MagicCoatBounce;
+            gBattlerAbility = battler;
+            return;
+        }
     }
 
     // Z-moves and Max Moves bypass protection, but deal reduced damage (factored in AccumulateOtherModifiers)
@@ -4407,7 +4432,15 @@ static void Cmd_getexp(void)
                         gBattleMoveDamage += GetSoftLevelCapExpValue(gPlayerParty[*expMonId].level, gBattleStruct->expShareExpValue);;
                     }
 
-                    ApplyExperienceMultipliers(&gBattleMoveDamage, *expMonId, gBattlerFainted);
+                    if (EXP_CAP_HARD && gBattleMoveDamage != 0)
+                    {
+                        u32 growthRate = gSpeciesInfo[GetMonData(&gPlayerParty[*expMonId], MON_DATA_SPECIES)].growthRate;
+                        if (gExperienceTables[growthRate][GetCurrentLevelCap()] < gExperienceTables[growthRate][GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL)] + gBattleMoveDamage)
+                            gBattleMoveDamage = gExperienceTables[growthRate][GetCurrentLevelCap()];
+                    }
+
+                    if (!EXP_CAP_HARD || gBattleMoveDamage != 0) // Edge case for hard level caps. Prevents mons from getting 1 exp
+                        ApplyExperienceMultipliers(&gBattleMoveDamage, *expMonId, gBattlerFainted);
 
                     if (IsTradedMon(&gPlayerParty[*expMonId]))
                     {
@@ -5903,9 +5936,10 @@ static void Cmd_moveend(void)
                     return;
                 }
                 // Check if the move used was actually a bounced move. If so, we need to go back to the original attacker and make sure, its move hits all 2 or 3 pokemon.
-                else if (gProtectStructs[gBattlerAttacker].usesBouncedMove)
+                else if (gBattleStruct->bouncedMoveIsUsed)
                 {
                     u8 originalBounceTarget = gBattlerAttacker;
+                    gBattleStruct->bouncedMoveIsUsed = FALSE;
                     gBattlerAttacker = gBattleStruct->attackerBeforeBounce;
                     gBattleStruct->targetsDone[gBattlerAttacker] |= gBitTable[originalBounceTarget];
                     gBattleStruct->targetsDone[originalBounceTarget] = 0;
@@ -6031,8 +6065,6 @@ static void Cmd_moveend(void)
                 for (i = 0; i < gBattlersCount; i++)
                 {
                     u32 holdEffect;
-                    if (i == gBattlerAttacker)
-                        continue;
                     holdEffect = GetBattlerHoldEffect(i, TRUE);
                     if (holdEffect == HOLD_EFFECT_EJECT_BUTTON)
                         ejectButtonBattlers |= gBitTable[i];
@@ -6048,7 +6080,7 @@ static void Cmd_moveend(void)
                     {
                         u32 battler = battlers[i];
 
-                        if (ejectButtonBattlers & gBitTable[battler])
+                        if (battler != gBattlerAttacker && ejectButtonBattlers & gBitTable[battler])
                         {
                             if (TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove)) // Apparently Sheer Force blocks Eject Button, but not Eject Pack
                                 continue;
@@ -6206,7 +6238,7 @@ static void Cmd_moveend(void)
 
                 if (!(gBattleStruct->lastMoveFailed & gBitTable[gBattlerAttacker]
                     || (!gSpecialStatuses[gBattlerAttacker].dancerUsedMove
-                        && gProtectStructs[gBattlerAttacker].usesBouncedMove)))
+                        && gBattleStruct->bouncedMoveIsUsed)))
                 {   // Dance move succeeds
                     // Set target for other Dancer mons; set bit so that mon cannot activate Dancer off of its own move
                     if (!gSpecialStatuses[gBattlerAttacker].dancerUsedMove)
@@ -6301,7 +6333,6 @@ static void Cmd_moveend(void)
                 CancelMultiTurnMoves(gBattlerAttacker); // Cancel it
 
             gBattleStruct->targetsDone[gBattlerAttacker] = 0;
-            gProtectStructs[gBattlerAttacker].usesBouncedMove = FALSE;
             gProtectStructs[gBattlerAttacker].targetAffected = FALSE;
             gProtectStructs[gBattlerAttacker].shellTrap = FALSE;
             gBattleStruct->ateBoost[gBattlerAttacker] = 0;
@@ -6318,6 +6349,7 @@ static void Cmd_moveend(void)
             gBattleStruct->hitSwitchTargetFailed = FALSE;
             gBattleStruct->isAtkCancelerForCalledMove = FALSE;
             gBattleStruct->swapDamageCategory = FALSE;
+            gBattleStruct->bouncedMoveIsUsed = FALSE;
             gBattleStruct->enduredDamage = 0;
             gBattleStruct->additionalEffectsCounter = 0;
             gBattleScripting.moveendState++;
@@ -7033,6 +7065,8 @@ static void SetDmgHazardsBattlescript(u8 battler, u8 multistringId)
         gBattlescriptCurrInstr = BattleScript_DmgHazardsOnTarget;
     else if (gBattlescriptCurrInstr[1] == BS_ATTACKER)
         gBattlescriptCurrInstr = BattleScript_DmgHazardsOnAttacker;
+    else if (gBattlescriptCurrInstr[1] == BS_SCRIPTING)
+        gBattlescriptCurrInstr = BattleScript_DmgHazardsOnBattlerScripting;
     else
         gBattlescriptCurrInstr = BattleScript_DmgHazardsOnFaintedBattler;
 }
@@ -7402,7 +7436,11 @@ static void Cmd_yesnoboxlearnmove(void)
         if (!gPaletteFade.active)
         {
             FreeAllWindowBuffers();
-            ShowSelectMovePokemonSummaryScreen(gPlayerParty, gBattleStruct->expGetterMonId, gPlayerPartyCount - 1, ReshowBattleScreenAfterMenu, gMoveToLearn);
+            if (BW_SUMMARY_SCREEN)
+                ShowSelectMovePokemonSummaryScreen_BW(gPlayerParty, gBattleStruct->expGetterMonId, gPlayerPartyCount - 1, ReshowBattleScreenAfterMenu, gMoveToLearn);
+            else
+                ShowSelectMovePokemonSummaryScreen(gPlayerParty, gBattleStruct->expGetterMonId, gPlayerPartyCount - 1, ReshowBattleScreenAfterMenu, gMoveToLearn);
+            
             gBattleScripting.learnMoveState++;
         }
         break;
@@ -9584,20 +9622,6 @@ static void Cmd_various(void)
         VARIOUS_ARGS();
         gLastUsedAbility = gBattleMons[battler].ability;
         break;
-    }
-    case VARIOUS_TRY_QUASH:
-    {
-        VARIOUS_ARGS(const u8 *failInstr);
-        if (GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget)) // It's true if foe is faster, has a bigger priority, or switches
-        {
-            gBattlescriptCurrInstr = cmd->failInstr; // This replaces the current battlescript with the "fail" script.
-        }
-        else // If the condition is not true, it means we are faster than the foe, so we can set the quash bit
-        {
-            gProtectStructs[gBattlerTarget].quash = TRUE;
-            gBattlescriptCurrInstr = cmd->nextInstr; // and then we proceed with the rest of our battlescript
-        }
-        return;
     }
     case VARIOUS_INVERT_STAT_STAGES:
     {
@@ -15992,6 +16016,7 @@ void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBat
 
         value *= sExperienceScalingFactors[(faintedLevel * 2) + 10];
         value /= sExperienceScalingFactors[faintedLevel + expGetterLevel + 10];
+
         *expAmount = value + 1;
     }
 }
@@ -16838,4 +16863,37 @@ void BS_TryGulpMissile(void)
         gBattlescriptCurrInstr = BattleScript_GulpMissileFormChange;
     else
         gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+
+void BS_TryQuash(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+    u32 i;
+
+    // It's true if foe is faster, has a bigger priority, or switches
+    if (GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget))
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+        return;
+    }
+
+    // If the above condition is not true, it means we are faster than the foe, so we can set the quash bit
+    gProtectStructs[gBattlerTarget].quash = TRUE;
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        gBattlerByTurnOrder[i] = i;
+    }
+    for (i = 0; i < gBattlersCount - 1; i++)
+    {
+        s32 j;
+        for (j = i + 1; j < gBattlersCount; j++)
+        {
+            if (!gProtectStructs[i].quash
+             && !gProtectStructs[j].quash
+             && GetWhichBattlerFaster(gBattlerByTurnOrder[i], gBattlerByTurnOrder[j], FALSE) == -1)
+                SwapTurnOrder(i, j);
+        }
+    }
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
