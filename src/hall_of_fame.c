@@ -525,23 +525,10 @@ static void Task_Hof_InitTeamSaveData(u8 taskId)
 static void Task_Hof_TrySaveData(u8 taskId)
 {
     gGameContinueCallback = CB2_DoHallOfFameScreenDontSaveData;
-    if (TrySavingData(SAVE_HALL_OF_FAME) == SAVE_STATUS_ERROR && gDamagedSaveSectors != 0)
-    {
-        UnsetBgTilemapBuffer(1);
-        UnsetBgTilemapBuffer(3);
-        FreeAllWindowBuffers();
+    PlaySE(SE_SAVE);
+    gTasks[taskId].func = Task_Hof_WaitToDisplayMon;
+    gTasks[taskId].tFrameCount = 32;
 
-        TRY_FREE_AND_SET_NULL(sHofGfxPtr);
-        TRY_FREE_AND_SET_NULL(sHofMonPtr);
-
-        DestroyTask(taskId);
-    }
-    else
-    {
-        PlaySE(SE_SAVE);
-        gTasks[taskId].func = Task_Hof_WaitToDisplayMon;
-        gTasks[taskId].tFrameCount = 32;
-    }
 }
 
 static void Task_Hof_WaitToDisplayMon(u8 taskId)

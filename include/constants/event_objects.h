@@ -59,7 +59,7 @@
 #define OBJ_EVENT_GFX_HIKER                       55
 #define OBJ_EVENT_GFX_CYCLING_TRIATHLETE_M        56
 #define OBJ_EVENT_GFX_CYCLING_TRIATHLETE_F        57
-#define OBJ_EVENT_GFX_BRENDAN_ACRO_BIKE           58
+#define OBJ_EVENT_GFX_ARCHIE                      58
 #define OBJ_EVENT_GFX_PROF_BIRCH                  59
 #define OBJ_EVENT_GFX_MAN_4                       60
 #define OBJ_EVENT_GFX_MAN_5                       61
@@ -196,7 +196,7 @@
 #define OBJ_EVENT_GFX_MAY_WATERING               192
 #define OBJ_EVENT_GFX_BRENDAN_DECORATING         193
 #define OBJ_EVENT_GFX_MAY_DECORATING             194
-#define OBJ_EVENT_GFX_ARCHIE                     195
+#define OBJ_EVENT_GFX_BRENDAN_ACRO_BIKE          195
 #define OBJ_EVENT_GFX_MAXIE                      196
 #define OBJ_EVENT_GFX_KYOGRE_FRONT               197
 #define OBJ_EVENT_GFX_GROUDON_FRONT              198

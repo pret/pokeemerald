@@ -847,6 +847,9 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
     mapDisplayHeader[0] = EXT_CTRL_CODE_BEGIN;
     mapDisplayHeader[1] = EXT_CTRL_CODE_HIGHLIGHT;
     mapDisplayHeader[2] = TEXT_COLOR_TRANSPARENT;
+    BufferMapFloorString();
+    StringCopy(gStringVar2, mapDisplayHeader);
+    StringExpandPlaceholders(mapDisplayHeader, gStringVar2);
     AddTextPrinterParameterized4(WINDOW_HEADER, FONT_NARROW, GetStringCenterAlignXOffset(FONT_NARROW, withoutPrefixPtr, 10 * 8), 1, 0, 0, colors, 0xFF, mapDisplayHeader);
 
     // Print Playtime In Header

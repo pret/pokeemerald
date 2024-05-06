@@ -3286,6 +3286,9 @@ static const u8 gRandomTrainerNamesF[][50] =
     _("Iris"), 
 };
 
+static const u8 gArchieNamesM[] = _("Archie");
+
+
 static const u16 ObjectEventToGender [] =
 {
     [OBJ_EVENT_GFX_NINJA_BOY]   =    MALE,
@@ -3341,6 +3344,7 @@ static const u16 ObjectEventToGender [] =
     [OBJ_EVENT_GFX_HIKER]       =    MALE,
     [OBJ_EVENT_GFX_CYCLING_TRIATHLETE_M]  =        MALE,
     [OBJ_EVENT_GFX_CYCLING_TRIATHLETE_F] =        FEMALE,
+    [OBJ_EVENT_GFX_ARCHIE]  =        MALE,
 };
 
 static const u8 *BattleStringGetOpponentNameByTrainerId(u16 trainerId, u8 *text, u8 multiplayerId, u8 battler)
@@ -3390,7 +3394,10 @@ static const u8 *BattleStringGetOpponentNameByTrainerId(u16 trainerId, u8 *text,
     else
     {
         #define SEED_TRAINER_NAME (trainerId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x + (100 * gSaveBlock1Ptr->pos.y))
-        toCpy = ObjectEventToGender[ReturnLastSpokenVarObjGfxId()] == MALE ? gRandomTrainerNamesM[RandomSeededModulo2(SEED_TRAINER_NAME, TRAINER_NAME_COUNT)] : gRandomTrainerNamesF[RandomSeededModulo2(SEED_TRAINER_NAME, TRAINER_NAME_COUNT)];
+        if(!FlagGet(FLAG_START_ARCHIE_BATTLE))
+            toCpy = ObjectEventToGender[ReturnLastSpokenVarObjGfxId()] == MALE ? gRandomTrainerNamesM[RandomSeededModulo2(SEED_TRAINER_NAME, TRAINER_NAME_COUNT)] : gRandomTrainerNamesF[RandomSeededModulo2(SEED_TRAINER_NAME, TRAINER_NAME_COUNT)];
+        else
+            toCpy = gArchieNamesM;
     }
 
     return toCpy;

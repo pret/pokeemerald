@@ -694,10 +694,11 @@ static void Task_CreditsTheEnd6(u8 taskId)
 
 static void Task_CreditsSoftReset(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gPaletteFade.active) // 
+    {
         SoftReset(RESET_ALL);
+    }
 }
-
 static void ResetGpuAndVram(void)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);

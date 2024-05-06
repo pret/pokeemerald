@@ -1243,6 +1243,9 @@ static void PrintMapNameAndTime(void) //this code is ripped froom different part
     mapDisplayHeader[0] = EXT_CTRL_CODE_BEGIN;
     mapDisplayHeader[1] = EXT_CTRL_CODE_HIGHLIGHT;
     mapDisplayHeader[2] = TEXT_COLOR_TRANSPARENT;
+    BufferMapFloorString();
+    StringCopy(gStringVar2, mapDisplayHeader);
+    StringExpandPlaceholders(mapDisplayHeader, gStringVar2);
     AddTextPrinterParameterized(WINDOW_TOP_BAR, FONT_NARROW, mapDisplayHeader, x + 152, 1, TEXT_SKIP_DRAW, NULL); // Print Map Name
 
     RtcCalcLocalTime();

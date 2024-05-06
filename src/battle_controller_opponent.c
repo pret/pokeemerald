@@ -463,6 +463,7 @@ static const u16 ObjectEventToTrainerPic [] =
     [OBJ_EVENT_GFX_HIKER]       =    TRAINER_PIC_HIKER,
     [OBJ_EVENT_GFX_CYCLING_TRIATHLETE_M]  =        TRAINER_PIC_CYCLING_TRIATHLETE_M,
     [OBJ_EVENT_GFX_CYCLING_TRIATHLETE_F] =        TRAINER_PIC_CYCLING_TRIATHLETE_F,
+    [OBJ_EVENT_GFX_ARCHIE] = TRAINER_PIC_AQUA_LEADER_ARCHIE,
 };
 
 static u32 OpponentGetTrainerPicId(u32 battlerId)
@@ -518,7 +519,10 @@ static u32 OpponentGetTrainerPicId(u32 battlerId)
     }
     else
     {
-        trainerPicId = ObjectEventToTrainerPic[ReturnLastSpokenVarObjGfxId()];
+        if(!FlagGet(FLAG_START_ARCHIE_BATTLE))
+            trainerPicId = ObjectEventToTrainerPic[ReturnLastSpokenVarObjGfxId()];
+        else
+            trainerPicId = TRAINER_PIC_AQUA_LEADER_ARCHIE;
     }
 
     return trainerPicId;

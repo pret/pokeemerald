@@ -13,7 +13,9 @@ PitArena_OnFrameFloor100::
 	lockall
 	setvar VAR_REWARD_STATE, 2
 	setvar VAR_FINAL_FLOOR, 2
-	msgbox PitArena_EndGameStatue_Text1, MSGBOX_DEFAULT
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	@msgbox PitArena_EndGameStatue_Text1, MSGBOX_DEFAULT
+	addmoney 650000
 	releaseall
 	end
 
@@ -69,7 +71,61 @@ PitArena_WarpEnd::
 	releaseall
 	end
 
-PitArena_EndGameStatue::
+PitArena_Archie::
+	lockall
+	setflag FLAG_START_ARCHIE_BATTLE
+	special HealPlayerParty
+	trainerbattle_single TRAINER_ARCHIE_PIT_BOSS, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_ArchieBattleFinished
+	releaseall
+	end
+
+PitArena_ArchieBattleFinished::
+	lockall
+	clearflag FLAG_START_ARCHIE_BATTLE
+	msgbox PitArena_EndGameStatue_Text1, MSGBOX_DEFAULT
+	closemessage
+	fadescreen FADE_TO_BLACK
+	removeobject 11
+	setflag FLAG_END_GAME_ARCHIE
+	addobject 10
+	clearflag FLAG_END_GAME_STATUE
+	fadescreen FADE_FROM_BLACK
+	releaseall
+	end
+
+PitArena_EndGameStatue:: 
+	lockall
+	specialvar VAR_RESULT, GetPlayerFacingDirection
+	goto_if_eq VAR_RESULT, DIR_NORTH, PitArena_EndGameStatue222
+	goto_if_eq VAR_RESULT, DIR_SOUTH, PitArena_EndGameStatue222
+	goto_if_eq VAR_RESULT, DIR_WEST, PitArena_EndGameStatue4
+	goto_if_eq VAR_RESULT, DIR_EAST, PitArena_EndGameStatue3
+	releaseall
+	end
+
+PitArena_EndGameStatue3::
+	applymovement OBJ_EVENT_ID_PLAYER, PlayerWestMovement
+	waitmovement 0
+	goto PitArena_EndGameStatue222
+
+PitArena_EndGameStatue4::
+	applymovement OBJ_EVENT_ID_PLAYER, PlayerEastMovement
+	waitmovement 0
+	goto PitArena_EndGameStatue222
+
+PlayerWestMovement:
+	walk_down
+	walk_right
+	face_up
+	step_end
+
+PlayerEastMovement:
+	walk_down
+	walk_left
+	face_up
+	step_end
+
+PitArena_EndGameStatue222::
 	lockall
 	msgbox PitArena_EndGameStatue_Text2, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, PitArena_EndGameStatue2
@@ -122,10 +178,10 @@ PitArena_TrainerBattle3::
 	end
 
 PitArena_Text_Intro:
-	.string "$"
+	.string ".$"
 
 PitArena_Text_Defeat:
-	.string "$"
+	.string ".$"
 
 PitArena_TrainerBattleFinished::
 	end

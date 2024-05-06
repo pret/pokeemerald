@@ -278,6 +278,7 @@ EventScript_ResetAllMapFlags::
 	setflag FLAG_GIVE_POKEMON
 	setflag FLAG_SHOP_NPC
 	setflag FLAG_END_GAME_STATUE
+	setflag FLAG_END_GAME_ARCHIE
 	call EventScript_ResetAllBerries
 	end
 

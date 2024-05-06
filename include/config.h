@@ -65,6 +65,8 @@
 #define GEN_9 8
 #define GEN_LATEST GEN_9
 
+//#define IRONMON_MODE
+#define RANDOM_GEN_5_MODE
 // General settings
 #define EXPANSION_INTRO              TRUE    // If TRUE, a custom RHH intro will play after the vanilla copyright screen.
 #define POKEDEX_PLUS_HGSS            TRUE   // If TRUE, enables the custom HGSS style Pokedex.

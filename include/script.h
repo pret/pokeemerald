@@ -63,5 +63,5 @@ void InitRamScript_NoObjectEvent(u8 *script, u16 scriptSize);
 // srccmd.h
 void SetMovingNpcId(u16 npcId);
 u16 ReturnLastSpokenVarObjGfxId();
-
+void BufferMapFloorString();
 #endif // GUARD_SCRIPT_H

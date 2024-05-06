@@ -196,8 +196,9 @@ enum {
 
 void ShowMapNamePopup(void)
 {
-    if (FlagGet(FLAG_HIDE_MAP_NAME_POPUP) != TRUE && (VarGet(VAR_PIT_FLOOR) != 100))
+    if (FlagGet(FLAG_HIDE_MAP_NAME_POPUP) != TRUE)
     {
+        BufferMapFloorString();
         if (!FuncIsActiveTask(Task_MapNamePopUpWindow))
         {
             // New pop up window
@@ -303,7 +304,7 @@ void HideMapNamePopUpWindow(void)
         {
             SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ);
             SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
-            if (sRegionMapSectionId_To_PopUpThemeIdMapping[gMapHeader.regionMapSectionId] == MAPPOPUP_THEME_TRANSPARENT)
+            if (sRegionMapSectionId_To_PopUpThemeIdMapping[gMapHeader.regionMapSectionId] == MAPPOPUP_THEME_TRANSPARENT )
                 SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 10));
             else
                 SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 10));
@@ -384,6 +385,11 @@ static void LoadMapNamePopUpWindowBgs(void)
             regionMapSectionId = 0; // Discard kanto region sections;
     }
     popupThemeId = sRegionMapSectionId_To_PopUpThemeIdMapping[regionMapSectionId];
+
+    if (VarGet(VAR_PIT_FLOOR) == 100)
+    {
+        popupThemeId = MAPPOPUP_THEME_BLACK;
+    }
 
     switch (popupThemeId) {
         case MAPPOPUP_THEME_BLACK:

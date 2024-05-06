@@ -551,9 +551,16 @@ u16 ReturnNumberOfTrainersForFloor()
 {
 
     if(VarGet(VAR_PIT_FLOOR) == 100)
-        FlagClear(FLAG_END_GAME_STATUE);
+    {
+        FlagClear(FLAG_END_GAME_ARCHIE);
+        //FlagClear(FLAG_END_GAME_STATUE);
+    }
     else
+    {
+        FlagSet(FLAG_END_GAME_ARCHIE);
         FlagSet(FLAG_END_GAME_STATUE);
+    }
+        
 
     if((VarGet(VAR_PIT_FLOOR) % 5) == 0) // Heal Floor
     {

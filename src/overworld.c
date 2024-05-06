@@ -1594,6 +1594,7 @@ void CB2_WhiteOut(void)
 
     if (++gMain.state >= 120)
     {
+        ClearSaveData();
         DoSoftReset();
         FieldClearVBlankHBlankCallbacks();
         StopMapMusic();
