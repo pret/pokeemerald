@@ -14881,10 +14881,10 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonFootprint_Vivillon[] = INCBIN_U8("graphics/pokemon/vivillon/footprint.1bpp");
 #endif //P_FOOTPRINTS
 #if OW_FOLLOWERS_ENABLED
-    const u32 gObjectEventPic_VivillonIcySnow[] = INCBIN_COMP("graphics/pokemon/vivillon/meadow/follower.4bpp");
+    const u32 gObjectEventPic_VivillonIcySnow[] = INCBIN_COMP("graphics/pokemon/vivillon/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    const u32 gFollowerPalette_VivillonIcySnow[] = INCBIN_U32("graphics/pokemon/vivillon/meadow/follow_normal.gbapal.lz");
-    const u32 gShinyFollowerPalette_VivillonIcySnow[] = INCBIN_U32("graphics/pokemon/vivillon/meadow/follow_shiny.gbapal.lz");
+    const u32 gFollowerPalette_VivillonIcySnow[] = INCBIN_U32("graphics/pokemon/vivillon/follow_normal.gbapal.lz");
+    const u32 gShinyFollowerPalette_VivillonIcySnow[] = INCBIN_U32("graphics/pokemon/vivillon/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 

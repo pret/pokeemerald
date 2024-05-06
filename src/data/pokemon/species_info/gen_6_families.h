@@ -1063,7 +1063,13 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .iconSprite = gMonIcon_Vivillon ##form,                                             \
         .iconPalIndex = iconPal,                                                            \
         FOOTPRINT(Vivillon)                                                                 \
-        FOLLOWER(Vivillon ##form, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)                   \
+        FOLLOWER(                                                                           \
+            Vivillon ##form,                                                                \
+            SIZE_32x32,                                                                     \
+            SHADOW_SIZE_M,                                                                  \
+            TRACKS_FOOT,                                                                    \
+            gFollowerPalette_Vivillon ##form,                                               \
+            gShinyFollowerPalette_Vivillon ##form)                                          \
         .levelUpLearnset = sVivillonLevelUpLearnset,                                        \
         .teachableLearnset = sVivillonTeachableLearnset,                                    \
         .formSpeciesIdTable = sVivillonFormSpeciesIdTable
