@@ -431,6 +431,7 @@ bool32 IsDamageMoveUnusable(u32 move, u32 battlerAtk, u32 battlerDef)
             return TRUE;
         break;
     case EFFECT_LOW_KICK:
+    case EFFECT_HEAT_CRASH:
         if (IsDynamaxed(battlerDef))
             return TRUE;
         break;
