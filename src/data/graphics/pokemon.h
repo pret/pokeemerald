@@ -5299,16 +5299,16 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #if P_FOOTPRINTS
     const u8 gMonFootprint_Unown[] = INCBIN_U8("graphics/pokemon/unown/footprint.1bpp");
 #endif //P_FOOTPRINTS
+#if OW_FOLLOWERS_ENABLED && OW_FOLLOWERS_SHARE_PALETTE == FALSE
+    const u32 gFollowerPalette_Unown[] = INCBIN_U32("graphics/pokemon/unown/follow_normal.gbapal.lz");
+    const u32 gShinyFollowerPalette_Unown[] = INCBIN_U32("graphics/pokemon/unown/follow_shiny.gbapal.lz");
+#endif //OW_FOLLOWERS_SHARE_PALETTE
 
     const u32 gMonFrontPic_UnownA[] = INCBIN_U32("graphics/pokemon/unown/anim_front.4bpp.lz");
     const u32 gMonBackPic_UnownA[] = INCBIN_U32("graphics/pokemon/unown/back.4bpp.lz");
     const u8 gMonIcon_UnownA[] = INCBIN_U8("graphics/pokemon/unown/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownA[] = INCBIN_COMP("graphics/pokemon/unown/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownA[] = INCBIN_U32("graphics/pokemon/unown/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownA[] = INCBIN_U32("graphics/pokemon/unown/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownB[] = INCBIN_U32("graphics/pokemon/unown/b/anim_front.4bpp.lz");
@@ -5316,10 +5316,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownB[] = INCBIN_U8("graphics/pokemon/unown/b/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownB[] = INCBIN_COMP("graphics/pokemon/unown/b/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownB[] = INCBIN_U32("graphics/pokemon/unown/b/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownB[] = INCBIN_U32("graphics/pokemon/unown/b/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownC[] = INCBIN_U32("graphics/pokemon/unown/c/anim_front.4bpp.lz");
@@ -5327,10 +5323,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownC[] = INCBIN_U8("graphics/pokemon/unown/c/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownC[] = INCBIN_COMP("graphics/pokemon/unown/c/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownC[] = INCBIN_U32("graphics/pokemon/unown/c/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownC[] = INCBIN_U32("graphics/pokemon/unown/c/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownD[] = INCBIN_U32("graphics/pokemon/unown/d/anim_front.4bpp.lz");
@@ -5338,10 +5330,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownD[] = INCBIN_U8("graphics/pokemon/unown/d/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownD[] = INCBIN_COMP("graphics/pokemon/unown/d/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownD[] = INCBIN_U32("graphics/pokemon/unown/d/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownD[] = INCBIN_U32("graphics/pokemon/unown/d/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownE[] = INCBIN_U32("graphics/pokemon/unown/e/anim_front.4bpp.lz");
@@ -5349,10 +5337,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownE[] = INCBIN_U8("graphics/pokemon/unown/e/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownE[] = INCBIN_COMP("graphics/pokemon/unown/e/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownE[] = INCBIN_U32("graphics/pokemon/unown/e/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownE[] = INCBIN_U32("graphics/pokemon/unown/e/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownF[] = INCBIN_U32("graphics/pokemon/unown/f/anim_front.4bpp.lz");
@@ -5360,10 +5344,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownF[] = INCBIN_U8("graphics/pokemon/unown/f/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownF[] = INCBIN_COMP("graphics/pokemon/unown/f/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownF[] = INCBIN_U32("graphics/pokemon/unown/f/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownF[] = INCBIN_U32("graphics/pokemon/unown/f/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownG[] = INCBIN_U32("graphics/pokemon/unown/g/anim_front.4bpp.lz");
@@ -5371,10 +5351,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownG[] = INCBIN_U8("graphics/pokemon/unown/g/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownG[] = INCBIN_COMP("graphics/pokemon/unown/g/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownG[] = INCBIN_U32("graphics/pokemon/unown/g/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownG[] = INCBIN_U32("graphics/pokemon/unown/g/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownH[] = INCBIN_U32("graphics/pokemon/unown/h/anim_front.4bpp.lz");
@@ -5382,10 +5358,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownH[] = INCBIN_U8("graphics/pokemon/unown/h/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownH[] = INCBIN_COMP("graphics/pokemon/unown/h/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownH[] = INCBIN_U32("graphics/pokemon/unown/h/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownH[] = INCBIN_U32("graphics/pokemon/unown/h/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownI[] = INCBIN_U32("graphics/pokemon/unown/i/anim_front.4bpp.lz");
@@ -5393,10 +5365,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownI[] = INCBIN_U8("graphics/pokemon/unown/i/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownI[] = INCBIN_COMP("graphics/pokemon/unown/i/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownI[] = INCBIN_U32("graphics/pokemon/unown/i/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownI[] = INCBIN_U32("graphics/pokemon/unown/i/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownJ[] = INCBIN_U32("graphics/pokemon/unown/j/anim_front.4bpp.lz");
@@ -5404,10 +5372,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownJ[] = INCBIN_U8("graphics/pokemon/unown/j/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownJ[] = INCBIN_COMP("graphics/pokemon/unown/j/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownJ[] = INCBIN_U32("graphics/pokemon/unown/j/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownJ[] = INCBIN_U32("graphics/pokemon/unown/j/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownK[] = INCBIN_U32("graphics/pokemon/unown/k/anim_front.4bpp.lz");
@@ -5415,10 +5379,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownK[] = INCBIN_U8("graphics/pokemon/unown/k/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownK[] = INCBIN_COMP("graphics/pokemon/unown/k/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownK[] = INCBIN_U32("graphics/pokemon/unown/k/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownK[] = INCBIN_U32("graphics/pokemon/unown/k/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownL[] = INCBIN_U32("graphics/pokemon/unown/l/anim_front.4bpp.lz");
@@ -5426,10 +5386,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownL[] = INCBIN_U8("graphics/pokemon/unown/l/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownL[] = INCBIN_COMP("graphics/pokemon/unown/l/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownL[] = INCBIN_U32("graphics/pokemon/unown/l/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownL[] = INCBIN_U32("graphics/pokemon/unown/l/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownM[] = INCBIN_U32("graphics/pokemon/unown/m/anim_front.4bpp.lz");
@@ -5437,10 +5393,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownM[] = INCBIN_U8("graphics/pokemon/unown/m/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownM[] = INCBIN_COMP("graphics/pokemon/unown/m/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownM[] = INCBIN_U32("graphics/pokemon/unown/m/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownM[] = INCBIN_U32("graphics/pokemon/unown/m/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownN[] = INCBIN_U32("graphics/pokemon/unown/n/anim_front.4bpp.lz");
@@ -5448,10 +5400,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownN[] = INCBIN_U8("graphics/pokemon/unown/n/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownN[] = INCBIN_COMP("graphics/pokemon/unown/n/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownN[] = INCBIN_U32("graphics/pokemon/unown/n/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownN[] = INCBIN_U32("graphics/pokemon/unown/n/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownO[] = INCBIN_U32("graphics/pokemon/unown/o/anim_front.4bpp.lz");
@@ -5459,10 +5407,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownO[] = INCBIN_U8("graphics/pokemon/unown/o/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownO[] = INCBIN_COMP("graphics/pokemon/unown/o/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownO[] = INCBIN_U32("graphics/pokemon/unown/o/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownO[] = INCBIN_U32("graphics/pokemon/unown/o/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownP[] = INCBIN_U32("graphics/pokemon/unown/p/anim_front.4bpp.lz");
@@ -5470,10 +5414,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownP[] = INCBIN_U8("graphics/pokemon/unown/p/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownP[] = INCBIN_COMP("graphics/pokemon/unown/p/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownP[] = INCBIN_U32("graphics/pokemon/unown/p/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownP[] = INCBIN_U32("graphics/pokemon/unown/p/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownQ[] = INCBIN_U32("graphics/pokemon/unown/q/anim_front.4bpp.lz");
@@ -5481,10 +5421,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownQ[] = INCBIN_U8("graphics/pokemon/unown/q/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownQ[] = INCBIN_COMP("graphics/pokemon/unown/q/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownQ[] = INCBIN_U32("graphics/pokemon/unown/q/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownQ[] = INCBIN_U32("graphics/pokemon/unown/q/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownR[] = INCBIN_U32("graphics/pokemon/unown/r/anim_front.4bpp.lz");
@@ -5492,10 +5428,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownR[] = INCBIN_U8("graphics/pokemon/unown/r/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownR[] = INCBIN_COMP("graphics/pokemon/unown/r/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownR[] = INCBIN_U32("graphics/pokemon/unown/r/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownR[] = INCBIN_U32("graphics/pokemon/unown/r/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownS[] = INCBIN_U32("graphics/pokemon/unown/s/anim_front.4bpp.lz");
@@ -5503,10 +5435,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownS[] = INCBIN_U8("graphics/pokemon/unown/s/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownS[] = INCBIN_COMP("graphics/pokemon/unown/s/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownS[] = INCBIN_U32("graphics/pokemon/unown/s/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownS[] = INCBIN_U32("graphics/pokemon/unown/s/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownT[] = INCBIN_U32("graphics/pokemon/unown/t/anim_front.4bpp.lz");
@@ -5514,10 +5442,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownT[] = INCBIN_U8("graphics/pokemon/unown/t/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownT[] = INCBIN_COMP("graphics/pokemon/unown/t/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownT[] = INCBIN_U32("graphics/pokemon/unown/t/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownT[] = INCBIN_U32("graphics/pokemon/unown/t/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownU[] = INCBIN_U32("graphics/pokemon/unown/u/anim_front.4bpp.lz");
@@ -5525,10 +5449,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownU[] = INCBIN_U8("graphics/pokemon/unown/u/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownU[] = INCBIN_COMP("graphics/pokemon/unown/u/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownU[] = INCBIN_U32("graphics/pokemon/unown/u/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownU[] = INCBIN_U32("graphics/pokemon/unown/u/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownV[] = INCBIN_U32("graphics/pokemon/unown/v/anim_front.4bpp.lz");
@@ -5536,10 +5456,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownV[] = INCBIN_U8("graphics/pokemon/unown/v/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownV[] = INCBIN_COMP("graphics/pokemon/unown/v/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownV[] = INCBIN_U32("graphics/pokemon/unown/v/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownV[] = INCBIN_U32("graphics/pokemon/unown/v/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownW[] = INCBIN_U32("graphics/pokemon/unown/w/anim_front.4bpp.lz");
@@ -5547,10 +5463,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownW[] = INCBIN_U8("graphics/pokemon/unown/w/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownW[] = INCBIN_COMP("graphics/pokemon/unown/w/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownW[] = INCBIN_U32("graphics/pokemon/unown/w/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownW[] = INCBIN_U32("graphics/pokemon/unown/w/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownX[] = INCBIN_U32("graphics/pokemon/unown/x/anim_front.4bpp.lz");
@@ -5558,10 +5470,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownX[] = INCBIN_U8("graphics/pokemon/unown/x/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownX[] = INCBIN_COMP("graphics/pokemon/unown/x/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownX[] = INCBIN_U32("graphics/pokemon/unown/x/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownX[] = INCBIN_U32("graphics/pokemon/unown/x/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownY[] = INCBIN_U32("graphics/pokemon/unown/y/anim_front.4bpp.lz");
@@ -5569,10 +5477,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownY[] = INCBIN_U8("graphics/pokemon/unown/y/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownY[] = INCBIN_COMP("graphics/pokemon/unown/y/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownY[] = INCBIN_U32("graphics/pokemon/unown/y/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownY[] = INCBIN_U32("graphics/pokemon/unown/y/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownZ[] = INCBIN_U32("graphics/pokemon/unown/z/anim_front.4bpp.lz");
@@ -5580,10 +5484,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownZ[] = INCBIN_U8("graphics/pokemon/unown/z/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownZ[] = INCBIN_COMP("graphics/pokemon/unown/z/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownZ[] = INCBIN_U32("graphics/pokemon/unown/z/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownZ[] = INCBIN_U32("graphics/pokemon/unown/z/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownExclamationMark[] = INCBIN_U32("graphics/pokemon/unown/exclamation_mark/anim_front.4bpp.lz");
@@ -5591,10 +5491,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownExclamationMark[] = INCBIN_U8("graphics/pokemon/unown/exclamation_mark/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownExclamationMark[] = INCBIN_COMP("graphics/pokemon/unown/exclamation_mark/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownExclamationMark[] = INCBIN_U32("graphics/pokemon/unown/exclamation_mark/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownExclamationMark[] = INCBIN_U32("graphics/pokemon/unown/exclamation_mark/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
     const u32 gMonFrontPic_UnownQuestionMark[] = INCBIN_U32("graphics/pokemon/unown/question_mark/anim_front.4bpp.lz");
@@ -5602,10 +5498,6 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u8 gMonIcon_UnownQuestionMark[] = INCBIN_U8("graphics/pokemon/unown/question_mark/icon.4bpp");
 #if OW_FOLLOWERS_ENABLED
     const u32 gObjectEventPic_UnownQuestionMark[] = INCBIN_COMP("graphics/pokemon/unown/question_mark/follower.4bpp");
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    // const u32 gFollowerPalette_UnownQuestionMark[] = INCBIN_U32("graphics/pokemon/unown/question_mark/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_UnownQuestionMark[] = INCBIN_U32("graphics/pokemon/unown/question_mark/follow_shiny.gbapal.lz");
-#endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
 #endif //P_FAMILY_UNOWN
