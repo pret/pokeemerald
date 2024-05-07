@@ -75,11 +75,7 @@ static const u16 sRandomValidMoves[] =
     MOVE_ICE_PUNCH,
     MOVE_THUNDER_PUNCH,
     MOVE_SCRATCH,
-    #if defined(BATTLE_ENGINE) || defined (POKEMON_EXPANSION)
     MOVE_VISE_GRIP,
-    #else
-    MOVE_VICE_GRIP,
-    #endif
     MOVE_GUILLOTINE,
     MOVE_RAZOR_WIND,
     MOVE_SWORDS_DANCE,
@@ -204,11 +200,7 @@ static const u16 sRandomValidMoves[] =
     MOVE_AMNESIA,
     MOVE_KINESIS,
     MOVE_SOFT_BOILED,
-    #if defined(BATTLE_ENGINE) || defined (POKEMON_EXPANSION)
     MOVE_HIGH_JUMP_KICK,
-    #else
-    MOVE_HI_JUMP_KICK,
-    #endif
     MOVE_GLARE,
     MOVE_DREAM_EATER,
     MOVE_POISON_GAS,
@@ -256,11 +248,7 @@ static const u16 sRandomValidMoves[] =
     MOVE_PROTECT,
     MOVE_MACH_PUNCH,
     MOVE_SCARY_FACE,
-    #if defined(BATTLE_ENGINE) || defined (POKEMON_EXPANSION)
     MOVE_FEINT_ATTACK,
-    #else
-    MOVE_FAINT_ATTACK,
-    #endif
     MOVE_SWEET_KISS,
     MOVE_BELLY_DRUM,
     MOVE_SLUDGE_BOMB,
@@ -323,7 +311,7 @@ static const u16 sRandomValidMoves[] =
     MOVE_EXTREME_SPEED,
     MOVE_ANCIENT_POWER,
     MOVE_SHADOW_BALL,
-    MOVE_FUTURE_SIGHT,
+    //MOVE_FUTURE_SIGHT, REMOVED UNTIL NOT BUGGY
     MOVE_ROCK_SMASH,
     MOVE_WHIRLPOOL,
     MOVE_BEAT_UP,
@@ -340,11 +328,7 @@ static const u16 sRandomValidMoves[] =
     MOVE_MEMENTO,
     MOVE_FACADE,
     MOVE_FOCUS_PUNCH,
-    #if defined(BATTLE_ENGINE) || defined (POKEMON_EXPANSION)
     MOVE_SMELLING_SALTS,
-    #else
-    MOVE_SMELLING_SALT,
-    #endif
     MOVE_FOLLOW_ME,
     MOVE_NATURE_POWER,
     MOVE_CHARGE,
@@ -434,7 +418,6 @@ static const u16 sRandomValidMoves[] =
     MOVE_WATER_PULSE,
     MOVE_DOOM_DESIRE,
     MOVE_PSYCHO_BOOST,
-    #ifdef BATTLE_ENGINE
     // Gen 4 moves
     MOVE_ROOST,
     MOVE_GRAVITY,
@@ -828,7 +811,6 @@ static const u16 sRandomValidMoves[] =
     MOVE_GLACIAL_LANCE,
     MOVE_ASTRAL_BARRAGE,
     MOVE_EERIE_SPELL,
-    #endif
     #endif
 };
 //**********************
@@ -8127,12 +8109,12 @@ static const u16 sRandomSpeciesLegendary[] =
     SPECIES_AVALUGG           ,
     SPECIES_NOIBAT            ,
     SPECIES_NOIVERN           ,
-    //SPECIES_XERNEAS           ,
-    //SPECIES_YVELTAL           ,
-    //SPECIES_ZYGARDE           ,
-    //SPECIES_DIANCIE           ,
-    //SPECIES_HOOPA             ,
-    //SPECIES_VOLCANION         ,
+    SPECIES_XERNEAS           ,
+    SPECIES_YVELTAL           ,
+    SPECIES_ZYGARDE           ,
+    SPECIES_DIANCIE           ,
+    SPECIES_HOOPA             ,
+    SPECIES_VOLCANION         ,
     SPECIES_ROWLET            ,
     SPECIES_DARTRIX           ,
     SPECIES_DECIDUEYE         ,
@@ -8347,7 +8329,6 @@ static const u16 sRandomSpeciesLegendary[] =
     SPECIES_DARMANITAN_GALARIAN ,
     SPECIES_YAMASK_GALARIAN   ,
     SPECIES_STUNFISK_GALARIAN ,
-    //SPECIES_PIKACHU_ORIGINAL_CAP ,
     SPECIES_PIKACHU_HOENN_CAP ,
     SPECIES_PICHU_SPIKY_EARED ,
     SPECIES_BURMY_SANDY_CLOAK ,
@@ -8355,11 +8336,6 @@ static const u16 sRandomSpeciesLegendary[] =
     SPECIES_WORMADAM_SANDY_CLOAK ,
     SPECIES_WORMADAM_TRASH_CLOAK ,
     SPECIES_CHERRIM_SUNSHINE  ,
-    //SPECIES_SHELLOS_EAST_SEA  ,
-    //SPECIES_GASTRODON_EAST_SEA ,
-    //SPECIES_BASCULIN_BLUE_STRIPED ,
-    //SPECIES_DARMANITAN_ZEN_MODE ,
-    //SPECIES_DARMANITAN_ZEN_MODE_GALARIAN ,
     SPECIES_DEERLING_SUMMER   ,
     SPECIES_DEERLING_AUTUMN   ,
     SPECIES_DEERLING_WINTER   ,
@@ -8369,24 +8345,8 @@ static const u16 sRandomSpeciesLegendary[] =
     SPECIES_KYUREM_WHITE      ,
     SPECIES_KYUREM_BLACK      ,
     SPECIES_VIVILLON_POLAR    ,
-    //SPECIES_VIVILLON_OCEAN    ,
-    //SPECIES_FLABEBE_BLUE_FLOWER ,
-    //SPECIES_FLABEBE_WHITE_FLOWER ,
-    //SPECIES_FLOETTE_BLUE_FLOWER ,
-    //SPECIES_FLOETTE_WHITE_FLOWER ,
-    //SPECIES_FLOETTE_ETERNAL_FLOWER ,
-    //SPECIES_FLORGES_BLUE_FLOWER ,
-    //SPECIES_FLORGES_WHITE_FLOWER ,
-    //SPECIES_MEOWSTIC_FEMALE   ,
-    //SPECIES_PUMPKABOO_SMALL   ,
     SPECIES_PUMPKABOO_SUPER   ,
-    //SPECIES_GOURGEIST_SMALL   ,
     SPECIES_GOURGEIST_SUPER   ,
-    //SPECIES_ORICORIO_POM_POM  ,
-    //SPECIES_ORICORIO_PAU      ,
-    //SPECIES_ORICORIO_SENSU    ,
-    //SPECIES_MINIOR_METEOR_BLUE ,
-    //SPECIES_MINIOR_CORE_BLUE  ,
     #endif
     #endif
     // SPECIES_EGG       ,
