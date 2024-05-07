@@ -275,10 +275,15 @@ PitArena_ShopNPC::
 	setvar VAR_TEMP_9, 0
 PitArena_ShopNPCHook::
 	message PitArena_ShopNPC_Text
+#ifndef RANDOM_GEN_5_MODE
 	dynmultichoice 17, 1, 0, 5, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitArena_ShopNPC_Option0, PitArena_ShopNPC_Option1, PitArena_ShopNPC_Option2, PitArena_ShopNPC_Option3, PitArena_ShopNPC_Option4, PitArena_ShopNPC_Option5, PitArena_ShopNPC_Option6, PitArena_ShopNPC_Option7, PitArena_ShopNPC_Option8
+#else
+	dynmultichoice 17, 1, 0, 5, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitArena_ShopNPC_Option0, PitArena_ShopNPC_Option1, PitArena_ShopNPC_Option3, PitArena_ShopNPC_Option4, PitArena_ShopNPC_Option6, PitArena_ShopNPC_Option7, PitArena_ShopNPC_Option8
+#endif
 	closemessage
 	setflag FLAG_BUY_FROM_MART
 	copyvar VAR_TEMP_9, VAR_RESULT
+#ifndef RANDOM_GEN_5_MODE
 	goto_if_eq VAR_RESULT, 0, PitArena_MartScript_TMs
 	goto_if_eq VAR_RESULT, 1, PitArena_MartScript_EvoItems
 	goto_if_eq VAR_RESULT, 2, PitArena_MartScript_MegaStones
@@ -287,6 +292,14 @@ PitArena_ShopNPCHook::
 	goto_if_eq VAR_RESULT, 5, PitArena_MartScript_ZCrystals
 	goto_if_eq VAR_RESULT, 6, PitArena_MartScript_FormItems
 	goto_if_eq VAR_RESULT, 7, PitArena_MartScript_Sell
+#else
+	goto_if_eq VAR_RESULT, 0, PitArena_MartScript_TMs
+	goto_if_eq VAR_RESULT, 1, PitArena_MartScript_EvoItems
+	goto_if_eq VAR_RESULT, 2, PitArena_MartScript_Mints
+	goto_if_eq VAR_RESULT, 3, PitArena_MartScript_Gems
+	goto_if_eq VAR_RESULT, 4, PitArena_MartScript_FormItems
+	goto_if_eq VAR_RESULT, 5, PitArena_MartScript_Sell
+#endif
 	clearflag FLAG_SELL_FROM_MART
 	clearflag FLAG_BUY_FROM_MART
 	release
@@ -354,13 +367,13 @@ PitArena_MartScript_Sell::
 
 
 PitArena_ShopNPC_Option0:
-	.string "TMs$"
+	.string "TMs    $"
 PitArena_ShopNPC_Option1:
 	.string "Evos$"
 PitArena_ShopNPC_Option2:
 	.string "Megas$"
 PitArena_ShopNPC_Option3:
-	.string "Mints$"
+	.string "Mints   $"
 PitArena_ShopNPC_Option4:
 	.string "Gems$"
 PitArena_ShopNPC_Option5:
@@ -665,56 +678,6 @@ PitArena_Mart_TMs:
 	.2byte ITEM_TM48
 	.2byte ITEM_TM49
 	.2byte ITEM_TM50
-	.2byte ITEM_TM51
-	.2byte ITEM_TM52
-	.2byte ITEM_TM53
-	.2byte ITEM_TM54
-	.2byte ITEM_TM55
-	.2byte ITEM_TM56
-	.2byte ITEM_TM57
-	.2byte ITEM_TM58
-	.2byte ITEM_TM59
-	.2byte ITEM_TM60
-	.2byte ITEM_TM61
-	.2byte ITEM_TM62
-	.2byte ITEM_TM63
-	.2byte ITEM_TM64
-	.2byte ITEM_TM65
-	.2byte ITEM_TM66
-	.2byte ITEM_TM67
-	.2byte ITEM_TM68
-	.2byte ITEM_TM69
-	.2byte ITEM_TM70
-	.2byte ITEM_TM71
-	.2byte ITEM_TM72
-	.2byte ITEM_TM73
-	.2byte ITEM_TM74
-	.2byte ITEM_TM75
-	.2byte ITEM_TM76
-	.2byte ITEM_TM77
-	.2byte ITEM_TM78
-	.2byte ITEM_TM79
-	.2byte ITEM_TM80
-	.2byte ITEM_TM81
-	.2byte ITEM_TM82
-	.2byte ITEM_TM83
-	.2byte ITEM_TM84
-	.2byte ITEM_TM85
-	.2byte ITEM_TM86
-	.2byte ITEM_TM87
-	.2byte ITEM_TM88
-	.2byte ITEM_TM89
-	.2byte ITEM_TM90
-	.2byte ITEM_TM91
-	.2byte ITEM_TM92
-	.2byte ITEM_TM93
-	.2byte ITEM_TM94
-	.2byte ITEM_TM95
-	.2byte ITEM_TM96
-	.2byte ITEM_TM97
-	.2byte ITEM_TM98
-	.2byte ITEM_TM99
-	.2byte ITEM_TM100
 	.2byte ITEM_NONE
     release
 	end
