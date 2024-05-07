@@ -2302,7 +2302,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 }   
                 else
                 {
-                    CreateMon(&party[i], GetSpeciesRandomNotSeeded(partyData[i].species, 0, 0), monLevel, 0, TRUE, personalityValue, otIdType, fixedOtId);
+                    CreateMon(&party[i], GetSpeciesRandomNotSeeded(partyData[i].species), monLevel, 0, TRUE, personalityValue, otIdType, fixedOtId);
                 }
             }
             SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);

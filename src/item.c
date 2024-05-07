@@ -24,6 +24,7 @@
 #include "party_menu.h"
 #include "overworld.h"
 #include "event_data.h"
+#include "bw_summary_screen.h"
 
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
@@ -903,10 +904,24 @@ u32 ItemId_GetHoldEffectParam(u32 itemId)
     return gItemsInfo[SanitizeItemId(itemId)].holdEffectParam;
 }
 
+#ifdef IRONMON_MODE
+EWRAM_DATA u8 tmStringVar[0x100] = {0};
+const u8 *ItemId_GetDescription(u16 itemId)
+{
+    if (GetPocketByItemId(SanitizeItemId(itemId)) == POCKET_TM_HM)
+    {
+        FormatTextByWidth(tmStringVar, 100, FONT_NORMAL, gMovesInfo[GetRandomMove(itemId, gItemsInfo[itemId].secondaryId)].description, 1);
+        return tmStringVar;
+    }
+    else
+        return gItemsInfo[SanitizeItemId(itemId)].description;
+}
+#else
 const u8 *ItemId_GetDescription(u16 itemId)
 {
     return gItemsInfo[SanitizeItemId(itemId)].description;
 }
+#endif
 
 u8 ItemId_GetImportance(u16 itemId)
 {

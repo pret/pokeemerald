@@ -33,6 +33,7 @@ void ShowSelectMovePokemonSummaryScreen_BW(struct Pokemon *mons, u8 monIndex, u8
 void ShowPokemonSummaryScreenHandleDeoxys_BW(u8 mode, struct BoxPokemon *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void));
 u8 GetMoveSlotToReplace_BW(void);
 void SummaryScreen_SetAnimDelayTaskId_BW(u8 taskId);
+void FormatTextByWidth(u8*, s32, u8, const u8*, s16);
 
 // The Pokémon Summary Screen can operate in different modes. Certain features,
 // such as move re-ordering, are available in the different modes.

@@ -7600,7 +7600,7 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
             moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * trainerMoney;
     }
 
-    return moneyReward;
+    return 500;
 }
 
 static void Cmd_getmoneyreward(void)
@@ -7615,6 +7615,7 @@ static void Cmd_getmoneyreward(void)
         money = GetTrainerMoneyToGive(gTrainerBattleOpponent_A);
         if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
             money += GetTrainerMoneyToGive(gTrainerBattleOpponent_B);
+        money = 500;
         AddMoney(&gSaveBlock1Ptr->money, money);
     }
     else

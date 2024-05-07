@@ -53,6 +53,9 @@
 #define POKEMON_EXPANSION
 #define ITEM_EXPANSION
 
+//#define IRONMON_MODE
+#define RANDOM_GEN_5_MODE
+
 // Generation constants used in configs to define behavior
 #define GEN_1 0
 #define GEN_2 1
@@ -63,10 +66,12 @@
 #define GEN_7 6
 #define GEN_8 7
 #define GEN_9 8
+#ifdef RANDOM_GEN_5_MODE
+#define GEN_LATEST GEN_5
+#else
 #define GEN_LATEST GEN_9
+#endif
 
-//#define IRONMON_MODE
-#define RANDOM_GEN_5_MODE
 // General settings
 #define EXPANSION_INTRO              TRUE    // If TRUE, a custom RHH intro will play after the vanilla copyright screen.
 #define POKEDEX_PLUS_HGSS            TRUE   // If TRUE, enables the custom HGSS style Pokedex.

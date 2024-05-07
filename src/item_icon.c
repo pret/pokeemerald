@@ -5,6 +5,7 @@
 #include "malloc.h"
 #include "sprite.h"
 #include "constants/items.h"
+#include "item.h"
 
 // EWRAM vars
 EWRAM_DATA u8 *gItemIconDecompressionBuffer = NULL;
@@ -163,6 +164,13 @@ const void *GetItemIconPicOrPalette(u16 itemId, u8 which)
         itemId = ITEMS_COUNT; // Use last icon, the "return to field" arrow
     else if (itemId >= ITEMS_COUNT)
         itemId = 0;
+
+#ifdef IRONMON_MODE
+    if (GetPocketByItemId(itemId) == POCKET_TM_HM)
+    {
+        return gTMMoveTypeTable[gMovesInfo[GetRandomMove(itemId, gItemsInfo[itemId].secondaryId)].type][which];
+    }
+#endif
 
     return gItemIconTable[itemId][which];
 }

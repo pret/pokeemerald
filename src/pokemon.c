@@ -5993,7 +5993,8 @@ static const u16 sUniversalMoves[] =
 u8 CanLearnTeachableMove(u16 species, u16 move)
 {
 #ifdef IRONMON_MODE
-    species = GetSpeciesRandomNotSeeded(species, TX_RANDOM_T_MOVES, 0);
+    species = GetSpeciesRandomSeeded(species);
+    move = GetRandomMove(move, species);
 #endif
     if (species == SPECIES_EGG)
     {
@@ -8357,7 +8358,7 @@ u16 GetSpeciesRandomSeeded(u16 species)
     return sRandomSpeciesLegendary[RandomSeededModulo2(species, RANDOM_SPECIES_COUNT_LEGENDARY)];
 }
 
-u16 GetSpeciesRandomNotSeeded(u16 species, u8 type, u16 additionalOffset)
+u16 GetSpeciesRandomNotSeeded(u16 species)
 {
     return sRandomSpeciesLegendary[RandomSeededModulo(species, RANDOM_SPECIES_COUNT_LEGENDARY)];
 }

@@ -345,7 +345,6 @@ static void HandleMonShinyIcon(bool8);
 static void HandleStatusSprite(struct Pokemon *);
 static u8 AddWindowFromTemplateList(const struct WindowTemplate*, u8);
 static void ClearCancelText(void);
-static void FormatTextByWidth(u8*, s32, u8, const u8*, s16);
 static void Task_ShowBattleMovesTilemap(u8);
 static void Task_ShowContestMovesTilemap(u8);
 static void Task_HideBattleMovesTilemap(u8);
@@ -5106,7 +5105,7 @@ static void KeepMoveSelectorVisible(u8 firstSpriteId)
 }
 
 // Shoutout to Vexx for this :)
-static void FormatTextByWidth(u8 *result, s32 maxWidth, u8 fontId, const u8 *str, s16 letterSpacing)
+void FormatTextByWidth(u8 *result, s32 maxWidth, u8 fontId, const u8 *str, s16 letterSpacing)
 {
     u8 *end, *ptr, *curLine, *lastSpace;
 

@@ -1,3 +1,24 @@
+const u32 *const gTMMoveTypeTable[NUMBER_OF_MON_TYPES][2] =
+{
+    [TYPE_NORMAL] = {gItemIcon_TM, gItemIconPalette_NormalTMHM},
+    [TYPE_FIGHTING] = {gItemIcon_TM, gItemIconPalette_FightingTMHM},
+    [TYPE_DRAGON] = {gItemIcon_TM, gItemIconPalette_DragonTMHM},
+    [TYPE_WATER] = {gItemIcon_TM, gItemIconPalette_WaterTMHM},
+    [TYPE_PSYCHIC] = {gItemIcon_TM, gItemIconPalette_PsychicTMHM},
+    [TYPE_POISON] = {gItemIcon_TM, gItemIconPalette_PoisonTMHM},
+    [TYPE_ICE] = {gItemIcon_TM, gItemIconPalette_IceTMHM},
+    [TYPE_GRASS] = {gItemIcon_TM, gItemIconPalette_GrassTMHM},
+    [TYPE_FIRE] = {gItemIcon_TM, gItemIconPalette_FireTMHM},
+    [TYPE_DARK] = {gItemIcon_TM, gItemIconPalette_DarkTMHM},
+    [TYPE_STEEL] = {gItemIcon_TM, gItemIconPalette_SteelTMHM},
+    [TYPE_ELECTRIC] = {gItemIcon_TM, gItemIconPalette_ElectricTMHM},
+    [TYPE_GROUND] = {gItemIcon_TM, gItemIconPalette_GroundTMHM},
+    [TYPE_GHOST] = {gItemIcon_TM, gItemIconPalette_GhostTMHM},
+    [TYPE_ROCK] = {gItemIcon_TM, gItemIconPalette_RockTMHM},
+    [TYPE_FLYING] = {gItemIcon_TM, gItemIconPalette_FlyingTMHM},
+    [TYPE_FAIRY] = {gItemIcon_TM, gItemIconPalette_FairyTMHM},
+    [TYPE_BUG] = {gItemIcon_TM, gItemIconPalette_BugTMHM},
+};
 const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
 {
     [ITEM_NONE] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
