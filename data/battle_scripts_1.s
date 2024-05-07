@@ -22,10 +22,14 @@
 
 BattleScript_Terastallization::
 	@ TODO: no string prints in S/V, but right now this helps with clarity
-	printstring STRINGID_PKMNTERASTALLIZEDINTO
-	@ TODO: replace this animation
-	playanimation BS_ATTACKER, B_ANIM_TOTEM_FLARE
+	printstring STRINGID_PKMNSTORINGENERGY
+	playanimation BS_ATTACKER, B_ANIM_TERA_CHARGE
 	waitanimation
+	applyterastallization
+	playanimation BS_ATTACKER, B_ANIM_TERA_ACTIVATE
+	waitanimation
+	printstring STRINGID_PKMNTERASTALLIZEDINTO
+	waitmessage B_WAIT_TIME_LONG
 	end3
 
 BattleScript_LowerAtkSpAtk::

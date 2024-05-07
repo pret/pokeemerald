@@ -405,6 +405,8 @@
 #define ANIM_TAG_SYRUP_SHELL_YELLOW         (ANIM_SPRITES_START + 391)
 #define ANIM_TAG_SYRUP_SPLAT_RED            (ANIM_SPRITES_START + 392)
 #define ANIM_TAG_SYRUP_SPLAT_YELLOW         (ANIM_SPRITES_START + 393)
+#define ANIM_TAG_TERA_CRYSTAL               (ANIM_SPRITES_START + 394)
+#define ANIM_TAG_TERA_SHATTER               (ANIM_SPRITES_START + 395)
 
 // battlers
 #define ANIM_ATTACKER         0
@@ -568,6 +570,8 @@
 #define B_ANIM_MAGIC_ROOM               47
 #define B_ANIM_TAILWIND                 48
 #define B_ANIM_FOG_CONTINUES            49
+#define B_ANIM_TERA_CHARGE              50
+#define B_ANIM_TERA_ACTIVATE            51
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

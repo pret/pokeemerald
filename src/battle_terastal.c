@@ -18,7 +18,6 @@
 void PrepareBattlerForTera(u32 battler)
 {
     u32 side = GetBattlerSide(battler);
-    struct Pokemon *party = GetBattlerParty(battler);
     u32 index = gBattlerPartyIndexes[battler];
 
     // Update TeraData fields.
@@ -33,11 +32,21 @@ void PrepareBattlerForTera(u32 battler)
     {
         FlagClear(B_FLAG_TERA_ORB_CHARGED);
     }
+}
+
+// Applies palette blend and enables UI indicator after animation has played
+void ApplyBattlerVisualsForTeraAnim(u32 battler)
+{
+    struct Pokemon *party = GetBattlerParty(battler);
+    u32 index = gBattlerPartyIndexes[battler];
 
     // Show indicator and do palette blend.
     UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &party[index], HEALTHBOX_ALL);
     BlendPalette(OBJ_PLTT_ID(battler), 16, 8, GetTeraTypeRGB(GetBattlerTeraType(battler)));
     CpuCopy32(gPlttBufferFaded + OBJ_PLTT_ID(battler), gPlttBufferUnfaded + OBJ_PLTT_ID(battler), PLTT_SIZEOF(16));
+
+    // We apply the animation behind a white screen, so restore the blended color here to avoid a pop
+    BlendPalette(OBJ_PLTT_ID(battler), 16, 16, RGB_WHITEALPHA);
 }
 
 // Returns whether a battler can Terastallize.
