@@ -1602,6 +1602,15 @@ static const u8 *ReturnEmptyStringIfNull(const u8 *string)
         return string;
 }
 
+static const u8 *const sArchieFinalApproach[1] =
+{
+    gText_ArchieFinalApproach,
+};
+
+static const u8 *const sArchieFinalDefeat[1] =
+{
+    gText_ArchieFinalDefeat,
+};
 
 static const u8 *const sRandomTrainerApproachTexts[77] =
 {
@@ -1768,6 +1777,8 @@ static const u8 *const sRandomTrainerDefeatTexts[77] =
 
 static const u8 *GetIntroSpeechOfApproachingTrainer(void)
 {
+    if(VarGet(VAR_PIT_FLOOR) == 100)
+        return ReturnEmptyStringIfNull(sArchieFinalApproach[0]);
     if (gApproachingTrainerId == 0)
         return ReturnEmptyStringIfNull(sRandomTrainerApproachTexts[Random() % 77]);
     else
@@ -1776,7 +1787,10 @@ static const u8 *GetIntroSpeechOfApproachingTrainer(void)
 
 const u8 *GetTrainerALoseText(void)
 {
-    StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(sRandomTrainerDefeatTexts[Random() % 77]));
+    if(VarGet(VAR_PIT_FLOOR) == 100)
+        StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(sArchieFinalDefeat[0]));
+    else
+        StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(sRandomTrainerDefeatTexts[Random() % 77]));
     return gStringVar4;
 }
 
@@ -1788,6 +1802,8 @@ const u8 *GetTrainerBLoseText(void)
 
 const u8 *GetTrainerWonSpeech(void)
 {
+    if(VarGet(VAR_PIT_FLOOR) == 100)
+        return ReturnEmptyStringIfNull(sArchieFinalApproach[0]);
     return ReturnEmptyStringIfNull(sRandomTrainerApproachTexts[Random() % 70]);
 }
 

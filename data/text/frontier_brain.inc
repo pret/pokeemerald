@@ -106,6 +106,15 @@ gText_BrandonDefeatGold::
 	.string "That's it! You've done it!\n"
 	.string "You kept working for this!$"
 
+
+gText_ArchieFinalApproach::
+    .string "You've made it quite far...\n"
+    .string "But your run ends here!$"
+
+gText_ArchieFinalDefeat::
+    .string "Well... I did say your run\n"
+    .string "would end... I was kind of right.$"
+
 gText_TylerApproach::
     .string "Let's see what you've got!\n"
     .string "This will be fun!$"

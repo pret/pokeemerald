@@ -15,7 +15,6 @@ PitArena_OnFrameFloor100::
 	setvar VAR_FINAL_FLOOR, 2
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	@msgbox PitArena_EndGameStatue_Text1, MSGBOX_DEFAULT
-	addmoney 650000
 	releaseall
 	end
 
@@ -187,6 +186,11 @@ PitArena_TrainerBattleFinished::
 	end
 
 PitArena_Debug::
+	releaseall
+	end
+
+
+PitArenaDebugNotOnWall::
 	setflag FLAG_FLOOR_CLEARED
 	setmetatile 9, 9, METATILE_Cave_FLOOR_COMPLETE, FALSE
 	setvar VAR_PIT_FLOOR, 24
@@ -195,9 +199,21 @@ PitArena_Debug::
 	end
 
 PitArena_Debug2::
+	releaseall
+	end
+
+PitArenaDebug2NotOnWall::
 	setflag FLAG_FLOOR_CLEARED
 	setmetatile 9, 9, METATILE_Cave_FLOOR_COMPLETE, FALSE
 	addvar VAR_PIT_FLOOR, 24
+	special DrawWholeMapView
+	end
+
+PitArenaDebug3NotOnWall::
+	setflag FLAG_FLOOR_CLEARED
+	setmetatile 9, 9, METATILE_Cave_FLOOR_COMPLETE, FALSE
+	setvar VAR_PIT_FLOOR, 99
+	additem ITEM_RARE_CANDY, 99
 	special DrawWholeMapView
 	end
 

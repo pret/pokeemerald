@@ -1427,6 +1427,9 @@ extern const u8 gText_NolandDefeatGold[];
 extern const u8 gText_LucyDefeatGold[];
 extern const u8 gText_BrandonDefeatGold[];
 
+extern const u8 gText_ArchieFinalApproach[];
+extern const u8 gText_ArchieFinalDefeat[];
+
 extern const u8 gText_TylerApproach[];
 extern const u8 gText_JuliaApproach[];
 extern const u8 gText_AlexApproach[];

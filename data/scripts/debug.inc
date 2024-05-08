@@ -138,15 +138,19 @@ Debug_EventScript_Text_DefensiveIVs:
 	.string "HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2}, SPDEF IVs: {STR_VAR_3}$"
 
 Debug_EventScript_Script_1::
+	goto PitArenaDebugNotOnWall
 	end
 
 Debug_EventScript_Script_2::
+	goto PitArenaDebug2NotOnWall
 	end
 
 Debug_EventScript_Script_3::
+	goto PitArenaDebug3NotOnWall
 	end
 
 Debug_EventScript_Script_4::
+	addmoney 650000
 	end
 
 Debug_EventScript_Script_5::
