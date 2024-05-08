@@ -5,18 +5,8 @@ PitArena_MapScripts::
 	.byte 0
 
 PitArena_OnFrame:
-	map_script_2 VAR_FINAL_FLOOR, 1, PitArena_OnFrameFloor100
 	map_script_2 VAR_REWARD_STATE, 1, PitArena_OnFrameRewardDrop
 	.2byte 0
-
-PitArena_OnFrameFloor100::
-	lockall
-	setvar VAR_REWARD_STATE, 2
-	setvar VAR_FINAL_FLOOR, 2
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
-	@msgbox PitArena_EndGameStatue_Text1, MSGBOX_DEFAULT
-	releaseall
-	end
 
 PitArena_OnFrameRewardDrop::
 	lockall
@@ -33,9 +23,9 @@ PitArena_OnResume:
 	callnative CheckFloorCleared
 	goto_if_unset FLAG_FLOOR_CLEARED, PitArena_OnResumeNormal
 	setmetatile 9, 9, METATILE_Cave_FLOOR_COMPLETE, FALSE
-	addvar VAR_REWARD_STATE, 1
 	setflashlevel 0
 	goto_if_eq VAR_PIT_FLOOR, 100, PitArena_OnResumeNormal
+	addvar VAR_REWARD_STATE, 1
 	setflashlevel 1
 PitArena_OnResumeNormal:
 	end
@@ -63,7 +53,8 @@ PitArena_Warp::
 	waitstate
 	goto PitArena_WarpEnd
 PitArena_WarpFloor100::
-	setvar VAR_FINAL_FLOOR, 1
+	setvar VAR_FINAL_FLOOR, 2
+	setvar VAR_REWARD_STATE, 2
 	warpteleport MAP_PIT_ARENA, 9, 11
 	waitstate
 PitArena_WarpEnd::
