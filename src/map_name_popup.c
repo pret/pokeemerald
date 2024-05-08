@@ -20,7 +20,7 @@
 #include "constants/layouts.h"
 #include "constants/region_map_sections.h"
 #include "constants/weather.h"
-#include "config/map_name_popup.h"
+#include "config/overworld.h"
 #include "config.h"
 
 // enums
@@ -188,11 +188,18 @@ static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping[] =
     [MAPSEC_TRAINER_HILL - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_MARBLE
 };
 
-// gen 5 assets
+#if OW_POPUP_GENERATION == GEN_5
+// Gen5 assets
 static const u8 sMapPopUpTilesPrimary_BW[] = INCBIN_U8("graphics/map_popup/bw/bw_primary.4bpp");
 static const u8 sMapPopUpTilesSecondary_BW[] = INCBIN_U8("graphics/map_popup/bw/bw_secondary.4bpp");
 static const u16 sMapPopUpTilesPalette_BW_Black[16] = INCBIN_U16("graphics/map_popup/bw/black.gbapal");
 static const u16 sMapPopUpTilesPalette_BW_White[16] = INCBIN_U16("graphics/map_popup/bw/white.gbapal");
+#else
+static const u8 sMapPopUpTilesPrimary_BW[] = {0};
+static const u8 sMapPopUpTilesSecondary_BW[] = {0};
+static const u16 sMapPopUpTilesPalette_BW_Black[] = {0};
+static const u16 sMapPopUpTilesPalette_BW_White[] = {0};
+#endif
 
 static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping_BW[] =
 {
@@ -341,7 +348,7 @@ enum {
     STATE_PRINT, // For some reason the first state is numerically last.
 };
 
-#define POPUP_OFFSCREEN_Y  ((MAP_POPUP_GENERATION == GEN_5) ? 24 : 40)
+#define POPUP_OFFSCREEN_Y  ((OW_POPUP_GENERATION == GEN_5) ? 24 : 40)
 #define POPUP_SLIDE_SPEED  2
 
 #define tState         data[0]
@@ -357,11 +364,11 @@ void ShowMapNamePopup(void)
         if (!FuncIsActiveTask(Task_MapNamePopUpWindow))
         {
             // New pop up window
-            if (MAP_POPUP_GENERATION == GEN_5)
+            if (OW_POPUP_GENERATION == GEN_5)
             {
                 gPopupTaskId = CreateTask(Task_MapNamePopUpWindow, 100);
 
-                if (MAP_POPUP_BW_ALPHA_BLEND && !IsWeatherAlphaBlend())
+                if (OW_POPUP_BW_ALPHA_BLEND && !IsWeatherAlphaBlend())
                     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
             }
             else
@@ -397,7 +404,7 @@ static void Task_MapNamePopUpWindow(u8 taskId)
             task->tState = STATE_SLIDE_IN;
             task->tPrintTimer = 0;
             ShowMapNamePopUpWindow();
-            if (MAP_POPUP_GENERATION == GEN_5)
+            if (OW_POPUP_GENERATION == GEN_5)
             {
                 EnableInterrupts(INTR_FLAG_HBLANK);
                 SetHBlankCallback(HBlankCB_DoublePopupWindow);
@@ -445,7 +452,7 @@ static void Task_MapNamePopUpWindow(u8 taskId)
         break;
     case STATE_ERASE:
         ClearStdWindowAndFrame(GetMapNamePopUpWindowId(), TRUE);
-        if (MAP_POPUP_GENERATION == GEN_5)
+        if (OW_POPUP_GENERATION == GEN_5)
             ClearStdWindowAndFrame(GetSecondaryPopUpWindowId(), TRUE);
         task->tState = STATE_END;
         break;
@@ -453,7 +460,7 @@ static void Task_MapNamePopUpWindow(u8 taskId)
         HideMapNamePopUpWindow();
         return;
     }
-if (MAP_POPUP_GENERATION != GEN_5)
+if (OW_POPUP_GENERATION != GEN_5)
     SetGpuReg(REG_OFFSET_BG0VOFS, task->tYOffset);
 }
 
@@ -469,7 +476,7 @@ void HideMapNamePopUpWindow(void)
             RemoveMapNamePopUpWindow();
         }
 
-        if (MAP_POPUP_GENERATION == GEN_5)
+        if (OW_POPUP_GENERATION == GEN_5)
         {
             if (GetSecondaryPopUpWindowId() != WINDOW_NONE)
             {
@@ -480,7 +487,7 @@ void HideMapNamePopUpWindow(void)
             DisableInterrupts(INTR_FLAG_HBLANK);
             SetHBlankCallback(NULL);
 
-            if (MAP_POPUP_BW_ALPHA_BLEND && !IsWeatherAlphaBlend())
+            if (OW_POPUP_BW_ALPHA_BLEND && !IsWeatherAlphaBlend())
             {
                 SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ);
                 SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
@@ -521,9 +528,9 @@ static void ShowMapNamePopUpWindow(void)
         GetMapName(withoutPrefixPtr, gMapHeader.regionMapSectionId, 0);
     }
 
-    if (MAP_POPUP_GENERATION == GEN_5)
+    if (OW_POPUP_GENERATION == GEN_5)
     {
-        if (MAP_POPUP_BW_ALPHA_BLEND && !IsWeatherAlphaBlend())
+        if (OW_POPUP_BW_ALPHA_BLEND && !IsWeatherAlphaBlend())
             SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR);
 
         mapNamePopUpWindowId = AddMapNamePopUpWindow();
@@ -540,14 +547,14 @@ static void ShowMapNamePopUpWindow(void)
     mapDisplayHeader[1] = EXT_CTRL_CODE_HIGHLIGHT;
     mapDisplayHeader[2] = TEXT_COLOR_TRANSPARENT;
 
-    if (MAP_POPUP_GENERATION == GEN_5)
+    if (OW_POPUP_GENERATION == GEN_5)
     {
         AddTextPrinterParameterized(mapNamePopUpWindowId, FONT_SHORT, mapDisplayHeader, 8, 2, TEXT_SKIP_DRAW, NULL);
         
-        if (MAP_POPUP_BW_TIME_MODE != MAP_POPUP_BW_TIME_NONE)
+        if (OW_POPUP_BW_TIME_MODE != OW_POPUP_BW_TIME_NONE)
         {
             RtcCalcLocalTime();
-            FormatDecimalTimeWithoutSeconds(withoutPrefixPtr, gLocalTime.hours, gLocalTime.minutes, MAP_POPUP_BW_TIME_MODE == MAP_POPUP_BW_TIME_24_HR);
+            FormatDecimalTimeWithoutSeconds(withoutPrefixPtr, gLocalTime.hours, gLocalTime.minutes, OW_POPUP_BW_TIME_MODE == OW_POPUP_BW_TIME_24_HR);
             AddTextPrinterParameterized(secondaryPopUpWindowId, FONT_SMALL, mapDisplayHeader, GetStringRightAlignXOffset(FONT_SMALL, mapDisplayHeader, DISPLAY_WIDTH) - 5, 8, TEXT_SKIP_DRAW, NULL);
         }
 
@@ -601,7 +608,7 @@ static void LoadMapNamePopUpWindowBg(void)
     u16 regionMapSectionId = gMapHeader.regionMapSectionId;
     u8 secondaryPopUpWindowId;
 
-    if (MAP_POPUP_GENERATION == GEN_5)
+    if (OW_POPUP_GENERATION == GEN_5)
         secondaryPopUpWindowId = GetSecondaryPopUpWindowId();
 
     if (regionMapSectionId >= KANTO_MAPSEC_START)
@@ -612,14 +619,14 @@ static void LoadMapNamePopUpWindowBg(void)
             regionMapSectionId = 0; // Discard kanto region sections;
     }
 
-    if (MAP_POPUP_GENERATION == GEN_5)
+    if (OW_POPUP_GENERATION == GEN_5)
     {
         popUpThemeId = sRegionMapSectionId_To_PopUpThemeIdMapping_BW[regionMapSectionId];
         switch (popUpThemeId) 
         {
             // add additional gen 5-style pop-up themes as cases here
             case MAPPOPUP_THEME_BW_DEFAULT:
-                if (MAP_POPUP_BW_COLOR == MAP_POPUP_BW_COLOR_WHITE)
+                if (OW_POPUP_BW_COLOR == OW_POPUP_BW_COLOR_WHITE)
                     LoadPalette(sMapPopUpTilesPalette_BW_White, BG_PLTT_ID(14), sizeof(sMapPopUpTilesPalette_BW_White));
                 else
                     LoadPalette(sMapPopUpTilesPalette_BW_Black, BG_PLTT_ID(14), sizeof(sMapPopUpTilesPalette_BW_Black));
