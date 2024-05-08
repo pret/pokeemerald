@@ -1055,6 +1055,19 @@ static const u16 sRandomConsumableValidItems[] =
     ITEM_ABILITY_CAPSULE,
     ITEM_ABILITY_PATCH,
     ITEM_RARE_CANDY,
+    ITEM_X_ATTACK,
+    ITEM_X_DEFENSE,
+    ITEM_X_SP_ATK,
+    ITEM_X_SP_DEF,
+    ITEM_X_SPEED,
+    ITEM_X_ACCURACY,
+    ITEM_DIRE_HIT,
+    ITEM_GUARD_SPEC,
+};
+
+#define RANDOM_BERRY_ITEM_COUNT ARRAY_COUNT(sRandomBerryValidItems)
+static const u16 sRandomBerryValidItems[] =
+{
     ITEM_CHERI_BERRY,
     ITEM_CHESTO_BERRY,
     ITEM_PECHA_BERRY,
@@ -1103,14 +1116,6 @@ static const u16 sRandomConsumableValidItems[] =
     ITEM_ROWAP_BERRY,
     ITEM_KEE_BERRY,
     ITEM_MARANGA_BERRY,
-    ITEM_X_ATTACK,
-    ITEM_X_DEFENSE,
-    ITEM_X_SP_ATK,
-    ITEM_X_SP_DEF,
-    ITEM_X_SPEED,
-    ITEM_X_ACCURACY,
-    ITEM_DIRE_HIT,
-    ITEM_GUARD_SPEC,
 };
 
 #define RANDOM_HELD_ITEM_COUNT ARRAY_COUNT(sRandomHeldValidItems)
@@ -1209,16 +1214,20 @@ static const u16 sRandomHeldValidItems[] =
 
 u16 RandomItemId(u16 itemId)
 {
+    u16 randomItemCategory = 0;
     if (ItemId_GetPocket(itemId) == POCKET_TM_HM)
     {
         return itemId;
     }
     else if (ItemId_GetPocket(itemId) != POCKET_KEY_ITEMS)
     {
-        if(Random32() % 8)
+        randomItemCategory = Random32() % 10;
+        if(randomItemCategory < 5)
             itemId = sRandomConsumableValidItems[RandomSeededModulo(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_CONSUMABLE_ITEM_COUNT)];
-        else
+        else if(randomItemCategory < 8)
             itemId = sRandomHeldValidItems[RandomSeededModulo(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_HELD_ITEM_COUNT)];
+        else
+            itemId = sRandomBerryValidItems[RandomSeededModulo(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_BERRY_ITEM_COUNT)];
     }
 
     VarSet(VAR_0x8006, itemId);

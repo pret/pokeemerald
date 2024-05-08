@@ -236,7 +236,7 @@ PitArena_RewardDrop1::
 	end
 
 PitArena_RewardDrop2::
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_NET_BALL
 	end
 
 PitArena_NewMon::
