@@ -136,6 +136,52 @@ SINGLE_BATTLE_TEST("Imposter doesn't apply the heroic transformation message whe
     } THEN { EXPECT_EQ(player->species, SPECIES_PALAFIN_HERO); }
 }
 
+SINGLE_BATTLE_TEST("Zero to Hero's message displays correctly after all battlers fainted - Player")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_EXPLOSION].effect == EFFECT_EXPLOSION);
+        PLAYER(SPECIES_PALAFIN_ZERO);
+        PLAYER(SPECIES_WOBBUFFET) { HP(1);}
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_FLIP_TURN); SEND_OUT(player, 1); }
+        TURN { MOVE(opponent, MOVE_EXPLOSION); SEND_OUT(player, 0); SEND_OUT(opponent, 1); }
+        TURN { MOVE(player, MOVE_TACKLE); MOVE(opponent, MOVE_TACKLE); }
+    } SCENE {
+        HP_BAR(opponent, hp: 0);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, opponent);
+        // Everyone faints.
+        MESSAGE("Go! Palafin!");
+        ABILITY_POPUP(player, ABILITY_ZERO_TO_HERO);
+        MESSAGE("Palafin underwent a heroic transformation!");
+        MESSAGE("2 sent out Wobbuffet!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Zero to Hero's message displays correctly after all battlers fainted - Opponent")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_EXPLOSION].effect == EFFECT_EXPLOSION);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_PALAFIN_ZERO);
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1);}
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_FLIP_TURN); SEND_OUT(opponent, 1); }
+        TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_EXPLOSION); SEND_OUT(player, 1); SEND_OUT(opponent, 0); }
+        TURN { MOVE(opponent, MOVE_TACKLE); MOVE(player, MOVE_TACKLE); }
+    } SCENE {
+        HP_BAR(player, hp: 0);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, player);
+        // Everyone faints.
+        MESSAGE("Go! Wobbuffet!");
+        MESSAGE("2 sent out Palafin!");
+        ABILITY_POPUP(opponent, ABILITY_ZERO_TO_HERO);
+        MESSAGE("Foe Palafin underwent a heroic transformation!");
+    }
+}
+
 // Write Trace test and move this one to that file (including every other ability that can't be copied)
 SINGLE_BATTLE_TEST("Zero to Hero cannot be copied by Trace")
 {

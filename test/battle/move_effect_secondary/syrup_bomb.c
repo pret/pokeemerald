@@ -1,6 +1,11 @@
 #include "global.h"
 #include "test/battle.h"
 
+ASSUMPTIONS
+{
+    ASSUME(MoveHasAdditionalEffect(MOVE_SYRUP_BOMB, MOVE_EFFECT_SYRUP_BOMB) == TRUE);
+}
+
 SINGLE_BATTLE_TEST("Syrup Bomb covers the foe in sticky syrup for 3 turns")
 {
     u8 j;

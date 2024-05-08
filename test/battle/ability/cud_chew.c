@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-SINGLE_BATTLE_TEST("Cud Chuw will activate Kee Berry effect again on the next turn")
+SINGLE_BATTLE_TEST("Cud Chew will activate Kee Berry effect again on the next turn")
 {
     GIVEN {
         ASSUME(gItemsInfo[ITEM_KEE_BERRY].holdEffect == HOLD_EFFECT_KEE_BERRY);
@@ -23,7 +23,7 @@ SINGLE_BATTLE_TEST("Cud Chuw will activate Kee Berry effect again on the next tu
     }
 }
 
-SINGLE_BATTLE_TEST("Cud Chuw will activate Oran Berry effect again on the next turn")
+SINGLE_BATTLE_TEST("Cud Chew will activate Oran Berry effect again on the next turn")
 {
     GIVEN {
         ASSUME(gItemsInfo[ITEM_ORAN_BERRY].holdEffect == HOLD_EFFECT_RESTORE_HP);
