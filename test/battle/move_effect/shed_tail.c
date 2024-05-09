@@ -70,3 +70,18 @@ SINGLE_BATTLE_TEST("Shed Tail fails if there are no usable pokemon left")
         MESSAGE("But it failed!");
     }
 }
+
+SINGLE_BATTLE_TEST("Shed Tail's HP cost doesn't trigger effects that trigger on damage taken")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_AIR_BALLOON); }
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SHED_TAIL); SEND_OUT(player, 1); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SHED_TAIL, player);
+        MESSAGE("Wobbuffet shed its tail to create a decoy!");
+        NOT MESSAGE("Wobbuffet's Air Balloon popped!");
+    }
+}
