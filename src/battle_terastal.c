@@ -8,6 +8,7 @@
 #include "item.h"
 #include "palette.h"
 #include "pokemon.h"
+#include "safari_zone.h"
 #include "sprite.h"
 #include "util.h"
 #include "constants/abilities.h"
@@ -721,6 +722,9 @@ void TeraIndicator_SetVisibilities(u32 healthboxId, bool32 invisible)
 {
     u8 spriteId = TeraIndicator_GetSpriteId(healthboxId);
     u32 battler = gSprites[healthboxId].hMain_Battler;
+
+    if (GetSafariZoneFlag())
+        return;
 
     if (invisible == TRUE)
         gSprites[spriteId].invisible = TRUE;
