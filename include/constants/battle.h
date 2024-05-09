@@ -432,10 +432,10 @@
 
 #define BATTLE_TERRAIN_COUNT            22
 
-#define B_WAIT_TIME_LONG        0
-#define B_WAIT_TIME_MED         0
-#define B_WAIT_TIME_SHORT       0
-#define B_WAIT_TIME_SHORTEST    0
+#define B_WAIT_TIME_LONG        16
+#define B_WAIT_TIME_MED         8
+#define B_WAIT_TIME_SHORT       4
+#define B_WAIT_TIME_SHORTEST    2
 
 #define FLEE_ITEM    1
 #define FLEE_ABILITY 2

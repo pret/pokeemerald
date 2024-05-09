@@ -859,6 +859,23 @@ static u16 SanitizeItemId(u16 itemId)
         return itemId;
 }
 
+
+#ifdef IRONMON_MODE
+const u8 *ItemId_GetName(u16 itemId)
+{
+    if (DECAP_ENABLED && DECAP_MIRRORING && !DECAP_ITEM_NAMES)
+        return ROM_MIRROR_PTR(gItemsInfo[SanitizeItemId(itemId)].name);
+    else
+    {
+        if (GetPocketByItemId(SanitizeItemId(itemId)) == POCKET_TM_HM)
+        {
+            return gMovesInfo[GetRandomMove(itemId, gItemsInfo[itemId].secondaryId)].name;
+        }
+        else
+            return gItemsInfo[SanitizeItemId(itemId)].name;
+    }
+}
+#else
 const u8 *ItemId_GetName(u16 itemId)
 {
     if (DECAP_ENABLED && DECAP_MIRRORING && !DECAP_ITEM_NAMES)
@@ -866,6 +883,7 @@ const u8 *ItemId_GetName(u16 itemId)
     else
         return gItemsInfo[SanitizeItemId(itemId)].name;
 }
+#endif
 
 u32 ItemId_GetPrice(u16 itemId)
 {
