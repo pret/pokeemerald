@@ -7578,7 +7578,7 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
 {
     u32 lastMonLevel = 0;
     u32 moneyReward;
-    u8 trainerMoney = 0;
+    u16 trainerMoney = 0;
 
     if (trainerId == TRAINER_SECRET_BASE)
     {
@@ -7590,17 +7590,17 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
         if (party == NULL)
             return 20;
         lastMonLevel = party[GetTrainerPartySizeFromId(trainerId) - 1].lvl;
-        trainerMoney = gTrainerClasses[GetTrainerClassFromId(trainerId)].money;
+        trainerMoney = 500;
 
         if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-            moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * trainerMoney;
+            moneyReward = gBattleStruct->moneyMultiplier * trainerMoney;
         else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-            moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * 2 * trainerMoney;
+            moneyReward = gBattleStruct->moneyMultiplier * trainerMoney;
         else
-            moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * trainerMoney;
+            moneyReward = gBattleStruct->moneyMultiplier * trainerMoney;
     }
 
-    return 500;
+    return moneyReward;
 }
 
 static void Cmd_getmoneyreward(void)
@@ -7615,7 +7615,6 @@ static void Cmd_getmoneyreward(void)
         money = GetTrainerMoneyToGive(gTrainerBattleOpponent_A);
         if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
             money += GetTrainerMoneyToGive(gTrainerBattleOpponent_B);
-        money = 500;
         AddMoney(&gSaveBlock1Ptr->money, money);
     }
     else
