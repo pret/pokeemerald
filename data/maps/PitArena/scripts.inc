@@ -685,6 +685,14 @@ PitArena_Mart_TMs:
 	.2byte ITEM_TM48
 	.2byte ITEM_TM49
 	.2byte ITEM_TM50
+	.2byte ITEM_HM01
+	.2byte ITEM_HM02
+	.2byte ITEM_HM03
+	.2byte ITEM_HM04
+	.2byte ITEM_HM05
+	.2byte ITEM_HM06
+	.2byte ITEM_HM07
+	.2byte ITEM_HM08
 	.2byte ITEM_NONE
     release
 	end

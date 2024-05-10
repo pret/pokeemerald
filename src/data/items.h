@@ -10586,7 +10586,7 @@ const struct Item gItemsInfo[] =
     [ITEM_HM_CUT] =
     {
         .name = _("HM01"),
-        .price = 0,
+        .price = 8000,
         .description = COMPOUND_STRING(
             "Attacks the foe\n"
             "with sharp blades\n"
@@ -10601,7 +10601,7 @@ const struct Item gItemsInfo[] =
     [ITEM_HM_FLY] =
     {
         .name = _("HM02"),
-        .price = 0,
+        .price = 8000,
         .description = COMPOUND_STRING(
             "Flies up on the\n"
             "first turn, then\n"
@@ -10616,7 +10616,7 @@ const struct Item gItemsInfo[] =
     [ITEM_HM_SURF] =
     {
         .name = _("HM03"),
-        .price = 0,
+        .price = 8000,
         .description = COMPOUND_STRING(
             "Creates a huge\n"
             "wave, then crashes\n"
@@ -10631,7 +10631,7 @@ const struct Item gItemsInfo[] =
     [ITEM_HM_STRENGTH] =
     {
         .name = _("HM04"),
-        .price = 0,
+        .price = 8000,
         .description = COMPOUND_STRING(
             "Builds enormous\n"
             "power, then slams\n"
@@ -10646,7 +10646,7 @@ const struct Item gItemsInfo[] =
     [ITEM_HM_FLASH] =
     {
         .name = _("HM05"),
-        .price = 0,
+        .price = 8000,
         .description = COMPOUND_STRING(
             "Looses a powerful\n"
             "blast of light that\n"
@@ -10661,7 +10661,7 @@ const struct Item gItemsInfo[] =
     [ITEM_HM_ROCK_SMASH] =
     {
         .name = _("HM06"),
-        .price = 0,
+        .price = 8000,
         .description = COMPOUND_STRING(
             "A rock-crushingly\n"
             "tough attack that\n"
@@ -10676,7 +10676,7 @@ const struct Item gItemsInfo[] =
     [ITEM_HM_WATERFALL] =
     {
         .name = _("HM07"),
-        .price = 0,
+        .price = 8000,
         .description = COMPOUND_STRING(
             "Attacks the foe\n"
             "with enough power\n"
@@ -10691,7 +10691,7 @@ const struct Item gItemsInfo[] =
     [ITEM_HM_DIVE] =
     {
         .name = _("HM08"),
-        .price = 0,
+        .price = 8000,
         .description = COMPOUND_STRING(
             "Dives underwater\n"
             "the 1st turn, then\n"
