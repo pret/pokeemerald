@@ -34,7 +34,6 @@ PitArena_OnResumeNormal:
 PitArena_OnTransition:
 	goto_if_unset FLAG_FLOOR_CLEARED, PitArena_OnTransitionNormal
 PitArena_OnTransitionNormal::
-	callnative StartTimer1Script
 	setrespawn HEAL_LOCATION_PETALBURG_CITY
 	setflashlevel 1
 	return
@@ -211,6 +210,14 @@ PitArenaDebug3NotOnWall::
 	special DrawWholeMapView
 	end
 
+PitArenaDebug4NotOnWall::
+	setflag FLAG_FLOOR_CLEARED
+	setmetatile 9, 9, METATILE_Cave_FLOOR_COMPLETE, FALSE
+	addvar VAR_PIT_FLOOR, 19
+	additem ITEM_RARE_CANDY, 99
+	special DrawWholeMapView
+	end
+
 
 PitArena_HealNPC::
 	lockall
@@ -314,9 +321,30 @@ PitArena_ShopNPCHook::
 	goto_if_eq VAR_RESULT, 4, PitArena_MartScript_FormItems
 	goto_if_eq VAR_RESULT, 5, PitArena_MartScript_Sell
 #endif
+EndOfMartScript::
 	clearflag FLAG_SELL_FROM_MART
 	clearflag FLAG_BUY_FROM_MART
 	release
+	end
+
+PitArena_MoveRelearner::
+	lockall
+	dynmultichoice 17, 1, 0, 5, 0, DYN_MULTICHOICE_CB_NONE, PitArena_ShopNPC_Option9, PitArena_ShopNPC_Option8
+	goto_if_eq VAR_RESULT, 0, PitArena_MartNPCMoveRelearner
+EndOfRelearnerScript::
+	release
+	end
+
+PitArena_MartNPCMoveRelearner::
+	special ChooseMonForMoveRelearner
+	waitstate
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EndOfRelearnerScript
+	special IsSelectedMonEgg
+	goto_if_eq VAR_RESULT, TRUE, EndOfRelearnerScript
+	goto_if_eq VAR_0x8005, 0, EndOfRelearnerScript
+	special TeachMoveRelearnerMove
+	waitstate
+	goto EndOfRelearnerScript
 	end
 
 PitArena_MartScript_TMs:
@@ -398,6 +426,8 @@ PitArena_ShopNPC_Option7:
 	.string "Sell$"
 PitArena_ShopNPC_Option8:
 	.string "Exit$"
+PitArena_ShopNPC_Option9:
+	.string "Move Relearner$"
 
 PitArena_ShopNPC_Text:
 	.string "How may I assist you?$"
@@ -500,8 +530,8 @@ PitArena_Mart_MegaStones:
 
 	.align 2
 PitArena_Mart_Mints:
-	.2byte ITEM_ABILITY_CAPSULE,
-    .2byte ITEM_ABILITY_PATCH,
+	.2byte ITEM_ABILITY_CAPSULE
+    .2byte ITEM_ABILITY_PATCH
 	.2byte ITEM_LONELY_MINT
     .2byte ITEM_ADAMANT_MINT
     .2byte ITEM_NAUGHTY_MINT

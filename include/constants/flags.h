@@ -674,8 +674,8 @@
 #define FLAG_END_GAME_ARCHIE  0x277 // Unused Flag
 #define FLAG_START_ARCHIE_BATTLE  0x278 // Unused Flag
 #define FLAG_REWARD_ITEM_3  0x279 // Unused Flag
-#define FLAG_UNUSED_0x27A  0x27A // Unused Flag
-#define FLAG_UNUSED_0x27B  0x27B // Unused Flag
+#define FLAG_MOVE_RELEARNER  0x27A // Unused Flag
+#define FLAG_RUN_ENDED_SCREEN  0x27B // Unused Flag
 #define FLAG_UNUSED_0x27C  0x27C // Unused Flag
 #define FLAG_UNUSED_0x27D  0x27D // Unused Flag
 #define FLAG_UNUSED_0x27E  0x27E // Unused Flag

@@ -14,5 +14,6 @@ void Script_GetChosenMonOffensiveEVs(void);
 void Script_GetChosenMonDefensiveEVs(void);
 void Script_GetChosenMonOffensiveIVs(void);
 void Script_GetChosenMonDefensiveIVs(void);
+int GameClear(void);
 
 #endif // GUARD_SCRIPT_POKEMON_UTIL_H

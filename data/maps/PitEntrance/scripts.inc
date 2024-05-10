@@ -20,7 +20,6 @@ PitArena_Entrance:
 	special EnableNationalPokedex
 	setflag FLAG_RECEIVED_RUNNING_SHOES
 	setflag FLAG_SYS_B_DASH
-	callnative StartTimer1Script
 	setflashlevel 0
 PitArena_EntranceEnd:
 	return

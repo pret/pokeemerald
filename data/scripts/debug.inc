@@ -154,6 +154,7 @@ Debug_EventScript_Script_4::
 	end
 
 Debug_EventScript_Script_5::
+	goto PitArenaDebug4NotOnWall
 	end
 
 Debug_EventScript_Script_6::

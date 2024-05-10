@@ -477,7 +477,7 @@ static void Task_Hof_InitMonData(u8 taskId)
         gTasks[taskId].tMonSpriteId(i) = SPRITE_NONE;
     }
 
-    if (gTasks[taskId].tDontSaveData)
+    if (TRUE)
         gTasks[taskId].func = Task_Hof_SetMonDisplayTask;
     else
         gTasks[taskId].func = Task_Hof_InitTeamSaveData;
@@ -595,7 +595,7 @@ static void Task_Hof_PrintMonInfoAfterAnimating(u8 taskId)
     {
         monSprite->oam.affineMode = ST_OAM_AFFINE_OFF;
         HallOfFame_PrintMonInfo(currMon, 0, 14);
-        gTasks[taskId].tFrameCount = 120;
+        gTasks[taskId].tFrameCount = 40;
         gTasks[taskId].func = Task_Hof_TryDisplayAnotherMon;
     }
 }
@@ -638,14 +638,15 @@ static void Task_Hof_PaletteFadeAndPrintWelcomeText(u8 taskId)
     }
 
     HallOfFame_PrintWelcomeText(0, 15);
-    PlaySE(SE_APPLAUSE);
+    if(!FlagGet(FLAG_RUN_ENDED_SCREEN))
+        PlaySE(SE_APPLAUSE);
     gTasks[taskId].tFrameCount = 400;
     gTasks[taskId].func = Task_Hof_DoConfetti;
 }
 
 static void Task_Hof_DoConfetti(u8 taskId)
 {
-    if (gTasks[taskId].tFrameCount != 0)
+    if ((gTasks[taskId].tFrameCount != 0) && !FlagGet(FLAG_RUN_ENDED_SCREEN))
     {
         gTasks[taskId].tFrameCount--;
 
@@ -693,7 +694,7 @@ static void Task_Hof_DisplayPlayer(u8 taskId)
     AddWindow(&sHof_WindowTemplate);
     LoadWindowGfx(1, gSaveBlock2Ptr->optionsWindowFrameType, 0x21D, BG_PLTT_ID(13));
     LoadPalette(GetTextWindowPalette(1), BG_PLTT_ID(14), PLTT_SIZE_4BPP);
-    gTasks[taskId].tFrameCount = 120;
+    gTasks[taskId].tFrameCount = 60;
     gTasks[taskId].func = Task_Hof_WaitAndPrintPlayerInfo;
 }
 
@@ -712,7 +713,10 @@ static void Task_Hof_WaitAndPrintPlayerInfo(u8 taskId)
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
         HallOfFame_PrintPlayerInfo(1, 2);
         DrawDialogueFrame(0, FALSE);
-        AddTextPrinterParameterized2(0, FONT_NORMAL, gText_LeagueChamp, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+        if(FlagGet(FLAG_RUN_ENDED_SCREEN))
+            AddTextPrinterParameterized2(0, FONT_NORMAL, gText_LostRunChamp, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+        else
+            AddTextPrinterParameterized2(0, FONT_NORMAL, gText_LeagueChamp, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);        
         CopyWindowToVram(0, COPYWIN_FULL);
         gTasks[taskId].func = Task_Hof_ExitOnKeyPressed;
     }
@@ -763,7 +767,13 @@ static void Task_Hof_HandleExit(u8 taskId)
         TRY_FREE_AND_SET_NULL(sHofGfxPtr);
         TRY_FREE_AND_SET_NULL(sHofMonPtr);
 
-        StartCredits();
+        if(FlagGet(FLAG_RUN_ENDED_SCREEN))
+        {
+            ClearSaveData();
+            DoSoftReset();
+        }
+        else
+            StartCredits();
     }
 }
 
@@ -932,8 +942,18 @@ static void Task_HofPC_DrawSpritesPrintText(u8 taskId)
 
     BlendPalettes(PALETTES_OBJECTS, 0xC, RGB(16, 29, 24));
 
-    ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].tCurrPageNo, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    StringExpandPlaceholders(gStringVar4, gText_HOFNumber);
+    if(FlagGet(FLAG_RUN_ENDED_SCREEN))
+    {
+        ConvertIntToDecimalStringN(gStringVar1, VarGet(VAR_PIT_FLOOR), STR_CONV_MODE_LEFT_ALIGN, 3);
+        //StringExpandPlaceholders(gStringVar4, gText_LostRunNumber);
+        gTasks[taskId].func = Task_HofPC_PrintMonInfo;
+        return;
+    }
+    else
+    {
+        ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].tCurrPageNo, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        StringExpandPlaceholders(gStringVar4, gText_HOFNumber);
+    }
 
     if (gTasks[taskId].tCurrTeamNo <= 0)
         HofPCTopBar_PrintPair(gStringVar4, gText_PickCancel, FALSE, 0, TRUE);
@@ -1098,7 +1118,10 @@ static void HallOfFame_PrintWelcomeText(u8 unusedPossiblyWindowId, u8 unused2)
 {
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     PutWindowTilemap(0);
-    AddTextPrinterParameterized3(0, FONT_NORMAL, GetStringCenterAlignXOffset(FONT_NORMAL, gText_WelcomeToHOF, 0xD0), 1, sMonInfoTextColors, 0, gText_WelcomeToHOF);
+    if(FlagGet(FLAG_RUN_ENDED_SCREEN))
+        AddTextPrinterParameterized3(0, FONT_NORMAL, GetStringCenterAlignXOffset(FONT_NORMAL, gText_LostRunHOF, 0xD0), 1, sMonInfoTextColors, 0, gText_LostRunHOF);
+    else
+        AddTextPrinterParameterized3(0, FONT_NORMAL, GetStringCenterAlignXOffset(FONT_NORMAL, gText_LostRunHOF, 0xD0), 1, sMonInfoTextColors, 0, gText_LostRunHOF);
     CopyWindowToVram(0, COPYWIN_FULL);
 }
 
@@ -1204,16 +1227,9 @@ static void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2)
     width = GetStringRightAlignXOffset(FONT_NORMAL, gSaveBlock2Ptr->playerName, 0x70);
     AddTextPrinterParameterized3(1, FONT_NORMAL, width, 1, sPlayerInfoTextColors, TEXT_SKIP_DRAW, gSaveBlock2Ptr->playerName);
 
-    trainerId = (gSaveBlock2Ptr->playerTrainerId[0]) | (gSaveBlock2Ptr->playerTrainerId[1] << 8);
-    AddTextPrinterParameterized3(1, FONT_NORMAL, 0, 0x11, sPlayerInfoTextColors, 0, gText_IDNumber);
-    text[0] = (trainerId % 100000) / 10000 + CHAR_0;
-    text[1] = (trainerId % 10000) / 1000 + CHAR_0;
-    text[2] = (trainerId % 1000) / 100 + CHAR_0;
-    text[3] = (trainerId % 100) / 10 + CHAR_0;
-    text[4] = (trainerId % 10) / 1 + CHAR_0;
-    text[5] = EOS;
-    width = GetStringRightAlignXOffset(FONT_NORMAL, text, 0x70);
-    AddTextPrinterParameterized3(1, FONT_NORMAL, width, 0x11, sPlayerInfoTextColors, TEXT_SKIP_DRAW, text);
+    ConvertIntToDecimalStringN(gStringVar1, VarGet(VAR_PIT_FLOOR), STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringExpandPlaceholders(gStringVar4, gText_LostRunNumber);
+    AddTextPrinterParameterized3(1, FONT_NORMAL, 0, 0x11, sPlayerInfoTextColors, 0, gStringVar4);
 
     AddTextPrinterParameterized3(1, FONT_NORMAL, 0, 0x21, sPlayerInfoTextColors, TEXT_SKIP_DRAW, gText_Time);
     text[0] = (gSaveBlock2Ptr->playTimeHours / 100) + CHAR_0;

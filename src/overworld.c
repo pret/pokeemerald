@@ -1594,8 +1594,9 @@ void CB2_WhiteOut(void)
 
     if (++gMain.state >= 120)
     {
-        ClearSaveData();
-        DoSoftReset();
+        FlagSet(FLAG_RUN_ENDED_SCREEN);
+        GameClear();
+        return;
         FieldClearVBlankHBlankCallbacks();
         StopMapMusic();
         ResetSafariZoneFlag_();

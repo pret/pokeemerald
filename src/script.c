@@ -516,8 +516,8 @@ void InitRamScript_NoObjectEvent(u8 *script, u16 scriptSize)
 void InitTrainerIdAndNameData()
 {
     u32 trainerId = 0;
-    SeedRngAndSetTrainerId();
-    trainerId = (Random() << 16) | GetGeneratedTrainerIdLower();
+    SeedRngWithRtc();
+    trainerId = (Random() << 16) | Random();
     SetTrainerId(trainerId, gSaveBlock2Ptr->playerTrainerId);
     NewGameBirchSpeech_SetDefaultPlayerName(Random() % 19);
 }
@@ -566,15 +566,23 @@ u16 ReturnNumberOfTrainersForFloor()
     {
         FlagClear(FLAG_HEAL_NPC);
         FlagClear(FLAG_SHOP_NPC);
+
+        if((VarGet(VAR_PIT_FLOOR) % 20) == 0) // New Mon Floor
+        {
+            FlagClear(FLAG_MOVE_RELEARNER);
+        }
         
         if((VarGet(VAR_PIT_FLOOR) % 25) == 0) // New Mon Floor
         {
             FlagClear(FLAG_GIVE_POKEMON);
+            FlagSet(FLAG_MOVE_RELEARNER);
         }
         return 0;
     }
+
     FlagSet(FLAG_HEAL_NPC);
     FlagSet(FLAG_SHOP_NPC);
+    FlagSet(FLAG_MOVE_RELEARNER);
     FlagSet(FLAG_GIVE_POKEMON);
 
     if(VarGet(VAR_PIT_FLOOR) < 11)
