@@ -4374,7 +4374,7 @@ static void Cmd_getexp(void)
             else
             {
                 *exp = calculatedExp;
-                gBattleStruct->expShareExpValue = calculatedExp / 2;
+                gBattleStruct->expShareExpValue = 3 * (calculatedExp / 4);
                 if (gBattleStruct->expShareExpValue == 0)
                     gBattleStruct->expShareExpValue = 1;
             }
