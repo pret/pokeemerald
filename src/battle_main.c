@@ -828,8 +828,11 @@ static void CB2_InitBattleInternal(void)
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
                                                                         | BATTLE_TYPE_EREADER_TRAINER
                                                                         | BATTLE_TYPE_TRAINER_HILL)))
-    {
-        gBattleTypeFlags |= (IsTrainerDoubleBattle(gTrainerBattleOpponent_A) ? BATTLE_TYPE_DOUBLE : 0);
+    {   
+        if(FlagGet(FLAG_DOUBLES_MODE))
+            gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
+        else
+            gBattleTypeFlags |= (IsTrainerDoubleBattle(gTrainerBattleOpponent_A) ? BATTLE_TYPE_DOUBLE : 0);
     }
 
     InitBattleBgsVideo();
@@ -2193,18 +2196,19 @@ void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon 
     bool32 noMoveSet = TRUE;
     u32 j;
 
-#ifdef IRONMON_MODE
-    if (!isPlayer)
+    if(FlagGet(FLAG_RANDOM_MODE))
     {
-        for (j = 0; j < MAX_MON_MOVES; j++)
+        if (!isPlayer)
         {
-            u16 move = GetRandomMove(partyEntry->moves[j], partyEntry->species);
-            SetMonData(mon, MON_DATA_MOVE1 + j, &move);
-            SetMonData(mon, MON_DATA_PP1 + j, &gMovesInfo[move].pp);
+            for (j = 0; j < MAX_MON_MOVES; j++)
+            {
+                u16 move = GetRandomMove(partyEntry->moves[j], partyEntry->species);
+                SetMonData(mon, MON_DATA_MOVE1 + j, &move);
+                SetMonData(mon, MON_DATA_PP1 + j, &gMovesInfo[move].pp);
+            }
+            return;
         }
-        return;
     }
-#endif
 
     for (j = 0; j < MAX_MON_MOVES; ++j)
     {
@@ -2398,8 +2402,14 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
                                                                         | BATTLE_TYPE_EREADER_TRAINER
                                                                         | BATTLE_TYPE_TRAINER_HILL)))
-    {
-        gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
+    {   if(FlagGet(FLAG_DOUBLES_MODE))
+        {
+            gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
+        }
+        else
+        {
+            gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
+        }
     }
     DebugPrintf("Reached End Of Parent Function: %d", gSpecialVar_Unused_0x8014);
     return retVal;

@@ -165,12 +165,13 @@ const void *GetItemIconPicOrPalette(u16 itemId, u8 which)
     else if (itemId >= ITEMS_COUNT)
         itemId = 0;
 
-#ifdef IRONMON_MODE
-    if (GetPocketByItemId(itemId) == POCKET_TM_HM)
+    if(FlagGet(FLAG_RANDOM_MODE))
     {
-        return gTMMoveTypeTable[gMovesInfo[GetRandomMove(itemId, gItemsInfo[itemId].secondaryId)].type][which];
+        if (GetPocketByItemId(itemId) == POCKET_TM_HM)
+        {
+            return gTMMoveTypeTable[gMovesInfo[GetRandomMove(itemId, gItemsInfo[itemId].secondaryId)].type][which];
+        }
     }
-#endif
 
     return gItemIconTable[itemId][which];
 }

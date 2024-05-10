@@ -279,6 +279,8 @@ EventScript_ResetAllMapFlags::
 	setflag FLAG_SHOP_NPC
 	setflag FLAG_END_GAME_STATUE
 	setflag FLAG_END_GAME_ARCHIE
+	clearflag FLAG_RANDOM_MODE 
+	clearflag FLAG_DOUBLES_MODE
 	call EventScript_ResetAllBerries
 	end
 

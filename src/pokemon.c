@@ -2418,8 +2418,7 @@ void GiveMonInitialMoveset(struct Pokemon *mon)
     GiveBoxMonInitialMoveset(&mon->box);
 }
 
-#ifdef IRONMON_MODE
-void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
+void GiveBoxMonInitialMovesetRandom(struct BoxPokemon *boxMon)
 {
     s32 j;
     u16 move = Random() % MOVES_COUNT_GEN4;
@@ -2447,13 +2446,19 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
         GiveMoveToBoxMon(boxMon, move);
     }
 }
-#else
+
 void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
 {
     u16 species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
     s32 level = GetLevelFromBoxMonExp(boxMon);
     s32 i;
     const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
+
+    if(FlagGet(FLAG_RANDOM_MODE))
+    {
+        GiveBoxMonInitialMovesetRandom(boxMon);
+        return;
+    }
 
     for (i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
     {
@@ -2465,7 +2470,6 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
             DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, learnset[i].move);
     }
 }
-#endif
 
 void GiveMonInitialMoveset_Fast(struct Pokemon *mon)
 {
@@ -2547,11 +2551,10 @@ u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
 
     if (learnset[sLearningMoveTableID].level == level)
     {
-        #ifdef IRONMON_MODE    
+        if(FlagGet(FLAG_RANDOM_MODE))
             gMoveToLearn = sRandomValidMoves[Random() % RANDOM_MOVES_COUNT];
-        #else
+        else
             gMoveToLearn = learnset[sLearningMoveTableID].move;
-        #endif
         sLearningMoveTableID++;
         retVal = GiveMoveToMon(mon, gMoveToLearn);
     }
@@ -3963,11 +3966,12 @@ u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
 {
     int i;
 
-#ifdef IRONMON_MODE
-    species = GetSpeciesRandomSeeded(species);
-    if ((gSpeciesInfo[species].abilities[1] == ABILITY_NONE) && (abilityNum == 1))
-        abilityNum = 0;
-#endif
+    if(FlagGet(FLAG_RANDOM_MODE))
+    {
+        species = GetSpeciesRandomSeeded(species);
+        if ((gSpeciesInfo[species].abilities[1] == ABILITY_NONE) && (abilityNum == 1))
+            abilityNum = 0;
+    }
 
     if (abilityNum < NUM_ABILITY_SLOTS)
         gLastUsedAbility = gSpeciesInfo[species].abilities[abilityNum];
@@ -5992,10 +5996,12 @@ static const u16 sUniversalMoves[] =
 
 u8 CanLearnTeachableMove(u16 species, u16 move)
 {
-#ifdef IRONMON_MODE
-    species = GetSpeciesRandomSeeded(species);
-    move = GetRandomMove(move, species);
-#endif
+    if(FlagGet(FLAG_RANDOM_MODE))
+    {
+        species = GetSpeciesRandomSeeded(species);
+        move = GetRandomMove(move, species);
+    }
+
     if (species == SPECIES_EGG)
     {
         return FALSE;
@@ -6096,15 +6102,16 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
                 for (k = 0; k < numMoves && moves[k] != learnset[i].move; k++)
                     ;
             
-            #ifdef IRONMON_MODE
-                if (k == numMoves)
-                {    
-                    moves[numMoves++] = GetRandomMove(learnset[i].move, species);
+                if(FlagGet(FLAG_RANDOM_MODE))
+                {
+                    if (k == numMoves)
+                        moves[numMoves++] = GetRandomMove(learnset[i].move, species);
                 }
-            #else
-                if (k == numMoves)
-                    moves[numMoves++] = learnset[i].move;
-            #endif
+                else
+                {
+                    if (k == numMoves)
+                        moves[numMoves++] = learnset[i].move;
+                }
             }
         }
     }
@@ -7092,11 +7099,11 @@ u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove)
         while (learnset[sLearningMoveTableID].level == 0 || learnset[sLearningMoveTableID].level == level)
         {
         
-        #ifdef IRONMON_MODE
-            gMoveToLearn = GetRandomMove(Random(), species);
-        #else
-            gMoveToLearn = learnset[sLearningMoveTableID].move;
-        #endif
+            if(FlagGet(FLAG_RANDOM_MODE))
+                gMoveToLearn = GetRandomMove(Random(), species);
+            else
+                gMoveToLearn = learnset[sLearningMoveTableID].move;
+
             sLearningMoveTableID++;
             return GiveMoveToMon(mon, gMoveToLearn);
         }

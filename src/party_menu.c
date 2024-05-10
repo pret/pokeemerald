@@ -5411,8 +5411,8 @@ void ItemUseCB_PPUp(u8 taskId, TaskFunc task)
     gTasks[taskId].func = Task_HandleWhichMoveInput;
 }
 
-#ifdef IRONMON_MODE
-u16 ItemIdToBattleMoveId(u16 item)
+
+u16 ItemIdToBattleMoveIdRandom(u16 item)
 {
     u16 moveID = 0;
     if (ItemId_GetPocket(item) == POCKET_TM_HM)
@@ -5423,12 +5423,16 @@ u16 ItemIdToBattleMoveId(u16 item)
     else
         return MOVE_NONE;
 }
-#else
+
 u16 ItemIdToBattleMoveId(u16 item)
 {
+    if(FlagGet(FLAG_RANDOM_MODE))
+    {
+        return ItemIdToBattleMoveIdRandom(item);
+    }
     return (ItemId_GetPocket(item) == POCKET_TM_HM) ? gItemsInfo[item].secondaryId : MOVE_NONE;
 }
-#endif
+
 
 bool8 MonKnowsMove(struct Pokemon *mon, u16 move)
 {

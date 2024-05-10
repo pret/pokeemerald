@@ -859,9 +859,7 @@ static u16 SanitizeItemId(u16 itemId)
         return itemId;
 }
 
-
-#ifdef IRONMON_MODE
-const u8 *ItemId_GetName(u16 itemId)
+const u8 *ItemId_GetNameRandom(u16 itemId)
 {
     if (DECAP_ENABLED && DECAP_MIRRORING && !DECAP_ITEM_NAMES)
         return ROM_MIRROR_PTR(gItemsInfo[SanitizeItemId(itemId)].name);
@@ -875,15 +873,19 @@ const u8 *ItemId_GetName(u16 itemId)
             return gItemsInfo[SanitizeItemId(itemId)].name;
     }
 }
-#else
+
 const u8 *ItemId_GetName(u16 itemId)
 {
+    if(FlagGet(FLAG_RANDOM_MODE))
+    {
+        return ItemId_GetNameRandom(itemId);
+    }
     if (DECAP_ENABLED && DECAP_MIRRORING && !DECAP_ITEM_NAMES)
         return ROM_MIRROR_PTR(gItemsInfo[SanitizeItemId(itemId)].name);
     else
         return gItemsInfo[SanitizeItemId(itemId)].name;
 }
-#endif
+
 
 u32 ItemId_GetPrice(u16 itemId)
 {
@@ -922,9 +924,8 @@ u32 ItemId_GetHoldEffectParam(u32 itemId)
     return gItemsInfo[SanitizeItemId(itemId)].holdEffectParam;
 }
 
-#ifdef IRONMON_MODE
 EWRAM_DATA u8 tmStringVar[0x100] = {0};
-const u8 *ItemId_GetDescription(u16 itemId)
+const u8 *ItemId_GetDescriptionRandom(u16 itemId)
 {
     if (GetPocketByItemId(SanitizeItemId(itemId)) == POCKET_TM_HM)
     {
@@ -934,12 +935,16 @@ const u8 *ItemId_GetDescription(u16 itemId)
     else
         return gItemsInfo[SanitizeItemId(itemId)].description;
 }
-#else
+
 const u8 *ItemId_GetDescription(u16 itemId)
-{
+{   
+    if(FlagGet(FLAG_RANDOM_MODE))
+    {
+        return ItemId_GetDescriptionRandom(itemId);
+    }
     return gItemsInfo[SanitizeItemId(itemId)].description;
 }
-#endif
+
 
 u8 ItemId_GetImportance(u16 itemId)
 {

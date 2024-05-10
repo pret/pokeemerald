@@ -55,8 +55,52 @@ PitEntrance_Warp::
 PitEntrance_Sign_Luck:
 	.string "Good Luck...$"
 
+PitEntrance_Normal:
+	.string "Normal$"
+
+PitEntrance_ExtraRandom:
+	.string "Extra Random$"
+
+PitEntrance_Singles:
+	.string "Single Battles$"
+
+PitEntrance_Doubles:
+	.string "Double Battles$"
+
+PitEntrance_TrainerType:
+	.string "Choose Trainer Type:\n"
+	.string "Doubles is in Beta but Working So Far.$"
+
+PitEntrance_RandomType:
+	.string "Choose Random Mode:\n"
+	.string "Extra Random includes Moves/Abilities.$"
+
 PitEntrance_StartBag::
 	lockall
+	message PitEntrance_RandomType
+	dynmultichoice 17, 0, TRUE, 6, 0, DYN_MULTICHOICE_CB_NONE, PitEntrance_Normal, PitEntrance_ExtraRandom
+	closemessage
+	goto_if_eq VAR_RESULT, 0, PitEntrance_StartBagNormalRandom
+	goto_if_eq VAR_RESULT, 1, PitEntrance_StartBagExtraRandom
+PitEntrance_StartBagNormalRandom::
+	clearflag FLAG_RANDOM_MODE 
+	goto PitEntrance_StartBagContinue1
+PitEntrance_StartBagExtraRandom::
+	setflag FLAG_RANDOM_MODE 
+	goto PitEntrance_StartBagContinue1
+PitEntrance_StartBagContinue1::
+	message PitEntrance_TrainerType
+	dynmultichoice 17, 0, TRUE, 6, 0, DYN_MULTICHOICE_CB_NONE, PitEntrance_Singles, PitEntrance_Doubles
+	closemessage
+	goto_if_eq VAR_RESULT, 0, PitEntrance_StartBagSingles
+	goto_if_eq VAR_RESULT, 1, PitEntrance_StartBagDoubles
+PitEntrance_StartBagSingles::
+	clearflag FLAG_DOUBLES_MODE 
+	goto PitEntrance_StartBagContinue2
+PitEntrance_StartBagDoubles::
+	setflag FLAG_DOUBLES_MODE 
+	goto PitEntrance_StartBagContinue2
+PitEntrance_StartBagContinue2::
 	setflag FLAG_CASE_STARTER_MODE
 	callnative InitTrainerIdAndNameData
 	callnative StartNewPokeballCaseUI

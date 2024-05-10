@@ -223,7 +223,7 @@ static const struct TrainerBattleParameter sContinueScriptDoubleBattleParams[] =
     {&sTrainerAIntroSpeech,         TRAINER_PARAM_LOAD_VAL_32BIT},
     {&sTrainerADefeatSpeech,        TRAINER_PARAM_LOAD_VAL_32BIT},
     {&sTrainerVictorySpeech,        TRAINER_PARAM_CLEAR_VAL_32BIT},
-    {&sTrainerCannotBattleSpeech,   TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerCannotBattleSpeech,   TRAINER_PARAM_CLEAR_VAL_32BIT},
     {&sTrainerABattleScriptRetAddr, TRAINER_PARAM_LOAD_VAL_32BIT},
     {&sTrainerBattleEndScript,      TRAINER_PARAM_LOAD_SCRIPT_RET_ADDR},
 };
@@ -1155,7 +1155,14 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
 {
     if (TrainerBattleLoadArg8(data) != TRAINER_BATTLE_SET_TRAINER_B)
         InitTrainerBattleVariables();
-    sTrainerBattleMode = TrainerBattleLoadArg8(data);
+    
+    if(FlagGet(FLAG_DOUBLES_MODE))
+    {
+        sTrainerBattleMode = TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE;
+        DebugPrintf("Set sTrainerBattleMode: %d", sTrainerBattleMode);
+    }
+    else
+        sTrainerBattleMode = TrainerBattleLoadArg8(data);
 
     switch (sTrainerBattleMode)
     {
@@ -1185,6 +1192,8 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
     case TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC:
         TrainerBattleLoadArgs(sContinueScriptDoubleBattleParams, data);
         SetMapVarsToTrainer();
+        sTrainerBattleMode = TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE;
+        DebugPrintf("Made it To Doubles Switch Case: %d", sTrainerBattleMode);
         return EventScript_TryDoDoubleTrainerBattle;
 #if FREE_MATCH_CALL == FALSE
     case TRAINER_BATTLE_REMATCH_DOUBLE:
@@ -1249,6 +1258,7 @@ void ConfigureAndSetUpOneTrainerBattle(u8 trainerObjEventId, const u8 *trainerSc
     gSelectedObjectEvent = trainerObjEventId;
     gSpecialVar_LastTalked = gObjectEvents[trainerObjEventId].localId;
     BattleSetup_ConfigureTrainerBattle(trainerScript + 1);
+    DebugPrintf("Configure One Trainer Battle: %d", 0);
     ScriptContext_SetupScript(EventScript_StartTrainerApproach);
     LockPlayerFieldControls();
 }
@@ -1258,6 +1268,7 @@ void ConfigureTwoTrainersBattle(u8 trainerObjEventId, const u8 *trainerScript)
     gSelectedObjectEvent = trainerObjEventId;
     gSpecialVar_LastTalked = gObjectEvents[trainerObjEventId].localId;
     BattleSetup_ConfigureTrainerBattle(trainerScript + 1);
+    DebugPrintf("Configure Two Trainers Battle: %d", 0);
 }
 
 void SetUpTwoTrainersBattle(void)
@@ -1283,6 +1294,11 @@ void SetTrainerFacingDirection(void)
 
 u8 GetTrainerBattleMode(void)
 {
+    if(FlagGet(FLAG_DOUBLES_MODE))
+    {
+        sTrainerBattleMode = TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE;
+        return TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE;
+    }
     return sTrainerBattleMode;
 }
 

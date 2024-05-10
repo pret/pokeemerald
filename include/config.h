@@ -53,7 +53,6 @@
 #define POKEMON_EXPANSION
 #define ITEM_EXPANSION
 
-#define IRONMON_MODE
 //#define RANDOM_GEN_5_MODE
 
 // Generation constants used in configs to define behavior
