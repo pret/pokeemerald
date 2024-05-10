@@ -1085,8 +1085,6 @@ static const u16 sRandomConsumableValidItems[] =
     ITEM_ELIXIR,
     ITEM_MAX_ELIXIR,
     ITEM_SACRED_ASH,
-    ITEM_ABILITY_CAPSULE,
-    ITEM_ABILITY_PATCH,
     ITEM_RARE_CANDY,
     ITEM_X_ATTACK,
     ITEM_X_DEFENSE,
@@ -1254,9 +1252,9 @@ u16 RandomItemId(u16 itemId)
     else if (ItemId_GetPocket(itemId) != POCKET_KEY_ITEMS)
     {
         randomItemCategory = Random32() % 10;
-        if(randomItemCategory < 5)
+        if(randomItemCategory < 7)
             itemId = sRandomConsumableValidItems[RandomSeededModulo(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_CONSUMABLE_ITEM_COUNT)];
-        else if(randomItemCategory < 8)
+        else if(randomItemCategory < 2)
             itemId = sRandomHeldValidItems[RandomSeededModulo(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_HELD_ITEM_COUNT)];
         else
             itemId = sRandomBerryValidItems[RandomSeededModulo(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_BERRY_ITEM_COUNT)];

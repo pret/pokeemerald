@@ -275,6 +275,7 @@ EventScript_ResetAllMapFlags::
 	setflag FLAG_HEAL_NPC
 	setflag FLAG_REWARD_ITEM_1
 	setflag FLAG_REWARD_ITEM_2
+	setflag FLAG_REWARD_ITEM_3
 	setflag FLAG_GIVE_POKEMON
 	setflag FLAG_SHOP_NPC
 	setflag FLAG_END_GAME_STATUE

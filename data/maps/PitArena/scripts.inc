@@ -13,6 +13,7 @@ PitArena_OnFrameRewardDrop::
 	setvar VAR_REWARD_STATE, 2
 	clearflag FLAG_REWARD_ITEM_1
 	clearflag FLAG_REWARD_ITEM_2
+	clearflag FLAG_REWARD_ITEM_3
 	addobject 6
 	addobject 7
 	callnative UpdateObjectEventsFromScript
@@ -45,6 +46,7 @@ PitArena_Warp::
 	clearflag FLAG_FLOOR_CLEARED
 	setflag FLAG_REWARD_ITEM_1
 	setflag FLAG_REWARD_ITEM_2
+	setflag FLAG_REWARD_ITEM_3
 	setvar VAR_REWARD_STATE, 0
 	callnative BufferMapFloorString
 	callnative SetRandomTrainers
@@ -122,6 +124,7 @@ PitArena_EndGameStatue222::
 	setvar VAR_REWARD_STATE, 2
 	clearflag FLAG_REWARD_ITEM_1
 	clearflag FLAG_REWARD_ITEM_2
+	clearflag FLAG_REWARD_ITEM_3
 	additem 6
 	additem 7
 	callnative UpdateObjectEventsFromScript
@@ -228,6 +231,10 @@ PitArena_RewardDrop1::
 
 PitArena_RewardDrop2::
 	finditem ITEM_NET_BALL
+	end
+
+PitArena_RewardDrop3::
+	finditem ITEM_MAWILITE
 	end
 
 PitArena_NewMon::
@@ -493,6 +500,8 @@ PitArena_Mart_MegaStones:
 
 	.align 2
 PitArena_Mart_Mints:
+	.2byte ITEM_ABILITY_CAPSULE,
+    .2byte ITEM_ABILITY_PATCH,
 	.2byte ITEM_LONELY_MINT
     .2byte ITEM_ADAMANT_MINT
     .2byte ITEM_NAUGHTY_MINT
