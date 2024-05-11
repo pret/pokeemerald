@@ -588,7 +588,7 @@ u16 ReturnNumberOfTrainersForFloor()
     FlagSet(FLAG_MOVER_OBJECT);
     FlagSet(FLAG_GIVE_POKEMON);
 
-    if(VarGet(VAR_PIT_FLOOR) > 1)
+    if((VarGet(VAR_PIT_FLOOR) > 5) && ((VarGet(VAR_PIT_FLOOR) < 95) || (VarGet(VAR_PIT_FLOOR) > 101)))
     {
         if(!(Random() % 20))
         {
@@ -600,11 +600,11 @@ u16 ReturnNumberOfTrainersForFloor()
     if(VarGet(VAR_LAST_FLOOR_TRAINER_NUMBER) == 4)
         return 1;
 
-    if(VarGet(VAR_PIT_FLOOR) < 2)
+    if(VarGet(VAR_PIT_FLOOR) < 5)
         return 1;
 
     u16 randomValue = Random() % 100;
-    if(randomValue < 35)
+    if(randomValue < 40)
         return 1;
     if(randomValue < 70)
         return 2;
