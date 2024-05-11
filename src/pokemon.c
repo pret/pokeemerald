@@ -5999,8 +5999,11 @@ u8 CanLearnTeachableMove(u16 species, u16 move)
 {
     if(FlagGet(FLAG_RANDOM_MODE))
     {
-        species = GetSpeciesRandomSeeded(species);
-        move = GetRandomMove(move, species);
+        species = GetSpeciesRandomSeeded(species + move);
+        if(species % 4)
+            return FALSE; 
+        else
+            return TRUE;
     }
 
     if (species == SPECIES_EGG)
