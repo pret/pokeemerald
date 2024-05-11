@@ -931,11 +931,7 @@ static void Task_MainMenuMain(u8 taskId)
 
     if (JOY_NEW(B_BUTTON)) // If B Pressed Go To Title Screen
     {
-        PlaySE(SE_PC_OFF);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-        sMainMenuDataPtr->savedCallback = CB2_InitTitleScreen;
-        sSelectedOption = HW_WIN_CONTINUE;
-        gTasks[taskId].func = Task_MainMenuTurnOff;
+
     }
 
     if(JOY_NEW(DPAD_DOWN)) // Handle DPad directions, kinda bad way to do it with each case handled individually but its whatever
