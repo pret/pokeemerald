@@ -4597,12 +4597,12 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconPalIndex = 1,                                                                      \
         FOOTPRINT(Alcremie)                                                                     \
         FOLLOWER(                                                                               \
-            sPicTable_AlcremieStrawberryVanillaCream,                                           \
+            sPicTable_AlcremieStrawberry, /*Alcremie ##sweet*/                                  \
             SIZE_32x32,                                                                         \
             SHADOW_SIZE_M,                                                                      \
             TRACKS_FOOT,                                                                        \
-            gFollowerPalette_AlcremieStrawberryVanillaCream,                                    \
-            gShinyFollowerPalette_AlcremieStrawberryVanillaCream                                \
+            gFollowerPalette_AlcremieStrawberryVanillaCream, /*Alcremie ##sweet##cream*/        \
+            gShinyFollowerPalette_AlcremieStrawberryVanillaCream /*Alcremie ##sweet##cream*/    \
         )                                                                                       \
         .levelUpLearnset = sAlcremieLevelUpLearnset,                                            \
         .teachableLearnset = sAlcremieTeachableLearnset,                                        \
@@ -6346,6 +6346,14 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_ZamazentaHeroOfManyBattles,
         .iconPalIndex = 2,
         FOOTPRINT(Zamazenta)
+        FOLLOWER(
+            sPicTable_ZamazentaHeroOfManyBattles,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            gFollowerPalette_ZamazentaHeroOfManyBattles,
+            gShinyFollowerPalette_ZamazentaHeroOfManyBattles
+        )
         .isLegendary = TRUE,
         .isFrontierBanned = TRUE,
         .levelUpLearnset = sZamazentaLevelUpLearnset,
@@ -6471,7 +6479,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         FOOTPRINT(Eternatus)
         FOLLOWER(
             sPicTable_Eternatus,
-            SIZE_64x64,
+            SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
             gFollowerPalette_Eternatus,
@@ -6654,6 +6662,14 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_Urshifu,
         .iconPalIndex = 2,
         FOOTPRINT(Urshifu)
+        FOLLOWER(
+            sPicTable_Urshifu,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            gFollowerPalette_Urshifu,
+            gShinyFollowerPalette_Urshifu
+        )
         .isLegendary = TRUE,
         .levelUpLearnset = sUrshifuSingleStrikeStyleLevelUpLearnset,
         .teachableLearnset = sUrshifuSingleStrikeStyleTeachableLearnset,

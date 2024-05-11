@@ -19147,10 +19147,10 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gMonShinyPalette_AlcremieRibbon[] = INCBIN_U32("graphics/pokemon/alcremie/ribbon/ribbon_shiny.gbapal.lz");
 
 #if OW_FOLLOWERS_ENABLED
-    const u32 gObjectEventPic_AlcremieStrawberryVanillaCream[] = INCBIN_COMP("graphics/pokemon/alcremie/follower.4bpp");
+    const u32 gObjectEventPic_AlcremieStrawberry[] = INCBIN_COMP("graphics/pokemon/alcremie/strawberry/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    const u32 gFollowerPalette_AlcremieStrawberryVanillaCream[] = INCBIN_U32("graphics/pokemon/alcremie/follow_normal.gbapal.lz");
-    const u32 gShinyFollowerPalette_AlcremieStrawberryVanillaCream[] = INCBIN_U32("graphics/pokemon/alcremie/follow_shiny.gbapal.lz");
+    const u32 gFollowerPalette_AlcremieStrawberryVanillaCream[] = INCBIN_U32("graphics/pokemon/alcremie/strawberry/follow_normal.gbapal.lz");
+    const u32 gShinyFollowerPalette_AlcremieStrawberryVanillaCream[] = INCBIN_U32("graphics/pokemon/alcremie/strawberry/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 

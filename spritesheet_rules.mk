@@ -3447,7 +3447,7 @@ $(POKEMONGFXDIR)/runerigus/follower.4bpp: %.4bpp: %.png
 $(POKEMONGFXDIR)/milcery/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(POKEMONGFXDIR)/alcremie/follower.4bpp: %.4bpp: %.png
+$(POKEMONGFXDIR)/alcremie/strawberry/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
 $(POKEMONGFXDIR)/falinks/follower.4bpp: %.4bpp: %.png

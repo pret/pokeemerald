@@ -5327,8 +5327,8 @@ static const struct SpriteFrameImage sPicTable_Milcery[] = {
     overworld_ascending_frames(gObjectEventPic_Milcery, 4, 4),
 };
 
-static const struct SpriteFrameImage sPicTable_AlcremieStrawberryVanillaCream[] = {
-    overworld_ascending_frames(gObjectEventPic_AlcremieStrawberryVanillaCream, 4, 4),
+static const struct SpriteFrameImage sPicTable_AlcremieStrawberry[] = {
+    overworld_ascending_frames(gObjectEventPic_AlcremieStrawberry, 4, 4),
 };
 #if P_GIGANTAMAX_FORMS
 /*static const struct SpriteFrameImage sPicTable_AlcremieGigantamax[] = {
