@@ -6174,7 +6174,7 @@ const struct Trainer gTrainers[] = {
         .trainerName = _("Dummy Name"),
         .items = {},
         .doubleBattle = FALSE,
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_STRONGEST_MOVE | AI_FLAG_HP_AWARE | AI_FLAG_WILL_SUICIDE | AI_FLAG_SMART_MON_CHOICES,
         .party = TRAINER_PARTY(sParty_RandomBattle),
     },
 
@@ -6186,7 +6186,7 @@ const struct Trainer gTrainers[] = {
         .trainerName = _("Dummy Name"),
         .items = {},
         .doubleBattle = FALSE,
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_STRONGEST_MOVE | AI_FLAG_HP_AWARE | AI_FLAG_WILL_SUICIDE | AI_FLAG_SMART_MON_CHOICES,
         .party = TRAINER_PARTY(sParty_RandomBattle),
     },
 
@@ -6198,7 +6198,7 @@ const struct Trainer gTrainers[] = {
         .trainerName = _("Dummy Name"),
         .items = {},
         .doubleBattle = FALSE,
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_STRONGEST_MOVE | AI_FLAG_HP_AWARE | AI_FLAG_WILL_SUICIDE | AI_FLAG_SMART_MON_CHOICES,
         .party = TRAINER_PARTY(sParty_RandomBattle),
     },
 
@@ -6210,7 +6210,7 @@ const struct Trainer gTrainers[] = {
         .trainerName = _("Dummy Name"),
         .items = {},
         .doubleBattle = FALSE,
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_STRONGEST_MOVE | AI_FLAG_HP_AWARE | AI_FLAG_WILL_SUICIDE | AI_FLAG_SMART_MON_CHOICES,
         .party = TRAINER_PARTY(sParty_RandomBattle),
     },
 
@@ -6222,7 +6222,7 @@ const struct Trainer gTrainers[] = {
         .trainerName = _("Archie"),
         .items = {ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE},
         .doubleBattle = FALSE,
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_ACE_POKEMON,
+        .aiFlags = AI_FLAG_OMNISCIENT | AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_STRONGEST_MOVE | AI_FLAG_HP_AWARE | AI_FLAG_WILL_SUICIDE | AI_FLAG_SMART_MON_CHOICES,
         .party = TRAINER_PARTY(sParty_Archie),
     },
 

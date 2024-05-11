@@ -158,6 +158,9 @@ Debug_EventScript_Script_5::
 	end
 
 Debug_EventScript_Script_6::
+	givemon SPECIES_ARCEUS, 100
+	givemon SPECIES_ARCEUS, 100
+	givemon SPECIES_ARCEUS, 100
 	end
 
 Debug_EventScript_Script_7::

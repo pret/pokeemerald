@@ -585,14 +585,22 @@ u16 ReturnNumberOfTrainersForFloor()
     FlagSet(FLAG_MOVE_RELEARNER);
     FlagSet(FLAG_GIVE_POKEMON);
 
-    if(VarGet(VAR_PIT_FLOOR) < 11)
+    if(VarGet(VAR_LAST_FLOOR_TRAINER_NUMBER) == 4)
         return 1;
-    if(VarGet(VAR_PIT_FLOOR) < 36)
+
+    if(VarGet(VAR_PIT_FLOOR) < 2)
+        return 1;
+
+    u16 randomValue = Random() % 100;
+    if(randomValue < 35)
+        return 1;
+    if(randomValue < 70)
         return 2;
-    if(VarGet(VAR_PIT_FLOOR) < 75)
+    if(randomValue < 90)
         return 3;
-    if(VarGet(VAR_PIT_FLOOR) >= 75)
+    if(randomValue < 100)
         return 4;
+
     return 0;
 }
 
@@ -613,6 +621,8 @@ void SetRandomTrainers()
     u16 iterator = 0;
     u16 trainerCount = ReturnNumberOfTrainersForFloor();
     u16 trainers[4] = {0, 0, 0, 0};
+
+    VarSet(VAR_LAST_FLOOR_TRAINER_NUMBER, trainerCount);
 
     // Handle Random Trainers That Are Spawned
     for (iterator = 0; iterator < trainerCount; iterator++)
