@@ -296,6 +296,7 @@ PitArena_Text_ReceivedMon:
 
 PitArena_MoveRelearner::
 	lockall
+	faceplayer
 	dynmultichoice 17, 1, 0, 5, 0, DYN_MULTICHOICE_CB_NONE, PitArena_MoveRelearnerText, PitArena_ShopNPC_Option8
 	goto_if_eq VAR_RESULT, 0, PitArena_MartNPCMoveRelearner
 EndOfRelearnerScript::
@@ -314,6 +315,57 @@ PitArena_MartNPCMoveRelearner::
 	goto EndOfRelearnerScript
 	end
 
+PitArena_Mover::
+	lockall
+	faceplayer
+	message PitArena_NPCMoverOpen
+	dynmultichoice 17, 1, 0, 5, 0, DYN_MULTICHOICE_CB_NONE, PitArena_NPCMover2, PitArena_NPCMover3, PitArena_ShopNPC_Option8
+	goto_if_eq VAR_RESULT, 0, PitArena_MoverSkip2
+	goto_if_eq VAR_RESULT, 1, PitArena_MoverSkip3
+	closemessage
+EndOfMoverScript::
+	release
+	end
+
+PitArena_NPCMoverOpen:
+	.string "Do you want to pay to skip floors?$"
+
+PitArena_MoverSkip2::
+	checkmoney 3000
+	goto_if_eq VAR_RESULT, FALSE, PitArena_Mover_NotEnoughMoney
+	removemoney 3000
+	setflag FLAG_FLOOR_CLEARED
+	setmetatile 9, 9, METATILE_Cave_FLOOR_COMPLETE, FALSE
+	addvar VAR_PIT_FLOOR, 1
+	special DrawWholeMapView
+	goto PitArena_Warp
+	release
+	end
+
+PitArena_MoverSkip3::
+	checkmoney 5000
+	goto_if_eq VAR_RESULT, FALSE, PitArena_Mover_NotEnoughMoney
+	removemoney 5000
+	setflag FLAG_FLOOR_CLEARED
+	setmetatile 9, 9, METATILE_Cave_FLOOR_COMPLETE, FALSE
+	addvar VAR_PIT_FLOOR, 2
+	special DrawWholeMapView
+	goto PitArena_Warp
+	release
+	end
+
+PitArena_Mover_NotEnoughMoney:
+	msgbox PitArena_NPCMoverNotEnoughMoneyText, MSGBOX_DEFAULT
+	release
+	end
+
+PitArena_NPCMoverNotEnoughMoneyText:
+	.string "Not enough money...$"
+
+PitArena_NPCMover2:
+	.string "2 Floors: ¥3000$"
+PitArena_NPCMover3:
+	.string "3 Floors: ¥5000$"
 
 PitArena_ShopNPC::
 	lockall

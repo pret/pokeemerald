@@ -550,6 +550,8 @@ u16 ReturnLastSpokenVarObjGfxId()
 u16 ReturnNumberOfTrainersForFloor()
 {
 
+    FlagSet(FLAG_MOVER_OBJECT);
+
     if(VarGet(VAR_PIT_FLOOR) == 100)
     {
         FlagClear(FLAG_END_GAME_ARCHIE);
@@ -583,7 +585,17 @@ u16 ReturnNumberOfTrainersForFloor()
     FlagSet(FLAG_HEAL_NPC);
     FlagSet(FLAG_SHOP_NPC);
     FlagSet(FLAG_MOVE_RELEARNER);
+    FlagSet(FLAG_MOVER_OBJECT);
     FlagSet(FLAG_GIVE_POKEMON);
+
+    if(VarGet(VAR_PIT_FLOOR) > 1)
+    {
+        if(!(Random() % 20))
+        {
+            FlagClear(FLAG_MOVER_OBJECT);
+            return 0;
+        }
+    }
 
     if(VarGet(VAR_LAST_FLOOR_TRAINER_NUMBER) == 4)
         return 1;

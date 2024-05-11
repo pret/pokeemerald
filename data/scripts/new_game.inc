@@ -279,6 +279,7 @@ EventScript_ResetAllMapFlags::
 	setflag FLAG_GIVE_POKEMON
 	setflag FLAG_SHOP_NPC
 	setflag FLAG_MOVE_RELEARNER
+	setflag FLAG_MOVER_OBJECT
 	setflag FLAG_END_GAME_STATUE
 	setflag FLAG_END_GAME_ARCHIE
 	clearflag FLAG_RANDOM_MODE 
