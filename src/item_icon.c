@@ -6,6 +6,7 @@
 #include "sprite.h"
 #include "constants/items.h"
 #include "item.h"
+#include "event_data.h"
 
 // EWRAM vars
 EWRAM_DATA u8 *gItemIconDecompressionBuffer = NULL;
@@ -170,6 +171,13 @@ const void *GetItemIconPicOrPalette(u16 itemId, u8 which)
         if (GetPocketByItemId(itemId) == POCKET_TM_HM)
         {
             return gTMMoveTypeTable[gMovesInfo[GetRandomMove(itemId, gItemsInfo[itemId].secondaryId)].type][which];
+        }
+    }
+    else
+    {
+        if (GetPocketByItemId(itemId) == POCKET_TM_HM)
+        {
+            return gTMMoveTypeTable[gMovesInfo[gItemsInfo[itemId].secondaryId].type][which];
         }
     }
 

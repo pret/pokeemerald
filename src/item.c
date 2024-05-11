@@ -952,6 +952,13 @@ const u8 *ItemId_GetDescription(u16 itemId)
     {
         return ItemId_GetDescriptionRandom(itemId);
     }
+
+    if (GetPocketByItemId(SanitizeItemId(itemId)) == POCKET_TM_HM)
+    {
+        FormatTextByWidth(tmStringVar, 100, FONT_NORMAL, gMovesInfo[gItemsInfo[itemId].secondaryId].description, 1);
+        return tmStringVar;
+    }
+
     return gItemsInfo[SanitizeItemId(itemId)].description;
 }
 
