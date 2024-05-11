@@ -3162,7 +3162,6 @@ void SetMoveEffect(bool32 primary, bool32 certain)
         }
         else
         {
-            u8 side;
             switch (gBattleScripting.moveEffect)
             {
             case MOVE_EFFECT_CONFUSION:
@@ -3176,7 +3175,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
 
                     // If the confusion is activating due to being released from Sky Drop, go to "confused due to fatigue" script.
                     // Otherwise, do normal confusion script.
-                    if(gCurrentMove == MOVE_SKY_DROP)
+                    if (gCurrentMove == MOVE_SKY_DROP)
                     {
                         gBattleMons[gEffectBattler].status2 &= ~(STATUS2_LOCK_CONFUSE);
                         gBattlerAttacker = gEffectBattler;
@@ -3420,47 +3419,19 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                 break;
             case MOVE_EFFECT_STEAL_ITEM:
                 {
-                    if (!CanStealItem(gBattlerAttacker, gBattlerTarget, gBattleMons[gBattlerTarget].item))
-                    {
-                        gBattlescriptCurrInstr++;
-                        break;
-                    }
-
-                    side = GetBattlerSide(gBattlerAttacker);
-                    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT
-                        && !(gBattleTypeFlags &
-                            (BATTLE_TYPE_EREADER_TRAINER
-                            | BATTLE_TYPE_FRONTIER
-                            | BATTLE_TYPE_LINK
-                            | BATTLE_TYPE_RECORDED_LINK
-                            | BATTLE_TYPE_SECRET_BASE)))
+                    if (!CanStealItem(gBattlerAttacker, gBattlerTarget, gBattleMons[gBattlerTarget].item)
+                        || gBattleMons[gBattlerAttacker].item != ITEM_NONE
+                        || gBattleMons[gBattlerTarget].item == ITEM_NONE)
                     {
                         gBattlescriptCurrInstr++;
                     }
-                    else if (!(gBattleTypeFlags &
-                            (BATTLE_TYPE_EREADER_TRAINER
-                            | BATTLE_TYPE_FRONTIER
-                            | BATTLE_TYPE_LINK
-                            | BATTLE_TYPE_RECORDED_LINK
-                            | BATTLE_TYPE_SECRET_BASE))
-                        && (gWishFutureKnock.knockedOffMons[side] & gBitTable[gBattlerPartyIndexes[gBattlerAttacker]]))
-                    {
-                        gBattlescriptCurrInstr++;
-                    }
-                    else if (gBattleMons[gBattlerTarget].item
-                        && GetBattlerAbility(gBattlerTarget) == ABILITY_STICKY_HOLD)
+                    else if (GetBattlerAbility(gBattlerTarget) == ABILITY_STICKY_HOLD)
                     {
                         BattleScriptPushCursor();
                         gBattlescriptCurrInstr = BattleScript_NoItemSteal;
 
                         gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
                         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
-                    }
-                    else if (gBattleMons[gBattlerAttacker].item != ITEM_NONE
-                        || gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY_E_READER
-                        || gBattleMons[gBattlerTarget].item == ITEM_NONE)
-                    {
-                        gBattlescriptCurrInstr++;
                     }
                     else
                     {
@@ -4438,15 +4409,19 @@ static void Cmd_getexp(void)
                         gBattleMoveDamage += GetSoftLevelCapExpValue(gPlayerParty[*expMonId].level, gBattleStruct->expShareExpValue);;
                     }
 
-                    if (EXP_CAP_HARD && gBattleMoveDamage != 0)
+                    ApplyExperienceMultipliers(&gBattleMoveDamage, *expMonId, gBattlerFainted);
+
+                    if (B_EXP_CAP_TYPE == EXP_CAP_HARD && gBattleMoveDamage != 0)
                     {
                         u32 growthRate = gSpeciesInfo[GetMonData(&gPlayerParty[*expMonId], MON_DATA_SPECIES)].growthRate;
-                        if (gExperienceTables[growthRate][GetCurrentLevelCap()] < gExperienceTables[growthRate][GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL)] + gBattleMoveDamage)
-                            gBattleMoveDamage = gExperienceTables[growthRate][GetCurrentLevelCap()];
-                    }
+                        u32 currentExp = GetMonData(&gPlayerParty[*expMonId], MON_DATA_EXP);
+                        u32 levelCap = GetCurrentLevelCap();
 
-                    if (!EXP_CAP_HARD || gBattleMoveDamage != 0) // Edge case for hard level caps. Prevents mons from getting 1 exp
-                        ApplyExperienceMultipliers(&gBattleMoveDamage, *expMonId, gBattlerFainted);
+                        if (GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL) >= levelCap)
+                            gBattleMoveDamage = 0;
+                        else if (gExperienceTables[growthRate][levelCap] < currentExp + gBattleMoveDamage)
+                            gBattleMoveDamage = gExperienceTables[growthRate][levelCap] - currentExp;
+                    }
 
                     if (IsTradedMon(&gPlayerParty[*expMonId]))
                     {
@@ -16712,7 +16687,7 @@ void BS_TryCopycat(void)
 {
     NATIVE_ARGS(const u8 *failInstr);
 
-    if (gLastUsedMove == MOVE_NONE || gLastUsedMove == MOVE_UNAVAILABLE || gMovesInfo[gLastUsedMove].copycatBanned)
+    if (gLastUsedMove == MOVE_NONE || gLastUsedMove == MOVE_UNAVAILABLE || gMovesInfo[gLastUsedMove].copycatBanned || IsZMove(gLastUsedMove))
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
@@ -16917,6 +16892,40 @@ void BS_TryGulpMissile(void)
         gBattlescriptCurrInstr = BattleScript_GulpMissileFormChange;
     else
         gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_TryActivateGulpMissile(void)
+{
+    NATIVE_ARGS();
+
+    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+        && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+        && TARGET_TURN_DAMAGED
+        && gBattleMons[gBattlerTarget].species != SPECIES_CRAMORANT
+        && GetBattlerAbility(gBattlerTarget) == ABILITY_GULP_MISSILE)
+    {
+        if (GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
+        {
+            gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 4;
+            if (gBattleMoveDamage == 0)
+                gBattleMoveDamage = 1;
+        }
+
+        switch(gBattleMons[gBattlerTarget].species)
+        {
+            case SPECIES_CRAMORANT_GORGING:
+                BattleScriptPushCursor();
+                TryBattleFormChange(gBattlerTarget, FORM_CHANGE_HIT_BY_MOVE);
+                gBattlescriptCurrInstr = BattleScript_GulpMissileGorging;
+                return;
+            case SPECIES_CRAMORANT_GULPING:
+                BattleScriptPushCursor();
+                TryBattleFormChange(gBattlerTarget, FORM_CHANGE_HIT_BY_MOVE);
+                gBattlescriptCurrInstr = BattleScript_GulpMissileGulping;
+                return;
+        }
+    }
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 void BS_TryQuash(void)

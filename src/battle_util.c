@@ -3002,6 +3002,15 @@ bool32 HandleWishPerishSongOnTurnEnd(void)
             {
                 struct Pokemon *party;
 
+                if (gWishFutureKnock.futureSightCounter[battler] == 0
+                 && gWishFutureKnock.futureSightCounter[BATTLE_PARTNER(battler)] == 0)
+                {
+                    gSideStatuses[GetBattlerSide(battler)] &= ~SIDE_STATUS_FUTUREATTACK;
+                }
+
+                if (!IsBattlerAlive(battler))
+                    continue;
+
                 if (gWishFutureKnock.futureSightMove[battler] == MOVE_FUTURE_SIGHT)
                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_FUTURE_SIGHT;
                 else
@@ -3019,12 +3028,6 @@ bool32 HandleWishPerishSongOnTurnEnd(void)
                     SetTypeBeforeUsingMove(gCurrentMove, gBattlerAttacker);
 
                 BattleScriptExecute(BattleScript_MonTookFutureAttack);
-
-                if (gWishFutureKnock.futureSightCounter[battler] == 0
-                 && gWishFutureKnock.futureSightCounter[BATTLE_PARTNER(battler)] == 0)
-                {
-                    gSideStatuses[GetBattlerSide(gBattlerTarget)] &= ~SIDE_STATUS_FUTUREATTACK;
-                }
 
                 return TRUE;
             }
@@ -5646,34 +5649,30 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && TARGET_TURN_DAMAGED
-             && IsBattlerAlive(battler))
+             && IsBattlerAlive(battler)
+             && gBattleMons[gBattlerTarget].species != SPECIES_CRAMORANT)
             {
-                // TODO: Convert this to a proper FORM_CHANGE type.
-                if (gBattleMons[gBattlerTarget].species == SPECIES_CRAMORANT_GORGING)
+                if (GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
                 {
-                    gBattleMons[gBattlerTarget].species = SPECIES_CRAMORANT;
-                    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
-                    {
-                        gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 4;
-                        if (gBattleMoveDamage == 0)
-                            gBattleMoveDamage = 1;
-                    }
-                    BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_GulpMissileGorging;
-                    effect++;
+                    gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 4;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
                 }
-                else if (gBattleMons[gBattlerTarget].species == SPECIES_CRAMORANT_GULPING)
+
+                switch(gBattleMons[gBattlerTarget].species)
                 {
-                    gBattleMons[gBattlerTarget].species = SPECIES_CRAMORANT;
-                    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
-                    {
-                        gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 4;
-                        if (gBattleMoveDamage == 0)
-                            gBattleMoveDamage = 1;
-                    }
-                    BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_GulpMissileGulping;
-                    effect++;
+                    case SPECIES_CRAMORANT_GORGING:
+                        TryBattleFormChange(battler, FORM_CHANGE_HIT_BY_MOVE);
+                        BattleScriptPushCursor();
+                        gBattlescriptCurrInstr = BattleScript_GulpMissileGorging;
+                        effect++;
+                        break;
+                    case SPECIES_CRAMORANT_GULPING:
+                        TryBattleFormChange(battler, FORM_CHANGE_HIT_BY_MOVE);
+                        BattleScriptPushCursor();
+                        gBattlescriptCurrInstr = BattleScript_GulpMissileGulping;
+                        effect++;
+                        break;
                 }
             }
             break;
@@ -10613,6 +10612,7 @@ u16 GetBattleFormChangeTargetSpecies(u32 battler, u16 method)
                     }
                     break;
                 case FORM_CHANGE_BATTLE_TURN_END:
+                case FORM_CHANGE_HIT_BY_MOVE:
                     if (formChanges[i].param1 == GetBattlerAbility(battler))
                         targetSpecies = formChanges[i].targetSpecies;
                     break;

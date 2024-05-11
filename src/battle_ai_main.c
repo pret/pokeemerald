@@ -838,7 +838,22 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         break;
     case AI_EFFECTIVENESS_x0_125:
     case AI_EFFECTIVENESS_x0_25:
-        RETURN_SCORE_MINUS(10);
+        switch (moveEffect)
+        {
+        case EFFECT_FIXED_DAMAGE_ARG:
+        case EFFECT_LEVEL_DAMAGE:
+        case EFFECT_PSYWAVE:
+        case EFFECT_OHKO:
+        case EFFECT_BIDE:
+        case EFFECT_SUPER_FANG:
+        case EFFECT_ENDEAVOR:
+        case EFFECT_COUNTER:
+        case EFFECT_MIRROR_COAT:
+        case EFFECT_METAL_BURST:
+            break;
+        default:
+            RETURN_SCORE_MINUS(10);
+        }
         break;
     }
 
@@ -3162,7 +3177,7 @@ static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
     return score;
 }
 
-static u32 AI_CalcMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
+static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
 {
     // move data
     u32 moveEffect = gMovesInfo[move].effect;
@@ -3593,7 +3608,7 @@ static u32 AI_CalcMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
             else
                 ADJUST_SCORE(WEAK_EFFECT);
         }
-        else if (aiData->abilities[battlerAtk] != ABILITY_CONTRARY)
+        else
         {
             IncreaseStatUpScore(battlerAtk, battlerDef, STAT_CHANGE_ATK, &score);
             IncreaseStatUpScore(battlerAtk, battlerDef, STAT_CHANGE_DEF, &score);
@@ -4408,56 +4423,88 @@ static u32 AI_CalcMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
         // Consider move effects that target self
         if (gMovesInfo[move].additionalEffects[i].self)
         {
-            u32 oneStageStatId = STAT_CHANGE_ATK + gMovesInfo[move].additionalEffects[i].moveEffect - MOVE_EFFECT_ATK_PLUS_1;
-            u32 twoStageStatId = STAT_CHANGE_ATK_2 + gMovesInfo[move].additionalEffects[i].moveEffect - MOVE_EFFECT_ATK_PLUS_1;
+            u32 StageStatId;
 
-            switch (gMovesInfo[move].additionalEffects[i].moveEffect)
+            if (aiData->abilities[battlerAtk] != ABILITY_CONTRARY)
             {
-                case MOVE_EFFECT_SPD_PLUS_2:
-                case MOVE_EFFECT_SPD_PLUS_1:
-                    if (aiData->abilities[battlerAtk] != ABILITY_CONTRARY && !AI_STRIKES_FIRST(battlerAtk, battlerDef, move))
-                        ADJUST_SCORE(GOOD_EFFECT);
-                    break;
+                switch (gMovesInfo[move].additionalEffects[i].moveEffect)
+                {
                 case MOVE_EFFECT_ATK_PLUS_1:
                 case MOVE_EFFECT_DEF_PLUS_1:
+                case MOVE_EFFECT_SPD_PLUS_1:
                 case MOVE_EFFECT_SP_ATK_PLUS_1:
                 case MOVE_EFFECT_SP_DEF_PLUS_1:
-                case MOVE_EFFECT_ACC_PLUS_1:
-                case MOVE_EFFECT_EVS_PLUS_1:
-                    IncreaseStatUpScore(battlerAtk, battlerDef, oneStageStatId, &score);
+                    StageStatId = STAT_CHANGE_ATK + gMovesInfo[move].additionalEffects[i].moveEffect - MOVE_EFFECT_ATK_PLUS_1;
+                    IncreaseStatUpScore(battlerAtk, battlerDef, StageStatId, &score);
                     break;
                 case MOVE_EFFECT_ATK_PLUS_2:
                 case MOVE_EFFECT_DEF_PLUS_2:
+                case MOVE_EFFECT_SPD_PLUS_2:
                 case MOVE_EFFECT_SP_ATK_PLUS_2:
                 case MOVE_EFFECT_SP_DEF_PLUS_2:
-                case MOVE_EFFECT_ACC_PLUS_2:
-                case MOVE_EFFECT_EVS_PLUS_2:
-                    IncreaseStatUpScore(battlerAtk, battlerDef, twoStageStatId, &score);
+                    StageStatId = STAT_CHANGE_ATK_2 + gMovesInfo[move].additionalEffects[i].moveEffect - MOVE_EFFECT_ATK_PLUS_1;
+                    IncreaseStatUpScore(battlerAtk, battlerDef, StageStatId, &score);
                     break;
-                // Effects that lower stat(s) - only need to consider Contrary
-                case MOVE_EFFECT_ATK_MINUS_1:
-                case MOVE_EFFECT_DEF_MINUS_1:
-                case MOVE_EFFECT_SPD_MINUS_1:
-                case MOVE_EFFECT_SP_ATK_MINUS_1:
-                case MOVE_EFFECT_SP_DEF_MINUS_1:
-                case MOVE_EFFECT_DEF_SPDEF_DOWN:
-                case MOVE_EFFECT_ATK_DEF_DOWN:
-                case MOVE_EFFECT_SP_ATK_TWO_DOWN:
-                    if (aiData->abilities[battlerAtk] == ABILITY_CONTRARY)
-                        IncreaseStatUpScore(battlerAtk, battlerDef, oneStageStatId, &score);
-                case MOVE_EFFECT_V_CREATE:
-                    if (aiData->abilities[battlerAtk] == ABILITY_CONTRARY)
-                    {
-                        IncreaseStatUpScore(battlerAtk, battlerDef, STAT_CHANGE_DEF, &score);
-                        IncreaseStatUpScore(battlerAtk, battlerDef, STAT_CHANGE_SPEED, &score);
-                        IncreaseStatUpScore(battlerAtk, battlerDef, STAT_CHANGE_SPDEF, &score);
-                    }
+                case MOVE_EFFECT_ACC_PLUS_1:
+                case MOVE_EFFECT_ACC_PLUS_2:
+                    IncreaseStatUpScore(battlerAtk, battlerDef, STAT_CHANGE_ACC, &score);
+                    break;
+                case MOVE_EFFECT_EVS_PLUS_1:
+                case MOVE_EFFECT_EVS_PLUS_2:
+                    IncreaseStatUpScore(battlerAtk, battlerDef, STAT_CHANGE_EVASION, &score);
                     break;
                 case MOVE_EFFECT_RAPID_SPIN:
                     if ((gSideStatuses[GetBattlerSide(battlerAtk)] & SIDE_STATUS_HAZARDS_ANY && CountUsablePartyMons(battlerAtk) != 0)
                     || (gStatuses3[battlerAtk] & STATUS3_LEECHSEED || gBattleMons[battlerAtk].status2 & STATUS2_WRAPPED))
                         ADJUST_SCORE(GOOD_EFFECT);
                     break;
+                }
+            }
+            else
+            {
+                switch (gMovesInfo[move].additionalEffects[i].moveEffect)
+                {
+                case MOVE_EFFECT_ATK_MINUS_1:
+                case MOVE_EFFECT_DEF_MINUS_1:
+                case MOVE_EFFECT_SPD_MINUS_1:
+                case MOVE_EFFECT_SP_ATK_MINUS_1:
+                case MOVE_EFFECT_SP_DEF_MINUS_1:
+                    StageStatId = STAT_CHANGE_ATK + gMovesInfo[move].additionalEffects[i].moveEffect - MOVE_EFFECT_ATK_MINUS_1;
+                    IncreaseStatUpScoreContrary(battlerAtk, battlerDef, StageStatId, &score);
+                    break;
+                case MOVE_EFFECT_ATK_MINUS_2:
+                case MOVE_EFFECT_DEF_MINUS_2:
+                case MOVE_EFFECT_SPD_MINUS_2:
+                case MOVE_EFFECT_SP_ATK_MINUS_2:
+                case MOVE_EFFECT_SP_DEF_MINUS_2:
+                    StageStatId = STAT_CHANGE_ATK + gMovesInfo[move].additionalEffects[i].moveEffect - MOVE_EFFECT_ATK_MINUS_2;
+                    IncreaseStatUpScoreContrary(battlerAtk, battlerDef, StageStatId, &score);
+                    break;
+                case MOVE_EFFECT_ACC_MINUS_1:
+                case MOVE_EFFECT_ACC_MINUS_2:
+                    IncreaseStatUpScoreContrary(battlerAtk, battlerDef, STAT_CHANGE_ACC, &score);
+                    break;
+                case MOVE_EFFECT_EVS_MINUS_1:
+                case MOVE_EFFECT_EVS_MINUS_2:
+                    IncreaseStatUpScoreContrary(battlerAtk, battlerDef, STAT_CHANGE_EVASION, &score);
+                    break;
+                case MOVE_EFFECT_DEF_SPDEF_DOWN:
+                    IncreaseStatUpScoreContrary(battlerAtk, battlerDef, STAT_CHANGE_DEF, &score);
+                    IncreaseStatUpScoreContrary(battlerAtk, battlerDef, STAT_CHANGE_SPDEF, &score);
+                    break;
+                case MOVE_EFFECT_ATK_DEF_DOWN:
+                    IncreaseStatUpScoreContrary(battlerAtk, battlerDef, STAT_CHANGE_ATK, &score);
+                    IncreaseStatUpScoreContrary(battlerAtk, battlerDef, STAT_CHANGE_DEF, &score);
+                    break;
+                case MOVE_EFFECT_SP_ATK_TWO_DOWN:
+                    IncreaseStatUpScoreContrary(battlerAtk, battlerDef, STAT_CHANGE_SPATK_2, &score);
+                    break;
+                case MOVE_EFFECT_V_CREATE:
+                    IncreaseStatUpScoreContrary(battlerAtk, battlerDef, STAT_CHANGE_DEF, &score);
+                    IncreaseStatUpScoreContrary(battlerAtk, battlerDef, STAT_CHANGE_SPEED, &score);
+                    IncreaseStatUpScoreContrary(battlerAtk, battlerDef, STAT_CHANGE_SPDEF, &score);
+                    break;
+                }
             }
         }
         else // consider move effects that hinder the target
@@ -4640,8 +4687,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             score += AI_CompareDamagingMoves(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex);
     }
 
-    // Calculates score based on effects of a move
-    score += AI_CalcMoveScore(battlerAtk, battlerDef, move);
+    score += AI_CalcMoveEffectScore(battlerAtk, battlerDef, move);
 
     return score;
 }
