@@ -3682,7 +3682,7 @@ const struct Item gItemsInfo[] =
         .name = _("Dubious Disc"),
         .price = 10000, // EVO
         .description = COMPOUND_STRING(
-            "A transparent device\n"
+            "A clear device\n"
             "overflowing with\n"
             "dubious data."),
         .pocket = POCKET_ITEMS,
@@ -9413,7 +9413,7 @@ const struct Item gItemsInfo[] =
             "Fires an icy cold\n"
             "beam that may\n"
         #if B_USE_FROSTBITE == TRUE
-            "give the foe frostbite."),
+            "inflict frostbite."),
         #else
             "freeze the foe."),
         #endif
@@ -9429,11 +9429,13 @@ const struct Item gItemsInfo[] =
         .name = _("TM14"),
         .price = 5500,
         .description = COMPOUND_STRING(
+        #if B_USE_FROSTBITE == TRUE
+            "A snow-and-wind\n"
+            "attack that may\n"
+            "inflict frostbite."),
+        #else
             "A brutal snow-and-\n"
             "wind attack that\n"
-        #if B_USE_FROSTBITE == TRUE
-            "may give the foe frostbite."),
-        #else
             "may freeze the foe."),
         #endif
         .importance = I_REUSABLE_TMS,

@@ -90,3 +90,17 @@ SINGLE_BATTLE_TEST("Belly Drum fails if the user's Attack is already at +6")
         }
     }
 }
+
+SINGLE_BATTLE_TEST("Belly Drum's HP cost doesn't trigger effects that trigger on damage taken")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_AIR_BALLOON); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_BELLY_DRUM); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_BELLY_DRUM, player);
+        MESSAGE("Wobbuffet cut its own HP and maximized ATTACK!");
+        NOT MESSAGE("Wobbuffet's Air Balloon popped!");
+    }
+}

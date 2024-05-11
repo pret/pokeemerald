@@ -819,7 +819,22 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         break;
     case AI_EFFECTIVENESS_x0_125:
     case AI_EFFECTIVENESS_x0_25:
-        RETURN_SCORE_MINUS(10);
+        switch (moveEffect)
+        {
+        case EFFECT_FIXED_DAMAGE_ARG:
+        case EFFECT_LEVEL_DAMAGE:
+        case EFFECT_PSYWAVE:
+        case EFFECT_OHKO:
+        case EFFECT_BIDE:
+        case EFFECT_SUPER_FANG:
+        case EFFECT_ENDEAVOR:
+        case EFFECT_COUNTER:
+        case EFFECT_MIRROR_COAT:
+        case EFFECT_METAL_BURST:
+            break;
+        default:
+            RETURN_SCORE_MINUS(10);
+        }
         break;
     }
 
