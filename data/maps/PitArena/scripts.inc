@@ -16,6 +16,7 @@ PitArena_OnFrameRewardDrop::
 	clearflag FLAG_REWARD_ITEM_3
 	addobject 6
 	addobject 7
+	addobject 12
 	callnative UpdateObjectEventsFromScript
 	releaseall
 	end
@@ -159,12 +160,15 @@ PitArena_EndGameStatue_Text3:
 PitArena_TrainerBattle::
 	trainerbattle_single TRAINER_RANDOM_BATTLE_0, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_TrainerBattleFinished
 	end
+
 PitArena_TrainerBattle1::
 	trainerbattle_single TRAINER_RANDOM_BATTLE_1, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_TrainerBattleFinished
 	end
+
 PitArena_TrainerBattle2::
 	trainerbattle_single TRAINER_RANDOM_BATTLE_2, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_TrainerBattleFinished
 	end
+
 PitArena_TrainerBattle3::
 	trainerbattle_single TRAINER_RANDOM_BATTLE_3, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_TrainerBattleFinished
 	end

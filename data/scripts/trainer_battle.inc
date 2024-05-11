@@ -33,6 +33,11 @@ EventScript_TryDoDoubleTrainerBattle::
 	special SetTrainerFacingDirection
 	goto EventScript_ShowTrainerIntroMsg
 
+EventScript_TurnTrainer::
+	lockall
+	faceplayer
+	end
+
 EventScript_NotEnoughMonsForDoubleBattle::
 	special ShowTrainerCantBattleSpeech
 	waitmessage
