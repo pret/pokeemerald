@@ -6773,8 +6773,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gFollowerPalette_GrowlitheHisuian
-            //, gShinyFollowerPalette_GrowlitheHisuian
+            gFollowerPalette_GrowlitheHisuian,
+            gShinyFollowerPalette_GrowlitheHisuian
         )
         .isHisuianForm = TRUE,
         .levelUpLearnset = sGrowlitheHisuianLevelUpLearnset,
@@ -6836,8 +6836,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gFollowerPalette_ArcanineHisuian
-            //, gShinyFollowerPalette_ArcanineHisuian
+            gFollowerPalette_ArcanineHisuian,
+            gShinyFollowerPalette_ArcanineHisuian
         )
         .isHisuianForm = TRUE,
         .levelUpLearnset = sArcanineHisuianLevelUpLearnset,
@@ -11140,8 +11140,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gFollowerPalette_VoltorbHisuian
-            //, gShinyFollowerPalette_VoltorbHisuian
+            gFollowerPalette_VoltorbHisuian,
+            gShinyFollowerPalette_VoltorbHisuian
         )
         .isHisuianForm = TRUE,
         .levelUpLearnset = sVoltorbHisuianLevelUpLearnset,
@@ -11203,8 +11203,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gFollowerPalette_ElectrodeHisuian
-            //, gShinyFollowerPalette_ElectrodeHisuian
+            gFollowerPalette_ElectrodeHisuian,
+            gShinyFollowerPalette_ElectrodeHisuian
         )
         .isHisuianForm = TRUE,
         .levelUpLearnset = sElectrodeHisuianLevelUpLearnset,
@@ -13842,8 +13842,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gFollowerPalette_Kleavor
-            //, gShinyFollowerPalette_Kleavor
+            gFollowerPalette_Kleavor,
+            gShinyFollowerPalette_Kleavor
         )
         .levelUpLearnset = sKleavorLevelUpLearnset,
         .teachableLearnset = sKleavorTeachableLearnset,

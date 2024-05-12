@@ -1645,7 +1645,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_GrowlitheHisuian[] = INCBIN_COMP("graphics/pokemon/growlithe/hisuian/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_GrowlitheHisuian[] = INCBIN_U32("graphics/pokemon/growlithe/hisuian/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_GrowlitheHisuian[] = INCBIN_U32("graphics/pokemon/growlithe/hisuian/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_GrowlitheHisuian[] = INCBIN_U32("graphics/pokemon/growlithe/hisuian/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
@@ -1658,7 +1658,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_ArcanineHisuian[] = INCBIN_COMP("graphics/pokemon/arcanine/hisuian/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_ArcanineHisuian[] = INCBIN_U32("graphics/pokemon/arcanine/hisuian/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_ArcanineHisuian[] = INCBIN_U32("graphics/pokemon/arcanine/hisuian/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_ArcanineHisuian[] = INCBIN_U32("graphics/pokemon/arcanine/hisuian/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_HISUIAN_FORMS
@@ -2752,7 +2752,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_VoltorbHisuian[] = INCBIN_COMP("graphics/pokemon/voltorb/hisuian/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_VoltorbHisuian[] = INCBIN_U32("graphics/pokemon/voltorb/hisuian/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_VoltorbHisuian[] = INCBIN_U32("graphics/pokemon/voltorb/hisuian/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_VoltorbHisuian[] = INCBIN_U32("graphics/pokemon/voltorb/hisuian/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
@@ -2765,7 +2765,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_ElectrodeHisuian[] = INCBIN_COMP("graphics/pokemon/electrode/hisuian/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_ElectrodeHisuian[] = INCBIN_U32("graphics/pokemon/electrode/hisuian/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_ElectrodeHisuian[] = INCBIN_U32("graphics/pokemon/electrode/hisuian/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_ElectrodeHisuian[] = INCBIN_U32("graphics/pokemon/electrode/hisuian/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_HISUIAN_FORMS
@@ -3470,7 +3470,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_Kleavor[] = INCBIN_COMP("graphics/pokemon/kleavor/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_Kleavor[] = INCBIN_U32("graphics/pokemon/kleavor/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_Kleavor[] = INCBIN_U32("graphics/pokemon/kleavor/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_Kleavor[] = INCBIN_U32("graphics/pokemon/kleavor/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_GEN_8_CROSS_EVOS
@@ -4509,7 +4509,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_TyphlosionHisuian[] = INCBIN_COMP("graphics/pokemon/typhlosion/hisuian/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_TyphlosionHisuian[] = INCBIN_U32("graphics/pokemon/typhlosion/hisuian/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_TyphlosionHisuian[] = INCBIN_U32("graphics/pokemon/typhlosion/hisuian/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_TyphlosionHisuian[] = INCBIN_U32("graphics/pokemon/typhlosion/hisuian/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_HISUIAN_FORMS
@@ -5703,7 +5703,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_QwilfishHisuian[] = INCBIN_COMP("graphics/pokemon/qwilfish/hisuian/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_QwilfishHisuian[] = INCBIN_U32("graphics/pokemon/qwilfish/hisuian/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_QwilfishHisuian[] = INCBIN_U32("graphics/pokemon/qwilfish/hisuian/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_QwilfishHisuian[] = INCBIN_U32("graphics/pokemon/qwilfish/hisuian/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
@@ -5719,7 +5719,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_Overqwil[] = INCBIN_COMP("graphics/pokemon/overqwil/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_Overqwil[] = INCBIN_U32("graphics/pokemon/overqwil/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_Overqwil[] = INCBIN_U32("graphics/pokemon/overqwil/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_Overqwil[] = INCBIN_U32("graphics/pokemon/overqwil/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_HISUIAN_FORMS
@@ -5830,7 +5830,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_SneaselHisuian[] = INCBIN_COMP("graphics/pokemon/sneasel/hisuian/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_SneaselHisuian[] = INCBIN_U32("graphics/pokemon/sneasel/hisuian/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_SneaselHisuian[] = INCBIN_U32("graphics/pokemon/sneasel/hisuian/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_SneaselHisuian[] = INCBIN_U32("graphics/pokemon/sneasel/hisuian/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
@@ -5849,7 +5849,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_Sneasler[] = INCBIN_COMP("graphics/pokemon/sneasler/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_Sneasler[] = INCBIN_U32("graphics/pokemon/sneasler/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_Sneasler[] = INCBIN_U32("graphics/pokemon/sneasler/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_Sneasler[] = INCBIN_U32("graphics/pokemon/sneasler/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_HISUIAN_FORMS
@@ -5904,7 +5904,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_Ursaluna[] = INCBIN_COMP("graphics/pokemon/ursaluna/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_Ursaluna[] = INCBIN_U32("graphics/pokemon/ursaluna/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_Ursaluna[] = INCBIN_U32("graphics/pokemon/ursaluna/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_Ursaluna[] = INCBIN_U32("graphics/pokemon/ursaluna/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
@@ -6291,7 +6291,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_Wyrdeer[] = INCBIN_COMP("graphics/pokemon/wyrdeer/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_Wyrdeer[] = INCBIN_U32("graphics/pokemon/wyrdeer/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_Wyrdeer[] = INCBIN_U32("graphics/pokemon/wyrdeer/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_Wyrdeer[] = INCBIN_U32("graphics/pokemon/wyrdeer/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_GEN_8_CROSS_EVOS
@@ -11356,7 +11356,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_SamurottHisuian[] = INCBIN_COMP("graphics/pokemon/samurott/hisuian/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_SamurottHisuian[] = INCBIN_U32("graphics/pokemon/samurott/hisuian/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_SamurottHisuian[] = INCBIN_U32("graphics/pokemon/samurott/hisuian/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_SamurottHisuian[] = INCBIN_U32("graphics/pokemon/samurott/hisuian/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_HISUIAN_FORMS
@@ -12177,7 +12177,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_LilligantHisuian[] = INCBIN_COMP("graphics/pokemon/lilligant/hisuian/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_LilligantHisuian[] = INCBIN_U32("graphics/pokemon/lilligant/hisuian/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_LilligantHisuian[] = INCBIN_U32("graphics/pokemon/lilligant/hisuian/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_LilligantHisuian[] = INCBIN_U32("graphics/pokemon/lilligant/hisuian/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_HISUIAN_FORMS
@@ -12213,10 +12213,10 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_BasculinRedStriped[] = INCBIN_U32("graphics/pokemon/basculin/follow_normal.gbapal.lz");
     const u32 gFollowerPalette_BasculinBlueStriped[] = INCBIN_U32("graphics/pokemon/basculin/blue_striped/follow_normal.gbapal.lz");
-    // const u32 gFollowerPalette_BasculinWhiteStriped[] = INCBIN_U32("graphics/pokemon/basculin/white_striped/follow_normal.gbapal.lz");
+    const u32 gFollowerPalette_BasculinWhiteStriped[] = INCBIN_U32("graphics/pokemon/basculin/white_striped/follow_normal.gbapal.lz");
     const u32 gShinyFollowerPalette_BasculinRedStriped[] = INCBIN_U32("graphics/pokemon/basculin/follow_shiny.gbapal.lz");
     const u32 gShinyFollowerPalette_BasculinBlueStriped[] = INCBIN_U32("graphics/pokemon/basculin/blue_striped/follow_shiny.gbapal.lz");
-    // const u32 gShinyFollowerPalette_BasculinWhiteStriped[] = INCBIN_U32("graphics/pokemon/basculin/white_striped/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_BasculinWhiteStriped[] = INCBIN_U32("graphics/pokemon/basculin/white_striped/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
@@ -12241,8 +12241,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_BasculegionMale[] = INCBIN_U32("graphics/pokemon/basculegion/follow_normal.gbapal.lz");
     const u32 gFollowerPalette_BasculegionFemale[] = INCBIN_U32("graphics/pokemon/basculegion/female/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_BasculegionMale[] = INCBIN_U32("graphics/pokemon/basculegion/follow_shiny.gbapal.lz");
-    // const u32 gShinyFollowerPalette_BasculegionFemale[] = INCBIN_U32("graphics/pokemon/basculegion/female/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_BasculegionMale[] = INCBIN_U32("graphics/pokemon/basculegion/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_BasculegionFemale[] = INCBIN_U32("graphics/pokemon/basculegion/female/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_HISUIAN_FORMS
@@ -12715,7 +12715,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_ZoruaHisuian[] = INCBIN_COMP("graphics/pokemon/zorua/hisuian/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_ZoruaHisuian[] = INCBIN_U32("graphics/pokemon/zorua/hisuian/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_ZoruaHisuian[] = INCBIN_U32("graphics/pokemon/zorua/hisuian/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_ZoruaHisuian[] = INCBIN_U32("graphics/pokemon/zorua/hisuian/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 
@@ -12728,7 +12728,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_ZoroarkHisuian[] = INCBIN_COMP("graphics/pokemon/zoroark/hisuian/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_ZoroarkHisuian[] = INCBIN_U32("graphics/pokemon/zoroark/hisuian/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_ZoroarkHisuian[] = INCBIN_U32("graphics/pokemon/zoroark/hisuian/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_ZoroarkHisuian[] = INCBIN_U32("graphics/pokemon/zoroark/hisuian/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_HISUIAN_FORMS
@@ -13821,7 +13821,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_BraviaryHisuian[] = INCBIN_COMP("graphics/pokemon/braviary/hisuian/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_BraviaryHisuian[] = INCBIN_U32("graphics/pokemon/braviary/hisuian/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_BraviaryHisuian[] = INCBIN_U32("graphics/pokemon/braviary/hisuian/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_BraviaryHisuian[] = INCBIN_U32("graphics/pokemon/braviary/hisuian/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_HISUIAN_FORMS
@@ -15677,7 +15677,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_SliggooHisuian[] = INCBIN_COMP("graphics/pokemon/sliggoo/hisuian/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_SliggooHisuian[] = INCBIN_U32("graphics/pokemon/sliggoo/hisuian/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_SliggooHisuian[] = INCBIN_U32("graphics/pokemon/sliggoo/hisuian/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_SliggooHisuian[] = INCBIN_U32("graphics/pokemon/sliggoo/hisuian/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_HISUIAN_FORMS
@@ -15708,7 +15708,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_GoodraHisuian[] = INCBIN_COMP("graphics/pokemon/goodra/hisuian/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_GoodraHisuian[] = INCBIN_U32("graphics/pokemon/goodra/hisuian/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_GoodraHisuian[] = INCBIN_U32("graphics/pokemon/goodra/hisuian/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_GoodraHisuian[] = INCBIN_U32("graphics/pokemon/goodra/hisuian/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_HISUIAN_FORMS
@@ -15873,7 +15873,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_AvaluggHisuian[] = INCBIN_COMP("graphics/pokemon/avalugg/hisuian/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_AvaluggHisuian[] = INCBIN_U32("graphics/pokemon/avalugg/hisuian/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_AvaluggHisuian[] = INCBIN_U32("graphics/pokemon/avalugg/hisuian/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_AvaluggHisuian[] = INCBIN_U32("graphics/pokemon/avalugg/hisuian/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_HISUIAN_FORMS
@@ -16148,7 +16148,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_DecidueyeHisuian[] = INCBIN_COMP("graphics/pokemon/decidueye/hisuian/follower.4bpp");
 #if OW_FOLLOWERS_SHARE_PALETTE == FALSE
     const u32 gFollowerPalette_DecidueyeHisuian[] = INCBIN_U32("graphics/pokemon/decidueye/hisuian/follow_normal.gbapal.lz");
-    // const u32 gShinyFollowerPalette_DecidueyeHisuian[] = INCBIN_U32("graphics/pokemon/decidueye/hisuian/follow_shiny.gbapal.lz");
+    const u32 gShinyFollowerPalette_DecidueyeHisuian[] = INCBIN_U32("graphics/pokemon/decidueye/hisuian/follow_shiny.gbapal.lz");
 #endif //OW_FOLLOWERS_SHARE_PALETTE
 #endif //OW_FOLLOWERS_ENABLED
 #endif //P_HISUIAN_FORMS

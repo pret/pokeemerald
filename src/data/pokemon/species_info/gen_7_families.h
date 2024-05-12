@@ -243,8 +243,8 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gFollowerPalette_DecidueyeHisuian
-            //, gShinyFollowerPalette_DecidueyeHisuian
+            gFollowerPalette_DecidueyeHisuian,
+            gShinyFollowerPalette_DecidueyeHisuian
         )
         .isHisuianForm = TRUE,
         .levelUpLearnset = sDecidueyeHisuianLevelUpLearnset,

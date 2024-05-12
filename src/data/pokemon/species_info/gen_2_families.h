@@ -448,8 +448,8 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gFollowerPalette_TyphlosionHisuian
-            //, gShinyFollowerPalette_TyphlosionHisuian
+            gFollowerPalette_TyphlosionHisuian,
+            gShinyFollowerPalette_TyphlosionHisuian
         )
         .isHisuianForm = TRUE,
         .levelUpLearnset = sTyphlosionHisuianLevelUpLearnset,
@@ -4328,8 +4328,8 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gFollowerPalette_QwilfishHisuian
-            //, gShinyFollowerPalette_QwilfishHisuian
+            gFollowerPalette_QwilfishHisuian,
+            gShinyFollowerPalette_QwilfishHisuian
         )
         .isHisuianForm = TRUE,
         .levelUpLearnset = sQwilfishHisuianLevelUpLearnset,
@@ -4391,8 +4391,8 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gFollowerPalette_Overqwil
-            //, gShinyFollowerPalette_Overqwil
+            gFollowerPalette_Overqwil,
+            gShinyFollowerPalette_Overqwil
         )
         .levelUpLearnset = sOverqwilLevelUpLearnset,
         .teachableLearnset = sOverqwilTeachableLearnset,
@@ -4788,8 +4788,8 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gFollowerPalette_SneaselHisuian
-            //, gShinyFollowerPalette_SneaselHisuian
+            gFollowerPalette_SneaselHisuian,
+            gShinyFollowerPalette_SneaselHisuian
         )
         .isHisuianForm = TRUE,
         .levelUpLearnset = sSneaselHisuianLevelUpLearnset,
@@ -4852,8 +4852,8 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gFollowerPalette_Sneasler
-            //, gShinyFollowerPalette_Sneasler
+            gFollowerPalette_Sneasler,
+            gShinyFollowerPalette_Sneasler
         )
         .levelUpLearnset = sSneaslerLevelUpLearnset,
         .teachableLearnset = sSneaslerTeachableLearnset,
@@ -5043,8 +5043,8 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gFollowerPalette_Ursaluna
-            //, gShinyFollowerPalette_Ursaluna
+            gFollowerPalette_Ursaluna,
+            gShinyFollowerPalette_Ursaluna
         )
         .levelUpLearnset = sUrsalunaLevelUpLearnset,
         .teachableLearnset = sUrsalunaTeachableLearnset,
@@ -6451,8 +6451,8 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gFollowerPalette_Wyrdeer
-            //, gShinyFollowerPalette_Wyrdeer
+            gFollowerPalette_Wyrdeer,
+            gShinyFollowerPalette_Wyrdeer
         )
         .levelUpLearnset = sWyrdeerLevelUpLearnset,
         .teachableLearnset = sWyrdeerTeachableLearnset,

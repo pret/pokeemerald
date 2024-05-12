@@ -4150,8 +4150,8 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gFollowerPalette_SliggooHisuian
-            //, gShinyFollowerPalette_SliggooHisuian
+            gFollowerPalette_SliggooHisuian,
+            gShinyFollowerPalette_SliggooHisuian
         )
         .isHisuianForm = TRUE,
         .levelUpLearnset = sSliggooHisuianLevelUpLearnset,
@@ -4214,8 +4214,8 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gFollowerPalette_GoodraHisuian
-            //, gShinyFollowerPalette_GoodraHisuian
+            gFollowerPalette_GoodraHisuian,
+            gShinyFollowerPalette_GoodraHisuian
         )
         .isHisuianForm = TRUE,
         .levelUpLearnset = sGoodraHisuianLevelUpLearnset,
@@ -5048,8 +5048,8 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            gFollowerPalette_AvaluggHisuian
-            //, gShinyFollowerPalette_AvaluggHisuian
+            gFollowerPalette_AvaluggHisuian,
+            gShinyFollowerPalette_AvaluggHisuian
         )
         .isHisuianForm = TRUE,
         .levelUpLearnset = sAvaluggHisuianLevelUpLearnset,
