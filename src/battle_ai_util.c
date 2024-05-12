@@ -778,7 +778,6 @@ static bool32 AI_IsMoveEffectInMinus(u32 battlerAtk, u32 battlerDef, u32 move, s
                 case MOVE_EFFECT_SP_DEF_MINUS_2:
                 case MOVE_EFFECT_EVS_MINUS_2:
                 case MOVE_EFFECT_ACC_MINUS_2:
-                case MOVE_EFFECT_SP_ATK_TWO_DOWN:
                 case MOVE_EFFECT_V_CREATE:
                 case MOVE_EFFECT_ATK_DEF_DOWN:
                 case MOVE_EFFECT_DEF_SPDEF_DOWN:

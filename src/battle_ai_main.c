@@ -4496,9 +4496,6 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
                     IncreaseStatUpScoreContrary(battlerAtk, battlerDef, STAT_CHANGE_ATK, &score);
                     IncreaseStatUpScoreContrary(battlerAtk, battlerDef, STAT_CHANGE_DEF, &score);
                     break;
-                case MOVE_EFFECT_SP_ATK_TWO_DOWN:
-                    IncreaseStatUpScoreContrary(battlerAtk, battlerDef, STAT_CHANGE_SPATK_2, &score);
-                    break;
                 case MOVE_EFFECT_V_CREATE:
                     IncreaseStatUpScoreContrary(battlerAtk, battlerDef, STAT_CHANGE_DEF, &score);
                     IncreaseStatUpScoreContrary(battlerAtk, battlerDef, STAT_CHANGE_SPEED, &score);
