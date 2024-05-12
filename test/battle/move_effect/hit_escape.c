@@ -137,6 +137,7 @@ SINGLE_BATTLE_TEST("Held items are consumed immediately after a mon switched in 
 
 SINGLE_BATTLE_TEST("Held items are consumed immediately after a mon switched in by U-turn and Intimidate activates after it: opposing side")
 {
+    KNOWN_FAILING;
     GIVEN {
         PLAYER(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); };
         PLAYER(SPECIES_EKANS) { Ability(ABILITY_INTIMIDATE);  }

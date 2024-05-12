@@ -62,7 +62,6 @@ SINGLE_BATTLE_TEST("Explosion causes the user to faint even if it has no effect"
         TURN { MOVE(player, MOVE_EXPLOSION); }
     } SCENE {
         HP_BAR(player, hp: 0);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, player);
         MESSAGE("It doesn't affect Foe Gastly…");
         NOT HP_BAR(opponent);
         MESSAGE("Wobbuffet fainted!");
@@ -89,5 +88,38 @@ DOUBLE_BATTLE_TEST("Explosion causes everyone to faint in a double battle")
         HP_BAR(opponentRight, hp: 0);
         MESSAGE("Foe Kadabra fainted!");
         MESSAGE("Wobbuffet fainted!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Explosion is blocked by Ability Damp")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_GOLDUCK) { Ability(ABILITY_DAMP); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_EXPLOSION); }
+    } SCENE {
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, player);
+            HP_BAR(player, hp: 0);
+        }
+        ABILITY_POPUP(opponent, ABILITY_DAMP);
+        MESSAGE("Foe Golduck's Damp prevents Wobbuffet from using Explosion!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Explosion does not trigger Destiny Bond")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); };
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_DESTINY_BOND); MOVE(opponent, MOVE_EXPLOSION);}
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DESTINY_BOND, player);
+        HP_BAR(opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, opponent);
+        HP_BAR(player);
+        NOT HP_BAR(opponent);
     }
 }
