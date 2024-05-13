@@ -1273,7 +1273,7 @@ static void Cmd_attackcanceler(void)
         gCurrentActionFuncId = B_ACTION_FINISHED;
         return;
     }
-    if (!IsBattlerAlive(gBattlerAttacker) && !(gHitMarker & HITMARKER_NO_ATTACKSTRING))
+    if (!IsBattlerAlive(gBattlerAttacker) && gMovesInfo[gCurrentMove].effect != EFFECT_EXPLOSION && !(gHitMarker & HITMARKER_NO_ATTACKSTRING))
     {
         gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
         gBattlescriptCurrInstr = BattleScript_MoveEnd;
@@ -5410,6 +5410,7 @@ static void Cmd_moveend(void)
     u16 *choicedMoveAtk = NULL;
     u32 endMode, endState;
     u32 originallyUsedMove;
+    u8 currBattler, liveBattlerCount;
 
     if (gChosenMove == MOVE_UNAVAILABLE)
         originallyUsedMove = MOVE_NONE;
@@ -5562,18 +5563,38 @@ static void Cmd_moveend(void)
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_RECOIL:
-            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-                && !(gHitMarker & HITMARKER_UNABLE_TO_USE_MOVE)
-                && IsBattlerAlive(gBattlerAttacker)
-                && gBattleScripting.savedDmg != 0) // Some checks may be redundant alongside this one
+            if (gHitMarker & HITMARKER_UNABLE_TO_USE_MOVE)
             {
-                if (gMovesInfo[gCurrentMove].recoil > 0)
-                {
-                    gBattleMoveDamage = max(1, gBattleScripting.savedDmg * max(1, gMovesInfo[gCurrentMove].recoil) / 100);
-                    BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_MoveEffectRecoil;
-                    effect = TRUE;
-                }
+                gBattleScripting.moveendState++;
+                break;
+            }
+            else if (gMovesInfo[gCurrentMove].recoil > 0
+                  && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+                  && IsBattlerAlive(gBattlerAttacker)
+                  && gBattleScripting.savedDmg != 0) // Some checks may be redundant alongside this one
+            {
+                gBattleMoveDamage = max(1, gBattleScripting.savedDmg * max(1, gMovesInfo[gCurrentMove].recoil) / 100);
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_MoveEffectRecoil;
+                effect = TRUE;
+            }
+            else if (gMovesInfo[gCurrentMove].effect == EFFECT_EXPLOSION && !IsAbilityOnField(ABILITY_DAMP))
+            {
+                gBattleMoveDamage = 0;
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_FaintAttackerForExplosion;
+                effect = TRUE;
+            }
+            else if ((gMovesInfo[gCurrentMove].effect == EFFECT_MAX_HP_50_RECOIL
+                   || gMovesInfo[gCurrentMove].effect == EFFECT_MIND_BLOWN)
+                  && IsBattlerAlive(gBattlerAttacker)
+                  && !(gMoveResultFlags & MOVE_RESULT_FAILED)
+                  && GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
+            {
+                gBattleMoveDamage = (GetNonDynamaxMaxHP(gBattlerAttacker) + 1) / 2; // Half of Max HP Rounded UP
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_MaxHp50Recoil;
+                effect = TRUE;
             }
             gBattleScripting.moveendState++;
             break;
@@ -5654,7 +5675,10 @@ static void Cmd_moveend(void)
             switch (gBattleStruct->moveEffect2)
             {
             case MOVE_EFFECT_KNOCK_OFF:
-                effect = TryKnockOffBattleScript(gBattlerTarget);
+                if (!DoesSubstituteBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove))
+                {
+                    effect = TryKnockOffBattleScript(gBattlerTarget);
+                }
                 break;
             case MOVE_EFFECT_STOCKPILE_WORE_OFF:
                 if (gDisableStructs[gBattlerAttacker].stockpileCounter != 0)
@@ -5666,7 +5690,9 @@ static void Cmd_moveend(void)
                 }
                 break;
             case MOVE_EFFECT_SMACK_DOWN:
-                if (!IsBattlerGrounded(gBattlerTarget) && IsBattlerAlive(gBattlerTarget))
+                if (!IsBattlerGrounded(gBattlerTarget)
+                 && IsBattlerAlive(gBattlerTarget)
+                 && !DoesSubstituteBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove))
                 {
                     gStatuses3[gBattlerTarget] |= STATUS3_SMACKED_DOWN;
                     gStatuses3[gBattlerTarget] &= ~(STATUS3_MAGNET_RISE | STATUS3_TELEKINESIS | STATUS3_ON_AIR);
@@ -5676,7 +5702,9 @@ static void Cmd_moveend(void)
                 }
                 break;
             case MOVE_EFFECT_REMOVE_STATUS: // Smelling salts, Wake-Up Slap, Sparkling Aria
-                if ((gBattleMons[gBattlerTarget].status1 & gMovesInfo[gCurrentMove].argument) && IsBattlerAlive(gBattlerTarget))
+                if ((gBattleMons[gBattlerTarget].status1 & gMovesInfo[gCurrentMove].argument)
+                 && IsBattlerAlive(gBattlerTarget)
+                 && !DoesSubstituteBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove))
                 {
                     gBattleMons[gBattlerTarget].status1 &= ~(gMovesInfo[gCurrentMove].argument);
 
@@ -5693,8 +5721,28 @@ static void Cmd_moveend(void)
                         gBattlescriptCurrInstr = BattleScript_TargetWokeUp;
                         break;
                     case STATUS1_BURN:
-                        gBattlescriptCurrInstr = BattleScript_TargetBurnHeal;
-                        break;
+                        // Checks to see if Sparkling Aria should cure a Shield Dust pokemon
+                        if (gBattleMons[gBattlerTarget].ability == ABILITY_SHIELD_DUST || gBattleMons[gBattlerTarget].item == ITEM_COVERT_CLOAK)
+                        {
+                            liveBattlerCount = 0;
+                            for (currBattler = 0; currBattler < gBattlersCount; currBattler++)
+                            {
+                                if (gBattleMons[currBattler].hp != 0)
+                                {
+                                    liveBattlerCount++;
+                                }
+                            }
+                            if (liveBattlerCount > 2)
+                            {
+                                gBattlescriptCurrInstr = BattleScript_TargetBurnHeal;
+                            }
+                            break;
+                        }
+                        else
+                        {
+                            gBattlescriptCurrInstr = BattleScript_TargetBurnHeal;
+                            break;
+                        }
                     }
                 }
                 break; // MOVE_EFFECT_REMOVE_STATUS
@@ -5918,7 +5966,11 @@ static void Cmd_moveend(void)
                     gBattleScripting.moveendState = 0;
                     MoveValuesCleanUp();
                     gBattleScripting.moveEffect = gBattleScripting.savedMoveEffect;
-                    BattleScriptPush(GET_MOVE_BATTLESCRIPT(gCurrentMove));
+
+                    if (gMovesInfo[gCurrentMove].effect == EFFECT_EXPLOSION)
+                        BattleScriptPush(gBattleMoveEffects[EFFECT_HIT].battleScript); // Edge case for Explosion not changing targets
+                    else
+                        BattleScriptPush(GET_MOVE_BATTLESCRIPT(gCurrentMove));
                     gBattlescriptCurrInstr = BattleScript_FlushMessageBox;
                     return;
                 }
@@ -7215,22 +7267,10 @@ static void Cmd_switchineffects(void)
 
         gDisableStructs[battler].truantSwitchInHack = 0;
 
-        // Don't activate switch-in abilities if the opposing field is empty.
-        // This could happen when a mon uses explosion and causes everyone to faint.
-        if ((battlerAbility == ABILITY_INTIMIDATE || battlerAbility == ABILITY_SUPERSWEET_SYRUP || battlerAbility == ABILITY_DOWNLOAD)
-         && !IsBattlerAlive(BATTLE_OPPOSITE(battler))
-         && !IsBattlerAlive(BATTLE_PARTNER(BATTLE_OPPOSITE(battler))))
-        {
-            if (ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, battler, FALSE))
-                return;
-        }
-        else
-        {
-            if (DoSwitchInAbilities(battler) || ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, battler, FALSE))
-                return;
-            else if (AbilityBattleEffects(ABILITYEFFECT_OPPORTUNIST, battler, 0, 0, 0))
-                return;
-        }
+        if (DoSwitchInAbilities(battler) || ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, battler, FALSE))
+            return;
+        else if (AbilityBattleEffects(ABILITYEFFECT_OPPORTUNIST, battler, 0, 0, 0))
+            return;
 
         gDisableStructs[battler].stickyWebDone = FALSE;
         gDisableStructs[battler].spikesDone = FALSE;
@@ -10993,18 +11033,8 @@ static void Cmd_tryexplosion(void)
 {
     CMD_ARGS();
 
-    u32 dampBattler;
     if (gBattleControllerExecFlags)
         return;
-
-    if ((dampBattler = IsAbilityOnField(ABILITY_DAMP)))
-    {
-        // Failed, a battler has Damp
-        gLastUsedAbility = ABILITY_DAMP;
-        gBattlerTarget = --dampBattler;
-        gBattlescriptCurrInstr = BattleScript_DampStopsExplosion;
-        return;
-    }
 
     gBattleMoveDamage = gBattleMons[gBattlerAttacker].hp;
     BtlController_EmitHealthBarUpdate(gBattlerAttacker, BUFFER_A, INSTANT_HP_BAR_DROP);
@@ -11249,9 +11279,6 @@ static void Cmd_manipulatedamage(void)
         break;
     case DMG_BIG_ROOT:
         gBattleMoveDamage = GetDrainedBigRootHp(gBattlerAttacker, gBattleMoveDamage);
-        break;
-    case DMG_1_2_ATTACKER_HP:
-        gBattleMoveDamage = (GetNonDynamaxMaxHP(gBattlerAttacker) + 1) / 2; // Half of Max HP Rounded UP
         break;
     case DMG_RECOIL_FROM_IMMUNE:
         gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 2;

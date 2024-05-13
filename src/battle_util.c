@@ -3583,6 +3583,20 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
             }
             gBattleStruct->atkCancellerTracker++;
             break;
+        case CANCELLER_EXPLODING_DAMP:
+        {
+            u32 dampBattler = IsAbilityOnField(ABILITY_DAMP);
+            if (dampBattler && (gMovesInfo[gCurrentMove].effect == EFFECT_EXPLOSION
+                             || gMovesInfo[gCurrentMove].effect == EFFECT_MIND_BLOWN))
+            {
+                gBattleScripting.battler = dampBattler - 1;
+                gBattlescriptCurrInstr = BattleScript_DampStopsExplosion;
+                gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
+                effect = 1;
+            }
+            gBattleStruct->atkCancellerTracker++;
+            break;
+        }
         case CANCELLER_MULTIHIT_MOVES:
             if (gMovesInfo[gCurrentMove].effect == EFFECT_MULTI_HIT)
             {
@@ -8713,8 +8727,11 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
         break;
     case EFFECT_DOUBLE_POWER_ON_ARG_STATUS:
         // Comatose targets treated as if asleep
-        if ((gBattleMons[battlerDef].status1 | (STATUS1_SLEEP * (abilityDef == ABILITY_COMATOSE))) & gMovesInfo[move].argument)
+        if ((gBattleMons[battlerDef].status1 | (STATUS1_SLEEP * (abilityDef == ABILITY_COMATOSE))) & gMovesInfo[move].argument
+         && !((gMovesInfo[move].additionalEffects->moveEffect == MOVE_EFFECT_REMOVE_STATUS) && DoesSubstituteBlockMove(battlerAtk, battlerDef, move)))
+        {
             basePower *= 2;
+        }
         break;
     case EFFECT_VARY_POWER_BASED_ON_HP:
         basePower = gMovesInfo[move].argument * gBattleMons[battlerDef].hp / gBattleMons[battlerDef].maxHP;
