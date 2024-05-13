@@ -858,6 +858,11 @@ PitArena_Mart_TMs:
 	.2byte ITEM_TM93
 	.2byte ITEM_TM94
 	.2byte ITEM_TM95
+	.2byte ITEM_TM96
+	.2byte ITEM_TM97
+	.2byte ITEM_TM98
+	.2byte ITEM_TM99
+	.2byte ITEM_TM100
 	.2byte ITEM_HM01
 	.2byte ITEM_HM02
 	.2byte ITEM_HM03
