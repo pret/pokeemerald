@@ -96,7 +96,7 @@ SINGLE_BATTLE_TEST("Knock Off does not remove items through Substitute")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_KNOCK_OFF, player);
         NOT { ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ITEM_KNOCKOFF); }
     } THEN {
-        EXPECT(opponent->item == ITEM_NONE);
+        EXPECT(opponent->item == ITEM_LEFTOVERS);
     }
 }
 
