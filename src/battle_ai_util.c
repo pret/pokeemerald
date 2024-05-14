@@ -274,7 +274,7 @@ bool32 IsBattlerTrapped(u32 battler, bool32 checkSwitch)
         return FALSE;
     if (checkSwitch && holdEffect == HOLD_EFFECT_SHED_SHELL)
         return FALSE;
-    else if (!checkSwitch && GetBattlerAbility(battler) == ABILITY_RUN_AWAY)
+    else if (!checkSwitch && AI_DATA->abilities[battler] == ABILITY_RUN_AWAY)
         return FALSE;
     else if (!checkSwitch && holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN)
         return FALSE;
@@ -1107,10 +1107,26 @@ bool32 AI_IsAbilityOnSide(u32 battlerId, u32 ability)
         return FALSE;
 }
 
+u32 AI_GetBattlerAbility(u32 battler)
+{
+    if (gAbilitiesInfo[gBattleMons[battler].ability].cantBeSuppressed)
+        return gBattleMons[battler].ability;
+
+    if (gStatuses3[battler] & STATUS3_GASTRO_ACID)
+        return ABILITY_NONE;
+
+    if (IsNeutralizingGasOnField()
+     && gBattleMons[battler].ability != ABILITY_NEUTRALIZING_GAS
+     && GetBattlerHoldEffectIgnoreAbility(battler, TRUE) != HOLD_EFFECT_ABILITY_SHIELD)
+        return ABILITY_NONE;
+
+    return gBattleMons[battler].ability;
+}
+
 // does NOT include ability suppression checks
 s32 AI_DecideKnownAbilityForTurn(u32 battlerId)
 {
-    u32 knownAbility = GetBattlerAbility(battlerId);
+    u32 knownAbility = AI_GetBattlerAbility(battlerId);
 
     // We've had ability overwritten by e.g. Worry Seed. It is not part of AI_PARTY in case of switching
     if (gBattleStruct->overwrittenAbilities[battlerId])
