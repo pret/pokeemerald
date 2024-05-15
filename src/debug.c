@@ -3410,7 +3410,7 @@ static void DebugAction_Give_Pokemon_SelectNature(u8 taskId)
 
     if (JOY_NEW(A_BUTTON))
     {
-        u8 abilityId;
+        u16 abilityId;
         sDebugMonData->nature = gTasks[taskId].tInput;
         gTasks[taskId].tInput = 0;
         gTasks[taskId].tDigit = 0;

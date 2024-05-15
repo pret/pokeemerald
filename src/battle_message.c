@@ -3206,13 +3206,6 @@ static const u8 *BattleStringGetPlayerName(u8 *text, u8 battler)
         break;
     }
 
-    if (DECAP_ENABLED && !DECAP_NICKNAMES && toCpy != text && *toCpy != CHAR_FIXED_CASE)
-    {
-        *text = CHAR_FIXED_CASE;
-        StringCopyN(text+1, toCpy, PLAYER_NAME_LENGTH + 1);
-        toCpy = text;
-    }
-
     return toCpy;
 }
 
@@ -3269,7 +3262,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
         if (*src == PLACEHOLDER_BEGIN)
         {
             src++;
-            switch (*src & ~PLACEHOLDER_FIXED_MASK)
+            switch (*src)
             {
             case B_TXT_BUFF1:
                 if (gBattleTextBuff1[0] == B_BUFF_PLACEHOLDER_BEGIN)
@@ -3644,28 +3637,11 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
 
             if (toCpy != NULL)
             {
-                if (DECAP_ENABLED)
+                while (*toCpy != EOS)
                 {
-                    bool32 fixedCase = *src & PLACEHOLDER_FIXED_MASK;
-
-                    if (fixedCase)
-                        dst[dstID++] = CHAR_FIXED_CASE;
-
-                    while (*toCpy != EOS)
-                    {
-                        if (*toCpy == CHAR_FIXED_CASE)
-                            fixedCase = TRUE;
-                        else if (*toCpy == CHAR_UNFIX_CASE)
-                            fixedCase = FALSE;
-                        dst[dstID++] = *toCpy++;
-                    }
-                    if (fixedCase)
-                        dst[dstID++] = CHAR_UNFIX_CASE;
-                }
-                else
-                {
-                    while (*toCpy != EOS)
-                        dst[dstID++] = *toCpy++;
+                    dst[dstID] = *toCpy;
+                    dstID++;
+                    toCpy++;
                 }
             }
 

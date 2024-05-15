@@ -131,6 +131,114 @@ SINGLE_BATTLE_TEST("Parental Bond-converted moves only hit once on Lightning Rod
     }
 }
 
+SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they still hit twice 35% of the time")
+{
+    PASSES_RANDOMLY(35, 100, RNG_HITS);
+
+    GIVEN {
+        ASSUME(B_MULTI_HIT_CHANCE >= GEN_5);
+        ASSUME(gMovesInfo[MOVE_COMET_PUNCH].category != DAMAGE_CATEGORY_STATUS);
+        ASSUME(gMovesInfo[MOVE_COMET_PUNCH].effect == EFFECT_MULTI_HIT);
+        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_COMET_PUNCH, megaEvolve: TRUE); }
+    } SCENE {
+        MESSAGE("Kangaskhan's Kangaskhanite is reacting to 1's Mega Ring!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, player);
+        MESSAGE("Kangaskhan has Mega Evolved into Mega Kangaskhan!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_COMET_PUNCH, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_COMET_PUNCH, player);
+        MESSAGE("Hit 2 time(s)!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
+    }
+    THEN {
+        EXPECT_EQ(player->species, SPECIES_KANGASKHAN_MEGA);
+    }
+}
+
+SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they still hit thrice 35% of the time")
+{
+    PASSES_RANDOMLY(35, 100, RNG_HITS);
+
+    GIVEN {
+        ASSUME(B_MULTI_HIT_CHANCE >= GEN_5);
+        ASSUME(gMovesInfo[MOVE_COMET_PUNCH].category != DAMAGE_CATEGORY_STATUS);
+        ASSUME(gMovesInfo[MOVE_COMET_PUNCH].effect == EFFECT_MULTI_HIT);
+        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_COMET_PUNCH, megaEvolve: TRUE); }
+    } SCENE {
+        MESSAGE("Kangaskhan's Kangaskhanite is reacting to 1's Mega Ring!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, player);
+        MESSAGE("Kangaskhan has Mega Evolved into Mega Kangaskhan!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_COMET_PUNCH, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_COMET_PUNCH, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_COMET_PUNCH, player);
+        MESSAGE("Hit 3 time(s)!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
+    }
+    THEN {
+        EXPECT_EQ(player->species, SPECIES_KANGASKHAN_MEGA);
+    }
+}
+
+SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they still hit four times 15% of the time")
+{
+    PASSES_RANDOMLY(15, 100, RNG_HITS);
+
+    GIVEN {
+        ASSUME(B_MULTI_HIT_CHANCE >= GEN_5);
+        ASSUME(gMovesInfo[MOVE_COMET_PUNCH].category != DAMAGE_CATEGORY_STATUS);
+        ASSUME(gMovesInfo[MOVE_COMET_PUNCH].effect == EFFECT_MULTI_HIT);
+        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_COMET_PUNCH, megaEvolve: TRUE); }
+    } SCENE {
+        MESSAGE("Kangaskhan's Kangaskhanite is reacting to 1's Mega Ring!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, player);
+        MESSAGE("Kangaskhan has Mega Evolved into Mega Kangaskhan!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_COMET_PUNCH, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_COMET_PUNCH, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_COMET_PUNCH, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_COMET_PUNCH, player);
+        MESSAGE("Hit 4 time(s)!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
+    }
+    THEN {
+        EXPECT_EQ(player->species, SPECIES_KANGASKHAN_MEGA);
+    }
+}
+
+SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they still hit five times 15% of the time")
+{
+    PASSES_RANDOMLY(15, 100, RNG_HITS);
+
+    GIVEN {
+        ASSUME(B_MULTI_HIT_CHANCE >= GEN_5);
+        ASSUME(gMovesInfo[MOVE_COMET_PUNCH].category != DAMAGE_CATEGORY_STATUS);
+        ASSUME(gMovesInfo[MOVE_COMET_PUNCH].effect == EFFECT_MULTI_HIT);
+        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_COMET_PUNCH, megaEvolve: TRUE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_COMET_PUNCH, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_COMET_PUNCH, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_COMET_PUNCH, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_COMET_PUNCH, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_COMET_PUNCH, player);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_COMET_PUNCH, player);
+        MESSAGE("Hit 5 time(s)!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
+    }
+    THEN {
+        EXPECT_EQ(player->species, SPECIES_KANGASKHAN_MEGA);
+    }
+}
+
 TO_DO_BATTLE_TEST("Parental Bond tests");
 
 // Temporary TODO: Convert Bulbapedia description into tests.

@@ -55,7 +55,6 @@ SECTIONS {
         data/*.o(COMMON);
         test/*.o(COMMON);
         *libc.a:sbrkr.o(COMMON);
-        gStackBase = .;
 
 	/* .persistent starts at 0x3007F00 */
 	/* WARNING: This is the end of the IRQ stack, if there's too

@@ -61,13 +61,6 @@ UP_ARROW    = 79
 DOWN_ARROW  = 7A
 LEFT_ARROW  = 7B
 RIGHT_ARROW = 7C
-@ Case-fixing/unfixing chars
-@ These are 1-2 pixel spaces in vanilla.
-@ 7D collides with 'ヲ' in JP,
-@ but that kana is practically unused in JP text.
-FIXED_CASE  = 7D
-UNFIX_CASE  = 7E
-
 SUPER_E     = 84
 '<'         = 85
 '>'         = 86
@@ -354,10 +347,6 @@ ARCHIE         = FD 0A
 MAXIE          = FD 0B
 KYOGRE         = FD 0C
 GROUDON        = FD 0D
-@ Like STR_VAR_X, but prepends CHAR_FIXED_CASE
-STR_VAR_1_FIXED  = FD 82
-STR_VAR_2_FIXED  = FD 83
-STR_VAR_3_FIXED  = FD 84
 
 @ battle string placeholders
 
