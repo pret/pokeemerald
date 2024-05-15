@@ -143,10 +143,11 @@ void ClearBattlerItemEffectHistory(u32 battlerId)
 
 void SaveBattlerData(u32 battlerId)
 {
-    if (!BattlerHasAi(battlerId))
+    if (!BattlerHasAi(battlerId) && !AI_THINKING_STRUCT->saved[battlerId].saved)
     {
         u32 i;
 
+        AI_THINKING_STRUCT->saved[battlerId].saved = TRUE;
         AI_THINKING_STRUCT->saved[battlerId].ability = gBattleMons[battlerId].ability;
         AI_THINKING_STRUCT->saved[battlerId].heldItem = gBattleMons[battlerId].item;
         AI_THINKING_STRUCT->saved[battlerId].species = gBattleMons[battlerId].species;
@@ -196,7 +197,7 @@ static bool32 ShouldFailForIllusion(u32 illusionSpecies, u32 battlerId)
 
 void SetBattlerData(u32 battlerId)
 {
-    if (!BattlerHasAi(battlerId))
+    if (!BattlerHasAi(battlerId) && AI_THINKING_STRUCT->saved[battlerId].saved)
     {
         u32 i, species, illusionSpecies, side;
         side = GetBattlerSide(battlerId);
@@ -240,10 +241,11 @@ void SetBattlerData(u32 battlerId)
 
 void RestoreBattlerData(u32 battlerId)
 {
-    if (!BattlerHasAi(battlerId))
+    if (!BattlerHasAi(battlerId) && AI_THINKING_STRUCT->saved[battlerId].saved)
     {
         u32 i;
 
+        AI_THINKING_STRUCT->saved[battlerId].saved = FALSE;
         gBattleMons[battlerId].ability = AI_THINKING_STRUCT->saved[battlerId].ability;
         gBattleMons[battlerId].item = AI_THINKING_STRUCT->saved[battlerId].heldItem;
         gBattleMons[battlerId].species = AI_THINKING_STRUCT->saved[battlerId].species;
@@ -354,9 +356,15 @@ bool32 MovesWithCategoryUnusable(u32 attacker, u32 target, u32 category)
 // To save computation time this function has 2 variants. One saves, sets and restores battlers, while the other doesn't.
 s32 AI_CalcDamageSaveBattlers(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectiveness, bool32 considerZPower)
 {
+    s32 dmg = 0;
     SaveBattlerData(battlerAtk);
     SaveBattlerData(battlerDef);
-    return AI_CalcDamage(move, battlerAtk, battlerDef, typeEffectiveness, considerZPower, AI_GetWeather(AI_DATA));
+    SetBattlerData(battlerAtk);
+    SetBattlerData(battlerDef);
+    dmg = AI_CalcDamage(move, battlerAtk, battlerDef, typeEffectiveness, considerZPower, AI_GetWeather(AI_DATA));
+    RestoreBattlerData(battlerAtk);
+    RestoreBattlerData(battlerDef);
+    return dmg;
 }
 
 static inline s32 LowestRollDmg(s32 dmg)
@@ -456,9 +464,6 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
     bool32 toggledDynamax = FALSE;
     bool32 toggledTera = FALSE;
     struct AiLogicData *aiData = AI_DATA;
-
-    SetBattlerData(battlerAtk);
-    SetBattlerData(battlerDef);
 
     // Temporarily enable Z-Moves for damage calcs
     if (considerZPower && IsViableZMove(battlerAtk, move))
@@ -591,9 +596,6 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
     {
         dmg = 0;
     }
-
-    RestoreBattlerData(battlerAtk);
-    RestoreBattlerData(battlerDef);
 
     // convert multiper to AI_EFFECTIVENESS_xX
     *typeEffectiveness = AI_GetEffectiveness(effectivenessMultiplier);
@@ -3282,11 +3284,20 @@ s32 AI_CalcPartyMonDamage(u32 move, u32 battlerAtk, u32 battlerDef, struct Battl
     s32 dmg;
     u8 effectiveness;
     struct BattlePokemon *savedBattleMons = AllocSaveBattleMons();
-    if(isPartyMonAttacker)
+    
+    if (isPartyMonAttacker)
+    {
         gBattleMons[battlerAtk] = switchinCandidate;
+        SetBattlerData(battlerDef); // set known opposing battler data
+    }
     else
+    {
         gBattleMons[battlerDef] = switchinCandidate;
+        SetBattlerData(battlerAtk); // set known opposing battler data
+    }
+    
     dmg = AI_CalcDamage(move, battlerAtk, battlerDef, &effectiveness, FALSE, AI_GetWeather(AI_DATA));
+    // restores original gBattleMon struct
     FreeRestoreBattleMons(savedBattleMons);
     return dmg;
 }
