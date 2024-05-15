@@ -49,3 +49,5 @@ SINGLE_BATTLE_TEST("Aura Wheel changes type depending on Morpeko's form")
         MESSAGE("It's super effective!");
     }
 }
+
+TO_DO_BATTLE_TEST("Aura Wheel can be used by Pokémon transformed into Morpeko");
