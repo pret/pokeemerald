@@ -1326,12 +1326,11 @@ static u32 GetSwitchinHazardsDamage(u32 battler, struct BattlePokemon *battleMon
 // Gets damage / healing from weather
 static s32 GetSwitchinWeatherImpact(void)
 {
-    s32 weatherDamage = 0, maxHP = AI_DATA->switchinCandidate.battleMon.maxHP, ability = AI_DATA->switchinCandidate.battleMon.ability;
+    s32 weatherImpact = 0, maxHP = AI_DATA->switchinCandidate.battleMon.maxHP, ability = AI_DATA->switchinCandidate.battleMon.ability;
     u32 holdEffect = gItemsInfo[AI_DATA->switchinCandidate.battleMon.item].holdEffect;
 
     if (WEATHER_HAS_EFFECT)
     {
-        s32 weatherImpact = 0;
         // Damage
         if (holdEffect != HOLD_EFFECT_SAFETY_GOGGLES && ability != ABILITY_MAGIC_GUARD && ability != ABILITY_OVERCOAT)
         {
@@ -1362,34 +1361,30 @@ static s32 GetSwitchinWeatherImpact(void)
                 weatherImpact = 1;
         }
 
-        weatherDamage += weatherImpact;
-
         // Healing
         if (gBattleWeather & B_WEATHER_RAIN && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA)
         {
             if (ability == ABILITY_DRY_SKIN)
             {
-                weatherImpact = maxHP / 8;
+                weatherImpact = -(maxHP / 8);
                 if (weatherImpact == 0)
-                    weatherImpact = 1;
+                    weatherImpact = -1;
             }
             else if (ability == ABILITY_RAIN_DISH)
             {
-                weatherImpact = maxHP / 16;
+                weatherImpact = -(maxHP / 16);
                 if (weatherImpact == 0)
-                    weatherImpact = 1;
+                    weatherImpact = -1;
             }
         }
         if (((gBattleWeather & B_WEATHER_HAIL) || (gBattleWeather & B_WEATHER_SNOW)) && ability == ABILITY_ICE_BODY)
         {
-            weatherImpact = maxHP / 16;
+            weatherImpact = -(maxHP / 16);
             if (weatherImpact == 0)
-                weatherImpact = 1;
+                weatherImpact = -1;
         }
-
-        weatherDamage -= weatherImpact;
     }
-    return weatherDamage;
+    return weatherImpact;
 }
 
 // Gets one turn of recurring healing
@@ -1499,6 +1494,7 @@ static u32 GetSwitchinStatusDamage(u32 battler)
         {
             if ((status & STATUS1_TOXIC_COUNTER) != STATUS1_TOXIC_TURN(15)) // not 16 turns
                 AI_DATA->switchinCandidate.battleMon.status1 += STATUS1_TOXIC_TURN(1);
+            statusDamage = maxHP / 16;
             statusDamage *= AI_DATA->switchinCandidate.battleMon.status1 & STATUS1_TOXIC_COUNTER >> 8;
             if (statusDamage == 0)
                 statusDamage = 1;
@@ -1566,7 +1562,7 @@ static u32 GetSwitchinHitsToKO(s32 damageTaken, u32 battler)
 
         // If mon is still alive, apply weather impact first, as it might KO the mon before it can heal with its item (order is weather -> item -> status)
         if (currentHP != 0)
-            currentHP = currentHP + weatherImpact;
+            currentHP = currentHP - weatherImpact;
 
         // Check if we're at a single use healing item threshold
         if (AI_DATA->switchinCandidate.battleMon.ability != ABILITY_KLUTZ && usedSingleUseHealingItem == FALSE
