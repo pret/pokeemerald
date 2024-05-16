@@ -423,7 +423,7 @@ static void SetBattlerAiMovesData(struct AiLogicData *aiData, u32 battlerAtk, u3
     // Simulate dmg for both ai controlled mons and for player controlled mons.
     for (battlerDef = 0; battlerDef < battlersCount; battlerDef++)
     {
-        if (battlerAtk == battlerDef)
+        if (battlerAtk == battlerDef || !IsBattlerAlive(battlerDef))
             continue;
 
         SaveBattlerData(battlerDef);
@@ -3028,21 +3028,6 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             else if (IsAbilityOfRating(aiData->abilities[battlerAtk], 0) || IsAbilityOfRating(aiData->abilities[battlerDef], 10))
                 ADJUST_SCORE(DECENT_EFFECT); // we want to transfer our bad ability or take their awesome ability
             break;
-        case EFFECT_EARTHQUAKE:
-        case EFFECT_MAGNITUDE:
-            if (!IsBattlerGrounded(battlerAtkPartner)
-             || (IsBattlerGrounded(battlerAtkPartner)
-               && AI_WhoStrikesFirst(battlerAtk, battlerAtkPartner, move) == AI_IS_SLOWER
-               && IsUngroundingEffect(gMovesInfo[aiData->partnerMove].effect)))
-                ADJUST_SCORE(DECENT_EFFECT);
-            else if (IS_BATTLER_OF_TYPE(battlerAtkPartner, TYPE_FIRE)
-              || IS_BATTLER_OF_TYPE(battlerAtkPartner, TYPE_ELECTRIC)
-              || IS_BATTLER_OF_TYPE(battlerAtkPartner, TYPE_POISON)
-              || IS_BATTLER_OF_TYPE(battlerAtkPartner, TYPE_ROCK))
-                ADJUST_SCORE(-10);    // partner will be hit by earthquake and is weak to it
-            else if (IsBattlerAlive(battlerAtkPartner))
-                ADJUST_SCORE(-3);
-            break;
         }
 
         // lightning rod, flash fire against enemy handled in AI_CheckBadMove
@@ -3082,6 +3067,18 @@ static s32 CompareMoveAccuracies(u32 battlerAtk, u32 battlerDef, u32 moveSlot1, 
     return 0;
 }
 
+static inline bool32 ShouldUseSpreadDamageMove(u32 battlerAtk, u32 move, u32 moveIndex, u32 hitsToFaintOpposingBattler)
+{
+    u32 partnerBattler = BATTLE_PARTNER(battlerAtk);
+    u32 noOfHitsToFaintPartner = GetNoOfHitsToKOBattler(battlerAtk, partnerBattler, moveIndex);
+    return (IsDoubleBattle()
+         && noOfHitsToFaintPartner != 0 // Immunity check
+         && IsBattlerAlive(partnerBattler)
+         && gMovesInfo[move].target == MOVE_TARGET_FOES_AND_ALLY
+         && !(noOfHitsToFaintPartner < 4 && hitsToFaintOpposingBattler == 1)
+         && noOfHitsToFaintPartner < 7);
+}
+
 static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
 {
     u32 i;
@@ -3099,7 +3096,13 @@ static s32 AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef, u32 currId)
         if (moves[i] != MOVE_NONE && gMovesInfo[moves[i]].power)
         {
             noOfHits[i] = GetNoOfHitsToKOBattler(battlerAtk, battlerDef, i);
-            if (noOfHits[i] < leastHits && noOfHits[i] != 0)
+            if (ShouldUseSpreadDamageMove(battlerAtk,moves[i], i, noOfHits[i]))
+            {
+                noOfHits[i] = -1;
+                viableMoveScores[i] = 0;
+                isTwoTurnNotSemiInvulnerableMove[i] = FALSE;
+            }
+            else if (noOfHits[i] < leastHits && noOfHits[i] != 0)
             {
                 leastHits = noOfHits[i];
             }
