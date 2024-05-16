@@ -96,7 +96,7 @@ SINGLE_BATTLE_TEST("Knock Off does not remove items through Substitute")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_KNOCK_OFF, player);
         NOT { ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ITEM_KNOCKOFF); }
     } THEN {
-        EXPECT(opponent->item == ITEM_NONE);
+        EXPECT(opponent->item == ITEM_LEFTOVERS);
     }
 }
 
@@ -191,5 +191,17 @@ DOUBLE_BATTLE_TEST("Knock Off does not trigger the opposing ally's Symbiosis")
         }
     } THEN {
         EXPECT(playerLeft->item == ITEM_NONE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Knock Off doesn't knock off items from Pokemon behind substitutes")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_POKE_BALL); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SUBSTITUTE); MOVE(player, MOVE_KNOCK_OFF); }
+    } SCENE {
+        NOT MESSAGE("Wobbuffet knocked off Foe Wobbuffet's Poké Ball");
     }
 }

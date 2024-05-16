@@ -329,7 +329,8 @@ void MultichoiceDynamic_DestroyStack(void)
 static void MultichoiceDynamic_MoveCursor(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 {
     u8 taskId;
-    PlaySE(SE_SELECT);
+    if (!onInit)
+        PlaySE(SE_SELECT);
     taskId = FindTaskIdByFunc(Task_HandleScrollingMultichoiceInput);
     if (taskId != TASK_NONE)
     {

@@ -5558,10 +5558,7 @@ static void InitBoxTitle(u8 boxId)
     sStorage->wallpaperPalBits |= (1 << 16) << tagIndex;
 
     StringCopyPadded(sStorage->boxTitleText, GetBoxNamePtr(boxId), 0, BOX_NAME_LENGTH);
-    if (DECAP_ENABLED && DECAP_MIRRORING)
-        DrawTextWindowAndBufferTiles(MirrorPtr(sStorage->boxTitleText), sStorage->boxTitleTiles, 0, 0, 2);
-    else
-        DrawTextWindowAndBufferTiles(sStorage->boxTitleText, sStorage->boxTitleTiles, 0, 0, 2);
+    DrawTextWindowAndBufferTiles(sStorage->boxTitleText, sStorage->boxTitleTiles, 0, 0, 2);
     LoadSpriteSheet(&spriteSheet);
     x = GetBoxTitleBaseX(GetBoxNamePtr(boxId));
 
@@ -6438,10 +6435,23 @@ static void SetPlacedMonData(u8 boxId, u8 position)
 
 static void PurgeMonOrBoxMon(u8 boxId, u8 position)
 {
+    u16 item = ITEM_NONE;
+
     if (boxId == TOTAL_BOXES_COUNT)
+    {
+        if (OW_PC_RELEASE_ITEM >= GEN_8)
+            item = GetMonData(&gPlayerParty[position], MON_DATA_HELD_ITEM);
         ZeroMonData(&gPlayerParty[position]);
+    }
     else
+    {
+        if (OW_PC_RELEASE_ITEM >= GEN_8)
+            item = GetBoxMonDataAt(boxId, position, MON_DATA_HELD_ITEM);
         ZeroBoxMonAt(boxId, position);
+    }
+
+    if (item != ITEM_NONE)
+        AddBagItem(item, 1);
 }
 
 static void SetShiftedMonData(u8 boxId, u8 position)
@@ -9619,10 +9629,7 @@ struct BoxPokemon *GetBoxedMonPtr(u8 boxId, u8 boxPosition)
 u8 *GetBoxNamePtr(u8 boxId)
 {
     if (boxId < TOTAL_BOXES_COUNT)
-        if (DECAP_ENABLED && DECAP_MIRRORING)
-            return MirrorPtr(gPokemonStoragePtr->boxNames[boxId]);
-        else
-            return gPokemonStoragePtr->boxNames[boxId];
+        return gPokemonStoragePtr->boxNames[boxId];
     else
         return NULL;
 }

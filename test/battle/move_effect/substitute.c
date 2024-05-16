@@ -54,3 +54,17 @@ SINGLE_BATTLE_TEST("Substitute's HP cost can trigger a berry")
         MESSAGE("Wobbuffet's Sitrus Berry restored health!");
     }
 }
+
+SINGLE_BATTLE_TEST("Substitute's HP cost doesn't trigger effects that trigger on damage taken")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_AIR_BALLOON); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SUBSTITUTE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SUBSTITUTE, player);
+        MESSAGE("Wobbuffet made a SUBSTITUTE!");
+        NOT MESSAGE("Wobbuffet's Air Balloon popped!");
+    }
+}

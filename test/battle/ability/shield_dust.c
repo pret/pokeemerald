@@ -95,7 +95,7 @@ SINGLE_BATTLE_TEST("Shield Dust does not block self-targeting effects, primary o
     GIVEN {
         ASSUME(MoveHasAdditionalEffectSelf(MOVE_POWER_UP_PUNCH, MOVE_EFFECT_ATK_PLUS_1) == TRUE);
         ASSUME(MoveHasAdditionalEffectSelf(MOVE_RAPID_SPIN, MOVE_EFFECT_RAPID_SPIN) == TRUE);
-        ASSUME(MoveHasAdditionalEffectSelf(MOVE_LEAF_STORM, MOVE_EFFECT_SP_ATK_TWO_DOWN) == TRUE);
+        ASSUME(MoveHasAdditionalEffectSelf(MOVE_LEAF_STORM, MOVE_EFFECT_SP_ATK_MINUS_2) == TRUE);
         ASSUME(MoveHasAdditionalEffectSelf(MOVE_METEOR_ASSAULT, MOVE_EFFECT_RECHARGE) == TRUE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_VIVILLON) { Ability(ABILITY_SHIELD_DUST); }
@@ -121,19 +121,44 @@ SINGLE_BATTLE_TEST("Shield Dust does not block self-targeting effects, primary o
     }
 }
 
-DOUBLE_BATTLE_TEST("Shield Dust does not block Sparkling Aria in doubles")
+DOUBLE_BATTLE_TEST("Shield Dust does or does not block Sparkling Aria depending on number of targets hit")
 {
-    KNOWN_FAILING;
+    u32 moveToUse;
+    PARAMETRIZE { moveToUse = MOVE_FINAL_GAMBIT; }
+    PARAMETRIZE { moveToUse = MOVE_TACKLE; }
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_VIVILLON) { Ability(ABILITY_SHIELD_DUST); Status1(STATUS1_BURN); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(playerLeft, MOVE_SPARKLING_ARIA); }
+        TURN { MOVE(playerRight, moveToUse, target: opponentRight); MOVE(playerLeft, MOVE_SPARKLING_ARIA); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPARKLING_ARIA, playerLeft);
-        MESSAGE("Foe Vivillion's burn was healed.");
-        STATUS_ICON(opponentLeft, burn: TRUE);
+        if (moveToUse == MOVE_TACKLE) {
+            MESSAGE("Foe Vivillon's burn was healed.");
+            STATUS_ICON(opponentLeft, none: TRUE);
+        } else {
+            NONE_OF {
+                MESSAGE("Foe Vivillon's burn was healed.");
+                STATUS_ICON(opponentLeft, none: TRUE);
+            }
+        }
+    }
+}
+
+SINGLE_BATTLE_TEST("Shield Dust blocks Sparkling Aria in singles")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_VIVILLON) { Ability(ABILITY_SHIELD_DUST); Status1(STATUS1_BURN); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SPARKLING_ARIA); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPARKLING_ARIA, player);
+        NONE_OF {
+            MESSAGE("Foe Vivillon's burn was healed.");
+            STATUS_ICON(opponent, none: TRUE);
+        }
     }
 }
