@@ -31,17 +31,12 @@ const struct ObjectEventGraphicsInfo gPokeballGraphics[POKEBALL_COUNT] = {
     POKEBALL_GFX_INFO(LUXURY),
     POKEBALL_GFX_INFO(PREMIER),
     // Gen IV/Sinnoh pokeballs
-    #ifdef ITEM_DUSK_BALL
     POKEBALL_GFX_INFO(DUSK),
     POKEBALL_GFX_INFO(HEAL),
     POKEBALL_GFX_INFO(QUICK),
     POKEBALL_GFX_INFO(CHERISH),
-    #endif
-    #ifdef ITEM_PARK_BALL
     POKEBALL_GFX_INFO(PARK),
-    #endif
     // Gen II/Johto Apricorn pokeballs
-    #ifdef ITEM_FAST_BALL
     POKEBALL_GFX_INFO(FAST),
     POKEBALL_GFX_INFO(LEVEL),
     POKEBALL_GFX_INFO(LURE),
@@ -50,15 +45,10 @@ const struct ObjectEventGraphicsInfo gPokeballGraphics[POKEBALL_COUNT] = {
     POKEBALL_GFX_INFO(FRIEND),
     POKEBALL_GFX_INFO(MOON),
     POKEBALL_GFX_INFO(SPORT),
-    #endif
     // Gen V
-    #ifdef ITEM_DREAM_BALL
     POKEBALL_GFX_INFO(DREAM),
-    #endif
     // Gen VII
-    #ifdef ITEM_BEAST_BALL
     POKEBALL_GFX_INFO(BEAST),
-    #endif
     // Gen VIII
     #ifdef ITEM_STRANGE_BALL
     POKEBALL_GFX_INFO(STRANGE),

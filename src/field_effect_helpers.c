@@ -112,12 +112,14 @@ static void LoadObjectReflectionPalette(struct ObjectEvent *objectEvent, struct 
 }
 
 // Apply a blue tint effect to a palette
-static void ApplyPondFilter(u8 paletteNum, u16 *dest) {
+static void ApplyPondFilter(u8 paletteNum, u16 *dest)
+{
     u32 i, r, g, b;
     // CpuCopy16(gPlttBufferUnfaded + 0x100 + paletteNum * 16, dest, 32);
     u16 *src = gPlttBufferUnfaded + OBJ_PLTT_ID(paletteNum);
     *dest++ = *src++; // copy transparency
-    for (i = 0; i < 16 - 1; i++) {
+    for (i = 0; i < 16 - 1; i++)
+    {
         r = GET_R(src[i]);
         g = GET_G(src[i]);
         b = GET_B(src[i]);
@@ -129,12 +131,14 @@ static void ApplyPondFilter(u8 paletteNum, u16 *dest) {
 }
 
 // Apply a ice tint effect to a palette
-static void ApplyIceFilter(u8 paletteNum, u16 *dest) {
+static void ApplyIceFilter(u8 paletteNum, u16 *dest)
+{
     u32 i, r, g, b;
     // CpuCopy16(gPlttBufferUnfaded + 0x100 + paletteNum * 16, dest, 32);
     u16 *src = gPlttBufferUnfaded + OBJ_PLTT_ID(paletteNum);
     *dest++ = *src++; // copy transparency
-    for (i = 0; i < 16 - 1; i++) {
+    for (i = 0; i < 16 - 1; i++)
+    {
         r = GET_R(src[i]);
         r -= 5;
         if (r > 31)
@@ -157,7 +161,9 @@ static void LoadObjectRegularReflectionPalette(struct ObjectEvent *objectEvent, 
     u16 baseTag = GetSpritePaletteTagByPaletteNum(mainSprite->oam.paletteNum);
     u16 paletteTag = REFLECTION_PAL_TAG(baseTag, mainSprite->oam.paletteNum);
     u8 paletteNum = IndexOfSpritePaletteTag(paletteTag);
-    if (paletteNum <= 16) { // Load filtered palette
+    if (paletteNum <= 16)
+    {
+        // Load filtered palette
         u16 filteredData[16];
         struct SpritePalette filteredPal = {.tag = paletteTag, .data = filteredData};
         if (sprite->sIsStillReflection == FALSE)
@@ -196,22 +202,24 @@ static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
 
     // Only filter palette if not using the high bridge blue palette
     // This is basically a copy of LoadObjectRegularReflectionPalette
-    if (IndexOfSpritePaletteTag(HIGH_BRIDGE_PAL_TAG) != reflectionSprite->oam.paletteNum) {
+    if (IndexOfSpritePaletteTag(HIGH_BRIDGE_PAL_TAG) != reflectionSprite->oam.paletteNum)
+    {
         u16 baseTag = GetSpritePaletteTagByPaletteNum(mainSprite->oam.paletteNum);
         u16 paletteTag = REFLECTION_PAL_TAG(baseTag, mainSprite->oam.paletteNum);
         u8 paletteNum = IndexOfSpritePaletteTag(paletteTag);
-        if (paletteNum >= 16) { // Build filtered palette
+        if (paletteNum >= 16)
+        {
+            // Build filtered palette
             u16 filteredData[16];
             struct SpritePalette filteredPal = {.tag = paletteTag, .data = filteredData};
             // Free palette if unused
             reflectionSprite->inUse = FALSE;
             FieldEffectFreePaletteIfUnused(reflectionSprite->oam.paletteNum);
             reflectionSprite->inUse = TRUE;
-            if (reflectionSprite->sIsStillReflection == FALSE) {
+            if (reflectionSprite->sIsStillReflection == FALSE)
                 ApplyPondFilter(mainSprite->oam.paletteNum, filteredData);
-            } else {
+            else
                 ApplyIceFilter(mainSprite->oam.paletteNum, filteredData);
-            }
             paletteNum = LoadSpritePalette(&filteredPal);
             UpdateSpritePaletteWithWeather(paletteNum);
         }
@@ -236,7 +244,8 @@ static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
         reflectionSprite->invisible = TRUE;
 
     // Support "virtual" sprites which can't be rotated via affines
-    if (reflectionSprite->subspriteTables[0].subsprites) {
+    if (reflectionSprite->subspriteTables[0].subsprites)
+    {
         reflectionSprite->oam.affineMode = ST_OAM_AFFINE_OFF;
         return;
     }

@@ -4,8 +4,14 @@ import json
 import os
 import subprocess
 
-# get compatibility from jsons
-def construct_compatibility_dict():
+# THIS IS A TEMPORARY SCRIPT MADE TO MOVE EXISTING FOLLOWER GRAPHICS FROM A SINGLE DIRECTORY.
+# IT TAKES FOLLOWER GRAPHICS FROM a 'followers' FOLDER IN THE ROOT FOLDER AND MOVES THEM BASED ON THEIR NAME.
+# EG. 'followers/bulbasaur.png' WILL BE MOVED to 'graphics/pokemon/bulbasaur/follower.png'.
+#
+# I'M SAVING IT HERE IN CASE IT'S NEEDED SOMEWHERE IN THE FUTURE, THOUGH TWEAKING MIGHT BE NEEDED.
+# - AsparagusEduardo
+
+def rellocate_follower_graphics():
     dict_out = {}
     count = 0
     for pth in sorted(glob.glob('followers/*.png')):
@@ -55,4 +61,4 @@ def construct_compatibility_dict():
         #print(pth)
         #subprocess.run(["tools/gbagfx/gbagfx " + name +".png " + name + "_normal.pal'" + str(count) + "'"]) 
 
-construct_compatibility_dict()
+rellocate_follower_graphics()

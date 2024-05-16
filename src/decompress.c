@@ -21,7 +21,8 @@ void LZDecompressVram(const u32 *src, void *dest)
 // Checks if `ptr` is likely LZ77 data
 // Checks word-alignment, min/max size, and header byte
 // Returns uncompressed size if true, 0 otherwise
-u32 IsLZ77Data(const void *ptr, u32 minSize, u32 maxSize) {
+u32 IsLZ77Data(const void *ptr, u32 minSize, u32 maxSize)
+{
     const u8 *data = ptr;
     u32 size;
     // Compressed data must be word aligned
@@ -51,7 +52,8 @@ u16 LoadCompressedSpriteSheet(const struct CompressedSpriteSheet *src)
 }
 
 // This can be used for either compressed or uncompressed sprite sheets
-u16 LoadCompressedSpriteSheetByTemplate(const struct SpriteTemplate *template, s32 offset) {
+u16 LoadCompressedSpriteSheetByTemplate(const struct SpriteTemplate *template, s32 offset)
+{
     struct SpriteTemplate myTemplate;
     struct SpriteFrameImage myImage;
     u32 size;

@@ -3243,21 +3243,29 @@ void SpriteCB_PlayerMonFromBall(struct Sprite *sprite)
         BattleAnimateBackSprite(sprite, sprite->sSpeciesId);
 }
 
-void SpriteCB_PlayerMonSlideIn(struct Sprite *sprite) {
-    if (sprite->data[3] == 0) {
+void SpriteCB_PlayerMonSlideIn(struct Sprite *sprite)
+{
+    if (sprite->data[3] == 0)
+    {
         PlaySE(SE_BALL_TRAY_ENTER);
         sprite->data[3]++;
-    } else if (sprite->data[3] == 1) {
+    }
+    else if (sprite->data[3] == 1)
+    {
         if (sprite->animEnded)
             return;
         sprite->data[4] = sprite->x;
         sprite->x = -33;
         sprite->invisible = FALSE;
         sprite->data[3]++;
-    } else if (sprite->data[3] < 27) {
+    }
+    else if (sprite->data[3] < 27)
+    {
         sprite->x += 4;
         sprite->data[3]++;
-    } else {
+    }
+    else
+    {
         sprite->data[3] = 0;
         sprite->x = sprite->data[4];
         sprite->data[4] = 0;

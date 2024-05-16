@@ -1464,16 +1464,19 @@ void RemoveAllObjectEventsExceptPlayer(void)
 
 // Free a sprite's current tiles and reallocate with a new size
 // Used when changing to a gfx info with a larger size
-static s16 ReallocSpriteTiles(struct Sprite *sprite, u32 byteSize) {
+static s16 ReallocSpriteTiles(struct Sprite *sprite, u32 byteSize)
+{
     s16 i;
     bool32 wasVisible = sprite->invisible;
     sprite->invisible = TRUE;
 
     i = CopySprite(sprite, sprite->x, sprite->y, 0xFF);
-    if (i < MAX_SPRITES) {
+    if (i < MAX_SPRITES)
+    {
         DestroySprite(&gSprites[i]);
         i = AllocSpriteTiles(byteSize / TILE_SIZE_4BPP);
-        if (i >= 0) {
+        if (i >= 0)
+        {
             // Fill the allocated area with zeroes
             // To avoid visual glitches if the frame hasn't been copied yet
             CpuFastFill16(0, (u8 *)OBJ_VRAM0 + TILE_SIZE_4BPP * i, byteSize);
@@ -1490,14 +1493,17 @@ static s16 ReallocSpriteTiles(struct Sprite *sprite, u32 byteSize) {
 u16 LoadSheetGraphicsInfo(const struct ObjectEventGraphicsInfo *info, u16 uuid, struct Sprite *sprite)
 {
     u16 tag = info->tileTag;
-    if (tag != TAG_NONE || info->compressed) { // sheet-based gfx
+    if (tag != TAG_NONE || info->compressed)
+    {
+        // sheet-based gfx
         u32 sheetSpan = GetSpanPerImage(info->oam->shape, info->oam->size);
         u16 oldTiles = 0;
         u16 tileStart;
         if (tag == TAG_NONE)
             tag = COMP_OW_TILE_TAG_BASE + uuid;
         
-        if (sprite) {
+        if (sprite)
+        {
             oldTiles = sprite->sheetTileStart;
             sprite->sheetTileStart = 0; // mark unused
             // Note: If sprite was not allocated to use a sheet,
@@ -1508,18 +1514,22 @@ u16 LoadSheetGraphicsInfo(const struct ObjectEventGraphicsInfo *info, u16 uuid, 
 
         tileStart = GetSpriteTileStartByTag(tag);
         // sheet not loaded; unload any old tiles and load it
-        if (tileStart == TAG_NONE) {
+        if (tileStart == TAG_NONE)
+        {
             struct SpriteFrameImage image = {.size = info->size, .data = info->images->data};
             struct SpriteTemplate template = {.tileTag = tag, .images = &image};
             if (oldTiles)
                 FieldEffectFreeTilesIfUnused(oldTiles);
             tileStart = LoadCompressedSpriteSheetByTemplate(&template, TILE_SIZE_4BPP << sheetSpan);
         // sheet loaded; unload any *other* sheet for sprite
-        } else if (oldTiles && oldTiles != tileStart) {
+        }
+        else if (oldTiles && oldTiles != tileStart)
+        {
             FieldEffectFreeTilesIfUnused(oldTiles);
         }
         
-        if (sprite) {
+        if (sprite)
+        {
             sprite->sheetTileStart = tileStart;
             sprite->sheetSpan = sheetSpan;
             sprite->usingSheet = TRUE;
@@ -1530,11 +1540,16 @@ u16 LoadSheetGraphicsInfo(const struct ObjectEventGraphicsInfo *info, u16 uuid, 
     // larger than the allocated prefix space,
     // in which case we would have to realloc
     // TODO: Realloc usingSheet -> !usingSheet larger gfx
-    } else if (sprite && sprite->usingSheet) {
+    }
+    else if (sprite && sprite->usingSheet)
+    {
         sprite->oam.tileNum = sprite->sheetTileStart;
         sprite->usingSheet = FALSE;
-    // Not usingSheet and info size differs; realloc tiles
-    } else if (sprite && !sprite->sheetTileStart && sprite->oam.size != info->oam->size) {
+    
+    }
+    else if (sprite && !sprite->sheetTileStart && sprite->oam.size != info->oam->size)
+    {
+        // Not usingSheet and info size differs; realloc tiles
         ReallocSpriteTiles(sprite, info->images->size);
     }
     return tag;
@@ -1947,7 +1962,8 @@ static void RefreshFollowerGraphics(struct ObjectEvent *objEvent)
     struct Sprite *sprite = &gSprites[objEvent->spriteId];
     u32 i = FindObjectEventPaletteIndexByTag(graphicsInfo->paletteTag);
 
-    if (graphicsInfo->oam->size != sprite->oam.size) {
+    if (graphicsInfo->oam->size != sprite->oam.size)
+    {
         #if LARGE_OW_SUPPORT && !OW_GFX_COMPRESS
         ReallocSpriteTiles(sprite, graphicsInfo->images->size);
         #endif
@@ -2182,7 +2198,8 @@ static u32 FindMetatileBehaviorWithinRange(s32 x, s32 y, u32 mb, u8 distance)
 }
 
 // Check a single follower message condition
-bool32 CheckMsgCondition(const struct MsgCondition *cond, struct Pokemon *mon, u32 species, struct ObjectEvent *obj) {
+bool32 CheckMsgCondition(const struct MsgCondition *cond, struct Pokemon *mon, u32 species, struct ObjectEvent *obj)
+{
     u32 multi;
     if (species == SPECIES_NONE)
         species = GetMonData(mon, MON_DATA_SPECIES);
@@ -2235,17 +2252,21 @@ bool32 CheckMsgCondition(const struct MsgCondition *cond, struct Pokemon *mon, u
 
 // Check if follower info can be displayed in the current situation;
 // i.e, if all its conditions match
-bool32 CheckMsgInfo(const struct FollowerMsgInfoExtended *info, struct Pokemon *mon, u32 species, struct ObjectEvent *obj) {
+bool32 CheckMsgInfo(const struct FollowerMsgInfoExtended *info, struct Pokemon *mon, u32 species, struct ObjectEvent *obj)
+{
     u32 i;
 
-    // any condition matches
-    if (info->orFlag) {
+    if (info->orFlag)
+    {
+        // any condition matches
         for (i = 0; i < ARRAY_COUNT(info->conditions) && info->conditions[i].type; i++)
             if (CheckMsgCondition(&info->conditions[i], mon, species, obj))
                 return TRUE;
         return FALSE;
-    // all conditions must match
-    } else {
+    }
+    else
+    {
+        // all conditions must match
         for (i = 0; i < ARRAY_COUNT(info->conditions) && info->conditions[i].type; i++)
             if (!CheckMsgCondition(&info->conditions[i], mon, species, obj))
                 return FALSE;
@@ -5447,16 +5468,23 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
     }
     sprite->sActionFuncId = 0;
     #else
-    if (GetLedgeJumpDirection(x, y, direction) != DIR_NONE) {
+    if (GetLedgeJumpDirection(x, y, direction) != DIR_NONE)
+    {
         // InitJumpRegular will set the proper speed
         ObjectEventSetSingleMovement(objectEvent, sprite, GetJump2MovementAction(direction));
-    } else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH)) {
+    }
+    else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH))
+    {
         // Set follow speed according to player's speed
         ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkFastMovementAction(direction));
-    } else if (PlayerGetCopyableMovement() == COPY_MOVE_JUMP2) {
+    }
+    else if (PlayerGetCopyableMovement() == COPY_MOVE_JUMP2)
+    {
         // If *player* jumps, make step take twice as long
         ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkSlowMovementAction(direction));
-    } else {
+    }
+    else
+    {
         ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkNormalMovementAction(direction));
         if (OW_MON_BOBBING == TRUE)
             sprite->y2 = -1;
@@ -7030,18 +7058,22 @@ static u8 LoadFillColorPalette(u16 color, u16 paletteTag, struct Sprite *sprite)
     return UpdateSpritePalette(&dynamicPalette, sprite);
 }
 
-static void ObjectEventSetPokeballGfx(struct ObjectEvent *objEvent) {
+static void ObjectEventSetPokeballGfx(struct ObjectEvent *objEvent)
+{
     #if OW_MON_POKEBALLS
     u32 ball = BALL_POKE;
-    if (objEvent->localId == OBJ_EVENT_ID_FOLLOWER) {
+    if (objEvent->localId == OBJ_EVENT_ID_FOLLOWER)
+    {
         struct Pokemon *mon = GetFirstLiveMon();
         if (mon)
             ball = ItemIdToBallId(GetMonData(mon, MON_DATA_POKEBALL));
     }
 
-    if (ball != BALL_POKE && ball < POKEBALL_COUNT) {
+    if (ball != BALL_POKE && ball < POKEBALL_COUNT)
+    {
         const struct ObjectEventGraphicsInfo *info = &gPokeballGraphics[ball];
-        if (info->tileTag == TAG_NONE) {
+        if (info->tileTag == TAG_NONE)
+        {
             ObjectEventSetGraphics(objEvent, info);
             return;
         }
@@ -9232,7 +9264,8 @@ static void UpdateObjectEventElevationAndPriority(struct ObjectEvent *objEvent, 
         return;
 
     ObjectEventUpdateElevation(objEvent, sprite);
-    if (objEvent->localId == OBJ_EVENT_ID_FOLLOWER) {
+    if (objEvent->localId == OBJ_EVENT_ID_FOLLOWER)
+    {
         #if LARGE_OW_SUPPORT
         // keep subspriteMode synced with player's
         // so that it disappears under bridges when they do
@@ -9264,7 +9297,8 @@ void ObjectEventUpdateElevation(struct ObjectEvent *objEvent, struct Sprite *spr
     u8 curElevation = MapGridGetElevationAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
     u8 prevElevation = MapGridGetElevationAt(objEvent->previousCoords.x, objEvent->previousCoords.y);
 
-    if (curElevation == 15 || prevElevation == 15) {
+    if (curElevation == 15 || prevElevation == 15)
+    {
         #if LARGE_OW_SUPPORT
         // Ignore subsprite priorities under bridges
         // so all subsprites will display below it

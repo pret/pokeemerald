@@ -932,12 +932,16 @@ void AnimCmd_frame(struct Sprite *sprite)
     if (!(sprite->oam.affineMode & ST_OAM_AFFINE_ON_MASK))
         SetSpriteOamFlipBits(sprite, hFlip, vFlip);
 
-    if (sprite->usingSheet) {
+    if (sprite->usingSheet)
+    {
         if (OW_GFX_COMPRESS && sprite->sheetSpan)
             imageValue = (imageValue + 1) << sprite->sheetSpan;
         sprite->oam.tileNum = sprite->sheetTileStart + imageValue;
-    } else
+    }
+    else
+    {
         RequestSpriteFrameImageCopy(imageValue, sprite->oam.tileNum, sprite->images);
+    }
 }
 
 void AnimCmd_end(struct Sprite *sprite)
@@ -968,12 +972,16 @@ void AnimCmd_jump(struct Sprite *sprite)
     if (!(sprite->oam.affineMode & ST_OAM_AFFINE_ON_MASK))
         SetSpriteOamFlipBits(sprite, hFlip, vFlip);
 
-    if (sprite->usingSheet) {
+    if (sprite->usingSheet)
+    {
         if (OW_GFX_COMPRESS && sprite->sheetSpan)
             imageValue = (imageValue + 1) << sprite->sheetSpan;
         sprite->oam.tileNum = sprite->sheetTileStart + imageValue;
-    } else
+    }
+    else
+    {
         RequestSpriteFrameImageCopy(imageValue, sprite->oam.tileNum, sprite->images);
+    }
 }
 
 void AnimCmd_loop(struct Sprite *sprite)
@@ -1449,7 +1457,8 @@ u16 LoadSpriteSheet(const struct SpriteSheet *sheet)
 }
 
 // Like LoadSpriteSheet, but checks if already loaded, and uses template image frames
-u16 LoadSpriteSheetByTemplate(const struct SpriteTemplate *template, u32 frame, s32 offset) {
+u16 LoadSpriteSheetByTemplate(const struct SpriteTemplate *template, u32 frame, s32 offset)
+{
     u16 tileStart;
     struct SpriteSheet sheet;
     // error if template is null or tile tag or images not set
@@ -1750,6 +1759,7 @@ static const u8 sSpanPerImage[4][4] =
 // For a given sprite shape & size, returns
 // the value for sheetSpan:
 // i.e, a 32x32 sprite has span 4, because 1 << 4 == 16 == 4x4 tiles
-u32 GetSpanPerImage(u32 shape, u32 size) {
+u32 GetSpanPerImage(u32 shape, u32 size)
+{
     return sSpanPerImage[shape][size];
 }
