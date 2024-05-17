@@ -1501,10 +1501,6 @@ void FreeSpriteTilesByTag(u16 tag)
             FREE_SPRITE_TILE(i);
 
         sSpriteTileRangeTags[index] = TAG_NONE;
-        #if DEBUG
-        // If debugging, visibly clear the freed tiles
-        CpuSmartFill16(0, (u8 *)OBJ_VRAM0 + TILE_SIZE_4BPP * start, count * TILE_SIZE_4BPP);
-        #endif
     }
 }
 
@@ -1635,9 +1631,6 @@ void FreeSpritePaletteByTag(u16 tag)
     if (index != 0xFF)
     {
         sSpritePaletteTags[index] = TAG_NONE;
-        #if DEBUG
-        FillPalette(0, index * 16 + 0x100, 32);
-        #endif
     }
 }
 
