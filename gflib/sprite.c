@@ -882,8 +882,11 @@ void BeginAnim(struct Sprite *sprite)
             if (OW_GFX_COMPRESS && sprite->sheetSpan)
                 imageValue = (imageValue + 1) << sprite->sheetSpan;
             sprite->oam.tileNum = sprite->sheetTileStart + imageValue;
-        } else
+        }
+        else
+        {
             RequestSpriteFrameImageCopy(imageValue, sprite->oam.tileNum, sprite->images);
+        }
     }
 }
 
