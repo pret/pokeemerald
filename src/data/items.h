@@ -9224,7 +9224,7 @@ const struct Item gItemsInfo[] =
     },
 // TMs/HMs. They don't have a set flingPower, as that's handled by GetFlingPowerFromItemId.
 
-    [ITEM_TM_FOCUS_PUNCH] =
+    [ITEM_TM_HONE_CLAWS] =
     {
         .name = _("TM01"),
         .price = 3000,
@@ -9254,7 +9254,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_DRAGON_CLAW,
     },
 
-    [ITEM_TM_WATER_PULSE] =
+    [ITEM_TM_PSYSHOCK] =
     {
         .name = _("TM03"),
         .price = 5000,
@@ -9344,7 +9344,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_BULK_UP,
     },
 
-    [ITEM_TM_BULLET_SEED] =
+    [ITEM_TM_VENOSHOCK] =
     {
         .name = _("TM09"),
         .price = 1000,
@@ -9377,7 +9377,7 @@ const struct Item gItemsInfo[] =
     [ITEM_TM_SUNNY_DAY] =
     {
         .name = _("TM11"),
-        .price = 3000,
+        .price = 2000,
         .description = COMPOUND_STRING(
             "Raises the power of\n"
             "Fire-type moves\n"
@@ -9492,7 +9492,7 @@ const struct Item gItemsInfo[] =
     [ITEM_TM_RAIN_DANCE] =
     {
         .name = _("TM18"),
-        .price = 3000,
+        .price = 2000,
         .description = COMPOUND_STRING(
             "Raises the power of\n"
             "Water-type moves\n"
@@ -9504,7 +9504,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_RAIN_DANCE,
     },
 
-    [ITEM_TM_GIGA_DRAIN] =
+    [ITEM_TM_TELEKINESIS] =
     {
         .name = _("TM19"),
         .price = 1000,
@@ -9564,10 +9564,10 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_SOLAR_BEAM,
     },
 
-    [ITEM_TM_IRON_TAIL] =
+    [ITEM_TM_SMACK_DOWN] =
     {
         .name = _("TM23"),
-        .price = 500,
+        .price = 1000,
         .description = COMPOUND_STRING(
             "Slams the foe with\n"
             "a hard tail. It may\n"
@@ -9672,7 +9672,7 @@ const struct Item gItemsInfo[] =
     [ITEM_TM_SHADOW_BALL] =
     {
         .name = _("TM30"),
-        .price = 3000,
+        .price = 8000,
         .description = COMPOUND_STRING(
             "Hurls a dark lump\n"
             "at the foe. It may\n"
@@ -9729,7 +9729,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_REFLECT,
     },
 
-    [ITEM_TM_SHOCK_WAVE] =
+    [ITEM_TM_SLUDGE_WAVE] =
     {
         .name = _("TM34"),
         .price = 5000,
@@ -9792,7 +9792,7 @@ const struct Item gItemsInfo[] =
     [ITEM_TM_FIRE_BLAST] =
     {
         .name = _("TM38"),
-        .price = 8000,
+        .price = 5000,
         .description = COMPOUND_STRING(
             "A powerful fire\n"
             "attack that may\n"
@@ -9864,7 +9864,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_FACADE,
     },
 
-    [ITEM_TM_SECRET_POWER] =
+    [ITEM_TM_FLAME_CHARGE] =
     {
         .name = _("TM43"),
         .price = 3000,
@@ -9924,7 +9924,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_THIEF,
     },
 
-    [ITEM_TM_STEEL_WING] =
+    [ITEM_TM_LOW_SWEEP] =
     {
         .name = _("TM47"),
         .price = 3000,
@@ -9939,7 +9939,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_LOW_SWEEP,
     },
 
-    [ITEM_TM_SKILL_SWAP] =
+    [ITEM_TM_ROUND] =
     {
         .name = _("TM48"),
         .price = 1000,
@@ -9954,7 +9954,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_ROUND,
     },
 
-    [ITEM_TM_SNATCH] =
+    [ITEM_TM_ECHOED_VOICE] =
     {
         .name = _("TM49"),
         .price = 3000,
@@ -9984,7 +9984,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_OVERHEAT,
     },
 
-    [ITEM_TM51] =
+    [ITEM_TM_ALLY_SWITCH] =
     {
         .name = _("TM51"),
         .price = 500,
@@ -9996,7 +9996,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_ALLY_SWITCH, // Todo
     },
 
-    [ITEM_TM52] =
+    [ITEM_TM_FOCUS_BLAST] =
     {
         .name = _("TM52"),
         .price = 5000,
@@ -10008,7 +10008,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_FOCUS_BLAST, // Todo
     },
 
-    [ITEM_TM53] =
+    [ITEM_TM_ENERGY_BALL] =
     {
         .name = _("TM53"),
         .price = 8000,
@@ -10020,7 +10020,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_ENERGY_BALL, // Todo
     },
 
-    [ITEM_TM54] =
+    [ITEM_TM_FALSE_SWIPE] =
     {
         .name = _("TM54"),
         .price = 500,
@@ -10032,10 +10032,10 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_FALSE_SWIPE, // Todo
     },
 
-    [ITEM_TM55] =
+    [ITEM_TM_SCALD] =
     {
         .name = _("TM55"),
-        .price = 5000,
+        .price = 8000,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
@@ -10044,7 +10044,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_SCALD, // Todo
     },
 
-    [ITEM_TM56] =
+    [ITEM_TM_FLING] =
     {
         .name = _("TM56"),
         .price = 500,
@@ -10056,7 +10056,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_FLING, // Todo
     },
 
-    [ITEM_TM57] =
+    [ITEM_TM_CHARGE_BEAM] =
     {
         .name = _("TM57"),
         .price = 3000,
@@ -10068,7 +10068,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_CHARGE_BEAM, // Todo
     },
 
-    [ITEM_TM58] =
+    [ITEM_TM_SKY_DROP] =
     {
         .name = _("TM58"),
         .price = 3000,
@@ -10080,7 +10080,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_SKY_DROP, // Todo
     },
 
-    [ITEM_TM59] =
+    [ITEM_TM_INCINERATE] =
     {
         .name = _("TM59"),
         .price = 3000,
@@ -10092,7 +10092,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_INCINERATE, // Todo
     },
 
-    [ITEM_TM60] =
+    [ITEM_TM_QUASH] =
     {
         .name = _("TM60"),
         .price = 500,
@@ -10104,7 +10104,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_QUASH, // Todo
     },
 
-    [ITEM_TM61] =
+    [ITEM_TM_WILL_O_WISP] =
     {
         .name = _("TM61"),
         .price = 5000,
@@ -10116,7 +10116,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_WILL_O_WISP, // Todo
     },
 
-    [ITEM_TM62] =
+    [ITEM_TM_ACROBATICS] =
     {
         .name = _("TM62"),
         .price = 8000,
@@ -10128,7 +10128,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_ACROBATICS, // Todo
     },
 
-    [ITEM_TM63] =
+    [ITEM_TM_EMBARGO] =
     {
         .name = _("TM63"),
         .price = 500,
@@ -10140,7 +10140,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_EMBARGO, // Todo
     },
 
-    [ITEM_TM64] =
+    [ITEM_TM_EXPLOSION] =
     {
         .name = _("TM64"),
         .price = 3000,
@@ -10152,7 +10152,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_EXPLOSION, // Todo
     },
 
-    [ITEM_TM65] =
+    [ITEM_TM_SHADOW_CLAW] =
     {
         .name = _("TM65"),
         .price = 5000,
@@ -10164,7 +10164,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_SHADOW_CLAW, // Todo
     },
 
-    [ITEM_TM66] =
+    [ITEM_TM_PAYBACK] =
     {
         .name = _("TM66"),
         .price = 5000,
@@ -10176,7 +10176,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_PAYBACK, // Todo
     },
 
-    [ITEM_TM67] =
+    [ITEM_TM_RETALIATE] =
     {
         .name = _("TM67"),
         .price = 3000,
@@ -10188,7 +10188,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_RETALIATE, // Todo
     },
 
-    [ITEM_TM68] =
+    [ITEM_TM_GIGA_IMPACT] =
     {
         .name = _("TM68"),
         .price = 3000,
@@ -10200,7 +10200,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_GIGA_IMPACT, // Todo
     },
 
-    [ITEM_TM69] =
+    [ITEM_TM_ROCK_POLISH] =
     {
         .name = _("TM69"),
         .price = 3000,
@@ -10212,7 +10212,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_ROCK_POLISH, // Todo
     },
 
-    [ITEM_TM70] =
+    [ITEM_TM_FOCUS_PUNCH] =
     {
         .name = _("TM70"),
         .price = 3000,
@@ -10224,7 +10224,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_FOCUS_PUNCH, // Todo
     },
 
-    [ITEM_TM71] =
+    [ITEM_TM_STONE_EDGE] =
     {
         .name = _("TM71"),
         .price = 5000,
@@ -10236,7 +10236,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_STONE_EDGE, // Todo
     },
 
-    [ITEM_TM72] =
+    [ITEM_TM_VOLT_SWITCH] =
     {
         .name = _("TM72"),
         .price = 8000,
@@ -10248,7 +10248,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_VOLT_SWITCH, // Todo
     },
 
-    [ITEM_TM73] =
+    [ITEM_TM_THUNDER_WAVE] =
     {
         .name = _("TM73"),
         .price = 3000,
@@ -10260,7 +10260,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_THUNDER_WAVE, // Todo
     },
 
-    [ITEM_TM74] =
+    [ITEM_TM_GYRO_BALL] =
     {
         .name = _("TM74"),
         .price = 3000,
@@ -10272,7 +10272,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_GYRO_BALL, // Todo
     },
 
-    [ITEM_TM75] =
+    [ITEM_TM_SWORDS_DANCE] =
     {
         .name = _("TM75"),
         .price = 8000,
@@ -10284,10 +10284,10 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_SWORDS_DANCE, // Todo
     },
 
-    [ITEM_TM76] =
+    [ITEM_TM_STRUGGLE_BUG] =
     {
         .name = _("TM76"),
-        .price = 1000,
+        .price = 3000,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
@@ -10296,7 +10296,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_STRUGGLE_BUG, // Todo
     },
 
-    [ITEM_TM77] =
+    [ITEM_TM_PSYCH_UP] =
     {
         .name = _("TM77"),
         .price = 500,
@@ -10308,7 +10308,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_PSYCH_UP, // Todo
     },
 
-    [ITEM_TM78] =
+    [ITEM_TM_BULLDOZE] =
     {
         .name = _("TM78"),
         .price = 3000,
@@ -10320,10 +10320,10 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_BULLDOZE, // Todo
     },
 
-    [ITEM_TM79] =
+    [ITEM_TM_FROST_BREATH] =
     {
         .name = _("TM79"),
-        .price = 5000,
+        .price = 3000,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
@@ -10332,7 +10332,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_FROST_BREATH, // Todo
     },
 
-    [ITEM_TM80] =
+    [ITEM_TM_ROCK_SLIDE] =
     {
         .name = _("TM80"),
         .price = 5000,
@@ -10344,10 +10344,10 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_ROCK_SLIDE, // Todo
     },
 
-    [ITEM_TM81] =
+    [ITEM_TM_X_SCISSOR] =
     {
         .name = _("TM81"),
-        .price = 3000,
+        .price = 5000,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
@@ -10356,7 +10356,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_X_SCISSOR, // Todo
     },
 
-    [ITEM_TM82] =
+    [ITEM_TM_DRAGON_TAIL] =
     {
         .name = _("TM82"),
         .price = 3000,
@@ -10368,7 +10368,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_DRAGON_TAIL, // Todo
     },
 
-    [ITEM_TM83] =
+    [ITEM_TM_WORK_UP] =
     {
         .name = _("TM83"),
         .price = 1000,
@@ -10380,7 +10380,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_WORK_UP, // Todo
     },
 
-    [ITEM_TM84] =
+    [ITEM_TM_POISON_JAB] =
     {
         .name = _("TM84"),
         .price = 5000,
@@ -10392,10 +10392,10 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_POISON_JAB, // Todo
     },
 
-    [ITEM_TM85] =
+    [ITEM_TM_DREAM_EATER] =
     {
         .name = _("TM85"),
-        .price = 5000,
+        .price = 1000,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
@@ -10404,10 +10404,10 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_DREAM_EATER, // Todo
     },
 
-    [ITEM_TM86] =
+    [ITEM_TM_GRASS_KNOT] =
     {
         .name = _("TM86"),
-        .price = 1000,
+        .price = 3000,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
@@ -10416,7 +10416,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_GRASS_KNOT, // Todo
     },
 
-    [ITEM_TM87] =
+    [ITEM_TM_SWAGGER] =
     {
         .name = _("TM87"),
         .price = 3000,
@@ -10428,10 +10428,10 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_SWAGGER, // Todo
     },
 
-    [ITEM_TM88] =
+    [ITEM_TM_PLUCK] =
     {
         .name = _("TM88"),
-        .price = 500,
+        .price = 1000,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
@@ -10440,7 +10440,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_PLUCK, // Todo
     },
 
-    [ITEM_TM89] =
+    [ITEM_TM_U_TURN] =
     {
         .name = _("TM89"),
         .price = 8000,
@@ -10452,10 +10452,10 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_U_TURN, // Todo
     },
 
-    [ITEM_TM90] =
+    [ITEM_TM_SUBSTITUTE] =
     {
         .name = _("TM90"),
-        .price = 3000,
+        .price = 8000,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
@@ -10464,10 +10464,10 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_SUBSTITUTE, // Todo
     },
 
-    [ITEM_TM91] =
+    [ITEM_TM_FLASH_CANNON] =
     {
         .name = _("TM91"),
-        .price = 3000,
+        .price = 5000,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
@@ -10476,7 +10476,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_FLASH_CANNON, // Todo
     },
 
-    [ITEM_TM92] =
+    [ITEM_TM_TRICK_ROOM] =
     {
         .name = _("TM92"),
         .price = 1000,
@@ -10488,7 +10488,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_TRICK_ROOM, // Todo
     },
 
-    [ITEM_TM93] =
+    [ITEM_TM_WILD_CHARGE] =
     {
         .name = _("TM93"),
         .price = 5000,
@@ -10500,7 +10500,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_WILD_CHARGE, // Todo
     },
 
-    [ITEM_TM94] =
+    [ITEM_TM_WATER_PULSE] =
     {
         .name = _("TM94"),
         .price = 3000,
@@ -10512,7 +10512,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_WATER_PULSE, // Todo
     },
 
-    [ITEM_TM95] =
+    [ITEM_TM_SNARL] =
     {
         .name = _("TM95"),
         .price = 3000,
@@ -10524,10 +10524,10 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_SNARL, // Todo
     },
 
-    [ITEM_TM96] =
+    [ITEM_TM_BULLET_SEED] =
     {
         .name = _("TM96"),
-        .price = 5000,
+        .price = 3000,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
@@ -10536,7 +10536,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_BULLET_SEED, // Todo
     },
 
-    [ITEM_TM97] =
+    [ITEM_TM_GIGA_DRAIN] =
     {
         .name = _("TM97"),
         .price = 5000,
@@ -10548,7 +10548,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_GIGA_DRAIN, // Todo
     },
 
-    [ITEM_TM98] =
+    [ITEM_TM_IRON_TAIL] =
     {
         .name = _("TM98"),
         .price = 3000,
@@ -10560,7 +10560,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_IRON_TAIL, // Todo
     },
 
-    [ITEM_TM99] =
+    [ITEM_TM_SHOCK_WAVE] =
     {
         .name = _("TM99"),
         .price = 3000,
@@ -10572,10 +10572,10 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_SHOCK_WAVE, // Todo
     },
 
-    [ITEM_TM100] =
+    [ITEM_TM_SKILL_SWAP] =
     {
         .name = _("TM100"),
-        .price = 3000,
+        .price = 1000,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,

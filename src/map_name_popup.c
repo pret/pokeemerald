@@ -16,6 +16,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "script.h"
 #include "constants/battle_frontier.h"
 #include "constants/layouts.h"
 #include "constants/region_map_sections.h"

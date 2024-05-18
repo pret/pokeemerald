@@ -2,15 +2,15 @@
 #define GUARD_CONSTANTS_TMS_HMS_H
 
 #define FOREACH_TM(F) \
-    F(FOCUS_PUNCH) \
+    F(HONE_CLAWS) \
     F(DRAGON_CLAW) \
-    F(WATER_PULSE) \
+    F(PSYSHOCK) \
     F(CALM_MIND) \
     F(ROAR) \
     F(TOXIC) \
     F(HAIL) \
     F(BULK_UP) \
-    F(BULLET_SEED) \
+    F(VENOSHOCK) \
     F(HIDDEN_POWER) \
     F(SUNNY_DAY) \
     F(TAUNT) \
@@ -20,11 +20,11 @@
     F(LIGHT_SCREEN) \
     F(PROTECT) \
     F(RAIN_DANCE) \
-    F(GIGA_DRAIN) \
+    F(TELEKINESIS) \
     F(SAFEGUARD) \
     F(FRUSTRATION) \
     F(SOLAR_BEAM) \
-    F(IRON_TAIL) \
+    F(SMACK_DOWN) \
     F(THUNDERBOLT) \
     F(THUNDER) \
     F(EARTHQUAKE) \
@@ -35,7 +35,7 @@
     F(BRICK_BREAK) \
     F(DOUBLE_TEAM) \
     F(REFLECT) \
-    F(SHOCK_WAVE) \
+    F(SLUDGE_WAVE) \
     F(FLAMETHROWER) \
     F(SLUDGE_BOMB) \
     F(SANDSTORM) \
@@ -44,14 +44,64 @@
     F(AERIAL_ACE) \
     F(TORMENT) \
     F(FACADE) \
-    F(SECRET_POWER) \
+    F(FLAME_CHARGE) \
     F(REST) \
     F(ATTRACT) \
     F(THIEF) \
-    F(STEEL_WING) \
+    F(LOW_SWEEP) \
+    F(ROUND) \
+    F(ECHOED_VOICE) \
+    F(OVERHEAT) \
+    F(ALLY_SWITCH) \
+    F(FOCUS_BLAST) \
+    F(ENERGY_BALL) \
+    F(FALSE_SWIPE) \
+    F(SCALD) \
+    F(FLING) \
+    F(CHARGE_BEAM) \
+    F(SKY_DROP) \
+    F(INCINERATE) \
+    F(QUASH) \
+    F(WILL_O_WISP) \
+    F(ACROBATICS) \
+    F(EMBARGO) \
+    F(EXPLOSION) \
+    F(SHADOW_CLAW) \
+    F(PAYBACK) \
+    F(RETALIATE) \
+    F(GIGA_IMPACT) \
+    F(ROCK_POLISH) \
+    F(FOCUS_PUNCH) \
+    F(STONE_EDGE) \
+    F(VOLT_SWITCH) \
+    F(THUNDER_WAVE) \
+    F(GYRO_BALL) \
+    F(SWORDS_DANCE) \
+    F(STRUGGLE_BUG) \
+    F(PSYCH_UP) \
+    F(BULLDOZE) \
+    F(FROST_BREATH) \
+    F(ROCK_SLIDE) \
+    F(X_SCISSOR) \
+    F(DRAGON_TAIL) \
+    F(WORK_UP) \
+    F(POISON_JAB) \
+    F(DREAM_EATER) \
+    F(GRASS_KNOT) \
+    F(SWAGGER) \
+    F(PLUCK) \
+    F(U_TURN) \
+    F(SUBSTITUTE) \
+    F(FLASH_CANNON) \
+    F(TRICK_ROOM) \
+    F(WILD_CHARGE) \
+    F(WATER_PULSE) \
+    F(SNARL) \
+    F(BULLET_SEED) \
+    F(GIGA_DRAIN) \
+    F(IRON_TAIL) \
+    F(SHOCK_WAVE) \
     F(SKILL_SWAP) \
-    F(SNATCH) \
-    F(OVERHEAT)
 
 #define FOREACH_HM(F) \
     F(CUT) \
