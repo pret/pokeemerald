@@ -10324,9 +10324,29 @@ uq4_12_t GetTypeEffectiveness(struct Pokemon *mon, u8 moveType)
         if (type2 != type1)
             MulByTypeEffectiveness(&modifier, MOVE_POUND, moveType, 0, type2, 0, FALSE);
 
-        if (moveType == TYPE_GROUND && abilityDef == ABILITY_LEVITATE)
+        if (abilityDef == ABILITY_LEVITATE && moveType == TYPE_GROUND)
             modifier = UQ_4_12(0.0);
-        if (abilityDef == ABILITY_WONDER_GUARD && modifier <= UQ_4_12(1.0))
+        else if (abilityDef == ABILITY_WONDER_GUARD && modifier <= UQ_4_12(1.0))
+            modifier = UQ_4_12(0.0);
+        else if (abilityDef == ABILITY_FLASH_FIRE && moveType == TYPE_FIRE)
+            modifier = UQ_4_12(0.0);
+        else if (abilityDef == ABILITY_LIGHTNING_ROD && moveType == TYPE_ELECTRIC) // TODO: Add future Lightning Rod config
+            modifier = UQ_4_12(0.0);
+        else if (abilityDef == ABILITY_VOLT_ABSORB && moveType == TYPE_ELECTRIC)
+            modifier = UQ_4_12(0.0);
+        else if (abilityDef == ABILITY_MOTOR_DRIVE && moveType == TYPE_ELECTRIC)
+            modifier = UQ_4_12(0.0);
+        else if (abilityDef == ABILITY_MOTOR_DRIVE && moveType == TYPE_ELECTRIC)
+            modifier = UQ_4_12(0.0);
+        else if (abilityDef == ABILITY_WATER_ABSORB && moveType == TYPE_WATER)
+            modifier = UQ_4_12(0.0);
+        else if (abilityDef == ABILITY_DRY_SKIN && moveType == TYPE_WATER)
+            modifier = UQ_4_12(0.0);
+        else if (abilityDef == ABILITY_STORM_DRAIN && moveType == TYPE_WATER)
+            modifier = UQ_4_12(0.0);
+        else if (abilityDef == ABILITY_SAP_SIPPER && moveType == TYPE_GRASS)
+            modifier = UQ_4_12(0.0);
+        else if (abilityDef == ABILITY_EARTH_EATER && moveType == TYPE_GROUND)
             modifier = UQ_4_12(0.0);
     }
     
