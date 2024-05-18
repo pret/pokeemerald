@@ -2421,12 +2421,12 @@ void GiveMonInitialMoveset(struct Pokemon *mon)
 void GiveBoxMonInitialMovesetRandom(struct BoxPokemon *boxMon)
 {
     s32 j;
-    u16 move = Random() % MOVES_COUNT_GEN4;
+    u16 move = 0;
     bool8 firstMoveGiven = TRUE;
 
     for (j = 0; j < MAX_MON_MOVES; j++)
     {
-        move = sRandomValidMoves[Random() % RANDOM_MOVES_COUNT];
+        move = sRandomValidMoves[RandomModulo(move, RANDOM_MOVES_COUNT)];
         
         if (firstMoveGiven)
         {
@@ -2435,10 +2435,10 @@ void GiveBoxMonInitialMovesetRandom(struct BoxPokemon *boxMon)
             {
                 if (gMovesInfo[move].power <= 1)
                 {
-                    move = sRandomValidMoves[Random() % RANDOM_MOVES_COUNT];
+                    move = sRandomValidMoves[RandomModulo(move, RANDOM_MOVES_COUNT)];
                 }
                 else
-                    continue;
+                    break;
             }
         }
         if (firstMoveGiven)
@@ -2459,7 +2459,6 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
         GiveBoxMonInitialMovesetRandom(boxMon);
         return;
     }
-
     for (i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
     {
         if (learnset[i].level > level)
@@ -8371,7 +8370,7 @@ u16 GetSpeciesRandomSeeded(u16 species)
 
 u16 GetSpeciesRandomNotSeeded(u16 species)
 {
-    return sRandomSpeciesLegendary[RandomSeededModulo(species, RANDOM_SPECIES_COUNT_LEGENDARY)];
+    return sRandomSpeciesLegendary[RandomModulo(species, RANDOM_SPECIES_COUNT_LEGENDARY)];
 }
 
 u16 GetRandomMove(u16 move, u16 species)

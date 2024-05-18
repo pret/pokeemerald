@@ -10,7 +10,7 @@
 
 //tx_randomizer_and_challenges
 u16 RandomSeeded(u16 value);
-u16 RandomSeededModulo(u32 value, u16 modulo);
+u16 RandomModulo(u32 value, u16 modulo);
 void ShuffleListU8(u8 *list, u8 count, u8 seed);
 void ShuffleListU16(u16 *list, u16 count, u32 seed);
 u16 RandomSeededModulo2(u32 value, u16 modulo);

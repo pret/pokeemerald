@@ -2200,12 +2200,12 @@ void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon 
     {
         if (!isPlayer)
         {
-            for (j = 0; j < MAX_MON_MOVES; j++)
-            {
-                u16 move = GetRandomMove(partyEntry->moves[j], partyEntry->species);
-                SetMonData(mon, MON_DATA_MOVE1 + j, &move);
-                SetMonData(mon, MON_DATA_PP1 + j, &gMovesInfo[move].pp);
-            }
+            //for (j = 0; j < MAX_MON_MOVES; j++)
+            //{
+            //    u16 move = GetRandomMove(partyEntry->moves[j], partyEntry->species);
+            //    SetMonData(mon, MON_DATA_MOVE1 + j, &move);
+            //    SetMonData(mon, MON_DATA_PP1 + j, &gMovesInfo[move].pp);
+            //}
             return;
         }
     }
