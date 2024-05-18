@@ -1482,7 +1482,9 @@ static s16 ReallocSpriteTiles(struct Sprite *sprite, u32 byteSize)
             CpuFastFill16(0, (u8 *)OBJ_VRAM0 + TILE_SIZE_4BPP * i, byteSize);
             sprite->oam.tileNum = i;
         }
-    } else {
+    }
+    else
+    {
         i = -1;
     }
     
@@ -2013,7 +2015,7 @@ static u16 GetOverworldCastformSpecies(void)
     return SPECIES_CASTFORM_NORMAL;
 }
 
-static bool8 GetMonInfo(struct Pokemon * mon, u16 *species, u8 *form, u8 *shiny)
+static bool8 GetMonInfo(struct Pokemon *mon, u16 *species, u8 *form, u8 *shiny)
 {
     *form = 0; // default
     if (!mon)
@@ -2113,10 +2115,9 @@ void RemoveFollowingPokemon(void)
 // Determine whether follower *should* be visible
 static bool32 IsFollowerVisible(void)
 {
-    return
-    !(TestPlayerAvatarFlags(FOLLOWER_INVISIBLE_FLAGS)
-    || MetatileBehavior_IsSurfableWaterOrUnderwater(gObjectEvents[gPlayerAvatar.objectEventId].previousMetatileBehavior)
-    || MetatileBehavior_IsForcedMovementTile(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior));
+    return !(TestPlayerAvatarFlags(FOLLOWER_INVISIBLE_FLAGS)
+            || MetatileBehavior_IsSurfableWaterOrUnderwater(gObjectEvents[gPlayerAvatar.objectEventId].previousMetatileBehavior)
+            || MetatileBehavior_IsForcedMovementTile(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior));
 }
 
 static bool8 SpeciesHasType(u16 species, u8 type)
@@ -2239,16 +2240,20 @@ bool32 CheckMsgInfo(const struct FollowerMsgInfoExtended *info, struct Pokemon *
     {
         // any condition matches
         for (i = 0; i < ARRAY_COUNT(info->conditions) && info->conditions[i].type; i++)
+        {
             if (CheckMsgCondition(&info->conditions[i], mon, species, obj))
                 return TRUE;
+        }
         return FALSE;
     }
     else
     {
         // all conditions must match
         for (i = 0; i < ARRAY_COUNT(info->conditions) && info->conditions[i].type; i++)
+        {
             if (!CheckMsgCondition(&info->conditions[i], mon, species, obj))
                 return FALSE;
+        }
         return TRUE;
     }
 }
@@ -5275,10 +5280,9 @@ bool8 MovementType_FollowPlayer_Shadow(struct ObjectEvent *objectEvent, struct S
     {
         // Shadow player's position
         objectEvent->invisible = TRUE;
-        MoveObjectEventToMapCoords(
-            objectEvent,
-            gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x,
-            gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y
+        MoveObjectEventToMapCoords(objectEvent,
+                                   gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x,
+                                   gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y
         );
         objectEvent->triggerGroundEffectsOnMove = FALSE; // Stop endless reflection spawning
         return FALSE;
@@ -5287,10 +5291,9 @@ bool8 MovementType_FollowPlayer_Shadow(struct ObjectEvent *objectEvent, struct S
     // This way the player cannot talk to the invisible follower before it appears
     if (objectEvent->invisible)
     {
-        MoveObjectEventToMapCoords(
-            objectEvent,
-            gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x,
-            gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y
+        MoveObjectEventToMapCoords(objectEvent,
+                                   gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x,
+                                   gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y
         );
         objectEvent->triggerGroundEffectsOnMove = FALSE; // Stop endless reflection spawning
     }
@@ -5357,8 +5360,11 @@ bool8 FollowablePlayerMovement_Idle(struct ObjectEvent *objectEvent, struct Spri
     {
         // finish movement action
         objectEvent->singleMovementActive = 0;
-    } else if (OW_MON_BOBBING == TRUE && (sprite->data[3] & 7) == 2)
+    }
+    else if (OW_MON_BOBBING == TRUE && (sprite->data[3] & 7) == 2)
+    {
         sprite->y2 ^= -1;
+    }
     UpdateFollowerTransformEffect(objectEvent, sprite);
     return FALSE;
 }
@@ -5483,9 +5489,7 @@ bool8 FollowablePlayerMovement_GoSpeed1(struct ObjectEvent *objectEvent, struct 
     ObjectEventMoveDestCoords(objectEvent, direction, &x, &y);
     ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkFastMovementAction(direction));
     if (GetCollisionAtCoords(objectEvent, x, y, direction) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
-    {
         ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(direction));
-    }
     objectEvent->singleMovementActive = TRUE;
     sprite->sTypeFuncId = 2;
     return TRUE;
@@ -5502,9 +5506,7 @@ bool8 FollowablePlayerMovement_GoSpeed2(struct ObjectEvent *objectEvent, struct 
     ObjectEventMoveDestCoords(objectEvent, direction, &x, &y);
     ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkFasterMovementAction(direction));
     if (GetCollisionAtCoords(objectEvent, x, y, direction) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
-    {
         ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(direction));
-    }
     objectEvent->singleMovementActive = TRUE;
     sprite->sTypeFuncId = 2;
     return TRUE;
@@ -5521,9 +5523,7 @@ bool8 FollowablePlayerMovement_Slide(struct ObjectEvent *objectEvent, struct Spr
     ObjectEventMoveDestCoords(objectEvent, direction, &x, &y);
     ObjectEventSetSingleMovement(objectEvent, sprite, GetSlideMovementAction(direction));
     if (GetCollisionAtCoords(objectEvent, x, y, direction) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
-    {
         ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(direction));
-    }
     objectEvent->singleMovementActive = TRUE;
     sprite->sTypeFuncId = 2;
     return TRUE;
@@ -5552,9 +5552,7 @@ bool8 FollowablePlayerMovement_GoSpeed4(struct ObjectEvent *objectEvent, struct 
     ObjectEventMoveDestCoords(objectEvent, direction, &x, &y);
     ObjectEventSetSingleMovement(objectEvent, sprite, GetJumpMovementAction(direction));
     if (GetCollisionAtCoords(objectEvent, x, y, direction) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
-    {
         ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(direction));
-    }
     objectEvent->singleMovementActive = TRUE;
     sprite->sTypeFuncId = 2;
     return TRUE;
@@ -9425,38 +9423,38 @@ static void DoTracksGroundEffect_Footprints(struct ObjectEvent *objEvent, struct
     FieldEffectStart(sandFootprints_FieldEffectData[isDeepSand]);
 }
 
-static void DoTracksGroundEffect_FootprintsB(struct ObjectEvent *objEvent, struct Sprite *sprite, u8 a)
+static void DoTracksGroundEffect_FootprintsB(struct ObjectEvent *objEvent, struct Sprite *sprite, bool8 isDeepSand)
 {
-	// First half-word is a Field Effect script id. (gFieldEffectScriptPointers)
-	u16 otherFootprintsA_FieldEffectData[2] = {
-		FLDEFF_TRACKS_SPOT,
-		FLDEFF_TRACKS_SPOT
-	};
+    // First half-word is a Field Effect script id. (gFieldEffectScriptPointers)
+    u16 otherFootprintsA_FieldEffectData[2] = {
+        FLDEFF_TRACKS_SPOT,
+        FLDEFF_TRACKS_SPOT
+    };
 
-	gFieldEffectArguments[0] = objEvent->previousCoords.x;
-	gFieldEffectArguments[1] = objEvent->previousCoords.y;
-	gFieldEffectArguments[2] = 149;
-	gFieldEffectArguments[3] = 2;
-	gFieldEffectArguments[4] = objEvent->facingDirection;
+    gFieldEffectArguments[0] = objEvent->previousCoords.x;
+    gFieldEffectArguments[1] = objEvent->previousCoords.y;
+    gFieldEffectArguments[2] = 149;
+    gFieldEffectArguments[3] = 2;
+    gFieldEffectArguments[4] = objEvent->facingDirection;
     gFieldEffectArguments[5] = objEvent->previousMetatileBehavior;
-	FieldEffectStart(otherFootprintsA_FieldEffectData[a]);
+    FieldEffectStart(otherFootprintsA_FieldEffectData[isDeepSand]);
 }
 
-static void DoTracksGroundEffect_FootprintsC(struct ObjectEvent *objEvent, struct Sprite *sprite, u8 a)
+static void DoTracksGroundEffect_FootprintsC(struct ObjectEvent *objEvent, struct Sprite *sprite, bool8 isDeepSand)
 {
-	// First half-word is a Field Effect script id. (gFieldEffectScriptPointers)
-	u16 otherFootprintsB_FieldEffectData[2] = {
-		FLDEFF_TRACKS_BUG,
-		FLDEFF_TRACKS_BUG
-	};
+    // First half-word is a Field Effect script id. (gFieldEffectScriptPointers)
+    u16 otherFootprintsB_FieldEffectData[2] = {
+        FLDEFF_TRACKS_BUG,
+        FLDEFF_TRACKS_BUG
+    };
 
-	gFieldEffectArguments[0] = objEvent->previousCoords.x;
-	gFieldEffectArguments[1] = objEvent->previousCoords.y;
-	gFieldEffectArguments[2] = 149;
-	gFieldEffectArguments[3] = 2;
-	gFieldEffectArguments[4] = objEvent->facingDirection;
+    gFieldEffectArguments[0] = objEvent->previousCoords.x;
+    gFieldEffectArguments[1] = objEvent->previousCoords.y;
+    gFieldEffectArguments[2] = 149;
+    gFieldEffectArguments[3] = 2;
+    gFieldEffectArguments[4] = objEvent->facingDirection;
     gFieldEffectArguments[5] = objEvent->previousMetatileBehavior;
-	FieldEffectStart(otherFootprintsB_FieldEffectData[a]);
+    FieldEffectStart(otherFootprintsB_FieldEffectData[isDeepSand]);
 }
 
 static void DoTracksGroundEffect_BikeTireTracks(struct ObjectEvent *objEvent, struct Sprite *sprite, bool8 isDeepSand)
