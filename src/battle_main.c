@@ -2303,7 +2303,19 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                     CreateMon(&party[i], partyData[i].species, monLevel, MAX_PER_STAT_IVS, TRUE, personalityValue, otIdType, fixedOtId);
                     if (!isPlayer)
                         DebugPrintf("Reached Create NPC Kyogre: %d", gSpecialVar_Unused_0x8014);
-                }   
+                }
+                else if ((gSpecialVar_Unused_0x8014 == TRAINER_ARCHIE_PIT_BOSS) && (!isPlayer))
+                {
+                    u16 newSpecies = GetSpeciesRandomNotSeeded(partyData[i].species);
+                    const struct Evolution *evolutions = GetSpeciesEvolutions(newSpecies);
+                    while (evolutions != NULL)
+                    {
+                        newSpecies = evolutions[0].targetSpecies;
+                        evolutions = GetSpeciesEvolutions(newSpecies);
+                        DebugPrintf("Evolved: %d", newSpecies);
+                    }
+                    CreateMon(&party[i], newSpecies, monLevel, 0, TRUE, personalityValue, otIdType, fixedOtId);
+                }
                 else
                 {
                     CreateMon(&party[i], GetSpeciesRandomNotSeeded(partyData[i].species), monLevel, 0, TRUE, personalityValue, otIdType, fixedOtId);
