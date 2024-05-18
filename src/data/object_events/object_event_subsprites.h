@@ -2130,6 +2130,327 @@ static const struct Subsprite sOamTable_24x32_4[] = {
     },
 };
 
+static const struct Subsprite sOamTable_64x64_Follower[] = {
+    {
+        .x = -32, .y = -32,
+        SUBSPRITE_SHAPE(64, 32),
+        .tileOffset = 0,
+        .priority = 1
+    },
+    {
+        .x = -32, .y = 0,
+        SUBSPRITE_SHAPE(64, 32),
+        .tileOffset = 32,
+        .priority = 2
+    }
+};
+
+static const struct Subsprite sOamTable_64x64_HotSprings[] = {
+    {
+        .x = -32,
+        .y = -32,
+        SUBSPRITE_SHAPE(64, 32),
+        .tileOffset = 0,
+        .priority = 2
+    },
+    {
+        .x = -32,
+        .y = 0,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 32,
+        .priority = 2
+    },
+    {
+        .x = 0,
+        .y = 0,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 36,
+        .priority = 2
+    },
+    {
+        .x = -32,
+        .y = 8,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 40,
+        .priority = 2
+    },
+    {
+        .x = 0,
+        .y = 8,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 44,
+        .priority = 2
+    },
+    {
+        .x = -32,
+        .y = 16,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 48,
+        .priority = 2
+    },
+    {
+        .x = 0,
+        .y = 16,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 52,
+        .priority = 2
+    },
+    {
+        .x = -32,
+        .y = 24,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 56,
+        .priority = 3
+    },
+    {
+        .x = 0,
+        .y = 24,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 60,
+        .priority = 3
+    },
+};
+
+static const struct Subsprite sOamTable_64x64_Grass2[] = {
+    {
+        .x = -32,
+        .y = -32,
+        SUBSPRITE_SHAPE(64, 32),
+        .tileOffset = 0,
+        .priority = 2
+    },
+    {
+        .x = -32,
+        .y = 0,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 32,
+        .priority = 2
+    },
+    {
+        .x = 0,
+        .y = 0,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 36,
+        .priority = 2
+    },
+    {
+        .x = -32,
+        .y = 8,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 40,
+        .priority = 2
+    },
+    {
+        .x = 0,
+        .y = 8,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 44,
+        .priority = 2
+    },
+    {
+        .x = -32,
+        .y = 16,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 48,
+        .priority = 3
+    },
+    {
+        .x = 0,
+        .y = 16,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 52,
+        .priority = 3
+    },
+    {
+        .x = -32,
+        .y = 24,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 56,
+        .priority = 3
+    },
+    {
+        .x = 0,
+        .y = 24,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 60,
+        .priority = 3
+    },
+};
+
+static const struct Subsprite sOamTable_64x64_Grass1[] = {
+    {
+        .x = -32,
+        .y = -32,
+        SUBSPRITE_SHAPE(64, 32),
+        .tileOffset = 0,
+        .priority = 1
+    },
+    {
+        .x = -32,
+        .y = 0,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 32,
+        .priority = 1
+    },
+    {
+        .x = 0,
+        .y = 0,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 36,
+        .priority = 1
+    },
+    {
+        .x = -32,
+        .y = 8,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 40,
+        .priority = 1
+    },
+    {
+        .x = 0,
+        .y = 8,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 44,
+        .priority = 1
+    },
+    {
+        .x = -32,
+        .y = 16,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 48,
+        .priority = 3
+    },
+    {
+        .x = 0,
+        .y = 16,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 52,
+        .priority = 3
+    },
+    {
+        .x = -32,
+        .y = 24,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 56,
+        .priority = 3
+    },
+    {
+        .x = 0,
+        .y = 24,
+        SUBSPRITE_SHAPE(32, 8),
+        .tileOffset = 60,
+        .priority = 3
+    },
+};
+
+static const struct Subsprite sOamTable_64x64_Grass3[] = {
+    {
+        .x = -32,
+        .y = -24,
+        SUBSPRITE_SHAPE(64, 32),
+        .tileOffset = 0,
+        .priority = 2
+    },
+    {
+        .x = -32,
+        .y = 8,
+        SUBSPRITE_SHAPE(64, 32),
+        .tileOffset = 32,
+        .priority = 3
+    }
+};
+
+static const struct Subsprite sOamTable_64x64_Grass4[] = {
+    {
+        .x = -32,
+        .y = -24,
+        SUBSPRITE_SHAPE(64, 32),
+        .tileOffset = 0,
+        .priority = 1
+    },
+    {
+        .x = -32,
+        .y = 8,
+        SUBSPRITE_SHAPE(64, 32),
+        .tileOffset = 32,
+        .priority = 3
+    }
+};
+
+
+static const struct SubspriteTable sOamTables_16x24[] = {
+    SUBSPRITE_TABLE_ENTRY(sOamTable_16x24_0),
+    SUBSPRITE_TABLE_ENTRY(sOamTable_16x24_0),
+    SUBSPRITE_TABLE_ENTRY(sOamTable_16x24_1),
+    SUBSPRITE_TABLE_ENTRY(sOamTable_16x24_2),
+    SUBSPRITE_TABLE_ENTRY(sOamTable_16x24_3),
+    SUBSPRITE_TABLE_ENTRY(sOamTable_16x24_4),
+};
+
+
+static const struct SubspriteTable sOamTables_24x16[] = {
+    SUBSPRITE_TABLE_ENTRY(sOamTable_24x16_0),
+    SUBSPRITE_TABLE_ENTRY(sOamTable_24x16_0),
+    SUBSPRITE_TABLE_ENTRY(sOamTable_24x16_1),
+    SUBSPRITE_TABLE_ENTRY(sOamTable_24x16_2),
+    SUBSPRITE_TABLE_ENTRY(sOamTable_24x16_3),
+    SUBSPRITE_TABLE_ENTRY(sOamTable_24x16_3),
+};
+
+static const struct SubspriteTable sOamTables_24x24[] = {
+    SUBSPRITE_TABLE_ENTRY(sOamTable_24x24_0), // reflections
+    SUBSPRITE_TABLE_ENTRY(sOamTable_24x24_0), // all 2
+    SUBSPRITE_TABLE_ENTRY(sOamTable_24x24_1), // all 1
+    SUBSPRITE_TABLE_ENTRY(sOamTable_24x24_2), // bottom 8 3
+    SUBSPRITE_TABLE_ENTRY(sOamTable_24x24_3), // bottom 16 3
+    SUBSPRITE_TABLE_ENTRY(sOamTable_24x24_4), // top 1, bottom 16 3
+};
+
+static const struct SubspriteTable sOamTables_24x32[] = {
+    SUBSPRITE_TABLE_ENTRY(sOamTable_24x32_0),
+    SUBSPRITE_TABLE_ENTRY(sOamTable_24x32_0),
+    SUBSPRITE_TABLE_ENTRY(sOamTable_24x32_1),
+    SUBSPRITE_TABLE_ENTRY(sOamTable_24x32_2),
+    SUBSPRITE_TABLE_ENTRY(sOamTable_24x32_3),
+    SUBSPRITE_TABLE_ENTRY(sOamTable_24x32_4),
+};
+
+
+static const struct SubspriteTable sOamTables_32x24[] = {
+    SUBSPRITE_TABLE_ENTRY(sOamTable_32x24_0),
+    SUBSPRITE_TABLE_ENTRY(sOamTable_32x24_0),
+    SUBSPRITE_TABLE_ENTRY(sOamTable_32x24_1),
+    SUBSPRITE_TABLE_ENTRY(sOamTable_32x24_2),
+    SUBSPRITE_TABLE_ENTRY(sOamTable_32x24_3),
+    SUBSPRITE_TABLE_ENTRY(sOamTable_32x24_4),
+};
+
+
+// For following pokemon
+// Makes the top 32 pixels priority 1,
+// so that very tall pokemon's heads
+// will appear on top of buildings, etc.
+static const struct SubspriteTable sOamTables_64x64_Tall[] = {
+    {}, // unused
+    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_Follower), // elevation 3
+    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_1), // elevation 4
+    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_HotSprings), // hot springs
+    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_Grass2), // long grass
+    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_Grass1) // long grass priority 1
+};
+
+// Like sOamTables_64x64_Tall, but fewer pixels visible in long grass
+// Meant for pokemon that are more long than tall like Wailord
+static const struct SubspriteTable sOamTables_64x64_Long[] = {
+    {}, // unused
+    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_Follower), // elevation 3
+    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_1), // elevation 4
+    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_HotSprings), // hot springs
+    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_Grass3), // long grass
+    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_Grass4) // long grass priority 1
+};
+#endif
+
 static const struct Subsprite sOamTable_48x48[] = {
     {
         .x = -24,
@@ -2565,302 +2886,7 @@ static const struct Subsprite sOamTable_48x48_Grass1[] = {
     }
 };
 
-static const struct Subsprite sOamTable_64x64_Follower[] = {
-    {
-        .x = -32, .y = -32,
-        SUBSPRITE_SHAPE(64, 32),
-        .tileOffset = 0,
-        .priority = 1
-    },
-    {
-        .x = -32, .y = 0,
-        SUBSPRITE_SHAPE(64, 32),
-        .tileOffset = 32,
-        .priority = 2
-    }
-};
-
-static const struct Subsprite sOamTable_64x64_HotSprings[] = {
-    {
-        .x = -32,
-        .y = -32,
-        SUBSPRITE_SHAPE(64, 32),
-        .tileOffset = 0,
-        .priority = 2
-    },
-    {
-        .x = -32,
-        .y = 0,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 32,
-        .priority = 2
-    },
-    {
-        .x = 0,
-        .y = 0,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 36,
-        .priority = 2
-    },
-    {
-        .x = -32,
-        .y = 8,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 40,
-        .priority = 2
-    },
-    {
-        .x = 0,
-        .y = 8,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 44,
-        .priority = 2
-    },
-    {
-        .x = -32,
-        .y = 16,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 48,
-        .priority = 2
-    },
-    {
-        .x = 0,
-        .y = 16,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 52,
-        .priority = 2
-    },
-    {
-        .x = -32,
-        .y = 24,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 56,
-        .priority = 3
-    },
-    {
-        .x = 0,
-        .y = 24,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 60,
-        .priority = 3
-    },
-};
-
-static const struct Subsprite sOamTable_64x64_Grass2[] = {
-    {
-        .x = -32,
-        .y = -32,
-        SUBSPRITE_SHAPE(64, 32),
-        .tileOffset = 0,
-        .priority = 2
-    },
-    {
-        .x = -32,
-        .y = 0,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 32,
-        .priority = 2
-    },
-    {
-        .x = 0,
-        .y = 0,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 36,
-        .priority = 2
-    },
-    {
-        .x = -32,
-        .y = 8,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 40,
-        .priority = 2
-    },
-    {
-        .x = 0,
-        .y = 8,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 44,
-        .priority = 2
-    },
-    {
-        .x = -32,
-        .y = 16,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 48,
-        .priority = 3
-    },
-    {
-        .x = 0,
-        .y = 16,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 52,
-        .priority = 3
-    },
-    {
-        .x = -32,
-        .y = 24,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 56,
-        .priority = 3
-    },
-    {
-        .x = 0,
-        .y = 24,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 60,
-        .priority = 3
-    },
-};
-
-static const struct Subsprite sOamTable_64x64_Grass1[] = {
-    {
-        .x = -32,
-        .y = -32,
-        SUBSPRITE_SHAPE(64, 32),
-        .tileOffset = 0,
-        .priority = 1
-    },
-    {
-        .x = -32,
-        .y = 0,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 32,
-        .priority = 1
-    },
-    {
-        .x = 0,
-        .y = 0,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 36,
-        .priority = 1
-    },
-    {
-        .x = -32,
-        .y = 8,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 40,
-        .priority = 1
-    },
-    {
-        .x = 0,
-        .y = 8,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 44,
-        .priority = 1
-    },
-    {
-        .x = -32,
-        .y = 16,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 48,
-        .priority = 3
-    },
-    {
-        .x = 0,
-        .y = 16,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 52,
-        .priority = 3
-    },
-    {
-        .x = -32,
-        .y = 24,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 56,
-        .priority = 3
-    },
-    {
-        .x = 0,
-        .y = 24,
-        SUBSPRITE_SHAPE(32, 8),
-        .tileOffset = 60,
-        .priority = 3
-    },
-};
-
-static const struct Subsprite sOamTable_64x64_Grass3[] = {
-    {
-        .x = -32,
-        .y = -24,
-        SUBSPRITE_SHAPE(64, 32),
-        .tileOffset = 0,
-        .priority = 2
-    },
-    {
-        .x = -32,
-        .y = 8,
-        SUBSPRITE_SHAPE(64, 32),
-        .tileOffset = 32,
-        .priority = 3
-    }
-};
-
-static const struct Subsprite sOamTable_64x64_Grass4[] = {
-    {
-        .x = -32,
-        .y = -24,
-        SUBSPRITE_SHAPE(64, 32),
-        .tileOffset = 0,
-        .priority = 1
-    },
-    {
-        .x = -32,
-        .y = 8,
-        SUBSPRITE_SHAPE(64, 32),
-        .tileOffset = 32,
-        .priority = 3
-    }
-};
-
-
-static const struct SubspriteTable sOamTables_16x24[] = {
-    SUBSPRITE_TABLE_ENTRY(sOamTable_16x24_0),
-    SUBSPRITE_TABLE_ENTRY(sOamTable_16x24_0),
-    SUBSPRITE_TABLE_ENTRY(sOamTable_16x24_1),
-    SUBSPRITE_TABLE_ENTRY(sOamTable_16x24_2),
-    SUBSPRITE_TABLE_ENTRY(sOamTable_16x24_3),
-    SUBSPRITE_TABLE_ENTRY(sOamTable_16x24_4),
-};
-
-
-static const struct SubspriteTable sOamTables_24x16[] = {
-    SUBSPRITE_TABLE_ENTRY(sOamTable_24x16_0),
-    SUBSPRITE_TABLE_ENTRY(sOamTable_24x16_0),
-    SUBSPRITE_TABLE_ENTRY(sOamTable_24x16_1),
-    SUBSPRITE_TABLE_ENTRY(sOamTable_24x16_2),
-    SUBSPRITE_TABLE_ENTRY(sOamTable_24x16_3),
-    SUBSPRITE_TABLE_ENTRY(sOamTable_24x16_3),
-};
-
-static const struct SubspriteTable sOamTables_24x24[] = {
-    SUBSPRITE_TABLE_ENTRY(sOamTable_24x24_0), // reflections
-    SUBSPRITE_TABLE_ENTRY(sOamTable_24x24_0), // all 2
-    SUBSPRITE_TABLE_ENTRY(sOamTable_24x24_1), // all 1
-    SUBSPRITE_TABLE_ENTRY(sOamTable_24x24_2), // bottom 8 3
-    SUBSPRITE_TABLE_ENTRY(sOamTable_24x24_3), // bottom 16 3
-    SUBSPRITE_TABLE_ENTRY(sOamTable_24x24_4), // top 1, bottom 16 3
-};
-
-static const struct SubspriteTable sOamTables_24x32[] = {
-    SUBSPRITE_TABLE_ENTRY(sOamTable_24x32_0),
-    SUBSPRITE_TABLE_ENTRY(sOamTable_24x32_0),
-    SUBSPRITE_TABLE_ENTRY(sOamTable_24x32_1),
-    SUBSPRITE_TABLE_ENTRY(sOamTable_24x32_2),
-    SUBSPRITE_TABLE_ENTRY(sOamTable_24x32_3),
-    SUBSPRITE_TABLE_ENTRY(sOamTable_24x32_4),
-};
-
-
-static const struct SubspriteTable sOamTables_32x24[] = {
-    SUBSPRITE_TABLE_ENTRY(sOamTable_32x24_0),
-    SUBSPRITE_TABLE_ENTRY(sOamTable_32x24_0),
-    SUBSPRITE_TABLE_ENTRY(sOamTable_32x24_1),
-    SUBSPRITE_TABLE_ENTRY(sOamTable_32x24_2),
-    SUBSPRITE_TABLE_ENTRY(sOamTable_32x24_3),
-    SUBSPRITE_TABLE_ENTRY(sOamTable_32x24_4),
-};
-
-
+// Also used for truck
 static const struct SubspriteTable sOamTables_48x48[] = {
     SUBSPRITE_TABLE_ENTRY(sOamTable_48x48), // reflections
     SUBSPRITE_TABLE_ENTRY(sOamTable_48x48), // elevation 3
@@ -2869,29 +2895,3 @@ static const struct SubspriteTable sOamTables_48x48[] = {
     SUBSPRITE_TABLE_ENTRY(sOamTable_48x48_Grass2), // long grass
     SUBSPRITE_TABLE_ENTRY(sOamTable_48x48_Grass1) // long grass priority 1
 };
-
-
-// For following pokemon
-// Makes the top 32 pixels priority 1,
-// so that very tall pokemon's heads
-// will appear on top of buildings, etc.
-static const struct SubspriteTable sOamTables_64x64_Tall[] = {
-    {}, // unused
-    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_Follower), // elevation 3
-    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_1), // elevation 4
-    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_HotSprings), // hot springs
-    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_Grass2), // long grass
-    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_Grass1) // long grass priority 1
-};
-
-// Like sOamTables_64x64_Tall, but fewer pixels visible in long grass
-// Meant for pokemon that are more long than tall like Wailord
-static const struct SubspriteTable sOamTables_64x64_Long[] = {
-    {}, // unused
-    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_Follower), // elevation 3
-    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_1), // elevation 4
-    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_HotSprings), // hot springs
-    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_Grass3), // long grass
-    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_Grass4) // long grass priority 1
-};
-#endif

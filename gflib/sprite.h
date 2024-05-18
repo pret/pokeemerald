@@ -225,9 +225,9 @@ struct Sprite
              // is (offset + 1) << sheetSpan;
              // (This allows using frame-based anim tables for sheet sprites)
              u16 sheetSpan:3;
-            //  u16 flags_4:1;                 //0x10
-            //  u16 flags_5:1;                 //0x20
-            //  u16 flags_6:1;                 //0x40
+             //  u16 flags_4:1;             //0x10
+             //  u16 flags_5:1;             //0x20
+             //  u16 flags_6:1;             //0x40
              u16 flags_7:1;                 //0x80
     /*0x3F*/ u16 hFlip:1;                   //1
              u16 vFlip:1;                   //2

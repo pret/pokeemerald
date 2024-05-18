@@ -1,3 +1,8 @@
+.macro IsFollowerFieldMoveUser var:req
+callfunc ScrFunc_IsFollowerFieldMoveUser
+.2byte \var
+.endm
+
 @ Interact with cuttable tree
 EventScript_CutTree::
 	lockall
@@ -12,8 +17,7 @@ EventScript_CutTree::
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
 EventScript_CutTreeCommon:
-	callfunc ScrFunc_IsFollowerFieldMoveUser
-	.2byte VAR_0x8004
+	IsFollowerFieldMoveUser VAR_0x8004
 	setfieldeffectargument 3, VAR_0x8004 @ skip pose if so
 	dofieldeffect FLDEFF_USE_CUT_ON_TREE
 	waitstate
@@ -77,8 +81,7 @@ EventScript_RockSmash::
 	closemessage
 EventScript_RockSmashCommon:
 	@ check if follower should use the field move
-	callfunc ScrFunc_IsFollowerFieldMoveUser
-	.2byte VAR_0x8004
+	IsFollowerFieldMoveUser VAR_0x8004
 	setfieldeffectargument 3, VAR_0x8004 @ skip pose if so
 	dofieldeffect FLDEFF_USE_ROCK_SMASH
 	waitstate
