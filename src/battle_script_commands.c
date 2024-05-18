@@ -4345,7 +4345,10 @@ static void Cmd_getexp(void)
             else
             {
                 *exp = calculatedExp;
-                gBattleStruct->expShareExpValue = 3 * (calculatedExp / 4);
+                if(FlagGet(FLAG_HARD_MODE))
+                    gBattleStruct->expShareExpValue = (calculatedExp / 2);
+                else
+                    gBattleStruct->expShareExpValue = 3 * (calculatedExp / 4);
                 if (gBattleStruct->expShareExpValue == 0)
                     gBattleStruct->expShareExpValue = 1;
             }

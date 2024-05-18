@@ -67,6 +67,12 @@ PitEntrance_Singles:
 PitEntrance_Doubles:
 	.string "Double Battles$"
 
+PitEntrance_NormalMode:
+	.string "Normal Difficulty$"
+
+PitEntrance_HardMode:
+	.string "Hard Difficulty$"
+
 PitEntrance_TrainerType:
 	.string "Choose Trainer Type:\n"
 	.string "Doubles is in Beta but Working So Far.$"
@@ -74,6 +80,10 @@ PitEntrance_TrainerType:
 PitEntrance_RandomType:
 	.string "Choose Random Mode:\n"
 	.string "Extra Random includes Moves/Abilities.$"
+
+PitEntrance_Mode:
+	.string "Choose Difficulty Mode:\n"
+	.string "Hard mode has less Exp Share Gain.$"
 
 PitEntrance_StartBag::
 	lockall
@@ -101,6 +111,18 @@ PitEntrance_StartBagDoubles::
 	setflag FLAG_DOUBLES_MODE 
 	goto PitEntrance_StartBagContinue2
 PitEntrance_StartBagContinue2::
+	message PitEntrance_Mode
+	dynmultichoice 17, 0, TRUE, 6, 0, DYN_MULTICHOICE_CB_NONE, PitEntrance_NormalMode, PitEntrance_HardMode
+	closemessage
+	goto_if_eq VAR_RESULT, 0, PitEntrance_StartBagModeNormal
+	goto_if_eq VAR_RESULT, 1, PitEntrance_StartBagHard
+PitEntrance_StartBagModeNormal::
+	clearflag FLAG_HARD_MODE 
+	goto PitEntrance_StartBagContinue3
+PitEntrance_StartBagHard::
+	setflag FLAG_HARD_MODE 
+	goto PitEntrance_StartBagContinue3
+PitEntrance_StartBagContinue3::
 	setflag FLAG_CASE_STARTER_MODE
 	callnative InitTrainerIdAndNameData
 	callnative StartNewPokeballCaseUI

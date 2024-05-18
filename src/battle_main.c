@@ -2294,7 +2294,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 CreateMon(&party[i], partyData[i].species, partyData[i].lvl, 0, TRUE, personalityValue, otIdType, fixedOtId);
             else
             {
-                u16 monLevel = VarGet(VAR_PIT_FLOOR) < 5 ? 5 : VarGet(VAR_PIT_FLOOR);
+                u16 monLevel = VarGet(VAR_PIT_FLOOR);
                 if (monLevel > 100)
                     monLevel = 100;
                 if ((gSpecialVar_Unused_0x8014 == TRAINER_ARCHIE_PIT_BOSS) && (i == 5)) 
