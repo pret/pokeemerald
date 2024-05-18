@@ -11,15 +11,36 @@ PitArena_OnFrame:
 PitArena_OnFrameRewardDrop::
 	lockall
 	setvar VAR_REWARD_STATE, 2
+	random 3
+	switch VAR_RESULT
+	case 0, PitArena_OnFrameRewardDrop_3
+	case 1, PitArena_OnFrameRewardDrop_4
+	case 2, PitArena_OnFrameRewardDrop_5
+PitArena_OnFrameRewardDrop_1:
+	callnative UpdateObjectEventsFromScript
+	releaseall
+	end
+
+PitArena_OnFrameRewardDrop_3:
+	clearflag FLAG_REWARD_ITEM_1
+	addobject 6
+	goto PitArena_OnFrameRewardDrop_1
+
+PitArena_OnFrameRewardDrop_4:
+	clearflag FLAG_REWARD_ITEM_1
+	clearflag FLAG_REWARD_ITEM_2
+	addobject 6
+	addobject 7
+	goto PitArena_OnFrameRewardDrop_1
+
+PitArena_OnFrameRewardDrop_5:
 	clearflag FLAG_REWARD_ITEM_1
 	clearflag FLAG_REWARD_ITEM_2
 	clearflag FLAG_REWARD_ITEM_3
 	addobject 6
 	addobject 7
 	addobject 12
-	callnative UpdateObjectEventsFromScript
-	releaseall
-	end
+	goto PitArena_OnFrameRewardDrop_1
 
 PitArena_OnResume:
 	callnative CheckFloorCleared

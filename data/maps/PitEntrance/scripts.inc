@@ -32,6 +32,7 @@ PitEntrance_Warp::
 	setflag FLAG_EXP_SHARE
 	callnative BufferMapFloorString
 	callnative SetRandomTrainers
+	additem ITEM_SACRED_ASH, 1
 	additem ITEM_POTION, 5
 	additem ITEM_SUPER_POTION, 2
 	additem ITEM_FULL_RESTORE, 1
