@@ -17,21 +17,25 @@ enum {
 };
 
 // Can be either 3 bytes, a u16 and a byte, or a 24-bit value
-union __attribute__((packed)) MsgConditionData {
+union __attribute__((packed)) MsgConditionData
+{
     u8 bytes[3];
-    struct __attribute__((packed)) {
+    struct __attribute__((packed))
+    {
         u16 hw;
         u8 b;
     } split;
     u32 raw:24;
 }; // size = 0x3
 
-struct __attribute__((packed)) MsgCondition {
+struct __attribute__((packed)) MsgCondition
+{
     u32 type:8;
     union MsgConditionData data;
 }; // size = 0x4
 
-struct FollowerMsgInfoExtended {
+struct FollowerMsgInfoExtended
+{
     const u8 *text;
     const u8 *script;
 

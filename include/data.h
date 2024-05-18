@@ -131,15 +131,16 @@ struct TypeInfo
     //u16 arceusForm;
 };
 
-struct FollowerMsgInfo {
+struct FollowerMsgInfo
+{
     const u8 *text;
     const u8 *script;
 };
 
 struct FollowerMessagePool
 {
-    const struct FollowerMsgInfo * messages;
-    const u8 * script;
+    const struct FollowerMsgInfo *messages;
+    const u8 *script;
     u16 length;
 };
 

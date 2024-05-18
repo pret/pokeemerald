@@ -1629,9 +1629,7 @@ void FreeSpritePaletteByTag(u16 tag)
 {
     u8 index = IndexOfSpritePaletteTag(tag);
     if (index != 0xFF)
-    {
         sSpritePaletteTags[index] = TAG_NONE;
-    }
 }
 
 void SetSubspriteTables(struct Sprite *sprite, const struct SubspriteTable *subspriteTables)
