@@ -8878,7 +8878,7 @@ static void TryLoadItemIconAtPos(u8 cursorArea, u8 cursorPos)
 
     if (heldItem != ITEM_NONE)
     {
-        const u32 *tiles = GetItemIconSprite(heldItem);
+        const u32 *tiles = GetItemIconPic(heldItem);
         const u32 *pal = GetItemIconPalette(heldItem);
         u8 id = GetNewItemIconIdx();
 
@@ -8933,7 +8933,7 @@ static void TakeItemFromMon(u8 cursorArea, u8 cursorPos)
 
 static void InitItemIconInCursor(u16 itemId)
 {
-    const u32 *tiles = GetItemIconSprite(itemId);
+    const u32 *tiles = GetItemIconPic(itemId);
     const u32 *pal = GetItemIconPalette(itemId);
     u8 id = GetNewItemIconIdx();
     LoadItemIconGfx(id, tiles, pal);

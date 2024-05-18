@@ -16,8 +16,8 @@ icon_table_pattern = re.compile(r'\[(ITEM_[A-Z_0-9]+)\]\s*=\s*\{([^,]+),\s*([^}]
 icon_table_data = {}
 for match in icon_table_pattern.findall(icon_table_content):
     if len(match) == 3:
-        item_name, icon_sprite, icon_palette = match
-        icon_table_data[item_name] = (icon_sprite, icon_palette)
+        item_name, icon_pic, icon_palette = match
+        icon_table_data[item_name] = (icon_pic, icon_palette)
 
 # Read items.h content
 for file in glob.glob('./src/data/items.h'):
@@ -29,9 +29,9 @@ def add_icon_data(match):
     item_name = match.group(1)
     item_content = match.group(2)
     if item_name in icon_table_data:
-        icon_sprite, icon_palette = icon_table_data[item_name]
-        print(f"Updating {item_name}: adding iconSprite = {icon_sprite}, iconPalette = {icon_palette}")
-        return f'[{item_name}] =\n    {{{item_content}    .iconSprite = {icon_sprite},\n        .iconPalette = {icon_palette},\n    }},'
+        icon_pic, icon_palette = icon_table_data[item_name]
+        print(f"Updating {item_name}: adding iconPic = {icon_pic}, iconPalette = {icon_palette}")
+        return f'[{item_name}] =\n    {{{item_content}    .iconPic = {icon_pic},\n        .iconPalette = {icon_palette},\n    }},'
     else:
         return match.group(0)
 
