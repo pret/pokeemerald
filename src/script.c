@@ -590,7 +590,7 @@ u16 ReturnNumberOfTrainersForFloor()
 
     if((VarGet(VAR_PIT_FLOOR) > 5) && ((VarGet(VAR_PIT_FLOOR) < 95) || (VarGet(VAR_PIT_FLOOR) > 101)))
     {
-        if(!(Random() % 20))
+        if(!(Random() % 25))
         {
             FlagClear(FLAG_MOVER_OBJECT);
             return 0;
@@ -604,11 +604,11 @@ u16 ReturnNumberOfTrainersForFloor()
         return 1;
 
     u16 randomValue = Random() % 100;
-    if(randomValue < 40)
+    if(randomValue < 55)
         return 1;
-    if(randomValue < 70)
+    if(randomValue < 85)
         return 2;
-    if(randomValue < 90)
+    if(randomValue < 95)
         return 3;
     if(randomValue < 100)
         return 4;
