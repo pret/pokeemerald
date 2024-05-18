@@ -743,10 +743,6 @@ static const struct SpriteFrameImage sPicTable_Nurse[] = {
     overworld_frame(gObjectEventPic_Nurse, 2, 4, 3),
 };
 
-static const struct SpriteFrameImage sPicTable_ItemBall[] = {
-    obj_frame_tiles(gObjectEventPic_ItemBall),
-};
-
 static const struct SpriteFrameImage sPicTable_ProfBirch[] = {
     overworld_frame(gObjectEventPic_ProfBirch, 2, 4, 0),
     overworld_frame(gObjectEventPic_ProfBirch, 2, 4, 1),
@@ -1981,13 +1977,13 @@ static const struct SpriteFrameImage sPicTable_Brandon[] = {
     overworld_frame(gObjectEventPic_Brandon, 2, 4, 8),
 };
 
-static const struct SpriteFrameImage sPicTable_AnimatedBall[] = {
-    overworld_frame(gObjectEventPic_AnimatedBall, 2, 4, 0),
-    overworld_frame(gObjectEventPic_AnimatedBall, 2, 4, 1),
-    overworld_frame(gObjectEventPic_AnimatedBall, 2, 4, 2),
-    overworld_frame(gObjectEventPic_AnimatedBall, 2, 4, 3),
-    overworld_frame(gObjectEventPic_AnimatedBall, 2, 4, 4),
-    overworld_frame(gObjectEventPic_AnimatedBall, 2, 4, 0),
+static const struct SpriteFrameImage sPicTable_PokeBall[] = {
+    overworld_frame(gObjectEventPic_PokeBall, 2, 4, 0),
+    overworld_frame(gObjectEventPic_PokeBall, 2, 4, 1),
+    overworld_frame(gObjectEventPic_PokeBall, 2, 4, 2),
+    overworld_frame(gObjectEventPic_PokeBall, 2, 4, 3),
+    overworld_frame(gObjectEventPic_PokeBall, 2, 4, 4),
+    overworld_frame(gObjectEventPic_PokeBall, 2, 4, 0),
 };
 
 #if OW_MON_POKEBALLS

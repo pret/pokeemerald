@@ -25,7 +25,7 @@ struct CompressedSpriteSheet
 struct SpriteFrameImage
 {
     const void *data;
-    u16 size;
+    u16 size;   
 };
 
 #define obj_frame_tiles(ptr) {.data = (u8 *)ptr, .size = sizeof ptr}

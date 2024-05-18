@@ -414,7 +414,7 @@ bool8 (*const gFollowPlayerMovementFuncs[])(struct ObjectEvent *, struct Sprite 
     [COPY_MOVE_WALK_FAST] = FollowablePlayerMovement_GoSpeed1,
     [COPY_MOVE_WALK_FASTER] = FollowablePlayerMovement_GoSpeed2,
     [COPY_MOVE_SLIDE] = FollowablePlayerMovement_Slide,
-    [COPY_MOVE_JUMP_IN_PLACE] = fph_IM_DIFFERENT,
+    [COPY_MOVE_JUMP_IN_PLACE] = FollowablePlayerMovement_JumpInPlace,
     [COPY_MOVE_JUMP] = FollowablePlayerMovement_GoSpeed4,
     [COPY_MOVE_JUMP2] = FollowablePlayerMovement_Step,
     [COPY_MOVE_EMPTY_1] = FollowablePlayerMovement_Idle,
