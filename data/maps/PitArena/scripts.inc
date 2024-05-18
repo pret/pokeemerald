@@ -545,6 +545,7 @@ PitArena_Mart_Vitamins:
 
 	.align 2
 PitArena_Mart_EvoItems:
+	.2byte ITEM_EVERSTONE
 	.2byte ITEM_FIRE_STONE
     .2byte ITEM_WATER_STONE
     .2byte ITEM_THUNDER_STONE
@@ -556,12 +557,6 @@ PitArena_Mart_EvoItems:
     .2byte ITEM_DUSK_STONE
     .2byte ITEM_DAWN_STONE
 	.2byte ITEM_LINKING_CORD
-    .2byte ITEM_SWEET_APPLE
-    .2byte ITEM_TART_APPLE
-    .2byte ITEM_CRACKED_POT
-    .2byte ITEM_CHIPPED_POT
-    .2byte ITEM_GALARICA_CUFF
-    .2byte ITEM_GALARICA_WREATH
     .2byte ITEM_DRAGON_SCALE
     .2byte ITEM_UPGRADE
     .2byte ITEM_PROTECTOR
@@ -573,6 +568,12 @@ PitArena_Mart_EvoItems:
     .2byte ITEM_WHIPPED_DREAM
     .2byte ITEM_SACHET
     .2byte ITEM_OVAL_STONE
+    .2byte ITEM_SWEET_APPLE
+    .2byte ITEM_TART_APPLE
+    .2byte ITEM_CRACKED_POT
+    .2byte ITEM_CHIPPED_POT
+    .2byte ITEM_GALARICA_CUFF
+    .2byte ITEM_GALARICA_WREATH
     .2byte ITEM_STRAWBERRY_SWEET
     .2byte ITEM_LOVE_SWEET
     .2byte ITEM_BERRY_SWEET
