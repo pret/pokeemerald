@@ -67,228 +67,302 @@ static const u8* const sIceTexts[] = {sCondMsg26, sCondMsg40, sCondMsg41, NULL};
 static const u8 sCondMsg42[] = _("{STR_VAR_1}'s burn looks painful!");
 
 // See the struct definition in follower_helper.h for more info
-const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT] = {
+const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT] =
+{
     [COND_MSG_CELEBI] =
     {
-    .text = (u8*)sCelebiTexts,
-    .textSpread = 1,
-    .script = EventScript_FollowerDance,
-    .emotion = FOLLOWER_EMOTION_NEUTRAL,
-    .conditions = {MATCH_SPECIES(SPECIES_CELEBI)},
+        .text = (u8*)sCelebiTexts,
+        .textSpread = 1,
+        .script = EventScript_FollowerDance,
+        .emotion = FOLLOWER_EMOTION_NEUTRAL,
+        .conditions =
+        {
+            MATCH_SPECIES(SPECIES_CELEBI),
+        },
     },
     [COND_MSG_FIRE] =
     {
-    .text = (u8*)sFireTexts,
-    .textSpread = 1,
-    .emotion = FOLLOWER_EMOTION_NEUTRAL,
-    .conditions = {MATCH_TYPES(TYPE_FIRE, TYPE_FIRE)},
+        .text = (u8*)sFireTexts,
+        .textSpread = 1,
+        .emotion = FOLLOWER_EMOTION_NEUTRAL,
+        .conditions =
+        {
+            MATCH_TYPES(TYPE_FIRE, TYPE_FIRE),
+        },
     },
     [COND_MSG_EVER_GRANDE] =
     {
-    .text = sCondMsg06,
-    .script = EventScript_FollowerFaceUp,
-    .emotion = FOLLOWER_EMOTION_HAPPY,
-    .conditions = {MATCH_MAP(EVER_GRANDE_CITY)},
+        .text = sCondMsg06,
+        .script = EventScript_FollowerFaceUp,
+        .emotion = FOLLOWER_EMOTION_HAPPY,
+        .conditions =
+        {
+            MATCH_MAP(EVER_GRANDE_CITY),
+        },
     },
     [COND_MSG_ROUTE_112] =
     {
-    .text = sCondMsg07,
-    .emotion = FOLLOWER_EMOTION_HAPPY,
-    .conditions = {MATCH_MAP(ROUTE112)},
+        .text = sCondMsg07,
+        .emotion = FOLLOWER_EMOTION_HAPPY,
+        .conditions =
+        {
+            MATCH_MAP(ROUTE112),
+        },
     },
     [COND_MSG_DAY_CARE] =
     {
-    .text = sCondMsg08,
-    .script = EventScript_FollowerNostalgia,
-    .emotion = FOLLOWER_EMOTION_NEUTRAL,
-    .conditions = {MATCH_MAP(ROUTE117_POKEMON_DAY_CARE)},
+        .text = sCondMsg08,
+        .script = EventScript_FollowerNostalgia,
+        .emotion = FOLLOWER_EMOTION_NEUTRAL,
+        .conditions =
+        {
+            MATCH_MAP(ROUTE117_POKEMON_DAY_CARE)
+        },
     },
     [COND_MSG_MART] =
     {
-    .text = (u8*)sShopTexts,
-    .textSpread = 1,
-    .script = EventScript_FollowerLookAround,
-    .emotion = FOLLOWER_EMOTION_NEUTRAL,
-    .conditions = {MATCH_MUSIC(MUS_POKE_MART)},
+        .text = (u8*)sShopTexts,
+        .textSpread = 1,
+        .script = EventScript_FollowerLookAround,
+        .emotion = FOLLOWER_EMOTION_NEUTRAL,
+        .conditions =
+        {
+            MATCH_MUSIC(MUS_POKE_MART)
+        },
     },
     [COND_MSG_VICTORY_ROAD] =
     {
-    .text = sCondMsg11,
-    .emotion = FOLLOWER_EMOTION_PENSIVE,
-    .conditions = {MATCH_MUSIC(MUS_VICTORY_ROAD)},
+        .text = sCondMsg11,
+        .emotion = FOLLOWER_EMOTION_PENSIVE,
+        .conditions =
+        {
+            MATCH_MUSIC(MUS_VICTORY_ROAD)
+        },
     },
     [COND_MSG_BIKE_SHOP] =
     {
-    .text = sCondMsg12,
-    .emotion = FOLLOWER_EMOTION_PENSIVE,
-    .conditions = {MATCH_MAP(MAUVILLE_CITY_BIKE_SHOP)},
+        .text = sCondMsg12,
+        .emotion = FOLLOWER_EMOTION_PENSIVE,
+        .conditions =
+        {
+            MATCH_MAP(MAUVILLE_CITY_BIKE_SHOP)
+        },
     },
     [COND_MSG_MACHINES] =
     {
-    .text = (u8*)sMachineTexts,
-    .textSpread = 1,
-    .emotion = FOLLOWER_EMOTION_MUSIC,
-    .orFlag = 1, // match any of these maps
-    .conditions = {
-        MATCH_MAP(NEW_MAUVILLE_INSIDE),
-        MATCH_MAP(SLATEPORT_CITY_STERNS_SHIPYARD_1F),
-        MATCH_MAP(SLATEPORT_CITY_STERNS_SHIPYARD_2F),
-    }
+        .text = (u8*)sMachineTexts,
+        .textSpread = 1,
+        .emotion = FOLLOWER_EMOTION_MUSIC,
+        .orFlag = 1, // match any of these maps
+        .conditions =
+        {
+            MATCH_MAP(NEW_MAUVILLE_INSIDE),
+            MATCH_MAP(SLATEPORT_CITY_STERNS_SHIPYARD_1F),
+            MATCH_MAP(SLATEPORT_CITY_STERNS_SHIPYARD_2F),
+        },
     },
     [COND_MSG_SAILING] =
     {
-    .text = (u8*)sBoatTexts,
-    .textSpread = 1,
-    .emotion = FOLLOWER_EMOTION_MUSIC,
-    .script = EventScript_FollowerLookAround,
-    .conditions = {MATCH_MUSIC(MUS_SAILING)},
+        .text = (u8*)sBoatTexts,
+        .textSpread = 1,
+        .emotion = FOLLOWER_EMOTION_MUSIC,
+        .script = EventScript_FollowerLookAround,
+        .conditions =
+        {
+            MATCH_MUSIC(MUS_SAILING),
+        },
     },
     [COND_MSG_PUDDLE] =
     {
-    .text = sCondMsg18,
-    .script = EventScript_FollowerHopping,
-    .emotion = FOLLOWER_EMOTION_MUSIC,
-    .conditions = {MATCH_ON_MB(MB_SHALLOW_WATER, MB_PUDDLE)},
+        .text = sCondMsg18,
+        .script = EventScript_FollowerHopping,
+        .emotion = FOLLOWER_EMOTION_MUSIC,
+        .conditions =
+        {
+            MATCH_ON_MB(MB_SHALLOW_WATER, MB_PUDDLE),
+        },
     },
     [COND_MSG_SAND] =
     {
-    .text = sCondMsg19,
-    .emotion = FOLLOWER_EMOTION_MUSIC,
-    .conditions = {MATCH_ON_MB(MB_SAND, MB_DEEP_SAND)},
+        .text = sCondMsg19,
+        .emotion = FOLLOWER_EMOTION_MUSIC,
+        .conditions =
+        {
+            MATCH_ON_MB(MB_SAND, MB_DEEP_SAND),
+        },
     },
     [COND_MSG_GRASS] =
     {
-    .text = sCondMsg20,
-    .emotion = FOLLOWER_EMOTION_MUSIC,
-    .conditions = {MATCH_ON_MB(MB_TALL_GRASS, MB_LONG_GRASS)},
+        .text = sCondMsg20,
+        .emotion = FOLLOWER_EMOTION_MUSIC,
+        .conditions =
+        {
+            MATCH_ON_MB(MB_TALL_GRASS, MB_LONG_GRASS),
+        },
     },
     [COND_MSG_FOOTPRINTS] =
     {
-    .text = sCondMsg21,
-    .emotion = FOLLOWER_EMOTION_MUSIC,
-    .conditions = {MATCH_ON_MB(MB_SAND, MB_FOOTPRINTS)},
+        .text = sCondMsg21,
+        .emotion = FOLLOWER_EMOTION_MUSIC,
+        .conditions =
+        {
+            MATCH_ON_MB(MB_SAND, MB_FOOTPRINTS),
+        },
     },
     [COND_MSG_ELEVATOR] =
     {
-    .text = (u8*)sElevatorTexts,
-    .textSpread = 1,
-    .emotion = FOLLOWER_EMOTION_SURPRISE,
-    .conditions = {MATCH_MAP(LILYCOVE_CITY_DEPARTMENT_STORE_ELEVATOR)},
+        .text = (u8*)sElevatorTexts,
+        .textSpread = 1,
+        .emotion = FOLLOWER_EMOTION_SURPRISE,
+        .conditions =
+        {
+            MATCH_MAP(LILYCOVE_CITY_DEPARTMENT_STORE_ELEVATOR),
+        },
     },
     [COND_MSG_ICE_ROOM] =
     {
-    .text = (u8*)sColdTexts,
-    .textSpread = 1,
-    .emotion = FOLLOWER_EMOTION_SURPRISE,
-    .conditions = {MATCH_MAP(SHOAL_CAVE_LOW_TIDE_ICE_ROOM)},
+        .text = (u8*)sColdTexts,
+        .textSpread = 1,
+        .emotion = FOLLOWER_EMOTION_SURPRISE,
+        .conditions =
+        {
+            MATCH_MAP(SHOAL_CAVE_LOW_TIDE_ICE_ROOM),
+        },
     },
     [COND_MSG_ROUTE_117] =
     {
-    .text = sCondMsg27,
-    .emotion = FOLLOWER_EMOTION_SURPRISE,
-    .conditions = {MATCH_MAP(ROUTE117)},
+        .text = sCondMsg27,
+        .emotion = FOLLOWER_EMOTION_SURPRISE,
+        .conditions =
+        {
+            MATCH_MAP(ROUTE117),
+        },
     },
     [COND_MSG_DRAGON_GROWL] =
     {
-    .text = sCondMsg28,
-    .emotion = FOLLOWER_EMOTION_UPSET,
-    .conditions = {
-        MATCH_TYPES(TYPE_DRAGON, TYPE_DRAGON),
-        MATCH_MAPSEC(MAPSEC_SKY_PILLAR),
-    }
+        .text = sCondMsg28,
+        .emotion = FOLLOWER_EMOTION_UPSET,
+        .conditions =
+        {
+            MATCH_TYPES(TYPE_DRAGON, TYPE_DRAGON),
+            MATCH_MAPSEC(MAPSEC_SKY_PILLAR),
+        },
     },
     [COND_MSG_FEAR] =
     {
-    .text = (u8*)sFearTexts,
-    .textSpread = 1,
-    .emotion = FOLLOWER_EMOTION_UPSET,
-    .conditions = {
-        MATCH_NOT_TYPES(TYPE_GHOST, TYPE_GHOST),
-        MATCH_MAPSEC(MAPSEC_MT_PYRE),
-        MATCH_MUSIC(MUS_MT_PYRE),
-    }
+        .text = (u8*)sFearTexts,
+        .textSpread = 1,
+        .emotion = FOLLOWER_EMOTION_UPSET,
+        .conditions =
+        {
+            MATCH_NOT_TYPES(TYPE_GHOST, TYPE_GHOST),
+            MATCH_MAPSEC(MAPSEC_MT_PYRE),
+            MATCH_MUSIC(MUS_MT_PYRE),
+        },
     },
     [COND_MSG_FIRE_RAIN] =
     {
-    .text = sCondMsg31,
-    .emotion = FOLLOWER_EMOTION_UPSET,
-    .conditions = {
-        MATCH_TYPES(TYPE_FIRE, TYPE_FIRE),
-        MATCH_WEATHER(WEATHER_RAIN, WEATHER_RAIN_THUNDERSTORM),
-    }
+        .text = sCondMsg31,
+        .emotion = FOLLOWER_EMOTION_UPSET,
+        .conditions =
+        {
+            MATCH_TYPES(TYPE_FIRE, TYPE_FIRE),
+            MATCH_WEATHER(WEATHER_RAIN, WEATHER_RAIN_THUNDERSTORM),
+        },
     },
     [COND_MSG_FROZEN] =
     {
-    .text = sCondMsg32,
-    .emotion = FOLLOWER_EMOTION_UPSET,
-    .conditions = {
-        MATCH_STATUS(STATUS1_FREEZE),
-    }
+        .text = sCondMsg32,
+        .emotion = FOLLOWER_EMOTION_UPSET,
+        .conditions =
+        {
+           MATCH_STATUS(STATUS1_FREEZE),
+        },
     },
     [COND_MSG_SEASIDE] =
     {
-    .text = (u8*)sSeaTexts,
-    .textSpread = 1,
-    .script = EventScript_FollowerFaceResult,
-    .emotion = FOLLOWER_EMOTION_MUSIC,
-    .conditions = {MATCH_NEAR_MB(MB_OCEAN_WATER, 5)},
+        .text = (u8*)sSeaTexts,
+        .textSpread = 1,
+        .script = EventScript_FollowerFaceResult,
+        .emotion = FOLLOWER_EMOTION_MUSIC,
+        .conditions =
+        {
+            MATCH_NEAR_MB(MB_OCEAN_WATER, 5),
+        },
     },
     [COND_MSG_WATERFALL] =
     {
-    .text = sCondMsg36,
-    .script = EventScript_FollowerFaceResult,
-    .emotion = FOLLOWER_EMOTION_MUSIC,
-    .conditions = {MATCH_NEAR_MB(MB_WATERFALL, 5)},
+        .text = sCondMsg36,
+        .script = EventScript_FollowerFaceResult,
+        .emotion = FOLLOWER_EMOTION_MUSIC,
+        .conditions =
+        {
+            MATCH_NEAR_MB(MB_WATERFALL, 5),
+        },
     },
     [COND_MSG_RAIN] =
     {
-    .text = sCondMsg37,
-    .emotion = FOLLOWER_EMOTION_MUSIC,
-    .conditions = {
+        .text = sCondMsg37,
+        .emotion = FOLLOWER_EMOTION_MUSIC,
+        .conditions =
+        {
         MATCH_NOT_TYPES(TYPE_FIRE, TYPE_FIRE),
         MATCH_WEATHER(WEATHER_RAIN, WEATHER_RAIN_THUNDERSTORM)
     }
     },
     [COND_MSG_REFLECTION] =
     {
-    .text = sCondMsg38,
-    .script = EventScript_FollowerFaceResult,
-    .emotion = FOLLOWER_EMOTION_PENSIVE,
-    .conditions = {MATCH_NEAR_MB(MB_POND_WATER, 1)},
+        .text = sCondMsg38,
+        .script = EventScript_FollowerFaceResult,
+        .emotion = FOLLOWER_EMOTION_PENSIVE,
+        .conditions =
+        {
+            MATCH_NEAR_MB(MB_POND_WATER, 1),
+        },
     },
     [COND_MSG_LEAVES] =
     {
-    .text = sCondMsg39,
-    .emotion = FOLLOWER_EMOTION_PENSIVE,
-    .conditions = {MATCH_MAPSEC(MAPSEC_PETALBURG_WOODS)},
+        .text = sCondMsg39,
+        .emotion = FOLLOWER_EMOTION_PENSIVE,
+        .conditions =
+        {
+            MATCH_MAPSEC(MAPSEC_PETALBURG_WOODS),
+        },
     },
     [COND_MSG_ICE] =
     {
-    .text = (u8*)sIceTexts,
-    .textSpread = 1,
-    .script = EventScript_FollowerFaceResult,
-    .emotion = FOLLOWER_EMOTION_PENSIVE,
-    .conditions = {MATCH_NEAR_MB(MB_ICE, 1)},
+        .text = (u8*)sIceTexts,
+        .textSpread = 1,
+        .script = EventScript_FollowerFaceResult,
+        .emotion = FOLLOWER_EMOTION_PENSIVE,
+        .conditions =
+        {
+            MATCH_NEAR_MB(MB_ICE, 1),
+        },
     },
     [COND_MSG_BURN] =
     {
-    .text = sCondMsg42,
-    .emotion = FOLLOWER_EMOTION_SAD,
-    .conditions = {MATCH_STATUS(STATUS1_BURN)},
+        .text = sCondMsg42,
+        .emotion = FOLLOWER_EMOTION_SAD,
+        .conditions =
+        {
+            MATCH_STATUS(STATUS1_BURN),
+        },
     },
 };
 
 // Pool of "unconditional" follower messages
-const struct FollowerMessagePool gFollowerBasicMessages[FOLLOWER_EMOTION_LENGTH] = {
-    [FOLLOWER_EMOTION_HAPPY] = {gFollowerHappyMessages, EventScript_FollowerGeneric, N_FOLLOWER_HAPPY_MESSAGES},
-    [FOLLOWER_EMOTION_NEUTRAL] = {gFollowerNeutralMessages, EventScript_FollowerGeneric, N_FOLLOWER_NEUTRAL_MESSAGES},
-    [FOLLOWER_EMOTION_SAD] = {gFollowerSadMessages, EventScript_FollowerGeneric, N_FOLLOWER_SAD_MESSAGES},
-    [FOLLOWER_EMOTION_UPSET] = {gFollowerUpsetMessages, EventScript_FollowerGeneric, N_FOLLOWER_UPSET_MESSAGES},
-    [FOLLOWER_EMOTION_ANGRY] = {gFollowerAngryMessages, EventScript_FollowerGeneric, N_FOLLOWER_ANGRY_MESSAGES},
-    [FOLLOWER_EMOTION_PENSIVE] = {gFollowerPensiveMessages, EventScript_FollowerGeneric, N_FOLLOWER_PENSIVE_MESSAGES},
-    [FOLLOWER_EMOTION_LOVE] = {gFollowerLoveMessages, EventScript_FollowerGeneric, N_FOLLOWER_LOVE_MESSAGES},
+const struct FollowerMessagePool gFollowerBasicMessages[FOLLOWER_EMOTION_LENGTH] =
+{
+    [FOLLOWER_EMOTION_HAPPY]    = {gFollowerHappyMessages,    EventScript_FollowerGeneric, N_FOLLOWER_HAPPY_MESSAGES},
+    [FOLLOWER_EMOTION_NEUTRAL]  = {gFollowerNeutralMessages,  EventScript_FollowerGeneric, N_FOLLOWER_NEUTRAL_MESSAGES},
+    [FOLLOWER_EMOTION_SAD]      = {gFollowerSadMessages,      EventScript_FollowerGeneric, N_FOLLOWER_SAD_MESSAGES},
+    [FOLLOWER_EMOTION_UPSET]    = {gFollowerUpsetMessages,    EventScript_FollowerGeneric, N_FOLLOWER_UPSET_MESSAGES},
+    [FOLLOWER_EMOTION_ANGRY]    = {gFollowerAngryMessages,    EventScript_FollowerGeneric, N_FOLLOWER_ANGRY_MESSAGES},
+    [FOLLOWER_EMOTION_PENSIVE]  = {gFollowerPensiveMessages,  EventScript_FollowerGeneric, N_FOLLOWER_PENSIVE_MESSAGES},
+    [FOLLOWER_EMOTION_LOVE]     = {gFollowerLoveMessages,     EventScript_FollowerGeneric, N_FOLLOWER_LOVE_MESSAGES},
     [FOLLOWER_EMOTION_SURPRISE] = {gFollowerSurpriseMessages, EventScript_FollowerGeneric, N_FOLLOWER_SURPRISE_MESSAGES},
-    [FOLLOWER_EMOTION_CURIOUS] = {gFollowerCuriousMessages, EventScript_FollowerGeneric, N_FOLLOWER_CURIOUS_MESSAGES},
-    [FOLLOWER_EMOTION_MUSIC] = {gFollowerMusicMessages, EventScript_FollowerGeneric, N_FOLLOWER_MUSIC_MESSAGES},
+    [FOLLOWER_EMOTION_CURIOUS]  = {gFollowerCuriousMessages,  EventScript_FollowerGeneric, N_FOLLOWER_CURIOUS_MESSAGES},
+    [FOLLOWER_EMOTION_MUSIC]    = {gFollowerMusicMessages,    EventScript_FollowerGeneric, N_FOLLOWER_MUSIC_MESSAGES},
     [FOLLOWER_EMOTION_POISONED] = {gFollowerPoisonedMessages, EventScript_FollowerGeneric, N_FOLLOWER_POISONED_MESSAGES},
 };

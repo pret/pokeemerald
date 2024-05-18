@@ -707,38 +707,38 @@ u32 FldEff_DeepSandFootprints(void)
 
 u32 FldEff_TracksBug(void)
 {
-	u8 spriteId;
-	struct Sprite *sprite;
+    u8 spriteId;
+    struct Sprite *sprite;
 
-	SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
-	spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TRACKS_BUG], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
-	if (spriteId != MAX_SPRITES)
-	{
-		sprite = &gSprites[spriteId];
-		sprite->coordOffsetEnabled = TRUE;
-		sprite->oam.priority = gFieldEffectArguments[3];
-		sprite->data[7] = FLDEFF_TRACKS_BUG;
-		StartSpriteAnim(sprite, gFieldEffectArguments[4]);
-	}
-	return 0;
+    SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TRACKS_BUG], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.priority = gFieldEffectArguments[3];
+        sprite->data[7] = FLDEFF_TRACKS_BUG;
+        StartSpriteAnim(sprite, gFieldEffectArguments[4]);
+    }
+    return 0;
 }
 
 u32 FldEff_TracksSpot(void)
 {
-	u8 spriteId;
-	struct Sprite *sprite;
+    u8 spriteId;
+    struct Sprite *sprite;
 
-	SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
-	spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TRACKS_SPOT], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
-	if (spriteId != MAX_SPRITES)
-	{
-		sprite = &gSprites[spriteId];
-		sprite->coordOffsetEnabled = TRUE;
-		sprite->oam.priority = gFieldEffectArguments[3];
-		sprite->data[7] = FLDEFF_TRACKS_SPOT;
-		StartSpriteAnim(sprite, gFieldEffectArguments[4]);
-	}
-	return 0;
+    SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TRACKS_SPOT], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.priority = gFieldEffectArguments[3];
+        sprite->data[7] = FLDEFF_TRACKS_SPOT;
+        StartSpriteAnim(sprite, gFieldEffectArguments[4]);
+    }
+    return 0;
 }
 
 u32 FldEff_BikeTireTracks(void)
@@ -760,20 +760,20 @@ u32 FldEff_BikeTireTracks(void)
 
 u32 FldEff_TracksSlither(void)
 {
-	u8 spriteId;
-	struct Sprite *sprite;
+    u8 spriteId;
+    struct Sprite *sprite;
 
-	SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
-	spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TRACKS_SLITHER], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
-	if (spriteId != MAX_SPRITES)
-	{
-		sprite = &gSprites[spriteId];
-		sprite->coordOffsetEnabled = TRUE;
-		sprite->oam.priority = gFieldEffectArguments[3];
-		sprite->data[7] = FLDEFF_TRACKS_SLITHER;
-		StartSpriteAnim(sprite, gFieldEffectArguments[4]);
-	}
-	return spriteId;
+    SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TRACKS_SLITHER], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.priority = gFieldEffectArguments[3];
+        sprite->data[7] = FLDEFF_TRACKS_SLITHER;
+        StartSpriteAnim(sprite, gFieldEffectArguments[4]);
+    }
+    return spriteId;
 }
 
 void (*const gFadeFootprintsTireTracksFuncs[])(struct Sprite *) = {

@@ -167,7 +167,6 @@ static u8 UpdateSpritePalette(const struct SpritePalette *spritePalette, struct 
 static void ResetObjectEventFldEffData(struct ObjectEvent *);
 static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *);
 static u8 FindObjectEventPaletteIndexByTag(u16);
-static void _PatchObjectPalette(u16, u8);
 static bool8 ObjectEventDoesElevationMatch(struct ObjectEvent *, u8);
 static void SpriteCB_CameraObject(struct Sprite *);
 static void CameraObject_Init(struct Sprite *);
@@ -1743,7 +1742,6 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
     const struct ObjectEventGraphicsInfo *graphicsInfo;
     struct Sprite *sprite;
     u8 spriteId;
-    u32 UNUSED paletteNum;
     bool32 isShiny = graphicsId >= SPECIES_SHINY_TAG + OBJ_EVENT_GFX_MON_BASE;
 
     if (isShiny)
@@ -1754,7 +1752,7 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
 
     if (spriteTemplate->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC)
     {
-        paletteNum = LoadDynamicFollowerPaletteFromGraphicsId(graphicsId, isShiny, spriteTemplate);
+        u32 paletteNum = LoadDynamicFollowerPaletteFromGraphicsId(graphicsId, isShiny, spriteTemplate);
         spriteTemplate->paletteTag = GetSpritePaletteTagByPaletteNum(paletteNum);
     }
     else if (spriteTemplate->paletteTag != TAG_NONE)
@@ -2092,11 +2090,9 @@ void UpdateFollowingPokemon(void)
     // Follower appearance changed; move to player and set invisible
     if (species != OW_SPECIES(objEvent) || shiny != objEvent->shiny || form != OW_FORM(objEvent))
     {
-        MoveObjectEventToMapCoords(
-            objEvent,
-            gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x,
-            gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y
-        );
+        MoveObjectEventToMapCoords(objEvent,
+                                   gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x,
+                                   gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
         FollowerSetGraphics(objEvent, species, form, shiny);
         objEvent->invisible = TRUE;
     }
@@ -2159,20 +2155,28 @@ static u32 FindMetatileBehaviorWithinRange(s32 x, s32 y, u32 mb, u8 distance)
     s32 i;
 
     for (i = y + 1; i <= y + distance; i++)
+    {
         if (MapGridGetMetatileBehaviorAt(x, i) == mb)
             return DIR_SOUTH;
+    }
 
     for (i = y - 1; i >= y - distance; i--)
+    {
         if (MapGridGetMetatileBehaviorAt(x, i) == mb)
             return DIR_NORTH;
+    }
 
     for (i = x + 1; i <= x + distance; i++)
+    {
         if (MapGridGetMetatileBehaviorAt(i, y) == mb)
             return DIR_EAST;
+    }
 
     for (i = x - 1; i >= x - distance; i--)
+    {
         if (MapGridGetMetatileBehaviorAt(i, y) == mb)
             return DIR_WEST;
+    }
 
     return DIR_NONE;
 }
@@ -2217,9 +2221,10 @@ bool32 CheckMsgCondition(const struct MsgCondition *cond, struct Pokemon *mon, u
     // case MSG_COND_TIME_OF_DAY:
     //     break;
     case MSG_COND_NEAR_MB:
-        multi = FindMetatileBehaviorWithinRange(
-                    obj->currentCoords.x, obj->currentCoords.y, 
-                    cond->data.bytes[0], cond->data.bytes[1]);
+        multi = FindMetatileBehaviorWithinRange(obj->currentCoords.x,
+                                                obj->currentCoords.y,
+                                                cond->data.bytes[0],
+                                                cond->data.bytes[1]);
         if (multi)
             gSpecialVar_Result = multi;
         return multi;
@@ -2941,11 +2946,6 @@ void LoadSpecialObjectReflectionPalette(u16 tag, u8 slot)
             return;
         }
     }
-}
-
-static void UNUSED _PatchObjectPalette(u16 tag, u8 slot)
-{
-    PatchObjectPalette(tag, slot);
 }
 
 static void UNUSED IncrementObjectEventCoords(struct ObjectEvent *objectEvent, s16 x, s16 y)
@@ -5282,8 +5282,7 @@ bool8 MovementType_FollowPlayer_Shadow(struct ObjectEvent *objectEvent, struct S
         objectEvent->invisible = TRUE;
         MoveObjectEventToMapCoords(objectEvent,
                                    gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x,
-                                   gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y
-        );
+                                   gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
         objectEvent->triggerGroundEffectsOnMove = FALSE; // Stop endless reflection spawning
         return FALSE;
     }
@@ -5293,8 +5292,7 @@ bool8 MovementType_FollowPlayer_Shadow(struct ObjectEvent *objectEvent, struct S
     {
         MoveObjectEventToMapCoords(objectEvent,
                                    gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x,
-                                   gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y
-        );
+                                   gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
         objectEvent->triggerGroundEffectsOnMove = FALSE; // Stop endless reflection spawning
     }
     sprite->sTypeFuncId = 1; // Enter active state; if the player moves the follower will appear
@@ -5877,11 +5875,10 @@ bool8 ScrFunc_GetDirectionToFace(struct ScriptContext *ctx)
     if (id0 >= OBJECT_EVENTS_COUNT || id1 >= OBJECT_EVENTS_COUNT)
         *var = DIR_NONE;
     else
-        *var = GetDirectionToFace(
-            gObjectEvents[id0].currentCoords.x,
-            gObjectEvents[id0].currentCoords.y,
-            gObjectEvents[id1].currentCoords.x,
-            gObjectEvents[id1].currentCoords.y);
+        *var = GetDirectionToFace(gObjectEvents[id0].currentCoords.x,
+                                  gObjectEvents[id0].currentCoords.y,
+                                  gObjectEvents[id1].currentCoords.x,
+                                  gObjectEvents[id1].currentCoords.y);
     return FALSE;
 }
 

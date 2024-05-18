@@ -1631,8 +1631,10 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
     if (decoration->permission == DECORPERM_SPRITE)
     {
         for (i = 0; i < NUM_DECORATION_FLAGS; i++)
+        {
             if (FlagGet(FLAG_DECORATION_1 + i) == TRUE)
                 return TRUE;
+        }
         return FALSE;
     }
     return TRUE;

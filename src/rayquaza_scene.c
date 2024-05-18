@@ -1303,8 +1303,10 @@ static void CB2_InitRayquazaScene(void)
     ClearScheduledBgCopiesToVram();
     ScanlineEffect_Stop();
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
         if (gObjectEvents[i].graphicsId == OBJ_EVENT_GFX_RAYQUAZA)
             gObjectEvents[i].invisible = FALSE;
+    }
     FreeAllSpritePalettes();
     ResetPaletteFade();
     ResetSpriteData();
