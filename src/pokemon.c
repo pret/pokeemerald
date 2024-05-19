@@ -366,8 +366,6 @@ const struct SpindaSpot gSpindaSpotGraphics[] =
 // Support percentages are listed in comments off to the side instead
 #define PALACE_STYLE(atk, def, atkLow, defLow) {atk, atk + def, atkLow, atkLow + defLow}
 
-// The below data for smokescreen starts and ends with some data that belongs to battle_gfx_sfx_util.c
-
 const struct NatureInfo gNaturesInfo[NUM_NATURES] =
 {
     [NATURE_HARDY] =
@@ -637,8 +635,8 @@ const struct NatureInfo gNaturesInfo[NUM_NATURES] =
     [NATURE_SASSY] =
     {
         .name = COMPOUND_STRING("Sassy"),
-        .statDown = STAT_SPDEF,
-        .statUp = STAT_SPEED,
+        .statUp = STAT_SPDEF,
+        .statDown = STAT_SPEED,
         .backAnim = 1,
         .pokeBlockAnim = {ANIM_SASSY, AFFINE_TURN_UP_HIGH},
         .natureGirlMessage = BattleFrontier_Lounge5_Text_NatureGirlSassy,

@@ -15,6 +15,8 @@
 static void SpriteCB_SmokescreenImpactMain(struct Sprite *);
 static void SpriteCB_SmokescreenImpact(struct Sprite *);
 
+// The below data for smokescreen starts and ends with some data that belongs to battle_gfx_sfx_util.c
+
 static const struct CompressedSpriteSheet sSmokescreenImpactSpriteSheet =
 {
     .data = gSmokescreenImpactTiles, .size = 0x180, .tag = TAG_SMOKESCREEN
