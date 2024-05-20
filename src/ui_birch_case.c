@@ -21,6 +21,7 @@
 #include "menu_helpers.h"
 #include "palette.h"
 #include "party_menu.h"
+#include "pokemon.h"
 #include "scanline_effect.h"
 #include "script.h"
 #include "sound.h"
@@ -152,8 +153,19 @@ static const struct MonChoiceData sStarterChoices[9] =
 static u32 ReturnRandomSpeciesByPokeballIndex(u32 index)
 {   
     u16 species = sStarterChoices[index].species;
+    u16 counter = 0;
 
     species = GetSpeciesRandomSeeded(species * GetSpeciesRandomSeeded(VarGet(VAR_PIT_FLOOR) + 1));
+
+    //reroll in case any legendaries, mythics or ultra beasts were chosen
+    if (FlagGet(FLAG_NO_LEGENDARIES))
+    {
+        while ((IsSpeciesLegendary(species) || IsSpeciesUltraBeast(species) || IsSpeciesMythical(species)) && counter < 1000)
+        {
+            species = GetSpeciesRandomSeeded(species * GetSpeciesRandomSeeded(VarGet(VAR_PIT_FLOOR) + 1));
+            counter++;
+        }
+    }
 
     return species;
 }
