@@ -105,7 +105,7 @@ PitEntrance_StartBagContinue1::
 	goto_if_eq VAR_RESULT, 0, PitEntrance_StartBagSingles
 	goto_if_eq VAR_RESULT, 1, PitEntrance_StartBagDoubles
 PitEntrance_StartBagSingles::
-	clearflag FLAG_DOUBLES_MODE
+	clearflag FLAG_DOUBLES_MODE 
 	goto PitEntrance_StartBagContinue2
 PitEntrance_StartBagDoubles::
 	setflag FLAG_DOUBLES_MODE 
@@ -261,7 +261,7 @@ PitEntrance_Text_MoreInfo::
 	.string "You and each trainer have random mons.\n"
 	.string "Trainer mon levels are tied to the\l"
 	.string "floor number, with 5/100 being min/max.\p"
-	.string "Trainer numbers are also randomized\p"
+	.string "Trainer numbers are also randomied\p"
 	.string "ranging from 1 to 4 with generally less\p"
 	.string "opponents in the lower floors.\p"
 	.string "After clearing each floor you will \n"

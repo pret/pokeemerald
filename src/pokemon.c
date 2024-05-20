@@ -8383,27 +8383,3 @@ const u8 *GetMoveName(u16 moveId)
 {
     return gMovesInfo[moveId].name;
 }
-
-bool8 IsSpeciesLegendary(u16 species)
-{
-    species = SanitizeSpeciesId(species);
-    if (gSpeciesInfo[species].isLegendary)
-        return TRUE;
-    return FALSE;
-}
-
-bool8 IsSpeciesMythical(u16 species)
-{
-    species = SanitizeSpeciesId(species);
-    if (gSpeciesInfo[species].isMythical)
-        return TRUE;
-    return FALSE;
-}
-
-bool8 IsSpeciesUltraBeast(u16 species)
-{
-    species = SanitizeSpeciesId(species);
-    if (gSpeciesInfo[species].isUltraBeast)
-        return TRUE;
-    return FALSE;
-}
