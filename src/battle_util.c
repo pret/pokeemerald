@@ -8702,7 +8702,7 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
         if (gMultiHitCounter == 0) // Calc damage with max BP for move consideration
             basePower *= 6;
         else
-            basePower *= (4 - gMultiHitCounter);
+            basePower *= 1 + gMovesInfo[move].strikeCount - gMultiHitCounter;
         break;
     case EFFECT_SPIT_UP:
         basePower = 100 * gDisableStructs[battlerAtk].stockpileCounter;
