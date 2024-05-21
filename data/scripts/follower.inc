@@ -1,5 +1,5 @@
 gText_FollowerLovesYou::
-  .string "{STR_VAR_1} is regarding you with\nadoration!$"
+	.string "{STR_VAR_1} is regarding you with\nadoration!$"
 
 gText_FollowerLostInThought::
 	.string "{STR_VAR_1} seems lost in thought.$"

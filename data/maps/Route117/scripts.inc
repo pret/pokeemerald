@@ -28,13 +28,9 @@ Route117_OnTransition:
 Route117_EventScript_ShowDaycareMon1:
 	@ set pokemon movement type based on compatibility
 	special SetDaycareCompatibilityString
-	@ 0:
 	call_if_eq VAR_RESULT, PARENTS_INCOMPATIBLE, Route117_EventScript_DaycareMonIncompatible
-	@ 20: do nothing if low compatibility
-	@ call_if_eq VAR_RESULT, PARENTS_LOW_COMPATIBILITY, Route117_EventScript_DaycareMonLowCompatibility
-	@ 50:
+	@ Don't do anything if PARENTS_LOW_COMPATIBILITY
 	call_if_eq VAR_RESULT, PARENTS_MED_COMPATIBILITY, Route117_EventScript_DaycareMonMedCompatibility
-	@ 70:
 	call_if_eq VAR_RESULT, PARENTS_MAX_COMPATIBILITY, Route117_EventScript_DaycareMonMaxCompatibility
 	clearflag FLAG_TEMP_2
 Route117_EventScript_ShowDaycareMon0:

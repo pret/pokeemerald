@@ -1736,13 +1736,15 @@ bool8 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, u
 
 static const u8 sSpanPerImage[4][4] =
 {
-    [ST_OAM_SQUARE]      = {
+    [ST_OAM_SQUARE] =
+    {
         [ST_OAM_SIZE_0] = 0, // SPRITE_SIZE_8x8
         [ST_OAM_SIZE_1] = 2, // SPRITE_SIZE_16x16
         [ST_OAM_SIZE_2] = 4, // SPRITE_SIZE_32x32
         [ST_OAM_SIZE_3] = 6  // SPRITE_SIZE_64x64
     },
-    [ST_OAM_H_RECTANGLE ... ST_OAM_V_RECTANGLE] = {
+    [ST_OAM_H_RECTANGLE ... ST_OAM_V_RECTANGLE] =
+    {
         [ST_OAM_SIZE_0] = 1, // SPRITE_SIZE_16x8
         [ST_OAM_SIZE_1] = 2, // SPRITE_SIZE_32x8
         [ST_OAM_SIZE_2] = 3, // SPRITE_SIZE_32x16
