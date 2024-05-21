@@ -261,7 +261,7 @@ PitEntrance_Text_MoreInfo::
 	.string "You and each trainer have random mons.\n"
 	.string "Trainer mon levels are tied to the\l"
 	.string "floor number, with 5/100 being min/max.\p"
-	.string "Trainer numbers are also randomied\p"
+	.string "Trainer numbers are also randomized\p"
 	.string "ranging from 1 to 4 with generally less\p"
 	.string "opponents in the lower floors.\p"
 	.string "After clearing each floor you will \n"

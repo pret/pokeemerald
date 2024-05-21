@@ -319,7 +319,7 @@ enum {
     HGSS_COLOR_COUNT
 };
 
-static const u16* sDexPalettes[HGSS_COLOR_COUNT][HGSS_PAL_TYPE_COUNT] =
+static const u16 * const sDexPalettes[HGSS_COLOR_COUNT][HGSS_PAL_TYPE_COUNT] =
 {
     [HGSS_CLASSIC] =    {sPokedexPlusHGSS_Default_Pal, 
                          sPokedexPlusHGSS_National_Pal, 
