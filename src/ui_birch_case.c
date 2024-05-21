@@ -160,7 +160,7 @@ static u32 ReturnRandomSpeciesByPokeballIndex(u32 index)
     //reroll in case any legendaries, mythics or ultra beasts are determined
     if (FlagGet(FLAG_NO_LEGENDARIES))
     {
-        while ((IsSpeciesLegendary | IsSpeciesMythical | IsSpeciesUltraBeast) && counter < 1000)
+        while ((IsSpeciesLegendary(species) || IsSpeciesMythical(species) || IsSpeciesUltraBeast(species)) && counter < 1000)
         {
             species = GetSpeciesRandomSeeded(species * GetSpeciesRandomSeeded(VarGet(VAR_PIT_FLOOR) + 1));
             counter ++;

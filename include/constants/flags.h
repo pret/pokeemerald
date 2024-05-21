@@ -47,7 +47,7 @@
 #define FLAG_RANDOM_MODE     0x22 // Unused Flag
 #define FLAG_DOUBLES_MODE    0x23 // Unused Flag
 #define FLAG_HARD_MODE       0x24 // Unused Flag
-#define FLAG_NO_LEGENDAIRES  0x25 // Unused Flag
+#define FLAG_NO_LEGENDARIES  0x25 // Unused Flag
 #define FLAG_NO_DUPLICATES   0x26 // Unused Flag
 #define FLAG_UNUSED_0x027    0x27 // Unused Flag
 #define FLAG_UNUSED_0x028    0x28 // Unused Flag

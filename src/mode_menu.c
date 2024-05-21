@@ -31,100 +31,6 @@
 // This code is based on Ghoulslash's excellent UI tutorial:
 // https://www.pokecommunity.com/showpost.php?p=10441093
 
-/*
- * Glossary of acronyms and abbreviations -- because sometimes I go crazy with these
- *
- * BG = background
- * GF = Game Freak
- * DMA = Direct Memory Access
- * GBA = Game Boy Advance
- */
-
-/*
- * Some general resources you should bookmark:
- * TONC GBA tutorial: https://www.coranac.com/tonc/text/toc.htm
- * Computer systems course with focus on GBA: https://ianfinlayson.net/class/cpsc305/
- * GBATEK reference docs: https://problemkaputt.de/gbatek.htm
- * Copetti GBA Architecture: https://www.copetti.org/writings/consoles/game-boy-advance/
- */
-
-/*
- * The meat of the menu code lives in this file. The tutorial comments assume the following:
- *
- * 1) You understand the basics of GBA graphics i.e. the multiple BG layers and how they are controlled, the various
- *    GBA graphics modes, the basics of hardware sprites, etc
- *
- * 2) You are familiar with the concept of tiles (tilesets) vs tilemaps. These are two distinct concepts and you need to
- *    understand them to understand any UI code.
- *
- * 3) You are familiar with the concept of a charblock and a screenblock, which are crucial to proper VRAM layout.
- *
- * 4) You understand the basics of the pokeemerald Callback and Task systems, which structure the menu's control flow.
- *
- * 5) You have a basic grasp of the GBA memory layout -- you know the difference between VRAM, EWRAM, IWRAM, etc.
- *
- * 6) Some of the UI code makes use of DMA (Direct Memory Access). This assumes you are familiar with what DMA is and
- *    how it works on the GBA. Also note that a lot of the GF library code does not perform DMA directly, rather it
- *    schedules a DMA copy to occur during the next VBlank using a circle buffer of DMA transfer request objects. See
- *    the code in `gflib/dma3_manager.{h,c} for more details.
- *
- * If you are unsure about any of these concepts, please check the following resources:
- *
- * GBA graphics basics:
- *     + https://www.coranac.com/tonc/text/video.htm
- *     + https://ianfinlayson.net/class/cpsc305/notes/06-gba1
- *
- * Tiles, tilemaps, charblocks, screenblocks:
- *     + https://www.coranac.com/tonc/text/objbg.htm
- *     + https://www.coranac.com/tonc/text/regbg.htm
- *     + https://ianfinlayson.net/class/cpsc305/notes/13-tiles <--- this is a highly recommended resource
- *
- * Callbacks and Tasks:
- *     + https://github.com/pret/pokeemerald/wiki/Overview%E2%88%B6-The-Game-Loop
- *     + https://github.com/pret/pokeemerald/wiki/Overview%E2%88%B6-The-Task-System
- *
- * GBA Memory Layout:
- *     + https://www.coranac.com/tonc/text/hardware.htm#sec-memory
- *     + https://problemkaputt.de/gbatek.htm#gbamemorymap
- *
- * DMA:
- *     + https://www.coranac.com/tonc/text/dma.htm
- *     + https://ianfinlayson.net/class/cpsc305/notes/14-memory
- */
-
-/*
- * Basic Code Flow
- * A summary of the basic control flow path for this code. This may help aid in understanding which functions get
- * called, and when.
- *
- * 1) Any code that would like to launch this menu must include `sample_ui.h' so it has the right hook-in, specifically
- *    `Task_OpenModeMenu_Simple'. It must then setup the transition (however is relevant based on its context) and set
- *    the active task to `Task_OpenModeMenu_Simple'. In our case, `start_menu.c' is the caller of this task.
- *
- * 2) `Task_OpenModeMenu_Simple' waits for any active fades to finish, then it calls our init code in `ModeMenu_Init'
- *    which changes the gMainCallback2 to our `ModeMenu_SetupCB'.
- *
- * 3) `ModeMenu_SetupCB' runs each frame, bit-by-bit getting our menu initialized. Once initialization has finished,
- *    this callback:
- *       1) Sets up a new task `Task_ModeMenuWaitFadeIn' which waits until we fade back in before hotswapping itself for
- *          `Task_ModeMenuMainInput' which reads input and updates the menu state.
- *       2) Starts a palette fade to bring the screen from black back to regular colors
- *       3) Sets our VBlank callback to `ModeMenu_VBlankCB' (which is called every VBlank as part of the VBlank
- *          interrupt service routine). This callback transfers our OAM and palette buffers into VRAM, among other
- *          things
- *       4) Sets gMainCallback2 to our menu's main callback `ModeMenu_MainCB', which does the standard processing of
- *          tasks, animating of sprites, etc.
- *
- * 4) We have reached our standard menu state. Every frame `ModeMenu_MainCB' runs, which calls `Task_ModeMenuMainInput`
- *    to get input from the user and update menu state and backing graphics buffers. `ModeMenu_MainCB' also updates
- *    other important gamestate. Then, when VBlank occurs, our `ModeMenu_VBlankCB' copies palettes and OAM into VRAM
- *    before pending DMA transfers fire and copy any screen graphics updates into VRAM.
- */
-
-/*
- * Various state for the UI -- we'll allocate this on the heap since none of it needs to be preserved after we exit the
- * menu.
- */
 struct ModeMenuState
 {
     // Save the callback to run when we exit: i.e. where do we want to go after closing the menu
@@ -132,11 +38,11 @@ struct ModeMenuState
     // We will use this later to track some loading state
     u8 loadState;
     // Store the current dex mode, we'll have a mode that shows dex number/description as well as a few others
-    u8 mode;
+    u8 mode; // WIP
     // The sprite ID of the current mon icon, we need this so we can destroy the sprite when the user scrolls
-    u8 monIconSpriteId;
+    u8 monIconSpriteId; // WIP
     // The dex num of the currently displayed mon
-    u16 monIconDexNum;
+    u16 monIconDexNum; // WIP
 };
 
 // GF window system passes window IDs around, so define this to avoid using magic numbers everywhere
@@ -326,13 +232,13 @@ static const struct WindowTemplate sModeMenuWindowTemplates[] =
  * (you can technically get away with 8bpp indexing as long as each individual index is between 0-15). The easiest way
  * to make indexed PNGs is using a program like GraphicsGale or Aseprite (in Index mode).
  */
-static const u32 sModeMenuTiles[] = INCBIN_U32("graphics/sample_ui/tiles.4bpp.lz");
+static const u32 sModeMenuTiles[] = INCBIN_U32("graphics/ui_mode_menu/tiles.4bpp.lz");
 
 /*
  * I created this tilemap in TilemapStudio using the above tile PNG. I highly recommend TilemapStudio for exporting maps
  * like this.
  */
-static const u32 sModeMenuTilemap[] = INCBIN_U32("graphics/sample_ui/tilemap.bin.lz");
+static const u32 sModeMenuTilemap[] = INCBIN_U32("graphics/ui_mode_menu/tilemap.bin.lz");
 
 /*
  * This palette was built from a JASC palette file that you can export using GraphicsGale or Aseprite. Please note: the
@@ -341,7 +247,7 @@ static const u32 sModeMenuTilemap[] = INCBIN_U32("graphics/sample_ui/tilemap.bin
  * CRLF. To remedy this, run your JASC palette file through a tool like unix2dos and you shouldn't have any more
  * problems.
  */
-static const u16 sModeMenuPalette[] = INCBIN_U16("graphics/sample_ui/00.gbapal");
+static const u16 sModeMenuPalette[] = INCBIN_U16("graphics/ui_mode_menu/00.gbapal");
 
 // Define some font color values that will index into our font color table below.
 enum FontColor
@@ -388,17 +294,8 @@ static void ModeMenu_FreeResources(void);
 
 void Task_OpenModeMenu(u8 taskId)
 {
-    /*
-     * We are still in the overworld callback, so wait until the palette fade is finished (i.e. the screen is entirely
-     * black) before we start cleaning things up and changing callbacks (which might affect displayed graphics and cause
-     * artifacting)
-     */
     if (!gPaletteFade.active)
     {
-        /*
-         * Free overworld related heap stuff -- if you are entering this menu from somewhere else you may want to do
-         * other cleanup. We're entering from overworld start menu so this works for us.
-         */
         CleanupOverworldWindowsAndTilemaps();
         // Allocate heap space for menu state and set up callbacks
         ModeMenu_Init(CB2_ReturnToFieldWithOpenMenu);
@@ -412,11 +309,6 @@ void ModeMenu_Init(MainCallback callback)
     sModeMenuState = AllocZeroed(sizeof(struct ModeMenuState));
     if (sModeMenuState == NULL)
     {
-        /*
-         * If the heap allocation failed for whatever reason, then set the callback to just return to the overworld.
-         * This really shouldn't ever happen but if it does, this is better than hard crashing and making the user think
-         * you bricked their Game Boy.
-         */
         SetMainCallback2(callback);
         return;
     }
@@ -424,27 +316,11 @@ void ModeMenu_Init(MainCallback callback)
     sModeMenuState->loadState = 0;
     sModeMenuState->savedCallback = callback;
 
-    /*
-     * Next frame start running UI setup code. SetMainCallback2 also resets gMain.state to zero, which we will need for
-     * the SetupCB
-     */
     SetMainCallback2(ModeMenu_SetupCB);
 }
 
 static void ModeMenu_SetupCB(void)
 {
-    /*
-     * You may ask: why are these tasks in a giant switch statement? For one thing, it is because this is how GameFreak
-     * does things, and cargo cult programming is a glorious institution. On a more serious note, the intention is to
-     * control how much work is done each frame, and to prevent our setup code from getting interrupted in the middle of
-     * something important. So ideally, we do a small bit of work in each case statement, exit the function, and then
-     * wait for VBlank. Then next frame, we come back around and complete the work in the subsequent case statement.
-     *
-     * You may ask further: how can we be sure that the code in each case finishes before the end of the frame? The
-     * short answer is (besides counting cycles, which is really hard to do given the complexity of the code being
-     * called) we can't. The size of each case is generally a best guess, a crude attempt at doing a small amount of
-     * work before stopping and letting the next frame handle the next bit.
-     */
     switch (gMain.state)
     {
     case 0:
