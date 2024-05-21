@@ -28,6 +28,7 @@
 #include "pokedex.h"
 #include "gpu_regs.h"
 #include "ui_mode_menu.h"
+#include "list_menu.h"
 
 // This code is based on Ghoulslash's excellent UI tutorial:
 // https://www.pokecommunity.com/showpost.php?p=10441093
@@ -77,7 +78,7 @@ enum MenuItems
 static EWRAM_DATA struct ModeMenuState *sModeMenuState = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 
-static const struct BgTemplate sOptionMenuBgTemplates[] =
+static const struct BgTemplate sModeMenuBgTemplates[] =
 {
     //WIP not all needed!
     {
@@ -154,22 +155,22 @@ static const struct WindowTemplate sModeMenuWindowTemplates[] =
 //
 
 // EWRAM vars
-EWRAM_DATA static struct OptionMenu *sOptions = NULL;
+EWRAM_DATA static struct ModeMenu *sOptions = NULL;
 static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
 static EWRAM_DATA u8 *sBg3TilemapBuffer = NULL;
 
 // const data
 static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/interface/option_menu_equals_sign.4bpp"); // note: this is only used in the Japanese release
-static const u16 sOptionMenuBg_Pal[] = {RGB(17, 18, 31)};
-static const u16 sOptionMenuText_Pal[] = INCBIN_U16("graphics/interface/option_menu_text_custom.gbapal");
+static const u16 sModeMenuBg_Pal[] = {RGB(17, 18, 31)};
+static const u16 sModeMenuText_Pal[] = INCBIN_U16("graphics/interface/option_menu_text_custom.gbapal");
 
-static const u32 sOptionsPlusTiles[] = INCBIN_U32("graphics/ui_mode_menu/options_plus_tiles.4bpp.lz");
-static const u16 sOptionsPlusPalette[] = INCBIN_U16("graphics/ui_mode_menu/options_plus_tiles.gbapal");
-static const u32 sOptionsPlusTilemap[] = INCBIN_U32("graphics/ui_mode_menu/options_plus_tiles.bin.lz");
+static const u32 sOptionsPlusTiles[] = INCBIN_U32("graphics/ui_mode_menu/mode_menu_tiles.4bpp.lz");
+static const u16 sOptionsPlusPalette[] = INCBIN_U16("graphics/ui_mode_menu/mode_menu_tiles.gbapal");
+static const u32 sOptionsPlusTilemap[] = INCBIN_U32("graphics/ui_mode_menu/mode_menu_tiles.bin.lz");
 
 // Scrolling Background
 static const u32 sScrollBgTiles[] = INCBIN_U32("graphics/ui_mode_menu/scroll_tiles.4bpp.lz");
-static const u32 sScrollBgTilemap[] = INCBIN_U32("graphics/ui_mode_menu/scroll_tilemap.bin.lz");
+static const u32 sScrollBgTilemap[] = INCBIN_U32("graphics/ui_mode_menu/scroll_tiles.bin.lz");
 static const u16 sScrollBgPalette[] = INCBIN_U16("graphics/ui_mode_menu/scroll_tiles.gbapal");
 
 #define TEXT_COLOR_OPTIONS_WHITE                1
@@ -187,12 +188,12 @@ static const u16 sScrollBgPalette[] = INCBIN_U16("graphics/ui_mode_menu/scroll_t
 #define TEXT_COLOR_OPTIONS_RED_DARK_FG          13
 #define TEXT_COLOR_OPTIONS_RED_DARK_SHADOW      14
 
-struct OptionMenu
+struct ModeMenu
 {
-    u8 submenu;
+    //u8 submenu;
     u8 sel[MENUITEM_MAIN_COUNT];
-    int menuCursor[2];
-    //int visibleCursor[MENU_COUNT];
+    int menuCursor;
+    int visibleCursor;
     u8 arrowTaskId;
     u8 gfxLoadState;
 };
@@ -263,7 +264,7 @@ static const u8 sText_Legendaries[] = _("LEGENDARIES");
 static const u8 sText_Duplicates[]  = _("DUPLICATES");
 static const u8 sText_Cancel[]      = _("CANCEL");
 
-static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
+static const u8 *const sModeMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
 {
     [MENUITEM_MAIN_DEFAULTS]     = sText_Defaults,
     [MENUITEM_MAIN_BATTLEMODE]   = sText_BattleMode,
@@ -277,7 +278,7 @@ static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
 
 static const u8 *const OptionTextRight(u8 menuItem)
 {
-    return sOptionMenuItemsNamesMain[menuItem];
+    return sModeMenuItemsNamesMain[menuItem];
 }
 
 // Menu left side text conditions
@@ -313,7 +314,7 @@ static const u8 sText_Desc_Legendaries_Off[]    = _("Legendaries can not be foun
 static const u8 sText_Desc_Duplicates_On[]      = _("Truly random. Duplicates are\npossible in the Birch Bag.");
 static const u8 sText_Desc_Duplicates_Off[]     = _("Birch bag can't hold duplicates.");
 
-static const u8 *const sOptionMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
+static const u8 *const sModeMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
 {
     [MENUITEM_MAIN_DEFAULTS]     = {sText_Desc_Defaults,            sText_Desc_Defaults,            sText_Empty},
     [MENUITEM_MAIN_BATTLEMODE]   = {sText_Desc_BattleMode_Singles,  sText_Desc_BattleMode_Doubles,  sText_Empty},
@@ -327,15 +328,15 @@ static const u8 *const sOptionMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
 
 static const u8 *const OptionTextDescription(void)
 {
-    u8 menuItem = sOptions->menuCursor[sOptions->submenu]; //WIP?
+    u8 menuItem = sOptions->menuCursor;
     u8 selection;
 
     //if (!CheckConditions(menuItem))
-    //    return sOptionMenuItemDescriptionsDisabledMain[menuItem];
+    //    return sModeMenuItemDescriptionsDisabledMain[menuItem];
     selection = sOptions->sel[menuItem];
     //if (menuItem == MENUITEM_MAIN_DEFAULTS || menuItem == MENUITEM_MAIN_DUPLICATES)
     //    selection = 0;
-    return sOptionMenuItemDescriptionsMain[menuItem][selection];
+    return sModeMenuItemDescriptionsMain[menuItem][selection];
 }
 
 static u8 MenuItemCount(void)
@@ -379,60 +380,127 @@ void ModeMenu_Init(MainCallback callback)
 
 static void ModeMenu_SetupCB(void)
 {
+    u32 i, taskId;
+
     switch (gMain.state)
     {
+    default:
     case 0:
-        // Use DMA to completely clear VRAM
-        DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
-        // Null out V/H blanking callbacks since we are not drawing anything atm
         SetVBlankHBlankCallbacksToNull();
         ClearScheduledBgCopiesToVram();
+        ResetVramOamAndBgCntRegs();
+        sOptions = AllocZeroed(sizeof(*sOptions));
+        FreeAllSpritePalettes();
+        ResetTasks();
+        ResetSpriteData();
         gMain.state++;
         break;
     case 1:
-        ScanlineEffect_Stop();
-        FreeAllSpritePalettes();
-        ResetPaletteFade();
-        ResetSpriteData();
-        ResetTasks();
+        DmaClearLarge16(3, (void *)(VRAM), VRAM_SIZE, 0x1000);
+        DmaClear32(3, OAM, OAM_SIZE);
+        DmaClear16(3, PLTT, PLTT_SIZE);
+        ResetBgsAndClearDma3BusyFlags(0);
+        ResetBgPositions();
+        
+        DeactivateAllTextPrinters();
+        SetGpuReg(REG_OFFSET_WIN0H, 0);
+        SetGpuReg(REG_OFFSET_WIN0V, 0);
+        SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ);
+        SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_DARKEN | BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG2);
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+        SetGpuReg(REG_OFFSET_BLDY, 4);
+        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON);
+        
+        ResetAllBgsCoordinates();
+        ResetBgsAndClearDma3BusyFlags(0);
+        InitBgsFromTemplates(0, sModeMenuBgTemplates, NELEMS(sModeMenuBgTemplates));
+        InitWindows(sModeMenuWindowTemplates);
+
+        sBg2TilemapBuffer = Alloc(0x800);
+        memset(sBg2TilemapBuffer, 0, 0x800);
+        SetBgTilemapBuffer(2, sBg2TilemapBuffer);
+        ScheduleBgCopyTilemapToVram(2);
+
+        sBg3TilemapBuffer = Alloc(0x800);
+        memset(sBg3TilemapBuffer, 0, 0x800);
+        SetBgTilemapBuffer(3, sBg3TilemapBuffer);
+        ScheduleBgCopyTilemapToVram(3);
         gMain.state++;
         break;
     case 2:
-        if (ModeMenu_InitBgs())
-        {
-            // If we successfully init the BGs, we can move on
-            sModeMenuState->loadState = 0;
-            gMain.state++;
-        }
-        else
-        {
-            ModeMenu_FadeAndBail();
-            return;
-        }
+        ResetPaletteFade();
+        ScanlineEffect_Stop();
+        gMain.state++;
+        sOptions->gfxLoadState = 0;
         break;
     case 3:
-        if (ModeMenu_LoadGraphics() == TRUE)
+        if (OptionsMenu_LoadGraphics() == TRUE)
         {
             gMain.state++;
+            LoadBgTiles(1, GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->tiles, 0x120, 0x1A2);
         }
         break;
     case 4:
-        // Set up our text windows
-        ModeMenu_InitWindows();
+        LoadPalette(sModeMenuBg_Pal, 0, sizeof(sModeMenuBg_Pal));
+        LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->pal, 0x70, 0x20);
         gMain.state++;
         break;
     case 5:
-        // WIP unnecessary?
-
-        // Create a task that does nothing until the palette fade is done. We will start the palette fade next frame.
-        CreateTask(Task_ModeMenuWaitFadeIn, 0);
+        LoadPalette(sModeMenuText_Pal, 16, sizeof(sModeMenuText_Pal));
         gMain.state++;
         break;
     case 6:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        sOptions->sel[MENUITEM_MAIN_DEFAULTS ]    = gSaveBlock2Ptr->modeDefault;
+        sOptions->sel[MENUITEM_MAIN_BATTLEMODE]   = gSaveBlock2Ptr->modeBattleMode;
+        sOptions->sel[MENUITEM_MAIN_RANDOMIZER]   = gSaveBlock2Ptr->modeRandomizer;
+        sOptions->sel[MENUITEM_MAIN_XPSHARE]      = gSaveBlock2Ptr->modeXPShare;
+        sOptions->sel[MENUITEM_MAIN_STAT_CHANGER] = gSaveBlock2Ptr->modeStatChanger;
+        sOptions->sel[MENUITEM_MAIN_LEGENDARIES]  = gSaveBlock2Ptr->modeLegendaries;
+        sOptions->sel[MENUITEM_MAIN_DUPLICATES]   = gSaveBlock2Ptr->modeDuplicates;
+
+        //sOptions->submenu = MENU_MAIN;
+
         gMain.state++;
         break;
     case 7:
+        PutWindowTilemap(WIN_TOPBAR);
+        DrawTopBarText();
+        gMain.state++;
+        break;
+    case 8:
+        PutWindowTilemap(WIN_DESCRIPTION);
+        DrawDescriptionText();
+        gMain.state++;
+        break;
+    case 9:
+        PutWindowTilemap(WIN_OPTIONS);
+        DrawModeMenuTexts();
+        gMain.state++;
+        break;
+    case 10:
+        taskId = CreateTask(Task_ModeMenuWaitFadeIn, 0);
+        
+        sOptions->arrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 240 / 2, 20, 110, MENUITEM_MAIN_COUNT - 1, 110, 110, 0);
+
+        for (i = 0; i < min(OPTIONS_ON_SCREEN, MenuItemCount()); i++)
+            DrawChoices(i, i * Y_DIFF);
+
+        HighlightModeMenuItem();
+
+        CopyWindowToVram(WIN_OPTIONS, COPYWIN_FULL);
+        gMain.state++;
+        break;
+    case 11:
+        DrawBgWindowFrames();
+        gMain.state++;
+        break;
+    case 12:
+        ShowBg(0);
+        ShowBg(1);
+        ShowBg(2);
+        ShowBg(3);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
         // Finally we can set our main callbacks since loading is finished
         SetVBlankCallback(ModeMenu_VBlankCB);
         SetMainCallback2(ModeMenu_MainCB);
@@ -454,7 +522,147 @@ static void ModeMenu_VBlankCB(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
+    ChangeBgY(3, 96, BG_COORD_ADD);
 }
+
+//Header Window
+static const u8 sText_TopBar_Main[] = _("CHOOSE GAME MODE");
+static void DrawTopBarText(void)
+{
+    const u8 color[3] = { 0, TEXT_COLOR_WHITE, TEXT_COLOR_OPTIONS_GRAY_FG };
+
+    FillWindowPixelBuffer(WIN_TOPBAR, PIXEL_FILL(0));
+    AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 105, 1, color, 0, sText_TopBar_Main);
+    PutWindowTilemap(WIN_TOPBAR);
+    CopyWindowToVram(WIN_TOPBAR, COPYWIN_FULL);
+}
+
+static void DrawModeMenuTexts(void) //left side text
+{
+    u8 i;
+
+    FillWindowPixelBuffer(WIN_OPTIONS, PIXEL_FILL(0));
+    for (i = 0; i < MenuItemCount(); i++)
+        DrawLeftSideOptionText(i, (i * Y_DIFF) + 1);
+    CopyWindowToVram(WIN_OPTIONS, COPYWIN_FULL);
+}
+
+static void DrawDescriptionText(void)
+{
+    u8 color_gray[3];
+    color_gray[0] = TEXT_COLOR_TRANSPARENT;
+    color_gray[1] = TEXT_COLOR_OPTIONS_GRAY_FG;
+    color_gray[2] = TEXT_COLOR_OPTIONS_GRAY_SHADOW;
+        
+    FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(1));
+    AddTextPrinterParameterized4(WIN_DESCRIPTION, FONT_NORMAL, 8, 1, 0, 0, color_gray, TEXT_SKIP_DRAW, OptionTextDescription());
+    CopyWindowToVram(WIN_DESCRIPTION, COPYWIN_FULL);
+}
+
+static void DrawLeftSideOptionText(int selection, int y)
+{
+    u8 color_yellow[3];
+    u8 color_gray[3];
+
+    color_yellow[0] = TEXT_COLOR_TRANSPARENT;
+    color_yellow[1] = TEXT_COLOR_WHITE;
+    color_yellow[2] = TEXT_COLOR_OPTIONS_GRAY_FG;
+    color_gray[0] = TEXT_COLOR_TRANSPARENT;
+    color_gray[1] = TEXT_COLOR_WHITE;
+    color_gray[2] = TEXT_COLOR_OPTIONS_GRAY_SHADOW;
+
+    if (CheckConditions(selection))
+        AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_yellow, TEXT_SKIP_DRAW, OptionTextRight(selection));
+    else
+        AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_gray, TEXT_SKIP_DRAW, OptionTextRight(selection));
+}
+
+static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen, bool8 active)
+{
+    u8 color_red[3];
+    u8 color_gray[3];
+
+    if (active)
+    {
+        color_red[0] = TEXT_COLOR_TRANSPARENT;
+        color_red[1] = TEXT_COLOR_OPTIONS_ORANGE_FG;
+        color_red[2] = TEXT_COLOR_OPTIONS_GRAY_FG;
+        color_gray[0] = TEXT_COLOR_TRANSPARENT;
+        color_gray[1] = TEXT_COLOR_OPTIONS_WHITE;
+        color_gray[2] = TEXT_COLOR_OPTIONS_GRAY_FG;
+    }
+    else
+    {
+        color_red[0] = TEXT_COLOR_TRANSPARENT;
+        color_red[1] = TEXT_COLOR_OPTIONS_WHITE;
+        color_red[2] = TEXT_COLOR_OPTIONS_GRAY_FG;
+        color_gray[0] = TEXT_COLOR_TRANSPARENT;
+        color_gray[1] = TEXT_COLOR_OPTIONS_WHITE;
+        color_gray[2] = TEXT_COLOR_OPTIONS_GRAY_FG;
+    }
+
+
+    if (choosen)
+        AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, x, y, 0, 0, color_red, TEXT_SKIP_DRAW, text);
+    else
+        AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, x, y, 0, 0, color_gray, TEXT_SKIP_DRAW, text);
+}
+
+static void DrawChoices(u32 id, int y) //right side draw function
+{
+    if (sItemFunctionsMain[id].drawChoices != NULL)
+        sItemFunctionsMain[id].drawChoices(sOptions->sel[id], y);
+}
+
+static void HighlightModeMenuItem(void)
+{
+    int cursor = sOptions->visibleCursor;
+
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(8, 232));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(cursor * Y_DIFF + 24, cursor * Y_DIFF + 40));
+}
+
+static bool8 OptionsMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spritesheets, and palettes
+{
+    switch (sOptions->gfxLoadState)
+    {
+    case 0:
+        ResetTempTileDataBuffers();
+        DecompressAndCopyTileDataToVram(2, sOptionsPlusTiles, 0, 0, 0);
+        sOptions->gfxLoadState++;
+        break;
+    case 1:
+        if (FreeTempTileDataBuffersIfPossible() != TRUE)
+        {
+            LZDecompressWram(sOptionsPlusTilemap, sBg2TilemapBuffer);
+            sOptions->gfxLoadState++;
+        }
+        break;
+    case 2:
+        ResetTempTileDataBuffers();
+        DecompressAndCopyTileDataToVram(3, sScrollBgTiles, 0, 0, 0);
+        sOptions->gfxLoadState++;
+        break;
+    case 3:
+        if (FreeTempTileDataBuffersIfPossible() != TRUE)
+        {
+            LZDecompressWram(sScrollBgTilemap, sBg3TilemapBuffer);
+            sOptions->gfxLoadState++;
+        }
+        break;
+    case 4:
+        LoadPalette(sOptionsPlusPalette, 64, 32);
+        LoadPalette(sScrollBgPalette, 32, 32);
+        sOptions->gfxLoadState++;
+        break;
+    default:
+        sOptions->gfxLoadState = 0;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+// original code ##############################
 
 static void Task_ModeMenuWaitFadeIn(u8 taskId)
 {
