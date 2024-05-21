@@ -21,7 +21,7 @@
 #include "menu_helpers.h"
 #include "palette.h"
 #include "party_menu.h"
-#include "pokemon.c"
+#include "pokemon.h"
 #include "scanline_effect.h"
 #include "script.h"
 #include "sound.h"
