@@ -15,6 +15,7 @@
 #include "menu.h"
 #include "scanline_effect.h"
 #include "sprite.h"
+#include "strings.h"
 #include "constants/rgb.h"
 #include "decompress.h"
 #include "constants/songs.h"
@@ -48,8 +49,23 @@ struct ModeMenuState
 // GF window system passes window IDs around, so define this to avoid using magic numbers everywhere
 enum WindowIds
 {
-    WIN_UI_HINTS,
-    WIN_MON_INFO
+    WIN_TOPBAR,
+    WIN_OPTIONS,
+    WIN_DESCRIPTION
+};
+
+// Menu items to browse through the list of options
+enum MenuItems
+{
+    MENUITEM_MAIN_DEFAULTS,
+    MENUITEM_MAIN_BATTLEMODE,
+    MENUITEM_MAIN_RANDOMIZER,
+    MENUITEM_MAIN_XPSHARE,
+    MENUITEM_MAIN_STAT_CHANGER,
+    MENUITEM_MAIN_LEGENDARIES,
+    MENUITEM_MAIN_DUPLICATES,
+    MENUITEM_MAIN_CANCEL,
+    MENUITEM_MAIN_COUNT,
 };
 
 /*
@@ -61,214 +77,133 @@ enum WindowIds
 static EWRAM_DATA struct ModeMenuState *sModeMenuState = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 
-/*
- * Defines and read-only data for on-screen dex.
- */
-#define MON_ICON_X     39
-#define MON_ICON_Y     36
-static const u8 sRegionNameKanto[] =  _("Kanto");
-/*
- * Dex mode defines. Info mode shows dex number and description. Stats and Other modes will show placeholder text, but
- * you can change this to show whatever info you want.
- */
-#define MODE_INFO   0
-#define MODE_STATS  1
-#define MODE_OTHER  2
-static const u8 sModeNameInfo[] =  _("Info");
-static const u8 sModeNameStats[] =  _("Stats");
-static const u8 sModeNameOther[] =  _("Other");
-static const u8 *const sModeNames[3] = {
-    [MODE_INFO]   = sModeNameInfo,
-    [MODE_STATS]  = sModeNameStats,
-    [MODE_OTHER]  = sModeNameOther
-};
-
-/*
- * BgTemplates are just a nice way to setup various BG attributes without having to deal with manually writing to the
- * various display and BG control registers that the Game Boy actually cares about. GF handles that for you with lots of
- * clever BG management code. All you have to do is tell it what you want. If you want to see the gory details of BG
- * control registers, check out this resource and the code in `gflib/bg.{h,c}':
- * https://problemkaputt.de/gbatek.htm#lcdiobgcontrol
- */
-static const struct BgTemplate sModeMenuBgTemplates[] =
+static const struct BgTemplate sOptionMenuBgTemplates[] =
 {
+    //WIP not all needed!
     {
-        // We will use BG0 for the text windows
-        .bg = 0,
-        // Use charblock 0 for BG0 tiles
-        .charBaseIndex = 0,
-        // Use screenblock 31 for BG0 tilemap
-        // (It has become customary to put tilemaps in the final few screenblocks)
-        .mapBaseIndex = 31,
-        // Draw the text windows on top of the main BG
-        .priority = 1
+       .bg = 0,
+       .charBaseIndex = 1,
+       .mapBaseIndex = 30,
+       .screenSize = 0,
+       .paletteMode = 0,
+       .priority = 1,
     },
     {
-        // The Main BG: we will use BG1 for the menu graphics
-        .bg = 1,
-        // Use charblock 3 for BG1 tiles
-        .charBaseIndex = 3,
-        // Use screenblock 30 for BG1 tilemap
-        .mapBaseIndex = 30,
-        // Draw this BG below BG0, since we want text drawn on top of the menu graphics
-        .priority = 2
-    }
-    /*
-     * I encourage you to open the mGBA Tools/Game State Views/View Tiles menu to see how this above code gets
-     * translated into an actual VRAM layout. Quiz yourself by changing the charBaseIndex and mapBaseIndex and guessing
-     * what will happen before looking at the Tile Viewer.
-     */
+       .bg = 1,
+       .charBaseIndex = 1,
+       .mapBaseIndex = 31,
+       .screenSize = 0,
+       .paletteMode = 0,
+       .priority = 0,
+    },
+    {
+       .bg = 2,
+       .charBaseIndex = 0,
+       .mapBaseIndex = 29,
+       .screenSize = 0,
+       .paletteMode = 0,
+       .priority = 1,
+    },
+    {
+       .bg = 3,
+       .charBaseIndex = 3,
+       .mapBaseIndex = 27,
+       .screenSize = 0,
+       .paletteMode = 0,
+       .priority = 2,
+    },
 };
 
-/*
- * Like the above BgTemplates, WindowTemplates are just an easy way to setup some software windows (which are provided
- * by the GameFreak library). GF's window system is used primarily for drawing dynamic text on the background layers.
- * Their inner workings are quite confusing, so hopefully this tutorial clears some things up.
- *
- * One big thing to note is that GF windows use a technique called tile rendering to draw text. With normal BG
- * rendering, you have a pre-drawn tileset, and then you dynamically update the tilemap, based on gamestate, to change
- * what's shown on screen. With tile rendering, this process is basically flipped on its head. GF tile-rendered windows
- * instead write a preset increasing sequence of tile indexes into the parts of the BG tilemap that represent a given
- * window. Then, to draw text, it dynamically draws to a backing pixel buffer (the `u8 *tileData' in the Window struct)
- * that is copied into VRAM just like regular tile data. This effectively allows the text rendering code to treat the
- * window BG as a pseudo-framebuffer, as if we were in a simple bitmap mode like Mode 3. This technique is advantageous
- * because it allows for maximum flexibility with font sizing and spacing. You aren't locked into 8x8 tiles for each
- * character.
- *
- * For more information about tile rendering and text rendering sytems in general, check out the TTE TONC tutorial and
- * the tile rendering section specifically. You can also consult Game Freak's code in `gflib/window.c' and
- * `gflib/text.c'.
- * https://www.coranac.com/tonc/text/tte.htm#sec-chr
- */
 static const struct WindowTemplate sModeMenuWindowTemplates[] =
 {
-    [WIN_UI_HINTS] =
+    [WIN_TOPBAR] =
     {
-        // This window will print on BG0
-        .bg = 0,
-        /*
-         * The tilemap position for this window, if we imagine the tilemap as a 2D matrix. These positions refer to
-         * tiles, so to get the actual pixel position you should multiply by 8.
-         */
-        .tilemapLeft = 14,
+        .bg = 1,
+        .tilemapLeft = 0,
         .tilemapTop = 0,
-        /*
-         * The tilemap dimensions for this window, if we imagine the tilemap as a 2D matrix. These dimensions refer to
-         * tiles, so to get the actual pixel dimensions you should multiply by 8.
-         */
-        .width = 16,
-        .height = 7,
-        /*
-         * Use BG palette 15 for all tilemap entries that fall within this window. Tilemap entries store the palette for
-         * the given tile in bits F, E, D, C (top four) of the entry. We'll need to load the right palette into BG
-         * palette slot 15.
-         */
-        .paletteNum = 15,
-
-        /*
-         * This next parameter is where things get interesting. The window base block is the tile offset, relative to
-         * the window BG's charblock, where the window's graphics live in VRAM. Since we might be cramming multiple
-         * windows into the same BG, we need to tell the engine where exactly to place each window's graphics, lest they
-         * overlap.
-         *
-         * Typically, you want each subsequent window's baseBlock to be at least:
-         *     previousBaseBlock + (prevWindowWidth * prevWindowHeight)
-         * which makes sense if you think about it. (Try changing the second window's baseBlock to see how important
-         * this parameter is!)
-         *
-         * And another thing -- why is this value set to 1 and not 0? You will understand this better once you finish
-         * going through the tutorial code, but I will put the explanation here:
-         *
-         * It's because this window lives on BG0. If we set the baseBlock to 0, then the text writing code will draw the
-         * first section of window text into tile 0 of charblock 0 (because baseBlock=0 and BG0_charblock=0). When we
-         * init our window, BG0's tilemap buffer is zeroed out (because it gets AllocZeroed'd by the window init code).
-         * But since the tilemap buffer ultimately gets copied into BG0's screenblock, it is effectively telling the
-         * hardware to draw tile 0 across the entire screen. And since we put some text in tile 0, you are going to end
-         * up seeing a small bit of text drawn across the screen, which looks really bad.
-         *
-         * We obviously don't want that, so we offset the window text by one so that tile 0 of charblock 0 is empty. And
-         * as a result our zeroed BG tilemap draws transparent tiles instead of the text fragment. (Recall that the
-         * value in each tilemap buffer entry is basically a pointer into our charblock, so `tilemapBuffer[i] == 0'
-         * means draw `tile 0' onto wherever `tilemap position i' maps on the LCD. The various LCD register settings
-         * will define where on the LCD that `tilemap position i' is actually drawn. And technically, it's actually a
-         * tad more complicated than this. See here for details: https://www.coranac.com/tonc/text/regbg.htm#sec-map)
-         *
-         * If this is confusing, try changing this value to 0, rebuild and see what the menu does. Looking at the mGBA
-         * tile viewer will illuminate what is happening.
-         */
-        .baseBlock = 1
-        /*
-         * Just like with the BgTemplates, I encourage you to open:
-         *     "mGBA Tools/Game State Views/View Tiles"
-         * to see how this above code gets translated into an actual VRAM layout. In this case, try changing the
-         * baseBlock value for this window and see where in VRAM the text gets drawn. If you want to really work your
-         * brain, change the charblock base for BG0 *and* the baseBlock for this window and try to guess where in VRAM
-         * your window text will show up.
-         */
+        .width = 30,
+        .height = 2,
+        .paletteNum = 1,
+        .baseBlock = 2
     },
-    [WIN_MON_INFO] =
+    [WIN_OPTIONS] =
     {
-        // This window will also print on BG0
         .bg = 0,
         .tilemapLeft = 2,
-        .tilemapTop = 9,
+        .tilemapTop = 3,
         .width = 26,
         .height = 10,
-        // We will use the same palette for this window, since it's also just regular text
-        .paletteNum = 15,
-        /*
-         * Here we will set the baseBlock to the previous window's baseblock + the width*height in tiles of the previous
-         * window. Try changing this value around and use the mGBA tile viewer to see what happens.
-         */
-        .baseBlock = 1 + (16 * 7)
+        .paletteNum = 1,
+        .baseBlock = 62
     },
-    // Mark the end of the templates so the `InitWindow' library function doesn't run past the end
+    [WIN_DESCRIPTION] = 
+    {
+        .bg = 1,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 26,
+        .height = 4,
+        .paletteNum = 1,
+        .baseBlock = 500
+    },
     DUMMY_WIN_TEMPLATE
 };
 
+//
+//  Graphics Pointers to Tilemaps, Tilesets, Spritesheets, Palettes
+//
 
-/*
- * The tile file is generated from properly a indexed tile PNG image. You MUST use an indexed PNG with 4bpp indexing
- * (you can technically get away with 8bpp indexing as long as each individual index is between 0-15). The easiest way
- * to make indexed PNGs is using a program like GraphicsGale or Aseprite (in Index mode).
- */
-static const u32 sModeMenuTiles[] = INCBIN_U32("graphics/ui_mode_menu/tiles.4bpp.lz");
+// EWRAM vars
+EWRAM_DATA static struct OptionMenu *sOptions = NULL;
+static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
+static EWRAM_DATA u8 *sBg3TilemapBuffer = NULL;
 
-/*
- * I created this tilemap in TilemapStudio using the above tile PNG. I highly recommend TilemapStudio for exporting maps
- * like this.
- */
-static const u32 sModeMenuTilemap[] = INCBIN_U32("graphics/ui_mode_menu/tilemap.bin.lz");
+// const data
+static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/interface/option_menu_equals_sign.4bpp"); // note: this is only used in the Japanese release
+static const u16 sOptionMenuBg_Pal[] = {RGB(17, 18, 31)};
+static const u16 sOptionMenuText_Pal[] = INCBIN_U16("graphics/interface/option_menu_text_custom.gbapal");
 
-/*
- * This palette was built from a JASC palette file that you can export using GraphicsGale or Aseprite. Please note: the
- * palette conversion tool REQUIRES that JASC palette files end in CRLF, the standard Windows line ending. If you are
- * using the Mac/Linux version of a tool like Aseprite, you may get errors complaining that your lines end in LF and not
- * CRLF. To remedy this, run your JASC palette file through a tool like unix2dos and you shouldn't have any more
- * problems.
- */
-static const u16 sModeMenuPalette[] = INCBIN_U16("graphics/ui_mode_menu/00.gbapal");
+static const u32 sOptionsPlusTiles[] = INCBIN_U32("graphics/ui_mode_menu/options_plus_tiles.4bpp.lz");
+static const u16 sOptionsPlusPalette[] = INCBIN_U16("graphics/ui_mode_menu/options_plus_tiles.gbapal");
+static const u32 sOptionsPlusTilemap[] = INCBIN_U32("graphics/ui_mode_menu/options_plus_tiles.bin.lz");
 
-// Define some font color values that will index into our font color table below.
-enum FontColor
+// Scrolling Background
+static const u32 sScrollBgTiles[] = INCBIN_U32("graphics/ui_mode_menu/scroll_tiles.4bpp.lz");
+static const u32 sScrollBgTilemap[] = INCBIN_U32("graphics/ui_mode_menu/scroll_tilemap.bin.lz");
+static const u16 sScrollBgPalette[] = INCBIN_U16("graphics/ui_mode_menu/scroll_tiles.gbapal");
+
+#define TEXT_COLOR_OPTIONS_WHITE                1
+#define TEXT_COLOR_OPTIONS_GRAY_FG              2
+#define TEXT_COLOR_OPTIONS_GRAY_SHADOW          3
+#define TEXT_COLOR_OPTIONS_GRAY_LIGHT_FG        4
+#define TEXT_COLOR_OPTIONS_ORANGE_FG            5
+#define TEXT_COLOR_OPTIONS_ORANGE_SHADOW        6
+#define TEXT_COLOR_OPTIONS_RED_FG               7
+#define TEXT_COLOR_OPTIONS_RED_SHADOW           8
+#define TEXT_COLOR_OPTIONS_GREEN_FG             9
+#define TEXT_COLOR_OPTIONS_GREEN_SHADOW         10
+#define TEXT_COLOR_OPTIONS_GREEN_DARK_FG        11
+#define TEXT_COLOR_OPTIONS_GREEN_DARK_SHADOW    12
+#define TEXT_COLOR_OPTIONS_RED_DARK_FG          13
+#define TEXT_COLOR_OPTIONS_RED_DARK_SHADOW      14
+
+struct OptionMenu
 {
-    FONT_BLACK,
-    FONT_WHITE,
-    FONT_RED,
-    FONT_BLUE,
+    u8 submenu;
+    u8 sel[MENUITEM_MAIN_COUNT];
+    int menuCursor[2];
+    //int visibleCursor[MENU_COUNT];
+    u8 arrowTaskId;
+    u8 gfxLoadState;
 };
-static const u8 sModeMenuWindowFontColors[][3] =
-{
-    /*
-     * The TEXT_COLOR_X macros here are just palette indexes. Specifically, these indexes match the colors in
-     * `gMessageBox_Pal', so we will need to make sure that palette is loaded. Since our window is set to use
-     * palette 15, we'll load it into BG palette slot 15 in the menu loading code.
-     */
-    [FONT_BLACK]  = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_LIGHT_GRAY},
-    [FONT_WHITE]  = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GRAY},
-    [FONT_RED]    = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED,        TEXT_COLOR_LIGHT_GRAY},
-    [FONT_BLUE]   = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_BLUE,       TEXT_COLOR_LIGHT_GRAY},
-};
+
+#define Y_DIFF 16 // Difference in pixels between items.
+#define OPTIONS_ON_SCREEN 5
+#define NUM_OPTIONS_FROM_BORDER 1
+
+//
+//  local functions
+//
 
 // Callbacks for the sample UI
 static void ModeMenu_SetupCB(void);
@@ -291,15 +226,138 @@ static void ModeMenu_PrintUiButtonHints(void);
 static void ModeMenu_PrintUiMonInfo(void);
 static void ModeMenu_DrawMonIcon(u16 dexNum);
 static void ModeMenu_FreeResources(void);
+static int ProcessInput_Options_Two(int selection);
+static int ProcessInput_Options_Three(int selection);
+static void DrawChoices_Defaults(int selection, int y);
+static void DrawChoices_BattleMode(int selection, int y);
+static void DrawChoices_Randomizer(int selection, int y);
+static void DrawChoices_XPShare(int selection, int y);
+static void DrawChoices_StatChanger(int selection, int y);
+static void DrawChoices_Legendaries(int selection, int y);
+static void DrawChoices_Duplicates(int selection, int y);
+
+// Menu draw and input functions
+struct MainMenu
+{
+    void (*drawChoices)(int selection, int y);
+    int (*processInput)(int selection);
+} static const sItemFunctionsMain[MENUITEM_MAIN_COUNT] =
+{
+    [MENUITEM_MAIN_DEFAULTS]     = {DrawChoices_Defaults,    ProcessInput_Options_Three},
+    [MENUITEM_MAIN_BATTLEMODE]   = {DrawChoices_BattleMode,  ProcessInput_Options_Two},
+    [MENUITEM_MAIN_RANDOMIZER]   = {DrawChoices_Randomizer,  ProcessInput_Options_Two},
+    [MENUITEM_MAIN_XPSHARE]      = {DrawChoices_XPShare,     ProcessInput_Options_Two},
+    [MENUITEM_MAIN_STAT_CHANGER] = {DrawChoices_StatChanger, ProcessInput_Options_Two},
+    [MENUITEM_MAIN_LEGENDARIES]  = {DrawChoices_Legendaries, ProcessInput_Options_Two},
+    [MENUITEM_MAIN_DUPLICATES]   = {DrawChoices_Duplicates,  ProcessInput_Options_Two},
+    [MENUITEM_MAIN_CANCEL]       = {NULL, NULL},
+};
+
+// Menu left side option names text
+static const u8 sText_Defaults[]    = _("DEFAULT");
+static const u8 sText_BattleMode[]  = _("BATTLE MODE");
+static const u8 sText_Randomizer[]  = _("RANDOMIZER");
+static const u8 sText_XPShare[]     = _("XP SHARE");
+static const u8 sText_StatChanger[] = _("STAT CHANGER");
+static const u8 sText_Legendaries[] = _("LEGENDARIES");
+static const u8 sText_Duplicates[]  = _("DUPLICATES");
+static const u8 sText_Cancel[]      = _("CANCEL");
+
+static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
+{
+    [MENUITEM_MAIN_DEFAULTS]     = sText_Defaults,
+    [MENUITEM_MAIN_BATTLEMODE]   = sText_BattleMode,
+    [MENUITEM_MAIN_RANDOMIZER]   = sText_Randomizer,
+    [MENUITEM_MAIN_XPSHARE]      = sText_XPShare,
+    [MENUITEM_MAIN_STAT_CHANGER] = sText_StatChanger,
+    [MENUITEM_MAIN_LEGENDARIES]  = sText_Legendaries,
+    [MENUITEM_MAIN_DUPLICATES]   = sText_Duplicates,
+    [MENUITEM_MAIN_CANCEL]       = sText_Cancel,
+};
+
+static const u8 *const OptionTextRight(u8 menuItem)
+{
+    return sOptionMenuItemsNamesMain[menuItem];
+}
+
+// Menu left side text conditions
+static bool8 CheckConditions(int selection)
+{
+    switch(selection)
+    {
+        case MENUITEM_MAIN_DEFAULTS:       return TRUE;
+        case MENUITEM_MAIN_BATTLEMODE:     return TRUE;
+        case MENUITEM_MAIN_RANDOMIZER:     return TRUE;
+        case MENUITEM_MAIN_XPSHARE:        return TRUE;
+        case MENUITEM_MAIN_STAT_CHANGER:   return TRUE;
+        case MENUITEM_MAIN_LEGENDARIES:    return TRUE;
+        case MENUITEM_MAIN_DUPLICATES:     return TRUE;
+        case MENUITEM_MAIN_CANCEL:         return TRUE;
+        case MENUITEM_MAIN_COUNT:          return TRUE;
+    }
+}
+
+// Descriptions
+static const u8 sText_Empty[]                   = _("");
+static const u8 sText_Desc_Save[]               = _("Save your settings.");
+static const u8 sText_Desc_Defaults[]           = _("Set all options based on defaults.");
+static const u8 sText_Desc_BattleMode_Singles[] = _("Play only single battles.");
+static const u8 sText_Desc_BattleMode_Doubles[] = _("Play only double battles.");
+static const u8 sText_Desc_Randomizer_Mons[]    = _("Only randomize Pokémon species\n, trainers and item drops.");
+static const u8 sText_Desc_Randomizer_All[]     = _("Also randomize abilities and\nmoves.");
+static const u8 sText_Desc_XPShare_75[]         = _("Exp. Share gives 75 pct XP\nto party mons.");
+static const u8 sText_Desc_XPShare_50[]         = _("Exp. Share gives 50 pct XP\nto party mons.");
+static const u8 sText_Desc_StatChanger[]        = _("Enables the Stat. Changer\nin the party menu.");
+static const u8 sText_Desc_Legendaries_On[]     = _("Legendaries can be found in\nthe Birch Bag.");
+static const u8 sText_Desc_Legendaries_Off[]    = _("Legendaries can not be found\nin the Birch Bag.");
+static const u8 sText_Desc_Duplicates_On[]      = _("Truly random. Duplicates are\npossible in the Birch Bag.");
+static const u8 sText_Desc_Duplicates_Off[]     = _("Birch bag can't hold duplicates.");
+
+static const u8 *const sOptionMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
+{
+    [MENUITEM_MAIN_DEFAULTS]     = {sText_Desc_Defaults,            sText_Desc_Defaults,            sText_Empty},
+    [MENUITEM_MAIN_BATTLEMODE]   = {sText_Desc_BattleMode_Singles,  sText_Desc_BattleMode_Doubles,  sText_Empty},
+    [MENUITEM_MAIN_RANDOMIZER]   = {sText_Desc_Randomizer_Mons,     sText_Desc_Randomizer_All,      sText_Empty},
+    [MENUITEM_MAIN_XPSHARE]      = {sText_Desc_XPShare_75,          sText_Desc_XPShare_50,          sText_Empty},
+    [MENUITEM_MAIN_STAT_CHANGER] = {sText_Desc_StatChanger,         sText_Desc_StatChanger,         sText_Empty},
+    [MENUITEM_MAIN_LEGENDARIES]  = {sText_Desc_Legendaries_On,      sText_Desc_Legendaries_Off,     sText_Empty},
+    [MENUITEM_MAIN_DUPLICATES]   = {sText_Desc_Duplicates_On,       sText_Desc_Duplicates_Off,      sText_Empty},
+    [MENUITEM_MAIN_CANCEL]       = {sText_Desc_Save,                sText_Empty,                    sText_Empty},
+};
+
+static const u8 *const OptionTextDescription(void)
+{
+    u8 menuItem = sOptions->menuCursor[sOptions->submenu]; //WIP?
+    u8 selection;
+
+    //if (!CheckConditions(menuItem))
+    //    return sOptionMenuItemDescriptionsDisabledMain[menuItem];
+    selection = sOptions->sel[menuItem];
+    //if (menuItem == MENUITEM_MAIN_DEFAULTS || menuItem == MENUITEM_MAIN_DUPLICATES)
+    //    selection = 0;
+    return sOptionMenuItemDescriptionsMain[menuItem][selection];
+}
+
+static u8 MenuItemCount(void)
+{
+    return MENUITEM_MAIN_COUNT;
+}
+
+static u8 MenuItemCancel(void)
+{
+    return MENUITEM_MAIN_CANCEL;
+}
+
+//
+//  main code
+//
 
 void Task_OpenModeMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        // Allocate heap space for menu state and set up callbacks
         ModeMenu_Init(CB2_ReturnToFieldWithOpenMenu);
-        // Our setup is done, so destroy ourself.
         DestroyTask(taskId);
     }
 }
@@ -328,41 +386,18 @@ static void ModeMenu_SetupCB(void)
         DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
         // Null out V/H blanking callbacks since we are not drawing anything atm
         SetVBlankHBlankCallbacksToNull();
-        /*
-         * If previous game state had scheduled any copies to VRAM, cancel these now so we don't accidentally draw
-         * garbage to the screen.
-         */
         ClearScheduledBgCopiesToVram();
         gMain.state++;
         break;
     case 1:
-        /*
-         * Unclear on what this does, I think it is related to some of the screen transition effects. In any case, we
-         * don't want any of those since this is a menu, dammit
-         */
         ScanlineEffect_Stop();
-        /*
-         * Clear all sprite palette tags in the sprite system. Sprite palette tags will be explained in more detail in
-         * the next tutorial. For now, just accept that we need to clear them for things to work properly.
-         */
         FreeAllSpritePalettes();
-        /*
-         * Reset palette fade settings -- we are currently in a fade-to-black initiated by whatever code opened this
-         * menu screen. Since we don't know what they were doing with the palettes, just reset everything so we can do a
-         * simple fade-in when we're done loading.
-         */
         ResetPaletteFade();
-        // Completely clear all sprite buffers and settings
         ResetSpriteData();
-        /*
-         * Completely clear all task data. There should be no tasks running right now so make sure nothing is hanging
-         * around from whatever code got us into this menu.
-         */
         ResetTasks();
         gMain.state++;
         break;
     case 2:
-        // Try to run the BG init code
         if (ModeMenu_InitBgs())
         {
             // If we successfully init the BGs, we can move on
@@ -371,19 +406,13 @@ static void ModeMenu_SetupCB(void)
         }
         else
         {
-            /*
-             * Otherwise, fade out, free the heap data, and return to main menu. Like before, this shouldn't ever really
-             * happen but it's better to handle it then have a surprise hard-crash.
-             */
             ModeMenu_FadeAndBail();
             return;
         }
         break;
     case 3:
-        // `ModeMenu_LoadGraphics' has its own giant switch statement, so keep calling until it returns TRUE at the end
         if (ModeMenu_LoadGraphics() == TRUE)
         {
-            // Only advance the state of this load switch statment once all the LoadGraphics logic has finished.
             gMain.state++;
         }
         break;
@@ -393,43 +422,13 @@ static void ModeMenu_SetupCB(void)
         gMain.state++;
         break;
     case 5:
-        // Setup initial draw of Pokemon icon sprite
-        sModeMenuState->monIconDexNum = NATIONAL_DEX_BULBASAUR;
-
-        /*
-         * Free all mon icon palettes just to make sure nothing is left over from previous screen. The sprite system
-         * uses a technique called palette tagging to help the game keep track of which palettes are in use, and by
-         * which sprites. As mentioned above, we will cover palette tags in more detail in the next tutorial.
-         */
-        FreeMonIconPalettes();
-
-        /*
-         * Since this is a small demo without many sprites, we can just load all 6 default mon icon palettes at once.
-         * If you have a more complex UI with lots of unique-palette sprites in addition to mon icons, you may instead
-         * want to manage mon icon palettes dynamically based on which mon icons are currently on screen. You can do
-         * this with the more granular `LoadMonIconPalette(u16 species)' and `FreeMonIconPalette(u16 species)'
-         * functions.
-         */
-        LoadMonIconPalettes();
-
-        // Draw the mon icon
-        ModeMenu_DrawMonIcon(sModeMenuState->monIconDexNum);
-
-        // Print the UI button hints in the top-right
-        ModeMenu_PrintUiButtonHints();
-
-        // Print the mon info in the main text box
-        ModeMenu_PrintUiMonInfo();
+        // WIP unnecessary?
 
         // Create a task that does nothing until the palette fade is done. We will start the palette fade next frame.
         CreateTask(Task_ModeMenuWaitFadeIn, 0);
         gMain.state++;
         break;
     case 6:
-        /*
-         * Fade screen in from black, this will take multiple frames to finish so we'll want the above active task poll
-         * the fade to completion before continuing processing.
-         */
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         gMain.state++;
         break;
@@ -443,49 +442,22 @@ static void ModeMenu_SetupCB(void)
 
 static void ModeMenu_MainCB(void)
 {
-    // Iterate through the Tasks list and run any active task callbacks
     RunTasks();
-    // For all active sprites, call their callbacks and update their animation state
     AnimateSprites();
-    /*
-     * After all sprite state is updated, we need to sort their information into the OAM buffer which will be copied
-     * into actual OAM during VBlank. This makes sure sprites are drawn at the correct positions and in the correct
-     * order (recall sprite draw order determines which sprites appear on top of each other).
-     */
     BuildOamBuffer();
-    /*
-     * This one is a little confusing because there are actually two layers of scheduling. Regular game code can call
-     * `ScheduleBgCopyTilemapToVram(u8 bgId)' which will simply mark the tilemap for `bgId' as "ready to be copied".
-     * Then, calling `DoScheduledBgTilemapCopiesToVram' here does not actually perform the copy. Rather it simply adds a
-     * DMA transfer request to the DMA manager for this buffer copy. Only during VBlank when DMA transfers are processed
-     * does the copy into VRAM actually occur.
-     */
     DoScheduledBgTilemapCopiesToVram();
-    // If a palette fade is active, tick the udpate
     UpdatePaletteFade();
 }
 
 static void ModeMenu_VBlankCB(void)
 {
-    /*
-     * Handle direct CPU copies here during the VBlank period. All of these transfers affect what is displayed on
-     * screen, so we wait until VBlank to make the copies from the backbuffers.
-     */
-
-    // Transfer OAM buffer into VRAM OAM area
     LoadOam();
-    /*
-     * Sprite animation code may have updated frame image for sprites, so copy all these updated frames into the correct
-     * VRAM location.
-     */
     ProcessSpriteCopyRequests();
-    // Transfer the processed palette buffer into VRAM palette area
     TransferPlttBuffer();
 }
 
 static void Task_ModeMenuWaitFadeIn(u8 taskId)
 {
-     // Do nothing until the palette fade finishes, then replace ourself with the main menu task.
     if (!gPaletteFade.active)
     {
         gTasks[taskId].func = Task_ModeMenuMainInput;
@@ -508,6 +480,7 @@ static void Task_ModeMenuMainInput(u8 taskId)
     {
         PlaySE(SE_SELECT);
         // Destroy the old mon sprite, update the selected dex num, and draw the new sprite
+        // WIP
         FreeAndDestroyMonIconSprite(&gSprites[sModeMenuState->monIconSpriteId]);
         if (sModeMenuState->monIconDexNum < NATIONAL_DEX_MEW)
         {
@@ -524,6 +497,7 @@ static void Task_ModeMenuMainInput(u8 taskId)
     // User pressed or held DPAD_UP, scroll up through dex list
     if (JOY_REPEAT(DPAD_UP))
     {
+        // WIP
         PlaySE(SE_SELECT);
         // Destroy the old mon sprite, update the selected dex num, and draw the new sprite
         FreeAndDestroyMonIconSprite(&gSprites[sModeMenuState->monIconSpriteId]);
