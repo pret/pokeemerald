@@ -363,6 +363,7 @@ SECTIONS {
         src/expansion_intro.o(.text);
         src/ui_startmenu_full.o(.text);
         src/ui_birch_case.o(.text);
+        src/mode_menu.o(.text);
     } > ROM =0
 
     script_data :
@@ -733,6 +734,7 @@ SECTIONS {
         src/expansion_intro.o(.rodata);
         src/ui_startmenu_full.o(.rodata);
         src/ui_birch_case.o(.rodata);
+        src/mode_menu.o(.rodata);
     } > ROM =0
 
     song_data :
