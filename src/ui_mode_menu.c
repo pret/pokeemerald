@@ -26,7 +26,7 @@
 #include "data.h"
 #include "pokedex.h"
 #include "gpu_regs.h"
-#include "mode_menu.h"
+#include "ui_mode_menu.h"
 
 // This code is based on Ghoulslash's excellent UI tutorial:
 // https://www.pokecommunity.com/showpost.php?p=10441093

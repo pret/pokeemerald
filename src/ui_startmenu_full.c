@@ -47,6 +47,7 @@
 #include "link.h"
 #include "frontier_pass.h"
 #include "start_menu.h"
+#include "mode_menu.h" // WIP
 
 /*
     Full Screen Start Menu
@@ -1525,7 +1526,7 @@ static void Task_StartMenuFullMain(u8 taskId)
             case START_MENU_OPTIONS:
                 PlaySE(SE_SELECT);
                 BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-                gTasks[taskId].func = Task_OpenOptionsMenuStartMenu;
+                gTasks[taskId].func = Task_OpenModeMenu; // WIP Task_OpenOptionsMenuStartMenu;
                 break;
         }
     }
