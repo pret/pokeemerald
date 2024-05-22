@@ -59,12 +59,6 @@ struct ModeMenuState
     MainCallback savedCallback;
     // We will use this later to track some loading state
     u8 loadState;
-    // Store the current dex mode, we'll have a mode that shows dex number/description as well as a few others
-    u8 mode; // WIP
-    // The sprite ID of the current mon icon, we need this so we can destroy the sprite when the user scrolls
-    u8 monIconSpriteId; // WIP
-    // The dex num of the currently displayed mon
-    u16 monIconDexNum; // WIP
 };
 
 // GF window system passes window IDs around, so define this to avoid using magic numbers everywhere
@@ -99,7 +93,6 @@ static EWRAM_DATA struct ModeMenuState *sModeMenuState = NULL;
 
 static const struct BgTemplate sModeMenuBgTemplates[] =
 {
-    //WIP not all needed?
     {
        .bg = 0,
        .charBaseIndex = 1,
@@ -766,7 +759,6 @@ static void Task_ModeMenuMainInput(u8 taskId)
     }
     else if (JOY_REPEAT(DPAD_UP))
     {
-        // WIP
         if (sOptions->visibleCursor == NUM_OPTIONS_FROM_BORDER) // don't advance visible cursor until scrolled to the bottom
         {
             if (--sOptions->menuCursor == 0)
@@ -888,28 +880,8 @@ static void Task_ModeMenuSave(u8 taskId)
     gTasks[taskId].func = Task_ModeMenuWaitFadeAndExitGracefully;
 }
 
-/*static void Task_ModeMenuWaitFadeAndBail(u8 taskId) // WIP needed?
-{
-    // Wait until the screen fades to black before we start doing cleanup
-    if (!gPaletteFade.active)
-    {
-        SetMainCallback2(sModeMenuState->savedCallback);
-        ModeMenu_FreeResources();
-        DestroyTask(taskId);
-    }
-}*/
-
 static void Task_ModeMenuWaitFadeAndExitGracefully(u8 taskId)
 {
-    /*
-     * This function is basically the same as Task_ModeMenuWaitFadeAndBail. However, for this sample we broke it out
-     * because typically you might want to do something different if the user gracefully exits a menu vs if you got
-     * booted from a menu due to heap allocation failure.
-     */
-
-    // E.g. you could do some other processing here
-
-    // Wait until the screen fades to black before we start doing final cleanup
     if (!gPaletteFade.active)
     {
         SetMainCallback2(sModeMenuState->savedCallback);
