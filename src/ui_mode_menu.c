@@ -214,13 +214,13 @@ static void ModeMenu_VBlankCB(void);
 // Sample UI tasks
 static void Task_ModeMenuWaitFadeIn(u8 taskId);
 static void Task_ModeMenuMainInput(u8 taskId);
-static void Task_ModeMenuWaitFadeAndBail(u8 taskId);
+//static void Task_ModeMenuWaitFadeAndBail(u8 taskId);
 static void Task_ModeMenuWaitFadeAndExitGracefully(u8 taskId);
 
 // Sample UI helper functions
 void ModeMenu_Init(MainCallback callback);
-static bool8 ModeMenu_InitBgs(void);
-static void ModeMenu_FadeAndBail(void);
+//static bool8 ModeMenu_InitBgs(void);
+//static void ModeMenu_FadeAndBail(void);
 static bool8 ModeMenu_LoadGraphics(void);
 static void ModeMenu_InitWindows(void);
 static void ModeMenu_PrintUiButtonHints(void);
@@ -435,7 +435,7 @@ static void ModeMenu_SetupCB(void)
         sOptions->gfxLoadState = 0;
         break;
     case 3:
-        if (OptionsMenu_LoadGraphics() == TRUE)
+        if (ModeMenu_LoadGraphics() == TRUE)
         {
             gMain.state++;
             LoadBgTiles(1, GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->tiles, 0x120, 0x1A2);
@@ -622,7 +622,7 @@ static void HighlightModeMenuItem(void)
     SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(cursor * Y_DIFF + 24, cursor * Y_DIFF + 40));
 }
 
-static bool8 OptionsMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spritesheets, and palettes
+static bool8 ModeMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spritesheets, and palettes
 {
     switch (sOptions->gfxLoadState)
     {
@@ -662,84 +662,123 @@ static bool8 OptionsMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, 
     return FALSE;
 }
 
-// original code ##############################
-
 static void Task_ModeMenuWaitFadeIn(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         gTasks[taskId].func = Task_ModeMenuMainInput;
+        // WTF Archie???
+        SetGpuReg(REG_OFFSET_WIN0H, 0); // Idk man Im just trying to stop this stupid graphical bug from happening dont judge me
+        SetGpuReg(REG_OFFSET_WIN0V, 0);
+        SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ);
+        SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_DARKEN | BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG2);
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+        SetGpuReg(REG_OFFSET_BLDY, 4);
+        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
+        ShowBg(0);
+        ShowBg(1);
+        ShowBg(2);
+        ShowBg(3);
+        HighlightOptionMenuItem();
+        return;
     }
 }
 
 static void Task_ModeMenuMainInput(u8 taskId)
 {
-    // Exit the menu when the player presses B
-    if (JOY_NEW(B_BUTTON))
+    // WIP
+    int i = 0;
+    u8 optionsToDraw = min(OPTIONS_ON_SCREEN , MenuItemCount());
+
+    if (JOY_NEW(A_BUTTON))
     {
-        PlaySE(SE_PC_OFF);
+        if (sOptions->menuCursor[sOptions->submenu] == MenuItemCancel())
+            gTasks[taskId].func = Task_OptionMenuSave;
+    }
+    // Exit the menu when the player presses B
+    else if (JOY_NEW(B_BUTTON))
+    {
+        gTasks[taskId].func = Task_OptionMenuSave;
+        /*
+        //PlaySE(SE_PC_OFF);
         // Fade screen to black
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         // Replace ourself with the "exit gracefully" task function
-        gTasks[taskId].func = Task_ModeMenuWaitFadeAndExitGracefully;
+        gTasks[taskId].func = Task_ModeMenuWaitFadeAndExitGracefully;*/
     }
     // User pressed or held DPAD_DOWN, scroll down through dex list
-    if (JOY_REPEAT(DPAD_DOWN))
+    else if (JOY_REPEAT(DPAD_DOWN))
     {
-        PlaySE(SE_SELECT);
-        // Destroy the old mon sprite, update the selected dex num, and draw the new sprite
-        // WIP
-        FreeAndDestroyMonIconSprite(&gSprites[sModeMenuState->monIconSpriteId]);
-        if (sModeMenuState->monIconDexNum < NATIONAL_DEX_MEW)
+        if (sOptions->visibleCursor[sOptions->submenu] == optionsToDraw-2) // don't advance visible cursor until scrolled to the bottom
         {
-            sModeMenuState->monIconDexNum++;
+            if (++sOptions->menuCursor[sOptions->submenu] == MenuItemCount() - 1)
+                sOptions->visibleCursor[sOptions->submenu]++;
+            else
+                ScrollMenu(0);
         }
         else
         {
-            // Wrap dex number around to Bulbasaur when user presses down on Mew
-            sModeMenuState->monIconDexNum = NATIONAL_DEX_BULBASAUR;
+            if (++sOptions->menuCursor[sOptions->submenu] >= MenuItemCount()-1) // Scroll all the way to the top.
+            {
+                sOptions->visibleCursor[sOptions->submenu] = optionsToDraw-2;
+                sOptions->menuCursor[sOptions->submenu] = MenuItemCount() - optionsToDraw-1;
+                ScrollAll(1);
+                sOptions->visibleCursor[sOptions->submenu] = sOptions->menuCursor[sOptions->submenu] = 0;
+            }
+            else
+            {
+                sOptions->visibleCursor[sOptions->submenu]++;
+            }
         }
-        ModeMenu_DrawMonIcon(sModeMenuState->monIconDexNum);
-        ModeMenu_PrintUiMonInfo();
+        HighlightOptionMenuItem();
+        DrawDescriptionText();
     }
     // User pressed or held DPAD_UP, scroll up through dex list
-    if (JOY_REPEAT(DPAD_UP))
+    else if (JOY_REPEAT(DPAD_UP))
     {
         // WIP
-        PlaySE(SE_SELECT);
-        // Destroy the old mon sprite, update the selected dex num, and draw the new sprite
-        FreeAndDestroyMonIconSprite(&gSprites[sModeMenuState->monIconSpriteId]);
-        if (sModeMenuState->monIconDexNum > NATIONAL_DEX_BULBASAUR)
+        if (sOptions->visibleCursor[sOptions->submenu] == NUM_OPTIONS_FROM_BORDER) // don't advance visible cursor until scrolled to the bottom
         {
-            sModeMenuState->monIconDexNum--;
+            if (--sOptions->menuCursor[sOptions->submenu] == 0)
+                sOptions->visibleCursor[sOptions->submenu]--;
+            else
+                ScrollMenu(1);
         }
         else
         {
-            // Wrap dex number around to Mew when user presses Up on Bulbasaur
-            sModeMenuState->monIconDexNum = NATIONAL_DEX_MEW;
+            if (--sOptions->menuCursor[sOptions->submenu] < 0) // Scroll all the way to the bottom.
+            {
+                sOptions->visibleCursor[sOptions->submenu] = sOptions->menuCursor[sOptions->submenu] = optionsToDraw-2;
+                ScrollAll(0);
+                sOptions->visibleCursor[sOptions->submenu] = optionsToDraw-1;
+                sOptions->menuCursor[sOptions->submenu] = MenuItemCount() - 1;
+            }
+            else
+            {
+                sOptions->visibleCursor[sOptions->submenu]--;
+            }
         }
-        ModeMenu_DrawMonIcon(sModeMenuState->monIconDexNum);
-        ModeMenu_PrintUiMonInfo();
-    }
-    // User pressed A, cycle to next dex mode
-    if (JOY_NEW(A_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        if (sModeMenuState->mode == MODE_OTHER)
-        {
-            // Wrap back around to Info after the last mode
-            sModeMenuState->mode = MODE_INFO;
-        }
-        else
-        {
-            sModeMenuState->mode++;
-        }
-        ModeMenu_PrintUiButtonHints();
-        ModeMenu_PrintUiMonInfo();
+        HighlightOptionMenuItem();
+        DrawDescriptionText();
     }
 }
 
-static void Task_ModeMenuWaitFadeAndBail(u8 taskId)
+static void Task_OptionMenuSave(u8 taskId)
+{
+    gSaveBlock2Ptr->modeDefault     = sOptions->sel[MENUITEM_MAIN_DEFAULTS];
+    gSaveBlock2Ptr->modeBattleMode  = sOptions->sel[MENUITEM_MAIN_BATTLEMODE];
+    gSaveBlock2Ptr->modeRandomizer  = sOptions->sel[MENUITEM_MAIN_RANDOMIZER];
+    gSaveBlock2Ptr->modeXPShare     = sOptions->sel[MENUITEM_MAIN_XPSHARE];
+    gSaveBlock2Ptr->modeStatChanger = sOptions->sel[MENUITEM_MAIN_STAT_CHANGER];
+    gSaveBlock2Ptr->modeLegendaries = sOptions->sel[MENUITEM_MAIN_LEGENDARIES];
+    gSaveBlock2Ptr->modeDuplicates  = sOptions->sel[MENUITEM_MAIN_DUPLICATES];
+
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+    gTasks[taskId].func = Task_ModeMenuWaitFadeAndExitGracefully;
+}
+
+/*static void Task_ModeMenuWaitFadeAndBail(u8 taskId) // WIP needed?
 {
     // Wait until the screen fades to black before we start doing cleanup
     if (!gPaletteFade.active)
@@ -748,7 +787,7 @@ static void Task_ModeMenuWaitFadeAndBail(u8 taskId)
         ModeMenu_FreeResources();
         DestroyTask(taskId);
     }
-}
+}*/
 
 static void Task_ModeMenuWaitFadeAndExitGracefully(u8 taskId)
 {
@@ -769,15 +808,291 @@ static void Task_ModeMenuWaitFadeAndExitGracefully(u8 taskId)
     }
 }
 
-static bool8 ModeMenu_InitBgs(void)
+//menu navigation code
+static void ScrollMenu(int direction)
 {
-    /*
-     * 1 screenblock is 2 KiB, so that should be a good size for our tilemap buffer. We don't need more than one
-     * screenblock since BG1's size setting is 0, which tells the GBA we are using a 32x32 tile background:
-     *      (32 tile * 32 tile * 2 bytes/tile = 2048)
-     * For more info on tilemap entries and how they work:
-     * https://www.coranac.com/tonc/text/regbg.htm#sec-map
-     */
+    int menuItem, pos;
+    u8 optionsToDraw = min(OPTIONS_ON_SCREEN, MenuItemCount());
+
+    if (direction == 0) // scroll down
+        menuItem = sOptions->menuCursor[sOptions->submenu] + NUM_OPTIONS_FROM_BORDER, pos = optionsToDraw - 1;
+    else
+        menuItem = sOptions->menuCursor[sOptions->submenu] - NUM_OPTIONS_FROM_BORDER, pos = 0;
+
+    // Hide one
+    ScrollWindow(WIN_OPTIONS, direction, Y_DIFF, PIXEL_FILL(0));
+    // Show one
+    FillWindowPixelRect(WIN_OPTIONS, PIXEL_FILL(0), 0, Y_DIFF * pos, 26 * 8, Y_DIFF);
+    // Print
+    DrawChoices(menuItem, pos * Y_DIFF);
+    DrawLeftSideOptionText(menuItem, (pos * Y_DIFF) + 1);
+    CopyWindowToVram(WIN_OPTIONS, COPYWIN_GFX);
+}
+
+static void ScrollAll(int direction) // to bottom or top
+{
+    int i, y, menuItem, pos;
+    int scrollCount;
+    u8 optionsToDraw = min(OPTIONS_ON_SCREEN, MenuItemCount());
+
+    scrollCount = MenuItemCount() - optionsToDraw;
+
+    // Move items up/down
+    ScrollWindow(WIN_OPTIONS, direction, Y_DIFF * scrollCount, PIXEL_FILL(1));
+
+    // Clear moved items
+    if (direction == 0)
+    {
+        y = optionsToDraw - scrollCount;
+        if (y < 0)
+            y = optionsToDraw;
+        y *= Y_DIFF;
+    }
+    else
+    {
+        y = 0;
+    }
+
+    FillWindowPixelRect(WIN_OPTIONS, PIXEL_FILL(0), 0, y, 26 * 8, Y_DIFF * scrollCount);
+    // Print new texts
+    for (i = 0; i < scrollCount; i++)
+    {
+        if (direction == 0) // From top to bottom
+            menuItem = MenuItemCount() - 1 - i, pos = optionsToDraw - 1 - i;
+        else // From bottom to top
+            menuItem = i, pos = i;
+        DrawChoices(menuItem, pos * Y_DIFF);
+        DrawLeftSideOptionText(menuItem, (pos * Y_DIFF) + 1);
+    }
+    CopyWindowToVram(WIN_OPTIONS, COPYWIN_GFX);
+}
+
+// Process Input functions ****GENERIC****
+static int GetMiddleX(const u8 *txt1, const u8 *txt2, const u8 *txt3)
+{
+    int xMid;
+    int widthLeft = GetStringWidth(1, txt1, 0);
+    int widthMid = GetStringWidth(1, txt2, 0);
+    int widthRight = GetStringWidth(1, txt3, 0);
+
+    widthMid -= (198 - 104);
+    xMid = (widthLeft - widthMid - widthRight) / 2 + 104;
+    return xMid;
+}
+
+static int XOptions_ProcessInput(int x, int selection)
+{
+    if (JOY_NEW(DPAD_RIGHT))
+    {
+        if (++selection > (x - 1))
+            selection = 0;
+    }
+    if (JOY_NEW(DPAD_LEFT))
+    {
+        if (--selection < 0)
+            selection = (x - 1);
+    }
+    return selection;
+}
+
+static int ProcessInput_Options_Two(int selection)
+{
+    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
+        selection ^= 1;
+
+    return selection;
+}
+
+static int ProcessInput_Options_Three(int selection)
+{
+    return XOptions_ProcessInput(3, selection);
+}
+
+// #################### continue?
+
+// Draw Choices functions ****GENERIC****
+static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style, bool8 active)
+{
+    bool8 choosen = FALSE;
+    if (style != 0)
+        choosen = TRUE;
+
+    DrawRightSideChoiceText(text, x, y+1, choosen, active);
+}
+
+static void DrawChoices_Options_Three(const u8 *const *const strings, int selection, int y, bool8 active)
+{
+    // WIP this is the code for four
+    static const u8 choiceOrders[][3] =
+    {
+        {0, 1, 2},
+        {0, 1, 2},
+        {1, 2, 3},
+        {1, 2, 3},
+    };
+    u8 styles[4] = {0};
+    int xMid;
+    const u8 *order = choiceOrders[selection];
+
+    styles[selection] = 1;
+    xMid = GetMiddleX(strings[order[0]], strings[order[1]], strings[order[2]]);
+
+    DrawOptionMenuChoice(strings[order[0]], 104, y, styles[order[0]], active);
+    DrawOptionMenuChoice(strings[order[1]], xMid, y, styles[order[1]], active);
+    DrawOptionMenuChoice(strings[order[2]], GetStringRightAlignXOffset(1, strings[order[2]], 198), y, styles[order[2]], active);
+}
+
+static void ReDrawAll(void)
+{
+    u8 menuItem = sOptions->menuCursor[sOptions->submenu] - sOptions->visibleCursor[sOptions->submenu];
+    u8 i;
+    u8 optionsToDraw = min(OPTIONS_ON_SCREEN, MenuItemCount());
+
+    if (MenuItemCount() <= OPTIONS_ON_SCREEN) // Draw or delete the scrolling arrows based on options in the menu
+    {
+        if (sOptions->arrowTaskId != TASK_NONE)
+        {
+            RemoveScrollIndicatorArrowPair(sOptions->arrowTaskId);
+            sOptions->arrowTaskId = TASK_NONE;
+        }
+    }
+    else
+    {
+        if (sOptions->arrowTaskId == TASK_NONE)
+            sOptions->arrowTaskId = sOptions->arrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 240 / 2, 20, 110, MenuItemCount() - 1, 110, 110, 0);
+
+    }
+
+    FillWindowPixelBuffer(WIN_OPTIONS, PIXEL_FILL(0));
+    for (i = 0; i < optionsToDraw; i++)
+    {
+        DrawChoices(menuItem+i, i * Y_DIFF);
+        DrawLeftSideOptionText(menuItem+i, (i * Y_DIFF) + 1);
+    }
+    CopyWindowToVram(WIN_OPTIONS, COPYWIN_GFX);
+}
+
+// Process Input functions ****SPECIFIC****
+static const u8 sText_ModeNormal[]          = _("NORMAL");
+static const u8 sText_ModeHard[]            = _("HARD");
+static const u8 sText_ModeCustom[]          = _("CUSTOM");
+static const u8 *const sTextModeStrings[]   = {sText_ModeNormal, sText_ModeHard, sText_ModeCustom};
+static const u8 sText_BattleMode_Singles[]  = _("SINGLES");
+static const u8 sText_BattleMode_Doubles[]  = _("DOUBLES");
+static const u8 sText_Randomizer_Mons[]     = _("MONS");
+static const u8 sText_Randomizer_All[]      = _("ALL");
+static const u8 sText_XPShare_75[]          = _("75%");
+static const u8 sText_XPShare_50[]          = _("50%");
+static const u8 sText_StatChanger_On[]      = _("ACTIVE");
+static const u8 sText_StatChanger_Off[]     = _("INACTIVE");
+static const u8 sText_Choice_Yes[]          = _("YES");
+static const u8 sText_Choice_No[]           = _("NO");
+
+static void DrawChoices_Defaults(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_MAIN_DEFAULTS);
+    DrawChoices_Options_Three(sTextModeStrings, selection, y, active);
+}
+
+static void DrawChoices_BattleMode(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_MAIN_BATTLEMODE);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(sText_BattleMode_Singles, 104, y, styles[0], active);
+    DrawOptionMenuChoice(sText_BattleMode_Doubles, GetStringRightAlignXOffset(FONT_NORMAL, sText_BattleMode_Doubles, 198), y, styles[1], active);
+}
+
+static void DrawChoices_Randomizer(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_MAIN_RANDOMIZER);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(sText_Randomizer_Mons, 104, y, styles[0], active);
+    DrawOptionMenuChoice(sText_Randomizer_All, GetStringRightAlignXOffset(FONT_NORMAL, sText_Randomizer_All, 198), y, styles[1], active);
+}
+
+static void DrawChoices_XPShare(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_MAIN_XPSHARE);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(sText_XPShare_75, 104, y, styles[0], active);
+    DrawOptionMenuChoice(sText_XPShare_50, GetStringRightAlignXOffset(FONT_NORMAL, sText_XPShare_50, 198), y, styles[1], active);
+}
+
+static void DrawChoices_StatChanger(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_MAIN_STAT_CHANGER);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(sText_StatChanger_On, 104, y, styles[0], active);
+    DrawOptionMenuChoice(sText_StatChanger_Off, GetStringRightAlignXOffset(FONT_NORMAL, sText_StatChanger_Off, 198), y, styles[1], active);
+}
+
+static void DrawChoices_Legendaries(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_MAIN_LEGENDARIES);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(sText_Choice_Yes, 104, y, styles[0], active);
+    DrawOptionMenuChoice(sText_Choice_No, GetStringRightAlignXOffset(FONT_NORMAL, sText_Choice_No, 198), y, styles[1], active);
+}
+
+static void DrawChoices_Duplicates(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_MAIN_DUPLICATES);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(sText_Choice_Yes, 104, y, styles[0], active);
+    DrawOptionMenuChoice(sText_Choice_No, GetStringRightAlignXOffset(FONT_NORMAL, sText_Choice_No, 198), y, styles[1], active);
+}
+
+// Background tilemap
+#define TILE_TOP_CORNER_L 0x1A2 // 418
+#define TILE_TOP_EDGE     0x1A3 // 419
+#define TILE_TOP_CORNER_R 0x1A4 // 420
+#define TILE_LEFT_EDGE    0x1A5 // 421
+#define TILE_RIGHT_EDGE   0x1A7 // 423
+#define TILE_BOT_CORNER_L 0x1A8 // 424
+#define TILE_BOT_EDGE     0x1A9 // 425
+#define TILE_BOT_CORNER_R 0x1AA // 426
+
+static void DrawBgWindowFrames(void)
+{
+    //                     bg, tile,              x, y, width, height, palNum
+    // Option Texts window
+    //FillBgTilemapBufferRect(1, TILE_TOP_CORNER_L,  1,  2,  1,  1,  7);
+    //FillBgTilemapBufferRect(1, TILE_TOP_EDGE,      2,  2, 26,  1,  7);
+    //FillBgTilemapBufferRect(1, TILE_TOP_CORNER_R, 28,  2,  1,  1,  7);
+    //FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1,  3,  1, 16,  7);
+    //FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28,  3,  1, 16,  7);
+    //FillBgTilemapBufferRect(1, TILE_BOT_CORNER_L,  1, 13,  1,  1,  7);
+    //FillBgTilemapBufferRect(1, TILE_BOT_EDGE,      2, 13, 26,  1,  7);
+    //FillBgTilemapBufferRect(1, TILE_BOT_CORNER_R, 28, 13,  1,  1,  7);
+
+    // Description window
+    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_L,  1, 14,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_TOP_EDGE,      2, 14, 27,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_R, 28, 14,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1, 15,  1,  4,  7);
+    FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28, 15,  1,  4,  7);
+    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_L,  1, 19,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_BOT_EDGE,      2, 19, 27,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_R, 28, 19,  1,  1,  7);
+
+    CopyBgTilemapBufferToVram(1);
+}
+
+/*static bool8 ModeMenu_InitBgs(void)
+{
+   
     const u32 TILEMAP_BUFFER_SIZE = (1024 * 2);
 
     // BG registers may have scroll values left over from the previous screen. Reset all scroll values to 0.
@@ -791,28 +1106,16 @@ static bool8 ModeMenu_InitBgs(void)
         return FALSE;
     }
 
-    /*
-     * Clear all BG-related data buffers and mark DMAs as ready. Also resets the BG and mode bits of reg DISPCNT to 0.
-     * This will effectively turn off all BGs and activate Mode 0.
-     * LTODO explain the underlying sDmaBusyBitfield here
-     */
+    
     ResetBgsAndClearDma3BusyFlags(0);
 
-    /*
-     * Use the BG templates defined at the top of the file to init various cached BG attributes. These attributes will
-     * be used by the various load methods to correctly setup VRAM per the user template. Some of the attributes can
-     * also be pushed into relevant video regs using the provided functions in `bg.h'
-     */
+   
     InitBgsFromTemplates(0, sModeMenuBgTemplates, NELEMS(sModeMenuBgTemplates));
 
     // Set the BG manager to use our newly allocated tilemap buffer for BG1's tilemap
     SetBgTilemapBuffer(1, sBg1TilemapBuffer);
 
-    /*
-     * Schedule to copy the tilemap buffer contents (remember we zeroed it out earlier) into VRAM on the next VBlank.
-     * Right now, BG1 will just use Tile 0 for every tile. We will change this once we load in our true tilemap
-     * values from sModeMenuTilemap.
-     */
+   
     ScheduleBgCopyTilemapToVram(1);
 
     // Set reg DISPCNT to show BG0, BG1. Try commenting these out to see what happens.
@@ -820,219 +1123,52 @@ static bool8 ModeMenu_InitBgs(void)
     ShowBg(1);
 
     return TRUE;
-}
+}*/
 
-static void ModeMenu_FadeAndBail(void)
+/*static void ModeMenu_FadeAndBail(void)
 {
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     CreateTask(Task_ModeMenuWaitFadeAndBail, 0);
-
-    /*
-     * Set callbacks to ours while we wait for the fade to finish, then our above task will cleanup and swap the
-     * callbacks back to the one we saved earlier (which should re-load the overworld)
-     */
     SetVBlankCallback(ModeMenu_VBlankCB);
     SetMainCallback2(ModeMenu_MainCB);
-}
+}*/
 
-static bool8 ModeMenu_LoadGraphics(void)
+/*static void ModeMenu_InitWindows(void)
 {
-    switch (sModeMenuState->loadState)
-    {
-    case 0:
-        /*
-         * Reset leftover temp buffers from any previous code that used them to load graphics. The loading code in
-         * `menu.c' basically saves pointers to the decompression buffers after it copies to VRAM. Here, we just reset
-         * all the pointers to NULL and set the tracking index to 0. This obviously assumes the previous screen freed
-         * the buffers for us.
-         */
-        ResetTempTileDataBuffers();
-
-        /*
-         * Decompress our tileset and copy it into VRAM using the parameters we set in the BgTemplates at the top -- we
-         * pass 1 for the bgId so it uses the charblock setting from the BG1 template.
-         * The size, offset, mode parameters are set to 0:
-         *
-         *      Size is 0 because that tells the function to set the size dynamically based on the decompressed data.
-         *
-         *      Offset is 0 because we want to tiles loaded right at whatever charblock we set in the BgTemplate.
-         *
-         *      Mode is 0 because we are copying tiles and not a tilemap, and 0 tells the bg library to use the tile
-         *      loading code as opposed to the tilemap loading code (unfortunately GameFreak didn't provide a mode
-         *      enum -- it was probably a preprocessor define in the original game code. So you have to look at the
-         *      library functions to figure out what the mode values mean).
-         *
-         * `menu.c' also has a alternative function `DecompressAndLoadBgGfxUsingHeap', which does the same thing but
-         * automatically frees the decompression buffer for you. If you want, you can use that here instead and remove
-         * the `ResetTempTileDataBuffers' call above, since it doesn't use the temp tile data buffers.
-         */
-        DecompressAndCopyTileDataToVram(1, sModeMenuTiles, 0, 0, 0);
-        sModeMenuState->loadState++;
-        break;
-    case 1:
-        /*
-         * Each frame, keep trying to free the temp data buffer we used last frame to copy the tile data into VRAM. We
-         * have to do a poll here because this free may not occur depending on the state of the DMA manager. If instead
-         * you chose to load graphics using the alternative `DecompressAndLoadBgGfxUsingHeap', you can remove this call
-         * and wrapping if statement since the polling/freeing is handled for you under the hood.
-         * LTODO explain this better, like above sDmaBusyBitfield is being used here, this might be confusing
-         */
-        if (FreeTempTileDataBuffersIfPossible() != TRUE)
-        {
-            /*
-             * This basically just wraps the LZ77UnCompWram system call. It reads and decompresses whatever data is
-             * provided in the `src' (argument 1), and writes the decompressed data to a WRAM location given in `dest'
-             * (argument 2). In our case `dest' is just the tilemap buffer we heap-allocated earlier.
-             */
-            LZDecompressWram(sModeMenuTilemap, sBg1TilemapBuffer);
-            sModeMenuState->loadState++;
-        }
-        break;
-    case 2:
-        /*
-         * Copy our palette into the game's BG palette buffer, slot 0 -- this step does not directly get the palette
-         * into VRAM. That only happens during VBlank if the current callback specifies a buffer transfer.
-         */
-        LoadPalette(sModeMenuPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-        /*
-         * Copy the message box palette into BG palette buffer, slot 15. Our window is set to use palette 15 and our
-         * text color constants are defined assuming we are indexing into this palette.
-         */
-        LoadPalette(gMessageBox_Pal, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
-        sModeMenuState->loadState++;
-    default:
-        sModeMenuState->loadState = 0;
-        return TRUE;
-    }
-    return FALSE;
-}
-
-static void ModeMenu_InitWindows(void)
-{
-    /*
-     * Initialize windows from the window templates we specified above. This makes two important allocations:
-     *
-     * 1) It allocates a tilemap buffer for the window tilemap, the size of which is based on the screen size setting
-     *    specified in the BgTemplate (we didn't set one, so it defaults to 0, see BGXCNT register documentation for
-     *    more details on screen sizes). For this UI, the size setting is 0 which just means use a single screen. We
-     *    only allocate a single tilemap for the entire BG layer. So if you have multiple windows on the same BG, they
-     *    will all share the same tilemap buffer.
-     *
-     * 2) It allocates one `tileData' buffer (often also called the pixel buffer in the code) for each window. *Each
-     *    window has its own pixel buffer.* This is the buffer into which we actually draw text, and it gets copied upon
-     *    request to the tile area of VRAM based on the BG charblock and window baseblock.
-     *
-     * It's also worth noting that the window API allows you to allocate and set your own tilemap buffer for the window
-     * BG layer, just like we did earlier for BG1. However, it's better to just let the window API do the allocation and
-     * setup for you through `InitWindows()' -- just make sure to call `FreeAllWindowBuffers()' before closing up shop
-     * to return your memory.
-     */
     InitWindows(sModeMenuWindowTemplates);
 
     // Marks all text printers as inactive. Basically just setting flags. That's it.
     DeactivateAllTextPrinters();
-
-    /*
-     * Schedule a copy of BG0 tilemap buffer to VRAM. This buffer was allocated for us by `InitWindows()' since we
-     * specified a window on BG0 and had not yet set that layer's tilemap buffer. Note that the buffer was also zeroed
-     * for us by `InitWindows()'
-     */
     ScheduleBgCopyTilemapToVram(0);
-
-    /*
-     * Fill each entire window pixel buffer (i.e. window.tileData) with the given value. In this case, fill it with 0s
-     * to make the window completely transparent. We will draw text into the window pixel buffer later.
-     */
     FillWindowPixelBuffer(WIN_UI_HINTS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     FillWindowPixelBuffer(WIN_MON_INFO, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-
-    /*
-     * Write an increasing sequence of tile indexes into each window's tilemap buffer, based on the offset provided by
-     * the window.baseBlock. Why? Because the window text will be drawn onto the tiles themselves. So we just want each
-     * subsequent tilemap entry to point to the next tile in VRAM. That way, we can treat the tiles as a
-     * pseudo-framebuffer and render our text however we want. If you dive deeper into the implementation of
-     * `PutWindowTilemap', you will see that it takes some fancy calculation to determine which entries in the
-     * tilemap buffer we actually need to modify (because we are mapping from GameFreak windows, which are logically 2D,
-     * to VRAM locations, which in reality is basically a 1D array). I will leave exploration of the inner-workings of
-     * this function as an exercise to the reader.
-     */
     PutWindowTilemap(WIN_UI_HINTS);
     PutWindowTilemap(WIN_MON_INFO);
-
-    /*
-     * Copy (well, schedule to copy) each window into VRAM using DMA3 under the hood. The COPYWIN_FULL argument means we
-     * copy BOTH the tilemap buffer (which recall is just an incrementing sequence of references into our tile canvas)
-     * and the tiles themselves. Typically when updating text on a window, you only need to copy the tile canvas (i.e.
-     * using COPYWIN_GFX) since the tilemap should never change. But to init the window we need to get both into VRAM.
-     */
     CopyWindowToVram(WIN_UI_HINTS, COPYWIN_FULL);
     CopyWindowToVram(WIN_MON_INFO, COPYWIN_FULL);
-}
+}*/
 
-static const u8 sText_ModeMenuButtonHint1[] = _("{DPAD_UPDOWN}Change POKéMON");
-static const u8 sText_ModeMenuButtonHint2[] = _("{A_BUTTON}Mode: {STR_VAR_1}");
-static const u8 sText_ModeMenuButtonHint3[] = _("{B_BUTTON}Exit");
-static void ModeMenu_PrintUiButtonHints(void)
-{
-    /*
-     * Fill the window with transparent. You normally want to do this before drawing new text to remove the old text
-     * from the window (otherwise you'll see strange remnants of the previous text's pixels underneath your new text).
-     */
-    FillWindowPixelBuffer(WIN_UI_HINTS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-
-    // Copy the current mode name into a temp string variable
-    StringCopy(gStringVar1, sModeNames[sModeMenuState->mode]);
-
-    /*
-     * `StringExpandPlaceholders' takes the src string, expands all placeholders (i.e. those bits in braces that look
-     * like {FOO}), then copies the expanded string into dest. The {STR_VAR_1} placeholder will expand to the current
-     * contents of temp string gStringVar1, which is very useful for constructing dynamic strings. Note that above we
-     * saved the mode name into gStringVar1.
-     */
-    StringExpandPlaceholders(gStringVar2, sText_ModeMenuButtonHint2);
-
-    /*
-     * Use the text printing system to add text to this window. We set the speed value to TEXT_SKIP_DRAW to tell the
-     * printer to draw into the pixel buffer but skip the actual VRAM copy. Why? Because we want to wait until all the
-     * text is rendered before we actually copy to VRAM and make the text visible. This prevents flickering from
-     * occuring (for a technical reason explained below). Try changing the speed parameter TEXT_SKIP_DRAW to 0 (which
-     * tells the text printer to copy to VRAM on the next VBlank) and observe the slight flicker that occurs.
-     *
-     * The reason you see flickering when drawing lots of text without setting TEXT_SKIP_DRAW is because without this,
-     * each `AddTextPrinterX' call actually schedules a separate DMA transfer of the partially draw window pixel buffer.
-     * Since the each transfer is transfering the entire buffer, if you queue up a lot of these by calling
-     * `AddTextPrinterX' a lot of separate times, getting everything into VRAM is going to take multiple frames, and you
-     * will see the partially drawn text show up as each subsequent DMA transfer finishes.
-     */
-    AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_NORMAL, 0, 3, 0, 0, sModeMenuWindowFontColors[FONT_WHITE],
-        TEXT_SKIP_DRAW, sRegionNameKanto);
-    AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 47, 0, 0, 0, sModeMenuWindowFontColors[FONT_WHITE],
-        TEXT_SKIP_DRAW, sText_ModeMenuButtonHint1);
-    AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 47, 10, 0, 0, sModeMenuWindowFontColors[FONT_WHITE],
-        TEXT_SKIP_DRAW, gStringVar2);
-    AddTextPrinterParameterized4(WIN_UI_HINTS, FONT_SMALL, 47, 20, 0, 0, sModeMenuWindowFontColors[FONT_WHITE],
-        TEXT_SKIP_DRAW, sText_ModeMenuButtonHint3);
-
-    /*
-     * Explicitly copy to VRAM now that all text is drawn into the window pixel buffer. We use COPYWIN_GFX here since no
-     * changes were made to the BG tilemap, so no need to copy it again (recall that GF windows use tile rendering).
-     */
-    CopyWindowToVram(WIN_UI_HINTS, COPYWIN_GFX);
-}
+#define try_free(ptr) ({        \
+    void ** ptr__ = (void **)&(ptr);   \
+    if (*ptr__ != NULL)                \
+        Free(*ptr__);                  \
+})
 
 static void ModeMenu_FreeResources(void)
 {
-    // Free our data struct and our BG1 tilemap buffer
-    if (sModeMenuState != NULL)
-    {
-        Free(sModeMenuState);
-    }
-    if (sBg1TilemapBuffer != NULL)
-    {
-        Free(sBg1TilemapBuffer);
-    }
-    // Free all allocated tilemap and pixel buffers associated with the windows.
     FreeAllWindowBuffers();
-    // Reset all sprite data
     ResetSpriteData();
+    FREE_AND_SET_NULL(sOptions);
+    try_free(sBg2TilemapBuffer);
+    try_free(sBg3TilemapBuffer);
+    SetGpuReg(REG_OFFSET_WIN0H, 0);
+    SetGpuReg(REG_OFFSET_WIN0V, 0);
+    SetGpuReg(REG_OFFSET_WININ, 0);
+    SetGpuReg(REG_OFFSET_WINOUT, 0);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+    SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+    SetGpuReg(REG_OFFSET_BLDY, 4);
+    SetGpuReg(REG_OFFSET_DISPCNT, 0);
+    HideBg(2);
+    HideBg(3);
 }
