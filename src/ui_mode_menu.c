@@ -29,6 +29,7 @@
 #include "gpu_regs.h"
 #include "ui_mode_menu.h"
 #include "list_menu.h"
+#include "international_string_util.h"
 
 // This code is based on Ghoulslash's excellent UI tutorial:
 // https://www.pokecommunity.com/showpost.php?p=10441093
@@ -76,11 +77,10 @@ enum MenuItems
  * still good practice to clean up after oneself, so we will be sure to free everything before exiting.
  */
 static EWRAM_DATA struct ModeMenuState *sModeMenuState = NULL;
-static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 
 static const struct BgTemplate sModeMenuBgTemplates[] =
 {
-    //WIP not all needed!
+    //WIP not all needed?
     {
        .bg = 0,
        .charBaseIndex = 1,
@@ -190,7 +190,7 @@ static const u16 sScrollBgPalette[] = INCBIN_U16("graphics/ui_mode_menu/scroll_t
 
 struct ModeMenu
 {
-    //u8 submenu;
+    u8 submenu;
     u8 sel[MENUITEM_MAIN_COUNT];
     int menuCursor;
     int visibleCursor;
@@ -214,21 +214,29 @@ static void ModeMenu_VBlankCB(void);
 // Sample UI tasks
 static void Task_ModeMenuWaitFadeIn(u8 taskId);
 static void Task_ModeMenuMainInput(u8 taskId);
-//static void Task_ModeMenuWaitFadeAndBail(u8 taskId);
+static void Task_ModeMenuSave(u8 taskId);
 static void Task_ModeMenuWaitFadeAndExitGracefully(u8 taskId);
 
 // Sample UI helper functions
 void ModeMenu_Init(MainCallback callback);
-//static bool8 ModeMenu_InitBgs(void);
-//static void ModeMenu_FadeAndBail(void);
+static const u8 *const OptionTextRight(u8 menuItem);
+static bool8 CheckConditions(int selection);
+static void DrawTopBarText(void); //top Option text
+static void DrawLeftSideOptionText(int selection, int y);
+static void DrawRightSideChoiceText(const u8 *str, int x, int y, bool8 choosen, bool8 active);
+static void DrawDescriptionText(void);
+static void DrawModeMenuTexts(void); //left side text;
+static void DrawChoices(u32 id, int y); //right side draw function
+static void HighlightModeMenuItem(void);
 static bool8 ModeMenu_LoadGraphics(void);
-static void ModeMenu_InitWindows(void);
-static void ModeMenu_PrintUiButtonHints(void);
-static void ModeMenu_PrintUiMonInfo(void);
-static void ModeMenu_DrawMonIcon(u16 dexNum);
 static void ModeMenu_FreeResources(void);
+static void ScrollMenu(int direction);
+static void ScrollAll(int direction); // to bottom or top
+static int GetMiddleX(const u8 *txt1, const u8 *txt2, const u8 *txt3);
+static int XOptions_ProcessInput(int x, int selection);
 static int ProcessInput_Options_Two(int selection);
 static int ProcessInput_Options_Three(int selection);
+static void ReDrawAll(void);
 static void DrawChoices_Defaults(int selection, int y);
 static void DrawChoices_BattleMode(int selection, int y);
 static void DrawChoices_Randomizer(int selection, int y);
@@ -236,6 +244,7 @@ static void DrawChoices_XPShare(int selection, int y);
 static void DrawChoices_StatChanger(int selection, int y);
 static void DrawChoices_Legendaries(int selection, int y);
 static void DrawChoices_Duplicates(int selection, int y);
+static void DrawBgWindowFrames(void);
 
 // Menu draw and input functions
 struct MainMenu
@@ -255,7 +264,7 @@ struct MainMenu
 };
 
 // Menu left side option names text
-static const u8 sText_Defaults[]    = _("DEFAULT");
+static const u8 sText_Defaults[]    = _("DEFAULTS");
 static const u8 sText_BattleMode[]  = _("BATTLE MODE");
 static const u8 sText_Randomizer[]  = _("RANDOMIZER");
 static const u8 sText_XPShare[]     = _("XP SHARE");
@@ -295,20 +304,24 @@ static bool8 CheckConditions(int selection)
         case MENUITEM_MAIN_DUPLICATES:     return TRUE;
         case MENUITEM_MAIN_CANCEL:         return TRUE;
         case MENUITEM_MAIN_COUNT:          return TRUE;
+        default:                           return FALSE;
     }
 }
 
 // Descriptions
 static const u8 sText_Empty[]                   = _("");
 static const u8 sText_Desc_Save[]               = _("Save your settings.");
-static const u8 sText_Desc_Defaults[]           = _("Set all options based on defaults.");
+static const u8 sText_Desc_Defaults_Normal[]    = _("Sets all options for Normal Mode.");
+static const u8 sText_Desc_Defaults_Hard[]      = _("Sets all options for Hard Mode.");
+static const u8 sText_Desc_Defaults_Custom[]    = _("Is shown when manually changing\nmode settings.");
 static const u8 sText_Desc_BattleMode_Singles[] = _("Play only single battles.");
 static const u8 sText_Desc_BattleMode_Doubles[] = _("Play only double battles.");
-static const u8 sText_Desc_Randomizer_Mons[]    = _("Only randomize Pokémon species\n, trainers and item drops.");
+static const u8 sText_Desc_Randomizer_Mons[]    = _("Only randomize Pokémon species,\ntrainers and item drops.");
 static const u8 sText_Desc_Randomizer_All[]     = _("Also randomize abilities and\nmoves.");
-static const u8 sText_Desc_XPShare_75[]         = _("Exp. Share gives 75 pct XP\nto party mons.");
-static const u8 sText_Desc_XPShare_50[]         = _("Exp. Share gives 50 pct XP\nto party mons.");
-static const u8 sText_Desc_StatChanger[]        = _("Enables the Stat. Changer\nin the party menu.");
+static const u8 sText_Desc_XPShare_75[]         = _("Exp. Share gives 75% XP to\nparty mons.");
+static const u8 sText_Desc_XPShare_50[]         = _("Exp. Share gives 50% XP to\nparty mons.");
+static const u8 sText_Desc_StatChanger_On[]     = _("Enables the EV/IV Changer\nin the party menu.");
+static const u8 sText_Desc_StatChanger_Off[]    = _("Disables the EV/IV Changer\nin the party menu.");
 static const u8 sText_Desc_Legendaries_On[]     = _("Legendaries can be found in\nthe Birch Bag.");
 static const u8 sText_Desc_Legendaries_Off[]    = _("Legendaries can not be found\nin the Birch Bag.");
 static const u8 sText_Desc_Duplicates_On[]      = _("Truly random. Duplicates are\npossible in the Birch Bag.");
@@ -316,11 +329,11 @@ static const u8 sText_Desc_Duplicates_Off[]     = _("Birch bag can't hold duplic
 
 static const u8 *const sModeMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
 {
-    [MENUITEM_MAIN_DEFAULTS]     = {sText_Desc_Defaults,            sText_Desc_Defaults,            sText_Empty},
+    [MENUITEM_MAIN_DEFAULTS]     = {sText_Desc_Defaults_Normal,     sText_Desc_Defaults_Hard,       sText_Desc_Defaults_Custom},
     [MENUITEM_MAIN_BATTLEMODE]   = {sText_Desc_BattleMode_Singles,  sText_Desc_BattleMode_Doubles,  sText_Empty},
     [MENUITEM_MAIN_RANDOMIZER]   = {sText_Desc_Randomizer_Mons,     sText_Desc_Randomizer_All,      sText_Empty},
     [MENUITEM_MAIN_XPSHARE]      = {sText_Desc_XPShare_75,          sText_Desc_XPShare_50,          sText_Empty},
-    [MENUITEM_MAIN_STAT_CHANGER] = {sText_Desc_StatChanger,         sText_Desc_StatChanger,         sText_Empty},
+    [MENUITEM_MAIN_STAT_CHANGER] = {sText_Desc_StatChanger_On,      sText_Desc_StatChanger_Off,     sText_Empty},
     [MENUITEM_MAIN_LEGENDARIES]  = {sText_Desc_Legendaries_On,      sText_Desc_Legendaries_Off,     sText_Empty},
     [MENUITEM_MAIN_DUPLICATES]   = {sText_Desc_Duplicates_On,       sText_Desc_Duplicates_Off,      sText_Empty},
     [MENUITEM_MAIN_CANCEL]       = {sText_Desc_Save,                sText_Empty,                    sText_Empty},
@@ -380,7 +393,8 @@ void ModeMenu_Init(MainCallback callback)
 
 static void ModeMenu_SetupCB(void)
 {
-    u32 i, taskId;
+    u32 i;
+    u8 taskId;
 
     switch (gMain.state)
     {
@@ -532,7 +546,7 @@ static void DrawTopBarText(void)
     const u8 color[3] = { 0, TEXT_COLOR_WHITE, TEXT_COLOR_OPTIONS_GRAY_FG };
 
     FillWindowPixelBuffer(WIN_TOPBAR, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 105, 1, color, 0, sText_TopBar_Main);
+    AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 80, 1, color, 0, sText_TopBar_Main);
     PutWindowTilemap(WIN_TOPBAR);
     CopyWindowToVram(WIN_TOPBAR, COPYWIN_FULL);
 }
@@ -680,26 +694,24 @@ static void Task_ModeMenuWaitFadeIn(u8 taskId)
         ShowBg(1);
         ShowBg(2);
         ShowBg(3);
-        HighlightOptionMenuItem();
+        HighlightModeMenuItem();
         return;
     }
 }
 
 static void Task_ModeMenuMainInput(u8 taskId)
 {
-    // WIP
-    int i = 0;
     u8 optionsToDraw = min(OPTIONS_ON_SCREEN , MenuItemCount());
 
     if (JOY_NEW(A_BUTTON))
     {
-        if (sOptions->menuCursor[sOptions->submenu] == MenuItemCancel())
-            gTasks[taskId].func = Task_OptionMenuSave;
+        if (sOptions->menuCursor == MenuItemCancel())
+            gTasks[taskId].func = Task_ModeMenuSave;
     }
     // Exit the menu when the player presses B
     else if (JOY_NEW(B_BUTTON))
     {
-        gTasks[taskId].func = Task_OptionMenuSave;
+        gTasks[taskId].func = Task_ModeMenuSave;
         /*
         //PlaySE(SE_PC_OFF);
         // Fade screen to black
@@ -707,64 +719,79 @@ static void Task_ModeMenuMainInput(u8 taskId)
         // Replace ourself with the "exit gracefully" task function
         gTasks[taskId].func = Task_ModeMenuWaitFadeAndExitGracefully;*/
     }
-    // User pressed or held DPAD_DOWN, scroll down through dex list
     else if (JOY_REPEAT(DPAD_DOWN))
     {
-        if (sOptions->visibleCursor[sOptions->submenu] == optionsToDraw-2) // don't advance visible cursor until scrolled to the bottom
+        if (sOptions->visibleCursor == optionsToDraw-2) // don't advance visible cursor until scrolled to the bottom
         {
-            if (++sOptions->menuCursor[sOptions->submenu] == MenuItemCount() - 1)
-                sOptions->visibleCursor[sOptions->submenu]++;
+            if (++sOptions->menuCursor == MenuItemCount() - 1)
+                sOptions->visibleCursor++;
             else
                 ScrollMenu(0);
         }
         else
         {
-            if (++sOptions->menuCursor[sOptions->submenu] >= MenuItemCount()-1) // Scroll all the way to the top.
+            if (++sOptions->menuCursor >= MenuItemCount()-1) // Scroll all the way to the top.
             {
-                sOptions->visibleCursor[sOptions->submenu] = optionsToDraw-2;
-                sOptions->menuCursor[sOptions->submenu] = MenuItemCount() - optionsToDraw-1;
+                sOptions->visibleCursor = optionsToDraw-2;
+                sOptions->menuCursor = MenuItemCount() - optionsToDraw-1;
                 ScrollAll(1);
-                sOptions->visibleCursor[sOptions->submenu] = sOptions->menuCursor[sOptions->submenu] = 0;
+                sOptions->visibleCursor = sOptions->menuCursor = 0;
             }
             else
             {
-                sOptions->visibleCursor[sOptions->submenu]++;
+                sOptions->visibleCursor++;
             }
         }
-        HighlightOptionMenuItem();
+        HighlightModeMenuItem();
         DrawDescriptionText();
     }
-    // User pressed or held DPAD_UP, scroll up through dex list
     else if (JOY_REPEAT(DPAD_UP))
     {
         // WIP
-        if (sOptions->visibleCursor[sOptions->submenu] == NUM_OPTIONS_FROM_BORDER) // don't advance visible cursor until scrolled to the bottom
+        if (sOptions->visibleCursor == NUM_OPTIONS_FROM_BORDER) // don't advance visible cursor until scrolled to the bottom
         {
-            if (--sOptions->menuCursor[sOptions->submenu] == 0)
-                sOptions->visibleCursor[sOptions->submenu]--;
+            if (--sOptions->menuCursor == 0)
+                sOptions->visibleCursor--;
             else
                 ScrollMenu(1);
         }
         else
         {
-            if (--sOptions->menuCursor[sOptions->submenu] < 0) // Scroll all the way to the bottom.
+            if (--sOptions->menuCursor < 0) // Scroll all the way to the bottom.
             {
-                sOptions->visibleCursor[sOptions->submenu] = sOptions->menuCursor[sOptions->submenu] = optionsToDraw-2;
+                sOptions->visibleCursor = sOptions->menuCursor = optionsToDraw-2;
                 ScrollAll(0);
-                sOptions->visibleCursor[sOptions->submenu] = optionsToDraw-1;
-                sOptions->menuCursor[sOptions->submenu] = MenuItemCount() - 1;
+                sOptions->visibleCursor = optionsToDraw-1;
+                sOptions->menuCursor = MenuItemCount() - 1;
             }
             else
             {
-                sOptions->visibleCursor[sOptions->submenu]--;
+                sOptions->visibleCursor--;
             }
         }
-        HighlightOptionMenuItem();
+        HighlightModeMenuItem();
         DrawDescriptionText();
+    }
+    else if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
+    {
+        int cursor = sOptions->menuCursor;
+        u8 previousOption = sOptions->sel[cursor];
+        if (CheckConditions(cursor))
+        {
+            if (sItemFunctionsMain[cursor].processInput != NULL)
+            {
+                sOptions->sel[cursor] = sItemFunctionsMain[cursor].processInput(previousOption);
+                ReDrawAll();
+                DrawDescriptionText();
+            }
+
+            if (previousOption != sOptions->sel[cursor])
+                DrawChoices(cursor, sOptions->visibleCursor * Y_DIFF);
+        }
     }
 }
 
-static void Task_OptionMenuSave(u8 taskId)
+static void Task_ModeMenuSave(u8 taskId)
 {
     gSaveBlock2Ptr->modeDefault     = sOptions->sel[MENUITEM_MAIN_DEFAULTS];
     gSaveBlock2Ptr->modeBattleMode  = sOptions->sel[MENUITEM_MAIN_BATTLEMODE];
@@ -815,9 +842,9 @@ static void ScrollMenu(int direction)
     u8 optionsToDraw = min(OPTIONS_ON_SCREEN, MenuItemCount());
 
     if (direction == 0) // scroll down
-        menuItem = sOptions->menuCursor[sOptions->submenu] + NUM_OPTIONS_FROM_BORDER, pos = optionsToDraw - 1;
+        menuItem = sOptions->menuCursor + NUM_OPTIONS_FROM_BORDER, pos = optionsToDraw - 1;
     else
-        menuItem = sOptions->menuCursor[sOptions->submenu] - NUM_OPTIONS_FROM_BORDER, pos = 0;
+        menuItem = sOptions->menuCursor - NUM_OPTIONS_FROM_BORDER, pos = 0;
 
     // Hide one
     ScrollWindow(WIN_OPTIONS, direction, Y_DIFF, PIXEL_FILL(0));
@@ -911,7 +938,7 @@ static int ProcessInput_Options_Three(int selection)
 // #################### continue?
 
 // Draw Choices functions ****GENERIC****
-static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style, bool8 active)
+static void DrawModeMenuChoice(const u8 *text, u8 x, u8 y, u8 style, bool8 active)
 {
     bool8 choosen = FALSE;
     if (style != 0)
@@ -920,31 +947,9 @@ static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style, bool8 act
     DrawRightSideChoiceText(text, x, y+1, choosen, active);
 }
 
-static void DrawChoices_Options_Three(const u8 *const *const strings, int selection, int y, bool8 active)
-{
-    // WIP this is the code for four
-    static const u8 choiceOrders[][3] =
-    {
-        {0, 1, 2},
-        {0, 1, 2},
-        {1, 2, 3},
-        {1, 2, 3},
-    };
-    u8 styles[4] = {0};
-    int xMid;
-    const u8 *order = choiceOrders[selection];
-
-    styles[selection] = 1;
-    xMid = GetMiddleX(strings[order[0]], strings[order[1]], strings[order[2]]);
-
-    DrawOptionMenuChoice(strings[order[0]], 104, y, styles[order[0]], active);
-    DrawOptionMenuChoice(strings[order[1]], xMid, y, styles[order[1]], active);
-    DrawOptionMenuChoice(strings[order[2]], GetStringRightAlignXOffset(1, strings[order[2]], 198), y, styles[order[2]], active);
-}
-
 static void ReDrawAll(void)
 {
-    u8 menuItem = sOptions->menuCursor[sOptions->submenu] - sOptions->visibleCursor[sOptions->submenu];
+    u8 menuItem = sOptions->menuCursor - sOptions->visibleCursor;
     u8 i;
     u8 optionsToDraw = min(OPTIONS_ON_SCREEN, MenuItemCount());
 
@@ -973,9 +978,9 @@ static void ReDrawAll(void)
 }
 
 // Process Input functions ****SPECIFIC****
-static const u8 sText_ModeNormal[]          = _("NORMAL");
+static const u8 sText_ModeNormal[]          = _("NORM");
 static const u8 sText_ModeHard[]            = _("HARD");
-static const u8 sText_ModeCustom[]          = _("CUSTOM");
+static const u8 sText_ModeCustom[]          = _("CUST");
 static const u8 *const sTextModeStrings[]   = {sText_ModeNormal, sText_ModeHard, sText_ModeCustom};
 static const u8 sText_BattleMode_Singles[]  = _("SINGLES");
 static const u8 sText_BattleMode_Doubles[]  = _("DOUBLES");
@@ -991,7 +996,23 @@ static const u8 sText_Choice_No[]           = _("NO");
 static void DrawChoices_Defaults(int selection, int y)
 {
     bool8 active = CheckConditions(MENUITEM_MAIN_DEFAULTS);
-    DrawChoices_Options_Three(sTextModeStrings, selection, y, active);
+    u8 styles[2] = {0};
+    int xMid;
+    static const u8 choiceOrders[][3] =
+    {
+        {0, 1, 2},
+        {0, 1, 2},
+        {0, 1, 2},
+    };
+    const u8 *order = choiceOrders[selection];
+    const u8 *const *const strings = sTextModeStrings;
+
+    styles[selection] = 1;
+    xMid = GetMiddleX(strings[order[0]], strings[order[1]], strings[order[2]]);
+
+    DrawModeMenuChoice(strings[order[0]], 104, y, styles[order[0]], active);
+    DrawModeMenuChoice(strings[order[1]], xMid, y, styles[order[1]], active);
+    DrawModeMenuChoice(strings[order[2]], GetStringRightAlignXOffset(1, strings[order[2]], 198), y, styles[order[2]], active);
 }
 
 static void DrawChoices_BattleMode(int selection, int y)
@@ -1000,8 +1021,8 @@ static void DrawChoices_BattleMode(int selection, int y)
     u8 styles[2] = {0};
     styles[selection] = 1;
 
-    DrawOptionMenuChoice(sText_BattleMode_Singles, 104, y, styles[0], active);
-    DrawOptionMenuChoice(sText_BattleMode_Doubles, GetStringRightAlignXOffset(FONT_NORMAL, sText_BattleMode_Doubles, 198), y, styles[1], active);
+    DrawModeMenuChoice(sText_BattleMode_Singles, 104, y, styles[0], active);
+    DrawModeMenuChoice(sText_BattleMode_Doubles, GetStringRightAlignXOffset(FONT_NORMAL, sText_BattleMode_Doubles, 198), y, styles[1], active);
 }
 
 static void DrawChoices_Randomizer(int selection, int y)
@@ -1010,8 +1031,8 @@ static void DrawChoices_Randomizer(int selection, int y)
     u8 styles[2] = {0};
     styles[selection] = 1;
 
-    DrawOptionMenuChoice(sText_Randomizer_Mons, 104, y, styles[0], active);
-    DrawOptionMenuChoice(sText_Randomizer_All, GetStringRightAlignXOffset(FONT_NORMAL, sText_Randomizer_All, 198), y, styles[1], active);
+    DrawModeMenuChoice(sText_Randomizer_Mons, 104, y, styles[0], active);
+    DrawModeMenuChoice(sText_Randomizer_All, GetStringRightAlignXOffset(FONT_NORMAL, sText_Randomizer_All, 198), y, styles[1], active);
 }
 
 static void DrawChoices_XPShare(int selection, int y)
@@ -1020,8 +1041,8 @@ static void DrawChoices_XPShare(int selection, int y)
     u8 styles[2] = {0};
     styles[selection] = 1;
 
-    DrawOptionMenuChoice(sText_XPShare_75, 104, y, styles[0], active);
-    DrawOptionMenuChoice(sText_XPShare_50, GetStringRightAlignXOffset(FONT_NORMAL, sText_XPShare_50, 198), y, styles[1], active);
+    DrawModeMenuChoice(sText_XPShare_75, 104, y, styles[0], active);
+    DrawModeMenuChoice(sText_XPShare_50, GetStringRightAlignXOffset(FONT_NORMAL, sText_XPShare_50, 198), y, styles[1], active);
 }
 
 static void DrawChoices_StatChanger(int selection, int y)
@@ -1030,8 +1051,8 @@ static void DrawChoices_StatChanger(int selection, int y)
     u8 styles[2] = {0};
     styles[selection] = 1;
 
-    DrawOptionMenuChoice(sText_StatChanger_On, 104, y, styles[0], active);
-    DrawOptionMenuChoice(sText_StatChanger_Off, GetStringRightAlignXOffset(FONT_NORMAL, sText_StatChanger_Off, 198), y, styles[1], active);
+    DrawModeMenuChoice(sText_StatChanger_On, 104, y, styles[0], active);
+    DrawModeMenuChoice(sText_StatChanger_Off, GetStringRightAlignXOffset(FONT_NORMAL, sText_StatChanger_Off, 198), y, styles[1], active);
 }
 
 static void DrawChoices_Legendaries(int selection, int y)
@@ -1040,8 +1061,8 @@ static void DrawChoices_Legendaries(int selection, int y)
     u8 styles[2] = {0};
     styles[selection] = 1;
 
-    DrawOptionMenuChoice(sText_Choice_Yes, 104, y, styles[0], active);
-    DrawOptionMenuChoice(sText_Choice_No, GetStringRightAlignXOffset(FONT_NORMAL, sText_Choice_No, 198), y, styles[1], active);
+    DrawModeMenuChoice(sText_Choice_Yes, 104, y, styles[0], active);
+    DrawModeMenuChoice(sText_Choice_No, GetStringRightAlignXOffset(FONT_NORMAL, sText_Choice_No, 198), y, styles[1], active);
 }
 
 static void DrawChoices_Duplicates(int selection, int y)
@@ -1050,8 +1071,8 @@ static void DrawChoices_Duplicates(int selection, int y)
     u8 styles[2] = {0};
     styles[selection] = 1;
 
-    DrawOptionMenuChoice(sText_Choice_Yes, 104, y, styles[0], active);
-    DrawOptionMenuChoice(sText_Choice_No, GetStringRightAlignXOffset(FONT_NORMAL, sText_Choice_No, 198), y, styles[1], active);
+    DrawModeMenuChoice(sText_Choice_Yes, 104, y, styles[0], active);
+    DrawModeMenuChoice(sText_Choice_No, GetStringRightAlignXOffset(FONT_NORMAL, sText_Choice_No, 198), y, styles[1], active);
 }
 
 // Background tilemap
@@ -1066,17 +1087,6 @@ static void DrawChoices_Duplicates(int selection, int y)
 
 static void DrawBgWindowFrames(void)
 {
-    //                     bg, tile,              x, y, width, height, palNum
-    // Option Texts window
-    //FillBgTilemapBufferRect(1, TILE_TOP_CORNER_L,  1,  2,  1,  1,  7);
-    //FillBgTilemapBufferRect(1, TILE_TOP_EDGE,      2,  2, 26,  1,  7);
-    //FillBgTilemapBufferRect(1, TILE_TOP_CORNER_R, 28,  2,  1,  1,  7);
-    //FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1,  3,  1, 16,  7);
-    //FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28,  3,  1, 16,  7);
-    //FillBgTilemapBufferRect(1, TILE_BOT_CORNER_L,  1, 13,  1,  1,  7);
-    //FillBgTilemapBufferRect(1, TILE_BOT_EDGE,      2, 13, 26,  1,  7);
-    //FillBgTilemapBufferRect(1, TILE_BOT_CORNER_R, 28, 13,  1,  1,  7);
-
     // Description window
     FillBgTilemapBufferRect(1, TILE_TOP_CORNER_L,  1, 14,  1,  1,  7);
     FillBgTilemapBufferRect(1, TILE_TOP_EDGE,      2, 14, 27,  1,  7);
@@ -1089,64 +1099,6 @@ static void DrawBgWindowFrames(void)
 
     CopyBgTilemapBufferToVram(1);
 }
-
-/*static bool8 ModeMenu_InitBgs(void)
-{
-   
-    const u32 TILEMAP_BUFFER_SIZE = (1024 * 2);
-
-    // BG registers may have scroll values left over from the previous screen. Reset all scroll values to 0.
-    ResetAllBgsCoordinates();
-
-    // Allocate our tilemap buffer on the heap
-    sBg1TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
-    if (sBg1TilemapBuffer == NULL)
-    {
-        // Bail if the allocation fails
-        return FALSE;
-    }
-
-    
-    ResetBgsAndClearDma3BusyFlags(0);
-
-   
-    InitBgsFromTemplates(0, sModeMenuBgTemplates, NELEMS(sModeMenuBgTemplates));
-
-    // Set the BG manager to use our newly allocated tilemap buffer for BG1's tilemap
-    SetBgTilemapBuffer(1, sBg1TilemapBuffer);
-
-   
-    ScheduleBgCopyTilemapToVram(1);
-
-    // Set reg DISPCNT to show BG0, BG1. Try commenting these out to see what happens.
-    ShowBg(0);
-    ShowBg(1);
-
-    return TRUE;
-}*/
-
-/*static void ModeMenu_FadeAndBail(void)
-{
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-    CreateTask(Task_ModeMenuWaitFadeAndBail, 0);
-    SetVBlankCallback(ModeMenu_VBlankCB);
-    SetMainCallback2(ModeMenu_MainCB);
-}*/
-
-/*static void ModeMenu_InitWindows(void)
-{
-    InitWindows(sModeMenuWindowTemplates);
-
-    // Marks all text printers as inactive. Basically just setting flags. That's it.
-    DeactivateAllTextPrinters();
-    ScheduleBgCopyTilemapToVram(0);
-    FillWindowPixelBuffer(WIN_UI_HINTS, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    FillWindowPixelBuffer(WIN_MON_INFO, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    PutWindowTilemap(WIN_UI_HINTS);
-    PutWindowTilemap(WIN_MON_INFO);
-    CopyWindowToVram(WIN_UI_HINTS, COPYWIN_FULL);
-    CopyWindowToVram(WIN_MON_INFO, COPYWIN_FULL);
-}*/
 
 #define try_free(ptr) ({        \
     void ** ptr__ = (void **)&(ptr);   \
