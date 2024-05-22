@@ -1276,7 +1276,7 @@ const struct Item gItemsInfo[] =
     [ITEM_HEALTH_FEATHER] =
     {
         .name = _("HealthFeather"),
-        .price = 500, // VITAMINS
+        .price = 100, // VITAMINS
         .description = sHealthFeatherDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
@@ -1288,7 +1288,7 @@ const struct Item gItemsInfo[] =
     [ITEM_MUSCLE_FEATHER] =
     {
         .name = _("MuscleFeather"),
-        .price = 500, // VITAMINS
+        .price = 100, // VITAMINS
         .description = sMuscleFeatherDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
@@ -1300,7 +1300,7 @@ const struct Item gItemsInfo[] =
     [ITEM_RESIST_FEATHER] =
     {
         .name = _("ResistFeather"),
-        .price = 500, // VITAMINS
+        .price = 100, // VITAMINS
         .description = sResistFeatherDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
@@ -1312,7 +1312,7 @@ const struct Item gItemsInfo[] =
     [ITEM_GENIUS_FEATHER] =
     {
         .name = _("GeniusFeather"),
-        .price = 500, // VITAMINS
+        .price = 100, // VITAMINS
         .description = sGeniusFeatherDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
@@ -1324,7 +1324,7 @@ const struct Item gItemsInfo[] =
     [ITEM_CLEVER_FEATHER] =
     {
         .name = _("CleverFeather"),
-        .price = 500, // VITAMINS
+        .price = 100, // VITAMINS
         .description = sCleverFeatherDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
@@ -1336,7 +1336,7 @@ const struct Item gItemsInfo[] =
     [ITEM_SWIFT_FEATHER] =
     {
         .name = _("SwiftFeather"),
-        .price = 500, // VITAMINS
+        .price = 100, // VITAMINS
         .description = sSwiftFeatherDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
