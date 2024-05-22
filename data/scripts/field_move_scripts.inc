@@ -1,8 +1,3 @@
-.macro IsFollowerFieldMoveUser var:req
-callfunc ScrFunc_IsFollowerFieldMoveUser
-.2byte \var
-.endm
-
 @ Interact with cuttable tree
 EventScript_CutTree::
 	lockall

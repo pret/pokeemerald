@@ -118,8 +118,8 @@ EventScript_PkmnCenterNurse_GoldCardHealPkmn::
 	end
 
 Movement_PkmnCenterNurse_Turn:
-  walk_in_place_faster_left
-  step_end
+	walk_in_place_faster_left
+	step_end
 
 Movement_PkmnCenterNurse_Bow:
 	nurse_joy_bow

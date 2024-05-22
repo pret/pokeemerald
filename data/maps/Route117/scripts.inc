@@ -6,14 +6,6 @@ Route117_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route117_OnTransition
 	.byte 0
 
-.macro getdaycaregfx var0:req var1:req var2:req var3:req
-callfunc ScrFunc_getdaycaregfx
-.2byte \var0
-.2byte \var1
-.2byte \var2
-.2byte \var3
-.endm
-
 Route117_OnTransition:
 	call Route117_EventScript_TryMoveDayCareMan
 	@ set flags for OW daycare mons
