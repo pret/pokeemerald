@@ -794,34 +794,34 @@ static void Task_ModeMenuMainInput(u8 taskId)
                 sOptions->sel[cursor] = sItemFunctionsMain[cursor].processInput(previousOption);
 
                 //change selections based on defaults
-                if(sOptions->menuCursor != 0) // 0 = first line => DEFAULT choice
+                switch(sOptions->menuCursor)
                 {
-                    sOptions->sel[MENUITEM_MAIN_DEFAULTS]   = MODE_CUSTOM;
-                }
-                else
-                {
-                    //populate default options to the other mode lines
-                    switch(sOptions->sel[cursor])
-                    {
-                        case MODE_NORMAL:
-                            sOptions->sel[MENUITEM_MAIN_BATTLEMODE]   = MODE_SINGLES;
-                            sOptions->sel[MENUITEM_MAIN_RANDOMIZER]   = RANDOM_MONS;
-                            sOptions->sel[MENUITEM_MAIN_XPSHARE]      = XP_75;
-                            sOptions->sel[MENUITEM_MAIN_STAT_CHANGER] = ACTIVE;
-                            sOptions->sel[MENUITEM_MAIN_LEGENDARIES]  = YES;
-                            sOptions->sel[MENUITEM_MAIN_DUPLICATES]   = NO;
-                            break;
-                        case MODE_HARD:
-                            sOptions->sel[MENUITEM_MAIN_BATTLEMODE]   = MODE_SINGLES;
-                            sOptions->sel[MENUITEM_MAIN_RANDOMIZER]   = RANDOM_MONS;
-                            sOptions->sel[MENUITEM_MAIN_XPSHARE]      = XP_50;
-                            sOptions->sel[MENUITEM_MAIN_STAT_CHANGER] = INACTIVE;
-                            sOptions->sel[MENUITEM_MAIN_LEGENDARIES]  = NO;
-                            sOptions->sel[MENUITEM_MAIN_DUPLICATES]   = NO;
-                            break;
-                        default:
-                            break;
-                    }
+                    case 0: // 0 = first line => DEFAULT choice
+                        //populate default options to the other mode lines
+                        switch(sOptions->sel[cursor])
+                        {
+                            case MODE_NORMAL:
+                                sOptions->sel[MENUITEM_MAIN_XPSHARE]      = XP_75;
+                                sOptions->sel[MENUITEM_MAIN_STAT_CHANGER] = ACTIVE;
+                                sOptions->sel[MENUITEM_MAIN_LEGENDARIES]  = YES;
+                                sOptions->sel[MENUITEM_MAIN_DUPLICATES]   = NO;
+                                break;
+                            case MODE_HARD:
+                                sOptions->sel[MENUITEM_MAIN_XPSHARE]      = XP_50;
+                                sOptions->sel[MENUITEM_MAIN_STAT_CHANGER] = INACTIVE;
+                                sOptions->sel[MENUITEM_MAIN_LEGENDARIES]  = NO;
+                                sOptions->sel[MENUITEM_MAIN_DUPLICATES]   = NO;
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    case 1: //do nothing
+                    case 2: //do nothing
+                        break;
+                    default: //set game mode to CUSTOM
+                        sOptions->sel[MENUITEM_MAIN_DEFAULTS]   = MODE_CUSTOM;
+                        break;
                 }
 
                 ReDrawAll();
