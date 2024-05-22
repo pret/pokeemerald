@@ -1020,65 +1020,6 @@ static void ModeMenu_PrintUiButtonHints(void)
     CopyWindowToVram(WIN_UI_HINTS, COPYWIN_GFX);
 }
 
-static const u8 sText_ModeMenuMonInfoSpecies[] = _("{NO}{STR_VAR_1} {STR_VAR_2}");
-static const u8 sText_ModeMenuMonStats[] = _("Put stats info here");
-static const u8 sText_ModeMenuMonOther[] = _("Put other info here");
-static void ModeMenu_PrintUiMonInfo(void)
-{
-    u16 speciesId = NationalPokedexNumToSpecies(sModeMenuState->monIconDexNum);
-
-    // Clear the window before drawing new text
-    FillWindowPixelBuffer(WIN_MON_INFO, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    switch (sModeMenuState->mode)
-    {
-    case MODE_INFO:
-        /*
-         * Use the string manipulation library to put the National Dex num, species name, and dex description into
-         * strings, ready to be drawn.
-         */
-        ConvertIntToDecimalStringN(gStringVar1, sModeMenuState->monIconDexNum, STR_CONV_MODE_LEADING_ZEROS, 3);
-        StringCopy(gStringVar2, GetSpeciesName(speciesId));
-        StringExpandPlaceholders(gStringVar3, sText_ModeMenuMonInfoSpecies);
-        StringCopy(gStringVar4, GetSpeciesPokedexDescription(speciesId));
-
-        // The window drawing code here works just like in `ModeMenu_PrintUiButtonHints'
-        AddTextPrinterParameterized4(WIN_MON_INFO, FONT_SHORT, 5, 3, 0, 0, sModeMenuWindowFontColors[FONT_BLACK],
-            TEXT_SKIP_DRAW, gStringVar3);
-        AddTextPrinterParameterized4(WIN_MON_INFO, FONT_SMALL, 5, 25, 0, 0, sModeMenuWindowFontColors[FONT_BLACK],
-            TEXT_SKIP_DRAW, gStringVar4);
-        break;
-    case MODE_STATS:
-        AddTextPrinterParameterized4(WIN_MON_INFO, FONT_SHORT, 5, 3, 0, 0, sModeMenuWindowFontColors[FONT_BLACK],
-            TEXT_SKIP_DRAW, sText_ModeMenuMonStats);
-        break;
-    case MODE_OTHER:
-        AddTextPrinterParameterized4(WIN_MON_INFO, FONT_SHORT, 5, 3, 0, 0, sModeMenuWindowFontColors[FONT_BLACK],
-            TEXT_SKIP_DRAW, sText_ModeMenuMonOther);
-        break;
-    default:
-        break;
-    }
-
-    // Copy pixel buffer to VRAM now that we are done drawing text
-    CopyWindowToVram(WIN_MON_INFO, COPYWIN_GFX);
-}
-
-static void ModeMenu_DrawMonIcon(u16 dexNum)
-{
-    // Convert the dex number to a species ID.
-    u16 speciesId = NationalPokedexNumToSpecies(dexNum);
-
-    /*
-     * Create a new mon icon sprite and save off its sprite ID so we can easily free it when we need to update which
-     * icon is displayed. We set the sprite callback to a preset supplied by the GF's mon icon code. This callback
-     * updates the little bounce animation of the icon. `CreateMonIcon' handles all the details of sprite initialization
-     * for us. Feel free to dive into the implementation to see the gory details.
-     */
-    sModeMenuState->monIconSpriteId = CreateMonIcon(speciesId, SpriteCB_MonIcon, MON_ICON_X, MON_ICON_Y, 4, 0);
-    // Set prio to 0 so the icon sprite draws on top of everything
-    gSprites[sModeMenuState->monIconSpriteId].oam.priority = 0;
-}
-
 static void ModeMenu_FreeResources(void)
 {
     // Free our data struct and our BG1 tilemap buffer
