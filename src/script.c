@@ -16,6 +16,7 @@
 #include "task.h"
 #include "field_weather.h"
 #include "new_game.h"
+#include "ui_mode_menu.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
@@ -684,4 +685,10 @@ void StartNewPokeballCaseUI(void)
 {
     FadeScreen(FADE_TO_BLACK, 0);
     CreateTask(Task_OpenBirchCase, 0);
+}
+
+void CallModeMenu(void)
+{
+    FadeScreen(FADE_TO_BLACK, 0);
+    CreateTask(Task_OpenModeMenu, 0);
 }

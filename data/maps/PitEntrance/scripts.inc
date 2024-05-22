@@ -55,73 +55,30 @@ PitEntrance_Warp::
 PitEntrance_Sign_Luck:
 	.string "Good Luck...$"
 
-PitEntrance_Normal:
-	.string "Normal$"
+PitEntrance_ModeMenu:
+	.string "Please choose your game mode.$"
 
-PitEntrance_ExtraRandom:
-	.string "Extra Random$"
+PitEntrance_ReadyToStart:
+	.string "Are you ready to start?$"
 
-PitEntrance_Singles:
-	.string "Single Battles$"
+PitEntrance_MsgYes:
+	.string "Let's go!$"
 
-PitEntrance_Doubles:
-	.string "Double Battles$"
-
-PitEntrance_NormalMode:
-	.string "Normal Difficulty$"
-
-PitEntrance_HardMode:
-	.string "Hard Difficulty$"
-
-PitEntrance_TrainerType:
-	.string "Choose Trainer Type:\n"
-	.string "Doubles is in Beta but Working So Far.$"
-
-PitEntrance_RandomType:
-	.string "Choose Random Mode:\n"
-	.string "Extra Random includes Moves/Abilities.$"
-
-PitEntrance_Mode:
-	.string "Choose Difficulty Mode:\n"
-	.string "Hard mode has less Exp Share Gain.$"
+PitEntrance_MsgModeMenu:
+	.string "Change game mode again!$"
 
 PitEntrance_StartBag::
 	lockall
-	message PitEntrance_RandomType
-	dynmultichoice 17, 0, TRUE, 6, 0, DYN_MULTICHOICE_CB_NONE, PitEntrance_Normal, PitEntrance_ExtraRandom
+	msgbox PitEntrance_ModeMenu, MSGBOX_AUTOCLOSE
+	waitmessage
+PitEntrace_ModeMenu::
+	callnative CallModeMenu
+	waitstate
+	message PitEntrance_ReadyToStart
+	dynmultichoice 17, 0, TRUE, 6, 0, DYN_MULTICHOICE_CB_NONE, PitEntrance_MsgYes, PitEntrance_MsgModeMenu
 	closemessage
-	goto_if_eq VAR_RESULT, 0, PitEntrance_StartBagNormalRandom
-	goto_if_eq VAR_RESULT, 1, PitEntrance_StartBagExtraRandom
-PitEntrance_StartBagNormalRandom::
-	clearflag FLAG_RANDOM_MODE 
-	goto PitEntrance_StartBagContinue1
-PitEntrance_StartBagExtraRandom::
-	setflag FLAG_RANDOM_MODE 
-	goto PitEntrance_StartBagContinue1
-PitEntrance_StartBagContinue1::
-	message PitEntrance_TrainerType
-	dynmultichoice 17, 0, TRUE, 6, 0, DYN_MULTICHOICE_CB_NONE, PitEntrance_Singles, PitEntrance_Doubles
-	closemessage
-	goto_if_eq VAR_RESULT, 0, PitEntrance_StartBagSingles
-	goto_if_eq VAR_RESULT, 1, PitEntrance_StartBagDoubles
-PitEntrance_StartBagSingles::
-	clearflag FLAG_DOUBLES_MODE 
-	goto PitEntrance_StartBagContinue2
-PitEntrance_StartBagDoubles::
-	setflag FLAG_DOUBLES_MODE 
-	goto PitEntrance_StartBagContinue2
-PitEntrance_StartBagContinue2::
-	message PitEntrance_Mode
-	dynmultichoice 17, 0, TRUE, 6, 0, DYN_MULTICHOICE_CB_NONE, PitEntrance_NormalMode, PitEntrance_HardMode
-	closemessage
-	goto_if_eq VAR_RESULT, 0, PitEntrance_StartBagModeNormal
-	goto_if_eq VAR_RESULT, 1, PitEntrance_StartBagHard
-PitEntrance_StartBagModeNormal::
-	clearflag FLAG_HARD_MODE 
-	goto PitEntrance_StartBagContinue3
-PitEntrance_StartBagHard::
-	setflag FLAG_HARD_MODE 
-	goto PitEntrance_StartBagContinue3
+	goto_if_eq VAR_RESULT, 0, PitEntrance_StartBagContinue3
+	goto_if_eq VAR_RESULT, 1, PitEntrace_ModeMenu
 PitEntrance_StartBagContinue3::
 	setflag FLAG_CASE_STARTER_MODE
 	callnative InitTrainerIdAndNameData

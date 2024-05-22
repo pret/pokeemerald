@@ -383,7 +383,7 @@ void Task_OpenModeMenu(u8 taskId)
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        ModeMenu_Init(CB2_ReturnToFieldWithOpenMenu);
+        ModeMenu_Init(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         DestroyTask(taskId);
     }
 }
