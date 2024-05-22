@@ -49,8 +49,8 @@
 #define FLAG_HARD_MODE       0x24 // Unused Flag
 #define FLAG_NO_LEGENDARIES  0x25 // Unused Flag
 #define FLAG_NO_DUPLICATES   0x26 // Unused Flag
-#define FLAG_UNUSED_0x027    0x27 // Unused Flag
-#define FLAG_UNUSED_0x028    0x28 // Unused Flag
+#define FLAG_XPSHARE_50      0x27 // Unused Flag
+#define FLAG_STAT_CHANGER    0x28 // Unused Flag
 #define FLAG_UNUSED_0x029    0x29 // Unused Flag
 #define FLAG_UNUSED_0x02A    0x2A // Unused Flag
 #define FLAG_UNUSED_0x02B    0x2B // Unused Flag

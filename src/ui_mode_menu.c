@@ -1,5 +1,6 @@
 #include "gba/types.h"
 #include "gba/defines.h"
+#include "gba/isagbprint.h"
 #include "global.h"
 #include "main.h"
 #include "bg.h"
@@ -30,6 +31,24 @@
 #include "ui_mode_menu.h"
 #include "list_menu.h"
 #include "international_string_util.h"
+#include "event_data.h"
+#include "constants/flags.h"
+
+//defines
+#define MODE_NORMAL     0
+#define MODE_HARD       1
+#define MODE_CUSTOM     2
+#define MODE_SINGLES    0
+#define MODE_DOUBLES    1
+#define RANDOM_MONS     0
+#define RANDOM_ALL      1
+#define XP_75           0
+#define XP_50           1
+#define ACTIVE          0
+#define INACTIVE        1
+#define YES             0
+#define NO              1
+
 
 // This code is based on Ghoulslash's excellent UI tutorial:
 // https://www.pokecommunity.com/showpost.php?p=10441093
@@ -223,7 +242,7 @@ static const u8 *const OptionTextRight(u8 menuItem);
 static bool8 CheckConditions(int selection);
 static void DrawTopBarText(void); //top Option text
 static void DrawLeftSideOptionText(int selection, int y);
-static void DrawRightSideChoiceText(const u8 *str, int x, int y, bool8 choosen, bool8 active);
+static void DrawRightSideChoiceText(const u8 *str, int x, int y, bool8 chosen, bool8 active);
 static void DrawDescriptionText(void);
 static void DrawModeMenuTexts(void); //left side text;
 static void DrawChoices(u32 id, int y); //right side draw function
@@ -465,7 +484,7 @@ static void ModeMenu_SetupCB(void)
         gMain.state++;
         break;
     case 6:
-        sOptions->sel[MENUITEM_MAIN_DEFAULTS ]    = gSaveBlock2Ptr->modeDefault;
+        sOptions->sel[MENUITEM_MAIN_DEFAULTS]    = gSaveBlock2Ptr->modeDefault;
         sOptions->sel[MENUITEM_MAIN_BATTLEMODE]   = gSaveBlock2Ptr->modeBattleMode;
         sOptions->sel[MENUITEM_MAIN_RANDOMIZER]   = gSaveBlock2Ptr->modeRandomizer;
         sOptions->sel[MENUITEM_MAIN_XPSHARE]      = gSaveBlock2Ptr->modeXPShare;
@@ -591,7 +610,7 @@ static void DrawLeftSideOptionText(int selection, int y)
         AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_gray, TEXT_SKIP_DRAW, OptionTextRight(selection));
 }
 
-static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen, bool8 active)
+static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 chosen, bool8 active)
 {
     u8 color_red[3];
     u8 color_gray[3];
@@ -616,7 +635,7 @@ static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 choosen,
     }
 
 
-    if (choosen)
+    if (chosen)
         AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, x, y, 0, 0, color_red, TEXT_SKIP_DRAW, text);
     else
         AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, x, y, 0, 0, color_gray, TEXT_SKIP_DRAW, text);
@@ -781,6 +800,38 @@ static void Task_ModeMenuMainInput(u8 taskId)
             if (sItemFunctionsMain[cursor].processInput != NULL)
             {
                 sOptions->sel[cursor] = sItemFunctionsMain[cursor].processInput(previousOption);
+
+                //change selections based on defaults
+                if(sOptions->menuCursor != 0) // 0 = first line => DEFAULT choice
+                {
+                    sOptions->sel[MENUITEM_MAIN_DEFAULTS]   = MODE_CUSTOM;
+                }
+                else
+                {
+                    //populate default options to the other mode lines
+                    switch(sOptions->sel[cursor])
+                    {
+                        case MODE_NORMAL:
+                            sOptions->sel[MENUITEM_MAIN_BATTLEMODE]   = MODE_SINGLES;
+                            sOptions->sel[MENUITEM_MAIN_RANDOMIZER]   = RANDOM_MONS;
+                            sOptions->sel[MENUITEM_MAIN_XPSHARE]      = XP_75;
+                            sOptions->sel[MENUITEM_MAIN_STAT_CHANGER] = ACTIVE;
+                            sOptions->sel[MENUITEM_MAIN_LEGENDARIES]  = YES;
+                            sOptions->sel[MENUITEM_MAIN_DUPLICATES]   = NO;
+                            break;
+                        case MODE_HARD:
+                            sOptions->sel[MENUITEM_MAIN_BATTLEMODE]   = MODE_SINGLES;
+                            sOptions->sel[MENUITEM_MAIN_RANDOMIZER]   = RANDOM_MONS;
+                            sOptions->sel[MENUITEM_MAIN_XPSHARE]      = XP_50;
+                            sOptions->sel[MENUITEM_MAIN_STAT_CHANGER] = INACTIVE;
+                            sOptions->sel[MENUITEM_MAIN_LEGENDARIES]  = NO;
+                            sOptions->sel[MENUITEM_MAIN_DUPLICATES]   = NO;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
                 ReDrawAll();
                 DrawDescriptionText();
             }
@@ -793,6 +844,7 @@ static void Task_ModeMenuMainInput(u8 taskId)
 
 static void Task_ModeMenuSave(u8 taskId)
 {
+    //write in saveblock || probably unnecessary for ui_mode_menu as it only sets the VARs
     gSaveBlock2Ptr->modeDefault     = sOptions->sel[MENUITEM_MAIN_DEFAULTS];
     gSaveBlock2Ptr->modeBattleMode  = sOptions->sel[MENUITEM_MAIN_BATTLEMODE];
     gSaveBlock2Ptr->modeRandomizer  = sOptions->sel[MENUITEM_MAIN_RANDOMIZER];
@@ -800,6 +852,37 @@ static void Task_ModeMenuSave(u8 taskId)
     gSaveBlock2Ptr->modeStatChanger = sOptions->sel[MENUITEM_MAIN_STAT_CHANGER];
     gSaveBlock2Ptr->modeLegendaries = sOptions->sel[MENUITEM_MAIN_LEGENDARIES];
     gSaveBlock2Ptr->modeDuplicates  = sOptions->sel[MENUITEM_MAIN_DUPLICATES];
+
+    //set VARs
+    if (sOptions->sel[MENUITEM_MAIN_BATTLEMODE] == MODE_DOUBLES)
+        FlagSet(FLAG_DOUBLES_MODE);
+    else
+        FlagClear(FLAG_DOUBLES_MODE);
+
+    if (sOptions->sel[MENUITEM_MAIN_RANDOMIZER] == RANDOM_ALL)
+        FlagSet(FLAG_RANDOM_MODE);
+    else
+        FlagClear(FLAG_RANDOM_MODE);
+
+    if (sOptions->sel[MENUITEM_MAIN_XPSHARE] == XP_50)
+        FlagSet(FLAG_XPSHARE_50);
+    else
+        FlagClear(FLAG_XPSHARE_50);
+    
+    if (sOptions->sel[MENUITEM_MAIN_STAT_CHANGER] == ACTIVE)
+        FlagSet(FLAG_STAT_CHANGER);
+    else
+        FlagClear(FLAG_STAT_CHANGER);
+
+    if (sOptions->sel[MENUITEM_MAIN_LEGENDARIES] == NO)
+        FlagSet(FLAG_NO_LEGENDARIES);
+    else
+        FlagClear(FLAG_NO_LEGENDARIES);
+
+    if (sOptions->sel[MENUITEM_MAIN_DUPLICATES] == NO)
+        FlagSet(FLAG_NO_DUPLICATES);
+    else
+        FlagClear(FLAG_NO_DUPLICATES);
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_ModeMenuWaitFadeAndExitGracefully;
@@ -940,11 +1023,11 @@ static int ProcessInput_Options_Three(int selection)
 // Draw Choices functions ****GENERIC****
 static void DrawModeMenuChoice(const u8 *text, u8 x, u8 y, u8 style, bool8 active)
 {
-    bool8 choosen = FALSE;
+    bool8 chosen = FALSE;
     if (style != 0)
-        choosen = TRUE;
+        chosen = TRUE;
 
-    DrawRightSideChoiceText(text, x, y+1, choosen, active);
+    DrawRightSideChoiceText(text, x, y+1, chosen, active);
 }
 
 static void ReDrawAll(void)
@@ -981,7 +1064,6 @@ static void ReDrawAll(void)
 static const u8 sText_ModeNormal[]          = _("NORM");
 static const u8 sText_ModeHard[]            = _("HARD");
 static const u8 sText_ModeCustom[]          = _("CUST");
-static const u8 *const sTextModeStrings[]   = {sText_ModeNormal, sText_ModeHard, sText_ModeCustom};
 static const u8 sText_BattleMode_Singles[]  = _("SINGLES");
 static const u8 sText_BattleMode_Doubles[]  = _("DOUBLES");
 static const u8 sText_Randomizer_Mons[]     = _("MONS");
@@ -996,23 +1078,15 @@ static const u8 sText_Choice_No[]           = _("NO");
 static void DrawChoices_Defaults(int selection, int y)
 {
     bool8 active = CheckConditions(MENUITEM_MAIN_DEFAULTS);
-    u8 styles[2] = {0};
+    u8 styles[3] = {0};
     int xMid;
-    static const u8 choiceOrders[][3] =
-    {
-        {0, 1, 2},
-        {0, 1, 2},
-        {0, 1, 2},
-    };
-    const u8 *order = choiceOrders[selection];
-    const u8 *const *const strings = sTextModeStrings;
 
     styles[selection] = 1;
-    xMid = GetMiddleX(strings[order[0]], strings[order[1]], strings[order[2]]);
+    xMid = GetMiddleX(sText_ModeNormal, sText_ModeHard, sText_ModeCustom);
 
-    DrawModeMenuChoice(strings[order[0]], 104, y, styles[order[0]], active);
-    DrawModeMenuChoice(strings[order[1]], xMid, y, styles[order[1]], active);
-    DrawModeMenuChoice(strings[order[2]], GetStringRightAlignXOffset(1, strings[order[2]], 198), y, styles[order[2]], active);
+    DrawModeMenuChoice(sText_ModeNormal, 104, y, styles[0], active);
+    DrawModeMenuChoice(sText_ModeHard, xMid, y, styles[1], active);
+    DrawModeMenuChoice(sText_ModeCustom, GetStringRightAlignXOffset(1, sText_ModeCustom, 198), y, styles[2], active);
 }
 
 static void DrawChoices_BattleMode(int selection, int y)
