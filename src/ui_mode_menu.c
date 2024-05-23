@@ -283,7 +283,7 @@ static const u8 sText_XPShare[]     = _("XP SHARE");
 static const u8 sText_StatChanger[] = _("STAT CHANGER");
 static const u8 sText_Legendaries[] = _("LEGENDARIES");
 static const u8 sText_Duplicates[]  = _("DUPLICATES");
-static const u8 sText_Cancel[]      = _("CANCEL");
+static const u8 sText_Cancel[]      = _("SAVE & LEAVE");
 
 static const u8 *const sModeMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
 {

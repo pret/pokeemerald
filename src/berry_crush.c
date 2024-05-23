@@ -1069,7 +1069,7 @@ static void UNUSED BerryCrush_InitVBlankCB(void)
 
 static void SaveResults(void)
 {
-    u32 time, presses;
+    /*u32 time, presses;
 
     // Calculate pressing speed ((time / 60) / presses)
     time = sGame->results.time;
@@ -1120,7 +1120,7 @@ static void SaveResults(void)
     if (GiveBerryPowder(sGame->powder))
         return;
 
-    sGame->noRoomForPowder = TRUE;
+    sGame->noRoomForPowder = TRUE;*/
 }
 
 static void VBlankCB(void)
@@ -1863,12 +1863,12 @@ void ShowBerryCrushRankings(void)
 {
     u8 taskId;
 
-    LockPlayerFieldControls();
+    /*LockPlayerFieldControls();
     taskId = CreateTask(Task_ShowRankings, 0);
     gTasks[taskId].tPressingSpeeds(0) = gSaveBlock2Ptr->berryCrush.pressingSpeeds[0];
     gTasks[taskId].tPressingSpeeds(1) = gSaveBlock2Ptr->berryCrush.pressingSpeeds[1];
     gTasks[taskId].tPressingSpeeds(2) = gSaveBlock2Ptr->berryCrush.pressingSpeeds[2];
-    gTasks[taskId].tPressingSpeeds(3) = gSaveBlock2Ptr->berryCrush.pressingSpeeds[3];
+    gTasks[taskId].tPressingSpeeds(3) = gSaveBlock2Ptr->berryCrush.pressingSpeeds[3];*/
 }
 
 static void PrintTimer(struct BerryCrushGame_Gfx *gfx, u16 timer)

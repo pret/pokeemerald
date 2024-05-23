@@ -43,6 +43,7 @@
 #include "constants/moves.h"
 #include "naming_screen.h"
 #include "tv.h"
+#include "gba/isagbprint.h"
 
  /*
     9 Starter Selection Birch Case
@@ -154,16 +155,67 @@ static u32 ReturnRandomSpeciesByPokeballIndex(u32 index)
 {   
     u16 species = sStarterChoices[index].species;
     u16 counter = 0;
+    u16 counter2 = 0;
+    bool8 rerollMon;
+    int i;
 
     species = GetSpeciesRandomSeeded(species * GetSpeciesRandomSeeded(VarGet(VAR_PIT_FLOOR) + 1));
 
-    //reroll in case any legendaries, mythics or ultra beasts are determined
-    if (FlagGet(FLAG_NO_LEGENDARIES))
+    if (FlagGet(FLAG_NO_DUPLICATES))
     {
-        while ((IsSpeciesLegendary(species) || IsSpeciesMythical(species) || IsSpeciesUltraBeast(species)) && counter < 1000)
+        do
         {
-            species = GetSpeciesRandomSeeded(species * GetSpeciesRandomSeeded(VarGet(VAR_PIT_FLOOR) + 1));
-            counter ++;
+            rerollMon = FALSE;
+            DebugPrintf("handPosition = %d", index);
+            DebugPrintf("species = %d", species);
+            //reroll in case any legendaries, mythics or ultra beasts are determined
+            if (FlagGet(FLAG_NO_LEGENDARIES))
+            {
+                while ((IsSpeciesLegendary(species) || IsSpeciesMythical(species) || IsSpeciesUltraBeast(species)) && counter < 100)
+                {
+                    species = GetSpeciesRandomSeeded(species * GetSpeciesRandomSeeded(VarGet(VAR_PIT_FLOOR) + 1));
+                    counter ++;
+                }
+            }
+            //check for duplicates
+            for (i=0; i<9; i++) // 9 slots in birch case
+            {
+                DebugPrintf("slot = %d with species %d", i, gSaveBlock2Ptr->uniqueSpecies[i]);
+                if (species == gSaveBlock2Ptr->uniqueSpecies[i] && i != index)
+                {
+                    rerollMon = TRUE;
+                    DebugPrintf("index = %d", index);
+                    DebugPrintf("i = %d", i);
+                    DebugPrintf("double species = %d", species);
+                }                    
+            }
+            //reroll
+            if (rerollMon)
+            {
+                species = GetSpeciesRandomSeeded(species * GetSpeciesRandomSeeded(VarGet(VAR_PIT_FLOOR) + 1));
+                counter2++;
+            }
+            //exit in case of infinite loop
+            if (counter2 == 100)
+                rerollMon = FALSE;
+        }
+        while (rerollMon);
+
+        //save species for rerolls
+        gSaveBlock2Ptr->uniqueSpecies[index] = species;
+        DebugPrintf("Found species = %d", species);
+        //gSaveBlock2Ptr->uniqueSpecies[9]++; //9 = counter of successfully rolled mons
+    }
+    else
+    {
+        //reroll in case any legendaries, mythics or ultra beasts are determined
+        if (FlagGet(FLAG_NO_LEGENDARIES))
+        {
+            while ((IsSpeciesLegendary(species) || IsSpeciesMythical(species) || IsSpeciesUltraBeast(species)) && counter < 100)
+            {
+                species = GetSpeciesRandomSeeded(species * GetSpeciesRandomSeeded(VarGet(VAR_PIT_FLOOR) + 1));
+                counter ++;
+            }
         }
     }
 
