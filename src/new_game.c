@@ -45,6 +45,7 @@
 #include "mystery_gift.h"
 #include "union_room_chat.h"
 #include "constants/items.h"
+#include "gba/isagbprint.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
 
@@ -90,6 +91,8 @@ static void InitPlayerTrainerId(void)
 // L=A isnt set here for some reason.
 void SetDefaultOptions(void)
 {
+    int i;
+
     //options
     gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_INSTANT;
     gSaveBlock2Ptr->optionsWindowFrameType = 0;
@@ -106,6 +109,12 @@ void SetDefaultOptions(void)
     gSaveBlock2Ptr->modeStatChanger = 0;
     gSaveBlock2Ptr->modeLegendaries = 0;
     gSaveBlock2Ptr->modeDuplicates = 1;
+
+    //reset duplicate check data
+    for (i=0; i<9; i++)
+    {
+        gSaveBlock2Ptr->uniqueSpecies[i] = 0;
+    }
 }
 
 static void ClearPokedexFlags(void)
