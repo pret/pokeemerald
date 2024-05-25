@@ -157,6 +157,7 @@ static u32 ReturnRandomSpeciesByPokeballIndex(u32 index)
     u16 counter = 0;
     u16 counter2 = 0;
     bool8 rerollMon;
+    u8 partyCount;
     int i;
 
     species = GetSpeciesRandomSeeded(species * GetSpeciesRandomSeeded(VarGet(VAR_PIT_FLOOR) + 1));
@@ -177,7 +178,7 @@ static u32 ReturnRandomSpeciesByPokeballIndex(u32 index)
                     counter ++;
                 }
             }
-            //check for duplicates
+            //check for duplicates within the case
             for (i=0; i<9; i++) // 9 slots in birch case
             {
                 DebugPrintf("slot = %d with species %d", i, gSaveBlock2Ptr->uniqueSpecies[i]);
@@ -187,7 +188,26 @@ static u32 ReturnRandomSpeciesByPokeballIndex(u32 index)
                     DebugPrintf("index = %d", index);
                     DebugPrintf("i = %d", i);
                     DebugPrintf("double species = %d", species);
-                }                    
+                }
+            }
+            //check for duplicates against the player's party
+            partyCount = CalculatePlayerPartyCount();
+            if (partyCount > 2 && rerollMon == FALSE) //only the case after obtaining the third mon
+            {
+                for (i=0; i<partyCount; i++)
+                {
+                    if (species == GetMonData(&gPlayerParty[i], MON_DATA_SPECIES))
+                    {
+                        rerollMon = TRUE;
+                        DebugPrintf("gPlayerParty[%d] = %d", i, species);
+                    }
+                }
+            }
+            //exit in case of infinite loop
+            if (counter2 == 100)
+            {
+                rerollMon = FALSE;
+                DebugPrintf("--- reroll ---");
             }
             //reroll
             if (rerollMon)
@@ -195,9 +215,6 @@ static u32 ReturnRandomSpeciesByPokeballIndex(u32 index)
                 species = GetSpeciesRandomSeeded(species * GetSpeciesRandomSeeded(VarGet(VAR_PIT_FLOOR) + 1));
                 counter2++;
             }
-            //exit in case of infinite loop
-            if (counter2 == 100)
-                rerollMon = FALSE;
         }
         while (rerollMon);
 
