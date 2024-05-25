@@ -229,7 +229,7 @@ static const u16 sRandomValidMoves[] =
     MOVE_SUPER_FANG,
     MOVE_SLASH,
     MOVE_SUBSTITUTE,
-    MOVE_SKETCH,
+    //MOVE_SKETCH,
     MOVE_TRIPLE_KICK,
     MOVE_THIEF,
     MOVE_SPIDER_WEB,
@@ -814,6 +814,29 @@ static const u16 sRandomValidMoves[] =
     #endif
 };
 //**********************
+
+#define INVALID_ABILITIES_COUNT ARRAY_COUNT(sInvalidRandomAbilities)
+static const u16 sInvalidRandomAbilities[] =
+{
+    ABILITY_MULTITYPE,
+    ABILITY_STANCE_CHANGE,
+    ABILITY_SCHOOLING,
+    ABILITY_COMATOSE,
+    ABILITY_SHIELDS_DOWN,
+    ABILITY_DISGUISE,
+    ABILITY_RKS_SYSTEM,
+    ABILITY_BATTLE_BOND,
+    ABILITY_POWER_CONSTRUCT,
+    ABILITY_ICE_FACE,
+    ABILITY_GULP_MISSILE,
+    ABILITY_ZERO_TO_HERO,
+    ABILITY_COMMANDER,
+    ABILITY_ZEN_MODE,
+    ABILITY_FORECAST,
+    ABILITY_FLOWER_GIFT,
+    ABILITY_AS_ONE_ICE_RIDER,
+    ABILITY_AS_ONE_SHADOW_RIDER,
+};
 
 
 struct SpeciesItem
@@ -3965,31 +3988,49 @@ u8 GetMonsStateToDoubles_2(void)
 u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
 {
     int i;
+    bool8 reroll = FALSE;
 
-    if(FlagGet(FLAG_RANDOM_MODE))
+    do
     {
-        species = GetSpeciesRandomSeeded(species);
-        if ((gSpeciesInfo[species].abilities[1] == ABILITY_NONE) && (abilityNum == 1))
-            abilityNum = 0;
-    }
+        if(FlagGet(FLAG_RANDOM_MODE))
+        {
+            species = GetSpeciesRandomSeeded(species);
+            if ((gSpeciesInfo[species].abilities[1] == ABILITY_NONE) && (abilityNum == 1))
+                abilityNum = 0;
+        }
 
-    if (abilityNum < NUM_ABILITY_SLOTS)
-        gLastUsedAbility = gSpeciesInfo[species].abilities[abilityNum];
-    else
-        gLastUsedAbility = ABILITY_NONE;
+        if (abilityNum < NUM_ABILITY_SLOTS)
+            gLastUsedAbility = gSpeciesInfo[species].abilities[abilityNum];
+        else
+            gLastUsedAbility = ABILITY_NONE;
 
-    if (abilityNum >= NUM_NORMAL_ABILITY_SLOTS) // if abilityNum is empty hidden ability, look for other hidden abilities
-    {
-        for (i = NUM_NORMAL_ABILITY_SLOTS; i < NUM_ABILITY_SLOTS && gLastUsedAbility == ABILITY_NONE; i++)
+        if (abilityNum >= NUM_NORMAL_ABILITY_SLOTS) // if abilityNum is empty hidden ability, look for other hidden abilities
+        {
+            for (i = NUM_NORMAL_ABILITY_SLOTS; i < NUM_ABILITY_SLOTS && gLastUsedAbility == ABILITY_NONE; i++)
+            {
+                gLastUsedAbility = gSpeciesInfo[species].abilities[i];
+            }
+        }
+
+        for (i = 0; i < NUM_ABILITY_SLOTS && gLastUsedAbility == ABILITY_NONE; i++) // look for any non-empty ability
         {
             gLastUsedAbility = gSpeciesInfo[species].abilities[i];
         }
-    }
 
-    for (i = 0; i < NUM_ABILITY_SLOTS && gLastUsedAbility == ABILITY_NONE; i++) // look for any non-empty ability
-    {
-        gLastUsedAbility = gSpeciesInfo[species].abilities[i];
-    }
+        //check if ability is valid
+        if(FlagGet(FLAG_RANDOM_MODE))
+        {
+            for (i=0; i<INVALID_ABILITIES_COUNT; i++)
+            {
+                if (gLastUsedAbility == sInvalidRandomAbilities[i])
+                {
+                    DebugPrintf("reroll Ability");
+                    reroll = TRUE;
+                    i = INVALID_ABILITIES_COUNT;
+                }
+            }
+        }
+    } while (reroll);
 
     return gLastUsedAbility;
 }
