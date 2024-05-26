@@ -552,9 +552,14 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
                 dmg = gMovesInfo[move].argument * (aiData->abilities[battlerAtk] == ABILITY_PARENTAL_BOND ? 2 : 1);
                 break;
             case EFFECT_MULTI_HIT:
-                dmg *= (aiData->abilities[battlerAtk] == ABILITY_SKILL_LINK
-                    && !(move == MOVE_WATER_SHURIKEN && gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH)
-                    ? 5 : 3);
+                if (move == MOVE_WATER_SHURIKEN && gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH)
+                    dmg *= 3;
+                else if (aiData->abilities[battlerAtk] == ABILITY_SKILL_LINK)
+                    dmg *= 5;
+                else if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_LOADED_DICE)
+                    dmg *= 4;
+                else
+                    dmg *= 3;
                 break;
             case EFFECT_ENDEAVOR:
                 // If target has less HP than user, Endeavor does no damage
@@ -3284,7 +3289,7 @@ s32 AI_CalcPartyMonDamage(u32 move, u32 battlerAtk, u32 battlerDef, struct Battl
     s32 dmg;
     u8 effectiveness;
     struct BattlePokemon *savedBattleMons = AllocSaveBattleMons();
-    
+
     if (isPartyMonAttacker)
     {
         gBattleMons[battlerAtk] = switchinCandidate;
@@ -3299,7 +3304,7 @@ s32 AI_CalcPartyMonDamage(u32 move, u32 battlerAtk, u32 battlerDef, struct Battl
         SetBattlerData(battlerAtk); // set known opposing battler data
         AI_THINKING_STRUCT->saved[battlerAtk].saved = FALSE;
     }
-    
+
     dmg = AI_CalcDamage(move, battlerAtk, battlerDef, &effectiveness, FALSE, AI_GetWeather(AI_DATA));
     // restores original gBattleMon struct
     FreeRestoreBattleMons(savedBattleMons);
