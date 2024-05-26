@@ -3988,10 +3988,14 @@ u8 GetMonsStateToDoubles_2(void)
 u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
 {
     int i;
-    bool8 reroll = FALSE;
+    bool8 reroll;
+    int counter = 0;
 
     do
     {
+        reroll = FALSE;
+
+        //randomize species to determine ability
         if(FlagGet(FLAG_RANDOM_MODE))
         {
             species = GetSpeciesRandomSeeded(species);
@@ -4020,15 +4024,24 @@ u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
         //check if ability is valid
         if(FlagGet(FLAG_RANDOM_MODE))
         {
+            DebugPrintf("check for invalid abilities");
             for (i=0; i<INVALID_ABILITIES_COUNT; i++)
             {
                 if (gLastUsedAbility == sInvalidRandomAbilities[i])
                 {
-                    DebugPrintf("reroll Ability");
+                    DebugPrintf("reroll Ability: %d", gLastUsedAbility);
                     reroll = TRUE;
                     i = INVALID_ABILITIES_COUNT;
                 }
             }
+            // infinite loop protection setting a default ability if nothing is found
+            if (counter >= 10)
+            {
+                reroll = FALSE;
+                gLastUsedAbility = ABILITY_TECHNICIAN;
+            }
+
+            counter++;
         }
     } while (reroll);
 
