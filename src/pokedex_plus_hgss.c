@@ -193,6 +193,7 @@ static const u8 sText_Stats_eggGroup_WATER_2[] = _("WATER {CIRCLE_2}");
 static const u8 sText_Stats_eggGroup_DITTO[] = _("DITTO");
 static const u8 sText_Stats_eggGroup_DRAGON[] = _("DRAGON");
 static const u8 sText_Stats_eggGroup_NO_EGGS_DISCOVERED[] = _("---");
+static const u8 sText_Stats_eggGroup_UNKNOWN[] = _("???");
 static const u8 sText_Dex_SEEN[] = _("SEEN");
 static const u8 sText_Dex_OWN[] = _("OWN");
 
@@ -5755,50 +5756,53 @@ static void PrintStatsScreen_Left(u8 taskId)
         //Egg group 1
         switch (sPokedexView->sPokemonStats.eggGroup1)
         {
-        case EGG_GROUP_MONSTER     :
+        case EGG_GROUP_MONSTER:
             StringCopy(gStringVar1, sText_Stats_eggGroup_MONSTER);
             break;
-        case EGG_GROUP_WATER_1     :
+        case EGG_GROUP_WATER_1:
             StringCopy(gStringVar1, sText_Stats_eggGroup_WATER_1);
             break;
-        case EGG_GROUP_BUG         :
+        case EGG_GROUP_BUG:
             StringCopy(gStringVar1, sText_Stats_eggGroup_BUG);
             break;
-        case EGG_GROUP_FLYING      :
+        case EGG_GROUP_FLYING:
             StringCopy(gStringVar1, sText_Stats_eggGroup_FLYING);
             break;
-        case EGG_GROUP_FIELD       :
+        case EGG_GROUP_FIELD:
             StringCopy(gStringVar1, sText_Stats_eggGroup_FIELD);
             break;
-        case EGG_GROUP_FAIRY       :
+        case EGG_GROUP_FAIRY:
             StringCopy(gStringVar1, sText_Stats_eggGroup_FAIRY);
             break;
-        case EGG_GROUP_GRASS       :
+        case EGG_GROUP_GRASS:
             StringCopy(gStringVar1, sText_Stats_eggGroup_GRASS);
             break;
-        case EGG_GROUP_HUMAN_LIKE  :
+        case EGG_GROUP_HUMAN_LIKE:
             StringCopy(gStringVar1, sText_Stats_eggGroup_HUMAN_LIKE);
             break;
-        case EGG_GROUP_WATER_3     :
+        case EGG_GROUP_WATER_3:
             StringCopy(gStringVar1, sText_Stats_eggGroup_WATER_3);
             break;
-        case EGG_GROUP_MINERAL     :
+        case EGG_GROUP_MINERAL:
             StringCopy(gStringVar1, sText_Stats_eggGroup_MINERAL);
             break;
-        case EGG_GROUP_AMORPHOUS   :
+        case EGG_GROUP_AMORPHOUS:
             StringCopy(gStringVar1, sText_Stats_eggGroup_AMORPHOUS);
             break;
-        case EGG_GROUP_WATER_2     :
+        case EGG_GROUP_WATER_2:
             StringCopy(gStringVar1, sText_Stats_eggGroup_WATER_2);
             break;
-        case EGG_GROUP_DITTO       :
+        case EGG_GROUP_DITTO:
             StringCopy(gStringVar1, sText_Stats_eggGroup_DITTO);
             break;
-        case EGG_GROUP_DRAGON      :
+        case EGG_GROUP_DRAGON:
             StringCopy(gStringVar1, sText_Stats_eggGroup_DRAGON);
             break;
         case EGG_GROUP_NO_EGGS_DISCOVERED:
             StringCopy(gStringVar1, sText_Stats_eggGroup_NO_EGGS_DISCOVERED);
+            break;
+        default:
+            StringCopy(gStringVar1, sText_Stats_eggGroup_UNKNOWN);
             break;
         }
         //Egg group 2
@@ -5806,50 +5810,53 @@ static void PrintStatsScreen_Left(u8 taskId)
         {
             switch (sPokedexView->sPokemonStats.eggGroup2)
             {
-            case EGG_GROUP_MONSTER     :
+            case EGG_GROUP_MONSTER:
                 StringCopy(gStringVar2, sText_Stats_eggGroup_MONSTER);
                 break;
-            case EGG_GROUP_WATER_1     :
+            case EGG_GROUP_WATER_1:
                 StringCopy(gStringVar2, sText_Stats_eggGroup_WATER_1);
                 break;
-            case EGG_GROUP_BUG         :
+            case EGG_GROUP_BUG:
                 StringCopy(gStringVar2, sText_Stats_eggGroup_BUG);
                 break;
-            case EGG_GROUP_FLYING      :
+            case EGG_GROUP_FLYING:
                 StringCopy(gStringVar2, sText_Stats_eggGroup_FLYING);
                 break;
-            case EGG_GROUP_FIELD       :
+            case EGG_GROUP_FIELD:
                 StringCopy(gStringVar2, sText_Stats_eggGroup_FIELD);
                 break;
-            case EGG_GROUP_FAIRY       :
+            case EGG_GROUP_FAIRY:
                 StringCopy(gStringVar2, sText_Stats_eggGroup_FAIRY);
                 break;
-            case EGG_GROUP_GRASS       :
+            case EGG_GROUP_GRASS:
                 StringCopy(gStringVar2, sText_Stats_eggGroup_GRASS);
                 break;
-            case EGG_GROUP_HUMAN_LIKE  :
+            case EGG_GROUP_HUMAN_LIKE:
                 StringCopy(gStringVar2, sText_Stats_eggGroup_HUMAN_LIKE);
                 break;
-            case EGG_GROUP_WATER_3     :
+            case EGG_GROUP_WATER_3:
                 StringCopy(gStringVar2, sText_Stats_eggGroup_WATER_3);
                 break;
-            case EGG_GROUP_MINERAL     :
+            case EGG_GROUP_MINERAL:
                 StringCopy(gStringVar2, sText_Stats_eggGroup_MINERAL);
                 break;
-            case EGG_GROUP_AMORPHOUS   :
+            case EGG_GROUP_AMORPHOUS:
                 StringCopy(gStringVar2, sText_Stats_eggGroup_AMORPHOUS);
                 break;
-            case EGG_GROUP_WATER_2     :
+            case EGG_GROUP_WATER_2:
                 StringCopy(gStringVar2, sText_Stats_eggGroup_WATER_2);
                 break;
-            case EGG_GROUP_DITTO       :
+            case EGG_GROUP_DITTO:
                 StringCopy(gStringVar2, sText_Stats_eggGroup_DITTO);
                 break;
-            case EGG_GROUP_DRAGON      :
+            case EGG_GROUP_DRAGON:
                 StringCopy(gStringVar2, sText_Stats_eggGroup_DRAGON);
                 break;
             case EGG_GROUP_NO_EGGS_DISCOVERED:
                 StringCopy(gStringVar2, sText_Stats_eggGroup_NO_EGGS_DISCOVERED);
+                break;
+            default:
+                StringCopy(gStringVar2, sText_Stats_eggGroup_UNKNOWN);
                 break;
             }
             StringExpandPlaceholders(gStringVar3, sText_Stats_eggGroup_Groups);
@@ -6669,7 +6676,7 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 dept
             StringExpandPlaceholders(gStringVar4, sText_EVO_LEVEL_RECOIL_DAMAGE_FEMALE);
             break;
         default:
-            StringExpandPlaceholders(gStringVar4, sText_EVO_UNKNOWN );
+            StringExpandPlaceholders(gStringVar4, sText_EVO_UNKNOWN);
             break;
         }//Switch end
         PrintInfoScreenTextSmall(gStringVar4, base_x + depth_x*depth+base_x_offset, base_y + base_y_offset*(*depth_i)); //Print actual instructions
