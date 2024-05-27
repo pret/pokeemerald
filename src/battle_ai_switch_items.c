@@ -1279,6 +1279,9 @@ static u32 GetSwitchinHazardsDamage(u32 battler, struct BattlePokemon *battleMon
         // Stealth Rock
         if ((hazardFlags & SIDE_STATUS_STEALTH_ROCK) && heldItemEffect != HOLD_EFFECT_HEAVY_DUTY_BOOTS)
             hazardDamage += GetStealthHazardDamageByTypesAndHP(gMovesInfo[MOVE_STEALTH_ROCK].type, defType1, defType2, battleMon->maxHP);
+        // G-Max Steelsurge
+        if ((hazardFlags & SIDE_STATUS_STEELSURGE) && heldItemEffect != HOLD_EFFECT_HEAVY_DUTY_BOOTS)
+            hazardDamage += GetStealthHazardDamageByTypesAndHP(gMovesInfo[MOVE_G_MAX_STEELSURGE].type, defType1, defType2, battleMon->maxHP);
         // Spikes
         if ((hazardFlags & SIDE_STATUS_SPIKES) && IsMonGrounded(heldItemEffect, ability, defType1, defType2))
         {
@@ -1324,31 +1327,34 @@ static u32 GetSwitchinHazardsDamage(u32 battler, struct BattlePokemon *battleMon
 static s32 GetSwitchinWeatherImpact(void)
 {
     s32 weatherImpact = 0, maxHP = AI_DATA->switchinCandidate.battleMon.maxHP, ability = AI_DATA->switchinCandidate.battleMon.ability;
-    u16 item = AI_DATA->switchinCandidate.battleMon.item;
+    u32 holdEffect = gItemsInfo[AI_DATA->switchinCandidate.battleMon.item].holdEffect;
 
     if (WEATHER_HAS_EFFECT)
     {
         // Damage
-        if (item != ITEM_SAFETY_GOGGLES)
+        if (holdEffect != HOLD_EFFECT_SAFETY_GOGGLES && ability != ABILITY_MAGIC_GUARD && ability != ABILITY_OVERCOAT)
         {
-            if ((gBattleWeather & B_WEATHER_HAIL) && (AI_DATA->switchinCandidate.battleMon.type1 != TYPE_ICE || AI_DATA->switchinCandidate.battleMon.type2 != TYPE_ICE)
-            && ability != ABILITY_OVERCOAT && ability != ABILITY_SNOW_CLOAK && ability != ABILITY_ICE_BODY)
+            if ((gBattleWeather & B_WEATHER_HAIL)
+             && (AI_DATA->switchinCandidate.battleMon.type1 != TYPE_ICE || AI_DATA->switchinCandidate.battleMon.type2 != TYPE_ICE)
+             && ability != ABILITY_SNOW_CLOAK && ability != ABILITY_ICE_BODY)
             {
                 weatherImpact = maxHP / 16;
                 if (weatherImpact == 0)
                     weatherImpact = 1;
             }
-            else if ((gBattleWeather & B_WEATHER_SANDSTORM) && (AI_DATA->switchinCandidate.battleMon.type1 != TYPE_GROUND && AI_DATA->switchinCandidate.battleMon.type2 != TYPE_GROUND
+            else if ((gBattleWeather & B_WEATHER_SANDSTORM)
+                && (AI_DATA->switchinCandidate.battleMon.type1 != TYPE_GROUND && AI_DATA->switchinCandidate.battleMon.type2 != TYPE_GROUND
                 && AI_DATA->switchinCandidate.battleMon.type1 != TYPE_ROCK && AI_DATA->switchinCandidate.battleMon.type2 != TYPE_ROCK
                 && AI_DATA->switchinCandidate.battleMon.type1 != TYPE_STEEL && AI_DATA->switchinCandidate.battleMon.type2 != TYPE_STEEL
-                && ability != ABILITY_OVERCOAT && ability != ABILITY_SAND_VEIL && ability != ABILITY_SAND_RUSH && ability != ABILITY_SAND_FORCE))
+                && ability != ABILITY_SAND_VEIL && ability != ABILITY_SAND_RUSH && ability != ABILITY_SAND_FORCE))
             {
                 weatherImpact = maxHP / 16;
                 if (weatherImpact == 0)
                     weatherImpact = 1;
             }
         }
-        if ((gBattleWeather & B_WEATHER_SUN) && (ability == ABILITY_SOLAR_POWER || ability == ABILITY_DRY_SKIN))
+        if ((gBattleWeather & B_WEATHER_SUN) && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA
+         && (ability == ABILITY_SOLAR_POWER || ability == ABILITY_DRY_SKIN))
         {
             weatherImpact = maxHP / 8;
             if (weatherImpact == 0)
@@ -1356,26 +1362,26 @@ static s32 GetSwitchinWeatherImpact(void)
         }
 
         // Healing
-        if (gBattleWeather & B_WEATHER_RAIN)
+        if (gBattleWeather & B_WEATHER_RAIN && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA)
         {
             if (ability == ABILITY_DRY_SKIN)
             {
-                weatherImpact = maxHP / 8;
+                weatherImpact = -(maxHP / 8);
                 if (weatherImpact == 0)
-                    weatherImpact = 1;
+                    weatherImpact = -1;
             }
             else if (ability == ABILITY_RAIN_DISH)
             {
-                weatherImpact = maxHP / 16;
+                weatherImpact = -(maxHP / 16);
                 if (weatherImpact == 0)
-                    weatherImpact = 1;
+                    weatherImpact = -1;
             }
         }
         if (((gBattleWeather & B_WEATHER_HAIL) || (gBattleWeather & B_WEATHER_SNOW)) && ability == ABILITY_ICE_BODY)
         {
-            weatherImpact = maxHP / 16;
+            weatherImpact = -(maxHP / 16);
             if (weatherImpact == 0)
-                weatherImpact =1;
+                weatherImpact = -1;
         }
     }
     return weatherImpact;
@@ -1385,18 +1391,18 @@ static s32 GetSwitchinWeatherImpact(void)
 static u32 GetSwitchinRecurringHealing(void)
 {
     u32 recurringHealing = 0, maxHP = AI_DATA->switchinCandidate.battleMon.maxHP, ability = AI_DATA->switchinCandidate.battleMon.ability;
-    u16 item = AI_DATA->switchinCandidate.battleMon.item;
+    u32 holdEffect = gItemsInfo[AI_DATA->switchinCandidate.battleMon.item].holdEffect;
 
     // Items
     if (ability != ABILITY_KLUTZ)
     {
-        if (item == ITEM_BLACK_SLUDGE && (AI_DATA->switchinCandidate.battleMon.type1 == TYPE_POISON || AI_DATA->switchinCandidate.battleMon.type2 == TYPE_POISON))
+        if (holdEffect == HOLD_EFFECT_BLACK_SLUDGE && (AI_DATA->switchinCandidate.battleMon.type1 == TYPE_POISON || AI_DATA->switchinCandidate.battleMon.type2 == TYPE_POISON))
         {
             recurringHealing = maxHP / 16;
             if (recurringHealing == 0)
                 recurringHealing = 1;
         }
-        else if (item == ITEM_LEFTOVERS)
+        else if (holdEffect == HOLD_EFFECT_LEFTOVERS)
         {
             recurringHealing = maxHP / 16;
             if (recurringHealing == 0)
@@ -1407,9 +1413,10 @@ static u32 GetSwitchinRecurringHealing(void)
     // Abilities
     if (ability == ABILITY_POISON_HEAL && (AI_DATA->switchinCandidate.battleMon.status1 & STATUS1_POISON))
     {
-        recurringHealing = maxHP / 8;
-        if (recurringHealing == 0)
-            recurringHealing = 1;
+        u32 healing = maxHP / 8;
+        if (healing == 0)
+            healing = 1;
+        recurringHealing += healing;
     }
     return recurringHealing;
 }
@@ -1418,24 +1425,24 @@ static u32 GetSwitchinRecurringHealing(void)
 static u32 GetSwitchinRecurringDamage(void)
 {
     u32 passiveDamage = 0, maxHP = AI_DATA->switchinCandidate.battleMon.maxHP, ability = AI_DATA->switchinCandidate.battleMon.ability;
-    u16 item = AI_DATA->switchinCandidate.battleMon.item;
+    u32 holdEffect = gItemsInfo[AI_DATA->switchinCandidate.battleMon.item].holdEffect;
 
     // Items
     if (ability != ABILITY_MAGIC_GUARD && ability != ABILITY_KLUTZ)
     {
-        if (item == ITEM_BLACK_SLUDGE && AI_DATA->switchinCandidate.battleMon.type1 != TYPE_POISON && AI_DATA->switchinCandidate.battleMon.type2 != TYPE_POISON)
+        if (holdEffect == HOLD_EFFECT_BLACK_SLUDGE && AI_DATA->switchinCandidate.battleMon.type1 != TYPE_POISON && AI_DATA->switchinCandidate.battleMon.type2 != TYPE_POISON)
         {
             passiveDamage = maxHP / 8;
             if (passiveDamage == 0)
                 passiveDamage = 1;
         }
-        else if (item == ITEM_LIFE_ORB && ability != ABILITY_SHEER_FORCE)
+        else if (holdEffect == HOLD_EFFECT_LIFE_ORB && ability != ABILITY_SHEER_FORCE)
         {
             passiveDamage = maxHP / 10;
             if (passiveDamage == 0)
                 passiveDamage = 1;
         }
-        else if (item == ITEM_STICKY_BARB)
+        else if (holdEffect == HOLD_EFFECT_STICKY_BARB)
         {
             passiveDamage = maxHP / 8;
             if(passiveDamage == 0)
@@ -1487,6 +1494,7 @@ static u32 GetSwitchinStatusDamage(u32 battler)
         {
             if ((status & STATUS1_TOXIC_COUNTER) != STATUS1_TOXIC_TURN(15)) // not 16 turns
                 AI_DATA->switchinCandidate.battleMon.status1 += STATUS1_TOXIC_TURN(1);
+            statusDamage = maxHP / 16;
             statusDamage *= AI_DATA->switchinCandidate.battleMon.status1 & STATUS1_TOXIC_COUNTER >> 8;
             if (statusDamage == 0)
                 statusDamage = 1;
@@ -1527,8 +1535,8 @@ static u32 GetSwitchinHitsToKO(s32 damageTaken, u32 battler)
     u32 recurringHealing = GetSwitchinRecurringHealing();
     u32 statusDamage = GetSwitchinStatusDamage(battler);
     u32 hitsToKO = 0, singleUseItemHeal = 0;
-    u16 maxHP = AI_DATA->switchinCandidate.battleMon.maxHP, item = AI_DATA->switchinCandidate.battleMon.item, heldItemEffect = gItemsInfo[AI_DATA->switchinCandidate.battleMon.item].holdEffect;
-    u8 weatherDuration = gWishFutureKnock.weatherDuration, holdEffectParam = gItemsInfo[AI_DATA->switchinCandidate.battleMon.item].holdEffectParam;
+    u16 maxHP = AI_DATA->switchinCandidate.battleMon.maxHP, item = AI_DATA->switchinCandidate.battleMon.item, heldItemEffect = gItemsInfo[item].holdEffect;
+    u8 weatherDuration = gWishFutureKnock.weatherDuration, holdEffectParam = gItemsInfo[item].holdEffectParam;
     u32 opposingBattler = GetBattlerAtPosition(BATTLE_OPPOSITE(GetBattlerPosition(battler)));
     u32 opposingAbility = gBattleMons[opposingBattler].ability;
     bool32 usedSingleUseHealingItem = FALSE;
@@ -1554,32 +1562,38 @@ static u32 GetSwitchinHitsToKO(s32 damageTaken, u32 battler)
 
         // If mon is still alive, apply weather impact first, as it might KO the mon before it can heal with its item (order is weather -> item -> status)
         if (currentHP != 0)
-            currentHP = currentHP + weatherImpact;
+            currentHP = currentHP - weatherImpact;
 
         // Check if we're at a single use healing item threshold
-        if (AI_DATA->switchinCandidate.battleMon.ability != ABILITY_KLUTZ && usedSingleUseHealingItem == FALSE)
+        if (AI_DATA->switchinCandidate.battleMon.ability != ABILITY_KLUTZ && usedSingleUseHealingItem == FALSE
+         && !(opposingAbility == ABILITY_UNNERVE && GetPocketByItemId(item) == POCKET_BERRIES))
         {
-            if (currentHP < maxHP / 2)
+            switch (heldItemEffect)
             {
-                if (item == ITEM_BERRY_JUICE)
-                {
+            case HOLD_EFFECT_RESTORE_HP:
+                if (currentHP < maxHP / 2)
                     singleUseItemHeal = holdEffectParam;
-                }
-                else if (opposingAbility != ABILITY_UNNERVE && heldItemEffect == HOLD_EFFECT_RESTORE_HP)
+                break;
+            case HOLD_EFFECT_RESTORE_PCT_HP:
+                if (currentHP < maxHP / 2)
                 {
-                    // By default, this should only encompass Oran Berry and Sitrus Berry.
-                    singleUseItemHeal = holdEffectParam;
+                    singleUseItemHeal = maxHP / holdEffectParam;
                     if (singleUseItemHeal == 0)
                         singleUseItemHeal = 1;
                 }
-            }
-            else if (currentHP < maxHP / CONFUSE_BERRY_HP_FRACTION
-                && opposingAbility != ABILITY_UNNERVE
-                && (item == ITEM_AGUAV_BERRY || item == ITEM_FIGY_BERRY || item == ITEM_IAPAPA_BERRY || item == ITEM_MAGO_BERRY || item == ITEM_WIKI_BERRY))
-            {
-                singleUseItemHeal = maxHP / CONFUSE_BERRY_HEAL_FRACTION;
-                if (singleUseItemHeal == 0)
-                    singleUseItemHeal = 1;
+                break;
+            case HOLD_EFFECT_CONFUSE_SPICY:
+            case HOLD_EFFECT_CONFUSE_DRY:
+            case HOLD_EFFECT_CONFUSE_SWEET:
+            case HOLD_EFFECT_CONFUSE_BITTER:
+            case HOLD_EFFECT_CONFUSE_SOUR:
+                if (currentHP < maxHP / CONFUSE_BERRY_HP_FRACTION)
+                {
+                    singleUseItemHeal = maxHP / holdEffectParam;
+                    if (singleUseItemHeal == 0)
+                        singleUseItemHeal = 1;
+                }
+                break;
             }
 
             // If we used one, apply it without overcapping our maxHP
