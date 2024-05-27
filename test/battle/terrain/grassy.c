@@ -68,7 +68,7 @@ SINGLE_BATTLE_TEST("Grassy Terrain decreases power of Earthquake and Bulldoze by
     PARAMETRIZE { terrain = TRUE; move = MOVE_BULLDOZE; } // 3
     GIVEN {
         ASSUME(gMovesInfo[MOVE_EARTHQUAKE].effect == EFFECT_EARTHQUAKE);
-        ASSUME(gMovesInfo[MOVE_BULLDOZE].effect == EFFECT_BULLDOZE);
+        ASSUME(gMovesInfo[MOVE_BULLDOZE].effect == EFFECT_EARTHQUAKE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

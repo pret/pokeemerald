@@ -379,14 +379,17 @@ bool32 IsDamageMoveUnusable(u32 move, u32 battlerAtk, u32 battlerDef)
     s32 moveType;
     struct AiLogicData *aiData = AI_DATA;
     u32 battlerDefAbility;
+    GET_MOVE_TYPE(move, moveType);
 
     if (DoesBattlerIgnoreAbilityChecks(aiData->abilities[battlerAtk], move))
         battlerDefAbility = ABILITY_NONE;
     else
         battlerDefAbility = aiData->abilities[battlerDef];
 
-    SetTypeBeforeUsingMove(move, battlerAtk);
-    GET_MOVE_TYPE(move, moveType);
+    // Battler doesn't see partners Ability for some reason.
+    // This is a small hack to avoid the issue but should be investigated
+    if (battlerDef == BATTLE_PARTNER(battlerAtk))
+        battlerDefAbility = GetBattlerAbility(battlerDef);
 
     switch (battlerDefAbility)
     {
@@ -431,7 +434,7 @@ bool32 IsDamageMoveUnusable(u32 move, u32 battlerAtk, u32 battlerDef)
             return TRUE;
         break;
     case EFFECT_BELCH:
-        if (ItemId_GetPocket(GetUsedHeldItem(battlerAtk)) != POCKET_BERRIES)
+        if (IsBelchPreventingMove(battlerAtk, move))
             return TRUE;
         break;
     case EFFECT_LAST_RESORT:
@@ -491,14 +494,13 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
 
     gBattleStruct->dynamicMoveType = 0;
 
-
     SetTypeBeforeUsingMove(move, battlerAtk);
     GET_MOVE_TYPE(move, moveType);
+    effectivenessMultiplier = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, aiData->abilities[battlerDef], FALSE);
 
     if (gMovesInfo[move].power)
         isDamageMoveUnusable = IsDamageMoveUnusable(move, battlerAtk, battlerDef);
 
-    effectivenessMultiplier = CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, aiData->abilities[battlerDef], FALSE);
     if (gMovesInfo[move].power && !isDamageMoveUnusable)
     {
         s32 critChanceIndex, normalDmg, fixedBasePower, n;

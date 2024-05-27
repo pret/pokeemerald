@@ -123,3 +123,25 @@ SINGLE_BATTLE_TEST("Explosion does not trigger Destiny Bond")
         NOT HP_BAR(opponent);
     }
 }
+
+DOUBLE_BATTLE_TEST("Explosion boosted by Galvanize is correctly blocked by Volt Absorb")
+{
+    GIVEN {
+        PLAYER(SPECIES_GEODUDE_ALOLAN) { Ability(ABILITY_GALVANIZE); }
+        PLAYER(SPECIES_WYNAUT) { HP(1); }
+        OPPONENT(SPECIES_LANTURN) { Ability(ABILITY_VOLT_ABSORB); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_EXPLOSION); }
+    } SCENE {
+        MESSAGE("Geodude used Explosion!");
+        HP_BAR(playerLeft, hp: 0);
+        ABILITY_POPUP(opponentLeft, ABILITY_VOLT_ABSORB);
+        NOT HP_BAR(opponentLeft, hp: 0);
+        HP_BAR(playerRight, hp: 0);
+        MESSAGE("Wynaut fainted!");
+        HP_BAR(opponentRight, hp: 0);
+        MESSAGE("Foe Wobbuffet fainted!");
+        MESSAGE("Geodude fainted!");
+    }
+}

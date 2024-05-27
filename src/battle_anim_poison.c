@@ -62,15 +62,7 @@ static const union AnimCmd sAnim_SludgeBombHit[] =
 const union AnimCmd *const gAnims_PoisonProjectile[] =
 {
     sAnim_PoisonProjectile,
-};
-
-const union AnimCmd *const gAnims_AcidPoisonDroplet[] =
-{
     sAnim_AcidPoisonDroplet,
-};
-
-static const union AnimCmd *const sAnims_SludgeBombHit[] =
-{
     sAnim_SludgeBombHit,
 };
 
@@ -125,7 +117,7 @@ const struct SpriteTemplate gSludgeBombHitParticleSpriteTemplate =
     .tileTag = ANIM_TAG_POISON_BUBBLE,
     .paletteTag = ANIM_TAG_POISON_BUBBLE,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
-    .anims = sAnims_SludgeBombHit,
+    .anims = &gAnims_PoisonProjectile[2],
     .images = NULL,
     .affineAnims = sAffineAnims_SludgeBombHit,
     .callback = AnimSludgeBombHitParticle,
@@ -148,7 +140,7 @@ const struct SpriteTemplate gAcidPoisonDropletSpriteTemplate =
     .tileTag = ANIM_TAG_POISON_BUBBLE,
     .paletteTag = ANIM_TAG_POISON_BUBBLE,
     .oam = &gOamData_AffineDouble_ObjNormal_16x16,
-    .anims = gAnims_AcidPoisonDroplet,
+    .anims = &gAnims_PoisonProjectile[1],
     .images = NULL,
     .affineAnims = gAffineAnims_Droplet,
     .callback = AnimAcidPoisonDroplet,
@@ -193,7 +185,7 @@ const struct SpriteTemplate gGreenPoisonDrip =
 	.tileTag = ANIM_TAG_GREEN_POISON_BUBBLE,
 	.paletteTag = ANIM_TAG_GREEN_POISON_BUBBLE,
 	.oam = &gOamData_AffineDouble_ObjNormal_16x16,
-	.anims = gAnims_AcidPoisonDroplet,
+    .anims = &gAnims_PoisonProjectile[1],
 	.images = NULL,
 	.affineAnims = gAffineAnims_Droplet,
 	.callback = AnimAcidPoisonDroplet,
