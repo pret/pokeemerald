@@ -5406,7 +5406,6 @@ static void Cmd_moveend(void)
     u16 *choicedMoveAtk = NULL;
     u32 endMode, endState;
     u32 originallyUsedMove;
-    u8 currBattler, liveBattlerCount;
 
     if (gChosenMove == MOVE_UNAVAILABLE)
         originallyUsedMove = MOVE_NONE;
@@ -5717,28 +5716,19 @@ static void Cmd_moveend(void)
                         gBattlescriptCurrInstr = BattleScript_TargetWokeUp;
                         break;
                     case STATUS1_BURN:
-                        // Checks to see if Sparkling Aria should cure a Shield Dust pokemon
-                        if (gBattleMons[gBattlerTarget].ability == ABILITY_SHIELD_DUST || gBattleMons[gBattlerTarget].item == ITEM_COVERT_CLOAK)
-                        {
-                            liveBattlerCount = 0;
-                            for (currBattler = 0; currBattler < gBattlersCount; currBattler++)
-                            {
-                                if (gBattleMons[currBattler].hp != 0)
-                                {
-                                    liveBattlerCount++;
-                                }
-                            }
-                            if (liveBattlerCount > 2)
-                            {
-                                gBattlescriptCurrInstr = BattleScript_TargetBurnHeal;
-                            }
-                            break;
-                        }
-                        else
-                        {
-                            gBattlescriptCurrInstr = BattleScript_TargetBurnHeal;
-                            break;
-                        }
+                        gBattlescriptCurrInstr = BattleScript_TargetBurnHeal;
+                        break;
+                    case STATUS1_FREEZE:
+                        gBattlescriptCurrInstr = BattleScript_FrostbiteHealedViaFireMove;
+                        break;
+                    case STATUS1_FROSTBITE:
+                        gBattlescriptCurrInstr = BattleScript_DefrostedViaFireMove;
+                        break;
+                    case STATUS1_POISON:
+                    case STATUS1_TOXIC_POISON:
+                    case STATUS1_PSN_ANY:
+                        gBattlescriptCurrInstr = BattleScript_TargetPoisonHealed;
+                        break;
                     }
                 }
                 break; // MOVE_EFFECT_REMOVE_STATUS

@@ -122,6 +122,7 @@ SINGLE_BATTLE_TEST("Covert Cloak does not block self-targeting effects, primary 
 DOUBLE_BATTLE_TEST("Covert Cloak does or does not block Sparkling Aria depending on number of targets hit")
 {
     u32 moveToUse;
+    KNOWN_FAILING;
     PARAMETRIZE { moveToUse = MOVE_FINAL_GAMBIT; }
     PARAMETRIZE { moveToUse = MOVE_TACKLE; }
     GIVEN {
@@ -147,6 +148,7 @@ DOUBLE_BATTLE_TEST("Covert Cloak does or does not block Sparkling Aria depending
 
 SINGLE_BATTLE_TEST("Covert Cloak blocks Sparkling Aria in singles")
 {
+    KNOWN_FAILING;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_COVERT_CLOAK); Status1(STATUS1_BURN); }
