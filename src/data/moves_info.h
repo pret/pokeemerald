@@ -16586,7 +16586,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "The user attacks twice. Two\n"
             "targets are hit once each."),
-        .effect = EFFECT_HIT, // TODO: EFFECT_DRAGON_DARTS
+        .effect = EFFECT_DRAGON_DARTS,
         .power = 50,
         .type = TYPE_DRAGON,
         .accuracy = 100,
