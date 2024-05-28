@@ -147,7 +147,7 @@ static bool32 HasBadOdds(u32 battler, bool32 emitResult)
         playerMove = gBattleMons[opposingBattler].moves[i];
         if (playerMove != MOVE_NONE && gMovesInfo[playerMove].power != 0)
         {
-            damageTaken = AI_CalcDamage(playerMove, opposingBattler, battler, &effectiveness, FALSE, weather);
+            damageTaken = AI_CalcDamage(playerMove, opposingBattler, battler, &effectiveness, FALSE, weather, DMG_ROLL_HIGHEST);
             if (damageTaken > maxDamageTaken)
                 maxDamageTaken = damageTaken;
         }
@@ -1234,7 +1234,7 @@ static u32 GetBestMonDmg(struct Pokemon *party, int firstId, int lastId, u8 inva
             if (aiMove != MOVE_NONE && gMovesInfo[aiMove].power != 0)
             {
                 aiMove = GetMonData(&party[i], MON_DATA_MOVE1 + j);
-                dmg = AI_CalcPartyMonDamage(aiMove, battler, opposingBattler, AI_DATA->switchinCandidate.battleMon, TRUE);
+                dmg = AI_CalcPartyMonDamage(aiMove, battler, opposingBattler, AI_DATA->switchinCandidate.battleMon, TRUE, DMG_ROLL_AVERAGE);
                 if (bestDmg < dmg)
                 {
                     bestDmg = dmg;
@@ -1683,7 +1683,7 @@ static s32 GetMaxDamagePlayerCouldDealToSwitchin(u32 battler, u32 opposingBattle
         playerMove = gBattleMons[opposingBattler].moves[i];
         if (playerMove != MOVE_NONE && gMovesInfo[playerMove].power != 0)
         {
-            damageTaken = AI_CalcPartyMonDamage(playerMove, opposingBattler, battler, battleMon, FALSE);
+            damageTaken = AI_CalcPartyMonDamage(playerMove, opposingBattler, battler, battleMon, FALSE, DMG_ROLL_HIGHEST);
             if (damageTaken > maxDamageTaken)
                 maxDamageTaken = damageTaken;
         }
@@ -1775,7 +1775,7 @@ static u32 GetBestMonIntegrated(struct Pokemon *party, int firstId, int lastId, 
 
             // Only do damage calc if switching after KO, don't need it otherwise and saves ~0.02s per turn
             if (isSwitchAfterKO && aiMove != MOVE_NONE && gMovesInfo[aiMove].power != 0)
-                damageDealt = AI_CalcPartyMonDamage(aiMove, battler, opposingBattler, AI_DATA->switchinCandidate.battleMon, TRUE);
+                damageDealt = AI_CalcPartyMonDamage(aiMove, battler, opposingBattler, AI_DATA->switchinCandidate.battleMon, TRUE, DMG_ROLL_AVERAGE);
 
             // Check for Baton Pass; hitsToKO requirements mean mon can boost and BP without dying whether it's slower or not
             if (aiMove == MOVE_BATON_PASS && ((hitsToKO > hitsToKOThreshold + 1 && AI_DATA->switchinCandidate.battleMon.speed < playerMonSpeed) || (hitsToKO > hitsToKOThreshold && AI_DATA->switchinCandidate.battleMon.speed > playerMonSpeed)))

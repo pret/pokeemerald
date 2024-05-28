@@ -5,6 +5,13 @@
 
 #define AI_STRIKES_FIRST(battlerAi, battlerDef, move)((AI_WhoStrikesFirst(battlerAi, battlerDef, move) == AI_IS_FASTER))
 
+enum
+{
+    DMG_ROLL_LOWEST,
+    DMG_ROLL_AVERAGE,
+    DMG_ROLL_HIGHEST,
+};
+
 bool32 AI_RandLessThan(u32 val);
 bool32 IsAiVsAiBattle(void);
 bool32 BattlerHasAi(u32 battlerId);
@@ -82,8 +89,8 @@ bool32 ShouldLowerEvasion(u32 battlerAtk, u32 battlerDef, u32 defAbility);
 bool32 IsAffectedByPowder(u32 battler, u32 ability, u32 holdEffect);
 bool32 MovesWithCategoryUnusable(u32 attacker, u32 target, u32 category);
 s32 AI_WhichMoveBetter(u32 move1, u32 move2, u32 battlerAtk, u32 battlerDef, s32 noOfHitsToKo);
-s32 AI_CalcDamageSaveBattlers(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectiveness, bool32 considerZPower);
-s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectiveness, bool32 considerZPower, u32 weather);
+s32 AI_CalcDamageSaveBattlers(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectiveness, bool32 considerZPower, u32 dmgRoll);
+s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectiveness, bool32 considerZPower, u32 weather, u32 dmgRoll);
 bool32 AI_IsDamagedByRecoil(u32 battler);
 u32 GetNoOfHitsToKO(u32 dmg, s32 hp);
 u32 GetNoOfHitsToKOBattlerDmg(u32 dmg, u32 battlerDef);
@@ -187,7 +194,7 @@ void IncreaseSleepScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score);
 void IncreaseConfusionScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score);
 void IncreaseFrostbiteScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score);
 
-s32 AI_CalcPartyMonDamage(u32 move, u32 battlerAtk, u32 battlerDef, struct BattlePokemon switchinCandidate, bool8 isPartyMonAttacker);
+s32 AI_CalcPartyMonDamage(u32 move, u32 battlerAtk, u32 battlerDef, struct BattlePokemon switchinCandidate, bool32 isPartyMonAttacker, u32 dmgRoll);
 s32 AI_CheckMoveEffects(u32 battlerAtk, u32 battlerDef, u32 move, s32 score, struct AiLogicData *aiData, u32 predictedMove, bool32 isDoubleBattle);
 s32 AI_TryToClearStats(u32 battlerAtk, u32 battlerDef, bool32 isDoubleBattle);
 bool32 AI_ShouldCopyStatChanges(u32 battlerAtk, u32 battlerDef);
