@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(gMovesInfo[MOVE_HOWL].effect == EFFECT_ATTACK_UP_USER_ALLY);
 }
 
-SINGLE_BATTLE_TEST("Howl raises user's Attack", s16 damage)
+SINGLE_BATTLE_TEST("Howl raises user's Attack by 1 stage", s16 damage)
 {
     bool32 raiseAttack;
     PARAMETRIZE { raiseAttack = FALSE; }
@@ -31,7 +31,7 @@ SINGLE_BATTLE_TEST("Howl raises user's Attack", s16 damage)
     }
 }
 
-DOUBLE_BATTLE_TEST("Howl raises user's and partner's Attack", s16 damageLeft, s16 damageRight)
+DOUBLE_BATTLE_TEST("Howl raises user's and partner's Attack by 1 stage", s16 damageLeft, s16 damageRight)
 {
     bool32 raiseAttack;
     PARAMETRIZE { raiseAttack = FALSE; }

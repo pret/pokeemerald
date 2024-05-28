@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(gMovesInfo[MOVE_SAND_ATTACK].effect == EFFECT_ACCURACY_DOWN);
 }
 
-SINGLE_BATTLE_TEST("Sand Attack lowers Accuracy")
+SINGLE_BATTLE_TEST("Sand Attack lowers Accuracy by 1 stage")
 {
     ASSUME(gMovesInfo[MOVE_SCRATCH].accuracy == 100);
     PASSES_RANDOMLY(gMovesInfo[MOVE_SCRATCH].accuracy * 3 / 4, 100, RNG_ACCURACY);

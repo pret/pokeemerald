@@ -4,9 +4,10 @@
 ASSUMPTIONS
 {
     ASSUME(gItemsInfo[ITEM_QUICK_CLAW].holdEffect == HOLD_EFFECT_QUICK_CLAW);
+    ASSUME(gItemsInfo[ITEM_QUICK_CLAW].holdEffectParam == 20);
 }
 
-SINGLE_BATTLE_TEST("Quick Claw activates 10% of the time")
+SINGLE_BATTLE_TEST("Quick Claw activates 20% of the time")
 {
     PASSES_RANDOMLY(2, 10, RNG_QUICK_CLAW);
     GIVEN {

@@ -46,3 +46,16 @@ AI_SINGLE_BATTLE_TEST("AI will choose a priority move if it is slower then the t
         MESSAGE("Foe Wobbuffet fainted!");
     }
 }
+
+AI_SINGLE_BATTLE_TEST("AI sees Loaded Dice damage increase from multi hit moves")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_WOBBUFFET) { HP(44); }
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_LOADED_DICE); Moves(MOVE_SEED_BOMB, MOVE_BULLET_SEED); }
+    } WHEN {
+        TURN { EXPECT_MOVE(opponent, MOVE_BULLET_SEED); }
+    } SCENE {
+        MESSAGE("Wobbuffet fainted!");
+    }
+}

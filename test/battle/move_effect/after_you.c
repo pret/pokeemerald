@@ -51,3 +51,6 @@ DOUBLE_BATTLE_TEST("After You does nothing if the target has already moved")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerRight);
     }
 }
+
+TO_DO_BATTLE_TEST("After You doesn't fail if the turner remains the same after After You (Gen8+)");
+TO_DO_BATTLE_TEST("After You ignores the effects of Quash");

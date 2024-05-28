@@ -13865,10 +13865,12 @@ Move_MAGIC_POWDER::
 	end
 
 Move_DRAGON_DARTS::
+	loadspritegfx ANIM_TAG_DREEPY_SHINY
 	loadspritegfx ANIM_TAG_DREEPY
+        loadspritegfx ANIM_TAG_AIR_WAVE
 	loadspritegfx ANIM_TAG_EXPLOSION
 	playsewithpan SE_FALL, SOUND_PAN_ATTACKER
-	createsprite gDreepyMissileTemplate, ANIM_TARGET, 2, 0x0, 0x0, 0x19
+	createdragondartsprite ANIM_TARGET, 2, 0x0, 0x0, 0x19
 	delay 0x19
 	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 16, 1

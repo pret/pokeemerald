@@ -91,8 +91,9 @@ SINGLE_BATTLE_TEST("Steel Beam hp loss is prevented by Magic Guard")
     } WHEN {
         TURN { MOVE(player, MOVE_STEEL_BEAM); }
     } SCENE {
-        NOT HP_BAR(player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STEEL_BEAM, player);
+        HP_BAR(opponent);
+        NOT HP_BAR(player);
     }
 }
 

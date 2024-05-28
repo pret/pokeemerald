@@ -444,6 +444,7 @@ struct SpeciesInfo /*0x8C*/
             // Move Data
  /* 0x80 */ const struct LevelUpMove *levelUpLearnset;
  /* 0x84 */ const u16 *teachableLearnset;
+            const u16 *eggMoveLearnset;
  /* 0x88 */ const struct Evolution *evolutions;
  /* 0x84 */ const u16 *formSpeciesIdTable;
  /* 0x84 */ const struct FormChange *formChangeTable;
@@ -565,6 +566,66 @@ struct Ability
     u8 failsOnImposter:1; // doesn't work on an Imposter mon; when can we actually use this?
 };
 
+enum {
+    AFFINE_NONE,
+    AFFINE_TURN_UP,
+    AFFINE_TURN_UP_AND_DOWN,
+    AFFINE_TURN_DOWN,
+    AFFINE_TURN_DOWN_SLOW,
+    AFFINE_TURN_DOWN_SLIGHT,
+    AFFINE_TURN_UP_HIGH,
+    AFFINE_UNUSED_1,
+    AFFINE_UNUSED_2,
+    AFFINE_UNUSED_3,
+    NUM_MON_AFFINES,
+};
+
+// The animation the Pokémon does during the feeding scene depends on their nature.
+// The below values are offsets into sMonPokeblockAnims of the animation data for that nature.
+#define ANIM_HARDY   0
+#define ANIM_LONELY  (ANIM_HARDY + 3)
+#define ANIM_BRAVE   (ANIM_LONELY + 1)
+#define ANIM_ADAMANT (ANIM_BRAVE + 1)
+#define ANIM_NAUGHTY (ANIM_ADAMANT + 5)
+#define ANIM_BOLD    (ANIM_NAUGHTY + 3)
+#define ANIM_DOCILE  (ANIM_BOLD + 2)
+#define ANIM_RELAXED (ANIM_DOCILE + 1)
+#define ANIM_IMPISH  (ANIM_RELAXED + 2)
+#define ANIM_LAX     (ANIM_IMPISH + 1)
+#define ANIM_TIMID   (ANIM_LAX + 1)
+#define ANIM_HASTY   (ANIM_TIMID + 5)
+#define ANIM_SERIOUS (ANIM_HASTY + 2)
+#define ANIM_JOLLY   (ANIM_SERIOUS + 1)
+#define ANIM_NAIVE   (ANIM_JOLLY + 1)
+#define ANIM_MODEST  (ANIM_NAIVE + 4)
+#define ANIM_MILD    (ANIM_MODEST + 3)
+#define ANIM_QUIET   (ANIM_MILD + 1)
+#define ANIM_BASHFUL (ANIM_QUIET + 2)
+#define ANIM_RASH    (ANIM_BASHFUL + 3)
+#define ANIM_CALM    (ANIM_RASH + 3)
+#define ANIM_GENTLE  (ANIM_CALM + 1)
+#define ANIM_SASSY   (ANIM_GENTLE + 1)
+#define ANIM_CAREFUL (ANIM_SASSY + 1)
+#define ANIM_QUIRKY  (ANIM_CAREFUL + 5)
+
+// In palace double battles, Pokémon have a target preference depending on nature
+#define PALACE_TARGET_STRONGER 0
+#define PALACE_TARGET_WEAKER   1
+#define PALACE_TARGET_RANDOM   2
+
+struct NatureInfo
+{
+    const u8 *name;
+    u8 statUp;
+    u8 statDown;
+    u8 backAnim;
+    u8 pokeBlockAnim[2];
+    u8 battlePalacePercents[4];
+    u8 battlePalaceFlavorText;
+    u8 battlePalaceSmokescreen;
+    const u8 *natureGirlMessage;
+};
+
 #define SPINDA_SPOT_WIDTH 16
 #define SPINDA_SPOT_HEIGHT 16
 
@@ -630,9 +691,9 @@ extern const u8 gPPUpAddValues[];
 extern const u8 gStatStageRatios[MAX_STAT_STAGE + 1][2];
 extern const u16 gUnionRoomFacilityClasses[];
 extern const struct SpriteTemplate gBattlerSpriteTemplates[];
-extern const s8 gNatureStatTable[][5];
 extern const u32 sExpCandyExperienceTable[];
 extern const struct Ability gAbilitiesInfo[];
+extern const struct NatureInfo gNaturesInfo[];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);
@@ -715,6 +776,7 @@ u16 GetSpeciesHeight(u16 species);
 u16 GetSpeciesWeight(u16 species);
 const struct LevelUpMove *GetSpeciesLevelUpLearnset(u16 species);
 const u16 *GetSpeciesTeachableLearnset(u16 species);
+const u16 *GetSpeciesEggMoves(u16 species);
 const struct Evolution *GetSpeciesEvolutions(u16 species);
 const u16 *GetSpeciesFormTable(u16 species);
 const struct FormChange *GetSpeciesFormChanges(u16 species);
