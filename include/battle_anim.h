@@ -537,6 +537,9 @@ extern const union AnimCmd *const gAnims_WillOWispOrb[];
 extern const union AnimCmd *const gAnims_FirePlume[];
 
 // battle_anim_dragon.c
+extern const union AnimCmd *const gAnims_DreepyMissilePlayer[];
+extern const union AnimCmd *const gAnims_DreepyMissileOpponent[];
+extern const union AnimCmd *const gAnims_DreepyMissileOpponentNotDrag[];
 extern const union AnimCmd *const gAnims_DragonBreathFire[];
 extern const union AnimCmd *const gAnims_DragonRageFirePlume[];
 extern const union AffineAnimCmd *const gAffineAnims_DragonRageFire[];
