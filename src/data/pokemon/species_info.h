@@ -24,7 +24,7 @@
     .followerShinyPalette = DEFAULT_2(NULL, __VA_ARGS__),
 #else
 #define FOLLOWER_PAL(...)
-#endif
+#endif //OW_FOLLOWERS_SHARE_PALETTE == FALSE
 
 #define FOLLOWER(picTable, _size, shadow, _tracks, ...)                                     \
 .followerData = {                                                                           \
@@ -48,7 +48,7 @@
     FOLLOWER_PAL(__VA_ARGS__)
 #else
 #define FOLLOWER(picTable, _size, shadow, _tracks, ...)
-#endif
+#endif //OW_FOLLOWERS_ENABLED
 
 // Maximum value for a female Pokémon is 254 (MON_FEMALE) which is 100% female.
 // 255 (MON_GENDERLESS) is reserved for genderless Pokémon.

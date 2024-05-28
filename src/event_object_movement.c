@@ -529,8 +529,8 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     // Gen VIII
     #ifdef ITEM_STRANGE_BALL
     {gObjectEventPal_StrangeBall,           OBJ_EVENT_PAL_TAG_BALL_STRANGE},
-    #endif
-#endif
+    #endif //ITEM_STRANGE_BALL
+#endif //W_MON_POKEBALLS
     {gObjectEventPal_Substitute,            OBJ_EVENT_PAL_TAG_SUBSTITUTE},
     {gObjectEventPaletteEmotes,             OBJ_EVENT_PAL_TAG_EMOTES},
 #ifdef BUGFIX
@@ -1673,7 +1673,7 @@ u8 SpawnSpecialObjectEventParameterized(u16 graphicsId, u8 movementBehavior, u8 
     y -= MAP_OFFSET;
     objectEventTemplate.localId = localId;
     objectEventTemplate.graphicsId = graphicsId;
-    // objectEventTemplate.kind = OBJ_KIND_NORMAL;
+    objectEventTemplate.kind = OBJ_KIND_NORMAL;
     objectEventTemplate.x = x;
     objectEventTemplate.y = y;
     objectEventTemplate.elevation = elevation;
@@ -1837,7 +1837,7 @@ struct Pokemon *GetFirstLiveMon(void)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if (gPlayerParty[i].hp > 0 && !(gPlayerParty[i].box.isEgg || gPlayerParty[i].box.isBadEgg))
-        return &gPlayerParty[i];
+            return &gPlayerParty[i];
     }
     return NULL;
 }
@@ -9620,11 +9620,6 @@ static void (*const sGroundEffectFuncs[])(struct ObjectEvent *objEvent, struct S
     GroundEffect_HotSprings,            // GROUND_EFFECT_FLAG_HOT_SPRINGS
     GroundEffect_Seaweed                // GROUND_EFFECT_FLAG_SEAWEED
 };
-
-static void UNUSED GroundEffect_Shadow(struct ObjectEvent *objEvent, struct Sprite *sprite)
-{
-    SetUpShadow(objEvent, sprite);
-}
 
 static void DoFlaggedGroundEffects(struct ObjectEvent *objEvent, struct Sprite *sprite, u32 flags)
 {
