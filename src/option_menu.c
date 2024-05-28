@@ -15,6 +15,7 @@
 #include "window.h"
 #include "gba/m4a_internal.h"
 #include "constants/rgb.h"
+#include "ui_options_menu.h"
 
 #define tMenuSelection data[0]
 #define tTextSpeed data[1]
@@ -156,107 +157,115 @@ static void VBlankCB(void)
 
 void CB2_InitOptionMenu(void)
 {
-    switch (gMain.state)
+    if (TRUE)
     {
-    default:
-    case 0:
-        SetVBlankCallback(NULL);
-        gMain.state++;
-        break;
-    case 1:
-        DmaClearLarge16(3, (void *)(VRAM), VRAM_SIZE, 0x1000);
-        DmaClear32(3, OAM, OAM_SIZE);
-        DmaClear16(3, PLTT, PLTT_SIZE);
-        SetGpuReg(REG_OFFSET_DISPCNT, 0);
-        ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(0, sOptionMenuBgTemplates, ARRAY_COUNT(sOptionMenuBgTemplates));
-        ChangeBgX(0, 0, BG_COORD_SET);
-        ChangeBgY(0, 0, BG_COORD_SET);
-        ChangeBgX(1, 0, BG_COORD_SET);
-        ChangeBgY(1, 0, BG_COORD_SET);
-        ChangeBgX(2, 0, BG_COORD_SET);
-        ChangeBgY(2, 0, BG_COORD_SET);
-        ChangeBgX(3, 0, BG_COORD_SET);
-        ChangeBgY(3, 0, BG_COORD_SET);
-        InitWindows(sOptionMenuWinTemplates);
-        DeactivateAllTextPrinters();
-        SetGpuReg(REG_OFFSET_WIN0H, 0);
-        SetGpuReg(REG_OFFSET_WIN0V, 0);
-        SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0);
-        SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_CLR);
-        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_DARKEN);
-        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
-        SetGpuReg(REG_OFFSET_BLDY, 4);
-        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
-        ShowBg(0);
-        ShowBg(1);
-        gMain.state++;
-        break;
-    case 2:
-        ResetPaletteFade();
-        ScanlineEffect_Stop();
-        ResetTasks();
-        ResetSpriteData();
-        gMain.state++;
-        break;
-    case 3:
-        LoadBgTiles(1, GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->tiles, 0x120, 0x1A2);
-        gMain.state++;
-        break;
-    case 4:
-        LoadPalette(sOptionMenuBg_Pal, BG_PLTT_ID(0), sizeof(sOptionMenuBg_Pal));
-        LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->pal, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
-        gMain.state++;
-        break;
-    case 5:
-        LoadPalette(sOptionMenuText_Pal, BG_PLTT_ID(1), sizeof(sOptionMenuText_Pal));
-        gMain.state++;
-        break;
-    case 6:
-        PutWindowTilemap(WIN_HEADER);
-        DrawHeaderText();
-        gMain.state++;
-        break;
-    case 7:
-        gMain.state++;
-        break;
-    case 8:
-        PutWindowTilemap(WIN_OPTIONS);
-        DrawOptionMenuTexts();
-        gMain.state++;
-    case 9:
-        DrawBgWindowFrames();
-        gMain.state++;
-        break;
-    case 10:
-    {
-        u8 taskId = CreateTask(Task_OptionMenuFadeIn, 0);
-
-        gTasks[taskId].tMenuSelection = 0;
-        gTasks[taskId].tTextSpeed = gSaveBlock2Ptr->optionsTextSpeed;
-        gTasks[taskId].tBattleSceneOff = gSaveBlock2Ptr->optionsBattleSceneOff;
-        gTasks[taskId].tBattleStyle = gSaveBlock2Ptr->optionsBattleStyle;
-        gTasks[taskId].tSound = gSaveBlock2Ptr->optionsSound;
-        gTasks[taskId].tButtonMode = gSaveBlock2Ptr->optionsButtonMode;
-        gTasks[taskId].tWindowFrameType = gSaveBlock2Ptr->optionsWindowFrameType;
-
-        TextSpeed_DrawChoices(gTasks[taskId].tTextSpeed);
-        BattleScene_DrawChoices(gTasks[taskId].tBattleSceneOff);
-        BattleStyle_DrawChoices(gTasks[taskId].tBattleStyle);
-        Sound_DrawChoices(gTasks[taskId].tSound);
-        ButtonMode_DrawChoices(gTasks[taskId].tButtonMode);
-        FrameType_DrawChoices(gTasks[taskId].tWindowFrameType);
-        HighlightOptionMenuItem(gTasks[taskId].tMenuSelection);
-
-        CopyWindowToVram(WIN_OPTIONS, COPYWIN_FULL);
-        gMain.state++;
-        break;
-    }
-    case 11:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-        SetVBlankCallback(VBlankCB);
-        SetMainCallback2(MainCB2);
+        CB2_InitOptionsMenu();
         return;
+    }
+    else
+    {
+        switch (gMain.state)
+        {
+        default:
+        case 0:
+            SetVBlankCallback(NULL);
+            gMain.state++;
+            break;
+        case 1:
+            DmaClearLarge16(3, (void *)(VRAM), VRAM_SIZE, 0x1000);
+            DmaClear32(3, OAM, OAM_SIZE);
+            DmaClear16(3, PLTT, PLTT_SIZE);
+            SetGpuReg(REG_OFFSET_DISPCNT, 0);
+            ResetBgsAndClearDma3BusyFlags(0);
+            InitBgsFromTemplates(0, sOptionMenuBgTemplates, ARRAY_COUNT(sOptionMenuBgTemplates));
+            ChangeBgX(0, 0, BG_COORD_SET);
+            ChangeBgY(0, 0, BG_COORD_SET);
+            ChangeBgX(1, 0, BG_COORD_SET);
+            ChangeBgY(1, 0, BG_COORD_SET);
+            ChangeBgX(2, 0, BG_COORD_SET);
+            ChangeBgY(2, 0, BG_COORD_SET);
+            ChangeBgX(3, 0, BG_COORD_SET);
+            ChangeBgY(3, 0, BG_COORD_SET);
+            InitWindows(sOptionMenuWinTemplates);
+            DeactivateAllTextPrinters();
+            SetGpuReg(REG_OFFSET_WIN0H, 0);
+            SetGpuReg(REG_OFFSET_WIN0V, 0);
+            SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0);
+            SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_CLR);
+            SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_DARKEN);
+            SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+            SetGpuReg(REG_OFFSET_BLDY, 4);
+            SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
+            ShowBg(0);
+            ShowBg(1);
+            gMain.state++;
+            break;
+        case 2:
+            ResetPaletteFade();
+            ScanlineEffect_Stop();
+            ResetTasks();
+            ResetSpriteData();
+            gMain.state++;
+            break;
+        case 3:
+            LoadBgTiles(1, GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->tiles, 0x120, 0x1A2);
+            gMain.state++;
+            break;
+        case 4:
+            LoadPalette(sOptionMenuBg_Pal, BG_PLTT_ID(0), sizeof(sOptionMenuBg_Pal));
+            LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->pal, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
+            gMain.state++;
+            break;
+        case 5:
+            LoadPalette(sOptionMenuText_Pal, BG_PLTT_ID(1), sizeof(sOptionMenuText_Pal));
+            gMain.state++;
+            break;
+        case 6:
+            PutWindowTilemap(WIN_HEADER);
+            DrawHeaderText();
+            gMain.state++;
+            break;
+        case 7:
+            gMain.state++;
+            break;
+        case 8:
+            PutWindowTilemap(WIN_OPTIONS);
+            DrawOptionMenuTexts();
+            gMain.state++;
+        case 9:
+            DrawBgWindowFrames();
+            gMain.state++;
+            break;
+        case 10:
+        {
+            u8 taskId = CreateTask(Task_OptionMenuFadeIn, 0);
+
+            gTasks[taskId].tMenuSelection = 0;
+            gTasks[taskId].tTextSpeed = gSaveBlock2Ptr->optionsTextSpeed;
+            gTasks[taskId].tBattleSceneOff = gSaveBlock2Ptr->optionsBattleSceneOff;
+            gTasks[taskId].tBattleStyle = gSaveBlock2Ptr->optionsBattleStyle;
+            gTasks[taskId].tSound = gSaveBlock2Ptr->optionsSound;
+            gTasks[taskId].tButtonMode = gSaveBlock2Ptr->optionsButtonMode;
+            gTasks[taskId].tWindowFrameType = gSaveBlock2Ptr->optionsWindowFrameType;
+
+            TextSpeed_DrawChoices(gTasks[taskId].tTextSpeed);
+            BattleScene_DrawChoices(gTasks[taskId].tBattleSceneOff);
+            BattleStyle_DrawChoices(gTasks[taskId].tBattleStyle);
+            Sound_DrawChoices(gTasks[taskId].tSound);
+            ButtonMode_DrawChoices(gTasks[taskId].tButtonMode);
+            FrameType_DrawChoices(gTasks[taskId].tWindowFrameType);
+            HighlightOptionMenuItem(gTasks[taskId].tMenuSelection);
+
+            CopyWindowToVram(WIN_OPTIONS, COPYWIN_FULL);
+            gMain.state++;
+            break;
+        }
+        case 11:
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+            SetVBlankCallback(VBlankCB);
+            SetMainCallback2(MainCB2);
+            return;
+        }
     }
 }
 

@@ -3991,6 +3991,8 @@ u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
     bool8 reroll;
     int counter = 0;
 
+    DebugPrintf("GetAbilityBySpecies");
+
     do
     {
         reroll = FALSE;
@@ -4045,6 +4047,7 @@ u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
         }
     } while (reroll);
 
+    DebugPrintf("gLastUsedAbility = %d", gLastUsedAbility);
     return gLastUsedAbility;
 }
 
