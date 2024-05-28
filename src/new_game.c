@@ -111,7 +111,7 @@ void SetDefaultOptions(void)
     gSaveBlock2Ptr->modeDuplicates = 1;
 
     //reset duplicate check data
-    for (i=0; i<9; i++)
+    for (i=0; i<8; i++)
     {
         gSaveBlock2Ptr->uniqueSpecies[i] = 0;
     }

@@ -55,13 +55,10 @@
 
 struct ModeMenuState
 {
-    // Save the callback to run when we exit: i.e. where do we want to go after closing the menu
     MainCallback savedCallback;
-    // We will use this later to track some loading state
     u8 loadState;
 };
 
-// GF window system passes window IDs around, so define this to avoid using magic numbers everywhere
 enum WindowIds
 {
     WIN_TOPBAR,
@@ -69,7 +66,6 @@ enum WindowIds
     WIN_DESCRIPTION
 };
 
-// Menu items to browse through the list of options
 enum MenuItems
 {
     MENUITEM_MAIN_DEFAULTS,
@@ -83,12 +79,6 @@ enum MenuItems
     MENUITEM_MAIN_COUNT,
 };
 
-/*
- * Both of these can be pointers that live in EWRAM -- allocating the actual data on the heap will save precious WRAM
- * space since none of this data matters outside the context of our menu. We can easily cleanup when we're done. It's
- * worth noting that every time the game re-loads into the overworld, the heap gets nuked from orbit. However, it is
- * still good practice to clean up after oneself, so we will be sure to free everything before exiting.
- */
 static EWRAM_DATA struct ModeMenuState *sModeMenuState = NULL;
 
 static const struct BgTemplate sModeMenuBgTemplates[] =
@@ -202,7 +192,6 @@ static const u16 sScrollBgPalette[] = INCBIN_U16("graphics/ui_mode_menu/scroll_t
 
 struct ModeMenu
 {
-    u8 submenu;
     u8 sel[MENUITEM_MAIN_COUNT];
     int menuCursor;
     int visibleCursor;
@@ -276,7 +265,7 @@ struct MainMenu
 };
 
 // Menu left side option names text
-static const u8 sText_Defaults[]    = _("DEFAULTS");
+static const u8 sText_Defaults[]    = _("PRESETS");
 static const u8 sText_BattleMode[]  = _("BATTLE MODE");
 static const u8 sText_Randomizer[]  = _("RANDOMIZER");
 static const u8 sText_XPShare[]     = _("XP SHARE");
@@ -356,11 +345,7 @@ static const u8 *const OptionTextDescription(void)
     u8 menuItem = sOptions->menuCursor;
     u8 selection;
 
-    //if (!CheckConditions(menuItem))
-    //    return sModeMenuItemDescriptionsDisabledMain[menuItem];
     selection = sOptions->sel[menuItem];
-    //if (menuItem == MENUITEM_MAIN_DEFAULTS || menuItem == MENUITEM_MAIN_DUPLICATES)
-    //    selection = 0;
     return sModeMenuItemDescriptionsMain[menuItem][selection];
 }
 
@@ -484,9 +469,6 @@ static void ModeMenu_SetupCB(void)
         sOptions->sel[MENUITEM_MAIN_STAT_CHANGER] = gSaveBlock2Ptr->modeStatChanger;
         sOptions->sel[MENUITEM_MAIN_LEGENDARIES]  = gSaveBlock2Ptr->modeLegendaries;
         sOptions->sel[MENUITEM_MAIN_DUPLICATES]   = gSaveBlock2Ptr->modeDuplicates;
-
-        //sOptions->submenu = MENU_MAIN;
-
         gMain.state++;
         break;
     case 7:
@@ -648,7 +630,7 @@ static void HighlightModeMenuItem(void)
     SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(cursor * Y_DIFF + 24, cursor * Y_DIFF + 40));
 }
 
-static bool8 ModeMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spritesheets, and palettes
+static bool8 ModeMenu_LoadGraphics(void) //Load all the tilesets, tilemaps, spritesheets, and palettes
 {
     switch (sOptions->gfxLoadState)
     {
@@ -693,7 +675,6 @@ static void Task_ModeMenuWaitFadeIn(u8 taskId)
     if (!gPaletteFade.active)
     {
         gTasks[taskId].func = Task_ModeMenuMainInput;
-        // WTF Archie???
         SetGpuReg(REG_OFFSET_WIN0H, 0); // Idk man Im just trying to stop this stupid graphical bug from happening dont judge me
         SetGpuReg(REG_OFFSET_WIN0V, 0);
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ);
@@ -724,12 +705,6 @@ static void Task_ModeMenuMainInput(u8 taskId)
     else if (JOY_NEW(B_BUTTON))
     {
         gTasks[taskId].func = Task_ModeMenuSave;
-        /*
-        //PlaySE(SE_PC_OFF);
-        // Fade screen to black
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        // Replace ourself with the "exit gracefully" task function
-        gTasks[taskId].func = Task_ModeMenuWaitFadeAndExitGracefully;*/
     }
     else if (JOY_REPEAT(DPAD_DOWN))
     {
@@ -989,8 +964,6 @@ static int ProcessInput_Options_Three(int selection)
 {
     return XOptions_ProcessInput(3, selection);
 }
-
-// #################### continue?
 
 // Draw Choices functions ****GENERIC****
 static void DrawModeMenuChoice(const u8 *text, u8 x, u8 y, u8 style, bool8 active)
