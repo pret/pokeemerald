@@ -3282,9 +3282,6 @@ static void Task_DeoxysRockInteraction(u8 taskId)
     }
 }
 
-// duplicate of event_object_movement
-#define OBJ_EVENT_PAL_TAG_BIRTH_ISLAND_STONE      0x111F
-
 static void ChangeDeoxysRockLevel(u8 rockLevel)
 {
     u8 paletteNum = IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_BIRTH_ISLAND_STONE);

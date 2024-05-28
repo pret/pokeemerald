@@ -152,9 +152,6 @@ static const union AnimCmd *const sAnims_FallingFossil[] =
     sAnim_FallingFossil,
 };
 
-// Duplicate of event_object_movement
-#define OBJ_EVENT_PAL_TAG_NPC_1                   0x1103
-
 static const struct SpriteTemplate sSpriteTemplate_FallingFossil =
 {
     .tileTag = TAG_NONE,

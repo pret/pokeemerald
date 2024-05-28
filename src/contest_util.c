@@ -2493,12 +2493,6 @@ void SetLinkContestPlayerGfx(void)
     }
 }
 
-// copied from event_object_movement
-#define OBJ_EVENT_PAL_TAG_BRENDAN                 0x1100
-#define OBJ_EVENT_PAL_TAG_MAY                     0x1110
-#define OBJ_EVENT_PAL_TAG_RS_BRENDAN              0x1122
-#define OBJ_EVENT_PAL_TAG_RS_MAY                  0x1123
-
 void LoadLinkContestPlayerPalettes(void)
 {
     int i;

@@ -2861,10 +2861,10 @@ u8 LoadPlayerObjectEventPalette(u8 gender)
     {
         default:
         case MALE:
-            paletteTag = FLDEFF_PAL_TAG_BRENDAN;
+            paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN;
             break;
         case FEMALE:
-            paletteTag = FLDEFF_PAL_TAG_MAY;
+            paletteTag = OBJ_EVENT_PAL_TAG_MAY;
             break;
     }
     return LoadObjectEventPalette(paletteTag);
