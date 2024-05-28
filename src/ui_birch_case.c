@@ -179,7 +179,7 @@ static u32 ReturnRandomSpeciesByPokeballIndex(u32 index)
                 }
             }
             //check for duplicates within the case
-            for (i=0; i<9; i++) // 9 slots in birch case
+            for (i=0; i<8; i++) // 9 slots in birch case, checking against the first 8
             {
                 DebugPrintf("slot = %d with species %d", i, gSaveBlock2Ptr->uniqueSpecies[i]);
                 if (species == gSaveBlock2Ptr->uniqueSpecies[i] && i != index)

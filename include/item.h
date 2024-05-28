@@ -85,6 +85,7 @@ void HideHeaderBox(void);
 u16 RandomItemId(u16 itemId);
 u16 RandomItem(void);
 u16 RandomItemHidden(void);
+u16 GetRandomHeldItemOpponent(void);
 
 /* Expands to:
  * enum

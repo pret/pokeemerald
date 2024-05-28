@@ -2271,6 +2271,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             u32 otIdType = OT_ID_RANDOM_NO_SHINY;
             u32 fixedOtId = 0;
             u32 ability = 0;
+            u16 item = 0;
 
             if (trainer->doubleBattle == TRUE)
                 personalityValue = 0x80;
@@ -2321,7 +2322,16 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                     CreateMon(&party[i], GetSpeciesRandomNotSeeded(partyData[i].species), monLevel, 0, TRUE, personalityValue, otIdType, fixedOtId);
                 }
             }
-            SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
+
+            //get random item for opponent mons
+            if(!isPlayer)
+            {
+                item = GetRandomHeldItemOpponent();
+                DebugPrintf("Item = %d", item);
+                SetMonData(&party[i], MON_DATA_HELD_ITEM, &item);
+            }
+            else
+                SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
 
             CustomTrainerPartyAssignMoves(&party[i], &partyData[i], isPlayer);
             SetMonData(&party[i], MON_DATA_IVS, &(partyData[i].iv));
