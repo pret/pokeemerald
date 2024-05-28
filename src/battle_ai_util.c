@@ -917,48 +917,21 @@ static u32 AI_GetEffectiveness(uq4_12_t multiplier)
 */
 s32 AI_WhoStrikesFirst(u32 battlerAI, u32 battler2, u32 moveConsidered)
 {
-    u32 fasterAI = 0, fasterPlayer = 0, i;
     s8 prioAI = 0;
     s8 prioBattler2 = 0;
-    u16 *battler2Moves = GetMovesArray(battler2);
-
-    // Check move priorities first.
     prioAI = GetMovePriority(battlerAI, moveConsidered);
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        prioBattler2 = GetMovePriority(battler2, battler2Moves[i]);
-        if (battler2Moves[i] == MOVE_NONE || battler2Moves[i] == MOVE_UNAVAILABLE
-            || (prioBattler2 > prioAI && !CanIndexMoveFaintTarget(battler2, battlerAI, i , 2)))
-            continue;
 
-        if (prioAI > prioBattler2)
-            fasterAI++;
-        else if (prioBattler2 > prioAI)
-            fasterPlayer++;
-    }
-
-    if (fasterAI > fasterPlayer)
-    {
+    if (prioAI > prioBattler2)
         return AI_IS_FASTER;
-    }
-    else if (fasterAI < fasterPlayer)
-    {
-        return AI_IS_SLOWER;
-    }
+
+    if (GetWhichBattlerFasterArgs(battlerAI, battler2, TRUE,
+                                  AI_DATA->abilities[battlerAI], AI_DATA->abilities[battler2],
+                                  AI_DATA->holdEffects[battlerAI], AI_DATA->holdEffects[battler2],
+                                  AI_DATA->speedStats[battlerAI], AI_DATA->speedStats[battler2],
+                                  prioAI, prioBattler2) == 1)
+        return AI_IS_FASTER;
     else
-    {
-        if (prioAI > prioBattler2)
-            return AI_IS_FASTER;    // if we didn't know any of battler 2's moves to compare priorities, assume they don't have a prio+ move
-        // Priorities are the same(at least comparing to moves the AI is aware of), decide by speed.
-        if (GetWhichBattlerFasterArgs(battlerAI, battler2, TRUE,
-                                      AI_DATA->abilities[battlerAI], AI_DATA->abilities[battler2],
-                                      AI_DATA->holdEffects[battlerAI], AI_DATA->holdEffects[battler2],
-                                      AI_DATA->speedStats[battlerAI], AI_DATA->speedStats[battler2],
-                                      prioAI, prioBattler2) == 1)
-            return AI_IS_FASTER;
-        else
-            return AI_IS_SLOWER;
-    }
+        return AI_IS_SLOWER;
 }
 
 // Check if target has means to faint ai mon.
@@ -1657,19 +1630,14 @@ bool32 ShouldLowerDefense(u32 battlerAtk, u32 battlerDef, u32 defAbility)
 
 bool32 ShouldLowerSpeed(u32 battlerAtk, u32 battlerDef, u32 defAbility)
 {
-    if (AI_STRIKES_FIRST(battlerAtk, battlerDef, AI_THINKING_STRUCT->moveConsidered)
-            && (AI_THINKING_STRUCT->aiFlags[battlerAtk] & AI_FLAG_TRY_TO_FAINT)
-            && CanAIFaintTarget(battlerAtk, battlerDef, 0))
-        return FALSE; // Don't bother lowering stats if can kill enemy.
+    if (defAbility == ABILITY_CONTRARY
+     || defAbility == ABILITY_CLEAR_BODY
+     || defAbility == ABILITY_FULL_METAL_BODY
+     || defAbility == ABILITY_WHITE_SMOKE
+     || AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_CLEAR_AMULET)
+        return FALSE;
 
-    if (!AI_STRIKES_FIRST(battlerAtk, battlerDef, AI_THINKING_STRUCT->moveConsidered)
-      && defAbility != ABILITY_CONTRARY
-      && defAbility != ABILITY_CLEAR_BODY
-      && defAbility != ABILITY_FULL_METAL_BODY
-      && defAbility != ABILITY_WHITE_SMOKE
-      && AI_DATA->holdEffects[battlerDef] != HOLD_EFFECT_CLEAR_AMULET)
-        return TRUE;
-    return FALSE;
+    return (!AI_STRIKES_FIRST(battlerAtk, battlerDef, AI_THINKING_STRUCT->moveConsidered));
 }
 
 bool32 ShouldLowerSpAtk(u32 battlerAtk, u32 battlerDef, u32 defAbility)
