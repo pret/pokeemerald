@@ -109,12 +109,6 @@ void SetDefaultOptions(void)
     gSaveBlock2Ptr->modeStatChanger = 0;
     gSaveBlock2Ptr->modeLegendaries = 0;
     gSaveBlock2Ptr->modeDuplicates = 1;
-
-    //reset duplicate check data
-    for (i=0; i<8; i++)
-    {
-        gSaveBlock2Ptr->uniqueSpecies[i] = 0;
-    }
 }
 
 static void ClearPokedexFlags(void)
@@ -226,8 +220,8 @@ void NewGameInitData(void)
 
 static void ResetMiniGamesRecords(void)
 {
-    //CpuFill16(0, &gSaveBlock2Ptr->berryCrush, sizeof(struct BerryCrush));
-    //SetBerryPowder(&gSaveBlock2Ptr->berryCrush.berryPowderAmount, 0);
+    CpuFill16(0, &gSaveBlock2Ptr->berryCrush, sizeof(struct BerryCrush));
+    SetBerryPowder(&gSaveBlock2Ptr->berryCrush.berryPowderAmount, 0);
     ResetPokemonJumpRecords();
     CpuFill16(0, &gSaveBlock2Ptr->berryPick, sizeof(struct BerryPickingResults));
 }

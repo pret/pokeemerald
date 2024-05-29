@@ -151,6 +151,26 @@ static const struct MonChoiceData sStarterChoices[9] =
     [BALL_BOTTOM_SECOND]    = {SPECIES_BULBASAUR, 5, ITEM_POTION, BALL_NET, NUM_NATURES, 3, 0, {0, 0, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {0, 0, 0, 0},   0, NUMBER_OF_MON_TYPES,0},
 };
 
+//==========EWRAM==========//
+static EWRAM_DATA struct MenuResources *sBirchCaseDataPtr = NULL;
+static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
+static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
+static EWRAM_DATA u8 sMonChosenAlready[9] = {0};
+static EWRAM_DATA u16 sAlreadyRolledSpecies[9] = {0};
+
+//==========STATIC=DEFINES==========//
+static void BirchCaseRunSetup(void);
+static bool8 BirchCaseDoGfxSetup(void);
+static bool8 BirchCase_InitBgs(void);
+static void BirchCaseFadeAndBail(void);
+static bool8 BirchCaseLoadGraphics(void);
+static void BirchCase_InitWindows(void);
+static void PrintTextToBottomBar(u8 textId);
+static void Task_BirchCaseWaitFadeIn(u8 taskId);
+static void Task_BirchCaseMain(u8 taskId);
+static void SampleUi_DrawMonIcon(u16 speciesId);
+static void Task_DelayedSpriteLoad(u8 taskId);
+
 static u32 ReturnRandomSpeciesByPokeballIndex(u32 index)
 {   
     u16 species = sStarterChoices[index].species;
@@ -179,10 +199,10 @@ static u32 ReturnRandomSpeciesByPokeballIndex(u32 index)
                 }
             }
             //check for duplicates within the case
-            for (i=0; i<8; i++) // 9 slots in birch case, checking against the first 8
+            for (i=0; i<9; i++) // 9 slots in birch case
             {
-                DebugPrintf("slot = %d with species %d", i, gSaveBlock2Ptr->uniqueSpecies[i]);
-                if (species == gSaveBlock2Ptr->uniqueSpecies[i] && i != index)
+                DebugPrintf("slot = %d with species %d", i, sAlreadyRolledSpecies[i]);
+                if (species == sAlreadyRolledSpecies[i] && i != index)
                 {
                     rerollMon = TRUE;
                     DebugPrintf("index = %d", index);
@@ -219,9 +239,9 @@ static u32 ReturnRandomSpeciesByPokeballIndex(u32 index)
         while (rerollMon);
 
         //save species for rerolls
-        gSaveBlock2Ptr->uniqueSpecies[index] = species;
+        sAlreadyRolledSpecies[index] = species;
         DebugPrintf("Found species = %d", species);
-        //gSaveBlock2Ptr->uniqueSpecies[9]++; //9 = counter of successfully rolled mons
+        //sAlreadyRolledSpecies[9]++; //9 = counter of successfully rolled mons
     }
     else
     {
@@ -238,25 +258,6 @@ static u32 ReturnRandomSpeciesByPokeballIndex(u32 index)
 
     return species;
 }
-
-//==========EWRAM==========//
-static EWRAM_DATA struct MenuResources *sBirchCaseDataPtr = NULL;
-static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
-static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
-static EWRAM_DATA u8 sMonChosenAlready[9] = {0};
-
-//==========STATIC=DEFINES==========//
-static void BirchCaseRunSetup(void);
-static bool8 BirchCaseDoGfxSetup(void);
-static bool8 BirchCase_InitBgs(void);
-static void BirchCaseFadeAndBail(void);
-static bool8 BirchCaseLoadGraphics(void);
-static void BirchCase_InitWindows(void);
-static void PrintTextToBottomBar(u8 textId);
-static void Task_BirchCaseWaitFadeIn(u8 taskId);
-static void Task_BirchCaseMain(u8 taskId);
-static void SampleUi_DrawMonIcon(u16 speciesId);
-static void Task_DelayedSpriteLoad(u8 taskId);
 
 //==========CONST=DATA==========//
 static const struct BgTemplate sMenuBgTemplates[] =
@@ -723,6 +724,7 @@ static void BirchCaseFreeResources(void)
     for(i = 0; i < 9; i++)
     {
         sMonChosenAlready[i] = 0;
+        sAlreadyRolledSpecies[i] = 0;
     }
 }
 
