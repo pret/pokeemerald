@@ -5868,17 +5868,17 @@ u8 GetDirectionToFace(s16 x, s16 y, s16 targetX, s16 targetY)
 bool8 ScrFunc_GetDirectionToFace(struct ScriptContext *ctx)
 {
     u16 *var = GetVarPointer(ScriptReadHalfword(ctx));
-    u8 id0 = GetObjectEventIdByLocalId(ScriptReadByte(ctx)); // source
-    u8 id1 = GetObjectEventIdByLocalId(ScriptReadByte(ctx)); // target
+    u8 sourceId = GetObjectEventIdByLocalId(ScriptReadByte(ctx));
+    u8 targetId = GetObjectEventIdByLocalId(ScriptReadByte(ctx));
     if (var == NULL)
         return FALSE;
-    if (id0 >= OBJECT_EVENTS_COUNT || id1 >= OBJECT_EVENTS_COUNT)
+    if (sourceId >= OBJECT_EVENTS_COUNT || targetId >= OBJECT_EVENTS_COUNT)
         *var = DIR_NONE;
     else
-        *var = GetDirectionToFace(gObjectEvents[id0].currentCoords.x,
-                                  gObjectEvents[id0].currentCoords.y,
-                                  gObjectEvents[id1].currentCoords.x,
-                                  gObjectEvents[id1].currentCoords.y);
+        *var = GetDirectionToFace(gObjectEvents[sourceId].currentCoords.x,
+                                  gObjectEvents[sourceId].currentCoords.y,
+                                  gObjectEvents[targetId].currentCoords.x,
+                                  gObjectEvents[targetId].currentCoords.y);
     return FALSE;
 }
 

@@ -95,10 +95,7 @@ EventScript_SmashRock:: @ fallthrough
 	end
 
 EventScript_FollowerFieldMove:
-	callfunc ScrFunc_GetDirectionToFace
-	.2byte VAR_0x8005
-	.byte OBJ_EVENT_ID_FOLLOWER
-	.byte OBJ_EVENT_ID_PLAYER
+	getdirectiontoface VAR_0x8005, OBJ_EVENT_ID_FOLLOWER, OBJ_EVENT_ID_PLAYER
 	specialvar VAR_0x8006, GetPlayerFacingDirection
 	goto_if_eq VAR_0x8005, DIR_NONE, EventScript_FollowerFieldMoveEnd
 	@ Swap follower and player

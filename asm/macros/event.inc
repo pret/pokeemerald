@@ -2222,3 +2222,11 @@
 	callfunc ScrFunc_IsFollowerFieldMoveUser
 	.2byte \var
 	.endm
+
+	@ Saves the direction from where source object event would need to turn to to face the target into the specified var.
+	.macro getdirectiontoface var:req, sourceId:req, targetId:req
+	callfunc ScrFunc_GetDirectionToFace
+	.2byte \var
+	.byte \sourceId
+	.byte \targetId
+	.endm
