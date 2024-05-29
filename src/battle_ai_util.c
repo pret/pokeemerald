@@ -369,13 +369,15 @@ s32 AI_CalcDamageSaveBattlers(u32 move, u32 battlerAtk, u32 battlerDef, u8 *type
 
 static inline s32 LowestRollDmg(s32 dmg)
 {
-    dmg *= 100 - 15;
+    dmg *= MIN_ROLL_PERCENTAGE;
     dmg /= 100;
     return dmg;
 }
 
 static inline s32 HighestRollDmg(s32 dmg)
 {
+    dmg *= MAX_ROLL_PERCENTAGE;
+    dmg /= 100;
     return dmg;
 }
 

@@ -5,6 +5,10 @@
 
 #define AI_STRIKES_FIRST(battlerAi, battlerDef, move)((AI_WhoStrikesFirst(battlerAi, battlerDef, move) == AI_IS_FASTER))
 
+// Roll boundaries used by AI when scoring. Doesn't affect actual damage dealt.
+#define MAX_ROLL_PERCENTAGE 100
+#define MIN_ROLL_PERCENTAGE 85
+
 enum
 {
     DMG_ROLL_LOWEST,
