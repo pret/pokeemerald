@@ -2218,7 +2218,7 @@
 	.endm
 
 	@ Checks if Field move is being used by the current follower.
-	.macro IsFollowerFieldMoveUser var:req
+	.macro isfollowerfieldmoveuser var:req
 	callfunc ScrFunc_IsFollowerFieldMoveUser
 	.2byte \var
 	.endm

@@ -12,7 +12,7 @@ EventScript_CutTree::
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
 EventScript_CutTreeCommon:
-	IsFollowerFieldMoveUser VAR_0x8004
+	isfollowerfieldmoveuser VAR_0x8004
 	setfieldeffectargument 3, VAR_0x8004 @ skip pose if so
 	dofieldeffect FLDEFF_USE_CUT_ON_TREE
 	waitstate
@@ -76,7 +76,7 @@ EventScript_RockSmash::
 	closemessage
 EventScript_RockSmashCommon:
 	@ check if follower should use the field move
-	IsFollowerFieldMoveUser VAR_0x8004
+	isfollowerfieldmoveuser VAR_0x8004
 	setfieldeffectargument 3, VAR_0x8004 @ skip pose if so
 	dofieldeffect FLDEFF_USE_ROCK_SMASH
 	waitstate
