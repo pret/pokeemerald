@@ -8464,3 +8464,11 @@ bool8 IsSpeciesUltraBeast(u16 species)
         return TRUE;
     return FALSE;
 }
+
+bool8 IsSpeciesParadoxMon(u16 species)
+{
+    species = SanitizeSpeciesId(species);
+    if (gSpeciesInfo[species].isParadoxForm)
+        return TRUE;
+    return FALSE;
+}

@@ -806,6 +806,7 @@ const u8 *GetMoveName(u16 moveId);
 bool8 IsSpeciesLegendary(u16 species);
 bool8 IsSpeciesMythical(u16 species);
 bool8 IsSpeciesUltraBeast(u16 species);
+bool8 IsSpeciesParadoxMon(u16 species);
 
 //tx_randomizer_and_challenges
 void RandomizeSpeciesListEWRAM(u16 seed);
