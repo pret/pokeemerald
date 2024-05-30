@@ -33,6 +33,7 @@
 #include "international_string_util.h"
 #include "event_data.h"
 #include "constants/flags.h"
+#include "ui_birch_case.h"
 
 //defines
 #define MODE_NORMAL     0
@@ -702,7 +703,7 @@ static void Task_ModeMenuMainInput(u8 taskId)
             gTasks[taskId].func = Task_ModeMenuSave;
     }
     // Exit the menu when the player presses B
-    else if (JOY_NEW(B_BUTTON))
+    else if (JOY_NEW(SELECT_BUTTON) || JOY_NEW(START_BUTTON))
     {
         gTasks[taskId].func = Task_ModeMenuSave;
     }
@@ -859,7 +860,7 @@ static void Task_ModeMenuWaitFadeAndExitGracefully(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(sModeMenuState->savedCallback);
+        BirchCase_Init(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         ModeMenu_FreeResources();
         DestroyTask(taskId);
     }
@@ -1013,8 +1014,8 @@ static const u8 sText_BattleMode_Singles[]  = _("SINGLES");
 static const u8 sText_BattleMode_Doubles[]  = _("DOUBLES");
 static const u8 sText_Randomizer_Mons[]     = _("MONS");
 static const u8 sText_Randomizer_All[]      = _("ALL");
-static const u8 sText_XPShare_75[]          = _("75%");
-static const u8 sText_XPShare_50[]          = _("50%");
+static const u8 sText_XPShare_75[]          = _("NORMAL");
+static const u8 sText_XPShare_50[]          = _("HARD");
 static const u8 sText_StatChanger_On[]      = _("ACTIVE");
 static const u8 sText_StatChanger_Off[]     = _("INACTIVE");
 static const u8 sText_Choice_Yes[]          = _("YES");

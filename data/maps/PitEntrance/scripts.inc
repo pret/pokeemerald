@@ -72,18 +72,10 @@ PitEntrance_StartBag::
 	msgbox PitEntrance_ModeMenu, MSGBOX_AUTOCLOSE
 	waitmessage
 PitEntrace_ModeMenu::
-	callnative CallModeMenu
-	waitstate
-	message PitEntrance_ReadyToStart
-	dynmultichoice 17, 0, TRUE, 6, 0, DYN_MULTICHOICE_CB_NONE, PitEntrance_MsgYes, PitEntrance_MsgModeMenu
-	closemessage
-	goto_if_eq VAR_RESULT, 0, PitEntrance_StartBagContinue3
-	goto_if_eq VAR_RESULT, 1, PitEntrace_ModeMenu
-PitEntrance_StartBagContinue3::
 	setflag FLAG_CASE_STARTER_MODE
 	callnative InitTrainerIdAndNameData
-	callnative StartNewPokeballCaseUI
-   	waitstate
+	callnative CallModeMenu
+	waitstate
 	clearflag FLAG_CASE_STARTER_MODE
 	removeobject 1
 	setflag FLAG_STARTER_CHOICE_BAG
