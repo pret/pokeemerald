@@ -153,14 +153,6 @@ void EnableResetRTC(void)
     FlagSet(FLAG_SYS_RESET_RTC_ENABLE);
 }
 
-bool32 CanResetRTC(void)
-{
-    if (FlagGet(FLAG_SYS_RESET_RTC_ENABLE) && VarGet(VAR_RESET_RTC_ENABLE) == 0x920)
-        return TRUE;
-    else
-        return FALSE;
-}
-
 u16 *GetVarPointer(u16 id)
 {
     if (id < VARS_START)

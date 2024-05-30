@@ -25,5 +25,5 @@ For contacts and other pret projects, see [pret.github.io](https://pret.github.i
 [ ] Breeding Mechanics are updated
 [ ] Shiny/Oval/Exp Charms are available
 [ ] Battle UI now shows Physical/Special type of move
-[ ] The Clock can be reset
+[X] The Clock can be reset
 [ ] HMs may be used if a Pokemon in the party can learn it, rather than if they know it
