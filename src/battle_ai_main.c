@@ -1435,7 +1435,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             if (IsBattlerIncapacitated(battlerDef, aiData->abilities[battlerDef]) || gBattleMons[battlerDef].status2 & (STATUS2_INFATUATION | STATUS2_CONFUSION))
                 ADJUST_SCORE(-1);
             if ((predictedMove == MOVE_NONE || GetBattleMoveCategory(predictedMove) == DAMAGE_CATEGORY_STATUS
-              || DoesSubstituteBlockMove(battlerAtk, BATTLE_PARTNER(battlerDef), predictedMove)) 
+              || DoesSubstituteBlockMove(battlerAtk, BATTLE_PARTNER(battlerDef), predictedMove))
               && !(predictedMove == MOVE_NONE && (AI_THINKING_STRUCT->aiFlags[battlerAtk] & AI_FLAG_RISKY))) // Let Risky AI predict blindly based on stats
                 ADJUST_SCORE(-10);
             break;
@@ -4722,14 +4722,7 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
         }
     }
 
-    if (score <= 1)
-        return NOT_GOOD_ENOUGH;
-    else if (score <= 3)
-        return GOOD_MOVE_EFFECTS;
-    else if (score <= 5)
-        return PREFERRED_MOVE_EFFECTS;
-    else
-        return BEST_MOVE_EFFECTS;
+    return score;
 }
 
 // AI_FLAG_CHECK_VIABILITY - Chooses best possible move to hit player
