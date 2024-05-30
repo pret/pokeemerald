@@ -1006,6 +1006,11 @@ struct SaveBlock1
     /*0x650*/ struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
     /*0x690*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
     /*0x790*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
+              struct ItemSlot bagPocket_Medicine[BAG_MEDICINE_COUNT];
+              struct ItemSlot bagPocket_BattleItems[BAG_BATTLEITEMS_COUNT];
+              struct ItemSlot bagPocket_PowerUp[BAG_POWERUP_COUNT];
+              struct ItemSlot bagPocket_MegaStones[BAG_MEGASTONES_COUNT];
+              struct ItemSlot bagPocket_ZCrystals[BAG_ZCRYSTALS_COUNT];
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
     /*0x9BC*/ u16 berryBlenderRecords[3];
 #if FREE_MATCH_CALL == FALSE
