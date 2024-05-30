@@ -124,6 +124,8 @@ top:
 
         gIntrTable[7] = Intr_Timer2;
 
+        gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
+
         // The current test restarted the ROM (e.g. by jumping to NULL).
         if (sCurrentTest.address != 0)
         {
