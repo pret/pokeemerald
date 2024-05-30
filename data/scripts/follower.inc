@@ -21,7 +21,7 @@ EventScript_FollowerEnd::
 	end
 
 EventScript_FollowerLovesYou::
-	applymovement OBJ_EVENT_ID_FOLLOWER ContestHall_Movement_Heart
+	applymovement OBJ_EVENT_ID_FOLLOWER, ContestHall_Movement_Heart
 	waitmovement OBJ_EVENT_ID_FOLLOWER
 	waitmoncry
 	msgbox gText_FollowerLovesYou, MSGBOX_DEFAULT
@@ -39,7 +39,7 @@ EventScript_FollowerGenericSkipFace:
 
 EventScript_FollowerJump::
 	faceplayer
-	applymovement OBJ_EVENT_ID_FOLLOWER FollowerSplashMovement
+	applymovement OBJ_EVENT_ID_FOLLOWER, FollowerSplashMovement
 	waitmovement OBJ_EVENT_ID_FOLLOWER
 	waitfieldeffect FLDEFF_EMOTE
 	message 0x0
@@ -379,43 +379,43 @@ EventScript_FollowerIsShivering::
 	goto EventScript_FollowerGeneric
 
 ShiverVertical:
-	applymovement OBJ_EVENT_ID_FOLLOWER FollowerShiverVerticalMovement
+	applymovement OBJ_EVENT_ID_FOLLOWER, FollowerShiverVerticalMovement
 	waitmovement OBJ_EVENT_ID_FOLLOWER
 	return
 
 ShiverHorizontal:
-	applymovement OBJ_EVENT_ID_FOLLOWER FollowerShiverHorizontalMovement
+	applymovement OBJ_EVENT_ID_FOLLOWER, FollowerShiverHorizontalMovement
 	waitmovement OBJ_EVENT_ID_FOLLOWER
 	return
 
 EventScript_FollowerNostalgia::
-	applymovement OBJ_EVENT_ID_FOLLOWER FollowerNostalgiaMovement
+	applymovement OBJ_EVENT_ID_FOLLOWER, FollowerNostalgiaMovement
 	waitmovement OBJ_EVENT_ID_FOLLOWER
 	goto EventScript_FollowerGeneric
 
 EventScript_FollowerHopping::
 	faceplayer
-	applymovement OBJ_EVENT_ID_FOLLOWER FollowerSkippingMovement
+	applymovement OBJ_EVENT_ID_FOLLOWER, FollowerSkippingMovement
 	waitmovement OBJ_EVENT_ID_FOLLOWER
 	goto EventScript_FollowerGeneric
 
 JumpOnN:
-	applymovement OBJ_EVENT_ID_FOLLOWER FollowerJumpOnPlayerNorth
+	applymovement OBJ_EVENT_ID_FOLLOWER, FollowerJumpOnPlayerNorth
 	waitmovement OBJ_EVENT_ID_FOLLOWER
 	return
 
 JumpOnS:
-	applymovement OBJ_EVENT_ID_FOLLOWER FollowerJumpOnPlayerSouth
+	applymovement OBJ_EVENT_ID_FOLLOWER, FollowerJumpOnPlayerSouth
 	waitmovement OBJ_EVENT_ID_FOLLOWER
 	return
 
 JumpOnE:
-	applymovement OBJ_EVENT_ID_FOLLOWER FollowerJumpOnPlayerEast
+	applymovement OBJ_EVENT_ID_FOLLOWER, FollowerJumpOnPlayerEast
 	waitmovement OBJ_EVENT_ID_FOLLOWER
 	return
 
 JumpOnW:
-	applymovement OBJ_EVENT_ID_FOLLOWER FollowerJumpOnPlayerWest
+	applymovement OBJ_EVENT_ID_FOLLOWER, FollowerJumpOnPlayerWest
 	waitmovement OBJ_EVENT_ID_FOLLOWER
 	return
 
@@ -432,22 +432,22 @@ EventScript_FollowerJumpOnPlayer::
 	goto EventScript_FollowerGeneric
 
 CuddleN:
-	applymovement OBJ_EVENT_ID_FOLLOWER FollowerCuddlingNorth
+	applymovement OBJ_EVENT_ID_FOLLOWER, FollowerCuddlingNorth
 	waitmovement OBJ_EVENT_ID_FOLLOWER
 	return
 
 CuddleS:
-	applymovement OBJ_EVENT_ID_FOLLOWER FollowerCuddlingSouth
+	applymovement OBJ_EVENT_ID_FOLLOWER, FollowerCuddlingSouth
 	waitmovement OBJ_EVENT_ID_FOLLOWER
 	return
 
 CuddleE:
-	applymovement OBJ_EVENT_ID_FOLLOWER FollowerCuddlingEast
+	applymovement OBJ_EVENT_ID_FOLLOWER, FollowerCuddlingEast
 	waitmovement OBJ_EVENT_ID_FOLLOWER
 	return
 
 CuddleW:
-	applymovement OBJ_EVENT_ID_FOLLOWER FollowerCuddlingWest
+	applymovement OBJ_EVENT_ID_FOLLOWER, FollowerCuddlingWest
 	waitmovement OBJ_EVENT_ID_FOLLOWER
 	return
 
