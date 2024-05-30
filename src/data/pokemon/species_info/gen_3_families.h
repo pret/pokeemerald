@@ -9348,12 +9348,12 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
 #if P_PRIMAL_REVERSIONS
     [SPECIES_KYOGRE_PRIMAL] =
     {
-        .baseHP        = 100,
-        .baseAttack    = 150,
-        .baseDefense   = 90,
-        .baseSpeed     = 90,
-        .baseSpAttack  = 180,
-        .baseSpDefense = 160,
+        .baseHP        = 140,
+        .baseAttack    = 190,
+        .baseDefense   = 130,
+        .baseSpeed     = 130,
+        .baseSpAttack  = 220,
+        .baseSpDefense = 190,
         .types = MON_TYPES(TYPE_WATER),
         .catchRate = 3,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 385 : 347,
