@@ -1639,11 +1639,15 @@ const u32 gBagMaleTiles[] = INCBIN_U32("graphics/bag/bag.4bpp.lz");
 const u32 gBagFemaleTiles[] = INCBIN_U32("graphics/bag/bag.4bpp.lz");
 const u32 gBagPalette[] = INCBIN_U32("graphics/bag/bag.gbapal.lz");
 
-const u32 gBagScreenMale_Pal[] = INCBIN_U32("graphics/bag/menu_male.gbapal.lz");
-const u32 gBagScreenFemale_Pal[] = INCBIN_U32("graphics/bag/menu_male.gbapal.lz");
+const u32 gBagScreenMale_Pal[] = INCBIN_U32("graphics/bag/menu.gbapal.lz");
+const u32 gBagScreenFemale_Pal[] = INCBIN_U32("graphics/bag/menu.gbapal.lz");
 
 const u32 gBagScreen_Gfx[] = INCBIN_U32("graphics/bag/menu.4bpp.lz");
 const u32 gBagScreen_GfxTileMap[] = INCBIN_U32("graphics/bag/menu.bin.lz");
+
+const u32 gBagScroll_Gfx[] = INCBIN_U32("graphics/bag/scroll_tiles.4bpp.lz");
+const u32 gBagScroll_GfxTileMap[] = INCBIN_U32("graphics/bag/scroll_tiles.bin.lz");
+const u32 gBagScrollBgPalette[] = INCBIN_U16("graphics/bag/scroll_tiles.gbapal");
 
 const u32 gBattlePyramidBag_Gfx[]          = INCBIN_U32("graphics/bag/bag_pyramid.4bpp.lz");
 const u32 gBattlePyramidBag_Pal[]          = INCBIN_U32("graphics/bag/bag_pyramid.gbapal.lz"); // female palette is first and male is second.
