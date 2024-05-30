@@ -63,6 +63,7 @@ PitArena_OnTransitionNormal::
 PitArena_Warp::
 	goto_if_unset FLAG_FLOOR_CLEARED, PitArena_WarpEnd
 	lockall
+	callnative AutoSave
 	addvar VAR_PIT_FLOOR, 1
 	clearflag FLAG_FLOOR_CLEARED
 	setflag FLAG_REWARD_ITEM_1
