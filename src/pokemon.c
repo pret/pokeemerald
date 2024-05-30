@@ -836,6 +836,7 @@ static const u16 sInvalidRandomAbilities[] =
     ABILITY_FLOWER_GIFT,
     ABILITY_AS_ONE_ICE_RIDER,
     ABILITY_AS_ONE_SHADOW_RIDER,
+    ABILITY_NEUTRALIZING_GAS,
 };
 
 
