@@ -348,12 +348,13 @@ static const struct TrainerMon sParty_Archie[] = {
 
     {
         .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-        //.ev = TRAINER_PARTY_EVS(252, 0, 4, 0, 252, 0),
+        .ev = TRAINER_PARTY_EVS(0, 0, 4, 252, 252, 0),
         .lvl = 100,
         .species = SPECIES_KYOGRE,
-        //.heldItem = ITEM_LEFTOVERS,
-        //.ability = 0,
-        //.nature = NATURE_MODEST,
+        .heldItem = ITEM_BRIGHT_POWDER,
+        .ability = 0,
+        .nature = NATURE_MODEST,
+        .moves = {MOVE_LIQUIDATION, MOVE_THUNDER, MOVE_ORIGIN_PULSE, MOVE_ICE_BEAM}
     }
 };
 
