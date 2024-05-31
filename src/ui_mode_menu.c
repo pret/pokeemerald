@@ -70,6 +70,7 @@ enum WindowIds
 enum MenuItems
 {
     MENUITEM_MAIN_DEFAULTS,
+    MENUITEM_MAIN_AUTOSAVE,
     MENUITEM_MAIN_BATTLEMODE,
     MENUITEM_MAIN_RANDOMIZER,
     MENUITEM_MAIN_XPSHARE,
@@ -240,6 +241,7 @@ static int ProcessInput_Options_Two(int selection);
 static int ProcessInput_Options_Three(int selection);
 static void ReDrawAll(void);
 static void DrawChoices_Defaults(int selection, int y);
+static void DrawChoices_Autosave(int selection, int y);
 static void DrawChoices_BattleMode(int selection, int y);
 static void DrawChoices_Randomizer(int selection, int y);
 static void DrawChoices_XPShare(int selection, int y);
@@ -256,6 +258,7 @@ struct MainMenu
 } static const sItemFunctionsMain[MENUITEM_MAIN_COUNT] =
 {
     [MENUITEM_MAIN_DEFAULTS]     = {DrawChoices_Defaults,    ProcessInput_Options_Three},
+    [MENUITEM_MAIN_AUTOSAVE]     = {DrawChoices_Autosave,    ProcessInput_Options_Three},
     [MENUITEM_MAIN_BATTLEMODE]   = {DrawChoices_BattleMode,  ProcessInput_Options_Two},
     [MENUITEM_MAIN_RANDOMIZER]   = {DrawChoices_Randomizer,  ProcessInput_Options_Two},
     [MENUITEM_MAIN_XPSHARE]      = {DrawChoices_XPShare,     ProcessInput_Options_Two},
@@ -267,6 +270,7 @@ struct MainMenu
 
 // Menu left side option names text
 static const u8 sText_Defaults[]    = _("PRESETS");
+static const u8 sText_Autosave[]    = _("AUTOSAVE");
 static const u8 sText_BattleMode[]  = _("BATTLE MODE");
 static const u8 sText_Randomizer[]  = _("RANDOMIZER");
 static const u8 sText_XPShare[]     = _("XP SHARE");
@@ -278,6 +282,7 @@ static const u8 sText_Cancel[]      = _("SAVE & LEAVE");
 static const u8 *const sModeMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
 {
     [MENUITEM_MAIN_DEFAULTS]     = sText_Defaults,
+    [MENUITEM_MAIN_AUTOSAVE]     = sText_Autosave,
     [MENUITEM_MAIN_BATTLEMODE]   = sText_BattleMode,
     [MENUITEM_MAIN_RANDOMIZER]   = sText_Randomizer,
     [MENUITEM_MAIN_XPSHARE]      = sText_XPShare,
@@ -298,6 +303,7 @@ static bool8 CheckConditions(int selection)
     switch(selection)
     {
         case MENUITEM_MAIN_DEFAULTS:       return TRUE;
+        case MENUITEM_MAIN_AUTOSAVE:       return TRUE;
         case MENUITEM_MAIN_BATTLEMODE:     return TRUE;
         case MENUITEM_MAIN_RANDOMIZER:     return TRUE;
         case MENUITEM_MAIN_XPSHARE:        return TRUE;
@@ -316,6 +322,9 @@ static const u8 sText_Desc_Save[]               = _("Save your settings.");
 static const u8 sText_Desc_Defaults_Normal[]    = _("Sets all options for Normal Mode.");
 static const u8 sText_Desc_Defaults_Hard[]      = _("Sets all options for Hard Mode.");
 static const u8 sText_Desc_Defaults_Custom[]    = _("Is shown when manually changing\nmode settings.");
+static const u8 sText_Desc_Autosave_Off[]       = _("Autosave is inactive.");
+static const u8 sText_Desc_Autosave_5[]         = _("Autosave is executed every\nfive floors during warping.");
+static const u8 sText_Desc_Autosave_On[]        = _("Autosave is executed every\nfloor during warping.");
 static const u8 sText_Desc_BattleMode_Singles[] = _("Play only single battles.");
 static const u8 sText_Desc_BattleMode_Doubles[] = _("Play only double battles.");
 static const u8 sText_Desc_Randomizer_Mons[]    = _("Only randomize Pokémon species,\ntrainers and item drops.");
@@ -332,6 +341,7 @@ static const u8 sText_Desc_Duplicates_Off[]     = _("Birch bag can't hold duplic
 static const u8 *const sModeMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
 {
     [MENUITEM_MAIN_DEFAULTS]     = {sText_Desc_Defaults_Normal,     sText_Desc_Defaults_Hard,       sText_Desc_Defaults_Custom},
+    [MENUITEM_MAIN_AUTOSAVE]     = {sText_Desc_Autosave_Off,        sText_Desc_Autosave_5,          sText_Desc_Autosave_On},
     [MENUITEM_MAIN_BATTLEMODE]   = {sText_Desc_BattleMode_Singles,  sText_Desc_BattleMode_Doubles,  sText_Empty},
     [MENUITEM_MAIN_RANDOMIZER]   = {sText_Desc_Randomizer_Mons,     sText_Desc_Randomizer_All,      sText_Empty},
     [MENUITEM_MAIN_XPSHARE]      = {sText_Desc_XPShare_75,          sText_Desc_XPShare_50,          sText_Empty},
@@ -463,7 +473,8 @@ static void ModeMenu_SetupCB(void)
         gMain.state++;
         break;
     case 6:
-        sOptions->sel[MENUITEM_MAIN_DEFAULTS]    = gSaveBlock2Ptr->modeDefault;
+        sOptions->sel[MENUITEM_MAIN_DEFAULTS]     = gSaveBlock2Ptr->modeDefault;
+        sOptions->sel[MENUITEM_MAIN_AUTOSAVE]     = gSaveBlock2Ptr->modeAutosave;
         sOptions->sel[MENUITEM_MAIN_BATTLEMODE]   = gSaveBlock2Ptr->modeBattleMode;
         sOptions->sel[MENUITEM_MAIN_RANDOMIZER]   = gSaveBlock2Ptr->modeRandomizer;
         sOptions->sel[MENUITEM_MAIN_XPSHARE]      = gSaveBlock2Ptr->modeXPShare;
@@ -812,8 +823,9 @@ static void Task_ModeMenuMainInput(u8 taskId)
 
 static void Task_ModeMenuSave(u8 taskId)
 {
-    //write in saveblock || probably unnecessary for ui_mode_menu as it only sets the VARs
+    //write in saveblock
     gSaveBlock2Ptr->modeDefault     = sOptions->sel[MENUITEM_MAIN_DEFAULTS];
+    gSaveBlock2Ptr->modeAutosave    = sOptions->sel[MENUITEM_MAIN_AUTOSAVE];
     gSaveBlock2Ptr->modeBattleMode  = sOptions->sel[MENUITEM_MAIN_BATTLEMODE];
     gSaveBlock2Ptr->modeRandomizer  = sOptions->sel[MENUITEM_MAIN_RANDOMIZER];
     gSaveBlock2Ptr->modeXPShare     = sOptions->sel[MENUITEM_MAIN_XPSHARE];
@@ -821,7 +833,9 @@ static void Task_ModeMenuSave(u8 taskId)
     gSaveBlock2Ptr->modeLegendaries = sOptions->sel[MENUITEM_MAIN_LEGENDARIES];
     gSaveBlock2Ptr->modeDuplicates  = sOptions->sel[MENUITEM_MAIN_DUPLICATES];
 
-    //set VARs
+    //set flags/VARs
+    VarSet(VAR_PIT_AUTOSAVE, sOptions->sel[MENUITEM_MAIN_AUTOSAVE]);
+
     if (sOptions->sel[MENUITEM_MAIN_BATTLEMODE] == MODE_DOUBLES)
         FlagSet(FLAG_DOUBLES_MODE);
     else
@@ -1010,6 +1024,9 @@ static void ReDrawAll(void)
 static const u8 sText_ModeNormal[]          = _("NORM");
 static const u8 sText_ModeHard[]            = _("HARD");
 static const u8 sText_ModeCustom[]          = _("CUST");
+static const u8 sText_Autosave_Off[]        = _("OFF");
+static const u8 sText_Autosave_5[]          = _("5FLRS");
+static const u8 sText_Autosave_On[]         = _("ON");
 static const u8 sText_BattleMode_Singles[]  = _("SINGLES");
 static const u8 sText_BattleMode_Doubles[]  = _("DOUBLES");
 static const u8 sText_Randomizer_Mons[]     = _("MONS");
@@ -1033,6 +1050,20 @@ static void DrawChoices_Defaults(int selection, int y)
     DrawModeMenuChoice(sText_ModeNormal, 104, y, styles[0], active);
     DrawModeMenuChoice(sText_ModeHard, xMid, y, styles[1], active);
     DrawModeMenuChoice(sText_ModeCustom, GetStringRightAlignXOffset(1, sText_ModeCustom, 198), y, styles[2], active);
+}
+
+static void DrawChoices_Autosave(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_MAIN_AUTOSAVE);
+    u8 styles[3] = {0};
+    int xMid;
+
+    styles[selection] = 1;
+    xMid = GetMiddleX(sText_Autosave_Off, sText_Autosave_5, sText_Autosave_On);
+
+    DrawModeMenuChoice(sText_Autosave_Off, 104, y, styles[0], active);
+    DrawModeMenuChoice(sText_Autosave_5, xMid, y, styles[1], active);
+    DrawModeMenuChoice(sText_Autosave_On, GetStringRightAlignXOffset(1, sText_Autosave_On, 198), y, styles[2], active);
 }
 
 static void DrawChoices_BattleMode(int selection, int y)

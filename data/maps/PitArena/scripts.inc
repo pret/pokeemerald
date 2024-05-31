@@ -62,6 +62,7 @@ PitArena_OnTransitionNormal::
 	return
 
 PitArena_Warp::
+	callnative SetAutosaveFlag
 	goto_if_unset FLAG_FLOOR_CLEARED, PitArena_WarpEnd
 	goto_if_unset FLAG_AUTO_SAVE, PitArenaNoAutoSave
 	clearflag FLAG_SAVING_FIELD_EFFECT

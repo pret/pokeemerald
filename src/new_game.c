@@ -103,6 +103,7 @@ void SetDefaultOptions(void)
     
     //game modes
     gSaveBlock2Ptr->modeDefault = 0;
+    gSaveBlock2Ptr->modeAutosave = 0;
     gSaveBlock2Ptr->modeBattleMode = 0;
     gSaveBlock2Ptr->modeRandomizer = 0;
     gSaveBlock2Ptr->modeXPShare = 0;

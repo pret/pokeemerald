@@ -17,11 +17,13 @@
 #include "menu_helpers.h"
 #include "decompress.h"
 #include "ui_options_menu.h"
+#include "event_data.h"
 
 // Menu items
 enum
 {
     MENUITEM_MAIN_TEXTSPEED,
+    MENUITEM_MAIN_AUTOSAVE,
     MENUITEM_MAIN_BATTLESCENE,
     MENUITEM_MAIN_BATTLESTYLE,
     MENUITEM_MAIN_SOUND,
@@ -150,6 +152,7 @@ static void DrawDescriptionText(void);
 static void DrawOptionsMenuChoice(const u8 *text, u8 x, u8 y, u8 style, bool8 active);
 static void ReDrawAll(void);
 static void DrawChoices_TextSpeed(int selection, int y);
+static void DrawChoices_Autosave(int selection, int y);
 static void DrawChoices_BattleScene(int selection, int y);
 static void DrawChoices_BattleStyle(int selection, int y);
 static void DrawChoices_Sound(int selection, int y);
@@ -199,6 +202,7 @@ struct // MENU_MAIN
 } static const sItemFunctionsMain[MENUITEM_MAIN_COUNT] =
 {
     [MENUITEM_MAIN_TEXTSPEED]    = {DrawChoices_TextSpeed,   ProcessInput_Options_Four},
+    [MENUITEM_MAIN_AUTOSAVE]     = {DrawChoices_Autosave,    ProcessInput_Options_Three},
     [MENUITEM_MAIN_BATTLESCENE]  = {DrawChoices_BattleScene, ProcessInput_Options_Two},
     [MENUITEM_MAIN_BATTLESTYLE]  = {DrawChoices_BattleStyle, ProcessInput_Options_Two},
     [MENUITEM_MAIN_SOUND]        = {DrawChoices_Sound,       ProcessInput_Options_Two},
@@ -209,10 +213,12 @@ struct // MENU_MAIN
 
 // Menu left side option names text
 
+static const u8 sText_Autosave[]    = _("AUTOSAVE");
 static const u8 sText_Cancel[]      = _("SAVE & LEAVE");
 static const u8 *const sOptionsMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
 {
     [MENUITEM_MAIN_TEXTSPEED]   = gText_TextSpeed,
+    [MENUITEM_MAIN_AUTOSAVE]    = sText_Autosave,
     [MENUITEM_MAIN_BATTLESCENE] = gText_BattleScene,
     [MENUITEM_MAIN_BATTLESTYLE] = gText_BattleStyle,
     [MENUITEM_MAIN_SOUND]       = gText_Sound,
@@ -232,6 +238,7 @@ static bool8 CheckConditions(int selection)
     switch(selection)
     {
         case MENUITEM_MAIN_TEXTSPEED:       return TRUE;
+        case MENUITEM_MAIN_AUTOSAVE:        return TRUE;
         case MENUITEM_MAIN_BATTLESCENE:     return TRUE;
         case MENUITEM_MAIN_BATTLESTYLE:     return TRUE;
         case MENUITEM_MAIN_SOUND:           return TRUE;
@@ -247,6 +254,9 @@ static bool8 CheckConditions(int selection)
 static const u8 sText_Empty[]                   = _("");
 static const u8 sText_Desc_Save[]               = _("Save your settings.");
 static const u8 sText_Desc_TextSpeed[]          = _("Choose one of the four text-display\nspeeds.");
+static const u8 sText_Desc_Autosave_Off[]       = _("Autosave is inactive.");
+static const u8 sText_Desc_Autosave_5[]         = _("Autosave is executed every\nfive floors during warping.");
+static const u8 sText_Desc_Autosave_On[]        = _("Autosave is executed every\nfloor during warping.");
 static const u8 sText_Desc_BattleScene_On[]     = _("Show the POKéMON battle animations.");
 static const u8 sText_Desc_BattleScene_Off[]    = _("Skip the POKéMON battle animations.");
 static const u8 sText_Desc_BattleStyle_Shift[]  = _("Get the option to switch your\nPOKéMON after the enemies faints.");
@@ -260,6 +270,7 @@ static const u8 sText_Desc_FrameType[]          = _("Choose the frame surroundin
 static const u8 *const sOptionsMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
 {
     [MENUITEM_MAIN_TEXTSPEED]   = {sText_Desc_TextSpeed,            sText_Empty,                sText_Empty},
+    [MENUITEM_MAIN_AUTOSAVE]    = {sText_Desc_Autosave_Off,         sText_Desc_Autosave_5,      sText_Desc_Autosave_On},
     [MENUITEM_MAIN_BATTLESCENE] = {sText_Desc_BattleScene_On,       sText_Desc_BattleScene_Off, sText_Empty},
     [MENUITEM_MAIN_BATTLESTYLE] = {sText_Desc_BattleStyle_Shift,    sText_Desc_BattleStyle_Set, sText_Empty},
     [MENUITEM_MAIN_SOUND]       = {sText_Desc_SoundMono,            sText_Desc_SoundStereo,     sText_Empty},
@@ -534,6 +545,7 @@ void CB2_InitOptionsMenu(void)
         break;
     case 6:
         sOptions->sel[MENUITEM_MAIN_TEXTSPEED]   = gSaveBlock2Ptr->optionsTextSpeed;
+        sOptions->sel[MENUITEM_MAIN_AUTOSAVE]    = gSaveBlock2Ptr->modeAutosave;
         sOptions->sel[MENUITEM_MAIN_BATTLESCENE] = gSaveBlock2Ptr->optionsBattleSceneOff;
         sOptions->sel[MENUITEM_MAIN_BATTLESTYLE] = gSaveBlock2Ptr->optionsBattleStyle;
         sOptions->sel[MENUITEM_MAIN_SOUND]       = gSaveBlock2Ptr->optionsSound;
@@ -694,11 +706,15 @@ static void Task_OptionsMenuProcessInput(u8 taskId)
 static void Task_OptionsMenuSave(u8 taskId)
 {
     gSaveBlock2Ptr->optionsTextSpeed        = sOptions->sel[MENUITEM_MAIN_TEXTSPEED];
+    gSaveBlock2Ptr->modeAutosave            = sOptions->sel[MENUITEM_MAIN_AUTOSAVE];
     gSaveBlock2Ptr->optionsBattleSceneOff   = sOptions->sel[MENUITEM_MAIN_BATTLESCENE];
     gSaveBlock2Ptr->optionsBattleStyle      = sOptions->sel[MENUITEM_MAIN_BATTLESTYLE];
     gSaveBlock2Ptr->optionsSound            = sOptions->sel[MENUITEM_MAIN_SOUND];
     gSaveBlock2Ptr->optionsButtonMode       = sOptions->sel[MENUITEM_MAIN_BUTTONMODE];
     gSaveBlock2Ptr->optionsWindowFrameType  = sOptions->sel[MENUITEM_MAIN_FRAMETYPE];
+
+    //set flags/VARs
+    VarSet(VAR_PIT_AUTOSAVE, sOptions->sel[MENUITEM_MAIN_AUTOSAVE]);
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_OptionsMenuFadeOut;
@@ -902,21 +918,24 @@ static void ReDrawAll(void)
 }
 
 // Process Input functions ****SPECIFIC****
-static const u8 sText_Slow[] =              _("SLO");
-static const u8 sText_Mid[] =               _("MID");
-static const u8 sText_Fast[] =              _("FAST");
-static const u8 sText_Instant[] =           _("INST");
-static const u8 sText_On[] =                _("ON");
-static const u8 sText_Off[] =               _("OFF");
-static const u8 sText_Shift[] =             _("SHIFT");
-static const u8 sText_Set[] =               _("SET");
-static const u8 sText_Mono[] =              _("MONO");
-static const u8 sText_Stereo[] =            _("STEREO");
-static const u8 sText_Normal[] =            _("NORMAL");
-static const u8 sText_LR[] =                _("LR");
-static const u8 sText_L_A[] =               _("L=A");
-static const u8 sText_FrameType[] =         _("TYPE");
-static const u8 sText_FrameTypeNumber[] =   _("");
+static const u8 sText_Slow[]                = _("SLO");
+static const u8 sText_Mid[]                 = _("MID");
+static const u8 sText_Fast[]                = _("FAST");
+static const u8 sText_Instant[]             = _("INST");
+static const u8 sText_Autosave_Off[]        = _("OFF");
+static const u8 sText_Autosave_5[]          = _("5FLRS");
+static const u8 sText_Autosave_On[]         = _("ON");
+static const u8 sText_On[]                  = _("ON");
+static const u8 sText_Off[]                 = _("OFF");
+static const u8 sText_Shift[]               = _("SHIFT");
+static const u8 sText_Set[]                 = _("SET");
+static const u8 sText_Mono[]                = _("MONO");
+static const u8 sText_Stereo[]              = _("STEREO");
+static const u8 sText_Normal[]              = _("NORMAL");
+static const u8 sText_LR[]                  = _("LR");
+static const u8 sText_L_A[]                 = _("L=A");
+static const u8 sText_FrameType[]           = _("TYPE");
+static const u8 sText_FrameTypeNumber[]     = _("");
 
 static void DrawChoices_TextSpeed(int selection, int y)
 {
@@ -929,6 +948,20 @@ static void DrawChoices_TextSpeed(int selection, int y)
     DrawOptionsMenuChoice(sText_Mid, 125, y, styles[1], active);
     DrawOptionsMenuChoice(sText_Fast, 146, y, styles[2], active);
     DrawOptionsMenuChoice(sText_Instant, GetStringRightAlignXOffset(1, sText_Instant, 198), y, styles[3], active);
+}
+
+static void DrawChoices_Autosave(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_MAIN_AUTOSAVE);
+    u8 styles[3] = {0};
+    int xMid;
+
+    styles[selection] = 1;
+    xMid = GetMiddleX(sText_Autosave_Off, sText_Autosave_5, sText_Autosave_On);
+
+    DrawOptionsMenuChoice(sText_Autosave_Off, 104, y, styles[0], active);
+    DrawOptionsMenuChoice(sText_Autosave_5, xMid, y, styles[1], active);
+    DrawOptionsMenuChoice(sText_Autosave_On, GetStringRightAlignXOffset(1, sText_Autosave_On, 198), y, styles[2], active);
 }
 
 static void DrawChoices_BattleScene(int selection, int y)

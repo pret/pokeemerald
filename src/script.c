@@ -21,6 +21,11 @@
 
 #define RAM_SCRIPT_MAGIC 51
 
+//Autosave defines
+#define SAVE_NO         0
+#define SAVE_5_FLOORS   1
+#define SAVE_EACH_FLOOR 2
+
 enum {
     SCRIPT_MODE_STOPPED,
     SCRIPT_MODE_BYTECODE,
@@ -700,4 +705,24 @@ void AutoSave(void)
     AutoSaveDoSaveCallback();
     FlagSet(FLAG_SAVING_FIELD_EFFECT);
     ScriptContext_Enable();
+}
+
+void SetAutosaveFlag(void)
+{
+    switch(gSaveBlock2Ptr->modeAutosave)
+    {
+        case SAVE_NO:
+            FlagClear(FLAG_AUTO_SAVE);
+            break;
+        case SAVE_5_FLOORS:
+            if((VarGet(VAR_PIT_FLOOR) % 5) == 0) //every fifth floor
+                FlagSet(FLAG_AUTO_SAVE);
+            else
+                FlagClear(FLAG_AUTO_SAVE);
+            break;
+        case SAVE_EACH_FLOOR:
+            FlagSet(FLAG_AUTO_SAVE);
+            break;
+    }
+    
 }

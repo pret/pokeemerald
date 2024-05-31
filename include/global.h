@@ -517,7 +517,8 @@ struct SaveBlock2
              u16 modeStatChanger:1;
              u16 modeLegendaries:1;
              u16 modeDuplicates:1;
-             u16 padding90:8;
+             u16 modeAutosave:2;
+             u16 padding90:6;
     /*0x92*/ u8 filler_91[0x6];
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
