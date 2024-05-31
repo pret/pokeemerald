@@ -739,15 +739,6 @@ extern const u8 gText_RankingHall[];
 extern const u8 gText_ExchangeService[];
 
 // Battle Frontier Move Tutors
-extern const u8 gText_GrassPledge[];
-extern const u8 gText_FirePledge[];
-extern const u8 gText_WaterPledge[];
-extern const u8 gText_DracoMeteor[];
-extern const u8 gText_FrenzyPlant[];
-extern const u8 gText_BlastBurn[];
-extern const u8 gText_HydroCannon[];
-extern const u8 gText_RelicSong[];
-extern const u8 gText_SecretSword[];
 extern const u8 gText_Softboiled16BP[];
 extern const u8 gText_SeismicToss24BP[];
 extern const u8 gText_DreamEater24BP[];
