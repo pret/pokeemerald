@@ -565,12 +565,12 @@ u16 ReturnNumberOfTrainersForFloor()
     }
         
 
-    if((VarGet(VAR_PIT_FLOOR) % 2) == 0) // Heal Floor
+    if((VarGet(VAR_PIT_FLOOR) % 5) == 0) // Heal Floor
     {
         FlagClear(FLAG_HEAL_NPC);
         FlagClear(FLAG_SHOP_NPC);
 
-        if((VarGet(VAR_PIT_FLOOR) % 2) == 0) // New Mon Floor
+        if((VarGet(VAR_PIT_FLOOR) % 20) == 0) // Move Relearner/Tutor Floor
         {
             FlagClear(FLAG_MOVE_RELEARNER);
         }
