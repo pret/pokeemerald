@@ -698,5 +698,6 @@ void AutoSave(void)
 {
     ScriptContext_Stop();
     AutoSaveDoSaveCallback();
+    FlagSet(FLAG_SAVING_FIELD_EFFECT);
     ScriptContext_Enable();
 }

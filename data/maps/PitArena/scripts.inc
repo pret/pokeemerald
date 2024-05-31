@@ -62,8 +62,13 @@ PitArena_OnTransitionNormal::
 
 PitArena_Warp::
 	goto_if_unset FLAG_FLOOR_CLEARED, PitArena_WarpEnd
-	lockall
+	goto_if_unset FLAG_AUTO_SAVE, PitArenaNoAutoSave
+	clearflag FLAG_SAVING_FIELD_EFFECT
+	dofieldeffect(FLDEFF_SAVING)
+	waitfieldeffect(FLDEFF_SAVING)
 	callnative AutoSave
+PitArenaNoAutoSave::
+	lockall
 	addvar VAR_PIT_FLOOR, 1
 	clearflag FLAG_FLOOR_CLEARED
 	setflag FLAG_REWARD_ITEM_1

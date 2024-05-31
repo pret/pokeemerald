@@ -1287,3 +1287,36 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_Rayquaza = {
 };
 
 static const struct SpritePalette sSpritePalette_Unused = {gObjectEventPal_Npc3, FLDEFF_PAL_TAG_UNKNOWN};
+
+const struct SpritePalette gSpritePalette_SavingFieldEffect     = {gFieldEffectObjectPaletteSaving, FLDEFF_PAL_TAG_SAVING};
+
+static const union AnimCmd sSavingAnim[] =
+{
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(2, 20),
+    ANIMCMD_FRAME(3, 20),
+    ANIMCMD_JUMP(0),
+};
+
+static const struct SpriteFrameImage sPicTable_Saving[] = {
+    overworld_frame(gFieldEffectObjectPic_Saving, 8, 8, 0),
+    overworld_frame(gFieldEffectObjectPic_Saving, 8, 8, 1),
+    overworld_frame(gFieldEffectObjectPic_Saving, 8, 8, 2),
+    overworld_frame(gFieldEffectObjectPic_Saving, 8, 8, 3),
+};
+
+static const union AnimCmd *const sAnimTable_Saving[] =
+{
+    sSavingAnim,
+};
+
+const struct SpriteTemplate gFieldEffectObjectTemplate_Saving = {
+    .tileTag = TAG_NONE,
+    .paletteTag = FLDEFF_PAL_TAG_SAVING,
+    .oam = &gObjectEventBaseOam_64x64,
+    .anims = sAnimTable_Saving,
+    .images = sPicTable_Saving,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SavingSpriteCallback,
+};

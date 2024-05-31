@@ -51,8 +51,8 @@
 #define FLAG_NO_DUPLICATES   0x26 // Unused Flag
 #define FLAG_XPSHARE_50      0x27 // Unused Flag
 #define FLAG_STAT_CHANGER    0x28 // Unused Flag
-#define FLAG_UNUSED_0x029    0x29 // Unused Flag
-#define FLAG_UNUSED_0x02A    0x2A // Unused Flag
+#define FLAG_SAVING_FIELD_EFFECT    0x29 // Unused Flag
+#define FLAG_AUTO_SAVE    	0x2A // Unused Flag
 #define FLAG_UNUSED_0x02B    0x2B // Unused Flag
 #define FLAG_UNUSED_0x02C    0x2C // Unused Flag
 #define FLAG_UNUSED_0x02D    0x2D // Unused Flag

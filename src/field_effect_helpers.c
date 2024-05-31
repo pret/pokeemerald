@@ -12,6 +12,9 @@
 #include "trig.h"
 #include "constants/field_effects.h"
 #include "constants/songs.h"
+#include "task.h"
+#include "field_player_avatar.h"
+#include "event_data.h"
 
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF // duplicate of define in event_object_movement.c
 
@@ -1715,3 +1718,88 @@ static const s8 sFigure8YOffsets[FIGURE_8_LENGTH] = {
     -1,  0, -1, -1,  0, -1, -1,  0,
     -1, -1, -1, -1, -1, -1, -1, -2,
 };
+
+
+#define eState                  data[0]
+#define eSavingSpriteID      data[1]
+#define eSavingAnimFrame     data[4]
+
+static void Task_Saving(u8 taskId);
+static u8 Saving_Init(struct Task *task);
+static u8 Saving_WaitForFinish(struct Task *task);
+
+static bool8 (*const sSavingStateFuncs[])(struct Task *) =
+{
+    Saving_Init,
+    Saving_WaitForFinish       
+};
+
+void FldEff_Saving(void)
+{
+    u8 taskId = CreateTask(Task_Saving, 0xFF);
+    Task_Saving(taskId);
+}
+
+static void Task_Saving(u8 taskId)
+{
+    while (sSavingStateFuncs[gTasks[taskId].eState](&gTasks[taskId]))
+        ;
+}
+
+static bool8 Saving_Init(struct Task *task)
+{
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    s16 x = playerObjEvent->currentCoords.x;
+    s16 y = playerObjEvent->currentCoords.y;
+    s16 x2;
+    s16 y2;    
+    s16 x_diff;
+    s16 y_diff;
+
+    DebugPrintf("Starting Save Field Effect. %d", 0);
+
+    u8 spriteId;
+    struct Sprite *sprite;
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_SAVING], 0, 0, 0xFF);
+    task->eSavingSpriteID = spriteId;
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->oam.priority = 0;
+        sprite->invisible = FALSE;
+        sprite->coordOffsetEnabled = TRUE;
+        DebugPrintf("Sprite is Valid. %d", spriteId);
+    }
+    sprite = &gSprites[spriteId];
+
+    y_diff = 1;
+    x_diff = 0;
+
+    SetSpritePosToMapCoords((playerObjEvent->currentCoords.x + x_diff), (playerObjEvent->currentCoords.y + y_diff), &x2, &y2);
+    StartSpriteAnim(sprite, 0);
+    sprite->x = x2 + 8;
+    sprite->y = y2 + 8;
+    sprite->data[0] = playerObjEvent->currentCoords.x;
+    sprite->data[1] = playerObjEvent->currentCoords.y;
+
+    task->eSavingAnimFrame = 0;
+    task->eState++;
+    return FALSE;
+}
+
+static bool8 Saving_WaitForFinish(struct Task *task)
+{   
+    FieldEffectActiveListRemove(FLDEFF_SAVING);
+    DestroyTask(FindTaskIdByFunc(Task_Saving));
+    task->eSavingAnimFrame++;
+    return FALSE;
+}
+
+void SavingSpriteCallback(struct Sprite *sprite)
+{   
+    if(FlagGet(FLAG_SAVING_FIELD_EFFECT))
+    {
+        FieldEffectFreeGraphicsResources(sprite);
+        FlagClear(FLAG_SAVING_FIELD_EFFECT);
+    }
+}

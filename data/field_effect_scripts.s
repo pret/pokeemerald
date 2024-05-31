@@ -76,6 +76,12 @@ gFieldEffectScriptPointers::
 	.4byte gFldEffScript_UseVsSeeker                    @ FLDEFF_USE_VS_SEEKER
 	.4byte gFldEffScript_XIcon                          @ FLDEFF_X_ICON
 	.4byte gFldEffScript_DoubleExclMarkIcon             @ FLDEFF_DOUBLE_EXCL_MARK_ICON
+	.4byte gFieldEffectScript_Saving					@ FLDEFF_SAVING
+
+
+gFieldEffectScript_Saving::
+	field_eff_loadfadedpal_callnative gSpritePalette_SavingFieldEffect, FldEff_Saving
+	field_eff_end
 
 gFieldEffectScript_ExclamationMarkIcon1::
 	field_eff_callnative FldEff_ExclamationMarkIcon
