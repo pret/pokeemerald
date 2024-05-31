@@ -318,13 +318,17 @@ PitArena_Text_ReceivedMon:
 PitArena_MoveRelearner::
 	lockall
 	faceplayer
-	dynmultichoice 17, 1, 0, 5, 0, DYN_MULTICHOICE_CB_NONE, PitArena_MoveRelearnerText, PitArena_ShopNPC_Option8
+	dynmultichoice 17, 1, 0, 5, 0, DYN_MULTICHOICE_CB_NONE, PitArena_MoveRelearnerText, PitArena_EggMovesText, PitArena_TutorMovesText, PitArena_ShopNPC_Option8
 	goto_if_eq VAR_RESULT, 0, PitArena_MartNPCMoveRelearner
+	goto_if_eq VAR_RESULT, 1, PitArena_MartNPCMoveTutorEggMoves
+	goto_if_eq VAR_RESULT, 2, PitArena_MartNPCMoveTutorTutorMoves
 EndOfRelearnerScript::
 	release
 	end
 
 PitArena_MartNPCMoveRelearner::
+	setvar VAR_PIT_TUTOR_STATE, 0
+PitArena_MartNPCMoveTutor::
 	special ChooseMonForMoveRelearner
 	waitstate
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EndOfRelearnerScript
@@ -334,6 +338,181 @@ PitArena_MartNPCMoveRelearner::
 	special TeachMoveRelearnerMove
 	waitstate
 	goto EndOfRelearnerScript
+	end
+
+PitArena_MartNPCMoveTutorEggMoves::
+	setvar VAR_PIT_TUTOR_STATE, 2
+	goto PitArena_MartNPCMoveTutor
+	end
+
+PitArena_MartNPCMoveTutorTutorMoves::
+	setvar VAR_PIT_TUTOR_STATE, 1
+	special ShowTutorMoveList
+	waitstate
+	release
+	end
+
+PitArena_MartNPCMoveTutorTutorMoves69420::
+	setvar VAR_PIT_TUTOR_STATE, 1
+	setvar VAR_0x8004, SCROLL_MULTI_BF_MOVE_TUTOR_1
+	setvar VAR_0x8006, 0
+	special ShowScrollableMultichoice
+	waitstate
+	copyvar VAR_TEMP_FRONTIER_TUTOR_SELECTION, VAR_RESULT
+	switch VAR_RESULT
+	case 0, PitArena_MartNPCMoveTutorTutorMoves_Move1
+	case 1, PitArena_MartNPCMoveTutorTutorMoves_Move2
+	case 2, PitArena_MartNPCMoveTutorTutorMoves_Move3
+	case 3, PitArena_MartNPCMoveTutorTutorMoves_Move4
+	case 4, PitArena_MartNPCMoveTutorTutorMoves_Move5
+	case 5, PitArena_MartNPCMoveTutorTutorMoves_Move6
+	case 6, PitArena_MartNPCMoveTutorTutorMoves_Move7
+	case 7, PitArena_MartNPCMoveTutorTutorMoves_Move8
+	case 8, PitArena_MartNPCMoveTutorTutorMoves_Move9
+	case MULTI_B_PRESSED, PitArena_MartNPCMoveTutorTutorMoves_Exit
+PitArena_MartNPCMoveTutorTutorMoves_End:
+	waitmessage
+	release
+	end
+
+PitArena_MartNPCMoveTutorTutorMoves_Move1:
+	call PitArena_Tutor_GrassPledge
+	goto PitArena_MartNPCMoveTutorTutorMoves_End
+
+PitArena_MartNPCMoveTutorTutorMoves_Move2:
+	call PitArena_Tutor_FirePledge
+	goto PitArena_MartNPCMoveTutorTutorMoves_End
+
+PitArena_MartNPCMoveTutorTutorMoves_Move3:
+	call PitArena_Tutor_WaterPledge
+	goto PitArena_MartNPCMoveTutorTutorMoves_End
+
+PitArena_MartNPCMoveTutorTutorMoves_Move4:
+	call PitArena_Tutor_DracoMeteor
+	goto PitArena_MartNPCMoveTutorTutorMoves_End
+
+PitArena_MartNPCMoveTutorTutorMoves_Move5:
+	call PitArena_Tutor_FrenzyPlant
+	goto PitArena_MartNPCMoveTutorTutorMoves_End
+
+PitArena_MartNPCMoveTutorTutorMoves_Move6:
+	call PitArena_Tutor_BlastBurn
+	goto PitArena_MartNPCMoveTutorTutorMoves_End
+
+PitArena_MartNPCMoveTutorTutorMoves_Move7:
+	call PitArena_Tutor_HydroCannon
+	goto PitArena_MartNPCMoveTutorTutorMoves_End
+
+PitArena_MartNPCMoveTutorTutorMoves_Move8:
+	call PitArena_Tutor_RelicSong
+	goto PitArena_MartNPCMoveTutorTutorMoves_End
+
+PitArena_MartNPCMoveTutorTutorMoves_Move9:
+	call PitArena_Tutor_SecretSword
+	goto PitArena_MartNPCMoveTutorTutorMoves_End
+
+PitArena_MartNPCMoveTutorTutorMoves_Exit:
+	call PitArena_Tutor_Exit
+	goto PitArena_MartNPCMoveTutorTutorMoves_End
+
+PitArena_Tutor_GrassPledge::
+	setvar VAR_0x8008, 10000
+	setvar VAR_0x8005, MOVE_GRASS_PLEDGE
+	call PitArena_Tutor_ConfirmMoveSelection
+	end
+
+PitArena_Tutor_FirePledge::
+	setvar VAR_0x8008, 10000
+	setvar VAR_0x8005, MOVE_FIRE_PLEDGE
+	call PitArena_Tutor_ConfirmMoveSelection
+	end
+
+PitArena_Tutor_WaterPledge::
+	setvar VAR_0x8008, 10000
+	setvar VAR_0x8005, MOVE_WATER_PLEDGE
+	call PitArena_Tutor_ConfirmMoveSelection
+	end
+
+PitArena_Tutor_DracoMeteor::
+	setvar VAR_0x8008, 10000
+	setvar VAR_0x8005, MOVE_DRACO_METEOR
+	call PitArena_Tutor_ConfirmMoveSelection
+	end
+
+PitArena_Tutor_FrenzyPlant::
+	setvar VAR_0x8008, 10000
+	setvar VAR_0x8005, MOVE_FRENZY_PLANT
+	call PitArena_Tutor_ConfirmMoveSelection
+	end
+
+PitArena_Tutor_BlastBurn::
+	setvar VAR_0x8008, 10000
+	setvar VAR_0x8005, MOVE_BLAST_BURN
+	call PitArena_Tutor_ConfirmMoveSelection
+	end
+
+PitArena_Tutor_HydroCannon::
+	setvar VAR_0x8008, 10000
+	setvar VAR_0x8005, MOVE_HYDRO_CANNON
+	call PitArena_Tutor_ConfirmMoveSelection
+	end
+
+PitArena_Tutor_RelicSong::
+	setvar VAR_0x8008, 10000
+	setvar VAR_0x8005, MOVE_RELIC_SONG
+	call PitArena_Tutor_ConfirmMoveSelection
+	end
+
+PitArena_Tutor_SecretSword::
+	setvar VAR_0x8008, 10000
+	setvar VAR_0x8005, MOVE_SECRET_SWORD
+	call PitArena_Tutor_ConfirmMoveSelection
+	end
+
+PitArena_Tutor_ConfirmMoveSelection::
+	special BufferBattleFrontierTutorMoveName
+	buffernumberstring STR_VAR_2, VAR_0x8008
+	msgbox PitArena_Tutor_ConfirmMoveSelection_Text_0
+	msgbox PitArena_Tutor_ConfirmMoveSelection_Text_1, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq PitArena_Tutor_ConfirmMoveSelection_2
+	checkmoney 10000
+	compare VAR_RESULT, NO
+	goto_if_eq PitArena_Tutor_ConfirmMoveSelection_5
+	msgbox BattleFrontier_Lounge7_Text_TeachMoveToWhichMon, MSGBOX_DEFAULT
+	fadescreen FADE_TO_BLACK
+	special CloseBattleFrontierTutorWindow
+	special ChooseMonForMoveTutor
+	waitstate
+	compare VAR_RESULT, FALSE
+	goto_if_eq PitArena_Tutor_ConfirmMoveSelection_8
+	removemoney 10000
+PitArena_Tutor_ConfirmMoveSelection_4:
+	waitmessage
+	release
+	end
+
+PitArena_Tutor_ConfirmMoveSelection_2:
+	msgbox PitArena_Tutor_ConfirmMoveSelection_Text_2, MSGBOX_AUTOCLOSE
+	waitmessage
+	special CloseBattleFrontierTutorWindow
+	release
+	end
+
+PitArena_Tutor_ConfirmMoveSelection_5:
+	msgbox PitArena_Tutor_ConfirmMoveSelection_Text_3, MSGBOX_AUTOCLOSE
+	waitmessage
+	special CloseBattleFrontierTutorWindow
+	release
+	end
+
+PitArena_Tutor_ConfirmMoveSelection_8:
+	call PitArena_Tutor_Exit
+	goto PitArena_Tutor_ConfirmMoveSelection_4
+
+PitArena_Tutor_Exit::
+	special CloseBattleFrontierTutorWindow
+	release
 	end
 
 PitArena_Mover::
@@ -515,12 +694,24 @@ PitArena_ShopNPC_Option7:
 PitArena_ShopNPC_Option8:
 	.string "Exit$"
 PitArena_MoveRelearnerText:
-	.string "Move Relearner$"
+	.string "Move Relearner (free)$"
+PitArena_EggMovesText:
+	.string "Egg Moves$"
+PitArena_TutorMovesText:
+	.string "Tutor Moves$"
 PitArena_ShopNPC_OptionVitamin:
 	.string "Vitamins$"
-
 PitArena_ShopNPC_Text:
 	.string "How may I assist you?$"
+
+PitArena_Tutor_ConfirmMoveSelection_Text_0:
+	.string "The move {STR_VAR_1}, is it?$"
+PitArena_Tutor_ConfirmMoveSelection_Text_1:
+	.string "That will be {STR_VAR_2} Pokédollar, okay?$"
+PitArena_Tutor_ConfirmMoveSelection_Text_2:
+	.string "Alright. Come back anytime you want.$"
+PitArena_Tutor_ConfirmMoveSelection_Text_3:
+	.string "Oh, you don't have enough money!$"
 
 
 	.align 2

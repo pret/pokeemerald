@@ -2367,7 +2367,7 @@ void ShowScrollableMultichoice(void)
     case SCROLL_MULTI_BF_MOVE_TUTOR_1:
     case SCROLL_MULTI_BF_MOVE_TUTOR_2:
         task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-        task->tNumItems = 11;
+        task->tNumItems = 9;
         task->tLeft = 15;
         task->tTop = 1;
         task->tWidth = 14;
@@ -2510,16 +2510,15 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
     },
     [SCROLL_MULTI_BF_MOVE_TUTOR_1] =
     {
-        gText_Softboiled16BP,
-        gText_SeismicToss24BP,
-        gText_DreamEater24BP,
-        gText_MegaPunch24BP,
-        gText_MegaKick48BP,
-        gText_BodySlam48BP,
-        gText_RockSlide48BP,
-        gText_Counter48BP,
-        gText_ThunderWave48BP,
-        gText_SwordsDance48BP,
+        gText_GrassPledge,
+        gText_FirePledge,
+        gText_WaterPledge,
+        gText_DracoMeteor,
+        gText_FrenzyPlant,
+        gText_BlastBurn,
+        gText_HydroCannon,
+        gText_RelicSong,
+        gText_SecretSword,
         gText_Exit
     },
     [SCROLL_MULTI_BF_MOVE_TUTOR_2] =

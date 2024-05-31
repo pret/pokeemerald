@@ -57,6 +57,7 @@
 #include "constants/union_room.h"
 #include "constants/weather.h"
 #include "tx_randomizer_and_challenges.h"
+#include "daycare.h"
 
 
 #define FRIENDSHIP_EVO_THRESHOLD ((P_FRIENDSHIP_EVO_THRESHOLD >= GEN_9) ? 160 : 220)
@@ -8472,4 +8473,91 @@ bool8 IsSpeciesParadoxMon(u16 species)
     if (gSpeciesInfo[species].isParadoxForm)
         return TRUE;
     return FALSE;
+}
+
+u8 GetNumberOfEggMoves(struct Pokemon *mon)
+{
+    u16 eggMoveBuffer[EGG_MOVES_ARRAY_COUNT];
+    u16 learnedMoves[MAX_MON_MOVES];
+    u8 numMoves = 0;
+    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0);
+    u16 firstStage = GetEggSpecies(species);
+    u8 numEggMoves = GetEggMovesSpecies(firstStage, eggMoveBuffer);
+    u16 moves[numEggMoves];
+    int i, j;
+    bool8 hasMonMove = FALSE;
+
+    if (species == SPECIES_EGG)
+        return 0;
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
+
+    for (i = 0; i < numEggMoves; i++)
+    {
+        hasMonMove = FALSE;
+
+        for (j = 0; j < MAX_MON_MOVES; j++){
+            if(learnedMoves[j] == eggMoveBuffer[i])
+                hasMonMove = TRUE;
+        }
+
+        if(!hasMonMove)
+            moves[numMoves++] = eggMoveBuffer[i];
+    }
+
+    return numMoves;
+}
+
+u8 GetEggMoveTutorMoves(struct Pokemon *mon, u16 *moves)
+{
+    u16 learnedMoves[4];
+    u8 numMoves = 0;
+    u16 eggMoveBuffer[EGG_MOVES_ARRAY_COUNT];
+    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0);
+    u16 eggSpecies = GetEggSpecies(species);
+    u16 numEggMoves = GetEggMovesSpecies(eggSpecies, eggMoveBuffer);
+    int i, j;
+    bool8 hasMonMove = FALSE;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
+
+    for (i = 0; i < numEggMoves; i++)
+    {
+        hasMonMove = FALSE;
+
+        for (j = 0; j < MAX_MON_MOVES; j++){
+            if(learnedMoves[j] == eggMoveBuffer[i])
+                hasMonMove = TRUE;
+        }
+
+        if(!hasMonMove)
+            moves[numMoves++] = eggMoveBuffer[i];
+    }
+
+    return numMoves;
+}
+
+#define TUTOR_MOVES_COUNT ARRAY_COUNT(sTutorMoves)
+static const u16 sTutorMoves[] =
+{
+    MOVE_GRASS_PLEDGE,
+    MOVE_FIRE_PLEDGE,
+    MOVE_WATER_PLEDGE,
+    MOVE_DRACO_METEOR,
+    MOVE_FRENZY_PLANT,
+    MOVE_BLAST_BURN,
+    MOVE_HYDRO_CANNON,
+    MOVE_RELIC_SONG,
+    MOVE_SECRET_SWORD,
+};
+
+u8 GetTutorMoves(u16 *moves)
+{
+    int i;
+
+    for (i = 0; i < TUTOR_MOVES_COUNT; i++)
+        moves[i] = sTutorMoves[i];
+
+    return TUTOR_MOVES_COUNT;
 }

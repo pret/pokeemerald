@@ -565,20 +565,22 @@ u16 ReturnNumberOfTrainersForFloor()
     }
         
 
-    if((VarGet(VAR_PIT_FLOOR) % 5) == 0) // Heal Floor
+    if((VarGet(VAR_PIT_FLOOR) % 2) == 0) // Heal Floor
     {
         FlagClear(FLAG_HEAL_NPC);
         FlagClear(FLAG_SHOP_NPC);
 
-        if((VarGet(VAR_PIT_FLOOR) % 20) == 0) // New Mon Floor
+        if((VarGet(VAR_PIT_FLOOR) % 2) == 0) // New Mon Floor
         {
             FlagClear(FLAG_MOVE_RELEARNER);
+            FlagClear(FLAG_MOVE_TUTOR);
         }
         
         if((VarGet(VAR_PIT_FLOOR) % 25) == 0) // New Mon Floor
         {
             FlagClear(FLAG_GIVE_POKEMON);
             FlagSet(FLAG_MOVE_RELEARNER);
+            FlagSet(FLAG_MOVE_TUTOR);
         }
         return 0;
     }
@@ -588,6 +590,7 @@ u16 ReturnNumberOfTrainersForFloor()
     FlagSet(FLAG_MOVE_RELEARNER);
     FlagSet(FLAG_MOVER_OBJECT);
     FlagSet(FLAG_GIVE_POKEMON);
+    FlagSet(FLAG_MOVE_TUTOR);
 
     if((VarGet(VAR_PIT_FLOOR) > 5) && ((VarGet(VAR_PIT_FLOOR) < 95) || (VarGet(VAR_PIT_FLOOR) > 101)))
     {

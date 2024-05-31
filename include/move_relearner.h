@@ -3,5 +3,6 @@
 
 void TeachMoveRelearnerMove(void);
 void MoveRelearnerShowHideHearts(s32);
+void ShowTutorMoveList(void);
 
 #endif //GUARD_MOVE_RELEARNER_H
