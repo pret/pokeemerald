@@ -819,4 +819,7 @@ u8 GetRandomType(void);
 u8 EvolutionBlockedByEvoLimit(u16 species);
 u16 GetSpeciesRandomSeeded(u16 species);
 u16 GetSpeciesRandomNotSeeded(u16 species);
+u8 GetNumberOfEggMoves(struct Pokemon *mon);
+u8 GetEggMoveTutorMoves(struct Pokemon *mon, u16 *moves);
+u8 GetTutorMoves(u16 *moves);
 #endif // GUARD_POKEMON_H

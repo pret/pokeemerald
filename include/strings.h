@@ -920,6 +920,7 @@ extern const u8 gText_MoveRelearnerStopTryingToTeachMove[];
 extern const u8 gText_MoveRelearnerAndPoof[];
 extern const u8 gText_MoveRelearnerPkmnForgotMoveAndLearnedNew[];
 extern const u8 gText_TeachWhichMoveToPkmn[];
+extern const u8 gText_TeachWhichMove[];
 extern const u8 gText_MoveRelearnerGiveUp[];
 extern const u8 gText_MoveRelearnerTeachMoveConfirm[];
 extern const u8 gText_MoveRelearnerBattleMoves[];
@@ -3231,5 +3232,9 @@ extern const u8 gText_PM[];
 
 extern const u8 gText_Fertilize[];
 extern const u8 gText_PlantBerry[];
+
+// Move Tutors
+extern const u8 gText_TutorMoves[];
+extern const u8 gText_Egg_Moves[];
 
 #endif // GUARD_STRINGS_H

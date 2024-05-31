@@ -571,7 +571,7 @@ u16 ReturnNumberOfTrainersForFloor()
         FlagClear(FLAG_HEAL_NPC);
         FlagClear(FLAG_SHOP_NPC);
 
-        if((VarGet(VAR_PIT_FLOOR) % 20) == 0) // New Mon Floor
+        if((VarGet(VAR_PIT_FLOOR) % 20) == 0) // Move Relearner/Tutor Floor
         {
             FlagClear(FLAG_MOVE_RELEARNER);
         }

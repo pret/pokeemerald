@@ -445,7 +445,7 @@ static void UNUSED ClearAllDaycareData(struct DayCare *daycare)
 // Determines what the species of an Egg would be based on the given species.
 // It determines this by working backwards through the evolution chain of the
 // given species.
-static u16 GetEggSpecies(u16 species)
+u16 GetEggSpecies(u16 species)
 {
     int i, j, k;
     bool8 found;
@@ -795,7 +795,10 @@ u8 GetEggMovesSpecies(u16 species, u16 *eggMoves)
             break;
         }
 
-        eggMoves[i] = gEggMoves[eggMoveIdx + i];
+    	if(FlagGet(FLAG_RANDOM_MODE))
+            eggMoves[i] = GetRandomMove(gEggMoves[eggMoveIdx + i], species);
+        else
+            eggMoves[i] = gEggMoves[eggMoveIdx + i];
         numEggMoves++;
     }
 
