@@ -795,7 +795,10 @@ u8 GetEggMovesSpecies(u16 species, u16 *eggMoves)
             break;
         }
 
-        eggMoves[i] = gEggMoves[eggMoveIdx + i];
+    	if(FlagGet(FLAG_RANDOM_MODE))
+            eggMoves[i] = GetRandomMove(gEggMoves[eggMoveIdx + i], species);
+        else
+            eggMoves[i] = gEggMoves[eggMoveIdx + i];
         numEggMoves++;
     }
 

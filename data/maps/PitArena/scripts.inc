@@ -10,6 +10,7 @@ PitArena_OnFrame:
 
 PitArena_OnFrameRewardDrop::
 	lockall
+	setvar VAR_PIT_TUTOR_STATE, 0
 	setvar VAR_REWARD_STATE, 2
 	random 3
 	switch VAR_RESULT
@@ -318,16 +319,20 @@ PitArena_Text_ReceivedMon:
 PitArena_MoveRelearner::
 	lockall
 	faceplayer
+	showmoneybox 12, 11
 	dynmultichoice 17, 1, 0, 5, 0, DYN_MULTICHOICE_CB_NONE, PitArena_MoveRelearnerText, PitArena_EggMovesText, PitArena_TutorMovesText, PitArena_ShopNPC_Option8
 	goto_if_eq VAR_RESULT, 0, PitArena_MartNPCMoveRelearner
 	goto_if_eq VAR_RESULT, 1, PitArena_MartNPCMoveTutorEggMoves
 	goto_if_eq VAR_RESULT, 2, PitArena_MartNPCMoveTutorTutorMoves
 EndOfRelearnerScript::
+	hidemoneybox
 	release
 	end
 
 PitArena_MartNPCMoveRelearner::
 	setvar VAR_PIT_TUTOR_STATE, 0
+	hidemoneybox
+	release
 PitArena_MartNPCMoveTutor::
 	special ChooseMonForMoveRelearner
 	waitstate
@@ -341,14 +346,29 @@ PitArena_MartNPCMoveTutor::
 	end
 
 PitArena_MartNPCMoveTutorEggMoves::
+	checkmoney 10000
+	goto_if_eq VAR_RESULT, FALSE, PitArena_MartNPCMoveTutorTutorMoves_NotEnoughMoney
 	setvar VAR_PIT_TUTOR_STATE, 2
+	hidemoneybox
+	release
 	goto PitArena_MartNPCMoveTutor
 	end
 
 PitArena_MartNPCMoveTutorTutorMoves::
 	setvar VAR_PIT_TUTOR_STATE, 1
+	hidemoneybox
+	release
 	special ShowTutorMoveList
 	waitstate
+	call_if_eq VAR_RESULT, 99, PitArena_MartNPCMoveTutorTutorMoves_NotEnoughMoney
+	release
+	end
+
+PitArena_MartNPCMoveTutorTutorMoves_NotEnoughMoney::
+	hidemoneybox
+	release
+	lock
+	msgbox PitArena_Tutor_NotGotTheMoney, MSGBOX_AUTOCLOSE
 	release
 	end
 
@@ -533,9 +553,9 @@ PitArena_ShopNPC_Option8:
 PitArena_MoveRelearnerText:
 	.string "Move Relearner (free)$"
 PitArena_EggMovesText:
-	.string "Egg Moves$"
+	.string "Egg Moves (10.000¥)$"
 PitArena_TutorMovesText:
-	.string "Tutor Moves$"
+	.string "Tutor Moves (10.000¥)$"
 PitArena_ShopNPC_OptionVitamin:
 	.string "Vitamins$"
 PitArena_ShopNPC_Text:
@@ -547,7 +567,7 @@ PitArena_Tutor_ConfirmMoveSelection_Text_1:
 	.string "That will be {STR_VAR_2} Pokédollar, okay?$"
 PitArena_Tutor_ConfirmMoveSelection_Text_2:
 	.string "Alright. Come back anytime you want.$"
-PitArena_Tutor_ConfirmMoveSelection_Text_3:
+PitArena_Tutor_NotGotTheMoney:
 	.string "Oh, you don't have enough money!$"
 
 

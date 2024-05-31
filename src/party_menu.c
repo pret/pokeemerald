@@ -77,6 +77,7 @@
 #include "constants/songs.h"
 #include "naming_screen.h"
 #include "ui_menu.h"
+#include "money.h"
 
 #if (DECAP_ENABLED) && (DECAP_MIRRORING) && !(DECAP_PARTY_MENU)
 #define gStringVar4 (MirrorPtr(gStringVar4))
@@ -2301,6 +2302,7 @@ static void Task_HandleCancelParticipationYesNoInput(u8 taskId)
 
 static u8 CanTeachMove(struct Pokemon *mon, u16 move)
 {
+    DebugPrintf("move = %d", move);
     if (GetMonData(mon, MON_DATA_IS_EGG))
         return CANNOT_LEARN_MOVE_IS_EGG;
     else if (!CanLearnTeachableMove(GetMonData(mon, MON_DATA_SPECIES_OR_EGG), move))
@@ -5550,6 +5552,9 @@ static void Task_DoLearnedMoveFanfareAfterText(u8 taskId)
 {
     if (IsPartyMenuTextPrinterActive() != TRUE)
     {
+        //deduct money if a tutor move was taught
+        if(VarGet(VAR_PIT_TUTOR_STATE) == TUTOR_STATE_TUTOR_MOVES)
+            RemoveMoney(&gSaveBlock1Ptr->money, 10000);
         PlayFanfare(MUS_LEVEL_UP);
         gTasks[taskId].func = Task_LearnNextMoveOrClosePartyMenu;
     }

@@ -6096,6 +6096,8 @@ u8 CanLearnTeachableMove(u16 species, u16 move)
     {
         u32 i, j;
         const u16 *teachableLearnset = GetSpeciesTeachableLearnset(species);
+
+        DebugPrintf("species = %d, move = %d", species, move);
         for (i = 0; i < ARRAY_COUNT(sUniversalMoves); i++)
         {
             if (sUniversalMoves[i] == move)

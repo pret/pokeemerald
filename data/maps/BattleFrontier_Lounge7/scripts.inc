@@ -125,6 +125,20 @@ BattleFrontier_Lounge7_EventScript_SwordsDance::
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
+BattleFrontier_Lounge7_EventScript_SetUpTutorMovesForLearnsets::
+	setvar VAR_0x8008, 48
+	setvar VAR_0x8005, MOVE_GRASS_PLEDGE
+	setvar VAR_0x8005, MOVE_FIRE_PLEDGE
+	setvar VAR_0x8005, MOVE_WATER_PLEDGE
+	setvar VAR_0x8005, MOVE_DRACO_METEOR
+	setvar VAR_0x8005, MOVE_FRENZY_PLANT
+	setvar VAR_0x8005, MOVE_BLAST_BURN
+	setvar VAR_0x8005, MOVE_HYDRO_CANNON
+	setvar VAR_0x8005, MOVE_RELIC_SONG
+	setvar VAR_0x8005, MOVE_SECRET_SWORD
+	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
+	end
+
 BattleFrontier_Lounge7_EventScript_RightMoveTutor::
 	lock
 	faceplayer
