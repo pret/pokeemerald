@@ -5976,9 +5976,59 @@ void RunBattleScriptCommands(void)
         gBattleScriptingCommandsTable[gBattlescriptCurrInstr[0]]();
 }
 
+bool32 TrySetAteType(u32 move, u32 battlerAtk, u32 attackerAbility)
+{
+    u32 ateType;
+
+    switch (gMovesInfo[move].effect)
+    {
+    case EFFECT_TERA_BLAST:
+        if (IsTerastallized(battlerAtk))
+            return FALSE;
+        break;
+    case EFFECT_TERA_STARSTORM:
+        if (gBattleMons[battlerAtk].species == SPECIES_TERAPAGOS_STELLAR)
+            return FALSE;
+        break;
+    case EFFECT_HIDDEN_POWER:
+    case EFFECT_WEATHER_BALL:
+    case EFFECT_CHANGE_TYPE_ON_ITEM:
+    case EFFECT_NATURAL_GIFT:
+        return FALSE;
+    }
+
+    ateType = TYPE_NONE;
+    switch (attackerAbility)
+    {
+    case ABILITY_PIXILATE:
+        ateType = TYPE_FAIRY;
+        break;
+    case ABILITY_REFRIGERATE:
+        ateType = TYPE_ICE;
+        break;
+    case ABILITY_AERILATE:
+        ateType = TYPE_FLYING;
+        break;
+    case ABILITY_GALVANIZE:
+        ateType = TYPE_ELECTRIC;
+        break;
+    default:
+        ateType = TYPE_NONE;
+        break;
+    }
+
+    if (ateType != TYPE_NONE)
+    {
+        gBattleStruct->dynamicMoveType = ateType | F_DYNAMIC_TYPE_SET;
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
 void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
 {
-    u32 moveType, ateType, attackerAbility;
+    u32 moveType, attackerAbility;
     u16 holdEffect = GetBattlerHoldEffect(battlerAtk, TRUE);
 
     if (move == MOVE_STRUGGLE)
@@ -6080,29 +6130,15 @@ void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
     }
 
     attackerAbility = GetBattlerAbility(battlerAtk);
-
-    if (gMovesInfo[move].type == TYPE_NORMAL
-             && gMovesInfo[move].effect != EFFECT_HIDDEN_POWER
-             && gMovesInfo[move].effect != EFFECT_WEATHER_BALL
-             && gMovesInfo[move].effect != EFFECT_CHANGE_TYPE_ON_ITEM
-             && gMovesInfo[move].effect != EFFECT_NATURAL_GIFT
-             && !(gMovesInfo[move].effect == EFFECT_TERA_BLAST && IsTerastallized(battlerAtk))
-             && !(gMovesInfo[move].effect == EFFECT_TERA_STARSTORM && gBattleMons[battlerAtk].species == SPECIES_TERAPAGOS_STELLAR)
-             && ((attackerAbility == ABILITY_PIXILATE && (ateType = TYPE_FAIRY))
-                 || (attackerAbility == ABILITY_REFRIGERATE && (ateType = TYPE_ICE))
-                 || (attackerAbility == ABILITY_AERILATE && (ateType = TYPE_FLYING))
-                 || ((attackerAbility == ABILITY_GALVANIZE) && (ateType = TYPE_ELECTRIC))
-                )
-             )
+    if (gMovesInfo[move].type == TYPE_NORMAL && TrySetAteType(move, battlerAtk, attackerAbility))
     {
-        gBattleStruct->dynamicMoveType = ateType | F_DYNAMIC_TYPE_SET;
         if (!IsDynamaxed(battlerAtk))
             gBattleStruct->ateBoost[battlerAtk] = 1;
     }
     else if (gMovesInfo[move].type != TYPE_NORMAL
-             && gMovesInfo[move].effect != EFFECT_HIDDEN_POWER
-             && gMovesInfo[move].effect != EFFECT_WEATHER_BALL
-             && attackerAbility == ABILITY_NORMALIZE)
+          && gMovesInfo[move].effect != EFFECT_HIDDEN_POWER
+          && gMovesInfo[move].effect != EFFECT_WEATHER_BALL
+          && attackerAbility == ABILITY_NORMALIZE)
     {
         gBattleStruct->dynamicMoveType = TYPE_NORMAL | F_DYNAMIC_TYPE_SET;
         if (!IsDynamaxed(battlerAtk))
