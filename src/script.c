@@ -576,9 +576,19 @@ u16 ReturnNumberOfTrainersForFloor()
         FlagClear(FLAG_HEAL_NPC);
         FlagClear(FLAG_SHOP_NPC);
 
-        if((VarGet(VAR_PIT_FLOOR) % 20) == 0) // Move Relearner/Tutor Floor
+        if(FlagGet(FLAG_RANDOM_MODE))
         {
-            FlagClear(FLAG_MOVE_RELEARNER);
+            if((VarGet(VAR_PIT_FLOOR) % 20) == 0) // Move Relearner/Tutor Floor
+            {
+                FlagClear(FLAG_MOVE_RELEARNER);
+            }
+        }
+        else
+        {
+            if((VarGet(VAR_PIT_FLOOR) % 10) == 0) // Move Relearner/Tutor Floor
+            {
+                FlagClear(FLAG_MOVE_RELEARNER);
+            }
         }
         
         if((VarGet(VAR_PIT_FLOOR) % 25) == 0) // New Mon Floor
