@@ -611,15 +611,54 @@ u16 ReturnNumberOfTrainersForFloor()
         return 1;
 
     u16 randomValue = Random() % 100;
-    if(randomValue < 55)
-        return 1;
-    if(randomValue < 85)
-        return 2;
-    if(randomValue < 95)
-        return 3;
-    if(randomValue < 100)
-        return 4;
-
+    if(VarGet(VAR_PIT_FLOOR) < 25) // first 25 floor rates
+    {
+        if(randomValue < 65)
+            return 1;
+        if(randomValue < 90)
+            return 2;
+        if(randomValue < 99)
+            return 3;
+        if(randomValue < 100)
+            return 4;
+        return 0;
+    }
+    else if(VarGet(VAR_PIT_FLOOR) < 50) // second 25 floor rates
+    {
+        if(randomValue < 55)
+            return 1;
+        if(randomValue < 85)
+            return 2;
+        if(randomValue < 95)
+            return 3;
+        if(randomValue < 100)
+            return 4;
+        return 0;
+    }
+    else if(VarGet(VAR_PIT_FLOOR) < 75)  // third 25 floor rates
+    {
+        if(randomValue < 30)
+            return 1;
+        if(randomValue < 60)
+            return 2;
+        if(randomValue < 90)
+            return 3;
+        if(randomValue < 100)
+            return 4;
+        return 0;
+    }
+    else  // last 25 floor rates and post level 100 rates
+    {
+        if(randomValue < 20)
+            return 1;
+        if(randomValue < 40)
+            return 2;
+        if(randomValue < 80)
+            return 3;
+        if(randomValue < 100)
+            return 4;
+        return 0;
+    }   
     return 0;
 }
 
