@@ -330,7 +330,7 @@ static void VBlankCB(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    ChangeBgY(3, 96, BG_COORD_ADD);
+    ChangeBgY(3, 96, BG_COORD_SUB);
 }
 
 static const u8 sText_TopBar_Main[]         = _("OPTIONS");

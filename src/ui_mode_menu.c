@@ -69,10 +69,10 @@ enum WindowIds
 
 enum MenuItems
 {
-    MENUITEM_MAIN_DEFAULTS,
-    MENUITEM_MAIN_AUTOSAVE,
     MENUITEM_MAIN_BATTLEMODE,
     MENUITEM_MAIN_RANDOMIZER,
+    MENUITEM_MAIN_AUTOSAVE,
+    MENUITEM_MAIN_DEFAULTS,
     MENUITEM_MAIN_XPSHARE,
     MENUITEM_MAIN_STAT_CHANGER,
     MENUITEM_MAIN_LEGENDARIES,
@@ -269,7 +269,7 @@ struct MainMenu
 };
 
 // Menu left side option names text
-static const u8 sText_Defaults[]    = _("PRESETS");
+static const u8 sText_Defaults[]    = _("DIFFICULTY");
 static const u8 sText_Autosave[]    = _("AUTOSAVE");
 static const u8 sText_BattleMode[]  = _("BATTLE MODE");
 static const u8 sText_Randomizer[]  = _("RANDOMIZER");
@@ -542,7 +542,7 @@ static void ModeMenu_VBlankCB(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    ChangeBgY(3, 96, BG_COORD_ADD);
+    ChangeBgY(3, 96, BG_COORD_SUB);
 }
 
 //Header Window
@@ -783,7 +783,7 @@ static void Task_ModeMenuMainInput(u8 taskId)
                 //change selections based on defaults
                 switch(sOptions->menuCursor)
                 {
-                    case 0: // 0 = first line => DEFAULT choice
+                    case MENUITEM_MAIN_DEFAULTS: // 0 = first line => DEFAULT choice
                         //populate default options to the other mode lines
                         switch(sOptions->sel[cursor])
                         {
@@ -803,6 +803,7 @@ static void Task_ModeMenuMainInput(u8 taskId)
                                 break;
                         }
                         break;
+                    case 0: //do nothing
                     case 1: //do nothing
                     case 2: //do nothing
                         break;
