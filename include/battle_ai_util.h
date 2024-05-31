@@ -4,8 +4,8 @@
 #define FOE(battler) ((BATTLE_OPPOSITE(battler)) & BIT_SIDE)
 
 // Roll boundaries used by AI when scoring. Doesn't affect actual damage dealt.
-#define MAX_ROLL_PERCENTAGE 100
-#define MIN_ROLL_PERCENTAGE 85
+#define MAX_ROLL_PERCENTAGE DMG_ROLL_PERCENT_HI 
+#define MIN_ROLL_PERCENTAGE DMG_ROLL_PERCENT_LO
 
 enum
 {

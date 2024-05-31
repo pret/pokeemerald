@@ -391,9 +391,9 @@ static inline s32 HighestRollDmg(s32 dmg)
     return dmg;
 }
 
-static inline s32 AverageRollDmg(s32 dmg)
+static inline s32 AverageDmg(s32 dmg)
 {
-    dmg = ((HighestRollDmg(dmg) + LowestRollDmg(dmg)) * 100) / 2;
+    dmg = (dmg * (MIN_ROLL_PERCENTAGE + MAX_ROLL_PERCENTAGE)) / 2;
     dmg /= 100;
     return dmg;
 }
@@ -559,7 +559,7 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
             u32 critChance = GetCritHitChance(critChanceIndex);
             // With critChance getting closer to 1, dmg gets closer to critDmg.
             if (dmgRoll == DMG_ROLL_AVERAGE)
-                dmg = AverageRollDmg((critDmg + normalDmg * (critChance - 1)) / (critChance));
+                dmg = AverageDmg((critDmg + normalDmg * (critChance - 1)) / (critChance));
             else if (dmgRoll == DMG_ROLL_HIGHEST)
                 dmg = HighestRollDmg((critDmg + normalDmg * (critChance - 1)) / (critChance));
             else
@@ -568,7 +568,7 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
         else
         {
             if (dmgRoll == DMG_ROLL_AVERAGE)
-                dmg = AverageRollDmg(normalDmg);
+                dmg = AverageDmg(normalDmg);
             else if (dmgRoll == DMG_ROLL_HIGHEST)
                 dmg = HighestRollDmg(normalDmg);
             else
