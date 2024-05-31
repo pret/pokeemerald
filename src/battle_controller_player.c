@@ -1847,7 +1847,7 @@ static void MoveSelectionDisplayMoveDescription(u32 battler)
     if (gMovesInfo[move].effect == EFFECT_PLACEHOLDER)
         StringAppend(gDisplayedStringBattle, gNotDoneYetDescription);
     else
-        StringAppend(gDisplayedStringBattle, gMovesInfo[move - 1].description);
+        StringAppend(gDisplayedStringBattle, gMovesInfo[move].description);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_DESCRIPTION);
 
     if (gCategoryIconSpriteId == 0xFF)
