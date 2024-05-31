@@ -162,7 +162,7 @@ static bool32 HasBadOdds(u32 battler, bool32 emitResult)
     // Check if current mon can outspeed and KO in spite of bad matchup, and don't switch out if it can
     if(damageDealt > gBattleMons[opposingBattler].hp)
     {
-        if (AI_WhoStrikesFirst(battler, opposingBattler, aiBestMove) == AI_IS_FASTER)
+        if (AI_IsFaster(battler, opposingBattler, aiBestMove))
             return FALSE;
     }
 
@@ -569,7 +569,7 @@ static bool32 ShouldSwitchIfGameStatePrompt(u32 battler, bool32 emitResult)
                 && AnyStatIsRaised(battler))
                 switchMon = FALSE;
             if (AiExpectsToFaintPlayer(battler)
-                && !AI_STRIKES_FIRST(battler, opposingBattler, 0)
+                && AI_IsSlower(battler, opposingBattler, 0)
                 && !AI_OpponentCanFaintAiWithMod(battler, 0))
                 switchMon = FALSE;
         }
@@ -2019,7 +2019,7 @@ static bool32 AiExpectsToFaintPlayer(u32 battler)
 
     if (GetBattlerSide(target) != GetBattlerSide(battler)
       && CanIndexMoveFaintTarget(battler, target, gBattleStruct->aiMoveOrAction[battler], 0)
-      && AI_WhoStrikesFirst(battler, target, GetAIChosenMove(battler)) == AI_IS_FASTER)
+      && AI_IsFaster(battler, target, GetAIChosenMove(battler)))
     {
         // We expect to faint the target and move first -> dont use an item
         return TRUE;
