@@ -5,10 +5,12 @@
 
 extern u8 gLastViewedMonIndex;
 
-extern const u8 *const gMoveDescriptionPointers[];
 extern const u8 gNotDoneYetDescription[];
 extern const struct SpriteTemplate gSpriteTemplate_MoveTypes;
 extern const struct CompressedSpriteSheet gSpriteSheet_MoveTypes;
+extern const struct CompressedSpriteSheet gSpriteSheet_CategoryIcons;
+extern const struct SpritePalette gSpritePal_CategoryIcons;
+extern const struct SpriteTemplate gSpriteTemplate_CategoryIcons;
 
 void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void));
 void ShowSelectMovePokemonSummaryScreen(struct Pokemon *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void), u16 newMove);

@@ -3753,3 +3753,9 @@ void ArrowsChangeColorLastBallCycle(bool32 showArrows)
     }
 #endif
 }
+
+void CategoryIcons_LoadSpritesGfx(void)
+{
+    LoadCompressedSpriteSheet(&gSpriteSheet_CategoryIcons);
+    LoadSpritePalette(&gSpritePal_CategoryIcons);
+}

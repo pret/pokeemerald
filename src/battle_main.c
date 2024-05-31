@@ -230,6 +230,7 @@ EWRAM_DATA u16 gBallToDisplay = 0;
 EWRAM_DATA bool8 gLastUsedBallMenuPresent = FALSE;
 EWRAM_DATA u8 gPartyCriticalHits[PARTY_SIZE] = {0};
 EWRAM_DATA static u8 sTriedEvolving = 0;
+EWRAM_DATA u8 gCategoryIconSpriteId = 0;
 
 void (*gPreBattleCallback1)(void);
 void (*gBattleMainFunc)(void);
@@ -3416,6 +3417,7 @@ static void BattleStartClearSetData(void)
 
     gBattleStruct->swapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
     gSelectedMonPartyId = PARTY_SIZE; // Revival Blessing
+    gCategoryIconSpriteId = 0xFF;
 }
 
 void SwitchInClearSetData(u32 battler)
