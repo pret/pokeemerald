@@ -45,7 +45,8 @@ SINGLE_BATTLE_TEST("Clear Body prevents stat stage reduction from moves")
         ASSUME(gMovesInfo[MOVE_CONFIDE].effect == EFFECT_SPECIAL_ATTACK_DOWN);
         ASSUME(gMovesInfo[MOVE_FAKE_TEARS].effect == EFFECT_SPECIAL_DEFENSE_DOWN_2);
         ASSUME(gMovesInfo[MOVE_SCARY_FACE].effect == EFFECT_SPEED_DOWN_2);
-        ASSUME(gMovesInfo[MOVE_SWEET_SCENT].effect == (B_UPDATED_MOVE_DATA >= GEN_6 ? EFFECT_EVASION_DOWN_2 : EFFECT_EVASION_DOWN));
+        ASSUME(B_UPDATED_MOVE_DATA >= GEN_6);
+        ASSUME(gMovesInfo[MOVE_SWEET_SCENT].effect == EFFECT_EVASION_DOWN_2);
         ASSUME(gMovesInfo[MOVE_SAND_ATTACK].effect == EFFECT_ACCURACY_DOWN);
         PLAYER(SPECIES_WOBBUFFET)
         OPPONENT(SPECIES_BELDUM) { Ability(ABILITY_CLEAR_BODY); }
@@ -82,7 +83,7 @@ SINGLE_BATTLE_TEST("Clear Body prevents Sticky Web")
 SINGLE_BATTLE_TEST("Clear Body doesn't prevent stat stage reduction from moves used by the user")
 {
     GIVEN {
-        ASSUME(MoveHasAdditionalEffect(MOVE_SUPERPOWER, MOVE_EFFECT_ATK_DEF_DOWN) == TRUE);
+        ASSUME(MoveHasAdditionalEffectSelf(MOVE_SUPERPOWER, MOVE_EFFECT_ATK_DEF_DOWN) == TRUE);
         PLAYER(SPECIES_WOBBUFFET)
         OPPONENT(SPECIES_BELDUM) { Ability(ABILITY_CLEAR_BODY); }
     } WHEN {
@@ -129,7 +130,8 @@ SINGLE_BATTLE_TEST("Mold Breaker, Teravolt, and Turboblaze ignore Clear Body")
         ASSUME(gMovesInfo[MOVE_CONFIDE].effect == EFFECT_SPECIAL_ATTACK_DOWN);
         ASSUME(gMovesInfo[MOVE_FAKE_TEARS].effect == EFFECT_SPECIAL_DEFENSE_DOWN_2);
         ASSUME(gMovesInfo[MOVE_SCARY_FACE].effect == EFFECT_SPEED_DOWN_2);
-        ASSUME(gMovesInfo[MOVE_SWEET_SCENT].effect == (B_UPDATED_MOVE_DATA >= GEN_6 ? EFFECT_EVASION_DOWN_2 : EFFECT_EVASION_DOWN));
+        ASSUME(B_UPDATED_MOVE_DATA >= GEN_6);
+        ASSUME(gMovesInfo[MOVE_SWEET_SCENT].effect == EFFECT_EVASION_DOWN_2);
         ASSUME(gMovesInfo[MOVE_SAND_ATTACK].effect == EFFECT_ACCURACY_DOWN);
         PLAYER(SPECIES_WOBBUFFET) { Ability(ability); }
         OPPONENT(SPECIES_BELDUM) { Ability(ABILITY_CLEAR_BODY); }
