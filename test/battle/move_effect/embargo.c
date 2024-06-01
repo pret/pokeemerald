@@ -203,7 +203,7 @@ SINGLE_BATTLE_TEST("Embargo doesn't stop an item flung at an affected target fro
     }
 }
 
-SINGLE_BATTLE_TEST("Embargo is passed via Baton Pass")
+SINGLE_BATTLE_TEST("Baton Pass passes Embargo's effect")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
