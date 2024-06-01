@@ -2976,7 +2976,9 @@ bool32 ShouldSetScreen(u32 battlerAtk, u32 battlerDef, u32 moveEffect)
 {
     u32 atkSide = GetBattlerSide(battlerAtk);
 
-    if (HasMoveEffect(battlerDef, EFFECT_BRICK_BREAK)) // Don't waste a turn if screens will be broken
+    // Don't waste a turn if screens will be broken
+    if (HasMoveEffect(battlerDef, EFFECT_BRICK_BREAK)
+     || HasMoveEffect(battlerDef, EFFECT_RAGING_BULL))
         return FALSE;
 
     switch (moveEffect)

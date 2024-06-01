@@ -24,3 +24,4 @@ TO_DO_BATTLE_TEST("Leech Seed doesn't affect already seeded targets")
 TO_DO_BATTLE_TEST("Leech Seeded targets lose 1/8 of its max HP every turn and give it to the user")
 TO_DO_BATTLE_TEST("Leech Seed's effect is paused until a new battler replaces the original user's position") // Faint, can't be replaced, then revived.
 TO_DO_BATTLE_TEST("Leech Seed's effect pause still prevents it from being seeded again")
+TO_DO_BATTLE_TEST("Baton Pass passes Leech Seed's effect");

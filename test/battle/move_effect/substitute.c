@@ -68,3 +68,5 @@ SINGLE_BATTLE_TEST("Substitute's HP cost doesn't trigger effects that trigger on
         NOT MESSAGE("Wobbuffet's Air Balloon popped!");
     }
 }
+
+TO_DO_BATTLE_TEST("Baton Pass passes Substitutes");
