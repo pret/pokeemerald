@@ -446,6 +446,14 @@ bool32 IsDamageMoveUnusable(u32 move, u32 battlerAtk, u32 battlerDef)
         if (!(gFieldStatuses & STATUS_FIELD_TERRAIN_ANY) && gMovesInfo[move].argument == ARG_TRY_REMOVE_TERRAIN_FAIL)
             return TRUE;
         break;
+    case EFFECT_POLTERGEIST:
+        if (AI_DATA->items[battlerDef] == ITEM_NONE)
+            return TRUE;
+        break;
+    case EFFECT_FIRST_TURN_ONLY:
+        if (!gDisableStructs[battlerAtk].isFirstTurn)
+            return TRUE;
+        break;
     }
 
     return FALSE;
