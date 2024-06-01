@@ -79,12 +79,6 @@
 #include "ui_menu.h"
 #include "money.h"
 
-#if (DECAP_ENABLED) && (DECAP_MIRRORING) && !(DECAP_PARTY_MENU)
-#define gStringVar4 (MirrorPtr(gStringVar4))
-#define AddTextPrinterParameterized4(a, b, c, d, e, f, g, h, str) (AddTextPrinterParameterized4(a, b, c, d, e, f, g, h, MirrorPtr(str)))
-#define AddTextPrinterParameterized3(a, b, c, d, e, f, str) AddTextPrinterParameterized3(a, b, c, d, e, f, MirrorPtr(str))
-#endif
-
 //Tutor states for VAR_PIT_TUTOR_STATE
 #define TUTOR_STATE_RELEARNER 0
 #define TUTOR_STATE_TUTOR_MOVES 1

@@ -25,6 +25,7 @@
 #include "overworld.h"
 #include "event_data.h"
 #include "bw_summary_screen.h"
+#include "config/decap.h"
 
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
@@ -876,17 +877,12 @@ static u16 SanitizeItemId(u16 itemId)
 
 const u8 *ItemId_GetNameRandom(u16 itemId)
 {
-    if (DECAP_ENABLED && DECAP_MIRRORING && !DECAP_ITEM_NAMES)
-        return ROM_MIRROR_PTR(gItemsInfo[SanitizeItemId(itemId)].name);
-    else
+    if (GetPocketByItemId(SanitizeItemId(itemId)) == POCKET_TM_HM)
     {
-        if (GetPocketByItemId(SanitizeItemId(itemId)) == POCKET_TM_HM)
-        {
-            return gMovesInfo[GetRandomMove(itemId, gItemsInfo[itemId].secondaryId)].name;
-        }
-        else
-            return gItemsInfo[SanitizeItemId(itemId)].name;
+        return gMovesInfo[GetRandomMove(itemId, gItemsInfo[itemId].secondaryId)].name;
     }
+    else
+        return gItemsInfo[SanitizeItemId(itemId)].name;
 }
 
 const u8 *ItemId_GetName(u16 itemId)
@@ -895,20 +891,14 @@ const u8 *ItemId_GetName(u16 itemId)
     {
         return ItemId_GetNameRandom(itemId);
     }
-    if (DECAP_ENABLED && DECAP_MIRRORING && !DECAP_ITEM_NAMES)
-        return ROM_MIRROR_PTR(gItemsInfo[SanitizeItemId(itemId)].name);
+    if (GetPocketByItemId(SanitizeItemId(itemId)) == POCKET_TM_HM)
+    {
+        return gMovesInfo[gItemsInfo[itemId].secondaryId].name;
+    }
     else
     {
-        if (GetPocketByItemId(SanitizeItemId(itemId)) == POCKET_TM_HM)
-        {
-            return gMovesInfo[gItemsInfo[itemId].secondaryId].name;
-        }
-        else
-        {
-            return gItemsInfo[SanitizeItemId(itemId)].name;
-        }
+        return gItemsInfo[SanitizeItemId(itemId)].name;
     }
-        
 }
 
 
