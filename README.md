@@ -170,7 +170,7 @@ With this, you'll get the latest version of pokeemerald-expansion, plus a couple
 - Check your current version.
     - You can check in the debug menu's `Utilities -> Expansion Version` option.
     - If the option is not available, you possibly have version 1.6.2 or older. In that case, please check the [changelogs](CHANGELOG.md) to determine your version based on the features available on your repository.
-- Once you have your remote set up, run the command `git pull RHH expansion/X.Y.Z`, replacing X, Y and Z with the digits of the respective version you want to update to (eg, to update to 1.8.3, use `git pull RHH expansion/1.8.3`).
+- Once you have your remote set up, run the command `git pull RHH expansion/X.Y.Z`, replacing X, Y and Z with the digits of the respective version you want to update to (eg, to update to 1.8.4, use `git pull RHH expansion/1.8.4`).
     - ***Important:*** If you are several versions behind, we recommend updating one minor version at a time, skipping directly to the latest patch version (eg, 1.5.3 -> 1.6.2 -> 1.7.4 and so on)
 - Alternatively, you can update to unreleased versions of the expansion.
     - ***master (stable):*** It contains unreleased **bugfixes** that will come in the next patch version. To merge, use `git pull RHH master`.

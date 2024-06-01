@@ -43,3 +43,27 @@ SINGLE_BATTLE_TEST("Mycelium Might ignores opposing abilities")
         NOT ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
     }
 }
+
+SINGLE_BATTLE_TEST("Mycelium Might vs Stall action order depends on speed")
+{
+    u32 speed;
+    PARAMETRIZE { speed = 99; }
+    PARAMETRIZE { speed = 101; }
+    GIVEN {
+        PLAYER(SPECIES_TOEDSCOOL) { Speed(100); Ability(ABILITY_MYCELIUM_MIGHT); }
+        OPPONENT(SPECIES_SABLEYE) { Speed(speed); Ability(ABILITY_STALL);}
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_CELEBRATE); }
+    } SCENE {
+        if (speed < 100)
+        {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, player);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
+        }
+        else
+        {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, player);
+        }
+    }
+}

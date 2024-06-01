@@ -1786,7 +1786,7 @@ gCryTable::
 .endif @ P_FAMILY_CRABRAWLER
 .if P_FAMILY_ORICORIO == TRUE
 	cry Cry_OricorioBaile
-	cry Cry_OricorioPomPom
+	cry_uncomp Cry_OricorioPomPom @ Cannot be heard unless we use cry_uncomp here.
 	cry Cry_OricorioPau
 	cry Cry_OricorioSensu
 .endif @ P_FAMILY_ORICORIO
@@ -4212,7 +4212,7 @@ gCryTable_Reverse::
 .endif @ P_FAMILY_CRABRAWLER
 .if P_FAMILY_ORICORIO == TRUE
 	cry_reverse Cry_OricorioBaile
-	cry_reverse Cry_OricorioPomPom
+	cry_reverse_uncomp Cry_OricorioPomPom @ Cannot be heard unless we use cry_reverse_uncomp here.
 	cry_reverse Cry_OricorioPau
 	cry_reverse Cry_OricorioSensu
 .endif @ P_FAMILY_ORICORIO

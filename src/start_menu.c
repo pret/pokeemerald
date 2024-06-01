@@ -51,10 +51,6 @@
 #include "ui_startmenu_full.h"
 #include "ui_mode_menu.h"
 
-#if (DECAP_ENABLED) && (DECAP_MIRRORING) && !(DECAP_START_MENU)
-#define AddTextPrinterParameterized (AddTextPrinterFixedCaseParameterized)
-#endif
-
 // Menu actions
 enum
 {

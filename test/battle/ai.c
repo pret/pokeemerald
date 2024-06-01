@@ -830,3 +830,128 @@ AI_SINGLE_BATTLE_TEST("AI will choose Surf over Thunderbolt and Ice Beam if the 
         TURN { EXPECT_MOVE(opponent, MOVE_SURF); }
     }
 }
+
+AI_SINGLE_BATTLE_TEST("AI will choose Scratch over Power-up Punch with Contrary")
+{
+    u32 ability;
+
+    PARAMETRIZE {ability = ABILITY_SUCTION_CUPS; }
+    PARAMETRIZE {ability = ABILITY_CONTRARY; }
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_SCRATCH].power == 40);
+        ASSUME(gMovesInfo[MOVE_SCRATCH].type == TYPE_NORMAL);
+        ASSUME(gMovesInfo[MOVE_POWER_UP_PUNCH].power == 40);
+        ASSUME(gMovesInfo[MOVE_POWER_UP_PUNCH].type == TYPE_FIGHTING);
+        ASSUME(gSpeciesInfo[SPECIES_SQUIRTLE].types[0] == TYPE_WATER);
+        ASSUME(gSpeciesInfo[SPECIES_SQUIRTLE].types[1] == TYPE_WATER);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_SQUIRTLE) { };
+        OPPONENT(SPECIES_MALAMAR) { Ability(ability); Moves(MOVE_SCRATCH, MOVE_POWER_UP_PUNCH); }
+    } WHEN {
+        TURN {
+            if (ability != ABILITY_CONTRARY)
+                EXPECT_MOVE(opponent, MOVE_POWER_UP_PUNCH);
+            else
+                EXPECT_MOVE(opponent, MOVE_SCRATCH);
+        }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI will choose Superpower over Outrage with Contrary")
+{
+    u32 ability;
+
+    PARAMETRIZE {ability = ABILITY_SUCTION_CUPS; }
+    PARAMETRIZE {ability = ABILITY_CONTRARY; }
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_SUPERPOWER].power == 120);
+        ASSUME(gMovesInfo[MOVE_SUPERPOWER].type == TYPE_FIGHTING);
+        ASSUME(gMovesInfo[MOVE_OUTRAGE].power == 120);
+        ASSUME(gMovesInfo[MOVE_OUTRAGE].type == TYPE_DRAGON);
+        ASSUME(gSpeciesInfo[SPECIES_SQUIRTLE].types[0] == TYPE_WATER);
+        ASSUME(gSpeciesInfo[SPECIES_SQUIRTLE].types[1] == TYPE_WATER);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_SQUIRTLE) { };
+        OPPONENT(SPECIES_MALAMAR) { Ability(ability); Moves(MOVE_OUTRAGE, MOVE_SUPERPOWER); }
+    } WHEN {
+        TURN {
+            if (ability != ABILITY_CONTRARY)
+                EXPECT_MOVE(opponent, MOVE_OUTRAGE);
+            else
+                EXPECT_MOVE(opponent, MOVE_SUPERPOWER);
+        }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("AI will not choose Earthquake if it damages the partner")
+{
+    u32 species;
+
+    PARAMETRIZE { species = SPECIES_CHARIZARD; }
+    PARAMETRIZE { species = SPECIES_CHARMANDER; }
+    PARAMETRIZE { species = SPECIES_CHIKORITA; }
+
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_EARTHQUAKE].target == MOVE_TARGET_FOES_AND_ALLY);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_PHANPY) { Moves(MOVE_EARTHQUAKE, MOVE_TACKLE); }
+        OPPONENT(species) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        if (species == SPECIES_CHARIZARD)
+            TURN { EXPECT_MOVE(opponentLeft, MOVE_EARTHQUAKE); }
+        else
+            TURN { EXPECT_MOVE(opponentLeft, MOVE_TACKLE, target: playerLeft); }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("AI will choose Earthquake if partner is not alive")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_EARTHQUAKE].target == MOVE_TARGET_FOES_AND_ALLY);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_EARTHQUAKE, MOVE_TACKLE); }
+        OPPONENT(SPECIES_PIKACHU) { HP(1); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentRight); }
+        TURN { EXPECT_MOVE(opponentLeft, MOVE_EARTHQUAKE); }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("AI will choose Earthquake if it kill an opposing mon and does 1/3 of damage to AI")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_EARTHQUAKE].target == MOVE_TARGET_FOES_AND_ALLY);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_EARTHQUAKE, MOVE_TACKLE); }
+        OPPONENT(SPECIES_PARAS) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { EXPECT_MOVE(opponentLeft, MOVE_EARTHQUAKE); }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("AI will the see a corresponding absorbing ability on partner to one of its moves")
+{
+    u32 ability;
+    PARAMETRIZE { ability = ABILITY_LIGHTNING_ROD; }
+    PARAMETRIZE { ability = ABILITY_STATIC; }
+
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_DISCHARGE].target == MOVE_TARGET_FOES_AND_ALLY);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_DISCHARGE, MOVE_TACKLE); }
+        OPPONENT(SPECIES_PIKACHU) { HP(1); Ability(ability); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        if (ability == ABILITY_LIGHTNING_ROD)
+            TURN { EXPECT_MOVE(opponentLeft, MOVE_DISCHARGE); }
+        else
+            TURN { EXPECT_MOVE(opponentLeft, MOVE_TACKLE); }
+    }
+}

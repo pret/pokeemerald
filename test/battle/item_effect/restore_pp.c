@@ -66,3 +66,30 @@ SINGLE_BATTLE_TEST("Max Elixir restores the PP of all of a battler's moves fully
 }
 
 TO_DO_BATTLE_TEST("Ether won't work if the selected move has all its PP")
+
+TO_DO_BATTLE_TEST("Elixir can be used if at least one move is missing PP in any slot") // The test system can't currently test this, in a test the item is used without running useability checks
+/*
+{
+    u8 move1PP;
+    u8 move2PP;
+    u8 move3PP;
+    u8 move4PP;
+    PARAMETRIZE { move1PP = 30; move2PP = 30; move3PP = 20; move4PP = 10; }
+    PARAMETRIZE { move1PP = 40; move2PP = 20; move3PP = 20; move4PP = 10; }
+    PARAMETRIZE { move1PP = 40; move2PP = 30; move3PP = 10; move4PP = 10; }
+    PARAMETRIZE { move1PP = 40; move2PP = 30; move3PP = 20; move4PP = 0; }
+    GIVEN {
+        ASSUME(gItemsInfo[ITEM_ELIXIR].battleUsage == EFFECT_ITEM_RESTORE_PP);
+        ASSUME(gItemsInfo[ITEM_ELIXIR].type == ITEM_USE_PARTY_MENU);
+        PLAYER(SPECIES_WOBBUFFET) { MovesWithPP({MOVE_MEDITATE, move1PP}, {MOVE_AGILITY, move2PP}, {MOVE_PSYBEAM, move3PP}, {MOVE_TRICK, move4PP}); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { USE_ITEM(player, ITEM_ELIXIR, partyIndex: 0); }
+    } THEN {
+        EXPECT_EQ(player->pp[0], 40);
+        EXPECT_EQ(player->pp[1], 30);
+        EXPECT_EQ(player->pp[2], 20);
+        EXPECT_EQ(player->pp[3], 10);
+    }
+}
+*/

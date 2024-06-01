@@ -1781,7 +1781,7 @@ const struct Item gItemsInfo[] =
     [ITEM_EXP_CANDY_XL] =
     {
         .name = _("Exp.Candy XL"),
-        .pluralName = _("Exp.Candies L"),
+        .pluralName = _("Exp.Candies XL"),
         .price = 10000,
         .holdEffectParam = EXP_30000,
         .description = COMPOUND_STRING(

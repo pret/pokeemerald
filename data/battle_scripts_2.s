@@ -122,7 +122,7 @@ BattleScript_ItemSetMist::
 BattleScript_ItemSetFocusEnergy::
 	call BattleScript_UseItemMessage
 	jumpifstatus2 BS_ATTACKER, STATUS2_FOCUS_ENERGY_ANY, BattleScript_ButItFailed
-	setfocusenergy
+	setfocusenergy BS_ATTACKER
 	playmoveanimation BS_ATTACKER, MOVE_FOCUS_ENERGY
 	waitanimation
 	copybyte sBATTLER, gBattlerAttacker

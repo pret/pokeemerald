@@ -76,16 +76,6 @@ void PreprocAsmFile(std::string filename)
             PrintAsmBytes(s, length);
             break;
         }
-        // Like String, but prepends FIXED_CASE char
-        case Directive::FixedString:
-        {
-            unsigned char s[kMaxStringLength];
-            int length = 0;
-            s[length++] = '\x7d'; // FIXED_CASE
-            length += stack.top().ReadString(s+length);
-            PrintAsmBytes(s, length);
-            break;
-        }
         case Directive::Braille:
         {
             unsigned char s[kMaxStringLength];

@@ -855,8 +855,9 @@
 	.byte 0x99
 	.endm
 
-	.macro setfocusenergy
+	.macro setfocusenergy battler:req
 	.byte 0x9a
+	.byte \battler
 	.endm
 
 	.macro transformdataexecution
@@ -2378,10 +2379,6 @@
 
 	.macro dmgtocurrattackerhp
 	manipulatedamage DMG_CURR_ATTACKER_HP
-	.endm
-
-	.macro dmg_1_2_attackerhp
-	manipulatedamage DMG_1_2_ATTACKER_HP
 	.endm
 
 	.macro jumpifflowerveil jumpInstr:req

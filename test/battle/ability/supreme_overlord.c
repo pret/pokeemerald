@@ -94,17 +94,14 @@ SINGLE_BATTLE_TEST("Supreme Overlord does not boost attack if party members are 
 
 SINGLE_BATTLE_TEST("Supreme Overlord's message displays correctly after all battlers fainted - Player")
 {
-    // For some reason the Ability Pop Up fails to appear after Explosion.
-    KNOWN_FAILING;
     GIVEN {
         ASSUME(gMovesInfo[MOVE_EXPLOSION].effect == EFFECT_EXPLOSION);
         PLAYER(SPECIES_WOBBUFFET) { HP(1);}
-        PLAYER(SPECIES_KINGAMBIT);
+        PLAYER(SPECIES_KINGAMBIT) { Ability(ABILITY_SUPREME_OVERLORD); }
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_EXPLOSION); SEND_OUT(player, 1); SEND_OUT(opponent, 1); }
-        TURN { MOVE(player, MOVE_TACKLE); MOVE(opponent, MOVE_KOWTOW_CLEAVE); }
     } SCENE {
         HP_BAR(opponent, hp: 0);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, opponent);
@@ -118,18 +115,14 @@ SINGLE_BATTLE_TEST("Supreme Overlord's message displays correctly after all batt
 
 SINGLE_BATTLE_TEST("Supreme Overlord's message displays correctly after all battlers fainted - Opponent")
 {
-    // For some reason the Ability Pop Up fails to appear after Explosion.
-    KNOWN_FAILING;
     GIVEN {
         ASSUME(gMovesInfo[MOVE_EXPLOSION].effect == EFFECT_EXPLOSION);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { HP(1);}
-        OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_KINGAMBIT);
+        OPPONENT(SPECIES_KINGAMBIT) { Ability(ABILITY_SUPREME_OVERLORD); }
     } WHEN {
         TURN { MOVE(player, MOVE_EXPLOSION); SEND_OUT(player, 1); SEND_OUT(opponent, 1); }
-        TURN { SWITCH(opponent, 2); MOVE(player, MOVE_TACKLE); }
     } SCENE {
         HP_BAR(player, hp: 0);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, player);
