@@ -1717,6 +1717,48 @@ void Speed_(u32 sourceLine, u32 speed)
     DATA.explicitSpeeds[DATA.currentSide] |= 1 << DATA.currentPartyIndex;
 }
 
+void HPIV_(u32 sourceLine, u32 hpIV)
+{
+    INVALID_IF(!DATA.currentMon, "HP IV outside of PLAYER/OPPONENT");
+    INVALID_IF(hpIV > MAX_PER_STAT_IVS, "Illegal HP IV: %d", hpIV);
+    SetMonData(DATA.currentMon, MON_DATA_HP_IV, &hpIV);
+}
+
+void AttackIV_(u32 sourceLine, u32 attackIV)
+{
+    INVALID_IF(!DATA.currentMon, "Attack IV outside of PLAYER/OPPONENT");
+    INVALID_IF(attackIV > MAX_PER_STAT_IVS, "Illegal attack IV: %d", attackIV);
+    SetMonData(DATA.currentMon, MON_DATA_ATK_IV, &attackIV);
+}
+
+void DefenseIV_(u32 sourceLine, u32 defenseIV)
+{
+    INVALID_IF(!DATA.currentMon, "Defense IV outside of PLAYER/OPPONENT");
+    INVALID_IF(defenseIV > MAX_PER_STAT_IVS, "Illegal defense IV: %d", defenseIV);
+    SetMonData(DATA.currentMon, MON_DATA_DEF_IV, &defenseIV);
+}
+
+void SpAttackIV_(u32 sourceLine, u32 spAttackIV)
+{
+    INVALID_IF(!DATA.currentMon, "SpAttack IV outside of PLAYER/OPPONENT");
+    INVALID_IF(spAttackIV > MAX_PER_STAT_IVS, "Illegal special attack IV: %d", spAttackIV);
+    SetMonData(DATA.currentMon, MON_DATA_SPATK_IV, &spAttackIV);
+}
+
+void SpDefenseIV_(u32 sourceLine, u32 spDefenseIV)
+{
+    INVALID_IF(!DATA.currentMon, "SpDefense IV outside of PLAYER/OPPONENT");
+    INVALID_IF(spDefenseIV > MAX_PER_STAT_IVS, "Illegal special defense IV: %d", spDefenseIV);
+    SetMonData(DATA.currentMon, MON_DATA_SPDEF_IV, &spDefenseIV);
+}
+
+void SpeedIV_(u32 sourceLine, u32 speedIV)
+{
+    INVALID_IF(!DATA.currentMon, "Speed IV outside of PLAYER/OPPONENT");
+    INVALID_IF(speedIV > MAX_PER_STAT_IVS, "Illegal speed IV: %d", speedIV);
+    SetMonData(DATA.currentMon, MON_DATA_SPEED_IV, &speedIV);
+}
+
 void Item_(u32 sourceLine, u32 item)
 {
     INVALID_IF(!DATA.currentMon, "Item outside of PLAYER/OPPONENT");

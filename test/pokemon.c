@@ -33,17 +33,34 @@ TEST("Terastallization type defaults to primary or secondary type")
         || teraType == gSpeciesInfo[SPECIES_PIDGEY].types[1]);
 }
 
-TEST("Terastallization type can be set to any type")
+TEST("Terastallization type can be set to any type except TYPE_NONE")
 {
     u32 i, teraType;
     struct Pokemon mon;
-    for (i = 0; i < NUMBER_OF_MON_TYPES; i++)
+    for (i = 1; i < NUMBER_OF_MON_TYPES; i++)
     {
         PARAMETRIZE { teraType = i; }
     }
     CreateMon(&mon, SPECIES_WOBBUFFET, 100, 0, FALSE, 0, OT_ID_PRESET, 0);
     SetMonData(&mon, MON_DATA_TERA_TYPE, &teraType);
     EXPECT_EQ(teraType, GetMonData(&mon, MON_DATA_TERA_TYPE));
+}
+
+TEST("Terastallization type is reset to the default types when setting Tera Type back to TYPE_NONE")
+{
+    u32 i, teraType, typeNone;
+    struct Pokemon mon;
+    for (i = 1; i < NUMBER_OF_MON_TYPES; i++)
+    {
+        PARAMETRIZE { teraType = i; typeNone = TYPE_NONE; }
+    }
+    CreateMon(&mon, SPECIES_PIDGEY, 100, 0, FALSE, 0, OT_ID_PRESET, 0);
+    SetMonData(&mon, MON_DATA_TERA_TYPE, &teraType);
+    EXPECT_EQ(teraType, GetMonData(&mon, MON_DATA_TERA_TYPE));
+    SetMonData(&mon, MON_DATA_TERA_TYPE, &typeNone);
+    typeNone = GetMonData(&mon, MON_DATA_TERA_TYPE);
+    EXPECT(typeNone == gSpeciesInfo[SPECIES_PIDGEY].types[0]
+        || typeNone == gSpeciesInfo[SPECIES_PIDGEY].types[1]);
 }
 
 TEST("Shininess independent from PID and OTID")
