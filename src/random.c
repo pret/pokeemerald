@@ -35,15 +35,15 @@ u16 Random2(void)
 // Returns a random index according to a list of weights
 u8 RandomWeightedIndex(u8 *weights, u8 length) {
     u32 i;
-    u16 random_value;
+    u16 randomValue;
     u16 weightSum = 0;
     for (i = 0; i < length; i++)
         weightSum += weights[i];
-    random_value = Random() % weightSum;
+    randomValue = weightSum > 0 ? Random() % weightSum : 0;
     weightSum = 0;
     for (i = 0; i < length; i++) {
         weightSum += weights[i];
-        if (random_value <= weightSum)
+        if (randomValue <= weightSum)
             return i;
     }
 }
