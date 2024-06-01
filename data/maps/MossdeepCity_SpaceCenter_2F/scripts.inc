@@ -320,6 +320,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha::
 	setobjectmovementtype LOCALID_SCIENTIST, MOVEMENT_TYPE_WANDER_AROUND
 	addobject LOCALID_SCIENTIST
 	fadescreen FADE_FROM_BLACK
+	releaseall
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayer::
