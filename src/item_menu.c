@@ -1680,8 +1680,8 @@ static void OpenContextMenu(u8 taskId)
                 }
                 break;
             case BALLS_POCKET:
-                gBagMenu->contextMenuItemsPtr = sContextMenuItems_BallsPocket;
-                gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_BallsPocket);
+                gBagMenu->contextMenuItemsPtr = sContextMenuItems_ItemsPocket;
+                gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_ItemsPocket);
                 break;
             case TMHM_POCKET:
                 gBagMenu->contextMenuItemsPtr = sContextMenuItems_TmHmPocket;

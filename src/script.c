@@ -607,7 +607,7 @@ u16 ReturnNumberOfTrainersForFloor()
 
     if((VarGet(VAR_PIT_FLOOR) > 25) && ((VarGet(VAR_PIT_FLOOR) < 95) || (VarGet(VAR_PIT_FLOOR) > 101)))
     {
-        if(!(Random() % 35))
+        if(!(Random() % 25))
         {
             FlagClear(FLAG_MOVER_OBJECT);
             return 0;
