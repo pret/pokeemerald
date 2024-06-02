@@ -790,7 +790,7 @@ static void Task_MenuMain(u8 taskId)
         gTasks[taskId].func = Task_MenuEditingStat;
         if(sMenuDataPtr->editingStat == 0)
             StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 1);
-        if((sMenuDataPtr->editingStat == 255 || (sMenuDataPtr->evTotal == 510)) && (sMenuDataPtr->selector_x == 0))
+        if((sMenuDataPtr->editingStat == 252 || (sMenuDataPtr->evTotal == 510)) && (sMenuDataPtr->selector_x == 0))
             StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 2);
         if((sMenuDataPtr->editingStat == 31) && (sMenuDataPtr->selector_x == 1))
             StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 2);
@@ -927,14 +927,14 @@ static void Task_MenuEditingStat(u8 taskId) // This function should be refactore
     {
         if(sMenuDataPtr->selector_x == 0)
         {
-            if((sMenuDataPtr->editingStat == 255) || (sMenuDataPtr->evTotal == 510))
+            if((sMenuDataPtr->editingStat == 252) || (sMenuDataPtr->evTotal == 510))
             {
                 StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 2);
                 return;
             }
 
             sMenuDataPtr->editingStat++;
-            if((sMenuDataPtr->editingStat == 255))
+            if((sMenuDataPtr->editingStat == 252))
                 StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 2);
             else
                 StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 3);
@@ -965,16 +965,16 @@ static void Task_MenuEditingStat(u8 taskId) // This function should be refactore
     {
         if(sMenuDataPtr->selector_x == 0)
         {
-            if((sMenuDataPtr->editingStat == 255) || (sMenuDataPtr->evTotal == 510))
+            if((sMenuDataPtr->editingStat == 252) || (sMenuDataPtr->evTotal == 510))
             {
                 StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 2);
                 return;
             }
 
-            if (510 - sMenuDataPtr->evTotal < 255)
+            if (510 - sMenuDataPtr->evTotal < 252)
                 sMenuDataPtr->editingStat += 510 - sMenuDataPtr->evTotal;
             else
-                sMenuDataPtr->editingStat = 255;
+                sMenuDataPtr->editingStat = 252;
     
             StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 2);    
             ChangeAndUpdateStat();
