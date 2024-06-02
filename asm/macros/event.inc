@@ -1393,7 +1393,7 @@
 	@ The specified id can be used to refer to the sprite again later with turnvobject.
 	.macro createvobject graphicsId:req, id:req, x:req, y:req, elevation=3, direction=DIR_SOUTH
 	.byte 0xaa
-	.byte \graphicsId
+	.2byte \graphicsId
 	.byte \id
 	.2byte \x
 	.2byte \y
@@ -1813,7 +1813,6 @@
 	_dynmultichoice \left, \top, \ignoreBPress, \maxBeforeScroll, \shouldSort, \initialSelected, \callbacks, NULL
 	.endm
 
-
 @ Supplementary
 
 	.macro goto_if_unset flag:req, dest:req
@@ -2184,4 +2183,43 @@
 	callnative SetTeraType
 	.byte \type
 	.2byte \slot
+	.endm
+
+	@ Saves species and forms of Daycare Pokémon to specific vars. Saves the amount of Daycare mon to VAR_RESULT.
+	.macro getdaycaregfx varSpecies1:req varSpecies2:req varForm1:req varForm2:req
+	callnative GetDaycareGraphics
+	.2byte \varSpecies1
+	.2byte \varSpecies2
+	.2byte \varForm1
+	.2byte \varForm2
+	.endm
+
+	@ Plays the cry of the first alive party member.
+	.macro playfirstmoncry
+	callnative PlayFirstMonCry
+	.endm
+
+	@ Buffers the nickname of the first alive party member.
+	.macro bufferlivemonnickname out:req
+	callnative BufferFirstLiveMonNickname
+	.byte \out
+	.endm
+
+	@ Executes Follower actions
+	.macro getfolloweraction
+	callnative GetFollowerAction
+	.endm
+
+	@ Checks if Field move is being used by the current follower.
+	.macro isfollowerfieldmoveuser var:req
+	callnative IsFollowerFieldMoveUser
+	.2byte \var
+	.endm
+
+	@ Saves the direction from where source object event would need to turn to to face the target into the specified var.
+	.macro getdirectiontoface var:req, sourceId:req, targetId:req
+	callnative GetDirectionToFaceScript
+	.2byte \var
+	.byte \sourceId
+	.byte \targetId
 	.endm

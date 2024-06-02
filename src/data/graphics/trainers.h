@@ -423,16 +423,38 @@ static const union AnimCmd sAnimCmd_Kanto[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sAnimCmd_Point_HGSS[] =
+{
+    ANIMCMD_FRAME(3, 9),
+    ANIMCMD_FRAME(0, 9),
+    ANIMCMD_FRAME(2, 24),
+    ANIMCMD_FRAME(2, 24),
+    ANIMCMD_FRAME(3, 50),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnimCmd_Point_HGSS_Red_Leaf[] =
+{
+    ANIMCMD_FRAME(0, 9),
+    ANIMCMD_FRAME(1, 9),
+    ANIMCMD_FRAME(3, 24),
+    ANIMCMD_FRAME(3, 24),
+    ANIMCMD_FRAME(0, 50),
+    ANIMCMD_END,
+};
+
 static const union AnimCmd *const sBackAnims_Hoenn[] =
 {
     sAnim_GeneralFrame3,
     sAnimCmd_Hoenn,
+    sAnimCmd_Point_HGSS,
 };
 
 static const union AnimCmd *const sBackAnims_Kanto[] =
 {
     sAnim_GeneralFrame0,
     sAnimCmd_Kanto,
+    sAnimCmd_Point_HGSS_Red_Leaf,
 };
 
 const struct SpriteFrameImage gTrainerBackPicTable_Brendan[] =

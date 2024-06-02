@@ -8,6 +8,7 @@
 #include "constants/songs.h"
 #include "data.h"
 #include "decompress.h"
+#include "event_object_movement.h"
 #include "field_weather.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -38,6 +39,7 @@
 #include "trainer_pokemon_sprites.h"
 
 #include "constants/items.h"
+#include "constants/event_objects.h"
 
 #if DEBUG_POKEMON_MENU == TRUE
 extern const struct BattleBackground sBattleTerrainTable[];
@@ -53,6 +55,37 @@ static struct PokemonDebugMenu *GetStructPtr(u8 taskId)
 
     return (struct PokemonDebugMenu*)(T1_READ_PTR(taskDataPtr));
 }
+
+static const union AnimCmd sAnim_Follower_1[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(2, 30),
+    ANIMCMD_FRAME(3, 30),
+    ANIMCMD_FRAME(2, 30),
+    ANIMCMD_FRAME(3, 30),
+    ANIMCMD_FRAME(2, 10),
+    ANIMCMD_FRAME(4, 30),
+    ANIMCMD_FRAME(5, 30),
+    ANIMCMD_FRAME(4, 30),
+    ANIMCMD_FRAME(5, 30),
+    ANIMCMD_FRAME(4, 10),
+    ANIMCMD_FRAME(4, 30, .hFlip = TRUE),
+    ANIMCMD_FRAME(5, 30, .hFlip = TRUE),
+    ANIMCMD_FRAME(4, 30, .hFlip = TRUE),
+    ANIMCMD_FRAME(5, 30, .hFlip = TRUE),
+    ANIMCMD_FRAME(4, 10, .hFlip = TRUE),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sAnims_Follower[] =
+{
+    sAnim_GeneralFrame0,
+    sAnim_Follower_1,
+};
 
 //BgTemplates
 static const struct BgTemplate sBgTemplates[] =
@@ -678,56 +711,14 @@ static void UpdateBattlerValue(struct PokemonDebugMenu *data)
     }
 }
 
-//Sprite functions
-static const u32 *GetMonSpritePalStructCustom(u16 species, bool8 isFemale, bool8 isShiny)
-{
-    if (isShiny)
-    {
-        if (gSpeciesInfo[species].shinyPaletteFemale != NULL && isFemale)
-            return gSpeciesInfo[species].shinyPaletteFemale;
-        else if (gSpeciesInfo[species].shinyPalette != NULL)
-            return gSpeciesInfo[species].shinyPalette;
-        else
-            return gSpeciesInfo[SPECIES_NONE].shinyPalette;
-    }
-    else
-    {
-        if (gSpeciesInfo[species].paletteFemale != NULL && isFemale)
-            return gSpeciesInfo[species].paletteFemale;
-        else if (gSpeciesInfo[species].palette != NULL)
-            return gSpeciesInfo[species].palette;
-        else
-            return gSpeciesInfo[SPECIES_NONE].palette;
-    }
-}
-
 static void BattleLoadOpponentMonSpriteGfxCustom(u16 species, bool8 isFemale, bool8 isShiny, u8 battlerId)
 {
-    const void *lzPaletteData;
-    u16 paletteOffset = 0x100 + battlerId * 16;;
-
-    if (isShiny)
-    {
-        if (gSpeciesInfo[species].shinyPaletteFemale != NULL && isFemale)
-            lzPaletteData = gSpeciesInfo[species].shinyPaletteFemale;
-        else if (gSpeciesInfo[species].shinyPalette != NULL)
-            lzPaletteData = gSpeciesInfo[species].shinyPalette;
-        else
-            lzPaletteData = gSpeciesInfo[SPECIES_NONE].shinyPalette;
-    }
-    else
-    {
-        if (gSpeciesInfo[species].paletteFemale != NULL && isFemale)
-            lzPaletteData = gSpeciesInfo[species].paletteFemale;
-        else if (gSpeciesInfo[species].palette != NULL)
-            lzPaletteData = gSpeciesInfo[species].palette;
-        else
-            lzPaletteData = gSpeciesInfo[SPECIES_NONE].palette;
-    }
+    const u32 *lzPaletteData = GetMonSpritePalFromSpecies(species, isShiny, isFemale);
+    u16 paletteOffset = OBJ_PLTT_ID(battlerId);
 
     LZDecompressWram(lzPaletteData, gDecompressionBuffer);
-    LoadPalette(gDecompressionBuffer, paletteOffset, 0x20);
-    LoadPalette(gDecompressionBuffer, 0x80 + battlerId * 16, 0x20);
+    LoadPalette(gDecompressionBuffer, paletteOffset, PLTT_SIZE_4BPP);
+    LoadPalette(gDecompressionBuffer, BG_PLTT_ID(8) + BG_PLTT_ID(battlerId), PLTT_SIZE_4BPP);
 }
 
 static void SetConstSpriteValues(struct PokemonDebugMenu *data)
@@ -781,6 +772,35 @@ static void SpriteCB_EnemyShadowCustom(struct Sprite *shadowSprite)
 
     shadowSprite->x = battlerSprite->x;
     shadowSprite->x2 = battlerSprite->x2;
+}
+
+static void SpriteCB_Follower(struct Sprite *sprite)
+{
+    if (sprite->animDelayCounter == 0)
+    {
+        sprite->animDelayCounter = 60;
+        switch (sprite->animNum)
+        {
+            default:
+            case 0:
+            case 1:
+                StartSpriteAnim(sprite, GetFaceDirectionAnimNum(DIR_NORTH));
+                break;
+            case 2:
+                StartSpriteAnim(sprite, GetFaceDirectionAnimNum(DIR_WEST));
+                break;
+            case 3:
+                StartSpriteAnim(sprite, GetFaceDirectionAnimNum(DIR_EAST));
+                break;
+            case 4:
+                StartSpriteAnim(sprite, GetFaceDirectionAnimNum(DIR_SOUTH));
+                break;
+        }
+    }
+    else
+    {
+        sprite->animDelayCounter--;
+    }
 }
 
 static void LoadAndCreateEnemyShadowSpriteCustom(struct PokemonDebugMenu *data, u16 species)
@@ -1111,7 +1131,7 @@ void CB2_Debug_Pokemon(void)
             PrintInstructionsOnWindow(data);
 
             //Palettes
-            palette = GetMonSpritePalStructCustom(species, data->isFemale, data->isShiny);
+            palette = GetMonSpritePalFromSpecies(species, data->isShiny, data->isFemale);
             LoadCompressedSpritePaletteWithTag(palette, species);
             //Front
             HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->spritesGfx[1], species, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
@@ -1141,6 +1161,11 @@ void CB2_Debug_Pokemon(void)
             //Icon Sprite
             data->iconspriteId = CreateMonIcon(species, SpriteCB_MonIcon, DEBUG_ICON_X, DEBUG_ICON_Y, 4, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
             gSprites[data->iconspriteId].oam.priority = 0;
+
+            //Follower Sprite
+            data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species, SpriteCB_Follower, DEBUG_FOLLOWER_X, DEBUG_FOLLOWER_Y, 0);
+            gSprites[data->followerspriteId].oam.priority = 0;
+            gSprites[data->followerspriteId].anims = sAnims_Follower;
 
             //Modify Arrows
             SetUpModifyArrows(data);
@@ -1648,6 +1673,7 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     DestroySprite(&gSprites[data->frontspriteId]);
     DestroySprite(&gSprites[data->backspriteId]);
     DestroySprite(&gSprites[data->iconspriteId]);
+    DestroySprite(&gSprites[data->followerspriteId]);
 
     FreeMonSpritesGfx();
     ResetSpriteData();
@@ -1663,7 +1689,7 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     PrintInstructionsOnWindow(data);
 
     //Palettes
-    palette = GetMonSpritePalStructCustom(species, data->isFemale, data->isShiny);
+    palette = GetMonSpritePalFromSpecies(species, data->isShiny, data->isFemale);
     LoadCompressedSpritePaletteWithTag(palette, species);
     //Front
     HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->spritesGfx[1], species, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
@@ -1691,6 +1717,15 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     //Icon Sprite
     data->iconspriteId = CreateMonIcon(species, SpriteCB_MonIcon, DEBUG_ICON_X, DEBUG_ICON_Y, 4, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
     gSprites[data->iconspriteId].oam.priority = 0;
+
+    //Follower Sprite
+    data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species + (data->isShiny ? SPECIES_SHINY_TAG : 0),
+                                                        SpriteCB_Follower,
+                                                        DEBUG_FOLLOWER_X,
+                                                        DEBUG_FOLLOWER_Y,
+                                                        0);
+    gSprites[data->followerspriteId].oam.priority = 0;
+    gSprites[data->followerspriteId].anims = sAnims_Follower;
 
     //Modify Arrows
     LoadSpritePalette(&gSpritePalette_Arrow);
