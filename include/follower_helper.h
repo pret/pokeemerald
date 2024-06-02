@@ -69,7 +69,7 @@ struct FollowerMsgInfoExtended
 #define MATCH_SPECIES(species) MATCH_U24(MSG_COND_SPECIES, species)
 #define MATCH_TYPES(type1, type2) MATCH_U8(MSG_COND_TYPE, type1, type2, 0)
 // Checks that follower has *neither* of the two types
-#define MATCH_NOT_TYPES(type1, type2) MATCH_U8(MSG_COND_TYPE, type1, type2, TYPE_NONE)
+#define MATCH_NOT_TYPES(type1, type2) MATCH_U8(MSG_COND_TYPE, type1, type2, TYPE_NONE | 1)
 #define MATCH_STATUS(status) MATCH_U24(MSG_COND_STATUS, status)
 #define MATCH_MAPSEC(mapsec) MATCH_U24(MSG_COND_MAPSEC, mapsec)
 #define MATCH_MAP_RAW(mapGroup, mapNum) MATCH_U8(MSG_COND_MAP, mapGroup, mapNum, 0)
