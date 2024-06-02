@@ -3390,7 +3390,7 @@ const u8* FaintClearSetData(u32 battler)
     gBattleStruct->zmove.toBeUsed[battler] = MOVE_NONE;
     gBattleStruct->zmove.effect = EFFECT_HIT;
     // Clear Dynamax data
-    UndoDynamax(battler);
+    UndoDynamax(battler);	
 
     return result;
 }
