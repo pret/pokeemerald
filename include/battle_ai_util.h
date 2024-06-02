@@ -4,13 +4,14 @@
 #define FOE(battler) ((BATTLE_OPPOSITE(battler)) & BIT_SIDE)
 
 // Roll boundaries used by AI when scoring. Doesn't affect actual damage dealt.
-#define MAX_ROLL_PERCENTAGE DMG_ROLL_PERCENT_HI 
+#define MAX_ROLL_PERCENTAGE DMG_ROLL_PERCENT_HI
 #define MIN_ROLL_PERCENTAGE DMG_ROLL_PERCENT_LO
+#define DMG_ROLL_PERCENTAGE ((MAX_ROLL_PERCENTAGE + MIN_ROLL_PERCENTAGE + 1) / 2) // Controls the damage roll the AI sees for the default roll. By default the 9th roll is seen
 
 enum
 {
     DMG_ROLL_LOWEST,
-    DMG_ROLL_AVERAGE,
+    DMG_ROLL_DEFAULT,
     DMG_ROLL_HIGHEST,
 };
 

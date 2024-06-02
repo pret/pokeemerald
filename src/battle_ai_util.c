@@ -391,9 +391,9 @@ static inline s32 HighestRollDmg(s32 dmg)
     return dmg;
 }
 
-static inline s32 AverageDmg(s32 dmg)
+static inline s32 DmgRoll(s32 dmg)
 {
-    dmg = (dmg * (MIN_ROLL_PERCENTAGE + MAX_ROLL_PERCENTAGE)) / 2;
+    dmg *= DMG_ROLL_PERCENTAGE;
     dmg /= 100;
     return dmg;
 }
@@ -566,8 +566,8 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
                                              aiData->abilities[battlerAtk], aiData->abilities[battlerDef]);
             u32 critChance = GetCritHitChance(critChanceIndex);
             // With critChance getting closer to 1, dmg gets closer to critDmg.
-            if (dmgRoll == DMG_ROLL_AVERAGE)
-                dmg = AverageDmg((critDmg + normalDmg * (critChance - 1)) / (critChance));
+            if (dmgRoll == DMG_ROLL_DEFAULT)
+                dmg = DmgRoll((critDmg + normalDmg * (critChance - 1)) / (critChance));
             else if (dmgRoll == DMG_ROLL_HIGHEST)
                 dmg = HighestRollDmg((critDmg + normalDmg * (critChance - 1)) / (critChance));
             else
@@ -575,8 +575,8 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
         }
         else
         {
-            if (dmgRoll == DMG_ROLL_AVERAGE)
-                dmg = AverageDmg(normalDmg);
+            if (dmgRoll == DMG_ROLL_DEFAULT)
+                dmg = DmgRoll(normalDmg);
             else if (dmgRoll == DMG_ROLL_HIGHEST)
                 dmg = HighestRollDmg(normalDmg);
             else
@@ -3763,7 +3763,7 @@ bool32 ShouldUseZMove(u32 battlerAtk, u32 battlerDef, u32 chosenMove)
         else if (!IS_MOVE_STATUS(chosenMove) && IS_MOVE_STATUS(gBattleStruct->zmove.chosenZMove))
             return FALSE;
 
-        if (!IS_MOVE_STATUS(chosenMove) && AI_CalcDamageSaveBattlers(chosenMove, battlerAtk, battlerDef, &effectiveness, FALSE, DMG_ROLL_AVERAGE) >= gBattleMons[battlerDef].hp)
+        if (!IS_MOVE_STATUS(chosenMove) && AI_CalcDamageSaveBattlers(chosenMove, battlerAtk, battlerDef, &effectiveness, FALSE, DMG_ROLL_DEFAULT) >= gBattleMons[battlerDef].hp)
             return FALSE;   // don't waste damaging z move if can otherwise faint target
 
         return TRUE;
