@@ -39,6 +39,7 @@ SINGLE_BATTLE_TEST("Belch cannot be used if the user has not eaten a berry")
         else {
             TURN { MOVE(player, MOVE_STUFF_CHEEKS); }
             TURN { MOVE(player, MOVE_BELCH); }
+            TURN { MOVE(player, MOVE_BELCH); }
         }
     } SCENE {
         if (item == ITEM_NONE) {
@@ -47,6 +48,11 @@ SINGLE_BATTLE_TEST("Belch cannot be used if the user has not eaten a berry")
         else {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_STUFF_CHEEKS, player);
             ANIMATION(ANIM_TYPE_MOVE, MOVE_BELCH, player);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_BELCH, player);
         }
     }
 }
+
+TO_DO_BATTLE_TEST("Belch can still be used after switching out");
+TO_DO_BATTLE_TEST("Belch can still be used after fainting");
+TO_DO_BATTLE_TEST("Belch can still be used after restoring the consumed berry");

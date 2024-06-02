@@ -337,6 +337,8 @@ static bool8 CanBurnHitThaw(u16 move);
 static u32 GetNextTarget(u32 moveTarget, bool32 excludeCurrent);
 static void TryUpdateEvolutionTracker(u32 evolutionMethod, u32 upAmount, u16 usedMove);
 static void AccuracyCheck(bool32 recalcDragonDarts, const u8 *nextInstr, const u8 *failInstr, u16 move);
+static void SaveBattlerAttacker(u32 battler);
+static void SaveBattlerTarget(u32 battler);
 
 static void Cmd_attackcanceler(void);
 static void Cmd_accuracycheck(void);
@@ -6168,7 +6170,8 @@ static void Cmd_moveend(void)
                           && CanBattlerSwitch(gBattlerAttacker))
                         {
                             gLastUsedItem = gBattleMons[battler].item;
-                            gBattleStruct->savedBattlerTarget = gBattleScripting.battler = battler;  // Battler with red card
+                            SaveBattlerTarget(battler); // save battler with red card
+                            gBattleScripting.battler = battler;
                             gEffectBattler = gBattlerAttacker;
                             if (gMovesInfo[gCurrentMove].effect == EFFECT_HIT_ESCAPE)
                                 gBattlescriptCurrInstr = BattleScript_MoveEnd;  // Prevent user switch-in selection
@@ -6228,8 +6231,19 @@ static void Cmd_moveend(void)
         case MOVEEND_DANCER: // Special case because it's so annoying
             if (gMovesInfo[gCurrentMove].danceMove)
             {
-                u8 battler, nextDancer = 0;
+                u32 battler, nextDancer = 0;
+                bool32 turnOnHitmarker = FALSE;
 
+                for (battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
+                {
+                    if (gSpecialStatuses[battler].dancerUsedMove)
+                    {
+                        // in case a battler fails to act on a Dancer-called move
+                        turnOnHitmarker = TRUE;
+                        break;
+                    }
+                }
+                
                 if (!(gBattleStruct->lastMoveFailed & gBitTable[gBattlerAttacker]
                     || (!gSpecialStatuses[gBattlerAttacker].dancerUsedMove
                         && gBattleStruct->bouncedMoveIsUsed)))
@@ -6245,6 +6259,8 @@ static void Cmd_moveend(void)
                     {
                         if (GetBattlerAbility(battler) == ABILITY_DANCER && !gSpecialStatuses[battler].dancerUsedMove)
                         {
+                            if (turnOnHitmarker)
+                                gHitMarker |= HITMARKER_ATTACKSTRING_PRINTED;
                             if (!nextDancer || (gBattleMons[battler].speed < gBattleMons[nextDancer & 0x3].speed))
                                 nextDancer = battler | 0x4;
                         }
@@ -6325,6 +6341,25 @@ static void Cmd_moveend(void)
               && (gMoveResultFlags & MOVE_RESULT_NO_EFFECT)         // And it is unusable
               && (gBattleMons[gBattlerAttacker].status2 & STATUS2_LOCK_CONFUSE) != STATUS2_LOCK_CONFUSE_TURN(1))  // And won't end this turn
                 CancelMultiTurnMoves(gBattlerAttacker); // Cancel it
+            
+            
+        
+            if (gBattleStruct->savedAttackerCount > 0)
+            {
+                // #if TESTING
+                // Test_ExitWithResult(TEST_RESULT_ERROR,  "savedAttackerCount is greater than 0! More calls to SaveBattlerAttacker than RestoreBattlerAttacker!");
+                // #else
+                DebugPrintfLevel(MGBA_LOG_WARN, "savedAttackerCount is greater than 0! More calls to SaveBattlerAttacker than RestoreBattlerAttacker!");
+                // #endif
+            }
+            if (gBattleStruct->savedTargetCount > 0)
+            {
+                // #if TESTING
+                // Test_ExitWithResult(TEST_RESULT_ERROR, "savedTargetCount is greater than 0! More calls to SaveBattlerTarget than RestoreBattlerTarget!");
+                // #else
+                DebugPrintfLevel(MGBA_LOG_WARN, "savedTargetCount is greater than 0! More calls to SaveBattlerTarget than RestoreBattlerTarget!");
+                // #endif
+            }
 
             gBattleStruct->targetsDone[gBattlerAttacker] = 0;
             gProtectStructs[gBattlerAttacker].targetAffected = FALSE;
@@ -9378,18 +9413,6 @@ static void Cmd_various(void)
         AbilityBattleEffects(ABILITYEFFECT_TRACE2, battler, 0, 0, 0);
         AbilityBattleEffects(ABILITYEFFECT_OPPORTUNIST, battler, 0, 0, 0);
         return;
-    }
-    case VARIOUS_SAVE_TARGET:
-    {
-        VARIOUS_ARGS();
-        gBattleStruct->savedBattlerTarget = gBattlerTarget;
-        break;
-    }
-    case VARIOUS_RESTORE_TARGET:
-    {
-        VARIOUS_ARGS();
-        gBattlerTarget = gBattleStruct->savedBattlerTarget;
-        break;
     }
     case VARIOUS_INSTANT_HP_DROP:
     {
@@ -15655,6 +15678,75 @@ static void Cmd_callnative(void)
 }
 
 // Callnative Funcs
+
+static void SaveBattlerTarget(u32 battler)
+{
+    if (gBattleStruct->savedTargetCount < NELEMS(gBattleStruct->savedBattlerTarget))
+        gBattleStruct->savedBattlerTarget[gBattleStruct->savedTargetCount++] = battler;
+    else
+        DebugPrintfLevel(MGBA_LOG_WARN, "Attempting to exceed savedBattlerTarget array size!");
+}
+
+static void SaveBattlerAttacker(u32 battler)
+{
+    if (gBattleStruct->savedAttackerCount < NELEMS(gBattleStruct->savedBattlerAttacker))
+        gBattleStruct->savedBattlerAttacker[gBattleStruct->savedAttackerCount++] = battler;
+    else
+        DebugPrintfLevel(MGBA_LOG_WARN, "Attempting to exceed savedBattlerAttacker array size!");
+}
+
+void BS_SaveTarget(void)
+{
+    NATIVE_ARGS();
+    SaveBattlerTarget(gBattlerTarget);
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_RestoreTarget(void)
+{
+    NATIVE_ARGS();
+    if (gBattleStruct->savedTargetCount > 0)
+    {
+        gBattleStruct->savedTargetCount--;
+        gBattlerTarget = gBattleStruct->savedBattlerTarget[gBattleStruct->savedTargetCount];
+    }
+    else
+    {
+        // #if TESTING
+        // Test_ExitWithResult(TEST_RESULT_ERROR, "BS_RestoreTarget attempting to restore an empty target!");
+        // #else
+        DebugPrintfLevel(MGBA_LOG_WARN, "BS_RestoreTarget attempting to restore an empty target!");
+        // #endif
+    }
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_SaveAttacker(void)
+{
+    NATIVE_ARGS();
+    SaveBattlerAttacker(gBattlerAttacker);
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_RestoreAttacker(void)
+{
+    NATIVE_ARGS();
+    if (gBattleStruct->savedAttackerCount > 0)
+    {
+        gBattleStruct->savedAttackerCount--;
+        gBattlerAttacker = gBattleStruct->savedBattlerAttacker[gBattleStruct->savedAttackerCount];
+    }
+    else
+    {
+        // #if TESTING
+        // Test_ExitWithResult(TEST_RESULT_ERROR,  "BS_RestoreAttacker attempting to restore an empty attacker!");
+        // #else
+        DebugPrintfLevel(MGBA_LOG_WARN, "BS_RestoreAttacker attempting to restore an empty attacker!");
+        // #endif
+    }
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
 void BS_CalcMetalBurstDmg(void)
 {
     NATIVE_ARGS(const u8 *failInstr);

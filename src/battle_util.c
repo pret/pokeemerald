@@ -903,44 +903,6 @@ static const uq4_12_t sPercentToModifier[] =
     UQ_4_12(1.00), // 100
 };
 
-#define X UQ_4_12
-#define ______ X(1.0) // Regular effectiveness.
-
-// Type matchup updates.                                                Attacker      Defender
-#define STL_RS (B_UPDATED_TYPE_MATCHUPS >= GEN_6 ? X(1.0) : X(0.5))  // Ghost/Dark -> Steel
-#define PSN_RS (B_UPDATED_TYPE_MATCHUPS >= GEN_2 ? X(0.5) : X(2.0))  // Bug        -> Poison
-#define BUG_RS (B_UPDATED_TYPE_MATCHUPS >= GEN_2 ? X(1.0) : X(2.0))  // Poison     -> Bug
-#define PSY_RS (B_UPDATED_TYPE_MATCHUPS >= GEN_2 ? X(2.0) : X(0.0))  // Ghost      -> Psychic
-#define FIR_RS (B_UPDATED_TYPE_MATCHUPS >= GEN_2 ? X(0.5) : X(1.0))  // Ice        -> Fire
-
-static const uq4_12_t sTypeEffectivenessTable[NUMBER_OF_MON_TYPES][NUMBER_OF_MON_TYPES] =
-{//                   Defender -->
- //  Attacker         Normal  Fighting Flying  Poison  Ground   Rock    Bug     Ghost   Steel  Mystery  Fire   Water   Grass  Electric Psychic   Ice   Dragon   Dark   Fairy   Stellar
-    [TYPE_NORMAL]   = {______, ______, ______, ______, ______, X(0.5), ______, X(0.0), X(0.5), ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______},
-    [TYPE_FIGHTING] = {X(2.0), ______, X(0.5), X(0.5), ______, X(2.0), X(0.5), X(0.0), X(2.0), ______, ______, ______, ______, ______, X(0.5), X(2.0), ______, X(2.0), X(0.5), ______},
-    [TYPE_FLYING]   = {______, X(2.0), ______, ______, ______, X(0.5), X(2.0), ______, X(0.5), ______, ______, ______, X(2.0), X(0.5), ______, ______, ______, ______, ______, ______},
-    [TYPE_POISON]   = {______, ______, ______, X(0.5), X(0.5), X(0.5), BUG_RS, X(0.5), X(0.0), ______, ______, ______, X(2.0), ______, ______, ______, ______, ______, X(2.0), ______},
-    [TYPE_GROUND]   = {______, ______, X(0.0), X(2.0), ______, X(2.0), X(0.5), ______, X(2.0), ______, X(2.0), ______, X(0.5), X(2.0), ______, ______, ______, ______, ______, ______},
-    [TYPE_ROCK]     = {______, X(0.5), X(2.0), ______, X(0.5), ______, X(2.0), ______, X(0.5), ______, X(2.0), ______, ______, ______, ______, X(2.0), ______, ______, ______, ______},
-    [TYPE_BUG]      = {______, X(0.5), X(0.5), PSN_RS, ______, ______, ______, X(0.5), X(0.5), ______, X(0.5), ______, X(2.0), ______, X(2.0), ______, ______, X(2.0), X(0.5), ______},
-    [TYPE_GHOST]    = {X(0.0), ______, ______, ______, ______, ______, ______, X(2.0), STL_RS, ______, ______, ______, ______, ______, PSY_RS, ______, ______, X(0.5), ______, ______},
-    [TYPE_STEEL]    = {______, ______, ______, ______, ______, X(2.0), ______, ______, X(0.5), ______, X(0.5), X(0.5), ______, X(0.5), ______, X(2.0), ______, ______, X(2.0), ______},
-    [TYPE_MYSTERY]  = {______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______},
-    [TYPE_FIRE]     = {______, ______, ______, ______, ______, X(0.5), X(2.0), ______, X(2.0), ______, X(0.5), X(0.5), X(2.0), ______, ______, X(2.0), X(0.5), ______, ______, ______},
-    [TYPE_WATER]    = {______, ______, ______, ______, X(2.0), X(2.0), ______, ______, ______, ______, X(2.0), X(0.5), X(0.5), ______, ______, ______, X(0.5), ______, ______, ______},
-    [TYPE_GRASS]    = {______, ______, X(0.5), X(0.5), X(2.0), X(2.0), X(0.5), ______, X(0.5), ______, X(0.5), X(2.0), X(0.5), ______, ______, ______, X(0.5), ______, ______, ______},
-    [TYPE_ELECTRIC] = {______, ______, X(2.0), ______, X(0.0), ______, ______, ______, ______, ______, ______, X(2.0), X(0.5), X(0.5), ______, ______, X(0.5), ______, ______, ______},
-    [TYPE_PSYCHIC]  = {______, X(2.0), ______, X(2.0), ______, ______, ______, ______, X(0.5), ______, ______, ______, ______, ______, X(0.5), ______, ______, X(0.0), ______, ______},
-    [TYPE_ICE]      = {______, ______, X(2.0), ______, X(2.0), ______, ______, ______, X(0.5), ______, FIR_RS, X(0.5), X(2.0), ______, ______, X(0.5), X(2.0), ______, ______, ______},
-    [TYPE_DRAGON]   = {______, ______, ______, ______, ______, ______, ______, ______, X(0.5), ______, ______, ______, ______, ______, ______, ______, X(2.0), ______, X(0.0), ______},
-    [TYPE_DARK]     = {______, X(0.5), ______, ______, ______, ______, ______, X(2.0), STL_RS, ______, ______, ______, ______, ______, X(2.0), ______, ______, X(0.5), X(0.5), ______},
-    [TYPE_FAIRY]    = {______, X(2.0), ______, X(0.5), ______, ______, ______, ______, X(0.5), ______, X(0.5), ______, ______, ______, ______, ______, X(2.0), X(2.0), ______, ______},
-    [TYPE_STELLAR]  = {______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______},
-};
-
-#undef ______
-#undef X
-
 // code
 u8 GetBattlerForBattleScript(u8 caseId)
 {
@@ -4408,7 +4370,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
-                gBattlerAttacker = battler;
+                gBattleScripting.battler = battler;
                 BattleScriptPushCursorAndCallback(BattleScript_FriskActivates); // Try activate
                 effect++;
             }
@@ -4970,10 +4932,10 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 BattleScriptPushCursorAndCallback(BattleScript_BadDreamsActivates);
                 effect++;
                 break;
-            SOLAR_POWER_HP_DROP:
             case ABILITY_SOLAR_POWER:
                 if (IsBattlerWeatherAffected(battler, B_WEATHER_SUN))
                 {
+                SOLAR_POWER_HP_DROP:
                     BattleScriptPushCursorAndCallback(BattleScript_SolarPowerActivates);
                     gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 8;
                     if (gBattleMoveDamage == 0)
@@ -5045,45 +5007,75 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
     case ABILITYEFFECT_WOULD_BLOCK:
         {
             u16 moveTarget = GetBattlerMoveTargetType(battler, move);
-            u16 battlerAbility = GetBattlerAbility(battler);
-            u16 targetAbility = GetBattlerAbility(gBattlerTarget);
             const u8 * battleScriptBlocksMove = NULL;
 
-            if ((gLastUsedAbility == ABILITY_SOUNDPROOF && gMovesInfo[move].soundMove && !(moveTarget & MOVE_TARGET_USER))
-             || (gLastUsedAbility == ABILITY_BULLETPROOF && gMovesInfo[move].ballisticMove))
+            switch (gLastUsedAbility)
+            {
+            case ABILITY_SOUNDPROOF:
+                if (gMovesInfo[move].soundMove && !(moveTarget & MOVE_TARGET_USER))
+                    effect = 1;
+                break;
+            case ABILITY_BULLETPROOF:
+                if (gMovesInfo[move].ballisticMove)
+                    effect = 1;
+                break;
+            case ABILITY_DAZZLING:
+            case ABILITY_QUEENLY_MAJESTY:
+            case ABILITY_ARMOR_TAIL:
+                if (GetChosenMovePriority(gBattlerAttacker) > 0 && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(battler))
+                    effect = 2;
+                break;
+            case ABILITY_GOOD_AS_GOLD:
+                if (IS_MOVE_STATUS(gCurrentMove)
+                 && !(moveTarget & MOVE_TARGET_USER)
+                 && !(moveTarget & MOVE_TARGET_OPPONENTS_FIELD)
+                 && !(moveTarget & MOVE_TARGET_ALL_BATTLERS))
+                    effect = 3;
+                break;
+            }
+
+            if (!effect)
+            {
+                switch (GetBattlerAbility(BATTLE_PARTNER(battler)))
+                {
+                case ABILITY_DAZZLING:
+                case ABILITY_QUEENLY_MAJESTY:
+                case ABILITY_ARMOR_TAIL:
+                    if (GetChosenMovePriority(gBattlerAttacker) > 0 && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(battler))
+                        effect = 4;
+                    break;
+                }
+            }
+
+            if (effect == 1)
             {
                 if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)
                     gHitMarker |= HITMARKER_NO_PPDEDUCT;
                 battleScriptBlocksMove = BattleScript_SoundproofProtected;
-                effect = 1;
             }
-            else if ((gLastUsedAbility == ABILITY_DAZZLING || gLastUsedAbility == ABILITY_QUEENLY_MAJESTY || gLastUsedAbility == ABILITY_ARMOR_TAIL || IsBattlerAlive(battler ^= BIT_FLANK))
-                  && (battlerAbility == ABILITY_DAZZLING || battlerAbility == ABILITY_QUEENLY_MAJESTY || battlerAbility == ABILITY_ARMOR_TAIL)
-                  && GetChosenMovePriority(gBattlerAttacker) > 0
-                  && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(battler))
+            else if (effect == 2 || effect == 4)
             {
+                if (effect == 4)
+                    gBattleScripting.battler = BATTLE_PARTNER(battler);
+                else
+                    gBattleScripting.battler = battler;
+
                 if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)
                     gHitMarker |= HITMARKER_NO_PPDEDUCT;
                 battleScriptBlocksMove = BattleScript_DazzlingProtected;
-                effect = 1;
+            }
+            else if (effect == 3)
+            {
+                battleScriptBlocksMove = BattleScript_GoodAsGoldActivates;
             }
             else if (GetChosenMovePriority(gBattlerAttacker) > 0
-                     && BlocksPrankster(move, gBattlerAttacker, gBattlerTarget, TRUE)
-                     && !(IS_MOVE_STATUS(move) && (targetAbility == ABILITY_MAGIC_BOUNCE || gProtectStructs[gBattlerTarget].bounceMove)))
+                  && BlocksPrankster(move, gBattlerAttacker, gBattlerTarget, TRUE)
+                  && !(IS_MOVE_STATUS(move) && (gLastUsedAbility == ABILITY_MAGIC_BOUNCE || gProtectStructs[gBattlerTarget].bounceMove)))
             {
                 if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE) || !(moveTarget & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY)))
                     CancelMultiTurnMoves(gBattlerAttacker); // Don't cancel moves that can hit two targets bc one target might not be protected
                 gBattleScripting.battler = gBattlerAbility = gBattlerTarget;
                 battleScriptBlocksMove = BattleScript_DarkTypePreventsPrankster;
-                effect = 1;
-            }
-            else if (GetBattlerAbility(gBattlerTarget) == ABILITY_GOOD_AS_GOLD
-                  && IS_MOVE_STATUS(gCurrentMove)
-                  && !(moveTarget & MOVE_TARGET_USER)
-                  && !(moveTarget & MOVE_TARGET_OPPONENTS_FIELD)
-                  && !(moveTarget & MOVE_TARGET_ALL_BATTLERS))
-            {
-                battleScriptBlocksMove = BattleScript_GoodAsGoldActivates;
                 effect = 1;
             }
             if (caseID == ABILITYEFFECT_WOULD_BLOCK)
@@ -5562,6 +5554,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && RandomWeighted(RNG_STATIC, 2, 1))
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_PARALYSIS;
+                PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_AbilityStatusEffect;
                 gHitMarker |= HITMARKER_STATUS_ABILITY_EFFECT;
@@ -5579,6 +5572,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && RandomWeighted(RNG_FLAME_BODY, 2, 1))
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_BURN;
+                PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_AbilityStatusEffect;
                 gHitMarker |= HITMARKER_STATUS_ABILITY_EFFECT;
@@ -5851,6 +5845,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             if (IsBattlerAlive(battler)
              && (gMovesInfo[gCurrentMove].danceMove)
              && !gSpecialStatuses[battler].dancerUsedMove
+             && (gHitMarker & HITMARKER_ATTACKSTRING_PRINTED)
              && gBattlerAttacker != battler)
             {
                 // Set bit and save Dancer mon's original target
@@ -9994,7 +9989,7 @@ static inline s32 DoMoveDamageCalcVars(u32 move, u32 battlerAtk, u32 battlerDef,
 
     if (randomFactor)
     {
-        dmg *= 100 - RandomUniform(RNG_DAMAGE_MODIFIER, 0, 15);
+        dmg *= DMG_ROLL_PERCENT_HI - RandomUniform(RNG_DAMAGE_MODIFIER, 0, DMG_ROLL_PERCENT_HI - DMG_ROLL_PERCENT_LO);
         dmg /= 100;
     }
 
@@ -10055,7 +10050,7 @@ static inline s32 DoFutureSightAttackDamageCalcVars(u32 move, u32 battlerAtk, u3
 
     if (randomFactor)
     {
-        dmg *= 100 - RandomUniform(RNG_DAMAGE_MODIFIER, 0, 15);
+        dmg *= DMG_ROLL_PERCENT_HI - RandomUniform(RNG_DAMAGE_MODIFIER, 0, DMG_ROLL_PERCENT_HI - DMG_ROLL_PERCENT_LO);
         dmg /= 100;
     }
 
@@ -10366,8 +10361,8 @@ uq4_12_t GetTypeEffectiveness(struct Pokemon *mon, u8 moveType)
 uq4_12_t GetTypeModifier(u32 atkType, u32 defType)
 {
     if (B_FLAG_INVERSE_BATTLE != 0 && FlagGet(B_FLAG_INVERSE_BATTLE))
-        return GetInverseTypeMultiplier(sTypeEffectivenessTable[atkType][defType]);
-    return sTypeEffectivenessTable[atkType][defType];
+        return GetInverseTypeMultiplier(gTypeEffectivenessTable[atkType][defType]);
+    return gTypeEffectivenessTable[atkType][defType];
 }
 
 s32 GetStealthHazardDamageByTypesAndHP(u8 hazardType, u8 type1, u8 type2, u32 maxHp)
@@ -10911,10 +10906,8 @@ u8 GetBattleMoveCategory(u32 moveId)
 
     if (IS_MOVE_STATUS(moveId))
         return DAMAGE_CATEGORY_STATUS;
-    else if (gMovesInfo[moveId].type < TYPE_MYSTERY)
-        return DAMAGE_CATEGORY_PHYSICAL;
     else
-        return DAMAGE_CATEGORY_SPECIAL;
+        return gTypesInfo[gMovesInfo[moveId].type].damageCategory;
 }
 
 static bool32 TryRemoveScreens(u32 battler)

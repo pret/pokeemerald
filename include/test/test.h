@@ -75,7 +75,7 @@ void Test_ExpectedResult(enum TestResult);
 void Test_ExpectLeaks(bool32);
 void Test_ExitWithResult(enum TestResult, const char *fmt, ...);
 
-s32 MgbaPrintf_(const char *fmt, ...);
+s32 Test_MgbaPrintf(const char *fmt, ...);
 
 #define TEST(_name) \
     static void CAT(Test, __LINE__)(void); \
@@ -193,7 +193,7 @@ static inline struct Benchmark BenchmarkStop(void)
     do \
     { \
         u32 a_ = (a).ticks; u32 b_ = (b).ticks; \
-        MgbaPrintf_(#a ": %d ticks, " #b ": %d ticks", a_, b_); \
+        Test_MgbaPrintf(#a ": %d ticks, " #b ": %d ticks", a_, b_); \
         if (((a_ - BENCHMARK_ABS) * BENCHMARK_REL) >= (b_ * 100)) \
             Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: EXPECT_FASTER(" #a ", " #b ") failed", gTestRunnerState.test->filename, __LINE__); \
     } while (0)
@@ -202,7 +202,7 @@ static inline struct Benchmark BenchmarkStop(void)
     do \
     { \
         u32 a_ = (a).ticks; u32 b_ = (b).ticks; \
-        MgbaPrintf_(#a ": %d ticks, " #b ": %d ticks", a_, b_); \
+        Test_MgbaPrintf(#a ": %d ticks, " #b ": %d ticks", a_, b_); \
         if ((a_ * 100) <= ((b_ - BENCHMARK_ABS) * BENCHMARK_REL)) \
             Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: EXPECT_SLOWER(" #a ", " #b ") failed", gTestRunnerState.test->filename, __LINE__); \
     } while (0)
@@ -215,7 +215,7 @@ static inline struct Benchmark BenchmarkStop(void)
 
 #define PARAMETRIZE if (gFunctionTestRunnerState->parameters++ == gFunctionTestRunnerState->runParameter)
 
-#define PARAMETRIZE_LABEL(f, label) if (gFunctionTestRunnerState->parameters++ == gFunctionTestRunnerState->runParameter && (MgbaPrintf_(":N%s: " f " (%d/%d)", gTestRunnerState.test->name, label, gFunctionTestRunnerState->runParameter + 1, gFunctionTestRunnerState->parameters), 1))
+#define PARAMETRIZE_LABEL(f, label) if (gFunctionTestRunnerState->parameters++ == gFunctionTestRunnerState->runParameter && (Test_MgbaPrintf(":N%s: " f " (%d/%d)", gTestRunnerState.test->name, label, gFunctionTestRunnerState->runParameter + 1, gFunctionTestRunnerState->parameters), 1))
 
 #define TO_DO \
     do { \

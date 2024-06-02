@@ -2774,14 +2774,14 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
             break;
         case MON_DATA_TERA_TYPE:
         {
-            if (substruct0->teraType == 0)
+            if (substruct0->teraType == TYPE_NONE)
             {
                 const u8 *types = gSpeciesInfo[substruct0->species].types;
                 retVal = (boxMon->personality & 0x1) == 0 ? types[0] : types[1];
             }
             else
             {
-                retVal = substruct0->teraType - 1;
+                retVal = substruct0->teraType;
             }
             break;
         }
@@ -3210,7 +3210,7 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         {
             u32 teraType;
             SET8(teraType);
-            substruct0->teraType = 1 + teraType;
+            substruct0->teraType = teraType;
             break;
         }
         case MON_DATA_EVOLUTION_TRACKER:
@@ -6839,4 +6839,14 @@ u16 GetSpeciesPreEvolution(u16 species)
 const u8 *GetMoveName(u16 moveId)
 {
     return gMovesInfo[moveId].name;
+}
+
+const u8 *GetMoveAnimationScript(u16 moveId)
+{
+    if (gMovesInfo[moveId].battleAnimScript == NULL)
+    {
+        DebugPrintfLevel(MGBA_LOG_WARN, "No animation for moveId=%u", moveId);
+        return Move_TACKLE;
+    }
+    return gMovesInfo[moveId].battleAnimScript;
 }

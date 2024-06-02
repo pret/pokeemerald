@@ -524,6 +524,7 @@ struct MoveInfo
     u32 parentalBondBanned:1;
     u32 skyBattleBanned:1;
     u32 sketchBanned:1;
+    u32 padding:5; // end of word
 
     u32 argument;
 
@@ -535,6 +536,7 @@ struct MoveInfo
     u8 contestCategory:3;
     u8 contestComboStarterId;
     u8 contestComboMoves[MAX_COMBO_MOVES];
+    const u8 *battleAnimScript;
 };
 
 #define EFFECTS_ARR(...) (const struct AdditionalEffect[]) {__VA_ARGS__}
@@ -873,5 +875,6 @@ u16 GetSpeciesPreEvolution(u16 species);
 void HealPokemon(struct Pokemon *mon);
 void HealBoxPokemon(struct BoxPokemon *boxMon);
 const u8 *GetMoveName(u16 moveId);
+const u8 *GetMoveAnimationScript(u16 moveId);
 
 #endif // GUARD_POKEMON_H

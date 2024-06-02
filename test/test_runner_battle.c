@@ -208,20 +208,20 @@ static void PrintTestName(void)
     if (STATE->trials && STATE->parameters)
     {
         if (STATE->trials == 1)
-            MgbaPrintf_(":N%s %d/%d (%d/?)", gTestRunnerState.test->name, STATE->runParameter + 1, STATE->parameters, STATE->runTrial + 1);
+            Test_MgbaPrintf(":N%s %d/%d (%d/?)", gTestRunnerState.test->name, STATE->runParameter + 1, STATE->parameters, STATE->runTrial + 1);
         else
-            MgbaPrintf_(":N%s %d/%d (%d/%d)", gTestRunnerState.test->name, STATE->runParameter + 1, STATE->parameters, STATE->runTrial + 1, STATE->trials);
+            Test_MgbaPrintf(":N%s %d/%d (%d/%d)", gTestRunnerState.test->name, STATE->runParameter + 1, STATE->parameters, STATE->runTrial + 1, STATE->trials);
     }
     else if (STATE->trials)
     {
         if (STATE->trials == 1)
-            MgbaPrintf_(":N%s (%d/?)", gTestRunnerState.test->name, STATE->runTrial + 1);
+            Test_MgbaPrintf(":N%s (%d/?)", gTestRunnerState.test->name, STATE->runTrial + 1);
         else
-            MgbaPrintf_(":N%s (%d/%d)", gTestRunnerState.test->name, STATE->runTrial + 1, STATE->trials);
+            Test_MgbaPrintf(":N%s (%d/%d)", gTestRunnerState.test->name, STATE->runTrial + 1, STATE->trials);
     }
     else if (STATE->parameters)
     {
-        MgbaPrintf_(":N%s %d/%d", gTestRunnerState.test->name, STATE->runParameter + 1, STATE->parameters);
+        Test_MgbaPrintf(":N%s %d/%d", gTestRunnerState.test->name, STATE->runParameter + 1, STATE->parameters);
     }
 }
 
@@ -956,7 +956,7 @@ static void PrintAiMoveLog(u32 battlerId, u32 moveSlot, u32 moveId, s32 totalSco
     if (DATA.aiLogPrintedForMove[battlerId] & gBitTable[moveSlot]) return;
 
     DATA.aiLogPrintedForMove[battlerId] |= gBitTable[moveSlot];
-    MgbaPrintf_("Score Log for move %S:\n", GetMoveName(moveId));
+    Test_MgbaPrintf("Score Log for move %S:\n", GetMoveName(moveId));
     for (i = 0; i < MAX_AI_LOG_LINES; i++)
     {
         struct AILogLine *log = &DATA.aiLogLines[battlerId][moveSlot][i];
@@ -965,17 +965,17 @@ static void PrintAiMoveLog(u32 battlerId, u32 moveSlot, u32 moveId, s32 totalSco
             if (log->set)
             {
                 scoreFromLogs = log->score;
-                MgbaPrintf_("%s:%d: = %d\n", log->file, log->line, log->score);
+                Test_MgbaPrintf("%s:%d: = %d\n", log->file, log->line, log->score);
             }
             else if (log->score > 0)
             {
                 scoreFromLogs += log->score;
-                MgbaPrintf_("%s:%d: +%d\n", log->file, log->line, log->score);
+                Test_MgbaPrintf("%s:%d: +%d\n", log->file, log->line, log->score);
             }
             else
             {
                 scoreFromLogs += log->score;
-                MgbaPrintf_("%s:%d: %d\n", log->file, log->line, log->score);
+                Test_MgbaPrintf("%s:%d: %d\n", log->file, log->line, log->score);
             }
         }
         else
@@ -987,7 +987,7 @@ static void PrintAiMoveLog(u32 battlerId, u32 moveSlot, u32 moveId, s32 totalSco
     {
         Test_ExitWithResult(TEST_RESULT_ERROR, "Warning! Score from logs(%d) is different than actual score(%d). Make sure all of the score adjustments use the ADJUST_SCORE macro\n", scoreFromLogs, totalScore);
     }
-    MgbaPrintf_("Total: %d\n", totalScore);
+    Test_MgbaPrintf("Total: %d\n", totalScore);
 }
 
 static void ClearAiLog(u32 battlerId)
@@ -1163,7 +1163,7 @@ static s32 TryMessage(s32 i, s32 n, const u8 *string)
             continue;
 
         event = &DATA.queuedEvents[i].as.message;
-        // MgbaPrintf_("Looking for: %S Found: %S\n", event->pattern, string); // Useful for debugging.
+        // Test_MgbaPrintf("Looking for: %S Found: %S\n", event->pattern, string); // Useful for debugging.
         for (j = k = 0; ; j++, k++)
         {
             if (event->pattern[k] == CHAR_SPACE)
@@ -1715,6 +1715,48 @@ void Speed_(u32 sourceLine, u32 speed)
     SetMonData(DATA.currentMon, MON_DATA_SPEED, &speed);
     DATA.hasExplicitSpeeds = TRUE;
     DATA.explicitSpeeds[DATA.currentSide] |= 1 << DATA.currentPartyIndex;
+}
+
+void HPIV_(u32 sourceLine, u32 hpIV)
+{
+    INVALID_IF(!DATA.currentMon, "HP IV outside of PLAYER/OPPONENT");
+    INVALID_IF(hpIV > MAX_PER_STAT_IVS, "Illegal HP IV: %d", hpIV);
+    SetMonData(DATA.currentMon, MON_DATA_HP_IV, &hpIV);
+}
+
+void AttackIV_(u32 sourceLine, u32 attackIV)
+{
+    INVALID_IF(!DATA.currentMon, "Attack IV outside of PLAYER/OPPONENT");
+    INVALID_IF(attackIV > MAX_PER_STAT_IVS, "Illegal attack IV: %d", attackIV);
+    SetMonData(DATA.currentMon, MON_DATA_ATK_IV, &attackIV);
+}
+
+void DefenseIV_(u32 sourceLine, u32 defenseIV)
+{
+    INVALID_IF(!DATA.currentMon, "Defense IV outside of PLAYER/OPPONENT");
+    INVALID_IF(defenseIV > MAX_PER_STAT_IVS, "Illegal defense IV: %d", defenseIV);
+    SetMonData(DATA.currentMon, MON_DATA_DEF_IV, &defenseIV);
+}
+
+void SpAttackIV_(u32 sourceLine, u32 spAttackIV)
+{
+    INVALID_IF(!DATA.currentMon, "SpAttack IV outside of PLAYER/OPPONENT");
+    INVALID_IF(spAttackIV > MAX_PER_STAT_IVS, "Illegal special attack IV: %d", spAttackIV);
+    SetMonData(DATA.currentMon, MON_DATA_SPATK_IV, &spAttackIV);
+}
+
+void SpDefenseIV_(u32 sourceLine, u32 spDefenseIV)
+{
+    INVALID_IF(!DATA.currentMon, "SpDefense IV outside of PLAYER/OPPONENT");
+    INVALID_IF(spDefenseIV > MAX_PER_STAT_IVS, "Illegal special defense IV: %d", spDefenseIV);
+    SetMonData(DATA.currentMon, MON_DATA_SPDEF_IV, &spDefenseIV);
+}
+
+void SpeedIV_(u32 sourceLine, u32 speedIV)
+{
+    INVALID_IF(!DATA.currentMon, "Speed IV outside of PLAYER/OPPONENT");
+    INVALID_IF(speedIV > MAX_PER_STAT_IVS, "Illegal speed IV: %d", speedIV);
+    SetMonData(DATA.currentMon, MON_DATA_SPEED_IV, &speedIV);
 }
 
 void Item_(u32 sourceLine, u32 item)

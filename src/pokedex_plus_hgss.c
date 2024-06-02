@@ -622,60 +622,6 @@ static void DestroyCategoryIcon(void);
 
 static u16 NationalPokedexNumToSpeciesHGSS(u16 nationalNum);
 
-#define TAG_CATEGORY_ICONS 30004
-
-static const u16 sCategoryIcons_Pal[] = INCBIN_U16("graphics/interface/category_icons.gbapal");
-static const u32 sCategoryIcons_Gfx[] = INCBIN_U32("graphics/interface/category_icons.4bpp.lz");
-
-static const struct OamData sOamData_CategoryIcons =
-{
-    .size = SPRITE_SIZE(16x16),
-    .shape = SPRITE_SHAPE(16x16),
-    .priority = 0,
-};
-static const struct CompressedSpriteSheet sSpriteSheet_CategoryIcons =
-{
-    .data = sCategoryIcons_Gfx,
-    .size = 16*16*3/2,
-    .tag = TAG_CATEGORY_ICONS,
-};
-static const struct SpritePalette sSpritePal_CategoryIcons =
-{
-    .data = sCategoryIcons_Pal,
-    .tag = TAG_CATEGORY_ICONS
-};
-static const union AnimCmd sSpriteAnim_CategoryIcon0[] =
-{
-    ANIMCMD_FRAME(0, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sSpriteAnim_CategoryIcon1[] =
-{
-    ANIMCMD_FRAME(4, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd sSpriteAnim_CategoryIcon2[] =
-{
-    ANIMCMD_FRAME(8, 0),
-    ANIMCMD_END
-};
-static const union AnimCmd *const sSpriteAnimTable_CategoryIcons[] =
-{
-    sSpriteAnim_CategoryIcon0,
-    sSpriteAnim_CategoryIcon1,
-    sSpriteAnim_CategoryIcon2,
-};
-static const struct SpriteTemplate sSpriteTemplate_CategoryIcons =
-{
-    .tileTag = TAG_CATEGORY_ICONS,
-    .paletteTag = TAG_CATEGORY_ICONS,
-    .oam = &sOamData_CategoryIcons,
-    .anims = sSpriteAnimTable_CategoryIcons,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
-};
-
 //Stat bars by DizzyEgg
 #define TAG_STAT_BAR 4097
 #define TAG_STAT_BAR_BG 4098
@@ -1955,7 +1901,7 @@ static const struct SearchOptionText sDexSearchColorOptions[] =
 
 static const struct SearchOptionText sDexSearchTypeOptions[NUMBER_OF_MON_TYPES] = // + 2 for "None" and terminator, - 2 for Mystery and Stellar
 {
-    {gText_DexEmptyString, gText_DexSearchTypeNone},
+    {gText_DexEmptyString, gTypesInfo[TYPE_NONE].name},
     {gText_DexEmptyString, gTypesInfo[TYPE_NORMAL].name},
     {gText_DexEmptyString, gTypesInfo[TYPE_FIGHTING].name},
     {gText_DexEmptyString, gTypesInfo[TYPE_FLYING].name},
@@ -4769,7 +4715,7 @@ static void LoadTilesetTilemapHGSS(u8 page)
 static u8 ShowCategoryIcon(u32 category)
 {
     if (sPokedexView->categoryIconSpriteId == 0xFF)
-        sPokedexView->categoryIconSpriteId = CreateSprite(&sSpriteTemplate_CategoryIcons, 139, 90, 0);
+        sPokedexView->categoryIconSpriteId = CreateSprite(&gSpriteTemplate_CategoryIcons, 139, 90, 0);
 
     gSprites[sPokedexView->categoryIconSpriteId].invisible = FALSE;
     StartSpriteAnim(&gSprites[sPokedexView->categoryIconSpriteId], category);
@@ -4912,8 +4858,8 @@ static void Task_LoadStatsScreen(u8 taskId)
         CreateTypeIconSprites();
         sPokedexView->categoryIconSpriteId = 0xFF;
         LoadCompressedPalette(gMoveTypes_Pal, 0x1D0, 0x60);
-        LoadCompressedSpriteSheet(&sSpriteSheet_CategoryIcons);
-        LoadSpritePalette(&sSpritePal_CategoryIcons);
+        LoadCompressedSpriteSheet(&gSpriteSheet_CategoryIcons);
+        LoadSpritePalette(&gSpritePal_CategoryIcons);
         gMain.state++;
         break;
     case 4:

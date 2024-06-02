@@ -54,6 +54,7 @@
 #include "wild_encounter.h"
 #include "window.h"
 #include "constants/abilities.h"
+#include "constants/battle_ai.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_string_ids.h"
 #include "constants/battle_partner.h"
@@ -229,6 +230,7 @@ EWRAM_DATA u16 gBallToDisplay = 0;
 EWRAM_DATA bool8 gLastUsedBallMenuPresent = FALSE;
 EWRAM_DATA u8 gPartyCriticalHits[PARTY_SIZE] = {0};
 EWRAM_DATA static u8 sTriedEvolving = 0;
+EWRAM_DATA u8 gCategoryIconSpriteId = 0;
 
 void (*gPreBattleCallback1)(void);
 void (*gBattleMainFunc)(void);
@@ -294,336 +296,7 @@ const struct OamData gOamData_BattleSpritePlayerSide =
 
 static const s8 sCenterToCornerVecXs[8] ={-32, -16, -16, -32, -32};
 
-#if B_EXPANDED_TYPE_NAMES == TRUE
-#define HANDLE_EXPANDED_TYPE_NAME(_name, ...) _(DEFAULT(_name, __VA_ARGS__))
-#else
-#define HANDLE_EXPANDED_TYPE_NAME(_name, ...) _(_name)
-#endif
-
-// .generic is large enough that the text for TYPE_ELECTRIC will exceed TEXT_BUFF_ARRAY_COUNT.
-const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
-{
-    [TYPE_NORMAL] =
-    {
-        .name = _("Normal"),
-        .generic = _("a NORMAL move"),
-        .palette = 13,
-        .zMove = MOVE_BREAKNECK_BLITZ,
-        .maxMove = MOVE_MAX_STRIKE,
-        .paletteTMHM = gItemIconPalette_NormalTMHM,
-        //.enhanceItem = ITEM_SILK_SCARF,
-        //.berry = ITEM_CHILAN_BERRY,
-        //.gem = ITEM_NORMAL_GEM,
-        //.zCrystal = ITEM_NORMALIUM_Z,
-        //.teraShard = ITEM_NORMAL_TERA_SHARD,
-        //.arceusForm = SPECIES_ARCEUS_NORMAL,
-    },
-    [TYPE_FIGHTING] =
-    {
-        .name = HANDLE_EXPANDED_TYPE_NAME("Fight", "Fighting"),
-        .generic = _("a FIGHTING move"),
-        .palette = 13,
-        .zMove = MOVE_ALL_OUT_PUMMELING,
-        .maxMove = MOVE_MAX_KNUCKLE,
-        .paletteTMHM = gItemIconPalette_FightingTMHM,
-        //.enhanceItem = ITEM_BLACK_BELT,
-        //.berry = ITEM_CHOPLE_BERRY,
-        //.gem = ITEM_FIGHTING_GEM,
-        //.zCrystal = ITEM_FIGHTINIUM_Z,
-        //.plate = ITEM_FIST_PLATE,
-        //.memory = ITEM_FIGHTING_MEMORY,
-        //.teraShard = ITEM_FIGHTING_TERA_SHARD,
-        //.arceusForm = SPECIES_ARCEUS_FIGHTING,
-    },
-    [TYPE_FLYING] =
-    {
-        .name = _("Flying"),
-        .generic = _("a FLYING move"),
-        .palette = 14,
-        .zMove = MOVE_SUPERSONIC_SKYSTRIKE,
-        .maxMove = MOVE_MAX_AIRSTREAM,
-        .paletteTMHM = gItemIconPalette_FlyingTMHM,
-        //.enhanceItem = ITEM_SHARP_BEAK,
-        //.berry = ITEM_COBA_BERRY,
-        //.gem = ITEM_FLYING_GEM,
-        //.zCrystal = ITEM_FLYINIUM_Z,
-        //.plate = ITEM_SKY_PLATE,
-        //.memory = ITEM_FLYING_MEMORY,
-        //.teraShard = ITEM_FLYING_TERA_SHARD,
-        //.arceusForm = SPECIES_ARCEUS_FLYING,
-    },
-    [TYPE_POISON] =
-    {
-        .name = _("Poison"),
-        .generic = _("a POISON move"),
-        .palette = 14,
-        .zMove = MOVE_ACID_DOWNPOUR,
-        .maxMove = MOVE_MAX_OOZE,
-        .paletteTMHM = gItemIconPalette_PoisonTMHM,
-        //.enhanceItem = ITEM_POISON_BARB,
-        //.berry = ITEM_KEBIA_BERRY,
-        //.gem = ITEM_POISON_GEM,
-        //.zCrystal = ITEM_POISONIUM_Z,
-        //.plate = ITEM_TOXIC_PLATE,
-        //.memory = ITEM_POISON_MEMORY,
-        //.teraShard = ITEM_POISON_TERA_SHARD,
-        //.arceusForm = SPECIES_ARCEUS_POISON,
-    },
-    [TYPE_GROUND] =
-    {
-        .name = _("Ground"),
-        .generic = _("a GROUND move"),
-        .palette = 13,
-        .zMove = MOVE_TECTONIC_RAGE,
-        .maxMove = MOVE_MAX_QUAKE,
-        .paletteTMHM = gItemIconPalette_GroundTMHM,
-        //.enhanceItem = ITEM_SOFT_SAND,
-        //.berry = ITEM_SHUCA_BERRY,
-        //.gem = ITEM_GROUND_GEM,
-        //.zCrystal = ITEM_GROUNDIUM_Z,
-        //.plate = ITEM_EARTH_PLATE,
-        //.memory = ITEM_GROUND_MEMORY,
-        //.teraShard = ITEM_GROUND_TERA_SHARD,
-        //.arceusForm = SPECIES_ARCEUS_GROUND,
-    },
-    [TYPE_ROCK] =
-    {
-        .name = _("Rock"),
-        .generic = _("a ROCK move"),
-        .palette = 13,
-        .zMove = MOVE_CONTINENTAL_CRUSH,
-        .maxMove = MOVE_MAX_ROCKFALL,
-        .paletteTMHM = gItemIconPalette_RockTMHM,
-        //.enhanceItem = ITEM_HARD_STONE,
-        //.berry = ITEM_CHARTI_BERRY,
-        //.gem = ITEM_ROCK_GEM,
-        //.zCrystal = ITEM_ROCKIUM_Z,
-        //.plate = ITEM_STONE_PLATE,
-        //.memory = ITEM_ROCK_MEMORY,
-        //.teraShard = ITEM_ROCK_TERA_SHARD,
-        //.arceusForm = SPECIES_ARCEUS_ROCK,
-    },
-    [TYPE_BUG] =
-    {
-        .name = _("Bug"),
-        .generic = _("a BUG move"),
-        .palette = 15,
-        .zMove = MOVE_SAVAGE_SPIN_OUT,
-        .maxMove = MOVE_MAX_FLUTTERBY,
-        .paletteTMHM = gItemIconPalette_BugTMHM,
-        //.enhanceItem = ITEM_SILVER_POWDER,
-        //.berry = ITEM_TANGA_BERRY,
-        //.gem = ITEM_BUG_GEM,
-        //.zCrystal = ITEM_BUGINIUM_Z,
-        //.plate = ITEM_INSECT_PLATE,
-        //.memory = ITEM_BUG_MEMORY,
-        //.teraShard = ITEM_BUG_TERA_SHARD,
-        //.arceusForm = SPECIES_ARCEUS_BUG,
-    },
-    [TYPE_GHOST] =
-    {
-        .name = _("Ghost"),
-        .generic = _("a GHOST move"),
-        .palette = 14,
-        .zMove = MOVE_NEVER_ENDING_NIGHTMARE,
-        .maxMove = MOVE_MAX_PHANTASM,
-        .paletteTMHM = gItemIconPalette_GhostTMHM,
-        //.enhanceItem = ITEM_SPELL_TAG,
-        //.berry = ITEM_KASIB_BERRY,
-        //.gem = ITEM_GHOST_GEM,
-        //.zCrystal = ITEM_GHOSTIUM_Z,
-        //.plate = ITEM_SPOOKY_PLATE,
-        //.memory = ITEM_GHOST_MEMORY,
-        //.teraShard = ITEM_GHOST_TERA_SHARD,
-        //.arceusForm = SPECIES_ARCEUS_GHOST,
-    },
-    [TYPE_STEEL] =
-    {
-        .name = _("Steel"),
-        .generic = _("a STEEL move"),
-        .palette = 13,
-        .zMove = MOVE_CORKSCREW_CRASH,
-        .maxMove = MOVE_MAX_STEELSPIKE,
-        .paletteTMHM = gItemIconPalette_SteelTMHM,
-        //.enhanceItem = ITEM_METAL_COAT,
-        //.berry = ITEM_BABIRI_BERRY,
-        //.gem = ITEM_STEEL_GEM,
-        //.zCrystal = ITEM_STEELIUM_Z,
-        //.plate = ITEM_IRON_PLATE,
-        //.memory = ITEM_STEEL_MEMORY,
-        //.teraShard = ITEM_STEEL_TERA_SHARD,
-        //.arceusForm = SPECIES_ARCEUS_STEEL,
-    },
-    [TYPE_MYSTERY] =
-    {
-        .name = _("???"),
-        .generic = _("a ??? move"),
-        .palette = 15,
-    },
-    [TYPE_FIRE] =
-    {
-        .name = _("Fire"),
-        .generic = _("a FIRE move"),
-        .palette = 13,
-        .zMove = MOVE_INFERNO_OVERDRIVE,
-        .maxMove = MOVE_MAX_FLARE,
-        .paletteTMHM = gItemIconPalette_FireTMHM,
-        //.enhanceItem = ITEM_CHARCOAL,
-        //.berry = ITEM_OCCA_BERRY,
-        //.gem = ITEM_FIRE_GEM,
-        //.zCrystal = ITEM_FIRIUM_Z,
-        //.plate = ITEM_FLAME_PLATE,
-        //.memory = ITEM_FIRE_MEMORY,
-        //.teraShard = ITEM_FIRE_TERA_SHARD,
-        //.arceusForm = SPECIES_ARCEUS_FIRE,
-    },
-    [TYPE_WATER] =
-    {
-        .name = _("Water"),
-        .generic = _("a WATER move"),
-        .palette = 14,
-        .zMove = MOVE_HYDRO_VORTEX,
-        .maxMove = MOVE_MAX_GEYSER,
-        .paletteTMHM = gItemIconPalette_WaterTMHM,
-        //.enhanceItem = ITEM_MYSTIC_WATER,
-        //.berry = ITEM_PASSHO_BERRY,
-        //.gem = ITEM_WATER_GEM,
-        //.zCrystal = ITEM_WATERIUM_Z,
-        //.plate = ITEM_SPLASH_PLATE,
-        //.memory = ITEM_WATER_MEMORY,
-        //.teraShard = ITEM_WATER_TERA_SHARD,
-        //.arceusForm = SPECIES_ARCEUS_WATER,
-    },
-    [TYPE_GRASS] =
-    {
-        .name = _("Grass"),
-        .generic = _("a GRASS move"),
-        .palette = 15,
-        .zMove = MOVE_BLOOM_DOOM,
-        .maxMove = MOVE_MAX_OVERGROWTH,
-        .paletteTMHM = gItemIconPalette_GrassTMHM,
-        //.enhanceItem = ITEM_MIRACLE_SEED,
-        //.berry = ITEM_RINDO_BERRY,
-        //.gem = ITEM_GRASS_GEM,
-        //.zCrystal = ITEM_GRASSIUM_Z,
-        //.plate = ITEM_MEADOW_PLATE,
-        //.memory = ITEM_GRASS_MEMORY,
-        //.teraShard = ITEM_GRASS_TERA_SHARD,
-        //.arceusForm = SPECIES_ARCEUS_GRASS,
-    },
-    [TYPE_ELECTRIC] =
-    {
-        .name = HANDLE_EXPANDED_TYPE_NAME("Electr", "Electric"),
-        .generic = _("an ELECTRIC move"),
-        .palette = 13,
-        .zMove = MOVE_GIGAVOLT_HAVOC,
-        .maxMove = MOVE_MAX_LIGHTNING,
-        .paletteTMHM = gItemIconPalette_ElectricTMHM,
-        //.enhanceItem = ITEM_MAGNET,
-        //.berry = ITEM_WACAN_BERRY,
-        //.gem = ITEM_ELECTRIC_GEM,
-        //.zCrystal = ITEM_ELECTRIUM_Z,
-        //.plate = ITEM_ZAP_PLATE,
-        //.memory = ITEM_ELECTRIC_MEMORY,
-        //.teraShard = ITEM_ELECTRIC_TERA_SHARD,
-        //.arceusForm = SPECIES_ARCEUS_ELECTRIC,
-    },
-    [TYPE_PSYCHIC] =
-    {
-        .name = HANDLE_EXPANDED_TYPE_NAME("Psychc", "Psychic"),
-        .generic = _("a PSYCHIC move"),
-        .palette = 14,
-        .zMove = MOVE_SHATTERED_PSYCHE,
-        .maxMove = MOVE_MAX_MINDSTORM,
-        .paletteTMHM = gItemIconPalette_PsychicTMHM,
-        //.enhanceItem = ITEM_TWISTED_SPOON,
-        //.berry = ITEM_PAYAPA_BERRY,
-        //.gem = ITEM_PSYCHIC_GEM,
-        //.zCrystal = ITEM_PSYCHIUM_Z,
-        //.plate = ITEM_MIND_PLATE,
-        //.memory = ITEM_PSYCHIC_MEMORY,
-        //.teraShard = ITEM_PSYCHIC_TERA_SHARD,
-        //.arceusForm = SPECIES_ARCEUS_PSYCHIC,
-    },
-    [TYPE_ICE] =
-    {
-        .name = _("Ice"),
-        .generic = _("an ICE move"),
-        .palette = 14,
-        .zMove = MOVE_SUBZERO_SLAMMER,
-        .maxMove = MOVE_MAX_HAILSTORM,
-        .paletteTMHM = gItemIconPalette_IceTMHM,
-        //.enhanceItem = ITEM_NEVER_MELT_ICE,
-        //.berry = ITEM_YACHE_BERRY,
-        //.gem = ITEM_ICE_GEM,
-        //.zCrystal = ITEM_ICIUM_Z,
-        //.plate = ITEM_ICICLE_PLATE,
-        //.memory = ITEM_ICE_MEMORY,
-        //.teraShard = ITEM_ICE_TERA_SHARD,
-        //.arceusForm = SPECIES_ARCEUS_ICE,
-    },
-    [TYPE_DRAGON] =
-    {
-        .name = _("Dragon"),
-        .generic = _("a DRAGON move"),
-        .palette = 15,
-        .zMove = MOVE_DEVASTATING_DRAKE,
-        .maxMove = MOVE_MAX_WYRMWIND,
-        .paletteTMHM = gItemIconPalette_DragonTMHM,
-        //.enhanceItem = ITEM_DRAGON_FANG,
-        //.berry = ITEM_HABAN_BERRY,
-        //.gem = ITEM_DRAGON_GEM,
-        //.zCrystal = ITEM_DRAGONIUM_Z,
-        //.plate = ITEM_DRACO_PLATE,
-        //.memory = ITEM_DRAGON_MEMORY,
-        //.teraShard = ITEM_DRAGON_TERA_SHARD,
-        //.arceusForm = SPECIES_ARCEUS_DRAGON,
-    },
-    [TYPE_DARK] =
-    {
-        .name = _("Dark"),
-        .generic = _("a DARK move"),
-        .palette = 13,
-        .zMove = MOVE_BLACK_HOLE_ECLIPSE,
-        .maxMove = MOVE_MAX_DARKNESS,
-        .paletteTMHM = gItemIconPalette_DarkTMHM,
-        //.enhanceItem = ITEM_BLACK_GLASSES,
-        //.berry = ITEM_COLBUR_BERRY,
-        //.gem = ITEM_DARK_GEM,
-        //.zCrystal = ITEM_DARKINIUM_Z,
-        //.plate = ITEM_DREAD_PLATE,
-        //.memory = ITEM_DARK_MEMORY,
-        //.teraShard = ITEM_DARK_TERA_SHARD,
-        //.arceusForm = SPECIES_ARCEUS_DARK,
-    },
-    [TYPE_FAIRY] =
-    {
-        .name = _("Fairy"),
-        .generic = _("a FAIRY move"),
-        .palette = 14,
-        .zMove = MOVE_TWINKLE_TACKLE,
-        .maxMove = MOVE_MAX_STARFALL,
-        .paletteTMHM = gItemIconPalette_FairyTMHM,
-        //.enhanceItem = ITEM_FAIRY_FEATHER,
-        //.berry = ITEM_ROSELI_BERRY,
-        //.gem = ITEM_FAIRY_GEM,
-        //.zCrystal = ITEM_FAIRIUM_Z,
-        //.plate = ITEM_PIXIE_PLATE,
-        //.memory = ITEM_FAIRY_MEMORY,
-        //.teraShard = ITEM_FAIRY_TERA_SHARD,
-        //.arceusForm = SPECIES_ARCEUS_FAIRY,
-    },
-    [TYPE_STELLAR] =
-    {
-        .name = HANDLE_EXPANDED_TYPE_NAME("Stellr", "Stellar"),
-        .generic = _("a STELLAR move"),
-        .palette = 15,
-        .zMove = MOVE_BREAKNECK_BLITZ,
-        .maxMove = MOVE_MAX_STRIKE,
-        .paletteTMHM = gItemIconPalette_NormalTMHM, // failsafe
-        // .teraShard = ITEM_STELLAR_TERA_SHARD,
-    },
-};
+#include "data/types_info.h"
 
 // extra args are money and ball
 #define TRAINER_CLASS(trainerClass, trainerName, ...)   \
@@ -3446,6 +3119,7 @@ static void BattleStartClearSetData(void)
 
     gBattleStruct->swapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
     gSelectedMonPartyId = PARTY_SIZE; // Revival Blessing
+    gCategoryIconSpriteId = 0xFF;
 }
 
 void SwitchInClearSetData(u32 battler)
@@ -3746,6 +3420,9 @@ const u8* FaintClearSetData(u32 battler)
     gBattleStruct->zmove.active = FALSE;
     gBattleStruct->zmove.toBeUsed[battler] = MOVE_NONE;
     gBattleStruct->zmove.effect = EFFECT_HIT;
+    // Clear Dynamax data
+    UndoDynamax(battler);	
+
     return result;
 }
 
@@ -4469,7 +4146,10 @@ static void HandleTurnActionSelectionState(void)
             if ((gBattleTypeFlags & BATTLE_TYPE_HAS_AI || IsWildMonSmart())
                     && (BattlerHasAi(battler) && !(gBattleTypeFlags & BATTLE_TYPE_PALACE)))
             {
-                AI_DATA->mostSuitableMonId[battler] = GetMostSuitableMonToSwitchInto(battler, FALSE);
+                if (AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_RISKY) // Risky AI switches aggressively even mid battle
+                    AI_DATA->mostSuitableMonId[battler] = GetMostSuitableMonToSwitchInto(battler, TRUE);
+                else
+                    AI_DATA->mostSuitableMonId[battler] = GetMostSuitableMonToSwitchInto(battler, FALSE);
                 gBattleStruct->aiMoveOrAction[battler] = ComputeBattleAiScores(battler);
             }
             // fallthrough
@@ -5122,7 +4802,7 @@ s8 GetMovePriority(u32 battler, u16 move)
         gProtectStructs[battler].pranksterElevated = 1;
         priority++;
     }
-    else if (gMovesInfo[move].effect == EFFECT_GRASSY_GLIDE && gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN && IsBattlerGrounded(battler))
+    else if (gMovesInfo[move].effect == EFFECT_GRASSY_GLIDE && gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN && IsBattlerGrounded(battler) && !IsDynamaxed(battler) && !(gBattleStruct->dynamax.toDynamax & gBitTable[battler]))
     {
         priority++;
     }
@@ -6001,9 +5681,59 @@ void RunBattleScriptCommands(void)
         gBattleScriptingCommandsTable[gBattlescriptCurrInstr[0]]();
 }
 
+bool32 TrySetAteType(u32 move, u32 battlerAtk, u32 attackerAbility)
+{
+    u32 ateType;
+
+    switch (gMovesInfo[move].effect)
+    {
+    case EFFECT_TERA_BLAST:
+        if (IsTerastallized(battlerAtk))
+            return FALSE;
+        break;
+    case EFFECT_TERA_STARSTORM:
+        if (gBattleMons[battlerAtk].species == SPECIES_TERAPAGOS_STELLAR)
+            return FALSE;
+        break;
+    case EFFECT_HIDDEN_POWER:
+    case EFFECT_WEATHER_BALL:
+    case EFFECT_CHANGE_TYPE_ON_ITEM:
+    case EFFECT_NATURAL_GIFT:
+        return FALSE;
+    }
+
+    ateType = TYPE_NONE;
+    switch (attackerAbility)
+    {
+    case ABILITY_PIXILATE:
+        ateType = TYPE_FAIRY;
+        break;
+    case ABILITY_REFRIGERATE:
+        ateType = TYPE_ICE;
+        break;
+    case ABILITY_AERILATE:
+        ateType = TYPE_FLYING;
+        break;
+    case ABILITY_GALVANIZE:
+        ateType = TYPE_ELECTRIC;
+        break;
+    default:
+        ateType = TYPE_NONE;
+        break;
+    }
+
+    if (ateType != TYPE_NONE)
+    {
+        gBattleStruct->dynamicMoveType = ateType | F_DYNAMIC_TYPE_SET;
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
 void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
 {
-    u32 moveType, ateType, attackerAbility;
+    u32 moveType, attackerAbility;
     u16 holdEffect = GetBattlerHoldEffect(battlerAtk, TRUE);
 
     if (move == MOVE_STRUGGLE)
@@ -6038,9 +5768,9 @@ void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
                      | ((gBattleMons[battlerAtk].spAttackIV & 1) << 4)
                      | ((gBattleMons[battlerAtk].spDefenseIV & 1) << 5);
 
-        // Subtract 4 instead of 1 below because 3 types are excluded (TYPE_NORMAL and TYPE_MYSTERY and TYPE_FAIRY)
-        // The final + 1 skips past Normal, and the following conditional skips TYPE_MYSTERY
-        gBattleStruct->dynamicMoveType = ((NUMBER_OF_MON_TYPES - 4) * typeBits) / 63 + 1;
+        // Subtract 6 instead of 1 below because 5 types are excluded (TYPE_NONE, TYPE_NORMAL, TYPE_MYSTERY, TYPE_FAIRY and TYPE_STELLAR)
+        // The final + 2 skips past TYPE_NONE and Normal.
+        gBattleStruct->dynamicMoveType = ((NUMBER_OF_MON_TYPES - 6) * typeBits) / 63 + 2;
         if (gBattleStruct->dynamicMoveType >= TYPE_MYSTERY)
             gBattleStruct->dynamicMoveType++;
         gBattleStruct->dynamicMoveType |= F_DYNAMIC_TYPE_IGNORE_PHYSICALITY | F_DYNAMIC_TYPE_SET;
@@ -6105,29 +5835,15 @@ void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
     }
 
     attackerAbility = GetBattlerAbility(battlerAtk);
-
-    if (gMovesInfo[move].type == TYPE_NORMAL
-             && gMovesInfo[move].effect != EFFECT_HIDDEN_POWER
-             && gMovesInfo[move].effect != EFFECT_WEATHER_BALL
-             && gMovesInfo[move].effect != EFFECT_CHANGE_TYPE_ON_ITEM
-             && gMovesInfo[move].effect != EFFECT_NATURAL_GIFT
-             && !(gMovesInfo[move].effect == EFFECT_TERA_BLAST && IsTerastallized(battlerAtk))
-             && !(gMovesInfo[move].effect == EFFECT_TERA_STARSTORM && gBattleMons[battlerAtk].species == SPECIES_TERAPAGOS_STELLAR)
-             && ((attackerAbility == ABILITY_PIXILATE && (ateType = TYPE_FAIRY))
-                 || (attackerAbility == ABILITY_REFRIGERATE && (ateType = TYPE_ICE))
-                 || (attackerAbility == ABILITY_AERILATE && (ateType = TYPE_FLYING))
-                 || ((attackerAbility == ABILITY_GALVANIZE) && (ateType = TYPE_ELECTRIC))
-                )
-             )
+    if (gMovesInfo[move].type == TYPE_NORMAL && TrySetAteType(move, battlerAtk, attackerAbility))
     {
-        gBattleStruct->dynamicMoveType = ateType | F_DYNAMIC_TYPE_SET;
         if (!IsDynamaxed(battlerAtk))
             gBattleStruct->ateBoost[battlerAtk] = 1;
     }
     else if (gMovesInfo[move].type != TYPE_NORMAL
-             && gMovesInfo[move].effect != EFFECT_HIDDEN_POWER
-             && gMovesInfo[move].effect != EFFECT_WEATHER_BALL
-             && attackerAbility == ABILITY_NORMALIZE)
+          && gMovesInfo[move].effect != EFFECT_HIDDEN_POWER
+          && gMovesInfo[move].effect != EFFECT_WEATHER_BALL
+          && attackerAbility == ABILITY_NORMALIZE)
     {
         gBattleStruct->dynamicMoveType = TYPE_NORMAL | F_DYNAMIC_TYPE_SET;
         if (!IsDynamaxed(battlerAtk))

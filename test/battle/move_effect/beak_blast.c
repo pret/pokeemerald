@@ -111,3 +111,6 @@ SINGLE_BATTLE_TEST("Beak Blast burns only when contact moves are used")
         HP_BAR(opponent);
     }
 }
+
+TO_DO_BATTLE_TEST("Beak Blast's charging message is shown regardless if it would've missed");
+TO_DO_BATTLE_TEST("Bulletproof is immune to Beak Blast but not to the burn it causes");

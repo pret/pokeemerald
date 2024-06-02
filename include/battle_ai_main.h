@@ -32,22 +32,20 @@
 #define BEST_DAMAGE_MOVE     1  // Move with the most amount of hits with the best accuracy/effect
 #define POWERFUL_STATUS_MOVE 10 // Moves with this score will be chosen over a move that faints target
 
-// Temporary scores that are added together to determine a final score at the at of AI_CalcMoveEffectScore
+// Scores given in AI_CalcMoveEffectScore
 #define WEAK_EFFECT      1
 #define DECENT_EFFECT    2
-#define GOOD_EFFECT      4
-#define BEST_EFFECT      6
-
-// AI_CalcMoveEffectScore final score
-#define NOT_GOOD_ENOUGH           0 // Not worth using over a damaging move
-#define GOOD_MOVE_EFFECTS         2 // Worth using over a damaging move
-#define PREFERRED_MOVE_EFFECTS    3 // Worth using over a damagin move and is better then DECENT_EFFECT
-#define BEST_MOVE_EFFECTS         4 // Best possible move effects. E.g. stat boosting moves that boost multiply moves
+#define GOOD_EFFECT      3
+#define BEST_EFFECT      4
 
 // AI_TryToFaint
 #define FAST_KILL      6 // AI is faster and faints target
 #define SLOW_KILL      4 // AI is slower and faints target
 #define LAST_CHANCE    2 // AI faints to target. It should try and do damage with a priority move
+
+// AI_Risky
+#define STRONG_RISKY_EFFECT     3
+#define AVERAGE_RISKY_EFFECT    2
 
 #include "test_runner.h"
 

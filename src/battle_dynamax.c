@@ -207,6 +207,7 @@ void UndoDynamax(u16 battlerId)
         u16 mult = UQ_4_12(1.0/1.5); // placeholder
         gBattleMons[battlerId].hp = UQ_4_12_TO_INT((GetMonData(mon, MON_DATA_HP) * mult + 1) + UQ_4_12_ROUND); // round up
         SetMonData(mon, MON_DATA_HP, &gBattleMons[battlerId].hp);
+        CalculateMonStats(mon);
     }
 
     // Makes sure there are no Dynamax flags set, including on switch / faint.

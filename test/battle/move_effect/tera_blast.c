@@ -21,6 +21,57 @@ SINGLE_BATTLE_TEST("Tera Blast changes from Normal-type to the user's Tera Type"
     }
 }
 
+SINGLE_BATTLE_TEST("Tera Blast has correct effectiveness for every Tera Type")
+{
+    u32 species;
+    u32 type;
+
+    PARAMETRIZE { species = SPECIES_CHIKORITA; type = TYPE_FLYING;   }
+    PARAMETRIZE { species = SPECIES_CHIKORITA; type = TYPE_POISON;   }
+    PARAMETRIZE { species = SPECIES_CHIKORITA; type = TYPE_FIRE;     }
+    PARAMETRIZE { species = SPECIES_CHIKORITA; type = TYPE_BUG;      }
+    PARAMETRIZE { species = SPECIES_CHIKORITA; type = TYPE_ICE;      }
+    PARAMETRIZE { species = SPECIES_CYNDAQUIL; type = TYPE_GROUND;   }
+    PARAMETRIZE { species = SPECIES_CYNDAQUIL; type = TYPE_ROCK;     }
+    PARAMETRIZE { species = SPECIES_CYNDAQUIL; type = TYPE_WATER;    }
+    PARAMETRIZE { species = SPECIES_GASTLY;    type = TYPE_NORMAL;   }
+    PARAMETRIZE { species = SPECIES_GASTLY;    type = TYPE_GHOST;    }
+    PARAMETRIZE { species = SPECIES_GASTLY;    type = TYPE_PSYCHIC;  }
+    PARAMETRIZE { species = SPECIES_TOTODILE;  type = TYPE_GRASS;    }
+    PARAMETRIZE { species = SPECIES_TOTODILE;  type = TYPE_ELECTRIC; }
+    PARAMETRIZE { species = SPECIES_DRATINI;   type = TYPE_DRAGON;   }
+    PARAMETRIZE { species = SPECIES_DRATINI;   type = TYPE_FAIRY;    }
+    PARAMETRIZE { species = SPECIES_SNEASEL;   type = TYPE_FIGHTING; }
+    PARAMETRIZE { species = SPECIES_SNEASEL;   type = TYPE_STEEL;    }
+    PARAMETRIZE { species = SPECIES_ABRA;      type = TYPE_DARK;     }
+
+    GIVEN {
+        ASSUME(gSpeciesInfo[SPECIES_CHIKORITA].types[0] == TYPE_GRASS);
+        ASSUME(gSpeciesInfo[SPECIES_CHIKORITA].types[1] == TYPE_GRASS);
+        ASSUME(gSpeciesInfo[SPECIES_CYNDAQUIL].types[0] == TYPE_FIRE);
+        ASSUME(gSpeciesInfo[SPECIES_CYNDAQUIL].types[1] == TYPE_FIRE);
+        ASSUME(gSpeciesInfo[SPECIES_GASTLY].types[0] == TYPE_GHOST);
+        ASSUME(gSpeciesInfo[SPECIES_GASTLY].types[1] == TYPE_POISON);
+        ASSUME(gSpeciesInfo[SPECIES_TOTODILE].types[0] == TYPE_WATER);
+        ASSUME(gSpeciesInfo[SPECIES_TOTODILE].types[1] == TYPE_WATER);
+        ASSUME(gSpeciesInfo[SPECIES_DRATINI].types[0] == TYPE_DRAGON);
+        ASSUME(gSpeciesInfo[SPECIES_DRATINI].types[1] == TYPE_DRAGON);
+        ASSUME(gSpeciesInfo[SPECIES_SNEASEL].types[0] == TYPE_DARK);
+        ASSUME(gSpeciesInfo[SPECIES_SNEASEL].types[1] == TYPE_ICE);
+        ASSUME(gSpeciesInfo[SPECIES_ABRA].types[0] == TYPE_PSYCHIC);
+        ASSUME(gSpeciesInfo[SPECIES_ABRA].types[1] == TYPE_PSYCHIC);
+        PLAYER(SPECIES_WOBBUFFET) { TeraType(type); }
+        OPPONENT(species);
+    } WHEN {
+        TURN { MOVE(player, MOVE_TERA_BLAST, tera: TRUE); }
+    } SCENE {
+        if (species == SPECIES_GASTLY && type == TYPE_NORMAL)
+            MESSAGE("It doesn't affect Foe Gastly…");
+        else
+            MESSAGE("It's super effective!");
+    }
+}
+
 SINGLE_BATTLE_TEST("Tera Blast becomes a physical move if the user is Terastallized and has a higher Attack stat", s16 damage)
 {
     bool32 tera;

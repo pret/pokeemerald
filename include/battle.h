@@ -738,7 +738,10 @@ struct BattleStruct
     u8 magnitudeBasePower;
     u8 presentBasePower;
     u8 roostTypes[MAX_BATTLERS_COUNT][2];
-    u8 savedBattlerTarget;
+    u8 savedBattlerTarget[5];
+    u8 savedBattlerAttacker[5];
+    u8 savedTargetCount:4;
+    u8 savedAttackerCount:4;
     bool8 ateBoost[MAX_BATTLERS_COUNT];
     u8 activeAbilityPopUps; // as bits for each battler
     u8 abilityPopUpSpriteIds[MAX_BATTLERS_COUNT][2];    // two per battler
@@ -1146,6 +1149,7 @@ extern u16 gLastThrownBall;
 extern u16 gBallToDisplay;
 extern bool8 gLastUsedBallMenuPresent;
 extern u8 gPartyCriticalHits[PARTY_SIZE];
+extern u8 gCategoryIconSpriteId;
 
 static inline u32 GetBattlerPosition(u32 battler)
 {
