@@ -1628,7 +1628,7 @@ static const u8 *const sArchieFinalDefeat[1] =
     gText_ArchieFinalDefeat,
 };
 
-static const u8 *const sRandomTrainerApproachTexts[77] =
+static const u8 *const sRandomTrainerApproachTexts[78] =
 {
     gText_TylerApproach,
     gText_JuliaApproach,
@@ -1707,6 +1707,7 @@ static const u8 *const sRandomTrainerApproachTexts[77] =
     gText_HunterApproach,
     gText_AinsleyApproach,
     gText_GriffinApproach,
+    gText_wiz1989Approach,
 };
 
 static const u8 *const sRandomTrainerDefeatTexts[77] =

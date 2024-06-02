@@ -256,5 +256,6 @@ u8 GetBattlerType(u32 battler, u8 typeIndex);
 bool8 CanMonParticipateInSkyBattle(struct Pokemon *mon);
 bool8 IsMonBannedFromSkyBattles(u16 species);
 void RemoveBattlerType(u32 battler, u8 type);
+u32 GetCalcedMoveBasePower(u32 move, u32 battlerAtk, u32 weather);
 
 #endif // GUARD_BATTLE_UTIL_H

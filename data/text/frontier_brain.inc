@@ -233,7 +233,7 @@ gText_CooperApproach::
     .string "This will be fun!$"
 
 gText_RubyApproach::
-    .string "Your run stop here!$"
+    .string "Your run stops here!$"
 
 gText_ColeApproach::
     .string "I'm going to wipe you out!$"
@@ -356,7 +356,7 @@ gText_NoraApproach::
 
 gText_HunterApproach::
     .string "How is your run going?\n"
-    .string "I think its been too easy.$"
+    .string "I think it's been too easy.$"
 
 gText_AinsleyApproach::
     .string "If you can believe it,\n"
@@ -365,6 +365,10 @@ gText_AinsleyApproach::
 gText_GriffinApproach::
 	.string "Gwah!\n"
 	.string "Hahahaha!$"
+
+gText_wiz1989Approach::
+    .string "If you're a streamer, your defeat\n"
+    .string "will be great content!$"
 
 
 
@@ -561,7 +565,7 @@ gText_LiamDefeat::
 
 gText_EvelynDefeat::
     .string "Ha… You may have won but,\n"
-	.string "it will cost your run!$"
+	.string "it will cost you your run!$"
 
 gText_WilliamDefeat::
     .string "You've earned this win!$"

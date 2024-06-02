@@ -11226,3 +11226,168 @@ void RemoveBattlerType(u32 battler, u8 type)
             *(u8 *)(&gBattleMons[battler].type1 + i) = TYPE_MYSTERY;
     }
 }
+
+u32 GetCalcedMoveBasePower(u32 move, u32 battlerAtk, u32 weather)
+{
+    u32 i;
+    u32 basePower = gMovesInfo[move].power;
+    u32 weight, hpFraction, speed;
+
+    if (gBattleStruct->zmove.active)
+        return GetZMovePower(gBattleStruct->zmove.baseMoves[battlerAtk]);
+
+    switch (gMovesInfo[move].effect)
+    {
+    case EFFECT_PLEDGE:
+        if (gBattleStruct->pledgeMove)
+            basePower = 150;
+        break;
+    case EFFECT_FLING:
+        basePower = GetFlingPowerFromItemId(gBattleMons[battlerAtk].item);
+        break;
+    case EFFECT_ERUPTION:
+        basePower = gBattleMons[battlerAtk].hp * basePower / gBattleMons[battlerAtk].maxHP;
+        break;
+    case EFFECT_FLAIL:
+        hpFraction = GetScaledHPFraction(gBattleMons[battlerAtk].hp, gBattleMons[battlerAtk].maxHP, 48);
+        for (i = 0; i < sizeof(sFlailHpScaleToPowerTable); i += 2)
+        {
+            if (hpFraction <= sFlailHpScaleToPowerTable[i])
+                break;
+        }
+        basePower = sFlailHpScaleToPowerTable[i + 1];
+        break;
+    case EFFECT_RETURN:
+        basePower = 10 * (gBattleMons[battlerAtk].friendship) / 25;
+        break;
+    case EFFECT_FRUSTRATION:
+        basePower = 10 * (MAX_FRIENDSHIP - gBattleMons[battlerAtk].friendship) / 25;
+        break;
+    case EFFECT_FURY_CUTTER:
+        basePower = CalcFuryCutterBasePower(basePower, gDisableStructs[battlerAtk].furyCutterCounter);
+        break;
+    case EFFECT_ROLLOUT:
+        basePower = CalcRolloutBasePower(battlerAtk, basePower, gDisableStructs[battlerAtk].rolloutTimer);
+        break;
+    case EFFECT_SPIT_UP:
+        basePower = 100 * gDisableStructs[battlerAtk].stockpileCounter;
+        break;
+    case EFFECT_WEATHER_BALL:
+        if (weather & B_WEATHER_ANY)
+            basePower *= 2;
+        break;
+    case EFFECT_NATURAL_GIFT:
+        basePower = gNaturalGiftTable[ITEM_TO_BERRY(gBattleMons[battlerAtk].item)].power;
+        break;
+    case EFFECT_TRUMP_CARD:
+        i = GetMoveSlot(gBattleMons[battlerAtk].moves, move);
+        if (i != MAX_MON_MOVES)
+        {
+            if (gBattleMons[battlerAtk].pp[i] >= ARRAY_COUNT(sTrumpCardPowerTable))
+                basePower = sTrumpCardPowerTable[ARRAY_COUNT(sTrumpCardPowerTable) - 1];
+            else
+                basePower = sTrumpCardPowerTable[gBattleMons[battlerAtk].pp[i]];
+        }
+        break;
+    case EFFECT_ACROBATICS:
+        if (gBattleMons[battlerAtk].item == ITEM_NONE
+            // Edge case, because removal of items happens after damage calculation.
+            || (gSpecialStatuses[battlerAtk].gemBoost && GetBattlerHoldEffect(battlerAtk, FALSE) == HOLD_EFFECT_GEMS))
+            basePower *= 2;
+        break;
+    case EFFECT_STORED_POWER:
+        basePower += (CountBattlerStatIncreases(battlerAtk, TRUE) * 20);
+        break;
+    case EFFECT_ECHOED_VOICE:
+        // gBattleStruct->sameMoveTurns incremented in ppreduce
+        if (gBattleStruct->sameMoveTurns[battlerAtk] != 0)
+        {
+            basePower += (basePower * gBattleStruct->sameMoveTurns[battlerAtk]);
+            if (basePower > 200)
+                basePower = 200;
+        }
+        break;
+    case EFFECT_ROUND:
+        for (i = 0; i < gBattlersCount; i++)
+        {
+            if (i != battlerAtk && IsBattlerAlive(i) && gLastMoves[i] == MOVE_ROUND)
+            {
+                basePower *= 2;
+                break;
+            }
+        }
+        break;
+    case EFFECT_FUSION_COMBO:
+        if (gMovesInfo[gLastUsedMove].effect == EFFECT_FUSION_COMBO && move != gLastUsedMove)
+            basePower *= 2;
+        break;
+    case EFFECT_LASH_OUT:
+        if (gProtectStructs[battlerAtk].statFell)
+            basePower *= 2;
+        break;
+    case EFFECT_EXPLOSION:
+        if (move == MOVE_MISTY_EXPLOSION && gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN && IsBattlerGrounded(battlerAtk))
+            basePower = uq4_12_multiply(basePower, UQ_4_12(1.5));
+        break;
+    case EFFECT_HIDDEN_POWER:
+    {
+        if (B_HIDDEN_POWER_DMG < GEN_6)
+        {
+            u8 powerBits = ((gBattleMons[battlerAtk].hpIV & 2) >> 1)
+                         | ((gBattleMons[battlerAtk].attackIV & 2) << 0)
+                         | ((gBattleMons[battlerAtk].defenseIV & 2) << 1)
+                         | ((gBattleMons[battlerAtk].speedIV & 2) << 2)
+                         | ((gBattleMons[battlerAtk].spAttackIV & 2) << 3)
+                         | ((gBattleMons[battlerAtk].spDefenseIV & 2) << 4);
+
+            basePower = (40 * powerBits) / 63 + 30;
+        }
+        break;
+    }
+    case EFFECT_GRAV_APPLE:
+        if (gFieldStatuses & STATUS_FIELD_GRAVITY)
+            basePower = uq4_12_multiply(basePower, UQ_4_12(1.5));
+        break;
+    case EFFECT_TERRAIN_PULSE:
+        if ((gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
+            && IsBattlerGrounded(battlerAtk))
+            basePower *= 2;
+        break;
+    case EFFECT_EXPANDING_FORCE:
+        if (IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_PSYCHIC_TERRAIN))
+            basePower = uq4_12_multiply(basePower, UQ_4_12(1.5));
+        break;
+    case EFFECT_BEAT_UP:
+        if (B_BEAT_UP >= GEN_5)
+            basePower = CalcBeatUpPower();
+        break;
+    case EFFECT_PSYBLADE:
+        if (IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_ELECTRIC_TERRAIN))
+            basePower = uq4_12_multiply(basePower, UQ_4_12(1.5));
+        break;
+    case EFFECT_MAX_MOVE:
+        basePower = GetMaxMovePower(gBattleMons[battlerAtk].moves[gBattleStruct->chosenMovePositions[battlerAtk]]);
+        break;
+    case EFFECT_RAGE_FIST:
+        basePower += 50 * gBattleStruct->timesGotHit[GetBattlerSide(battlerAtk)][gBattlerPartyIndexes[battlerAtk]];
+        basePower = (basePower > 350) ? 350 : basePower;
+        break;
+    case EFFECT_LAST_RESPECTS:
+        basePower += (basePower * min(100, GetBattlerSideFaintCounter(battlerAtk)));
+        break;
+    }
+
+    // Move-specific base power changes
+    switch (move)
+    {
+    case MOVE_WATER_SHURIKEN:
+        if (gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH)
+            basePower = 20;
+        break;
+    }
+
+    if (basePower == 0)
+        basePower = 1;    
+    
+    return basePower;
+}

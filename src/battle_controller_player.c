@@ -5,6 +5,7 @@
 #include "battle_controllers.h"
 #include "battle_dome.h"
 #include "battle_interface.h"
+#include "battle_main.h"
 #include "battle_message.h"
 #include "battle_setup.h"
 #include "battle_tv.h"
@@ -43,6 +44,8 @@
 #include "pokemon_summary_screen.h"
 #include "level_caps.h"
 #include "event_data.h"
+#include "field_weather.h"
+
 static void ChangeMoveDisplayMode(u32 battler);
 
 static void PlayerBufferExecCompleted(u32 battler);
@@ -1061,6 +1064,10 @@ static void MoveSelectionDisplayMoveDescription(u32 battler)
     u8 pwr_start[] = _("{CLEAR_TO 0x03}");
     u8 acc_start[] = _("{CLEAR_TO 0x38}");
     u8 pri_start[] = _("{CLEAR_TO 0x6D}");
+
+    //update pwr for dynamic moves
+    pwr = GetCalcedMoveBasePower(move, battler, GetSavedWeather());
+
     LoadMessageBoxAndBorderGfx();
     DrawStdWindowFrame(B_WIN_MOVE_DESCRIPTION, FALSE);
     if (pwr < 2)
@@ -1841,7 +1848,11 @@ u8 TypeEffectiveness(u8 targetId, u32 battler)
     move = moveInfo->moves[gMoveSelectionCursor[battler]];
     move = gBattleMons[battler].moves[gMoveSelectionCursor[battler]];
 
-    moveType = gMovesInfo[move].type;
+    //moveType = gMovesInfo[move].type;
+    //handle dynamic move types
+    SetTypeBeforeUsingMove(move, battler);
+    GET_MOVE_TYPE(move, moveType); //this sets the moveType var
+
     modifier = CalcTypeEffectivenessMultiplier(move, moveType, battler, targetId, GetBattlerAbility(targetId), TRUE);
     
     if (modifier == UQ_4_12(0.0)) {
@@ -1901,7 +1912,12 @@ static void MoveSelectionDisplayMoveType(u32 battler)
             type = gMovesInfo[MOVE_IVY_CUDGEL].type;
     }
     else
-        type = gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].type;
+    {
+        //handle dynamic move types
+        SetTypeBeforeUsingMove(moveInfo->moves[gMoveSelectionCursor[battler]], battler);
+        GET_MOVE_TYPE(moveInfo->moves[gMoveSelectionCursor[battler]], type); //this sets the type var
+        //type = gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].type;
+    }
 
     StringCopy(txtPtr, gTypesInfo[type].name);
     BattlePutTextOnWindow(gDisplayedStringBattle, typeColor);

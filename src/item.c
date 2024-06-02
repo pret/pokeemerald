@@ -1269,8 +1269,6 @@ static const u16 sRandomHeldItemsForOpponents[] =
     ITEM_CHOICE_BAND,
     ITEM_CHOICE_SPECS,
     ITEM_CHOICE_SCARF,
-    ITEM_FLAME_ORB,
-    ITEM_TOXIC_ORB,
     ITEM_BRIGHT_POWDER,
     ITEM_WHITE_HERB,
     ITEM_QUICK_CLAW,
