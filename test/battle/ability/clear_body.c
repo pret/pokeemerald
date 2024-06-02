@@ -97,32 +97,31 @@ SINGLE_BATTLE_TEST("Clear Body doesn't prevent stat stage reduction from moves u
 
 SINGLE_BATTLE_TEST("Mold Breaker, Teravolt, and Turboblaze ignore Clear Body")
 {
-    u16 move;
-    u16 ability;
-    PARAMETRIZE{ move = MOVE_GROWL;         ability = ABILITY_MOLD_BREAKER; }
-    PARAMETRIZE{ move = MOVE_LEER;          ability = ABILITY_MOLD_BREAKER; }
-    PARAMETRIZE{ move = MOVE_CONFIDE;       ability = ABILITY_MOLD_BREAKER; }
-    PARAMETRIZE{ move = MOVE_FAKE_TEARS;    ability = ABILITY_MOLD_BREAKER; }
-    PARAMETRIZE{ move = MOVE_SCARY_FACE;    ability = ABILITY_MOLD_BREAKER; }
-    PARAMETRIZE{ move = MOVE_SWEET_SCENT;   ability = ABILITY_MOLD_BREAKER; }
-    PARAMETRIZE{ move = MOVE_SAND_ATTACK;   ability = ABILITY_MOLD_BREAKER; }
-    PARAMETRIZE{ move = MOVE_GROWL;         ability = ABILITY_MOLD_BREAKER; }
+    u32 j, k;
+    u16 ability = ABILITY_NONE;
+    u16 move = ABILITY_NONE;
+    static const u16 breakerAbilities[] = {
+        ABILITY_MOLD_BREAKER,
+        ABILITY_TERAVOLT,
+        ABILITY_TURBOBLAZE,
+    };
+    static const u16 statReductionMoves[] = {
+        MOVE_GROWL,
+        MOVE_LEER,
+        MOVE_CONFIDE,
+        MOVE_FAKE_TEARS,
+        MOVE_SCARY_FACE,
+        MOVE_SWEET_SCENT,
+        MOVE_SAND_ATTACK,
+    };
 
-    PARAMETRIZE{ move = MOVE_LEER;          ability = ABILITY_TERAVOLT; }
-    PARAMETRIZE{ move = MOVE_CONFIDE;       ability = ABILITY_TERAVOLT; }
-    PARAMETRIZE{ move = MOVE_FAKE_TEARS;    ability = ABILITY_TERAVOLT; }
-    PARAMETRIZE{ move = MOVE_SCARY_FACE;    ability = ABILITY_TERAVOLT; }
-    PARAMETRIZE{ move = MOVE_SWEET_SCENT;   ability = ABILITY_TERAVOLT; }
-    PARAMETRIZE{ move = MOVE_SAND_ATTACK;   ability = ABILITY_TERAVOLT; }
-    PARAMETRIZE{ move = MOVE_GROWL;         ability = ABILITY_TERAVOLT; }
-
-    PARAMETRIZE{ move = MOVE_LEER;          ability = ABILITY_TURBOBLAZE; }
-    PARAMETRIZE{ move = MOVE_CONFIDE;       ability = ABILITY_TURBOBLAZE; }
-    PARAMETRIZE{ move = MOVE_FAKE_TEARS;    ability = ABILITY_TURBOBLAZE; }
-    PARAMETRIZE{ move = MOVE_SCARY_FACE;    ability = ABILITY_TURBOBLAZE; }
-    PARAMETRIZE{ move = MOVE_SWEET_SCENT;   ability = ABILITY_TURBOBLAZE; }
-    PARAMETRIZE{ move = MOVE_SAND_ATTACK;   ability = ABILITY_TURBOBLAZE; }
-    PARAMETRIZE{ move = MOVE_GROWL;         ability = ABILITY_TURBOBLAZE; }
+    for (j = 0; j < ARRAY_COUNT(statReductionMoves); j++)
+    {
+        for (k = 0; k < ARRAY_COUNT(breakerAbilities); k++)
+        {
+            PARAMETRIZE{ move = statReductionMoves[j]; ability = breakerAbilities[k]; }
+        }
+    }
 
     GIVEN {
         ASSUME(gMovesInfo[MOVE_GROWL].effect == EFFECT_ATTACK_DOWN);
@@ -159,8 +158,7 @@ SINGLE_BATTLE_TEST("Clear Body doesn't prevent Speed reduction from Iron Ball")
         if (heldItem == ITEM_IRON_BALL) {
             MESSAGE("Wobbuffet used Celebrate!");
             MESSAGE("Foe Beldum used Celebrate!");
-        }
-        else {
+        } else {
             MESSAGE("Foe Beldum used Celebrate!");
             MESSAGE("Wobbuffet used Celebrate!");
         }
