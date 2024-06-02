@@ -145,12 +145,6 @@ bool8 ScrCmd_callnative(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_callfunc(struct ScriptContext *ctx)
-{
-    u32 func = ScriptReadWord(ctx);
-    return ((ScrCmdFunc) func)(ctx);
-}
-
 bool8 ScrCmd_waitstate(struct ScriptContext *ctx)
 {
     ScriptContext_Stop();

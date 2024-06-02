@@ -1813,13 +1813,6 @@
 	_dynmultichoice \left, \top, \ignoreBPress, \maxBeforeScroll, \shouldSort, \initialSelected, \callbacks, NULL
 	.endm
 
-	@ Like callnative, but can return a value. TODO: Replace uses with callnative.
-	.macro callfunc func:req
-	.byte 0xe5
-	.4byte \func
-	.endm
-
-
 @ Supplementary
 
 	.macro goto_if_unset flag:req, dest:req
