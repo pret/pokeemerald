@@ -47,7 +47,7 @@
 #include "link.h"
 #include "frontier_pass.h"
 #include "start_menu.h"
-#include "ui_mode_menu.h" // WIP
+#include "ui_mode_menu.h"
 
 /*
     Full Screen Start Menu

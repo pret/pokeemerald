@@ -78,16 +78,19 @@
 #include "naming_screen.h"
 #include "ui_menu.h"
 #include "money.h"
+#include "overworld.h"
 
 //Tutor states for VAR_PIT_TUTOR_STATE
 #define TUTOR_STATE_RELEARNER 0
 #define TUTOR_STATE_TUTOR_MOVES 1
 #define TUTOR_STATE_EGG_MOVES 2
+#define TUTOR_STATE_IV_EDITOR 3
 
 enum {
     MENU_SUMMARY,
     MENU_SWITCH,
     MENU_STAT_EDIT,
+    MENU_STAT_VIEW,
     MENU_NICKNAME,
     MENU_CANCEL1,
     MENU_ITEM,
@@ -475,6 +478,7 @@ static void CB2_ChooseContestMon(void);
 static void Task_ChoosePartyMon(u8 taskId);
 static void Task_ChooseMonForMoveRelearner(u8);
 static void CB2_ChooseMonForMoveRelearner(void);
+static void CB2_ChooseMonForStatEditor(void);
 static void Task_BattlePyramidChooseMonHeldItems(u8);
 static void ShiftMoveSlot(struct Pokemon*, u8, u8);
 static void BlitBitmapToPartyWindow_LeftColumn(u8, u8, u8, u8, u8, u8);
@@ -2934,6 +2938,9 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
 
     if(FlagGet(FLAG_STAT_CHANGER))
         AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_STAT_EDIT);
+    else
+        AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_STAT_VIEW);
+
     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_NICKNAME);
     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_CANCEL1);
 }
@@ -7816,6 +7823,9 @@ static void Task_ChooseMonForMoveRelearner(u8 taskId)
             case TUTOR_STATE_EGG_MOVES:
                 InitPartyMenu(PARTY_MENU_TYPE_EGG_TUTOR, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_AND_CLOSE, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_ChooseMonForMoveRelearner);
                 break;
+            case TUTOR_STATE_IV_EDITOR:
+                InitPartyMenu(PARTY_MENU_TYPE_CHOOSE_MON, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_AND_CLOSE, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_ChooseMonForStatEditor);
+                break;
         }
         DestroyTask(taskId);
     }
@@ -7838,6 +7848,15 @@ static void CB2_ChooseMonForMoveRelearner(void)
                 break;
         }
     }
+    gFieldCallback2 = CB2_FadeFromPartyMenu;
+    SetMainCallback2(CB2_ReturnToField);
+}
+
+static void CB2_ChooseMonForStatEditor(void)
+{
+    gSpecialVar_0x8004 = GetCursorSelectionMonId();
+    if (gSpecialVar_0x8004 >= PARTY_SIZE)
+        gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
     gFieldCallback2 = CB2_FadeFromPartyMenu;
     SetMainCallback2(CB2_ReturnToField);
 }

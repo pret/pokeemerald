@@ -5,6 +5,7 @@
 
 void Task_OpenMenuFromStartMenu(u8 taskId);
 void StatEditor_Init(MainCallback callback);
+void CallStatEditor(void);
 
 extern const u8 *const gNatureNamePointers[];
 //extern const u8 gAbilityNames[][ABILITY_NAME_LENGTH + 1];

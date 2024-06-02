@@ -69,7 +69,7 @@ enum
     MENU_ACTION_PYRAMID_BAG,
     MENU_ACTION_UI_MENU,
     MENU_ACTION_DEBUG,
-    MENU_ACTION_MODE_MENU, // WIP
+    MENU_ACTION_MODE_MENU,
 };
 
 // Save status
@@ -145,7 +145,7 @@ static void SaveGameTask(u8 taskId);
 static void Task_SaveAfterLinkBattle(u8 taskId);
 static void Task_WaitForBattleTowerLinkSave(u8 taskId);
 static bool8 FieldCB_ReturnToFieldStartMenu(void);
-static bool8 StartMenuModeMenuCallback(void); // WIP
+static bool8 StartMenuModeMenuCallback(void);
 
 static const struct WindowTemplate sWindowTemplate_SafariBalls = {
     .bg = 0,
@@ -191,7 +191,7 @@ static const struct WindowTemplate sWindowTemplate_PyramidPeak = {
 
 static const u8 sText_NewMenu[] = _("Stats");
 static const u8 sText_MenuDebug[] = _("DEBUG");
-static const u8 sText_ModeMenu[] = _("MODE MENU"); // WIP
+static const u8 sText_ModeMenu[] = _("MODE MENU");
 
 static const struct MenuAction sStartMenuItems[] =
 {
@@ -210,7 +210,7 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_PYRAMID_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBattlePyramidBagCallback}},
     [MENU_ACTION_UI_MENU]         = {sText_NewMenu,     {.u8_void = StartMenuUiMenuCallback}},
     [MENU_ACTION_DEBUG]           = {sText_MenuDebug,   {.u8_void = StartMenuDebugCallback}},
-    [MENU_ACTION_MODE_MENU]       = {sText_ModeMenu,    {.u8_void = StartMenuModeMenuCallback}} // WIP
+    [MENU_ACTION_MODE_MENU]       = {sText_ModeMenu,    {.u8_void = StartMenuModeMenuCallback}}
 };
 
 static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
@@ -366,7 +366,7 @@ static void BuildDebugStartMenu(void)
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);
     AddStartMenuAction(MENU_ACTION_OPTION);
-    AddStartMenuAction(MENU_ACTION_MODE_MENU); // WIP
+    AddStartMenuAction(MENU_ACTION_MODE_MENU);
 }
 
 static void BuildSafariZoneStartMenu(void)

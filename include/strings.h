@@ -531,6 +531,7 @@ extern const u8 gText_Dash[];
 extern const u8 gText_Plus[];
 extern const u8 gText_Nickname[];
 extern const u8 gText_StatEdit[];
+extern const u8 gText_StatView[];
 
 //Pokédex text
 extern const u8 gText_CryOf[];

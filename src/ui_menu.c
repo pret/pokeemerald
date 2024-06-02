@@ -39,6 +39,7 @@
 #include "trainer_pokemon_sprites.h"
 #include "field_effect.h"
 #include "field_screen_effect.h"
+#include "overworld.h"
 
 /*
  * 
@@ -577,12 +578,18 @@ static void PrintTitleToWindowMainState()
     FillWindowPixelBuffer(WINDOW_1, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     
     AddTextPrinterParameterized4(WINDOW_1, FONT_NORMAL, 1, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_MenuTitle);
+    
+    if(!FlagGet(FLAG_STAT_EDIT_PAID))
+    {
+        BlitBitmapToWindow(WINDOW_1, sR_ButtonGfx, 75, (BUTTON_Y), 24, 8);
+        AddTextPrinterParameterized4(WINDOW_1, FONT_NARROW, 102, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_MenuLRButtonTextMain);
+    }
 
-    BlitBitmapToWindow(WINDOW_1, sR_ButtonGfx, 75, (BUTTON_Y), 24, 8);
-    AddTextPrinterParameterized4(WINDOW_1, FONT_NARROW, 102, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_MenuLRButtonTextMain);
-
-    BlitBitmapToWindow(WINDOW_1, sA_ButtonGfx, 160, (BUTTON_Y), 8, 8);
-    AddTextPrinterParameterized4(WINDOW_1, FONT_NARROW, 172, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_MenuAButtonTextMain);
+    if(FlagGet(FLAG_STAT_CHANGER) || FlagGet(FLAG_STAT_EDIT_PAID))
+    {
+        BlitBitmapToWindow(WINDOW_1, sA_ButtonGfx, 160, (BUTTON_Y), 8, 8);
+        AddTextPrinterParameterized4(WINDOW_1, FONT_NARROW, 172, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, sText_MenuAButtonTextMain);
+    }
 
     PutWindowTilemap(WINDOW_1);
     CopyWindowToVram(WINDOW_1, 3);
@@ -743,6 +750,7 @@ static void Task_MenuTurnOff(u8 taskId)
 
     if (!gPaletteFade.active)
     {
+        FlagClear(FLAG_STAT_EDIT_PAID);
         SetMainCallback2(sMenuDataPtr->savedCallback);
         Menu_FreeResources();
         DestroyTask(taskId);
@@ -781,42 +789,52 @@ static void ReloadNewPokemon(u8 taskId)
 /* This is the meat of the UI. This is where you wait for player inputs and can branch to other tasks accordingly */
 static void Task_MenuMain(u8 taskId)
 {
-    if (JOY_NEW(A_BUTTON))
+    //set cursor to only the IV column
+    if (FlagGet(FLAG_STAT_EDIT_PAID))
+        sMenuDataPtr->selector_x = 1;
+
+    if(FlagGet(FLAG_STAT_CHANGER) || FlagGet(FLAG_STAT_EDIT_PAID))
     {
-        sMenuDataPtr->editingStat = GetMonData(ReturnPartyMon(), selectedStatToStatEnum[sMenuDataPtr->selectedStat]);
-        StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 3);
-        PlaySE(SE_SELECT);
-        PrintTitleToWindowEditState();
-        gTasks[taskId].func = Task_MenuEditingStat;
-        if(sMenuDataPtr->editingStat == 0)
-            StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 1);
-        if((sMenuDataPtr->editingStat == 252 || (sMenuDataPtr->evTotal == 510)) && (sMenuDataPtr->selector_x == 0))
-            StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 2);
-        if((sMenuDataPtr->editingStat == 31) && (sMenuDataPtr->selector_x == 1))
-            StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 2);
-        return;
+        if (JOY_NEW(A_BUTTON))
+        {
+            sMenuDataPtr->editingStat = GetMonData(ReturnPartyMon(), selectedStatToStatEnum[sMenuDataPtr->selectedStat]);
+            StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 3);
+            PlaySE(SE_SELECT);
+            PrintTitleToWindowEditState();
+            gTasks[taskId].func = Task_MenuEditingStat;
+            if(sMenuDataPtr->editingStat == 0)
+                StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 1);
+            if((sMenuDataPtr->editingStat == 252 || (sMenuDataPtr->evTotal == 510)) && (sMenuDataPtr->selector_x == 0))
+                StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 2);
+            if((sMenuDataPtr->editingStat == 31) && (sMenuDataPtr->selector_x == 1))
+                StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 2);
+            return;
+        }
     }
-    if (JOY_NEW(L_BUTTON))
+    if(!FlagGet(FLAG_STAT_EDIT_PAID))
     {
-        u16 partyid = sMenuDataPtr->partyid;
-        if (partyid == 0)
-            partyid = gPlayerPartyCount - 1;
-        else
-            partyid -= 1;
-        sMenuDataPtr->partyid = partyid;
-        PlaySE(SE_SELECT);
-        ReloadNewPokemon(taskId);
-    }
-    if (JOY_NEW(R_BUTTON))
-    {
-        u16 partyid = sMenuDataPtr->partyid;
-        if (partyid == gPlayerPartyCount - 1)
-            partyid = 0;
-        else
-            partyid += 1;
-        sMenuDataPtr->partyid = partyid;
-        PlaySE(SE_SELECT);
-        ReloadNewPokemon(taskId);
+        if (JOY_NEW(L_BUTTON))
+        {
+            u16 partyid = sMenuDataPtr->partyid;
+            if (partyid == 0)
+                partyid = gPlayerPartyCount - 1;
+            else
+                partyid -= 1;
+            sMenuDataPtr->partyid = partyid;
+            PlaySE(SE_SELECT);
+            ReloadNewPokemon(taskId);
+        }
+        if (JOY_NEW(R_BUTTON))
+        {
+            u16 partyid = sMenuDataPtr->partyid;
+            if (partyid == gPlayerPartyCount - 1)
+                partyid = 0;
+            else
+                partyid += 1;
+            sMenuDataPtr->partyid = partyid;
+            PlaySE(SE_SELECT);
+            ReloadNewPokemon(taskId);
+        }
     }
     if (JOY_NEW(B_BUTTON))
     {
@@ -824,13 +842,18 @@ static void Task_MenuMain(u8 taskId)
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_MenuTurnOff;
     }
-    if (JOY_NEW(DPAD_LEFT) || JOY_NEW(DPAD_RIGHT))
+
+    if(!FlagGet(FLAG_STAT_EDIT_PAID))
     {
-        if(sMenuDataPtr->selector_x == 0)
-            sMenuDataPtr->selector_x = 1;
-        else
-            sMenuDataPtr->selector_x = 0; 
+        if (JOY_NEW(DPAD_LEFT) || JOY_NEW(DPAD_RIGHT))
+        {
+            if(sMenuDataPtr->selector_x == 0)
+                sMenuDataPtr->selector_x = 1;
+            else
+                sMenuDataPtr->selector_x = 0; 
+        }
     }
+
     if (JOY_NEW(DPAD_UP))
     {
         if (sMenuDataPtr->selector_y == 0)
@@ -1012,4 +1035,7 @@ static void Task_MenuEditingStat(u8 taskId) // This function should be refactore
 
 }
 
-
+void CallStatEditor(void)
+{
+    StatEditor_Init(CB2_ReturnToField);
+}

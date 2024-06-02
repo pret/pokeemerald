@@ -151,6 +151,7 @@
 #define TUTOR_STATE_RELEARNER 0
 #define TUTOR_STATE_TUTOR_MOVES 1
 #define TUTOR_STATE_EGG_MOVES 2
+#define TUTOR_STATE_IV_EDITOR 3
 
 // The different versions of hearts are selected using animation
 // commands.

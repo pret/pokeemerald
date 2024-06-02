@@ -438,8 +438,10 @@ PitArena_ShopNPC::
 PitArena_ShopNPCHook::
 	message PitArena_ShopNPC_Text
 #ifndef RANDOM_GEN_5_MODE
+	goto_if_unset FLAG_STAT_CHANGER, PitArena_ShopNPCHook_GenNewIVs
 	dynmultichoice 17, 1, 0, 5, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitArena_ShopNPC_Option0, PitArena_ShopNPC_Option1, PitArena_ShopNPC_OptionVitamin, PitArena_ShopNPC_Option2, PitArena_ShopNPC_Option3, PitArena_ShopNPC_Option4, PitArena_ShopNPC_Option5, PitArena_ShopNPC_Option6, PitArena_ShopNPC_Option7, PitArena_ShopNPC_Option8
 #else
+	goto_if_unset FLAG_STAT_CHANGER, PitArena_ShopNPCHook_Gen5IVs
 	dynmultichoice 17, 1, 0, 5, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitArena_ShopNPC_Option0, PitArena_ShopNPC_Option1, PitArena_ShopNPC_OptionVitamin, PitArena_ShopNPC_Option3, PitArena_ShopNPC_Option4, PitArena_ShopNPC_Option6, PitArena_ShopNPC_Option7, PitArena_ShopNPC_Option8
 #endif
 	closemessage
@@ -467,6 +469,40 @@ PitArena_ShopNPCHook::
 EndOfMartScript::
 	clearflag FLAG_SELL_FROM_MART
 	clearflag FLAG_BUY_FROM_MART
+	release
+	end
+
+PitArena_ShopNPCHook_GenNewIVs::
+	dynmultichoice 17, 1, 0, 5, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitArena_ShopNPC_Option0, PitArena_ShopNPC_Option1, PitArena_ShopNPC_OptionVitamin, PitArena_ShopNPC_Option2, PitArena_ShopNPC_Option3, PitArena_ShopNPC_Option4, PitArena_ShopNPC_Option5, PitArena_ShopNPC_Option6, PitArena_ShopNPC_EditIVs, PitArena_ShopNPC_Option7, PitArena_ShopNPC_Option8
+	closemessage
+	setflag FLAG_BUY_FROM_MART
+	copyvar VAR_TEMP_9, VAR_RESULT
+	goto_if_eq VAR_RESULT, 0, PitArena_MartScript_TMs
+	goto_if_eq VAR_RESULT, 1, PitArena_MartScript_EvoItems
+	goto_if_eq VAR_RESULT, 2, PitArena_MartScript_Vitamins
+	goto_if_eq VAR_RESULT, 3, PitArena_MartScript_MegaStones
+	goto_if_eq VAR_RESULT, 4, PitArena_MartScript_Mints
+	goto_if_eq VAR_RESULT, 5, PitArena_MartScript_Gems
+	goto_if_eq VAR_RESULT, 6, PitArena_MartScript_ZCrystals
+	goto_if_eq VAR_RESULT, 7, PitArena_MartScript_FormItems
+	goto_if_eq VAR_RESULT, 8, PitArena_MartScript_EditIVs
+	goto_if_eq VAR_RESULT, 9, PitArena_MartScript_Sell
+	release
+	end
+
+PitArena_ShopNPCHook_Gen5IVs::
+	dynmultichoice 17, 1, 0, 5, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitArena_ShopNPC_Option0, PitArena_ShopNPC_Option1, PitArena_ShopNPC_OptionVitamin, PitArena_ShopNPC_Option3, PitArena_ShopNPC_Option4, PitArena_ShopNPC_Option6, PitArena_ShopNPC_EditIVs, PitArena_ShopNPC_Option7, PitArena_ShopNPC_Option8
+	closemessage
+	setflag FLAG_BUY_FROM_MART
+	copyvar VAR_TEMP_9, VAR_RESULT
+	goto_if_eq VAR_RESULT, 0, PitArena_MartScript_TMs
+	goto_if_eq VAR_RESULT, 1, PitArena_MartScript_EvoItems
+	goto_if_eq VAR_RESULT, 2, PitArena_MartScript_Vitamins
+	goto_if_eq VAR_RESULT, 3, PitArena_MartScript_Mints
+	goto_if_eq VAR_RESULT, 4, PitArena_MartScript_Gems
+	goto_if_eq VAR_RESULT, 5, PitArena_MartScript_FormItems
+	goto_if_eq VAR_RESULT, 6, PitArena_MartScript_EditIVs
+	goto_if_eq VAR_RESULT, 7, PitArena_MartScript_Sell
 	release
 	end
 
@@ -529,12 +565,48 @@ PitArena_MartScript_FormItems::
 	release
 	end
 
+PitArena_MartScript_EditIVs::
+	showmoneybox 0, 0
+	msgbox PitArena_ShopNPC_IV_Text, MSGBOX_YESNO
+	hidemoneybox
+	release
+	lock
+	goto_if_eq VAR_RESULT, NO, PitArena_ShopNPCHook
+	checkmoney 3000
+	goto_if_eq VAR_RESULT, FALSE, PitArena_MartScript_EditIVs_NotEnoughMoney
+	removemoney 3000
+	call PitArena_MartScript_EditIVs_Execute
+	goto PitArena_ShopNPCHook
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
 PitArena_MartScript_Sell::
 	clearflag FLAG_BUY_FROM_MART
 	setflag FLAG_SELL_FROM_MART
 	pokemart PitArena_Mart_EvoItems
 	goto PitArena_ShopNPCHook
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+PitArena_MartScript_EditIVs_NotEnoughMoney::
+	msgbox PitArena_Tutor_NotGotTheMoney, MSGBOX_DEFAULT
+	goto PitArena_ShopNPCHook
+	release
+	end
+
+PitArena_MartScript_EditIVs_Execute::
+	setvar VAR_PIT_TUTOR_STATE, 3
+	setflag FLAG_STAT_EDIT_PAID
+	special ChooseMonForMoveRelearner
+	waitstate
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, PitArena_ShopNPCHook
+	special IsSelectedMonEgg
+	goto_if_eq VAR_RESULT, TRUE, PitArena_ShopNPCHook
+	special CallStatEditor
+	waitstate
+	goto PitArena_ShopNPCHook
 	release
 	end
 
@@ -557,21 +629,25 @@ PitArena_ShopNPC_Option7:
 	.string "Sell$"
 PitArena_ShopNPC_Option8:
 	.string "Exit$"
+PitArena_ShopNPC_EditIVs:
+	.string "Edit IVs$"
 PitArena_MoveRelearnerText:
 	.string "Move Relearner (free)$"
 PitArena_EggMovesText:
-	.string "Egg Moves (10.000¥)$"
+	.string "Egg Moves (¥10.000)$"
 PitArena_TutorMovesText:
-	.string "Tutor Moves (10.000¥)$"
+	.string "Tutor Moves (¥10.000)$"
 PitArena_ShopNPC_OptionVitamin:
 	.string "Vitamins$"
 PitArena_ShopNPC_Text:
 	.string "How may I assist you?$"
+PitArena_ShopNPC_IV_Text:
+	.string "That will be ¥3.000, okay?$"
 
 PitArena_Tutor_ConfirmMoveSelection_Text_0:
 	.string "The move {STR_VAR_1}, is it?$"
 PitArena_Tutor_ConfirmMoveSelection_Text_1:
-	.string "That will be {STR_VAR_2} Pokédollar, okay?$"
+	.string "That will be ¥{STR_VAR_2}, okay?$"
 PitArena_Tutor_ConfirmMoveSelection_Text_2:
 	.string "Alright. Come back anytime you want.$"
 PitArena_Tutor_NotGotTheMoney:

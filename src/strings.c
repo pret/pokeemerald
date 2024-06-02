@@ -291,6 +291,7 @@ const u8 gText_TMHMPocket[] = _("TMs & HMs");
 const u8 gText_BerriesPocket[] = _("BERRIES");
 const u8 gText_Nickname[] = _("NICKNAME");
 const u8 gText_StatEdit[] = _("EDIT STATS");
+const u8 gText_StatView[] = _("VIEW STATS");
 const u8 gText_KeyItemsPocket[] = _("KEY ITEMS");
 const u8 gText_MedicinePocket[] = _("MEDICINE");
 const u8 gText_BattleItemsPocket[] = _("BATTLE ITEM");

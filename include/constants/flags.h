@@ -53,7 +53,7 @@
 #define FLAG_STAT_CHANGER    0x28 // Unused Flag
 #define FLAG_SAVING_FIELD_EFFECT    0x29 // Unused Flag
 #define FLAG_AUTO_SAVE    	 0x2A // Unused Flag
-#define FLAG_UNUSED_0x02B    0x2B // Unused Flag
+#define FLAG_STAT_EDIT_PAID  0x2B // Unused Flag - Used to handle the stat editor for the IV merchant
 #define FLAG_UNUSED_0x02C    0x2C // Unused Flag
 #define FLAG_UNUSED_0x02D    0x2D // Unused Flag
 #define FLAG_UNUSED_0x02E    0x2E // Unused Flag
