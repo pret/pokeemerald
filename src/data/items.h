@@ -792,7 +792,7 @@ const struct Item gItemsInfo[] =
             "A bitter powder\n"
             "that heals all\n"
             "status problems."),
-        .pocket = POCKET_MEDICINE,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
@@ -823,7 +823,7 @@ const struct Item gItemsInfo[] =
         .description = COMPOUND_STRING(
             "Heals a poisoned\n"
             "Pokémon."),
-        .pocket = POCKET_MEDICINE,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
@@ -838,7 +838,7 @@ const struct Item gItemsInfo[] =
         .description = COMPOUND_STRING(
             "Heals a paralyzed\n"
             "Pokémon."),
-        .pocket = POCKET_MEDICINE,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
@@ -853,7 +853,7 @@ const struct Item gItemsInfo[] =
         .description = COMPOUND_STRING(
             "Heals Pokémon\n"
             "of a burn."),
-        .pocket = POCKET_MEDICINE,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
@@ -868,7 +868,7 @@ const struct Item gItemsInfo[] =
         .description = COMPOUND_STRING(
             "Defrosts a frozen\n"
             "Pokémon."),
-        .pocket = POCKET_MEDICINE,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
@@ -883,7 +883,7 @@ const struct Item gItemsInfo[] =
         .description = COMPOUND_STRING(
             "Awakens a sleeping\n"
             "Pokémon."),
-        .pocket = POCKET_MEDICINE,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
@@ -896,7 +896,7 @@ const struct Item gItemsInfo[] =
         .name = _("Full Heal"),
         .price = (I_PRICE >= GEN_7) ? 400 : 600,
         .description = sFullHealDesc,
-        .pocket = POCKET_MEDICINE,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
@@ -3871,7 +3871,7 @@ const struct Item gItemsInfo[] =
             "A wondrous hold\n"
             "item that prevents\n"
             "evolution."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 30,
@@ -3939,7 +3939,7 @@ const struct Item gItemsInfo[] =
             "A tablet that ups\n"
             "the power of\n"
             "Fire-type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_FIRE,
@@ -3956,7 +3956,7 @@ const struct Item gItemsInfo[] =
             "A tablet that ups\n"
             "the power of\n"
             "Water-type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_WATER,
@@ -3973,7 +3973,7 @@ const struct Item gItemsInfo[] =
             "A tablet that ups\n"
             "the power of Elec-\n"
             "tric-type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_ELECTRIC,
@@ -3990,7 +3990,7 @@ const struct Item gItemsInfo[] =
             "A tablet that ups\n"
             "the power of\n"
             "Grass-type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_GRASS,
@@ -4007,7 +4007,7 @@ const struct Item gItemsInfo[] =
             "A tablet that ups\n"
             "the power of\n"
             "Ice-type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_ICE,
@@ -4024,7 +4024,7 @@ const struct Item gItemsInfo[] =
             "A tablet that ups\n"
             "the power of Fight-\n"
             "ing-type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_FIGHTING,
@@ -4041,7 +4041,7 @@ const struct Item gItemsInfo[] =
             "A tablet that ups\n"
             "the power of\n"
             "Poison-type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_POISON,
@@ -4058,7 +4058,7 @@ const struct Item gItemsInfo[] =
             "A tablet that ups\n"
             "the power of\n"
             "Ground-type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_GROUND,
@@ -4075,7 +4075,7 @@ const struct Item gItemsInfo[] =
             "A tablet that ups\n"
             "the power of\n"
             "Flying-type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_FLYING,
@@ -4092,7 +4092,7 @@ const struct Item gItemsInfo[] =
             "A tablet that ups\n"
             "the power of Psy\n"
             "chic-type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_PSYCHIC,
@@ -4109,7 +4109,7 @@ const struct Item gItemsInfo[] =
             "A tablet that ups\n"
             "the power of\n"
             "Bug-type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_BUG,
@@ -4126,7 +4126,7 @@ const struct Item gItemsInfo[] =
             "A tablet that ups\n"
             "the power of\n"
             "Rock-type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_ROCK,
@@ -4143,7 +4143,7 @@ const struct Item gItemsInfo[] =
             "A tablet that ups\n"
             "the power of\n"
             "Ghost-type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_GHOST,
@@ -4160,7 +4160,7 @@ const struct Item gItemsInfo[] =
             "A tablet that ups\n"
             "the power of\n"
             "Dragon-type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_DRAGON,
@@ -4177,7 +4177,7 @@ const struct Item gItemsInfo[] =
             "A tablet that ups\n"
             "the power of\n"
             "Dark-type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_DARK,
@@ -4194,7 +4194,7 @@ const struct Item gItemsInfo[] =
             "A tablet that ups\n"
             "the power of\n"
             "Steel-type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_STEEL,
@@ -4211,7 +4211,7 @@ const struct Item gItemsInfo[] =
             "A stone tablet that\n"
             "boosts the power of\n"
             "Fairy-type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_FAIRY,
@@ -4229,7 +4229,7 @@ const struct Item gItemsInfo[] =
             "Changes Genesect's\n"
             "Techno Blast to\n"
             "Water-type."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_WATER,
@@ -4245,7 +4245,7 @@ const struct Item gItemsInfo[] =
             "Changes Genesect's\n"
             "Techno Blast to\n"
             "Electric-type."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_ELECTRIC,
@@ -4261,7 +4261,7 @@ const struct Item gItemsInfo[] =
             "Changes Genesect's\n"
             "Techno Blast to\n"
             "Fire-type."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_FIRE,
@@ -4277,7 +4277,7 @@ const struct Item gItemsInfo[] =
             "Changes Genesect's\n"
             "Techno Blast to\n"
             "Ice-type."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_ICE,
@@ -4297,7 +4297,7 @@ const struct Item gItemsInfo[] =
             "A disc with Fire\n"
             "type data. It swaps\n"
             "Silvally's type."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_FIRE,
@@ -4315,7 +4315,7 @@ const struct Item gItemsInfo[] =
             "A disc with Water\n"
             "type data. It swaps\n"
             "Silvally's type."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_WATER,
@@ -4333,7 +4333,7 @@ const struct Item gItemsInfo[] =
             "A disc with Electric\n"
             "type data. It swaps\n"
             "Silvally's type."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_ELECTRIC,
@@ -4351,7 +4351,7 @@ const struct Item gItemsInfo[] =
             "A disc with Grass\n"
             "type data. It swaps\n"
             "Silvally's type."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_GRASS,
@@ -4369,7 +4369,7 @@ const struct Item gItemsInfo[] =
             "A disc with Ice\n"
             "type data. It swaps\n"
             "Silvally's type."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_ICE,
@@ -4387,7 +4387,7 @@ const struct Item gItemsInfo[] =
             "A disc with Fighting\n"
             "type data. It swaps\n"
             "Silvally's type."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_FIGHTING,
@@ -4405,7 +4405,7 @@ const struct Item gItemsInfo[] =
             "A disc with Poison\n"
             "type data. It swaps\n"
             "Silvally's type."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_POISON,
@@ -4423,7 +4423,7 @@ const struct Item gItemsInfo[] =
             "A disc with Ground\n"
             "type data. It swaps\n"
             "Silvally's type."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_GROUND,
@@ -4441,7 +4441,7 @@ const struct Item gItemsInfo[] =
             "A disc with Flying\n"
             "type data. It swaps\n"
             "Silvally's type."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_FLYING,
@@ -4459,7 +4459,7 @@ const struct Item gItemsInfo[] =
             "A disc with Psychic\n"
             "type data. It swaps\n"
             "Silvally's type."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_PSYCHIC,
@@ -4477,7 +4477,7 @@ const struct Item gItemsInfo[] =
             "A disc with Bug\n"
             "type data. It swaps\n"
             "Silvally's type."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_BUG,
@@ -4495,7 +4495,7 @@ const struct Item gItemsInfo[] =
             "A disc with Rock\n"
             "type data. It swaps\n"
             "Silvally's type."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_ROCK,
@@ -4513,7 +4513,7 @@ const struct Item gItemsInfo[] =
             "A disc with Ghost\n"
             "type data. It swaps\n"
             "Silvally's type."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_GHOST,
@@ -4531,7 +4531,7 @@ const struct Item gItemsInfo[] =
             "A disc with Dragon\n"
             "type data. It swaps\n"
             "Silvally's type."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_DRAGON,
@@ -4549,7 +4549,7 @@ const struct Item gItemsInfo[] =
             "A disc with Dark\n"
             "type data. It swaps\n"
             "Silvally's type."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_DARK,
@@ -4567,7 +4567,7 @@ const struct Item gItemsInfo[] =
             "A disc with Steel\n"
             "type data. It swaps\n"
             "Silvally's type."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_STEEL,
@@ -4585,7 +4585,7 @@ const struct Item gItemsInfo[] =
             "A disc with Fairy\n"
             "type data. It swaps\n"
             "Silvally's type."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_FAIRY,
@@ -4600,7 +4600,7 @@ const struct Item gItemsInfo[] =
             "A rusty sword. A\n"
             "hero used it to\n"
             "halt a disaster."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
@@ -4613,7 +4613,7 @@ const struct Item gItemsInfo[] =
             "A rusty shield. A\n"
             "hero used it to\n"
             "halt a disaster."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
@@ -4629,7 +4629,7 @@ const struct Item gItemsInfo[] =
             "A red, glowing orb\n"
             "said to contain an\n"
             "ancient power."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_MEGA_STONES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
@@ -4643,7 +4643,7 @@ const struct Item gItemsInfo[] =
             "A blue, glowing orb\n"
             "said to contain an\n"
             "ancient power."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_MEGA_STONES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
@@ -5359,7 +5359,7 @@ const struct Item gItemsInfo[] =
             "Increases the\n"
             "power of Normal\n"
             "Type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_NORMAL,
@@ -5375,7 +5375,7 @@ const struct Item gItemsInfo[] =
             "Increases the\n"
             "power of Fire\n"
             "Type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_FIRE,
@@ -5391,7 +5391,7 @@ const struct Item gItemsInfo[] =
             "Increases the\n"
             "power of Water\n"
             "Type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_WATER,
@@ -5407,7 +5407,7 @@ const struct Item gItemsInfo[] =
             "Increases the\n"
             "power of Electric\n"
             "Type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_ELECTRIC,
@@ -5423,7 +5423,7 @@ const struct Item gItemsInfo[] =
             "Increases the\n"
             "power of Grass\n"
             "Type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_GRASS,
@@ -5439,7 +5439,7 @@ const struct Item gItemsInfo[] =
             "Increases the\n"
             "power of Ice\n"
             "Type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_ICE,
@@ -5455,7 +5455,7 @@ const struct Item gItemsInfo[] =
             "Increases the\n"
             "power of Fighting\n"
             "Type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_FIGHTING,
@@ -5471,7 +5471,7 @@ const struct Item gItemsInfo[] =
             "Increases the\n"
             "power of Poison\n"
             "Type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_POISON,
@@ -5487,7 +5487,7 @@ const struct Item gItemsInfo[] =
             "Increases the\n"
             "power of Ground\n"
             "Type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_GROUND,
@@ -5503,7 +5503,7 @@ const struct Item gItemsInfo[] =
             "Increases the\n"
             "power of Flying\n"
             "Type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_FLYING,
@@ -5519,7 +5519,7 @@ const struct Item gItemsInfo[] =
             "Increases the\n"
             "power of Psychic\n"
             "Type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_PSYCHIC,
@@ -5535,7 +5535,7 @@ const struct Item gItemsInfo[] =
             "Increases the\n"
             "power of Bug\n"
             "Type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_BUG,
@@ -5551,7 +5551,7 @@ const struct Item gItemsInfo[] =
             "Increases the\n"
             "power of Rock\n"
             "Type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_ROCK,
@@ -5567,7 +5567,7 @@ const struct Item gItemsInfo[] =
             "Increases the\n"
             "power of Ghost\n"
             "Type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_GHOST,
@@ -5583,7 +5583,7 @@ const struct Item gItemsInfo[] =
             "Increases the\n"
             "power of Dragon\n"
             "Type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_DRAGON,
@@ -5599,7 +5599,7 @@ const struct Item gItemsInfo[] =
             "Increases the\n"
             "power of Dark\n"
             "Type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_DARK,
@@ -5615,7 +5615,7 @@ const struct Item gItemsInfo[] =
             "Increases the\n"
             "power of Steel\n"
             "Type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_STEEL,
@@ -5631,7 +5631,7 @@ const struct Item gItemsInfo[] =
             "Increases the\n"
             "power of Fairy\n"
             "Type moves."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = TYPE_FAIRY,
@@ -12157,7 +12157,7 @@ const struct Item gItemsInfo[] =
             "A mysterious string\n"
             "that makes some\n"
             "Pokémon evolve."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
         .effect = gItemEffect_EvoItem,

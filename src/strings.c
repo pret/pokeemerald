@@ -286,7 +286,7 @@ const u8 *const gPyramidBagMenu_ReturnToStrings[] =
 };
 
 const u8 gText_ReturnToVar1[] = _("Return to\n{STR_VAR_1}.");
-const u8 gText_ItemsPocket[] = _("ITEMS");
+const u8 gText_ItemsPocket[] = _("STATUS");
 const u8 gText_PokeBallsPocket[] = _("REVIVES");
 const u8 gText_TMHMPocket[] = _("TMs & HMs");
 const u8 gText_BerriesPocket[] = _("BERRIES");
@@ -294,7 +294,7 @@ const u8 gText_Nickname[] = _("NICKNAME");
 const u8 gText_StatEdit[] = _("EDIT STATS");
 const u8 gText_StatView[] = _("VIEW STATS");
 const u8 gText_KeyItemsPocket[] = _("KEY ITEMS");
-const u8 gText_MedicinePocket[] = _("MEDICINE");
+const u8 gText_MedicinePocket[] = _("HP & PP");
 const u8 gText_BattleItemsPocket[] = _("BATTLE ITEM");
 const u8 gText_PowerUpPocket[] = _("POWER-UP");
 const u8 gText_MegaStonesPocket[] = _("MEGA STONES");

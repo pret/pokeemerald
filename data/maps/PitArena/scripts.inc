@@ -642,7 +642,7 @@ PitArena_ShopNPC_OptionVitamin:
 PitArena_ShopNPC_Text:
 	.string "How may I assist you?$"
 PitArena_ShopNPC_IV_Text:
-	.string "That will be ¥3.000, okay?$"
+	.string "That will be ¥3,000, okay?$"
 
 PitArena_Tutor_ConfirmMoveSelection_Text_0:
 	.string "The move {STR_VAR_1}, is it?$"
