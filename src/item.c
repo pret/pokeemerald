@@ -1162,7 +1162,6 @@ static const u16 sRandomBerryValidItems[] =
 #define RANDOM_HELD_ITEM_COUNT ARRAY_COUNT(sRandomHeldValidItems)
 static const u16 sRandomHeldValidItems[] =
 {
-    // Medicinal Flutes
     ITEM_BLUE_FLUTE,
     ITEM_YELLOW_FLUTE,
     ITEM_RED_FLUTE,
@@ -1244,6 +1243,15 @@ static const u16 sRandomHeldValidItems[] =
     ITEM_BLUNDER_POLICY,
     ITEM_ROOM_SERVICE,
     ITEM_UTILITY_UMBRELLA,
+};
+
+#define RANDOM_ITEM_REROLL_COUNT ARRAY_COUNT(sRandomItemsRerollCheck)
+static const u16 sRandomItemsRerollCheck[] =
+{
+    ITEM_BLUE_FLUTE,
+    ITEM_YELLOW_FLUTE,
+    ITEM_RED_FLUTE,
+    ITEM_AMULET_COIN,
 };
 
 #define RANDOM_HELD_ITEM_OPPONENT_COUNT ARRAY_COUNT(sRandomHeldItemsForOpponents)
@@ -1335,20 +1343,36 @@ u16 GetRandomHeldItemOpponent(void)
 u16 RandomItemId(u16 itemId)
 {
     u16 randomItemCategory = 0;
-    if (ItemId_GetPocket(itemId) == POCKET_TM_HM)
-    {
-        return itemId;
-    }
-    else if (ItemId_GetPocket(itemId) != POCKET_KEY_ITEMS)
-    {
-        randomItemCategory = Random32() % 10;
-        if(randomItemCategory < 7)
-            itemId = sRandomConsumableValidItems[RandomSeededModulo2(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_CONSUMABLE_ITEM_COUNT)];
-        else if(randomItemCategory < 9)
-            itemId = sRandomHeldValidItems[RandomSeededModulo2(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_HELD_ITEM_COUNT)];
-        else
-            itemId = sRandomBerryValidItems[RandomSeededModulo2(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_BERRY_ITEM_COUNT)];
-    }
+    bool8 rerollItem = FALSE;
+    int i, counter;
+
+    do
+    {    
+        if (ItemId_GetPocket(itemId) == POCKET_TM_HM)
+        {
+            return itemId;
+        }
+        else if (ItemId_GetPocket(itemId) != POCKET_KEY_ITEMS)
+        {
+            randomItemCategory = Random32() % 10;
+            if(randomItemCategory < 7)
+                itemId = sRandomConsumableValidItems[RandomSeededModulo2(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_CONSUMABLE_ITEM_COUNT)];
+            else if(randomItemCategory < 9)
+                itemId = sRandomHeldValidItems[RandomSeededModulo2(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_HELD_ITEM_COUNT)];
+            else
+                itemId = sRandomBerryValidItems[RandomSeededModulo2(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_BERRY_ITEM_COUNT)];
+        }
+        //check for reroll
+        for (i = 0; i < RANDOM_ITEM_REROLL_COUNT; i++)
+        {
+            if(itemId == sRandomItemsRerollCheck[i] && CheckBagHasItem(sRandomItemsRerollCheck[i], 1))
+                rerollItem = TRUE;
+        }
+        //exit in case of infinite loop
+        if (counter >= 20)
+            rerollItem = FALSE;
+        counter++;
+    } while (rerollItem);
 
     VarSet(VAR_0x8006, itemId);
     return itemId;
