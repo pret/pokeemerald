@@ -11,3 +11,4 @@ site-url = "/pokeemerald-expansion/"
 
 [preprocessor.fix_links]
 command = "python3 fix_links.py"
+after = [ "links" ]
