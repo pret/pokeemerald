@@ -129,8 +129,14 @@ DOUBLE_BATTLE_TEST("Sticky Web has correct interactions with Mirror Armor - the 
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, BATTLER_OPPONENT);
         if (opponentSetUpper == 0) {
             MESSAGE("Foe Caterpie's Speed fell!");
+            NONE_OF {
+                MESSAGE("Foe Caterpie was caught in a Sticky Web!");
+            }
         } else {
             MESSAGE("Foe Weedle's Speed fell!");
+            NONE_OF {
+                MESSAGE("Foe Weedle was caught in a Sticky Web!");
+            }
         }
     }
 }
