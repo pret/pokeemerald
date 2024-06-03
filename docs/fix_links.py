@@ -36,7 +36,7 @@ def proc_items(items):
             s = s.replace('](README.md)', '](./)')
             s = s.replace('](/INSTALL.md', '](INSTALL.md')
             s = s.replace('](docs/', '](')
-            item['Chapter']['content'] = URL_RE.sub(handle_url, s)
+            s = URL_RE.sub(handle_url, s)
             item['Chapter']['content'] = ANCHOR_RE.sub(handle_anchor, s)
             proc_items(item['Chapter']['sub_items'])
 
