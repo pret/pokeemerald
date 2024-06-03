@@ -1820,7 +1820,7 @@ const struct Item gItemsInfo[] =
             "A glass flute that\n"
             "awakens sleeping\n"
             "Pokémon."),
-        .pocket = POCKET_MEDICINE,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
@@ -1836,7 +1836,7 @@ const struct Item gItemsInfo[] =
             "A glass flute that\n"
             "snaps Pokémon\n"
             "out of confusion."),
-        .pocket = POCKET_MEDICINE,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
@@ -1852,7 +1852,7 @@ const struct Item gItemsInfo[] =
             "A glass flute that\n"
             "snaps Pokémon\n"
             "out of attraction."),
-        .pocket = POCKET_MEDICINE,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
