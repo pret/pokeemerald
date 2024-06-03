@@ -16,12 +16,12 @@ SINGLE_BATTLE_TEST("Pursuited mon correctly switches out after it got hit and ac
     } WHEN {
         TURN { SWITCH(player, 1); MOVE(opponent, MOVE_PURSUIT); }
     } SCENE {
-        MESSAGE("Dugtrio, that's enough! Come back!");
+        SWITCH_OUT_MESSAGE("Dugtrio");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PURSUIT, opponent);
         ABILITY_POPUP(player, ABILITY_TANGLING_HAIR);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
         MESSAGE("Foe Wynaut's Speed fell!");
-        MESSAGE("Go! Wobbuffet!");
+        SEND_IN_MESSAGE("Wobbuffet");
     }
 }
 

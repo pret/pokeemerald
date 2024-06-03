@@ -77,9 +77,9 @@ DOUBLE_BATTLE_TEST("Intimidate doesn't activate on an empty field in a double ba
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, playerLeft);
         // Everyone faints.
 
-        MESSAGE("Go! Ekans!");
+        SEND_IN_MESSAGE("Ekans");
         MESSAGE("2 sent out Arbok!");
-        MESSAGE("Go! Abra!");
+        SEND_IN_MESSAGE("Abra");
         MESSAGE("2 sent out Wynaut!");
 
         NONE_OF {
@@ -147,12 +147,12 @@ DOUBLE_BATTLE_TEST("Intimidate activates on an empty slot")
 
 
     } SCENE {
-        MESSAGE("Wobbuffet, that's enough! Come back!");
-        MESSAGE("Go! Wynaut!");
+        SWITCH_OUT_MESSAGE("Wobbuffet");
+        SEND_IN_MESSAGE("Wynaut");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GUNK_SHOT, playerRight);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPLASH, opponentRight);
-        MESSAGE("Wynaut, that's enough! Come back!");
-        MESSAGE("Go! Hitmontop!");
+        SWITCH_OUT_MESSAGE("Wynaut");
+        SEND_IN_MESSAGE("Hitmontop");
         ABILITY_POPUP(playerLeft, ABILITY_INTIMIDATE);
         NONE_OF {
             MESSAGE("Hitmontop's Intimidate cuts Foe Ralts's attack!");
@@ -222,9 +222,9 @@ SINGLE_BATTLE_TEST("Intimidate activates when it's no longer effected by Neutral
     } SCENE {
         ABILITY_POPUP(player, ABILITY_NEUTRALIZING_GAS);
         MESSAGE("Neutralizing Gas filled the area!");
-        MESSAGE("Weezing, that's enough! Come back!");
+        SWITCH_OUT_MESSAGE("Weezing");
         MESSAGE("The effects of Neutralizing Gas wore off!");
         ABILITY_POPUP(opponent, ABILITY_INTIMIDATE);
-        MESSAGE("Go! Wobbuffet!");
+        SEND_IN_MESSAGE("Wobbuffet");
     }
 }

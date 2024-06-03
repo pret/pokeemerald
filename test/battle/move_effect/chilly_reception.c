@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("Chilly Reception sets up snow and switches the user out")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CHILLY_RECEPTION, player);
         MESSAGE("It started to snow!");
         MESSAGE("Slowking went back to  1");
-        MESSAGE("Go! Slowpoke!");
+        SEND_IN_MESSAGE("Slowpoke");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SNOW_CONTINUES);
     }
 }
@@ -37,7 +37,7 @@ SINGLE_BATTLE_TEST("Chilly Reception switches the user out, even if the weather 
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CHILLY_RECEPTION, player);
         MESSAGE("There is no relief from this heavy rain!");
         MESSAGE("Slowking went back to  1");
-        MESSAGE("Go! Slowpoke!");
+        SEND_IN_MESSAGE("Slowpoke");
         MESSAGE("Rain continues to fall.");
     }
 }

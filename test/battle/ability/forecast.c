@@ -368,7 +368,7 @@ SINGLE_BATTLE_TEST("Forecast transforms Castform back when it switches out")
         ABILITY_POPUP(player, ABILITY_FORECAST);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         MESSAGE("Castform transformed!");
-        MESSAGE("Castform, that's enough! Come back!");
+        SWITCH_OUT_MESSAGE("Castform");
     } THEN {
         EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPECIES), SPECIES_CASTFORM);
     }

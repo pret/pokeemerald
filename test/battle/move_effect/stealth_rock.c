@@ -46,7 +46,7 @@ SINGLE_BATTLE_TEST("Stealth Rock damages the correct pokemon when Eject Button i
         ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, opponent);
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_HARDEN, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
-        MESSAGE("Go! Metapod!");
+        SEND_IN_MESSAGE("Metapod");
         HP_BAR(player);
     } THEN {
         EXPECT_EQ(opponent->hp, opponent->maxHP);
@@ -67,7 +67,7 @@ DOUBLE_BATTLE_TEST("Stealth Rock damages the correct pokemon when Eject Button i
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STEALTH_ROCK, opponentLeft);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponentRight);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerLeft);
-        MESSAGE("Go! Metapod!");
+        SEND_IN_MESSAGE("Metapod");
         HP_BAR(playerLeft);
     } THEN {
         EXPECT_EQ(opponentLeft->hp, opponentLeft->maxHP);

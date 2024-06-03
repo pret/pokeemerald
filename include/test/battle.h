@@ -999,6 +999,20 @@ void SendOut(u32 sourceLine, struct BattlePokemon *, u32 partyIndex);
 #define MESSAGE(pattern) do {static const u8 msg[] = _(pattern); QueueMessage(__LINE__, msg);} while (0)
 #define STATUS_ICON(battler, status) QueueStatus(__LINE__, battler, (struct StatusEventContext) { status })
 
+#define SWITCH_OUT_MESSAGE(name) ONE_OF {                                         \
+                                     MESSAGE(name ", that's enough! Come back!"); \
+                                     MESSAGE(name ", come back!");                \
+                                     MESSAGE(name ", OK! Come back!");            \
+                                     MESSAGE(name ", good! Come back!");          \
+                                 }
+
+#define SEND_IN_MESSAGE(name)    ONE_OF {                                            \
+                                     MESSAGE("Go! " name "!");                       \
+                                     MESSAGE("Do it! " name "!");                    \
+                                     MESSAGE("Go for it, " name "!");                \
+                                     MESSAGE("Your foe's weak! Get 'em, " name "!"); \
+                                 }
+
 enum QueueGroupType
 {
     QUEUE_GROUP_NONE,

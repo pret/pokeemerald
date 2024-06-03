@@ -88,6 +88,6 @@ SINGLE_BATTLE_TEST("Rattled triggers correctly when hit by U-Turn") // Specific 
         ABILITY_POPUP(opponent, ABILITY_RATTLED);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
         MESSAGE("Foe Sudowoodo's Speed rose!");
-        MESSAGE("Go! Wynaut!");
+        SEND_IN_MESSAGE("Wynaut");
     }
 }

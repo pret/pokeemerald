@@ -67,7 +67,7 @@ SINGLE_BATTLE_TEST("Tablets of Ruin's message displays correctly after all battl
         HP_BAR(player, hp: 0);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, player);
         // Everyone faints.
-        MESSAGE("Go! Wobbuffet!");
+        SEND_IN_MESSAGE("Wobbuffet");
         MESSAGE("2 sent out Wo-Chien!");
         ABILITY_POPUP(opponent, ABILITY_TABLETS_OF_RUIN);
         MESSAGE("Foe Wo-Chien's Tablets of Ruin weakened the Attack of all surrounding Pokémon!");
