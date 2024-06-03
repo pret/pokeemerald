@@ -2266,6 +2266,7 @@ extern const u8 gText_HOFNumber[];
 extern const u8 gText_LostRunChamp[];
 extern const u8 gText_LostRunNumber[];
 extern const u8 gText_LostRunHOF[];
+extern const u8 gText_WonRunHOF[];
 extern const u8 gText_PickNextCancel[];
 extern const u8 gText_PickCancel[];
 extern const u8 gText_AButtonExit[];

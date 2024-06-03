@@ -585,7 +585,7 @@ u16 ReturnNumberOfTrainersForFloor()
         }
         else
         {
-            if((VarGet(VAR_PIT_FLOOR) % 10) == 0) // Move Relearner/Tutor Floor
+            if(((VarGet(VAR_PIT_FLOOR) % 10) == 0) && !((VarGet(VAR_PIT_FLOOR) % 25) == 0)) // Move Relearner/Tutor Floor
             {
                 FlagClear(FLAG_MOVE_RELEARNER);
             }
@@ -625,7 +625,7 @@ u16 ReturnNumberOfTrainersForFloor()
     {
         if(randomValue < 65)
             return 1;
-        if(randomValue < 90)
+        if(randomValue < 95)
             return 2;
         if(randomValue < 99)
             return 3;

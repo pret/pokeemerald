@@ -246,7 +246,7 @@ PitArenaDebug3NotOnWall::
 PitArenaDebug4NotOnWall::
 	setflag FLAG_FLOOR_CLEARED
 	setmetatile 9, 9, METATILE_Cave_FLOOR_COMPLETE, FALSE
-	addvar VAR_PIT_FLOOR, 19
+	setvar VAR_PIT_FLOOR, 19
 	additem ITEM_RARE_CANDY, 99
 	special DrawWholeMapView
 	end
@@ -634,9 +634,9 @@ PitArena_ShopNPC_EditIVs:
 PitArena_MoveRelearnerText:
 	.string "Move Relearner (free)$"
 PitArena_EggMovesText:
-	.string "Egg Moves (¥10.000)$"
+	.string "Egg Moves (¥10,000)$"
 PitArena_TutorMovesText:
-	.string "Tutor Moves (¥10.000)$"
+	.string "Tutor Moves (¥10,000)$"
 PitArena_ShopNPC_OptionVitamin:
 	.string "Vitamins$"
 PitArena_ShopNPC_Text:

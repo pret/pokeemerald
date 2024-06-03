@@ -140,7 +140,7 @@ static const struct WindowTemplate sHof_WindowTemplate = {
     .tilemapLeft = 2,
     .tilemapTop = 2,
     .width = 14,
-    .height = 6,
+    .height = 10,
     .paletteNum = 14,
     .baseBlock = 1
 };
@@ -1118,10 +1118,10 @@ static void HallOfFame_PrintWelcomeText(u8 unusedPossiblyWindowId, u8 unused2)
 {
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     PutWindowTilemap(0);
-    if(FlagGet(FLAG_RUN_ENDED_SCREEN))
+    if(FlagGet(FLAG_RUN_ENDED_SCREEN) && (VarGet(VAR_PIT_FLOOR) <= 100))
         AddTextPrinterParameterized3(0, FONT_NORMAL, GetStringCenterAlignXOffset(FONT_NORMAL, gText_LostRunHOF, 0xD0), 1, sMonInfoTextColors, 0, gText_LostRunHOF);
     else
-        AddTextPrinterParameterized3(0, FONT_NORMAL, GetStringCenterAlignXOffset(FONT_NORMAL, gText_LostRunHOF, 0xD0), 1, sMonInfoTextColors, 0, gText_LostRunHOF);
+        AddTextPrinterParameterized3(0, FONT_NORMAL, GetStringCenterAlignXOffset(FONT_NORMAL, gText_WonRunHOF, 0xD0), 1, sMonInfoTextColors, 0, gText_WonRunHOF);
     CopyWindowToVram(0, COPYWIN_FULL);
 }
 
@@ -1213,11 +1213,21 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u
     }
 }
 
+static const u8 sText_ModeNormal[]          = _("MODE: NORM");
+static const u8 sText_ModeHard[]            = _("MODE: HARD");
+static const u8 sText_ModeCustom[]          = _("MODE: CUSTOM");
+static const u8 sText_BattleMode_Singles[]  = _("SINGLES");
+static const u8 sText_BattleMode_Doubles[]  = _("DOUBLES");
+static const u8 sText_Randomizer_Mons[]     = _("RAND MONS");
+static const u8 sText_Randomizer_All[]      = _("RAND ALL");
+static const u8 sText_LegendsOn[]           = _("LEGEND ON");
+static const u8 sText_LegendsOff[]          = _("NO LEGEND");
 static void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2)
 {
     u8 text[20];
     u32 width;
     u16 trainerId;
+    const u8 *modeText;
 
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
     PutWindowTilemap(1);
@@ -1248,6 +1258,65 @@ static void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2)
 
     width = GetStringRightAlignXOffset(FONT_NORMAL, text, 0x70);
     AddTextPrinterParameterized3(1, FONT_NORMAL, width, 0x21, sPlayerInfoTextColors, TEXT_SKIP_DRAW, text);
+
+    switch(gSaveBlock2Ptr->modeDefault)
+    {
+        case 0:
+            modeText = sText_ModeNormal;
+            break;
+        case 1:
+            modeText = sText_ModeHard;
+            break;
+        case 2:
+            modeText = sText_ModeCustom;
+            break;
+        default:
+            modeText = sText_ModeNormal;
+            break;
+    }
+    AddTextPrinterParameterized3(1, FONT_NORMAL, 0, 0x31, sPlayerInfoTextColors, TEXT_SKIP_DRAW, modeText);
+    
+    switch(gSaveBlock2Ptr->modeBattleMode)
+    {
+        case 0:
+            modeText = sText_BattleMode_Singles;
+            break;
+        case 1:
+            modeText = sText_BattleMode_Doubles;
+            break;
+        default:
+            modeText = sText_BattleMode_Singles;
+            break;
+    }
+    AddTextPrinterParameterized3(1, FONT_NORMAL, 70, 0x31, sPlayerInfoTextColors, TEXT_SKIP_DRAW, modeText);
+
+    switch(gSaveBlock2Ptr->modeRandomizer)
+    {
+        case 0:
+            modeText = sText_Randomizer_Mons;
+            break;
+        case 1:
+            modeText = sText_Randomizer_All;
+            break;
+        default:
+            modeText = sText_Randomizer_Mons;
+            break;
+    }
+    AddTextPrinterParameterized3(1, FONT_NORMAL, 0, 0x41, sPlayerInfoTextColors, TEXT_SKIP_DRAW, modeText);
+
+    switch(gSaveBlock2Ptr->modeLegendaries)
+    {
+        case 0:
+            modeText = sText_LegendsOn;
+            break;
+        case 1:
+            modeText = sText_LegendsOff;
+            break;
+        default:
+            modeText = sText_LegendsOn;
+            break;
+    }
+    AddTextPrinterParameterized3(1, FONT_NORMAL, 61, 0x41, sPlayerInfoTextColors, TEXT_SKIP_DRAW, modeText);
 
     CopyWindowToVram(1, COPYWIN_FULL);
 }
