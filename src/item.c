@@ -1356,11 +1356,11 @@ u16 RandomItemId(u16 itemId)
         {
             randomItemCategory = Random32() % 10;
             if(randomItemCategory < 7)
-                itemId = sRandomConsumableValidItems[RandomSeededModulo2(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_CONSUMABLE_ITEM_COUNT)];
+                itemId = sRandomConsumableValidItems[RandomModulo(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_CONSUMABLE_ITEM_COUNT)];
             else if(randomItemCategory < 9)
-                itemId = sRandomHeldValidItems[RandomSeededModulo2(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_HELD_ITEM_COUNT)];
+                itemId = sRandomHeldValidItems[RandomModulo(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_HELD_ITEM_COUNT)];
             else
-                itemId = sRandomBerryValidItems[RandomSeededModulo2(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_BERRY_ITEM_COUNT)];
+                itemId = sRandomBerryValidItems[RandomModulo(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_BERRY_ITEM_COUNT)];
         }
         //check for reroll
         for (i = 0; i < RANDOM_ITEM_REROLL_COUNT; i++)

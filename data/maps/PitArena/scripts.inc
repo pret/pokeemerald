@@ -12,6 +12,7 @@ PitArena_OnFrameRewardDrop::
 	lockall
 	setvar VAR_PIT_TUTOR_STATE, 0
 	setvar VAR_REWARD_STATE, 2
+	goto_if_eq VAR_PIT_FLOOR, 100, PitArena_OnFrameRewardDrop_4
 	random 3
 	switch VAR_RESULT
 	case 0, PitArena_OnFrameRewardDrop_3
@@ -153,7 +154,6 @@ PitArena_EndGameStatue222::
 	setvar VAR_REWARD_STATE, 2
 	clearflag FLAG_REWARD_ITEM_1
 	clearflag FLAG_REWARD_ITEM_2
-	clearflag FLAG_REWARD_ITEM_3
 	additem 6
 	additem 7
 	callnative UpdateObjectEventsFromScript
