@@ -843,7 +843,7 @@ static void BirchCase_InitWindows(void)
 //
 static const u8 sText_ChooseMon[] = _("Release a Pokémon!");
 static const u8 sText_AreYouSure[] = _("Are you sure?    {A_BUTTON} Yes  {B_BUTTON} No");
-static const u8 sText_RecievedMon[] = _("You recieved the Mon!");
+static const u8 sText_RecievedMon[] = _("You received the Mon!");
 static const u8 sText_Choose1Mon[] = _("Choose your 1st Mon!");
 static const u8 sText_Choose2Mon[] = _("Choose your 2nd Mon!");
 static const u8 sText_Choose3Mon[] = _("Choose your 3rd Mon!");
