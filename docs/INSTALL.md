@@ -1,1 +1,1 @@
-../INSTALL.md
+{{#include ../INSTALL.md}}

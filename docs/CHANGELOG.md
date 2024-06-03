@@ -1,1 +1,1 @@
-../CHANGELOG.md
+{{#include ../CHANGELOG.md}}
