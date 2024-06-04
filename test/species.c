@@ -7,6 +7,7 @@ TEST("Form species ID tables are shared between all forms")
     u32 i;
     u32 species = SPECIES_NONE;
     const u16 *formSpeciesIdTable;
+
     for (i = 0; i < NUM_SPECIES; i++)
     {
         if (gSpeciesInfo[i].formSpeciesIdTable)
@@ -29,6 +30,7 @@ TEST("Form change tables contain only forms in the form species ID table")
     u32 species = SPECIES_NONE;
     const struct FormChange *formChangeTable;
     const u16 *formSpeciesIdTable;
+
     for (i = 0; i < NUM_SPECIES; i++)
     {
         if (gSpeciesInfo[i].formChangeTable)
@@ -61,6 +63,7 @@ TEST("Form change targets have the appropriate species flags")
     u32 i;
     u32 species = SPECIES_NONE;
     const struct FormChange *formChangeTable;
+
     for (i = 0; i < NUM_SPECIES; i++)
     {
         if (gSpeciesInfo[i].formChangeTable)
