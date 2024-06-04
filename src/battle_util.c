@@ -10595,6 +10595,14 @@ bool32 IsBattlerUltraBursted(u32 battler)
     return (gSpeciesInfo[gBattleMons[battler].species].isUltraBurst);
 }
 
+bool32 IsBattlerInTeraForm(u32 battler)
+{
+    // While Transform does copy stats and visuals, it shouldn't be counted as a true Tera Form.
+    if (gBattleMons[battler].status2 & STATUS2_TRANSFORMED)
+        return FALSE;
+    return (gSpeciesInfo[gBattleMons[battler].species].isTeraForm);
+}
+
 // Returns SPECIES_NONE if no form change is possible
 u16 GetBattleFormChangeTargetSpecies(u32 battler, u16 method)
 {
@@ -10685,6 +10693,10 @@ u16 GetBattleFormChangeTargetSpecies(u32 battler, u16 method)
                     if (gBattleMons[battler].status1 & formChanges[i].param1)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
+                case FORM_CHANGE_BATTLE_TERASTALLIZATION:
+                    if (GetBattlerTeraType(battler) == formChanges[i].param1)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
                 }
             }
         }
@@ -10700,7 +10712,7 @@ bool32 CanBattlerFormChange(u32 battler, u16 method)
         && B_TRANSFORM_FORM_CHANGES >= GEN_5)
         return FALSE;
     // Mega Evolved and Ultra Bursted Pokémon should always revert to normal upon fainting or ending the battle.
-    if ((IsBattlerMegaEvolved(battler) || IsBattlerUltraBursted(battler)) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_END_BATTLE))
+    if ((IsBattlerMegaEvolved(battler) || IsBattlerUltraBursted(battler) || IsBattlerInTeraForm(battler)) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_END_BATTLE))
         return TRUE;
     else if (IsBattlerPrimalReverted(battler) && (method == FORM_CHANGE_END_BATTLE))
         return TRUE;
@@ -10740,7 +10752,7 @@ bool32 TryBattleFormChange(u32 battler, u16 method)
         bool32 restoreSpecies = FALSE;
 
         // Mega Evolved and Ultra Bursted Pokémon should always revert to normal upon fainting or ending the battle, so no need to add it to the form change tables.
-        if ((IsBattlerMegaEvolved(battler) || IsBattlerUltraBursted(battler)) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_END_BATTLE))
+        if ((IsBattlerMegaEvolved(battler) || IsBattlerUltraBursted(battler) || IsBattlerInTeraForm(battler)) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_END_BATTLE))
             restoreSpecies = TRUE;
 
         // Unlike Megas, Primal Reversion isn't canceled on fainting.

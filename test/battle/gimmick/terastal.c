@@ -686,7 +686,7 @@ SINGLE_BATTLE_TEST("(TERA) Protean cannot change the type of a Terastallized Pok
         PLAYER(SPECIES_GRENINJA) { Ability(ABILITY_PROTEAN); TeraType(TYPE_GRASS); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_BUBBLE, tera: TRUE); 
+        TURN { MOVE(player, MOVE_BUBBLE, tera: TRUE);
                MOVE(opponent, MOVE_EMBER); }
     } SCENE {
         MESSAGE("Greninja used Bubble!");
@@ -791,5 +791,23 @@ SINGLE_BATTLE_TEST("(TERA) All type indicators function correctly")
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE, tera: TRUE); }
+    }
+}
+
+SINGLE_BATTLE_TEST("(TERA) Pokemon with Tera forms change upon Terastallizing")
+{
+    u32 species, targetSpecies;
+    PARAMETRIZE { species = SPECIES_OGERPON_TEAL_MASK;        targetSpecies = SPECIES_OGERPON_TEAL_MASK_TERA; }
+    PARAMETRIZE { species = SPECIES_OGERPON_WELLSPRING_MASK;  targetSpecies = SPECIES_OGERPON_WELLSPRING_MASK_TERA; }
+    PARAMETRIZE { species = SPECIES_OGERPON_HEARTHFLAME_MASK; targetSpecies = SPECIES_OGERPON_HEARTHFLAME_MASK_TERA; }
+    PARAMETRIZE { species = SPECIES_OGERPON_CORNERSTONE_MASK; targetSpecies = SPECIES_OGERPON_CORNERSTONE_MASK_TERA; }
+    PARAMETRIZE { species = SPECIES_TERAPAGOS_TERASTAL;       targetSpecies = SPECIES_TERAPAGOS_STELLAR; }
+    GIVEN {
+        PLAYER(species);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE, tera: TRUE); }
+    } THEN {
+        EXPECT_EQ(player->species, targetSpecies);
     }
 }

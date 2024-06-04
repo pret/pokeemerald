@@ -121,6 +121,10 @@
 #define FORM_CHANGE_STATUS                      20
 
 // Form change that activates after move is used. Currently only used for activating Gulp Missile.
-#define FORM_CHANGE_HIT_BY_MOVE                     21
+#define FORM_CHANGE_HIT_BY_MOVE                 21
+
+// Form change that activates when terastallized as as a specific type
+// param1: tera type
+#define FORM_CHANGE_BATTLE_TERASTALLIZATION     22
 
 #endif // GUARD_CONSTANTS_FORM_CHANGE_TYPES_H

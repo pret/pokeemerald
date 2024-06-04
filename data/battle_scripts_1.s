@@ -32,6 +32,22 @@ BattleScript_Terastallization::
 	waitmessage B_WAIT_TIME_LONG
 	end3
 
+BattleScript_TeraFormChange::
+	@ TODO: no string prints in S/V, but right now this helps with clarity
+	printstring STRINGID_PKMNSTORINGENERGY
+	handleformchange BS_ATTACKER, 0
+	handleformchange BS_ATTACKER, 1
+	playanimation BS_ATTACKER, B_ANIM_TERA_CHARGE
+	waitanimation
+	applyterastallization
+	playanimation BS_ATTACKER, B_ANIM_TERA_ACTIVATE
+	waitanimation
+	handleformchange BS_ATTACKER, 2
+	printstring STRINGID_PKMNTERASTALLIZEDINTO
+	waitmessage B_WAIT_TIME_LONG
+	switchinabilities BS_ATTACKER
+	end3
+
 BattleScript_LowerAtkSpAtk::
 	jumpifstat BS_EFFECT_BATTLER, CMP_GREATER_THAN, STAT_ATK, MIN_STAT_STAGE, BattleScript_LowerAtkSpAtkDoAnim
 	jumpifstat BS_EFFECT_BATTLER, CMP_EQUAL, STAT_SPATK, MIN_STAT_STAGE, BattleScript_LowerAtkSpAtkEnd

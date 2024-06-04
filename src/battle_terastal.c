@@ -25,7 +25,7 @@ void PrepareBattlerForTera(u32 battler)
     gBattleStruct->tera.isTerastallized[side] |= gBitTable[index];
     gBattleStruct->tera.alreadyTerastallized[battler] = TRUE;
 
-    // Remove Tera Orb charge.    
+    // Remove Tera Orb charge.
     if (B_FLAG_TERA_ORB_CHARGED != 0
         && (B_FLAG_TERA_ORB_NO_COST == 0 || !FlagGet(B_FLAG_TERA_ORB_NO_COST))
         && side == B_SIDE_PLAYER
@@ -91,8 +91,7 @@ bool32 CanTerastallize(u32 battler)
 // Returns a battler's Tera type.
 u32 GetBattlerTeraType(u32 battler)
 {
-    struct Pokemon *mon = &GetBattlerParty(battler)[gBattlerPartyIndexes[battler]];
-    return GetMonData(mon, MON_DATA_TERA_TYPE);
+    return GetMonData(&GetBattlerParty(battler)[gBattlerPartyIndexes[battler]], MON_DATA_TERA_TYPE);
 }
 
 // Returns whether a battler is terastallized.
@@ -128,7 +127,7 @@ uq4_12_t GetTeraMultiplier(u32 battler, u32 type)
     // Safety check.
     if (!IsTerastallized(battler))
         return UQ_4_12(1.0);
-    
+
     // Stellar-type checks.
     if (teraType == TYPE_STELLAR)
     {

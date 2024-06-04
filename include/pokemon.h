@@ -360,7 +360,7 @@ struct SpeciesInfo /*0x8C*/
  /* 0x05 */ u8 baseSpDefense;
  /* 0x06 */ u8 types[2];
  /* 0x08 */ u8 catchRate;
- /* 0x09 */ u8 padding1;
+ /* 0x09 */ u8 forceTeraType;
  /* 0x0A */ u16 expYield; // expYield was changed from u8 to u16 for the new Exp System.
  /* 0x0C */ u16 evYield_HP:2;
             u16 evYield_Attack:2;
@@ -378,6 +378,7 @@ struct SpeciesInfo /*0x8C*/
  /* 0x16 */ u8 eggGroups[2];
  /* 0x18 */ u16 abilities[NUM_ABILITY_SLOTS]; // 3 abilities, no longer u8 because we have over 255 abilities now.
  /* 0x1E */ u8 safariZoneFleeRate;
+
             // Pokédex data
  /* 0x1F */ u8 categoryName[13];
  /* 0x1F */ u8 speciesName[POKEMON_NAME_LENGTH + 1];
@@ -431,6 +432,7 @@ struct SpeciesInfo /*0x8C*/
             u32 isPrimalReversion:1;
             u32 isUltraBurst:1;
             u32 isGigantamax:1;
+            u32 isTeraForm:1;
             u32 isAlolanForm:1;
             u32 isGalarianForm:1;
             u32 isHisuianForm:1;

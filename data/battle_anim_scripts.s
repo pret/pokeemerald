@@ -27436,12 +27436,13 @@ General_TeraCharge:
 	delay 20
 	createvisualtask AnimTask_BlendBattleAnimPalExclude, 5, 5, 2, 0, 16, RGB_WHITEALPHA
 	waitforvisualfinish
+	createvisualtask AnimTask_TransformMon, 2, 1, 0
 	call TeraChargeParticles
 	playsewithpan SE_M_BRICK_BREAK, SOUND_PAN_ATTACKER
 	clearmonbg ANIM_ATK_PARTNER
 	blendoff
 	end
-	
+
 TeraChargeParticles:
 	createsprite gTeraCrystalSpreadSpriteTemplate, ANIM_TARGET, 0, 0, -5, 8
 	createsprite gTeraCrystalSpreadSpriteTemplate, ANIM_TARGET, 0, 1, 5, 9
