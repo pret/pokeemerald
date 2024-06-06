@@ -97,6 +97,7 @@ EventScript_ObtainedItemMessage:
 EventScript_ContinueObtainedItem:
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	hideitemdesc
+	setflag FLAG_END_AUDIO_EARLY
 	setvar VAR_RESULT, TRUE
 	return
 
@@ -168,6 +169,7 @@ EventScript_PickUpItem::
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PutBattlePyramidItemInBag
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	hideitemdesc
+	setflag FLAG_END_AUDIO_EARLY
 	return
 
 EventScript_PutBattlePyramidItemInBag::
