@@ -642,7 +642,8 @@ PitArena_ShopNPC_OptionVitamin:
 PitArena_ShopNPC_Text:
 	.string "How may I assist you?$"
 PitArena_ShopNPC_IV_Text:
-	.string "That will be ¥3,000, okay?$"
+	.string "Your Pokémon are at max IVs by default.\n"
+	.string "Still want to change it for ¥3,000?$"
 
 PitArena_Tutor_ConfirmMoveSelection_Text_0:
 	.string "The move {STR_VAR_1}, is it?$"
