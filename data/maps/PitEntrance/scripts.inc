@@ -205,11 +205,11 @@ PitEntrance_Sign_Option5:
 
 PitEntrance_Text_MoreInfo::
 	.string "In this challenge you start with 3\n"
-	.string "random Pokemon and must fight around\l"
+	.string "random Pokémon and must fight around\l"
 	.string "200 trainers in a random gauntlet.\p"
 	.string "You and each trainer have random mons.\n"
-	.string "Trainer mon levels are tied to the\l"
-	.string "floor number, with 5/100 being min/max.\p"
+	.string "Trainer Pokémon levels are tied to the\l"
+	.string "floor number, with 1/100 being min/max.\p"
 	.string "Trainer numbers are also randomized\n"
 	.string "ranging from 1 to 4 with generally less\l"
 	.string "opponents in the lower floors.\p"
@@ -220,7 +220,7 @@ PitEntrance_Text_MoreInfo::
 	.string "where you will be able to rest and\l"
 	.string "prepare for the next Trial.\p"
 	.string "Every 25th floor, you will receive\n"
-	.string "another random Mon.\p"
+	.string "another random Pokémon.\p"
 	.string "And every ten floors there will be\n"
 	.string "a Move Tutor.\p"
 	.string "If you do manage to beat the final\n"
@@ -235,7 +235,7 @@ PitEntrance_Text_BattleInfo::
 	.string "later Gen mechanics are in the game.\p"
 	.string "Depending on the version you chose that\n"
 	.string "means things like Megas and late Gen\l"
-	.string "Pokemon exist.\p"
+	.string "Pokémon exist.\p"
 	.string "I'm not even really aware of it all as\n"
 	.string "I haven't played all the later games.\p"
 	.string "If you have specific question you can\n"
@@ -305,4 +305,4 @@ PitEntrance_Text_Rules::
 
 PitEntrance_Text_Discord:
 	.string "To talk about the hack join the TAH\n"
-	.string "Discord: https://discord.gg/hX3a63RYzZ$"
+	.string "Discord: https://discord.gg/FNCWjqsgdT$"
