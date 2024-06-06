@@ -73,7 +73,7 @@ static bool32 HasBadOdds(u32 battler, bool32 emitResult)
     //Variable initialization
 	u8 opposingPosition, atkType1, atkType2, defType1, defType2, effectiveness;
     s32 i, damageDealt = 0, maxDamageDealt = 0, damageTaken = 0, maxDamageTaken = 0;
-    u32 aiMove, playerMove, aiBestMove = MOVE_NONE, aiAbility = GetBattlerAbility(battler), opposingBattler, weather = AI_GetWeather(AI_DATA);
+    u32 aiMove, playerMove, aiBestMove = MOVE_NONE, aiAbility = AI_DATA->abilities[battler], opposingBattler, weather = AI_GetWeather(AI_DATA);
     bool32 getsOneShot = FALSE, hasStatusMove = FALSE, hasSuperEffectiveMove = FALSE;
 	u16 typeEffectiveness = UQ_4_12(1.0), aiMoveEffect; //baseline typing damage
 
@@ -247,7 +247,7 @@ static bool32 ShouldSwitchIfWonderGuard(u32 battler, bool32 emitResult)
 
     opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(battler));
 
-    if (GetBattlerAbility(GetBattlerAtPosition(opposingPosition)) != ABILITY_WONDER_GUARD)
+    if (AI_DATA->abilities[GetBattlerAtPosition(opposingPosition)] != ABILITY_WONDER_GUARD)
         return FALSE;
 
     // Check if Pokémon has a super effective move.
@@ -837,7 +837,7 @@ static bool32 CanMonSurviveHazardSwitchin(u32 battler)
 {
     u32 battlerIn1, battlerIn2;
     u32 hazardDamage = 0, battlerHp = gBattleMons[battler].hp;
-    u32 ability = GetBattlerAbility(battler), aiMove;
+    u32 ability = AI_DATA->abilities[battler], aiMove;
     s32 firstId, lastId, i, j;
     struct Pokemon *party;
 
@@ -1742,7 +1742,7 @@ static bool32 CanAbilityTrapOpponent(u16 ability, u32 opponent)
         return FALSE;
     else if (ability == ABILITY_SHADOW_TAG)
     {
-        if (B_SHADOW_TAG_ESCAPE >= GEN_4 && GetBattlerAbility(opponent) == ABILITY_SHADOW_TAG) // Check if ability exists in species
+        if (B_SHADOW_TAG_ESCAPE >= GEN_4 && AI_DATA->abilities[opponent] == ABILITY_SHADOW_TAG) // Check if ability exists in species
             return FALSE;
         else
             return TRUE;
