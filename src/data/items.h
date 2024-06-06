@@ -2260,7 +2260,7 @@ const struct Item gItemsInfo[] =
     [ITEM_NUGGET] =
     {
         .name = _("Nugget"),
-        .price = 10000 * TREASURE_FACTOR,
+        .price = 10000,
         .description = COMPOUND_STRING(
             "A nugget of pure\n"
             "gold. Can be sold at\n"

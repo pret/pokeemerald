@@ -1346,13 +1346,15 @@ u16 RandomItemId(u16 itemId)
         }
         else if (ItemId_GetPocket(itemId) != POCKET_KEY_ITEMS)
         {
-            randomItemCategory = Random32() % 10;
-            if(randomItemCategory < 7)
+            randomItemCategory = Random32() % 1000;
+            if(randomItemCategory < 700)
                 itemId = sRandomConsumableValidItems[RandomModulo(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_CONSUMABLE_ITEM_COUNT)];
-            else if(randomItemCategory < 9)
+            else if(randomItemCategory < 900)
                 itemId = sRandomHeldValidItems[RandomModulo(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_HELD_ITEM_COUNT)];
-            else
+            else if(randomItemCategory < 997)
                 itemId = sRandomBerryValidItems[RandomModulo(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_BERRY_ITEM_COUNT)];
+            else
+                itemId = ITEM_NUGGET;
         }
         //check for reroll
         for (i = 0; i < RANDOM_ITEM_REROLL_COUNT; i++)
