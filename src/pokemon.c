@@ -6195,7 +6195,13 @@ u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves)
     const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
 
     for (i = 0; i < MAX_LEVEL_UP_MOVES && learnset[i].move != LEVEL_UP_MOVE_END; i++)
-         moves[numMoves++] = GetRandomMove(Random(), species);
+    {
+        if (FlagGet(FLAG_RANDOM_MODE))
+            moves[numMoves++] = GetRandomMove(Random(), species);
+        else
+            moves[numMoves++] = learnset[i].move;
+    }
+        
 
      return numMoves;
 }
