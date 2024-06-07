@@ -7,6 +7,7 @@
 #include "pokemon.h"
 #include "constants/songs.h"
 #include "task.h"
+#include "event_data.h"
 
 struct Fanfare
 {
