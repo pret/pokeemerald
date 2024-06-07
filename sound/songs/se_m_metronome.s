@@ -2,7 +2,7 @@
 
 	.equ	se_m_metronome_grp, voicegroup128
 	.equ	se_m_metronome_pri, 4
-	.equ	se_m_metronome_rev, reverb_set+50
+	.equ	se_m_metronome_rev, 0
 	.equ	se_m_metronome_mvl, 127
 	.equ	se_m_metronome_key, 0
 	.equ	se_m_metronome_tbs, 1

@@ -157,3 +157,4 @@
 	.include "src/ui_birch_case.o"
 	.include "src/ui_main_menu.o"
 	.include "src/ui_mode_menu.o"
+	.include "src/sound_check_menu.o"

@@ -2,7 +2,7 @@
 
 	.equ	se_m_baton_pass_grp, voicegroup128
 	.equ	se_m_baton_pass_pri, 4
-	.equ	se_m_baton_pass_rev, reverb_set+50
+	.equ	se_m_baton_pass_rev, 0
 	.equ	se_m_baton_pass_mvl, 127
 	.equ	se_m_baton_pass_key, 0
 	.equ	se_m_baton_pass_tbs, 1

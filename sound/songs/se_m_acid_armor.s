@@ -2,7 +2,7 @@
 
 	.equ	se_m_acid_armor_grp, voicegroup128
 	.equ	se_m_acid_armor_pri, 4
-	.equ	se_m_acid_armor_rev, reverb_set+50
+	.equ	se_m_acid_armor_rev, 0
 	.equ	se_m_acid_armor_mvl, 127
 	.equ	se_m_acid_armor_key, 0
 	.equ	se_m_acid_armor_tbs, 1

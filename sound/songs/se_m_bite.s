@@ -2,7 +2,7 @@
 
 	.equ	se_m_bite_grp, voicegroup128
 	.equ	se_m_bite_pri, 4
-	.equ	se_m_bite_rev, reverb_set+50
+	.equ	se_m_bite_rev, 0
 	.equ	se_m_bite_mvl, 127
 	.equ	se_m_bite_key, 0
 	.equ	se_m_bite_tbs, 1

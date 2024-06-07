@@ -1,6 +1,6 @@
 	.align 2
 voicegroup128::
-	voice_directsound_no_resample 60, 0, DirectSoundWaveData_bicycle_bell, 255, 249, 0, 165
+	voice_directsound 60, 0, DirectSoundWaveData_bicycle_bell, 255, 249, 0, 165
 	voice_directsound_alt 60, 0, DirectSoundWaveData_bicycle_bell, 255, 0, 255, 165
 	voice_directsound 60, 0, DirectSoundWaveData_unknown_synth_snare, 255, 0, 255, 165
 	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_glockenspiel, 255, 242, 0, 127

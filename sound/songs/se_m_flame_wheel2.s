@@ -2,7 +2,7 @@
 
 	.equ	se_m_flame_wheel2_grp, voicegroup128
 	.equ	se_m_flame_wheel2_pri, 4
-	.equ	se_m_flame_wheel2_rev, reverb_set+50
+	.equ	se_m_flame_wheel2_rev, 0
 	.equ	se_m_flame_wheel2_mvl, 127
 	.equ	se_m_flame_wheel2_key, 0
 	.equ	se_m_flame_wheel2_tbs, 1

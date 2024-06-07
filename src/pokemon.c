@@ -53,6 +53,7 @@
 #include "constants/layouts.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
+#include "constants/species.h"
 #include "constants/trainers.h"
 #include "constants/union_room.h"
 #include "constants/weather.h"
@@ -6279,7 +6280,64 @@ u16 GetBattleBGM(void)
     if(trainerClass == TRAINER_CLASS_AQUA_LEADER)
         return MUS_VS_AQUA_MAGMA_LEADER;
 
-    switch (Random() % 15)
+    if((Random() % 10) <= 7)
+    {
+        switch (Random() % 26)
+        {
+            case 0:
+                return MUS_VS_AQUA_MAGMA;
+            case 1:
+                return MUS_VS_GYM_LEADER;
+            case 2:
+                return MUS_VS_CHAMPION;
+            case 3:
+                return MUS_VS_RIVAL;
+            case 4:
+                return MUS_VS_ELITE_FOUR;
+            case 5:
+                return MUS_RG_VS_LEGEND;
+            case 6:
+                return MUS_VS_FRONTIER_BRAIN;
+            case 7:        
+                return MUS_HG_VS_TRAINER;    
+            case 8:        
+                return MUS_HG_VS_GYM_LEADER;  
+            case 9:        
+                return MUS_HG_VS_RIVAL;  
+            case 10:        
+                return MUS_HG_VS_ROCKET;  
+            case 11:        
+                return MUS_HG_VS_CHAMPION;  
+            case 12:        
+                return MUS_HG_VS_TRAINER_KANTO;  
+            case 13:        
+                return MUS_HG_VS_GYM_LEADER_KANTO;
+            case 14:        
+                return MUS_DP_VS_GYM_LEADER;
+            case 15:        
+                return MUS_DP_VS_TRAINER;
+            case 16:        
+                return MUS_DP_VS_GALACTIC_BOSS;
+            case 17:        
+                return MUS_DP_VS_CHAMPION;
+            case 18:        
+                return MUS_DP_VS_GALACTIC;
+            case 19:        
+                return MUS_DP_VS_RIVAL;
+            case 20:        
+                return MUS_HG_VS_GYM_LEADER_KANTO;
+            case 21:        
+                return MUS_HG_VS_GYM_LEADER_KANTO;      
+            case 22:
+                return MUS_DP_VS_GALACTIC_COMMANDER;
+            case 23:         
+                return MUS_DP_VS_ELITE_FOUR;                
+            default:
+                return MUS_VS_TRAINER;
+        }
+    }
+
+    switch(Random() % 20)
     {
         case 0:
             return MUS_VS_RAYQUAZA;
@@ -6288,26 +6346,40 @@ u16 GetBattleBGM(void)
         case 2:
             return MUS_VS_REGI;
         case 3:
-            return MUS_VS_AQUA_MAGMA;
+            return MUS_RG_VS_MEWTWO;
         case 4:
-            return MUS_VS_GYM_LEADER;
+            return MUS_VS_MEW;
         case 5:
-            return MUS_VS_CHAMPION;
+            return MUS_HG_VS_RAIKOU;
         case 6:
-            return MUS_VS_RIVAL;
+            return MUS_HG_VS_ENTEI;
         case 7:
-            return MUS_VS_ELITE_FOUR;
+            return MUS_HG_VS_SUICUNE;
         case 8:
-            return MUS_RG_VS_LEGEND;
+            return MUS_HG_VS_LUGIA;
         case 9:
-            return MUS_VS_FRONTIER_BRAIN;
+            return MUS_HG_VS_HO_OH;
         case 10:
-             return MUS_VS_WILD;
+            return MUS_HG_VS_WILD;
+        case 11:
+            return MUS_RG_VS_DEOXYS;
+        case 12:
+            return MUS_DP_VS_UXIE_MESPRIT_AZELF;
+        case 13:
+            return MUS_DP_VS_DIALGA_PALKIA;
+        case 14:
+            return MUS_DP_VS_LEGEND;
+        case 15:
+            return MUS_PL_VS_GIRATINA;
+        case 16:
+            return MUS_DP_VS_WILD;
+        case 17:
+            return MUS_DP_VS_ARCEUS;
         default:
-            return MUS_VS_TRAINER;
+            return MUS_VS_WILD;
     }
-       
 }
+
 
 void PlayBattleBGM(void)
 {

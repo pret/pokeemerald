@@ -2,7 +2,7 @@
 
 	.equ	se_m_reflect_grp, voicegroup128
 	.equ	se_m_reflect_pri, 4
-	.equ	se_m_reflect_rev, reverb_set+50
+	.equ	se_m_reflect_rev, 0
 	.equ	se_m_reflect_mvl, 127
 	.equ	se_m_reflect_key, 0
 	.equ	se_m_reflect_tbs, 1

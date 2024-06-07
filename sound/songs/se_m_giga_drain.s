@@ -2,7 +2,7 @@
 
 	.equ	se_m_giga_drain_grp, voicegroup128
 	.equ	se_m_giga_drain_pri, 4
-	.equ	se_m_giga_drain_rev, reverb_set+50
+	.equ	se_m_giga_drain_rev, 0
 	.equ	se_m_giga_drain_mvl, 127
 	.equ	se_m_giga_drain_key, 0
 	.equ	se_m_giga_drain_tbs, 1

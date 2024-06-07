@@ -2,7 +2,7 @@
 
 	.equ	se_m_milk_drink_grp, voicegroup128
 	.equ	se_m_milk_drink_pri, 4
-	.equ	se_m_milk_drink_rev, reverb_set+50
+	.equ	se_m_milk_drink_rev, 0
 	.equ	se_m_milk_drink_mvl, 127
 	.equ	se_m_milk_drink_key, 0
 	.equ	se_m_milk_drink_tbs, 1

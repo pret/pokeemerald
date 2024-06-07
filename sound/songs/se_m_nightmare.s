@@ -2,7 +2,7 @@
 
 	.equ	se_m_nightmare_grp, voicegroup128
 	.equ	se_m_nightmare_pri, 4
-	.equ	se_m_nightmare_rev, reverb_set+50
+	.equ	se_m_nightmare_rev, 0
 	.equ	se_m_nightmare_mvl, 127
 	.equ	se_m_nightmare_key, 0
 	.equ	se_m_nightmare_tbs, 1

@@ -2,7 +2,7 @@
 
 	.equ	se_m_bubble_grp, voicegroup128
 	.equ	se_m_bubble_pri, 4
-	.equ	se_m_bubble_rev, reverb_set+50
+	.equ	se_m_bubble_rev, 0
 	.equ	se_m_bubble_mvl, 127
 	.equ	se_m_bubble_key, 0
 	.equ	se_m_bubble_tbs, 1

@@ -2,7 +2,7 @@
 
 	.equ	se_m_dragon_rage_grp, voicegroup128
 	.equ	se_m_dragon_rage_pri, 4
-	.equ	se_m_dragon_rage_rev, reverb_set+50
+	.equ	se_m_dragon_rage_rev, 0
 	.equ	se_m_dragon_rage_mvl, 127
 	.equ	se_m_dragon_rage_key, 0
 	.equ	se_m_dragon_rage_tbs, 1

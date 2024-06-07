@@ -2,7 +2,7 @@
 
 	.equ	se_m_vital_throw_grp, voicegroup128
 	.equ	se_m_vital_throw_pri, 4
-	.equ	se_m_vital_throw_rev, reverb_set+50
+	.equ	se_m_vital_throw_rev, 0
 	.equ	se_m_vital_throw_mvl, 127
 	.equ	se_m_vital_throw_key, 0
 	.equ	se_m_vital_throw_tbs, 1
