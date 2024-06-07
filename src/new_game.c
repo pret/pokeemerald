@@ -112,6 +112,7 @@ void SetDefaultOptions(void)
     gSaveBlock2Ptr->modeStatChanger = 0;
     gSaveBlock2Ptr->modeLegendaries = 0;
     gSaveBlock2Ptr->modeDuplicates = 1;
+    gSaveBlock2Ptr->modeMegas = 1;
 }
 
 static void ClearPokedexFlags(void)

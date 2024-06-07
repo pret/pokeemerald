@@ -883,6 +883,7 @@ PitArena_Mart_ZCrystals:
 
  	.align 2
 PitArena_Mart_FormItems:
+	.2byte  ITEM_ROTOM_CATALOG
     .2byte  ITEM_FLAME_PLATE
     .2byte  ITEM_SPLASH_PLATE
     .2byte  ITEM_ZAP_PLATE

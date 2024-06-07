@@ -304,5 +304,5 @@ PitEntrance_Text_Rules::
 	.string "Can you survive even 100 floors?$"
 
 PitEntrance_Text_Discord:
-	.string "To talk about the hack join the TAH\n"
-	.string "Discord: https://discord.gg/FNCWjqsgdT$"
+	.string "To talk about the hack join our server.\n"
+	.string "Discord: https://discord.gg/3b83g96NTW$"

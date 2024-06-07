@@ -6195,7 +6195,13 @@ u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves)
     const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
 
     for (i = 0; i < MAX_LEVEL_UP_MOVES && learnset[i].move != LEVEL_UP_MOVE_END; i++)
-         moves[numMoves++] = GetRandomMove(Random(), species);
+    {
+        if (FlagGet(FLAG_RANDOM_MODE))
+            moves[numMoves++] = GetRandomMove(Random(), species);
+        else
+            moves[numMoves++] = learnset[i].move;
+    }
+        
 
      return numMoves;
 }
@@ -8783,4 +8789,31 @@ u8 GetTutorMoves(u16 *moves)
         moves[i] = sTutorMoves[i];
 
     return TUTOR_MOVES_COUNT;
+}
+
+// Returns ITEM_NONE if no mega evolution by mega stone is possible
+u16 GetMegaStone(u32 species)
+{
+    u32 i;
+    u32 megaStone = ITEM_NONE;
+    const struct FormChange *formChanges = GetSpeciesFormChanges(species);
+
+    if (formChanges != NULL)
+    {
+        for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
+        {
+            if (formChanges[i].method == FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM)
+            {
+                //multiple mega stones (X/Y) currently not considered
+                megaStone = formChanges[i].param1;
+            }
+        }
+    }
+
+    return megaStone;
+}
+
+u32 GetMaxNumberOfSpecies(void)
+{
+    return RANDOM_SPECIES_COUNT_LEGENDARY;
 }

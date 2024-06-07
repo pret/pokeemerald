@@ -10763,7 +10763,7 @@ const struct Item gItemsInfo[] =
     [ITEM_ROTOM_CATALOG] =
     {
         .name = _("RotomCatalog"),
-        .price = 0,
+        .price = 8000,
         .importance = 1,
         .description = COMPOUND_STRING(
             "A catalog full of\n"

@@ -34,6 +34,7 @@
 #include "event_data.h"
 #include "constants/flags.h"
 #include "ui_birch_case.h"
+#include "config.h"
 
 //defines
 #define MODE_NORMAL     0
@@ -49,6 +50,8 @@
 #define INACTIVE        1
 #define YES             0
 #define NO              1
+#define MEGAS_ON        0
+#define MEGAS_OFF       1
 
 
 // This code is based on Ghoulslash's excellent UI tutorial:
@@ -77,6 +80,9 @@ enum MenuItems
     MENUITEM_MAIN_STAT_CHANGER,
     MENUITEM_MAIN_LEGENDARIES,
     MENUITEM_MAIN_DUPLICATES,
+    #ifndef RANDOM_GEN_5_MODE
+    MENUITEM_MAIN_MEGAS,
+    #endif
     MENUITEM_MAIN_CANCEL,
     MENUITEM_MAIN_COUNT,
 };
@@ -248,6 +254,7 @@ static void DrawChoices_XPShare(int selection, int y);
 static void DrawChoices_StatChanger(int selection, int y);
 static void DrawChoices_Legendaries(int selection, int y);
 static void DrawChoices_Duplicates(int selection, int y);
+static void DrawChoices_Megas(int selection, int y);
 static void DrawBgWindowFrames(void);
 
 // Menu draw and input functions
@@ -265,11 +272,14 @@ struct MainMenu
     [MENUITEM_MAIN_STAT_CHANGER] = {DrawChoices_StatChanger, ProcessInput_Options_Two},
     [MENUITEM_MAIN_LEGENDARIES]  = {DrawChoices_Legendaries, ProcessInput_Options_Two},
     [MENUITEM_MAIN_DUPLICATES]   = {DrawChoices_Duplicates,  ProcessInput_Options_Two},
+    #ifndef RANDOM_GEN_5_MODE
+    [MENUITEM_MAIN_MEGAS]        = {DrawChoices_Megas,       ProcessInput_Options_Two},
+    #endif
     [MENUITEM_MAIN_CANCEL]       = {NULL, NULL},
 };
 
 // Menu left side option names text
-static const u8 sText_Defaults[]    = _("DIFFICULTY");
+static const u8 sText_Defaults[]    = _("PRESETS");
 static const u8 sText_Autosave[]    = _("AUTOSAVE");
 static const u8 sText_BattleMode[]  = _("BATTLE MODE");
 static const u8 sText_Randomizer[]  = _("RANDOMIZER");
@@ -277,6 +287,7 @@ static const u8 sText_XPShare[]     = _("XP SHARE");
 static const u8 sText_StatChanger[] = _("STAT CHANGER");
 static const u8 sText_Legendaries[] = _("LEGENDARIES");
 static const u8 sText_Duplicates[]  = _("DUPLICATES");
+static const u8 sText_Megas[]       = _("TRAINER MEGAS");
 static const u8 sText_Cancel[]      = _("SAVE & LEAVE");
 
 static const u8 *const sModeMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
@@ -289,6 +300,9 @@ static const u8 *const sModeMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
     [MENUITEM_MAIN_STAT_CHANGER] = sText_StatChanger,
     [MENUITEM_MAIN_LEGENDARIES]  = sText_Legendaries,
     [MENUITEM_MAIN_DUPLICATES]   = sText_Duplicates,
+    #ifndef RANDOM_GEN_5_MODE
+    [MENUITEM_MAIN_MEGAS]        = sText_Megas,
+    #endif
     [MENUITEM_MAIN_CANCEL]       = sText_Cancel,
 };
 
@@ -310,6 +324,9 @@ static bool8 CheckConditions(int selection)
         case MENUITEM_MAIN_STAT_CHANGER:   return TRUE;
         case MENUITEM_MAIN_LEGENDARIES:    return TRUE;
         case MENUITEM_MAIN_DUPLICATES:     return TRUE;
+        #ifndef RANDOM_GEN_5_MODE
+        case MENUITEM_MAIN_MEGAS:          return TRUE;
+        #endif
         case MENUITEM_MAIN_CANCEL:         return TRUE;
         case MENUITEM_MAIN_COUNT:          return TRUE;
         default:                           return FALSE;
@@ -319,8 +336,8 @@ static bool8 CheckConditions(int selection)
 // Descriptions
 static const u8 sText_Empty[]                   = _("");
 static const u8 sText_Desc_Save[]               = _("Save your settings.");
-static const u8 sText_Desc_Defaults_Normal[]    = _("Sets all options for Normal Mode.");
-static const u8 sText_Desc_Defaults_Hard[]      = _("Sets all options for Hard Mode.");
+static const u8 sText_Desc_Defaults_Normal[]    = _("Sets all options for Normal Mode below.");
+static const u8 sText_Desc_Defaults_Hard[]      = _("Sets all options for Hard Mode below.");
 static const u8 sText_Desc_Defaults_Custom[]    = _("Is shown when manually changing\nmode settings.");
 static const u8 sText_Desc_Autosave_Off[]       = _("Autosave is inactive.");
 static const u8 sText_Desc_Autosave_5[]         = _("Autosave is executed every\nfive floors during warping.");
@@ -337,6 +354,8 @@ static const u8 sText_Desc_Legendaries_On[]     = _("Legendaries can be found in
 static const u8 sText_Desc_Legendaries_Off[]    = _("Legendaries can not be found\nin the Birch Bag.");
 static const u8 sText_Desc_Duplicates_On[]      = _("Truly random. Duplicates are\npossible in the Birch Bag.");
 static const u8 sText_Desc_Duplicates_Off[]     = _("Birch bag can't hold duplicates.");
+static const u8 sText_Desc_Megas_On[]           = _("Trainer Pokémon have a 25% chance\nto mega evolve if possible.");
+static const u8 sText_Desc_Megas_Off[]          = _("Trainer Pokémon can never mega\nevolve.");
 
 static const u8 *const sModeMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
 {
@@ -348,6 +367,9 @@ static const u8 *const sModeMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
     [MENUITEM_MAIN_STAT_CHANGER] = {sText_Desc_StatChanger_On,      sText_Desc_StatChanger_Off,     sText_Empty},
     [MENUITEM_MAIN_LEGENDARIES]  = {sText_Desc_Legendaries_On,      sText_Desc_Legendaries_Off,     sText_Empty},
     [MENUITEM_MAIN_DUPLICATES]   = {sText_Desc_Duplicates_On,       sText_Desc_Duplicates_Off,      sText_Empty},
+    #ifndef RANDOM_GEN_5_MODE
+    [MENUITEM_MAIN_MEGAS]        = {sText_Desc_Megas_On,            sText_Desc_Megas_Off,           sText_Empty},
+    #endif
     [MENUITEM_MAIN_CANCEL]       = {sText_Desc_Save,                sText_Empty,                    sText_Empty},
 };
 
@@ -481,6 +503,9 @@ static void ModeMenu_SetupCB(void)
         sOptions->sel[MENUITEM_MAIN_STAT_CHANGER] = gSaveBlock2Ptr->modeStatChanger;
         sOptions->sel[MENUITEM_MAIN_LEGENDARIES]  = gSaveBlock2Ptr->modeLegendaries;
         sOptions->sel[MENUITEM_MAIN_DUPLICATES]   = gSaveBlock2Ptr->modeDuplicates;
+        #ifndef RANDOM_GEN_5_MODE
+        sOptions->sel[MENUITEM_MAIN_MEGAS]        = gSaveBlock2Ptr->modeMegas;
+        #endif
         gMain.state++;
         break;
     case 7:
@@ -583,6 +608,7 @@ static void DrawLeftSideOptionText(int selection, int y)
 {
     u8 color_yellow[3];
     u8 color_gray[3];
+    u8 color_red[3];
 
     color_yellow[0] = TEXT_COLOR_TRANSPARENT;
     color_yellow[1] = TEXT_COLOR_WHITE;
@@ -590,11 +616,24 @@ static void DrawLeftSideOptionText(int selection, int y)
     color_gray[0] = TEXT_COLOR_TRANSPARENT;
     color_gray[1] = TEXT_COLOR_WHITE;
     color_gray[2] = TEXT_COLOR_OPTIONS_GRAY_SHADOW;
+    color_red[0] = TEXT_COLOR_TRANSPARENT;
+    color_red[1] = TEXT_COLOR_OPTIONS_RED_FG;
+    color_red[2] = TEXT_COLOR_OPTIONS_GRAY_FG;
 
     if (CheckConditions(selection))
-        AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_yellow, TEXT_SKIP_DRAW, OptionTextRight(selection));
+    {
+        if (selection != MENUITEM_MAIN_DEFAULTS)
+            AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_yellow, TEXT_SKIP_DRAW, OptionTextRight(selection));
+        else
+            AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_red, TEXT_SKIP_DRAW, OptionTextRight(selection));
+    }
     else
-        AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_gray, TEXT_SKIP_DRAW, OptionTextRight(selection));
+    {
+        if (selection != MENUITEM_MAIN_DEFAULTS)
+            AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_gray, TEXT_SKIP_DRAW, OptionTextRight(selection));
+        else
+            AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_red, TEXT_SKIP_DRAW, OptionTextRight(selection));
+    }
 }
 
 static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 chosen, bool8 active)
@@ -792,12 +831,18 @@ static void Task_ModeMenuMainInput(u8 taskId)
                                 sOptions->sel[MENUITEM_MAIN_STAT_CHANGER] = ACTIVE;
                                 sOptions->sel[MENUITEM_MAIN_LEGENDARIES]  = YES;
                                 sOptions->sel[MENUITEM_MAIN_DUPLICATES]   = NO;
+                                #ifndef RANDOM_GEN_5_MODE
+                                sOptions->sel[MENUITEM_MAIN_MEGAS]        = MEGAS_OFF;
+                                #endif
                                 break;
                             case MODE_HARD:
                                 sOptions->sel[MENUITEM_MAIN_XPSHARE]      = XP_50;
                                 sOptions->sel[MENUITEM_MAIN_STAT_CHANGER] = INACTIVE;
                                 sOptions->sel[MENUITEM_MAIN_LEGENDARIES]  = NO;
                                 sOptions->sel[MENUITEM_MAIN_DUPLICATES]   = NO;
+                                #ifndef RANDOM_GEN_5_MODE
+                                sOptions->sel[MENUITEM_MAIN_MEGAS]        = MEGAS_ON;
+                                #endif
                                 break;
                             default:
                                 break;
@@ -833,6 +878,9 @@ static void Task_ModeMenuSave(u8 taskId)
     gSaveBlock2Ptr->modeStatChanger = sOptions->sel[MENUITEM_MAIN_STAT_CHANGER];
     gSaveBlock2Ptr->modeLegendaries = sOptions->sel[MENUITEM_MAIN_LEGENDARIES];
     gSaveBlock2Ptr->modeDuplicates  = sOptions->sel[MENUITEM_MAIN_DUPLICATES];
+    #ifndef RANDOM_GEN_5_MODE
+    gSaveBlock2Ptr->modeMegas       = sOptions->sel[MENUITEM_MAIN_MEGAS];
+    #endif
 
     //set flags/VARs
     VarSet(VAR_PIT_AUTOSAVE, sOptions->sel[MENUITEM_MAIN_AUTOSAVE]);
@@ -866,6 +914,13 @@ static void Task_ModeMenuSave(u8 taskId)
         FlagSet(FLAG_NO_DUPLICATES);
     else
         FlagClear(FLAG_NO_DUPLICATES);
+
+    #ifndef RANDOM_GEN_5_MODE
+    if (sOptions->sel[MENUITEM_MAIN_MEGAS] == MEGAS_OFF)
+        FlagClear(FLAG_MEGAS);
+    else
+        FlagSet(FLAG_MEGAS);
+    #endif
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_ModeMenuWaitFadeAndExitGracefully;
@@ -1126,6 +1181,18 @@ static void DrawChoices_Duplicates(int selection, int y)
     DrawModeMenuChoice(sText_Choice_Yes, 104, y, styles[0], active);
     DrawModeMenuChoice(sText_Choice_No, GetStringRightAlignXOffset(FONT_NORMAL, sText_Choice_No, 198), y, styles[1], active);
 }
+
+#ifndef RANDOM_GEN_5_MODE
+static void DrawChoices_Megas(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_MAIN_MEGAS);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawModeMenuChoice(sText_Choice_Yes, 104, y, styles[0], active);
+    DrawModeMenuChoice(sText_Choice_No, GetStringRightAlignXOffset(FONT_NORMAL, sText_Choice_No, 198), y, styles[1], active);
+}
+#endif
 
 // Background tilemap
 #define TILE_TOP_CORNER_L 0x1A2 // 418
