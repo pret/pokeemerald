@@ -181,6 +181,7 @@ static u32 ReturnRandomSpeciesByPokeballIndex(u32 index)
     int i;
 
     species = GetSpeciesRandomSeeded(species * GetSpeciesRandomSeeded(VarGet(VAR_PIT_FLOOR) + 1));
+    //species = SPECIES_GROUDON; //Test setting for reroll tests
 
     if (FlagGet(FLAG_NO_DUPLICATES))
     {
@@ -196,6 +197,7 @@ static u32 ReturnRandomSpeciesByPokeballIndex(u32 index)
                 {
                     species = GetSpeciesRandomSeeded(species * GetSpeciesRandomSeeded(VarGet(VAR_PIT_FLOOR) + 1));
                     counter ++;
+                    DebugPrintf("rerolled non-legend species = %d", species);
                 }
             }
             //check for duplicates within the case
@@ -227,13 +229,13 @@ static u32 ReturnRandomSpeciesByPokeballIndex(u32 index)
             if (counter2 == 100)
             {
                 rerollMon = FALSE;
-                DebugPrintf("--- reroll ---");
             }
             //reroll
             if (rerollMon)
             {
                 species = GetSpeciesRandomSeeded(species * GetSpeciesRandomSeeded(VarGet(VAR_PIT_FLOOR) + 1));
                 counter2++;
+                DebugPrintf("--- reroll ---");
             }
         }
         while (rerollMon);
