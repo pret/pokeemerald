@@ -823,4 +823,5 @@ u8 GetNumberOfEggMoves(struct Pokemon *mon);
 u8 GetEggMoveTutorMoves(struct Pokemon *mon, u16 *moves);
 u8 GetTutorMoves(u16 *moves);
 u16 GetMegaStone(u32 species);
+u32 GetMaxNumberOfSpecies(void);
 #endif // GUARD_POKEMON_H

@@ -8808,3 +8808,8 @@ u16 GetMegaStone(u32 species)
 
     return megaStone;
 }
+
+u32 GetMaxNumberOfSpecies(void)
+{
+    return RANDOM_SPECIES_COUNT_LEGENDARY;
+}

@@ -193,11 +193,12 @@ static u32 ReturnRandomSpeciesByPokeballIndex(u32 index)
             //reroll in case any legendaries, mythics or ultra beasts are determined
             if (FlagGet(FLAG_NO_LEGENDARIES))
             {
-                while ((IsSpeciesLegendary(species) || IsSpeciesMythical(species) || IsSpeciesUltraBeast(species) || IsSpeciesParadoxMon(species)) && counter < 100)
+                while (((IsSpeciesLegendary(species) || IsSpeciesMythical(species) || IsSpeciesUltraBeast(species) || IsSpeciesParadoxMon(species)) || species > GetMaxNumberOfSpecies()) && counter < 10)
                 {
-                    species = GetSpeciesRandomSeeded(species * GetSpeciesRandomSeeded(VarGet(VAR_PIT_FLOOR) + 1));
+                    // +counter to handle edge cases
+                    species = GetSpeciesRandomSeeded(species * GetSpeciesRandomSeeded(VarGet(VAR_PIT_FLOOR) + index + counter2)) + counter;
                     counter ++;
-                    DebugPrintf("rerolled non-legend species = %d", species);
+                    DebugPrintf("%d, rerolled non-legend species = %d", counter, species);
                 }
             }
             //check for duplicates within the case
@@ -226,15 +227,18 @@ static u32 ReturnRandomSpeciesByPokeballIndex(u32 index)
                 }
             }
             //exit in case of infinite loop
-            if (counter2 == 100)
+            if (counter2 == 10)
             {
                 rerollMon = FALSE;
+                // default species could be specified here!
+                DebugPrintf("no valid species found. Default: %d", species);
             }
             //reroll
             if (rerollMon)
             {
-                species = GetSpeciesRandomSeeded(species * GetSpeciesRandomSeeded(VarGet(VAR_PIT_FLOOR) + 1));
                 counter2++;
+                species = GetSpeciesRandomSeeded(species * GetSpeciesRandomSeeded(VarGet(VAR_PIT_FLOOR) + index));
+                counter = 0; //reset counter for legendary rerolls
                 DebugPrintf("--- reroll ---");
             }
         }
