@@ -1364,21 +1364,21 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
         .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
-    [TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN] = {
+    [TRAINER_BACK_PIC_LUCAS] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
-        .images = gTrainerBackPicTable_RubySapphireBrendan,
+        .images = gTrainerBackPicTable_Lucas,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
         .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
-    [TRAINER_BACK_PIC_RUBY_SAPPHIRE_MAY] = {
+    [TRAINER_BACK_PIC_DAWN] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
-        .images = gTrainerBackPicTable_RubySapphireMay,
+        .images = gTrainerBackPicTable_Dawn,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
         .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
@@ -6843,6 +6843,8 @@ u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)
     {
         if(gSaveBlock2Ptr->playerGfxType == 1)
             return FacilityClassToPicIndex(FACILITY_CLASS_LEAF);
+        else if(gSaveBlock2Ptr->playerGfxType == 2)
+            return TRAINER_PIC_DAWN;
         else
             return FacilityClassToPicIndex(FACILITY_CLASS_MAY);
     }
@@ -6850,6 +6852,8 @@ u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)
     {
         if(gSaveBlock2Ptr->playerGfxType == 1)
             return FacilityClassToPicIndex(FACILITY_CLASS_RED);
+        else if(gSaveBlock2Ptr->playerGfxType == 2)
+            return TRAINER_PIC_LUCAS;
         else
             return FacilityClassToPicIndex(FACILITY_CLASS_BRENDAN);
     }
