@@ -883,9 +883,9 @@ static void Task_ModeMenuSave(u8 taskId)
         FlagClear(FLAG_NO_DUPLICATES);
 
     if (sOptions->sel[MENUITEM_MAIN_MEGAS] == MEGAS_OFF)
-        FlagSet(FLAG_NO_MEGAS);
+        FlagClear(FLAG_MEGAS);
     else
-        FlagClear(FLAG_NO_MEGAS);
+        FlagSet(FLAG_MEGAS);
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_ModeMenuWaitFadeAndExitGracefully;
