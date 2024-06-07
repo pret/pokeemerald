@@ -1881,9 +1881,26 @@ static u8 VersionToCardType(u8 version)
 
 static void CreateTrainerCardTrainerPic(void)
 {
+
+    u16 facilityClass = 0;
+    if (gSaveBlock2Ptr->playerGender != MALE)
+    {
+        if(gSaveBlock2Ptr->playerGfxType == 1)
+            facilityClass = FacilityClassToPicIndex(FACILITY_CLASS_LEAF);
+        else
+            facilityClass = FacilityClassToPicIndex(FACILITY_CLASS_MAY);
+    }
+    else
+    {
+        if(gSaveBlock2Ptr->playerGfxType == 1)
+            facilityClass = FacilityClassToPicIndex(FACILITY_CLASS_RED);
+        else
+            facilityClass = FacilityClassToPicIndex(FACILITY_CLASS_BRENDAN);
+    }
+
     if (InUnionRoom() == TRUE && gReceivedRemoteLinkPlayers == 1)
     {
-        CreateTrainerCardTrainerPicSprite(FacilityClassToPicIndex(sData->trainerCard.unionRoomClass),
+        CreateTrainerCardTrainerPicSprite(facilityClass,
                     TRUE,
                     sTrainerPicOffset[sData->isHoenn][sData->trainerCard.gender][0],
                     sTrainerPicOffset[sData->isHoenn][sData->trainerCard.gender][1],
@@ -1892,7 +1909,7 @@ static void CreateTrainerCardTrainerPic(void)
     }
     else
     {
-        CreateTrainerCardTrainerPicSprite(FacilityClassToPicIndex(sTrainerPicFacilityClass[sData->cardType][sData->trainerCard.gender]),
+        CreateTrainerCardTrainerPicSprite(facilityClass,
                     TRUE,
                     sTrainerPicOffset[sData->isHoenn][sData->trainerCard.gender][0],
                     sTrainerPicOffset[sData->isHoenn][sData->trainerCard.gender][1],

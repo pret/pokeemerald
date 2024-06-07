@@ -2501,6 +2501,20 @@ void BtlController_HandleDrawTrainerPic(u32 battler, u32 trainerPicId, bool32 is
         }
         else
         {
+            if (gSaveBlock2Ptr->playerGender != MALE)
+            {
+                if(gSaveBlock2Ptr->playerGfxType == 1)
+                    trainerPicId = TRAINER_BACK_PIC_LEAF;
+                else
+                    trainerPicId = TRAINER_BACK_PIC_MAY;
+            }
+            else
+            {
+                if(gSaveBlock2Ptr->playerGfxType == 1)
+                    trainerPicId = TRAINER_BACK_PIC_RED;
+                else
+                    trainerPicId = TRAINER_BACK_PIC_BRENDAN;
+            }
             DecompressTrainerBackPic(trainerPicId, battler);
             SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(battler));
             if (subpriority == -1)
@@ -2523,7 +2537,21 @@ void BtlController_HandleDrawTrainerPic(u32 battler, u32 trainerPicId, bool32 is
 void BtlController_HandleTrainerSlide(u32 battler, u32 trainerPicId)
 {
     if (GetBattlerSide(battler) == B_SIDE_PLAYER)
-    {
+    {   
+        if (gSaveBlock2Ptr->playerGender != MALE)
+        {
+            if(gSaveBlock2Ptr->playerGfxType == 1)
+                trainerPicId = TRAINER_BACK_PIC_LEAF;
+            else
+                trainerPicId = TRAINER_BACK_PIC_MAY;
+        }
+        else
+        {
+            if(gSaveBlock2Ptr->playerGfxType == 1)
+                trainerPicId = TRAINER_BACK_PIC_RED;
+            else
+                trainerPicId = TRAINER_BACK_PIC_BRENDAN;
+        }
         DecompressTrainerBackPic(trainerPicId, battler);
         SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(battler));
         gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate,

@@ -222,6 +222,11 @@ static const u32 sBrendanMugshot_Gfx[] = INCBIN_U32("graphics/ui_main_menu/brend
 static const u16 sMayMugshot_Pal[] = INCBIN_U16("graphics/ui_main_menu/may_mugshot.gbapal");
 static const u32 sMayMugshot_Gfx[] = INCBIN_U32("graphics/ui_main_menu/may_mugshot.4bpp.lz");
 
+static const u16 sRedMugshot_Pal[] = INCBIN_U16("graphics/ui_main_menu/red_mugshot.gbapal");
+static const u32 sRedMugshot_Gfx[] = INCBIN_U32("graphics/ui_main_menu/red_mugshot.4bpp.lz");
+static const u16 sLeafMugshot_Pal[] = INCBIN_U16("graphics/ui_main_menu/leaf_mugshot.gbapal");
+static const u32 sLeafMugshot_Gfx[] = INCBIN_U32("graphics/ui_main_menu/leaf_mugshot.4bpp.lz");
+
 
 //
 //  Sprite Data for Mugshots and Icon Shadows 
@@ -258,6 +263,32 @@ static const struct CompressedSpriteSheet sSpriteSheet_MayMugshot =
 static const struct SpritePalette sSpritePal_MayMugshot =
 {
     .data = sMayMugshot_Pal,
+    .tag = TAG_MUGSHOT
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_RedMugshot =
+{
+    .data = sRedMugshot_Gfx,
+    .size = 64*64*1/2,
+    .tag = TAG_MUGSHOT,
+};
+
+static const struct SpritePalette sSpritePal_RedMugshot =
+{
+    .data = sRedMugshot_Pal,
+    .tag = TAG_MUGSHOT
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_LeafMugshot =
+{
+    .data = sLeafMugshot_Gfx,
+    .size = 64*64*1/2,
+    .tag = TAG_MUGSHOT,
+};
+
+static const struct SpritePalette sSpritePal_LeafMugshot =
+{
+    .data = sLeafMugshot_Pal,
     .tag = TAG_MUGSHOT
 };
 
@@ -649,16 +680,33 @@ static bool8 MainMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spr
         {
             LoadCompressedSpriteSheet(&sSpriteSheet_IconBox);
             LoadSpritePalette(&sSpritePal_IconBox);
-            LoadCompressedSpriteSheet(&sSpriteSheet_BrendanMugshot);
-            LoadSpritePalette(&sSpritePal_BrendanMugshot);
+            if(gSaveBlock2Ptr->playerGfxType == 1){
+                LoadCompressedSpriteSheet(&sSpriteSheet_RedMugshot);
+                LoadSpritePalette(&sSpritePal_RedMugshot);
+            }
+            else
+            {
+                LoadCompressedSpriteSheet(&sSpriteSheet_BrendanMugshot);
+                LoadSpritePalette(&sSpritePal_BrendanMugshot);
+            }
+            
             LoadPalette(sMainBgPalette, 0, 32);
         }
         else
         {
             LoadCompressedSpriteSheet(&sSpriteSheet_IconBoxFem);
             LoadSpritePalette(&sSpritePal_IconBoxFem);
-            LoadCompressedSpriteSheet(&sSpriteSheet_MayMugshot);
-            LoadSpritePalette(&sSpritePal_MayMugshot);
+            if(gSaveBlock2Ptr->playerGfxType == 1)
+            {
+                LoadCompressedSpriteSheet(&sSpriteSheet_LeafMugshot);
+                LoadSpritePalette(&sSpritePal_LeafMugshot);
+            }
+            else
+            {
+                LoadCompressedSpriteSheet(&sSpriteSheet_MayMugshot);
+                LoadSpritePalette(&sSpritePal_MayMugshot);
+            }
+            
             LoadPalette(sMainBgPaletteFem, 0, 32);
         }
         LoadPalette(sScrollBgPalette, 16, 32);
