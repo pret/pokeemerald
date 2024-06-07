@@ -34,6 +34,7 @@
 #include "event_data.h"
 #include "constants/flags.h"
 #include "ui_birch_case.h"
+#include "config.h"
 
 //defines
 #define MODE_NORMAL     0
@@ -79,7 +80,9 @@ enum MenuItems
     MENUITEM_MAIN_STAT_CHANGER,
     MENUITEM_MAIN_LEGENDARIES,
     MENUITEM_MAIN_DUPLICATES,
+    #ifndef RANDOM_GEN_5_MODE
     MENUITEM_MAIN_MEGAS,
+    #endif
     MENUITEM_MAIN_CANCEL,
     MENUITEM_MAIN_COUNT,
 };
@@ -269,7 +272,9 @@ struct MainMenu
     [MENUITEM_MAIN_STAT_CHANGER] = {DrawChoices_StatChanger, ProcessInput_Options_Two},
     [MENUITEM_MAIN_LEGENDARIES]  = {DrawChoices_Legendaries, ProcessInput_Options_Two},
     [MENUITEM_MAIN_DUPLICATES]   = {DrawChoices_Duplicates,  ProcessInput_Options_Two},
+    #ifndef RANDOM_GEN_5_MODE
     [MENUITEM_MAIN_MEGAS]        = {DrawChoices_Megas,       ProcessInput_Options_Two},
+    #endif
     [MENUITEM_MAIN_CANCEL]       = {NULL, NULL},
 };
 
@@ -295,7 +300,9 @@ static const u8 *const sModeMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
     [MENUITEM_MAIN_STAT_CHANGER] = sText_StatChanger,
     [MENUITEM_MAIN_LEGENDARIES]  = sText_Legendaries,
     [MENUITEM_MAIN_DUPLICATES]   = sText_Duplicates,
+    #ifndef RANDOM_GEN_5_MODE
     [MENUITEM_MAIN_MEGAS]        = sText_Megas,
+    #endif
     [MENUITEM_MAIN_CANCEL]       = sText_Cancel,
 };
 
@@ -317,7 +324,9 @@ static bool8 CheckConditions(int selection)
         case MENUITEM_MAIN_STAT_CHANGER:   return TRUE;
         case MENUITEM_MAIN_LEGENDARIES:    return TRUE;
         case MENUITEM_MAIN_DUPLICATES:     return TRUE;
+        #ifndef RANDOM_GEN_5_MODE
         case MENUITEM_MAIN_MEGAS:          return TRUE;
+        #endif
         case MENUITEM_MAIN_CANCEL:         return TRUE;
         case MENUITEM_MAIN_COUNT:          return TRUE;
         default:                           return FALSE;
@@ -358,7 +367,9 @@ static const u8 *const sModeMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
     [MENUITEM_MAIN_STAT_CHANGER] = {sText_Desc_StatChanger_On,      sText_Desc_StatChanger_Off,     sText_Empty},
     [MENUITEM_MAIN_LEGENDARIES]  = {sText_Desc_Legendaries_On,      sText_Desc_Legendaries_Off,     sText_Empty},
     [MENUITEM_MAIN_DUPLICATES]   = {sText_Desc_Duplicates_On,       sText_Desc_Duplicates_Off,      sText_Empty},
+    #ifndef RANDOM_GEN_5_MODE
     [MENUITEM_MAIN_MEGAS]        = {sText_Desc_Megas_On,            sText_Desc_Megas_Off,           sText_Empty},
+    #endif
     [MENUITEM_MAIN_CANCEL]       = {sText_Desc_Save,                sText_Empty,                    sText_Empty},
 };
 
@@ -492,7 +503,9 @@ static void ModeMenu_SetupCB(void)
         sOptions->sel[MENUITEM_MAIN_STAT_CHANGER] = gSaveBlock2Ptr->modeStatChanger;
         sOptions->sel[MENUITEM_MAIN_LEGENDARIES]  = gSaveBlock2Ptr->modeLegendaries;
         sOptions->sel[MENUITEM_MAIN_DUPLICATES]   = gSaveBlock2Ptr->modeDuplicates;
+        #ifndef RANDOM_GEN_5_MODE
         sOptions->sel[MENUITEM_MAIN_MEGAS]        = gSaveBlock2Ptr->modeMegas;
+        #endif
         gMain.state++;
         break;
     case 7:
@@ -804,14 +817,18 @@ static void Task_ModeMenuMainInput(u8 taskId)
                                 sOptions->sel[MENUITEM_MAIN_STAT_CHANGER] = ACTIVE;
                                 sOptions->sel[MENUITEM_MAIN_LEGENDARIES]  = YES;
                                 sOptions->sel[MENUITEM_MAIN_DUPLICATES]   = NO;
+                                #ifndef RANDOM_GEN_5_MODE
                                 sOptions->sel[MENUITEM_MAIN_MEGAS]        = MEGAS_OFF;
+                                #endif
                                 break;
                             case MODE_HARD:
                                 sOptions->sel[MENUITEM_MAIN_XPSHARE]      = XP_50;
                                 sOptions->sel[MENUITEM_MAIN_STAT_CHANGER] = INACTIVE;
                                 sOptions->sel[MENUITEM_MAIN_LEGENDARIES]  = NO;
                                 sOptions->sel[MENUITEM_MAIN_DUPLICATES]   = NO;
+                                #ifndef RANDOM_GEN_5_MODE
                                 sOptions->sel[MENUITEM_MAIN_MEGAS]        = MEGAS_ON;
+                                #endif
                                 break;
                             default:
                                 break;
@@ -847,7 +864,9 @@ static void Task_ModeMenuSave(u8 taskId)
     gSaveBlock2Ptr->modeStatChanger = sOptions->sel[MENUITEM_MAIN_STAT_CHANGER];
     gSaveBlock2Ptr->modeLegendaries = sOptions->sel[MENUITEM_MAIN_LEGENDARIES];
     gSaveBlock2Ptr->modeDuplicates  = sOptions->sel[MENUITEM_MAIN_DUPLICATES];
+    #ifndef RANDOM_GEN_5_MODE
     gSaveBlock2Ptr->modeMegas       = sOptions->sel[MENUITEM_MAIN_MEGAS];
+    #endif
 
     //set flags/VARs
     VarSet(VAR_PIT_AUTOSAVE, sOptions->sel[MENUITEM_MAIN_AUTOSAVE]);
@@ -882,10 +901,12 @@ static void Task_ModeMenuSave(u8 taskId)
     else
         FlagClear(FLAG_NO_DUPLICATES);
 
+    #ifndef RANDOM_GEN_5_MODE
     if (sOptions->sel[MENUITEM_MAIN_MEGAS] == MEGAS_OFF)
         FlagClear(FLAG_MEGAS);
     else
         FlagSet(FLAG_MEGAS);
+    #endif
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_ModeMenuWaitFadeAndExitGracefully;
@@ -1147,6 +1168,7 @@ static void DrawChoices_Duplicates(int selection, int y)
     DrawModeMenuChoice(sText_Choice_No, GetStringRightAlignXOffset(FONT_NORMAL, sText_Choice_No, 198), y, styles[1], active);
 }
 
+#ifndef RANDOM_GEN_5_MODE
 static void DrawChoices_Megas(int selection, int y)
 {
     bool8 active = CheckConditions(MENUITEM_MAIN_MEGAS);
@@ -1156,6 +1178,7 @@ static void DrawChoices_Megas(int selection, int y)
     DrawModeMenuChoice(sText_Choice_Yes, 104, y, styles[0], active);
     DrawModeMenuChoice(sText_Choice_No, GetStringRightAlignXOffset(FONT_NORMAL, sText_Choice_No, 198), y, styles[1], active);
 }
+#endif
 
 // Background tilemap
 #define TILE_TOP_CORNER_L 0x1A2 // 418
