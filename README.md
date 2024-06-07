@@ -141,6 +141,14 @@ Based off RHH's pokeemerald-expansion v1.8.0 https://github.com/rh-hideout/pokee
     - [Nature Colors](https://github.com/DizzyEggg/pokeemerald/tree/nature_color) in summary screen by @DizzyEggg
     - [Dynamic Multichoice](https://github.com/SBird1337/pokeemerald/tree/feature/dynmulti) by @SBird1337
     - [Saveblock Cleansing](https://github.com/ghoulslash/pokeemerald/tree/saveblock) by @ghoulslash
+    - [Followers & Expanded IDs](https://github.com/aarant/pokeemerald/tree/followers-expanded-id) by @aarant
+        - May be disabled.
+        - Includes Pokémon followers like in HGSS, including interactions.
+        - ***Expands the amount of possible object event IDs beyond 255.***
+        - ***Includes an implementation of dynamic overworld palettes (DOWP).***
+        - **Additional features**:
+            - *Pokémon overworld sprites up to Generation 8.*
+            - *Integration with our Pokémon Sprite Visualizer, allowing users to browse through the follower sprites alongside battle sprites.*
 - ***Other features***
     - Pressing B while holding a Pokémon drops them like in modern games (configurable).
     - Running indoors (configurable).
