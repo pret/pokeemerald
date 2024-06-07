@@ -336,8 +336,8 @@ static bool8 CheckConditions(int selection)
 // Descriptions
 static const u8 sText_Empty[]                   = _("");
 static const u8 sText_Desc_Save[]               = _("Save your settings.");
-static const u8 sText_Desc_Defaults_Normal[]    = _("Sets all options for Normal Mode.");
-static const u8 sText_Desc_Defaults_Hard[]      = _("Sets all options for Hard Mode.");
+static const u8 sText_Desc_Defaults_Normal[]    = _("Sets all options for Normal Mode below.");
+static const u8 sText_Desc_Defaults_Hard[]      = _("Sets all options for Hard Mode below.");
 static const u8 sText_Desc_Defaults_Custom[]    = _("Is shown when manually changing\nmode settings.");
 static const u8 sText_Desc_Autosave_Off[]       = _("Autosave is inactive.");
 static const u8 sText_Desc_Autosave_5[]         = _("Autosave is executed every\nfive floors during warping.");
@@ -608,6 +608,7 @@ static void DrawLeftSideOptionText(int selection, int y)
 {
     u8 color_yellow[3];
     u8 color_gray[3];
+    u8 color_red[3];
 
     color_yellow[0] = TEXT_COLOR_TRANSPARENT;
     color_yellow[1] = TEXT_COLOR_WHITE;
@@ -615,11 +616,24 @@ static void DrawLeftSideOptionText(int selection, int y)
     color_gray[0] = TEXT_COLOR_TRANSPARENT;
     color_gray[1] = TEXT_COLOR_WHITE;
     color_gray[2] = TEXT_COLOR_OPTIONS_GRAY_SHADOW;
+    color_red[0] = TEXT_COLOR_TRANSPARENT;
+    color_red[1] = TEXT_COLOR_OPTIONS_RED_FG;
+    color_red[2] = TEXT_COLOR_OPTIONS_GRAY_FG;
 
     if (CheckConditions(selection))
-        AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_yellow, TEXT_SKIP_DRAW, OptionTextRight(selection));
+    {
+        if (selection != MENUITEM_MAIN_DEFAULTS)
+            AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_yellow, TEXT_SKIP_DRAW, OptionTextRight(selection));
+        else
+            AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_red, TEXT_SKIP_DRAW, OptionTextRight(selection));
+    }
     else
-        AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_gray, TEXT_SKIP_DRAW, OptionTextRight(selection));
+    {
+        if (selection != MENUITEM_MAIN_DEFAULTS)
+            AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_gray, TEXT_SKIP_DRAW, OptionTextRight(selection));
+        else
+            AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_red, TEXT_SKIP_DRAW, OptionTextRight(selection));
+    }
 }
 
 static void DrawRightSideChoiceText(const u8 *text, int x, int y, bool8 chosen, bool8 active)
