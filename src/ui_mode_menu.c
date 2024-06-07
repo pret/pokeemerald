@@ -274,7 +274,7 @@ struct MainMenu
 };
 
 // Menu left side option names text
-static const u8 sText_Defaults[]    = _("DIFFICULTY");
+static const u8 sText_Defaults[]    = _("PRESETS");
 static const u8 sText_Autosave[]    = _("AUTOSAVE");
 static const u8 sText_BattleMode[]  = _("BATTLE MODE");
 static const u8 sText_Randomizer[]  = _("RANDOMIZER");
