@@ -249,6 +249,9 @@ static const u8 sText_EVO_ITEM_HOLD[] = _("{LV}{UP_ARROW}, holds {STR_VAR_2}");
 static const u8 sText_EVO_LEVEL_MOVE_TWENTY_TIMES[] = _("{LV}{UP_ARROW} after 20x {STR_VAR_2}");
 static const u8 sText_EVO_LEVEL_RECOIL_DAMAGE_MALE[] = _("{LV}{UP_ARROW} with {STR_VAR_2} recoil, male");
 static const u8 sText_EVO_LEVEL_RECOIL_DAMAGE_FEMALE[] = _("{LV}{UP_ARROW} with {STR_VAR_2} recoil, female");
+static const u8 sText_EVO_LEVEL_HOLD_ITEM[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, holds {STR_VAR_3}"); 
+static const u8 sText_EVO_ITEM_HOLD_ITEM[] = _("{STR_VAR_2} is used,\nholds {STR_VAR_3}");
+static const u8 sText_EVO_ITEM_SPECIFIC_MON_IN_PARTY[] = _("{STR_VAR_2} is used,\nwith {STR_VAR_3} in party");
 static const u8 sText_EVO_UNKNOWN[] = _("Method unknown");
 static const u8 sText_EVO_NONE[] = _("{STR_VAR_1} has no evolution.");
 
@@ -6765,6 +6768,73 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 dept
         case EVO_LEVEL_RECOIL_DAMAGE_FEMALE:
             ConvertIntToDecimalStringN(gStringVar2, evolutions[i].param, STR_CONV_MODE_LEADING_ZEROS, 3);
             StringExpandPlaceholders(gStringVar4, sText_EVO_LEVEL_RECOIL_DAMAGE_FEMALE);
+            break;
+        case EVO_LEVEL_HOLD_ITEM:
+            ConvertIntToDecimalStringN(gStringVar2, evolutions[i].param, STR_CONV_MODE_LEADING_ZEROS, EVO_SCREEN_LVL_DIGITS); //level
+            //handle special cases below
+            switch (species)
+            {
+                case SPECIES_RUFFLET:
+                    item = ITEM_PSYCHIC_MEMORY;
+                    break;
+                case SPECIES_GOOMY:
+                    item = ITEM_STEEL_MEMORY;
+                    break;
+                case SPECIES_BERGMITE:
+                    item = ITEM_ROCK_MEMORY;
+                    break;
+                case SPECIES_DARTRIX:
+                    item = ITEM_FIGHTING_MEMORY;
+                    break;
+                case SPECIES_CUBONE:
+                    item = ITEM_GHOST_MEMORY;
+                    break;
+                case SPECIES_KOFFING:
+                    item = ITEM_FAIRY_MEMORY;
+                    break;
+                case SPECIES_QUILAVA:
+                    item = ITEM_GHOST_MEMORY;
+                    break;
+                case SPECIES_DEWOTT:
+                    item = ITEM_DARK_MEMORY;
+                    break;
+            }
+            CopyItemName(item, gStringVar3);
+            StringExpandPlaceholders(gStringVar4, sText_EVO_LEVEL_HOLD_ITEM);
+            break;
+        case EVO_ITEM_HOLD_ITEM:
+            item = evolutions[i].param;
+            CopyItemName(item, gStringVar2);
+            //handle special cases below
+            switch (species)
+            {
+                case SPECIES_PIKACHU:
+                    item = ITEM_PSYCHIC_MEMORY;
+                    break;
+                case SPECIES_EXEGGCUTE:
+                    item = ITEM_DRAGON_MEMORY;
+                    break;
+                case SPECIES_PETILIL:
+                    item = ITEM_FIGHTING_MEMORY;
+                    break;
+            }
+            CopyItemName(item, gStringVar3);
+            StringExpandPlaceholders(gStringVar4, sText_EVO_ITEM_HOLD_ITEM);
+            break;
+        case EVO_ITEM_SPECIFIC_MON_IN_PARTY:
+            item = evolutions[i].param;
+            CopyItemName(item, gStringVar2);
+            //handle special cases below
+            switch (species)
+            {
+                case SPECIES_KARRABLAST:
+                    StringCopy(gStringVar3, GetSpeciesName(SPECIES_SHELMET)); //mon name
+                    break;
+                case SPECIES_SHELMET:
+                    StringCopy(gStringVar3, GetSpeciesName(SPECIES_KARRABLAST)); //mon name
+                    break;
+            }
+            StringExpandPlaceholders(gStringVar4, sText_EVO_ITEM_SPECIFIC_MON_IN_PARTY);
             break;
         default:
             StringExpandPlaceholders(gStringVar4, sText_EVO_UNKNOWN);

@@ -4981,7 +4981,7 @@ static u32 GetGMaxTargetSpecies(u32 species)
 
 u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, struct Pokemon *tradePartner)
 {
-    int i, j;
+    int i, j, k;
     u16 targetSpecies = SPECIES_NONE;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
     u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
@@ -5047,6 +5047,47 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
 
             switch (evolutions[i].method)
             {
+            case EVO_LEVEL_HOLD_ITEM:
+                if (evolutions[i].param <= level)
+                {
+                    //handle special cases below
+                    switch (GetMonData(mon, MON_DATA_SPECIES))
+                    {
+                        case SPECIES_RUFFLET:
+                            if (GetMonData(mon, MON_DATA_HELD_ITEM) == ITEM_PSYCHIC_MEMORY)
+                                targetSpecies = evolutions[i].targetSpecies;
+                            break;
+                        case SPECIES_GOOMY:
+                            if (GetMonData(mon, MON_DATA_HELD_ITEM) == ITEM_STEEL_MEMORY)
+                                targetSpecies = evolutions[i].targetSpecies;
+                            break;
+                        case SPECIES_BERGMITE:
+                            if (GetMonData(mon, MON_DATA_HELD_ITEM) == ITEM_ROCK_MEMORY)
+                                targetSpecies = evolutions[i].targetSpecies;
+                            break;
+                        case SPECIES_DARTRIX:
+                            if (GetMonData(mon, MON_DATA_HELD_ITEM) == ITEM_FIGHTING_MEMORY)
+                                targetSpecies = evolutions[i].targetSpecies;
+                            break;
+                        case SPECIES_CUBONE:
+                            if (GetMonData(mon, MON_DATA_HELD_ITEM) == ITEM_GHOST_MEMORY)
+                                targetSpecies = evolutions[i].targetSpecies;
+                            break;
+                        case SPECIES_KOFFING:
+                            if (GetMonData(mon, MON_DATA_HELD_ITEM) == ITEM_FAIRY_MEMORY)
+                                targetSpecies = evolutions[i].targetSpecies;
+                            break;
+                        case SPECIES_QUILAVA:
+                            if (GetMonData(mon, MON_DATA_HELD_ITEM) == ITEM_GHOST_MEMORY)
+                                targetSpecies = evolutions[i].targetSpecies;
+                            break;
+                        case SPECIES_DEWOTT:
+                            if (GetMonData(mon, MON_DATA_HELD_ITEM) == ITEM_DARK_MEMORY)
+                                targetSpecies = evolutions[i].targetSpecies;
+                            break;
+                    }
+                }
+                break;
             case EVO_FRIENDSHIP:
                 if (friendship >= FRIENDSHIP_EVO_THRESHOLD)
                     targetSpecies = evolutions[i].targetSpecies;
@@ -5310,6 +5351,27 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
 
             switch (evolutions[i].method)
             {
+            case EVO_ITEM_HOLD_ITEM:
+                if (evolutions[i].param == evolutionItem)
+                {
+                    switch(GetMonData(mon, MON_DATA_SPECIES))
+                    {
+                        case SPECIES_PIKACHU:
+                            if (GetMonData(mon, MON_DATA_HELD_ITEM) == ITEM_PSYCHIC_MEMORY)
+                                targetSpecies = evolutions[i].targetSpecies;
+                            break;
+                        case SPECIES_EXEGGCUTE:
+                            if (GetMonData(mon, MON_DATA_HELD_ITEM) == ITEM_DRAGON_MEMORY)
+                                targetSpecies = evolutions[i].targetSpecies;
+                            break;
+                        case SPECIES_PETILIL:
+                            if (GetMonData(mon, MON_DATA_HELD_ITEM) == ITEM_FIGHTING_MEMORY)
+                                targetSpecies = evolutions[i].targetSpecies;
+                            break;
+                    }
+                    targetSpecies = evolutions[i].targetSpecies;
+                }
+                break;
             case EVO_ITEM:
                 if (evolutions[i].param == evolutionItem)
                     targetSpecies = evolutions[i].targetSpecies;
@@ -5329,6 +5391,30 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
             case EVO_ITEM_DAY:
                 if (GetTimeOfDay() != TIME_NIGHT && evolutions[i].param == evolutionItem)
                     targetSpecies = evolutions[i].targetSpecies;
+                break;
+            case EVO_ITEM_SPECIFIC_MON_IN_PARTY:
+                if (evolutions[i].param == evolutionItem)
+                {
+                    switch(GetMonData(mon, MON_DATA_SPECIES))
+                    {
+                        case SPECIES_KARRABLAST:
+                            for (k=0; k<PARTY_SIZE; k++)
+                            {
+                                if (GetMonData(&gPlayerParty[k], MON_DATA_SPECIES) == SPECIES_SHELMET)
+                                targetSpecies = evolutions[i].targetSpecies;
+                            }
+                            DebugPrintf("target species = %d", targetSpecies);
+                            break;
+                        case SPECIES_SHELMET:
+                            for (k=0; k<PARTY_SIZE; k++)
+                            {
+                                if (GetMonData(&gPlayerParty[k], MON_DATA_SPECIES) == SPECIES_KARRABLAST)
+                                    targetSpecies = evolutions[i].targetSpecies;
+                            }
+                            DebugPrintf("target species = %d", targetSpecies);
+                            break;
+                    }
+                }
                 break;
             }
         }

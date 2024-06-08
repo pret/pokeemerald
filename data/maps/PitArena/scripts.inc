@@ -705,6 +705,7 @@ PitArena_Mart_EvoItems:
     .2byte ITEM_PRISM_SCALE
     .2byte ITEM_WHIPPED_DREAM
     .2byte ITEM_SACHET
+	.2byte ITEM_BLACK_AUGURITE
 	.2byte ITEM_PEAT_BLOCK
     .2byte ITEM_OVAL_STONE
     .2byte ITEM_SWEET_APPLE
