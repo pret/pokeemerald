@@ -3580,7 +3580,7 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
         case CANCELLER_MULTIHIT_MOVES:
             if (gMovesInfo[gCurrentMove].effect == EFFECT_MULTI_HIT)
             {
-                u16 ability = gBattleMons[gBattlerAttacker].ability;
+                u32 ability = GetBattlerAbility(gBattlerAttacker);
 
                 if (ability == ABILITY_SKILL_LINK)
                 {
@@ -11170,7 +11170,7 @@ void RemoveConfusionStatus(u32 battler)
 
 static bool32 CanBeInfinitelyConfused(u32 battler)
 {
-    if  (gBattleMons[battler].ability == ABILITY_OWN_TEMPO
+    if  (GetBattlerAbility(battler) == ABILITY_OWN_TEMPO
          || IsBattlerTerrainAffected(battler, STATUS_FIELD_MISTY_TERRAIN)
          || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD)
     {
