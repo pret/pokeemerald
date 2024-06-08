@@ -2265,7 +2265,7 @@ const struct Item gItemsInfo[] =
             "A nugget of pure\n"
             "gold. Can be sold at\n"
             "a high price."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 30,
