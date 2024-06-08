@@ -155,6 +155,7 @@ SINGLE_BATTLE_TEST("Clear Body doesn't prevent Speed reduction from Iron Ball")
     } WHEN {
         TURN { }
     } SCENE {
+        NOT ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
         if (heldItem == ITEM_IRON_BALL) {
             MESSAGE("Wobbuffet used Celebrate!");
             MESSAGE("Foe Beldum used Celebrate!");
@@ -174,6 +175,7 @@ SINGLE_BATTLE_TEST("Clear Body doesn't prevent Speed reduction from paralysis")
         TURN { MOVE(player, MOVE_THUNDER_WAVE); }
         TURN { MOVE(player, MOVE_THUNDER_WAVE); }
     } SCENE {
+        NOT ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
         MESSAGE("Foe Beldum used Celebrate!");
         MESSAGE("Wobbuffet used Thunder Wave!");
         MESSAGE("Wobbuffet used Thunder Wave!");
@@ -196,6 +198,7 @@ SINGLE_BATTLE_TEST("Clear Body doesn't prevent Attack reduction from burn", s16 
     } WHEN {
         TURN { MOVE(opponent, MOVE_TACKLE); }
     } SCENE {
+        NOT ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
         HP_BAR(player, captureDamage: &results[i].damage);
     } FINALLY {
         EXPECT_MUL_EQ(results[0].damage, Q_4_12(0.5), results[1].damage);
@@ -214,6 +217,7 @@ SINGLE_BATTLE_TEST("Clear Body doesn't prevent receiving negative stat changes f
         TURN { MOVE(player, MOVE_SCARY_FACE); MOVE(opponent, MOVE_BATON_PASS); SEND_OUT(opponent, 1); }
         TURN { MOVE(player, MOVE_SCARY_FACE); }
     } SCENE {
+        NOT ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
         MESSAGE("Wobbuffet used Scary Face!");
         MESSAGE("Foe Beldum used Celebrate!");
     }
@@ -233,6 +237,7 @@ SINGLE_BATTLE_TEST("Clear Body doesn't prevent Topsy-Turvy")
         TURN { MOVE(player, MOVE_TOPSY_TURVY); }
         TURN { MOVE(player, MOVE_SCARY_FACE); }
     } SCENE {
+        NOT ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
         MESSAGE("Wobbuffet used Topsy-Turvy!");
         MESSAGE("Foe Beldum used Celebrate!");
         MESSAGE("Foe Beldum used Celebrate!");
@@ -245,18 +250,19 @@ SINGLE_BATTLE_TEST("Clear Body doesn't prevent Spectral Thief from resetting pos
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_SPECTRAL_THIEF, MOVE_EFFECT_SPECTRAL_THIEF) == TRUE);
         ASSUME(gMovesInfo[MOVE_AGILITY].effect == EFFECT_SPEED_UP_2);
-        PLAYER(SPECIES_WOBBUFFET) { Speed(4); Moves(MOVE_SPECTRAL_THIEF, MOVE_CELEBRATE); }
-        OPPONENT(SPECIES_BELDUM) { Speed(5); Ability(ABILITY_CLEAR_BODY); Moves(MOVE_AGILITY, MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
+        OPPONENT(SPECIES_METANG) { Speed(5); Ability(ABILITY_CLEAR_BODY); }
     } WHEN {
         TURN{ MOVE(opponent, MOVE_AGILITY); }
         TURN{ MOVE(player, MOVE_SPECTRAL_THIEF); }
         TURN{ }
     } SCENE {
-        MESSAGE("Foe Beldum used Agility!");
+        NOT ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
+        MESSAGE("Foe Metang used Agility!");
         MESSAGE("Wobbuffet used Celebrate!");
-        MESSAGE("Foe Beldum used Celebrate!");
+        MESSAGE("Foe Metang used Celebrate!");
         MESSAGE("Wobbuffet used SpectrlThief!");
         MESSAGE("Wobbuffet used Celebrate!");
-        MESSAGE("Foe Beldum used Celebrate!");
+        MESSAGE("Foe Metang used Celebrate!");
     }
 }
