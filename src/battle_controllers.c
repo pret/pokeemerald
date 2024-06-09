@@ -2507,6 +2507,8 @@ void BtlController_HandleDrawTrainerPic(u32 battler, u32 trainerPicId, bool32 is
                     trainerPicId = TRAINER_BACK_PIC_LEAF;
                 else if(gSaveBlock2Ptr->playerGfxType == 2)
                     trainerPicId = TRAINER_BACK_PIC_DAWN;
+                else if(gSaveBlock2Ptr->playerGfxType == 3)
+                    trainerPicId = TRAINER_BACK_PIC_CYNTHIA;
                 else
                     trainerPicId = TRAINER_BACK_PIC_MAY;
             }
@@ -2516,6 +2518,8 @@ void BtlController_HandleDrawTrainerPic(u32 battler, u32 trainerPicId, bool32 is
                     trainerPicId = TRAINER_BACK_PIC_RED;
                 else if(gSaveBlock2Ptr->playerGfxType == 2)
                     trainerPicId = TRAINER_BACK_PIC_LUCAS;
+                else if(gSaveBlock2Ptr->playerGfxType == 3)
+                    trainerPicId = TRAINER_BACK_PIC_STEVEN;
                 else
                     trainerPicId = TRAINER_BACK_PIC_BRENDAN;
             }
@@ -2548,6 +2552,8 @@ void BtlController_HandleTrainerSlide(u32 battler, u32 trainerPicId)
                 trainerPicId = TRAINER_BACK_PIC_LEAF;
             else if(gSaveBlock2Ptr->playerGfxType == 2)
                 trainerPicId = TRAINER_BACK_PIC_DAWN;
+            else if(gSaveBlock2Ptr->playerGfxType == 3)
+                    trainerPicId = TRAINER_BACK_PIC_CYNTHIA;
             else
                 trainerPicId = TRAINER_BACK_PIC_MAY;
         }
@@ -2557,6 +2563,8 @@ void BtlController_HandleTrainerSlide(u32 battler, u32 trainerPicId)
                 trainerPicId = TRAINER_BACK_PIC_RED;
             else if(gSaveBlock2Ptr->playerGfxType == 2)
                 trainerPicId = TRAINER_BACK_PIC_LUCAS;
+            else if(gSaveBlock2Ptr->playerGfxType == 3)
+                    trainerPicId = TRAINER_BACK_PIC_STEVEN;
             else
                 trainerPicId = TRAINER_BACK_PIC_BRENDAN;
         }

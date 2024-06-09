@@ -232,6 +232,11 @@ static const u32 sLucasMugshot_Gfx[] = INCBIN_U32("graphics/ui_main_menu/lucas_m
 static const u16 sDawnMugshot_Pal[] = INCBIN_U16("graphics/ui_main_menu/dawn_mugshot.gbapal");
 static const u32 sDawnMugshot_Gfx[] = INCBIN_U32("graphics/ui_main_menu/dawn_mugshot.4bpp.lz");
 
+static const u16 sStevenMugshot_Pal[] = INCBIN_U16("graphics/ui_main_menu/steven.gbapal");
+static const u32 sStevenMugshot_Gfx[] = INCBIN_U32("graphics/ui_main_menu/steven.4bpp.lz");
+static const u16 sCynthiaMugshot_Pal[] = INCBIN_U16("graphics/ui_main_menu/cynthia.gbapal");
+static const u32 sCynthiaMugshot_Gfx[] = INCBIN_U32("graphics/ui_main_menu/cynthia.4bpp.lz");
+
 //
 //  Sprite Data for Mugshots and Icon Shadows 
 //
@@ -319,6 +324,32 @@ static const struct CompressedSpriteSheet sSpriteSheet_DawnMugshot =
 static const struct SpritePalette sSpritePal_DawnMugshot =
 {
     .data = sDawnMugshot_Pal,
+    .tag = TAG_MUGSHOT
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_StevenMugshot =
+{
+    .data = sStevenMugshot_Gfx,
+    .size = 64*64*1/2,
+    .tag = TAG_MUGSHOT,
+};
+
+static const struct SpritePalette sSpritePal_StevenMugshot =
+{
+    .data = sStevenMugshot_Pal,
+    .tag = TAG_MUGSHOT
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_CynthiaMugshot =
+{
+    .data = sCynthiaMugshot_Gfx,
+    .size = 64*64*1/2,
+    .tag = TAG_MUGSHOT,
+};
+
+static const struct SpritePalette sSpritePal_CynthiaMugshot =
+{
+    .data = sCynthiaMugshot_Pal,
     .tag = TAG_MUGSHOT
 };
 
@@ -719,6 +750,11 @@ static bool8 MainMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spr
                 LoadCompressedSpriteSheet(&sSpriteSheet_LucasMugshot);
                 LoadSpritePalette(&sSpritePal_LucasMugshot);
             }
+            else if(gSaveBlock2Ptr->playerGfxType == 3)
+            {
+                LoadCompressedSpriteSheet(&sSpriteSheet_StevenMugshot);
+                LoadSpritePalette(&sSpritePal_StevenMugshot);
+            }
             else
             {
                 LoadCompressedSpriteSheet(&sSpriteSheet_BrendanMugshot);
@@ -740,6 +776,11 @@ static bool8 MainMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spr
             {
                 LoadCompressedSpriteSheet(&sSpriteSheet_DawnMugshot);
                 LoadSpritePalette(&sSpritePal_DawnMugshot);
+            }
+            else if(gSaveBlock2Ptr->playerGfxType == 3)
+            {
+                LoadCompressedSpriteSheet(&sSpriteSheet_CynthiaMugshot);
+                LoadSpritePalette(&sSpritePal_CynthiaMugshot);
             }
             else
             {

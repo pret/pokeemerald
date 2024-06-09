@@ -1889,6 +1889,8 @@ static void CreateTrainerCardTrainerPic(void)
             facilityClass = FacilityClassToPicIndex(FACILITY_CLASS_LEAF);
         else if(gSaveBlock2Ptr->playerGfxType == 2)
             facilityClass = TRAINER_PIC_DAWN;
+        else if(gSaveBlock2Ptr->playerGfxType == 3)
+            facilityClass = TRAINER_PIC_CYNTHIA;
         else
             facilityClass = FacilityClassToPicIndex(FACILITY_CLASS_MAY);
     }
@@ -1898,6 +1900,8 @@ static void CreateTrainerCardTrainerPic(void)
             facilityClass = FacilityClassToPicIndex(FACILITY_CLASS_RED);
         else if(gSaveBlock2Ptr->playerGfxType == 2)
             facilityClass = TRAINER_PIC_LUCAS;
+        else if(gSaveBlock2Ptr->playerGfxType == 3)
+            facilityClass = TRAINER_PIC_STEVEN;
         else 
             facilityClass = FacilityClassToPicIndex(FACILITY_CLASS_BRENDAN);
     }
