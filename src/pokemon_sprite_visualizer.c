@@ -25,7 +25,7 @@
 #include "pokedex.h"
 #include "pokemon.h"
 #include "pokemon_animation.h"
-#include "pokemon_debug.h"
+#include "pokemon_sprite_visualizer.h"
 #include "pokemon_icon.h"
 #include "reset_rtc_screen.h"
 #include "scanline_effect.h"
@@ -41,7 +41,7 @@
 #include "constants/items.h"
 #include "constants/event_objects.h"
 
-#if DEBUG_POKEMON_MENU == TRUE
+#if DEBUG_POKEMON_SPRITE_VISUALIZER == TRUE
 extern const struct BattleBackground sBattleTerrainTable[];
 extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
 extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;
@@ -49,11 +49,11 @@ extern const struct SpritePalette sSpritePalettes_HealthBoxHealthBar[2];
 extern const struct UCoords8 sBattlerCoords[][MAX_BATTLERS_COUNT] ;
 static const u16 sBgColor[] = {RGB_WHITE};
 
-static struct PokemonDebugMenu *GetStructPtr(u8 taskId)
+static struct PokemonSpriteVisualizer *GetStructPtr(u8 taskId)
 {
     u8 *taskDataPtr = (u8 *)(&gTasks[taskId].data[0]);
 
-    return (struct PokemonDebugMenu*)(T1_READ_PTR(taskDataPtr));
+    return (struct PokemonSpriteVisualizer*)(T1_READ_PTR(taskDataPtr));
 }
 
 static const union AnimCmd sAnim_Follower_1[] =
@@ -129,7 +129,7 @@ static const struct BgTemplate sBgTemplates[] =
 };
 
 //WindowTemplates
-static const struct WindowTemplate sPokemonDebugWindowTemplate[] =
+static const struct WindowTemplate sPokemonSpriteVisualizerWindowTemplate[] =
 {
     [WIN_NAME_NUMBERS] = {
         .bg = 0,
@@ -398,16 +398,16 @@ const u8 gBattleBackgroundTerrainNames[][26] =
     [BATTLE_TERRAIN_PLAIN]      = _("NORMAL - PLAIN           "),
 };
 //Function declarations
-static void PrintDigitChars(struct PokemonDebugMenu *data);
-static void SetUpModifyArrows(struct PokemonDebugMenu *data);
-static void UpdateBattlerValue(struct PokemonDebugMenu *data);
+static void PrintDigitChars(struct PokemonSpriteVisualizer *data);
+static void SetUpModifyArrows(struct PokemonSpriteVisualizer *data);
+static void UpdateBattlerValue(struct PokemonSpriteVisualizer *data);
 static void ValueToCharDigits(u8 *charDigits, u32 newValue, u8 maxDigits);
-static bool32 TryMoveDigit(struct PokemonDebugModifyArrows *modArrows, bool32 moveUp);
-static void CB2_Debug_Runner(void);
-static void ResetBGs_Debug_Menu(u16);
-static void Handle_Input_Debug_Pokemon(u8);
-static void ReloadPokemonSprites(struct PokemonDebugMenu *data);
-static void Exit_Debug_Pokemon(u8);
+static bool32 TryMoveDigit(struct PokemonSpriteVisualizerModifyArrows *modArrows, bool32 moveUp);
+static void CB2_PokemonSpriteVisualizerRunner(void);
+static void ResetBGs_PokemonSpriteVisualizer(u16);
+static void HandleInput_PokemonSpriteVisualizer(u8);
+static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data);
+static void Exit_PokemonSpriteVisualizer(u8);
 
 //Text handling functions
 static void UNUSED PadString(const u8 *src, u8 *dst)
@@ -423,7 +423,7 @@ static void UNUSED PadString(const u8 *src, u8 *dst)
     dst[i] = EOS;
 }
 
-static void PrintInstructionsOnWindow(struct PokemonDebugMenu *data)
+static void PrintInstructionsOnWindow(struct PokemonSpriteVisualizer *data)
 {
     u8 fontId = 0;
     u8 x = 2;
@@ -503,7 +503,7 @@ static void SetStructPtr(u8 taskId, void *ptr)
 
 //Digit and arrow functions
 #define VAL_U16     0
-static void PrintDigitChars(struct PokemonDebugMenu *data)
+static void PrintDigitChars(struct PokemonSpriteVisualizer *data)
 {
     s32 i;
     u16 species = data->modifyArrows.currValue;
@@ -572,7 +572,7 @@ static void ValueToCharDigits(u8 *charDigits, u32 newValue, u8 maxDigits)
         charDigits[i] = valueDigits[i] + CHAR_0;
 }
 
-static void SetArrowInvisibility(struct PokemonDebugMenu *data)
+static void SetArrowInvisibility(struct PokemonSpriteVisualizer *data)
 {
     switch (data->currentSubmenu)
     {
@@ -597,7 +597,7 @@ static void SetArrowInvisibility(struct PokemonDebugMenu *data)
     }
 }
 
-static void SetUpModifyArrows(struct PokemonDebugMenu *data)
+static void SetUpModifyArrows(struct PokemonSpriteVisualizer *data)
 {
     LoadSpritePalette(&gSpritePalette_Arrow);
     data->modifyArrows.arrowSpriteId[0] = CreateSprite(&gSpriteTemplate_Arrow, MODIFY_DIGITS_ARROW_X, MODIFY_DIGITS_ARROW1_Y, 0);
@@ -615,7 +615,7 @@ static void SetUpModifyArrows(struct PokemonDebugMenu *data)
     ValueToCharDigits(data->modifyArrows.charDigits, data->modifyArrows.currValue, data->modifyArrows.maxDigits);
 }
 
-static void SetUpOptionArrows(struct PokemonDebugMenu *data)
+static void SetUpOptionArrows(struct PokemonSpriteVisualizer *data)
 {
     LoadSpritePalette(&gSpritePalette_Arrow);
     data->optionArrows.arrowSpriteId[0] = CreateSprite(&gSpriteTemplate_Arrow, OPTIONS_ARROW_1_X, OPTIONS_ARROW_Y, 0);
@@ -626,7 +626,7 @@ static void SetUpOptionArrows(struct PokemonDebugMenu *data)
     gSprites[data->optionArrows.arrowSpriteId[0]].invisible = TRUE;
 }
 
-static void SetUpYPosModifyArrows(struct PokemonDebugMenu *data)
+static void SetUpYPosModifyArrows(struct PokemonSpriteVisualizer *data)
 {
     LoadSpritePalette(&gSpritePalette_Arrow);
     data->yPosModifyArrows.arrowSpriteId[0] = CreateSprite(&gSpriteTemplate_Arrow, OPTIONS_ARROW_1_X, OPTIONS_ARROW_Y, 0);
@@ -637,7 +637,7 @@ static void SetUpYPosModifyArrows(struct PokemonDebugMenu *data)
     gSprites[data->yPosModifyArrows.arrowSpriteId[0]].invisible = TRUE;
 }
 
-static bool32 TryMoveDigit(struct PokemonDebugModifyArrows *modArrows, bool32 moveUp)
+static bool32 TryMoveDigit(struct PokemonSpriteVisualizerModifyArrows *modArrows, bool32 moveUp)
 {
     s32 i;
     u8 charDigits[MODIFY_DIGITS_MAX];
@@ -701,7 +701,7 @@ static bool32 TryMoveDigit(struct PokemonDebugModifyArrows *modArrows, bool32 mo
     }
 }
 
-static void UpdateBattlerValue(struct PokemonDebugMenu *data)
+static void UpdateBattlerValue(struct PokemonSpriteVisualizer *data)
 {
     switch (data->modifyArrows.typeOfVal)
     {
@@ -721,7 +721,7 @@ static void BattleLoadOpponentMonSpriteGfxCustom(u16 species, bool8 isFemale, bo
     LoadPalette(gDecompressionBuffer, BG_PLTT_ID(8) + BG_PLTT_ID(battlerId), PLTT_SIZE_4BPP);
 }
 
-static void SetConstSpriteValues(struct PokemonDebugMenu *data)
+static void SetConstSpriteValues(struct PokemonSpriteVisualizer *data)
 {
     u16 species = data->currentmonId;
     data->constSpriteValues.frontPicCoords = gSpeciesInfo[species].frontPicYOffset;
@@ -729,7 +729,7 @@ static void SetConstSpriteValues(struct PokemonDebugMenu *data)
     data->constSpriteValues.backPicCoords = gSpeciesInfo[species].backPicYOffset;
 }
 
-static void ResetOffsetSpriteValues(struct PokemonDebugMenu *data)
+static void ResetOffsetSpriteValues(struct PokemonSpriteVisualizer *data)
 {
     data->offsetsSpriteValues.offset_back_picCoords = 0;
     data->offsetsSpriteValues.offset_front_picCoords = 0;
@@ -757,7 +757,7 @@ static u8 GetBattlerSpriteFinal_YCustom(u16 species, s8 offset_picCoords, s8 off
     return y;
 }
 
-static void UpdateShadowSpriteInvisible(struct PokemonDebugMenu *data)
+static void UpdateShadowSpriteInvisible(struct PokemonSpriteVisualizer *data)
 {
     if (data->constSpriteValues.frontElevation + data->offsetsSpriteValues.offset_front_elevation == 0)
         gSprites[data->frontShadowSpriteId].invisible = TRUE;
@@ -803,7 +803,7 @@ static void SpriteCB_Follower(struct Sprite *sprite)
     }
 }
 
-static void LoadAndCreateEnemyShadowSpriteCustom(struct PokemonDebugMenu *data, u16 species)
+static void LoadAndCreateEnemyShadowSpriteCustom(struct PokemonSpriteVisualizer *data, u16 species)
 {
     u8 x, y;
     bool8 invisible = FALSE;
@@ -903,7 +903,7 @@ static void LoadBattleBg(u8 battleBgType, u8 battleTerrain)
 }
 static void PrintBattleBgName(u8 taskId)
 {
-    struct PokemonDebugMenu *data = GetStructPtr(taskId);
+    struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
     u8 fontId = 0;
     u8 text[30+1];
 
@@ -915,7 +915,7 @@ static void PrintBattleBgName(u8 taskId)
 }
 static void UpdateBattleBg(u8 taskId, bool8 increment)
 {
-    struct PokemonDebugMenu *data = GetStructPtr(taskId);
+    struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
 
     if (data->battleBgType == MAP_BATTLE_SCENE_NORMAL)
     {
@@ -971,7 +971,7 @@ static void UpdateBattleBg(u8 taskId, bool8 increment)
 // Main functions
 static void UpdateMonAnimNames(u8 taskId)
 {
-    struct PokemonDebugMenu *data = GetStructPtr(taskId);
+    struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
     u8 frontAnim = data->animIdFront;
     u8 backAnim = data->animIdBack;
     u8 text[34];
@@ -994,7 +994,7 @@ static void UpdateMonAnimNames(u8 taskId)
     PrintBattleBgName(taskId);
 }
 
-static void UpdateYPosOffsetText(struct PokemonDebugMenu *data)
+static void UpdateYPosOffsetText(struct PokemonSpriteVisualizer *data)
 {
     u8 text[34];
     u8 fontId = 0;
@@ -1045,12 +1045,12 @@ static void UpdateYPosOffsetText(struct PokemonDebugMenu *data)
     AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, x_new_val, y, 0, NULL);
 }
 
-static void ResetPokemonDebugWindows(void)
+static void ResetPokemonSpriteVisualizerWindows(void)
 {
     u8 i;
 
     FreeAllWindowBuffers();
-    InitWindows(sPokemonDebugWindowTemplate);
+    InitWindows(sPokemonSpriteVisualizerWindowTemplate);
 
     for (i = 0; i < WIN_END + 1; i++)
     {
@@ -1063,11 +1063,11 @@ static void ResetPokemonDebugWindows(void)
 #define MALE_PERSONALITY 0xFE
 #define FEMALE_PERSONALITY 0X0
 
-void CB2_Debug_Pokemon(void)
+void CB2_Pokemon_Sprite_Visualizer(void)
 {
     u8 taskId;
     const u32 *palette;
-    struct PokemonDebugMenu *data;
+    struct PokemonSpriteVisualizer *data;
     u16 species;
     s16 offset_y;
     u8 front_x = sBattlerCoords[0][1].x;
@@ -1079,7 +1079,7 @@ void CB2_Debug_Pokemon(void)
         default:
             SetVBlankCallback(NULL);
             FreeMonSpritesGfx();
-            ResetBGs_Debug_Menu(0);
+            ResetBGs_PokemonSpriteVisualizer(0);
             DmaFillLarge16(3, 0, (u8 *)VRAM, VRAM_SIZE, 0x1000)
             DmaClear32(3, OAM, OAM_SIZE);
             DmaClear16(3, PLTT, PLTT_SIZE);
@@ -1103,7 +1103,7 @@ void CB2_Debug_Pokemon(void)
             gMain.state++;
             break;
         case 2:
-            ResetPokemonDebugWindows();
+            ResetPokemonSpriteVisualizerWindows();
             gMain.state++;
             break;
         case 3:
@@ -1119,9 +1119,9 @@ void CB2_Debug_Pokemon(void)
             ShowBg(3);
 
             //input task handler
-            taskId = CreateTask(Handle_Input_Debug_Pokemon, 0);
+            taskId = CreateTask(HandleInput_PokemonSpriteVisualizer, 0);
 
-            data = AllocZeroed(sizeof(struct PokemonDebugMenu));
+            data = AllocZeroed(sizeof(struct PokemonSpriteVisualizer));
             SetStructPtr(taskId, data);
 
             data->currentmonId = SPECIES_BULBASAUR;
@@ -1153,17 +1153,17 @@ void CB2_Debug_Pokemon(void)
             BattleLoadOpponentMonSpriteGfxCustom(species, data->isFemale, data->isShiny, 4);
             SetMultiuseSpriteTemplateToPokemon(species, 2);
             offset_y = gSpeciesInfo[species].backPicYOffset;
-            data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_BACK_X, DEBUG_MON_BACK_Y + offset_y, 0);
+            data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, VISUALIZER_MON_BACK_X, VISUALIZER_MON_BACK_Y + offset_y, 0);
             gSprites[data->backspriteId].oam.paletteNum = 4;
             gSprites[data->backspriteId].callback = SpriteCallbackDummy;
             gSprites[data->backspriteId].oam.priority = 0;
 
             //Icon Sprite
-            data->iconspriteId = CreateMonIcon(species, SpriteCB_MonIcon, DEBUG_ICON_X, DEBUG_ICON_Y, 4, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
+            data->iconspriteId = CreateMonIcon(species, SpriteCB_MonIcon, VISUALIZER_ICON_X, VISUALIZER_ICON_Y, 4, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
             gSprites[data->iconspriteId].oam.priority = 0;
 
             //Follower Sprite
-            data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species, SpriteCB_Follower, DEBUG_FOLLOWER_X, DEBUG_FOLLOWER_Y, 0);
+            data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species, SpriteCB_Follower, VISUALIZER_FOLLOWER_X, VISUALIZER_FOLLOWER_Y, 0);
             gSprites[data->followerspriteId].oam.priority = 0;
             gSprites[data->followerspriteId].anims = sAnims_Follower;
 
@@ -1194,13 +1194,13 @@ void CB2_Debug_Pokemon(void)
         case 4:
             EnableInterrupts(1);
             SetVBlankCallback(VBlankCB);
-            SetMainCallback2(CB2_Debug_Runner);
+            SetMainCallback2(CB2_PokemonSpriteVisualizerRunner);
             m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x80);
             break;
     }
 }
 
-static void CB2_Debug_Runner(void)
+static void CB2_PokemonSpriteVisualizerRunner(void)
 {
     RunTasks();
     AnimateSprites();
@@ -1208,7 +1208,7 @@ static void CB2_Debug_Runner(void)
     UpdatePaletteFade();
 }
 
-static void ResetBGs_Debug_Menu(u16 a)
+static void ResetBGs_PokemonSpriteVisualizer(u16 a)
 {
     if (!(a & DISPCNT_BG0_ON))
     {
@@ -1247,11 +1247,11 @@ static void ResetBGs_Debug_Menu(u16 a)
     }
 }
 
-static void ApplyOffsetSpriteValues(struct PokemonDebugMenu *data)
+static void ApplyOffsetSpriteValues(struct PokemonSpriteVisualizer *data)
 {
     u16 species = data->currentmonId;
     //Back
-    gSprites[data->backspriteId].y = DEBUG_MON_BACK_Y + gSpeciesInfo[species].backPicYOffset + data->offsetsSpriteValues.offset_back_picCoords;
+    gSprites[data->backspriteId].y = VISUALIZER_MON_BACK_Y + gSpeciesInfo[species].backPicYOffset + data->offsetsSpriteValues.offset_back_picCoords;
     //Front
     gSprites[data->frontspriteId].y = GetBattlerSpriteFinal_YCustom(species, data->offsetsSpriteValues.offset_front_picCoords, data->offsetsSpriteValues.offset_front_elevation);
 
@@ -1261,7 +1261,7 @@ static void ApplyOffsetSpriteValues(struct PokemonDebugMenu *data)
 
 static void UpdateSubmenuOneOptionValue(u8 taskId, bool8 increment)
 {
-    struct PokemonDebugMenu *data = GetStructPtr(taskId);
+    struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
     u8 option = data->submenuYpos[1];
 
     switch (option)
@@ -1306,7 +1306,7 @@ static void UpdateSubmenuOneOptionValue(u8 taskId, bool8 increment)
     case 3:
         if (GetSpeciesFormTable(data->currentmonId) != NULL)
         {
-            struct PokemonDebugModifyArrows *modArrows = &data->modifyArrows;
+            struct PokemonSpriteVisualizerModifyArrows *modArrows = &data->modifyArrows;
             u8 formId = GetFormIdFromFormSpeciesId(data->currentmonId);
             const u16 *formTable = GetSpeciesFormTable(data->currentmonId);
             if (increment)
@@ -1349,7 +1349,7 @@ static void UpdateSubmenuOneOptionValue(u8 taskId, bool8 increment)
 
 static void UpdateSubmenuTwoOptionValue(u8 taskId, bool8 increment)
 {
-    struct PokemonDebugMenu *data = GetStructPtr(taskId);
+    struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
     u16 species = data->currentmonId;
     u8 option = data->submenuYpos[2];
     s8 offset;
@@ -1374,7 +1374,7 @@ static void UpdateSubmenuTwoOptionValue(u8 taskId, bool8 increment)
                 offset -= 1;
         }
         data->offsetsSpriteValues.offset_back_picCoords = offset;
-        gSprites[data->backspriteId].y = DEBUG_MON_BACK_Y + gSpeciesInfo[species].backPicYOffset + offset;
+        gSprites[data->backspriteId].y = VISUALIZER_MON_BACK_Y + gSpeciesInfo[species].backPicYOffset + offset;
         break;
     case 1: //Front picCoords
         offset = data->offsetsSpriteValues.offset_front_picCoords;
@@ -1445,9 +1445,9 @@ static void Task_AnimateAfterDelay(u8 taskId)
     }
 }
 
-static void Handle_Input_Debug_Pokemon(u8 taskId)
+static void HandleInput_PokemonSpriteVisualizer(u8 taskId)
 {
-    struct PokemonDebugMenu *data = GetStructPtr(taskId);
+    struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
     struct Sprite *Frontsprite = &gSprites[data->frontspriteId];
     struct Sprite *Backsprite = &gSprites[data->backspriteId];
 
@@ -1508,7 +1508,7 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
         else if (JOY_NEW(B_BUTTON))
         {
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
-            gTasks[taskId].func = Exit_Debug_Pokemon;
+            gTasks[taskId].func = Exit_PokemonSpriteVisualizer;
             PlaySE(SE_PC_OFF);
         }
         else if (JOY_NEW(DPAD_DOWN))
@@ -1662,7 +1662,7 @@ static void Handle_Input_Debug_Pokemon(u8 taskId)
 #undef sDelay
 #undef sAnimId
 
-static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
+static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
 {
     const u32 *palette;
     u16 species = data->currentmonId;
@@ -1709,20 +1709,20 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     BattleLoadOpponentMonSpriteGfxCustom(species, data->isFemale, data->isShiny, 5);
     SetMultiuseSpriteTemplateToPokemon(species, 2);
     offset_y = gSpeciesInfo[species].backPicYOffset;
-    data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_BACK_X, DEBUG_MON_BACK_Y + offset_y, 0);
+    data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, VISUALIZER_MON_BACK_X, VISUALIZER_MON_BACK_Y + offset_y, 0);
     gSprites[data->backspriteId].oam.paletteNum = 5;
     gSprites[data->backspriteId].callback = SpriteCallbackDummy;
     gSprites[data->backspriteId].oam.priority = 0;
 
     //Icon Sprite
-    data->iconspriteId = CreateMonIcon(species, SpriteCB_MonIcon, DEBUG_ICON_X, DEBUG_ICON_Y, 4, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
+    data->iconspriteId = CreateMonIcon(species, SpriteCB_MonIcon, VISUALIZER_ICON_X, VISUALIZER_ICON_Y, 4, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
     gSprites[data->iconspriteId].oam.priority = 0;
 
     //Follower Sprite
     data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species + (data->isShiny ? SPECIES_SHINY_TAG : 0),
                                                         SpriteCB_Follower,
-                                                        DEBUG_FOLLOWER_X,
-                                                        DEBUG_FOLLOWER_Y,
+                                                        VISUALIZER_FOLLOWER_X,
+                                                        VISUALIZER_FOLLOWER_Y,
                                                         0);
     gSprites[data->followerspriteId].oam.priority = 0;
     gSprites[data->followerspriteId].anims = sAnims_Follower;
@@ -1751,11 +1751,11 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     CopyWindowToVram(WIN_FOOTPRINT, COPYWIN_GFX);
 }
 
-static void Exit_Debug_Pokemon(u8 taskId)
+static void Exit_PokemonSpriteVisualizer(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        struct PokemonDebugMenu *data = GetStructPtr(taskId);
+        struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
         Free(data);
         FreeMonSpritesGfx();
         DestroyTask(taskId);
