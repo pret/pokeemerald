@@ -43,7 +43,6 @@ Route111_EventScript_SecretPowerMan::
 	end
 
 Route111_EventScript_GiveSecretPower::
-	giveitem ITEM_TM_SCALD
 	goto_if_eq VAR_RESULT, FALSE, Route111_EventScript_NoRoomForSecretPower
 	msgbox Route111_Text_ExplainSecretPower, MSGBOX_DEFAULT
 	closemessage
