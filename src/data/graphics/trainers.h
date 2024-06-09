@@ -289,6 +289,9 @@ const u32 gTrainerPalette_Cynthia[] = INCBIN_U32("graphics/trainers/front_pics/c
 const u32 gTrainerBackPalette_Steven[] = INCBIN_U32("graphics/trainers/back_pics/steven.gbapal.lz");
 const u32 gTrainerBackPalette_Cynthia[] = INCBIN_U32("graphics/trainers/back_pics/cynthia.gbapal.lz");
 
+const u32 gTrainerFrontPic_Oak[] = INCBIN_U32("graphics/trainers/front_pics/oak.4bpp.lz");
+const u32 gTrainerPalette_Oak[] = INCBIN_U32("graphics/trainers/front_pics/oak.gbapal.lz");
+
 const u8 gTrainerBackPic_Brendan[] = INCBIN_U8("graphics/trainers/back_pics/brendan.4bpp");
 const u8 gTrainerBackPic_May[] = INCBIN_U8("graphics/trainers/back_pics/may.4bpp");
 const u8 gTrainerBackPic_Red[] = INCBIN_U8("graphics/trainers/back_pics/red.4bpp");
@@ -297,6 +300,11 @@ const u8 gTrainerBackPic_Lucas[] = INCBIN_U8("graphics/trainers/back_pics/lucas.
 const u8 gTrainerBackPic_Dawn[] = INCBIN_U8("graphics/trainers/back_pics/dawn.4bpp");
 const u8 gTrainerBackPic_Cynthia[] = INCBIN_U8("graphics/trainers/back_pics/cynthia.4bpp");
 const u8 gTrainerBackPic_Steven[] = INCBIN_U8("graphics/trainers/back_pics/steven.4bpp");
+const u8 gTrainerBackPic_Phoebe[] = INCBIN_U8("graphics/trainers/back_pics/phoebe.4bpp");
+const u8 gTrainerBackPic_Oak[]    = INCBIN_U8("graphics/trainers/back_pics/oak.4bpp");
+
+const u32 gTrainerBackPalette_Oak[] = INCBIN_U32("graphics/trainers/back_pics/oak.gbapal.lz");
+const u32 gTrainerBackPalette_Phoebe[] = INCBIN_U32("graphics/trainers/back_pics/phoebe.gbapal.lz");
 
 const u32 gTrainerBackPicPalette_Red[] = INCBIN_U32("graphics/trainers/back_pics/red.gbapal.lz");
 const u32 gTrainerBackPicPalette_Leaf[] = INCBIN_U32("graphics/trainers/back_pics/leaf.gbapal.lz");
@@ -411,6 +419,7 @@ const struct TrainerSprite gTrainerSprites[] =
     TRAINER_SPRITE(LUCAS, Lucas),
     TRAINER_SPRITE(DAWN, Dawn),
     TRAINER_SPRITE(CYNTHIA, Cynthia),
+    TRAINER_SPRITE(OAK, Oak),
 };
 
 static const union AnimCmd sAnimCmd_Hoenn[] =
@@ -511,6 +520,22 @@ const struct SpriteFrameImage gTrainerBackPicTable_Steven[] =
     {gTrainerBackPic_Steven + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
 };
 
+const struct SpriteFrameImage gTrainerBackPicTable_Phoebe[] =
+{
+    {gTrainerBackPic_Phoebe + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
+    {gTrainerBackPic_Phoebe + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
+    {gTrainerBackPic_Phoebe + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
+    {gTrainerBackPic_Phoebe + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
+};
+
+const struct SpriteFrameImage gTrainerBackPicTable_Oak[] =
+{
+    {gTrainerBackPic_Oak + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
+    {gTrainerBackPic_Oak + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
+    {gTrainerBackPic_Oak + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
+    {gTrainerBackPic_Oak + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
+};
+
 // .backPic goes functionally unused, since none of these pics are compressed
 // and the place they would get extracted to gets overwritten later anyway
 // the casts are so they'll play nice with the strict struct definition
@@ -533,4 +558,6 @@ const struct TrainerBacksprite gTrainerBacksprites[] =
     TRAINER_BACK_SPRITE(DAWN, 4, Dawn, BackPalette_Dawn, Hoenn),
     TRAINER_BACK_SPRITE(CYNTHIA, 4, Cynthia, BackPalette_Cynthia, Hoenn),
     TRAINER_BACK_SPRITE(STEVEN, 4, Steven, Palette_Steven, Hoenn),
+    TRAINER_BACK_SPRITE(PHOEBE, 4, Phoebe, BackPalette_Phoebe, Hoenn),
+    TRAINER_BACK_SPRITE(OAK,    4, Oak, BackPalette_Oak, Hoenn),
 };

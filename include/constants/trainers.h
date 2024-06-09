@@ -106,10 +106,11 @@
 #define TRAINER_PIC_PYRAMID_KING_BRANDON  88
 #define TRAINER_PIC_RED                   89
 #define TRAINER_PIC_LEAF                  90
-#define TRAINER_PIC_LUCAS            91
-#define TRAINER_PIC_DAWN                92
-#define TRAINER_PIC_CYNTHIA                93
-#define TRAINER_PIC_COUNT                 94
+#define TRAINER_PIC_LUCAS            	  91
+#define TRAINER_PIC_DAWN                  92
+#define TRAINER_PIC_CYNTHIA               93
+#define TRAINER_PIC_OAK               	  94
+#define TRAINER_PIC_COUNT                 95
 
 // The player back pics are assumed to alternate according to the gender values (MALE/FEMALE)
 #define TRAINER_BACK_PIC_BRENDAN                0
@@ -120,6 +121,8 @@
 #define TRAINER_BACK_PIC_DAWN     				5
 #define TRAINER_BACK_PIC_STEVEN                 6
 #define TRAINER_BACK_PIC_CYNTHIA                7
+#define TRAINER_BACK_PIC_OAK                 	8
+#define TRAINER_BACK_PIC_PHOEBE                	9
 
 #define FACILITY_CLASS_HIKER                 0x0
 #define FACILITY_CLASS_AQUA_GRUNT_M          0x1

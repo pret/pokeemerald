@@ -131,6 +131,8 @@ extern const struct SpriteFrameImage gTrainerBackPicTable_Lucas[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Dawn[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Cynthia[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Steven[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Phoebe[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Oak[];
 
 extern const union AffineAnimCmd *const gAffineAnims_BattleSpritePlayerSide[];
 extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteOpponentSide[];

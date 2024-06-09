@@ -1270,7 +1270,7 @@ static void Task_NewGameBirchSpeech_Init2(u8 taskId)
     RtcCalcLocalTime();
     SeedRngWithRtc();
     gSaveBlock2Ptr->playerGender = Random() % 2;
-    gSaveBlock2Ptr->playerGfxType = (Random() + 0xBB45) % 4;
+    gSaveBlock2Ptr->playerGfxType = (Random() + 0xBB45) % 5;
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetAllPicSprites();

@@ -1400,6 +1400,24 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
         .callback = SpriteCB_BattleSpriteStartSlideLeft,
     },
+    [TRAINER_BACK_PIC_OAK] = {
+        .tileTag = TAG_NONE,
+        .paletteTag = 0,
+        .oam = &gOamData_BattleSpritePlayerSide,
+        .anims = NULL,
+        .images = gTrainerBackPicTable_Oak,
+        .affineAnims = gAffineAnims_BattleSpritePlayerSide,
+        .callback = SpriteCB_BattleSpriteStartSlideLeft,
+    },
+    [TRAINER_BACK_PIC_PHOEBE] = {
+        .tileTag = TAG_NONE,
+        .paletteTag = 0,
+        .oam = &gOamData_BattleSpritePlayerSide,
+        .anims = NULL,
+        .images = gTrainerBackPicTable_Phoebe,
+        .affineAnims = gAffineAnims_BattleSpritePlayerSide,
+        .callback = SpriteCB_BattleSpriteStartSlideLeft,
+    },
 };
 
 #define NUM_SECRET_BASE_CLASSES 5
@@ -6853,6 +6871,8 @@ u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)
             return TRAINER_PIC_DAWN;
         else if(gSaveBlock2Ptr->playerGfxType == 3)
             return TRAINER_PIC_CYNTHIA;
+        else if(gSaveBlock2Ptr->playerGfxType == 4)
+            return TRAINER_PIC_ELITE_FOUR_PHOEBE;
         else
             return FacilityClassToPicIndex(FACILITY_CLASS_MAY);
     }
@@ -6864,6 +6884,8 @@ u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)
             return TRAINER_PIC_LUCAS;
         else if(gSaveBlock2Ptr->playerGfxType == 3)
             return TRAINER_PIC_STEVEN;
+        else if(gSaveBlock2Ptr->playerGfxType == 4)
+            return TRAINER_PIC_OAK;
         else
             return FacilityClassToPicIndex(FACILITY_CLASS_BRENDAN);
     }

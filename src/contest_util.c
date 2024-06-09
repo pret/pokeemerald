@@ -2476,7 +2476,7 @@ void SetLinkContestPlayerGfx(void)
                 if (gLinkPlayers[i].gender == MALE)
                     gContestMons[i].trainerGfxId = OBJ_EVENT_GFX_CYNTHIA;
                 else
-                    gContestMons[i].trainerGfxId = OBJ_EVENT_GFX_LINK_RS_MAY;
+                    gContestMons[i].trainerGfxId = OBJ_EVENT_GFX_OAK;
             }
         }
 

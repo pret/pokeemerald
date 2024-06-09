@@ -238,8 +238,8 @@
 #define OBJ_EVENT_GFX_DEOXYS                     232
 #define OBJ_EVENT_GFX_DEOXYS_TRIANGLE            233
 #define OBJ_EVENT_GFX_BRANDON                    234
-#define OBJ_EVENT_GFX_CYNTHIA            235
-#define OBJ_EVENT_GFX_LINK_RS_MAY                236
+#define OBJ_EVENT_GFX_CYNTHIA            		 235
+#define OBJ_EVENT_GFX_OAK                		 236
 #define OBJ_EVENT_GFX_LUGIA                      237
 #define OBJ_EVENT_GFX_HOOH                       238
 

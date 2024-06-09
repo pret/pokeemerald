@@ -2010,6 +2010,8 @@ u32 LinkPlayerGetTrainerPicId(u32 multiplayerId)
         trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_LUCAS;
     else if (gSaveBlock2Ptr->playerGfxType == 3)
         trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_STEVEN;
+    else if (gSaveBlock2Ptr->playerGfxType == 4)
+        trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_OAK;
     else
         trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_BRENDAN;
 
@@ -2026,6 +2028,8 @@ static u32 PlayerGetTrainerBackPicId(void)
         trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_LUCAS;
     else if (gSaveBlock2Ptr->playerGfxType == 3)
         trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_STEVEN;
+    else if (gSaveBlock2Ptr->playerGfxType == 4)
+        trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_OAK;
     else
         trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_BRENDAN;
 

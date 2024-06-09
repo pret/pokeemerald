@@ -267,7 +267,7 @@ static const u8 sFRLGAvatarGfxIds[GENDER_COUNT] =
 static const u8 sRSAvatarGfxIds[GENDER_COUNT] =
 {
     [MALE]   = OBJ_EVENT_GFX_CYNTHIA,
-    [FEMALE] = OBJ_EVENT_GFX_LINK_RS_MAY
+    [FEMALE] = OBJ_EVENT_GFX_OAK
 };
 
 static const u8 sPlayerAvatarGfxToStateFlag[GENDER_COUNT][6][2] =
@@ -1251,6 +1251,17 @@ u8 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
             return OBJ_EVENT_GFX_STEVEN;
         }
     }
+    if(gSaveBlock2Ptr->playerGfxType == 4)
+    {
+        if(gender != MALE)
+        {
+            return OBJ_EVENT_GFX_PHOEBE;
+        } 
+        else
+        {
+            return OBJ_EVENT_GFX_OAK;
+        }
+    }
 
     return sRivalAvatarGfxIds[state][gender];
 }
@@ -1288,6 +1299,17 @@ u8 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
         else
         {
             return OBJ_EVENT_GFX_STEVEN;
+        }
+    }
+    if(gSaveBlock2Ptr->playerGfxType == 4)
+    {
+        if(gender != MALE)
+        {
+            return OBJ_EVENT_GFX_PHOEBE;
+        } 
+        else
+        {
+            return OBJ_EVENT_GFX_OAK;
         }
     }
        
