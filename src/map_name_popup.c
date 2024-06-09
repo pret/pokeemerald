@@ -418,7 +418,7 @@ static void Task_MapNamePopUpWindow(u8 taskId)
         {
             task->tYOffset = 0;
             task->tState = STATE_WAIT;
-            gTasks[gPopupTaskId].data[1] = 0;
+            gTasks[gPopupTaskId].tOnscreenTimer = 0;
         }
         break;
     case STATE_WAIT:
@@ -460,8 +460,8 @@ static void Task_MapNamePopUpWindow(u8 taskId)
         HideMapNamePopUpWindow();
         return;
     }
-if (OW_POPUP_GENERATION != GEN_5)
-    SetGpuReg(REG_OFFSET_BG0VOFS, task->tYOffset);
+    if (OW_POPUP_GENERATION != GEN_5)
+        SetGpuReg(REG_OFFSET_BG0VOFS, task->tYOffset);
 }
 
 void HideMapNamePopUpWindow(void)
