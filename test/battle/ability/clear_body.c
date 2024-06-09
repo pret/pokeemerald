@@ -45,7 +45,7 @@ SINGLE_BATTLE_TEST("Clear Body prevents stat stage reduction from moves")
         ASSUME(gMovesInfo[MOVE_CONFIDE].effect == EFFECT_SPECIAL_ATTACK_DOWN);
         ASSUME(gMovesInfo[MOVE_FAKE_TEARS].effect == EFFECT_SPECIAL_DEFENSE_DOWN_2);
         ASSUME(gMovesInfo[MOVE_SCARY_FACE].effect == EFFECT_SPEED_DOWN_2);
-        ASSUME(B_UPDATED_MOVE_DATA >= GEN_6);
+        ASSUME(B_UPDATED_MOVE_DATA >= GEN_6); // For Sweet Scent
         ASSUME(gMovesInfo[MOVE_SWEET_SCENT].effect == EFFECT_EVASION_DOWN_2);
         ASSUME(gMovesInfo[MOVE_SAND_ATTACK].effect == EFFECT_ACCURACY_DOWN);
         PLAYER(SPECIES_WOBBUFFET)
@@ -90,7 +90,8 @@ SINGLE_BATTLE_TEST("Clear Body doesn't prevent stat stage reduction from moves u
         TURN { MOVE(opponent, MOVE_SUPERPOWER); }
     } SCENE {
         NONE_OF {
-            ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY); MESSAGE("Foe Beldum's Clear Body prevents stat loss!");
+            ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY); 
+            MESSAGE("Foe Beldum's Clear Body prevents stat loss!");
         }
     }
 }
@@ -129,7 +130,7 @@ SINGLE_BATTLE_TEST("Mold Breaker, Teravolt, and Turboblaze ignore Clear Body")
         ASSUME(gMovesInfo[MOVE_CONFIDE].effect == EFFECT_SPECIAL_ATTACK_DOWN);
         ASSUME(gMovesInfo[MOVE_FAKE_TEARS].effect == EFFECT_SPECIAL_DEFENSE_DOWN_2);
         ASSUME(gMovesInfo[MOVE_SCARY_FACE].effect == EFFECT_SPEED_DOWN_2);
-        ASSUME(B_UPDATED_MOVE_DATA >= GEN_6);
+        ASSUME(B_UPDATED_MOVE_DATA >= GEN_6); // For Sweet Scent
         ASSUME(gMovesInfo[MOVE_SWEET_SCENT].effect == EFFECT_EVASION_DOWN_2);
         ASSUME(gMovesInfo[MOVE_SAND_ATTACK].effect == EFFECT_ACCURACY_DOWN);
         PLAYER(SPECIES_WOBBUFFET) { Ability(ability); }
@@ -138,7 +139,8 @@ SINGLE_BATTLE_TEST("Mold Breaker, Teravolt, and Turboblaze ignore Clear Body")
         TURN { MOVE(player, move); }
     } SCENE {
         NONE_OF {
-            ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY); MESSAGE("Foe Beldum's Clear Body prevents stat loss!");
+            ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY); 
+            MESSAGE("Foe Beldum's Clear Body prevents stat loss!");
         }
     }
 }
