@@ -420,6 +420,7 @@ static const u16 sRandomValidMoves[] =
     MOVE_WATER_PULSE,
     MOVE_DOOM_DESIRE,
     MOVE_PSYCHO_BOOST,
+#ifndef PIT_GEN_3_MODE
     // Gen 4 moves
     MOVE_ROOST,
     MOVE_GRAVITY,
@@ -626,7 +627,8 @@ static const u16 sRandomValidMoves[] =
     MOVE_V_CREATE,
     MOVE_FUSION_FLARE,
     MOVE_FUSION_BOLT,
-#ifndef RANDOM_GEN_5_MODE
+#endif
+#ifdef PIT_GEN_9_MODE
     // Gen 6 moves
     MOVE_FLYING_PRESS,
     MOVE_MAT_BLOCK,
@@ -8005,7 +8007,7 @@ static const u16 sRandomSpeciesLegendary[] =
     SPECIES_JIRACHI           ,
     SPECIES_DEOXYS            ,
     SPECIES_CHIMECHO          ,
-    #ifdef POKEMON_EXPANSION
+#ifndef PIT_GEN_3_MODE
     SPECIES_TURTWIG           ,
     SPECIES_GROTLE            ,
     SPECIES_TORTERRA          ,
@@ -8274,7 +8276,8 @@ static const u16 sRandomSpeciesLegendary[] =
     SPECIES_KELDEO            ,
     SPECIES_MELOETTA          ,
     SPECIES_GENESECT          ,
-#ifndef RANDOM_GEN_5_MODE
+#endif
+#ifdef PIT_GEN_9_MODE
     SPECIES_CHESPIN           ,
     SPECIES_QUILLADIN         ,
     SPECIES_CHESNAUGHT        ,
@@ -8732,7 +8735,6 @@ static const u16 sRandomSpeciesLegendary[] =
     SPECIES_IRON_CROWN,
     SPECIES_TERAPAGOS_NORMAL,
     SPECIES_PECHARUNT
-    #endif
     #endif
     // SPECIES_EGG       ,
 };

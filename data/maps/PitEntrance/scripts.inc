@@ -41,7 +41,7 @@ PitEntrance_Warp::
 	additem ITEM_ETHER, 2
 	additem ITEM_ELIXIR, 1
 	additem ITEM_ESCAPE_ROPE, 1
-#ifndef RANDOM_GEN_5_MODE
+#ifdef PIT_GEN_9_MODE
 	additem ITEM_MEGA_RING, 1
 	additem ITEM_Z_POWER_RING, 1
 #endif

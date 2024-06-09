@@ -437,17 +437,32 @@ PitArena_ShopNPC::
 	setvar VAR_TEMP_9, 0
 PitArena_ShopNPCHook::
 	message PitArena_ShopNPC_Text
-#ifndef RANDOM_GEN_5_MODE
-	goto_if_unset FLAG_STAT_CHANGER, PitArena_ShopNPCHook_GenNewIVs
-	dynmultichoice 17, 1, 0, 5, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitArena_ShopNPC_Option0, PitArena_ShopNPC_Option1, PitArena_ShopNPC_OptionVitamin, PitArena_ShopNPC_Option2, PitArena_ShopNPC_Option3, PitArena_ShopNPC_Option4, PitArena_ShopNPC_Option5, PitArena_ShopNPC_Option6, PitArena_ShopNPC_Option7, PitArena_ShopNPC_Option8
-#else
+#ifdef PIT_GEN_3_MODE
+	goto_if_unset FLAG_STAT_CHANGER, PitArena_ShopNPCHook_Gen3IVs
+	dynmultichoice 17, 1, 0, 5, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitArena_ShopNPC_Option0, PitArena_ShopNPC_Option1, PitArena_ShopNPC_OptionVitamin, PitArena_ShopNPC_Option7, PitArena_ShopNPC_Option8
+#elif defined PIT_GEN_5_MODE
 	goto_if_unset FLAG_STAT_CHANGER, PitArena_ShopNPCHook_Gen5IVs
-	dynmultichoice 17, 1, 0, 5, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitArena_ShopNPC_Option0, PitArena_ShopNPC_Option1, PitArena_ShopNPC_OptionVitamin, PitArena_ShopNPC_Option3, PitArena_ShopNPC_Option4, PitArena_ShopNPC_Option6, PitArena_ShopNPC_Option7, PitArena_ShopNPC_Option8
+	dynmultichoice 17, 1, 0, 5, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitArena_ShopNPC_Option0, PitArena_ShopNPC_Option1, PitArena_ShopNPC_OptionVitamin, PitArena_ShopNPC_Option4, PitArena_ShopNPC_Option6, PitArena_ShopNPC_Option7, PitArena_ShopNPC_Option8
+#else
+	goto_if_unset FLAG_STAT_CHANGER, PitArena_ShopNPCHook_Gen9IVs
+	dynmultichoice 17, 1, 0, 5, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitArena_ShopNPC_Option0, PitArena_ShopNPC_Option1, PitArena_ShopNPC_OptionVitamin, PitArena_ShopNPC_Option2, PitArena_ShopNPC_Option3, PitArena_ShopNPC_Option4, PitArena_ShopNPC_Option5, PitArena_ShopNPC_Option6, PitArena_ShopNPC_Option7, PitArena_ShopNPC_Option8
 #endif
 	closemessage
 	setflag FLAG_BUY_FROM_MART
 	copyvar VAR_TEMP_9, VAR_RESULT
-#ifndef RANDOM_GEN_5_MODE
+#ifdef PIT_GEN_3_MODE
+	goto_if_eq VAR_RESULT, 0, PitArena_MartScript_TMs
+	goto_if_eq VAR_RESULT, 1, PitArena_MartScript_EvoItems
+	goto_if_eq VAR_RESULT, 2, PitArena_MartScript_Vitamins
+	goto_if_eq VAR_RESULT, 6, PitArena_MartScript_Sell
+#elif defined PIT_GEN_5_MODE
+	goto_if_eq VAR_RESULT, 0, PitArena_MartScript_TMs
+	goto_if_eq VAR_RESULT, 1, PitArena_MartScript_EvoItems
+	goto_if_eq VAR_RESULT, 2, PitArena_MartScript_Vitamins
+	goto_if_eq VAR_RESULT, 4, PitArena_MartScript_Gems
+	goto_if_eq VAR_RESULT, 5, PitArena_MartScript_FormItems
+	goto_if_eq VAR_RESULT, 6, PitArena_MartScript_Sell
+#else
 	goto_if_eq VAR_RESULT, 0, PitArena_MartScript_TMs
 	goto_if_eq VAR_RESULT, 1, PitArena_MartScript_EvoItems
 	goto_if_eq VAR_RESULT, 2, PitArena_MartScript_Vitamins
@@ -457,14 +472,6 @@ PitArena_ShopNPCHook::
 	goto_if_eq VAR_RESULT, 6, PitArena_MartScript_ZCrystals
 	goto_if_eq VAR_RESULT, 7, PitArena_MartScript_FormItems
 	goto_if_eq VAR_RESULT, 8, PitArena_MartScript_Sell
-#else
-	goto_if_eq VAR_RESULT, 0, PitArena_MartScript_TMs
-	goto_if_eq VAR_RESULT, 1, PitArena_MartScript_EvoItems
-	goto_if_eq VAR_RESULT, 2, PitArena_MartScript_Vitamins
-	goto_if_eq VAR_RESULT, 3, PitArena_MartScript_Mints
-	goto_if_eq VAR_RESULT, 4, PitArena_MartScript_Gems
-	goto_if_eq VAR_RESULT, 5, PitArena_MartScript_FormItems
-	goto_if_eq VAR_RESULT, 6, PitArena_MartScript_Sell
 #endif
 EndOfMartScript::
 	clearflag FLAG_SELL_FROM_MART
@@ -472,7 +479,7 @@ EndOfMartScript::
 	release
 	end
 
-PitArena_ShopNPCHook_GenNewIVs::
+PitArena_ShopNPCHook_Gen9IVs::
 	dynmultichoice 17, 1, 0, 5, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitArena_ShopNPC_Option0, PitArena_ShopNPC_Option1, PitArena_ShopNPC_OptionVitamin, PitArena_ShopNPC_Option2, PitArena_ShopNPC_Option3, PitArena_ShopNPC_Option4, PitArena_ShopNPC_Option5, PitArena_ShopNPC_Option6, PitArena_ShopNPC_EditIVs, PitArena_ShopNPC_Option7, PitArena_ShopNPC_Option8
 	closemessage
 	setflag FLAG_BUY_FROM_MART
@@ -491,7 +498,7 @@ PitArena_ShopNPCHook_GenNewIVs::
 	end
 
 PitArena_ShopNPCHook_Gen5IVs::
-	dynmultichoice 17, 1, 0, 5, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitArena_ShopNPC_Option0, PitArena_ShopNPC_Option1, PitArena_ShopNPC_OptionVitamin, PitArena_ShopNPC_Option3, PitArena_ShopNPC_Option4, PitArena_ShopNPC_Option6, PitArena_ShopNPC_EditIVs, PitArena_ShopNPC_Option7, PitArena_ShopNPC_Option8
+	dynmultichoice 17, 1, 0, 5, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitArena_ShopNPC_Option0, PitArena_ShopNPC_Option1, PitArena_ShopNPC_OptionVitamin, PitArena_ShopNPC_Option4, PitArena_ShopNPC_Option6, PitArena_ShopNPC_EditIVs, PitArena_ShopNPC_Option7, PitArena_ShopNPC_Option8
 	closemessage
 	setflag FLAG_BUY_FROM_MART
 	copyvar VAR_TEMP_9, VAR_RESULT
@@ -501,6 +508,19 @@ PitArena_ShopNPCHook_Gen5IVs::
 	goto_if_eq VAR_RESULT, 3, PitArena_MartScript_Mints
 	goto_if_eq VAR_RESULT, 4, PitArena_MartScript_Gems
 	goto_if_eq VAR_RESULT, 5, PitArena_MartScript_FormItems
+	goto_if_eq VAR_RESULT, 6, PitArena_MartScript_EditIVs
+	goto_if_eq VAR_RESULT, 7, PitArena_MartScript_Sell
+	release
+	end
+
+PitArena_ShopNPCHook_Gen3IVs::
+	dynmultichoice 17, 1, 0, 5, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitArena_ShopNPC_Option0, PitArena_ShopNPC_Option1, PitArena_ShopNPC_OptionVitamin, PitArena_ShopNPC_EditIVs, PitArena_ShopNPC_Option7, PitArena_ShopNPC_Option8
+	closemessage
+	setflag FLAG_BUY_FROM_MART
+	copyvar VAR_TEMP_9, VAR_RESULT
+	goto_if_eq VAR_RESULT, 0, PitArena_MartScript_TMs
+	goto_if_eq VAR_RESULT, 1, PitArena_MartScript_EvoItems
+	goto_if_eq VAR_RESULT, 2, PitArena_MartScript_Vitamins
 	goto_if_eq VAR_RESULT, 6, PitArena_MartScript_EditIVs
 	goto_if_eq VAR_RESULT, 7, PitArena_MartScript_Sell
 	release
@@ -665,12 +685,14 @@ PitArena_Mart_Vitamins:
 	.2byte ITEM_HP_UP
 	.2byte ITEM_PP_UP
 	.2byte ITEM_PP_MAX
+#ifndef PIT_GEN_3_MODE
 	.2byte ITEM_HEALTH_FEATHER
 	.2byte ITEM_MUSCLE_FEATHER
 	.2byte ITEM_RESIST_FEATHER
 	.2byte ITEM_GENIUS_FEATHER
 	.2byte ITEM_CLEVER_FEATHER
 	.2byte ITEM_SWIFT_FEATHER
+#endif
 	.2byte ITEM_NONE
 	release
 	end
@@ -906,6 +928,7 @@ PitArena_Mart_FormItems:
     .2byte  ITEM_SHOCK_DRIVE
     .2byte  ITEM_BURN_DRIVE
     .2byte  ITEM_CHILL_DRIVE
+#ifdef PIT_GEN_9_MODE
     .2byte  ITEM_RUSTED_SWORD
     .2byte  ITEM_RUSTED_SHIELD
 	.2byte  ITEM_YELLOW_NECTAR
@@ -928,6 +951,7 @@ PitArena_Mart_FormItems:
     .2byte  ITEM_DARK_MEMORY
     .2byte  ITEM_STEEL_MEMORY
     .2byte  ITEM_FAIRY_MEMORY
+#endif
 	.2byte ITEM_NONE
     release
 	end

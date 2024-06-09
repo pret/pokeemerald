@@ -53,7 +53,10 @@
 #define POKEMON_EXPANSION
 #define ITEM_EXPANSION
 
-#define RANDOM_GEN_5_MODE
+// ### SWITCH Generations for different game version! ###
+//#define PIT_GEN_3_MODE
+#define PIT_GEN_5_MODE
+//#define PIT_GEN_9_MODE
 
 // Generation constants used in configs to define behavior
 #define GEN_1 0
@@ -65,7 +68,9 @@
 #define GEN_7 6
 #define GEN_8 7
 #define GEN_9 8
-#ifdef RANDOM_GEN_5_MODE
+#ifdef PIT_GEN_3_MODE
+#define GEN_LATEST GEN_3
+#elif defined PIT_GEN_5_MODE
 #define GEN_LATEST GEN_5
 #else
 #define GEN_LATEST GEN_9
