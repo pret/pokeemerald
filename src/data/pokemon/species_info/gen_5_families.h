@@ -8543,7 +8543,9 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         FOOTPRINT(Bisharp)
         .levelUpLearnset = sBisharpLevelUpLearnset,
         .teachableLearnset = sBisharpTeachableLearnset,
+    #ifdef PIT_GEN_9_MODE
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_METAL_COAT, SPECIES_KINGAMBIT}),
+    #endif
     },
 
 #if P_GEN_9_CROSS_EVOS

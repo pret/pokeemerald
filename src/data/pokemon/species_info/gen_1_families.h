@@ -13631,6 +13631,29 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sEeveeTeachableLearnset,
         .formSpeciesIdTable = sEeveeFormSpeciesIdTable,
         .formChangeTable = sEeveeFormChangeTable,
+    #ifdef PIT_GEN_3_MODE
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_JOLTEON},
+                                {EVO_ITEM, ITEM_WATER_STONE, SPECIES_VAPOREON},
+                                {EVO_ITEM, ITEM_FIRE_STONE, SPECIES_FLAREON},
+                                {EVO_ITEM, ITEM_SUN_STONE, SPECIES_ESPEON},
+                                {EVO_ITEM, ITEM_MOON_STONE, SPECIES_UMBREON},
+                                {EVO_FRIENDSHIP_DAY, 0, SPECIES_ESPEON},
+                                {EVO_FRIENDSHIP_NIGHT, 0, SPECIES_UMBREON}),
+    #endif
+    #ifdef PIT_GEN_5_MODE
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_JOLTEON},
+                                {EVO_ITEM, ITEM_WATER_STONE, SPECIES_VAPOREON},
+                                {EVO_ITEM, ITEM_FIRE_STONE, SPECIES_FLAREON},
+                                {EVO_ITEM, ITEM_SUN_STONE, SPECIES_ESPEON},
+                                {EVO_ITEM, ITEM_MOON_STONE, SPECIES_UMBREON},
+                                {EVO_FRIENDSHIP_DAY, 0, SPECIES_ESPEON},
+                                {EVO_FRIENDSHIP_NIGHT, 0, SPECIES_UMBREON},
+                                {EVO_SPECIFIC_MAP, MAP_PETALBURG_WOODS, SPECIES_LEAFEON},
+                                {EVO_ITEM, ITEM_LEAF_STONE, SPECIES_LEAFEON},
+                                {EVO_SPECIFIC_MAP, MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM, SPECIES_GLACEON},
+                                {EVO_ITEM, ITEM_ICE_STONE, SPECIES_GLACEON}),
+    #endif
+    #ifdef PIT_GEN_9_MODE
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_JOLTEON},
                                 {EVO_ITEM, ITEM_WATER_STONE, SPECIES_VAPOREON},
                                 {EVO_ITEM, ITEM_FIRE_STONE, SPECIES_FLAREON},
@@ -13643,6 +13666,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
                                 {EVO_SPECIFIC_MAP, MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM, SPECIES_GLACEON},
                                 {EVO_ITEM, ITEM_ICE_STONE, SPECIES_GLACEON},
                                 {EVO_FRIENDSHIP_MOVE_TYPE, TYPE_FAIRY, SPECIES_SYLVEON}),
+    #endif
     },
 
 #if P_GIGANTAMAX_FORMS

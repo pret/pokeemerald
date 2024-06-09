@@ -13259,7 +13259,7 @@ const struct Item gItemsInfo[] =
     [ITEM_GRACIDEA] =
     {
         .name = _("Gracidea"),
-        .price = 0,
+        .price = 4000,
         .importance = 1,
         .description = COMPOUND_STRING(
             "Bouquets made with\n"
@@ -13274,7 +13274,7 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Reveal Glass"),
         .pluralName = _("Reveal Glasses"),
-        .price = 0,
+        .price = 6000,
         .importance = 1,
         .description = COMPOUND_STRING(
             "This glass returns\n"
@@ -13289,7 +13289,7 @@ const struct Item gItemsInfo[] =
     {
         .name = _("DNA Splicers"),
         .pluralName = _("DNA Splicers"),
-        .price = 0,
+        .price = 12000,
         .importance = 1,
         .description = COMPOUND_STRING(
             "Splicer that fuses\n"
@@ -13317,7 +13317,7 @@ const struct Item gItemsInfo[] =
     [ITEM_PRISON_BOTTLE] =
     {
         .name = _("Prison Bottle"),
-        .price = 0,
+        .price = 4000,
         .importance = 1,
         .description = COMPOUND_STRING(
             "A bottle used to\n"
@@ -13331,7 +13331,7 @@ const struct Item gItemsInfo[] =
     [ITEM_N_SOLARIZER] =
     {
         .name = _("N-Solarizer"),
-        .price = 0,
+        .price = 12000,
         .importance = 1,
         .description = COMPOUND_STRING(
             "A device to fuse\n"
@@ -13345,7 +13345,7 @@ const struct Item gItemsInfo[] =
     [ITEM_N_LUNARIZER] =
     {
         .name = _("N-Lunarizer"),
-        .price = 0,
+        .price = 12000,
         .importance = 1,
         .description = COMPOUND_STRING(
             "A device to fuse\n"
@@ -13360,7 +13360,7 @@ const struct Item gItemsInfo[] =
     {
         .name = _("ReinsOfUnity"),
         .pluralName = _("ReinsOfUnity"),
-        .price = 0,
+        .price = 12000,
         .importance = 1,
         .description = COMPOUND_STRING(
             "Reins that unite\n"
