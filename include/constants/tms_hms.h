@@ -190,9 +190,9 @@
 # else
 #define FOREACH_TM(F) \
     F(PROTECT) \
-    F(FIRE FANG) \
-    F(THUNDER FANG) \
-    F(ICE FANG) \
+    F(FIRE_FANG) \
+    F(THUNDER_FANG) \
+    F(ICE_FANG) \
     F(WATER_PULSE) \
     F(LOW_KICK) \
     F(ACID_SPRAY) \
@@ -222,7 +222,7 @@
     F(SHADOW_CLAW) \
     F(FOUL_PLAY) \
     F(BULK_UP) \
-    F(BODY_SLAM) \
+    F(HIDDEN_POWER) \
     F(FIRE_PUNCH) \
     F(THUNDER_PUNCH) \
     F(ICE_PUNCH) \

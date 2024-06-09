@@ -12206,7 +12206,7 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_BULK_UP,
     },
 
-    [ITEM_TM_BODY_SLAM] =
+    [ITEM_TM_HIDDEN_POWER] =
     {
         .name = _("TM34"),
         .price = 5000,
@@ -12218,7 +12218,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .secondaryId = MOVE_BODY_SLAM,
+        .secondaryId = MOVE_HIDDEN_POWER,
     },
 
     [ITEM_TM_FIRE_PUNCH] =
