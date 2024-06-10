@@ -600,9 +600,9 @@ PitArena_MartScript_EditIVs::
 	release
 	lock
 	goto_if_eq VAR_RESULT, NO, PitArena_ShopNPCHook
-	checkmoney 3000
+	checkmoney 1000
 	goto_if_eq VAR_RESULT, FALSE, PitArena_MartScript_EditIVs_NotEnoughMoney
-	removemoney 3000
+	removemoney 1000
 	call PitArena_MartScript_EditIVs_Execute
 	goto PitArena_ShopNPCHook
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
@@ -671,7 +671,7 @@ PitArena_ShopNPC_Text:
 	.string "How may I assist you?$"
 PitArena_ShopNPC_IV_Text:
 	.string "Your Pokémon are at max IVs by default.\n"
-	.string "Still want to change it for ¥3,000?$"
+	.string "Still want to change it for ¥1,000?$"
 
 PitArena_Tutor_ConfirmMoveSelection_Text_0:
 	.string "The move {STR_VAR_1}, is it?$"
