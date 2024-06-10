@@ -454,14 +454,14 @@ PitArena_ShopNPCHook::
 	goto_if_eq VAR_RESULT, 0, PitArena_MartScript_TMs
 	goto_if_eq VAR_RESULT, 1, PitArena_MartScript_EvoItems
 	goto_if_eq VAR_RESULT, 2, PitArena_MartScript_Vitamins
-	goto_if_eq VAR_RESULT, 6, PitArena_MartScript_Sell
+	goto_if_eq VAR_RESULT, 3, PitArena_MartScript_Sell
 #elif defined PIT_GEN_5_MODE
 	goto_if_eq VAR_RESULT, 0, PitArena_MartScript_TMs
 	goto_if_eq VAR_RESULT, 1, PitArena_MartScript_EvoItems
 	goto_if_eq VAR_RESULT, 2, PitArena_MartScript_Vitamins
-	goto_if_eq VAR_RESULT, 4, PitArena_MartScript_Gems
-	goto_if_eq VAR_RESULT, 5, PitArena_MartScript_FormItems
-	goto_if_eq VAR_RESULT, 6, PitArena_MartScript_Sell
+	goto_if_eq VAR_RESULT, 3, PitArena_MartScript_Gems
+	goto_if_eq VAR_RESULT, 4, PitArena_MartScript_FormItems
+	goto_if_eq VAR_RESULT, 5, PitArena_MartScript_Sell
 #else
 	goto_if_eq VAR_RESULT, 0, PitArena_MartScript_TMs
 	goto_if_eq VAR_RESULT, 1, PitArena_MartScript_EvoItems
@@ -521,8 +521,8 @@ PitArena_ShopNPCHook_Gen3IVs::
 	goto_if_eq VAR_RESULT, 0, PitArena_MartScript_TMs
 	goto_if_eq VAR_RESULT, 1, PitArena_MartScript_EvoItems
 	goto_if_eq VAR_RESULT, 2, PitArena_MartScript_Vitamins
-	goto_if_eq VAR_RESULT, 6, PitArena_MartScript_EditIVs
-	goto_if_eq VAR_RESULT, 7, PitArena_MartScript_Sell
+	goto_if_eq VAR_RESULT, 3, PitArena_MartScript_EditIVs
+	goto_if_eq VAR_RESULT, 4, PitArena_MartScript_Sell
 	release
 	end
 
@@ -1052,6 +1052,7 @@ PitArena_Mart_TMs:
 	.2byte ITEM_TM78
 	.2byte ITEM_TM79
 	.2byte ITEM_TM80
+#ifndef PIT_GEN_3_MODE
 	.2byte ITEM_TM81
 	.2byte ITEM_TM82
 	.2byte ITEM_TM83
@@ -1072,6 +1073,7 @@ PitArena_Mart_TMs:
 	.2byte ITEM_TM98
 	.2byte ITEM_TM99
 	.2byte ITEM_TM100
+#endif
 	.2byte ITEM_HM01
 	.2byte ITEM_HM02
 	.2byte ITEM_HM03
