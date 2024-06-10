@@ -24,7 +24,6 @@ SINGLE_BATTLE_TEST("Tar Shot doubles the effectiveness of Fire-type moves used o
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(species);
     } WHEN {
-        //TURN { MOVE(player, MOVE_FORESTS_CURSE); } // Adds third type
         TURN { MOVE(player, MOVE_EMBER); }
         TURN { MOVE(player, MOVE_TAR_SHOT); }
         TURN { MOVE(player, MOVE_EMBER); }
