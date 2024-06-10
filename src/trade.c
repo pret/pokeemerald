@@ -51,6 +51,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/union_room.h"
+#include "scanline_effect.h"
 
 // IDs for RunTradeMenuCallback
 enum {
@@ -3051,6 +3052,12 @@ static void CB2_InitInGameTrade(void)
     case 11:
         SetTradeSequenceBgGpuRegs(5);
         SetTradeSequenceBgGpuRegs(0);
+        SetGpuReg(REG_OFFSET_WIN0H, 0);
+        SetGpuReg(REG_OFFSET_WIN0V, 0);
+        SetGpuReg(REG_OFFSET_WININ, 0);
+        SetGpuReg(REG_OFFSET_WINOUT, 0);
+        ScanlineEffect_Clear();
+        ScanlineEffect_Stop();
         BufferTradeSceneStrings();
         gMain.state++;
         break;
