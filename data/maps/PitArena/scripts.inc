@@ -120,6 +120,13 @@ PitArena_ArchieBattleFinished::
 	addobject 10
 	clearflag FLAG_END_GAME_STATUE
 	fadescreen FADE_FROM_BLACK
+	callnative SetAutosaveFlag
+	goto_if_unset FLAG_AUTO_SAVE, PitArchieNoAutoSave
+	clearflag FLAG_SAVING_FIELD_EFFECT
+	dofieldeffect(FLDEFF_SAVING)
+	waitfieldeffect(FLDEFF_SAVING)
+	callnative AutoSave
+PitArchieNoAutoSave:
 	releaseall
 	end
 
