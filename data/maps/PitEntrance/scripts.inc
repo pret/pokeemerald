@@ -137,15 +137,16 @@ PitEntrance_EventScript_Sign::
 	msgbox PitEntrance_Text_Rules, MSGBOX_DEFAULT
 PitEntrance_EventScript_Sign_Hook::
 	message PitEntrance_Sign_Text
-	dynmultichoice 17, 0, 0, 6, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitEntrance_Sign_Option0, PitEntrance_Sign_Option1, PitEntrance_Sign_Option2, PitEntrance_Sign_Option3, PitEntrance_Sign_Option4, PitEntrance_Sign_Option5
+	dynmultichoice 17, 0, 0, 6, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitEntrance_Sign_Option0, PitEntrance_Sign_Option1, PitEntrance_Sign_Option2, PitEntrance_Sign_Option6, PitEntrance_Sign_Option4, PitEntrance_Sign_Option5, PitEntrance_Sign_Option3
 	closemessage
 	copyvar VAR_TEMP_9, VAR_RESULT
 	goto_if_eq VAR_RESULT, 0, PitEntrance_MoreInfo
 	goto_if_eq VAR_RESULT, 1, PitEntrance_BattleInfo
 	goto_if_eq VAR_RESULT, 2, PitEntrance_Credits
-	goto_if_eq VAR_RESULT, 3, PitEntrance_Cheats
+	goto_if_eq VAR_RESULT, 3, PitEntrance_ChangeAvatar
 	goto_if_eq VAR_RESULT, 4, PitEntrance_Bugs
 	goto_if_eq VAR_RESULT, 5, PitEntrance_Discord
+	goto_if_eq VAR_RESULT, 6, PitEntrance_Cheats
 	release
 	end
 
@@ -186,6 +187,11 @@ PitEntrance_Discord:
 	release
 	end 
 
+PitEntrance_ChangeAvatar:
+	goto PitArena_ChangeAvatar
+	release
+	end 
+
 PitEntrance_Sign_Text:
 	.string "Would you like more information?$"
 
@@ -201,6 +207,48 @@ PitEntrance_Sign_Option4:
 	.string "Bugs$"
 PitEntrance_Sign_Option5:
 	.string "Discord$"
+PitEntrance_Sign_Option6:
+	.string "Outfit$"
+
+PitArena_ChangeAvatar::
+	lockall
+	faceplayer
+	message PitArena_ChangeAvatarText
+	dynmultichoice 17, 1, 0, 5, 0, DYN_MULTICHOICE_CB_NONE, PitArena_NPCAvatarChange0, PitArena_NPCAvatarChange1, PitArena_NPCAvatarChange2, PitArena_NPCAvatarChange3, PitArena_NPCAvatarChange4, PitArena_NPCAvatarChange5, PitArena_NPCAvatarChange6, PitArena_NPCAvatarChange7, PitArena_NPCAvatarChange8, PitArena_NPCAvatarChange9, PitArena_NPCAvatarChange10, PitArena_NPCAvatarChange11
+	callnative SetPlayerAvatar
+	closemessage
+	warpteleport MAP_PIT_ENTRANCE, 7, 8
+	waitstate
+	release
+	end
+
+PitArena_ChangeAvatarText:
+	.string "Who do you want to play as?$"
+
+PitArena_NPCAvatarChange0:
+	.string "Brendan$"
+PitArena_NPCAvatarChange1:
+	.string "May$"
+PitArena_NPCAvatarChange2:
+	.string "Red$"
+PitArena_NPCAvatarChange3:
+	.string "Leaf$"
+PitArena_NPCAvatarChange4:
+	.string "Lucas$"
+PitArena_NPCAvatarChange5:
+	.string "Dawn$"
+PitArena_NPCAvatarChange6:
+	.string "Steven$"
+PitArena_NPCAvatarChange7:
+	.string "Cynthia$"
+PitArena_NPCAvatarChange8:
+	.string "Oak$"
+PitArena_NPCAvatarChange9:
+	.string "Phoebe$"
+PitArena_NPCAvatarChange10:
+	.string "Ethan$"
+PitArena_NPCAvatarChange11:
+	.string "Lyra$"
 
 
 PitEntrance_Text_MoreInfo::

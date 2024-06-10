@@ -775,3 +775,58 @@ void SetAutosaveFlag(void)
     }
     
 }
+
+void SetPlayerAvatar(void)
+{
+    switch(VarGet(VAR_RESULT))
+    {
+        case 0:
+            gSaveBlock2Ptr->playerGender = MALE;
+            gSaveBlock2Ptr->playerGfxType = 0;
+            break;
+        case 1:
+            gSaveBlock2Ptr->playerGender = FEMALE;
+            gSaveBlock2Ptr->playerGfxType = 0;
+            break;
+        case 2:
+            gSaveBlock2Ptr->playerGender = MALE;
+            gSaveBlock2Ptr->playerGfxType = 1;
+            break;
+        case 3:
+            gSaveBlock2Ptr->playerGender = FEMALE;
+            gSaveBlock2Ptr->playerGfxType = 1;
+            break;
+        case 4:
+            gSaveBlock2Ptr->playerGender = MALE;
+            gSaveBlock2Ptr->playerGfxType = 2;
+            break;
+        case 5:
+            gSaveBlock2Ptr->playerGender = FEMALE;
+            gSaveBlock2Ptr->playerGfxType = 2;
+            break;
+        case 6:
+            gSaveBlock2Ptr->playerGender = MALE;
+            gSaveBlock2Ptr->playerGfxType = 3;
+            break;
+        case 7:
+            gSaveBlock2Ptr->playerGender = FEMALE;
+            gSaveBlock2Ptr->playerGfxType = 3;
+            break;
+        case 8:
+            gSaveBlock2Ptr->playerGender = MALE;
+            gSaveBlock2Ptr->playerGfxType = 4;
+            break;
+        case 9:
+            gSaveBlock2Ptr->playerGender = FEMALE;
+            gSaveBlock2Ptr->playerGfxType = 4;
+            break;
+        case 10:
+            gSaveBlock2Ptr->playerGender = MALE;
+            gSaveBlock2Ptr->playerGfxType = 5;
+            break;
+        case 11:
+            gSaveBlock2Ptr->playerGender = FEMALE;
+            gSaveBlock2Ptr->playerGfxType = 5;
+            break;
+    }
+}
