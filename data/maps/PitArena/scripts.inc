@@ -714,9 +714,6 @@ PitArena_Mart_EvoItems:
     .2byte ITEM_LEAF_STONE
     .2byte ITEM_SUN_STONE
     .2byte ITEM_MOON_STONE
-
-    
-
     .2byte ITEM_LINKING_CORD
     .2byte ITEM_DRAGON_SCALE
     .2byte ITEM_UPGRADE
@@ -753,6 +750,8 @@ PitArena_Mart_EvoItems:
     .2byte ITEM_SCROLL_OF_WATERS
     .2byte ITEM_BLACK_AUGURITE
     .2byte ITEM_PEAT_BLOCK
+	.2byte ITEM_GIMMIGHOUL_COIN
+	.2byte ITEM_LEADERS_CREST
     .2byte ITEM_AUSPICIOUS_ARMOR
     .2byte ITEM_MALICIOUS_ARMOR
     .2byte ITEM_UNREMARKABLE_TEACUP
