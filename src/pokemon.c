@@ -59,6 +59,7 @@
 #include "constants/weather.h"
 #include "tx_randomizer_and_challenges.h"
 #include "daycare.h"
+#include "config.h"
 
 
 #define FRIENDSHIP_EVO_THRESHOLD ((P_FRIENDSHIP_EVO_THRESHOLD >= GEN_9) ? 160 : 220)
@@ -8858,6 +8859,11 @@ u8 GetEggMoveTutorMoves(struct Pokemon *mon, u16 *moves)
 #define TUTOR_MOVES_COUNT ARRAY_COUNT(sTutorMoves)
 static const u16 sTutorMoves[] =
 {
+#ifdef PIT_GEN_3_MODE
+    MOVE_FRENZY_PLANT,
+    MOVE_BLAST_BURN,
+    MOVE_HYDRO_CANNON,
+#else
     MOVE_GRASS_PLEDGE,
     MOVE_FIRE_PLEDGE,
     MOVE_WATER_PLEDGE,
@@ -8867,6 +8873,7 @@ static const u16 sTutorMoves[] =
     MOVE_HYDRO_CANNON,
     MOVE_RELIC_SONG,
     MOVE_SECRET_SWORD,
+#endif
 };
 
 u8 GetTutorMoves(u16 *moves)
