@@ -13,6 +13,7 @@ PitArena_OnFrameRewardDrop::
 	setvar VAR_PIT_TUTOR_STATE, 0
 	setvar VAR_REWARD_STATE, 2
 	goto_if_eq VAR_PIT_FLOOR, 100, PitArena_OnFrameRewardDrop_4
+	goto_if_set FLAG_DOUBLES_MODE, PitArena_OnFrameRewardDrop_Doubles
 	random 3
 	switch VAR_RESULT
 	case 0, PitArena_OnFrameRewardDrop_3
@@ -42,6 +43,13 @@ PitArena_OnFrameRewardDrop_5:
 	addobject 6
 	addobject 7
 	addobject 12
+	goto PitArena_OnFrameRewardDrop_1
+
+PitArena_OnFrameRewardDrop_Doubles:
+	random 2
+	switch VAR_RESULT
+	case 0, PitArena_OnFrameRewardDrop_4
+	case 1, PitArena_OnFrameRewardDrop_5
 	goto PitArena_OnFrameRewardDrop_1
 
 PitArena_OnResume:
