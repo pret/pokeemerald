@@ -1797,9 +1797,9 @@ static const u8 *GetIntroSpeechOfApproachingTrainer(void)
     if(VarGet(VAR_PIT_FLOOR) == 100)
         return ReturnEmptyStringIfNull(sArchieFinalApproach[0]);
     if (gApproachingTrainerId == 0)
-        return ReturnEmptyStringIfNull(sRandomTrainerApproachTexts[Random() % 77]);
+        return ReturnEmptyStringIfNull(sRandomTrainerApproachTexts[Random() % 78]);
     else
-        return ReturnEmptyStringIfNull(sRandomTrainerApproachTexts[Random() % 77]);
+        return ReturnEmptyStringIfNull(sRandomTrainerApproachTexts[Random() % 78]);
 }
 
 const u8 *GetTrainerALoseText(void)
