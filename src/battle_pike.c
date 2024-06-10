@@ -580,7 +580,7 @@ static void SetupRoomObjectEvents(void)
         if (sStatusMon == PIKE_STATUSMON_DUSCLOPS)
             objGfx2 = OBJ_EVENT_GFX_DUSCLOPS;
         else
-            objGfx2 = OBJ_EVENT_GFX_KIRLIA;
+            objGfx2 = OBJ_EVENT_GFX_LYRA;
         setObjGfx2 = TRUE;
         break;
     case PIKE_ROOM_HEAL_PART:

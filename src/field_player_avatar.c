@@ -1262,6 +1262,17 @@ u8 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
             return OBJ_EVENT_GFX_OAK;
         }
     }
+    if(gSaveBlock2Ptr->playerGfxType == 5)
+    {
+        if(gender != MALE)
+        {
+            return OBJ_EVENT_GFX_LYRA;
+        } 
+        else
+        {
+            return OBJ_EVENT_GFX_ETHAN;
+        }
+    }
 
     return sRivalAvatarGfxIds[state][gender];
 }
@@ -1310,6 +1321,17 @@ u8 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
         else
         {
             return OBJ_EVENT_GFX_OAK;
+        }
+    }
+    if(gSaveBlock2Ptr->playerGfxType == 5)
+    {
+        if(gender != MALE)
+        {
+            return OBJ_EVENT_GFX_LYRA;
+        } 
+        else
+        {
+            return OBJ_EVENT_GFX_ETHAN;
         }
     }
        

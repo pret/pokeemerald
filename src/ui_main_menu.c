@@ -242,6 +242,11 @@ static const u32 sOakMugshot_Gfx[] = INCBIN_U32("graphics/ui_main_menu/oak_mugsh
 static const u16 sPhoebeMugshot_Pal[] = INCBIN_U16("graphics/ui_main_menu/phoebe.gbapal");
 static const u32 sPhoebeMugshot_Gfx[] = INCBIN_U32("graphics/ui_main_menu/phoebe.4bpp.lz");
 
+static const u16 sEthanMugshot_Pal[] = INCBIN_U16("graphics/ui_main_menu/ethan.gbapal");
+static const u32 sEthanMugshot_Gfx[] = INCBIN_U32("graphics/ui_main_menu/ethan.4bpp.lz");
+static const u16 sLyraMugshot_Pal[] = INCBIN_U16("graphics/ui_main_menu/lyra.gbapal");
+static const u32 sLyraMugshot_Gfx[] = INCBIN_U32("graphics/ui_main_menu/lyra.4bpp.lz");
+
 //
 //  Sprite Data for Mugshots and Icon Shadows 
 //
@@ -381,6 +386,32 @@ static const struct CompressedSpriteSheet sSpriteSheet_PhoebeMugshot =
 static const struct SpritePalette sSpritePal_PhoebeMugshot =
 {
     .data = sPhoebeMugshot_Pal,
+    .tag = TAG_MUGSHOT
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_EthanMugshot =
+{
+    .data = sEthanMugshot_Gfx,
+    .size = 64*64*1/2,
+    .tag = TAG_MUGSHOT,
+};
+
+static const struct SpritePalette sSpritePal_EthanMugshot =
+{
+    .data = sEthanMugshot_Pal,
+    .tag = TAG_MUGSHOT
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_LyraMugshot =
+{
+    .data = sLyraMugshot_Gfx,
+    .size = 64*64*1/2,
+    .tag = TAG_MUGSHOT,
+};
+
+static const struct SpritePalette sSpritePal_LyraMugshot =
+{
+    .data = sLyraMugshot_Pal,
     .tag = TAG_MUGSHOT
 };
 
@@ -791,6 +822,11 @@ static bool8 MainMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spr
                 LoadCompressedSpriteSheet(&sSpriteSheet_OakMugshot);
                 LoadSpritePalette(&sSpritePal_OakMugshot);
             }
+            else if(gSaveBlock2Ptr->playerGfxType == 5)
+            {
+                LoadCompressedSpriteSheet(&sSpriteSheet_EthanMugshot);
+                LoadSpritePalette(&sSpritePal_EthanMugshot);
+            }
             else
             {
                 LoadCompressedSpriteSheet(&sSpriteSheet_BrendanMugshot);
@@ -822,6 +858,11 @@ static bool8 MainMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spr
             {
                 LoadCompressedSpriteSheet(&sSpriteSheet_PhoebeMugshot);
                 LoadSpritePalette(&sSpritePal_PhoebeMugshot);
+            }
+            else if(gSaveBlock2Ptr->playerGfxType == 5)
+            {
+                LoadCompressedSpriteSheet(&sSpriteSheet_LyraMugshot);
+                LoadSpritePalette(&sSpritePal_LyraMugshot);
             }
             else
             {

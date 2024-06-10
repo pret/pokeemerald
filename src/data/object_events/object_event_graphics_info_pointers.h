@@ -248,6 +248,8 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lucas;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Dawn;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Cynthia;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Oak;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lyra;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Ethan;
 
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
     [OBJ_EVENT_GFX_BRENDAN_NORMAL] =           &gObjectEventGraphicsInfo_BrendanNormal,
@@ -468,8 +470,8 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_MOM] =                      &gObjectEventGraphicsInfo_Mom,
     [OBJ_EVENT_GFX_LINK_BRENDAN] =             &gObjectEventGraphicsInfo_LinkBrendan,
     [OBJ_EVENT_GFX_LINK_MAY] =                 &gObjectEventGraphicsInfo_LinkMay,
-    [OBJ_EVENT_GFX_JUAN] =                     &gObjectEventGraphicsInfo_Juan,
-    [OBJ_EVENT_GFX_SCOTT] =                    &gObjectEventGraphicsInfo_Scott,
+    [OBJ_EVENT_GFX_LYRA] =                     &gObjectEventGraphicsInfo_Lyra,
+    [OBJ_EVENT_GFX_ETHAN] =                    &gObjectEventGraphicsInfo_Ethan,
     [OBJ_EVENT_GFX_POOCHYENA] =                &gObjectEventGraphicsInfo_Poochyena,
     [OBJ_EVENT_GFX_KYOGRE_SIDE] =              &gObjectEventGraphicsInfo_KyogreSide,
     [OBJ_EVENT_GFX_GROUDON_SIDE] =             &gObjectEventGraphicsInfo_GroudonSide,

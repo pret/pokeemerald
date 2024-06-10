@@ -219,8 +219,8 @@
 #define OBJ_EVENT_GFX_MOM                        215
 #define OBJ_EVENT_GFX_LINK_BRENDAN               216
 #define OBJ_EVENT_GFX_LINK_MAY                   217
-#define OBJ_EVENT_GFX_JUAN                       218
-#define OBJ_EVENT_GFX_SCOTT                      219
+#define OBJ_EVENT_GFX_LYRA                       218
+#define OBJ_EVENT_GFX_ETHAN                      219
 #define OBJ_EVENT_GFX_POOCHYENA                  220
 #define OBJ_EVENT_GFX_KYOGRE_SIDE                221
 #define OBJ_EVENT_GFX_GROUDON_SIDE               222

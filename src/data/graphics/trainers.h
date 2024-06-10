@@ -292,6 +292,11 @@ const u32 gTrainerBackPalette_Cynthia[] = INCBIN_U32("graphics/trainers/back_pic
 const u32 gTrainerFrontPic_Oak[] = INCBIN_U32("graphics/trainers/front_pics/oak.4bpp.lz");
 const u32 gTrainerPalette_Oak[] = INCBIN_U32("graphics/trainers/front_pics/oak.gbapal.lz");
 
+const u32 gTrainerFrontPic_Ethan[] = INCBIN_U32("graphics/trainers/front_pics/ethan.4bpp.lz");
+const u32 gTrainerPalette_Ethan[] = INCBIN_U32("graphics/trainers/front_pics/ethan.gbapal.lz");
+const u32 gTrainerFrontPic_Lyra[] = INCBIN_U32("graphics/trainers/front_pics/lyra.4bpp.lz");
+const u32 gTrainerPalette_Lyra[] = INCBIN_U32("graphics/trainers/front_pics/lyra.gbapal.lz");
+
 const u8 gTrainerBackPic_Brendan[] = INCBIN_U8("graphics/trainers/back_pics/brendan.4bpp");
 const u8 gTrainerBackPic_May[] = INCBIN_U8("graphics/trainers/back_pics/may.4bpp");
 const u8 gTrainerBackPic_Red[] = INCBIN_U8("graphics/trainers/back_pics/red.4bpp");
@@ -302,6 +307,11 @@ const u8 gTrainerBackPic_Cynthia[] = INCBIN_U8("graphics/trainers/back_pics/cynt
 const u8 gTrainerBackPic_Steven[] = INCBIN_U8("graphics/trainers/back_pics/steven.4bpp");
 const u8 gTrainerBackPic_Phoebe[] = INCBIN_U8("graphics/trainers/back_pics/phoebe.4bpp");
 const u8 gTrainerBackPic_Oak[]    = INCBIN_U8("graphics/trainers/back_pics/oak.4bpp");
+
+const u8 gTrainerBackPic_Lyra[] = INCBIN_U8("graphics/trainers/back_pics/lyra.4bpp");
+const u8 gTrainerBackPic_Ethan[]    = INCBIN_U8("graphics/trainers/back_pics/ethan.4bpp");
+const u32 gTrainerBackPalette_Ethan[] = INCBIN_U32("graphics/trainers/back_pics/ethan.gbapal.lz");
+const u32 gTrainerBackPalette_Lyra[] = INCBIN_U32("graphics/trainers/back_pics/lyra.gbapal.lz");
 
 const u32 gTrainerBackPalette_Oak[] = INCBIN_U32("graphics/trainers/back_pics/oak.gbapal.lz");
 const u32 gTrainerBackPalette_Phoebe[] = INCBIN_U32("graphics/trainers/back_pics/phoebe.gbapal.lz");
@@ -420,6 +430,8 @@ const struct TrainerSprite gTrainerSprites[] =
     TRAINER_SPRITE(DAWN, Dawn),
     TRAINER_SPRITE(CYNTHIA, Cynthia),
     TRAINER_SPRITE(OAK, Oak),
+    TRAINER_SPRITE(LYRA, Lyra),
+    TRAINER_SPRITE(ETHAN, Ethan),
 };
 
 static const union AnimCmd sAnimCmd_Hoenn[] =
@@ -536,6 +548,22 @@ const struct SpriteFrameImage gTrainerBackPicTable_Oak[] =
     {gTrainerBackPic_Oak + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
 };
 
+const struct SpriteFrameImage gTrainerBackPicTable_Lyra[] =
+{
+    {gTrainerBackPic_Lyra + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
+    {gTrainerBackPic_Lyra + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
+    {gTrainerBackPic_Lyra + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
+    {gTrainerBackPic_Lyra + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
+};
+
+const struct SpriteFrameImage gTrainerBackPicTable_Ethan[] =
+{
+    {gTrainerBackPic_Ethan + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
+    {gTrainerBackPic_Ethan + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
+    {gTrainerBackPic_Ethan + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
+    {gTrainerBackPic_Ethan + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
+};
+
 // .backPic goes functionally unused, since none of these pics are compressed
 // and the place they would get extracted to gets overwritten later anyway
 // the casts are so they'll play nice with the strict struct definition
@@ -550,14 +578,16 @@ const struct SpriteFrameImage gTrainerBackPicTable_Oak[] =
 
 const struct TrainerBacksprite gTrainerBacksprites[] =
 {
-    TRAINER_BACK_SPRITE(BRENDAN, 4, Brendan, Palette_Brendan, Hoenn),
-    TRAINER_BACK_SPRITE(MAY, 4, May, Palette_May, Hoenn),
-    TRAINER_BACK_SPRITE(RED, 5, Red, BackPicPalette_Red, Kanto),
-    TRAINER_BACK_SPRITE(LEAF, 5, Leaf, BackPicPalette_Leaf, Kanto),
-    TRAINER_BACK_SPRITE(LUCAS, 4, Lucas, BackPalette_Lucas, Hoenn),
-    TRAINER_BACK_SPRITE(DAWN, 4, Dawn, BackPalette_Dawn, Hoenn),
-    TRAINER_BACK_SPRITE(CYNTHIA, 4, Cynthia, BackPalette_Cynthia, Hoenn),
+    TRAINER_BACK_SPRITE(BRENDAN,4, Brendan, Palette_Brendan, Hoenn),
+    TRAINER_BACK_SPRITE(MAY,    4, May, Palette_May, Hoenn),
+    TRAINER_BACK_SPRITE(RED,    5, Red, BackPicPalette_Red, Kanto),
+    TRAINER_BACK_SPRITE(LEAF,   5, Leaf, BackPicPalette_Leaf, Kanto),
+    TRAINER_BACK_SPRITE(LUCAS,  4, Lucas, BackPalette_Lucas, Hoenn),
+    TRAINER_BACK_SPRITE(DAWN,   4, Dawn, BackPalette_Dawn, Hoenn),
+    TRAINER_BACK_SPRITE(CYNTHIA,4, Cynthia, BackPalette_Cynthia, Hoenn),
     TRAINER_BACK_SPRITE(STEVEN, 4, Steven, Palette_Steven, Hoenn),
     TRAINER_BACK_SPRITE(PHOEBE, 4, Phoebe, BackPalette_Phoebe, Hoenn),
     TRAINER_BACK_SPRITE(OAK,    4, Oak, BackPalette_Oak, Hoenn),
+    TRAINER_BACK_SPRITE(LYRA,   4, Lyra, BackPalette_Lyra, Hoenn),
+    TRAINER_BACK_SPRITE(ETHAN,  4, Ethan, BackPalette_Ethan, Hoenn),
 };
