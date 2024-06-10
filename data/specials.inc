@@ -556,3 +556,4 @@ gSpecials::
 	def_special Script_GetChosenMonDefensiveIVs
 	def_special ShowTutorMoveList
 	def_special CallStatEditor
+	def_special CreateWonderTradePokemon
