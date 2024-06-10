@@ -98,16 +98,41 @@ u16 gSaveAttemptStatus;
 
 EWRAM_DATA struct SaveSector gSaveDataBuffer = {0}; // Buffer used for reading/writing sectors
 
+EWRAM_DATA u8 saveDexSeen[NUM_DEX_FLAG_BYTES];
+EWRAM_DATA u8 saveDexCaught[NUM_DEX_FLAG_BYTES];
+
+void SavePokedexFlags2(void)
+{
+    u16 i;
+    for (i = 0; i < NUM_DEX_FLAG_BYTES; i++)
+    {
+        saveDexCaught[i] = gSaveBlock1Ptr->dexCaught[i];
+        saveDexSeen[i] = gSaveBlock1Ptr->dexSeen[i];
+    }
+}
+
+void ReloadPokedexFlags2(void)
+{
+    u16 i;
+    for (i = 0; i < NUM_DEX_FLAG_BYTES; i++)
+    {
+        gSaveBlock1Ptr->dexCaught[i] = saveDexCaught[i];
+        gSaveBlock1Ptr->dexSeen[i] = saveDexSeen[i];
+    }
+}
+
+
 void ClearSaveData(void)
 {
     u16 i;
-
+    SavePokedexFlags2();
     // Clear the full save two sectors at a time
     for (i = 0; i < SECTORS_COUNT / 2; i++)
     {
         EraseFlashSector(i);
         EraseFlashSector(i + SECTORS_COUNT / 2);
     }
+    ReloadPokedexFlags2();
 }
 
 void Save_ResetSaveCounters(void)

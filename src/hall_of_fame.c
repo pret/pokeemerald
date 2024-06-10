@@ -33,6 +33,7 @@
 #include "trainer_pokemon_sprites.h"
 #include "data.h"
 #include "confetti_util.h"
+#include "main_menu.h"
 #include "constants/rgb.h"
 
 #define HALL_OF_FAME_MAX_TEAMS 30
@@ -769,8 +770,7 @@ static void Task_Hof_HandleExit(u8 taskId)
 
         if(FlagGet(FLAG_RUN_ENDED_SCREEN))
         {
-            ClearSaveData();
-            DoSoftReset();
+            SetMainCallback2(CB2_NewGameBirchSpeech_FromNewMainMenu);
         }
         else
             StartCredits();
