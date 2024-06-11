@@ -53,6 +53,7 @@ SINGLE_BATTLE_TEST("Clear Body prevents stat stage reduction from moves")
         TURN { MOVE(player, move); }
     } SCENE {
         NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, move, player);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
         }
         ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
@@ -88,6 +89,7 @@ SINGLE_BATTLE_TEST("Clear Body doesn't prevent stat stage reduction from moves u
     } WHEN {
         TURN { MOVE(opponent, MOVE_SUPERPOWER); }
     } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SUPERPOWER, opponent);
         NONE_OF {
             ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY); 
             MESSAGE("Foe Beldum's Clear Body prevents stat loss!");
@@ -136,6 +138,7 @@ SINGLE_BATTLE_TEST("Mold Breaker, Teravolt, and Turboblaze ignore Clear Body")
     } WHEN {
         TURN { MOVE(player, move); }
     } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, move, player);
         NONE_OF {
             ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY); 
             MESSAGE("Foe Beldum's Clear Body prevents stat loss!");
@@ -175,9 +178,10 @@ SINGLE_BATTLE_TEST("Clear Body doesn't prevent Speed reduction from paralysis")
         TURN { MOVE(player, MOVE_THUNDER_WAVE); }
         TURN { MOVE(player, MOVE_THUNDER_WAVE); }
     } SCENE {
-        NOT ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
         MESSAGE("Foe Beldum used Celebrate!");
         MESSAGE("Wobbuffet used Thunder Wave!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDER_WAVE, player);
+        NOT ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
         MESSAGE("Wobbuffet used Thunder Wave!");
         ONE_OF {
             MESSAGE("Foe Beldum used Celebrate!");
@@ -217,8 +221,9 @@ SINGLE_BATTLE_TEST("Clear Body doesn't prevent receiving negative stat changes f
         TURN { MOVE(player, MOVE_SCARY_FACE); MOVE(opponent, MOVE_BATON_PASS); SEND_OUT(opponent, 1); }
         TURN { MOVE(player, MOVE_SCARY_FACE); }
     } SCENE {
-        NOT ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
         MESSAGE("Wobbuffet used Scary Face!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCARY_FACE, player);
+        ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
         MESSAGE("Foe Beldum used Celebrate!");
     }
 }
@@ -237,11 +242,14 @@ SINGLE_BATTLE_TEST("Clear Body doesn't prevent Topsy-Turvy")
         TURN { MOVE(player, MOVE_TOPSY_TURVY); }
         TURN { MOVE(player, MOVE_SCARY_FACE); }
     } SCENE {
-        NOT ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
         MESSAGE("Wobbuffet used Topsy-Turvy!");
+        NOT ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TOPSY_TURVY, player);
         MESSAGE("Foe Beldum used Celebrate!");
         MESSAGE("Foe Beldum used Celebrate!");
         MESSAGE("Wobbuffet used Scary Face!");
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_SCARY_FACE, player);
+        ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
     }
 }
 
@@ -257,11 +265,13 @@ SINGLE_BATTLE_TEST("Clear Body doesn't prevent Spectral Thief from resetting pos
         TURN{ MOVE(player, MOVE_SPECTRAL_THIEF); }
         TURN{ }
     } SCENE {
-        NOT ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
         MESSAGE("Foe Metang used Agility!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_AGILITY, opponent);
         MESSAGE("Wobbuffet used Celebrate!");
         MESSAGE("Foe Metang used Celebrate!");
         MESSAGE("Wobbuffet used SpectrlThief!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPECTRAL_THIEF, player);
+        NOT ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
         MESSAGE("Wobbuffet used Celebrate!");
         MESSAGE("Foe Metang used Celebrate!");
     }
