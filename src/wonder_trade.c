@@ -22,6 +22,12 @@
 #include "string_util.h"
 #include "daycare.h"
 #include "wonder_trade.h"
+#include "constants/vars.h"
+#include "constants/flags.h"
+#include "gba/defines.h"
+#include "data.h"
+#include "gba/types.h"
+#include "constants/global.h"
 
 // This file's functions.
 static u8 GetWonderTradeOT(u8 *name);
@@ -122,7 +128,7 @@ static u32 ReturnRandomSpecies()
             if (rerollMon)
             {
                 counter2++;
-                species = GetSpeciesRandomNotSeeded(species * GetSpeciesRandomNotSeeded(VarGet(VAR_PIT_FLOOR) + index));
+                species = GetSpeciesRandomNotSeeded(species * GetSpeciesRandomNotSeeded(VarGet(VAR_PIT_FLOOR) + 1));
                 counter = 0; //reset counter for legendary rerolls
                 DebugPrintf("--- reroll ---");
             }
