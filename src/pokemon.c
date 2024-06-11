@@ -5372,7 +5372,6 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                                 targetSpecies = evolutions[i].targetSpecies;
                             break;
                     }
-                    targetSpecies = evolutions[i].targetSpecies;
                 }
                 break;
             case EVO_ITEM:
