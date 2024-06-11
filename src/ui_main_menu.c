@@ -237,8 +237,8 @@ static const u32 sStevenMugshot_Gfx[] = INCBIN_U32("graphics/ui_main_menu/steven
 static const u16 sCynthiaMugshot_Pal[] = INCBIN_U16("graphics/ui_main_menu/cynthia.gbapal");
 static const u32 sCynthiaMugshot_Gfx[] = INCBIN_U32("graphics/ui_main_menu/cynthia.4bpp.lz");
 
-static const u16 sOakMugshot_Pal[] = INCBIN_U16("graphics/ui_main_menu/oak_mugshot_by_slaqueen.gbapal");
-static const u32 sOakMugshot_Gfx[] = INCBIN_U32("graphics/ui_main_menu/oak_mugshot_by_slaqueen.4bpp.lz");
+static const u16 sOakMugshot_Pal[] = INCBIN_U16("graphics/ui_main_menu/oak.gbapal");
+static const u32 sOakMugshot_Gfx[] = INCBIN_U32("graphics/ui_main_menu/oak.4bpp.lz");
 static const u16 sPhoebeMugshot_Pal[] = INCBIN_U16("graphics/ui_main_menu/phoebe.gbapal");
 static const u32 sPhoebeMugshot_Gfx[] = INCBIN_U32("graphics/ui_main_menu/phoebe.4bpp.lz");
 
