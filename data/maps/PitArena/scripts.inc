@@ -556,11 +556,10 @@ PitArena_ShopNPCHook_Gen5IVs::
 	goto_if_eq VAR_RESULT, 0, PitArena_MartScript_TMs
 	goto_if_eq VAR_RESULT, 1, PitArena_MartScript_EvoItems
 	goto_if_eq VAR_RESULT, 2, PitArena_MartScript_Vitamins
-	goto_if_eq VAR_RESULT, 3, PitArena_MartScript_Mints
-	goto_if_eq VAR_RESULT, 4, PitArena_MartScript_Gems
-	goto_if_eq VAR_RESULT, 5, PitArena_MartScript_FormItems
-	goto_if_eq VAR_RESULT, 6, PitArena_MartScript_EditIVs
-	goto_if_eq VAR_RESULT, 7, PitArena_MartScript_Sell
+	goto_if_eq VAR_RESULT, 3, PitArena_MartScript_Gems
+	goto_if_eq VAR_RESULT, 4, PitArena_MartScript_FormItems
+	goto_if_eq VAR_RESULT, 5, PitArena_MartScript_EditIVs
+	goto_if_eq VAR_RESULT, 6, PitArena_MartScript_Sell
 	release
 	end
 
