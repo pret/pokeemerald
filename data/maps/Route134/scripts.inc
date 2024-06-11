@@ -32,17 +32,17 @@ Route134_EventScript_Hitoshi::
 	end
 
 Route134_EventScript_Hudson::
-	trainerbattle_single TRAINER_HUDSON, Route134_Text_HudsonIntro, Route134_Text_HudsonDefeat
+	trainerbattle_single TRAINER_RANDOM_BATTLE_6, Route134_Text_HudsonIntro, Route134_Text_HudsonDefeat
 	msgbox Route134_Text_HudsonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route134_EventScript_Reyna::
-	trainerbattle_single TRAINER_REYNA, Route134_Text_ReynaIntro, Route134_Text_ReynaDefeat
+	trainerbattle_single TRAINER_RANDOM_BATTLE_5, Route134_Text_ReynaIntro, Route134_Text_ReynaDefeat
 	msgbox Route134_Text_ReynaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route134_EventScript_Marley::
-	trainerbattle_single TRAINER_MARLEY, Route134_Text_MarleyIntro, Route134_Text_MarleyDefeat
+	trainerbattle_single TRAINER_RANDOM_BATTLE_4, Route134_Text_MarleyIntro, Route134_Text_MarleyDefeat
 	msgbox Route134_Text_MarleyPostBattle, MSGBOX_AUTOCLOSE
 	end
 

@@ -73,12 +73,6 @@ u8 ScriptGiveEgg(u16 species)
 
 void HasEnoughMonsForDoubleBattle(void)
 {
-    if(FlagGet(FLAG_DOUBLES_MODE))
-    {
-        gSpecialVar_Result = PLAYER_HAS_TWO_USABLE_MONS;
-        return;
-    }
-
     switch (GetMonsStateToDoubles())
     {
     case PLAYER_HAS_TWO_USABLE_MONS:

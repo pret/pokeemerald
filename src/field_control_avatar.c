@@ -328,7 +328,7 @@ static const u8 *GetInteractedObjectEventScript(struct MapPosition *position, u8
 
     if(VarGet(VAR_PIT_FLOOR) > 0)
     {
-        if(gSpecialVar_LastTalked > 0 && gSpecialVar_LastTalked < 5)
+        if(((gSpecialVar_LastTalked > 0) && (gSpecialVar_LastTalked < 5)) || ((gSpecialVar_LastTalked > 14) && (gSpecialVar_LastTalked < 19)))
         {
             script = EventScript_TurnTrainer;
             return script;

@@ -549,9 +549,20 @@ static const struct RandomTrainerNPC RandomNPCTrainers[] =
     [3] = {VAR_OBJ_GFX_ID_3, FLAG_TRAINER_3, TRAINER_RANDOM_BATTLE_3},
 };
 
-u16 ReturnLastSpokenVarObjGfxId()
+static const struct RandomTrainerNPC RandomNPCTrainers_Doubles[] = 
 {
-    return VarGet(RandomNPCTrainers[gSpecialVar_LastTalked - 1].gfxid);
+    [0] = {VAR_OBJ_GFX_ID_0, FLAG_TRAINER_4, TRAINER_RANDOM_BATTLE_4},
+    [1] = {VAR_OBJ_GFX_ID_1, FLAG_TRAINER_5, TRAINER_RANDOM_BATTLE_5},
+    [2] = {VAR_OBJ_GFX_ID_2, FLAG_TRAINER_6, TRAINER_RANDOM_BATTLE_6},
+    [3] = {VAR_OBJ_GFX_ID_3, FLAG_TRAINER_7, TRAINER_RANDOM_BATTLE_7},
+};
+
+u16 ReturnLastSpokenVarObjGfxId()
+{   
+    if(FlagGet(FLAG_DOUBLES_MODE))
+        return VarGet(RandomNPCTrainers_Doubles[gSpecialVar_LastTalked - 15].gfxid);
+    else
+        return VarGet(RandomNPCTrainers[gSpecialVar_LastTalked - 1].gfxid);
 }
 
 u16 ReturnNumberOfTrainersForFloor()
@@ -701,9 +712,19 @@ void SetRandomTrainers()
             newTrainer = (Random() % 4);
         }
         trainers[newTrainer] = 1;
-        VarSet(RandomNPCTrainers[newTrainer].gfxid, (Random() % 53) + 5);
-        ClearTrainerFlag(RandomNPCTrainers[newTrainer].trainerflag); 
-        FlagClear(RandomNPCTrainers[newTrainer].objectflag); 
+        if(FlagGet(FLAG_DOUBLES_MODE))
+        {
+            VarSet(RandomNPCTrainers_Doubles[newTrainer].gfxid, (Random() % 53) + 5);
+            ClearTrainerFlag(RandomNPCTrainers_Doubles[newTrainer].trainerflag); 
+            FlagClear(RandomNPCTrainers_Doubles[newTrainer].objectflag); 
+        }
+        else
+        {
+            VarSet(RandomNPCTrainers[newTrainer].gfxid, (Random() % 53) + 5);
+            ClearTrainerFlag(RandomNPCTrainers[newTrainer].trainerflag); 
+            FlagClear(RandomNPCTrainers[newTrainer].objectflag); 
+        }
+        
     }
 
     // Handle Random Trainer Objects That Aren't Spawned
@@ -711,11 +732,28 @@ void SetRandomTrainers()
     {
         if (!trainers[iterator])
         {
+            if(FlagGet(FLAG_DOUBLES_MODE))
+            {
+                FlagSet(RandomNPCTrainers_Doubles[iterator].objectflag);
+                SetTrainerFlag(RandomNPCTrainers_Doubles[iterator].trainerflag);
+            }
+            else
+            {
+                FlagSet(RandomNPCTrainers[iterator].objectflag);
+                SetTrainerFlag(RandomNPCTrainers[iterator].trainerflag);
+            }
+        }
+        if(FlagGet(FLAG_DOUBLES_MODE))
+        {
             FlagSet(RandomNPCTrainers[iterator].objectflag);
             SetTrainerFlag(RandomNPCTrainers[iterator].trainerflag);
         }
+        else
+        {
+            FlagSet(RandomNPCTrainers_Doubles[iterator].objectflag);
+            SetTrainerFlag(RandomNPCTrainers_Doubles[iterator].trainerflag);
+        }
     }
-    
 }
 
 void CheckFloorCleared()
@@ -724,7 +762,10 @@ void CheckFloorCleared()
     u16 trainerDefeated = 0;
     for (iterator = 0; iterator < 4; iterator++)
     {
-        trainerDefeated = (u8) FlagGet(TRAINER_FLAGS_START + RandomNPCTrainers[iterator].trainerflag) + trainerDefeated;
+        if(FlagGet(FLAG_DOUBLES_MODE))
+            trainerDefeated = (u8) FlagGet(TRAINER_FLAGS_START + RandomNPCTrainers_Doubles[iterator].trainerflag) + trainerDefeated;
+        else
+            trainerDefeated = (u8) FlagGet(TRAINER_FLAGS_START + RandomNPCTrainers[iterator].trainerflag) + trainerDefeated;
     }
     if (trainerDefeated == 4)
         FlagSet(FLAG_FLOOR_CLEARED);

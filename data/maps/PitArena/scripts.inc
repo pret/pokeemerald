@@ -217,11 +217,30 @@ PitArena_TrainerBattle3::
 	trainerbattle_single TRAINER_RANDOM_BATTLE_3, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_TrainerBattleFinished
 	end
 
+PitArena_TrainerBattle4::
+	trainerbattle_double TRAINER_RANDOM_BATTLE_4, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_Text_NotEnoughMons, PitArena_TrainerBattleFinished
+	end
+
+PitArena_TrainerBattle5::
+	trainerbattle_double TRAINER_RANDOM_BATTLE_5, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_Text_NotEnoughMons, PitArena_TrainerBattleFinished
+	end
+
+PitArena_TrainerBattle6::
+	trainerbattle_double TRAINER_RANDOM_BATTLE_6, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_Text_NotEnoughMons, PitArena_TrainerBattleFinished
+	end
+
+PitArena_TrainerBattle7::
+	trainerbattle_double TRAINER_RANDOM_BATTLE_7, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_Text_NotEnoughMons, PitArena_TrainerBattleFinished
+	end
+
 PitArena_Text_Intro:
 	.string ".$"
 
 PitArena_Text_Defeat:
 	.string ".$"
+
+PitArena_Text_NotEnoughMons:
+	.string "Not enough mons.$"
 
 PitArena_TrainerBattleFinished::
 	end

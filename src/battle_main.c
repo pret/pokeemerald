@@ -824,14 +824,9 @@ static void CB2_InitBattleInternal(void)
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         gBattleTerrain = BATTLE_TERRAIN_BUILDING;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
-                                                                        | BATTLE_TYPE_EREADER_TRAINER
-                                                                        | BATTLE_TYPE_TRAINER_HILL)))
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {   
-        if(FlagGet(FLAG_DOUBLES_MODE))
-            gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
-        else
-            gBattleTypeFlags |= (IsTrainerDoubleBattle(gTrainerBattleOpponent_A) ? BATTLE_TYPE_DOUBLE : 0);
+        gBattleTypeFlags |= (IsTrainerDoubleBattle(gTrainerBattleOpponent_A) ? BATTLE_TYPE_DOUBLE : 0);
     }
 
     InitBattleBgsVideo();
@@ -2438,14 +2433,8 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
                                                                         | BATTLE_TYPE_EREADER_TRAINER
                                                                         | BATTLE_TYPE_TRAINER_HILL)))
-    {   if(FlagGet(FLAG_DOUBLES_MODE))
-        {
-            gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
-        }
-        else
-        {
-            gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
-        }
+    {   
+        gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
     }
     DebugPrintf("Reached End Of Parent Function: %d", gSpecialVar_Unused_0x8014);
     return retVal;

@@ -511,10 +511,10 @@
 #define TRAINER_KAYLEY                      505
 #define TRAINER_AURON                       506
 #define TRAINER_KELVIN                      507
-#define TRAINER_MARLEY                      508
-#define TRAINER_REYNA                       509
-#define TRAINER_HUDSON                      510
-#define TRAINER_CONOR                       511
+#define TRAINER_RANDOM_BATTLE_4                      508
+#define TRAINER_RANDOM_BATTLE_5                       509
+#define TRAINER_RANDOM_BATTLE_6                      510
+#define TRAINER_RANDOM_BATTLE_7                       511
 #define TRAINER_EDWIN_1                     512
 #define TRAINER_RANDOM_BATTLE_0               513
 #define TRAINER_RANDOM_BATTLE_1            	514
