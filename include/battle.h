@@ -779,6 +779,7 @@ struct BattleStruct
     u8 supremeOverlordCounter[MAX_BATTLERS_COUNT];
     u8 quickClawRandom[MAX_BATTLERS_COUNT];
     u8 quickDrawRandom[MAX_BATTLERS_COUNT];
+    u8 shellSideArmCategory[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT];
 };
 
 // The palaceFlags member of struct BattleStruct contains 1 flag per move to indicate which moves the AI should consider,

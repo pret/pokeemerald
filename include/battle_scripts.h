@@ -796,7 +796,6 @@ extern const u8 BattleScript_EffectPlasmaFists[];
 extern const u8 BattleScript_EffectHyperspaceFury[];
 extern const u8 BattleScript_EffectAuraWheel[];
 extern const u8 BattleScript_EffectPhotonGeyser[];
-extern const u8 BattleScript_EffectShellSideArm[];
 extern const u8 BattleScript_EffectNoRetreat[];
 extern const u8 BattleScript_EffectTarShot[];
 extern const u8 BattleScript_EffectPoltergeist[];
