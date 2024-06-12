@@ -432,7 +432,7 @@
 
 #define BATTLE_TERRAIN_COUNT            22
 
-#define B_WAIT_TIME_LONG        16
+#define B_WAIT_TIME_LONG        40
 #define B_WAIT_TIME_MED         8
 #define B_WAIT_TIME_SHORT       4
 #define B_WAIT_TIME_SHORTEST    2

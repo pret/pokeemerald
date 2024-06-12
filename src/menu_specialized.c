@@ -1520,7 +1520,7 @@ void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bg
     u8 text[12];
     u8 color[3];
 
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(bgClr));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(13));
 
     statsDiff[0] = statsAfter[STAT_HP]    - statsBefore[STAT_HP];
     statsDiff[1] = statsAfter[STAT_ATK]   - statsBefore[STAT_ATK];
@@ -1529,9 +1529,9 @@ void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bg
     statsDiff[4] = statsAfter[STAT_SPDEF] - statsBefore[STAT_SPDEF];
     statsDiff[5] = statsAfter[STAT_SPEED] - statsBefore[STAT_SPEED];
 
-    color[0] = bgClr;
-    color[1] = fgClr;
-    color[2] = shadowClr;
+    color[0] = 13;
+    color[1] = 14;
+    color[2] = 15;
 
     for (i = 0; i < NUM_STATS; i++)
     {
@@ -1575,7 +1575,7 @@ void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgClr, u8 fgClr, u8 s
     u8 text[12];
     u8 color[3];
 
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(bgClr));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(13));
 
     stats[0] = currStats[STAT_HP];
     stats[1] = currStats[STAT_ATK];
@@ -1584,9 +1584,9 @@ void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgClr, u8 fgClr, u8 s
     stats[4] = currStats[STAT_SPDEF];
     stats[5] = currStats[STAT_SPEED];
 
-    color[0] = bgClr;
-    color[1] = fgClr;
-    color[2] = shadowClr;
+    color[0] = 13;
+    color[1] = 14;
+    color[2] = 15;
 
     for (i = 0; i < NUM_STATS; i++)
     {

@@ -278,7 +278,7 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
         .tilemapTop = 8,
         .width = 10,
         .height = 11,
-        .paletteNum = 5,
+        .paletteNum = 1,
         .baseBlock = 0x0100,
     },
     [B_WIN_LEVEL_UP_BANNER] = {
@@ -404,7 +404,7 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
         .tilemapTop = 47,
         .width = 18,
         .height = 6,
-        .paletteNum = 5,
+        .paletteNum = 1,
         .baseBlock = 0x0350,
     },
     DUMMY_WIN_TEMPLATE
@@ -652,7 +652,7 @@ static const struct WindowTemplate sBattleArenaWindowTemplates[] =
         .tilemapTop = 47,
         .width = 18,
         .height = 6,
-        .paletteNum = 5,
+        .paletteNum = 1,
         .baseBlock = 0x0350,
     },
     DUMMY_WIN_TEMPLATE
@@ -808,8 +808,8 @@ void InitBattleBgsVideo(void)
 
 void LoadBattleMenuWindowGfx(void)
 {
-    LoadUserWindowBorderGfx(2, 0x12, BG_PLTT_ID(1));
-    LoadUserWindowBorderGfx(2, 0x22, BG_PLTT_ID(1));
+    LoadUserWindowBorderGfxOverride(2, 0x12, BG_PLTT_ID(1));
+    LoadUserWindowBorderGfxOverride(2, 0x22, BG_PLTT_ID(1));
     LoadCompressedPalette(gBattleWindowTextPalette, BG_PLTT_ID(5), PLTT_SIZE_4BPP);
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)

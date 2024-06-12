@@ -112,6 +112,11 @@ void LoadUserWindowBorderGfx(u8 windowId, u16 destOffset, u8 palOffset)
     LoadWindowGfx(windowId, gSaveBlock2Ptr->optionsWindowFrameType, destOffset, palOffset);
 }
 
+void LoadUserWindowBorderGfxOverride(u8 windowId, u16 destOffset, u8 palOffset)
+{
+    LoadWindowGfx(windowId, 2, destOffset, palOffset);
+}
+
 void DrawTextBorderOuter(u8 windowId, u16 tileNum, u8 palNum)
 {
     u8 bgLayer = GetWindowAttribute(windowId, WINDOW_BG);

@@ -1068,7 +1068,7 @@ static void MoveSelectionDisplayMoveDescription(u32 battler)
     //update pwr for dynamic moves
     pwr = GetCalcedMoveBasePower(move, battler, GetSavedWeather());
 
-    LoadMessageBoxAndBorderGfx();
+    LoadMessageBoxAndBorderGfxOverride();
     DrawStdWindowFrame(B_WIN_MOVE_DESCRIPTION, FALSE);
     if (pwr < 2)
         StringCopy(pwr_num, gText_BattleSwitchWhich5);

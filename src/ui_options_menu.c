@@ -28,7 +28,6 @@ enum
     MENUITEM_MAIN_BATTLESTYLE,
     MENUITEM_MAIN_SOUND,
     MENUITEM_MAIN_BUTTONMODE,
-    MENUITEM_MAIN_FRAMETYPE,
     MENUITEM_MAIN_CANCEL,
     MENUITEM_MAIN_COUNT,
 };
@@ -207,7 +206,6 @@ struct // MENU_MAIN
     [MENUITEM_MAIN_BATTLESTYLE]  = {DrawChoices_BattleStyle, ProcessInput_Options_Two},
     [MENUITEM_MAIN_SOUND]        = {DrawChoices_Sound,       ProcessInput_Options_Two},
     [MENUITEM_MAIN_BUTTONMODE]   = {DrawChoices_ButtonMode,  ProcessInput_Options_Three},
-    [MENUITEM_MAIN_FRAMETYPE]    = {DrawChoices_FrameType,   ProcessInput_FrameType},
     [MENUITEM_MAIN_CANCEL]       = {NULL, NULL},
 };
 
@@ -223,7 +221,6 @@ static const u8 *const sOptionsMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
     [MENUITEM_MAIN_BATTLESTYLE] = gText_BattleStyle,
     [MENUITEM_MAIN_SOUND]       = gText_Sound,
     [MENUITEM_MAIN_BUTTONMODE]  = gText_ButtonMode,
-    [MENUITEM_MAIN_FRAMETYPE]   = gText_Frame,
     [MENUITEM_MAIN_CANCEL]      = sText_Cancel,
 };
 
@@ -243,7 +240,6 @@ static bool8 CheckConditions(int selection)
         case MENUITEM_MAIN_BATTLESTYLE:     return TRUE;
         case MENUITEM_MAIN_SOUND:           return TRUE;
         case MENUITEM_MAIN_BUTTONMODE:      return TRUE;
-        case MENUITEM_MAIN_FRAMETYPE:       return TRUE;
         case MENUITEM_MAIN_CANCEL:          return TRUE;
         case MENUITEM_MAIN_COUNT:           return TRUE;
         default:                            return FALSE;
@@ -275,7 +271,6 @@ static const u8 *const sOptionsMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] 
     [MENUITEM_MAIN_BATTLESTYLE] = {sText_Desc_BattleStyle_Shift,    sText_Desc_BattleStyle_Set, sText_Empty},
     [MENUITEM_MAIN_SOUND]       = {sText_Desc_SoundMono,            sText_Desc_SoundStereo,     sText_Empty},
     [MENUITEM_MAIN_BUTTONMODE]  = {sText_Desc_ButtonMode,           sText_Desc_ButtonMode_LR,   sText_Desc_ButtonMode_LA},
-    [MENUITEM_MAIN_FRAMETYPE]   = {sText_Desc_FrameType,            sText_Empty,                sText_Empty},
     [MENUITEM_MAIN_CANCEL]      = {sText_Desc_Save,                 sText_Empty,                sText_Empty},
 };
 
@@ -288,7 +283,6 @@ static const u8 *const sOptionsMenuItemDescriptionsDisabledMain[MENUITEM_MAIN_CO
     [MENUITEM_MAIN_BATTLESTYLE] = sText_Empty,
     [MENUITEM_MAIN_SOUND]       = sText_Empty,
     [MENUITEM_MAIN_BUTTONMODE]  = sText_Empty,
-    [MENUITEM_MAIN_FRAMETYPE]   = sText_Empty,
     [MENUITEM_MAIN_CANCEL]      = sText_Empty,
 };
 
@@ -300,7 +294,7 @@ static const u8 *const OptionTextDescription(void)
     if (!CheckConditions(menuItem))
         return sOptionsMenuItemDescriptionsDisabledMain[menuItem];
     selection = sOptions->sel[menuItem];
-    if (menuItem == MENUITEM_MAIN_TEXTSPEED || menuItem == MENUITEM_MAIN_FRAMETYPE)
+    if (menuItem == MENUITEM_MAIN_TEXTSPEED)
         selection = 0;
     return sOptionsMenuItemDescriptionsMain[menuItem][selection];
 }
@@ -550,7 +544,7 @@ void CB2_InitOptionsMenu(void)
         sOptions->sel[MENUITEM_MAIN_BATTLESTYLE] = gSaveBlock2Ptr->optionsBattleStyle;
         sOptions->sel[MENUITEM_MAIN_SOUND]       = gSaveBlock2Ptr->optionsSound;
         sOptions->sel[MENUITEM_MAIN_BUTTONMODE]  = gSaveBlock2Ptr->optionsButtonMode;
-        sOptions->sel[MENUITEM_MAIN_FRAMETYPE]   = gSaveBlock2Ptr->optionsWindowFrameType;
+//        sOptions->sel[MENUITEM_MAIN_FRAMETYPE]   = gSaveBlock2Ptr->optionsWindowFrameType;
 
         gMain.state++;
         break;
@@ -711,7 +705,6 @@ static void Task_OptionsMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsBattleStyle      = sOptions->sel[MENUITEM_MAIN_BATTLESTYLE];
     gSaveBlock2Ptr->optionsSound            = sOptions->sel[MENUITEM_MAIN_SOUND];
     gSaveBlock2Ptr->optionsButtonMode       = sOptions->sel[MENUITEM_MAIN_BUTTONMODE];
-    gSaveBlock2Ptr->optionsWindowFrameType  = sOptions->sel[MENUITEM_MAIN_FRAMETYPE];
 
     //set flags/VARs
     VarSet(VAR_PIT_AUTOSAVE, sOptions->sel[MENUITEM_MAIN_AUTOSAVE]);
@@ -1008,7 +1001,7 @@ static void DrawChoices_ButtonMode(int selection, int y)
 
 static void DrawChoices_FrameType(int selection, int y)
 {
-    bool8 active = CheckConditions(MENUITEM_MAIN_FRAMETYPE);
+    bool8 active = 0; //CheckConditions(MENUITEM_MAIN_FRAMETYPE);
     u8 text[16];
     u8 n = selection + 1;
     u16 i;
