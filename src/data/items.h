@@ -7358,7 +7358,7 @@ const struct Item gItemsInfo[] =
         .price = 200,
         .holdEffect = HOLD_EFFECT_DOUBLE_PRIZE,
         .description = sLuckIncenseDesc,
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 30,
@@ -7416,7 +7416,7 @@ const struct Item gItemsInfo[] =
             "A hold item that\n"
             "boosts Exp. points\n"
             "earned in battle."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 30,
