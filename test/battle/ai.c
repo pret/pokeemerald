@@ -819,8 +819,9 @@ AI_SINGLE_BATTLE_TEST("AI will not choose Burn Up if the user lost the Fire typi
     }
 }
 
-AI_SINGLE_BATTLE_TEST("AI will choose Surf over Thunderbolt and Ice Beam if the opposing mon has Volt Absorb")
+AI_SINGLE_BATTLE_TEST("AI will only choose Surf 1/3 times if the opposing mon has Volt Absorb")
 {
+    PASSES_RANDOMLY(1, 3, RNG_AI_ABILITY);
     GIVEN {
         ASSUME(gMovesInfo[MOVE_THUNDERBOLT].type == TYPE_ELECTRIC);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
@@ -828,6 +829,27 @@ AI_SINGLE_BATTLE_TEST("AI will choose Surf over Thunderbolt and Ice Beam if the 
         OPPONENT(SPECIES_LANTURN) { Moves(MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_SURF); }
     } WHEN {
         TURN { EXPECT_MOVE(opponent, MOVE_SURF); }
+        TURN { EXPECT_MOVE(opponent, MOVE_SURF); }
+    } SCENE {
+        MESSAGE("Foe Lanturn used Surf!");
+        MESSAGE("Foe Lanturn used Surf!");
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI will choose Thunderbolt then Surf 2/3 times if the opposing mon has Volt Absorb")
+{
+    PASSES_RANDOMLY(2, 3, RNG_AI_ABILITY);
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_THUNDERBOLT].type == TYPE_ELECTRIC);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_LANTURN) { Ability(ABILITY_VOLT_ABSORB); };
+        OPPONENT(SPECIES_LANTURN) { Moves(MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_SURF); }
+    } WHEN {
+        TURN { EXPECT_MOVE(opponent, MOVE_THUNDERBOLT); }
+        TURN { EXPECT_MOVE(opponent, MOVE_SURF); }
+    } SCENE {
+        MESSAGE("Foe Lanturn used Thunderbolt!");
+        MESSAGE("Foe Lanturn used Surf!");
     }
 }
 
