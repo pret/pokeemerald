@@ -1001,6 +1001,21 @@ AI_SINGLE_BATTLE_TEST("AI calculates guaranteed criticals and detects critical i
     }
 }
 
+AI_DOUBLE_BATTLE_TEST("AI recognizes Volt Absorb received from Trace")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_MAGNETON);
+        PLAYER(SPECIES_GARDEVOIR) { Ability(ABILITY_TRACE); }
+        OPPONENT(SPECIES_JOLTEON) { Ability(ABILITY_VOLT_ABSORB); Moves(MOVE_THUNDER_WAVE, MOVE_THUNDERSHOCK, MOVE_WATER_GUN); }
+        OPPONENT(SPECIES_JOLTEON) { Ability(ABILITY_VOLT_ABSORB); Moves(MOVE_THUNDER_WAVE, MOVE_THUNDERSHOCK, MOVE_WATER_GUN); }
+    } WHEN {
+        TURN { NOT_EXPECT_MOVE(opponentLeft, MOVE_THUNDERSHOCK); NOT_EXPECT_MOVE(opponentLeft, MOVE_THUNDER_WAVE); NOT_EXPECT_MOVE(opponentRight, MOVE_THUNDER_WAVE); }
+    } THEN {
+        EXPECT(gBattleResources->aiData->abilities[B_POSITION_PLAYER_RIGHT] == ABILITY_VOLT_ABSORB);
+    }
+}
+
 AI_SINGLE_BATTLE_TEST("AI avoids contact moves against rocky helmet")
 {
     u32 item;
