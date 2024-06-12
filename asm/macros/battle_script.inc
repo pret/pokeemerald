@@ -1641,6 +1641,10 @@
 	callnative BS_TryUpdateRecoilTracker
 	.endm
 
+	.macro tryupdateleaderscresttracker
+	callnative BS_TryUpdateLeadersCrestTracker
+	.endm
+
 	.macro trytidyup clear:req, jumpInstr:req
 	callnative BS_TryTidyUp
 	.byte \clear

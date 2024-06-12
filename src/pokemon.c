@@ -4684,6 +4684,10 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                 if (evolutionTracker >= evolutions[i].param && GetMonGender(mon) == MON_FEMALE)
                     targetSpecies = evolutions[i].targetSpecies;
                 break;
+            case EVO_DEFEAT_WITH_ITEM:
+                if (evolutionTracker >= 3)
+                    targetSpecies = evolutions[i].targetSpecies;
+                break;
             }
         }
         break;

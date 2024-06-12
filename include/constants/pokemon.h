@@ -296,6 +296,7 @@
 #define EVO_RECOIL_DAMAGE_MALE            48     // Pokémon levels up after having suffered specified amount of non-fainting recoil damage as a male
 #define EVO_RECOIL_DAMAGE_FEMALE          49     // Pokémon levels up after having suffered specified amount of non-fainting recoil damage as a female
 #define EVO_ITEM_COUNT_999                50     // Pokémon levels up after trainer has collected 999 of a specific item
+#define EVO_DEFEAT_WITH_ITEM              51     // Pokémon levels up after having defeat 3 Pokémon of the same species holding the specified item
 
 // Evolution 'modes,' for GetEvolutionTargetSpecies
 #define EVO_MODE_NORMAL            0
