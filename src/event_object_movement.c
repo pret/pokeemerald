@@ -1890,10 +1890,12 @@ static const struct ObjectEventGraphicsInfo *SpeciesToGraphicsInfo(u16 species, 
         break;
     }
     // Try to avoid OOB or undefined access
-    if (graphicsInfo->tileTag == 0 && species < NUM_SPECIES)
-        return &gSpeciesInfo[SPECIES_NONE].followerData;
-    else if (graphicsInfo->tileTag != TAG_NONE && species >= NUM_SPECIES)
-        return &gSpeciesInfo[SPECIES_NONE].followerData;
+    if ((graphicsInfo->tileTag == 0 && species < NUM_SPECIES) || (graphicsInfo->tileTag != TAG_NONE && species >= NUM_SPECIES))
+    {
+        if (OW_SUBSTITUTE_PLACEHOLDER)
+            return &gSpeciesInfo[SPECIES_NONE].followerData;
+        return NULL;
+    }
 #endif
     return graphicsInfo;
 }
@@ -1983,7 +1985,7 @@ static void RefreshFollowerGraphics(struct ObjectEvent *objEvent)
 
     if (graphicsInfo->oam->size != sprite->oam.size)
     {
-        if (LARGE_OW_SUPPORT && !OW_GFX_COMPRESS)
+        if (OW_LARGE_OW_SUPPORT && !OW_GFX_COMPRESS)
             ReallocSpriteTiles(sprite, graphicsInfo->images->size);
         // Add difference in Y vectors
         sprite->y += -(graphicsInfo->height >> 1) - sprite->centerToCornerVecY;
@@ -2077,7 +2079,8 @@ void UpdateFollowingPokemon(void)
     // 3. flag is set
     if (OW_FOLLOWERS_ENABLED == FALSE
      || !GetFollowerInfo(&species, &form, &shiny)
-     || (gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(species, 0)->oam->size > ST_OAM_SIZE_2)
+     || SpeciesToGraphicsInfo(species, form) == NULL
+     || (gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(species, form)->oam->size > ST_OAM_SIZE_2)
      || FlagGet(FLAG_TEMP_HIDE_FOLLOWER))
     {
         RemoveFollowingPokemon();
@@ -2636,7 +2639,7 @@ static void ObjectEventSetGraphics(struct ObjectEvent *objectEvent, const struct
         UpdateSpritePalette(&sObjectEventSpritePalettes[i], sprite);
 
     // If gfx size changes, we need to reallocate tiles
-    if (LARGE_OW_SUPPORT && !OW_GFX_COMPRESS && graphicsInfo->oam->size != sprite->oam.size)
+    if (OW_LARGE_OW_SUPPORT && !OW_GFX_COMPRESS && graphicsInfo->oam->size != sprite->oam.size)
         ReallocSpriteTiles(sprite, graphicsInfo->images->size);
 
     #if OW_GFX_COMPRESS
@@ -7147,7 +7150,7 @@ bool8 MovementAction_ExitPokeball_Step1(struct ObjectEvent *objectEvent, struct 
         LoadFillColorPalette(RGB_WHITE, OBJ_EVENT_PAL_TAG_WHITE, sprite);
         // Initialize affine animation
         sprite->affineAnims = sAffineAnims_PokeballFollower;
-        if (LARGE_OW_SUPPORT && !IS_POW_OF_TWO(-sprite->centerToCornerVecX))
+        if (OW_LARGE_OW_SUPPORT && !IS_POW_OF_TWO(-sprite->centerToCornerVecX))
             return FALSE;
         sprite->affineAnims = sAffineAnims_PokeballFollower;
         sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
@@ -7194,7 +7197,7 @@ bool8 MovementAction_EnterPokeball_Step1(struct ObjectEvent *objectEvent, struct
         sprite->subspriteTableNum = 0;
         // Only do affine if sprite width is power of 2
         // (effect looks weird on sprites composed of subsprites like 48x48, etc)
-        if (LARGE_OW_SUPPORT && !IS_POW_OF_TWO(-sprite->centerToCornerVecX))
+        if (OW_LARGE_OW_SUPPORT && !IS_POW_OF_TWO(-sprite->centerToCornerVecX))
             return FALSE;
         sprite->affineAnims = sAffineAnims_PokeballFollower;
         sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
@@ -9237,7 +9240,7 @@ static void UpdateObjectEventElevationAndPriority(struct ObjectEvent *objEvent, 
     {
         // keep subspriteMode synced with player's
         // so that it disappears under bridges when they do
-        if (LARGE_OW_SUPPORT)
+        if (OW_LARGE_OW_SUPPORT)
             sprite->subspriteMode |= gSprites[gPlayerAvatar.spriteId].subspriteMode & SUBSPRITES_IGNORE_PRIORITY;
         // if transitioning between elevations, use the player's elevation
         if (!objEvent->currentElevation)
@@ -9269,7 +9272,7 @@ void ObjectEventUpdateElevation(struct ObjectEvent *objEvent, struct Sprite *spr
     {
         // Ignore subsprite priorities under bridges
         // so all subsprites will display below it
-        if (LARGE_OW_SUPPORT)
+        if (OW_LARGE_OW_SUPPORT)
             sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
         return;
     }
@@ -9667,7 +9670,7 @@ static void DoGroundEffects_OnSpawn(struct ObjectEvent *objEvent, struct Sprite 
 #endif
     {
         flags = 0;
-        if (LARGE_OW_SUPPORT && !sprite->oam.affineMode)
+        if (OW_LARGE_OW_SUPPORT && !sprite->oam.affineMode)
             sprite->subspriteMode = SUBSPRITES_ON;
         UpdateObjectEventElevationAndPriority(objEvent, sprite);
         GetAllGroundEffectFlags_OnSpawn(objEvent, &flags);
@@ -9689,7 +9692,7 @@ static void DoGroundEffects_OnBeginStep(struct ObjectEvent *objEvent, struct Spr
 #endif
     {
         flags = 0;
-        if (LARGE_OW_SUPPORT && !sprite->oam.affineMode)
+        if (OW_LARGE_OW_SUPPORT && !sprite->oam.affineMode)
             sprite->subspriteMode = SUBSPRITES_ON;
         UpdateObjectEventElevationAndPriority(objEvent, sprite);
         GetAllGroundEffectFlags_OnBeginStep(objEvent, &flags);
