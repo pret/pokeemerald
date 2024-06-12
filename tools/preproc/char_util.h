@@ -68,4 +68,21 @@ inline bool IsIdentifierChar(unsigned char c)
     return IsAsciiAlphanum(c) || c == '_';
 }
 
+inline bool IsCharGnuAssemblerNameBeginner(unsigned char c)
+{
+    return IsAsciiAlpha(c) || c == '$' || c == '_' || c == '.';
+}
+
+inline bool IsPartOfGnuAssemblerName(unsigned char c)
+{
+    return IsAsciiAlphanum(c) || c == '$' || c == '_' || c == '.';
+}
+
+inline bool IsGnuAssemblerWhitespace(unsigned char c)
+{
+    return c == ' ' || c == '\t'; // || c == '\f';
+}
+
+#define LOCAL_LABEL_PREFIX '$'
+
 #endif // CHAR_UTIL_H

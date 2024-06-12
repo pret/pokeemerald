@@ -27,6 +27,11 @@
 
 Charmap* g_charmap;
 
+namespace Preproc
+{
+    int numErrors = 0;
+}
+
 void PrintAsmBytes(unsigned char *s, int length)
 {
     if (length > 0)
@@ -49,10 +54,13 @@ void PreprocAsmFile(std::string filename)
 
     stack.push(AsmFile(filename));
 
+    std::string lineBuffer;
+
     for (;;)
     {
         while (stack.top().IsAtEnd())
         {
+            stack.top().FindUndefinedLocalLabelsThenClear();
             stack.pop();
 
             if (stack.empty())
@@ -66,6 +74,7 @@ void PreprocAsmFile(std::string filename)
         switch (directive)
         {
         case Directive::Include:
+            // stack.top().FindUndefinedLocalLabelsThenClear();
             stack.push(AsmFile(stack.top().ReadPath()));
             stack.top().OutputLocation();
             break;
@@ -85,18 +94,25 @@ void PreprocAsmFile(std::string filename)
         }
         case Directive::Unknown:
         {
-            std::string globalLabel = stack.top().GetGlobalLabel();
+            LabelType labelType = stack.top().TryParseLabel(lineBuffer);
 
-            if (globalLabel.length() != 0)
+            switch (labelType)
             {
-                const char *s = globalLabel.c_str();
-                std::printf("%s: ; .global %s\n", s, s);
-            }
-            else
-            {
-                stack.top().OutputLine();
-            }
+                const char * labelCStr;
 
+                case LabelType::NotALabel:
+                    stack.top().FindAndReplaceLocalLabels(lineBuffer);
+                    break;
+                case LabelType::Global:
+                    labelCStr = lineBuffer.c_str();
+                    std::printf("%s: ; .global %s\n", labelCStr, labelCStr);
+                    break;
+                case LabelType::Nonlocal:
+                case LabelType::Local:
+                    labelCStr = lineBuffer.c_str();
+                    std::printf("%s:\n", labelCStr);
+                    break;
+            }
             break;
         }
         }
@@ -159,6 +175,10 @@ int main(int argc, char **argv)
         }
     } else
         FATAL_ERROR("\"%s\" has an unknown file extension of \"%s\".\n", argv[1], extension);
+
+    if (Preproc::numErrors > 0) {
+        std::exit(1);
+    }
 
     return 0;
 }

@@ -28,6 +28,8 @@
 #include "string_parser.h"
 #include "../../gflib/characters.h"
 
+static int asmFileIdentifier;
+
 AsmFile::AsmFile(std::string filename) : m_filename(filename)
 {
     FILE *fp = std::fopen(filename.c_str(), "rb");
@@ -58,7 +60,9 @@ AsmFile::AsmFile(std::string filename) : m_filename(filename)
     m_pos = 0;
     m_lineNum = 1;
     m_lineStart = 0;
-
+    m_curNonLocalLabel = std::string{"_.L"}.append(std::to_string(asmFileIdentifier));
+    asmFileIdentifier++;
+    m_nonLocalLabelFound = false;
     RemoveComments();
 }
 
@@ -69,6 +73,10 @@ AsmFile::AsmFile(AsmFile&& other) : m_filename(std::move(other.m_filename))
     m_size = other.m_size;
     m_lineNum = other.m_lineNum;
     m_lineStart = other.m_lineStart;
+    m_curNonLocalLabel = other.m_curNonLocalLabel;
+    m_nonLocalLabelFound = other.m_nonLocalLabelFound;
+    m_localLabels = other.m_localLabels;
+    m_identified = false;
 
     other.m_buffer = nullptr;
 }
@@ -76,6 +84,40 @@ AsmFile::AsmFile(AsmFile&& other) : m_filename(std::move(other.m_filename))
 AsmFile::~AsmFile()
 {
     if (m_size > 0) delete[] m_buffer;
+}
+
+void AsmFile::TryPrintErrorHeaderMessage ()
+{
+    if (this->m_identified) {
+        return;
+    }
+
+    fprintf(stderr, "\n%s: Preproc messages\n", this->m_filename.c_str());
+    this->m_identified = true;
+}
+
+void AsmFile::RaiseErrorWhereButContinue (long lineNum, const char * format, ...)
+{
+    this->TryPrintErrorHeaderMessage();
+
+    std::va_list args;
+    va_start(args, format);
+    this->ReportDiagnosticWhere("error", lineNum, format, args);
+    va_end(args);
+
+    Preproc::numErrors++;
+}
+
+void AsmFile::RaiseErrorButContinue (const char * format, ...)
+{
+    this->TryPrintErrorHeaderMessage();
+
+    std::va_list args;
+    va_start(args, format);
+    this->ReportDiagnostic("error", format, args);
+    va_end(args);
+
+    Preproc::numErrors++;
 }
 
 // Removes comments to simplify further processing.
@@ -105,7 +147,9 @@ void AsmFile::RemoveComments()
                 pos++;
             }
         }
-        else if (m_buffer[pos] == '@' && (pos == 0 || m_buffer[pos - 1] != '\\'))
+        else if (
+            (m_buffer[pos] == '@' && (pos == 0 || m_buffer[pos - 1] != '\\'))
+            || (m_buffer[pos] == '/' && m_buffer[pos + 1] == '/'))
         {
             while (m_buffer[pos] != '\n' && m_buffer[pos] != 0)
                 m_buffer[pos++] = ' ';
@@ -178,29 +222,234 @@ Directive AsmFile::GetDirective()
         return Directive::Unknown;
 }
 
-// Checks if we're at label that ends with '::'.
-// Returns the name if so and an empty string if not.
-std::string AsmFile::GetGlobalLabel()
+LocalLabelInfo::LocalLabelInfo ()
 {
+    this->defined = true;
+}
+
+LocalLabelInfo::LocalLabelInfo (long lineNum)
+{
+    this->defined = false;
+    this->lineNums.emplace(lineNum);
+}
+
+// scan each line
+// if nonlocal label define:
+//  go through each local label found
+//  if not defined, print error
+//  then set the current nonlocal label
+// if local label define:
+//  replace local label with nonlocal label equivalent
+//  set local label as defined
+// if local label in statement:
+//  replace local label with nonlocal label equivalent
+//  add line number of reference
+
+// Check if we're parsing a label
+// the label is a global label if it ends with ::
+// the label is a local label if it starts with the local label prefix (currently '$', but check char_util.h) and ends with :
+// the label is a nonlocal label if it ends with :
+// otherwise, it is not a label
+// returns the type of label, and sets the argument pointer to the resulting label string
+LabelType AsmFile::TryParseLabel(std::string& returnLabel)
+{
+    //SkipWhitespace();
+
     long start = m_pos;
     long pos = m_pos;
 
-    if (IsIdentifierStartingChar(m_buffer[pos]))
+    if (IsCharGnuAssemblerNameBeginner(m_buffer[pos]))
     {
+        bool isLocalLabel = false;
+
+        if (m_buffer[pos] == LOCAL_LABEL_PREFIX) {
+            isLocalLabel = true;
+        }
+
         pos++;
 
-        while (IsIdentifierChar(m_buffer[pos]))
+        while (IsPartOfGnuAssemblerName(m_buffer[pos]))
             pos++;
+
+        //
+        if (m_buffer[pos] == ':')
+        {
+            std::size_t newSize = pos - start;
+            returnLabel.resize(newSize);
+            returnLabel.replace(0, newSize, &m_buffer[start], newSize);
+
+            if (!isLocalLabel) {
+                this->FindUndefinedLocalLabelsThenClear();
+                this->m_curNonLocalLabel = returnLabel;
+                this->m_nonLocalLabelFound = true;
+            } else {
+                auto localLabelInfo = this->m_localLabels.find(returnLabel);
+                if (localLabelInfo == this->m_localLabels.end()) {
+                    this->m_localLabels.emplace(returnLabel, LocalLabelInfo());
+                } else {
+                    if (!localLabelInfo->second.defined) {
+                        localLabelInfo->second.defined = true;
+                    } else {
+                        this->RaiseErrorButContinue("local label %s is already defined", returnLabel.c_str());
+                    }
+                }
+            }
+
+            LabelType labelType;
+
+            if (m_buffer[pos + 1] == ':') {
+                if (!isLocalLabel) {
+                    labelType = LabelType::Global;
+                } else {
+                    this->RaiseErrorButContinue("local label %s cannot be made global (change :: to :)", returnLabel.c_str());
+                    labelType = LabelType::Local;
+                }
+                m_pos = pos + 2;
+            } else {
+                if (isLocalLabel) {
+                    labelType = LabelType::Local;
+                } else {
+                    labelType = LabelType::Nonlocal;
+                }
+                m_pos = pos + 1;
+            }
+
+            if (isLocalLabel) {
+                if (!this->m_nonLocalLabelFound) {
+                    this->RaiseErrorButContinue("local label %s defined before non-local label", returnLabel.c_str());
+                }
+                returnLabel.insert(0, this->m_curNonLocalLabel);
+            }
+
+            ExpectEmptyRestOfLine();
+            return labelType;
+        }
     }
 
-    if (m_buffer[pos] == ':' && m_buffer[pos + 1] == ':')
-    {
-        m_pos = pos + 2;
-        ExpectEmptyRestOfLine();
-        return std::string(&m_buffer[start], pos - start);
+    return LabelType::NotALabel;
+}
+
+void AsmFile::FindUndefinedLocalLabelsThenClear ()
+{
+    for (auto const& localLabel : this->m_localLabels) {
+        if (!localLabel.second.defined) {
+            for (long lineNum : localLabel.second.lineNums) {
+                this->RaiseErrorWhereButContinue(lineNum, "local label %s was not defined within its scope", localLabel.first.c_str());
+            }
+        }
     }
 
-    return std::string();
+    this->m_localLabels.clear();
+}
+
+// return true if a local label was replaced
+void AsmFile::FindAndReplaceLocalLabels (std::string& outputLine)
+{
+    // first check if the prefix is in the line at all
+    // to avoid allocating a string
+
+    long pos = m_pos;
+    unsigned char c;
+    bool foundLocalLabelPrefix = false;
+
+    while (true) {
+        c = m_buffer[pos];
+        if (c == '\n' || c == '\0') {
+            break;
+        } else if (c == LOCAL_LABEL_PREFIX) {
+            foundLocalLabelPrefix = true;
+            break;
+        }
+        pos++;
+    }
+
+    if (!foundLocalLabelPrefix) {
+        if (c == '\0') {
+            if (pos >= m_size) {
+                this->RaiseWarning("file doesn't end with newline");
+                puts(&m_buffer[m_lineStart]);
+            } else {
+                this->RaiseError("unexpected null character");
+            }
+            m_pos = pos;
+        } else {
+            m_buffer[pos] = '\0';
+            puts(&m_buffer[m_lineStart]);
+            m_buffer[pos] = '\n';
+            m_pos = pos;
+            m_pos++;
+            m_lineStart = m_pos;
+            m_lineNum++;
+        }
+        return;
+    }
+
+    outputLine.resize(0);
+
+    // a local label can start after any non-name character
+    bool canStartLocalLabel = true;
+
+    while (true) {
+        c = m_buffer[m_pos];
+        //isParsingNonNameChars = IsPartOfGnuAssemblerName(c);
+
+        if (c == LOCAL_LABEL_PREFIX && canStartLocalLabel) {
+            outputLine += this->m_curNonLocalLabel;
+            //outputLine += LOCAL_LABEL_PREFIX;
+            m_pos++;
+            bool justFoundLocalLabelPrefix = true;
+
+            long start = m_pos;
+            while (true) {
+                c = m_buffer[m_pos];
+                if (!IsPartOfGnuAssemblerName(c)) {
+                    if (justFoundLocalLabelPrefix) {
+                        this->RaiseErrorButContinue("local label prefix \"%c\" must be followed by a label name", LOCAL_LABEL_PREFIX);
+                    }
+                    break;
+                }
+                justFoundLocalLabelPrefix = false;
+                m_pos++;
+            }
+
+            std::string localLabelName = std::string(&m_buffer[start - 1], m_pos - start + 1); 
+            auto localLabelInfo = this->m_localLabels.find(localLabelName);
+            if (localLabelInfo == this->m_localLabels.end()) {
+                this->m_localLabels.emplace(localLabelName, LocalLabelInfo(this->m_lineNum));
+            // only add line numbers if the label isn't defined
+            // as they're only used for reporting errors
+            } else if (!localLabelInfo->second.defined) {
+                std::set<long> * lineNums = &localLabelInfo->second.lineNums;
+                lineNums->emplace_hint(lineNums->end(), this->m_lineNum);
+            }
+
+            outputLine += localLabelName;
+
+            if (c == '\n' || c == '\0') {
+                break;
+            }
+        } else if (c == '\n' || c == '\0') {
+            break;
+        } else {
+            canStartLocalLabel = !IsPartOfGnuAssemblerName(c);
+            outputLine += c;
+        }
+        m_pos++;        
+    }
+
+    if (c == '\0') {
+        if (m_pos >= m_size) {
+            this->RaiseWarning("file doesn't end with newline");
+            puts(&m_buffer[m_lineStart]);
+        } else {
+            this->RaiseError("unexpected null character");
+        }
+    } else {
+        puts(outputLine.c_str());
+        m_pos++;
+        m_lineStart = m_pos;
+        m_lineNum++;
+    }
 }
 
 // Skips tabs and spaces.
@@ -572,10 +821,16 @@ void AsmFile::OutputLocation()
 // Reports a diagnostic message.
 void AsmFile::ReportDiagnostic(const char* type, const char* format, std::va_list args)
 {
+    this->ReportDiagnosticWhere(type, this->m_lineNum, format, args);
+}
+
+// Reports a diagnostic message, but with a custom line number
+void AsmFile::ReportDiagnosticWhere(const char* type, long lineNum, const char* format, std::va_list args)
+{
     const int bufferSize = 1024;
     char buffer[bufferSize];
     std::vsnprintf(buffer, bufferSize, format, args);
-    std::fprintf(stderr, "%s:%ld: %s: %s\n", m_filename.c_str(), m_lineNum, type, buffer);
+    std::fprintf(stderr, "%s:%ld: %s: %s\n", m_filename.c_str(), lineNum, type, buffer);
 }
 
 #define DO_REPORT(type)                   \
@@ -597,5 +852,6 @@ void AsmFile::RaiseError(const char* format, ...)
 // Reports a warning diagnostic.
 void AsmFile::RaiseWarning(const char* format, ...)
 {
+    this->TryPrintErrorHeaderMessage();
     DO_REPORT("warning");
 }
