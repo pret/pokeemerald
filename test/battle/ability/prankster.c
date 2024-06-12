@@ -136,7 +136,7 @@ DOUBLE_BATTLE_TEST("Prankster-affected moves that target all Pokémon are succes
 {
     GIVEN {
         ASSUME(gMovesInfo[MOVE_CAPTIVATE].target == MOVE_TARGET_BOTH);
-        PLAYER(SPECIES_VOLBEAT) { Ability(ABILITY_PRANKSTER); }
+        PLAYER(SPECIES_ILLUMISE) { Ability(ABILITY_PRANKSTER); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_UMBREON);
         OPPONENT(SPECIES_WOBBUFFET);
