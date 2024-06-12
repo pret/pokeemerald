@@ -5837,7 +5837,7 @@ static void TryEvolvePokemon(void)
             if (species == SPECIES_NONE && (gLeveledUpInBattle & gBitTable[i]))
             { 
                 gLeveledUpInBattle &= ~(gBitTable[i]);
-                species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_NORMAL, gLeveledUpInBattle, NULL);
+                species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_BATTLE_ONLY, gLeveledUpInBattle, NULL);
             }
 
             if (species != SPECIES_NONE)
