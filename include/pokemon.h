@@ -138,8 +138,7 @@ struct PokemonSubstruct1
     u16 move1:11; // 2047 moves.
     u16 evolutionTracker1:5;
     u16 move2:11; // 2047 moves.
-    u16 evolutionTracker2:4;
-    u16 unused_02:1;
+    u16 evolutionTracker2:5;
     u16 move3:11; // 2047 moves.
     u16 unused_04:5;
     u16 move4:11; // 2047 moves.

@@ -69,6 +69,7 @@ static bool8 TryStartWarpEventScript(struct MapPosition *, u16);
 static bool8 TryStartMiscWalkingScripts(u16);
 static bool8 TryStartStepCountScript(u16);
 static void UpdateFriendshipStepCounter(void);
+static void UpdateLetsGoEvolutionTracker(void);
 #if OW_POISON_DAMAGE < GEN_5
 static bool8 UpdatePoisonStepCounter(void);
 #endif // OW_POISON_DAMAGE
@@ -565,6 +566,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
     IncrementRematchStepCounter();
     UpdateFriendshipStepCounter();
     UpdateFarawayIslandStepCounter();
+    UpdateLetsGoEvolutionTracker();
 
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED_MOVE) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior))
     {
@@ -655,6 +657,28 @@ static void UpdateFriendshipStepCounter(void)
             AdjustFriendship(mon, FRIENDSHIP_EVENT_WALKING);
             mon++;
         }
+    }
+}
+
+static void UpdateLetsGoEvolutionTracker(void)
+{
+    u32 i;
+    u16 count;
+    struct Pokemon *followingMon = GetFirstLiveMon();
+    const struct Evolution *evolutions = GetSpeciesEvolutions(GetMonData(followingMon, MON_DATA_SPECIES));
+
+    if (evolutions == NULL)
+        return;
+
+    for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
+    {
+        if (evolutions[i].method != EVO_OVERWORLD_STEPS || SanitizeSpeciesId(evolutions[i].targetSpecies) == SPECIES_NONE)
+            continue;
+
+        // We only have 10 bits to use
+        count = min(1023, GetMonData(followingMon, MON_DATA_EVOLUTION_TRACKER) + 1);
+        SetMonData(followingMon, MON_DATA_EVOLUTION_TRACKER, &count);
+        return;
     }
 }
 
