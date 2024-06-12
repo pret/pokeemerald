@@ -8781,7 +8781,6 @@ static const u16 sRandomSpeciesLegendary[] =
     SPECIES_RAGING_BOLT,
     SPECIES_IRON_BOULDER,
     SPECIES_IRON_CROWN,
-    SPECIES_TERAPAGOS_NORMAL,
     SPECIES_PECHARUNT
     #endif
     // SPECIES_EGG       ,
