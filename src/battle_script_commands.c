@@ -7032,8 +7032,12 @@ static void Cmd_openpartyscreen(void)
                 if (gAbsentBattlerFlags & gBitTable[battlerOpposite])
                     battlerOpposite ^= BIT_FLANK;
 
-                BtlController_EmitLinkStandbyMsg(battlerOpposite, BUFFER_A, LINK_STANDBY_MSG_ONLY, FALSE);
-                MarkBattlerForControllerExec(battlerOpposite);
+                // Make sure we're checking a valid battler. In edge case scenarios - battler could be absent and battlerOpposite would become a non-existent one softlocking the game.
+                if (battlerOpposite < gBattlersCount)
+                {
+                    BtlController_EmitLinkStandbyMsg(battlerOpposite, BUFFER_A, LINK_STANDBY_MSG_ONLY, FALSE);
+                    MarkBattlerForControllerExec(battlerOpposite);
+                }
             }
         }
     }
