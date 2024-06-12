@@ -21,6 +21,7 @@
 #include "text_window.h"
 #include "window.h"
 #include "constants/songs.h"
+#include "party_menu.h"
 
 #define DLG_WINDOW_PALETTE_NUM 15
 #define DLG_WINDOW_BASE_TILE_NUM 0x200
@@ -165,6 +166,14 @@ void InitTextBoxGfxAndPrinters(void)
     ChangeBgY(0, 0, BG_COORD_SET);
     DeactivateAllTextPrinters();
     LoadMessageBoxAndBorderGfx();
+}
+
+void InitTextBoxGfxAndPrintersOverride(void)
+{
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    DeactivateAllTextPrinters();
+    LoadMessageBoxAndBorderGfxOverride();
 }
 
 u16 RunTextPrintersAndIsPrinter0Active(void)
@@ -469,7 +478,7 @@ static u16 UNUSED Menu_GetStdPalColor(u8 colorNum)
 
 void DisplayItemMessageOnField(u8 taskId, const u8 *string, TaskFunc callback)
 {
-    LoadMessageBoxAndBorderGfx();
+    LoadMessageBoxAndBorderGfxOverride();
     DisplayMessageAndContinueTask(taskId, 0, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM, FONT_NORMAL, GetPlayerTextSpeedDelay(), string, callback);
     CopyWindowToVram(0, COPYWIN_FULL);
 }
@@ -953,8 +962,18 @@ void RedrawMenuCursor(u8 oldPos, u8 newPos)
 
     width = GetMenuCursorDimensionByFont(sMenu.fontId, 0);
     height = GetMenuCursorDimensionByFont(sMenu.fontId, 1);
-    FillWindowPixelRect(sMenu.windowId, PIXEL_FILL(1), sMenu.left, sMenu.optionHeight * oldPos + sMenu.top, width, height);
-    AddTextPrinterParameterized(sMenu.windowId, sMenu.fontId, gText_SelectorArrow3, sMenu.left, sMenu.optionHeight * newPos + sMenu.top, 0, 0);
+    
+    if(gMain.callback2 == CB2_UpdatePartyMenu || gMain.callback2 == CB2_MoveRelearnerMain || (gMain.callback2 == CB2_MoveTutorListMain) || (FindTaskIdByFunc(Task_CallYesOrNoCallbackOverride) != TASK_NONE))
+    {
+        FillWindowPixelRect(sMenu.windowId, PIXEL_FILL(1), sMenu.left, sMenu.optionHeight * oldPos + sMenu.top, width, height);
+        AddTextPrinterParameterized(sMenu.windowId, sMenu.fontId, gText_SelectorArrow3, sMenu.left, sMenu.optionHeight * newPos + sMenu.top, 0, 0);
+    }
+    else
+    {
+        FillWindowPixelRect(sMenu.windowId, PIXEL_FILL(10), sMenu.left, sMenu.optionHeight * oldPos + sMenu.top, width, height);
+        const u8 colors[3] = {10,  1,  2};
+        AddTextPrinterParameterized4(sMenu.windowId, sMenu.fontId, sMenu.left, sMenu.optionHeight * newPos + sMenu.top, 0, 0, colors, 0, gText_SelectorArrow3);
+    }
 }
 
 u8 Menu_MoveCursor(s8 cursorDelta)
@@ -1158,6 +1177,32 @@ void PrintMenuActionTexts(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpac
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
+void PrintMenuActionTextsOverride(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions, const u8 *actionIds)
+{
+    u8 i;
+    struct TextPrinterTemplate printer;
+
+    printer.windowId = windowId;
+    printer.fontId = fontId;
+    printer.fgColor = 1;
+    printer.bgColor = 10;
+    printer.shadowColor = 2;
+    printer.unk = GetFontAttribute(fontId, FONTATTR_UNKNOWN);
+    printer.letterSpacing = letterSpacing;
+    printer.lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
+    printer.x = left;
+    printer.currentX = left;
+
+    for (i = 0; i < itemCount; i++)
+    {
+        printer.currentChar = menuActions[actionIds[i]].text;
+        printer.y = (lineHeight * i) + top;
+        printer.currentY = printer.y;
+        AddTextPrinter(&printer, TEXT_SKIP_DRAW, NULL);
+    }
+
+    CopyWindowToVram(windowId, COPYWIN_GFX);
+}
 static void UNUSED PrintMenuActionTextsAtTopById(u8 windowId, u8 fontId, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions, const u8 *actionIds)
 {
     PrintMenuActionTexts(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 1, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), lineHeight, itemCount, menuActions, actionIds);
@@ -1282,6 +1327,37 @@ void PrintMenuActionGrid(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
+void PrintMenuActionGridOverride(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth, u8 horizontalCount, u8 verticalCount, const struct MenuAction *menuActions, const u8 *actionIds)
+{
+    u8 i;
+    u8 j;
+    struct TextPrinterTemplate printer;
+
+    printer.windowId = windowId;
+    printer.fontId = fontId;
+    printer.fgColor = 1;
+    printer.bgColor = 10;
+    printer.shadowColor = 2;
+    printer.unk = GetFontAttribute(fontId, FONTATTR_UNKNOWN);
+    printer.letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+    printer.lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
+
+    for (i = 0; i < verticalCount; i++)
+    {
+        for (j = 0; j < horizontalCount; j++)
+        {
+            printer.currentChar = menuActions[actionIds[(horizontalCount * i) + j]].text;
+            printer.x = (optionWidth * j) + left;
+            printer.y = (GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT) * i) + top;
+            printer.currentX = printer.x;
+            printer.currentY = printer.y;
+            AddTextPrinter(&printer, TEXT_SKIP_DRAW, NULL);
+        }
+    }
+
+    CopyWindowToVram(windowId, COPYWIN_GFX);
+}
+
 static void UNUSED PrintMenuActionGrid_TopLeft(u8 windowId, u8 fontId, u8 optionWidth, u8 unused, u8 horizontalCount, u8 verticalCount, const struct MenuAction *menuActions, const u8 *actionIds)
 {
     PrintMenuActionGrid(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 0, optionWidth, horizontalCount, verticalCount, menuActions, actionIds);
@@ -1329,11 +1405,28 @@ static void MoveMenuGridCursor(u8 oldCursorPos, u8 newCursorPos)
 
     u8 xPos = (oldCursorPos % sMenu.columns) * sMenu.optionWidth + sMenu.left;
     u8 yPos = (oldCursorPos / sMenu.columns) * sMenu.optionHeight + sMenu.top;
-    FillWindowPixelRect(sMenu.windowId, PIXEL_FILL(1), xPos, yPos, cursorWidth, cursorHeight);
+
+    if(gMain.callback2 == CB2_MoveRelearnerMain || (gMain.callback2 == CB2_MoveTutorListMain) || (FindTaskIdByFunc(Task_CallYesOrNoCallbackOverride) != TASK_NONE))
+    {
+        FillWindowPixelRect(sMenu.windowId, PIXEL_FILL(1), xPos, yPos, cursorWidth, cursorHeight);
+    }
+    else
+    {
+        FillWindowPixelRect(sMenu.windowId, PIXEL_FILL(10), xPos, yPos, cursorWidth, cursorHeight);
+    }
 
     xPos = (newCursorPos % sMenu.columns) * sMenu.optionWidth + sMenu.left;
     yPos = (newCursorPos / sMenu.columns) * sMenu.optionHeight + sMenu.top;
-    AddTextPrinterParameterized(sMenu.windowId, sMenu.fontId, gText_SelectorArrow3, xPos, yPos, 0, 0);
+
+    if(gMain.callback2 == CB2_MoveRelearnerMain || (gMain.callback2 == CB2_MoveTutorListMain) || (FindTaskIdByFunc(Task_CallYesOrNoCallbackOverride) != TASK_NONE))
+    {
+        AddTextPrinterParameterized(sMenu.windowId, sMenu.fontId, gText_SelectorArrow3, xPos, yPos, 0, 0);
+    }
+    else
+    {
+        const u8 colors[3] = {10,  1,  2};
+        AddTextPrinterParameterized4(sMenu.windowId, sMenu.fontId, xPos, yPos, 0, 0, colors, 0, gText_SelectorArrow3);
+    }
 }
 
 u8 ChangeMenuGridCursorPosition(s8 deltaX, s8 deltaY)
@@ -1649,6 +1742,31 @@ void CreateYesNoMenu(const struct WindowTemplate *window, u16 baseTileNum, u8 pa
     printer.fgColor = GetFontAttribute(FONT_NORMAL, FONTATTR_COLOR_FOREGROUND);
     printer.bgColor = GetFontAttribute(FONT_NORMAL, FONTATTR_COLOR_BACKGROUND);
     printer.shadowColor = GetFontAttribute(FONT_NORMAL, FONTATTR_COLOR_SHADOW);
+    printer.unk = GetFontAttribute(FONT_NORMAL, FONTATTR_UNKNOWN);
+    printer.letterSpacing = 0;
+    printer.lineSpacing = 0;
+
+    AddTextPrinter(&printer, TEXT_SKIP_DRAW, NULL);
+    InitMenuInUpperLeftCornerNormal(sYesNoWindowId, 2, initialCursorPos);
+}
+
+void CreateYesNoMenuOverride(const struct WindowTemplate *window, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos)
+{
+    struct TextPrinterTemplate printer;
+
+    sYesNoWindowId = AddWindow(window);
+    DrawStdFrameWithCustomTileAndPalette(sYesNoWindowId, TRUE, baseTileNum, paletteNum);
+
+    printer.currentChar = gText_YesNo;
+    printer.windowId = sYesNoWindowId;
+    printer.fontId = FONT_NORMAL;
+    printer.x = 8;
+    printer.y = 1;
+    printer.currentX = printer.x;
+    printer.currentY = printer.y;
+    printer.fgColor = 2;
+    printer.bgColor = 1;
+    printer.shadowColor = 3;
     printer.unk = GetFontAttribute(FONT_NORMAL, FONTATTR_UNKNOWN);
     printer.letterSpacing = 0;
     printer.lineSpacing = 0;

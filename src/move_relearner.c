@@ -359,7 +359,6 @@ static const struct BgTemplate sMoveRelearnerMenuBackgroundTemplates[] =
 static void DoMoveRelearnerMain(void);
 static void CreateLearnableMovesList(void);
 static void CreateUISprites(void);
-static void CB2_MoveRelearnerMain(void);
 static void Task_WaitForFadeOut(u8 taskId);
 static void CB2_InitLearnMove(void);
 static void CB2_InitLearnMoveReturnFromSelectMove(void);
@@ -373,7 +372,6 @@ static void RemoveScrollArrows(void);
 static void HideHeartSpritesAndShowTeachMoveText(bool8);
 static void Task_TutorMoves_WaitForFadeOut(u8 taskId);
 static void CB2_InitShowTutorMoveList(void);
-static void CB2_MoveTutorListMain(void);
 static void DoMoveTutorListMain(void);
 
 static void VBlankCB_MoveRelearner(void)
@@ -469,7 +467,7 @@ static void InitMoveRelearnerBackgroundLayers(void)
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
 }
 
-static void CB2_MoveRelearnerMain(void)
+void CB2_MoveRelearnerMain(void)
 {
     DoMoveRelearnerMain();
     RunTasks();
@@ -651,7 +649,7 @@ static void DoMoveRelearnerMain(void)
     case MENU_STATE_CHOOSE_SETUP_STATE:
         if (!MoveRelearnerRunTextPrinters())
         {
-            FillWindowPixelBuffer(RELEARNERWIN_MSG, 0x11);
+            FillWindowPixelBuffer(RELEARNERWIN_MSG, 10);
             if (sMoveRelearnerMenuSate.showContestInfo == FALSE)
             {
                 sMoveRelearnerStruct->state = MENU_STATE_SETUP_BATTLE_MODE;
@@ -785,7 +783,7 @@ static void FreeMoveRelearnerResources(void)
 static void HideHeartSpritesAndShowTeachMoveText(bool8 onlyHideSprites)
 {
     s32 i;
-
+    const u8 colors[3] = {10,  1,  2};
     for (i = 0; i < 16; i++)
         gSprites[sMoveRelearnerStruct->heartSpriteIds[i]].invisible = TRUE;
 
@@ -795,8 +793,8 @@ static void HideHeartSpritesAndShowTeachMoveText(bool8 onlyHideSprites)
             StringExpandPlaceholders(gStringVar4, gText_TeachWhichMove);
         else
             StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToPkmn);
-        FillWindowPixelBuffer(RELEARNERWIN_MSG, 0x11);
-        AddTextPrinterParameterized(RELEARNERWIN_MSG, FONT_NORMAL, gStringVar4, 0, 1, 0, NULL);
+        FillWindowPixelBuffer(RELEARNERWIN_MSG, 10);
+        AddTextPrinterParameterized4(RELEARNERWIN_MSG, FONT_NORMAL, 0, 1, 0, 0, colors, 0, gStringVar4);
     }
 }
 
@@ -810,24 +808,6 @@ static void HandleInput(bool8 showContest)
     case LIST_NOTHING_CHOSEN:
         if (!(JOY_NEW(DPAD_LEFT | DPAD_RIGHT)) && !GetLRKeysPressed())
             break;
-
-        PlaySE(SE_SELECT);
-
-        if (showContest == FALSE)
-        {
-            PutWindowTilemap(RELEARNERWIN_DESC_CONTEST);
-            sMoveRelearnerStruct->state = MENU_STATE_SETUP_CONTEST_MODE;
-            sMoveRelearnerMenuSate.showContestInfo = TRUE;
-        }
-        else
-        {
-            PutWindowTilemap(RELEARNERWIN_DESC_BATTLE);
-            sMoveRelearnerStruct->state = MENU_STATE_SETUP_BATTLE_MODE;
-            sMoveRelearnerMenuSate.showContestInfo = FALSE;
-        }
-
-        ScheduleBgCopyTilemapToVram(1);
-        MoveRelearnerShowHideHearts(GetCurrentSelectedMove());
         break;
     case LIST_CANCEL:
         PlaySE(SE_SELECT);
@@ -865,14 +845,15 @@ static s32 GetCurrentSelectedMove(void)
 // selected and whenever the display mode changes.
 static void ShowTeachMoveText(bool8 shouldDoNothingInstead)
 {
+    const u8 colors[3] = {10,  1,  2};
     if (shouldDoNothingInstead == FALSE)
     {
         if(VarGet(VAR_PIT_TUTOR_STATE) == TUTOR_STATE_TUTOR_MOVES)
             StringExpandPlaceholders(gStringVar4, gText_TeachWhichMove);
         else
             StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToPkmn);
-        FillWindowPixelBuffer(RELEARNERWIN_MSG, 0x11);
-        AddTextPrinterParameterized(RELEARNERWIN_MSG, FONT_NORMAL, gStringVar4, 0, 1, 0, NULL);
+        FillWindowPixelBuffer(RELEARNERWIN_MSG, 10);
+        AddTextPrinterParameterized4(RELEARNERWIN_MSG, FONT_NORMAL, 0, 1, 0, 0, colors, 0, gStringVar4);
     }
 }
 
@@ -1047,7 +1028,7 @@ static void CB2_InitShowTutorMoveList(void)
     SetMainCallback2(CB2_MoveTutorListMain);
 }
 
-static void CB2_MoveTutorListMain(void)
+void CB2_MoveTutorListMain(void)
 {
     DoMoveTutorListMain();
     RunTasks();

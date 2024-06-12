@@ -1467,16 +1467,19 @@ static void ShowSaveInfoWindow(void)
     DrawStdWindowFrame(sSaveInfoWindowId, FALSE);
 
     gender = gSaveBlock2Ptr->playerGender;
-    color = TEXT_COLOR_RED;  // Red when female, blue when male.
+    color = TEXT_COLOR_DARK_GRAY;  // Red when female, blue when male.
 
     if (gender == MALE)
     {
-        color = TEXT_COLOR_BLUE;
+        color = TEXT_COLOR_DARK_GRAY;
     }
 
     // Print region name
     yOffset = 1;
-    BufferSaveMenuText(SAVE_MENU_LOCATION, gStringVar4, TEXT_COLOR_GREEN);
+    BufferSaveMenuText(SAVE_MENU_LOCATION, gStringVar4, TEXT_COLOR_DARK_GRAY);
+    BufferMapFloorString();
+    StringCopy(gStringVar2, gStringVar4);
+    StringExpandPlaceholders(gStringVar4, gStringVar2);
     AddTextPrinterParameterized(sSaveInfoWindowId, FONT_NORMAL, gStringVar4, 0, yOffset, TEXT_SKIP_DRAW, NULL);
 
     // Print player name

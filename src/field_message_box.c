@@ -29,7 +29,7 @@ static void Task_DrawFieldMessage(u8 taskId)
     switch (task->tState)
     {
         case 0:
-           LoadMessageBoxAndBorderGfx();
+           LoadMessageBoxAndBorderGfxOverride();
            task->tState++;
            break;
         case 1:

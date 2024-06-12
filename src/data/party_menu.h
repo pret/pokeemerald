@@ -685,7 +685,7 @@ static const struct WindowTemplate sLevelUpStatsWindowTemplate =
     .tilemapTop = 1,
     .width = 10,
     .height = 11,
-    .paletteNum = 14,
+    .paletteNum = 13,
     .baseBlock = 0x2E9,
 };
 

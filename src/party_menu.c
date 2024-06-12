@@ -583,7 +583,7 @@ static void RefreshPartyMenu(void) //Refreshes the party menu without restarting
     SetMainCallback2(CB2_ReloadPartyMenu);
 }
 
-static void CB2_UpdatePartyMenu(void)
+void CB2_UpdatePartyMenu(void)
 {
     RunTasks();
     AnimateSprites();
@@ -2337,7 +2337,7 @@ static void LoadPartyMenuWindows(void)
     DeactivateAllTextPrinters();
     for (i = 0; i < PARTY_SIZE; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
-    LoadUserWindowBorderGfx(0, 0x4F, BG_PLTT_ID(13));
+    LoadUserWindowBorderGfxOverride(0, 0x4F, BG_PLTT_ID(13));
     LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(14), PLTT_SIZE_4BPP);
     LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
 }
@@ -2799,9 +2799,12 @@ void DisplayPartyMenuStdMessage(u32 stringId)
             else if (!ShouldUseChooseMonText())
                 stringId = PARTY_MSG_CHOOSE_MON_OR_CANCEL;
         }
+
+        const u8 colors[3] = {10,  1,  2};
         DrawStdFrameWithCustomTileAndPalette(*windowPtr, FALSE, 0x4F, 13);
+        FillWindowPixelBuffer(*windowPtr, PIXEL_FILL(10));
         StringExpandPlaceholders(gStringVar4, sActionStringTable[stringId]);
-        AddTextPrinterParameterized(*windowPtr, FONT_NORMAL, gStringVar4, 0, 1, 0, 0);
+        AddTextPrinterParameterized4(*windowPtr, FONT_NORMAL, 0, 1, 0, 0, colors, 0, gStringVar4);
         ScheduleBgCopyTilemapToVram(2);
     }
 }
