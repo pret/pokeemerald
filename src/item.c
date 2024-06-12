@@ -1381,7 +1381,7 @@ u16 RandomItemId(u16 itemId)
         else if (ItemId_GetPocket(itemId) != POCKET_KEY_ITEMS)
         {
             randomItemCategory = Random32() % 1000;
-            if(randomItemCategory < 600)
+            if(randomItemCategory < 650)
                 itemId = sRandomConsumableValidItems[RandomModulo(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_CONSUMABLE_ITEM_COUNT)];
             else if(randomItemCategory < 700)
                 itemId = sRandomXItems[RandomModulo(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_X_ITEM_COUNT)];

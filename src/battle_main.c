@@ -2328,7 +2328,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                     u16 odds;
                     odds = (Random() % 100);
 
-                    if (odds < 25)
+                    if (odds < 40)
                     {
                         u16 megaStone = GetMegaStone(GetMonData(&party[i], MON_DATA_SPECIES));
 
