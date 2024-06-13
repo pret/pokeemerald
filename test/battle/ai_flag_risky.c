@@ -83,7 +83,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_RISKY: AI prefers high damage moves at the expens
 
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | aiRiskyFlag);
-        PLAYER(SPECIES_GOLDEEN) { Level(5); Moves(MOVE_TACKLE); } 
+        PLAYER(SPECIES_PSYDUCK) { Level(5); Moves(MOVE_TACKLE); } 
         OPPONENT(SPECIES_CASTFORM) { Level(20); Moves(MOVE_THUNDER, MOVE_THUNDERBOLT); }
     } WHEN {
             TURN { MOVE(player, MOVE_TACKLE); EXPECT_MOVE(opponent, aiRiskyFlag ? MOVE_THUNDER : MOVE_THUNDERBOLT); }

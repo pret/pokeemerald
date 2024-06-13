@@ -114,7 +114,7 @@ TEST("No species has two evolutions that use the evolution tracker")
 
     for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
     {
-        if (evolutions[i].method == EVO_LEVEL_MOVE_TWENTY_TIMES
+        if (evolutions[i].method == EVO_USE_MOVE_TWENTY_TIMES
     #ifdef EVO_DEFEAT_WITH_ITEM
          || evolutions[i].method == EVO_DEFEAT_WITH_ITEM
     #endif //EVO_DEFEAT_WITH_ITEM
@@ -124,8 +124,8 @@ TEST("No species has two evolutions that use the evolution tracker")
         )
             evolutionTrackerEvolutions++;
 
-        if (evolutions[i].method == EVO_LEVEL_RECOIL_DAMAGE_MALE
-         || evolutions[i].method == EVO_LEVEL_RECOIL_DAMAGE_FEMALE)
+        if (evolutions[i].method == EVO_RECOIL_DAMAGE_MALE
+         || evolutions[i].method == EVO_RECOIL_DAMAGE_FEMALE)
         {
             // Special handling for these since they can be combined as the evolution tracker field is used for the same purpose
             if (!hasGenderBasedRecoil)

@@ -11633,7 +11633,7 @@ bool32 TargetFullyImmuneToCurrMove(u32 BattlerAtk, u32 battlerDef)
     GET_MOVE_TYPE(gCurrentMove, moveType);
 
     return ((CalcTypeEffectivenessMultiplier(gCurrentMove, moveType, BattlerAtk, battlerDef, GetBattlerAbility(battlerDef), FALSE) == UQ_4_12(0.0))
-         || IsBattlerProtected(battlerDef, gCurrentMove)
+         || IsBattlerProtected(BattlerAtk, battlerDef, gCurrentMove)
          || IsSemiInvulnerable(battlerDef, gCurrentMove)
          || DoesCurrentTargetHaveAbilityImmunity());
 }
