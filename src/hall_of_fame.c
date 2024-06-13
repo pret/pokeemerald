@@ -697,17 +697,23 @@ static void Task_Hof_DisplayPlayer(u8 taskId)
     LoadPalette(GetTextWindowPalette(1), BG_PLTT_ID(14), PLTT_SIZE_4BPP);
     gTasks[taskId].tFrameCount = 60;
     gTasks[taskId].func = Task_Hof_WaitAndPrintPlayerInfo;
+    DrawDialogueFrame(0, FALSE);
+    if(FlagGet(FLAG_RUN_ENDED_SCREEN))
+        AddTextPrinterParameterized2(0, FONT_NORMAL, gText_LostRunChamp, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    else
+        AddTextPrinterParameterized2(0, FONT_NORMAL, gText_LeagueChamp, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);        
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static void Task_Hof_WaitAndPrintPlayerInfo(u8 taskId)
 {
-    if (gTasks[taskId].tFrameCount != 0)
-    {
-        gTasks[taskId].tFrameCount--;
-    }
-    else if (gSprites[gTasks[taskId].tPlayerSpriteID].x != 192)
+    if (gSprites[gTasks[taskId].tPlayerSpriteID].x != 216 - 54)
     {
         gSprites[gTasks[taskId].tPlayerSpriteID].x++;
+    }
+    else if ((!JOY_NEW(A_BUTTON)))
+    {
+        gTasks[taskId].tFrameCount = 60;
     }
     else
     {

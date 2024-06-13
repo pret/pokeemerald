@@ -150,7 +150,7 @@ Debug_EventScript_Script_3::
 	end
 
 Debug_EventScript_Script_4::
-	addmoney 650000
+	goto PitArena_ChangeAvatarDebug
 	end
 
 Debug_EventScript_Script_5::

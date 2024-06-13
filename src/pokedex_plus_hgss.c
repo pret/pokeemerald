@@ -5330,8 +5330,8 @@ static void PrintStatsScreen_Moves_Top(u8 taskId)
     }
     else if (selected < (numEggMoves + numLevelUpMoves + numTMHMMoves))
     {
-        CopyItemName(sStatsMovesTMHM_ID[(selected-numEggMoves-numLevelUpMoves)], gStringVar1); //TM name
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gStringVar1, moves_x + 113, moves_y + 9);
+        //CopyItemName(sStatsMovesTMHM_ID[(selected-numEggMoves-numLevelUpMoves)], gStringVar1); //TM name
+        //PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gStringVar1, moves_x + 113, moves_y + 9);
         item = sStatsMovesTMHM_ID[(selected-numEggMoves-numLevelUpMoves)];
     }
     else if (selected < (numEggMoves + numLevelUpMoves + numTMHMMoves + numTutorMoves))
