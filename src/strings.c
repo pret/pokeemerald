@@ -173,16 +173,16 @@ const u8 gText_HOFDexSaving[] = _("SAVING…\nDON'T TURN OFF THE POWER.");
 const u8 gText_HOFCorrupted[] = _("The HALL OF FAME data is corrupted.");
 const u8 gText_HOFNumber[] = _("THE PIT HALL OF FAME");
 #ifdef PIT_GEN_3_MODE
-const u8 gText_LeagueChamp[] = _("PIT OF 100 TRIALS CHAMPION!\nCONGRATULATIONS!                    v1.6.1 Gen3");
-const u8 gText_LostRunChamp[] = _("Good Progress!\nand Good Luck Next Time!          v1.6.1 Gen3");
+const u8 gText_LeagueChamp[] = _("PIT OF 100 TRIALS CHAMPION!\nCONGRATULATIONS!                   v1.6.1 Gen3");
+const u8 gText_LostRunChamp[] = _("Good Progress!\nand Good Luck Next Time!         v1.6.1 Gen3");
 #endif
 #ifdef PIT_GEN_5_MODE
-const u8 gText_LeagueChamp[] = _("PIT OF 100 TRIALS CHAMPION!\nCONGRATULATIONS!                    v1.6.1 Gen5");
-const u8 gText_LostRunChamp[] = _("Good Progress!\nand Good Luck Next Time!          v1.6.1 Gen5");
+const u8 gText_LeagueChamp[] = _("PIT OF 100 TRIALS CHAMPION!\nCONGRATULATIONS!                   v1.6.1 Gen5");
+const u8 gText_LostRunChamp[] = _("Good Progress!\nand Good Luck Next Time!         v1.6.1 Gen5");
 #endif
 #ifdef PIT_GEN_9_MODE
-const u8 gText_LeagueChamp[] = _("PIT OF 100 TRIALS CHAMPION!\nCONGRATULATIONS!                    v1.6.1 Gen9");
-const u8 gText_LostRunChamp[] = _("Good Progress!\nand Good Luck Next Time!          v1.6.1 Gen9");
+const u8 gText_LeagueChamp[] = _("PIT OF 100 TRIALS CHAMPION!\nCONGRATULATIONS!                   v1.6.1 Gen9");
+const u8 gText_LostRunChamp[] = _("Good Progress!\nand Good Luck Next Time!         v1.6.1 Gen9");
 #endif
 const u8 gText_LostRunNumber[] = _("FLOOR                     {STR_VAR_1}");
 const u8 gText_Number[] = _("No. ");
