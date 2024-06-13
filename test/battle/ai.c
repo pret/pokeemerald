@@ -555,8 +555,9 @@ AI_SINGLE_BATTLE_TEST("AI will not choose Burn Up if the user lost the Fire typi
     }
 }
 
-AI_SINGLE_BATTLE_TEST("AI will choose Surf over Thunderbolt and Ice Beam if the opposing mon has Volt Absorb")
+AI_SINGLE_BATTLE_TEST("AI will only choose Surf 1/3 times if the opposing mon has Volt Absorb")
 {
+    PASSES_RANDOMLY(1, 3, RNG_AI_ABILITY);
     GIVEN {
         ASSUME(gMovesInfo[MOVE_THUNDERBOLT].type == TYPE_ELECTRIC);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
@@ -564,6 +565,27 @@ AI_SINGLE_BATTLE_TEST("AI will choose Surf over Thunderbolt and Ice Beam if the 
         OPPONENT(SPECIES_LANTURN) { Moves(MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_SURF); }
     } WHEN {
         TURN { EXPECT_MOVE(opponent, MOVE_SURF); }
+        TURN { EXPECT_MOVE(opponent, MOVE_SURF); }
+    } SCENE {
+        MESSAGE("Foe Lanturn used Surf!");
+        MESSAGE("Foe Lanturn used Surf!");
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI will choose Thunderbolt then Surf 2/3 times if the opposing mon has Volt Absorb")
+{
+    PASSES_RANDOMLY(2, 3, RNG_AI_ABILITY);
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_THUNDERBOLT].type == TYPE_ELECTRIC);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_LANTURN) { Ability(ABILITY_VOLT_ABSORB); };
+        OPPONENT(SPECIES_LANTURN) { Moves(MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_SURF); }
+    } WHEN {
+        TURN { EXPECT_MOVE(opponent, MOVE_THUNDERBOLT); }
+        TURN { EXPECT_MOVE(opponent, MOVE_SURF); }
+    } SCENE {
+        MESSAGE("Foe Lanturn used Thunderbolt!");
+        MESSAGE("Foe Lanturn used Surf!");
     }
 }
 
@@ -712,6 +734,45 @@ AI_SINGLE_BATTLE_TEST("AI calculates guaranteed criticals and detects critical i
             TURN { EXPECT_MOVE(opponent, MOVE_BRICK_BREAK); }
         else
             TURN { EXPECT_MOVE(opponent, MOVE_STORM_THROW); }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("AI recognizes Volt Absorb received from Trace")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_MAGNETON);
+        PLAYER(SPECIES_GARDEVOIR) { Ability(ABILITY_TRACE); }
+        OPPONENT(SPECIES_JOLTEON) { Ability(ABILITY_VOLT_ABSORB); Moves(MOVE_THUNDER_WAVE, MOVE_THUNDERSHOCK, MOVE_WATER_GUN); }
+        OPPONENT(SPECIES_JOLTEON) { Ability(ABILITY_VOLT_ABSORB); Moves(MOVE_THUNDER_WAVE, MOVE_THUNDERSHOCK, MOVE_WATER_GUN); }
+    } WHEN {
+        TURN { NOT_EXPECT_MOVE(opponentLeft, MOVE_THUNDERSHOCK); NOT_EXPECT_MOVE(opponentLeft, MOVE_THUNDER_WAVE); NOT_EXPECT_MOVE(opponentRight, MOVE_THUNDER_WAVE); }
+    } THEN {
+        EXPECT(gBattleResources->aiData->abilities[B_POSITION_PLAYER_RIGHT] == ABILITY_VOLT_ABSORB);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI avoids contact moves against rocky helmet")
+{
+    u32 item;
+
+    PARAMETRIZE { item = ITEM_NONE; }
+    PARAMETRIZE { item = ITEM_ROCKY_HELMET; }
+
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_BRANCH_POKE].makesContact);
+        ASSUME(!gMovesInfo[MOVE_LEAFAGE].makesContact);
+        ASSUME(gMovesInfo[MOVE_BRANCH_POKE].power == gMovesInfo[MOVE_LEAFAGE].power);
+        ASSUME(gMovesInfo[MOVE_BRANCH_POKE].type == gMovesInfo[MOVE_LEAFAGE].type);
+        ASSUME(gMovesInfo[MOVE_BRANCH_POKE].category == gMovesInfo[MOVE_LEAFAGE].category);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_WOBBUFFET) { Item(item); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_BRANCH_POKE, MOVE_LEAFAGE); }
+    } WHEN {
+        if (item == ITEM_ROCKY_HELMET)
+            TURN { EXPECT_MOVE(opponent, MOVE_LEAFAGE); }
+        else
+            TURN { EXPECT_MOVES(opponent, MOVE_LEAFAGE, MOVE_BRANCH_POKE); }
     }
 }
 

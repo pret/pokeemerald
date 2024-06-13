@@ -290,8 +290,8 @@
 #define EVO_LEVEL_FOG                     42     // Pokémon reaches the specified level during fog in the overworld
 #define EVO_MOVE_TWO_SEGMENT              43     // Pokémon levels up, knows specified move, has a personality value with a modulus of 0
 #define EVO_MOVE_THREE_SEGMENT            44     // Pokémon levels up, knows specified move, has a personality value with a modulus of 1-99
-#define EVO_LEVEL_FAMILY_OF_THREE         45     // Pokémon reaches the specified level with a personality value with a modulus of 0
-#define EVO_LEVEL_FAMILY_OF_FOUR          46     // Pokémon reaches the specified level with a personality value with a modulus of 1-99
+#define EVO_LEVEL_FAMILY_OF_THREE         45     // Pokémon reaches the specified level in battle with a personality value with a modulus of 0
+#define EVO_LEVEL_FAMILY_OF_FOUR          46     // Pokémon reaches the specified level in battle with a personality value with a modulus of 1-99
 #define EVO_USE_MOVE_TWENTY_TIMES         47     // Pokémon levels up after having used a move for at least 20 times
 #define EVO_RECOIL_DAMAGE_MALE            48     // Pokémon levels up after having suffered specified amount of non-fainting recoil damage as a male
 #define EVO_RECOIL_DAMAGE_FEMALE          49     // Pokémon levels up after having suffered specified amount of non-fainting recoil damage as a female
@@ -307,6 +307,7 @@
 #define EVO_MODE_ITEM_CHECK        4 // If an Everstone is being held, still want to show that the stone *could* be used on that Pokémon to evolve
 #define EVO_MODE_BATTLE_SPECIAL    5
 #define EVO_MODE_OVERWORLD_SPECIAL 6
+#define EVO_MODE_BATTLE_ONLY       7 // This mode is only used in battles to support Tandemaus' unique requirement
 
 #define MON_PIC_WIDTH 64
 #define MON_PIC_HEIGHT 64

@@ -521,8 +521,9 @@ struct SimulatedDamage AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u
     }
     else if (gMovesInfo[move].effect == EFFECT_PHOTON_GEYSER)
         gBattleStruct->swapDamageCategory = (GetCategoryBasedOnStats(gBattlerAttacker) == DAMAGE_CATEGORY_PHYSICAL);
-
-    if (gMovesInfo[move].effect == EFFECT_NATURE_POWER)
+    else if (move == MOVE_SHELL_SIDE_ARM && gBattleStruct->shellSideArmCategory[battlerAtk][battlerDef] == DAMAGE_CATEGORY_SPECIAL)
+        gBattleStruct->swapDamageCategory = TRUE;
+    else if (gMovesInfo[move].effect == EFFECT_NATURE_POWER)
         move = GetNaturePowerMove();
 
     // Temporarily enable other gimmicks for damage calcs if planned
@@ -917,17 +918,18 @@ static bool32 AI_IsMoveEffectInMinus(u32 battlerAtk, u32 battlerDef, u32 move, s
 s32 AI_WhichMoveBetter(u32 move1, u32 move2, u32 battlerAtk, u32 battlerDef, s32 noOfHitsToKo)
 {
     bool32 effect1, effect2;
-    s32 defAbility = AI_DATA->abilities[battlerDef];
+    u32 defAbility = AI_DATA->abilities[battlerDef];
+    u32 atkAbility = AI_DATA->abilities[battlerAtk];
 
     // Check if physical moves hurt.
-    if (AI_DATA->holdEffects[battlerAtk] != HOLD_EFFECT_PROTECTIVE_PADS
+    if (AI_DATA->holdEffects[battlerAtk] != HOLD_EFFECT_PROTECTIVE_PADS && atkAbility != ABILITY_LONG_REACH
         && (AI_DATA->holdEffects[battlerDef] == HOLD_EFFECT_ROCKY_HELMET
         || defAbility == ABILITY_IRON_BARBS || defAbility == ABILITY_ROUGH_SKIN))
     {
-        if (IS_MOVE_PHYSICAL(move1) && !IS_MOVE_PHYSICAL(move2))
+        if (gMovesInfo[move1].makesContact && !gMovesInfo[move2].makesContact)
+            return -1;
+        if (gMovesInfo[move2].makesContact && !gMovesInfo[move1].makesContact)
             return 1;
-        if (IS_MOVE_PHYSICAL(move2) && !IS_MOVE_PHYSICAL(move1))
-            return 0;
     }
 
     // Check additional effects.
@@ -1198,6 +1200,8 @@ u32 AI_GetBattlerAbility(u32 battler)
 // does NOT include ability suppression checks
 s32 AI_DecideKnownAbilityForTurn(u32 battlerId)
 {
+    u32 validAbilities[NUM_ABILITY_SLOTS];
+    u8 i, numValidAbilities = 0;
     u32 knownAbility = AI_GetBattlerAbility(battlerId);
 
     // We've had ability overwritten by e.g. Worry Seed. It is not part of AI_PARTY in case of switching
@@ -1219,17 +1223,14 @@ s32 AI_DecideKnownAbilityForTurn(u32 battlerId)
     if (knownAbility == ABILITY_SHADOW_TAG || knownAbility == ABILITY_MAGNET_PULL || knownAbility == ABILITY_ARENA_TRAP)
         return knownAbility;
 
-    // Else, guess the ability
-    if (gSpeciesInfo[gBattleMons[battlerId].species].abilities[0] != ABILITY_NONE)
+    for (i = 0; i < NUM_ABILITY_SLOTS; i++)
     {
-        u32 abilityGuess = ABILITY_NONE;
-        while (abilityGuess == ABILITY_NONE)
-        {
-            abilityGuess = gSpeciesInfo[gBattleMons[battlerId].species].abilities[Random() % NUM_ABILITY_SLOTS];
-        }
-
-        return abilityGuess;
+        if (gSpeciesInfo[gBattleMons[battlerId].species].abilities[i] != ABILITY_NONE)
+            validAbilities[numValidAbilities++] = gSpeciesInfo[gBattleMons[battlerId].species].abilities[i];
     }
+
+    if (numValidAbilities > 0)
+        return validAbilities[RandomUniform(RNG_AI_ABILITY, 0, numValidAbilities - 1)];
 
     return ABILITY_NONE; // Unknown.
 }

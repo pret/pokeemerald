@@ -1400,7 +1400,7 @@ static void Cmd_attackcanceler(void)
         gBattlescriptCurrInstr = BattleScript_TookAttack;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
     }
-    else if (IsBattlerProtected(gBattlerTarget, gCurrentMove)
+    else if (IsBattlerProtected(gBattlerAttacker, gBattlerTarget, gCurrentMove)
      && (gCurrentMove != MOVE_CURSE || IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
      && (!gBattleMoveEffects[gMovesInfo[gCurrentMove].effect].twoTurnEffect || (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS))
      && gMovesInfo[gCurrentMove].effect != EFFECT_SUCKER_PUNCH
@@ -1456,7 +1456,7 @@ static void Cmd_unused5(void)
 {
     CMD_ARGS(const u8 *failInstr);
 
-    if (IsBattlerProtected(gBattlerTarget, gCurrentMove))
+    if (IsBattlerProtected(gBattlerAttacker, gBattlerTarget, gCurrentMove))
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         JumpIfMoveFailed(sizeof(*cmd), MOVE_NONE);
@@ -1471,7 +1471,7 @@ static void Cmd_unused5(void)
 static bool8 JumpIfMoveAffectedByProtect(u16 move)
 {
     bool8 affected = FALSE;
-    if (IsBattlerProtected(gBattlerTarget, move))
+    if (IsBattlerProtected(gBattlerAttacker, gBattlerTarget, move))
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         JumpIfMoveFailed(7, move);
@@ -1961,6 +1961,8 @@ static void Cmd_damagecalc(void)
     u8 moveType;
 
     GET_MOVE_TYPE(gCurrentMove, moveType);
+    if (gBattleStruct->shellSideArmCategory[gBattlerAttacker][gBattlerTarget] == DAMAGE_CATEGORY_SPECIAL && gCurrentMove == MOVE_SHELL_SIDE_ARM)
+        gBattleStruct->swapDamageCategory = TRUE;
     gBattleMoveDamage = CalculateMoveDamage(gCurrentMove, gBattlerAttacker, gBattlerTarget, moveType, 0, gIsCriticalHit, TRUE, TRUE);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
@@ -7023,8 +7025,12 @@ static void Cmd_openpartyscreen(void)
                 if (gAbsentBattlerFlags & gBitTable[battlerOpposite])
                     battlerOpposite ^= BIT_FLANK;
 
-                BtlController_EmitLinkStandbyMsg(battlerOpposite, BUFFER_A, LINK_STANDBY_MSG_ONLY, FALSE);
-                MarkBattlerForControllerExec(battlerOpposite);
+                // Make sure we're checking a valid battler. In edge case scenarios - battler could be absent and battlerOpposite would become a non-existent one softlocking the game.
+                if (battlerOpposite < gBattlersCount)
+                {
+                    BtlController_EmitLinkStandbyMsg(battlerOpposite, BUFFER_A, LINK_STANDBY_MSG_ONLY, FALSE);
+                    MarkBattlerForControllerExec(battlerOpposite);
+                }
             }
         }
     }
@@ -10500,44 +10506,6 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
-    case VARIOUS_SHELL_SIDE_ARM_CHECK: // 0% chance GameFreak actually checks this way according to DaWobblefet, but this is the only functional explanation at the moment
-    {
-        VARIOUS_ARGS();
-
-        u32 attackerAtkStat = gBattleMons[gBattlerAttacker].attack;
-        u32 targetDefStat = gBattleMons[gBattlerTarget].defense;
-        u32 attackerSpAtkStat = gBattleMons[gBattlerAttacker].spAttack;
-        u32 targetSpDefStat = gBattleMons[gBattlerTarget].spDefense;
-        u8 statStage;
-        u32 physical;
-        u32 special;
-
-        gBattleStruct->swapDamageCategory = FALSE;
-
-        statStage = gBattleMons[gBattlerAttacker].statStages[STAT_ATK];
-        attackerAtkStat *= gStatStageRatios[statStage][0];
-        attackerAtkStat /= gStatStageRatios[statStage][1];
-
-        statStage = gBattleMons[gBattlerTarget].statStages[STAT_DEF];
-        targetDefStat *= gStatStageRatios[statStage][0];
-        targetDefStat /= gStatStageRatios[statStage][1];
-
-        physical = ((((2 * gBattleMons[gBattlerAttacker].level / 5 + 2) * gMovesInfo[gCurrentMove].power * attackerAtkStat) / targetDefStat) / 50);
-
-        statStage = gBattleMons[gBattlerAttacker].statStages[STAT_SPATK];
-        attackerSpAtkStat *= gStatStageRatios[statStage][0];
-        attackerSpAtkStat /= gStatStageRatios[statStage][1];
-
-        statStage = gBattleMons[gBattlerTarget].statStages[STAT_SPDEF];
-        targetSpDefStat *= gStatStageRatios[statStage][0];
-        targetSpDefStat /= gStatStageRatios[statStage][1];
-
-        special = ((((2 * gBattleMons[gBattlerAttacker].level / 5 + 2) * gMovesInfo[gCurrentMove].power * attackerSpAtkStat) / targetSpDefStat) / 50);
-
-        if (((physical > special) || (physical == special && (Random() % 2) == 0)))
-            gBattleStruct->swapDamageCategory = TRUE;
-        break;
-    }
     case VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED:
     {
         VARIOUS_ARGS(const u8 *jumpInstr);
@@ -13916,7 +13884,7 @@ static void Cmd_trymemento(void)
     if (B_MEMENTO_FAIL >= GEN_4
       && (gBattleCommunication[MISS_TYPE] == B_MSG_PROTECTED
         || gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE
-        || IsBattlerProtected(gBattlerTarget, gCurrentMove)
+        || IsBattlerProtected(gBattlerAttacker, gBattlerTarget, gCurrentMove)
         || DoesSubstituteBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove)))
     {
         // Failed, target was protected.
@@ -16187,6 +16155,7 @@ void BS_ItemRestoreHP(void)
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && battler != MAX_BATTLERS_COUNT)
             {
                 gAbsentBattlerFlags &= ~gBitTable[battler];
+                gBattleMons[battler].hp = hp;
                 gBattleCommunication[MULTIUSE_STATE] = TRUE;
             }
             gBattlescriptCurrInstr = cmd->nextInstr;

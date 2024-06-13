@@ -1553,7 +1553,7 @@ void OpenPokemon(u32 sourceLine, u32 side, u32 species)
     DATA.currentSide = side;
     DATA.currentPartyIndex = *partySize;
     DATA.currentMon = &party[DATA.currentPartyIndex];
-    DATA.gender = MON_MALE;
+    DATA.gender = 0xFF; // Male
     DATA.nature = NATURE_HARDY;
     (*partySize)++;
 

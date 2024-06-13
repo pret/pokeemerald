@@ -1654,11 +1654,11 @@
 	.macro trygulpmissile
 	callnative BS_TryGulpMissile
 	.endm
-	
+
 	.macro tryactivategulpmissile
 	callnative BS_TryActivateGulpMissile
 	.endm
-	
+
 	.macro tryquash failInstr:req
 	callnative BS_TryQuash
 	.4byte \failInstr
@@ -2226,10 +2226,6 @@
 	.macro cutonethirdhpraisestats failInstr:req
 	various BS_ATTACKER, VARIOUS_CUT_1_3_HP_RAISE_STATS
 	.4byte \failInstr
-	.endm
-
-	.macro shellsidearmcheck
-	various BS_ATTACKER, VARIOUS_SHELL_SIDE_ARM_CHECK
 	.endm
 
 	.macro jumpifteanoberry jumpInstr:req

@@ -18079,7 +18079,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "Deals better of physical and\n"
             "special damage. May poison."),
-        .effect = EFFECT_SHELL_SIDE_ARM,
+        .effect = EFFECT_HIT, // The effect is hardcoded to the move since SetShellSideArmCategory() can't be used with anything but Shell Side Arm because of the BP requirement
         .power = 90,
         .type = TYPE_POISON,
         .accuracy = 100,
