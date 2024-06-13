@@ -2,7 +2,7 @@ static const struct SpriteFrameImage sPicTable_Substitute[] = {
     overworld_ascending_frames(gObjectEventPic_Substitute, 4, 4),
 };
 
-#if OW_FOLLOWERS_ENABLED
+#if OW_POKEMON_OBJECT_EVENTS
 #if P_FAMILY_BULBASAUR
 static const struct SpriteFrameImage sPicTable_Bulbasaur[] = {
     overworld_ascending_frames(gObjectEventPic_Bulbasaur, 4, 4),
@@ -4481,8 +4481,13 @@ static const struct SpriteFrameImage sPicTable_Yveltal[] = {
 static const struct SpriteFrameImage sPicTable_Zygarde50[] = {
     overworld_ascending_frames(gObjectEventPic_Zygarde50, 4, 4),
 };
-    //const u32 gObjectEventPic_Zygarde10[] = INCBIN_COMP("graphics/pokemon/zygarde/10_percent/follower.4bpp");
-    //const u32 gObjectEventPic_ZygardeComplete[] = INCBIN_COMP("graphics/pokemon/zygarde/complete/follower.4bpp");
+/*static const struct SpriteFrameImage sPicTable_Zygarde10[] = {
+    overworld_ascending_frames(gObjectEventPic_Zygarde10, 4, 4),
+};
+static const struct SpriteFrameImage sPicTable_ZygardeComplete[] = {
+    overworld_ascending_frames(gObjectEventPic_ZygardeComplete, 4, 4),
+};
+*/
 #endif //P_FAMILY_ZYGARDE
 
 #if P_FAMILY_DIANCIE
@@ -6147,4 +6152,4 @@ static const struct SpriteFrameImage sPicTable_TerapagosStellar[] = {
 };*/
 #endif //P_FAMILY_PECHARUNT
 
-#endif //OW_FOLLOWERS_ENABLED
+#endif //OW_POKEMON_OBJECT_EVENTS
