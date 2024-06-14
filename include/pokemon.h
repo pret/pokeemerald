@@ -349,7 +349,7 @@ struct Evolution
     u16 targetSpecies;
 };
 
-struct SpeciesInfo /*0x8C*/
+struct SpeciesInfo /*0xC0*/
 {
  /* 0x00 */ u8 baseHP;
  /* 0x01 */ u8 baseAttack;
@@ -445,15 +445,15 @@ struct SpeciesInfo /*0x8C*/
             // Move Data
  /* 0x80 */ const struct LevelUpMove *levelUpLearnset;
  /* 0x84 */ const u16 *teachableLearnset;
-            const u16 *eggMoveLearnset;
- /* 0x88 */ const struct Evolution *evolutions;
- /* 0x84 */ const u16 *formSpeciesIdTable;
- /* 0x84 */ const struct FormChange *formChangeTable;
+ /* 0x88 */ const u16 *eggMoveLearnset;
+ /* 0x8C */ const struct Evolution *evolutions;
+ /* 0x90 */ const u16 *formSpeciesIdTable;
+ /* 0x94 */ const struct FormChange *formChangeTable;
 #if OW_POKEMON_OBJECT_EVENTS
-            struct ObjectEventGraphicsInfo overworldData;
+ /* 0x98 */ struct ObjectEventGraphicsInfo overworldData;
 #if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
-            const void* overworldPalette;
-            const void* overworldShinyPalette;
+ /* 0xB8 */ const void* overworldPalette;
+ /* 0xBC */ const void* overworldShinyPalette;
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
 };
