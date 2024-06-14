@@ -354,7 +354,7 @@ static const u8 sText_Desc_Legendaries_On[]     = _("Legendaries can be found in
 static const u8 sText_Desc_Legendaries_Off[]    = _("Legendaries can not be found\nin the Birch Bag.");
 static const u8 sText_Desc_Duplicates_On[]      = _("Truly random. Duplicates are\npossible in the Birch Bag.");
 static const u8 sText_Desc_Duplicates_Off[]     = _("Birch bag can't hold duplicates.");
-static const u8 sText_Desc_Megas_On[]           = _("Trainer Pokémon have a 25% chance\nto mega evolve if possible.");
+static const u8 sText_Desc_Megas_On[]           = _("Trainer Pokémon have a 40% chance\nto mega evolve if possible.");
 static const u8 sText_Desc_Megas_Off[]          = _("Trainer Pokémon can never mega\nevolve.");
 
 static const u8 *const sModeMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
