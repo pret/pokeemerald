@@ -609,7 +609,7 @@ static const bool8 sHasChangeableEntries[LIST_ITEM_COUNT] =
     [LIST_ITEM_STAT_STAGES] = TRUE,
 };
 
-static const u16 sBgColor[] = {RGB_WHITE};
+static const u16 sBgColor[] = {RGB_BLACK};
 
 // this file's functions
 static void Task_DebugMenuFadeOut(u8 taskId);
