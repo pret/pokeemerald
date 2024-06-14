@@ -22,6 +22,7 @@
 #include "window.h"
 #include "constants/songs.h"
 #include "party_menu.h"
+#include "overworld.h"
 
 #define DLG_WINDOW_PALETTE_NUM 15
 #define DLG_WINDOW_BASE_TILE_NUM 0x200
@@ -963,7 +964,7 @@ void RedrawMenuCursor(u8 oldPos, u8 newPos)
     width = GetMenuCursorDimensionByFont(sMenu.fontId, 0);
     height = GetMenuCursorDimensionByFont(sMenu.fontId, 1);
     
-    if(gMain.callback2 == CB2_UpdatePartyMenu || gMain.callback2 == CB2_MoveRelearnerMain || (gMain.callback2 == CB2_MoveTutorListMain) || (FindTaskIdByFunc(Task_CallYesOrNoCallbackOverride) != TASK_NONE))
+    if(gMain.callback2 == CB2_UpdatePartyMenu || gMain.callback2 == CB2_MoveRelearnerMain || gMain.callback2 == CB2_Overworld || (gMain.callback2 == CB2_MoveTutorListMain) || (FindTaskIdByFunc(Task_CallYesOrNoCallbackOverride) != TASK_NONE))
     {
         FillWindowPixelRect(sMenu.windowId, PIXEL_FILL(1), sMenu.left, sMenu.optionHeight * oldPos + sMenu.top, width, height);
         AddTextPrinterParameterized(sMenu.windowId, sMenu.fontId, gText_SelectorArrow3, sMenu.left, sMenu.optionHeight * newPos + sMenu.top, 0, 0);
