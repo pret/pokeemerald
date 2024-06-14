@@ -8958,3 +8958,88 @@ u32 GetMaxNumberOfSpecies(void)
 {
     return RANDOM_SPECIES_COUNT_LEGENDARY;
 }
+
+u8 GetCurrentMaxMonGeneratedCount(void)
+{
+    u32 speciesCountReduced = ((GetMaxNumberOfSpecies() * 9) / 10);
+    return (gSaveBlock3Ptr->monsGeneratedCount / (speciesCountReduced)) + 1;
+}
+
+u16 GetRandomSpeciesFlattenedCurve(void)
+{
+    u16 randomSpecies = 0;
+    u16 largestMonCount = gSaveBlock3Ptr->largestMonCount;
+    u16 notChosen = TRUE;
+    u8 maxChosenNumber = 0;
+    u16 breakOut = 0;
+
+    gSaveBlock3Ptr->monsGeneratedCount += 1;
+    maxChosenNumber = GetCurrentMaxMonGeneratedCount();
+
+    SeedRngWithRtc();
+
+    while(notChosen)
+    {
+        randomSpecies = GetSpeciesRandomNotSeeded(0);
+        if(gSaveBlock3Ptr->monRolledCounts[randomSpecies] < maxChosenNumber)
+            notChosen = FALSE;
+
+        breakOut++;
+        if(breakOut > 100000)
+            notChosen = FALSE;
+    }
+
+    gSaveBlock3Ptr->monRolledCounts[randomSpecies] += 1;
+    if(gSaveBlock3Ptr->monRolledCounts[randomSpecies] > largestMonCount)
+        gSaveBlock3Ptr->largestMonCount = gSaveBlock3Ptr->monRolledCounts[randomSpecies] + 1;
+
+    return randomSpecies;
+        
+}
+
+void ClearGeneratedMons(void)
+{
+    u16 i = 0;
+    gSaveBlock3Ptr->monsGeneratedCount = 0;
+    for(i = 0; i < GetMaxNumberOfSpecies(); i++)
+    {
+        gSaveBlock3Ptr->monRolledCounts[i] = 0;
+    }
+}
+
+void DebugTestRandomness(void)
+{
+    u16 i = 0;
+    u16 floor = 0;
+    u16 partyNum = 0;
+    u16 trainerNum = 0;
+
+    ClearGeneratedMons();
+    SeedRngWithRtc();
+
+    i = 0;
+    while(i < 1)
+    {
+        for(floor = 0; floor < 10; floor++)
+        {
+            for(trainerNum = 0; trainerNum < 4; trainerNum++)
+            {
+                for(partyNum = 0; partyNum < 5; partyNum++)
+                {
+                    u16 randomSpecies = GetRandomSpeciesFlattenedCurve();
+                }
+            }
+        }
+        i++;
+    }
+
+    DebugPrintf("\n\n\nDebugTestRandomness New");
+    for(i = 0; i < GetMaxNumberOfSpecies(); i++)
+    {
+        StringCopy(gStringVar1, GetSpeciesName(i));
+        DebugPrintf("Species %S: %d", &gStringVar1, gSaveBlock3Ptr->monRolledCounts[i]);
+    }
+    DebugPrintf("Number of Mons Generated: %d", gSaveBlock3Ptr->monsGeneratedCount);
+    
+    ClearGeneratedMons();
+}

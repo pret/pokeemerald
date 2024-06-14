@@ -2301,7 +2301,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 }
                 else if ((gSpecialVar_Unused_0x8014 == TRAINER_ARCHIE_PIT_BOSS) && (!isPlayer))
                 {
-                    u16 newSpecies = GetSpeciesRandomNotSeeded(partyData[i].species);
+                    u16 newSpecies = GetRandomSpeciesFlattenedCurve();
                     const struct Evolution *evolutions = GetSpeciesEvolutions(newSpecies);
                     while (evolutions != NULL)
                     {
@@ -2313,7 +2313,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 }
                 else
                 {
-                    CreateMon(&party[i], GetSpeciesRandomNotSeeded(partyData[i].species), monLevel, 0, TRUE, personalityValue, otIdType, fixedOtId);
+                    CreateMon(&party[i], GetRandomSpeciesFlattenedCurve(), monLevel, 0, TRUE, personalityValue, otIdType, fixedOtId);
                 }
             }
 

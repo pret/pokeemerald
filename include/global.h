@@ -166,6 +166,9 @@ struct UCoords32
 
 struct SaveBlock3
 {
+    u32 monsGeneratedCount;
+    u32 largestMonCount;
+    u8 monRolledCounts[NUM_SPECIES];
 };
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;

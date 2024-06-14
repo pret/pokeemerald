@@ -156,7 +156,7 @@ static EWRAM_DATA struct MenuResources *sBirchCaseDataPtr = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
 static EWRAM_DATA u8 sMonChosenAlready[9] = {0};
-static EWRAM_DATA u16 sAlreadyRolledSpecies[9] = {0};
+static EWRAM_DATA u16 sRolledSpecies[9] = {0};
 
 //==========STATIC=DEFINES==========//
 static void BirchCaseRunSetup(void);
@@ -170,99 +170,96 @@ static void Task_BirchCaseWaitFadeIn(u8 taskId);
 static void Task_BirchCaseMain(u8 taskId);
 static void SampleUi_DrawMonIcon(u16 speciesId);
 static void Task_DelayedSpriteLoad(u8 taskId);
+static void GenerateRandomSpeciesForCase(void);
 
 static u32 ReturnRandomSpeciesByPokeballIndex(u32 index)
 {   
-    u16 species = sStarterChoices[index].species;
+    return sRolledSpecies[index];
+}
+
+static void GenerateRandomSpeciesForCase(void)
+{
+    u16 species = 0;
     u16 counter = 0;
     u16 counter2 = 0;
     bool8 rerollMon;
     u8 partyCount;
     int i;
 
-    species = GetSpeciesRandomSeeded(species * GetSpeciesRandomSeeded(VarGet(VAR_PIT_FLOOR) + 1));
-    //species = SPECIES_GROUDON; //Test setting for reroll tests
-
-    if (FlagGet(FLAG_NO_DUPLICATES))
+    for(u8 index = 0; index < 9; index++)
     {
-        do
+        counter = 0;
+        counter2 = 0;
+        species = GetRandomSpeciesFlattenedCurve();
+
+        if (FlagGet(FLAG_NO_DUPLICATES))
         {
-            rerollMon = FALSE;
-            DebugPrintf("handPosition = %d", index);
-            DebugPrintf("species = %d", species);
+            do
+            {
+                rerollMon = FALSE;
+                if (FlagGet(FLAG_NO_LEGENDARIES)) //reroll in case any legendaries, mythics or ultra beasts are determined
+                {
+                    while (((IsSpeciesLegendary(species) || IsSpeciesMythical(species) || IsSpeciesUltraBeast(species) || IsSpeciesParadoxMon(species)) || species > GetMaxNumberOfSpecies()) && counter < 10)
+                    {
+                        species = GetRandomSpeciesFlattenedCurve();
+                        counter++;
+                    }
+                }
+
+                
+                for (i=0; i < 9; i++) //check for duplicates within the case
+                {
+                    if (species == sRolledSpecies[i] && i != index)
+                    {
+                        rerollMon = TRUE;
+                    }
+                }
+
+                //check for duplicates against the player's party
+                partyCount = CalculatePlayerPartyCount();
+                if (partyCount > 2 && rerollMon == FALSE) //only the case after obtaining the third mon
+                {
+                    for (i = 0; i < partyCount; i++)
+                    {
+                        if (species == GetMonData(&gPlayerParty[i], MON_DATA_SPECIES))
+                            rerollMon = TRUE;
+                    }
+                }
+
+                
+                if (counter2 == 10) //exit in case of infinite loop
+                {
+                    rerollMon = FALSE;
+                    DebugPrintf("no valid species found. Default: %d", species);
+                }
+                //reroll
+                if (rerollMon)
+                {
+                    counter2++;
+                    species = GetRandomSpeciesFlattenedCurve();
+                    counter = 0;
+                }
+            }
+            while (rerollMon);
+
+            //save species for rerolls
+            sRolledSpecies[index] = species;
+        }
+        else
+        {
             //reroll in case any legendaries, mythics or ultra beasts are determined
             if (FlagGet(FLAG_NO_LEGENDARIES))
             {
-                while (((IsSpeciesLegendary(species) || IsSpeciesMythical(species) || IsSpeciesUltraBeast(species) || IsSpeciesParadoxMon(species)) || species > GetMaxNumberOfSpecies()) && counter < 10)
+                while ((IsSpeciesLegendary(species) || IsSpeciesMythical(species) || IsSpeciesUltraBeast(species) || IsSpeciesParadoxMon(species)) && counter < 1000)
                 {
-                    // +counter to handle edge cases
-                    species = GetSpeciesRandomSeeded(species * GetSpeciesRandomSeeded(VarGet(VAR_PIT_FLOOR) + index + counter2)) + counter;
-                    counter ++;
-                    DebugPrintf("%d, rerolled non-legend species = %d", counter, species);
+                    species = GetRandomSpeciesFlattenedCurve();
+                    counter++;
                 }
-            }
-            //check for duplicates within the case
-            for (i=0; i<9; i++) // 9 slots in birch case
-            {
-                DebugPrintf("slot = %d with species %d", i, sAlreadyRolledSpecies[i]);
-                if (species == sAlreadyRolledSpecies[i] && i != index)
-                {
-                    rerollMon = TRUE;
-                    DebugPrintf("index = %d", index);
-                    DebugPrintf("i = %d", i);
-                    DebugPrintf("double species = %d", species);
-                }
-            }
-            //check for duplicates against the player's party
-            partyCount = CalculatePlayerPartyCount();
-            if (partyCount > 2 && rerollMon == FALSE) //only the case after obtaining the third mon
-            {
-                for (i=0; i<partyCount; i++)
-                {
-                    if (species == GetMonData(&gPlayerParty[i], MON_DATA_SPECIES))
-                    {
-                        rerollMon = TRUE;
-                        DebugPrintf("gPlayerParty[%d] = %d", i, species);
-                    }
-                }
-            }
-            //exit in case of infinite loop
-            if (counter2 == 10)
-            {
-                rerollMon = FALSE;
-                // default species could be specified here!
-                DebugPrintf("no valid species found. Default: %d", species);
-            }
-            //reroll
-            if (rerollMon)
-            {
-                counter2++;
-                species = GetSpeciesRandomSeeded(species * GetSpeciesRandomSeeded(VarGet(VAR_PIT_FLOOR) + index));
-                counter = 0; //reset counter for legendary rerolls
-                DebugPrintf("--- reroll ---");
-            }
-        }
-        while (rerollMon);
-
-        //save species for rerolls
-        sAlreadyRolledSpecies[index] = species;
-        DebugPrintf("Found species = %d", species);
-        //sAlreadyRolledSpecies[9]++; //9 = counter of successfully rolled mons
-    }
-    else
-    {
-        //reroll in case any legendaries, mythics or ultra beasts are determined
-        if (FlagGet(FLAG_NO_LEGENDARIES))
-        {
-            while ((IsSpeciesLegendary(species) || IsSpeciesMythical(species) || IsSpeciesUltraBeast(species) || IsSpeciesParadoxMon(species)) && counter < 100)
-            {
-                species = GetSpeciesRandomSeeded(species * GetSpeciesRandomSeeded(VarGet(VAR_PIT_FLOOR) + 1));
-                counter ++;
+                sRolledSpecies[index] = species;
             }
         }
     }
-
-    return species;
+    return;
 }
 
 //==========CONST=DATA==========//
@@ -664,6 +661,7 @@ static bool8 BirchCaseDoGfxSetup(void)
         ResetPaletteFade();
         ResetSpriteData();
         ResetTasks();
+        GenerateRandomSpeciesForCase();
         gMain.state++;
         break;
     case 2:
@@ -730,7 +728,7 @@ static void BirchCaseFreeResources(void)
     for(i = 0; i < 9; i++)
     {
         sMonChosenAlready[i] = 0;
-        sAlreadyRolledSpecies[i] = 0;
+        sRolledSpecies[i] = 0;
     }
 }
 

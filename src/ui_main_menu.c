@@ -528,8 +528,7 @@ void MainMenu_Init(MainCallback callback)
         SetMainCallback2(callback);
         return;
     }
-    
-    // initialize stuff
+    //DebugTestRandomness();
     sMainMenuDataPtr->gfxLoadState = 0;
     sMainMenuDataPtr->savedCallback = callback;
     for(i = 0; i < 6; i++)

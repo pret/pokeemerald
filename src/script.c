@@ -529,11 +529,6 @@ void InitTrainerIdAndNameData()
     NewGameBirchSpeech_SetDefaultPlayerName(Random() % 19);
 }
 
-void StartTimer1Script()
-{
-    StartTimer1();
-}
-
 struct RandomTrainerNPC 
 {
     u16 gfxid;
