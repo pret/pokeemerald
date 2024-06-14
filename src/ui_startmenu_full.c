@@ -48,6 +48,7 @@
 #include "frontier_pass.h"
 #include "start_menu.h"
 #include "ui_mode_menu.h"
+#include "ui_outfits.h"
 
 /*
     Full Screen Start Menu
@@ -794,13 +795,13 @@ static void CreateGreyedMenuBoxes()
         StartSpriteAnim(&gSprites[sStartMenuDataPtr->greyMenuBoxIds[1]], 0);
     }
 
-    if(!FlagGet(FLAG_SYS_POKENAV_GET))
-    {
-        if (sStartMenuDataPtr->greyMenuBoxIds[2] == SPRITE_NONE)
-            sStartMenuDataPtr->greyMenuBoxIds[2] = CreateSprite(&sSpriteTemplate_GreyMenuButtonMap, CURSOR_LEFT_COL_X, CURSOR_BTM_ROW_Y, 1);
-        gSprites[sStartMenuDataPtr->greyMenuBoxIds[2]].invisible = FALSE;
-        StartSpriteAnim(&gSprites[sStartMenuDataPtr->greyMenuBoxIds[2]], 0);
-    }
+    //if(!FlagGet(FLAG_SYS_POKENAV_GET))
+    //{
+    //    if (sStartMenuDataPtr->greyMenuBoxIds[2] == SPRITE_NONE)
+    //        sStartMenuDataPtr->greyMenuBoxIds[2] = CreateSprite(&sSpriteTemplate_GreyMenuButtonMap, CURSOR_LEFT_COL_X, CURSOR_BTM_ROW_Y, 1);
+    //    gSprites[sStartMenuDataPtr->greyMenuBoxIds[2]].invisible = FALSE;
+    //    StartSpriteAnim(&gSprites[sStartMenuDataPtr->greyMenuBoxIds[2]], 0);
+    //}
     
     return;
 }
@@ -1381,7 +1382,7 @@ void Task_OpenPokenavStartMenu(u8 taskId)
         StartMenuFull_FreeResources();
 		PlayRainStoppingSoundEffect();
 		CleanupOverworldWindowsAndTilemaps();
-        SetMainCallback2(CB2_InitPokeNav);
+        OutfitsMenu_Init(CB2_ReturnToFullScreenStartMenu);
     }
 }
 
@@ -1508,7 +1509,7 @@ static void Task_StartMenuFullMain(u8 taskId)
                 }
                 break;
             case START_MENU_MAP:
-                if(FlagGet(FLAG_SYS_POKENAV_GET))
+                if(1)
                 {
                     PlaySE(SE_SELECT);
                     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
