@@ -224,6 +224,21 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: Post-KO switches prioritize of
     }
 }
 
+AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: Post-KO switches factor in Trick Room for revenge killing")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_TRICK_ROOM].effect == EFFECT_TRICK_ROOM);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_MON_CHOICES);
+        PLAYER(SPECIES_SWELLOW) { Level(30); Speed(10); Moves(MOVE_WING_ATTACK, MOVE_GROWL); }
+        OPPONENT(SPECIES_BALTOY) { Level(1); Speed(10); Moves(MOVE_TRICK_ROOM); }
+        OPPONENT(SPECIES_ELECTRODE) { Level(30); Speed(5); Moves(MOVE_THUNDERBOLT); }
+        OPPONENT(SPECIES_ELECTRODE) { Level(30); Speed(15); Moves(MOVE_THUNDERBOLT); }
+    } WHEN {
+            TURN { EXPECT_MOVE(opponent, MOVE_TRICK_ROOM); MOVE(player, MOVE_GROWL); }
+            TURN { MOVE(player, MOVE_WING_ATTACK); EXPECT_SEND_OUT(opponent, 1); }
+    }
+}
+
 // General AI_FLAG_SMART_SWITCHING behaviour
 AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI switches out after sufficient stat drops")
 {
