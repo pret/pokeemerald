@@ -16468,7 +16468,8 @@ void BS_TryRelicSong(void)
 {
     NATIVE_ARGS();
 
-    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_SHEER_FORCE && !(gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED))
+    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_SHEER_FORCE && !(gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED)
+        && (gBattleMons[gBattlerAttacker].species == SPECIES_MELOETTA_ARIA || gBattleMons[gBattlerAttacker].species == SPECIES_MELOETTA_PIROUETTE))
     {
         if (gBattleMons[gBattlerAttacker].species == SPECIES_MELOETTA_ARIA)
             gBattleMons[gBattlerAttacker].species = SPECIES_MELOETTA_PIROUETTE;
@@ -16479,7 +16480,9 @@ void BS_TryRelicSong(void)
         gBattlescriptCurrInstr = BattleScript_AttackerFormChangeMoveEffect;
     }
     else
+    {
         gBattlescriptCurrInstr = cmd->nextInstr;
+    }
 }
 
 void BS_SetPledge(void)
