@@ -10057,7 +10057,7 @@ BattleScript_BerserkGeneRet_End:
 
 BattleScript_BoosterEnergyEnd2::
 	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT, sB_ANIM_ARG1
-	call BattleScript_AbilityPopUp
+	call BattleScript_AbilityPopUpTarget
 	printstring STRINGID_BOOSTERENERGYACTIVATES
 	waitmessage B_WAIT_TIME_MED
 	printstring STRINGID_STATWASHEIGHTENED
