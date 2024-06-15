@@ -13037,16 +13037,16 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_KNOCK_OFF, // Todo
     },
 
-    [ITEM_TM_DRAINING_KISS] =
+    [ITEM_TM_SCALD] =
     {
         .name = _("TM99"),
-        .price = 3000,
+        .price = 8000,
         .description = sQuestionMarksDesc, // Todo
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .secondaryId = MOVE_DRAINING_KISS, // Todo
+        .secondaryId = MOVE_SCALD, // Todo
     },
 
     [ITEM_TM_DRAGON_CHEER] =
