@@ -450,7 +450,7 @@ static void SetBattlerAiMovesData(struct AiLogicData *aiData, u32 battlerAtk, u3
         SetBattlerData(battlerDef);
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
-            struct SimulatedDamage dmg;
+            struct SimulatedDamage dmg = {0};
             u8 effectiveness = AI_EFFECTIVENESS_x0;
             u32 move = moves[i];
 
