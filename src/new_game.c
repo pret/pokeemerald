@@ -62,6 +62,7 @@ EWRAM_DATA u8 newGameDexCaught[NUM_DEX_FLAG_BYTES];
 void SavePokedexFlags(void)
 {
     u16 i;
+    DebugPrintf("SavePokedexFlags");
     for (i = 0; i < NUM_DEX_FLAG_BYTES; i++)
     {
         newGameDexCaught[i] = gSaveBlock1Ptr->dexCaught[i];
@@ -115,7 +116,7 @@ static void InitPlayerTrainerId(void)
 // L=A isnt set here for some reason.
 void SetDefaultOptions(void)
 {
-    int i;
+    int i, counter;
 
     //options
     gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_INSTANT;
@@ -128,15 +129,18 @@ void SetDefaultOptions(void)
     gSaveBlock2Ptr->regionMapZoom = FALSE;
     
     //game modes
-    gSaveBlock2Ptr->modeDefault = 0;
-    gSaveBlock2Ptr->modeAutosave = 1;
-    gSaveBlock2Ptr->modeBattleMode = 0;
-    gSaveBlock2Ptr->modeRandomizer = 0;
-    gSaveBlock2Ptr->modeXPShare = 0;
-    gSaveBlock2Ptr->modeStatChanger = 0;
-    gSaveBlock2Ptr->modeLegendaries = 0;
-    gSaveBlock2Ptr->modeDuplicates = 1;
-    gSaveBlock2Ptr->modeMegas = 1;
+    if (GetNationalPokedexCount(FLAG_GET_CAUGHT) < 1)
+    {
+        gSaveBlock2Ptr->modeDefault = 0;
+        gSaveBlock2Ptr->modeAutosave = 1;
+        gSaveBlock2Ptr->modeBattleMode = 0;
+        gSaveBlock2Ptr->modeRandomizer = 0;
+        gSaveBlock2Ptr->modeXPShare = 0;
+        gSaveBlock2Ptr->modeStatChanger = 0;
+        gSaveBlock2Ptr->modeLegendaries = 0;
+        gSaveBlock2Ptr->modeDuplicates = 1;
+        gSaveBlock2Ptr->modeMegas = 1;
+    }
 }
 
 static void ClearPokedexFlags(void)
