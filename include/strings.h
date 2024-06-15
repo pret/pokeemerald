@@ -1149,6 +1149,7 @@ extern const u8 gText_SwitchPokedexListings[];
 extern const u8 gText_ReturnToPokedex[];
 extern const u8 gText_SelectPokedexMode[];
 extern const u8 gText_SelectPokedexListingMode[];
+extern const u8 gText_SelectOwnershipMode[];
 extern const u8 gText_ListByFirstLetter[];
 extern const u8 gText_ListByBodyColor[];
 extern const u8 gText_ListByType[];
@@ -3239,5 +3240,13 @@ extern const u8 gText_PlantBerry[];
 // Move Tutors
 extern const u8 gText_TutorMoves[];
 extern const u8 gText_Egg_Moves[];
+
+// The Pit
+extern const u8 gText_DexOwnedTitle[];
+extern const u8 gText_DexSeenTitle[];
+extern const u8 gText_DexSortOwnedTitle[];
+extern const u8 gText_DexOwnedDescription[];
+extern const u8 gText_DexSeenDescription[];
+extern const u8 gText_DexSortOwnedDescription[];
 
 #endif // GUARD_STRINGS_H
