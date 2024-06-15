@@ -5,6 +5,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "pokemon.h"
+#include "constants/cries.h"
 #include "constants/songs.h"
 #include "task.h"
 
@@ -460,7 +461,7 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     SetPokemonCryPriority(priority);
 
     species = GetCryIdBySpecies(species);
-    if (species != 0)
+    if (species != CRY_NONE)
     {
         species--;
         gMPlay_PokemonCry = SetPokemonCryTone(reverse ? &gCryTable_Reverse[species] : &gCryTable[species]);

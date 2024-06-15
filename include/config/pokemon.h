@@ -41,6 +41,7 @@
 // Other settings
 #define P_CUSTOM_GENDER_DIFF_ICONS  TRUE        // If TRUE, will give more Pokémon custom icons for their female forms, i.e. Hippopotas and Hippowdon
 #define P_FOOTPRINTS                TRUE        // If TRUE, Pokémon will have footprints (as was the case up to Gen 5 and in BDSP). Disabling this saves some ROM space.
+#define P_CRIES_ENABLED             TRUE        // If TRUE, Pokémon will have cries. Disabling this saves around a LOT of ROM space (over 25%!), but instead we recommend disabling individual unused Pokémon families in include/config/species_enabled.h.
 #define P_LEGENDARY_PERFECT_IVS     GEN_LATEST  // Since Gen 6, Legendaries, Mythicals and Ultra Beasts found in the wild or given through gifts have at least 3 perfect IVs.
 #define P_EV_CAP                    GEN_LATEST  // Since Gen 6, the max EVs per stat is 252 instead of 255.
 #define P_SHOW_TERA_TYPE            GEN_8       // Since Gen 9, the Tera Type is shown on the summary screen.
