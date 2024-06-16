@@ -562,7 +562,6 @@ u16 ReturnLastSpokenVarObjGfxId()
 
 u16 ReturnNumberOfTrainersForFloor()
 {
-
     FlagSet(FLAG_MOVER_OBJECT);
 
     if(VarGet(VAR_PIT_FLOOR) == 100)
@@ -641,9 +640,9 @@ u16 ReturnNumberOfTrainersForFloor()
     }
     else if(VarGet(VAR_PIT_FLOOR) < 50) // second 25 floor rates
     {
-        if(randomValue < 55)
+        if(randomValue < 45)
             return 1;
-        if(randomValue < 85)
+        if(randomValue < 75)
             return 2;
         if(randomValue < 95)
             return 3;
