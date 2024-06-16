@@ -795,13 +795,13 @@ static void CreateGreyedMenuBoxes()
         StartSpriteAnim(&gSprites[sStartMenuDataPtr->greyMenuBoxIds[1]], 0);
     }
 
-    //if(!FlagGet(FLAG_SYS_POKENAV_GET))
-    //{
-    //    if (sStartMenuDataPtr->greyMenuBoxIds[2] == SPRITE_NONE)
-    //        sStartMenuDataPtr->greyMenuBoxIds[2] = CreateSprite(&sSpriteTemplate_GreyMenuButtonMap, CURSOR_LEFT_COL_X, CURSOR_BTM_ROW_Y, 1);
-    //    gSprites[sStartMenuDataPtr->greyMenuBoxIds[2]].invisible = FALSE;
-    //    StartSpriteAnim(&gSprites[sStartMenuDataPtr->greyMenuBoxIds[2]], 0);
-    //}
+    if(!FlagGet(FLAG_SYS_POKENAV_GET))
+    {
+        if (sStartMenuDataPtr->greyMenuBoxIds[2] == SPRITE_NONE)
+            sStartMenuDataPtr->greyMenuBoxIds[2] = CreateSprite(&sSpriteTemplate_GreyMenuButtonMap, CURSOR_LEFT_COL_X, CURSOR_BTM_ROW_Y, 1);
+        gSprites[sStartMenuDataPtr->greyMenuBoxIds[2]].invisible = FALSE;
+        StartSpriteAnim(&gSprites[sStartMenuDataPtr->greyMenuBoxIds[2]], 0);
+    }
     
     return;
 }

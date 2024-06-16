@@ -1747,6 +1747,10 @@ static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y)
     }
 
     objectEvent = &gObjectEvents[objectEventId];
+
+    if (objectEvent->movementType == MOVEMENT_TYPE_PLAYER)
+        objectEvent->graphicsId = GetPlayerAvatarGraphicsId(); 
+
     subspriteTables = NULL;
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
     spriteFrameImage.size = graphicsInfo->size;

@@ -1277,65 +1277,44 @@ u8 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
     return sRivalAvatarGfxIds[state][gender];
 }
 
-u8 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
+u8 GetPlayerAvatarGraphicsId()
 {
-    if(gSaveBlock2Ptr->playerGfxType == 1)
+    u8 gender = gSaveBlock2Ptr->playerGender;
+    switch(gSaveBlock2Ptr->playerGfxType)
     {
-        if(gender != MALE)
-        {
-            return OBJ_EVENT_GFX_LEAF;
-        } 
-        else
-        {
-            return OBJ_EVENT_GFX_RED;
-        }
+        case 0:
+            if(gender != MALE)
+                return OBJ_EVENT_GFX_MAY_NORMAL;
+            else
+                return OBJ_EVENT_GFX_BRENDAN_NORMAL;
+        case 1:
+            if(gender != MALE)
+                return OBJ_EVENT_GFX_LEAF;
+            else
+                return OBJ_EVENT_GFX_RED;
+        case 2:
+            if(gender != MALE)
+                return OBJ_EVENT_GFX_DAWN;
+            else
+                return OBJ_EVENT_GFX_LUCAS;
+        case 3:
+            if(gender != MALE)
+                return OBJ_EVENT_GFX_CYNTHIA;
+            else
+                return OBJ_EVENT_GFX_STEVEN;
+        case 4:
+            if(gender != MALE)
+                return OBJ_EVENT_GFX_PHOEBE;
+            else
+                return OBJ_EVENT_GFX_OAK;
+        case 5:
+            if(gender != MALE)
+                return OBJ_EVENT_GFX_LYRA;
+            else
+                return OBJ_EVENT_GFX_ETHAN;
     }
-    if(gSaveBlock2Ptr->playerGfxType == 2)
-    {
-        if(gender != MALE)
-        {
-            return OBJ_EVENT_GFX_DAWN;
-        } 
-        else
-        {
-            return OBJ_EVENT_GFX_LUCAS;
-        }
-    }
-    if(gSaveBlock2Ptr->playerGfxType == 3)
-    {
-        if(gender != MALE)
-        {
-            return OBJ_EVENT_GFX_CYNTHIA;
-        } 
-        else
-        {
-            return OBJ_EVENT_GFX_STEVEN;
-        }
-    }
-    if(gSaveBlock2Ptr->playerGfxType == 4)
-    {
-        if(gender != MALE)
-        {
-            return OBJ_EVENT_GFX_PHOEBE;
-        } 
-        else
-        {
-            return OBJ_EVENT_GFX_OAK;
-        }
-    }
-    if(gSaveBlock2Ptr->playerGfxType == 5)
-    {
-        if(gender != MALE)
-        {
-            return OBJ_EVENT_GFX_LYRA;
-        } 
-        else
-        {
-            return OBJ_EVENT_GFX_ETHAN;
-        }
-    }
-       
-    return sPlayerAvatarGfxIds[state][gender];
+
+    return OBJ_EVENT_GFX_BRENDAN_NORMAL;
 }
 
 u8 GetFRLGAvatarGraphicsIdByGender(u8 gender)
@@ -1350,7 +1329,7 @@ u8 GetRSAvatarGraphicsIdByGender(u8 gender)
 
 u8 GetPlayerAvatarGraphicsIdByStateId(u8 state)
 {
-    return GetPlayerAvatarGraphicsIdByStateIdAndGender(state, gSaveBlock2Ptr->playerGender);
+    return GetPlayerAvatarGraphicsId();
 }
 
 u8 unref_GetRivalAvatarGenderByGraphicsId(u8 gfxId)
@@ -1376,13 +1355,11 @@ u8 GetPlayerAvatarGenderByGraphicsId(u8 gfxId)
     switch (gfxId)
     {
     case OBJ_EVENT_GFX_MAY_NORMAL:
-    case OBJ_EVENT_GFX_MAY_MACH_BIKE:
-    case OBJ_EVENT_GFX_MAY_ACRO_BIKE:
-    case OBJ_EVENT_GFX_MAY_SURFING:
-    case OBJ_EVENT_GFX_MAY_FIELD_MOVE:
-    case OBJ_EVENT_GFX_MAY_UNDERWATER:
-    case OBJ_EVENT_GFX_MAY_FISHING:
-    case OBJ_EVENT_GFX_MAY_WATERING:
+    case OBJ_EVENT_GFX_DAWN:
+    case OBJ_EVENT_GFX_LEAF:
+    case OBJ_EVENT_GFX_LYRA:
+    case OBJ_EVENT_GFX_CYNTHIA:
+    case OBJ_EVENT_GFX_PHOEBE:
         return FEMALE;
     default:
         return MALE;
@@ -1480,7 +1457,7 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     struct ObjectEvent *objectEvent;
 
     playerObjEventTemplate.localId = OBJ_EVENT_ID_PLAYER;
-    playerObjEventTemplate.graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, gender);
+    playerObjEventTemplate.graphicsId = GetPlayerAvatarGraphicsId();
     playerObjEventTemplate.x = x - MAP_OFFSET;
     playerObjEventTemplate.y = y - MAP_OFFSET;
     playerObjEventTemplate.elevation = 0;
