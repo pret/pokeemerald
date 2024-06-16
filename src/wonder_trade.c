@@ -100,7 +100,7 @@ static u32 ReturnRandomSpecies()
                     // +counter to handle edge cases
                     species = GetSpeciesRandomNotSeeded(species * GetSpeciesRandomNotSeeded(VarGet(VAR_PIT_FLOOR) + counter2)) + counter;
                     counter ++;
-                    DebugPrintf("%d, rerolled non-legend species = %d", counter, species);
+                    //DebugPrintf("%d, rerolled non-legend species = %d", counter, species);
                 }
             }
 
@@ -113,7 +113,7 @@ static u32 ReturnRandomSpecies()
                     if (species == GetMonData(&gPlayerParty[i], MON_DATA_SPECIES))
                     {
                         rerollMon = TRUE;
-                        DebugPrintf("gPlayerParty[%d] = %d", i, species);
+                        //DebugPrintf("gPlayerParty[%d] = %d", i, species);
                     }
                 }
             }
@@ -122,7 +122,7 @@ static u32 ReturnRandomSpecies()
             {
                 rerollMon = FALSE;
                 // default species could be specified here!
-                DebugPrintf("no valid species found. Default: %d", species);
+                //DebugPrintf("no valid species found. Default: %d", species);
             }
             //reroll
             if (rerollMon)
@@ -130,13 +130,13 @@ static u32 ReturnRandomSpecies()
                 counter2++;
                 species = GetSpeciesRandomNotSeeded(species * GetSpeciesRandomNotSeeded(VarGet(VAR_PIT_FLOOR) + 1));
                 counter = 0; //reset counter for legendary rerolls
-                DebugPrintf("--- reroll ---");
+                //DebugPrintf("--- reroll ---");
             }
         }
         while (rerollMon);
 
         //save species for rerolls
-        DebugPrintf("Found species = %d", species);
+        //DebugPrintf("Found species = %d", species);
         //sAlreadyRolledSpecies[9]++; //9 = counter of successfully rolled mons
     }
     else

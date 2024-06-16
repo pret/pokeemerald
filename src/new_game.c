@@ -62,7 +62,6 @@ EWRAM_DATA u8 newGameDexCaught[NUM_DEX_FLAG_BYTES];
 void SavePokedexFlags(void)
 {
     u16 i;
-    DebugPrintf("SavePokedexFlags");
     for (i = 0; i < NUM_DEX_FLAG_BYTES; i++)
     {
         newGameDexCaught[i] = gSaveBlock1Ptr->dexCaught[i];

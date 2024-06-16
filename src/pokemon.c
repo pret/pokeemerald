@@ -4029,7 +4029,7 @@ u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
     bool8 reroll;
     int counter = 0;
 
-    DebugPrintf("GetAbilityBySpecies");
+    //DebugPrintf("GetAbilityBySpecies");
 
 #ifdef PIT_GEN_3_MODE
     //exclude hidden abilities
@@ -4070,12 +4070,12 @@ u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
         //check if ability is valid
         if(FlagGet(FLAG_RANDOM_MODE))
         {
-            DebugPrintf("check for invalid abilities");
+            //DebugPrintf("check for invalid abilities");
             for (i=0; i<INVALID_ABILITIES_COUNT; i++)
             {
                 if (gLastUsedAbility == sInvalidRandomAbilities[i])
                 {
-                    DebugPrintf("reroll Ability: %d", gLastUsedAbility);
+                    //DebugPrintf("reroll Ability: %d", gLastUsedAbility);
                     reroll = TRUE;
                     i = INVALID_ABILITIES_COUNT;
                 }
@@ -4091,7 +4091,7 @@ u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
         }
     } while (reroll);
 
-    DebugPrintf("gLastUsedAbility = %d", gLastUsedAbility);
+    //DebugPrintf("gLastUsedAbility = %d", gLastUsedAbility);
     return gLastUsedAbility;
 }
 
@@ -5447,7 +5447,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                                 if (GetMonData(&gPlayerParty[k], MON_DATA_SPECIES) == SPECIES_SHELMET)
                                 targetSpecies = evolutions[i].targetSpecies;
                             }
-                            DebugPrintf("target species = %d", targetSpecies);
+                            //DebugPrintf("target species = %d", targetSpecies);
                             break;
                         case SPECIES_SHELMET:
                             for (k=0; k<PARTY_SIZE; k++)
@@ -5455,7 +5455,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                                 if (GetMonData(&gPlayerParty[k], MON_DATA_SPECIES) == SPECIES_KARRABLAST)
                                     targetSpecies = evolutions[i].targetSpecies;
                             }
-                            DebugPrintf("target species = %d", targetSpecies);
+                            //DebugPrintf("target species = %d", targetSpecies);
                             break;
                     }
                 }
@@ -6232,7 +6232,7 @@ u8 CanLearnTeachableMove(u16 species, u16 move)
         u32 i, j;
         const u16 *teachableLearnset = GetSpeciesTeachableLearnset(species);
 
-        DebugPrintf("species = %d, move = %d", species, move);
+        //DebugPrintf("species = %d, move = %d", species, move);
         for (i = 0; i < ARRAY_COUNT(sUniversalMoves); i++)
         {
             if (sUniversalMoves[i] == move)
@@ -9039,13 +9039,13 @@ void DebugTestRandomness(void)
         i++;
     }
 
-    DebugPrintf("\n\n\nDebugTestRandomness New");
+    //DebugPrintf("\n\n\nDebugTestRandomness New");
     for(i = 0; i < GetMaxNumberOfSpecies(); i++)
     {
         StringCopy(gStringVar1, GetSpeciesName(i));
-        DebugPrintf("Species %S: %d", &gStringVar1, gSaveBlock3Ptr->monRolledCounts[i]);
+        //DebugPrintf("Species %S: %d", &gStringVar1, gSaveBlock3Ptr->monRolledCounts[i]);
     }
-    DebugPrintf("Number of Mons Generated: %d", gSaveBlock3Ptr->monsGeneratedCount);
+    //DebugPrintf("Number of Mons Generated: %d", gSaveBlock3Ptr->monsGeneratedCount);
     
     ClearGeneratedMons();
 }

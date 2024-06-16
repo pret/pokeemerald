@@ -253,7 +253,7 @@ static u8 CreateSelector()
 
     gSprites[sMenuDataPtr->selectorSpriteId].invisible = FALSE;
     StartSpriteAnim(&gSprites[sMenuDataPtr->selectorSpriteId], 0);
-    DebugPrintf("Sprite ID: %d", sMenuDataPtr->selectorSpriteId);
+    //DebugPrintf("Sprite ID: %d", sMenuDataPtr->selectorSpriteId);
     return sMenuDataPtr->selectorSpriteId;
 }
 
@@ -646,7 +646,7 @@ static void PrintMonStats()
     {
         currentStat = GetMonData(ReturnPartyMon(), statsToPrintActual[i]);
         sMenuDataPtr->normalTotal += currentStat;
-        DebugPrintf("Stat: %d", currentStat);
+        //DebugPrintf("Stat: %d", currentStat);
         ConvertIntToDecimalStringN(gStringVar2, currentStat, STR_CONV_MODE_RIGHT_ALIGN, 3);
         AddTextPrinterParameterized4(WINDOW_2, 1, StatPrintData[statsToPrintActual[i]].x, StatPrintData[statsToPrintActual[i]].y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
     }
@@ -655,7 +655,7 @@ static void PrintMonStats()
     {
         currentStat = GetMonData(ReturnPartyMon(), statsToPrintEVs[i]);
         sMenuDataPtr->evTotal += currentStat;
-        DebugPrintf("Stat: %d", currentStat);
+        //DebugPrintf("Stat: %d", currentStat);
         ConvertIntToDecimalStringN(gStringVar2, currentStat, STR_CONV_MODE_RIGHT_ALIGN, 3);
         AddTextPrinterParameterized4(WINDOW_2, 1, StatPrintData[statsToPrintEVs[i]].x, StatPrintData[statsToPrintEVs[i]].y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
     }
@@ -664,7 +664,7 @@ static void PrintMonStats()
     {
         currentStat = GetMonData(ReturnPartyMon(), statsToPrintIVs[i]);
         sMenuDataPtr->ivTotal += currentStat;
-        DebugPrintf("Stat: %d", currentStat);
+        //DebugPrintf("Stat: %d", currentStat);
         ConvertIntToDecimalStringN(gStringVar2, currentStat, STR_CONV_MODE_RIGHT_ALIGN, 3);
         AddTextPrinterParameterized4(WINDOW_2, 1, StatPrintData[statsToPrintIVs[i]].x, StatPrintData[statsToPrintIVs[i]].y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
     }
@@ -735,7 +735,7 @@ static void SelectorCallback(struct Sprite *sprite)
     sprite->x = spriteCords[sMenuDataPtr->selector_y][sMenuDataPtr->selector_x].x;
     sprite->y = spriteCords[sMenuDataPtr->selector_y][sMenuDataPtr->selector_x].y;
 
-    DebugPrintf("%d", sMenuDataPtr->selectedStat);
+    //DebugPrintf("%d", sMenuDataPtr->selectedStat);
 }
 
 static void Task_MenuWaitFadeIn(u8 taskId)

@@ -1756,8 +1756,6 @@ static bool8 Saving_Init(struct Task *task)
     s16 x_diff;
     s16 y_diff;
 
-    DebugPrintf("Starting Save Field Effect. %d", 0);
-
     u8 spriteId;
     struct Sprite *sprite;
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_SAVING], 0, 0, 0xFF);
@@ -1768,7 +1766,6 @@ static bool8 Saving_Init(struct Task *task)
         sprite->oam.priority = 0;
         sprite->invisible = FALSE;
         sprite->coordOffsetEnabled = TRUE;
-        DebugPrintf("Sprite is Valid. %d", spriteId);
     }
     sprite = &gSprites[spriteId];
 

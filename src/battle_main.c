@@ -876,7 +876,7 @@ static void CB2_InitBattleInternal(void)
 
     gBattleCommunication[MULTIUSE_STATE] = 0;
 
-    DebugPrintf("Reached End Of Init Battle Internal: %d", gSpecialVar_Unused_0x8014);
+    //DebugPrintf("Reached End Of Init Battle Internal: %d", gSpecialVar_Unused_0x8014);
 }
 
 #define BUFFER_PARTY_VS_SCREEN_STATUS(party, flags, i)                      \
@@ -2296,8 +2296,8 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 {
                     monLevel = 100;
                     CreateMon(&party[i], partyData[i].species, monLevel, MAX_PER_STAT_IVS, TRUE, personalityValue, otIdType, fixedOtId);
-                    if (!isPlayer)
-                        DebugPrintf("Reached Create NPC Kyogre: %d", gSpecialVar_Unused_0x8014);
+                    //if (!isPlayer)
+                       //DebugPrintf("Reached Create NPC Kyogre: %d", gSpecialVar_Unused_0x8014);
                 }
                 else if ((gSpecialVar_Unused_0x8014 == TRAINER_ARCHIE_PIT_BOSS) && (!isPlayer))
                 {
@@ -2307,7 +2307,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                     {
                         newSpecies = evolutions[0].targetSpecies;
                         evolutions = GetSpeciesEvolutions(newSpecies);
-                        DebugPrintf("Evolved: %d", newSpecies);
+                        //DebugPrintf("Evolved: %d", newSpecies);
                     }
                     CreateMon(&party[i], newSpecies, monLevel, 0, TRUE, personalityValue, otIdType, fixedOtId);
                 }
@@ -2418,7 +2418,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
         }
     }
 
-    DebugPrintf("Reached End Of Party Creator: %d", isPlayer);
+    //DebugPrintf("Reached End Of Party Creator: %d", isPlayer);
     return trainer->partySize;
 }
 
@@ -2436,7 +2436,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     {   
         gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
     }
-    DebugPrintf("Reached End Of Parent Function: %d", gSpecialVar_Unused_0x8014);
+    //DebugPrintf("Reached End Of Parent Function: %d", gSpecialVar_Unused_0x8014);
     return retVal;
 }
 

@@ -486,7 +486,7 @@ bool8 ScrCmd_random(struct ScriptContext *ctx)
     u16 max = VarGet(ScriptReadHalfword(ctx));
 
     gSpecialVar_Result = Random() % max;
-    DebugPrintf("gSpecialVar_Result = %d", gSpecialVar_Result);
+    //DebugPrintf("gSpecialVar_Result = %d", gSpecialVar_Result);
     return FALSE;
 }
 

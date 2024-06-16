@@ -230,7 +230,7 @@ static void GenerateRandomSpeciesForCase(void)
                 if (counter2 == 10) //exit in case of infinite loop
                 {
                     rerollMon = FALSE;
-                    DebugPrintf("no valid species found. Default: %d", species);
+                    //DebugPrintf("no valid species found. Default: %d", species);
                 }
                 //reroll
                 if (rerollMon)
