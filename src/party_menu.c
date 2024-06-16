@@ -282,6 +282,7 @@ static void DrawEmptySlot(u8 windowId);
 static void DrawEmptySlot_Equal(u8 windowId); //Custom party menu
 static void DisplayPartyPokemonDataForRelearner(u8);
 static void DisplayPartyPokemonDataForEggTutor(u8);
+static void DisplayPartyPokemonDataForMoveTutor(u8);
 static void DisplayPartyPokemonDataForContest(u8);
 static void DisplayPartyPokemonDataForChooseHalf(u8);
 static void DisplayPartyPokemonDataForWirelessMinigame(u8);
@@ -1013,6 +1014,8 @@ static void RenderPartyMenuBox(u8 slot)
                 DisplayPartyPokemonDataForRelearner(slot);
             else if (gPartyMenu.menuType == PARTY_MENU_TYPE_EGG_TUTOR)
                 DisplayPartyPokemonDataForEggTutor(slot);
+            else if (gPartyMenu.menuType == PARTY_MENU_TYPE_MOVE_TUTOR)
+                DisplayPartyPokemonDataForMoveTutor(slot);
             else if (gPartyMenu.menuType == PARTY_MENU_TYPE_CONTEST)
                 DisplayPartyPokemonDataForContest(slot);
             else if (gPartyMenu.menuType == PARTY_MENU_TYPE_CHOOSE_HALF)
@@ -1121,6 +1124,14 @@ static void DisplayPartyPokemonDataForRelearner(u8 slot)
 static void DisplayPartyPokemonDataForEggTutor(u8 slot)
 {
     if (GetNumberOfEggMoves(&gPlayerParty[slot]) == 0)
+        DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_NOT_ABLE_2);
+    else
+        DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_ABLE_2);
+}
+
+static void DisplayPartyPokemonDataForMoveTutor(u8 slot)
+{
+    if (GetNumberOfTutorMoves(&gPlayerParty[slot]) == 0)
         DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_NOT_ABLE_2);
     else
         DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_ABLE_2);
@@ -5554,8 +5565,10 @@ static void Task_DoLearnedMoveFanfareAfterText(u8 taskId)
     if (IsPartyMenuTextPrinterActive() != TRUE)
     {
         //deduct money if a tutor move was taught
+#ifdef PIT_GEN_9_MODE
         if(VarGet(VAR_PIT_TUTOR_STATE) == TUTOR_STATE_TUTOR_MOVES)
             RemoveMoney(&gSaveBlock1Ptr->money, 10000);
+#endif
         PlayFanfare(MUS_LEVEL_UP);
         gTasks[taskId].func = Task_LearnNextMoveOrClosePartyMenu;
     }
@@ -7823,6 +7836,9 @@ static void Task_ChooseMonForMoveRelearner(u8 taskId)
             case TUTOR_STATE_RELEARNER:
                 InitPartyMenu(PARTY_MENU_TYPE_MOVE_RELEARNER, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_AND_CLOSE, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_ChooseMonForMoveRelearner);
                 break;
+            case TUTOR_STATE_TUTOR_MOVES:
+                InitPartyMenu(PARTY_MENU_TYPE_MOVE_TUTOR, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_AND_CLOSE, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_ChooseMonForMoveRelearner);
+                break;
             case TUTOR_STATE_EGG_MOVES:
                 InitPartyMenu(PARTY_MENU_TYPE_EGG_TUTOR, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_AND_CLOSE, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_ChooseMonForMoveRelearner);
                 break;
@@ -7849,6 +7865,11 @@ static void CB2_ChooseMonForMoveRelearner(void)
             case TUTOR_STATE_EGG_MOVES:
                 gSpecialVar_0x8005 = GetNumberOfEggMoves(&gPlayerParty[gSpecialVar_0x8004]);
                 break;
+#ifndef PIT_GEN_9_MODE    
+            case TUTOR_STATE_TUTOR_MOVES:
+                gSpecialVar_0x8005 = GetNumberOfTutorMoves(&gPlayerParty[gSpecialVar_0x8004]);
+                break;
+#endif
         }
     }
     gFieldCallback2 = CB2_FadeFromPartyMenu;

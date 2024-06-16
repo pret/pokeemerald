@@ -21,6 +21,7 @@
 
 // Array buffers
 #define EGG_MOVES_ARRAY_COUNT           19
+#define TUTOR_MOVES_ARRAY_COUNT         30
 #define EGG_LVL_UP_MOVES_ARRAY_COUNT    (MAX_LEVEL_UP_MOVES > 50 ? MAX_LEVEL_UP_MOVES : 50)
 
 #endif //GUARD_DAYCARE_CONSTANTS_H

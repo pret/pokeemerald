@@ -43,6 +43,7 @@ EWRAM_DATA static u16 sHatchedEggEggMoves[EGG_MOVES_ARRAY_COUNT] = {0};
 EWRAM_DATA static u16 sHatchedEggMotherMoves[MAX_MON_MOVES] = {0};
 
 #include "data/pokemon/egg_moves.h"
+#include "data/pokemon/tutor_moves.h"
 
 static const struct WindowTemplate sDaycareLevelMenuWindowTemplate =
 {
@@ -803,6 +804,41 @@ u8 GetEggMovesSpecies(u16 species, u16 *eggMoves)
     }
 
     return numEggMoves;
+}
+
+u8 GetTutorMovesSpecies(u16 species, u16 *tutorMoves)
+{
+    u16 tutorMoveIdx;
+    u16 numTutorMoves;
+    u16 i;
+
+    numTutorMoves = 0;
+    tutorMoveIdx = 0;
+    for (i = 0; i < ARRAY_COUNT(gTutorMoves) - 1; i++)
+    {
+        if (gTutorMoves[i] == species + TUTOR_MOVES_SPECIES_OFFSET)
+        {
+            tutorMoveIdx = i + 1;
+            break;
+        }
+    }
+
+    for (i = 0; i < TUTOR_MOVES_ARRAY_COUNT; i++)
+    {
+        if (gTutorMoves[tutorMoveIdx + i] > TUTOR_MOVES_SPECIES_OFFSET)
+        {
+            // TODO: the curly braces around this if statement are required for a matching build.
+            break;
+        }
+
+    	if(FlagGet(FLAG_RANDOM_MODE))
+            tutorMoves[i] = GetRandomMove(gTutorMoves[tutorMoveIdx + i], species);
+        else
+            tutorMoves[i] = gTutorMoves[tutorMoveIdx + i];
+        numTutorMoves++;
+    }
+
+    return numTutorMoves;
 }
 
 bool8 SpeciesCanLearnEggMove(u16 species, u16 move) //Move search PokedexPlus HGSS_Ui

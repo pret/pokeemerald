@@ -2681,9 +2681,12 @@ const u16 gEggMoves[] = {
         MOVE_HYDRO_PUMP,
         MOVE_THRASH,
         MOVE_TWISTER),
-#endif
 
+#elif defined PIT_GEN_5_MODE
 // #### GEN 5 Egg Moves ####
+// WIP
+#else
+// #### GEN 9 / NEWEST Egg Moves ####
 #if P_FAMILY_BULBASAUR
     egg_moves(BULBASAUR,
         MOVE_SKULL_BASH,
@@ -8157,6 +8160,8 @@ const u16 gEggMoves[] = {
         MOVE_FREEZE_DRY,
         MOVE_ICICLE_SPEAR),
 #endif //P_FAMILY_FRIGIBAX
+
+#endif // PIT_GEN differentiation
 
     EGG_MOVES_TERMINATOR
 };
