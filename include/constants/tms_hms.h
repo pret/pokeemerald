@@ -287,7 +287,7 @@
     F(TOXIC) \
     F(GYRO_BALL) \
     F(KNOCK_OFF) \
-    F(DOUBLE_EDGE) \
+    F(SCALD) \
     F(DRAGON_CHEER)
 # endif
 

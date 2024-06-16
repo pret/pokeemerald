@@ -116,6 +116,12 @@ enum
     NAME_YZ,
 };
 
+enum {
+    DEX_MODE_HEADER,
+    DEX_MODE_OWNED,
+    DEX_MODE_SEEN
+};
+
 extern const u16 gPokedexOrder_Alphabetical[];
 extern const u16 gPokedexOrder_Height[];
 extern const u16 gPokedexOrder_Weight[];
@@ -1752,7 +1758,7 @@ static const struct SearchMenuItem sSearchMenuItems[SEARCH_COUNT] =
     },
     [SEARCH_MODE] =
     {
-        .description = gText_SelectPokedexMode,
+        .description = gText_SelectOwnershipMode,
         .titleBgX = 0,
         .titleBgY = 10,
         .titleBgWidth = 5,
@@ -1988,8 +1994,9 @@ static const u8 sSearchMovementMap_ShiftHoennDex[SEARCH_COUNT][4] =
 
 static const struct SearchOptionText sDexModeOptions[] =
 {
-    [DEX_MODE_HOENN]    = {gText_DexHoennDescription, gText_DexHoennTitle},
-    [DEX_MODE_NATIONAL] = {gText_DexNatDescription,   gText_DexNatTitle},
+    [DEX_MODE_HEADER] = {gText_DexEmptyString,      gText_DexSearchDontSpecify},
+    [DEX_MODE_OWNED]  = {gText_DexOwnedDescription, gText_DexOwnedTitle},
+    [DEX_MODE_SEEN]   = {gText_DexSeenDescription,  gText_DexSeenTitle},
     {},
 };
 
@@ -2060,6 +2067,7 @@ static const struct SearchOptionText sDexSearchTypeOptions[NUMBER_OF_MON_TYPES +
 };
 
 static const u8 sPokedexModes[] = {DEX_MODE_HOENN, DEX_MODE_NATIONAL};
+static const u8 sOwnedOptions[] = {DEX_MODE_HEADER, DEX_MODE_OWNED, DEX_MODE_SEEN};
 static const u8 sOrderOptions[] =
 {
     ORDER_NUMERICAL,
@@ -7795,7 +7803,7 @@ static void Task_ClosePokedexFromSearchResultsStartMenu(u8 taskId)
 //*        Search code               *
 //*                                  *
 //************************************
-static int DoPokedexSearch(u8 dexMode, u8 order, u8 abcGroup, u8 bodyColor, u8 type1, u8 type2)
+static int DoPokedexSearch(u8 dexMode, u8 order, u8 abcGroup, u8 bodyColor, u8 type1, u8 type2, u8 owned)
 {
     u16 species;
     u16 i;
@@ -7806,10 +7814,29 @@ static int DoPokedexSearch(u8 dexMode, u8 order, u8 abcGroup, u8 bodyColor, u8 t
 
     for (i = 0, resultsCount = 0; i < NATIONAL_DEX_COUNT; i++)
     {
-        if (sPokedexView->pokedexList[i].seen)
+        switch (owned)
         {
-            sPokedexView->pokedexList[resultsCount] = sPokedexView->pokedexList[i];
-            resultsCount++;
+            case DEX_MODE_OWNED:
+                if (sPokedexView->pokedexList[i].owned)
+                {
+                    sPokedexView->pokedexList[resultsCount] = sPokedexView->pokedexList[i];
+                    resultsCount++;
+                }
+                break;
+            case DEX_MODE_SEEN:
+                if (sPokedexView->pokedexList[i].seen && !sPokedexView->pokedexList[i].owned)
+                {
+                    sPokedexView->pokedexList[resultsCount] = sPokedexView->pokedexList[i];
+                    resultsCount++;
+                }
+                break;
+            default:
+                if (sPokedexView->pokedexList[i].seen)
+                {
+                    sPokedexView->pokedexList[resultsCount] = sPokedexView->pokedexList[i];
+                    resultsCount++;
+                }
+                break;
         }
     }
     sPokedexView->pokemonListCount = resultsCount;
@@ -8220,14 +8247,15 @@ static void Task_HandleSearchMenuInput(u8 taskId)
 
 static void Task_StartPokedexSearch(u8 taskId)
 {
-    u8 dexMode = GetSearchModeSelection(taskId, SEARCH_MODE);
+    u8 dexMode = DEX_MODE_NATIONAL;
     u8 order = GetSearchModeSelection(taskId, SEARCH_ORDER);
     u8 abcGroup = GetSearchModeSelection(taskId, SEARCH_NAME);
     u8 bodyColor = GetSearchModeSelection(taskId, SEARCH_COLOR);
     u8 type1 = GetSearchModeSelection(taskId, SEARCH_TYPE_LEFT);
     u8 type2 = GetSearchModeSelection(taskId, SEARCH_TYPE_RIGHT);
+    u8 owned = GetSearchModeSelection(taskId, SEARCH_MODE); //SEARCH_MODE is reused for owned/seen
 
-    DoPokedexSearch(dexMode, order, abcGroup, bodyColor, type1, type2);
+    DoPokedexSearch(dexMode, order, abcGroup, bodyColor, type1, type2, owned);
     gTasks[taskId].func = Task_WaitAndCompleteSearch;
 }
 
@@ -8569,11 +8597,8 @@ static void PrintSelectedSearchParameters(u8 taskId)
     searchParamId = gTasks[taskId].tCursorPos_Order + gTasks[taskId].tScrollOffset_Order;
     PrintSearchText(sDexOrderOptions[searchParamId].title, 0x2D, 0x41);
 
-    if (IsNationalPokedexEnabled())
-    {
-        searchParamId = gTasks[taskId].tCursorPos_Mode + gTasks[taskId].tScrollOffset_Mode;
-        PrintSearchText(sDexModeOptions[searchParamId].title, 0x2D, 0x51);
-    }
+    searchParamId = gTasks[taskId].tCursorPos_Mode + gTasks[taskId].tScrollOffset_Mode;
+    PrintSearchText(sDexModeOptions[searchParamId].title, 0x2D, 0x51);
 }
 
 static void DrawOrEraseSearchParameterBox(bool8 erase)
@@ -8638,7 +8663,7 @@ static u8 GetSearchModeSelection(u8 taskId, u8 option)
     default:
         return 0;
     case SEARCH_MODE:
-        return sPokedexModes[id];
+        return sOwnedOptions[id];
     case SEARCH_ORDER:
         return sOrderOptions[id];
     case SEARCH_NAME:
@@ -8671,7 +8696,9 @@ static void SetDefaultSearchModeAndOrder(u8 taskId)
         selected = DEX_MODE_NATIONAL;
         break;
     }
-    gTasks[taskId].tCursorPos_Mode = selected;
+
+    //set inital value for OWNED/SEEN filter
+    gTasks[taskId].tCursorPos_Mode = DEX_MODE_HEADER;
 
     switch (sPokedexView->dexOrderBackup)
     {

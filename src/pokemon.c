@@ -4031,6 +4031,12 @@ u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
 
     DebugPrintf("GetAbilityBySpecies");
 
+#ifdef PIT_GEN_3_MODE
+    //exclude hidden abilities
+    if(abilityNum == 2)
+        abilityNum = 1;
+#endif
+
     do
     {
         reroll = FALSE;
