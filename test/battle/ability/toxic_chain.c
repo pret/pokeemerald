@@ -3,8 +3,10 @@
 
 SINGLE_BATTLE_TEST("Toxic Chain inflicts bad poison when attacking")
 {
+    PASSES_RANDOMLY(3, 10, RNG_TOXIC_CHAIN);
     GIVEN {
         ASSUME(gMovesInfo[MOVE_TACKLE].category != DAMAGE_CATEGORY_STATUS);
+        ASSUME(gMovesInfo[MOVE_TACKLE].power > 0);
         PLAYER(SPECIES_OKIDOGI) { Ability(ABILITY_TOXIC_CHAIN); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -24,6 +26,7 @@ SINGLE_BATTLE_TEST("Toxic Chain inflicts bad poison on any hit of a multi-hit mo
     GIVEN {
         ASSUME(gMovesInfo[MOVE_DOUBLE_SLAP].category != DAMAGE_CATEGORY_STATUS);
         ASSUME(gMovesInfo[MOVE_DOUBLE_SLAP].effect == EFFECT_MULTI_HIT);
+        ASSUME(gMovesInfo[MOVE_DOUBLE_SLAP].power > 0);
         ASSUME(gItemsInfo[ITEM_PECHA_BERRY].holdEffect == HOLD_EFFECT_CURE_PSN);
         PLAYER(SPECIES_OKIDOGI) { Ability(ABILITY_TOXIC_CHAIN); }
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_PECHA_BERRY); }
@@ -48,14 +51,15 @@ SINGLE_BATTLE_TEST("Toxic Chain inflicts bad poison on any hit of a multi-hit mo
 DOUBLE_BATTLE_TEST("Toxic Chain can inflict bad poison on both foes")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_BLIZZARD].category != DAMAGE_CATEGORY_STATUS);
-        ASSUME(gMovesInfo[MOVE_BLIZZARD].target == MOVE_TARGET_BOTH);
+        ASSUME(gMovesInfo[MOVE_RAZOR_LEAF].category != DAMAGE_CATEGORY_STATUS);
+        ASSUME(gMovesInfo[MOVE_RAZOR_LEAF].target == MOVE_TARGET_BOTH);
+        ASSUME(gMovesInfo[MOVE_RAZOR_LEAF].power > 0);
         PLAYER(SPECIES_OKIDOGI) { Ability(ABILITY_TOXIC_CHAIN); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WYNAUT);
     } WHEN {
-        TURN { MOVE(playerLeft, MOVE_BLIZZARD); }
+        TURN { MOVE(playerLeft, MOVE_RAZOR_LEAF, WITH_RNG(RNG_TOXIC_CHAIN, TRUE)); }
     } SCENE {
         HP_BAR(opponentLeft);
         ABILITY_POPUP(playerLeft, ABILITY_TOXIC_CHAIN);

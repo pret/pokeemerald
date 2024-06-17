@@ -5805,7 +5805,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && CanBePoisoned(gBattlerAttacker, gBattlerTarget)
              && TARGET_TURN_DAMAGED // Need to actually hit the target
-             && (Random() % 3) == 0)
+             && RandomWeighted(RNG_TOXIC_CHAIN, 7, 3))
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_TOXIC;
                 PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
