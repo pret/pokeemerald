@@ -8908,14 +8908,73 @@ u8 GetEggMoveTutorMoves(struct Pokemon *mon, u16 *moves)
     return numMoves;
 }
 
+u8 GetNumberOfTutorMoves(struct Pokemon *mon)
+{
+    u16 tutorMoveBuffer[TUTOR_MOVES_ARRAY_COUNT];
+    u16 learnedMoves[MAX_MON_MOVES];
+    u8 numMoves = 0;
+    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0);
+    //u16 firstStage = GetEggSpecies(species);
+    u16 numTutorMoves = GetTutorMovesSpecies(species, tutorMoveBuffer);
+    u16 moves[numTutorMoves];
+    int i, j;
+    bool8 hasMonMove = FALSE;
+
+    if (species == SPECIES_EGG)
+        return 0;
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
+
+    for (i = 0; i < numTutorMoves; i++)
+    {
+        hasMonMove = FALSE;
+
+        for (j = 0; j < MAX_MON_MOVES; j++){
+            if(learnedMoves[j] == tutorMoveBuffer[i])
+                hasMonMove = TRUE;
+        }
+
+        if(!hasMonMove)
+            moves[numMoves++] = tutorMoveBuffer[i];
+    }
+
+    return numMoves;
+}
+
+u8 GetTutorMoves(struct Pokemon *mon, u16 *moves)
+{
+    u16 learnedMoves[4];
+    u8 numMoves = 0;
+    u16 tutorMoveBuffer[TUTOR_MOVES_ARRAY_COUNT];
+    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0);
+    //u16 eggSpecies = GetEggSpecies(species);
+    u16 numTutorMoves = GetTutorMovesSpecies(species, tutorMoveBuffer);
+    int i, j;
+    bool8 hasMonMove = FALSE;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
+
+    for (i = 0; i < numTutorMoves; i++)
+    {
+        hasMonMove = FALSE;
+
+        for (j = 0; j < MAX_MON_MOVES; j++){
+            if(learnedMoves[j] == tutorMoveBuffer[i])
+                hasMonMove = TRUE;
+        }
+
+        if(!hasMonMove)
+            moves[numMoves++] = tutorMoveBuffer[i];
+    }
+
+    return numMoves;
+}
+
 #define TUTOR_MOVES_COUNT ARRAY_COUNT(sTutorMoves)
 static const u16 sTutorMoves[] =
 {
-#ifdef PIT_GEN_3_MODE
-    MOVE_FRENZY_PLANT,
-    MOVE_BLAST_BURN,
-    MOVE_HYDRO_CANNON,
-#else
+#ifdef PIT_GEN_9_MODE
     MOVE_GRASS_PLEDGE,
     MOVE_FIRE_PLEDGE,
     MOVE_WATER_PLEDGE,
@@ -8928,7 +8987,7 @@ static const u16 sTutorMoves[] =
 #endif
 };
 
-u8 GetTutorMoves(u16 *moves)
+u8 GetStaticTutorMoves(u16 *moves)
 {
     int i;
 

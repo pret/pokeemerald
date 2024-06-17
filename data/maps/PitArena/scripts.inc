@@ -364,7 +364,11 @@ PitArena_MoveRelearner::
 	dynmultichoice 17, 1, 0, 5, 0, DYN_MULTICHOICE_CB_NONE, PitArena_MoveRelearnerText, PitArena_EggMovesText, PitArena_TutorMovesText, PitArena_ShopNPC_Option8
 	goto_if_eq VAR_RESULT, 0, PitArena_MartNPCMoveRelearner
 	goto_if_eq VAR_RESULT, 1, PitArena_MartNPCMoveTutorEggMoves
+#ifndef PIT_GEN_9_MODE
 	goto_if_eq VAR_RESULT, 2, PitArena_MartNPCMoveTutorTutorMoves
+#else
+	goto_if_eq VAR_RESULT, 2, PitArena_MartNPCMoveTutorStaticTutorMoves
+#endif
 EndOfRelearnerScript::
 	hidemoneybox
 	release
@@ -396,6 +400,15 @@ PitArena_MartNPCMoveTutorEggMoves::
 	end
 
 PitArena_MartNPCMoveTutorTutorMoves::
+	checkmoney 10000
+	goto_if_eq VAR_RESULT, FALSE, PitArena_MartNPCMoveTutorTutorMoves_NotEnoughMoney
+	setvar VAR_PIT_TUTOR_STATE, 1
+	hidemoneybox
+	release
+	goto PitArena_MartNPCMoveTutor
+	end
+
+PitArena_MartNPCMoveTutorStaticTutorMoves::
 	setvar VAR_PIT_TUTOR_STATE, 1
 	hidemoneybox
 	release

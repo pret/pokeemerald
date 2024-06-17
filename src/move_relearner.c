@@ -744,9 +744,13 @@ static void DoMoveRelearnerMain(void)
     case MENU_STATE_PRINT_TEXT_THEN_FANFARE:
         if (!MoveRelearnerRunTextPrinters())
         {
-            //deduct money if an egg move was taught
+            //deduct money if a tutor move was taught
             if(VarGet(VAR_PIT_TUTOR_STATE) == TUTOR_STATE_EGG_MOVES)
                 RemoveMoney(&gSaveBlock1Ptr->money, 10000);
+#ifndef PIT_GEN_9_MODE
+            if (VarGet(VAR_PIT_TUTOR_STATE) == TUTOR_STATE_TUTOR_MOVES)
+                RemoveMoney(&gSaveBlock1Ptr->money, 10000);
+#endif
             PlayFanfare(MUS_LEVEL_UP);
             sMoveRelearnerStruct->state = MENU_STATE_WAIT_FOR_FANFARE;
         }
@@ -788,10 +792,14 @@ static void HideHeartSpritesAndShowTeachMoveText(bool8 onlyHideSprites)
 
     if (!onlyHideSprites)
     {
+#ifdef PIT_GEN_9_MODE
         if(VarGet(VAR_PIT_TUTOR_STATE) == TUTOR_STATE_TUTOR_MOVES)
             StringExpandPlaceholders(gStringVar4, gText_TeachWhichMove);
         else
             StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToPkmn);
+#else
+        StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToPkmn);
+#endif
         FillWindowPixelBuffer(RELEARNERWIN_MSG, 10);
         AddTextPrinterParameterized4(RELEARNERWIN_MSG, FONT_NORMAL, 0, 1, 0, 0, colors, 0, gStringVar4);
     }
@@ -811,14 +819,13 @@ static void HandleInput(bool8 showContest)
     case LIST_CANCEL:
         PlaySE(SE_SELECT);
         RemoveScrollArrows();
-        if(VarGet(VAR_PIT_TUTOR_STATE) == TUTOR_STATE_TUTOR_MOVES)
-            sMoveRelearnerStruct->state = MENU_STATE_FADE_AND_RETURN;
-        else
-        {
-            sMoveRelearnerStruct->state = MENU_STATE_PRINT_GIVE_UP_PROMPT;
-            StringExpandPlaceholders(gStringVar4, gText_MoveRelearnerGiveUp);
-            MoveRelearnerPrintMessage(gStringVar4);
-        }
+#ifdef PIT_GEN_9_MODE
+        sMoveRelearnerStruct->state = MENU_STATE_FADE_AND_RETURN;
+#else
+        sMoveRelearnerStruct->state = MENU_STATE_PRINT_GIVE_UP_PROMPT;
+        StringExpandPlaceholders(gStringVar4, gText_MoveRelearnerGiveUp);
+        MoveRelearnerPrintMessage(gStringVar4);
+#endif
         break;
     default:
         PlaySE(SE_SELECT);
@@ -847,10 +854,14 @@ static void ShowTeachMoveText(bool8 shouldDoNothingInstead)
     const u8 colors[3] = {10,  1,  2};
     if (shouldDoNothingInstead == FALSE)
     {
+#ifdef PIT_GEN_9_MODE
         if(VarGet(VAR_PIT_TUTOR_STATE) == TUTOR_STATE_TUTOR_MOVES)
             StringExpandPlaceholders(gStringVar4, gText_TeachWhichMove);
         else
             StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToPkmn);
+#else
+        StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToPkmn);
+#endif
         FillWindowPixelBuffer(RELEARNERWIN_MSG, 10);
         AddTextPrinterParameterized4(RELEARNERWIN_MSG, FONT_NORMAL, 0, 1, 0, 0, colors, 0, gStringVar4);
     }
@@ -921,9 +932,15 @@ static void CreateLearnableMovesList(void)
         case TUTOR_STATE_EGG_MOVES:
 			sMoveRelearnerStruct->numMenuChoices = GetEggMoveTutorMoves(&gPlayerParty[sMoveRelearnerStruct->partyMon], sMoveRelearnerStruct->movesToLearn);
 		    break;
+#ifdef PIT_GEN_9_MODE
         case TUTOR_STATE_TUTOR_MOVES:
-			sMoveRelearnerStruct->numMenuChoices = GetTutorMoves(sMoveRelearnerStruct->movesToLearn);
+			sMoveRelearnerStruct->numMenuChoices = GetStaticTutorMoves(sMoveRelearnerStruct->movesToLearn);
 		    break;
+#else
+        case TUTOR_STATE_TUTOR_MOVES:
+			sMoveRelearnerStruct->numMenuChoices = GetTutorMoves(&gPlayerParty[sMoveRelearnerStruct->partyMon], sMoveRelearnerStruct->movesToLearn);
+		    break;
+#endif
 	}
 
     for (i = 0; i < sMoveRelearnerStruct->numMenuChoices; i++)
