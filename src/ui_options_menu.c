@@ -24,6 +24,7 @@ enum
 {
     MENUITEM_MAIN_TEXTSPEED,
     MENUITEM_MAIN_AUTOSAVE,
+    MENUITEM_MAIN_FOLLOWMONS,
     MENUITEM_MAIN_BATTLESCENE,
     MENUITEM_MAIN_BATTLESTYLE,
     MENUITEM_MAIN_SOUND,
@@ -152,6 +153,7 @@ static void DrawOptionsMenuChoice(const u8 *text, u8 x, u8 y, u8 style, bool8 ac
 static void ReDrawAll(void);
 static void DrawChoices_TextSpeed(int selection, int y);
 static void DrawChoices_Autosave(int selection, int y);
+static void DrawChoices_FollowMons(int selection, int y);
 static void DrawChoices_BattleScene(int selection, int y);
 static void DrawChoices_BattleStyle(int selection, int y);
 static void DrawChoices_Sound(int selection, int y);
@@ -202,6 +204,7 @@ struct // MENU_MAIN
 {
     [MENUITEM_MAIN_TEXTSPEED]    = {DrawChoices_TextSpeed,   ProcessInput_Options_Four},
     [MENUITEM_MAIN_AUTOSAVE]     = {DrawChoices_Autosave,    ProcessInput_Options_Three},
+    [MENUITEM_MAIN_FOLLOWMONS]   = {DrawChoices_FollowMons,  ProcessInput_Options_Two},
     [MENUITEM_MAIN_BATTLESCENE]  = {DrawChoices_BattleScene, ProcessInput_Options_Two},
     [MENUITEM_MAIN_BATTLESTYLE]  = {DrawChoices_BattleStyle, ProcessInput_Options_Two},
     [MENUITEM_MAIN_SOUND]        = {DrawChoices_Sound,       ProcessInput_Options_Two},
@@ -212,11 +215,13 @@ struct // MENU_MAIN
 // Menu left side option names text
 
 static const u8 sText_Autosave[]    = _("AUTOSAVE");
+static const u8 sText_FollowMons[]  = _("FOLLOWER MONS");
 static const u8 sText_Cancel[]      = _("SAVE & LEAVE");
 static const u8 *const sOptionsMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
 {
     [MENUITEM_MAIN_TEXTSPEED]   = gText_TextSpeed,
     [MENUITEM_MAIN_AUTOSAVE]    = sText_Autosave,
+    [MENUITEM_MAIN_FOLLOWMONS]  = sText_FollowMons,
     [MENUITEM_MAIN_BATTLESCENE] = gText_BattleScene,
     [MENUITEM_MAIN_BATTLESTYLE] = gText_BattleStyle,
     [MENUITEM_MAIN_SOUND]       = gText_Sound,
@@ -236,6 +241,7 @@ static bool8 CheckConditions(int selection)
     {
         case MENUITEM_MAIN_TEXTSPEED:       return TRUE;
         case MENUITEM_MAIN_AUTOSAVE:        return TRUE;
+        case MENUITEM_MAIN_FOLLOWMONS:      return TRUE;
         case MENUITEM_MAIN_BATTLESCENE:     return TRUE;
         case MENUITEM_MAIN_BATTLESTYLE:     return TRUE;
         case MENUITEM_MAIN_SOUND:           return TRUE;
@@ -253,6 +259,8 @@ static const u8 sText_Desc_TextSpeed[]          = _("Choose one of the four text
 static const u8 sText_Desc_Autosave_Off[]       = _("Autosave is inactive.");
 static const u8 sText_Desc_Autosave_5[]         = _("Autosave is executed every\nfive floors during warping.");
 static const u8 sText_Desc_Autosave_On[]        = _("Autosave is executed every\nfloor during warping.");
+static const u8 sText_Desc_FollowMon_On[]       = _("Activate to have your first\nPokémon following you around.");
+static const u8 sText_Desc_FollowMon_Off[]      = _("Deactivate to have no\nPokémon following you around.");
 static const u8 sText_Desc_BattleScene_On[]     = _("Show the POKéMON battle animations.");
 static const u8 sText_Desc_BattleScene_Off[]    = _("Skip the POKéMON battle animations.");
 static const u8 sText_Desc_BattleStyle_Shift[]  = _("Get the option to switch your\nPOKéMON after the enemies faints.");
@@ -267,6 +275,7 @@ static const u8 *const sOptionsMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] 
 {
     [MENUITEM_MAIN_TEXTSPEED]   = {sText_Desc_TextSpeed,            sText_Empty,                sText_Empty},
     [MENUITEM_MAIN_AUTOSAVE]    = {sText_Desc_Autosave_Off,         sText_Desc_Autosave_5,      sText_Desc_Autosave_On},
+    [MENUITEM_MAIN_FOLLOWMONS]  = {sText_Desc_FollowMon_On,         sText_Desc_FollowMon_Off,   sText_Empty},
     [MENUITEM_MAIN_BATTLESCENE] = {sText_Desc_BattleScene_On,       sText_Desc_BattleScene_Off, sText_Empty},
     [MENUITEM_MAIN_BATTLESTYLE] = {sText_Desc_BattleStyle_Shift,    sText_Desc_BattleStyle_Set, sText_Empty},
     [MENUITEM_MAIN_SOUND]       = {sText_Desc_SoundMono,            sText_Desc_SoundStereo,     sText_Empty},
@@ -540,6 +549,7 @@ void CB2_InitOptionsMenu(void)
     case 6:
         sOptions->sel[MENUITEM_MAIN_TEXTSPEED]   = gSaveBlock2Ptr->optionsTextSpeed;
         sOptions->sel[MENUITEM_MAIN_AUTOSAVE]    = gSaveBlock2Ptr->modeAutosave;
+        sOptions->sel[MENUITEM_MAIN_FOLLOWMONS]  = gSaveBlock2Ptr->optionsFollowMonsOff;
         sOptions->sel[MENUITEM_MAIN_BATTLESCENE] = gSaveBlock2Ptr->optionsBattleSceneOff;
         sOptions->sel[MENUITEM_MAIN_BATTLESTYLE] = gSaveBlock2Ptr->optionsBattleStyle;
         sOptions->sel[MENUITEM_MAIN_SOUND]       = gSaveBlock2Ptr->optionsSound;
@@ -701,6 +711,7 @@ static void Task_OptionsMenuSave(u8 taskId)
 {
     gSaveBlock2Ptr->optionsTextSpeed        = sOptions->sel[MENUITEM_MAIN_TEXTSPEED];
     gSaveBlock2Ptr->modeAutosave            = sOptions->sel[MENUITEM_MAIN_AUTOSAVE];
+    gSaveBlock2Ptr->optionsFollowMonsOff    = sOptions->sel[MENUITEM_MAIN_FOLLOWMONS];
     gSaveBlock2Ptr->optionsBattleSceneOff   = sOptions->sel[MENUITEM_MAIN_BATTLESCENE];
     gSaveBlock2Ptr->optionsBattleStyle      = sOptions->sel[MENUITEM_MAIN_BATTLESTYLE];
     gSaveBlock2Ptr->optionsSound            = sOptions->sel[MENUITEM_MAIN_SOUND];
@@ -708,6 +719,10 @@ static void Task_OptionsMenuSave(u8 taskId)
 
     //set flags/VARs
     VarSet(VAR_PIT_AUTOSAVE, sOptions->sel[MENUITEM_MAIN_AUTOSAVE]);
+    if (sOptions->sel[MENUITEM_MAIN_FOLLOWMONS] == TRUE)
+        FlagSet(FLAG_FOLLOWERS_OFF);
+    else
+        FlagClear(FLAG_FOLLOWERS_OFF);
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_OptionsMenuFadeOut;
@@ -955,6 +970,16 @@ static void DrawChoices_Autosave(int selection, int y)
     DrawOptionsMenuChoice(sText_Autosave_Off, 104, y, styles[0], active);
     DrawOptionsMenuChoice(sText_Autosave_5, xMid, y, styles[1], active);
     DrawOptionsMenuChoice(sText_Autosave_On, GetStringRightAlignXOffset(1, sText_Autosave_On, 198), y, styles[2], active);
+}
+
+static void DrawChoices_FollowMons(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_MAIN_FOLLOWMONS);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawOptionsMenuChoice(sText_On, 104, y, styles[0], active);
+    DrawOptionsMenuChoice(sText_Off, GetStringRightAlignXOffset(FONT_NORMAL, sText_Off, 198), y, styles[1], active);
 }
 
 static void DrawChoices_BattleScene(int selection, int y)

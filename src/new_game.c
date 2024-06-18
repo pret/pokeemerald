@@ -118,14 +118,19 @@ void SetDefaultOptions(void)
     int i, counter;
 
     //options
-    gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_INSTANT;
-    gSaveBlock2Ptr->optionsWindowFrameType = 0;
+    if (GetNationalPokedexCount(FLAG_GET_CAUGHT) < 1)
+    {
+        gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_INSTANT;
+        gSaveBlock2Ptr->optionsWindowFrameType = 0;
 
-    gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_STEREO;
-    gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
+        gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_STEREO;
+        gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
 
-    gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
-    gSaveBlock2Ptr->regionMapZoom = FALSE;
+        gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
+        gSaveBlock2Ptr->regionMapZoom = FALSE;
+
+        gSaveBlock2Ptr->optionsFollowMonsOff = FALSE;
+    }
     
     //game modes
     if (GetNationalPokedexCount(FLAG_GET_CAUGHT) < 1)
@@ -140,6 +145,12 @@ void SetDefaultOptions(void)
         gSaveBlock2Ptr->modeDuplicates = 1;
         gSaveBlock2Ptr->modeMegas = 1;
     }
+
+    //set flags
+    if (gSaveBlock2Ptr->optionsFollowMonsOff)
+        FlagSet(FLAG_FOLLOWERS_OFF);
+    else
+        FlagClear(FLAG_FOLLOWERS_OFF);
 }
 
 static void ClearPokedexFlags(void)
