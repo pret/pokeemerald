@@ -1239,7 +1239,6 @@ static const u16 sRandomHeldValidItems[] =
     ITEM_POWER_HERB,
     ITEM_SHED_SHELL,
     ITEM_SMOOTH_ROCK,
-    ITEM_STICKY_BARB,
     ITEM_TOXIC_ORB,
     ITEM_WISE_GLASSES,
     ITEM_WIDE_LENS,
