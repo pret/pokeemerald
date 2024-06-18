@@ -6226,16 +6226,16 @@ const struct Trainer gTrainers[] = {
         .party = TRAINER_PARTY(sParty_Archie),
     },
 
-    [TRAINER_EDWIN_5] =
+    [TRAINER_ARCHIE_PIT_BOSS_DOUBLES] =
     {
-        .trainerClass = TRAINER_CLASS_COLLECTOR,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS,
-        .trainerPic = TRAINER_PIC_COLLECTOR,
-        .trainerName = _("EDWIN"),
-        .items = {},
-        .doubleBattle = FALSE,
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = TRAINER_PARTY(sParty_Edwin5),
+        .trainerClass = TRAINER_CLASS_AQUA_LEADER,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_AQUA,
+        .trainerPic = TRAINER_PIC_AQUA_LEADER_ARCHIE,
+        .trainerName = _("Archie"),
+        .items = {ITEM_FULL_RESTORE, ITEM_FULL_RESTORE},
+        .doubleBattle = TRUE,
+        .aiFlags = AI_FLAG_ACE_POKEMON | AI_FLAG_OMNISCIENT | AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_STRONGEST_MOVE | AI_FLAG_HP_AWARE | AI_FLAG_WILL_SUICIDE | AI_FLAG_SMART_MON_CHOICES,
+        .party = TRAINER_PARTY(sParty_Archie),
     },
 
     [TRAINER_WALLY_VR_1] =
