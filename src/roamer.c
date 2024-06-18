@@ -105,7 +105,8 @@ static void CreateInitialRoamerMon(u8 index, u16 species, u8 level)
     ROAMER(index)->personality = GetMonData(&gEnemyParty[0], MON_DATA_PERSONALITY);
     ROAMER(index)->species = species;
     ROAMER(index)->level = level;
-    ROAMER(index)->status = 0;
+    ROAMER(index)->statusA = 0;
+    ROAMER(index)->statusB = 0;
     ROAMER(index)->hp = GetMonData(&gEnemyParty[0], MON_DATA_MAX_HP);
     ROAMER(index)->cool = GetMonData(&gEnemyParty[0], MON_DATA_COOL);
     ROAMER(index)->beauty = GetMonData(&gEnemyParty[0], MON_DATA_BEAUTY);
@@ -238,18 +239,13 @@ bool8 IsRoamerAt(u32 roamerIndex, u8 mapGroup, u8 mapNum)
 
 void CreateRoamerMonInstance(u32 roamerIndex)
 {
-    u32 status;
+    u32 status = ROAMER(roamerIndex)->statusA + (ROAMER(roamerIndex)->statusB << 8);
     struct Pokemon *mon = &gEnemyParty[0];
     ZeroEnemyPartyMons();
     CreateMonWithIVsPersonality(mon, ROAMER(roamerIndex)->species, ROAMER(roamerIndex)->level, ROAMER(roamerIndex)->ivs, ROAMER(roamerIndex)->personality);
     // The roamer's status field is u16, but SetMonData expects status to be u32, so will set the roamer's status
     // using the status field and the following 3 bytes (cool, beauty, and cute).
-#ifdef BUGFIX
-    status = ROAMER(roamerIndex)->status;
     SetMonData(mon, MON_DATA_STATUS, &status);
-#else
-    SetMonData(mon, MON_DATA_STATUS, &ROAMER->status);
-#endif
     SetMonData(mon, MON_DATA_HP, &ROAMER(roamerIndex)->hp);
     SetMonData(mon, MON_DATA_COOL, &ROAMER(roamerIndex)->cool);
     SetMonData(mon, MON_DATA_BEAUTY, &ROAMER(roamerIndex)->beauty);
@@ -276,8 +272,11 @@ bool8 TryStartRoamerEncounter(void)
 
 void UpdateRoamerHPStatus(struct Pokemon *mon)
 {
+    u32 status = GetMonData(mon, MON_DATA_STATUS);
+
     ROAMER(gEncounteredRoamerIndex)->hp = GetMonData(mon, MON_DATA_HP);
-    ROAMER(gEncounteredRoamerIndex)->status = GetMonData(mon, MON_DATA_STATUS);
+    ROAMER(gEncounteredRoamerIndex)->statusA = status;
+    ROAMER(gEncounteredRoamerIndex)->statusB = status >> 8;
 
     RoamerMoveToOtherLocationSet(gEncounteredRoamerIndex);
 }
