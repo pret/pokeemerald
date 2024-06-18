@@ -2135,10 +2135,31 @@ void RemoveFollowingPokemon(void)
     RemoveObjectEvent(objectEvent);
 }
 
+u8 IsFrontPartyPokemonNoGraphics(void)
+{   
+    const struct ObjectEventGraphicsInfo *graphicsInfo = NULL;
+    u16 species = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES);
+    switch (species)
+    {
+    case SPECIES_UNOWN:
+        graphicsInfo = &gSpeciesInfo[SPECIES_UNOWN_B].followerData;
+        break;
+    default:
+        graphicsInfo = &gSpeciesInfo[species].followerData;
+        break;
+    }
+
+    if (graphicsInfo->tileTag == 0 && species < NUM_SPECIES)
+        return TRUE;
+    else if (graphicsInfo->tileTag != TAG_NONE && species >= NUM_SPECIES)
+        return TRUE;
+    return FALSE;
+}
+
 // Determine whether follower *should* be visible
 static bool32 IsFollowerVisible(void)
 {
-    if(FlagGet(FLAG_FOLLOWERS_OFF))
+    if(FlagGet(FLAG_FOLLOWERS_OFF) || IsFrontPartyPokemonNoGraphics())
         return FALSE;
     return !(TestPlayerAvatarFlags(FOLLOWER_INVISIBLE_FLAGS)
             || MetatileBehavior_IsSurfableWaterOrUnderwater(gObjectEvents[gPlayerAvatar.objectEventId].previousMetatileBehavior)
