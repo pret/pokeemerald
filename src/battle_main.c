@@ -2292,14 +2292,14 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 u16 monLevel = VarGet(VAR_PIT_FLOOR);
                 if (monLevel > 100)
                     monLevel = 100;
-                if ((gSpecialVar_Unused_0x8014 == TRAINER_ARCHIE_PIT_BOSS) && (i == 5)) 
+                if (((gSpecialVar_Unused_0x8014 == TRAINER_ARCHIE_PIT_BOSS) || (gSpecialVar_Unused_0x8014 == TRAINER_ARCHIE_PIT_BOSS_DOUBLES)) && (i == 5)) 
                 {
                     monLevel = 100;
                     CreateMon(&party[i], partyData[i].species, monLevel, MAX_PER_STAT_IVS, TRUE, personalityValue, otIdType, fixedOtId);
                     //if (!isPlayer)
                        //DebugPrintf("Reached Create NPC Kyogre: %d", gSpecialVar_Unused_0x8014);
                 }
-                else if ((gSpecialVar_Unused_0x8014 == TRAINER_ARCHIE_PIT_BOSS) && (!isPlayer))
+                else if (((gSpecialVar_Unused_0x8014 == TRAINER_ARCHIE_PIT_BOSS) || (gSpecialVar_Unused_0x8014 == TRAINER_ARCHIE_PIT_BOSS_DOUBLES)) && (!isPlayer))
                 {
                     u16 newSpecies = GetRandomSpeciesFlattenedCurve();
                     const struct Evolution *evolutions = GetSpeciesEvolutions(newSpecies);

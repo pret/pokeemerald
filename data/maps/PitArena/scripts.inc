@@ -105,7 +105,13 @@ PitArena_Archie::
 	lockall
 	setflag FLAG_START_ARCHIE_BATTLE
 	special HealPlayerParty
+	goto_if_set FLAG_DOUBLES_MODE, PitArenaDoublesArchie
 	trainerbattle_single TRAINER_ARCHIE_PIT_BOSS, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_ArchieBattleFinished
+	releaseall
+	end
+
+PitArenaDoublesArchie::
+	trainerbattle_double TRAINER_ARCHIE_PIT_BOSS_DOUBLES, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_Text_NotEnoughMons, PitArena_ArchieBattleFinished
 	releaseall
 	end
 
