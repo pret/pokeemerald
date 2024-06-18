@@ -291,12 +291,6 @@ bool8 IsFanfareTaskInactive(void)
 
 static void Task_Fanfare(u8 taskId)
 {
-    if(FlagGet(FLAG_END_AUDIO_EARLY))
-    {
-        m4aMPlayContinue(&gMPlayInfo_BGM);
-        DestroyTask(taskId);
-    }
-
     if (sFanfareCounter)
     {
         sFanfareCounter--;

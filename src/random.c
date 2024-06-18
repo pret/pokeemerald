@@ -250,7 +250,7 @@ u16 RandomSeeded(u16 value)
     result = ISO_RANDOMIZE1(otId + value) >> 16;
     return result;
 }
-#define I_MAX 9
+#define I_MAX 5
 u16 RandomModulo(u32 value, u16 modulo)
 {
     u32 otId;

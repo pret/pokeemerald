@@ -97,7 +97,6 @@ EventScript_ObtainedItemMessage:
 EventScript_ContinueObtainedItem:
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	hideitemdesc
-	setflag FLAG_END_AUDIO_EARLY
 	setvar VAR_RESULT, TRUE
 	return
 
@@ -106,7 +105,6 @@ EventScript_NoRoomForItem::
 	return
 
 EventScript_PlayFanfareObtainedItem::
-	playfanfare MUS_OBTAIN_ITEM
 	return
 
 EventScript_PlayFanfareObtainedTMHM::
