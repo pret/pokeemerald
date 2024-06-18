@@ -3883,7 +3883,7 @@ static bool32 TryChangeBattleTerrain(u32 battler, u32 statusFlag, u8 *timer)
 {
     if ((!(gFieldStatuses & statusFlag) && (!gBattleStruct->isSkyBattle)))
     {
-        gFieldStatuses &= ~(STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_GRASSY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_PSYCHIC_TERRAIN);
+        gFieldStatuses &= ~(STATUS_FIELD_TERRAIN_ANY | STATUS_FIELD_TERRAIN_PERMANENT);
         gFieldStatuses |= statusFlag;
         gDisableStructs[battler].terrainAbilityDone = FALSE;
 
@@ -6558,7 +6558,7 @@ static u8 StatRaiseBerry(u32 battler, u32 itemId, u32 statId, bool32 end2)
         else
             SET_STATCHANGER(statId, 1, FALSE);
 
-        gBattleScripting.animArg1 = 14 + statId;
+        gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + statId;
         gBattleScripting.animArg2 = 0;
 
         if (end2)
@@ -6609,7 +6609,7 @@ static u8 RandomStatRaiseBerry(u32 battler, u32 itemId, bool32 end2)
         else
             SET_STATCHANGER(i + 1, 2, FALSE);
 
-        gBattleScripting.animArg1 = 0x21 + i + 6;
+        gBattleScripting.animArg1 = STAT_ANIM_PLUS2 + i + 1;
         gBattleScripting.animArg2 = 0;
         if (end2)
         {
@@ -6686,7 +6686,7 @@ static u8 DamagedStatBoostBerryEffect(u32 battler, u8 statId, u8 category)
             SET_STATCHANGER(statId, 1, FALSE);
 
         gBattleScripting.battler = battler;
-        gBattleScripting.animArg1 = 14 + statId;
+        gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + statId;
         gBattleScripting.animArg2 = 0;
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_BerryStatRaiseRet;
@@ -6703,7 +6703,7 @@ u8 TryHandleSeed(u32 battler, u32 terrainFlag, u8 statId, u16 itemId, bool32 exe
         gLastUsedItem = itemId; // For surge abilities
         gEffectBattler = gBattleScripting.battler = battler;
         SET_STATCHANGER(statId, 1, FALSE);
-        gBattleScripting.animArg1 = 14 + statId;
+        gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + statId;
         gBattleScripting.animArg2 = 0;
         if (execute)
         {
@@ -7111,7 +7111,7 @@ static u8 ItemEffectMoveEnd(u32 battler, u16 holdEffect)
         }
         SET_STATCHANGER(STAT_ATK, 2, FALSE);
 
-        gBattleScripting.animArg1 = 14 + STAT_ATK;
+        gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + STAT_ATK;
         gBattleScripting.animArg2 = 0;
 
         BattleScriptPushCursorAndCallback(BattleScript_BerserkGeneRet);
@@ -7393,7 +7393,7 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                 }
                 SET_STATCHANGER(STAT_ATK, 2, FALSE);
 
-                gBattleScripting.animArg1 = 14 + STAT_ATK;
+                gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + STAT_ATK;
                 gBattleScripting.animArg2 = 0;
 
                 BattleScriptPushCursorAndCallback(BattleScript_BerserkGeneRet);
@@ -7657,7 +7657,7 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                 }
                 SET_STATCHANGER(STAT_ATK, 2, FALSE);
 
-                gBattleScripting.animArg1 = 14 + STAT_ATK;
+                gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + STAT_ATK;
                 gBattleScripting.animArg2 = 0;
 
                 BattleScriptPushCursorAndCallback(BattleScript_BerserkGeneRet);
@@ -8343,7 +8343,7 @@ bool32 IsMoveMakingContact(u32 move, u32 battlerAtk)
 
     if (!gMovesInfo[move].makesContact)
     {
-        if (move == MOVE_SHELL_SIDE_ARM && gBattleStruct->shellSideArmCategory[battlerAtk][gBattlerTarget] == DAMAGE_CATEGORY_SPECIAL)
+        if (move == MOVE_SHELL_SIDE_ARM && gBattleStruct->shellSideArmCategory[battlerAtk][gBattlerTarget] == DAMAGE_CATEGORY_PHYSICAL)
             return TRUE;
         else
             return FALSE;
@@ -8383,7 +8383,7 @@ bool32 IsBattlerProtected(u32 battlerAtk, u32 battlerDef, u32 move)
     // Protective Pads doesn't stop Unseen Fist from bypassing Protect effects, so IsMoveMakingContact() isn't used here.
     // This means extra logic is needed to handle Shell Side Arm.
     if (GetBattlerAbility(gBattlerAttacker) == ABILITY_UNSEEN_FIST
-     && (gMovesInfo[move].makesContact || (move == MOVE_SHELL_SIDE_ARM && gBattleStruct->shellSideArmCategory[battlerAtk][battlerDef] == DAMAGE_CATEGORY_SPECIAL))
+     && (gMovesInfo[move].makesContact || (move == MOVE_SHELL_SIDE_ARM && gBattleStruct->shellSideArmCategory[battlerAtk][battlerDef] == DAMAGE_CATEGORY_PHYSICAL))
      && !gProtectStructs[battlerDef].maxGuarded) // Max Guard cannot be bypassed by Unseen Fist
         return FALSE;
     else if (gMovesInfo[move].ignoresProtect)
@@ -9316,7 +9316,11 @@ static inline u32 CalcAttackStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 m
         if (IS_MOVE_PHYSICAL(move))
         {
             atkStat = gBattleMons[battlerAtk].defense;
-            atkStage = gBattleMons[battlerAtk].statStages[STAT_DEF];
+            // Edge case: Body Press used during Wonder Room. For some reason, it still uses Defense over Sp.Def, but uses Sp.Def stat changes
+            if (gFieldStatuses & STATUS_FIELD_WONDER_ROOM)
+                atkStage = gBattleMons[battlerAtk].statStages[STAT_SPDEF];
+            else
+                atkStage = gBattleMons[battlerAtk].statStages[STAT_DEF];
         }
         else
         {
@@ -11222,7 +11226,7 @@ bool32 TryRoomService(u32 battler)
         BufferStatChange(battler, STAT_SPEED, STRINGID_STATFELL);
         gEffectBattler = gBattleScripting.battler = battler;
         SET_STATCHANGER(STAT_SPEED, 1, TRUE);
-        gBattleScripting.animArg1 = 14 + STAT_SPEED;
+        gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + STAT_SPEED;
         gBattleScripting.animArg2 = 0;
         gLastUsedItem = gBattleMons[battler].item;
         return TRUE;
@@ -11608,7 +11612,9 @@ void SetShellSideArmCategory(void)
 
             special = ((((2 * gBattleMons[battlerAtk].level / 5 + 2) * gMovesInfo[MOVE_SHELL_SIDE_ARM].power * attackerSpAtkStat) / targetSpDefStat) / 50);
 
-            if (((physical > special) || (physical == special && RandomPercentage(RNG_SHELL_SIDE_ARM, 50))))
+            if ((physical > special) || (physical == special && RandomPercentage(RNG_SHELL_SIDE_ARM, 50)))
+                gBattleStruct->shellSideArmCategory[battlerAtk][battlerDef] = DAMAGE_CATEGORY_PHYSICAL;
+            else
                 gBattleStruct->shellSideArmCategory[battlerAtk][battlerDef] = DAMAGE_CATEGORY_SPECIAL;
         }
     }

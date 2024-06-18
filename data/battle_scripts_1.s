@@ -5828,6 +5828,7 @@ BattleScript_DoSwitchOut::
 
 BattleScript_PursuitDmgOnSwitchOut::
 	pause B_WAIT_TIME_SHORT
+	orword gHitMarker, HITMARKER_OBEYS
 	attackstring
 	ppreduce
 	critcalc
@@ -5845,11 +5846,12 @@ BattleScript_PursuitDmgOnSwitchOut::
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
 	tryfaintmon BS_TARGET
-	moveendfromto MOVEEND_ABILITIES, MOVEEND_CHOICE_MOVE
+	moveendfromto MOVEEND_ABILITIES, MOVEEND_ATTACKER_INVISIBLE @ MOVEEND_CHOICE_MOVE has to be included
 	jumpiffainted BS_TARGET, FALSE, BattleScript_PursuitDmgOnSwitchOutRet
 	setbyte sGIVEEXP_STATE, 0
 	getexp BS_TARGET
 BattleScript_PursuitDmgOnSwitchOutRet:
+	bicword gHitMarker, HITMARKER_OBEYS
 	return
 
 BattleScript_Pausex20::

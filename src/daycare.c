@@ -1040,12 +1040,14 @@ static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parent
         eggSpecies = SPECIES_ILLUMISE;
     else if (eggSpecies == SPECIES_MANAPHY)
         eggSpecies = SPECIES_PHIONE;
-    else if (eggSpecies == SPECIES_SINISTEA_ANTIQUE)
-        eggSpecies = SPECIES_SINISTEA_PHONY;
     else if (GET_BASE_SPECIES_ID(eggSpecies) == SPECIES_ROTOM)
         eggSpecies = SPECIES_ROTOM;
     else if (GET_BASE_SPECIES_ID(eggSpecies) == SPECIES_FURFROU)
         eggSpecies = SPECIES_FURFROU;
+    else if (eggSpecies == SPECIES_SINISTEA_ANTIQUE)
+        eggSpecies = SPECIES_SINISTEA_PHONY;
+    else if (eggSpecies == SPECIES_POLTCHAGEIST_ARTISAN)
+        eggSpecies = SPECIES_POLTCHAGEIST_COUNTERFEIT;
     // To avoid single-stage Totem Pokémon to breed more of themselves.
     else if (eggSpecies == SPECIES_MIMIKYU_TOTEM_DISGUISED)
         eggSpecies = SPECIES_MIMIKYU_DISGUISED;

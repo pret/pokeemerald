@@ -1961,7 +1961,7 @@ static void Cmd_damagecalc(void)
     u8 moveType;
 
     GET_MOVE_TYPE(gCurrentMove, moveType);
-    if (gBattleStruct->shellSideArmCategory[gBattlerAttacker][gBattlerTarget] == DAMAGE_CATEGORY_SPECIAL && gCurrentMove == MOVE_SHELL_SIDE_ARM)
+    if (gBattleStruct->shellSideArmCategory[gBattlerAttacker][gBattlerTarget] == DAMAGE_CATEGORY_PHYSICAL && gCurrentMove == MOVE_SHELL_SIDE_ARM)
         gBattleStruct->swapDamageCategory = TRUE;
     gBattleMoveDamage = CalculateMoveDamage(gCurrentMove, gBattlerAttacker, gBattlerTarget, moveType, 0, gIsCriticalHit, TRUE, TRUE);
     gBattlescriptCurrInstr = cmd->nextInstr;
@@ -5389,7 +5389,6 @@ static void Cmd_moveend(void)
     bool32 effect = FALSE;
     u32 moveType = 0;
     u32 holdEffectAtk = 0;
-    u16 *choicedMoveAtk = NULL;
     u32 endMode, endState;
     u32 originallyUsedMove;
 
@@ -5402,7 +5401,6 @@ static void Cmd_moveend(void)
     endState = cmd->endState;
 
     holdEffectAtk = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
-    choicedMoveAtk = &gBattleStruct->choicedMove[gBattlerAttacker];
     GET_MOVE_TYPE(gCurrentMove, moveType);
 
     do
@@ -5612,29 +5610,34 @@ static void Cmd_moveend(void)
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_CHOICE_MOVE: // update choice band move
-            if (gHitMarker & HITMARKER_OBEYS
-             && (HOLD_EFFECT_CHOICE(holdEffectAtk) || GetBattlerAbility(gBattlerAttacker) == ABILITY_GORILLA_TACTICS)
-             && gChosenMove != MOVE_STRUGGLE
-             && (*choicedMoveAtk == MOVE_NONE || *choicedMoveAtk == MOVE_UNAVAILABLE))
             {
-                if ((gMovesInfo[gChosenMove].effect == EFFECT_BATON_PASS
-                 || gMovesInfo[gChosenMove].effect == EFFECT_HEALING_WISH)
-                 && !(gMoveResultFlags & MOVE_RESULT_FAILED))
+                u16 *choicedMoveAtk = &gBattleStruct->choicedMove[gBattlerAttacker];
+                if (gHitMarker & HITMARKER_OBEYS
+                 && (HOLD_EFFECT_CHOICE(holdEffectAtk) || GetBattlerAbility(gBattlerAttacker) == ABILITY_GORILLA_TACTICS)
+                 && gChosenMove != MOVE_STRUGGLE
+                 && (*choicedMoveAtk == MOVE_NONE || *choicedMoveAtk == MOVE_UNAVAILABLE))
                 {
-                    gBattleScripting.moveendState++;
-                    break;
+                    if ((gMovesInfo[gChosenMove].effect == EFFECT_BATON_PASS
+                     || gMovesInfo[gChosenMove].effect == EFFECT_HEALING_WISH)
+                     && !(gMoveResultFlags & MOVE_RESULT_FAILED))
+                    {
+                        gBattleScripting.moveendState++;
+                        break;
+                    }
+                    *choicedMoveAtk = gChosenMove;
                 }
-                *choicedMoveAtk = gChosenMove;
+                for (i = 0; i < MAX_MON_MOVES; i++)
+                {
+                    if (gBattleMons[gBattlerAttacker].moves[i] == *choicedMoveAtk)
+                        break;
+                }
+                if (i == MAX_MON_MOVES)
+                {
+                    *choicedMoveAtk = MOVE_NONE;
+                }
+                gBattleScripting.moveendState++;
+                break;
             }
-            for (i = 0; i < MAX_MON_MOVES; i++)
-            {
-                if (gBattleMons[gBattlerAttacker].moves[i] == *choicedMoveAtk)
-                    break;
-            }
-            if (i == MAX_MON_MOVES)
-                *choicedMoveAtk = MOVE_NONE;
-            gBattleScripting.moveendState++;
-            break;
         case MOVEEND_CHANGED_ITEMS: // changed held items
             for (i = 0; i < gBattlersCount; i++)
             {
@@ -12825,7 +12828,11 @@ static void Cmd_trysetencore(void)
     {
         gDisableStructs[gBattlerTarget].encoredMove = gBattleMons[gBattlerTarget].moves[i];
         gDisableStructs[gBattlerTarget].encoredMovePos = i;
-        gDisableStructs[gBattlerTarget].encoreTimer = 3;
+        // Encore always lasts 3 turns, but we need to account for a scenario where Encore changes the move during the same turn.
+        if (GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget))
+            gDisableStructs[gBattlerTarget].encoreTimer = 4;
+        else
+            gDisableStructs[gBattlerTarget].encoreTimer = 3;
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
     else
@@ -13543,7 +13550,7 @@ static void Cmd_jumpifnopursuitswitchdmg(void)
                 gActionsByTurnOrder[i] = B_ACTION_TRY_FINISH;
         }
 
-        gCurrentMove = gChosenMoveByBattler[gBattlerTarget];
+        gCurrentMove = gChosenMove = gChosenMoveByBattler[gBattlerTarget];
         gCurrMovePos = gChosenMovePos = *(gBattleStruct->chosenMovePositions + gBattlerTarget);
         gBattlescriptCurrInstr = cmd->nextInstr;
         gBattleScripting.animTurn = 1;
@@ -16437,9 +16444,9 @@ void BS_SetRemoveTerrain(void)
     }
     else
     {
-        u16 atkHoldEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
+        u32 atkHoldEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
 
-        gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;
+        gFieldStatuses &= ~(STATUS_FIELD_TERRAIN_ANY | STATUS_FIELD_TERRAIN_PERMANENT);
         gFieldStatuses |= statusFlag;
         gFieldTimers.terrainTimer = (atkHoldEffect == HOLD_EFFECT_TERRAIN_EXTENDER) ? 8 : 5;
         gBattlescriptCurrInstr = cmd->nextInstr;
@@ -16537,7 +16544,8 @@ void BS_TryRelicSong(void)
 {
     NATIVE_ARGS();
 
-    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_SHEER_FORCE && !(gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED))
+    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_SHEER_FORCE && !(gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED)
+        && (gBattleMons[gBattlerAttacker].species == SPECIES_MELOETTA_ARIA || gBattleMons[gBattlerAttacker].species == SPECIES_MELOETTA_PIROUETTE))
     {
         if (gBattleMons[gBattlerAttacker].species == SPECIES_MELOETTA_ARIA)
             gBattleMons[gBattlerAttacker].species = SPECIES_MELOETTA_PIROUETTE;
@@ -16548,7 +16556,9 @@ void BS_TryRelicSong(void)
         gBattlescriptCurrInstr = BattleScript_AttackerFormChangeMoveEffect;
     }
     else
+    {
         gBattlescriptCurrInstr = cmd->nextInstr;
+    }
 }
 
 void BS_SetPledge(void)
