@@ -12801,7 +12801,6 @@ static const struct LevelUpMove sBasculinWhiteStripedLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sBasculegionLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 0, MOVE_DIRE_CLAW),
     LEVEL_UP_MOVE( 1, MOVE_SHADOW_BALL),
     LEVEL_UP_MOVE( 1, MOVE_TAIL_WHIP),
     LEVEL_UP_MOVE( 1, MOVE_WATER_GUN),
