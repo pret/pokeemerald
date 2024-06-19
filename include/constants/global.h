@@ -1,6 +1,7 @@
 #ifndef GUARD_CONSTANTS_GLOBAL_H
 #define GUARD_CONSTANTS_GLOBAL_H
 
+#include "config/general.h"
 #include "config/battle.h"
 #include "config/debug.h"
 #include "config/item.h"

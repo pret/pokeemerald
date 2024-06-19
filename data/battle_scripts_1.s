@@ -1,4 +1,4 @@
-#include "config.h"
+#include "config/general.h"
 #include "config/battle.h"
 #include "constants/global.h"
 #include "constants/battle.h"
