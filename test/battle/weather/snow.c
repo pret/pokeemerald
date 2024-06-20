@@ -13,8 +13,8 @@ ASSUMPTIONS
 SINGLE_BATTLE_TEST("Snow multiplies the defense of Ice-types by 1.5x", s16 damage)
 {
     u16 move;
-    PARAMETRIZE{ move = MOVE_SNOWSCAPE; }
-    PARAMETRIZE{ move = MOVE_CELEBRATE; }
+    PARAMETRIZE { move = MOVE_SNOWSCAPE; }
+    PARAMETRIZE { move = MOVE_CELEBRATE; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_GLALIE);
