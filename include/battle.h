@@ -785,6 +785,9 @@ struct BattleStruct
     u8 blunderPolicy:1; // should blunder policy activate
     u8 swapDamageCategory:1; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
     u8 bouncedMoveIsUsed:1;
+    u8 descriptionSubmenu:1; // For Move Description window in move selection screen
+    u8 ackBallUseBtn:1; // Used for the last used ball feature
+    u8 ballSwapped:1; // Used for the last used ball feature
     u8 ballSpriteIds[2];    // item gfx, window gfx
     u8 appearedInBattle; // Bitfield to track which Pokemon appeared in battle. Used for Burmy's form change
     u8 skyDropTargets[MAX_BATTLERS_COUNT]; // For Sky Drop, to account for if multiple Pokemon use Sky Drop in a double battle.
