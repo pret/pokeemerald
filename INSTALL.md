@@ -354,6 +354,13 @@ Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to
 >   [install devkitARM on Arch Linux](#installing-devkitarm-on-arch-linux).
 </details>
 
+### NixOS
+Run the following command to start an interactive shell with the necessary packages:
+```bash
+nix-shell -p pkgsCross.arm-embedded.stdenv.cc git pkg-config libpng
+```
+Then proceed to [Choosing where to store pokeemerald Expansion (Linux)](#choosing-where-to-store-pokeemerald-expansion-linux).
+
 ### Other distributions
 _(Specific instructions for other distributions would be greatly appreciated!)_
 
