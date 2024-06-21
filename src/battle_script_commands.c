@@ -13328,7 +13328,16 @@ static void Cmd_handlefurycutter(void)
     }
     else
     {
-        if (gDisableStructs[gBattlerAttacker].furyCutterCounter != 5
+        u32 max;
+
+        if (B_UPDATED_MOVE_DATA >= GEN_6)
+            max = 3;
+        else if (B_UPDATED_MOVE_DATA == GEN_5)
+            max = 4;
+        else
+            max = 5;
+
+        if (gDisableStructs[gBattlerAttacker].furyCutterCounter < max
             && gSpecialStatuses[gBattlerAttacker].parentalBondState != PARENTAL_BOND_1ST_HIT) // Don't increment counter on first hit
             gDisableStructs[gBattlerAttacker].furyCutterCounter++;
 
