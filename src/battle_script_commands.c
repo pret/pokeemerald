@@ -4633,7 +4633,7 @@ bool32 NoAliveMonsForEitherParty(void)
     return (NoAliveMonsForPlayer() || NoAliveMonsForOpponent());
 }
 
-// For battles that aren't BATTLE_TYPE_LINK or BATTLE_TYPE_RECORDED_LINK, the only thing this
+// For battles that aren't BATTLE_TYPE_LINK or BATTLE_TYPE_RECORDED_LINK or double trainer battles, the only thing this
 // command does is check whether the player has won/lost by totaling each team's HP. It then
 // sets gBattleOutcome accordingly, if necessary.
 static void Cmd_checkteamslost(void)
@@ -4649,10 +4649,16 @@ static void Cmd_checkteamslost(void)
     if (NoAliveMonsForOpponent())
         gBattleOutcome |= B_OUTCOME_WON;
 
-    // For link battles that haven't ended, count number of empty battler spots
-    // In link multi battles, jump to pointer if more than 1 spot empty
+    // Fair switching - everyone has to switch in most at the same time, without knowing which pokemon the other trainer selected.
+    // In vanilla Emerald this was only used for link battles, in expansion it's also used for regular trainers in double battles.
+    // For battles that haven't ended, count number of empty battler spots
+    // In multi battles, jump to pointer if more than 1 spot empty
     // In non-multi battles, jump to pointer if 1 spot is missing on both sides
-    if (gBattleOutcome == 0 && (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
+    if (gBattleOutcome == 0
+        && (((gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
+              || ((gBattleTypeFlags & BATTLE_TYPE_TRAINER) && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+            )
+        )
     {
         s32 i, emptyPlayerSpots, emptyOpponentSpots;
 
@@ -6769,7 +6775,7 @@ static void Cmd_openpartyscreen(void)
     u32 i, battler = 0;
     const u8 *failInstr = cmd->failInstr;
 
-    if (cmd->battler == BS_FAINTED_LINK_MULTIPLE_1)
+    if (cmd->battler == BS_FAINTED_MULTIPLE_1)
     {
         if ((gBattleTypeFlags & BATTLE_TYPE_MULTI) || !(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
         {
@@ -6924,7 +6930,7 @@ static void Cmd_openpartyscreen(void)
         }
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
-    else if (cmd->battler == BS_FAINTED_LINK_MULTIPLE_2)
+    else if (cmd->battler == BS_FAINTED_MULTIPLE_2)
     {
         if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
         {
@@ -7307,7 +7313,7 @@ static void Cmd_switchineffects(void)
             gBattleStruct->hpOnSwitchout[GetBattlerSide(i)] = gBattleMons[i].hp;
         }
 
-        if (cmd->battler == BS_FAINTED_LINK_MULTIPLE_1)
+        if (cmd->battler == BS_FAINTED_MULTIPLE_1)
         {
             u32 hitmarkerFaintBits = gHitMarker >> 28;
 

@@ -5407,7 +5407,7 @@ BattleScript_GiveExp::
 
 BattleScript_HandleFaintedMon::
 	setbyte sSHIFT_SWITCHED, 0
-	checkteamslost BattleScript_LinkHandleFaintedMonMultiple
+	checkteamslost BattleScript_HandleFaintedMonMultiple
 	jumpifbyte CMP_NOT_EQUAL, gBattleOutcome, 0, BattleScript_FaintedMonEnd
 	jumpifbattletype BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonTryChoose
 	jumpifword CMP_NO_COMMON_BITS, gHitMarker, HITMARKER_PLAYER_FAINTED, BattleScript_FaintedMonTryChoose
@@ -5488,13 +5488,13 @@ BattleScript_FaintedMonShiftSwitched:
 	copybyte gBattlerTarget, sSAVED_BATTLER
 	goto BattleScript_FaintedMonSendOutNewEnd
 
-BattleScript_LinkHandleFaintedMonMultiple::
-	openpartyscreen BS_FAINTED_LINK_MULTIPLE_1, BattleScript_LinkHandleFaintedMonMultipleStart
-BattleScript_LinkHandleFaintedMonMultipleStart::
+BattleScript_HandleFaintedMonMultiple::
+	openpartyscreen BS_FAINTED_MULTIPLE_1, BattleScript_HandleFaintedMonMultipleStart
+BattleScript_HandleFaintedMonMultipleStart::
 	switchhandleorder BS_FAINTED, 0
-	openpartyscreen BS_FAINTED_LINK_MULTIPLE_2, BattleScript_LinkHandleFaintedMonMultipleEnd
+	openpartyscreen BS_FAINTED_MULTIPLE_2, BattleScript_HandleFaintedMonMultipleEnd
 	switchhandleorder BS_FAINTED, 0
-BattleScript_LinkHandleFaintedMonLoop::
+BattleScript_HandleFaintedMonLoop::
 	switchhandleorder BS_FAINTED, 3
 	drawpartystatussummary BS_FAINTED
 	getswitchedmondata BS_FAINTED
@@ -5506,9 +5506,9 @@ BattleScript_LinkHandleFaintedMonLoop::
 	hidepartystatussummary BS_FAINTED
 	switchinanim BS_FAINTED, FALSE
 	waitstate
-	switchineffects BS_FAINTED_LINK_MULTIPLE_1
-	jumpifbytenotequal gBattlerFainted, gBattlersCount, BattleScript_LinkHandleFaintedMonLoop
-BattleScript_LinkHandleFaintedMonMultipleEnd::
+	switchineffects BS_FAINTED_MULTIPLE_1
+	jumpifbytenotequal gBattlerFainted, gBattlersCount, BattleScript_HandleFaintedMonLoop
+BattleScript_HandleFaintedMonMultipleEnd::
 	end2
 
 BattleScript_LocalTrainerBattleWon::
