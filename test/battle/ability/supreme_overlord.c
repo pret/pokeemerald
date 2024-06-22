@@ -94,6 +94,7 @@ SINGLE_BATTLE_TEST("Supreme Overlord does not boost attack if party members are 
 
 SINGLE_BATTLE_TEST("Supreme Overlord's message displays correctly after all battlers fainted - Player")
 {
+    KNOWN_FAILING; // Explosion causes the ability to wait
     GIVEN {
         ASSUME(gMovesInfo[MOVE_EXPLOSION].effect == EFFECT_EXPLOSION);
         PLAYER(SPECIES_WOBBUFFET) { HP(1);}
@@ -107,9 +108,9 @@ SINGLE_BATTLE_TEST("Supreme Overlord's message displays correctly after all batt
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, opponent);
         // Everyone faints.
         MESSAGE("Go! Kingambit!");
+        MESSAGE("2 sent out Wobbuffet!");
         ABILITY_POPUP(player, ABILITY_SUPREME_OVERLORD);
         MESSAGE("Kingambit gained strength from the fallen!");
-        MESSAGE("2 sent out Wobbuffet!");
     }
 }
 

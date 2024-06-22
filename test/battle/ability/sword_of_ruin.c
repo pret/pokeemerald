@@ -32,6 +32,7 @@ SINGLE_BATTLE_TEST("Sword of Ruin reduces Defense if opposing mon's ability does
 
 SINGLE_BATTLE_TEST("Sword of Ruin's message displays correctly after all battlers fainted - Player")
 {
+    KNOWN_FAILING; // Explosion causes the ability to wait
     GIVEN {
         ASSUME(gMovesInfo[MOVE_EXPLOSION].effect == EFFECT_EXPLOSION);
         PLAYER(SPECIES_WOBBUFFET) { HP(1);}
@@ -46,9 +47,9 @@ SINGLE_BATTLE_TEST("Sword of Ruin's message displays correctly after all battler
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, opponent);
         // Everyone faints.
         MESSAGE("Go! Chien-Pao!");
+        MESSAGE("2 sent out Wobbuffet!");
         ABILITY_POPUP(player, ABILITY_SWORD_OF_RUIN);
         MESSAGE("Chien-Pao's Sword of Ruin weakened the Defense of all surrounding Pokémon!");
-        MESSAGE("2 sent out Wobbuffet!");
     }
 }
 

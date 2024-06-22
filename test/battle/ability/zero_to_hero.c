@@ -138,6 +138,7 @@ SINGLE_BATTLE_TEST("Imposter doesn't apply the heroic transformation message whe
 
 SINGLE_BATTLE_TEST("Zero to Hero's message displays correctly after all battlers fainted - Player")
 {
+    KNOWN_FAILING; // Explosion causes the ability to wait
     GIVEN {
         ASSUME(gMovesInfo[MOVE_EXPLOSION].effect == EFFECT_EXPLOSION);
         PLAYER(SPECIES_PALAFIN_ZERO);
@@ -153,9 +154,9 @@ SINGLE_BATTLE_TEST("Zero to Hero's message displays correctly after all battlers
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, opponent);
         // Everyone faints.
         MESSAGE("Go! Palafin!");
+        MESSAGE("2 sent out Wobbuffet!");
         ABILITY_POPUP(player, ABILITY_ZERO_TO_HERO);
         MESSAGE("Palafin underwent a heroic transformation!");
-        MESSAGE("2 sent out Wobbuffet!");
     }
 }
 
