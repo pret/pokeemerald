@@ -56,7 +56,14 @@ BattleFrontier_BattlePikeCorridor_Movement_AttendantEnterCorridor:
 	face_down
 	step_end
 
-BattleFrontier_BattlePikeCorridor_Text_YourChallengeHasBegun:
-	.string "Your Battle Choice challenge\n"
-	.string "has now begun…$"
-
+.ifdef ENGLISH
+	.include "data/maps/BattleFrontier_BattlePikeCorridor/text.inc"
+.else
+.ifdef FRENCH
+	.include "data/maps/BattleFrontier_BattlePikeCorridor/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/BattleFrontier_BattlePikeCorridor/text_it.inc"
+.endif
+.endif
+.endif
