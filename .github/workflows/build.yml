@@ -53,13 +53,22 @@ jobs:
         run: make -j${nproc} all
 
       - name: French Compare
-        run: make -j${nproc} compare_fr
+        run: make -j${nproc} fr # Once all assets are ready, use compare_fr instead
 
       - name: French Modern
         env:
           MODERN: 1
           COMPARE: 0
         run: make -j${nproc} modern_fr
+
+      - name: Italian Compare
+        run: make -j${nproc} it # Once all assets are ready, use compare_it instead
+
+      - name: Italian Modern
+        env:
+          MODERN: 1
+          COMPARE: 0
+        run: make -j${nproc} modern_it
 
       - name: Move symfiles
         if: ${{ github.event_name == 'push' }}
