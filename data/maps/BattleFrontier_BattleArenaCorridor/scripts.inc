@@ -86,7 +86,14 @@ BattleFrontier_BattleArenaCorridor_Movement_AttendantMoveOutOfWay:
 	walk_in_place_faster_down
 	step_end
 
-BattleFrontier_BattleArenaCorridor_Text_PleaseStepIn:
-	.string "Your battles shall be waged in\n"
-	.string "the next room. Please step in!$"
-
+.ifdef ENGLISH
+	.include "data/maps/BattleFrontier_BattleArenaCorridor/text.inc"
+.else
+.ifdef FRENCH
+	.include "data/maps/BattleFrontier_BattleArenaCorridor/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/BattleFrontier_BattleArenaCorridor/text_it.inc"
+.endif
+.endif
+.endif

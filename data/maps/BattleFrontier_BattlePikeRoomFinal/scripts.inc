@@ -36,7 +36,14 @@ BattleFrontier_BattlePikeRoomFinal_EventScript_TurnPlayerNorth::
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-BattleFrontier_BattlePikeRoomFinal_Text_CongratsThisWayPlease:
-	.string "Congratulations…\n"
-	.string "Now, this way, please…$"
-
+.ifdef ENGLISH
+	.include "data/maps/BattleFrontier_BattlePikeRoomFinal/text.inc"
+.else
+.ifdef FRENCH
+	.include "data/maps/BattleFrontier_BattlePikeRoomFinal/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/BattleFrontier_BattlePikeRoomFinal/text_it.inc"
+.endif
+.endif
+.endif
