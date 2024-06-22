@@ -1612,7 +1612,7 @@ static const u8 *const sArchieFinalDefeat[1] =
     gText_ArchieFinalDefeat,
 };
 
-static const u8 *const sRandomTrainerApproachTexts[78] =
+static const u8 *const sRandomTrainerApproachTexts[79] =
 {
     gText_TylerApproach,
     gText_JuliaApproach,
@@ -1692,6 +1692,7 @@ static const u8 *const sRandomTrainerApproachTexts[78] =
     gText_AinsleyApproach,
     gText_GriffinApproach,
     gText_wiz1989Approach,
+    gText_OneTwoThreeApproach,
 };
 
 static const u8 *const sRandomTrainerDefeatTexts[77] =
@@ -1781,9 +1782,9 @@ static const u8 *GetIntroSpeechOfApproachingTrainer(void)
     if(VarGet(VAR_PIT_FLOOR) == 100)
         return ReturnEmptyStringIfNull(sArchieFinalApproach[0]);
     if (gApproachingTrainerId == 0)
-        return ReturnEmptyStringIfNull(sRandomTrainerApproachTexts[Random() % 78]);
+        return ReturnEmptyStringIfNull(sRandomTrainerApproachTexts[Random() % 79]);
     else
-        return ReturnEmptyStringIfNull(sRandomTrainerApproachTexts[Random() % 78]);
+        return ReturnEmptyStringIfNull(sRandomTrainerApproachTexts[Random() % 79]);
 }
 
 const u8 *GetTrainerALoseText(void)
