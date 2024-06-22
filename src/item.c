@@ -1397,8 +1397,11 @@ u16 RandomItemId(u16 itemId)
         //check for reroll
         for (i = 0; i < RANDOM_ITEM_REROLL_COUNT; i++)
         {
-            if(itemId == sRandomItemsRerollCheck[i] && CheckBagHasItem(sRandomItemsRerollCheck[i], 1))
+            if(itemId == sRandomItemsRerollCheck[i] && CheckBagHasItem(itemId, 1))
+            {
+                DebugPrintf("rerollItem = TRUE, i=%d", i);
                 rerollItem = TRUE;
+            }
         }
         //exit in case of infinite loop
         if (counter >= 20)
@@ -1407,6 +1410,7 @@ u16 RandomItemId(u16 itemId)
     } while (rerollItem);
 
     VarSet(VAR_0x8006, itemId);
+    DebugPrintf("itemId = %d", itemId);
     return itemId;
 }
 

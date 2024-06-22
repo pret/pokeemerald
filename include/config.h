@@ -6,7 +6,7 @@
 // still has them in the ROM. This is because the developers forgot
 // to define NDEBUG before release, however this has been changed as
 // Ruby's actual debug build does not use the AGBPrint features.
-#define NDEBUG
+//#define NDEBUG
 
 // To enable printf debugging, comment out "#define NDEBUG". This allows
 // the various AGBPrint functions to be used. (See include/gba/isagbprint.h).
@@ -55,8 +55,8 @@
 
 // ### SWITCH Generations for different game version! ###
 //#define PIT_GEN_3_MODE
-#define PIT_GEN_5_MODE
-//#define PIT_GEN_9_MODE
+//#define PIT_GEN_5_MODE
+#define PIT_GEN_9_MODE
 
 // Generation constants used in configs to define behavior
 #define GEN_1 0
