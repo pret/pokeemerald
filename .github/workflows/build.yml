@@ -53,22 +53,32 @@ jobs:
         run: make -j${nproc} all
 
       - name: French Compare
-        run: make -j${nproc} fr # Once all assets are ready, use compare_fr instead
+        env:
+          MODERN: 0
+          COMPARE: 0 # Once all assets are ready, set to 1 instead
+          GAME_LANGUAGE: FRENCH
+        run: make -j${nproc}
 
       - name: French Modern
         env:
           MODERN: 1
           COMPARE: 0
-        run: make -j${nproc} modern_fr
+          GAME_LANGUAGE: FRENCH
+        run: make -j${nproc}
 
       - name: Italian Compare
-        run: make -j${nproc} it # Once all assets are ready, use compare_it instead
+        env:
+          MODERN: 0
+          COMPARE: 0 # Once all assets are ready, set to 1 instead
+          GAME_LANGUAGE: ITALIAN
+        run: make -j${nproc}
 
       - name: Italian Modern
         env:
           MODERN: 1
           COMPARE: 0
-        run: make -j${nproc} modern_it
+          GAME_LANGUAGE: ITALIAN
+        run: make -j${nproc}
 
       - name: Move symfiles
         if: ${{ github.event_name == 'push' }}
