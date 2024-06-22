@@ -48,7 +48,7 @@ SINGLE_BATTLE_TEST("Pixilate turns a normal type move into Fairy")
         PLAYER(SPECIES_DRAGONITE);
         OPPONENT(SPECIES_ALTARIA) { Item(ITEM_ALTARIANITE); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_TACKLE, megaEvolve: TRUE); }
+        TURN { MOVE(opponent, MOVE_TACKLE, gimmick: GIMMICK_MEGA); }
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
@@ -62,9 +62,8 @@ SINGLE_BATTLE_TEST("Refrigerate turns a normal type move into Ice")
         PLAYER(SPECIES_MEGANIUM);
         OPPONENT(SPECIES_AMAURA) { Ability(ABILITY_REFRIGERATE); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_TACKLE, megaEvolve: TRUE); }
+        TURN { MOVE(opponent, MOVE_TACKLE); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
         MESSAGE("It's super effective!");
     }
@@ -76,7 +75,7 @@ SINGLE_BATTLE_TEST("Aerilate turns a normal type move into Flying")
         PLAYER(SPECIES_MEGANIUM);
         OPPONENT(SPECIES_SALAMENCE) { Item(ITEM_SALAMENCITE); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_TACKLE, megaEvolve: TRUE); }
+        TURN { MOVE(opponent, MOVE_TACKLE, gimmick: GIMMICK_MEGA); }
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);

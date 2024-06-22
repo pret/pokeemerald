@@ -52,7 +52,7 @@
             .isShiny = TRUE,
 #line 18
             .dynamaxLevel = 5,
-            .shouldDynamax = TRUE,
+            .useGimmick = GIMMICK_DYNAMAX,
             .moves = {
 #line 19
                 MOVE_AIR_SLASH,

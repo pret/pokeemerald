@@ -6557,8 +6557,8 @@ static void ReloadBattlerSprites(u32 battler, struct Pokemon *party)
     BattleLoadMonSpriteGfx(mon, battler);
     CreateBattlerSprite(battler);
     UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], mon, HEALTHBOX_ALL);
-    // If battler is mega evolved / primal reversed, hide the sprite until the move animation finishes.
-    MegaIndicator_SetVisibilities(gHealthboxSpriteIds[battler], TRUE);
+    // If battler has an indicator for a gimmick, hide the sprite until the move animation finishes.
+    UpdateIndicatorVisibilityAndType(gHealthboxSpriteIds[battler], TRUE);
     
     // Try to recreate shadow sprite
     if (gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteId < MAX_SPRITES)

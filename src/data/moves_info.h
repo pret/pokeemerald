@@ -21106,9 +21106,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     },
     [MOVE_GUARDIAN_OF_ALOLA] =
     {
-        .name = COMPOUND_STRING("Guardian Of Alola"),
+        .name = COMPOUND_STRING("Guardian of Alola"),
         .description = sNullDescription,
-        .effect = EFFECT_SUPER_FANG,
+        .effect = EFFECT_GUARDIAN_OF_ALOLA,
         .power = 1,
         .type = TYPE_FAIRY,
         .accuracy = 0,
@@ -21152,7 +21152,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Light That Burns The Sky"),
         .description = sNullDescription,
-        .effect = EFFECT_HIT,
+        .effect = EFFECT_PHOTON_GEYSER,
         .power = 200,
         .type = TYPE_PSYCHIC,
         .accuracy = 0,

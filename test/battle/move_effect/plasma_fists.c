@@ -53,7 +53,7 @@ SINGLE_BATTLE_TEST("Plasma Fists type-changing effect is applied after Pixilate"
         PLAYER(SPECIES_KRABBY) { Speed(300); };
         OPPONENT(SPECIES_ALTARIA) { Speed(1); Item(ITEM_ALTARIANITE); }
     } WHEN {
-        TURN { MOVE(player, MOVE_PLASMA_FISTS); MOVE(opponent, MOVE_EMBER, megaEvolve: TRUE); }
+        TURN { MOVE(player, MOVE_PLASMA_FISTS); MOVE(opponent, MOVE_EMBER, gimmick: GIMMICK_MEGA); }
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, opponent);
         MESSAGE("Krabby used Plasma Fists!");
@@ -88,7 +88,7 @@ SINGLE_BATTLE_TEST("Plasma Fists turns normal type dynamax-moves into electric t
         PLAYER(SPECIES_KRABBY) { Speed(100); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(1); }
     } WHEN {
-        TURN { MOVE(player, MOVE_PLASMA_FISTS); MOVE(opponent, MOVE_TACKLE, dynamax: TRUE); }
+        TURN { MOVE(player, MOVE_PLASMA_FISTS); MOVE(opponent, MOVE_TACKLE, gimmick: GIMMICK_DYNAMAX); }
     } SCENE {
         MESSAGE("Krabby used Plasma Fists!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PLASMA_FISTS, player);

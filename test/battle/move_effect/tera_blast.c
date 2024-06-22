@@ -13,7 +13,7 @@ SINGLE_BATTLE_TEST("Tera Blast changes from Normal-type to the user's Tera Type"
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_DARK); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_TERA_BLAST, tera: TRUE); }
+        TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: GIMMICK_TERA); }
     } SCENE {
         MESSAGE("Wobbuffet used Tera Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);
@@ -63,7 +63,7 @@ SINGLE_BATTLE_TEST("Tera Blast has correct effectiveness for every Tera Type")
         PLAYER(SPECIES_WOBBUFFET) { TeraType(type); }
         OPPONENT(species);
     } WHEN {
-        TURN { MOVE(player, MOVE_TERA_BLAST, tera: TRUE); }
+        TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: GIMMICK_TERA); }
     } SCENE {
         if (species == SPECIES_GASTLY && type == TYPE_NORMAL)
             MESSAGE("It doesn't affect Foe Gastly…");
@@ -75,13 +75,13 @@ SINGLE_BATTLE_TEST("Tera Blast has correct effectiveness for every Tera Type")
 SINGLE_BATTLE_TEST("Tera Blast becomes a physical move if the user is Terastallized and has a higher Attack stat", s16 damage)
 {
     bool32 tera;
-    PARAMETRIZE { tera = FALSE; }
-    PARAMETRIZE { tera = TRUE; }
+    PARAMETRIZE { tera = GIMMICK_NONE; }
+    PARAMETRIZE { tera = GIMMICK_TERA; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_NORMAL); Attack(100); SpAttack(50); }
         OPPONENT(SPECIES_WOBBUFFET) { Defense(200); SpDefense(200); }
     } WHEN {
-        TURN { MOVE(player, MOVE_TERA_BLAST, tera: tera); }
+        TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: tera); }
     } SCENE {
         MESSAGE("Wobbuffet used Tera Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);
@@ -100,7 +100,7 @@ SINGLE_BATTLE_TEST("Stellar-type Tera Blast lowers both offensive stats")
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_STELLAR); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_TERA_BLAST, tera: TRUE); }
+        TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: GIMMICK_TERA); }
     } SCENE {
         MESSAGE("Wobbuffet used Tera Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);
@@ -119,7 +119,7 @@ SINGLE_BATTLE_TEST("Stellar-type Tera Blast has 100 BP and a one-time 1.2x boost
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_TERA_BLAST); MOVE(opponent, MOVE_RECOVER); }
-        TURN { MOVE(player, MOVE_TERA_BLAST, tera: TRUE); }
+        TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: GIMMICK_TERA); }
         TURN { MOVE(player, MOVE_WORK_UP); }
         TURN { MOVE(player, MOVE_TERA_BLAST); }
     } SCENE {
@@ -149,7 +149,7 @@ SINGLE_BATTLE_TEST("Stellar-type Tera Blast is super-effective on Stellar-type P
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_STELLAR); }
         OPPONENT(SPECIES_WOBBUFFET) { TeraType(TYPE_STELLAR); }
     } WHEN {
-        TURN { MOVE(player, MOVE_TERA_BLAST, tera: TRUE); MOVE(opponent, MOVE_CELEBRATE, tera: TRUE); }
+        TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
     } SCENE {
         MESSAGE("Wobbuffet used Tera Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);
@@ -163,7 +163,7 @@ SINGLE_BATTLE_TEST("Stellar-type Tera Blast activates a Stellar-type Pokemon's W
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_STELLAR); }
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_WEAKNESS_POLICY); TeraType(TYPE_NORMAL); }
     } WHEN {
-        TURN { MOVE(player, MOVE_TERA_BLAST, tera: TRUE); MOVE(opponent, MOVE_CELEBRATE, tera: TRUE); }
+        TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
     } SCENE {
         MESSAGE("Wobbuffet used Tera Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);
@@ -178,7 +178,7 @@ SINGLE_BATTLE_TEST("Flying-type Tera Blast does not have its priority boosted by
         PLAYER(SPECIES_TALONFLAME) { Ability(ABILITY_GALE_WINGS); TeraType(TYPE_FLYING); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_TERA_BLAST, tera: TRUE); MOVE(opponent, MOVE_QUICK_ATTACK); }
+        TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_QUICK_ATTACK); }
     } SCENE {
         MESSAGE("Foe Wobbuffet used Quick Attack!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, opponent);

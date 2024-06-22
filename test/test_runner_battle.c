@@ -3,6 +3,8 @@
 #include "battle_ai_util.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
+#include "battle_gimmick.h"
+#include "battle_z_move.h"
 #include "characters.h"
 #include "event_data.h"
 #include "fieldmap.h"
@@ -2101,17 +2103,31 @@ void MoveGetIdAndSlot(s32 battlerId, struct MoveContext *ctx, u32 *moveId, u32 *
         INVALID("No move or moveSlot");
     }
 
-    if (ctx->explicitMegaEvolve && ctx->megaEvolve)
-        *moveSlot |= RET_MEGA_EVOLUTION;
+    if (ctx->explicitGimmick && ctx->gimmick != GIMMICK_NONE)
+    {
+        u32 item = GetMonData(mon, MON_DATA_HELD_ITEM);
+        u32 holdEffect = ItemId_GetHoldEffect(item);
+        u32 species = GetMonData(mon, MON_DATA_SPECIES);
+        u32 side = GetBattlerSide(battlerId);
 
-    if (ctx->explicitUltraBurst && ctx->ultraBurst)
-        *moveSlot |= RET_ULTRA_BURST;
+        // Check invalid item usage.
+        INVALID_IF(ctx->gimmick == GIMMICK_MEGA && holdEffect != HOLD_EFFECT_MEGA_STONE && species != SPECIES_RAYQUAZA, "Cannot Mega Evolve without a Mega Stone");
+        INVALID_IF(ctx->gimmick == GIMMICK_Z_MOVE && holdEffect != HOLD_EFFECT_Z_CRYSTAL, "Cannot use a Z-Move without a Z-Crystal");
+        INVALID_IF(ctx->gimmick == GIMMICK_Z_MOVE && ItemId_GetSecondaryId(item) != gMovesInfo[*moveId].type
+                   && GetSignatureZMove(*moveId, species, item) == MOVE_NONE
+                   && *moveId != MOVE_PHOTON_GEYSER, // exception because test won't recognize Ultra Necrozma pre-Burst
+                   "Cannot turn %S into a Z-Move with %S", GetMoveName(ctx->move), ItemId_GetName(item));
+        INVALID_IF(ctx->gimmick != GIMMICK_MEGA && holdEffect == HOLD_EFFECT_MEGA_STONE, "Cannot use another gimmick while holding a Mega Stone");
+        INVALID_IF(ctx->gimmick != GIMMICK_Z_MOVE && ctx->gimmick != GIMMICK_ULTRA_BURST && holdEffect == HOLD_EFFECT_Z_CRYSTAL, "Cannot use another gimmick while holding a Z-Crystal");
 
-    if (ctx->explicitDynamax && ctx->dynamax)
-        *moveSlot |= RET_DYNAMAX;
-    
-    if (ctx->explicitTera && ctx->tera)
-        *moveSlot |= RET_TERASTAL;
+        // Check multiple gimmick use.
+        INVALID_IF(DATA.chosenGimmick[side][DATA.currentMonIndexes[battlerId]] != GIMMICK_NONE
+                   && !(DATA.chosenGimmick[side][DATA.currentMonIndexes[battlerId]] == GIMMICK_ULTRA_BURST
+                   && ctx->gimmick == GIMMICK_Z_MOVE), "Cannot use multiple gimmicks on the same battler");
+
+        DATA.chosenGimmick[side][DATA.currentMonIndexes[battlerId]] = ctx->gimmick;
+        *moveSlot |= RET_GIMMICK;
+    }
 }
 
 void Move(u32 sourceLine, struct BattlePokemon *battler, struct MoveContext ctx)
@@ -2673,6 +2689,11 @@ void ValidateFinally(u32 sourceLine)
 u32 TestRunner_Battle_GetForcedAbility(u32 side, u32 partyIndex)
 {
     return DATA.forcedAbilities[side][partyIndex];
+}
+
+u32 TestRunner_Battle_GetChosenGimmick(u32 side, u32 partyIndex)
+{
+    return DATA.chosenGimmick[side][partyIndex];
 }
 
 // TODO: Consider storing the last successful i and searching from i+1

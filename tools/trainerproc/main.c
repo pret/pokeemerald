@@ -1824,16 +1824,15 @@ static void fprint_trainers(const char *output_path, FILE *f, struct Parsed *par
 
             if (pokemon->dynamax_level_line || pokemon->gigantamax_factor_line)
             {
-                fprintf(f, "            .shouldDynamax = TRUE,\n");
+                fprintf(f, "            .useGimmick = GIMMICK_DYNAMAX,\n");
             }
-
-            if (pokemon->tera_type_line)
+            else if (pokemon->tera_type_line)
             {
                 fprintf(f, "#line %d\n", pokemon->tera_type_line);
                 fprintf(f, "            .teraType = ");
                 fprint_constant(f, "TYPE", pokemon->tera_type);
                 fprintf(f, ",\n");
-                fprintf(f, "            .shouldTerastal = TRUE,\n");
+                fprintf(f, "            .useGimmick = GIMMICK_TERA,\n");
             }
 
             if (pokemon->moves_n > 0)

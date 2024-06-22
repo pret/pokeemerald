@@ -196,6 +196,8 @@ s32 GetStealthHazardDamage(u8 hazardType, u32 battler);
 s32 GetStealthHazardDamageByTypesAndHP(u8 hazardType, u8 type1, u8 type2, u32 maxHp);
 bool32 CanMegaEvolve(u32 battler);
 bool32 CanUltraBurst(u32 battler);
+void ActivateMegaEvolution(u32 battler);
+void ActivateUltraBurst(u32 battler);
 bool32 IsBattlerMegaEvolved(u32 battler);
 bool32 IsBattlerPrimalReverted(u32 battler);
 bool32 IsBattlerUltraBursted(u32 battler);
