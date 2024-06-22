@@ -318,16 +318,46 @@ $(TILESETGFXDIR)/secondary/mystery_events_house/tiles.4bpp: %.4bpp: %.png
 $(FONTGFXDIR)/small.latfont: $(FONTGFXDIR)/latin_small.png
 	$(GFX) $< $@
 
+$(FONTGFXDIR)/fr/small.latfont: $(FONTGFXDIR)/fr/latin_small.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/it/small.latfont: $(FONTGFXDIR)/it/latin_small.png
+	$(GFX) $< $@
+
 $(FONTGFXDIR)/normal.latfont: $(FONTGFXDIR)/latin_normal.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/fr/normal.latfont: $(FONTGFXDIR)/fr/latin_normal.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/it/normal.latfont: $(FONTGFXDIR)/it/latin_normal.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/short.latfont: $(FONTGFXDIR)/latin_short.png
 	$(GFX) $< $@
 
+$(FONTGFXDIR)/fr/short.latfont: $(FONTGFXDIR)/fr/latin_short.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/it/short.latfont: $(FONTGFXDIR)/it/latin_short.png
+	$(GFX) $< $@
+
 $(FONTGFXDIR)/narrow.latfont: $(FONTGFXDIR)/latin_narrow.png
 	$(GFX) $< $@
 
+$(FONTGFXDIR)/fr/narrow.latfont: $(FONTGFXDIR)/fr/latin_narrow.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/it/narrow.latfont: $(FONTGFXDIR)/it/latin_narrow.png
+	$(GFX) $< $@
+
 $(FONTGFXDIR)/small_narrow.latfont: $(FONTGFXDIR)/latin_small_narrow.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/fr/small_narrow.latfont: $(FONTGFXDIR)/fr/latin_small_narrow.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/it/small_narrow.latfont: $(FONTGFXDIR)/it/latin_small_narrow.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/small.hwjpnfont: $(FONTGFXDIR)/japanese_small.png
