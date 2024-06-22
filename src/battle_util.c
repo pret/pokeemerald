@@ -6205,6 +6205,7 @@ u32 GetBattlerAbility(u32 battler)
     if (((IsMoldBreakerTypeAbility(gBattleMons[gBattlerAttacker].ability)
             && !(gStatuses3[gBattlerAttacker] & STATUS3_GASTRO_ACID))
             || gMovesInfo[gCurrentMove].ignoresTargetAbility)
+            && battler != gBattlerAttacker
             && gAbilitiesInfo[gBattleMons[battler].ability].breakable
             && noAbilityShield
             && gBattlerByTurnOrder[gCurrentTurnActionNumber] == gBattlerAttacker
