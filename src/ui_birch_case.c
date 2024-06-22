@@ -199,7 +199,7 @@ static void GenerateRandomSpeciesForCase(void)
                 rerollMon = FALSE;
                 if (FlagGet(FLAG_NO_LEGENDARIES)) //reroll in case any legendaries, mythics or ultra beasts are determined
                 {
-                    while (((IsSpeciesLegendary(species) || IsSpeciesMythical(species) || IsSpeciesUltraBeast(species) || IsSpeciesParadoxMon(species)) || species > GetMaxNumberOfSpecies()) && counter < 10)
+                    while (((IsSpeciesLegendary(species) || IsSpeciesMythical(species) || IsSpeciesUltraBeast(species) || IsSpeciesParadoxMon(species))) && counter < 10)
                     {
                         species = GetRandomSpeciesFlattenedCurve();
                         counter++;
