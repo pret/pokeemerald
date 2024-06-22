@@ -23,15 +23,15 @@ EverGrandeCity_EventScript_SetVisitedEverGrande::
 	setvar VAR_TEMP_1, 1
 	end
 
-EverGrandeCity_Text_EnteringVictoryRoad:
-	.string "ENTERING VICTORY ROAD$"
-
-EverGrandeCity_Text_EnteringPokemonLeague:
-	.string "ENTERING POKéMON LEAGUE\n"
-	.string "CENTER GATE$"
-
-EverGrandeCity_Text_CitySign:
-	.string "EVER GRANDE CITY\p"
-	.string "“The paradise of flowers, the sea,\n"
-	.string "and POKéMON.”$"
+.ifdef ENGLISH
+	.include "data/maps/EverGrandeCity/text.inc"
+.else
+.ifdef FRENCH
+	.include "data/maps/EverGrandeCity/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/EverGrandeCity/text_it.inc"
+.endif
+.endif
+.endif
 
