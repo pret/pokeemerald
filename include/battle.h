@@ -662,7 +662,11 @@ struct BattleStruct
     u16 abilityPreventingSwitchout;
     u8 hpScale;
     u16 synchronizeMoveEffect;
-    bool8 anyMonHasTransformed;
+    u8 anyMonHasTransformed:1; // Only used in battle_tv.c
+    u8 multipleSwitchInBattlers:4; // One bit per battler
+    u8 multipleSwitchInState:2;
+    u8 multipleSwitchInCursor:3;
+    u8 multipleSwitchInSortedBattlers[MAX_BATTLERS_COUNT];
     void (*savedCallback)(void);
     u16 usedHeldItems[PARTY_SIZE][NUM_BATTLE_SIDES]; // For each party member and side. For harvest, recycle
     u16 chosenItem[MAX_BATTLERS_COUNT];

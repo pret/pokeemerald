@@ -59,7 +59,6 @@ SINGLE_BATTLE_TEST("Intimidate (opponent) lowers player's attack after KO", s16 
 
 DOUBLE_BATTLE_TEST("Intimidate doesn't activate on an empty field in a double battle")
 {
-    KNOWN_FAILING;
     GIVEN {
         ASSUME(gMovesInfo[MOVE_EXPLOSION].effect == EFFECT_EXPLOSION);
         PLAYER(SPECIES_WOBBUFFET);

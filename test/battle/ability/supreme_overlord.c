@@ -94,7 +94,6 @@ SINGLE_BATTLE_TEST("Supreme Overlord does not boost attack if party members are 
 
 SINGLE_BATTLE_TEST("Supreme Overlord's message displays correctly after all battlers fainted - Player")
 {
-    KNOWN_FAILING; // Explosion causes the ability to wait
     GIVEN {
         ASSUME(gMovesInfo[MOVE_EXPLOSION].effect == EFFECT_EXPLOSION);
         PLAYER(SPECIES_WOBBUFFET) { HP(1);}

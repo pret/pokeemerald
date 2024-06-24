@@ -32,7 +32,6 @@ SINGLE_BATTLE_TEST("Sword of Ruin reduces Defense if opposing mon's ability does
 
 SINGLE_BATTLE_TEST("Sword of Ruin's message displays correctly after all battlers fainted - Player")
 {
-    KNOWN_FAILING; // Explosion causes the ability to wait
     GIVEN {
         ASSUME(gMovesInfo[MOVE_EXPLOSION].effect == EFFECT_EXPLOSION);
         PLAYER(SPECIES_WOBBUFFET) { HP(1);}

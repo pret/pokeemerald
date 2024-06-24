@@ -63,8 +63,6 @@ SINGLE_BATTLE_TEST("Switch-in abilities trigger in Speed Order after post-KO swi
 {
     u32 spdPlayer, spdOpponent;
 
-    KNOWN_FAILING;
-
     PARAMETRIZE { spdPlayer = 5; spdOpponent = 1; }
     PARAMETRIZE { spdOpponent = 5; spdPlayer = 1; }
 
@@ -91,8 +89,6 @@ SINGLE_BATTLE_TEST("Switch-in abilities trigger in Speed Order after post-KO swi
 DOUBLE_BATTLE_TEST("Switch-in abilities trigger in Speed Order after post-KO switch - Double Battle")
 {
     u32 spdPlayer1, spdPlayer2, spdOpponent1, spdOpponent2;
-
-    KNOWN_FAILING;
 
     PARAMETRIZE { spdPlayer1 = 5; spdPlayer2 = 4; spdOpponent1 = 3; spdOpponent2 = 2; }
     PARAMETRIZE { spdPlayer1 = 2; spdPlayer2 = 3; spdOpponent1 = 4; spdOpponent2 = 5; }

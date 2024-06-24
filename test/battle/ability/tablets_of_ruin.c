@@ -32,7 +32,6 @@ SINGLE_BATTLE_TEST("Tablets of Ruin reduces Attack if opposing mon's ability doe
 
 SINGLE_BATTLE_TEST("Tablets of Ruin's message displays correctly after all battlers fainted - Player")
 {
-    KNOWN_FAILING; // Explosion causes the ability to wait
     GIVEN {
         ASSUME(gMovesInfo[MOVE_EXPLOSION].effect == EFFECT_EXPLOSION);
         PLAYER(SPECIES_WOBBUFFET) { HP(1);}

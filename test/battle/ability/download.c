@@ -56,7 +56,7 @@ SINGLE_BATTLE_TEST("Download raises Sp.Attack if enemy has lower Sp. Def than De
 SINGLE_BATTLE_TEST("Download doesn't activate if target hasn't been sent out yet", s16 damagePhysical, s16 damageSpecial)
 {
     u32 ability;
-    KNOWN_FAILING;
+
     PARAMETRIZE { ability = ABILITY_TRACE; }
     PARAMETRIZE { ability = ABILITY_DOWNLOAD; }
     GIVEN {

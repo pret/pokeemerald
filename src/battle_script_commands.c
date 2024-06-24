@@ -4633,7 +4633,7 @@ bool32 NoAliveMonsForEitherParty(void)
     return (NoAliveMonsForPlayer() || NoAliveMonsForOpponent());
 }
 
-// For battles that aren't BATTLE_TYPE_LINK or BATTLE_TYPE_RECORDED_LINK or double trainer battles, the only thing this
+// For battles that aren't BATTLE_TYPE_LINK or BATTLE_TYPE_RECORDED_LINK or trainer battles, the only thing this
 // command does is check whether the player has won/lost by totaling each team's HP. It then
 // sets gBattleOutcome accordingly, if necessary.
 static void Cmd_checkteamslost(void)
@@ -4650,15 +4650,11 @@ static void Cmd_checkteamslost(void)
         gBattleOutcome |= B_OUTCOME_WON;
 
     // Fair switching - everyone has to switch in most at the same time, without knowing which pokemon the other trainer selected.
-    // In vanilla Emerald this was only used for link battles, in expansion it's also used for regular trainers in double battles.
+    // In vanilla Emerald this was only used for link battles, in expansion it's also used for regular trainer battles.
     // For battles that haven't ended, count number of empty battler spots
     // In multi battles, jump to pointer if more than 1 spot empty
     // In non-multi battles, jump to pointer if 1 spot is missing on both sides
-    if (gBattleOutcome == 0
-        && (((gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
-              || ((gBattleTypeFlags & BATTLE_TYPE_TRAINER) && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-            )
-        )
+    if (gBattleOutcome == 0 && (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_TRAINER)))
     {
         s32 i, emptyPlayerSpots, emptyOpponentSpots;
 
@@ -7148,13 +7144,8 @@ bool32 DoSwitchInAbilities(u32 battler)
          || AbilityBattleEffects(ABILITYEFFECT_TRACE2, 0, 0, 0, 0));
 }
 
-static void Cmd_switchineffects(void)
+static void UpdateSentMonFlags(u32 battler)
 {
-    CMD_ARGS(u8 battler);
-
-    s32 i;
-    u32 battler = GetBattlerForBattleScript(cmd->battler);
-
     UpdateSentPokesToOpponentValue(battler);
 
     gHitMarker &= ~HITMARKER_FAINTED(battler);
@@ -7162,7 +7153,11 @@ static void Cmd_switchineffects(void)
 
     if (!BattlerHasAi(battler))
         gBattleStruct->appearedInBattle |= gBitTable[gBattlerPartyIndexes[battler]];
+}
 
+static bool32 DoSwitchInEffectsForBattler(u32 battler)
+{
+    u32 i;
     // Neutralizing Gas announces itself before hazards
     if (gBattleMons[battler].ability == ABILITY_NEUTRALIZING_GAS && gSpecialStatuses[battler].announceNeutralizingGas == 0)
     {
@@ -7280,7 +7275,7 @@ static void Cmd_switchineffects(void)
         BattleScriptPushCursor();
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_Z_HP_TRAP;
         gBattlescriptCurrInstr = BattleScript_HealReplacementZMove;
-        return;
+        return TRUE;
     }
     else
     {
@@ -7295,9 +7290,9 @@ static void Cmd_switchineffects(void)
         gDisableStructs[battler].truantSwitchInHack = 0;
 
         if (DoSwitchInAbilities(battler) || ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, battler, FALSE))
-            return;
+            return TRUE;
         else if (AbilityBattleEffects(ABILITYEFFECT_OPPORTUNIST, battler, 0, 0, 0))
-            return;
+            return TRUE;
 
         gDisableStructs[battler].stickyWebDone = FALSE;
         gDisableStructs[battler].spikesDone = FALSE;
@@ -7313,22 +7308,68 @@ static void Cmd_switchineffects(void)
             gBattleStruct->hpOnSwitchout[GetBattlerSide(i)] = gBattleMons[i].hp;
         }
 
-        if (cmd->battler == BS_FAINTED_MULTIPLE_1)
-        {
-            u32 hitmarkerFaintBits = gHitMarker >> 28;
-
-            gBattlerFainted++;
-            while (1)
-            {
-                if (hitmarkerFaintBits & gBitTable[gBattlerFainted] && !(gAbsentBattlerFlags & gBitTable[gBattlerFainted]))
-                    break;
-                if (gBattlerFainted >= gBattlersCount)
-                    break;
-                gBattlerFainted++;
-            }
-        }
         gBattleStruct->forcedSwitch &= ~(gBitTable[battler]);
+        return FALSE;
+    }
+
+    return TRUE; // Effect's script plays.
+}
+
+static void Cmd_switchineffects(void)
+{
+    CMD_ARGS(u8 battler);
+    u32 i, battler = GetBattlerForBattleScript(cmd->battler);
+
+    switch (cmd->battler)
+    {
+    // Multiple mons fainted and are being switched-in. Their abilities/hazards will play according to speed ties.
+    case BS_FAINTED_MULTIPLE_1: // Saves the battlers.
+        gBattleStruct->multipleSwitchInBattlers |= gBitTable[battler];
+        UpdateSentMonFlags(battler);
+
+        // Increment fainted battler.
+        do
+        {
+            gBattlerFainted++;
+            if (gBattlerFainted >= gBattlersCount)
+                break;
+            if (gHitMarker & HITMARKER_FAINTED(gBattlerFainted) && !(gAbsentBattlerFlags & gBitTable[gBattlerFainted]))
+                break;
+        } while (1);
+
         gBattlescriptCurrInstr = cmd->nextInstr;
+        return;
+    case BS_FAINTED_MULTIPLE_2: // Plays hazards/abilities.
+        switch (gBattleStruct->multipleSwitchInState)
+        {
+        case 0: // Sort battlers by speed
+            for (i = 0; i < gBattlersCount; i++)
+                gBattleStruct->multipleSwitchInSortedBattlers[i] = i;
+            SortBattlersBySpeed(gBattleStruct->multipleSwitchInSortedBattlers, FALSE);
+            gBattleStruct->multipleSwitchInState++;
+            gBattleStruct->multipleSwitchInCursor = 0;
+            // Loop through all available battlers
+        case 1:
+            for (; gBattleStruct->multipleSwitchInCursor < gBattlersCount; gBattleStruct->multipleSwitchInCursor++)
+            {
+                gBattlerFainted = gBattleStruct->multipleSwitchInSortedBattlers[gBattleStruct->multipleSwitchInCursor];
+                if (gBattleStruct->multipleSwitchInBattlers & gBitTable[gBattlerFainted])
+                {
+                    if (DoSwitchInEffectsForBattler(gBattlerFainted))
+                        return;
+                }
+            }
+            // All battlers done, end
+            gBattleStruct->multipleSwitchInBattlers = 0;
+            gBattleStruct->multipleSwitchInState = 0;
+            gBattlescriptCurrInstr = cmd->nextInstr;
+        }
+        break;
+    default:
+        UpdateSentMonFlags(battler);
+        if (!DoSwitchInEffectsForBattler(battler))
+            gBattlescriptCurrInstr = cmd->nextInstr;
+        break;
     }
 }
 

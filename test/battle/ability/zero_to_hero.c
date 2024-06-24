@@ -138,7 +138,6 @@ SINGLE_BATTLE_TEST("Imposter doesn't apply the heroic transformation message whe
 
 SINGLE_BATTLE_TEST("Zero to Hero's message displays correctly after all battlers fainted - Player")
 {
-    KNOWN_FAILING; // Explosion causes the ability to wait
     GIVEN {
         ASSUME(gMovesInfo[MOVE_EXPLOSION].effect == EFFECT_EXPLOSION);
         PLAYER(SPECIES_PALAFIN_ZERO);
