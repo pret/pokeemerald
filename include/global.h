@@ -139,6 +139,14 @@
 // It looks like file.c:line: size of array `id' is negative
 #define STATIC_ASSERT(expr, id) typedef char id[(expr) ? 1 : -1];
 
+#if ENGLISH
+#define LANGUAGE_STRING(_english, _french, _italian) _(_english)
+#elif FRENCH
+#define LANGUAGE_STRING(_english, _french, _italian) _(_french)
+#elif ITALIAN
+#define LANGUAGE_STRING(_english, _french, _italian) _(_italian)
+#endif
+
 struct Coords8
 {
     s8 x;
