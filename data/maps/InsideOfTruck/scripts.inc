@@ -51,8 +51,14 @@ InsideOfTruck_EventScript_MovingBox::
 	msgbox InsideOfTruck_Text_BoxPrintedWithMonLogo, MSGBOX_SIGN
 	end
 
-InsideOfTruck_Text_BoxPrintedWithMonLogo:
-	.string "The box is printed with a POKéMON logo.\p"
-	.string "It's a POKéMON brand moving and\n"
-	.string "delivery service.$"
-
+.ifdef ENGLISH
+	.include "data/maps/InsideOfTruck/text.inc"
+.else
+.ifdef FRENCH
+	.include "data/maps/InsideOfTruck/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/InsideOfTruck/text_it.inc"
+.endif
+.endif
+.endif
