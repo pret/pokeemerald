@@ -858,20 +858,12 @@
 #define TRAINER_LEAF                        852
 #define TRAINER_BRENDAN_PLACEHOLDER         853
 #define TRAINER_MAY_PLACEHOLDER             854
-#define TRAINER_RANDOM_BATTLE_4_OMNISCIENT  855
-#define TRAINER_RANDOM_BATTLE_5_OMNISCIENT  856
-#define TRAINER_RANDOM_BATTLE_6_OMNISCIENT  857
-#define TRAINER_RANDOM_BATTLE_7_OMNISCIENT  858
-#define TRAINER_RANDOM_BATTLE_0_OMNISCIENT  559
-#define TRAINER_RANDOM_BATTLE_1_OMNISCIENT  860
-#define TRAINER_RANDOM_BATTLE_2_OMNISCIENT  861
-#define TRAINER_RANDOM_BATTLE_3_OMNISCIENT  862
 
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is only space for 9 additional trainers before trainer flag space overflows
 //       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled
 //       MAX_TRAINERS_COUNT can be increased but will take up additional saveblock space
 
-#define TRAINERS_COUNT                      863
+#define TRAINERS_COUNT                      855
 #define MAX_TRAINERS_COUNT                  864
 #define TRAINER_PARTNER(partner)           (MAX_TRAINERS_COUNT + partner)
 

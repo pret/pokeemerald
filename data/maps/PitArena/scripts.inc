@@ -209,76 +209,37 @@ PitArena_EndGameStatue_Text3:
 	.string "Well, thanks for playing!$"
 
 PitArena_TrainerBattle::
-	goto_if_set FLAG_FLOOR_100, PitArena_TrainerBattle_Omniscient
 	trainerbattle_single TRAINER_RANDOM_BATTLE_0, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_TrainerBattleFinished
 	end
 
 PitArena_TrainerBattle1::
-	goto_if_set FLAG_FLOOR_100, PitArena_TrainerBattle1_Omniscient
 	trainerbattle_single TRAINER_RANDOM_BATTLE_1, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_TrainerBattleFinished
 	end
 
 PitArena_TrainerBattle2::
-	goto_if_set FLAG_FLOOR_100, PitArena_TrainerBattle2_Omniscient
 	trainerbattle_single TRAINER_RANDOM_BATTLE_2, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_TrainerBattleFinished
 	end
 
 PitArena_TrainerBattle3::
-	goto_if_set FLAG_FLOOR_100, PitArena_TrainerBattle3_Omniscient
 	trainerbattle_single TRAINER_RANDOM_BATTLE_3, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_TrainerBattleFinished
 	end
 
 PitArena_TrainerBattle4::
-	goto_if_set FLAG_FLOOR_100, PitArena_TrainerBattle4_Omniscient
 	trainerbattle_double TRAINER_RANDOM_BATTLE_4, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_Text_NotEnoughMons, PitArena_TrainerBattleFinished
 	end
 
 PitArena_TrainerBattle5::
-	goto_if_set FLAG_FLOOR_100, PitArena_TrainerBattle5_Omniscient
 	trainerbattle_double TRAINER_RANDOM_BATTLE_5, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_Text_NotEnoughMons, PitArena_TrainerBattleFinished
 	end
 
 PitArena_TrainerBattle6::
-	goto_if_set FLAG_FLOOR_100, PitArena_TrainerBattle6_Omniscient
 	trainerbattle_double TRAINER_RANDOM_BATTLE_6, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_Text_NotEnoughMons, PitArena_TrainerBattleFinished
 	end
 
 PitArena_TrainerBattle7::
-	goto_if_set FLAG_FLOOR_100, PitArena_TrainerBattle7_Omniscient
 	trainerbattle_double TRAINER_RANDOM_BATTLE_7, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_Text_NotEnoughMons, PitArena_TrainerBattleFinished
 	end
 
-PitArena_TrainerBattle_Omniscient::
-	trainerbattle_single TRAINER_RANDOM_BATTLE_0_OMNISCIENT, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_TrainerBattleFinished
-	end
-
-PitArena_TrainerBattle1_Omniscient::
-	trainerbattle_single TRAINER_RANDOM_BATTLE_1_OMNISCIENT, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_TrainerBattleFinished
-	end
-
-PitArena_TrainerBattle2_Omniscient::
-	trainerbattle_single TRAINER_RANDOM_BATTLE_2_OMNISCIENT, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_TrainerBattleFinished
-	end
-
-PitArena_TrainerBattle3_Omniscient::
-	trainerbattle_single TRAINER_RANDOM_BATTLE_3_OMNISCIENT, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_TrainerBattleFinished
-	end
-
-PitArena_TrainerBattle4_Omniscient::
-	trainerbattle_double TRAINER_RANDOM_BATTLE_4_OMNISCIENT, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_Text_NotEnoughMons, PitArena_TrainerBattleFinished
-	end
-
-PitArena_TrainerBattle5_Omniscient::
-	trainerbattle_double TRAINER_RANDOM_BATTLE_5_OMNISCIENT, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_Text_NotEnoughMons, PitArena_TrainerBattleFinished
-	end
-
-PitArena_TrainerBattle6_Omniscient::
-	trainerbattle_double TRAINER_RANDOM_BATTLE_6_OMNISCIENT, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_Text_NotEnoughMons, PitArena_TrainerBattleFinished
-	end
-
-PitArena_TrainerBattle7_Omniscient::
-	trainerbattle_double TRAINER_RANDOM_BATTLE_7_OMNISCIENT, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_Text_NotEnoughMons, PitArena_TrainerBattleFinished
-	end
 
 PitArena_Text_Intro:
 	.string ".$"

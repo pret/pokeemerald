@@ -175,6 +175,10 @@ static u32 GetAiFlags(u16 trainerId)
         flags |= AI_FLAG_DOUBLE_BATTLE;
     }
 
+    //add omniscient flag to trainers starting at floor 100
+    if(FlagGet(FLAG_FLOOR_100))
+        flags |= AI_FLAG_OMNISCIENT;
+
     // Automatically includes AI_FLAG_SMART_MON_CHOICES to improve smart switching
     if (flags & AI_FLAG_SMART_SWITCHING)
         flags |= AI_FLAG_SMART_MON_CHOICES;

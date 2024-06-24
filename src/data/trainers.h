@@ -6154,54 +6154,6 @@ const struct Trainer gTrainers[] = {
         .party = TRAINER_PARTY(sParty_RandomBattle),
     },
 
-    [TRAINER_RANDOM_BATTLE_4_OMNISCIENT] =
-    {
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS,
-        .trainerPic = TRAINER_PIC_HIKER,
-        .trainerName = _("Dummy Name"),
-        .items = {},
-        .doubleBattle = TRUE,
-        .aiFlags = AI_FLAG_OMNISCIENT | AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_STRONGEST_MOVE | AI_FLAG_HP_AWARE | AI_FLAG_WILL_SUICIDE | AI_FLAG_SMART_MON_CHOICES,
-        .party = TRAINER_PARTY(sParty_RandomBattle),
-    },
-
-    [TRAINER_RANDOM_BATTLE_5_OMNISCIENT] =
-    {
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS,
-        .trainerPic = TRAINER_PIC_HIKER,
-        .trainerName = _("Dummy Name"),
-        .items = {},
-        .doubleBattle = TRUE,
-        .aiFlags = AI_FLAG_OMNISCIENT | AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_STRONGEST_MOVE | AI_FLAG_HP_AWARE | AI_FLAG_WILL_SUICIDE | AI_FLAG_SMART_MON_CHOICES,
-        .party = TRAINER_PARTY(sParty_RandomBattle),
-    },
-
-    [TRAINER_RANDOM_BATTLE_6_OMNISCIENT] =
-    {
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS,
-        .trainerPic = TRAINER_PIC_HIKER,
-        .trainerName = _("Dummy Name"),
-        .items = {},
-        .doubleBattle = TRUE,
-        .aiFlags = AI_FLAG_OMNISCIENT | AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_STRONGEST_MOVE | AI_FLAG_HP_AWARE | AI_FLAG_WILL_SUICIDE | AI_FLAG_SMART_MON_CHOICES,
-        .party = TRAINER_PARTY(sParty_RandomBattle),
-    },
-
-    [TRAINER_RANDOM_BATTLE_7_OMNISCIENT] =
-    {
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS,
-        .trainerPic = TRAINER_PIC_HIKER,
-        .trainerName = _("Dummy Name"),
-        .items = {},
-        .doubleBattle = TRUE,
-        .aiFlags = AI_FLAG_OMNISCIENT | AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_STRONGEST_MOVE | AI_FLAG_HP_AWARE | AI_FLAG_WILL_SUICIDE | AI_FLAG_SMART_MON_CHOICES,
-        .party = TRAINER_PARTY(sParty_RandomBattle),
-    },
-
     [TRAINER_EDWIN_1] =
     {
         .trainerClass = TRAINER_CLASS_COLLECTOR,
@@ -6259,54 +6211,6 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_STRONGEST_MOVE | AI_FLAG_HP_AWARE | AI_FLAG_WILL_SUICIDE | AI_FLAG_SMART_MON_CHOICES,
-        .party = TRAINER_PARTY(sParty_RandomBattle),
-    },
-
-    [TRAINER_RANDOM_BATTLE_0_OMNISCIENT] =
-    {
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS,
-        .trainerPic = TRAINER_PIC_HIKER,
-        .trainerName = _("Dummy Name"),
-        .items = {},
-        .doubleBattle = FALSE,
-        .aiFlags = AI_FLAG_OMNISCIENT | AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_STRONGEST_MOVE | AI_FLAG_HP_AWARE | AI_FLAG_WILL_SUICIDE | AI_FLAG_SMART_MON_CHOICES,
-        .party = TRAINER_PARTY(sParty_RandomBattle),
-    },
-
-    [TRAINER_RANDOM_BATTLE_1_OMNISCIENT] =
-    {
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS,
-        .trainerPic = TRAINER_PIC_HIKER,
-        .trainerName = _("Dummy Name"),
-        .items = {},
-        .doubleBattle = FALSE,
-        .aiFlags = AI_FLAG_OMNISCIENT | AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_STRONGEST_MOVE | AI_FLAG_HP_AWARE | AI_FLAG_WILL_SUICIDE | AI_FLAG_SMART_MON_CHOICES,
-        .party = TRAINER_PARTY(sParty_RandomBattle),
-    },
-
-    [TRAINER_RANDOM_BATTLE_2_OMNISCIENT] =
-    {
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS,
-        .trainerPic = TRAINER_PIC_HIKER,
-        .trainerName = _("Dummy Name"),
-        .items = {},
-        .doubleBattle = FALSE,
-        .aiFlags = AI_FLAG_OMNISCIENT | AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_STRONGEST_MOVE | AI_FLAG_HP_AWARE | AI_FLAG_WILL_SUICIDE | AI_FLAG_SMART_MON_CHOICES,
-        .party = TRAINER_PARTY(sParty_RandomBattle),
-    },
-
-    [TRAINER_RANDOM_BATTLE_3_OMNISCIENT] =
-    {
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS,
-        .trainerPic = TRAINER_PIC_HIKER,
-        .trainerName = _("Dummy Name"),
-        .items = {},
-        .doubleBattle = FALSE,
-        .aiFlags = AI_FLAG_OMNISCIENT | AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_STRONGEST_MOVE | AI_FLAG_HP_AWARE | AI_FLAG_WILL_SUICIDE | AI_FLAG_SMART_MON_CHOICES,
         .party = TRAINER_PARTY(sParty_RandomBattle),
     },
 
