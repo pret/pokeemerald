@@ -1,4 +1,5 @@
 #include "global.h"
+#include "string_util.h"
 #include "test/test.h"
 #include "constants/form_change_types.h"
 
@@ -128,4 +129,19 @@ TEST("No species has two evolutions that use the evolution tracker")
     }
 
     EXPECT(evolutionTrackerEvolutions < 2);
+}
+
+extern const u8 gFallbackPokedexText[];
+
+TEST("Every species has a description")
+{
+    u32 i;
+    u32 species = SPECIES_NONE;
+    for (i = 1; i < NUM_SPECIES; i++)
+    {
+        if (IsSpeciesEnabled(i))
+            PARAMETRIZE { species = i; }
+    }
+
+    EXPECT_NE(StringCompare(GetSpeciesPokedexDescription(species), gFallbackPokedexText), 0);
 }
