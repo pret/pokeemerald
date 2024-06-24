@@ -87,7 +87,7 @@ void HasEnoughMonsForDoubleBattle(void)
     }
 }
 
-static bool8 CheckPartyMonHasHeldItem(u16 item)
+bool8 CheckPartyMonHasHeldItem(u16 item)
 {
     int i;
 

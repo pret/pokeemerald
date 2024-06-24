@@ -26,6 +26,7 @@
 #include "event_data.h"
 #include "bw_summary_screen.h"
 #include "config/decap.h"
+#include "script_pokemon_util.h"
 
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
@@ -1372,7 +1373,8 @@ u16 RandomItemId(u16 itemId)
 {
     u16 randomItemCategory = 0;
     bool8 rerollItem = FALSE;
-    int i, counter;
+    int i;
+    int counter = 0;
 
     do
     {    
@@ -1397,7 +1399,7 @@ u16 RandomItemId(u16 itemId)
         //check for reroll
         for (i = 0; i < RANDOM_ITEM_REROLL_COUNT; i++)
         {
-            if(itemId == sRandomItemsRerollCheck[i] && CheckBagHasItem(itemId, 1))
+            if(itemId == sRandomItemsRerollCheck[i] && (CheckBagHasItem(itemId, 1) || CheckPartyMonHasHeldItem(itemId)))
             {
                 DebugPrintf("rerollItem = TRUE, i=%d", i);
                 rerollItem = TRUE;
