@@ -257,6 +257,8 @@ static void GenerateRandomSpeciesForCase(void)
                 }
                 sRolledSpecies[index] = species;
             }
+            else
+                sRolledSpecies[index] = species;
         }
     }
     return;
