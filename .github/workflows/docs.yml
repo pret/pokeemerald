@@ -26,8 +26,18 @@ jobs:
         run: |
           cd docs
           mdbook build
+      - name: Check if Pages is enabled
+        uses: octokit/request-action@v2.x
+        id: check_pages
+        continue-on-error: true
+        with:
+          route: GET /repos/{repo}/pages
+          repo: ${{ github.repository }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Setup Pages
         uses: actions/configure-pages@v4
+        if: steps.check_pages.outcome == 'success'
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -35,3 +45,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        if: steps.check_pages.outcome == 'success'
