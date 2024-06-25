@@ -60,21 +60,14 @@ MirageTower_4F_EventScript_CollapseMirageTower::
 	release
 	end
 
-MirageTower_4F_Text_TakeRootFossil:
-	.string "You found the ROOT FOSSIL.\p"
-	.string "If this FOSSIL is taken, the ground\n"
-	.string "around it will likely crumble away…\p"
-	.string "Take the ROOT FOSSIL anyway?$"
-
-MirageTower_4F_Text_LeftRootFossilAlone:
-	.string "{PLAYER} left the ROOT FOSSIL alone.$"
-
-MirageTower_4F_Text_TakeClawFossil:
-	.string "You found the CLAW FOSSIL.\p"
-	.string "If this FOSSIL is taken, the ground\n"
-	.string "around it will likely crumble away…\p"
-	.string "Take the CLAW FOSSIL anyway?$"
-
-MirageTower_4F_Text_LeaveClawFossilAlone:
-	.string "{PLAYER} left the CLAW FOSSIL alone.$"
-
+.ifdef ENGLISH
+	.include "data/maps/MirageTower_4F/text.inc"
+.else
+.ifdef FRENCH
+	.include "data/maps/MirageTower_4F/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/MirageTower_4F/text_it.inc"
+.endif
+.endif
+.endif

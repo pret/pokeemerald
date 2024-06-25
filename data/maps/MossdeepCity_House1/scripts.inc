@@ -21,21 +21,14 @@ MossdeepCity_House1_EventScript_Woman::
 	msgbox MossdeepCity_House1_Text_HusbandCanTellPokeblockMonLikes, MSGBOX_NPC
 	end
 
-MossdeepCity_House1_Text_HmmYourPokemon:
-	.string "Hmm!\n"
-	.string "Your {STR_VAR_1}…$"
-
-MossdeepCity_House1_Text_ItLikesXPokeblocks:
-	.string "It likes {STR_VAR_1}S,\n"
-	.string "doesn't it?\p"
-	.string "No, I'm positive of it! It definitely\n"
-	.string "likes {STR_VAR_1}S!$"
-
-MossdeepCity_House1_Text_DoesntLikeOrDislikePokeblocks:
-	.string "It doesn't appear to like or dislike\n"
-	.string "any {POKEBLOCK}S.$"
-
-MossdeepCity_House1_Text_HusbandCanTellPokeblockMonLikes:
-	.string "My husband can tell what kind of\n"
-	.string "{POKEBLOCK}S a POKéMON likes at a glance.$"
-
+.ifdef ENGLISH
+	.include "data/maps/MossdeepCity_House1/text.inc"
+.else
+.ifdef FRENCH
+	.include "data/maps/MossdeepCity_House1/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/MossdeepCity_House1/text_it.inc"
+.endif
+.endif
+.endif
