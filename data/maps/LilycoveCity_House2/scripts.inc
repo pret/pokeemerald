@@ -18,12 +18,14 @@ LilycoveCity_House2_EventScript_ReceivedRest::
 	release
 	end
 
-LilycoveCity_House2_Text_NotAwakeYetHaveThis:
-	.string "Huh? What? What's that?\p"
-	.string "I'm not near awake yet…\n"
-	.string "You can have this…$"
-
-LilycoveCity_House2_Text_SleepIsEssential:
-	.string "Yawn…\p"
-	.string "Sleep is essential for good health…\n"
-	.string "Sleep and regain health…$"
+.ifdef ENGLISH
+	.include "data/maps/LilycoveCity_House2/text.inc"
+.else
+.ifdef FRENCH
+	.include "data/maps/LilycoveCity_House2/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/LilycoveCity_House2/text_it.inc"
+.endif
+.endif
+.endif
