@@ -199,7 +199,7 @@ static void GenerateRandomSpeciesForCase(void)
                 rerollMon = FALSE;
                 if (FlagGet(FLAG_NO_LEGENDARIES)) //reroll in case any legendaries, mythics or ultra beasts are determined
                 {
-                    while (((IsSpeciesLegendary(species) || IsSpeciesMythical(species) || IsSpeciesUltraBeast(species) || IsSpeciesParadoxMon(species)) || species > GetMaxNumberOfSpecies()) && counter < 10)
+                    while (((IsSpeciesLegendary(species) || IsSpeciesMythical(species) || IsSpeciesUltraBeast(species) || IsSpeciesParadoxMon(species))) && counter < 10)
                     {
                         species = GetRandomSpeciesFlattenedCurve();
                         counter++;
@@ -257,6 +257,8 @@ static void GenerateRandomSpeciesForCase(void)
                 }
                 sRolledSpecies[index] = species;
             }
+            else
+                sRolledSpecies[index] = species;
         }
     }
     return;
@@ -900,18 +902,18 @@ static void PrintTextToBottomBar(u8 textId)
     
 
     StringCopy(gStringVar1, &gText_NumberClear01[0]);
-    ConvertIntToDecimalStringN(gStringVar2, dexNum, STR_CONV_MODE_LEADING_ZEROS, 3);
+    ConvertIntToDecimalStringN(gStringVar2, dexNum, STR_CONV_MODE_LEADING_ZEROS, 4);
     StringAppend(gStringVar1, gStringVar2);
     AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x, 1 + 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar1);
 
-    AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x + 32, 1 + 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gText_Dash);
+    AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x + 38, 1 + 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gText_Dash);
 
 #ifdef POKEMON_EXPANSION
     StringCopy(&speciesNameArray[0], GetSpeciesName(species));
 #else
     StringCopy(&speciesNameArray[0], &gSpeciesNames[species][0]);
 #endif
-    AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x + 40, 1 + 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, &speciesNameArray[0]);
+    AddTextPrinterParameterized4(WINDOW_BOTTOM_BAR, FONT_NORMAL, x + 46, 1 + 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, &speciesNameArray[0]);
 
     if(textId != 2)
     {

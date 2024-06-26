@@ -489,6 +489,7 @@ static const u8 sText_YouMissedPkmn[] = _("You missed the POKéMON!");
 static const u8 sText_PkmnBrokeFree[] = _("Oh, no!\nThe POKéMON broke free!");
 static const u8 sText_ItAppearedCaught[] = _("Aww!\nIt appeared to be caught!");
 static const u8 sText_AarghAlmostHadIt[] = _("Aargh!\nAlmost had it!");
+static const u8 sText_ArchieAce[] = _("You have proven yourself worthy!\pBut I have one more trick\nup my sleeve.\pWelcome the GOD OF THE SEAS...\p");
 static const u8 sText_ShootSoClose[] = _("Shoot!\nIt was so close, too!");
 static const u8 sText_GotchaPkmnCaughtPlayer[] = _("Gotcha!\n{B_DEF_NAME} was caught!{WAIT_SE}{PLAY_BGM MUS_CAUGHT}\p");
 static const u8 sText_GotchaPkmnCaughtWally[] = _("Gotcha!\n{B_DEF_NAME} was caught!{WAIT_SE}{PLAY_BGM MUS_CAUGHT}{PAUSE 127}");
@@ -4323,6 +4324,16 @@ static const struct TrainerSlide sTrainerSlides[] =
         .msgDynamax = sText_TargetWokeUp,
     },
     */
+    {
+        .trainerId = TRAINER_ARCHIE_PIT_BOSS,
+        .isFrontierTrainer = FALSE,
+        .msgLastSwitchIn = sText_ArchieAce,
+    },
+    {
+        .trainerId = TRAINER_ARCHIE_PIT_BOSS_DOUBLES,
+        .isFrontierTrainer = FALSE,
+        .msgLastSwitchIn = sText_ArchieAce,
+    },
 };
 
 static u32 GetEnemyMonCount(u32 firstId, u32 lastId, bool32 onlyAlive)

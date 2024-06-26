@@ -955,7 +955,7 @@ static void GetItemName(u8 *dest, u16 itemId)
         else
         {
             // Get TM number
-            ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_TM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
+            ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_TM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 3);
             StringExpandPlaceholders(dest, gText_NumberItem_TMBerry);
         }
         break;
@@ -2174,7 +2174,7 @@ static void Task_ItemContext_Sell(u8 taskId)
     }
 }
 
-#define ITEM_SELL_FACTOR ((I_SELL_VALUE_FRACTION >= GEN_9) ? 4 : 2)
+#define ITEM_SELL_FACTOR 2
 
 static void DisplaySellItemPriceAndConfirm(u8 taskId)
 {

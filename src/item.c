@@ -26,6 +26,7 @@
 #include "event_data.h"
 #include "bw_summary_screen.h"
 #include "config/decap.h"
+#include "script_pokemon_util.h"
 
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
@@ -1097,14 +1098,6 @@ static const u16 sRandomConsumableValidItems[] =
     ITEM_ELIXIR,
     ITEM_MAX_ELIXIR,
     ITEM_RARE_CANDY,
-    ITEM_X_ATTACK,
-    ITEM_X_DEFENSE,
-    ITEM_X_SP_ATK,
-    ITEM_X_SP_DEF,
-    ITEM_X_SPEED,
-    ITEM_X_ACCURACY,
-    ITEM_DIRE_HIT,
-    ITEM_GUARD_SPEC,
 };
 
 #define RANDOM_X_ITEM_COUNT ARRAY_COUNT(sRandomXItems)
@@ -1380,7 +1373,8 @@ u16 RandomItemId(u16 itemId)
 {
     u16 randomItemCategory = 0;
     bool8 rerollItem = FALSE;
-    int i, counter;
+    int i;
+    int counter = 0;
 
     do
     {    
@@ -1391,7 +1385,7 @@ u16 RandomItemId(u16 itemId)
         else if (ItemId_GetPocket(itemId) != POCKET_KEY_ITEMS)
         {
             randomItemCategory = Random32() % 1000;
-            if(randomItemCategory < 50)
+            if(randomItemCategory < 100)
                 itemId = sRandomXItems[RandomModulo(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_X_ITEM_COUNT)];
             else if(randomItemCategory < 700)
                 itemId = sRandomConsumableValidItems[RandomModulo(itemId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x, RANDOM_CONSUMABLE_ITEM_COUNT)];
@@ -1405,8 +1399,11 @@ u16 RandomItemId(u16 itemId)
         //check for reroll
         for (i = 0; i < RANDOM_ITEM_REROLL_COUNT; i++)
         {
-            if(itemId == sRandomItemsRerollCheck[i] && CheckBagHasItem(sRandomItemsRerollCheck[i], 1))
+            if(itemId == sRandomItemsRerollCheck[i] && (CheckBagHasItem(itemId, 1) || CheckPartyMonHasHeldItem(itemId)))
+            {
+                DebugPrintf("rerollItem = TRUE, i=%d", i);
                 rerollItem = TRUE;
+            }
         }
         //exit in case of infinite loop
         if (counter >= 20)
@@ -1415,6 +1412,7 @@ u16 RandomItemId(u16 itemId)
     } while (rerollItem);
 
     VarSet(VAR_0x8006, itemId);
+    DebugPrintf("itemId = %d", itemId);
     return itemId;
 }
 

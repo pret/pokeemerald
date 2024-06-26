@@ -370,6 +370,10 @@ gText_wiz1989Approach::
     .string "If you're a streamer, your defeat\n"
     .string "will be great content!$"
 
+gText_OneTwoThreeApproach::
+    .string "One, two, three...\n"
+    .string "you are losing, not me!$"
+
 
 
 gText_TylerDefeat::

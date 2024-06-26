@@ -1516,6 +1516,7 @@ extern const u8 gText_HunterApproach[];
 extern const u8 gText_AinsleyApproach[];
 extern const u8 gText_GriffinApproach[];
 extern const u8 gText_wiz1989Approach[];
+extern const u8 gText_OneTwoThreeApproach[];
 extern const u8 gText_TylerDefeat[];
 extern const u8 gText_JuliaDefeat[];
 extern const u8 gText_AlexDefeat[];

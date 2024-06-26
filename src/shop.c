@@ -645,6 +645,8 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y)
 
         if (ItemId_GetImportance(itemId) && (CheckBagHasItem(itemId, 1) || CheckPCHasItem(itemId, 1)))
             StringCopy(gStringVar4, gText_SoldOut);
+        else if (ItemId_GetPrice(itemId) == 0)
+            StringCopy(gStringVar4, gText_SoldOut);
         else
             StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1);
         x = GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 120);
@@ -1006,6 +1008,8 @@ static void Task_BuyMenu(u8 taskId)
                 sShopData->totalCost = gDecorations[itemId].price;
 
             if (ItemId_GetImportance(itemId) && (CheckBagHasItem(itemId, 1) || CheckPCHasItem(itemId, 1)))
+                BuyMenuDisplayMessage(taskId, gText_ThatItemIsSoldOut, BuyMenuReturnToItemList);
+            else if (ItemId_GetPrice(itemId) == 0)
                 BuyMenuDisplayMessage(taskId, gText_ThatItemIsSoldOut, BuyMenuReturnToItemList);
             else if (!IsEnoughMoney(&gSaveBlock1Ptr->money, sShopData->totalCost))
             {

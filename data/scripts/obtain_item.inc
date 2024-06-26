@@ -139,18 +139,38 @@ Std_FindItem::
 	lock
 	faceplayer
 	waitse
+	message stext1
 	call Std_RandomItem
+	message stext2
 	copyvar VAR_0x8004, ITEMID
 	copyvar VAR_0x8005, AMOUNT
 	checkitemspace ITEMID, AMOUNT
+	message stext3
 	copyvar VAR_0x8007, VAR_RESULT
 	bufferitemnameplural STR_VAR_2, ITEMID, AMOUNT
 	checkitemtype ITEMID
+	message stext4
 	call EventScript_BufferPocketNameAndTryFanfare
+	message stext5
 	call_if_eq VAR_0x8007, TRUE, EventScript_PickUpItem
 	call_if_eq VAR_0x8007, FALSE, EventScript_NoRoomToPickUpItem
 	release
 	return
+
+stext1:
+	.string "Error obtain_item.1$"
+
+stext2:
+	.string "Error obtain_item.2$"
+
+stext3:
+	.string "Error obtain_item.3$"
+
+stext4:
+	.string "Error obtain_item.4$"
+
+stext5:
+	.string "Error obtain_item.5$"
 
 EventScript_PickUpItem::
 	removeobject VAR_LAST_TALKED

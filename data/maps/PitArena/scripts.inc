@@ -104,6 +104,7 @@ PitArena_WarpEnd::
 PitArena_Archie::
 	lockall
 	setflag FLAG_START_ARCHIE_BATTLE
+	setflag FLAG_FLOOR_100
 	special HealPlayerParty
 	goto_if_set FLAG_DOUBLES_MODE, PitArenaDoublesArchie
 	trainerbattle_single TRAINER_ARCHIE_PIT_BOSS, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_ArchieBattleFinished
@@ -239,6 +240,7 @@ PitArena_TrainerBattle7::
 	trainerbattle_double TRAINER_RANDOM_BATTLE_7, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_Text_NotEnoughMons, PitArena_TrainerBattleFinished
 	end
 
+
 PitArena_Text_Intro:
 	.string ".$"
 
@@ -367,13 +369,15 @@ PitArena_MoveRelearner::
 	lockall
 	faceplayer
 	showmoneybox 12, 11
+#ifndef PIT_GEN_9_MODE
 	dynmultichoice 17, 1, 0, 5, 0, DYN_MULTICHOICE_CB_NONE, PitArena_MoveRelearnerText, PitArena_EggMovesText, PitArena_TutorMovesText, PitArena_ShopNPC_Option8
+#else
+	dynmultichoice 17, 1, 0, 5, 0, DYN_MULTICHOICE_CB_NONE, PitArena_MoveRelearnerText, PitArena_EggMovesText, PitArena_ShopNPC_Option8
+#endif	
 	goto_if_eq VAR_RESULT, 0, PitArena_MartNPCMoveRelearner
 	goto_if_eq VAR_RESULT, 1, PitArena_MartNPCMoveTutorEggMoves
 #ifndef PIT_GEN_9_MODE
 	goto_if_eq VAR_RESULT, 2, PitArena_MartNPCMoveTutorTutorMoves
-#else
-	goto_if_eq VAR_RESULT, 2, PitArena_MartNPCMoveTutorStaticTutorMoves
 #endif
 EndOfRelearnerScript::
 	hidemoneybox
@@ -515,7 +519,7 @@ PitArena_ShopNPCHook::
 	dynmultichoice 17, 1, 0, 5, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitArena_ShopNPC_Option0, PitArena_ShopNPC_Option1, PitArena_ShopNPC_OptionVitamin, PitArena_ShopNPC_Option4, PitArena_ShopNPC_Option6, PitArena_ShopNPC_Option7, PitArena_ShopNPC_Option8
 #else
 	goto_if_unset FLAG_STAT_CHANGER, PitArena_ShopNPCHook_Gen9IVs
-	dynmultichoice 17, 1, 0, 5, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitArena_ShopNPC_Option0, PitArena_ShopNPC_Option1, PitArena_ShopNPC_OptionVitamin, PitArena_ShopNPC_Option2, PitArena_ShopNPC_Option3, PitArena_ShopNPC_Option4, PitArena_ShopNPC_Option5, PitArena_ShopNPC_Option6, PitArena_ShopNPC_Option7, PitArena_ShopNPC_Option8
+	dynmultichoice 17, 1, 0, 5, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitArena_ShopNPC_Option0, PitArena_ShopNPC_Option0_100, PitArena_ShopNPC_Option0_200, PitArena_ShopNPC_Option1, PitArena_ShopNPC_OptionVitamin, PitArena_ShopNPC_Option2, PitArena_ShopNPC_Option3, PitArena_ShopNPC_Option4, PitArena_ShopNPC_Option5, PitArena_ShopNPC_Option6, PitArena_ShopNPC_Option7, PitArena_ShopNPC_Option8
 #endif
 	closemessage
 	setflag FLAG_BUY_FROM_MART
@@ -534,14 +538,16 @@ PitArena_ShopNPCHook::
 	goto_if_eq VAR_RESULT, 5, PitArena_MartScript_Sell
 #else
 	goto_if_eq VAR_RESULT, 0, PitArena_MartScript_TMs
-	goto_if_eq VAR_RESULT, 1, PitArena_MartScript_EvoItems
-	goto_if_eq VAR_RESULT, 2, PitArena_MartScript_Vitamins
-	goto_if_eq VAR_RESULT, 3, PitArena_MartScript_MegaStones
-	goto_if_eq VAR_RESULT, 4, PitArena_MartScript_Mints
-	goto_if_eq VAR_RESULT, 5, PitArena_MartScript_Gems
-	goto_if_eq VAR_RESULT, 6, PitArena_MartScript_ZCrystals
-	goto_if_eq VAR_RESULT, 7, PitArena_MartScript_FormItems
-	goto_if_eq VAR_RESULT, 8, PitArena_MartScript_Sell
+	goto_if_eq VAR_RESULT, 1, PitArena_MartScript_TMs_100
+	goto_if_eq VAR_RESULT, 2, PitArena_MartScript_TMs_200
+	goto_if_eq VAR_RESULT, 3, PitArena_MartScript_EvoItems
+	goto_if_eq VAR_RESULT, 4, PitArena_MartScript_Vitamins
+	goto_if_eq VAR_RESULT, 5, PitArena_MartScript_MegaStones
+	goto_if_eq VAR_RESULT, 6, PitArena_MartScript_Mints
+	goto_if_eq VAR_RESULT, 7, PitArena_MartScript_Gems
+	goto_if_eq VAR_RESULT, 8, PitArena_MartScript_ZCrystals
+	goto_if_eq VAR_RESULT, 9, PitArena_MartScript_FormItems
+	goto_if_eq VAR_RESULT, 10, PitArena_MartScript_Sell
 #endif
 EndOfMartScript::
 	clearflag FLAG_SELL_FROM_MART
@@ -550,20 +556,22 @@ EndOfMartScript::
 	end
 
 PitArena_ShopNPCHook_Gen9IVs::
-	dynmultichoice 17, 1, 0, 5, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitArena_ShopNPC_Option0, PitArena_ShopNPC_Option1, PitArena_ShopNPC_OptionVitamin, PitArena_ShopNPC_Option2, PitArena_ShopNPC_Option3, PitArena_ShopNPC_Option4, PitArena_ShopNPC_Option5, PitArena_ShopNPC_Option6, PitArena_ShopNPC_EditIVs, PitArena_ShopNPC_Option7, PitArena_ShopNPC_Option8
+	dynmultichoice 17, 1, 0, 5, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitArena_ShopNPC_Option0, PitArena_ShopNPC_Option0_100, PitArena_ShopNPC_Option0_200, PitArena_ShopNPC_Option1, PitArena_ShopNPC_OptionVitamin, PitArena_ShopNPC_Option2, PitArena_ShopNPC_Option3, PitArena_ShopNPC_Option4, PitArena_ShopNPC_Option5, PitArena_ShopNPC_Option6, PitArena_ShopNPC_EditIVs, PitArena_ShopNPC_Option7, PitArena_ShopNPC_Option8
 	closemessage
 	setflag FLAG_BUY_FROM_MART
 	copyvar VAR_TEMP_9, VAR_RESULT
 	goto_if_eq VAR_RESULT, 0, PitArena_MartScript_TMs
-	goto_if_eq VAR_RESULT, 1, PitArena_MartScript_EvoItems
-	goto_if_eq VAR_RESULT, 2, PitArena_MartScript_Vitamins
-	goto_if_eq VAR_RESULT, 3, PitArena_MartScript_MegaStones
-	goto_if_eq VAR_RESULT, 4, PitArena_MartScript_Mints
-	goto_if_eq VAR_RESULT, 5, PitArena_MartScript_Gems
-	goto_if_eq VAR_RESULT, 6, PitArena_MartScript_ZCrystals
-	goto_if_eq VAR_RESULT, 7, PitArena_MartScript_FormItems
-	goto_if_eq VAR_RESULT, 8, PitArena_MartScript_EditIVs
-	goto_if_eq VAR_RESULT, 9, PitArena_MartScript_Sell
+	goto_if_eq VAR_RESULT, 1, PitArena_MartScript_TMs_100
+	goto_if_eq VAR_RESULT, 2, PitArena_MartScript_TMs_200
+	goto_if_eq VAR_RESULT, 3, PitArena_MartScript_EvoItems
+	goto_if_eq VAR_RESULT, 4, PitArena_MartScript_Vitamins
+	goto_if_eq VAR_RESULT, 5, PitArena_MartScript_MegaStones
+	goto_if_eq VAR_RESULT, 6, PitArena_MartScript_Mints
+	goto_if_eq VAR_RESULT, 7, PitArena_MartScript_Gems
+	goto_if_eq VAR_RESULT, 8, PitArena_MartScript_ZCrystals
+	goto_if_eq VAR_RESULT, 9, PitArena_MartScript_FormItems
+	goto_if_eq VAR_RESULT, 10, PitArena_MartScript_EditIVs
+	goto_if_eq VAR_RESULT, 11, PitArena_MartScript_Sell
 	release
 	end
 
@@ -609,7 +617,23 @@ PitArena_MartScript_TMs:
 	goto PitArena_ShopNPCHook
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
-	end 
+	end
+
+PitArena_MartScript_TMs_100:
+	setflag FLAG_BUY_FROM_MART
+	pokemart PitArena_Mart_TMs_100
+	goto PitArena_ShopNPCHook
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+PitArena_MartScript_TMs_200:
+	setflag FLAG_BUY_FROM_MART
+	pokemart PitArena_Mart_TMs_200
+	goto PitArena_ShopNPCHook
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
 
 PitArena_MartScript_EvoItems:
 	setflag FLAG_BUY_FROM_MART
@@ -702,6 +726,10 @@ PitArena_MartScript_EditIVs_Execute::
 
 PitArena_ShopNPC_Option0:
 	.string "TMs    $"
+PitArena_ShopNPC_Option0_100:
+	.string "TMs 100+$"
+PitArena_ShopNPC_Option0_200:
+	.string "TMs 200+$"
 PitArena_ShopNPC_Option1:
 	.string "Evos$"
 PitArena_ShopNPC_Option2:
@@ -1138,6 +1166,158 @@ PitArena_Mart_TMs:
 	.2byte ITEM_TM99
 	.2byte ITEM_TM100
 #endif
+#ifndef PIT_GEN_9_MODE
+	.2byte ITEM_HM01
+	.2byte ITEM_HM02
+	.2byte ITEM_HM03
+	.2byte ITEM_HM04
+	.2byte ITEM_HM05
+	.2byte ITEM_HM06
+	.2byte ITEM_HM07
+	.2byte ITEM_HM08
+#endif
+	.2byte ITEM_NONE
+    release
+	end
+
+ 	.align 2
+PitArena_Mart_TMs_100:
+	.2byte ITEM_TM101
+	.2byte ITEM_TM102
+	.2byte ITEM_TM103
+	.2byte ITEM_TM104
+	.2byte ITEM_TM105
+	.2byte ITEM_TM106
+	.2byte ITEM_TM107
+	.2byte ITEM_TM108
+	.2byte ITEM_TM109
+	.2byte ITEM_TM110
+	.2byte ITEM_TM111
+	.2byte ITEM_TM112
+	.2byte ITEM_TM113
+	.2byte ITEM_TM114
+	.2byte ITEM_TM115
+	.2byte ITEM_TM116
+	.2byte ITEM_TM117
+	.2byte ITEM_TM118
+	.2byte ITEM_TM119
+	.2byte ITEM_TM120
+	.2byte ITEM_TM121
+	.2byte ITEM_TM122
+	.2byte ITEM_TM123
+	.2byte ITEM_TM124
+	.2byte ITEM_TM125
+	.2byte ITEM_TM126
+	.2byte ITEM_TM127
+	.2byte ITEM_TM128
+	.2byte ITEM_TM129
+	.2byte ITEM_TM130
+	.2byte ITEM_TM131
+	.2byte ITEM_TM132
+	.2byte ITEM_TM133
+	.2byte ITEM_TM134
+	.2byte ITEM_TM135
+	.2byte ITEM_TM136
+	.2byte ITEM_TM137
+	.2byte ITEM_TM138
+	.2byte ITEM_TM139
+	.2byte ITEM_TM140
+	.2byte ITEM_TM141
+	.2byte ITEM_TM142
+	.2byte ITEM_TM143
+	.2byte ITEM_TM144
+	.2byte ITEM_TM145
+	.2byte ITEM_TM146
+	.2byte ITEM_TM147
+	.2byte ITEM_TM148
+	.2byte ITEM_TM149
+	.2byte ITEM_TM150
+	.2byte ITEM_TM151
+	.2byte ITEM_TM152
+	.2byte ITEM_TM153
+	.2byte ITEM_TM154
+	.2byte ITEM_TM155
+	.2byte ITEM_TM156
+	.2byte ITEM_TM157
+	.2byte ITEM_TM158
+	.2byte ITEM_TM159
+	.2byte ITEM_TM160
+	.2byte ITEM_TM161
+	.2byte ITEM_TM162
+	.2byte ITEM_TM163
+	.2byte ITEM_TM164
+	.2byte ITEM_TM165
+	.2byte ITEM_TM166
+	.2byte ITEM_TM167
+	.2byte ITEM_TM168
+	.2byte ITEM_TM169
+	.2byte ITEM_TM170
+	.2byte ITEM_TM171
+	.2byte ITEM_TM172
+	.2byte ITEM_TM173
+	.2byte ITEM_TM174
+	.2byte ITEM_TM175
+	.2byte ITEM_TM176
+	.2byte ITEM_TM177
+	.2byte ITEM_TM178
+	.2byte ITEM_TM179
+	.2byte ITEM_TM180
+	.2byte ITEM_TM181
+	.2byte ITEM_TM182
+	.2byte ITEM_TM183
+	.2byte ITEM_TM184
+	.2byte ITEM_TM185
+	.2byte ITEM_TM186
+	.2byte ITEM_TM187
+	.2byte ITEM_TM188
+	.2byte ITEM_TM189
+	.2byte ITEM_TM190
+	.2byte ITEM_TM191
+	.2byte ITEM_TM192
+	.2byte ITEM_TM193
+	.2byte ITEM_TM194
+	.2byte ITEM_TM195
+	.2byte ITEM_TM196
+	.2byte ITEM_TM197
+	.2byte ITEM_TM198
+	.2byte ITEM_TM199
+	.2byte ITEM_TM200
+	.2byte ITEM_NONE
+    release
+	end
+
+ 	.align 2
+PitArena_Mart_TMs_200:
+	.2byte ITEM_TM201
+	.2byte ITEM_TM202
+	.2byte ITEM_TM203
+	.2byte ITEM_TM204
+	.2byte ITEM_TM205
+	.2byte ITEM_TM206
+	.2byte ITEM_TM207
+	.2byte ITEM_TM208
+	.2byte ITEM_TM209
+	.2byte ITEM_TM210
+	.2byte ITEM_TM211
+	.2byte ITEM_TM212
+	.2byte ITEM_TM213
+	.2byte ITEM_TM214
+	.2byte ITEM_TM215
+	.2byte ITEM_TM216
+	.2byte ITEM_TM217
+	.2byte ITEM_TM218
+	.2byte ITEM_TM219
+	.2byte ITEM_TM220
+	.2byte ITEM_TM221
+	.2byte ITEM_TM222
+	.2byte ITEM_TM223
+	.2byte ITEM_TM224
+	.2byte ITEM_TM225
+	.2byte ITEM_TM226
+	.2byte ITEM_TM227
+	.2byte ITEM_TM228
+	.2byte ITEM_TM229
+	.2byte ITEM_TM230
 	.2byte ITEM_HM01
 	.2byte ITEM_HM02
 	.2byte ITEM_HM03
