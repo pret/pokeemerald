@@ -259,17 +259,7 @@ u16 RandomModulo(u32 value, u16 modulo)
     u8 i = 0;
 
     value = Random32();
-
-    otId = GetTrainerId(gSaveBlock2Ptr->playerTrainerId);
-    RAND_MAX = 0xFFFFFFFF - (0xFFFFFFFF % modulo);
-
-    do
-    {
-        result = ISO_RANDOMIZE1(otId + value + result);
-    }
-    while ((result >= RAND_MAX) && (++i != I_MAX));
-
-    return (result % modulo);
+    return (value % modulo);
 }
 
 u16 RandomSeededModulo2(u32 value, u16 modulo)

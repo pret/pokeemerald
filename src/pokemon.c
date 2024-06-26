@@ -9034,7 +9034,7 @@ u32 GetMaxNumberOfSpecies(void)
 
 u8 GetCurrentMaxMonGeneratedCount(void)
 {
-    u32 speciesCountReduced = ((GetMaxNumberOfSpecies() * 9) / 10);
+    u32 speciesCountReduced = ((GetMaxNumberOfSpecies() * 15) / 16);
     return (gSaveBlock3Ptr->monsGeneratedCount / (speciesCountReduced)) + 1;
 }
 
@@ -9049,7 +9049,7 @@ u16 GetRandomSpeciesFlattenedCurve(void)
     gSaveBlock3Ptr->monsGeneratedCount += 1;
     maxChosenNumber = GetCurrentMaxMonGeneratedCount();
 
-    SeedRngWithRtc();
+    //SeedRngWithRtc();
 
     while(notChosen)
     {
@@ -9088,7 +9088,7 @@ void DebugTestRandomness(void)
     u16 trainerNum = 0;
 
     ClearGeneratedMons();
-    SeedRngWithRtc();
+    //SeedRngWithRtc();
 
     i = 0;
     while(i < 1)
