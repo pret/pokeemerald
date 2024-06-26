@@ -158,19 +158,19 @@ Std_FindItem::
 	return
 
 stext1:
-	.string "Error obtain_item.1$"
+	.string ".$"
 
 stext2:
-	.string "Error obtain_item.2$"
+	.string "..$"
 
 stext3:
-	.string "Error obtain_item.3$"
+	.string "...$"
 
 stext4:
-	.string "Error obtain_item.4$"
+	.string "....$"
 
 stext5:
-	.string "Error obtain_item.5$"
+	.string ".....$"
 
 EventScript_PickUpItem::
 	removeobject VAR_LAST_TALKED
@@ -187,7 +187,6 @@ EventScript_PickUpItem::
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PutBattlePyramidItemInBag
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	hideitemdesc
-	setflag FLAG_END_AUDIO_EARLY
 	return
 
 EventScript_PutBattlePyramidItemInBag::

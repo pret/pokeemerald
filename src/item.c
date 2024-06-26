@@ -1399,7 +1399,7 @@ u16 RandomItemId(u16 itemId)
         //check for reroll
         for (i = 0; i < RANDOM_ITEM_REROLL_COUNT; i++)
         {
-            if(itemId == sRandomItemsRerollCheck[i] && (CheckBagHasItem(itemId, 1) || CheckPartyMonHasHeldItem(itemId)))
+            if((itemId == sRandomItemsRerollCheck[i]) && (CheckBagHasItem(itemId, 1) || CheckPartyMonHasHeldItem(itemId)))
             {
                 DebugPrintf("rerollItem = TRUE, i=%d", i);
                 rerollItem = TRUE;
