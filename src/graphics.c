@@ -1634,7 +1634,13 @@ const u32 gKantoTrainerCardFrontLink_Tilemap[] = INCBIN_U32("graphics/trainer_ca
 
 // pokemon storage system
 
+#if ENGLISH
 const u32 gStorageSystemMenu_Gfx[] = INCBIN_U32("graphics/pokemon_storage/menu.4bpp.lz");
+#elif FRENCH
+const u32 gStorageSystemMenu_Gfx[] = INCBIN_U32("graphics/pokemon_storage/french/menu.4bpp.lz");
+#elif ITALIAN
+const u32 gStorageSystemMenu_Gfx[] = INCBIN_U32("graphics/pokemon_storage/italian/menu.4bpp.lz");
+#endif
 const u16 gStorageSystemPartyMenu_Pal[] = INCBIN_U16("graphics/pokemon_storage/menu.gbapal"); // Only used by party menu, but generated from all menu gfx
 const u32 gStorageSystemPartyMenu_Tilemap[] = INCBIN_U32("graphics/pokemon_storage/party_menu.bin.lz");
 
