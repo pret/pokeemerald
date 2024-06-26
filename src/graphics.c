@@ -1381,7 +1381,13 @@ const u32 gIntroCopyright_Gfx[] = INCBIN_U32("graphics/intro/copyright.4bpp.lz")
 const u32 gIntroCopyright_Tilemap[] = INCBIN_U32("graphics/intro/copyright.bin.lz");
 
 const u16 gPokedexAreaScreenAreaUnknown_Pal[] = INCBIN_U16("graphics/pokedex/area_unknown.gbapal");
+#if ENGLISH
 const u32 gPokedexAreaScreenAreaUnknown_Gfx[] = INCBIN_U32("graphics/pokedex/area_unknown.4bpp.lz");
+#elif FRENCH
+const u32 gPokedexAreaScreenAreaUnknown_Gfx[] = INCBIN_U32("graphics/pokedex/french/area_unknown.4bpp.lz");
+#elif ITALIAN
+const u32 gPokedexAreaScreenAreaUnknown_Gfx[] = INCBIN_U32("graphics/pokedex/italian/area_unknown.4bpp.lz");
+#endif
 
 const u16 gMenuInfoElements1_Pal[] = INCBIN_U16("graphics/interface/menu_info1.gbapal");
 const u16 gMenuInfoElements2_Pal[] = INCBIN_U16("graphics/interface/menu_info2.gbapal");
@@ -1831,18 +1837,23 @@ const u32 gCreditsCopyrightEnd_Tilemap[] = INCBIN_U32("graphics/credits/fr/the_e
 
 const u16 g321Start_Pal[] = INCBIN_U16("graphics/link/321start.gbapal");
 const u32 g321Start_Gfx[] = INCBIN_U32("graphics/link/321start_fr.4bpp.lz");
+
+// poke jump
+const u16 gPokeJumpBonuses_Pal[] = INCBIN_U16("graphics/pokemon_jump/french/bonuses.gbapal");
+const u32 gPokeJumpBonuses_Gfx[] = INCBIN_U32("graphics/pokemon_jump/french/bonuses.4bpp.lz");
+const u32 gPokeJumpBonuses_Tilemap[] = INCBIN_U32("graphics/pokemon_jump/french/bonuses.bin.lz");
 #elif ITALIAN
 const u32 gCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/it/the_end_copyright.4bpp.lz");
 const u32 gCreditsCopyrightEnd_Tilemap[] = INCBIN_U32("graphics/credits/it/the_end_copyright.bin.lz");
 
 const u16 g321Start_Pal[] = INCBIN_U16("graphics/link/321start.gbapal");
 const u32 g321Start_Gfx[] = INCBIN_U32("graphics/link/321start_it.4bpp.lz");
-#endif
 
 // poke jump
-const u16 gPokeJumpBonuses_Pal[] = INCBIN_U16("graphics/pokemon_jump/bonuses.gbapal");
-const u32 gPokeJumpBonuses_Gfx[] = INCBIN_U32("graphics/pokemon_jump/bonuses.4bpp.lz");
-const u32 gPokeJumpBonuses_Tilemap[] = INCBIN_U32("graphics/pokemon_jump/bonuses.bin.lz");
+const u16 gPokeJumpBonuses_Pal[] = INCBIN_U16("graphics/pokemon_jump/italian/bonuses.gbapal");
+const u32 gPokeJumpBonuses_Gfx[] = INCBIN_U32("graphics/pokemon_jump/italian/bonuses.4bpp.lz");
+const u32 gPokeJumpBonuses_Tilemap[] = INCBIN_U32("graphics/pokemon_jump/italian/bonuses.bin.lz");
+#endif
 
 const u16 gBlenderCenter_Pal[] = INCBIN_U16("graphics/berry_blender/center.gbapal");
 
