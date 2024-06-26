@@ -37,17 +37,14 @@ MauvilleCity_Mart_EventScript_Man::
 	msgbox MauvilleCity_Mart_Text_DecisionsDetermineBattle, MSGBOX_NPC
 	end
 
-MauvilleCity_Mart_Text_ItemsToTemporarilyElevateStats:
-	.string "There are items that temporarily\n"
-	.string "elevate the stats of POKéMON.\p"
-	.string "The ones I know you use in battle\n"
-	.string "are X ATTACK and X DEFEND…\p"
-	.string "I do believe that there are others\n"
-	.string "like them.$"
-
-MauvilleCity_Mart_Text_DecisionsDetermineBattle:
-	.string "Use a certain move, or use an item\n"
-	.string "instead…\p"
-	.string "The TRAINER's decisions determine how\n"
-	.string "battles turn out, I think.$"
-
+.ifdef ENGLISH
+	.include "data/maps/MauvilleCity_Mart/text.inc"
+.else
+.ifdef FRENCH
+	.include "data/maps/MauvilleCity_Mart/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/MauvilleCity_Mart/text_it.inc"
+.endif
+.endif
+.endif

@@ -85,13 +85,14 @@ MtChimney_CableCarStation_Movement_ExitCableCar:
 	delay_16
 	step_end
 
-MtChimney_CableCarStation_Text_CableCarReadyGetOn:
-	.string "The CABLE CAR is ready to go down.\n"
-	.string "Would you like to be on it?$"
-
-MtChimney_CableCarStation_Text_StepThisWay:
-	.string "Please step this way.$"
-
-MtChimney_CableCarStation_Text_RideAnotherTime:
-	.string "Please ride with us another time.$"
-
+.ifdef ENGLISH
+	.include "data/maps/MtChimney_CableCarStation/text.inc"
+.else
+.ifdef FRENCH
+	.include "data/maps/MtChimney_CableCarStation/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/MtChimney_CableCarStation/text_it.inc"
+.endif
+.endif
+.endif
