@@ -387,7 +387,6 @@ EndOfRelearnerScript::
 PitArena_MartNPCMoveRelearner::
 	setvar VAR_PIT_TUTOR_STATE, 0
 	hidemoneybox
-	release
 PitArena_MartNPCMoveTutor::
 	special ChooseMonForMoveRelearner
 	waitstate
@@ -405,7 +404,6 @@ PitArena_MartNPCMoveTutorEggMoves::
 	goto_if_eq VAR_RESULT, FALSE, PitArena_MartNPCMoveTutorTutorMoves_NotEnoughMoney
 	setvar VAR_PIT_TUTOR_STATE, 2
 	hidemoneybox
-	release
 	goto PitArena_MartNPCMoveTutor
 	end
 
@@ -414,14 +412,12 @@ PitArena_MartNPCMoveTutorTutorMoves::
 	goto_if_eq VAR_RESULT, FALSE, PitArena_MartNPCMoveTutorTutorMoves_NotEnoughMoney
 	setvar VAR_PIT_TUTOR_STATE, 1
 	hidemoneybox
-	release
 	goto PitArena_MartNPCMoveTutor
 	end
 
 PitArena_MartNPCMoveTutorStaticTutorMoves::
 	setvar VAR_PIT_TUTOR_STATE, 1
 	hidemoneybox
-	release
 	special ShowTutorMoveList
 	waitstate
 	call_if_eq VAR_RESULT, 99, PitArena_MartNPCMoveTutorTutorMoves_NotEnoughMoney
@@ -430,8 +426,6 @@ PitArena_MartNPCMoveTutorStaticTutorMoves::
 
 PitArena_MartNPCMoveTutorTutorMoves_NotEnoughMoney::
 	hidemoneybox
-	release
-	lock
 	msgbox PitArena_Tutor_NotGotTheMoney, MSGBOX_AUTOCLOSE
 	release
 	end
@@ -682,8 +676,6 @@ PitArena_MartScript_EditIVs::
 	showmoneybox 0, 0
 	msgbox PitArena_ShopNPC_IV_Text, MSGBOX_YESNO
 	hidemoneybox
-	release
-	lock
 	goto_if_eq VAR_RESULT, NO, PitArena_ShopNPCHook
 	checkmoney 1000
 	goto_if_eq VAR_RESULT, FALSE, PitArena_MartScript_EditIVs_NotEnoughMoney

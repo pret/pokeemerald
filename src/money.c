@@ -208,7 +208,7 @@ void HideMoneyBox(void)
 {
     RemoveMoneyLabelObject();
     ClearStdWindowAndFrameToTransparent(sMoneyBoxWindowId, FALSE);
-    CopyWindowToVram(sMoneyBoxWindowId, COPYWIN_GFX);
+    CopyWindowToVram(sMoneyBoxWindowId, COPYWIN_FULL);
     RemoveWindow(sMoneyBoxWindowId);
 }
 

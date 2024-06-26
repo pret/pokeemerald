@@ -2300,7 +2300,6 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                     //if (!isPlayer)
                        //DebugPrintf("Reached Create NPC Kyogre: %d", gSpecialVar_Unused_0x8014);
                 }
-                //else if (((gSpecialVar_Unused_0x8014 == TRAINER_ARCHIE_PIT_BOSS) || (gSpecialVar_Unused_0x8014 == TRAINER_ARCHIE_PIT_BOSS_DOUBLES)) && (!isPlayer))
                 else if (monLevel == 100)
                 {
                     // = fully evolved mons for every trainer from Floor 100 on
