@@ -129,4 +129,9 @@
 // param1: tera type
 #define FORM_CHANGE_BATTLE_TERASTALLIZATION     22
 
+// Form change that activates at midnight after a certain amount of days has passed.
+// Adding this form change will automatically make the countdown start as soon the Pokémon changes into a species other than the one specified for this form change.
+// param1: amount of days
+#define FORM_CHANGE_DAYS_PASSED                 23
+
 #endif // GUARD_CONSTANTS_FORM_CHANGE_TYPES_H

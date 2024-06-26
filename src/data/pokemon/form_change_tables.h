@@ -779,6 +779,14 @@ static const struct FormChange sGreninjaBattleBondFormChangeTable[] = {
 };
 #endif //P_FAMILY_FROAKIE
 
+#if P_FAMILY_FURFROU
+static const struct FormChange sFurfrouFormChangeTable[] = {
+    {FORM_CHANGE_WITHDRAW,    SPECIES_FURFROU_NATURAL},
+    {FORM_CHANGE_DAYS_PASSED, SPECIES_FURFROU_NATURAL, 5},
+    {FORM_CHANGE_TERMINATOR},
+};
+#endif //P_FAMILY_FURFROU
+
 #if P_FAMILY_HONEDGE
 static const struct FormChange sAegislashFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_SWITCH, SPECIES_AEGISLASH_SHIELD},
@@ -841,8 +849,9 @@ static const struct FormChange sDiancieFormChangeTable[] = {
 
 #if P_FAMILY_HOOPA
 static const struct FormChange sHoopaFormChangeTable[] = {
-    {FORM_CHANGE_ITEM_USE, SPECIES_HOOPA_UNBOUND, ITEM_PRISON_BOTTLE, SPECIES_HOOPA_CONFINED},
-    {FORM_CHANGE_WITHDRAW, SPECIES_HOOPA_CONFINED},
+    {FORM_CHANGE_ITEM_USE,    SPECIES_HOOPA_UNBOUND, ITEM_PRISON_BOTTLE, SPECIES_HOOPA_CONFINED},
+    {FORM_CHANGE_WITHDRAW,    SPECIES_HOOPA_CONFINED},
+    {FORM_CHANGE_DAYS_PASSED, SPECIES_HOOPA_CONFINED, 3},
     {FORM_CHANGE_TERMINATOR},
 };
 #endif //P_FAMILY_HOOPA
