@@ -23,7 +23,7 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_TM_HAIL",
+      "trainer_sight_or_berry_tree_id": "ITEM_TM_REST",
       "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_TM_HAIL"
     },
