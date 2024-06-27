@@ -54,9 +54,9 @@
 #define FLAG_SAVING_FIELD_EFFECT    0x29 // Unused Flag
 #define FLAG_AUTO_SAVE    	 0x2A // Unused Flag
 #define FLAG_STAT_EDIT_PAID  0x2B // Unused Flag - Used to handle the stat editor for the IV merchant
-#define FLAG_END_AUDIO_EARLY    0x2C // Unused Flag
-#define FLAG_FRLG_PLAYER    0x2D // Unused Flag
-#define FLAG_MEGAS          0x2E // Unused Flag
+#define FLAG_END_AUDIO_EARLY 0x2C // Unused Flag
+#define FLAG_FRLG_PLAYER     0x2D // Unused Flag
+#define FLAG_MEGAS           0x2E // Unused Flag
 #define FLAG_FLOOR_100       0x2F // Unused Flag
 #define FLAG_UNUSED_0x030    0x30 // Unused Flag
 #define FLAG_UNUSED_0x031    0x31 // Unused Flag

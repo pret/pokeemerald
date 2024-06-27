@@ -285,6 +285,7 @@ EventScript_ResetAllMapFlags::
 	clearflag FLAG_RANDOM_MODE 
 	clearflag FLAG_DOUBLES_MODE
 	clearflag FLAG_FLOOR_100
+	setflag FLAG_NO_DUPLICATES
 	call EventScript_ResetAllBerries
 	end
 

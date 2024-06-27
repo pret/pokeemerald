@@ -79,7 +79,7 @@ enum MenuItems
     MENUITEM_MAIN_XPSHARE,
     MENUITEM_MAIN_STAT_CHANGER,
     MENUITEM_MAIN_LEGENDARIES,
-    MENUITEM_MAIN_DUPLICATES,
+    //MENUITEM_MAIN_DUPLICATES,
     #ifdef PIT_GEN_9_MODE
     MENUITEM_MAIN_MEGAS,
     #endif
@@ -271,7 +271,7 @@ struct MainMenu
     [MENUITEM_MAIN_XPSHARE]      = {DrawChoices_XPShare,     ProcessInput_Options_Two},
     [MENUITEM_MAIN_STAT_CHANGER] = {DrawChoices_StatChanger, ProcessInput_Options_Two},
     [MENUITEM_MAIN_LEGENDARIES]  = {DrawChoices_Legendaries, ProcessInput_Options_Two},
-    [MENUITEM_MAIN_DUPLICATES]   = {DrawChoices_Duplicates,  ProcessInput_Options_Two},
+    //[MENUITEM_MAIN_DUPLICATES]   = {DrawChoices_Duplicates,  ProcessInput_Options_Two},
     #ifdef PIT_GEN_9_MODE
     [MENUITEM_MAIN_MEGAS]        = {DrawChoices_Megas,       ProcessInput_Options_Two},
     #endif
@@ -299,7 +299,7 @@ static const u8 *const sModeMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
     [MENUITEM_MAIN_XPSHARE]      = sText_XPShare,
     [MENUITEM_MAIN_STAT_CHANGER] = sText_StatChanger,
     [MENUITEM_MAIN_LEGENDARIES]  = sText_Legendaries,
-    [MENUITEM_MAIN_DUPLICATES]   = sText_Duplicates,
+    //[MENUITEM_MAIN_DUPLICATES]   = sText_Duplicates,
     #ifdef PIT_GEN_9_MODE
     [MENUITEM_MAIN_MEGAS]        = sText_Megas,
     #endif
@@ -323,7 +323,7 @@ static bool8 CheckConditions(int selection)
         case MENUITEM_MAIN_XPSHARE:        return TRUE;
         case MENUITEM_MAIN_STAT_CHANGER:   return TRUE;
         case MENUITEM_MAIN_LEGENDARIES:    return TRUE;
-        case MENUITEM_MAIN_DUPLICATES:     return TRUE;
+        //case MENUITEM_MAIN_DUPLICATES:     return TRUE;
         #ifdef PIT_GEN_9_MODE
         case MENUITEM_MAIN_MEGAS:          return TRUE;
         #endif
@@ -366,7 +366,7 @@ static const u8 *const sModeMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
     [MENUITEM_MAIN_XPSHARE]      = {sText_Desc_XPShare_75,          sText_Desc_XPShare_50,          sText_Empty},
     [MENUITEM_MAIN_STAT_CHANGER] = {sText_Desc_StatChanger_On,      sText_Desc_StatChanger_Off,     sText_Empty},
     [MENUITEM_MAIN_LEGENDARIES]  = {sText_Desc_Legendaries_On,      sText_Desc_Legendaries_Off,     sText_Empty},
-    [MENUITEM_MAIN_DUPLICATES]   = {sText_Desc_Duplicates_On,       sText_Desc_Duplicates_Off,      sText_Empty},
+    //[MENUITEM_MAIN_DUPLICATES]   = {sText_Desc_Duplicates_On,       sText_Desc_Duplicates_Off,      sText_Empty},
     #ifdef PIT_GEN_9_MODE
     [MENUITEM_MAIN_MEGAS]        = {sText_Desc_Megas_On,            sText_Desc_Megas_Off,           sText_Empty},
     #endif
@@ -502,7 +502,7 @@ static void ModeMenu_SetupCB(void)
         sOptions->sel[MENUITEM_MAIN_XPSHARE]      = gSaveBlock2Ptr->modeXPShare;
         sOptions->sel[MENUITEM_MAIN_STAT_CHANGER] = gSaveBlock2Ptr->modeStatChanger;
         sOptions->sel[MENUITEM_MAIN_LEGENDARIES]  = gSaveBlock2Ptr->modeLegendaries;
-        sOptions->sel[MENUITEM_MAIN_DUPLICATES]   = gSaveBlock2Ptr->modeDuplicates;
+        //sOptions->sel[MENUITEM_MAIN_DUPLICATES]   = gSaveBlock2Ptr->modeDuplicates;
         #ifdef PIT_GEN_9_MODE
         sOptions->sel[MENUITEM_MAIN_MEGAS]        = gSaveBlock2Ptr->modeMegas;
         #endif
@@ -830,7 +830,7 @@ static void Task_ModeMenuMainInput(u8 taskId)
                                 sOptions->sel[MENUITEM_MAIN_XPSHARE]      = XP_75;
                                 sOptions->sel[MENUITEM_MAIN_STAT_CHANGER] = ACTIVE;
                                 sOptions->sel[MENUITEM_MAIN_LEGENDARIES]  = YES;
-                                sOptions->sel[MENUITEM_MAIN_DUPLICATES]   = NO;
+                                //sOptions->sel[MENUITEM_MAIN_DUPLICATES]   = NO;
                                 #ifdef PIT_GEN_9_MODE
                                 sOptions->sel[MENUITEM_MAIN_MEGAS]        = MEGAS_OFF;
                                 #endif
@@ -839,7 +839,7 @@ static void Task_ModeMenuMainInput(u8 taskId)
                                 sOptions->sel[MENUITEM_MAIN_XPSHARE]      = XP_50;
                                 sOptions->sel[MENUITEM_MAIN_STAT_CHANGER] = INACTIVE;
                                 sOptions->sel[MENUITEM_MAIN_LEGENDARIES]  = NO;
-                                sOptions->sel[MENUITEM_MAIN_DUPLICATES]   = NO;
+                                //sOptions->sel[MENUITEM_MAIN_DUPLICATES]   = NO;
                                 #ifdef PIT_GEN_9_MODE
                                 sOptions->sel[MENUITEM_MAIN_MEGAS]        = MEGAS_ON;
                                 #endif
@@ -877,7 +877,7 @@ static void Task_ModeMenuSave(u8 taskId)
     gSaveBlock2Ptr->modeXPShare     = sOptions->sel[MENUITEM_MAIN_XPSHARE];
     gSaveBlock2Ptr->modeStatChanger = sOptions->sel[MENUITEM_MAIN_STAT_CHANGER];
     gSaveBlock2Ptr->modeLegendaries = sOptions->sel[MENUITEM_MAIN_LEGENDARIES];
-    gSaveBlock2Ptr->modeDuplicates  = sOptions->sel[MENUITEM_MAIN_DUPLICATES];
+    //gSaveBlock2Ptr->modeDuplicates  = sOptions->sel[MENUITEM_MAIN_DUPLICATES];
     #ifdef PIT_GEN_9_MODE
     gSaveBlock2Ptr->modeMegas       = sOptions->sel[MENUITEM_MAIN_MEGAS];
     #endif
@@ -910,10 +910,11 @@ static void Task_ModeMenuSave(u8 taskId)
     else
         FlagClear(FLAG_NO_LEGENDARIES);
 
+    /*
     if (sOptions->sel[MENUITEM_MAIN_DUPLICATES] == NO)
         FlagSet(FLAG_NO_DUPLICATES);
     else
-        FlagClear(FLAG_NO_DUPLICATES);
+        FlagClear(FLAG_NO_DUPLICATES);*/
 
     #ifdef PIT_GEN_9_MODE
     if (sOptions->sel[MENUITEM_MAIN_MEGAS] == MEGAS_OFF)
@@ -1174,7 +1175,7 @@ static void DrawChoices_Legendaries(int selection, int y)
 
 static void DrawChoices_Duplicates(int selection, int y)
 {
-    bool8 active = CheckConditions(MENUITEM_MAIN_DUPLICATES);
+    bool8 active = TRUE;//CheckConditions(MENUITEM_MAIN_DUPLICATES);
     u8 styles[2] = {0};
     styles[selection] = 1;
 
