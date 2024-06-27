@@ -1,0 +1,26 @@
+
+SeafloorCavern_Entrance_Text_HearMagmaNearMossdeep:
+	.string "Hé!\n"
+	.string "Je me souviens de toi!\p"
+	.string "Si tu es là, ça veut dire que tu veux\n"
+	.string "encore te mêler de nos affaires!\p"
+	.string "Tu penses vraiment qu’une demi-portion\n"
+	.string "comme toi peut gêner la TEAM AQUA?\p"
+	.string "Mais tu rêves complètement, ma parole.\p"
+	.string "Tu arriverais à peine à entrer dans\n"
+	.string "la TEAM MAGMA, c’est dire!\p"
+	.string "En parlant d’eux, il paraît qu’on les a\n"
+	.string "repérés près d’ALGATIA.\p"
+	.string "Ils ne doivent pas faire les fiers\n"
+	.string "si près de la mer!$"
+
+SeafloorCavern_Entrance_Text_HearMagmaNearMossdeepShort:
+	.string "Tu penses vraiment qu’une demi-portion\n"
+	.string "comme toi peut gêner la TEAM AQUA?\p"
+	.string "Mais tu rêves complètement, ma parole.\p"
+	.string "Tu arriverais à peine à entrer dans\n"
+	.string "la TEAM MAGMA, c’est dire!\p"
+	.string "En parlant d’eux, il paraît qu’on les a\n"
+	.string "repérés près d’ALGATIA.\p"
+	.string "Ils ne doivent pas faire les fiers\n"
+	.string "si près de la mer!$"
