@@ -10345,11 +10345,14 @@ u16 GetBattleFormChangeTargetSpecies(u32 battler, u16 method)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE:
-                    if (gBattleMons[battler].moves[0] == formChanges[i].param1
-                     || gBattleMons[battler].moves[1] == formChanges[i].param1
-                     || gBattleMons[battler].moves[2] == formChanges[i].param1
-                     || gBattleMons[battler].moves[3] == formChanges[i].param1)
-                        targetSpecies = formChanges[i].targetSpecies;
+                    if(FlagGet(FLAG_MEGAS))
+                    {
+                        if (gBattleMons[battler].moves[0] == formChanges[i].param1
+                        || gBattleMons[battler].moves[1] == formChanges[i].param1
+                        || gBattleMons[battler].moves[2] == formChanges[i].param1
+                        || gBattleMons[battler].moves[3] == formChanges[i].param1)
+                            targetSpecies = formChanges[i].targetSpecies;
+                    }
                     break;
                 case FORM_CHANGE_BATTLE_SWITCH:
                     targetSpecies = formChanges[i].targetSpecies;
