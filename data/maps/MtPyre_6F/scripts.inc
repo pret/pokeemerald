@@ -27,43 +27,14 @@ MtPyre_6F_EventScript_Cedric::
 	msgbox MtPyre_6F_Text_CedricPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtPyre_6F_Text_ValerieIntro:
-	.string "When I'm here…\n"
-	.string "A curious power flows into me…$"
-
-MtPyre_6F_Text_ValerieDefeat:
-	.string "The power is ebbing away…$"
-
-MtPyre_6F_Text_ValeriePostBattle:
-	.string "Perhaps the power is from the spirits\n"
-	.string "of POKéMON in fitful sleep here…$"
-
-MtPyre_6F_Text_ValerieRegister:
-	.string "Fufufu… I lost the match, but…\n"
-	.string "I have this little ability…\p"
-	.string "Without ever laying my hands on\n"
-	.string "your POKéNAV… Hiyah!$"
-
-MtPyre_6F_Text_ValerieRematchIntro:
-	.string "Behind you…\n"
-	.string "What is it…$"
-
-MtPyre_6F_Text_ValerieRematchDefeat:
-	.string "Something faded away…$"
-
-MtPyre_6F_Text_ValeriePostRematch:
-	.string "The POKéMON at rest here…\n"
-	.string "Sometimes, they play…$"
-
-MtPyre_6F_Text_CedricIntro:
-	.string "Have you lost your bearings?\n"
-	.string "Have no fear for I am here!$"
-
-MtPyre_6F_Text_CedricDefeat:
-	.string "Weren't you lost?$"
-
-MtPyre_6F_Text_CedricPostBattle:
-	.string "I had this feeling that a lost TRAINER\n"
-	.string "would be panicked and easy to beat.\p"
-	.string "It's dirty and I won't try it again…$"
-
+.ifdef ENGLISH
+	.include "data/maps/MtPyre_6F/text.inc"
+.else
+.ifdef FRENCH
+	.include "data/maps/MtPyre_6F/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/MtPyre_6F/text_it.inc"
+.endif
+.endif
+.endif

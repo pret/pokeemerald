@@ -25,23 +25,14 @@ MtPyre_1F_EventScript_Man::
 	msgbox MtPyre_1F_Text_RestingPlaceOfZigzagoon, MSGBOX_NPC
 	end
 
-MtPyre_1F_Text_TakeThisForYourOwnGood:
-	.string "All sorts of beings wander the slopes\n"
-	.string "of MT. PYRE…\p"
-	.string "There is no telling what may happen.\n"
-	.string "Take this. It's for your own good.$"
-
-MtPyre_1F_Text_ExplainCleanseTag:
-	.string "Have a POKéMON hold that\n"
-	.string "CLEANSE TAG.\p"
-	.string "It will help ward off wild POKéMON.$"
-
-MtPyre_1F_Text_ComeToPayRespects:
-	.string "Did you come to pay your respect\n"
-	.string "to the spirits of departed POKéMON?\p"
-	.string "You must care for your POKéMON a lot.$"
-
-MtPyre_1F_Text_RestingPlaceOfZigzagoon:
-	.string "This is the final resting place of my\n"
-	.string "ZIGZAGOON. I cherished it…$"
-
+.ifdef ENGLISH
+	.include "data/maps/MtPyre_1F/text.inc"
+.else
+.ifdef FRENCH
+	.include "data/maps/MtPyre_1F/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/MtPyre_1F/text_it.inc"
+.endif
+.endif
+.endif

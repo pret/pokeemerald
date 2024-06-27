@@ -5,11 +5,14 @@ OldaleTown_House1_EventScript_Woman::
 	msgbox OldaleTown_House1_Text_LeftPokemonGoesOutFirst, MSGBOX_NPC
 	end
 
-OldaleTown_House1_Text_LeftPokemonGoesOutFirst:
-	.string "When a POKéMON battle starts, the one\n"
-	.string "at the left of the list goes out first.\p"
-	.string "So, when you get more POKéMON in your\n"
-	.string "party, try switching around the order\l"
-	.string "of your POKéMON.\p"
-	.string "It could give you an advantage.$"
-
+.ifdef ENGLISH
+	.include "data/maps/OldaleTown_House1/text.inc"
+.else
+.ifdef FRENCH
+	.include "data/maps/OldaleTown_House1/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/OldaleTown_House1/text_it.inc"
+.endif
+.endif
+.endif

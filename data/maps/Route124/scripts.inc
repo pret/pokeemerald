@@ -99,6 +99,14 @@ Route124_EventScript_Isabella::
 	msgbox Route124_Text_IsabellaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route124_Text_HuntersHouse:
-	.string "HUNTER'S HOUSE$"
-
+.ifdef ENGLISH
+	.include "data/maps/Route124/text.inc"
+.else
+.ifdef FRENCH
+	.include "data/maps/Route124/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/Route124/text_it.inc"
+.endif
+.endif
+.endif
