@@ -1686,11 +1686,29 @@ const u16 gNamingScreenMenu_Pal[6][16] =
 };
 const u32 gNamingScreenMenu_Gfx[]                = INCBIN_U32("graphics/naming_screen/menu.4bpp.lz");
 const u32 gNamingScreenPageSwapFrame_Gfx[]       = INCBIN_U32("graphics/naming_screen/page_swap_frame.4bpp");
+#if ENGLISH
 const u32 gNamingScreenBackButton_Gfx[]          = INCBIN_U32("graphics/naming_screen/back_button.4bpp");
 const u32 gNamingScreenOKButton_Gfx[]            = INCBIN_U32("graphics/naming_screen/ok_button.4bpp");
+#elif FRENCH
+const u32 gNamingScreenBackButton_Gfx[]          = INCBIN_U32("graphics/naming_screen/french/back_button.4bpp");
+const u32 gNamingScreenOKButton_Gfx[]            = INCBIN_U32("graphics/naming_screen/ok_button.4bpp");
+#elif ITALIAN
+const u32 gNamingScreenBackButton_Gfx[]          = INCBIN_U32("graphics/naming_screen/italian/back_button.4bpp");
+const u32 gNamingScreenOKButton_Gfx[]            = INCBIN_U32("graphics/naming_screen/italian/ok_button.4bpp");
+#endif
+#if ENGLISH
 const u32 gNamingScreenPageSwapUpper_Gfx[]       = INCBIN_U32("graphics/naming_screen/page_swap_upper.4bpp");
 const u32 gNamingScreenPageSwapLower_Gfx[]       = INCBIN_U32("graphics/naming_screen/page_swap_lower.4bpp");
 const u32 gNamingScreenPageSwapOthers_Gfx[]      = INCBIN_U32("graphics/naming_screen/page_swap_others.4bpp");
+#elif FRENCH
+const u32 gNamingScreenPageSwapUpper_Gfx[]       = INCBIN_U32("graphics/naming_screen/french/page_swap_upper.4bpp");
+const u32 gNamingScreenPageSwapLower_Gfx[]       = INCBIN_U32("graphics/naming_screen/french/page_swap_lower.4bpp");
+const u32 gNamingScreenPageSwapOthers_Gfx[]      = INCBIN_U32("graphics/naming_screen/french/page_swap_others.4bpp");
+#elif ITALIAN
+const u32 gNamingScreenPageSwapUpper_Gfx[]       = INCBIN_U32("graphics/naming_screen/italian/page_swap_upper.4bpp");
+const u32 gNamingScreenPageSwapLower_Gfx[]       = INCBIN_U32("graphics/naming_screen/italian/page_swap_lower.4bpp");
+const u32 gNamingScreenPageSwapOthers_Gfx[]      = INCBIN_U32("graphics/naming_screen/italian/page_swap_others.4bpp");
+#endif
 const u32 gNamingScreenCursor_Gfx[]              = INCBIN_U32("graphics/naming_screen/cursor.4bpp");
 const u32 gNamingScreenCursorSquished_Gfx[]      = INCBIN_U32("graphics/naming_screen/cursor_squished.4bpp");
 const u32 gNamingScreenCursorFilled_Gfx[]        = INCBIN_U32("graphics/naming_screen/cursor_filled.4bpp");
