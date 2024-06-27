@@ -461,7 +461,7 @@ PitArena_NPCMoverWonderTrade:
 	end
 
 PitArena_NPCMoverOpen:
-	.string "What would you like to do?\n"
+	.string "I have a special offer for you!\n"
 	.string "Free Rare Candy Included With Purchase!$"
 
 PitArena_MoverSkip2::
@@ -499,11 +499,11 @@ PitArena_NPCMoverNotEnoughMoneyText:
 	.string "Not enough money...$"
 
 PitArena_NPCMover2:
-	.string "2 Floors: ¥3000$"
+	.string "Skip 2 Floors: ¥3000$"
 PitArena_NPCMover3:
-	.string "3 Floors: ¥5000$"
+	.string "Skip 3 Floors: ¥5000$"
 PitArena_NPCMover4:
-	.string "Trade:      ¥500$"
+	.string "Wonder Trade:   ¥500$"
 
 PitArena_ShopNPC::
 	lockall
