@@ -46,13 +46,14 @@ ShoalCave_LowTideLowerRoom_EventScript_ReceivedFocusBand::
 	release
 	end
 
-ShoalCave_LowTideLowerRoom_Text_CanOvercomeColdWithFocus:
-	.string "The penetrating cold around these\n"
-	.string "parts is an impediment to training.\p"
-	.string "But with focus, one can overcome!\p"
-	.string "With this FOCUS BAND, buckle down and\n"
-	.string "withstand the cold!$"
-
-ShoalCave_LowTideLowerRoom_Text_EverythingStartsWithFocus:
-	.string "Everything starts with focus!$"
-
+.ifdef ENGLISH
+	.include "data/maps/ShoalCave_LowTideLowerRoom/text.inc"
+.else
+.ifdef FRENCH
+	.include "data/maps/ShoalCave_LowTideLowerRoom/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/ShoalCave_LowTideLowerRoom/text_it.inc"
+.endif
+.endif
+.endif
