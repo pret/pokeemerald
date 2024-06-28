@@ -33,8 +33,7 @@ static inline u32 _SFC32_Next_Stream(struct Sfc32State *state, const u8 stream)
 static void SFC32_Seed(struct Sfc32State *state, u32 seed, u8 stream)
 {
     u32 i;
-    state->a = state->b = 0;
-    state->c = seed;
+    state->a = state->b = state->c = seed;
     state->ctr = stream;
     for(i = 0; i < 16; i++)
     {
@@ -254,17 +253,26 @@ u16 RandomSeeded(u16 value)
 #define I_MAX 5
 u16 RandomModulo(u32 value, u16 modulo)
 {
-    u32 result = 0;
-    u64 k = 0;
+    u32 next_power_of_two, mask, result;
+    if (modulo < 2)
+        return 0;
 
-    k = (4294967295 - (4294967295 % modulo)) / modulo;
+    next_power_of_two = modulo;
+    --next_power_of_two;
+    next_power_of_two |= next_power_of_two >> 1;
+    next_power_of_two |= next_power_of_two >> 2;
+    next_power_of_two |= next_power_of_two >> 4;
+    next_power_of_two |= next_power_of_two >> 8;
+    ++next_power_of_two;
+
+    mask = next_power_of_two - 1;
+
     do
     {
-        value = Random32();
-    }
-    while(value >= (k * modulo));
+        result = Random32() & mask;
+    } while (result >= modulo);
 
-    return (value % modulo);
+    return result;
 }
 
 u16 RandomSeededModulo2(u32 value, u16 modulo)
