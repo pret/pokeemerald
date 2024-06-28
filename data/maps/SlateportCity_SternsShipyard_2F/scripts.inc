@@ -17,6 +17,10 @@ SlateportCity_SternsShipyard_2F_EventScript_Scientist2::
 .else
 .ifdef ITALIAN
 	.include "data/maps/SlateportCity_SternsShipyard_2F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SlateportCity_SternsShipyard_2F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

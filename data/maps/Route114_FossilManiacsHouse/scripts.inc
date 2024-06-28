@@ -38,6 +38,10 @@ Route114_FossilManiacsHouse_EventScript_Bookshelf::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route114_FossilManiacsHouse/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route114_FossilManiacsHouse/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -193,6 +193,10 @@ LavaridgeTown_Gym_1F_EventScript_GymStatue::
 .else
 .ifdef ITALIAN
 	.include "data/maps/LavaridgeTown_Gym_1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LavaridgeTown_Gym_1F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

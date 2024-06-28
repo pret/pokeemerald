@@ -157,6 +157,10 @@ JaggedPass_EventScript_Autumn::
 .else
 .ifdef ITALIAN
 	.include "data/maps/JaggedPass/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/JaggedPass/text_es.inc"
+.endif
 .endif
 .endif
 .endif

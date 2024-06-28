@@ -188,6 +188,10 @@ SkyPillar_Top_Movement_CameraPanDown:
 .else
 .ifdef ITALIAN
 	.include "data/maps/SkyPillar_Top/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SkyPillar_Top/text_es.inc"
+.endif
 .endif
 .endif
 .endif

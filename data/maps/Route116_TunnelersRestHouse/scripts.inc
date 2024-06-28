@@ -35,6 +35,10 @@ Route116_TunnelersRestHouse_EventScript_TunnelOpened::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route116_TunnelersRestHouse/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route116_TunnelersRestHouse/text_es.inc"
+.endif
 .endif
 .endif
 .endif

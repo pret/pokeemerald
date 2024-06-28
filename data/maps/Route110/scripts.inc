@@ -751,6 +751,10 @@ Route110_Movement_BirchExit4:
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route110/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route110/text_es.inc"
+.endif
 .endif
 .endif
 .endif

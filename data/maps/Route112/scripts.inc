@@ -117,6 +117,10 @@ Route112_EventScript_Shayla::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route112/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route112/text_es.inc"
+.endif
 .endif
 .endif
 .endif

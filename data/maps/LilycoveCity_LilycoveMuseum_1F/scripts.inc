@@ -169,6 +169,10 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_FatMan::
 .else
 .ifdef ITALIAN
 	.include "data/maps/LilycoveCity_LilycoveMuseum_1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LilycoveCity_LilycoveMuseum_1F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

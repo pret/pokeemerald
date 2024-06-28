@@ -437,6 +437,10 @@ MtPyre_Summit_EventScript_Grunt4::
 .else
 .ifdef ITALIAN
 	.include "data/maps/MtPyre_Summit/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MtPyre_Summit/text_es.inc"
+.endif
 .endif
 .endif
 .endif

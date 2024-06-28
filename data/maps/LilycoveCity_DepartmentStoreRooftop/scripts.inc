@@ -192,6 +192,10 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_ExitVendingMachine::
 .else
 .ifdef ITALIAN
 	.include "data/maps/LilycoveCity_DepartmentStoreRooftop/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LilycoveCity_DepartmentStoreRooftop/text_es.inc"
+.endif
 .endif
 .endif
 .endif

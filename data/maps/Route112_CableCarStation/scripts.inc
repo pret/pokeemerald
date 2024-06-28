@@ -94,6 +94,10 @@ Route112_CableCarStation_Movement_ExitCableCar:
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route112_CableCarStation/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route112_CableCarStation/text_es.inc"
+.endif
 .endif
 .endif
 .endif

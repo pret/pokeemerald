@@ -26,6 +26,10 @@ LilycoveCity_House2_EventScript_ReceivedRest::
 .else
 .ifdef ITALIAN
 	.include "data/maps/LilycoveCity_House2/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LilycoveCity_House2/text_es.inc"
+.endif
 .endif
 .endif
 .endif

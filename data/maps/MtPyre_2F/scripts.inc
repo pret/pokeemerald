@@ -50,6 +50,10 @@ MtPyre_2F_EventScript_Zander::
 .else
 .ifdef ITALIAN
 	.include "data/maps/MtPyre_2F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MtPyre_2F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

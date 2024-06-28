@@ -111,6 +111,10 @@ RustboroCity_Gym_EventScript_RegisterRoxanne::
 .else
 .ifdef ITALIAN
 	.include "data/maps/RustboroCity_Gym/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/RustboroCity_Gym/text_es.inc"
+.endif
 .endif
 .endif
 .endif

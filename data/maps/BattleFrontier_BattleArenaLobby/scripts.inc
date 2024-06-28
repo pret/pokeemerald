@@ -360,6 +360,10 @@ BattleFrontier_BattleArenaLobby_EventScript_ExitRules::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_BattleArenaLobby/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_BattleArenaLobby/text_es.inc"
+.endif
 .endif
 .endif
 .endif

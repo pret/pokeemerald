@@ -141,6 +141,10 @@ MagmaHideout_4F_EventScript_Tabitha::
 .else
 .ifdef ITALIAN
 	.include "data/maps/MagmaHideout_4F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MagmaHideout_4F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

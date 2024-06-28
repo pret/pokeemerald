@@ -280,6 +280,10 @@ PlayersHouse_2F_EventScript_GameCube::
 .else
 .ifdef ITALIAN
 	.include "data/maps/LittlerootTown_BrendansHouse_2F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LittlerootTown_BrendansHouse_2F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -291,6 +291,10 @@ Route124_DivingTreasureHuntersHouse_EventScript_ShardTradeBoard::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route124_DivingTreasureHuntersHouse/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route124_DivingTreasureHuntersHouse/text_es.inc"
+.endif
 .endif
 .endif
 .endif

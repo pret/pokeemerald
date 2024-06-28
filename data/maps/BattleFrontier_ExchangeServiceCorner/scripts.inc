@@ -442,6 +442,10 @@ BattleFrontier_ExchangeServiceCorner_EventScript_Girl::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_ExchangeServiceCorner/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_ExchangeServiceCorner/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -92,6 +92,10 @@ FallarborTown_PokemonCenter_1F_Movement_LanetteExitWest:
 .else
 .ifdef ITALIAN
 	.include "data/maps/FallarborTown_PokemonCenter_1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/FallarborTown_PokemonCenter_1F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

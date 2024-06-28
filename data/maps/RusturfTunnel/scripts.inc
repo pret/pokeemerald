@@ -431,6 +431,10 @@ RusturfTunnel_EventScript_Mike::
 .else
 .ifdef ITALIAN
 	.include "data/maps/RusturfTunnel/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/RusturfTunnel/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -654,6 +654,10 @@ BattleFrontier_BattlePikeRoomNormal_Movement_CameraPanDown:
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_BattlePikeRoomNormal/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_BattlePikeRoomNormal/text_es.inc"
+.endif
 .endif
 .endif
 .endif

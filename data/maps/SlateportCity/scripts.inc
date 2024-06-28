@@ -958,6 +958,10 @@ SlateportCity_EventScript_BerryCrushRankingsSign::
 .else
 .ifdef ITALIAN
 	.include "data/maps/SlateportCity/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SlateportCity/text_es.inc"
+.endif
 .endif
 .endif
 .endif

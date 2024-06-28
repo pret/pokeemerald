@@ -54,6 +54,10 @@ ShoalCave_LowTideLowerRoom_EventScript_ReceivedFocusBand::
 .else
 .ifdef ITALIAN
 	.include "data/maps/ShoalCave_LowTideLowerRoom/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/ShoalCave_LowTideLowerRoom/text_es.inc"
+.endif
 .endif
 .endif
 .endif

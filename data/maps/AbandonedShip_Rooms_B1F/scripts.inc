@@ -18,6 +18,10 @@ AbandonedShip_Rooms_B1F_EventScript_FatMan::
 .else
 .ifdef ITALIAN
 	.include "data/maps/AbandonedShip_Rooms_B1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/AbandonedShip_Rooms_B1F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

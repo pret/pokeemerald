@@ -295,6 +295,10 @@ BattleFrontier_Lounge7_EventScript_Gentleman::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_Lounge7/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_Lounge7/text_es.inc"
+.endif
 .endif
 .endif
 .endif

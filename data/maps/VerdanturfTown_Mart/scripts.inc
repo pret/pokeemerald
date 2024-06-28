@@ -48,6 +48,10 @@ VerdanturfTown_Mart_EventScript_Lass::
 .else
 .ifdef ITALIAN
 	.include "data/maps/VerdanturfTown_Mart/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/VerdanturfTown_Mart/text_es.inc"
+.endif
 .endif
 .endif
 .endif

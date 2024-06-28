@@ -205,6 +205,10 @@ RustboroCity_DevonCorp_3F_EventScript_RareRocksDisplay::
 .else
 .ifdef ITALIAN
 	.include "data/maps/RustboroCity_DevonCorp_3F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/RustboroCity_DevonCorp_3F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -343,6 +343,10 @@ LilycoveCity_ContestHall_EventScript_SmartStageSign::
 .else
 .ifdef ITALIAN
 	.include "data/maps/LilycoveCity_ContestHall/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LilycoveCity_ContestHall/text_es.inc"
+.endif
 .endif
 .endif
 .endif

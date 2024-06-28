@@ -86,6 +86,10 @@ RustboroCity_Flat1_2F_EventScript_PokeDoll::
 .else
 .ifdef ITALIAN
 	.include "data/maps/RustboroCity_Flat1_2F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/RustboroCity_Flat1_2F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

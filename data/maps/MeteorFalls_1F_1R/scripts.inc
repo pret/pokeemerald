@@ -245,6 +245,10 @@ MeteorFalls_1F_1R_EventScript_MetCozmo::
 .else
 .ifdef ITALIAN
 	.include "data/maps/MeteorFalls_1F_1R/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MeteorFalls_1F_1R/text_es.inc"
+.endif
 .endif
 .endif
 .endif

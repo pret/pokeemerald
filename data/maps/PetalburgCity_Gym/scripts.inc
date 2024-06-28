@@ -1149,6 +1149,10 @@ PetalburgCity_Gym_EventScript_GymStatue::
 .else
 .ifdef ITALIAN
 	.include "data/maps/PetalburgCity_Gym/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/PetalburgCity_Gym/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -90,6 +90,10 @@ VerdanturfTown_WandasHouse_EventScript_WallysAuntEverGrande::
 .else
 .ifdef ITALIAN
 	.include "data/maps/VerdanturfTown_WandasHouse/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/VerdanturfTown_WandasHouse/text_es.inc"
+.endif
 .endif
 .endif
 .endif

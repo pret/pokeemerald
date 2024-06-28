@@ -581,6 +581,10 @@ Route111_EventScript_TrainerHillSign::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route111/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route111/text_es.inc"
+.endif
 .endif
 .endif
 .endif

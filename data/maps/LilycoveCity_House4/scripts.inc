@@ -17,6 +17,10 @@ LilycoveCity_House4_EventScript_Man2::
 .else
 .ifdef ITALIAN
 	.include "data/maps/LilycoveCity_House4/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LilycoveCity_House4/text_es.inc"
+.endif
 .endif
 .endif
 .endif

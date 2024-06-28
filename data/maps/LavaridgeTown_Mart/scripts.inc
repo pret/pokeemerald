@@ -42,6 +42,10 @@ LavaridgeTown_Mart_EventScript_OldWoman::
 .else
 .ifdef ITALIAN
 	.include "data/maps/LavaridgeTown_Mart/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LavaridgeTown_Mart/text_es.inc"
+.endif
 .endif
 .endif
 .endif

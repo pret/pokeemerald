@@ -646,6 +646,10 @@ DewfordTown_EventScript_PhraseNotTrendyEnough::
 .else
 .ifdef ITALIAN
 	.include "data/maps/DewfordTown/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/DewfordTown/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -129,6 +129,10 @@ BattleFrontier_BattlePalaceCorridor_Movement_AttendantEnterBattleRoom:
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_BattlePalaceCorridor/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_BattlePalaceCorridor/text_es.inc"
+.endif
 .endif
 .endif
 .endif

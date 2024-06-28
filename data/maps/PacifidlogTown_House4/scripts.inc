@@ -35,6 +35,10 @@ PacifidlogTown_House4_EventScript_No::
 .else
 .ifdef ITALIAN
 	.include "data/maps/PacifidlogTown_House4/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/PacifidlogTown_House4/text_es.inc"
+.endif
 .endif
 .endif
 .endif

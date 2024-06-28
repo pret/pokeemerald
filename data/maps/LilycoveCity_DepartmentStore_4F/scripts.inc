@@ -61,6 +61,10 @@ LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs:
 .else
 .ifdef ITALIAN
 	.include "data/maps/LilycoveCity_DepartmentStore_4F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LilycoveCity_DepartmentStore_4F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

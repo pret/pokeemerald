@@ -93,6 +93,10 @@ MtChimney_CableCarStation_Movement_ExitCableCar:
 .else
 .ifdef ITALIAN
 	.include "data/maps/MtChimney_CableCarStation/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MtChimney_CableCarStation/text_es.inc"
+.endif
 .endif
 .endif
 .endif

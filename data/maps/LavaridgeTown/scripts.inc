@@ -284,6 +284,10 @@ LavaridgeTown_EventScript_HerbShopSign::
 .else
 .ifdef ITALIAN
 	.include "data/maps/LavaridgeTown/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LavaridgeTown/text_es.inc"
+.endif
 .endif
 .endif
 .endif

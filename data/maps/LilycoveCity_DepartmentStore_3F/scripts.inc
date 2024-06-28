@@ -66,6 +66,10 @@ LilycoveCity_DepartmentStore_3F_EventScript_Woman::
 .else
 .ifdef ITALIAN
 	.include "data/maps/LilycoveCity_DepartmentStore_3F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LilycoveCity_DepartmentStore_3F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

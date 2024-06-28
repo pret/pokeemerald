@@ -36,6 +36,10 @@ Route111_OldLadysRestStop_EventScript_DeclineRest::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route111_OldLadysRestStop/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route111_OldLadysRestStop/text_es.inc"
+.endif
 .endif
 .endif
 .endif

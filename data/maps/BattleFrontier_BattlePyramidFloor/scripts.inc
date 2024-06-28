@@ -132,6 +132,10 @@ BattlePyramid_Retire::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_BattlePyramidFloor/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_BattlePyramidFloor/text_es.inc"
+.endif
 .endif
 .endif
 .endif

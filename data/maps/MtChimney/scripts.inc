@@ -541,6 +541,10 @@ MtChimney_EventScript_SawyerRematch::
 .else
 .ifdef ITALIAN
 	.include "data/maps/MtChimney/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MtChimney/text_es.inc"
+.endif
 .endif
 .endif
 .endif

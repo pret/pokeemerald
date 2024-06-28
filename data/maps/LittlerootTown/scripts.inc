@@ -917,6 +917,10 @@ LittlerootTown_EventScript_GiveRunningShoes::
 .else
 .ifdef ITALIAN
 	.include "data/maps/LittlerootTown/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LittlerootTown/text_es.inc"
+.endif
 .endif
 .endif
 .endif

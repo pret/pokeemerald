@@ -160,6 +160,10 @@ LilycoveCity_DepartmentStore_5F_EventScript_LittleGirl::
 .else
 .ifdef ITALIAN
 	.include "data/maps/LilycoveCity_DepartmentStore_5F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LilycoveCity_DepartmentStore_5F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

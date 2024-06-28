@@ -351,6 +351,10 @@ OldaleTown_Movement_ReturnToOriginalPosition:
 .else
 .ifdef ITALIAN
 	.include "data/maps/OldaleTown/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/OldaleTown/text_es.inc"
+.endif
 .endif
 .endif
 .endif

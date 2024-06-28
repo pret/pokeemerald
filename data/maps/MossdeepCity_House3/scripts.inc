@@ -32,6 +32,10 @@ MossdeepCity_House3_EventScript_DeclineSuperRod::
 .else
 .ifdef ITALIAN
 	.include "data/maps/MossdeepCity_House3/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MossdeepCity_House3/text_es.inc"
+.endif
 .endif
 .endif
 .endif

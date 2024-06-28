@@ -147,6 +147,10 @@ SkyPillar_Outside_EventScript_ClosedDoor::
 .else
 .ifdef ITALIAN
 	.include "data/maps/SkyPillar_Outside/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SkyPillar_Outside/text_es.inc"
+.endif
 .endif
 .endif
 .endif

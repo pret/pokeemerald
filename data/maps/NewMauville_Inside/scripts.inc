@@ -253,6 +253,10 @@ NewMauville_Inside_EventScript_DefeatedVoltorb3::
 .else
 .ifdef ITALIAN
 	.include "data/maps/NewMauville_Inside/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/NewMauville_Inside/text_es.inc"
+.endif
 .endif
 .endif
 .endif

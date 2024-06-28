@@ -286,6 +286,10 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_Partner8::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_BattleTowerMultiPartnerRoom/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_BattleTowerMultiPartnerRoom/text_es.inc"
+.endif
 .endif
 .endif
 .endif

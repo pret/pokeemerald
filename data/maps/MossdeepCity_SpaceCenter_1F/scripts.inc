@@ -290,6 +290,10 @@ MossdeepCity_SpaceCenter_1F_Movement_MoveGruntFromStairs:
 .else
 .ifdef ITALIAN
 	.include "data/maps/MossdeepCity_SpaceCenter_1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MossdeepCity_SpaceCenter_1F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -455,6 +455,10 @@ BattleFrontier_BattlePalaceBattleRoom_Movement_SpenserEnter:
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_BattlePalaceBattleRoom/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_BattlePalaceBattleRoom/text_es.inc"
+.endif
 .endif
 .endif
 .endif

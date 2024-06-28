@@ -75,6 +75,10 @@ PetalburgCity_WallysHouse_EventScript_ReceivedHM03Surf::
 .else
 .ifdef ITALIAN
 	.include "data/maps/PetalburgCity_WallysHouse/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/PetalburgCity_WallysHouse/text_es.inc"
+.endif
 .endif
 .endif
 .endif

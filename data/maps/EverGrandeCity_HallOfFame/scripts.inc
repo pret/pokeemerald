@@ -91,6 +91,10 @@ EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame2:
 .else
 .ifdef ITALIAN
 	.include "data/maps/EverGrandeCity_HallOfFame/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/EverGrandeCity_HallOfFame/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -23,6 +23,10 @@ Route119_House_EventScript_Wingull::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route119_House/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route119_House/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -53,6 +53,10 @@ Route114_LanettesHouse_EventScript_PC::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route114_LanettesHouse/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route114_LanettesHouse/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -19,6 +19,10 @@ SeafloorCavern_Room1_EventScript_Grunt2::
 .else
 .ifdef ITALIAN
 	.include "data/maps/SeafloorCavern_Room1/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SeafloorCavern_Room1/text_es.inc"
+.endif
 .endif
 .endif
 .endif

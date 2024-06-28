@@ -49,6 +49,10 @@ Route106_EventScript_Ned::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route106/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route106/text_es.inc"
+.endif
 .endif
 .endif
 .endif

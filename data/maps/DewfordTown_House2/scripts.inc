@@ -34,6 +34,10 @@ DewfordTown_House2_EventScript_Boy::
 .else
 .ifdef ITALIAN
 	.include "data/maps/DewfordTown_House2/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/DewfordTown_House2/text_es.inc"
+.endif
 .endif
 .endif
 .endif

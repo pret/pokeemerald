@@ -49,6 +49,10 @@ BattleFrontier_Lounge5_EventScript_LittleBoy::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_Lounge5/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_Lounge5/text_es.inc"
+.endif
 .endif
 .endif
 .endif

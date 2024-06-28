@@ -128,6 +128,10 @@ VictoryRoad_1F_EventScript_Katelynn::
 .else
 .ifdef ITALIAN
 	.include "data/maps/VictoryRoad_1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/VictoryRoad_1F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -178,6 +178,10 @@ Route123_EventScript_RematchFernando::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route123/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route123/text_es.inc"
+.endif
 .endif
 .endif
 .endif

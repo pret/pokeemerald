@@ -180,6 +180,10 @@ Route121_EventScript_RematchCristin::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route121/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route121/text_es.inc"
+.endif
 .endif
 .endif
 .endif

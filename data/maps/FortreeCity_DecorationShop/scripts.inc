@@ -65,6 +65,10 @@ FortreeCity_DecorationShop_PokemartDecor_Chairs:
 .else
 .ifdef ITALIAN
 	.include "data/maps/FortreeCity_DecorationShop/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/FortreeCity_DecorationShop/text_es.inc"
+.endif
 .endif
 .endif
 .endif

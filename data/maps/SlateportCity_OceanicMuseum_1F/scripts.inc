@@ -232,6 +232,10 @@ SlateportCity_OceanicMuseum_1F_Movement_FamiliarGruntExitNorth:
 .else
 .ifdef ITALIAN
 	.include "data/maps/SlateportCity_OceanicMuseum_1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SlateportCity_OceanicMuseum_1F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

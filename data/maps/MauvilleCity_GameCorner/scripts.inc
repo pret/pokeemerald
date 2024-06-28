@@ -634,6 +634,10 @@ MauvilleCity_GameCorner_EventScript_NoCoinCase::
 .else
 .ifdef ITALIAN
 	.include "data/maps/MauvilleCity_GameCorner/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MauvilleCity_GameCorner/text_es.inc"
+.endif
 .endif
 .endif
 .endif

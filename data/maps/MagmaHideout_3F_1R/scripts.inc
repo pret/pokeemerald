@@ -19,6 +19,10 @@ MagmaHideout_3F_1R_EventScript_Grunt16::
 .else
 .ifdef ITALIAN
 	.include "data/maps/MagmaHideout_3F_1R/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MagmaHideout_3F_1R/text_es.inc"
+.endif
 .endif
 .endif
 .endif

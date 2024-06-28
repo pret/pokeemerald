@@ -42,6 +42,10 @@ SlateportCity_Mart_EventScript_Man::
 .else
 .ifdef ITALIAN
 	.include "data/maps/SlateportCity_Mart/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SlateportCity_Mart/text_es.inc"
+.endif
 .endif
 .endif
 .endif

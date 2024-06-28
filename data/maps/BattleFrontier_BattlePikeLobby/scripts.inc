@@ -275,6 +275,10 @@ BattleFrontier_BattlePike_EventScript_CloseCurtain::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_BattlePikeLobby/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_BattlePikeLobby/text_es.inc"
+.endif
 .endif
 .endif
 .endif

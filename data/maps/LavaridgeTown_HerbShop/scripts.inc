@@ -49,6 +49,10 @@ LavaridgeTown_HerbShop_EventScript_ExplainCharcoal::
 .else
 .ifdef ITALIAN
 	.include "data/maps/LavaridgeTown_HerbShop/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LavaridgeTown_HerbShop/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -35,6 +35,10 @@ PacifidlogTown_EventScript_TownSign::
 .else
 .ifdef ITALIAN
 	.include "data/maps/PacifidlogTown/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/PacifidlogTown/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -219,6 +219,10 @@ BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_ScottsHouse/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_ScottsHouse/text_es.inc"
+.endif
 .endif
 .endif
 .endif

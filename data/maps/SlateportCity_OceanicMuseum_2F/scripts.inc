@@ -280,6 +280,10 @@ SlateportCity_OceanicMuseum_2F_EventScript_MuseumPatron3::
 .else
 .ifdef ITALIAN
 	.include "data/maps/SlateportCity_OceanicMuseum_2F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SlateportCity_OceanicMuseum_2F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

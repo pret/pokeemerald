@@ -44,6 +44,10 @@ Route110_SeasideCyclingRoadNorthEntrance_EventScript_ClearCyclingRoad::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route110_SeasideCyclingRoadNorthEntrance/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route110_SeasideCyclingRoadNorthEntrance/text_es.inc"
+.endif
 .endif
 .endif
 .endif

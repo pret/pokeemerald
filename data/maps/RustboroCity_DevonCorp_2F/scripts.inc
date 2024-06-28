@@ -278,6 +278,10 @@ RustboroCity_DevonCorp_2F_EventScript_WorkOnNext::
 .else
 .ifdef ITALIAN
 	.include "data/maps/RustboroCity_DevonCorp_2F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/RustboroCity_DevonCorp_2F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

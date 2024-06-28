@@ -68,6 +68,10 @@ MirageTower_4F_EventScript_CollapseMirageTower::
 .else
 .ifdef ITALIAN
 	.include "data/maps/MirageTower_4F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MirageTower_4F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -104,6 +104,10 @@ Route109_SeashoreHouse_EventScript_TrainersNotCompleted::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route109_SeashoreHouse/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route109_SeashoreHouse/text_es.inc"
+.endif
 .endif
 .endif
 .endif

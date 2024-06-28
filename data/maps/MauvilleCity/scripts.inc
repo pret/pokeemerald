@@ -470,6 +470,10 @@ MauvilleCity_EventScript_RegisterWallyCall::
 .else
 .ifdef ITALIAN
 	.include "data/maps/MauvilleCity/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MauvilleCity/text_es.inc"
+.endif
 .endif
 .endif
 .endif

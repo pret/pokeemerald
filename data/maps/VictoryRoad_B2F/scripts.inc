@@ -39,6 +39,10 @@ VictoryRoad_B2F_EventScript_Dianne::
 .else
 .ifdef ITALIAN
 	.include "data/maps/VictoryRoad_B2F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/VictoryRoad_B2F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

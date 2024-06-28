@@ -322,6 +322,10 @@ Route110_TrickHousePuzzle7_EventScript_Everett::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route110_TrickHousePuzzle7/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route110_TrickHousePuzzle7/text_es.inc"
+.endif
 .endif
 .endif
 .endif

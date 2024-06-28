@@ -295,6 +295,10 @@ LittlerootTown_BrendansHouse_1F_Movement_BrendanGoUpstairs2:
 .else
 .ifdef ITALIAN
 	.include "data/maps/LittlerootTown_BrendansHouse_1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LittlerootTown_BrendansHouse_1F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -909,6 +909,10 @@ Route110_TrickHousePuzzle5_Movement_MechadollShake:
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route110_TrickHousePuzzle5/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route110_TrickHousePuzzle5/text_es.inc"
+.endif
 .endif
 .endif
 .endif

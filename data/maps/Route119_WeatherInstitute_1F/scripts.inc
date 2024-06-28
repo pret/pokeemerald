@@ -78,6 +78,10 @@ Route119_WeatherInstitute_1F_EventScript_Grunt4::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route119_WeatherInstitute_1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route119_WeatherInstitute_1F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

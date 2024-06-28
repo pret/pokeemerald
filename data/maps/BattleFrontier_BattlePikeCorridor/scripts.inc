@@ -64,6 +64,10 @@ BattleFrontier_BattlePikeCorridor_Movement_AttendantEnterCorridor:
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_BattlePikeCorridor/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_BattlePikeCorridor/text_es.inc"
+.endif
 .endif
 .endif
 .endif

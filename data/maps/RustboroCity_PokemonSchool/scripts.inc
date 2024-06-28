@@ -207,6 +207,10 @@ RustboroCity_PokemonSchool_EventScript_ScottWatchStudents::
 .else
 .ifdef ITALIAN
 	.include "data/maps/RustboroCity_PokemonSchool/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/RustboroCity_PokemonSchool/text_es.inc"
+.endif
 .endif
 .endif
 .endif

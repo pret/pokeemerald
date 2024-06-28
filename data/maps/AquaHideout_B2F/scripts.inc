@@ -97,6 +97,10 @@ AquaHideout_B2F_EventScript_Grunt8::
 .else
 .ifdef ITALIAN
 	.include "data/maps/AquaHideout_B2F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/AquaHideout_B2F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

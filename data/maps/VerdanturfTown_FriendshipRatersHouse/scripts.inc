@@ -70,6 +70,10 @@ VerdanturfTown_FriendshipRatersHouse_EventScript_Pikachu::
 .else
 .ifdef ITALIAN
 	.include "data/maps/VerdanturfTown_FriendshipRatersHouse/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/VerdanturfTown_FriendshipRatersHouse/text_es.inc"
+.endif
 .endif
 .endif
 .endif

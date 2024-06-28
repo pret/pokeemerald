@@ -279,6 +279,10 @@ BattleFrontier_BattleDomePreBattleRoom_Movement_PlayerEnterDoor:
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_BattleDomePreBattleRoom/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_BattleDomePreBattleRoom/text_es.inc"
+.endif
 .endif
 .endif
 .endif

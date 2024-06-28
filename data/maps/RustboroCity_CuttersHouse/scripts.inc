@@ -29,6 +29,10 @@ RustboroCity_CuttersHouse_EventScript_Lass::
 .else
 .ifdef ITALIAN
 	.include "data/maps/RustboroCity_CuttersHouse/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/RustboroCity_CuttersHouse/text_es.inc"
+.endif
 .endif
 .endif
 .endif

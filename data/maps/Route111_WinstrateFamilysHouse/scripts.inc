@@ -69,6 +69,10 @@ Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route111_WinstrateFamilysHouse/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route111_WinstrateFamilysHouse/text_es.inc"
+.endif
 .endif
 .endif
 .endif

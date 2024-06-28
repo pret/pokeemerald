@@ -114,6 +114,10 @@ AquaHideout_B1F_EventScript_Grunt7::
 .else
 .ifdef ITALIAN
 	.include "data/maps/AquaHideout_B1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/AquaHideout_B1F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

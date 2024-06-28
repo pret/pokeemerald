@@ -182,6 +182,10 @@ MauvilleCity_BikeShop_EventScript_ExitAcroHandbook::
 .else
 .ifdef ITALIAN
 	.include "data/maps/MauvilleCity_BikeShop/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MauvilleCity_BikeShop/text_es.inc"
+.endif
 .endif
 .endif
 .endif

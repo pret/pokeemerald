@@ -184,6 +184,10 @@ Route114_EventScript_Kai::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route114/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route114/text_es.inc"
+.endif
 .endif
 .endif
 .endif

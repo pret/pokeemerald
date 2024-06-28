@@ -60,6 +60,10 @@ Route110_SeasideCyclingRoadSouthEntrance_EventScript_ClearCyclingRoad::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route110_SeasideCyclingRoadSouthEntrance/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route110_SeasideCyclingRoadSouthEntrance/text_es.inc"
+.endif
 .endif
 .endif
 .endif

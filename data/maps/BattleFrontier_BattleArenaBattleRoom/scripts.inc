@@ -501,6 +501,10 @@ BattleFrontier_BattleArenaBattleRoom_Movement_GretaWalkBackToCenter:
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_BattleArenaBattleRoom/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_BattleArenaBattleRoom/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -241,6 +241,10 @@ BattleFrontier_OutsideEast_EventScript_Camper::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_OutsideEast/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_OutsideEast/text_es.inc"
+.endif
 .endif
 .endif
 .endif

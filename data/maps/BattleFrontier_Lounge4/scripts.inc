@@ -21,6 +21,10 @@ BattleFrontier_Lounge4_EventScript_Man::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_Lounge4/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_Lounge4/text_es.inc"
+.endif
 .endif
 .endif
 .endif

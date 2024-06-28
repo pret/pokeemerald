@@ -328,6 +328,10 @@ LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs2:
 .else
 .ifdef ITALIAN
 	.include "data/maps/LittlerootTown_MaysHouse_1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LittlerootTown_MaysHouse_1F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

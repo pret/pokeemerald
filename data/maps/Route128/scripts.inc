@@ -253,6 +253,10 @@ Route128_EventScript_Carlee::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route128/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route128/text_es.inc"
+.endif
 .endif
 .endif
 .endif

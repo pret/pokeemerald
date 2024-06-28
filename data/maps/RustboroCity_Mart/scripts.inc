@@ -76,6 +76,10 @@ RustboroCity_Mart_EventScript_BugCatcher::
 .else
 .ifdef ITALIAN
 	.include "data/maps/RustboroCity_Mart/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/RustboroCity_Mart/text_es.inc"
+.endif
 .endif
 .endif
 .endif

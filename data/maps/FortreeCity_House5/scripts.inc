@@ -27,6 +27,10 @@ FortreeCity_House5_EventScript_Zigzagoon::
 .else
 .ifdef ITALIAN
 	.include "data/maps/FortreeCity_House5/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/FortreeCity_House5/text_es.inc"
+.endif
 .endif
 .endif
 .endif

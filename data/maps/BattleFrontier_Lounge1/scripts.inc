@@ -158,6 +158,10 @@ BattleFrontier_Lounge1_EventScript_Boy2::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_Lounge1/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_Lounge1/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -13,6 +13,10 @@ AbandonedShip_Rooms2_B1F_EventScript_Camper::
 .else
 .ifdef ITALIAN
 	.include "data/maps/AbandonedShip_Rooms2_B1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/AbandonedShip_Rooms2_B1F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

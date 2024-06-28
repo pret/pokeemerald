@@ -990,6 +990,10 @@ LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase::
 .else
 .ifdef ITALIAN
 	.include "data/maps/LilycoveCity_ContestLobby/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LilycoveCity_ContestLobby/text_es.inc"
+.endif
 .endif
 .endif
 .endif

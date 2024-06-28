@@ -1006,6 +1006,10 @@ Route104_EventScript_Darian::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route104/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route104/text_es.inc"
+.endif
 .endif
 .endif
 .endif

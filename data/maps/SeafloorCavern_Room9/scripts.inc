@@ -233,6 +233,10 @@ SeafloorCavern_Room9_Movement_Delay32:
 .else
 .ifdef ITALIAN
 	.include "data/maps/SeafloorCavern_Room9/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SeafloorCavern_Room9/text_es.inc"
+.endif
 .endif
 .endif
 .endif

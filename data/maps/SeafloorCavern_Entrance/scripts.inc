@@ -66,6 +66,10 @@ SeafloorCavern_Entrance_EventScript_GruntFacePlayerNorth::
 .else
 .ifdef ITALIAN
 	.include "data/maps/SeafloorCavern_Entrance/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SeafloorCavern_Entrance/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -35,6 +35,10 @@ MtPyre_6F_EventScript_Cedric::
 .else
 .ifdef ITALIAN
 	.include "data/maps/MtPyre_6F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MtPyre_6F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

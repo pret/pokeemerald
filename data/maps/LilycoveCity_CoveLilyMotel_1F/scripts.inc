@@ -83,6 +83,10 @@ LilycoveCity_CoveLilyMotel_1F_Movement_OwnerReturn:
 .else
 .ifdef ITALIAN
 	.include "data/maps/LilycoveCity_CoveLilyMotel_1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LilycoveCity_CoveLilyMotel_1F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -299,6 +299,10 @@ Route113_GlassWorkshop_EventScript_NinjaBoy::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route113_GlassWorkshop/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route113_GlassWorkshop/text_es.inc"
+.endif
 .endif
 .endif
 .endif

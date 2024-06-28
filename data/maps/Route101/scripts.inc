@@ -268,6 +268,10 @@ Route101_Movement_BirchApproachPlayer:
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route101/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route101/text_es.inc"
+.endif
 .endif
 .endif
 .endif

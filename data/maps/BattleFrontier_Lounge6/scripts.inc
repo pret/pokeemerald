@@ -53,6 +53,10 @@ BattleFrontier_Lounge6_EventScript_TradeCompleted::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_Lounge6/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_Lounge6/text_es.inc"
+.endif
 .endif
 .endif
 .endif

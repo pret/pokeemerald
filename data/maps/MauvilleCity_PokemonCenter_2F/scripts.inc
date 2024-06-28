@@ -30,6 +30,10 @@ MauvilleCity_PokemonCenter_2F_EventScript_Youngster::
 .else
 .ifdef ITALIAN
 	.include "data/maps/MauvilleCity_PokemonCenter_2F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MauvilleCity_PokemonCenter_2F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

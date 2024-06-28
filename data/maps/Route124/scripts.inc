@@ -107,6 +107,10 @@ Route124_EventScript_Isabella::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route124/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route124/text_es.inc"
+.endif
 .endif
 .endif
 .endif

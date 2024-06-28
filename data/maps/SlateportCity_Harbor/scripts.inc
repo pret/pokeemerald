@@ -394,6 +394,10 @@ SlateportCity_Harbor_EventScript_TradedScanner::
 .else
 .ifdef ITALIAN
 	.include "data/maps/SlateportCity_Harbor/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SlateportCity_Harbor/text_es.inc"
+.endif
 .endif
 .endif
 .endif

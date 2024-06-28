@@ -120,6 +120,10 @@ BattleFrontier_Lounge2_EventScript_TriathleteF::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_Lounge2/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_Lounge2/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -26,6 +26,10 @@ SootopolisCity_House2_EventScript_DontKnowAboutOrbs::
 .else
 .ifdef ITALIAN
 	.include "data/maps/SootopolisCity_House2/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SootopolisCity_House2/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -704,6 +704,10 @@ Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route110_TrickHouseEntrance/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route110_TrickHouseEntrance/text_es.inc"
+.endif
 .endif
 .endif
 .endif

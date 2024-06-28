@@ -193,6 +193,10 @@ FarawayIsland_Interior_EventScript_HideMewWhenGrassCut::
 .else
 .ifdef ITALIAN
 	.include "data/maps/FarawayIsland_Interior/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/FarawayIsland_Interior/text_es.inc"
+.endif
 .endif
 .endif
 .endif

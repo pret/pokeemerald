@@ -105,6 +105,10 @@ Route104_MrBrineysHouse_EventScript_Peeko::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route104_MrBrineysHouse/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route104_MrBrineysHouse/text_es.inc"
+.endif
 .endif
 .endif
 .endif

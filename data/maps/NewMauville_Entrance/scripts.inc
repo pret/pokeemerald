@@ -54,6 +54,10 @@ NewMauville_Entrance_EventScript_DontOpenDoor::
 .else
 .ifdef ITALIAN
 	.include "data/maps/NewMauville_Entrance/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/NewMauville_Entrance/text_es.inc"
+.endif
 .endif
 .endif
 .endif

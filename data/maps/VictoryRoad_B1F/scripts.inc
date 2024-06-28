@@ -34,6 +34,10 @@ VictoryRoad_B1F_EventScript_Halle::
 .else
 .ifdef ITALIAN
 	.include "data/maps/VictoryRoad_B1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/VictoryRoad_B1F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

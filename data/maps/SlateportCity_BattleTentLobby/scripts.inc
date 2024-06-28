@@ -282,6 +282,10 @@ SlateportCity_BattleTentLobby_EventScript_ExitRules::
 .else
 .ifdef ITALIAN
 	.include "data/maps/SlateportCity_BattleTentLobby/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SlateportCity_BattleTentLobby/text_es.inc"
+.endif
 .endif
 .endif
 .endif

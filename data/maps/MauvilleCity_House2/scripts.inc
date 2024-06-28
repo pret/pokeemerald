@@ -48,6 +48,10 @@ MauvilleCity_House2_EventScript_DeclineTrade::
 .else
 .ifdef ITALIAN
 	.include "data/maps/MauvilleCity_House2/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MauvilleCity_House2/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -44,6 +44,10 @@ Route110_TrickHousePuzzle1_EventScript_Robin::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route110_TrickHousePuzzle1/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route110_TrickHousePuzzle1/text_es.inc"
+.endif
 .endif
 .endif
 .endif

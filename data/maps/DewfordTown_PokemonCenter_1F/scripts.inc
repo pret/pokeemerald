@@ -34,6 +34,10 @@ DewfordTown_PokemonCenter_1F_EventScript_Man::
 .else
 .ifdef ITALIAN
 	.include "data/maps/DewfordTown_PokemonCenter_1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/DewfordTown_PokemonCenter_1F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

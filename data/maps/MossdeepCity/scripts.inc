@@ -318,6 +318,10 @@ MossdeepCity_Movement_ScottExitEast:
 .else
 .ifdef ITALIAN
 	.include "data/maps/MossdeepCity/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MossdeepCity/text_es.inc"
+.endif
 .endif
 .endif
 .endif

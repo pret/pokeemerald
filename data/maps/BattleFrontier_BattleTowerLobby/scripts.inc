@@ -918,6 +918,10 @@ BattleFrontier_BattleTowerLobby_EventScript_ExitRules::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_BattleTowerLobby/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_BattleTowerLobby/text_es.inc"
+.endif
 .endif
 .endif
 .endif

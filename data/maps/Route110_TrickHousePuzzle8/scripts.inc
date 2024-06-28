@@ -35,6 +35,10 @@ Route110_TrickHousePuzzle8_EventScript_Leroy::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route110_TrickHousePuzzle8/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route110_TrickHousePuzzle8/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -27,6 +27,10 @@ PacifidlogTown_House5_EventScript_Gentleman::
 .else
 .ifdef ITALIAN
 	.include "data/maps/PacifidlogTown_House5/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/PacifidlogTown_House5/text_es.inc"
+.endif
 .endif
 .endif
 .endif

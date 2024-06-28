@@ -38,6 +38,10 @@ RustboroCity_PokemonCenter_1F_EventScript_Girl::
 .else
 .ifdef ITALIAN
 	.include "data/maps/RustboroCity_PokemonCenter_1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/RustboroCity_PokemonCenter_1F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

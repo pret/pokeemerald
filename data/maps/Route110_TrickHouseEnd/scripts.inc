@@ -257,6 +257,10 @@ Route110_TrickHouseEnd_Movement_TrickMasterSurprise:
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route110_TrickHouseEnd/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route110_TrickHouseEnd/text_es.inc"
+.endif
 .endif
 .endif
 .endif

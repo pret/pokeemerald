@@ -17,6 +17,10 @@ RustboroCity_Flat2_3F_EventScript_Woman::
 .else
 .ifdef ITALIAN
 	.include "data/maps/RustboroCity_Flat2_3F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/RustboroCity_Flat2_3F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

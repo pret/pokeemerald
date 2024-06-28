@@ -89,6 +89,10 @@ GraniteCave_StevensRoom_Movement_StevenExitSouth:
 .else
 .ifdef ITALIAN
 	.include "data/maps/GraniteCave_StevensRoom/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/GraniteCave_StevensRoom/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -98,6 +98,10 @@ PacifidlogTown_House2_EventScript_UnhappyAzurill::
 .else
 .ifdef ITALIAN
 	.include "data/maps/PacifidlogTown_House2/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/PacifidlogTown_House2/text_es.inc"
+.endif
 .endif
 .endif
 .endif

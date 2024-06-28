@@ -933,6 +933,10 @@ BattleFrontier_BattleDomeBattleRoom_Movement_RefereeExit:
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_BattleDomeBattleRoom/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_BattleDomeBattleRoom/text_es.inc"
+.endif
 .endif
 .endif
 .endif

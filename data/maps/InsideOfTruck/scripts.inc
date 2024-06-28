@@ -59,6 +59,10 @@ InsideOfTruck_EventScript_MovingBox::
 .else
 .ifdef ITALIAN
 	.include "data/maps/InsideOfTruck/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/InsideOfTruck/text_es.inc"
+.endif
 .endif
 .endif
 .endif

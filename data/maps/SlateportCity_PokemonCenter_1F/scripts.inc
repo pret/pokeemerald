@@ -34,6 +34,10 @@ SlateportCity_PokemonCenter_1F_EventScript_Woman::
 .else
 .ifdef ITALIAN
 	.include "data/maps/SlateportCity_PokemonCenter_1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SlateportCity_PokemonCenter_1F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

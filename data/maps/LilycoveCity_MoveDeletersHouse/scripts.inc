@@ -76,6 +76,10 @@ LilycoveCity_MoveDeletersHouse_EventScript_LastMonWithSurf::
 .else
 .ifdef ITALIAN
 	.include "data/maps/LilycoveCity_MoveDeletersHouse/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LilycoveCity_MoveDeletersHouse/text_es.inc"
+.endif
 .endif
 .endif
 .endif

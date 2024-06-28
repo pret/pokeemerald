@@ -31,6 +31,10 @@ EverGrandeCity_EventScript_SetVisitedEverGrande::
 .else
 .ifdef ITALIAN
 	.include "data/maps/EverGrandeCity/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/EverGrandeCity/text_es.inc"
+.endif
 .endif
 .endif
 .endif

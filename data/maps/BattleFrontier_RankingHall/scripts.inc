@@ -108,6 +108,10 @@ BattleFrontier_RankingHall_EventScript_Boy::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_RankingHall/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_RankingHall/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -63,6 +63,10 @@ Route114_FossilManiacsTunnel_EventScript_PlayerRevivedFossil::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route114_FossilManiacsTunnel/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route114_FossilManiacsTunnel/text_es.inc"
+.endif
 .endif
 .endif
 .endif

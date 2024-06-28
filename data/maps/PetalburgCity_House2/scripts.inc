@@ -17,6 +17,10 @@ PetalburgCity_House2_EventScript_SchoolKid::
 .else
 .ifdef ITALIAN
 	.include "data/maps/PetalburgCity_House2/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/PetalburgCity_House2/text_es.inc"
+.endif
 .endif
 .endif
 .endif

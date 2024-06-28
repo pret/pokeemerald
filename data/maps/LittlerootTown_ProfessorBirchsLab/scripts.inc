@@ -671,6 +671,10 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ScottAboardSSTidalCall::
 .else
 .ifdef ITALIAN
 	.include "data/maps/LittlerootTown_ProfessorBirchsLab/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LittlerootTown_ProfessorBirchsLab/text_es.inc"
+.endif
 .endif
 .endif
 .endif

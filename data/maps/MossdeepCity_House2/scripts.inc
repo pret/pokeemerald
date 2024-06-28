@@ -61,6 +61,10 @@ MossdeepCity_House2_Movement_WingullExitEast:
 .else
 .ifdef ITALIAN
 	.include "data/maps/MossdeepCity_House2/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MossdeepCity_House2/text_es.inc"
+.endif
 .endif
 .endif
 .endif

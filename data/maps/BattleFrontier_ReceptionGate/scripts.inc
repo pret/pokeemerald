@@ -306,6 +306,10 @@ BattleFrontier_ReceptionGate_EventScript_ExitFrontierPassGuide::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_ReceptionGate/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_ReceptionGate/text_es.inc"
+.endif
 .endif
 .endif
 .endif

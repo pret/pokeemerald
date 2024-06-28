@@ -532,6 +532,10 @@ BattleFrontier_BattlePyramidLobby_EventScript_ExitRules::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_BattlePyramidLobby/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_BattlePyramidLobby/text_es.inc"
+.endif
 .endif
 .endif
 .endif

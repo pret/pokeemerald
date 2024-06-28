@@ -17,6 +17,10 @@ VerdanturfTown_House_EventScript_Woman2::
 .else
 .ifdef ITALIAN
 	.include "data/maps/VerdanturfTown_House/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/VerdanturfTown_House/text_es.inc"
+.endif
 .endif
 .endif
 .endif

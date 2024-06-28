@@ -148,6 +148,10 @@ LilycoveCity_DepartmentStore_1F_EventScript_FloorNamesSign::
 .else
 .ifdef ITALIAN
 	.include "data/maps/LilycoveCity_DepartmentStore_1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LilycoveCity_DepartmentStore_1F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

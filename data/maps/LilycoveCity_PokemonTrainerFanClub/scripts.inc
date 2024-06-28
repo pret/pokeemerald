@@ -575,6 +575,10 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed2::
 .else
 .ifdef ITALIAN
 	.include "data/maps/LilycoveCity_PokemonTrainerFanClub/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LilycoveCity_PokemonTrainerFanClub/text_es.inc"
+.endif
 .endif
 .endif
 .endif

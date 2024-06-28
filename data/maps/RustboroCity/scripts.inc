@@ -1029,6 +1029,10 @@ RustboroCity_EventScript_Boy1::
 .else
 .ifdef ITALIAN
 	.include "data/maps/RustboroCity/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/RustboroCity/text_es.inc"
+.endif
 .endif
 .endif
 .endif

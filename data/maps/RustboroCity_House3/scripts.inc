@@ -28,6 +28,10 @@ RustboroCity_House3_EventScript_Pekachu::
 .else
 .ifdef ITALIAN
 	.include "data/maps/RustboroCity_House3/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/RustboroCity_House3/text_es.inc"
+.endif
 .endif
 .endif
 .endif

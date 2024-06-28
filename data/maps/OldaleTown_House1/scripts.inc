@@ -13,6 +13,10 @@ OldaleTown_House1_EventScript_Woman::
 .else
 .ifdef ITALIAN
 	.include "data/maps/OldaleTown_House1/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/OldaleTown_House1/text_es.inc"
+.endif
 .endif
 .endif
 .endif

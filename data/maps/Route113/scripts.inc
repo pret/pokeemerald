@@ -141,6 +141,10 @@ Route113_EventScript_Wyatt::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route113/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route113/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -226,6 +226,10 @@ BattleFrontier_BattlePyramidTop_Movement_CameraPanUp:
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_BattlePyramidTop/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_BattlePyramidTop/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -72,6 +72,10 @@ FortreeCity_House4_EventScript_Wingull::
 .else
 .ifdef ITALIAN
 	.include "data/maps/FortreeCity_House4/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/FortreeCity_House4/text_es.inc"
+.endif
 .endif
 .endif
 .endif

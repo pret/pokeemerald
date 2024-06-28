@@ -315,6 +315,10 @@ BattleFrontier_OutsideWest_EventScript_PokefanF::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_OutsideWest/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_OutsideWest/text_es.inc"
+.endif
 .endif
 .endif
 .endif

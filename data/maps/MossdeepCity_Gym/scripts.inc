@@ -372,6 +372,10 @@ MossdeepCity_Gym_EventScript_RedFloorSwitch::
 .else
 .ifdef ITALIAN
 	.include "data/maps/MossdeepCity_Gym/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MossdeepCity_Gym/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -46,6 +46,10 @@ MossdeepCity_Mart_EventScript_Sailor::
 .else
 .ifdef ITALIAN
 	.include "data/maps/MossdeepCity_Mart/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MossdeepCity_Mart/text_es.inc"
+.endif
 .endif
 .endif
 .endif

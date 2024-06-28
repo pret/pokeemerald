@@ -105,6 +105,10 @@ LilycoveCity_House3_EventScript_WereDoingContest::
 .else
 .ifdef ITALIAN
 	.include "data/maps/LilycoveCity_House3/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LilycoveCity_House3/text_es.inc"
+.endif
 .endif
 .endif
 .endif

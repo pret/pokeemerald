@@ -72,6 +72,10 @@ FallarborTown_CozmosHouse_EventScript_CozmoIsHappy::
 .else
 .ifdef ITALIAN
 	.include "data/maps/FallarborTown_CozmosHouse/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/FallarborTown_CozmosHouse/text_es.inc"
+.endif
 .endif
 .endif
 .endif

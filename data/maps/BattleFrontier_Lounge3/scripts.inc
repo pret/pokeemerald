@@ -205,6 +205,10 @@ BattleFrontier_Lounge3_EventScript_FaceOriginalDirection::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_Lounge3/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_Lounge3/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -57,6 +57,10 @@ AbandonedShip_Rooms2_1F_EventScript_Garrison::
 .else
 .ifdef ITALIAN
 	.include "data/maps/AbandonedShip_Rooms2_1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/AbandonedShip_Rooms2_1F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

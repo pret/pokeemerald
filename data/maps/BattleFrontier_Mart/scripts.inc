@@ -56,6 +56,10 @@ BattleFrontier_Mart_EventScript_Boy::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_Mart/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_Mart/text_es.inc"
+.endif
 .endif
 .endif
 .endif

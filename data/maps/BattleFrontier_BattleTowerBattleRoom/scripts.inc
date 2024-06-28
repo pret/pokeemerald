@@ -445,6 +445,10 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_RetireChallenge::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_BattleTowerBattleRoom/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_BattleTowerBattleRoom/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -30,6 +30,10 @@ AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus::
 .else
 .ifdef ITALIAN
 	.include "data/maps/AbandonedShip_CaptainsOffice/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/AbandonedShip_CaptainsOffice/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -68,6 +68,10 @@ MeteorFalls_1F_2R_EventScript_RematchJay::
 .else
 .ifdef ITALIAN
 	.include "data/maps/MeteorFalls_1F_2R/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MeteorFalls_1F_2R/text_es.inc"
+.endif
 .endif
 .endif
 .endif

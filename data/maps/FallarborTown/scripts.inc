@@ -59,6 +59,10 @@ FallarborTown_EventScript_MoveTutorSign::
 .else
 .ifdef ITALIAN
 	.include "data/maps/FallarborTown/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/FallarborTown/text_es.inc"
+.endif
 .endif
 .endif
 .endif

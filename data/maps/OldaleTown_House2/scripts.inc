@@ -17,6 +17,10 @@ OldaleTown_House2_EventScript_Man::
 .else
 .ifdef ITALIAN
 	.include "data/maps/OldaleTown_House2/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/OldaleTown_House2/text_es.inc"
+.endif
 .endif
 .endif
 .endif

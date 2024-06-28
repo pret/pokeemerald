@@ -549,6 +549,10 @@ LilycoveCity_Harbor_Movement_SailorBoardWithBrineyEast:
 .else
 .ifdef ITALIAN
 	.include "data/maps/LilycoveCity_Harbor/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LilycoveCity_Harbor/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -84,6 +84,10 @@ EverGrandeCity_PokemonCenter_1F_Movement_ScottExit:
 .else
 .ifdef ITALIAN
 	.include "data/maps/EverGrandeCity_PokemonCenter_1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/EverGrandeCity_PokemonCenter_1F/text_es.inc"
+.endif
 .endif
 .endif
 .endif

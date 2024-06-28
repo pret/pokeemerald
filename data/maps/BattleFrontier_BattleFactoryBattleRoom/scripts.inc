@@ -258,6 +258,10 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_ScientistsFaceBattle::
 .else
 .ifdef ITALIAN
 	.include "data/maps/BattleFrontier_BattleFactoryBattleRoom/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/BattleFrontier_BattleFactoryBattleRoom/text_es.inc"
+.endif
 .endif
 .endif
 .endif

@@ -484,6 +484,10 @@ Route109_EventScript_Elijah::
 .else
 .ifdef ITALIAN
 	.include "data/maps/Route109/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route109/text_es.inc"
+.endif
 .endif
 .endif
 .endif
