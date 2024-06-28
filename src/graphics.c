@@ -1535,19 +1535,24 @@ const u16 gRegionMapCityZoomTiles_Pal[] = INCBIN_U16("graphics/pokenav/zoom_tile
 const u32 gRegionMapCityZoomText_Gfx[] = INCBIN_U32("graphics/pokenav/city_zoom_text.4bpp.lz");
 const u16 gPokenavConditionCancel_Pal[] = INCBIN_U16("graphics/pokenav/condition/cancel.gbapal");
 const u8 gPokenavConditionCancel_Gfx[] = INCBIN_U8("graphics/pokenav/condition/cancel.4bpp");
+
+const u16 gMonMarkingsMenu_Pal[] = INCBIN_U16("graphics/interface/mon_markings_menu.gbapal");
+const u8 gMonMarkingsMenu_Gfx[] = INCBIN_U8("graphics/interface/mon_markings_menu.4bpp");
 #elif FRENCH
 const u32 gRegionMapCityZoomText_Gfx[] = INCBIN_U32("graphics/pokenav/city_zoom_text_fr.4bpp.lz");
 const u16 gPokenavConditionCancel_Pal[] = INCBIN_U16("graphics/pokenav/condition/cancel.gbapal");
 const u8 gPokenavConditionCancel_Gfx[] = INCBIN_U8("graphics/pokenav/condition/french/cancel.4bpp");
+
+const u16 gMonMarkingsMenu_Pal[] = INCBIN_U16("graphics/interface/mon_markings_menu.gbapal");
+const u8 gMonMarkingsMenu_Gfx[] = INCBIN_U8("graphics/interface/mon_markings_menu.4bpp");
 #elif ITALIAN
 const u32 gRegionMapCityZoomText_Gfx[] = INCBIN_U32("graphics/pokenav/city_zoom_text_it.4bpp.lz");
 const u16 gPokenavConditionCancel_Pal[] = INCBIN_U16("graphics/pokenav/condition/cancel.gbapal");
 const u8 gPokenavConditionCancel_Gfx[] = INCBIN_U8("graphics/pokenav/condition/italian/cancel.4bpp");
-#endif
-
 
 const u16 gMonMarkingsMenu_Pal[] = INCBIN_U16("graphics/interface/mon_markings_menu.gbapal");
 const u8 gMonMarkingsMenu_Gfx[] = INCBIN_U8("graphics/interface/mon_markings_menu.4bpp");
+#endif
 
 const u16 gBerryBlenderMiscPalette[] = INCBIN_U16("graphics/berry_blender/misc.gbapal");
 const u16 gBerryBlenderArrowPalette[] = INCBIN_U16("graphics/berry_blender/arrow.gbapal");
@@ -1766,7 +1771,13 @@ const u16 gTilesetPalettes_General[][16] =
     INCBIN_U16("data/tilesets/primary/general/palettes/15.gbapal"),
 };
 
+#if ENGLISH
 const u32 gTilesetTiles_General[] = INCBIN_U32("data/tilesets/primary/general/tiles.4bpp.lz");
+#elif FRENCH
+const u32 gTilesetTiles_General[] = INCBIN_U32("data/tilesets/primary/general/french/tiles.4bpp.lz");
+#elif ITALIAN
+const u32 gTilesetTiles_General[] = INCBIN_U32("data/tilesets/primary/general/italian/tiles.4bpp.lz");
+#endif
 
 // trade/egg hatch
 
@@ -1857,8 +1868,16 @@ const u32 gTitleScreenPokemonLogoTilemap[] = INCBIN_U32("graphics/title_screen/p
 
 // size in LoadPalette calls is reported as 0xD0 << 1, which is 0x1A0, but palette is only 0x100 bytes long so it loads garbage as well
 const u16 gFrontierPassBg_Pal[][16]                      = INCBIN_U16("graphics/frontier_pass/bg.gbapal");
+#if ENGLISH
 const u32 gFrontierPassBg_Gfx[]                          = INCBIN_U32("graphics/frontier_pass/bg.4bpp.lz");
 const u32 gFrontierPassMapAndCard_Gfx[]                  = INCBIN_U32("graphics/frontier_pass/map_and_card.8bpp.lz");
+#elif FRENCH
+const u32 gFrontierPassBg_Gfx[]                          = INCBIN_U32("graphics/frontier_pass/french/bg.4bpp.lz");
+const u32 gFrontierPassMapAndCard_Gfx[]                  = INCBIN_U32("graphics/frontier_pass/french/map_and_card.8bpp.lz");
+#elif ITALIAN
+const u32 gFrontierPassBg_Gfx[]                          = INCBIN_U32("graphics/frontier_pass/italian/bg.4bpp.lz");
+const u32 gFrontierPassMapAndCard_Gfx[]                  = INCBIN_U32("graphics/frontier_pass/italian/map_and_card.8bpp.lz");
+#endif
 const u32 gFrontierPassBg_Tilemap[]                      = INCBIN_U32("graphics/frontier_pass/bg.bin.lz");
 const u16 gFrontierPassCancelButton_Tilemap[]            = INCBIN_U16("graphics/frontier_pass/cancel.bin");
 const u16 gFrontierPassCancelButtonHighlighted_Tilemap[] = INCBIN_U16("graphics/frontier_pass/cancel_highlighted.bin");
@@ -1918,7 +1937,11 @@ const u16 gTilesetPalettes_Shop[][16] =
 	INCBIN_U16("data/tilesets/secondary/shop/palettes/14.gbapal"),
 	INCBIN_U16("data/tilesets/secondary/shop/palettes/15.gbapal"),
 };
-const u32 gTilesetTiles_Shop[] = INCBIN_U32("data/tilesets/secondary/shop/tiles.4bpp.lz");
+#if FRENCH
+const u32 gTilesetTiles_Shop[] = INCBIN_U32("data/tilesets/secondary/shop/french/tiles.4bpp.lz");
+#elif ITALIAN
+const u32 gTilesetTiles_Shop[] = INCBIN_U32("data/tilesets/secondary/shop/italian/tiles.4bpp.lz");
+#endif
 
 // roulette
 const u16 gRouletteShadow_Pal[] = INCBIN_U16("graphics/roulette/shadow.gbapal");
@@ -1939,7 +1962,11 @@ const u16 gRouletteUnused3_Pal[] = INCBIN_U16("graphics/roulette/unused_3.gbapal
 const u16 gRouletteUnused4_Pal[] = INCBIN_U16("graphics/roulette/unused_4.gbapal");
 
 // frontier pass
-const u32 gFrontierPassMapScreen_Gfx[] = INCBIN_U32("graphics/frontier_pass/map_screen.4bpp.lz");
+#if FRENCH
+const u32 gFrontierPassMapScreen_Gfx[] = INCBIN_U32("graphics/frontier_pass/french/map_screen.4bpp.lz");
+#elif ITALIAN
+const u32 gFrontierPassMapScreen_Gfx[] = INCBIN_U32("graphics/frontier_pass/italian/map_screen.4bpp.lz");
+#endif
 
 // tiles battle dome
 const u16 gTilesetPalettes_BattleDome[][16] =
@@ -1961,7 +1988,11 @@ const u16 gTilesetPalettes_BattleDome[][16] =
 	INCBIN_U16("data/tilesets/secondary/battle_dome/palettes/14.gbapal"),
 	INCBIN_U16("data/tilesets/secondary/battle_dome/palettes/15.gbapal"),
 };
-const u32 gTilesetTiles_BattleDome[] = INCBIN_U32("data/tilesets/secondary/battle_dome/tiles.4bpp.lz");
+#if FRENCH
+const u32 gTilesetTiles_BattleDome[] = INCBIN_U32("data/tilesets/secondary/battle_dome/french/tiles.4bpp.lz");
+#elif ITALIAN
+const u32 gTilesetTiles_BattleDome[] = INCBIN_U32("data/tilesets/secondary/battle_dome/italian/tiles.4bpp.lz");
+#endif
 
 // pokenav match call gfx
 const u16 gMatchCallUI_Pal[] = INCBIN_U16("graphics/pokenav/match_call/ui.gbapal");

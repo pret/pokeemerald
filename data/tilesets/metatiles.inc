@@ -136,7 +136,17 @@ gMetatileAttributes_InsideBuilding::
 
 	.align 1
 gMetatiles_Shop::
+.ifdef ENGLISH
 	.incbin "data/tilesets/secondary/shop/metatiles.bin"
+.else
+.ifdef FRENCH
+	.incbin "data/tilesets/secondary/shop/french/metatiles.bin"
+.else
+.ifdef ITALIAN
+	.incbin "data/tilesets/secondary/shop/italian/metatiles.bin"
+.endif
+.endif
+.endif
 
 	.align 1
 gMetatileAttributes_Shop::
