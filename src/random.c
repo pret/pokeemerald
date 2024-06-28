@@ -250,15 +250,20 @@ u16 RandomSeeded(u16 value)
     result = ISO_RANDOMIZE1(otId + value) >> 16;
     return result;
 }
+
 #define I_MAX 5
 u16 RandomModulo(u32 value, u16 modulo)
 {
-    u32 otId;
-    u32 RAND_MAX;
     u32 result = 0;
-    u8 i = 0;
+    u64 k = 0;
 
-    value = Random32();
+    k = (4294967295 - (4294967295 % modulo)) / modulo;
+    do
+    {
+        value = Random32();
+    }
+    while(value >= (k * modulo));
+
     return (value % modulo);
 }
 
