@@ -485,7 +485,13 @@ const u32 gJPContestInterfaceTilemap[] = INCBIN_U32("graphics/contest/japanese/i
 const u32 gJPContestAudienceTilemap[] = INCBIN_U32("graphics/contest/japanese/audience.bin.lz");
 const u32 gContestCurtainTilemap[] = INCBIN_U32("graphics/contest/curtain.bin.lz");
 
+#if ENGLISH
 const u32 gContestInterfaceGfx[] = INCBIN_U32("graphics/contest/interface.4bpp.lz");
+#elif FRENCH
+const u32 gContestInterfaceGfx[] = INCBIN_U32("graphics/contest/french/interface.4bpp.lz");
+#elif ITALIAN
+const u32 gContestInterfaceGfx[] = INCBIN_U32("graphics/contest/italian/interface.4bpp.lz");
+#endif
 const u32 gContestAudienceGfx[] = INCBIN_U32("graphics/contest/audience.4bpp.lz");
 const u32 gContestFaces_Gfx[] = INCBIN_U32("graphics/contest/faces.4bpp.lz");
 const u32 gContestJudgeSymbolsGfx[] = INCBIN_U32("graphics/contest/judge_symbols.4bpp.lz");
@@ -1199,7 +1205,13 @@ const u32 gPartyMenuPokeball_Gfx[] = INCBIN_U32("graphics/party_menu/pokeball.4b
 const u32 gPartyMenuPokeballSmall_Gfx[] = INCBIN_U32("graphics/party_menu/pokeball_small.4bpp.lz"); //unused
 const u32 gPartyMenuPokeball_Pal[] = INCBIN_U32("graphics/party_menu/pokeball.gbapal.lz");
 
+#if ENGLISH
 const u32 gStatusGfx_Icons[] = INCBIN_U32("graphics/interface/status_icons.4bpp.lz");
+#elif FRENCH
+const u32 gStatusGfx_Icons[] = INCBIN_U32("graphics/interface/french/status_icons.4bpp.lz");
+#elif ITALIAN
+const u32 gStatusGfx_Icons[] = INCBIN_U32("graphics/interface/italian/status_icons.4bpp.lz");
+#endif
 const u32 gStatusPal_Icons[] = INCBIN_U32("graphics/interface/status_icons.gbapal.lz");
 
 #if ENGLISH
@@ -1286,7 +1298,7 @@ const u32 gMenuPokeblockDevice_Pal[] = INCBIN_U32("graphics/pokeblock/device.gba
 #if ENGLISH || ITALIAN
 const u32 gMenuPokeblock_Tilemap[] = INCBIN_U32("graphics/pokeblock/menu.bin.lz");
 #elif FRENCH
-const u32 gMenuPokeblock_Tilemap[] = INCBIN_U32("graphics/pokeblock/menu.bin.lz");
+const u32 gMenuPokeblock_Tilemap[] = INCBIN_U32("graphics/pokeblock/french/menu.bin.lz");
 #endif
 
 const u32 gPokeblock_Gfx[] = INCBIN_U32("graphics/pokeblock/pokeblock.4bpp.lz");
@@ -1365,8 +1377,16 @@ const u16 gPokedexBgHoenn_Pal[] = INCBIN_U16("graphics/pokedex/bg_hoenn.gbapal")
 const u16 gPokedexCaughtScreen_Pal[] = INCBIN_U16("graphics/pokedex/caught_screen.gbapal");
 const u16 gPokedexSearchResults_Pal[] = INCBIN_U16("graphics/pokedex/search_results_bg.gbapal");
 const u16 gPokedexBgNational_Pal[] = INCBIN_U16("graphics/pokedex/bg_national.gbapal");
+#if ENGLISH
 const u32 gPokedexMenu_Gfx[] = INCBIN_U32("graphics/pokedex/menu.4bpp.lz");
 const u32 gPokedexInterface_Gfx[] = INCBIN_U32("graphics/pokedex/interface.4bpp.lz");
+#elif FRENCH
+const u32 gPokedexMenu_Gfx[] = INCBIN_U32("graphics/pokedex/french/menu.4bpp.lz");
+const u32 gPokedexInterface_Gfx[] = INCBIN_U32("graphics/pokedex/french/interface.4bpp.lz");
+#elif ITALIAN
+const u32 gPokedexMenu_Gfx[] = INCBIN_U32("graphics/pokedex/italian/menu.4bpp.lz");
+const u32 gPokedexInterface_Gfx[] = INCBIN_U32("graphics/pokedex/italian/interface.4bpp.lz");
+#endif
 const u32 gUnused_PokedexNoBall[] = INCBIN_U32("graphics/pokedex/noball_unused.4bpp.lz");
 const u32 gPokedexStartMenuMain_Tilemap[] = INCBIN_U32("graphics/pokedex/start_menu_main.bin.lz");
 const u32 gPokedexStartMenuSearchResults_Tilemap[] = INCBIN_U32("graphics/pokedex/start_menu_search_results.bin.lz");
@@ -1378,7 +1398,13 @@ const u32 gPokedexScreenSelectBarSubmenu_Tilemap[] = INCBIN_U32("graphics/pokede
 const u32 gPokedexInfoScreen_Tilemap[] = INCBIN_U32("graphics/pokedex/info_screen.bin.lz");
 const u32 gPokedexCryScreen_Tilemap[] = INCBIN_U32("graphics/pokedex/cry_screen.bin.lz");
 const u16 gPokedexSearchMenu_Pal[] = INCBIN_U16("graphics/pokedex/search_menu.gbapal");
+#if ENGLISH
 const u32 gPokedexSearchMenu_Gfx[] = INCBIN_U32("graphics/pokedex/search_menu.4bpp.lz");
+#elif FRENCH
+const u32 gPokedexSearchMenu_Gfx[] = INCBIN_U32("graphics/pokedex/french/search_menu.4bpp.lz");
+#elif ITALIAN
+const u32 gPokedexSearchMenu_Gfx[] = INCBIN_U32("graphics/pokedex/italian/search_menu.4bpp.lz");
+#endif
 const u32 gPokedexSearchMenuNational_Tilemap[] = INCBIN_U32("graphics/pokedex/search_menu_national.bin.lz");
 const u32 gPokedexSearchMenuHoenn_Tilemap[] = INCBIN_U32("graphics/pokedex/search_menu_hoenn.bin.lz");
 
@@ -1402,7 +1428,13 @@ const u32 gPokedexAreaScreenAreaUnknown_Gfx[] = INCBIN_U32("graphics/pokedex/ita
 const u16 gMenuInfoElements1_Pal[] = INCBIN_U16("graphics/interface/menu_info1.gbapal");
 const u16 gMenuInfoElements2_Pal[] = INCBIN_U16("graphics/interface/menu_info2.gbapal");
 const u16 gMenuInfoElements3_Pal[] = INCBIN_U16("graphics/interface/menu_info3.gbapal");
+#if ENGLISH
 const u8 gMenuInfoElements_Gfx[] = INCBIN_U8("graphics/interface/menu_info.4bpp");
+#elif FRENCH
+const u8 gMenuInfoElements_Gfx[] = INCBIN_U8("graphics/interface/french/menu_info.4bpp");
+#elif ITALIAN
+const u8 gMenuInfoElements_Gfx[] = INCBIN_U8("graphics/interface/italian/menu_info.4bpp");
+#endif
 
 #if ENGLISH
 const u8 gBagMenuHMIcon_Gfx[] = INCBIN_U8("graphics/bag/hm.4bpp");
@@ -1491,8 +1523,8 @@ const u32 gPokenavLeftHeaderTough_Gfx[] = INCBIN_U32("graphics/pokenav/left_head
 const u32 gPokenavLeftHeaderCool_Gfx[] = INCBIN_U32("graphics/pokenav/left_headers/cool.4bpp.lz");
 const u32 gPokenavLeftHeaderParty_Gfx[] = INCBIN_U32("graphics/pokenav/left_headers/party.4bpp.lz");
 #elif FRENCH
-const u32 gPokenavHeader_Gfx[] = INCBIN_U32("graphics/pokenav/header_it.4bpp.lz"); // TODO: use width 9 and makefile rule for cleanliness, make wasnt behaving, didnt want to apply num_tiles to this
-const u32 gPokenavHeader_Tilemap[] = INCBIN_U32("graphics/pokenav/header_it.bin.lz");
+const u32 gPokenavHeader_Gfx[] = INCBIN_U32("graphics/pokenav/header_fr.4bpp.lz"); // TODO: use width 9 and makefile rule for cleanliness, make wasnt behaving, didnt want to apply num_tiles to this
+const u32 gPokenavHeader_Tilemap[] = INCBIN_U32("graphics/pokenav/header_fr.bin.lz");
 
 const u16 gPokenavLeftHeader_Pal[] = INCBIN_U16("graphics/pokenav/left_headers/palette.gbapal");
 const u32 gPokenavLeftHeaderBeauty_Gfx[] = INCBIN_U32("graphics/pokenav/left_headers/french/beauty.4bpp.lz");
@@ -1544,14 +1576,14 @@ const u16 gPokenavConditionCancel_Pal[] = INCBIN_U16("graphics/pokenav/condition
 const u8 gPokenavConditionCancel_Gfx[] = INCBIN_U8("graphics/pokenav/condition/french/cancel.4bpp");
 
 const u16 gMonMarkingsMenu_Pal[] = INCBIN_U16("graphics/interface/mon_markings_menu.gbapal");
-const u8 gMonMarkingsMenu_Gfx[] = INCBIN_U8("graphics/interface/mon_markings_menu.4bpp");
+const u8 gMonMarkingsMenu_Gfx[] = INCBIN_U8("graphics/interface/french/mon_markings_menu.4bpp");
 #elif ITALIAN
 const u32 gRegionMapCityZoomText_Gfx[] = INCBIN_U32("graphics/pokenav/city_zoom_text_it.4bpp.lz");
 const u16 gPokenavConditionCancel_Pal[] = INCBIN_U16("graphics/pokenav/condition/cancel.gbapal");
 const u8 gPokenavConditionCancel_Gfx[] = INCBIN_U8("graphics/pokenav/condition/italian/cancel.4bpp");
 
 const u16 gMonMarkingsMenu_Pal[] = INCBIN_U16("graphics/interface/mon_markings_menu.gbapal");
-const u8 gMonMarkingsMenu_Gfx[] = INCBIN_U8("graphics/interface/mon_markings_menu.4bpp");
+const u8 gMonMarkingsMenu_Gfx[] = INCBIN_U8("graphics/interface/italian/mon_markings_menu.4bpp");
 #endif
 
 const u16 gBerryBlenderMiscPalette[] = INCBIN_U16("graphics/berry_blender/misc.gbapal");
@@ -1581,7 +1613,7 @@ const u32 gEasyChatButtonWindow_Gfx[] = INCBIN_U32("graphics/easy_chat/button_wi
 const u32 gEasyChatMode_Gfx[] = INCBIN_U32("graphics/easy_chat/mode.4bpp.lz");
 #elif FRENCH
 const u32 gEasyChatButtonWindow_Gfx[] = INCBIN_U32("graphics/easy_chat/button_window_fr.4bpp.lz");
-const u32 gEasyChatMode_Gfx[] = INCBIN_U32("graphics/easy_chat/mode_it.4bpp.lz");
+const u32 gEasyChatMode_Gfx[] = INCBIN_U32("graphics/easy_chat/mode_fr.4bpp.lz");
 #elif ITALIAN
 const u32 gEasyChatButtonWindow_Gfx[] = INCBIN_U32("graphics/easy_chat/button_window_it.4bpp.lz");
 const u32 gEasyChatMode_Gfx[] = INCBIN_U32("graphics/easy_chat/mode_it.4bpp.lz");
@@ -1606,7 +1638,13 @@ const u32 gUsePokeblockCondition_Gfx[] = INCBIN_U32("graphics/pokeblock/use_scre
 #endif
 
 const u16 gUsePokeblockUpDown_Pal[] = INCBIN_U16("graphics/pokeblock/use_screen/updown.gbapal");
+#if ENGLISH
 const u8 gUsePokeblockUpDown_Gfx[] = INCBIN_U8("graphics/pokeblock/use_screen/updown.4bpp");
+#elif FRENCH
+const u8 gUsePokeblockUpDown_Gfx[] = INCBIN_U8("graphics/pokeblock/use_screen/french/updown.4bpp");
+#elif ITALIAN
+const u8 gUsePokeblockUpDown_Gfx[] = INCBIN_U8("graphics/pokeblock/use_screen/italian/updown.4bpp");
+#endif
 
 #if ENGLISH
 const u16 gUsePokeblockGraph_Pal[] = INCBIN_U16("graphics/pokeblock/use_screen/graph.gbapal");
