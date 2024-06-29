@@ -1194,9 +1194,9 @@ const u32 gBattleAnimSpritePal_WhiteShadow[] = INCBIN_U32("graphics/battle_anims
 #if ENGLISH
 const u32 gPartyMenuBg_Gfx[] = INCBIN_U32("graphics/party_menu/bg.4bpp.lz");
 #elif FRENCH
-const u32 gPartyMenuBg_Gfx[] = INCBIN_U32("graphics/party_menu/bg_fr.4bpp.lz");
+const u32 gPartyMenuBg_Gfx[] = INCBIN_U32("graphics/party_menu/french/bg.4bpp.lz");
 #elif ITALIAN
-const u32 gPartyMenuBg_Gfx[] = INCBIN_U32("graphics/party_menu/bg_it.4bpp.lz");
+const u32 gPartyMenuBg_Gfx[] = INCBIN_U32("graphics/party_menu/italian/bg.4bpp.lz");
 #endif
 const u32 gPartyMenuBg_Pal[] = INCBIN_U32("graphics/party_menu/bg.gbapal.lz");
 const u32 gPartyMenuBg_Tilemap[] = INCBIN_U32("graphics/party_menu/bg.bin.lz");
