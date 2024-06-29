@@ -486,6 +486,12 @@ $(BATTRANSGFXDIR)/vs_frame.4bpp: %.4bpp: %.png
 graphics/party_menu/bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 62 -Wnum_tiles
 
+graphics/party_menu/french/bg.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 62 -Wnum_tiles
+
+graphics/party_menu/italian/bg.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 62 -Wnum_tiles
+
 graphics/bag/menu.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53 -Wnum_tiles
 

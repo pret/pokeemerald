@@ -1,17 +1,15 @@
-#if ENGLISH
 const u16 gSlotMachineMenu_Pal[] = INCBIN_U16("graphics/slot_machine/menu.gbapal");
+#if ENGLISH
 const u32 gSlotMachineMenu_Gfx[] = INCBIN_U32("graphics/slot_machine/menu.4bpp.lz");
 const u16 gSlotMachineMenu_Tilemap[] = INCBIN_U16("graphics/slot_machine/menu.bin");
 
 const u16 gSlotMachineInfoBox_Tilemap[] = INCBIN_U16("graphics/slot_machine/info_box.bin");
 #elif FRENCH
-const u16 gSlotMachineMenu_Pal[] = INCBIN_U16("graphics/slot_machine/fr/menu.gbapal");
 const u32 gSlotMachineMenu_Gfx[] = INCBIN_U32("graphics/slot_machine/fr/menu.4bpp.lz");
 const u16 gSlotMachineMenu_Tilemap[] = INCBIN_U16("graphics/slot_machine/menu.bin");
 
 const u16 gSlotMachineInfoBox_Tilemap[] = INCBIN_U16("graphics/slot_machine/fr/info_box.bin");
 #elif ITALIAN
-const u16 gSlotMachineMenu_Pal[] = INCBIN_U16("graphics/slot_machine/it/menu.gbapal");
 const u32 gSlotMachineMenu_Gfx[] = INCBIN_U32("graphics/slot_machine/it/menu.4bpp.lz");
 const u16 gSlotMachineMenu_Tilemap[] = INCBIN_U16("graphics/slot_machine/menu.bin");
 
