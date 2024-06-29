@@ -1916,15 +1916,16 @@ static bool32 HasAtLeastFiveBadges(void)
 void IncrementRematchStepCounter(void)
 {
 #if FREE_MATCH_CALL == FALSE
-    if (HasAtLeastFiveBadges()
-        && (I_VS_SEEKER_CHARGING != 0)
-        && (!CheckBagHasItem(ITEM_VS_SEEKER, 1)))
-    {
-        if (gSaveBlock1Ptr->trainerRematchStepCounter >= STEP_COUNTER_MAX)
-            gSaveBlock1Ptr->trainerRematchStepCounter = STEP_COUNTER_MAX;
-        else
-            gSaveBlock1Ptr->trainerRematchStepCounter++;
-    }
+    if (!HasAtLeastFiveBadges())
+        return;
+    
+    if (IsVsSeekerEnabled())
+        return;
+
+    if (gSaveBlock1Ptr->trainerRematchStepCounter >= STEP_COUNTER_MAX)
+        gSaveBlock1Ptr->trainerRematchStepCounter = STEP_COUNTER_MAX;
+    else
+        gSaveBlock1Ptr->trainerRematchStepCounter++;
 #endif //FREE_MATCH_CALL
 }
 
