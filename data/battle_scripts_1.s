@@ -8573,7 +8573,7 @@ BattleScript_SynchronizeActivates::
 	return
 
 BattleScript_NoItemSteal::
-	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUpTarget
 	printstring STRINGID_PKMNSXMADEYINEFFECTIVE
 	waitmessage B_WAIT_TIME_LONG
 	return
