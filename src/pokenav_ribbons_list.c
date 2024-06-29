@@ -436,7 +436,7 @@ static u32 LoopedTask_OpenRibbonsMonList(s32 state)
         SetBgTilemapBuffer(1, menu->buff);
         CopyToBgTilemapBuffer(1, sMonRibbonListFrameTilemap, 0, 0);
         CopyPaletteIntoBufferUnfaded(sMonRibbonListFramePal, 0x10, 0x20);
-    #elif FRENCH
+    #elif FRENCH || ITALIAN
         DecompressAndCopyTileDataToVram(1, gMonRibbonListFrameTiles, 0, 0, 0);
         SetBgTilemapBuffer(1, menu->buff);
         CopyToBgTilemapBuffer(1, gMonRibbonListFrameTilemap, 0, 0);
