@@ -158,6 +158,12 @@ $(TILESETGFXDIR)/primary/building/tiles.4bpp: %.4bpp: %.png
 $(TILESETGFXDIR)/secondary/shop/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 502 -Wnum_tiles
 
+$(TILESETGFXDIR)/secondary/shop/french/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 502
+
+$(TILESETGFXDIR)/secondary/shop/italian/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 502 -Wnum_tiles
+
 $(TILESETGFXDIR)/secondary/pokemon_center/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 478 -Wnum_tiles
 
@@ -788,6 +794,12 @@ $(PKNAVGFXDIR)/device_outline.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53 -Wnum_tiles
 	
 $(PKNAVGFXDIR)/match_call/ui.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 13 -Wnum_tiles
+
+$(PKNAVGFXDIR)/match_call/french/ui.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 13 -Wnum_tiles
+	
+$(PKNAVGFXDIR)/match_call/italian/ui.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 13 -Wnum_tiles
 
 $(POKEDEXGFXDIR)/region_map.8bpp: %.8bpp: %.png

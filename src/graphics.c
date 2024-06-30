@@ -2035,9 +2035,9 @@ const u32 gTilesetTiles_BattleDome[] = INCBIN_U32("data/tilesets/secondary/battl
 // pokenav match call gfx
 const u16 gMatchCallUI_Pal[] = INCBIN_U16("graphics/pokenav/match_call/ui.gbapal");
 #if FRENCH
-const u32 gMatchCallUI_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/ui_fr.4bpp.lz");
+const u32 gMatchCallUI_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/french/ui.4bpp.lz");
 #elif ITALIAN
-const u32 gMatchCallUI_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/ui_it.4bpp.lz");
+const u32 gMatchCallUI_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/italian/ui.4bpp.lz");
 #endif
 const u32 gMatchCallUI_Tilemap[] = INCBIN_U32("graphics/pokenav/match_call/ui.bin.lz");
 
