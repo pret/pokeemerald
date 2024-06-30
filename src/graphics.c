@@ -1018,9 +1018,9 @@ const u32 gDomeTourneyInfoCardBg_Tilemap[] = INCBIN_U32("graphics/battle_frontie
 #if ENGLISH
 const u32 gDomeTourneyTreeButtons_Gfx[] = INCBIN_U32("graphics/battle_frontier/tourney_buttons.4bpp.lz"); // exit/cancel and pokeball buttons
 #elif FRENCH
-const u32 gDomeTourneyTreeButtons_Gfx[] = INCBIN_U32("graphics/battle_frontier/tourney_buttons_fr.4bpp.lz"); // exit/cancel and pokeball buttons
+const u32 gDomeTourneyTreeButtons_Gfx[] = INCBIN_U32("graphics/battle_frontier/french/tourney_buttons.4bpp.lz"); // exit/cancel and pokeball buttons
 #elif ITALIAN
-const u32 gDomeTourneyTreeButtons_Gfx[] = INCBIN_U32("graphics/battle_frontier/tourney_buttons_it.4bpp.lz"); // exit/cancel and pokeball buttons
+const u32 gDomeTourneyTreeButtons_Gfx[] = INCBIN_U32("graphics/battle_frontier/italian/tourney_buttons.4bpp.lz"); // exit/cancel and pokeball buttons
 #endif
 const u32 gDomeTourneyTree_Pal[] = INCBIN_U32("graphics/battle_frontier/tourney.gbapal.lz");
 const u32 gDomeTourneyTreeButtons_Pal[] = INCBIN_U32("graphics/battle_frontier/tourney_buttons.gbapal.lz");
@@ -1276,9 +1276,9 @@ const u32 gShopMenu_Tilemap[] = INCBIN_U32("graphics/shop/menu.bin.lz");
 #if ENGLISH
 const u32 gShopMenuMoney_Gfx[] = INCBIN_U32("graphics/shop/money.4bpp.lz");
 #elif FRENCH
-const u32 gShopMenuMoney_Gfx[] = INCBIN_U32("graphics/shop/money_fr.4bpp.lz");
+const u32 gShopMenuMoney_Gfx[] = INCBIN_U32("graphics/shop/french/money.4bpp.lz");
 #elif ITALIAN
-const u32 gShopMenuMoney_Gfx[] = INCBIN_U32("graphics/shop/money_it.4bpp.lz");
+const u32 gShopMenuMoney_Gfx[] = INCBIN_U32("graphics/shop/italian/money.4bpp.lz");
 #endif
 
 // Pokeblock
@@ -1523,8 +1523,8 @@ const u32 gPokenavLeftHeaderTough_Gfx[] = INCBIN_U32("graphics/pokenav/left_head
 const u32 gPokenavLeftHeaderCool_Gfx[] = INCBIN_U32("graphics/pokenav/left_headers/cool.4bpp.lz");
 const u32 gPokenavLeftHeaderParty_Gfx[] = INCBIN_U32("graphics/pokenav/left_headers/party.4bpp.lz");
 #elif FRENCH
-const u32 gPokenavHeader_Gfx[] = INCBIN_U32("graphics/pokenav/header_fr.4bpp.lz"); // TODO: use width 9 and makefile rule for cleanliness, make wasnt behaving, didnt want to apply num_tiles to this
-const u32 gPokenavHeader_Tilemap[] = INCBIN_U32("graphics/pokenav/header_fr.bin.lz");
+const u32 gPokenavHeader_Gfx[] = INCBIN_U32("graphics/pokenav/french/header.4bpp.lz"); // TODO: use width 9 and makefile rule for cleanliness, make wasnt behaving, didnt want to apply num_tiles to this
+const u32 gPokenavHeader_Tilemap[] = INCBIN_U32("graphics/pokenav/french/header.bin.lz");
 
 const u16 gPokenavLeftHeader_Pal[] = INCBIN_U16("graphics/pokenav/left_headers/palette.gbapal");
 const u32 gPokenavLeftHeaderBeauty_Gfx[] = INCBIN_U32("graphics/pokenav/left_headers/french/beauty.4bpp.lz");
@@ -1540,8 +1540,8 @@ const u32 gPokenavLeftHeaderTough_Gfx[] = INCBIN_U32("graphics/pokenav/left_head
 const u32 gPokenavLeftHeaderCool_Gfx[] = INCBIN_U32("graphics/pokenav/left_headers/french/cool.4bpp.lz");
 const u32 gPokenavLeftHeaderParty_Gfx[] = INCBIN_U32("graphics/pokenav/left_headers/french/party.4bpp.lz");
 #elif ITALIAN
-const u32 gPokenavHeader_Gfx[] = INCBIN_U32("graphics/pokenav/header_it.4bpp.lz"); // TODO: use width 9 and makefile rule for cleanliness, make wasnt behaving, didnt want to apply num_tiles to this
-const u32 gPokenavHeader_Tilemap[] = INCBIN_U32("graphics/pokenav/header_it.bin.lz");
+const u32 gPokenavHeader_Gfx[] = INCBIN_U32("graphics/pokenav/italian/header.4bpp.lz"); // TODO: use width 9 and makefile rule for cleanliness, make wasnt behaving, didnt want to apply num_tiles to this
+const u32 gPokenavHeader_Tilemap[] = INCBIN_U32("graphics/pokenav/italian/header.bin.lz");
 
 const u16 gPokenavLeftHeader_Pal[] = INCBIN_U16("graphics/pokenav/left_headers/palette.gbapal");
 const u32 gPokenavLeftHeaderBeauty_Gfx[] = INCBIN_U32("graphics/pokenav/left_headers/italian/beauty.4bpp.lz");
@@ -1571,14 +1571,14 @@ const u8 gPokenavConditionCancel_Gfx[] = INCBIN_U8("graphics/pokenav/condition/c
 const u16 gMonMarkingsMenu_Pal[] = INCBIN_U16("graphics/interface/mon_markings_menu.gbapal");
 const u8 gMonMarkingsMenu_Gfx[] = INCBIN_U8("graphics/interface/mon_markings_menu.4bpp");
 #elif FRENCH
-const u32 gRegionMapCityZoomText_Gfx[] = INCBIN_U32("graphics/pokenav/city_zoom_text_fr.4bpp.lz");
+const u32 gRegionMapCityZoomText_Gfx[] = INCBIN_U32("graphics/pokenav/french/city_zoom_text.4bpp.lz");
 const u16 gPokenavConditionCancel_Pal[] = INCBIN_U16("graphics/pokenav/condition/cancel.gbapal");
 const u8 gPokenavConditionCancel_Gfx[] = INCBIN_U8("graphics/pokenav/condition/french/cancel.4bpp");
 
 const u16 gMonMarkingsMenu_Pal[] = INCBIN_U16("graphics/interface/mon_markings_menu.gbapal");
 const u8 gMonMarkingsMenu_Gfx[] = INCBIN_U8("graphics/interface/french/mon_markings_menu.4bpp");
 #elif ITALIAN
-const u32 gRegionMapCityZoomText_Gfx[] = INCBIN_U32("graphics/pokenav/city_zoom_text_it.4bpp.lz");
+const u32 gRegionMapCityZoomText_Gfx[] = INCBIN_U32("graphics/pokenav/italian/city_zoom_text.4bpp.lz");
 const u16 gPokenavConditionCancel_Pal[] = INCBIN_U16("graphics/pokenav/condition/cancel.gbapal");
 const u8 gPokenavConditionCancel_Gfx[] = INCBIN_U8("graphics/pokenav/condition/italian/cancel.4bpp");
 
@@ -1612,11 +1612,11 @@ const u16 gEasyChatButtonWindow_Pal[] = INCBIN_U16("graphics/easy_chat/button_wi
 const u32 gEasyChatButtonWindow_Gfx[] = INCBIN_U32("graphics/easy_chat/button_window.4bpp.lz");
 const u32 gEasyChatMode_Gfx[] = INCBIN_U32("graphics/easy_chat/mode.4bpp.lz");
 #elif FRENCH
-const u32 gEasyChatButtonWindow_Gfx[] = INCBIN_U32("graphics/easy_chat/button_window_fr.4bpp.lz");
-const u32 gEasyChatMode_Gfx[] = INCBIN_U32("graphics/easy_chat/mode_fr.4bpp.lz");
+const u32 gEasyChatButtonWindow_Gfx[] = INCBIN_U32("graphics/easy_chat/french/button_window.4bpp.lz");
+const u32 gEasyChatMode_Gfx[] = INCBIN_U32("graphics/easy_chat/french/mode.4bpp.lz");
 #elif ITALIAN
-const u32 gEasyChatButtonWindow_Gfx[] = INCBIN_U32("graphics/easy_chat/button_window_it.4bpp.lz");
-const u32 gEasyChatMode_Gfx[] = INCBIN_U32("graphics/easy_chat/mode_it.4bpp.lz");
+const u32 gEasyChatButtonWindow_Gfx[] = INCBIN_U32("graphics/easy_chat/italian/button_window.4bpp.lz");
+const u32 gEasyChatMode_Gfx[] = INCBIN_U32("graphics/easy_chat/italian/mode.4bpp.lz");
 #endif
 const u16 gEasyChatMode_Pal[] = INCBIN_U16("graphics/easy_chat/mode.gbapal");
 
@@ -1672,13 +1672,13 @@ const u32 gHoennTrainerCardFront_Tilemap[] = INCBIN_U32("graphics/trainer_card/f
 const u32 gHoennTrainerCardBack_Tilemap[] = INCBIN_U32("graphics/trainer_card/back.bin.lz");
 const u32 gHoennTrainerCardFrontLink_Tilemap[] = INCBIN_U32("graphics/trainer_card/front_link.bin.lz");
 #elif FRENCH
-const u32 gHoennTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/card_fr.4bpp.lz");
+const u32 gHoennTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/french/card.4bpp.lz");
 const u32 gHoennTrainerCardBg_Tilemap[] = INCBIN_U32("graphics/trainer_card/bg.bin.lz");
-const u32 gHoennTrainerCardFront_Tilemap[] = INCBIN_U32("graphics/trainer_card/front_fr.bin.lz");
+const u32 gHoennTrainerCardFront_Tilemap[] = INCBIN_U32("graphics/trainer_card/french/front.bin.lz");
 const u32 gHoennTrainerCardBack_Tilemap[] = INCBIN_U32("graphics/trainer_card/back.bin.lz");
-const u32 gHoennTrainerCardFrontLink_Tilemap[] = INCBIN_U32("graphics/trainer_card/front_link_fr.bin.lz");
+const u32 gHoennTrainerCardFrontLink_Tilemap[] = INCBIN_U32("graphics/trainer_card/french/front_link.bin.lz");
 #elif ITALIAN
-const u32 gHoennTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/card_it.4bpp.lz");
+const u32 gHoennTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/italian/card.4bpp.lz");
 const u32 gHoennTrainerCardBg_Tilemap[] = INCBIN_U32("graphics/trainer_card/bg.bin.lz");
 const u32 gHoennTrainerCardFront_Tilemap[] = INCBIN_U32("graphics/trainer_card/front.bin.lz");
 const u32 gHoennTrainerCardBack_Tilemap[] = INCBIN_U32("graphics/trainer_card/back.bin.lz");
@@ -1692,15 +1692,15 @@ const u32 gKantoTrainerCardBg_Tilemap[] = INCBIN_U32("graphics/trainer_card/frlg
 const u32 gKantoTrainerCardFront_Tilemap[] = INCBIN_U32("graphics/trainer_card/frlg/front.bin.lz");
 const u32 gKantoTrainerCardBack_Tilemap[] = INCBIN_U32("graphics/trainer_card/frlg/back.bin.lz");
 #elif FRENCH
-const u32 gKantoTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/frlg/card_fr.4bpp.lz");
+const u32 gKantoTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/frlg/french/card.4bpp.lz");
 const u32 gKantoTrainerCardBg_Tilemap[] = INCBIN_U32("graphics/trainer_card/frlg/bg.bin.lz");
 const u32 gKantoTrainerCardFront_Tilemap[] = INCBIN_U32("graphics/trainer_card/frlg/front.bin.lz");
 const u32 gKantoTrainerCardBack_Tilemap[] = INCBIN_U32("graphics/trainer_card/frlg/back.bin.lz");
 #elif ITALIAN
-const u32 gKantoTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/frlg/card_it.4bpp.lz");
+const u32 gKantoTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/frlg/italian/card.4bpp.lz");
 const u32 gKantoTrainerCardBg_Tilemap[] = INCBIN_U32("graphics/trainer_card/frlg/bg.bin.lz");
 const u32 gKantoTrainerCardFront_Tilemap[] = INCBIN_U32("graphics/trainer_card/frlg/front.bin.lz");
-const u32 gKantoTrainerCardBack_Tilemap[] = INCBIN_U32("graphics/trainer_card/frlg/back_it.bin.lz");
+const u32 gKantoTrainerCardBack_Tilemap[] = INCBIN_U32("graphics/trainer_card/frlg/italian/back.bin.lz");
 #endif
 const u32 gKantoTrainerCardFrontLink_Tilemap[] = INCBIN_U32("graphics/trainer_card/frlg/front_link.bin.lz");
 
@@ -1833,9 +1833,9 @@ const u16 gTradeCursor_Pal[] = INCBIN_U16("graphics/trade/cursor.gbapal");
 #if ENGLISH
 const u8 gTradeMenu_Gfx[] = INCBIN_U8("graphics/trade/menu.4bpp");
 #elif FRENCH
-const u8 gTradeMenu_Gfx[] = INCBIN_U8("graphics/trade/menu_fr.4bpp");
+const u8 gTradeMenu_Gfx[] = INCBIN_U8("graphics/trade/french/menu.4bpp");
 #elif ITALIAN
-const u8 gTradeMenu_Gfx[] = INCBIN_U8("graphics/trade/menu_it.4bpp");
+const u8 gTradeMenu_Gfx[] = INCBIN_U8("graphics/trade/italian/menu.4bpp");
 #endif
 const u8 gTradeCursor_Gfx[] = INCBIN_U8("graphics/trade/cursor.4bpp");
 const u16 gTradeUnused_Tilemap[] = INCBIN_U16("graphics/trade/unused.bin");
@@ -1934,7 +1934,7 @@ const u32 gCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/fr/the_end_c
 const u32 gCreditsCopyrightEnd_Tilemap[] = INCBIN_U32("graphics/credits/fr/the_end_copyright.bin.lz");
 
 const u16 g321Start_Pal[] = INCBIN_U16("graphics/link/321start.gbapal");
-const u32 g321Start_Gfx[] = INCBIN_U32("graphics/link/321start_fr.4bpp.lz");
+const u32 g321Start_Gfx[] = INCBIN_U32("graphics/link/french/321start.4bpp.lz");
 
 // poke jump
 const u16 gPokeJumpBonuses_Pal[] = INCBIN_U16("graphics/pokemon_jump/french/bonuses.gbapal");
@@ -1945,7 +1945,7 @@ const u32 gCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/it/the_end_c
 const u32 gCreditsCopyrightEnd_Tilemap[] = INCBIN_U32("graphics/credits/it/the_end_copyright.bin.lz");
 
 const u16 g321Start_Pal[] = INCBIN_U16("graphics/link/321start.gbapal");
-const u32 g321Start_Gfx[] = INCBIN_U32("graphics/link/321start_it.4bpp.lz");
+const u32 g321Start_Gfx[] = INCBIN_U32("graphics/link/italian/321start.4bpp.lz");
 
 // poke jump
 const u16 gPokeJumpBonuses_Pal[] = INCBIN_U16("graphics/pokemon_jump/italian/bonuses.gbapal");
@@ -2053,9 +2053,9 @@ const u32 gConditionSearchResultTilemap[] = INCBIN_U32("graphics/pokenav/conditi
 // pokenav ribbons list
 const u16 gMonRibbonListFramePal[] = INCBIN_U16("graphics/pokenav/ribbons/list_bg.gbapal");
 #if FRENCH
-const u32 gMonRibbonListFrameTiles[] = INCBIN_U32("graphics/pokenav/ribbons/list_bg_fr.4bpp.lz");
+const u32 gMonRibbonListFrameTiles[] = INCBIN_U32("graphics/pokenav/ribbons/french/list_bg.4bpp.lz");
 #elif ITALIAN
-const u32 gMonRibbonListFrameTiles[] = INCBIN_U32("graphics/pokenav/ribbons/list_bg_it.4bpp.lz");
+const u32 gMonRibbonListFrameTiles[] = INCBIN_U32("graphics/pokenav/ribbons/italian/list_bg.4bpp.lz");
 #endif
 const u32 gMonRibbonListFrameTilemap[] = INCBIN_U32("graphics/pokenav/ribbons/list_bg.bin.lz");
 
