@@ -55,7 +55,7 @@ jobs:
       - name: French Compare
         env:
           MODERN: 0
-          COMPARE: 0 # Once all assets are ready, set to 1 instead
+          COMPARE: 1
           GAME_LANGUAGE: FRENCH
         run: make -j${nproc}
 
