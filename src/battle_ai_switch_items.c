@@ -876,6 +876,24 @@ static bool32 ShouldSwitchIfEncored(u32 battler, bool32 emitResult)
     return FALSE;
 }
 
+static bool32 ShouldSwitchIfBadChoiceLock(u32 battler, bool32 emitResult)
+{
+    u32 holdEffect = GetBattlerHoldEffect(battler, FALSE);
+
+    if (HOLD_EFFECT_CHOICE(holdEffect) && gBattleMons[battler].ability != ABILITY_KLUTZ)
+    {
+        if (gMovesInfo[gLastUsedMove].category == DAMAGE_CATEGORY_STATUS)
+        {
+            gBattleStruct->AI_monToSwitchIntoId[battler] = PARTY_SIZE;
+            if (emitResult)
+                BtlController_EmitTwoReturnValues(battler, 1, B_ACTION_SWITCH, 0);
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
 // AI should switch if it's become setup fodder and has something better to switch to
 static bool32 AreAttackingStatsLowered(u32 battler, bool32 emitResult)
 {
@@ -898,7 +916,8 @@ static bool32 AreAttackingStatsLowered(u32 battler, bool32 emitResult)
             if (AI_DATA->mostSuitableMonId[battler] != PARTY_SIZE && (Random() & 1))
             {
                 gBattleStruct->AI_monToSwitchIntoId[battler] = PARTY_SIZE;
-                BtlController_EmitTwoReturnValues(battler, 1, B_ACTION_SWITCH, 0);
+                if (emitResult)
+                    BtlController_EmitTwoReturnValues(battler, 1, B_ACTION_SWITCH, 0);
                 return TRUE;
             }
         }
@@ -906,7 +925,8 @@ static bool32 AreAttackingStatsLowered(u32 battler, bool32 emitResult)
         else if (attackingStage < DEFAULT_STAT_STAGE - 2)
         {
             gBattleStruct->AI_monToSwitchIntoId[battler] = PARTY_SIZE;
-            BtlController_EmitTwoReturnValues(battler, 1, B_ACTION_SWITCH, 0);
+            if (emitResult)
+                BtlController_EmitTwoReturnValues(battler, 1, B_ACTION_SWITCH, 0);
             return TRUE;
         }
     }
@@ -1030,6 +1050,8 @@ bool32 ShouldSwitch(u32 battler, bool32 emitResult)
     if (HasBadOdds(battler, emitResult))
         return TRUE;
     if (ShouldSwitchIfEncored(battler, emitResult))
+        return TRUE;
+    if (ShouldSwitchIfBadChoiceLock(battler, emitResult))
         return TRUE;
     if (AreAttackingStatsLowered(battler, emitResult))
         return TRUE;

@@ -2316,6 +2316,8 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 else
                 {
                     CreateMon(&party[i], GetRandomSpeciesFlattenedCurve(), monLevel, 0, TRUE, personalityValue, otIdType, fixedOtId);
+                    //test line below for forced test encounters
+                    //CreateMon(&party[i], SPECIES_RAYQUAZA, monLevel, 0, TRUE, personalityValue, otIdType, fixedOtId);
                 }
             }
 

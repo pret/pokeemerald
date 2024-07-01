@@ -2629,6 +2629,22 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             return 0;   // cannot even select
     } // move effect checks
 
+    // Choice items
+    if (HOLD_EFFECT_CHOICE(aiData->holdEffects[battlerAtk]) && gBattleMons[battlerAtk].ability != ABILITY_KLUTZ)
+    {
+        // Don't use user-target moves ie. Swords Dance, with exceptions
+        if ((moveTarget & MOVE_TARGET_USER)
+        && moveEffect != EFFECT_DESTINY_BOND && moveEffect != EFFECT_WISH && moveEffect != EFFECT_HEALING_WISH
+        && !(moveEffect == EFFECT_AURORA_VEIL && (AI_GetWeather(aiData) & (B_WEATHER_SNOW | B_WEATHER_HAIL))))
+            ADJUST_SCORE(-30);
+        // Don't use a status move if the mon is the last one in the party, has no good switchin, or is trapped
+        else if (GetBattleMoveCategory(move) == DAMAGE_CATEGORY_STATUS
+            && (CountUsablePartyMons(battlerAtk) < 1
+            || AI_DATA->mostSuitableMonId[battlerAtk] == PARTY_SIZE
+            || IsBattlerTrapped(battlerAtk, TRUE)))
+            ADJUST_SCORE(-30);
+    }
+
     if (score < 0)
         score = 0;
 
