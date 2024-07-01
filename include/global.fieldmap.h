@@ -131,7 +131,7 @@ struct MapEvents
 struct MapConnection
 {
     u8 direction;
-    u32 offset;
+    s32 offset;
     u8 mapGroup;
     u8 mapNum;
 };
