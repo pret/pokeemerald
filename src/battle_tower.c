@@ -2745,7 +2745,7 @@ static void SetTowerInterviewData(void)
 
     GetFrontierTrainerName(text, gTrainerBattleOpponent_A);
     StripExtCtrlCodes(text);
-#if FRENCH
+#if FRENCH || ITALIAN
     text[7] = EOS;
 #endif
     StringCopy(gSaveBlock2Ptr->frontier.towerInterview.opponentName, text);

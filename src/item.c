@@ -30,7 +30,7 @@ EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
 #elif FRENCH
 #include "data/text/fr/item_descriptions.h"
 #elif ITALIAN
-#include "data/text/fr/item_descriptions.h"
+#include "data/text/it/item_descriptions.h"
 #endif
 #include "data/items.h"
 

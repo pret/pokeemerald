@@ -1,5 +1,6 @@
 #include "global.h"
 
+ALIGNED(4)
 #if ENGLISH
 const u8 gText_MysteryEventBerry[] = _("Obtained a {STR_VAR_2} BERRY!\nDad has it at PETALBURG GYM.");
 const u8 gText_MysteryEventBerryTransform[] = _("The {STR_VAR_1} BERRY transformed into\none {STR_VAR_2} BERRY.");
@@ -13,7 +14,6 @@ const u8 gText_MysteryEventNewTrainer[] = _("A new TRAINER has arrived in\nHOENN
 static const u8 gText_MysteryEventNewAdversaryInBattleTower[] = _("A new adversary has arrived in the\nBATTLE TOWER."); // Unused
 const u8 gText_MysteryEventCantBeUsed[] = _("This data can't be used in\nthis version.");
 #elif FRENCH
-ALIGNED(4)
 const u8 gText_MysteryEventBerry[] = _("Tu as obtenu une BAIE {STR_VAR_2}!\nPapa en a une à l’ARENE de CLEMENTI.");
 const u8 gText_MysteryEventBerryTransform[] = _("La BAIE {STR_VAR_1} s’est transformée en\nune BAIE {STR_VAR_2}.");
 const u8 gText_MysteryEventBerryObtained[] = _("Tu avais déjà obtenu la BAIE\n{STR_VAR_1}.");

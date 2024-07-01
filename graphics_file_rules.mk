@@ -162,7 +162,7 @@ $(TILESETGFXDIR)/secondary/shop/french/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 502
 
 $(TILESETGFXDIR)/secondary/shop/italian/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 502 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 502
 
 $(TILESETGFXDIR)/secondary/pokemon_center/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 478 -Wnum_tiles
