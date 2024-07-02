@@ -16,7 +16,7 @@
 // would normally use AGBPrint() and AGBPrintf().
 
 // Using English as default.
-#if !defined(ENGLISH) && !defined(FRENCH) && !defined(ITALIAN)
+#if !defined(ENGLISH) && !defined(FRENCH) && !defined(ITALIAN) && !defined(SPANISH)
 #define ENGLISH 1
 #endif
 

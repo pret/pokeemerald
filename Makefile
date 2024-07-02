@@ -63,7 +63,12 @@ ifeq ($(GAME_LANGUAGE), ITALIAN)
   GAME_CODE  := $(GAME_CODE)I
   BUILD_SUFIX := _it
 else
+ifeq ($(GAME_LANGUAGE), SPANISH)
+  GAME_CODE  := $(GAME_CODE)S
+  BUILD_SUFIX := _es
+else
   $(error unknown language $(GAME_LANGUAGE))
+endif
 endif
 endif
 endif
@@ -318,7 +323,7 @@ endif
 
 #### Main Rules ####
 
-ALL_BUILDS := emerald emerald_fr emerald_it
+ALL_BUILDS := emerald emerald_fr emerald_it emerald_es
 MODERN_BUILDS := $(ALL_BUILDS:%=%_modern)
 
 ifeq ($(DINFO),1)
@@ -450,27 +455,32 @@ $(ROM): $(ELF)
 en:         ; @$(MAKE) GAME_LANGUAGE=ENGLISH
 fr:         ; @$(MAKE) GAME_LANGUAGE=FRENCH
 it:         ; @$(MAKE) GAME_LANGUAGE=ITALIAN
+sp:         ; @$(MAKE) GAME_LANGUAGE=SPANISH
 
 # For contributors to make sure a change didn't affect the contents of the ROMs.
 compare:    ; @$(MAKE) GAME_LANGUAGE=ENGLISH COMPARE=1
 compare_en: ; @$(MAKE) GAME_LANGUAGE=ENGLISH COMPARE=1
 compare_fr: ; @$(MAKE) GAME_LANGUAGE=FRENCH COMPARE=1
 compare_it: ; @$(MAKE) GAME_LANGUAGE=ITALIAN COMPARE=1
+compare_es: ; @$(MAKE) GAME_LANGUAGE=SPANISH COMPARE=1
 
 # Quick way to check all matching versions
 compare_all:
 	@$(MAKE) GAME_LANGUAGE=ENGLISH
 	@$(MAKE) GAME_LANGUAGE=FRENCH
 	@$(MAKE) GAME_LANGUAGE=ITALIAN
+	@$(MAKE) GAME_LANGUAGE=SPANISH
 	@$(SHA1) rom.sha1
 	@$(SHA1) rom_fr.sha1
 	@$(SHA1) rom_it.sha1
+	@$(SHA1) rom_es.sha1
 
 # Use modern compilers to build rom. Will not match with original ROMs.
 modern:     ; @$(MAKE) GAME_LANGUAGE=ENGLISH MODERN=1
 modern_en:  ; @$(MAKE) GAME_LANGUAGE=ENGLISH MODERN=1
 modern_fr:  ; @$(MAKE) GAME_LANGUAGE=FRENCH MODERN=1
 modern_it:  ; @$(MAKE) GAME_LANGUAGE=ITALIAN MODERN=1
+modern_es:  ; @$(MAKE) GAME_LANGUAGE=SPANISH MODERN=1
 
 libagbsyscall:
 	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN) MODERN=$(MODERN)
