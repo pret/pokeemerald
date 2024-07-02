@@ -557,9 +557,9 @@ const struct TrainerMoney gTrainerMoneyTable[] =
 #if ENGLISH
 #include "data/text/abilities.h"
 #elif FRENCH
-#include "data/text/fr/abilities.h"
+#include "data/text/french/abilities.h"
 #elif ITALIAN
-#include "data/text/it/abilities.h"
+#include "data/text/italian/abilities.h"
 #endif
 
 static void (* const sTurnActionsFuncsTable[])(void) =

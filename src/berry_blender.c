@@ -247,7 +247,7 @@ static const u8 sBlenderCenter_Tilemap[] = INCBIN_U8("graphics/berry_blender/cen
 static const u16 sBlenderOuter_Pal[] = INCBIN_U16("graphics/berry_blender/outer.gbapal");
 #elif FRENCH || ITALIAN
 static const u8 sBlenderCenter_Tilemap[] = INCBIN_U8("graphics/berry_blender/center_map.bin");
-static const u16 sBlenderOuter_Pal[] = INCBIN_U16("graphics/berry_blender/fr/outer.gbapal");
+static const u16 sBlenderOuter_Pal[] = INCBIN_U16("graphics/berry_blender/french/outer.gbapal");
 #endif
 
 static const u16 sUnused_Pal[] = INCBIN_U16("graphics/berry_blender/unused.gbapal");

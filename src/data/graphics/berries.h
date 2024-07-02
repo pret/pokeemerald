@@ -3,13 +3,13 @@ const u32 gBerryCheck_Gfx[] = INCBIN_U32("graphics/bag/check_berry.4bpp.lz");
 const u32 gBerryCheck_Pal[] = INCBIN_U32("graphics/bag/check_berry.gbapal.lz");
 const u32 gBerryTag_Gfx[] = INCBIN_U32("graphics/bag/berry_tag.bin.lz");
 #elif FRENCH
-const u32 gBerryCheck_Gfx[] = INCBIN_U32("graphics/bag/fr/check_berry.4bpp.lz");
+const u32 gBerryCheck_Gfx[] = INCBIN_U32("graphics/bag/french/check_berry.4bpp.lz");
 const u32 gBerryCheck_Pal[] = INCBIN_U32("graphics/bag/check_berry.gbapal.lz");
-const u32 gBerryTag_Gfx[] = INCBIN_U32("graphics/bag/fr/berry_tag.bin.lz");
+const u32 gBerryTag_Gfx[] = INCBIN_U32("graphics/bag/french/berry_tag.bin.lz");
 #elif ITALIAN
-const u32 gBerryCheck_Gfx[] = INCBIN_U32("graphics/bag/it/check_berry.4bpp.lz");
+const u32 gBerryCheck_Gfx[] = INCBIN_U32("graphics/bag/italian/check_berry.4bpp.lz");
 const u32 gBerryCheck_Pal[] = INCBIN_U32("graphics/bag/check_berry.gbapal.lz");
-const u32 gBerryTag_Gfx[] = INCBIN_U32("graphics/bag/it/berry_tag.bin.lz");
+const u32 gBerryTag_Gfx[] = INCBIN_U32("graphics/bag/italian/berry_tag.bin.lz");
 #endif
 
 const u32 gBerryTag_Pal[] = INCBIN_U32("graphics/bag/berry_tag_title.bin.lz");

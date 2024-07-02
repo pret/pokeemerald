@@ -37,13 +37,13 @@ $(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types
 	@cat $^ >$@
 
 ### French Types ###
-TYPESGFXDIR := graphics/types/fr
+TYPESGFXDIR := graphics/types/french
 
 $(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)
 	@cat $^ >$@
 
 ### Italian Types ###
-TYPESGFXDIR := graphics/types/it
+TYPESGFXDIR := graphics/types/italian
 
 $(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)
 	@cat $^ >$@
@@ -324,46 +324,46 @@ $(TILESETGFXDIR)/secondary/mystery_events_house/tiles.4bpp: %.4bpp: %.png
 $(FONTGFXDIR)/small.latfont: $(FONTGFXDIR)/latin_small.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/fr/small.latfont: $(FONTGFXDIR)/fr/latin_small.png
+$(FONTGFXDIR)/french/small.latfont: $(FONTGFXDIR)/french/latin_small.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/it/small.latfont: $(FONTGFXDIR)/it/latin_small.png
+$(FONTGFXDIR)/italian/small.latfont: $(FONTGFXDIR)/italian/latin_small.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/normal.latfont: $(FONTGFXDIR)/latin_normal.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/fr/normal.latfont: $(FONTGFXDIR)/fr/latin_normal.png
+$(FONTGFXDIR)/french/normal.latfont: $(FONTGFXDIR)/french/latin_normal.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/it/normal.latfont: $(FONTGFXDIR)/it/latin_normal.png
+$(FONTGFXDIR)/italian/normal.latfont: $(FONTGFXDIR)/italian/latin_normal.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/short.latfont: $(FONTGFXDIR)/latin_short.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/fr/short.latfont: $(FONTGFXDIR)/fr/latin_short.png
+$(FONTGFXDIR)/french/short.latfont: $(FONTGFXDIR)/french/latin_short.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/it/short.latfont: $(FONTGFXDIR)/it/latin_short.png
+$(FONTGFXDIR)/italian/short.latfont: $(FONTGFXDIR)/italian/latin_short.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/narrow.latfont: $(FONTGFXDIR)/latin_narrow.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/fr/narrow.latfont: $(FONTGFXDIR)/fr/latin_narrow.png
+$(FONTGFXDIR)/french/narrow.latfont: $(FONTGFXDIR)/french/latin_narrow.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/it/narrow.latfont: $(FONTGFXDIR)/it/latin_narrow.png
+$(FONTGFXDIR)/italian/narrow.latfont: $(FONTGFXDIR)/italian/latin_narrow.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/small_narrow.latfont: $(FONTGFXDIR)/latin_small_narrow.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/fr/small_narrow.latfont: $(FONTGFXDIR)/fr/latin_small_narrow.png
+$(FONTGFXDIR)/french/small_narrow.latfont: $(FONTGFXDIR)/french/latin_small_narrow.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/it/small_narrow.latfont: $(FONTGFXDIR)/it/latin_small_narrow.png
+$(FONTGFXDIR)/italian/small_narrow.latfont: $(FONTGFXDIR)/italian/latin_small_narrow.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/small.hwjpnfont: $(FONTGFXDIR)/japanese_small.png

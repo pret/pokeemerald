@@ -48,9 +48,9 @@ static bool32 ShouldDoNearbyMessage(void);
 #if ENGLISH
 #include "data/text/match_call_messages.h"
 #elif FRENCH
-#include "data/text/fr/match_call_messages.h"
+#include "data/text/french/match_call_messages.h"
 #elif ITALIAN
-#include "data/text/it/match_call_messages.h"
+#include "data/text/italian/match_call_messages.h"
 #endif
 
 const u8 *const gMatchCallFlavorTexts[REMATCH_TABLE_ENTRIES][CHECK_PAGE_ENTRY_COUNT] =

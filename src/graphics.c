@@ -373,39 +373,39 @@ const u8 gHealthboxElementsGfxTable[] = INCBIN_U8("graphics/battle_interface/hpb
                                                   "graphics/battle_interface/healthbox_doubles_frameend.4bpp",
                                                   "graphics/battle_interface/healthbox_doubles_frameend_bar.4bpp");
 #elif FRENCH
-const u8 gHealthboxElementsGfxTable[] = INCBIN_U8("graphics/battle_interface/fr/hpbar.4bpp",
+const u8 gHealthboxElementsGfxTable[] = INCBIN_U8("graphics/battle_interface/french/hpbar.4bpp",
                                                   "graphics/battle_interface/expbar.4bpp",
                                                   "graphics/battle_interface/status_psn.4bpp",
                                                   "graphics/battle_interface/status_par.4bpp",
-                                                  "graphics/battle_interface/fr/status_slp.4bpp",
-                                                  "graphics/battle_interface/fr/status_frz.4bpp",
-                                                  "graphics/battle_interface/fr/status_brn.4bpp",
+                                                  "graphics/battle_interface/french/status_slp.4bpp",
+                                                  "graphics/battle_interface/french/status_frz.4bpp",
+                                                  "graphics/battle_interface/french/status_brn.4bpp",
                                                   "graphics/battle_interface/misc.4bpp",
                                                   "graphics/battle_interface/hpbar_anim.4bpp",
                                                   "graphics/battle_interface/misc_frameend.4bpp",
                                                   "graphics/battle_interface/ball_display.4bpp",
                                                   "graphics/battle_interface/ball_display_unused_extra.4bpp",
-                                                  "graphics/battle_interface/fr/status2.4bpp",  // these three duplicate sets of graphics are for the opponent pokemon
-                                                  "graphics/battle_interface/fr/status3.4bpp",  // and are also for use in double battles. they use dynamic palettes so
-                                                  "graphics/battle_interface/fr/status4.4bpp",  // coloring them is an extreme headache and wont be done for now
+                                                  "graphics/battle_interface/french/status2.4bpp",  // these three duplicate sets of graphics are for the opponent pokemon
+                                                  "graphics/battle_interface/french/status3.4bpp",  // and are also for use in double battles. they use dynamic palettes so
+                                                  "graphics/battle_interface/french/status4.4bpp",  // coloring them is an extreme headache and wont be done for now
                                                   "graphics/battle_interface/healthbox_doubles_frameend.4bpp",
                                                   "graphics/battle_interface/healthbox_doubles_frameend_bar.4bpp");
 #elif ITALIAN
-const u8 gHealthboxElementsGfxTable[] = INCBIN_U8("graphics/battle_interface/it/hpbar.4bpp",
+const u8 gHealthboxElementsGfxTable[] = INCBIN_U8("graphics/battle_interface/italian/hpbar.4bpp",
                                                   "graphics/battle_interface/expbar.4bpp",
-                                                  "graphics/battle_interface/it/status_psn.4bpp",
+                                                  "graphics/battle_interface/italian/status_psn.4bpp",
                                                   "graphics/battle_interface/status_par.4bpp",
-                                                  "graphics/battle_interface/it/status_slp.4bpp",
-                                                  "graphics/battle_interface/it/status_frz.4bpp",
-                                                  "graphics/battle_interface/it/status_brn.4bpp",
+                                                  "graphics/battle_interface/italian/status_slp.4bpp",
+                                                  "graphics/battle_interface/italian/status_frz.4bpp",
+                                                  "graphics/battle_interface/italian/status_brn.4bpp",
                                                   "graphics/battle_interface/misc.4bpp",
                                                   "graphics/battle_interface/hpbar_anim.4bpp",
                                                   "graphics/battle_interface/misc_frameend.4bpp",
                                                   "graphics/battle_interface/ball_display.4bpp",
                                                   "graphics/battle_interface/ball_display_unused_extra.4bpp",
-                                                  "graphics/battle_interface/it/status2.4bpp",  // these three duplicate sets of graphics are for the opponent pokemon
-                                                  "graphics/battle_interface/it/status3.4bpp",  // and are also for use in double battles. they use dynamic palettes so
-                                                  "graphics/battle_interface/it/status4.4bpp",  // coloring them is an extreme headache and wont be done for now
+                                                  "graphics/battle_interface/italian/status2.4bpp",  // these three duplicate sets of graphics are for the opponent pokemon
+                                                  "graphics/battle_interface/italian/status3.4bpp",  // and are also for use in double battles. they use dynamic palettes so
+                                                  "graphics/battle_interface/italian/status4.4bpp",  // coloring them is an extreme headache and wont be done for now
                                                   "graphics/battle_interface/healthbox_doubles_frameend.4bpp",
                                                   "graphics/battle_interface/healthbox_doubles_frameend_bar.4bpp");
 #endif
@@ -682,9 +682,9 @@ const u32 gBattleAnimSpritePal_Tendrils[] = INCBIN_U32("graphics/battle_anims/sp
 #if ENGLISH
 const u32 gHealthboxSinglesPlayerGfx[] = INCBIN_U32("graphics/battle_interface/healthbox_singles_player.4bpp.lz");
 #elif FRENCH
-const u32 gHealthboxSinglesPlayerGfx[] = INCBIN_U32("graphics/battle_interface/fr/healthbox_singles_player.4bpp.lz");
+const u32 gHealthboxSinglesPlayerGfx[] = INCBIN_U32("graphics/battle_interface/french/healthbox_singles_player.4bpp.lz");
 #elif ITALIAN
-const u32 gHealthboxSinglesPlayerGfx[] = INCBIN_U32("graphics/battle_interface/it/healthbox_singles_player.4bpp.lz");
+const u32 gHealthboxSinglesPlayerGfx[] = INCBIN_U32("graphics/battle_interface/italian/healthbox_singles_player.4bpp.lz");
 #endif
 const u32 gHealthboxSinglesOpponentGfx[] = INCBIN_U32("graphics/battle_interface/healthbox_singles_opponent.4bpp.lz");
 const u32 gHealthboxDoublesPlayerGfx[] = INCBIN_U32( "graphics/battle_interface/healthbox_doubles_player.4bpp.lz");
@@ -1132,7 +1132,7 @@ const u32 gBerryBlenderCenter_Gfx[] = INCBIN_U32("graphics/berry_blender/center.
 #if ENGLISH
 const u32 gBerryBlenderOuter_Gfx[] = INCBIN_U32("graphics/berry_blender/outer.4bpp.lz");
 #elif FRENCH || ITALIAN
-const u32 gBerryBlenderOuter_Gfx[] = INCBIN_U32("graphics/berry_blender/fr/outer.4bpp.lz");
+const u32 gBerryBlenderOuter_Gfx[] = INCBIN_U32("graphics/berry_blender/french/outer.4bpp.lz");
 #endif
 const u32 gBerryBlenderOuter_Tilemap[] = INCBIN_U32("graphics/berry_blender/outer_map.bin.lz");
 
@@ -1217,9 +1217,9 @@ const u32 gStatusPal_Icons[] = INCBIN_U32("graphics/interface/status_icons.gbapa
 #if ENGLISH
 const u32 gMoveTypes_Gfx[] = INCBIN_U32("graphics/types/move_types.4bpp.lz");
 #elif FRENCH
-const u32 gMoveTypes_Gfx[] = INCBIN_U32("graphics/types/fr/move_types.4bpp.lz");
+const u32 gMoveTypes_Gfx[] = INCBIN_U32("graphics/types/french/move_types.4bpp.lz");
 #elif ITALIAN
-const u32 gMoveTypes_Gfx[] = INCBIN_U32("graphics/types/it/move_types.4bpp.lz");
+const u32 gMoveTypes_Gfx[] = INCBIN_U32("graphics/types/italian/move_types.4bpp.lz");
 #endif
 const u32 gMoveTypes_Pal[] = INCBIN_U32("graphics/types/move_types.gbapal.lz");
 
@@ -1451,7 +1451,7 @@ const u16 gContestResultsTitle_Smart_Tilemap[]  = INCBIN_U16("graphics/contest/r
 const u16 gContestResultsTitle_Tough_Tilemap[]  = INCBIN_U16("graphics/contest/results_screen/title_tough.bin");
 const u16 gContestResultsTitle_Tilemap[]        = INCBIN_U16("graphics/contest/results_screen/title.bin");
 #elif FRENCH
-const u8 gBagMenuHMIcon_Gfx[] = INCBIN_U8("graphics/bag/fr/hm.4bpp");
+const u8 gBagMenuHMIcon_Gfx[] = INCBIN_U8("graphics/bag/french/hm.4bpp");
 // contest results screen
 const u16 gContestResultsTitle_Normal_Tilemap[] = INCBIN_U16("graphics/contest/french/results_screen/title_normal.bin");
 const u16 gContestResultsTitle_Super_Tilemap[]  = INCBIN_U16("graphics/contest/french/results_screen/title_super.bin");
@@ -1465,7 +1465,7 @@ const u16 gContestResultsTitle_Smart_Tilemap[]  = INCBIN_U16("graphics/contest/f
 const u16 gContestResultsTitle_Tough_Tilemap[]  = INCBIN_U16("graphics/contest/french/results_screen/title_tough.bin");
 const u16 gContestResultsTitle_Tilemap[]        = INCBIN_U16("graphics/contest/french/results_screen/title.bin");
 #elif ITALIAN
-const u8 gBagMenuHMIcon_Gfx[] = INCBIN_U8("graphics/bag/it/hm.4bpp");
+const u8 gBagMenuHMIcon_Gfx[] = INCBIN_U8("graphics/bag/italian/hm.4bpp");
 // contest results screen
 const u16 gContestResultsTitle_Normal_Tilemap[] = INCBIN_U16("graphics/contest/italian/results_screen/title_normal.bin");
 const u16 gContestResultsTitle_Super_Tilemap[]  = INCBIN_U16("graphics/contest/italian/results_screen/title_super.bin");
@@ -1596,9 +1596,9 @@ const u8 gBerryBlenderCountdownNumbers_Gfx[] = INCBIN_U8("graphics/berry_blender
 #if ENGLISH
 const u8 gBerryBlenderStart_Gfx[] = INCBIN_U8("graphics/berry_blender/start.4bpp");
 #elif FRENCH
-const u8 gBerryBlenderStart_Gfx[] = INCBIN_U8("graphics/berry_blender/fr/start.4bpp");
+const u8 gBerryBlenderStart_Gfx[] = INCBIN_U8("graphics/berry_blender/french/start.4bpp");
 #elif ITALIAN
-const u8 gBerryBlenderStart_Gfx[] = INCBIN_U8("graphics/berry_blender/it/start.4bpp");
+const u8 gBerryBlenderStart_Gfx[] = INCBIN_U8("graphics/berry_blender/italian/start.4bpp");
 #endif
 static const u8 sEmpty1[0x200] = {0};
 const u8 gBerryBlenderPlayerArrow_Gfx[] = INCBIN_U8("graphics/berry_blender/arrow.4bpp");
@@ -1769,13 +1769,13 @@ const u16 gUnionRoomChat_Background_Pal[] = INCBIN_U16("graphics/union_room_chat
 const u32 gUnionRoomChat_Background_Gfx[] = INCBIN_U32("graphics/union_room_chat/background.4bpp.lz");
 const u32 gUnionRoomChat_Background_Tilemap[] = INCBIN_U32("graphics/union_room_chat/background.bin.lz");
 #elif FRENCH
-const u16 gUnionRoomChat_Background_Pal[] = INCBIN_U16("graphics/union_room_chat/fr/background.gbapal");
-const u32 gUnionRoomChat_Background_Gfx[] = INCBIN_U32("graphics/union_room_chat/fr/background.4bpp.lz");
-const u32 gUnionRoomChat_Background_Tilemap[] = INCBIN_U32("graphics/union_room_chat/fr/background.bin.lz");
+const u16 gUnionRoomChat_Background_Pal[] = INCBIN_U16("graphics/union_room_chat/french/background.gbapal");
+const u32 gUnionRoomChat_Background_Gfx[] = INCBIN_U32("graphics/union_room_chat/french/background.4bpp.lz");
+const u32 gUnionRoomChat_Background_Tilemap[] = INCBIN_U32("graphics/union_room_chat/french/background.bin.lz");
 #elif ITALIAN
-const u16 gUnionRoomChat_Background_Pal[] = INCBIN_U16("graphics/union_room_chat/it/background.gbapal");
-const u32 gUnionRoomChat_Background_Gfx[] = INCBIN_U32("graphics/union_room_chat/it/background.4bpp.lz");
-const u32 gUnionRoomChat_Background_Tilemap[] = INCBIN_U32("graphics/union_room_chat/it/background.bin.lz");
+const u16 gUnionRoomChat_Background_Pal[] = INCBIN_U16("graphics/union_room_chat/italian/background.gbapal");
+const u32 gUnionRoomChat_Background_Gfx[] = INCBIN_U32("graphics/union_room_chat/italian/background.4bpp.lz");
+const u32 gUnionRoomChat_Background_Tilemap[] = INCBIN_U32("graphics/union_room_chat/italian/background.bin.lz");
 #endif
 const u16 gUnionRoomChat_Window_Pal1[] = INCBIN_U16("graphics/union_room_chat/window_1.gbapal");
 const u16 gUnionRoomChat_Window_Pal2[] = INCBIN_U16("graphics/union_room_chat/window_2.gbapal");
@@ -1784,9 +1784,9 @@ const u32 gUnionRoomChat_Border_Tilemap[] = INCBIN_U32("graphics/union_room_chat
 #if ENGLISH
 const u32 gUnionRoomChat_RButtonLabels[] = INCBIN_U32("graphics/union_room_chat/r_button_labels.4bpp.lz");
 #elif FRENCH
-const u32 gUnionRoomChat_RButtonLabels[] = INCBIN_U32("graphics/union_room_chat/fr/r_button_labels.4bpp.lz");
+const u32 gUnionRoomChat_RButtonLabels[] = INCBIN_U32("graphics/union_room_chat/french/r_button_labels.4bpp.lz");
 #elif ITALIAN
-const u32 gUnionRoomChat_RButtonLabels[] = INCBIN_U32("graphics/union_room_chat/it/r_button_labels.4bpp.lz");
+const u32 gUnionRoomChat_RButtonLabels[] = INCBIN_U32("graphics/union_room_chat/italian/r_button_labels.4bpp.lz");
 #endif
 
 const u16 gTilesetPalettes_General[][16] =
@@ -1888,19 +1888,19 @@ const u32 gTitleScreenEmeraldVersionGfx[]  = INCBIN_U32("graphics/title_screen/e
 const u16 gTitleScreenPressStartPal[]      = INCBIN_U16("graphics/title_screen/press_start.gbapal");
 const u32 gTitleScreenPressStartGfx[]      = INCBIN_U32("graphics/title_screen/press_start.4bpp.lz");
 #elif FRENCH
-const u16 gTitleScreenEmeraldVersionPal[]  = INCBIN_U16("graphics/title_screen/fr/emerald_version.gbapal");
+const u16 gTitleScreenEmeraldVersionPal[]  = INCBIN_U16("graphics/title_screen/french/emerald_version.gbapal");
 const u32 gTitleScreenCloudsTilemap[]      = INCBIN_U32("graphics/title_screen/clouds.bin.lz");
 const u32 gTitleScreenPokemonLogoGfx[]     = INCBIN_U32("graphics/title_screen/pokemon_logo.8bpp.lz");
-const u32 gTitleScreenEmeraldVersionGfx[]  = INCBIN_U32("graphics/title_screen/fr/emerald_version.8bpp.lz");
+const u32 gTitleScreenEmeraldVersionGfx[]  = INCBIN_U32("graphics/title_screen/french/emerald_version.8bpp.lz");
 const u16 gTitleScreenPressStartPal[]      = INCBIN_U16("graphics/title_screen/press_start.gbapal");
-const u32 gTitleScreenPressStartGfx[]      = INCBIN_U32("graphics/title_screen/fr/press_start.4bpp.lz");
+const u32 gTitleScreenPressStartGfx[]      = INCBIN_U32("graphics/title_screen/french/press_start.4bpp.lz");
 #elif ITALIAN
-const u16 gTitleScreenEmeraldVersionPal[]  = INCBIN_U16("graphics/title_screen/it/emerald_version.gbapal");
+const u16 gTitleScreenEmeraldVersionPal[]  = INCBIN_U16("graphics/title_screen/italian/emerald_version.gbapal");
 const u32 gTitleScreenCloudsTilemap[]      = INCBIN_U32("graphics/title_screen/clouds.bin.lz");
 const u32 gTitleScreenPokemonLogoGfx[]     = INCBIN_U32("graphics/title_screen/pokemon_logo.8bpp.lz");
-const u32 gTitleScreenEmeraldVersionGfx[]  = INCBIN_U32("graphics/title_screen/it/emerald_version.8bpp.lz");
+const u32 gTitleScreenEmeraldVersionGfx[]  = INCBIN_U32("graphics/title_screen/italian/emerald_version.8bpp.lz");
 const u16 gTitleScreenPressStartPal[]      = INCBIN_U16("graphics/title_screen/press_start.gbapal");
-const u32 gTitleScreenPressStartGfx[]      = INCBIN_U32("graphics/title_screen/it/press_start.4bpp.lz");
+const u32 gTitleScreenPressStartGfx[]      = INCBIN_U32("graphics/title_screen/italian/press_start.4bpp.lz");
 #endif
 const u32 gTitleScreenPokemonLogoTilemap[] = INCBIN_U32("graphics/title_screen/pokemon_logo.bin.lz");
 
@@ -1930,8 +1930,8 @@ const u32 gBerryCrush_TextWindows_Tilemap[] = INCBIN_U32("graphics/berry_crush/t
 
 // credits
 #if FRENCH
-const u32 gCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/fr/the_end_copyright.4bpp.lz");
-const u32 gCreditsCopyrightEnd_Tilemap[] = INCBIN_U32("graphics/credits/fr/the_end_copyright.bin.lz");
+const u32 gCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/french/the_end_copyright.4bpp.lz");
+const u32 gCreditsCopyrightEnd_Tilemap[] = INCBIN_U32("graphics/credits/french/the_end_copyright.bin.lz");
 
 const u16 g321Start_Pal[] = INCBIN_U16("graphics/link/321start.gbapal");
 const u32 g321Start_Gfx[] = INCBIN_U32("graphics/link/french/321start.4bpp.lz");
@@ -1941,8 +1941,8 @@ const u16 gPokeJumpBonuses_Pal[] = INCBIN_U16("graphics/pokemon_jump/french/bonu
 const u32 gPokeJumpBonuses_Gfx[] = INCBIN_U32("graphics/pokemon_jump/french/bonuses.4bpp.lz");
 const u32 gPokeJumpBonuses_Tilemap[] = INCBIN_U32("graphics/pokemon_jump/french/bonuses.bin.lz");
 #elif ITALIAN
-const u32 gCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/it/the_end_copyright.4bpp.lz");
-const u32 gCreditsCopyrightEnd_Tilemap[] = INCBIN_U32("graphics/credits/it/the_end_copyright.bin.lz");
+const u32 gCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/italian/the_end_copyright.4bpp.lz");
+const u32 gCreditsCopyrightEnd_Tilemap[] = INCBIN_U32("graphics/credits/italian/the_end_copyright.bin.lz");
 
 const u16 g321Start_Pal[] = INCBIN_U16("graphics/link/321start.gbapal");
 const u32 g321Start_Gfx[] = INCBIN_U32("graphics/link/italian/321start.4bpp.lz");

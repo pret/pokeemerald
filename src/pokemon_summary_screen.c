@@ -325,9 +325,9 @@ static void SummaryScreen_DestroyAnimDelayTask(void);
 #if ENGLISH
 #include "data/text/move_descriptions.h"
 #elif FRENCH
-#include "data/text/fr/move_descriptions.h"
+#include "data/text/french/move_descriptions.h"
 #elif ITALIAN
-#include "data/text/it/move_descriptions.h"
+#include "data/text/italian/move_descriptions.h"
 #endif
 #include "data/text/nature_names.h"
 

@@ -869,9 +869,9 @@ ALIGNED(4) static const u8 sExpandedPlaceholder_PokedexDescription[] = _("");
 #if ENGLISH
 #include "data/pokemon/pokedex_text.h"
 #elif FRENCH
-#include "data/pokemon/fr/pokedex_text.h"
+#include "data/pokemon/french/pokedex_text.h"
 #elif ITALIAN
-#include "data/pokemon/it/pokedex_text.h"
+#include "data/pokemon/italian/pokedex_text.h"
 #endif
 #include "data/pokemon/pokedex_entries.h"
 

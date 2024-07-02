@@ -5,15 +5,15 @@ const u16 gSlotMachineMenu_Tilemap[] = INCBIN_U16("graphics/slot_machine/menu.bi
 
 const u16 gSlotMachineInfoBox_Tilemap[] = INCBIN_U16("graphics/slot_machine/info_box.bin");
 #elif FRENCH
-const u32 gSlotMachineMenu_Gfx[] = INCBIN_U32("graphics/slot_machine/fr/menu.4bpp.lz");
+const u32 gSlotMachineMenu_Gfx[] = INCBIN_U32("graphics/slot_machine/french/menu.4bpp.lz");
 const u16 gSlotMachineMenu_Tilemap[] = INCBIN_U16("graphics/slot_machine/menu.bin");
 
-const u16 gSlotMachineInfoBox_Tilemap[] = INCBIN_U16("graphics/slot_machine/fr/info_box.bin");
+const u16 gSlotMachineInfoBox_Tilemap[] = INCBIN_U16("graphics/slot_machine/french/info_box.bin");
 #elif ITALIAN
-const u32 gSlotMachineMenu_Gfx[] = INCBIN_U32("graphics/slot_machine/it/menu.4bpp.lz");
+const u32 gSlotMachineMenu_Gfx[] = INCBIN_U32("graphics/slot_machine/italian/menu.4bpp.lz");
 const u16 gSlotMachineMenu_Tilemap[] = INCBIN_U16("graphics/slot_machine/menu.bin");
 
-const u16 gSlotMachineInfoBox_Tilemap[] = INCBIN_U16("graphics/slot_machine/it/info_box.bin");
+const u16 gSlotMachineInfoBox_Tilemap[] = INCBIN_U16("graphics/slot_machine/italian/info_box.bin");
 #endif
 
 const u16 gSlotMachineReelSymbols_Pal[] = INCBIN_U16("graphics/slot_machine/reel_symbols/1.gbapal");
@@ -38,7 +38,7 @@ const u32 gSlotMachineDigitalDisplay_Gfx[] = INCBIN_U32("graphics/slot_machine/d
 const u8 gSlotMachineReelSymbol6Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/french/6.4bpp");
 const u8 gSlotMachineReelSymbol7Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/7.4bpp");
  // The 'REG' text is missing in the French and Italian versions.
-const u32 gSlotMachineDigitalDisplay_Gfx[] = INCBIN_U32("graphics/slot_machine/fr/digital_display.4bpp.lz");
+const u32 gSlotMachineDigitalDisplay_Gfx[] = INCBIN_U32("graphics/slot_machine/french/digital_display.4bpp.lz");
 #endif
 
 const u8 gSlotMachineNumber0Tiles[] = INCBIN_U8("graphics/slot_machine/numbers/0.4bpp");

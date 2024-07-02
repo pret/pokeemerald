@@ -3,9 +3,9 @@
 #if ENGLISH
 ALIGNED(4) const u16 gFontSmallNarrowLatinGlyphs[] = INCBIN_U16("graphics/fonts/small_narrow.latfont");
 #elif FRENCH
-ALIGNED(4) const u16 gFontSmallNarrowLatinGlyphs[] = INCBIN_U16("graphics/fonts/fr/small_narrow.latfont");
+ALIGNED(4) const u16 gFontSmallNarrowLatinGlyphs[] = INCBIN_U16("graphics/fonts/french/small_narrow.latfont");
 #elif ITALIAN
-ALIGNED(4) const u16 gFontSmallNarrowLatinGlyphs[] = INCBIN_U16("graphics/fonts/it/small_narrow.latfont");
+ALIGNED(4) const u16 gFontSmallNarrowLatinGlyphs[] = INCBIN_U16("graphics/fonts/italian/small_narrow.latfont");
 #endif
 ALIGNED(4) const u8 gFontSmallNarrowLatinGlyphWidths[] = {
     3,  5,  5,  5,  5,  5,  5,  5,  5,  4,  3,  4,  4,  5,  5,  5,
@@ -53,9 +53,9 @@ ALIGNED(4) const u8 gFontSmallNarrowLatinGlyphWidths[] = {
 #if ENGLISH
 ALIGNED(4) const u16 gFontSmallLatinGlyphs[] = INCBIN_U16("graphics/fonts/small.latfont");
 #elif FRENCH
-ALIGNED(4) const u16 gFontSmallLatinGlyphs[] = INCBIN_U16("graphics/fonts/fr/small.latfont");
+ALIGNED(4) const u16 gFontSmallLatinGlyphs[] = INCBIN_U16("graphics/fonts/french/small.latfont");
 #elif ITALIAN
-ALIGNED(4) const u16 gFontSmallLatinGlyphs[] = INCBIN_U16("graphics/fonts/it/small.latfont");
+ALIGNED(4) const u16 gFontSmallLatinGlyphs[] = INCBIN_U16("graphics/fonts/italian/small.latfont");
 #endif
 ALIGNED(4) const u8 gFontSmallLatinGlyphWidths[] = {
     3,  5,  5,  5,  5,  5,  5,  5,  5,  4,  3,  4,  4,  5,  5,  5,
@@ -103,9 +103,9 @@ ALIGNED(4) const u8 gFontSmallLatinGlyphWidths[] = {
 #if ENGLISH
 ALIGNED(4) const u16 gFontNarrowLatinGlyphs[] = INCBIN_U16("graphics/fonts/narrow.latfont");
 #elif FRENCH
-ALIGNED(4) const u16 gFontNarrowLatinGlyphs[] = INCBIN_U16("graphics/fonts/fr/narrow.latfont");
+ALIGNED(4) const u16 gFontNarrowLatinGlyphs[] = INCBIN_U16("graphics/fonts/french/narrow.latfont");
 #elif ITALIAN
-ALIGNED(4) const u16 gFontNarrowLatinGlyphs[] = INCBIN_U16("graphics/fonts/it/narrow.latfont");
+ALIGNED(4) const u16 gFontNarrowLatinGlyphs[] = INCBIN_U16("graphics/fonts/italian/narrow.latfont");
 #endif
 ALIGNED(4) const u8 gFontNarrowLatinGlyphWidths[] = {
     3,  5,  5,  5,  5,  5,  5,  5,  5,  4,  3,  4,  4,  5,  5,  5,
@@ -158,9 +158,9 @@ ALIGNED(4) const u8 gFontNarrowLatinGlyphWidths[] = {
 #if ENGLISH
 ALIGNED(4) const u16 gFontShortLatinGlyphs[] = INCBIN_U16("graphics/fonts/short.latfont");
 #elif FRENCH
-ALIGNED(4) const u16 gFontShortLatinGlyphs[] = INCBIN_U16("graphics/fonts/fr/short.latfont");
+ALIGNED(4) const u16 gFontShortLatinGlyphs[] = INCBIN_U16("graphics/fonts/french/short.latfont");
 #elif ITALIAN
-ALIGNED(4) const u16 gFontShortLatinGlyphs[] = INCBIN_U16("graphics/fonts/it/short.latfont");
+ALIGNED(4) const u16 gFontShortLatinGlyphs[] = INCBIN_U16("graphics/fonts/italian/short.latfont");
 #endif
 ALIGNED(4) const u8 gFontShortLatinGlyphWidths[] = {
     3,  6,  6,  6,  6,  6,  6,  6,  6,  6,  3,  6,  6,  6,  6,  6,
@@ -210,9 +210,9 @@ ALIGNED(4) const u8 gFontShortLatinGlyphWidths[] = {
 #if ENGLISH
 ALIGNED(4) const u16 gFontNormalLatinGlyphs[] = INCBIN_U16("graphics/fonts/normal.latfont");
 #elif FRENCH
-ALIGNED(4) const u16 gFontNormalLatinGlyphs[] = INCBIN_U16("graphics/fonts/fr/normal.latfont");
+ALIGNED(4) const u16 gFontNormalLatinGlyphs[] = INCBIN_U16("graphics/fonts/french/normal.latfont");
 #elif ITALIAN
-ALIGNED(4) const u16 gFontNormalLatinGlyphs[] = INCBIN_U16("graphics/fonts/it/normal.latfont");
+ALIGNED(4) const u16 gFontNormalLatinGlyphs[] = INCBIN_U16("graphics/fonts/italian/normal.latfont");
 #endif
 ALIGNED(4) const u8 gFontNormalLatinGlyphWidths[] = {
     3,  6,  6,  6,  6,  6,  6,  6,  6,  6,  3,  6,  6,  6,  6,  6,
