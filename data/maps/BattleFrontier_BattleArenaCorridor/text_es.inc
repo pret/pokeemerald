@@ -1,4 +1,4 @@
 
 BattleFrontier_BattleArenaCorridor_Text_PleaseStepIn:
-	.string "Your battles shall be waged in\n"
-	.string "the next room. Please step in!$"
+	.string "Los combates se librarán\n"
+	.string "en la sala de al lado. ¡Suerte!$"

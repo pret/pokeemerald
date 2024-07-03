@@ -1,4 +1,4 @@
 
 BattleFrontier_BattlePikeCorridor_Text_YourChallengeHasBegun:
-	.string "Your Battle Choice challenge\n"
-	.string "has now begun…$"
+	.string "El desafío de la ELECCIÓN de COMBATES\n"
+	.string "ha dado comienzo…$"

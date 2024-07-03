@@ -1,21 +1,22 @@
+
 AbandonedShip_HiddenFloorCorridors_Text_Rm1DoorIsLocked:
-	.string "The door is locked.\p"
-	.string "“RM. 1” is painted on the door.$"
+	.string "La puerta está cerrada.\p"
+	.string "En la puerta pone “CABINA 1”.$"
 
 AbandonedShip_HiddenFloorCorridors_Text_Rm2DoorIsLocked:
-	.string "The door is locked.\p"
-	.string "“RM. 2” is painted on the door.$"
+	.string "La puerta está cerrada.\p"
+	.string "En la puerta pone “CABINA 2”.$"
 
 AbandonedShip_HiddenFloorCorridors_Text_Rm4DoorIsLocked:
-	.string "The door is locked.\p"
-	.string "“RM. 4” is painted on the door.$"
+	.string "La puerta está cerrada.\p"
+	.string "En la puerta pone “CABINA 4”.$"
 
 AbandonedShip_HiddenFloorCorridors_Text_Rm6DoorIsLocked:
-	.string "The door is locked.\p"
-	.string "“RM. 6” is painted on the door.$"
+	.string "La puerta está cerrada.\p"
+	.string "En la puerta pone “CABINA 6”.$"
 
 AbandonedShip_HiddenFloorCorridors_Text_InsertedKey:
-	.string "{PLAYER} inserted and turned the\n"
-	.string "KEY.\p"
-	.string "The inserted KEY stuck fast,\n"
-	.string "but the door opened.$"
+	.string "{PLAYER} ha metido la LLAVE\n"
+	.string "y la ha hecho girar.\p"
+	.string "La LLAVE se ha quedado atascada,\n"
+	.string "pero la puerta se ha abierto.$"
