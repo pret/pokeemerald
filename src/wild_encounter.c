@@ -919,7 +919,7 @@ static void SetEncounterFishing(void)
 
 u32 CalculateChainFishingShinyRolls(void)
 {
-    return (1 + (2 * GetCurrentChainFishingDexNavStreak()));
+    return 2 * GetCurrentChainFishingDexNavStreak();
 }
 
 static void SetLastFishingSpecies(u32 species)
