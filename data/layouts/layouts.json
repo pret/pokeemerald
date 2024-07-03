@@ -4430,6 +4430,36 @@
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/PitEntrance/border.bin",
       "blockdata_filepath": "data/layouts/PitEntrance/map.bin"
+    },
+    {
+      "id": "LAYOUT_PIT_ARENA_WATER",
+      "name": "PitArenaWater_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_PitWaterTheme",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/PitArenaWater/border.bin",
+      "blockdata_filepath": "data/layouts/PitArenaWater/map.bin"
+    },
+    {
+      "id": "LAYOUT_PIT_ARENA_DESERT",
+      "name": "PitArenaDesert_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_PitArenaDesert",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/PitArenaDesert/border.bin",
+      "blockdata_filepath": "data/layouts/PitArenaDesert/map.bin"
+    },
+    {
+      "id": "LAYOUT_PIT_ARENA_SNOW",
+      "name": "PitArenaSnow_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_PitArenaSnow",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/PitArenaSnow/border.bin",
+      "blockdata_filepath": "data/layouts/PitArenaSnow/map.bin"
     }
   ]
 }

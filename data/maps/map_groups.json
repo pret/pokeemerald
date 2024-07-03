@@ -95,7 +95,10 @@
     "Underwater_Route105",
     "Underwater_Route125",
     "PitArena",
-    "PitEntrance"
+    "PitEntrance",
+    "PitArenaWater",
+    "PitArenaDesert",
+    "PitArenaSnow"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",

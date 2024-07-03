@@ -207,3 +207,12 @@ const u16 gMetatileAttributes_MysteryEventsHouse[] = INCBIN_U16("data/tilesets/s
 
 const u16 gMetatiles_UnionRoom[] = INCBIN_U16("data/tilesets/secondary/union_room/metatiles.bin");
 const u16 gMetatileAttributes_UnionRoom[] = INCBIN_U16("data/tilesets/secondary/union_room/metatile_attributes.bin");
+
+const u16 gMetatiles_PitWaterTheme[] = INCBIN_U16("data/tilesets/primary/pit_water_theme/metatiles.bin");
+const u16 gMetatileAttributes_PitWaterTheme[] = INCBIN_U16("data/tilesets/primary/pit_water_theme/metatile_attributes.bin");
+
+const u16 gMetatiles_PitArenaDesert[] = INCBIN_U16("data/tilesets/primary/pit_arena_desert/metatiles.bin");
+const u16 gMetatileAttributes_PitArenaDesert[] = INCBIN_U16("data/tilesets/primary/pit_arena_desert/metatile_attributes.bin");
+
+const u16 gMetatiles_PitArenaSnow[] = INCBIN_U16("data/tilesets/primary/pit_arena_snow/metatiles.bin");
+const u16 gMetatileAttributes_PitArenaSnow[] = INCBIN_U16("data/tilesets/primary/pit_arena_snow/metatile_attributes.bin");

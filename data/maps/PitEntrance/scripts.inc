@@ -47,7 +47,7 @@ PitEntrance_Warp::
 #endif
 	additem ITEM_EXP_SHARE, 1
 	setflag FLAG_SYS_POKEMON_GET
-	warpteleport MAP_PIT_ARENA, 9, 7
+	warpteleport MAP_PIT_ARENA_WATER, 9, 7
 	waitstate
 	releaseall
 	end
