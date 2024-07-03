@@ -1,27 +1,27 @@
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_ReadyFor2ndOpponentSet:
-	.string "The 2nd set of opponents is next.\n"
-	.string "Are you ready?$"
+	.string "El 2.º equipo está preparado.\n"
+	.string "¿Continuamos?$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_ReadyFor3rdOpponentSet:
-	.string "The 3rd set of opponents is next.\n"
-	.string "Are you ready?$"
+	.string "El 3.{SUPER_ER} equipo está preparado.\n"
+	.string "¿Continuamos?$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_ReadyFor4thOpponentSet:
-	.string "The 4th set of opponents is next.\n"
-	.string "Are you ready?$"
+	.string "El 4.º equipo está preparado.\n"
+	.string "¿Continuamos?$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_ReadyFor5thOpponentSet:
-	.string "The 5th set of opponents is next.\n"
-	.string "Are you ready?$"
+	.string "El 5.º equipo está preparado.\n"
+	.string "¿Continuamos?$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_ReadyFor6thOpponentSet:
-	.string "The 6th set of opponents is next.\n"
-	.string "Are you ready?$"
+	.string "El 6.º equipo está preparado.\n"
+	.string "¿Continuamos?$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_ReadyFor7thOpponentSet:
-	.string "The 7th set of opponents is next.\n"
-	.string "Are you ready?$"
+	.string "El 7.º equipo está preparado.\n"
+	.string "¿Continuamos?$"
 
 @ Unused
 BattleFrontier_BattleTowerMultiBattleRoom_Text_2ndOpponentSetNext:
@@ -54,9 +54,9 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_7thOpponentSetNext:
 	.string "Do your best!$"
 
 gText_LinkStandby3::
-	.string "Link standby…$"
+	.string "Esperando conexión…$"
 
 gText_YourPartnerHasRetired::
-	.string "Your partner has retired.\p"
-	.string "Your BATTLE ROOM challenge\n"
-	.string "will be canceled.$"
+	.string "Tu pareja se ha retirado.\p"
+	.string "Tu desafío de la SALA BATALLA\n"
+	.string "ha sido cancelado.$"

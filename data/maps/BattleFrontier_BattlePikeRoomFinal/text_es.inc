@@ -1,4 +1,4 @@
 
 BattleFrontier_BattlePikeRoomFinal_Text_CongratsThisWayPlease:
-	.string "Congratulations…\n"
-	.string "Now, this way, please…$"
+	.string "Enhorabuena…\n"
+	.string "Por aquí, por favor…$"
