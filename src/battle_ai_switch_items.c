@@ -442,7 +442,7 @@ static bool32 ShouldSwitchIfGameStatePrompt(u32 battler, bool32 emitResult)
     {
         //Yawn
         if (gStatuses3[battler] & STATUS3_YAWN
-            && AI_CanSleep(battler, monAbility)
+            && CanBeSlept(battler, monAbility)
             && gBattleMons[battler].hp > gBattleMons[battler].maxHP / 3)
         {
             switchMon = TRUE;
@@ -1291,8 +1291,6 @@ static u32 GetSwitchinHazardsDamage(u32 battler, struct BattlePokemon *battleMon
             hazardDamage += spikesDamage;
         }
 
-        // Toxic Spikes
-        // TODO: CanBePoisoned compatibility to avoid duplicate code
         if ((hazardFlags & SIDE_STATUS_TOXIC_SPIKES) && (defType1 != TYPE_POISON && defType2 != TYPE_POISON
             && defType1 != TYPE_STEEL && defType2 != TYPE_STEEL
             && ability != ABILITY_IMMUNITY && ability != ABILITY_POISON_HEAL && ability != ABILITY_COMATOSE

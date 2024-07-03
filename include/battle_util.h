@@ -235,10 +235,10 @@ bool32 MoveHasAdditionalEffectSelf(u32 move, u32 moveEffect);
 bool32 MoveHasAdditionalEffectSelfArg(u32 move, u32 moveEffect, u32 argument);
 bool32 MoveHasChargeTurnAdditionalEffect(u32 move);
 
-bool32 CanSleep(u32 battler);
-bool32 CanBePoisoned(u32 battlerAttacker, u32 battlerTarget);
-bool32 CanBeBurned(u32 battler);
-bool32 CanBeParalyzed(u32 battler);
+bool32 CanBeSlept(u32 battler, u32 ability);
+bool32 CanBePoisoned(u32 battlerAtk, u32 battlerDef, u32 defAbility);
+bool32 CanBeBurned(u32 battler, u32 ability);
+bool32 CanBeParalyzed(u32 battler, u32 ability);
 bool32 CanBeFrozen(u32 battler);
 bool32 CanGetFrostbite(u32 battler);
 bool32 CanBeConfused(u32 battler);
