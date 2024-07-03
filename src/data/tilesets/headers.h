@@ -858,3 +858,36 @@ const struct Tileset gTileset_PitArenaSnow =
     .metatileAttributes = gMetatileAttributes_PitArenaSnow,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_PitArenaBeach =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_PitArenaBeach,
+    .palettes = gTilesetPalettes_PitArenaBeach,
+    .metatiles = gMetatiles_PitArenaBeach,
+    .metatileAttributes = gMetatileAttributes_PitArenaBeach,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_PitArenaDeepForest =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_PitArenaDeepForest,
+    .palettes = gTilesetPalettes_PitArenaDeepForest,
+    .metatiles = gMetatiles_PitArenaDeepForest,
+    .metatileAttributes = gMetatileAttributes_PitArenaDeepForest,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_PitArenaDirtPath =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_PitArenaDirtPath,
+    .palettes = gTilesetPalettes_PitArenaDirtPath,
+    .metatiles = gMetatiles_PitArenaDirtPath,
+    .metatileAttributes = gMetatileAttributes_PitArenaDirtPath,
+    .callback = NULL,
+};

@@ -98,7 +98,10 @@
     "PitEntrance",
     "PitArenaWater",
     "PitArenaDesert",
-    "PitArenaSnow"
+    "PitArenaSnow",
+    "PitArenaBeach",
+    "PitArenaDeepForest",
+    "PitArenaDirtPath"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",
