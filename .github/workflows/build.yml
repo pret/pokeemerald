@@ -80,19 +80,19 @@ jobs:
           GAME_LANGUAGE: ITALIAN
         run: make -j${nproc}
 
-      - name: Spanish Compare
-        env:
-          MODERN: 0
-          COMPARE: 0 # Once all assets are ready, set to 1 instead
-          GAME_LANGUAGE: SPANISH
-        run: make -j${nproc}
+      #- name: Spanish Compare
+      #  env:
+      #    MODERN: 0
+      #    COMPARE: 0 # Once all assets are ready, set to 1 instead
+      #    GAME_LANGUAGE: SPANISH
+      #  run: make -j${nproc}
 
-      - name: Spanish Modern
-        env:
-          MODERN: 1
-          COMPARE: 0
-          GAME_LANGUAGE: SPANISH
-        run: make -j${nproc}
+      #- name: Spanish Modern
+      #  env:
+      #    MODERN: 1
+      #    COMPARE: 0
+      #    GAME_LANGUAGE: SPANISH
+      #  run: make -j${nproc}
 
       - name: Move symfiles
         if: ${{ github.event_name == 'push' }}
