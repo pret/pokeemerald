@@ -554,7 +554,7 @@ static const struct RandomTrainerNPC RandomNPCTrainers_Doubles[] =
 
 u16 ReturnLastSpokenVarObjGfxId()
 {   
-    if(FlagGet(FLAG_DOUBLES_MODE))
+    if(gSpecialVar_LastTalked > 4)
         return VarGet(RandomNPCTrainers_Doubles[gSpecialVar_LastTalked - 15].gfxid);
     else
         return VarGet(RandomNPCTrainers[gSpecialVar_LastTalked - 1].gfxid);
@@ -682,18 +682,25 @@ void PlayerPartyCountToResultVar()
     VarSet(VAR_RESULT, gPlayerPartyCount);
 }
 
-void RemovePartyPokemon()
+void RemovePartyPokemon(void)
 {
     ZeroMonData(&gPlayerParty[VarGet(VAR_RESULT)]);
     CompactPartySlots();
     CalculatePlayerPartyCount();
 }
 
-void SetRandomTrainers()
+void SetRandomTrainersMixedDoubles(void);
+void SetRandomTrainers(void)
 {
     u16 iterator = 0;
     u16 trainerCount = ReturnNumberOfTrainersForFloor();
     u16 trainers[4] = {0, 0, 0, 0};
+
+    if(FlagGet(FLAG_MIXED_DOUBLES_MODE))
+    {
+        SetRandomTrainersMixedDoubles();
+        return;
+    }
 
     VarSet(VAR_LAST_FLOOR_TRAINER_NUMBER, trainerCount);
 
@@ -750,18 +757,120 @@ void SetRandomTrainers()
     }
 }
 
+void SetRandomTrainersMixedDoubles(void)
+{
+    u16 iterator = 0;
+    u16 trainerCount = ReturnNumberOfTrainersForFloor();
+    u16 trainers[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+
+    VarSet(VAR_LAST_FLOOR_TRAINER_NUMBER, trainerCount);
+
+    // Handle Random Trainers That Are Spawned
+    for (iterator = 0; iterator < trainerCount; iterator++)
+    {
+        u16 newTrainer = (Random() % 8);
+        u8 reroll = FALSE;
+        if(newTrainer > 3)
+        {
+            if(trainers[newTrainer - 4] == 1)
+            {
+                reroll = TRUE;
+            }
+            else
+            {
+                reroll = FALSE;
+            }
+        }
+        else
+        {
+            if(trainers[newTrainer + 4] == 1)
+            {
+                reroll = TRUE;
+            }
+            else
+            {
+                reroll = FALSE;
+            }
+        }
+
+        while(trainers[newTrainer] || reroll)
+        {
+            newTrainer = (Random() % 8);
+            if(newTrainer > 3)
+            {
+                if(newTrainer > 3)
+                {
+                    if(trainers[newTrainer - 4] == 1)
+                    {
+                        reroll = TRUE;
+                    }
+                    else
+                    {
+                        reroll = FALSE;
+                    }
+                }
+                else
+                {
+                    if(trainers[newTrainer + 4] == 1)
+                    {
+                        reroll = TRUE;
+                    }
+                    else
+                    {
+                        reroll = FALSE;
+                    }
+                }
+            }
+        }
+
+        trainers[newTrainer] = 1;
+
+        if(newTrainer > 3)
+        {
+            VarSet(RandomNPCTrainers_Doubles[newTrainer - 4].gfxid, (Random() % 53) + 5);
+            ClearTrainerFlag(RandomNPCTrainers_Doubles[newTrainer - 4].trainerflag); 
+            FlagClear(RandomNPCTrainers_Doubles[newTrainer - 4].objectflag); 
+        }
+        else
+        {
+            VarSet(RandomNPCTrainers[newTrainer].gfxid, (Random() % 53) + 5);
+            ClearTrainerFlag(RandomNPCTrainers[newTrainer].trainerflag); 
+            FlagClear(RandomNPCTrainers[newTrainer].objectflag); 
+        }
+        
+    }
+
+    // Handle Random Trainer Objects That Aren't Spawned
+    for (iterator = 0; iterator < 8; iterator++)
+    {
+        if (!trainers[iterator])
+        {
+            if(iterator > 3)
+            {
+                FlagSet(RandomNPCTrainers_Doubles[iterator - 4].objectflag);
+                SetTrainerFlag(RandomNPCTrainers_Doubles[iterator - 4].trainerflag);
+            }
+            else
+            {
+                FlagSet(RandomNPCTrainers[iterator].objectflag);
+                SetTrainerFlag(RandomNPCTrainers[iterator].trainerflag);
+            }
+        }
+    }
+}
+
 void CheckFloorCleared()
 {
     u16 iterator = 0;
     u16 trainerDefeated = 0;
-    for (iterator = 0; iterator < 4; iterator++)
+    for (iterator = 0; iterator < 8; iterator++)
     {
-        if(FlagGet(FLAG_DOUBLES_MODE))
-            trainerDefeated = (u8) FlagGet(TRAINER_FLAGS_START + RandomNPCTrainers_Doubles[iterator].trainerflag) + trainerDefeated;
+        if(iterator > 3)
+            trainerDefeated = (u8) FlagGet(TRAINER_FLAGS_START + RandomNPCTrainers_Doubles[iterator - 4].trainerflag) + trainerDefeated;
         else
             trainerDefeated = (u8) FlagGet(TRAINER_FLAGS_START + RandomNPCTrainers[iterator].trainerflag) + trainerDefeated;
     }
-    if (trainerDefeated == 4)
+    if (trainerDefeated == 8)
         FlagSet(FLAG_FLOOR_CLEARED);
     return;
 }
