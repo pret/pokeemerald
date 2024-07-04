@@ -20,6 +20,7 @@
 #include "palette.h"
 #include "party_menu.h"
 #include "pokemon.h"
+#include "pokemon_storage_system.h"
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
@@ -1015,10 +1016,10 @@ void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 
 bool8 FldEff_PokecenterHeal(void)
 {
-    u8 nPokemon;
+    u32 nPokemon;
     struct Task *task;
 
-    nPokemon = CalculatePlayerPartyCount();
+    nPokemon = (OW_IGNORE_EGGS_ON_HEAL <= GEN_3) ? CalculatePlayerPartyCount() : CountPartyNonEggMons();
     task = &gTasks[CreateTask(Task_PokecenterHeal, 0xff)];
     task->tNumMons = nPokemon;
     task->tFirstBallX = 93;

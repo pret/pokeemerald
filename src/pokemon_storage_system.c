@@ -1436,9 +1436,9 @@ s16 GetFirstFreeBoxSpot(u8 boxId)
     return -1; // all spots are taken
 }
 
-u8 CountPartyNonEggMons(void)
+u32 CountPartyNonEggMons(void)
 {
-    u16 i, count;
+    u32 i, count;
 
     for (i = 0, count = 0; i < PARTY_SIZE; i++)
     {
@@ -6538,7 +6538,7 @@ static void ReleaseMon(void)
             if (OW_PC_RELEASE_ITEM >= GEN_8)
                 item = GetBoxMonDataAt(boxId, sCursorPosition, MON_DATA_HELD_ITEM);
         }
-            
+
         PurgeMonOrBoxMon(boxId, sCursorPosition);
         if (item != ITEM_NONE)
             AddBagItem(item, 1);
