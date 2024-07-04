@@ -693,7 +693,7 @@ void SetRandomTrainersMixedDoubles(void);
 void SetRandomTrainers(void)
 {
     u16 iterator = 0;
-    u16 trainerCount = ReturnNumberOfTrainersForFloor();
+    u16 trainerCount = 0;
     u16 trainers[4] = {0, 0, 0, 0};
 
     if(FlagGet(FLAG_MIXED_DOUBLES_MODE))
@@ -701,6 +701,8 @@ void SetRandomTrainers(void)
         SetRandomTrainersMixedDoubles();
         return;
     }
+
+    trainerCount = ReturnNumberOfTrainersForFloor();
 
     VarSet(VAR_LAST_FLOOR_TRAINER_NUMBER, trainerCount);
 
