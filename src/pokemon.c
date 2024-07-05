@@ -6644,7 +6644,7 @@ bool8 IsTradedMon(struct Pokemon *mon)
     u32 otId;
     GetMonData(mon, MON_DATA_OT_NAME, otName);
     otId = GetMonData(mon, MON_DATA_OT_ID, 0);
-    return IsOtherTrainer(otId, otName);
+    return FALSE;
 }
 
 bool8 IsOtherTrainer(u32 otId, u8 *otName)
