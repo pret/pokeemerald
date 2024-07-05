@@ -7,29 +7,56 @@
 ## endfor
 #if FRENCH
 ## for map_section in map_sections
+{% if existsIn(map_section, "name_fr") %}
 {% if getVar(map_section.name) == map_section.map_section %}
 static const u8 sMapName_{{ cleanString(map_section.name) }}[] = _("{{ map_section.name_fr }}");
 {% endif %}
 {% if existsIn(map_section, "name_clone") %}
 static const u8 sMapName_{{ cleanString(map_section.name) }}_Clone[] = _("{{ map_section.name_fr }}");
 {% endif %}
+{% else %}
+{% if getVar(map_section.name) == map_section.map_section %}
+static const u8 sMapName_{{ cleanString(map_section.name) }}[] = _("{{ map_section.name }}");
+{% endif %}
+{% if existsIn(map_section, "name_clone") %}
+static const u8 sMapName_{{ cleanString(map_section.name) }}_Clone[] = _("{{ map_section.name }}");
+{% endif %}
+{% endif %}
 ## endfor
 #elif ITALIAN
 ## for map_section in map_sections
+{% if existsIn(map_section, "name_it") %}
 {% if getVar(map_section.name) == map_section.map_section %}
 static const u8 sMapName_{{ cleanString(map_section.name) }}[] = _("{{ map_section.name_it }}");
 {% endif %}
 {% if existsIn(map_section, "name_clone") %}
 static const u8 sMapName_{{ cleanString(map_section.name) }}_Clone[] = _("{{ map_section.name_it }}");
 {% endif %}
+{% else %}
+{% if getVar(map_section.name) == map_section.map_section %}
+static const u8 sMapName_{{ cleanString(map_section.name) }}[] = _("{{ map_section.name }}");
+{% endif %}
+{% if existsIn(map_section, "name_clone") %}
+static const u8 sMapName_{{ cleanString(map_section.name) }}_Clone[] = _("{{ map_section.name }}");
+{% endif %}
+{% endif %}
 ## endfor
 #elif SPANISH
 ## for map_section in map_sections
+{% if existsIn(map_section, "name_es") %}
 {% if getVar(map_section.name) == map_section.map_section %}
 static const u8 sMapName_{{ cleanString(map_section.name) }}[] = _("{{ map_section.name_es }}");
 {% endif %}
 {% if existsIn(map_section, "name_clone") %}
 static const u8 sMapName_{{ cleanString(map_section.name) }}_Clone[] = _("{{ map_section.name_es }}");
+{% endif %}
+{% else %}
+{% if getVar(map_section.name) == map_section.map_section %}
+static const u8 sMapName_{{ cleanString(map_section.name) }}[] = _("{{ map_section.name }}");
+{% endif %}
+{% if existsIn(map_section, "name_clone") %}
+static const u8 sMapName_{{ cleanString(map_section.name) }}_Clone[] = _("{{ map_section.name }}");
+{% endif %}
 {% endif %}
 ## endfor
 #else //ENGLISH
