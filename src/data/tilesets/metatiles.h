@@ -225,3 +225,15 @@ const u16 gMetatileAttributes_PitArenaDeepForest[] = INCBIN_U16("data/tilesets/p
 
 const u16 gMetatiles_PitArenaDirtPath[] = INCBIN_U16("data/tilesets/primary/pit_arena_dirt_path/metatiles.bin");
 const u16 gMetatileAttributes_PitArenaDirtPath[] = INCBIN_U16("data/tilesets/primary/pit_arena_dirt_path/metatile_attributes.bin");
+
+const u16 gMetatiles_PitArenaClouds[] = INCBIN_U16("data/tilesets/primary/pit_arena_clouds/metatiles.bin");
+const u16 gMetatileAttributes_PitArenaClouds[] = INCBIN_U16("data/tilesets/primary/pit_arena_clouds/metatile_attributes.bin");
+
+const u16 gMetatiles_PitArenaMushroomWoods[] = INCBIN_U16("data/tilesets/primary/pit_arena_mushroom_woods/metatiles.bin");
+const u16 gMetatileAttributes_PitArenaMushroomWoods[] = INCBIN_U16("data/tilesets/primary/pit_arena_mushroom_woods/metatile_attributes.bin");
+
+const u16 gMetatiles_PitArenaSpiderWoods[] = INCBIN_U16("data/tilesets/primary/pit_arena_spider_woods/metatiles.bin");
+const u16 gMetatileAttributes_PitArenaSpiderWoods[] = INCBIN_U16("data/tilesets/primary/pit_arena_spider_woods/metatile_attributes.bin");
+
+const u16 gMetatiles_PitArenaUnderwater[] = INCBIN_U16("data/tilesets/primary/pit_arena_underwater/metatiles.bin");
+const u16 gMetatileAttributes_PitArenaUnderwater[] = INCBIN_U16("data/tilesets/primary/pit_arena_underwater/metatile_attributes.bin");
