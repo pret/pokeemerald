@@ -601,6 +601,10 @@ u16 ReturnNumberOfTrainersForFloor()
             FlagClear(FLAG_GIVE_POKEMON);
             FlagSet(FLAG_MOVE_RELEARNER);
         }
+
+        if(FlagGet(FLAG_NO_EXP_MODE))
+            FlagClear(FLAG_MOVE_RELEARNER);
+
         return 0;
     }
 
@@ -975,4 +979,22 @@ void SetPlayerAvatar(void)
             gSaveBlock2Ptr->playerGfxType = 5;
             break;
     }
+}
+
+void LevelUpParty(void)
+{   
+    if(!(FlagGet(FLAG_NO_EXP_MODE)))
+        return;
+
+    if(VarGet(VAR_PIT_FLOOR) <= 5)
+        return;
+
+    u32 i = 0;
+    for(i = 0; i < 6; i++)
+    {
+        struct Pokemon *mon = &gPlayerParty[i];
+        ForceIncrementMonLevel(mon);
+        MonTryLearningNewMove(mon, TRUE);
+    }
+    return;
 }

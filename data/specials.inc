@@ -557,3 +557,4 @@ gSpecials::
 	def_special ShowTutorMoveList
 	def_special CallStatEditor
 	def_special CreateWonderTradePokemon
+	def_special TryLevelUpOverworldEvo

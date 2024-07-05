@@ -62,6 +62,7 @@
 #include "tx_randomizer_and_challenges.h"
 #include "daycare.h"
 #include "config.h"
+#include "field_screen_effect.h"
 
 
 #define FRIENDSHIP_EVO_THRESHOLD ((P_FRIENDSHIP_EVO_THRESHOLD >= GEN_9) ? 160 : 220)
@@ -861,6 +862,7 @@ static void Task_PlayMapChosenOrBattleBGM(u8 taskId);
 static bool8 ShouldSkipFriendshipChange(void);
 static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv);
 void TrySpecialOverworldEvo();
+void TryLevelUpOverworldEvo();
 
 EWRAM_DATA static u8 sLearningMoveTableID = 0;
 EWRAM_DATA u8 gPlayerPartyCount = 0;
@@ -6177,6 +6179,21 @@ bool8 TryIncrementMonLevel(struct Pokemon *mon)
     }
 }
 
+void ForceIncrementMonLevel(struct Pokemon *mon)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
+    u8 nextLevel = GetMonData(mon, MON_DATA_LEVEL, 0) + 1;
+    u32 expPoints = GetMonData(mon, MON_DATA_EXP, 0);
+    s32 currentHP = GetMonData(mon, MON_DATA_HP, NULL);
+    expPoints = gExperienceTables[gSpeciesInfo[species].growthRate][nextLevel];
+    SetMonData(mon, MON_DATA_EXP, &expPoints);
+    SetMonData(mon, MON_DATA_LEVEL, &nextLevel);
+    CalculateMonStats(mon);
+    if(currentHP == 0)
+        SetMonData(mon, MON_DATA_HP, &currentHP);
+    return;
+}
+
 static const u16 sUniversalMoves[] =
 {
     MOVE_BIDE,
@@ -7442,6 +7459,40 @@ void TrySpecialOverworldEvo(void)
 
     sTriedEvolving = 0;
     SetMainCallback2(CB2_ReturnToField);
+}
+
+void TryLevelUpOverworldEvo(void)
+{
+    u8 i;
+    if(!(FlagGet(FLAG_NO_EXP_MODE)))
+        return;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 targetSpecies = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_NORMAL, ITEM_NONE, SPECIES_NONE);
+        if (targetSpecies != SPECIES_NONE && !(sTriedEvolving & gBitTable[i]))
+        {
+            sTriedEvolving |= gBitTable[i];
+            if(gMain.callback2 == TryLevelUpOverworldEvo) // This fixes small graphics glitches.
+                EvolutionScene(&gPlayerParty[i], targetSpecies, TRUE, i);
+            else
+                BeginEvolutionScene(&gPlayerParty[i], targetSpecies, TRUE, i);
+            gCB2_AfterEvolution = TryLevelUpOverworldEvo;
+            return;
+        }
+    }
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if((sTriedEvolving & gBitTable[i]))
+        {
+            sTriedEvolving = 0;
+            gFieldCallback = FieldCB_ContinueScriptPlease;
+            SetMainCallback2(CB2_ReturnToField);
+            return;
+        }
+    }
+    sTriedEvolving = 0;
+    return;    
 }
 
 bool32 SpeciesHasGenderDifferences(u16 species)

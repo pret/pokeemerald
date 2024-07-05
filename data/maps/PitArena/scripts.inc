@@ -81,6 +81,9 @@ PitArena_Warp::
 PitArenaNoAutoSave::
 	lockall
 	addvar VAR_PIT_FLOOR, 1
+	callnative LevelUpParty
+	special TryLevelUpOverworldEvo
+PitArenaContinueAfterEvo::
 	clearflag FLAG_FLOOR_CLEARED
 	setflag FLAG_REWARD_ITEM_1
 	setflag FLAG_REWARD_ITEM_2

@@ -41,6 +41,7 @@
 #include "safari_zone.h"
 #include "field_specials.h"
 #include "ui_menu.h"
+#include "event_scripts.h"
 
 static void Task_ExitNonAnimDoor(u8);
 static void Task_ExitNonDoor(u8);
@@ -146,6 +147,15 @@ static void Task_WaitForFadeAndEnableScriptCtx(u8 taskID)
     }
 }
 
+void Task_WaitForFadeAndRestartScriptCtx(u8 taskID)
+{
+    if (WaitForWeatherFadeIn() == TRUE)
+    {
+        DestroyTask(taskID);
+        ScriptContext_SetupScript(PitArenaContinueAfterEvo);
+    }
+}
+
 void FieldCB_ContinueScriptHandleMusic(void)
 {
     LockPlayerFieldControls();
@@ -160,6 +170,14 @@ void FieldCB_ContinueScript(void)
     FadeInFromBlack();
     CreateTask(Task_WaitForFadeAndEnableScriptCtx, 10);
 }
+
+void FieldCB_ContinueScriptPlease(void)
+{
+    LockPlayerFieldControls();
+    FadeInFromBlack();
+    CreateTask(Task_WaitForFadeAndRestartScriptCtx, 10);
+}
+
 
 static void Task_ReturnToFieldCableLink(u8 taskId)
 {

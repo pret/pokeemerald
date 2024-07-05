@@ -59,7 +59,7 @@
 #define FLAG_MEGAS           0x2E // Unused Flag
 #define FLAG_FLOOR_100       0x2F // Unused Flag
 #define FLAG_MIXED_DOUBLES_MODE    0x30 // Unused Flag
-#define FLAG_UNUSED_0x031    0x31 // Unused Flag
+#define FLAG_NO_EXP_MODE     0x31 // Unused Flag
 #define FLAG_UNUSED_0x032    0x32 // Unused Flag
 #define FLAG_UNUSED_0x033    0x33 // Unused Flag
 #define FLAG_UNUSED_0x034    0x34 // Unused Flag

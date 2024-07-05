@@ -4295,7 +4295,7 @@ static void Cmd_getexp(void)
     case 0: // check if should receive exp at all
         if (GetBattlerSide(gBattlerFainted) != B_SIDE_OPPONENT
             || IsAiVsAiBattle()
-            || !BattleTypeAllowsExp())
+            || !BattleTypeAllowsExp() || FlagGet(FLAG_NO_EXP_MODE))
         {
             gBattleScripting.getexpState = 6; // goto last case
         }
