@@ -4377,13 +4377,13 @@ const struct Item gItems[] =
 
 // TMs/HMs
 
-    [ITEM_TM01_FOCUS_PUNCH] =
+    [ITEM_TM_FOCUS_PUNCH] =
     {
         .name = LANGUAGE_STRING(
             "TM01",
             "CT01",
             "MT01"),
-        .itemId = ITEM_TM01_FOCUS_PUNCH,
+        .itemId = ITEM_TM01,
         .price = 3000,
         .description = sTM01Desc,
         .pocket = POCKET_TM_HM,
@@ -4391,13 +4391,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM02_DRAGON_CLAW] =
+    [ITEM_TM_DRAGON_CLAW] =
     {
         .name = LANGUAGE_STRING(
             "TM02",
             "CT02",
             "MT02"),
-        .itemId = ITEM_TM02_DRAGON_CLAW,
+        .itemId = ITEM_TM02,
         .price = 3000,
         .description = sTM02Desc,
         .pocket = POCKET_TM_HM,
@@ -4405,13 +4405,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM03_WATER_PULSE] =
+    [ITEM_TM_WATER_PULSE] =
     {
         .name = LANGUAGE_STRING(
             "TM03",
             "CT03",
             "MT03"),
-        .itemId = ITEM_TM03_WATER_PULSE,
+        .itemId = ITEM_TM03,
         .price = 3000,
         .description = sTM03Desc,
         .pocket = POCKET_TM_HM,
@@ -4419,13 +4419,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM04_CALM_MIND] =
+    [ITEM_TM_CALM_MIND] =
     {
         .name = LANGUAGE_STRING(
             "TM04",
             "CT04",
             "MT04"),
-        .itemId = ITEM_TM04_CALM_MIND,
+        .itemId = ITEM_TM04,
         .price = 3000,
         .description = sTM04Desc,
         .pocket = POCKET_TM_HM,
@@ -4433,13 +4433,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM05_ROAR] =
+    [ITEM_TM_ROAR] =
     {
         .name = LANGUAGE_STRING(
             "TM05",
             "CT05",
             "MT05"),
-        .itemId = ITEM_TM05_ROAR,
+        .itemId = ITEM_TM05,
         .price = 1000,
         .description = sTM05Desc,
         .pocket = POCKET_TM_HM,
@@ -4447,13 +4447,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM06_TOXIC] =
+    [ITEM_TM_TOXIC] =
     {
         .name = LANGUAGE_STRING(
             "TM06",
             "CT06",
             "MT06"),
-        .itemId = ITEM_TM06_TOXIC,
+        .itemId = ITEM_TM06,
         .price = 3000,
         .description = sTM06Desc,
         .pocket = POCKET_TM_HM,
@@ -4461,13 +4461,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM07_HAIL] =
+    [ITEM_TM_HAIL] =
     {
         .name = LANGUAGE_STRING(
             "TM07",
             "CT07",
             "MT07"),
-        .itemId = ITEM_TM07_HAIL,
+        .itemId = ITEM_TM07,
         .price = 3000,
         .description = sTM07Desc,
         .pocket = POCKET_TM_HM,
@@ -4475,13 +4475,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM08_BULK_UP] =
+    [ITEM_TM_BULK_UP] =
     {
         .name = LANGUAGE_STRING(
             "TM08",
             "CT08",
             "MT08"),
-        .itemId = ITEM_TM08_BULK_UP,
+        .itemId = ITEM_TM08,
         .price = 3000,
         .description = sTM08Desc,
         .pocket = POCKET_TM_HM,
@@ -4489,13 +4489,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM09_BULLET_SEED] =
+    [ITEM_TM_BULLET_SEED] =
     {
         .name = LANGUAGE_STRING(
             "TM09",
             "CT09",
             "MT09"),
-        .itemId = ITEM_TM09_BULLET_SEED,
+        .itemId = ITEM_TM09,
         .price = 3000,
         .description = sTM09Desc,
         .pocket = POCKET_TM_HM,
@@ -4503,13 +4503,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM10_HIDDEN_POWER] =
+    [ITEM_TM_HIDDEN_POWER] =
     {
         .name = LANGUAGE_STRING(
             "TM10",
             "CT10",
             "MT10"),
-        .itemId = ITEM_TM10_HIDDEN_POWER,
+        .itemId = ITEM_TM10,
         .price = 3000,
         .description = sTM10Desc,
         .pocket = POCKET_TM_HM,
@@ -4517,13 +4517,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM11_SUNNY_DAY] =
+    [ITEM_TM_SUNNY_DAY] =
     {
         .name = LANGUAGE_STRING(
             "TM11",
             "CT11",
             "MT11"),
-        .itemId = ITEM_TM11_SUNNY_DAY,
+        .itemId = ITEM_TM11,
         .price = 2000,
         .description = sTM11Desc,
         .pocket = POCKET_TM_HM,
@@ -4531,13 +4531,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM12_TAUNT] =
+    [ITEM_TM_TAUNT] =
     {
         .name = LANGUAGE_STRING(
             "TM12",
             "CT12",
             "MT12"),
-        .itemId = ITEM_TM12_TAUNT,
+        .itemId = ITEM_TM12,
         .price = 3000,
         .description = sTM12Desc,
         .pocket = POCKET_TM_HM,
@@ -4545,13 +4545,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM13_ICE_BEAM] =
+    [ITEM_TM_ICE_BEAM] =
     {
         .name = LANGUAGE_STRING(
             "TM13",
             "CT13",
             "MT13"),
-        .itemId = ITEM_TM13_ICE_BEAM,
+        .itemId = ITEM_TM13,
         .price = 3000,
         .description = sTM13Desc,
         .pocket = POCKET_TM_HM,
@@ -4559,13 +4559,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM14_BLIZZARD] =
+    [ITEM_TM_BLIZZARD] =
     {
         .name = LANGUAGE_STRING(
             "TM14",
             "CT14",
             "MT14"),
-        .itemId = ITEM_TM14_BLIZZARD,
+        .itemId = ITEM_TM14,
         .price = 5500,
         .description = sTM14Desc,
         .pocket = POCKET_TM_HM,
@@ -4573,13 +4573,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM15_HYPER_BEAM] =
+    [ITEM_TM_HYPER_BEAM] =
     {
         .name = LANGUAGE_STRING(
             "TM15",
             "CT15",
             "MT15"),
-        .itemId = ITEM_TM15_HYPER_BEAM,
+        .itemId = ITEM_TM15,
         .price = 7500,
         .description = sTM15Desc,
         .pocket = POCKET_TM_HM,
@@ -4587,13 +4587,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM16_LIGHT_SCREEN] =
+    [ITEM_TM_LIGHT_SCREEN] =
     {
         .name = LANGUAGE_STRING(
             "TM16",
             "CT16",
             "MT16"),
-        .itemId = ITEM_TM16_LIGHT_SCREEN,
+        .itemId = ITEM_TM16,
         .price = 3000,
         .description = sTM16Desc,
         .pocket = POCKET_TM_HM,
@@ -4601,13 +4601,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM17_PROTECT] =
+    [ITEM_TM_PROTECT] =
     {
         .name = LANGUAGE_STRING(
             "TM17",
             "CT17",
             "MT17"),
-        .itemId = ITEM_TM17_PROTECT,
+        .itemId = ITEM_TM17,
         .price = 3000,
         .description = sTM17Desc,
         .pocket = POCKET_TM_HM,
@@ -4615,13 +4615,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM18_RAIN_DANCE] =
+    [ITEM_TM_RAIN_DANCE] =
     {
         .name = LANGUAGE_STRING(
             "TM18",
             "CT18",
             "MT18"),
-        .itemId = ITEM_TM18_RAIN_DANCE,
+        .itemId = ITEM_TM18,
         .price = 2000,
         .description = sTM18Desc,
         .pocket = POCKET_TM_HM,
@@ -4629,13 +4629,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM19_GIGA_DRAIN] =
+    [ITEM_TM_GIGA_DRAIN] =
     {
         .name = LANGUAGE_STRING(
             "TM19",
             "CT19",
             "MT19"),
-        .itemId = ITEM_TM19_GIGA_DRAIN,
+        .itemId = ITEM_TM19,
         .price = 3000,
         .description = sTM19Desc,
         .pocket = POCKET_TM_HM,
@@ -4643,13 +4643,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM20_SAFEGUARD] =
+    [ITEM_TM_SAFEGUARD] =
     {
         .name = LANGUAGE_STRING(
             "TM20",
             "CT20",
             "MT20"),
-        .itemId = ITEM_TM20_SAFEGUARD,
+        .itemId = ITEM_TM20,
         .price = 3000,
         .description = sTM20Desc,
         .pocket = POCKET_TM_HM,
@@ -4657,13 +4657,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM21_FRUSTRATION] =
+    [ITEM_TM_FRUSTRATION] =
     {
         .name = LANGUAGE_STRING(
             "TM21",
             "CT21",
             "MT21"),
-        .itemId = ITEM_TM21_FRUSTRATION,
+        .itemId = ITEM_TM21,
         .price = 1000,
         .description = sTM21Desc,
         .pocket = POCKET_TM_HM,
@@ -4671,13 +4671,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM22_SOLAR_BEAM] =
+    [ITEM_TM_SOLAR_BEAM] =
     {
         .name = LANGUAGE_STRING(
             "TM22",
             "CT22",
             "MT22"),
-        .itemId = ITEM_TM22_SOLAR_BEAM,
+        .itemId = ITEM_TM22,
         .price = 3000,
         .description = sTM22Desc,
         .pocket = POCKET_TM_HM,
@@ -4685,13 +4685,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM23_IRON_TAIL] =
+    [ITEM_TM_IRON_TAIL] =
     {
         .name = LANGUAGE_STRING(
             "TM23",
             "CT23",
             "MT23"),
-        .itemId = ITEM_TM23_IRON_TAIL,
+        .itemId = ITEM_TM23,
         .price = 3000,
         .description = sTM23Desc,
         .pocket = POCKET_TM_HM,
@@ -4699,13 +4699,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM24_THUNDERBOLT] =
+    [ITEM_TM_THUNDERBOLT] =
     {
         .name = LANGUAGE_STRING(
             "TM24",
             "CT24",
             "MT24"),
-        .itemId = ITEM_TM24_THUNDERBOLT,
+        .itemId = ITEM_TM24,
         .price = 3000,
         .description = sTM24Desc,
         .pocket = POCKET_TM_HM,
@@ -4713,13 +4713,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM25_THUNDER] =
+    [ITEM_TM_THUNDER] =
     {
         .name = LANGUAGE_STRING(
             "TM25",
             "CT25",
             "MT25"),
-        .itemId = ITEM_TM25_THUNDER,
+        .itemId = ITEM_TM25,
         .price = 5500,
         .description = sTM25Desc,
         .pocket = POCKET_TM_HM,
@@ -4727,13 +4727,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM26_EARTHQUAKE] =
+    [ITEM_TM_EARTHQUAKE] =
     {
         .name = LANGUAGE_STRING(
             "TM26",
             "CT26",
             "MT26"),
-        .itemId = ITEM_TM26_EARTHQUAKE,
+        .itemId = ITEM_TM26,
         .price = 3000,
         .description = sTM26Desc,
         .pocket = POCKET_TM_HM,
@@ -4741,13 +4741,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM27_RETURN] =
+    [ITEM_TM_RETURN] =
     {
         .name = LANGUAGE_STRING(
             "TM27",
             "CT27",
             "MT27"),
-        .itemId = ITEM_TM27_RETURN,
+        .itemId = ITEM_TM27,
         .price = 1000,
         .description = sTM27Desc,
         .pocket = POCKET_TM_HM,
@@ -4755,13 +4755,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM28_DIG] =
+    [ITEM_TM_DIG] =
     {
         .name = LANGUAGE_STRING(
             "TM28",
             "CT28",
             "MT28"),
-        .itemId = ITEM_TM28_DIG,
+        .itemId = ITEM_TM28,
         .price = 2000,
         .description = sTM28Desc,
         .pocket = POCKET_TM_HM,
@@ -4769,13 +4769,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM29_PSYCHIC] =
+    [ITEM_TM_PSYCHIC] =
     {
         .name = LANGUAGE_STRING(
             "TM29",
             "CT29",
             "MT29"),
-        .itemId = ITEM_TM29_PSYCHIC,
+        .itemId = ITEM_TM29,
         .price = 2000,
         .description = sTM29Desc,
         .pocket = POCKET_TM_HM,
@@ -4783,13 +4783,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM30_SHADOW_BALL] =
+    [ITEM_TM_SHADOW_BALL] =
     {
         .name = LANGUAGE_STRING(
             "TM30",
             "CT30",
             "MT30"),
-        .itemId = ITEM_TM30_SHADOW_BALL,
+        .itemId = ITEM_TM30,
         .price = 3000,
         .description = sTM30Desc,
         .pocket = POCKET_TM_HM,
@@ -4797,13 +4797,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM31_BRICK_BREAK] =
+    [ITEM_TM_BRICK_BREAK] =
     {
         .name = LANGUAGE_STRING(
             "TM31",
             "CT31",
             "MT31"),
-        .itemId = ITEM_TM31_BRICK_BREAK,
+        .itemId = ITEM_TM31,
         .price = 3000,
         .description = sTM31Desc,
         .pocket = POCKET_TM_HM,
@@ -4811,13 +4811,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM32_DOUBLE_TEAM] =
+    [ITEM_TM_DOUBLE_TEAM] =
     {
         .name = LANGUAGE_STRING(
             "TM32",
             "CT32",
             "MT32"),
-        .itemId = ITEM_TM32_DOUBLE_TEAM,
+        .itemId = ITEM_TM32,
         .price = 2000,
         .description = sTM32Desc,
         .pocket = POCKET_TM_HM,
@@ -4825,13 +4825,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM33_REFLECT] =
+    [ITEM_TM_REFLECT] =
     {
         .name = LANGUAGE_STRING(
             "TM33",
             "CT33",
             "MT33"),
-        .itemId = ITEM_TM33_REFLECT,
+        .itemId = ITEM_TM33,
         .price = 3000,
         .description = sTM33Desc,
         .pocket = POCKET_TM_HM,
@@ -4839,13 +4839,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM34_SHOCK_WAVE] =
+    [ITEM_TM_SHOCK_WAVE] =
     {
         .name = LANGUAGE_STRING(
             "TM34",
             "CT34",
             "MT34"),
-        .itemId = ITEM_TM34_SHOCK_WAVE,
+        .itemId = ITEM_TM34,
         .price = 3000,
         .description = sTM34Desc,
         .pocket = POCKET_TM_HM,
@@ -4853,13 +4853,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM35_FLAMETHROWER] =
+    [ITEM_TM_FLAMETHROWER] =
     {
         .name = LANGUAGE_STRING(
             "TM35",
             "CT35",
             "MT35"),
-        .itemId = ITEM_TM35_FLAMETHROWER,
+        .itemId = ITEM_TM35,
         .price = 3000,
         .description = sTM35Desc,
         .pocket = POCKET_TM_HM,
@@ -4867,13 +4867,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM36_SLUDGE_BOMB] =
+    [ITEM_TM_SLUDGE_BOMB] =
     {
         .name = LANGUAGE_STRING(
             "TM36",
             "CT36",
             "MT36"),
-        .itemId = ITEM_TM36_SLUDGE_BOMB,
+        .itemId = ITEM_TM36,
         .price = 1000,
         .description = sTM36Desc,
         .pocket = POCKET_TM_HM,
@@ -4881,13 +4881,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM37_SANDSTORM] =
+    [ITEM_TM_SANDSTORM] =
     {
         .name = LANGUAGE_STRING(
             "TM37",
             "CT37",
             "MT37"),
-        .itemId = ITEM_TM37_SANDSTORM,
+        .itemId = ITEM_TM37,
         .price = 2000,
         .description = sTM37Desc,
         .pocket = POCKET_TM_HM,
@@ -4895,13 +4895,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM38_FIRE_BLAST] =
+    [ITEM_TM_FIRE_BLAST] =
     {
         .name = LANGUAGE_STRING(
             "TM38",
             "CT38",
             "MT38"),
-        .itemId = ITEM_TM38_FIRE_BLAST,
+        .itemId = ITEM_TM38,
         .price = 5500,
         .description = sTM38Desc,
         .pocket = POCKET_TM_HM,
@@ -4909,13 +4909,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM39_ROCK_TOMB] =
+    [ITEM_TM_ROCK_TOMB] =
     {
         .name = LANGUAGE_STRING(
             "TM39",
             "CT39",
             "MT39"),
-        .itemId = ITEM_TM39_ROCK_TOMB,
+        .itemId = ITEM_TM39,
         .price = 3000,
         .description = sTM39Desc,
         .pocket = POCKET_TM_HM,
@@ -4923,13 +4923,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM40_AERIAL_ACE] =
+    [ITEM_TM_AERIAL_ACE] =
     {
         .name = LANGUAGE_STRING(
             "TM40",
             "CT40",
             "MT40"),
-        .itemId = ITEM_TM40_AERIAL_ACE,
+        .itemId = ITEM_TM40,
         .price = 3000,
         .description = sTM40Desc,
         .pocket = POCKET_TM_HM,
@@ -4937,13 +4937,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM41_TORMENT] =
+    [ITEM_TM_TORMENT] =
     {
         .name = LANGUAGE_STRING(
             "TM41",
             "CT41",
             "MT41"),
-        .itemId = ITEM_TM41_TORMENT,
+        .itemId = ITEM_TM41,
         .price = 3000,
         .description = sTM41Desc,
         .pocket = POCKET_TM_HM,
@@ -4951,13 +4951,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM42_FACADE] =
+    [ITEM_TM_FACADE] =
     {
         .name = LANGUAGE_STRING(
             "TM42",
             "CT42",
             "MT42"),
-        .itemId = ITEM_TM42_FACADE,
+        .itemId = ITEM_TM42,
         .price = 3000,
         .description = sTM42Desc,
         .pocket = POCKET_TM_HM,
@@ -4965,13 +4965,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM43_SECRET_POWER] =
+    [ITEM_TM_SECRET_POWER] =
     {
         .name = LANGUAGE_STRING(
             "TM43",
             "CT43",
             "MT43"),
-        .itemId = ITEM_TM43_SECRET_POWER,
+        .itemId = ITEM_TM43,
         .price = 3000,
         .description = sTM43Desc,
         .pocket = POCKET_TM_HM,
@@ -4979,13 +4979,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM44_REST] =
+    [ITEM_TM_REST] =
     {
         .name = LANGUAGE_STRING(
             "TM44",
             "CT44",
             "MT44"),
-        .itemId = ITEM_TM44_REST,
+        .itemId = ITEM_TM44,
         .price = 3000,
         .description = sTM44Desc,
         .pocket = POCKET_TM_HM,
@@ -4993,13 +4993,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM45_ATTRACT] =
+    [ITEM_TM_ATTRACT] =
     {
         .name = LANGUAGE_STRING(
             "TM45",
             "CT45",
             "MT45"),
-        .itemId = ITEM_TM45_ATTRACT,
+        .itemId = ITEM_TM45,
         .price = 3000,
         .description = sTM45Desc,
         .pocket = POCKET_TM_HM,
@@ -5007,13 +5007,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM46_THIEF] =
+    [ITEM_TM_THIEF] =
     {
         .name = LANGUAGE_STRING(
             "TM46",
             "CT46",
             "MT46"),
-        .itemId = ITEM_TM46_THIEF,
+        .itemId = ITEM_TM46,
         .price = 3000,
         .description = sTM46Desc,
         .pocket = POCKET_TM_HM,
@@ -5021,13 +5021,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM47_STEEL_WING] =
+    [ITEM_TM_STEEL_WING] =
     {
         .name = LANGUAGE_STRING(
             "TM47",
             "CT47",
             "MT47"),
-        .itemId = ITEM_TM47_STEEL_WING,
+        .itemId = ITEM_TM47,
         .price = 3000,
         .description = sTM47Desc,
         .pocket = POCKET_TM_HM,
@@ -5035,13 +5035,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM48_SKILL_SWAP] =
+    [ITEM_TM_SKILL_SWAP] =
     {
         .name = LANGUAGE_STRING(
             "TM48",
             "CT48",
             "MT48"),
-        .itemId = ITEM_TM48_SKILL_SWAP,
+        .itemId = ITEM_TM48,
         .price = 3000,
         .description = sTM48Desc,
         .pocket = POCKET_TM_HM,
@@ -5049,13 +5049,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM49_SNATCH] =
+    [ITEM_TM_SNATCH] =
     {
         .name = LANGUAGE_STRING(
             "TM49",
             "CT49",
             "MT49"),
-        .itemId = ITEM_TM49_SNATCH,
+        .itemId = ITEM_TM49,
         .price = 3000,
         .description = sTM49Desc,
         .pocket = POCKET_TM_HM,
@@ -5063,13 +5063,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_TM50_OVERHEAT] =
+    [ITEM_TM_OVERHEAT] =
     {
         .name = LANGUAGE_STRING(
             "TM50",
             "CT50",
             "MT50"),
-        .itemId = ITEM_TM50_OVERHEAT,
+        .itemId = ITEM_TM50,
         .price = 3000,
         .description = sTM50Desc,
         .pocket = POCKET_TM_HM,
@@ -5077,13 +5077,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM01_CUT] =
+    [ITEM_HM_CUT] =
     {
         .name = LANGUAGE_STRING(
             "HM01",
             "CS01",
             "MN01"),
-        .itemId = ITEM_HM01_CUT,
+        .itemId = ITEM_HM01,
         .price = 0,
         .description = sHM01Desc,
         .importance = 1,
@@ -5092,13 +5092,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM02_FLY] =
+    [ITEM_HM_FLY] =
     {
         .name = LANGUAGE_STRING(
             "HM02",
             "CS02",
             "MN02"),
-        .itemId = ITEM_HM02_FLY,
+        .itemId = ITEM_HM02,
         .price = 0,
         .description = sHM02Desc,
         .importance = 1,
@@ -5107,13 +5107,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM03_SURF] =
+    [ITEM_HM_SURF] =
     {
         .name = LANGUAGE_STRING(
             "HM03",
             "CS03",
             "MN03"),
-        .itemId = ITEM_HM03_SURF,
+        .itemId = ITEM_HM03,
         .price = 0,
         .description = sHM03Desc,
         .importance = 1,
@@ -5122,13 +5122,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM04_STRENGTH] =
+    [ITEM_HM_STRENGTH] =
     {
         .name = LANGUAGE_STRING(
             "HM04",
             "CS04",
             "MN04"),
-        .itemId = ITEM_HM04_STRENGTH,
+        .itemId = ITEM_HM04,
         .price = 0,
         .description = sHM04Desc,
         .importance = 1,
@@ -5137,13 +5137,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM05_FLASH] =
+    [ITEM_HM_FLASH] =
     {
         .name = LANGUAGE_STRING(
             "HM05",
             "CS05",
             "MN05"),
-        .itemId = ITEM_HM05_FLASH,
+        .itemId = ITEM_HM05,
         .price = 0,
         .description = sHM05Desc,
         .importance = 1,
@@ -5152,13 +5152,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM06_ROCK_SMASH] =
+    [ITEM_HM_ROCK_SMASH] =
     {
         .name = LANGUAGE_STRING(
             "HM06",
             "CS06",
             "MN06"),
-        .itemId = ITEM_HM06_ROCK_SMASH,
+        .itemId = ITEM_HM06,
         .price = 0,
         .description = sHM06Desc,
         .importance = 1,
@@ -5167,13 +5167,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM07_WATERFALL] =
+    [ITEM_HM_WATERFALL] =
     {
         .name = LANGUAGE_STRING(
             "HM07",
             "CS07",
             "MN07"),
-        .itemId = ITEM_HM07_WATERFALL,
+        .itemId = ITEM_HM07,
         .price = 0,
         .description = sHM07Desc,
         .importance = 1,
@@ -5182,13 +5182,13 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-    [ITEM_HM08_DIVE] =
+    [ITEM_HM_DIVE] =
     {
         .name = LANGUAGE_STRING(
             "HM08",
             "CS08",
             "MN08"),
-        .itemId = ITEM_HM08_DIVE,
+        .itemId = ITEM_HM08,
         .price = 0,
         .description = sHM08Desc,
         .importance = 1,

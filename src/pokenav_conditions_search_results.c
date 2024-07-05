@@ -3,6 +3,7 @@
 #include "bg.h"
 #include "graphics.h"
 #include "menu.h"
+#include "palette.h"
 #include "window.h"
 #include "sound.h"
 #include "dynamic_placeholder_text_util.h"
@@ -78,16 +79,14 @@ static const LoopedTask sConditionSearchLoopedTaskFuncs[] =
 };
 
 #if FRENCH || ITALIAN
-#define SEARCH_RESULT_PAL gConditionSearchResultFramePal
 #define SEARCH_RESULT_TILES gConditionSearchResultTiles
 #define SEARCH_RESULT_TILEMAP gConditionSearchResultTilemap
 #define SEARCH_RESULT_LIST_ITEM_X 12
 #define SEARCH_RESULT_LIST_WIN_WIDTH 18
 #else //ENGLISH
-static const u16 sConditionSearchResultFramePal[] = INCBIN_U16("graphics/pokenav/condition/search_results.gbapal");
+static const u16 gConditionSearchResultFramePal[] = INCBIN_U16("graphics/pokenav/condition/search_results.gbapal");
 static const u32 sConditionSearchResultTiles[] = INCBIN_U32("graphics/pokenav/condition/search_results.4bpp.lz");
 static const u32 sConditionSearchResultTilemap[] = INCBIN_U32("graphics/pokenav/condition/search_results.bin.lz");
-#define SEARCH_RESULT_PAL sConditionSearchResultFramePal
 #define SEARCH_RESULT_TILES sConditionSearchResultTiles
 #define SEARCH_RESULT_TILEMAP sConditionSearchResultTilemap
 #define SEARCH_RESULT_LIST_ITEM_X 13
@@ -445,7 +444,7 @@ static u32 LoopedTask_OpenConditionSearchResults(s32 state)
         SetBgTilemapBuffer(1, gfx->buff);
         CopyToBgTilemapBuffer(1, SEARCH_RESULT_TILEMAP, 0, 0);
         CopyBgTilemapBufferToVram(1);
-        CopyPaletteIntoBufferUnfaded(SEARCH_RESULT_PAL, 0x10, 0x20);
+        CopyPaletteIntoBufferUnfaded(gConditionSearchResultFramePal, BG_PLTT_ID(1), sizeof(gConditionSearchResultFramePal));
         CopyBgTilemapBufferToVram(1);
         return LT_INC_AND_PAUSE;
     case 1:
@@ -457,7 +456,7 @@ static u32 LoopedTask_OpenConditionSearchResults(s32 state)
     case 2:
         if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
-        CopyPaletteIntoBufferUnfaded(sListBg_Pal, 0x20, 32);
+        CopyPaletteIntoBufferUnfaded(sListBg_Pal, BG_PLTT_ID(2), sizeof(sListBg_Pal));
         CreateSearchResultsList();
         return LT_INC_AND_PAUSE;
     case 3:

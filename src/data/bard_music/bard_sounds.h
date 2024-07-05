@@ -1,7 +1,7 @@
 #ifndef GUARD_BARD_SOUNDS_TABLE_H
 #define GUARD_BARD_SOUNDS_TABLE_H
 
-#define NULL_BARD_SOUND { 0xff }
+#define NULL_BARD_SOUND { .songLengthId = 0xff }
 
 #if FRENCH
 #include "french/pokemon.h"

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "palette.h"
 #include "pokemon.h"
 #include "pokemon_animation.h"
 #include "sprite.h"
@@ -845,13 +846,13 @@ static const u8 sBackAnimNatureModTable[NUM_NATURES] =
 static const union AffineAnimCmd sMonAffineAnim_0[] =
 {
     AFFINEANIMCMD_FRAME(256, 256, 0, 0),
-    AFFINEANIMCMDTYPE_END
+    {AFFINEANIMCMDTYPE_END}
 };
 
 static const union AffineAnimCmd sMonAffineAnim_1[] =
 {
     AFFINEANIMCMD_FRAME(-256, 256, 0, 0),
-    AFFINEANIMCMDTYPE_END
+    {AFFINEANIMCMDTYPE_END}
 };
 
 static const union AffineAnimCmd *const sMonAffineAnims[] =
@@ -901,11 +902,11 @@ u8 GetSpeciesBackAnimSet(u16 species)
 // as 0xFFFFXXXX instead of the desired 0x02YYXXXX.
 // By dumb luck, this is not an issue in vanilla. However,
 // changing the link order revealed this bug.
-#if MODERN
+#if MODERN || defined(BUGFIX)
 #define ANIM_SPRITE(taskId)   ((struct Sprite *)((gTasks[taskId].tPtrHi << 16) | ((u16)gTasks[taskId].tPtrLo)))
 #else
 #define ANIM_SPRITE(taskId)   ((struct Sprite *)((gTasks[taskId].tPtrHi << 16) | (gTasks[taskId].tPtrLo)))
-#endif //MODERN
+#endif //MODERN || BUGFIX
 
 static void Task_HandleMonAnimation(u8 taskId)
 {
@@ -1538,7 +1539,7 @@ static void Anim_CircleCounterclockwise(struct Sprite *sprite)
 #define GlowColor(color, colorIncrement, speed)                         \
 {                                                                       \
     if (sprite->data[2] == 0)                                           \
-        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;          \
+        sprite->data[7] = OBJ_PLTT_ID(sprite->oam.paletteNum);          \
                                                                         \
     if (sprite->data[2] > 128)                                          \
     {                                                                   \
@@ -2473,7 +2474,7 @@ static void Anim_FlashYellow(struct Sprite *sprite)
 {
     if (++sprite->data[2] == 1)
     {
-        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+        sprite->data[7] = OBJ_PLTT_ID(sprite->oam.paletteNum);
         sprite->data[6] = 0;
         sprite->data[5] = 0;
         sprite->data[4] = 0;
@@ -4968,29 +4969,24 @@ static void ShrinkGrowVibrate(struct Sprite *sprite)
     }
     else
     {
-        u8 posY_unsigned;
-        s8 posY_signed;
-        s32 posY;
-        s16 index = (u16)(sprite->data[2] % sprite->data[6] * 256) / sprite->data[6] % 256;
+        s8 sinY;
+        u16 y;
+        s16 index = ((u16)(sprite->data[2] % sprite->data[6] * 256) / sprite->data[6]) % 256;
         if (sprite->data[2] % 2 == 0)
         {
             sprite->data[4] = Sin(index, 32) + 256;
             sprite->data[5] = Sin(index, 32) + 256;
-            posY_unsigned = Sin(index, 32);
-            posY_signed = posY_unsigned;
+            sinY = Sin(index, 32);
         }
         else
         {
             sprite->data[4] = Sin(index, 8) + 256;
             sprite->data[5] = Sin(index, 8) + 256;
-            posY_unsigned = Sin(index, 8);
-            posY_signed = posY_unsigned;
+            sinY = Sin(index, 8);
         }
 
-        posY = posY_signed;
-        if (posY < 0)
-            posY += 7;
-        sprite->y2 = (u32)(posY) >> 3;
+        y = sinY / 8;
+        sprite->y2 = y;
         HandleSetAffineData(sprite, sprite->data[4], sprite->data[5], 0);
     }
 
@@ -5262,7 +5258,7 @@ static void Anim_ShakeFlashYellow_Fast(struct Sprite *sprite)
 {
     if (++sprite->data[2] == 1)
     {
-        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+        sprite->data[7] = OBJ_PLTT_ID(sprite->oam.paletteNum);
         sprite->data[6] = 0;
         sprite->data[5] = 0;
         sprite->data[4] = 0;
@@ -5276,7 +5272,7 @@ static void Anim_ShakeFlashYellow(struct Sprite *sprite)
 {
     if (++sprite->data[2] == 1)
     {
-        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+        sprite->data[7] = OBJ_PLTT_ID(sprite->oam.paletteNum);
         sprite->data[6] = 0;
         sprite->data[5] = 0;
         sprite->data[4] = 0;
@@ -5290,7 +5286,7 @@ static void Anim_ShakeFlashYellow_Slow(struct Sprite *sprite)
 {
     if (++sprite->data[2] == 1)
     {
-        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+        sprite->data[7] = OBJ_PLTT_ID(sprite->oam.paletteNum);
         sprite->data[6] = 0;
         sprite->data[5] = 0;
         sprite->data[4] = 0;
@@ -5356,7 +5352,7 @@ static void Anim_ShakeGlowRed_Fast(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
-        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+        sprite->data[7] = OBJ_PLTT_ID(sprite->oam.paletteNum);
         sprite->data[0] = 10;
         sprite->data[5] = 0;
         sprite->data[4] = 2;
@@ -5377,7 +5373,7 @@ static void Anim_ShakeGlowRed(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
-        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+        sprite->data[7] = OBJ_PLTT_ID(sprite->oam.paletteNum);
         sprite->data[0] = 20;
         sprite->data[5] = 0;
         sprite->data[4] = 1;
@@ -5398,7 +5394,7 @@ static void Anim_ShakeGlowRed_Slow(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
-        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+        sprite->data[7] = OBJ_PLTT_ID(sprite->oam.paletteNum);
         sprite->data[0] = 80;
         sprite->data[5] = 0;
         sprite->data[4] = 1;
@@ -5419,7 +5415,7 @@ static void Anim_ShakeGlowGreen_Fast(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
-        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+        sprite->data[7] = OBJ_PLTT_ID(sprite->oam.paletteNum);
         sprite->data[0] = 10;
         sprite->data[5] = 0;
         sprite->data[4] = 2;
@@ -5440,7 +5436,7 @@ static void Anim_ShakeGlowGreen(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
-        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+        sprite->data[7] = OBJ_PLTT_ID(sprite->oam.paletteNum);
         sprite->data[0] = 20;
         sprite->data[5] = 0;
         sprite->data[4] = 1;
@@ -5461,7 +5457,7 @@ static void Anim_ShakeGlowGreen_Slow(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
-        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+        sprite->data[7] = OBJ_PLTT_ID(sprite->oam.paletteNum);
         sprite->data[0] = 80;
         sprite->data[5] = 0;
         sprite->data[4] = 1;
@@ -5482,7 +5478,7 @@ static void Anim_ShakeGlowBlue_Fast(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
-        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+        sprite->data[7] = OBJ_PLTT_ID(sprite->oam.paletteNum);
         sprite->data[0] = 10;
         sprite->data[5] = 0;
         sprite->data[4] = 2;
@@ -5503,7 +5499,7 @@ static void Anim_ShakeGlowBlue(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
-        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+        sprite->data[7] = OBJ_PLTT_ID(sprite->oam.paletteNum);
         sprite->data[0] = 20;
         sprite->data[5] = 0;
         sprite->data[4] = 1;
@@ -5524,7 +5520,7 @@ static void Anim_ShakeGlowBlue_Slow(struct Sprite *sprite)
 {
     if (sprite->data[2] == 0)
     {
-        sprite->data[7] = (sprite->oam.paletteNum * 16) + 256;
+        sprite->data[7] = OBJ_PLTT_ID(sprite->oam.paletteNum);
         sprite->data[0] = 80;
         sprite->data[5] = 0;
         sprite->data[4] = 1;

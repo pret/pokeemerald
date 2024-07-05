@@ -3,6 +3,7 @@
 #include "graphics.h"
 #include "bg.h"
 #include "menu.h"
+#include "palette.h"
 #include "window.h"
 #include "sound.h"
 #include "string_util.h"
@@ -229,8 +230,7 @@ static s32 GetRibbonsMonListCount(void)
     return list->monList->listCount;
 }
 
-//unused
-static s32 GetMonRibbonSelectedMonData(void)
+static s32 UNUSED GetMonRibbonSelectedMonData(void)
 {
     struct Pokenav_RibbonsMonList * list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_LIST);
     s32 idx = PokenavList_GetSelectedIndex();
@@ -345,8 +345,7 @@ static void InsertMonListItem(struct Pokenav_RibbonsMonList *list, struct Pokena
     list->monList->listCount++;
 }
 
-// Unused
-static bool32 PlayerHasRibbonsMon(void)
+static bool32 UNUSED PlayerHasRibbonsMon(void)
 {
     s32 i, j;
 
@@ -435,12 +434,12 @@ static u32 LoopedTask_OpenRibbonsMonList(s32 state)
         DecompressAndCopyTileDataToVram(1, gMonRibbonListFrameTiles, 0, 0, 0);
         SetBgTilemapBuffer(1, menu->buff);
         CopyToBgTilemapBuffer(1, gMonRibbonListFrameTilemap, 0, 0);
-        CopyPaletteIntoBufferUnfaded(gMonRibbonListFramePal, 0x10, 0x20);
+        CopyPaletteIntoBufferUnfaded(gMonRibbonListFramePal, BG_PLTT_ID(1), sizeof(gMonRibbonListFramePal));
     #else //ENGLISH
         DecompressAndCopyTileDataToVram(1, sMonRibbonListFrameTiles, 0, 0, 0);
         SetBgTilemapBuffer(1, menu->buff);
         CopyToBgTilemapBuffer(1, sMonRibbonListFrameTilemap, 0, 0);
-        CopyPaletteIntoBufferUnfaded(sMonRibbonListFramePal, 0x10, 0x20);
+        CopyPaletteIntoBufferUnfaded(sMonRibbonListFramePal, BG_PLTT_ID(1), sizeof(sMonRibbonListFramePal));
     #endif
         CopyBgTilemapBufferToVram(1);
         return LT_INC_AND_PAUSE;
@@ -456,7 +455,7 @@ static u32 LoopedTask_OpenRibbonsMonList(s32 state)
     case 2:
         if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
-        CopyPaletteIntoBufferUnfaded(sMonRibbonListUi_Pal, 0x20, 0x20);
+        CopyPaletteIntoBufferUnfaded(sMonRibbonListUi_Pal, BG_PLTT_ID(2), sizeof(sMonRibbonListUi_Pal));
         CreateRibbonMonsList();
         return LT_INC_AND_PAUSE;
     case 3:

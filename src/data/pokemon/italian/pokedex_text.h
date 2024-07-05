@@ -729,7 +729,7 @@ const u8 gStarmiePokedexText[] = _(
     "che brillano sulle onde leggere del mare\n"
     "durante la notte.");
 
-const u8 gMrmimePokedexText[] = _(
+const u8 gMrMimePokedexText[] = _(
     "MR. MIME è un esperto di mimica. Con la\n"
     "gestualità convince l’osservatore dell’\n"
     "esistenza di oggetti invisibili che saranno\n"

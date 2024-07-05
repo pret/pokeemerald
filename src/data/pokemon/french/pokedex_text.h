@@ -726,7 +726,7 @@ const u8 gStarmiePokedexText[] = _(
     "STAROSS provenaient du reflet des étoiles\n"
     "sur les vagues lors d’une nuit paisible.");
 
-const u8 gMrmimePokedexText[] = _(
+const u8 gMrMimePokedexText[] = _(
     "M. MIME est un pantomime hors pair. Il\n"
     "fait croire aux gens que quelque chose\n"
     "d’invisible existe réellement. Cet objet\n"

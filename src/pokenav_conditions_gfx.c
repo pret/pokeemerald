@@ -116,10 +116,12 @@ static const LoopedTask sLoopedTaskFuncs[] =
     [CONDITION_FUNC_CLOSE_MARKINGS] = LoopedTask_CloseMonMarkingsWindow
 };
 
+typedef u8 ALIGNED(4) TilemapBuffer[BG_SCREEN_SIZE];
+
 struct Pokenav_ConditionMenuGfx
 {
     u32 loopedTaskId;
-    u8 tilemapBuffers[3][BG_SCREEN_SIZE];
+    TilemapBuffer tilemapBuffers[3];
     u8 filler[2];
     u8 partyPokeballSpriteIds[PARTY_SIZE + 1];
     u32 (*callback)(void);
@@ -224,8 +226,8 @@ static u32 LoopedTask_OpenConditionGraphMenu(s32 state)
             CopyToBgTilemapBufferRect(3, gPokenavOptions_Tilemap, 0, 5, 9, 4);
 
         CopyBgTilemapBufferToVram(3);
-        CopyPaletteIntoBufferUnfaded(gPokenavCondition_Pal, 0x10, 0x20);
-        CopyPaletteIntoBufferUnfaded(gConditionText_Pal, 0xF0, 0x20);
+        CopyPaletteIntoBufferUnfaded(gPokenavCondition_Pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
+        CopyPaletteIntoBufferUnfaded(gConditionText_Pal, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         menu->monTransitionX = -80;
         return LT_INC_AND_PAUSE;
     case 4:
@@ -235,7 +237,7 @@ static u32 LoopedTask_OpenConditionGraphMenu(s32 state)
         LZ77UnCompVram(sConditionGraphData_Tilemap, menu->tilemapBuffers[2]);
         SetBgTilemapBuffer(2, menu->tilemapBuffers[2]);
         CopyBgTilemapBufferToVram(2);
-        CopyPaletteIntoBufferUnfaded(gConditionGraphData_Pal, 0x30, 0x20);
+        CopyPaletteIntoBufferUnfaded(gConditionGraphData_Pal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
         ConditionGraph_InitWindow(2);
         return LT_INC_AND_PAUSE;
     case 5:
@@ -546,7 +548,7 @@ static u32 LoopedTask_CloseMonMarkingsWindow(s32 state)
     return LT_FINISH;
 }
 
-static u8 *UnusedPrintNumberString(u8 *dst, u16 num)
+static u8 UNUSED *UnusedPrintNumberString(u8 *dst, u16 num)
 {
     u8 *txtPtr = ConvertIntToDecimalStringN(dst, num, STR_CONV_MODE_RIGHT_ALIGN, 4);
     txtPtr = StringCopy(txtPtr, gText_Number2);
@@ -827,13 +829,13 @@ static void CreateConditionMonPic(u8 id)
             menu->monPicSpriteId = spriteId;
             gSprites[menu->monPicSpriteId].callback = MonPicGfxSpriteCallback;
             menu->monGfxPtr = (void *)VRAM + BG_VRAM_SIZE + (menu->monGfxTileStart * 32);
-            menu->monPalIndex = (menu->monPalIndex * 16) + 0x100;
+            menu->monPalIndex = OBJ_PLTT_ID(menu->monPalIndex);
         }
     }
     else
     {
         DmaCopy16Defvars(3, GetConditionMonPicGfx(id), menu->monGfxPtr, MON_PIC_SIZE);
-        LoadPalette(GetConditionMonPal(id), menu->monPalIndex, 0x20);
+        LoadPalette(GetConditionMonPal(id), menu->monPalIndex, PLTT_SIZE_4BPP);
     }
 }
 

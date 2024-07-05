@@ -74,6 +74,7 @@
 // for TV shows from TVGROUP_NORMAL. The remainder are for TV
 // shows from TVGROUP_RECORD_MIX.
 #define NUM_NORMAL_TVSHOW_SLOTS 5
+#define TV_SHOWS_COUNT (NUM_NORMAL_TVSHOW_SLOTS + 20)
 
 #define PLAYERS_HOUSE_TV_NONE  0
 #define PLAYERS_HOUSE_TV_LATI  1
@@ -169,7 +170,7 @@
 
 #define NUM_SECRET_BASE_FLAGS  32  // by definition, bitfield of 2 u16s
 
-// TV Show states for Pokemon Contest Live Updates
+// TV Show states for Pokémon Contest Live Updates
 #define CONTESTLIVE_STATE_INTRO                 0
 #define CONTESTLIVE_STATE_WON_BOTH_ROUNDS       1
 #define CONTESTLIVE_STATE_BETTER_ROUND2         2

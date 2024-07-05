@@ -1079,9 +1079,7 @@ static void LoadOrbEffectPalette(bool8 blueOrb)
         color[0] = RGB_BLUE;
 
     for (i = 0; i < 16; i++)
-    {
-        LoadPalette(color, 0xF0 + i, 2);
-    }
+        LoadPalette(color, BG_PLTT_ID(15) + i, PLTT_SIZEOF(1));
 }
 
 static bool8 UpdateOrbEffectBlend(u16 shakeDir)
@@ -1136,7 +1134,7 @@ static void Task_OrbEffect(u8 taskId)
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 7));
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR);
         SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ);
-        SetBgTilemapPalette(0, 0, 0, 0x1E, 0x14, 0xF);
+        SetBgTilemapPalette(0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT, 0xF);
         ScheduleBgCopyTilemapToVram(0);
         SetOrbFlashScanlineEffectWindowBoundaries(&gScanlineEffectRegBuffers[0][0], tCenterX, tCenterY, 1);
         CpuFastSet(&gScanlineEffectRegBuffers[0], &gScanlineEffectRegBuffers[1], 480);

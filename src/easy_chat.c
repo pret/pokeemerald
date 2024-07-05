@@ -226,18 +226,23 @@ static void DoQuizQuestionEasyChatScreen(void);
 static void DoQuizSetAnswerEasyChatScreen(void);
 static void DoQuizSetQuestionEasyChatScreen(void);
 
-#define PALTAG_TRIANGLE_CURSOR 0
-#define PALTAG_RECTANGLE_CURSOR 1
-#define PALTAG_MISC_UI 2
-#define PALTAG_RS_INTERVIEW_FRAME 3
+enum {
+    PALTAG_TRIANGLE_CURSOR,
+    PALTAG_RECTANGLE_CURSOR,
+    PALTAG_MISC_UI,
+    PALTAG_RS_INTERVIEW_FRAME,
+};
 
-#define GFXTAG_TRIANGLE_CURSOR 0
-#define GFXTAG_RECTANGLE_CURSOR 1
-#define GFXTAG_SCROLL_INDICATOR 2
-#define GFXTAG_START_SELECT_BUTTONS 3
-#define GFXTAG_MODE_WINDOW 4
-#define GFXTAG_RS_INTERVIEW_FRAME 5
-#define GFXTAG_BUTTON_WINDOW 6
+enum {
+    GFXTAG_TRIANGLE_CURSOR,
+    GFXTAG_RECTANGLE_CURSOR,
+    GFXTAG_SCROLL_INDICATOR,
+    GFXTAG_START_SELECT_BUTTONS,
+    GFXTAG_MODE_WINDOW,
+    GFXTAG_RS_INTERVIEW_FRAME,
+    GFXTAG_BUTTON_WINDOW,
+};
+
 
 // State values for sEasyChatScreen->inputState
 // Control which input handler to use in HandleEasyChatInput
@@ -374,6 +379,13 @@ enum {
     WINANIM_RETURN_TO_KEYBOARD,
     WINANIM_KEYBOARD_SWITCH_OUT,
     WINANIM_KEYBOARD_SWITCH_IN,
+};
+
+// Window IDs
+enum {
+    WIN_TITLE,
+    WIN_MSG,
+    WIN_INPUT_SELECT, // Word groups, word list, and keyboard
 };
 
 // Values for text frame tilemap
@@ -840,7 +852,7 @@ static const struct BgTemplate sEasyChatBgTemplates[] = {
 };
 
 static const struct WindowTemplate sEasyChatWindowTemplates[] = {
-    {
+    [WIN_TITLE] = {
         .bg = 1,
 #if FRENCH || ITALIAN
         .tilemapLeft = 0,
@@ -855,7 +867,7 @@ static const struct WindowTemplate sEasyChatWindowTemplates[] = {
         .paletteNum = 10,
         .baseBlock = 0x10,
     },
-    {
+    [WIN_MSG] = {
         .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 15,
@@ -864,7 +876,7 @@ static const struct WindowTemplate sEasyChatWindowTemplates[] = {
         .paletteNum = 15,
         .baseBlock = 0xA,
     },
-    {
+    [WIN_INPUT_SELECT] = {
         .bg = 2,
         .tilemapLeft = 1,
         .tilemapTop = 0,
@@ -899,17 +911,17 @@ static const u8 *const sEasyChatKeyboardAlphabet[NUM_ALPHABET_ROWS] =
 static const struct SpriteSheet sSpriteSheets[] = {
     {
         .data = sTriangleCursor_Gfx,
-        .size = 0x20,
+        .size = sizeof(sTriangleCursor_Gfx),
         .tag = GFXTAG_TRIANGLE_CURSOR
     },
     {
         .data = sScrollIndicator_Gfx,
-        .size = 0x100,
+        .size = sizeof(sScrollIndicator_Gfx),
         .tag = GFXTAG_SCROLL_INDICATOR
     },
     {
         .data = sStartSelectButtons_Gfx,
-        .size = 0x100,
+        .size = sizeof(sStartSelectButtons_Gfx),
         .tag = GFXTAG_START_SELECT_BUTTONS
     },
     {0}
@@ -976,7 +988,8 @@ static const struct OamData sOamData_TriangleCursor = {
     .affineParam = 0,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_TriangleCursor = {
+static const struct SpriteTemplate sSpriteTemplate_TriangleCursor =
+{
     .tileTag = PALTAG_TRIANGLE_CURSOR,
     .paletteTag = GFXTAG_TRIANGLE_CURSOR,
     .oam = &sOamData_TriangleCursor,
@@ -1037,7 +1050,8 @@ static const union AnimCmd *const sAnims_RectangleCursor[] = {
     [RECTCURSOR_ANIM_ON_LETTER] = sAnim_RectangleCursor_OnLetter,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_RectangleCursor = {
+static const struct SpriteTemplate sSpriteTemplate_RectangleCursor =
+{
     .tileTag = GFXTAG_RECTANGLE_CURSOR,
     .paletteTag = PALTAG_RECTANGLE_CURSOR,
     .oam = &sOamData_RectangleCursor,
@@ -1107,7 +1121,8 @@ static const union AnimCmd *const sAnims_ModeWindow[] = {
     [MODEWINDOW_ANIM_TRANSITION]  = sAnim_ModeWindow_Transition,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_ModeWindow = {
+static const struct SpriteTemplate sSpriteTemplate_ModeWindow =
+{
     .tileTag = GFXTAG_MODE_WINDOW,
     .paletteTag = PALTAG_MISC_UI,
     .oam = &sOamData_ModeWindow,
@@ -1133,7 +1148,8 @@ static const struct OamData sOamData_ButtonWindow = {
     .affineParam = 0,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_ButtonWindow = {
+static const struct SpriteTemplate sSpriteTemplate_ButtonWindow =
+{
     .tileTag = GFXTAG_BUTTON_WINDOW,
     .paletteTag = PALTAG_MISC_UI,
     .oam = &sOamData_ButtonWindow,
@@ -1191,7 +1207,8 @@ static const union AnimCmd *const sAnims_TwoFrame[] = {
     sAnim_Frame1,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_StartSelectButton = {
+static const struct SpriteTemplate sSpriteTemplate_StartSelectButton =
+{
     .tileTag = GFXTAG_START_SELECT_BUTTONS,
     .paletteTag = PALTAG_MISC_UI,
     .oam = &sOamData_StartSelectButton,
@@ -1201,7 +1218,8 @@ static const struct SpriteTemplate sSpriteTemplate_StartSelectButton = {
     .callback = SpriteCallbackDummy,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_ScrollIndicator = {
+static const struct SpriteTemplate sSpriteTemplate_ScrollIndicator =
+{
     .tileTag = GFXTAG_SCROLL_INDICATOR,
     .paletteTag = PALTAG_MISC_UI,
     .oam = &sOamData_ScrollIndicator,
@@ -1727,7 +1745,7 @@ static bool8 InitEasyChatScreenStruct(u8 type, u16 *words, u8 displayedPersonTyp
     u8 templateId;
     int i;
 
-    sEasyChatScreen = malloc(sizeof(*sEasyChatScreen));
+    sEasyChatScreen = Alloc(sizeof(*sEasyChatScreen));
     if (sEasyChatScreen == NULL)
         return FALSE;
 
@@ -2846,7 +2864,7 @@ static void GetEasyChatConfirmDeletionText(const u8 **str1, const u8 **str2)
     *str2 = gText_BeDeletedThatOkay;
 }
 
-static void GetKeyboardCursorColAndRow(u8 *column, u8 *row)
+static void GetKeyboardCursorColAndRow(s8 *column, s8 *row)
 {
     *column = sEasyChatScreen->keyboardColumn;
     *row = sEasyChatScreen->keyboardRow;
@@ -2862,7 +2880,7 @@ static u8 GetKeyboardScrollOffset(void)
     return sEasyChatScreen->keyboardScrollOffset;
 }
 
-static void GetWordSelectColAndRow(u8 *column, u8 *row)
+static void GetWordSelectColAndRow(s8 *column, s8 *row)
 {
     *column = sEasyChatScreen->wordSelectColumn;
     *row = sEasyChatScreen->wordSelectRow;
@@ -2878,7 +2896,7 @@ static u8 GetWordSelectLastRow(void)
     return sEasyChatScreen->wordSelectLastRow;
 }
 
-static u8 UnusedDummy(void)
+static u8 UNUSED UnusedDummy(void)
 {
     return FALSE;
 }
@@ -4017,13 +4035,13 @@ static void InitEasyChatBgs(void)
 static void LoadEasyChatPalettes(void)
 {
     ResetPaletteFade();
-    LoadPalette(gEasyChatMode_Pal, 0, 32);
-    LoadPalette(sTextInputFrameOrange_Pal, 1 * 16, 32);
-    LoadPalette(sTextInputFrameGreen_Pal, 4 * 16, 32);
-    LoadPalette(sTitleText_Pal, 10 * 16, 8);
-    LoadPalette(sText_Pal, 11 * 16, 12);
-    LoadPalette(sText_Pal, 15 * 16, 12);
-    LoadPalette(sText_Pal, 3 * 16, 12);
+    LoadPalette(gEasyChatMode_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+    LoadPalette(sTextInputFrameOrange_Pal, BG_PLTT_ID(1), sizeof(sTextInputFrameOrange_Pal));
+    LoadPalette(sTextInputFrameGreen_Pal, BG_PLTT_ID(4), sizeof(sTextInputFrameGreen_Pal));
+    LoadPalette(sTitleText_Pal, BG_PLTT_ID(10), sizeof(sTitleText_Pal));
+    LoadPalette(sText_Pal, BG_PLTT_ID(11), sizeof(sText_Pal));
+    LoadPalette(sText_Pal, BG_PLTT_ID(15), sizeof(sText_Pal));
+    LoadPalette(sText_Pal, BG_PLTT_ID(3), sizeof(sText_Pal));
 }
 
 static void PrintTitle(void)
@@ -4038,10 +4056,10 @@ static void PrintTitle(void)
 #else //ENGLISH
     xOffset = GetStringCenterAlignXOffset(FONT_NORMAL, titleText, 144);
 #endif
-    FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    PrintEasyChatTextWithColors(0, FONT_NORMAL, titleText, xOffset, 1, TEXT_SKIP_DRAW, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
-    PutWindowTilemap(0);
-    CopyWindowToVram(0, COPYWIN_FULL);
+    FillWindowPixelBuffer(WIN_TITLE, PIXEL_FILL(0));
+    PrintEasyChatTextWithColors(WIN_TITLE, FONT_NORMAL, titleText, xOffset, 1, TEXT_SKIP_DRAW, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
+    PutWindowTilemap(WIN_TITLE);
+    CopyWindowToVram(WIN_TITLE, COPYWIN_FULL);
 }
 
 static void PrintEasyChatText(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
@@ -4061,10 +4079,10 @@ static void PrintEasyChatTextWithColors(u8 windowId, u8 fontId, const u8 *str, u
 static void PrintInitialInstructions(void)
 {
     FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 17);
-    LoadUserWindowBorderGfx(1, 1, 0xE0);
-    DrawTextBorderOuter(1, 1, 14);
+    LoadUserWindowBorderGfx(WIN_MSG, 1, BG_PLTT_ID(14));
+    DrawTextBorderOuter(WIN_MSG, 1, 14);
     PrintEasyChatStdMessage(MSG_INSTRUCTIONS);
-    PutWindowTilemap(1);
+    PutWindowTilemap(WIN_MSG);
     CopyBgTilemapBufferToVram(0);
 }
 
@@ -4108,14 +4126,14 @@ static void PrintEasyChatStdMessage(u8 msgId)
         break;
     }
 
-    FillWindowPixelBuffer(1, PIXEL_FILL(1));
+    FillWindowPixelBuffer(WIN_MSG, PIXEL_FILL(1));
     if (text1)
-        PrintEasyChatText(1, FONT_NORMAL, text1, 0, 1, TEXT_SKIP_DRAW, 0);
+        PrintEasyChatText(WIN_MSG, FONT_NORMAL, text1, 0, 1, TEXT_SKIP_DRAW, 0);
 
     if (text2)
-        PrintEasyChatText(1, FONT_NORMAL, text2, 0, 17, TEXT_SKIP_DRAW, 0);
+        PrintEasyChatText(WIN_MSG, FONT_NORMAL, text2, 0, 17, TEXT_SKIP_DRAW, 0);
 
-    CopyWindowToVram(1, COPYWIN_FULL);
+    CopyWindowToVram(WIN_MSG, COPYWIN_FULL);
 }
 
 static void CreateEasyChatYesNoMenu(u8 initialCursorPos)
@@ -4306,14 +4324,14 @@ static void AdjustBgTilemapForFooter(void)
 
 static void DrawLowerWindow(void)
 {
-    PutWindowTilemap(2);
-    CopyBgTilemapBufferToVram(2);
+    PutWindowTilemap(WIN_INPUT_SELECT);
+    CopyBgTilemapBufferToVram(WIN_INPUT_SELECT);
 }
 
 static void InitLowerWindowText(u32 whichText)
 {
     ResetLowerWindowScroll();
-    FillWindowPixelBuffer(2, PIXEL_FILL(1));
+    FillWindowPixelBuffer(WIN_INPUT_SELECT, PIXEL_FILL(1));
     switch (whichText)
     {
     case TEXT_GROUPS:
@@ -4327,7 +4345,7 @@ static void InitLowerWindowText(u32 whichText)
         break;
     }
 
-    CopyWindowToVram(2, COPYWIN_GFX);
+    CopyWindowToVram(WIN_INPUT_SELECT, COPYWIN_GFX);
 }
 
 static void PrintKeyboardText(void)
@@ -4356,7 +4374,7 @@ static void PrintKeyboardGroupNames(void)
                 return;
             }
 
-            PrintEasyChatText(2, FONT_NORMAL, GetEasyChatWordGroupName(groupId), x * 84 + 10, y, TEXT_SKIP_DRAW, NULL);
+            PrintEasyChatText(WIN_INPUT_SELECT, FONT_NORMAL, GetEasyChatWordGroupName(groupId), x * 84 + 10, y, TEXT_SKIP_DRAW, NULL);
         }
 
         y += 16;
@@ -4368,7 +4386,7 @@ static void PrintKeyboardAlphabet(void)
     u32 i;
 
     for (i = 0; i < ARRAY_COUNT(sEasyChatKeyboardAlphabet); i++)
-        PrintEasyChatText(2, FONT_NORMAL, sEasyChatKeyboardAlphabet[i], 10, 97 + i * 16, TEXT_SKIP_DRAW, NULL);
+        PrintEasyChatText(WIN_INPUT_SELECT, FONT_NORMAL, sEasyChatKeyboardAlphabet[i], 10, 97 + i * 16, TEXT_SKIP_DRAW, NULL);
 }
 
 static void PrintInitialWordSelectText(void)
@@ -4439,16 +4457,16 @@ static void PrintWordSelectText(u8 scrollOffset, u8 numRows)
             {
                 CopyEasyChatWordPadded(sScreenControl->wordSelectPrintBuffer, easyChatWord, 0);
                 if (!DummyWordCheck(easyChatWord))
-                    PrintEasyChatText(2, FONT_NORMAL, sScreenControl->wordSelectPrintBuffer, (j * 13 + 3) * 8, y, TEXT_SKIP_DRAW, NULL);
+                    PrintEasyChatText(WIN_INPUT_SELECT, FONT_NORMAL, sScreenControl->wordSelectPrintBuffer, (j * 13 + 3) * 8, y, TEXT_SKIP_DRAW, NULL);
                 else // Never reached
-                    PrintEasyChatTextWithColors(2, FONT_NORMAL, sScreenControl->wordSelectPrintBuffer, (j * 13 + 3) * 8, y, TEXT_SKIP_DRAW, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_LIGHT_GRAY);
+                    PrintEasyChatTextWithColors(WIN_INPUT_SELECT, FONT_NORMAL, sScreenControl->wordSelectPrintBuffer, (j * 13 + 3) * 8, y, TEXT_SKIP_DRAW, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_LIGHT_GRAY);
             }
         }
 
         y += 16;
     }
 
-    CopyWindowToVram(2, COPYWIN_GFX);
+    CopyWindowToVram(WIN_INPUT_SELECT, COPYWIN_GFX);
 }
 
 static void EraseWordSelectRows(u8 scrollOffset, u8 numRows)
@@ -4472,15 +4490,15 @@ static void EraseWordSelectRows(u8 scrollOffset, u8 numRows)
         var1 = 0;
     }
 
-    FillWindowPixelRect(2, PIXEL_FILL(1), 0, y, 224, var2);
+    FillWindowPixelRect(WIN_INPUT_SELECT, PIXEL_FILL(1), 0, y, 224, var2);
     if (var1)
-        FillWindowPixelRect(2, PIXEL_FILL(1), 0, 0, 224, var1);
+        FillWindowPixelRect(WIN_INPUT_SELECT, PIXEL_FILL(1), 0, 0, 224, var1);
 }
 
 static void ClearWordSelectWindow(void)
 {
-    FillWindowPixelBuffer(2, PIXEL_FILL(1));
-    CopyWindowToVram(2, COPYWIN_GFX);
+    FillWindowPixelBuffer(WIN_INPUT_SELECT, PIXEL_FILL(1));
+    CopyWindowToVram(WIN_INPUT_SELECT, COPYWIN_GFX);
 }
 
 static void InitLowerWindowAnim(int winAnimType)
@@ -5209,7 +5227,7 @@ static bool8 IsEasyChatGroupUnlocked(u8 groupId)
     switch (groupId)
     {
     case EC_GROUP_TRENDY_SAYING:
-        return FlagGet(FLAG_SYS_HIPSTER_MEET);
+        return FlagGet(FLAG_UNLOCKED_TRENDY_SAYINGS);
     case EC_GROUP_EVENTS:
     case EC_GROUP_MOVE_1:
     case EC_GROUP_MOVE_2:
@@ -5364,8 +5382,11 @@ u8 *ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows
     return dest;
 }
 
-// Used by French and Italian versions
+#if FRENCH || ITALIAN
 u8 *UnusedConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows)
+#else //ENGLISH
+static u8 UNUSED *UnusedConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows)
+#endif
 {
     u16 i, j, k;
     u16 numColumns;
@@ -5526,80 +5547,98 @@ void BufferDeepLinkPhrase(void)
     CopyEasyChatWord(gStringVar2, easyChatWord);
 }
 
-static bool8 IsAdditionalPhraseUnlocked(u8 additionalPhraseId)
+/*
+    ### Trendy Sayings
+
+    Not to be confused with Dewford Town's "trendy phrase".
+
+    This is a group of easy chat words (EC_GROUP_TRENDY_SAYING) that are normally inaccessible.
+    They can be unlocked either through Mystery Event (where they're referred to as "rare" words)
+    or from the "Hipster" variety of the Mauville Old Man. The Hipster can unlock one word each
+    time he is received via record mixing (and once if he is the player's default Old Man).
+
+    Which words have been unlocked is saved in the unlockedTrendySayings bitfield in SaveBlock1
+
+    Unlocked trendy saying words are only accessible if the flag FLAG_UNLOCKED_TRENDY_SAYINGS is set.
+    It's set any time the player talks to the Hipster, but is not apparently set by Mystery Event,
+    meaning trendy saying words unlocked via Mystery Event may not be available until the player has
+    talked to the Hipster.
+*/
+static bool8 IsTrendySayingUnlocked(u8 wordIndex)
 {
-    int byteOffset = additionalPhraseId / 8;
-    int shift = additionalPhraseId % 8;
-    return (gSaveBlock1Ptr->additionalPhrases[byteOffset] >> shift) & 1;
+    int byteOffset = wordIndex / 8;
+    int shift = wordIndex % 8;
+    return (gSaveBlock1Ptr->unlockedTrendySayings[byteOffset] >> shift) & 1;
 }
 
-void UnlockAdditionalPhrase(u8 additionalPhraseId)
+void UnlockTrendySaying(u8 wordIndex)
 {
-    if (additionalPhraseId < NUM_ADDITIONAL_PHRASES)
+    if (wordIndex < NUM_TRENDY_SAYINGS)
     {
-        int byteOffset = additionalPhraseId / 8;
-        int shift = additionalPhraseId % 8;
-        gSaveBlock1Ptr->additionalPhrases[byteOffset] |= 1 << shift;
+        int byteOffset = wordIndex / 8;
+        int shift = wordIndex % 8;
+        gSaveBlock1Ptr->unlockedTrendySayings[byteOffset] |= 1 << shift;
     }
 }
 
-static u8 GetNumAdditionalPhrasesUnlocked(void)
+static u8 GetNumTrendySayingsUnlocked(void)
 {
     u8 i;
-    u8 numAdditionalPhrasesUnlocked;
+    u8 numUnlocked;
 
-    for (i = 0, numAdditionalPhrasesUnlocked = 0; i < NUM_ADDITIONAL_PHRASES; i++)
+    for (i = 0, numUnlocked = 0; i < NUM_TRENDY_SAYINGS; i++)
     {
-        if (IsAdditionalPhraseUnlocked(i))
-            numAdditionalPhrasesUnlocked++;
+        if (IsTrendySayingUnlocked(i))
+            numUnlocked++;
     }
 
-    return numAdditionalPhrasesUnlocked;
+    return numUnlocked;
 }
 
-u16 GetNewHipsterPhraseToTeach(void)
+u16 UnlockRandomTrendySaying(void)
 {
     u16 i;
-    u16 additionalPhraseId;
-    u8 numAdditionalPhrasesUnlocked = GetNumAdditionalPhrasesUnlocked();
-    if (numAdditionalPhrasesUnlocked == NUM_ADDITIONAL_PHRASES)
+    u16 numToSkip;
+    u8 numUnlocked = GetNumTrendySayingsUnlocked();
+    if (numUnlocked == NUM_TRENDY_SAYINGS)
         return EC_EMPTY_WORD;
 
-    additionalPhraseId = Random() % (NUM_ADDITIONAL_PHRASES - numAdditionalPhrasesUnlocked);
-    for (i = 0; i < NUM_ADDITIONAL_PHRASES; i++)
+    numToSkip = Random() % (NUM_TRENDY_SAYINGS - numUnlocked);
+    for (i = 0; i < NUM_TRENDY_SAYINGS; i++)
     {
-        if (!IsAdditionalPhraseUnlocked(i))
+        if (!IsTrendySayingUnlocked(i))
         {
-            if (additionalPhraseId)
+            if (numToSkip)
             {
-                additionalPhraseId--;
+                // Skip the first n locked words, as determined by the Random call above.
+                numToSkip--;
             }
             else
             {
-                UnlockAdditionalPhrase(i);
+                UnlockTrendySaying(i);
                 return EC_WORD(EC_GROUP_TRENDY_SAYING, i);
             }
         }
     }
 
+    // Would only be reached if there are no new words to teach, which is handled at the start.
     return EC_EMPTY_WORD;
 }
 
-// Unused
-u16 GetRandomTaughtHipsterPhrase(void)
+static u16 UNUSED GetRandomUnlockedTrendySaying(void)
 {
     u16 i;
-    u16 additionalPhraseId = GetNumAdditionalPhrasesUnlocked();
-    if (additionalPhraseId == 0)
+    u16 n = GetNumTrendySayingsUnlocked();
+    if (n == 0)
         return EC_EMPTY_WORD;
 
-    additionalPhraseId = Random() % additionalPhraseId;
-    for (i = 0; i < NUM_ADDITIONAL_PHRASES; i++)
+    n = Random() % n;
+    for (i = 0; i < NUM_TRENDY_SAYINGS; i++)
     {
-        if (IsAdditionalPhraseUnlocked(i))
+        if (IsTrendySayingUnlocked(i))
         {
-            if (additionalPhraseId)
-                additionalPhraseId--;
+            if (n)
+                n--;
             else
                 return EC_WORD(EC_GROUP_TRENDY_SAYING, i);
         }
@@ -5670,10 +5709,10 @@ void InitEasyChatPhrases(void)
     // Mauville old man data is corrupted, which is initialized directly after
     // this function is called when starting a new game.
     for (i = 0; i < 64; i++)
-        gSaveBlock1Ptr->additionalPhrases[i] = 0;
+        gSaveBlock1Ptr->unlockedTrendySayings[i] = 0;
 #else
-    for (i = 0; i < ARRAY_COUNT(gSaveBlock1Ptr->additionalPhrases); i++)
-        gSaveBlock1Ptr->additionalPhrases[i] = 0;
+    for (i = 0; i < ARRAY_COUNT(gSaveBlock1Ptr->unlockedTrendySayings); i++)
+        gSaveBlock1Ptr->unlockedTrendySayings[i] = 0;
 #endif
 }
 
@@ -5712,7 +5751,7 @@ static void SetUnlockedEasyChatGroups(void)
         sWordData->unlockedGroupIds[sWordData->numUnlockedGroups++] = EC_GROUP_MOVE_2;
     }
 
-    if (FlagGet(FLAG_SYS_HIPSTER_MEET))
+    if (FlagGet(FLAG_UNLOCKED_TRENDY_SAYINGS))
         sWordData->unlockedGroupIds[sWordData->numUnlockedGroups++] = EC_GROUP_TRENDY_SAYING;
 
     if (IsNationalPokedexEnabled())
@@ -5732,8 +5771,7 @@ static u8 GetUnlockedEasyChatGroupId(u8 index)
         return sWordData->unlockedGroupIds[index];
 }
 
-// Unused
-static u8 *BufferEasyChatWordGroupName(u8 *dest, u8 groupId, u16 totalChars)
+static u8 UNUSED *BufferEasyChatWordGroupName(u8 *dest, u8 groupId, u16 totalChars)
 {
     u16 i;
     u8 *str = StringCopy(dest, sEasyChatGroupNamePointers[groupId]);
@@ -5901,7 +5939,7 @@ static bool8 IsEasyChatIndexAndGroupUnlocked(u16 wordIndex, u8 groupId)
     case EC_GROUP_MOVE_2:
         return TRUE;
     case EC_GROUP_TRENDY_SAYING:
-        return IsAdditionalPhraseUnlocked(wordIndex);
+        return IsTrendySayingUnlocked(wordIndex);
     default:
         return gEasyChatGroups[groupId].wordData.words[wordIndex].enabled;
     }

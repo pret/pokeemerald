@@ -73,8 +73,8 @@ struct PokenavMonList
 enum
 {
     POKENAV_MODE_NORMAL,           // Chosen from Start menu.
-    POKENAV_MODE_FORCE_CALL_READY, // Pokenav tutorial before calling Mr. Stone
-    POKENAV_MODE_FORCE_CALL_EXIT,  // Pokenav tutorial after calling Mr. Stone
+    POKENAV_MODE_FORCE_CALL_READY, // PokéNav tutorial before calling Mr. Stone
+    POKENAV_MODE_FORCE_CALL_EXIT,  // PokéNav tutorial after calling Mr. Stone
 };
 
 enum
@@ -124,7 +124,7 @@ enum
 #define POKENAV_MENU_IDS_START 100000
 enum
 {
-    POKENAV_MAIN_MENU = POKENAV_MENU_IDS_START, // The main menu where the player selects Hoenn Map/Condition/Match Call/Ribbons 
+    POKENAV_MAIN_MENU = POKENAV_MENU_IDS_START, // The main menu where the player selects Hoenn Map/Condition/Match Call/Ribbons
     POKENAV_MAIN_MENU_CURSOR_ON_MAP,
     POKENAV_CONDITION_MENU,                     // The first Condition screen where the player selects Party or Search
     POKENAV_CONDITION_SEARCH_MENU,              // The Condition search menu where the player selects a search parameter
@@ -240,8 +240,8 @@ enum
                         [CHECK_PAGE_INTRO_2]  = gText_MatchCall##name##_Intro2}
 
 
-// Pokenav Function IDs
-// Indices into the LoopedTask tables for each of the main Pokenav features
+// PokéNav Function IDs
+// Indices into the LoopedTask tables for each of the main PokéNav features
 
 enum RegionMapFuncIds
 {

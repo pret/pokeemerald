@@ -2,6 +2,8 @@
 #define GUARD_ITEM_H
 
 #include "constants/item.h"
+#include "constants/items.h"
+#include "constants/tms_hms.h"
 
 typedef void (*ItemUseFunc)(u8);
 
@@ -62,18 +64,37 @@ u16 CountTotalItemQuantityInBag(u16 itemId);
 bool8 AddPyramidBagItem(u16 itemId, u16 count);
 bool8 RemovePyramidBagItem(u16 itemId, u16 count);
 const u8 *ItemId_GetName(u16 itemId);
-u16 ItemId_GetId(u16 itemId);
 u16 ItemId_GetPrice(u16 itemId);
 u8 ItemId_GetHoldEffect(u16 itemId);
 u8 ItemId_GetHoldEffectParam(u16 itemId);
 const u8 *ItemId_GetDescription(u16 itemId);
 u8 ItemId_GetImportance(u16 itemId);
-u8 ItemId_GetRegistrability(u16 itemId);
 u8 ItemId_GetPocket(u16 itemId);
 u8 ItemId_GetType(u16 itemId);
 ItemUseFunc ItemId_GetFieldFunc(u16 itemId);
 u8 ItemId_GetBattleUsage(u16 itemId);
 ItemUseFunc ItemId_GetBattleFunc(u16 itemId);
 u8 ItemId_GetSecondaryId(u16 itemId);
+
+/* Expands to:
+ * enum
+ * {
+ *   ITEM_TM_FOCUS_PUNCH,
+ *   ...
+ *   ITEM_HM_CUT,
+ *   ...
+ * }; */
+#define ENUM_TM(id) CAT(ITEM_TM_, id),
+#define ENUM_HM(id) CAT(ITEM_HM_, id),
+enum
+{
+    ENUM_TM_START_ = ITEM_TM01 - 1,
+    FOREACH_TM(ENUM_TM)
+
+    ENUM_HM_START_ = ITEM_HM01 - 1,
+    FOREACH_HM(ENUM_HM)
+};
+#undef ENUM_TM
+#undef ENUM_HM
 
 #endif // GUARD_ITEM_H

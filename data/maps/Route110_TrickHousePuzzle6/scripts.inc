@@ -11,6 +11,7 @@ Route110_TrickHousePuzzle6_OnWarp:
 	map_script_2 VAR_TEMP_0, VAR_TEMP_0, Route110_TrickHousePuzzle6_EventScript_InitPuzzle
 	.2byte 0
 
+@ NOTE: This rotating gate puzzle makes use of VAR_TEMP_0 - VAR_TEMP_5
 Route110_TrickHousePuzzle6_EventScript_InitPuzzle::
 	special RotatingGate_InitPuzzleAndGraphics
 	end

@@ -32,7 +32,7 @@ BattleFrontier_BattlePyramidTop_OnResume:
 BattleFrontier_BattlePyramidTop_EventScript_CheckChallengeStatus::
 	copyvar VAR_TEMP_C, VAR_RESULT
 	frontier_getstatus
-	switch VAR_TEMP_0
+	switch VAR_TEMP_CHALLENGE_STATUS
 	case 0, BattleFrontier_BattlePyramidTop_EventScript_ReadyChallenge
 	case CHALLENGE_STATUS_SAVING, BattleFrontier_BattlePyramid_EventScript_WarpToLobby
 	case CHALLENGE_STATUS_PAUSED, BattleFrontier_BattlePyramidTop_EventScript_ReadyChallenge
@@ -43,13 +43,13 @@ BattleFrontier_BattlePyramidTop_EventScript_CheckChallengeStatus::
 	end
 
 BattleFrontier_BattlePyramidTop_OnFrame:
-	map_script_2 VAR_TEMP_E, 0, BattleFrontier_BattlePyramidTop_EventScript_PlayPyramidMusic
+	map_script_2 VAR_TEMP_PLAYING_PYRAMID_MUSIC, 0, BattleFrontier_BattlePyramidTop_EventScript_PlayPyramidMusic
 	map_script_2 VAR_TEMP_F, 1, BattleFrontier_BattlePyramidTop_EventScript_ShowMapName
 	.2byte 0
 
 BattleFrontier_BattlePyramidTop_EventScript_PlayPyramidMusic::
 	playbgm MUS_B_PYRAMID_TOP, FALSE
-	setvar VAR_TEMP_E, 1
+	setvar VAR_TEMP_PLAYING_PYRAMID_MUSIC, 1
 	end
 
 BattleFrontier_BattlePyramidTop_EventScript_ShowMapName::

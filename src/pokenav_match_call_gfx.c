@@ -50,7 +50,7 @@ struct Pokenav_MatchCallGfx
     u8 unusedTilemapBuffer[BG_SCREEN_SIZE];
     u8 bgTilemapBuffer2[BG_SCREEN_SIZE];
     u8 *trainerPicGfxPtr;
-    u8 trainerPicGfx[0x800];
+    u8 trainerPicGfx[TRAINER_PIC_SIZE];
     u8 trainerPicPal[0x20];
 };
 
@@ -344,7 +344,7 @@ static u32 LoopedTask_OpenMatchCall(s32 state)
         SetBgTilemapBuffer(2, gfx->bgTilemapBuffer2);
         CopyToBgTilemapBuffer(2, MATCH_CALL_UI_TILEMAP, 0, 0);
         CopyBgTilemapBufferToVram(2);
-        CopyPaletteIntoBufferUnfaded(MATCH_CALL_UI_PAL, 0x20, 0x20);
+        CopyPaletteIntoBufferUnfaded(MATCH_CALL_UI_PAL, BG_PLTT_ID(2), sizeof(MATCH_CALL_UI_PAL));
         CopyBgTilemapBufferToVram(2);
         return LT_INC_AND_PAUSE;
     case 1:
@@ -354,7 +354,7 @@ static u32 LoopedTask_OpenMatchCall(s32 state)
         BgDmaFill(1, 0, 0, 1);
         SetBgTilemapBuffer(1, gfx->bgTilemapBuffer1);
         FillBgTilemapBufferRect_Palette0(1, 0x1000, 0, 0, 32, 20);
-        CopyPaletteIntoBufferUnfaded(sCallWindow_Pal, 0x10, 0x20);
+        CopyPaletteIntoBufferUnfaded(sCallWindow_Pal, BG_PLTT_ID(1), sizeof(sCallWindow_Pal));
         CopyBgTilemapBufferToVram(1);
         return LT_INC_AND_PAUSE;
     case 2:
@@ -363,8 +363,8 @@ static u32 LoopedTask_OpenMatchCall(s32 state)
 
         LoadCallWindowAndFade(gfx);
         DecompressAndCopyTileDataToVram(3, sPokeball_Gfx, 0, 0, 0);
-        CopyPaletteIntoBufferUnfaded(sListWindow_Pal, 0x30, 0x20);
-        CopyPaletteIntoBufferUnfaded(sPokeball_Pal, 0x50, 0x20);
+        CopyPaletteIntoBufferUnfaded(sListWindow_Pal, BG_PLTT_ID(3), sizeof(sListWindow_Pal));
+        CopyPaletteIntoBufferUnfaded(sPokeball_Pal, BG_PLTT_ID(5), PLTT_SIZE_4BPP);
         return LT_INC_AND_PAUSE;
     case 3:
         if (FreeTempTileDataBuffersIfPossible() || !IsMatchCallListInitFinished())
@@ -924,9 +924,9 @@ static void Task_FlashPokeballIcons(u8 taskId)
         tSinIdx += 4;
         tSinIdx &= 0x7F;
         tSinVal = gSineTable[tSinIdx] >> 4;
-        PokenavCopyPalette(sPokeball_Pal, &sPokeball_Pal[0x10], 0x10, 0x10, tSinVal, &gPlttBufferUnfaded[0x50]);
+        PokenavCopyPalette(sPokeball_Pal, &sPokeball_Pal[0x10], 0x10, 0x10, tSinVal, &gPlttBufferUnfaded[BG_PLTT_ID(5)]);
         if (!gPaletteFade.active)
-            CpuCopy32(&gPlttBufferUnfaded[0x50], &gPlttBufferFaded[0x50], 0x20);
+            CpuCopy32(&gPlttBufferUnfaded[BG_PLTT_ID(5)], &gPlttBufferFaded[BG_PLTT_ID(5)], PLTT_SIZE_4BPP);
     }
 }
 
@@ -1113,7 +1113,7 @@ static void DrawMsgBoxForMatchCallMsg(struct Pokenav_MatchCallGfx *gfx)
 
 static void DrawMsgBoxForCloseByMsg(struct Pokenav_MatchCallGfx *gfx)
 {
-    LoadUserWindowBorderGfx(gfx->msgBoxWindowId, 1, 0x40);
+    LoadUserWindowBorderGfx(gfx->msgBoxWindowId, 1, BG_PLTT_ID(4));
     DrawTextBorderOuter(gfx->msgBoxWindowId, 1, 4);
     FillWindowPixelBuffer(gfx->msgBoxWindowId, PIXEL_FILL(1));
     PutWindowTilemap(gfx->msgBoxWindowId);
@@ -1197,7 +1197,7 @@ static void AllocMatchCallSprites(void)
     spriteSheet.tag = GFXTAG_TRAINER_PIC;
     gfx->trainerPicGfxPtr = (u8 *)OBJ_VRAM0 + LoadSpriteSheet(&spriteSheet) * 0x20;
     paletteNum = AllocSpritePalette(PALTAG_TRAINER_PIC);
-    gfx->trainerPicPalOffset = 0x100 + paletteNum * 0x10;
+    gfx->trainerPicPalOffset = OBJ_PLTT_ID(paletteNum);
     gfx->trainerPicSprite = CreateTrainerPicSprite();
     gfx->trainerPicSprite->invisible = TRUE;
 }

@@ -2207,7 +2207,7 @@ const struct PokedexEntry gPokedexEntries[] =
     #endif
         .height = 13,
         .weight = 545,
-        .description = gMrmimePokedexText,
+        .description = gMrMimePokedexText,
         .pokemonScale = 258,
         .pokemonOffset = 6,
         .trainerScale = 256,

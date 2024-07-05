@@ -1,7 +1,11 @@
 #ifndef GUARD_BATTLE_MESSAGE_H
 #define GUARD_BATTLE_MESSAGE_H
 
-#define TEXT_BUFF_ARRAY_COUNT   16
+// This buffer can hold many different things. Some of the things it can hold
+// that have explicit sizes are listed below to ensure it can contain them.
+#define TEXT_BUFF_ARRAY_COUNT   max(16, \
+                                max(MOVE_NAME_LENGTH + 2, /* +2 to hold the "!" and EOS. */ \
+                                    POKEMON_NAME_LENGTH + 1))
 
 // for 0xFD
 #define B_TXT_BUFF1 0x0
@@ -202,7 +206,7 @@ struct BattleMsgData
     u16 lastItem;
     u8 lastAbility;
     u8 scrActive;
-    u8 unk1605E;
+    u8 bakScriptPartyIdx;
     u8 hpScale;
     u8 itemEffectBattler;
     u8 moveType;
@@ -278,7 +282,7 @@ extern const u8 gText_OpponentMon1Name[];
 extern const u8 gText_Mind[];
 extern const u8 gText_Skill[];
 extern const u8 gText_Body[];
-extern const u8 gText_Judgement[];
+extern const u8 gText_Judgment[];
 extern const u8 gText_EmptyString3[];
 extern const u8 gText_RecordBattleToPass[];
 extern const u8 gText_BattleRecordedOnPass[];

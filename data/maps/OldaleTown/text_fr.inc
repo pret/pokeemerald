@@ -51,6 +51,6 @@ OldaleTown_Text_BrendanLetsGoBack:
 	.string "papa, maintenant.\p"
 	.string "{PLAYER}, tu ferais bien de n’pas tarder.$"
 
-OldaleTown_Text_CitySign:
+OldaleTown_Text_TownSign:
 	.string "ROSYERES\n"
 	.string "“Là où les choses se font rares.”$"

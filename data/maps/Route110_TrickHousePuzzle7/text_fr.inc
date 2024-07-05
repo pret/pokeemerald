@@ -1,5 +1,5 @@
 
-Route110_TrickHousePuzzle7_EventScript_WroteSecretCodeLockOpened::
+Route110_TrickHousePuzzle7_Text_WroteSecretCodeLockOpened::
 	.string "{PLAYER} écrit le code secret\n"
 	.string "sur la porte.\p"
 	.string "“Le MAITRE DES PIEGES est trognon!”\n"

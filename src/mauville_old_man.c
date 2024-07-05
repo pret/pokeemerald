@@ -104,7 +104,7 @@ static void SetupHipster(void)
     struct MauvilleManHipster *hipster = &gSaveBlock1Ptr->oldMan.hipster;
 
     hipster->id = MAUVILLE_MAN_HIPSTER;
-    hipster->alreadySpoken = FALSE;
+    hipster->taughtWord = FALSE;
     hipster->language = gGameLanguage;
 }
 
@@ -241,27 +241,28 @@ void PlayBardSong(void)
     ScriptContext_Stop();
 }
 
-void GetHipsterSpokenFlag(void)
+void HasHipsterTaughtWord(void)
 {
-    gSpecialVar_Result = (&gSaveBlock1Ptr->oldMan.hipster)->alreadySpoken;
+    gSpecialVar_Result = (&gSaveBlock1Ptr->oldMan.hipster)->taughtWord;
 }
 
-void SetHipsterSpokenFlag(void)
+void SetHipsterTaughtWord(void)
 {
-    (&gSaveBlock1Ptr->oldMan.hipster)->alreadySpoken = TRUE;
+    (&gSaveBlock1Ptr->oldMan.hipster)->taughtWord = TRUE;
 }
 
 void HipsterTryTeachWord(void)
 {
-    u16 phrase = GetNewHipsterPhraseToTeach();
+    u16 word = UnlockRandomTrendySaying();
 
-    if (phrase == EC_EMPTY_WORD)
+    if (word == EC_EMPTY_WORD)
     {
+        // All words already unlocked
         gSpecialVar_Result = FALSE;
     }
     else
     {
-        CopyEasyChatWord(gStringVar1, phrase);
+        CopyEasyChatWord(gStringVar1, word);
         gSpecialVar_Result = TRUE;
     }
 }
@@ -385,7 +386,7 @@ static void ResetBardFlag(void)
 
 static void ResetHipsterFlag(void)
 {
-    (&gSaveBlock1Ptr->oldMan.hipster)->alreadySpoken = FALSE;
+    (&gSaveBlock1Ptr->oldMan.hipster)->taughtWord = FALSE;
 }
 
 static void ResetTraderFlag(void)
@@ -495,7 +496,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
         song->sound = GetWordSounds(word);
         GetWordPhonemes(song, MACRO1(word));
         song->currWord++;
-        if (song->sound->var00 != 0xFF)
+        if (song->sound->songLengthId != 0xFF)
             song->state = 0;
         else
         {
@@ -513,9 +514,9 @@ static void BardSing(struct Task *task, struct BardSong *song)
         {
         case 0:
             song->phonemeTimer = song->phonemes[song->currPhoneme].length;
-            if (sound->var00 <= 50)
+            if (sound->songLengthId <= 50)
             {
-                u8 num = sound->var00 / 3;
+                u8 num = sound->songLengthId / 3;
                 m4aSongNumStart(PH_TRAP_HELD + 3 * num);
             }
             song->state = 2;
@@ -523,7 +524,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
             break;
         case 2:
             song->state = 1;
-            if (sound->var00 <= 50)
+            if (sound->songLengthId <= 50)
             {
                 song->volume = 0x100 + sound->volume * 16;
                 m4aMPlayVolumeControl(&gMPlayInfo_SE2, TRACKS_ALL, song->volume);
@@ -545,7 +546,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
             if (song->phonemeTimer == 0)
             {
                 song->currPhoneme++;
-                if (song->currPhoneme != 6 && song->sound[song->currPhoneme].var00 != 0xFF)
+                if (song->currPhoneme != 6 && song->sound[song->currPhoneme].songLengthId != 0xFF)
                     song->state = 0;
                 else
                 {
@@ -755,8 +756,7 @@ void SanitizeMauvilleOldManForRuby(union OldMan * oldMan)
     }
 }
 
-// Unused
-static void SetMauvilleOldManLanguage(union OldMan * oldMan, u32 language1, u32 language2, u32 language3)
+static void UNUSED SetMauvilleOldManLanguage(union OldMan * oldMan, u32 language1, u32 language2, u32 language3)
 {
     s32 i;
 
@@ -984,7 +984,7 @@ static const struct Story sStorytellerStories[] = {
         MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtStory
     },
     {
-        GAME_STAT_FISHING_CAPTURES, 1,
+        GAME_STAT_FISHING_ENCOUNTERS, 1,
         MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtTitle,
         MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtAction,
         MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtStory

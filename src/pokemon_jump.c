@@ -2355,7 +2355,7 @@ void IsPokemonJumpSpeciesInParty(void)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_HAS_SPECIES))
         {
-            u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+            u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
             if (IsSpeciesAllowedInPokemonJump(species))
             {
                 gSpecialVar_Result = TRUE;
@@ -2715,7 +2715,7 @@ static void CreateJumpMonSprite(struct PokemonJumpGfx *jumpGfx, struct PokemonJu
     u8 spriteId;
 
     spriteTemplate = sSpriteTemplate_JumpMon;
-    buffer = Alloc(0x2000);
+    buffer = Alloc(MON_PIC_SIZE * MAX_MON_PIC_FRAMES);
     unusedBuffer = Alloc(MON_PIC_SIZE);
     if (multiplayerId == GetPokeJumpMultiplayerId())
         subpriority = 3;
@@ -3193,21 +3193,21 @@ static void LoadPokeJumpGfx(void)
         ResetTempTileDataBuffers();
         LoadSpriteSheetsAndPalettes(sPokemonJumpGfx);
         InitDigitPrinters();
-        LoadPalette(sBg_Pal, 0, 0x20);
+        LoadPalette(sBg_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
         DecompressAndCopyTileDataToVram(BG_SCENERY, sBg_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(BG_SCENERY, sBg_Tilemap, 0, 0, 1);
-        LoadPalette(sVenusaur_Pal, 0x30, 0x20);
+        LoadPalette(sVenusaur_Pal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
         DecompressAndCopyTileDataToVram(BG_VENUSAUR, sVenusaur_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(BG_VENUSAUR, sVenusaur_Tilemap, 0, 0, 1);
-        LoadPalette(BONUSES_PAL, 0x10, 0x20);
+        LoadPalette(BONUSES_PAL, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         DecompressAndCopyTileDataToVram(BG_BONUSES, BONUSES_GFX, 0, 0, 0);
         DecompressAndCopyTileDataToVram(BG_BONUSES, BONUSES_TILEMAP, 0, 0, 1);
-        LoadPalette(sInterface_Pal, 0x20, 0x20);
+        LoadPalette(sInterface_Pal, BG_PLTT_ID(2), PLTT_SIZE_4BPP);
         SetBgTilemapBuffer(BG_INTERFACE, sPokemonJumpGfx->tilemapBuffer);
         FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 0x20, 0x20);
         PrintScoreSuffixes();
         PrintScore(0);
-        LoadUserWindowBorderGfxOnBg(0, 1, 0xE0);
+        LoadUserWindowBorderGfxOnBg(0, 1, BG_PLTT_ID(14));
         CopyBgTilemapBufferToVram(BG_INTERFACE);
         CopyBgTilemapBufferToVram(BG_VENUSAUR);
         CopyBgTilemapBufferToVram(BG_BONUSES);
@@ -3611,7 +3611,7 @@ static u32 AddMessageWindow(u32 left, u32 top, u32 width, u32 height)
     window.tilemapTop = top;
     window.width = width;
     window.height = height;
-    window.paletteNum = 0xF;
+    window.paletteNum = 15;
     window.baseBlock = 0x43;
 
     windowId = AddWindow(&window);
@@ -3978,7 +3978,7 @@ struct UnusedPacket
 
 // Data packet that's never sent
 // No function to read it either
-static void SendPacket_Unused(u32 data)
+static void UNUSED SendPacket_Unused(u32 data)
 {
     struct UnusedPacket packet;
     packet.id = PACKET_UNUSED;
@@ -4223,8 +4223,8 @@ static void PrintRecordsText(u16 windowId, int width)
     recordNums[1] = records->bestJumpScore;
     recordNums[2] = records->excellentsInRow;
 
-    LoadUserWindowBorderGfx_(windowId, 0x21D, 0xD0);
-    DrawTextBorderOuter(windowId, 0x21D, 0xD);
+    LoadUserWindowBorderGfx_(windowId, 0x21D, BG_PLTT_ID(13));
+    DrawTextBorderOuter(windowId, 0x21D, 13);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_PkmnJumpRecords, GetStringCenterAlignXOffset(FONT_NORMAL, gText_PkmnJumpRecords, width * 8), 1, TEXT_SKIP_DRAW, NULL);
     for (i = 0; i < ARRAY_COUNT(sRecordsTexts); i++)

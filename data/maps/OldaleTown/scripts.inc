@@ -29,8 +29,8 @@ OldaleTown_EventScript_MoveMartEmployee::
 	setobjectmovementtype LOCALID_MART_EMPLOYEE, MOVEMENT_TYPE_FACE_DOWN
 	return
 
-OldaleTown_EventScript_CitySign::
-	msgbox OldaleTown_Text_CitySign, MSGBOX_SIGN
+OldaleTown_EventScript_TownSign::
+	msgbox OldaleTown_Text_TownSign, MSGBOX_SIGN
 	end
 
 OldaleTown_EventScript_Girl::

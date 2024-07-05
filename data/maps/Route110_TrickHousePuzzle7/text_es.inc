@@ -1,5 +1,5 @@
 
-Route110_TrickHousePuzzle7_EventScript_WroteSecretCodeLockOpened::
+Route110_TrickHousePuzzle7_Text_WroteSecretCodeLockOpened::
 	.string "{PLAYER} wrote down the secret code\n"
 	.string "on the door.\p"
 	.string "“TRICK MASTER is huggable.”\n"

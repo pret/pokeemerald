@@ -7,6 +7,9 @@
 #include <string>
 using std::string; using std::to_string;
 
+#include <algorithm>
+using std::replace_if;
+
 #include <inja.hpp>
 using namespace inja;
 using json = nlohmann::json;
@@ -33,6 +36,7 @@ int main(int argc, char *argv[])
     string outputFilepath = argv[3];
 
     Environment env;
+    env.set_trim_blocks(true);
 
     // Add custom command callbacks.
     env.add_callback("doNotModifyHeader", 0, [jsonfilepath, templateFilepath](Arguments& args) {
@@ -94,6 +98,24 @@ int main(int argc, char *argv[])
     // single argument is a json object
     env.add_callback("isEmpty", 1, [](Arguments& args) {
         return args.at(0)->empty();
+    });
+
+    env.add_callback("isEmptyString", 1, [](Arguments& args) {
+        return args.at(0)->get<string>().empty();
+    });
+
+    env.add_callback("cleanString", 1, [](Arguments& args) {
+        string str = args.at(0)->get<string>();
+        for (unsigned int i = 0; i < str.length(); i++) {
+            // This code is not Unicode aware, so UTF-8 is not easily parsable without introducing
+            // another library. Just filter out any non-alphanumeric characters for now.
+            // TODO: proper Unicode string normalization
+            if ((i == 0 && isdigit(str[i]))
+             || !isalnum(str[i])) {
+                str[i] = '_';
+            }
+        }
+        return str;
     });
 
     try

@@ -49,6 +49,6 @@ OldaleTown_Text_BrendanLetsGoBack:
 	.string "di mio padre.\l"
 	.string "{PLAYER}, anche tu dovresti tornarci.$"
 
-OldaleTown_Text_CitySign:
+OldaleTown_Text_TownSign:
 	.string "SOLAROSA\n"
 	.string "“Dove tutto comincia in piccolo”.$"

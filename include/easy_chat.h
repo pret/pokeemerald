@@ -126,14 +126,18 @@ u8 * CopyEasyChatWord(u8 *dest, u16 word);
 bool32 IsEasyChatAnswerUnlocked(int word);
 void InitializeEasyChatWordArray(u16 *words, u16 length);
 u8 *ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows);
-u8 *UnusedConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows); // Used by French and Italian versions
+#if FRENCH || ITALIAN
+u8 *UnusedConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows);
+#else //ENGLISH
+static u8 UNUSED *UnusedConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows);
+#endif
 bool8 IsBardWordInvalid(u16 word);
 u16 GetRandomEasyChatWordFromGroup(u16 group);
-u16 GetNewHipsterPhraseToTeach(void);
+u16 UnlockRandomTrendySaying(void);
 u16 EasyChat_GetNumWordsInGroup(u8);
 u16 GetRandomEasyChatWordFromUnlockedGroup(u16);
 void DoEasyChatScreen(u8 type, u16 *words, MainCallback callback, u8 displayedPersonType);
 void InitQuestionnaireWords(void);
-void UnlockAdditionalPhrase(u8 additionalPhraseId);
+void UnlockTrendySaying(u8 wordIndex);
 
 #endif // GUARD_EASYCHAT_H

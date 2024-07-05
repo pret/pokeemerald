@@ -1,5 +1,5 @@
 
-Route110_TrickHousePuzzle8_EventScript_WroteSecretCodeLockOpened::
+Route110_TrickHousePuzzle8_Text_WroteSecretCodeLockOpened::
 	.string "{PLAYER} scrive il codice segreto\n"
 	.string "sulla porta.\p"
 	.string "“Il MAGO del QUIZ è un amore”.\n"

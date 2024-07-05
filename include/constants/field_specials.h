@@ -62,7 +62,7 @@
 #define DEPT_STORE_FLOORNUM_11F      14
 #define DEPT_STORE_FLOORNUM_ROOFTOP  15
 
-// Lilycove Pokemon Trainer Fan Club
+// Lilycove Pokémon Trainer Fan Club
 #define NUM_TRAINER_FAN_CLUB_MEMBERS  8
 
 #define FANCLUB_GOT_FIRST_FANS 7
@@ -79,5 +79,11 @@
 #define FANCOUNTER_BATTLED_AT_BASE   1
 #define FANCOUNTER_FINISHED_CONTEST  2
 #define FANCOUNTER_USED_BATTLE_TOWER 3
+
+// Return values for DoDeoxysRockInteraction
+#define DEOXYS_ROCK_FAILED     0
+#define DEOXYS_ROCK_PROGRESSED 1
+#define DEOXYS_ROCK_SOLVED     2
+#define DEOXYS_ROCK_COMPLETE   3
 
 #endif // GUARD_CONSTANTS_FIELD_SPECIALS_H

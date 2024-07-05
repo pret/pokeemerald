@@ -51,6 +51,6 @@ OldaleTown_Text_BrendanLetsGoBack:
 	.string "LAB now.\l"
 	.string "{PLAYER}, you should hustle back, too.$"
 
-OldaleTown_Text_CitySign:
+OldaleTown_Text_TownSign:
 	.string "OLDALE TOWN\n"
 	.string "“Where things start off scarce.”$"
