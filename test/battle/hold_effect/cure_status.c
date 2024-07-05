@@ -163,12 +163,12 @@ SINGLE_BATTLE_TEST("Berry hold effect cures status if a pokemon enters a battle"
     u16 status;
     u16 item;
 
-    PARAMETRIZE{ status = STATUS1_BURN; item = ITEM_RAWST_BERRY; }
-    PARAMETRIZE{ status = STATUS1_FREEZE; item = ITEM_ASPEAR_BERRY; }
-    PARAMETRIZE{ status = STATUS1_PARALYSIS; item = ITEM_CHERI_BERRY; }
-    PARAMETRIZE{ status = STATUS1_POISON; item = ITEM_PECHA_BERRY; }
-    PARAMETRIZE{ status = STATUS1_TOXIC_POISON; item = ITEM_PECHA_BERRY; }
-    PARAMETRIZE{ status = STATUS1_SLEEP; item = ITEM_CHESTO_BERRY; }
+    PARAMETRIZE { status = STATUS1_BURN; item = ITEM_RAWST_BERRY; }
+    PARAMETRIZE { status = STATUS1_FREEZE; item = ITEM_ASPEAR_BERRY; }
+    PARAMETRIZE { status = STATUS1_PARALYSIS; item = ITEM_CHERI_BERRY; }
+    PARAMETRIZE { status = STATUS1_POISON; item = ITEM_PECHA_BERRY; }
+    PARAMETRIZE { status = STATUS1_TOXIC_POISON; item = ITEM_PECHA_BERRY; }
+    PARAMETRIZE { status = STATUS1_SLEEP; item = ITEM_CHESTO_BERRY; }
 
     GIVEN {
         ASSUME(gItemsInfo[ITEM_RAWST_BERRY].holdEffect == HOLD_EFFECT_CURE_BRN);

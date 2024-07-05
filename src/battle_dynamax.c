@@ -759,7 +759,7 @@ void BS_SetMaxMoveEffect(void)
         {
             static const u8 sSnoozeEffects[] = {TRUE, FALSE};
             if (!(gStatuses3[gBattlerTarget] & STATUS3_YAWN)
-                && CanSleep(gBattlerTarget)
+                && CanBeSlept(gBattlerTarget, GetBattlerAbility(gBattlerTarget))
                 && RandomElement(RNG_G_MAX_SNOOZE, sSnoozeEffects)) // 50% chance of success
             {
                 gStatuses3[gBattlerTarget] |= STATUS3_YAWN_TURN(2);
@@ -865,7 +865,7 @@ void BS_TrySetStatus1(void)
     switch (status1)
     {
         case STATUS1_POISON:
-            if (CanBePoisoned(gBattlerAttacker, gBattlerTarget))
+            if (CanBePoisoned(gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerTarget)))
             {
                 gBattleMons[gBattlerTarget].status1 |= STATUS1_POISON;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
@@ -873,7 +873,7 @@ void BS_TrySetStatus1(void)
             }
             break;
         case STATUS1_PARALYSIS:
-            if (CanBeParalyzed(gBattlerTarget))
+            if (CanBeParalyzed(gBattlerTarget, GetBattlerAbility(gBattlerTarget)))
             {
                 gBattleMons[gBattlerTarget].status1 |= STATUS1_PARALYSIS;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 3;
@@ -881,7 +881,7 @@ void BS_TrySetStatus1(void)
             }
             break;
         case STATUS1_SLEEP:
-            if (CanSleep(gBattlerTarget))
+            if (CanBeSlept(gBattlerTarget, GetBattlerAbility(gBattlerTarget)))
             {
                 if (B_SLEEP_TURNS >= GEN_5)
                     gBattleMons[gBattlerTarget].status1 |=  STATUS1_SLEEP_TURN((Random() % 3) + 2);

@@ -9,8 +9,8 @@ ASSUMPTIONS
 SINGLE_BATTLE_TEST("Weather Ball doubles its power and turns to a Fire-type move in Sunlight", s16 damage)
 {
     u16 move;
-    PARAMETRIZE{ move = MOVE_CELEBRATE; }
-    PARAMETRIZE{ move = MOVE_SUNNY_DAY; }
+    PARAMETRIZE { move = MOVE_CELEBRATE; }
+    PARAMETRIZE { move = MOVE_SUNNY_DAY; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_MEGANIUM);
@@ -27,8 +27,8 @@ SINGLE_BATTLE_TEST("Weather Ball doubles its power and turns to a Fire-type move
 SINGLE_BATTLE_TEST("Weather Ball doubles its power and turns to a Water-type move in Rain", s16 damage)
 {
     u16 move;
-    PARAMETRIZE{ move = MOVE_CELEBRATE; }
-    PARAMETRIZE{ move = MOVE_RAIN_DANCE; }
+    PARAMETRIZE { move = MOVE_CELEBRATE; }
+    PARAMETRIZE { move = MOVE_RAIN_DANCE; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_ARCANINE);
@@ -45,8 +45,8 @@ SINGLE_BATTLE_TEST("Weather Ball doubles its power and turns to a Water-type mov
 SINGLE_BATTLE_TEST("Weather Ball doubles its power and turns to a Rock-type move in a Sandstorm", s16 damage)
 {
     u16 move;
-    PARAMETRIZE{ move = MOVE_CELEBRATE; }
-    PARAMETRIZE{ move = MOVE_SANDSTORM; }
+    PARAMETRIZE { move = MOVE_CELEBRATE; }
+    PARAMETRIZE { move = MOVE_SANDSTORM; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_MAGMAR) { Item(ITEM_SAFETY_GOGGLES); };
@@ -63,9 +63,9 @@ SINGLE_BATTLE_TEST("Weather Ball doubles its power and turns to a Rock-type move
 SINGLE_BATTLE_TEST("Weather Ball doubles its power and turns to an Ice-type move in Hail and Snow", s16 damage)
 {
     u16 move;
-    PARAMETRIZE{ move = MOVE_CELEBRATE; }
-    PARAMETRIZE{ move = MOVE_HAIL; }
-    PARAMETRIZE{ move = MOVE_SNOWSCAPE; }
+    PARAMETRIZE { move = MOVE_CELEBRATE; }
+    PARAMETRIZE { move = MOVE_HAIL; }
+    PARAMETRIZE { move = MOVE_SNOWSCAPE; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_DRAGONAIR) { Item(ITEM_SAFETY_GOGGLES); };

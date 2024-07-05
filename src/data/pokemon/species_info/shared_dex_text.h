@@ -1,3 +1,10 @@
+// fallback
+const u8 gFallbackPokedexText[] = _(
+    "This is a newly discovered Pokémon.\n"
+    "It is currently under investigation.\n"
+    "No detailed information is available\n"
+    "at this time.");
+
 // Gen 1 families
 const u8 gRaticateAlolanPokedexText[] = _(
     "It forms a group of Rattata, which it \n"

@@ -402,9 +402,9 @@ AI_DOUBLE_BATTLE_TEST("AI will not use Helping Hand if partner does not have any
 {
     u16 move1 = MOVE_NONE, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE;
 
-    PARAMETRIZE{ move1 = MOVE_LEER; move2 = MOVE_TOXIC; }
-    PARAMETRIZE{ move1 = MOVE_HELPING_HAND; move2 = MOVE_PROTECT; }
-    PARAMETRIZE{ move1 = MOVE_ACUPRESSURE; move2 = MOVE_DOUBLE_TEAM; move3 = MOVE_TOXIC; move4 = MOVE_PROTECT; }
+    PARAMETRIZE { move1 = MOVE_LEER; move2 = MOVE_TOXIC; }
+    PARAMETRIZE { move1 = MOVE_HELPING_HAND; move2 = MOVE_PROTECT; }
+    PARAMETRIZE { move1 = MOVE_ACUPRESSURE; move2 = MOVE_DOUBLE_TEAM; move3 = MOVE_TOXIC; move4 = MOVE_PROTECT; }
 
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
@@ -431,7 +431,7 @@ AI_DOUBLE_BATTLE_TEST("AI will not use a status move if partner already chose He
     for (j = MOVE_NONE + 1; j < MOVES_COUNT; j++)
     {
         if (gMovesInfo[j].category == DAMAGE_CATEGORY_STATUS) {
-            PARAMETRIZE{ statusMove = j; }
+            PARAMETRIZE { statusMove = j; }
         }
     }
 

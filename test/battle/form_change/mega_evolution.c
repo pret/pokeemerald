@@ -153,3 +153,26 @@ SINGLE_BATTLE_TEST("Regular Mega Evolution and Fervent Wish Mega Evolution can h
         EXPECT_EQ(opponent->species, SPECIES_GARDEVOIR_MEGA);
     }
 }
+
+SINGLE_BATTLE_TEST("Mega Evolved Pokemon do not change abilities after fainting")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_CRUNCH].makesContact == TRUE);
+        ASSUME(gSpeciesInfo[SPECIES_GARCHOMP_MEGA].abilities[0] != ABILITY_ROUGH_SKIN);
+        ASSUME(gSpeciesInfo[SPECIES_GARCHOMP_MEGA].abilities[1] != ABILITY_ROUGH_SKIN);
+        ASSUME(gSpeciesInfo[SPECIES_GARCHOMP_MEGA].abilities[2] != ABILITY_ROUGH_SKIN);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_GARCHOMP) { Ability(ABILITY_ROUGH_SKIN); Item(ITEM_GARCHOMPITE); HP(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CRUNCH); MOVE(opponent, MOVE_CELEBRATE, gimmick: GIMMICK_MEGA); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CRUNCH, player);
+        MESSAGE("Foe Garchomp fainted!");
+        NONE_OF {
+            ABILITY_POPUP(opponent, ABILITY_ROUGH_SKIN);
+            MESSAGE("Wobbuffet was hurt by Foe Garchomp's Rough Skin!");
+            HP_BAR(player);
+        }
+    }
+}

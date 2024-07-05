@@ -5,8 +5,8 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_RISKY: AI will blindly Mirror Coat against specia
 {
     u32 aiRiskyFlag = 0;
 
-    PARAMETRIZE{ aiRiskyFlag = 0; }
-    PARAMETRIZE{ aiRiskyFlag = AI_FLAG_RISKY; }
+    PARAMETRIZE { aiRiskyFlag = 0; }
+    PARAMETRIZE { aiRiskyFlag = AI_FLAG_RISKY; }
 
     GIVEN {
         ASSUME(gMovesInfo[MOVE_MIRROR_COAT].effect == EFFECT_MIRROR_COAT);
@@ -24,8 +24,8 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_RISKY: AI will blindly Counter against physical a
 {
     u32 aiRiskyFlag = 0;
 
-    PARAMETRIZE{ aiRiskyFlag = 0; }
-    PARAMETRIZE{ aiRiskyFlag = AI_FLAG_RISKY; }
+    PARAMETRIZE { aiRiskyFlag = 0; }
+    PARAMETRIZE { aiRiskyFlag = AI_FLAG_RISKY; }
 
     GIVEN {
         ASSUME(gMovesInfo[MOVE_COUNTER].effect == EFFECT_COUNTER);
@@ -43,8 +43,8 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_RISKY: AI will prioritize Revenge if slower")
 {
     u32 aiRiskyFlag = 0;
 
-    PARAMETRIZE{ aiRiskyFlag = 0; }
-    PARAMETRIZE{ aiRiskyFlag = AI_FLAG_RISKY; }
+    PARAMETRIZE { aiRiskyFlag = 0; }
+    PARAMETRIZE { aiRiskyFlag = AI_FLAG_RISKY; }
 
     GIVEN {
         ASSUME(gMovesInfo[MOVE_REVENGE].effect == EFFECT_REVENGE);
@@ -60,8 +60,8 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_RISKY: Mid-battle switches prioritize offensive o
 {
     u32 aiRiskyFlag = 0;
 
-    PARAMETRIZE{ aiRiskyFlag = 0; }
-    PARAMETRIZE{ aiRiskyFlag = AI_FLAG_RISKY; }
+    PARAMETRIZE { aiRiskyFlag = 0; }
+    PARAMETRIZE { aiRiskyFlag = AI_FLAG_RISKY; }
 
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_MON_CHOICES | aiRiskyFlag);
@@ -78,8 +78,8 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_RISKY: AI prefers high damage moves at the expens
 {
     u32 aiRiskyFlag = 0;
 
-    PARAMETRIZE{ aiRiskyFlag = 0; }
-    PARAMETRIZE{ aiRiskyFlag = AI_FLAG_RISKY; }
+    PARAMETRIZE { aiRiskyFlag = 0; }
+    PARAMETRIZE { aiRiskyFlag = AI_FLAG_RISKY; }
 
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | aiRiskyFlag);

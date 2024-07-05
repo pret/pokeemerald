@@ -56,7 +56,7 @@ DOUBLE_BATTLE_TEST("Sticky Web lowers Speed by 1 in a double battle after Explos
         OPPONENT(SPECIES_WOBBUFFET) {HP(1); Speed(1);}
         OPPONENT(SPECIES_WOBBUFFET) {HP(1); Speed(1);}
         OPPONENT(SPECIES_WYNAUT) {Speed(10);}
-        OPPONENT(SPECIES_WYNAUT) {Speed(10);}
+        OPPONENT(SPECIES_ALAKAZAM) {Speed(100);}
     } WHEN {
         TURN { MOVE(playerRight, MOVE_STICKY_WEB); MOVE(playerLeft, MOVE_EXPLOSION); SEND_OUT(playerLeft, 2); SEND_OUT(opponentLeft, 2); SEND_OUT(opponentRight, 3); }
         TURN {}
@@ -65,12 +65,12 @@ DOUBLE_BATTLE_TEST("Sticky Web lowers Speed by 1 in a double battle after Explos
         MESSAGE("A sticky web spreads out on the ground around the opposing team!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, playerLeft);
         MESSAGE("2 sent out Wynaut!");
+        MESSAGE("2 sent out Alakazam!");
+        MESSAGE("Foe Alakazam was caught in a Sticky Web!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
+        MESSAGE("Foe Alakazam's Speed fell!");
         MESSAGE("Foe Wynaut was caught in a Sticky Web!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-        MESSAGE("Foe Wynaut's Speed fell!");
-        MESSAGE("2 sent out Wynaut!");
-        MESSAGE("Foe Wynaut was caught in a Sticky Web!");
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
         MESSAGE("Foe Wynaut's Speed fell!");
     }
 }

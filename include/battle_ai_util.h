@@ -146,10 +146,8 @@ bool32 HasMagicCoatAffectedMove(u32 battler);
 bool32 HasSnatchAffectedMove(u32 battler);
 
 // status checks
-bool32 AI_CanBeBurned(u32 battler, u32 ability);
 bool32 AI_CanGetFrostbite(u32 battler, u32 ability);
 bool32 AI_CanBeConfused(u32 battlerAtk, u32 battlerDef, u32 move, u32 ability);
-bool32 AI_CanSleep(u32 battler, u32 ability);
 bool32 IsBattlerIncapacitated(u32 battler, u32 ability);
 bool32 AI_CanPutToSleep(u32 battlerAtk, u32 battlerDef, u32 defAbility, u32 move, u32 partnerMove);
 bool32 ShouldPoisonSelf(u32 battler, u32 ability);

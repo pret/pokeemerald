@@ -20,8 +20,8 @@ AI_SINGLE_BATTLE_TEST("Choiced Pokémon switch out after using a status move onc
 
     for (j = 0; j < ARRAY_COUNT(choiceItems); j++)
     {
-        PARAMETRIZE{ ability = ABILITY_NONE;    heldItem = choiceItems[j]; }
-        PARAMETRIZE{ ability = ABILITY_KLUTZ;   heldItem = choiceItems[j]; }
+        PARAMETRIZE { ability = ABILITY_NONE;    heldItem = choiceItems[j]; }
+        PARAMETRIZE { ability = ABILITY_KLUTZ;   heldItem = choiceItems[j]; }
     }
 
     GIVEN {
@@ -55,8 +55,8 @@ AI_SINGLE_BATTLE_TEST("Choiced Pokémon won't use stat boosting moves")
 
     for (j = 0; j < ARRAY_COUNT(choiceItems); j++)
     {
-        PARAMETRIZE{ ability = ABILITY_NONE;    heldItem = choiceItems[j]; }
-        PARAMETRIZE{ ability = ABILITY_KLUTZ;   heldItem = choiceItems[j]; }
+        PARAMETRIZE { ability = ABILITY_NONE;    heldItem = choiceItems[j]; }
+        PARAMETRIZE { ability = ABILITY_KLUTZ;   heldItem = choiceItems[j]; }
     }
 
     GIVEN {
@@ -87,10 +87,10 @@ AI_SINGLE_BATTLE_TEST("Choiced Pokémon won't use status move if they are the on
 
     for (j = 0; j < ARRAY_COUNT(choiceItems); j++)
     {
-        PARAMETRIZE{ ability = ABILITY_NONE;    heldItem = choiceItems[j]; isAlive = 0; }
-        PARAMETRIZE{ ability = ABILITY_KLUTZ;   heldItem = choiceItems[j]; isAlive = 0; }
-        PARAMETRIZE{ ability = ABILITY_NONE;    heldItem = choiceItems[j]; isAlive = 1; }
-        PARAMETRIZE{ ability = ABILITY_KLUTZ;   heldItem = choiceItems[j]; isAlive = 1; }
+        PARAMETRIZE { ability = ABILITY_NONE;    heldItem = choiceItems[j]; isAlive = 0; }
+        PARAMETRIZE { ability = ABILITY_KLUTZ;   heldItem = choiceItems[j]; isAlive = 0; }
+        PARAMETRIZE { ability = ABILITY_NONE;    heldItem = choiceItems[j]; isAlive = 1; }
+        PARAMETRIZE { ability = ABILITY_KLUTZ;   heldItem = choiceItems[j]; isAlive = 1; }
     }
 
     GIVEN {
@@ -122,10 +122,10 @@ AI_SINGLE_BATTLE_TEST("Choiced Pokémon won't use status move if they don't have
 
     for (j = 0; j < ARRAY_COUNT(choiceItems); j++)
     {
-        PARAMETRIZE{ ability = ABILITY_NONE;    heldItem = choiceItems[j]; species = SPECIES_SWAMPERT; move = MOVE_WATERFALL; }
-        PARAMETRIZE{ ability = ABILITY_KLUTZ;   heldItem = choiceItems[j]; species = SPECIES_SWAMPERT; move = MOVE_WATERFALL; }
-        PARAMETRIZE{ ability = ABILITY_NONE;    heldItem = choiceItems[j]; species = SPECIES_ELEKID; move = MOVE_THUNDER_WAVE; }
-        PARAMETRIZE{ ability = ABILITY_KLUTZ;   heldItem = choiceItems[j]; species = SPECIES_ELEKID; move = MOVE_THUNDER_WAVE; }
+        PARAMETRIZE { ability = ABILITY_NONE;    heldItem = choiceItems[j]; species = SPECIES_SWAMPERT; move = MOVE_WATERFALL; }
+        PARAMETRIZE { ability = ABILITY_KLUTZ;   heldItem = choiceItems[j]; species = SPECIES_SWAMPERT; move = MOVE_WATERFALL; }
+        PARAMETRIZE { ability = ABILITY_NONE;    heldItem = choiceItems[j]; species = SPECIES_ELEKID; move = MOVE_THUNDER_WAVE; }
+        PARAMETRIZE { ability = ABILITY_KLUTZ;   heldItem = choiceItems[j]; species = SPECIES_ELEKID; move = MOVE_THUNDER_WAVE; }
     }
 
     GIVEN {
@@ -157,10 +157,10 @@ AI_SINGLE_BATTLE_TEST("Choiced Pokémon won't use status move if they are trappe
 
     for (j = 0; j < ARRAY_COUNT(choiceItems); j++)
     {
-        PARAMETRIZE{ aiAbility = ABILITY_NONE;    heldItem = choiceItems[j]; species = SPECIES_RHYDON; playerAbility = ABILITY_LIGHTNING_ROD; }
-        PARAMETRIZE{ aiAbility = ABILITY_KLUTZ;   heldItem = choiceItems[j]; species = SPECIES_RHYDON; playerAbility = ABILITY_LIGHTNING_ROD; }
-        PARAMETRIZE{ aiAbility = ABILITY_NONE;    heldItem = choiceItems[j]; species = SPECIES_DUGTRIO; playerAbility = ABILITY_ARENA_TRAP; }
-        PARAMETRIZE{ aiAbility = ABILITY_KLUTZ;   heldItem = choiceItems[j]; species = SPECIES_DUGTRIO; playerAbility = ABILITY_ARENA_TRAP; }
+        PARAMETRIZE { aiAbility = ABILITY_NONE;    heldItem = choiceItems[j]; species = SPECIES_RHYDON; playerAbility = ABILITY_LIGHTNING_ROD; }
+        PARAMETRIZE { aiAbility = ABILITY_KLUTZ;   heldItem = choiceItems[j]; species = SPECIES_RHYDON; playerAbility = ABILITY_LIGHTNING_ROD; }
+        PARAMETRIZE { aiAbility = ABILITY_NONE;    heldItem = choiceItems[j]; species = SPECIES_DUGTRIO; playerAbility = ABILITY_ARENA_TRAP; }
+        PARAMETRIZE { aiAbility = ABILITY_KLUTZ;   heldItem = choiceItems[j]; species = SPECIES_DUGTRIO; playerAbility = ABILITY_ARENA_TRAP; }
     }
 
     GIVEN {
