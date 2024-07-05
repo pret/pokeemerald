@@ -39,9 +39,6 @@ BattleFrontier_PokemonCenter_1F_EventScript_Skitty::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_PokemonCenter_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_PokemonCenter_1F/text_fr.inc"
 .else
@@ -50,7 +47,8 @@ BattleFrontier_PokemonCenter_1F_EventScript_Skitty::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_PokemonCenter_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_PokemonCenter_1F/text.inc"
 .endif
 .endif
 .endif

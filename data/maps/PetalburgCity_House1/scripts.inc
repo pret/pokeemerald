@@ -9,9 +9,6 @@ PetalburgCity_House1_EventScript_Woman::
 	msgbox PetalburgCity_House1_Text_GoOnAdventure, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/PetalburgCity_House1/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/PetalburgCity_House1/text_fr.inc"
 .else
@@ -20,7 +17,8 @@ PetalburgCity_House1_EventScript_Woman::
 .else
 .ifdef SPANISH
 	.include "data/maps/PetalburgCity_House1/text_es.inc"
-.endif
+.else
+	.include "data/maps/PetalburgCity_House1/text.inc"
 .endif
 .endif
 .endif

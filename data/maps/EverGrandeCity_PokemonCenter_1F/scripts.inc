@@ -76,9 +76,6 @@ EverGrandeCity_PokemonCenter_1F_Movement_ScottExit:
 	walk_down
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/EverGrandeCity_PokemonCenter_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/EverGrandeCity_PokemonCenter_1F/text_fr.inc"
 .else
@@ -87,7 +84,8 @@ EverGrandeCity_PokemonCenter_1F_Movement_ScottExit:
 .else
 .ifdef SPANISH
 	.include "data/maps/EverGrandeCity_PokemonCenter_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/EverGrandeCity_PokemonCenter_1F/text.inc"
 .endif
 .endif
 .endif

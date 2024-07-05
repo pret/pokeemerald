@@ -201,20 +201,6 @@ SecretBase_EventScript_SkittyTV::
 	msgbox SecretBase_Text_SkittyTV, MSGBOX_SIGN
 	end
 
-.ifdef ENGLISH
-SecretBase_Text_SmallIndentInWall::
-	.string "There's a small indent in the wall.$"
-
-SecretBase_Text_IndentUseSecretPower::
-	.string "There's a small indent in the wall.\p"
-	.string "Use the SECRET POWER?$"
-
-SecretBase_Text_DiscoveredSmallCavern::
-	.string "Discovered a small cavern!$"
-
-SecretBase_Text_WantToMakeYourSecretBaseHere:
-	.string "Want to make your SECRET BASE here?$"
-.else
 .ifdef FRENCH
 SecretBase_Text_SmallIndentInWall::
 	.string "Il y a une petite fissure dans le mur.$"
@@ -242,6 +228,18 @@ SecretBase_Text_DiscoveredSmallCavern::
 
 SecretBase_Text_WantToMakeYourSecretBaseHere:
 	.string "Vuoi creare qui la tua BASE SEGRETA?$"
-.endif
+.else
+SecretBase_Text_SmallIndentInWall::
+	.string "There's a small indent in the wall.$"
+
+SecretBase_Text_IndentUseSecretPower::
+	.string "There's a small indent in the wall.\p"
+	.string "Use the SECRET POWER?$"
+
+SecretBase_Text_DiscoveredSmallCavern::
+	.string "Discovered a small cavern!$"
+
+SecretBase_Text_WantToMakeYourSecretBaseHere:
+	.string "Want to make your SECRET BASE here?$"
 .endif
 .endif

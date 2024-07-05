@@ -121,9 +121,6 @@ BattleFrontier_BattlePalaceCorridor_Movement_AttendantEnterBattleRoom:
 	set_invisible
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_BattlePalaceCorridor/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_BattlePalaceCorridor/text_fr.inc"
 .else
@@ -132,7 +129,8 @@ BattleFrontier_BattlePalaceCorridor_Movement_AttendantEnterBattleRoom:
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_BattlePalaceCorridor/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_BattlePalaceCorridor/text.inc"
 .endif
 .endif
 .endif

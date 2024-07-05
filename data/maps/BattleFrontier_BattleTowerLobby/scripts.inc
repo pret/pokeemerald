@@ -910,9 +910,6 @@ BattleFrontier_BattleTowerLobby_EventScript_ExitRules::
 	releaseall
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_BattleTowerLobby/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_BattleTowerLobby/text_fr.inc"
 .else
@@ -921,7 +918,8 @@ BattleFrontier_BattleTowerLobby_EventScript_ExitRules::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_BattleTowerLobby/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_BattleTowerLobby/text.inc"
 .endif
 .endif
 .endif

@@ -370,14 +370,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
         {
             [0] =
             {
-            #if ENGLISH
-                .name = _("ALAINA"),
-                .facilityClass = FACILITY_CLASS_HEX_MANIAC,
-                .speechBefore = {EC_WORD_YOU, EC_WORD_CAN, EC_WORD_CHOOSE, EC_WORD_NOT, EC_WORD_TO, EC_WORD_BELIEVE},
-                .speechWin = {EC_WORD_A, EC_WORD_SUPER, EC_WORD_NATURAL, EC_WORD_POWER, EC_WORD_HAS, EC_WORD_COME},
-                .speechLose = {EC_WORD_THIS, EC_WORD_MUST_BE, EC_WORD_A, EC_MOVE(NIGHTMARE), EC_WORD_EXCL, EC_EMPTY_WORD},
-                .speechAfter = {EC_WORD_I, EC_WORD_WILL, EC_WORD_DISAPPEAR, EC_WORD_IN, EC_WORD_THE, EC_WORD_DARK},
-            #elif FRENCH
+            #if FRENCH
                 .name = _("ALAINA"),
                 .facilityClass = FACILITY_CLASS_HEX_MANIAC,
                 .speechBefore = {EC_WORD_YOU, EC_WORD_ISN_T, EC_WORD_ON, EC_WORD_NOT, EC_WORD_WHO_WAS, EC_WORD_BELIEVE, },
@@ -391,6 +384,13 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                 .speechWin = {EC_WORD_IT, EC_WORD_WITH, EC_WORD_LISTENS, EC_WORD_AS_IF, EC_WORD_IS, EC_WORD_NATURAL},
                 .speechLose = {EC_WORD_IS, EC_WORD_A, EC_MOVE(NIGHTMARE), EC_WORD_QUES, EC_EMPTY_WORD, EC_EMPTY_WORD},
                 .speechAfter = {EC_WORD_WHOM, EC_WORD_TRAINS, EC_WORD_IF_I_LOSE, EC_WORD_ALTHOUGH, EC_WORD_DARK, EC_WORD_ELLIPSIS},
+            #else //ENGLISH
+                .name = _("ALAINA"),
+                .facilityClass = FACILITY_CLASS_HEX_MANIAC,
+                .speechBefore = {EC_WORD_YOU, EC_WORD_CAN, EC_WORD_CHOOSE, EC_WORD_NOT, EC_WORD_TO, EC_WORD_BELIEVE},
+                .speechWin = {EC_WORD_A, EC_WORD_SUPER, EC_WORD_NATURAL, EC_WORD_POWER, EC_WORD_HAS, EC_WORD_COME},
+                .speechLose = {EC_WORD_THIS, EC_WORD_MUST_BE, EC_WORD_A, EC_MOVE(NIGHTMARE), EC_WORD_EXCL, EC_EMPTY_WORD},
+                .speechAfter = {EC_WORD_I, EC_WORD_WILL, EC_WORD_DISAPPEAR, EC_WORD_IN, EC_WORD_THE, EC_WORD_DARK},
             #endif
                 .mons =
                 {
@@ -544,14 +544,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
             },
             [1] =
             {
-            #if ENGLISH
-                .name = _("ALFONSO"),
-                .facilityClass = FACILITY_CLASS_CYCLING_TRIATHLETE_M,
-                .speechBefore = {EC_WORD_I, EC_WORD_NEVER, EC_WORD_TAKE, EC_WORD_A, EC_WORD_TRAIN, EC_EMPTY_WORD},
-                .speechWin = {EC_WORD_I_AM, EC_WORD_FEELING, EC_MOVE2(SUPERSONIC), EC_WORD_ON, EC_WORD_MY, EC_WORD_BIKE},
-                .speechLose = {EC_WORD_MY, EC_WORD_BIKE, EC_WORD_EXCL, EC_WORD_YOU_VE, EC_WORD_DESTROYED, EC_WORD_IT},
-                .speechAfter = {EC_WORD_A, EC_WORD_BIKE, EC_WORD_OVER, EC_WORD_ANY, EC_WORD_TRAIN, EC_WORD_EXCL},
-            #elif FRENCH
+            #if FRENCH
                 .name = _("BARTH"),
                 .facilityClass = FACILITY_CLASS_CYCLING_TRIATHLETE_M,
                 .speechBefore = {EC_WORD_THE, EC_EMPTY_WORD, EC_WORD_TRAIN, EC_WORD_QUES, EC_WORD_THANKS, EC_EMPTY_WORD, },
@@ -565,6 +558,13 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                 .speechWin = {EC_WORD_WEREN_T, EC_WORD_BETTER, EC_WORD_BIKE, EC_WORD_IS, EC_WORD_SUPER, EC_WORD_EXCL},
                 .speechLose = {EC_WORD_WEREN_T, EC_WORD_BETTER, EC_WORD_BIKE, EC_WORD_QUES_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD},
                 .speechAfter = {EC_WORD_WEREN_T, EC_WORD_BIKE, EC_WORD_IS, EC_WORD_ABOVE, EC_WORD_NOT_VERY, EC_WORD_TRAIN},
+            #else //ENGLISH
+                .name = _("ALFONSO"),
+                .facilityClass = FACILITY_CLASS_CYCLING_TRIATHLETE_M,
+                .speechBefore = {EC_WORD_I, EC_WORD_NEVER, EC_WORD_TAKE, EC_WORD_A, EC_WORD_TRAIN, EC_EMPTY_WORD},
+                .speechWin = {EC_WORD_I_AM, EC_WORD_FEELING, EC_MOVE2(SUPERSONIC), EC_WORD_ON, EC_WORD_MY, EC_WORD_BIKE},
+                .speechLose = {EC_WORD_MY, EC_WORD_BIKE, EC_WORD_EXCL, EC_WORD_YOU_VE, EC_WORD_DESTROYED, EC_WORD_IT},
+                .speechAfter = {EC_WORD_A, EC_WORD_BIKE, EC_WORD_OVER, EC_WORD_ANY, EC_WORD_TRAIN, EC_WORD_EXCL},
             #endif
                 .mons =
                 {
@@ -722,14 +722,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
         {
             [0] =
             {
-            #if ENGLISH
-                .name = _("THEODORE"),
-                .facilityClass = FACILITY_CLASS_BLACK_BELT,
-                .speechBefore = {EC_WORD_MY, EC_WORD_POWER, EC_WORD_WILL, EC_MOVE2(STOMP), EC_WORD_YOU, EC_WORD_EXCL},
-                .speechWin = {EC_WORD_WAAAH, EC_WORD_HAHAHA, EC_WORD_EXCL, EC_WORD_WAAAH, EC_WORD_HAHAHA, EC_WORD_EXCL_EXCL},
-                .speechLose = {EC_WORD_I, EC_WORD_WENT, EC_WORD_AT, EC_WORD_IT, EC_WORD_TOO, EC_WORD_HARD},
-                .speechAfter = {EC_WORD_YES_SIR_EXCL, EC_WORD_YOU, EC_WORD_LOOK, EC_WORD_NICE, EC_WORD_AND, EC_WORD_GUTSY},
-            #elif FRENCH
+            #if FRENCH
                 .name = _("THEODORE"),
                 .facilityClass = FACILITY_CLASS_BLACK_BELT,
                 .speechBefore = {EC_WORD_I_AM, EC_WORD_POWER, EC_WORD_AND, EC_WORD_ANGRY, EC_EMPTY_WORD, EC_EMPTY_WORD, },
@@ -743,6 +736,13 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                 .speechWin = {EC_WORD_HAHAHA, EC_WORD_ELLIPSIS_ELLIPSIS_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
                 .speechLose = {EC_WORD_IS_IT_QUES, EC_WORD_TEACHES, EC_WORD_REFRESHING, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
                 .speechAfter = {EC_WORD_WILL, EC_WORD_SMACK, EC_WORD_TAKE_THAT, EC_WORD_WEREN_T, EC_WORD_BETTER, EC_MOVE(STRENGTH)},
+            #else //ENGLISH
+                .name = _("THEODORE"),
+                .facilityClass = FACILITY_CLASS_BLACK_BELT,
+                .speechBefore = {EC_WORD_MY, EC_WORD_POWER, EC_WORD_WILL, EC_MOVE2(STOMP), EC_WORD_YOU, EC_WORD_EXCL},
+                .speechWin = {EC_WORD_WAAAH, EC_WORD_HAHAHA, EC_WORD_EXCL, EC_WORD_WAAAH, EC_WORD_HAHAHA, EC_WORD_EXCL_EXCL},
+                .speechLose = {EC_WORD_I, EC_WORD_WENT, EC_WORD_AT, EC_WORD_IT, EC_WORD_TOO, EC_WORD_HARD},
+                .speechAfter = {EC_WORD_YES_SIR_EXCL, EC_WORD_YOU, EC_WORD_LOOK, EC_WORD_NICE, EC_WORD_AND, EC_WORD_GUTSY},
             #endif
                 .mons =
                 {
@@ -894,14 +894,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
             },
             [1] =
             {
-            #if ENGLISH
-                .name = _("JAYDEN"),
-                .facilityClass = FACILITY_CLASS_PKMN_BREEDER_F,
-                .speechBefore = {EC_WORD_SOME, EC_WORD_THINGS, EC_WORD_YOU, EC_WORD_CAN_T, EC_WORD_DO, EC_WORD_ALONE},
-                .speechWin = {EC_WORD_YOU, EC_WORD_WIN, EC_WORD_AS, EC_WORD_A, EC_WORD_GROUP, EC_EMPTY_WORD},
-                .speechLose = {EC_WORD_WE, EC_WORD_COULDN_T, EC_WORD_WIN, EC_WORD_TOGETHER, EC_WORD_QUES, EC_EMPTY_WORD},
-                .speechAfter = {EC_WORD_MAYBE, EC_WORD_I, EC_WORD_NEED, EC_WORD_A, EC_WORD_BOY, EC_WORD_FRIEND},
-            #elif FRENCH
+            #if FRENCH
                 .name = _("LAETICIA"),
                 .facilityClass = FACILITY_CLASS_PKMN_BREEDER_F,
                 .speechBefore = {EC_WORD_WHO, EC_WORD_BELONGS_TO, EC_WORD_WIN, EC_EMPTY_WORD, EC_WORD_TODAY, EC_WORD_QUES, },
@@ -915,6 +908,13 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                 .speechWin = {EC_WORD_HOW, EC_WORD_IS, EC_WORD_BEAUTIFUL, EC_WORD_IF_I_WIN, EC_WORD_ME, EC_WORD_EXCL},
                 .speechLose = {EC_WORD_AS_IF, EC_WORD_IS, EC_WORD_BEAUTIFUL, EC_WORD_IF_I_LOSE, EC_WORD_ME, EC_WORD_EXCL},
                 .speechAfter = {EC_WORD_NATURALLY, EC_WORD_WHOM, EC_WORD_OK_QUES, EC_WORD_COME, EC_WORD_A, EC_WORD_BOY},
+            #else //ENGLISH
+                .name = _("JAYDEN"),
+                .facilityClass = FACILITY_CLASS_PKMN_BREEDER_F,
+                .speechBefore = {EC_WORD_SOME, EC_WORD_THINGS, EC_WORD_YOU, EC_WORD_CAN_T, EC_WORD_DO, EC_WORD_ALONE},
+                .speechWin = {EC_WORD_YOU, EC_WORD_WIN, EC_WORD_AS, EC_WORD_A, EC_WORD_GROUP, EC_EMPTY_WORD},
+                .speechLose = {EC_WORD_WE, EC_WORD_COULDN_T, EC_WORD_WIN, EC_WORD_TOGETHER, EC_WORD_QUES, EC_EMPTY_WORD},
+                .speechAfter = {EC_WORD_MAYBE, EC_WORD_I, EC_WORD_NEED, EC_WORD_A, EC_WORD_BOY, EC_WORD_FRIEND},
             #endif
                 .mons =
                 {
@@ -1073,14 +1073,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
         {
             [0] =
             {
-            #if ENGLISH
-                .name = _("SALVADORE"),
-                .facilityClass = FACILITY_CLASS_PKMN_BREEDER_M,
-                .speechBefore = {EC_WORD_LET_S, EC_MOVE2(WRAP), EC_WORD_THINGS, EC_WORD_UP, EC_WORD_HERE, EC_WORD_HEY_QUES},
-                .speechWin = {EC_WORD_WOULD, EC_WORD_YOU, EC_WORD_LIKE, EC_WORD_TO, EC_WORD_GO_HOME, EC_WORD_QUES},
-                .speechLose = {EC_WORD_I, EC_WORD_WILL, EC_WORD_MAKE, EC_WORD_YOU, EC_WORD_SORRY, EC_WORD_FRIEND},
-                .speechAfter = {EC_WORD_HAVEN_T, EC_WORD_YOU, EC_WORD_DONE, EC_WORD_ENOUGH, EC_WORD_QUES, EC_EMPTY_WORD},
-            #elif FRENCH
+            #if FRENCH
                 .name = _("ANGEL"),
                 .facilityClass = FACILITY_CLASS_PKMN_BREEDER_M,
                 .speechBefore = {EC_WORD_TOO_LATE, EC_WORD_EXCL, EC_WORD_COME_OVER, EC_WORD_SIBLINGS, EC_WORD_WHEN_I_WIN, EC_WORD_EXCL, },
@@ -1094,6 +1087,13 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                 .speechWin = {EC_WORD_ABOVE, EC_WORD_IF, EC_WORD_REFUSE, EC_WORD_MEAN, EC_WORD_HOME, EC_WORD_ELLIPSIS},
                 .speechLose = {EC_WORD_AS_IF, EC_WORD_WILL, EC_WORD_SAYS, EC_WORD_THOSE_ARE, EC_WORD_MEAN, EC_WORD_IF_I_WIN},
                 .speechAfter = {EC_WORD_AS_IF, EC_WORD_OVER, EC_WORD_WILL, EC_WORD_MUST_BE, EC_WORD_WHERE, EC_WORD_QUES},
+            #else //ENGLISH
+                .name = _("SALVADORE"),
+                .facilityClass = FACILITY_CLASS_PKMN_BREEDER_M,
+                .speechBefore = {EC_WORD_LET_S, EC_MOVE2(WRAP), EC_WORD_THINGS, EC_WORD_UP, EC_WORD_HERE, EC_WORD_HEY_QUES},
+                .speechWin = {EC_WORD_WOULD, EC_WORD_YOU, EC_WORD_LIKE, EC_WORD_TO, EC_WORD_GO_HOME, EC_WORD_QUES},
+                .speechLose = {EC_WORD_I, EC_WORD_WILL, EC_WORD_MAKE, EC_WORD_YOU, EC_WORD_SORRY, EC_WORD_FRIEND},
+                .speechAfter = {EC_WORD_HAVEN_T, EC_WORD_YOU, EC_WORD_DONE, EC_WORD_ENOUGH, EC_WORD_QUES, EC_EMPTY_WORD},
             #endif
                 .mons =
                 {
@@ -1241,14 +1241,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
             },
             [1] =
             {
-            #if ENGLISH
-                .name = _("VERONICA"),
-                .facilityClass = FACILITY_CLASS_PKMN_BREEDER_F,
-                .speechBefore = {EC_WORD_I_AM, EC_WORD_THE, EC_WORD_STRONG, EC_WORD_BEAUTY, EC_WORD_AROUND, EC_WORD_HERE},
-                .speechWin = {EC_WORD_I_AM, EC_WORD_STRONG, EC_WORD_THAT_S, EC_WORD_WHY, EC_WORD_EXCL, EC_EMPTY_WORD},
-                .speechLose = {EC_WORD_I_AM, EC_WORD_TIRED, EC_WORD_TODAY, EC_WORD_THAT_S, EC_WORD_WHY, EC_WORD_EXCL},
-                .speechAfter = {EC_WORD_WHY, EC_WORD_YES, EC_WORD_I_AM, EC_WORD_ANGRY, EC_WORD_THANK_YOU, EC_WORD_EXCL},
-            #elif FRENCH
+            #if FRENCH
                 .name = _("VERONICA"),
                 .facilityClass = FACILITY_CLASS_PKMN_BREEDER_F,
                 .speechBefore = {EC_WORD_FEELING, EC_WORD_BEAUTY, EC_WORD_IT_S, EC_EMPTY_WORD, EC_WORD_YET, EC_WORD_EXCL_EXCL, },
@@ -1262,6 +1255,13 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                 .speechWin = {EC_WORD_ARE, EC_WORD_PERFECT, EC_WORD_WEREN_T, EC_WORD_PLUS, EC_WORD_SILKY, EC_WORD_EXCL},
                 .speechLose = {EC_WORD_TODAY, EC_WORD_AS_IF, EC_WORD_ARE, EC_WORD_VERY, EC_WORD_ALONE, EC_WORD_ELLIPSIS},
                 .speechAfter = {EC_WORD_NOW, EC_WORD_ARE, EC_WORD_INSIDE, EC_WORD_LISTEN, EC_WORD_DON_T, EC_WORD_EXCL},
+            #else //ENGLISH
+                .name = _("VERONICA"),
+                .facilityClass = FACILITY_CLASS_PKMN_BREEDER_F,
+                .speechBefore = {EC_WORD_I_AM, EC_WORD_THE, EC_WORD_STRONG, EC_WORD_BEAUTY, EC_WORD_AROUND, EC_WORD_HERE},
+                .speechWin = {EC_WORD_I_AM, EC_WORD_STRONG, EC_WORD_THAT_S, EC_WORD_WHY, EC_WORD_EXCL, EC_EMPTY_WORD},
+                .speechLose = {EC_WORD_I_AM, EC_WORD_TIRED, EC_WORD_TODAY, EC_WORD_THAT_S, EC_WORD_WHY, EC_WORD_EXCL},
+                .speechAfter = {EC_WORD_WHY, EC_WORD_YES, EC_WORD_I_AM, EC_WORD_ANGRY, EC_WORD_THANK_YOU, EC_WORD_EXCL},
             #endif
                 .mons =
                 {
@@ -1419,14 +1419,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
         {
             [0] =
             {
-            #if ENGLISH
-                .name = _("KEENAN"),
-                .facilityClass = FACILITY_CLASS_PSYCHIC_M,
-                .speechBefore = {EC_WORD_YOU, EC_WORD_LOOK, EC_WORD_SO, EC_WORD_HURRIED, EC_EMPTY_WORD, EC_EMPTY_WORD},
-                .speechWin = {EC_WORD_TOO, EC_WORD_BAD, EC_EMPTY_WORD, EC_WORD_TIME, EC_WORD_IS, EC_WORD_UP},
-                .speechLose = {EC_WORD_DOES, EC_WORD_THE, EC_WORD_TIME, EC_WORD_WORRY, EC_WORD_YOU, EC_WORD_QUES},
-                .speechAfter = {EC_WORD_YOU, EC_WORD_DON_T, EC_WORD_HAVE, EC_WORD_TIME, EC_WORD_TO, EC_WORD_CHAT},
-            #elif FRENCH
+            #if FRENCH
                 .name = _("ARTHUS"),
                 .facilityClass = FACILITY_CLASS_PSYCHIC_M,
                 .speechBefore = {EC_WORD_DOES, EC_EMPTY_WORD, EC_WORD_HURRIED, EC_WORD_QUES, EC_EMPTY_WORD, EC_EMPTY_WORD, },
@@ -1440,6 +1433,13 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                 .speechWin = {EC_WORD_ONLY, EC_WORD_IT, EC_WORD_BEGINNING, EC_WORD_LISTEN, EC_WORD_IF_I_LOSE, EC_WORD_EXCL},
                 .speechLose = {EC_WORD_ONLY, EC_WORD_IT, EC_WORD_BEGINNING, EC_WORD_LISTEN, EC_WORD_IF_I_WIN, EC_WORD_EXCL},
                 .speechAfter = {EC_WORD_WILL, EC_WORD_BEGINNING, EC_WORD_NITWIT, EC_WORD_TO, EC_WORD_WORD, EC_WORD_QUES},
+            #else //ENGLISH
+                .name = _("KEENAN"),
+                .facilityClass = FACILITY_CLASS_PSYCHIC_M,
+                .speechBefore = {EC_WORD_YOU, EC_WORD_LOOK, EC_WORD_SO, EC_WORD_HURRIED, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                .speechWin = {EC_WORD_TOO, EC_WORD_BAD, EC_EMPTY_WORD, EC_WORD_TIME, EC_WORD_IS, EC_WORD_UP},
+                .speechLose = {EC_WORD_DOES, EC_WORD_THE, EC_WORD_TIME, EC_WORD_WORRY, EC_WORD_YOU, EC_WORD_QUES},
+                .speechAfter = {EC_WORD_YOU, EC_WORD_DON_T, EC_WORD_HAVE, EC_WORD_TIME, EC_WORD_TO, EC_WORD_CHAT},
             #endif
                 .mons =
                 {
@@ -1579,14 +1579,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
             },
             [1] =
             {
-            #if ENGLISH
-                .name = _("KRISTINA"),
-                .facilityClass = FACILITY_CLASS_AROMA_LADY,
-                .speechBefore = {EC_WORD_IT_S, EC_WORD_HOT, EC_WORD_ELLIPSIS, EC_WORD_WHAT, EC_WORD_A, EC_WORD_STENCH},
-                .speechWin = {EC_WORD_I, EC_WORD_REALLY, EC_WORD_LIKE, EC_WORD_AN, EC_WORD_OFFENSIVE, EC_WORD_STENCH},
-                .speechLose = {EC_WORD_I, EC_MOVE2(COVET), EC_WORD_ANY, EC_WORD_STRONG, EC_WORD_STENCH, EC_EMPTY_WORD},
-                .speechAfter = {EC_WORD_MY, EC_WORD_SENSE, EC_WORD_OF, EC_WORD_SMELL, EC_WORD_ISN_T, EC_WORD_NORMAL},
-            #elif FRENCH
+            #if FRENCH
                 .name = _("KRISTINA"),
                 .facilityClass = FACILITY_CLASS_AROMA_LADY,
                 .speechBefore = {EC_WORD_HAHAHA, EC_WORD_ELLIPSIS, EC_WORD_WHERE, EC_EMPTY_WORD, EC_WORD_STENCH, EC_WORD_EXCL, },
@@ -1600,6 +1593,13 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                 .speechWin = {EC_WORD_IT, EC_WORD_STENCH, EC_WORD_THAT_S, EC_WORD_WHOM, EC_WORD_LIKES, EC_WORD_ELLIPSIS},
                 .speechLose = {EC_WORD_LOWS, EC_WORD_IT, EC_WORD_STENCH, EC_WORD_AS_IF, EC_WORD_IS, EC_WORD_THOSE_WERE},
                 .speechAfter = {EC_WORD_IT, EC_WORD_STENCH, EC_WORD_IS, EC_WORD_ABOVE, EC_WORD_NOT_VERY, EC_MOVE(SWEET_SCENT)},
+            #else //ENGLISH
+                .name = _("KRISTINA"),
+                .facilityClass = FACILITY_CLASS_AROMA_LADY,
+                .speechBefore = {EC_WORD_IT_S, EC_WORD_HOT, EC_WORD_ELLIPSIS, EC_WORD_WHAT, EC_WORD_A, EC_WORD_STENCH},
+                .speechWin = {EC_WORD_I, EC_WORD_REALLY, EC_WORD_LIKE, EC_WORD_AN, EC_WORD_OFFENSIVE, EC_WORD_STENCH},
+                .speechLose = {EC_WORD_I, EC_MOVE2(COVET), EC_WORD_ANY, EC_WORD_STRONG, EC_WORD_STENCH, EC_EMPTY_WORD},
+                .speechAfter = {EC_WORD_MY, EC_WORD_SENSE, EC_WORD_OF, EC_WORD_SMELL, EC_WORD_ISN_T, EC_WORD_NORMAL},
             #endif
                 .mons =
                 {
@@ -1765,14 +1765,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                 {
                     [0] =
                         {
-                        #if ENGLISH
-                            .name = _("TERRANCE"),
-                            .facilityClass = FACILITY_CLASS_GENTLEMAN,
-                            .speechBefore = {EC_WORD_GOOD, EC_WORD_CHILDREN, EC_WORD_WILL, EC_WORD_GET, EC_WORD_A, EC_MOVE2(PRESENT)},
-                            .speechWin = {EC_WORD_THANK_YOU, EC_WORD_MY, EC_WORD_VICTORY, EC_WORD_IS, EC_WORD_YOUR, EC_MOVE2(PRESENT)},
-                            .speechLose = {EC_WORD_THAT_WAS, EC_WORD_MY, EC_MOVE2(PRESENT), EC_WORD_TO, EC_WORD_YOU, EC_EMPTY_WORD},
-                            .speechAfter = {EC_WORD_WELL_THEN, EC_WORD_CONGRATS, EC_WORD_MY, EC_WORD_FRIEND, EC_EMPTY_WORD, EC_EMPTY_WORD},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("ANSELME"),
                             .facilityClass = FACILITY_CLASS_GENTLEMAN,
                             .speechBefore = {EC_WORD_IT, EC_WORD_A, EC_MOVE2(PRESENT), EC_WORD_QUES, EC_EMPTY_WORD, EC_EMPTY_WORD, },
@@ -1786,6 +1779,13 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                             .speechWin = {EC_WORD_WEREN_T, EC_WORD_BETTER, EC_WORD_VICTORY, EC_WORD_IS, EC_WORD_IT, EC_MOVE2(PRESENT)},
                             .speechLose = {EC_WORD_IS, EC_WORD_PERFECT, EC_WORD_ON, EC_WORD_IT, EC_WORD_WITH, EC_MOVE2(PRESENT)},
                             .speechAfter = {EC_WORD_WHICH, EC_WORD_GIVE, EC_WORD_ALL, EC_WORD_TOO, EC_WORD_CONGRATS, EC_WORD_EXCL},
+                        #else //ENGLISH
+                            .name = _("TERRANCE"),
+                            .facilityClass = FACILITY_CLASS_GENTLEMAN,
+                            .speechBefore = {EC_WORD_GOOD, EC_WORD_CHILDREN, EC_WORD_WILL, EC_WORD_GET, EC_WORD_A, EC_MOVE2(PRESENT)},
+                            .speechWin = {EC_WORD_THANK_YOU, EC_WORD_MY, EC_WORD_VICTORY, EC_WORD_IS, EC_WORD_YOUR, EC_MOVE2(PRESENT)},
+                            .speechLose = {EC_WORD_THAT_WAS, EC_WORD_MY, EC_MOVE2(PRESENT), EC_WORD_TO, EC_WORD_YOU, EC_EMPTY_WORD},
+                            .speechAfter = {EC_WORD_WELL_THEN, EC_WORD_CONGRATS, EC_WORD_MY, EC_WORD_FRIEND, EC_EMPTY_WORD, EC_EMPTY_WORD},
                         #endif
                             .mons =
                                 {
@@ -1919,14 +1919,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                         },
                     [1] =
                         {
-                        #if ENGLISH
-                            .name = _("ELIZABETH"),
-                            .facilityClass = FACILITY_CLASS_LADY,
-                            .speechBefore = {EC_WORD_CAN, EC_WORD_YOU, EC_WORD_SENSE, EC_WORD_ME, EC_MOVE(FOCUS_ENERGY), EC_WORD_QUES},
-                            .speechWin = {EC_WORD_THAT_S, EC_WORD_ABOUT, EC_WORD_RIGHT, EC_WORD_I, EC_WORD_WOULD, EC_WORD_THINK},
-                            .speechLose = {EC_WORD_THINGS, EC_WORD_DON_T, EC_WORD_ALWAYS, EC_WORD_WORK, EC_WORD_OUT, EC_EMPTY_WORD},
-                            .speechAfter = {EC_WORD_I_AM, EC_WORD_FEELING, EC_WORD_LONESOME, EC_WORD_AND, EC_WORD_SAD, EC_WORD_NOW},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("ELIZABETH"),
                             .facilityClass = FACILITY_CLASS_LADY,
                             .speechBefore = {EC_WORD_YOU, EC_WORD_SENSE, EC_WORD_DAUGHTER, EC_EMPTY_WORD, EC_MOVE(FOCUS_ENERGY), EC_WORD_QUES, },
@@ -1940,6 +1933,13 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                             .speechWin = {EC_WORD_MISS, EC_WORD_SHINE, EC_WORD_HEH, EC_WORD_QUES, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechLose = {EC_WORD_AS_IF, EC_WORD_ALWAYS, EC_WORD_STORES, EC_WORD_HERE, EC_WORD_THOSE_ARE, EC_WORD_ELLIPSIS},
                             .speechAfter = {EC_WORD_NOW, EC_WORD_ARE, EC_WORD_PERFECT, EC_WORD_SAD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                        #else //ENGLISH
+                            .name = _("ELIZABETH"),
+                            .facilityClass = FACILITY_CLASS_LADY,
+                            .speechBefore = {EC_WORD_CAN, EC_WORD_YOU, EC_WORD_SENSE, EC_WORD_ME, EC_MOVE(FOCUS_ENERGY), EC_WORD_QUES},
+                            .speechWin = {EC_WORD_THAT_S, EC_WORD_ABOUT, EC_WORD_RIGHT, EC_WORD_I, EC_WORD_WOULD, EC_WORD_THINK},
+                            .speechLose = {EC_WORD_THINGS, EC_WORD_DON_T, EC_WORD_ALWAYS, EC_WORD_WORK, EC_WORD_OUT, EC_EMPTY_WORD},
+                            .speechAfter = {EC_WORD_I_AM, EC_WORD_FEELING, EC_WORD_LONESOME, EC_WORD_AND, EC_WORD_SAD, EC_WORD_NOW},
                         #endif
                             .mons =
                                 {
@@ -2100,14 +2100,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                 {
                     [0] =
                         {
-                        #if ENGLISH
-                            .name = _("ANNABELL"),
-                            .facilityClass = FACILITY_CLASS_PARASOL_LADY,
-                            .speechBefore = {EC_WORD_HI, EC_WORD_ARE, EC_WORD_YOU, EC_WORD_FEELING, EC_WORD_UPBEAT, EC_WORD_QUES},
-                            .speechWin = {EC_WORD_AREN_T, EC_WORD_YOU, EC_WORD_FEELING, EC_WORD_WELL, EC_WORD_QUES, EC_EMPTY_WORD},
-                            .speechLose = {EC_WORD_I, EC_WORD_CAN, EC_WORD_SEE, EC_WORD_YOU_RE, EC_WORD_FEELING, EC_WORD_GREAT},
-                            .speechAfter = {EC_WORD_YOUR, EC_WORD_POKEMON, EC_WORD_LOOK, EC_WORD_READY, EC_WORD_TO, EC_WORD_HUSTLE},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("ANNABEL"),
                             .facilityClass = FACILITY_CLASS_PARASOL_LADY,
                             .speechBefore = {EC_WORD_YOU, EC_WORD_SIBLINGS, EC_WORD_SENSE, EC_EMPTY_WORD, EC_WORD_WEIRD, EC_WORD_QUES, },
@@ -2121,6 +2114,13 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                             .speechWin = {EC_WORD_AS_IF, EC_WORD_WILL_BE_HERE, EC_WORD_ALONE, EC_WORD_TODAY, EC_WORD_HEH, EC_WORD_QUES},
                             .speechLose = {EC_WORD_WILL_BE_HERE, EC_WORD_PERFECT, EC_WORD_ALONE, EC_WORD_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_ALL, EC_WORD_DID, EC_WORD_POKEMON, EC_WORD_ARE, EC_WORD_LOWS, EC_WORD_ALONE},
+                        #else //ENGLISH
+                            .name = _("ANNABELL"),
+                            .facilityClass = FACILITY_CLASS_PARASOL_LADY,
+                            .speechBefore = {EC_WORD_HI, EC_WORD_ARE, EC_WORD_YOU, EC_WORD_FEELING, EC_WORD_UPBEAT, EC_WORD_QUES},
+                            .speechWin = {EC_WORD_AREN_T, EC_WORD_YOU, EC_WORD_FEELING, EC_WORD_WELL, EC_WORD_QUES, EC_EMPTY_WORD},
+                            .speechLose = {EC_WORD_I, EC_WORD_CAN, EC_WORD_SEE, EC_WORD_YOU_RE, EC_WORD_FEELING, EC_WORD_GREAT},
+                            .speechAfter = {EC_WORD_YOUR, EC_WORD_POKEMON, EC_WORD_LOOK, EC_WORD_READY, EC_WORD_TO, EC_WORD_HUSTLE},
                         #endif
                             .mons =
                                 {
@@ -2282,14 +2282,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                         },
                     [1] =
                         {
-                        #if ENGLISH
-                            .name = _("COLEMAN"),
-                            .facilityClass = FACILITY_CLASS_COLLECTOR,
-                            .speechBefore = {EC_WORD_I, EC_WORD_SEEK, EC_WORD_SOMEONE, EC_WORD_AS, EC_WORD_MY, EC_WORD_IDOL},
-                            .speechWin = {EC_WORD_DID, EC_WORD_MY, EC_WORD_IDOL, EC_WORD_SEE, EC_WORD_THAT, EC_WORD_QUES},
-                            .speechLose = {EC_WORD_YOU_RE, EC_WORD_LIKE, EC_WORD_A, EC_MOVE(HEAL_BELL), EC_WORD_TO_ME, EC_WORD_EXCL},
-                            .speechAfter = {EC_WORD_I_VE, EC_WORD_DECIDED, EC_WORD_I_CHOOSE_YOU, EC_WORD_AS, EC_WORD_MY, EC_WORD_IDOL},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("ARNAUD"),
                             .facilityClass = FACILITY_CLASS_COLLECTOR,
                             .speechBefore = {EC_WORD_I, EC_WORD_SEEK, EC_WORD_AN, EC_EMPTY_WORD, EC_WORD_IDOL, EC_WORD_ELLIPSIS, },
@@ -2303,6 +2296,13 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                             .speechWin = {EC_WORD_IS_IT_QUES, EC_WORD_WON, EC_WORD_NITWIT, EC_WORD_IT, EC_WORD_WITH, EC_WORD_IDOL},
                             .speechLose = {EC_WORD_IF_I_LOSE, EC_WORD_LAY, EC_WORD_DO, EC_WORD_AS_IF, EC_WORD_SORRY, EC_WORD_ELLIPSIS},
                             .speechAfter = {EC_WORD_WILL_BE_HERE, EC_WORD_LET_S, EC_WORD_IT, EC_WORD_WITH, EC_WORD_IDOL, EC_WORD_QUES},
+                        #else //ENGLISH
+                            .name = _("COLEMAN"),
+                            .facilityClass = FACILITY_CLASS_COLLECTOR,
+                            .speechBefore = {EC_WORD_I, EC_WORD_SEEK, EC_WORD_SOMEONE, EC_WORD_AS, EC_WORD_MY, EC_WORD_IDOL},
+                            .speechWin = {EC_WORD_DID, EC_WORD_MY, EC_WORD_IDOL, EC_WORD_SEE, EC_WORD_THAT, EC_WORD_QUES},
+                            .speechLose = {EC_WORD_YOU_RE, EC_WORD_LIKE, EC_WORD_A, EC_MOVE(HEAL_BELL), EC_WORD_TO_ME, EC_WORD_EXCL},
+                            .speechAfter = {EC_WORD_I_VE, EC_WORD_DECIDED, EC_WORD_I_CHOOSE_YOU, EC_WORD_AS, EC_WORD_MY, EC_WORD_IDOL},
                         #endif
                             .mons =
                                 {
@@ -2461,14 +2461,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                 {
                     [0] =
                         {
-                        #if ENGLISH
-                            .name = _("ENRIQUE"),
-                            .facilityClass = FACILITY_CLASS_RICH_BOY,
-                            .speechBefore = {EC_WORD_GET, EC_WORD_READY, EC_WORD_FOR, EC_WORD_AN, EC_WORD_AWESOME, EC_WORD_TIME},
-                            .speechWin = {EC_WORD_HEY, EC_WORD_HEY, EC_WORD_EXCL, EC_WORD_WHAT_S_UP_QUES, EC_EMPTY_WORD, EC_EMPTY_WORD},
-                            .speechLose = {EC_WORD_AWW, EC_WORD_COULDN_T, EC_WORD_YOU, EC_WORD_LET_ME_WIN, EC_WORD_QUES, EC_EMPTY_WORD},
-                            .speechAfter = {EC_WORD_DID, EC_WORD_YOU, EC_WORD_SEE, EC_WORD_MY, EC_WORD_SKILL, EC_WORD_QUES},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("ADEMAR"),
                             .facilityClass = FACILITY_CLASS_RICH_BOY,
                             .speechBefore = {EC_WORD_THE, EC_WORD_TIME, EC_WORD_BELONGS_TO, EC_WORD_BE, EC_WORD_AWESOME, EC_WORD_EXCL_EXCL, },
@@ -2482,6 +2475,13 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                             .speechWin = {EC_WORD_UNBELIEVABLE, EC_WORD_WILL, EC_WORD_LOST, EC_WORD_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechLose = {EC_WORD_AS_IF, EC_WORD_WHOM, EC_WORD_WILL, EC_WORD_SAYS, EC_WORD_IF_I_WIN, EC_WORD_ELLIPSIS},
                             .speechAfter = {EC_WORD_AGREE, EC_WORD_IS_IT_QUES, EC_WORD_COOLNESS, EC_WORD_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                        #else //ENGLISH
+                            .name = _("ENRIQUE"),
+                            .facilityClass = FACILITY_CLASS_RICH_BOY,
+                            .speechBefore = {EC_WORD_GET, EC_WORD_READY, EC_WORD_FOR, EC_WORD_AN, EC_WORD_AWESOME, EC_WORD_TIME},
+                            .speechWin = {EC_WORD_HEY, EC_WORD_HEY, EC_WORD_EXCL, EC_WORD_WHAT_S_UP_QUES, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                            .speechLose = {EC_WORD_AWW, EC_WORD_COULDN_T, EC_WORD_YOU, EC_WORD_LET_ME_WIN, EC_WORD_QUES, EC_EMPTY_WORD},
+                            .speechAfter = {EC_WORD_DID, EC_WORD_YOU, EC_WORD_SEE, EC_WORD_MY, EC_WORD_SKILL, EC_WORD_QUES},
                         #endif
                             .mons =
                                 {
@@ -2633,14 +2633,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                         },
                     [1] =
                         {
-                        #if ENGLISH
-                            .name = _("COLLEEN"),
-                            .facilityClass = FACILITY_CLASS_LADY,
-                            .speechBefore = {EC_WORD_I, EC_WORD_WOULD, EC_WORD_LIKE, EC_WORD_TO, EC_WORD_ROCK, EC_WORD_OUT},
-                            .speechWin = {EC_WORD_I, EC_WORD_LIKE, EC_WORD_THIS, EC_WORD_ROCK, EC_WORD_THING, EC_WORD_EXCL},
-                            .speechLose = {EC_WORD_GO_AHEAD, EC_WORD_AND, EC_WORD_CRUSH, EC_WORD_MY, EC_WORD_DREAM, EC_WORD_ELLIPSIS},
-                            .speechAfter = {EC_WORD_I, EC_WORD_WANT, EC_WORD_TO, EC_WORD_GO, EC_WORD_WILD, EC_WORD_SOMETIME},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("LUCETTE"),
                             .facilityClass = FACILITY_CLASS_LADY,
                             .speechBefore = {EC_WORD_LIKELY_TO, EC_WORD_BE, EC_WORD_SHREDDED, EC_WORD_EXCL_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD, },
@@ -2654,6 +2647,13 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                             .speechWin = {EC_WORD_IT, EC_WORD_ANIME, EC_WORD_WHOM, EC_WORD_PLAYED, EC_WORD_IF_I_WIN, EC_WORD_EXCL},
                             .speechLose = {EC_WORD_IS, EC_WORD_WEREN_T, EC_WORD_END, EC_WORD_NOT_VERY, EC_WORD_WITH, EC_WORD_DREAM},
                             .speechAfter = {EC_WORD_AS_IF, EC_WORD_IS_IT_QUES, EC_WORD_LOST, EC_WORD_IT, EC_WORD_ANIME, EC_WORD_EXCL},
+                        #else //ENGLISH
+                            .name = _("COLLEEN"),
+                            .facilityClass = FACILITY_CLASS_LADY,
+                            .speechBefore = {EC_WORD_I, EC_WORD_WOULD, EC_WORD_LIKE, EC_WORD_TO, EC_WORD_ROCK, EC_WORD_OUT},
+                            .speechWin = {EC_WORD_I, EC_WORD_LIKE, EC_WORD_THIS, EC_WORD_ROCK, EC_WORD_THING, EC_WORD_EXCL},
+                            .speechLose = {EC_WORD_GO_AHEAD, EC_WORD_AND, EC_WORD_CRUSH, EC_WORD_MY, EC_WORD_DREAM, EC_WORD_ELLIPSIS},
+                            .speechAfter = {EC_WORD_I, EC_WORD_WANT, EC_WORD_TO, EC_WORD_GO, EC_WORD_WILD, EC_WORD_SOMETIME},
                         #endif
                             .mons =
                                 {
@@ -2819,14 +2819,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                 {
                     [0] =
                         {
-                        #if ENGLISH
-                            .name = _("KIMBERLY"),
-                            .facilityClass = FACILITY_CLASS_POKEFAN_F,
-                            .speechBefore = {EC_WORD_I, EC_WORD_LIKE, EC_WORD_WORKING, EC_WORD_AT, EC_WORD_MY, EC_WORD_OWN_TEMPO},
-                            .speechWin = {EC_WORD_I_AM, EC_WORD_NOT, EC_WORD_BAD, EC_WORD_YOU, EC_WORD_THINK, EC_WORD_QUES},
-                            .speechLose = {EC_WORD_YOU_RE, EC_WORD_A, EC_WORD_MEAN, EC_WORD_KID, EC_WORD_IT, EC_WORD_SEEMS},
-                            .speechAfter = {EC_WORD_MY, EC_WORD_OWN_TEMPO, EC_WORD_IS, EC_WORD_RIGHT, EC_WORD_FOR, EC_WORD_ME},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("KIMBERLY"),
                             .facilityClass = FACILITY_CLASS_POKEFAN_F,
                             .speechBefore = {EC_WORD_LIKE, EC_WORD_WORKING, EC_WORD_NEARLY, EC_WORD_MY, EC_WORD_OWN_TEMPO, EC_WORD_EXCL, },
@@ -2840,6 +2833,13 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                             .speechWin = {EC_WORD_AS_IF, EC_WORD_ARE, EC_WORD_JUST, EC_WORD_THOSE_WERE, EC_WORD_NO, EC_WORD_QUES},
                             .speechLose = {EC_WORD_WILL_BE_HERE, EC_WORD_LOWS, EC_WORD_WANDERING, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_IT, EC_WORD_WITH, EC_WORD_WORK, EC_WORD_SOMETIME, EC_WORD_IS, EC_WORD_ENTERTAINING},
+                        #else //ENGLISH
+                            .name = _("KIMBERLY"),
+                            .facilityClass = FACILITY_CLASS_POKEFAN_F,
+                            .speechBefore = {EC_WORD_I, EC_WORD_LIKE, EC_WORD_WORKING, EC_WORD_AT, EC_WORD_MY, EC_WORD_OWN_TEMPO},
+                            .speechWin = {EC_WORD_I_AM, EC_WORD_NOT, EC_WORD_BAD, EC_WORD_YOU, EC_WORD_THINK, EC_WORD_QUES},
+                            .speechLose = {EC_WORD_YOU_RE, EC_WORD_A, EC_WORD_MEAN, EC_WORD_KID, EC_WORD_IT, EC_WORD_SEEMS},
+                            .speechAfter = {EC_WORD_MY, EC_WORD_OWN_TEMPO, EC_WORD_IS, EC_WORD_RIGHT, EC_WORD_FOR, EC_WORD_ME},
                         #endif
                             .mons =
                                 {
@@ -2982,14 +2982,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                         },
                     [1] =
                         {
-                        #if ENGLISH
-                            .name = _("FRANCISCO"),
-                            .facilityClass = FACILITY_CLASS_POKEFAN_M,
-                            .speechBefore = {EC_WORD_I, EC_WORD_STUDY, EC_WORD_EVERY, EC_WORD_DAY, EC_WORD_TOO, EC_EMPTY_WORD},
-                            .speechWin = {EC_WORD_SO, EC_WORD_THAT_S, EC_WORD_HOW, EC_WORD_YOU, EC_WORD_LOSE, EC_EMPTY_WORD},
-                            .speechLose = {EC_WORD_NO, EC_WORD_WONDER, EC_WORD_I, EC_WORD_COULDN_T, EC_WORD_BEAT, EC_WORD_YOU},
-                            .speechAfter = {EC_WORD_YES, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_WORD_THANK_YOU, EC_EMPTY_WORD, EC_EMPTY_WORD},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("FRANCISCO"),
                             .facilityClass = FACILITY_CLASS_POKEFAN_M,
                             .speechBefore = {EC_WORD_STUDY, EC_WORD_ELLIPSIS, EC_WORD_ANOTHER, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD, },
@@ -3003,6 +2996,13 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                             .speechWin = {EC_WORD_NITWIT, EC_WORD_ON, EC_WORD_WIN, EC_WORD_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechLose = {EC_WORD_THE, EC_WORD_AS_IF, EC_WORD_WHICH, EC_WORD_PLEASE, EC_WORD_TAKE_THAT, EC_WORD_EXCL},
                             .speechAfter = {EC_WORD_YES, EC_WORD_ELLIPSIS, EC_WORD_THANKS, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                        #else //ENGLISH
+                            .name = _("FRANCISCO"),
+                            .facilityClass = FACILITY_CLASS_POKEFAN_M,
+                            .speechBefore = {EC_WORD_I, EC_WORD_STUDY, EC_WORD_EVERY, EC_WORD_DAY, EC_WORD_TOO, EC_EMPTY_WORD},
+                            .speechWin = {EC_WORD_SO, EC_WORD_THAT_S, EC_WORD_HOW, EC_WORD_YOU, EC_WORD_LOSE, EC_EMPTY_WORD},
+                            .speechLose = {EC_WORD_NO, EC_WORD_WONDER, EC_WORD_I, EC_WORD_COULDN_T, EC_WORD_BEAT, EC_WORD_YOU},
+                            .speechAfter = {EC_WORD_YES, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_WORD_THANK_YOU, EC_EMPTY_WORD, EC_EMPTY_WORD},
                         #endif
                             .mons =
                                 {
@@ -3171,14 +3171,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                 {
                     [0] =
                         {
-                        #if ENGLISH
-                            .name = _("MEREDITH"),
-                            .facilityClass = FACILITY_CLASS_PKMN_RANGER_F,
-                            .speechBefore = {EC_WORD_UM, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_WORD_I, EC_WORD_ELLIPSIS, EC_EMPTY_WORD},
-                            .speechWin = {EC_WORD_OH, EC_WORD_EXCL, EC_EMPTY_WORD, EC_WORD_UM, EC_WORD_ELLIPSIS, EC_WORD_YAY},
-                            .speechLose = {EC_WORD_UM, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_WORD_WAAAH, EC_WORD_ELLIPSIS, EC_EMPTY_WORD},
-                            .speechAfter = {EC_WORD_UM, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_WORD_I_AM, EC_WORD_SAD, EC_WORD_ELLIPSIS},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("MEREDITH"),
                             .facilityClass = FACILITY_CLASS_PKMN_RANGER_F,
                             .speechBefore = {EC_WORD_HMM, EC_WORD_ELLIPSIS, EC_WORD_I, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD, },
@@ -3192,6 +3185,13 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                             .speechWin = {EC_WORD_YES, EC_WORD_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechLose = {EC_WORD_NO, EC_WORD_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_SAD, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                        #else //ENGLISH
+                            .name = _("MEREDITH"),
+                            .facilityClass = FACILITY_CLASS_PKMN_RANGER_F,
+                            .speechBefore = {EC_WORD_UM, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_WORD_I, EC_WORD_ELLIPSIS, EC_EMPTY_WORD},
+                            .speechWin = {EC_WORD_OH, EC_WORD_EXCL, EC_EMPTY_WORD, EC_WORD_UM, EC_WORD_ELLIPSIS, EC_WORD_YAY},
+                            .speechLose = {EC_WORD_UM, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_WORD_WAAAH, EC_WORD_ELLIPSIS, EC_EMPTY_WORD},
+                            .speechAfter = {EC_WORD_UM, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_WORD_I_AM, EC_WORD_SAD, EC_WORD_ELLIPSIS},
                         #endif
                             .mons =
                                 {
@@ -3333,14 +3333,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                         },
                     [1] =
                         {
-                        #if ENGLISH
-                            .name = _("BERNARD"),
-                            .facilityClass = FACILITY_CLASS_KINDLER,
-                            .speechBefore = {EC_WORD_I, EC_WORD_CAN_T, EC_WORD_LOSE, EC_WORD_THIS, EC_WORD_HOT, EC_WORD_BATTLE},
-                            .speechWin = {EC_WORD_DID, EC_WORD_I, EC_WORD_COOL, EC_WORD_YOU, EC_WORD_DOWN, EC_WORD_QUES},
-                            .speechLose = {EC_WORD_AIYEEH, EC_WORD_EXCL, EC_WORD_YOU_RE, EC_WORD_A, EC_WORD_TERRIBLE, EC_WORD_PERSON},
-                            .speechAfter = {EC_WORD_YOUR, EC_WORD_HEART, EC_WORD_MUST_BE, EC_WORD_ICE, EC_WORD_COLD, EC_WORD_ELLIPSIS},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("YVAN"),
                             .facilityClass = FACILITY_CLASS_KINDLER,
                             .speechBefore = {EC_WORD_FOR_NOW, EC_WORD_EXCL, EC_WORD_WILL, EC_WORD_WIN, EC_EMPTY_WORD, EC_EMPTY_WORD, },
@@ -3354,6 +3347,13 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                             .speechWin = {EC_WORD_AS_IF, EC_WORD_IS_IT_QUES, EC_WORD_LOST, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechLose = {EC_WORD_MISS, EC_WORD_PERSON, EC_WORD_WANDERING, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_OVERDO, EC_WORD_MEETS, EC_WORD_IT, EC_WORD_DISAPPOINTED, EC_WORD_LISTEN, EC_WORD_STEEL},
+                        #else //ENGLISH
+                            .name = _("BERNARD"),
+                            .facilityClass = FACILITY_CLASS_KINDLER,
+                            .speechBefore = {EC_WORD_I, EC_WORD_CAN_T, EC_WORD_LOSE, EC_WORD_THIS, EC_WORD_HOT, EC_WORD_BATTLE},
+                            .speechWin = {EC_WORD_DID, EC_WORD_I, EC_WORD_COOL, EC_WORD_YOU, EC_WORD_DOWN, EC_WORD_QUES},
+                            .speechLose = {EC_WORD_AIYEEH, EC_WORD_EXCL, EC_WORD_YOU_RE, EC_WORD_A, EC_WORD_TERRIBLE, EC_WORD_PERSON},
+                            .speechAfter = {EC_WORD_YOUR, EC_WORD_HEART, EC_WORD_MUST_BE, EC_WORD_ICE, EC_WORD_COLD, EC_WORD_ELLIPSIS},
                         #endif
                             .mons =
                                 {
@@ -3511,14 +3511,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                 {
                     [0] =
                         {
-                        #if ENGLISH
-                            .name = _("ABRAHAM"),
-                            .facilityClass = FACILITY_CLASS_RUIN_MANIAC,
-                            .speechBefore = {EC_WORD_I, EC_WORD_LIKE, EC_WORD_THIS, EC_WORD_POKEMON, EC_WORD_THE, EC_WORD_BEST},
-                            .speechWin = {EC_WORD_WHAT, EC_WORD_A, EC_WORD_GREAT, EC_WORD_POKEMON, EC_WORD_IT, EC_WORD_IS},
-                            .speechLose = {EC_WORD_I, EC_WORD_CONFUSED, EC_WORD_A, EC_WORD_MOVE, EC_WORD_WITH, EC_WORD_ANOTHER},
-                            .speechAfter = {EC_WORD_I, EC_WORD_WANT, EC_WORD_A, EC_MOVE(SKETCH), EC_WORD_OF, EC_WORD_YOU},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("ABRAHAM"),
                             .facilityClass = FACILITY_CLASS_RUIN_MANIAC,
                             .speechBefore = {EC_WORD_ADORE, EC_WORD_CASE, EC_WORD_POKEMON, EC_WORD_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD, },
@@ -3532,6 +3525,13 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                             .speechWin = {EC_WORD_IS_IT_QUES, EC_WORD_LOWS, EC_WORD_A, EC_WORD_THIN, EC_WORD_POKEMON, EC_WORD_EXCL},
                             .speechLose = {EC_WORD_IS_IT_QUES, EC_WORD_SAYS, EC_MOVE2(CONFUSION), EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_IS_IT_QUES, EC_WORD_TO, EC_WORD_MOVE, EC_WORD_VERY, EC_WORD_ENTERTAINING, EC_WORD_ELLIPSIS},
+                        #else //ENGLISH
+                            .name = _("ABRAHAM"),
+                            .facilityClass = FACILITY_CLASS_RUIN_MANIAC,
+                            .speechBefore = {EC_WORD_I, EC_WORD_LIKE, EC_WORD_THIS, EC_WORD_POKEMON, EC_WORD_THE, EC_WORD_BEST},
+                            .speechWin = {EC_WORD_WHAT, EC_WORD_A, EC_WORD_GREAT, EC_WORD_POKEMON, EC_WORD_IT, EC_WORD_IS},
+                            .speechLose = {EC_WORD_I, EC_WORD_CONFUSED, EC_WORD_A, EC_WORD_MOVE, EC_WORD_WITH, EC_WORD_ANOTHER},
+                            .speechAfter = {EC_WORD_I, EC_WORD_WANT, EC_WORD_A, EC_MOVE(SKETCH), EC_WORD_OF, EC_WORD_YOU},
                         #endif
                             .mons =
                                 {
@@ -3683,14 +3683,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                         },
                     [1] =
                         {
-                        #if ENGLISH
-                            .name = _("LUC"),
-                            .facilityClass = FACILITY_CLASS_TUBER_M,
-                            .speechBefore = {EC_WORD_I, EC_WORD_HAVE, EC_WORD_A, EC_WORD_COOL, EC_WORD_RARE, EC_WORD_MOVE},
-                            .speechWin = {EC_WORD_MY, EC_WORD_RARE, EC_WORD_MOVE, EC_WORD_IS, EC_WORD_COOL, EC_WORD_ISN_T_IT_QUES},
-                            .speechLose = {EC_WORD_DIDN_T, EC_WORD_YOU, EC_WORD_SEE, EC_WORD_MY, EC_WORD_MOVE, EC_WORD_QUES},
-                            .speechAfter = {EC_WORD_I_AM, EC_WORD_SMART, EC_WORD_BUT, EC_WORD_ALSO, EC_WORD_WEAK, EC_WORD_ELLIPSIS},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("LEOPOLD"),
                             .facilityClass = FACILITY_CLASS_TUBER_M,
                             .speechBefore = {EC_WORD_DAUGHTER, EC_WORD_MOVE, EC_WORD_IS, EC_WORD_RARE, EC_WORD_AND, EC_WORD_COOL, },
@@ -3704,6 +3697,13 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                             .speechWin = {EC_WORD_NO, EC_WORD_ELLIPSIS, EC_WORD_AS_IF, EC_WORD_IS, EC_WORD_ENTERTAINING, EC_WORD_ELLIPSIS},
                             .speechLose = {EC_WORD_WEREN_T, EC_WORD_BETTER, EC_WORD_MOVE, EC_WORD_IS, EC_WORD_WEAK, EC_WORD_WEAK},
                             .speechAfter = {EC_WORD_ARE, EC_WORD_SMART, EC_WORD_BUT, EC_WORD_AS_IF, EC_WORD_STRONG, EC_WORD_ELLIPSIS},
+                        #else //ENGLISH
+                            .name = _("LUC"),
+                            .facilityClass = FACILITY_CLASS_TUBER_M,
+                            .speechBefore = {EC_WORD_I, EC_WORD_HAVE, EC_WORD_A, EC_WORD_COOL, EC_WORD_RARE, EC_WORD_MOVE},
+                            .speechWin = {EC_WORD_MY, EC_WORD_RARE, EC_WORD_MOVE, EC_WORD_IS, EC_WORD_COOL, EC_WORD_ISN_T_IT_QUES},
+                            .speechLose = {EC_WORD_DIDN_T, EC_WORD_YOU, EC_WORD_SEE, EC_WORD_MY, EC_WORD_MOVE, EC_WORD_QUES},
+                            .speechAfter = {EC_WORD_I_AM, EC_WORD_SMART, EC_WORD_BUT, EC_WORD_ALSO, EC_WORD_WEAK, EC_WORD_ELLIPSIS},
                         #endif
                             .mons =
                                 {
@@ -3869,14 +3869,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                 {
                     [0] =
                         {
-                        #if ENGLISH
-                            .name = _("BREYDEN"),
-                            .facilityClass = FACILITY_CLASS_YOUNGSTER,
-                            .speechBefore = {EC_WORD_I, EC_WORD_CARE, EC_WORD_FOR, EC_WORD_MY, EC_WORD_POKEMON, EC_WORD_A_LOT},
-                            .speechWin = {EC_WORD_MY, EC_WORD_POKEMON, EC_WORD_CAN, EC_WORD_DO, EC_WORD_IT, EC_WORD_ALL},
-                            .speechLose = {EC_WORD_IT_S, EC_WORD_NOT, EC_WORD_LIKE, EC_WORD_WE, EC_WORD_ALWAYS, EC_WORD_WIN},
-                            .speechAfter = {EC_WORD_I, EC_WORD_LIKE, EC_WORD_THE, EC_WORD_BEGINNING, EC_WORD_POKEMON, EC_WORD_BEST},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("AUGUSTIN"),
                             .facilityClass = FACILITY_CLASS_YOUNGSTER,
                             .speechBefore = {EC_WORD_I_VE, EC_WORD_TRUST, EC_WORD_IN, EC_WORD_WHO_IS, EC_WORD_POKEMON, EC_WORD_EXCL, },
@@ -3890,6 +3883,13 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                             .speechWin = {EC_WORD_SORRY, EC_WORD_NITWIT, EC_WORD_ALL, EC_WORD_DID, EC_WORD_POKEMON, EC_WORD_ELLIPSIS},
                             .speechLose = {EC_WORD_AS_IF, EC_WORD_ALWAYS, EC_WORD_LEGEND, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_IS_IT_QUES, EC_WORD_GOTCHA, EC_WORD_A, EC_WORD_EGG, EC_WORD_LISTEN, EC_WORD_POKEMON},
+                        #else //ENGLISH
+                            .name = _("BREYDEN"),
+                            .facilityClass = FACILITY_CLASS_YOUNGSTER,
+                            .speechBefore = {EC_WORD_I, EC_WORD_CARE, EC_WORD_FOR, EC_WORD_MY, EC_WORD_POKEMON, EC_WORD_A_LOT},
+                            .speechWin = {EC_WORD_MY, EC_WORD_POKEMON, EC_WORD_CAN, EC_WORD_DO, EC_WORD_IT, EC_WORD_ALL},
+                            .speechLose = {EC_WORD_IT_S, EC_WORD_NOT, EC_WORD_LIKE, EC_WORD_WE, EC_WORD_ALWAYS, EC_WORD_WIN},
+                            .speechAfter = {EC_WORD_I, EC_WORD_LIKE, EC_WORD_THE, EC_WORD_BEGINNING, EC_WORD_POKEMON, EC_WORD_BEST},
                         #endif
                             .mons =
                                 {
@@ -4040,14 +4040,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                         },
                     [1] =
                         {
-                        #if ENGLISH
-                            .name = _("ANIYA"),
-                            .facilityClass = FACILITY_CLASS_TUBER_F,
-                            .speechBefore = {EC_WORD_SOMEONE, EC_WORD_GOT, EC_WORD_ME, EC_WORD_A_LITTLE, EC_WORD_POKEMON, EC_WORD_EGG},
-                            .speechWin = {EC_WORD_I_AM, EC_WORD_NOT, EC_WORD_NEW, EC_WORD_AT, EC_WORD_THIS, EC_WORD_EXCL},
-                            .speechLose = {EC_WORD_OH, EC_WORD_BUT, EC_WORD_ELLIPSIS, EC_WORD_WHY, EC_WORD_WHY, EC_WORD_QUES_EXCL},
-                            .speechAfter = {EC_WORD_YOU_RE, EC_WORD_BUSY, EC_WORD_QUES, EC_WORD_DON_T, EC_WORD_GIVE_UP, EC_WORD_EXCL},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("ANIYA"),
                             .facilityClass = FACILITY_CLASS_TUBER_F,
                             .speechBefore = {EC_WORD_I_VE, EC_WORD_RECEIVED, EC_WORD_A, EC_WORD_EGG, EC_WORD_OF, EC_WORD_POKEMON, },
@@ -4061,6 +4054,13 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                             .speechWin = {EC_WORD_IS_IT_QUES, EC_WORD_AWFULLY, EC_WORD_WON, EC_WORD_OLDEN, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechLose = {EC_WORD_HIT, EC_WORD_QUES_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_WILL, EC_WORD_VERY, EC_WORD_WORK, EC_WORD_QUES, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                        #else //ENGLISH
+                            .name = _("ANIYA"),
+                            .facilityClass = FACILITY_CLASS_TUBER_F,
+                            .speechBefore = {EC_WORD_SOMEONE, EC_WORD_GOT, EC_WORD_ME, EC_WORD_A_LITTLE, EC_WORD_POKEMON, EC_WORD_EGG},
+                            .speechWin = {EC_WORD_I_AM, EC_WORD_NOT, EC_WORD_NEW, EC_WORD_AT, EC_WORD_THIS, EC_WORD_EXCL},
+                            .speechLose = {EC_WORD_OH, EC_WORD_BUT, EC_WORD_ELLIPSIS, EC_WORD_WHY, EC_WORD_WHY, EC_WORD_QUES_EXCL},
+                            .speechAfter = {EC_WORD_YOU_RE, EC_WORD_BUSY, EC_WORD_QUES, EC_WORD_DON_T, EC_WORD_GIVE_UP, EC_WORD_EXCL},
                         #endif
                             .mons =
                                 {
@@ -4215,14 +4215,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                 {
                     [0] =
                         {
-                        #if ENGLISH
-                            .name = _("DANE"),
-                            .facilityClass = FACILITY_CLASS_BIRD_KEEPER,
-                            .speechBefore = {EC_WORD_I, EC_WORD_GOT, EC_WORD_MY, EC_WORD_POKEMON, EC_WORD_ON, EC_WORD_VACATION},
-                            .speechWin = {EC_WORD_IT_S, EC_WORD_GREAT, EC_WORD_TO, EC_WORD_TRAVEL, EC_WORD_AND, EC_WORD_BATTLE},
-                            .speechLose = {EC_WORD_WAAAH, EC_WORD_EXCL, EC_WORD_MY, EC_WORD_RARE, EC_WORD_POKEMON, EC_WORD_EXCL},
-                            .speechAfter = {EC_WORD_OFF, EC_WORD_ON, EC_WORD_ANOTHER, EC_WORD_VACATION, EC_WORD_I, EC_WORD_GO},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("ADAM"),
                             .facilityClass = FACILITY_CLASS_BIRD_KEEPER,
                             .speechBefore = {EC_WORD_WHO_IS, EC_WORD_POKEMON, EC_WORD_ARE, EC_WORD_IN, EC_WORD_HOLIDAY, EC_WORD_EXCL, },
@@ -4236,6 +4229,13 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                             .speechWin = {EC_WORD_MISS, EC_WORD_BEAUTIFUL, EC_WORD_TRAVEL, EC_WORD_AND, EC_WORD_HEARING, EC_WORD_ELLIPSIS},
                             .speechLose = {EC_WORD_ALL, EC_WORD_TOO, EC_WORD_POKEMON, EC_WORD_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_DREAM, EC_WORD_ABOUT, EC_WORD_VACATION, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                        #else //ENGLISH
+                            .name = _("DANE"),
+                            .facilityClass = FACILITY_CLASS_BIRD_KEEPER,
+                            .speechBefore = {EC_WORD_I, EC_WORD_GOT, EC_WORD_MY, EC_WORD_POKEMON, EC_WORD_ON, EC_WORD_VACATION},
+                            .speechWin = {EC_WORD_IT_S, EC_WORD_GREAT, EC_WORD_TO, EC_WORD_TRAVEL, EC_WORD_AND, EC_WORD_BATTLE},
+                            .speechLose = {EC_WORD_WAAAH, EC_WORD_EXCL, EC_WORD_MY, EC_WORD_RARE, EC_WORD_POKEMON, EC_WORD_EXCL},
+                            .speechAfter = {EC_WORD_OFF, EC_WORD_ON, EC_WORD_ANOTHER, EC_WORD_VACATION, EC_WORD_I, EC_WORD_GO},
                         #endif
                             .mons =
                                 {
@@ -4378,14 +4378,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                         },
                     [1] =
                         {
-                        #if ENGLISH
-                            .name = _("STEPHANIE"),
-                            .facilityClass = FACILITY_CLASS_SWIMMING_TRIATHLETE_F,
-                            .speechBefore = {EC_WORD_THIS, EC_WORD_IS, EC_WORD_HOW, EC_WORD_YOU, EC_WORD_WIN, EC_WORD_EXCL},
-                            .speechWin = {EC_WORD_DO, EC_WORD_YOU, EC_WORD_UNDERSTAND, EC_WORD_HOW, EC_WORD_NOW, EC_WORD_QUES},
-                            .speechLose = {EC_WORD_YES, EC_WORD_THAT_S, EC_WORD_HOW, EC_WORD_YOU, EC_WORD_DO, EC_WORD_IT},
-                            .speechAfter = {EC_WORD_YOU, EC_WORD_BEAT, EC_WORD_ME, EC_WORD_GOOD, EC_WORD_FOR, EC_WORD_YOU},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("STEPHANIE"),
                             .facilityClass = FACILITY_CLASS_SWIMMING_TRIATHLETE_F,
                             .speechBefore = {EC_WORD_I, EC_WORD_THINKS, EC_WORD_WIN, EC_WORD_WITH, EC_WORD_GOING, EC_WORD_EXCL, },
@@ -4399,6 +4392,13 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                             .speechWin = {EC_WORD_NOW, EC_WORD_WORKS, EC_WORD_HOW, EC_WORD_WIN, EC_WORD_ISN_T_IT_QUES, EC_WORD_ELLIPSIS},
                             .speechLose = {EC_WORD_NOW, EC_WORD_WORKS, EC_WORD_HOW, EC_WORD_SPIRIT, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_WILL, EC_WORD_WON, EC_WORD_WILL_BE_HERE, EC_WORD_HAPPY, EC_WORD_NOW, EC_WORD_QUES},
+                        #else //ENGLISH
+                            .name = _("STEPHANIE"),
+                            .facilityClass = FACILITY_CLASS_SWIMMING_TRIATHLETE_F,
+                            .speechBefore = {EC_WORD_THIS, EC_WORD_IS, EC_WORD_HOW, EC_WORD_YOU, EC_WORD_WIN, EC_WORD_EXCL},
+                            .speechWin = {EC_WORD_DO, EC_WORD_YOU, EC_WORD_UNDERSTAND, EC_WORD_HOW, EC_WORD_NOW, EC_WORD_QUES},
+                            .speechLose = {EC_WORD_YES, EC_WORD_THAT_S, EC_WORD_HOW, EC_WORD_YOU, EC_WORD_DO, EC_WORD_IT},
+                            .speechAfter = {EC_WORD_YOU, EC_WORD_BEAT, EC_WORD_ME, EC_WORD_GOOD, EC_WORD_FOR, EC_WORD_YOU},
                         #endif
                             .mons =
                                 {
@@ -4562,14 +4562,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                 {
                     [0] =
                         {
-                        #if ENGLISH
-                            .name = _("ALFRED"),
-                            .facilityClass = FACILITY_CLASS_COOLTRAINER_M,
-                            .speechBefore = {EC_WORD_WE, EC_WORD_CAN, EC_WORD_TAKE, EC_WORD_ON, EC_WORD_ANY, EC_WORD_TYPE},
-                            .speechWin = {EC_WORD_WE, EC_WORD_DID, EC_WORD_BETTER, EC_WORD_THAN, EC_WORD_OKAY, EC_WORD_EXCL},
-                            .speechLose = {EC_WORD_OUR, EC_WORD_STRATEGY, EC_WORD_ISN_T, EC_WORD_ANY, EC_WORD_GOOD, EC_WORD_ELLIPSIS},
-                            .speechAfter = {EC_WORD_WE, EC_WORD_NEED, EC_WORD_TO, EC_WORD_TRAIN, EC_WORD_A_LOT, EC_WORD_MORE},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("ALBAN"),
                             .facilityClass = FACILITY_CLASS_COOLTRAINER_M,
                             .speechBefore = {EC_WORD_I_AM, EC_WORD_LIE, EC_WORD_CAPABLE, EC_WORD_OF, EC_WORD_SIBLINGS, EC_WORD_WHEN_I_WIN, },
@@ -4583,6 +4576,13 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                             .speechWin = {EC_WORD_OR, EC_WORD_PERFECT, EC_WORD_OKAY, EC_WORD_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechLose = {EC_WORD_WEREN_T, EC_WORD_AT, EC_WORD_STRATEGY, EC_WORD_AS_IF, EC_WORD_IS, EC_WORD_OKAY},
                             .speechAfter = {EC_WORD_WHOM, EC_WORD_OK_QUES, EC_WORD_COME, EC_WORD_PLUS, EC_WORD_WORK, EC_WORD_ELLIPSIS},
+                        #else //ENGLISH
+                            .name = _("ALFRED"),
+                            .facilityClass = FACILITY_CLASS_COOLTRAINER_M,
+                            .speechBefore = {EC_WORD_WE, EC_WORD_CAN, EC_WORD_TAKE, EC_WORD_ON, EC_WORD_ANY, EC_WORD_TYPE},
+                            .speechWin = {EC_WORD_WE, EC_WORD_DID, EC_WORD_BETTER, EC_WORD_THAN, EC_WORD_OKAY, EC_WORD_EXCL},
+                            .speechLose = {EC_WORD_OUR, EC_WORD_STRATEGY, EC_WORD_ISN_T, EC_WORD_ANY, EC_WORD_GOOD, EC_WORD_ELLIPSIS},
+                            .speechAfter = {EC_WORD_WE, EC_WORD_NEED, EC_WORD_TO, EC_WORD_TRAIN, EC_WORD_A_LOT, EC_WORD_MORE},
                         #endif
                             .mons =
                                 {
@@ -4730,14 +4730,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                         },
                     [1] =
                         {
-                        #if ENGLISH
-                            .name = _("EDIE"),
-                            .facilityClass = FACILITY_CLASS_PSYCHIC_F,
-                            .speechBefore = {EC_WORD_WE, EC_WORD_WILL_BE_HERE, EC_WORD_FOR, EC_WORD_ANY, EC_WORD_TRAINER, EC_WORD_CHALLENGE},
-                            .speechWin = {EC_WORD_MY, EC_WORD_STRATEGY, EC_WORD_WORKS, EC_WORD_TO, EC_WORD_PERFECTION, EC_WORD_EXCL},
-                            .speechLose = {EC_WORD_NO, EC_WORD_NO, EC_WORD_ELLIPSIS, EC_WORD_THAT, EC_WORD_WON_T, EC_WORD_DO},
-                            .speechAfter = {EC_WORD_THERE, EC_WORD_SHOULD, EC_WORD_BE, EC_WORD_A, EC_WORD_TRAINER, EC_WORD_SCHOOL},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("SARRAH"),
                             .facilityClass = FACILITY_CLASS_PSYCHIC_F,
                             .speechBefore = {EC_WORD_I_AM, EC_WORD_FEELING, EC_WORD_FOR, EC_WORD_ACCEPT, EC_WORD_A, EC_WORD_CHALLENGE, },
@@ -4751,6 +4744,13 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                             .speechWin = {EC_WORD_WEREN_T, EC_WORD_BETTER, EC_WORD_STRATEGY, EC_WORD_IS, EC_WORD_FROM, EC_WORD_FEAR},
                             .speechLose = {EC_WORD_NO, EC_WORD_ELLIPSIS, EC_WORD_AS_IF, EC_WORD_LEARN, EC_WORD_IF_I_WIN, EC_WORD_ELLIPSIS},
                             .speechAfter = {EC_WORD_TRAINS, EC_WORD_TO, EC_WORD_SCHOOL, EC_WORD_FROM, EC_WORD_TRAINER, EC_WORD_ELLIPSIS},
+                        #else //ENGLISH
+                            .name = _("EDIE"),
+                            .facilityClass = FACILITY_CLASS_PSYCHIC_F,
+                            .speechBefore = {EC_WORD_WE, EC_WORD_WILL_BE_HERE, EC_WORD_FOR, EC_WORD_ANY, EC_WORD_TRAINER, EC_WORD_CHALLENGE},
+                            .speechWin = {EC_WORD_MY, EC_WORD_STRATEGY, EC_WORD_WORKS, EC_WORD_TO, EC_WORD_PERFECTION, EC_WORD_EXCL},
+                            .speechLose = {EC_WORD_NO, EC_WORD_NO, EC_WORD_ELLIPSIS, EC_WORD_THAT, EC_WORD_WON_T, EC_WORD_DO},
+                            .speechAfter = {EC_WORD_THERE, EC_WORD_SHOULD, EC_WORD_BE, EC_WORD_A, EC_WORD_TRAINER, EC_WORD_SCHOOL},
                         #endif
                             .mons =
                                 {
@@ -4909,14 +4909,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                 {
                     [0] =
                         {
-                        #if ENGLISH
-                            .name = _("RODERICK"),
-                            .facilityClass = FACILITY_CLASS_COOLTRAINER_M,
-                            .speechBefore = {EC_WORD_I, EC_WORD_CAN, EC_WORD_WIN, EC_WORD_WITHOUT, EC_WORD_A, EC_MOVE2(HELPING_HAND)},
-                            .speechWin = {EC_WORD_IT_S, EC_WORD_ONLY, EC_WORD_NATURAL, EC_WORD_THAT, EC_WORD_I, EC_WORD_WIN},
-                            .speechLose = {EC_WORD_LOSING, EC_WORD_HAS, EC_WORD_ME, EC_WORD_FEELING, EC_WORD_SMALL, EC_WORD_ELLIPSIS},
-                            .speechAfter = {EC_WORD_YOU, EC_WORD_HAVE, EC_WORD_A, EC_WORD_GOOD, EC_WORD_TEACHER, EC_WORD_QUES},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("ALISTAIR"),
                             .facilityClass = FACILITY_CLASS_COOLTRAINER_M,
                             .speechBefore = {EC_WORD_CAN, EC_WORD_WIN, EC_WORD_WITHOUT, EC_EMPTY_WORD, EC_MOVE2(HELPING_HAND), EC_WORD_EXCL, },
@@ -4930,6 +4923,13 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                             .speechWin = {EC_WORD_NITWIT, EC_WORD_DON_T, EC_WORD_WEREN_T, EC_WORD_VICTORY, EC_WORD_IS, EC_WORD_NATURAL},
                             .speechLose = {EC_WORD_AS_IF, EC_WORD_WHOM, EC_WORD_LIKES, EC_WORD_IF_I_LOSE, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_HOW, EC_WORD_IS, EC_WORD_IT, EC_WORD_EVER, EC_WORD_TEACHER, EC_WORD_QUES},
+                        #else //ENGLISH
+                            .name = _("RODERICK"),
+                            .facilityClass = FACILITY_CLASS_COOLTRAINER_M,
+                            .speechBefore = {EC_WORD_I, EC_WORD_CAN, EC_WORD_WIN, EC_WORD_WITHOUT, EC_WORD_A, EC_MOVE2(HELPING_HAND)},
+                            .speechWin = {EC_WORD_IT_S, EC_WORD_ONLY, EC_WORD_NATURAL, EC_WORD_THAT, EC_WORD_I, EC_WORD_WIN},
+                            .speechLose = {EC_WORD_LOSING, EC_WORD_HAS, EC_WORD_ME, EC_WORD_FEELING, EC_WORD_SMALL, EC_WORD_ELLIPSIS},
+                            .speechAfter = {EC_WORD_YOU, EC_WORD_HAVE, EC_WORD_A, EC_WORD_GOOD, EC_WORD_TEACHER, EC_WORD_QUES},
                         #endif
                             .mons =
                                 {
@@ -5077,14 +5077,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                         },
                     [1] =
                         {
-                        #if ENGLISH
-                            .name = _("ALICIA"),
-                            .facilityClass = FACILITY_CLASS_COOLTRAINER_F,
-                            .speechBefore = {EC_WORD_I, EC_WORD_DON_T, EC_WORD_NEED, EC_WORD_A, EC_MOVE2(HELPING_HAND), EC_WORD_EXCL},
-                            .speechWin = {EC_WORD_SORRY, EC_WORD_EXCL, EC_WORD_TOO, EC_WORD_BAD, EC_WORD_FOR, EC_WORD_YOU},
-                            .speechLose = {EC_WORD_WHAT, EC_WORD_AN, EC_WORD_UNBELIEVABLE, EC_MOVE2(STRUGGLE), EC_WORD_THAT_WAS, EC_WORD_EXCL},
-                            .speechAfter = {EC_WORD_I, EC_WORD_CAN, EC_WORD_BE, EC_WORD_YOUR, EC_WORD_POKEMON, EC_WORD_TEACHER},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("ISABELLE"),
                             .facilityClass = FACILITY_CLASS_COOLTRAINER_F,
                             .speechBefore = {EC_WORD_SOMEONE, EC_WORD_ON, EC_WORD_NOT, EC_WORD_OF, EC_MOVE2(HELPING_HAND), EC_WORD_EXCL, },
@@ -5098,6 +5091,13 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                             .speechWin = {EC_WORD_SIMPLE, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechLose = {EC_WORD_INCREDIBLE, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_PLEASE, EC_WORD_CONCEDE, EC_WORD_WEREN_T, EC_WORD_SINCE, EC_WORD_TEACHER, EC_WORD_POKEMON},
+                        #else //ENGLISH
+                            .name = _("ALICIA"),
+                            .facilityClass = FACILITY_CLASS_COOLTRAINER_F,
+                            .speechBefore = {EC_WORD_I, EC_WORD_DON_T, EC_WORD_NEED, EC_WORD_A, EC_MOVE2(HELPING_HAND), EC_WORD_EXCL},
+                            .speechWin = {EC_WORD_SORRY, EC_WORD_EXCL, EC_WORD_TOO, EC_WORD_BAD, EC_WORD_FOR, EC_WORD_YOU},
+                            .speechLose = {EC_WORD_WHAT, EC_WORD_AN, EC_WORD_UNBELIEVABLE, EC_MOVE2(STRUGGLE), EC_WORD_THAT_WAS, EC_WORD_EXCL},
+                            .speechAfter = {EC_WORD_I, EC_WORD_CAN, EC_WORD_BE, EC_WORD_YOUR, EC_WORD_POKEMON, EC_WORD_TEACHER},
                         #endif
                             .mons =
                                 {
@@ -5260,14 +5260,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                 {
                     [0] =
                         {
-                        #if ENGLISH
-                            .name = _("TERRENCE"),
-                            .facilityClass = FACILITY_CLASS_EXPERT_M,
-                            .speechBefore = {EC_WORD_OH_DEAR, EC_WORD_THIS, EC_WORD_MATCH, EC_WORD_IS, EC_WORD_FOR, EC_WORD_YOU},
-                            .speechWin = {EC_WORD_OH_DEAR, EC_WORD_DID, EC_WORD_YOU, EC_WORD_SEE, EC_WORD_THAT, EC_WORD_QUES},
-                            .speechLose = {EC_WORD_OH_DEAR, EC_WORD_I_AM, EC_WORD_SO, EC_WORD_SORRY, EC_EMPTY_WORD, EC_EMPTY_WORD},
-                            .speechAfter = {EC_WORD_IS, EC_WORD_YOUR, EC_WORD_GRANDMOTHER, EC_WORD_STRONG, EC_WORD_QUES, EC_EMPTY_WORD},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("GREGOIRE"),
                             .facilityClass = FACILITY_CLASS_EXPERT_M,
                             .speechBefore = {EC_WORD_OH_DEAR, EC_WORD_THIS, EC_WORD_FIGHTING, EC_WORD_IS, EC_WORD_FOR, EC_WORD_HIM, },
@@ -5281,6 +5274,13 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                             .speechWin = {EC_WORD_ARE, EC_WORD_PERFECT, EC_WORD_BORED, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechLose = {EC_WORD_SORRY, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_SINCE, EC_WORD_GRANDMOTHER, EC_WORD_IS, EC_WORD_VERY, EC_WORD_STRONG, EC_WORD_QUES},
+                        #else //ENGLISH
+                            .name = _("TERRENCE"),
+                            .facilityClass = FACILITY_CLASS_EXPERT_M,
+                            .speechBefore = {EC_WORD_OH_DEAR, EC_WORD_THIS, EC_WORD_MATCH, EC_WORD_IS, EC_WORD_FOR, EC_WORD_YOU},
+                            .speechWin = {EC_WORD_OH_DEAR, EC_WORD_DID, EC_WORD_YOU, EC_WORD_SEE, EC_WORD_THAT, EC_WORD_QUES},
+                            .speechLose = {EC_WORD_OH_DEAR, EC_WORD_I_AM, EC_WORD_SO, EC_WORD_SORRY, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                            .speechAfter = {EC_WORD_IS, EC_WORD_YOUR, EC_WORD_GRANDMOTHER, EC_WORD_STRONG, EC_WORD_QUES, EC_EMPTY_WORD},
                         #endif
                             .mons =
                                 {
@@ -5428,14 +5428,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                         },
                     [1] =
                         {
-                        #if ENGLISH
-                            .name = _("CARLOTTA"),
-                            .facilityClass = FACILITY_CLASS_EXPERT_F,
-                            .speechBefore = {EC_WORD_OH_DEAR, EC_WORD_I, EC_WORD_WILL, EC_WORD_WIN, EC_WORD_FOR, EC_WORD_YOU},
-                            .speechWin = {EC_WORD_OH_DEAR, EC_WORD_WE, EC_WORD_HAVE, EC_WORD_A, EC_WORD_PARTY, EC_WORD_LATER},
-                            .speechLose = {EC_WORD_OH_DEAR, EC_WORD_I_AM, EC_WORD_SORRY, EC_WORD_TO, EC_WORD_DISAPPOINT, EC_WORD_YOU},
-                            .speechAfter = {EC_WORD_IS, EC_WORD_YOUR, EC_WORD_GRANDFATHER, EC_WORD_COOL, EC_WORD_QUES, EC_EMPTY_WORD},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("CARLOTTA"),
                             .facilityClass = FACILITY_CLASS_EXPERT_F,
                             .speechBefore = {EC_WORD_YOU, EC_WORD_COME, EC_WORD_EVEN_SO, EC_WORD_FEELING, EC_WORD_PARTY, EC_WORD_QUES, },
@@ -5449,6 +5442,13 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                             .speechWin = {EC_WORD_LATER, EC_WORD_PLAYS, EC_WORD_TO, EC_WORD_SILKY, EC_WORD_PARTY, EC_WORD_QUES},
                             .speechLose = {EC_WORD_SORRY, EC_WORD_JUST, EC_WORD_NITWIT, EC_WORD_WEREN_T, EC_WORD_DISAPPOINT, EC_WORD_EXCL},
                             .speechAfter = {EC_WORD_EVER, EC_WORD_GRANDFATHER, EC_WORD_IS, EC_WORD_VERY, EC_WORD_STRONG, EC_WORD_QUES},
+                        #else //ENGLISH
+                            .name = _("CARLOTTA"),
+                            .facilityClass = FACILITY_CLASS_EXPERT_F,
+                            .speechBefore = {EC_WORD_OH_DEAR, EC_WORD_I, EC_WORD_WILL, EC_WORD_WIN, EC_WORD_FOR, EC_WORD_YOU},
+                            .speechWin = {EC_WORD_OH_DEAR, EC_WORD_WE, EC_WORD_HAVE, EC_WORD_A, EC_WORD_PARTY, EC_WORD_LATER},
+                            .speechLose = {EC_WORD_OH_DEAR, EC_WORD_I_AM, EC_WORD_SORRY, EC_WORD_TO, EC_WORD_DISAPPOINT, EC_WORD_YOU},
+                            .speechAfter = {EC_WORD_IS, EC_WORD_YOUR, EC_WORD_GRANDFATHER, EC_WORD_COOL, EC_WORD_QUES, EC_EMPTY_WORD},
                         #endif
                             .mons =
                                 {
@@ -5607,14 +5607,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                 {
                     [0] =
                         {
-                        #if ENGLISH
-                            .name = _("NORA"),
-                            .facilityClass = FACILITY_CLASS_PKMN_RANGER_F,
-                            .speechBefore = {EC_WORD_WAAAH, EC_WORD_THIS, EC_WORD_IS, EC_WORD_SO, EC_WORD_EXCITING, EC_WORD_EXCL},
-                            .speechWin = {EC_WORD_WAAAH, EC_WORD_I_AM, EC_WORD_SO, EC_WORD_HAPPY, EC_WORD_I, EC_WORD_WON},
-                            .speechLose = {EC_WORD_WAAAH, EC_WORD_I_AM, EC_WORD_SO, EC_WORD_SAD, EC_WORD_I, EC_WORD_LOST},
-                            .speechAfter = {EC_WORD_WAAAH, EC_WORD_EXCL, EC_EMPTY_WORD, EC_WORD_GO, EC_WORD_AWAY, EC_WORD_EXCL},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("JACKIE"),
                             .facilityClass = FACILITY_CLASS_PKMN_RANGER_F,
                             .speechBefore = {EC_WORD_WAAAH, EC_EMPTY_WORD, EC_WORD_IT_S, EC_WORD_RATHER, EC_WORD_EXCITING, EC_WORD_EXCL, },
@@ -5628,6 +5621,13 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                             .speechWin = {EC_WORD_OFF, EC_WORD_IS, EC_WORD_WEREN_T, EC_WORD_HAPPINESS, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechLose = {EC_WORD_ON, EC_WORD_IS, EC_WORD_SAD, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_WROOOAAR_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                        #else //ENGLISH
+                            .name = _("NORA"),
+                            .facilityClass = FACILITY_CLASS_PKMN_RANGER_F,
+                            .speechBefore = {EC_WORD_WAAAH, EC_WORD_THIS, EC_WORD_IS, EC_WORD_SO, EC_WORD_EXCITING, EC_WORD_EXCL},
+                            .speechWin = {EC_WORD_WAAAH, EC_WORD_I_AM, EC_WORD_SO, EC_WORD_HAPPY, EC_WORD_I, EC_WORD_WON},
+                            .speechLose = {EC_WORD_WAAAH, EC_WORD_I_AM, EC_WORD_SO, EC_WORD_SAD, EC_WORD_I, EC_WORD_LOST},
+                            .speechAfter = {EC_WORD_WAAAH, EC_WORD_EXCL, EC_EMPTY_WORD, EC_WORD_GO, EC_WORD_AWAY, EC_WORD_EXCL},
                         #endif
                             .mons =
                                 {
@@ -5771,14 +5771,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                         },
                     [1] =
                         {
-                        #if ENGLISH
-                            .name = _("GAV"),
-                            .facilityClass = FACILITY_CLASS_PKMN_RANGER_M,
-                            .speechBefore = {EC_WORD_WAHAHAHA, EC_WORD_YOU, EC_WORD_CAN_T, EC_WORD_STOP, EC_WORD_ME, EC_WORD_EXCL},
-                            .speechWin = {EC_WORD_WOWEE, EC_WORD_EXCL, EC_EMPTY_WORD, EC_WORD_I_AM, EC_WORD_AWESOME, EC_WORD_COOL},
-                            .speechLose = {EC_WORD_I_AM, EC_WORD_NOT, EC_WORD_COOL, EC_WORD_AT, EC_WORD_ALL, EC_WORD_EXCL},
-                            .speechAfter = {EC_WORD_HEHEHE, EC_WORD_THAT_WAS, EC_WORD_AN, EC_WORD_AWESOME, EC_WORD_BATTLE, EC_WORD_EXCL},
-                        #elif FRENCH
+                        #if FRENCH
                             .name = _("IGNACE"),
                             .facilityClass = FACILITY_CLASS_PKMN_RANGER_M,
                             .speechBefore = {EC_WORD_WAHAHAHA, EC_WORD_I_AM, EC_WORD_THE, EC_WORD_BEST, EC_EMPTY_WORD, EC_EMPTY_WORD, },
@@ -5792,6 +5785,13 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                             .speechWin = {EC_WORD_ARE, EC_WORD_LOWS, EC_WORD_A, EC_WORD_TRAINER, EC_WORD_COOL, EC_WORD_ELLIPSIS},
                             .speechLose = {EC_WORD_NO, EC_WORD_ELLIPSIS, EC_WORD_AS_IF, EC_WORD_ARE, EC_WORD_JUST, EC_WORD_STRONG},
                             .speechAfter = {EC_WORD_MISS, EC_WORD_THIN, EC_WORD_FIGHTING, EC_WORD_LISTEN, EC_WORD_POKEMON, EC_WORD_EXCL},
+                        #else //ENGLISH
+                            .name = _("GAV"),
+                            .facilityClass = FACILITY_CLASS_PKMN_RANGER_M,
+                            .speechBefore = {EC_WORD_WAHAHAHA, EC_WORD_YOU, EC_WORD_CAN_T, EC_WORD_STOP, EC_WORD_ME, EC_WORD_EXCL},
+                            .speechWin = {EC_WORD_WOWEE, EC_WORD_EXCL, EC_EMPTY_WORD, EC_WORD_I_AM, EC_WORD_AWESOME, EC_WORD_COOL},
+                            .speechLose = {EC_WORD_I_AM, EC_WORD_NOT, EC_WORD_COOL, EC_WORD_AT, EC_WORD_ALL, EC_WORD_EXCL},
+                            .speechAfter = {EC_WORD_HEHEHE, EC_WORD_THAT_WAS, EC_WORD_AN, EC_WORD_AWESOME, EC_WORD_BATTLE, EC_WORD_EXCL},
                         #endif
                             .mons =
                                 {

@@ -15,9 +15,6 @@ Route119_House_EventScript_Wingull::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route119_House/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route119_House/text_fr.inc"
 .else
@@ -26,7 +23,8 @@ Route119_House_EventScript_Wingull::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route119_House/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route119_House/text.inc"
 .endif
 .endif
 .endif

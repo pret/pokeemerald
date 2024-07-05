@@ -250,9 +250,6 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_ScientistsFaceBattle::
 	waitmovement 0
 	return
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_BattleFactoryBattleRoom/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_BattleFactoryBattleRoom/text_fr.inc"
 .else
@@ -261,7 +258,8 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_ScientistsFaceBattle::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_BattleFactoryBattleRoom/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_BattleFactoryBattleRoom/text.inc"
 .endif
 .endif
 .endif

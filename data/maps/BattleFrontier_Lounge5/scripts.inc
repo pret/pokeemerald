@@ -41,9 +41,6 @@ BattleFrontier_Lounge5_EventScript_LittleBoy::
 	msgbox BattleFrontier_Lounge5_Text_GirlPlaysAtRedHouseALot, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_Lounge5/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_Lounge5/text_fr.inc"
 .else
@@ -52,7 +49,8 @@ BattleFrontier_Lounge5_EventScript_LittleBoy::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_Lounge5/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_Lounge5/text.inc"
 .endif
 .endif
 .endif

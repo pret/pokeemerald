@@ -83,9 +83,6 @@ EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame2:
 	walk_up
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/EverGrandeCity_HallOfFame/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/EverGrandeCity_HallOfFame/text_fr.inc"
 .else
@@ -94,7 +91,8 @@ EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame2:
 .else
 .ifdef SPANISH
 	.include "data/maps/EverGrandeCity_HallOfFame/text_es.inc"
-.endif
+.else
+	.include "data/maps/EverGrandeCity_HallOfFame/text.inc"
 .endif
 .endif
 .endif

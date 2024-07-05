@@ -576,13 +576,13 @@ static void FrameType_DrawChoices(u8 selection)
 
     text[i] = EOS;
 
-#if ENGLISH
-    DrawOptionMenuChoice(gText_FrameType, 104, YPOS_FRAMETYPE, 0);
-    DrawOptionMenuChoice(text, 128, YPOS_FRAMETYPE, 1);
-#elif FRENCH || ITALIAN
+#if FRENCH || ITALIAN
     width = GetStringWidth(FONT_NORMAL, gText_FrameType, 0);
     DrawOptionMenuChoice(gText_FrameType, 104, YPOS_FRAMETYPE, 0);
     DrawOptionMenuChoice(text, width + 107, YPOS_FRAMETYPE, 1);
+#else //ENGLISH
+    DrawOptionMenuChoice(gText_FrameType, 104, YPOS_FRAMETYPE, 0);
+    DrawOptionMenuChoice(text, 128, YPOS_FRAMETYPE, 1);
 #endif
 }
 

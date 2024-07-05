@@ -3054,17 +3054,17 @@ static const u16 sVenusaur_Pal[] = INCBIN_U16("graphics/pokemon_jump/venusaur.gb
 static const u32 sVenusaur_Gfx[] = INCBIN_U32("graphics/pokemon_jump/venusaur.4bpp.lz");
 static const u32 sVenusaur_Tilemap[] = INCBIN_U32("graphics/pokemon_jump/venusaur.bin.lz");
 
-#if ENGLISH
+#if FRENCH || ITALIAN
+#define BONUSES_PAL gPokeJumpBonuses_Pal
+#define BONUSES_GFX gPokeJumpBonuses_Gfx
+#define BONUSES_TILEMAP gPokeJumpBonuses_Tilemap
+#else //ENGLISH
 static const u16 sBonuses_Pal[] = INCBIN_U16("graphics/pokemon_jump/bonuses.gbapal");
 static const u32 sBonuses_Gfx[] = INCBIN_U32("graphics/pokemon_jump/bonuses.4bpp.lz");
 static const u32 sBonuses_Tilemap[] = INCBIN_U32("graphics/pokemon_jump/bonuses.bin.lz");
 #define BONUSES_PAL sBonuses_Pal
 #define BONUSES_GFX sBonuses_Gfx
 #define BONUSES_TILEMAP sBonuses_Tilemap
-#elif FRENCH || ITALIAN
-#define BONUSES_PAL gPokeJumpBonuses_Pal
-#define BONUSES_GFX gPokeJumpBonuses_Gfx
-#define BONUSES_TILEMAP gPokeJumpBonuses_Tilemap
 #endif
 
 static const struct BgTemplate sBgTemplates[] =

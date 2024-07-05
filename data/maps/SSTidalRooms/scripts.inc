@@ -62,14 +62,16 @@ SSTidalRooms_EventScript_Naomi::
 	msgbox SSTidalRooms_Text_NaomiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/SSTidalRooms/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SSTidalRooms/text_fr.inc"
 .else
 .ifdef ITALIAN
 	.include "data/maps/SSTidalRooms/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SSTidalRooms/text_es.inc"
+.else
+	.include "data/maps/SSTidalRooms/text.inc"
 .endif
 .endif
 .endif

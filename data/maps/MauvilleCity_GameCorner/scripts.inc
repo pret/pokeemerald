@@ -626,9 +626,6 @@ MauvilleCity_GameCorner_EventScript_NoCoinCase::
 	releaseall
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MauvilleCity_GameCorner/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MauvilleCity_GameCorner/text_fr.inc"
 .else
@@ -637,7 +634,8 @@ MauvilleCity_GameCorner_EventScript_NoCoinCase::
 .else
 .ifdef SPANISH
 	.include "data/maps/MauvilleCity_GameCorner/text_es.inc"
-.endif
+.else
+	.include "data/maps/MauvilleCity_GameCorner/text.inc"
 .endif
 .endif
 .endif

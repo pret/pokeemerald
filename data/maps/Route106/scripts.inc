@@ -41,9 +41,6 @@ Route106_EventScript_Ned::
 	msgbox Route106_Text_NedPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route106/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route106/text_fr.inc"
 .else
@@ -52,7 +49,8 @@ Route106_EventScript_Ned::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route106/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route106/text.inc"
 .endif
 .endif
 .endif

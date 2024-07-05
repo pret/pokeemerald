@@ -218,9 +218,6 @@ BattleFrontier_BattlePyramidTop_Movement_CameraPanUp:
 	delay_16
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_BattlePyramidTop/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_BattlePyramidTop/text_fr.inc"
 .else
@@ -229,7 +226,8 @@ BattleFrontier_BattlePyramidTop_Movement_CameraPanUp:
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_BattlePyramidTop/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_BattlePyramidTop/text.inc"
 .endif
 .endif
 .endif

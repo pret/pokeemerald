@@ -68,9 +68,6 @@ LilycoveCity_MoveDeletersHouse_EventScript_LastMonWithSurf::
 	releaseall
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/LilycoveCity_MoveDeletersHouse/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LilycoveCity_MoveDeletersHouse/text_fr.inc"
 .else
@@ -79,7 +76,8 @@ LilycoveCity_MoveDeletersHouse_EventScript_LastMonWithSurf::
 .else
 .ifdef SPANISH
 	.include "data/maps/LilycoveCity_MoveDeletersHouse/text_es.inc"
-.endif
+.else
+	.include "data/maps/LilycoveCity_MoveDeletersHouse/text.inc"
 .endif
 .endif
 .endif

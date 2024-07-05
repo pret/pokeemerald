@@ -100,9 +100,6 @@ BattleFrontier_RankingHall_EventScript_Boy::
 	msgbox BattleFrontier_RankingHall_Text_MyNamesNotUpThere, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_RankingHall/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_RankingHall/text_fr.inc"
 .else
@@ -111,7 +108,8 @@ BattleFrontier_RankingHall_EventScript_Boy::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_RankingHall/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_RankingHall/text.inc"
 .endif
 .endif
 .endif

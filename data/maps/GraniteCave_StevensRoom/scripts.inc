@@ -81,9 +81,6 @@ GraniteCave_StevensRoom_Movement_StevenExitSouth:
 	delay_8
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/GraniteCave_StevensRoom/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/GraniteCave_StevensRoom/text_fr.inc"
 .else
@@ -92,7 +89,8 @@ GraniteCave_StevensRoom_Movement_StevenExitSouth:
 .else
 .ifdef SPANISH
 	.include "data/maps/GraniteCave_StevensRoom/text_es.inc"
-.endif
+.else
+	.include "data/maps/GraniteCave_StevensRoom/text.inc"
 .endif
 .endif
 .endif

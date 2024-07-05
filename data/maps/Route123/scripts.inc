@@ -170,9 +170,6 @@ Route123_EventScript_RematchFernando::
 	msgbox Route123_Text_FernandoPostRematch, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route123/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route123/text_fr.inc"
 .else
@@ -181,7 +178,8 @@ Route123_EventScript_RematchFernando::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route123/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route123/text.inc"
 .endif
 .endif
 .endif

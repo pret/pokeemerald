@@ -49,9 +49,6 @@ AbandonedShip_Rooms2_1F_EventScript_Garrison::
 	msgbox AbandonedShip_Rooms2_1F_Text_GarrisonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/AbandonedShip_Rooms2_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/AbandonedShip_Rooms2_1F/text_fr.inc"
 .else
@@ -60,7 +57,8 @@ AbandonedShip_Rooms2_1F_EventScript_Garrison::
 .else
 .ifdef SPANISH
 	.include "data/maps/AbandonedShip_Rooms2_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/AbandonedShip_Rooms2_1F/text.inc"
 .endif
 .endif
 .endif

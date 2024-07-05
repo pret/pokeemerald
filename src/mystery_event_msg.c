@@ -1,19 +1,7 @@
 #include "global.h"
 
 ALIGNED(4)
-#if ENGLISH
-const u8 gText_MysteryEventBerry[] = _("Obtained a {STR_VAR_2} BERRY!\nDad has it at PETALBURG GYM.");
-const u8 gText_MysteryEventBerryTransform[] = _("The {STR_VAR_1} BERRY transformed into\none {STR_VAR_2} BERRY.");
-const u8 gText_MysteryEventBerryObtained[] = _("The {STR_VAR_1} BERRY has already been\nobtained.");
-const u8 gText_MysteryEventSpecialRibbon[] = _("A special RIBBON was awarded to\nyour party POKéMON.");
-const u8 gText_MysteryEventNationalDex[] = _("The POKéDEX has been upgraded\nwith the NATIONAL MODE.");
-const u8 gText_MysteryEventRareWord[] = _("A rare word has been added.");
-const u8 gText_MysteryEventSentOver[] = _("{STR_VAR_1} was sent over!");
-const u8 gText_MysteryEventFullParty[] = _("Your party is full.\n{STR_VAR_1} could not be sent over.");
-const u8 gText_MysteryEventNewTrainer[] = _("A new TRAINER has arrived in\nHOENN.");
-static const u8 gText_MysteryEventNewAdversaryInBattleTower[] = _("A new adversary has arrived in the\nBATTLE TOWER."); // Unused
-const u8 gText_MysteryEventCantBeUsed[] = _("This data can't be used in\nthis version.");
-#elif FRENCH
+#if FRENCH
 const u8 gText_MysteryEventBerry[] = _("Tu as obtenu une BAIE {STR_VAR_2}!\nPapa en a une à l’ARENE de CLEMENTI.");
 const u8 gText_MysteryEventBerryTransform[] = _("La BAIE {STR_VAR_1} s’est transformée en\nune BAIE {STR_VAR_2}.");
 const u8 gText_MysteryEventBerryObtained[] = _("Tu avais déjà obtenu la BAIE\n{STR_VAR_1}.");
@@ -37,4 +25,16 @@ const u8 gText_MysteryEventFullParty[] = _("La tua squadra è già al completo.\
 const u8 gText_MysteryEventNewTrainer[] = _("È arrivato un nuovo ALLENATORE\nnella regione di HOENN.");
 const u8 gText_MysteryEventNewAdversaryInBattleTower[] = _("A new adversary has arrived in the\nBATTLE TOWER.");
 const u8 gText_MysteryEventCantBeUsed[] = _("Questi dati non possono essere\nutilizzati in questa versione.");
+#else //ENGLISH
+const u8 gText_MysteryEventBerry[] = _("Obtained a {STR_VAR_2} BERRY!\nDad has it at PETALBURG GYM.");
+const u8 gText_MysteryEventBerryTransform[] = _("The {STR_VAR_1} BERRY transformed into\none {STR_VAR_2} BERRY.");
+const u8 gText_MysteryEventBerryObtained[] = _("The {STR_VAR_1} BERRY has already been\nobtained.");
+const u8 gText_MysteryEventSpecialRibbon[] = _("A special RIBBON was awarded to\nyour party POKéMON.");
+const u8 gText_MysteryEventNationalDex[] = _("The POKéDEX has been upgraded\nwith the NATIONAL MODE.");
+const u8 gText_MysteryEventRareWord[] = _("A rare word has been added.");
+const u8 gText_MysteryEventSentOver[] = _("{STR_VAR_1} was sent over!");
+const u8 gText_MysteryEventFullParty[] = _("Your party is full.\n{STR_VAR_1} could not be sent over.");
+const u8 gText_MysteryEventNewTrainer[] = _("A new TRAINER has arrived in\nHOENN.");
+static const u8 gText_MysteryEventNewAdversaryInBattleTower[] = _("A new adversary has arrived in the\nBATTLE TOWER."); // Unused
+const u8 gText_MysteryEventCantBeUsed[] = _("This data can't be used in\nthis version.");
 #endif

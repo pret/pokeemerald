@@ -276,9 +276,6 @@ LavaridgeTown_EventScript_HerbShopSign::
 	msgbox LavaridgeTown_Text_HerbShopSign, MSGBOX_SIGN
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/LavaridgeTown/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LavaridgeTown/text_fr.inc"
 .else
@@ -287,7 +284,8 @@ LavaridgeTown_EventScript_HerbShopSign::
 .else
 .ifdef SPANISH
 	.include "data/maps/LavaridgeTown/text_es.inc"
-.endif
+.else
+	.include "data/maps/LavaridgeTown/text.inc"
 .endif
 .endif
 .endif

@@ -23,9 +23,6 @@ EverGrandeCity_EventScript_SetVisitedEverGrande::
 	setvar VAR_TEMP_1, 1
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/EverGrandeCity/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/EverGrandeCity/text_fr.inc"
 .else
@@ -34,7 +31,8 @@ EverGrandeCity_EventScript_SetVisitedEverGrande::
 .else
 .ifdef SPANISH
 	.include "data/maps/EverGrandeCity/text_es.inc"
-.endif
+.else
+	.include "data/maps/EverGrandeCity/text.inc"
 .endif
 .endif
 .endif

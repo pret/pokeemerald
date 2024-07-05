@@ -252,9 +252,6 @@ SlateportCity_PokemonFanClub_EventScript_Azumarill::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/SlateportCity_PokemonFanClub/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SlateportCity_PokemonFanClub/text_fr.inc"
 .else
@@ -263,7 +260,8 @@ SlateportCity_PokemonFanClub_EventScript_Azumarill::
 .else
 .ifdef SPANISH
 	.include "data/maps/SlateportCity_PokemonFanClub/text_es.inc"
-.endif
+.else
+	.include "data/maps/SlateportCity_PokemonFanClub/text.inc"
 .endif
 .endif
 .endif

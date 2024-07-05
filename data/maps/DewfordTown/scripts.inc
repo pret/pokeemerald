@@ -638,9 +638,6 @@ DewfordTown_EventScript_PhraseNotTrendyEnough::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/DewfordTown/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/DewfordTown/text_fr.inc"
 .else
@@ -649,7 +646,8 @@ DewfordTown_EventScript_PhraseNotTrendyEnough::
 .else
 .ifdef SPANISH
 	.include "data/maps/DewfordTown/text_es.inc"
-.endif
+.else
+	.include "data/maps/DewfordTown/text.inc"
 .endif
 .endif
 .endif

@@ -541,9 +541,6 @@ LilycoveCity_Harbor_Movement_SailorBoardWithBrineyEast:
 	set_invisible
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/LilycoveCity_Harbor/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LilycoveCity_Harbor/text_fr.inc"
 .else
@@ -552,7 +549,8 @@ LilycoveCity_Harbor_Movement_SailorBoardWithBrineyEast:
 .else
 .ifdef SPANISH
 	.include "data/maps/LilycoveCity_Harbor/text_es.inc"
-.endif
+.else
+	.include "data/maps/LilycoveCity_Harbor/text.inc"
 .endif
 .endif
 .endif

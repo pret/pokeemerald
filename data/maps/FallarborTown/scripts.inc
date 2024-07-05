@@ -51,9 +51,6 @@ FallarborTown_EventScript_MoveTutorSign::
 	msgbox FallarborTown_Text_MoveTutorSign, MSGBOX_SIGN
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/FallarborTown/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/FallarborTown/text_fr.inc"
 .else
@@ -62,7 +59,8 @@ FallarborTown_EventScript_MoveTutorSign::
 .else
 .ifdef SPANISH
 	.include "data/maps/FallarborTown/text_es.inc"
-.endif
+.else
+	.include "data/maps/FallarborTown/text.inc"
 .endif
 .endif
 .endif

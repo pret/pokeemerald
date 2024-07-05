@@ -86,9 +86,6 @@ BattleFrontier_BattleArenaCorridor_Movement_AttendantMoveOutOfWay:
 	walk_in_place_faster_down
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_BattleArenaCorridor/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_BattleArenaCorridor/text_fr.inc"
 .else
@@ -97,7 +94,8 @@ BattleFrontier_BattleArenaCorridor_Movement_AttendantMoveOutOfWay:
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_BattleArenaCorridor/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_BattleArenaCorridor/text.inc"
 .endif
 .endif
 .endif

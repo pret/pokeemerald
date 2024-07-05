@@ -29,9 +29,6 @@ FortreeCity_PokemonCenter_1F_EventScript_Boy::
 	msgbox FortreeCity_PokemonCenter_1F_Text_DoYouKnowAboutPokenav, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/FortreeCity_PokemonCenter_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/FortreeCity_PokemonCenter_1F/text_fr.inc"
 .else
@@ -40,7 +37,8 @@ FortreeCity_PokemonCenter_1F_EventScript_Boy::
 .else
 .ifdef SPANISH
 	.include "data/maps/FortreeCity_PokemonCenter_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/FortreeCity_PokemonCenter_1F/text.inc"
 .endif
 .endif
 .endif

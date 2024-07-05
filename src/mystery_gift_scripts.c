@@ -3,12 +3,12 @@
 #include "mystery_gift_server.h"
 #include "mystery_gift.h"
 
-#if ENGLISH
-static const u8 sText_CanceledReadingCard[] = _("Canceled reading\nthe Card.");
-#elif FRENCH
+#if FRENCH
 static const u8 sText_CanceledReadingCard[] = _("Annuler la lecture\nde la carte.");
 #elif ITALIAN
 static const u8 sText_CanceledReadingCard[] = _("Lettura scheda\nannullata.");
+#else //ENGLISH
+static const u8 sText_CanceledReadingCard[] = _("Canceled reading\nthe Card.");
 #endif
 
 

@@ -211,9 +211,6 @@ BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest::
 	waitmovement 0
 	return
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_ScottsHouse/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_ScottsHouse/text_fr.inc"
 .else
@@ -222,7 +219,8 @@ BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_ScottsHouse/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_ScottsHouse/text.inc"
 .endif
 .endif
 .endif

@@ -244,9 +244,6 @@ Route118_EventScript_Deandre::
 	msgbox Route118_Text_DeandrePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route118/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route118/text_fr.inc"
 .else
@@ -255,7 +252,8 @@ Route118_EventScript_Deandre::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route118/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route118/text.inc"
 .endif
 .endif
 .endif

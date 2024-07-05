@@ -28,9 +28,6 @@ MeteorFalls_StevensCave_EventScript_Defeated::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MeteorFalls_StevensCave/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MeteorFalls_StevensCave/text_fr.inc"
 .else
@@ -39,7 +36,8 @@ MeteorFalls_StevensCave_EventScript_Defeated::
 .else
 .ifdef SPANISH
 	.include "data/maps/MeteorFalls_StevensCave/text_es.inc"
-.endif
+.else
+	.include "data/maps/MeteorFalls_StevensCave/text.inc"
 .endif
 .endif
 .endif

@@ -237,9 +237,6 @@ MeteorFalls_1F_1R_EventScript_MetCozmo::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MeteorFalls_1F_1R/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MeteorFalls_1F_1R/text_fr.inc"
 .else
@@ -248,7 +245,8 @@ MeteorFalls_1F_1R_EventScript_MetCozmo::
 .else
 .ifdef SPANISH
 	.include "data/maps/MeteorFalls_1F_1R/text_es.inc"
-.endif
+.else
+	.include "data/maps/MeteorFalls_1F_1R/text.inc"
 .endif
 .endif
 .endif

@@ -73,9 +73,6 @@ Route102_EventScript_Allen::
 	msgbox Route102_Text_AllenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route102/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route102/text_fr.inc"
 .else
@@ -84,7 +81,8 @@ Route102_EventScript_Allen::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route102/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route102/text.inc"
 .endif
 .endif
 .endif

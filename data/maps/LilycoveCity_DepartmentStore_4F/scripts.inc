@@ -53,9 +53,6 @@ LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs:
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/LilycoveCity_DepartmentStore_4F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LilycoveCity_DepartmentStore_4F/text_fr.inc"
 .else
@@ -64,7 +61,8 @@ LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs:
 .else
 .ifdef SPANISH
 	.include "data/maps/LilycoveCity_DepartmentStore_4F/text_es.inc"
-.endif
+.else
+	.include "data/maps/LilycoveCity_DepartmentStore_4F/text.inc"
 .endif
 .endif
 .endif

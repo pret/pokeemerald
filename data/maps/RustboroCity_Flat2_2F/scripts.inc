@@ -21,9 +21,6 @@ RustboroCity_Flat2_2F_EventScript_GavePremierBall::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/RustboroCity_Flat2_2F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/RustboroCity_Flat2_2F/text_fr.inc"
 .else
@@ -32,7 +29,8 @@ RustboroCity_Flat2_2F_EventScript_GavePremierBall::
 .else
 .ifdef SPANISH
 	.include "data/maps/RustboroCity_Flat2_2F/text_es.inc"
-.endif
+.else
+	.include "data/maps/RustboroCity_Flat2_2F/text.inc"
 .endif
 .endif
 .endif

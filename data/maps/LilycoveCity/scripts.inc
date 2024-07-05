@@ -412,9 +412,6 @@ LilycoveCity_EventScript_DontKnowAboutBerryBlender::
 	msgbox LilycoveCity_Text_ExplainBerryBlender, MSGBOX_DEFAULT
 	return
 
-.ifdef ENGLISH
-	.include "data/maps/LilycoveCity/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LilycoveCity/text_fr.inc"
 .else
@@ -423,7 +420,8 @@ LilycoveCity_EventScript_DontKnowAboutBerryBlender::
 .else
 .ifdef SPANISH
 	.include "data/maps/LilycoveCity/text_es.inc"
-.endif
+.else
+	.include "data/maps/LilycoveCity/text.inc"
 .endif
 .endif
 .endif

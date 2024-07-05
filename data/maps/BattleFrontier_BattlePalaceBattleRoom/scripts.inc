@@ -447,9 +447,6 @@ BattleFrontier_BattlePalaceBattleRoom_Movement_SpenserEnter:
 	face_left
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_BattlePalaceBattleRoom/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_BattlePalaceBattleRoom/text_fr.inc"
 .else
@@ -458,7 +455,8 @@ BattleFrontier_BattlePalaceBattleRoom_Movement_SpenserEnter:
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_BattlePalaceBattleRoom/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_BattlePalaceBattleRoom/text.inc"
 .endif
 .endif
 .endif

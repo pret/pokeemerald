@@ -39,9 +39,6 @@ OldaleTown_PokemonCenter_1F_EventScript_WirelessClubAvailable::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/OldaleTown_PokemonCenter_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/OldaleTown_PokemonCenter_1F/text_fr.inc"
 .else
@@ -50,7 +47,8 @@ OldaleTown_PokemonCenter_1F_EventScript_WirelessClubAvailable::
 .else
 .ifdef SPANISH
 	.include "data/maps/OldaleTown_PokemonCenter_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/OldaleTown_PokemonCenter_1F/text.inc"
 .endif
 .endif
 .endif

@@ -14,13 +14,6 @@ MysteryGiftScript_StampCard::
 	release
 	end
 
-.ifdef ENGLISH
-sText_MysteryGiftStampCard:
-	.string "Thank you for using the STAMP CARD\n"
-	.string "System.\p"
-	.string "You have {STR_VAR_1} more to collect to\n"
-	.string "fill your STAMP CARD.$"
-.else
 .ifdef FRENCH
 sText_MysteryGiftStampCard:
 	.string "Merci d’utiliser le système\n"
@@ -35,6 +28,11 @@ sText_MysteryGiftStampCard:
 	.string "Il numero di BOLLINI che ancora ti\n"
 	.string "serve per completare la SCHEDA\l"
 	.string "è {STR_VAR_1}.$"
-.endif
+.else @ENGLISH
+sText_MysteryGiftStampCard:
+	.string "Thank you for using the STAMP CARD\n"
+	.string "System.\p"
+	.string "You have {STR_VAR_1} more to collect to\n"
+	.string "fill your STAMP CARD.$"
 .endif
 .endif

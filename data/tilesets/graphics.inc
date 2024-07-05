@@ -366,7 +366,10 @@ gTilesetPalettes_InsideBuilding::
 	.incbin "data/tilesets/primary/building/palettes/14.gbapal"
 	.incbin "data/tilesets/primary/building/palettes/15.gbapal"
 
-.ifdef ENGLISH
+.ifdef FRENCH
+.else
+.ifdef ITALIAN
+.else @ENGLISH
 	.align 2
 gTilesetTiles_Shop::
 	.incbin "data/tilesets/secondary/shop/tiles.4bpp.lz"
@@ -389,6 +392,7 @@ gTilesetPalettes_Shop::
 	.incbin "data/tilesets/secondary/shop/palettes/13.gbapal"
 	.incbin "data/tilesets/secondary/shop/palettes/14.gbapal"
 	.incbin "data/tilesets/secondary/shop/palettes/15.gbapal"
+.endif
 .endif
 
 	.align 2
@@ -1410,7 +1414,10 @@ gTilesetPalettes_BattlePalace::
 	.incbin "data/tilesets/secondary/battle_palace/palettes/14.gbapal"
 	.incbin "data/tilesets/secondary/battle_palace/palettes/15.gbapal"
 
-.ifdef ENGLISH
+.ifdef FRENCH
+.else
+.ifdef ITALIAN
+.else @ENGLISH
 	.align 2
 gTilesetTiles_BattleDome::
 	.incbin "data/tilesets/secondary/battle_dome/tiles.4bpp.lz"
@@ -1433,6 +1440,7 @@ gTilesetPalettes_BattleDome::
 	.incbin "data/tilesets/secondary/battle_dome/palettes/13.gbapal"
 	.incbin "data/tilesets/secondary/battle_dome/palettes/14.gbapal"
 	.incbin "data/tilesets/secondary/battle_dome/palettes/15.gbapal"
+.endif
 .endif
 
 	.align 2

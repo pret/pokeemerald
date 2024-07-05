@@ -58,9 +58,6 @@ EverGrandeCity_GlaciasRoom_EventScript_Defeated::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/EverGrandeCity_GlaciasRoom/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/EverGrandeCity_GlaciasRoom/text_fr.inc"
 .else
@@ -69,7 +66,8 @@ EverGrandeCity_GlaciasRoom_EventScript_Defeated::
 .else
 .ifdef SPANISH
 	.include "data/maps/EverGrandeCity_GlaciasRoom/text_es.inc"
-.endif
+.else
+	.include "data/maps/EverGrandeCity_GlaciasRoom/text.inc"
 .endif
 .endif
 .endif

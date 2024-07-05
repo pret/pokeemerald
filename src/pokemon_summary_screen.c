@@ -124,14 +124,14 @@ enum
 #define TILE_FILLED_JAM_HEART    0x103C
 #define TILE_EMPTY_JAM_HEART     0x103D
 
-#if ENGLISH
-#define PSS_DATA_WINDOW_INFO_ABILITY_WIDTH  18
-#define PSS_DATA_WINDOW_INFO_MEMO_BASEBLOCK 557
-#define MOVE_NAMES_RECT_Y_WIDTH_HEIGHT      66, 72, 16
-#elif FRENCH || ITALIAN
+#if FRENCH || ITALIAN
 #define PSS_DATA_WINDOW_INFO_ABILITY_WIDTH  19
 #define PSS_DATA_WINDOW_INFO_MEMO_BASEBLOCK 561
 #define MOVE_NAMES_RECT_Y_WIDTH_HEIGHT      65, 72, 15
+#else //ENGLISH
+#define PSS_DATA_WINDOW_INFO_ABILITY_WIDTH  18
+#define PSS_DATA_WINDOW_INFO_MEMO_BASEBLOCK 557
+#define MOVE_NAMES_RECT_Y_WIDTH_HEIGHT      66, 72, 16
 #endif
 
 static EWRAM_DATA struct PokemonSummaryScreenData
@@ -322,12 +322,12 @@ static void KeepMoveSelectorVisible(u8);
 static void SummaryScreen_DestroyAnimDelayTask(void);
 
 // const rom data
-#if ENGLISH
-#include "data/text/move_descriptions.h"
-#elif FRENCH
+#if FRENCH
 #include "data/text/french/move_descriptions.h"
 #elif ITALIAN
 #include "data/text/italian/move_descriptions.h"
+#else //ENGLISH
+#include "data/text/move_descriptions.h"
 #endif
 #include "data/text/nature_names.h"
 

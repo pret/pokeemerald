@@ -50,9 +50,6 @@ PacifidlogTown_House3_EventScript_Girl::
 	msgbox PacifidlogTown_House3_Text_IsThatAPokedex, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/PacifidlogTown_House3/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/PacifidlogTown_House3/text_fr.inc"
 .else
@@ -61,7 +58,8 @@ PacifidlogTown_House3_EventScript_Girl::
 .else
 .ifdef SPANISH
 	.include "data/maps/PacifidlogTown_House3/text_es.inc"
-.endif
+.else
+	.include "data/maps/PacifidlogTown_House3/text.inc"
 .endif
 .endif
 .endif

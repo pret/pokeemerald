@@ -271,9 +271,6 @@ BattleFrontier_BattleDomePreBattleRoom_Movement_PlayerEnterDoor:
 	set_invisible
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_BattleDomePreBattleRoom/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_BattleDomePreBattleRoom/text_fr.inc"
 .else
@@ -282,7 +279,8 @@ BattleFrontier_BattleDomePreBattleRoom_Movement_PlayerEnterDoor:
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_BattleDomePreBattleRoom/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_BattleDomePreBattleRoom/text.inc"
 .endif
 .endif
 .endif

@@ -298,9 +298,6 @@ BattleFrontier_ReceptionGate_EventScript_ExitFrontierPassGuide::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_ReceptionGate/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_ReceptionGate/text_fr.inc"
 .else
@@ -309,7 +306,8 @@ BattleFrontier_ReceptionGate_EventScript_ExitFrontierPassGuide::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_ReceptionGate/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_ReceptionGate/text.inc"
 .endif
 .endif
 .endif

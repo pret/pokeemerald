@@ -1021,9 +1021,6 @@ RustboroCity_EventScript_Boy1::
 	msgbox RustboroCity_Text_YouCanHave2On2Battle, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/RustboroCity/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/RustboroCity/text_fr.inc"
 .else
@@ -1032,7 +1029,8 @@ RustboroCity_EventScript_Boy1::
 .else
 .ifdef SPANISH
 	.include "data/maps/RustboroCity/text_es.inc"
-.endif
+.else
+	.include "data/maps/RustboroCity/text.inc"
 .endif
 .endif
 .endif

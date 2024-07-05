@@ -30,16 +30,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-#if ENGLISH
-#define WIN_BERRY_NAME_WIDTH        8
-#define WIN_BERRY_NAME_BASEBLOCK    69
-#define WIN_SIZE_FIRM_BASEBLOCK     85
-#define WIN_DESC_TILEMAP_LEFT       4
-#define WIN_DESC_WIDTH              25
-#define WIN_DESC_BASEBLOCK          157
-#define WIN_BERRY_TAG_BASEBLOCK     257
-#define BERRY_DESCRIPTION_X         0
-#elif FRENCH
+#if FRENCH
 #define WIN_BERRY_NAME_WIDTH        8
 #define WIN_BERRY_NAME_BASEBLOCK    72
 #define WIN_SIZE_FIRM_BASEBLOCK     88
@@ -57,6 +48,15 @@
 #define WIN_DESC_BASEBLOCK          170
 #define WIN_BERRY_TAG_BASEBLOCK     278
 #define BERRY_DESCRIPTION_X         5
+#else //ENGLISH
+#define WIN_BERRY_NAME_WIDTH        8
+#define WIN_BERRY_NAME_BASEBLOCK    69
+#define WIN_SIZE_FIRM_BASEBLOCK     85
+#define WIN_DESC_TILEMAP_LEFT       4
+#define WIN_DESC_WIDTH              25
+#define WIN_DESC_BASEBLOCK          157
+#define WIN_BERRY_TAG_BASEBLOCK     257
+#define BERRY_DESCRIPTION_X         0
 #endif
 
 // There are 4 windows used in berry tag screen.
@@ -433,11 +433,7 @@ static void PrintAllBerryData(void)
 
 static void PrintBerryNumberAndName(void)
 {
-#if ENGLISH
-    const struct Berry *berry = GetBerryInfo(sBerryTag->berryId);
-    ConvertIntToDecimalStringN(gStringVar1, sBerryTag->berryId, STR_CONV_MODE_LEADING_ZEROS, 2);
-    StringCopy(gStringVar2, berry->name);
-#elif FRENCH
+#if FRENCH
     const struct Berry *berry;
     ConvertIntToDecimalStringN(gStringVar1, sBerryTag->berryId, STR_CONV_MODE_LEADING_ZEROS, 2);
     berry = GetBerryInfo(sBerryTag->berryId);
@@ -445,6 +441,10 @@ static void PrintBerryNumberAndName(void)
 #elif ITALIAN
     ConvertIntToDecimalStringN(gStringVar1, sBerryTag->berryId, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringCopy(gStringVar2, ItemId_GetName(BERRY_TO_ITEM(sBerryTag->berryId)));
+#else //ENGLISH
+    const struct Berry *berry = GetBerryInfo(sBerryTag->berryId);
+    ConvertIntToDecimalStringN(gStringVar1, sBerryTag->berryId, STR_CONV_MODE_LEADING_ZEROS, 2);
+    StringCopy(gStringVar2, berry->name);
 #endif
     StringExpandPlaceholders(gStringVar4, gText_NumberVar1Var2);
     PrintTextInBerryTagScreen(WIN_BERRY_NAME, gStringVar4, 0, 1, 0, 0);

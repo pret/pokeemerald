@@ -743,9 +743,6 @@ Route110_Movement_BirchExit4:
 	walk_up
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/Route110/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route110/text_fr.inc"
 .else
@@ -754,7 +751,8 @@ Route110_Movement_BirchExit4:
 .else
 .ifdef SPANISH
 	.include "data/maps/Route110/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route110/text.inc"
 .endif
 .endif
 .endif

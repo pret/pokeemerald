@@ -67,9 +67,6 @@ PetalburgCity_WallysHouse_EventScript_ReceivedHM03Surf::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/PetalburgCity_WallysHouse/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/PetalburgCity_WallysHouse/text_fr.inc"
 .else
@@ -78,7 +75,8 @@ PetalburgCity_WallysHouse_EventScript_ReceivedHM03Surf::
 .else
 .ifdef SPANISH
 	.include "data/maps/PetalburgCity_WallysHouse/text_es.inc"
-.endif
+.else
+	.include "data/maps/PetalburgCity_WallysHouse/text.inc"
 .endif
 .endif
 .endif

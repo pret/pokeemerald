@@ -9,9 +9,6 @@ RustboroCity_Flat2_3F_EventScript_Woman::
 	msgbox RustboroCity_Flat2_3F_Text_PresidentsSonAlsoCollectsRareStones, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/RustboroCity_Flat2_3F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/RustboroCity_Flat2_3F/text_fr.inc"
 .else
@@ -20,7 +17,8 @@ RustboroCity_Flat2_3F_EventScript_Woman::
 .else
 .ifdef SPANISH
 	.include "data/maps/RustboroCity_Flat2_3F/text_es.inc"
-.endif
+.else
+	.include "data/maps/RustboroCity_Flat2_3F/text.inc"
 .endif
 .endif
 .endif

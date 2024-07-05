@@ -112,9 +112,6 @@ BattleFrontier_Lounge2_EventScript_TriathleteF::
 	msgbox BattleFrontier_Lounge2_Text_ThisPlaceIsScaringMe, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_Lounge2/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_Lounge2/text_fr.inc"
 .else
@@ -123,7 +120,8 @@ BattleFrontier_Lounge2_EventScript_TriathleteF::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_Lounge2/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_Lounge2/text.inc"
 .endif
 .endif
 .endif

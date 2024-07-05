@@ -256,9 +256,6 @@ MauvilleCity_Gym_EventScript_GymStatue::
 	releaseall
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MauvilleCity_Gym/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MauvilleCity_Gym/text_fr.inc"
 .else
@@ -267,7 +264,8 @@ MauvilleCity_Gym_EventScript_GymStatue::
 .else
 .ifdef SPANISH
 	.include "data/maps/MauvilleCity_Gym/text_es.inc"
-.endif
+.else
+	.include "data/maps/MauvilleCity_Gym/text.inc"
 .endif
 .endif
 .endif

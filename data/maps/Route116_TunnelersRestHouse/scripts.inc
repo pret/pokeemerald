@@ -27,9 +27,6 @@ Route116_TunnelersRestHouse_EventScript_TunnelOpened::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route116_TunnelersRestHouse/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route116_TunnelersRestHouse/text_fr.inc"
 .else
@@ -38,7 +35,8 @@ Route116_TunnelersRestHouse_EventScript_TunnelOpened::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route116_TunnelersRestHouse/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route116_TunnelersRestHouse/text.inc"
 .endif
 .endif
 .endif

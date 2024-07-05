@@ -287,9 +287,6 @@ BattleFrontier_Lounge7_EventScript_Gentleman::
 	msgbox BattleFrontier_Lounge7_Text_LadiesWereStrongAndBeautiful, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_Lounge7/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_Lounge7/text_fr.inc"
 .else
@@ -298,7 +295,8 @@ BattleFrontier_Lounge7_EventScript_Gentleman::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_Lounge7/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_Lounge7/text.inc"
 .endif
 .endif
 .endif

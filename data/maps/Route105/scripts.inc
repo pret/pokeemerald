@@ -76,9 +76,6 @@ Route105_EventScript_AndresRematch::
 	msgbox Route105_Text_AndresRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route105/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route105/text_fr.inc"
 .else
@@ -87,7 +84,8 @@ Route105_EventScript_AndresRematch::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route105/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route105/text.inc"
 .endif
 .endif
 .endif

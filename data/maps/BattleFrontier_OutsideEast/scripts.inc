@@ -233,9 +233,6 @@ BattleFrontier_OutsideEast_EventScript_Camper::
 	msgbox BattleFrontier_OutsideEast_Text_StickyMonWithLongTail, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_OutsideEast/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_OutsideEast/text_fr.inc"
 .else
@@ -244,7 +241,8 @@ BattleFrontier_OutsideEast_EventScript_Camper::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_OutsideEast/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_OutsideEast/text.inc"
 .endif
 .endif
 .endif

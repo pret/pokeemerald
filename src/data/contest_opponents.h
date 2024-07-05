@@ -143,13 +143,13 @@ const struct ContestWinner gDefaultContestWinners[] =
         .trainerId = 0xFFFF,
         .species = SPECIES_ELECTRIKE,
         .contestCategory = CONTEST_CATEGORY_CUTE,
-    #if ENGLISH
-        .monName = _("ELECTER"),
-        .trainerName = _("EZRA"),
-    #elif FRENCH
+    #if FRENCH
         .monName = _("DYNONO"),
         .trainerName = _("AXEL"),
     #elif ITALIAN
+        .monName = _("ELECTER"),
+        .trainerName = _("EZRA"),
+    #else //ENGLISH
         .monName = _("ELECTER"),
         .trainerName = _("EZRA"),
     #endif
@@ -160,13 +160,13 @@ const struct ContestWinner gDefaultContestWinners[] =
         .trainerId = 0xFFFF,
         .species = SPECIES_TROPIUS,
         .contestCategory = CONTEST_CATEGORY_COOL,
-    #if ENGLISH
-        .monName = _("TROPO"),
-        .trainerName = _("ALLAN"),
-    #elif FRENCH
+    #if FRENCH
         .monName = _("TROPO"),
         .trainerName = _("NICOLAS"),
     #elif ITALIAN
+        .monName = _("TROPO"),
+        .trainerName = _("ALLAN"),
+    #else //ENGLISH
         .monName = _("TROPO"),
         .trainerName = _("ALLAN"),
     #endif
@@ -177,13 +177,13 @@ const struct ContestWinner gDefaultContestWinners[] =
         .trainerId = 0xFFFF,
         .species = SPECIES_XATU,
         .contestCategory = CONTEST_CATEGORY_BEAUTY,
-    #if ENGLISH
-        .monName = _("TUXA"),
-        .trainerName = _("JULIET"),
-    #elif FRENCH
+    #if FRENCH
         .monName = _("TUXA"),
         .trainerName = _("JULIA"),
     #elif ITALIAN
+        .monName = _("TUXA"),
+        .trainerName = _("JULIET"),
+    #else //ENGLISH
         .monName = _("TUXA"),
         .trainerName = _("JULIET"),
     #endif
@@ -194,15 +194,15 @@ const struct ContestWinner gDefaultContestWinners[] =
         .trainerId = 0xFFFF,
         .species = SPECIES_PLUSLE,
         .contestCategory = CONTEST_CATEGORY_TOUGH,
-    #if ENGLISH
-        .monName = _("PULSE"),
-        .trainerName = _("BAILY"),
-    #elif FRENCH
+    #if FRENCH
         .monName = _("POSSI"),
         .trainerName = _("ELTON"),
     #elif ITALIAN
         .monName = _("PULSE"),
         .trainerName = _("LEIO"),
+    #else //ENGLISH
+        .monName = _("PULSE"),
+        .trainerName = _("BAILY"),
     #endif
         .contestRank = CONTEST_RANK_MASTER
     },
@@ -211,13 +211,13 @@ const struct ContestWinner gDefaultContestWinners[] =
         .trainerId = 0xFFFF,
         .species = SPECIES_SHUPPET,
         .contestCategory = CONTEST_CATEGORY_SMART,
-    #if ENGLISH
-        .monName = _("SHUPUP"),
-        .trainerName = _("MELANY"),
-    #elif FRENCH
+    #if FRENCH
         .monName = _("CHOMBY"),
         .trainerName = _("MELANIE"),
     #elif ITALIAN
+        .monName = _("SHUPUP"),
+        .trainerName = _("MELANY"),
+    #else //ENGLISH
         .monName = _("SHUPUP"),
         .trainerName = _("MELANY"),
     #endif
@@ -228,13 +228,13 @@ const struct ContestWinner gDefaultContestWinners[] =
         .trainerId = 0xFFFF,
         .species = SPECIES_ZANGOOSE,
         .contestCategory = CONTEST_CATEGORY_COOL,
-    #if ENGLISH
-        .monName = _("GOOZAN"),
-        .trainerName = _("HANA"),
-    #elif FRENCH
+    #if FRENCH
         .monName = _("GRIFFIK"),
         .trainerName = _("ANNE"),
     #elif ITALIAN
+        .monName = _("GOOZAN"),
+        .trainerName = _("HANA"),
+    #else //ENGLISH
         .monName = _("GOOZAN"),
         .trainerName = _("HANA"),
     #endif
@@ -245,15 +245,15 @@ const struct ContestWinner gDefaultContestWinners[] =
         .trainerId = 0xFFFF,
         .species = SPECIES_LOUDRED,
         .contestCategory = CONTEST_CATEGORY_BEAUTY,
-    #if ENGLISH
-        .monName = _("LOUDED"),
-        .trainerName = _("BRYANT"),
-    #elif FRENCH
+    #if FRENCH
         .monName = _("BABOUM"),
         .trainerName = _("JACO"),
     #elif ITALIAN
         .monName = _("LOUDED"),
         .trainerName = _("BERTO"),
+    #else //ENGLISH
+        .monName = _("LOUDED"),
+        .trainerName = _("BRYANT"),
     #endif
         .contestRank = CONTEST_RANK_HYPER
     },
@@ -262,13 +262,13 @@ const struct ContestWinner gDefaultContestWinners[] =
         .trainerId = 0xFFFF,
         .species = SPECIES_DELCATTY,
         .contestCategory = CONTEST_CATEGORY_CUTE,
-    #if ENGLISH
-        .monName = _("KITSY"),
-        .trainerName = _("OMAR"),
-    #elif FRENCH
+    #if FRENCH
         .monName = _("KITSY"),
         .trainerName = _("OMAR"),
     #elif ITALIAN
+        .monName = _("KITSY"),
+        .trainerName = _("OMAR"),
+    #else //ENGLISH
         .monName = _("KITSY"),
         .trainerName = _("OMAR"),
     #endif
@@ -280,13 +280,13 @@ const struct ContestPokemon gContestOpponents[] =
 {
     [CONTEST_OPPONENT_JIMMY] = {
         .species = SPECIES_POOCHYENA,
-    #if ENGLISH
-        .nickname = _("POOCHY"),
-        .trainerName = _("JIMMY"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("PUPUCE"),
         .trainerName = _("OLIVE"),
     #elif ITALIAN
+        .nickname = _("POOCHY"),
+        .trainerName = _("JIMMY"),
+    #else //ENGLISH
         .nickname = _("POOCHY"),
         .trainerName = _("JIMMY"),
     #endif
@@ -316,15 +316,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_EDITH] = {
         .species = SPECIES_ILLUMISE,
-    #if ENGLISH
-        .nickname = _("MUSILLE"),
-        .trainerName = _("EDITH"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("MUMI"),
         .trainerName = _("EDITH"),
     #elif ITALIAN
         .nickname = _("MUSILLE"),
         .trainerName = _("AMBRA"),
+    #else //ENGLISH
+        .nickname = _("MUSILLE"),
+        .trainerName = _("EDITH"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_GIRL_1,
         .aiFlags = CONTEST_AI_SET_2,
@@ -352,15 +352,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_EVAN] = {
         .species = SPECIES_DUSTOX,
-    #if ENGLISH
-        .nickname = _("DUSTER"),
-        .trainerName = _("EVAN"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("PINOX"),
         .trainerName = _("HUGUES"),
     #elif ITALIAN
         .nickname = _("DUSTER"),
         .trainerName = _("IVANO"),
+    #else //ENGLISH
+        .nickname = _("DUSTER"),
+        .trainerName = _("EVAN"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_LITTLE_BOY,
         .aiFlags = CONTEST_AI_SET_3,
@@ -388,15 +388,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_KELSEY] = {
         .species = SPECIES_SEEDOT,
-    #if ENGLISH
-        .nickname = _("DOTS"),
-        .trainerName = _("KELSEY"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("NIPIOT"),
         .trainerName = _("JOHANN"),
     #elif ITALIAN
         .nickname = _("DOTS"),
         .trainerName = _("CAROLA"),
+    #else //ENGLISH
+        .nickname = _("DOTS"),
+        .trainerName = _("KELSEY"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_WOMAN_1,
         .aiFlags = CONTEST_AI_SET_4,
@@ -424,15 +424,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_MADISON] = {
         .species = SPECIES_TAILLOW,
-    #if ENGLISH
-        .nickname = _("TATAY"),
-        .trainerName = _("MADISON"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("NINI"),
         .trainerName = _("ANNE"),
     #elif ITALIAN
         .nickname = _("TATAY"),
         .trainerName = _("LILLY"),
+    #else //ENGLISH
+        .nickname = _("TATAY"),
+        .trainerName = _("MADISON"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_POKEFAN_F,
         .aiFlags = CONTEST_AI_SET_5,
@@ -460,13 +460,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_RAYMOND] = {
         .species = SPECIES_NINCADA,
-    #if ENGLISH
-        .nickname = _("NINDA"),
-        .trainerName = _("RAYMOND"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("GRINJA"),
         .trainerName = _("SEB"),
     #elif ITALIAN
+        .nickname = _("NINDA"),
+        .trainerName = _("RAYMOND"),
+    #else //ENGLISH
         .nickname = _("NINDA"),
         .trainerName = _("RAYMOND"),
     #endif
@@ -496,15 +496,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_GRANT] = {
         .species = SPECIES_SHROOMISH,
-    #if ENGLISH
-        .nickname = _("SMISH"),
-        .trainerName = _("GRANT"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("BOUBOU"),
         .trainerName = _("QUENTIN"),
     #elif ITALIAN
         .nickname = _("SMISH"),
         .trainerName = _("GIGIO"),
+    #else //ENGLISH
+        .nickname = _("SMISH"),
+        .trainerName = _("GRANT"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_YOUNGSTER,
         .aiFlags = CONTEST_AI_SET_7,
@@ -532,15 +532,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_PAIGE] = {
         .species = SPECIES_SPHEAL,
-    #if ENGLISH
-        .nickname = _("SLEAL"),
-        .trainerName = _("PAIGE"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("OBLIE"),
         .trainerName = _("CHANCE"),
     #elif ITALIAN
         .nickname = _("SPHELI"),
         .trainerName = _("LORENA"),
+    #else //ENGLISH
+        .nickname = _("SLEAL"),
+        .trainerName = _("PAIGE"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_WOMAN_4,
         .aiFlags = CONTEST_AI_SET_8,
@@ -568,15 +568,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_ALEC] = {
         .species = SPECIES_SLAKOTH,
-    #if ENGLISH
-        .nickname = _("SLOKTH"),
-        .trainerName = _("ALEC"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("PATROVIT"),
         .trainerName = _("STEF"),
     #elif ITALIAN
         .nickname = _("SLOKTH"),
         .trainerName = _("EZIO"),
+    #else //ENGLISH
+        .nickname = _("SLOKTH"),
+        .trainerName = _("ALEC"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_CAMPER,
         .aiFlags = CONTEST_AI_SET_9,
@@ -604,15 +604,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_SYDNEY] = {
         .species = SPECIES_WHISMUR,
-    #if ENGLISH
-        .nickname = _("WHIRIS"),
-        .trainerName = _("SYDNEY"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("CHUTI"),
         .trainerName = _("ALBANE"),
     #elif ITALIAN
         .nickname = _("WHIRIS"),
         .trainerName = _("LUANA"),
+    #else //ENGLISH
+        .nickname = _("WHIRIS"),
+        .trainerName = _("SYDNEY"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_LASS,
         .aiFlags = CONTEST_AI_SET_A,
@@ -640,15 +640,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_MORRIS] = {
         .species = SPECIES_MAKUHITA,
-    #if ENGLISH
-        .nickname = _("MAHITA"),
-        .trainerName = _("MORRIS"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("MAHITA"),
         .trainerName = _("DANIEL"),
     #elif ITALIAN
         .nickname = _("MAHITA"),
         .trainerName = _("SABINO"),
+    #else //ENGLISH
+        .nickname = _("MAHITA"),
+        .trainerName = _("MORRIS"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_SCHOOL_KID_M,
         .aiFlags = CONTEST_AI_SET_B,
@@ -676,15 +676,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_MARIAH] = {
         .species = SPECIES_ARON,
-    #if ENGLISH
-        .nickname = _("RONAR"),
-        .trainerName = _("MARIAH"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("GALI"),
         .trainerName = _("MARION"),
     #elif ITALIAN
         .nickname = _("RONAR"),
         .trainerName = _("LIALA"),
+    #else //ENGLISH
+        .nickname = _("RONAR"),
+        .trainerName = _("MARIAH"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_GIRL_2,
         .aiFlags = CONTEST_AI_SET_C,
@@ -712,15 +712,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_RUSSELL] = {
         .species = SPECIES_CROBAT,
-    #if ENGLISH
-        .nickname = _("BATRO"),
-        .trainerName = _("RUSSELL"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("FEFE"),
         .trainerName = _("DENIS"),
     #elif ITALIAN
         .nickname = _("BATRO"),
         .trainerName = _("GIULIO"),
+    #else //ENGLISH
+        .nickname = _("BATRO"),
+        .trainerName = _("RUSSELL"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_MAN_3,
         .aiFlags = CONTEST_AI_SET_D,
@@ -748,13 +748,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_MELANIE] = {
         .species = SPECIES_GULPIN,
-    #if ENGLISH
-        .nickname = _("GULIN"),
-        .trainerName = _("MELANIE"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("SLURP"),
         .trainerName = _("JOANNE"),
     #elif ITALIAN
+        .nickname = _("GULIN"),
+        .trainerName = _("MELANIE"),
+    #else //ENGLISH
         .nickname = _("GULIN"),
         .trainerName = _("MELANIE"),
     #endif
@@ -784,15 +784,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_CHANCE] = {
         .species = SPECIES_MANECTRIC,
-    #if ENGLISH
-        .nickname = _("RIKELEC"),
-        .trainerName = _("CHANCE"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("DYNI"),
         .trainerName = _("ALEX"),
     #elif ITALIAN
         .nickname = _("RIKELEC"),
         .trainerName = _("BIAGIO"),
+    #else //ENGLISH
+        .nickname = _("RIKELEC"),
+        .trainerName = _("CHANCE"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_RICH_BOY,
         .aiFlags = CONTEST_AI_SET_F,
@@ -820,13 +820,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_AGATHA] = {
         .species = SPECIES_BULBASAUR,
-    #if ENGLISH
-        .nickname = _("BULBY"),
-        .trainerName = _("AGATHA"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("BULBI"),
         .trainerName = _("AGATHA"),
     #elif ITALIAN
+        .nickname = _("BULBY"),
+        .trainerName = _("AGATHA"),
+    #else //ENGLISH
         .nickname = _("BULBY"),
         .trainerName = _("AGATHA"),
     #endif
@@ -856,15 +856,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_BEAU] = {
         .species = SPECIES_BUTTERFREE,
-    #if ENGLISH
-        .nickname = _("FUTTERBE"),
-        .trainerName = _("BEAU"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("PAPILOU"),
         .trainerName = _("JANIE"),
     #elif ITALIAN
         .nickname = _("FUTTERBE"),
         .trainerName = _("BEBA"),
+    #else //ENGLISH
+        .nickname = _("FUTTERBE"),
+        .trainerName = _("BEAU"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_HEX_MANIAC,
         .aiFlags = CONTEST_AI_SET_2,
@@ -892,15 +892,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_KAY] = {
         .species = SPECIES_PIDGEOTTO,
-    #if ENGLISH
-        .nickname = _("PIDEOT"),
-        .trainerName = _("KAY"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("KOUKOU"),
         .trainerName = _("KATY"),
     #elif ITALIAN
         .nickname = _("PIDEOT"),
         .trainerName = _("KALY"),
+    #else //ENGLISH
+        .nickname = _("PIDEOT"),
+        .trainerName = _("KAY"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_WOMAN_5,
         .aiFlags = CONTEST_AI_SET_3,
@@ -928,15 +928,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_CALE] = {
         .species = SPECIES_DIGLETT,
-    #if ENGLISH
-        .nickname = _("DIGLE"),
-        .trainerName = _("CALE"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("PIKPIK"),
         .trainerName = _("AYMERIC"),
     #elif ITALIAN
         .nickname = _("DIGLE"),
         .trainerName = _("CARLINO"),
+    #else //ENGLISH
+        .nickname = _("DIGLE"),
+        .trainerName = _("CALE"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_HIKER,
         .aiFlags = CONTEST_AI_SET_4,
@@ -964,15 +964,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_CAITLIN] = {
         .species = SPECIES_POLIWAG,
-    #if ENGLISH
-        .nickname = _("WAGIL"),
-        .trainerName = _("CAITLIN"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("TARPI"),
         .trainerName = _("EMMA"),
     #elif ITALIAN
         .nickname = _("POLI"),
         .trainerName = _("CADALIA"),
+    #else //ENGLISH
+        .nickname = _("WAGIL"),
+        .trainerName = _("CAITLIN"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_TUBER_F,
         .aiFlags = CONTEST_AI_SET_5,
@@ -1000,15 +1000,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_COLBY] = {
         .species = SPECIES_TOTODILE,
-    #if ENGLISH
-        .nickname = _("TOTDIL"),
-        .trainerName = _("COLBY"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("KAKIM"),
         .trainerName = _("KEVIN"),
     #elif ITALIAN
         .nickname = _("TOTDIL"),
         .trainerName = _("CICCO"),
+    #else //ENGLISH
+        .nickname = _("TOTDIL"),
+        .trainerName = _("COLBY"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_NINJA_BOY,
         .aiFlags = CONTEST_AI_SET_6,
@@ -1036,13 +1036,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_KYLIE] = {
         .species = SPECIES_LEDYBA,
-    #if ENGLISH
-        .nickname = _("BALEDY"),
-        .trainerName = _("KYLIE"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("KOXX"),
         .trainerName = _("MARIE"),
     #elif ITALIAN
+        .nickname = _("BALEDY"),
+        .trainerName = _("KYLIE"),
+    #else //ENGLISH
         .nickname = _("BALEDY"),
         .trainerName = _("KYLIE"),
     #endif
@@ -1072,15 +1072,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_LIAM] = {
         .species = SPECIES_DELIBIRD,
-    #if ENGLISH
-        .nickname = _("BIRDLY"),
-        .trainerName = _("LIAM"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("DIZY"),
         .trainerName = _("LIAM"),
     #elif ITALIAN
         .nickname = _("BIRDLY"),
         .trainerName = _("LARO"),
+    #else //ENGLISH
+        .nickname = _("BIRDLY"),
+        .trainerName = _("LIAM"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_MAN_5,
         .aiFlags = CONTEST_AI_SET_8,
@@ -1108,13 +1108,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_MILO] = {
         .species = SPECIES_LARVITAR,
-    #if ENGLISH
-        .nickname = _("TARVITAR"),
-        .trainerName = _("MILO"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("BRIBRI"),
         .trainerName = _("SAM"),
     #elif ITALIAN
+        .nickname = _("TARVITAR"),
+        .trainerName = _("MILO"),
+    #else //ENGLISH
         .nickname = _("TARVITAR"),
         .trainerName = _("MILO"),
     #endif
@@ -1144,15 +1144,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_KARINA] = {
         .species = SPECIES_ROSELIA,
-    #if ENGLISH
-        .nickname = _("RELIA"),
-        .trainerName = _("KARINA"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("RELIA"),
         .trainerName = _("LYDIA"),
     #elif ITALIAN
         .nickname = _("RELIA"),
         .trainerName = _("BRUNA"),
+    #else //ENGLISH
+        .nickname = _("RELIA"),
+        .trainerName = _("KARINA"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_PICNICKER,
         .aiFlags = CONTEST_AI_SET_10,
@@ -1180,13 +1180,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_BOBBY] = {
         .species = SPECIES_DODRIO,
-    #if ENGLISH
-        .nickname = _("DUODO"),
-        .trainerName = _("BOBBY"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("DUODO"),
         .trainerName = _("NICO"),
     #elif ITALIAN
+        .nickname = _("DUODO"),
+        .trainerName = _("BOBBY"),
+    #else //ENGLISH
         .nickname = _("DUODO"),
         .trainerName = _("BOBBY"),
     #endif
@@ -1216,15 +1216,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_CLAIRE] = {
         .species = SPECIES_TRAPINCH,
-    #if ENGLISH
-        .nickname = _("PINCHIN"),
-        .trainerName = _("CLAIRE"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("KRAKY"),
         .trainerName = _("FRANCE"),
     #elif ITALIAN
         .nickname = _("PINCHIN"),
         .trainerName = _("CLARA"),
+    #else //ENGLISH
+        .nickname = _("PINCHIN"),
+        .trainerName = _("CLAIRE"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_GIRL_1,
         .aiFlags = CONTEST_AI_SET_11,
@@ -1252,15 +1252,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_WILLIE] = {
         .species = SPECIES_CACNEA,
-    #if ENGLISH
-        .nickname = _("NACAC"),
-        .trainerName = _("WILLIE"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("NACAC"),
         .trainerName = _("YANNICK"),
     #elif ITALIAN
         .nickname = _("NACAC"),
         .trainerName = _("WILLY"),
+    #else //ENGLISH
+        .nickname = _("NACAC"),
+        .trainerName = _("WILLIE"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_LITTLE_BOY,
         .aiFlags = CONTEST_AI_SET_12,
@@ -1288,15 +1288,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_CASSIDY] = {
         .species = SPECIES_SANDSLASH,
-    #if ENGLISH
-        .nickname = _("SHRAND"),
-        .trainerName = _("CASSIDY"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("BLETTE"),
         .trainerName = _("RAISSA"),
     #elif ITALIAN
         .nickname = _("SHRAND"),
         .trainerName = _("CLOE"),
+    #else //ENGLISH
+        .nickname = _("SHRAND"),
+        .trainerName = _("CASSIDY"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_POKEFAN_F,
         .aiFlags = CONTEST_AI_SET_13,
@@ -1324,15 +1324,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_MORGAN] = {
         .species = SPECIES_BALTOY,
-    #if ENGLISH
-        .nickname = _("TOYBAL"),
-        .trainerName = _("MORGAN"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("BALBU"),
         .trainerName = _("DIMITRI"),
     #elif ITALIAN
         .nickname = _("TOYBAL"),
         .trainerName = _("DAVIDE"),
+    #else //ENGLISH
+        .nickname = _("TOYBAL"),
+        .trainerName = _("MORGAN"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_BLACK_BELT,
         .aiFlags = CONTEST_AI_SET_14,
@@ -1360,15 +1360,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_SUMMER] = {
         .species = SPECIES_MEDICHAM,
-    #if ENGLISH
-        .nickname = _("CHAMCHAM"),
-        .trainerName = _("SUMMER"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("CHARMILLE"),
         .trainerName = _("OLGA"),
     #elif ITALIAN
         .nickname = _("CHAMCHAM"),
         .trainerName = _("DIANA"),
+    #else //ENGLISH
+        .nickname = _("CHAMCHAM"),
+        .trainerName = _("SUMMER"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_WOMAN_4,
         .aiFlags = CONTEST_AI_SET_15,
@@ -1396,15 +1396,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_MILES] = {
         .species = SPECIES_SPINDA,
-    #if ENGLISH
-        .nickname = _("SPININ"),
-        .trainerName = _("MILES"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("SPININ"),
         .trainerName = _("XAVIER"),
     #elif ITALIAN
         .nickname = _("SPININ"),
         .trainerName = _("MARK"),
+    #else //ENGLISH
+        .nickname = _("SPININ"),
+        .trainerName = _("MILES"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_CAMPER,
         .aiFlags = CONTEST_AI_SET_16,
@@ -1432,15 +1432,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_AUDREY] = {
         .species = SPECIES_SWABLU,
-    #if ENGLISH
-        .nickname = _("SWABY"),
-        .trainerName = _("AUDREY"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("VEGA"),
         .trainerName = _("AUDREY"),
     #elif ITALIAN
         .nickname = _("SWABY"),
         .trainerName = _("AZZURRA"),
+    #else //ENGLISH
+        .nickname = _("SWABY"),
+        .trainerName = _("AUDREY"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_LASS,
         .aiFlags = CONTEST_AI_SET_17,
@@ -1468,15 +1468,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_AVERY] = {
         .species = SPECIES_SPOINK,
-    #if ENGLISH
-        .nickname = _("POINKER"),
-        .trainerName = _("AVERY"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("PIGPIG"),
         .trainerName = _("GREG"),
     #elif ITALIAN
         .nickname = _("POINKER"),
         .trainerName = _("FABIO"),
+    #else //ENGLISH
+        .nickname = _("POINKER"),
+        .trainerName = _("AVERY"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_SCHOOL_KID_M,
         .aiFlags = CONTEST_AI_SET_A,
@@ -1504,15 +1504,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_ARIANA] = {
         .species = SPECIES_KECLEON,
-    #if ENGLISH
-        .nickname = _("KECON"),
-        .trainerName = _("ARIANA"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("CAMY"),
         .trainerName = _("ARIANE"),
     #elif ITALIAN
         .nickname = _("KECON"),
         .trainerName = _("TAMY"),
+    #else //ENGLISH
+        .nickname = _("KECON"),
+        .trainerName = _("ARIANA"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_GIRL_2,
         .aiFlags = CONTEST_AI_SET_18,
@@ -1540,15 +1540,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_ASHTON] = {
         .species = SPECIES_GOLDEEN,
-    #if ENGLISH
-        .nickname = _("GOLDEN"),
-        .trainerName = _("ASHTON"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("RENA"),
         .trainerName = _("HUBERT"),
     #elif ITALIAN
         .nickname = _("GOLDEN"),
         .trainerName = _("ENZO"),
+    #else //ENGLISH
+        .nickname = _("GOLDEN"),
+        .trainerName = _("ASHTON"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_MAN_3,
         .aiFlags = CONTEST_AI_SET_19,
@@ -1576,13 +1576,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_SANDRA] = {
         .species = SPECIES_BARBOACH,
-    #if ENGLISH
-        .nickname = _("BOBOACH"),
-        .trainerName = _("SANDRA"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("BOBACHE"),
         .trainerName = _("SANDRA"),
     #elif ITALIAN
+        .nickname = _("BOBOACH"),
+        .trainerName = _("SANDRA"),
+    #else //ENGLISH
         .nickname = _("BOBOACH"),
         .trainerName = _("SANDRA"),
     #endif
@@ -1612,15 +1612,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_CARSON] = {
         .species = SPECIES_SKARMORY,
-    #if ENGLISH
-        .nickname = _("CORPY"),
-        .trainerName = _("CARSON"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("ARRY"),
         .trainerName = _("CARSON"),
     #elif ITALIAN
         .nickname = _("SKARMY"),
         .trainerName = _("PIERRE"),
+    #else //ENGLISH
+        .nickname = _("CORPY"),
+        .trainerName = _("CARSON"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_YOUNGSTER,
         .aiFlags = CONTEST_AI_SET_1B,
@@ -1648,13 +1648,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_KATRINA] = {
         .species = SPECIES_LOTAD,
-    #if ENGLISH
-        .nickname = _("TADO"),
-        .trainerName = _("KATRINA"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("PTIPIO"),
         .trainerName = _("GWEN"),
     #elif ITALIAN
+        .nickname = _("TADO"),
+        .trainerName = _("KATRINA"),
+    #else //ENGLISH
         .nickname = _("TADO"),
         .trainerName = _("KATRINA"),
     #endif
@@ -1684,13 +1684,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_LUKE] = {
         .species = SPECIES_SLOWBRO,
-    #if ENGLISH
-        .nickname = _("BROWLO"),
-        .trainerName = _("LUKE"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("GADOSS"),
         .trainerName = _("LUKE"),
     #elif ITALIAN
+        .nickname = _("BROWLO"),
+        .trainerName = _("LUKE"),
+    #else //ENGLISH
         .nickname = _("BROWLO"),
         .trainerName = _("LUKE"),
     #endif
@@ -1720,15 +1720,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_RAUL] = {
         .species = SPECIES_FARFETCHD,
-    #if ENGLISH
-        .nickname = _("FETCHIN"),
-        .trainerName = _("RAUL"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("ARTICHO"),
         .trainerName = _("RAUL"),
     #elif ITALIAN
         .nickname = _("FARFI"),
         .trainerName = _("RINO"),
+    #else //ENGLISH
+        .nickname = _("FETCHIN"),
+        .trainerName = _("RAUL"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_MAN_5,
         .aiFlags = CONTEST_AI_SET_2,
@@ -1756,13 +1756,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_JADA] = {
         .species = SPECIES_SEEL,
-    #if ENGLISH
-        .nickname = _("SEELEY"),
-        .trainerName = _("JADA"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("RIAM"),
         .trainerName = _("JADE"),
     #elif ITALIAN
+        .nickname = _("SEELEY"),
+        .trainerName = _("JADA"),
+    #else //ENGLISH
         .nickname = _("SEELEY"),
         .trainerName = _("JADA"),
     #endif
@@ -1792,15 +1792,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_ZEEK] = {
         .species = SPECIES_DROWZEE,
-    #if ENGLISH
-        .nickname = _("DROWZIN"),
-        .trainerName = _("ZEEK"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("SUPORI"),
         .trainerName = _("ROBERTO"),
     #elif ITALIAN
         .nickname = _("DROWZIN"),
         .trainerName = _("JACK"),
+    #else //ENGLISH
+        .nickname = _("DROWZIN"),
+        .trainerName = _("ZEEK"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_PSYCHIC_M,
         .aiFlags = CONTEST_AI_SET_4,
@@ -1828,15 +1828,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_DIEGO] = {
         .species = SPECIES_HITMONCHAN,
-    #if ENGLISH
-        .nickname = _("HITEMON"),
-        .trainerName = _("DIEGO"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("PIFPAF"),
         .trainerName = _("DIEGO"),
     #elif ITALIAN
         .nickname = _("HITEMON"),
         .trainerName = _("GIOVI"),
+    #else //ENGLISH
+        .nickname = _("HITEMON"),
+        .trainerName = _("DIEGO"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_EXPERT_M,
         .aiFlags = CONTEST_AI_SET_5,
@@ -1864,15 +1864,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_ALIYAH] = {
         .species = SPECIES_BLISSEY,
-    #if ENGLISH
-        .nickname = _("BLISS"),
-        .trainerName = _("ALIYAH"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("PHORIE"),
         .trainerName = _("ALIYAH"),
     #elif ITALIAN
         .nickname = _("BLISS"),
         .trainerName = _("LELY"),
+    #else //ENGLISH
+        .nickname = _("BLISS"),
+        .trainerName = _("ALIYAH"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_TEALA,
         .aiFlags = CONTEST_AI_SET_6,
@@ -1900,13 +1900,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_NATALIA] = {
         .species = SPECIES_ELEKID,
-    #if ENGLISH
-        .nickname = _("KIDLEK"),
-        .trainerName = _("NATALIA"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("KIDLEK"),
         .trainerName = _("NATALIA"),
     #elif ITALIAN
+        .nickname = _("KIDLEK"),
+        .trainerName = _("NATALIA"),
+    #else //ENGLISH
         .nickname = _("KIDLEK"),
         .trainerName = _("NATALIA"),
     #endif
@@ -1936,13 +1936,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_DEVIN] = {
         .species = SPECIES_SNUBBULL,
-    #if ENGLISH
-        .nickname = _("SNUBBINS"),
-        .trainerName = _("DEVIN"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("SNUBBINS"),
         .trainerName = _("MARCO"),
     #elif ITALIAN
+        .nickname = _("SNUBBINS"),
+        .trainerName = _("DEVIN"),
+    #else //ENGLISH
         .nickname = _("SNUBBINS"),
         .trainerName = _("DEVIN"),
     #endif
@@ -1972,15 +1972,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_TYLOR] = {
         .species = SPECIES_MISDREAVUS,
-    #if ENGLISH
-        .nickname = _("DREAVIS"),
-        .trainerName = _("TYLOR"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("FEUVI"),
         .trainerName = _("LILOU"),
     #elif ITALIAN
         .nickname = _("DREAVIS"),
         .trainerName = _("TATA"),
+    #else //ENGLISH
+        .nickname = _("DREAVIS"),
+        .trainerName = _("TYLOR"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_HEX_MANIAC,
         .aiFlags = CONTEST_AI_SET_9,
@@ -2008,13 +2008,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_RONNIE] = {
         .species = SPECIES_LAIRON,
-    #if ENGLISH
-        .nickname = _("LAIRN"),
-        .trainerName = _("RONNIE"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("GAN"),
         .trainerName = _("ETIENNE"),
     #elif ITALIAN
+        .nickname = _("LAIRN"),
+        .trainerName = _("RONNIE"),
+    #else //ENGLISH
         .nickname = _("LAIRN"),
         .trainerName = _("RONNIE"),
     #endif
@@ -2044,15 +2044,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_CLAUDIA] = {
         .species = SPECIES_SHIFTRY,
-    #if ENGLISH
-        .nickname = _("SHIFTY"),
-        .trainerName = _("CLAUDIA"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("GALOU"),
         .trainerName = _("CLAUDIA"),
     #elif ITALIAN
         .nickname = _("SHIFTY"),
         .trainerName = _("DENISE"),
+    #else //ENGLISH
+        .nickname = _("SHIFTY"),
+        .trainerName = _("CLAUDIA"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_GIRL_1,
         .aiFlags = CONTEST_AI_SET_2,
@@ -2080,13 +2080,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_ELIAS] = {
         .species = SPECIES_NINJASK,
-    #if ENGLISH
-        .nickname = _("NINAS"),
-        .trainerName = _("ELIAS"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("NINAS"),
         .trainerName = _("GONTRAN"),
     #elif ITALIAN
+        .nickname = _("NINAS"),
+        .trainerName = _("ELIAS"),
+    #else //ENGLISH
         .nickname = _("NINAS"),
         .trainerName = _("ELIAS"),
     #endif
@@ -2116,15 +2116,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_JADE] = {
         .species = SPECIES_SWELLOW,
-    #if ENGLISH
-        .nickname = _("WELOW"),
-        .trainerName = _("JADE"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("HELEDEL"),
         .trainerName = _("ZADIA"),
     #elif ITALIAN
         .nickname = _("WELOW"),
         .trainerName = _("GIADA"),
+    #else //ENGLISH
+        .nickname = _("WELOW"),
+        .trainerName = _("JADE"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_POKEFAN_F,
         .aiFlags = CONTEST_AI_SET_12,
@@ -2152,13 +2152,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_FRANCIS] = {
         .species = SPECIES_MIGHTYENA,
-    #if ENGLISH
-        .nickname = _("YENA"),
-        .trainerName = _("FRANCIS"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("YENA"),
         .trainerName = _("FRANCIS"),
     #elif ITALIAN
+        .nickname = _("YENA"),
+        .trainerName = _("FRANCIS"),
+    #else //ENGLISH
         .nickname = _("YENA"),
         .trainerName = _("FRANCIS"),
     #endif
@@ -2188,13 +2188,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_ALISHA] = {
         .species = SPECIES_BEAUTIFLY,
-    #if ENGLISH
-        .nickname = _("TIFLY"),
-        .trainerName = _("ALISHA"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("CARMA"),
         .trainerName = _("YVANA"),
     #elif ITALIAN
+        .nickname = _("TIFLY"),
+        .trainerName = _("ALISHA"),
+    #else //ENGLISH
         .nickname = _("TIFLY"),
         .trainerName = _("ALISHA"),
     #endif
@@ -2224,13 +2224,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_SAUL] = {
         .species = SPECIES_SEAKING,
-    #if ENGLISH
-        .nickname = _("KINGSEA"),
-        .trainerName = _("SAUL"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("ROIPI"),
         .trainerName = _("ENZO"),
     #elif ITALIAN
+        .nickname = _("KINGSEA"),
+        .trainerName = _("SAUL"),
+    #else //ENGLISH
         .nickname = _("KINGSEA"),
         .trainerName = _("SAUL"),
     #endif
@@ -2260,15 +2260,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_FELICIA] = {
         .species = SPECIES_CASTFORM,
-    #if ENGLISH
-        .nickname = _("CASTER"),
-        .trainerName = _("FELICIA"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("PHEO"),
         .trainerName = _("NOLWENN"),
     #elif ITALIAN
         .nickname = _("CASTER"),
         .trainerName = _("LIZIA"),
+    #else //ENGLISH
+        .nickname = _("CASTER"),
+        .trainerName = _("FELICIA"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_LASS,
         .aiFlags = CONTEST_AI_SET_16,
@@ -2296,15 +2296,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_EMILIO] = {
         .species = SPECIES_MACHOKE,
-    #if ENGLISH
-        .nickname = _("CHOKEM"),
-        .trainerName = _("EMILIO"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("MACHIP"),
         .trainerName = _("ARNAUD"),
     #elif ITALIAN
         .nickname = _("CHOKEM"),
         .trainerName = _("PACO"),
+    #else //ENGLISH
+        .nickname = _("CHOKEM"),
+        .trainerName = _("EMILIO"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_SCHOOL_KID_M,
         .aiFlags = CONTEST_AI_SET_20,
@@ -2332,15 +2332,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_KARLA] = {
         .species = SPECIES_LOMBRE,
-    #if ENGLISH
-        .nickname = _("LOMBE"),
-        .trainerName = _("KARLA"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("LOMBE"),
         .trainerName = _("CARLA"),
     #elif ITALIAN
         .nickname = _("LOMBE"),
         .trainerName = _("CARLA"),
+    #else //ENGLISH
+        .nickname = _("LOMBE"),
+        .trainerName = _("KARLA"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_GIRL_2,
         .aiFlags = CONTEST_AI_SET_A,
@@ -2368,15 +2368,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_DARRYL] = {
         .species = SPECIES_SEVIPER,
-    #if ENGLISH
-        .nickname = _("VIPES"),
-        .trainerName = _("DARRYL"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("VIPES"),
         .trainerName = _("NORBERT"),
     #elif ITALIAN
         .nickname = _("VIPES"),
         .trainerName = _("RAUL"),
+    #else //ENGLISH
+        .nickname = _("VIPES"),
+        .trainerName = _("DARRYL"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_MAN_3,
         .aiFlags = CONTEST_AI_SET_18,
@@ -2404,13 +2404,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_SELENA] = {
         .species = SPECIES_WAILMER,
-    #if ENGLISH
-        .nickname = _("MERAIL"),
-        .trainerName = _("SELENA"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("MERAIL"),
         .trainerName = _("SELENE"),
     #elif ITALIAN
+        .nickname = _("MERAIL"),
+        .trainerName = _("SELENA"),
+    #else //ENGLISH
         .nickname = _("MERAIL"),
         .trainerName = _("SELENA"),
     #endif
@@ -2440,13 +2440,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_NOEL] = {
         .species = SPECIES_MAGIKARP,
-    #if ENGLISH
-        .nickname = _("KARPAG"),
-        .trainerName = _("NOEL"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("KARPAG"),
         .trainerName = _("NOEL"),
     #elif ITALIAN
+        .nickname = _("KARPAG"),
+        .trainerName = _("NOEL"),
+    #else //ENGLISH
         .nickname = _("KARPAG"),
         .trainerName = _("NOEL"),
     #endif
@@ -2476,13 +2476,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_LACEY] = {
         .species = SPECIES_LUNATONE,
-    #if ENGLISH
-        .nickname = _("LUNONE"),
-        .trainerName = _("LACEY"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("KARTIE"),
         .trainerName = _("LAURIE"),
     #elif ITALIAN
+        .nickname = _("LUNONE"),
+        .trainerName = _("LACEY"),
+    #else //ENGLISH
         .nickname = _("LUNONE"),
         .trainerName = _("LACEY"),
     #endif
@@ -2512,15 +2512,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_CORBIN] = {
         .species = SPECIES_ABSOL,
-    #if ENGLISH
-        .nickname = _("ABSO"),
-        .trainerName = _("CORBIN"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("ABSO"),
         .trainerName = _("BRAHIM"),
     #elif ITALIAN
         .nickname = _("ABSO"),
         .trainerName = _("ELIO"),
+    #else //ENGLISH
+        .nickname = _("ABSO"),
+        .trainerName = _("CORBIN"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_MANIAC,
         .aiFlags = CONTEST_AI_SET_F,
@@ -2548,13 +2548,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_GRACIE] = {
         .species = SPECIES_EXEGGUTOR,
-    #if ENGLISH
-        .nickname = _("EGGSOR"),
-        .trainerName = _("GRACIE"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("KIKO"),
         .trainerName = _("GRACE"),
     #elif ITALIAN
+        .nickname = _("EGGSOR"),
+        .trainerName = _("GRACIE"),
+    #else //ENGLISH
         .nickname = _("EGGSOR"),
         .trainerName = _("GRACIE"),
     #endif
@@ -2584,13 +2584,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_COLTIN] = {
         .species = SPECIES_CUBONE,
-    #if ENGLISH
-        .nickname = _("CUBIN"),
-        .trainerName = _("COLTIN"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("OCELO"),
         .trainerName = _("THIERRY"),
     #elif ITALIAN
+        .nickname = _("CUBIN"),
+        .trainerName = _("COLTIN"),
+    #else //ENGLISH
         .nickname = _("CUBIN"),
         .trainerName = _("COLTIN"),
     #endif
@@ -2620,13 +2620,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_ELLIE] = {
         .species = SPECIES_HITMONLEE,
-    #if ENGLISH
-        .nickname = _("HITMON"),
-        .trainerName = _("ELLIE"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("BRICLEE"),
         .trainerName = _("ELLIE"),
     #elif ITALIAN
+        .nickname = _("HITMON"),
+        .trainerName = _("ELLIE"),
+    #else //ENGLISH
         .nickname = _("HITMON"),
         .trainerName = _("ELLIE"),
     #endif
@@ -2656,15 +2656,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_MARCUS] = {
         .species = SPECIES_SQUIRTLE,
-    #if ENGLISH
-        .nickname = _("SURTLE"),
-        .trainerName = _("MARCUS"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("PUPI"),
         .trainerName = _("FABIEN"),
     #elif ITALIAN
         .nickname = _("SURTLE"),
         .trainerName = _("MARZIO"),
+    #else //ENGLISH
+        .nickname = _("SURTLE"),
+        .trainerName = _("MARCUS"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_SAILOR,
         .aiFlags = CONTEST_AI_SET_4,
@@ -2692,13 +2692,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_KIARA] = {
         .species = SPECIES_KANGASKHAN,
-    #if ENGLISH
-        .nickname = _("KHANKAN"),
-        .trainerName = _("KIARA"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("GIGO"),
         .trainerName = _("KIARA"),
     #elif ITALIAN
+        .nickname = _("KHANKAN"),
+        .trainerName = _("KIARA"),
+    #else //ENGLISH
         .nickname = _("KHANKAN"),
         .trainerName = _("KIARA"),
     #endif
@@ -2728,15 +2728,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_BRYCE] = {
         .species = SPECIES_PINECO,
-    #if ENGLISH
-        .nickname = _("PINOC"),
-        .trainerName = _("BRYCE"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("POMDAPY"),
         .trainerName = _("BRYCE"),
     #elif ITALIAN
         .nickname = _("PINOC"),
         .trainerName = _("BICIO"),
+    #else //ENGLISH
+        .nickname = _("PINOC"),
+        .trainerName = _("BRYCE"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_BUG_CATCHER,
         .aiFlags = CONTEST_AI_SET_6,
@@ -2764,13 +2764,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_JAMIE] = {
         .species = SPECIES_DUNSPARCE,
-    #if ENGLISH
-        .nickname = _("DILTOT"),
-        .trainerName = _("JAMIE"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("MIMISSE"),
         .trainerName = _("JANIE"),
     #elif ITALIAN
+        .nickname = _("DILTOT"),
+        .trainerName = _("JAMIE"),
+    #else //ENGLISH
         .nickname = _("DILTOT"),
         .trainerName = _("JAMIE"),
     #endif
@@ -2800,13 +2800,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_JORGE] = {
         .species = SPECIES_HOUNDOOM,
-    #if ENGLISH
-        .nickname = _("DOOMOND"),
-        .trainerName = _("JORGE"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("MOLOM"),
         .trainerName = _("JOSE"),
     #elif ITALIAN
+        .nickname = _("DOOMOND"),
+        .trainerName = _("JORGE"),
+    #else //ENGLISH
         .nickname = _("DOOMOND"),
         .trainerName = _("JORGE"),
     #endif
@@ -2836,15 +2836,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_DEVON] = {
         .species = SPECIES_MILTANK,
-    #if ENGLISH
-        .nickname = _("MILKAN"),
-        .trainerName = _("DEVON"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("MOUMI"),
         .trainerName = _("DEVON"),
     #elif ITALIAN
         .nickname = _("MILKAN"),
         .trainerName = _("DANI"),
+    #else //ENGLISH
+        .nickname = _("MILKAN"),
+        .trainerName = _("DEVON"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_POKEFAN_M,
         .aiFlags = CONTEST_AI_SET_9,
@@ -2872,13 +2872,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_JUSTINA] = {
         .species = SPECIES_GYARADOS,
-    #if ENGLISH
-        .nickname = _("RADOS"),
-        .trainerName = _("JUSTINA"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("LELIV"),
         .trainerName = _("JUSTINE"),
     #elif ITALIAN
+        .nickname = _("RADOS"),
+        .trainerName = _("JUSTINA"),
+    #else //ENGLISH
         .nickname = _("RADOS"),
         .trainerName = _("JUSTINA"),
     #endif
@@ -2908,13 +2908,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_RALPH] = {
         .species = SPECIES_LOUDRED,
-    #if ENGLISH
-        .nickname = _("LOUDERD"),
-        .trainerName = _("RALPH"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("BOUMBY"),
         .trainerName = _("RAPH"),
     #elif ITALIAN
+        .nickname = _("LOUDERD"),
+        .trainerName = _("RALPH"),
+    #else //ENGLISH
         .nickname = _("LOUDERD"),
         .trainerName = _("RALPH"),
     #endif
@@ -2944,15 +2944,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_ROSA] = {
         .species = SPECIES_SKITTY,
-    #if ENGLISH
-        .nickname = _("SITTY"),
-        .trainerName = _("ROSA"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("SITTY"),
         .trainerName = _("LOANA"),
     #elif ITALIAN
         .nickname = _("SITTY"),
         .trainerName = _("ROSALIA"),
+    #else //ENGLISH
+        .nickname = _("SITTY"),
+        .trainerName = _("ROSA"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_GIRL_1,
         .aiFlags = CONTEST_AI_SET_11,
@@ -2980,13 +2980,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_KEATON] = {
         .species = SPECIES_SLAKING,
-    #if ENGLISH
-        .nickname = _("SLING"),
-        .trainerName = _("KEATON"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("YAPAFEU"),
         .trainerName = _("KARIM"),
     #elif ITALIAN
+        .nickname = _("SLING"),
+        .trainerName = _("KEATON"),
+    #else //ENGLISH
         .nickname = _("SLING"),
         .trainerName = _("KEATON"),
     #endif
@@ -3016,15 +3016,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_MAYRA] = {
         .species = SPECIES_ALTARIA,
-    #if ENGLISH
-        .nickname = _("TARIA"),
-        .trainerName = _("MAYRA"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("TARIA"),
         .trainerName = _("AURELIE"),
     #elif ITALIAN
         .nickname = _("TARIA"),
         .trainerName = _("MARA"),
+    #else //ENGLISH
+        .nickname = _("TARIA"),
+        .trainerName = _("MAYRA"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_POKEFAN_F,
         .aiFlags = CONTEST_AI_SET_5,
@@ -3052,15 +3052,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_LAMAR] = {
         .species = SPECIES_KIRLIA,
-    #if ENGLISH
-        .nickname = _("LIRKI"),
-        .trainerName = _("LAMAR"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("KIPO"),
         .trainerName = _("NACER"),
     #elif ITALIAN
         .nickname = _("LIRKI"),
         .trainerName = _("FIORE"),
+    #else //ENGLISH
+        .nickname = _("LIRKI"),
+        .trainerName = _("LAMAR"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_RICH_BOY,
         .aiFlags = CONTEST_AI_SET_1E,
@@ -3088,15 +3088,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_AUBREY] = {
         .species = SPECIES_BELLOSSOM,
-    #if ENGLISH
-        .nickname = _("BLOSSOM"),
-        .trainerName = _("AUBREY"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("LIFLI"),
         .trainerName = _("MAYRA"),
     #elif ITALIAN
         .nickname = _("BLOSSOM"),
         .trainerName = _("ROBERTA"),
+    #else //ENGLISH
+        .nickname = _("BLOSSOM"),
+        .trainerName = _("AUBREY"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_WOMAN_4,
         .aiFlags = CONTEST_AI_SET_1F,
@@ -3124,13 +3124,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_NIGEL] = {
         .species = SPECIES_SABLEYE,
-    #if ENGLISH
-        .nickname = _("EYESAB"),
-        .trainerName = _("NIGEL"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("TENEF"),
         .trainerName = _("WILFRID"),
     #elif ITALIAN
+        .nickname = _("EYESAB"),
+        .trainerName = _("NIGEL"),
+    #else //ENGLISH
         .nickname = _("EYESAB"),
         .trainerName = _("NIGEL"),
     #endif
@@ -3160,15 +3160,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_CAMILLE] = {
         .species = SPECIES_NATU,
-    #if ENGLISH
-        .nickname = _("UTAN"),
-        .trainerName = _("CAMILLE"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("UTAN"),
         .trainerName = _("CAMILLE"),
     #elif ITALIAN
         .nickname = _("UTAN"),
         .trainerName = _("CAMILLA"),
+    #else //ENGLISH
+        .nickname = _("UTAN"),
+        .trainerName = _("CAMILLE"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_LASS,
         .aiFlags = CONTEST_AI_SET_20,
@@ -3196,15 +3196,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_DEON] = {
         .species = SPECIES_SHARPEDO,
-    #if ENGLISH
-        .nickname = _("PEDOS"),
-        .trainerName = _("DEON"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("PEDOS"),
         .trainerName = _("LEON"),
     #elif ITALIAN
         .nickname = _("PEDOS"),
         .trainerName = _("LEONIO"),
+    #else //ENGLISH
+        .nickname = _("PEDOS"),
+        .trainerName = _("DEON"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_SCHOOL_KID_M,
         .aiFlags = CONTEST_AI_SET_A,
@@ -3232,15 +3232,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_JANELLE] = {
         .species = SPECIES_LUVDISC,
-    #if ENGLISH
-        .nickname = _("LUVIS"),
-        .trainerName = _("JANELLE"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("LOVY"),
         .trainerName = _("EMMA"),
     #elif ITALIAN
         .nickname = _("LUVIS"),
         .trainerName = _("JANETTE"),
+    #else //ENGLISH
+        .nickname = _("LUVIS"),
+        .trainerName = _("JANELLE"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_GIRL_2,
         .aiFlags = CONTEST_AI_SET_18,
@@ -3268,13 +3268,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_HEATH] = {
         .species = SPECIES_HERACROSS,
-    #if ENGLISH
-        .nickname = _("HEROSS"),
-        .trainerName = _("HEATH"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("HEROSS"),
         .trainerName = _("NATHAN"),
     #elif ITALIAN
+        .nickname = _("HEROSS"),
+        .trainerName = _("HEATH"),
+    #else //ENGLISH
         .nickname = _("HEROSS"),
         .trainerName = _("HEATH"),
     #endif
@@ -3304,13 +3304,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_SASHA] = {
         .species = SPECIES_ELECTRODE,
-    #if ENGLISH
-        .nickname = _("RODLECT"),
-        .trainerName = _("SASHA"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("RODLECT"),
         .trainerName = _("FABOU"),
     #elif ITALIAN
+        .nickname = _("RODLECT"),
+        .trainerName = _("SASHA"),
+    #else //ENGLISH
         .nickname = _("RODLECT"),
         .trainerName = _("SASHA"),
     #endif
@@ -3340,15 +3340,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_FRANKIE] = {
         .species = SPECIES_PICHU,
-    #if ENGLISH
-        .nickname = _("CHUPY"),
-        .trainerName = _("FRANKIE"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("CHUPY"),
         .trainerName = _("FRANKY"),
     #elif ITALIAN
         .nickname = _("CHUPY"),
         .trainerName = _("VICTOR"),
+    #else //ENGLISH
+        .nickname = _("CHUPY"),
+        .trainerName = _("FRANKIE"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_YOUNGSTER,
         .aiFlags = CONTEST_AI_SET_21,
@@ -3376,13 +3376,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_HELEN] = {
         .species = SPECIES_WOBBUFFET,
-    #if ENGLISH
-        .nickname = _("WOBET"),
-        .trainerName = _("HELEN"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("TOCTOC"),
         .trainerName = _("ELSA"),
     #elif ITALIAN
+        .nickname = _("WOBET"),
+        .trainerName = _("HELEN"),
+    #else //ENGLISH
         .nickname = _("WOBET"),
         .trainerName = _("HELEN"),
     #endif
@@ -3412,15 +3412,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_CAMILE] = {
         .species = SPECIES_GENGAR,
-    #if ENGLISH
-        .nickname = _("GAREN"),
-        .trainerName = _("CAMILE"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("PLASMI"),
         .trainerName = _("CAMILLE"),
     #elif ITALIAN
         .nickname = _("GAREN"),
         .trainerName = _("CAMILLE"),
+    #else //ENGLISH
+        .nickname = _("GAREN"),
+        .trainerName = _("CAMILE"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_HEX_MANIAC,
         .aiFlags = CONTEST_AI_SET_1,
@@ -3448,13 +3448,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_MARTIN] = {
         .species = SPECIES_PORYGON,
-    #if ENGLISH
-        .nickname = _("GONPOR"),
-        .trainerName = _("MARTIN"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("GONPY"),
         .trainerName = _("MARTIN"),
     #elif ITALIAN
+        .nickname = _("GONPOR"),
+        .trainerName = _("MARTIN"),
+    #else //ENGLISH
         .nickname = _("GONPOR"),
         .trainerName = _("MARTIN"),
     #endif
@@ -3484,15 +3484,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_SERGIO] = {
         .species = SPECIES_DRAGONITE,
-    #if ENGLISH
-        .nickname = _("DRITE"),
-        .trainerName = _("SERGIO"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("DRACKY"),
         .trainerName = _("DJAMEL"),
     #elif ITALIAN
         .nickname = _("DRITE"),
         .trainerName = _("SERENO"),
+    #else //ENGLISH
+        .nickname = _("DRITE"),
+        .trainerName = _("SERGIO"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_BOY_1,
         .aiFlags = CONTEST_AI_SET_3,
@@ -3520,13 +3520,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_KAILEY] = {
         .species = SPECIES_MEOWTH,
-    #if ENGLISH
-        .nickname = _("MEOWY"),
-        .trainerName = _("KAILEY"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("MISSI"),
         .trainerName = _("KALYA"),
     #elif ITALIAN
+        .nickname = _("MEOWY"),
+        .trainerName = _("KAILEY"),
+    #else //ENGLISH
         .nickname = _("MEOWY"),
         .trainerName = _("KAILEY"),
     #endif
@@ -3556,15 +3556,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_PERLA] = {
         .species = SPECIES_JYNX,
-    #if ENGLISH
-        .nickname = _("NYX"),
-        .trainerName = _("PERLA"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("LIPPIX"),
         .trainerName = _("PERLINE"),
     #elif ITALIAN
         .nickname = _("NYX"),
         .trainerName = _("PEPA"),
+    #else //ENGLISH
+        .nickname = _("NYX"),
+        .trainerName = _("PERLA"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_BEAUTY,
         .aiFlags = CONTEST_AI_SET_5,
@@ -3592,13 +3592,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_CLARA] = {
         .species = SPECIES_TOGEPI,
-    #if ENGLISH
-        .nickname = _("GEPITO"),
-        .trainerName = _("CLARA"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("PIGETO"),
         .trainerName = _("CLARA"),
     #elif ITALIAN
+        .nickname = _("GEPITO"),
+        .trainerName = _("CLARA"),
+    #else //ENGLISH
         .nickname = _("GEPITO"),
         .trainerName = _("CLARA"),
     #endif
@@ -3628,13 +3628,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_JAKOB] = {
         .species = SPECIES_ESPEON,
-    #if ENGLISH
-        .nickname = _("SPEON"),
-        .trainerName = _("JAKOB"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("TALIX"),
         .trainerName = _("JACOB"),
     #elif ITALIAN
+        .nickname = _("SPEON"),
+        .trainerName = _("JAKOB"),
+    #else //ENGLISH
         .nickname = _("SPEON"),
         .trainerName = _("JAKOB"),
     #endif
@@ -3664,13 +3664,13 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_TREY] = {
         .species = SPECIES_SLOWKING,
-    #if ENGLISH
-        .nickname = _("SLOWGO"),
-        .trainerName = _("TREY"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("CARPY"),
         .trainerName = _("KAMEL"),
     #elif ITALIAN
+        .nickname = _("SLOWGO"),
+        .trainerName = _("TREY"),
+    #else //ENGLISH
         .nickname = _("SLOWGO"),
         .trainerName = _("TREY"),
     #endif
@@ -3700,15 +3700,15 @@ const struct ContestPokemon gContestOpponents[] =
     },
     [CONTEST_OPPONENT_LANE] = {
         .species = SPECIES_URSARING,
-    #if ENGLISH
-        .nickname = _("URSING"),
-        .trainerName = _("LANE"),
-    #elif FRENCH
+    #if FRENCH
         .nickname = _("URSING"),
         .trainerName = _("VICTOR"),
     #elif ITALIAN
         .nickname = _("URSING"),
         .trainerName = _("LENO"),
+    #else //ENGLISH
+        .nickname = _("URSING"),
+        .trainerName = _("LANE"),
     #endif
         .trainerGfxId = OBJ_EVENT_GFX_BLACK_BELT,
         .aiFlags = CONTEST_AI_SET_9,

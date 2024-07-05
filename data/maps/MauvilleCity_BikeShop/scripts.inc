@@ -174,9 +174,6 @@ MauvilleCity_BikeShop_EventScript_ExitAcroHandbook::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MauvilleCity_BikeShop/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MauvilleCity_BikeShop/text_fr.inc"
 .else
@@ -185,7 +182,8 @@ MauvilleCity_BikeShop_EventScript_ExitAcroHandbook::
 .else
 .ifdef SPANISH
 	.include "data/maps/MauvilleCity_BikeShop/text_es.inc"
-.endif
+.else
+	.include "data/maps/MauvilleCity_BikeShop/text.inc"
 .endif
 .endif
 .endif

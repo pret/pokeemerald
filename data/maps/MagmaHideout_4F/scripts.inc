@@ -133,9 +133,6 @@ MagmaHideout_4F_EventScript_Tabitha::
 	msgbox MagmaHideout_4F_Text_TabithaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MagmaHideout_4F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MagmaHideout_4F/text_fr.inc"
 .else
@@ -144,7 +141,8 @@ MagmaHideout_4F_EventScript_Tabitha::
 .else
 .ifdef SPANISH
 	.include "data/maps/MagmaHideout_4F/text_es.inc"
-.endif
+.else
+	.include "data/maps/MagmaHideout_4F/text.inc"
 .endif
 .endif
 .endif

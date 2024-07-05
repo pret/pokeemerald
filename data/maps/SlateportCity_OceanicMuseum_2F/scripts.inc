@@ -272,9 +272,6 @@ SlateportCity_OceanicMuseum_2F_EventScript_MuseumPatron3::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/SlateportCity_OceanicMuseum_2F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SlateportCity_OceanicMuseum_2F/text_fr.inc"
 .else
@@ -283,7 +280,8 @@ SlateportCity_OceanicMuseum_2F_EventScript_MuseumPatron3::
 .else
 .ifdef SPANISH
 	.include "data/maps/SlateportCity_OceanicMuseum_2F/text_es.inc"
-.endif
+.else
+	.include "data/maps/SlateportCity_OceanicMuseum_2F/text.inc"
 .endif
 .endif
 .endif

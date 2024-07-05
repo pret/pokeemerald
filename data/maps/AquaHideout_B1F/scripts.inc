@@ -106,9 +106,6 @@ AquaHideout_B1F_EventScript_Grunt7::
 	msgbox AquaHideout_B1F_Text_Grunt7PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/AquaHideout_B1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/AquaHideout_B1F/text_fr.inc"
 .else
@@ -117,7 +114,8 @@ AquaHideout_B1F_EventScript_Grunt7::
 .else
 .ifdef SPANISH
 	.include "data/maps/AquaHideout_B1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/AquaHideout_B1F/text.inc"
 .endif
 .endif
 .endif

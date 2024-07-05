@@ -696,9 +696,6 @@ Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle::
 	delay 10
 	return
 
-.ifdef ENGLISH
-	.include "data/maps/Route110_TrickHouseEntrance/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route110_TrickHouseEntrance/text_fr.inc"
 .else
@@ -707,7 +704,8 @@ Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route110_TrickHouseEntrance/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route110_TrickHouseEntrance/text.inc"
 .endif
 .endif
 .endif

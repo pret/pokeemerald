@@ -452,9 +452,6 @@ BattleFrontier_BattleTowerMultiBattleRoom_Movement_WalkInPlaceLeft:
 	walk_in_place_left
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_BattleTowerMultiBattleRoom/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_BattleTowerMultiBattleRoom/text_fr.inc"
 .else
@@ -463,7 +460,8 @@ BattleFrontier_BattleTowerMultiBattleRoom_Movement_WalkInPlaceLeft:
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_BattleTowerMultiBattleRoom/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_BattleTowerMultiBattleRoom/text.inc"
 .endif
 .endif
 .endif

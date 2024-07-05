@@ -462,9 +462,6 @@ MauvilleCity_EventScript_RegisterWallyCall::
 	releaseall
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MauvilleCity/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MauvilleCity/text_fr.inc"
 .else
@@ -473,7 +470,8 @@ MauvilleCity_EventScript_RegisterWallyCall::
 .else
 .ifdef SPANISH
 	.include "data/maps/MauvilleCity/text_es.inc"
-.endif
+.else
+	.include "data/maps/MauvilleCity/text.inc"
 .endif
 .endif
 .endif

@@ -54,9 +54,6 @@ PetalburgCity_PokemonCenter_1F_EventScript_SayMudkipType::
 	msgbox PetalburgCity_PokemonCenter_1F_Text_MudkipIsWaterType, MSGBOX_DEFAULT
 	return
 
-.ifdef ENGLISH
-	.include "data/maps/PetalburgCity_PokemonCenter_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/PetalburgCity_PokemonCenter_1F/text_fr.inc"
 .else
@@ -65,7 +62,8 @@ PetalburgCity_PokemonCenter_1F_EventScript_SayMudkipType::
 .else
 .ifdef SPANISH
 	.include "data/maps/PetalburgCity_PokemonCenter_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/PetalburgCity_PokemonCenter_1F/text.inc"
 .endif
 .endif
 .endif

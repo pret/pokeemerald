@@ -84,9 +84,6 @@ FallarborTown_PokemonCenter_1F_Movement_LanetteExitWest:
 	delay_8
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/FallarborTown_PokemonCenter_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/FallarborTown_PokemonCenter_1F/text_fr.inc"
 .else
@@ -95,7 +92,8 @@ FallarborTown_PokemonCenter_1F_Movement_LanetteExitWest:
 .else
 .ifdef SPANISH
 	.include "data/maps/FallarborTown_PokemonCenter_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/FallarborTown_PokemonCenter_1F/text.inc"
 .endif
 .endif
 .endif

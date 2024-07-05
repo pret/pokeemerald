@@ -48,9 +48,6 @@ BattleFrontier_Mart_EventScript_Boy::
 	msgbox BattleFrontier_Mart_Text_FacilitiesDontAllowItems, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_Mart/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_Mart/text_fr.inc"
 .else
@@ -59,7 +56,8 @@ BattleFrontier_Mart_EventScript_Boy::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_Mart/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_Mart/text.inc"
 .endif
 .endif
 .endif

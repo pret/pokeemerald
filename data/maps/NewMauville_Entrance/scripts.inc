@@ -46,9 +46,6 @@ NewMauville_Entrance_EventScript_DontOpenDoor::
 	releaseall
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/NewMauville_Entrance/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/NewMauville_Entrance/text_fr.inc"
 .else
@@ -57,7 +54,8 @@ NewMauville_Entrance_EventScript_DontOpenDoor::
 .else
 .ifdef SPANISH
 	.include "data/maps/NewMauville_Entrance/text_es.inc"
-.endif
+.else
+	.include "data/maps/NewMauville_Entrance/text.inc"
 .endif
 .endif
 .endif

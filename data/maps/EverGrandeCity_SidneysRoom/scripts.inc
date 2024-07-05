@@ -64,9 +64,6 @@ EverGrandeCity_SidneysRoom_EventScript_Defeated::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/EverGrandeCity_SidneysRoom/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/EverGrandeCity_SidneysRoom/text_fr.inc"
 .else
@@ -75,7 +72,8 @@ EverGrandeCity_SidneysRoom_EventScript_Defeated::
 .else
 .ifdef SPANISH
 	.include "data/maps/EverGrandeCity_SidneysRoom/text_es.inc"
-.endif
+.else
+	.include "data/maps/EverGrandeCity_SidneysRoom/text.inc"
 .endif
 .endif
 .endif

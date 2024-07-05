@@ -49,9 +49,6 @@ RustboroCity_House1_EventScript_Hiker::
 	msgbox RustboroCity_House1_Text_AllSortsOfPlaces, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/RustboroCity_House1/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/RustboroCity_House1/text_fr.inc"
 .else
@@ -60,7 +57,8 @@ RustboroCity_House1_EventScript_Hiker::
 .else
 .ifdef SPANISH
 	.include "data/maps/RustboroCity_House1/text_es.inc"
-.endif
+.else
+	.include "data/maps/RustboroCity_House1/text.inc"
 .endif
 .endif
 .endif

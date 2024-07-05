@@ -45,21 +45,7 @@
 
 #define POKEBLOCK_MAX_FEEL 99
 
-#if ENGLISH || ITALIAN
-#define WIN_TITLE_WIDTH             9
-#define WIN_LIST_BASEBLOCK          0x30
-#define WIN_SPICY_BASEBLOCK         0x12C
-#define WIN_DRY_BASEBLOCK           0x136
-#define WIN_SWEET_BASEBLOCK         0x140
-#define WIN_BITTER_BASEBLOCK        0x14A
-#define WIN_SOUR_BASEBLOCK          0x154
-#define WIN_FEEL_BASEBLOCK          0x15E
-#define WIN_ACTIONS_TALL_BASEBLOCK  0x162
-#define WIN_ACTIONS_BASEBLOCK       0x186
-#define WIN_TOSS_MSG_BASEBLOCK      0x19E
-#define WIN_TOSS_PKBLOCK_BASEBLOCK  0x20A
-#define PKBLOCK_CASE_NAME_WIDTH     72
-#elif FRENCH
+#if FRENCH
 #define WIN_TITLE_WIDTH             10
 #define WIN_LIST_BASEBLOCK          0x32
 #define WIN_SPICY_BASEBLOCK         0x12E
@@ -73,6 +59,20 @@
 #define WIN_TOSS_MSG_BASEBLOCK      0x1A0
 #define WIN_TOSS_PKBLOCK_BASEBLOCK  0x20C
 #define PKBLOCK_CASE_NAME_WIDTH     80
+#else //ENGLISH || ITALIAN
+#define WIN_TITLE_WIDTH             9
+#define WIN_LIST_BASEBLOCK          0x30
+#define WIN_SPICY_BASEBLOCK         0x12C
+#define WIN_DRY_BASEBLOCK           0x136
+#define WIN_SWEET_BASEBLOCK         0x140
+#define WIN_BITTER_BASEBLOCK        0x14A
+#define WIN_SOUR_BASEBLOCK          0x154
+#define WIN_FEEL_BASEBLOCK          0x15E
+#define WIN_ACTIONS_TALL_BASEBLOCK  0x162
+#define WIN_ACTIONS_BASEBLOCK       0x186
+#define WIN_TOSS_MSG_BASEBLOCK      0x19E
+#define WIN_TOSS_PKBLOCK_BASEBLOCK  0x20A
+#define PKBLOCK_CASE_NAME_WIDTH     72
 #endif
 
 enum {

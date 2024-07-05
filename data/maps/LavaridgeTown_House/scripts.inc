@@ -15,9 +15,6 @@ LavaridgeTown_House_EventScript_Zigzagoon::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/LavaridgeTown_House/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LavaridgeTown_House/text_fr.inc"
 .else
@@ -26,7 +23,8 @@ LavaridgeTown_House_EventScript_Zigzagoon::
 .else
 .ifdef SPANISH
 	.include "data/maps/LavaridgeTown_House/text_es.inc"
-.endif
+.else
+	.include "data/maps/LavaridgeTown_House/text.inc"
 .endif
 .endif
 .endif

@@ -386,9 +386,6 @@ SlateportCity_Harbor_EventScript_TradedScanner::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/SlateportCity_Harbor/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SlateportCity_Harbor/text_fr.inc"
 .else
@@ -397,7 +394,8 @@ SlateportCity_Harbor_EventScript_TradedScanner::
 .else
 .ifdef SPANISH
 	.include "data/maps/SlateportCity_Harbor/text_es.inc"
-.endif
+.else
+	.include "data/maps/SlateportCity_Harbor/text.inc"
 .endif
 .endif
 .endif

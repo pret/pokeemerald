@@ -5,9 +5,6 @@ OldaleTown_House1_EventScript_Woman::
 	msgbox OldaleTown_House1_Text_LeftPokemonGoesOutFirst, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/OldaleTown_House1/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/OldaleTown_House1/text_fr.inc"
 .else
@@ -16,7 +13,8 @@ OldaleTown_House1_EventScript_Woman::
 .else
 .ifdef SPANISH
 	.include "data/maps/OldaleTown_House1/text_es.inc"
-.endif
+.else
+	.include "data/maps/OldaleTown_House1/text.inc"
 .endif
 .endif
 .endif

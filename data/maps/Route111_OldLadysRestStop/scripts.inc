@@ -28,9 +28,6 @@ Route111_OldLadysRestStop_EventScript_DeclineRest::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route111_OldLadysRestStop/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route111_OldLadysRestStop/text_fr.inc"
 .else
@@ -39,7 +36,8 @@ Route111_OldLadysRestStop_EventScript_DeclineRest::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route111_OldLadysRestStop/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route111_OldLadysRestStop/text.inc"
 .endif
 .endif
 .endif

@@ -573,9 +573,6 @@ Route111_EventScript_TrainerHillSign::
 	msgbox Route111_Text_TrainerHillSign, MSGBOX_SIGN
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route111/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route111/text_fr.inc"
 .else
@@ -584,7 +581,8 @@ Route111_EventScript_TrainerHillSign::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route111/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route111/text.inc"
 .endif
 .endif
 .endif

@@ -58,9 +58,6 @@ LilycoveCity_DepartmentStore_3F_EventScript_Woman::
 	msgbox LilycoveCity_DepartmentStore_3F_Text_GaveCarbosToSpeedUpMon, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/LilycoveCity_DepartmentStore_3F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LilycoveCity_DepartmentStore_3F/text_fr.inc"
 .else
@@ -69,7 +66,8 @@ LilycoveCity_DepartmentStore_3F_EventScript_Woman::
 .else
 .ifdef SPANISH
 	.include "data/maps/LilycoveCity_DepartmentStore_3F/text_es.inc"
-.endif
+.else
+	.include "data/maps/LilycoveCity_DepartmentStore_3F/text.inc"
 .endif
 .endif
 .endif

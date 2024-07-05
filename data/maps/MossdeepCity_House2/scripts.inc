@@ -53,9 +53,6 @@ MossdeepCity_House2_Movement_WingullExitEast:
 	delay_8
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/MossdeepCity_House2/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MossdeepCity_House2/text_fr.inc"
 .else
@@ -64,7 +61,8 @@ MossdeepCity_House2_Movement_WingullExitEast:
 .else
 .ifdef SPANISH
 	.include "data/maps/MossdeepCity_House2/text_es.inc"
-.endif
+.else
+	.include "data/maps/MossdeepCity_House2/text.inc"
 .endif
 .endif
 .endif

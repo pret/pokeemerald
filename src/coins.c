@@ -8,11 +8,7 @@
 #include "international_string_util.h"
 #include "constants/coins.h"
 
-#if ENGLISH
-#define COINS_STRING_FONT           FONT_NORMAL
-#define COINS_STRING_TOTAL_WIDTH    0x40
-#define COINS_WINDOW_WIDTH          8
-#elif FRENCH
+#if FRENCH
 #define COINS_STRING_FONT           FONT_NARROW
 #define COINS_STRING_TOTAL_WIDTH    0x38
 #define COINS_WINDOW_WIDTH          7
@@ -20,6 +16,10 @@
 #define COINS_STRING_FONT           FONT_NARROW
 #define COINS_STRING_TOTAL_WIDTH    0x30
 #define COINS_WINDOW_WIDTH          6
+#else //ENGLISH
+#define COINS_STRING_FONT           FONT_NORMAL
+#define COINS_STRING_TOTAL_WIDTH    0x40
+#define COINS_WINDOW_WIDTH          8
 #endif
 
 static EWRAM_DATA u8 sCoinsWindowId = 0;

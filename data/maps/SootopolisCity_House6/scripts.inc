@@ -31,9 +31,6 @@ SootopolisCity_House6_EventScript_NoRoomForWailmerDoll::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/SootopolisCity_House6/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SootopolisCity_House6/text_fr.inc"
 .else
@@ -42,7 +39,8 @@ SootopolisCity_House6_EventScript_NoRoomForWailmerDoll::
 .else
 .ifdef SPANISH
 	.include "data/maps/SootopolisCity_House6/text_es.inc"
-.endif
+.else
+	.include "data/maps/SootopolisCity_House6/text.inc"
 .endif
 .endif
 .endif

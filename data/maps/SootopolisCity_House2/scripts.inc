@@ -18,9 +18,6 @@ SootopolisCity_House2_EventScript_DontKnowAboutOrbs::
 	msgbox SootopolisCity_House2_Text_OughtToVisitAndSee, MSGBOX_DEFAULT
 	return
 
-.ifdef ENGLISH
-	.include "data/maps/SootopolisCity_House2/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SootopolisCity_House2/text_fr.inc"
 .else
@@ -29,7 +26,8 @@ SootopolisCity_House2_EventScript_DontKnowAboutOrbs::
 .else
 .ifdef SPANISH
 	.include "data/maps/SootopolisCity_House2/text_es.inc"
-.endif
+.else
+	.include "data/maps/SootopolisCity_House2/text.inc"
 .endif
 .endif
 .endif

@@ -41,9 +41,6 @@ FortreeCity_House2_EventScript_WrongGuess::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/FortreeCity_House2/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/FortreeCity_House2/text_fr.inc"
 .else
@@ -52,7 +49,8 @@ FortreeCity_House2_EventScript_WrongGuess::
 .else
 .ifdef SPANISH
 	.include "data/maps/FortreeCity_House2/text_es.inc"
-.endif
+.else
+	.include "data/maps/FortreeCity_House2/text.inc"
 .endif
 .endif
 .endif

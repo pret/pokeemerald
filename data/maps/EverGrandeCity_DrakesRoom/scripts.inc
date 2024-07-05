@@ -61,9 +61,6 @@ EverGrandeCity_DrakesRoom_EventScript_Defeated::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/EverGrandeCity_DrakesRoom/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/EverGrandeCity_DrakesRoom/text_fr.inc"
 .else
@@ -72,7 +69,8 @@ EverGrandeCity_DrakesRoom_EventScript_Defeated::
 .else
 .ifdef SPANISH
 	.include "data/maps/EverGrandeCity_DrakesRoom/text_es.inc"
-.endif
+.else
+	.include "data/maps/EverGrandeCity_DrakesRoom/text.inc"
 .endif
 .endif
 .endif

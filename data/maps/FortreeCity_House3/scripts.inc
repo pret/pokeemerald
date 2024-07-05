@@ -9,9 +9,6 @@ FortreeCity_House3_EventScript_SchoolKidM::
 	msgbox FortreeCity_House3_Text_OhYouHavePokedex, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/FortreeCity_House3/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/FortreeCity_House3/text_fr.inc"
 .else
@@ -20,7 +17,8 @@ FortreeCity_House3_EventScript_SchoolKidM::
 .else
 .ifdef SPANISH
 	.include "data/maps/FortreeCity_House3/text_es.inc"
-.endif
+.else
+	.include "data/maps/FortreeCity_House3/text.inc"
 .endif
 .endif
 .endif

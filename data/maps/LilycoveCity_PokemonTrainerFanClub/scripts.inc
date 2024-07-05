@@ -567,9 +567,6 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed::
 LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed2::
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/LilycoveCity_PokemonTrainerFanClub/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LilycoveCity_PokemonTrainerFanClub/text_fr.inc"
 .else
@@ -578,7 +575,8 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed2::
 .else
 .ifdef SPANISH
 	.include "data/maps/LilycoveCity_PokemonTrainerFanClub/text_es.inc"
-.endif
+.else
+	.include "data/maps/LilycoveCity_PokemonTrainerFanClub/text.inc"
 .endif
 .endif
 .endif

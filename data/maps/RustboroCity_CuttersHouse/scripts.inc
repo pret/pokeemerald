@@ -21,9 +21,6 @@ RustboroCity_CuttersHouse_EventScript_Lass::
 	msgbox RustboroCity_CuttersHouse_Text_DadHelpedClearLandOfTrees, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/RustboroCity_CuttersHouse/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/RustboroCity_CuttersHouse/text_fr.inc"
 .else
@@ -32,7 +29,8 @@ RustboroCity_CuttersHouse_EventScript_Lass::
 .else
 .ifdef SPANISH
 	.include "data/maps/RustboroCity_CuttersHouse/text_es.inc"
-.endif
+.else
+	.include "data/maps/RustboroCity_CuttersHouse/text.inc"
 .endif
 .endif
 .endif

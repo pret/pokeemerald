@@ -469,11 +469,9 @@ compare_all:
 	@$(MAKE) GAME_LANGUAGE=ENGLISH
 	@$(MAKE) GAME_LANGUAGE=FRENCH
 	@$(MAKE) GAME_LANGUAGE=ITALIAN
-	@$(MAKE) GAME_LANGUAGE=SPANISH
 	@$(SHA1) rom.sha1
 	@$(SHA1) rom_fr.sha1
 	@$(SHA1) rom_it.sha1
-	@$(SHA1) rom_es.sha1
 
 # Use modern compilers to build rom. Will not match with original ROMs.
 modern:     ; @$(MAKE) GAME_LANGUAGE=ENGLISH MODERN=1

@@ -184,9 +184,6 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_ExitVendingMachine::
 	releaseall
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/LilycoveCity_DepartmentStoreRooftop/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LilycoveCity_DepartmentStoreRooftop/text_fr.inc"
 .else
@@ -195,7 +192,8 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_ExitVendingMachine::
 .else
 .ifdef SPANISH
 	.include "data/maps/LilycoveCity_DepartmentStoreRooftop/text_es.inc"
-.endif
+.else
+	.include "data/maps/LilycoveCity_DepartmentStoreRooftop/text.inc"
 .endif
 .endif
 .endif

@@ -40,14 +40,16 @@ Underwater_SeafloorCavern_EventScript_CheckStolenSub::
 	msgbox Underwater_SeafloorCavern_Text_SubExplorer1, MSGBOX_SIGN
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Underwater_SeafloorCavern/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Underwater_SeafloorCavern/text_fr.inc"
 .else
 .ifdef ITALIAN
 	.include "data/maps/Underwater_SeafloorCavern/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Underwater_SeafloorCavern/text_es.inc"
+.else
+	.include "data/maps/Underwater_SeafloorCavern/text.inc"
 .endif
 .endif
 .endif

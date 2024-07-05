@@ -318,9 +318,6 @@ PetalburgWoods_EventScript_JamesRematch::
 	msgbox PetalburgWoods_Text_IveBeenTrainingHard, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/PetalburgWoods/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/PetalburgWoods/text_fr.inc"
 .else
@@ -329,7 +326,8 @@ PetalburgWoods_EventScript_JamesRematch::
 .else
 .ifdef SPANISH
 	.include "data/maps/PetalburgWoods/text_es.inc"
-.endif
+.else
+	.include "data/maps/PetalburgWoods/text.inc"
 .endif
 .endif
 .endif

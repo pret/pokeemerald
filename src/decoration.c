@@ -205,12 +205,12 @@ static void TossDecorationPrompt(u8 taskId);
 static void TossDecoration(u8 taskId);
 
 #include "data/decoration/tiles.h"
-#if ENGLISH
-#include "data/decoration/description.h"
-#elif FRENCH
+#if FRENCH
 #include "data/decoration/description_fr.h"
 #elif ITALIAN
 #include "data/decoration/description_it.h"
+#else //ENGLISH
+#include "data/decoration/description.h"
 #endif
 #include "data/decoration/header.h"
 

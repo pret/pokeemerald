@@ -39,9 +39,6 @@ FortreeCity_Mart_EventScript_Boy::
 	msgbox FortreeCity_Mart_Text_RareCandyMakesMonGrow, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/FortreeCity_Mart/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/FortreeCity_Mart/text_fr.inc"
 .else
@@ -50,7 +47,8 @@ FortreeCity_Mart_EventScript_Boy::
 .else
 .ifdef SPANISH
 	.include "data/maps/FortreeCity_Mart/text_es.inc"
-.endif
+.else
+	.include "data/maps/FortreeCity_Mart/text.inc"
 .endif
 .endif
 .endif

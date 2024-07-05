@@ -30,9 +30,6 @@ LavaridgeTown_PokemonCenter_1F_EventScript_Gentleman::
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_TrainersShouldRestToo, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/LavaridgeTown_PokemonCenter_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LavaridgeTown_PokemonCenter_1F/text_fr.inc"
 .else
@@ -41,7 +38,8 @@ LavaridgeTown_PokemonCenter_1F_EventScript_Gentleman::
 .else
 .ifdef SPANISH
 	.include "data/maps/LavaridgeTown_PokemonCenter_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/LavaridgeTown_PokemonCenter_1F/text.inc"
 .endif
 .endif
 .endif

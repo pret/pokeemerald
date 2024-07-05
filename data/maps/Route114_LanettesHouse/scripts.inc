@@ -45,9 +45,6 @@ Route114_LanettesHouse_EventScript_PC::
 	msgbox Route114_LanettesHouse_Text_EmailFromBill, MSGBOX_SIGN
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route114_LanettesHouse/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route114_LanettesHouse/text_fr.inc"
 .else
@@ -56,7 +53,8 @@ Route114_LanettesHouse_EventScript_PC::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route114_LanettesHouse/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route114_LanettesHouse/text.inc"
 .endif
 .endif
 .endif

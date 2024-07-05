@@ -75,9 +75,6 @@ LilycoveCity_CoveLilyMotel_1F_Movement_OwnerReturn:
 	face_up
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/LilycoveCity_CoveLilyMotel_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LilycoveCity_CoveLilyMotel_1F/text_fr.inc"
 .else
@@ -86,7 +83,8 @@ LilycoveCity_CoveLilyMotel_1F_Movement_OwnerReturn:
 .else
 .ifdef SPANISH
 	.include "data/maps/LilycoveCity_CoveLilyMotel_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/LilycoveCity_CoveLilyMotel_1F/text.inc"
 .endif
 .endif
 .endif

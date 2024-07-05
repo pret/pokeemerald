@@ -15,9 +15,6 @@ LilycoveCity_House1_EventScript_Kecleon::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/LilycoveCity_House1/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LilycoveCity_House1/text_fr.inc"
 .else
@@ -26,7 +23,8 @@ LilycoveCity_House1_EventScript_Kecleon::
 .else
 .ifdef SPANISH
 	.include "data/maps/LilycoveCity_House1/text_es.inc"
-.endif
+.else
+	.include "data/maps/LilycoveCity_House1/text.inc"
 .endif
 .endif
 .endif

@@ -272,9 +272,6 @@ PlayersHouse_2F_EventScript_GameCube::
 	msgbox PlayersHouse_2F_Text_ItsAGameCube, MSGBOX_SIGN
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/LittlerootTown_BrendansHouse_2F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LittlerootTown_BrendansHouse_2F/text_fr.inc"
 .else
@@ -283,7 +280,8 @@ PlayersHouse_2F_EventScript_GameCube::
 .else
 .ifdef SPANISH
 	.include "data/maps/LittlerootTown_BrendansHouse_2F/text_es.inc"
-.endif
+.else
+	.include "data/maps/LittlerootTown_BrendansHouse_2F/text.inc"
 .endif
 .endif
 .endif

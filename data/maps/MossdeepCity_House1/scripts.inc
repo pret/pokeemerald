@@ -21,9 +21,6 @@ MossdeepCity_House1_EventScript_Woman::
 	msgbox MossdeepCity_House1_Text_HusbandCanTellPokeblockMonLikes, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MossdeepCity_House1/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MossdeepCity_House1/text_fr.inc"
 .else
@@ -32,7 +29,8 @@ MossdeepCity_House1_EventScript_Woman::
 .else
 .ifdef SPANISH
 	.include "data/maps/MossdeepCity_House1/text_es.inc"
-.endif
+.else
+	.include "data/maps/MossdeepCity_House1/text.inc"
 .endif
 .endif
 .endif

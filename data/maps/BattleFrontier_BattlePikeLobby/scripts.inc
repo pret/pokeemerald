@@ -267,9 +267,6 @@ BattleFrontier_BattlePike_EventScript_CloseCurtain::
 	waitse
 	return
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_BattlePikeLobby/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_BattlePikeLobby/text_fr.inc"
 .else
@@ -278,7 +275,8 @@ BattleFrontier_BattlePike_EventScript_CloseCurtain::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_BattlePikeLobby/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_BattlePikeLobby/text.inc"
 .endif
 .endif
 .endif

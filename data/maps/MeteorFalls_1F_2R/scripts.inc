@@ -60,9 +60,6 @@ MeteorFalls_1F_2R_EventScript_RematchJay::
 	msgbox MeteorFalls_1F_2R_Text_JayPostRematch, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MeteorFalls_1F_2R/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MeteorFalls_1F_2R/text_fr.inc"
 .else
@@ -71,7 +68,8 @@ MeteorFalls_1F_2R_EventScript_RematchJay::
 .else
 .ifdef SPANISH
 	.include "data/maps/MeteorFalls_1F_2R/text_es.inc"
-.endif
+.else
+	.include "data/maps/MeteorFalls_1F_2R/text.inc"
 .endif
 .endif
 .endif

@@ -34,9 +34,6 @@ SlateportCity_Mart_EventScript_Man::
 	msgbox SlateportCity_Mart_Text_GreatBallIsBetter, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/SlateportCity_Mart/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SlateportCity_Mart/text_fr.inc"
 .else
@@ -45,7 +42,8 @@ SlateportCity_Mart_EventScript_Man::
 .else
 .ifdef SPANISH
 	.include "data/maps/SlateportCity_Mart/text_es.inc"
-.endif
+.else
+	.include "data/maps/SlateportCity_Mart/text.inc"
 .endif
 .endif
 .endif

@@ -54,14 +54,16 @@ SootopolisCity_Mart_EventScript_GentlemanNoLegendaries::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/SootopolisCity_Mart/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SootopolisCity_Mart/text_fr.inc"
 .else
 .ifdef ITALIAN
 	.include "data/maps/SootopolisCity_Mart/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SootopolisCity_Mart/text_es.inc"
+.else
+	.include "data/maps/SootopolisCity_Mart/text.inc"
 .endif
 .endif
 .endif

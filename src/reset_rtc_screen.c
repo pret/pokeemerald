@@ -19,13 +19,7 @@
 #include "gpu_regs.h"
 #include "constants/rgb.h"
 
-#if ENGLISH
-#define CURSOR_DAYS_X 53
-#define CURSOR_HOURS_X 86
-#define CURSOR_MINS_X 101
-#define CURSOR_SECS_X 116
-#define CURSOR_CONFIRM_X 153
-#elif FRENCH
+#if FRENCH
 #define CURSOR_DAYS_X 56
 #define CURSOR_HOURS_X 92
 #define CURSOR_MINS_X 107
@@ -37,6 +31,12 @@
 #define CURSOR_MINS_X 119
 #define CURSOR_SECS_X 134
 #define CURSOR_CONFIRM_X 183
+#else //ENGLISH
+#define CURSOR_DAYS_X 53
+#define CURSOR_HOURS_X 86
+#define CURSOR_MINS_X 101
+#define CURSOR_SECS_X 116
+#define CURSOR_CONFIRM_X 153
 #endif
 
 #define PALTAG_ARROW 0x1000

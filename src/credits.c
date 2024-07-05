@@ -87,7 +87,14 @@ static EWRAM_DATA bool8 sUsedSpeedUp = 0; // Never read
 static EWRAM_DATA struct CreditsData *sCreditsData = {0};
 
 static const u16 sCredits_Pal[] = INCBIN_U16("graphics/credits/credits.gbapal");
-#if ENGLISH
+#if FRENCH || ITALIAN
+#define CREDITS_COPYRIGHT_END_GFX gCreditsCopyrightEnd_Gfx
+#define CREDITS_COPYRIGHT_END_TILE_OFFSET 0
+#define UPDATE_PAGE_DELAY 121
+#define SHOW_MONS_SPRITE_DATA_3 52
+#define SHOW_MONS_DELAY 52
+#define CATCH_RIVAL_TIMER 620
+#else //ENGLISH
 static const u32 sCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/the_end_copyright.4bpp.lz");
 #define CREDITS_COPYRIGHT_END_GFX sCreditsCopyrightEnd_Gfx
 #define CREDITS_COPYRIGHT_END_TILE_OFFSET 1
@@ -95,13 +102,6 @@ static const u32 sCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/the_e
 #define SHOW_MONS_SPRITE_DATA_3 50
 #define SHOW_MONS_DELAY 50
 #define CATCH_RIVAL_TIMER 584
-#elif FRENCH || ITALIAN
-#define CREDITS_COPYRIGHT_END_GFX gCreditsCopyrightEnd_Gfx
-#define CREDITS_COPYRIGHT_END_TILE_OFFSET 0
-#define UPDATE_PAGE_DELAY 121
-#define SHOW_MONS_SPRITE_DATA_3 52
-#define SHOW_MONS_DELAY 52
-#define CATCH_RIVAL_TIMER 620
 #endif
 
 static void SpriteCB_CreditsMonBg(struct Sprite *);
@@ -133,7 +133,7 @@ static void SpriteCB_Rival(struct Sprite *);
 static u8 CreateCreditsMonSprite(u16, s16, s16, u16);
 static void DeterminePokemonToShow(void);
 
-#if ENGLISH
+#if !defined(FRENCH) && !defined(ITALIAN)
 static const u8 sTheEnd_LetterMap_T[] =
 {
     0,    1, 0,
@@ -1315,7 +1315,12 @@ static void LoadTheEndScreen(u16 tileOffsetLoad, u16 tileOffsetWrite, u16 palOff
         ((u16 *) (VRAM + tileOffsetWrite))[i] = baseTile + CREDITS_COPYRIGHT_END_TILE_OFFSET;
 }
 
-#if ENGLISH
+#if FRENCH || ITALIAN
+static void DrawTheEnd(u16 offset, u16 palette)
+{
+    LZ77UnCompVram(gCreditsCopyrightEnd_Tilemap, ((u16 *) (VRAM + offset)));
+}
+#else //ENGLISH
 static u16 GetLetterMapTile(u8 baseTiles)
 {
     u16 out = (baseTiles & 0x3F) + 80;
@@ -1357,11 +1362,6 @@ static void DrawTheEnd(u16 offset, u16 palette)
     DrawLetterMapTiles(sTheEnd_LetterMap_E, 16, 7, offset, palette);
     DrawLetterMapTiles(sTheEnd_LetterMap_N, 20, 7, offset, palette);
     DrawLetterMapTiles(sTheEnd_LetterMap_D, 24, 7, offset, palette);
-}
-#elif FRENCH || ITALIAN
-static void DrawTheEnd(u16 offset, u16 palette)
-{
-    LZ77UnCompVram(gCreditsCopyrightEnd_Tilemap, ((u16 *) (VRAM + offset)));
 }
 #endif
 

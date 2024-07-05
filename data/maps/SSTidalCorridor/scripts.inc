@@ -253,14 +253,16 @@ SSTidalCorridor_Movement_SailorReturn:
 	walk_in_place_faster_up
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/SSTidalCorridor/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SSTidalCorridor/text_fr.inc"
 .else
 .ifdef ITALIAN
 	.include "data/maps/SSTidalCorridor/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SSTidalCorridor/text_es.inc"
+.else
+	.include "data/maps/SSTidalCorridor/text.inc"
 .endif
 .endif
 .endif

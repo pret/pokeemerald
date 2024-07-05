@@ -125,9 +125,6 @@ EverGrandeCity_PokemonLeague_1F_Movement_RightGuardOutOfWay:
 	walk_in_place_faster_down
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/EverGrandeCity_PokemonLeague_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/EverGrandeCity_PokemonLeague_1F/text_fr.inc"
 .else
@@ -136,7 +133,8 @@ EverGrandeCity_PokemonLeague_1F_Movement_RightGuardOutOfWay:
 .else
 .ifdef SPANISH
 	.include "data/maps/EverGrandeCity_PokemonLeague_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/EverGrandeCity_PokemonLeague_1F/text.inc"
 .endif
 .endif
 .endif

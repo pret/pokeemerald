@@ -704,9 +704,6 @@ PetalburgCity_EventScript_GymBoy::
 	msgbox PetalburgCity_Text_AreYouRookieTrainer, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/PetalburgCity/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/PetalburgCity/text_fr.inc"
 .else
@@ -715,7 +712,8 @@ PetalburgCity_EventScript_GymBoy::
 .else
 .ifdef SPANISH
 	.include "data/maps/PetalburgCity/text_es.inc"
-.endif
+.else
+	.include "data/maps/PetalburgCity/text.inc"
 .endif
 .endif
 .endif

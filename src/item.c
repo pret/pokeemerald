@@ -25,12 +25,12 @@ static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
 EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
 
 // rodata
-#if ENGLISH
-#include "data/text/item_descriptions.h"
-#elif FRENCH
+#if FRENCH
 #include "data/text/french/item_descriptions.h"
 #elif ITALIAN
 #include "data/text/italian/item_descriptions.h"
+#else //ENGLISH
+#include "data/text/item_descriptions.h"
 #endif
 #include "data/items.h"
 
@@ -121,17 +121,17 @@ void GetBerryCountString(u8 *dst, const u8 *berryName, u32 quantity)
     else
         berryString = gText_Berries;
 
-#if ENGLISH
-    txtPtr = StringCopy(dst, berryName);
-    *txtPtr = CHAR_SPACE;
-    StringCopy(txtPtr + 1, berryString);
-#elif FRENCH
+#if FRENCH
     txtPtr = StringCopy(dst, berryString);
     *txtPtr = CHAR_SPACE;
     StringCopy(txtPtr + 1, berryName);
 #elif ITALIAN
     txtPtr = StringCopy(dst, berryString);
     StringCopy(txtPtr, berryName);
+#else //ENGLISH
+    txtPtr = StringCopy(dst, berryName);
+    *txtPtr = CHAR_SPACE;
+    StringCopy(txtPtr + 1, berryString);
 #endif
 }
 

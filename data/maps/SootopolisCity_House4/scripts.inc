@@ -19,9 +19,6 @@ SootopolisCity_House4_EventScript_Azumarill::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/SootopolisCity_House4/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SootopolisCity_House4/text_fr.inc"
 .else
@@ -30,7 +27,8 @@ SootopolisCity_House4_EventScript_Azumarill::
 .else
 .ifdef SPANISH
 	.include "data/maps/SootopolisCity_House4/text_es.inc"
-.endif
+.else
+	.include "data/maps/SootopolisCity_House4/text.inc"
 .endif
 .endif
 .endif

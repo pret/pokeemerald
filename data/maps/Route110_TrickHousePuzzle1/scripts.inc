@@ -36,9 +36,6 @@ Route110_TrickHousePuzzle1_EventScript_Robin::
 	msgbox Route110_TrickHousePuzzle1_Text_RobinPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route110_TrickHousePuzzle1/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route110_TrickHousePuzzle1/text_fr.inc"
 .else
@@ -47,7 +44,8 @@ Route110_TrickHousePuzzle1_EventScript_Robin::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route110_TrickHousePuzzle1/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route110_TrickHousePuzzle1/text.inc"
 .endif
 .endif
 .endif

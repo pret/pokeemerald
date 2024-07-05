@@ -11,9 +11,6 @@ SeafloorCavern_Room4_EventScript_Grunt4::
 	msgbox SeafloorCavern_Room4_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/SeafloorCavern_Room4/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SeafloorCavern_Room4/text_fr.inc"
 .else
@@ -22,7 +19,8 @@ SeafloorCavern_Room4_EventScript_Grunt4::
 .else
 .ifdef SPANISH
 	.include "data/maps/SeafloorCavern_Room4/text_es.inc"
-.endif
+.else
+	.include "data/maps/SeafloorCavern_Room4/text.inc"
 .endif
 .endif
 .endif

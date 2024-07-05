@@ -64,9 +64,6 @@ SlateportCity_SternsShipyard_1F_EventScript_Briney::
 	msgbox SlateportCity_SternsShipyard_1F_Text_DecidedToHelpDock, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/SlateportCity_SternsShipyard_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SlateportCity_SternsShipyard_1F/text_fr.inc"
 .else
@@ -75,7 +72,8 @@ SlateportCity_SternsShipyard_1F_EventScript_Briney::
 .else
 .ifdef SPANISH
 	.include "data/maps/SlateportCity_SternsShipyard_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/SlateportCity_SternsShipyard_1F/text.inc"
 .endif
 .endif
 .endif

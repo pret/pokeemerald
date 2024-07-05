@@ -287,9 +287,6 @@ LittlerootTown_BrendansHouse_1F_Movement_BrendanGoUpstairs2:
 	walk_up
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/LittlerootTown_BrendansHouse_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LittlerootTown_BrendansHouse_1F/text_fr.inc"
 .else
@@ -298,7 +295,8 @@ LittlerootTown_BrendansHouse_1F_Movement_BrendanGoUpstairs2:
 .else
 .ifdef SPANISH
 	.include "data/maps/LittlerootTown_BrendansHouse_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/LittlerootTown_BrendansHouse_1F/text.inc"
 .endif
 .endif
 .endif

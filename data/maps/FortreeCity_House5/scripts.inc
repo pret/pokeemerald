@@ -19,9 +19,6 @@ FortreeCity_House5_EventScript_Zigzagoon::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/FortreeCity_House5/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/FortreeCity_House5/text_fr.inc"
 .else
@@ -30,7 +27,8 @@ FortreeCity_House5_EventScript_Zigzagoon::
 .else
 .ifdef SPANISH
 	.include "data/maps/FortreeCity_House5/text_es.inc"
-.endif
+.else
+	.include "data/maps/FortreeCity_House5/text.inc"
 .endif
 .endif
 .endif

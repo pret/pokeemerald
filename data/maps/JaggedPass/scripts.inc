@@ -149,9 +149,6 @@ JaggedPass_EventScript_Autumn::
 	msgbox JaggedPass_Text_AutumnPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/JaggedPass/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/JaggedPass/text_fr.inc"
 .else
@@ -160,7 +157,8 @@ JaggedPass_EventScript_Autumn::
 .else
 .ifdef SPANISH
 	.include "data/maps/JaggedPass/text_es.inc"
-.endif
+.else
+	.include "data/maps/JaggedPass/text.inc"
 .endif
 .endif
 .endif

@@ -36,9 +36,6 @@ BattleFrontier_BattlePikeRoomFinal_EventScript_TurnPlayerNorth::
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_BattlePikeRoomFinal/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_BattlePikeRoomFinal/text_fr.inc"
 .else
@@ -47,7 +44,8 @@ BattleFrontier_BattlePikeRoomFinal_EventScript_TurnPlayerNorth::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_BattlePikeRoomFinal/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_BattlePikeRoomFinal/text.inc"
 .endif
 .endif
 .endif

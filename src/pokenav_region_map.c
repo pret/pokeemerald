@@ -22,12 +22,11 @@
 
 #define NUM_CITY_MAPS 22
 
-#if ENGLISH
-#define MAP_SEC_INFO_WIDTH 12
-#elif FRENCH || ITALIAN
+#if FRENCH || ITALIAN
 #define MAP_SEC_INFO_WIDTH 13
+#else //ENGLISH
+#define MAP_SEC_INFO_WIDTH 12
 #endif
-
 
 struct Pokenav_RegionMapMenu
 {

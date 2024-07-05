@@ -86,9 +86,6 @@ Route112_CableCarStation_Movement_ExitCableCar:
 	delay_16
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/Route112_CableCarStation/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route112_CableCarStation/text_fr.inc"
 .else
@@ -97,7 +94,8 @@ Route112_CableCarStation_Movement_ExitCableCar:
 .else
 .ifdef SPANISH
 	.include "data/maps/Route112_CableCarStation/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route112_CableCarStation/text.inc"
 .endif
 .endif
 .endif

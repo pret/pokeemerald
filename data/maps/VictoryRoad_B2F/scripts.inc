@@ -31,9 +31,6 @@ VictoryRoad_B2F_EventScript_Dianne::
 	msgbox VictoryRoad_B2F_Text_DiannePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/VictoryRoad_B2F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/VictoryRoad_B2F/text_fr.inc"
 .else
@@ -42,7 +39,8 @@ VictoryRoad_B2F_EventScript_Dianne::
 .else
 .ifdef SPANISH
 	.include "data/maps/VictoryRoad_B2F/text_es.inc"
-.endif
+.else
+	.include "data/maps/VictoryRoad_B2F/text.inc"
 .endif
 .endif
 .endif

@@ -61,9 +61,6 @@ Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route111_WinstrateFamilysHouse/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route111_WinstrateFamilysHouse/text_fr.inc"
 .else
@@ -72,7 +69,8 @@ Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route111_WinstrateFamilysHouse/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route111_WinstrateFamilysHouse/text.inc"
 .endif
 .endif
 .endif

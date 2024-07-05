@@ -15,12 +15,12 @@
 #include "constants/songs.h"
 
 
-#if ENGLISH
-#define FULL_TRAINER_STRING_CLEAR_WIDTH_1 51
-#define FULL_TRAINER_STRING_CLEAR_WIDTH_2 120
-#elif FRENCH || ITALIAN
+#if FRENCH || ITALIAN
 #define FULL_TRAINER_STRING_CLEAR_WIDTH_1 57
 #define FULL_TRAINER_STRING_CLEAR_WIDTH_2 126
+#else //ENGLISH
+#define FULL_TRAINER_STRING_CLEAR_WIDTH_1 51
+#define FULL_TRAINER_STRING_CLEAR_WIDTH_2 120
 #endif
 
 struct Pokenav_MatchCallMenu
@@ -45,12 +45,12 @@ static u32 CB2_HandleCallExitInput(struct Pokenav_MatchCallMenu *);
 static u32 LoopedTask_BuildMatchCallList(s32);
 static bool32 ShouldDoNearbyMessage(void);
 
-#if ENGLISH
-#include "data/text/match_call_messages.h"
-#elif FRENCH
+#if FRENCH
 #include "data/text/french/match_call_messages.h"
 #elif ITALIAN
 #include "data/text/italian/match_call_messages.h"
+#else //ENGLISH
+#include "data/text/match_call_messages.h"
 #endif
 
 const u8 *const gMatchCallFlavorTexts[REMATCH_TABLE_ENTRIES][CHECK_PAGE_ENTRY_COUNT] =
@@ -502,17 +502,17 @@ void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntry *matchCallEntry, u8
     const u8 *className;
     if (!matchCallEntry->isSpecialTrainer)
     {
-    #if ENGLISH
-        int index = GetTrainerIdxByRematchIdx(matchCallEntry->headerId);
-        const struct Trainer *trainer = &gTrainers[index];
-        int class = trainer->trainerClass;
-        className = gTrainerClassNames[class];
-        trainerName = trainer->trainerName;
-    #elif FRENCH || ITALIAN
+    #if FRENCH || ITALIAN
         const struct Trainer *trainer = &gTrainers[GetTrainerIdxByRematchIdx(matchCallEntry->headerId)];
         int class = trainer->trainerClass;
         int gender = trainer->encounterMusic_gender;
         className = GetTrainerClassNameGenderSpecific(class, gender, trainer->trainerName);
+        trainerName = trainer->trainerName;
+    #else //ENGLISH
+        int index = GetTrainerIdxByRematchIdx(matchCallEntry->headerId);
+        const struct Trainer *trainer = &gTrainers[index];
+        int class = trainer->trainerClass;
+        className = gTrainerClassNames[class];
         trainerName = trainer->trainerName;
     #endif
     }

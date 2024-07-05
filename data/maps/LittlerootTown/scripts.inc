@@ -909,9 +909,6 @@ LittlerootTown_EventScript_GiveRunningShoes::
 	delay 30
 	return
 
-.ifdef ENGLISH
-	.include "data/maps/LittlerootTown/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LittlerootTown/text_fr.inc"
 .else
@@ -920,7 +917,8 @@ LittlerootTown_EventScript_GiveRunningShoes::
 .else
 .ifdef SPANISH
 	.include "data/maps/LittlerootTown/text_es.inc"
-.endif
+.else
+	.include "data/maps/LittlerootTown/text.inc"
 .endif
 .endif
 .endif

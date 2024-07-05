@@ -11,14 +11,16 @@ SSTidalLowerDeck_EventScript_Leonard::
 	msgbox SSTidalLowerDeck_Text_LeonardPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/SSTidalLowerDeck/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SSTidalLowerDeck/text_fr.inc"
 .else
 .ifdef ITALIAN
 	.include "data/maps/SSTidalLowerDeck/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SSTidalLowerDeck/text_es.inc"
+.else
+	.include "data/maps/SSTidalLowerDeck/text.inc"
 .endif
 .endif
 .endif

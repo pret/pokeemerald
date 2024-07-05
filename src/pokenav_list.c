@@ -11,14 +11,14 @@
 #define GFXTAG_ARROW 10
 #define PALTAG_ARROW 20
 
-#if ENGLISH
-#define LIST_TRAINER_NAME_X 8
-#define FIELD_FLAVOR_TEXT_X 2
-#define LIST_ARROW_X_OFFSET 3
-#elif FRENCH || ITALIAN
+#if FRENCH || ITALIAN
 #define LIST_TRAINER_NAME_X 10
 #define FIELD_FLAVOR_TEXT_X 4
 #define LIST_ARROW_X_OFFSET 5
+#else //ENGLISH
+#define LIST_TRAINER_NAME_X 8
+#define FIELD_FLAVOR_TEXT_X 2
+#define LIST_ARROW_X_OFFSET 3
 #endif
 
 struct PokenavListMenuWindow {

@@ -41,9 +41,6 @@ Route110_TrickHousePuzzle6_EventScript_Sebastian::
 	msgbox Route110_TrickHousePuzzle6_Text_SebastianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route110_TrickHousePuzzle6/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route110_TrickHousePuzzle6/text_fr.inc"
 .else
@@ -52,7 +49,8 @@ Route110_TrickHousePuzzle6_EventScript_Sebastian::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route110_TrickHousePuzzle6/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route110_TrickHousePuzzle6/text.inc"
 .endif
 .endif
 .endif

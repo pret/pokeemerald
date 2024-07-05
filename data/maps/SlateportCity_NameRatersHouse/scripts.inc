@@ -61,9 +61,6 @@ SlateportCity_NameRatersHouse_EventScript_NewNameDifferent::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/SlateportCity_NameRatersHouse/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SlateportCity_NameRatersHouse/text_fr.inc"
 .else
@@ -72,7 +69,8 @@ SlateportCity_NameRatersHouse_EventScript_NewNameDifferent::
 .else
 .ifdef SPANISH
 	.include "data/maps/SlateportCity_NameRatersHouse/text_es.inc"
-.endif
+.else
+	.include "data/maps/SlateportCity_NameRatersHouse/text.inc"
 .endif
 .endif
 .endif

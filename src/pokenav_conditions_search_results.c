@@ -77,7 +77,13 @@ static const LoopedTask sConditionSearchLoopedTaskFuncs[] =
     ConvertConditionsToListRanks
 };
 
-#if ENGLISH
+#if FRENCH || ITALIAN
+#define SEARCH_RESULT_PAL gConditionSearchResultFramePal
+#define SEARCH_RESULT_TILES gConditionSearchResultTiles
+#define SEARCH_RESULT_TILEMAP gConditionSearchResultTilemap
+#define SEARCH_RESULT_LIST_ITEM_X 12
+#define SEARCH_RESULT_LIST_WIN_WIDTH 18
+#else //ENGLISH
 static const u16 sConditionSearchResultFramePal[] = INCBIN_U16("graphics/pokenav/condition/search_results.gbapal");
 static const u32 sConditionSearchResultTiles[] = INCBIN_U32("graphics/pokenav/condition/search_results.4bpp.lz");
 static const u32 sConditionSearchResultTilemap[] = INCBIN_U32("graphics/pokenav/condition/search_results.bin.lz");
@@ -86,12 +92,6 @@ static const u32 sConditionSearchResultTilemap[] = INCBIN_U32("graphics/pokenav/
 #define SEARCH_RESULT_TILEMAP sConditionSearchResultTilemap
 #define SEARCH_RESULT_LIST_ITEM_X 13
 #define SEARCH_RESULT_LIST_WIN_WIDTH 17
-#elif FRENCH || ITALIAN
-#define SEARCH_RESULT_PAL gConditionSearchResultFramePal
-#define SEARCH_RESULT_TILES gConditionSearchResultTiles
-#define SEARCH_RESULT_TILEMAP gConditionSearchResultTilemap
-#define SEARCH_RESULT_LIST_ITEM_X 12
-#define SEARCH_RESULT_LIST_WIN_WIDTH 18
 #endif
 static const u16 sListBg_Pal[] = INCBIN_U16("graphics/pokenav/condition/search_results_list.gbapal");
 

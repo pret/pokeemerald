@@ -132,9 +132,6 @@ FortreeCity_Gym_EventScript_GymStatue::
 	releaseall
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/FortreeCity_Gym/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/FortreeCity_Gym/text_fr.inc"
 .else
@@ -143,7 +140,8 @@ FortreeCity_Gym_EventScript_GymStatue::
 .else
 .ifdef SPANISH
 	.include "data/maps/FortreeCity_Gym/text_es.inc"
-.endif
+.else
+	.include "data/maps/FortreeCity_Gym/text.inc"
 .endif
 .endif
 .endif

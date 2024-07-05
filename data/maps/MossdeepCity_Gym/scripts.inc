@@ -364,9 +364,6 @@ MossdeepCity_Gym_EventScript_RedFloorSwitch::
 	freerotatingtilepuzzle
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MossdeepCity_Gym/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MossdeepCity_Gym/text_fr.inc"
 .else
@@ -375,7 +372,8 @@ MossdeepCity_Gym_EventScript_RedFloorSwitch::
 .else
 .ifdef SPANISH
 	.include "data/maps/MossdeepCity_Gym/text_es.inc"
-.endif
+.else
+	.include "data/maps/MossdeepCity_Gym/text.inc"
 .endif
 .endif
 .endif

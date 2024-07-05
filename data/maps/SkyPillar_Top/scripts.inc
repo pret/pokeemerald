@@ -180,9 +180,6 @@ SkyPillar_Top_Movement_CameraPanDown:
 	walk_slow_down
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/SkyPillar_Top/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SkyPillar_Top/text_fr.inc"
 .else
@@ -191,7 +188,8 @@ SkyPillar_Top_Movement_CameraPanDown:
 .else
 .ifdef SPANISH
 	.include "data/maps/SkyPillar_Top/text_es.inc"
-.endif
+.else
+	.include "data/maps/SkyPillar_Top/text.inc"
 .endif
 .endif
 .endif

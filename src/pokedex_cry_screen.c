@@ -70,14 +70,14 @@ static const u16 sCryMeterNeedle_Pal[] = INCBIN_U16("graphics/pokedex/cry_meter_
 static const u8 sCryMeterNeedle_Gfx[] = INCBIN_U8("graphics/pokedex/cry_meter_needle.4bpp");
 
 static const u16 sCryMeter_Tilemap[] = INCBIN_U16("graphics/pokedex/cry_meter_map.bin"); // Unused
-#if ENGLISH
+#if FRENCH || ITALIAN
+#define CRY_METER_PAL gCryMeter_Pal
+#define CRY_METER_GFX gCryMeter_Gfx
+#else //ENGLISH
 static const u16 sCryMeter_Pal[] = INCBIN_U16("graphics/pokedex/cry_meter.gbapal");
 static const u8 sCryMeter_Gfx[] = INCBIN_U8("graphics/pokedex/cry_meter.4bpp.lz");
 #define CRY_METER_PAL sCryMeter_Pal
 #define CRY_METER_GFX sCryMeter_Gfx
-#elif FRENCH || ITALIAN
-#define CRY_METER_PAL gCryMeter_Pal
-#define CRY_METER_GFX gCryMeter_Gfx
 #endif
 
 static const u16 sWaveformOffsets[][72] =

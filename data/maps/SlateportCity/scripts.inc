@@ -950,9 +950,6 @@ SlateportCity_EventScript_BerryCrushRankingsSign::
 	releaseall
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/SlateportCity/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SlateportCity/text_fr.inc"
 .else
@@ -961,7 +958,8 @@ SlateportCity_EventScript_BerryCrushRankingsSign::
 .else
 .ifdef SPANISH
 	.include "data/maps/SlateportCity/text_es.inc"
-.endif
+.else
+	.include "data/maps/SlateportCity/text.inc"
 .endif
 .endif
 .endif

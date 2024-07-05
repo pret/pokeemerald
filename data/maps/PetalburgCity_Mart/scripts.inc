@@ -66,9 +66,6 @@ PetalburgCity_Mart_EventScript_Man::
 	msgbox PetalburgCity_Mart_Text_TakeSomeAntidotesWithYou, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/PetalburgCity_Mart/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/PetalburgCity_Mart/text_fr.inc"
 .else
@@ -77,7 +74,8 @@ PetalburgCity_Mart_EventScript_Man::
 .else
 .ifdef SPANISH
 	.include "data/maps/PetalburgCity_Mart/text_es.inc"
-.endif
+.else
+	.include "data/maps/PetalburgCity_Mart/text.inc"
 .endif
 .endif
 .endif

@@ -176,9 +176,6 @@ Route114_EventScript_Kai::
 	msgbox Route114_Text_KaiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route114/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route114/text_fr.inc"
 .else
@@ -187,7 +184,8 @@ Route114_EventScript_Kai::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route114/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route114/text.inc"
 .endif
 .endif
 .endif

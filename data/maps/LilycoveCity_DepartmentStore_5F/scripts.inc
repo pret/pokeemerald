@@ -152,9 +152,6 @@ LilycoveCity_DepartmentStore_5F_EventScript_LittleGirl::
 	msgbox LilycoveCity_DepartmentStore_5F_Text_GettingDollInsteadOfPokemon, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/LilycoveCity_DepartmentStore_5F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LilycoveCity_DepartmentStore_5F/text_fr.inc"
 .else
@@ -163,7 +160,8 @@ LilycoveCity_DepartmentStore_5F_EventScript_LittleGirl::
 .else
 .ifdef SPANISH
 	.include "data/maps/LilycoveCity_DepartmentStore_5F/text_es.inc"
-.endif
+.else
+	.include "data/maps/LilycoveCity_DepartmentStore_5F/text.inc"
 .endif
 .endif
 .endif

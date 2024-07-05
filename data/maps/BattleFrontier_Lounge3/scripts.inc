@@ -197,9 +197,6 @@ BattleFrontier_Lounge3_EventScript_FaceOriginalDirection::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_Lounge3/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_Lounge3/text_fr.inc"
 .else
@@ -208,7 +205,8 @@ BattleFrontier_Lounge3_EventScript_FaceOriginalDirection::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_Lounge3/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_Lounge3/text.inc"
 .endif
 .endif
 .endif

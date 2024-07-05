@@ -283,9 +283,6 @@ Route124_DivingTreasureHuntersHouse_EventScript_ShardTradeBoard::
 	msgbox Route124_DivingTreasureHuntersHouse_Text_ShardTradeBoard, MSGBOX_SIGN
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route124_DivingTreasureHuntersHouse/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route124_DivingTreasureHuntersHouse/text_fr.inc"
 .else
@@ -294,7 +291,8 @@ Route124_DivingTreasureHuntersHouse_EventScript_ShardTradeBoard::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route124_DivingTreasureHuntersHouse/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route124_DivingTreasureHuntersHouse/text.inc"
 .endif
 .endif
 .endif

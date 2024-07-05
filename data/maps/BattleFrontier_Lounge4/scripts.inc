@@ -13,9 +13,6 @@ BattleFrontier_Lounge4_EventScript_Man::
 	msgbox BattleFrontier_Lounge4_Text_NeedBreatherAfterBattles, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_Lounge4/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_Lounge4/text_fr.inc"
 .else
@@ -24,7 +21,8 @@ BattleFrontier_Lounge4_EventScript_Man::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_Lounge4/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_Lounge4/text.inc"
 .endif
 .endif
 .endif

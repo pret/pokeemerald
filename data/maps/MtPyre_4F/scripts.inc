@@ -8,9 +8,6 @@ MtPyre_5F_EventScript_Atsushi::
 	msgbox MtPyre_5F_Text_AtsushiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MtPyre_4F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MtPyre_4F/text_fr.inc"
 .else
@@ -19,7 +16,8 @@ MtPyre_5F_EventScript_Atsushi::
 .else
 .ifdef SPANISH
 	.include "data/maps/MtPyre_4F/text_es.inc"
-.endif
+.else
+	.include "data/maps/MtPyre_4F/text.inc"
 .endif
 .endif
 .endif

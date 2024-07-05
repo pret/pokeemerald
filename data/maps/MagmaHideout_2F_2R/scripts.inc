@@ -21,9 +21,6 @@ MagmaHideout_2F_2R_EventScript_Grunt8::
 	msgbox MagmaHideout_2F_2R_Text_Grunt8PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MagmaHideout_2F_2R/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MagmaHideout_2F_2R/text_fr.inc"
 .else
@@ -32,7 +29,8 @@ MagmaHideout_2F_2R_EventScript_Grunt8::
 .else
 .ifdef SPANISH
 	.include "data/maps/MagmaHideout_2F_2R/text_es.inc"
-.endif
+.else
+	.include "data/maps/MagmaHideout_2F_2R/text.inc"
 .endif
 .endif
 .endif

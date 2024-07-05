@@ -27,9 +27,6 @@ Route110_TrickHousePuzzle8_EventScript_Leroy::
 	msgbox Route110_TrickHousePuzzle8_Text_LeroyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route110_TrickHousePuzzle8/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route110_TrickHousePuzzle8/text_fr.inc"
 .else
@@ -38,7 +35,8 @@ Route110_TrickHousePuzzle8_EventScript_Leroy::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route110_TrickHousePuzzle8/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route110_TrickHousePuzzle8/text.inc"
 .endif
 .endif
 .endif

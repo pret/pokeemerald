@@ -9,9 +9,6 @@ OldaleTown_House2_EventScript_Man::
 	msgbox OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/OldaleTown_House2/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/OldaleTown_House2/text_fr.inc"
 .else
@@ -20,7 +17,8 @@ OldaleTown_House2_EventScript_Man::
 .else
 .ifdef SPANISH
 	.include "data/maps/OldaleTown_House2/text_es.inc"
-.endif
+.else
+	.include "data/maps/OldaleTown_House2/text.inc"
 .endif
 .endif
 .endif

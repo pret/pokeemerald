@@ -925,9 +925,6 @@ BattleFrontier_BattleDomeBattleRoom_Movement_RefereeExit:
 	walk_left
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_BattleDomeBattleRoom/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_BattleDomeBattleRoom/text_fr.inc"
 .else
@@ -936,7 +933,8 @@ BattleFrontier_BattleDomeBattleRoom_Movement_RefereeExit:
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_BattleDomeBattleRoom/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_BattleDomeBattleRoom/text.inc"
 .endif
 .endif
 .endif

@@ -5,12 +5,12 @@
 #include "main.h"
 #include "pokemon_storage_system.h"
 
-#if ENGLISH
-#define POKENAV_LIST_ITEM_X 13
-#define POKENAV_LIST_WINDOW_WIDTH 16
-#elif FRENCH || ITALIAN
+#if FRENCH || ITALIAN
 #define POKENAV_LIST_ITEM_X 12
 #define POKENAV_LIST_WINDOW_WIDTH 17
+#else //ENGLISH
+#define POKENAV_LIST_ITEM_X 13
+#define POKENAV_LIST_WINDOW_WIDTH 16
 #endif
 
 typedef u32 (*LoopedTask)(s32 state);

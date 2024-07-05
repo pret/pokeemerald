@@ -216,9 +216,6 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_ShowToughPainting::
 	releaseall
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/LilycoveCity_LilycoveMuseum_2F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LilycoveCity_LilycoveMuseum_2F/text_fr.inc"
 .else
@@ -227,7 +224,8 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_ShowToughPainting::
 .else
 .ifdef SPANISH
 	.include "data/maps/LilycoveCity_LilycoveMuseum_2F/text_es.inc"
-.endif
+.else
+	.include "data/maps/LilycoveCity_LilycoveMuseum_2F/text.inc"
 .endif
 .endif
 .endif

@@ -19,35 +19,6 @@ MysteryGiftScript_VisitingTrainerArrived:
 	release
 	end
 
-.ifdef ENGLISH
-sText_MysteryGiftVisitingTrainerInstructions:
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.\p"
-	.string "By holding this WONDER CARD, you\n"
-	.string "may take part in a survey at a\l"
-	.string "POKéMON MART.\p"
-	.string "Use these surveys to invite\n"
-	.string "TRAINERS to SOOTOPOLIS CITY.\p"
-	.string "…Let me give you a secret\n"
-	.string "password for a survey:\p"
-	.string "“GIVE ME\n"
-	.string "AWESOME TRAINER”\p"
-	.string "Write that in on a survey and send\n"
-	.string "it to the WIRELESS\l"
-	.string "COMMUNICATION SYSTEM.$"
-
-sText_MysteryGiftVisitingTrainerArrived:
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.\p"
-	.string "A TRAINER has arrived in\n"
-	.string "SOOTOPOLIS CITY looking for you.\p"
-	.string "We hope you will enjoy\n"
-	.string "battling the visiting TRAINER.\p"
-	.string "You may invite other TRAINERS by\n"
-	.string "entering other passwords.\p"
-	.string "Try looking for other passwords\n"
-	.string "that may work.$"
-.else
 .ifdef FRENCH
 sText_MysteryGiftVisitingTrainerInstructions:
 	.string "Merci d’utiliser le système\n"
@@ -106,6 +77,33 @@ sText_MysteryGiftVisitingTrainerArrived:
 	.string "Inserendo altre password,\n"
 	.string "potrai invitare altri ALLENATORI!\p"
 	.string "Cerca altre password valide!$"
-.endif
+.else @ENGLISH
+sText_MysteryGiftVisitingTrainerInstructions:
+	.string "Thank you for using the MYSTERY\n"
+	.string "GIFT System.\p"
+	.string "By holding this WONDER CARD, you\n"
+	.string "may take part in a survey at a\l"
+	.string "POKéMON MART.\p"
+	.string "Use these surveys to invite\n"
+	.string "TRAINERS to SOOTOPOLIS CITY.\p"
+	.string "…Let me give you a secret\n"
+	.string "password for a survey:\p"
+	.string "“GIVE ME\n"
+	.string "AWESOME TRAINER”\p"
+	.string "Write that in on a survey and send\n"
+	.string "it to the WIRELESS\l"
+	.string "COMMUNICATION SYSTEM.$"
+
+sText_MysteryGiftVisitingTrainerArrived:
+	.string "Thank you for using the MYSTERY\n"
+	.string "GIFT System.\p"
+	.string "A TRAINER has arrived in\n"
+	.string "SOOTOPOLIS CITY looking for you.\p"
+	.string "We hope you will enjoy\n"
+	.string "battling the visiting TRAINER.\p"
+	.string "You may invite other TRAINERS by\n"
+	.string "entering other passwords.\p"
+	.string "Try looking for other passwords\n"
+	.string "that may work.$"
 .endif
 .endif

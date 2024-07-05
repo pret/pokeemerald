@@ -224,9 +224,6 @@ SlateportCity_OceanicMuseum_1F_Movement_FamiliarGruntExitNorth:
 	delay_8
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/SlateportCity_OceanicMuseum_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SlateportCity_OceanicMuseum_1F/text_fr.inc"
 .else
@@ -235,7 +232,8 @@ SlateportCity_OceanicMuseum_1F_Movement_FamiliarGruntExitNorth:
 .else
 .ifdef SPANISH
 	.include "data/maps/SlateportCity_OceanicMuseum_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/SlateportCity_OceanicMuseum_1F/text.inc"
 .endif
 .endif
 .endif

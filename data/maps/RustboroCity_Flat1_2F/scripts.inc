@@ -78,9 +78,6 @@ RustboroCity_Flat1_2F_EventScript_PokeDoll::
 	msgbox RustboroCity_Flat1_2F_Text_ItsAPokemonPlushDoll, MSGBOX_SIGN
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/RustboroCity_Flat1_2F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/RustboroCity_Flat1_2F/text_fr.inc"
 .else
@@ -89,7 +86,8 @@ RustboroCity_Flat1_2F_EventScript_PokeDoll::
 .else
 .ifdef SPANISH
 	.include "data/maps/RustboroCity_Flat1_2F/text_es.inc"
-.endif
+.else
+	.include "data/maps/RustboroCity_Flat1_2F/text.inc"
 .endif
 .endif
 .endif

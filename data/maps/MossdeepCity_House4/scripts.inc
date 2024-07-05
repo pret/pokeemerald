@@ -39,9 +39,6 @@ MossdeepCity_House4_EventScript_Skitty::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MossdeepCity_House4/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MossdeepCity_House4/text_fr.inc"
 .else
@@ -50,7 +47,8 @@ MossdeepCity_House4_EventScript_Skitty::
 .else
 .ifdef SPANISH
 	.include "data/maps/MossdeepCity_House4/text_es.inc"
-.endif
+.else
+	.include "data/maps/MossdeepCity_House4/text.inc"
 .endif
 .endif
 .endif

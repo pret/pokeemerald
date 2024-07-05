@@ -26,9 +26,6 @@ VictoryRoad_B1F_EventScript_Halle::
 	msgbox VictoryRoad_B1F_Text_HallePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/VictoryRoad_B1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/VictoryRoad_B1F/text_fr.inc"
 .else
@@ -37,7 +34,8 @@ VictoryRoad_B1F_EventScript_Halle::
 .else
 .ifdef SPANISH
 	.include "data/maps/VictoryRoad_B1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/VictoryRoad_B1F/text.inc"
 .endif
 .endif
 .endif

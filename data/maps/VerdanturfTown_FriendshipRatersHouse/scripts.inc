@@ -62,9 +62,6 @@ VerdanturfTown_FriendshipRatersHouse_EventScript_Pikachu::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/VerdanturfTown_FriendshipRatersHouse/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/VerdanturfTown_FriendshipRatersHouse/text_fr.inc"
 .else
@@ -73,7 +70,8 @@ VerdanturfTown_FriendshipRatersHouse_EventScript_Pikachu::
 .else
 .ifdef SPANISH
 	.include "data/maps/VerdanturfTown_FriendshipRatersHouse/text_es.inc"
-.endif
+.else
+	.include "data/maps/VerdanturfTown_FriendshipRatersHouse/text.inc"
 .endif
 .endif
 .endif

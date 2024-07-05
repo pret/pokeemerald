@@ -1404,14 +1404,16 @@ SootopolisCity_Movement_DestroyTask::
 	destroy_extra_task
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/SootopolisCity/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SootopolisCity/text_fr.inc"
 .else
 .ifdef ITALIAN
 	.include "data/maps/SootopolisCity/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SootopolisCity/text_es.inc"
+.else
+	.include "data/maps/SootopolisCity/text.inc"
 .endif
 .endif
 .endif

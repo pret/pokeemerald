@@ -646,9 +646,6 @@ BattleFrontier_BattlePikeRoomNormal_Movement_CameraPanDown:
 	walk_down
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_BattlePikeRoomNormal/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_BattlePikeRoomNormal/text_fr.inc"
 .else
@@ -657,7 +654,8 @@ BattleFrontier_BattlePikeRoomNormal_Movement_CameraPanDown:
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_BattlePikeRoomNormal/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_BattlePikeRoomNormal/text.inc"
 .endif
 .endif
 .endif

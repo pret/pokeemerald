@@ -97,9 +97,6 @@ LilycoveCity_House3_EventScript_WereDoingContest::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/LilycoveCity_House3/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LilycoveCity_House3/text_fr.inc"
 .else
@@ -108,7 +105,8 @@ LilycoveCity_House3_EventScript_WereDoingContest::
 .else
 .ifdef SPANISH
 	.include "data/maps/LilycoveCity_House3/text_es.inc"
-.endif
+.else
+	.include "data/maps/LilycoveCity_House3/text.inc"
 .endif
 .endif
 .endif

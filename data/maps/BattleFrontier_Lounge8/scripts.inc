@@ -13,9 +13,6 @@ BattleFrontier_Lounge8_EventScript_NinjaBoy::
 	msgbox BattleFrontier_Lounge8_Text_ToldMeIHaveTalentForBattling, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_Lounge8/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_Lounge8/text_fr.inc"
 .else
@@ -24,7 +21,8 @@ BattleFrontier_Lounge8_EventScript_NinjaBoy::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_Lounge8/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_Lounge8/text.inc"
 .endif
 .endif
 .endif

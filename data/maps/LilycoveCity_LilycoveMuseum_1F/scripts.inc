@@ -161,9 +161,6 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_FatMan::
 	msgbox LilycoveCity_LilycoveMuseum_1F_Text_MuseumTouristDestination, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/LilycoveCity_LilycoveMuseum_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LilycoveCity_LilycoveMuseum_1F/text_fr.inc"
 .else
@@ -172,7 +169,8 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_FatMan::
 .else
 .ifdef SPANISH
 	.include "data/maps/LilycoveCity_LilycoveMuseum_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/LilycoveCity_LilycoveMuseum_1F/text.inc"
 .endif
 .endif
 .endif

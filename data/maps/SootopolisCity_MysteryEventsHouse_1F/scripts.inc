@@ -165,14 +165,16 @@ SootopolisCity_MysteryEventsHouse_1F_Movement_OldManMoveAsideRight:
 	walk_in_place_faster_left
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/SootopolisCity_MysteryEventsHouse_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SootopolisCity_MysteryEventsHouse_1F/text_fr.inc"
 .else
 .ifdef ITALIAN
 	.include "data/maps/SootopolisCity_MysteryEventsHouse_1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SootopolisCity_MysteryEventsHouse_1F/text_es.inc"
+.else
+	.include "data/maps/SootopolisCity_MysteryEventsHouse_1F/text.inc"
 .endif
 .endif
 .endif

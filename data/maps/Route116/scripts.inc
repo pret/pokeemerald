@@ -351,9 +351,6 @@ Route116_EventScript_Johnson::
 	msgbox Route116_Text_JohnsonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route116/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route116/text_fr.inc"
 .else
@@ -362,7 +359,8 @@ Route116_EventScript_Johnson::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route116/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route116/text.inc"
 .endif
 .endif
 .endif

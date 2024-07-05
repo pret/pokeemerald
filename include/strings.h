@@ -530,12 +530,9 @@ extern const u8 gText_NumberClear01[];
 extern const u8 gText_5MarksPokemon[];
 extern const u8 gText_UnkHeight[];
 extern const u8 gText_UnkWeight[];
-#if FRENCH || ITALIAN
-extern const u8 gText_EmptyPkmnCategory[];
+#ifdef UNITS_METRIC
 extern const u8 gText_EmptyHeight[];
 extern const u8 gText_EmptyWeight[];
-extern const u8 gText_EmptyPokedexInfo1[];
-extern const u8 gText_EmptyPokedexInfo2[];
 #endif
 extern const u8 gText_HTHeight[];
 extern const u8 gText_WTWeight[];
@@ -2492,11 +2489,11 @@ extern const u8 gText_MrStoneMatchCallDesc[];
 extern const u8 gText_MrStoneMatchCallName[];
 extern const u8 gText_StevenMatchCallDesc[];
 extern const u8 gText_StevenMatchCallName[];
-#if ENGLISH
-extern const u8 gText_MayBrendanMatchCallDesc[];
-#elif FRENCH || ITALIAN
+#if FRENCH || ITALIAN
 extern const u8 gText_BrendanMatchCallDesc[];
 extern const u8 gText_MayMatchCallDesc[];
+#else //ENGLISH
+extern const u8 gText_MayBrendanMatchCallDesc[];
 #endif
 extern const u8 gText_WallyMatchCallDesc[];
 extern const u8 gText_NormanMatchCallDesc[];

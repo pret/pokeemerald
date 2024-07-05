@@ -26,9 +26,6 @@ VerdanturfTown_PokemonCenter_1F_EventScript_ExpertM::
 	msgbox VerdanturfTown_PokemonCenter_1F_Text_VisitForBattleTent, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/VerdanturfTown_PokemonCenter_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/VerdanturfTown_PokemonCenter_1F/text_fr.inc"
 .else
@@ -37,7 +34,8 @@ VerdanturfTown_PokemonCenter_1F_EventScript_ExpertM::
 .else
 .ifdef SPANISH
 	.include "data/maps/VerdanturfTown_PokemonCenter_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/VerdanturfTown_PokemonCenter_1F/text.inc"
 .endif
 .endif
 .endif

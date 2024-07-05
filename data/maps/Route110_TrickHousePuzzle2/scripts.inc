@@ -99,9 +99,6 @@ Route110_TrickHousePuzzle2_EventScript_Georgia::
 	msgbox Route110_TrickHousePuzzle2_Text_GeorgiaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route110_TrickHousePuzzle2/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route110_TrickHousePuzzle2/text_fr.inc"
 .else
@@ -110,7 +107,8 @@ Route110_TrickHousePuzzle2_EventScript_Georgia::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route110_TrickHousePuzzle2/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route110_TrickHousePuzzle2/text.inc"
 .endif
 .endif
 .endif

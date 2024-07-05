@@ -260,9 +260,6 @@ Route101_Movement_BirchApproachPlayer:
 	walk_right
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/Route101/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route101/text_fr.inc"
 .else
@@ -271,7 +268,8 @@ Route101_Movement_BirchApproachPlayer:
 .else
 .ifdef SPANISH
 	.include "data/maps/Route101/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route101/text.inc"
 .endif
 .endif
 .endif

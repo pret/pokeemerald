@@ -32,10 +32,10 @@
 #include "constants/rgb.h"
 #include "constants/trainers.h"
 
-#if ENGLISH || FRENCH
-#define CARD_NAME_BACK_LEFT 136
-#elif ITALIAN
+#if ITALIAN
 #define CARD_NAME_BACK_LEFT 148
+#else //ENGLISH || FRENCH
+#define CARD_NAME_BACK_LEFT 136
 #endif
 
 struct TrainerCardData
@@ -1524,7 +1524,7 @@ static void DrawStarsAndBadgesOnCard(void)
 static void DrawCardBackStats(void)
 {
 // For some reason this function is emptied out in the French and Italian versions
-#if ENGLISH
+#if !defined(FRENCH) && !defined(ITALIAN)
     if (sData->cardType == CARD_TYPE_FRLG)
     {
         if (sData->hasTrades)

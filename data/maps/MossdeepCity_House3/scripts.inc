@@ -24,9 +24,6 @@ MossdeepCity_House3_EventScript_DeclineSuperRod::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MossdeepCity_House3/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MossdeepCity_House3/text_fr.inc"
 .else
@@ -35,7 +32,8 @@ MossdeepCity_House3_EventScript_DeclineSuperRod::
 .else
 .ifdef SPANISH
 	.include "data/maps/MossdeepCity_House3/text_es.inc"
-.endif
+.else
+	.include "data/maps/MossdeepCity_House3/text.inc"
 .endif
 .endif
 .endif

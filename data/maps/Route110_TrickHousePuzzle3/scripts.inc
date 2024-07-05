@@ -301,9 +301,6 @@ Route110_TrickHousePuzzle3_EventScript_Alan::
 	msgbox Route110_TrickHousePuzzle3_Text_AlanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route110_TrickHousePuzzle3/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route110_TrickHousePuzzle3/text_fr.inc"
 .else
@@ -312,7 +309,8 @@ Route110_TrickHousePuzzle3_EventScript_Alan::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route110_TrickHousePuzzle3/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route110_TrickHousePuzzle3/text.inc"
 .endif
 .endif
 .endif

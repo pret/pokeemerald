@@ -41,10 +41,12 @@
 #define MAX_FALL_DIST 10 // The number of times a berry needs to fall before hitting the ground
 #define EAT_FALL_DIST 7 // The number of times a berry needs to fall to be available to eat
 
-#if ENGLISH || FRENCH
+#if FRENCH
 #define RESULTS_TITLE_FONT FONT_NORMAL
 #elif ITALIAN
 #define RESULTS_TITLE_FONT FONT_NARROW
+#else //ENGLISH
+#define RESULTS_TITLE_FONT FONT_NORMAL
 #endif
 
 enum {

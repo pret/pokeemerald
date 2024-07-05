@@ -476,9 +476,6 @@ Route109_EventScript_Elijah::
 	msgbox Route109_Text_ElijahPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route109/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route109/text_fr.inc"
 .else
@@ -487,7 +484,8 @@ Route109_EventScript_Elijah::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route109/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route109/text.inc"
 .endif
 .endif
 .endif

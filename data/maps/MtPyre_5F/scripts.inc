@@ -8,9 +8,6 @@ MtPyre_4F_EventScript_Tasha::
 	msgbox MtPyre_4F_Text_TashaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MtPyre_5F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MtPyre_5F/text_fr.inc"
 .else
@@ -19,7 +16,8 @@ MtPyre_4F_EventScript_Tasha::
 .else
 .ifdef SPANISH
 	.include "data/maps/MtPyre_5F/text_es.inc"
-.endif
+.else
+	.include "data/maps/MtPyre_5F/text.inc"
 .endif
 .endif
 .endif

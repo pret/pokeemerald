@@ -263,9 +263,6 @@ BattleFrontier_BattlePikeThreePathRoom_Movement_HintGiverReturnToPos:
 	face_down
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_BattlePikeThreePathRoom/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_BattlePikeThreePathRoom/text_fr.inc"
 .else
@@ -274,7 +271,8 @@ BattleFrontier_BattlePikeThreePathRoom_Movement_HintGiverReturnToPos:
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_BattlePikeThreePathRoom/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_BattlePikeThreePathRoom/text.inc"
 .endif
 .endif
 .endif

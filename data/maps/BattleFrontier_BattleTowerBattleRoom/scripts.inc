@@ -437,9 +437,6 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_RetireChallenge::
 	goto BattleFrontier_BattleTower_EventScript_WarpToLobbyLost
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_BattleTowerBattleRoom/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_BattleTowerBattleRoom/text_fr.inc"
 .else
@@ -448,7 +445,8 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_RetireChallenge::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_BattleTowerBattleRoom/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_BattleTowerBattleRoom/text.inc"
 .endif
 .endif
 .endif

@@ -26,9 +26,6 @@ DewfordTown_PokemonCenter_1F_EventScript_Man::
 	msgbox DewfordTown_PokemonCenter_1F_Text_FaintedMonCanUseHM, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/DewfordTown_PokemonCenter_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/DewfordTown_PokemonCenter_1F/text_fr.inc"
 .else
@@ -37,7 +34,8 @@ DewfordTown_PokemonCenter_1F_EventScript_Man::
 .else
 .ifdef SPANISH
 	.include "data/maps/DewfordTown_PokemonCenter_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/DewfordTown_PokemonCenter_1F/text.inc"
 .endif
 .endif
 .endif

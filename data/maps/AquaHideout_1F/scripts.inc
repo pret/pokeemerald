@@ -50,9 +50,6 @@ AquaHideout_1F_EventScript_Grunt1Defeated::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/AquaHideout_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/AquaHideout_1F/text_fr.inc"
 .else
@@ -61,7 +58,8 @@ AquaHideout_1F_EventScript_Grunt1Defeated::
 .else
 .ifdef SPANISH
 	.include "data/maps/AquaHideout_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/AquaHideout_1F/text.inc"
 .endif
 .endif
 .endif

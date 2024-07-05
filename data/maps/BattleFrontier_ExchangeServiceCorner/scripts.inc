@@ -434,9 +434,6 @@ BattleFrontier_ExchangeServiceCorner_EventScript_Girl::
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_MoreBattlePointsForRecord, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_ExchangeServiceCorner/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_ExchangeServiceCorner/text_fr.inc"
 .else
@@ -445,7 +442,8 @@ BattleFrontier_ExchangeServiceCorner_EventScript_Girl::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_ExchangeServiceCorner/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_ExchangeServiceCorner/text.inc"
 .endif
 .endif
 .endif

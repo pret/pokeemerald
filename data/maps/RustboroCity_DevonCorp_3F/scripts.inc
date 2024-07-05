@@ -197,9 +197,6 @@ RustboroCity_DevonCorp_3F_EventScript_RareRocksDisplay::
 	msgbox RustboroCity_DevonCorp_3F_Text_RareRocksDisplay, MSGBOX_SIGN
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/RustboroCity_DevonCorp_3F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/RustboroCity_DevonCorp_3F/text_fr.inc"
 .else
@@ -208,7 +205,8 @@ RustboroCity_DevonCorp_3F_EventScript_RareRocksDisplay::
 .else
 .ifdef SPANISH
 	.include "data/maps/RustboroCity_DevonCorp_3F/text_es.inc"
-.endif
+.else
+	.include "data/maps/RustboroCity_DevonCorp_3F/text.inc"
 .endif
 .endif
 .endif

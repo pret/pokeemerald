@@ -1141,9 +1141,6 @@ PetalburgCity_Gym_EventScript_GymStatue::
 	releaseall
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/PetalburgCity_Gym/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/PetalburgCity_Gym/text_fr.inc"
 .else
@@ -1152,7 +1149,8 @@ PetalburgCity_Gym_EventScript_GymStatue::
 .else
 .ifdef SPANISH
 	.include "data/maps/PetalburgCity_Gym/text_es.inc"
-.endif
+.else
+	.include "data/maps/PetalburgCity_Gym/text.inc"
 .endif
 .endif
 .endif

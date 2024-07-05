@@ -32,9 +32,6 @@ MtPyre_3F_EventScript_RematchGabrielle::
 	msgbox MtPyre_3F_Text_GabriellePostRematch, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MtPyre_3F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MtPyre_3F/text_fr.inc"
 .else
@@ -43,7 +40,8 @@ MtPyre_3F_EventScript_RematchGabrielle::
 .else
 .ifdef SPANISH
 	.include "data/maps/MtPyre_3F/text_es.inc"
-.endif
+.else
+	.include "data/maps/MtPyre_3F/text.inc"
 .endif
 .endif
 .endif

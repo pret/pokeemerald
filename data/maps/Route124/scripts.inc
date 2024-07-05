@@ -99,9 +99,6 @@ Route124_EventScript_Isabella::
 	msgbox Route124_Text_IsabellaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route124/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route124/text_fr.inc"
 .else
@@ -110,7 +107,8 @@ Route124_EventScript_Isabella::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route124/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route124/text.inc"
 .endif
 .endif
 .endif

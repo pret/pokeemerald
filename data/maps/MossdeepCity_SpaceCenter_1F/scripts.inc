@@ -282,9 +282,6 @@ MossdeepCity_SpaceCenter_1F_Movement_MoveGruntFromStairs:
 	unlock_facing_direction
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/MossdeepCity_SpaceCenter_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MossdeepCity_SpaceCenter_1F/text_fr.inc"
 .else
@@ -293,7 +290,8 @@ MossdeepCity_SpaceCenter_1F_Movement_MoveGruntFromStairs:
 .else
 .ifdef SPANISH
 	.include "data/maps/MossdeepCity_SpaceCenter_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/MossdeepCity_SpaceCenter_1F/text.inc"
 .endif
 .endif
 .endif

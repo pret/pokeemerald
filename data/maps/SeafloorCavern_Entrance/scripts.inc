@@ -58,9 +58,6 @@ SeafloorCavern_Entrance_EventScript_GruntFacePlayerNorth::
 	waitmovement 0
 	return
 
-.ifdef ENGLISH
-	.include "data/maps/SeafloorCavern_Entrance/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SeafloorCavern_Entrance/text_fr.inc"
 .else
@@ -69,7 +66,8 @@ SeafloorCavern_Entrance_EventScript_GruntFacePlayerNorth::
 .else
 .ifdef SPANISH
 	.include "data/maps/SeafloorCavern_Entrance/text_es.inc"
-.endif
+.else
+	.include "data/maps/SeafloorCavern_Entrance/text.inc"
 .endif
 .endif
 .endif

@@ -307,9 +307,6 @@ BattleFrontier_OutsideWest_EventScript_PokefanF::
 	msgbox BattleFrontier_OutsideWest_Text_MonWithLongTailInFrontier, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_OutsideWest/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_OutsideWest/text_fr.inc"
 .else
@@ -318,7 +315,8 @@ BattleFrontier_OutsideWest_EventScript_PokefanF::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_OutsideWest/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_OutsideWest/text.inc"
 .endif
 .endif
 .endif

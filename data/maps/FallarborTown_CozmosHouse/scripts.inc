@@ -64,9 +64,6 @@ FallarborTown_CozmosHouse_EventScript_CozmoIsHappy::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/FallarborTown_CozmosHouse/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/FallarborTown_CozmosHouse/text_fr.inc"
 .else
@@ -75,7 +72,8 @@ FallarborTown_CozmosHouse_EventScript_CozmoIsHappy::
 .else
 .ifdef SPANISH
 	.include "data/maps/FallarborTown_CozmosHouse/text_es.inc"
-.endif
+.else
+	.include "data/maps/FallarborTown_CozmosHouse/text.inc"
 .endif
 .endif
 .endif

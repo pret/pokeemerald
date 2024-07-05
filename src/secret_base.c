@@ -47,16 +47,6 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
-#if ENGLISH
-#define REGISTRY_WIN_1_TILEMAP_LEFT 18
-#define REGISTRY_WIN_1_WIDTH 11
-#define REGISTRY_WIN_2_BASEBLOCK 0xc7
-#elif FRENCH || ITALIAN
-#define REGISTRY_WIN_1_TILEMAP_LEFT 17
-#define REGISTRY_WIN_1_WIDTH 12
-#define REGISTRY_WIN_2_BASEBLOCK 0xd9
-#endif
-
 // Values for registryStatus
 enum {
     UNREGISTERED,
@@ -187,9 +177,9 @@ static const struct WindowTemplate sRegistryWindowTemplates[] =
 {
     {
         .bg = 0,
-        .tilemapLeft = REGISTRY_WIN_1_TILEMAP_LEFT,
+        .tilemapLeft = LANG_VAL(18, 17, 17),
         .tilemapTop = 1,
-        .width = REGISTRY_WIN_1_WIDTH,
+        .width = LANG_VAL(11, 12, 12),
         .height = 18,
         .paletteNum = 15,
         .baseBlock = 0x01,
@@ -201,7 +191,7 @@ static const struct WindowTemplate sRegistryWindowTemplates[] =
         .width = 28,
         .height = 4,
         .paletteNum = 15,
-        .baseBlock = REGISTRY_WIN_2_BASEBLOCK,
+        .baseBlock = LANG_VAL(0xc7, 0xd9, 0xd9),
     }
 };
 
@@ -737,10 +727,10 @@ static u8 *GetSecretBaseName(u8 *dest, u8 secretBaseIdx)
 {
     *StringCopyN(dest, gSaveBlock1Ptr->secretBases[secretBaseIdx].trainerName, GetNameLength(gSaveBlock1Ptr->secretBases[secretBaseIdx].trainerName)) = EOS;
     ConvertInternationalString(dest, gSaveBlock1Ptr->secretBases[secretBaseIdx].language);
-#if ENGLISH
-    return StringAppend(dest, gText_ApostropheSBase);
-#elif FRENCH || ITALIAN
+#if FRENCH || ITALIAN
     return StringAppendWithPlaceholder(dest, gText_ApostropheSBase, dest);
+#else //ENGLISH
+    return StringAppend(dest, gText_ApostropheSBase);
 #endif
 }
 

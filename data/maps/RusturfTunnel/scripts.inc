@@ -423,9 +423,6 @@ RusturfTunnel_EventScript_Mike::
 	msgbox RusturfTunnel_Text_MikePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/RusturfTunnel/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/RusturfTunnel/text_fr.inc"
 .else
@@ -434,7 +431,8 @@ RusturfTunnel_EventScript_Mike::
 .else
 .ifdef SPANISH
 	.include "data/maps/RusturfTunnel/text_es.inc"
-.endif
+.else
+	.include "data/maps/RusturfTunnel/text.inc"
 .endif
 .endif
 .endif

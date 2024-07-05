@@ -27,9 +27,6 @@ Route110_TrickHousePuzzle4_EventScript_Paula::
 	msgbox Route110_TrickHousePuzzle4_Text_PaulaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route110_TrickHousePuzzle4/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route110_TrickHousePuzzle4/text_fr.inc"
 .else
@@ -38,7 +35,8 @@ Route110_TrickHousePuzzle4_EventScript_Paula::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route110_TrickHousePuzzle4/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route110_TrickHousePuzzle4/text.inc"
 .endif
 .endif
 .endif

@@ -17,9 +17,6 @@ GraniteCave_1F_EventScript_ReceivedFlash::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/GraniteCave_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/GraniteCave_1F/text_fr.inc"
 .else
@@ -28,7 +25,8 @@ GraniteCave_1F_EventScript_ReceivedFlash::
 .else
 .ifdef SPANISH
 	.include "data/maps/GraniteCave_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/GraniteCave_1F/text.inc"
 .endif
 .endif
 .endif

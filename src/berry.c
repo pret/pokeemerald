@@ -24,94 +24,7 @@ static u8 CalcBerryYield(struct BerryTree *tree);
 static u8 GetBerryCountByBerryTreeId(u8 id);
 static u16 GetStageDurationByBerryType(u8);
 
-#if ENGLISH
-static const u8 sBerryDescriptionPart1_Cheri[] = _("Blooms with delicate pretty flowers.");
-static const u8 sBerryDescriptionPart2_Cheri[] = _("The bright red BERRY is very spicy.");
-static const u8 sBerryDescriptionPart1_Chesto[] = _("The BERRY's thick skin and fruit are");
-static const u8 sBerryDescriptionPart2_Chesto[] = _("very tough. It is dry-tasting all over.");
-static const u8 sBerryDescriptionPart1_Pecha[] = _("Very sweet and delicious.");
-static const u8 sBerryDescriptionPart2_Pecha[] = _("Also very tender - handle with care.");
-static const u8 sBerryDescriptionPart1_Rawst[] = _("If the leaves grow long and curly,");
-static const u8 sBerryDescriptionPart2_Rawst[] = _("the BERRY seems to grow very bitter.");
-static const u8 sBerryDescriptionPart1_Aspear[] = _("The hard BERRY is dense with a rich");
-static const u8 sBerryDescriptionPart2_Aspear[] = _("juice. It is quite sour.");
-static const u8 sBerryDescriptionPart1_Leppa[] = _("Grows slower than CHERI and others.");
-static const u8 sBerryDescriptionPart2_Leppa[] = _("The smaller the BERRY, the tastier.");
-static const u8 sBerryDescriptionPart1_Oran[] = _("A peculiar BERRY with a mix of flavors.");
-static const u8 sBerryDescriptionPart2_Oran[] = _("BERRIES grow in half a day.");
-static const u8 sBerryDescriptionPart1_Persim[] = _("Loves sunlight. The BERRY's color");
-static const u8 sBerryDescriptionPart2_Persim[] = _("grows vivid when exposed to the sun.");
-static const u8 sBerryDescriptionPart1_Lum[] = _("Slow to grow. If raised with loving");
-static const u8 sBerryDescriptionPart2_Lum[] = _("care, it may grow two BERRIES.");
-static const u8 sBerryDescriptionPart1_Sitrus[] = _("Closely related to ORAN. The large");
-static const u8 sBerryDescriptionPart2_Sitrus[] = _("BERRY has a well-rounded flavor.");
-static const u8 sBerryDescriptionPart1_Figy[] = _("The BERRY, which looks chewed up,");
-static const u8 sBerryDescriptionPart2_Figy[] = _("brims with spicy substances.");
-static const u8 sBerryDescriptionPart1_Wiki[] = _("The BERRY is said to have grown lumpy");
-static const u8 sBerryDescriptionPart2_Wiki[] = _("to help POKéMON grip it.");
-static const u8 sBerryDescriptionPart1_Mago[] = _("The BERRY turns curvy as it grows.");
-static const u8 sBerryDescriptionPart2_Mago[] = _("The curvier, the sweeter and tastier.");
-static const u8 sBerryDescriptionPart1_Aguav[] = _("The flower is dainty. It is rare in its");
-static const u8 sBerryDescriptionPart2_Aguav[] = _("ability to grow without light.");
-static const u8 sBerryDescriptionPart1_Iapapa[] = _("The BERRY is very big and sour.");
-static const u8 sBerryDescriptionPart2_Iapapa[] = _("It takes at least a day to grow.");
-static const u8 sBerryDescriptionPart1_Razz[] = _("The red BERRY tastes slightly spicy.");
-static const u8 sBerryDescriptionPart2_Razz[] = _("It grows quickly in just four hours.");
-static const u8 sBerryDescriptionPart1_Bluk[] = _("The BERRY is blue on the outside, but");
-static const u8 sBerryDescriptionPart2_Bluk[] = _("it blackens the mouth when eaten.");
-static const u8 sBerryDescriptionPart1_Nanab[] = _("This BERRY was the seventh");
-static const u8 sBerryDescriptionPart2_Nanab[] = _("discovered in the world. It is sweet.");
-static const u8 sBerryDescriptionPart1_Wepear[] = _("The flower is small and white. It has a");
-static const u8 sBerryDescriptionPart2_Wepear[] = _("delicate balance of bitter and sour.");
-static const u8 sBerryDescriptionPart1_Pinap[] = _("Weak against wind and cold.");
-static const u8 sBerryDescriptionPart2_Pinap[] = _("The fruit is spicy and the skin, sour.");
-static const u8 sBerryDescriptionPart1_Pomeg[] = _("However much it is watered,");
-static const u8 sBerryDescriptionPart2_Pomeg[] = _("it only grows up to six BERRIES.");
-static const u8 sBerryDescriptionPart1_Kelpsy[] = _("A rare variety shaped like a root.");
-static const u8 sBerryDescriptionPart2_Kelpsy[] = _("Grows a very large flower.");
-static const u8 sBerryDescriptionPart1_Qualot[] = _("Loves water. Grows strong even in");
-static const u8 sBerryDescriptionPart2_Qualot[] = _("locations with constant rainfall.");
-static const u8 sBerryDescriptionPart1_Hondew[] = _("A BERRY that is very valuable and");
-static const u8 sBerryDescriptionPart2_Hondew[] = _("rarely seen. It is very delicious.");
-static const u8 sBerryDescriptionPart1_Grepa[] = _("Despite its tenderness and round");
-static const u8 sBerryDescriptionPart2_Grepa[] = _("shape, the BERRY is unimaginably sour.");
-static const u8 sBerryDescriptionPart1_Tamato[] = _("The BERRY is lip-bendingly spicy.");
-static const u8 sBerryDescriptionPart2_Tamato[] = _("It takes time to grow.");
-static const u8 sBerryDescriptionPart1_Cornn[] = _("A BERRY from an ancient era. May not");
-static const u8 sBerryDescriptionPart2_Cornn[] = _("grow unless planted in quantity.");
-static const u8 sBerryDescriptionPart1_Magost[] = _("A BERRY that is widely said to have");
-static const u8 sBerryDescriptionPart2_Magost[] = _("a finely balanced flavor.");
-static const u8 sBerryDescriptionPart1_Rabuta[] = _("A rare variety that is overgrown with");
-static const u8 sBerryDescriptionPart2_Rabuta[] = _("hair. It is quite bitter.");
-static const u8 sBerryDescriptionPart1_Nomel[] = _("Quite sour. Just one bite makes it");
-static const u8 sBerryDescriptionPart2_Nomel[] = _("impossible to taste for three days.");
-static const u8 sBerryDescriptionPart1_Spelon[] = _("The vividly red BERRY is very spicy.");
-static const u8 sBerryDescriptionPart2_Spelon[] = _("Its warts secrete a spicy substance.");
-static const u8 sBerryDescriptionPart1_Pamtre[] = _("Drifts on the sea from somewhere.");
-static const u8 sBerryDescriptionPart2_Pamtre[] = _("It is thought to grow elsewhere.");
-static const u8 sBerryDescriptionPart1_Watmel[] = _("A huge BERRY, with some over 20");
-static const u8 sBerryDescriptionPart2_Watmel[] = _("inches discovered. Exceedingly sweet.");
-static const u8 sBerryDescriptionPart1_Durin[] = _("Bitter to even look at. It is so");
-static const u8 sBerryDescriptionPart2_Durin[] = _("bitter, no one has ever eaten it as is.");
-static const u8 sBerryDescriptionPart1_Belue[] = _("It is glossy and looks delicious, but");
-static const u8 sBerryDescriptionPart2_Belue[] = _("it is awfully sour. Takes time to grow.");
-static const u8 sBerryDescriptionPart1_Liechi[] = _("A mysterious BERRY. It is rumored to");
-static const u8 sBerryDescriptionPart2_Liechi[] = _("contain the power of the sea.");
-static const u8 sBerryDescriptionPart1_Ganlon[] = _("A mysterious BERRY. It is rumored to");
-static const u8 sBerryDescriptionPart2_Ganlon[] = _("contain the power of the land.");
-static const u8 sBerryDescriptionPart1_Salac[] = _("A mysterious BERRY. It is rumored to");
-static const u8 sBerryDescriptionPart2_Salac[] = _("contain the power of the sky.");
-static const u8 sBerryDescriptionPart1_Petaya[] = _("A mysterious BERRY. It is rumored to");
-static const u8 sBerryDescriptionPart2_Petaya[] = _("contain the power of all living things.");
-static const u8 sBerryDescriptionPart1_Apicot[] = _("A very mystifying BERRY. No telling");
-static const u8 sBerryDescriptionPart2_Apicot[] = _("what may happen or how it can be used.");
-static const u8 sBerryDescriptionPart1_Lansat[] = _("Said to be a legendary BERRY.");
-static const u8 sBerryDescriptionPart2_Lansat[] = _("Holding it supposedly brings joy.");
-static const u8 sBerryDescriptionPart1_Starf[] = _("So strong, it was abandoned at the");
-static const u8 sBerryDescriptionPart2_Starf[] = _("world's edge. Considered a mirage.");
-static const u8 sBerryDescriptionPart1_Enigma[] = _("A completely enigmatic BERRY.");
-static const u8 sBerryDescriptionPart2_Enigma[] = _("Appears to have the power of stars.");
-#elif FRENCH
+#if FRENCH
 static const u8 sBerryDescriptionPart1_Cheri[] = _("Donne de belles et délicates fleurs.");
 static const u8 sBerryDescriptionPart2_Cheri[] = _("Cette BAIE rouge vif est très épicée.");
 static const u8 sBerryDescriptionPart1_Chesto[] = _("L’épaisse peau et le fruit de cette");
@@ -285,19 +198,103 @@ static const u8 sBerryDescriptionPart1_Starf[] = _("Quasi mai usata per il suo s
 static const u8 sBerryDescriptionPart2_Starf[] = _("forte. È considerata un miraggio.");
 static const u8 sBerryDescriptionPart1_Enigma[] = _("BACCA altamente enigmatica.");
 static const u8 sBerryDescriptionPart2_Enigma[] = _("Pare possedere la forza delle stelle.");
+#else //ENGLISH
+static const u8 sBerryDescriptionPart1_Cheri[] = _("Blooms with delicate pretty flowers.");
+static const u8 sBerryDescriptionPart2_Cheri[] = _("The bright red BERRY is very spicy.");
+static const u8 sBerryDescriptionPart1_Chesto[] = _("The BERRY's thick skin and fruit are");
+static const u8 sBerryDescriptionPart2_Chesto[] = _("very tough. It is dry-tasting all over.");
+static const u8 sBerryDescriptionPart1_Pecha[] = _("Very sweet and delicious.");
+static const u8 sBerryDescriptionPart2_Pecha[] = _("Also very tender - handle with care.");
+static const u8 sBerryDescriptionPart1_Rawst[] = _("If the leaves grow long and curly,");
+static const u8 sBerryDescriptionPart2_Rawst[] = _("the BERRY seems to grow very bitter.");
+static const u8 sBerryDescriptionPart1_Aspear[] = _("The hard BERRY is dense with a rich");
+static const u8 sBerryDescriptionPart2_Aspear[] = _("juice. It is quite sour.");
+static const u8 sBerryDescriptionPart1_Leppa[] = _("Grows slower than CHERI and others.");
+static const u8 sBerryDescriptionPart2_Leppa[] = _("The smaller the BERRY, the tastier.");
+static const u8 sBerryDescriptionPart1_Oran[] = _("A peculiar BERRY with a mix of flavors.");
+static const u8 sBerryDescriptionPart2_Oran[] = _("BERRIES grow in half a day.");
+static const u8 sBerryDescriptionPart1_Persim[] = _("Loves sunlight. The BERRY's color");
+static const u8 sBerryDescriptionPart2_Persim[] = _("grows vivid when exposed to the sun.");
+static const u8 sBerryDescriptionPart1_Lum[] = _("Slow to grow. If raised with loving");
+static const u8 sBerryDescriptionPart2_Lum[] = _("care, it may grow two BERRIES.");
+static const u8 sBerryDescriptionPart1_Sitrus[] = _("Closely related to ORAN. The large");
+static const u8 sBerryDescriptionPart2_Sitrus[] = _("BERRY has a well-rounded flavor.");
+static const u8 sBerryDescriptionPart1_Figy[] = _("The BERRY, which looks chewed up,");
+static const u8 sBerryDescriptionPart2_Figy[] = _("brims with spicy substances.");
+static const u8 sBerryDescriptionPart1_Wiki[] = _("The BERRY is said to have grown lumpy");
+static const u8 sBerryDescriptionPart2_Wiki[] = _("to help POKéMON grip it.");
+static const u8 sBerryDescriptionPart1_Mago[] = _("The BERRY turns curvy as it grows.");
+static const u8 sBerryDescriptionPart2_Mago[] = _("The curvier, the sweeter and tastier.");
+static const u8 sBerryDescriptionPart1_Aguav[] = _("The flower is dainty. It is rare in its");
+static const u8 sBerryDescriptionPart2_Aguav[] = _("ability to grow without light.");
+static const u8 sBerryDescriptionPart1_Iapapa[] = _("The BERRY is very big and sour.");
+static const u8 sBerryDescriptionPart2_Iapapa[] = _("It takes at least a day to grow.");
+static const u8 sBerryDescriptionPart1_Razz[] = _("The red BERRY tastes slightly spicy.");
+static const u8 sBerryDescriptionPart2_Razz[] = _("It grows quickly in just four hours.");
+static const u8 sBerryDescriptionPart1_Bluk[] = _("The BERRY is blue on the outside, but");
+static const u8 sBerryDescriptionPart2_Bluk[] = _("it blackens the mouth when eaten.");
+static const u8 sBerryDescriptionPart1_Nanab[] = _("This BERRY was the seventh");
+static const u8 sBerryDescriptionPart2_Nanab[] = _("discovered in the world. It is sweet.");
+static const u8 sBerryDescriptionPart1_Wepear[] = _("The flower is small and white. It has a");
+static const u8 sBerryDescriptionPart2_Wepear[] = _("delicate balance of bitter and sour.");
+static const u8 sBerryDescriptionPart1_Pinap[] = _("Weak against wind and cold.");
+static const u8 sBerryDescriptionPart2_Pinap[] = _("The fruit is spicy and the skin, sour.");
+static const u8 sBerryDescriptionPart1_Pomeg[] = _("However much it is watered,");
+static const u8 sBerryDescriptionPart2_Pomeg[] = _("it only grows up to six BERRIES.");
+static const u8 sBerryDescriptionPart1_Kelpsy[] = _("A rare variety shaped like a root.");
+static const u8 sBerryDescriptionPart2_Kelpsy[] = _("Grows a very large flower.");
+static const u8 sBerryDescriptionPart1_Qualot[] = _("Loves water. Grows strong even in");
+static const u8 sBerryDescriptionPart2_Qualot[] = _("locations with constant rainfall.");
+static const u8 sBerryDescriptionPart1_Hondew[] = _("A BERRY that is very valuable and");
+static const u8 sBerryDescriptionPart2_Hondew[] = _("rarely seen. It is very delicious.");
+static const u8 sBerryDescriptionPart1_Grepa[] = _("Despite its tenderness and round");
+static const u8 sBerryDescriptionPart2_Grepa[] = _("shape, the BERRY is unimaginably sour.");
+static const u8 sBerryDescriptionPart1_Tamato[] = _("The BERRY is lip-bendingly spicy.");
+static const u8 sBerryDescriptionPart2_Tamato[] = _("It takes time to grow.");
+static const u8 sBerryDescriptionPart1_Cornn[] = _("A BERRY from an ancient era. May not");
+static const u8 sBerryDescriptionPart2_Cornn[] = _("grow unless planted in quantity.");
+static const u8 sBerryDescriptionPart1_Magost[] = _("A BERRY that is widely said to have");
+static const u8 sBerryDescriptionPart2_Magost[] = _("a finely balanced flavor.");
+static const u8 sBerryDescriptionPart1_Rabuta[] = _("A rare variety that is overgrown with");
+static const u8 sBerryDescriptionPart2_Rabuta[] = _("hair. It is quite bitter.");
+static const u8 sBerryDescriptionPart1_Nomel[] = _("Quite sour. Just one bite makes it");
+static const u8 sBerryDescriptionPart2_Nomel[] = _("impossible to taste for three days.");
+static const u8 sBerryDescriptionPart1_Spelon[] = _("The vividly red BERRY is very spicy.");
+static const u8 sBerryDescriptionPart2_Spelon[] = _("Its warts secrete a spicy substance.");
+static const u8 sBerryDescriptionPart1_Pamtre[] = _("Drifts on the sea from somewhere.");
+static const u8 sBerryDescriptionPart2_Pamtre[] = _("It is thought to grow elsewhere.");
+static const u8 sBerryDescriptionPart1_Watmel[] = _("A huge BERRY, with some over 20");
+static const u8 sBerryDescriptionPart2_Watmel[] = _("inches discovered. Exceedingly sweet.");
+static const u8 sBerryDescriptionPart1_Durin[] = _("Bitter to even look at. It is so");
+static const u8 sBerryDescriptionPart2_Durin[] = _("bitter, no one has ever eaten it as is.");
+static const u8 sBerryDescriptionPart1_Belue[] = _("It is glossy and looks delicious, but");
+static const u8 sBerryDescriptionPart2_Belue[] = _("it is awfully sour. Takes time to grow.");
+static const u8 sBerryDescriptionPart1_Liechi[] = _("A mysterious BERRY. It is rumored to");
+static const u8 sBerryDescriptionPart2_Liechi[] = _("contain the power of the sea.");
+static const u8 sBerryDescriptionPart1_Ganlon[] = _("A mysterious BERRY. It is rumored to");
+static const u8 sBerryDescriptionPart2_Ganlon[] = _("contain the power of the land.");
+static const u8 sBerryDescriptionPart1_Salac[] = _("A mysterious BERRY. It is rumored to");
+static const u8 sBerryDescriptionPart2_Salac[] = _("contain the power of the sky.");
+static const u8 sBerryDescriptionPart1_Petaya[] = _("A mysterious BERRY. It is rumored to");
+static const u8 sBerryDescriptionPart2_Petaya[] = _("contain the power of all living things.");
+static const u8 sBerryDescriptionPart1_Apicot[] = _("A very mystifying BERRY. No telling");
+static const u8 sBerryDescriptionPart2_Apicot[] = _("what may happen or how it can be used.");
+static const u8 sBerryDescriptionPart1_Lansat[] = _("Said to be a legendary BERRY.");
+static const u8 sBerryDescriptionPart2_Lansat[] = _("Holding it supposedly brings joy.");
+static const u8 sBerryDescriptionPart1_Starf[] = _("So strong, it was abandoned at the");
+static const u8 sBerryDescriptionPart2_Starf[] = _("world's edge. Considered a mirage.");
+static const u8 sBerryDescriptionPart1_Enigma[] = _("A completely enigmatic BERRY.");
+static const u8 sBerryDescriptionPart2_Enigma[] = _("Appears to have the power of stars.");
 #endif
 
 const struct Berry gBerries[] =
 {
     [ITEM_CHERI_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("CHERI"),
-    #elif FRENCH
-        .name = _("CERIZ"),
-    #elif ITALIAN
-        .name = _("LIEGIA"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "CHERI",
+            "CERIZ",
+            "LIEGIA"),
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 20,
         .maxYield = 3,
@@ -315,13 +312,10 @@ const struct Berry gBerries[] =
 
     [ITEM_CHESTO_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("CHESTO"),
-    #elif FRENCH
-        .name = _("MARON"),
-    #elif ITALIAN
-        .name = _("STAGNA"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "CHESTO",
+            "MARON",
+            "STAGNA"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 80,
         .maxYield = 3,
@@ -339,11 +333,10 @@ const struct Berry gBerries[] =
 
     [ITEM_PECHA_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH || FRENCH
-        .name = _("PECHA"),
-    #elif ITALIAN
-        .name = _("PESCA"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "PECHA",
+            "PECHA",
+            "PESCA"),
         .firmness = BERRY_FIRMNESS_VERY_SOFT,
         .size = 40,
         .maxYield = 3,
@@ -361,13 +354,10 @@ const struct Berry gBerries[] =
 
     [ITEM_RAWST_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("RAWST"),
-    #elif FRENCH
-        .name = _("FRAIVE"),
-    #elif ITALIAN
-        .name = _("FRAGO"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "RAWST",
+            "FRAIVE",
+            "FRAGO"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 32,
         .maxYield = 3,
@@ -385,13 +375,10 @@ const struct Berry gBerries[] =
 
     [ITEM_ASPEAR_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("ASPEAR"),
-    #elif FRENCH
-        .name = _("WILLIA"),
-    #elif ITALIAN
-        .name = _("PERINA"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "ASPEAR",
+            "WILLIA",
+            "PERINA"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 50,
         .maxYield = 3,
@@ -409,13 +396,10 @@ const struct Berry gBerries[] =
 
     [ITEM_LEPPA_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("LEPPA"),
-    #elif FRENCH
-        .name = _("MEPO"),
-    #elif ITALIAN
-        .name = _("MELA"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "LEPPA",
+            "MEPO",
+            "MELA"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 28,
         .maxYield = 3,
@@ -433,11 +417,10 @@ const struct Berry gBerries[] =
 
     [ITEM_ORAN_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH || FRENCH
-        .name = _("ORAN"),
-    #elif ITALIAN
-        .name = _("RANCIA"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "ORAN",
+            "ORAN",
+            "RANCIA"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 35,
         .maxYield = 3,
@@ -455,13 +438,10 @@ const struct Berry gBerries[] =
 
     [ITEM_PERSIM_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("PERSIM"),
-    #elif FRENCH
-        .name = _("KIKA"),
-    #elif ITALIAN
-        .name = _("KI"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "PERSIM",
+            "KIKA",
+            "KI"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 47,
         .maxYield = 3,
@@ -479,13 +459,10 @@ const struct Berry gBerries[] =
 
     [ITEM_LUM_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("LUM"),
-    #elif FRENCH
-        .name = _("PRINE"),
-    #elif ITALIAN
-        .name = _("PRUGNA"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "LUM",
+            "PRINE",
+            "PRUGNA"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 34,
         .maxYield = 2,
@@ -503,11 +480,10 @@ const struct Berry gBerries[] =
 
     [ITEM_SITRUS_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH || FRENCH
-        .name = _("SITRUS"),
-    #elif ITALIAN
-        .name = _("CEDRO"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "SITRUS",
+            "SITRUS",
+            "CEDRO"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 95,
         .maxYield = 3,
@@ -525,13 +501,10 @@ const struct Berry gBerries[] =
 
     [ITEM_FIGY_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("FIGY"),
-    #elif FRENCH
-        .name = _("FIGUY"),
-    #elif ITALIAN
-        .name = _("FICO"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "FIGY",
+            "FIGUY",
+            "FICO"),
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 100,
         .maxYield = 3,
@@ -549,11 +522,10 @@ const struct Berry gBerries[] =
 
     [ITEM_WIKI_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH || FRENCH
-        .name = _("WIKI"),
-    #elif ITALIAN
-        .name = _("KIWI"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "WIKI",
+            "WIKI",
+            "KIWI"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 115,
         .maxYield = 3,
@@ -571,11 +543,10 @@ const struct Berry gBerries[] =
 
     [ITEM_MAGO_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH || FRENCH
-        .name = _("MAGO"),
-    #elif ITALIAN
-        .name = _("MANGO"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "MAGO",
+            "MAGO",
+            "MANGO"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 126,
         .maxYield = 3,
@@ -593,13 +564,10 @@ const struct Berry gBerries[] =
 
     [ITEM_AGUAV_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("AGUAV"),
-    #elif FRENCH
-        .name = _("GOWAV"),
-    #elif ITALIAN
-        .name = _("GUAVA"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "AGUAV",
+            "GOWAV",
+            "GUAVA"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 64,
         .maxYield = 3,
@@ -617,13 +585,10 @@ const struct Berry gBerries[] =
 
     [ITEM_IAPAPA_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("IAPAPA"),
-    #elif FRENCH
-        .name = _("PAPAYA"),
-    #elif ITALIAN
-        .name = _("PAIA"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "IAPAPA",
+            "PAPAYA",
+            "PAIA"),
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 223,
         .maxYield = 3,
@@ -641,13 +606,10 @@ const struct Berry gBerries[] =
 
     [ITEM_RAZZ_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("RAZZ"),
-    #elif FRENCH
-        .name = _("FRAMBY"),
-    #elif ITALIAN
-        .name = _("LAMPON"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "RAZZ",
+            "FRAMBY",
+            "LAMPON"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 120,
         .maxYield = 6,
@@ -665,13 +627,10 @@ const struct Berry gBerries[] =
 
     [ITEM_BLUK_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("BLUK"),
-    #elif FRENCH
-        .name = _("REMU"),
-    #elif ITALIAN
-        .name = _("MORA"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "BLUK",
+            "REMU",
+            "MORA"),
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 108,
         .maxYield = 6,
@@ -689,11 +648,10 @@ const struct Berry gBerries[] =
 
     [ITEM_NANAB_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH || FRENCH
-        .name = _("NANAB"),
-    #elif ITALIAN
-        .name = _("BANA"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "NANAB",
+            "NANAB",
+            "BANA"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 77,
         .maxYield = 6,
@@ -711,13 +669,10 @@ const struct Berry gBerries[] =
 
     [ITEM_WEPEAR_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("WEPEAR"),
-    #elif FRENCH
-        .name = _("REPOI"),
-    #elif ITALIAN
-        .name = _("PERA"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "WEPEAR",
+            "REPOI",
+            "PERA"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 74,
         .maxYield = 6,
@@ -735,13 +690,10 @@ const struct Berry gBerries[] =
 
     [ITEM_PINAP_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("PINAP"),
-    #elif FRENCH
-        .name = _("NANANA"),
-    #elif ITALIAN
-        .name = _("NANAS"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "PINAP",
+            "NANANA",
+            "NANAS"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 80,
         .maxYield = 6,
@@ -759,13 +711,10 @@ const struct Berry gBerries[] =
 
     [ITEM_POMEG_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("POMEG"),
-    #elif FRENCH
-        .name = _("GRENA"),
-    #elif ITALIAN
-        .name = _("GRANA"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "POMEG",
+            "GRENA",
+            "GRANA"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 135,
         .maxYield = 6,
@@ -783,13 +732,10 @@ const struct Berry gBerries[] =
 
     [ITEM_KELPSY_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("KELPSY"),
-    #elif FRENCH
-        .name = _("ALGA"),
-    #elif ITALIAN
-        .name = _("LGA"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "KELPSY",
+            "ALGA",
+            "LGA"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 150,
         .maxYield = 6,
@@ -807,11 +753,10 @@ const struct Berry gBerries[] =
 
     [ITEM_QUALOT_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH || FRENCH
-        .name = _("QUALOT"),
-    #elif ITALIAN
-        .name = _("LOQUAT"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "QUALOT",
+            "QUALOT",
+            "LOQUAT"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 110,
         .maxYield = 6,
@@ -829,13 +774,10 @@ const struct Berry gBerries[] =
 
     [ITEM_HONDEW_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("HONDEW"),
-    #elif FRENCH
-        .name = _("LONME"),
-    #elif ITALIAN
-        .name = _("MELON"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "HONDEW",
+            "LONME",
+            "MELON"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 162,
         .maxYield = 6,
@@ -853,13 +795,10 @@ const struct Berry gBerries[] =
 
     [ITEM_GREPA_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("GREPA"),
-    #elif FRENCH
-        .name = _("RESIN"),
-    #elif ITALIAN
-        .name = _("UVA"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "GREPA",
+            "RESIN",
+            "UVA"),
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 149,
         .maxYield = 6,
@@ -877,11 +816,10 @@ const struct Berry gBerries[] =
 
     [ITEM_TAMATO_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH || FRENCH
-        .name = _("TAMATO"),
-    #elif ITALIAN
-        .name = _("MODORO"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "TAMATO",
+            "TAMATO",
+            "MODORO"),
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 200,
         .maxYield = 4,
@@ -899,13 +837,10 @@ const struct Berry gBerries[] =
 
     [ITEM_CORNN_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("CORNN"),
-    #elif FRENCH
-        .name = _("SIAM"),
-    #elif ITALIAN
-        .name = _("VENA"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "CORNN",
+            "SIAM",
+            "VENA"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 75,
         .maxYield = 4,
@@ -923,13 +858,10 @@ const struct Berry gBerries[] =
 
     [ITEM_MAGOST_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("MAGOST"),
-    #elif FRENCH
-        .name = _("MANGOU"),
-    #elif ITALIAN
-        .name = _("GOSTAN"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "MAGOST",
+            "MANGOU",
+            "GOSTAN"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 140,
         .maxYield = 4,
@@ -947,11 +879,10 @@ const struct Berry gBerries[] =
 
     [ITEM_RABUTA_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH || FRENCH
-        .name = _("RABUTA"),
-    #elif ITALIAN
-        .name = _("MBUTAN"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "RABUTA",
+            "RABUTA",
+            "MBUTAN"),
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 226,
         .maxYield = 4,
@@ -969,13 +900,10 @@ const struct Berry gBerries[] =
 
     [ITEM_NOMEL_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("NOMEL"),
-    #elif FRENCH
-        .name = _("TRONCI"),
-    #elif ITALIAN
-        .name = _("LEMON"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "NOMEL",
+            "TRONCI",
+            "LEMON"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 285,
         .maxYield = 4,
@@ -993,13 +921,10 @@ const struct Berry gBerries[] =
 
     [ITEM_SPELON_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("SPELON"),
-    #elif FRENCH
-        .name = _("KIWAN"),
-    #elif ITALIAN
-        .name = _("MELOS"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "SPELON",
+            "KIWAN",
+            "MELOS"),
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 133,
         .maxYield = 2,
@@ -1017,11 +942,10 @@ const struct Berry gBerries[] =
 
     [ITEM_PAMTRE_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("PAMTRE"),
-    #elif FRENCH || ITALIAN
-        .name = _("PALMA"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "PAMTRE",
+            "PALMA",
+            "PALMA"),
         .firmness = BERRY_FIRMNESS_VERY_SOFT,
         .size = 244,
         .maxYield = 2,
@@ -1039,13 +963,10 @@ const struct Berry gBerries[] =
 
     [ITEM_WATMEL_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("WATMEL"),
-    #elif FRENCH
-        .name = _("STEKPA"),
-    #elif ITALIAN
-        .name = _("COMERO"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "WATMEL",
+            "STEKPA",
+            "COMERO"),
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 250,
         .maxYield = 2,
@@ -1063,11 +984,10 @@ const struct Berry gBerries[] =
 
     [ITEM_DURIN_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH || FRENCH
-        .name = _("DURIN"),
-    #elif ITALIAN
-        .name = _("DURIAN"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "DURIN",
+            "DURIN",
+            "DURIAN"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 280,
         .maxYield = 2,
@@ -1085,13 +1005,10 @@ const struct Berry gBerries[] =
 
     [ITEM_BELUE_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("BELUE"),
-    #elif FRENCH
-        .name = _("MYRTE"),
-    #elif ITALIAN
-        .name = _("RTILLO"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "BELUE",
+            "MYRTE",
+            "RTILLO"),
         .firmness = BERRY_FIRMNESS_VERY_SOFT,
         .size = 300,
         .maxYield = 2,
@@ -1109,13 +1026,10 @@ const struct Berry gBerries[] =
 
     [ITEM_LIECHI_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("LIECHI"),
-    #elif FRENCH
-        .name = _("LICHII"),
-    #elif ITALIAN
-        .name = _("LICI"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "LIECHI",
+            "LICHII",
+            "LICI"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 111,
         .maxYield = 2,
@@ -1133,13 +1047,10 @@ const struct Berry gBerries[] =
 
     [ITEM_GANLON_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("GANLON"),
-    #elif FRENCH
-        .name = _("LINGAN"),
-    #elif ITALIAN
-        .name = _("LONGAN"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "GANLON",
+            "LINGAN",
+            "LONGAN"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 33,
         .maxYield = 2,
@@ -1157,13 +1068,10 @@ const struct Berry gBerries[] =
 
     [ITEM_SALAC_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("SALAC"),
-    #elif FRENCH
-        .name = _("SAILAK"),
-    #elif ITALIAN
-        .name = _("SALAK"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "SALAC",
+            "SAILAK",
+            "SALAK"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 95,
         .maxYield = 2,
@@ -1181,13 +1089,10 @@ const struct Berry gBerries[] =
 
     [ITEM_PETAYA_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("PETAYA"),
-    #elif FRENCH
-        .name = _("PITAYE"),
-    #elif ITALIAN
-        .name = _("PITAYA"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "PETAYA",
+            "PITAYE",
+            "PITAYA"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 237,
         .maxYield = 2,
@@ -1205,13 +1110,10 @@ const struct Berry gBerries[] =
 
     [ITEM_APICOT_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("APICOT"),
-    #elif FRENCH
-        .name = _("ABRIKO"),
-    #elif ITALIAN
-        .name = _("COCCA"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "APICOT",
+            "ABRIKO",
+            "COCCA"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 75,
         .maxYield = 2,
@@ -1229,11 +1131,10 @@ const struct Berry gBerries[] =
 
     [ITEM_LANSAT_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH || FRENCH
-        .name = _("LANSAT"),
-    #elif ITALIAN
-        .name = _("LANGSA"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "LANSAT",
+            "LANSAT",
+            "LANGSA"),
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 97,
         .maxYield = 2,
@@ -1251,13 +1152,10 @@ const struct Berry gBerries[] =
 
     [ITEM_STARF_BERRY - FIRST_BERRY_INDEX] =
     {
-    #if ENGLISH
-        .name = _("STARF"),
-    #elif FRENCH
-        .name = _("FRISTA"),
-    #elif ITALIAN
-        .name = _("MBOLA"),
-    #endif
+        .name = LANGUAGE_STRING(
+            "STARF",
+            "FRISTA",
+            "MBOLA"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 153,
         .maxYield = 2,

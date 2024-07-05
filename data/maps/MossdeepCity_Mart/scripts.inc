@@ -38,9 +38,6 @@ MossdeepCity_Mart_EventScript_Sailor::
 	msgbox MossdeepCity_Mart_Text_NetAndDiveBallsRare, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MossdeepCity_Mart/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MossdeepCity_Mart/text_fr.inc"
 .else
@@ -49,7 +46,8 @@ MossdeepCity_Mart_EventScript_Sailor::
 .else
 .ifdef SPANISH
 	.include "data/maps/MossdeepCity_Mart/text_es.inc"
-.endif
+.else
+	.include "data/maps/MossdeepCity_Mart/text.inc"
 .endif
 .endif
 .endif

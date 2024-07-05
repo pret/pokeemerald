@@ -63,9 +63,6 @@ VerdanturfTown_EventScript_RusturfTunnelSign::
 	msgbox VerdanturfTown_Text_RusturfTunnelSign, MSGBOX_SIGN
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/VerdanturfTown/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/VerdanturfTown/text_fr.inc"
 .else
@@ -74,7 +71,8 @@ VerdanturfTown_EventScript_RusturfTunnelSign::
 .else
 .ifdef SPANISH
 	.include "data/maps/VerdanturfTown/text_es.inc"
-.endif
+.else
+	.include "data/maps/VerdanturfTown/text.inc"
 .endif
 .endif
 .endif

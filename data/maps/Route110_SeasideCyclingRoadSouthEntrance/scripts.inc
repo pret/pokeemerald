@@ -52,9 +52,6 @@ Route110_SeasideCyclingRoadSouthEntrance_EventScript_ClearCyclingRoad::
 	releaseall
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route110_SeasideCyclingRoadSouthEntrance/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route110_SeasideCyclingRoadSouthEntrance/text_fr.inc"
 .else
@@ -63,7 +60,8 @@ Route110_SeasideCyclingRoadSouthEntrance_EventScript_ClearCyclingRoad::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route110_SeasideCyclingRoadSouthEntrance/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route110_SeasideCyclingRoadSouthEntrance/text.inc"
 .endif
 .endif
 .endif

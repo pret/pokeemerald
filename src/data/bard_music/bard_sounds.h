@@ -3,28 +3,7 @@
 
 #define NULL_BARD_SOUND { 0xff }
 
-#if ENGLISH
-#include "pokemon.h"
-#include "moves.h"
-#include "trainer.h"
-#include "status.h"
-#include "battle.h"
-#include "greetings.h"
-#include "people.h"
-#include "voices.h"
-#include "speech.h"
-#include "endings.h"
-#include "feelings.h"
-#include "conditions.h"
-#include "actions.h"
-#include "lifestyle.h"
-#include "hobbies.h"
-#include "time.h"
-#include "misc.h"
-#include "adjectives.h"
-#include "events.h"
-#include "trendysaying.h"
-#elif FRENCH
+#if FRENCH
 #include "french/pokemon.h"
 #include "french/moves.h"
 #include "french/trainer.h"
@@ -66,6 +45,27 @@
 #include "italian/adjectives.h"
 #include "italian/events.h"
 #include "italian/trendysaying.h"
+#else //ENGLISH
+#include "pokemon.h"
+#include "moves.h"
+#include "trainer.h"
+#include "status.h"
+#include "battle.h"
+#include "greetings.h"
+#include "people.h"
+#include "voices.h"
+#include "speech.h"
+#include "endings.h"
+#include "feelings.h"
+#include "conditions.h"
+#include "actions.h"
+#include "lifestyle.h"
+#include "hobbies.h"
+#include "time.h"
+#include "misc.h"
+#include "adjectives.h"
+#include "events.h"
+#include "trendysaying.h"
 #endif
 
 const struct BardSound (*const gBardSoundsTable[EC_NUM_GROUPS])[6] = {

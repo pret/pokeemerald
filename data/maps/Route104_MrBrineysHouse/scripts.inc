@@ -97,9 +97,6 @@ Route104_MrBrineysHouse_EventScript_Peeko::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route104_MrBrineysHouse/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route104_MrBrineysHouse/text_fr.inc"
 .else
@@ -108,7 +105,8 @@ Route104_MrBrineysHouse_EventScript_Peeko::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route104_MrBrineysHouse/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route104_MrBrineysHouse/text.inc"
 .endif
 .endif
 .endif

@@ -68,9 +68,6 @@ RustboroCity_Mart_EventScript_BugCatcher::
 	msgbox RustboroCity_Mart_Text_GettingEscapeRopeJustInCase, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/RustboroCity_Mart/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/RustboroCity_Mart/text_fr.inc"
 .else
@@ -79,7 +76,8 @@ RustboroCity_Mart_EventScript_BugCatcher::
 .else
 .ifdef SPANISH
 	.include "data/maps/RustboroCity_Mart/text_es.inc"
-.endif
+.else
+	.include "data/maps/RustboroCity_Mart/text.inc"
 .endif
 .endif
 .endif

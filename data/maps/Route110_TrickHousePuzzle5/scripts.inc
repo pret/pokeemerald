@@ -901,9 +901,6 @@ Route110_TrickHousePuzzle5_Movement_MechadollShake:
 	face_down
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/Route110_TrickHousePuzzle5/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route110_TrickHousePuzzle5/text_fr.inc"
 .else
@@ -912,7 +909,8 @@ Route110_TrickHousePuzzle5_Movement_MechadollShake:
 .else
 .ifdef SPANISH
 	.include "data/maps/Route110_TrickHousePuzzle5/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route110_TrickHousePuzzle5/text.inc"
 .endif
 .endif
 .endif

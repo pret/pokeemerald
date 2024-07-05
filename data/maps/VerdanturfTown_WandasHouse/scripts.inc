@@ -82,9 +82,6 @@ VerdanturfTown_WandasHouse_EventScript_WallysAuntEverGrande::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/VerdanturfTown_WandasHouse/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/VerdanturfTown_WandasHouse/text_fr.inc"
 .else
@@ -93,7 +90,8 @@ VerdanturfTown_WandasHouse_EventScript_WallysAuntEverGrande::
 .else
 .ifdef SPANISH
 	.include "data/maps/VerdanturfTown_WandasHouse/text_es.inc"
-.endif
+.else
+	.include "data/maps/VerdanturfTown_WandasHouse/text.inc"
 .endif
 .endif
 .endif

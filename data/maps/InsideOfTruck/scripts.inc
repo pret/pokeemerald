@@ -51,9 +51,6 @@ InsideOfTruck_EventScript_MovingBox::
 	msgbox InsideOfTruck_Text_BoxPrintedWithMonLogo, MSGBOX_SIGN
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/InsideOfTruck/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/InsideOfTruck/text_fr.inc"
 .else
@@ -62,7 +59,8 @@ InsideOfTruck_EventScript_MovingBox::
 .else
 .ifdef SPANISH
 	.include "data/maps/InsideOfTruck/text_es.inc"
-.endif
+.else
+	.include "data/maps/InsideOfTruck/text.inc"
 .endif
 .endif
 .endif

@@ -27,9 +27,6 @@ PacifidlogTown_House4_EventScript_No::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/PacifidlogTown_House4/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/PacifidlogTown_House4/text_fr.inc"
 .else
@@ -38,7 +35,8 @@ PacifidlogTown_House4_EventScript_No::
 .else
 .ifdef SPANISH
 	.include "data/maps/PacifidlogTown_House4/text_es.inc"
-.endif
+.else
+	.include "data/maps/PacifidlogTown_House4/text.inc"
 .endif
 .endif
 .endif

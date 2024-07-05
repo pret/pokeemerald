@@ -47,9 +47,6 @@ FallarborTown_Mart_EventScript_Skitty::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/FallarborTown_Mart/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/FallarborTown_Mart/text_fr.inc"
 .else
@@ -58,7 +55,8 @@ FallarborTown_Mart_EventScript_Skitty::
 .else
 .ifdef SPANISH
 	.include "data/maps/FallarborTown_Mart/text_es.inc"
-.endif
+.else
+	.include "data/maps/FallarborTown_Mart/text.inc"
 .endif
 .endif
 .endif

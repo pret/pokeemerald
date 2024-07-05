@@ -35,9 +35,6 @@ MauvilleCity_PokemonCenter_1F_EventScript_Youngster::
 	msgbox MauvilleCity_PokemonCenter_1F_Text_RecordCornerSoundsFun, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MauvilleCity_PokemonCenter_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MauvilleCity_PokemonCenter_1F/text_fr.inc"
 .else
@@ -46,7 +43,8 @@ MauvilleCity_PokemonCenter_1F_EventScript_Youngster::
 .else
 .ifdef SPANISH
 	.include "data/maps/MauvilleCity_PokemonCenter_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/MauvilleCity_PokemonCenter_1F/text.inc"
 .endif
 .endif
 .endif

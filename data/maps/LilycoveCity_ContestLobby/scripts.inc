@@ -982,9 +982,6 @@ LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/LilycoveCity_ContestLobby/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LilycoveCity_ContestLobby/text_fr.inc"
 .else
@@ -993,7 +990,8 @@ LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase::
 .else
 .ifdef SPANISH
 	.include "data/maps/LilycoveCity_ContestLobby/text_es.inc"
-.endif
+.else
+	.include "data/maps/LilycoveCity_ContestLobby/text.inc"
 .endif
 .endif
 .endif

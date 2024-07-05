@@ -28,9 +28,6 @@ MossdeepCity_GameCorner_1F_EventScript_OldMan::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MossdeepCity_GameCorner_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MossdeepCity_GameCorner_1F/text_fr.inc"
 .else
@@ -39,7 +36,8 @@ MossdeepCity_GameCorner_1F_EventScript_OldMan::
 .else
 .ifdef SPANISH
 	.include "data/maps/MossdeepCity_GameCorner_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/MossdeepCity_GameCorner_1F/text.inc"
 .endif
 .endif
 .endif

@@ -291,9 +291,6 @@ Route113_GlassWorkshop_EventScript_NinjaBoy::
 	msgbox Route113_GlassWorkshop_Text_FunToBlowGlassFlute, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route113_GlassWorkshop/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route113_GlassWorkshop/text_fr.inc"
 .else
@@ -302,7 +299,8 @@ Route113_GlassWorkshop_EventScript_NinjaBoy::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route113_GlassWorkshop/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route113_GlassWorkshop/text.inc"
 .endif
 .endif
 .endif

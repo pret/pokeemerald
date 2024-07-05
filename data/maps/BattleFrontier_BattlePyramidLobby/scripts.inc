@@ -524,9 +524,6 @@ BattleFrontier_BattlePyramidLobby_EventScript_ExitRules::
 	releaseall
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_BattlePyramidLobby/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_BattlePyramidLobby/text_fr.inc"
 .else
@@ -535,7 +532,8 @@ BattleFrontier_BattlePyramidLobby_EventScript_ExitRules::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_BattlePyramidLobby/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_BattlePyramidLobby/text.inc"
 .endif
 .endif
 .endif

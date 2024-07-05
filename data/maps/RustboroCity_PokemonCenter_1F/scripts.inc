@@ -30,9 +30,6 @@ RustboroCity_PokemonCenter_1F_EventScript_Girl::
 	msgbox RustboroCity_PokemonCenter_1F_Text_HMCutNextDoor, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/RustboroCity_PokemonCenter_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/RustboroCity_PokemonCenter_1F/text_fr.inc"
 .else
@@ -41,7 +38,8 @@ RustboroCity_PokemonCenter_1F_EventScript_Girl::
 .else
 .ifdef SPANISH
 	.include "data/maps/RustboroCity_PokemonCenter_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/RustboroCity_PokemonCenter_1F/text.inc"
 .endif
 .endif
 .endif

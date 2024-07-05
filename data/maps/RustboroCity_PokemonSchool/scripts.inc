@@ -199,9 +199,6 @@ RustboroCity_PokemonSchool_EventScript_ScottWatchStudents::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/RustboroCity_PokemonSchool/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/RustboroCity_PokemonSchool/text_fr.inc"
 .else
@@ -210,7 +207,8 @@ RustboroCity_PokemonSchool_EventScript_ScottWatchStudents::
 .else
 .ifdef SPANISH
 	.include "data/maps/RustboroCity_PokemonSchool/text_es.inc"
-.endif
+.else
+	.include "data/maps/RustboroCity_PokemonSchool/text.inc"
 .endif
 .endif
 .endif

@@ -103,14 +103,16 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_LotadSizeRecord::
 	releaseall
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/SootopolisCity_LotadAndSeedotHouse/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SootopolisCity_LotadAndSeedotHouse/text_fr.inc"
 .else
 .ifdef ITALIAN
 	.include "data/maps/SootopolisCity_LotadAndSeedotHouse/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SootopolisCity_LotadAndSeedotHouse/text_es.inc"
+.else
+	.include "data/maps/SootopolisCity_LotadAndSeedotHouse/text.inc"
 .endif
 .endif
 .endif

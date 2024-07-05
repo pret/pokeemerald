@@ -998,9 +998,6 @@ Route104_EventScript_Darian::
 	msgbox Route104_Text_DarianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route104/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route104/text_fr.inc"
 .else
@@ -1009,7 +1006,8 @@ Route104_EventScript_Darian::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route104/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route104/text.inc"
 .endif
 .endif
 .endif

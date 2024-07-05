@@ -29,12 +29,12 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-#if ENGLISH
-#define WEIGHT_LEFT 0x81
-#elif FRENCH
+#if FRENCH
 #define WEIGHT_LEFT 0x90
 #elif ITALIAN
 #define WEIGHT_LEFT 0x90
+#else //ENGLISH
+#define WEIGHT_LEFT 0x81
 #endif
 
 enum
@@ -866,12 +866,12 @@ static const u8 sText_TenDashes[] = _("----------");
 
 ALIGNED(4) static const u8 sExpandedPlaceholder_PokedexDescription[] = _("");
 
-#if ENGLISH
-#include "data/pokemon/pokedex_text.h"
-#elif FRENCH
+#if FRENCH
 #include "data/pokemon/french/pokedex_text.h"
 #elif ITALIAN
 #include "data/pokemon/italian/pokedex_text.h"
+#else //ENGLISH
+#include "data/pokemon/pokedex_text.h"
 #endif
 #include "data/pokemon/pokedex_entries.h"
 

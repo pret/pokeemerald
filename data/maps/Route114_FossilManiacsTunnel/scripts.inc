@@ -55,9 +55,6 @@ Route114_FossilManiacsTunnel_EventScript_PlayerRevivedFossil::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route114_FossilManiacsTunnel/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route114_FossilManiacsTunnel/text_fr.inc"
 .else
@@ -66,7 +63,8 @@ Route114_FossilManiacsTunnel_EventScript_PlayerRevivedFossil::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route114_FossilManiacsTunnel/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route114_FossilManiacsTunnel/text.inc"
 .endif
 .endif
 .endif

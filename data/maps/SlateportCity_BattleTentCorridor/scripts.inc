@@ -153,9 +153,6 @@ SlateportCity_BattleTentCorridor_Movement_AttendantExit:
 	set_invisible
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/SlateportCity_BattleTentCorridor/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SlateportCity_BattleTentCorridor/text_fr.inc"
 .else
@@ -164,7 +161,8 @@ SlateportCity_BattleTentCorridor_Movement_AttendantExit:
 .else
 .ifdef SPANISH
 	.include "data/maps/SlateportCity_BattleTentCorridor/text_es.inc"
-.endif
+.else
+	.include "data/maps/SlateportCity_BattleTentCorridor/text.inc"
 .endif
 .endif
 .endif

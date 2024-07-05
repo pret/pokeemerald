@@ -9,9 +9,6 @@ SootopolisCity_House5_EventScript_Girl::
 	msgbox SootopolisCity_House5_Text_BrotherUsedToStudySea, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/SootopolisCity_House5/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SootopolisCity_House5/text_fr.inc"
 .else
@@ -20,7 +17,8 @@ SootopolisCity_House5_EventScript_Girl::
 .else
 .ifdef SPANISH
 	.include "data/maps/SootopolisCity_House5/text_es.inc"
-.endif
+.else
+	.include "data/maps/SootopolisCity_House5/text.inc"
 .endif
 .endif
 .endif

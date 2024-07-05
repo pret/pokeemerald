@@ -66,9 +66,6 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_MetScott::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/LilycoveCity_CoveLilyMotel_2F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LilycoveCity_CoveLilyMotel_2F/text_fr.inc"
 .else
@@ -77,7 +74,8 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_MetScott::
 .else
 .ifdef SPANISH
 	.include "data/maps/LilycoveCity_CoveLilyMotel_2F/text_es.inc"
-.endif
+.else
+	.include "data/maps/LilycoveCity_CoveLilyMotel_2F/text.inc"
 .endif
 .endif
 .endif

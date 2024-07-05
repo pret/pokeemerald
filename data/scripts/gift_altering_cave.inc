@@ -12,17 +12,6 @@ MysteryGiftScript_AlteringCave_:
 	release
 	end
 
-.ifdef ENGLISH
-sText_MysteryGiftAlteringCave:
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.\p"
-	.string "There appears to be a rumor about\n"
-	.string "rare POKéMON sightings.\p"
-	.string "The sightings reportedly came from\n"
-	.string "the ALTERING CAVE on ROUTE 103.\p"
-	.string "Perhaps it would be worthwhile for\n"
-	.string "you to investigate this rumor.$"
-.else
 .ifdef FRENCH
 sText_MysteryGiftAlteringCave:
 	.string "Merci d’utiliser le système\n"
@@ -43,6 +32,15 @@ sText_MysteryGiftAlteringCave:
 	.string "MUTEVOLE sul PERCORSO 103.\p"
 	.string "Perché non vai a vedere\n"
 	.string "di persona?$"
-.endif
+.else @ENGLISH
+sText_MysteryGiftAlteringCave:
+	.string "Thank you for using the MYSTERY\n"
+	.string "GIFT System.\p"
+	.string "There appears to be a rumor about\n"
+	.string "rare POKéMON sightings.\p"
+	.string "The sightings reportedly came from\n"
+	.string "the ALTERING CAVE on ROUTE 103.\p"
+	.string "Perhaps it would be worthwhile for\n"
+	.string "you to investigate this rumor.$"
 .endif
 .endif

@@ -310,9 +310,6 @@ LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC::
 	releaseall
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/LittlerootTown_MaysHouse_2F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LittlerootTown_MaysHouse_2F/text_fr.inc"
 .else
@@ -321,7 +318,8 @@ LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC::
 .else
 .ifdef SPANISH
 	.include "data/maps/LittlerootTown_MaysHouse_2F/text_es.inc"
-.endif
+.else
+	.include "data/maps/LittlerootTown_MaysHouse_2F/text.inc"
 .endif
 .endif
 .endif

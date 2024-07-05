@@ -27,9 +27,6 @@ PacifidlogTown_EventScript_TownSign::
 	msgbox PacifidlogTown_Text_TownSign, MSGBOX_SIGN
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/PacifidlogTown/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/PacifidlogTown/text_fr.inc"
 .else
@@ -38,7 +35,8 @@ PacifidlogTown_EventScript_TownSign::
 .else
 .ifdef SPANISH
 	.include "data/maps/PacifidlogTown/text_es.inc"
-.endif
+.else
+	.include "data/maps/PacifidlogTown/text.inc"
 .endif
 .endif
 .endif

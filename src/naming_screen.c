@@ -45,10 +45,10 @@ enum {
 
 #define KBROW_COUNT 4
 
-#if ENGLISH || ITALIAN
-#define KBCOL_COUNT 8
-#elif FRENCH
+#if FRENCH
 #define KBCOL_COUNT 9
+#else //ENGLISH || ITALIAN
+#define KBCOL_COUNT 8
 #endif
 
 enum {
@@ -1743,17 +1743,17 @@ static void DrawNormalTextEntryBox(void)
 
 static void DrawMonTextEntryBox(void)
 {
-#if ENGLISH
-    u8 buffer[32];
-
-    StringCopy(buffer, gSpeciesNames[sNamingScreen->monSpecies]);
-    StringAppendN(buffer, sNamingScreen->template->title, 15);
-#elif FRENCH || ITALIAN
+#if FRENCH || ITALIAN
     // StringVar1 is used as a buffer here
     u8 buffer[48];
 
     StringCopy(gStringVar1, gSpeciesNames[sNamingScreen->monSpecies]);
     StringExpandPlaceholders(buffer, sNamingScreen->template->title);
+#else //ENGLISH
+    u8 buffer[32];
+
+    StringCopy(buffer, gSpeciesNames[sNamingScreen->monSpecies]);
+    StringAppendN(buffer, sNamingScreen->template->title, 15);
 #endif
     FillWindowPixelBuffer(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], PIXEL_FILL(1));
     AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], FONT_NORMAL, buffer, 8, 1, 0, 0);

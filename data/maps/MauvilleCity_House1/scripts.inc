@@ -18,9 +18,6 @@ MauvilleCity_House1_EventScript_ReceivedRockSmash::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MauvilleCity_House1/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MauvilleCity_House1/text_fr.inc"
 .else
@@ -29,7 +26,8 @@ MauvilleCity_House1_EventScript_ReceivedRockSmash::
 .else
 .ifdef SPANISH
 	.include "data/maps/MauvilleCity_House1/text_es.inc"
-.endif
+.else
+	.include "data/maps/MauvilleCity_House1/text.inc"
 .endif
 .endif
 .endif

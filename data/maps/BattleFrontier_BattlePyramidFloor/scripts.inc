@@ -124,9 +124,6 @@ BattlePyramid_FindItemBallEnd::
 BattlePyramid_Retire::
 	goto BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_BattlePyramidFloor/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_BattlePyramidFloor/text_fr.inc"
 .else
@@ -135,7 +132,8 @@ BattlePyramid_Retire::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_BattlePyramidFloor/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_BattlePyramidFloor/text.inc"
 .endif
 .endif
 .endif

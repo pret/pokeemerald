@@ -13,12 +13,12 @@
 #include "constants/trainers.h"
 
 
-#if ENGLISH
-#define MAY_MATCH_CALL_DESC gText_MayBrendanMatchCallDesc
-#define BRENDAN_MATCH_CALL_DESC gText_MayBrendanMatchCallDesc
-#elif FRENCH || ITALIAN
+#if FRENCH || ITALIAN
 #define MAY_MATCH_CALL_DESC gText_MayMatchCallDesc
 #define BRENDAN_MATCH_CALL_DESC gText_BrendanMatchCallDesc
+#else //ENGLISH
+#define MAY_MATCH_CALL_DESC gText_MayBrendanMatchCallDesc
+#define BRENDAN_MATCH_CALL_DESC gText_MayBrendanMatchCallDesc
 #endif
 
 // NPC below means non-trainer character (no rematch or check page)
@@ -1097,10 +1097,10 @@ static void MatchCall_GetNameAndDesc_Birch(match_call_t matchCall, const u8 **de
 static void MatchCall_GetNameAndDescByRematchIdx(u32 idx, const u8 **desc, const u8 **name)
 {
     const struct Trainer *trainer = gTrainers + GetTrainerIdxByRematchIdx(idx);
-#if ENGLISH
-    *desc = gTrainerClassNames[trainer->trainerClass];
-#elif FRENCH || ITALIAN
+#if FRENCH || ITALIAN
     *desc = GetTrainerClassNameGenderSpecific(trainer->trainerClass, trainer->encounterMusic_gender, trainer->trainerName);
+#else //ENGLISH
+    *desc = gTrainerClassNames[trainer->trainerClass];
 #endif
     *name = trainer->trainerName;
 }

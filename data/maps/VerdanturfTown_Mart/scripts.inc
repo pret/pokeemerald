@@ -40,9 +40,6 @@ VerdanturfTown_Mart_EventScript_Lass::
 	msgbox VerdanturfTown_Mart_Text_NestBallOnWeakenedPokemon, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/VerdanturfTown_Mart/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/VerdanturfTown_Mart/text_fr.inc"
 .else
@@ -51,7 +48,8 @@ VerdanturfTown_Mart_EventScript_Lass::
 .else
 .ifdef SPANISH
 	.include "data/maps/VerdanturfTown_Mart/text_es.inc"
-.endif
+.else
+	.include "data/maps/VerdanturfTown_Mart/text.inc"
 .endif
 .endif
 .endif

@@ -56,9 +56,6 @@ BattleFrontier_BattlePikeCorridor_Movement_AttendantEnterCorridor:
 	face_down
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_BattlePikeCorridor/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_BattlePikeCorridor/text_fr.inc"
 .else
@@ -67,7 +64,8 @@ BattleFrontier_BattlePikeCorridor_Movement_AttendantEnterCorridor:
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_BattlePikeCorridor/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_BattlePikeCorridor/text.inc"
 .endif
 .endif
 .endif

@@ -29,9 +29,6 @@ PacifidlogTown_PokemonCenter_1F_EventScript_OldMan::
 	msgbox PacifidlogTown_PokemonCenter_1F_Text_AncestorsLivedOnBoats, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/PacifidlogTown_PokemonCenter_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/PacifidlogTown_PokemonCenter_1F/text_fr.inc"
 .else
@@ -40,7 +37,8 @@ PacifidlogTown_PokemonCenter_1F_EventScript_OldMan::
 .else
 .ifdef SPANISH
 	.include "data/maps/PacifidlogTown_PokemonCenter_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/PacifidlogTown_PokemonCenter_1F/text.inc"
 .endif
 .endif
 .endif

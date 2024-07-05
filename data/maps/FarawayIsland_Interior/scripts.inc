@@ -185,9 +185,6 @@ FarawayIsland_Interior_EventScript_HideMewWhenGrassCut::
 	releaseall
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/FarawayIsland_Interior/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/FarawayIsland_Interior/text_fr.inc"
 .else
@@ -196,7 +193,8 @@ FarawayIsland_Interior_EventScript_HideMewWhenGrassCut::
 .else
 .ifdef SPANISH
 	.include "data/maps/FarawayIsland_Interior/text_es.inc"
-.endif
+.else
+	.include "data/maps/FarawayIsland_Interior/text.inc"
 .endif
 .endif
 .endif

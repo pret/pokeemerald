@@ -364,9 +364,6 @@ MossdeepCity_SpaceCenter_2F_EventScript_BrendanRayquazaCall::
 	waitmessage
 	return
 
-.ifdef ENGLISH
-	.include "data/maps/MossdeepCity_SpaceCenter_2F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MossdeepCity_SpaceCenter_2F/text_fr.inc"
 .else
@@ -375,7 +372,8 @@ MossdeepCity_SpaceCenter_2F_EventScript_BrendanRayquazaCall::
 .else
 .ifdef SPANISH
 	.include "data/maps/MossdeepCity_SpaceCenter_2F/text_es.inc"
-.endif
+.else
+	.include "data/maps/MossdeepCity_SpaceCenter_2F/text.inc"
 .endif
 .endif
 .endif

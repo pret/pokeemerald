@@ -61,9 +61,6 @@ CaveOfOrigin_B1F_EventScript_AtSkyPillar::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/CaveOfOrigin_B1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/CaveOfOrigin_B1F/text_fr.inc"
 .else
@@ -72,7 +69,8 @@ CaveOfOrigin_B1F_EventScript_AtSkyPillar::
 .else
 .ifdef SPANISH
 	.include "data/maps/CaveOfOrigin_B1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/CaveOfOrigin_B1F/text.inc"
 .endif
 .endif
 .endif

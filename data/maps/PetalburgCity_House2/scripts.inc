@@ -9,9 +9,6 @@ PetalburgCity_House2_EventScript_SchoolKid::
 	msgbox PetalburgCity_House2_Text_BattledNormanOnce, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/PetalburgCity_House2/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/PetalburgCity_House2/text_fr.inc"
 .else
@@ -20,7 +17,8 @@ PetalburgCity_House2_EventScript_SchoolKid::
 .else
 .ifdef SPANISH
 	.include "data/maps/PetalburgCity_House2/text_es.inc"
-.endif
+.else
+	.include "data/maps/PetalburgCity_House2/text.inc"
 .endif
 .endif
 .endif

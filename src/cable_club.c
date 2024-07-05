@@ -35,10 +35,10 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
-#if ENGLISH
-#define WAIT_FOR_LINK_TIMEOUT 300
-#elif FRENCH || ITALIAN
+#if FRENCH || ITALIAN
 #define WAIT_FOR_LINK_TIMEOUT 480
+#else //ENGLISH
+#define WAIT_FOR_LINK_TIMEOUT 300
 #endif
 
 static const struct WindowTemplate sWindowTemplate_LinkPlayerCount = {

@@ -85,9 +85,6 @@ MtChimney_CableCarStation_Movement_ExitCableCar:
 	delay_16
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/MtChimney_CableCarStation/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MtChimney_CableCarStation/text_fr.inc"
 .else
@@ -96,7 +93,8 @@ MtChimney_CableCarStation_Movement_ExitCableCar:
 .else
 .ifdef SPANISH
 	.include "data/maps/MtChimney_CableCarStation/text_es.inc"
-.endif
+.else
+	.include "data/maps/MtChimney_CableCarStation/text.inc"
 .endif
 .endif
 .endif

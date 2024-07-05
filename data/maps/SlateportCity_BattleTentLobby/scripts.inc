@@ -274,9 +274,6 @@ SlateportCity_BattleTentLobby_EventScript_ExitRules::
 	releaseall
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/SlateportCity_BattleTentLobby/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SlateportCity_BattleTentLobby/text_fr.inc"
 .else
@@ -285,7 +282,8 @@ SlateportCity_BattleTentLobby_EventScript_ExitRules::
 .else
 .ifdef SPANISH
 	.include "data/maps/SlateportCity_BattleTentLobby/text_es.inc"
-.endif
+.else
+	.include "data/maps/SlateportCity_BattleTentLobby/text.inc"
 .endif
 .endif
 .endif

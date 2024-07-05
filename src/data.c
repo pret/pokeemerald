@@ -322,12 +322,7 @@ const union AnimCmd *const gAnims_MonPic[] =
 #include "data/pokemon_graphics/unknown_table.h"
 
 #include "data/trainer_parties.h"
-#if ENGLISH
-#include "data/text/trainer_class_names.h"
-#include "data/trainers.h"
-#include "data/text/species_names.h"
-#include "data/text/move_names.h"
-#elif FRENCH
+#if FRENCH
 #include "data/text/french/trainer_class_names.h"
 #include "data/trainers.h"
 #include "data/text/french/species_names.h"
@@ -337,4 +332,9 @@ const union AnimCmd *const gAnims_MonPic[] =
 #include "data/trainers.h"
 #include "data/text/species_names.h"
 #include "data/text/italian/move_names.h"
+#else //ENGLISH
+#include "data/text/trainer_class_names.h"
+#include "data/trainers.h"
+#include "data/text/species_names.h"
+#include "data/text/move_names.h"
 #endif

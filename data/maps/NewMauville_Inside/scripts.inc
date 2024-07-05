@@ -245,9 +245,6 @@ NewMauville_Inside_EventScript_DefeatedVoltorb3::
 	goto Common_EventScript_RemoveStaticPokemon
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/NewMauville_Inside/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/NewMauville_Inside/text_fr.inc"
 .else
@@ -256,7 +253,8 @@ NewMauville_Inside_EventScript_DefeatedVoltorb3::
 .else
 .ifdef SPANISH
 	.include "data/maps/NewMauville_Inside/text_es.inc"
-.endif
+.else
+	.include "data/maps/NewMauville_Inside/text.inc"
 .endif
 .endif
 .endif

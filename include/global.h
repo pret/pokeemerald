@@ -139,16 +139,16 @@
 // It looks like file.c:line: size of array `id' is negative
 #define STATIC_ASSERT(expr, id) typedef char id[(expr) ? 1 : -1];
 
-#if ENGLISH
-#define LANG_VAL(_english, _french, _italian, ...) (_english)
-#define LANGUAGE_STRING(_english, _french, _italian, ...) _(_english)
-#elif FRENCH
+#if FRENCH
 #define LANG_VAL(_english, _french, _italian, ...) (_french)
 #define LANGUAGE_STRING(_english, _french, _italian, ...) _(_french)
 #elif ITALIAN
 #define LANG_VAL(_english, _french, _italian, ...) (_italian)
 #define LANGUAGE_STRING(_english, _french, _italian, ...) _(_italian)
 #elif SPANISH
+#define LANG_VAL(_english, _french, _italian, ...) (_english)
+#define LANGUAGE_STRING(_english, _french, _italian, ...) _(_english)
+#else //ENGLISH
 #define LANG_VAL(_english, _french, _italian, ...) (_english)
 #define LANGUAGE_STRING(_english, _french, _italian, ...) _(_english)
 #endif

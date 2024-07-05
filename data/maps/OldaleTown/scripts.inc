@@ -343,9 +343,6 @@ OldaleTown_Movement_ReturnToOriginalPosition:
 	walk_left
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/OldaleTown/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/OldaleTown/text_fr.inc"
 .else
@@ -354,7 +351,8 @@ OldaleTown_Movement_ReturnToOriginalPosition:
 .else
 .ifdef SPANISH
 	.include "data/maps/OldaleTown/text_es.inc"
-.endif
+.else
+	.include "data/maps/OldaleTown/text.inc"
 .endif
 .endif
 .endif

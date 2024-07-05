@@ -109,9 +109,6 @@ Route112_EventScript_Shayla::
 	msgbox Route112_Text_ShaylaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route112/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route112/text_fr.inc"
 .else
@@ -120,7 +117,8 @@ Route112_EventScript_Shayla::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route112/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route112/text.inc"
 .endif
 .endif
 .endif

@@ -22,9 +22,6 @@ MauvilleCity_PokemonCenter_2F_EventScript_Youngster::
 	msgbox MauvilleCity_PokemonCenter_2F_Text_Youngster, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MauvilleCity_PokemonCenter_2F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MauvilleCity_PokemonCenter_2F/text_fr.inc"
 .else
@@ -33,7 +30,8 @@ MauvilleCity_PokemonCenter_2F_EventScript_Youngster::
 .else
 .ifdef SPANISH
 	.include "data/maps/MauvilleCity_PokemonCenter_2F/text_es.inc"
-.endif
+.else
+	.include "data/maps/MauvilleCity_PokemonCenter_2F/text.inc"
 .endif
 .endif
 .endif

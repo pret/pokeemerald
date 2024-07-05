@@ -30,9 +30,6 @@ Route114_FossilManiacsHouse_EventScript_Bookshelf::
 	msgbox Route114_FossilManiacsHouse_Text_CrammedWithBooks, MSGBOX_SIGN
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route114_FossilManiacsHouse/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route114_FossilManiacsHouse/text_fr.inc"
 .else
@@ -41,7 +38,8 @@ Route114_FossilManiacsHouse_EventScript_Bookshelf::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route114_FossilManiacsHouse/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route114_FossilManiacsHouse/text.inc"
 .endif
 .endif
 .endif

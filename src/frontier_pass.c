@@ -167,7 +167,7 @@ static void SpriteCB_PlayerHead(struct Sprite *);
 
 static const u16 sMaleHead_Pal[]                 = INCBIN_U16("graphics/frontier_pass/map_heads.gbapal");
 static const u16 sFemaleHead_Pal[]               = INCBIN_U16("graphics/frontier_pass/map_heads_female.gbapal");
-#if ENGLISH
+#if !defined(FRENCH) && !defined(ITALIAN)
 static const u32 sMapScreen_Gfx[]                = INCBIN_U32("graphics/frontier_pass/map_screen.4bpp.lz");
 #endif
 static const u32 sCursor_Gfx[]                   = INCBIN_U32("graphics/frontier_pass/cursor.4bpp.lz");
@@ -1409,10 +1409,10 @@ static bool32 InitFrontierMap(void)
         InitWindows(sMapWindowTemplates);
         DeactivateAllTextPrinters();
         PrintOnFrontierMap();
-    #if ENGLISH
-        DecompressAndCopyTileDataToVram(1, sMapScreen_Gfx, 0, 0, 0);
-    #elif FRENCH || ITALIAN
+    #if FRENCH || ITALIAN
         DecompressAndCopyTileDataToVram(1, gFrontierPassMapScreen_Gfx, 0, 0, 0);
+    #else //ENGLISH
+        DecompressAndCopyTileDataToVram(1, sMapScreen_Gfx, 0, 0, 0);
     #endif
         break;
     case 5:

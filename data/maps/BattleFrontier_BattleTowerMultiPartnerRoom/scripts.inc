@@ -278,9 +278,6 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_Partner8::
 	goto BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_TalkToPotentialPartner
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_BattleTowerMultiPartnerRoom/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_BattleTowerMultiPartnerRoom/text_fr.inc"
 .else
@@ -289,7 +286,8 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_Partner8::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_BattleTowerMultiPartnerRoom/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_BattleTowerMultiPartnerRoom/text.inc"
 .endif
 .endif
 .endif

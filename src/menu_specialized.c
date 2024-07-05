@@ -26,12 +26,12 @@
 #include "constants/songs.h"
 #include "gba/io_reg.h"
 
-#if ENGLISH
-#define MAILBOXWIN_TITLE_WIDTH             8
-#define MAILBOXWIN_LISTOPTIONS_BASEBLOCK   0x18
-#elif FRENCH || ITALIAN
+#if FRENCH || ITALIAN
 #define MAILBOXWIN_TITLE_WIDTH             24
 #define MAILBOXWIN_LISTOPTIONS_BASEBLOCK   0x38
+#else //ENGLISH
+#define MAILBOXWIN_TITLE_WIDTH             8
+#define MAILBOXWIN_LISTOPTIONS_BASEBLOCK   0x18
 #endif
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];

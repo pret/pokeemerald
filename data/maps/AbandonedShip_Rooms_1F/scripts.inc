@@ -31,9 +31,6 @@ AbandonedShip_Rooms_1F_EventScript_ThaliaRematch::
 	msgbox AbandonedShip_Rooms_1F_Text_ThaliaPostRematch, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/AbandonedShip_Rooms_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/AbandonedShip_Rooms_1F/text_fr.inc"
 .else
@@ -42,7 +39,8 @@ AbandonedShip_Rooms_1F_EventScript_ThaliaRematch::
 .else
 .ifdef SPANISH
 	.include "data/maps/AbandonedShip_Rooms_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/AbandonedShip_Rooms_1F/text.inc"
 .endif
 .endif
 .endif

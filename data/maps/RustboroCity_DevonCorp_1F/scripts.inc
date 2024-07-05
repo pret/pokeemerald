@@ -80,9 +80,6 @@ RustboroCity_DevonCorp_1F_EventScript_ProductsDisplay::
 	msgbox RustboroCity_DevonCorp_1F_Text_ProductDisplay, MSGBOX_SIGN
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/RustboroCity_DevonCorp_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/RustboroCity_DevonCorp_1F/text_fr.inc"
 .else
@@ -91,7 +88,8 @@ RustboroCity_DevonCorp_1F_EventScript_ProductsDisplay::
 .else
 .ifdef SPANISH
 	.include "data/maps/RustboroCity_DevonCorp_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/RustboroCity_DevonCorp_1F/text.inc"
 .endif
 .endif
 .endif

@@ -38,18 +38,7 @@
 #include "constants/event_objects.h"
 #include "party_menu.h"
 
-#if ENGLISH
-#define TOWER_RESULT_X          16
-#define TOWER_STREAK_X1X2       72, 132
-#define DOME_STREAK_X2A         121
-#define DOME_STREAK_X2B         112
-#define PALACE_RESULT_X         16
-#define PALACE_STREAK_X1X2      72, 131
-#define PIKE_CLEARED_X2A        114
-#define PIKE_CLEARED_X2B        114
-#define FACTORY_RENTALSWAP_X    152
-#define PYRAMID_STREAK_X2       111
-#elif FRENCH
+#if FRENCH
 #define TOWER_RESULT_X          16
 #define TOWER_STREAK_X1X2       72, 132
 #define DOME_STREAK_X2A         153
@@ -71,6 +60,17 @@
 #define PIKE_CLEARED_X2B        127
 #define FACTORY_RENTALSWAP_X    148
 #define PYRAMID_STREAK_X2       112
+#else //ENGLISH
+#define TOWER_RESULT_X          16
+#define TOWER_STREAK_X1X2       72, 132
+#define DOME_STREAK_X2A         121
+#define DOME_STREAK_X2B         112
+#define PALACE_RESULT_X         16
+#define PALACE_STREAK_X1X2      72, 131
+#define PIKE_CLEARED_X2A        114
+#define PIKE_CLEARED_X2B        114
+#define FACTORY_RENTALSWAP_X    152
+#define PYRAMID_STREAK_X2       111
 #endif
 
 struct FrontierBrainMon

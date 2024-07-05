@@ -87,9 +87,6 @@ FortreeCity_Movement_KecleonFlee:
 	walk_right
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/FortreeCity/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/FortreeCity/text_fr.inc"
 .else
@@ -98,7 +95,8 @@ FortreeCity_Movement_KecleonFlee:
 .else
 .ifdef SPANISH
 	.include "data/maps/FortreeCity/text_es.inc"
-.endif
+.else
+	.include "data/maps/FortreeCity/text.inc"
 .endif
 .endif
 .endif

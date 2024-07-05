@@ -139,9 +139,6 @@ SkyPillar_Outside_EventScript_ClosedDoor::
 	msgbox SkyPillar_Outside_Text_DoorIsClosed, MSGBOX_SIGN
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/SkyPillar_Outside/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SkyPillar_Outside/text_fr.inc"
 .else
@@ -150,7 +147,8 @@ SkyPillar_Outside_EventScript_ClosedDoor::
 .else
 .ifdef SPANISH
 	.include "data/maps/SkyPillar_Outside/text_es.inc"
-.endif
+.else
+	.include "data/maps/SkyPillar_Outside/text.inc"
 .endif
 .endif
 .endif

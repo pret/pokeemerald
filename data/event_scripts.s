@@ -826,17 +826,6 @@ Common_EventScript_PlayerHandedOverTheItem::
 	.include "data/scripts/movement.inc"
 	.include "data/scripts/check_furniture.inc"
 
-.ifdef ENGLISH
-	.include "data/text/record_mix.inc"
-	.include "data/text/pc.inc"
-	.include "data/text/pkmn_center_nurse.inc"
-	.include "data/text/mart_clerk.inc"
-	.include "data/text/obtain_item.inc"
-	.include "data/text/general.inc"
-	.include "data/text/pc_transfer.inc"
-	.include "data/text/questionnaire.inc"
-	.include "data/text/abnormal_weather.inc"
-.else
 .ifdef FRENCH
 	.include "data/text/french/record_mix.inc"
 	.include "data/text/french/pc.inc"
@@ -869,7 +858,16 @@ Common_EventScript_PlayerHandedOverTheItem::
 	.include "data/text/spanish/pc_transfer.inc"
 	.include "data/text/spanish/questionnaire.inc"
 	.include "data/text/spanish/abnormal_weather.inc"
-.endif
+.else
+	.include "data/text/record_mix.inc"
+	.include "data/text/pc.inc"
+	.include "data/text/pkmn_center_nurse.inc"
+	.include "data/text/mart_clerk.inc"
+	.include "data/text/obtain_item.inc"
+	.include "data/text/general.inc"
+	.include "data/text/pc_transfer.inc"
+	.include "data/text/questionnaire.inc"
+	.include "data/text/abnormal_weather.inc"
 .endif
 .endif
 .endif

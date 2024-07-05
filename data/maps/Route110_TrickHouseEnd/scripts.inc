@@ -249,9 +249,6 @@ Route110_TrickHouseEnd_Movement_TrickMasterSurprise:
 	jump_in_place_left
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/Route110_TrickHouseEnd/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route110_TrickHouseEnd/text_fr.inc"
 .else
@@ -260,7 +257,8 @@ Route110_TrickHouseEnd_Movement_TrickMasterSurprise:
 .else
 .ifdef SPANISH
 	.include "data/maps/Route110_TrickHouseEnd/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route110_TrickHouseEnd/text.inc"
 .endif
 .endif
 .endif

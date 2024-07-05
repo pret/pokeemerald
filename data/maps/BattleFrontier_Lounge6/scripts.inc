@@ -45,9 +45,6 @@ BattleFrontier_Lounge6_EventScript_TradeCompleted::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_Lounge6/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_Lounge6/text_fr.inc"
 .else
@@ -56,7 +53,8 @@ BattleFrontier_Lounge6_EventScript_TradeCompleted::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_Lounge6/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_Lounge6/text.inc"
 .endif
 .endif
 .endif

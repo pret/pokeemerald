@@ -26,9 +26,6 @@ SlateportCity_PokemonCenter_1F_EventScript_Woman::
 	msgbox SlateportCity_PokemonCenter_1F_Text_TradedMonWithFriend, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/SlateportCity_PokemonCenter_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SlateportCity_PokemonCenter_1F/text_fr.inc"
 .else
@@ -37,7 +34,8 @@ SlateportCity_PokemonCenter_1F_EventScript_Woman::
 .else
 .ifdef SPANISH
 	.include "data/maps/SlateportCity_PokemonCenter_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/SlateportCity_PokemonCenter_1F/text.inc"
 .endif
 .endif
 .endif

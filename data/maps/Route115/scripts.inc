@@ -129,9 +129,6 @@ Route115_EventScript_Marlene::
 	msgbox Route115_Text_MarlenePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route115/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route115/text_fr.inc"
 .else
@@ -140,7 +137,8 @@ Route115_EventScript_Marlene::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route115/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route115/text.inc"
 .endif
 .endif
 .endif

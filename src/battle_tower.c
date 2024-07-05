@@ -151,12 +151,12 @@ const u16 gBattleFrontierHeldItems[] =
 };
 
 #include "data/battle_frontier/battle_frontier_trainer_mons.h"
-#if ENGLISH
-#include "data/battle_frontier/battle_frontier_trainers.h"
-#elif FRENCH
+#if FRENCH
 #include "data/battle_frontier/battle_frontier_trainers_fr.h"
 #elif ITALIAN
 #include "data/battle_frontier/battle_frontier_trainers_it.h"
+#else //ENGLISH
+#include "data/battle_frontier/battle_frontier_trainers.h"
 #endif
 #include "data/battle_frontier/battle_frontier_mons.h"
 
@@ -902,23 +902,23 @@ static const u8 sBattleTowerPartySizes[FRONTIER_MODE_COUNT] =
 
 static const u16 sRecordTrainerSpeechWon[] =
 {
-#if ENGLISH
-    EC_WORD_YAY, EC_WORD_YAY, EC_WORD_EXCL_EXCL, EC_WORD_I_VE, EC_WORD_WON, EC_WORD_EXCL_EXCL
-#elif FRENCH
+#if FRENCH
     EC_WORD_YAY, EC_WORD_EXCL_EXCL, EC_WORD_I_VE, EC_EMPTY_WORD, EC_WORD_WINS, EC_WORD_EXCL_EXCL
 #elif ITALIAN
     EC_WORD_PLAY, EC_WORD_IS_IT_QUES, EC_WORD_WON, EC_WORD_ISN_T_IT_QUES, EC_EMPTY_WORD, EC_EMPTY_WORD
+#else //ENGLISH
+    EC_WORD_YAY, EC_WORD_YAY, EC_WORD_EXCL_EXCL, EC_WORD_I_VE, EC_WORD_WON, EC_WORD_EXCL_EXCL
 #endif
 };
 
 static const u16 sRecordTrainerSpeechLost[] =
 {
-#if ENGLISH
-    EC_WORD_TOO, EC_WORD_BAD, EC_WORD_ELLIPSIS, EC_WORD_WE, EC_WORD_LOST, EC_WORD_ELLIPSIS
-#elif FRENCH
+#if FRENCH
     EC_WORD_SLIMY, EC_WORD_ELLIPSIS, EC_WORD_TO_US, EC_WORD_EVEN_SO, EC_WORD_LOST, EC_WORD_EXCL
 #elif ITALIAN
     EC_WORD_SCARY, EC_WORD_IS_IT_QUES, EC_WORD_LOST, EC_WORD_LOST, EC_WORD_LOST, EC_WORD_EXCL, EC_POKEMON(NONE)
+#else //ENGLISH
+    EC_WORD_TOO, EC_WORD_BAD, EC_WORD_ELLIPSIS, EC_WORD_WE, EC_WORD_LOST, EC_WORD_ELLIPSIS
 #endif
 };
 
@@ -1942,7 +1942,9 @@ static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId)
 
 void FrontierSpeechToString(const u16 *words)
 {
-#if ENGLISH
+#if FRENCH || ITALIAN
+    UnusedConvertEasyChatWordsToString(gStringVar4, words, 2, 3);
+#else //ENGLISH
     ConvertEasyChatWordsToString(gStringVar4, words, 3, 2);
     if (GetStringWidth(FONT_NORMAL, gStringVar4, -1) > 204u)
     {
@@ -1956,8 +1958,6 @@ void FrontierSpeechToString(const u16 *words)
 
         gStringVar4[i] = CHAR_PROMPT_SCROLL;
     }
-#elif FRENCH || ITALIAN
-    UnusedConvertEasyChatWordsToString(gStringVar4, words, 2, 3);
 #endif
 }
 

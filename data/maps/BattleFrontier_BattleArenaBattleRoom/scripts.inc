@@ -493,9 +493,6 @@ BattleFrontier_BattleArenaBattleRoom_Movement_GretaWalkBackToCenter:
 	walk_in_place_faster_left
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_BattleArenaBattleRoom/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_BattleArenaBattleRoom/text_fr.inc"
 .else
@@ -504,7 +501,8 @@ BattleFrontier_BattleArenaBattleRoom_Movement_GretaWalkBackToCenter:
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_BattleArenaBattleRoom/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_BattleArenaBattleRoom/text.inc"
 .endif
 .endif
 .endif

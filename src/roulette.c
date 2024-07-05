@@ -158,14 +158,14 @@
 
 #define NO_DELAY 0xFFFF
 
-#if ENGLISH
-#define WIN_TILEMAP_LEFT 3
-#define WIN_WIDTH 24
-#define WIN_BASEBLOCK 0xC5
-#elif FRENCH || ITALIAN
+#if FRENCH || ITALIAN
 #define WIN_TILEMAP_LEFT 2
 #define WIN_WIDTH 26
 #define WIN_BASEBLOCK 0xBD
+#else //ENGLISH
+#define WIN_TILEMAP_LEFT 3
+#define WIN_WIDTH 24
+#define WIN_BASEBLOCK 0xC5
 #endif
 
 enum {
@@ -2333,7 +2333,33 @@ static void UpdateWheelPosition(void)
 }
 
 static const u8 sFiller[3] = {};
-#if ENGLISH
+#if FRENCH || ITALIAN
+#define SHADOW_PAL       gRouletteShadow_Pal
+#define BALL_PAL         gRouletteBall_Pal
+#define BALL_COUNTER_PAL gRouletteBallCounter_Pal
+#define CURSOR_PAL       gRouletteCursor_Pal
+#define CREDIT_PAL       gRouletteCredit_Pal
+#define SHROOMISH_PAL    gRouletteShroomish_Pal
+#define TAILLOW_PAL      gRouletteTaillow_Pal
+#define GRID_ICONS_PAL   gRouletteGridIcons_Pal
+#define WYNAUT_PAL       gRouletteWynaut_Pal
+#define AZURILL_PAL      gRouletteAzurill_Pal
+#define SKITTY_PAL       gRouletteSkitty_Pal
+#define MAKUHITA_PAL     gRouletteMakuhita_Pal
+#else //ENGLISH
+#define SHADOW_PAL       sShadow_Pal
+#define BALL_PAL         sBall_Pal
+#define BALL_COUNTER_PAL sBallCounter_Pal
+#define CURSOR_PAL       sCursor_Pal
+#define CREDIT_PAL       sCredit_Pal
+#define SHROOMISH_PAL    sShroomish_Pal
+#define TAILLOW_PAL      sTaillow_Pal
+#define GRID_ICONS_PAL   sGridIcons_Pal
+#define WYNAUT_PAL       sWynaut_Pal
+#define AZURILL_PAL      sAzurill_Pal
+#define SKITTY_PAL       sSkitty_Pal
+#define MAKUHITA_PAL     sMakuhita_Pal
+
 static const u16 sShadow_Pal[] = INCBIN_U16("graphics/roulette/shadow.gbapal");
 static const u16 sBall_Pal[] = INCBIN_U16("graphics/roulette/ball.gbapal");
 static const u16 sBallCounter_Pal[] = INCBIN_U16("graphics/roulette/ball_counter.gbapal");
@@ -2350,32 +2376,6 @@ static const u16 sUnused1_Pal[] = INCBIN_U16("graphics/roulette/unused_1.gbapal"
 static const u16 sUnused2_Pal[] = INCBIN_U16("graphics/roulette/unused_2.gbapal");
 static const u16 sUnused3_Pal[] = INCBIN_U16("graphics/roulette/unused_3.gbapal");
 static const u16 sUnused4_Pal[] = INCBIN_U16("graphics/roulette/unused_4.gbapal");
-
-#define SHADOW_PAL       sShadow_Pal
-#define BALL_PAL         sBall_Pal
-#define BALL_COUNTER_PAL sBallCounter_Pal
-#define CURSOR_PAL       sCursor_Pal
-#define CREDIT_PAL       sCredit_Pal
-#define SHROOMISH_PAL    sShroomish_Pal
-#define TAILLOW_PAL      sTaillow_Pal
-#define GRID_ICONS_PAL   sGridIcons_Pal
-#define WYNAUT_PAL       sWynaut_Pal
-#define AZURILL_PAL      sAzurill_Pal
-#define SKITTY_PAL       sSkitty_Pal
-#define MAKUHITA_PAL     sMakuhita_Pal
-#elif FRENCH || ITALIAN
-#define SHADOW_PAL       gRouletteShadow_Pal
-#define BALL_PAL         gRouletteBall_Pal
-#define BALL_COUNTER_PAL gRouletteBallCounter_Pal
-#define CURSOR_PAL       gRouletteCursor_Pal
-#define CREDIT_PAL       gRouletteCredit_Pal
-#define SHROOMISH_PAL    gRouletteShroomish_Pal
-#define TAILLOW_PAL      gRouletteTaillow_Pal
-#define GRID_ICONS_PAL   gRouletteGridIcons_Pal
-#define WYNAUT_PAL       gRouletteWynaut_Pal
-#define AZURILL_PAL      gRouletteAzurill_Pal
-#define SKITTY_PAL       gRouletteSkitty_Pal
-#define MAKUHITA_PAL     gRouletteMakuhita_Pal
 #endif
 
 static const u32 sBall_Gfx[] = INCBIN_U32("graphics/roulette/ball.4bpp.lz");

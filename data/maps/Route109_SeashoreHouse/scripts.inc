@@ -96,9 +96,6 @@ Route109_SeashoreHouse_EventScript_TrainersNotCompleted::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route109_SeashoreHouse/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route109_SeashoreHouse/text_fr.inc"
 .else
@@ -107,7 +104,8 @@ Route109_SeashoreHouse_EventScript_TrainersNotCompleted::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route109_SeashoreHouse/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route109_SeashoreHouse/text.inc"
 .endif
 .endif
 .endif

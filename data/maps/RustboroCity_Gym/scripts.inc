@@ -103,9 +103,6 @@ RustboroCity_Gym_EventScript_RegisterRoxanne::
 	releaseall
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/RustboroCity_Gym/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/RustboroCity_Gym/text_fr.inc"
 .else
@@ -114,7 +111,8 @@ RustboroCity_Gym_EventScript_RegisterRoxanne::
 .else
 .ifdef SPANISH
 	.include "data/maps/RustboroCity_Gym/text_es.inc"
-.endif
+.else
+	.include "data/maps/RustboroCity_Gym/text.inc"
 .endif
 .endif
 .endif

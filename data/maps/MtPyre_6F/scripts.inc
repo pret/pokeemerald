@@ -27,9 +27,6 @@ MtPyre_6F_EventScript_Cedric::
 	msgbox MtPyre_6F_Text_CedricPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MtPyre_6F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MtPyre_6F/text_fr.inc"
 .else
@@ -38,7 +35,8 @@ MtPyre_6F_EventScript_Cedric::
 .else
 .ifdef SPANISH
 	.include "data/maps/MtPyre_6F/text_es.inc"
-.endif
+.else
+	.include "data/maps/MtPyre_6F/text.inc"
 .endif
 .endif
 .endif

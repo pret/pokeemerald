@@ -223,9 +223,6 @@ EverGrandeCity_ChampionsRoom_Movement_BirchArrives:
 	walk_in_place_faster_left
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/EverGrandeCity_ChampionsRoom/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/EverGrandeCity_ChampionsRoom/text_fr.inc"
 .else
@@ -234,7 +231,8 @@ EverGrandeCity_ChampionsRoom_Movement_BirchArrives:
 .else
 .ifdef SPANISH
 	.include "data/maps/EverGrandeCity_ChampionsRoom/text_es.inc"
-.endif
+.else
+	.include "data/maps/EverGrandeCity_ChampionsRoom/text.inc"
 .endif
 .endif
 .endif

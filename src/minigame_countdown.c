@@ -377,7 +377,7 @@ static void CreateStartSprite(u16 tileTag, u16 palTag, s16 x, s16 y, u8 subprior
 static void InitStartGraphic(u8 spriteId1, u8 spriteId2, u8 spriteId3);
 static void SpriteCB_Start(struct Sprite *sprite);
 
-#if ENGLISH
+#if !defined(FRENCH) && !defined(ITALIAN)
 static const u16 s321Start_Pal[] = INCBIN_U16("graphics/link/321start.gbapal");
 static const u32 s321Start_Gfx[] = INCBIN_U32("graphics/link/321start.4bpp.lz");
 #endif
@@ -608,12 +608,12 @@ static void SpriteCB_Start(struct Sprite *sprite)
 
 static void Load321StartGfx(u16 tileTag, u16 palTag)
 {
-#if ENGLISH
-    struct CompressedSpriteSheet spriteSheet = {s321Start_Gfx, 0xE00, 0};
-    struct SpritePalette spritePalette = {s321Start_Pal, 0};
-#elif FRENCH || ITALIAN
+#if FRENCH || ITALIAN
     struct CompressedSpriteSheet spriteSheet = {g321Start_Gfx, 0xE00, 0};
     struct SpritePalette spritePalette = {g321Start_Pal, 0};
+#else //ENGLISH
+    struct CompressedSpriteSheet spriteSheet = {s321Start_Gfx, 0xE00, 0};
+    struct SpritePalette spritePalette = {s321Start_Pal, 0};
 #endif
 
     spriteSheet.tag = tileTag;

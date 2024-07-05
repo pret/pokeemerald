@@ -140,9 +140,6 @@ LilycoveCity_DepartmentStore_1F_EventScript_FloorNamesSign::
 	msgbox LilycoveCity_DepartmentStore_1F_Text_FloorNamesSign, MSGBOX_SIGN
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/LilycoveCity_DepartmentStore_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LilycoveCity_DepartmentStore_1F/text_fr.inc"
 .else
@@ -151,7 +148,8 @@ LilycoveCity_DepartmentStore_1F_EventScript_FloorNamesSign::
 .else
 .ifdef SPANISH
 	.include "data/maps/LilycoveCity_DepartmentStore_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/LilycoveCity_DepartmentStore_1F/text.inc"
 .endif
 .endif
 .endif

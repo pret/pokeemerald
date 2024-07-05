@@ -429,9 +429,6 @@ MtPyre_Summit_EventScript_Grunt4::
 	msgbox MtPyre_Summit_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MtPyre_Summit/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MtPyre_Summit/text_fr.inc"
 .else
@@ -440,7 +437,8 @@ MtPyre_Summit_EventScript_Grunt4::
 .else
 .ifdef SPANISH
 	.include "data/maps/MtPyre_Summit/text_es.inc"
-.endif
+.else
+	.include "data/maps/MtPyre_Summit/text.inc"
 .endif
 .endif
 .endif

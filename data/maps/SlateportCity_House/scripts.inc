@@ -9,9 +9,6 @@ SlateportCity_House_EventScript_Girl::
 	msgbox SlateportCity_House_Text_MustBeGoingToBattleTent, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/SlateportCity_House/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SlateportCity_House/text_fr.inc"
 .else
@@ -20,7 +17,8 @@ SlateportCity_House_EventScript_Girl::
 .else
 .ifdef SPANISH
 	.include "data/maps/SlateportCity_House/text_es.inc"
-.endif
+.else
+	.include "data/maps/SlateportCity_House/text.inc"
 .endif
 .endif
 .endif

@@ -9,9 +9,6 @@ RustboroCity_Flat1_1F_EventScript_Woman::
 	msgbox RustboroCity_Flat1_1F_Text_PokemonStrange, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/RustboroCity_Flat1_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/RustboroCity_Flat1_1F/text_fr.inc"
 .else
@@ -20,7 +17,8 @@ RustboroCity_Flat1_1F_EventScript_Woman::
 .else
 .ifdef SPANISH
 	.include "data/maps/RustboroCity_Flat1_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/RustboroCity_Flat1_1F/text.inc"
 .endif
 .endif
 .endif

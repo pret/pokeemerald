@@ -70,9 +70,6 @@ Route119_WeatherInstitute_1F_EventScript_Grunt4::
 	msgbox Route119_WeatherInstitute_1F_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route119_WeatherInstitute_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route119_WeatherInstitute_1F/text_fr.inc"
 .else
@@ -81,7 +78,8 @@ Route119_WeatherInstitute_1F_EventScript_Grunt4::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route119_WeatherInstitute_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route119_WeatherInstitute_1F/text.inc"
 .endif
 .endif
 .endif

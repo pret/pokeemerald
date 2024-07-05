@@ -42,9 +42,6 @@ MtPyre_2F_EventScript_Zander::
 	msgbox MtPyre_2F_Text_ZanderPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MtPyre_2F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MtPyre_2F/text_fr.inc"
 .else
@@ -53,7 +50,8 @@ MtPyre_2F_EventScript_Zander::
 .else
 .ifdef SPANISH
 	.include "data/maps/MtPyre_2F/text_es.inc"
-.endif
+.else
+	.include "data/maps/MtPyre_2F/text.inc"
 .endif
 .endif
 .endif

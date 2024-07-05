@@ -146,10 +146,10 @@ static void Task_CloseBagMenu(u8);
 static u8 AddItemMessageWindow(u8);
 static void RemoveItemMessageWindow(u8);
 static void ReturnToItemList(u8);
-#if ENGLISH
-static void PrintItemQuantity(u8, s16);
-#elif FRENCH || ITALIAN
+#if FRENCH || ITALIAN
 static void PrintItemQuantity(u8, s16, u32);
+#else //ENGLISH
+static void PrintItemQuantity(u8, s16);
 #endif
 static u8 BagMenu_AddWindow(u8);
 static u8 GetSwitchBagPocketDirection(void);
@@ -279,10 +279,10 @@ static const struct MenuAction sItemMenuActions[] = {
     [ACTION_WALK]              = {gMenuText_Walk,     ItemMenu_UseOutOfBattle},
     [ACTION_DESELECT]          = {gMenuText_Deselect, ItemMenu_Register},
     [ACTION_CHECK_TAG]         = {gMenuText_CheckTag, ItemMenu_CheckTag},
-#if ENGLISH
-    [ACTION_CONFIRM]           = {gMenuText_Confirm,  Task_FadeAndCloseBagMenu},
-#elif FRENCH || ITALIAN
+#if FRENCH || ITALIAN
     [ACTION_CONFIRM]           = {gMenuText_Confirm2, Task_FadeAndCloseBagMenu},
+#else //ENGLISH
+    [ACTION_CONFIRM]           = {gMenuText_Confirm,  Task_FadeAndCloseBagMenu},
 #endif
     [ACTION_SHOW]              = {gMenuText_Show,     ItemMenu_Show},
     [ACTION_GIVE_FAVOR_LADY]   = {gMenuText_Give2,    ItemMenu_GiveFavorLady},
@@ -331,13 +331,13 @@ static const u8 sContextMenuItems_Cancel[] = {
 };
 
 static const u8 sContextMenuItems_BerryBlenderCrush[] = {
-#if ENGLISH
-    ACTION_CONFIRM,     ACTION_CHECK_TAG,
-    ACTION_DUMMY,       ACTION_CANCEL
-#elif FRENCH || ITALIAN
+#if FRENCH || ITALIAN
     ACTION_CONFIRM,     ACTION_DUMMY,
     ACTION_CHECK_TAG,   ACTION_DUMMY,
     ACTION_CANCEL,      ACTION_DUMMY
+#else //ENGLISH
+    ACTION_CONFIRM,     ACTION_CHECK_TAG,
+    ACTION_DUMMY,       ACTION_CANCEL
 #endif
 };
 
@@ -1201,28 +1201,28 @@ void CloseItemMessage(u8 taskId)
 
 static void AddItemQuantityWindow(u8 windowType)
 {
-#if ENGLISH
-    PrintItemQuantity(BagMenu_AddWindow(windowType), 1);
-#elif FRENCH || ITALIAN
+#if FRENCH || ITALIAN
     u32 windowId = BagMenu_AddWindow(windowType);
     PrintItemQuantity(windowId, 1, TEXT_SKIP_DRAW);
     CopyWindowToVram(windowId, 3);
+#else //ENGLISH
+    PrintItemQuantity(BagMenu_AddWindow(windowType), 1);
 #endif
 }
 
-#if ENGLISH
-static void PrintItemQuantity(u8 windowId, s16 quantity)
-#elif FRENCH || ITALIAN
+#if FRENCH || ITALIAN
 static void PrintItemQuantity(u8 windowId, s16 quantity, u32 speed)
+#else //ENGLISH
+static void PrintItemQuantity(u8 windowId, s16 quantity)
 #endif
 {
     u8 numDigits = (gBagPosition.pocket == BERRIES_POCKET) ? BERRY_CAPACITY_DIGITS : BAG_ITEM_CAPACITY_DIGITS;
     ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, numDigits);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
-#if ENGLISH
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 40), 2, 0, 0);
-#elif FRENCH || ITALIAN
+#if FRENCH || ITALIAN
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 40), 2, speed, NULL);
+#else //ENGLISH
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 40), 2, 0, 0);
 #endif
 }
 
@@ -1880,10 +1880,10 @@ static void Task_ChooseHowManyToToss(u8 taskId)
 
     if (AdjustQuantityAccordingToDPadInput(&tItemCount, tQuantity) == TRUE)
     {
-    #if ENGLISH
-        PrintItemQuantity(gBagMenu->windowIds[ITEMWIN_QUANTITY], tItemCount);
-    #elif FRENCH || ITALIAN
+    #if FRENCH || ITALIAN
         PrintItemQuantity(gBagMenu->windowIds[ITEMWIN_QUANTITY], tItemCount, 0);
+    #else //ENGLISH
+        PrintItemQuantity(gBagMenu->windowIds[ITEMWIN_QUANTITY], tItemCount);
     #endif
     }
     else if (JOY_NEW(A_BUTTON))
@@ -2247,10 +2247,10 @@ static void Task_ChooseHowManyToDeposit(u8 taskId)
 
     if (AdjustQuantityAccordingToDPadInput(&tItemCount, tQuantity) == TRUE)
     {
-    #if ENGLISH
-        PrintItemQuantity(gBagMenu->windowIds[ITEMWIN_QUANTITY], tItemCount);
-    #elif FRENCH || ITALIAN
+    #if FRENCH || ITALIAN
         PrintItemQuantity(gBagMenu->windowIds[ITEMWIN_QUANTITY], tItemCount, 0);
+    #else //ENGLISH
+        PrintItemQuantity(gBagMenu->windowIds[ITEMWIN_QUANTITY], tItemCount);
     #endif
     }
     else if (JOY_NEW(A_BUTTON))

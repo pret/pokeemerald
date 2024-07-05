@@ -245,9 +245,6 @@ Route128_EventScript_Carlee::
 	msgbox Route128_Text_CarleePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route128/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route128/text_fr.inc"
 .else
@@ -256,7 +253,8 @@ Route128_EventScript_Carlee::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route128/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route128/text.inc"
 .endif
 .endif
 .endif

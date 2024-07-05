@@ -26,9 +26,6 @@ DewfordTown_House2_EventScript_Boy::
 	msgbox DewfordTown_House2_Text_BrawlySoCool, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/DewfordTown_House2/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/DewfordTown_House2/text_fr.inc"
 .else
@@ -37,7 +34,8 @@ DewfordTown_House2_EventScript_Boy::
 .else
 .ifdef SPANISH
 	.include "data/maps/DewfordTown_House2/text_es.inc"
-.endif
+.else
+	.include "data/maps/DewfordTown_House2/text.inc"
 .endif
 .endif
 .endif

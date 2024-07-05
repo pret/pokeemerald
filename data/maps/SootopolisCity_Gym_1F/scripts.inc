@@ -175,9 +175,6 @@ SootopolisCity_Gym_1F_EventScript_GymStatue::
 	releaseall
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/SootopolisCity_Gym_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SootopolisCity_Gym_1F/text_fr.inc"
 .else
@@ -186,7 +183,8 @@ SootopolisCity_Gym_1F_EventScript_GymStatue::
 .else
 .ifdef SPANISH
 	.include "data/maps/SootopolisCity_Gym_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/SootopolisCity_Gym_1F/text.inc"
 .endif
 .endif
 .endif

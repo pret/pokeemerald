@@ -449,9 +449,6 @@ BattleFrontier_BattleFactoryPreBattleRoom_Movement_AttendantReturnToPlayer:
 	face_down
 	step_end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_BattleFactoryPreBattleRoom/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_BattleFactoryPreBattleRoom/text_fr.inc"
 .else
@@ -460,7 +457,8 @@ BattleFrontier_BattleFactoryPreBattleRoom_Movement_AttendantReturnToPlayer:
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_BattleFactoryPreBattleRoom/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_BattleFactoryPreBattleRoom/text.inc"
 .endif
 .endif
 .endif

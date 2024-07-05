@@ -9,9 +9,6 @@ SlateportCity_SternsShipyard_2F_EventScript_Scientist2::
 	msgbox SlateportCity_SternsShipyard_2F_Text_FloatsBecauseBuoyancy, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/SlateportCity_SternsShipyard_2F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/SlateportCity_SternsShipyard_2F/text_fr.inc"
 .else
@@ -20,7 +17,8 @@ SlateportCity_SternsShipyard_2F_EventScript_Scientist2::
 .else
 .ifdef SPANISH
 	.include "data/maps/SlateportCity_SternsShipyard_2F/text_es.inc"
-.endif
+.else
+	.include "data/maps/SlateportCity_SternsShipyard_2F/text.inc"
 .endif
 .endif
 .endif

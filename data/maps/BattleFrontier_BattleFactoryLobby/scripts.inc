@@ -322,9 +322,6 @@ BattleFrontier_BattleFactoryLobby_EventScript_ExitRules::
 	releaseall
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/BattleFrontier_BattleFactoryLobby/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/BattleFrontier_BattleFactoryLobby/text_fr.inc"
 .else
@@ -333,7 +330,8 @@ BattleFrontier_BattleFactoryLobby_EventScript_ExitRules::
 .else
 .ifdef SPANISH
 	.include "data/maps/BattleFrontier_BattleFactoryLobby/text_es.inc"
-.endif
+.else
+	.include "data/maps/BattleFrontier_BattleFactoryLobby/text.inc"
 .endif
 .endif
 .endif

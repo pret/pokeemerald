@@ -57,9 +57,6 @@ FortreeCity_DecorationShop_PokemartDecor_Chairs:
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/FortreeCity_DecorationShop/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/FortreeCity_DecorationShop/text_fr.inc"
 .else
@@ -68,7 +65,8 @@ FortreeCity_DecorationShop_PokemartDecor_Chairs:
 .else
 .ifdef SPANISH
 	.include "data/maps/FortreeCity_DecorationShop/text_es.inc"
-.endif
+.else
+	.include "data/maps/FortreeCity_DecorationShop/text.inc"
 .endif
 .endif
 .endif

@@ -5,9 +5,6 @@ AbandonedShip_Rooms2_B1F_EventScript_Camper::
 	msgbox AbandonedShip_Rooms2_B1F_Text_PerfectPlaceToGoExploring, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/AbandonedShip_Rooms2_B1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/AbandonedShip_Rooms2_B1F/text_fr.inc"
 .else
@@ -16,7 +13,8 @@ AbandonedShip_Rooms2_B1F_EventScript_Camper::
 .else
 .ifdef SPANISH
 	.include "data/maps/AbandonedShip_Rooms2_B1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/AbandonedShip_Rooms2_B1F/text.inc"
 .endif
 .endif
 .endif

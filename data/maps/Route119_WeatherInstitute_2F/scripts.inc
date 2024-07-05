@@ -210,9 +210,6 @@ Route119_WeatherInstitute_2F_EventScript_WeatherScientist::
 	goto Route119_WeatherInstitute_2F_EventScript_ReceiveCastform
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route119_WeatherInstitute_2F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route119_WeatherInstitute_2F/text_fr.inc"
 .else
@@ -221,7 +218,8 @@ Route119_WeatherInstitute_2F_EventScript_WeatherScientist::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route119_WeatherInstitute_2F/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route119_WeatherInstitute_2F/text.inc"
 .endif
 .endif
 .endif

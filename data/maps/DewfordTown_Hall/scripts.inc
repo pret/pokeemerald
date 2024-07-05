@@ -259,9 +259,6 @@ DewfordTown_Hall_EventScript_ReceivedSludgeBomb::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/DewfordTown_Hall/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/DewfordTown_Hall/text_fr.inc"
 .else
@@ -270,7 +267,8 @@ DewfordTown_Hall_EventScript_ReceivedSludgeBomb::
 .else
 .ifdef SPANISH
 	.include "data/maps/DewfordTown_Hall/text_es.inc"
-.endif
+.else
+	.include "data/maps/DewfordTown_Hall/text.inc"
 .endif
 .endif
 .endif

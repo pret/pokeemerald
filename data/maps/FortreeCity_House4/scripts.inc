@@ -64,9 +64,6 @@ FortreeCity_House4_EventScript_Wingull::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/FortreeCity_House4/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/FortreeCity_House4/text_fr.inc"
 .else
@@ -75,7 +72,8 @@ FortreeCity_House4_EventScript_Wingull::
 .else
 .ifdef SPANISH
 	.include "data/maps/FortreeCity_House4/text_es.inc"
-.endif
+.else
+	.include "data/maps/FortreeCity_House4/text.inc"
 .endif
 .endif
 .endif

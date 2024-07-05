@@ -45,19 +45,6 @@ EventScript_CancelCut::
 	releaseall
 	end
 
-.ifdef ENGLISH
-Text_WantToCut:
-	.string "This tree looks like it can be\n"
-	.string "CUT down!\p"
-	.string "Would you like to CUT it?$"
-
-Text_MonUsedFieldMove:
-	.string "{STR_VAR_1} used {STR_VAR_2}!$"
-
-Text_CantCut:
-	.string "This tree looks like it can be\n"
-	.string "CUT down!$"
-.else
 .ifdef FRENCH
 Text_WantToCut:
 	.string "Cet arbre semble pouvoir être COUPE.\p"
@@ -79,7 +66,18 @@ Text_MonUsedFieldMove:
 
 Text_CantCut:
 	.string "L’albero si può abbattere con TAGLIO.$"
-.endif
+.else
+Text_WantToCut:
+	.string "This tree looks like it can be\n"
+	.string "CUT down!\p"
+	.string "Would you like to CUT it?$"
+
+Text_MonUsedFieldMove:
+	.string "{STR_VAR_1} used {STR_VAR_2}!$"
+
+Text_CantCut:
+	.string "This tree looks like it can be\n"
+	.string "CUT down!$"
 .endif
 .endif
 
@@ -139,15 +137,6 @@ EventScript_CancelSmash::
 	releaseall
 	end
 
-.ifdef ENGLISH
-Text_WantToSmash:
-	.string "This rock appears to be breakable.\n"
-	.string "Would you like to use ROCK SMASH?$"
-
-Text_CantSmash:
-	.string "It's a rugged rock, but a POKéMON\n"
-	.string "may be able to smash it.$"
-.else
 .ifdef FRENCH
 Text_WantToSmash:
 	.string "Ce bloc de pierre peut être brisé.\n"
@@ -165,7 +154,14 @@ Text_WantToSmash:
 Text_CantSmash:
 	.string "È una roccia dura, ma un POKéMON\n"
 	.string "dovrebbe poterla frantumare.$"
-.endif
+.else
+Text_WantToSmash:
+	.string "This rock appears to be breakable.\n"
+	.string "Would you like to use ROCK SMASH?$"
+
+Text_CantSmash:
+	.string "It's a rugged rock, but a POKéMON\n"
+	.string "may be able to smash it.$"
 .endif
 .endif
 
@@ -212,25 +208,6 @@ EventScript_CancelStrength::
 	releaseall
 	end
 
-.ifdef ENGLISH
-Text_WantToStrength:
-	.string "It's a big boulder, but a POKéMON\n"
-	.string "may be able to push it aside.\p"
-	.string "Would you like to use STRENGTH?$"
-
-Text_MonUsedStrength:
-	.string "{STR_VAR_1} used STRENGTH!\p"
-	.string "{STR_VAR_1}'s STRENGTH made it\n"
-	.string "possible to move boulders around!$"
-
-Text_CantStrength:
-	.string "It's a big boulder, but a POKéMON\n"
-	.string "may be able to push it aside.$"
-
-Text_StrengthActivated:
-	.string "STRENGTH made it possible to move\n"
-	.string "boulders around.$"
-.else
 .ifdef FRENCH
 Text_WantToStrength:
 	.string "C’est un gros rocher, mais un POKéMON\n"
@@ -267,7 +244,24 @@ Text_CantStrength:
 Text_StrengthActivated:
 	.string "FORZA ha reso possibile spostare\n"
 	.string "i massi.$"
-.endif
+.else
+Text_WantToStrength:
+	.string "It's a big boulder, but a POKéMON\n"
+	.string "may be able to push it aside.\p"
+	.string "Would you like to use STRENGTH?$"
+
+Text_MonUsedStrength:
+	.string "{STR_VAR_1} used STRENGTH!\p"
+	.string "{STR_VAR_1}'s STRENGTH made it\n"
+	.string "possible to move boulders around!$"
+
+Text_CantStrength:
+	.string "It's a big boulder, but a POKéMON\n"
+	.string "may be able to push it aside.$"
+
+Text_StrengthActivated:
+	.string "STRENGTH made it possible to move\n"
+	.string "boulders around.$"
 .endif
 .endif
 
@@ -293,18 +287,6 @@ EventScript_EndWaterfall::
 	releaseall
 	end
 
-.ifdef ENGLISH
-Text_CantWaterfall:
-	.string "A wall of water is crashing down with\n"
-	.string "a mighty roar.$"
-
-Text_WantToWaterfall:
-	.string "It's a large waterfall.\n"
-	.string "Would you like to use WATERFALL?$"
-
-Text_MonUsedWaterfall:
-	.string "{STR_VAR_1} used WATERFALL.$"
-.else
 .ifdef FRENCH
 Text_CantWaterfall:
 	.string "Un mur d’eau s’abat dans un vacarme\n"
@@ -328,7 +310,17 @@ Text_WantToWaterfall:
 
 Text_MonUsedWaterfall:
 	.string "{STR_VAR_1} usa CASCATA.$"
-.endif
+.else
+Text_CantWaterfall:
+	.string "A wall of water is crashing down with\n"
+	.string "a mighty roar.$"
+
+Text_WantToWaterfall:
+	.string "It's a large waterfall.\n"
+	.string "Would you like to use WATERFALL?$"
+
+Text_MonUsedWaterfall:
+	.string "{STR_VAR_1} used WATERFALL.$"
 .endif
 .endif
 
@@ -379,33 +371,6 @@ EventScript_EndSurface::
 	releaseall
 	end
 
-.ifdef ENGLISH
-Text_CantDive:
-	.string "The sea is deep here. A POKéMON\n"
-	.string "may be able to go underwater.$"
-
-Text_WantToDive:
-	.string "The sea is deep here.\n"
-	.string "Would you like to use DIVE?$"
-
-Text_MonUsedDive:
-	.string "{STR_VAR_1} used DIVE.$"
-
-Text_CantSurface:
-	.string "Light is filtering down from above.\n"
-	.string "A POKéMON may be able to surface.$"
-
-Text_WantToSurface:
-	.string "Light is filtering down from above.\n"
-	.string "Would you like to use DIVE?$"
-
-EventScript_FailSweetScent::
-	msgbox Text_FailSweetScent, MSGBOX_SIGN
-	end
-
-Text_FailSweetScent:
-	.string "Looks like there's nothing here…$"
-.else
 .ifdef FRENCH
 Text_CantDive:
 	.string "La mer est profonde. Un POKéMON\n"
@@ -459,6 +424,31 @@ EventScript_FailSweetScent::
 
 Text_FailSweetScent:
 	.string "Pare non ci sia nulla qui…$"
-.endif
+.else
+Text_CantDive:
+	.string "The sea is deep here. A POKéMON\n"
+	.string "may be able to go underwater.$"
+
+Text_WantToDive:
+	.string "The sea is deep here.\n"
+	.string "Would you like to use DIVE?$"
+
+Text_MonUsedDive:
+	.string "{STR_VAR_1} used DIVE.$"
+
+Text_CantSurface:
+	.string "Light is filtering down from above.\n"
+	.string "A POKéMON may be able to surface.$"
+
+Text_WantToSurface:
+	.string "Light is filtering down from above.\n"
+	.string "Would you like to use DIVE?$"
+
+EventScript_FailSweetScent::
+	msgbox Text_FailSweetScent, MSGBOX_SIGN
+	end
+
+Text_FailSweetScent:
+	.string "Looks like there's nothing here…$"
 .endif
 .endif

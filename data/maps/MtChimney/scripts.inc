@@ -533,9 +533,6 @@ MtChimney_EventScript_SawyerRematch::
 	msgbox MtChimney_Text_SawyerPostRematch, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MtChimney/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MtChimney/text_fr.inc"
 .else
@@ -544,7 +541,8 @@ MtChimney_EventScript_SawyerRematch::
 .else
 .ifdef SPANISH
 	.include "data/maps/MtChimney/text_es.inc"
-.endif
+.else
+	.include "data/maps/MtChimney/text.inc"
 .endif
 .endif
 .endif

@@ -180,9 +180,6 @@ Route117_EventScript_Aisha::
 	msgbox Route117_Text_AishaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/Route117/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/Route117/text_fr.inc"
 .else
@@ -191,7 +188,8 @@ Route117_EventScript_Aisha::
 .else
 .ifdef SPANISH
 	.include "data/maps/Route117/text_es.inc"
-.endif
+.else
+	.include "data/maps/Route117/text.inc"
 .endif
 .endif
 .endif

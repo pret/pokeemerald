@@ -58,9 +58,6 @@ FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale::
 	releaseall
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/FallarborTown_MoveRelearnersHouse/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/FallarborTown_MoveRelearnersHouse/text_fr.inc"
 .else
@@ -69,7 +66,8 @@ FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale::
 .else
 .ifdef SPANISH
 	.include "data/maps/FallarborTown_MoveRelearnersHouse/text_es.inc"
-.endif
+.else
+	.include "data/maps/FallarborTown_MoveRelearnersHouse/text.inc"
 .endif
 .endif
 .endif

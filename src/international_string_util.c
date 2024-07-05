@@ -90,17 +90,17 @@ int Intl_GetListMenuWidth(const struct ListMenuTemplate *listMenu)
 
 void CopyMonCategoryText(int dexNum, u8 *dest)
 {
-#if ENGLISH
-    u8 *str = StringCopy(dest, gPokedexEntries[dexNum].categoryName);
-    *str = CHAR_SPACE;
-    StringCopy(str + 1, gText_Pokemon);
-#elif FRENCH
+#if FRENCH
     u8 *str = StringCopy(dest, gPokedexEntries[dexNum].categoryName);
 #elif ITALIAN
     const u8 *categoryText = gPokedexEntries[dexNum].categoryName;
     u8 *str = StringCopy(dest, gText_Pokemon);
     *str++ = CHAR_SPACE;
     StringCopy(str, categoryText);
+#else //ENGLISH
+    u8 *str = StringCopy(dest, gPokedexEntries[dexNum].categoryName);
+    *str = CHAR_SPACE;
+    StringCopy(str + 1, gText_Pokemon);
 #endif
 }
 

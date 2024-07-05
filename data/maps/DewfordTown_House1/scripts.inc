@@ -19,9 +19,6 @@ DewfordTown_House1_EventScript_Zigzagoon::
 	release
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/DewfordTown_House1/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/DewfordTown_House1/text_fr.inc"
 .else
@@ -30,7 +27,8 @@ DewfordTown_House1_EventScript_Zigzagoon::
 .else
 .ifdef SPANISH
 	.include "data/maps/DewfordTown_House1/text_es.inc"
-.endif
+.else
+	.include "data/maps/DewfordTown_House1/text.inc"
 .endif
 .endif
 .endif

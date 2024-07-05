@@ -25,9 +25,6 @@ MtPyre_1F_EventScript_Man::
 	msgbox MtPyre_1F_Text_RestingPlaceOfZigzagoon, MSGBOX_NPC
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MtPyre_1F/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MtPyre_1F/text_fr.inc"
 .else
@@ -36,7 +33,8 @@ MtPyre_1F_EventScript_Man::
 .else
 .ifdef SPANISH
 	.include "data/maps/MtPyre_1F/text_es.inc"
-.endif
+.else
+	.include "data/maps/MtPyre_1F/text.inc"
 .endif
 .endif
 .endif

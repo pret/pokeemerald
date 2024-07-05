@@ -335,9 +335,6 @@ LilycoveCity_ContestHall_EventScript_SmartStageSign::
 	msgbox LilycoveCity_ContestHall_Text_SmartContestStage, MSGBOX_SIGN
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/LilycoveCity_ContestHall/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/LilycoveCity_ContestHall/text_fr.inc"
 .else
@@ -346,7 +343,8 @@ LilycoveCity_ContestHall_EventScript_SmartStageSign::
 .else
 .ifdef SPANISH
 	.include "data/maps/LilycoveCity_ContestHall/text_es.inc"
-.endif
+.else
+	.include "data/maps/LilycoveCity_ContestHall/text.inc"
 .endif
 .endif
 .endif

@@ -150,9 +150,6 @@ MossdeepCity_StevensHouse_EventScript_DiveItemBall::
 	setflag FLAG_RECEIVED_HM08
 	end
 
-.ifdef ENGLISH
-	.include "data/maps/MossdeepCity_StevensHouse/text.inc"
-.else
 .ifdef FRENCH
 	.include "data/maps/MossdeepCity_StevensHouse/text_fr.inc"
 .else
@@ -161,7 +158,8 @@ MossdeepCity_StevensHouse_EventScript_DiveItemBall::
 .else
 .ifdef SPANISH
 	.include "data/maps/MossdeepCity_StevensHouse/text_es.inc"
-.endif
+.else
+	.include "data/maps/MossdeepCity_StevensHouse/text.inc"
 .endif
 .endif
 .endif
