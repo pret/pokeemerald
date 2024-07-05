@@ -12608,9 +12608,14 @@ static void Cmd_setsubstitute(void)
     CMD_ARGS();
 
     u32 factor = gMovesInfo[gCurrentMove].effect == EFFECT_SHED_TAIL ? 2 : 4;
-    u32 hp = GetNonDynamaxMaxHP(gBattlerAttacker) / factor;
+    u32 hp;
 
-    if (GetNonDynamaxMaxHP(gBattlerAttacker) / factor == 0)
+    if (factor == 2)
+        hp = (GetNonDynamaxMaxHP(gBattlerAttacker)+1) / factor; // shed tail rounds up
+    else
+        hp = GetNonDynamaxMaxHP(gBattlerAttacker) / factor; // one bit value will only work for Pokémon which max hp can go to 1020(which is more than possible in games)
+
+    if (hp == 0)
         hp = 1;
 
     if (gBattleMons[gBattlerAttacker].hp <= hp)
@@ -12620,7 +12625,7 @@ static void Cmd_setsubstitute(void)
     }
     else
     {
-        gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / factor; // one bit value will only work for Pokémon which max hp can go to 1020(which is more than possible in games)
+        gBattleMoveDamage = hp;
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
 
