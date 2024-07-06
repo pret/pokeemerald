@@ -1151,7 +1151,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
             if (LURE_STEP_COUNT != 0)
                 totalRerolls += 1;
             if (I_FISHING_CHAIN && gIsFishingEncounter)
-                totalRerolls += (2 * gChainFishingDexNavStreak);
+                totalRerolls += CalculateChainFishingShinyRolls();
 
             while (GET_SHINY_VALUE(value, personality) >= SHINY_ODDS && totalRerolls > 0)
             {
