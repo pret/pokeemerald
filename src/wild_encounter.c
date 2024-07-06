@@ -51,7 +51,7 @@ enum {
 
 static u16 FeebasRandom(void);
 static void FeebasSeedRng(u16 seed);
-static void UpdateChainFishingSpeciesAndStreak(u32 species);
+static void UpdateChainFishingStreak();
 static bool8 IsWildLevelAllowedByRepel(u8 level);
 static void ApplyFluteEncounterRateMod(u32 *encRate);
 static void ApplyCleanseTagEncounterRateMod(u32 *encRate);
@@ -68,7 +68,6 @@ EWRAM_DATA static u32 sFeebasRngValue = 0;
 EWRAM_DATA bool8 gIsFishingEncounter = 0;
 EWRAM_DATA bool8 gIsSurfingEncounter = 0;
 EWRAM_DATA u8 gChainFishingDexNavStreak = 0;
-EWRAM_DATA static u16 sLastFishingSpecies = 0;
 
 #include "data/wild_encounters.h"
 
@@ -520,7 +519,7 @@ static u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 
     u16 wildMonSpecies = wildMonInfo->wildPokemon[wildMonIndex].species;
     u8 level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, WILD_AREA_FISHING);
 
-    UpdateChainFishingSpeciesAndStreak(wildMonSpecies);
+    UpdateChainFishingStreak();
     CreateWildMon(wildMonSpecies, level);
     return wildMonSpecies;
 }
@@ -871,25 +870,18 @@ bool8 DoesCurrentMapHaveFishingMons(void)
 
 u32 CalculateChainFishingShinyRolls(void)
 {
-    return (2 * gChainFishingDexNavStreak);
+    return (2 * min(gChainFishingDexNavStreak, FISHING_CHAIN_SHINY_STREAK_MAX));
 }
 
-static void UpdateChainFishingSpeciesAndStreak(u32 species)
+static void UpdateChainFishingStreak()
 {
     if (!I_FISHING_CHAIN)
         return;
-
-    if (species != sLastFishingSpecies)
-    {
-        gChainFishingDexNavStreak = 0;
-        return;
-    }
 
     if (gChainFishingDexNavStreak >= FISHING_CHAIN_LENGTH_MAX)
         return;
 
     gChainFishingDexNavStreak++;
-    sLastFishingSpecies = species;
 }
 
 void FishingWildEncounter(u8 rod)
