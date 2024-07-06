@@ -357,7 +357,7 @@ static void DrawLevelUpBannerText(void);
 static void SpriteCB_MonIconOnLvlUpBanner(struct Sprite *sprite);
 static bool32 CriticalCapture(u32 odds);
 static void BestowItem(u32 battlerAtk, u32 battlerDef);
-static bool8 IsFinalStrikeEffect(u16 move);
+static bool8 IsFinalStrikeEffect(u32 moveEffect);
 static void TryUpdateRoundTurnOrder(void);
 static bool32 ChangeOrderTargetAfterAttacker(void);
 void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBattler);
@@ -15876,10 +15876,9 @@ bool32 IsMoveAffectedByParentalBond(u32 move, u32 battler)
     return FALSE;
 }
 
-static bool8 IsFinalStrikeEffect(u16 move)
+static bool8 IsFinalStrikeEffect(u32 moveEffect)
 {
     u32 i;
-    u16 moveEffect = gMovesInfo[move].effect;
 
     for (i = 0; i < ARRAY_COUNT(sFinalStrikeOnlyEffects); i++)
     {
