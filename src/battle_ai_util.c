@@ -385,15 +385,21 @@ bool32 IsDamageMoveUnusable(u32 move, u32 battlerAtk, u32 battlerDef)
 
     switch (battlerDefAbility)
     {
+    case ABILITY_LIGHTNING_ROD:
+        if (B_REDIRECT_ABILITY_IMMUNITY < GEN_5)
+            break;
+        // Fallthrough
     case ABILITY_VOLT_ABSORB:
     case ABILITY_MOTOR_DRIVE:
-    case ABILITY_LIGHTNING_ROD:
         if (moveType == TYPE_ELECTRIC)
             return TRUE;
         break;
+    case ABILITY_STORM_DRAIN:
+        if (B_REDIRECT_ABILITY_IMMUNITY < GEN_5)
+            break;
+        // Fallthrough
     case ABILITY_WATER_ABSORB:
     case ABILITY_DRY_SKIN:
-    case ABILITY_STORM_DRAIN:
         if (moveType == TYPE_WATER)
             return TRUE;
         break;

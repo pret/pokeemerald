@@ -432,9 +432,9 @@ BattleScript_EffectTeatime::
 	waitanimation
 	setbyte gBattlerTarget, 0
 BattleScript_TeatimeLoop:
-	jumpifrodaffected BS_TARGET, BattleScript_Teatimerod
-	jumpifabsorbaffected BS_TARGET, BattleScript_Teatimesorb
-	jumpifmotoraffected BS_TARGET, BattleScript_Teatimemotor
+	jumpifelectricabilityaffected BS_TARGET, ABILITY_LIGHTNING_ROD, BattleScript_Teatimerod
+	jumpifelectricabilityaffected BS_TARGET, ABILITY_VOLT_ABSORB, BattleScript_Teatimesorb
+	jumpifelectricabilityaffected BS_TARGET, ABILITY_MOTOR_DRIVE, BattleScript_Teatimemotor
 	jumpifteainvulnerable BS_TARGET, BattleScript_Teatimevul @ in semi-invulnerable state OR held item is not a Berry
 	orword gHitMarker, HITMARKER_DISABLE_ANIMATION | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_DISGUISE
 	setbyte sBERRY_OVERRIDE, TRUE   @ override the requirements for eating berries
@@ -3609,7 +3609,7 @@ BattleScript_EffectParalyze::
 BattleScript_BattleScript_EffectParalyzeNoTypeCalc:
 	jumpifmovehadnoeffect BattleScript_ButItFailed
 	jumpifstatus BS_TARGET, STATUS1_PARALYSIS, BattleScript_AlreadyParalyzed
-	jumpifabsorbaffected BS_TARGET, BattleScript_VoltAbsorbHeal
+	jumpifelectricabilityaffected BS_TARGET, ABILITY_VOLT_ABSORB, BattleScript_VoltAbsorbHeal
 	tryparalyzetype BS_ATTACKER, BS_TARGET, BattleScript_NotAffected
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
 	jumpifterrainaffected BS_TARGET, STATUS_FIELD_MISTY_TERRAIN, BattleScript_MistyTerrainPrevents
