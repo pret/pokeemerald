@@ -935,6 +935,8 @@ void StartMenuFull_Init(MainCallback callback)
         sStartMenuDataPtr->greyMenuBoxIds[i] = SPRITE_NONE;
     }
     InitCursorInPlace();
+
+    gFieldCallback = NULL;
     
     SetMainCallback2(StartMenuFull_RunSetup);
 }
