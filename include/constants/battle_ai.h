@@ -32,7 +32,7 @@
 #define AI_FLAG_RISKY                 (1 << 4)
 #define AI_FLAG_PREFER_STRONGEST_MOVE (1 << 5)
 #define AI_FLAG_PREFER_BATON_PASS     (1 << 6)
-#define AI_FLAG_DOUBLE_BATTLE         (1 << 7)   // removed, split between AI_FLAG_CHECK_BAD_MOVE & AI_FLAG_CHECK_GOOD_MOVE
+#define AI_FLAG_DOUBLE_BATTLE         (1 << 7)   // Automatically set for double battles, handles AI behaviour with partner
 #define AI_FLAG_HP_AWARE              (1 << 8)
 #define AI_FLAG_POWERFUL_STATUS       (1 << 9)   // AI prefers moves that set up field effects or side statuses, even if the user can faint the target
 // New, Trainer Handicap Flags
