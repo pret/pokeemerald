@@ -628,7 +628,7 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y)
                 gStringVar1,
                 ItemId_GetPrice(itemId) >> IsPokeNewsActive(POKENEWS_SLATEPORT),
                 STR_CONV_MODE_LEFT_ALIGN,
-                5);
+                6);
         }
         else
         {
@@ -636,7 +636,7 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y)
                 gStringVar1,
                 gDecorations[itemId].price,
                 STR_CONV_MODE_LEFT_ALIGN,
-                5);
+                6);
         }
 
         if (ItemId_GetImportance(itemId) && (CheckBagHasItem(itemId, 1) || CheckPCHasItem(itemId, 1)))
