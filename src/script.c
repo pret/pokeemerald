@@ -596,7 +596,7 @@ u16 ReturnNumberOfTrainersForFloor()
             }
         }
         
-        if((VarGet(VAR_PIT_FLOOR) % 25) == 0) // New Mon Floor
+        if(((VarGet(VAR_PIT_FLOOR) % 25) == 0) && (gSaveBlock2Ptr->mode3MonsOnly == 0)) // New Mon Floor
         {
             FlagClear(FLAG_GIVE_POKEMON);
             FlagSet(FLAG_MOVE_RELEARNER);
