@@ -174,6 +174,13 @@ PlayerEastMovement:
 
 PitArena_EndGameStatue222::
 	lockall
+	callnative SetAutosaveFlag
+	goto_if_unset FLAG_AUTO_SAVE, PitStatueNoAutoSave
+	clearflag FLAG_SAVING_FIELD_EFFECT
+	dofieldeffect(FLDEFF_SAVING)
+	waitfieldeffect(FLDEFF_SAVING)
+	callnative AutoSave
+PitStatueNoAutoSave:
 	msgbox PitArena_EndGameStatue_Text2, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, PitArena_EndGameStatue2
 	setvar VAR_REWARD_STATE, 2

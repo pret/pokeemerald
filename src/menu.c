@@ -23,6 +23,7 @@
 #include "constants/songs.h"
 #include "party_menu.h"
 #include "overworld.h"
+#include "pokemon_storage_system.h"
 
 #define DLG_WINDOW_PALETTE_NUM 15
 #define DLG_WINDOW_BASE_TILE_NUM 0x200
@@ -964,7 +965,7 @@ void RedrawMenuCursor(u8 oldPos, u8 newPos)
     width = GetMenuCursorDimensionByFont(sMenu.fontId, 0);
     height = GetMenuCursorDimensionByFont(sMenu.fontId, 1);
     
-    if(gMain.callback2 == CB2_UpdatePartyMenu || gMain.callback2 == CB2_MoveRelearnerMain || gMain.callback2 == CB2_Overworld || (gMain.callback2 == CB2_MoveTutorListMain) || (FindTaskIdByFunc(Task_CallYesOrNoCallbackOverride) != TASK_NONE))
+    if(gMain.callback2 == CB2_ReturnToFieldLocal || gMain.callback2 == CB2_PokeStorage || gMain.callback2 == CB2_UpdatePartyMenu || gMain.callback2 == CB2_MoveRelearnerMain || gMain.callback2 == CB2_Overworld || (gMain.callback2 == CB2_MoveTutorListMain) || (FindTaskIdByFunc(Task_CallYesOrNoCallbackOverride) != TASK_NONE))
     {
         FillWindowPixelRect(sMenu.windowId, PIXEL_FILL(1), sMenu.left, sMenu.optionHeight * oldPos + sMenu.top, width, height);
         AddTextPrinterParameterized(sMenu.windowId, sMenu.fontId, gText_SelectorArrow3, sMenu.left, sMenu.optionHeight * newPos + sMenu.top, 0, 0);
@@ -1407,7 +1408,7 @@ static void MoveMenuGridCursor(u8 oldCursorPos, u8 newCursorPos)
     u8 xPos = (oldCursorPos % sMenu.columns) * sMenu.optionWidth + sMenu.left;
     u8 yPos = (oldCursorPos / sMenu.columns) * sMenu.optionHeight + sMenu.top;
 
-    if(gMain.callback2 == CB2_MoveRelearnerMain || (gMain.callback2 == CB2_MoveTutorListMain) || (FindTaskIdByFunc(Task_CallYesOrNoCallbackOverride) != TASK_NONE))
+    if(gMain.callback2 == CB2_ReturnToFieldLocal || gMain.callback2 == CB2_ReturnToField || gMain.callback2 == CB2_PokeStorage || gMain.callback2 == CB2_MoveRelearnerMain || (gMain.callback2 == CB2_MoveTutorListMain) || (FindTaskIdByFunc(Task_CallYesOrNoCallbackOverride) != TASK_NONE))
     {
         FillWindowPixelRect(sMenu.windowId, PIXEL_FILL(1), xPos, yPos, cursorWidth, cursorHeight);
     }
@@ -1419,7 +1420,7 @@ static void MoveMenuGridCursor(u8 oldCursorPos, u8 newCursorPos)
     xPos = (newCursorPos % sMenu.columns) * sMenu.optionWidth + sMenu.left;
     yPos = (newCursorPos / sMenu.columns) * sMenu.optionHeight + sMenu.top;
 
-    if(gMain.callback2 == CB2_MoveRelearnerMain || (gMain.callback2 == CB2_MoveTutorListMain) || (FindTaskIdByFunc(Task_CallYesOrNoCallbackOverride) != TASK_NONE))
+    if(gMain.callback2 == CB2_ReturnToFieldLocal || gMain.callback2 == CB2_ReturnToField || gMain.callback2 == CB2_PokeStorage || gMain.callback2 == CB2_MoveRelearnerMain || (gMain.callback2 == CB2_MoveTutorListMain) || (FindTaskIdByFunc(Task_CallYesOrNoCallbackOverride) != TASK_NONE))
     {
         AddTextPrinterParameterized(sMenu.windowId, sMenu.fontId, gText_SelectorArrow3, xPos, yPos, 0, 0);
     }
@@ -1699,6 +1700,16 @@ void PrintMenuTable(u8 windowId, u8 itemCount, const struct MenuAction *menuActi
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
+void PrintMenuTableOverride(u8 windowId, u8 itemCount, const struct MenuAction *menuActions)
+{
+    u32 i;
+    const u8 color[3] = {0, 14, 15};
+    for (i = 0; i < itemCount; i++)
+        AddTextPrinterParameterized4(windowId, FONT_NORMAL, 8, (i * 16) + 1, 0, 0, color, TEXT_SKIP_DRAW, menuActions[i].text);
+
+    CopyWindowToVram(windowId, COPYWIN_GFX);
+}
+
 void PrintMenuActionTextsInUpperLeftCorner(u8 windowId, u8 itemCount, const struct MenuAction *menuActions, const u8 *actionIds)
 {
     u8 i;
@@ -1768,6 +1779,31 @@ void CreateYesNoMenuOverride(const struct WindowTemplate *window, u16 baseTileNu
     printer.fgColor = 2;
     printer.bgColor = 1;
     printer.shadowColor = 3;
+    printer.unk = GetFontAttribute(FONT_NORMAL, FONTATTR_UNKNOWN);
+    printer.letterSpacing = 0;
+    printer.lineSpacing = 0;
+
+    AddTextPrinter(&printer, TEXT_SKIP_DRAW, NULL);
+    InitMenuInUpperLeftCornerNormal(sYesNoWindowId, 2, initialCursorPos);
+}
+
+void CreateYesNoMenuOverride2(const struct WindowTemplate *window, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos)
+{
+    struct TextPrinterTemplate printer;
+
+    sYesNoWindowId = AddWindow(window);
+    DrawStdFrameWithCustomTileAndPalette(sYesNoWindowId, TRUE, baseTileNum, paletteNum);
+
+    printer.currentChar = gText_YesNo;
+    printer.windowId = sYesNoWindowId;
+    printer.fontId = FONT_NORMAL;
+    printer.x = 8;
+    printer.y = 1;
+    printer.currentX = printer.x;
+    printer.currentY = printer.y;
+    printer.fgColor = 14;
+    printer.bgColor = 1;
+    printer.shadowColor = 15;
     printer.unk = GetFontAttribute(FONT_NORMAL, FONTATTR_UNKNOWN);
     printer.letterSpacing = 0;
     printer.lineSpacing = 0;

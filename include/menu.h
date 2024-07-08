@@ -68,6 +68,7 @@ void SetWindowTemplateFields(struct WindowTemplate *template, u8 priority, u8 ti
 void DrawStdFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 tileStart, u8 palette);
 void ScheduleBgCopyTilemapToVram(u8 bgNum);
 void PrintMenuTable(u8 windowId, u8 itemCount, const struct MenuAction *strs);
+void PrintMenuTableOverride(u8 windowId, u8 itemCount, const struct MenuAction *menuActions);
 u8 InitMenuInUpperLeftCornerNormal(u8 windowId, u8 numItems, u8 initialCursorPos);
 u8 Menu_GetCursorPos(void);
 s8 Menu_ProcessInput(void);
@@ -79,6 +80,7 @@ bool8 FreeTempTileDataBuffersIfPossible(void);
 struct WindowTemplate CreateWindowTemplate(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock);
 void CreateYesNoMenu(const struct WindowTemplate *windowTemplate, u16 borderFirstTileNum, u8 borderPalette, u8 initialCursorPos);
 void CreateYesNoMenuOverride(const struct WindowTemplate *window, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos);
+void CreateYesNoMenuOverride2(const struct WindowTemplate *window, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos);
 void CB2_MoveRelearnerMain(void);
 void CB2_MoveTutorListMain(void);
 void DecompressAndLoadBgGfxUsingHeap(u8 bgId, const void *src, u32 size, u16 offset, u8 mode);

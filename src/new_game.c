@@ -46,6 +46,7 @@
 #include "union_room_chat.h"
 #include "constants/items.h"
 #include "gba/isagbprint.h"
+#include "pokemon_storage_system.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
 
@@ -234,14 +235,21 @@ void NewGameInitData(void)
     InitLotadSizeRecord();
     gPlayerPartyCount = 0;
     ZeroPlayerPartyMons();
-    ResetPokemonStorageSystem();
+    
+    // Poke Storage Stuff
+    if (GetNationalPokedexCount(FLAG_GET_CAUGHT) < 1)
+    {   
+        ResetPokemonStorageSystem();
+        SetBoxWallpapersToSimple();
+    }
+
     ClearRoamerData();
     ClearRoamerLocationData();
     gSaveBlock1Ptr->registeredItem = ITEM_NONE;
     ClearBag();
     NewGameInitPCItems();
     ClearPokeblocks();
-    ClearDecorationInventories();
+    //ClearDecorationInventories();
     InitEasyChatPhrases();
     SetMauvilleOldMan();
     InitDewfordTrend();

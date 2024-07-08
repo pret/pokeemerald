@@ -43,6 +43,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/pokemon_icon.h"
+#include "scanline_effect.h"
 
 /*
     NOTE: This file is large. Some general groups of functions have
@@ -234,6 +235,7 @@ enum {
     PALTAG_ITEM_ICON_1, // Used implicitly in CreateItemIconSprites
     PALTAG_ITEM_ICON_2, // Used implicitly in CreateItemIconSprites
     PALTAG_MARKING_MENU,
+    PALTAG_BOX_SELECTOR,
 };
 
 enum {
@@ -792,6 +794,7 @@ static void StopBoxScrollArrowsSlide(void);
 static void AnimateBoxScrollArrows(bool8);
 static void SpriteCB_Arrow(struct Sprite *);
 static struct Sprite *CreateChooseBoxArrows(u16, u16, u8, u8, u8);
+void PC_InitializeGPUWindows(void);
 
 // Box title
 static void InitBoxTitle(u8);
@@ -951,14 +954,15 @@ static const union AffineAnimCmd *const sAffineAnims_ChooseBoxMenu[] =
     sAffineAnim_ChooseBoxMenu
 };
 
-static const u8 sChooseBoxMenu_TextColors[] = {TEXT_COLOR_RED, TEXT_DYNAMIC_COLOR_6, TEXT_DYNAMIC_COLOR_5};
+static const u8 sChooseBoxMenu_TextColors[] = {0xF, 0xD, 2};
 static const u8 sText_OutOf30[] = _("/30");
 
 static const u16 sChooseBoxMenu_Pal[]        = INCBIN_U16("graphics/pokemon_storage/box_selection_popup.gbapal");
 static const u8 sChooseBoxMenuCenter_Gfx[]   = INCBIN_U8("graphics/pokemon_storage/box_selection_popup_center.4bpp");
 static const u8 sChooseBoxMenuSides_Gfx[]    = INCBIN_U8("graphics/pokemon_storage/box_selection_popup_sides.4bpp");
-static const u32 sScrollingBg_Gfx[]          = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.4bpp.lz");
-static const u32 sScrollingBg_Tilemap[]      = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.bin.lz");
+static const u32 sScrollingBg_Gfx[]         = INCBIN_U32("graphics/ui_mode_menu/scroll_tiles.4bpp.lz");
+static const u32 sScrollingBg_Tilemap[]     = INCBIN_U32("graphics/ui_mode_menu/scroll_tiles_pal13.bin.lz");
+static const u16 sScrollBgPalette2[]        = INCBIN_U16("graphics/ui_mode_menu/scroll_tiles.gbapal");
 static const u16 sDisplayMenu_Pal[]          = INCBIN_U16("graphics/pokemon_storage/display_menu.gbapal"); // Unused
 static const u32 sDisplayMenu_Tilemap[]      = INCBIN_U32("graphics/pokemon_storage/display_menu.bin.lz");
 static const u16 sPkmnData_Tilemap[]         = INCBIN_U16("graphics/pokemon_storage/pkmn_data.bin");
@@ -993,7 +997,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 17,
         .width = 18,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = 14,
         .baseBlock = 0x14,
     },
     [WIN_ITEM_DESC] = {
@@ -1002,7 +1006,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .tilemapTop = 13,
         .width = 21,
         .height = 7,
-        .paletteNum = 15,
+        .paletteNum = 13,
         .baseBlock = 0x14,
     },
     DUMMY_WIN_TEMPLATE
@@ -1112,7 +1116,7 @@ static const struct WindowTemplate sYesNoWindowTemplate =
     .tilemapTop = 11,
     .width = 5,
     .height = 4,
-    .paletteNum = 15,
+    .paletteNum = 14,
     .baseBlock = 0x5C,
 };
 
@@ -1551,7 +1555,7 @@ static void Task_PCMainMenu(u8 taskId)
     {
     case STATE_LOAD:
         CreateMainMenu(task->tSelectedOption, &task->tWindowId);
-        LoadMessageBoxAndBorderGfx();
+        LoadMessageBoxAndBorderGfxOverride();
         DrawDialogueFrame(0, FALSE);
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
         AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SKIP_DRAW, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
@@ -1590,14 +1594,14 @@ static void Task_PCMainMenu(u8 taskId)
             DestroyTask(taskId);
             break;
         default:
-            if (task->tInput == OPTION_WITHDRAW && CountPartyMons() == PARTY_SIZE)
+            if (((task->tInput == OPTION_WITHDRAW) && (CountPartyMons() == PARTY_SIZE)) && (VarGet(VAR_PIT_FLOOR) > 0))
             {
                 // Can't withdraw
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
                 AddTextPrinterParameterized2(0, FONT_NORMAL, gText_PartyFull, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
                 task->tState = STATE_ERROR_MSG;
             }
-            else if (task->tInput == OPTION_DEPOSIT && CountPartyMons() == 1)
+            else if ((task->tInput == OPTION_DEPOSIT) && (CountPartyMons() == 0))
             {
                 // Can't deposit
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
@@ -1696,7 +1700,7 @@ static void CreateMainMenu(u8 whichMenu, s16 *windowIdPtr)
     *windowIdPtr = windowId;
 }
 
-static void CB2_ExitPokeStorage(void)
+void CB2_ExitPokeStorage(void)
 {
     sPreviousBoxOption = GetCurrentBoxOption();
     gFieldCallback = FieldTask_ReturnToPcMenu;
@@ -1772,7 +1776,7 @@ static void LoadChooseBoxMenuGfx(struct ChooseBoxMenu *menu, u16 tileTag, u16 pa
     // The Choose Box menu instead uses the palette indicated by palTag, which is always PALTAG_MISC_1 (sHandCursor_Pal)
     struct SpritePalette palette =
     {
-        sChooseBoxMenu_Pal, palTag
+        sChooseBoxMenu_Pal, PALTAG_BOX_SELECTOR
     };
     struct SpriteSheet sheets[] =
     {
@@ -1781,13 +1785,12 @@ static void LoadChooseBoxMenuGfx(struct ChooseBoxMenu *menu, u16 tileTag, u16 pa
         {}
     };
 
-    if (loadPal) // Always false
-        LoadSpritePalette(&palette);
+    LoadSpritePalette(&palette);
 
     LoadSpriteSheets(sheets);
     sChooseBoxMenu = menu;
     menu->tileTag = tileTag;
-    menu->paletteTag = palTag;
+    menu->paletteTag = PALTAG_BOX_SELECTOR;
     menu->subpriority = subpriority;
     menu->loadedPalette = loadPal;
 }
@@ -1993,7 +1996,7 @@ static void VBlankCB_PokeStorage(void)
     SetGpuReg(REG_OFFSET_BG2HOFS, sStorage->bg2_X);
 }
 
-static void CB2_PokeStorage(void)
+void CB2_PokeStorage(void)
 {
     RunTasks();
     DoScheduledBgTilemapCopiesToVram();
@@ -2085,7 +2088,7 @@ static void SetMonIconTransparency(void)
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL);
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(7, 11));
     }
-    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP);
+    SetGpuReg(REG_OFFSET_DISPCNT,  DISPCNT_WIN0_ON | DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP);
 }
 
 static void SetPokeStorageTask(TaskFunc newFunc)
@@ -2100,8 +2103,8 @@ static void Task_InitPokeStorage(u8 taskId)
     {
     case 0:
         SetVBlankCallback(NULL);
-        SetGpuReg(REG_OFFSET_DISPCNT, 0);
         ResetForPokeStorage();
+        PC_InitializeGPUWindows();
         if (sStorage->isReopening)
         {
             switch (sWhichToReshow)
@@ -2198,6 +2201,7 @@ static void Task_InitPokeStorage(u8 taskId)
             BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
             SetPokeStorageTask(Task_ReshowPokeStorage);
         }
+        PC_InitializeGPUWindows();
         SetVBlankCallback(VBlankCB_PokeStorage);
         return;
     default:
@@ -2205,6 +2209,24 @@ static void Task_InitPokeStorage(u8 taskId)
     }
 
     sStorage->state++;
+}
+
+void PC_InitializeGPUWindows(void) // This function creates hw window
+{
+    SetGpuReg(REG_OFFSET_DISPCNT, 0);
+    SetGpuReg(REG_OFFSET_WIN0H, 0);
+    SetGpuReg(REG_OFFSET_WIN0V, 0);
+    SetGpuReg(REG_OFFSET_WIN1H, 0);
+    SetGpuReg(REG_OFFSET_WIN1V, 0);
+    SetGpuReg(REG_OFFSET_WININ, 0);
+    SetGpuReg(REG_OFFSET_WINOUT, 0);
+    SetGpuReg(REG_OFFSET_DISPCNT,  DISPCNT_WIN0_ON | DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP); // Turn on Window 0 and Enable Sprites
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, 80));  // Set Window 0 width/height Which defines the not darkened space
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 160));
+    SetGpuReg(REG_OFFSET_WININ, (WININ_WIN0_BG1 | WININ_WIN0_BG3 | WININ_WIN0_OBJ)); // Set Win 0 Active everywhere except bg 2 
+    SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_ALL);                                                                     // where the main tiles are so the window hides whats behind it
+    ScanlineEffect_Stop();
+    ScanlineEffect_Clear();
 }
 
 static void Task_ShowPokeStorage(u8 taskId)
@@ -2218,7 +2240,10 @@ static void Task_ShowPokeStorage(u8 taskId)
         break;
     case 1:
         if (!IsComputerScreenOpenEffectActive())
+        {
             SetPokeStorageTask(Task_PokeStorageMain);
+            PC_InitializeGPUWindows();
+        }
         break;
     }
 }
@@ -3852,7 +3877,7 @@ static void SetScrollingBackground(void)
 
 static void ScrollBackground(void)
 {
-    ChangeBgX(3, 128, BG_COORD_ADD);
+    //ChangeBgX(3, 128, BG_COORD_ADD);
     ChangeBgY(3, 128, BG_COORD_SUB);
 }
 
@@ -3889,6 +3914,7 @@ static void InitPalettesAndSprites(void)
     LoadPalette(sInterface_Pal, BG_PLTT_ID(0), sizeof(sInterface_Pal));
     LoadPalette(sPkmnDataGray_Pal, BG_PLTT_ID(2), sizeof(sPkmnDataGray_Pal));
     LoadPalette(sTextWindows_Pal, BG_PLTT_ID(15), sizeof(sTextWindows_Pal));
+    LoadPalette(sScrollBgPalette2, BG_PLTT_ID(13), sizeof(sScrollBgPalette2));
     if (sStorage->boxOption != OPTION_MOVE_ITEMS)
         LoadPalette(sScrollingBg_Pal, BG_PLTT_ID(3), sizeof(sScrollingBg_Pal));
     else
@@ -4027,20 +4053,21 @@ static void LoadDisplayMonGfx(u16 species, u32 pid)
 
 static void PrintDisplayMonInfo(void)
 {
-    FillWindowPixelBuffer(WIN_DISPLAY_INFO, PIXEL_FILL(1));
+    const u8 color[3] = {0, 2, 3};
+    FillWindowPixelBuffer(WIN_DISPLAY_INFO, PIXEL_FILL(0));
     if (sStorage->boxOption != OPTION_MOVE_ITEMS)
     {
-        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_NORMAL, sStorage->displayMonNameText, 6, 0, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SHORT, sStorage->displayMonSpeciesName, 6, 15, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 29, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SMALL, sStorage->displayMonItemName, 6, 43, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized4(WIN_DISPLAY_INFO, FONT_NORMAL, 6, 0, 0, 0, color, TEXT_SKIP_DRAW, sStorage->displayMonNameText);
+        AddTextPrinterParameterized4(WIN_DISPLAY_INFO, FONT_SHORT, 6, 15, 0, 0, color, TEXT_SKIP_DRAW, sStorage->displayMonSpeciesName);
+        AddTextPrinterParameterized4(WIN_DISPLAY_INFO, FONT_SHORT, 10, 29, 0, 0, color, TEXT_SKIP_DRAW, sStorage->displayMonGenderLvlText);
+        AddTextPrinterParameterized4(WIN_DISPLAY_INFO, FONT_SMALL, 6, 43, 0, 0, color, TEXT_SKIP_DRAW, sStorage->displayMonItemName);
     }
     else
     {
-        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SMALL, sStorage->displayMonItemName, 6, 0, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_NORMAL, sStorage->displayMonNameText, 6, 13, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SHORT, sStorage->displayMonSpeciesName, 6, 28, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 42, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized4(WIN_DISPLAY_INFO, FONT_SMALL, 6, 0, 0, 0, color, TEXT_SKIP_DRAW, sStorage->displayMonItemName);
+        AddTextPrinterParameterized4(WIN_DISPLAY_INFO, FONT_NORMAL, 6, 13, 0, 0, color, TEXT_SKIP_DRAW, sStorage->displayMonNameText);
+        AddTextPrinterParameterized4(WIN_DISPLAY_INFO, FONT_SHORT, 6, 28, 0, 0, color, TEXT_SKIP_DRAW, sStorage->displayMonSpeciesName);
+        AddTextPrinterParameterized4(WIN_DISPLAY_INFO, FONT_SHORT, 10, 42, 0, 0, color, TEXT_SKIP_DRAW, sStorage->displayMonGenderLvlText);
     }
 
     CopyWindowToVram(WIN_DISPLAY_INFO, COPYWIN_GFX);
@@ -4304,7 +4331,8 @@ static void UpdateBoxToSendMons(void)
 static void InitPokeStorageBg0(void)
 {
     SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(29));
-    LoadUserWindowBorderGfxOverride(WIN_MESSAGE, 2, BG_PLTT_ID(13));
+    LoadUserWindowBorderGfxOverride(WIN_MESSAGE, 2, BG_PLTT_ID(14));
+    PC_InitializeGPUWindows();
     FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 17);
     CopyBgTilemapBufferToVram(0);
 }
@@ -4342,9 +4370,10 @@ static void PrintMessage(u8 id)
         break;
     }
 
+    const u8 color[3] = {0, 14, 15};
     DynamicPlaceholderTextUtil_ExpandPlaceholders(sStorage->messageText, sMessages[id].text);
     FillWindowPixelBuffer(WIN_MESSAGE, PIXEL_FILL(1));
-    AddTextPrinterParameterized(WIN_MESSAGE, FONT_NORMAL, sStorage->messageText, 0, 1, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized4(WIN_MESSAGE, FONT_NORMAL, 0, 1, 0, 0, color, TEXT_SKIP_DRAW, sStorage->messageText);
     DrawTextBorderOuter(WIN_MESSAGE, 2, 14);
     PutWindowTilemap(WIN_MESSAGE);
     CopyWindowToVram(WIN_MESSAGE, COPYWIN_GFX);
@@ -4353,7 +4382,7 @@ static void PrintMessage(u8 id)
 
 static void ShowYesNoWindow(s8 cursorPos)
 {
-    CreateYesNoMenu(&sYesNoWindowTemplate, 11, 14, 0);
+    CreateYesNoMenuOverride2(&sYesNoWindowTemplate, 11, 14, 0);
     Menu_MoveCursorNoWrapAround(cursorPos);
 }
 
@@ -4564,6 +4593,7 @@ static void SpriteCB_BoxMonIconScrollIn(struct Sprite *sprite)
         // Icon arrived
         sStorage->iconScrollNumIncoming--;
         sprite->x = sprite->sScrollInDestX;
+        sprite->invisible = FALSE;
         sprite->callback = SpriteCallbackDummy;
     }
 }
@@ -4573,6 +4603,7 @@ static void SpriteCB_BoxMonIconScrollOut(struct Sprite *sprite)
     if (sprite->sDelay != 0)
     {
         sprite->sDelay--;
+        sprite->invisible = TRUE;
     }
     else
     {
@@ -4581,7 +4612,7 @@ static void SpriteCB_BoxMonIconScrollOut(struct Sprite *sprite)
         sprite->sScrollOutX = sprite->x + sprite->x2;
 
         // Check if icon offscreen
-        if (sprite->sScrollOutX <= 68 || sprite->sScrollOutX >= 252)
+        if (sprite->sScrollOutX <= 112 || sprite->sScrollOutX >= 252)
             sprite->callback = SpriteCallbackDummy;
     }
 }
@@ -4629,6 +4660,7 @@ static u8 CreateBoxMonIconsInColumn(u8 column, u16 distance, s16 speed)
                     sStorage->boxMonsSprites[boxPosition]->sDistance = distance;
                     sStorage->boxMonsSprites[boxPosition]->sSpeed = speed;
                     sStorage->boxMonsSprites[boxPosition]->sScrollInDestX = xDest;
+                    sStorage->boxMonsSprites[boxPosition]->invisible = TRUE;
                     sStorage->boxMonsSprites[boxPosition]->callback = SpriteCB_BoxMonIconScrollIn;
                     iconsCreated++;
                 }
@@ -4653,6 +4685,7 @@ static u8 CreateBoxMonIconsInColumn(u8 column, u16 distance, s16 speed)
                     sStorage->boxMonsSprites[boxPosition]->sDistance = distance;
                     sStorage->boxMonsSprites[boxPosition]->sSpeed = speed;
                     sStorage->boxMonsSprites[boxPosition]->sScrollInDestX = xDest;
+                    sStorage->boxMonsSprites[boxPosition]->invisible = TRUE;
                     sStorage->boxMonsSprites[boxPosition]->callback = SpriteCB_BoxMonIconScrollIn;
                     if (GetBoxMonDataAt(sStorage->incomingBoxId, boxPosition, MON_DATA_HELD_ITEM) == ITEM_NONE)
                         sStorage->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
@@ -4700,7 +4733,7 @@ static bool8 UpdateBoxMonIconScroll(void)
     {
     case 0:
         sStorage->iconScrollPos += sStorage->iconScrollSpeed;
-        if (sStorage->iconScrollPos <= 64 || sStorage->iconScrollPos >= 252)
+        if (sStorage->iconScrollPos <= 112 || sStorage->iconScrollPos >= 252)
         {
             // A column of icons has gone offscreen, destroy them
             DestroyBoxMonIconsInColumn(sStorage->iconScrollCurColumn);
@@ -4781,7 +4814,14 @@ static void CreatePartyMonsSprites(bool8 visible)
     u16 species = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES_OR_EGG);
     u32 personality = GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY);
 
-    sStorage->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12);
+    if (species != SPECIES_NONE)
+    {
+        sStorage->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12);
+    }
+    else
+    {
+        sStorage->partySprites[0] = NULL;
+    }
     count = 1;
     for (i = 1; i < PARTY_SIZE; i++)
     {
@@ -5621,6 +5661,7 @@ static void CreateIncomingBoxTitle(u8 boxId, s8 direction)
         sStorage->nextBoxTitleSprites[i]->sSpeed = (-direction) * 6;
         sStorage->nextBoxTitleSprites[i]->sIncomingX = i * 32 + x;
         sStorage->nextBoxTitleSprites[i]->sIncomingDelay = 0;
+        sStorage->nextBoxTitleSprites[i]->invisible = TRUE;
         sStorage->nextBoxTitleSprites[i]->callback = SpriteCB_IncomingBoxTitle;
         StartSpriteAnim(sStorage->nextBoxTitleSprites[i], i);
 
@@ -5644,9 +5685,15 @@ static void CycleBoxTitleSprites(void)
 static void SpriteCB_IncomingBoxTitle(struct Sprite *sprite)
 {
     if (sprite->sIncomingDelay != 0)
+    {
         sprite->sIncomingDelay--;
+    }
     else if ((sprite->x += sprite->sSpeed) == sprite->sIncomingX)
+    {
         sprite->callback = SpriteCallbackDummy;
+        sprite->invisible = FALSE;
+    }
+        
 }
 
 static void SpriteCB_OutgoingBoxTitle(struct Sprite *sprite)
@@ -5657,10 +5704,7 @@ static void SpriteCB_OutgoingBoxTitle(struct Sprite *sprite)
     }
     else
     {
-        sprite->x += sprite->sSpeed;
-        sprite->sOutgoingX = sprite->x + sprite->x2;
-        if (sprite->sOutgoingX < 64 || sprite->sOutgoingX > DISPLAY_WIDTH + 16)
-            DestroySprite(sprite);
+        DestroySprite(sprite);
     }
 }
 
@@ -5725,6 +5769,7 @@ static void StartBoxScrollArrowsSlide(s8 direction)
     {
         sStorage->arrowSprites[i]->x2 = 0;
         sStorage->arrowSprites[i]->sState = 2;
+        sStorage->arrowSprites[i]->invisible = TRUE;
     }
     if (direction < 0)
     {
@@ -6834,10 +6879,7 @@ static void SetMonMarkings(u8 markings)
 
 static bool8 IsRemovingLastPartyMon(void)
 {
-    if (sCursorArea == CURSOR_AREA_IN_PARTY && !sIsMonBeingMoved && CountPartyAliveNonEggMonsExcept(sCursorPosition) == 0)
-        return TRUE;
-    else
-        return FALSE;
+    return FALSE;
 }
 
 static bool8 CanPlaceMon(void)
@@ -7035,19 +7077,19 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
         {
         case MON_MALE:
             *(txtPtr)++ = TEXT_COLOR_RED;
-            *(txtPtr)++ = TEXT_COLOR_WHITE;
+            *(txtPtr)++ = 0;
             *(txtPtr)++ = TEXT_COLOR_LIGHT_RED;
             *(txtPtr)++ = CHAR_MALE;
             break;
         case MON_FEMALE:
             *(txtPtr)++ = TEXT_COLOR_GREEN;
-            *(txtPtr)++ = TEXT_COLOR_WHITE;
+            *(txtPtr)++ = 0;
             *(txtPtr)++ = TEXT_COLOR_LIGHT_GREEN;
             *(txtPtr)++ = CHAR_FEMALE;
             break;
         default:
             *(txtPtr)++ = TEXT_COLOR_DARK_GRAY;
-            *(txtPtr)++ = TEXT_COLOR_WHITE;
+            *(txtPtr)++ = 0;
             *(txtPtr)++ = TEXT_COLOR_LIGHT_GRAY;
             *(txtPtr)++ = CHAR_SPACER; // Genderless
             break;
@@ -7056,7 +7098,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
         *(txtPtr++) = EXT_CTRL_CODE_BEGIN;
         *(txtPtr++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
         *(txtPtr++) = TEXT_COLOR_DARK_GRAY;
-        *(txtPtr++) = TEXT_COLOR_WHITE;
+        *(txtPtr++) = 0;
         *(txtPtr++) = TEXT_COLOR_LIGHT_GRAY;
         *(txtPtr++) = CHAR_SPACE;
         *(txtPtr++) = CHAR_EXTRA_SYMBOL;
@@ -8010,7 +8052,7 @@ static void InitMenu(void)
     sStorage->menuItemsCount = 0;
     sStorage->menuWidth = 0;
     sStorage->menuWindow.bg = 0;
-    sStorage->menuWindow.paletteNum = 15;
+    sStorage->menuWindow.paletteNum = 14;
     sStorage->menuWindow.baseBlock = 92;
 }
 
@@ -8091,7 +8133,7 @@ static void AddMenu(void)
     sStorage->menuWindowId = AddWindow(&sStorage->menuWindow);
     ClearWindowTilemap(sStorage->menuWindowId);
     DrawStdFrameWithCustomTileAndPalette(sStorage->menuWindowId, FALSE, 11, 14);
-    PrintMenuTable(sStorage->menuWindowId, sStorage->menuItemsCount, (void *)sStorage->menuItems);
+    PrintMenuTableOverride(sStorage->menuWindowId, sStorage->menuItemsCount, (void *)sStorage->menuItems);
     InitMenuInUpperLeftCornerNormal(sStorage->menuWindowId, sStorage->menuItemsCount, 0);
     ScheduleBgCopyTilemapToVram(0);
     sStorage->menuUnusedField = 0;
@@ -8294,7 +8336,7 @@ static bool8 MultiMove_Cancel(void)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             SetCursorPriorityTo1();
-            LoadPalette(GetTextWindowPalette(3), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+            LoadPalette(GetTextWindowPalette(0), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
             ShowBg(0);
             return FALSE;
         }
@@ -9635,6 +9677,15 @@ static void SetBoxWallpaper(u8 boxId, u8 wallpaperId)
 {
     if (boxId < TOTAL_BOXES_COUNT && wallpaperId < WALLPAPER_COUNT)
         gPokemonStoragePtr->boxWallpapers[boxId] = wallpaperId;
+}
+
+void SetBoxWallpapersToSimple(void)
+{
+    u8 boxId = 0;
+    for(boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
+    {
+        gPokemonStoragePtr->boxWallpapers[boxId] = WALLPAPER_PLAIN;
+    }
 }
 
 // For moving to the next Pokémon while viewing the summary screen
