@@ -29,8 +29,9 @@
 #define STAT_CHANGE_ACC        10
 #define STAT_CHANGE_EVASION    11
 
-#define BEST_DAMAGE_MOVE     1  // Move with the most amount of hits with the best accuracy/effect
-#define POWERFUL_STATUS_MOVE 10 // Moves with this score will be chosen over a move that faints target
+#define BEST_DAMAGE_MOVE         1  // Move with the most amount of hits with the best accuracy/effect
+#define POWERFUL_STATUS_MOVE     10 // Moves with this score will be chosen over a move that faints target
+#define NO_DAMAGE_OR_FAILS      -20 // Move fails or does no damage
 
 // Scores given in AI_CalcMoveEffectScore
 #define WEAK_EFFECT      1
@@ -62,6 +63,14 @@
     { \
         TestRunner_Battle_AIAdjustScore(__FILE__, __LINE__, sBattler_AI, AI_THINKING_STRUCT->movesetIndex, val); \
         score += val; \
+    } while (0) \
+
+#define ADJUST_AND_RETURN_SCORE(val) \
+    do \
+    { \
+        TestRunner_Battle_AIAdjustScore(__FILE__, __LINE__, sBattler_AI, AI_THINKING_STRUCT->movesetIndex, val); \
+        score += val; \
+        return score; \
     } while (0) \
 
 #define ADJUST_SCORE_PTR(val) \

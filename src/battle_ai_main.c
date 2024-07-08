@@ -4734,17 +4734,17 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     if (gMovesInfo[move].power)
     {
         if (GetNoOfHitsToKOBattler(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex) == 0)
-            ADJUST_SCORE(-20);
+            ADJUST_AND_RETURN_SCORE(NO_DAMAGE_OR_FAILS); // No point in checking the move further so return early
         else
         {
             if ((AI_THINKING_STRUCT->aiFlags[battlerAtk] & AI_FLAG_RISKY) && GetBestDmgMoveFromBattler(battlerAtk, battlerDef) == move)
-                ADJUST_SCORE(1);
+                ADJUST_SCORE(BEST_DAMAGE_MOVE);
             else
-                score += AI_CompareDamagingMoves(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex);
+                ADJUST_SCORE(AI_CompareDamagingMoves(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex));
         }
     }
 
-    score += AI_CalcMoveEffectScore(battlerAtk, battlerDef, move);
+    ADJUST_SCORE(AI_CalcMoveEffectScore(battlerAtk, battlerDef, move));
 
     return score;
 }
