@@ -142,6 +142,7 @@ void SetDefaultOptions(void)
         gSaveBlock2Ptr->modeRandomizer = 0;
         gSaveBlock2Ptr->modeXPShare = 0;
         gSaveBlock2Ptr->modeStatChanger = 0;
+        gSaveBlock2Ptr->modeCashRewards = 0;
         gSaveBlock2Ptr->modeLegendaries = 0;
         gSaveBlock2Ptr->modeDuplicates = 1;
         gSaveBlock2Ptr->modeMegas = 1;

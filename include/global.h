@@ -523,7 +523,8 @@ struct SaveBlock2
              u16 modeAutosave:2;
              u16 modeMegas:1;
              u16 optionsFollowMonsOff:1;
-             u16 padding90:4;
+             u16 modeCashRewards:2;
+             u16 padding90:2;
     /*0x92*/ u8 filler_91[0x5];
              u8 playerGfxType;
     /*0x98*/ struct Time localTimeOffset;

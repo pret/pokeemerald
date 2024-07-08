@@ -7631,6 +7631,19 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
         lastMonLevel = party[GetTrainerPartySizeFromId(trainerId) - 1].lvl;
         trainerMoney = 500;
 
+        if(gSaveBlock2Ptr->modeCashRewards == 1)
+        {
+            trainerMoney = 1000;
+        }
+        else if(gSaveBlock2Ptr->modeCashRewards == 2)
+        {
+            trainerMoney = 250;
+        }
+        else
+        {
+            trainerMoney = 500;
+        }
+
         if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
             moneyReward = gBattleStruct->moneyMultiplier * trainerMoney;
         else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
