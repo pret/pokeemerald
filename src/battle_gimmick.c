@@ -330,6 +330,9 @@ void UpdateIndicatorVisibilityAndType(u32 healthboxId, bool32 invisible)
     u32 palTag = GetIndicatorPalTag(battler);
     struct Sprite *sprite = &gSprites[GetIndicatorSpriteId(healthboxId)];
 
+    if (GetIndicatorSpriteId(healthboxId) == 0) // safari zone means the player doesn't have an indicator sprite id
+        return;
+
     if (tileTag != TAG_NONE && palTag != TAG_NONE)
     {
         sprite->oam.tileNum = GetSpriteTileStartByTag(tileTag);
