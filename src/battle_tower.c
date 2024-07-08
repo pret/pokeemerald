@@ -2060,7 +2060,7 @@ void DoSpecialTrainerBattle(void)
         BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_SECRET_BASE));
         break;
     case SPECIAL_BATTLE_EREADER:
-    #if FREE_BATTLE_TOWER_E_READER == FALSE 
+    #if FREE_BATTLE_TOWER_E_READER == FALSE
         ZeroEnemyPartyMons();
         for (i = 0; i < (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.ereaderTrainer.party); i++)
             CreateBattleTowerMon(&gEnemyParty[i], &gSaveBlock2Ptr->frontier.ereaderTrainer.party[i]);
@@ -3061,9 +3061,7 @@ static void FillPartnerParty(u16 trainerId)
                 personality = (personality & 0xFFFFFF00) | GeneratePersonalityForGender(MON_MALE, partyData[i].species);
             else if (partyData[i].gender == TRAINER_MON_FEMALE)
                 personality = (personality & 0xFFFFFF00) | GeneratePersonalityForGender(MON_FEMALE, partyData[i].species);
-            if (partyData[i].nature != 0)
-                ModifyPersonalityForNature(&personality, partyData[i].nature - 1);
-
+            ModifyPersonalityForNature(&personality, partyData[i].nature);
             CreateMon(&gPlayerParty[i + 3], partyData[i].species, partyData[i].lvl, 0, TRUE, personality, OT_ID_PRESET, otID);
             j = partyData[i].isShiny;
             SetMonData(&gPlayerParty[i + 3], MON_DATA_IS_SHINY, &j);
