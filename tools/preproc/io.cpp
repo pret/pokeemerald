@@ -1,6 +1,7 @@
 #include "preproc.h"
 #include "io.h"
 #include <string>
+#include <cerrno>
 #include <cstring>
 
 char *ReadFileToBuffer(const char *filename, bool isStdin, long *size)
