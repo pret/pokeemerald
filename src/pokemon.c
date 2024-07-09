@@ -6640,10 +6640,10 @@ s8 GetFlavorRelationByPersonality(u32 personality, u8 flavor)
 
 bool8 IsTradedMon(struct Pokemon *mon)
 {
-    u8 otName[PLAYER_NAME_LENGTH + 1];
-    u32 otId;
-    GetMonData(mon, MON_DATA_OT_NAME, otName);
-    otId = GetMonData(mon, MON_DATA_OT_ID, 0);
+    //u8 otName[PLAYER_NAME_LENGTH + 1];
+    //u32 otId;
+    //GetMonData(mon, MON_DATA_OT_NAME, otName);
+    //otId = GetMonData(mon, MON_DATA_OT_ID, 0);
     return FALSE;
 }
 
@@ -8909,7 +8909,7 @@ u8 GetNumberOfEggMoves(struct Pokemon *mon)
     u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0);
     u16 firstStage = GetEggSpecies(species);
     u8 numEggMoves = GetEggMovesSpecies(firstStage, eggMoveBuffer);
-    u16 moves[numEggMoves];
+    //u16 moves[numEggMoves];
     int i, j;
     bool8 hasMonMove = FALSE;
 
@@ -8928,7 +8928,7 @@ u8 GetNumberOfEggMoves(struct Pokemon *mon)
         }
 
         if(!hasMonMove)
-            moves[numMoves++] = eggMoveBuffer[i];
+            numMoves++;
     }
 
     return numMoves;
@@ -8972,7 +8972,7 @@ u8 GetNumberOfTutorMoves(struct Pokemon *mon)
     u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0);
     //u16 firstStage = GetEggSpecies(species);
     u16 numTutorMoves = GetTutorMovesSpecies(species, tutorMoveBuffer);
-    u16 moves[numTutorMoves];
+    //u16 moves[numTutorMoves];
     int i, j;
     bool8 hasMonMove = FALSE;
 
@@ -8991,7 +8991,7 @@ u8 GetNumberOfTutorMoves(struct Pokemon *mon)
         }
 
         if(!hasMonMove)
-            moves[numMoves++] = tutorMoveBuffer[i];
+            numMoves++;
     }
 
     return numMoves;
@@ -9147,7 +9147,7 @@ void DebugTestRandomness(void)
             {
                 for(partyNum = 0; partyNum < 5; partyNum++)
                 {
-                    u16 randomSpecies = GetRandomSpeciesFlattenedCurve();
+                    GetRandomSpeciesFlattenedCurve();
                 }
             }
         }

@@ -1090,26 +1090,21 @@ EventScript_End:
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
 
+	.include "data/scripts/pit_arena.inc"
+	.include "data/scripts/pit_bosses.inc"
+	.include "data/scripts/pit_mon_encounters.inc"
+	.include "data/scripts/pit_stop.inc"
+	.include "data/scripts/pit_item_shop.inc"
+
 	.include "data/maps/PitArena/scripts.inc"
-
 	.include "data/maps/PitEntrance/scripts.inc"
-
 	.include "data/maps/PitArenaWater/scripts.inc"
-
 	.include "data/maps/PitArenaDesert/scripts.inc"
-
 	.include "data/maps/PitArenaSnow/scripts.inc"
-
 	.include "data/maps/PitArenaBeach/scripts.inc"
-
 	.include "data/maps/PitArenaDeepForest/scripts.inc"
-
 	.include "data/maps/PitArenaDirtPath/scripts.inc"
-
 	.include "data/maps/PitArenaClouds/scripts.inc"
-
 	.include "data/maps/PitArenaMushroomWoods/scripts.inc"
-
 	.include "data/maps/PitArenaSpiderWoods/scripts.inc"
-
 	.include "data/maps/PitArenaUnderwater/scripts.inc"

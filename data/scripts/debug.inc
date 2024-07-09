@@ -137,6 +137,37 @@ Debug_EventScript_Text_OffensiveIVs:
 Debug_EventScript_Text_DefensiveIVs:
 	.string "HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2}, SPDEF IVs: {STR_VAR_3}$"
 
+PitArenaDebugNotOnWall::
+	setflag FLAG_FLOOR_CLEARED
+	setmetatile 9, 9, METATILE_Cave_FLOOR_COMPLETE, FALSE
+	setvar VAR_PIT_FLOOR, 24
+	additem ITEM_RARE_CANDY, 99
+	special DrawWholeMapView
+	end
+
+PitArenaDebug2NotOnWall::
+	setflag FLAG_FLOOR_CLEARED
+	setmetatile 9, 9, METATILE_Cave_FLOOR_COMPLETE, FALSE
+	addvar VAR_PIT_FLOOR, 24
+	special DrawWholeMapView
+	end
+
+PitArenaDebug3NotOnWall::
+	setflag FLAG_FLOOR_CLEARED
+	setmetatile 9, 9, METATILE_Cave_FLOOR_COMPLETE, FALSE
+	setvar VAR_PIT_FLOOR, 99
+	additem ITEM_RARE_CANDY, 99
+	special DrawWholeMapView
+	end
+
+PitArenaDebug4NotOnWall::
+	setflag FLAG_FLOOR_CLEARED
+	setmetatile 9, 9, METATILE_Cave_FLOOR_COMPLETE, FALSE
+	setvar VAR_PIT_FLOOR, 19
+	additem ITEM_RARE_CANDY, 99
+	special DrawWholeMapView
+	end
+
 Debug_EventScript_Script_1::
 	goto PitArenaDebugNotOnWall
 	end

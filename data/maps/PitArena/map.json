@@ -76,7 +76,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PitArena_HealNPC",
+      "script": "PitStop_HealNPC",
       "flag": "FLAG_HEAL_NPC"
     },
     {
@@ -115,7 +115,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PitArena_NewMon",
+      "script": "PitStop_NewMon",
       "flag": "FLAG_GIVE_POKEMON"
     },
     {
@@ -128,7 +128,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PitArena_ShopNPC",
+      "script": "PitShop_ShopNPC",
       "flag": "FLAG_SHOP_NPC"
     },
     {
@@ -141,7 +141,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PitArena_EndGameStatue",
+      "script": "Pit_EndGameStatue",
       "flag": "FLAG_END_GAME_STATUE"
     },
     {
@@ -154,7 +154,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PitArena_Archie",
+      "script": "PitBoss_Archie",
       "flag": "FLAG_END_GAME_ARCHIE"
     },
     {
@@ -180,7 +180,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PitArena_MoveRelearner",
+      "script": "PitTutor_MoveRelearner",
       "flag": "FLAG_MOVE_RELEARNER"
     },
     {
@@ -193,7 +193,7 @@
       "movement_range_y": 2,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PitArena_Mover",
+      "script": "PitEncounter_Mover",
       "flag": "FLAG_MOVER_OBJECT"
     },
     {
