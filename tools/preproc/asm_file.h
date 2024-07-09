@@ -38,7 +38,7 @@ enum class Directive
 class AsmFile
 {
 public:
-    AsmFile(std::string filename, bool isStdin);
+    AsmFile(std::string filename, bool isStdin, bool doEnum);
     AsmFile(AsmFile&& other);
     AsmFile(const AsmFile&) = delete;
     ~AsmFile();
@@ -54,6 +54,7 @@ public:
 
 private:
     char* m_buffer;
+    bool m_doEnum;
     long m_pos;
     long m_size;
     long m_lineNum;

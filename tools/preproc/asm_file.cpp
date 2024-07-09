@@ -29,9 +29,10 @@
 #include "../../gflib/characters.h"
 #include "io.h"
 
-AsmFile::AsmFile(std::string filename, bool isStdin) : m_filename(filename)
+AsmFile::AsmFile(std::string filename, bool isStdin, bool doEnum) : m_filename(filename)
 {
     m_buffer = ReadFileToBuffer(filename.c_str(), isStdin, &m_size);
+    m_doEnum = doEnum;
 
     m_pos = 0;
     m_lineNum = 1;
@@ -43,6 +44,7 @@ AsmFile::AsmFile(std::string filename, bool isStdin) : m_filename(filename)
 AsmFile::AsmFile(AsmFile&& other) : m_filename(std::move(other.m_filename))
 {
     m_buffer = other.m_buffer;
+    m_doEnum = other.m_doEnum;
     m_pos = other.m_pos;
     m_size = other.m_size;
     m_lineNum = other.m_lineNum;
@@ -510,6 +512,9 @@ void AsmFile::OutputLine()
 // parses an assumed C `enum`. Returns false if `enum { ...` is not matched
 bool AsmFile::ParseEnum()
 {
+    if (!m_doEnum)
+        return false;
+
     long fallbackPosition = m_pos;
     std::string headerFilename = "";
     long currentHeaderLine = SkipWhitespaceAndEol();
@@ -530,22 +535,26 @@ bool AsmFile::ParseEnum()
     {
         currentHeaderLine += SkipWhitespaceAndEol();
         std::string currentIdentName = ReadIdentifier();
-        if (currentIdentName.empty() && symbolCount == 0)
+        if (!currentIdentName.empty())
+        {
+            std::printf("# %ld \"%s\"\n", currentHeaderLine, headerFilename.c_str());
+            currentHeaderLine += SkipWhitespaceAndEol();
+            if (m_buffer[m_pos] == '=')
+            {
+                m_pos++;
+                currentHeaderLine += SkipWhitespaceAndEol();
+                enumCounter = ReadInteger(headerFilename, currentHeaderLine);
+                currentHeaderLine += SkipWhitespaceAndEol();
+            }
+            std::printf(".equiv %s, %ld\n", currentIdentName.c_str(), enumCounter);
+            enumCounter++;
+            symbolCount++;
+        }
+        else if (symbolCount == 0)
         {
             RaiseError("%s:%ld: empty enum is invalid", headerFilename.c_str(), currentHeaderLine);
         }
-        std::printf("# %ld \"%s\"\n", currentHeaderLine, headerFilename.c_str());
-        currentHeaderLine += SkipWhitespaceAndEol();
-        if (m_buffer[m_pos] == '=')
-        {
-            m_pos++;
-            currentHeaderLine += SkipWhitespaceAndEol();
-            enumCounter = ReadInteger(headerFilename, currentHeaderLine);
-            currentHeaderLine += SkipWhitespaceAndEol();
-        }
-        
-        std::printf(".equiv %s, %ld\n", currentIdentName.c_str(), enumCounter);
-        enumCounter++;
+
         if (m_buffer[m_pos] != ',')
         {
             currentHeaderLine += SkipWhitespaceAndEol();
