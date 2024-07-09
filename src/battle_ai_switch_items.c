@@ -1192,8 +1192,8 @@ static u32 GetBestMonTypeMatchup(struct Pokemon *party, int firstId, int lastId,
 
                 u8 atkType1 = gBattleMons[opposingBattler].type1;
                 u8 atkType2 = gBattleMons[opposingBattler].type2;
-                u8 defType1 = gSpeciesInfo[species].types[0];
-                u8 defType2 = gSpeciesInfo[species].types[1];
+                u8 defType1 = GetTypeBySpecies(species, 1);
+                u8 defType2 = GetTypeBySpecies(species, 2);
 
                 typeEffectiveness = uq4_12_multiply(typeEffectiveness, (GetTypeModifier(atkType1, defType1)));
                 if (atkType2 != atkType1)
@@ -1658,7 +1658,7 @@ static u16 GetSwitchinTypeMatchup(u32 opposingBattler, struct BattlePokemon batt
 
     // Check type matchup
     u16 typeEffectiveness = UQ_4_12(1.0);
-    u8 atkType1 = gSpeciesInfo[gBattleMons[opposingBattler].species].types[0], atkType2 = gSpeciesInfo[gBattleMons[opposingBattler].species].types[1],
+    u8 atkType1 = GetTypeBySpecies(gBattleMons[opposingBattler].species, 1), atkType2 = GetTypeBySpecies(gBattleMons[opposingBattler].species, 2),
     defType1 = battleMon.type1, defType2 = battleMon.type2;
 
     // Multiply type effectiveness by a factor depending on type matchup

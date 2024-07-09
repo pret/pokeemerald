@@ -4472,13 +4472,8 @@ static void PrintCurrentSpeciesTypeInfo(u8 newEntry, u16 species)
         species = NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum);
     }
     //type icon(s)
-    #ifdef TX_RANDOMIZER_AND_CHALLENGES
-        type1 = GetTypeBySpecies(species, 1);
-        type2 = GetTypeBySpecies(species, 2);
-    #else
-        type1 = gSpeciesInfo[species].types[0];
-        type2 = gSpeciesInfo[species].types[1];
-    #endif
+    type1 = GetTypeBySpecies(species, 1);
+    type2 = GetTypeBySpecies(species, 2);
     if (species == SPECIES_NONE)
         type1 = type2 = TYPE_MYSTERY;
 
@@ -7892,8 +7887,8 @@ static int DoPokedexSearch(u8 dexMode, u8 order, u8 abcGroup, u8 bodyColor, u8 t
                 {
                     species = NationalPokedexNumToSpecies(sPokedexView->pokedexList[i].dexNum);
 
-                    types[0] = gSpeciesInfo[species].types[0];
-                    types[1] = gSpeciesInfo[species].types[1];
+                    types[0] = GetTypeBySpecies(species, 1);
+                    types[1] = GetTypeBySpecies(species, 2);
                     if (types[0] == type1 || types[1] == type1)
                     {
                         sPokedexView->pokedexList[resultsCount] = sPokedexView->pokedexList[i];
@@ -7910,8 +7905,8 @@ static int DoPokedexSearch(u8 dexMode, u8 order, u8 abcGroup, u8 bodyColor, u8 t
                 {
                     species = NationalPokedexNumToSpecies(sPokedexView->pokedexList[i].dexNum);
 
-                    types[0] = gSpeciesInfo[species].types[0];
-                    types[1] = gSpeciesInfo[species].types[1];
+                    types[0] = GetTypeBySpecies(species, 1);
+                    types[1] = GetTypeBySpecies(species, 2);
                     if ((types[0] == type1 && types[1] == type2) || (types[0] == type2 && types[1] == type1))
                     {
                         sPokedexView->pokedexList[resultsCount] = sPokedexView->pokedexList[i];

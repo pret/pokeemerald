@@ -2030,8 +2030,8 @@ static void InitDomeTrainers(void)
         rankingScores[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_SPDEF, NULL);
         rankingScores[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_SPEED, NULL);
         rankingScores[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_MAX_HP, NULL);
-        monTypesBits |= gBitTable[gSpeciesInfo[GetMonData(&gPlayerParty[trainerId], MON_DATA_SPECIES, NULL)].types[0]];
-        monTypesBits |= gBitTable[gSpeciesInfo[GetMonData(&gPlayerParty[trainerId], MON_DATA_SPECIES, NULL)].types[1]];
+        monTypesBits |= gBitTable[GetTypeBySpecies(GetMonData(&gPlayerParty[trainerId], MON_DATA_SPECIES, NULL), 1)];
+        monTypesBits |= gBitTable[GetTypeBySpecies(GetMonData(&gPlayerParty[trainerId], MON_DATA_SPECIES, NULL), 2)];
     }
 
     // Count the number of types in the players party, to factor into the ranking
@@ -2065,8 +2065,9 @@ static void InitDomeTrainers(void)
             rankingScores[i] += statValues[STAT_SPDEF];
             rankingScores[i] += statValues[STAT_SPEED];
             rankingScores[i] += statValues[STAT_HP];
-            monTypesBits |= gBitTable[gSpeciesInfo[gFacilityTrainerMons[DOME_MONS[i][j]].species].types[0]];
-            monTypesBits |= gBitTable[gSpeciesInfo[gFacilityTrainerMons[DOME_MONS[i][j]].species].types[1]];
+            monTypesBits |= gBitTable[GetTypeBySpecies(gFacilityTrainerMons[DOME_MONS[i][j]].species, 1)];
+            monTypesBits |= gBitTable[GetTypeBySpecies(gFacilityTrainerMons[DOME_MONS[i][j]].species, 2)];
+            
         }
 
         for (monTypesCount = 0, j = 0; j < 32; j++)
@@ -2427,9 +2428,9 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int mode)
 
     if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || IS_MOVE_STATUS(move))
         return 0;
-
-    defType1 = gSpeciesInfo[targetSpecies].types[0];
-    defType2 = gSpeciesInfo[targetSpecies].types[1];
+    
+    defType1 = GetTypeBySpecies(targetSpecies, 1);
+    defType2 = GetTypeBySpecies(targetSpecies, 2);
     defAbility = gSpeciesInfo[targetSpecies].abilities[0];
     moveType = gMovesInfo[move].type;
 

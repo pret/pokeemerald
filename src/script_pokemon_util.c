@@ -331,7 +331,7 @@ u32 ScriptGiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 natu
 
     // tera type
     if (teraType >= NUMBER_OF_MON_TYPES)
-        teraType = gSpeciesInfo[species].types[0];
+        teraType = GetTypeBySpecies(species, 1);
     SetMonData(&mon, MON_DATA_TERA_TYPE, &teraType);
 
     // EV and IV

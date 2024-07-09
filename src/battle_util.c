@@ -9809,7 +9809,7 @@ static inline s32 DoFutureSightAttackDamageCalcVars(u32 move, u32 battlerAtk, u3
     }
 
     // Same type attack bonus
-    if (gSpeciesInfo[partyMonSpecies].types[0] == moveType || gSpeciesInfo[partyMonSpecies].types[1] == moveType)
+    if (GetTypeBySpecies(partyMonSpecies, 1) == moveType || GetTypeBySpecies(partyMonSpecies, 2) == moveType)
         DAMAGE_APPLY_MODIFIER(UQ_4_12(1.5));
     else
         DAMAGE_APPLY_MODIFIER(UQ_4_12(1.0));
@@ -9922,9 +9922,9 @@ static inline void TryNoticeIllusionInTypeEffectiveness(u32 move, u32 moveType, 
 {
     // Check if the type effectiveness would've been different if the pokemon really had the types as the disguise.
     uq4_12_t presumedModifier = UQ_4_12(1.0);
-    MulByTypeEffectiveness(&presumedModifier, move, moveType, battlerDef, gSpeciesInfo[illusionSpecies].types[0], battlerAtk, FALSE);
-    if (gSpeciesInfo[illusionSpecies].types[1] != gSpeciesInfo[illusionSpecies].types[0])
-        MulByTypeEffectiveness(&presumedModifier, move, moveType, battlerDef, gSpeciesInfo[illusionSpecies].types[1], battlerAtk, FALSE);
+    MulByTypeEffectiveness(&presumedModifier, move, moveType, battlerDef, GetTypeBySpecies(illusionSpecies, 1), battlerAtk, FALSE);
+    if (GetTypeBySpecies(illusionSpecies, 1) != GetTypeBySpecies(illusionSpecies, 2))
+        MulByTypeEffectiveness(&presumedModifier, move, moveType, battlerDef, GetTypeBySpecies(illusionSpecies, 2), battlerAtk, FALSE);
 
     if (presumedModifier != resultingModifier)
         RecordAbilityBattle(battlerDef, ABILITY_ILLUSION);
@@ -10042,9 +10042,9 @@ uq4_12_t CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u16 a
 
     if (move != MOVE_STRUGGLE && moveType != TYPE_MYSTERY)
     {
-        MulByTypeEffectiveness(&modifier, move, moveType, 0, gSpeciesInfo[speciesDef].types[0], 0, FALSE);
-        if (gSpeciesInfo[speciesDef].types[1] != gSpeciesInfo[speciesDef].types[0])
-            MulByTypeEffectiveness(&modifier, move, moveType, 0, gSpeciesInfo[speciesDef].types[1], 0, FALSE);
+        MulByTypeEffectiveness(&modifier, move, moveType, 0, GetTypeBySpecies(speciesDef, 1), 0, FALSE);
+        if (GetTypeBySpecies(speciesDef, 2) != GetTypeBySpecies(speciesDef, 1))
+            MulByTypeEffectiveness(&modifier, move, moveType, 0, GetTypeBySpecies(speciesDef, 2), 0, FALSE);
 
         if (moveType == TYPE_GROUND && abilityDef == ABILITY_LEVITATE && !(gFieldStatuses & STATUS_FIELD_GRAVITY))
             modifier = UQ_4_12(0.0);
@@ -10076,8 +10076,8 @@ uq4_12_t GetTypeEffectiveness(struct Pokemon *mon, u8 moveType)
     uq4_12_t modifier = UQ_4_12(1.0);
     u16 abilityDef = GetMonAbility(mon);
     u16 speciesDef = GetMonData(mon, MON_DATA_SPECIES);
-    u8 type1 = gSpeciesInfo[speciesDef].types[0];
-    u8 type2 = gSpeciesInfo[speciesDef].types[1];
+    u8 type1 = GetTypeBySpecies(speciesDef, 1);
+    u8 type2 = GetTypeBySpecies(speciesDef, 2);
 
     if (moveType != TYPE_MYSTERY)
     {
@@ -11053,8 +11053,8 @@ void CopyMonLevelAndBaseStatsToBattleMon(u32 battler, struct Pokemon *mon)
 void CopyMonAbilityAndTypesToBattleMon(u32 battler, struct Pokemon *mon)
 {
     gBattleMons[battler].ability = GetMonAbility(mon);
-    gBattleMons[battler].type1 = gSpeciesInfo[gBattleMons[battler].species].types[0];
-    gBattleMons[battler].type2 = gSpeciesInfo[gBattleMons[battler].species].types[1];
+    gBattleMons[battler].type1 = GetTypeBySpecies(gBattleMons[battler].species, 1);
+    gBattleMons[battler].type2 = GetTypeBySpecies(gBattleMons[battler].species, 2);
     gBattleMons[battler].type3 = TYPE_MYSTERY;
 }
 
@@ -11211,7 +11211,7 @@ bool8 CanMonParticipateInSkyBattle(struct Pokemon *mon)
     u16 monAbilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
 
     bool8 hasLevitateAbility = gSpeciesInfo[species].abilities[monAbilityNum] == ABILITY_LEVITATE;
-    bool8 isFlyingType = gSpeciesInfo[species].types[0] == TYPE_FLYING || gSpeciesInfo[species].types[1] == TYPE_FLYING;
+    bool8 isFlyingType = GetTypeBySpecies(species, 1) == TYPE_FLYING || GetTypeBySpecies(species, 2) == TYPE_FLYING;
     bool8 monIsValidAndNotEgg = GetMonData(mon, MON_DATA_SANITY_HAS_SPECIES) && !GetMonData(mon, MON_DATA_IS_EGG);
 
     if (monIsValidAndNotEgg)

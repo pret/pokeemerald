@@ -850,22 +850,22 @@ static bool8 DoesTypePreventStatus(u16 species, u32 status)
     switch (status)
     {
     case STATUS1_TOXIC_POISON:
-        if (gSpeciesInfo[species].types[0] == TYPE_STEEL || gSpeciesInfo[species].types[0] == TYPE_POISON
-            || gSpeciesInfo[species].types[1] == TYPE_STEEL || gSpeciesInfo[species].types[1] == TYPE_POISON)
+        if (GetTypeBySpecies(species, 1) == TYPE_STEEL || GetTypeBySpecies(species, 1) == TYPE_POISON
+            || GetTypeBySpecies(species, 2) == TYPE_STEEL || GetTypeBySpecies(species, 2) == TYPE_POISON)
             ret = TRUE;
         break;
     case STATUS1_FREEZE:
     case STATUS1_FROSTBITE:
-        if (gSpeciesInfo[species].types[0] == TYPE_ICE || gSpeciesInfo[species].types[1] == TYPE_ICE)
+        if (GetTypeBySpecies(species, 1) == TYPE_ICE || GetTypeBySpecies(species, 2) == TYPE_ICE)
             ret = TRUE;
         break;
     case STATUS1_PARALYSIS:
-        if (gSpeciesInfo[species].types[0] == TYPE_GROUND || gSpeciesInfo[species].types[1] == TYPE_GROUND
-            || (B_PARALYZE_ELECTRIC >= GEN_6 && (gSpeciesInfo[species].types[0] == TYPE_ELECTRIC || gSpeciesInfo[species].types[1] == TYPE_ELECTRIC)))
+        if (GetTypeBySpecies(species, 1) == TYPE_GROUND || GetTypeBySpecies(species, 2) == TYPE_GROUND
+            || (B_PARALYZE_ELECTRIC >= GEN_6 && (GetTypeBySpecies(species, 1) == TYPE_ELECTRIC || GetTypeBySpecies(species, 2) == TYPE_ELECTRIC)))
             ret = TRUE;
         break;
     case STATUS1_BURN:
-        if (gSpeciesInfo[species].types[0] == TYPE_FIRE || gSpeciesInfo[species].types[1] == TYPE_FIRE)
+        if (GetTypeBySpecies(species, 1) == TYPE_FIRE || GetTypeBySpecies(species, 2) == TYPE_FIRE)
             ret = TRUE;
         break;
     case STATUS1_SLEEP:

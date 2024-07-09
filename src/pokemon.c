@@ -2307,6 +2307,15 @@ static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
     SetMonData(mon, field, &n);                                 \
 }
 
+#define RANDOM_STAT(base, iv, ev, statIndex, field)               \
+{                                                               \
+    s32 n = (((2 * base + iv + ev / 4) * level) / 100) + 5; \
+    n = ModifyStatByNature(nature, n, statIndex);               \
+    if (B_FRIENDSHIP_BOOST == TRUE)                             \
+        n = n + ((n * 10 * friendship) / (MAX_FRIENDSHIP * 100));\
+    SetMonData(mon, field, &n);                                 \
+}
+
 void CalculateMonStats(struct Pokemon *mon)
 {
     s32 oldMaxHP = GetMonData(mon, MON_DATA_MAX_HP, NULL);
@@ -2327,10 +2336,123 @@ void CalculateMonStats(struct Pokemon *mon)
     u8 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
     s32 level = GetLevelFromMonExp(mon);
     s32 newMaxHP;
+    u64 bst, weightTotal;
+    u64 temp1;
+    u32 hpW, atW, atsW, deW, desW, spW;
+    u32 hp_, at_, ats_, de_, des_, sp_;
+    u32 notValidStats = 1;
 
     u8 nature = GetMonData(mon, MON_DATA_HIDDEN_NATURE, NULL);
 
     SetMonData(mon, MON_DATA_LEVEL, &level);
+
+    if(gSaveBlock2Ptr->randomBST)
+    {
+        bst = (gSpeciesInfo[species].baseHP + gSpeciesInfo[species].baseAttack + gSpeciesInfo[species].baseDefense + gSpeciesInfo[species].baseSpAttack + gSpeciesInfo[species].baseSpDefense + gSpeciesInfo[species].baseSpeed) - 70;
+        bst *= 1000;
+
+        do
+        {
+            hpW = RandomSeededModulo2(notValidStats + species + gSpeciesInfo[species].baseHP, 1000);
+            atW = RandomSeededModulo2(notValidStats + hpW + species + gSpeciesInfo[species].baseAttack, 1000);
+            atsW = RandomSeededModulo2(notValidStats + atW + species + gSpeciesInfo[species].baseSpAttack, 1000);
+            deW = RandomSeededModulo2(notValidStats + atsW + species + gSpeciesInfo[species].baseDefense, 1000);
+            desW = RandomSeededModulo2(notValidStats + deW + species + gSpeciesInfo[species].baseSpDefense, 1000);
+            spW = RandomSeededModulo2(notValidStats + desW + species + gSpeciesInfo[species].baseSpeed, 1000);
+            weightTotal = hpW + atW + atsW + deW + desW + spW;
+
+            temp1 = (((u64) hpW) * bst) / weightTotal;
+            temp1 = temp1 / ((u64) 1000);
+            if (!(temp1 >= 1))
+                temp1 = 1;
+            hp_ = ((u32) temp1) + 20;
+
+            temp1 = (((u64) atW) * bst) / weightTotal;
+            temp1 = temp1 / ((u64) 1000);
+            if (!(temp1 >= 1))
+                temp1 = 1;
+            at_ = ((u32) temp1) + 10;
+
+            temp1 = (((u64) atsW) * bst) / weightTotal;
+            temp1 = temp1 / ((u64) 1000);
+            if (!(temp1 >= 1))
+                temp1 = 1;
+            ats_ = ((u32) temp1) + 10;
+
+            temp1 = (((u64) deW) * bst) / weightTotal;
+            temp1 = temp1 / ((u64) 1000);
+            if (!(temp1 >= 1))
+                temp1 = 1;
+            de_ = ((u32) temp1) + 10;
+
+            temp1 = (((u64) desW) * bst) / weightTotal;
+            temp1 = temp1 / ((u64) 1000);
+            if (!(temp1 >= 1))
+                temp1 = 1;
+            des_ = ((u32) temp1) + 10;
+
+            temp1 = (((u64) spW) * bst) / weightTotal;
+            temp1 = temp1 / ((u64) 1000);
+            if (!(temp1 >= 1))
+                temp1 = 1;
+            sp_ = ((u32) temp1) + 10;
+
+            if(hp_ > 255 || at_ > 255 || ats_ > 255 || de_ > 255 || des_ > 255 || sp_ > 255)
+                notValidStats += 1;
+            else
+                notValidStats = 0;
+        } while(notValidStats != 0 && species != SPECIES_NONE);
+
+        if (species == SPECIES_SHEDINJA)
+        {
+            newMaxHP = 1;
+        }
+        else
+        {
+            s32 n = 2 * hp_ + hpIV;
+            newMaxHP = (((n + hpEV / 4) * level) / 100) + level + 10;
+        }
+
+        gBattleScripting.levelUpHP = newMaxHP - oldMaxHP;
+        if (gBattleScripting.levelUpHP == 0)
+            gBattleScripting.levelUpHP = 1;
+
+        SetMonData(mon, MON_DATA_MAX_HP, &newMaxHP);
+        
+        RANDOM_STAT(at_, attackIV, attackEV, STAT_ATK, MON_DATA_ATK)
+        RANDOM_STAT(de_, defenseIV, defenseEV, STAT_DEF, MON_DATA_DEF)
+        RANDOM_STAT(sp_, speedIV, speedEV, STAT_SPEED, MON_DATA_SPEED)
+        RANDOM_STAT(ats_, spAttackIV, spAttackEV, STAT_SPATK, MON_DATA_SPATK)
+        RANDOM_STAT(des_, spDefenseIV, spDefenseEV, STAT_SPDEF, MON_DATA_SPDEF)
+
+        if (species == SPECIES_SHEDINJA)
+        {
+            if (currentHP != 0 || oldMaxHP == 0)
+                currentHP = 1;
+            else
+                return;
+        }
+        else
+        {
+            if (currentHP == 0 && oldMaxHP == 0)
+                currentHP = newMaxHP;
+            else if (currentHP != 0)
+            {
+                if (newMaxHP > oldMaxHP)
+                    currentHP += newMaxHP - oldMaxHP;
+                if (currentHP <= 0)
+                    currentHP = 1;
+                if (currentHP > newMaxHP)
+                    currentHP = newMaxHP;
+            }
+            else
+                return;
+        
+        }
+
+        SetMonData(mon, MON_DATA_HP, &currentHP);
+        return;
+    }
 
     if (species == SPECIES_SHEDINJA)
     {
@@ -4302,8 +4424,9 @@ void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst)
     dst->spDefense = GetMonData(src, MON_DATA_SPDEF, NULL);
     dst->abilityNum = GetMonData(src, MON_DATA_ABILITY_NUM, NULL);
     dst->otId = GetMonData(src, MON_DATA_OT_ID, NULL);
-    dst->type1 = gSpeciesInfo[dst->species].types[0];
-    dst->type2 = gSpeciesInfo[dst->species].types[1];
+    
+    dst->type1 = GetTypeBySpecies(dst->species, 1);
+    dst->type2 = GetTypeBySpecies(dst->species, 2);
     dst->type3 = TYPE_MYSTERY;
     dst->ability = GetAbilityBySpecies(dst->species, dst->abilityNum);
     GetMonData(src, MON_DATA_NICKNAME, nickname);
@@ -5268,8 +5391,9 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     for (j = 0; j < PARTY_SIZE; j++)
                     {
                         u16 currSpecies = GetMonData(&gPlayerParty[j], MON_DATA_SPECIES, NULL);
-                        if (gSpeciesInfo[currSpecies].types[0] == TYPE_DARK
-                         || gSpeciesInfo[currSpecies].types[1] == TYPE_DARK)
+                        
+                        if (GetTypeBySpecies(currSpecies, 1) == TYPE_DARK
+                         || GetTypeBySpecies(currSpecies, 2) == TYPE_DARK)
                         {
                             targetSpecies = evolutions[i].targetSpecies;
                             break;
@@ -5529,6 +5653,11 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
     {
         heldItem = ITEM_NONE;
         SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
+    }
+
+    if (gSaveBlock2Ptr->randomEvos && (targetSpecies != SPECIES_NONE))
+    {
+        targetSpecies = GetSpeciesRandomNotSeeded(targetSpecies);
     }
 
     return targetSpecies;
@@ -9164,3 +9293,57 @@ void DebugTestRandomness(void)
     
     ClearGeneratedMons();
 }
+
+#define RANDOM_TYPE_COUNT ARRAY_COUNT(sOneTypeChallengeValidTypes)
+static const u8  sOneTypeChallengeValidTypes[NUMBER_OF_MON_TYPES-1] =
+{
+    TYPE_NORMAL   ,
+    TYPE_FIGHTING ,
+    TYPE_FLYING   ,
+    TYPE_POISON   ,
+    TYPE_GROUND   ,
+    TYPE_ROCK     ,
+    TYPE_BUG      ,
+    TYPE_GHOST    ,
+    TYPE_STEEL    ,
+    TYPE_FIRE     ,
+    TYPE_WATER    ,
+    TYPE_GRASS    ,
+    TYPE_ELECTRIC ,
+    TYPE_PSYCHIC  ,
+    TYPE_ICE      ,
+    TYPE_DRAGON   ,
+    TYPE_DARK     ,
+    #if P_UPDATED_TYPES >= GEN_6
+        TYPE_FAIRY,
+    #endif
+};
+
+u8 GetTypeBySpecies(u16 species, u8 typeNum)
+{
+    u8 type;
+
+    if (typeNum == 1)
+        type = gSpeciesInfo[species].types[0];
+    else
+        type = gSpeciesInfo[species].types[1];
+
+    if (!gSaveBlock2Ptr->randomType)
+        return type;
+
+    type = sOneTypeChallengeValidTypes[RandomSeededModulo2(type + typeNum + species, NUMBER_OF_MON_TYPES - 1)];
+    return type;
+}
+
+// 
+// u8 GetTypeEffectivenessRandom(u8 type)
+// {
+//     if (type == TYPE_NONE)
+//         return TYPE_NONE;
+//     
+//     if (!gSaveBlock1Ptr->tx_Random_TypeEffectiveness)
+//         return type;
+// 
+//     return sTypeEffectivenessList[type];
+// }
+// 

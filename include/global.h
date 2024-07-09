@@ -525,8 +525,13 @@ struct SaveBlock2
              u16 optionsFollowMonsOff:1;
              u16 modeCashRewards:2;
              u16 mode3MonsOnly:1;
-             u16 padding90:1;
-    /*0x92*/ u8 filler_91[0x5];
+             u16 randomMoves:1;
+             u8 randomAbilities:1;
+             u8 randomBST:1;
+             u8 randomType:1;
+             u8 randomEvos:1;
+             u8 filler_9912:4;
+    /*0x92*/ u8 filler_91[0x4];
              u8 playerGfxType;
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
