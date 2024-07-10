@@ -196,10 +196,10 @@ struct SpecialStatus
     u8 statLowered:1;
     u8 lightningRodRedirected:1;
     u8 restoredBattlerSprite: 1;
-    u8 traced:1;
     u8 faintedHasReplacement:1;
     u8 focusBanded:1;
     u8 focusSashed:1;
+    u8 unused:1;
     // End of byte
     u8 sturdied:1;
     u8 stormDrainRedirected:1;

@@ -7140,8 +7140,7 @@ bool32 DoSwitchInAbilities(u32 battler)
     return (TryPrimalReversion(battler)
          || AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, battler, 0, 0, 0)
          || (gBattleWeather & B_WEATHER_ANY && WEATHER_HAS_EFFECT && AbilityBattleEffects(ABILITYEFFECT_ON_WEATHER, battler, 0, 0, 0))
-         || (gFieldStatuses & STATUS_FIELD_TERRAIN_ANY && AbilityBattleEffects(ABILITYEFFECT_ON_TERRAIN, battler, 0, 0, 0))
-         || AbilityBattleEffects(ABILITYEFFECT_TRACE2, 0, 0, 0, 0));
+         || (gFieldStatuses & STATUS_FIELD_TERRAIN_ANY && AbilityBattleEffects(ABILITYEFFECT_ON_TERRAIN, battler, 0, 0, 0)));
 }
 
 static void UpdateSentMonFlags(u32 battler)
@@ -7288,6 +7287,14 @@ static bool32 DoSwitchInEffectsForBattler(u32 battler)
             gDisableStructs[battler].truantCounter = 1;
 
         gDisableStructs[battler].truantSwitchInHack = 0;
+
+        for (i = 0; i < gBattlersCount; i++)
+        {
+            if (i != battler
+             && GetBattlerAbility(i) == ABILITY_TRACE
+             && AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, i, 0, 0, 0))
+                return TRUE;
+        }
 
         if (DoSwitchInAbilities(battler) || ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, battler, FALSE))
             return TRUE;
@@ -9226,7 +9233,6 @@ static void Cmd_various(void)
     case VARIOUS_RESET_SWITCH_IN_ABILITY_BITS:
     {
         VARIOUS_ARGS();
-        gSpecialStatuses[battler].traced = FALSE;
         gSpecialStatuses[battler].switchInAbilityDone = FALSE;
         break;
     }
@@ -9459,7 +9465,6 @@ static void Cmd_various(void)
         gBattlescriptCurrInstr = cmd->nextInstr;
         AbilityBattleEffects(ABILITYEFFECT_NEUTRALIZINGGAS, battler, 0, 0, 0);
         AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, battler, 0, 0, 0);
-        AbilityBattleEffects(ABILITYEFFECT_TRACE2, battler, 0, 0, 0);
         AbilityBattleEffects(ABILITYEFFECT_OPPORTUNIST, battler, 0, 0, 0);
         return;
     }

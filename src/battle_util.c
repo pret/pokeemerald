@@ -4247,6 +4247,50 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
         gBattleScripting.battler = battler;
         switch (gLastUsedAbility)
         {
+        case ABILITY_TRACE:
+            {
+                u32 chosenTarget;
+                u32 target1;
+                u32 target2;
+
+                if (gSpecialStatuses[battler].switchInAbilityDone)
+                    break;
+                if (gBattleResources->flags->flags[battler] & RESOURCE_FLAG_TRACED)
+                    break;
+
+                side = (BATTLE_OPPOSITE(GetBattlerPosition(battler))) & BIT_SIDE;
+                target1 = GetBattlerAtPosition(side);
+                target2 = GetBattlerAtPosition(side + BIT_FLANK);
+                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+                {
+                    if (!gAbilitiesInfo[gBattleMons[target1].ability].cantBeTraced && gBattleMons[target1].hp != 0
+                        && !gAbilitiesInfo[gBattleMons[target2].ability].cantBeTraced && gBattleMons[target2].hp != 0)
+                        chosenTarget = GetBattlerAtPosition((RandomPercentage(RNG_TRACE, 50) * 2) | side), effect++;
+                    else if (!gAbilitiesInfo[gBattleMons[target1].ability].cantBeTraced && gBattleMons[target1].hp != 0)
+                        chosenTarget = target1, effect++;
+                    else if (!gAbilitiesInfo[gBattleMons[target2].ability].cantBeTraced && gBattleMons[target2].hp != 0)
+                        chosenTarget = target2, effect++;
+                }
+                else
+                {
+                    if (!gAbilitiesInfo[gBattleMons[target1].ability].cantBeTraced && gBattleMons[target1].hp != 0)
+                        chosenTarget = target1, effect++;
+                }
+
+                if (effect != 0)
+                {
+                    BattleScriptPushCursorAndCallback(BattleScript_TraceActivatesEnd3);
+                    gBattleResources->flags->flags[battler] &= ~RESOURCE_FLAG_TRACED;
+                    gBattleStruct->tracedAbility[battler] = gLastUsedAbility = gBattleMons[chosenTarget].ability;
+                    RecordAbilityBattle(chosenTarget, gLastUsedAbility); // Record the opposing battler has this ability
+                    battler = gBattlerAbility = gBattleScripting.battler = battler;
+
+                    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, chosenTarget, gBattlerPartyIndexes[chosenTarget])
+                    PREPARE_ABILITY_BUFFER(gBattleTextBuff2, gLastUsedAbility)
+                }
+            }
+            break;
         case ABILITY_IMPOSTER:
             if (IsBattlerAlive(BATTLE_OPPOSITE(battler))
                 && !(gBattleMons[BATTLE_OPPOSITE(battler)].status2 & (STATUS2_TRANSFORMED | STATUS2_SUBSTITUTE))
@@ -4582,13 +4626,6 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 gBattleStruct->supersweetSyrup[GetBattlerSide(battler)] |= gBitTable[gBattlerPartyIndexes[battler]];
                 BattleScriptPushCursorAndCallback(BattleScript_SupersweetSyrupActivates);
                 effect++;
-            }
-            break;
-        case ABILITY_TRACE:
-            if (!(gSpecialStatuses[battler].traced))
-            {
-                gBattleResources->flags->flags[battler] |= RESOURCE_FLAG_TRACED;
-                gSpecialStatuses[battler].traced = TRUE;
             }
             break;
         case ABILITY_CLOUD_NINE:
@@ -5981,48 +6018,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             }
         }
         break;
-    case ABILITYEFFECT_TRACE1:
-    case ABILITYEFFECT_TRACE2:
-        for (i = 0; i < gBattlersCount; i++)
-        {
-            if (gBattleMons[i].ability == ABILITY_TRACE && (gBattleResources->flags->flags[i] & RESOURCE_FLAG_TRACED))
-            {
-                u32 chosenTarget;
-                u32 side = (BATTLE_OPPOSITE(GetBattlerPosition(i))) & BIT_SIDE; // side of the opposing Pokémon
-                u32 target1 = GetBattlerAtPosition(side);
-                u32 target2 = GetBattlerAtPosition(side + BIT_FLANK);
 
-                if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                {
-                    if (!gAbilitiesInfo[gBattleMons[target1].ability].cantBeTraced && gBattleMons[target1].hp != 0
-                     && !gAbilitiesInfo[gBattleMons[target2].ability].cantBeTraced && gBattleMons[target2].hp != 0)
-                        chosenTarget = GetBattlerAtPosition((RandomPercentage(RNG_TRACE, 50) * 2) | side), effect++;
-                    else if (!gAbilitiesInfo[gBattleMons[target1].ability].cantBeTraced && gBattleMons[target1].hp != 0)
-                        chosenTarget = target1, effect++;
-                    else if (!gAbilitiesInfo[gBattleMons[target2].ability].cantBeTraced && gBattleMons[target2].hp != 0)
-                        chosenTarget = target2, effect++;
-                }
-                else
-                {
-                    if (!gAbilitiesInfo[gBattleMons[target1].ability].cantBeTraced && gBattleMons[target1].hp != 0)
-                        chosenTarget = target1, effect++;
-                }
-
-                if (effect != 0)
-                {
-                    BattleScriptPushCursorAndCallback(BattleScript_TraceActivatesEnd3);
-                    gBattleResources->flags->flags[i] &= ~RESOURCE_FLAG_TRACED;
-                    gBattleStruct->tracedAbility[i] = gLastUsedAbility = gBattleMons[chosenTarget].ability;
-                    RecordAbilityBattle(chosenTarget, gLastUsedAbility); // Record the opposing battler has this ability
-                    battler = gBattlerAbility = gBattleScripting.battler = i;
-
-                    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, chosenTarget, gBattlerPartyIndexes[chosenTarget])
-                    PREPARE_ABILITY_BUFFER(gBattleTextBuff2, gLastUsedAbility)
-                    break;
-                }
-            }
-        }
-        break;
     case ABILITYEFFECT_NEUTRALIZINGGAS:
         // Prints message only. separate from ABILITYEFFECT_ON_SWITCHIN bc activates before entry hazards
         for (i = 0; i < gBattlersCount; i++)
