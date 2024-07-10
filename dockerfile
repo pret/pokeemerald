@@ -22,12 +22,16 @@ RUN git clone https://github.com/pret/agbcc
 
 WORKDIR /agbcc
 
-# Build agbcc and install it
-WORKDIR /
+RUN ./build.sh
 
-WORKDIR /pokeemerald
+# Build agbcc and install it
+#WORKDIR /
+
+#WORKDIR /pokeemerald
 
 
 # Command to build the ROM
 #CMD ["cd", "pokeemerald"]
 #CMD ["make"]
+#CMD ["/bin/bash", "-c","./install.sh ../pokeemerald ","cd ..", "cd /pokeemerald && make"]
+CMD ["/bin/bash", "-c", "./install.sh ../pokeemerald && cd .. && cd pokeemerald && make"]
