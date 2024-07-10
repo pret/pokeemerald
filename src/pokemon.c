@@ -8984,12 +8984,7 @@ u16 GetSpeciesRandomSeeded(u16 species)
 
 u16 GetSpeciesRandomNotSeeded(u16 species)
 {
-    u16 *stemp = Alloc(sizeof(sRandomSpeciesLegendary));
-    DmaCopy16(3, sRandomSpeciesLegendary, stemp, sizeof(sRandomSpeciesLegendary));
-    Shuffle16(stemp, RANDOM_SPECIES_COUNT_LEGENDARY);
-    species = stemp[RandomModulo(species, RANDOM_SPECIES_COUNT_LEGENDARY)];
-    Free(stemp);
-    return species;
+    return sRandomSpeciesLegendary[RandomModulo(species, RANDOM_SPECIES_COUNT_LEGENDARY)];
 }
 
 u16 GetRandomMove(u16 move, u16 species)
