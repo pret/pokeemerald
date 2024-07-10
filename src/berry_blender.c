@@ -916,14 +916,14 @@ static const u8 sBlackPokeblockFlavorFlags[] = {
     (1 << FLAVOR_SOUR)   | (1 << FLAVOR_SWEET)  | (1 << FLAVOR_SPICY),
 };
 
-static const u8 sUnused[] =
-{
-    0xfe, 0x02, 0x02, 0xce, 0xd0, 0x37, 0x44, 0x07, 0x1f, 0x0c, 0x10,
-    0x00, 0xff, 0xfe, 0x91, 0x72, 0xce, 0xd0, 0x37, 0x44, 0x07, 0x1f,
-    0x0c, 0x10, 0x00, 0xff, 0x06, 0x27, 0x02, 0xff, 0x00, 0x0c, 0x48,
-    0x02, 0xff, 0x00, 0x01, 0x1f, 0x02, 0xff, 0x00, 0x16, 0x37, 0x02,
-    0xff, 0x00, 0x0d, 0x50, 0x4b, 0x02, 0xff, 0x06, 0x06, 0x06, 0x06,
-    0x05, 0x03, 0x03, 0x03, 0x02, 0x02, 0x03, 0x03, 0x03, 0x03, 0x02
+static const u8 sJPText_GoodTvReady[] = _("\nいいTVができました "); // Unused
+static const u8 sJPText_BadTvReady[] = _("\nダメTVができました "); // Unused
+static const u8 sJPText_Flavors[][5] = {_("からい"), _("しぶい"), _("あまい"), _("にがい"), _("すっぱい")}; // Unused
+
+static const u8 sUnused[] = {
+    6, 6, 6, 6, 5,
+    3, 3, 3, 2, 2,
+    3, 3, 3, 3, 2
 };
 
 static const struct WindowTemplate sBlenderRecordWindowTemplate =
@@ -1908,7 +1908,7 @@ static void Task_HandleOpponent1(u8 taskId)
 static void Task_HandleOpponent2(u8 taskId)
 {
     u32 var1 = (sBerryBlender->arrowPos + 0x1800) & 0xFFFF;
-    u32 arrowId = sBerryBlender->playerIdToArrowId[2] & 0xFF;
+    u8 arrowId = sBerryBlender->playerIdToArrowId[2];
     if ((var1 >> 8) > sArrowHitRangeStart[arrowId] + 20 && (var1 >> 8) < sArrowHitRangeStart[arrowId] + 40)
     {
         if (!gTasks[taskId].tDidInput)
@@ -1925,11 +1925,9 @@ static void Task_HandleOpponent2(u8 taskId)
                 }
                 else
                 {
-                    u8 value;
                     if (rand > 65)
                         gRecvCmds[2][BLENDER_COMM_SCORE] = LINKCMD_BLENDER_SCORE_BEST;
-                    value = rand - 41;
-                    if (value < 25)
+                    if (rand > 40 && rand <= 65)
                         gRecvCmds[2][BLENDER_COMM_SCORE] = LINKCMD_BLENDER_SCORE_GOOD;
                     if (rand < 10)
                         CreateOpponentMissTask(2, 5);
@@ -1953,7 +1951,7 @@ static void Task_HandleOpponent2(u8 taskId)
 static void Task_HandleOpponent3(u8 taskId)
 {
     u32 var1 = (sBerryBlender->arrowPos + 0x1800) & 0xFFFF;
-    u32 arrowId = sBerryBlender->playerIdToArrowId[3] & 0xFF;
+    u8 arrowId = sBerryBlender->playerIdToArrowId[3];
     if ((var1 >> 8) > sArrowHitRangeStart[arrowId] + 20 && (var1 >> 8) < sArrowHitRangeStart[arrowId] + 40)
     {
         if (gTasks[taskId].data[0] == 0)
@@ -1971,16 +1969,9 @@ static void Task_HandleOpponent3(u8 taskId)
                 else
                 {
                     if (rand > 60)
-                    {
                         gRecvCmds[3][BLENDER_COMM_SCORE] = LINKCMD_BLENDER_SCORE_BEST;
-                    }
-                    else
-                    {
-                        s8 value = rand - 56; // makes me wonder what the original code was
-                        u8 value2 = value;
-                        if (value2 < 5)
-                            gRecvCmds[3][BLENDER_COMM_SCORE] = LINKCMD_BLENDER_SCORE_GOOD;
-                    }
+                    else if (rand > 55 && rand <= 60)
+                        gRecvCmds[3][BLENDER_COMM_SCORE] = LINKCMD_BLENDER_SCORE_GOOD;
                     if (rand < 5)
                         CreateOpponentMissTask(3, 5);
                 }

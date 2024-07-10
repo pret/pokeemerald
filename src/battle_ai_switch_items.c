@@ -335,32 +335,29 @@ static bool32 FindMonThatAbsorbsOpponentsMove(u32 battler, bool32 emitResult)
     // Create an array of possible absorb abilities so the AI considers all of them
     if (gMovesInfo[gLastLandedMoves[battler]].type == TYPE_FIRE)
     {
-        absorbingTypeAbilities[0] = ABILITY_FLASH_FIRE;
-        numAbsorbingAbilities = 1;
+        absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_FLASH_FIRE;
     }
     else if (gMovesInfo[gLastLandedMoves[battler]].type == TYPE_WATER)
     {
-        absorbingTypeAbilities[0] = ABILITY_WATER_ABSORB;
-        absorbingTypeAbilities[1] = ABILITY_STORM_DRAIN;
-        absorbingTypeAbilities[2] = ABILITY_DRY_SKIN;
-        numAbsorbingAbilities = 3;
+        absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_WATER_ABSORB;
+        absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_DRY_SKIN;
+        if (B_REDIRECT_ABILITY_IMMUNITY >= GEN_5)
+            absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_STORM_DRAIN;
     }
     else if (gMovesInfo[gLastLandedMoves[battler]].type == TYPE_ELECTRIC)
     {
-        absorbingTypeAbilities[0] = ABILITY_VOLT_ABSORB;
-        absorbingTypeAbilities[1] = ABILITY_MOTOR_DRIVE;
-        absorbingTypeAbilities[2] = ABILITY_LIGHTNING_ROD;
-        numAbsorbingAbilities = 3;
+        absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_VOLT_ABSORB;
+        absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_MOTOR_DRIVE;
+        if (B_REDIRECT_ABILITY_IMMUNITY >= GEN_5)
+            absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_LIGHTNING_ROD;
     }
     else if (gMovesInfo[gLastLandedMoves[battler]].type == TYPE_GRASS)
     {
-        absorbingTypeAbilities[0] = ABILITY_SAP_SIPPER;
-        numAbsorbingAbilities = 1;
+        absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_SAP_SIPPER;
     }
     else if (gMovesInfo[gLastLandedMoves[battler]].type == TYPE_GROUND)
     {
-        absorbingTypeAbilities[0] = ABILITY_EARTH_EATER;
-        numAbsorbingAbilities = 1;
+        absorbingTypeAbilities[numAbsorbingAbilities++] = ABILITY_EARTH_EATER;
     }
     else
     {
