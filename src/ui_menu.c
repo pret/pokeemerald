@@ -75,6 +75,7 @@ enum WindowIds
 //==========EWRAM==========//
 static EWRAM_DATA struct MenuResources *sMenuDataPtr = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
+static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
 
 //==========STATIC=DEFINES==========//
 static void Menu_RunSetup(void);
@@ -99,19 +100,19 @@ static const struct BgTemplate sMenuBgTemplates[] =
         .bg = 0,    // windows, etc
         .charBaseIndex = 0,
         .mapBaseIndex = 30,
-        .priority = 1
+        .priority = 0
     }, 
     {
         .bg = 1,    // this bg loads the UI tilemap
         .charBaseIndex = 3,
         .mapBaseIndex = 28,
-        .priority = 2
+        .priority = 1
     },
     {
         .bg = 2,    // this bg loads the UI tilemap
-        .charBaseIndex = 0,
+        .charBaseIndex = 2,
         .mapBaseIndex = 26,
-        .priority = 0
+        .priority = 2
     }
 };
 
@@ -152,6 +153,10 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
 static const u32 sMenuTiles[] = INCBIN_U32("graphics/ui_menu/background_tileset.4bpp.lz");
 static const u32 sMenuTilemap[] = INCBIN_U32("graphics/ui_menu/background_tileset.bin.lz");
 static const u16 sMenuPalette[] = INCBIN_U16("graphics/ui_menu/background_pal.gbapal");
+
+static const u32 sScrollBgTiles[] = INCBIN_U32("graphics/ui_main_menu/scroll_tiles.4bpp.lz");
+static const u32 sScrollBgTilemap[] = INCBIN_U32("graphics/ui_main_menu/scroll_tiles.bin.lz");
+static const u16 sScrollBgPalette[] = INCBIN_U16("graphics/ui_main_menu/scroll_tiles.gbapal");
 
 enum Colors
 {
@@ -318,6 +323,7 @@ static void Menu_VBlankCB(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
+    ChangeBgY(2, 128, BG_COORD_SUB);
 }
 
 static bool8 Menu_DoGfxSetup(void)
@@ -400,6 +406,7 @@ static void Menu_FreeResources(void)
     FreeResourcesAndDestroySprite(&gSprites[sMenuDataPtr->monIconSpriteId], sMenuDataPtr->monIconSpriteId);
     try_free(sMenuDataPtr);
     try_free(sBg1TilemapBuffer);
+    try_free(sBg2TilemapBuffer);
     FreeAllWindowBuffers();
 }
 
@@ -434,6 +441,15 @@ static bool8 StatEditor_InitBgs(void)
     InitBgsFromTemplates(0, sMenuBgTemplates, NELEMS(sMenuBgTemplates));
     SetBgTilemapBuffer(1, sBg1TilemapBuffer);
     ScheduleBgCopyTilemapToVram(1);
+
+    sBg2TilemapBuffer = Alloc(0x800);
+    if (sBg2TilemapBuffer == NULL)
+        return FALSE;
+    
+    memset(sBg2TilemapBuffer, 0, 0x800);
+    SetBgTilemapBuffer(2, sBg2TilemapBuffer);
+    ScheduleBgCopyTilemapToVram(2);
+
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     ShowBg(0);
     ShowBg(1);
@@ -458,7 +474,20 @@ static bool8 Menu_LoadGraphics(void)
         }
         break;
     case 2:
+        ResetTempTileDataBuffers();
+        DecompressAndCopyTileDataToVram(2, sScrollBgTiles, 0, 0, 0);
+        sMenuDataPtr->gfxLoadState++;
+        break;
+    case 3:
+        if (FreeTempTileDataBuffersIfPossible() != TRUE)
+        {
+            LZDecompressWram(sScrollBgTilemap, sBg2TilemapBuffer);
+            sMenuDataPtr->gfxLoadState++;
+        }
+        break;
+    case 4:
         LoadPalette(sMenuPalette, 0, 32);
+        LoadPalette(sScrollBgPalette, 16, 32);
         sMenuDataPtr->gfxLoadState++;
         break;
     default:
