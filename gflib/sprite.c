@@ -1443,7 +1443,7 @@ void SetOamMatrixRotationScaling(u8 matrixNum, s16 xScale, s16 yScale, u16 rotat
     CopyOamMatrix(matrixNum, &matrix);
 }
 
-u16 LoadSpriteSheet(const struct SpriteSheet *sheet)
+static u16 LoadSpriteSheetWithOffset(const struct SpriteSheet *sheet, u32 offset)
 {
     s16 tileStart = AllocSpriteTiles(sheet->size / TILE_SIZE_4BPP);
 
@@ -1454,9 +1454,14 @@ u16 LoadSpriteSheet(const struct SpriteSheet *sheet)
     else
     {
         AllocSpriteTileRange(sheet->tag, (u16)tileStart, sheet->size / TILE_SIZE_4BPP);
-        CpuSmartCopy16(sheet->data, (u8 *)OBJ_VRAM0 + TILE_SIZE_4BPP * tileStart, sheet->size);
+        CpuSmartCopy16(sheet->data, (u8 *)OBJ_VRAM0 + TILE_SIZE_4BPP * tileStart + offset, sheet->size - offset);
         return (u16)tileStart;
     }
+}
+
+u16 LoadSpriteSheet(const struct SpriteSheet *sheet)
+{
+    return LoadSpriteSheetWithOffset(sheet, 0);
 }
 
 // Like LoadSpriteSheet, but checks if already loaded, and uses template image frames
@@ -1469,10 +1474,10 @@ u16 LoadSpriteSheetByTemplate(const struct SpriteTemplate *template, u32 frame, 
         return TAG_NONE;
     if ((tileStart = GetSpriteTileStartByTag(template->tileTag)) != TAG_NONE) // return if already loaded
         return tileStart;
-    sheet.data = template->images[frame].data - offset;
+    sheet.data = template->images[frame].data;
     sheet.size = template->images[frame].size;
     sheet.tag = template->tileTag;
-    return LoadSpriteSheet(&sheet);
+    return LoadSpriteSheetWithOffset(&sheet, offset);
 }
 
 void LoadSpriteSheets(const struct SpriteSheet *sheets)
