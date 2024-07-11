@@ -215,9 +215,9 @@ Note that in msys2, Copy is Ctrl+Insert and Paste is Shift+Insert.
 
 To install Python on msys2, simply run the following commands:
 
-    ```bash
-    pacman -S mingw-w64-x86_64-python3
-    ```
+```bash
+pacman -S mingw-w64-x86_64-python3
+```
 
 Python is now installed.
 
@@ -475,6 +475,20 @@ devkitARM is now installed.
 
 Then proceed to [Choosing where to store pokeemerald Expansion (Linux)](#choosing-where-to-store-pokeemerald-expansion-linux).
 
+### NixOS
+Run the following command to start an interactive shell with the necessary packages:
+```bash
+nix-shell -p pkgsCross.arm-embedded.stdenv.cc git pkg-config libpng
+```
+Then proceed to [Choosing where to store pokeemerald Expansion (Linux)](#choosing-where-to-store-pokeemerald-expansion-linux).
+
+### NixOS
+Run the following command to start an interactive shell with the necessary packages:
+```bash
+nix-shell -p pkgsCross.arm-embedded.stdenv.cc git pkg-config libpng
+```
+Then proceed to [Choosing where to store pokeemerald Expansion (Linux)](#choosing-where-to-store-pokeemerald-expansion-linux).
+
 ### Other distributions
 _(Specific instructions for other distributions would be greatly appreciated!)_
 
@@ -592,7 +606,8 @@ Note that this is not necessary for a non-modern (agbcc) build since those are b
 
 <details>
     <summary><i>Deprecated; installing agbcc is optional since 1.7.0</i>.</summary>
-2. Install agbcc into pokeemerald-expansion. The commands to run depend on certain conditions. **You should only follow one of the listed instructions**:
+
+1. Install agbcc into pokeemerald-expansion. The commands to run depend on certain conditions. **You should only follow one of the listed instructions**:
 - If agbcc has **not been built before** in the folder where you chose to store pokeemerald Expansion, run the following commands to build and install it into pokeemerald-expansion:
 
     ```bash
@@ -621,18 +636,20 @@ Note that this is not necessary for a non-modern (agbcc) build since those are b
     <details>
         <summary><i>Note...</i></summary>
 
-        > If building agbcc or pokeemerald results in an error, try deleting the agbcc folder and re-installing agbcc as if it has not been built before.
+    > If building agbcc or pokeemerald results in an error, try deleting the agbcc folder and re-installing agbcc as if it has not been built before.
     </details>
 
-3. Once agbcc is installed, change directory back to the base directory where pokeemerald-expansion and agbcc are stored:
+2. Once agbcc is installed, change directory back to the base directory where pokeemerald-expansion and agbcc are stored:
 
     ```bash
     cd ..
     ```
-    
-4. To compile with agbcc:
 
-    ```make agbcc```
+3. To compile with agbcc:
+
+    ```bash
+    make agbcc
+    ```
 
 </details>
 

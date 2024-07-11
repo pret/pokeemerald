@@ -164,6 +164,18 @@ bool8 HasAtLeastOneBerry(void)
     return FALSE;
 }
 
+bool8 HasAtLeastOnePokeBall(void)
+{
+    u16 i;
+
+    for (i = FIRST_BALL; i <= LAST_BALL; i++)
+    {
+        if (CheckBagHasItem(i, 1) == TRUE)
+            return TRUE;
+    }
+    return FALSE;
+}
+
 bool8 CheckBagHasSpace(u16 itemId, u16 count)
 {
     if (ItemId_GetPocket(itemId) == POCKET_NONE)

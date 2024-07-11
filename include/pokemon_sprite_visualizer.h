@@ -1,10 +1,10 @@
-#ifndef GUARD_POKEMON_DEBUG_H
-#define GUARD_POKEMON_DEBUG_H
+#ifndef GUARD_POKEMON_SPRITE_VISUALIZER_H
+#define GUARD_POKEMON_SPRITE_VISUALIZER_H
 
-#include "constants/pokemon_debug.h"
+#include "constants/pokemon_sprite_visualizer.h"
 
 //Structs
-struct PokemonDebugModifyArrows
+struct PokemonSpriteVisualizerModifyArrows
 {
     u8 arrowSpriteId[2];
     u16 minValue;
@@ -17,13 +17,13 @@ struct PokemonDebugModifyArrows
     u8 typeOfVal;
 };
 
-struct PokemonDebugOptionArrows
+struct PokemonSpriteVisualizerOptionArrows
 {
     u8 arrowSpriteId[1];
     u8 currentDigit;
 };
 
-struct PokemonDebugYPosModifiyArrows
+struct PokemonSpriteVisualizerYPosModifiyArrows
 {
     u8 arrowSpriteId[1];
     u8 currentDigit;
@@ -43,7 +43,7 @@ struct PokemonSpriteOffsets
     s8 offset_front_elevation;
 };
 
-struct PokemonDebugMenu
+struct PokemonSpriteVisualizer
 {
     u16 currentmonId;
     u8 currentmonWindowId;
@@ -55,9 +55,9 @@ struct PokemonDebugMenu
     u8 frontShadowSpriteId;
     bool8 isShiny;
     bool8 isFemale;
-    struct PokemonDebugModifyArrows modifyArrows;
-    struct PokemonDebugOptionArrows optionArrows;
-    struct PokemonDebugYPosModifiyArrows yPosModifyArrows;
+    struct PokemonSpriteVisualizerModifyArrows modifyArrows;
+    struct PokemonSpriteVisualizerOptionArrows optionArrows;
+    struct PokemonSpriteVisualizerYPosModifiyArrows yPosModifyArrows;
     struct PokemonSpriteConstValues constSpriteValues;
     struct PokemonSpriteOffsets offsetsSpriteValues;
     u8 animIdBack;
@@ -68,7 +68,7 @@ struct PokemonDebugMenu
     u8 submenuYpos[3];
 };
 
-void CB2_Debug_Pokemon(void);
+void CB2_Pokemon_Sprite_Visualizer(void);
 
 
-#endif // GUARD_POKEMON_DEBUG_H
+#endif // GUARD_POKEMON_SPRITE_VISUALIZER_H

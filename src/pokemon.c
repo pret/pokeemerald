@@ -1143,6 +1143,14 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         {
             isShiny = TRUE;
         }
+        else if (P_ONLY_OBTAINABLE_SHINIES && InBattlePyramid())
+        {
+            isShiny = FALSE;
+        }
+        else if (P_NO_SHINIES_WITHOUT_POKEBALLS && !HasAtLeastOnePokeBall())
+        {
+            isShiny = FALSE;
+        }
         else
         {
             u32 totalRerolls = 0;
@@ -2383,8 +2391,8 @@ u32 GetMonData2(struct Pokemon *mon, s32 field)
 struct EvolutionTrackerBitfield
 {
     u16 a: 5;
-    u16 b: 4;
-    u16 unused: 7;
+    u16 b: 5;
+    u16 unused: 6;
 };
 
 union EvolutionTracker
@@ -2856,6 +2864,9 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
             retVal = nature ^ boxMon->hiddenNatureModifier;
             break;
         }
+        case MON_DATA_DAYS_SINCE_FORM_CHANGE:
+            retVal = boxMon->daysSinceFormChange;
+            break;
         default:
             break;
         }
@@ -3290,6 +3301,9 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             boxMon->hiddenNatureModifier = nature ^ hiddenNature;
             break;
         }
+        case MON_DATA_DAYS_SINCE_FORM_CHANGE:
+            SET8(boxMon->daysSinceFormChange);
+            break;
         }
     }
 
@@ -3391,6 +3405,9 @@ u8 GetMonsStateToDoubles(void)
     s32 aliveCount = 0;
     s32 i;
     CalculatePlayerPartyCount();
+
+    if (OW_DOUBLE_APPROACH_WITH_ONE_MON)
+        return PLAYER_HAS_TWO_USABLE_MONS;
 
     if (gPlayerPartyCount == 1)
         return gPlayerPartyCount; // PLAYER_HAS_ONE_MON
@@ -3666,6 +3683,7 @@ void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst)
     dst->type1 = gSpeciesInfo[dst->species].types[0];
     dst->type2 = gSpeciesInfo[dst->species].types[1];
     dst->type3 = TYPE_MYSTERY;
+    dst->isShiny = IsMonShiny(src);
     dst->ability = GetAbilityBySpecies(dst->species, dst->abilityNum);
     GetMonData(src, MON_DATA_NICKNAME, nickname);
     StringCopy_Nickname(dst->nickname, nickname);
@@ -4448,6 +4466,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
     switch (mode)
     {
     case EVO_MODE_NORMAL:
+    case EVO_MODE_BATTLE_ONLY:
         level = GetMonData(mon, MON_DATA_LEVEL, 0);
         friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, 0);
 
@@ -4536,11 +4555,11 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     targetSpecies = evolutions[i].targetSpecies;
                 break;
             case EVO_LEVEL_FAMILY_OF_FOUR:
-                if (evolutions[i].param <= level && (personality % 100) != 0)
+                if (mode == EVO_MODE_BATTLE_ONLY && evolutions[i].param <= level && (personality % 100) != 0)
                     targetSpecies = evolutions[i].targetSpecies;
                 break;
             case EVO_LEVEL_FAMILY_OF_THREE:
-                if (evolutions[i].param <= level && (personality % 100) == 0)
+                if (mode == EVO_MODE_BATTLE_ONLY && evolutions[i].param <= level && (personality % 100) == 0)
                     targetSpecies = evolutions[i].targetSpecies;
                 break;
             case EVO_BEAUTY:
@@ -4682,6 +4701,14 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                 break;
             case EVO_RECOIL_DAMAGE_FEMALE:
                 if (evolutionTracker >= evolutions[i].param && GetMonGender(mon) == MON_FEMALE)
+                    targetSpecies = evolutions[i].targetSpecies;
+                break;
+            case EVO_DEFEAT_WITH_ITEM:
+                if (evolutionTracker >= 3)
+                    targetSpecies = evolutions[i].targetSpecies;
+                break;
+            case EVO_OVERWORLD_STEPS:
+                if (evolutionTracker >= evolutions[i].param)
                     targetSpecies = evolutions[i].targetSpecies;
                 break;
             }
@@ -6220,7 +6247,7 @@ void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)
 
 bool8 HasTwoFramesAnimation(u16 species)
 {
-    return species != SPECIES_UNOWN;
+    return P_TWO_FRAME_FRONT_SPRITES && species != SPECIES_UNOWN;
 }
 
 static bool8 ShouldSkipFriendshipChange(void)
@@ -6471,20 +6498,24 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
                 case FORM_CHANGE_ITEM_USE:
                     if (arg == formChanges[i].param1)
                     {
+                        bool32 pass = TRUE;
                         switch (formChanges[i].param2)
                         {
                         case DAY:
-                            if (GetTimeOfDay() != TIME_NIGHT)
-                                targetSpecies = formChanges[i].targetSpecies;
+                            if (GetTimeOfDay() == TIME_NIGHT)
+                                pass = FALSE;
                             break;
                         case NIGHT:
-                            if (GetTimeOfDay() == TIME_NIGHT)
-                                targetSpecies = formChanges[i].targetSpecies;
-                            break;
-                        default:
-                            targetSpecies = formChanges[i].targetSpecies;
+                            if (GetTimeOfDay() != TIME_NIGHT)
+                                pass = FALSE;
                             break;
                         }
+
+                        if (formChanges[i].param3 != STATUS1_NONE && GetBoxMonData(boxMon, MON_DATA_STATUS, NULL) & formChanges[i].param3)
+                            pass = FALSE;
+
+                        if (pass)
+                            targetSpecies = formChanges[i].targetSpecies;
                     }
                     break;
                 case FORM_CHANGE_ITEM_USE_MULTICHOICE:
@@ -6509,6 +6540,7 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
                     break;
                 case FORM_CHANGE_WITHDRAW:
                 case FORM_CHANGE_FAINT:
+                case FORM_CHANGE_DAYS_PASSED:
                     targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_CHANGE_STATUS:
@@ -6534,6 +6566,22 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
     }
 
     return targetSpecies;
+}
+
+void TrySetDayLimitToFormChange(struct Pokemon *mon)
+{
+    u32 i;
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    const struct FormChange *formChanges = GetSpeciesFormChanges(species);
+
+    for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
+    {
+        if (formChanges[i].method == FORM_CHANGE_DAYS_PASSED && species != formChanges[i].targetSpecies)
+        {
+            SetMonData(mon, MON_DATA_DAYS_SINCE_FORM_CHANGE, &formChanges[i].param1);
+            break;
+        }
+    }
 }
 
 bool32 DoesSpeciesHaveFormChangeMethod(u16 species, u16 method)
@@ -6814,8 +6862,8 @@ void HealBoxPokemon(struct BoxPokemon *boxMon)
 u16 GetCryIdBySpecies(u16 species)
 {
     species = SanitizeSpeciesId(species);
-    if (gSpeciesInfo[species].cryId >= CRY_COUNT)
-        return 0;
+    if (P_CRIES_ENABLED == FALSE || gSpeciesInfo[species].cryId >= CRY_COUNT)
+        return CRY_NONE;
     return gSpeciesInfo[species].cryId;
 }
 
@@ -6851,4 +6899,39 @@ const u8 *GetMoveAnimationScript(u16 moveId)
         return Move_TACKLE;
     }
     return gMovesInfo[moveId].battleAnimScript;
+}
+
+void UpdateDaysPassedSinceFormChange(u16 days)
+{
+    u32 i;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gPlayerParty[i];
+        u8 daysSinceFormChange;
+
+        if (!GetMonData(mon, MON_DATA_SPECIES, 0))
+            continue;
+
+        daysSinceFormChange = GetMonData(mon, MON_DATA_DAYS_SINCE_FORM_CHANGE, 0);
+        if (daysSinceFormChange == 0)
+            continue;
+
+        if (daysSinceFormChange > days)
+            daysSinceFormChange -= days;
+        else
+            daysSinceFormChange = 0;
+
+        SetMonData(mon, MON_DATA_DAYS_SINCE_FORM_CHANGE, &daysSinceFormChange);
+
+        if (daysSinceFormChange == 0)
+        {
+            u16 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_CHANGE_DAYS_PASSED, 0);
+            
+            if (targetSpecies != SPECIES_NONE)
+            {
+                SetMonData(mon, MON_DATA_SPECIES, &targetSpecies);
+                CalculateMonStats(mon);
+            }
+        }
+    }
 }

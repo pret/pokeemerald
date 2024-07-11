@@ -1,0 +1,48 @@
+name: Docs
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install latest mdbook
+        run: |
+          tag=$(curl 'https://api.github.com/repos/rust-lang/mdbook/releases/latest' | jq -r '.tag_name')
+          url="https://github.com/rust-lang/mdbook/releases/download/${tag}/mdbook-${tag}-x86_64-unknown-linux-gnu.tar.gz"
+          mkdir mdbook
+          curl -sSL $url | tar -xz --directory=./mdbook
+          echo `pwd`/mdbook >> $GITHUB_PATH
+      - name: Build Book
+        run: |
+          cd docs
+          mdbook build
+      - name: Check if Pages is enabled
+        uses: octokit/request-action@v2.x
+        id: check_pages
+        continue-on-error: true
+        with:
+          route: GET /repos/{repo}/pages
+          repo: ${{ github.repository }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        if: steps.check_pages.outcome == 'success'
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'docs/book'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        if: steps.check_pages.outcome == 'success'

@@ -17,17 +17,17 @@
 // Set .compressed = OW_GFX_COMPRESS
 #define COMP OW_GFX_COMPRESS
 
-#if OW_FOLLOWERS_ENABLED
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-#define FOLLOWER_PAL(...)                                   \
-    .followerPalette = DEFAULT(NULL, __VA_ARGS__),          \
-    .followerShinyPalette = DEFAULT_2(NULL, __VA_ARGS__),
+#if OW_POKEMON_OBJECT_EVENTS
+#if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
+#define OVERWORLD_PAL(...)                                  \
+    .overworldPalette = DEFAULT(NULL, __VA_ARGS__),         \
+    .overworldShinyPalette = DEFAULT_2(NULL, __VA_ARGS__),
 #else
-#define FOLLOWER_PAL(...)
-#endif //OW_FOLLOWERS_SHARE_PALETTE == FALSE
+#define OVERWORLD_PAL(...)
+#endif //OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
 
-#define FOLLOWER(picTable, _size, shadow, _tracks, ...)                                     \
-.followerData = {                                                                           \
+#define OVERWORLD(picTable, _size, shadow, _tracks, ...)                                    \
+.overworldData = {                                                                          \
     .tileTag = TAG_NONE,                                                                    \
     .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,                                                \
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,                                         \
@@ -45,10 +45,10 @@
     .images = picTable,                                                                     \
     .affineAnims = gDummySpriteAffineAnimTable,                                             \
 },                                                                                          \
-    FOLLOWER_PAL(__VA_ARGS__)
+    OVERWORLD_PAL(__VA_ARGS__)
 #else
-#define FOLLOWER(picTable, _size, shadow, _tracks, ...)
-#endif //OW_FOLLOWERS_ENABLED
+#define OVERWORLD(picTable, _size, shadow, _tracks, ...)
+#endif //OW_POKEMON_OBJECT_EVENTS
 
 // Maximum value for a female Pokémon is 254 (MON_FEMALE) which is 100% female.
 // 255 (MON_GENDERLESS) is reserved for genderless Pokémon.
@@ -76,11 +76,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .categoryName = _("Unknown"),
         .height = 0,
         .weight = 0,
-        .description = COMPOUND_STRING(
-            "This is a newly discovered Pokémon.\n"
-            "It is currently under investigation.\n"
-            "No detailed information is available\n"
-            "at this time."),
+        .description = gFallbackPokedexText,
         .pokemonScale = 256,
         .pokemonOffset = 0,
         .trainerScale = 256,
@@ -99,8 +95,25 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .iconSprite = gMonIcon_QuestionMark,
         .iconPalIndex = 0,
         FOOTPRINT(QuestionMark)
-    #if OW_FOLLOWERS_ENABLED
-        .followerData = {TAG_NONE, OBJ_EVENT_PAL_TAG_SUBSTITUTE, OBJ_EVENT_PAL_TAG_NONE, 512, 32, 32, 2, SHADOW_SIZE_M, FALSE, COMP, TRACKS_FOOT, &gObjectEventBaseOam_32x32, sOamTables_32x32, sAnimTable_Following, sPicTable_Substitute, gDummySpriteAffineAnimTable},
+    #if OW_POKEMON_OBJECT_EVENTS
+        .overworldData = {
+            .tileTag = TAG_NONE,
+            .paletteTag = OBJ_EVENT_PAL_TAG_SUBSTITUTE,
+            .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+            .size = 512,
+            .width = 32,
+            .height = 32,
+            .paletteSlot = PALSLOT_NPC_1,
+            .shadowSize = SHADOW_SIZE_M,
+            .inanimate = FALSE,
+            .compressed = COMP,
+            .tracks = TRACKS_FOOT,
+            .oam = &gObjectEventBaseOam_32x32,
+            .subspriteTables = sOamTables_32x32,
+            .anims = sAnimTable_Following,
+            .images = sPicTable_Substitute,
+            .affineAnims = gDummySpriteAffineAnimTable,
+        },
     #endif
         .levelUpLearnset = sNoneLevelUpLearnset,
         .teachableLearnset = sNoneTeachableLearnset,

@@ -506,7 +506,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Lugia,                 OBJ_EVENT_PAL_TAG_LUGIA},
     {gObjectEventPal_RubySapphireBrendan,   OBJ_EVENT_PAL_TAG_RS_BRENDAN},
     {gObjectEventPal_RubySapphireMay,       OBJ_EVENT_PAL_TAG_RS_MAY},
-#if OW_MON_POKEBALLS
+#if OW_FOLLOWERS_POKEBALLS
     {gObjectEventPal_MasterBall,            OBJ_EVENT_PAL_TAG_BALL_MASTER},
     {gObjectEventPal_UltraBall,             OBJ_EVENT_PAL_TAG_BALL_ULTRA},
     {gObjectEventPal_GreatBall,             OBJ_EVENT_PAL_TAG_BALL_GREAT},
@@ -537,7 +537,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     #ifdef ITEM_STRANGE_BALL
     {gObjectEventPal_StrangeBall,           OBJ_EVENT_PAL_TAG_BALL_STRANGE},
     #endif //ITEM_STRANGE_BALL
-#endif //OW_MON_POKEBALLS
+#endif //OW_FOLLOWERS_POKEBALLS
     {gObjectEventPal_Substitute,            OBJ_EVENT_PAL_TAG_SUBSTITUTE},
     {gObjectEventPaletteEmotes,             OBJ_EVENT_PAL_TAG_EMOTES},
 #ifdef BUGFIX
@@ -1878,23 +1878,25 @@ struct ObjectEvent *GetFollowerObject(void)
 static const struct ObjectEventGraphicsInfo *SpeciesToGraphicsInfo(u16 species, u8 form)
 {
     const struct ObjectEventGraphicsInfo *graphicsInfo = NULL;
-#if OW_FOLLOWERS_ENABLED
+#if OW_POKEMON_OBJECT_EVENTS
     switch (species)
     {
     case SPECIES_UNOWN: // Letters >A are defined as species >= NUM_SPECIES, so are not contiguous with A
         form %= NUM_UNOWN_FORMS;
-        graphicsInfo = &gSpeciesInfo[form ? SPECIES_UNOWN_B + form - 1 : species].followerData;
+        graphicsInfo = &gSpeciesInfo[form ? SPECIES_UNOWN_B + form - 1 : species].overworldData;
         break;
     default:
-        graphicsInfo = &gSpeciesInfo[species].followerData;
+        graphicsInfo = &gSpeciesInfo[species].overworldData;
         break;
     }
     // Try to avoid OOB or undefined access
-    if (graphicsInfo->tileTag == 0 && species < NUM_SPECIES)
-        return &gSpeciesInfo[SPECIES_NONE].followerData;
-    else if (graphicsInfo->tileTag != TAG_NONE && species >= NUM_SPECIES)
-        return &gSpeciesInfo[SPECIES_NONE].followerData;
-#endif
+    if ((graphicsInfo->tileTag == 0 && species < NUM_SPECIES) || (graphicsInfo->tileTag != TAG_NONE && species >= NUM_SPECIES))
+    {
+        if (OW_SUBSTITUTE_PLACEHOLDER)
+            return &gSpeciesInfo[SPECIES_NONE].overworldData;
+        return NULL;
+    }
+#endif // OW_POKEMON_OBJECT_EVENTS
     return graphicsInfo;
 }
 
@@ -1903,9 +1905,9 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
 {
     u32 paletteNum;
     // Use standalone palette, unless entry is OOB or NULL (fallback to front-sprite-based)
-#if OW_FOLLOWERS_ENABLED == TRUE && OW_FOLLOWERS_SHARE_PALETTE == FALSE
-    if ((shiny && gSpeciesInfo[species].followerPalette)
-    || (!shiny && gSpeciesInfo[species].followerShinyPalette))
+#if OW_POKEMON_OBJECT_EVENTS == TRUE && OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
+    if ((shiny && gSpeciesInfo[species].overworldPalette)
+    || (!shiny && gSpeciesInfo[species].overworldShinyPalette))
     {
         struct SpritePalette spritePalette;
         u16 palTag = shiny ? (species + SPECIES_SHINY_TAG + OBJ_EVENT_PAL_TAG_DYNAMIC) : (species + OBJ_EVENT_PAL_TAG_DYNAMIC);
@@ -1914,9 +1916,9 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
             return paletteNum;
         spritePalette.tag = palTag;
         if (shiny)
-            spritePalette.data = gSpeciesInfo[species].followerShinyPalette;
+            spritePalette.data = gSpeciesInfo[species].overworldShinyPalette;
         else
-            spritePalette.data = gSpeciesInfo[species].followerPalette;
+            spritePalette.data = gSpeciesInfo[species].overworldPalette;
         
         // Check if pal data must be decompressed
         if (IsLZ77Data(spritePalette.data, PLTT_SIZE_4BPP, PLTT_SIZE_4BPP))
@@ -1928,7 +1930,7 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
         paletteNum = LoadSpritePalette(&spritePalette);
     }
     else
-#endif //OW_FOLLOWERS_SHARE_PALETTE
+#endif //OW_POKEMON_OBJECT_EVENTS == TRUE && OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
     {
         // Note that the shiny palette tag is `species + SPECIES_SHINY_TAG`, which must be increased with more pokemon
         // so that palette tags do not overlap
@@ -1983,7 +1985,7 @@ static void RefreshFollowerGraphics(struct ObjectEvent *objEvent)
 
     if (graphicsInfo->oam->size != sprite->oam.size)
     {
-        if (LARGE_OW_SUPPORT && !OW_GFX_COMPRESS)
+        if (OW_LARGE_OW_SUPPORT && !OW_GFX_COMPRESS)
             ReallocSpriteTiles(sprite, graphicsInfo->images->size);
         // Add difference in Y vectors
         sprite->y += -(graphicsInfo->height >> 1) - sprite->centerToCornerVecY;
@@ -2075,9 +2077,11 @@ void UpdateFollowingPokemon(void)
     // 1. GetFollowerInfo returns FALSE
     // 2. Map is indoors and gfx is larger than 32x32
     // 3. flag is set
-    if (OW_FOLLOWERS_ENABLED == FALSE
+    if (OW_POKEMON_OBJECT_EVENTS == FALSE
+     || OW_FOLLOWERS_ENABLED == FALSE
      || !GetFollowerInfo(&species, &form, &shiny)
-     || (gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(species, 0)->oam->size > ST_OAM_SIZE_2)
+     || SpeciesToGraphicsInfo(species, form) == NULL
+     || (gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(species, form)->oam->size > ST_OAM_SIZE_2)
      || FlagGet(FLAG_TEMP_HIDE_FOLLOWER))
     {
         RemoveFollowingPokemon();
@@ -2636,7 +2640,7 @@ static void ObjectEventSetGraphics(struct ObjectEvent *objectEvent, const struct
         UpdateSpritePalette(&sObjectEventSpritePalettes[i], sprite);
 
     // If gfx size changes, we need to reallocate tiles
-    if (LARGE_OW_SUPPORT && !OW_GFX_COMPRESS && graphicsInfo->oam->size != sprite->oam.size)
+    if (OW_LARGE_OW_SUPPORT && !OW_GFX_COMPRESS && graphicsInfo->oam->size != sprite->oam.size)
         ReallocSpriteTiles(sprite, graphicsInfo->images->size);
 
     #if OW_GFX_COMPRESS
@@ -5341,7 +5345,7 @@ bool8 MovementType_FollowPlayer_Moving(struct ObjectEvent *objectEvent, struct S
     else if (objectEvent->movementActionId < MOVEMENT_ACTION_EXIT_POKEBALL)
     {
         UpdateFollowerTransformEffect(objectEvent, sprite);
-        if (OW_MON_BOBBING == TRUE && (sprite->data[5] & 7) == 2)
+        if (OW_FOLLOWERS_BOBBING == TRUE && (sprite->data[5] & 7) == 2)
             sprite->y2 ^= -1;
     }
     return FALSE;
@@ -5362,7 +5366,7 @@ bool8 FollowablePlayerMovement_Idle(struct ObjectEvent *objectEvent, struct Spri
         // finish movement action
         objectEvent->singleMovementActive = 0;
     }
-    else if (OW_MON_BOBBING == TRUE && (sprite->data[3] & 7) == 2)
+    else if (OW_FOLLOWERS_BOBBING == TRUE && (sprite->data[3] & 7) == 2)
     {
         sprite->y2 ^= -1;
     }
@@ -5406,7 +5410,7 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
         ObjectEventSetSingleMovement(objectEvent, sprite, MOVEMENT_ACTION_EXIT_POKEBALL);
         objectEvent->singleMovementActive = 1;
         sprite->sTypeFuncId = 2;
-        if (OW_MON_BOBBING == TRUE)
+        if (OW_FOLLOWERS_BOBBING == TRUE)
             sprite->y2 = 0;
         return TRUE;
     }
@@ -5446,7 +5450,7 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
         else
         {
             objectEvent->movementActionId = GetWalkNormalMovementAction(direction);
-            if (OW_MON_BOBBING == TRUE)
+            if (OW_FOLLOWERS_BOBBING == TRUE)
                 sprite->y2 = -1;
         }
     }
@@ -5470,7 +5474,7 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
     else
     {
         ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkNormalMovementAction(direction));
-        if (OW_MON_BOBBING == TRUE)
+        if (OW_FOLLOWERS_BOBBING == TRUE)
             sprite->y2 = -1;
     }
     #endif
@@ -7033,7 +7037,7 @@ static u8 LoadFillColorPalette(u16 color, u16 paletteTag, struct Sprite *sprite)
 
 static void ObjectEventSetPokeballGfx(struct ObjectEvent *objEvent)
 {
-    #if OW_MON_POKEBALLS
+    #if OW_FOLLOWERS_POKEBALLS
     u32 ball = BALL_POKE;
     if (objEvent->localId == OBJ_EVENT_ID_FOLLOWER)
     {
@@ -7051,7 +7055,7 @@ static void ObjectEventSetPokeballGfx(struct ObjectEvent *objEvent)
             return;
         }
     }
-    #endif
+    #endif //OW_FOLLOWERS_POKEBALLS
     ObjectEventSetGraphicsId(objEvent, OBJ_EVENT_GFX_POKE_BALL);
 }
 
@@ -7147,7 +7151,7 @@ bool8 MovementAction_ExitPokeball_Step1(struct ObjectEvent *objectEvent, struct 
         LoadFillColorPalette(RGB_WHITE, OBJ_EVENT_PAL_TAG_WHITE, sprite);
         // Initialize affine animation
         sprite->affineAnims = sAffineAnims_PokeballFollower;
-        if (LARGE_OW_SUPPORT && !IS_POW_OF_TWO(-sprite->centerToCornerVecX))
+        if (OW_LARGE_OW_SUPPORT && !IS_POW_OF_TWO(-sprite->centerToCornerVecX))
             return FALSE;
         sprite->affineAnims = sAffineAnims_PokeballFollower;
         sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
@@ -7194,7 +7198,7 @@ bool8 MovementAction_EnterPokeball_Step1(struct ObjectEvent *objectEvent, struct
         sprite->subspriteTableNum = 0;
         // Only do affine if sprite width is power of 2
         // (effect looks weird on sprites composed of subsprites like 48x48, etc)
-        if (LARGE_OW_SUPPORT && !IS_POW_OF_TWO(-sprite->centerToCornerVecX))
+        if (OW_LARGE_OW_SUPPORT && !IS_POW_OF_TWO(-sprite->centerToCornerVecX))
             return FALSE;
         sprite->affineAnims = sAffineAnims_PokeballFollower;
         sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
@@ -9237,7 +9241,7 @@ static void UpdateObjectEventElevationAndPriority(struct ObjectEvent *objEvent, 
     {
         // keep subspriteMode synced with player's
         // so that it disappears under bridges when they do
-        if (LARGE_OW_SUPPORT)
+        if (OW_LARGE_OW_SUPPORT)
             sprite->subspriteMode |= gSprites[gPlayerAvatar.spriteId].subspriteMode & SUBSPRITES_IGNORE_PRIORITY;
         // if transitioning between elevations, use the player's elevation
         if (!objEvent->currentElevation)
@@ -9269,7 +9273,7 @@ void ObjectEventUpdateElevation(struct ObjectEvent *objEvent, struct Sprite *spr
     {
         // Ignore subsprite priorities under bridges
         // so all subsprites will display below it
-        if (LARGE_OW_SUPPORT)
+        if (OW_LARGE_OW_SUPPORT)
             sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
         return;
     }
@@ -9667,7 +9671,7 @@ static void DoGroundEffects_OnSpawn(struct ObjectEvent *objEvent, struct Sprite 
 #endif
     {
         flags = 0;
-        if (LARGE_OW_SUPPORT && !sprite->oam.affineMode)
+        if (OW_LARGE_OW_SUPPORT && !sprite->oam.affineMode)
             sprite->subspriteMode = SUBSPRITES_ON;
         UpdateObjectEventElevationAndPriority(objEvent, sprite);
         GetAllGroundEffectFlags_OnSpawn(objEvent, &flags);
@@ -9689,7 +9693,7 @@ static void DoGroundEffects_OnBeginStep(struct ObjectEvent *objEvent, struct Spr
 #endif
     {
         flags = 0;
-        if (LARGE_OW_SUPPORT && !sprite->oam.affineMode)
+        if (OW_LARGE_OW_SUPPORT && !sprite->oam.affineMode)
             sprite->subspriteMode = SUBSPRITES_ON;
         UpdateObjectEventElevationAndPriority(objEvent, sprite);
         GetAllGroundEffectFlags_OnBeginStep(objEvent, &flags);

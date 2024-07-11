@@ -313,7 +313,11 @@ void SetTeraType(struct ScriptContext *ctx)
         SetMonData(&gPlayerParty[partyIndex], MON_DATA_TERA_TYPE, &type);
 }
 
-u32 ScriptGiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 nature, u8 abilityNum, u8 gender, u8 *evs, u8 *ivs, u16 *moves, bool8 isShiny, bool8 ggMaxFactor, u8 teraType)
+/* Creates a Pokemon via script
+ * if side/slot are assigned, it will create the mon at the assigned party location
+ * if slot == PARTY_SIZE, it will give the mon to first available party or storage slot
+ */
+static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u16 item, u8 ball, u8 nature, u8 abilityNum, u8 gender, u8 *evs, u8 *ivs, u16 *moves, bool8 isShiny, bool8 ggMaxFactor, u8 teraType)
 {
     u16 nationalDexNum;
     int sentToPc;
@@ -408,34 +412,43 @@ u32 ScriptGiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 natu
     SetMonData(&mon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
     SetMonData(&mon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
 
-    // find empty party slot to decide whether the Pokémon goes to the Player's party or the storage system.
-    for (i = 0; i < PARTY_SIZE; i++)
+    if (slot < PARTY_SIZE)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
-            break;
-    }
-    if (i >= PARTY_SIZE)
-    {
-        sentToPc = CopyMonToPC(&mon);
+        if (side == 0)
+            CopyMon(&gPlayerParty[slot], &mon, sizeof(struct Pokemon));
+        else
+            CopyMon(&gEnemyParty[slot], &mon, sizeof(struct Pokemon));
+        sentToPc = MON_GIVEN_TO_PARTY;
     }
     else
     {
-        sentToPc = MON_GIVEN_TO_PARTY;
-        CopyMon(&gPlayerParty[i], &mon, sizeof(mon));
-        gPlayerPartyCount = i + 1;
+        // find empty party slot to decide whether the Pokémon goes to the Player's party or the storage system.
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
+                break;
+        }
+        if (i >= PARTY_SIZE)
+        {
+            sentToPc = CopyMonToPC(&mon);
+        }
+        else
+        {
+            sentToPc = MON_GIVEN_TO_PARTY;
+            CopyMon(&gPlayerParty[i], &mon, sizeof(mon));
+            gPlayerPartyCount = i + 1;
+        }
     }
 
-    // set pokédex flags
-    nationalDexNum = SpeciesToNationalPokedexNum(species);
-    switch (sentToPc)
+    if (side == 0)
     {
-    case MON_GIVEN_TO_PARTY:
-    case MON_GIVEN_TO_PC:
-        GetSetPokedexFlag(nationalDexNum, FLAG_SET_SEEN);
-        GetSetPokedexFlag(nationalDexNum, FLAG_SET_CAUGHT);
-        break;
-    case MON_CANT_GIVE:
-        break;
+        // set pokédex flags
+        nationalDexNum = SpeciesToNationalPokedexNum(species);
+        if (sentToPc != MON_CANT_GIVE)
+        {
+            GetSetPokedexFlag(nationalDexNum, FLAG_SET_SEEN);
+            GetSetPokedexFlag(nationalDexNum, FLAG_SET_CAUGHT);
+        }
     }
 
     return sentToPc;
@@ -448,13 +461,17 @@ u32 ScriptGiveMon(u16 species, u8 level, u16 item)
                                 MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1};  // ScriptGiveMonParameterized won't touch the stats' IV.
     u16 moves[MAX_MON_MOVES] = {MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE};
 
-    return ScriptGiveMonParameterized(species, level, item, ITEM_POKE_BALL, NUM_NATURES, NUM_ABILITY_PERSONALITY, MON_GENDERLESS, evs, ivs, moves, FALSE, FALSE, NUMBER_OF_MON_TYPES);
+    return ScriptGiveMonParameterized(0, PARTY_SIZE, species, level, item, ITEM_POKE_BALL, NUM_NATURES, NUM_ABILITY_PERSONALITY, MON_GENDERLESS, evs, ivs, moves, FALSE, FALSE, NUMBER_OF_MON_TYPES);
 }
 
 #define PARSE_FLAG(n, default_) (flags & (1 << (n))) ? VarGet(ScriptReadHalfword(ctx)) : (default_)
 
-void ScrCmd_givemon(struct ScriptContext *ctx)
+/* Give or create a mon to either player or opponent 
+ */
+void ScrCmd_createmon(struct ScriptContext *ctx)
 {
+    u8 side           = ScriptReadByte(ctx);
+    u8 slot           = ScriptReadByte(ctx);
     u16 species       = VarGet(ScriptReadHalfword(ctx));
     u8 level          = VarGet(ScriptReadHalfword(ctx));
 
@@ -488,7 +505,7 @@ void ScrCmd_givemon(struct ScriptContext *ctx)
     u8 ivs[NUM_STATS]        = {hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv};
     u16 moves[MAX_MON_MOVES] = {move1, move2, move3, move4};
 
-    gSpecialVar_Result = ScriptGiveMonParameterized(species, level, item, ball, nature, abilityNum, gender, evs, ivs, moves, isShiny, ggMaxFactor, teraType);
+    gSpecialVar_Result = ScriptGiveMonParameterized(side, slot, species, level, item, ball, nature, abilityNum, gender, evs, ivs, moves, isShiny, ggMaxFactor, teraType);
 }
 
 #undef PARSE_FLAG

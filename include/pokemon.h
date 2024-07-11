@@ -26,6 +26,7 @@ enum {
     MON_DATA_IS_SHINY,
     MON_DATA_HIDDEN_NATURE,
     MON_DATA_HP_LOST,
+    MON_DATA_DAYS_SINCE_FORM_CHANGE,
     MON_DATA_ENCRYPT_SEPARATOR,
     MON_DATA_NICKNAME,
     MON_DATA_NICKNAME10,
@@ -138,8 +139,7 @@ struct PokemonSubstruct1
     u16 move1:11; // 2047 moves.
     u16 evolutionTracker1:5;
     u16 move2:11; // 2047 moves.
-    u16 evolutionTracker2:4;
-    u16 unused_02:1;
+    u16 evolutionTracker2:5;
     u16 move3:11; // 2047 moves.
     u16 unused_04:5;
     u16 move4:11; // 2047 moves.
@@ -247,7 +247,8 @@ struct BoxPokemon
     u8 hasSpecies:1;
     u8 isEgg:1;
     u8 blockBoxRS:1; // Unused, but Pokémon Box Ruby & Sapphire will refuse to deposit a Pokémon with this flag set.
-    u8 unused_13:4;
+    u8 daysSinceFormChange:3; // 7 days.
+    u8 unused_13:1;
     u8 otName[PLAYER_NAME_LENGTH];
     u8 markings:4;
     u8 compressedStatus:4;
@@ -350,7 +351,7 @@ struct Evolution
     u16 targetSpecies;
 };
 
-struct SpeciesInfo /*0x8C*/
+struct SpeciesInfo /*0xC4*/
 {
  /* 0x00 */ u8 baseHP;
  /* 0x01 */ u8 baseAttack;
@@ -446,17 +447,17 @@ struct SpeciesInfo /*0x8C*/
             // Move Data
  /* 0x80 */ const struct LevelUpMove *levelUpLearnset;
  /* 0x84 */ const u16 *teachableLearnset;
-            const u16 *eggMoveLearnset;
- /* 0x88 */ const struct Evolution *evolutions;
- /* 0x84 */ const u16 *formSpeciesIdTable;
- /* 0x84 */ const struct FormChange *formChangeTable;
-#if OW_FOLLOWERS_ENABLED
-            struct ObjectEventGraphicsInfo followerData;
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-            const void* followerPalette;
-            const void* followerShinyPalette;
-#endif //OW_FOLLOWERS_SHARE_PALETTE
-#endif //OW_FOLLOWERS_ENABLED
+ /* 0x88 */ const u16 *eggMoveLearnset;
+ /* 0x8C */ const struct Evolution *evolutions;
+ /* 0x90 */ const u16 *formSpeciesIdTable;
+ /* 0x94 */ const struct FormChange *formChangeTable;
+#if OW_POKEMON_OBJECT_EVENTS
+ /* 0x98 */ struct ObjectEventGraphicsInfo overworldData;
+#if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
+ /* 0xBC */ const void* overworldPalette;
+ /* 0xC0 */ const void* overworldShinyPalette;
+#endif //OW_PKMN_OBJECTS_SHARE_PALETTES
+#endif //OW_POKEMON_OBJECT_EVENTS
 };
 
 struct MoveInfo
@@ -878,5 +879,7 @@ void HealPokemon(struct Pokemon *mon);
 void HealBoxPokemon(struct BoxPokemon *boxMon);
 const u8 *GetMoveName(u16 moveId);
 const u8 *GetMoveAnimationScript(u16 moveId);
+void UpdateDaysPassedSinceFormChange(u16 days);
+void TrySetDayLimitToFormChange(struct Pokemon *mon);
 
 #endif // GUARD_POKEMON_H

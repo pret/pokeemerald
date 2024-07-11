@@ -56,21 +56,19 @@ enum MaxMoveEffect
 	MAX_EFFECT_BYPASS_PROTECT,
 };
 
-bool32 IsDynamaxed(u16 battlerId);
-bool32 CanDynamax(u16 battlerId);
-bool32 IsGigantamaxed(u16 battlerId);
+bool32 CanDynamax(u32 battler);
+bool32 IsGigantamaxed(u32 battler);
 void ApplyDynamaxHPMultiplier(u32 battler, struct Pokemon* mon);
-void PrepareBattlerForDynamax(u16 battlerId);
-u16 GetNonDynamaxHP(u16 battlerId);
-u16 GetNonDynamaxMaxHP(u32 battlerId);
-void UndoDynamax(u16 battlerId);
-bool32 IsMoveBlockedByMaxGuard(u16 move);
-bool32 IsMoveBlockedByDynamax(u16 move);
+void ActivateDynamax(u32 battler);
+u16 GetNonDynamaxHP(u32 battler);
+u16 GetNonDynamaxMaxHP(u32 battler);
+void UndoDynamax(u32 battler);
+bool32 IsMoveBlockedByMaxGuard(u32 move);
+bool32 IsMoveBlockedByDynamax(u32 move);
 
-bool32 ShouldUseMaxMove(u16 battlerId, u16 baseMove);
-u16 GetMaxMove(u16 battlerId, u16 baseMove);
-u8 GetMaxMovePower(u16 move);
-bool32 IsMaxMove(u16 move);
+u16 GetMaxMove(u32 battler, u32 baseMove);
+u8 GetMaxMovePower(u32 move);
+bool32 IsMaxMove(u32 move);
 void ChooseDamageNonTypesString(u8 type);
 
 void BS_UpdateDynamax(void);
@@ -82,11 +80,5 @@ void BS_DamageNonTypes(void);
 void BS_HealOneSixth(void);
 void BS_TryRecycleBerry(void);
 void BS_JumpIfDynamaxed(void);
-
-void ChangeDynamaxTriggerSprite(u8 spriteId, u8 animId);
-void CreateDynamaxTriggerSprite(u8, bool8);
-void HideDynamaxTriggerSprite(void);
-bool32 IsDynamaxTriggerSpriteActive(void);
-void DestroyDynamaxTriggerSprite(void);
 
 #endif

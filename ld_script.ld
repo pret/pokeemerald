@@ -358,7 +358,7 @@ SECTIONS {
         src/gym_leader_rematch.o(.text);
         src/battle_transition_frontier.o(.text);
         src/international_string_util.o(.text);
-        src/pokemon_debug.o(.text);
+        src/pokemon_sprite_visualizer.o(.text);
         src/expansion_intro.o(.text);
     } > ROM =0
 
@@ -726,7 +726,7 @@ SECTIONS {
         data/mystery_gift.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
-        src/pokemon_debug.o(.rodata);
+        src/pokemon_sprite_visualizer.o(.rodata);
         src/expansion_intro.o(.rodata);
     } > ROM =0
 

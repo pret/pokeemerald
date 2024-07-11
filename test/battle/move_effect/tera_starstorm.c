@@ -43,14 +43,14 @@ DOUBLE_BATTLE_TEST("Tera Starstorm targets both opponents in a double battle if 
 SINGLE_BATTLE_TEST("Tera Starstorm becomes a physical move if the user is Terapagos-Stellar, is Terastallized, and has a higher Attack stat", s16 damage)
 {
     bool32 tera;
-    PARAMETRIZE { tera = FALSE; }
-    PARAMETRIZE { tera = TRUE; }
+    PARAMETRIZE { tera = GIMMICK_NONE; }
+    PARAMETRIZE { tera = GIMMICK_TERA; }
     GIVEN {
         ASSUME(gMovesInfo[MOVE_TERA_STARSTORM].category == DAMAGE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_TERAPAGOS_STELLAR) { Attack(100); SpAttack(50); }
         OPPONENT(SPECIES_WOBBUFFET) { Defense(200); SpDefense(200); }
     } WHEN {
-        TURN { MOVE(player, MOVE_TERA_STARSTORM, tera: tera); }
+        TURN { MOVE(player, MOVE_TERA_STARSTORM, gimmick: tera); }
     } SCENE {
         MESSAGE("Terapagos used Tera Starstorm!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_STARSTORM, player);

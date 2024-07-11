@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_THOUSAND_ARROWS].additionalEffects->moveEffect == MOVE_EFFECT_SMACK_DOWN);
+    ASSUME(MoveHasAdditionalEffect(MOVE_THOUSAND_ARROWS, MOVE_EFFECT_SMACK_DOWN) == TRUE);
     ASSUME(gMovesInfo[MOVE_THOUSAND_ARROWS].ignoreTypeIfFlyingAndUngrounded == TRUE);
 }
 

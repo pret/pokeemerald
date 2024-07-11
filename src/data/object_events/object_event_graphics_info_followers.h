@@ -1,4 +1,4 @@
-#if OW_MON_POKEBALLS
+#if OW_FOLLOWERS_POKEBALLS
 
 #define POKEBALL_GFX_INFO(NAME)                                     \
     [BALL_##NAME] = {                                               \
@@ -54,4 +54,4 @@ const struct ObjectEventGraphicsInfo gPokeballGraphics[POKEBALL_COUNT] = {
     POKEBALL_GFX_INFO(STRANGE),
     #endif
 };
-#endif
+#endif //OW_FOLLOWERS_POKEBALLS

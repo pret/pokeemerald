@@ -380,11 +380,11 @@ const u32 gObjectEventPic_RayquazaCutscene[] = INCBIN_U32("graphics/object_event
 const u16 gObjectEventPal_HoOh[] = INCBIN_U16("graphics/object_events/palettes/ho_oh.gbapal");
 const u16 gObjectEventPal_Lugia[] = INCBIN_U16("graphics/object_events/palettes/lugia.gbapal");
 
-const u16 gObjectEventPal_Substitute[] = INCBIN_U16("graphics/pokemon/question_mark/follower.gbapal");
+const u16 gObjectEventPal_Substitute[] = INCBIN_U16("graphics/pokemon/question_mark/overworld.gbapal");
 
 const u16 gObjectEventPaletteEmotes[] = INCBIN_U16("graphics/misc/emotes.gbapal");
 
-#if OW_MON_POKEBALLS
+#if OW_FOLLOWERS_POKEBALLS
 const u32 gObjectEventPic_MasterBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_master.4bpp");
 const u32 gObjectEventPic_UltraBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_ultra.4bpp");
 const u32 gObjectEventPic_GreatBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_great.4bpp");
@@ -413,10 +413,10 @@ const u32 gObjectEventPic_DreamBall[] = INCBIN_U32("graphics/object_events/pics/
 const u32 gObjectEventPic_BeastBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_beast.4bpp");
 #ifdef ITEM_STRANGE_BALL
 const u32 gObjectEventPic_StrangeBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_strange.4bpp");
-#endif
-#endif
+#endif //ITEM_STRANGE_BALL
+#endif //OW_FOLLOWERS_POKEBALLS
 
-#if OW_MON_POKEBALLS
+#if OW_FOLLOWERS_POKEBALLS
 // Palettes are small, so always include all of the palettes (no #ifdef)
 // Vanilla
 const u16 gObjectEventPal_MasterBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_master.gbapal");
@@ -450,5 +450,7 @@ const u16 gObjectEventPal_DreamBall[] = INCBIN_U16("graphics/object_events/pics/
 // Gen VII
 const u16 gObjectEventPal_BeastBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_beast.gbapal");
 // Gen VIII
+#ifdef ITEM_STRANGE_BALL
 const u16 gObjectEventPal_StrangeBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_strange.gbapal");
-#endif
+#endif //ITEM_STRANGE_BALL
+#endif //OW_FOLLOWERS_POKEBALLS

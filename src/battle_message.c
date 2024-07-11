@@ -794,8 +794,8 @@ static const u8 sText_AttackerLostElectricType[] = _("{B_ATK_NAME_WITH_PREFIX} u
 static const u8 sText_AttackerSwitchedStatWithTarget[] = _("{B_ATK_NAME_WITH_PREFIX} switched {B_BUFF1}\nwith its target!");
 static const u8 sText_BeingHitChargedPkmnWithPower[] = _("Being hit by {B_CURRENT_MOVE}\ncharged {B_DEF_NAME_WITH_PREFIX} with power!");
 static const u8 sText_SunlightActivatedAbility[] = _("The harsh sunlight activated\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ABILITY}!");
-static const u8 sText_StatWasHeightened[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_BUFF1} was heightened!");
-static const u8 sText_BoosterEnergyActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} used its Booster Energy\nto activate {B_SCR_ACTIVE_ABILITY}!");
+static const u8 sText_StatWasHeightened[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_BUFF1}\nwas heightened!");
+static const u8 sText_BoosterEnergyActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} used its\n{B_LAST_ITEM} to activate\l{B_SCR_ACTIVE_ABILITY}!");
 static const u8 sText_ElectricTerrainActivatedAbility[] = _("The Electric Terrain activated\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ABILITY}!");
 static const u8 sText_AbilityWeakenedSurroundingMonsStat[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nweakened the {B_BUFF1} of\lall surrounding Pokémon!\p");
 static const u8 sText_AttackerGainedStrengthFromTheFallen[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} gained strength\nfrom the fallen!");
@@ -3967,7 +3967,10 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
         // We cannot check the actual width of the window because
         // B_WIN_MOVE_NAME_1 and B_WIN_MOVE_NAME_3 are 16 wide for
         // Z-move details.
-        printerTemplate.fontId = GetFontIdToFit(text, printerTemplate.fontId, printerTemplate.letterSpacing, 8 * TILE_WIDTH);
+        if (gBattleStruct->zmove.viewing && windowId == B_WIN_MOVE_NAME_1)
+            printerTemplate.fontId = GetFontIdToFit(text, printerTemplate.fontId, printerTemplate.letterSpacing, 16 * TILE_WIDTH);
+        else
+            printerTemplate.fontId = GetFontIdToFit(text, printerTemplate.fontId, printerTemplate.letterSpacing, 8 * TILE_WIDTH);
     }
 
     if (printerTemplate.x == 0xFF)
@@ -4023,7 +4026,7 @@ void SetPpNumbersPaletteInMoveSelection(u32 battler)
         var = GetCurrentPpToMaxPpState(chooseMoveStruct->currentPp[gMoveSelectionCursor[battler]],
                          chooseMoveStruct->maxPp[gMoveSelectionCursor[battler]]);
     else
-        var = GetCurrentPpToMaxPpState(chooseMoveStruct->currentPp[gMoveSelectionCursor[battler]], gMovesInfo[gMoveSelectionCursor[battler]].pp);
+        var = 3;
 
     gPlttBufferUnfaded[BG_PLTT_ID(5) + 12] = palPtr[(var * 2) + 0];
     gPlttBufferUnfaded[BG_PLTT_ID(5) + 11] = palPtr[(var * 2) + 1];

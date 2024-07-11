@@ -1,7 +1,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include "gba/gba.h"
-#include "config.h"
+#include "config/general.h"
 #include "malloc.h"
 #include "mini_printf.h"
 

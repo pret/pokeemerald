@@ -3,6 +3,10 @@
 
 #include "constants/event_object_movement.h"
 
+#if OW_POKEMON_OBJECT_EVENTS == FALSE && OW_FOLLOWERS_ENABLED == TRUE
+#error "OW_POKEMON_OBJECT_EVENTS needs to be TRUE in order for OW_FOLLOWERS_ENABLED to work."
+#endif
+
 // Palette slots for overworld NPCs.
 // The same standard set of palettes for overworld objects are normally always loaded at the same
 // time while walking around the overworld. The only exceptions are the palettes for the player and

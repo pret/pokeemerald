@@ -1387,7 +1387,7 @@ static const struct SearchOptionText sDexSearchColorOptions[] =
     {},
 };
 
-static const struct SearchOptionText sDexSearchTypeOptions[NUMBER_OF_MON_TYPES] = // + 2 for "None" and terminator, - 2 for Mystery and Stellar
+static const struct SearchOptionText sDexSearchTypeOptions[] =
 {
     {gText_DexEmptyString, gTypesInfo[TYPE_NONE].name},
     {gText_DexEmptyString, gTypesInfo[TYPE_NORMAL].name},

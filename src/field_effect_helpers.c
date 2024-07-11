@@ -353,7 +353,7 @@ u32 FldEff_Shadow(void)
         gSprites[spriteId].sLocalId = gFieldEffectArguments[0];
         gSprites[spriteId].sMapNum = gFieldEffectArguments[1];
         gSprites[spriteId].sMapGroup = gFieldEffectArguments[2];
-        #if LARGE_OW_SUPPORT
+        #if OW_LARGE_OW_SUPPORT
         gSprites[spriteId].sYOffset = gShadowVerticalOffsets[graphicsInfo->shadowSize];
         #else
         gSprites[spriteId].sYOffset = (graphicsInfo->height >> 1) - gShadowVerticalOffsets[graphicsInfo->shadowSize];
@@ -376,7 +376,7 @@ void UpdateShadowFieldEffect(struct Sprite *sprite)
         struct Sprite *linkedSprite = &gSprites[objectEvent->spriteId];
         sprite->oam.priority = linkedSprite->oam.priority;
         sprite->x = linkedSprite->x;
-        #if LARGE_OW_SUPPORT
+        #if OW_LARGE_OW_SUPPORT
         // Read 'live' size from linked sprite
         sprite->y = linkedSprite->y - linkedSprite->centerToCornerVecY - sprite->sYOffset;
         #else

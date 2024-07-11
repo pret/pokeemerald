@@ -368,17 +368,17 @@ static void PlayerPartnerHandleChooseMove(u32 battler)
             if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
                 gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
         }
-
-        if (ShouldUseZMove(battler, gBattlerTarget, moveInfo->moves[chosenMoveId]))
-            QueueZMove(battler, moveInfo->moves[chosenMoveId]);
-
-        // If partner can mega evolve, do it.
-        if (CanMegaEvolve(battler))
-            BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));
-        else if (CanUltraBurst(battler))
-            BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_ULTRA_BURST) | (gBattlerTarget << 8));
+        // If partner can and should use a gimmick (considering trainer data), do it
+        if (gBattleStruct->gimmick.usableGimmick[battler] != GIMMICK_NONE
+         && !(gBattleStruct->gimmick.usableGimmick[battler] == GIMMICK_Z_MOVE
+         && !ShouldUseZMove(battler, gBattlerTarget, moveInfo->moves[chosenMoveId])))
+        {
+            BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_GIMMICK) | (gBattlerTarget << 8));
+        }
         else
+        {
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
+        }
     }
 
     PlayerPartnerBufferExecCompleted(battler);
@@ -435,7 +435,7 @@ static void PlayerPartnerHandleIntroTrainerBallThrow(u32 battler)
     const u32 *trainerPal;
 
     if (gPartnerTrainerId > TRAINER_PARTNER(PARTNER_NONE))
-        trainerPal = gTrainerBacksprites[gPartnerSpriteId].palette.data;
+        trainerPal = gTrainerBacksprites[gBattlePartners[gPartnerTrainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerPic].palette.data;
     else if (IsAiVsAiBattle())
         trainerPal = gTrainerSprites[GetTrainerPicFromId(gPartnerTrainerId)].palette.data;
     else

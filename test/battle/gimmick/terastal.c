@@ -6,13 +6,13 @@
 SINGLE_BATTLE_TEST("(TERA) Terastallizing into a different type preserves other STAB boosts", s16 damage1, s16 damage2)
 {
     bool32 tera;
-    PARAMETRIZE { tera = FALSE; }
-    PARAMETRIZE { tera = TRUE; }
+    PARAMETRIZE { tera = GIMMICK_NONE; }
+    PARAMETRIZE { tera = GIMMICK_TERA; }
     GIVEN {
         PLAYER(SPECIES_BULBASAUR) { TeraType(TYPE_NORMAL); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_VINE_WHIP, tera: tera); }
+        TURN { MOVE(player, MOVE_VINE_WHIP, gimmick: tera); }
         TURN { MOVE(player, MOVE_SLUDGE_BOMB); }
     } SCENE {
         MESSAGE("Bulbasaur used Vine Whip!");
@@ -30,13 +30,13 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into a different type preserves other 
 SINGLE_BATTLE_TEST("(TERA) Terastallizing does not affect the power of non-STAB moves", s16 damage)
 {
     bool32 tera;
-    PARAMETRIZE { tera = FALSE; }
-    PARAMETRIZE { tera = TRUE; }
+    PARAMETRIZE { tera = GIMMICK_NONE; }
+    PARAMETRIZE { tera = GIMMICK_TERA; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_PSYCHIC); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_HEADBUTT, tera: tera); }
+        TURN { MOVE(player, MOVE_HEADBUTT, gimmick: tera); }
     } SCENE {
         MESSAGE("Wobbuffet used Headbutt!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HEADBUTT, player);
@@ -49,13 +49,13 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing does not affect the power of non-STAB 
 SINGLE_BATTLE_TEST("(TERA) Terastallizing into a different type gives that type 1.5x STAB", s16 damage)
 {
     bool32 tera;
-    PARAMETRIZE { tera = FALSE; }
-    PARAMETRIZE { tera = TRUE; }
+    PARAMETRIZE { tera = GIMMICK_NONE; }
+    PARAMETRIZE { tera = GIMMICK_TERA; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_NORMAL); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_HEADBUTT, tera: tera); }
+        TURN { MOVE(player, MOVE_HEADBUTT, gimmick: tera); }
     } SCENE {
         MESSAGE("Wobbuffet used Headbutt!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HEADBUTT, player);
@@ -69,13 +69,13 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into a different type gives that type 
 SINGLE_BATTLE_TEST("(TERA) Terastallizing into the same type gives that type 2x STAB", s16 damage)
 {
     bool32 tera;
-    PARAMETRIZE { tera = FALSE; }
-    PARAMETRIZE { tera = TRUE; }
+    PARAMETRIZE { tera = GIMMICK_NONE; }
+    PARAMETRIZE { tera = GIMMICK_TERA; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_PSYCHIC); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_PSYCHIC, tera: tera); }
+        TURN { MOVE(player, MOVE_PSYCHIC, gimmick: tera); }
     } SCENE {
         MESSAGE("Wobbuffet used Psychic!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PSYCHIC, player);
@@ -89,13 +89,13 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into the same type gives that type 2x 
 SINGLE_BATTLE_TEST("(TERA) Terastallizing into a different type with Adaptability gives 2.0x STAB", s16 damage)
 {
     bool32 tera;
-    PARAMETRIZE { tera = FALSE; }
-    PARAMETRIZE { tera = TRUE; }
+    PARAMETRIZE { tera = GIMMICK_NONE; }
+    PARAMETRIZE { tera = GIMMICK_TERA; }
     GIVEN {
         PLAYER(SPECIES_CRAWDAUNT) { Ability(ABILITY_ADAPTABILITY); TeraType(TYPE_NORMAL); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_HEADBUTT, tera: tera); }
+        TURN { MOVE(player, MOVE_HEADBUTT, gimmick: tera); }
     } SCENE {
         MESSAGE("Crawdaunt used Headbutt!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HEADBUTT, player);
@@ -109,13 +109,13 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into a different type with Adaptabilit
 SINGLE_BATTLE_TEST("(TERA) Terastallizing into the same type with Adaptability gives 2.25x STAB", s16 damage)
 {
     bool32 tera;
-    PARAMETRIZE { tera = FALSE; }
-    PARAMETRIZE { tera = TRUE; }
+    PARAMETRIZE { tera = GIMMICK_NONE; }
+    PARAMETRIZE { tera = GIMMICK_TERA; }
     GIVEN {
         PLAYER(SPECIES_CRAWDAUNT) { Ability(ABILITY_ADAPTABILITY); TeraType(TYPE_WATER); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_WATER_PULSE, tera: tera); }
+        TURN { MOVE(player, MOVE_WATER_PULSE, gimmick: tera); }
     } SCENE {
         MESSAGE("Crawdaunt used Water Pulse!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_PULSE, player);
@@ -129,14 +129,14 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into the same type with Adaptability g
 SINGLE_BATTLE_TEST("(TERA) Terastallizing boosts moves of the same type to 60 BP", s16 damage)
 {
     bool32 tera;
-    PARAMETRIZE { tera = FALSE; }
-    PARAMETRIZE { tera = TRUE; }
+    PARAMETRIZE { tera = GIMMICK_NONE; }
+    PARAMETRIZE { tera = GIMMICK_TERA; }
     GIVEN {
         ASSUME(gMovesInfo[MOVE_ABSORB].power == 20);
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_GRASS); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_ABSORB, tera: tera); }
+        TURN { MOVE(player, MOVE_ABSORB, gimmick: tera); }
     } SCENE {
         MESSAGE("Wobbuffet used Absorb!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ABSORB, player);
@@ -150,14 +150,14 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing boosts moves of the same type to 60 BP
 SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor occurs after Technician", s16 damage)
 {
     bool32 tera;
-    PARAMETRIZE { tera = FALSE; }
-    PARAMETRIZE { tera = TRUE; }
+    PARAMETRIZE { tera = GIMMICK_NONE; }
+    PARAMETRIZE { tera = GIMMICK_TERA; }
     GIVEN {
         ASSUME(gMovesInfo[MOVE_MEGA_DRAIN].power == 40);
         PLAYER(SPECIES_MR_MIME) { Ability(ABILITY_TECHNICIAN); TeraType(TYPE_GRASS); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_MEGA_DRAIN, tera: tera); }
+        TURN { MOVE(player, MOVE_MEGA_DRAIN, gimmick: tera); }
     } SCENE {
         MESSAGE("Mr. Mime used Mega Drain!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MEGA_DRAIN, player);
@@ -171,13 +171,13 @@ SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor occurs after Technicia
 SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor occurs after Technician", s16 damage)
 {
     bool32 tera;
-    PARAMETRIZE { tera = FALSE; }
-    PARAMETRIZE { tera = TRUE; }
+    PARAMETRIZE { tera = GIMMICK_NONE; }
+    PARAMETRIZE { tera = GIMMICK_TERA; }
     GIVEN {
         PLAYER(SPECIES_MR_MIME) { Ability(ABILITY_TECHNICIAN); TeraType(TYPE_PSYCHIC); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_STORED_POWER, tera: tera); }
+        TURN { MOVE(player, MOVE_STORED_POWER, gimmick: tera); }
     } SCENE {
         MESSAGE("Mr. Mime used Stored Power!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STORED_POWER, player);
@@ -191,13 +191,13 @@ SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor occurs after Technicia
 SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor does not apply to multi-hit moves", s16 damage)
 {
     bool32 tera;
-    PARAMETRIZE { tera = FALSE; }
-    PARAMETRIZE { tera = TRUE; }
+    PARAMETRIZE { tera = GIMMICK_NONE; }
+    PARAMETRIZE { tera = GIMMICK_TERA; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_NORMAL); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_FURY_SWIPES, tera: tera); }
+        TURN { MOVE(player, MOVE_FURY_SWIPES, gimmick: tera); }
     } SCENE {
         MESSAGE("Wobbuffet used Fury Swipes!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FURY_SWIPES, player);
@@ -210,13 +210,13 @@ SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor does not apply to mult
 SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor does not apply to priority moves", s16 damage)
 {
     bool32 tera;
-    PARAMETRIZE { tera = FALSE; }
-    PARAMETRIZE { tera = TRUE; }
+    PARAMETRIZE { tera = GIMMICK_NONE; }
+    PARAMETRIZE { tera = GIMMICK_TERA; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_NORMAL); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_QUICK_ATTACK, tera: tera); }
+        TURN { MOVE(player, MOVE_QUICK_ATTACK, gimmick: tera); }
     } SCENE {
         MESSAGE("Wobbuffet used Quick Attack!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, player);
@@ -231,13 +231,13 @@ SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor does not apply to prio
 SINGLE_BATTLE_TEST("(TERA) Terastallization changes type effectiveness", s16 damage)
 {
     bool32 tera;
-    PARAMETRIZE { tera = FALSE; }
-    PARAMETRIZE { tera = TRUE; }
+    PARAMETRIZE { tera = GIMMICK_NONE; }
+    PARAMETRIZE { tera = GIMMICK_TERA; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_GRASS); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE, tera: tera); MOVE(opponent, MOVE_WATER_GUN); }
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: tera); MOVE(opponent, MOVE_WATER_GUN); }
     } SCENE {
         MESSAGE("Foe Wobbuffet used Water Gun!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_GUN, opponent);
@@ -253,7 +253,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallization changes type effectiveness")
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_FLYING); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE, tera: TRUE); MOVE(opponent, MOVE_EARTHQUAKE); }
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_EARTHQUAKE); }
     } SCENE {
         MESSAGE("Foe Wobbuffet used Earthquake!");
         MESSAGE("It doesn't affect Wobbuffet…");
@@ -268,7 +268,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallization persists across switches")
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE, tera: TRUE); MOVE(opponent, MOVE_EARTHQUAKE); }
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_EARTHQUAKE); }
         TURN { SWITCH(player, 1); }
         TURN { SWITCH(player, 0); }
         TURN { MOVE(opponent, MOVE_EARTHQUAKE); }
@@ -292,7 +292,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallization changes the effect of Curse")
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_GHOST); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_CURSE, tera: TRUE); }
+        TURN { MOVE(player, MOVE_CURSE, gimmick: GIMMICK_TERA); }
     } SCENE {
         MESSAGE("Wobbuffet used Curse!");
         HP_BAR(player);
@@ -307,7 +307,7 @@ SINGLE_BATTLE_TEST("(TERA) Roost does not remove the user's Flying type while Te
         PLAYER(SPECIES_ZAPDOS) { HP(1); TeraType(TYPE_FLYING); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_ROOST, tera: TRUE); MOVE(opponent, MOVE_ICE_BEAM); }
+        TURN { MOVE(player, MOVE_ROOST, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_ICE_BEAM); }
     } SCENE {
         MESSAGE("Zapdos used Roost!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ROOST, player);
@@ -327,7 +327,7 @@ SINGLE_BATTLE_TEST("(TERA) Type-changing moves fail against a Terastallized Poke
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_PSYCHIC); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE, tera: TRUE); MOVE(opponent, move); }
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); MOVE(opponent, move); }
     } SCENE {
         if (move != MOVE_SOAK)
             NOT { ANIMATION(ANIM_TYPE_MOVE, move, opponent); }
@@ -341,7 +341,7 @@ SINGLE_BATTLE_TEST("(TERA) Reflect Type fails if used by a Terastallized Pokemon
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_PSYCHIC); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_REFLECT_TYPE, tera: TRUE); }
+        TURN { MOVE(player, MOVE_REFLECT_TYPE, gimmick: GIMMICK_TERA); }
     } SCENE {
         MESSAGE("Wobbuffet used Reflect Type!");
         MESSAGE("But it failed!");
@@ -354,7 +354,7 @@ SINGLE_BATTLE_TEST("(TERA) Conversion fails if used by a Terastallized Pokemon")
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_PSYCHIC); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_CONVERSION, tera: TRUE); }
+        TURN { MOVE(player, MOVE_CONVERSION, gimmick: GIMMICK_TERA); }
     } SCENE {
         MESSAGE("Wobbuffet used Conversion!");
         MESSAGE("But it failed!");
@@ -368,7 +368,7 @@ SINGLE_BATTLE_TEST("(TERA) Conversion2 fails if used by a Terastallized Pokemon"
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_TACKLE); }
-        TURN { MOVE(player, MOVE_CONVERSION_2, tera: TRUE); }
+        TURN { MOVE(player, MOVE_CONVERSION_2, gimmick: GIMMICK_TERA); }
     } SCENE {
         MESSAGE("Wobbuffet used Conversion 2!");
         MESSAGE("But it failed!");
@@ -381,7 +381,7 @@ SINGLE_BATTLE_TEST("(TERA) Reflect Type copies a Terastallized Pokemon's Tera Ty
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_GHOST); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_CELEBRATE, tera: TRUE); }
+        TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
         TURN { MOVE(opponent, MOVE_REFLECT_TYPE); }
         TURN { MOVE(player, MOVE_TACKLE); }
     } SCENE {
@@ -401,8 +401,8 @@ SINGLE_BATTLE_TEST("(TERA) Synchronoise uses a Terastallized Pokemon's Tera Type
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_GHOST); }
         OPPONENT(SPECIES_WOBBUFFET) { TeraType(TYPE_GHOST); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_SYNCHRONOISE); MOVE(player, MOVE_CELEBRATE, tera: TRUE); }
-        TURN { MOVE(opponent, MOVE_SYNCHRONOISE, tera: TRUE); }
+        TURN { MOVE(opponent, MOVE_SYNCHRONOISE); MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
+        TURN { MOVE(opponent, MOVE_SYNCHRONOISE, gimmick: GIMMICK_TERA); }
     } SCENE {
         // turn 1
         MESSAGE("Foe Wobbuffet used Synchronoise!");
@@ -420,7 +420,7 @@ SINGLE_BATTLE_TEST("(TERA) Revelation Dance uses a Terastallized Pokemon's Tera 
         PLAYER(SPECIES_ORICORIO) { TeraType(TYPE_NORMAL); }
         OPPONENT(SPECIES_GENGAR);
     } WHEN {
-        TURN { MOVE(player, MOVE_REVELATION_DANCE, tera: TRUE); }
+        TURN { MOVE(player, MOVE_REVELATION_DANCE, gimmick: GIMMICK_TERA); }
     } SCENE {
         MESSAGE("Oricorio used Revelation Dance!");
         MESSAGE("It doesn't affect Foe Gengar…");
@@ -439,7 +439,7 @@ SINGLE_BATTLE_TEST("(TERA) Double Shock does not remove the user's Electric type
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_DOUBLE_SHOCK); MOVE(opponent, MOVE_RECOVER); }
-        TURN { MOVE(player, MOVE_DOUBLE_SHOCK, tera: TRUE); MOVE(opponent, MOVE_RECOVER); }
+        TURN { MOVE(player, MOVE_DOUBLE_SHOCK, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_RECOVER); }
         TURN { MOVE(player, MOVE_DOUBLE_SHOCK); MOVE(opponent, MOVE_RECOVER); }
         TURN { SWITCH(player, 1); MOVE(opponent, MOVE_RECOVER); }
         TURN { SWITCH(player, 0); MOVE(opponent, MOVE_RECOVER); }
@@ -479,9 +479,9 @@ SINGLE_BATTLE_TEST("(TERA) Transform does not copy the target's Tera Type, and i
         PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE, MOVE_TACKLE, MOVE_EARTHQUAKE); TeraType(TYPE_GHOST); }
         OPPONENT(SPECIES_DITTO) { TeraType(TYPE_FLYING); }
     } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE, tera: TRUE); MOVE(opponent, MOVE_TRANSFORM); }
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_TRANSFORM); }
         TURN { MOVE(player, MOVE_EARTHQUAKE); }
-        // TURN { MOVE(player, MOVE_TACKLE); MOVE(opponent, MOVE_TACKLE, target: player, tera: TRUE); }
+        // TURN { MOVE(player, MOVE_TACKLE); MOVE(opponent, MOVE_TACKLE, target: player, gimmick: GIMMICK_TERA); }
     } SCENE {
         // turn 2
         MESSAGE("Wobbuffet used Earthquake!");
@@ -498,13 +498,13 @@ SINGLE_BATTLE_TEST("(TERA) Transform does not copy the target's Tera Type, and i
 SINGLE_BATTLE_TEST("(TERA) Stellar type does not change the user's defensive profile", s16 damage)
 {
     bool32 tera;
-    PARAMETRIZE { tera = FALSE; }
-    PARAMETRIZE { tera = TRUE; }
+    PARAMETRIZE { tera = GIMMICK_NONE; }
+    PARAMETRIZE { tera = GIMMICK_TERA; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_STELLAR); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE, tera: tera); MOVE(opponent, MOVE_PSYCHIC); }
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: tera); MOVE(opponent, MOVE_PSYCHIC); }
     } SCENE {
         MESSAGE("Foe Wobbuffet used Psychic!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PSYCHIC, opponent);
@@ -520,7 +520,7 @@ SINGLE_BATTLE_TEST("(TERA) Reflect Type copies a Stellar-type Pokemon's base typ
         PLAYER(SPECIES_BANETTE) { TeraType(TYPE_STELLAR); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_CELEBRATE, tera: TRUE); }
+        TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
         TURN { MOVE(opponent, MOVE_REFLECT_TYPE); }
         TURN { MOVE(player, MOVE_TACKLE); }
     } SCENE {
@@ -541,7 +541,7 @@ SINGLE_BATTLE_TEST("(TERA) Revelation Dance uses a Stellar-type Pokemon's base t
         PLAYER(SPECIES_ORICORIO_SENSU) { TeraType(TYPE_STELLAR); }
         OPPONENT(SPECIES_GUMSHOOS);
     } WHEN {
-        TURN { MOVE(player, MOVE_REVELATION_DANCE, tera: TRUE); }
+        TURN { MOVE(player, MOVE_REVELATION_DANCE, gimmick: GIMMICK_TERA); }
     } SCENE {
         MESSAGE("Oricorio used Revelation Dance!");
         MESSAGE("It doesn't affect Foe Gumshoos…");
@@ -555,7 +555,7 @@ SINGLE_BATTLE_TEST("(TERA) Conversion2 fails if last hit by a Stellar-type move"
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_STELLAR); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_TERA_BLAST, tera: TRUE); }
+        TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: GIMMICK_TERA); }
         TURN { MOVE(opponent, MOVE_CONVERSION_2); }
     } SCENE {
         // turn 1
@@ -573,7 +573,7 @@ SINGLE_BATTLE_TEST("(TERA) Roost does not remove Flying-type ground immunity whe
         PLAYER(SPECIES_ZAPDOS) { HP(1); TeraType(TYPE_STELLAR); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_ROOST, tera: TRUE); MOVE(opponent, MOVE_ICE_BEAM); }
+        TURN { MOVE(player, MOVE_ROOST, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_ICE_BEAM); }
     } SCENE {
         MESSAGE("Zapdos used Roost!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ROOST, player);
@@ -591,7 +591,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into the Stellar-type provides a one-t
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_EXTRASENSORY); }
-        TURN { MOVE(player, MOVE_EXTRASENSORY, tera: TRUE); }
+        TURN { MOVE(player, MOVE_EXTRASENSORY, gimmick: GIMMICK_TERA); }
         TURN { MOVE(player, MOVE_EXTRASENSORY); }
     } SCENE {
         // turn 1
@@ -621,7 +621,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into the Stellar-type provides a one-t
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_TAKE_DOWN); }
-        TURN { MOVE(player, MOVE_TAKE_DOWN, tera: TRUE); }
+        TURN { MOVE(player, MOVE_TAKE_DOWN, gimmick: GIMMICK_TERA); }
         TURN { MOVE(player, MOVE_TAKE_DOWN); }
     } SCENE {
         // turn 1
@@ -652,7 +652,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into the Stellar type boosts all moves
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_MEGA_DRAIN); }
-        TURN { MOVE(player, MOVE_MEGA_DRAIN, tera: TRUE); }
+        TURN { MOVE(player, MOVE_MEGA_DRAIN, gimmick: GIMMICK_TERA); }
         TURN { MOVE(player, MOVE_MEGA_DRAIN); }
         TURN { MOVE(player, MOVE_BUBBLE); }
     } SCENE {
@@ -686,7 +686,7 @@ SINGLE_BATTLE_TEST("(TERA) Protean cannot change the type of a Terastallized Pok
         PLAYER(SPECIES_GRENINJA) { Ability(ABILITY_PROTEAN); TeraType(TYPE_GRASS); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_BUBBLE, tera: TRUE);
+        TURN { MOVE(player, MOVE_BUBBLE, gimmick: GIMMICK_TERA); 
                MOVE(opponent, MOVE_EMBER); }
     } SCENE {
         MESSAGE("Greninja used Bubble!");
@@ -702,7 +702,7 @@ SINGLE_BATTLE_TEST("(TERA) Status moves don't expend Stellar's one-time type boo
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_STELLAR); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_GROWL, tera: TRUE); }
+        TURN { MOVE(player, MOVE_GROWL, gimmick: GIMMICK_TERA); }
         TURN { MOVE(player, MOVE_TAKE_DOWN); }
         TURN { MOVE(player, MOVE_TAKE_DOWN); }
     } SCENE {
@@ -730,7 +730,7 @@ SINGLE_BATTLE_TEST("(TERA) Stellar type's one-time boost factors in dynamically-
         PLAYER(SPECIES_PELIPPER) { Ability(ABILITY_DRIZZLE); TeraType(TYPE_STELLAR); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_WEATHER_BALL, tera: TRUE); MOVE(opponent, MOVE_RECOVER); }
+        TURN { MOVE(player, MOVE_WEATHER_BALL, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_RECOVER); }
         TURN { MOVE(player, MOVE_TAKE_DOWN); MOVE(opponent, MOVE_RECOVER); }
         TURN { MOVE(player, MOVE_TAKE_DOWN); MOVE(opponent, MOVE_RECOVER); }
         TURN { MOVE(player, MOVE_WATER_PULSE); MOVE(opponent, MOVE_RECOVER); }
@@ -790,7 +790,7 @@ SINGLE_BATTLE_TEST("(TERA) All type indicators function correctly")
         PLAYER(SPECIES_WOBBUFFET) { TeraType(type); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE, tera: TRUE); }
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
     }
 }
 
@@ -806,7 +806,7 @@ SINGLE_BATTLE_TEST("(TERA) Pokemon with Tera forms change upon Terastallizing")
         PLAYER(species);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE, tera: TRUE); }
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
     } THEN {
         EXPECT_EQ(player->species, targetSpecies);
     }

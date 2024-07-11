@@ -20,8 +20,8 @@ SINGLE_BATTLE_TEST("Sandstorm deals 1/16 damage per turn")
 SINGLE_BATTLE_TEST("Sandstorm multiplies the special defense of Rock-types by 1.5x", s16 damage)
 {
     u16 move;
-    PARAMETRIZE{ move = MOVE_SANDSTORM; }
-    PARAMETRIZE{ move = MOVE_CELEBRATE; }
+    PARAMETRIZE { move = MOVE_SANDSTORM; }
+    PARAMETRIZE { move = MOVE_CELEBRATE; }
     GIVEN {
         ASSUME(gMovesInfo[MOVE_SWIFT].category == DAMAGE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_WOBBUFFET) ;

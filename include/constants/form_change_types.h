@@ -24,6 +24,8 @@
 // param2: time of day to check, optional.
 // - DAY if Form change that activates in the daytime.
 // - NIGHT if Form change that activates at nighttime.
+// - 0 if irrelevant, but param3 is necessary.
+// param3: illegal statuses to have, optional.
 #define FORM_CHANGE_ITEM_USE                    2
 
 // TODO: Form change that activates when the Pokémon learns or forgets the move.
@@ -126,5 +128,10 @@
 // Form change that activates when terastallized as as a specific type
 // param1: tera type
 #define FORM_CHANGE_BATTLE_TERASTALLIZATION     22
+
+// Form change that activates at midnight after a certain amount of days has passed.
+// Adding this form change will automatically make the countdown start as soon the Pokémon changes into a species other than the one specified for this form change.
+// param1: amount of days
+#define FORM_CHANGE_DAYS_PASSED                 23
 
 #endif // GUARD_CONSTANTS_FORM_CHANGE_TYPES_H

@@ -1934,12 +1934,6 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 0, // TODO: Assign points
     },
 
-    [EFFECT_SHELL_SIDE_ARM] =
-    {
-        .battleScript = BattleScript_EffectShellSideArm,
-        .battleTvScore = 0, // TODO: Assign points
-    },
-
     [EFFECT_TERRAIN_PULSE] =
     {
         .battleScript = BattleScript_EffectHit,
@@ -2249,4 +2243,11 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
     },
+
+    [EFFECT_GUARDIAN_OF_ALOLA] =
+    {
+        .battleScript = BattleScript_DamageToQuarterTargetHP,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+
 };

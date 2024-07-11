@@ -63,8 +63,8 @@
 #define BS_EFFECT_BATTLER           2
 #define BS_FAINTED                  3
 #define BS_ATTACKER_WITH_PARTNER    4 // for Cmd_updatestatusicon
-#define BS_FAINTED_LINK_MULTIPLE_1  5 // for openpartyscreen
-#define BS_FAINTED_LINK_MULTIPLE_2  6 // for openpartyscreen
+#define BS_FAINTED_MULTIPLE_1       5 // for openpartyscreen
+#define BS_FAINTED_MULTIPLE_2       6 // for openpartyscreen
 #define BS_BATTLER_0                7
 #define BS_ATTACKER_SIDE            8 // for Cmd_jumpifability
 #define BS_TARGET_SIDE              9 // for Cmd_jumpifability
@@ -206,35 +206,34 @@
 #define VARIOUS_JUMP_IF_WEATHER_AFFECTED             114
 #define VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED         115
 #define VARIOUS_SET_ATTACKER_STICKY_WEB_USER         116
-#define VARIOUS_SHELL_SIDE_ARM_CHECK                 117
-#define VARIOUS_TRY_NO_RETREAT                       118
-#define VARIOUS_TRY_TAR_SHOT                         119
-#define VARIOUS_CAN_TAR_SHOT_WORK                    120
-#define VARIOUS_CHECK_POLTERGEIST                    121
-#define VARIOUS_CUT_1_3_HP_RAISE_STATS               122
-#define VARIOUS_TRY_END_NEUTRALIZING_GAS             123
-#define VARIOUS_JUMP_IF_UNDER_200                    124
-#define VARIOUS_SET_SKY_DROP                         125
-#define VARIOUS_CLEAR_SKY_DROP                       126
-#define VARIOUS_SKY_DROP_YAWN                        127
-#define VARIOUS_CURE_CERTAIN_STATUSES                128
-#define VARIOUS_TRY_RESET_NEGATIVE_STAT_STAGES       129
-#define VARIOUS_JUMP_IF_LAST_USED_ITEM_BERRY         130
-#define VARIOUS_JUMP_IF_LAST_USED_ITEM_HOLD_EFFECT   131
-#define VARIOUS_SAVE_BATTLER_ITEM                    132
-#define VARIOUS_RESTORE_BATTLER_ITEM                 133
-#define VARIOUS_BATTLER_ITEM_TO_LAST_USED_ITEM       134
-#define VARIOUS_SET_BEAK_BLAST                       135
-#define VARIOUS_SWAP_SIDE_STATUSES                   136
-#define VARIOUS_SWAP_STATS                           137
-#define VARIOUS_TEATIME_INVUL                        138
-#define VARIOUS_TEATIME_TARGETS                      139
-#define VARIOUS_TRY_WIND_RIDER_POWER                 140
-#define VARIOUS_ACTIVATE_WEATHER_CHANGE_ABILITIES    141
-#define VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES    142
-#define VARIOUS_STORE_HEALING_WISH                   143
-#define VARIOUS_HIT_SWITCH_TARGET_FAILED             144
-#define VARIOUS_TRY_REVIVAL_BLESSING                 145
+#define VARIOUS_TRY_NO_RETREAT                       117
+#define VARIOUS_TRY_TAR_SHOT                         118
+#define VARIOUS_CAN_TAR_SHOT_WORK                    119
+#define VARIOUS_CHECK_POLTERGEIST                    120
+#define VARIOUS_CUT_1_3_HP_RAISE_STATS               121
+#define VARIOUS_TRY_END_NEUTRALIZING_GAS             122
+#define VARIOUS_JUMP_IF_UNDER_200                    123
+#define VARIOUS_SET_SKY_DROP                         124
+#define VARIOUS_CLEAR_SKY_DROP                       125
+#define VARIOUS_SKY_DROP_YAWN                        126
+#define VARIOUS_CURE_CERTAIN_STATUSES                127
+#define VARIOUS_TRY_RESET_NEGATIVE_STAT_STAGES       128
+#define VARIOUS_JUMP_IF_LAST_USED_ITEM_BERRY         129
+#define VARIOUS_JUMP_IF_LAST_USED_ITEM_HOLD_EFFECT   130
+#define VARIOUS_SAVE_BATTLER_ITEM                    131
+#define VARIOUS_RESTORE_BATTLER_ITEM                 132
+#define VARIOUS_BATTLER_ITEM_TO_LAST_USED_ITEM       133
+#define VARIOUS_SET_BEAK_BLAST                       134
+#define VARIOUS_SWAP_SIDE_STATUSES                   135
+#define VARIOUS_SWAP_STATS                           136
+#define VARIOUS_TEATIME_INVUL                        137
+#define VARIOUS_TEATIME_TARGETS                      138
+#define VARIOUS_TRY_WIND_RIDER_POWER                 139
+#define VARIOUS_ACTIVATE_WEATHER_CHANGE_ABILITIES    140
+#define VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES    141
+#define VARIOUS_STORE_HEALING_WISH                   142
+#define VARIOUS_HIT_SWITCH_TARGET_FAILED             143
+#define VARIOUS_TRY_REVIVAL_BLESSING                 144
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

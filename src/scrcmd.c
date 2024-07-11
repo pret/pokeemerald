@@ -2467,3 +2467,8 @@ bool8 ScrCmd_warpwhitefade(struct ScriptContext *ctx)
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
+
+void ScriptSetDoubleBattleFlag(struct ScriptContext *ctx)
+{
+    sIsScriptedWildDouble = TRUE;
+}
