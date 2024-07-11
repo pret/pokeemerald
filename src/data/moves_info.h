@@ -14126,6 +14126,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .metronomeBanned = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = B_UPDATED_MOVE_DATA >= GEN_7 ? MOVE_EFFECT_DEF_PLUS_2:  MOVE_EFFECT_DEF_PLUS_1,
+            .self = TRUE,
             .chance = 50,
         }),
         .contestEffect = CONTEST_EFFECT_USER_MORE_EASILY_STARTLED,
