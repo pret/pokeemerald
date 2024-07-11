@@ -107,7 +107,9 @@ PitArena_MartScript_Vitamins:
 
 PitArena_MartScript_TMs:
 	setflag FLAG_BUY_FROM_MART
+	setflag FLAG_TM_SHOP
 	pokemart PitArena_Mart_TMs
+	clearflag FLAG_TM_SHOP
 	goto PitShop_ShopNPCHook
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
@@ -115,7 +117,9 @@ PitArena_MartScript_TMs:
 
 PitArena_MartScript_TMs_100:
 	setflag FLAG_BUY_FROM_MART
+	setflag FLAG_TM_SHOP
 	pokemart PitArena_Mart_TMs_100
+	clearflag FLAG_TM_SHOP
 	goto PitShop_ShopNPCHook
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
@@ -123,7 +127,9 @@ PitArena_MartScript_TMs_100:
 
 PitArena_MartScript_TMs_200:
 	setflag FLAG_BUY_FROM_MART
+	setflag FLAG_TM_SHOP
 	pokemart PitArena_Mart_TMs_200
+	clearflag FLAG_TM_SHOP
 	goto PitShop_ShopNPCHook
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release

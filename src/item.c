@@ -961,13 +961,67 @@ const u8 *ItemId_GetDescription(u16 itemId)
 
     if (GetPocketByItemId(SanitizeItemId(itemId)) == POCKET_TM_HM)
     {
-        FormatTextByWidth(tmStringVar, 100, FONT_NORMAL, gMovesInfo[gItemsInfo[itemId].secondaryId].description, 1);
+        FormatTextByWidth(tmStringVar, 100, FONT_SMALL_NARROW, gMovesInfo[gItemsInfo[itemId].secondaryId].description, 1);
         return tmStringVar;
     }
 
     return gItemsInfo[SanitizeItemId(itemId)].description;
 }
 
+const u8 gText_PowerAccPP[] = _("BP{STR_VAR_1}/PP{STR_VAR_2}/AC{STR_VAR_3}"); 
+const u8 *ItemId_GetTMData(u16 itemId)
+{   
+    s32 x;
+    const struct MoveInfo *move;
+    u8 buffer[32];
+    const u8 *str;
+    const u8 colors[3] = {10,  1,  2};
+
+    if(FlagGet(FLAG_RANDOM_MODE))
+    {
+        move = &gMovesInfo[GetRandomMove(itemId, gItemsInfo[itemId].secondaryId)];
+    }
+    else
+    {
+        move = &gMovesInfo[gItemsInfo[itemId].secondaryId];
+    }
+    
+    ConvertIntToDecimalStringN(buffer, move->pp, STR_CONV_MODE_LEFT_ALIGN, 2);
+    StringCopy(gStringVar2, buffer);
+
+    if (move->power < 2)
+    {
+        str = gText_OneDash;
+    }
+    else
+    {
+        ConvertIntToDecimalStringN(buffer, move->power, STR_CONV_MODE_LEFT_ALIGN, 3);
+        str = buffer;
+    }
+    StringCopy(gStringVar1, str);
+
+    if (move->accuracy == 0)
+    {
+        str = gText_OneDash;
+    }
+    else
+    {
+        ConvertIntToDecimalStringN(buffer, move->accuracy, STR_CONV_MODE_LEFT_ALIGN, 3);
+        str = buffer;
+    }
+    StringCopy(gStringVar3, str);
+    StringExpandPlaceholders(gStringVar4, gText_PowerAccPP);
+
+    FormatTextByWidth(tmStringVar, 100, FONT_SMALL_NARROW, gStringVar4, 1);
+    return tmStringVar;
+}
+
+bool8 IsTM(u16 itemId)
+{
+    if (GetPocketByItemId(SanitizeItemId(itemId)) == POCKET_TM_HM)
+        return TRUE;
+    return FALSE;
+}
 
 u8 ItemId_GetImportance(u16 itemId)
 {

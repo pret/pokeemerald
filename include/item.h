@@ -69,6 +69,8 @@ const u8 *ItemId_GetEffect(u32 itemId);
 u32 ItemId_GetHoldEffect(u32 itemId);
 u32 ItemId_GetHoldEffectParam(u32 itemId);
 const u8 *ItemId_GetDescription(u16 itemId);
+const u8 *ItemId_GetTMData(u16 itemId);
+bool8 IsTM(u16 itemId);
 u8 ItemId_GetImportance(u16 itemId);
 u8 ItemId_GetPocket(u16 itemId);
 u8 ItemId_GetType(u16 itemId);
