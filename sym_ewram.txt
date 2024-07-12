@@ -159,3 +159,4 @@
 	.include "src/ui_mode_menu.o"
 	.include "src/sound_check_menu.o"
 	.include "src/ui_outfits.o"
+	.include "src/pinball.o"
