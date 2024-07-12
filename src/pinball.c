@@ -2112,7 +2112,7 @@ static void PlayPinballGame(u8 gameType)
 {
     u8 taskId;
 
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
     sPinballGame = AllocZeroed(sizeof(*sPinballGame));
     sPinballGame->gameType = gameType;
     sPinballGame->returnMainCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
@@ -3508,8 +3508,8 @@ static void UpdateBallSprite(struct Sprite *sprite)
 {
     int ballAnim;
     struct Ball *ball = &sPinballGame->ball;
-    sprite->pos1.x = (ball->xPos >> 8) - sPinballGame->cameraScrollX;
-    sprite->pos1.y = (ball->yPos >> 8) - sPinballGame->cameraScrollY;
+    sprite->x = (ball->xPos >> 8) - sPinballGame->cameraScrollX;
+    sprite->y = (ball->yPos >> 8) - sPinballGame->cameraScrollY;
 
     ball->rotation += ball->spin;
     ballAnim = (ball->rotation >> 4) % 8;
@@ -3525,8 +3525,8 @@ static void UpdateFlipperSprite(struct Sprite *sprite)
     else
         flipper = &sPinballGame->leftFlipper;
 
-    sprite->pos1.x = flipper->xPos - sPinballGame->cameraScrollX;
-    sprite->pos1.y = flipper->yPos - sPinballGame->cameraScrollY;
+    sprite->x = flipper->xPos - sPinballGame->cameraScrollX;
+    sprite->y = flipper->yPos - sPinballGame->cameraScrollY;
 
     anim = (flipper->type * 3) + ((flipper->state >> 8) / 6);
     StartSpriteAnim(sprite, anim);
@@ -3537,8 +3537,8 @@ static void UpdateTimerDigitSprite(struct Sprite *sprite)
     int minutes, tensDigit, onesDigit;
     int type = sprite->data[0];
 
-    sprite->pos2.x = -sPinballGame->cameraScrollX;
-    sprite->pos2.y = -sPinballGame->cameraScrollY;
+    sprite->x2 = -sPinballGame->cameraScrollX;
+    sprite->y2 = -sPinballGame->cameraScrollY;
 
     switch (type)
     {
@@ -3868,8 +3868,8 @@ static void UpdateMeowthSprite(struct Sprite *sprite)
     int prevFacing = sprite->data[1];
     int curState = meowth->state;
     int curFacing = meowth->facing;
-    sprite->pos1.x = meowth->xPos - sPinballGame->cameraScrollX;
-    sprite->pos1.y = meowth->yPos - sPinballGame->cameraScrollY;
+    sprite->x = meowth->xPos - sPinballGame->cameraScrollX;
+    sprite->y = meowth->yPos - sPinballGame->cameraScrollY;
 
     // Check if Meowth's state changed, and start the appropriate
     // sprite animation.
@@ -3906,8 +3906,8 @@ static void UpdateMeowthJewelSprite(struct Sprite *sprite)
     struct MeowthJewel *jewel = &sPinballGame->meowth.jewels[jewelId];
     int prevState = sprite->data[1];
     int curState = jewel->state;
-    sprite->pos1.x = jewel->xPos - sPinballGame->cameraScrollX;
-    sprite->pos1.y = (jewel->yPos >> 8) - sPinballGame->cameraScrollY;
+    sprite->x = jewel->xPos - sPinballGame->cameraScrollX;
+    sprite->y = (jewel->yPos >> 8) - sPinballGame->cameraScrollY;
     if (prevState != curState)
     {
         sprite->data[1] = curState;
@@ -3940,17 +3940,17 @@ static void UpdateMeowthJewelMultiplierSprite(struct Sprite *sprite)
     // data[0] = state
     // data[1] = state counter
     // data[2] = original y position
-    sprite->pos2.x = -sPinballGame->cameraScrollX;
-    sprite->pos2.y = -sPinballGame->cameraScrollY;
+    sprite->x2 = -sPinballGame->cameraScrollX;
+    sprite->y2 = -sPinballGame->cameraScrollY;
     switch (sprite->data[0])
     {
     case 0:
-        sprite->pos1.y--;
+        sprite->y--;
         if (++sprite->data[1] == 5)
         {
             sprite->data[0] = 1;
             sprite->data[1] = 0;
-            sprite->pos1.y = sprite->data[2];
+            sprite->y = sprite->data[2];
         }
         break;
     case 1:
@@ -4000,8 +4000,8 @@ static void UpdateMeowthJewelSparkleSprite(struct Sprite *sprite)
     else
     {
         sprite->data[0]--;
-        sprite->pos1.x = ((sprite->data[1] - 1) * 8 + 4) - sPinballGame->cameraScrollX;
-        sprite->pos1.y = 4 - sPinballGame->cameraScrollY;
+        sprite->x = ((sprite->data[1] - 1) * 8 + 4) - sPinballGame->cameraScrollX;
+        sprite->y = 4 - sPinballGame->cameraScrollY;
         sprite->invisible = FALSE;
     }
 }
@@ -4154,8 +4154,8 @@ static void UpdateDugtrioSprite(struct Sprite *sprite)
     int prevState = sprite->data[0];
     int curState = diglett->dugtrioState;
 
-    sprite->pos2.x = -sPinballGame->cameraScrollX;
-    sprite->pos2.y = -sPinballGame->cameraScrollY;
+    sprite->x2 = -sPinballGame->cameraScrollX;
+    sprite->y2 = -sPinballGame->cameraScrollY;
 
     // Check if Dugtrio's state changed, and start the appropriate
     // sprite animation.
@@ -4412,8 +4412,8 @@ static void UpdateSeelSprite(struct Sprite *sprite)
     struct SeelSwimmer *swimmer = &sPinballGame->seel.swimmers[sprite->data[1]];
     int prevState = sprite->data[0];
     int curState = swimmer->state;
-    sprite->pos1.x = (swimmer->xPos >> 8) - sPinballGame->cameraScrollX;
-    sprite->pos1.y = (swimmer->yPos >> 8) - sPinballGame->cameraScrollY;
+    sprite->x = (swimmer->xPos >> 8) - sPinballGame->cameraScrollX;
+    sprite->y = (swimmer->yPos >> 8) - sPinballGame->cameraScrollY;
 
     // Check if this Seel's state changed, and start the appropriate
     // sprite animation.
@@ -4471,8 +4471,8 @@ static void UpdateSeelSparkleSprite(struct Sprite *sprite)
     else
     {
         sprite->data[0]--;
-        sprite->pos1.x = ((sprite->data[1] - 1) * 8 + 4) - sPinballGame->cameraScrollX;
-        sprite->pos1.y = 4 - sPinballGame->cameraScrollY;
+        sprite->x = ((sprite->data[1] - 1) * 8 + 4) - sPinballGame->cameraScrollX;
+        sprite->y = 4 - sPinballGame->cameraScrollY;
         sprite->invisible = FALSE;
     }
 }
@@ -4482,17 +4482,17 @@ static void UpdateSeelMultiplierSprite(struct Sprite *sprite)
     // data[0] = state
     // data[1] = state counter
     // data[2] = original y position
-    sprite->pos2.x = -sPinballGame->cameraScrollX;
-    sprite->pos2.y = -sPinballGame->cameraScrollY;
+    sprite->x2 = -sPinballGame->cameraScrollX;
+    sprite->y2 = -sPinballGame->cameraScrollY;
     switch (sprite->data[0])
     {
     case 0:
-        sprite->pos1.y--;
+        sprite->y--;
         if (++sprite->data[1] == 5)
         {
             sprite->data[0] = 1;
             sprite->data[1] = 0;
-            sprite->pos1.y = sprite->data[2];
+            sprite->y = sprite->data[2];
         }
         break;
     case 1:
@@ -4823,19 +4823,19 @@ static void UpdateGhostSprite(struct Sprite *sprite, struct GraveyardGhost *ghos
     // data[1] = ghost index
     int prevState = sprite->data[0];
     int curState = ghost->state;
-    sprite->pos1.x = (ghost->xPos >> 8) - sPinballGame->cameraScrollX;
-    sprite->pos1.y = (ghost->yPos >> 8) - sPinballGame->cameraScrollY;
+    sprite->x = (ghost->xPos >> 8) - sPinballGame->cameraScrollX;
+    sprite->y = (ghost->yPos >> 8) - sPinballGame->cameraScrollY;
     switch ((ghost->counter % 52) / 13)
     {
     case 0:
     case 2:
-        sprite->pos2.y = 0;
+        sprite->y2 = 0;
         break;
     case 1:
-        sprite->pos2.y = 1;
+        sprite->y2 = 1;
         break;
     case 3:
-        sprite->pos2.y = -1;
+        sprite->y2 = -1;
         break;
     }
 
@@ -4871,8 +4871,8 @@ static void UpdateGengarSprite(struct Sprite *sprite)
     struct GengarGhost *gengarGhost = &sPinballGame->gengar.gengarGhost;
     int prevState = sprite->data[0];
     int curState = gengarGhost->state;
-    sprite->pos1.x = (gengarGhost->xPos >> 8) - sPinballGame->cameraScrollX;
-    sprite->pos1.y = (gengarGhost->yPos >> 8) - sPinballGame->cameraScrollY;
+    sprite->x = (gengarGhost->xPos >> 8) - sPinballGame->cameraScrollX;
+    sprite->y = (gengarGhost->yPos >> 8) - sPinballGame->cameraScrollY;
 
     // Check if Gengar's state changed, and start the appropriate
     // sprite animation.
