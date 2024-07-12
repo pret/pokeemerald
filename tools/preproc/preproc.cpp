@@ -142,7 +142,7 @@ const char* GetFileExtension(const char* filename)
 
 static void UsageAndExit(const char *program)
 {
-    std::fprintf(stderr, "Usage: %s SRC_FILE CHARMAP_FILE [-i] [-e]\nwhere -i denotes if input is from stdin\n      -e enables enum handling\n", program);
+    std::fprintf(stderr, "Usage: %s [-i] [-e] SRC_FILE CHARMAP_FILE\nwhere -i denotes if input is from stdin\n      -e enables enum handling\n", program);
     std::exit(EXIT_FAILURE);
 }
 
@@ -154,25 +154,11 @@ int main(int argc, char **argv)
     bool isStdin = false;
     bool doEnum = false;
 
-    /* preproc SRC_FILE CHARMAP_FILE [-i] [-e] */
-    while ((opt = getopt(argc, argv, "-ie")) != -1)
+    /* preproc [-i] [-e] SRC_FILE CHARMAP_FILE */
+    while ((opt = getopt(argc, argv, "ie")) != -1)
     {
         switch (opt)
         {
-        case 1: // positional.
-            switch (optind)
-            {
-            case 2:
-                source = optarg;
-                break;
-            case 3:
-                charmap = optarg;
-                break;
-            default:
-                UsageAndExit(argv[0]);
-                break;
-            }
-            break;
         case 'i':
             isStdin = true;
             break;
@@ -185,8 +171,11 @@ int main(int argc, char **argv)
         }
     }
 
-    if (optind != argc || !source || !charmap)
+    if (optind + 2 != argc)
         UsageAndExit(argv[0]);
+
+    source = argv[optind + 0];
+    charmap = argv[optind + 1];
 
     g_charmap = new Charmap(charmap);
 
