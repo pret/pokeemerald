@@ -288,6 +288,7 @@ EventScript_ResetAllMapFlags::
 	clearflag FLAG_MIXED_DOUBLES_MODE
 	setflag FLAG_NO_EXP_MODE
 	setflag FLAG_NO_DUPLICATES
+	setvar B_BATTLE_SPEED, 1
 	call EventScript_ResetAllBerries
 	end
 
