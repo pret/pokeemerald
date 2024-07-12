@@ -4530,6 +4530,36 @@
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/PitArenaUnderwater/border.bin",
       "blockdata_filepath": "data/layouts/PitArenaUnderwater/map.bin"
+    },
+    {
+      "id": "LAYOUT_PIT_ARENA_MINE",
+      "name": "PitArenaMine_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_PitArenaMine",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/PitArenaMine/border.bin",
+      "blockdata_filepath": "data/layouts/PitArenaMine/map.bin"
+    },
+    {
+      "id": "LAYOUT_PIT_ARENA_SPIDER_CAVE",
+      "name": "PitArenaSpiderCave_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_PitArenaSpiderCave",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/PitArenaSpiderCave/border.bin",
+      "blockdata_filepath": "data/layouts/PitArenaSpiderCave/map.bin"
+    },
+    {
+      "id": "LAYOUT_PIT_ARENA_WHITE_BARK",
+      "name": "PitArenaWhiteBark_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_PitArenaWhiteBark",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/PitArenaWhiteBark/border.bin",
+      "blockdata_filepath": "data/layouts/PitArenaWhiteBark/map.bin"
     }
   ]
 }

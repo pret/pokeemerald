@@ -1108,3 +1108,9 @@ EventScript_End:
 	.include "data/maps/PitArenaMushroomWoods/scripts.inc"
 	.include "data/maps/PitArenaSpiderWoods/scripts.inc"
 	.include "data/maps/PitArenaUnderwater/scripts.inc"
+
+	.include "data/maps/PitArenaMine/scripts.inc"
+
+	.include "data/maps/PitArenaSpiderCave/scripts.inc"
+
+	.include "data/maps/PitArenaWhiteBark/scripts.inc"

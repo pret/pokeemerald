@@ -105,7 +105,10 @@
     "PitArenaClouds",
     "PitArenaMushroomWoods",
     "PitArenaSpiderWoods",
-    "PitArenaUnderwater"
+    "PitArenaUnderwater",
+    "PitArenaMine",
+    "PitArenaSpiderCave",
+    "PitArenaWhiteBark"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",

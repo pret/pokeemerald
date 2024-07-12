@@ -75,6 +75,9 @@
 #define MAP_PIT_ARENA_MUSHROOM_WOODS (66 | (0 << 8))
 #define MAP_PIT_ARENA_SPIDER_WOODS   (67 | (0 << 8))
 #define MAP_PIT_ARENA_UNDERWATER     (68 | (0 << 8))
+#define MAP_PIT_ARENA_MINE           (69 | (0 << 8))
+#define MAP_PIT_ARENA_SPIDER_CAVE    (70 | (0 << 8))
+#define MAP_PIT_ARENA_WHITE_BARK     (71 | (0 << 8))
 
 // gMapGroup_IndoorLittleroot
 #define MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F    (0 | (1 << 8))
