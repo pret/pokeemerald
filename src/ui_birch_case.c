@@ -44,6 +44,7 @@
 #include "naming_screen.h"
 #include "tv.h"
 #include "gba/isagbprint.h"
+#include "random.h"
 
  /*
     9 Starter Selection Birch Case
@@ -157,6 +158,7 @@ static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
 static EWRAM_DATA u8 sMonChosenAlready[9] = {0};
 static EWRAM_DATA u16 sRolledSpecies[9] = {0};
+static EWRAM_DATA u16 sRolledLegendAlready = 0;
 
 //==========STATIC=DEFINES==========//
 static void BirchCaseRunSetup(void);
@@ -185,6 +187,7 @@ static void GenerateRandomSpeciesForCase(void)
     bool8 rerollMon;
     u8 partyCount;
     int i;
+    sRolledLegendAlready = FALSE;
 
     for(u8 index = 0; index < 9; index++)
     {
@@ -197,7 +200,7 @@ static void GenerateRandomSpeciesForCase(void)
             do
             {
                 rerollMon = FALSE;
-                if (FlagGet(FLAG_NO_LEGENDARIES)) //reroll in case any legendaries, mythics or ultra beasts are determined
+                if (FlagGet(FLAG_NO_LEGENDARIES) || (sRolledLegendAlready && (Random() % 10))) //reroll in case any legendaries, mythics or ultra beasts are determined
                 {
                     while (((IsSpeciesLegendary(species) || IsSpeciesMythical(species) || IsSpeciesUltraBeast(species) || IsSpeciesParadoxMon(species))) && counter < 10)
                     {
@@ -243,22 +246,31 @@ static void GenerateRandomSpeciesForCase(void)
             while (rerollMon);
 
             //save species for rerolls
+            if((IsSpeciesLegendary(species) || IsSpeciesMythical(species) || IsSpeciesUltraBeast(species) || IsSpeciesParadoxMon(species)))
+                    sRolledLegendAlready = TRUE;
             sRolledSpecies[index] = species;
         }
         else
         {
             //reroll in case any legendaries, mythics or ultra beasts are determined
-            if (FlagGet(FLAG_NO_LEGENDARIES))
+            if (FlagGet(FLAG_NO_LEGENDARIES) || (sRolledLegendAlready && (Random() % 20)))
             {
                 while ((IsSpeciesLegendary(species) || IsSpeciesMythical(species) || IsSpeciesUltraBeast(species) || IsSpeciesParadoxMon(species)) && counter < 1000)
                 {
                     species = GetRandomSpeciesFlattenedCurve();
                     counter++;
                 }
+                if((IsSpeciesLegendary(species) || IsSpeciesMythical(species) || IsSpeciesUltraBeast(species) || IsSpeciesParadoxMon(species)))
+                    sRolledLegendAlready = TRUE;
                 sRolledSpecies[index] = species;
             }
             else
+            {
+                if((IsSpeciesLegendary(species) || IsSpeciesMythical(species) || IsSpeciesUltraBeast(species) || IsSpeciesParadoxMon(species)))
+                    sRolledLegendAlready = TRUE;
                 sRolledSpecies[index] = species;
+            }
+                
         }
     }
     return;
