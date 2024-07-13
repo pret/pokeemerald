@@ -1715,7 +1715,7 @@ u8 DoFieldEndTurnEffects(void)
     do
     {
         s32 i;
-        u8 side;
+        u32 side;
 
         switch (gBattleStruct->turnCountersTracker)
         {
@@ -2068,19 +2068,11 @@ u8 DoFieldEndTurnEffects(void)
             while (gBattleStruct->turnSideTracker < 2)
             {
                 side = gBattleStruct->turnSideTracker;
-                if (gSideStatuses[side] & SIDE_STATUS_DAMAGE_NON_TYPES)
+                if (gSideStatuses[side] & SIDE_STATUS_DAMAGE_NON_TYPES && --gSideTimers[side].damageNonTypesTimer == 0)
                 {
-                    if (--gSideTimers[side].damageNonTypesTimer == 0)
-                    {
-                        // There is no in-game message when this side status ends.
-                        gSideStatuses[side] &= ~SIDE_STATUS_DAMAGE_NON_TYPES;
-                        effect++;
-                    }
-                    else
-                    {
-                        ChooseDamageNonTypesString(gSideTimers[side].damageNonTypesType);
-                        BattleScriptExecute(BattleScript_DamageNonTypesContinues);
-                    }
+                    // There is no in-game message when this side status ends.
+                    gSideStatuses[side] &= ~SIDE_STATUS_DAMAGE_NON_TYPES;
+                    effect++;
                 }
                 gBattleStruct->turnSideTracker++;
                 if (effect != 0)
@@ -2346,7 +2338,9 @@ enum
     ENDTURN_SALT_CURE,
     ENDTURN_SYRUP_BOMB,
     ENDTURN_DYNAMAX,
+    ENDTURN_GMAX_MOVE_RESIDUAL_DAMAGE,
     ENDTURN_SEA_OF_FIRE_DAMAGE,
+    ENDTURN_WEATHER_DAMAGE,
     ENDTURN_BATTLER_COUNT
 };
 
@@ -2933,13 +2927,79 @@ u8 DoBattlerEndTurnEffects(void)
             }
             gBattleStruct->turnEffectsTracker++;
             break;
+        case ENDTURN_GMAX_MOVE_RESIDUAL_DAMAGE:
+            {
+                u32 side = GetBattlerSide(gBattlerAttacker);
+                if (gSideTimers[side].damageNonTypesTimer
+                 && !IS_BATTLER_OF_TYPE(gBattlerAttacker, gSideTimers[side].damageNonTypesType)
+                 && IsBattlerAlive(gBattlerAttacker)
+                 && GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
+                {
+                    gBattleScripting.battler = battler;
+                    gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 6;
+                    ChooseDamageNonTypesString(gSideTimers[side].damageNonTypesType);
+                    BattleScriptExecute(BattleScript_DamageNonTypesContinues);
+                    effect++;
+                }
+                gBattleStruct->turnEffectsTracker++;
+                break;
+            }
         case ENDTURN_SEA_OF_FIRE_DAMAGE:
             if (IsBattlerAlive(battler) && gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SEA_OF_FIRE)
             {
-                gBattleMoveDamage = gBattleMons[battler].maxHP / 8;
+                gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 8;
                 BtlController_EmitStatusAnimation(battler, BUFFER_A, FALSE, STATUS1_BURN);
                 MarkBattlerForControllerExec(battler);
                 BattleScriptExecute(BattleScript_HurtByTheSeaOfFire);
+                effect++;
+            }
+            gBattleStruct->turnEffectsTracker++;
+            break;
+        case ENDTURN_WEATHER_DAMAGE:
+            ability = GetBattlerAbility(battler);
+            if (!IsBattlerAlive(battler) || !WEATHER_HAS_EFFECT || ability == ABILITY_MAGIC_GUARD)
+            {
+                gBattleStruct->turnEffectsTracker++;
+                break;
+            }
+            else if (gBattleWeather & B_WEATHER_SANDSTORM
+                  && ability != ABILITY_SAND_VEIL
+                  && ability != ABILITY_SAND_FORCE
+                  && ability != ABILITY_SAND_RUSH
+                  && ability != ABILITY_OVERCOAT
+                  && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ROCK)
+                  && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GROUND)
+                  && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_STEEL)
+                  && !(gStatuses3[gBattlerAttacker] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
+                  && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_SAFETY_GOGGLES)
+            {
+                gBattleScripting.battler = battler;
+                gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 16;
+                BattleScriptExecute(BattleScript_DamagingWeather);
+                effect++;
+            }
+            else if (gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW)
+                  && ability == ABILITY_ICE_BODY
+                  && !(gStatuses3[battler] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
+                  && !BATTLER_MAX_HP(battler)
+                  && !(gStatuses3[battler] & STATUS3_HEAL_BLOCK))
+            {
+                gBattleScripting.battler = battler;
+                gBattleMoveDamage = -1 * (GetNonDynamaxMaxHP(battler) / 16);
+                BattleScriptExecute(BattleScript_IceBodyHeal);
+                effect++;
+            }
+            else if (gBattleWeather & B_WEATHER_HAIL
+                  && !IS_BATTLER_OF_TYPE(battler, TYPE_ICE)
+                  && ability != ABILITY_SNOW_CLOAK
+                  && ability != ABILITY_OVERCOAT
+                  && ability != ABILITY_ICE_BODY
+                  && !(gStatuses3[battler] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
+                  && GetBattlerHoldEffect(battler, TRUE) != HOLD_EFFECT_SAFETY_GOGGLES)
+            {
+                gBattleScripting.battler = battler;
+                gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 16;
+                BattleScriptExecute(BattleScript_DamagingWeather);
                 effect++;
             }
             gBattleStruct->turnEffectsTracker++;

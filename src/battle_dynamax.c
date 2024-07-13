@@ -971,24 +971,6 @@ void BS_TrySetStatus2(void)
     }
 }
 
-// Applies the endturn damage effect associated with the "Damage Non-" G-Max moves.
-void BS_DamageNonTypes(void)
-{
-    NATIVE_ARGS();
-    u8 side = GetBattlerSide(gBattlerAttacker);
-    gBattleMoveDamage = 0;
-    if (gSideTimers[side].damageNonTypesTimer
-        && !IS_BATTLER_OF_TYPE(gBattlerAttacker, gSideTimers[side].damageNonTypesType)
-        && IsBattlerAlive(gBattlerAttacker)
-        && GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
-    {
-        gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 6;
-        if (gBattleMoveDamage == 0)
-            gBattleMoveDamage = 1;
-    }
-    gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
 // Heals one-sixth of the target's HP, including for Dynamaxed targets.
 void BS_HealOneSixth(void)
 {

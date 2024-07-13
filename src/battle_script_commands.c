@@ -490,7 +490,7 @@ static void Cmd_setlightscreen(void);
 static void Cmd_tryKO(void);
 static void Cmd_damagetohalftargethp(void);
 static void Cmd_unused_95(void);
-static void Cmd_weatherdamage(void);
+static void Cmd_unused_96(void);
 static void Cmd_tryinfatuating(void);
 static void Cmd_updatestatusicon(void);
 static void Cmd_setmist(void);
@@ -749,7 +749,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_tryKO,                                   //0x93
     Cmd_damagetohalftargethp,                    //0x94
     Cmd_unused_95,                               //0x95
-    Cmd_weatherdamage,                           //0x96
+    Cmd_unused_96,                               //0x96
     Cmd_tryinfatuating,                          //0x97
     Cmd_updatestatusicon,                        //0x98
     Cmd_setmist,                                 //0x99
@@ -12411,74 +12411,8 @@ static void Cmd_unused_95(void)
 {
 }
 
-static void Cmd_weatherdamage(void)
+static void Cmd_unused_96(void)
 {
-    CMD_ARGS();
-
-    u32 ability = GetBattlerAbility(gBattlerAttacker);
-
-    gBattleMoveDamage = 0;
-    if (IsBattlerAlive(gBattlerAttacker) && WEATHER_HAS_EFFECT && ability != ABILITY_MAGIC_GUARD)
-    {
-        if (gBattleWeather & B_WEATHER_SANDSTORM)
-        {
-            if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ROCK)
-                && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GROUND)
-                && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_STEEL)
-                && ability != ABILITY_SAND_VEIL
-                && ability != ABILITY_SAND_FORCE
-                && ability != ABILITY_SAND_RUSH
-                && ability != ABILITY_OVERCOAT
-                && !(gStatuses3[gBattlerAttacker] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
-                && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_SAFETY_GOGGLES)
-            {
-                gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 16;
-                if (gBattleMoveDamage == 0)
-                    gBattleMoveDamage = 1;
-            }
-        }
-        if (gBattleWeather & B_WEATHER_HAIL)
-        {
-            if (ability == ABILITY_ICE_BODY
-                && !(gStatuses3[gBattlerAttacker] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
-                && !BATTLER_MAX_HP(gBattlerAttacker)
-                && !(gStatuses3[gBattlerAttacker] & STATUS3_HEAL_BLOCK))
-            {
-                gBattlerAbility = gBattlerAttacker;
-                gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 16;
-                if (gBattleMoveDamage == 0)
-                    gBattleMoveDamage = 1;
-                gBattleMoveDamage *= -1;
-            }
-            else if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ICE)
-                && ability != ABILITY_SNOW_CLOAK
-                && ability != ABILITY_OVERCOAT
-                && ability != ABILITY_ICE_BODY
-                && !(gStatuses3[gBattlerAttacker] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
-                && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_SAFETY_GOGGLES)
-            {
-                gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 16;
-                if (gBattleMoveDamage == 0)
-                    gBattleMoveDamage = 1;
-            }
-        }
-        if (gBattleWeather & B_WEATHER_SNOW)
-        {
-            if (ability == ABILITY_ICE_BODY
-                && !(gStatuses3[gBattlerAttacker] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
-                && !BATTLER_MAX_HP(gBattlerAttacker)
-                && !(gStatuses3[gBattlerAttacker] & STATUS3_HEAL_BLOCK))
-            {
-                gBattlerAbility = gBattlerAttacker;
-                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 16;
-                if (gBattleMoveDamage == 0)
-                    gBattleMoveDamage = 1;
-                gBattleMoveDamage *= -1;
-            }
-        }
-    }
-
-    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_tryinfatuating(void)
@@ -14044,7 +13978,7 @@ u32 GetNaturePowerMove(u32 battler)
         move = MOVE_PSYCHIC;
     else if (sNaturePowerMoves[gBattleTerrain] == MOVE_NONE)
         move = MOVE_TRI_ATTACK;
-    
+
     if (GetActiveGimmick(battler) == GIMMICK_Z_MOVE)
     {
         gBattleStruct->zmove.baseMoves[gBattlerAttacker] = move;

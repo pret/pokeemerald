@@ -53,3 +53,20 @@ SINGLE_BATTLE_TEST("Hail fails if Desolate Land or Primordial Sea are active")
         }
     }
 }
+
+DOUBLE_BATTLE_TEST("Hail deals damage based on turn order")
+{
+    GIVEN {
+        PLAYER(SPECIES_GLALIE);
+        PLAYER(SPECIES_WYNAUT) { Speed(1); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(2); }
+        OPPONENT(SPECIES_WYNAUT) { Speed(3); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_HAIL); }
+    } SCENE {
+        NOT HP_BAR(playerLeft);
+        HP_BAR(opponentRight);
+        HP_BAR(opponentLeft);
+        HP_BAR(playerRight);
+   }
+}

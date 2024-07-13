@@ -85,6 +85,7 @@ gBattleAnims_General::
 	.4byte General_Fog                      @ B_ANIM_FOG_CONTINUES
 	.4byte General_TeraCharge               @ B_ANIM_TERA_CHARGE
 	.4byte General_TeraActivate             @ B_ANIM_TERA_ACTIVATE
+	.4byte General_SimpleHeal               @ B_ANIM_SIMPLE_HEAL
 
 	.align 2
 gBattleAnims_Special::
@@ -27345,6 +27346,12 @@ General_WishHeal:
 	call HealingEffect
 	waitforvisualfinish
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 3, 10, 0, RGB_BLACK
+	end
+
+General_SimpleHeal:
+	loadspritegfx ANIM_TAG_BLUE_STAR
+	call HealingEffect
+	waitforvisualfinish
 	end
 
 General_IllusionOff:
