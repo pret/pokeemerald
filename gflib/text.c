@@ -2155,21 +2155,17 @@ u32 GetFontIdToFit(const u8 *string, u32 fontId, u32 letterSpacing, u32 widthPx)
 
 u8 *PrependFontIdToFit(u8 *start, u8 *end, u32 fontId, u32 width)
 {
-
     u32 fitFontId = GetFontIdToFit(start, fontId, 0, width);
-    if (fitFontId != fontId)
-    {
-        memmove(&start[3], &start[0], end - start);
-        start[0] = EXT_CTRL_CODE_BEGIN;
-        start[1] = EXT_CTRL_CODE_FONT;
-        start[2] = fitFontId;
-        end[3] = EOS;
-        return end + 3;
-    }
-    else
-    {
+
+    if (fitFontId == fontId)
         return end;
-    }
+
+    memmove(&start[3], &start[0], end - start);
+    start[0] = EXT_CTRL_CODE_BEGIN;
+    start[1] = EXT_CTRL_CODE_FONT;
+    start[2] = fitFontId;
+    end[3] = EOS;
+    return end + 3;
 }
 
 u8 *WrapFontIdToFit(u8 *start, u8 *end, u32 fontId, u32 width)
