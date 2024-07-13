@@ -762,6 +762,24 @@ SINGLE_BATTLE_TEST("(TERA) Stellar type's one-time boost factors in dynamically-
     }
 }
 
+SINGLE_BATTLE_TEST("(TERA) Pokemon with Tera forms change upon Terastallizing")
+{
+    u32 species, targetSpecies;
+    PARAMETRIZE { species = SPECIES_OGERPON_TEAL_MASK;        targetSpecies = SPECIES_OGERPON_TEAL_MASK_TERA; }
+    PARAMETRIZE { species = SPECIES_OGERPON_WELLSPRING_MASK;  targetSpecies = SPECIES_OGERPON_WELLSPRING_MASK_TERA; }
+    PARAMETRIZE { species = SPECIES_OGERPON_HEARTHFLAME_MASK; targetSpecies = SPECIES_OGERPON_HEARTHFLAME_MASK_TERA; }
+    PARAMETRIZE { species = SPECIES_OGERPON_CORNERSTONE_MASK; targetSpecies = SPECIES_OGERPON_CORNERSTONE_MASK_TERA; }
+    PARAMETRIZE { species = SPECIES_TERAPAGOS_TERASTAL;       targetSpecies = SPECIES_TERAPAGOS_STELLAR; }
+    GIVEN {
+        PLAYER(species);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
+    } THEN {
+        EXPECT_EQ(player->species, targetSpecies);
+    }
+}
+
 SINGLE_BATTLE_TEST("(TERA) All type indicators function correctly")
 {
     u32 type;
@@ -794,20 +812,34 @@ SINGLE_BATTLE_TEST("(TERA) All type indicators function correctly")
     }
 }
 
-SINGLE_BATTLE_TEST("(TERA) Pokemon with Tera forms change upon Terastallizing")
+SINGLE_BATTLE_TEST("(TERA) All type indicators function correctly - Opponent")
 {
-    u32 species, targetSpecies;
-    PARAMETRIZE { species = SPECIES_OGERPON_TEAL_MASK;        targetSpecies = SPECIES_OGERPON_TEAL_MASK_TERA; }
-    PARAMETRIZE { species = SPECIES_OGERPON_WELLSPRING_MASK;  targetSpecies = SPECIES_OGERPON_WELLSPRING_MASK_TERA; }
-    PARAMETRIZE { species = SPECIES_OGERPON_HEARTHFLAME_MASK; targetSpecies = SPECIES_OGERPON_HEARTHFLAME_MASK_TERA; }
-    PARAMETRIZE { species = SPECIES_OGERPON_CORNERSTONE_MASK; targetSpecies = SPECIES_OGERPON_CORNERSTONE_MASK_TERA; }
-    PARAMETRIZE { species = SPECIES_TERAPAGOS_TERASTAL;       targetSpecies = SPECIES_TERAPAGOS_STELLAR; }
+    u32 type;
+    PARAMETRIZE { type = TYPE_NONE; }
+    PARAMETRIZE { type = TYPE_NORMAL; }
+    PARAMETRIZE { type = TYPE_FIGHTING; }
+    PARAMETRIZE { type = TYPE_FLYING; }
+    PARAMETRIZE { type = TYPE_POISON; }
+    PARAMETRIZE { type = TYPE_GROUND; }
+    PARAMETRIZE { type = TYPE_ROCK; }
+    PARAMETRIZE { type = TYPE_BUG; }
+    PARAMETRIZE { type = TYPE_GHOST; }
+    PARAMETRIZE { type = TYPE_STEEL; }
+    PARAMETRIZE { type = TYPE_MYSTERY; }
+    PARAMETRIZE { type = TYPE_FIRE; }
+    PARAMETRIZE { type = TYPE_WATER; }
+    PARAMETRIZE { type = TYPE_GRASS; }
+    PARAMETRIZE { type = TYPE_ELECTRIC; }
+    PARAMETRIZE { type = TYPE_PSYCHIC; }
+    PARAMETRIZE { type = TYPE_ICE; }
+    PARAMETRIZE { type = TYPE_DRAGON; }
+    PARAMETRIZE { type = TYPE_DARK; }
+    PARAMETRIZE { type = TYPE_FAIRY; }
+    PARAMETRIZE { type = TYPE_STELLAR; }
     GIVEN {
-        PLAYER(species);
-        OPPONENT(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { TeraType(type); }
     } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
-    } THEN {
-        EXPECT_EQ(player->species, targetSpecies);
+        TURN { MOVE(opponent, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
     }
 }
