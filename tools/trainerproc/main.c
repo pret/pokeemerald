@@ -1824,7 +1824,7 @@ static void fprint_trainers(const char *output_path, FILE *f, struct Parsed *par
 
             if (pokemon->dynamax_level_line || pokemon->gigantamax_factor_line)
             {
-                fprintf(f, "            .useGimmick = GIMMICK_DYNAMAX,\n");
+                fprintf(f, "            .shouldUseDynamax = TRUE,\n");
             }
             else if (pokemon->tera_type_line)
             {
@@ -1832,7 +1832,6 @@ static void fprint_trainers(const char *output_path, FILE *f, struct Parsed *par
                 fprintf(f, "            .teraType = ");
                 fprint_constant(f, "TYPE", pokemon->tera_type);
                 fprintf(f, ",\n");
-                fprintf(f, "            .useGimmick = GIMMICK_TERA,\n");
             }
 
             if (pokemon->moves_n > 0)

@@ -70,11 +70,12 @@ struct TrainerMon
     u8 nature:5;
     bool8 gender:2;
     bool8 isShiny:1;
-    u8 useGimmick:4;
-    u8 dynamaxLevel:4;
     u8 teraType:5;
     bool8 gigantamaxFactor:1;
-    u8 padding:2;
+    u8 shouldUseDynamax:1;
+    u8 padding1:1;
+    u8 dynamaxLevel:4;
+    u8 padding2:4;
 };
 
 #define TRAINER_PARTY(partyArray) partyArray, .partySize = ARRAY_COUNT(partyArray)
