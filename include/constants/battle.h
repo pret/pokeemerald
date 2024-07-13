@@ -296,7 +296,7 @@
 #define MOVE_EFFECT_AFFECTS_USER        (1 << 6) // 64
 #define MOVE_EFFECT_CERTAIN             (1 << 7) // 128
 
-// Battle terrain defines for gBattleTerrain.
+// Battle environment defines for gBattleEnvironment.
 #define BATTLE_TERRAIN_GRASS        0
 #define BATTLE_TERRAIN_LONG_GRASS   1
 #define BATTLE_TERRAIN_SAND         2
