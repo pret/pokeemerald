@@ -4904,7 +4904,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
             gOverworldPalette_RotomHeat,
             gShinyOverworldPalette_RotomHeat
         )
-        .levelUpLearnset = sRotomLevelUpLearnset,
+        .levelUpLearnset = sRotomHeatLevelUpLearnset,
         .teachableLearnset = sRotomTeachableLearnset,
         .formSpeciesIdTable = sRotomFormSpeciesIdTable,
         .formChangeTable = sRotomFormChangeTable,
@@ -4969,7 +4969,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
             gOverworldPalette_RotomWash,
             gShinyOverworldPalette_RotomWash
         )
-        .levelUpLearnset = sRotomLevelUpLearnset,
+        .levelUpLearnset = sRotomWashLevelUpLearnset,
         .teachableLearnset = sRotomTeachableLearnset,
         .formSpeciesIdTable = sRotomFormSpeciesIdTable,
         .formChangeTable = sRotomFormChangeTable,
@@ -5033,7 +5033,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
             gOverworldPalette_RotomFrost,
             gShinyOverworldPalette_RotomFrost
         )
-        .levelUpLearnset = sRotomLevelUpLearnset,
+        .levelUpLearnset = sRotomFrostLevelUpLearnset,
         .teachableLearnset = sRotomTeachableLearnset,
         .formSpeciesIdTable = sRotomFormSpeciesIdTable,
         .formChangeTable = sRotomFormChangeTable,
@@ -5098,7 +5098,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
             gOverworldPalette_RotomFan,
             gShinyOverworldPalette_RotomFan
         )
-        .levelUpLearnset = sRotomLevelUpLearnset,
+        .levelUpLearnset = sRotomFanLevelUpLearnset,
         .teachableLearnset = sRotomTeachableLearnset,
         .formSpeciesIdTable = sRotomFormSpeciesIdTable,
         .formChangeTable = sRotomFormChangeTable,
@@ -5162,7 +5162,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
             gOverworldPalette_RotomMow,
             gShinyOverworldPalette_RotomMow
         )
-        .levelUpLearnset = sRotomLevelUpLearnset,
+        .levelUpLearnset = sRotomMowLevelUpLearnset,
         .teachableLearnset = sRotomTeachableLearnset,
         .formSpeciesIdTable = sRotomFormSpeciesIdTable,
         .formChangeTable = sRotomFormChangeTable,
