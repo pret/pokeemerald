@@ -601,7 +601,7 @@ const struct WindowTemplate * const gBattleWindowTemplates[] =
 
 static const struct BattleBackground sBattleEnvironmentTable[] =
 {
-    [BATTLE_TERRAIN_GRASS] =
+    [BATTLE_ENVIRONMENT_GRASS] =
     {
         .tileset = gBattleEnvironmentTiles_TallGrass,
         .tilemap = gBattleEnvironmentTilemap_TallGrass,
@@ -610,7 +610,7 @@ static const struct BattleBackground sBattleEnvironmentTable[] =
         .palette = gBattleEnvironmentPalette_TallGrass,
     },
 
-    [BATTLE_TERRAIN_LONG_GRASS] =
+    [BATTLE_ENVIRONMENT_LONG_GRASS] =
     {
         .tileset = gBattleEnvironmentTiles_LongGrass,
         .tilemap = gBattleEnvironmentTilemap_LongGrass,
@@ -619,7 +619,7 @@ static const struct BattleBackground sBattleEnvironmentTable[] =
         .palette = gBattleEnvironmentPalette_LongGrass,
     },
 
-    [BATTLE_TERRAIN_SAND] =
+    [BATTLE_ENVIRONMENT_SAND] =
     {
         .tileset = gBattleEnvironmentTiles_Sand,
         .tilemap = gBattleEnvironmentTilemap_Sand,
@@ -628,7 +628,7 @@ static const struct BattleBackground sBattleEnvironmentTable[] =
         .palette = gBattleEnvironmentPalette_Sand,
     },
 
-    [BATTLE_TERRAIN_UNDERWATER] =
+    [BATTLE_ENVIRONMENT_UNDERWATER] =
     {
         .tileset = gBattleEnvironmentTiles_Underwater,
         .tilemap = gBattleEnvironmentTilemap_Underwater,
@@ -637,7 +637,7 @@ static const struct BattleBackground sBattleEnvironmentTable[] =
         .palette = gBattleEnvironmentPalette_Underwater,
     },
 
-    [BATTLE_TERRAIN_WATER] =
+    [BATTLE_ENVIRONMENT_WATER] =
     {
         .tileset = gBattleEnvironmentTiles_Water,
         .tilemap = gBattleEnvironmentTilemap_Water,
@@ -646,7 +646,7 @@ static const struct BattleBackground sBattleEnvironmentTable[] =
         .palette = gBattleEnvironmentPalette_Water,
     },
 
-    [BATTLE_TERRAIN_POND] =
+    [BATTLE_ENVIRONMENT_POND] =
     {
         .tileset = gBattleEnvironmentTiles_PondWater,
         .tilemap = gBattleEnvironmentTilemap_PondWater,
@@ -655,7 +655,7 @@ static const struct BattleBackground sBattleEnvironmentTable[] =
         .palette = gBattleEnvironmentPalette_PondWater,
     },
 
-    [BATTLE_TERRAIN_MOUNTAIN] =
+    [BATTLE_ENVIRONMENT_MOUNTAIN] =
     {
         .tileset = gBattleEnvironmentTiles_Rock,
         .tilemap = gBattleEnvironmentTilemap_Rock,
@@ -664,7 +664,7 @@ static const struct BattleBackground sBattleEnvironmentTable[] =
         .palette = gBattleEnvironmentPalette_Rock,
     },
 
-    [BATTLE_TERRAIN_CAVE] =
+    [BATTLE_ENVIRONMENT_CAVE] =
     {
         .tileset = gBattleEnvironmentTiles_Cave,
         .tilemap = gBattleEnvironmentTilemap_Cave,
@@ -673,7 +673,7 @@ static const struct BattleBackground sBattleEnvironmentTable[] =
         .palette = gBattleEnvironmentPalette_Cave,
     },
 
-    [BATTLE_TERRAIN_BUILDING] =
+    [BATTLE_ENVIRONMENT_BUILDING] =
     {
         .tileset = gBattleEnvironmentTiles_Building,
         .tilemap = gBattleEnvironmentTilemap_Building,
@@ -682,7 +682,7 @@ static const struct BattleBackground sBattleEnvironmentTable[] =
         .palette = gBattleEnvironmentPalette_Building,
     },
 
-    [BATTLE_TERRAIN_PLAIN] =
+    [BATTLE_ENVIRONMENT_PLAIN] =
     {
         .tileset = gBattleEnvironmentTiles_Building,
         .tilemap = gBattleEnvironmentTilemap_Building,
