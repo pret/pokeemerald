@@ -56,6 +56,4 @@ private:
     void RaiseWarning(const char* format, ...);
 };
 
-#define CHUNK_SIZE 4096
-
 #endif // C_FILE_H
