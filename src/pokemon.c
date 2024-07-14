@@ -5839,6 +5839,10 @@ const u32 *GetMonSpritePalFromSpecies(u16 species, bool32 isShiny, bool32 isFema
 bool8 IsMoveHM(u16 move)
 {
     int i = 0;
+
+    if (P_CAN_FORGET_HIDDEN_MOVE)
+        return FALSE;
+
     while (sHMMoves[i] != HM_MOVES_END)
     {
         if (sHMMoves[i++] == move)
@@ -6926,7 +6930,7 @@ void UpdateDaysPassedSinceFormChange(u16 days)
         if (daysSinceFormChange == 0)
         {
             u16 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_CHANGE_DAYS_PASSED, 0);
-            
+
             if (targetSpecies != SPECIES_NONE)
             {
                 SetMonData(mon, MON_DATA_SPECIES, &targetSpecies);
