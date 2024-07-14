@@ -23,7 +23,7 @@ SINGLE_BATTLE_TEST("Photon Geyser can be mirror coated if it is a special move")
     }
 }
 
-SINGLE_BATTLE_TEST("Photon Geyser can be countered if it is a physcal move")
+SINGLE_BATTLE_TEST("Photon Geyser can be countered if it is a physical move")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Attack(110); SpAttack(100); }

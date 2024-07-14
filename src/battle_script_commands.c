@@ -1962,8 +1962,8 @@ static void Cmd_damagecalc(void)
     u8 moveType;
 
     GET_MOVE_TYPE(gCurrentMove, moveType);
-    if (gBattleStruct->shellSideArmCategory[gBattlerAttacker][gBattlerTarget] == DAMAGE_CATEGORY_PHYSICAL && gCurrentMove == MOVE_SHELL_SIDE_ARM)
-        gBattleStruct->swapDamageCategory = TRUE;
+    if (gMovesInfo[gCurrentMove].effect == EFFECT_SHELL_SIDE_ARM)
+        gBattleStruct->swapDamageCategory = (gBattleStruct->shellSideArmCategory[gBattlerAttacker][gBattlerTarget] != gMovesInfo[gCurrentMove].category);
     gBattleMoveDamage = CalculateMoveDamage(gCurrentMove, gBattlerAttacker, gBattlerTarget, moveType, 0, gIsCriticalHit, TRUE, TRUE);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
@@ -16865,7 +16865,7 @@ void BS_SetPhotonGeyserCategory(void)
     NATIVE_ARGS();
     if (!((gMovesInfo[gCurrentMove].effect == EFFECT_TERA_BLAST && GetActiveGimmick(gBattlerAttacker) != GIMMICK_TERA)
             || (gMovesInfo[gCurrentMove].effect == EFFECT_TERA_STARSTORM && GetActiveGimmick(gBattlerAttacker) != GIMMICK_TERA && gBattleMons[gBattlerAttacker].species == SPECIES_TERAPAGOS_STELLAR)))
-        gBattleStruct->swapDamageCategory = (GetCategoryBasedOnStats(gBattlerAttacker) == DAMAGE_CATEGORY_PHYSICAL);
+        gBattleStruct->swapDamageCategory = (GetCategoryBasedOnStats(gBattlerAttacker) != gMovesInfo[gCurrentMove].category);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 

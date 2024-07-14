@@ -8456,7 +8456,7 @@ bool32 IsMoveMakingContact(u32 move, u32 battlerAtk)
 
     if (!gMovesInfo[move].makesContact)
     {
-        if (move == MOVE_SHELL_SIDE_ARM && gBattleStruct->shellSideArmCategory[battlerAtk][gBattlerTarget] == DAMAGE_CATEGORY_PHYSICAL)
+        if (gMovesInfo[move].effect == EFFECT_SHELL_SIDE_ARM && gBattleStruct->shellSideArmCategory[battlerAtk][gBattlerTarget] == DAMAGE_CATEGORY_PHYSICAL)
             return TRUE;
         else
             return FALSE;
@@ -8496,7 +8496,8 @@ bool32 IsBattlerProtected(u32 battlerAtk, u32 battlerDef, u32 move)
     // Protective Pads doesn't stop Unseen Fist from bypassing Protect effects, so IsMoveMakingContact() isn't used here.
     // This means extra logic is needed to handle Shell Side Arm.
     if (GetBattlerAbility(gBattlerAttacker) == ABILITY_UNSEEN_FIST
-     && (gMovesInfo[move].makesContact || (move == MOVE_SHELL_SIDE_ARM && gBattleStruct->shellSideArmCategory[battlerAtk][battlerDef] == DAMAGE_CATEGORY_PHYSICAL))
+     && (gMovesInfo[move].makesContact
+     || (gMovesInfo[move].effect == EFFECT_SHELL_SIDE_ARM && gBattleStruct->shellSideArmCategory[battlerAtk][battlerDef] == DAMAGE_CATEGORY_PHYSICAL))
      && !gProtectStructs[battlerDef].maxGuarded) // Max Guard cannot be bypassed by Unseen Fist
         return FALSE;
     else if (gMovesInfo[move].ignoresProtect)
@@ -10990,10 +10991,17 @@ bool32 ShouldGetStatBadgeBoost(u16 badgeFlag, u32 battler)
     return FALSE;
 }
 
+static u32 SwapMoveDamageCategory(u32 move)
+{
+    if (gMovesInfo[move].category == DAMAGE_CATEGORY_PHYSICAL)
+        return DAMAGE_CATEGORY_SPECIAL;
+    return DAMAGE_CATEGORY_PHYSICAL;
+}
+
 u8 GetBattleMoveCategory(u32 moveId)
 {
     if (gBattleStruct != NULL && gBattleStruct->swapDamageCategory) // Photon Geyser, Shell Side Arm, Light That Burns the Sky, Tera Blast
-        return DAMAGE_CATEGORY_PHYSICAL;
+        return SwapMoveDamageCategory(moveId);
     if (gBattleStruct != NULL && (IsZMove(moveId) || IsMaxMove(moveId))) // TODO: Might be buggy depending on when this is called.
         return gBattleStruct->categoryOverride;
     if (B_PHYSICAL_SPECIAL_SPLIT >= GEN_4)
