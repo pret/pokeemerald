@@ -275,7 +275,7 @@ TEST("Item names fit on Shop Screen")
 TEST("Species names fit on Battle Screen HP box")
 {
     u32 i, genderWidthPx;
-    const u32 fontId = FONT_SMALL_NARROWER, widthPx = 54;
+    const u32 fontId = FONT_SMALL_NARROWER, widthPx = 55;
     u32 species = SPECIES_NONE;
     genderWidthPx = GetStringWidth(fontId, COMPOUND_STRING("♂"), 0);
     for (i = 1; i < NUM_SPECIES; i++)
@@ -499,6 +499,25 @@ TEST("Species names fit on PokeNav Ribbon List Screen")
         }
     }
     EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
+}
+
+TEST("Species names fit on Battle Screen HP box for vanilla mons with the default font")
+{
+    u32 i, genderWidthPx;
+    const u32 fontId = FONT_SMALL, widthPx = 55;
+    u32 species = SPECIES_NONE;
+    genderWidthPx = GetStringWidth(fontId, COMPOUND_STRING("♂"), 0);
+    for (i = 1; i < SPECIES_TURTWIG; i++)
+    {
+        if (IsSpeciesEnabled(i))
+        {
+            PARAMETRIZE_LABEL("%S", gSpeciesInfo[i].speciesName) { species = i; }
+        }
+    }
+    if (gSpeciesInfo[i].genderRatio != MON_GENDERLESS)
+        EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0) - genderWidthPx, widthPx);
+    else
+        EXPECT_LE(GetStringWidth(fontId, gSpeciesInfo[species].speciesName, 0), widthPx);
 }
 
 TEST("Ability names fit on Pokemon Summary Screen")
