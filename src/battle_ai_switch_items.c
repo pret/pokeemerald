@@ -1901,12 +1901,11 @@ static u32 GetBestMonIntegrated(struct Pokemon *party, int firstId, int lastId, 
 
         else if (batonPassId != PARTY_SIZE)
             return batonPassId;
-
-        // If ace mon is the last available Pokemon and U-Turn/Volt Switch was used - switch to the mon.
-        else if (aceMonId != PARTY_SIZE
-            && (gMovesInfo[gLastUsedMove].effect == EFFECT_HIT_ESCAPE || gMovesInfo[gLastUsedMove].effect == EFFECT_PARTING_SHOT))
-            return aceMonId;
     }
+    // If ace mon is the last available Pokemon and U-Turn/Volt Switch was used - switch to the mon.
+    if (aceMonId != PARTY_SIZE && (gMovesInfo[gLastUsedMove].effect == EFFECT_HIT_ESCAPE || gMovesInfo[gLastUsedMove].effect == EFFECT_PARTING_SHOT))
+        return aceMonId;
+        
     return PARTY_SIZE;
 }
 
