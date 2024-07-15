@@ -56,6 +56,23 @@ SINGLE_BATTLE_TEST("Own Tempo prevents confusion from moves by the user")
     }
 }
 
+SINGLE_BATTLE_TEST("Own Tempo is ignored by Mold Breaker")
+{
+    KNOWN_FAILING; // Ideally the func CanBeConfused should be split into AttackerCanBeConfused and TargetCanBeConfused or we do it in the same func but have a check for when battlerAtk == battlerDef
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_CONFUSE_RAY].effect == EFFECT_CONFUSE);
+        PLAYER(SPECIES_PINSIR) { Ability(ABILITY_MOLD_BREAKER); }
+        OPPONENT(SPECIES_SLOWPOKE) { Ability(ABILITY_OWN_TEMPO); };
+    } WHEN {
+        TURN { MOVE(player, MOVE_CONFUSE_RAY); }
+    } SCENE {
+        NONE_OF {
+            ABILITY_POPUP(opponent, ABILITY_OWN_TEMPO);
+            MESSAGE("Foe Slowpoke's Own Tempo prevents confusion!");
+        }
+    }
+}
+
 SINGLE_BATTLE_TEST("Own Tempo cures confusion obtained from an opponent with Mold Breaker")
 {
     KNOWN_FAILING;

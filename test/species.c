@@ -1,4 +1,5 @@
 #include "global.h"
+#include "string_util.h"
 #include "test/test.h"
 #include "constants/form_change_types.h"
 
@@ -6,12 +7,14 @@ TEST("Form species ID tables are shared between all forms")
 {
     u32 i;
     u32 species = SPECIES_NONE;
+    const u16 *formSpeciesIdTable;
+
     for (i = 0; i < NUM_SPECIES; i++)
     {
         if (gSpeciesInfo[i].formSpeciesIdTable) PARAMETRIZE { species = i; }
     }
 
-    const u16 *formSpeciesIdTable = gSpeciesInfo[species].formSpeciesIdTable;
+    formSpeciesIdTable = gSpeciesInfo[species].formSpeciesIdTable;
     for (i = 0; formSpeciesIdTable[i] != FORM_SPECIES_END; i++)
     {
         u32 formSpeciesId = formSpeciesIdTable[i];
@@ -23,13 +26,16 @@ TEST("Form change tables contain only forms in the form species ID table")
 {
     u32 i, j;
     u32 species = SPECIES_NONE;
+    const struct FormChange *formChangeTable;
+    const u16 *formSpeciesIdTable;
+
     for (i = 0; i < NUM_SPECIES; i++)
     {
         if (gSpeciesInfo[i].formChangeTable) PARAMETRIZE { species = i; }
     }
 
-    const struct FormChange *formChangeTable = gSpeciesInfo[species].formChangeTable;
-    const u16 *formSpeciesIdTable = gSpeciesInfo[species].formSpeciesIdTable;
+    formChangeTable = gSpeciesInfo[species].formChangeTable;
+    formSpeciesIdTable = gSpeciesInfo[species].formSpeciesIdTable;
     EXPECT(formSpeciesIdTable);
 
     for (i = 0; formChangeTable[i].method != FORM_CHANGE_TERMINATOR; i++)
@@ -51,12 +57,14 @@ TEST("Form change targets have the appropriate species flags")
 {
     u32 i;
     u32 species = SPECIES_NONE;
+    const struct FormChange *formChangeTable;
+
     for (i = 0; i < NUM_SPECIES; i++)
     {
         if (gSpeciesInfo[i].formChangeTable) PARAMETRIZE { species = i; }
     }
 
-    const struct FormChange *formChangeTable = gSpeciesInfo[species].formChangeTable;
+    formChangeTable = gSpeciesInfo[species].formChangeTable;
     for (i = 0; formChangeTable[i].method != FORM_CHANGE_TERMINATOR; i++)
     {
         const struct SpeciesInfo *targetSpeciesInfo = &gSpeciesInfo[formChangeTable[i].targetSpecies];
@@ -77,4 +85,63 @@ TEST("Form change targets have the appropriate species flags")
             break;
        }
     }
+}
+
+TEST("No species has two evolutions that use the evolution tracker")
+{
+    u32 i;
+    u32 species = SPECIES_NONE;
+    u32 evolutionTrackerEvolutions;
+    bool32 hasGenderBasedRecoil;
+    const struct Evolution *evolutions;
+
+    for (i = 0; i < NUM_SPECIES; i++)
+    {
+        if (GetSpeciesEvolutions(i) != NULL) PARAMETRIZE { species = i; }
+    }
+
+    evolutionTrackerEvolutions = 0;
+    hasGenderBasedRecoil = FALSE;
+    evolutions = GetSpeciesEvolutions(species);
+
+    for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
+    {
+        if (evolutions[i].method == EVO_LEVEL_MOVE_TWENTY_TIMES
+    #ifdef EVO_DEFEAT_WITH_ITEM
+         || evolutions[i].method == EVO_DEFEAT_WITH_ITEM
+    #endif //EVO_DEFEAT_WITH_ITEM
+    #ifdef EVO_OVERWORLD_STEPS
+         || evolutions[i].method == EVO_OVERWORLD_STEPS
+    #endif //EVO_OVERWORLD_STEPS
+        )
+            evolutionTrackerEvolutions++;
+
+        if (evolutions[i].method == EVO_LEVEL_RECOIL_DAMAGE_MALE
+         || evolutions[i].method == EVO_LEVEL_RECOIL_DAMAGE_FEMALE)
+        {
+            // Special handling for these since they can be combined as the evolution tracker field is used for the same purpose
+            if (!hasGenderBasedRecoil)
+            {
+                hasGenderBasedRecoil = TRUE;
+                evolutionTrackerEvolutions++;
+            }
+        }
+    }
+
+    EXPECT(evolutionTrackerEvolutions < 2);
+}
+
+extern const u8 gFallbackPokedexText[];
+
+TEST("Every species has a description")
+{
+    u32 i;
+    u32 species = SPECIES_NONE;
+    for (i = 1; i < NUM_SPECIES; i++)
+    {
+        if (IsSpeciesEnabled(i))
+            PARAMETRIZE { species = i; }
+    }
+
+    EXPECT_NE(StringCompare(GetSpeciesPokedexDescription(species), gFallbackPokedexText), 0);
 }

@@ -24,6 +24,8 @@
 // param2: time of day to check, optional.
 // - DAY if Form change that activates in the daytime.
 // - NIGHT if Form change that activates at nighttime.
+// - 0 if irrelevant, but param3 is necessary.
+// param3: illegal statuses to have, optional.
 #define FORM_CHANGE_ITEM_USE                    2
 
 // TODO: Form change that activates when the Pokémon learns or forgets the move.

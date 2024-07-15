@@ -39,3 +39,6 @@ SINGLE_BATTLE_TEST("Gastro Acid fails if target has a banned ability")
         MESSAGE("But it failed!");
     }
 }
+
+TO_DO_BATTLE_TEST("Baton Pass passes Gastro Acid's effect");
+TO_DO_BATTLE_TEST("Baton Pass removes Gastro Acid if its ability cannot be surpressed");

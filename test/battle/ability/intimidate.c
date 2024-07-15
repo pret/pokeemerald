@@ -78,23 +78,29 @@ DOUBLE_BATTLE_TEST("Intimidate doesn't activate on an empty field in a double ba
         // Everyone faints.
 
         MESSAGE("Go! Ekans!");
-        MESSAGE("2 sent out Arbok!");
-        MESSAGE("Go! Abra!");
-        MESSAGE("2 sent out Wynaut!");
-
         NONE_OF {
             ABILITY_POPUP(playerLeft, ABILITY_INTIMIDATE);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-            MESSAGE("Ekans's Intimidate cuts Foe Arbok's attack!");
-            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-            MESSAGE("Ekans's Intimidate cuts Foe Wynaut's attack!");
-
+        }
+        MESSAGE("2 sent out Arbok!");
+        NONE_OF {
             ABILITY_POPUP(opponentLeft, ABILITY_INTIMIDATE);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-            MESSAGE("Foe Arbok's Intimidate cuts Ekans's attack!");
-            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-            MESSAGE("Foe Arbok's Intimidate cuts Abra's attack!");
         }
+        MESSAGE("Go! Abra!");
+        MESSAGE("2 sent out Wynaut!");
+        // Intimidate activates after all battlers have been brought out
+        ABILITY_POPUP(playerLeft, ABILITY_INTIMIDATE);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
+        MESSAGE("Ekans's Intimidate cuts Foe Arbok's attack!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
+        MESSAGE("Ekans's Intimidate cuts Foe Wynaut's attack!");
+
+        ABILITY_POPUP(opponentLeft, ABILITY_INTIMIDATE);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
+        MESSAGE("Foe Arbok's Intimidate cuts Ekans's attack!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
+        MESSAGE("Foe Arbok's Intimidate cuts Abra's attack!");
     }
 }
 
@@ -208,5 +214,34 @@ SINGLE_BATTLE_TEST("Intimidate can not further lower opponents Atk stat if it is
         MESSAGE("Wobbuffet's Attack won't go lower!");
     } THEN {
         EXPECT_EQ(player->statStages[STAT_ATK], MIN_STAT_STAGE);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Intimidate is not going to trigger if a mon switches out through u-turn and the opposing field is empty")
+{
+    GIVEN {
+        PLAYER(SPECIES_WYNAUT);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_EKANS) { Ability(ABILITY_INTIMIDATE); }
+        OPPONENT(SPECIES_WYNAUT) { HP(1); }
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_TREECKO);
+        OPPONENT(SPECIES_TORCHIC);
+    } WHEN {
+        TURN {
+            MOVE(opponentRight, MOVE_HEALING_WISH);
+            MOVE(playerLeft, MOVE_U_TURN, target: opponentLeft);
+            SEND_OUT(playerLeft, 2);
+            SEND_OUT(opponentLeft, 2);
+            SEND_OUT(opponentRight, 3);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_HEALING_WISH, opponentRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_U_TURN, playerLeft);
+        HP_BAR(opponentLeft);
+        MESSAGE("2 sent out Treecko!");
+        MESSAGE("2 sent out Torchic!");
+        NOT ABILITY_POPUP(playerLeft, ABILITY_INTIMIDATE);
     }
 }

@@ -98,7 +98,7 @@
 	waitstate
 	.endm
 
-	.macro multi_do type:req, partnerId:req, partnerPicId:req
+	.macro multi_do type:req, partnerId:req
 	special ReducePlayerPartyToSelectedMons
 	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	setvar VAR_0x8005, FRONTIER_DATA_SELECTED_MON_ORDER
@@ -106,7 +106,6 @@
 	setvar VAR_0x8004, SPECIAL_BATTLE_MULTI
 	setvar VAR_0x8005, \type | MULTI_BATTLE_CHOOSE_MONS
 	setvar VAR_0x8006, \partnerId
-	setvar VAR_0x8007, \partnerPicId
 	special DoSpecialTrainerBattle
 	waitstate
 	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SAVE_PARTY
@@ -114,30 +113,29 @@
 	special LoadPlayerParty
 	.endm
 
-	.macro multi_2_vs_2 trainer1Id:req, trainer1LoseText:req, trainer2Id:req, trainer2LoseText:req, partnerId:req, partnerPicId:req
+	.macro multi_2_vs_2 trainer1Id:req, trainer1LoseText:req, trainer2Id:req, trainer2LoseText:req, partnerId:req
 	special SavePlayerParty
 	trainerbattle TRAINER_BATTLE_SET_TRAINER_A, \trainer1Id, 0, NULL, \trainer1LoseText @ set first trainer mons
 	trainerbattle TRAINER_BATTLE_SET_TRAINER_B, \trainer2Id, 0, NULL, \trainer2LoseText @ set second trainer mons
-	multi_do MULTI_BATTLE_2_VS_2, \partnerId, \partnerPicId
+	multi_do MULTI_BATTLE_2_VS_2, \partnerId
 	.endm
 
-	.macro multi_2_vs_1 trainer1Id:req, trainer1LoseText:req, partnerId:req, partnerPicId:req
+	.macro multi_2_vs_1 trainer1Id:req, trainer1LoseText:req, partnerId:req
 	special SavePlayerParty
 	trainerbattle TRAINER_BATTLE_SET_TRAINER_A, \trainer1Id, 0, NULL, \trainer1LoseText @ set first trainer mons
-	multi_do MULTI_BATTLE_2_VS_1, \partnerId, \partnerPicId
+	multi_do MULTI_BATTLE_2_VS_1, \partnerId
 	.endm
 
 	@ Wild mons need to be assigned to gEnemyParty 0 and 3 slots, other slots need to be cleared out.
-	.macro multi_wild partnerId:req, partnerPicId:req
+	.macro multi_wild partnerId:req
 	special SavePlayerParty
-	multi_do MULTI_BATTLE_2_VS_WILD, \partnerId, \partnerPicId
+	multi_do MULTI_BATTLE_2_VS_WILD, \partnerId
 	.endm
 
-	.macro multi_do_fixed type:req, partnerId:req, partnerPicId:req
+	.macro multi_do_fixed type:req, partnerId:req
 	setvar VAR_0x8004, SPECIAL_BATTLE_MULTI
 	setvar VAR_0x8005, \type
 	setvar VAR_0x8006, \partnerId
-	setvar VAR_0x8007, \partnerPicId
 	special DoSpecialTrainerBattle
 	waitstate
 	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SAVE_PARTY
@@ -145,21 +143,21 @@
 	special LoadPlayerParty
 	.endm
 
-	.macro multi_fixed_2_vs_2 trainer1Id:req, trainer1LoseText:req, trainer2Id:req, trainer2LoseText:req, partnerId:req, partnerPicId:req
+	.macro multi_fixed_2_vs_2 trainer1Id:req, trainer1LoseText:req, trainer2Id:req, trainer2LoseText:req, partnerId:req
 	special SavePlayerParty
 	trainerbattle TRAINER_BATTLE_SET_TRAINER_A, \trainer1Id, 0, NULL, \trainer1LoseText @ set first trainer mons
 	trainerbattle TRAINER_BATTLE_SET_TRAINER_B, \trainer2Id, 0, NULL, \trainer2LoseText @ set second trainer mons
-	multi_do_fixed MULTI_BATTLE_2_VS_2, \partnerId, \partnerPicId
+	multi_do_fixed MULTI_BATTLE_2_VS_2, \partnerId
 	.endm
 
-	.macro multi_fixed_2_vs_1 trainer1Id:req, trainer1LoseText:req, partnerId:req, partnerPicId:req
+	.macro multi_fixed_2_vs_1 trainer1Id:req, trainer1LoseText:req, partnerId:req
 	special SavePlayerParty
 	trainerbattle TRAINER_BATTLE_SET_TRAINER_A, \trainer1Id, 0, NULL, \trainer1LoseText @ set first trainer mons
-	multi_do_fixed MULTI_BATTLE_2_VS_1, \partnerId, \partnerPicId
+	multi_do_fixed MULTI_BATTLE_2_VS_1, \partnerId
 	.endm
 
 	@ Wild mons need to be assigned to gEnemyParty 0 and 3 slots, other slots need to be cleared out.
-	.macro multi_fixed_wild partnerId:req, partnerPicId:req
+	.macro multi_fixed_wild partnerId:req
 	special SavePlayerParty
-	multi_do_fixed MULTI_BATTLE_2_VS_WILD, \partnerId, \partnerPicId
+	multi_do_fixed MULTI_BATTLE_2_VS_WILD, \partnerId
 	.endm

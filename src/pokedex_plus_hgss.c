@@ -5130,7 +5130,7 @@ static bool8 CalculateMoves(void)
         species = GetFormSpeciesId(species, 0);
 
     //Calculate amount of Egg and LevelUp moves
-    numEggMoves = GetEggMovesSpecies(species, statsMovesEgg);
+    numEggMoves = GetEggMovesBySpecies(species, statsMovesEgg);
     numLevelUpMoves = GetLevelUpMovesBySpecies(species, statsMovesLevelUp);
 
     //Egg moves

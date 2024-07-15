@@ -203,7 +203,7 @@ SINGLE_BATTLE_TEST("Embargo doesn't stop an item flung at an affected target fro
     }
 }
 
-SINGLE_BATTLE_TEST("Embargo is passed via Baton Pass")
+SINGLE_BATTLE_TEST("Baton Pass passes Embargo's effect")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -253,8 +253,8 @@ SINGLE_BATTLE_TEST("Embargo disables the effect of the Plate items on the move J
 {
     u32 heldItem;
 
-    PARAMETRIZE{ heldItem = ITEM_NONE; }
-    PARAMETRIZE{ heldItem = ITEM_PIXIE_PLATE; }
+    PARAMETRIZE { heldItem = ITEM_NONE; }
+    PARAMETRIZE { heldItem = ITEM_PIXIE_PLATE; }
     GIVEN {
         PLAYER(SPECIES_ARCEUS) { Item(heldItem); };
         OPPONENT(SPECIES_DRAGONITE);
@@ -274,8 +274,8 @@ SINGLE_BATTLE_TEST("Embargo disables the effect of the Drive items on the move T
 {
     u32 heldItem;
 
-    PARAMETRIZE{ heldItem = ITEM_NONE; }
-    PARAMETRIZE{ heldItem = ITEM_SHOCK_DRIVE; }
+    PARAMETRIZE { heldItem = ITEM_NONE; }
+    PARAMETRIZE { heldItem = ITEM_SHOCK_DRIVE; }
     GIVEN {
         PLAYER(SPECIES_GENESECT) { Item(heldItem); };
         OPPONENT(SPECIES_GYARADOS);
@@ -295,8 +295,8 @@ SINGLE_BATTLE_TEST("Embargo disables the effect of the Memory items on the move 
 {
     u32 heldItem;
 
-    PARAMETRIZE{ heldItem = ITEM_NONE; }
-    PARAMETRIZE{ heldItem = ITEM_FIRE_MEMORY; }
+    PARAMETRIZE { heldItem = ITEM_NONE; }
+    PARAMETRIZE { heldItem = ITEM_FIRE_MEMORY; }
     GIVEN {
         PLAYER(SPECIES_SILVALLY) { Item(heldItem); };
         OPPONENT(SPECIES_VENUSAUR);

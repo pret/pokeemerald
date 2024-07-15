@@ -35,3 +35,23 @@ SINGLE_BATTLE_TEST("Burn reduces Attack by 50%", s16 damage)
         EXPECT_MUL_EQ(results[0].damage, Q_4_12(0.5), results[1].damage);
     }
 }
+
+AI_SINGLE_BATTLE_TEST("AI avoids Will-o-Wisp when it can not burn target")
+{
+    u32 species, ability;
+
+    PARAMETRIZE { species = SPECIES_BUIZEL; ability = ABILITY_WATER_VEIL; }
+    PARAMETRIZE { species = SPECIES_DEWPIDER; ability = ABILITY_WATER_BUBBLE; }
+    PARAMETRIZE { species = SPECIES_KOMALA; ability = ABILITY_COMATOSE; }
+    PARAMETRIZE { species = SPECIES_ARCTIBAX; ability = ABILITY_THERMAL_EXCHANGE; }
+    PARAMETRIZE { species = SPECIES_NACLI; ability = ABILITY_PURIFYING_SALT; }
+    PARAMETRIZE { species = SPECIES_CHARMANDER; ability = ABILITY_BLAZE; }
+
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(species) { Ability(ability); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE, MOVE_WILL_O_WISP); }
+    } WHEN {
+        TURN { SCORE_EQ(opponent, MOVE_CELEBRATE, MOVE_WILL_O_WISP); } // Both get -10
+    }
+}

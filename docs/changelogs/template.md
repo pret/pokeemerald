@@ -6,7 +6,7 @@
 - Once you have your remote set up, run the command `git pull RHH expansion/1.Y.Z`.
 ```
 
-## 🌋 *IMPORTANT CHANGES* 🌋
+## 🌋 *IMPORTANT CHANGES AND REFACTORS* 🌋
 * N/A
 
 ## 💥 *Softlock/Crash fixes* 💥

@@ -239,6 +239,30 @@ SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they stil
     }
 }
 
+SINGLE_BATTLE_TEST("Parental Bond Smack Down effect triggers after 2nd hit")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_SMACK_DOWN].category != DAMAGE_CATEGORY_STATUS);
+        ASSUME(gMovesInfo[MOVE_SMACK_DOWN].strikeCount < 2);
+        ASSUME(MoveHasAdditionalEffect(MOVE_SMACK_DOWN, MOVE_EFFECT_SMACK_DOWN));
+        PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
+        OPPONENT(SPECIES_SKARMORY);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SMACK_DOWN, megaEvolve: TRUE); }
+    } SCENE {
+        MESSAGE("Kangaskhan's Kangaskhanite is reacting to 1's Mega Ring!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, player);
+        MESSAGE("Kangaskhan has Mega Evolved into Mega Kangaskhan!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SMACK_DOWN, player);
+        HP_BAR(opponent);
+        NOT MESSAGE("Foe Skarmory fell straight down!");
+        HP_BAR(opponent);
+        MESSAGE("Foe Skarmory fell straight down!");
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_KANGASKHAN_MEGA);
+    }
+}
+
 TO_DO_BATTLE_TEST("Parental Bond tests");
 
 // Temporary TODO: Convert Bulbapedia description into tests.

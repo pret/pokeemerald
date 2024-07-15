@@ -695,6 +695,7 @@ struct BattleTestData
 struct BattleTestRunnerState
 {
     u8 battlersCount;
+    bool8 forceMoveAnim;
     u16 parametersCount; // Valid only in BattleTest_Setup.
     u16 parameters;
     u16 runParameter;
@@ -995,6 +996,8 @@ void SendOut(u32 sourceLine, struct BattlePokemon *, u32 partyIndex);
 #define ONE_OF for (OpenQueueGroup(__LINE__, QUEUE_GROUP_ONE_OF); gBattleTestRunnerState->data.queueGroupType != QUEUE_GROUP_NONE; CloseQueueGroup(__LINE__))
 #define NONE_OF for (OpenQueueGroup(__LINE__, QUEUE_GROUP_NONE_OF); gBattleTestRunnerState->data.queueGroupType != QUEUE_GROUP_NONE; CloseQueueGroup(__LINE__))
 #define NOT NONE_OF
+
+#define FORCE_MOVE_ANIM(set) gBattleTestRunnerState->forceMoveAnim = (set)
 
 #define ABILITY_POPUP(battler, ...) QueueAbility(__LINE__, battler, (struct AbilityEventContext) { __VA_ARGS__ })
 #define ANIMATION(type, id, ...) QueueAnimation(__LINE__, type, id, (struct AnimationEventContext) { __VA_ARGS__ })

@@ -41,7 +41,7 @@ WILD_BATTLE_TEST("Ion Deluge works the same way as always when used by a mon wit
         NONE_OF {
             ABILITY_POPUP(opponent, ability);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("Wild Zebstrika's Sp.Atk rose!");
+            MESSAGE("Wild Zebstrika's Sp. Atk rose!");
             MESSAGE("Wild Zebstrika's Speed rose!");
         }
         MESSAGE("A deluge of ions showers the battlefield!");
