@@ -1,3 +1,78 @@
+/*
+Trainer and their parties defined with Competetive Syntax
+Compatible with Pokemon Showdown exports.
+https://github.com/smogon/pokemon-showdown/blob/master/sim/TEAMS.md
+
+A trainer specification starts with a "=== TRAINER_XXXX ==="
+and includes everything until the next line that starts with "==="
+or the file ends.
+A blank line is required between the trainer and their Pokemon
+and between Pokemon.
+TRAINER_XXXX is what the trainer is referred with in code.
+
+Fields with description and/or example of usage
+Required fields for trainers:
+    - Name
+    - Pic
+Optional (but still recommended) fields for trainers:
+    - Class (if not specified, PkMn Trainer will be used)
+    - Gender (Male/Female, affects random gender weights of party if not specified)
+    - Music
+    - Items (Some Item / Another Item / Third Item)
+            (Can also be specified with ITEM_SOME_ITEM)
+    - Double Battle (Yes/No, defaults to No)
+    - AI (Ai Flag / Another Flag / Third Flag / ...
+          see "constants/battle_ai.h" for all flags)
+    - Mugshot (enable Mugshots during battle transition
+               set to one of Purple, Green, Pink, Blue or Yellow)
+    - Starting Status (see include/constants/battle.h for values) 
+
+Pokemon are then speficied using the Showdown Export format
+If a field is not specified, it will use it's default value.
+
+Required fields for Pokemon
+    - Species (Either as SPECIES_ABRA or Abra)
+      This line also specifies Gender, Nickname and Held item.
+      Alfred (Abra) (M) @ Eviolite
+      Roberta (SPECIES_ABRA) (F) @ ITEM_CHOICE_SPECS
+      Both lines are valid, gender (M) or (F) must be capital letters.
+      Nickname length is limited to 10 characters using standard letters.
+      With narrow font it's increased to 12, longer strings will be silently shortened.
+      
+Optional fields for Pokemon
+    - Level (Number between 1 and 100, defaults to 100)
+    - Ability (Ability Name or ABILITY_ABILITY_NAME)
+    - IVs (0 HP / 1 Atk / 2 Def / 3 SpA / 4 SpD / 5 Spe, defaults to all 31)
+          (Order does not matter)
+    - EVs (252 HP / 128 Spe / 48 Def, defaults to all 0, is not capped at 512 total)
+          (Order does not matter)
+    - Ball (Poke Ball or ITEM_POKE_BALL, defaults to Poke Ball
+    - Happiness (Number between 1 and 255)
+    - Nature (Rash or NATURE_RASH, defaults to Hardy)
+    - Shiny (Yes/No, defaults to No)
+    - Dynamax Level (Number between 0 and 10, default 10, also sets "shouldDynamax" to True)
+    - Gigantamax (Yes/No, sets to Gigantamax factor)
+                 (doesn't do anything to Pokemon without a Gigantamax form, also sets "shouldDynamax" to True)
+    - Tera Type (Set to a Type, either Fire or TYPE_FIRE, also sets "shouldTerastal" to True)
+Moves are defined with a - (dash) followed by a single space, then the move name
+Either "- Tackle" or "- MOVE_TACKLE" works. One move per line.
+Moves has to be the last lines of a Pokemon.
+If no moves are specified, the Pokemon will use the last 4 moves it learns
+through levelup at its level.
+
+Default IVs and Level can be changed in the "main" function of tools/trainerproc/main.c
+
+This file is processed with a custom preprocessor.
+*/
+
+/*
+Comments can be added as C comment blocks
+// cannot be used as comments
+*/
+
+/*Comments can also be on a single line*/
+
+
 === TRAINER_NONE ===
 Name:
 Class: Pkmn Trainer 1
