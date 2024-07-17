@@ -38,7 +38,7 @@ Required fields for Pokemon:
       Both lines are valid. Gender (M) or (F) must use a capital letter.
       Nickname length is limited to 10 characters using standard letters.
       With narrow font it's increased to 12. Longer strings will be silently shortened.
-      
+
 Optional fields for Pokemon:
     - Level (Number between 1 and 100, defaults to 100)
     - Ability (Ability Name or ABILITY_ABILITY_NAME)

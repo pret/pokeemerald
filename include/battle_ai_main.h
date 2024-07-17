@@ -37,6 +37,7 @@ typedef s32 (*AiScoreFunc)(u32, u32, u32, s32);
 #define NO_DAMAGE_OR_FAILS      -20 // Move fails or does no damage
 
 // Scores given in AI_CalcMoveEffectScore
+#define NO_INCREASE      0
 #define WEAK_EFFECT      1
 #define DECENT_EFFECT    2
 #define GOOD_EFFECT      3
