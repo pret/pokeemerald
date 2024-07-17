@@ -1,14 +1,14 @@
 /*
-Trainer and their parties defined with Competetive Syntax
+Trainers and their parties defined with Competetive Syntax.
 Compatible with Pokemon Showdown exports.
 https://github.com/smogon/pokemon-showdown/blob/master/sim/TEAMS.md
 
-A trainer specification starts with a "=== TRAINER_XXXX ==="
+A trainer specification starts with "=== TRAINER_XXXX ==="
 and includes everything until the next line that starts with "==="
 or the file ends.
 A blank line is required between the trainer and their Pokemon
-and between Pokemon.
-TRAINER_XXXX is what the trainer is referred with in code.
+and between their Pokemon.
+TRAINER_XXXX is how the trainer is referred to within code.
 
 Fields with description and/or example of usage
 Required fields for trainers:
@@ -25,21 +25,21 @@ Optional (but still recommended) fields for trainers:
           see "constants/battle_ai.h" for all flags)
     - Mugshot (enable Mugshots during battle transition
                set to one of Purple, Green, Pink, Blue or Yellow)
-    - Starting Status (see include/constants/battle.h for values) 
+    - Starting Status (see include/constants/battle.h for values)
 
-Pokemon are then speficied using the Showdown Export format
+Pokemon are then specified using the Showdown Export format.
 If a field is not specified, it will use it's default value.
 
-Required fields for Pokemon
+Required fields for Pokemon:
     - Species (Either as SPECIES_ABRA or Abra)
       This line also specifies Gender, Nickname and Held item.
       Alfred (Abra) (M) @ Eviolite
       Roberta (SPECIES_ABRA) (F) @ ITEM_CHOICE_SPECS
-      Both lines are valid, gender (M) or (F) must be capital letters.
+      Both lines are valid. Gender (M) or (F) must use a capital letter.
       Nickname length is limited to 10 characters using standard letters.
-      With narrow font it's increased to 12, longer strings will be silently shortened.
+      With narrow font it's increased to 12. Longer strings will be silently shortened.
       
-Optional fields for Pokemon
+Optional fields for Pokemon:
     - Level (Number between 1 and 100, defaults to 100)
     - Ability (Ability Name or ABILITY_ABILITY_NAME)
     - IVs (0 HP / 1 Atk / 2 Def / 3 SpA / 4 SpD / 5 Spe, defaults to all 31)
@@ -54,9 +54,9 @@ Optional fields for Pokemon
     - Gigantamax (Yes/No, sets to Gigantamax factor)
                  (doesn't do anything to Pokemon without a Gigantamax form, also sets "shouldDynamax" to True)
     - Tera Type (Set to a Type, either Fire or TYPE_FIRE, also sets "shouldTerastal" to True)
-Moves are defined with a - (dash) followed by a single space, then the move name
+Moves are defined with a - (dash) followed by a single space, then the move name.
 Either "- Tackle" or "- MOVE_TACKLE" works. One move per line.
-Moves has to be the last lines of a Pokemon.
+Moves have to be the last lines of a Pokemon.
 If no moves are specified, the Pokemon will use the last 4 moves it learns
 through levelup at its level.
 
