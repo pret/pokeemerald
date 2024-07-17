@@ -24,7 +24,7 @@ SINGLE_BATTLE_TEST("Shaymin-Sky reverts to Shaymin-Land when frozen or frostbitt
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, move, opponent);
         if (move == MOVE_POWDER_SNOW) {
-            STATUS_ICON(player, freeze: TRUE);
+            FREEZE_OR_FROSTBURN_STATUS(player, TRUE);
             NOT HP_BAR(player); // Regression caused by Mimikyu form change
             MESSAGE("Shaymin transformed!");
         } else {
