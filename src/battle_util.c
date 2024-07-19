@@ -5874,9 +5874,40 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             case ABILITY_OPPORTUNIST:
                 if (gProtectStructs[battler].activateOpportunist == 2)
                 {
-                    gBattleScripting.savedBattler = gBattlerAttacker;
-                    gBattleScripting.battler = gBattlerAttacker = gBattlerAbility = battler;
+                    bool32 statBuffMoreThan1 = FALSE;
+                    bool32 handleSpeedAnimLater = FALSE;
+                    gBattleScripting.animArg1 = 0;
+                    gBattleScripting.battler = battler;
                     gProtectStructs[battler].activateOpportunist--;
+
+                    for (i = 0; i < (NUM_BATTLE_STATS - 1); i++)
+                    {
+                        if ((gQueuedStatBoosts[battler].stats & (1 << i)) == 0)
+                            continue;
+
+                        if (i == STAT_SPEED)
+                        {
+                            handleSpeedAnimLater = TRUE;
+                            continue;
+                        }
+
+                        if (!statBuffMoreThan1)
+                            statBuffMoreThan1 = ((gQueuedStatBoosts[battler].stats & (1 << i)) > 1);
+
+                        if (gBattleScripting.animArg1 != 0) //Already set in a different stat so now boosting multiple stats
+                            gBattleScripting.animArg1 = (!statBuffMoreThan1 ? STAT_ANIM_MULTIPLE_PLUS1 : STAT_ANIM_MULTIPLE_PLUS2);
+                        else
+                            gBattleScripting.animArg1 = GET_STAT_BUFF_ID((i + 1)) + (!statBuffMoreThan1 ? STAT_ANIM_PLUS1 : STAT_ANIM_PLUS2);
+
+                    }
+                    if (handleSpeedAnimLater)
+                    {
+                        if (gBattleScripting.animArg1 != 0) //Already set in a different stat so now boosting multiple stats
+                            gBattleScripting.animArg1 = (!statBuffMoreThan1 ? STAT_ANIM_MULTIPLE_PLUS1 : STAT_ANIM_MULTIPLE_PLUS2);
+                        else
+                            gBattleScripting.animArg1 = GET_STAT_BUFF_ID((STAT_SPEED + 1)) + (!statBuffMoreThan1 ? STAT_ANIM_PLUS1 : STAT_ANIM_PLUS2);
+                    }
+
                     BattleScriptPushCursorAndCallback(BattleScript_OpportunistCopyStatChange);
                     effect = 1;
                 }
@@ -6815,10 +6846,43 @@ static u8 TryConsumeMirrorHerb(u32 battler, bool32 execute)
 
     if (gProtectStructs[battler].eatMirrorHerb)
     {
+        u32 i;
+        bool32 statBuffMoreThan1 = FALSE;
+        bool32 handleSpeedAnimLater = FALSE;
+        gBattleScripting.animArg1 = 0;
+
         gLastUsedItem = gBattleMons[battler].item;
-        gBattleScripting.savedBattler = gBattlerAttacker;
-        gBattleScripting.battler = gBattlerAttacker = battler;
+        gBattleScripting.battler = battler;
         gProtectStructs[battler].eatMirrorHerb = 0;
+
+        for (i = 0; i < (NUM_BATTLE_STATS - 1); i++)
+        {
+            if ((gQueuedStatBoosts[battler].stats & (1 << i)) == 0)
+                continue;
+
+            if (i == STAT_SPEED)
+            {
+                handleSpeedAnimLater = TRUE;
+                continue;
+            }
+
+            if (!statBuffMoreThan1)
+                statBuffMoreThan1 = ((gQueuedStatBoosts[battler].stats & (1 << i)) > 1);
+
+            if (gBattleScripting.animArg1 != 0) //Already set in a different stat so now boosting multiple stats
+                gBattleScripting.animArg1 = (!statBuffMoreThan1 ? STAT_ANIM_MULTIPLE_PLUS1 : STAT_ANIM_MULTIPLE_PLUS2);
+            else
+                gBattleScripting.animArg1 = GET_STAT_BUFF_ID((i + 1)) + (!statBuffMoreThan1 ? STAT_ANIM_PLUS1 : STAT_ANIM_PLUS2);
+
+        }
+        if (handleSpeedAnimLater)
+        {
+            if (gBattleScripting.animArg1 != 0) //Already set in a different stat so now boosting multiple stats
+                gBattleScripting.animArg1 = (!statBuffMoreThan1 ? STAT_ANIM_MULTIPLE_PLUS1 : STAT_ANIM_MULTIPLE_PLUS2);
+            else
+                gBattleScripting.animArg1 = GET_STAT_BUFF_ID((STAT_SPEED + 1)) + (!statBuffMoreThan1 ? STAT_ANIM_PLUS1 : STAT_ANIM_PLUS2);
+        }
+
         if (execute)
         {
             BattleScriptExecute(BattleScript_MirrorHerbCopyStatChangeEnd2);
@@ -7344,6 +7408,9 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
 
                 BattleScriptPushCursorAndCallback(BattleScript_BerserkGeneRet);
                 effect = ITEM_STATS_CHANGE;
+                break;
+            case HOLD_EFFECT_MIRROR_HERB:
+                effect = TryConsumeMirrorHerb(battler, TRUE);
                 break;
             }
             if (effect != 0)

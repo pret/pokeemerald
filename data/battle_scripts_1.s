@@ -9100,7 +9100,6 @@ BattleScript_TotemFlaredToLife::
 	call BattleScript_ApplyTotemVarBoost
 	end2
 
-@ remove the mirror herb, do totem loop
 BattleScript_MirrorHerbCopyStatChangeEnd2::
 	call BattleScript_MirrorHerbCopyStatChange
 	end2
@@ -9110,16 +9109,24 @@ BattleScript_MirrorHerbCopyStatChange::
 	printstring STRINGID_MIRRORHERBCOPIED
 	waitmessage B_WAIT_TIME_LONG
 	removeitem BS_SCRIPTING
-	call BattleScript_TotemVar_Ret
-	copybyte gBattlerAttacker, sSAVED_BATTLER	@ restore the original attacker just to be safe
+	playanimation BS_SCRIPTING, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+BattleScript_MirrorHerbStartCopyStats:
+	copyfoesstatincrease BS_SCRIPTING, BattleScript_MirrorHerbStartReturn
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_MirrorHerbStartReturn
+	goto BattleScript_MirrorHerbStartCopyStats
+BattleScript_MirrorHerbStartReturn:
 	return
 
 BattleScript_OpportunistCopyStatChange::
-	call BattleScript_AbilityPopUp
-	printstring STRINGID_OPPORTUNISTCOPIED
+	call BattleScript_AbilityPopUpScripting
+	playanimation BS_SCRIPTING, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+BattleScript_OpportunistStartCopyStats:
+	copyfoesstatincrease BS_SCRIPTING, BattleScript_OpportunistCopyStatChangeEnd
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_OpportunistCopyStatChangeEnd
+	printfromtable gStatUpStringIds
 	waitmessage B_WAIT_TIME_LONG
-	call BattleScript_TotemVar_Ret
-	copybyte gBattlerAttacker, sSAVED_BATTLER	@ restore the original attacker just to be safe
+	goto BattleScript_OpportunistStartCopyStats
+BattleScript_OpportunistCopyStatChangeEnd:
 	end3
 
 BattleScript_TotemVar::
