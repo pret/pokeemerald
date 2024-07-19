@@ -1929,8 +1929,7 @@ static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monL
         return;
 
     for (i = 0; gFrontierBannedSpecies[i] != 0xFFFF
-      && gFrontierBannedSpecies[i] != GET_BASE_SPECIES_ID(species)
-      && IsSpeciesEnabled(gFrontierBannedSpecies[i]); i++)
+      && gFrontierBannedSpecies[i] != GET_BASE_SPECIES_ID(species); i++)
         ;
 
     if (gFrontierBannedSpecies[i] != 0xFFFF)
