@@ -113,3 +113,50 @@ TEST("ModifyPersonalityForNature can set any nature")
     ModifyPersonalityForNature(&personality, nature);
     EXPECT_EQ(GetNatureFromPersonality(personality), nature);
 }
+
+static const struct TrainerMon sTestParty2[] =
+{
+    {
+        .species = SPECIES_WYNAUT,
+        .lvl = 5,
+    },
+    {
+        .species = SPECIES_WYNAUT,
+        .lvl = 5,
+    },
+    {
+        .species = SPECIES_WYNAUT,
+        .lvl = 5,
+    },
+    {
+        .species = SPECIES_WYNAUT,
+        .lvl = 5,
+    },
+    {
+        .species = SPECIES_WYNAUT,
+        .lvl = 5,
+    },
+    {
+        .species = SPECIES_WYNAUT,
+        .lvl = 5,
+    },
+};
+
+static const struct Trainer sTestTrainer2 =
+{
+    .trainerName = _("Test2"),
+    .trainerClass = TRAINER_CLASS_BLACK_BELT,
+    .party = TRAINER_PARTY(sTestParty2),
+};
+
+TEST("Trainer Class Balls apply to the entire party")
+{
+    u32 j;
+    struct Pokemon *testParty = Alloc(6 * sizeof(struct Pokemon));
+    CreateNPCTrainerPartyFromTrainer(testParty, &sTestTrainer2, TRUE, BATTLE_TYPE_TRAINER);
+    for(j = 0; j < 6; j++)
+    {
+        EXPECT(GetMonData(&testParty[j], MON_DATA_POKEBALL, 0) == gTrainerClasses[sTestTrainer2.trainerClass].ball);
+    }
+    Free(testParty);
+}
