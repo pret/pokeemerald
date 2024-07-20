@@ -518,7 +518,6 @@ typedef void (*DoubleBattleTestFunction)(void *, const u32, struct BattlePokemon
 struct BattleTest
 {
     u8 type;
-    u16 sourceLine;
     union
     {
         SingleBattleTestFunction singles;
@@ -762,10 +761,10 @@ extern struct BattleTestRunnerState *const gBattleTestRunnerState;
         .name = _name, \
         .filename = __FILE__, \
         .runner = &gBattleTestRunner, \
+        .sourceLine = __LINE__, \
         .data = (void *)&(const struct BattleTest) \
         { \
             .type = _type, \
-            .sourceLine = __LINE__, \
             .function = { .singles = (SingleBattleTestFunction)CAT(Test, __LINE__) }, \
             .resultsSize = sizeof(struct CAT(Result, __LINE__)), \
         }, \
@@ -780,10 +779,10 @@ extern struct BattleTestRunnerState *const gBattleTestRunnerState;
         .name = _name, \
         .filename = __FILE__, \
         .runner = &gBattleTestRunner, \
+        .sourceLine = __LINE__, \
         .data = (void *)&(const struct BattleTest) \
         { \
             .type = _type, \
-            .sourceLine = __LINE__, \
             .function = { .doubles = (DoubleBattleTestFunction)CAT(Test, __LINE__) }, \
             .resultsSize = sizeof(struct CAT(Result, __LINE__)), \
         }, \
@@ -1091,7 +1090,7 @@ void ValidateFinally(u32 sourceLine);
         s32 _am = Q_4_12_TO_INT(_a * _m); \
         s32 _t = max(Q_4_12_TO_INT(abs(_m) + Q_4_12_ROUND), 1); \
         if (abs(_am-_b) > _t) \
-            Test_ExitWithResult(TEST_RESULT_FAIL, "%s:%d: EXPECT_MUL_EQ(%d, %q, %d) failed: %d not in [%d..%d]", gTestRunnerState.test->filename, __LINE__, _a, _m, _b, _am, _b-_t, _b+_t); \
+            Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, ":L%s:%d: EXPECT_MUL_EQ(%d, %q, %d) failed: %d not in [%d..%d]", gTestRunnerState.test->filename, __LINE__, _a, _m, _b, _am, _b-_t, _b+_t); \
     } while (0)
 
 #endif
