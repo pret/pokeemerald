@@ -762,6 +762,71 @@ SINGLE_BATTLE_TEST("(TERA) Stellar type's one-time boost factors in dynamically-
     }
 }
 
+SINGLE_BATTLE_TEST("(TERA) Terapagos retains the Stellar type boost at all times")
+{
+    s16 damage[2];
+    u32 move;
+    PARAMETRIZE { move = MOVE_TACKLE; }
+    PARAMETRIZE { move = MOVE_MACH_PUNCH; }
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_TACKLE].type == TYPE_NORMAL);
+        ASSUME(gMovesInfo[MOVE_MACH_PUNCH].type != TYPE_NORMAL);
+        PLAYER(SPECIES_TERAPAGOS);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, move, gimmick: GIMMICK_TERA); }
+        TURN { MOVE(player, move); }
+    } SCENE {
+        HP_BAR(opponent, captureDamage: &damage[0]);
+        HP_BAR(opponent, captureDamage: &damage[1]);
+    } THEN {
+        EXPECT_EQ(damage[0], damage[1]);
+    }
+}
+
+SINGLE_BATTLE_TEST("(TERA) Terapagos retains its base defensive profile when Terastalizing")
+{
+    GIVEN {
+        PLAYER(SPECIES_TERAPAGOS);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_BRICK_BREAK); }
+    } SCENE {
+        MESSAGE("It's super effective!");
+    }
+}
+
+SINGLE_BATTLE_TEST("(TERA) Illusion breaks if the pokemon Terastalizes")
+{
+    KNOWN_FAILING; // #5015
+    u32 species;
+    PARAMETRIZE { species = SPECIES_TERAPAGOS; }
+    PARAMETRIZE { species = SPECIES_WOBBUFFET; }
+    GIVEN {
+        PLAYER(SPECIES_ZOROARK) { TeraType(TYPE_DARK); }
+        PLAYER(species);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
+    } SCENE {
+        MESSAGE("Zoroark's Illusion wore off!");
+    }
+}
+
+/*
+//  This test freezes the emulator
+SINGLE_BATTLE_TEST("(TERA) Transformed pokemon can't Terastalize")
+{
+    GIVEN {
+        PLAYER(SPECIES_DITTO);
+        OPPONENT(SPECIES_TERAPAGOS) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_TRANSFORM); }
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
+    }
+}
+*/
+
 SINGLE_BATTLE_TEST("(TERA) Pokemon with Tera forms change upon Terastallizing")
 {
     u32 species, targetSpecies;
