@@ -6278,7 +6278,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
 #endif //P_FAMILY_FEZANDIPITI
 
 #if P_FAMILY_OGERPON
-#define OGERPON_SPECIES_INFO(Form, type, ability, color, iconpalette)                   \
+#define OGERPON_SPECIES_INFO(Form1, Form2, type, ability, color, iconpalette)            \
     {                                                                                   \
         .baseHP        = 80,                                                            \
         .baseAttack    = 120,                                                           \
@@ -6303,23 +6303,23 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .categoryName = _("Mask"),                                                      \
         .height = 12,                                                                   \
         .weight = 398,                                                                  \
-        .description = gOgerpon##Form##PokedexText,                                     \
+        .description = gOgerpon##Form1##MaskPokedexText,                                \
         .pokemonScale = 356,                                                            \
         .pokemonOffset = 17,                                                            \
         .trainerScale = 256,                                                            \
         .trainerOffset = 0,                                                             \
-        .frontPic = gMonFrontPic_Ogerpon##Form,                                         \
+        .frontPic = gMonFrontPic_Ogerpon##Form1##Form2,                                 \
         .frontPicSize = MON_COORDS_SIZE(64, 64),                                        \
         .frontPicYOffset = 0,                                                           \
         .frontAnimFrames = sAnims_Ogerpon,                                              \
         /*.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,*/                                    \
-        .backPic = gMonBackPic_Ogerpon##Form,                                           \
+        .backPic = gMonBackPic_Ogerpon##Form1##Form2,                                   \
         .backPicSize = MON_COORDS_SIZE(64, 64),                                         \
-        .backPicYOffset = 16,                                                           \
+        .backPicYOffset = 0,                                                            \
         /*.backAnimId = BACK_ANIM_NONE,*/                                               \
-        .palette = gMonPalette_Ogerpon##Form,                                           \
-        .shinyPalette = gMonShinyPalette_Ogerpon##Form,                                 \
-        .iconSprite = gMonIcon_Ogerpon##Form,                                           \
+        .palette = gMonPalette_Ogerpon##Form1##Form2,                                   \
+        .shinyPalette = gMonShinyPalette_Ogerpon##Form1##Form2,                         \
+        .iconSprite = gMonIcon_Ogerpon##Form1##Mask,                                    \
         .iconPalIndex = iconpalette,                                                    \
         FOOTPRINT(Ogerpon)                                                              \
         .levelUpLearnset = sOgerponLevelUpLearnset,                                     \
@@ -6329,15 +6329,15 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .isLegendary = TRUE,                                                            \
     }
 
-    [SPECIES_OGERPON_TEAL_MASK]             = OGERPON_SPECIES_INFO(TealMask,        TYPE_GRASS, ABILITY_DEFIANT,                   BODY_COLOR_GREEN, 1),
-    [SPECIES_OGERPON_WELLSPRING_MASK]       = OGERPON_SPECIES_INFO(WellspringMask,  TYPE_WATER, ABILITY_WATER_ABSORB,              BODY_COLOR_BLUE,  0),
-    [SPECIES_OGERPON_HEARTHFLAME_MASK]      = OGERPON_SPECIES_INFO(HearthflameMask, TYPE_FIRE,  ABILITY_MOLD_BREAKER,              BODY_COLOR_RED,   0),
-    [SPECIES_OGERPON_CORNERSTONE_MASK]      = OGERPON_SPECIES_INFO(CornerstoneMask, TYPE_ROCK,  ABILITY_STURDY,                    BODY_COLOR_GRAY,  0),
+    [SPECIES_OGERPON_TEAL_MASK]             = OGERPON_SPECIES_INFO(Teal,        Mask,     TYPE_GRASS, ABILITY_DEFIANT,                        BODY_COLOR_GREEN, 1),
+    [SPECIES_OGERPON_WELLSPRING_MASK]       = OGERPON_SPECIES_INFO(Wellspring,  Mask,     TYPE_WATER, ABILITY_WATER_ABSORB,                   BODY_COLOR_BLUE,  0),
+    [SPECIES_OGERPON_HEARTHFLAME_MASK]      = OGERPON_SPECIES_INFO(Hearthflame, Mask,     TYPE_FIRE,  ABILITY_MOLD_BREAKER,                   BODY_COLOR_RED,   0),
+    [SPECIES_OGERPON_CORNERSTONE_MASK]      = OGERPON_SPECIES_INFO(Cornerstone, Mask,     TYPE_ROCK,  ABILITY_STURDY,                         BODY_COLOR_GRAY,  0),
 #if P_TERA_FORMS
-    [SPECIES_OGERPON_TEAL_MASK_TERA]        = OGERPON_SPECIES_INFO(TealMask,        TYPE_GRASS, ABILITY_EMBODY_ASPECT_TEAL_MASK,        BODY_COLOR_GREEN, 1),
-    [SPECIES_OGERPON_WELLSPRING_MASK_TERA]  = OGERPON_SPECIES_INFO(WellspringMask,  TYPE_WATER, ABILITY_EMBODY_ASPECT_WELLSPRING_MASK,  BODY_COLOR_BLUE,  0),
-    [SPECIES_OGERPON_HEARTHFLAME_MASK_TERA] = OGERPON_SPECIES_INFO(HearthflameMask, TYPE_FIRE,  ABILITY_EMBODY_ASPECT_HEARTHFLAME_MASK, BODY_COLOR_RED,   0),
-    [SPECIES_OGERPON_CORNERSTONE_MASK_TERA] = OGERPON_SPECIES_INFO(CornerstoneMask, TYPE_ROCK,  ABILITY_EMBODY_ASPECT_CORNERSTONE_MASK, BODY_COLOR_GRAY,  0),
+    [SPECIES_OGERPON_TEAL_MASK_TERA]        = OGERPON_SPECIES_INFO(Teal,        MaskTera, TYPE_GRASS, ABILITY_EMBODY_ASPECT_TEAL_MASK,        BODY_COLOR_GREEN, 1),
+    [SPECIES_OGERPON_WELLSPRING_MASK_TERA]  = OGERPON_SPECIES_INFO(Wellspring,  MaskTera, TYPE_WATER, ABILITY_EMBODY_ASPECT_WELLSPRING_MASK,  BODY_COLOR_BLUE,  0),
+    [SPECIES_OGERPON_HEARTHFLAME_MASK_TERA] = OGERPON_SPECIES_INFO(Hearthflame, MaskTera, TYPE_FIRE,  ABILITY_EMBODY_ASPECT_HEARTHFLAME_MASK, BODY_COLOR_RED,   0),
+    [SPECIES_OGERPON_CORNERSTONE_MASK_TERA] = OGERPON_SPECIES_INFO(Cornerstone, MaskTera, TYPE_ROCK,  ABILITY_EMBODY_ASPECT_CORNERSTONE_MASK, BODY_COLOR_GRAY,  0),
 #endif //P_TERA_FORMS
 
 #endif //P_FAMILY_OGERPON
