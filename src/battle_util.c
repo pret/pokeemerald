@@ -6242,7 +6242,7 @@ u32 GetBattlerAbility(u32 battler)
             && gAbilitiesInfo[gBattleMons[battler].ability].breakable
             && noAbilityShield
             && gBattlerByTurnOrder[gCurrentTurnActionNumber] == gBattlerAttacker
-            && gActionsByTurnOrder[gBattlerByTurnOrder[gBattlerAttacker]] == B_ACTION_USE_MOVE
+            && gActionsByTurnOrder[gCurrentTurnActionNumber] == B_ACTION_USE_MOVE
             && gCurrentTurnActionNumber < gBattlersCount)
         return ABILITY_NONE;
 

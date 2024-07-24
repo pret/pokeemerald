@@ -13407,7 +13407,7 @@ static void Cmd_handlefurycutter(void)
             max = 5;
 
         if (gDisableStructs[gBattlerAttacker].furyCutterCounter < max
-            && gSpecialStatuses[gBattlerAttacker].parentalBondState != PARENTAL_BOND_1ST_HIT) // Don't increment counter on first hit
+            && gSpecialStatuses[gBattlerAttacker].parentalBondState != PARENTAL_BOND_2ND_HIT) // Don't increment counter on second hit
             gDisableStructs[gBattlerAttacker].furyCutterCounter++;
 
         gBattlescriptCurrInstr = cmd->nextInstr;
