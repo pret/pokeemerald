@@ -4911,6 +4911,8 @@ static s32 AI_SetupFirstTurn(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
 static s32 AI_Risky(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 {
     u8 i;
+    struct AiLogicData *aiData = AI_DATA;
+
     if (IS_TARGETING_PARTNER(battlerAtk, battlerDef))
         return score;
 
@@ -4933,12 +4935,16 @@ static s32 AI_Risky(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         break;
 
     // +2 Score
+    case EFFECT_MEMENTO:
+        if (aiData->hpPercents[battlerAtk] < 50 && AI_RandLessThan(128))
+            ADJUST_SCORE(AVERAGE_RISKY_EFFECT);
+        break;
     case EFFECT_REVENGE:
         if (gSpeciesInfo[gBattleMons[battlerDef].species].baseSpeed >= gSpeciesInfo[gBattleMons[battlerAtk].species].baseSpeed + 10)
             ADJUST_SCORE(AVERAGE_RISKY_EFFECT);
         break;
     case EFFECT_BELLY_DRUM:
-        if (gBattleMons[battlerAtk].hp >= gBattleMons[battlerAtk].maxHP * 90 / 100)
+        if (aiData->hpPercents[battlerAtk] >= 90)
             ADJUST_SCORE(AVERAGE_RISKY_EFFECT);
         break;
     case EFFECT_MAX_HP_50_RECOIL:
