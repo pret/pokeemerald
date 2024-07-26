@@ -6207,8 +6207,11 @@ bool32 IsNeutralizingGasOnField(void)
     return FALSE;
 }
 
-bool32 IsMoldBreakerTypeAbility(u32 ability)
+bool32 IsMoldBreakerTypeAbility(u32 battler, u32 ability)
 {
+    if (gStatuses3[battler] & STATUS3_GASTRO_ACID)
+        return FALSE;
+
     return (ability == ABILITY_MOLD_BREAKER || ability == ABILITY_TERAVOLT || ability == ABILITY_TURBOBLAZE
         || (ability == ABILITY_MYCELIUM_MIGHT && IS_MOVE_STATUS(gCurrentMove)));
 }
@@ -6224,6 +6227,9 @@ u32 GetBattlerAbility(u32 battler)
             && gStatuses3[battler] & STATUS3_GASTRO_ACID
             && gBattleMons[battler].ability == ABILITY_COMATOSE)
                 return ABILITY_NONE;
+
+        if (!gAbilitiesInfo[gBattleMons[battler].ability].breakable)
+            return gBattleMons[battler].ability;
     }
 
     if (gStatuses3[battler] & STATUS3_GASTRO_ACID)
@@ -6234,15 +6240,13 @@ u32 GetBattlerAbility(u32 battler)
      && noAbilityShield)
         return ABILITY_NONE;
 
-    if (((IsMoldBreakerTypeAbility(gBattleMons[gBattlerAttacker].ability)
-            && !(gStatuses3[gBattlerAttacker] & STATUS3_GASTRO_ACID))
-            || gMovesInfo[gCurrentMove].ignoresTargetAbility)
-            && battler != gBattlerAttacker
-            && gAbilitiesInfo[gBattleMons[battler].ability].breakable
-            && noAbilityShield
-            && gBattlerByTurnOrder[gCurrentTurnActionNumber] == gBattlerAttacker
-            && gActionsByTurnOrder[gCurrentTurnActionNumber] == B_ACTION_USE_MOVE
-            && gCurrentTurnActionNumber < gBattlersCount)
+    if ((IsMoldBreakerTypeAbility(gBattlerAttacker, gBattleMons[gBattlerAttacker].ability) || gMovesInfo[gCurrentMove].ignoresTargetAbility)
+     && battler != gBattlerAttacker
+     && gAbilitiesInfo[gBattleMons[battler].ability].breakable
+     && noAbilityShield
+     && gBattlerByTurnOrder[gCurrentTurnActionNumber] == gBattlerAttacker
+     && gActionsByTurnOrder[gCurrentTurnActionNumber] == B_ACTION_USE_MOVE
+     && gCurrentTurnActionNumber < gBattlersCount)
         return ABILITY_NONE;
 
     return gBattleMons[battler].ability;
