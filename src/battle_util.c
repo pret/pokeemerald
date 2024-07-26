@@ -6224,7 +6224,6 @@ u32 GetBattlerAbility(u32 battler)
             && gStatuses3[battler] & STATUS3_GASTRO_ACID
             && gBattleMons[battler].ability == ABILITY_COMATOSE)
                 return ABILITY_NONE;
-        return gBattleMons[battler].ability;
     }
 
     if (gStatuses3[battler] & STATUS3_GASTRO_ACID)
