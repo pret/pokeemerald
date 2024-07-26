@@ -315,6 +315,12 @@
 .Lsprite_\@_2:
 	.endm
 
+	.macro jumpifmovetypeequal type:req, jumpInstr:req
+	.byte 0x33
+	.byte \type
+	.4byte \jumpInstr
+	.endm
+
 @ useful macros
 	.macro jumpreteq value:req, ptr:req
 	jumpargeq ARG_RET_ID, \value, \ptr

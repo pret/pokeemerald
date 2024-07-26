@@ -86,6 +86,7 @@ static void Cmd_stopsound(void);
 static void Cmd_createvisualtaskontargets(void);
 static void Cmd_createspriteontargets(void);
 static void Cmd_createspriteontargets_onpos(void);
+static void Cmd_jumpifmovetypeequal(void);
 static void RunAnimScriptCommand(void);
 static void Task_UpdateMonBg(u8 taskId);
 static void FlipBattlerBgTiles(void);
@@ -177,6 +178,7 @@ static void (* const sScriptCmdTable[])(void) =
     Cmd_createvisualtaskontargets,  // 0x30
     Cmd_createspriteontargets,      // 0x31
     Cmd_createspriteontargets_onpos, // 0x32
+    Cmd_jumpifmovetypeequal,  // 0x33
 };
 
 void ClearBattleAnimationVars(void)
@@ -2135,4 +2137,17 @@ static void Cmd_stopsound(void)
     m4aMPlayStop(&gMPlayInfo_SE1);
     m4aMPlayStop(&gMPlayInfo_SE2);
     sBattleAnimScriptPtr++;
+}
+
+static void Cmd_jumpifmovetypeequal(void)
+{
+    u8 moveType;
+    const u8 *type = sBattleAnimScriptPtr + 1;
+    sBattleAnimScriptPtr += 2;
+    GET_MOVE_TYPE(gCurrentMove, moveType);
+
+    if (*type != moveType)
+        sBattleAnimScriptPtr += 4;
+    else
+        sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
 }
