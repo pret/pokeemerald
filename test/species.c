@@ -119,9 +119,6 @@ TEST("No species has two evolutions that use the evolution tracker")
     #ifdef EVO_DEFEAT_WITH_ITEM
          || evolutions[i].method == EVO_DEFEAT_WITH_ITEM
     #endif //EVO_DEFEAT_WITH_ITEM
-    #ifdef EVO_OVERWORLD_STEPS
-         || evolutions[i].method == EVO_OVERWORLD_STEPS
-    #endif //EVO_OVERWORLD_STEPS
         )
             evolutionTrackerEvolutions++;
 

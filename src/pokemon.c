@@ -85,6 +85,7 @@ EWRAM_DATA struct Pokemon gEnemyParty[PARTY_SIZE] = {0};
 EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
 EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManagers[MON_SPR_GFX_MANAGERS_COUNT] = {NULL};
 EWRAM_DATA static u8 sTriedEvolving = 0;
+EWRAM_DATA u16 gFollowerSteps = 0;
 
 #include "data/moves_info.h"
 #include "data/abilities.h"
@@ -4708,7 +4709,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     targetSpecies = evolutions[i].targetSpecies;
                 break;
             case EVO_OVERWORLD_STEPS:
-                if (evolutionTracker >= evolutions[i].param)
+                if (mon == GetFirstLiveMon() && gFollowerSteps >= evolutions[i].param)
                     targetSpecies = evolutions[i].targetSpecies;
                 break;
             }

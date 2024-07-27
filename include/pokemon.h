@@ -684,6 +684,7 @@ extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
 extern struct SpriteTemplate gMultiuseSpriteTemplate;
+extern u16 gFollowerSteps;
 
 extern const struct MoveInfo gMovesInfo[];
 extern const u8 gFacilityClassToPicIndex[];

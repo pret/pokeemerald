@@ -6,6 +6,7 @@
 #include "dma3.h"
 #include "dynamic_placeholder_text_util.h"
 #include "event_data.h"
+#include "event_object_movement.h"
 #include "field_screen_effect.h"
 #include "field_weather.h"
 #include "fldeff_misc.h"
@@ -6412,9 +6413,15 @@ static void RefreshDisplayMon(void)
 static void SetMovingMonData(u8 boxId, u8 position)
 {
     if (boxId == TOTAL_BOXES_COUNT)
+    {
         sStorage->movingMon = gPlayerParty[sCursorPosition];
+        if (&gPlayerParty[sCursorPosition] == GetFirstLiveMon())
+            gFollowerSteps = 0;
+    }
     else
+    {
         BoxMonAtToMon(boxId, position, &sStorage->movingMon);
+    }
 
     PurgeMonOrBoxMon(boxId, position);
     sMovingMonOrigBoxId = boxId;
@@ -6427,9 +6434,15 @@ static void SetPlacedMonData(u8 boxId, u8 position)
         HealPokemon(&sStorage->movingMon);
 
     if (boxId == TOTAL_BOXES_COUNT)
+    {
         gPlayerParty[position] = sStorage->movingMon;
+        if (&gPlayerParty[position] == GetFirstLiveMon())
+            gFollowerSteps = 0;
+    }
     else
+    {
         SetBoxMonAt(boxId, position, &sStorage->movingMon.box);
+    }
 }
 
 static void PurgeMonOrBoxMon(u8 boxId, u8 position)

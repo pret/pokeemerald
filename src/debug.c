@@ -99,6 +99,7 @@ enum UtilDebugMenu
     DEBUG_UTIL_MENU_ITEM_CHEAT,
     DEBUG_UTIL_MENU_ITEM_EXPANSION_VER,
     DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS,
+    DEBUG_UTIL_MENU_ITEM_EWRAM_COUNTERS,
 };
 
 enum GivePCBagDebugMenu
@@ -374,6 +375,7 @@ static void DebugAction_Util_Player_Id(u8 taskId);
 static void DebugAction_Util_CheatStart(u8 taskId);
 static void DebugAction_Util_ExpansionVersion(u8 taskId);
 static void DebugAction_Util_BerryFunctions(u8 taskId);
+static void DebugAction_Util_CheckEWRAMCounters(u8 taskId);
 
 static void DebugAction_OpenPCBagFillMenu(u8 taskId);
 static void DebugAction_PCBag_Fill_PCBoxes_Fast(u8 taskId);
@@ -476,6 +478,7 @@ extern const u8 Debug_CheckSaveBlock[];
 extern const u8 Debug_CheckROMSpace[];
 extern const u8 Debug_BoxFilledMessage[];
 extern const u8 Debug_ShowExpansionVersion[];
+extern const u8 Debug_EventScript_EWRAMCounters[];
 
 extern const u8 Debug_BerryPestsDisabled[];
 extern const u8 Debug_BerryWeedsDisabled[];
@@ -532,6 +535,7 @@ static const u8 sDebugText_Util_Player_Id[] =                _("New Trainer ID")
 static const u8 sDebugText_Util_CheatStart[] =               _("Cheat start");
 static const u8 sDebugText_Util_ExpansionVersion[] =         _("Expansion Version");
 static const u8 sDebugText_Util_BerryFunctions[] =           _("Berry Functions…{CLEAR_TO 110}{RIGHT_ARROW}");
+static const u8 sDebugText_Util_EWRAMCounters[] =            _("EWRAM Counters…{CLEAR_TO 110}{RIGHT_ARROW}");
 // PC/Bag Menu
 static const u8 sDebugText_PCBag_Fill[] =                    _("Fill…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_PCBag_Fill_Pc_Fast[] =            _("Fill PC Boxes Fast");
@@ -720,6 +724,7 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
     [DEBUG_UTIL_MENU_ITEM_CHEAT]           = {sDebugText_Util_CheatStart,       DEBUG_UTIL_MENU_ITEM_CHEAT},
     [DEBUG_UTIL_MENU_ITEM_EXPANSION_VER]   = {sDebugText_Util_ExpansionVersion, DEBUG_UTIL_MENU_ITEM_EXPANSION_VER},
     [DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS] = {sDebugText_Util_BerryFunctions,   DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS},
+    [DEBUG_UTIL_MENU_ITEM_EWRAM_COUNTERS]  = {sDebugText_Util_EWRAMCounters,    DEBUG_UTIL_MENU_ITEM_EWRAM_COUNTERS},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_PCBag[] =
@@ -889,6 +894,7 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
     [DEBUG_UTIL_MENU_ITEM_CHEAT]           = DebugAction_Util_CheatStart,
     [DEBUG_UTIL_MENU_ITEM_EXPANSION_VER]   = DebugAction_Util_ExpansionVersion,
     [DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS] = DebugAction_Util_BerryFunctions,
+    [DEBUG_UTIL_MENU_ITEM_EWRAM_COUNTERS]  = DebugAction_Util_CheckEWRAMCounters,
 };
 
 static void (*const sDebugMenu_Actions_PCBag[])(u8) =
@@ -5111,6 +5117,17 @@ static void DebugAction_Party_ClearParty(u8 taskId)
     ZeroPlayerPartyMons();
     ScriptContext_Enable();
     Debug_DestroyMenu_Full(taskId);
+}
+
+void CheckEWRAMCounters(struct ScriptContext *ctx)
+{
+    ConvertIntToDecimalStringN(gStringVar1, gFollowerSteps, STR_CONV_MODE_LEFT_ALIGN, 5);
+    ConvertIntToDecimalStringN(gStringVar2, gChainFishingDexNavStreak, STR_CONV_MODE_LEFT_ALIGN, 5);
+}
+
+static void DebugAction_Util_CheckEWRAMCounters(u8 taskId)
+{
+    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_EWRAMCounters);
 }
 
 #endif //DEBUG_OVERWORLD_MENU == TRUE
