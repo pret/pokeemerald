@@ -116,9 +116,7 @@ TEST("No species has two evolutions that use the evolution tracker")
     for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
     {
         if (evolutions[i].method == EVO_USE_MOVE_TWENTY_TIMES
-    #ifdef EVO_DEFEAT_WITH_ITEM
-         || evolutions[i].method == EVO_DEFEAT_WITH_ITEM
-    #endif //EVO_DEFEAT_WITH_ITEM
+         || evolutions[i].method == EVO_DEFEAT_THREE_WITH_ITEM
         )
             evolutionTrackerEvolutions++;
 

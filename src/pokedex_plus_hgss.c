@@ -249,7 +249,7 @@ static const u8 sText_EVO_USE_MOVE_TWENTY_TIMES[] = _("{LV}{UP_ARROW} after 20x 
 static const u8 sText_EVO_RECOIL_DAMAGE_MALE[] = _("{LV}{UP_ARROW} with {STR_VAR_2} recoil, male");
 static const u8 sText_EVO_RECOIL_DAMAGE_FEMALE[] = _("{LV}{UP_ARROW} with {STR_VAR_2} recoil, female");
 static const u8 sText_EVO_ITEM_COUNT_999[] = _("{LV}{UP_ARROW} with 999 {STR_VAR_2} in bag");
-static const u8 sText_EVO_DEFEAT_WITH_ITEM[] = _("{LV}{UP_ARROW} defeating {STR_VAR_3} holding {STR_VAR_2}");
+static const u8 sText_EVO_DEFEAT_THREE_WITH_ITEM[] = _("{LV}{UP_ARROW} defeating 3 {STR_VAR_3} holding {STR_VAR_2}");
 static const u8 sText_EVO_OVERWORLD_STEPS[] = _("{LV}{UP_ARROW} after {STR_VAR_2} steps");
 static const u8 sText_EVO_UNKNOWN[] = _("Method unknown");
 static const u8 sText_EVO_NONE[] = _("{STR_VAR_1} has no evolution.");
@@ -6629,11 +6629,11 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 dept
             CopyItemName(item, gStringVar2);
             StringExpandPlaceholders(gStringVar4, sText_EVO_ITEM_COUNT_999);
             break;
-         case EVO_DEFEAT_WITH_ITEM:
+         case EVO_DEFEAT_THREE_WITH_ITEM:
             item = evolutions[i].param;
             CopyItemName(item, gStringVar2);
             StringCopy(gStringVar3, GetSpeciesName(species));
-            StringExpandPlaceholders(gStringVar4, sText_EVO_DEFEAT_WITH_ITEM);
+            StringExpandPlaceholders(gStringVar4, sText_EVO_DEFEAT_THREE_WITH_ITEM);
             break;
         case EVO_OVERWORLD_STEPS:
             ConvertIntToDecimalStringN(gStringVar2, evolutions[i].param, STR_CONV_MODE_LEADING_ZEROS, 4);
