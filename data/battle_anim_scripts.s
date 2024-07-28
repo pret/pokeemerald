@@ -17845,15 +17845,15 @@ ElectroShotUnleash:
 	end
 
 Move_IVY_CUDGEL::
-    loadspritegfx ANIM_TAG_IVY_CUDGEL_GRASS
+	loadspritegfx ANIM_TAG_IVY_CUDGEL_GRASS
 	loadspritegfx ANIM_TAG_WOOD_HAMMER
 	loadspritegfx ANIM_TAG_WOOD_HAMMER_HAMMER
 	loadspritegfx ANIM_TAG_IMPACT
 	playsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_TranslateMonEllipticalRespectSide, 2, ANIM_ATTACKER, 12, 4, 2, 4
-        jumpifmovetypeequal TYPE_FIRE, IvyCudgelFire
-        jumpifmovetypeequal TYPE_ROCK, IvyCudgelRock
-        jumpifmovetypeequal TYPE_WATER, IvyCudgelWater
+	jumpifmovetypeequal TYPE_FIRE, IvyCudgelFire
+	jumpifmovetypeequal TYPE_ROCK, IvyCudgelRock
+	jumpifmovetypeequal TYPE_WATER, IvyCudgelWater
 	createsprite gIvyCudgelSpriteTemplate, ANIM_TARGET, 2
 	delay 60
 	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_ATTACKER, 3, 0, 12, 4
@@ -17862,9 +17862,9 @@ Move_IVY_CUDGEL::
 	delay 6
 	call WoodHammerImpact
 	waitforvisualfinish
-        end
+	end
 IvyCudgelFire:
-        loadspritegfx ANIM_TAG_IVY_CUDGEL_FIRE
+	loadspritegfx ANIM_TAG_IVY_CUDGEL_FIRE
 	createsprite gIvyCudgelFireSpriteTemplate, ANIM_TARGET, 2
 	delay 60
 	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_ATTACKER, 3, 0, 12, 4
@@ -17873,9 +17873,9 @@ IvyCudgelFire:
 	delay 6
 	call WoodHammerImpact
 	waitforvisualfinish
-        end
+	end
 IvyCudgelRock:
-        loadspritegfx ANIM_TAG_IVY_CUDGEL_ROCK
+	loadspritegfx ANIM_TAG_IVY_CUDGEL_ROCK
 	createsprite gIvyCudgelRockSpriteTemplate, ANIM_TARGET, 2
 	delay 60
 	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_ATTACKER, 3, 0, 12, 4
@@ -17884,9 +17884,9 @@ IvyCudgelRock:
 	delay 6
 	call WoodHammerImpact
 	waitforvisualfinish
-        end
+	end
 IvyCudgelWater:
-        loadspritegfx ANIM_TAG_IVY_CUDGEL_WATER
+	loadspritegfx ANIM_TAG_IVY_CUDGEL_WATER
 	createsprite gIvyCudgelWaterSpriteTemplate, ANIM_TARGET, 2
 	delay 60
 	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_ATTACKER, 3, 0, 12, 4
@@ -17895,7 +17895,7 @@ IvyCudgelWater:
 	delay 6
 	call WoodHammerImpact
 	waitforvisualfinish
-    end
+	end
 
 Move_AXE_KICK::
 	loadspritegfx ANIM_TAG_HANDS_AND_FEET
@@ -17907,7 +17907,7 @@ Move_AXE_KICK::
 	delay 2
 	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 1, 0, 0, ANIM_TARGET, 1
-	createvisualtask AnimTask_SquishTarget, 2
+	createvisualtask AnimTask_SquishTargetShort, 2
 	waitforvisualfinish
 	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 1, 4
 	end
