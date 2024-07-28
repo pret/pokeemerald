@@ -17844,6 +17844,59 @@ ElectroShotUnleash:
 	blendoff
 	end
 
+Move_IVY_CUDGEL::
+    loadspritegfx ANIM_TAG_IVY_CUDGEL_GRASS
+	loadspritegfx ANIM_TAG_WOOD_HAMMER
+	loadspritegfx ANIM_TAG_WOOD_HAMMER_HAMMER
+	loadspritegfx ANIM_TAG_IMPACT
+	playsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_TranslateMonEllipticalRespectSide, 2, ANIM_ATTACKER, 12, 4, 2, 4
+        jumpifmovetypeequal TYPE_FIRE, IvyCudgelFire
+        jumpifmovetypeequal TYPE_ROCK, IvyCudgelRock
+        jumpifmovetypeequal TYPE_WATER, IvyCudgelWater
+	createsprite gIvyCudgelSpriteTemplate, ANIM_TARGET, 2
+	delay 60
+	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_ATTACKER, 3, 0, 12, 4
+	delay 18
+	createvisualtask AnimTask_SquishTarget, 0x2
+	delay 6
+	call WoodHammerImpact
+	waitforvisualfinish
+        end
+IvyCudgelFire:
+        loadspritegfx ANIM_TAG_IVY_CUDGEL_FIRE
+	createsprite gIvyCudgelFireSpriteTemplate, ANIM_TARGET, 2
+	delay 60
+	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_ATTACKER, 3, 0, 12, 4
+	delay 18
+	createvisualtask AnimTask_SquishTarget, 0x2
+	delay 6
+	call WoodHammerImpact
+	waitforvisualfinish
+        end
+IvyCudgelRock:
+        loadspritegfx ANIM_TAG_IVY_CUDGEL_ROCK
+	createsprite gIvyCudgelRockSpriteTemplate, ANIM_TARGET, 2
+	delay 60
+	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_ATTACKER, 3, 0, 12, 4
+	delay 18
+	createvisualtask AnimTask_SquishTarget, 0x2
+	delay 6
+	call WoodHammerImpact
+	waitforvisualfinish
+        end
+IvyCudgelWater:
+        loadspritegfx ANIM_TAG_IVY_CUDGEL_WATER
+	createsprite gIvyCudgelWaterSpriteTemplate, ANIM_TARGET, 2
+	delay 60
+	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_ATTACKER, 3, 0, 12, 4
+	delay 18
+	createvisualtask AnimTask_SquishTarget, 0x2
+	delay 6
+	call WoodHammerImpact
+	waitforvisualfinish
+    end
+
 Move_AXE_KICK::
 	loadspritegfx ANIM_TAG_HANDS_AND_FEET
 	loadspritegfx ANIM_TAG_IMPACT
@@ -17889,7 +17942,6 @@ Move_MAGICAL_TORQUE::
 Move_PSYBLADE::
 Move_BLOOD_MOON::
 Move_MATCHA_GOTCHA::
-Move_IVY_CUDGEL::
 Move_TERA_STARSTORM::
 Move_FICKLE_BEAM::
 Move_THUNDERCLAP::
