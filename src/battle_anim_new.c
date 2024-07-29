@@ -110,6 +110,14 @@ static const union AffineAnimCmd sSquishTargetAffineAnimCmds[] =
     AFFINEANIMCMD_END,
 };
 
+static const union AffineAnimCmd sSquishTargetShortAffineAnimCmds[] =
+{
+    AFFINEANIMCMD_FRAME(0, 64, 0, 4), //Flatten
+    AFFINEANIMCMD_FRAME(0, 0, 0, 16),
+    AFFINEANIMCMD_FRAME(0, -64, 0, 4),
+    AFFINEANIMCMD_END,
+};
+
 // GEN 4
 // shadow sneak
 const struct SpriteTemplate gShadowSneakImpactSpriteTemplate =
@@ -4801,6 +4809,17 @@ const struct SpriteTemplate gUltraBurstSymbolSpriteTemplate =
     .callback = AnimSpriteOnMonPos
 };
 
+const struct SpriteTemplate gAxeKickSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_HANDS_AND_FEET,
+    .paletteTag = ANIM_TAG_HANDS_AND_FEET,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = &gAnims_HandsAndFeet[2],
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimBounceBallLand,
+};
+
 // Z MOVES
 //activate
 const struct SpriteTemplate gZMoveSymbolSpriteTemplate =
@@ -8541,6 +8560,15 @@ void AnimTask_SquishTarget(u8 taskId)
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
 
     PrepareAffineAnimInTaskData(task, spriteId, sSquishTargetAffineAnimCmds);
+    task->func = AnimTask_WaitAffineAnim;
+}
+
+void AnimTask_SquishTargetShort(u8 taskId)
+{
+    struct Task* task = &gTasks[taskId];
+    u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
+
+    PrepareAffineAnimInTaskData(task, spriteId, sSquishTargetShortAffineAnimCmds);
     task->func = AnimTask_WaitAffineAnim;
 }
 

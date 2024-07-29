@@ -11073,6 +11073,7 @@ static u32 SwapMoveDamageCategory(u32 move)
 
 u8 GetBattleMoveCategory(u32 moveId)
 {
+    u8 moveType;
     if (gBattleStruct != NULL && gBattleStruct->swapDamageCategory) // Photon Geyser, Shell Side Arm, Light That Burns the Sky, Tera Blast
         return SwapMoveDamageCategory(moveId);
     if (gBattleStruct != NULL && (IsZMove(moveId) || IsMaxMove(moveId))) // TODO: Might be buggy depending on when this is called.
@@ -11082,8 +11083,11 @@ u8 GetBattleMoveCategory(u32 moveId)
 
     if (IS_MOVE_STATUS(moveId))
         return DAMAGE_CATEGORY_STATUS;
+    else if (gMain.inBattle)
+        GET_MOVE_TYPE(moveId, moveType);
     else
-        return gTypesInfo[gMovesInfo[moveId].type].damageCategory;
+        moveType = gMovesInfo[moveId].type;
+    return gTypesInfo[moveType].damageCategory;
 }
 
 static bool32 TryRemoveScreens(u32 battler)
