@@ -4,8 +4,6 @@
 #include "constants/moves.h"
 #include "constants/trainers.h"
 
-#define SPECIES_SHINY_TAG 5000
-
 #define MAX_TRAINER_ITEMS 4
 
 #define TRAINER_PIC_WIDTH 64

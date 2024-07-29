@@ -1633,6 +1633,8 @@
 
 #define NUM_SPECIES SPECIES_EGG
 
+#define SPECIES_SHINY_TAG 5000
+
 // Competitive format aliases
 #define SPECIES_ALCREMIE_GMAX                           SPECIES_ALCREMIE_GIGANTAMAX
 #define SPECIES_APPLETUN_GMAX                           SPECIES_APPLETUN_GIGANTAMAX
