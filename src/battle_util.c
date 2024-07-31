@@ -8532,12 +8532,12 @@ u32 GetMoveTargetCount(u32 move, u32 battlerAtk, u32 battlerDef)
     switch (GetBattlerMoveTargetType(gBattlerAttacker, move))
     {
     case MOVE_TARGET_BOTH:
-        return IsBattlerAlive(battlerDef)
-             + IsBattlerAlive(BATTLE_PARTNER(battlerDef));
+        return !(gAbsentBattlerFlags & gBitTable[battlerDef])
+             + !(gAbsentBattlerFlags & gBitTable[BATTLE_PARTNER(battlerDef)]);
     case MOVE_TARGET_FOES_AND_ALLY:
-        return IsBattlerAlive(battlerDef)
-             + IsBattlerAlive(BATTLE_PARTNER(battlerDef))
-             + IsBattlerAlive(BATTLE_PARTNER(battlerAtk));
+        return !(gAbsentBattlerFlags & gBitTable[battlerDef])
+             + !(gAbsentBattlerFlags & gBitTable[BATTLE_PARTNER(battlerDef)])
+             + !(gAbsentBattlerFlags & gBitTable[BATTLE_PARTNER(battlerAtk)]);
     case MOVE_TARGET_OPPONENTS_FIELD:
         return 1;
     case MOVE_TARGET_DEPENDS:
@@ -9654,7 +9654,7 @@ static inline s32 CalculateBaseDamage(u32 power, u32 userFinalAttack, u32 level,
 
 static inline uq4_12_t GetTargetDamageModifier(u32 move, u32 battlerAtk, u32 battlerDef)
 {
-    if (GetMoveTargetCount(move, battlerAtk, battlerDef) >= 2)
+    if (IsDoubleBattle() && GetMoveTargetCount(move, battlerAtk, battlerDef) >= 2)
         return B_MULTIPLE_TARGETS_DMG >= GEN_4 ? UQ_4_12(0.75) : UQ_4_12(0.5);
     return UQ_4_12(1.0);
 }
