@@ -3,6 +3,7 @@
 - [README](./README.md)
 - [Installation](./INSTALL.md)
     - [Setting up WSL1 (Legacy Portion)](./legacy_WSL1_INSTALL.md)
+- [AI Flags](./ai_flags.md)
 - [Changelog](./CHANGELOG.md)
     - [1.8.x]()
         - [Version 1.8.5](changelogs/1.8.x/1.8.5.md)
