@@ -164,3 +164,15 @@ SINGLE_BATTLE_TEST("Shield Dust blocks Sparkling Aria in singles")
         }
     }
 }
+
+SINGLE_BATTLE_TEST("Shield Dust does not prevent ability stat changes")
+{
+    GIVEN {
+        PLAYER(SPECIES_VIVILLON) { Ability(ABILITY_SHIELD_DUST); }
+        OPPONENT(SPECIES_ELDEGOSS) { Ability(ABILITY_COTTON_DOWN); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE); }
+    } SCENE {
+        MESSAGE("Vivillon's Speed fell!");
+    }
+}
