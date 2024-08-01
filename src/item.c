@@ -13,8 +13,10 @@
 #include "item_use.h"
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
+#include "graphics.h"
 #include "constants/battle.h"
 #include "constants/items.h"
+#include "constants/moves.h"
 #include "constants/item_effects.h"
 #include "constants/hold_effects.h"
 
@@ -81,24 +83,28 @@ void SetBagItemsPointers(void)
     gBagPockets[BERRIES_POCKET].capacity = BAG_BERRIES_COUNT;
 }
 
-void CopyItemName(u16 itemId, u8 *dst)
+u8 *CopyItemName(u16 itemId, u8 *dst)
 {
-    StringCopy(dst, ItemId_GetName(itemId));
+    return StringCopy(dst, ItemId_GetName(itemId));
 }
 
 const u8 sText_s[] =_("s");
 
-void CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity)
+u8 *CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity)
 {
-    u8 *end = StringCopy(dst, ItemId_GetName(itemId)) - 1;
-
-    if (quantity < 2)
-        return;
-
-    if (DoesItemHavePluralName(itemId))
-        StringCopy(dst, ItemId_GetPluralName(itemId));
+    if (quantity == 1)
+    {
+        return StringCopy(dst, ItemId_GetName(itemId));
+    }
+    else if (DoesItemHavePluralName(itemId))
+    {
+        return StringCopy(dst, ItemId_GetPluralName(itemId));
+    }
     else
-        StringAppend(end, sText_s);
+    {
+        u8 *end = StringCopy(dst, ItemId_GetName(itemId));
+        return StringCopy(end, sText_s);
+    }
 }
 
 bool8 IsBagPocketNonEmpty(u8 pocket)
@@ -155,6 +161,18 @@ bool8 HasAtLeastOneBerry(void)
         }
     }
     gSpecialVar_Result = FALSE;
+    return FALSE;
+}
+
+bool8 HasAtLeastOnePokeBall(void)
+{
+    u16 i;
+
+    for (i = FIRST_BALL; i <= LAST_BALL; i++)
+    {
+        if (CheckBagHasItem(i, 1) == TRUE)
+            return TRUE;
+    }
     return FALSE;
 }
 

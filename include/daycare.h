@@ -10,7 +10,7 @@ struct RecordMixingDaycareMail
     bool16 cantHoldItem[DAYCARE_MON_COUNT];
 };
 
-u8 *GetMonNickname2(struct Pokemon *mon, u8 *dest);
+u8 *GetMonNicknameVanilla(struct Pokemon *mon, u8 *dest);
 u8 *GetBoxMonNickname(struct BoxPokemon *mon, u8 *dest);
 u8 CountPokemonInDaycare(struct DayCare *daycare);
 void InitDaycareMailRecordMixing(struct DayCare *daycare, struct RecordMixingDaycareMail *mixMail);

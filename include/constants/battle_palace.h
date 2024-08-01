@@ -21,9 +21,4 @@
 #define PALACE_MOVE_GROUP_DEFENSE 1
 #define PALACE_MOVE_GROUP_SUPPORT 2
 
-// In palace doubles battles Pokémon have a target preference depending on nature
-#define PALACE_TARGET_STRONGER 0
-#define PALACE_TARGET_WEAKER   1
-#define PALACE_TARGET_RANDOM   2
-
 #endif //GUARD_CONSTANTS_BATTLE_PALACE_H

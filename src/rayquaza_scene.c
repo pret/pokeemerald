@@ -1,5 +1,6 @@
 #include "global.h"
 #include "rayquaza_scene.h"
+#include "event_object_movement.h"
 #include "sprite.h"
 #include "task.h"
 #include "graphics.h"
@@ -15,6 +16,7 @@
 #include "sound.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+#include "constants/event_objects.h"
 #include "random.h"
 
 /*
@@ -1296,9 +1298,15 @@ void DoRayquazaScene(u8 animId, bool8 endEarly, void (*exitCallback)(void))
 
 static void CB2_InitRayquazaScene(void)
 {
+    u32 i;
     SetVBlankHBlankCallbacksToNull();
     ClearScheduledBgCopiesToVram();
     ScanlineEffect_Stop();
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].graphicsId == OBJ_EVENT_GFX_RAYQUAZA)
+            gObjectEvents[i].invisible = FALSE;
+    }
     FreeAllSpritePalettes();
     ResetPaletteFade();
     ResetSpriteData();

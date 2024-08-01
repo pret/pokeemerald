@@ -26,8 +26,10 @@ enum {
     MON_DATA_IS_SHINY,
     MON_DATA_HIDDEN_NATURE,
     MON_DATA_HP_LOST,
+    MON_DATA_DAYS_SINCE_FORM_CHANGE,
     MON_DATA_ENCRYPT_SEPARATOR,
     MON_DATA_NICKNAME,
+    MON_DATA_NICKNAME10,
     MON_DATA_SPECIES,
     MON_DATA_HELD_ITEM,
     MON_DATA_MOVE1,
@@ -137,8 +139,7 @@ struct PokemonSubstruct1
     u16 move1:11; // 2047 moves.
     u16 evolutionTracker1:5;
     u16 move2:11; // 2047 moves.
-    u16 evolutionTracker2:4;
-    u16 unused_02:1;
+    u16 evolutionTracker2:5;
     u16 move3:11; // 2047 moves.
     u16 unused_04:5;
     u16 move4:11; // 2047 moves.
@@ -246,7 +247,8 @@ struct BoxPokemon
     u8 hasSpecies:1;
     u8 isEgg:1;
     u8 blockBoxRS:1; // Unused, but Pokémon Box Ruby & Sapphire will refuse to deposit a Pokémon with this flag set.
-    u8 unused_13:4;
+    u8 daysSinceFormChange:3; // 7 days.
+    u8 unused_13:1;
     u8 otName[PLAYER_NAME_LENGTH];
     u8 markings:4;
     u8 compressedStatus:4;
@@ -349,7 +351,7 @@ struct Evolution
     u16 targetSpecies;
 };
 
-struct SpeciesInfo /*0x8C*/
+struct SpeciesInfo /*0xC4*/
 {
  /* 0x00 */ u8 baseHP;
  /* 0x01 */ u8 baseAttack;
@@ -359,7 +361,7 @@ struct SpeciesInfo /*0x8C*/
  /* 0x05 */ u8 baseSpDefense;
  /* 0x06 */ u8 types[2];
  /* 0x08 */ u8 catchRate;
- /* 0x09 */ u8 padding1;
+ /* 0x09 */ u8 forceTeraType;
  /* 0x0A */ u16 expYield; // expYield was changed from u8 to u16 for the new Exp System.
  /* 0x0C */ u16 evYield_HP:2;
             u16 evYield_Attack:2;
@@ -377,6 +379,7 @@ struct SpeciesInfo /*0x8C*/
  /* 0x16 */ u8 eggGroups[2];
  /* 0x18 */ u16 abilities[NUM_ABILITY_SLOTS]; // 3 abilities, no longer u8 because we have over 255 abilities now.
  /* 0x1E */ u8 safariZoneFleeRate;
+
             // Pokédex data
  /* 0x1F */ u8 categoryName[13];
  /* 0x1F */ u8 speciesName[POKEMON_NAME_LENGTH + 1];
@@ -424,12 +427,13 @@ struct SpeciesInfo /*0x8C*/
  /* 0x7A */ u32 isLegendary:1;
             u32 isMythical:1;
             u32 isUltraBeast:1;
+            u32 isParadox:1;
             u32 isTotem:1;
-            u32 isParadoxForm:1;
             u32 isMegaEvolution:1;
             u32 isPrimalReversion:1;
             u32 isUltraBurst:1;
             u32 isGigantamax:1;
+            u32 isTeraForm:1;
             u32 isAlolanForm:1;
             u32 isGalarianForm:1;
             u32 isHisuianForm:1;
@@ -437,14 +441,23 @@ struct SpeciesInfo /*0x8C*/
             u32 cannotBeTraded:1;
             u32 allPerfectIVs:1;
             u32 dexForceRequired:1; // This species will be taken into account for Pokédex ratings even if they have the "isMythical" flag set.
-            u32 tmIlliterate:1; // This species will be unable to learn the universal moves.
-            u32 padding4:15;
+            u32 tmIlliterate:1;     // This species will be unable to learn the universal moves.
+            u32 isFrontierBanned:1; // This species is not allowed to participate in Battle Frontier facilities.
+            u32 padding4:14;
             // Move Data
  /* 0x80 */ const struct LevelUpMove *levelUpLearnset;
  /* 0x84 */ const u16 *teachableLearnset;
- /* 0x88 */ const struct Evolution *evolutions;
- /* 0x84 */ const u16 *formSpeciesIdTable;
- /* 0x84 */ const struct FormChange *formChangeTable;
+ /* 0x88 */ const u16 *eggMoveLearnset;
+ /* 0x8C */ const struct Evolution *evolutions;
+ /* 0x90 */ const u16 *formSpeciesIdTable;
+ /* 0x94 */ const struct FormChange *formChangeTable;
+#if OW_POKEMON_OBJECT_EVENTS
+ /* 0x98 */ struct ObjectEventGraphicsInfo overworldData;
+#if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
+ /* 0xBC */ const void* overworldPalette;
+ /* 0xC0 */ const void* overworldShinyPalette;
+#endif //OW_PKMN_OBJECTS_SHARE_PALETTES
+#endif //OW_POKEMON_OBJECT_EVENTS
 };
 
 struct MoveInfo
@@ -526,6 +539,7 @@ struct MoveInfo
     u8 contestCategory:3;
     u8 contestComboStarterId;
     u8 contestComboMoves[MAX_COMBO_MOVES];
+    const u8 *battleAnimScript;
 };
 
 #define EFFECTS_ARR(...) (const struct AdditionalEffect[]) {__VA_ARGS__}
@@ -555,6 +569,66 @@ struct Ability
     u8 cantBeOverwritten:1; // cannot be overwritten by Entrainment, Worry Seed or Simple Beam (but can be by Mummy) - same as cantBeSuppressed except for Truant
     u8 breakable:1; // can be bypassed by Mold Breaker and clones
     u8 failsOnImposter:1; // doesn't work on an Imposter mon; when can we actually use this?
+};
+
+enum {
+    AFFINE_NONE,
+    AFFINE_TURN_UP,
+    AFFINE_TURN_UP_AND_DOWN,
+    AFFINE_TURN_DOWN,
+    AFFINE_TURN_DOWN_SLOW,
+    AFFINE_TURN_DOWN_SLIGHT,
+    AFFINE_TURN_UP_HIGH,
+    AFFINE_UNUSED_1,
+    AFFINE_UNUSED_2,
+    AFFINE_UNUSED_3,
+    NUM_MON_AFFINES,
+};
+
+// The animation the Pokémon does during the feeding scene depends on their nature.
+// The below values are offsets into sMonPokeblockAnims of the animation data for that nature.
+#define ANIM_HARDY   0
+#define ANIM_LONELY  (ANIM_HARDY + 3)
+#define ANIM_BRAVE   (ANIM_LONELY + 1)
+#define ANIM_ADAMANT (ANIM_BRAVE + 1)
+#define ANIM_NAUGHTY (ANIM_ADAMANT + 5)
+#define ANIM_BOLD    (ANIM_NAUGHTY + 3)
+#define ANIM_DOCILE  (ANIM_BOLD + 2)
+#define ANIM_RELAXED (ANIM_DOCILE + 1)
+#define ANIM_IMPISH  (ANIM_RELAXED + 2)
+#define ANIM_LAX     (ANIM_IMPISH + 1)
+#define ANIM_TIMID   (ANIM_LAX + 1)
+#define ANIM_HASTY   (ANIM_TIMID + 5)
+#define ANIM_SERIOUS (ANIM_HASTY + 2)
+#define ANIM_JOLLY   (ANIM_SERIOUS + 1)
+#define ANIM_NAIVE   (ANIM_JOLLY + 1)
+#define ANIM_MODEST  (ANIM_NAIVE + 4)
+#define ANIM_MILD    (ANIM_MODEST + 3)
+#define ANIM_QUIET   (ANIM_MILD + 1)
+#define ANIM_BASHFUL (ANIM_QUIET + 2)
+#define ANIM_RASH    (ANIM_BASHFUL + 3)
+#define ANIM_CALM    (ANIM_RASH + 3)
+#define ANIM_GENTLE  (ANIM_CALM + 1)
+#define ANIM_SASSY   (ANIM_GENTLE + 1)
+#define ANIM_CAREFUL (ANIM_SASSY + 1)
+#define ANIM_QUIRKY  (ANIM_CAREFUL + 5)
+
+// In palace double battles, Pokémon have a target preference depending on nature
+#define PALACE_TARGET_STRONGER 0
+#define PALACE_TARGET_WEAKER   1
+#define PALACE_TARGET_RANDOM   2
+
+struct NatureInfo
+{
+    const u8 *name;
+    u8 statUp;
+    u8 statDown;
+    u8 backAnim;
+    u8 pokeBlockAnim[2];
+    u8 battlePalacePercents[4];
+    u8 battlePalaceFlavorText;
+    u8 battlePalaceSmokescreen;
+    const u8 *natureGirlMessage;
 };
 
 #define SPINDA_SPOT_WIDTH 16
@@ -610,6 +684,7 @@ extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
 extern struct SpriteTemplate gMultiuseSpriteTemplate;
+extern u16 gFollowerSteps;
 
 extern const struct MoveInfo gMovesInfo[];
 extern const u8 gFacilityClassToPicIndex[];
@@ -622,9 +697,9 @@ extern const u8 gPPUpAddValues[];
 extern const u8 gStatStageRatios[MAX_STAT_STAGE + 1][2];
 extern const u16 gUnionRoomFacilityClasses[];
 extern const struct SpriteTemplate gBattlerSpriteTemplates[];
-extern const s8 gNatureStatTable[][5];
 extern const u32 sExpCandyExperienceTable[];
 extern const struct Ability gAbilitiesInfo[];
+extern const struct NatureInfo gNaturesInfo[];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);
@@ -658,8 +733,6 @@ void SetMonMoveSlot(struct Pokemon *mon, u16 move, u8 slot);
 void SetBattleMonMoveSlot(struct BattlePokemon *mon, u16 move, u8 slot);
 void GiveMonInitialMoveset(struct Pokemon *mon);
 void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon);
-void GiveMonInitialMoveset_Fast(struct Pokemon *mon);
-void GiveBoxMonInitialMoveset_Fast(struct BoxPokemon *boxMon);
 u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove);
 void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u16 move);
 void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
@@ -709,6 +782,7 @@ u16 GetSpeciesHeight(u16 species);
 u16 GetSpeciesWeight(u16 species);
 const struct LevelUpMove *GetSpeciesLevelUpLearnset(u16 species);
 const u16 *GetSpeciesTeachableLearnset(u16 species);
+const u16 *GetSpeciesEggMoves(u16 species);
 const struct Evolution *GetSpeciesEvolutions(u16 species);
 const u16 *GetSpeciesFormTable(u16 species);
 const struct FormChange *GetSpeciesFormChanges(u16 species);
@@ -759,6 +833,7 @@ void PlayMapChosenOrBattleBGM(u16 songId);
 void CreateTask_PlayMapChosenOrBattleBGM(u16 songId);
 const u32 *GetMonFrontSpritePal(struct Pokemon *mon);
 const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, bool32 isShiny, u32 personality);
+const u32 *GetMonSpritePalFromSpecies(u16 species, bool32 isShiny, bool32 isFemale);
 bool8 IsMoveHM(u16 move);
 bool8 IsMonSpriteNotFlipped(u16 species);
 s8 GetMonFlavorRelation(struct Pokemon *mon, u8 flavor);
@@ -804,5 +879,8 @@ u16 GetSpeciesPreEvolution(u16 species);
 void HealPokemon(struct Pokemon *mon);
 void HealBoxPokemon(struct BoxPokemon *boxMon);
 const u8 *GetMoveName(u16 moveId);
+const u8 *GetMoveAnimationScript(u16 moveId);
+void UpdateDaysPassedSinceFormChange(u16 days);
+void TrySetDayLimitToFormChange(struct Pokemon *mon);
 
 #endif // GUARD_POKEMON_H

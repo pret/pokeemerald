@@ -152,7 +152,7 @@ SINGLE_BATTLE_TEST("Spiky Shield does 1/8 dmg of max hp of attackers making cont
             HP_BAR(player, maxHp / 8);
             if (hp == 1) {
                 MESSAGE("Wobbuffet fainted!");
-                MESSAGE("Go! Wobbuffet!");
+                SEND_IN_MESSAGE("Wobbuffet");
             }
         }
     }
