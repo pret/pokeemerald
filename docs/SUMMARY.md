@@ -6,6 +6,7 @@
 - [AI Flags](./ai_flags.md)
 - [Changelog](./CHANGELOG.md)
     - [1.8.x]()
+        - [Version 1.8.6](changelogs/1.8.x/1.8.6.md)
         - [Version 1.8.5](changelogs/1.8.x/1.8.5.md)
         - [Version 1.8.4](changelogs/1.8.x/1.8.4.md)
         - [Version 1.8.3](changelogs/1.8.x/1.8.3.md)
