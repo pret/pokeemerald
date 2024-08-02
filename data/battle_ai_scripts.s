@@ -2710,6 +2710,10 @@ AI_CV_DragonDance_End:
 AI_CV_RapidSpin:
 	count_usable_party_mons AI_USER
 	if_equal 0, Score_Minus30
+	get_target_type1
+	if_equal TYPE_GHOST, Score_Minus30
+	get_target_type2
+	if_equal TYPE_GHOST, Score_Minus30
 	if_side_affecting AI_USER, SIDE_STATUS_SPIKES, AI_CV_RapidSpin2
 	score -1
 	goto AI_CV_RapidSpinEnd
