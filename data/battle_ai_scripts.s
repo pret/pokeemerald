@@ -3101,6 +3101,7 @@ AI_CV_DragonDance_End:
 	end
 
 AI_CV_RapidSpin:
+	score -1
 	count_usable_party_mons AI_USER
 	if_equal 0, Score_Minus30
 	get_target_type1
@@ -3108,11 +3109,16 @@ AI_CV_RapidSpin:
 	get_target_type2
 	if_equal TYPE_GHOST, Score_Minus30
 	if_side_affecting AI_USER, SIDE_STATUS_SPIKES, AI_CV_RapidSpin2
-	score -1
-	goto AI_CV_RapidSpinEnd
+	goto AI_CV_RapidSpin_SeededCheck
 
 AI_CV_RapidSpin2:
-	score +1
+	score +2
+AI_CV_RapidSpin_SeededCheck:
+	if_status3 AI_USER, STATUS3_LEECHSEED, AI_CV_RapidSpin3
+	goto AI_CV_RapidSpinEnd
+
+AI_CV_RapidSpin3:
+	score +2
 AI_CV_RapidSpinEnd:
 	end
 
