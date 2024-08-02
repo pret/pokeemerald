@@ -131,6 +131,7 @@ static void Cmd_get_used_held_item(void);
 static void Cmd_get_move_type_from_result(void);
 static void Cmd_get_move_power_from_result(void);
 static void Cmd_get_move_effect_from_result(void);
+static void Cmd_get_move_target_from_result(void);
 static void Cmd_get_protect_count(void);
 static void Cmd_nop_52(void);
 static void Cmd_nop_53(void);
@@ -2117,6 +2118,13 @@ static void Cmd_get_move_power_from_result(void)
 static void Cmd_get_move_effect_from_result(void)
 {
     AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->funcResult].effect;
+
+    gAIScriptPtr += 1;
+}
+
+static void Cmd_get_move_target_from_result(void)
+{
+    AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->funcResult].target;
 
     gAIScriptPtr += 1;
 }
