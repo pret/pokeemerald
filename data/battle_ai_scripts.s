@@ -63,7 +63,7 @@ AI_CheckBadMove:
 AI_CBM_CheckIfNegatesType:
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus30
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus5
-	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
+	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus20
 	get_ability AI_TARGET
 	if_equal ABILITY_VOLT_ABSORB, CheckIfVoltAbsorbCancelsElectric
 	if_equal ABILITY_WATER_ABSORB, CheckIfWaterAbsorbCancelsWater
@@ -641,7 +641,7 @@ AI_CheckBadMove_MirrorMove:
 AI_CBM_CheckIfNegatesType_MirrorMove:
 	get_last_used_bank_move AI_TARGET
 	if_type_effectiveness_from_result AI_EFFECTIVENESS_x0, Score_Minus30
-	if_type_effectiveness_from_result AI_EFFECTIVENESS_x0_25, Score_Minus30
+	if_type_effectiveness_from_result AI_EFFECTIVENESS_x0_25, Score_Minus20
 	if_type_effectiveness_from_result AI_EFFECTIVENESS_x0_5, Score_Minus5
 	get_ability AI_TARGET
 	if_equal ABILITY_VOLT_ABSORB, AI_CBM_VoltAbs_MirrorMove
@@ -839,6 +839,10 @@ Score_Minus10:
 Score_Minus12:
 	score -12
 	end
+
+Score_Minus20:
+    score -20
+    end
 
 Score_Minus30:
 	score -30
@@ -2073,7 +2077,7 @@ AI_CV_SleepTalk2:
 	goto AI_CV_SleepTalk_End
 
 AI_CV_SleepTalk3:
-	if_hp_less_than AI_USER, 51, Score_Minus30
+	if_hp_less_than AI_USER, 51, Score_Minus20
 	goto AI_CV_SleepTalk_End
 
 AI_CV_SleepTalk_End:
