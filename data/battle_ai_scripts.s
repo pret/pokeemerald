@@ -2065,7 +2065,15 @@ AI_CV_SleepTalk:
 	if_status AI_USER, STATUS1_SLEEP, Score_Plus10
 	get_last_used_bank_move AI_USER
 	get_move_effect_from_result
-	if_equal EFFECT_SLEEP_TALK, if_hp_more_than AI_USER, 33, if_hp_less_than AI_USER, 51, Score_Minus20
+	if_equal EFFECT_SLEEP_TALK AI_CV_SleepTalk2
+	AI_CV_SleepTalkEnd
+AI_CV_SleepTalk2:
+	if_hp_more_than AI_USER, 33,
+	AI_CV_SleepTalkEnd
+AI_CV_SleepTalk3:
+	if_hp_less_than AI_USER, 51, Score_Minus_20
+	AI_CV_SleepTalkEnd
+AI_CV_SleepTalkEnd:
 	score -5
 	end
 
