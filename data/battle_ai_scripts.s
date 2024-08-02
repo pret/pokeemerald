@@ -1830,8 +1830,8 @@ AI_CV_Flail_End:
 	end
 
 AI_CV_HealBell:
-	if_status AI_TARGET, STATUS1_ANY, AI_CV_HealBell_End
-	if_status_in_party AI_TARGET, STATUS1_ANY, AI_CV_HealBell_End
+	if_status AI_USER, STATUS1_ANY, AI_CV_HealBell_End
+	if_status_in_party AI_USER, STATUS1_ANY, AI_CV_HealBell_End
 	score -5
 AI_CV_HealBell_End:
 	end
