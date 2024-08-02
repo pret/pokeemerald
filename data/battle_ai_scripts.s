@@ -724,6 +724,7 @@ AI_CheckViability:
 	if_effect EFFECT_LOCK_ON, AI_CV_LockOn
 	if_effect EFFECT_SLEEP_TALK, AI_CV_SleepTalk
 	if_effect EFFECT_DESTINY_BOND, AI_CV_DestinyBond
+	if_effect EFFECT_GRUDGE, AI_CV_DestinyBond
 	if_effect EFFECT_FLAIL, AI_CV_Flail
 	if_effect EFFECT_HEAL_BELL, AI_CV_HealBell
 	if_effect EFFECT_THIEF, AI_CV_Thief
@@ -744,7 +745,7 @@ AI_CheckViability:
 	if_effect EFFECT_PSYCH_UP, AI_CV_PsychUp
 	if_effect EFFECT_MIRROR_COAT, AI_CV_MirrorCoat
 	if_effect EFFECT_SKULL_BASH, AI_CV_ChargeUpMove
-	if_effect EFFECT_SOLAR_BEAM, AI_CV_ChargeUpMove
+	if_effect EFFECT_SOLAR_BEAM, AI_CV_SolarBeam
 	if_effect EFFECT_SEMI_INVULNERABLE, AI_CV_SemiInvulnerable
 	if_effect EFFECT_SOFTBOILED, AI_CV_Heal
 	if_effect EFFECT_FAKE_OUT, AI_CV_FakeOut
@@ -782,6 +783,11 @@ AI_CheckViability:
 	if_effect EFFECT_DRAGON_DANCE, AI_CV_DragonDance
 	if_effect EFFECT_RAPID_SPIN, AI_CV_RapidSpin
 	if_effect EFFECT_ROAR, AI_CV_Phazing
+	if_effect EFFECT_EXPLOSION, AI_CV_SuicideCheck
+	if_effect EFFECT_DESTINY_BOND, AI_CV_SuicideCheck
+	if_effect EFFECT_MEMENTO, AI_CV_SuicideCheck
+	if_effect EFFECT_GRUDGE, AI_CV_SuicideCheck
+	if_effect EFFECT_PERISH_SONG, AI_CV_SuicideCheck
 	end
 
 AI_CV_Sleep:
@@ -2254,16 +2260,27 @@ AI_CV_MirrorCoat_SpecialTypeList:
 	.byte TYPE_DARK
 	.byte -1
 
+AI_CV_SolarBeam:
+	get_weather
+	if_equal AI_WEATHER_SUN, AI_CV_SolarBeam2
+	goto AI_CV_ChargeUpMove
+
+AI_CV_SolarBeam2:
+	end
+
 AI_CV_ChargeUpMove:
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CV_ChargeUpMove_ScoreDown2
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CV_ChargeUpMove_ScoreDown2
 	if_has_move_with_effect AI_TARGET, EFFECT_PROTECT, AI_CV_ChargeUpMove_ScoreDown2
-	if_hp_more_than AI_USER, 38, AI_CV_ChargeUpMove_End
+	if_hp_more_than AI_USER, 38, AI_CV_ChargeUpMove_Discourage
 	score -1
-	goto AI_CV_ChargeUpMove_End
+	goto AI_CV_ChargeUpMove_Discourage
 
 AI_CV_ChargeUpMove_ScoreDown2:
 	score -2
+AI_CV_ChargeUpMove_Discourage:
+	if_random_less_than 32, AI_CV_ChargeUpMove_End
+	score -1
 AI_CV_ChargeUpMove_End:
 	end
 
@@ -2680,6 +2697,7 @@ AI_CV_RapidSpin:
 	count_usable_party_mons AI_USER
 	if_equal 0, Score_Minus30
 	if_side_affecting AI_USER, SIDE_STATUS_SPIKES, AI_CV_RapidSpin2
+	score -1
 	goto AI_CV_RapidSpinEnd
 
 AI_CV_RapidSpin2:
@@ -2720,6 +2738,16 @@ AI_CV_PhazingEncourage:
 	score +1
 AI_CV_PhazingEnd:
 	end
+
+AI_CV_SuicideCheck:
+	count_usable_party_mons AI_USER
+	if_more_than 0, AI_CV_SuicideCheckEnd
+	count_usable_party_mons AI_TARGET
+	if_equal 0, AI_CV_SuicideCheckEnd
+	score -40
+AI_CV_SuicideCheckEnd:
+	end
+
 
 AI_TryToFaint:
 	if_target_is_ally AI_Ret
