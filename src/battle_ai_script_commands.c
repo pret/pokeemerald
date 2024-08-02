@@ -1286,7 +1286,10 @@ static void Cmd_get_considered_move_second_eff_chance(void)
 
 static void Cmd_get_considered_move_accuracy(void)
 {
-    AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->moveConsidered].accuracy;
+    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect == EFFECT_ALWAYS_HIT)
+        AI_THINKING_STRUCT->funcResult = 100;
+    else
+        AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->moveConsidered].accuracy;
     gAIScriptPtr += 1;
 }
 
