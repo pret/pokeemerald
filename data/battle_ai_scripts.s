@@ -1067,10 +1067,10 @@ AI_CV_MirrorMove:
 AI_CV_MirrorMove2:
 	get_last_used_bank_move AI_TARGET
 	get_move_target_from_result
-	if_equal MOVE_TARGET_BOTH, AI_CV_CheckViabilityMirrorMove
-	if_equal MOVE_TARGET_FOES_AND_ALLY, AI_CV_CheckViabilityMirrorMove
-	if_equal MOVE_TARGET_RANDOM, AI_CV_CheckViabilityMirrorMove
-	if_equal MOVE_TARGET_SELECTED, AI_CV_CheckViabilityMirrorMove
+	if_equal MOVE_TARGET_BOTH, AI_CV_CheckViability_MirrorMove
+	if_equal MOVE_TARGET_FOES_AND_ALLY, AI_CV_CheckViability_MirrorMove
+	if_equal MOVE_TARGET_RANDOM, AI_CV_CheckViability_MirrorMove
+	if_equal MOVE_TARGET_SELECTED, AI_CV_CheckViability_MirrorMove
 	score -2
 	goto AI_CV_MirrorMoveEnd
 AI_CV_CheckViability_MirrorMove:
