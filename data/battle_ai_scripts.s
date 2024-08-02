@@ -2068,7 +2068,7 @@ AI_CV_SleepTalk:
 	if_equal EFFECT_SLEEP_TALK AI_CV_SleepTalk2
 	AI_CV_SleepTalk_End
 AI_CV_SleepTalk2:
-	if_hp_more_than AI_USER, 33, Score_Minus_20
+	if_hp_more_than AI_USER, 33, AI_CV_SleepTalk3
 	AI_CV_SleepTalk_End
 AI_CV_SleepTalk3:
 	if_hp_less_than AI_USER, 51, Score_Minus_20
