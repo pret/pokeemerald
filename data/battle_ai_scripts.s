@@ -214,6 +214,7 @@ AI_CheckBadMove_CheckEffect:
 	if_effect EFFECT_WATER_SPORT, AI_CBM_WaterSport
 	if_effect EFFECT_CALM_MIND, AI_CBM_CalmMind
 	if_effect EFFECT_DRAGON_DANCE, AI_CBM_DragonDance
+	if_effect EFFECT_WISH, AI_CBM_Wish
 	end
 
 AI_CBM_Sleep:
@@ -440,6 +441,8 @@ AI_CBM_Curse:
 	end
 
 AI_CBM_Spikes:
+	count_usable_party_mons AI_TARGET
+	if_equal 0, Score_Minus30
 	if_side_affecting AI_TARGET, SIDE_STATUS_SPIKES, Score_Minus10
 	end
 
@@ -787,6 +790,15 @@ AI_CV_Sleep:
 AI_CV_SleepEncourageSlpDamage:
 	if_random_less_than 128, AI_CV_Sleep_End
 	score +1
+	if_status AI_TARGET, STATUS1_SLEEP, AI_CV_SleepRandom
+	goto AI_CV_Sleep_End
+
+AI_CV_SleepRandom:
+	get_last_used_bank_move AI_TARGET
+	get_move_effect_from_result
+	if_equal EFFECT_SLEEP, AI_CV_Sleep_End
+	if_random_less_than 220, AI_CV_Sleep_End
+	score +30
 AI_CV_Sleep_End:
 	end
 
@@ -1894,47 +1906,105 @@ AI_CV_Curse_End:
 	end
 
 AI_CV_Protect:
-	get_protect_count AI_USER
-	if_more_than 1, AI_CV_Protect_ScoreDown2
-	if_status AI_USER, STATUS1_TOXIC_POISON, AI_CV_Protect3
-	if_status2 AI_USER, STATUS2_CURSED, AI_CV_Protect3
-	if_status3 AI_USER, STATUS3_PERISH_SONG, AI_CV_Protect3
-	if_status2 AI_USER, STATUS2_INFATUATION, AI_CV_Protect3
-	if_status3 AI_USER, STATUS3_LEECHSEED, AI_CV_Protect3
-	if_status3 AI_USER, STATUS3_YAWN, AI_CV_Protect3
-	if_has_move_with_effect AI_TARGET, EFFECT_RESTORE_HP, AI_CV_Protect3
-	if_has_move_with_effect AI_TARGET, EFFECT_DEFENSE_CURL, AI_CV_Protect3
-	if_status AI_TARGET, STATUS1_TOXIC_POISON, AI_CV_Protect_ScoreUp2
-	if_status2 AI_TARGET, STATUS2_CURSED, AI_CV_Protect_ScoreUp2
-	if_status3 AI_TARGET, STATUS3_PERISH_SONG, AI_CV_Protect_ScoreUp2
-	if_status2 AI_TARGET, STATUS2_INFATUATION, AI_CV_Protect_ScoreUp2
-	if_status3 AI_TARGET, STATUS3_LEECHSEED, AI_CV_Protect_ScoreUp2
-	if_status3 AI_TARGET, STATUS3_YAWN, AI_CV_Protect_ScoreUp2
-	get_last_used_bank_move AI_TARGET
-	get_move_effect_from_result
-	if_not_equal EFFECT_LOCK_ON, AI_CV_Protect_ScoreUp2
-	goto AI_CV_Protect2
+	is_first_turn_for AI_USER
+	if_not_equal 0, AI_CV_ProtectCurse
+	if_random_less_than 128, AI_CV_ProtectCurse
+	goto AI_CV_Protect1
 
-AI_CV_Protect_ScoreUp2:
-	score +2
+AI_CV_Protect1:
+	score +1
+AI_CV_ProtectCurse:
+	if_status2 AI_USER, STATUS2_CURSED, AI_CV_Protect2
+	goto AI_CV_ProtectSeed
+
 AI_CV_Protect2:
-	if_random_less_than 128, AI_CV_Protect4
-	score -1
-AI_CV_Protect4:
-	get_protect_count AI_USER
-	if_equal 0, AI_CV_Protect_End
-	score -1
-	if_random_less_than 128, AI_CV_Protect_End
-	score -1
-	goto AI_CV_Protect_End
+	score -2
+AI_CV_ProtectSeed:
+	if_status3 AI_USER, STATUS3_LEECHSEED, AI_CV_Protect3
+	goto AI_CV_ProtectPerish
 
 AI_CV_Protect3:
-	get_last_used_bank_move AI_TARGET
-	get_move_effect_from_result
-	if_not_equal EFFECT_LOCK_ON, AI_CV_Protect_End
-AI_CV_Protect_ScoreDown2:
 	score -2
-AI_CV_Protect_End:
+AI_CV_ProtectPerish:
+	if_status3 AI_USER, STATUS3_PERISH_SONG, AI_CV_Protect4
+	goto AI_CV_ProtectInfatuation
+
+AI_CV_Protect4:
+	score -2
+AI_CV_ProtectInfatuation:
+	if_status2 AI_USER, STATUS2_INFATUATION, AI_CV_Protect5
+	goto AI_CV_ProtectStatus
+
+AI_CV_Protect5:
+	score -1
+AI_CV_ProtectStatus:
+	if_status AI_USER, STATUS1_PSN_ANY, AI_CV_Protect6
+	if_status3 AI_USER, STATUS3_YAWN, AI_CV_Protect6
+	if_status AI_USER, STATUS1_PARALYSIS, AI_CV_Protect7
+	goto AI_CV_ProtectTargetStatus
+
+AI_CV_Protect6:
+	score -2
+	goto AI_CV_ProtectTargetStatus
+
+AI_CV_Protect7:
+	score -1
+AI_CV_ProtectTargetStatus:
+	if_status3 AI_TARGET, STATUS3_YAWN, AI_CV_Protect8
+	if_status AI_TARGET, STATUS1_FREEZE, AI_CV_Protect9
+	if_status AI_TARGET, STATUS1_SLEEP, AI_CV_Protect9
+	if_status AI_TARGET, STATUS1_PARALYSIS, AI_CV_Protect9
+	goto AI_CV_ProtectTargetConf
+
+AI_CV_Protect8:
+	score +1
+	goto AI_CV_ProtectTargetConf
+
+AI_CV_Protect9:
+	score -1
+AI_CV_ProtectTargetConf:
+	if_status2 AI_TARGET, STATUS2_CONFUSION, AI_CV_Protect10
+	goto AI_CV_ProtectTargetInfat
+
+AI_CV_Protect10:
+	score -1
+AI_CV_ProtectTargetInfat:
+	if_status2 AI_TARGET, STATUS2_INFATUATION, AI_CV_Protect11
+	goto AI_CV_ProtectDouble
+
+AI_CV_Protect11:
+	score -1
+AI_CV_ProtectDouble:
+	get_protect_count AI_USER
+	if_less_than 1, AI_CV_ProtectEnd
+	if_hp_less_than AI_TARGET 13, AI_CV_ProtectVeryLowHP
+	if_hp_less_than AI_TARGET 25, AI_CV_ProtectLowHP
+	goto AI_CV_ProtectRecount
+
+AI_CV_ProtectLowHP:
+	if_status2 AI_TARGET, STATUS2_CURSED, AI_CV_Protect13
+	if_status3 AI_TARGET, STATUS3_LEECHSEED, AI_CV_ProtectVeryLowHP
+	goto AI_CV_ProtectEnd
+
+AI_CV_ProtectVeryLowHP:
+	if_status AI_TARGET, STATUS1_PSN_ANY, AI_CV_Protect13
+	if_status AI_TARGET, STATUS1_BURN, AI_CV_Protect13
+	if_status3 AI_TARGET, STATUS3_LEECHSEED, AI_CV_Protect13
+	if_status2 AI_TARGET, STATUS2_CURSED, AI_CV_Protect13
+	goto AI_CV_ProtectEnd
+
+AI_CV_ProtectRecount:
+	get_protect_count AI_USER
+	if_less_than 2, AI_CV_Protect12
+	score -5
+
+AI_CV_Protect12:
+	score -2
+	goto AI_CV_ProtectEnd
+
+AI_CV_Protect13:
+	score +2
+AI_CV_ProtectEnd:
 	end
 
 AI_CV_Foresight:
@@ -2946,6 +3016,12 @@ AI_HPAware_TargetTryToDiscourage:
 	if_random_less_than 50, AI_HPAware_End
 	score -2
 AI_HPAware_End:
+	end
+
+AI_CBM_Wish:
+	get_last_used_bank_move AI_USER
+	get_move_effect_from_result
+	if_effect EFFECT_WISH, Score_Minus30
 	end
 
 AI_HPAware_DiscouragedEffectsWhenHighHP:
