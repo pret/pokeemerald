@@ -55,7 +55,9 @@ AI_CheckBadMove:
 	get_how_powerful_move_is
 	if_equal MOVE_POWER_OTHER, AI_CheckBadMove_CheckSoundproof
 AI_CBM_CheckIfNegatesType:
-	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
+	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus30
+	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus5
+	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
 	get_ability AI_TARGET
 	if_equal ABILITY_VOLT_ABSORB, CheckIfVoltAbsorbCancelsElectric
 	if_equal ABILITY_WATER_ABSORB, CheckIfWaterAbsorbCancelsWater
