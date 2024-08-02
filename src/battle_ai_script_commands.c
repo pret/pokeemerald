@@ -1283,7 +1283,6 @@ static void Cmd_get_considered_move_second_eff_chance(void)
     gAIScriptPtr += 1;
 }
 
-
 static void Cmd_get_considered_move_accuracy(void)
 {
     if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect == EFFECT_ALWAYS_HIT)

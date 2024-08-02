@@ -81,33 +81,33 @@ AI_CBM_CheckImmunities:
 	if_equal ABILITY_FLASH_FIRE, CheckIfFlashFireCancelsFire
 	if_equal ABILITY_WONDER_GUARD, CheckIfWonderGuardCancelsMove
 	if_equal ABILITY_LEVITATE, CheckIfLevitateCancelsGroundMove
-	goto AI_CBM_TestWhetherToCheckResists
+	goto AI_CBM_TestWhetherToCheckTypeMatchup
 
 CheckIfVoltAbsorbCancelsElectric:
 	get_curr_move_type
 	if_equal_ TYPE_ELECTRIC, Score_Minus30
-	goto AI_CBM_TestWhetherToCheckResists
+	goto AI_CBM_TestWhetherToCheckTypeMatchup
 
 CheckIfWaterAbsorbCancelsWater:
 	get_curr_move_type
 	if_equal_ TYPE_WATER, Score_Minus30
-	goto AI_CBM_TestWhetherToCheckResists
+	goto AI_CBM_TestWhetherToCheckTypeMatchup
 
 CheckIfFlashFireCancelsFire:
 	get_curr_move_type
 	if_equal_ TYPE_FIRE, Score_Minus30
-	goto AI_CBM_TestWhetherToCheckResists
+	goto AI_CBM_TestWhetherToCheckTypeMatchup
 
 CheckIfWonderGuardCancelsMove:
-	if_type_effectiveness AI_EFFECTIVENESS_x2, AI_CBM_TestWhetherToCheckResists
+	if_type_effectiveness AI_EFFECTIVENESS_x2, AI_CBM_TestWhetherToCheckTypeMatchup
 	goto Score_Minus30
 
 CheckIfLevitateCancelsGroundMove:
 	get_curr_move_type
 	if_equal_ TYPE_GROUND, Score_Minus30
-	goto AI_CBM_TestWhetherToCheckResists
+	goto AI_CBM_TestWhetherToCheckTypeMatchup
 
-AI_CBM_TestWhetherToCheckResists:
+AI_CBM_TestWhetherToCheckTypeMatchup:
 	if_effect EFFECT_BIDE, CheckSoundproof
 	if_effect EFFECT_COUNTER, CheckSoundproof
 	if_effect EFFECT_ENDEAVOR, CheckSoundproof
@@ -118,46 +118,63 @@ AI_CBM_TestWhetherToCheckResists:
 	if_effect EFFECT_RAPID_SPIN, CheckSoundproof
 	if_effect EFFECT_SUPER_FANG, CheckSoundproof
 	if_effect EFFECT_TRAP, CheckSoundproof
-	if_effect EFFECT_PARALYZE_HIT, AI_CBM_TestWhetherToCheckResists_Status
-	if_effect EFFECT_POISON_FANG, AI_CBM_TestWhetherToCheckResists_Status
-	if_effect EFFECT_POISON_HIT, AI_CBM_TestWhetherToCheckResists_Status
-	if_effect EFFECT_SECRET_POWER, AI_CBM_TestWhetherToCheckResists_Status
-	if_effect EFFECT_KNOCK_OFF, AI_CBM_TestWhetherToCheckResists_ItemCheck
-	if_effect EFFECT_THIEF, AI_CBM_TestWhetherToCheckResists_ItemCheck
-	if_effect EFFECT_SPEED_DOWN_HIT, AI_CBM_TestWhetherToCheckResists_Speed
-	goto AI_CBM_CheckResists
+	if_effect EFFECT_PARALYZE_HIT, AI_CBM_TestWhetherToCheckTypeMatchup_Status
+	if_effect EFFECT_POISON_FANG, AI_CBM_TestWhetherToCheckTypeMatchup_Status
+	if_effect EFFECT_POISON_HIT, AI_CBM_TestWhetherToCheckTypeMatchup_Status
+	if_effect EFFECT_SECRET_POWER, AI_CBM_TestWhetherToCheckTypeMatchup_Status
+	if_effect EFFECT_KNOCK_OFF, AI_CBM_TestWhetherToCheckTypeMatchup_ItemCheck
+	if_effect EFFECT_THIEF, AI_CBM_TestWhetherToCheckTypeMatchup_ItemCheck
+	if_effect EFFECT_SPEED_DOWN_HIT, AI_CBM_TestWhetherToCheckTypeMatchup_Speed
+	goto AI_CBM_CheckTypeMatchup
 
-AI_CBM_TestWhetherToCheckResists_Status:
-	if_status AI_TARGET, STATUS1_ANY, AI_CBM_CheckResists
+AI_CBM_TestWhetherToCheckTypeMatchup_Status:
+	if_status AI_TARGET, STATUS1_ANY, AI_CBM_CheckTypeMatchup
 	get_considered_move_second_eff_chance
-	if_less_than 25, AI_CBM_CheckResists
+	if_less_than 25, AI_CBM_CheckTypeMatchup
 	goto CheckSoundproof
 
-AI_CBM_TestWhetherToCheckResists_ItemCheck:
+AI_CBM_TestWhetherToCheckTypeMatchup_ItemCheck:
 	get_ability AI_TARGET
-	if_equal ABILITY_STICKY_HOLD, AI_CBM_CheckResists
+	if_equal ABILITY_STICKY_HOLD, AI_CBM_CheckTypeMatchup
 	get_hold_effect AI_TARGET
-	if_not_in_bytes AI_CV_Thief_EncourageItemsToSteal, AI_CBM_CheckResists
+	if_not_in_bytes AI_CV_Thief_EncourageItemsToSteal, AI_CBM_CheckTypeMatchup
 	goto CheckSoundproof
 
-AI_CBM_TestWhetherToCheckResists_Speed:
+AI_CBM_TestWhetherToCheckTypeMatchup_Speed:
 	get_ability AI_TARGET
-	if_equal ABILITY_CLEAR_BODY, AI_CBM_CheckResists
-	if_equal ABILITY_WHITE_SMOKE, AI_CBM_CheckResists
-	if_equal ABILITY_SPEED_BOOST, AI_CBM_CheckResists
-	if_side_affecting AI_TARGET, SIDE_STATUS_MIST, AI_CBM_CheckResists
+	if_equal ABILITY_CLEAR_BODY, AI_CBM_CheckTypeMatchup
+	if_equal ABILITY_WHITE_SMOKE, AI_CBM_CheckTypeMatchup
+	if_equal ABILITY_SPEED_BOOST, AI_CBM_CheckTypeMatchup
+	if_side_affecting AI_TARGET, SIDE_STATUS_MIST, AI_CBM_CheckTypeMatchup
 	if_target_faster CheckSoundproof
-AI_CBM_CheckResists:
-	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CBM_CheckIfResists_Minus10
-	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CBM_CheckIfResists_Minus30
-	goto CheckSoundproof
+AI_CBM_CheckTypeMatchup:
+	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CBM_CheckTypeMatchup_Minus10
+	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CBM_CheckTypeMatchup_Minus30
+	if_type_effectiveness AI_EFFECTIVENESS_x2, AI_CBM_CheckTypeMatchup_Plus2
+	if_type_effectiveness AI_EFFECTIVENESS_x4, AI_CBM_CheckTypeMatchup_Plus3
+	goto CheckSTAB
 
-AI_CBM_CheckIfResists_Minus10:
+AI_CBM_CheckTypeMatchup_Plus2:
+	score +2
+	goto CheckSTAB
+
+AI_CBM_CheckTypeMatchup_Plus3:
+	score +3
+	goto CheckSTAB
+
+AI_CBM_CheckTypeMatchup_Minus10:
 	score -10
+	goto CheckSTAB
+
+AI_CBM_CheckTypeMatchup_Minus30:
+	score -30
+CheckSTAB:
+	get_curr_move_type
+	if_equal AI_TYPE1_USER, CheckSoundproof
+	if_equal AI_TYPE2_USER, CheckSoundproof
+	score -1
 	goto CheckSoundproof
 
-AI_CBM_CheckIfResists_Minus30:
-	score -30
 CheckSoundproof:
 	get_ability AI_TARGET
 	if_equal ABILITY_SOUNDPROOF, CheckIfSoundMove
