@@ -1984,7 +1984,7 @@ AI_CV_ProtectDouble:
 	goto AI_CV_ProtectRecount
 
 AI_CV_ProtectWish:
-	get_last_used_bank_move
+	get_last_used_bank_move AI_USER
 	if_effect EFFECT_WISH, AI_CV_Protect14
 	goto AI_CV_ProtectLeftovers
 
