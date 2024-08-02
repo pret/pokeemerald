@@ -128,7 +128,7 @@ SINGLE_BATTLE_TEST("Defiant activates after Sticky Web lowers Speed")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STICKY_WEB, opponent);
         // Switch-in - Sticky Web activates
-        MESSAGE("Go! Mankey!");
+        SEND_IN_MESSAGE("Mankey");
         MESSAGE("Mankey was caught in a Sticky Web!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
         MESSAGE("Mankey's Speed fell!");

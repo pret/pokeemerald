@@ -1,6 +1,33 @@
 #ifndef GUARD_EVENT_SCRIPTS_H
 #define GUARD_EVENT_SCRIPTS_H
 
+extern const u8 EventScript_Follower[];
+extern const u8 EventScript_FollowerEnd[];
+extern const u8 EventScript_FollowerGeneric[];
+extern const u8 EventScript_FollowerLovesYou[];
+
+extern const u8 EventScript_FollowerIsShivering[];
+extern const u8 EventScript_FollowerNostalgia[];
+extern const u8 EventScript_FollowerHopping[];
+extern const u8 EventScript_FollowerJumpOnPlayer[];
+extern const u8 EventScript_FollowerCuddling[];
+extern const u8 EventScript_FollowerShiverCuddling[];
+extern const u8 EventScript_FollowerGetCloser[];
+extern const u8 EventScript_FollowerPokingPlayer[];
+extern const u8 EventScript_FollowerLookAround[];
+extern const u8 EventScript_FollowerLookAway[];
+extern const u8 EventScript_FollowerLookAwayBark[];
+extern const u8 EventScript_FollowerLookAwayPoke[];
+extern const u8 EventScript_FollowerPokeGround[];
+extern const u8 EventScript_FollowerStartled[];
+extern const u8 EventScript_FollowerFastHopping[];
+extern const u8 EventScript_FollowerDizzy[];
+extern const u8 EventScript_FollowerLookAroundScared[];
+extern const u8 EventScript_FollowerDance[];
+extern const u8 EventScript_FollowerFaceUp[];
+extern const u8 EventScript_FollowerFaceResult[];
+extern const u8 EnterPokeballMovement[];
+
 extern const u8 EventScript_TestSignpostMsg[];
 extern const u8 EventScript_TryGetTrainerScript[];
 extern const u8 EventScript_StartTrainerApproach[];
@@ -616,5 +643,8 @@ extern const u8 VSSeeker_Text_BatteryNotChargedNeedXSteps[];
 extern const u8 VSSeeker_Text_NoTrainersWithinRange[];
 extern const u8 VSSeeker_Text_TrainersNotReady[];
 extern const u8 EventScript_VsSeekerChargingDone[];
+
+extern const u8 Common_Movement_FollowerSafeStart[];
+extern const u8 Common_Movement_FollowerSafeEnd[];
 
 #endif // GUARD_EVENT_SCRIPTS_H

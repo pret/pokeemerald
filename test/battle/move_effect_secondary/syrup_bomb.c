@@ -210,7 +210,7 @@ SINGLE_BATTLE_TEST("Sticky Syrup is removed when the user faints")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
         HP_BAR(player);
         MESSAGE("Wobbuffet fainted!");
-        MESSAGE("Go! Wynaut!");
+        SEND_IN_MESSAGE("Wynaut");
         NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SYRUP_BOMB_SPEED_DROP, opponent);
             MESSAGE("Foe Wobbuffet's Speed fell!");

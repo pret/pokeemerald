@@ -2,7 +2,7 @@
 #include "graphics.h"
 #include "mail.h"
 #include "palette.h"
-#include "pokemon_debug.h"
+#include "pokemon_sprite_visualizer.h"
 #include "pokemon_icon.h"
 #include "sprite.h"
 #include "data.h"

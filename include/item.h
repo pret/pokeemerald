@@ -23,6 +23,8 @@ struct Item
     u8 type;
     u8 battleUsage;
     u8 flingPower;
+    const u32 *iconPic;
+    const u32 *iconPalette;
 };
 
 struct BagPocket
@@ -37,11 +39,12 @@ extern struct BagPocket gBagPockets[];
 void ApplyNewEncryptionKeyToBagItems(u32 newKey);
 void ApplyNewEncryptionKeyToBagItems_(u32 newKey);
 void SetBagItemsPointers(void);
-void CopyItemName(u16 itemId, u8 *dst);
-void CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity);
+u8 *CopyItemName(u16 itemId, u8 *dst);
+u8 *CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity);
 bool8 IsBagPocketNonEmpty(u8 pocket);
 bool8 CheckBagHasItem(u16 itemId, u16 count);
 bool8 HasAtLeastOneBerry(void);
+bool8 HasAtLeastOnePokeBall(void);
 bool8 CheckBagHasSpace(u16 itemId, u16 count);
 u32 GetFreeSpaceForItemInBag(u16 itemId);
 bool8 AddBagItem(u16 itemId, u16 count);

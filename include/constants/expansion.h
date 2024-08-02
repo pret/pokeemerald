@@ -1,10 +1,10 @@
 #ifndef GUARD_CONSTANTS_EXPANSION_H
 #define GUARD_CONSTANTS_EXPANSION_H
 
-// 1.8.6
+// 1.9.0
 #define EXPANSION_VERSION_MAJOR 1
-#define EXPANSION_VERSION_MINOR 8
-#define EXPANSION_VERSION_PATCH 6
+#define EXPANSION_VERSION_MINOR 9
+#define EXPANSION_VERSION_PATCH 0
 
 // FALSE if this this version of Expansion is not a tagged commit, i.e.
 // it contains unreleased changes.

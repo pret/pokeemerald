@@ -67,7 +67,7 @@ SINGLE_BATTLE_TEST("Sword of Ruin's message displays correctly after all battler
         HP_BAR(player, hp: 0);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, player);
         // Everyone faints.
-        MESSAGE("Go! Wobbuffet!");
+        SEND_IN_MESSAGE("Wobbuffet");
         MESSAGE("2 sent out Chien-Pao!");
         ABILITY_POPUP(opponent, ABILITY_SWORD_OF_RUIN);
         MESSAGE("Foe Chien-Pao's Sword of Ruin weakened the Defense of all surrounding Pokémon!");

@@ -1458,6 +1458,9 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {NULL, 0x0, ANIM_TAG_IVY_CUDGEL_FIRE},
     {NULL, 0x0, ANIM_TAG_IVY_CUDGEL_ROCK},
     {NULL, 0x0, ANIM_TAG_IVY_CUDGEL_WATER},
+    {gBattleAnimSpriteGfx_TeraCrystal, 0x800, ANIM_TAG_TERA_CRYSTAL},
+    {gBattleAnimSpriteGfx_TeraShatter, 0x0180, ANIM_TAG_TERA_SHATTER},
+    {gBattleAnimSpriteGfx_DreepyMissile, 0x200, ANIM_TAG_DREEPY_SHINY},
 };
 
 const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
@@ -1917,6 +1920,9 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_IvyCudgelFire, ANIM_TAG_IVY_CUDGEL_FIRE},
     {gBattleAnimSpritePal_IvyCudgelRock, ANIM_TAG_IVY_CUDGEL_ROCK},
     {gBattleAnimSpritePal_IvyCudgelWater, ANIM_TAG_IVY_CUDGEL_WATER},
+    {gBattleAnimSpritePal_TeraCrystal, ANIM_TAG_TERA_CRYSTAL},
+    {gBattleAnimSpritePal_TeraShatter, ANIM_TAG_TERA_SHATTER},
+    {gBattleAnimSpritePal_DreepyMissileShiny, ANIM_TAG_DREEPY_SHINY},
 };
 
 const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
