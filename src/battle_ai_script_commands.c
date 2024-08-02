@@ -92,8 +92,8 @@ static void Cmd_if_equal_(void);
 static void Cmd_if_not_equal_(void);
 static void Cmd_if_user_goes(void);
 static void Cmd_if_user_doesnt_go(void);
-static void Cmd_nop_2A(void);
-static void Cmd_nop_2B(void);
+static void Cmd_get_considered_move_second_eff_chance(void);
+static void Cmd_get_considered_move_accuracy(void);
 static void Cmd_count_usable_party_mons(void);
 static void Cmd_get_considered_move(void);
 static void Cmd_get_considered_move_effect(void);
@@ -201,8 +201,8 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     Cmd_if_not_equal_,                              // 0x27
     Cmd_if_user_goes,                               // 0x28
     Cmd_if_user_doesnt_go,                          // 0x29
-    Cmd_nop_2A,                                     // 0x2A
-    Cmd_nop_2B,                                     // 0x2B
+    Cmd_get_considered_move_second_eff_chance,      // 0x2A
+    Cmd_get_considered_move_accuracy,               // 0x2B
     Cmd_count_usable_party_mons,                    // 0x2C
     Cmd_get_considered_move,                        // 0x2D
     Cmd_get_considered_move_effect,                 // 0x2E
@@ -1277,12 +1277,17 @@ static void Cmd_if_user_doesnt_go(void)
         gAIScriptPtr += 6;
 }
 
-static void Cmd_nop_2A(void)
+static void Cmd_get_considered_move_second_eff_chance(void)
 {
+    AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->moveConsidered].secondaryEffectChance;
+    gAIScriptPtr += 1;
 }
 
-static void Cmd_nop_2B(void)
+
+static void Cmd_get_considered_move_accuracy(void)
 {
+    AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->moveConsidered].accuracy;
+    gAIScriptPtr += 1;
 }
 
 static void Cmd_count_usable_party_mons(void)

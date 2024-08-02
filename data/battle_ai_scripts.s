@@ -50,63 +50,109 @@ gBattleAI_ScriptsTable::
 
 AI_CheckBadMove:
 	if_target_is_ally AI_Ret
-	if_move MOVE_FISSURE, AI_CBM_CheckIfNegatesType
-	if_move MOVE_GUILLOTINE, AI_CBM_CheckIfNegatesType
-	if_move MOVE_HORN_DRILL, AI_CBM_CheckIfNegatesType
-	if_effect EFFECT_LOW_KICK, AI_CBM_CheckIfNegatesType
-	if_effect EFFECT_FLAIL, AI_CBM_CheckIfNegatesType
-	if_effect EFFECT_RETURN, AI_CBM_CheckIfNegatesType
-	if_effect EFFECT_MAGNITUDE, AI_CBM_CheckIfNegatesType
-	if_effect EFFECT_HIDDEN_POWER, AI_CBM_CheckIfNegatesType
+	if_move MOVE_FISSURE, AI_CBM_CheckImmunities
+	if_move MOVE_GUILLOTINE, AI_CBM_CheckImmunities
+	if_move MOVE_HORN_DRILL, AI_CBM_CheckImmunities
+	if_effect EFFECT_LOW_KICK, AI_CBM_CheckImmunities
+	if_effect EFFECT_FLAIL, AI_CBM_CheckImmunities
+	if_effect EFFECT_RETURN, AI_CBM_CheckImmunities
+	if_effect EFFECT_MAGNITUDE, AI_CBM_CheckImmunities
+	if_effect EFFECT_HIDDEN_POWER, AI_CBM_CheckImmunities
 	get_how_powerful_move_is
-	if_equal MOVE_POWER_OTHER, CheckIfSoundMove
-AI_CBM_CheckIfNegatesType:
+	if_equal MOVE_POWER_OTHER, CheckSoundproof
+AI_CBM_CheckImmunities:
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus30
-	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus5
-	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus20
 	get_ability AI_TARGET
 	if_equal ABILITY_VOLT_ABSORB, CheckIfVoltAbsorbCancelsElectric
 	if_equal ABILITY_WATER_ABSORB, CheckIfWaterAbsorbCancelsWater
 	if_equal ABILITY_FLASH_FIRE, CheckIfFlashFireCancelsFire
 	if_equal ABILITY_WONDER_GUARD, CheckIfWonderGuardCancelsMove
 	if_equal ABILITY_LEVITATE, CheckIfLevitateCancelsGroundMove
-	if_equal ABILITY_SOUNDPROOF, CheckIfSoundMove
-	goto AI_CheckBadMove_CheckEffect
+	goto AI_CBM_TestWhetherToCheckResists
 
 CheckIfVoltAbsorbCancelsElectric:
 	get_curr_move_type
-	if_equal_ TYPE_ELECTRIC, Score_Minus12
-	goto AI_CheckBadMove_CheckEffect
+	if_equal_ TYPE_ELECTRIC, Score_Minus30
+	goto AI_CBM_TestWhetherToCheckResists
 
 CheckIfWaterAbsorbCancelsWater:
 	get_curr_move_type
-	if_equal_ TYPE_WATER, Score_Minus12
-	goto AI_CheckBadMove_CheckEffect
+	if_equal_ TYPE_WATER, Score_Minus30
+	goto AI_CBM_TestWhetherToCheckResists
 
 CheckIfFlashFireCancelsFire:
 	get_curr_move_type
-	if_equal_ TYPE_FIRE, Score_Minus12
-	goto AI_CheckBadMove_CheckEffect
+	if_equal_ TYPE_FIRE, Score_Minus30
+	goto AI_CBM_TestWhetherToCheckResists
 
 CheckIfWonderGuardCancelsMove:
-	if_type_effectiveness AI_EFFECTIVENESS_x2, AI_CheckBadMove_CheckEffect
-	goto Score_Minus10
+	if_type_effectiveness AI_EFFECTIVENESS_x2, AI_CBM_TestWhetherToCheckResists
+	goto Score_Minus30
 
 CheckIfLevitateCancelsGroundMove:
 	get_curr_move_type
-	if_equal_ TYPE_GROUND, Score_Minus10
+	if_equal_ TYPE_GROUND, Score_Minus30
+	goto AI_CBM_TestWhetherToCheckResists
+
+AI_CBM_TestWhetherToCheckResists:
+	if_effect EFFECT_BIDE, CheckSoundproof
+	if_effect EFFECT_COUNTER, CheckSoundproof
+	if_effect EFFECT_ENDEAVOR, CheckSoundproof
+	if_effect EFFECT_FAKE_OUT, CheckSoundproof
+	if_effect EFFECT_LEVEL_DAMAGE, CheckSoundproof
+	if_effect EFFECT_MIRROR_COAT, CheckSoundproof
+	if_effect EFFECT_OHKO, CheckSoundproof
+	if_effect EFFECT_RAPID_SPIN, CheckSoundproof
+	if_effect EFFECT_SUPER_FANG, CheckSoundproof
+	if_effect EFFECT_TRAP, CheckSoundproof
+	if_effect EFFECT_PARALYZE_HIT, AI_CBM_TestWhetherToCheckResists_Status
+	if_effect EFFECT_POISON_FANG, AI_CBM_TestWhetherToCheckResists_Status
+	if_effect EFFECT_POISON_HIT, AI_CBM_TestWhetherToCheckResists_Status
+	if_effect EFFECT_SECRET_POWER, AI_CBM_TestWhetherToCheckResists_Status
+	if_effect EFFECT_KNOCK_OFF, AI_CBM_TestWhetherToCheckResists_ItemCheck
+	if_effect EFFECT_THIEF, AI_CBM_TestWhetherToCheckResists_ItemCheck
+	goto AI_CBM_CheckResists
+
+AI_CBM_TestWhetherToCheckResists_Status:
+	if_status AI_TARGET, STATUS1_ANY, AI_CBM_CheckResists
+	get_considered_move_second_eff_chance
+	if_less_than 25, AI_CBM_CheckResists
+	goto CheckSoundproof
+
+AI_CBM_TestWhetherToCheckResists_ItemCheck:
+	if_equal ABILITY_STICKY_HOLD, CheckSoundproof
+	get_hold_effect AI_TARGET
+	if_not_in_bytes AI_CV_Thief_EncourageItemsToSteal, CheckSoundproof
+AI_CBM_CheckResists:
+	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CBM_CheckIfResists_Minus10
+	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CBM_CheckIfResists_Minus30
+	goto CheckSoundproof
+
+AI_CBM_CheckIfResists_Minus10:
+	score -10
+	goto CheckSoundproof
+
+AI_CBM_CheckIfResists_Minus30:
+	score -30
+CheckSoundproof:
+	get_ability AI_TARGET
+	if_equal ABILITY_SOUNDPROOF, CheckIfSoundMove
 	goto AI_CheckBadMove_CheckEffect
 
 CheckIfSoundMove:
-	if_move MOVE_GROWL, Score_Minus10
-	if_move MOVE_ROAR, Score_Minus10
-	if_move MOVE_SING, Score_Minus10
-	if_move MOVE_SUPERSONIC, Score_Minus10
-	if_move MOVE_SCREECH, Score_Minus10
-	if_move MOVE_SNORE, Score_Minus10
-	if_move MOVE_UPROAR, Score_Minus10
-	if_move MOVE_METAL_SOUND, Score_Minus10
-	if_move MOVE_GRASS_WHISTLE, Score_Minus10
+	if_move MOVE_GROWL, CheckIfSoundMove_Minus10
+	if_move MOVE_ROAR, CheckIfSoundMove_Minus10
+	if_move MOVE_SING, CheckIfSoundMove_Minus10
+	if_move MOVE_SUPERSONIC, CheckIfSoundMove_Minus10
+	if_move MOVE_SCREECH, CheckIfSoundMove_Minus10
+	if_move MOVE_SNORE, CheckIfSoundMove_Minus10
+	if_move MOVE_UPROAR, CheckIfSoundMove_Minus10
+	if_move MOVE_METAL_SOUND, CheckIfSoundMove_Minus10
+	if_move MOVE_GRASS_WHISTLE, CheckIfSoundMove_Minus10
+	goto AI_CheckBadMove_CheckEffect
+
+CheckIfSoundMove_Minus10:
+	score -10
 AI_CheckBadMove_CheckEffect:
 	if_effect EFFECT_SLEEP, AI_CBM_Sleep
 	if_effect EFFECT_YAWN, AI_CBM_Sleep
@@ -626,19 +672,19 @@ AI_CBM_MirrorMove2:
 
 AI_CheckBadMove_MirrorMove:
 	get_last_used_bank_move AI_TARGET
-	if_equal MOVE_FISSURE, AI_CBM_CheckIfNegatesType_MirrorMove
-	if_equal MOVE_GUILLOTINE, AI_CBM_CheckIfNegatesType_MirrorMove
-	if_equal MOVE_HORN_DRILL, AI_CBM_CheckIfNegatesType_MirrorMove
+	if_equal MOVE_FISSURE, AI_CBM_CheckImmunities_MirrorMove
+	if_equal MOVE_GUILLOTINE, AI_CBM_CheckImmunities_MirrorMove
+	if_equal MOVE_HORN_DRILL, AI_CBM_CheckImmunities_MirrorMove
 	get_move_effect_from_result
-	if_equal EFFECT_LOW_KICK, AI_CBM_CheckIfNegatesType_MirrorMove
-	if_equal EFFECT_FLAIL, AI_CBM_CheckIfNegatesType_MirrorMove
-	if_equal EFFECT_RETURN, AI_CBM_CheckIfNegatesType_MirrorMove
-	if_equal EFFECT_MAGNITUDE, AI_CBM_CheckIfNegatesType_MirrorMove
-	if_equal EFFECT_HIDDEN_POWER, AI_CBM_CheckIfNegatesType_MirrorMove
+	if_equal EFFECT_LOW_KICK, AI_CBM_CheckImmunities_MirrorMove
+	if_equal EFFECT_FLAIL, AI_CBM_CheckImmunities_MirrorMove
+	if_equal EFFECT_RETURN, AI_CBM_CheckImmunities_MirrorMove
+	if_equal EFFECT_MAGNITUDE, AI_CBM_CheckImmunities_MirrorMove
+	if_equal EFFECT_HIDDEN_POWER, AI_CBM_CheckImmunities_MirrorMove
 	get_last_used_bank_move AI_TARGET
 	get_move_power_from_result
 	if_less_than 2, AI_CBM_Soundproof_MirrorMove
-AI_CBM_CheckIfNegatesType_MirrorMove:
+AI_CBM_CheckImmunities_MirrorMove:
 	get_last_used_bank_move AI_TARGET
 	if_type_effectiveness_from_result AI_EFFECTIVENESS_x0, Score_Minus30
 	if_type_effectiveness_from_result AI_EFFECTIVENESS_x0_25, Score_Minus20

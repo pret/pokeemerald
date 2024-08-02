@@ -251,11 +251,11 @@
 	.4byte \param1
 	.endm
 
-	.macro nop_2A
+	.macro get_considered_move_second_eff_chance
 	.byte 0x2a
 	.endm
 
-	.macro nop_2B
+	.macro get_considered_move_accuracy
 	.byte 0x2b
 	.endm
 

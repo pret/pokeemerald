@@ -445,9 +445,10 @@ static bool8 ShouldSwitch(void)
     if (ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_ARENA_TRAP)) // Misses the Levitate check.
     {
         if (IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FLYING))
+            return TRUE;
+        else
             return FALSE;
     }
-        return FALSE;
     if (ABILITY_ON_FIELD2(ABILITY_MAGNET_PULL))
     {
         if (IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL))
