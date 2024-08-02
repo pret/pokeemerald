@@ -1900,8 +1900,10 @@ AI_CV_Curse3:
 	goto AI_CV_Curse_End
 
 AI_CV_Curse4:
-	if_hp_more_than AI_USER, 80, AI_CV_Curse_End
-	score -1
+	if_hp_more_than AI_USER, 90, AI_CV_Curse_End
+	score -2
+	if_hp_more_than AI_USER, 50, AI_CV_Curse_End
+	score -30
 AI_CV_Curse_End:
 	end
 
@@ -1976,36 +1978,55 @@ AI_CV_Protect11:
 	score -1
 AI_CV_ProtectDouble:
 	get_protect_count AI_USER
-	if_less_than 1, AI_CV_ProtectEnd
+	if_less_than 1, AI_CV_ProtectWish
 	if_hp_less_than AI_TARGET 13, AI_CV_ProtectVeryLowHP
 	if_hp_less_than AI_TARGET 25, AI_CV_ProtectLowHP
 	goto AI_CV_ProtectRecount
 
+AI_CV_ProtectWish:
+	get_last_used_bank_move
+	if_effect EFFECT_WISH, AI_CV_Protect14
+	goto AI_CV_ProtectLeftovers
+
 AI_CV_ProtectLowHP:
 	if_status2 AI_TARGET, STATUS2_CURSED, AI_CV_Protect13
 	if_status3 AI_TARGET, STATUS3_LEECHSEED, AI_CV_ProtectVeryLowHP
-	goto AI_CV_ProtectEnd
+	goto AI_CV_ProtectRecount
 
 AI_CV_ProtectVeryLowHP:
 	if_status AI_TARGET, STATUS1_PSN_ANY, AI_CV_Protect13
 	if_status AI_TARGET, STATUS1_BURN, AI_CV_Protect13
 	if_status3 AI_TARGET, STATUS3_LEECHSEED, AI_CV_Protect13
 	if_status2 AI_TARGET, STATUS2_CURSED, AI_CV_Protect13
-	goto AI_CV_ProtectEnd
+	goto AI_CV_ProtectRecount
 
 AI_CV_ProtectRecount:
 	get_protect_count AI_USER
 	if_less_than 2, AI_CV_Protect12
 	score -5
+	goto AI_CV_ProtectLeftovers
 
 AI_CV_Protect12:
 	score -2
-	goto AI_CV_ProtectEnd
+	goto AI_CV_ProtectLeftovers
 
 AI_CV_Protect13:
 	score +2
+	goto AI_CV_ProtectLeftovers
+
+AI_CV_Protect14:
+	score +1
+AI_CV_ProtectLeftovers:
+	get_hold_effect AI_USER
+	if_not_in_bytes AI_CV_Protect_Leftovers, AI_CV_ProtectEnd
+	if_random_less_than 128, AI_CV_ProtectEnd
+	score +1
 AI_CV_ProtectEnd:
 	end
+
+AI_CV_Protect_Leftovers:
+	.byte HOLD_EFFECT_LEFTOVERS
+	.byte -1
 
 AI_CV_Foresight:
 	get_target_type1
