@@ -53,11 +53,24 @@ AI_CheckBadMove:
 	if_move MOVE_FISSURE, AI_CBM_CheckImmunities
 	if_move MOVE_GUILLOTINE, AI_CBM_CheckImmunities
 	if_move MOVE_HORN_DRILL, AI_CBM_CheckImmunities
-	if_effect EFFECT_LOW_KICK, AI_CBM_CheckImmunities
+	if_effect EFFECT_DREAM_EATER, AI_CBM_CheckImmunities
+	if_effect EFFECT_ERUPTION, AI_CBM_CheckImmunities
+	if_effect EFFECT_EXPLOSION, AI_CBM_CheckImmunities
 	if_effect EFFECT_FLAIL, AI_CBM_CheckImmunities
-	if_effect EFFECT_RETURN, AI_CBM_CheckImmunities
-	if_effect EFFECT_MAGNITUDE, AI_CBM_CheckImmunities
+	if_effect EFFECT_FRUSTRATION, AI_CBM_CheckImmunities
+	if_effect EFFECT_FOCUS_PUNCH, AI_CBM_CheckImmunities
 	if_effect EFFECT_HIDDEN_POWER, AI_CBM_CheckImmunities
+	if_effect EFFECT_LOW_KICK, AI_CBM_CheckImmunities
+	if_effect EFFECT_MAGNITUDE, AI_CBM_CheckImmunities
+	if_effect EFFECT_OVERHEAT, AI_CBM_CheckImmunities
+	if_effect EFFECT_RAZOR_WIND, AI_CBM_CheckImmunities
+	if_effect EFFECT_RECHARGE, AI_CBM_CheckImmunities
+	if_effect EFFECT_RETURN, AI_CBM_CheckImmunities
+	if_effect EFFECT_SKULL_BASH, AI_CBM_CheckImmunities
+	if_effect EFFECT_SKY_ATTACK, AI_CBM_CheckImmunities
+	if_effect EFFECT_SOLAR_BEAM, AI_CBM_CheckImmunities
+	if_effect EFFECT_SPIT_UP, AI_CBM_CheckImmunities
+	if_effect EFFECT_SUPERPOWER, AI_CBM_CheckImmunities
 	get_how_powerful_move_is
 	if_equal MOVE_POWER_OTHER, CheckSoundproof
 AI_CBM_CheckImmunities:
@@ -111,6 +124,7 @@ AI_CBM_TestWhetherToCheckResists:
 	if_effect EFFECT_SECRET_POWER, AI_CBM_TestWhetherToCheckResists_Status
 	if_effect EFFECT_KNOCK_OFF, AI_CBM_TestWhetherToCheckResists_ItemCheck
 	if_effect EFFECT_THIEF, AI_CBM_TestWhetherToCheckResists_ItemCheck
+	if_effect EFFECT_SPEED_DOWN_HIT, AI_CBM_TestWhetherToCheckResists_Speed
 	goto AI_CBM_CheckResists
 
 AI_CBM_TestWhetherToCheckResists_Status:
@@ -120,9 +134,19 @@ AI_CBM_TestWhetherToCheckResists_Status:
 	goto CheckSoundproof
 
 AI_CBM_TestWhetherToCheckResists_ItemCheck:
-	if_equal ABILITY_STICKY_HOLD, CheckSoundproof
+	get_ability AI_TARGET
+	if_equal ABILITY_STICKY_HOLD, AI_CBM_CheckResists
 	get_hold_effect AI_TARGET
-	if_not_in_bytes AI_CV_Thief_EncourageItemsToSteal, CheckSoundproof
+	if_not_in_bytes AI_CV_Thief_EncourageItemsToSteal, AI_CBM_CheckResists
+	goto CheckSoundproof
+
+AI_CBM_TestWhetherToCheckResists_Speed:
+	get_ability AI_TARGET
+	if_equal ABILITY_CLEAR_BODY, AI_CBM_CheckResists
+	if_equal ABILITY_WHITE_SMOKE, AI_CBM_CheckResists
+	if_equal ABILITY_SPEED_BOOST, AI_CBM_CheckResists
+	if_side_affecting AI_TARGET, SIDE_STATUS_MIST, AI_CBM_CheckResists
+	if_target_faster CheckSoundproof
 AI_CBM_CheckResists:
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CBM_CheckIfResists_Minus10
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CBM_CheckIfResists_Minus30
@@ -137,7 +161,7 @@ AI_CBM_CheckIfResists_Minus30:
 CheckSoundproof:
 	get_ability AI_TARGET
 	if_equal ABILITY_SOUNDPROOF, CheckIfSoundMove
-	goto AI_CheckBadMove_CheckEffect
+	goto TestWhetherToCheckStatLowerImmunity
 
 CheckIfSoundMove:
 	if_move MOVE_GROWL, CheckIfSoundMove_Minus10
@@ -149,9 +173,35 @@ CheckIfSoundMove:
 	if_move MOVE_UPROAR, CheckIfSoundMove_Minus10
 	if_move MOVE_METAL_SOUND, CheckIfSoundMove_Minus10
 	if_move MOVE_GRASS_WHISTLE, CheckIfSoundMove_Minus10
-	goto AI_CheckBadMove_CheckEffect
+	goto TestWhetherToCheckStatLowerImmunity
 
 CheckIfSoundMove_Minus10:
+	score -10
+TestWhetherToCheckStatLowerImmunity:
+	if_effect EFFECT_ATTACK_DOWN, CheckStatLowerImmunity
+	if_effect EFFECT_DEFENSE_DOWN, CheckStatLowerImmunity
+	if_effect EFFECT_SPEED_DOWN, CheckStatLowerImmunity
+	if_effect EFFECT_SPECIAL_ATTACK_DOWN, CheckStatLowerImmunity
+	if_effect EFFECT_SPECIAL_DEFENSE_DOWN, CheckStatLowerImmunity
+	if_effect EFFECT_ACCURACY_DOWN, CheckStatLowerImmunity
+	if_effect EFFECT_EVASION_DOWN, CheckStatLowerImmunity
+	if_effect EFFECT_ATTACK_DOWN_2, CheckStatLowerImmunity
+	if_effect EFFECT_DEFENSE_DOWN_2, CheckStatLowerImmunity
+	if_effect EFFECT_SPEED_DOWN_2, CheckStatLowerImmunity
+	if_effect EFFECT_SPECIAL_ATTACK_DOWN_2, CheckStatLowerImmunity
+	if_effect EFFECT_SPECIAL_DEFENSE_DOWN_2, CheckStatLowerImmunity
+	if_effect EFFECT_ACCURACY_DOWN_2, CheckStatLowerImmunity
+	if_effect EFFECT_EVASION_DOWN_2, CheckStatLowerImmunity
+	if_effect EFFECT_SPEED_DOWN_HIT, CheckStatLowerImmunity
+	goto AI_CheckBadMove_CheckEffect
+
+CheckStatLowerImmunity:
+	if_equal ABILITY_CLEAR_BODY, CheckStatLowerImmunity_Minus10
+	if_equal ABILITY_WHITE_SMOKE, CheckStatLowerImmunity_Minus10
+	if_side_affecting AI_TARGET, SIDE_STATUS_MIST, CheckStatLowerImmunity_Minus10
+	goto AI_CheckBadMove_CheckEffect
+
+CheckStatLowerImmunity_Minus10:
 	score -10
 AI_CheckBadMove_CheckEffect:
 	if_effect EFFECT_SLEEP, AI_CBM_Sleep
@@ -296,7 +346,6 @@ AI_CBM_Nightmare:
 
 AI_CBM_DreamEater:
 	if_not_status AI_TARGET, STATUS1_SLEEP, Score_Minus8
-	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
 	end
 
 AI_CBM_BellyDrum:
@@ -333,37 +382,33 @@ AI_CBM_AttackDown:
 	if_stat_level_equal AI_TARGET, STAT_ATK, MIN_STAT_STAGE, Score_Minus10
 	get_ability AI_TARGET
 	if_equal ABILITY_HYPER_CUTTER, Score_Minus10
-	goto CheckIfAbilityBlocksStatChange
+	end
 
 AI_CBM_DefenseDown:
 	if_stat_level_equal AI_TARGET, STAT_DEF, MIN_STAT_STAGE, Score_Minus10
-	goto CheckIfAbilityBlocksStatChange
+	end
 
 AI_CBM_SpeedDown:
 	if_stat_level_equal AI_TARGET, STAT_SPEED, MIN_STAT_STAGE, Score_Minus10
 	if_ability AI_TARGET, ABILITY_SPEED_BOOST, Score_Minus10
-	goto CheckIfAbilityBlocksStatChange
+	end
 
 AI_CBM_SpAtkDown:
 	if_stat_level_equal AI_TARGET, STAT_SPATK, MIN_STAT_STAGE, Score_Minus10
-	goto CheckIfAbilityBlocksStatChange
+	end
 
 AI_CBM_SpDefDown:
 	if_stat_level_equal AI_TARGET, STAT_SPDEF, MIN_STAT_STAGE, Score_Minus10
-	goto CheckIfAbilityBlocksStatChange
+	end
 
 AI_CBM_AccDown:
 	if_stat_level_equal AI_TARGET, STAT_ACC, MIN_STAT_STAGE, Score_Minus10
 	get_ability AI_TARGET
 	if_equal ABILITY_KEEN_EYE, Score_Minus10
-	goto CheckIfAbilityBlocksStatChange
+	end
 
 AI_CBM_EvasionDown:
 	if_stat_level_equal AI_TARGET, STAT_EVASION, MIN_STAT_STAGE, Score_Minus10
-CheckIfAbilityBlocksStatChange:
-	get_ability AI_TARGET
-	if_equal ABILITY_CLEAR_BODY, Score_Minus10
-	if_equal ABILITY_WHITE_SMOKE, Score_Minus10
 	end
 
 AI_CBM_Haze:
