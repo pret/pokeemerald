@@ -105,6 +105,7 @@ AI_CheckBadMove_CheckSoundproof:
 	if_move MOVE_GRASS_WHISTLE, Score_Minus10
 AI_CheckBadMove_CheckEffect:
 	if_effect EFFECT_SLEEP, AI_CBM_Sleep
+	if_effect EFFECT_YAWN, AI_CBM_Sleep
 	if_effect EFFECT_EXPLOSION, AI_CBM_Explosion
 	if_effect EFFECT_DREAM_EATER, AI_CBM_DreamEater
 	if_effect EFFECT_ATTACK_UP, AI_CBM_AttackUp
@@ -654,6 +655,7 @@ Score_Plus10:
 AI_CheckViability:
 	if_target_is_ally AI_Ret
 	if_effect EFFECT_SLEEP, AI_CV_Sleep
+	if_effect EFFECT_YAWN, AI_CV_Sleep
 	if_effect EFFECT_ABSORB, AI_CV_Absorb
 	if_effect EFFECT_EXPLOSION, AI_CV_SelfKO
 	if_effect EFFECT_DREAM_EATER, AI_CV_DreamEater
@@ -1563,6 +1565,7 @@ AI_CV_Substitute4:
 	get_last_used_bank_move AI_TARGET
 	get_move_effect_from_result
 	if_equal EFFECT_SLEEP, AI_CV_Substitute5
+	if_equal EFFECT_YAWN, AI_CV_Substitute5
 	if_equal EFFECT_TOXIC, AI_CV_Substitute5
 	if_equal EFFECT_POISON, AI_CV_Substitute5
 	if_equal EFFECT_PARALYZE, AI_CV_Substitute5
@@ -2694,6 +2697,7 @@ AI_Risky_End:
 
 AI_Risky_EffectsToEncourage:
 	.byte EFFECT_SLEEP
+	.byte EFFECT_YAWN
 	.byte EFFECT_EXPLOSION
 	.byte EFFECT_MIRROR_MOVE
 	.byte EFFECT_OHKO
@@ -3099,6 +3103,7 @@ AI_HPAware_DiscouragedEffectsWhenTargetMediumHP:
 
 AI_HPAware_DiscouragedEffectsWhenTargetLowHP:
 	.byte EFFECT_SLEEP
+	.byte EFFECT_YAWN
 	.byte EFFECT_EXPLOSION
 	.byte EFFECT_ATTACK_UP
 	.byte EFFECT_DEFENSE_UP
