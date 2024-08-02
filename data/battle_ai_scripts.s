@@ -1911,70 +1911,67 @@ AI_CV_Protect:
 	is_first_turn_for AI_USER
 	if_not_equal 0, AI_CV_ProtectCurse
 	if_random_less_than 128, AI_CV_ProtectCurse
-	goto AI_CV_Protect1
-
-AI_CV_Protect1:
 	score +1
 AI_CV_ProtectCurse:
-	if_status2 AI_USER, STATUS2_CURSED, AI_CV_Protect2
+	if_status2 AI_USER, STATUS2_CURSED, AI_CV_Protect1
 	goto AI_CV_ProtectSeed
+
+AI_CV_Protect1:
+	score -2
+AI_CV_ProtectSeed:
+	if_status3 AI_USER, STATUS3_LEECHSEED, AI_CV_Protect2
+	goto AI_CV_ProtectPerish
 
 AI_CV_Protect2:
 	score -2
-AI_CV_ProtectSeed:
-	if_status3 AI_USER, STATUS3_LEECHSEED, AI_CV_Protect3
-	goto AI_CV_ProtectPerish
+AI_CV_ProtectPerish:
+	if_status3 AI_USER, STATUS3_PERISH_SONG, AI_CV_Protect3
+	goto AI_CV_ProtectInfatuation
 
 AI_CV_Protect3:
 	score -2
-AI_CV_ProtectPerish:
-	if_status3 AI_USER, STATUS3_PERISH_SONG, AI_CV_Protect4
-	goto AI_CV_ProtectInfatuation
-
-AI_CV_Protect4:
-	score -2
 AI_CV_ProtectInfatuation:
-	if_status2 AI_USER, STATUS2_INFATUATION, AI_CV_Protect5
+	if_status2 AI_USER, STATUS2_INFATUATION, AI_CV_Protect4
 	goto AI_CV_ProtectStatus
 
-AI_CV_Protect5:
+AI_CV_Protect4:
 	score -1
 AI_CV_ProtectStatus:
-	if_status AI_USER, STATUS1_PSN_ANY, AI_CV_Protect6
-	if_status3 AI_USER, STATUS3_YAWN, AI_CV_Protect6
-	if_status AI_USER, STATUS1_PARALYSIS, AI_CV_Protect7
+	if_status AI_USER, STATUS1_PSN_ANY, AI_CV_Protect5
+	if_status3 AI_USER, STATUS3_YAWN, AI_CV_Protect5
+	if_status AI_USER, STATUS1_PARALYSIS, AI_CV_Protect6
+	goto AI_CV_ProtectTargetStatus
+
+AI_CV_Protect5:
+	score -2
 	goto AI_CV_ProtectTargetStatus
 
 AI_CV_Protect6:
-	score -2
-	goto AI_CV_ProtectTargetStatus
-
-AI_CV_Protect7:
 	score -1
 AI_CV_ProtectTargetStatus:
-	if_status3 AI_TARGET, STATUS3_YAWN, AI_CV_Protect8
-	if_status AI_TARGET, STATUS1_FREEZE, AI_CV_Protect9
-	if_status AI_TARGET, STATUS1_SLEEP, AI_CV_Protect9
-	if_status AI_TARGET, STATUS1_PARALYSIS, AI_CV_Protect9
+	if_status3 AI_TARGET, STATUS3_YAWN, AI_CV_Protect7
+	if_status AI_TARGET, STATUS1_FREEZE, AI_CV_Protect8
+	if_status AI_TARGET, STATUS1_SLEEP, AI_CV_Protect8
+	if_status AI_TARGET, STATUS1_PARALYSIS, AI_CV_Protect8
 	goto AI_CV_ProtectTargetConf
 
-AI_CV_Protect8:
+AI_CV_Protect7:
 	score +1
 	goto AI_CV_ProtectTargetConf
 
-AI_CV_Protect9:
+AI_CV_Protect8:
 	score -1
 AI_CV_ProtectTargetConf:
-	if_status2 AI_TARGET, STATUS2_CONFUSION, AI_CV_Protect10
+	if_status2 AI_TARGET, STATUS2_CONFUSION, AI_CV_Protect9
 	goto AI_CV_ProtectTargetInfat
 
-AI_CV_Protect10:
+AI_CV_Protect9:
 	score -1
 AI_CV_ProtectTargetInfat:
-	if_status2 AI_TARGET, STATUS2_INFATUATION, AI_CV_Protect11
+	if_status2 AI_TARGET, STATUS2_INFATUATION, AI_CV_Protect10
 	goto AI_CV_ProtectDouble
 
-AI_CV_Protect11:
+AI_CV_Protect10:
 	score -1
 AI_CV_ProtectDouble:
 	get_protect_count AI_USER
@@ -1983,27 +1980,29 @@ AI_CV_ProtectDouble:
 	if_hp_less_than AI_TARGET 25, AI_CV_ProtectLowHP
 	goto AI_CV_ProtectRecount
 
-AI_CV_ProtectWish:
-	get_last_used_bank_move AI_USER
-	if_effect EFFECT_WISH, AI_CV_Protect14
-	goto AI_CV_ProtectLeftovers
-
 AI_CV_ProtectLowHP:
-	if_status2 AI_TARGET, STATUS2_CURSED, AI_CV_Protect13
+	if_status2 AI_TARGET, STATUS2_CURSED, AI_CV_Protect11
 	if_status3 AI_TARGET, STATUS3_LEECHSEED, AI_CV_ProtectVeryLowHP
 	goto AI_CV_ProtectRecount
 
 AI_CV_ProtectVeryLowHP:
-	if_status AI_TARGET, STATUS1_PSN_ANY, AI_CV_Protect13
-	if_status AI_TARGET, STATUS1_BURN, AI_CV_Protect13
-	if_status3 AI_TARGET, STATUS3_LEECHSEED, AI_CV_Protect13
-	if_status2 AI_TARGET, STATUS2_CURSED, AI_CV_Protect13
-	goto AI_CV_ProtectRecount
-
+	if_status AI_TARGET, STATUS1_PSN_ANY, AI_CV_Protect11
+	if_status AI_TARGET, STATUS1_BURN, AI_CV_Protect11
+	if_status3 AI_TARGET, STATUS3_LEECHSEED, AI_CV_Protect11
+	if_status2 AI_TARGET, STATUS2_CURSED, AI_CV_Protect11
 AI_CV_ProtectRecount:
 	get_protect_count AI_USER
 	if_less_than 2, AI_CV_Protect12
 	score -5
+	goto AI_CV_ProtectLeftovers
+
+AI_CV_ProtectWish:
+	get_last_used_bank_move AI_USER
+	if_effect EFFECT_WISH, AI_CV_Protect13
+	goto AI_CV_ProtectLeftovers
+
+AI_CV_Protect11:
+	score +2
 	goto AI_CV_ProtectLeftovers
 
 AI_CV_Protect12:
@@ -2011,16 +2010,16 @@ AI_CV_Protect12:
 	goto AI_CV_ProtectLeftovers
 
 AI_CV_Protect13:
-	score +2
-	goto AI_CV_ProtectLeftovers
-
-AI_CV_Protect14:
 	score +1
-AI_CV_ProtectLeftovers:
+AI_CV_ProtectLeftoversUser:
 	get_hold_effect AI_USER
-	if_not_in_bytes AI_CV_Protect_Leftovers, AI_CV_ProtectEnd
-	if_random_less_than 128, AI_CV_ProtectEnd
+	if_not_in_bytes AI_CV_Protect_Leftovers, AI_CV_ProtectLeftoversTarget
+	if_random_less_than 128, AI_CV_ProtectLeftoversTarget
 	score +1
+AI_CV_ProtectLeftoversTarget:
+	get_hold_effect AI_TARGET
+	if_not_in_bytes AI_CV_Protect_Leftovers, AI_CV_ProtectEnd
+	score -1
 AI_CV_ProtectEnd:
 	end
 
