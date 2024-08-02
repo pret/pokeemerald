@@ -780,6 +780,8 @@ AI_CheckViability:
 	if_effect EFFECT_WATER_SPORT, AI_CV_WaterSport
 	if_effect EFFECT_CALM_MIND, AI_CV_SpDefUp
 	if_effect EFFECT_DRAGON_DANCE, AI_CV_DragonDance
+	if_effect EFFECT_RAPID_SPIN, AI_CV_RapidSpin
+	if_effect EFFECT_ROAR, AI_CV_Phazing
 	end
 
 AI_CV_Sleep:
@@ -2672,6 +2674,51 @@ AI_CV_DragonDance2:
 	if_random_less_than 128, AI_CV_DragonDance_End
 	score +1
 AI_CV_DragonDance_End:
+	end
+
+AI_CV_RapidSpin:
+	count_usable_party_mons AI_USER
+	if_equal 0, Score_Minus30
+	if_side_affecting AI_USER, SIDE_STATUS_SPIKES, AI_CV_RapidSpin2
+	goto AI_CV_RapidSpinEnd
+
+AI_CV_RapidSpin2:
+	score +1
+AI_CV_RapidSpinEnd:
+	end
+
+AI_CV_Phazing:
+	count_usable_party_mons AI_TARGET
+	if_equal 0, Score_Minus30
+	if_side_affecting AI_TARGET, SIDE_STATUS_SPIKES, AI_CV_Phazing2
+	goto AI_CV_PhazingStatCheck
+
+AI_CV_Phazing2:
+	score +1
+AI_CV_PhazingStatCheck:
+	if_stat_level_more_than AI_TARGET, STAT_ATK, DEFAULT_STAT_STAGE + 1, AI_CV_PhazingEncourage
+	if_stat_level_more_than AI_TARGET, STAT_DEF, DEFAULT_STAT_STAGE + 1, AI_CV_PhazingEncourage
+	if_stat_level_more_than AI_TARGET, STAT_SPATK, DEFAULT_STAT_STAGE + 1, AI_CV_PhazingEncourage
+	if_stat_level_more_than AI_TARGET, STAT_SPDEF, DEFAULT_STAT_STAGE + 1, AI_CV_PhazingEncourage
+	if_stat_level_more_than AI_TARGET, STAT_SPEED, DEFAULT_STAT_STAGE + 1, AI_CV_PhazingEncourage
+	if_stat_level_more_than AI_TARGET, STAT_EVASION, DEFAULT_STAT_STAGE + 1, AI_CV_PhazingEncourage
+	if_stat_level_more_than AI_TARGET, STAT_ACC, DEFAULT_STAT_STAGE + 1, AI_CV_PhazingEncourage
+	if_stat_level_less_than AI_TARGET, STAT_ATK, DEFAULT_STAT_STAGE, AI_CV_PhazingDiscourage
+	if_stat_level_less_than AI_TARGET, STAT_DEF, DEFAULT_STAT_STAGE, AI_CV_PhazingDiscourage
+	if_stat_level_less_than AI_TARGET, STAT_SPATK, DEFAULT_STAT_STAGE, AI_CV_PhazingDiscourage
+	if_stat_level_less_than AI_TARGET, STAT_SPDEF, DEFAULT_STAT_STAGE, AI_CV_PhazingDiscourage
+	if_stat_level_less_than AI_TARGET, STAT_SPEED, DEFAULT_STAT_STAGE, AI_CV_PhazingDiscourage
+	if_stat_level_less_than AI_TARGET, STAT_EVASION, DEFAULT_STAT_STAGE, AI_CV_PhazingDiscourage
+	if_stat_level_less_than AI_TARGET, STAT_ACC, DEFAULT_STAT_STAGE, AI_CV_PhazingDiscourage
+	goto AI_CV_PhazingEnd
+
+AI_CV_PhazingDiscourage:
+	score -1
+	goto AI_CV_PhazingEnd
+
+AI_CV_PhazingEncourage:
+	score +1
+AI_CV_PhazingEnd:
 	end
 
 AI_TryToFaint:
