@@ -467,7 +467,7 @@
 	.byte \battler
 	.endm
 
-	.macro get_move_type_from_result
+	.macro get_move_target_from_result
 	.byte 0x52
 	.endm
 
