@@ -2073,7 +2073,7 @@ AI_CV_SleepTalk2:
 	goto AI_CV_SleepTalk_End
 
 AI_CV_SleepTalk3:
-	if_hp_less_than AI_USER, 51, Score_Minus_20
+	if_hp_less_than AI_USER, 51, Score_Minus30
 	goto AI_CV_SleepTalk_End
 
 AI_CV_SleepTalk_End:
