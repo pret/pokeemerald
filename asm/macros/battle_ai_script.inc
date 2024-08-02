@@ -467,12 +467,14 @@
 	.byte \battler
 	.endm
 
-	.macro nop_52
+	.macro get_move_type_from_result
 	.byte 0x52
 	.endm
 
-	.macro nop_53
+	.macro if_type_effectiveness_from_result param0:req, param1:req
 	.byte 0x53
+	.byte \param0
+	.4byte \param1
 	.endm
 
 	.macro nop_54
