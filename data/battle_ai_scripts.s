@@ -59,7 +59,7 @@ AI_CheckBadMove:
 	if_effect EFFECT_MAGNITUDE, AI_CBM_CheckIfNegatesType
 	if_effect EFFECT_HIDDEN_POWER, AI_CBM_CheckIfNegatesType
 	get_how_powerful_move_is
-	if_equal MOVE_POWER_OTHER, AI_CheckBadMove_CheckSoundproof
+	if_equal MOVE_POWER_OTHER, CheckIfSoundMove
 AI_CBM_CheckIfNegatesType:
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus30
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus5
@@ -805,6 +805,10 @@ AI_CBM_MirrorMove_CheckEffect:
 	if_equal EFFECT_CALM_MIND, AI_CBM_CalmMind
 	if_equal EFFECT_DRAGON_DANCE, AI_CBM_DragonDance
 	if_equal EFFECT_WISH, AI_CBM_Wish
+	goto AI_CBM_MirrorMoveEnd
+
+AI_CBM_MirrorMovePenalty:
+	score -2
 AI_CBM_MirrorMoveEnd:
 	end
 
