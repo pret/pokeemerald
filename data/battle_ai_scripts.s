@@ -680,7 +680,7 @@ AI_CheckViability:
 	if_effect EFFECT_EVASION_DOWN, AI_CV_EvasionDown
 	if_effect EFFECT_HAZE, AI_CV_Haze
 	if_effect EFFECT_BIDE, AI_CV_Bide
-	if_effect EFFECT_ROAR, AI_CV_Roar
+	if_effect EFFECT_ROAR, AI_CV_Phazing
 	if_effect EFFECT_CONVERSION, AI_CV_Conversion
 	if_effect EFFECT_RESTORE_HP, AI_CV_Heal
 	if_effect EFFECT_TOXIC, AI_CV_Toxic
@@ -782,11 +782,6 @@ AI_CheckViability:
 	if_effect EFFECT_CALM_MIND, AI_CV_SpDefUp
 	if_effect EFFECT_DRAGON_DANCE, AI_CV_DragonDance
 	if_effect EFFECT_RAPID_SPIN, AI_CV_RapidSpin
-	if_effect EFFECT_ROAR, AI_CV_Phazing
-	if_effect EFFECT_EXPLOSION, AI_CV_SuicideCheck
-	if_effect EFFECT_DESTINY_BOND, AI_CV_SuicideCheck
-	if_effect EFFECT_MEMENTO, AI_CV_SuicideCheck
-	if_effect EFFECT_GRUDGE, AI_CV_SuicideCheck
 	if_effect EFFECT_PERISH_SONG, AI_CV_SuicideCheck
 	end
 
@@ -847,7 +842,7 @@ AI_CV_SelfKO_Encourage4:
 	if_random_less_than 50, AI_CV_SelfKO_End
 	score -1
 AI_CV_SelfKO_End:
-	end
+	goto AI_CV_SuicideCheck
 
 AI_CV_DreamEater:
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CV_DreamEater_ScoreDown1
@@ -1311,19 +1306,38 @@ AI_CV_Bide:
 AI_CV_Bide_End:
 	end
 
-AI_CV_Roar:
-	if_stat_level_more_than AI_TARGET, STAT_ATK, 8, AI_CV_Roar2
-	if_stat_level_more_than AI_TARGET, STAT_DEF, 8, AI_CV_Roar2
-	if_stat_level_more_than AI_TARGET, STAT_SPATK, 8, AI_CV_Roar2
-	if_stat_level_more_than AI_TARGET, STAT_SPDEF, 8, AI_CV_Roar2
-	if_stat_level_more_than AI_TARGET, STAT_EVASION, 8, AI_CV_Roar2
-	score -3
-	goto AI_CV_Roar_End
 
-AI_CV_Roar2:
-	if_random_less_than 128, AI_CV_Roar_End
-	score +2
-AI_CV_Roar_End:
+AI_CV_Phazing:
+	count_usable_party_mons AI_TARGET
+	if_equal 0, Score_Minus30
+	if_side_affecting AI_TARGET, SIDE_STATUS_SPIKES, AI_CV_Phazing2
+	goto AI_CV_PhazingStatCheck
+
+AI_CV_Phazing2:
+	score +1
+AI_CV_PhazingStatCheck:
+	if_stat_level_more_than AI_TARGET, STAT_ATK, 7, AI_CV_PhazingEncourage
+	if_stat_level_more_than AI_TARGET, STAT_DEF, 7, AI_CV_PhazingEncourage
+	if_stat_level_more_than AI_TARGET, STAT_SPATK, 7, AI_CV_PhazingEncourage
+	if_stat_level_more_than AI_TARGET, STAT_SPDEF, 7, AI_CV_PhazingEncourage
+	if_stat_level_more_than AI_TARGET, STAT_SPEED, 7, AI_CV_PhazingEncourage
+	if_stat_level_more_than AI_TARGET, STAT_EVASION, 7, AI_CV_PhazingEncourage
+	if_stat_level_less_than AI_TARGET, STAT_ATK, 6, AI_CV_PhazingDiscourage
+	if_stat_level_less_than AI_TARGET, STAT_DEF, 6, AI_CV_PhazingDiscourage
+	if_stat_level_less_than AI_TARGET, STAT_SPATK, 6, AI_CV_PhazingDiscourage
+	if_stat_level_less_than AI_TARGET, STAT_SPDEF, 6, AI_CV_PhazingDiscourage
+	if_stat_level_less_than AI_TARGET, STAT_SPEED, 6, AI_CV_PhazingDiscourage
+	if_stat_level_less_than AI_TARGET, STAT_EVASION, 6, AI_CV_PhazingDiscourage
+	if_stat_level_less_than AI_TARGET, STAT_ACC, 6, AI_CV_PhazingDiscourage
+	goto AI_CV_PhazingEnd
+
+AI_CV_PhazingDiscourage:
+	score -1
+	goto AI_CV_PhazingEnd
+
+AI_CV_PhazingEncourage:
+	score +1
+AI_CV_PhazingEnd:
 	end
 
 AI_CV_Conversion:
@@ -1826,7 +1840,7 @@ AI_CV_DestinyBond3:
 	if_random_less_than 100, AI_CV_DestinyBond_End
 	score +2
 AI_CV_DestinyBond_End:
-	end
+	goto AI_CV_SuicideCheck
 
 AI_CV_Flail:
 	if_target_faster AI_CV_Flail2
@@ -2703,40 +2717,6 @@ AI_CV_RapidSpin:
 AI_CV_RapidSpin2:
 	score +1
 AI_CV_RapidSpinEnd:
-	end
-
-AI_CV_Phazing:
-	count_usable_party_mons AI_TARGET
-	if_equal 0, Score_Minus30
-	if_side_affecting AI_TARGET, SIDE_STATUS_SPIKES, AI_CV_Phazing2
-	goto AI_CV_PhazingStatCheck
-
-AI_CV_Phazing2:
-	score +1
-AI_CV_PhazingStatCheck:
-	if_stat_level_more_than AI_TARGET, STAT_ATK, DEFAULT_STAT_STAGE + 1, AI_CV_PhazingEncourage
-	if_stat_level_more_than AI_TARGET, STAT_DEF, DEFAULT_STAT_STAGE + 1, AI_CV_PhazingEncourage
-	if_stat_level_more_than AI_TARGET, STAT_SPATK, DEFAULT_STAT_STAGE + 1, AI_CV_PhazingEncourage
-	if_stat_level_more_than AI_TARGET, STAT_SPDEF, DEFAULT_STAT_STAGE + 1, AI_CV_PhazingEncourage
-	if_stat_level_more_than AI_TARGET, STAT_SPEED, DEFAULT_STAT_STAGE + 1, AI_CV_PhazingEncourage
-	if_stat_level_more_than AI_TARGET, STAT_EVASION, DEFAULT_STAT_STAGE + 1, AI_CV_PhazingEncourage
-	if_stat_level_more_than AI_TARGET, STAT_ACC, DEFAULT_STAT_STAGE + 1, AI_CV_PhazingEncourage
-	if_stat_level_less_than AI_TARGET, STAT_ATK, DEFAULT_STAT_STAGE, AI_CV_PhazingDiscourage
-	if_stat_level_less_than AI_TARGET, STAT_DEF, DEFAULT_STAT_STAGE, AI_CV_PhazingDiscourage
-	if_stat_level_less_than AI_TARGET, STAT_SPATK, DEFAULT_STAT_STAGE, AI_CV_PhazingDiscourage
-	if_stat_level_less_than AI_TARGET, STAT_SPDEF, DEFAULT_STAT_STAGE, AI_CV_PhazingDiscourage
-	if_stat_level_less_than AI_TARGET, STAT_SPEED, DEFAULT_STAT_STAGE, AI_CV_PhazingDiscourage
-	if_stat_level_less_than AI_TARGET, STAT_EVASION, DEFAULT_STAT_STAGE, AI_CV_PhazingDiscourage
-	if_stat_level_less_than AI_TARGET, STAT_ACC, DEFAULT_STAT_STAGE, AI_CV_PhazingDiscourage
-	goto AI_CV_PhazingEnd
-
-AI_CV_PhazingDiscourage:
-	score -1
-	goto AI_CV_PhazingEnd
-
-AI_CV_PhazingEncourage:
-	score +1
-AI_CV_PhazingEnd:
 	end
 
 AI_CV_SuicideCheck:
