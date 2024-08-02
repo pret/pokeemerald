@@ -129,6 +129,7 @@ static void Cmd_get_stockpile_count(void);
 static void Cmd_is_double_battle(void);
 static void Cmd_get_used_held_item(void);
 static void Cmd_get_move_type_from_result(void);
+static void Cmd_get_move_power_from_result(void);
 static void Cmd_get_move_effect_from_result(void);
 static void Cmd_get_protect_count(void);
 static void Cmd_get_move_target_from_result(void);
@@ -241,7 +242,7 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     Cmd_get_move_effect_from_result,                // 0x50
     Cmd_get_protect_count,                          // 0x51
     Cmd_get_move_target_from_result,                // 0x52
-    Cmd_if_type_effectiveness_from_result,         // 0x53
+    Cmd_if_type_effectiveness_from_result,          // 0x53
     Cmd_nop_54,                                     // 0x54
     Cmd_nop_55,                                     // 0x55
     Cmd_nop_56,                                     // 0x56

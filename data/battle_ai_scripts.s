@@ -612,7 +612,7 @@ AI_CBM_DragonDance:
 AI_CBM_MirrorMove:
 	is_first_turn_for AI_TARGET
 	if_equal TRUE, AI_CBM_MirrorMovePenalty
-	if_user_faster, AI_CBM_MirrorMove2
+	if_user_faster AI_CBM_MirrorMove2
 	score -1
 AI_CBM_MirrorMove2:
 	get_last_used_bank_move AI_TARGET
@@ -1062,7 +1062,7 @@ AI_CV_DreamEater_End:
 AI_CV_MirrorMove:
 	is_first_turn_for AI_TARGET
 	if_equal TRUE, AI_CV_MirrorMovePenalty
-	if_user_faster, AI_CV_MirrorMove2
+	if_user_faster AI_CV_MirrorMove2
 	score -1
 AI_CV_MirrorMove2:
 	get_last_used_bank_move AI_TARGET
