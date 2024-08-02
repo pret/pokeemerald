@@ -1209,65 +1209,6 @@ AI_CV_MirrorMovePenalty:
 AI_CV_MirrorMoveEnd:
 	end
 
-
-AI_CV_MirrorMove:
-	if_target_faster AI_CV_MirrorMove2
-	get_last_used_bank_move AI_TARGET
-	if_not_in_hwords AI_CV_MirrorMove_EncouragedMovesToMirror, AI_CV_MirrorMove2
-	if_random_less_than 128, AI_CV_MirrorMove_End
-	score +2
-	goto AI_CV_MirrorMove_End
-
-AI_CV_MirrorMove2:
-	get_last_used_bank_move AI_TARGET
-	if_in_hwords AI_CV_MirrorMove_EncouragedMovesToMirror, AI_CV_MirrorMove_End
-	if_random_less_than 80, AI_CV_MirrorMove_End
-	score -1
-AI_CV_MirrorMove_End:
-	end
-
-AI_CV_MirrorMove_EncouragedMovesToMirror:
-	.2byte MOVE_SLEEP_POWDER
-	.2byte MOVE_LOVELY_KISS
-	.2byte MOVE_SPORE
-	.2byte MOVE_HYPNOSIS
-	.2byte MOVE_SING
-	.2byte MOVE_GRASS_WHISTLE
-	.2byte MOVE_SHADOW_PUNCH
-	.2byte MOVE_SAND_ATTACK
-	.2byte MOVE_SMOKESCREEN
-	.2byte MOVE_TOXIC
-	.2byte MOVE_GUILLOTINE
-	.2byte MOVE_HORN_DRILL
-	.2byte MOVE_FISSURE
-	.2byte MOVE_SHEER_COLD
-	.2byte MOVE_CROSS_CHOP
-	.2byte MOVE_AEROBLAST
-	.2byte MOVE_CONFUSE_RAY
-	.2byte MOVE_SWEET_KISS
-	.2byte MOVE_SCREECH
-	.2byte MOVE_COTTON_SPORE
-	.2byte MOVE_SCARY_FACE
-	.2byte MOVE_FAKE_TEARS
-	.2byte MOVE_METAL_SOUND
-	.2byte MOVE_THUNDER_WAVE
-	.2byte MOVE_GLARE
-	.2byte MOVE_POISON_POWDER
-	.2byte MOVE_SHADOW_BALL
-	.2byte MOVE_DYNAMIC_PUNCH
-	.2byte MOVE_HYPER_BEAM
-	.2byte MOVE_EXTREME_SPEED
-	.2byte MOVE_THIEF
-	.2byte MOVE_COVET
-	.2byte MOVE_ATTRACT
-	.2byte MOVE_SWAGGER
-	.2byte MOVE_TORMENT
-	.2byte MOVE_FLATTER
-	.2byte MOVE_TRICK
-	.2byte MOVE_SUPERPOWER
-	.2byte MOVE_SKILL_SWAP
-	.2byte -1
-
 AI_CV_AttackUp:
 	if_stat_level_less_than AI_USER, STAT_ATK, 9, AI_CV_AttackUp2
 	if_random_less_than 100, AI_CV_AttackUp3
