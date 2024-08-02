@@ -1994,20 +1994,20 @@ AI_CV_ProtectRecount:
 	get_protect_count AI_USER
 	if_less_than 2, AI_CV_Protect12
 	score -5
-	goto AI_CV_ProtectLeftovers
+	goto AI_CV_ProtectLeftoversUser
 
 AI_CV_ProtectWish:
 	get_last_used_bank_move AI_USER
 	if_effect EFFECT_WISH, AI_CV_Protect13
-	goto AI_CV_ProtectLeftovers
+	goto AI_CV_ProtectLeftoversUser
 
 AI_CV_Protect11:
 	score +2
-	goto AI_CV_ProtectLeftovers
+	goto AI_CV_ProtectLeftoversUser
 
 AI_CV_Protect12:
 	score -2
-	goto AI_CV_ProtectLeftovers
+	goto AI_CV_ProtectLeftoversUser
 
 AI_CV_Protect13:
 	score +1
