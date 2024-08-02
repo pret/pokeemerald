@@ -1953,66 +1953,6 @@ AI_CV_Disable2:
 AI_CV_Disable_End:
 	end
 
-AI_CV_Counter:
-	if_status AI_TARGET, STATUS1_SLEEP, AI_CV_Counter_ScoreDown1
-	if_status2 AI_TARGET, STATUS2_INFATUATION, AI_CV_Counter_ScoreDown1
-	if_status2 AI_TARGET, STATUS2_CONFUSION, AI_CV_Counter_ScoreDown1
-	if_hp_more_than AI_USER, 30, AI_CV_Counter2
-	if_random_less_than 10, AI_CV_Counter2
-	score -1
-AI_CV_Counter2:
-	if_hp_more_than AI_USER, 50, AI_CV_Counter3
-	if_random_less_than 100, AI_CV_Counter3
-	score -1
-AI_CV_Counter3:
-	if_has_move AI_USER, MOVE_MIRROR_COAT, AI_CV_Counter7
-	get_last_used_bank_move AI_TARGET
-	get_move_power_from_result
-	if_equal 0, AI_CV_Counter5
-	if_target_not_taunted AI_CV_Counter4
-	if_random_less_than 100, AI_CV_Counter4
-	score +1
-AI_CV_Counter4:
-	get_last_used_bank_move AI_TARGET
-	get_move_type_from_result
-	if_not_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_Counter_ScoreDown1
-	if_random_less_than 100, AI_CV_Counter_End
-	score +1
-	goto AI_CV_Counter_End
-
-AI_CV_Counter5:
-	if_target_not_taunted AI_CV_Counter6
-	if_random_less_than 100, AI_CV_Counter6
-	score +1
-AI_CV_Counter6:
-	get_target_type1
-	if_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_Counter_End
-	get_target_type2
-	if_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_Counter_End
-	if_random_less_than 50, AI_CV_Counter_End
-AI_CV_Counter7:
-	if_random_less_than 100, AI_CV_Counter8
-	score +4
-AI_CV_Counter8:
-	end
-
-AI_CV_Counter_ScoreDown1:
-	score -1
-AI_CV_Counter_End:
-	end
-
-AI_CV_Counter_PhysicalTypeList:
-	.byte TYPE_NORMAL
-	.byte TYPE_FIGHTING
-	.byte TYPE_FLYING
-	.byte TYPE_POISON
-	.byte TYPE_GROUND
-	.byte TYPE_ROCK
-	.byte TYPE_BUG
-	.byte TYPE_GHOST
-	.byte TYPE_STEEL
-	.byte -1
-
 AI_CV_Encore:
 	if_any_move_disabled AI_TARGET, AI_CV_Encore2
 	if_target_faster AI_CV_Encore_ScoreDown2
@@ -2516,53 +2456,96 @@ AI_CV_PsychUp_ScoreDown2:
 AI_CV_PsychUp_End:
 	end
 
-AI_CV_MirrorCoat:
-	if_status AI_TARGET, STATUS1_SLEEP, AI_CV_MirrorCoat_ScoreDown1
-	if_status2 AI_TARGET, STATUS2_INFATUATION, AI_CV_MirrorCoat_ScoreDown1
-	if_status2 AI_TARGET, STATUS2_CONFUSION, AI_CV_MirrorCoat_ScoreDown1
-	if_hp_more_than AI_USER, 30, AI_CV_MirrorCoat2
-	if_random_less_than 10, AI_CV_MirrorCoat2
-	score -1
-AI_CV_MirrorCoat2:
-	if_hp_more_than AI_USER, 50, AI_CV_MirrorCoat3
-	if_random_less_than 100, AI_CV_MirrorCoat3
-	score -1
-AI_CV_MirrorCoat3:
-	if_has_move AI_USER, MOVE_COUNTER, AI_CV_MirrorCoat_ScoreUp4
+AI_CV_Counter:
 	get_last_used_bank_move AI_TARGET
 	get_move_power_from_result
-	if_equal 0, AI_CV_MirrorCoat5
-	if_target_not_taunted AI_CV_MirrorCoat4
-	if_random_less_than 100, AI_CV_MirrorCoat4
-	score +1
-AI_CV_MirrorCoat4:
+	if_not_equal 0, AI_CV_Counter_PhysCheck
+	if_target_not_taunted AI_CV_CounterCoatMinus
+	get_target_type1
+	if_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_CounterCoat_StatusCheck
+	get_target_type2
+	if_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_CounterCoat_StatusCheck
+	goto AI_CV_CounterCoatMinus
+
+AI_CV_Counter_PhysCheck:
 	get_last_used_bank_move AI_TARGET
 	get_move_type_from_result
-	if_not_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_MirrorCoat_ScoreDown1
-	if_random_less_than 100, AI_CV_MirrorCoat_End
-	score +1
-	goto AI_CV_MirrorCoat_End
+	if_not_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_CounterCoatMinus
+	if_target_taunted AI_CV_CounterCoatPlus
+	goto AI_CV_CounterCoat_StatusCheck
 
-AI_CV_MirrorCoat5:
-	if_target_not_taunted AI_CV_MirrorCoat6
-	if_random_less_than 100, AI_CV_MirrorCoat6
-	score +1
-AI_CV_MirrorCoat6:
+AI_CV_MirrorCoat:
+	get_last_used_bank_move AI_TARGET
+	get_move_power_from_result
+	if_not_equal 0, AI_CV_MirrorCoat_SpcCheck
+	if_target_not_taunted AI_CV_CounterCoatMinus
 	get_target_type1
-	if_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_MirrorCoat_End
+	if_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_CounterCoat_StatusCheck
 	get_target_type2
-	if_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_MirrorCoat_End
-	if_random_less_than 50, AI_CV_MirrorCoat_End
-AI_CV_MirrorCoat_ScoreUp4:
-	if_random_less_than 100, AI_CV_MirrorCoat_ScoreUp4_End
-	score +4
-AI_CV_MirrorCoat_ScoreUp4_End:
+	if_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_CounterCoat_StatusCheck
+	goto AI_CV_CounterCoatMinus
+
+AI_CV_MirrorCoat_SpcCheck:
+	get_last_used_bank_move AI_TARGET
+	get_move_type_from_result
+	if_not_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_CounterCoatMinus
+	if_target_taunted AI_CV_CounterCoatPlus
+	goto AI_CV_CounterCoat_StatusCheck
+
+AI_CV_CounterCoatPlus:
+	if_random_less_than 64, AI_CV_CounterCoat_StatusCheck
+	score +1
+	goto AI_CV_CounterCoat_StatusCheck
+
+AI_CV_CounterCoatMinus:
+	score -1
+AI_CV_CounterCoat_StatusCheck:
+	if_status AI_TARGET, STATUS1_SLEEP, AI_CV_CounterCoat1
+	if_status AI_TARGET, STATUS1_FREEZE, AI_CV_CounterCoat1
+	if_status AI_TARGET, STATUS1_PARALYSIS, AI_CV_CounterCoat1
+	goto AI_CV_CounterCoat_Confusion
+
+AI_CV_CounterCoat1:
+	score -1
+AI_CV_CounterCoat_Confusion:
+	if_status2 AI_TARGET, STATUS2_CONFUSION, AI_CV_CounterCoat2
+	goto AI_CV_CounterCoat_Infatuation
+
+AI_CV_CounterCoat2:
+	score -1
+AI_CV_CounterCoat_Infatuation:
+	if_status2 AI_TARGET, STATUS2_INFATUATION, AI_CV_CounterCoat3
+	goto AI_CV_HP_Check
+
+AI_CV_CounterCoat3:
+	score -1
+AI_CV_HP_Check:
+	if_hp_less_than AI_USER, 40, AI_CV_CounterCoat4
+	if_hp_less_than AI_USER, 70, AI_CV_CounterCoat5
+	goto AI_CV_CounterCoat_RandDown
+
+AI_CV_CounterCoat4:
+	score -1
+AI_CV_CounterCoat5:
+	if_random_less_than 16, AI_CV_CounterCoat_RandDown
+	score -1
+AI_CV_CounterCoat_RandDown:
+	if_random_less_than 80, AI_CV_CounterCoat_End
+	score -1
+AI_CV_CounterCoat_End:
 	end
 
-AI_CV_MirrorCoat_ScoreDown1:
-	score -1
-AI_CV_MirrorCoat_End:
-	end
+AI_CV_Counter_PhysicalTypeList:
+	.byte TYPE_NORMAL
+	.byte TYPE_FIGHTING
+	.byte TYPE_FLYING
+	.byte TYPE_POISON
+	.byte TYPE_GROUND
+	.byte TYPE_ROCK
+	.byte TYPE_BUG
+	.byte TYPE_GHOST
+	.byte TYPE_STEEL
+	.byte -1
 
 AI_CV_MirrorCoat_SpecialTypeList:
 	.byte TYPE_FIRE
