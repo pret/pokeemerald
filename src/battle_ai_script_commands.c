@@ -129,12 +129,10 @@ static void Cmd_get_stockpile_count(void);
 static void Cmd_is_double_battle(void);
 static void Cmd_get_used_held_item(void);
 static void Cmd_get_move_type_from_result(void);
-static void Cmd_get_move_power_from_result(void);
 static void Cmd_get_move_effect_from_result(void);
-static void Cmd_get_move_target_from_result(void);
 static void Cmd_get_protect_count(void);
-static void Cmd_nop_52(void);
-static void Cmd_nop_53(void);
+static void Cmd_get_move_target_from_result(void);
+static void Cmd_if_type_effectiveness_from_result(void);
 static void Cmd_nop_54(void);
 static void Cmd_nop_55(void);
 static void Cmd_nop_56(void);
@@ -242,8 +240,8 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     Cmd_get_move_power_from_result,                 // 0x4F
     Cmd_get_move_effect_from_result,                // 0x50
     Cmd_get_protect_count,                          // 0x51
-    Cmd_nop_52,                                     // 0x52
-    Cmd_nop_53,                                     // 0x53
+    Cmd_get_move_target_from_result,                // 0x52
+    Cmd_if_type_effectiveness_from_result,         // 0x53
     Cmd_nop_54,                                     // 0x54
     Cmd_nop_55,                                     // 0x55
     Cmd_nop_56,                                     // 0x56
@@ -1523,6 +1521,7 @@ static void Cmd_if_type_effectiveness(void)
     // This is how you get the "dual non-immunity" glitch, where AI 
     // will use ineffective moves on immune pokémon if the second type
     // has a non-neutral, non-immune effectiveness
+    // This bug is fixed in this mod
     gMoveResultFlags = TypeCalc(gCurrentMove, sBattler_AI, gBattlerTarget);
 
     if (gBattleMoveDamage == 120) // Super effective STAB.
@@ -2122,13 +2121,6 @@ static void Cmd_get_move_effect_from_result(void)
     gAIScriptPtr += 1;
 }
 
-static void Cmd_get_move_target_from_result(void)
-{
-    AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->funcResult].target;
-
-    gAIScriptPtr += 1;
-}
-
 static void Cmd_get_protect_count(void)
 {
     u8 battlerId;
@@ -2143,12 +2135,47 @@ static void Cmd_get_protect_count(void)
     gAIScriptPtr += 2;
 }
 
-static void Cmd_nop_52(void)
+static void Cmd_get_move_target_from_result(void)
 {
+    AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->funcResult].target;
+
+    gAIScriptPtr += 1;
 }
 
-static void Cmd_nop_53(void)
+static void Cmd_if_type_effectiveness_from_result(void)
 {
+    u8 damageVar;
+
+    gDynamicBasePower = 0;
+    gBattleStruct->dynamicMoveType = 0;
+    gBattleScripting.dmgMultiplier = 1;
+    gMoveResultFlags = 0;
+    gCritMultiplier = 1;
+
+    gBattleMoveDamage = AI_EFFECTIVENESS_x1;
+    gCurrentMove = AI_THINKING_STRUCT->funcResult;
+
+    gMoveResultFlags = TypeCalc(gCurrentMove, sBattler_AI, gBattlerTarget);
+
+    if (gBattleMoveDamage == 120) // Super effective STAB.
+        gBattleMoveDamage = AI_EFFECTIVENESS_x2;
+    if (gBattleMoveDamage == 240)
+        gBattleMoveDamage = AI_EFFECTIVENESS_x4;
+    if (gBattleMoveDamage == 30) // Not very effective STAB.
+        gBattleMoveDamage = AI_EFFECTIVENESS_x0_5;
+    if (gBattleMoveDamage == 15)
+        gBattleMoveDamage = AI_EFFECTIVENESS_x0_25;
+
+    if (gMoveResultFlags & MOVE_RESULT_DOESNT_AFFECT_FOE)
+        gBattleMoveDamage = AI_EFFECTIVENESS_x0;
+
+    // Store gBattleMoveDamage in a u8 variable because gAIScriptPtr[1] is a u8.
+    damageVar = gBattleMoveDamage;
+
+    if (damageVar == gAIScriptPtr[1])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
+    else
+        gAIScriptPtr += 6;
 }
 
 static void Cmd_nop_54(void)
