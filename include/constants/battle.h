@@ -98,6 +98,17 @@
 #define B_OUTCOME_MON_TELEPORTED       10
 #define B_OUTCOME_LINK_BATTLE_RAN      (1 << 7) // 128
 
+//Move targets
+#define MOVE_TARGET_SELECTED            0
+#define MOVE_TARGET_DEPENDS             (1 << 0)
+#define MOVE_TARGET_USER_OR_SELECTED    (1 << 1)
+#define MOVE_TARGET_RANDOM              (1 << 2)
+#define MOVE_TARGET_BOTH                (1 << 3)
+#define MOVE_TARGET_USER                (1 << 4)
+#define MOVE_TARGET_FOES_AND_ALLY       (1 << 5)
+#define MOVE_TARGET_OPPONENTS_FIELD     (1 << 6)
+
+
 // Non-volatile status conditions
 // These persist remain outside of battle and after switching out
 #define STATUS1_NONE             0
