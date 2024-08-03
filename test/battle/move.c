@@ -66,10 +66,9 @@ SINGLE_BATTLE_TEST("Turn order is determined by Speed if priority ties")
     }
 }
 
-SINGLE_BATTLE_TEST("Turn order is determined randomly if priority and Speed tie")
+SINGLE_BATTLE_TEST("Turn order is determined randomly if priority and Speed tie [singles]")
 {
-    KNOWN_FAILING; // The algorithm is significantly biased.
-    PASSES_RANDOMLY(1, 2);
+    PASSES_RANDOMLY(1, 2, RNG_SPEED_TIE);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(1); }
@@ -78,6 +77,60 @@ SINGLE_BATTLE_TEST("Turn order is determined randomly if priority and Speed tie"
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, opponent);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Turn order is determined randomly if priority and Speed tie [doubles]")
+{
+    struct BattlePokemon *order[4] = { NULL, NULL, NULL, NULL };
+    u32 a, b, c, d;
+
+    // TODO: Test all of these in a single PASSES_RANDOMLY pass rather
+    // than 24 PARAMETRIZEd passes.
+    PARAMETRIZE { a = 0; b = 1; c = 2; d = 3; }
+    PARAMETRIZE { a = 0; b = 1; c = 3; d = 2; }
+    PARAMETRIZE { a = 0; b = 2; c = 1; d = 3; }
+    PARAMETRIZE { a = 0; b = 2; c = 3; d = 1; }
+    PARAMETRIZE { a = 0; b = 3; c = 1; d = 2; }
+    PARAMETRIZE { a = 0; b = 3; c = 2; d = 1; }
+    PARAMETRIZE { a = 1; b = 0; c = 2; d = 3; }
+    PARAMETRIZE { a = 1; b = 0; c = 3; d = 2; }
+    PARAMETRIZE { a = 1; b = 2; c = 0; d = 3; }
+    PARAMETRIZE { a = 1; b = 2; c = 3; d = 0; }
+    PARAMETRIZE { a = 1; b = 3; c = 0; d = 2; }
+    PARAMETRIZE { a = 1; b = 3; c = 2; d = 0; }
+    PARAMETRIZE { a = 2; b = 0; c = 1; d = 3; }
+    PARAMETRIZE { a = 2; b = 0; c = 3; d = 1; }
+    PARAMETRIZE { a = 2; b = 1; c = 0; d = 3; }
+    PARAMETRIZE { a = 2; b = 1; c = 3; d = 0; }
+    PARAMETRIZE { a = 2; b = 3; c = 0; d = 1; }
+    PARAMETRIZE { a = 2; b = 3; c = 1; d = 0; }
+    PARAMETRIZE { a = 3; b = 0; c = 1; d = 2; }
+    PARAMETRIZE { a = 3; b = 0; c = 2; d = 1; }
+    PARAMETRIZE { a = 3; b = 1; c = 0; d = 2; }
+    PARAMETRIZE { a = 3; b = 1; c = 2; d = 0; }
+    PARAMETRIZE { a = 3; b = 2; c = 0; d = 1; }
+    PARAMETRIZE { a = 3; b = 2; c = 1; d = 0; }
+
+    order[a] = playerLeft;
+    order[b] = playerRight;
+    order[c] = opponentLeft;
+    order[d] = opponentRight;
+
+    PASSES_RANDOMLY(1, 24, RNG_SPEED_TIE);
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
+        PLAYER(SPECIES_WYNAUT) { Speed(1); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(1); }
+        OPPONENT(SPECIES_WYNAUT) { Speed(1); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_SPLASH); MOVE(playerRight, MOVE_SPLASH); MOVE(opponentLeft, MOVE_SPLASH); MOVE(opponentRight, MOVE_SPLASH); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPLASH, order[0]);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPLASH, order[1]);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPLASH, order[2]);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPLASH, order[3]);
     }
 }
 
