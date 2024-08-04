@@ -4,7 +4,7 @@
 #include "main.h"
 
 // turn on and off the bw summary screen
-#define BW_SUMMARY_SCREEN                           FALSE
+#define BW_SUMMARY_SCREEN                           TRUE
 
 // constants
 #define BW_MAX_MOVE_DESCRIPTION_LENGTH              60      // this only needs to be updated if you use auto-formatting
