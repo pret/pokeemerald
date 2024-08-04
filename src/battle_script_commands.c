@@ -1595,7 +1595,7 @@ u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility)
 {
     s32 i = 0;
     u8 flags = 0;
-    u8 type1 = gSpeciesInfo[targetSpecies].types[0], type2 = gSpeciesInfo[targetSpecies].types[1];
+    u8 type1 = gSpeciesInfo[targetSpecies].types[TYPE_PRIMARY], type2 = gSpeciesInfo[targetSpecies].types[TYPE_SECONDARY];
     u8 moveType;
 
     if (move == MOVE_STRUGGLE)
@@ -4623,8 +4623,8 @@ static void Cmd_switchindataupdate(void)
     for (i = 0; i < sizeof(struct BattlePokemon); i++)
         monData[i] = gBattleBufferB[gActiveBattler][4 + i];
 
-    gBattleMons[gActiveBattler].types[TYPE_PRIMARY] = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[0];
-    gBattleMons[gActiveBattler].types[TYPE_SECONDARY] = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[1];
+    gBattleMons[gActiveBattler].types[TYPE_PRIMARY] = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[TYPE_PRIMARY];
+    gBattleMons[gActiveBattler].types[TYPE_SECONDARY] = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[TYPE_SECONDARY];
     gBattleMons[gActiveBattler].ability = GetAbilityBySpecies(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].abilityNum);
 
     // check knocked off item

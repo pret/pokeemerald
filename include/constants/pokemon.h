@@ -24,9 +24,9 @@
 #define NUMBER_OF_MON_TYPES   18
 
 enum {
-	TYPE_PRIMARY,
-	TYPE_SECONDARY,
-	NUM_TYPE_SLOTS,
+    TYPE_PRIMARY,
+    TYPE_SECONDARY,
+    NUM_TYPE_SLOTS,
 };
 
 // Pokémon egg groups

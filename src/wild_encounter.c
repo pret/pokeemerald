@@ -922,7 +922,7 @@ static bool8 TryGetRandomWildMonIndexByType(const struct WildPokemon *wildMon, u
 
     for (validMonCount = 0, i = 0; i < numMon; i++)
     {
-        if (gSpeciesInfo[wildMon[i].species].types[0] == type || gSpeciesInfo[wildMon[i].species].types[1] == type)
+        if (gSpeciesInfo[wildMon[i].species].types[TYPE_PRIMARY] == type || gSpeciesInfo[wildMon[i].species].types[TYPE_SECONDARY] == type)
             validIndexes[validMonCount++] = i;
     }
 
