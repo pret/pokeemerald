@@ -13,19 +13,17 @@ struct SignatureZMove
     u16 zmove;
 };
 
-bool8 IsZMove(u16 move);
-void QueueZMove(u8 battler, u16 baseMove);
-bool32 IsViableZMove(u8 battler, u16 move);
-bool32 TryChangeZIndicator(u8 battler, u8 moveIndex);
-void CreateZMoveTriggerSprite(u8, bool8);
-void HideZMoveTriggerSprite(void);
-bool32 IsZMoveTriggerSpriteActive(void);
-void DestroyZMoveTriggerSprite(void);
-u16 GetTypeBasedZMove(u16 move, u8 battler);
+bool32 IsZMove(u32 move);
+bool32 CanUseZMove(u32 battler);
+u32 GetUsableZMove(u32 battler, u32 move);
+void ActivateZMove(u32 battler);
+bool32 IsViableZMove(u32 battler, u32 move);
+bool32 TryChangeZTrigger(u32 battler, u32 moveIndex);
+u32 GetTypeBasedZMove(u32 move);
+u32 GetSignatureZMove(u32 move, u32 species, u32 item);
 bool32 MoveSelectionDisplayZMove(u16 zmove, u32 battler);
 void SetZEffect(void);
-bool32 IsZMoveUsable(u8 battler, u16 moveIndex);
-void GetUsableZMoves(u8 battler, u16 *moves);
-u16 GetZMovePower(u16 move);
+void AssignUsableZMoves(u32 battler, u16 *moves);
+u32 GetZMovePower(u32 move);
 
 #endif // GUARD_BATTLE_Z_MOVE_H

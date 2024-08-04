@@ -144,13 +144,16 @@ static inline void Shuffle(void *data, size_t n, size_t size)
  * probability. The array must be known at compile-time (e.g. a global
  * const array).
  *
- * RandomPercentage(tag, t) returns FALSE with probability (1-t)/100,
+ * RandomPercentage(tag, t) returns FALSE with probability 1-t/100,
  * and TRUE with probability t/100.
  *
  * RandomWeighted(tag, w0, w1, ... wN) returns a number from 0 to N
  * inclusive. The return value is proportional to the weights, e.g.
  * RandomWeighted(..., 1, 1) returns 50% 0s and 50% 1s.
- * RandomWeighted(..., 2, 1) returns 2/3 0s and 1/3 1s. */
+ * RandomWeighted(..., 2, 1) returns 2/3 0s and 1/3 1s.
+ *
+ * RandomChance(tag, successes, total) returns FALSE with probability
+ * 1-successes/total, and TRUE with probability successes/total. */
 
 enum RandomTag
 {
@@ -162,6 +165,7 @@ enum RandomTag
     RNG_CUTE_CHARM,
     RNG_DAMAGE_MODIFIER,
     RNG_DIRE_CLAW,
+    RNG_EFFECT_SPORE,
     RNG_FLAME_BODY,
     RNG_FORCE_RANDOM_SWITCH,
     RNG_FROZEN,
@@ -181,10 +185,12 @@ enum RandomTag
     RNG_SECONDARY_EFFECT,
     RNG_SECONDARY_EFFECT_2,
     RNG_SECONDARY_EFFECT_3,
+    RNG_SHED_SKIN,
     RNG_SLEEP_TURNS,
     RNG_SPEED_TIE,
     RNG_STATIC,
     RNG_STENCH,
+    RNG_TOXIC_CHAIN,
     RNG_TRI_ATTACK,
     RNG_QUICK_DRAW,
     RNG_QUICK_CLAW,
@@ -202,6 +208,8 @@ enum RandomTag
             sum += weights[i]; \
         RandomWeightedArray(tag, sum, ARRAY_COUNT(weights), weights); \
     })
+
+#define RandomChance(tag, successes, total) (RandomWeighted(tag, total - successes, successes))
 
 #define RandomPercentage(tag, t) \
     ({ \
@@ -236,5 +244,7 @@ u32 RandomUniformDefault(enum RandomTag, u32 lo, u32 hi);
 u32 RandomUniformExceptDefault(enum RandomTag, u32 lo, u32 hi, bool32 (*reject)(u32));
 u32 RandomWeightedArrayDefault(enum RandomTag, u32 sum, u32 n, const u8 *weights);
 const void *RandomElementArrayDefault(enum RandomTag, const void *array, size_t size, size_t count);
+
+u8 RandomWeightedIndex(u8 *weights, u8 length);
 
 #endif // GUARD_RANDOM_H

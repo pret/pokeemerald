@@ -1,0 +1,31 @@
+=== 0 ===
+Name: Test1
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Double Battle: No
+
+Bubbles (Wobbuffet) (F) @ Assault Vest
+Hasty Nature
+Level: 67
+Ability: Telepathy
+IVs: 25 HP / 26 Atk / 27 Def / 29 SpA / 30 SpD / 28 Spe
+EVs: 252 HP / 4 SpA / 252 Spe
+Happiness: 42
+Shiny: Yes
+Ball: Master Ball
+Dynamax Level: 5
+- Air Slash
+- Barrier
+- Solar Beam
+- Explosion
+
+Wobbuffet
+Level: 5
+Ability: Shadow Tag
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Wynaut
+Level: 5
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe

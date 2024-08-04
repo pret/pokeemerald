@@ -23,6 +23,7 @@ $(MAPS_DIR)/groups.inc: $(MAPS_DIR)/map_groups.json
 $(MAPS_DIR)/connections.inc: $(MAPS_DIR)/groups.inc ;
 $(MAPS_DIR)/events.inc: $(MAPS_DIR)/connections.inc ;
 $(MAPS_DIR)/headers.inc: $(MAPS_DIR)/events.inc ;
+$(DATA_SRC_SUBDIR)/map_group_count.h: $(MAPS_DIR)/headers.inc ;
 include/constants/map_groups.h: $(MAPS_DIR)/headers.inc ;
 
 $(LAYOUTS_DIR)/layouts.inc: $(LAYOUTS_DIR)/layouts.json

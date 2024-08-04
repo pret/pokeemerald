@@ -73,7 +73,7 @@ SINGLE_BATTLE_TEST("Color Change changes the user to Electric type if hit by a m
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PSYCHO_CUT, player);
         ABILITY_POPUP(opponent, ABILITY_COLOR_CHANGE);
-        MESSAGE("Foe Wobbuffet's Color Change made it the Electr type!");
+        MESSAGE("Foe Wobbuffet's Color Change made it the Electric type!");
     }
 }
 
@@ -90,7 +90,7 @@ SINGLE_BATTLE_TEST("Color Change changes the type when a Pokemon is hit by Futur
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FUTURE_SIGHT, player);
         MESSAGE("Foe Snorlax took the Future Sight attack!");
         ABILITY_POPUP(opponent, ABILITY_COLOR_CHANGE);
-        MESSAGE("Foe Snorlax's Color Change made it the Psychc type!");
+        MESSAGE("Foe Snorlax's Color Change made it the Psychic type!");
     }
 }
 

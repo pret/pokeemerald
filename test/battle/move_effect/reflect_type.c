@@ -171,7 +171,7 @@ SINGLE_BATTLE_TEST("Reflect Type defaults to Normal type for the user's type1 an
         HP_BAR(player);
         MESSAGE("Foe Arcanine burned itself out!");
         // Turn 2
-        MESSAGE("Wobbuffet used Forest'sCurs!");
+        MESSAGE("Wobbuffet used Forest's Curse!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FORESTS_CURSE, player);
         MESSAGE("Grass type was added to Foe Arcanine!");
         // Turn 3

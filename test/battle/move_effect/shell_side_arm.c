@@ -31,7 +31,7 @@ SINGLE_BATTLE_TEST("Shell Side Arm can be mirror coated if it is special")
     }
 }
 
-SINGLE_BATTLE_TEST("Shell Side Arm does not change catogory mid-turn")
+SINGLE_BATTLE_TEST("Shell Side Arm does not change category mid-turn")
 {
     s16 damage[3];
 
@@ -56,7 +56,7 @@ SINGLE_BATTLE_TEST("Shell Side Arm does not change catogory mid-turn")
     }
 }
 
-DOUBLE_BATTLE_TEST("Shell Side Arm is choosing it's type for each battler on the field")
+DOUBLE_BATTLE_TEST("Shell Side Arm chooses its category for each battler on the field")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Speed(10); Moves(MOVE_SHELL_SIDE_ARM); }

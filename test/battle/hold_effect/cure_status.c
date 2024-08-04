@@ -72,7 +72,7 @@ SINGLE_BATTLE_TEST("Rawst and Lum Berries cure burn")
     }
 }
 
-SINGLE_BATTLE_TEST("Aspear and Lum Berries cure freeze")
+SINGLE_BATTLE_TEST("Aspear and Lum Berries cure freeze or frostbite")
 {
     u16 item;
 
@@ -88,9 +88,9 @@ SINGLE_BATTLE_TEST("Aspear and Lum Berries cure freeze")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ICE_PUNCH, player);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_FRZ, opponent);
-        STATUS_ICON(opponent, freeze: TRUE);
+        FREEZE_OR_FROSTBURN_STATUS(opponent, TRUE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
-        STATUS_ICON(opponent, freeze: FALSE);
+        FREEZE_OR_FROSTBURN_STATUS(opponent, FALSE);
     }
 }
 
@@ -249,7 +249,7 @@ SINGLE_BATTLE_TEST("Player Pokemon can be further poisoned with Toxic spikes aft
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC_SPIKES, opponent);
         MESSAGE("Poison Spikes were scattered all around your team's feet!");
         // 1st switch-in
-        MESSAGE("Go! Wobbuffet!");
+        SEND_IN_MESSAGE("Wobbuffet");
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, player);
         STATUS_ICON(player, poison: TRUE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
@@ -260,7 +260,7 @@ SINGLE_BATTLE_TEST("Player Pokemon can be further poisoned with Toxic spikes aft
         }
         STATUS_ICON(player, poison: FALSE);
         // 2nd switch-in
-        MESSAGE("Go! Wynaut!");
+        SEND_IN_MESSAGE("Wynaut");
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, player);
         STATUS_ICON(player, poison: TRUE);
     }

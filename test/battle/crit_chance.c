@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(B_CRIT_CHANCE >= GEN_7);
 }
 
-SINGLE_BATTLE_TEST("Side effected by Lucky Chant blocks critical hits")
+SINGLE_BATTLE_TEST("Crit Chance: Side effected by Lucky Chant blocks critical hits")
 {
     GIVEN {
         ASSUME(gMovesInfo[MOVE_LUCKY_CHANT].effect == EFFECT_LUCKY_CHANT);
@@ -20,7 +20,7 @@ SINGLE_BATTLE_TEST("Side effected by Lucky Chant blocks critical hits")
     }
 }
 
-SINGLE_BATTLE_TEST("Battle Armor and Shell Armor block critical hits")
+SINGLE_BATTLE_TEST("Crit Chance: Battle Armor and Shell Armor block critical hits")
 {
     u32 species;
     u32 ability;
@@ -39,7 +39,7 @@ SINGLE_BATTLE_TEST("Battle Armor and Shell Armor block critical hits")
     }
 }
 
-SINGLE_BATTLE_TEST("Flag ignoresTargetAbility ignores Battle Armor and Shell Armor")
+SINGLE_BATTLE_TEST("Crit Chance: Flag ignoresTargetAbility ignores Battle Armor and Shell Armor")
 {
     u32 species;
     u32 ability;
@@ -59,7 +59,7 @@ SINGLE_BATTLE_TEST("Flag ignoresTargetAbility ignores Battle Armor and Shell Arm
     }
 }
 
-SINGLE_BATTLE_TEST("Mold Breaker, Teravolt and Turboblaze ignore Battle Armor and Shell Armor")
+SINGLE_BATTLE_TEST("Crit Chance: Mold Breaker, Teravolt and Turboblaze ignore Battle Armor and Shell Armor")
 {
     u32 j;
     static const u32 pokemonPlayer[][2] =
@@ -102,7 +102,7 @@ SINGLE_BATTLE_TEST("Mold Breaker, Teravolt and Turboblaze ignore Battle Armor an
     }
 }
 
-SINGLE_BATTLE_TEST("User effected by Laser Focus causes moves to result in a critical hit")
+SINGLE_BATTLE_TEST("Crit Chance: User effected by Laser Focus causes moves to result in a critical hit")
 {
     GIVEN {
         ASSUME(gMovesInfo[MOVE_LASER_FOCUS].effect == EFFECT_LASER_FOCUS);
@@ -118,7 +118,7 @@ SINGLE_BATTLE_TEST("User effected by Laser Focus causes moves to result in a cri
     }
 }
 
-SINGLE_BATTLE_TEST("If the target is poisoned the ability Merciless causes a move to result in a critical hit")
+SINGLE_BATTLE_TEST("Crit Chance: If the target is poisoned the ability Merciless causes a move to result in a critical hit")
 {
     GIVEN {
         PLAYER(SPECIES_MAREANIE) { Ability(ABILITY_MERCILESS); }
@@ -131,7 +131,7 @@ SINGLE_BATTLE_TEST("If the target is poisoned the ability Merciless causes a mov
     }
 }
 
-SINGLE_BATTLE_TEST("Focus Energy increases the user's critical hit ratio by two stage")
+SINGLE_BATTLE_TEST("Crit Chance: Focus Energy increases the user's critical hit ratio by two stage")
 {
     PASSES_RANDOMLY(1, 2, RNG_CRITICAL_HIT);
     GIVEN {
@@ -148,7 +148,7 @@ SINGLE_BATTLE_TEST("Focus Energy increases the user's critical hit ratio by two 
     }
 }
 
-SINGLE_BATTLE_TEST("High crit rate increases the critical hit ratio by one stage")
+SINGLE_BATTLE_TEST("Crit Chance: High crit rate increases the critical hit ratio by one stage")
 {
     PASSES_RANDOMLY(1, 8, RNG_CRITICAL_HIT);
     GIVEN {
@@ -163,7 +163,7 @@ SINGLE_BATTLE_TEST("High crit rate increases the critical hit ratio by one stage
     }
 }
 
-SINGLE_BATTLE_TEST("Super Luck increases the critical hit ratio by one stage")
+SINGLE_BATTLE_TEST("Crit Chance: Super Luck increases the critical hit ratio by one stage")
 {
     PASSES_RANDOMLY(1, 8, RNG_CRITICAL_HIT);
     GIVEN {
@@ -177,7 +177,7 @@ SINGLE_BATTLE_TEST("Super Luck increases the critical hit ratio by one stage")
     }
 }
 
-SINGLE_BATTLE_TEST("Scope Lens increases the critical hit ratio by one stage")
+SINGLE_BATTLE_TEST("Crit Chance: Scope Lens increases the critical hit ratio by one stage")
 {
     PASSES_RANDOMLY(1, 8, RNG_CRITICAL_HIT);
     GIVEN {
@@ -192,7 +192,7 @@ SINGLE_BATTLE_TEST("Scope Lens increases the critical hit ratio by one stage")
     }
 }
 
-SINGLE_BATTLE_TEST("High crit rate, Super Luck and Scope Lens cause the move to result in a critical hit")
+SINGLE_BATTLE_TEST("Crit Chance: High crit rate, Super Luck and Scope Lens cause the move to result in a critical hit")
 {
     GIVEN {
         ASSUME(gMovesInfo[MOVE_SLASH].criticalHitStage == 1);
@@ -207,7 +207,7 @@ SINGLE_BATTLE_TEST("High crit rate, Super Luck and Scope Lens cause the move to 
     }
 }
 
-SINGLE_BATTLE_TEST("Signature items Leek and Lucky Punch increase the critical hit ratio by 2 stages")
+SINGLE_BATTLE_TEST("Crit Chance: Signature items Leek and Lucky Punch increase the critical hit ratio by 2 stages")
 {
     u32 species;
     u32 item;
@@ -232,7 +232,7 @@ SINGLE_BATTLE_TEST("Signature items Leek and Lucky Punch increase the critical h
     }
 }
 
-SINGLE_BATTLE_TEST("Dire Hit increases a battler's critical hit chance by 2 stages")
+SINGLE_BATTLE_TEST("Crit Chance: Dire Hit increases a battler's critical hit chance by 2 stages")
 {
     PASSES_RANDOMLY(1, 2, RNG_CRITICAL_HIT);
     GIVEN {
@@ -250,7 +250,7 @@ SINGLE_BATTLE_TEST("Dire Hit increases a battler's critical hit chance by 2 stag
     }
 }
 
-SINGLE_BATTLE_TEST("Focus Energy increases critical hit ratio by two")
+SINGLE_BATTLE_TEST("Crit Chance: Focus Energy increases critical hit ratio by two")
 {
     PASSES_RANDOMLY(8, 8, RNG_CRITICAL_HIT);
     GIVEN {
@@ -269,7 +269,7 @@ SINGLE_BATTLE_TEST("Focus Energy increases critical hit ratio by two")
     }
 }
 
-SINGLE_BATTLE_TEST("Dragon Cheer fails in a single battle")
+SINGLE_BATTLE_TEST("Crit Chance: Dragon Cheer fails in a single battle")
 {
     GIVEN {
         ASSUME(gMovesInfo[MOVE_DRAGON_CHEER].effect == EFFECT_DRAGON_CHEER);
@@ -282,7 +282,7 @@ SINGLE_BATTLE_TEST("Dragon Cheer fails in a single battle")
     }
 }
 
-DOUBLE_BATTLE_TEST("Dragon Cheer increases critical hit ratio by one on non Dragon types")
+DOUBLE_BATTLE_TEST("Crit Chance: Dragon Cheer increases critical hit ratio by one on non Dragon types")
 {
     PASSES_RANDOMLY(1, 8, RNG_CRITICAL_HIT);
     GIVEN {
@@ -302,7 +302,7 @@ DOUBLE_BATTLE_TEST("Dragon Cheer increases critical hit ratio by one on non Drag
     }
 }
 
-DOUBLE_BATTLE_TEST("Dragon Cheer increases critical hit ratio by two on Dragon types")
+DOUBLE_BATTLE_TEST("Crit Chance: Dragon Cheer increases critical hit ratio by two on Dragon types")
 {
     PASSES_RANDOMLY(1, 2, RNG_CRITICAL_HIT);
     GIVEN {
@@ -322,7 +322,7 @@ DOUBLE_BATTLE_TEST("Dragon Cheer increases critical hit ratio by two on Dragon t
     }
 }
 
-DOUBLE_BATTLE_TEST("Dragon Cheer fails if critical hit stage was already increased by Focus Energy")
+DOUBLE_BATTLE_TEST("Crit Chance: Dragon Cheer fails if critical hit stage was already increased by Focus Energy")
 {
     GIVEN {
         ASSUME(gMovesInfo[MOVE_SLASH].criticalHitStage == 1);

@@ -400,7 +400,7 @@ SINGLE_BATTLE_TEST("Clear Body, Full Metal Body, and White Smoke don't prevent S
             MESSAGE("Foe Torkoal used Celebrate!");
         else
             MESSAGE("Foe Metang used Celebrate!");
-        MESSAGE("Wobbuffet used SpectrlThief!");
+        MESSAGE("Wobbuffet used Spectral Thief!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPECTRAL_THIEF, player);
         NOT ABILITY_POPUP(opponent, ability);
         MESSAGE("Wobbuffet used Celebrate!");

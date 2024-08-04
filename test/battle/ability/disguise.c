@@ -121,3 +121,16 @@ SINGLE_BATTLE_TEST("Disguised Mimikyu takes damage from Rough Skin without break
         EXPECT_EQ(player->species, SPECIES_MIMIKYU_DISGUISED);
     }
 }
+
+SINGLE_BATTLE_TEST("Disguised Mimikyu is ignored by Mold Breaker")
+{
+    GIVEN {
+        PLAYER(SPECIES_MIMIKYU_DISGUISED) { Ability(ABILITY_DISGUISE); }
+        OPPONENT(SPECIES_PINSIR) { Ability(ABILITY_MOLD_BREAKER); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_AERIAL_ACE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_AERIAL_ACE, opponent);
+        NOT ABILITY_POPUP(player, ABILITY_DISGUISE);
+    }
+}

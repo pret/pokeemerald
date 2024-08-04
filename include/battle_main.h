@@ -23,6 +23,20 @@ struct MultiPartnerMenuPokemon
 #define BOUNCE_MON          0x0
 #define BOUNCE_HEALTHBOX    0x1
 
+enum {
+    FIRST_TURN_EVENTS_START,
+    FIRST_TURN_EVENTS_OVERWORLD_WEATHER,
+    FIRST_TURN_EVENTS_TERRAIN,
+    FIRST_TURN_EVENTS_STARTING_STATUS,
+    FIRST_TURN_EVENTS_TOTEM_BOOST,
+    FIRST_TURN_EVENTS_NEUTRALIZING_GAS,
+    FIRST_TURN_EVENTS_SWITCH_IN_ABILITIES,
+    FIRST_TURN_EVENTS_OPPORTUNIST_1,
+    FIRST_TURN_EVENTS_ITEM_EFFECTS,
+    FIRST_TURN_EVENTS_OPPORTUNIST_2,
+    FIRST_TURN_EVENTS_END,
+};
+
 void CB2_InitBattle(void);
 void BattleMainCB2(void);
 void CB2_QuitRecordedBattle(void);
@@ -43,6 +57,7 @@ void SpriteCB_FaintSlideAnim(struct Sprite *sprite);
 void DoBounceEffect(u8 battler, u8 which, s8 delta, s8 amplitude);
 void EndBounceEffect(u8 battler, u8 which);
 void SpriteCB_PlayerMonFromBall(struct Sprite *sprite);
+void SpriteCB_PlayerMonSlideIn(struct Sprite *sprite);
 void SpriteCB_TrainerThrowObject(struct Sprite *sprite);
 void AnimSetCenterToCornerVecX(struct Sprite *sprite);
 void BeginBattleIntroDummy(void);
@@ -77,6 +92,7 @@ extern const struct SpriteTemplate gUnusedBattleInitSprite;
 extern const struct OamData gOamData_BattleSpriteOpponentSide;
 extern const struct OamData gOamData_BattleSpritePlayerSide;
 extern const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES];
+extern const uq4_12_t gTypeEffectivenessTable[NUMBER_OF_MON_TYPES][NUMBER_OF_MON_TYPES];
 
 extern const u8 gStatusConditionString_PoisonJpn[8];
 extern const u8 gStatusConditionString_SleepJpn[8];

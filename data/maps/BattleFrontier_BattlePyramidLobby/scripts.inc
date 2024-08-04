@@ -59,6 +59,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_GiveBattlePoints::
 	special LoadPlayerParty
 	pyramid_clearhelditems
 	special HealPlayerParty
+	callnative UpdateFollowingPokemon
 	message BattleFrontier_BattlePyramidLobby_Text_UsedBattleBagWillBeKept
 	waitmessage
 	playse SE_EXP_MAX
@@ -83,6 +84,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_LostChallenge::
 	special LoadPlayerParty
 	pyramid_clearhelditems
 	special HealPlayerParty
+	callnative UpdateFollowingPokemon
 	lockall
 	message BattleFrontier_BattlePyramidLobby_Text_DisappointingHereIsBag
 	waitmessage
@@ -132,6 +134,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_TryEnterChallenge::
 	frontier_set FRONTIER_DATA_LVL_MODE, VAR_RESULT
 	msgbox BattleFrontier_BattlePyramidLobby_Text_SelectThreeMons, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
+	callnative RemoveFollowingPokemon
 	call BattleFrontier_EventScript_GetLvlMode
 	copyvar VAR_0x8004, VAR_RESULT
 	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
@@ -196,6 +199,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_CancelChallengeSaveFailed::
 
 BattleFrontier_BattlePyramidLobby_EventScript_LoadPartyAndCancelChallenge::
 	special LoadPlayerParty
+	callnative UpdateFollowingPokemon
 BattleFrontier_BattlePyramidLobby_EventScript_CancelChallenge::
 	msgbox BattleFrontier_BattlePyramidLobby_Text_AwaitFutureChallenge, MSGBOX_DEFAULT
 BattleFrontier_BattlePyramidLobby_EventScript_EndCancelChallenge::

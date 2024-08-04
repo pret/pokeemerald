@@ -5,12 +5,6 @@
 // behaviors. These have been tested in-game, in double, in multi, and in link battles. AI will always
 // revive their first fainted party member in order.
 
-#if B_EXPANDED_MOVE_NAMES
-#define REVIVAL_BLESSING "Revival Blessing"
-#else
-#define REVIVAL_BLESSING "RevivlBlesng"
-#endif
-
 ASSUMPTIONS
 {
     ASSUME(gMovesInfo[MOVE_REVIVAL_BLESSING].effect == EFFECT_REVIVAL_BLESSING);
@@ -26,7 +20,7 @@ SINGLE_BATTLE_TEST("Revival Blessing revives a chosen fainted party member for t
     } WHEN {
         TURN { MOVE(player, MOVE_REVIVAL_BLESSING); SEND_OUT(player, 2); }
     } SCENE {
-        MESSAGE("Wobbuffet used " REVIVAL_BLESSING "!");
+        MESSAGE("Wobbuffet used Revival Blessing!");
         MESSAGE("Wynaut was revived and is ready to fight again!");
     }
 }
@@ -41,7 +35,7 @@ SINGLE_BATTLE_TEST("Revival Blessing revives a fainted party member for an oppon
     } WHEN {
         TURN { MOVE(opponent, MOVE_REVIVAL_BLESSING); SEND_OUT(opponent, 1); }
     } SCENE {
-        MESSAGE("Foe Raichu used " REVIVAL_BLESSING "!");
+        MESSAGE("Foe Raichu used Revival Blessing!");
         MESSAGE("Pichu was revived and is ready to fight again!");
     }
 }
@@ -54,7 +48,7 @@ SINGLE_BATTLE_TEST("Revival Blessing fails if no party members are fainted")
     } WHEN {
         TURN { MOVE(player, MOVE_REVIVAL_BLESSING); }
     } SCENE {
-        MESSAGE("Wobbuffet used " REVIVAL_BLESSING "!");
+        MESSAGE("Wobbuffet used Revival Blessing!");
         MESSAGE("But it failed!");
     }
 }
@@ -82,10 +76,10 @@ TO_DO_BATTLE_TEST("Revival Blessing cannot revive a partner's party member");
 //         TURN { MOVE(user, MOVE_REVIVAL_BLESSING); }
 //     } SCENE {
 //         if (user == opponentLeft) {
-//             MESSAGE("Foe Wobbuffet used " REVIVAL_BLESSING "!");
+//             MESSAGE("Foe Wobbuffet used Revival Blessing!");
 //             MESSAGE("But it failed!");
 //         } else {
-//             MESSAGE("Foe Wynaut used " REVIVAL_BLESSING "!");
+//             MESSAGE("Foe Wynaut used Revival Blessing!");
 //             MESSAGE("Wynaut was revived and is ready to fight again!");
 //         }
 //     }
@@ -108,7 +102,7 @@ TO_DO_BATTLE_TEST("Revived battlers still lose their turn");
 //     } SCENE {
 //         MESSAGE("Wobbuffet used Tackle!");
 //         MESSAGE("Foe Wynaut fainted!");
-//         MESSAGE("Foe Wobbuffet used " REVIVAL_BLESSING "!");
+//         MESSAGE("Foe Wobbuffet used Revival Blessing!");
 //         MESSAGE("Wynaut was revived and is ready to fight again!");
 //         NOT { MESSAGE("Wynaut used Celebrate!"); }
 //     }

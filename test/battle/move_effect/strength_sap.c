@@ -190,7 +190,7 @@ SINGLE_BATTLE_TEST("Strength Sap makes attacker lose HP if target's ability is L
         MESSAGE("It sucked up the liquid ooze!");
         if (atkStat >= 490) {
             MESSAGE("Wobbuffet fainted!");
-            MESSAGE("Go! Wobbuffet!");
+            SEND_IN_MESSAGE("Wobbuffet");
         }
     } THEN {
         EXPECT_EQ(lostHp, atkStat);

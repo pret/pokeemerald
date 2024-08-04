@@ -79,3 +79,20 @@ SINGLE_BATTLE_TEST("Trace will copy an opponent's ability whenever it has the ch
         MESSAGE("Ralts TRACED Foe Torchic's Blaze!");
     }
 }
+
+DOUBLE_BATTLE_TEST("Trace respects the turn order")
+{
+    GIVEN {
+        PLAYER(SPECIES_DEOXYS_SPEED) { Speed(40); Ability(ABILITY_PRESSURE); }
+        PLAYER(SPECIES_GARDEVOIR) { Speed(20); Ability(ABILITY_TRACE); }
+        OPPONENT(SPECIES_HIPPOWDON) { Speed(10); Ability(ABILITY_SAND_STREAM); }
+        OPPONENT(SPECIES_DEOXYS_SPEED) { Speed(30); Ability(ABILITY_PRESSURE); }
+    } WHEN {
+        TURN { }
+    } SCENE {
+        ABILITY_POPUP(playerLeft, ABILITY_PRESSURE);
+        ABILITY_POPUP(opponentRight, ABILITY_PRESSURE);
+        ABILITY_POPUP(playerRight, ABILITY_TRACE);
+        ABILITY_POPUP(opponentLeft, ABILITY_SAND_STREAM);
+    }
+}

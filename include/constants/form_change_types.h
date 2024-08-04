@@ -63,7 +63,7 @@
 #define FORM_CHANGE_END_BATTLE_TERRAIN          8
 
 // Form change that activates when the Pokémon is switched out in battle.
-// - No parameters.
+// param1: ability to check, optional
 #define FORM_CHANGE_BATTLE_SWITCH               9
 
 // Form change that activates when the Pokémon's HP % passes a certain threshold.
@@ -123,6 +123,15 @@
 #define FORM_CHANGE_STATUS                      20
 
 // Form change that activates after move is used. Currently only used for activating Gulp Missile.
-#define FORM_CHANGE_HIT_BY_MOVE                     21
+#define FORM_CHANGE_HIT_BY_MOVE                 21
+
+// Form change that activates when terastallized as as a specific type
+// param1: tera type
+#define FORM_CHANGE_BATTLE_TERASTALLIZATION     22
+
+// Form change that activates at midnight after a certain amount of days has passed.
+// Adding this form change will automatically make the countdown start as soon the Pokémon changes into a species other than the one specified for this form change.
+// param1: amount of days
+#define FORM_CHANGE_DAYS_PASSED                 23
 
 #endif // GUARD_CONSTANTS_FORM_CHANGE_TYPES_H

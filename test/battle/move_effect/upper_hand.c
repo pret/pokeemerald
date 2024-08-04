@@ -116,3 +116,19 @@ SINGLE_BATTLE_TEST("Upper Hand is boosted by Sheer Force")
         HP_BAR(player);
     }
 }
+
+AI_SINGLE_BATTLE_TEST("AI won't use Upper Hand unless it has seen a priority move")
+{
+    u16 move;
+    PARAMETRIZE { move = MOVE_TACKLE; }
+    PARAMETRIZE { move = MOVE_QUICK_ATTACK; }
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        ASSUME(gMovesInfo[MOVE_QUICK_ATTACK].priority == 1);
+        PLAYER(SPECIES_WOBBUFFET) {Moves(move); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_UPPER_HAND, MOVE_KARATE_CHOP); }
+    } WHEN {
+        TURN { MOVE(player, move); EXPECT_MOVE(opponent, MOVE_KARATE_CHOP); }
+        TURN { MOVE(player, move); EXPECT_MOVE(opponent, move == MOVE_QUICK_ATTACK ? MOVE_UPPER_HAND : MOVE_KARATE_CHOP); }
+    }
+}

@@ -10,7 +10,7 @@ SINGLE_BATTLE_TEST("Psychic Terrain protects grounded battlers from priority mov
         TURN { MOVE(player, MOVE_PSYCHIC_TERRAIN); }
         TURN { MOVE(player, MOVE_QUICK_ATTACK); MOVE(opponent, MOVE_QUICK_ATTACK); }
     } SCENE {
-        MESSAGE("Claydol used PsychcTrrain!");
+        MESSAGE("Claydol used Psychic Terrain!");
         MESSAGE("Claydol cannot use Quick Attack!");
         NOT { HP_BAR(opponent); }
         MESSAGE("Foe Wobbuffet used Quick Attack!");
@@ -31,7 +31,7 @@ SINGLE_BATTLE_TEST("Psychic Terrain activates Psychic Seed and Mimicry")
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
         MESSAGE("Using Psychic Seed, the Sp. Def of Wobbuffet rose!");
         ABILITY_POPUP(opponent);
-        MESSAGE("Foe Stunfisk's type changed to Psychc!");
+        MESSAGE("Foe Stunfisk's type changed to Psychic!");
     } THEN {
         EXPECT_EQ(gBattleMons[B_POSITION_OPPONENT_LEFT].type1, TYPE_PSYCHIC);
     }
@@ -69,7 +69,7 @@ SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves that target the
         TURN { MOVE(player, MOVE_PSYCHIC_TERRAIN); }
         TURN { MOVE(player, MOVE_RECOVER); }
     } SCENE {
-        MESSAGE("Sableye used PsychcTrrain!");
+        MESSAGE("Sableye used Psychic Terrain!");
         MESSAGE("Sableye used Recover!");
         HP_BAR(player);
     }
@@ -84,7 +84,7 @@ SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves that target all
         TURN { MOVE(player, MOVE_PSYCHIC_TERRAIN); }
         TURN { MOVE(player, MOVE_HAZE); }
     } SCENE {
-        MESSAGE("Sableye used PsychcTrrain!");
+        MESSAGE("Sableye used Psychic Terrain!");
         MESSAGE("Sableye used Haze!");
     }
 }
@@ -98,7 +98,7 @@ SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves that target all
         TURN { MOVE(player, MOVE_PSYCHIC_TERRAIN); }
         TURN { MOVE(player, MOVE_SPIKES); }
     } SCENE {
-        MESSAGE("Sableye used PsychcTrrain!");
+        MESSAGE("Sableye used Psychic Terrain!");
         MESSAGE("Sableye used Spikes!");
     }
 }
@@ -114,7 +114,7 @@ DOUBLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves that target all
         TURN { MOVE(playerLeft, MOVE_PSYCHIC_TERRAIN); }
         TURN { MOVE(playerLeft, MOVE_HEAL_PULSE, target: playerRight); }
     } SCENE {
-        MESSAGE("Sableye used PsychcTrrain!");
+        MESSAGE("Sableye used Psychic Terrain!");
         MESSAGE("Sableye used Heal Pulse!");
     }
 }
@@ -128,7 +128,7 @@ SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority field moves")
         TURN { MOVE(player, MOVE_PSYCHIC_TERRAIN); }
         TURN { MOVE(player, MOVE_SUNNY_DAY); }
     } SCENE {
-        MESSAGE("Sableye used PsychcTrrain!");
+        MESSAGE("Sableye used Psychic Terrain!");
         MESSAGE("Sableye used Sunny Day!");
     }
 }

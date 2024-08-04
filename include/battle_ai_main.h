@@ -1,6 +1,9 @@
 #ifndef GUARD_BATTLE_AI_MAIN_H
 #define GUARD_BATTLE_AI_MAIN_H
 
+
+typedef s32 (*AiScoreFunc)(u32, u32, u32, s32);
+
 #define UNKNOWN_NO_OF_HITS UINT32_MAX
 
 // return vals for BattleAI_ChooseMoveOrAction
@@ -29,25 +32,25 @@
 #define STAT_CHANGE_ACC        10
 #define STAT_CHANGE_EVASION    11
 
-#define BEST_DAMAGE_MOVE     1  // Move with the most amount of hits with the best accuracy/effect
-#define POWERFUL_STATUS_MOVE 10 // Moves with this score will be chosen over a move that faints target
+#define BEST_DAMAGE_MOVE         1  // Move with the most amount of hits with the best accuracy/effect
+#define POWERFUL_STATUS_MOVE     10 // Moves with this score will be chosen over a move that faints target
+#define NO_DAMAGE_OR_FAILS      -20 // Move fails or does no damage
 
-// Temporary scores that are added together to determine a final score at the at of AI_CalcMoveEffectScore
+// Scores given in AI_CalcMoveEffectScore
+#define NO_INCREASE      0
 #define WEAK_EFFECT      1
 #define DECENT_EFFECT    2
-#define GOOD_EFFECT      4
-#define BEST_EFFECT      6
-
-// AI_CalcMoveEffectScore final score
-#define NOT_GOOD_ENOUGH           0 // Not worth using over a damaging move
-#define GOOD_MOVE_EFFECTS         2 // Worth using over a damaging move
-#define PREFERRED_MOVE_EFFECTS    3 // Worth using over a damagin move and is better then DECENT_EFFECT
-#define BEST_MOVE_EFFECTS         4 // Best possible move effects. E.g. stat boosting moves that boost multiply moves
+#define GOOD_EFFECT      3
+#define BEST_EFFECT      4
 
 // AI_TryToFaint
 #define FAST_KILL      6 // AI is faster and faints target
 #define SLOW_KILL      4 // AI is slower and faints target
 #define LAST_CHANCE    2 // AI faints to target. It should try and do damage with a priority move
+
+// AI_Risky
+#define STRONG_RISKY_EFFECT     3
+#define AVERAGE_RISKY_EFFECT    2
 
 #include "test_runner.h"
 
@@ -64,6 +67,14 @@
     { \
         TestRunner_Battle_AIAdjustScore(__FILE__, __LINE__, sBattler_AI, AI_THINKING_STRUCT->movesetIndex, val); \
         score += val; \
+    } while (0) \
+
+#define ADJUST_AND_RETURN_SCORE(val) \
+    do \
+    { \
+        TestRunner_Battle_AIAdjustScore(__FILE__, __LINE__, sBattler_AI, AI_THINKING_STRUCT->movesetIndex, val); \
+        score += val; \
+        return score; \
     } while (0) \
 
 #define ADJUST_SCORE_PTR(val) \
@@ -94,6 +105,7 @@ void Ai_InitPartyStruct(void);
 void Ai_UpdateSwitchInData(u32 battler);
 void Ai_UpdateFaintData(u32 battler);
 void SetAiLogicDataForTurn(struct AiLogicData *aiData);
+void ResetDynamicAiFunc(void);
 
 extern u8 sBattler_AI;
 

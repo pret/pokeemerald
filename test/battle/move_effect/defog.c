@@ -158,8 +158,8 @@ DOUBLE_BATTLE_TEST("Defog lowers evasiveness by 1 and removes Stealth Rock and S
             MESSAGE("The sticky web has disappeared from the ground around your team!");
         }
         // Switch happens
-        MESSAGE("Wobbuffet, that's enough! Come back!");
-        MESSAGE("Go! Wobbuffet!");
+        SWITCH_OUT_MESSAGE("Wobbuffet");
+        SEND_IN_MESSAGE("Wobbuffet");
         if (move != MOVE_DEFOG) {
             HP_BAR(playerLeft);
             MESSAGE("Pointed stones dug into Wobbuffet!");
@@ -201,8 +201,8 @@ SINGLE_BATTLE_TEST("Defog lowers evasiveness by 1 and removes Spikes from player
             MESSAGE("The spikes disappeared from the ground around your team!");
         }
         // Switch happens
-        MESSAGE("Wobbuffet, that's enough! Come back!");
-        MESSAGE("Go! Wobbuffet!");
+        SWITCH_OUT_MESSAGE("Wobbuffet");
+        SEND_IN_MESSAGE("Wobbuffet");
         if (move != MOVE_DEFOG) {
             HP_BAR(player);
             MESSAGE("Wobbuffet is hurt by spikes!");
