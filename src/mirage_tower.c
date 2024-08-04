@@ -4,7 +4,6 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_camera.h"
-#include "field_effect.h"
 #include "fieldmap.h"
 #include "gpu_regs.h"
 #include "menu.h"
@@ -155,7 +154,7 @@ static const union AnimCmd *const sAnims_FallingFossil[] =
 static const struct SpriteTemplate sSpriteTemplate_FallingFossil =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_1,
+    .paletteTag = TAG_NONE,
     .oam = &sOamData_FallingFossil,
     .anims = sAnims_FallingFossil,
     .images = NULL,
@@ -687,7 +686,6 @@ static void Task_FossilFallAndSink(u8 taskId)
         {
             struct SpriteTemplate fossilTemplate = sSpriteTemplate_FallingFossil;
             fossilTemplate.images = sFallingFossil->frameImage;
-            LoadObjectEventPalette(sSpriteTemplate_FallingFossil.paletteTag);
             sFallingFossil->spriteId = CreateSprite(&fossilTemplate, 128, -16, 1);
             gSprites[sFallingFossil->spriteId].centerToCornerVecX = 0;
             gSprites[sFallingFossil->spriteId].data[0] = gSprites[sFallingFossil->spriteId].x;
@@ -708,9 +706,6 @@ static void Task_FossilFallAndSink(u8 taskId)
         // Wait for fossil to finish falling / disintegrating
         if (gSprites[sFallingFossil->spriteId].callback != SpriteCallbackDummy)
             return;
-        gSprites[sFallingFossil->spriteId].inUse = FALSE;
-        FieldEffectFreePaletteIfUnused(gSprites[sFallingFossil->spriteId].oam.paletteNum);
-        gSprites[sFallingFossil->spriteId].inUse = TRUE;
         DestroySprite(&gSprites[sFallingFossil->spriteId]);
         FREE_AND_SET_NULL(sFallingFossil->disintegrateRand);;
         FREE_AND_SET_NULL(sFallingFossil->frameImage);

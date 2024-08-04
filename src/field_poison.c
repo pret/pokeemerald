@@ -3,7 +3,6 @@
 #include "battle_pike.h"
 #include "battle_pyramid.h"
 #include "event_data.h"
-#include "event_object_movement.h"
 #include "field_message_box.h"
 #include "field_poison.h"
 #include "fldeff_misc.h"
@@ -101,7 +100,6 @@ static void Task_TryFieldPoisonWhiteOut(u8 taskId)
         else
         {
             gSpecialVar_Result = FLDPSN_NO_WHITEOUT;
-            UpdateFollowingPokemon();
         }
         ScriptContext_Enable();
         DestroyTask(taskId);

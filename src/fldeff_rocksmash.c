@@ -27,7 +27,7 @@ static void Task_DoFieldMove_RunFunc(u8 taskId);
 static void FieldCallback_RockSmash(void);
 static void FieldMove_RockSmash(void);
 
-bool8 CheckObjectGraphicsInFrontOfPlayer(u16 graphicsId)
+bool8 CheckObjectGraphicsInFrontOfPlayer(u8 graphicsId)
 {
     u8 objEventId;
 
@@ -61,11 +61,9 @@ static void Task_DoFieldMove_Init(u8 taskId)
     if (!ObjectEventIsMovementOverridden(&gObjectEvents[objEventId])
      || ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objEventId]))
     {
-        if (gMapHeader.mapType == MAP_TYPE_UNDERWATER || gFieldEffectArguments[3])
+        if (gMapHeader.mapType == MAP_TYPE_UNDERWATER)
         {
-            // Skip field move pose underwater, or if arg3 is nonzero
-            if (gFieldEffectArguments[3])
-                gFieldEffectArguments[3] = 0;
+            // Skip field move pose underwater
             FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
             gTasks[taskId].func = Task_DoFieldMove_WaitForMon;
         }

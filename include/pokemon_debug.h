@@ -51,7 +51,6 @@ struct PokemonDebugMenu
     u8 frontspriteId;
     u8 backspriteId;
     u8 iconspriteId;
-    u8 followerspriteId;
     u8 frontShadowSpriteId;
     bool8 isShiny;
     bool8 isFemale;

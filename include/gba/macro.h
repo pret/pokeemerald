@@ -40,24 +40,6 @@
 #define CpuCopy16(src, dest, size) CPU_COPY(src, dest, size, 16)
 #define CpuCopy32(src, dest, size) CPU_COPY(src, dest, size, 32)
 
-#define CpuSmartCopy16(src, dest, size) \
-{ \
-    if ((((size) & 0x1f) == 0) && ((((u32)(src)) & 3) == 0) && ((((u32)(dest)) & 3) == 0)) { \
-        CpuFastCopy((src), (dest), (size)); \
-    } else { \
-        CpuCopy16((src), (dest), (size)); \
-    } \
-}
-
-#define CpuSmartCopy32(src, dest, size) \
-{ \
-    if ((((size) & 0x1f) == 0) && ((((u32)(src)) & 3) == 0) && ((((u32)(dest)) & 3) == 0)) { \
-        CpuFastCopy((src), (dest), (size)); \
-    } else { \
-        CpuCopy32((src), (dest), (size)); \
-    } \
-}
-
 #define CpuFastFill(value, dest, size)                               \
 {                                                                    \
     vu32 tmp = (vu32)(value);                                        \
@@ -69,24 +51,6 @@
 #define CpuFastFill16(value, dest, size) CpuFastFill(((value) << 16) | (value), (dest), (size))
 
 #define CpuFastFill8(value, dest, size) CpuFastFill(((value) << 24) | ((value) << 16) | ((value) << 8) | (value), (dest), (size))
-
-#define CpuSmartFill(value, dest, size) \
-{ \
-    if ((((size) & 0x1f) == 0) && ((((u32)(dest)) & 3) == 0)) { \
-        CpuFastFill((value), (dest), (size)); \
-    } else { \
-        CpuFill32((value), (dest), (size)); \
-    } \
-}
-
-#define CpuSmartFill16(value, dest, size) \
-{ \
-    if ((((size) & 0x1f) == 0) && ((((u32)(dest)) & 3) == 0)) { \
-        CpuFastFill16((value), (dest), (size)); \
-    } else { \
-        CpuFill16((value), (dest), (size)); \
-    } \
-}
 
 #define CpuFastCopy(src, dest, size) CpuFastSet(src, dest, ((size)/(32/8) & 0x1FFFFF))
 
