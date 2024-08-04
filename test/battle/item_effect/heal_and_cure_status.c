@@ -9,13 +9,13 @@ ASSUMPTIONS
 SINGLE_BATTLE_TEST("Full Restore restores a battler's HP and cures any primary status")
 {
     u16 status;
-    PARAMETRIZE{ status = STATUS1_BURN; }
-    PARAMETRIZE{ status = STATUS1_FREEZE; }
-    PARAMETRIZE{ status = STATUS1_PARALYSIS; }
-    PARAMETRIZE{ status = STATUS1_POISON; }
-    PARAMETRIZE{ status = STATUS1_TOXIC_POISON; }
-    PARAMETRIZE{ status = STATUS1_SLEEP; }
-    PARAMETRIZE{ status = STATUS1_NONE; }
+    PARAMETRIZE { status = STATUS1_BURN; }
+    PARAMETRIZE { status = STATUS1_FREEZE; }
+    PARAMETRIZE { status = STATUS1_PARALYSIS; }
+    PARAMETRIZE { status = STATUS1_POISON; }
+    PARAMETRIZE { status = STATUS1_TOXIC_POISON; }
+    PARAMETRIZE { status = STATUS1_SLEEP; }
+    PARAMETRIZE { status = STATUS1_NONE; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { HP(1); MaxHP(300); Status1(status); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -35,13 +35,13 @@ SINGLE_BATTLE_TEST("Full Restore restores a battler's HP and cures any primary s
 SINGLE_BATTLE_TEST("Full Restore restores a party members HP and cures any primary status")
 {
     u16 status;
-    PARAMETRIZE{ status = STATUS1_BURN; }
-    PARAMETRIZE{ status = STATUS1_FREEZE; }
-    PARAMETRIZE{ status = STATUS1_PARALYSIS; }
-    PARAMETRIZE{ status = STATUS1_POISON; }
-    PARAMETRIZE{ status = STATUS1_TOXIC_POISON; }
-    PARAMETRIZE{ status = STATUS1_SLEEP; }
-    PARAMETRIZE{ status = STATUS1_NONE; }
+    PARAMETRIZE { status = STATUS1_BURN; }
+    PARAMETRIZE { status = STATUS1_FREEZE; }
+    PARAMETRIZE { status = STATUS1_PARALYSIS; }
+    PARAMETRIZE { status = STATUS1_POISON; }
+    PARAMETRIZE { status = STATUS1_TOXIC_POISON; }
+    PARAMETRIZE { status = STATUS1_SLEEP; }
+    PARAMETRIZE { status = STATUS1_NONE; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { HP(1); MaxHP(300); Status1(status); }
         PLAYER(SPECIES_WYNAUT) { HP(1); MaxHP(300); Status1(status); }
@@ -64,12 +64,12 @@ SINGLE_BATTLE_TEST("Full Restore restores a party members HP and cures any prima
 SINGLE_BATTLE_TEST("Full Restore heals a battler from any primary status")
 {
     u16 status;
-    PARAMETRIZE{ status = STATUS1_BURN; }
-    PARAMETRIZE{ status = STATUS1_FREEZE; }
-    PARAMETRIZE{ status = STATUS1_PARALYSIS; }
-    PARAMETRIZE{ status = STATUS1_POISON; }
-    PARAMETRIZE{ status = STATUS1_TOXIC_POISON; }
-    PARAMETRIZE{ status = STATUS1_SLEEP; }
+    PARAMETRIZE { status = STATUS1_BURN; }
+    PARAMETRIZE { status = STATUS1_FREEZE; }
+    PARAMETRIZE { status = STATUS1_PARALYSIS; }
+    PARAMETRIZE { status = STATUS1_POISON; }
+    PARAMETRIZE { status = STATUS1_TOXIC_POISON; }
+    PARAMETRIZE { status = STATUS1_SLEEP; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Status1(status); }
         OPPONENT(SPECIES_WYNAUT);
@@ -86,12 +86,12 @@ SINGLE_BATTLE_TEST("Full Restore heals a battler from any primary status")
 SINGLE_BATTLE_TEST("Full Restore heals a party member from any primary status")
 {
     u16 status;
-    PARAMETRIZE{ status = STATUS1_BURN; }
-    PARAMETRIZE{ status = STATUS1_FREEZE; }
-    PARAMETRIZE{ status = STATUS1_PARALYSIS; }
-    PARAMETRIZE{ status = STATUS1_POISON; }
-    PARAMETRIZE{ status = STATUS1_TOXIC_POISON; }
-    PARAMETRIZE{ status = STATUS1_SLEEP; }
+    PARAMETRIZE { status = STATUS1_BURN; }
+    PARAMETRIZE { status = STATUS1_FREEZE; }
+    PARAMETRIZE { status = STATUS1_PARALYSIS; }
+    PARAMETRIZE { status = STATUS1_POISON; }
+    PARAMETRIZE { status = STATUS1_TOXIC_POISON; }
+    PARAMETRIZE { status = STATUS1_SLEEP; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT) { Status1(status); }

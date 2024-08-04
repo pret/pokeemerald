@@ -11,47 +11,16 @@
 #include "constants/trainers.h"
 #include "constants/battle.h"
 
-
-static const struct TrainerMon sTestParty1[] =
+static const struct Trainer sTestTrainers[] =
 {
-    {
-        .species = SPECIES_WOBBUFFET,
-        .ball = ITEM_MASTER_BALL,
-        .ability = ABILITY_TELEPATHY,
-        .friendship = 42,
-        .gender = TRAINER_MON_FEMALE,
-        .heldItem = ITEM_ASSAULT_VEST,
-        .isShiny = TRUE,
-        .iv = TRAINER_PARTY_IVS(25,26,27,28,29,30),
-        .ev = TRAINER_PARTY_EVS(252, 0, 0, 252, 4, 0),
-        .lvl = 67,
-        .moves = {MOVE_AIR_SLASH, MOVE_BARRIER, MOVE_SOLAR_BEAM, MOVE_EXPLOSION},
-        .nature = NATURE_HASTY,
-        .nickname = COMPOUND_STRING("Bubbles"),
-        .dynamaxLevel = 5,
-    },
-    {
-        .species = SPECIES_WOBBUFFET,
-        .ability = ABILITY_SHADOW_TAG,
-        .lvl = 5,
-    },
-    {
-        .species = SPECIES_WYNAUT,
-        .lvl = 5,
-    },
-};
-
-static const struct Trainer sTestTrainer1 =
-{
-    .trainerName = _("Test1"),
-    .party = TRAINER_PARTY(sTestParty1),
+#include "trainer_control.h"
 };
 
 TEST("CreateNPCTrainerPartyForTrainer generates customized Pokémon")
 {
     struct Pokemon *testParty = Alloc(6 * sizeof(struct Pokemon));
     u8 nickBuffer[20];
-    CreateNPCTrainerPartyFromTrainer(testParty, &sTestTrainer1, TRUE, BATTLE_TYPE_TRAINER);
+    CreateNPCTrainerPartyFromTrainer(testParty, &sTestTrainers[0], TRUE, BATTLE_TYPE_TRAINER);
     EXPECT(IsMonShiny(&testParty[0]));
     EXPECT(!IsMonShiny(&testParty[1]));
 
@@ -118,7 +87,7 @@ TEST("CreateNPCTrainerPartyForTrainer generates customized Pokémon")
     EXPECT(GetNature(&testParty[1]) == NATURE_HARDY);
 
     EXPECT_EQ(GetMonData(&testParty[0], MON_DATA_DYNAMAX_LEVEL), 5);
-    EXPECT_EQ(GetMonData(&testParty[1], MON_DATA_DYNAMAX_LEVEL), 0);
+    EXPECT_EQ(GetMonData(&testParty[1], MON_DATA_DYNAMAX_LEVEL), 10);
 
     Free(testParty);
 }
@@ -126,7 +95,7 @@ TEST("CreateNPCTrainerPartyForTrainer generates customized Pokémon")
 TEST("CreateNPCTrainerPartyForTrainer generates different personalities for different mons")
 {
     struct Pokemon *testParty = Alloc(6 * sizeof(struct Pokemon));
-    CreateNPCTrainerPartyFromTrainer(testParty, &sTestTrainer1, TRUE, BATTLE_TYPE_TRAINER);
+    CreateNPCTrainerPartyFromTrainer(testParty, &sTestTrainers[0], TRUE, BATTLE_TYPE_TRAINER);
     EXPECT(testParty[0].box.personality != testParty[1].box.personality);
     Free(testParty);
 }
@@ -143,4 +112,51 @@ TEST("ModifyPersonalityForNature can set any nature")
     }
     ModifyPersonalityForNature(&personality, nature);
     EXPECT_EQ(GetNatureFromPersonality(personality), nature);
+}
+
+static const struct TrainerMon sTestParty2[] =
+{
+    {
+        .species = SPECIES_WYNAUT,
+        .lvl = 5,
+    },
+    {
+        .species = SPECIES_WYNAUT,
+        .lvl = 5,
+    },
+    {
+        .species = SPECIES_WYNAUT,
+        .lvl = 5,
+    },
+    {
+        .species = SPECIES_WYNAUT,
+        .lvl = 5,
+    },
+    {
+        .species = SPECIES_WYNAUT,
+        .lvl = 5,
+    },
+    {
+        .species = SPECIES_WYNAUT,
+        .lvl = 5,
+    },
+};
+
+static const struct Trainer sTestTrainer2 =
+{
+    .trainerName = _("Test2"),
+    .trainerClass = TRAINER_CLASS_BLACK_BELT,
+    .party = TRAINER_PARTY(sTestParty2),
+};
+
+TEST("Trainer Class Balls apply to the entire party")
+{
+    u32 j;
+    struct Pokemon *testParty = Alloc(6 * sizeof(struct Pokemon));
+    CreateNPCTrainerPartyFromTrainer(testParty, &sTestTrainer2, TRUE, BATTLE_TYPE_TRAINER);
+    for(j = 0; j < 6; j++)
+    {
+        EXPECT(GetMonData(&testParty[j], MON_DATA_POKEBALL, 0) == gTrainerClasses[sTestTrainer2.trainerClass].ball);
+    }
+    Free(testParty);
 }

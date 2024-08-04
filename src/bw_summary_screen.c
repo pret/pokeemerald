@@ -29,7 +29,7 @@
 #include "palette.h"
 #include "pokeball.h"
 #include "pokemon.h"
-#include "pokemon_debug.h"
+#include "pokemon_sprite_visualizer.h"
 #include "pokemon_storage_system.h"
 #include "pokemon_summary_screen.h"
 #include "region_map.h"
@@ -5103,6 +5103,7 @@ static void KeepMoveSelectorVisible(u8 firstSpriteId)
         gSprites[spriteIds[i]].invisible = FALSE;
     }
 }
+#endif
 
 // Shoutout to Vexx for this :)
 void FormatTextByWidth(u8 *result, s32 maxWidth, u8 fontId, const u8 *str, s16 letterSpacing)
@@ -5149,5 +5150,3 @@ void FormatTextByWidth(u8 *result, s32 maxWidth, u8 fontId, const u8 *str, s16 l
         // now ptr is the next EOS char
     }
 }
-
-#endif

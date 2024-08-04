@@ -32,3 +32,6 @@ SINGLE_BATTLE_TEST("Bide deals twice the taken damage over two turns")
         EXPECT_EQ(bideDamage, 2 * (damage1 + damage2));
     }
 }
+
+TO_DO_BATTLE_TEST("Bide hits the last Pokémon that attacked the user, even allies");
+TO_DO_BATTLE_TEST("Bide has +1 priority if called via a different move"); // Gen 5 onwards

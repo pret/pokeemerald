@@ -137,6 +137,7 @@ SECTIONS {
         src/field_door.o(.text);
         src/field_player_avatar.o(.text);
         src/event_object_movement.o(.text);
+        src/follower_helper.o(.text);
         src/field_message_box.o(.text);
         src/event_object_lock.o(.text);
         src/text_window.o(.text);
@@ -358,7 +359,7 @@ SECTIONS {
         src/battle_transition_frontier.o(.text);
         src/international_string_util.o(.text);
 		src/ui_menu.o(.text);
-        src/pokemon_debug.o(.text);
+        src/pokemon_sprite_visualizer.o(.text);
         src/expansion_intro.o(.text);
         src/ui_startmenu_full.o(.text);
         src/ui_birch_case.o(.text);
@@ -531,6 +532,7 @@ SECTIONS {
         src/field_door.o(.rodata);
         src/field_player_avatar.o(.rodata);
         src/event_object_movement.o(.rodata);
+        src/follower_helper.o(.rodata);
         src/text_window.o(.rodata);
         src/scrcmd.o(.rodata);
         src/field_control_avatar.o(.rodata);
@@ -729,7 +731,7 @@ SECTIONS {
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
 		src/ui_menu.o(.rodata);
-        src/pokemon_debug.o(.rodata);
+        src/pokemon_sprite_visualizer.o(.rodata);
         src/expansion_intro.o(.rodata);
         src/ui_startmenu_full.o(.rodata);
         src/ui_birch_case.o(.rodata);

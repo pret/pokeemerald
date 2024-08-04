@@ -40,50 +40,8 @@ enum {
     NUM_ANIMDATA
 };
 
-enum {
-    AFFINE_NONE,
-    AFFINE_TURN_UP,
-    AFFINE_TURN_UP_AND_DOWN,
-    AFFINE_TURN_DOWN,
-    AFFINE_TURN_DOWN_SLOW,
-    AFFINE_TURN_DOWN_SLIGHT,
-    AFFINE_TURN_UP_HIGH,
-    AFFINE_UNUSED_1,
-    AFFINE_UNUSED_2,
-    AFFINE_UNUSED_3,
-    NUM_MON_AFFINES,
-};
-
 #define MON_X 48
 #define MON_Y 80
-
-// The animation the Pokémon does during the feeding scene depends on their nature.
-// The below values are offsets into sMonPokeblockAnims of the animation data for that nature.
-#define ANIM_HARDY   0
-#define ANIM_LONELY  (ANIM_HARDY + 3)
-#define ANIM_BRAVE   (ANIM_LONELY + 1)
-#define ANIM_ADAMANT (ANIM_BRAVE + 1)
-#define ANIM_NAUGHTY (ANIM_ADAMANT + 5)
-#define ANIM_BOLD    (ANIM_NAUGHTY + 3)
-#define ANIM_DOCILE  (ANIM_BOLD + 2)
-#define ANIM_RELAXED (ANIM_DOCILE + 1)
-#define ANIM_IMPISH  (ANIM_RELAXED + 2)
-#define ANIM_LAX     (ANIM_IMPISH + 1)
-#define ANIM_TIMID   (ANIM_LAX + 1)
-#define ANIM_HASTY   (ANIM_TIMID + 5)
-#define ANIM_SERIOUS (ANIM_HASTY + 2)
-#define ANIM_JOLLY   (ANIM_SERIOUS + 1)
-#define ANIM_NAIVE   (ANIM_JOLLY + 1)
-#define ANIM_MODEST  (ANIM_NAIVE + 4)
-#define ANIM_MILD    (ANIM_MODEST + 3)
-#define ANIM_QUIET   (ANIM_MILD + 1)
-#define ANIM_BASHFUL (ANIM_QUIET + 2)
-#define ANIM_RASH    (ANIM_BASHFUL + 3)
-#define ANIM_CALM    (ANIM_RASH + 3)
-#define ANIM_GENTLE  (ANIM_CALM + 1)
-#define ANIM_SASSY   (ANIM_GENTLE + 1)
-#define ANIM_CAREFUL (ANIM_SASSY + 1)
-#define ANIM_QUIRKY  (ANIM_CAREFUL + 5)
 
 struct PokeblockFeed
 {
@@ -140,35 +98,6 @@ static void SpriteCB_ThrownPokeblock(struct Sprite *);
 
 EWRAM_DATA static struct PokeblockFeed *sPokeblockFeed = NULL;
 EWRAM_DATA static struct CompressedSpritePalette sPokeblockSpritePal = {0};
-
-static const u8 sNatureToMonPokeblockAnim[NUM_NATURES][2] =
-{
-    [NATURE_HARDY]   = { ANIM_HARDY,   AFFINE_NONE },
-    [NATURE_LONELY]  = { ANIM_LONELY,  AFFINE_NONE },
-    [NATURE_BRAVE]   = { ANIM_BRAVE,   AFFINE_TURN_UP },
-    [NATURE_ADAMANT] = { ANIM_ADAMANT, AFFINE_NONE },
-    [NATURE_NAUGHTY] = { ANIM_NAUGHTY, AFFINE_NONE },
-    [NATURE_BOLD]    = { ANIM_BOLD,    AFFINE_NONE },
-    [NATURE_DOCILE]  = { ANIM_DOCILE,  AFFINE_NONE },
-    [NATURE_RELAXED] = { ANIM_RELAXED, AFFINE_TURN_UP_AND_DOWN },
-    [NATURE_IMPISH]  = { ANIM_IMPISH,  AFFINE_NONE },
-    [NATURE_LAX]     = { ANIM_LAX,     AFFINE_NONE },
-    [NATURE_TIMID]   = { ANIM_TIMID,   AFFINE_NONE },
-    [NATURE_HASTY]   = { ANIM_HASTY,   AFFINE_NONE },
-    [NATURE_SERIOUS] = { ANIM_SERIOUS, AFFINE_TURN_DOWN },
-    [NATURE_JOLLY]   = { ANIM_JOLLY,   AFFINE_NONE },
-    [NATURE_NAIVE]   = { ANIM_NAIVE,   AFFINE_NONE },
-    [NATURE_MODEST]  = { ANIM_MODEST,  AFFINE_TURN_DOWN_SLOW },
-    [NATURE_MILD]    = { ANIM_MILD,    AFFINE_NONE },
-    [NATURE_QUIET]   = { ANIM_QUIET,   AFFINE_NONE },
-    [NATURE_BASHFUL] = { ANIM_BASHFUL, AFFINE_NONE },
-    [NATURE_RASH]    = { ANIM_RASH,    AFFINE_NONE },
-    [NATURE_CALM]    = { ANIM_CALM,    AFFINE_NONE },
-    [NATURE_GENTLE]  = { ANIM_GENTLE,  AFFINE_TURN_DOWN_SLIGHT },
-    [NATURE_SASSY]   = { ANIM_SASSY,   AFFINE_TURN_UP_HIGH },
-    [NATURE_CAREFUL] = { ANIM_CAREFUL, AFFINE_NONE },
-    [NATURE_QUIRKY]  = { ANIM_QUIRKY,  AFFINE_NONE },
-};
 
 // Data for the animation the Pokémon does while readying to jump for the Pokéblock
 // Each nature can have up to 8 anim 'stages' it progresses through, and each stage has its own array of data.
@@ -996,7 +925,7 @@ static void CalculateMonAnimLength(void)
 
     pokeblockFeed = sPokeblockFeed;
     pokeblockFeed->monAnimLength = 1;
-    animId = sNatureToMonPokeblockAnim[pokeblockFeed->nature][0];
+    animId = gNaturesInfo[pokeblockFeed->nature].pokeBlockAnim[0];
 
     // Add up the time each stage of the animation will take
     for (i = 0; i < 8; i++, animId++)
@@ -1014,7 +943,7 @@ static void UpdateMonAnim(void)
     switch (pokeblockFeed->animRunState)
     {
     case 0:
-        pokeblockFeed->animId = sNatureToMonPokeblockAnim[pokeblockFeed->nature][0];
+        pokeblockFeed->animId = gNaturesInfo[pokeblockFeed->nature].pokeBlockAnim[0];
         pokeblockFeed->monSpritePtr = &gSprites[pokeblockFeed->monSpriteId_];
         pokeblockFeed->savedMonSprite = *pokeblockFeed->monSpritePtr;
         pokeblockFeed->animRunState = 10;
@@ -1023,7 +952,7 @@ static void UpdateMonAnim(void)
         break;
     case 10:
         InitMonAnimStage();
-        if (sNatureToMonPokeblockAnim[pokeblockFeed->nature][1] != AFFINE_NONE)
+        if (gNaturesInfo[pokeblockFeed->nature].pokeBlockAnim[1] != AFFINE_NONE)
         {
             // Initialize affine anim
             pokeblockFeed->monSpritePtr->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
@@ -1033,13 +962,13 @@ static void UpdateMonAnim(void)
         }
         pokeblockFeed->animRunState = 50;
     case 50:
-        if (sNatureToMonPokeblockAnim[pokeblockFeed->nature][1] != AFFINE_NONE)
+        if (gNaturesInfo[pokeblockFeed->nature].pokeBlockAnim[1] != AFFINE_NONE)
         {
             // Start affine anim
             if (!pokeblockFeed->noMonFlip) // double negation, so mon's sprite is flipped
-                StartSpriteAffineAnim(pokeblockFeed->monSpritePtr, sNatureToMonPokeblockAnim[pokeblockFeed->nature][1] + NUM_MON_AFFINES);
+                StartSpriteAffineAnim(pokeblockFeed->monSpritePtr, gNaturesInfo[pokeblockFeed->nature].pokeBlockAnim[1] + NUM_MON_AFFINES);
             else
-                StartSpriteAffineAnim(pokeblockFeed->monSpritePtr, sNatureToMonPokeblockAnim[pokeblockFeed->nature][1]);
+                StartSpriteAffineAnim(pokeblockFeed->monSpritePtr, gNaturesInfo[pokeblockFeed->nature].pokeBlockAnim[1]);
         }
         pokeblockFeed->animRunState = 60;
         break;

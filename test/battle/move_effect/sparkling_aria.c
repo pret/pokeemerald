@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_SPARKLING_ARIA].additionalEffects->moveEffect == MOVE_EFFECT_REMOVE_STATUS);
+    ASSUME(MoveHasAdditionalEffect(MOVE_SPARKLING_ARIA, MOVE_EFFECT_REMOVE_STATUS) == TRUE);
     ASSUME(gMovesInfo[MOVE_SPARKLING_ARIA].argument == STATUS1_BURN);
     ASSUME(gMovesInfo[MOVE_SPARKLING_ARIA].soundMove == TRUE);
 }

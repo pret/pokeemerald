@@ -1387,9 +1387,9 @@ static const struct SearchOptionText sDexSearchColorOptions[] =
     {},
 };
 
-static const struct SearchOptionText sDexSearchTypeOptions[NUMBER_OF_MON_TYPES + 1] = // + 2 for "None" and terminator, - 1 for Mystery
+static const struct SearchOptionText sDexSearchTypeOptions[] =
 {
-    {gText_DexEmptyString, gText_DexSearchTypeNone},
+    {gText_DexEmptyString, gTypesInfo[TYPE_NONE].name},
     {gText_DexEmptyString, gTypesInfo[TYPE_NORMAL].name},
     {gText_DexEmptyString, gTypesInfo[TYPE_FIGHTING].name},
     {gText_DexEmptyString, gTypesInfo[TYPE_FLYING].name},
@@ -2337,13 +2337,16 @@ static void CreatePokedexList(u8 dexMode, u8 order)
     }
 }
 
-static void PrintMonDexNumAndName(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top)
+static void PrintMonDexNum(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top)
 {
-    u8 color[3];
+    static const u8 color[3] = { TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_LIGHT_GRAY };
+    AddTextPrinterParameterized4(windowId, fontId, left * 8, (top * 8) + 1, 0, 0, color, TEXT_SKIP_DRAW, str);
+}
 
-    color[0] = TEXT_COLOR_TRANSPARENT;
-    color[1] = TEXT_DYNAMIC_COLOR_6;
-    color[2] = TEXT_COLOR_LIGHT_GRAY;
+static void PrintMonName(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top)
+{
+    static const u8 color[3] = { TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_LIGHT_GRAY };
+    fontId = GetFontIdToFit(str, fontId, 0, 50);
     AddTextPrinterParameterized4(windowId, fontId, left * 8, (top * 8) + 1, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
@@ -2453,7 +2456,7 @@ static void CreateMonDexNum(u16 entryNum, u8 left, u8 top, u16 unused)
     text[offset++] = CHAR_0 + ((dexNum % 1000) % 100) / 10;
     text[offset++] = CHAR_0 + ((dexNum % 1000) % 100) % 10;
     text[offset++] = EOS;
-    PrintMonDexNumAndName(0, FONT_NARROW, text, left, top);
+    PrintMonDexNum(0, FONT_NARROW, text, left, top);
 }
 
 static void CreateCaughtBall(bool16 owned, u8 x, u8 y, u16 unused)
@@ -2473,7 +2476,7 @@ static u8 CreateMonName(u16 num, u8 left, u8 top)
         str = GetSpeciesName(num);
     else
         str = sText_TenDashes;
-    PrintMonDexNumAndName(0, FONT_NARROW, str, left, top);
+    PrintMonName(0, FONT_NARROW, str, left, top);
     return StringLength(str);
 }
 
@@ -4671,7 +4674,7 @@ static void UNUSED UnusedPrintNum(u8 windowId, u16 num, u8 left, u8 top)
 
 static u8 PrintCryScreenSpeciesName(u8 windowId, u16 num, u8 left, u8 top)
 {
-    u8 str[POKEMON_NAME_LENGTH + 1];
+    u8 str[POKEMON_NAME_BUFFER_SIZE];
     u8 i;
 
     for (i = 0; i < ARRAY_COUNT(str); i++)
@@ -4682,6 +4685,7 @@ static u8 PrintCryScreenSpeciesName(u8 windowId, u16 num, u8 left, u8 top)
     default:
         for (i = 0; GetSpeciesName(num)[i] != EOS && i < POKEMON_NAME_LENGTH; i++)
             str[i] = GetSpeciesName(num)[i];
+        WrapFontIdToFit(str, str + i, FONT_NORMAL, 60);
         break;
     case 0:
         for (i = 0; i < 5; i++)
@@ -5004,13 +5008,16 @@ static u8 LoadSearchMenu(void)
     return CreateTask(Task_LoadSearchMenu, 0);
 }
 
+static void PrintSearchTextToFit(const u8 *str, u32 x, u32 y, u32 width)
+{
+    static const u8 color[3] = { TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_DARK_GRAY };
+    u32 fontId = GetFontIdToFit(str, FONT_NORMAL, 0, width);
+    AddTextPrinterParameterized4(0, fontId, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
+}
+
 static void PrintSearchText(const u8 *str, u32 x, u32 y)
 {
-    u8 color[3];
-
-    color[0] = TEXT_COLOR_TRANSPARENT;
-    color[1] = TEXT_DYNAMIC_COLOR_6;
-    color[2] = TEXT_COLOR_DARK_GRAY;
+    static const u8 color[3] = { TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_DARK_GRAY };
     AddTextPrinterParameterized4(0, FONT_NORMAL, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
@@ -5630,10 +5637,10 @@ static void PrintSelectedSearchParameters(u8 taskId)
     PrintSearchText(sDexSearchColorOptions[searchParamId].title, 0x2D, 0x21);
 
     searchParamId = gTasks[taskId].tCursorPos_TypeLeft + gTasks[taskId].tScrollOffset_TypeLeft;
-    PrintSearchText(sDexSearchTypeOptions[searchParamId].title, 0x2D, 0x31);
+    PrintSearchTextToFit(sDexSearchTypeOptions[searchParamId].title, 0x2D, 0x31, 38);
 
     searchParamId = gTasks[taskId].tCursorPos_TypeRight + gTasks[taskId].tScrollOffset_TypeRight;
-    PrintSearchText(sDexSearchTypeOptions[searchParamId].title, 0x5D, 0x31);
+    PrintSearchTextToFit(sDexSearchTypeOptions[searchParamId].title, 0x5D, 0x31, 38);
 
     searchParamId = gTasks[taskId].tCursorPos_Order + gTasks[taskId].tScrollOffset_Order;
     PrintSearchText(sDexOrderOptions[searchParamId].title, 0x2D, 0x41);

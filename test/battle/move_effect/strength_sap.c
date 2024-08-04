@@ -10,8 +10,8 @@ SINGLE_BATTLE_TEST("Strength Sap lowers Attack by 1 and restores HP based on tar
 {
     u32 atkStat = 0;
 
-    PARAMETRIZE{ atkStat = 100; }
-    PARAMETRIZE{ atkStat = 50; }
+    PARAMETRIZE { atkStat = 100; }
+    PARAMETRIZE { atkStat = 50; }
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { HP(200); }
@@ -35,8 +35,8 @@ SINGLE_BATTLE_TEST("Strength Sap works exactly the same when attacker is behind 
 {
     u32 atkStat = 0;
 
-    PARAMETRIZE{ atkStat = 100; }
-    PARAMETRIZE{ atkStat = 50; }
+    PARAMETRIZE { atkStat = 100; }
+    PARAMETRIZE { atkStat = 50; }
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { HP(200); }
@@ -65,7 +65,7 @@ SINGLE_BATTLE_TEST("Strength Sap lowers Attack by 1 and restores HP based on tar
 
     for (j = 0; j <= MAX_STAT_STAGE; j++) {
         if (j == DEFAULT_STAT_STAGE - 1) { continue; } // Ignore -6, because Strength Sap won't work otherwise
-        PARAMETRIZE{ statStage = j; }
+        PARAMETRIZE { statStage = j; }
     }
 
     GIVEN {
@@ -190,7 +190,7 @@ SINGLE_BATTLE_TEST("Strength Sap makes attacker lose HP if target's ability is L
         MESSAGE("It sucked up the liquid ooze!");
         if (atkStat >= 490) {
             MESSAGE("Wobbuffet fainted!");
-            MESSAGE("Go! Wobbuffet!");
+            SEND_IN_MESSAGE("Wobbuffet");
         }
     } THEN {
         EXPECT_EQ(lostHp, atkStat);

@@ -729,7 +729,7 @@ static void PrintMonStats()
     }
 
     nature = GetNature(ReturnPartyMon());
-    StringCopy(gStringVar2, gNatureNamePointers[nature]);
+    StringCopy(gStringVar2, gNaturesInfo[nature].name);
     AddTextPrinterParameterized4(WINDOW_3, FONT_SMALL_NARROW, 4, 50, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
 
     StringCopy(gStringVar2, gAbilitiesInfo[GetAbilityBySpecies(sMenuDataPtr->speciesID, GetMonData(ReturnPartyMon(), MON_DATA_ABILITY_NUM))].name);

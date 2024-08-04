@@ -250,8 +250,7 @@ void NewGameInitData(void)
         SetBoxWallpapersToSimple();
     }
 
-    ClearRoamerData();
-    ClearRoamerLocationData();
+    DeactivateAllRoamers();
     gSaveBlock1Ptr->registeredItem = ITEM_NONE;
     ClearBag();
     NewGameInitPCItems();

@@ -49,8 +49,8 @@ AI_SINGLE_BATTLE_TEST("AI doesn't use accuracy-lowering moves if it knows that t
     for (j = MOVE_NONE + 1; j < MOVES_COUNT; j++)
     {
         if (gMovesInfo[j].effect == EFFECT_ACCURACY_DOWN || gMovesInfo[j].effect == EFFECT_ACCURACY_DOWN_2) {
-            PARAMETRIZE{ moveAI = j; abilityAI = ABILITY_SWIFT_SWIM; }
-            PARAMETRIZE{ moveAI = j; abilityAI = ABILITY_MOLD_BREAKER; }
+            PARAMETRIZE { moveAI = j; abilityAI = ABILITY_SWIFT_SWIM; }
+            PARAMETRIZE { moveAI = j; abilityAI = ABILITY_MOLD_BREAKER; }
         }
     }
 

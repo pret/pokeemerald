@@ -2,13 +2,52 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 
-static const u16 sContestLadyMonGfxId[] =
+struct LilycoveContestLadyValues
 {
-    [CONTEST_CATEGORY_COOL]   = OBJ_EVENT_GFX_ZIGZAGOON_1,
-    [CONTEST_CATEGORY_BEAUTY] = OBJ_EVENT_GFX_SKITTY,
-    [CONTEST_CATEGORY_CUTE]   = OBJ_EVENT_GFX_POOCHYENA,
-    [CONTEST_CATEGORY_SMART]  = OBJ_EVENT_GFX_KECLEON,
-    [CONTEST_CATEGORY_TOUGH]  = OBJ_EVENT_GFX_PIKACHU
+    u16 monGfxId;
+    u16 monSpecies;
+    const u8 *monName;
+    const u8 *categoryName;
+    const u8 *contestName;
+};
+
+static const struct LilycoveContestLadyValues sContestLadyValues[] =
+{
+    [CONTEST_CATEGORY_COOL] = {
+        .monGfxId = OBJ_EVENT_GFX_ZIGZAGOON_1,
+        .monSpecies = SPECIES_ZIGZAGOON,
+        .monName = COMPOUND_STRING("HANDSOME"),
+        .categoryName = COMPOUND_STRING("coolness"),
+        .contestName = gText_CoolnessContest,
+    },
+    [CONTEST_CATEGORY_BEAUTY] = {
+        .monGfxId = OBJ_EVENT_GFX_SKITTY,
+        .monSpecies = SPECIES_SKITTY,
+        .monName = COMPOUND_STRING("VINNY"),
+        .categoryName = COMPOUND_STRING("beauty"),
+        .contestName = gText_BeautyContest,
+    },
+    [CONTEST_CATEGORY_CUTE] = {
+        .monGfxId = OBJ_EVENT_GFX_POOCHYENA,
+        .monSpecies = SPECIES_POOCHYENA,
+        .monName = COMPOUND_STRING("MOREME"),
+        .categoryName = COMPOUND_STRING("cuteness"),
+        .contestName = gText_CutenessContest,
+    },
+    [CONTEST_CATEGORY_SMART] = {
+        .monGfxId = OBJ_EVENT_GFX_KECLEON,
+        .monSpecies = SPECIES_KECLEON,
+        .monName = COMPOUND_STRING("IRONHARD"),
+        .categoryName = COMPOUND_STRING("smartness"),
+        .contestName = gText_SmartnessContest,
+    },
+    [CONTEST_CATEGORY_TOUGH] = {
+        .monGfxId = OBJ_EVENT_GFX_PIKACHU,
+        .monSpecies = SPECIES_PIKACHU,
+        .monName = COMPOUND_STRING("MUSCLE"),
+        .categoryName = COMPOUND_STRING("toughness"),
+        .contestName = gText_ToughnessContest,
+    },
 };
 
 static const u16 sLilycoveLadyGfxId[] =
@@ -290,12 +329,12 @@ static const u16 sQuizLadyPrizes[] =
 // Favor Lady data
 static const u8 *const sFavorLadyRequests[] =
 {
-    gText_FavorLady_Slippery,
-    gText_FavorLady_Roundish,
-    gText_FavorLady_Whamish,
-    gText_FavorLady_Shiny,
-    gText_FavorLady_Sticky,
-    gText_FavorLady_Pointy
+    COMPOUND_STRING("slippery"),
+    COMPOUND_STRING("roundish"),
+    COMPOUND_STRING("wham-ish"),
+    COMPOUND_STRING("shiny"),
+    COMPOUND_STRING("sticky"),
+    COMPOUND_STRING("pointy"),
 };
 
 static const u16 sFavorLadyAcceptedItems_Slippery[] =
@@ -428,41 +467,4 @@ static const u16 sFavorLadyPrizes[] =
     ITEM_HEART_SCALE,
     ITEM_RARE_CANDY,
     ITEM_PP_MAX
-};
-
-
-static const u8 *const sContestLadyMonNames[] =
-{
-    [CONTEST_CATEGORY_COOL]   = gText_ContestLady_Handsome,
-    [CONTEST_CATEGORY_BEAUTY] = gText_ContestLady_Vinny,
-    [CONTEST_CATEGORY_CUTE]   = gText_ContestLady_Moreme,
-    [CONTEST_CATEGORY_SMART]  = gText_ContestLady_Ironhard,
-    [CONTEST_CATEGORY_TOUGH]  = gText_ContestLady_Muscle
-};
-
-static const u8 *const sContestLadyCategoryNames[] =
-{
-    [CONTEST_CATEGORY_COOL]   = gText_ContestLady_Coolness,
-    [CONTEST_CATEGORY_BEAUTY] = gText_ContestLady_Beauty,
-    [CONTEST_CATEGORY_CUTE]   = gText_ContestLady_Cuteness,
-    [CONTEST_CATEGORY_SMART]  = gText_ContestLady_Smartness,
-    [CONTEST_CATEGORY_TOUGH]  = gText_ContestLady_Toughness
-};
-
-static const u8 *const sContestNames[] =
-{
-    [CONTEST_CATEGORY_COOL]   = gText_CoolnessContest,
-    [CONTEST_CATEGORY_BEAUTY] = gText_BeautyContest,
-    [CONTEST_CATEGORY_CUTE]   = gText_CutenessContest,
-    [CONTEST_CATEGORY_SMART]  = gText_SmartnessContest,
-    [CONTEST_CATEGORY_TOUGH]  = gText_ToughnessContest
-};
-
-static const u16 sContestLadyMonSpecies[] =
-{
-    [CONTEST_CATEGORY_COOL]   = SPECIES_ZIGZAGOON,
-    [CONTEST_CATEGORY_BEAUTY] = SPECIES_SKITTY,
-    [CONTEST_CATEGORY_CUTE]   = SPECIES_POOCHYENA,
-    [CONTEST_CATEGORY_SMART]  = SPECIES_KECLEON,
-    [CONTEST_CATEGORY_TOUGH]  = SPECIES_PIKACHU
 };

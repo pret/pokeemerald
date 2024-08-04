@@ -168,13 +168,6 @@ static const u8 *const sBattlePyramid_MapHeaderStrings[FRONTIER_STAGES_PER_CHALL
     sText_Pyramid,
 };
 
-static bool8 UNUSED StartMenu_ShowMapNamePopup(void)
-{
-    HideStartMenu();
-    ShowMapNamePopup();
-    return TRUE;
-}
-
 // States and data defines for Task_MapNamePopUpWindow
 enum {
     STATE_SLIDE_IN,

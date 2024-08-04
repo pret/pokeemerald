@@ -46,7 +46,6 @@ SINGLE_BATTLE_TEST("Thrash confuses the user after it finishes")
 SINGLE_BATTLE_TEST("Thrash does not confuse the user if it is canceled on turn 1 of 3")
 {
     GIVEN {
-        ASSUME(B_RAMPAGE_CANCELLING >= GEN_5);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -61,7 +60,6 @@ SINGLE_BATTLE_TEST("Thrash does not confuse the user if it is canceled on turn 1
 SINGLE_BATTLE_TEST("Thrash does not confuse the user if it is canceled on turn 2 of 3")
 {
     GIVEN {
-        ASSUME(B_RAMPAGE_CANCELLING >= GEN_5);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -73,9 +71,8 @@ SINGLE_BATTLE_TEST("Thrash does not confuse the user if it is canceled on turn 2
     }
 }
 
-SINGLE_BATTLE_TEST("Thrash confuses the user if it is canceled on turn 3 of 3")
+SINGLE_BATTLE_TEST("Thrash confuses the user if it is canceled on turn 3 of 3, Protect")
 {
-    KNOWN_FAILING;
     GIVEN {
         ASSUME(B_RAMPAGE_CANCELLING >= GEN_5);
         PLAYER(SPECIES_WOBBUFFET);
@@ -84,6 +81,22 @@ SINGLE_BATTLE_TEST("Thrash confuses the user if it is canceled on turn 3 of 3")
         TURN { MOVE(player, MOVE_THRASH); }
         TURN { SKIP_TURN(player); }
         TURN { MOVE(opponent, MOVE_PROTECT); SKIP_TURN(player); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_CONFUSION, player);
+    }
+}
+
+SINGLE_BATTLE_TEST("Thrash confuses the user if it is canceled on turn 3 of 3, Immunity")
+{
+    GIVEN {
+        ASSUME(B_RAMPAGE_CANCELLING >= GEN_5);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_GENGAR);
+    } WHEN {
+        TURN { MOVE(player, MOVE_THRASH); }
+        TURN { SKIP_TURN(player); }
+        TURN { SWITCH(opponent, 1); SKIP_TURN(player); }
     } SCENE {
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_CONFUSION, player);
     }

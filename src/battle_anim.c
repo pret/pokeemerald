@@ -18,6 +18,7 @@
 #include "sprite.h"
 #include "task.h"
 #include "test_runner.h"
+#include "test/battle.h"
 #include "constants/battle_anim.h"
 #include "constants/moves.h"
 
@@ -30,7 +31,6 @@
 
 extern const u16 gMovesWithQuietBGM[];
 extern const u8 *const gBattleAnims_General[];
-extern const u8 *const gBattleAnims_Moves[];
 extern const u8 *const gBattleAnims_Special[];
 extern const u8 *const gBattleAnims_StatusConditions[];
 
@@ -85,6 +85,7 @@ static void Cmd_stopsound(void);
 static void Cmd_createvisualtaskontargets(void);
 static void Cmd_createspriteontargets(void);
 static void Cmd_createspriteontargets_onpos(void);
+static void Cmd_jumpifmovetypeequal(void);
 static void Cmd_createdragondartsprite(void);
 static void RunAnimScriptCommand(void);
 static void Task_UpdateMonBg(u8 taskId);
@@ -177,7 +178,8 @@ static void (* const sScriptCmdTable[])(void) =
     Cmd_createvisualtaskontargets,  // 0x30
     Cmd_createspriteontargets,      // 0x31
     Cmd_createspriteontargets_onpos, // 0x32
-    Cmd_createdragondartsprite,     // 0x33
+    Cmd_jumpifmovetypeequal,         // 0x33
+    Cmd_createdragondartsprite,      // 0x34
 };
 
 void ClearBattleAnimationVars(void)
@@ -234,36 +236,21 @@ static void Nop(void)
 void LaunchBattleAnimation(u32 animType, u32 animId)
 {
     s32 i;
-    const u8 *const *animsTable;
 
     if (gTestRunnerEnabled)
     {
         TestRunner_Battle_RecordAnimation(animType, animId);
         // Play Transform and Ally Switch even in Headless as these move animations also change mon data.
         if (gTestRunnerHeadless
+            #if TESTING // Because gBattleTestRunnerState is not seen outside of test env.
+             && !gBattleTestRunnerState->forceMoveAnim
+            #endif // TESTING
             && !(animType == ANIM_TYPE_MOVE && (animId == MOVE_TRANSFORM || animId == MOVE_ALLY_SWITCH)))
         {
             gAnimScriptCallback = Nop;
             gAnimScriptActive = FALSE;
             return;
         }
-    }
-
-    switch (animType)
-    {
-    case ANIM_TYPE_GENERAL:
-    default:
-        animsTable = gBattleAnims_General;
-        break;
-    case ANIM_TYPE_MOVE:
-        animsTable = gBattleAnims_Moves;
-        break;
-    case ANIM_TYPE_STATUS:
-        animsTable = gBattleAnims_StatusConditions;
-        break;
-    case ANIM_TYPE_SPECIAL:
-        animsTable = gBattleAnims_Special;
-        break;
     }
 
     sAnimHideHpBoxes = !(animType == ANIM_TYPE_MOVE && animId == MOVE_TRANSFORM);
@@ -285,6 +272,7 @@ void LaunchBattleAnimation(u32 animType, u32 animId)
         case B_ANIM_RAINBOW:
         case B_ANIM_SEA_OF_FIRE:
         case B_ANIM_SWAMP:
+        case B_ANIM_TERA_CHARGE:
             sAnimHideHpBoxes = TRUE;
             break;
         default:
@@ -321,7 +309,23 @@ void LaunchBattleAnimation(u32 animType, u32 animId)
 
     sMonAnimTaskIdArray[0] = TASK_NONE;
     sMonAnimTaskIdArray[1] = TASK_NONE;
-    sBattleAnimScriptPtr = animsTable[animId];
+
+    switch (animType)
+    {
+    case ANIM_TYPE_GENERAL:
+    default:
+        sBattleAnimScriptPtr = gBattleAnims_General[animId];
+        break;
+    case ANIM_TYPE_MOVE:
+        sBattleAnimScriptPtr = GetMoveAnimationScript(animId);
+        break;
+    case ANIM_TYPE_STATUS:
+        sBattleAnimScriptPtr = gBattleAnims_StatusConditions[animId];
+        break;
+    case ANIM_TYPE_SPECIAL:
+        sBattleAnimScriptPtr = gBattleAnims_Special[animId];
+        break;
+    }
     gAnimScriptActive = TRUE;
     sAnimFramesToWait = 0;
     gAnimScriptCallback = RunAnimScriptCommand;
@@ -448,7 +452,7 @@ static u8 GetBattleAnimMoveTargets(u8 battlerArgIndex, u8 *targets)
     u32 i;
     u32 ignoredTgt = gBattlerAttacker;
     u32 target = GetBattlerMoveTargetType(gBattleAnimAttacker, gAnimMoveIndex);
-    
+
     switch (battlerAnimId)
     {
     case ANIM_ATTACKER:
@@ -460,7 +464,7 @@ static u8 GetBattleAnimMoveTargets(u8 battlerArgIndex, u8 *targets)
         ignoredTgt = gBattlerAttacker;
         break;
     }
-    
+
     switch (target)
     {
     case MOVE_TARGET_FOES_AND_ALLY:
@@ -791,6 +795,10 @@ static void Cmd_end(void)
 
     if (!continuousAnim) // May have been used for debug?
     {
+        // Debugging - ensure no hanging mon bg tasks
+        if (FuncIsActiveTask(Task_UpdateMonBg))
+            DebugPrintf("Move %d animation still has Task_UpdateMonBg active at the end!", gAnimMoveIndex);
+        
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
         if (!IsContest())
         {
@@ -2133,6 +2141,19 @@ static void Cmd_stopsound(void)
     m4aMPlayStop(&gMPlayInfo_SE1);
     m4aMPlayStop(&gMPlayInfo_SE2);
     sBattleAnimScriptPtr++;
+}
+
+static void Cmd_jumpifmovetypeequal(void)
+{
+    u8 moveType;
+    const u8 *type = sBattleAnimScriptPtr + 1;
+    sBattleAnimScriptPtr += 2;
+    GET_MOVE_TYPE(gCurrentMove, moveType);
+
+    if (*type != moveType)
+        sBattleAnimScriptPtr += 4;
+    else
+        sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
 }
 
 static void Cmd_createdragondartsprite(void)

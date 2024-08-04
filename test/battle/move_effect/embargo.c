@@ -203,7 +203,7 @@ SINGLE_BATTLE_TEST("Embargo doesn't stop an item flung at an affected target fro
     }
 }
 
-SINGLE_BATTLE_TEST("Embargo is passed via Baton Pass")
+SINGLE_BATTLE_TEST("Baton Pass passes Embargo's effect")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -220,7 +220,7 @@ SINGLE_BATTLE_TEST("Embargo is passed via Baton Pass")
         // Turn 2
         MESSAGE("Wobbuffet used Baton Pass!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BATON_PASS, player);
-        MESSAGE("Go! Wynaut!");
+        SEND_IN_MESSAGE("Wynaut");
         // Turn 3
         MESSAGE("Wynaut used Fling!");
         MESSAGE("But it failed!");
@@ -253,8 +253,8 @@ SINGLE_BATTLE_TEST("Embargo disables the effect of the Plate items on the move J
 {
     u32 heldItem;
 
-    PARAMETRIZE{ heldItem = ITEM_NONE; }
-    PARAMETRIZE{ heldItem = ITEM_PIXIE_PLATE; }
+    PARAMETRIZE { heldItem = ITEM_NONE; }
+    PARAMETRIZE { heldItem = ITEM_PIXIE_PLATE; }
     GIVEN {
         PLAYER(SPECIES_ARCEUS) { Item(heldItem); };
         OPPONENT(SPECIES_DRAGONITE);
@@ -274,8 +274,8 @@ SINGLE_BATTLE_TEST("Embargo disables the effect of the Drive items on the move T
 {
     u32 heldItem;
 
-    PARAMETRIZE{ heldItem = ITEM_NONE; }
-    PARAMETRIZE{ heldItem = ITEM_SHOCK_DRIVE; }
+    PARAMETRIZE { heldItem = ITEM_NONE; }
+    PARAMETRIZE { heldItem = ITEM_SHOCK_DRIVE; }
     GIVEN {
         PLAYER(SPECIES_GENESECT) { Item(heldItem); };
         OPPONENT(SPECIES_GYARADOS);
@@ -295,8 +295,8 @@ SINGLE_BATTLE_TEST("Embargo disables the effect of the Memory items on the move 
 {
     u32 heldItem;
 
-    PARAMETRIZE{ heldItem = ITEM_NONE; }
-    PARAMETRIZE{ heldItem = ITEM_FIRE_MEMORY; }
+    PARAMETRIZE { heldItem = ITEM_NONE; }
+    PARAMETRIZE { heldItem = ITEM_FIRE_MEMORY; }
     GIVEN {
         PLAYER(SPECIES_SILVALLY) { Item(heldItem); };
         OPPONENT(SPECIES_VENUSAUR);
@@ -342,7 +342,7 @@ SINGLE_BATTLE_TEST("Embargo doesn't prevent Mega Evolution")
     } WHEN {
         TURN { MOVE(player, MOVE_EMBARGO); }
         TURN { MOVE(opponent, MOVE_BATON_PASS); SEND_OUT(opponent, 1); }
-        TURN { MOVE(opponent, MOVE_CELEBRATE, megaEvolve: TRUE); }
+        TURN { MOVE(opponent, MOVE_CELEBRATE, gimmick: GIMMICK_MEGA); }
     } SCENE {
         // Turn 1
         MESSAGE("Wobbuffet used Embargo!");
@@ -352,7 +352,7 @@ SINGLE_BATTLE_TEST("Embargo doesn't prevent Mega Evolution")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BATON_PASS, opponent);
         MESSAGE("2 sent out Charizard!");
         // Turn 3
-        MESSAGE("Foe Charizard's CharizarditeY is reacting to 2's Mega Ring!");
+        MESSAGE("Foe Charizard's Charizardite Y is reacting to 2's Mega Ring!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, opponent);
         MESSAGE("Foe Charizard has Mega Evolved into Mega Charizard!");
     }

@@ -16,8 +16,11 @@
 #include "constants/songs.h"
 
 static void Task_DoPokeballSendOutAnim(u8 taskId);
-static void SpriteCB_PlayerMonSendOut_1(struct Sprite *sprite);
-static void SpriteCB_PlayerMonSendOut_2(struct Sprite *sprite);
+static inline void DoPokeballSendOutSoundEffect(u32 battler);
+static inline void *GetOpponentMonSendOutCallback(void);
+static inline bool32 IsBattlerPlayer(u32 battler);
+static void SpriteCB_MonSendOut_1(struct Sprite *sprite);
+static void SpriteCB_MonSendOut_2(struct Sprite *sprite);
 static void SpriteCB_OpponentMonSendOut(struct Sprite *sprite);
 static void SpriteCB_BallThrow(struct Sprite *sprite);
 static void SpriteCB_BallThrow_ReachMon(struct Sprite *sprite);
@@ -548,6 +551,8 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
 {
     u32 throwCaseId, ballId, battlerId, ballSpriteId;
     bool32 notSendOut = FALSE;
+    u32 throwXoffset = (B_ENEMY_THROW_BALLS >= GEN_6) ? 24 : 0;
+    s32 throwYoffset = (B_ENEMY_THROW_BALLS >= GEN_6) ? -16 : 24;
 
     if (gTasks[taskId].tFrames == 0)
     {
@@ -566,18 +571,25 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
 
     switch (throwCaseId)
     {
+    case POKEBALL_PLAYER_SLIDEIN: // don't actually send out, trigger the slide-in animation
+        gBattlerTarget = battlerId;
+        gSprites[ballSpriteId].callback = HandleBallAnimEnd;
+        gSprites[ballSpriteId].invisible = TRUE;
+        break;
     case POKEBALL_PLAYER_SENDOUT:
         gBattlerTarget = battlerId;
         gSprites[ballSpriteId].x = 24;
         gSprites[ballSpriteId].y = 68;
-        gSprites[ballSpriteId].callback = SpriteCB_PlayerMonSendOut_1;
+        gSprites[ballSpriteId].callback = SpriteCB_MonSendOut_1;
+        DoPokeballSendOutSoundEffect(battlerId);
         break;
     case POKEBALL_OPPONENT_SENDOUT:
-        gSprites[ballSpriteId].x = GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X);
-        gSprites[ballSpriteId].y = GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y) + 24;
+        gSprites[ballSpriteId].x = GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X) + throwXoffset;
+        gSprites[ballSpriteId].y = GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y) + throwYoffset;
         gBattlerTarget = battlerId;
         gSprites[ballSpriteId].data[0] = 0;
-        gSprites[ballSpriteId].callback = SpriteCB_OpponentMonSendOut;
+        gSprites[ballSpriteId].callback = GetOpponentMonSendOutCallback();
+        DoPokeballSendOutSoundEffect(battlerId);
         break;
     default:
         gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
@@ -602,6 +614,22 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
     gTasks[taskId].tOpponentBattler = gBattlerTarget;
     gTasks[taskId].func = TaskDummy;
     PlaySE(SE_BALL_THROW);
+}
+
+static inline void DoPokeballSendOutSoundEffect(u32 battler)
+{
+    if (IsBattlerPlayer(battler) && B_PLAYER_THROW_BALLS_SOUND < GEN_5)
+        return;
+
+    if (!IsBattlerPlayer(battler) && B_ENEMY_THROW_BALLS_SOUND < GEN_5)
+        return;
+
+     PlaySE(SE_BALL_THROW);
+}
+
+static inline void *GetOpponentMonSendOutCallback(void)
+{
+    return (B_ENEMY_THROW_BALLS >= GEN_6) ? SpriteCB_MonSendOut_1 : SpriteCB_OpponentMonSendOut;
 }
 
 // This sequence of functions is very similar to those that get run when
@@ -1037,6 +1065,13 @@ static void HandleBallAnimEnd(struct Sprite *sprite)
     bool8 affineAnimEnded = FALSE;
     u8 battlerId = sprite->sBattler;
 
+    if (sprite->data[7] == POKEBALL_PLAYER_SLIDEIN)
+    {
+        gSprites[gBattlerSpriteIds[sprite->sBattler]].callback = SpriteCB_PlayerMonSlideIn;
+        AnimateSprite(&gSprites[gBattlerSpriteIds[sprite->sBattler]]);
+        gSprites[gBattlerSpriteIds[sprite->sBattler]].data[1] = 0x1000;
+    }
+
     gSprites[gBattlerSpriteIds[battlerId]].invisible = FALSE;
     if (sprite->animEnded)
         sprite->invisible = TRUE;
@@ -1098,23 +1133,33 @@ static void SpriteCB_BallThrow_CaptureMon(struct Sprite *sprite)
     }
 }
 
-static void SpriteCB_PlayerMonSendOut_1(struct Sprite *sprite)
+static inline bool32 IsBattlerPlayer(u32 battler)
 {
+    return (battler % B_POSITION_PLAYER_RIGHT) ? FALSE : TRUE;
+}
+
+static void SpriteCB_MonSendOut_1(struct Sprite *sprite)
+{
+    bool32 isPlayer = IsBattlerPlayer(sprite->sBattler);
+    u32 coordX = (isPlayer) ? BATTLER_COORD_X_2 : BATTLER_COORD_X;
+    u32 coordY = (isPlayer) ? BATTLER_COORD_Y_PIC_OFFSET : BATTLER_COORD_Y;
+
     sprite->data[0] = 25;
-    sprite->data[2] = GetBattlerSpriteCoord(sprite->sBattler, BATTLER_COORD_X_2);
-    sprite->data[4] = GetBattlerSpriteCoord(sprite->sBattler, BATTLER_COORD_Y_PIC_OFFSET) + 24;
+    sprite->data[2] = GetBattlerSpriteCoord(sprite->sBattler, coordX);
+    sprite->data[4] = GetBattlerSpriteCoord(sprite->sBattler, coordY) + 24;
     sprite->data[5] = -30;
     sprite->oam.affineParam = sprite->sBattler;
     InitAnimArcTranslation(sprite);
-    sprite->callback = SpriteCB_PlayerMonSendOut_2;
+    sprite->callback = SpriteCB_MonSendOut_2;
 }
 
 #define HIBYTE(x) (((x) >> 8) & 0xFF)
 
-static void SpriteCB_PlayerMonSendOut_2(struct Sprite *sprite)
+static void SpriteCB_MonSendOut_2(struct Sprite *sprite)
 {
     u32 r6;
     u32 r7;
+    bool32 rightPosition = (IsBattlerPlayer(sprite->sBattler)) ? B_POSITION_PLAYER_RIGHT : B_POSITION_OPPONENT_RIGHT;
 
     if (HIBYTE(sprite->data[7]) >= 35 && HIBYTE(sprite->data[7]) < 80)
     {
@@ -1157,7 +1202,7 @@ static void SpriteCB_PlayerMonSendOut_2(struct Sprite *sprite)
             sprite->data[0] = 0;
 
             if (IsDoubleBattle() && gBattleSpritesDataPtr->animationData->introAnimActive
-             && sprite->sBattler == GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT))
+             && sprite->sBattler == GetBattlerAtPosition(rightPosition))
                 sprite->callback = SpriteCB_ReleaseMon2FromBall;
             else
                 sprite->callback = SpriteCB_ReleaseMonFromBall;

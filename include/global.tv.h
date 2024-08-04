@@ -82,7 +82,7 @@ typedef union // size = 0x24
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
         /*0x02*/ u16 species;
-        /*0x04*/ u8 pokemonName[POKEMON_NAME_LENGTH + 1];
+        /*0x04*/ u8 pokemonName[VANILLA_POKEMON_NAME_LENGTH + 1];
         /*0x0F*/ u8 trainerName[PLAYER_NAME_LENGTH + 1];
         /*0x17*/ u8 unused[3];
         /*0x1A*/ u8 random;
@@ -98,7 +98,7 @@ typedef union // size = 0x24
         /*0x01*/ bool8 active;
         /*0x02*/ u16 species;
         /*0x04*/ u16 words[2];
-        /*0x08*/ u8 pokemonNickname[POKEMON_NAME_LENGTH + 1];
+        /*0x08*/ u8 pokemonNickname[VANILLA_POKEMON_NAME_LENGTH + 1];
         /*0x13*/ u8 contestCategory:3;
                  u8 contestRank:2;
                  u8 contestResult:2;
@@ -196,7 +196,7 @@ typedef union // size = 0x24
         /*0x01*/ bool8 active;
         /*0x02*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
         /*0x0A*/ u8 contestCategory;
-        /*0x0B*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
+        /*0x0B*/ u8 nickname[VANILLA_POKEMON_NAME_LENGTH + 1];
         /*0x16*/ u8 pokeblockState;
         /*0x17*/ u8 language;
         /*0x18*/ u8 pokemonNameLanguage;
@@ -209,7 +209,7 @@ typedef union // size = 0x24
         /*0x01*/ bool8 active;
         /*0x02*/ u8 language;
         /*0x03*/ u8 language2;
-        /*0x04*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
+        /*0x04*/ u8 nickname[VANILLA_POKEMON_NAME_LENGTH + 1];
         /*0x0F*/ u8 ball;
         /*0x10*/ u16 species;
         /*0x12*/ u8 nBallsUsed;
@@ -409,7 +409,7 @@ typedef union // size = 0x24
         /*0x01*/ bool8 active;
         /*0x02*/ u8 nRibbons;
         /*0x03*/ u8 selectedRibbon;
-        /*0x04*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
+        /*0x04*/ u8 nickname[VANILLA_POKEMON_NAME_LENGTH + 1];
         /*0x0F*/ u8 language;
         /*0x10*/ u8 pokemonNameLanguage;
         /*0x11*/ u8 filler_12[2];

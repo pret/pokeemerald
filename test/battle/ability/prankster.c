@@ -136,7 +136,7 @@ DOUBLE_BATTLE_TEST("Prankster-affected moves that target all Pokémon are succes
 {
     GIVEN {
         ASSUME(gMovesInfo[MOVE_CAPTIVATE].target == MOVE_TARGET_BOTH);
-        PLAYER(SPECIES_VOLBEAT) { Ability(ABILITY_PRANKSTER); }
+        PLAYER(SPECIES_ILLUMISE) { Ability(ABILITY_PRANKSTER); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_UMBREON);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -196,7 +196,7 @@ SINGLE_BATTLE_TEST("Prankster-affected moves can still be bounced back by a Dark
         PLAYER(SPECIES_ABSOL) { Item(ITEM_ABSOLITE); }
         OPPONENT(SPECIES_VOLBEAT) { Ability(ABILITY_PRANKSTER); }
     } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE, megaEvolve: TRUE); MOVE(opponent, MOVE_CONFUSE_RAY); }
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_MEGA); MOVE(opponent, MOVE_CONFUSE_RAY); }
     } SCENE {
         MESSAGE("Foe Volbeat's Confuse Ray was bounced back by Absol's Magic Bounce!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CONFUSE_RAY, player);
@@ -209,7 +209,7 @@ SINGLE_BATTLE_TEST("Prankster-affected moves that are bounced back by Magic Boun
         PLAYER(SPECIES_ABSOL) { Item(ITEM_ABSOLITE); }
         OPPONENT(SPECIES_MURKROW) { Ability(ABILITY_PRANKSTER); }
     } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE, megaEvolve: TRUE); MOVE(opponent, MOVE_CONFUSE_RAY); }
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_MEGA); MOVE(opponent, MOVE_CONFUSE_RAY); }
     } SCENE {
         MESSAGE("Foe Murkrow's Confuse Ray was bounced back by Absol's Magic Bounce!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CONFUSE_RAY, player);

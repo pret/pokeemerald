@@ -252,7 +252,8 @@ MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle::
 	fadescreen FADE_TO_BLACK
 
 MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle::
-	waitstate
+	release
+	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha::
 	msgbox MossdeepCity_SpaceCenter_2F_Text_MaxieWeFailedIsAquaAlsoMisguided, MSGBOX_DEFAULT

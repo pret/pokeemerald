@@ -7,6 +7,7 @@
 #include "decompress.h"
 #include "event_data.h"
 #include "international_string_util.h"
+#include "item.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "main.h"
@@ -41,6 +42,10 @@ void HealPlayerParty(void)
         HealPokemon(&gPlayerParty[i]);
     if (OW_PC_HEAL >= GEN_8)
         HealPlayerBoxes();
+
+    // Recharge Tera Orb, if possible.
+    if (B_FLAG_TERA_ORB_CHARGED != 0 && CheckBagHasItem(ITEM_TERA_ORB, 1))
+        FlagSet(B_FLAG_TERA_ORB_CHARGED);
 }
 
 static void HealPlayerBoxes(void)
@@ -292,6 +297,25 @@ void ToggleGigantamaxFactor(struct ScriptContext *ctx)
     }
 }
 
+void CheckTeraType(struct ScriptContext *ctx)
+{
+    u32 partyIndex = VarGet(ScriptReadHalfword(ctx));
+
+    gSpecialVar_Result = TYPE_NONE;
+
+    if (partyIndex < PARTY_SIZE)
+        gSpecialVar_Result = GetMonData(&gPlayerParty[partyIndex], MON_DATA_TERA_TYPE);
+}
+
+void SetTeraType(struct ScriptContext *ctx)
+{
+    u32 type = ScriptReadByte(ctx);
+    u32 partyIndex = VarGet(ScriptReadHalfword(ctx));
+
+    if (type < NUMBER_OF_MON_TYPES && partyIndex < PARTY_SIZE)
+        SetMonData(&gPlayerParty[partyIndex], MON_DATA_TERA_TYPE, &type);
+}
+
 u32 ScriptGiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 nature, u8 abilityNum, u8 gender, u8 *evs, u8 *ivs, u16 *moves, bool8 ggMaxFactor, u8 teraType, bool8 isShiny)
 {
     u16 nationalDexNum;
@@ -331,7 +355,7 @@ u32 ScriptGiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 natu
 
     // tera type
     if (teraType >= NUMBER_OF_MON_TYPES)
-        teraType = GetTypeBySpecies(species, 1);
+        teraType = TYPE_NONE;
     SetMonData(&mon, MON_DATA_TERA_TYPE, &teraType);
 
     // EV and IV
@@ -422,6 +446,7 @@ u32 ScriptGiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 natu
     return sentToPc;
 }
 
+
 u32 ScriptGiveMon(u16 species, u8 level, u16 item)
 {
     u8 evs[NUM_STATS]        = {0, 0, 0, 0, 0, 0};
@@ -436,8 +461,12 @@ u32 ScriptGiveMon(u16 species, u8 level, u16 item)
 
 #define PARSE_FLAG(n, default_) (flags & (1 << (n))) ? VarGet(ScriptReadHalfword(ctx)) : (default_)
 
-void ScrCmd_givemon(struct ScriptContext *ctx)
+/* Give or create a mon to either player or opponent 
+ */
+void ScrCmd_createmon(struct ScriptContext *ctx)
 {
+    u8 side           = ScriptReadByte(ctx);
+    u8 slot           = ScriptReadByte(ctx);
     u16 species       = VarGet(ScriptReadHalfword(ctx));
     u8 level          = VarGet(ScriptReadHalfword(ctx));
 
@@ -458,12 +487,12 @@ void ScrCmd_givemon(struct ScriptContext *ctx)
     u8 speedEv        = PARSE_FLAG(8, 0);
     u8 spAtkEv        = PARSE_FLAG(9, 0);
     u8 spDefEv        = PARSE_FLAG(10, 0);
-    u8 hpIv           = PARSE_FLAG(11, Random() % MAX_PER_STAT_IVS + 1);
-    u8 atkIv          = PARSE_FLAG(12, Random() % MAX_PER_STAT_IVS + 1);
-    u8 defIv          = PARSE_FLAG(13, Random() % MAX_PER_STAT_IVS + 1);
-    u8 speedIv        = PARSE_FLAG(14, Random() % MAX_PER_STAT_IVS + 1);
-    u8 spAtkIv        = PARSE_FLAG(15, Random() % MAX_PER_STAT_IVS + 1);
-    u8 spDefIv        = PARSE_FLAG(16, Random() % MAX_PER_STAT_IVS + 1);
+    u8 hpIv           = PARSE_FLAG(11, Random() % (MAX_PER_STAT_IVS + 1));
+    u8 atkIv          = PARSE_FLAG(12, Random() % (MAX_PER_STAT_IVS + 1));
+    u8 defIv          = PARSE_FLAG(13, Random() % (MAX_PER_STAT_IVS + 1));
+    u8 speedIv        = PARSE_FLAG(14, Random() % (MAX_PER_STAT_IVS + 1));
+    u8 spAtkIv        = PARSE_FLAG(15, Random() % (MAX_PER_STAT_IVS + 1));
+    u8 spDefIv        = PARSE_FLAG(16, Random() % (MAX_PER_STAT_IVS + 1));
     u16 move1         = PARSE_FLAG(17, MOVE_NONE);
     u16 move2         = PARSE_FLAG(18, MOVE_NONE);
     u16 move3         = PARSE_FLAG(19, MOVE_NONE);

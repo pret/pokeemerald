@@ -137,24 +137,3 @@ DOUBLE_BATTLE_TEST("Brick Break can remove Light Screen, Reflect and Aurora Veil
         HP_BAR(playerLeft);
     }
 }
-
-SINGLE_BATTLE_TEST("Move Raging Bull changes it's type depending on the Tauros Form")
-{
-    u16 speciesPlayer;
-    u16 speciesOpponent;
-
-    PARAMETRIZE { speciesPlayer = SPECIES_TAUROS_PALDEAN_COMBAT_BREED; speciesOpponent = SPECIES_CHARIZARD; }
-    PARAMETRIZE { speciesPlayer = SPECIES_TAUROS_PALDEAN_BLAZE_BREED; speciesOpponent = SPECIES_BLASTOISE; }
-    PARAMETRIZE { speciesPlayer = SPECIES_TAUROS_PALDEAN_AQUA_BREED; speciesOpponent = SPECIES_VENUSAUR; }
-
-    GIVEN {
-        PLAYER(speciesPlayer);
-        OPPONENT(speciesOpponent);
-    } WHEN {
-        TURN { MOVE(player, MOVE_RAGING_BULL); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGING_BULL, player);
-        HP_BAR(opponent);
-        MESSAGE("It's not very effective…");
-    }
-}

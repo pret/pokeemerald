@@ -32,8 +32,6 @@ enum {
     ABILITYEFFECT_IMMUNITY,
     ABILITYEFFECT_SYNCHRONIZE,
     ABILITYEFFECT_ATK_SYNCHRONIZE,
-    ABILITYEFFECT_TRACE1,
-    ABILITYEFFECT_TRACE2,
     ABILITYEFFECT_MOVE_END_OTHER,
     ABILITYEFFECT_NEUTRALIZINGGAS,
     ABILITYEFFECT_FIELD_SPORT,         // Only used if B_SPORT_TURNS >= GEN_6
@@ -65,6 +63,10 @@ enum {
 
 #define IS_WHOLE_SIDE_ALIVE(battler)    ((IsBattlerAlive(battler) && IsBattlerAlive(BATTLE_PARTNER(battler))))
 #define IS_ALIVE_AND_PRESENT(battler)   (IsBattlerAlive(battler) && IsBattlerSpritePresent(battler))
+
+// Lowest and highest percentages used for damage roll calculations
+#define DMG_ROLL_PERCENT_LO 85
+#define DMG_ROLL_PERCENT_HI 100
 
 // for Natural Gift and Fling
 struct TypePower
@@ -153,14 +155,14 @@ bool32 TryChangeBattleWeather(u32 battler, u32 weatherEnumId, bool32 viaAbility)
 u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 moveArg);
 bool32 TryPrimalReversion(u32 battler);
 bool32 IsNeutralizingGasOnField(void);
-bool32 IsMoldBreakerTypeAbility(u32 ability);
+bool32 IsMoldBreakerTypeAbility(u32 battler, u32 ability);
 u32 GetBattlerAbility(u32 battler);
 u32 IsAbilityOnSide(u32 battler, u32 ability);
 u32 IsAbilityOnOpposingSide(u32 battler, u32 ability);
 u32 IsAbilityOnField(u32 ability);
 u32 IsAbilityOnFieldExcept(u32 battler, u32 ability);
 u32 IsAbilityPreventingEscape(u32 battler);
-bool32 IsBattlerProtected(u32 battler, u32 move);
+bool32 IsBattlerProtected(u32 battlerAtk, u32 battlerDef, u32 move);
 bool32 CanBattlerEscape(u32 battler); // no ability check
 void BattleScriptExecute(const u8 *BS_ptr);
 void BattleScriptPushCursorAndCallback(const u8 *BS_ptr);
@@ -187,10 +189,13 @@ s32 CalculateMoveDamageVars(u32 move, u32 battlerAtk, u32 battlerDef, u32 moveTy
 uq4_12_t CalcTypeEffectivenessMultiplier(u32 move, u32 moveType, u32 battlerAtk, u32 battlerDef, u32 defAbility, bool32 recordAbilities);
 uq4_12_t CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u16 abilityDef);
 uq4_12_t GetTypeModifier(u32 atkType, u32 defType);
+uq4_12_t GetTypeEffectiveness(struct Pokemon *mon, u8 moveType);
 s32 GetStealthHazardDamage(u8 hazardType, u32 battler);
 s32 GetStealthHazardDamageByTypesAndHP(u8 hazardType, u8 type1, u8 type2, u32 maxHp);
 bool32 CanMegaEvolve(u32 battler);
 bool32 CanUltraBurst(u32 battler);
+void ActivateMegaEvolution(u32 battler);
+void ActivateUltraBurst(u32 battler);
 bool32 IsBattlerMegaEvolved(u32 battler);
 bool32 IsBattlerPrimalReverted(u32 battler);
 bool32 IsBattlerUltraBursted(u32 battler);
@@ -211,6 +216,7 @@ bool32 IsBelchPreventingMove(u32 battler, u32 move);
 bool32 HasEnoughHpToEatBerry(u32 battler, u32 hpFraction, u32 itemId);
 bool32 IsPartnerMonFromSameTrainer(u32 battler);
 u8 GetCategoryBasedOnStats(u32 battler);
+void SetShellSideArmCategory(void);
 bool32 MoveIsAffectedBySheerForce(u32 move);
 bool32 TestIfSheerForceAffected(u32 battler, u16 move);
 void TryRestoreHeldItems(void);
@@ -241,17 +247,16 @@ bool32 MoveHasChargeTurnAdditionalEffect(u32 move);
 bool32 CanTargetPartner(u32 battlerAtk, u32 battlerDef);
 bool32 TargetFullyImmuneToCurrMove(u32 BattlerAtk, u32 battlerDef);
 
-bool32 CanSleep(u32 battler);
-bool32 CanBePoisoned(u32 battlerAttacker, u32 battlerTarget);
-bool32 CanBeBurned(u32 battler);
-bool32 CanBeParalyzed(u32 battler);
+bool32 CanBeSlept(u32 battler, u32 ability);
+bool32 CanBePoisoned(u32 battlerAtk, u32 battlerDef, u32 defAbility);
+bool32 CanBeBurned(u32 battler, u32 ability);
+bool32 CanBeParalyzed(u32 battler, u32 ability);
 bool32 CanBeFrozen(u32 battler);
 bool32 CanGetFrostbite(u32 battler);
 bool32 CanBeConfused(u32 battler);
 bool32 IsBattlerTerrainAffected(u32 battler, u32 terrainFlag);
 u32 GetBattlerAffectionHearts(u32 battler);
 u32 CountBattlerStatIncreases(u32 battler, bool32 countEvasionAcc);
-bool32 IsMyceliumMightOnField(void);
 bool32 ChangeTypeBasedOnTerrain(u32 battler);
 void RemoveConfusionStatus(u32 battler);
 u8 GetBattlerGender(u32 battler);
@@ -259,7 +264,7 @@ bool32 AreBattlersOfOppositeGender(u32 battler1, u32 battler2);
 bool32 AreBattlersOfSameGender(u32 battler1, u32 battler2);
 u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct AdditionalEffect *additionalEffect);
 bool32 MoveEffectIsGuaranteed(u32 battler, u32 battlerAbility, const struct AdditionalEffect *additionalEffect);
-u8 GetBattlerType(u32 battler, u8 typeIndex);
+u8 GetBattlerType(u32 battler, u8 typeIndex, bool32 ignoreTera);
 bool8 CanMonParticipateInSkyBattle(struct Pokemon *mon);
 bool8 IsMonBannedFromSkyBattles(u16 species);
 void RemoveBattlerType(u32 battler, u8 type);
