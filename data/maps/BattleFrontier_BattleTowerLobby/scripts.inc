@@ -415,18 +415,18 @@ BattleFrontier_BattleTowerLobby_EventScript_SaveBeforeLinkMultisChallenge::
 @ to the flash, but not data in PokemonStorage. The SaveGame script that follows asks the player to do a full save,
 @ which they can opt out of. As a result the player can save their party and quit without having saved the PC.
 @ This allows players to clone pokemon and their held items by withdrawing them (or erase them by despositing).
-.ifndef BUGFIX
+#ifndef BUGFIX
 	tower_save 0
-.endif
+#endif
 	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
 	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattleTowerLobby_EventScript_CancelChallengeSaveFailed
 @ GAME_STAT_ENTERED_BATTLE_TOWER should not be incremented here, for two reasons:
 @ 1. It is incremented again in BattleFrontier_BattleTowerLobby_EventScript_CableLinkSuccessful or BattleFrontier_BattleTowerLobby_EventScript_WirelessLinkSuccessful
-@ 2. If the player tries to save, but fails, the counter will still be incremented even if the player never enters the tower.
-.ifndef BUGFIX
+@ 2. If the player tries to connect, but fails, the counter will still be incremented even if the player never enters the tower.
+#ifndef BUGFIX
 	incrementgamestat GAME_STAT_ENTERED_BATTLE_TOWER
-.endif
+#endif
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattleTowerLobby_EventScript_TryWirelessLink
 	goto BattleFrontier_BattleTowerLobby_EventScript_TryCableLink

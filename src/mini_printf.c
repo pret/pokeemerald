@@ -41,7 +41,7 @@
 
 #ifndef NDEBUG
 
-struct mini_buff 
+struct mini_buff
 {
     char *buffer, *pbuffer;
     u32 buffer_len;
@@ -95,15 +95,17 @@ static s32 _putsAscii(char *s, s32 len, void *buf)
     s32 i;
     struct mini_buff *b;
 
-    if (!buf) 
+    if (!buf)
         return len;
 
     b = buf;
     p0 = b->buffer;
 
     /* Copy to buffer */
-    for (i = 0; i < len; i++) {
-        if(b->pbuffer == b->buffer + b->buffer_len - 1) {
+    for (i = 0; i < len; i++)
+    {
+        if(b->pbuffer == b->buffer + b->buffer_len - 1)
+        {
             break;
         }
         *(b->pbuffer ++) = s[i];
@@ -118,15 +120,17 @@ static s32 _putsEncoded(char *s, s32 len, void *buf)
     s32 i;
     struct mini_buff *b;
 
-    if (!buf) 
+    if (!buf)
         return len;
 
     b = buf;
     p0 = b->buffer;
 
     /* Copy to buffer */
-    for (i = 0; i < len; i++) {
-        if(b->pbuffer == b->buffer + b->buffer_len - 1) {
+    for (i = 0; i < len; i++)
+    {
+        if(b->pbuffer == b->buffer + b->buffer_len - 1)
+        {
             break;
         }
         *(b->pbuffer ++) = mini_pchar_decode(s[i]);
@@ -159,7 +163,7 @@ static s32 mini_itoa(s32 value, u32 radix, s32 uppercase, bool32 unsig, char *bu
     }
 
     /* This builds the string back to front ... */
-    do 
+    do
     {
         s32 digit = value % radix;
         *(pbuffer++) = (digit < 10 ? '0' + digit : (uppercase ? 'A' : 'a') + digit - 10);
@@ -191,7 +195,8 @@ static s32 mini_pad(char* ptr, s32 len, char pad_char, s32 pad_to, char *buffer)
     char * pbuffer = buffer;
     if(pad_to == 0)
         pad_to = len;
-    if (len > pad_to) {
+    if (len > pad_to)
+    {
         len = pad_to;
         overflow = TRUE;
     }
@@ -243,7 +248,7 @@ s32 mini_vpprintf(void* buf, const char *fmt, va_list va)
         {
             len = 1;
             len = _putsAscii(&ch, len, buf);
-        } else 
+        } else
         {
             char pad_char = ' ';
             s32 pad_to = 0;
@@ -270,7 +275,7 @@ s32 mini_vpprintf(void* buf, const char *fmt, va_list va)
                 ch=*(fmt++);
             }
 
-            switch (ch) 
+            switch (ch)
             {
                 case 0:
                     goto end;
@@ -328,7 +333,7 @@ s32 mini_vpprintf(void* buf, const char *fmt, va_list va)
                     break;
                 case 'S' : // preproc encoded string handler
                     ptr = va_arg(va, char*);
-                    len = StringLength(ptr);
+                    len = StringLength((u8*)ptr);
                     if (pad_to > 0)
                     {
                         len = mini_pad(ptr, len, pad_char, pad_to, bf);

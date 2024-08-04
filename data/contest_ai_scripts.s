@@ -1,3 +1,4 @@
+#include "config.h"
 #include "constants/global.h"
 #include "constants/contest.h"
 	.include "asm/macros.inc"
@@ -435,11 +436,11 @@ AI_CGM_BetterWhenAudienceExcited:
 AI_CGM_BetterWhenAudienceExcited_1stUp:
 	@ BUG: Should be if_appeal_num_eq 0
 	@ 1st up on 1st appeal excitement will always be 0
-.ifdef BUGFIX
+#ifdef BUGFIX
 	if_appeal_num_eq 0, AI_CGM_BetterWhenAudienceExcited_1stAppeal
-.else
+#else
 	if_appeal_num_not_eq 0, AI_CGM_BetterWhenAudienceExcited_1stAppeal
-.endif
+#endif
 	if_excitement_eq 4, AI_CGM_BetterWhenAudienceExcited_1AwayFromMax
 	if_excitement_eq 3, AI_CGM_BetterWhenAudienceExcited_2AwayFromMax
 	end
@@ -546,11 +547,11 @@ AI_CGM_TargetMonWithJudgesAttention:
 	end
 AI_CGM_TargetMonWithJudgesAttention_CheckMon1:
 	if_cannot_participate MON_1, AI_CGM_TargetMonWithJudgesAttention_CheckMon2
-.ifdef BUGFIX
+#ifdef BUGFIX
 	if_not_used_combo_starter MON_1, AI_CGM_TargetMonWithJudgesAttention_CheckMon2
-.else
+#else
 	if_used_combo_starter MON_1, AI_CGM_TargetMonWithJudgesAttention_CheckMon2
-.endif
+#endif
 	if_random_less_than 125, AI_CGM_TargetMonWithJudgesAttention_CheckMon2
 	score +2
 	if_not_completed_combo MON_1, AI_CGM_TargetMonWithJudgesAttention_CheckMon2
@@ -559,11 +560,11 @@ AI_CGM_TargetMonWithJudgesAttention_CheckMon1:
 AI_CGM_TargetMonWithJudgesAttention_CheckMon2:
 	if_user_order_eq MON_2, AI_CGM_End
 	if_cannot_participate MON_2, AI_CGM_TargetMonWithJudgesAttention_CheckMon3
-.ifdef BUGFIX
+#ifdef BUGFIX
 	if_not_used_combo_starter MON_2, AI_CGM_TargetMonWithJudgesAttention_CheckMon3
-.else
+#else
 	if_used_combo_starter MON_2, AI_CGM_TargetMonWithJudgesAttention_CheckMon3
-.endif
+#endif
 	if_random_less_than 125, AI_CGM_TargetMonWithJudgesAttention_CheckMon3
 	score +2
 	if_not_completed_combo MON_2, AI_CGM_TargetMonWithJudgesAttention_CheckMon3
@@ -572,11 +573,11 @@ AI_CGM_TargetMonWithJudgesAttention_CheckMon2:
 AI_CGM_TargetMonWithJudgesAttention_CheckMon3:
 	if_user_order_eq MON_3, AI_CGM_End
 	if_cannot_participate MON_3, AI_CGM_End
-.ifdef BUGFIX
+#ifdef BUGFIX
 	if_not_used_combo_starter MON_3, AI_CGM_End
-.else
+#else
 	if_used_combo_starter MON_3, AI_CGM_End
-.endif
+#endif
 	if_random_less_than 125, AI_CGM_End
 	score +2
 	if_not_completed_combo MON_3, AI_CGM_End
