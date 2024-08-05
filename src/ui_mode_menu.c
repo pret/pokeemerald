@@ -895,6 +895,11 @@ static void Task_ModeMenuSave(u8 taskId)
     else
         FlagClear(FLAG_RANDOM_MODE);
 
+    if (sOptions->sel[MENUITEM_MAIN_DEFAULTS] == MODE_HARD)
+        FlagSet(FLAG_HARD_MODE);
+    else
+        FlagClear(FLAG_HARD_MODE);
+
     if (sOptions->sel[MENUITEM_MAIN_XPSHARE] == XP_50)
         FlagSet(FLAG_XPSHARE_50);
     else

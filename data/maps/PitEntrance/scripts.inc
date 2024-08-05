@@ -325,8 +325,9 @@ PitEntrance_Text_HardModeInfo::
 	.string "and gives trainers EV trained Pokémon.\p"
 	.string "Trainer EVs will be evenly distributed and\n"
 	.string "match the average EVs of your own team.\p"
-	.string "It also enables new merchant items to\n"
-	.string "reset EVs for your own Pokémon.$"
+	.string "It also enables new merchant items in\n"
+	.string "the vitamins section to reset EVs for\l"
+	.string "your own Pokémon.$"
 
 PitEntrance_Text_Credits::
 	.string "I, Archie from Team Aquas Hideout, have\n"

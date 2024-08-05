@@ -9510,15 +9510,15 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Pomeg Berry"),
         .pluralName = _("Pomeg Berries"),
-        .price = (I_BERRY_PRICE >= GEN_8) ? 80 : 20,
+        .price = 500, // EV BERRY
         .description = COMPOUND_STRING(
             "Makes a Pokémon\n"
             "friendly but lowers\n"
-            "base HP."),
-        .pocket = POCKET_BERRIES,
+            "Resets HP EVs."),
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,
-        .effect = gItemEffect_PomegBerry,
+        .fieldUseFunc = ItemUseOutOfBattle_ResetEVs,
+        .effect = gItemEffect_HpMochi,
         .flingPower = 10,
         .iconPic = gItemIcon_PomegBerry,
         .iconPalette = gItemIconPalette_PomegBerry,
@@ -9528,15 +9528,15 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Kelpsy Berry"),
         .pluralName = _("Kelpsy Berries"),
-        .price = (I_BERRY_PRICE >= GEN_8) ? 80 : 20,
+        .price = 500, // EV BERRY
         .description = COMPOUND_STRING(
             "Makes a Pokémon\n"
             "friendly but lowers\n"
-            "base Attack."),
-        .pocket = POCKET_BERRIES,
+            "Resets Attack EVs."),
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,
-        .effect = gItemEffect_KelpsyBerry,
+        .fieldUseFunc = ItemUseOutOfBattle_ResetEVs,
+        .effect = gItemEffect_AtkMochi,
         .flingPower = 10,
         .iconPic = gItemIcon_KelpsyBerry,
         .iconPalette = gItemIconPalette_KelpsyBerry,
@@ -9546,15 +9546,15 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Qualot Berry"),
         .pluralName = _("Qualot Berries"),
-        .price = (I_BERRY_PRICE >= GEN_8) ? 80 : 20,
+        .price = 500, // EV BERRY
         .description = COMPOUND_STRING(
             "Makes a Pokémon\n"
             "friendly but lowers\n"
-            "base Defense."),
-        .pocket = POCKET_BERRIES,
+            "Resets Defense EVs."),
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,
-        .effect = gItemEffect_QualotBerry,
+        .fieldUseFunc = ItemUseOutOfBattle_ResetEVs,
+        .effect = gItemEffect_DefMochi,
         .flingPower = 10,
         .iconPic = gItemIcon_QualotBerry,
         .iconPalette = gItemIconPalette_QualotBerry,
@@ -9564,15 +9564,15 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Hondew Berry"),
         .pluralName = _("Hondew Berries"),
-        .price = (I_BERRY_PRICE >= GEN_8) ? 80 : 20,
+        .price = 500, // EV BERRY
         .description = COMPOUND_STRING(
             "Makes a Pokémon\n"
             "friendly but lowers\n"
-            "base Sp. Atk."),
-        .pocket = POCKET_BERRIES,
+            "Resets Sp. Atk. EVs."),
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,
-        .effect = gItemEffect_HondewBerry,
+        .fieldUseFunc = ItemUseOutOfBattle_ResetEVs,
+        .effect = gItemEffect_SpatkMochi,
         .flingPower = 10,
         .iconPic = gItemIcon_HondewBerry,
         .iconPalette = gItemIconPalette_HondewBerry,
@@ -9582,15 +9582,15 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Grepa Berry"),
         .pluralName = _("Grepa Berries"),
-        .price = (I_BERRY_PRICE >= GEN_8) ? 80 : 20,
+        .price = 500, // EV BERRY
         .description = COMPOUND_STRING(
             "Makes a Pokémon\n"
             "friendly but lowers\n"
-            "base Sp. Def."),
-        .pocket = POCKET_BERRIES,
+            "Resets Sp. Def. EVs."),
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,
-        .effect = gItemEffect_GrepaBerry,
+        .fieldUseFunc = ItemUseOutOfBattle_ResetEVs,
+        .effect = gItemEffect_SpdefMochi,
         .flingPower = 10,
         .iconPic = gItemIcon_GrepaBerry,
         .iconPalette = gItemIconPalette_GrepaBerry,
@@ -9600,15 +9600,15 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Tamato Berry"),
         .pluralName = _("Tamato Berries"),
-        .price = (I_BERRY_PRICE >= GEN_8) ? 80 : 20,
+        .price = 500, // EV BERRY
         .description = COMPOUND_STRING(
             "Makes a Pokémon\n"
             "friendly but lowers\n"
-            "base Speed."),
-        .pocket = POCKET_BERRIES,
+            "Resets Speed EVs."),
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,
-        .effect = gItemEffect_TamatoBerry,
+        .fieldUseFunc = ItemUseOutOfBattle_ResetEVs,
+        .effect = gItemEffect_SpeedMochi,
         .flingPower = 10,
         .iconPic = gItemIcon_TamatoBerry,
         .iconPalette = gItemIconPalette_TamatoBerry,
@@ -18133,12 +18133,12 @@ const struct Item gItemsInfo[] =
     {
         .name = HANDLE_EXPANDED_ITEM_NAME("FrshStrtMochi", "Fresh Start Mochi"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("FrshStrtMochi", "Fresh Start Mochi"),
-        .price = 300,
+        .price = 2000,
         .description = COMPOUND_STRING(
             "An item that resets\n"
             "all base points of\n"
             "a Pokémon."),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_POWER_UP,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_ResetEVs,
         .effect = gItemEffect_ResetMochi,

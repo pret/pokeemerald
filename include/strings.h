@@ -3212,6 +3212,13 @@ extern const u8 gText_ExpShareOn[];
 extern const u8 gText_ExpShareOff[];
 
 extern const u8 gText_BasePointsResetToZero[];
+extern const u8 gText_HpEVResetToZero[];
+extern const u8 gText_AtkEVResetToZero[];
+extern const u8 gText_DefEVResetToZero[];
+extern const u8 gText_SpatkEVResetToZero[];
+extern const u8 gText_SpdefEVResetToZero[];
+extern const u8 gText_SpeedEVResetToZero[];
+
 // BSBob map pop-ups
 extern const u8 gText_AM[];
 extern const u8 gText_PM[];

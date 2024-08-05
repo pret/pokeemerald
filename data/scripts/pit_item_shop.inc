@@ -97,13 +97,20 @@ PitShop_ShopNPCHook_Gen3IVs::
 	release
 	end
 
-PitArena_MartScript_Vitamins:
+PitArena_MartScript_Vitamins::
+	lock
 	setflag FLAG_BUY_FROM_MART
+	goto_if_set FLAG_HARD_MODE, PitArena_MartScript_Vitamins_2
 	pokemart PitArena_Mart_Vitamins
+PitArena_MartScript_Vitamins_1:
 	goto PitShop_ShopNPCHook
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
-	end 
+	return
+
+PitArena_MartScript_Vitamins_2:
+	pokemart PitArena_Mart_Vitamins_HARD
+	goto PitArena_MartScript_Vitamins_1
 
 PitArena_MartScript_TMs:
 	setflag FLAG_BUY_FROM_MART
@@ -223,11 +230,15 @@ PitArena_MartScript_EditIVs_Execute::
 
 
 PitShop_ShopNPC_Option0:
+#ifdef PIT_GEN_9_MODE
+	.string "TMs A-F$"
+#else
 	.string "TMs    $"
+#endif
 PitShop_ShopNPC_Option0_100:
-	.string "TMs 100+$"
+	.string "TMs G-R$"
 PitShop_ShopNPC_Option0_200:
-	.string "TMs 200+$"
+	.string "TMs S-Z & HMs$"
 PitShop_ShopNPC_Option1:
 	.string "Evos$"
 PitShop_ShopNPC_Option2:
@@ -272,6 +283,35 @@ PitArena_Tutor_NotGotTheMoney:
 
 	.align 2
 PitArena_Mart_Vitamins:
+	.2byte ITEM_PROTEIN
+	.2byte ITEM_CALCIUM
+	.2byte ITEM_IRON
+	.2byte ITEM_ZINC
+	.2byte ITEM_CARBOS
+	.2byte ITEM_HP_UP
+	.2byte ITEM_PP_UP
+	.2byte ITEM_PP_MAX
+#ifndef PIT_GEN_3_MODE
+	.2byte ITEM_HEALTH_FEATHER
+	.2byte ITEM_MUSCLE_FEATHER
+	.2byte ITEM_RESIST_FEATHER
+	.2byte ITEM_GENIUS_FEATHER
+	.2byte ITEM_CLEVER_FEATHER
+	.2byte ITEM_SWIFT_FEATHER
+#endif
+	.2byte ITEM_NONE
+	release
+	end
+
+.align 2
+PitArena_Mart_Vitamins_HARD:
+	.2byte ITEM_FRESH_START_MOCHI
+	.2byte ITEM_POMEG_BERRY
+	.2byte ITEM_KELPSY_BERRY
+	.2byte ITEM_QUALOT_BERRY
+	.2byte ITEM_HONDEW_BERRY
+	.2byte ITEM_GREPA_BERRY
+	.2byte ITEM_TAMATO_BERRY
 	.2byte ITEM_PROTEIN
 	.2byte ITEM_CALCIUM
 	.2byte ITEM_IRON
@@ -562,107 +602,271 @@ PitArena_Mart_FormItems:
 
  	.align 2
 PitArena_Mart_TMs:
-	.2byte ITEM_TM01
-	.2byte ITEM_TM02
-	.2byte ITEM_TM03
-	.2byte ITEM_TM04
-	.2byte ITEM_TM05
-	.2byte ITEM_TM06
-	.2byte ITEM_TM07
+#ifdef PIT_GEN_3_MODE
+	.2byte ITEM_TM40
+	.2byte ITEM_TM45
+	.2byte ITEM_TM14
+	.2byte ITEM_TM66
+	.2byte ITEM_TM31
 	.2byte ITEM_TM08
 	.2byte ITEM_TM09
-	.2byte ITEM_TM10
-	.2byte ITEM_TM11
-	.2byte ITEM_TM12
-	.2byte ITEM_TM13
-	.2byte ITEM_TM14
-	.2byte ITEM_TM15
-	.2byte ITEM_TM16
-	.2byte ITEM_TM17
-	.2byte ITEM_TM18
-	.2byte ITEM_TM19
-	.2byte ITEM_TM20
-	.2byte ITEM_TM21
-	.2byte ITEM_TM22
-	.2byte ITEM_TM23
-	.2byte ITEM_TM24
-	.2byte ITEM_TM25
-	.2byte ITEM_TM26
-	.2byte ITEM_TM27
+	.2byte ITEM_TM04
+	.2byte ITEM_TM68
+	.2byte ITEM_TM71
 	.2byte ITEM_TM28
-	.2byte ITEM_TM29
-	.2byte ITEM_TM30
-	.2byte ITEM_TM31
-	.2byte ITEM_TM32
-	.2byte ITEM_TM33
-	.2byte ITEM_TM34
-	.2byte ITEM_TM35
-	.2byte ITEM_TM36
-	.2byte ITEM_TM37
-	.2byte ITEM_TM38
-	.2byte ITEM_TM39
-	.2byte ITEM_TM40
-	.2byte ITEM_TM41
-	.2byte ITEM_TM42
-	.2byte ITEM_TM43
-	.2byte ITEM_TM44
-	.2byte ITEM_TM45
-	.2byte ITEM_TM46
-	.2byte ITEM_TM47
-	.2byte ITEM_TM48
-	.2byte ITEM_TM49
-	.2byte ITEM_TM50
 	.2byte ITEM_TM51
+	.2byte ITEM_TM32
+	.2byte ITEM_TM02
+	.2byte ITEM_TM63
 	.2byte ITEM_TM52
+	.2byte ITEM_TM26
+	.2byte ITEM_TM76
 	.2byte ITEM_TM53
+	.2byte ITEM_TM42
+	.2byte ITEM_TM38
+	.2byte ITEM_TM80
+	.2byte ITEM_TM35
+	.2byte ITEM_TM01
+	.2byte ITEM_TM21
 	.2byte ITEM_TM54
+	.2byte ITEM_TM19
+	.2byte ITEM_TM07
+	.2byte ITEM_TM10
+	.2byte ITEM_TM15
+	.2byte ITEM_TM13
+	.2byte ITEM_TM78
+	.2byte ITEM_TM75
+	.2byte ITEM_TM23
+	.2byte ITEM_TM16
+	.2byte ITEM_TM65
+	.2byte ITEM_TM64
 	.2byte ITEM_TM55
 	.2byte ITEM_TM56
-	.2byte ITEM_TM57
-	.2byte ITEM_TM58
-	.2byte ITEM_TM59
-	.2byte ITEM_TM60
-	.2byte ITEM_TM61
-	.2byte ITEM_TM62
-	.2byte ITEM_TM63
-	.2byte ITEM_TM64
-	.2byte ITEM_TM65
-	.2byte ITEM_TM66
-	.2byte ITEM_TM67
-	.2byte ITEM_TM68
-	.2byte ITEM_TM69
-	.2byte ITEM_TM70
-	.2byte ITEM_TM71
-	.2byte ITEM_TM72
 	.2byte ITEM_TM73
-	.2byte ITEM_TM74
-	.2byte ITEM_TM75
-	.2byte ITEM_TM76
+	.2byte ITEM_TM50
+	.2byte ITEM_TM17
 	.2byte ITEM_TM77
-	.2byte ITEM_TM78
+	.2byte ITEM_TM29
+	.2byte ITEM_TM18
+	.2byte ITEM_TM33
+	.2byte ITEM_TM44
+	.2byte ITEM_TM27
+	.2byte ITEM_TM05
+	.2byte ITEM_TM67
+	.2byte ITEM_TM39
+	.2byte ITEM_TM57
+	.2byte ITEM_TM20
+	.2byte ITEM_TM37
+	.2byte ITEM_TM43
+	.2byte ITEM_TM62
+	.2byte ITEM_TM30
+	.2byte ITEM_TM34
+	.2byte ITEM_TM48
+	.2byte ITEM_TM58
+	.2byte ITEM_TM36
+	.2byte ITEM_TM49
+	.2byte ITEM_TM72
+	.2byte ITEM_TM61
+	.2byte ITEM_TM22
+	.2byte ITEM_TM47
+	.2byte ITEM_TM59
+	.2byte ITEM_TM11
+	.2byte ITEM_TM60
+	.2byte ITEM_TM74
+	.2byte ITEM_TM70
+	.2byte ITEM_TM12
+	.2byte ITEM_TM46
+	.2byte ITEM_TM25
 	.2byte ITEM_TM79
-	.2byte ITEM_TM80
-#ifndef PIT_GEN_3_MODE
-	.2byte ITEM_TM81
-	.2byte ITEM_TM82
-	.2byte ITEM_TM83
-	.2byte ITEM_TM84
-	.2byte ITEM_TM85
-	.2byte ITEM_TM86
-	.2byte ITEM_TM87
-	.2byte ITEM_TM88
-	.2byte ITEM_TM89
-	.2byte ITEM_TM90
-	.2byte ITEM_TM91
-	.2byte ITEM_TM92
-	.2byte ITEM_TM93
-	.2byte ITEM_TM94
-	.2byte ITEM_TM95
+	.2byte ITEM_TM69
+	.2byte ITEM_TM24
+	.2byte ITEM_TM41
+	.2byte ITEM_TM06
+	.2byte ITEM_TM03
+#endif
+#ifdef PIT_GEN_5_MODE
+	.2byte ITEM_TM62
+	.2byte ITEM_TM40
+	.2byte ITEM_TM51
+	.2byte ITEM_TM45
+	.2byte ITEM_TM14
+	.2byte ITEM_TM31
+	.2byte ITEM_TM08
+	.2byte ITEM_TM78
 	.2byte ITEM_TM96
+	.2byte ITEM_TM04
+	.2byte ITEM_TM57
+	.2byte ITEM_TM28
+	.2byte ITEM_TM32
+	.2byte ITEM_TM02
+	.2byte ITEM_TM82
+	.2byte ITEM_TM85
+	.2byte ITEM_TM26
+	.2byte ITEM_TM49
+	.2byte ITEM_TM63
+	.2byte ITEM_TM53
+	.2byte ITEM_TM64
+	.2byte ITEM_TM42
+	.2byte ITEM_TM54
+	.2byte ITEM_TM38
+	.2byte ITEM_TM43
+	.2byte ITEM_TM35
+	.2byte ITEM_TM91
+	.2byte ITEM_TM56
+	.2byte ITEM_TM52
+	.2byte ITEM_TM70
+	.2byte ITEM_TM79
+	.2byte ITEM_TM21
 	.2byte ITEM_TM97
+	.2byte ITEM_TM68
+	.2byte ITEM_TM86
+	.2byte ITEM_TM74
+	.2byte ITEM_TM07
+	.2byte ITEM_TM10
+	.2byte ITEM_TM01
+	.2byte ITEM_TM15
+	.2byte ITEM_TM13
+	.2byte ITEM_TM59
 	.2byte ITEM_TM98
+	.2byte ITEM_TM16
+	.2byte ITEM_TM47
+	.2byte ITEM_TM50
+	.2byte ITEM_TM66
+	.2byte ITEM_TM88
+	.2byte ITEM_TM84
+	.2byte ITEM_TM17
+	.2byte ITEM_TM77
+	.2byte ITEM_TM29
+	.2byte ITEM_TM03
+	.2byte ITEM_TM60
+	.2byte ITEM_TM18
+	.2byte ITEM_TM33
+	.2byte ITEM_TM44
+	.2byte ITEM_TM67
+	.2byte ITEM_TM27
+	.2byte ITEM_TM05
+	.2byte ITEM_TM69
+	.2byte ITEM_TM80
+	.2byte ITEM_TM39
+	.2byte ITEM_TM48
+	.2byte ITEM_TM20
+	.2byte ITEM_TM37
+	.2byte ITEM_TM55
+	.2byte ITEM_TM30
+	.2byte ITEM_TM65
 	.2byte ITEM_TM99
 	.2byte ITEM_TM100
+	.2byte ITEM_TM58
+	.2byte ITEM_TM36
+	.2byte ITEM_TM34
+	.2byte ITEM_TM23
+	.2byte ITEM_TM95
+	.2byte ITEM_TM22
+	.2byte ITEM_TM71
+	.2byte ITEM_TM76
+	.2byte ITEM_TM90
+	.2byte ITEM_TM11
+	.2byte ITEM_TM87
+	.2byte ITEM_TM75
+	.2byte ITEM_TM12
+	.2byte ITEM_TM19
+	.2byte ITEM_TM46
+	.2byte ITEM_TM25
+	.2byte ITEM_TM73
+	.2byte ITEM_TM24
+	.2byte ITEM_TM41
+	.2byte ITEM_TM06
+	.2byte ITEM_TM92
+	.2byte ITEM_TM89
+	.2byte ITEM_TM09
+	.2byte ITEM_TM72
+	.2byte ITEM_TM94
+	.2byte ITEM_TM93
+	.2byte ITEM_TM61
+	.2byte ITEM_TM83
+	.2byte ITEM_TM81
+#endif
+#ifdef PIT_GEN_9_MODE
+	.2byte ITEM_TM13
+	.2byte ITEM_TM14
+	.2byte ITEM_TM27
+	.2byte ITEM_TM04
+	.2byte ITEM_TM40
+	.2byte ITEM_TM65
+	.2byte ITEM_TM227
+	.2byte ITEM_TM128
+	.2byte ITEM_TM112
+	.2byte ITEM_TM46
+	.2byte ITEM_TM132
+	.2byte ITEM_TM153
+	.2byte ITEM_TM143
+	.2byte ITEM_TM89
+	.2byte ITEM_TM66
+	.2byte ITEM_TM164
+	.2byte ITEM_TM222
+	.2byte ITEM_TM58
+	.2byte ITEM_TM182
+	.2byte ITEM_TM162
+	.2byte ITEM_TM64
+	.2byte ITEM_TM28
+	.2byte ITEM_TM56
+	.2byte ITEM_TM195
+	.2byte ITEM_TM129
+	.2byte ITEM_TM173
+	.2byte ITEM_TM23
+	.2byte ITEM_TM02
+	.2byte ITEM_TM22
+	.2byte ITEM_TM167
+	.2byte ITEM_TM213
+	.2byte ITEM_TM17
+	.2byte ITEM_TM108
+	.2byte ITEM_TM224
+	.2byte ITEM_TM94
+	.2byte ITEM_TM79
+	.2byte ITEM_TM55
+	.2byte ITEM_TM19
+	.2byte ITEM_TM204
+	.2byte ITEM_TM169
+	.2byte ITEM_TM226
+	.2byte ITEM_TM78
+	.2byte ITEM_TM100
+	.2byte ITEM_TM115
+	.2byte ITEM_TM44
+	.2byte ITEM_TM73
+	.2byte ITEM_TM37
+	.2byte ITEM_TM106
+	.2byte ITEM_TM197
+	.2byte ITEM_TM133
+	.2byte ITEM_TM149
+	.2byte ITEM_TM96
+	.2byte ITEM_TM136
+	.2byte ITEM_TM72
+	.2byte ITEM_TM211
+	.2byte ITEM_TM122
+	.2byte ITEM_TM205
+	.2byte ITEM_TM47
+	.2byte ITEM_TM119
+	.2byte ITEM_TM218
+	.2byte ITEM_TM25
+	.2byte ITEM_TM03
+	.2byte ITEM_TM57
+	.2byte ITEM_TM216
+	.2byte ITEM_TM141
+	.2byte ITEM_TM08
+	.2byte ITEM_TM144
+	.2byte ITEM_TM67
+	.2byte ITEM_TM24
+	.2byte ITEM_TM38
+	.2byte ITEM_TM125
+	.2byte ITEM_TM165
+	.2byte ITEM_TM93
+	.2byte ITEM_TM43
+	.2byte ITEM_TM196
+	.2byte ITEM_TM158
+	.2byte ITEM_TM192
+	.2byte ITEM_TM62
+	.2byte ITEM_TM155
+	.2byte ITEM_TM217
 #endif
 #ifndef PIT_GEN_9_MODE
 	.2byte ITEM_HM01
@@ -680,142 +884,158 @@ PitArena_Mart_TMs:
 
  	.align 2
 PitArena_Mart_TMs_100:
-	.2byte ITEM_TM101
-	.2byte ITEM_TM102
-	.2byte ITEM_TM103
-	.2byte ITEM_TM104
-	.2byte ITEM_TM105
-	.2byte ITEM_TM106
-	.2byte ITEM_TM107
-	.2byte ITEM_TM108
-	.2byte ITEM_TM109
-	.2byte ITEM_TM110
 	.2byte ITEM_TM111
-	.2byte ITEM_TM112
-	.2byte ITEM_TM113
-	.2byte ITEM_TM114
-	.2byte ITEM_TM115
-	.2byte ITEM_TM116
-	.2byte ITEM_TM117
-	.2byte ITEM_TM118
-	.2byte ITEM_TM119
-	.2byte ITEM_TM120
-	.2byte ITEM_TM121
-	.2byte ITEM_TM122
-	.2byte ITEM_TM123
-	.2byte ITEM_TM124
-	.2byte ITEM_TM125
-	.2byte ITEM_TM126
-	.2byte ITEM_TM127
-	.2byte ITEM_TM128
-	.2byte ITEM_TM129
-	.2byte ITEM_TM130
-	.2byte ITEM_TM131
-	.2byte ITEM_TM132
-	.2byte ITEM_TM133
-	.2byte ITEM_TM134
-	.2byte ITEM_TM135
-	.2byte ITEM_TM136
-	.2byte ITEM_TM137
-	.2byte ITEM_TM138
-	.2byte ITEM_TM139
-	.2byte ITEM_TM140
-	.2byte ITEM_TM141
-	.2byte ITEM_TM142
-	.2byte ITEM_TM143
-	.2byte ITEM_TM144
-	.2byte ITEM_TM145
-	.2byte ITEM_TM146
-	.2byte ITEM_TM147
-	.2byte ITEM_TM148
-	.2byte ITEM_TM149
-	.2byte ITEM_TM150
-	.2byte ITEM_TM151
 	.2byte ITEM_TM152
-	.2byte ITEM_TM153
+	.2byte ITEM_TM81
+	.2byte ITEM_TM146
+	.2byte ITEM_TM194
+	.2byte ITEM_TM137
+	.2byte ITEM_TM178
+	.2byte ITEM_TM102
+	.2byte ITEM_TM180
+	.2byte ITEM_TM225
+	.2byte ITEM_TM174
+	.2byte ITEM_TM189
+	.2byte ITEM_TM118
+	.2byte ITEM_TM121
+	.2byte ITEM_TM130
+	.2byte ITEM_TM29
+	.2byte ITEM_TM230
+	.2byte ITEM_TM186
+	.2byte ITEM_TM160
 	.2byte ITEM_TM154
-	.2byte ITEM_TM155
+	.2byte ITEM_TM142
+	.2byte ITEM_TM163
+	.2byte ITEM_TM117
+	.2byte ITEM_TM135
+	.2byte ITEM_TM10
+	.2byte ITEM_TM69
+	.2byte ITEM_TM124
+	.2byte ITEM_TM187
+	.2byte ITEM_TM34
+	.2byte ITEM_TM92
+	.2byte ITEM_TM104
+	.2byte ITEM_TM99
+	.2byte ITEM_TM181
+	.2byte ITEM_TM199
+	.2byte ITEM_TM159
+	.2byte ITEM_TM95
+	.2byte ITEM_TM75
+	.2byte ITEM_TM110
+	.2byte ITEM_TM12
+	.2byte ITEM_TM39
+	.2byte ITEM_TM185
+	.2byte ITEM_TM33
+	.2byte ITEM_TM31
+	.2byte ITEM_TM223
+	.2byte ITEM_TM220
+	.2byte ITEM_TM80
+	.2byte ITEM_TM201
+	.2byte ITEM_TM139
+	.2byte ITEM_TM35
+	.2byte ITEM_TM05
+	.2byte ITEM_TM209
+	.2byte ITEM_TM140
+	.2byte ITEM_TM42
 	.2byte ITEM_TM156
 	.2byte ITEM_TM157
-	.2byte ITEM_TM158
-	.2byte ITEM_TM159
-	.2byte ITEM_TM160
-	.2byte ITEM_TM161
-	.2byte ITEM_TM162
-	.2byte ITEM_TM163
-	.2byte ITEM_TM164
-	.2byte ITEM_TM165
-	.2byte ITEM_TM166
-	.2byte ITEM_TM167
-	.2byte ITEM_TM168
-	.2byte ITEM_TM169
-	.2byte ITEM_TM170
-	.2byte ITEM_TM171
-	.2byte ITEM_TM172
-	.2byte ITEM_TM173
-	.2byte ITEM_TM174
-	.2byte ITEM_TM175
-	.2byte ITEM_TM176
-	.2byte ITEM_TM177
-	.2byte ITEM_TM178
-	.2byte ITEM_TM179
-	.2byte ITEM_TM180
-	.2byte ITEM_TM181
-	.2byte ITEM_TM182
-	.2byte ITEM_TM183
-	.2byte ITEM_TM184
-	.2byte ITEM_TM185
-	.2byte ITEM_TM186
-	.2byte ITEM_TM187
-	.2byte ITEM_TM188
-	.2byte ITEM_TM189
-	.2byte ITEM_TM190
-	.2byte ITEM_TM191
-	.2byte ITEM_TM192
-	.2byte ITEM_TM193
-	.2byte ITEM_TM194
-	.2byte ITEM_TM195
-	.2byte ITEM_TM196
-	.2byte ITEM_TM197
+	.2byte ITEM_TM202
+	.2byte ITEM_TM206
+	.2byte ITEM_TM151
+	.2byte ITEM_TM127
+	.2byte ITEM_TM83
+	.2byte ITEM_TM26
+	.2byte ITEM_TM131
 	.2byte ITEM_TM198
-	.2byte ITEM_TM199
-	.2byte ITEM_TM200
-	.2byte ITEM_NONE
+	.2byte ITEM_TM21
+	.2byte ITEM_TM101
+	.2byte ITEM_TM07
+	.2byte ITEM_TM16
+	.2byte ITEM_TM203
+	.2byte ITEM_TM120
+	.2byte ITEM_TM63
+	.2byte ITEM_TM228
+	.2byte ITEM_TM138
+	.2byte ITEM_TM54
+	.2byte ITEM_TM50
+	.2byte ITEM_TM74
+	.2byte ITEM_TM85
+	.2byte ITEM_TM134
+	.2byte ITEM_TM172
+	.2byte ITEM_TM76
+	.2byte ITEM_TM86
+	.2byte ITEM_TM36
     release
 	end
 
  	.align 2
 PitArena_Mart_TMs_200:
-	.2byte ITEM_TM201
-	.2byte ITEM_TM202
-	.2byte ITEM_TM203
-	.2byte ITEM_TM204
-	.2byte ITEM_TM205
-	.2byte ITEM_TM206
-	.2byte ITEM_TM207
-	.2byte ITEM_TM208
-	.2byte ITEM_TM209
-	.2byte ITEM_TM210
-	.2byte ITEM_TM211
-	.2byte ITEM_TM212
-	.2byte ITEM_TM213
-	.2byte ITEM_TM214
+	.2byte ITEM_TM176
+	.2byte ITEM_TM51
+	.2byte ITEM_TM188
+	.2byte ITEM_TM200
+	.2byte ITEM_TM06
 	.2byte ITEM_TM215
-	.2byte ITEM_TM216
-	.2byte ITEM_TM217
-	.2byte ITEM_TM218
+	.2byte ITEM_TM71
+	.2byte ITEM_TM114
+	.2byte ITEM_TM61
+	.2byte ITEM_TM98
 	.2byte ITEM_TM219
-	.2byte ITEM_TM220
+	.2byte ITEM_TM70
+	.2byte ITEM_TM148
+	.2byte ITEM_TM214
+	.2byte ITEM_TM179
+	.2byte ITEM_TM53
+	.2byte ITEM_TM30
+	.2byte ITEM_TM52
+	.2byte ITEM_TM168
+	.2byte ITEM_TM190
+	.2byte ITEM_TM90
+	.2byte ITEM_TM177
+	.2byte ITEM_TM116
+	.2byte ITEM_TM170
+	.2byte ITEM_TM84
+	.2byte ITEM_TM150
+	.2byte ITEM_TM41
+	.2byte ITEM_TM15
+	.2byte ITEM_TM103
+	.2byte ITEM_TM49
+	.2byte ITEM_TM183
+	.2byte ITEM_TM210
+	.2byte ITEM_TM32
+	.2byte ITEM_TM88
+	.2byte ITEM_TM113
+	.2byte ITEM_TM01
+	.2byte ITEM_TM87
+	.2byte ITEM_TM207
+	.2byte ITEM_TM171
+	.2byte ITEM_TM18
 	.2byte ITEM_TM221
-	.2byte ITEM_TM222
-	.2byte ITEM_TM223
-	.2byte ITEM_TM224
-	.2byte ITEM_TM225
-	.2byte ITEM_TM226
-	.2byte ITEM_TM227
-	.2byte ITEM_TM228
+	.2byte ITEM_TM166
+	.2byte ITEM_TM09
+	.2byte ITEM_TM68
+	.2byte ITEM_TM82
+	.2byte ITEM_TM126
+	.2byte ITEM_TM175
+	.2byte ITEM_TM91
+	.2byte ITEM_TM20
+	.2byte ITEM_TM109
+	.2byte ITEM_TM161
+	.2byte ITEM_TM212
+	.2byte ITEM_TM60
 	.2byte ITEM_TM229
-	.2byte ITEM_TM230
+	.2byte ITEM_TM191
+	.2byte ITEM_TM184
+	.2byte ITEM_TM45
+	.2byte ITEM_TM48
+	.2byte ITEM_TM145
+	.2byte ITEM_TM11
+	.2byte ITEM_TM193
+	.2byte ITEM_TM208
+	.2byte ITEM_TM147
+	.2byte ITEM_TM107
+	.2byte ITEM_TM105
+	.2byte ITEM_TM59
 	.2byte ITEM_HM01
 	.2byte ITEM_HM02
 	.2byte ITEM_HM03

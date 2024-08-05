@@ -274,37 +274,37 @@ const u8 gItemEffect_SpdefFeather[11] = {
 
 const u8 gItemEffect_HpMochi[11] = {
     [4] = ITEM4_EV_HP,
-    [6] = ITEM6_ADD_EV,
+    [6] = ITEM6_RESET_EV,
     [10] = 0,
 };
 
 const u8 gItemEffect_AtkMochi[11] = {
     [4] = ITEM4_EV_ATK,
-    [6] = ITEM6_ADD_EV,
+    [6] = ITEM6_RESET_EV,
     [10] = 0,
 };
 
 const u8 gItemEffect_DefMochi[11] = {
     [5] = ITEM5_EV_DEF,
-    [6] = ITEM6_ADD_EV,
+    [6] = ITEM6_RESET_EV,
     [10] = 0,
 };
 
 const u8 gItemEffect_SpeedMochi[11] = {
     [5] = ITEM5_EV_SPEED,
-    [6] = ITEM6_ADD_EV,
+    [6] = ITEM6_RESET_EV,
     [10] = 0,
 };
 
 const u8 gItemEffect_SpatkMochi[11] = {
     [5] = ITEM5_EV_SPATK,
-    [6] = ITEM6_ADD_EV,
+    [6] = ITEM6_RESET_EV,
     [10] = 0,
 };
 
 const u8 gItemEffect_SpdefMochi[11] = {
     [5] = ITEM5_EV_SPDEF,
-    [6] = ITEM6_ADD_EV,
+    [6] = ITEM6_RESET_EV,
     [10] = 0,
 };
 

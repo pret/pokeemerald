@@ -5226,7 +5226,30 @@ void ItemUseCB_ResetEVs(u8 taskId, TaskFunc task)
         PlaySE(SE_USE_ITEM);
         RemoveBagItem(item, 1);
         GetMonNickname(mon, gStringVar1);
-        StringExpandPlaceholders(gStringVar4, gText_BasePointsResetToZero);
+        switch (item)
+        {
+            case ITEM_POMEG_BERRY:
+                StringExpandPlaceholders(gStringVar4, gText_HpEVResetToZero);
+                break;
+            case ITEM_KELPSY_BERRY:
+                StringExpandPlaceholders(gStringVar4, gText_AtkEVResetToZero);
+                break;
+            case ITEM_QUALOT_BERRY:
+                StringExpandPlaceholders(gStringVar4, gText_DefEVResetToZero);
+                break;
+            case ITEM_HONDEW_BERRY:
+                StringExpandPlaceholders(gStringVar4, gText_SpatkEVResetToZero);
+                break;
+            case ITEM_GREPA_BERRY:
+                StringExpandPlaceholders(gStringVar4, gText_SpdefEVResetToZero);
+                break;
+            case ITEM_TAMATO_BERRY:
+                StringExpandPlaceholders(gStringVar4, gText_SpeedEVResetToZero);
+                break;
+            default:
+                StringExpandPlaceholders(gStringVar4, gText_BasePointsResetToZero);
+                break;
+        }
         DisplayPartyMenuMessage(gStringVar4, TRUE);
         ScheduleBgCopyTilemapToVram(2);
         gTasks[taskId].func = task;
