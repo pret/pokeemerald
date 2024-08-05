@@ -42,6 +42,7 @@
 #define MODE_CUSTOM     2
 #define MODE_SINGLES    0
 #define MODE_DOUBLES    1
+#define MODE_MIXED_SINGLES_AND_DOUBLES    2
 #define RANDOM_MONS     0
 #define RANDOM_ALL      1
 #define XP_75           0
@@ -266,7 +267,7 @@ struct MainMenu
 {
     [MENUITEM_MAIN_DEFAULTS]     = {DrawChoices_Defaults,    ProcessInput_Options_Three},
     [MENUITEM_MAIN_AUTOSAVE]     = {DrawChoices_Autosave,    ProcessInput_Options_Three},
-    [MENUITEM_MAIN_BATTLEMODE]   = {DrawChoices_BattleMode,  ProcessInput_Options_Two},
+    [MENUITEM_MAIN_BATTLEMODE]   = {DrawChoices_BattleMode,  ProcessInput_Options_Three},
     [MENUITEM_MAIN_RANDOMIZER]   = {DrawChoices_Randomizer,  ProcessInput_Options_Two},
     [MENUITEM_MAIN_XPSHARE]      = {DrawChoices_XPShare,     ProcessInput_Options_Two},
     [MENUITEM_MAIN_STAT_CHANGER] = {DrawChoices_StatChanger, ProcessInput_Options_Two},
@@ -344,6 +345,7 @@ static const u8 sText_Desc_Autosave_5[]         = _("Autosave is executed every\
 static const u8 sText_Desc_Autosave_On[]        = _("Autosave is executed every\nfloor during warping.");
 static const u8 sText_Desc_BattleMode_Singles[] = _("Play only single battles.");
 static const u8 sText_Desc_BattleMode_Doubles[] = _("Play only double battles.");
+static const u8 sText_Desc_BattleMode_Mix[]     = _("Play mixed singles and double battles.");
 static const u8 sText_Desc_Randomizer_Mons[]    = _("Only randomize Pokémon species,\ntrainers and item drops.");
 static const u8 sText_Desc_Randomizer_All[]     = _("Also randomize abilities and\nmoves.");
 static const u8 sText_Desc_XPShare_75[]         = _("Exp. Share gives 75% XP to\nparty mons.");
@@ -361,7 +363,7 @@ static const u8 *const sModeMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
 {
     [MENUITEM_MAIN_DEFAULTS]     = {sText_Desc_Defaults_Normal,     sText_Desc_Defaults_Hard,       sText_Desc_Defaults_Custom},
     [MENUITEM_MAIN_AUTOSAVE]     = {sText_Desc_Autosave_Off,        sText_Desc_Autosave_5,          sText_Desc_Autosave_On},
-    [MENUITEM_MAIN_BATTLEMODE]   = {sText_Desc_BattleMode_Singles,  sText_Desc_BattleMode_Doubles,  sText_Empty},
+    [MENUITEM_MAIN_BATTLEMODE]   = {sText_Desc_BattleMode_Singles,  sText_Desc_BattleMode_Doubles,  sText_Desc_BattleMode_Mix},
     [MENUITEM_MAIN_RANDOMIZER]   = {sText_Desc_Randomizer_Mons,     sText_Desc_Randomizer_All,      sText_Empty},
     [MENUITEM_MAIN_XPSHARE]      = {sText_Desc_XPShare_75,          sText_Desc_XPShare_50,          sText_Empty},
     [MENUITEM_MAIN_STAT_CHANGER] = {sText_Desc_StatChanger_On,      sText_Desc_StatChanger_Off,     sText_Empty},
@@ -887,9 +889,17 @@ static void Task_ModeMenuSave(u8 taskId)
 
     if (sOptions->sel[MENUITEM_MAIN_BATTLEMODE] == MODE_DOUBLES)
         FlagSet(FLAG_DOUBLES_MODE);
-    else
+    else if(sOptions->sel[MENUITEM_MAIN_BATTLEMODE] == MODE_MIXED_SINGLES_AND_DOUBLES)
+    {
+        FlagSet(FLAG_MIXED_DOUBLES_MODE);
         FlagClear(FLAG_DOUBLES_MODE);
-
+    }
+    else
+    {
+        FlagClear(FLAG_DOUBLES_MODE);
+        FlagClear(FLAG_MIXED_DOUBLES_MODE);
+    }
+        
     if (sOptions->sel[MENUITEM_MAIN_RANDOMIZER] == RANDOM_ALL)
         FlagSet(FLAG_RANDOM_MODE);
     else
@@ -1089,8 +1099,9 @@ static const u8 sText_ModeCustom[]          = _("CUST");
 static const u8 sText_Autosave_Off[]        = _("OFF");
 static const u8 sText_Autosave_5[]          = _("5FLRS");
 static const u8 sText_Autosave_On[]         = _("ON");
-static const u8 sText_BattleMode_Singles[]  = _("SINGLES");
-static const u8 sText_BattleMode_Doubles[]  = _("DOUBLES");
+static const u8 sText_BattleMode_Singles[]  = _("SNGLS");
+static const u8 sText_BattleMode_Doubles[]  = _("DUOS");
+static const u8 sText_BattleMode_Mix[]  = _("MIX");
 static const u8 sText_Randomizer_Mons[]     = _("MONS");
 static const u8 sText_Randomizer_All[]      = _("ALL");
 static const u8 sText_XPShare_75[]          = _("NORMAL");
@@ -1131,11 +1142,12 @@ static void DrawChoices_Autosave(int selection, int y)
 static void DrawChoices_BattleMode(int selection, int y)
 {
     bool8 active = CheckConditions(MENUITEM_MAIN_BATTLEMODE);
-    u8 styles[2] = {0};
+    u8 styles[3] = {0};
     styles[selection] = 1;
 
     DrawModeMenuChoice(sText_BattleMode_Singles, 104, y, styles[0], active);
-    DrawModeMenuChoice(sText_BattleMode_Doubles, GetStringRightAlignXOffset(FONT_NORMAL, sText_BattleMode_Doubles, 198), y, styles[1], active);
+    DrawModeMenuChoice(sText_BattleMode_Doubles, GetStringRightAlignXOffset(FONT_NORMAL, sText_BattleMode_Doubles, 198 - 32), y, styles[1], active);
+    DrawModeMenuChoice(sText_BattleMode_Mix, GetStringRightAlignXOffset(FONT_NORMAL, sText_BattleMode_Mix, 198), y, styles[2], active);
 }
 
 static void DrawChoices_Randomizer(int selection, int y)

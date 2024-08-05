@@ -287,7 +287,7 @@ EventScript_ResetAllMapFlags::
 	clearflag FLAG_FLOOR_100
 	clearflag FLAG_MIXED_DOUBLES_MODE
 	clearflag FLAG_HARD_MODE
-	setflag FLAG_NO_EXP_MODE
+	clearflag FLAG_NO_EXP_MODE
 	setflag FLAG_NO_DUPLICATES
 	setvar B_BATTLE_SPEED, 1
 	call EventScript_ResetAllBerries

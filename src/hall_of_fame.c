@@ -1228,6 +1228,7 @@ static const u8 sText_ModeHard[]            = _("MODE: HARD");
 static const u8 sText_ModeCustom[]          = _("MODE: CUSTOM");
 static const u8 sText_BattleMode_Singles[]  = _("SINGLES");
 static const u8 sText_BattleMode_Doubles[]  = _("DOUBLES");
+static const u8 sText_BattleMode_Mixed[]  = _("MIXED");
 static const u8 sText_Randomizer_Mons[]     = _("RAND MONS");
 static const u8 sText_Randomizer_All[]      = _("RAND ALL");
 static const u8 sText_LegendsOn[]           = _("LEGEND ON");
@@ -1288,6 +1289,9 @@ static void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2)
             break;
         case 1:
             modeText = sText_BattleMode_Doubles;
+            break;
+        case 2:
+            modeText = sText_BattleMode_Mixed;
             break;
         default:
             modeText = sText_BattleMode_Singles;
