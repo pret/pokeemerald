@@ -608,7 +608,7 @@ static void GetOpponentMostCommonMonType(void)
 {
     u8 i;
     u8 typeCounts[NUMBER_OF_MON_TYPES];
-    u8 mostCommonTypes[NUM_TYPE_SLOTS];
+    u8 mostCommonTypes[2];
 
     gFacilityTrainerMons = gBattleFrontierMons;
 
@@ -618,33 +618,33 @@ static void GetOpponentMostCommonMonType(void)
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         u32 species = gFacilityTrainerMons[gFrontierTempParty[i]].species;
-        typeCounts[gSpeciesInfo[species].types[TYPE_PRIMARY]]++;
-        if (gSpeciesInfo[species].types[TYPE_PRIMARY] != gSpeciesInfo[species].types[TYPE_SECONDARY])
-            typeCounts[gSpeciesInfo[species].types[TYPE_SECONDARY]]++;
+        typeCounts[gSpeciesInfo[species].types[0]]++;
+        if (gSpeciesInfo[species].types[0] != gSpeciesInfo[species].types[1])
+            typeCounts[gSpeciesInfo[species].types[1]]++;
     }
 
     // Determine which are the two most-common types.
     // The second most-common type is only updated if
     // its count is equal to the most-common type.
-    mostCommonTypes[TYPE_PRIMARY] = 0;
-    mostCommonTypes[TYPE_SECONDARY] = 0;
+    mostCommonTypes[0] = 0;
+    mostCommonTypes[1] = 0;
     for (i = 1; i < NUMBER_OF_MON_TYPES; i++)
     {
-        if (typeCounts[mostCommonTypes[TYPE_PRIMARY]] < typeCounts[i])
-            mostCommonTypes[TYPE_PRIMARY] = i;
-        else if (typeCounts[mostCommonTypes[TYPE_PRIMARY]] == typeCounts[i])
-            mostCommonTypes[TYPE_SECONDARY] = i;
+        if (typeCounts[mostCommonTypes[0]] < typeCounts[i])
+            mostCommonTypes[0] = i;
+        else if (typeCounts[mostCommonTypes[0]] == typeCounts[i])
+            mostCommonTypes[1] = i;
     }
 
-    if (typeCounts[mostCommonTypes[TYPE_PRIMARY]] != 0)
+    if (typeCounts[mostCommonTypes[0]] != 0)
     {
         // The most-common type must be strictly greater than
         // the second-most-common type, or the top two must be
         // the same type.
-        if (typeCounts[mostCommonTypes[TYPE_PRIMARY]] > typeCounts[mostCommonTypes[TYPE_SECONDARY]])
-            gSpecialVar_Result = mostCommonTypes[TYPE_PRIMARY];
-        else if (mostCommonTypes[TYPE_PRIMARY] == mostCommonTypes[TYPE_SECONDARY])
-            gSpecialVar_Result = mostCommonTypes[TYPE_PRIMARY];
+        if (typeCounts[mostCommonTypes[0]] > typeCounts[mostCommonTypes[1]])
+            gSpecialVar_Result = mostCommonTypes[0];
+        else if (mostCommonTypes[0] == mostCommonTypes[1])
+            gSpecialVar_Result = mostCommonTypes[0];
         else
             gSpecialVar_Result = NUMBER_OF_MON_TYPES;
     }

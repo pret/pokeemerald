@@ -124,7 +124,7 @@ struct ChooseMoveStruct
     u8 currentPp[MAX_MON_MOVES];
     u8 maxPp[MAX_MON_MOVES];
     u16 species;
-	u8 monTypes[NUM_TYPE_SLOTS];
+	u8 monTypes[2];
 };
 
 enum

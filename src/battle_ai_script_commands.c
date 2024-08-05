@@ -1119,16 +1119,16 @@ static void Cmd_get_type(void)
     switch (typeVar)
     {
     case AI_TYPE1_USER: // AI user primary type
-        AI_THINKING_STRUCT->funcResult = gBattleMons[sBattler_AI].types[TYPE_PRIMARY];
+        AI_THINKING_STRUCT->funcResult = gBattleMons[sBattler_AI].types[0];
         break;
     case AI_TYPE1_TARGET: // target primary type
-        AI_THINKING_STRUCT->funcResult = gBattleMons[gBattlerTarget].types[TYPE_PRIMARY];
+        AI_THINKING_STRUCT->funcResult = gBattleMons[gBattlerTarget].types[0];
         break;
     case AI_TYPE2_USER: // AI user secondary type
-        AI_THINKING_STRUCT->funcResult = gBattleMons[sBattler_AI].types[TYPE_SECONDARY];
+        AI_THINKING_STRUCT->funcResult = gBattleMons[sBattler_AI].types[1];
         break;
     case AI_TYPE2_TARGET: // target secondary type
-        AI_THINKING_STRUCT->funcResult = gBattleMons[gBattlerTarget].types[TYPE_SECONDARY];
+        AI_THINKING_STRUCT->funcResult = gBattleMons[gBattlerTarget].types[1];
         break;
     case AI_TYPE_MOVE: // type of move being pointed to
         AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->moveConsidered].type;
