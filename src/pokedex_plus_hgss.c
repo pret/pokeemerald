@@ -119,7 +119,8 @@ enum
 enum {
     DEX_MODE_HEADER,
     DEX_MODE_OWNED,
-    DEX_MODE_SEEN
+    DEX_MODE_SEEN,
+    DEX_MODE_PARTY
 };
 
 extern const u16 gPokedexOrder_Alphabetical[];
@@ -628,6 +629,7 @@ static void EraseSelectorArrow(u32);
 static void PrintSelectorArrow(u32);
 static void PrintSearchParameterTitle(u32, const u8 *);
 static void ClearSearchParameterBoxText(void);
+static bool8 IsSpeciesInParty(u16 species);
 static void SetSpriteInvisibility(u8 spriteArrayId, bool8 invisible);
 static void CreateTypeIconSprites(void);
 static void SetSearchRectHighlight(u8 flags, u8 x, u8 y, u8 width);
@@ -1946,6 +1948,7 @@ static const struct SearchOptionText sDexModeOptions[] =
     [DEX_MODE_HEADER] = {gText_DexEmptyString,      gText_DexSearchDontSpecify},
     [DEX_MODE_OWNED]  = {gText_DexOwnedDescription, gText_DexOwnedTitle},
     [DEX_MODE_SEEN]   = {gText_DexSeenDescription,  gText_DexSeenTitle},
+    [DEX_MODE_PARTY]   = {gText_DexPartyDescription,  gText_DexPartyTitle},
     {},
 };
 
@@ -2016,7 +2019,7 @@ static const struct SearchOptionText sDexSearchTypeOptions[] =
 };
 
 static const u8 sPokedexModes[] = {DEX_MODE_HOENN, DEX_MODE_NATIONAL};
-static const u8 sOwnedOptions[] = {DEX_MODE_HEADER, DEX_MODE_OWNED, DEX_MODE_SEEN};
+static const u8 sOwnedOptions[] = {DEX_MODE_HEADER, DEX_MODE_OWNED, DEX_MODE_SEEN, DEX_MODE_PARTY};
 static const u8 sOrderOptions[] =
 {
     ORDER_NUMERICAL,
@@ -7789,6 +7792,13 @@ static int DoPokedexSearch(u8 dexMode, u8 order, u8 abcGroup, u8 bodyColor, u8 t
                     resultsCount++;
                 }
                 break;
+            case DEX_MODE_PARTY:
+                if (IsSpeciesInParty(NationalPokedexNumToSpecies(sPokedexView->pokedexList[i].dexNum)))
+                {
+                    sPokedexView->pokedexList[resultsCount] = sPokedexView->pokedexList[i];
+                    resultsCount++;
+                }
+                break;
             default:
                 if (sPokedexView->pokedexList[i].seen)
                 {
@@ -8783,4 +8793,19 @@ static void PrintSearchParameterTitle(u32 y, const u8 *str)
 static void ClearSearchParameterBoxText(void)
 {
     ClearSearchMenuRect(144, 8, 96, 96);
+}
+
+static bool8 IsSpeciesInParty(u16 species)
+{
+    int i;
+    u16 species_party;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        species_party = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+        if (gSpeciesInfo[species_party].natDexNum == species && species_party != SPECIES_NONE)
+            return TRUE;
+    }
+    
+    return FALSE;
 }

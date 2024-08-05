@@ -1351,6 +1351,9 @@ static const u16 sRandomItemsRerollCheck[] =
 #define RANDOM_HELD_ITEM_OPPONENT_COUNT ARRAY_COUNT(sRandomHeldItemsForOpponents)
 static const u16 sRandomHeldItemsForOpponents[] =
 {
+    ITEM_NONE,
+    ITEM_NONE,
+    ITEM_NONE,
     ITEM_SILK_SCARF,
     ITEM_CHARCOAL,
     ITEM_MYSTIC_WATER,

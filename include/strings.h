@@ -3237,5 +3237,7 @@ extern const u8 gText_DexSortOwnedTitle[];
 extern const u8 gText_DexOwnedDescription[];
 extern const u8 gText_DexSeenDescription[];
 extern const u8 gText_DexSortOwnedDescription[];
+extern const u8 gText_DexPartyTitle[];
+extern const u8 gText_DexPartyDescription[];
 
 #endif // GUARD_STRINGS_H

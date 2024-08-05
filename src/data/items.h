@@ -2424,7 +2424,7 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Guard Spec."),
         .pluralName = _("Guard Specs."),
-        .price = (I_PRICE >= GEN_7) ? 1500 : 700,
+        .price = 700,
         .description = COMPOUND_STRING(
             "Prevents stat\n"
             "reduction when\n"
