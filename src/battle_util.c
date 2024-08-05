@@ -10669,7 +10669,7 @@ u16 GetBattleFormChangeTargetSpecies(u32 battler, u16 method)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE:
-                    if(FlagGet(FLAG_MEGAS))
+                    if(FlagGet(FLAG_MEGAS) || GetBattlerSide(battler) == B_SIDE_PLAYER)
                     {
                         if (gBattleMons[battler].moves[0] == formChanges[i].param1
                         || gBattleMons[battler].moves[1] == formChanges[i].param1

@@ -907,5 +907,6 @@ u16 GetMegaStone(u32 species);
 u32 GetMaxNumberOfSpecies(void);
 void DebugTestRandomness(void);
 u16 GetRandomSpeciesFlattenedCurve(void);
+u16 GetAverageEVsFromParty(void);
 void ForceIncrementMonLevel(struct Pokemon *mon);
 #endif // GUARD_POKEMON_H

@@ -137,16 +137,17 @@ PitEntrance_EventScript_Sign::
 	msgbox PitEntrance_Text_Rules, MSGBOX_DEFAULT
 PitEntrance_EventScript_Sign_Hook::
 	message PitEntrance_Sign_Text
-	dynmultichoice 17, 0, 0, 6, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitEntrance_Sign_Option0, PitEntrance_Sign_Option1, PitEntrance_Sign_Option2, PitEntrance_Sign_Option6, PitEntrance_Sign_Option4, PitEntrance_Sign_Option5, PitEntrance_Sign_Option3
+	dynmultichoice 17, 0, 0, 6, VAR_TEMP_9, DYN_MULTICHOICE_CB_NONE, PitEntrance_Sign_Option0, PitEntrance_Sign_Option1, PitEntrance_Sign_Option_HardMode, PitEntrance_Sign_Option2, PitEntrance_Sign_Option6, PitEntrance_Sign_Option4, PitEntrance_Sign_Option5, PitEntrance_Sign_Option3
 	closemessage
 	copyvar VAR_TEMP_9, VAR_RESULT
 	goto_if_eq VAR_RESULT, 0, PitEntrance_MoreInfo
 	goto_if_eq VAR_RESULT, 1, PitEntrance_BattleInfo
-	goto_if_eq VAR_RESULT, 2, PitEntrance_Credits
-	goto_if_eq VAR_RESULT, 3, PitEntrance_ChangeAvatar
-	goto_if_eq VAR_RESULT, 4, PitEntrance_Bugs
-	goto_if_eq VAR_RESULT, 5, PitEntrance_Discord
-	goto_if_eq VAR_RESULT, 6, PitEntrance_Cheats
+	goto_if_eq VAR_RESULT, 2, PitEntrance_HardModeInfo
+	goto_if_eq VAR_RESULT, 3, PitEntrance_Credits
+	goto_if_eq VAR_RESULT, 4, PitEntrance_ChangeAvatar
+	goto_if_eq VAR_RESULT, 5, PitEntrance_Bugs
+	goto_if_eq VAR_RESULT, 6, PitEntrance_Discord
+	goto_if_eq VAR_RESULT, 7, PitEntrance_Cheats
 	release
 	end
 
@@ -160,7 +161,13 @@ PitEntrance_BattleInfo:
 	msgbox PitEntrance_Text_BattleInfo, MSGBOX_DEFAULT
 	goto PitEntrance_EventScript_Sign_Hook
 	release
-	end 
+	end
+
+PitEntrance_HardModeInfo:
+	msgbox PitEntrance_Text_HardModeInfo, MSGBOX_DEFAULT
+	goto PitEntrance_EventScript_Sign_Hook
+	release
+	end
 
 PitEntrance_Credits:
 	msgbox PitEntrance_Text_Credits, MSGBOX_DEFAULT
@@ -209,6 +216,8 @@ PitEntrance_Sign_Option5:
 	.string "Discord$"
 PitEntrance_Sign_Option6:
 	.string "Outfit$"
+PitEntrance_Sign_Option_HardMode:
+	.string "Hard Mode$"
 
 PitArena_ChangeAvatar::
 	lockall
@@ -303,6 +312,21 @@ PitEntrance_Text_BattleInfo::
 	.string "If you have specific question you can\n"
 	.string "check the Expansion Github to see what\l"
 	.string "changes they have made.$"
+
+PitEntrance_Text_HardModeInfo::
+	.string "Choosing HARD Mode in the Battle Mode\n"
+	.string "Menu will set the associated options.\p"
+	.string "Changing any of these will set the\n"
+	.string "game mode to CUSTOM and won't be\l"
+	.string "considered a HARD mode run.\p"
+	.string "HARD mode will reduce shared XP to 50%,\n"
+	.string "won't offer Legendaries to the player,\l"
+	.string "allows trainers to have Megas in Gen 9\l"
+	.string "and gives trainers EV trained Pokémon.\p"
+	.string "Trainer EVs will be evenly distributed and\n"
+	.string "match the average EVs of your own team.\p"
+	.string "It also enables new merchant items to\n"
+	.string "reset EVs for your own Pokémon.$"
 
 PitEntrance_Text_Credits::
 	.string "I, Archie from Team Aquas Hideout, have\n"

@@ -1986,6 +1986,8 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
     u32 personalityValue;
     s32 i;
     u8 monsCount;
+    u16 averageEVs = 0;
+
     if (battleTypeFlags & BATTLE_TYPE_TRAINER && !(battleTypeFlags & (BATTLE_TYPE_FRONTIER
                                                                         | BATTLE_TYPE_EREADER_TRAINER
                                                                         | BATTLE_TYPE_TRAINER_HILL)))
@@ -2016,6 +2018,9 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             else
                 monsCount = 6;
         }
+
+        averageEVs = GetAverageEVsFromParty() / 6;
+
         for (i = 0; i < monsCount; i++)
         {   
             s32 ball = -1;
@@ -2118,7 +2123,18 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
 
             CustomTrainerPartyAssignMoves(&party[i], &partyData[j], isPlayer);
             SetMonData(&party[i], MON_DATA_IVS, &(partyData[j].iv));
-            if (partyData[j].ev != NULL)
+        
+            //set opponent EVs for HARD MODE
+            if(FlagGet(FLAG_HARD_MODE) && !isPlayer)
+            {
+                SetMonData(&party[i], MON_DATA_HP_EV, &averageEVs);
+                SetMonData(&party[i], MON_DATA_ATK_EV, &averageEVs);
+                SetMonData(&party[i], MON_DATA_DEF_EV, &averageEVs);
+                SetMonData(&party[i], MON_DATA_SPATK_EV, &averageEVs);
+                SetMonData(&party[i], MON_DATA_SPDEF_EV, &averageEVs);
+                SetMonData(&party[i], MON_DATA_SPEED_EV, &averageEVs);
+            }
+            else if (partyData[i].ev != NULL)
             {
                 SetMonData(&party[i], MON_DATA_HP_EV, &(partyData[j].ev[0]));
                 SetMonData(&party[i], MON_DATA_ATK_EV, &(partyData[j].ev[1]));
@@ -2127,6 +2143,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 SetMonData(&party[i], MON_DATA_SPDEF_EV, &(partyData[j].ev[4]));
                 SetMonData(&party[i], MON_DATA_SPEED_EV, &(partyData[j].ev[5]));
             }
+
             if (partyData[j].ability != ABILITY_NONE)
             {
                 const struct SpeciesInfo *speciesInfo = &gSpeciesInfo[partyData[j].species];

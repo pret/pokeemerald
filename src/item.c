@@ -1267,11 +1267,9 @@ static const u16 sRandomHeldValidItems[] =
     ITEM_SPELL_TAG,
     ITEM_DRAGON_FANG,
     ITEM_BLACK_GLASSES,
-    ITEM_AMULET_COIN,
     ITEM_BRIGHT_POWDER,
     ITEM_FOCUS_BAND,
     ITEM_LEFTOVERS,
-    ITEM_LUCKY_EGG,
     ITEM_QUICK_CLAW,
     ITEM_SCOPE_LENS,
     ITEM_BLUE_FLUTE,
@@ -1318,6 +1316,7 @@ static const u16 sRandomHeldValidItems[] =
     ITEM_ROCKY_HELMET,
 #endif
 #ifdef PIT_GEN_9_MODE
+    ITEM_AMULET_COIN,
     ITEM_ASSAULT_VEST,
     ITEM_SAFETY_GOGGLES,
     ITEM_WEAKNESS_POLICY,
@@ -1390,6 +1389,7 @@ static const u16 sRandomHeldItemsForOpponents[] =
     ITEM_MENTAL_HERB,
     ITEM_SHELL_BELL,
     ITEM_WHITE_HERB,
+    ITEM_AMULET_COIN,
 #ifndef PIT_GEN_3_MODE
     ITEM_BIG_ROOT,
     ITEM_CHOICE_SPECS,

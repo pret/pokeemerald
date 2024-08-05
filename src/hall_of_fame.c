@@ -1269,14 +1269,12 @@ static void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2)
     width = GetStringRightAlignXOffset(FONT_NORMAL, text, 0x70);
     AddTextPrinterParameterized3(1, FONT_NORMAL, width, 0x21, sPlayerInfoTextColors, TEXT_SKIP_DRAW, text);
 
-    switch(gSaveBlock2Ptr->modeXPShare)
+    switch(gSaveBlock2Ptr->modeDefault)
     {
-        case 0:
-            modeText = sText_ModeNormal;
-            break;
         case 1:
             modeText = sText_ModeHard;
             break;
+        case 0:
         default:
             modeText = sText_ModeNormal;
             break;

@@ -7113,6 +7113,28 @@ bool8 IsOtherTrainer(u32 otId, u8 *otName)
     return TRUE;
 }
 
+u16 GetAverageEVsFromParty(void)
+{
+    u16 averageEVs = 0;
+    u16 totalEVs = 0;
+    s32 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        totalEVs += GetMonData(&gPlayerParty[i], MON_DATA_HP_EV);
+        totalEVs += GetMonData(&gPlayerParty[i], MON_DATA_ATK_EV);
+        totalEVs += GetMonData(&gPlayerParty[i], MON_DATA_DEF_EV);
+        totalEVs += GetMonData(&gPlayerParty[i], MON_DATA_SPEED_EV);
+        totalEVs += GetMonData(&gPlayerParty[i], MON_DATA_SPATK_EV);
+        totalEVs += GetMonData(&gPlayerParty[i], MON_DATA_SPDEF_EV);
+    }
+
+    averageEVs = totalEVs/CalculatePlayerPartyCount();
+    DebugPrintf("party size = %d, averageEVs = %d", CalculatePlayerPartyCount(), averageEVs);
+
+    return averageEVs;
+}
+
 void MonRestorePP(struct Pokemon *mon)
 {
     BoxMonRestorePP(&mon->box);
