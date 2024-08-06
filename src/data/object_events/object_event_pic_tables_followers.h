@@ -4465,9 +4465,9 @@ static const struct SpriteFrameImage sPicTable_Noivern[] = {
 static const struct SpriteFrameImage sPicTable_XerneasNeutral[] = {
     overworld_ascending_frames(gObjectEventPic_XerneasNeutral, 4, 4),
 };
-/*static const struct SpriteFrameImage sPicTable_XerneasActive[] = {
+static const struct SpriteFrameImage sPicTable_XerneasActive[] = {
     overworld_ascending_frames(gObjectEventPic_XerneasActive, 4, 4),
-};*/
+};
 #endif //P_FAMILY_XERNEAS
 
 #if P_FAMILY_YVELTAL
