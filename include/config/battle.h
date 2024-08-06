@@ -272,6 +272,6 @@
 // Poké Ball animation and sounds
 #define B_ENEMY_THROW_BALLS          GEN_1  // In GEN_6+, enemy Trainers throw Poké Balls into battle instead of them just appearing on the ground and opening.
 #define B_ENEMY_THROW_BALLS_SOUND    GEN_1  // In GEN_5+, enemy Trainer's Poké Balls make a sound when thrown to send out a Pokémon. This can only be used when B_ENEMY_THROW_BALLS is set to GEN_6 or later.
-#define B_PLAYER_THROW_BALLS_SOUND   GEN_1  // In GEN_5+, the player's Poké Balls make a sound when thrown to send out a Pokémon.
+#define B_PLAYER_THROW_BALLS_SOUND   GEN_LATEST  // In GEN_5+, the player's Poké Balls make a sound when thrown to send out a Pokémon.
 
 #endif // GUARD_CONFIG_BATTLE_H
