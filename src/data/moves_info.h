@@ -20420,8 +20420,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Fickle Beam"),
         .description = COMPOUND_STRING(
-            "Shoots a beam of light. Sometimes\n"
-            "twice as strong."),
+            "Shoots a beam of light.\n"
+            "Sometimes twice as strong."),
         .effect = EFFECT_FICKLE_BEAM,
         .power = 80,
         .type = TYPE_DRAGON,
