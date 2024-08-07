@@ -832,8 +832,8 @@ STATIC_ASSERT(sizeof(((struct BattleStruct *)0)->palaceFlags) * 8 >= MAX_BATTLER
 #define IS_BATTLER_OF_BASE_TYPE(battlerId, type)((GetBattlerType(battlerId, 0, TRUE) == type || GetBattlerType(battlerId, 1, TRUE) == type || (GetBattlerType(battlerId, 2, TRUE) != TYPE_MYSTERY && GetBattlerType(battlerId, 2, TRUE) == type)))
 #define IS_BATTLER_TYPELESS(battlerId)(GetBattlerType(battlerId, 0, FALSE) == TYPE_MYSTERY && GetBattlerType(battlerId, 1, FALSE) == TYPE_MYSTERY && GetBattlerType(battlerId, 2, FALSE) == TYPE_MYSTERY)
 
-#define SET_BATTLER_TYPE(battlerId, type)           \
-{                                                   \
+#define SET_BATTLER_TYPE(battlerId, type)              \
+{                                                      \
     gBattleMons[battlerId].types[0] = type;            \
     gBattleMons[battlerId].types[1] = type;            \
     gBattleMons[battlerId].types[2] = TYPE_MYSTERY;    \
