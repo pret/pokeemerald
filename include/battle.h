@@ -834,29 +834,16 @@ STATIC_ASSERT(sizeof(((struct BattleStruct *)0)->palaceFlags) * 8 >= MAX_BATTLER
 
 #define SET_BATTLER_TYPE(battlerId, type)           \
 {                                                   \
-    gBattleMons[battlerId].type1 = type;            \
-    gBattleMons[battlerId].type2 = type;            \
-    gBattleMons[battlerId].type3 = TYPE_MYSTERY;    \
+    gBattleMons[battlerId].types[0] = type;            \
+    gBattleMons[battlerId].types[1] = type;            \
+    gBattleMons[battlerId].types[2] = TYPE_MYSTERY;    \
 }
 
-<<<<<<< HEAD
 #define RESTORE_BATTLER_TYPE(battlerId)                                                     \
 {                                                                                           \
-    gBattleMons[battlerId].type1 = gSpeciesInfo[gBattleMons[battlerId].species].types[0];   \
-    gBattleMons[battlerId].type2 = gSpeciesInfo[gBattleMons[battlerId].species].types[1];   \
-    gBattleMons[battlerId].type3 = TYPE_MYSTERY;                                            \
-=======
-#define IS_TYPE_PHYSICAL(moveType)(moveType < TYPE_MYSTERY)
-#define IS_TYPE_SPECIAL(moveType)(moveType > TYPE_MYSTERY)
-
-#define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0))
-
-#define IS_BATTLER_OF_TYPE(battlerId, type)((gBattleMons[battlerId].types[0] == type || gBattleMons[battlerId].types[1] == type))
-#define SET_BATTLER_TYPE(battlerId, type)   \
-{                                           \
-    gBattleMons[battlerId].types[0] = type;    \
-    gBattleMons[battlerId].types[1] = type;    \
->>>>>>> 312749dd3109e607779bb1a15f3669ea2b0979dc
+    gBattleMons[battlerId].types[0] = gSpeciesInfo[gBattleMons[battlerId].species].types[0];   \
+    gBattleMons[battlerId].types[1] = gSpeciesInfo[gBattleMons[battlerId].species].types[1];   \
+    gBattleMons[battlerId].types[2] = TYPE_MYSTERY;                                            \
 }
 
 #define IS_BATTLER_PROTECTED(battlerId)(gProtectStructs[battlerId].protected                                           \

@@ -165,8 +165,8 @@ void SaveBattlerData(u32 battlerId)
             AI_THINKING_STRUCT->saved[battlerId].moves[i] = gBattleMons[battlerId].moves[i];
     }
     // Save and restore types even for AI controlled battlers in case it gets changed during move evaluation process.
-    AI_THINKING_STRUCT->saved[battlerId].types[0] = gBattleMons[battlerId].type1;
-    AI_THINKING_STRUCT->saved[battlerId].types[1] = gBattleMons[battlerId].type2;
+    AI_THINKING_STRUCT->saved[battlerId].types[0] = gBattleMons[battlerId].types[0];
+    AI_THINKING_STRUCT->saved[battlerId].types[1] = gBattleMons[battlerId].types[1];
 }
 
 static bool32 ShouldFailForIllusion(u32 illusionSpecies, u32 battlerId)
@@ -218,11 +218,11 @@ void SetBattlerData(u32 battlerId)
         if (illusionSpecies != SPECIES_NONE && ShouldFailForIllusion(illusionSpecies, battlerId))
         {
             // If the battler's type has not been changed, AI assumes the types of the illusion mon.
-            if (gBattleMons[battlerId].type1 == gSpeciesInfo[species].types[0]
-                && gBattleMons[battlerId].type2 == gSpeciesInfo[species].types[1])
+            if (gBattleMons[battlerId].types[0] == gSpeciesInfo[species].types[0]
+                && gBattleMons[battlerId].types[1] == gSpeciesInfo[species].types[1])
             {
-                gBattleMons[battlerId].type1 = gSpeciesInfo[illusionSpecies].types[0];
-                gBattleMons[battlerId].type2 = gSpeciesInfo[illusionSpecies].types[1];
+                gBattleMons[battlerId].types[0] = gSpeciesInfo[illusionSpecies].types[0];
+                gBattleMons[battlerId].types[1] = gSpeciesInfo[illusionSpecies].types[1];
             }
             species = illusionSpecies;
         }
@@ -262,8 +262,8 @@ void RestoreBattlerData(u32 battlerId)
         for (i = 0; i < 4; i++)
             gBattleMons[battlerId].moves[i] = AI_THINKING_STRUCT->saved[battlerId].moves[i];
     }
-    gBattleMons[battlerId].type1 = AI_THINKING_STRUCT->saved[battlerId].types[0];
-    gBattleMons[battlerId].type2 = AI_THINKING_STRUCT->saved[battlerId].types[1];
+    gBattleMons[battlerId].types[0] = AI_THINKING_STRUCT->saved[battlerId].types[0];
+    gBattleMons[battlerId].types[1] = AI_THINKING_STRUCT->saved[battlerId].types[1];
 }
 
 u32 GetHealthPercentage(u32 battlerId)
