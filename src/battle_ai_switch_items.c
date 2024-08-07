@@ -1233,8 +1233,16 @@ static u32 GetBestMonTypeMatchup(struct Pokemon *party, int firstId, int lastId,
         {
             if (!(gBitTable[i] & invalidMons) && !(gBitTable[i] & bits))
             {
+<<<<<<< HEAD
                 u16 species = GetMonData(&party[i], MON_DATA_SPECIES);
                 uq4_12_t typeEffectiveness = UQ_4_12(1.0);
+=======
+                u8 type1 = gSpeciesInfo[species].types[0];
+                u8 type2 = gSpeciesInfo[species].types[1];
+                u8 typeDmg = TYPE_MUL_NORMAL;
+                ModulateByTypeEffectiveness(gBattleMons[opposingBattler].types[0], type1, type2, &typeDmg);
+                ModulateByTypeEffectiveness(gBattleMons[opposingBattler].types[1], type1, type2, &typeDmg);
+>>>>>>> 312749dd3109e607779bb1a15f3669ea2b0979dc
 
                 u8 atkType1 = gBattleMons[opposingBattler].type1;
                 u8 atkType2 = gBattleMons[opposingBattler].type2;

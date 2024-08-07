@@ -262,7 +262,21 @@ u16 ChooseMoveAndTargetInBattlePalace(u32 battler)
         }
     }
 
+<<<<<<< HEAD
     moveTarget = GetBattlerMoveTargetType(battler, moveInfo->moves[chosenMoveId]);
+=======
+    if (moveInfo->moves[chosenMoveId] == MOVE_CURSE)
+    {
+        if (moveInfo->monTypes[0] != TYPE_GHOST && moveInfo->monTypes[1] != TYPE_GHOST)
+            moveTarget = MOVE_TARGET_USER;
+        else
+            moveTarget = MOVE_TARGET_SELECTED;
+    }
+    else
+    {
+        moveTarget = gBattleMoves[moveInfo->moves[chosenMoveId]].target;
+    }
+>>>>>>> 312749dd3109e607779bb1a15f3669ea2b0979dc
 
     if (moveTarget & MOVE_TARGET_USER)
         chosenMoveId |= (battler << 8);

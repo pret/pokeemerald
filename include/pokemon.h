@@ -322,6 +322,7 @@ struct BattlePokemon
     /*0x17*/ u32 spDefenseIV:5;
     /*0x17*/ u32 abilityNum:2;
     /*0x18*/ s8 statStages[NUM_BATTLE_STATS];
+<<<<<<< HEAD
     /*0x20*/ u16 ability;
     /*0x22*/ u8 type1;
     /*0x23*/ u8 type2;
@@ -342,6 +343,25 @@ struct BattlePokemon
     /*0x55*/ u32 otId;
     /*0x59*/ u8 metLevel;
     /*0x5A*/ bool8 isShiny;
+=======
+    /*0x20*/ u8 ability;
+    /*0x21*/ u8 types[2];
+    /*0x23*/ u8 unknown;
+    /*0x24*/ u8 pp[MAX_MON_MOVES];
+    /*0x28*/ u16 hp;
+    /*0x2A*/ u8 level;
+    /*0x2B*/ u8 friendship;
+    /*0x2C*/ u16 maxHP;
+    /*0x2E*/ u16 item;
+    /*0x30*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
+    /*0x3B*/ u8 ppBonuses;
+    /*0x3C*/ u8 otName[PLAYER_NAME_LENGTH + 1];
+    /*0x44*/ u32 experience;
+    /*0x48*/ u32 personality;
+    /*0x4C*/ u32 status1;
+    /*0x50*/ u32 status2;
+    /*0x54*/ u32 otId;
+>>>>>>> 312749dd3109e607779bb1a15f3669ea2b0979dc
 };
 
 struct Evolution
