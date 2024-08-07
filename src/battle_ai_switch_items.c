@@ -148,8 +148,8 @@ static bool32 HasBadOdds(u32 battler, bool32 emitResult)
         playerMove = gBattleMons[opposingBattler].moves[i];
         if (playerMove != MOVE_NONE && gMovesInfo[playerMove].power != 0)
         {
-            struct SimulatedDamage dmg = AI_CalcDamage(playerMove, opposingBattler, battler, &effectiveness, FALSE, weather, DMG_ROLL_HIGHEST);
-            if (dmg.expected > maxDamageTaken)
+            damageTaken = AI_CalcDamage(playerMove, opposingBattler, battler, &effectiveness, FALSE, weather, DMG_ROLL_HIGHEST).expected;
+            if (damageTaken > maxDamageTaken)
                 maxDamageTaken = damageTaken;
         }
     }
@@ -172,7 +172,7 @@ static bool32 HasBadOdds(u32 battler, bool32 emitResult)
         return FALSE;
 
     // Start assessing whether or not mon has bad odds
-    // Jump straight to swtiching out in cases where mon gets OHKO'd
+    // Jump straight to switching out in cases where mon gets OHKO'd
     if (((getsOneShot && gBattleMons[opposingBattler].speed > gBattleMons[battler].speed) // If the player OHKOs and outspeeds OR OHKOs, doesn't outspeed but isn't 2HKO'd
             || (getsOneShot && gBattleMons[opposingBattler].speed <= gBattleMons[battler].speed && maxDamageDealt < gBattleMons[opposingBattler].hp / 2))
         && (gBattleMons[battler].hp >= gBattleMons[battler].maxHP / 2 // And the current mon has at least 1/2 their HP, or 1/4 HP and Regenerator
@@ -180,7 +180,7 @@ static bool32 HasBadOdds(u32 battler, bool32 emitResult)
             && gBattleMons[battler].hp >= gBattleMons[battler].maxHP / 4)))
     {
         // 50% chance to stay in regardless
-        if (Random() % 2 == 0)
+        if (!RandomPercentage(RNG_AI_HASBADODDS, 50))
             return FALSE;
 
         // Switch mon out
@@ -203,7 +203,7 @@ static bool32 HasBadOdds(u32 battler, bool32 emitResult)
                 return FALSE;
 
             // 50% chance to stay in regardless
-            if (Random() % 2 == 0)
+            if (!RandomPercentage(RNG_AI_HASBADODDS, 50))
                 return FALSE;
 
             // Switch mon out
