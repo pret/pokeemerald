@@ -34,7 +34,7 @@ static const u8 sHappyMsg11[] = _("Your POKéMON has caught the scent of\nsmoke.
 static const u8 sHappyMsg12[] = _("{STR_VAR_1} is poking at your belly.");
 static const u8 sHappyMsg13[] = _("Your POKéMON stretched out its body\nand is relaxing.");
 static const u8 sHappyMsg14[] = _("{STR_VAR_1} looks like it wants to\nlead!");
-static const u8 sHappyMsg15[] = _("{STR_VAR_1} is doing it's best to\nkeep up with you.");
+static const u8 sHappyMsg15[] = _("{STR_VAR_1} is doing its best to\nkeep up with you.");
 static const u8 sHappyMsg16[] = _("{STR_VAR_1} is happily cuddling up\nto you!");
 static const u8 sHappyMsg17[] = _("{STR_VAR_1} is full of life!");
 static const u8 sHappyMsg18[] = _("{STR_VAR_1} seems to be very happy!");
@@ -134,7 +134,7 @@ const struct FollowerMsgInfo gFollowerUpsetMessages[] = {
 
 // Unconditional angry messages
 static const u8 sAngryMsg00[] = _("{STR_VAR_1} let out a roar!");
-static const u8 sAngryMsg01[] = _("{STR_VAR_1} is making a face like\nits angry!");
+static const u8 sAngryMsg01[] = _("{STR_VAR_1} is making a face like\nit's angry!");
 static const u8 sAngryMsg02[] = _("{STR_VAR_1} seems to be angry for\nsome reason.");
 static const u8 sAngryMsg03[] = _("Your POKéMON turned to face the\nother way, showing a defiant face.");
 static const u8 sAngryMsg04[] = _("{STR_VAR_1} cried out.");
