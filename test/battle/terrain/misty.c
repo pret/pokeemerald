@@ -34,7 +34,7 @@ SINGLE_BATTLE_TEST("Misty Terrain activates Misty Seed and Mimicry")
         ABILITY_POPUP(opponent);
         MESSAGE("Foe Stunfisk's type changed to Fairy!");
     } THEN {
-        EXPECT_EQ(gBattleMons[B_POSITION_OPPONENT_LEFT].type1, TYPE_FAIRY);
+        EXPECT_EQ(gBattleMons[B_POSITION_OPPONENT_LEFT].types[0], TYPE_FAIRY);
     }
 }
 

@@ -30,7 +30,7 @@ SINGLE_BATTLE_TEST("Grassy Terrain activates Grassy Seed and Mimicry")
         ABILITY_POPUP(opponent);
         MESSAGE("Foe Stunfisk's type changed to Grass!");
     } THEN {
-        EXPECT_EQ(gBattleMons[B_POSITION_OPPONENT_LEFT].type1, TYPE_GRASS);
+        EXPECT_EQ(gBattleMons[B_POSITION_OPPONENT_LEFT].types[0], TYPE_GRASS);
     }
 }
 
