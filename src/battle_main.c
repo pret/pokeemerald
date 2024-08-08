@@ -1987,6 +1987,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
     s32 i;
     u8 monsCount;
     u16 averageEVs = 0;
+    u16 setTrainerTera = 0;
 
     if (battleTypeFlags & BATTLE_TYPE_TRAINER && !(battleTypeFlags & (BATTLE_TYPE_FRONTIER
                                                                         | BATTLE_TYPE_EREADER_TRAINER
@@ -2048,14 +2049,14 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 personalityValue = 0x88; // Use personality more likely to result in a male Pokémon
 
             personalityValue += personalityHash << 8;
-            if (partyData[i].gender == TRAINER_MON_MALE)
-                personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(MON_MALE, partyData[i].species);
-            else if (partyData[i].gender == TRAINER_MON_FEMALE)
-                personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(MON_FEMALE, partyData[i].species);
-            else if (partyData[i].gender == TRAINER_MON_RANDOM_GENDER)
-                personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(Random() & 1 ? MON_MALE : MON_FEMALE, partyData[i].species);
+            if (partyData[j].gender == TRAINER_MON_MALE)
+                personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(MON_MALE, partyData[j].species);
+            else if (partyData[j].gender == TRAINER_MON_FEMALE)
+                personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(MON_FEMALE, partyData[j].species);
+            else if (partyData[j].gender == TRAINER_MON_RANDOM_GENDER)
+                personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(Random() & 1 ? MON_MALE : MON_FEMALE, partyData[j].species);
             ModifyPersonalityForNature(&personalityValue, partyData[i].nature);
-            if (partyData[i].isShiny)
+            if (partyData[j].isShiny)
             {
                 otIdType = OT_ID_PRESET;
                 fixedOtId = HIHALF(personalityValue) ^ LOHALF(personalityValue);
@@ -2134,7 +2135,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 SetMonData(&party[i], MON_DATA_SPDEF_EV, &averageEVs);
                 SetMonData(&party[i], MON_DATA_SPEED_EV, &averageEVs);
             }
-            else if (partyData[i].ev != NULL)
+            else if (partyData[j].ev != NULL)
             {
                 SetMonData(&party[i], MON_DATA_HP_EV, &(partyData[j].ev[0]));
                 SetMonData(&party[i], MON_DATA_ATK_EV, &(partyData[j].ev[1]));
@@ -2199,11 +2200,43 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 u32 data = partyData[j].gigantamaxFactor;
                 SetMonData(&party[i], MON_DATA_GIGANTAMAX_FACTOR, &data);
             }
-            if (partyData[i].teraType > 0)
+
+            if((partyData[j].teraType > 0))
             {
-                u32 data = partyData[i].teraType;
+                u32 data = TYPE_NONE;
                 SetMonData(&party[i], MON_DATA_TERA_TYPE, &data);
             }
+
+            //if(isPlayer && (partyData[j].teraType > 0))
+            //{
+            //    u32 data = partyData[j].teraType;
+            //    SetMonData(&party[i], MON_DATA_TERA_TYPE, &data);
+            //    DebugPrintf("PLAYER SET TERA %d", data);
+            //}
+            //else if (isPlayer)
+            //{
+            //    u32 data = TYPE_NONE;
+            //    SetMonData(&party[i], MON_DATA_TERA_TYPE, &data);
+            //}
+            //
+            //if (!isPlayer)
+            //{   
+            //    if(setTrainerTera == 0)
+            //    {
+            //        u32 data = Random() % NUMBER_OF_MON_TYPES;
+            //        SetMonData(&party[i], MON_DATA_TERA_TYPE, &data);
+            //        setTrainerTera = 1;
+            //        DebugPrintf("SET TERA %d", data);
+            //    }
+            //    else
+            //    {
+            //        u32 data = TYPE_NONE;
+            //        SetMonData(&party[i], MON_DATA_TERA_TYPE, &data);
+            //        DebugPrintf("DONT SET TERA %d", data);
+            //    }
+            //} 
+            //DebugPrintf("MONS CREATED HERE");
+
             CalculateMonStats(&party[i]);
 
             if (B_TRAINER_CLASS_POKE_BALLS >= GEN_7 && ball == -1)

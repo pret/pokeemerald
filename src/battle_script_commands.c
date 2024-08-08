@@ -14217,8 +14217,8 @@ static void Cmd_tryswapitems(void)
             if (!(sideAttacker == sideTarget && IsPartnerMonFromSameTrainer(gBattlerAttacker)))
             {
                 // if targeting your own side and you aren't in a multi battle, don't save items as stolen
-                if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-                    TrySaveExchangedItem(gBattlerAttacker, oldItemAtk);
+                //if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
+                //    TrySaveExchangedItem(gBattlerAttacker, oldItemAtk);
                 if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
                     TrySaveExchangedItem(gBattlerTarget, *newItemAtk);
             }

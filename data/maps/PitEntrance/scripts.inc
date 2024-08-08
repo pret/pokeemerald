@@ -43,6 +43,7 @@ PitEntrance_Warp::
 	additem ITEM_ESCAPE_ROPE, 1
 #ifdef PIT_GEN_9_MODE
 	additem ITEM_MEGA_RING, 1
+	@additem ITEM_TERA_ORB, 1
 	additem ITEM_Z_POWER_RING, 1
 #endif
 	additem ITEM_EXP_SHARE, 1

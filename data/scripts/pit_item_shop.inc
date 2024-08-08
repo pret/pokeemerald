@@ -334,6 +334,9 @@ PitArena_Mart_Vitamins_HARD:
 
 	.align 2
 PitArena_Mart_EvoItems:
+#ifdef PIT_GEN_3_MODE
+	.2byte  ITEM_METEORITE
+#endif
 	.2byte ITEM_EVERSTONE
     .2byte ITEM_FIRE_STONE
     .2byte ITEM_WATER_STONE
@@ -547,6 +550,26 @@ PitArena_Mart_ZCrystals:
 
  	.align 2
 PitArena_Mart_FormItems:
+	.2byte  ITEM_METEORITE
+    .2byte  ITEM_DNA_SPLICERS
+	.2byte  ITEM_GRACIDEA
+	.2byte  ITEM_GRISEOUS_CORE
+	.2byte  ITEM_ROTOM_CATALOG
+	.2byte  ITEM_REVEAL_GLASS
+#ifdef PIT_GEN_9_MODE
+	.2byte  ITEM_PRISON_BOTTLE
+	.2byte  ITEM_ADAMANT_CRYSTAL
+	.2byte  ITEM_LUSTROUS_ORB
+	.2byte  ITEM_N_SOLARIZER
+    .2byte  ITEM_N_LUNARIZER
+    .2byte  ITEM_RUSTED_SWORD
+    .2byte  ITEM_RUSTED_SHIELD
+    .2byte  ITEM_REINS_OF_UNITY
+#endif
+    .2byte  ITEM_DOUSE_DRIVE
+    .2byte  ITEM_SHOCK_DRIVE
+    .2byte  ITEM_BURN_DRIVE
+    .2byte  ITEM_CHILL_DRIVE
     .2byte  ITEM_FLAME_PLATE
     .2byte  ITEM_SPLASH_PLATE
     .2byte  ITEM_ZAP_PLATE
@@ -564,11 +587,6 @@ PitArena_Mart_FormItems:
     .2byte  ITEM_DREAD_PLATE
     .2byte  ITEM_IRON_PLATE
     .2byte  ITEM_PIXIE_PLATE
-    .2byte  ITEM_DOUSE_DRIVE
-    .2byte  ITEM_SHOCK_DRIVE
-    .2byte  ITEM_BURN_DRIVE
-    .2byte  ITEM_CHILL_DRIVE
-    .2byte  ITEM_DNA_SPLICERS
 #ifdef PIT_GEN_9_MODE
 	.2byte  ITEM_YELLOW_NECTAR
     .2byte  ITEM_PINK_NECTAR
@@ -590,11 +608,6 @@ PitArena_Mart_FormItems:
     .2byte  ITEM_DARK_MEMORY
     .2byte  ITEM_STEEL_MEMORY
     .2byte  ITEM_FAIRY_MEMORY
-	.2byte  ITEM_N_SOLARIZER
-    .2byte  ITEM_N_LUNARIZER
-    .2byte  ITEM_RUSTED_SWORD
-    .2byte  ITEM_RUSTED_SHIELD
-    .2byte  ITEM_REINS_OF_UNITY
 #endif
 	.2byte ITEM_NONE
     release
