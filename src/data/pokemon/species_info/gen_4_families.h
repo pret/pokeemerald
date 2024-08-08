@@ -4904,7 +4904,11 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
             gOverworldPalette_RotomHeat,
             gShinyOverworldPalette_RotomHeat
         )
+#if GEN_LATEST <= 3
+        .levelUpLearnset = sRotomLevelUpLearnset,
+#else
         .levelUpLearnset = sRotomHeatLevelUpLearnset,
+#endif
         .teachableLearnset = sRotomTeachableLearnset,
         .formSpeciesIdTable = sRotomFormSpeciesIdTable,
         .formChangeTable = sRotomFormChangeTable,
@@ -4969,7 +4973,11 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
             gOverworldPalette_RotomWash,
             gShinyOverworldPalette_RotomWash
         )
+#if GEN_LATEST <= 3
+        .levelUpLearnset = sRotomLevelUpLearnset,
+#else
         .levelUpLearnset = sRotomWashLevelUpLearnset,
+#endif
         .teachableLearnset = sRotomTeachableLearnset,
         .formSpeciesIdTable = sRotomFormSpeciesIdTable,
         .formChangeTable = sRotomFormChangeTable,
@@ -5033,7 +5041,11 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
             gOverworldPalette_RotomFrost,
             gShinyOverworldPalette_RotomFrost
         )
+#if GEN_LATEST <= 3
+        .levelUpLearnset = sRotomLevelUpLearnset,
+#else
         .levelUpLearnset = sRotomFrostLevelUpLearnset,
+#endif
         .teachableLearnset = sRotomTeachableLearnset,
         .formSpeciesIdTable = sRotomFormSpeciesIdTable,
         .formChangeTable = sRotomFormChangeTable,
@@ -5098,7 +5110,11 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
             gOverworldPalette_RotomFan,
             gShinyOverworldPalette_RotomFan
         )
+#if GEN_LATEST <= 3
+        .levelUpLearnset = sRotomLevelUpLearnset,
+#else
         .levelUpLearnset = sRotomFanLevelUpLearnset,
+#endif
         .teachableLearnset = sRotomTeachableLearnset,
         .formSpeciesIdTable = sRotomFormSpeciesIdTable,
         .formChangeTable = sRotomFormChangeTable,
@@ -5162,7 +5178,11 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
             gOverworldPalette_RotomMow,
             gShinyOverworldPalette_RotomMow
         )
+#if GEN_LATEST <= 3
+        .levelUpLearnset = sRotomLevelUpLearnset,
+#else
         .levelUpLearnset = sRotomMowLevelUpLearnset,
+#endif
         .teachableLearnset = sRotomTeachableLearnset,
         .formSpeciesIdTable = sRotomFormSpeciesIdTable,
         .formChangeTable = sRotomFormChangeTable,

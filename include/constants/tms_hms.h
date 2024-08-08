@@ -1,4 +1,4 @@
-#include "config.h"
+#include "config/general.h"
 
 #ifndef GUARD_CONSTANTS_TMS_HMS_H
 #define GUARD_CONSTANTS_TMS_HMS_H

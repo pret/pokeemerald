@@ -1,5 +1,5 @@
 #include "constants/moves.h"
-#include "config.h"
+#include "config/general.h"
 #if I_EXPANDED_ITEM_NAMES == TRUE
 #define HANDLE_EXPANDED_ITEM_NAME(_name, ...) _(DEFAULT(_name, __VA_ARGS__))
 #else

@@ -34,7 +34,7 @@
 #include "event_data.h"
 #include "constants/flags.h"
 #include "ui_birch_case.h"
-#include "config.h"
+#include "config/general.h"
 
 //defines
 #define MODE_NORMAL     0

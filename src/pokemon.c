@@ -61,7 +61,7 @@
 #include "constants/weather.h"
 #include "tx_randomizer_and_challenges.h"
 #include "daycare.h"
-#include "config.h"
+#include "config/general.h"
 #include "field_screen_effect.h"
 
 #include "wild_encounter.h"
@@ -3789,19 +3789,20 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
             retVal = substruct3->gigantamaxFactor;
             break;
         case MON_DATA_TERA_TYPE:
-            if (gSpeciesInfo[substruct0->species].forceTeraType)
-            {
-                retVal = gSpeciesInfo[substruct0->species].forceTeraType;
-            }
-            else if (substruct0->teraType == TYPE_NONE) // Tera Type hasn't been modified so we can just use the personality
-            {
-                const u8 *types = gSpeciesInfo[substruct0->species].types;
-                retVal = (boxMon->personality & 0x1) == 0 ? types[0] : types[1];
-            }
-            else
-            {
-                retVal = substruct0->teraType;
-            }
+            //if (gSpeciesInfo[substruct0->species].forceTeraType)
+            //{
+            //    retVal = gSpeciesInfo[substruct0->species].forceTeraType;
+            //}
+            //else if (substruct0->teraType == TYPE_NONE) // Tera Type hasn't been modified so we can just use the personality
+            //{
+            //    const u8 *types = gSpeciesInfo[substruct0->species].types;
+            //    retVal = (boxMon->personality & 0x1) == 0 ? types[0] : types[1];
+            //}
+            //else
+            //{
+            //    retVal = substruct0->teraType;
+            //}
+            retVal = substruct0->teraType == TYPE_NONE;
             break;
         case MON_DATA_EVOLUTION_TRACKER:
             evoTracker.asField.a = substruct1->evolutionTracker1;
@@ -8611,7 +8612,7 @@ static const u16 sRandomSpeciesLegendary[] =
     SPECIES_JIRACHI           ,
     SPECIES_DEOXYS            ,
     SPECIES_CHIMECHO          ,
-#ifndef PIT_GEN_3_MODE
+#ifdef PIT_GEN_5_MODE
     SPECIES_TURTWIG           ,
     SPECIES_GROTLE            ,
     SPECIES_TORTERRA          ,
@@ -8876,7 +8877,7 @@ static const u16 sRandomSpeciesLegendary[] =
     SPECIES_MELOETTA          ,
     SPECIES_GENESECT          ,
 #endif
-#ifdef PIT_GEN_9_MODE
+#if GEN_LATEST > 5
     SPECIES_CHESPIN           ,
     SPECIES_QUILLADIN         ,
     SPECIES_CHESNAUGHT        ,

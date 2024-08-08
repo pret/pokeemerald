@@ -11143,6 +11143,8 @@ static const struct LevelUpMove sRotomLevelUpLearnset[] = {
     LEVEL_UP_MOVE(55, MOVE_UPROAR),
     LEVEL_UP_END
 };
+#endif //P_FAMILY_ROTOM
+
 
 static const struct LevelUpMove sRotomHeatLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_OVERHEAT),
@@ -11233,7 +11235,6 @@ static const struct LevelUpMove sRotomMowLevelUpLearnset[] = {
     LEVEL_UP_MOVE(55, MOVE_UPROAR),
     LEVEL_UP_END
 };
-#endif //P_FAMILY_ROTOM
 
 #if P_FAMILY_UXIE
 static const struct LevelUpMove sUxieLevelUpLearnset[] = {
