@@ -599,3 +599,22 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Searing Sunraze Smash ignores the target's abilitie
         MESSAGE("A critical hit!");
     } 
 }
+
+SINGLE_BATTLE_TEST("(Z-MOVE) Z-Revelation Dance always transforms into Breakneck Blitz")
+{
+    u16 species;
+    PARAMETRIZE { species = SPECIES_ORICORIO_BAILE; }
+    PARAMETRIZE { species = SPECIES_ORICORIO_PAU; }
+    PARAMETRIZE { species = SPECIES_ORICORIO_POM_POM; }
+    PARAMETRIZE { species = SPECIES_ORICORIO_SENSU; }
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_REVELATION_DANCE].type == TYPE_NORMAL);
+        PLAYER(species) { Item(ITEM_NORMALIUM_Z); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_REVELATION_DANCE, gimmick: GIMMICK_Z_MOVE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ZMOVE_ACTIVATE, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_BREAKNECK_BLITZ, player);
+    }
+}
