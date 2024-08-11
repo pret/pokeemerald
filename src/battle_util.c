@@ -4060,6 +4060,54 @@ static inline bool32 HadMoreThanHalfHpNowDoesnt(u32 battler)
              && gBattleMons[battler].hp <= cutoff);
 }
 
+#define ANIM_STAT_HP      0
+#define ANIM_STAT_ATK     1
+#define ANIM_STAT_DEF     2
+#define ANIM_STAT_SPATK   3
+#define ANIM_STAT_SPDEF   4
+#define ANIM_STAT_SPEED   5
+#define ANIM_STAT_ACC     6
+#define ANIM_STAT_EVASION 7
+static void ChooseStatBoostAnimation(u32 battler)
+{
+    u32 stat;
+    bool32 statBuffMoreThan1 = FALSE;
+    u32 static const statsOrder[NUM_BATTLE_STATS] =
+    {
+        [ANIM_STAT_HP]      = STAT_HP,
+        [ANIM_STAT_ATK]     = STAT_ATK,
+        [ANIM_STAT_DEF]     = STAT_DEF,
+        [ANIM_STAT_SPATK]   = STAT_SPATK,
+        [ANIM_STAT_SPDEF]   = STAT_SPDEF,
+        [ANIM_STAT_SPEED]   = STAT_SPEED,
+        [ANIM_STAT_ACC]     = STAT_ACC,
+        [ANIM_STAT_EVASION] = STAT_EVASION,
+    };
+    gBattleScripting.animArg1 = 0;
+
+    for (stat = 1; stat < NUM_BATTLE_STATS; stat++) // Start loop at 1 to avoid STAT_HP
+    {
+        if ((gQueuedStatBoosts[battler].stats & (1 << statsOrder[stat])) == 0)
+            continue;
+
+        if (!statBuffMoreThan1)
+            statBuffMoreThan1 = ((gQueuedStatBoosts[battler].stats & (1 << statsOrder[stat])) > 1);
+
+        if (gBattleScripting.animArg1 != 0) // Already set in a different stat so now boosting multiple stats
+            gBattleScripting.animArg1 = (statBuffMoreThan1 ? STAT_ANIM_MULTIPLE_PLUS2 : STAT_ANIM_MULTIPLE_PLUS1);
+        else
+            gBattleScripting.animArg1 = GET_STAT_BUFF_ID((statsOrder[stat] + 1)) + (!statBuffMoreThan1 ? STAT_ANIM_PLUS1 : STAT_ANIM_PLUS2);
+    }
+}
+#undef ANIM_STAT_HP
+#undef ANIM_STAT_ATK
+#undef ANIM_STAT_DEF
+#undef ANIM_STAT_SPATK
+#undef ANIM_STAT_SPDEF
+#undef ANIM_STAT_SPEED
+#undef ANIM_STAT_ACC
+#undef ANIM_STAT_EVASION
+
 u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 moveArg)
 {
     u32 effect = 0;
@@ -6024,40 +6072,10 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             case ABILITY_OPPORTUNIST:
                 if (gProtectStructs[battler].activateOpportunist == 2)
                 {
-                    bool32 statBuffMoreThan1 = FALSE;
-                    bool32 handleSpeedAnimLater = FALSE;
                     gBattleScripting.animArg1 = 0;
                     gBattleScripting.battler = battler;
                     gProtectStructs[battler].activateOpportunist--;
-
-                    for (i = 0; i < (NUM_BATTLE_STATS - 1); i++)
-                    {
-                        if ((gQueuedStatBoosts[battler].stats & (1 << i)) == 0)
-                            continue;
-
-                        if (i == STAT_SPEED)
-                        {
-                            handleSpeedAnimLater = TRUE;
-                            continue;
-                        }
-
-                        if (!statBuffMoreThan1)
-                            statBuffMoreThan1 = ((gQueuedStatBoosts[battler].stats & (1 << i)) > 1);
-
-                        if (gBattleScripting.animArg1 != 0) //Already set in a different stat so now boosting multiple stats
-                            gBattleScripting.animArg1 = (!statBuffMoreThan1 ? STAT_ANIM_MULTIPLE_PLUS1 : STAT_ANIM_MULTIPLE_PLUS2);
-                        else
-                            gBattleScripting.animArg1 = GET_STAT_BUFF_ID((i + 1)) + (!statBuffMoreThan1 ? STAT_ANIM_PLUS1 : STAT_ANIM_PLUS2);
-
-                    }
-                    if (handleSpeedAnimLater)
-                    {
-                        if (gBattleScripting.animArg1 != 0) //Already set in a different stat so now boosting multiple stats
-                            gBattleScripting.animArg1 = (!statBuffMoreThan1 ? STAT_ANIM_MULTIPLE_PLUS1 : STAT_ANIM_MULTIPLE_PLUS2);
-                        else
-                            gBattleScripting.animArg1 = GET_STAT_BUFF_ID((STAT_SPEED + 1)) + (!statBuffMoreThan1 ? STAT_ANIM_PLUS1 : STAT_ANIM_PLUS2);
-                    }
-
+                    ChooseStatBoostAnimation(battler);
                     BattleScriptPushCursorAndCallback(BattleScript_OpportunistCopyStatChange);
                     effect = 1;
                 }
@@ -7006,43 +7024,11 @@ static u8 TryConsumeMirrorHerb(u32 battler, bool32 execute)
 
     if (gProtectStructs[battler].eatMirrorHerb)
     {
-        u32 i;
-        bool32 statBuffMoreThan1 = FALSE;
-        bool32 handleSpeedAnimLater = FALSE;
-        gBattleScripting.animArg1 = 0;
 
         gLastUsedItem = gBattleMons[battler].item;
         gBattleScripting.battler = battler;
         gProtectStructs[battler].eatMirrorHerb = 0;
-
-        for (i = 0; i < (NUM_BATTLE_STATS - 1); i++)
-        {
-            if ((gQueuedStatBoosts[battler].stats & (1 << i)) == 0)
-                continue;
-
-            if (i == STAT_SPEED)
-            {
-                handleSpeedAnimLater = TRUE;
-                continue;
-            }
-
-            if (!statBuffMoreThan1)
-                statBuffMoreThan1 = ((gQueuedStatBoosts[battler].stats & (1 << i)) > 1);
-
-            if (gBattleScripting.animArg1 != 0) //Already set in a different stat so now boosting multiple stats
-                gBattleScripting.animArg1 = (!statBuffMoreThan1 ? STAT_ANIM_MULTIPLE_PLUS1 : STAT_ANIM_MULTIPLE_PLUS2);
-            else
-                gBattleScripting.animArg1 = GET_STAT_BUFF_ID((i + 1)) + (!statBuffMoreThan1 ? STAT_ANIM_PLUS1 : STAT_ANIM_PLUS2);
-
-        }
-        if (handleSpeedAnimLater)
-        {
-            if (gBattleScripting.animArg1 != 0) //Already set in a different stat so now boosting multiple stats
-                gBattleScripting.animArg1 = (!statBuffMoreThan1 ? STAT_ANIM_MULTIPLE_PLUS1 : STAT_ANIM_MULTIPLE_PLUS2);
-            else
-                gBattleScripting.animArg1 = GET_STAT_BUFF_ID((STAT_SPEED + 1)) + (!statBuffMoreThan1 ? STAT_ANIM_PLUS1 : STAT_ANIM_PLUS2);
-        }
-
+        ChooseStatBoostAnimation(battler);
         if (execute)
         {
             BattleScriptExecute(BattleScript_MirrorHerbCopyStatChangeEnd2);
