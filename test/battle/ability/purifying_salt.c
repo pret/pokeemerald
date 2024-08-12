@@ -19,6 +19,24 @@ SINGLE_BATTLE_TEST("Purifying Salt halves damage from Ghost-type moves", s16 dam
     }
 }
 
+SINGLE_BATTLE_TEST("Purifying Salt halves damage from dynamic Ghost-type moves", s16 damage)
+{
+    u16 ability;
+    PARAMETRIZE { ability = ABILITY_STURDY; }
+    PARAMETRIZE { ability = ABILITY_PURIFYING_SALT; }
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_TERA_BLAST].effect == EFFECT_TERA_BLAST);
+        PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_GHOST); }
+        OPPONENT(SPECIES_GARGANACL) { Ability(ability); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: GIMMICK_TERA); }
+    } SCENE {
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_MUL_EQ(results[0].damage, UQ_4_12(0.5), results[1].damage);
+    }
+}
+
 SINGLE_BATTLE_TEST("Purifying Salt makes Rest fail")
 {
     GIVEN {

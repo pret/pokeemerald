@@ -8257,6 +8257,8 @@ u32 GetMoveTarget(u16 move, u8 setTarget)
 {
     u8 targetBattler = 0;
     u32 moveTarget, side;
+    u32 moveType;
+    GET_MOVE_TYPE(move, moveType);
 
     if (setTarget != NO_TARGET_OVERRIDE)
         moveTarget = setTarget - 1;
@@ -8274,7 +8276,7 @@ u32 GetMoveTarget(u16 move, u8 setTarget)
         else
         {
             targetBattler = SetRandomTarget(gBattlerAttacker);
-            if (gMovesInfo[move].type == TYPE_ELECTRIC
+            if (moveType == TYPE_ELECTRIC
                 && IsAbilityOnOpposingSide(gBattlerAttacker, ABILITY_LIGHTNING_ROD)
                 && GetBattlerAbility(targetBattler) != ABILITY_LIGHTNING_ROD)
             {
@@ -8282,7 +8284,7 @@ u32 GetMoveTarget(u16 move, u8 setTarget)
                 RecordAbilityBattle(targetBattler, gBattleMons[targetBattler].ability);
                 gSpecialStatuses[targetBattler].lightningRodRedirected = TRUE;
             }
-            else if (gMovesInfo[move].type == TYPE_WATER
+            else if (moveType == TYPE_WATER
                 && IsAbilityOnOpposingSide(gBattlerAttacker, ABILITY_STORM_DRAIN)
                 && GetBattlerAbility(targetBattler) != ABILITY_STORM_DRAIN)
             {
@@ -9771,7 +9773,7 @@ static inline u32 CalcDefenseStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
         break;
     case ABILITY_PURIFYING_SALT:
-        if (gMovesInfo[move].type == TYPE_GHOST)
+        if (moveType == TYPE_GHOST)
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(2.0));
         break;
     }
@@ -10467,7 +10469,8 @@ uq4_12_t CalcTypeEffectivenessMultiplier(u32 move, u32 moveType, u32 battlerAtk,
 uq4_12_t CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u16 abilityDef)
 {
     uq4_12_t modifier = UQ_4_12(1.0);
-    u8 moveType = gMovesInfo[move].type;
+    u32 moveType;
+    GET_MOVE_TYPE(move, moveType);
 
     if (move != MOVE_STRUGGLE && moveType != TYPE_MYSTERY)
     {
