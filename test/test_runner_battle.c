@@ -1327,7 +1327,7 @@ void TestRunner_Battle_AfterLastTurn(void)
     }
 
     STATE->runThen = TRUE;
-    STATE->runFinally = STATE->runParameter + 1 == STATE->parameters;
+    STATE->runFinally = STATE->runParameter + 1 == STATE->parameters && STATE->runTrial + 1 >= STATE->trials;
     InvokeTestFunction(test);
     STATE->runThen = FALSE;
     STATE->runFinally = FALSE;
@@ -1369,6 +1369,7 @@ static inline rng_value_t MakeRngValue(const u16 seed)
         return ISO_RANDOMIZE1(seed);
     #endif
 }
+
 static void CB2_BattleTest_NextTrial(void)
 {
     ClearFlagAfterTest();
@@ -1452,7 +1453,7 @@ void Randomly(u32 sourceLine, u32 passes, u32 trials, struct RandomlyContext ctx
 {
     const struct BattleTest *test = GetBattleTest();
     INVALID_IF(STATE->trials != 0, "PASSES_RANDOMLY can only be used once per test");
-    INVALID_IF(test->resultsSize > 0, "PASSES_RANDOMLY is incompatible with results");
+    INVALID_IF(test->resultsSize > 0 && STATE->parametersCount > 1, "PASSES_RANDOMLY is incompatible with results");
     INVALID_IF(passes > trials, "%d passes specified, but only %d trials", passes, trials);
     STATE->rngTag = ctx.tag;
     STATE->rngTrialOffset = 0;
