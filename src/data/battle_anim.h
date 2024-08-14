@@ -1461,6 +1461,10 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_TeraCrystal, 0x800, ANIM_TAG_TERA_CRYSTAL},
     {gBattleAnimSpriteGfx_TeraShatter, 0x0180, ANIM_TAG_TERA_SHATTER},
     {gBattleAnimSpriteGfx_DreepyMissile, 0x200, ANIM_TAG_DREEPY_SHINY},
+    {gBattleAnimSpriteGfx_BloodMoon, 0x0800, ANIM_TAG_BLOOD_MOON},
+    {gBattleAnimSpriteGfx_RedExplosion, 0x0800, ANIM_TAG_RED_EXPLOSION},
+    {gBattleAnimSpriteGfx_Beam, 0x0800, ANIM_TAG_BEAM},
+    {gBattleAnimSpriteGfx_PurpleChain, 0x1000, ANIM_TAG_PURPLE_CHAIN},
 };
 
 const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
@@ -1923,6 +1927,10 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_TeraCrystal, ANIM_TAG_TERA_CRYSTAL},
     {gBattleAnimSpritePal_TeraShatter, ANIM_TAG_TERA_SHATTER},
     {gBattleAnimSpritePal_DreepyMissileShiny, ANIM_TAG_DREEPY_SHINY},
+    {gBattleAnimSpritePal_BloodMoon, ANIM_TAG_BLOOD_MOON},
+    {gBattleAnimSpritePal_RedExplosion, ANIM_TAG_RED_EXPLOSION},
+    {gBattleAnimSpritePal_Beam, ANIM_TAG_BEAM},
+    {gBattleAnimSpritePal_PurpleChain, ANIM_TAG_PURPLE_CHAIN},
 };
 
 const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
