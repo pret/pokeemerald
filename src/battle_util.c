@@ -11117,6 +11117,10 @@ void TryRestoreHeldItems(void)
             if (ItemId_GetPocket(lostItem) == POCKET_BERRIES && GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) != lostItem)
                 lostItem = ITEM_NONE;
 
+            // consider switched items not lost (Switcheroo, Trick)
+            if (gBattleStruct->itemLost[B_SIDE_PLAYER][i].exchanged)
+                lostItem = ITEM_NONE;
+
             // Check if the lost item should be restored
             if ((lostItem != ITEM_NONE || returnNPCItems) && ItemId_GetPocket(lostItem) != POCKET_BERRIES)
                 SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &lostItem);
@@ -11174,6 +11178,20 @@ void TrySaveExchangedItem(u32 battler, u16 stolenItem)
       && GetBattlerSide(battler) == B_SIDE_PLAYER
       && stolenItem == gBattleStruct->itemLost[B_SIDE_PLAYER][gBattlerPartyIndexes[battler]].originalItem)
         gBattleStruct->itemLost[B_SIDE_PLAYER][gBattlerPartyIndexes[battler]].stolen = TRUE;
+}
+
+void TrySaveSwitchedItem(u32 battler, u16 switchedItem)
+{
+    // Because BtlController_EmitSetMonData does SetMonData, we need to save the stolen item only if it matches the battler's original
+    // So, if the player steals an item during battle and has it stolen from it, it will not end the battle with it (naturally)
+    if (B_TRAINERS_KNOCK_OFF_ITEMS == FALSE)
+        return;
+    // If regular trainer battle and mon's original item matches what is being stolen, save it to be restored at end of battle
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
+      && !(gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
+      && GetBattlerSide(battler) == B_SIDE_PLAYER
+      && switchedItem == gBattleStruct->itemLost[B_SIDE_PLAYER][gBattlerPartyIndexes[battler]].originalItem)
+        gBattleStruct->itemLost[B_SIDE_PLAYER][gBattlerPartyIndexes[battler]].exchanged = TRUE;
 }
 
 bool32 IsBattlerAffectedByHazards(u32 battler, bool32 toxicSpikes)

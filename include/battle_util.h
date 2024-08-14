@@ -222,6 +222,7 @@ bool32 TestIfSheerForceAffected(u32 battler, u16 move);
 void TryRestoreHeldItems(void);
 bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item);
 void TrySaveExchangedItem(u32 battler, u16 stolenItem);
+void TrySaveSwitchedItem(u32 battler, u16 switchedItem);
 bool32 IsPartnerMonFromSameTrainer(u32 battler);
 u8 TryHandleSeed(u32 battler, u32 terrainFlag, u8 statId, u16 itemId, bool32 execute);
 bool32 IsBattlerAffectedByHazards(u32 battler, bool32 toxicSpikes);
