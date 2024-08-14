@@ -47,7 +47,9 @@ SINGLE_BATTLE_TEST("Anger Point does not trigger when already at maximum Attack 
     }
 }
 
-SINGLE_BATTLE_TEST("Anger Point does not trigger when a substitute takes the hit")
+TO_DO_BATTLE_TEST("Anger Point triggers when a substitute takes the hit (Gen4)");
+
+SINGLE_BATTLE_TEST("Anger Point does not trigger when a substitute takes the hit (Gen5+)")
 {
     ASSUME(gMovesInfo[MOVE_FROST_BREATH].alwaysCriticalHit);
     ASSUME(gMovesInfo[MOVE_SUBSTITUTE].effect == EFFECT_SUBSTITUTE);

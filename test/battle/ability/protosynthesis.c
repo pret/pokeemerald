@@ -99,3 +99,7 @@ SINGLE_BATTLE_TEST("Protosynthesis activates on switch-in")
         MESSAGE("Roaring Moon's Attack was heightened!");
     }
 }
+
+TO_DO_BATTLE_TEST("Protosynthesis activates in sun before Booster Energy");
+TO_DO_BATTLE_TEST("Protosynthesis activates even if the Pokémon is holding an Utility Umbrella");
+TO_DO_BATTLE_TEST("Protosynthesis doesn't activate if Cloud Nine/Air Lock is on the field");

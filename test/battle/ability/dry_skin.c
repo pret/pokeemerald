@@ -15,6 +15,8 @@ SINGLE_BATTLE_TEST("Dry Skin causes 1/8th Max HP damage in Sun")
     }
 }
 
+TO_DO_BATTLE_TEST("Dry Skin doesn't get damaged in Sun if Cloud Nine/Air Lock is on the field");
+
 SINGLE_BATTLE_TEST("Dry Skin heals 1/8th Max HP in Rain")
 {
     GIVEN {
@@ -28,6 +30,8 @@ SINGLE_BATTLE_TEST("Dry Skin heals 1/8th Max HP in Rain")
         HP_BAR(player, damage: -(200 / 8));
     }
 }
+
+TO_DO_BATTLE_TEST("Dry Skin doesn't heal in Rain if Cloud Nine/Air Lock is on the field");
 
 SINGLE_BATTLE_TEST("Dry Skin increases damage taken from Fire-type moves by 25%", s16 damage)
 {

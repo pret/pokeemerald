@@ -3,6 +3,7 @@
 
 TO_DO_BATTLE_TEST("Harvest has a 50% chance to restore a Berry at the end of the turn");
 TO_DO_BATTLE_TEST("Harvest always restores a Berry in Sunlight");
+TO_DO_BATTLE_TEST("Harvest doesn't always restore a Berry if Cloud Nine/Air Lock is on the field");
 TO_DO_BATTLE_TEST("Harvest restores a Berry even after being switched out and back in");
 TO_DO_BATTLE_TEST("Harvest restores a Berry consumed by Fling");
 TO_DO_BATTLE_TEST("Harvest restores a Berry consumed by Natural Gift");

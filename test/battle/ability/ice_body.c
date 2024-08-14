@@ -26,3 +26,5 @@ SINGLE_BATTLE_TEST("Ice Body recovers 1/16th of Max HP in hail.")
         MESSAGE("Glalie's Ice Body healed it a little bit!");
     }
 }
+
+TO_DO_BATTLE_TEST("Sand Rush doesn't recover HP if Cloud Nine/Air Lock is on the field");

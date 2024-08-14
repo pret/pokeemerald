@@ -17,6 +17,8 @@ SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim in harsh sunlight")
     }
 }
 
+TO_DO_BATTLE_TEST("Flower Gift doesn't transform Cherrim if Cloud Nine/Air Lock is on the field");
+
 SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back to normal when weather changes")
 {
     GIVEN {
@@ -60,6 +62,8 @@ SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back to normal when its abili
         EXPECT_EQ(player->species, SPECIES_CHERRIM_OVERCAST);
     }
 }
+
+TO_DO_BATTLE_TEST("Forecast transforms Castform back to normal under Cloud Nine/Air Lock");
 
 DOUBLE_BATTLE_TEST("Flower Gift increases the attack of Cherrim and its allies by 1.5x", s16 damageL, s16 damageR)
 {

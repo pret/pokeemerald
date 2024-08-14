@@ -14,3 +14,5 @@ SINGLE_BATTLE_TEST("Rain Dish recovers 1/16th of Max HP in Rain")
         HP_BAR(player, damage: -(100 / 16));
     }
 }
+
+TO_DO_BATTLE_TEST("Rain Dish doesn't recover HP if Cloud Nine/Air Lock is on the field");
