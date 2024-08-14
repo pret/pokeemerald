@@ -3,6 +3,8 @@
 - [README](./README.md)
 - [Installation](./INSTALL.md)
     - [Setting up WSL1 (Legacy Portion)](./legacy_WSL1_INSTALL.md)
+- [Run documentation site locally](local_mdbook/index.md)
+    - [Ubuntu WSL1/WSL2](local_mdbook/ubuntu_WSL.md)
 - [AI Flags](./ai_flags.md)
 - [Tutorials]()
   - [How to add new AI Flags](./ai_logic.md)
