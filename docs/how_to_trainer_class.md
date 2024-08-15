@@ -12,13 +12,13 @@
 * [Usage](#usage)
 
 ## Quick Summary
-(Page contains out of date information, [new instructions for Sprites here](https://github.com/rh-hideout/pokeemerald-expansion/pull/3597).)  
+(Page contains out of date information, [new instructions for Sprites here](https://github.com/rh-hideout/pokeemerald-expansion/pull/3597).)
 If you've done this before and just need a quick lookup, here's what files you need:
 1. GFX into [graphics/trainers/front_pics](https://github.com/rh-hideout/pokeemerald-expansion/blob/master/graphics/trainers/front_pics)
 2. Palette into [graphics/trainers/palettes](https://github.com/rh-hideout/pokeemerald-expansion/blob/master/graphics/trainers/palettes)
 3. Register sprites to [include/graphics.h](https://github.com/rh-hideout/pokeemerald-expansion/blob/master/include/graphics.h)
 4. Point game to where graphic files are found: [src/data/graphics/trainers](https://github.com/rh-hideout/pokeemerald-expansion/blob/master/src/data/graphics/trainers.h)
-5. Add animation to: [src/data/trainer_graphics/front_pic_anims.h](https://github.com/rh-hideout/pokeemerald-expansion/blob/master/src/data/trainer_graphics/front_pic_anims.h) 
+5. Add animation to: [src/data/trainer_graphics/front_pic_anims.h](https://github.com/rh-hideout/pokeemerald-expansion/blob/master/src/data/trainer_graphics/front_pic_anims.h)
 6. Add the trainer to all three structs in: [src/data/trainer_graphics/front_pic_table.h](https://github.com/rh-hideout/pokeemerald-expansion/blob/master/src/data/trainer_graphics/front_pic_table.h)
 7. Add trainer to [include/constants/trainers.h](https://github.com/rh-hideout/pokeemerald-expansion/blob/master/include/constants/trainers.h)
 

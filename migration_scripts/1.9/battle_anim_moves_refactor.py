@@ -37,7 +37,7 @@ for line in lines:
     comment_split = line.split('//')
     if move and IsCommaMissing(comment_split[0]):
         line = comment_split[0].removesuffix('\n') + ',' + line[len(comment_split[0]):-1] + '\n'
-    
+
 
     moves_info_lines.append(line)
 

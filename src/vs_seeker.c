@@ -581,7 +581,7 @@ bool32 IsVsSeekerEnabled(void)
 {
     if (I_VS_SEEKER_CHARGING == 0)
         return FALSE;
-    
+
     return (CheckBagHasItem(ITEM_VS_SEEKER, 1));
 }
 

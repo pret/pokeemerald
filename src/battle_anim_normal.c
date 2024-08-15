@@ -414,7 +414,7 @@ u32 UnpackSelectedBattlePalettes(s16 selector)
     bool8 anim1 = (selector >> 5) & 1;
     bool8 anim2 = (selector >> 6) & 1;
     u32 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gAnimMoveIndex);
-    
+
     switch (moveTarget)
     {
     case MOVE_TARGET_BOTH:
@@ -431,7 +431,7 @@ u32 UnpackSelectedBattlePalettes(s16 selector)
         }
         break;
     }
-    
+
     return GetBattlePalettesMask(battleBackground, attacker, target, attackerPartner, targetPartner, anim1, anim2);
 }
 

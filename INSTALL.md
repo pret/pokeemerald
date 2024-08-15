@@ -327,7 +327,7 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
     libpng is now installed.
 
     Continue to [Installing pkg-config (macOS)](#installing-pkg-config-macos) if **pkg-config is not installed**. Otherwise, continue to [Installing devkitARM (macOS)](#installing-devkitarm-macos) if **devkitARM is not installed**.
-    
+
     If both pkg-config and devkitARM are already installed, go to [Choosing where to store pokeemerald Expansion (macOS)](#choosing-where-to-store-pokeemerald-expansion-macos).
 
 ### Installing pkg-config (macOS)
@@ -541,7 +541,7 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
     >   ```
     >   Where *\<folder where pokeemerald-expansion is to be stored>* is the path of the folder [where you chose to store pokeemerald Expansion](#Choosing-where-to-store-pokeemerald-expansion-WSL1). Then run the `git clone` command again.
     </details>
-    
+
 Now you're ready to build pokeemerald Expansion.
 
 ## Build pokeemerald Expansion

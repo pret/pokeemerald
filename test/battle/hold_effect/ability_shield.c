@@ -69,7 +69,7 @@ SINGLE_BATTLE_TEST("Ability Shield protects against Mycelium Might")
     } WHEN {
         TURN { MOVE(opponent, MOVE_SPORE); MOVE(player, MOVE_SPORE); }
     } SCENE {
-        
+
         if (item == ITEM_ABILITY_SHIELD) {
             NONE_OF {
                 ANIMATION(ANIM_TYPE_MOVE, MOVE_SPORE, opponent);

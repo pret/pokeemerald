@@ -384,7 +384,7 @@ Edit [src/data/text/species_names.h](https://github.com/rh-hideout/pokeemerald-e
  const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
      [SPECIES_NONE] = _("??????????"),
      [SPECIES_BULBASAUR] = _("Bulbasaur"),
-     ... 
+     ...
      [SPECIES_ENAMORUS] = _("Enamorus"),
 +    [SPECIES_MEWTHREE] = _("Mewthree"),
  };
@@ -482,7 +482,7 @@ Append to [src/data/pokemon/pokedex_text.h](https://github.com/rh-hideout/pokeem
      "winter. According to legend, this\n"
      "Pokémon's love gives rise to the\n"
      "budding of fresh life across the land.");
- 
+
 +const u8 gMewthreePokedexText[] = _(
 +    "The rumors became true.\n"
 +    "This is Mews final form.\n"
@@ -509,7 +509,7 @@ Edit [src/data/pokemon/pokedex_entries.h](https://github.com/rh-hideout/pokeemer
          .trainerScale = 296,
          .trainerOffset = 1,
      },
-    
+
 +    [NATIONAL_DEX_MEWTHREE] =
 +    {
 +        .categoryName = _("NEW SPECIES"),
@@ -553,7 +553,7 @@ Edit [src/data/pokemon/pokedex_orders.h](https://github.com/rh-hideout/pokeemera
      NATIONAL_DEX_DUGTRIO,
      ...
  };
- 
+
  const u16 gPokedexOrder_Height[] =
  {
      ...
@@ -598,7 +598,7 @@ Edit [src/data/pokemon/species_info.h](https://github.com/rh-hideout/pokeemerald
      },
 
 +     [SPECIES_MEWTHREE] =
-+     { 
++     {
 +        .baseHP        = 106,
 +        .baseAttack    = 150,
 +        .baseDefense   = 70,

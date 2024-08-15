@@ -181,7 +181,7 @@ Edit [src/data/pokemon/species_info.h](https://github.com/rh-hideout/pokeemerald
      },
 
 +    [SPECIES_MEWTHREE] =
-+    { 
++    {
 +       .baseHP        = 106,
 +       .baseAttack    = 150,
 +       .baseDefense   = 70,
@@ -245,7 +245,7 @@ That's all the basic fields present in vanilla emerald, so now let's take a look
  {
      ...
      [SPECIES_MEWTHREE] =
-     { 
+     {
         ...
         .isLegendary = TRUE,
         .allPerfectIVs = TRUE,
@@ -320,7 +320,7 @@ Lastly, we add the cry to our species entry
  {
      ...
      [SPECIES_MEWTHREE] =
-     { 
+     {
         ...
         .isLegendary = TRUE,
         .allPerfectIVs = TRUE,
@@ -399,7 +399,7 @@ Now we can add the number and entry to our Mewthree:
  {
      ...
      [SPECIES_MEWTHREE] =
-     { 
+     {
         ...
         .cryId = CRY_MEWTHREE,
 +       .natDexNum = NATIONAL_DEX_MEWTHREE,
@@ -420,7 +420,7 @@ Now we can add the number and entry to our Mewthree:
 ```
 ![image](https://github.com/rh-hideout/pokeemerald-expansion/assets/2904965/3759dd4c-8da5-4b1c-9a50-b9e9d0815e7f)
 
-The values `pokemonScale`, `pokemonOffset`, `trainerScale` and `trainerOffset` are used for the height comparison figure in the Pokédex. 
+The values `pokemonScale`, `pokemonOffset`, `trainerScale` and `trainerOffset` are used for the height comparison figure in the Pokédex.
 
 `height` and `weight` are specified in decimeters and hectograms respectively (which are meters and kilograms multiplied by 10, so 2.5 meters are 25 decimeters).
 
@@ -454,7 +454,7 @@ Edit [src/data/pokemon/pokedex_orders.h](https://github.com/rh-hideout/pokeemera
      NATIONAL_DEX_DUGTRIO,
      ...
  };
- 
+
  const u16 gPokedexOrder_Height[] =
  {
      ...
@@ -571,7 +571,7 @@ Now that we have all the external data ready, we just need to add it to `gSpecie
  {
      ...
      [SPECIES_MEWTHREE] =
-     { 
+     {
         ...
         .pokemonScale = 256,
         .pokemonOffset = 0,
@@ -651,7 +651,7 @@ We're almost there just a bit left!
  {
      ...
      [SPECIES_MEWTHREE] =
-     { 
+     {
         ...
         .abilities = { ABILITY_INSOMNIA, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_PURPLE,
@@ -746,7 +746,7 @@ Again, we need to register the learnset in `gSpeciesInfo`:
  {
      ...
      [SPECIES_MEWTHREE] =
-     { 
+     {
         ...
         PALETTES(Mewthree),
         ICON(Mewthree, 2),
@@ -847,7 +847,7 @@ Once more, we need to register the learnset in `gSpeciesInfo`:
  {
      ...
      [SPECIES_MEWTHREE] =
-     { 
+     {
         ...
         FOOTPRINT(Mewthree)
         .levelUpLearnset = sMewthreeLevelUpLearnset,
@@ -870,7 +870,7 @@ Edit `gSpeciesInfo`:
  {
      ...
      [SPECIES_MEWTWO] =
-     { 
+     {
         ...
         FOOTPRINT(Mewtwo)
         .isLegendary = TRUE,

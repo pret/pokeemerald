@@ -406,7 +406,7 @@ static void SetPlayerAndOpponentParties(void)
     u8 monLevel;
     u16 monId;
     u8 ivs;
-    
+
     if (gSaveBlock2Ptr->frontier.lvlMode == FRONTIER_LVL_TENT)
     {
         gFacilityTrainerMons = gSlateportBattleTentMons;
@@ -428,7 +428,7 @@ static void SetPlayerAndOpponentParties(void)
         {
             monId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
             ivs = gSaveBlock2Ptr->frontier.rentalMons[i].ivs;
-            
+
             CreateFacilityMon(&gFacilityTrainerMons[monId], monLevel, ivs, OT_ID_PLAYER_ID, FLAG_FRONTIER_MON_FACTORY, &gPlayerParty[i]);
             SetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY,
                     &gSaveBlock2Ptr->frontier.rentalMons[i].personality);

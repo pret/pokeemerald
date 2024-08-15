@@ -59,6 +59,6 @@ def rellocate_follower_graphics():
         #os.popen('cp followers/' + name + '.png followers/' + name + '/follower.png')
         #os.remove('followers/' + name + '.png')
         #print(pth)
-        #subprocess.run(["tools/gbagfx/gbagfx " + name +".png " + name + "_normal.pal'" + str(count) + "'"]) 
+        #subprocess.run(["tools/gbagfx/gbagfx " + name +".png " + name + "_normal.pal'" + str(count) + "'"])
 
 rellocate_follower_graphics()

@@ -6578,11 +6578,11 @@ void PrepareDoubleTeamAnim(u32 taskId, u32 animBattler, bool32 forAllySwitch)
             gSprites[spriteId].sBattlerFlank = (animBattler != ANIM_ATTACKER);
         else
             gSprites[spriteId].sBattlerFlank = (animBattler == ANIM_ATTACKER);
-        
+
         // correct direction on opponent side
         if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
             gSprites[spriteId].sBattlerFlank ^= 1;
-        
+
         gSprites[spriteId].callback = AnimDoubleTeam;
         task->tBlendSpritesCount++;
     }
@@ -6614,7 +6614,7 @@ static void ReloadBattlerSprites(u32 battler, struct Pokemon *party)
     UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], mon, HEALTHBOX_ALL);
     // If battler has an indicator for a gimmick, hide the sprite until the move animation finishes.
     UpdateIndicatorVisibilityAndType(gHealthboxSpriteIds[battler], TRUE);
-    
+
     // Try to recreate shadow sprite
     if (gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteId < MAX_SPRITES)
     {

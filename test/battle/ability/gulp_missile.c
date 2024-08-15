@@ -116,7 +116,7 @@ SINGLE_BATTLE_TEST("(Gulp Missile) Cramorant in Gorging paralyzes the target if 
 }
 
 SINGLE_BATTLE_TEST("(Gulp Missile) triggers even if the user is fainted by opposing mon")
-{  
+{
     GIVEN {
         PLAYER(SPECIES_CRAMORANT) { HP(1); MaxHP(250); Ability(ABILITY_GULP_MISSILE); }
         PLAYER(SPECIES_WOBBUFFET);

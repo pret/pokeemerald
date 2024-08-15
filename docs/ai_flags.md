@@ -21,14 +21,14 @@ AI: Check Bad Move / Try to Faint / Check Viability. The name of each flag is ju
 * Sequence Switching
 
 ## `COMPETITIVE_PARTY_SYNTAX != TRUE` / Not Found
-If you are not using competitive syntax parties, instead access the trainer data directly in [`src/data/trainers.h`](https://github.com/rh-hideout/pokeemerald-expansion/blob/master/src/data/trainers.h), and add flags like so, typed exactly the same as the flag names themselves: 
+If you are not using competitive syntax parties, instead access the trainer data directly in [`src/data/trainers.h`](https://github.com/rh-hideout/pokeemerald-expansion/blob/master/src/data/trainers.h), and add flags like so, typed exactly the same as the flag names themselves:
 `.aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY`
 
 # What AI Flags does pokeemerald-expansion have?
 This section lists all of expansion’s AI Flags and briefly describes the effect they have on the AI’s behaviour. In all cases, please check the corresponding function or surrounding code around their implementation for more details. Some of these functions are vanilla, some share a name with vanilla but have been modified to varying degrees, and some are completely new.
 
 ## `AI_FLAG_CHECK_BAD_MOVE`
-The AI will avoid using moves that are likely to fail in the current situation. This flag helps prevent the AI from making ineffective choices, such as using moves into immunities, into invulnerable states, or when the moves are otherwise hindered by abilities, terrain, or status conditions. 
+The AI will avoid using moves that are likely to fail in the current situation. This flag helps prevent the AI from making ineffective choices, such as using moves into immunities, into invulnerable states, or when the moves are otherwise hindered by abilities, terrain, or status conditions.
 
 ## `AI_FLAG_TRY_TO_FAINT`
 AI will prioritize KOing the player if able rather than using status moves. Will prioritize using a move that can OHKO the player. If the player can KO the AI’s mon and the AI’s mon is slower, prioritize priority moves (this does not prevent the AI from switching out instead).
@@ -58,12 +58,12 @@ AI will generally behave more recklessly. This AI enables the following behaviou
 * Prioritize Explosion moves
 
 ## `AI_FLAG_PREFER_STRONGEST_MOVE`
-Adds score bonus to any move the AI has that either OHKOs or 2HKOs the player. 
+Adds score bonus to any move the AI has that either OHKOs or 2HKOs the player.
 
 Keep in mind that this is a weaker form of `AI_FLAG_TRY_TO_FAINT` at scoring OHKOs as it does not take into account who is attacking first, it does however handle 2HKOs.
 
 ## `AI_FLAG_PREFER_BATON_PASS`
-AI prefers raising its own stats if it has >= 60% HP, as well as Ingrain, Aqua Ring, and Protect. Prioritizes Baton Bass if the mon is rooted (Ingrain) or has the Aqua Ring effect, and doesn’t if it has been Leech Seeded. 
+AI prefers raising its own stats if it has >= 60% HP, as well as Ingrain, Aqua Ring, and Protect. Prioritizes Baton Bass if the mon is rooted (Ingrain) or has the Aqua Ring effect, and doesn’t if it has been Leech Seeded.
 
 ## `AI_FLAG_DOUBLE_BATTLE`
 This flag is automatically set in double battles, and controls much of the doubles-specific scoring. I’ll summarize some of its scoring as follows:
@@ -83,7 +83,7 @@ With respect to the AI’s mons, in doubles:
 In both singles and doubles:
 * Prioritizes not using moves that require the user fainting (Destiny Bond, Explosion etc.) and healing moves while on >= 70% HP.
 * Prioritize not using moves that require the user fainting or losing significant HP (Belly Drum etc) while between 30% and 70% HP
-* Prioritize not using setup moves (Light Screen etc.) and Bide while on <= 30% HP 
+* Prioritize not using setup moves (Light Screen etc.) and Bide while on <= 30% HP
 
 With respect to the player’s mons:
 * Prioritize not using many status moves (stat buffs, Poison, Pain Split) if the player has between 30% and 70% HP
@@ -96,7 +96,7 @@ AI prioritizes setting up field effects (Trick Room, Rain Dance, etc.) and side 
 AI does not understand ability suppression (Mold Breaker etc., weather suppression (Air Lock etc.), redirection abilities (Lightningrod etc.) being temporarily removed due to move effects (Sky Drop etc.), or item suppression (Magic Room etc.) and will ignore them. This is a handicap flag.
 
 ## `AI_FLAG_WILL_SUICIDE`
-AI prioritizes self destruction moves (Explosion, Memento). 
+AI prioritizes self destruction moves (Explosion, Memento).
 
 ## `AI_FLAG_PREFER_STATUS_MOVES`
 AI gets a score bonus for status moves. This should be combined with `AI_FLAG_CHECK_BAD_MOVE` to prevent using only status moves.
@@ -127,7 +127,7 @@ Affects when the AI chooses to switch. AI will make smarter decisions about when
 Marks the last Pokemon in the party as the Ace Pokemon. It will not be used unless it is the last one remaining, or is forced to be switched in (Roar, U-Turn with 1 mon remaining, etc.)
 
 ## `AI_FLAG_OMNISCIENT`
-AI has full knowledge of player moves, abilities, and hold items, and can use this knowledge when making decisions. 
+AI has full knowledge of player moves, abilities, and hold items, and can use this knowledge when making decisions.
 
 ## `AI_FLAG_SMART_MON_CHOICES`
 Affects what the AI chooses to send out after a switch. AI will make smarter decisions when choosing which mon to send out mid-battle and after a KO, which are handled separately. Automatically included when `AI_FLAG_SMART_SWITCHING` is enabled.
@@ -148,7 +148,7 @@ And will choose mons after a mid-battle switch prioritizing the following criter
 * Has Baton Pass
 
 ## `AI_FLAG_CONSERVATIVE`
-AI always assumes it will roll the lowest possible result when comparing damage in scoring. 
+AI always assumes it will roll the lowest possible result when comparing damage in scoring.
 
 ## `AI_FLAG_SEQUENCE_SWITCHING`
 AI will always switch out after a KO in exactly party order as defined in the trainer data (ie. slot 1, then 2, then 3, etc.). The AI will never switch out mid-battle unless forced to (Roar etc.). If the AI uses a move that requires a switch where it makes a decision about what to send in (U-Turn etc.), it will always switch out into the lowest available party index.

@@ -37,7 +37,7 @@ SINGLE_BATTLE_TEST("Revelation Dance changes its type depending on the user's 1s
                 ANIMATION(ANIM_TYPE_MOVE, MOVE_REVELATION_DANCE, player);
                 HP_BAR(opponent);
                 MESSAGE("It's not very effective…");
-            } 
+            }
         }
     }
 }
@@ -142,7 +142,7 @@ SINGLE_BATTLE_TEST("Revelation Dance becomes Normal type if used by a Typeless P
             NONE_OF {
                 ANIMATION(ANIM_TYPE_MOVE, MOVE_REVELATION_DANCE, player);
                 HP_BAR(opponent);
-                MESSAGE("It's not very effective…"); 
+                MESSAGE("It's not very effective…");
             }
         }
     }

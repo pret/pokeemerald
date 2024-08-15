@@ -466,7 +466,7 @@ u32 ScriptGiveMon(u16 species, u8 level, u16 item)
 
 #define PARSE_FLAG(n, default_) (flags & (1 << (n))) ? VarGet(ScriptReadHalfword(ctx)) : (default_)
 
-/* Give or create a mon to either player or opponent 
+/* Give or create a mon to either player or opponent
  */
 void ScrCmd_createmon(struct ScriptContext *ctx)
 {

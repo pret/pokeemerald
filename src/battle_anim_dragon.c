@@ -42,35 +42,35 @@ const struct SpriteTemplate gOutrageFlameSpriteTemplate =
     .callback = AnimOutrageFlame,
 };
 
-static const union AnimCmd sAnim_DreepyMissileOpponent_0[] = 
+static const union AnimCmd sAnim_DreepyMissileOpponent_0[] =
 {
     ANIMCMD_FRAME(0, 0, .hFlip = TRUE),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gAnims_DreepyMissileOpponent[] = 
+const union AnimCmd *const gAnims_DreepyMissileOpponent[] =
 {
     sAnim_DreepyMissileOpponent_0,
 };
 
-static const union AnimCmd sAnim_DreepyMissilePlayer_0[] = 
+static const union AnimCmd sAnim_DreepyMissilePlayer_0[] =
 {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gAnims_DreepyMissilePlayer[] = 
+const union AnimCmd *const gAnims_DreepyMissilePlayer[] =
 {
     sAnim_DreepyMissilePlayer_0,
 };
 
-static const union AnimCmd sAnim_DreepyMissileNotDrag_0[] = 
+static const union AnimCmd sAnim_DreepyMissileNotDrag_0[] =
 {
     ANIMCMD_FRAME(0, 0, .hFlip = TRUE, .vFlip = TRUE),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gAnims_DreepyMissileOpponentNotDrag[] = 
+const union AnimCmd *const gAnims_DreepyMissileOpponentNotDrag[] =
 {
     sAnim_DreepyMissileNotDrag_0,
 };
