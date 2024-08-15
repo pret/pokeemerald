@@ -859,7 +859,7 @@ static u8 GetTrainerBattleTransition(void)
         return sBattleTransitionTable_Trainer[transitionType][1];
 }
 
-#define RANDOM_TRANSITION(table)(table[Random() % ARRAY_COUNT(table)])
+#define RANDOM_TRANSITION(table) (table[Random() % ARRAY_COUNT(table)])
 u8 GetSpecialBattleTransition(s32 id)
 {
     u16 var;
