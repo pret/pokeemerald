@@ -1670,7 +1670,6 @@ enum
     ENDTURN_PSYCHIC_TERRAIN,
     ENDTURN_ION_DELUGE,
     ENDTURN_FAIRY_LOCK,
-    ENDTURN_RETALIATE,
     ENDTURN_STATUS_HEAL,
     ENDTURN_RAINBOW,
     ENDTURN_SEA_OF_FIRE,
@@ -2161,13 +2160,6 @@ u8 DoFieldEndTurnEffects(void)
             {
                 gFieldStatuses &= ~STATUS_FIELD_FAIRY_LOCK;
             }
-            gBattleStruct->turnCountersTracker++;
-            break;
-        case ENDTURN_RETALIATE:
-            if (gSideTimers[B_SIDE_PLAYER].retaliateTimer > 0)
-                gSideTimers[B_SIDE_PLAYER].retaliateTimer--;
-            if (gSideTimers[B_SIDE_OPPONENT].retaliateTimer > 0)
-                gSideTimers[B_SIDE_OPPONENT].retaliateTimer--;
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_STATUS_HEAL:
