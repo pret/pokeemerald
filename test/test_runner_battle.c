@@ -410,7 +410,7 @@ u32 RandomUniformExcept(enum RandomTag tag, u32 lo, u32 hi, bool32 (*reject)(u32
         if (STATE->trials == 1)
         {
             u32 n = 0, i;
-            for (i = lo; i < hi; i++)
+            for (i = lo; i <= hi; i++)
                 if (!reject(i))
                     n++;
             STATE->trials = n;
