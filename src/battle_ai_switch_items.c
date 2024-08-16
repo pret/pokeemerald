@@ -1564,9 +1564,9 @@ static u32 GetSwitchinStatusDamage(u32 battler)
             if ((status & STATUS1_TOXIC_COUNTER) != STATUS1_TOXIC_TURN(15)) // not 16 turns
                 AI_DATA->switchinCandidate.battleMon.status1 += STATUS1_TOXIC_TURN(1);
             statusDamage = maxHP / 16;
-            statusDamage *= AI_DATA->switchinCandidate.battleMon.status1 & STATUS1_TOXIC_COUNTER >> 8;
             if (statusDamage == 0)
                 statusDamage = 1;
+            statusDamage *= AI_DATA->switchinCandidate.battleMon.status1 & STATUS1_TOXIC_COUNTER >> 8;
         }
     }
 

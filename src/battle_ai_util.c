@@ -2514,7 +2514,7 @@ u32 GetBattlerSecondaryDamage(u32 battlerId)
 bool32 BattlerWillFaintFromWeather(u32 battler, u32 ability)
 {
     if ((BattlerAffectedBySandstorm(battler, ability) || BattlerAffectedByHail(battler, ability))
-      && gBattleMons[battler].hp <= gBattleMons[battler].maxHP / 16)
+      && gBattleMons[battler].hp <= max(1, gBattleMons[battler].maxHP / 16))
         return TRUE;
 
     return FALSE;
@@ -2523,7 +2523,7 @@ bool32 BattlerWillFaintFromWeather(u32 battler, u32 ability)
 bool32 BattlerWillFaintFromSecondaryDamage(u32 battler, u32 ability)
 {
     if (GetBattlerSecondaryDamage(battler) != 0
-      && gBattleMons[battler].hp <= gBattleMons[battler].maxHP / 16)
+      && gBattleMons[battler].hp <= max(1, gBattleMons[battler].maxHP / 16))
         return TRUE;
     return FALSE;
 }

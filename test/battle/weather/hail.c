@@ -70,3 +70,15 @@ DOUBLE_BATTLE_TEST("Hail deals damage based on turn order")
         HP_BAR(playerRight);
    }
 }
+
+SINGLE_BATTLE_TEST("Hail damage rounds properly when maxHP < 16")
+{
+    GIVEN {
+        PLAYER(SPECIES_MAGIKARP) { Level(1); MaxHP(11); HP(11); }
+        OPPONENT(SPECIES_GLALIE);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_HAIL); }
+    } SCENE {
+        HP_BAR(player, damage: 1);
+    }
+}
