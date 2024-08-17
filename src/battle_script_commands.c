@@ -15669,17 +15669,26 @@ static void Cmd_swapstatstages(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
+static u16 *GetBattlerStat(struct BattlePokemon *battler, u32 stat)
+{
+    switch (stat)
+    {
+    case STAT_ATK:   return &battler->attack;
+    case STAT_DEF:   return &battler->defense;
+    case STAT_SPATK: return &battler->spAttack;
+    case STAT_SPDEF: return &battler->spDefense;
+    default:         return NULL;
+    }
+}
+
 static void Cmd_averagestats(void)
 {
     CMD_ARGS(u8 stat);
 
-    u8 stat = cmd->stat;
-    u16 atkStat = *(u16 *)((&gBattleMons[gBattlerAttacker].attack) + (stat - 1));
-    u16 defStat = *(u16 *)((&gBattleMons[gBattlerTarget].attack) + (stat - 1));
-    u16 average = (atkStat + defStat) / 2;
-
-    *(u16 *)((&gBattleMons[gBattlerAttacker].attack) + (stat - 1)) = average;
-    *(u16 *)((&gBattleMons[gBattlerTarget].attack) + (stat - 1)) = average;
+    u16 *stat1 = GetBattlerStat(&gBattleMons[gBattlerAttacker], cmd->stat);
+    u16 *stat2 = GetBattlerStat(&gBattleMons[gBattlerTarget], cmd->stat);
+    u16 avg = (*stat1 + *stat2) / 2;
+    *stat1 = *stat2 = avg;
 
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
