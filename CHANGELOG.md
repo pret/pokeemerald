@@ -1,6 +1,7 @@
 # Pokeemerald-Expansion Changelogs
 
 ## 1.9.x
+- **[Version 1.9.1](docs/changelogs/1.9.x/1.9.1.md) - 🧹 Bugfix Release**
 - **[Version 1.9.0](docs/changelogs/1.9.x/1.9.0.md) - ✨ Feature Release**
 
 ## 1.8.x

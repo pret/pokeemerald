@@ -122,7 +122,10 @@
 ### Fixed
 * N/A
 
-## 📦 Pret merges 📦
+## 📦 Branch Synchronisation 📦
+### pret's base pokeemerald
+* N/A
+### merrp/aarant's followers
 * N/A
 
 
