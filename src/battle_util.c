@@ -4767,7 +4767,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             }
             break;
         case ABILITY_WIND_RIDER:
-            if (!gSpecialStatuses[battler].switchInAbilityDone 
+            if (!gSpecialStatuses[battler].switchInAbilityDone
              && CompareStat(battler, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN)
              && gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_TAILWIND)
             {
@@ -6269,17 +6269,17 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
         }
         break;
     case ABILITYEFFECT_ON_WEATHER: // For ability effects that activate when the battle weather changes.
-        battler = gBattlerAbility = gBattleScripting.battler;
         gLastUsedAbility = GetBattlerAbility(battler);
         switch (gLastUsedAbility)
         {
         case ABILITY_FORECAST:
         case ABILITY_FLOWER_GIFT:
             if ((IsBattlerWeatherAffected(battler, gBattleWeather)
-                 || gBattleWeather == B_WEATHER_NONE
-                 || !WEATHER_HAS_EFFECT) // Air Lock active
-                 && TryBattleFormChange(battler, FORM_CHANGE_BATTLE_WEATHER))
+             || gBattleWeather == B_WEATHER_NONE
+             || !WEATHER_HAS_EFFECT) // Air Lock active
+             && TryBattleFormChange(battler, FORM_CHANGE_BATTLE_WEATHER))
             {
+                gBattleScripting.battler = battler;
                 BattleScriptPushCursorAndCallback(BattleScript_BattlerFormChangeWithStringEnd3);
                 effect++;
             }
@@ -6290,6 +6290,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && !(gBattleMons[battler].status2 & STATUS2_TRANSFORMED))
             {
                 // TODO: Convert this to a proper FORM_CHANGE type.
+                gBattleScripting.battler = battler;
                 gBattleMons[battler].species = SPECIES_EISCUE_ICE_FACE;
                 BattleScriptPushCursorAndCallback(BattleScript_BattlerFormChangeWithStringEnd3);
                 effect++;
@@ -6300,7 +6301,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             {
                 gDisableStructs[battler].weatherAbilityDone = TRUE;
                 PREPARE_STAT_BUFFER(gBattleTextBuff1, GetHighestStatId(battler));
-                gBattlerAbility = gBattleScripting.battler = battler;
+                gBattleScripting.battler = battler;
                 BattleScriptPushCursorAndCallback(BattleScript_ProtosynthesisActivates);
                 effect++;
             }

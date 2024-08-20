@@ -397,3 +397,25 @@ SINGLE_BATTLE_TEST("Forecast transforms Castform back when it uses a move that f
         EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPECIES), SPECIES_CASTFORM);
     }
 }
+
+SINGLE_BATTLE_TEST("Forecast transforms Castform when Cloud Nine ability user leaves the field")
+{
+    u32 species = 0, ability = 0;
+    PARAMETRIZE { species = SPECIES_PSYDUCK;  ability = ABILITY_CLOUD_NINE; }
+    PARAMETRIZE { species = SPECIES_RAYQUAZA; ability = ABILITY_AIR_LOCK; }
+
+    GIVEN {
+        PLAYER(SPECIES_CASTFORM) { Ability(ABILITY_FORECAST); }
+        OPPONENT(species) { Ability(ability); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SUNNY_DAY); MOVE(opponent, MOVE_CELEBRATE); }
+        TURN { SWITCH(opponent, 1); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SUNNY_DAY, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
+        MESSAGE("2 sent out Wobbuffet!");
+        ABILITY_POPUP(player, ABILITY_FORECAST);
+        MESSAGE("Castform transformed!");
+    }
+}
