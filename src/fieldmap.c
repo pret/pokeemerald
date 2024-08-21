@@ -48,7 +48,7 @@ static const struct MapConnection *GetIncomingConnection(u8 direction, int x, in
 static bool8 IsPosInIncomingConnectingMap(u8 direction, int x, int y, const struct MapConnection *connection);
 static bool8 IsCoordInIncomingConnectingMap(int coord, int srcMax, int destMax, int offset);
 
-#define GetBorderBlockAt(x, y)({                                                                   \
+#define GetBorderBlockAt(x, y) ({                                                                  \
     u16 block;                                                                                     \
     int i;                                                                                         \
     const u16 *border = gMapHeader.mapLayout->border; /* Unused, they read it again below */       \
