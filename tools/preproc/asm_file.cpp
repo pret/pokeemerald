@@ -520,6 +520,7 @@ bool AsmFile::ParseEnum()
     long currentHeaderLine = SkipWhitespaceAndEol();
     std::string enumName = ReadIdentifier();
     currentHeaderLine += SkipWhitespaceAndEol();
+    std::string enumBase = "0";
     long enumCounter = 0;
     long symbolCount = 0;
 
@@ -542,11 +543,28 @@ bool AsmFile::ParseEnum()
             if (m_buffer[m_pos] == '=')
             {
                 m_pos++;
-                currentHeaderLine += SkipWhitespaceAndEol();
-                enumCounter = ReadInteger(headerFilename, currentHeaderLine);
-                currentHeaderLine += SkipWhitespaceAndEol();
+                SkipWhitespace();
+                enumBase.clear();
+                for (;;)
+                {
+                    if (m_pos == m_size)
+                        RaiseError("unexpected EOF");
+                    if (m_buffer[m_pos] == ',')
+                        break;
+                    if (m_buffer[m_pos] == '\n')
+                    {
+                        currentHeaderLine++;
+                        enumBase.push_back(' ');
+                    }
+                    else
+                    {
+                        enumBase.push_back(m_buffer[m_pos]);
+                    }
+                    m_pos++;
+                }
+                enumCounter = 0;
             }
-            std::printf(".equiv %s, %ld\n", currentIdentName.c_str(), enumCounter);
+            std::printf(".equiv %s, (%s) + %ld\n", currentIdentName.c_str(), enumBase.c_str(), enumCounter);
             enumCounter++;
             symbolCount++;
         }
