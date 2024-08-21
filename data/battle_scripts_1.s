@@ -928,18 +928,9 @@ BattleScript_BothCanNoLongerEscape::
 	return
 
 BattleScript_EffectHyperspaceFury::
-	jumpifspecies BS_ATTACKER, SPECIES_HOOPA_UNBOUND, BattleScript_EffectHyperspaceFuryUnbound
+	jumpifspecies BS_ATTACKER, SPECIES_HOOPA_UNBOUND, BattleScript_EffectHit
 	jumpifspecies BS_ATTACKER, SPECIES_HOOPA_CONFINED, BattleScript_ButHoopaCantUseIt
 	goto BattleScript_PokemonCantUseTheMove
-
-BattleScript_EffectHyperspaceFuryUnbound::
-	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	attackstring
-	pause B_WAIT_TIME_LONG
-	ppreduce
-	seteffectprimary MOVE_EFFECT_FEINT
-	goto BattleScript_HitFromCritCalc
 
 BattleScript_ButHoopaCantUseIt:
 	printstring STRINGID_BUTHOOPACANTUSEIT
