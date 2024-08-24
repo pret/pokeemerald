@@ -134,3 +134,42 @@ SINGLE_BATTLE_TEST("Disguised Mimikyu is ignored by Mold Breaker")
         NOT ABILITY_POPUP(player, ABILITY_DISGUISE);
     }
 }
+
+SINGLE_BATTLE_TEST("Disguised Mimikyu's types revert back to Ghost/Fairy when Disguise is broken")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_SHADOW_CLAW].type == TYPE_GHOST);
+        PLAYER(SPECIES_MIMIKYU_DISGUISED) { Ability(ABILITY_DISGUISE); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SOAK); }
+        TURN { MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(opponent, MOVE_SHADOW_CLAW); }
+    } SCENE {
+        MESSAGE("Foe Wobbuffet used Soak!");
+        MESSAGE("Mimikyu transformed into the Water type!");
+        MESSAGE("Foe Wobbuffet used Tackle!");
+        ABILITY_POPUP(player, ABILITY_DISGUISE);
+        MESSAGE("Foe Wobbuffet used Shadow Claw!");
+        MESSAGE("It's super effective!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Disguised Mimikyu blocks a move after getting Gastro Acid Batton Passed")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_BATON_PASS].effect == EFFECT_BATON_PASS);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_MIMIKYU_DISGUISED) { Ability(ABILITY_DISGUISE); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_GASTRO_ACID); MOVE(player, MOVE_BATON_PASS); SEND_OUT(player, 1); }
+        TURN { MOVE(opponent, MOVE_SHADOW_CLAW); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_GASTRO_ACID, opponent);
+        MESSAGE("Wobbuffet's ability was suppressed!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_BATON_PASS, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SHADOW_CLAW, opponent);
+        ABILITY_POPUP(player, ABILITY_DISGUISE);
+    }
+}
