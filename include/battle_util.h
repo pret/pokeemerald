@@ -106,6 +106,15 @@ enum
     CANCELLER_END2,
 };
 
+enum {
+    OBEYS,
+    DISOBEYS_LOAFS,
+    DISOBEYS_HITS_SELF,
+    DISOBEYS_FALL_ASLEEP,
+    DISOBEYS_WHILE_ASLEEP,
+    DISOBEYS_RANDOM_MOVE,
+};
+
 extern const struct TypePower gNaturalGiftTable[];
 
 void HandleAction_ThrowBall(void);
@@ -171,7 +180,7 @@ void ClearVariousBattlerFlags(u32 battler);
 void HandleAction_RunBattleScript(void);
 u32 SetRandomTarget(u32 battler);
 u32 GetMoveTarget(u16 move, u8 setTarget);
-u8 IsMonDisobedient(void);
+u8 GetAttackerObedienceForAction();
 u32 GetBattlerHoldEffect(u32 battler, bool32 checkNegating);
 u32 GetBattlerHoldEffectIgnoreAbility(u32 battler, bool32 checkNegating);
 u32 GetBattlerHoldEffectInternal(u32 battler, bool32 checkNegating, bool32 checkAbility);

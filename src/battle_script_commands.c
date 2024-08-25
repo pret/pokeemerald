@@ -1284,15 +1284,39 @@ static void Cmd_attackcanceler(void)
 
     if (!(gHitMarker & HITMARKER_OBEYS) && !(gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS))
     {
-        switch (IsMonDisobedient())
+        switch (gBattleStruct->obedienceResult)
         {
-        case 0:
+        case OBEYS:
             break;
-        case 2:
+        case DISOBEYS_LOAFS:
+            // Randomly select, then print a disobedient string
+            // B_MSG_LOAFING, B_MSG_WONT_OBEY, B_MSG_TURNED_AWAY, or B_MSG_PRETEND_NOT_NOTICE
+            gBattleCommunication[MULTISTRING_CHOOSER] = MOD(Random(), NUM_LOAF_STRINGS);
+            gBattlescriptCurrInstr = BattleScript_MoveUsedLoafingAround;
+            gMoveResultFlags |= MOVE_RESULT_MISSED;
+            return;
+        case DISOBEYS_HITS_SELF:
+            gBattlerTarget = gBattlerAttacker;
+            gBattleMoveDamage = CalculateMoveDamage(MOVE_NONE, gBattlerAttacker, gBattlerAttacker, TYPE_MYSTERY, 40, FALSE, FALSE, TRUE);
+            gBattlescriptCurrInstr = BattleScript_IgnoresAndHitsItself;
+            gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
             gHitMarker |= HITMARKER_OBEYS;
             return;
-        default:
+        case DISOBEYS_FALL_ASLEEP:
+            gBattlescriptCurrInstr = BattleScript_IgnoresAndFallsAsleep;
             gMoveResultFlags |= MOVE_RESULT_MISSED;
+            return;
+        case DISOBEYS_WHILE_ASLEEP:
+            gBattlescriptCurrInstr = BattleScript_IgnoresWhileAsleep;
+            gMoveResultFlags |= MOVE_RESULT_MISSED;
+            return;
+        case DISOBEYS_RANDOM_MOVE:
+            gCalledMove = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
+            SetAtkCancellerForCalledMove();
+            gBattlescriptCurrInstr = BattleScript_IgnoresAndUsesRandomMove;
+            gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
+            gHitMarker |= HITMARKER_DISOBEDIENT_MOVE;
+            gHitMarker |= HITMARKER_OBEYS;
             return;
         }
     }
