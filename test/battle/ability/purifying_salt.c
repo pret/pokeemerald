@@ -84,3 +84,19 @@ SINGLE_BATTLE_TEST("Purifying Salt grants immunity to status effects")
         }
     }
 }
+
+SINGLE_BATTLE_TEST("Purifying Salt user can't be poisoned by Toxic Spikes")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_GARGANACL) { Ability(ABILITY_PURIFYING_SALT); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_TOXIC_SPIKES); }
+        TURN { SWITCH(player, 1); }
+    } SCENE {
+        SEND_IN_MESSAGE("Garganacl");
+    } THEN {
+        EXPECT_EQ(player->status1, STATUS1_NONE);
+    }
+}
