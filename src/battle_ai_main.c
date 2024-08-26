@@ -1739,14 +1739,6 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             break;
         case EFFECT_HIT_ESCAPE:
             break;
-        case EFFECT_CHILLY_RECEPTION:
-            if (CountUsablePartyMons(battlerAtk) == 0)
-                ADJUST_SCORE(-10);
-            else if (weather & (B_WEATHER_SNOW | B_WEATHER_PRIMAL_ANY) || IsMoveEffectWeather(aiData->partnerMove))
-                ADJUST_SCORE(-8);
-            else if (weather & B_WEATHER_HAIL)
-                ADJUST_SCORE(-2); // mainly to prevent looping between hail and snow
-            break;
         case EFFECT_BELLY_DRUM:
         case EFFECT_FILLET_AWAY:
             if (aiData->abilities[battlerAtk] == ABILITY_CONTRARY)
@@ -2781,7 +2773,6 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         case EFFECT_SNOWSCAPE:
         case EFFECT_RAIN_DANCE:
         case EFFECT_SANDSTORM:
-        case EFFECT_CHILLY_RECEPTION:
             if (IsMoveEffectWeather(move))
                 ADJUST_SCORE(-10);
             break;
@@ -2861,7 +2852,6 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         }
         break;
     case EFFECT_SNOWSCAPE:
-    case EFFECT_CHILLY_RECEPTION:
         if (IsBattlerAlive(battlerAtkPartner)
          && ShouldSetSnow(battlerAtkPartner, atkPartnerAbility, atkPartnerHoldEffect))
         {
@@ -2879,7 +2869,7 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             switch (atkPartnerAbility)
             {
             case ABILITY_ANGER_POINT:
-                if (gMovesInfo[move].alwaysCriticalHit == TRUE
+                if (gMovesInfo[move].alwaysCriticalHit == TRUE 
                     && BattlerStatCanRise(battlerAtkPartner, atkPartnerAbility, STAT_ATK)
                     && AI_IsFaster(battlerAtk, battlerAtkPartner, move)
                     && !CanIndexMoveFaintTarget(battlerAtk, battlerAtkPartner, AI_THINKING_STRUCT->movesetIndex, 1))
@@ -3640,7 +3630,6 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
         //fallthrough
     case EFFECT_HIT_ESCAPE:
     case EFFECT_PARTING_SHOT:
-    case EFFECT_CHILLY_RECEPTION:
         if (!IsDoubleBattle())
         {
             switch (ShouldPivot(battlerAtk, battlerDef, aiData->abilities[battlerDef], move, movesetIndex))
@@ -4899,7 +4888,6 @@ static s32 AI_SetupFirstTurn(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     case EFFECT_SANDSTORM:
     case EFFECT_HAIL:
     case EFFECT_SNOWSCAPE:
-    case EFFECT_CHILLY_RECEPTION:
     case EFFECT_GEOMANCY:
     case EFFECT_VICTORY_DANCE:
         ADJUST_SCORE(DECENT_EFFECT);
