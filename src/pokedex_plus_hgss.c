@@ -3511,14 +3511,14 @@ static void SpriteCB_DexListStartMenuCursor(struct Sprite *sprite)
 //************************************
 
 //Stat bars on main screen, code by DizzyEgg, idea by Jaizu
-#define PIXEL_COORDS_TO_OFFSET(x, y)(			\
-/*Add tiles by X*/								\
-((y / 8) * 32 * 8)								\
-/*Add tiles by X*/								\
-+ ((x / 8) * 32)								\
-/*Add pixels by Y*/								\
-+ ((((y) - ((y / 8) * 8))) * 4)				    \
-/*Add pixels by X*/								\
+#define PIXEL_COORDS_TO_OFFSET(x, y)(           \
+/*Add tiles by X*/                              \
+((y / 8) * 32 * 8)                              \
+/*Add tiles by X*/                              \
++ ((x / 8) * 32)                                \
+/*Add pixels by Y*/                             \
++ ((((y) - ((y / 8) * 8))) * 4)                 \
+/*Add pixels by X*/                             \
 + ((((x) - ((x / 8) * 8)) / 2)))
 
 static inline void WritePixel(u8 *dst, u32 x, u32 y, u32 value)

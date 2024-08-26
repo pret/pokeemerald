@@ -525,17 +525,17 @@ const struct SpriteTemplate gFlashCannonGrayChargeTemplate =
 
 static const union AffineAnimCmd sSpriteAffineAnim_JudgmentBall[] =
 {
-	AFFINEANIMCMD_FRAME(16, 16, 0, 0),
-	AFFINEANIMCMD_FRAME(8, 8, 0, 15), //Half size
-	AFFINEANIMCMD_FRAME(0, 0, 0, 120), //Delay
-	AFFINEANIMCMD_FRAME(24, 24, 0, 5), //Normal size
-	AFFINEANIMCMD_FRAME(0, 0, 0, 10), //Delay
-	AFFINEANIMCMD_FRAME(-16, -16, 0, 15), //Revert to 1 px
-	AFFINEANIMCMD_END,
+    AFFINEANIMCMD_FRAME(16, 16, 0, 0),
+    AFFINEANIMCMD_FRAME(8, 8, 0, 15), //Half size
+    AFFINEANIMCMD_FRAME(0, 0, 0, 120), //Delay
+    AFFINEANIMCMD_FRAME(24, 24, 0, 5), //Normal size
+    AFFINEANIMCMD_FRAME(0, 0, 0, 10), //Delay
+    AFFINEANIMCMD_FRAME(-16, -16, 0, 15), //Revert to 1 px
+    AFFINEANIMCMD_END,
 };
 static const union AffineAnimCmd* const sSpriteAffineAnimTable_JudgmentBall[] =
 {
-	sSpriteAffineAnim_JudgmentBall,
+    sSpriteAffineAnim_JudgmentBall,
 };
 const struct SpriteTemplate gJudgmentBlackChargeTemplate =
 {

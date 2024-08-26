@@ -527,7 +527,7 @@ void AnimFlyBallAttack(struct Sprite *sprite)
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
     sprite->data[3] = sprite->y;
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
-	sprite->data[5] = gBattleAnimArgs[1]; // if sprite is to remain invisible
+    sprite->data[5] = gBattleAnimArgs[1]; // if sprite is to remain invisible
 
     InitAnimLinearTranslation(sprite);
     sprite->callback = AnimFlyBallAttack_Step;

@@ -182,24 +182,24 @@ const struct SpriteTemplate gWaterBubbleSpriteTemplate =
 
 const struct SpriteTemplate gGreenPoisonDrip =
 {
-	.tileTag = ANIM_TAG_GREEN_POISON_BUBBLE,
-	.paletteTag = ANIM_TAG_GREEN_POISON_BUBBLE,
-	.oam = &gOamData_AffineDouble_ObjNormal_16x16,
+    .tileTag = ANIM_TAG_GREEN_POISON_BUBBLE,
+    .paletteTag = ANIM_TAG_GREEN_POISON_BUBBLE,
+    .oam = &gOamData_AffineDouble_ObjNormal_16x16,
     .anims = &gAnims_PoisonProjectile[1],
-	.images = NULL,
-	.affineAnims = gAffineAnims_Droplet,
-	.callback = AnimAcidPoisonDroplet,
+    .images = NULL,
+    .affineAnims = gAffineAnims_Droplet,
+    .callback = AnimAcidPoisonDroplet,
 };
 
 const struct SpriteTemplate gGreenPoisonBubble =
 {
-	.tileTag = ANIM_TAG_GREEN_POISON_BUBBLE,
-	.paletteTag = ANIM_TAG_GREEN_POISON_BUBBLE,
-	.oam = &gOamData_AffineDouble_ObjNormal_16x16,
-	.anims = gAnims_PoisonProjectile,
-	.images = NULL,
-	.affineAnims = gAffineAnims_PoisonProjectile,
-	.callback = AnimAcidPoisonBubble,
+    .tileTag = ANIM_TAG_GREEN_POISON_BUBBLE,
+    .paletteTag = ANIM_TAG_GREEN_POISON_BUBBLE,
+    .oam = &gOamData_AffineDouble_ObjNormal_16x16,
+    .anims = gAnims_PoisonProjectile,
+    .images = NULL,
+    .affineAnims = gAffineAnims_PoisonProjectile,
+    .callback = AnimAcidPoisonBubble,
 };
 
 const union AnimCmd gSuckerPunchAnimCmd[] =

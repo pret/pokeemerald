@@ -9496,30 +9496,30 @@ static void DoTracksGroundEffect_BikeTireTracks(struct ObjectEvent *objEvent, st
 
 static void DoTracksGroundEffect_SlitherTracks(struct ObjectEvent *objEvent, struct Sprite *sprite, u8 a)
 {
-	//  Specifies which bike track shape to show next.
-	//  For example, when the bike turns from up to right, it will show
-	//  a track that curves to the right.
-	//  Each 4-byte row corresponds to the initial direction of the bike, and
-	//  each byte in that row is for the next direction of the bike in the order
-	//  of down, up, left, right.
-	static const u8 slitherTracks_Transitions[4][4] = {
-		{1, 2, 7, 8},
-		{1, 2, 6, 5},
-		{5, 8, 3, 4},
-		{6, 7, 3, 4},
-	};
+    //  Specifies which bike track shape to show next.
+    //  For example, when the bike turns from up to right, it will show
+    //  a track that curves to the right.
+    //  Each 4-byte row corresponds to the initial direction of the bike, and
+    //  each byte in that row is for the next direction of the bike in the order
+    //  of down, up, left, right.
+    static const u8 slitherTracks_Transitions[4][4] = {
+        {1, 2, 7, 8},
+        {1, 2, 6, 5},
+        {5, 8, 3, 4},
+        {6, 7, 3, 4},
+    };
 
-	if (objEvent->currentCoords.x != objEvent->previousCoords.x || objEvent->currentCoords.y != objEvent->previousCoords.y)
-	{
-		gFieldEffectArguments[0] = objEvent->previousCoords.x;
-		gFieldEffectArguments[1] = objEvent->previousCoords.y;
-		gFieldEffectArguments[2] = 149;
-		gFieldEffectArguments[3] = 2;
-		gFieldEffectArguments[4] =
-			slitherTracks_Transitions[objEvent->previousMovementDirection][objEvent->facingDirection - 5];
+    if (objEvent->currentCoords.x != objEvent->previousCoords.x || objEvent->currentCoords.y != objEvent->previousCoords.y)
+    {
+        gFieldEffectArguments[0] = objEvent->previousCoords.x;
+        gFieldEffectArguments[1] = objEvent->previousCoords.y;
+        gFieldEffectArguments[2] = 149;
+        gFieldEffectArguments[3] = 2;
+        gFieldEffectArguments[4] =
+        slitherTracks_Transitions[objEvent->previousMovementDirection][objEvent->facingDirection - 5];
         gFieldEffectArguments[5] = objEvent->previousMetatileBehavior;
-		FieldEffectStart(FLDEFF_TRACKS_SLITHER);
-	}
+        FieldEffectStart(FLDEFF_TRACKS_SLITHER);
+    }
 }
 
 void GroundEffect_Ripple(struct ObjectEvent *objEvent, struct Sprite *sprite)

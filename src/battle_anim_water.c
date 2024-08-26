@@ -585,14 +585,14 @@ const struct SpriteTemplate gAquaTailHitSpriteTemplate =
 };
 
 static const union AnimCmd sAnimCmdAnimatedSpark2[] = {
-	ANIMCMD_FRAME((8 * 8) / (16 * 16) * 0, 8),
-	ANIMCMD_FRAME((8 * 8) / (16 * 16) * 1, 8),
-	ANIMCMD_FRAME((8 * 8) / (16 * 16) * 2, 8),
-	ANIMCMD_JUMP(0)
+    ANIMCMD_FRAME((8 * 8) / (16 * 16) * 0, 8),
+    ANIMCMD_FRAME((8 * 8) / (16 * 16) * 1, 8),
+    ANIMCMD_FRAME((8 * 8) / (16 * 16) * 2, 8),
+    ANIMCMD_JUMP(0)
 };
 
 static const union AnimCmd *const sAnimCmdTable_AnimatedSpark2[] = {
-	sAnimCmdAnimatedSpark2,
+    sAnimCmdAnimatedSpark2,
 };
 
 const struct SpriteTemplate gSparkBeamSpriteTemplate =

@@ -2954,7 +2954,7 @@ u8 DoBattlerEndTurnEffects(void)
                 && --gBattleStruct->dynamax.dynamaxTurns[battler] == 0)
             {
                 gBattleScripting.battler = battler;
-	            UndoDynamax(battler);
+                UndoDynamax(battler);
                 BattleScriptExecute(BattleScript_DynamaxEnds);
                 effect++;
             }

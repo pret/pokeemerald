@@ -2535,13 +2535,13 @@ const struct SpriteTemplate gTauntFingerSpriteTemplate =
 
 const struct SpriteTemplate gPowerOrbs_Float =
 {
-	.tileTag = ANIM_TAG_RED_ORB,
-	.paletteTag = ANIM_TAG_RED_ORB,
-	.oam = &gOamData_AffineOff_ObjNormal_16x16,
-	.anims = gSporeParticleAnimTable,
-	.images = NULL,
-	.affineAnims = gDummySpriteAffineAnimTable,
-	.callback = AnimSporeParticle,
+    .tileTag = ANIM_TAG_RED_ORB,
+    .paletteTag = ANIM_TAG_RED_ORB,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = gSporeParticleAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimSporeParticle,
 };
 
 const union AnimCmd gRockPolishStreak_AnimCmd[] =
@@ -7234,42 +7234,42 @@ static void AnimNightSlash(struct Sprite *sprite)
 
 static const union AffineAnimCmd sCompressTargetHorizontallyAffineAnimCmds[] =
 {
-	AFFINEANIMCMD_FRAME(64, 0, 0, 16), //Compress
-	AFFINEANIMCMD_FRAME(0, 0, 0, 64),
-	AFFINEANIMCMD_FRAME(-64, 0, 0, 16),
-	AFFINEANIMCMD_END,
+    AFFINEANIMCMD_FRAME(64, 0, 0, 16), //Compress
+    AFFINEANIMCMD_FRAME(0, 0, 0, 64),
+    AFFINEANIMCMD_FRAME(-64, 0, 0, 16),
+    AFFINEANIMCMD_END,
 };
 
 static const union AffineAnimCmd sCompressTargetHorizontallyAffineAnimCmdsFast[] =
 {
-	AFFINEANIMCMD_FRAME(32, 0, 0, 16), //Compress
-	AFFINEANIMCMD_FRAME(0, 0, 0, 32),
-	AFFINEANIMCMD_FRAME(-32, 0, 0, 16),
-	AFFINEANIMCMD_END,
+    AFFINEANIMCMD_FRAME(32, 0, 0, 16), //Compress
+    AFFINEANIMCMD_FRAME(0, 0, 0, 32),
+    AFFINEANIMCMD_FRAME(-32, 0, 0, 16),
+    AFFINEANIMCMD_END,
 };
 
 static void AnimTask_CompressTargetStep(u8 taskId)
 {
-	struct Task* task = &gTasks[taskId];
+    struct Task* task = &gTasks[taskId];
 
-	if (!RunAffineAnimFromTaskData(task))
-		DestroyAnimVisualTask(taskId);
+    if (!RunAffineAnimFromTaskData(task))
+        DestroyAnimVisualTask(taskId);
 }
 
 void AnimTask_CompressTargetHorizontally(u8 taskId)
 {
-	struct Task* task = &gTasks[taskId];
-	u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
-	PrepareAffineAnimInTaskData(task, spriteId, sCompressTargetHorizontallyAffineAnimCmds);
-	task->func = AnimTask_CompressTargetStep;
+    struct Task* task = &gTasks[taskId];
+    u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
+    PrepareAffineAnimInTaskData(task, spriteId, sCompressTargetHorizontallyAffineAnimCmds);
+    task->func = AnimTask_CompressTargetStep;
 }
 
 void AnimTask_CompressTargetHorizontallyFast(u8 taskId)
 {
-	struct Task* task = &gTasks[taskId];
-	u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
-	PrepareAffineAnimInTaskData(task, spriteId, sCompressTargetHorizontallyAffineAnimCmdsFast);
-	task->func = AnimTask_CompressTargetStep;
+    struct Task* task = &gTasks[taskId];
+    u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
+    PrepareAffineAnimInTaskData(task, spriteId, sCompressTargetHorizontallyAffineAnimCmdsFast);
+    task->func = AnimTask_CompressTargetStep;
 }
 
 void AnimTask_CreateSmallSteelBeamOrbs(u8 taskId)
