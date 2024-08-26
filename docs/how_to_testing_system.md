@@ -4,9 +4,9 @@
 To run all the tests use:
 `make check -j`
 To run specific tests, e.g. Spikes ones, use:
-`make check TESTS='Spikes'`
+`make check TESTS="Spikes"`
 To build a ROM (pokemerald-test.elf) that can be opened in mgba to view specific tests, e.g. Spikes ones, use:
-`make pokeemerald-test.elf TESTS='Spikes'`
+`make pokeemerald-test.elf TESTS="Spikes"`
 
 ## How to Write Tests
 Manually testing a battle mechanic often follows this pattern:
@@ -54,7 +54,7 @@ The `ASSUMPTIONS` block documents that Stun Spore has `EFFECT_PARALYZE`.
 If Stun Spore did not have that effect it would cause the tests in the file to be skipped. We write our tests like this so that hackers can change the effects of moves without causing tests to fail.
 
 `SINGLE_BATTLE_TEST` defines the name of the test. Related tests should start with the same prefix, e.g. Stun Spore tests should start with "Stun Spore", this allows just the Stun Spore-related tests to be run with:
-`make check TESTS='Stun Spore'`
+`make check TESTS="Stun Spore"`
 
 `GIVEN` initializes the parties, `PLAYER` and `OPPONENT` add a Pokémon to their respective parties. They can both accept a block which further customizes the Pokémon's stats, moves, item, ability, etc.
 
