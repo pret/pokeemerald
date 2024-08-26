@@ -263,6 +263,29 @@ SINGLE_BATTLE_TEST("Parental Bond Smack Down effect triggers after 2nd hit")
     }
 }
 
+SINGLE_BATTLE_TEST("Parental Bond Snore strikes twice while asleep")
+{
+    s16 damage[2];
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_SNORE].effect == EFFECT_SNORE);
+        PLAYER(SPECIES_KANGASKHAN_MEGA) { Status1(STATUS1_SLEEP); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SNORE); }
+    } SCENE {
+        MESSAGE("Kangaskhan is fast asleep.");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SNORE, player);
+        HP_BAR(opponent, captureDamage: &damage[0]);
+        HP_BAR(opponent, captureDamage: &damage[1]);
+        MESSAGE("Hit 2 time(s)!");
+    } THEN {
+        if (B_PARENTAL_BOND_DMG == GEN_6)
+            EXPECT_MUL_EQ(damage[0], Q_4_12(0.5), damage[1]);
+        else
+            EXPECT_MUL_EQ(damage[0], Q_4_12(0.25), damage[1]);
+    }
+}
+
 TO_DO_BATTLE_TEST("Parental Bond tests");
 
 // Temporary TODO: Convert Bulbapedia description into tests.
