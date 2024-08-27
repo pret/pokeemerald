@@ -10596,9 +10596,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "May cause flinching or\n"
         #if B_USE_FROSTBITE == TRUE
-            "leave the foe frozen."),
-        #else
             "leave the foe with frostbite."),
+        #else
+            "leave the foe frozen."),
         #endif
         .effect = EFFECT_HIT,
         .power = 65,
