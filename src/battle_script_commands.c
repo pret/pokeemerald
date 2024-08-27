@@ -6427,9 +6427,11 @@ static void Cmd_moveend(void)
             gBattleStruct->additionalEffectsCounter = 0;
             gBattleStruct->poisonPuppeteerConfusion = FALSE;
             gBattleStruct->fickleBeamBoosted = FALSE;
+            gBattleStruct->distortedTypeMatchups = 0;
             if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_Z_MOVE)
                 SetActiveGimmick(gBattlerAttacker, GIMMICK_NONE);
-            gBattleStruct->distortedTypeMatchups = 0;
+            if (B_CHARGE <= GEN_8 || moveType == TYPE_ELECTRIC)
+                gStatuses3[gBattlerAttacker] &= ~(STATUS3_CHARGED_UP);
             memset(gQueuedStatBoosts, 0, sizeof(gQueuedStatBoosts));
             gBattleScripting.moveendState++;
             break;
@@ -14012,7 +14014,10 @@ static void Cmd_setcharge(void)
 
     u8 battler = GetBattlerForBattleScript(cmd->battler);
     gStatuses3[battler] |= STATUS3_CHARGED_UP;
-    gDisableStructs[battler].chargeTimer = 2;
+    if (B_CHARGE < GEN_9)
+        gDisableStructs[battler].chargeTimer = 2;
+    else
+        gDisableStructs[battler].chargeTimer = 0;
     gBattlescriptCurrInstr++;
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
