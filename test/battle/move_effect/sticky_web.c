@@ -238,3 +238,36 @@ DOUBLE_BATTLE_TEST("Sticky Web has correct interactions with Mirror Armor - no o
         EXPECT_EQ(opponentRight->statStages[STAT_SPEED], DEFAULT_STAT_STAGE);
     }
 }
+SINGLE_BATTLE_TEST("Sticky Web is placed on the correct side after Explosion")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_EXPLOSION); MOVE(opponent, MOVE_STICKY_WEB); SEND_OUT(player, 1);}
+    } SCENE {
+        HP_BAR(player, hp: 0);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, player);
+        MESSAGE("Wobbuffet fainted!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STICKY_WEB, opponent);
+        MESSAGE("A sticky web spreads out on the ground around your team!");
+   }
+}
+
+SINGLE_BATTLE_TEST("Sticky Web is placed on the correct side after Memento")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_MEMENTO); MOVE(opponent, MOVE_STICKY_WEB); SEND_OUT(player, 1); }
+    } SCENE {
+        HP_BAR(player, hp: 0);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_MEMENTO, player);
+        MESSAGE("Wobbuffet fainted!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STICKY_WEB, opponent);
+        MESSAGE("A sticky web spreads out on the ground around your team!");
+    }
+}

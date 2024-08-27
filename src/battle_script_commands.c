@@ -9957,23 +9957,23 @@ static void Cmd_various(void)
         else
         {
             gSpecialStatuses[gBattlerTarget].instructedChosenTarget = *(gBattleStruct->moveTarget + gBattlerTarget) | 0x4;
-            gBattlerAttacker = gBattlerTarget;
             gCalledMove = move;
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
-                if (gBattleMons[gBattlerAttacker].moves[i] == gCalledMove)
+                if (gBattleMons[gBattlerTarget].moves[i] == gCalledMove)
                 {
                     gCurrMovePos = i;
                     i = 4;
                     break;
                 }
             }
-            if (i != 4 || gBattleMons[gBattlerAttacker].pp[gCurrMovePos] == 0)
+            if (i != 4 || gBattleMons[gBattlerTarget].pp[gCurrMovePos] == 0)
                 gBattlescriptCurrInstr = cmd->failInstr;
             else
             {
-                gBattlerTarget = gBattleStruct->lastMoveTarget[gBattlerAttacker];
+                gEffectBattler = gBattleStruct->lastMoveTarget[gBattlerTarget];
                 gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
+                gBattleStruct->atkCancellerTracker = 0;
                 PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, battler, gBattlerPartyIndexes[battler]);
                 gBattlescriptCurrInstr = cmd->nextInstr;
             }
@@ -11408,7 +11408,7 @@ static void Cmd_jumpifnotfirstturn(void)
 
     const u8 *jumpInstr = cmd->jumpInstr;
 
-    if (gDisableStructs[gBattlerAttacker].isFirstTurn)
+    if (gDisableStructs[gBattlerAttacker].isFirstTurn && !(gSpecialStatuses[gBattlerAttacker].instructedChosenTarget))
         gBattlescriptCurrInstr = cmd->nextInstr;
     else
         gBattlescriptCurrInstr = jumpInstr;

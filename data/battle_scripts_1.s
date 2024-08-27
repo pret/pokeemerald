@@ -1757,6 +1757,8 @@ BattleScript_EffectInstruct::
 	tryinstruct BattleScript_ButItFailed
 	attackanimation
 	waitanimation
+	copybyte gBattlerAttacker, gBattlerTarget
+	copybyte gBattlerTarget, gEffectBattler
 	printstring STRINGID_USEDINSTRUCTEDMOVE
 	waitmessage B_WAIT_TIME_LONG
 	setbyte sB_ANIM_TURN, 0
