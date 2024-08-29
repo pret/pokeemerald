@@ -5280,6 +5280,14 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_IndeedeeFemale,
         .iconPalIndex = 2,
         FOOTPRINT(Indeedee)
+        OVERWORLD(
+            sPicTable_IndeedeeFemale,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            gOverworldPalette_IndeedeeFemale,
+            gShinyOverworldPalette_IndeedeeFemale
+        )
         .levelUpLearnset = sIndeedeeFemaleLevelUpLearnset,
         .teachableLearnset = sIndeedeeFemaleTeachableLearnset,
         .eggMoveLearnset = sIndeedeeFemaleEggMoveLearnset,
