@@ -74,7 +74,6 @@ DOUBLE_BATTLE_TEST("Round still preserves the turn order outside of the other Ro
 }
 DOUBLE_BATTLE_TEST("Round still preserves the turn order outside of the other Round users moving immediately with switch")
 {
-    KNOWN_FAILING; // #5148
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT);

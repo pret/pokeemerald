@@ -183,3 +183,51 @@ SINGLE_BATTLE_TEST("Endure does not prevent multiple hits and stat changes occur
         MESSAGE("Wobbuffet's Speed rose!");
     }
 }
+
+SINGLE_BATTLE_TEST("Scale Shot decreases defense and increases speed after the 4th hit of Loaded Dice")
+{
+    PASSES_RANDOMLY(50, 100, RNG_LOADED_DICE);
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_SCALE_SHOT].effect == EFFECT_MULTI_HIT);
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_LOADED_DICE); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCALE_SHOT); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
+        MESSAGE("Hit 4 time(s)!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        MESSAGE("Wobbuffet's Defense fell!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        MESSAGE("Wobbuffet's Speed rose!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Scale Shot decreases defense and increases speed after killing opposing with less then 4 hits")
+{
+    u32 item;
+    PARAMETRIZE { item = ITEM_NONE; }
+    PARAMETRIZE { item = ITEM_LOADED_DICE; }
+
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_SCALE_SHOT].effect == EFFECT_MULTI_HIT);
+        PLAYER(SPECIES_BAGON) { Item(item); }
+        OPPONENT(SPECIES_SLUGMA) { Ability(ABILITY_WEAK_ARMOR); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCALE_SHOT); SEND_OUT(opponent, 1); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
+        MESSAGE("Foe Slugma fainted!");
+        MESSAGE("Hit 3 time(s)!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        MESSAGE("Bagon's Defense fell!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        MESSAGE("Bagon's Speed rose!");
+    }
+}
