@@ -374,7 +374,7 @@ void process_map(string map_filepath, string layouts_filepath, string output_dir
 string generate_groups_text(Json groups_data) {
     ostringstream text;
 
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from /map_groups.json\n@\n\n";
+    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/map_groups.json\n@\n\n";
 
     for (auto &key : groups_data["group_order"].array_items()) {
         string group = json_to_string(key);
@@ -415,7 +415,7 @@ string generate_connections_text(Json groups_data, string include_path) {
 
     ostringstream text;
 
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from /map_groups.json\n@\n\n";
+    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/map_groups.json\n@\n\n";
 
     for (Json map_name : map_names)
         text << "\t.include \"" << include_path << "/" <<  json_to_string(map_name) << "/connections.inc\"\n";
@@ -432,7 +432,7 @@ string generate_headers_text(Json groups_data, string include_path) {
 
     ostringstream text;
 
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from /map_groups.json\n@\n\n";
+    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/map_groups.json\n@\n\n";
 
     for (string map_name : map_names)
         text << "\t.include \"" << include_path << "/" << map_name << "/header.inc\"\n";
@@ -465,7 +465,7 @@ string generate_map_constants_text(string groups_filepath, Json groups_data) {
     text << "#ifndef GUARD_CONSTANTS_MAP_GROUPS_H\n"
          << "#define GUARD_CONSTANTS_MAP_GROUPS_H\n\n";
 
-    text << "//\n// DO NOT MODIFY THIS FILE! It is auto-generated from /map_groups.json\n//\n\n";
+    text << "//\n// DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/map_groups.json\n//\n\n";
 
     int group_num = 0;
 
@@ -530,7 +530,7 @@ void process_groups(string groups_filepath, string output_asm, string output_c) 
 string generate_layout_headers_text(Json layouts_data) {
     ostringstream text;
 
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from layouts.json\n@\n\n";
+    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/layouts/layouts.json\n@\n\n";
 
     for (auto &layout : layouts_data["layouts"].array_items()) {
         if (layout == Json::object()) continue;
