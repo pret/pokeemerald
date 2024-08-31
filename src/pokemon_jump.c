@@ -108,7 +108,7 @@ enum {
 // the lower 8 bits are a timer to the next state.
 // When the timer is incremented above 255, it increments
 // the vine state and the timer is reset.
-#define VINE_STATE_TIMER(vineState)(((vineState) << 8) | 0xFF)
+#define VINE_STATE_TIMER(vineState) (((vineState) << 8) | 0xFF)
 
 enum {
     MONSTATE_NORMAL, // Pokémon is either on the ground or in the middle of a jump

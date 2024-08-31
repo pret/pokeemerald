@@ -70,13 +70,13 @@
 
 // Get the id of the col/row from the selection ID
 // e.g. GET_ROW(SQU_PURPLE_SKITTY) is ROW_PURPLE
-#define GET_COL(selectionId)((selectionId) % (NUM_BOARD_POKES + 1))
-#define GET_ROW(selectionId)((selectionId) / (NUM_BOARD_POKES + 1) * (NUM_BOARD_POKES + 1))
+#define GET_COL(selectionId) ((selectionId) % (NUM_BOARD_POKES + 1))
+#define GET_ROW(selectionId) ((selectionId) / (NUM_BOARD_POKES + 1) * (NUM_BOARD_POKES + 1))
 
 // Get the col/row index from the selection ID
 // e.g. GET_ROW_IDX(SQU_PURPLE_SKITTY) is 2 (purple being the 3rd row)
-#define GET_COL_IDX(selectionId)(selectionId - 1)
-#define GET_ROW_IDX(selectionId)(selectionId / 5 - 1)
+#define GET_COL_IDX(selectionId) (selectionId - 1)
+#define GET_ROW_IDX(selectionId) (selectionId / 5 - 1)
 
 // Flags for the above selections, used to set which spaces have been hit or bet on
 #define F_WYNAUT_COL      (1 << COL_WYNAUT)
@@ -149,7 +149,7 @@
 
 // 2 different Roulette tables with 2 different rates (normal vs service day special)
 // & 1 gets which table, >> 7 gets if ROULETTE_SPECIAL_RATE is set
-#define GET_MIN_BET_ID(var)(((var) & 1) + (((var) >> 7) * 2))
+#define GET_MIN_BET_ID(var) (((var) & 1) + (((var) >> 7) * 2))
 
 // Having Shroomish or Taillow in the party can make rolls more consistent in length
 // It also increases the likelihood that, if they appear to unstick a ball, they'll move it to a slot the player bet on
@@ -990,8 +990,8 @@ static const struct RouletteFlashSettings sFlashData_Colors[NUM_ROULETTE_SLOTS +
     },
 };
 
-// Data to flash any pokemon icon (F_FLASH_ICON) on the roulette wheel. One entry for each color row
-// Each poke icon flashes with the tint of the row color it belongs to, so the pokemon itself is irrelevant
+// Data to flash any Pokémon icon (F_FLASH_ICON) on the roulette wheel. One entry for each color row
+// Each poke icon flashes with the tint of the row color it belongs to, so the Pokémon itself is irrelevant
 static const struct RouletteFlashSettings sFlashData_PokeIcons[NUM_BOARD_COLORS] =
 {
     [GET_ROW_IDX(ROW_ORANGE)] = {
@@ -2702,7 +2702,7 @@ static const struct SpriteTemplate sSpriteTemplates_GridIcons[NUM_BOARD_POKES] =
     }
 };
 
-// Wheel icons are listed clockwise starting from 1 oclock on the roulette wheel (with pokeball upside right)
+// Wheel icons are listed clockwise starting from 1 oclock on the roulette wheel (with Poké Ball upside right)
 // They go Wynaut -> Azurill -> Skitty -> Makuhita, and Orange -> Green -> Purple
 static const struct SpriteTemplate sSpriteTemplates_WheelIcons[NUM_ROULETTE_SLOTS] =
 {
@@ -4481,7 +4481,7 @@ static void SetBallStuck(struct Sprite *sprite)
     // The below slot ids are relative to the slot the ball got stuck on
     if ((sRoulette->useTaillow + 1) & sRoulette->partySpeciesFlags)
     {
-        // If the player has the corresponding pokemon in their party (HAS_SHROOMISH or HAS_TAILLOW),
+        // If the player has the corresponding Pokémon in their party (HAS_SHROOMISH or HAS_TAILLOW),
         // there's a 75% chance that the ball will be moved to a spot they bet on
         // assuming it was one of the slots identified as a candidate
         if (betSlotId && (rand % 256) < 192)

@@ -170,7 +170,7 @@
 
 #define NUM_SECRET_BASE_FLAGS  32  // by definition, bitfield of 2 u16s
 
-// TV Show states for Pokemon Contest Live Updates
+// TV Show states for Pokémon Contest Live Updates
 #define CONTESTLIVE_STATE_INTRO                 0
 #define CONTESTLIVE_STATE_WON_BOTH_ROUNDS       1
 #define CONTESTLIVE_STATE_BETTER_ROUND2         2
