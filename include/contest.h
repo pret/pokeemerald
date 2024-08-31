@@ -209,7 +209,7 @@ struct ContestantStatus
     u8 comboAppealBonus;
     u8 repeatJam;
     u8 nextTurnOrder;  // turn position
-    u8 attentionLevel;  // How much the Pokemon "stood out"
+    u8 attentionLevel;  // How much the Pokémon "stood out"
     u8 contestantAnimTarget;
 };
 

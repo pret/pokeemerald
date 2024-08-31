@@ -102,8 +102,10 @@ static s32 _putsAscii(char *s, s32 len, void *buf)
     p0 = b->buffer;
 
     /* Copy to buffer */
-    for (i = 0; i < len; i++) {
-        if(b->pbuffer == b->buffer + b->buffer_len - 1) {
+    for (i = 0; i < len; i++)
+    {
+        if(b->pbuffer == b->buffer + b->buffer_len - 1)
+        {
             break;
         }
         *(b->pbuffer ++) = s[i];
@@ -125,8 +127,10 @@ static s32 _putsEncoded(char *s, s32 len, void *buf)
     p0 = b->buffer;
 
     /* Copy to buffer */
-    for (i = 0; i < len; i++) {
-        if(b->pbuffer == b->buffer + b->buffer_len - 1) {
+    for (i = 0; i < len; i++)
+    {
+        if(b->pbuffer == b->buffer + b->buffer_len - 1)
+        {
             break;
         }
         *(b->pbuffer ++) = mini_pchar_decode(s[i]);
@@ -191,7 +195,8 @@ static s32 mini_pad(char* ptr, s32 len, char pad_char, s32 pad_to, char *buffer)
     char * pbuffer = buffer;
     if(pad_to == 0)
         pad_to = len;
-    if (len > pad_to) {
+    if (len > pad_to)
+    {
         len = pad_to;
         overflow = TRUE;
     }
