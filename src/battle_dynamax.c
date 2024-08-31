@@ -406,7 +406,6 @@ static u8 GetMaxPowerTier(u32 move)
         case EFFECT_NATURAL_GIFT:
         case EFFECT_MIRROR_COAT:
         case EFFECT_FINAL_GAMBIT:
-        //case EFFECT_DRAGON_DARTS:
             return MAX_POWER_TIER_2;
         case EFFECT_OHKO:
         case EFFECT_RETURN:
