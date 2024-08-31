@@ -75,7 +75,7 @@ void PickLotteryCornerTicket(void)
                 }
             }
         }
-        else // pokemon are always arranged from populated spots first to unpopulated, so the moment a NONE species is found, that's the end of the list.
+        else // Pokémon are always arranged from populated spots first to unpopulated, so the moment a NONE species is found, that's the end of the list.
             break;
     }
 

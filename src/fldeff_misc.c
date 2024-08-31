@@ -308,7 +308,7 @@ static const struct SpriteTemplate sSpriteTemplate_RecordMixLights =
     .callback = SpriteCallbackDummy,
 };
 
-// For accessing pokemon storage PC or the Hall of Fame PC
+// For accessing Pokémon storage PC or the Hall of Fame PC
 void ComputerScreenOpenEffect(u16 increment, u16 unused, u8 priority)
 {
     CreateComputerScreenEffectTask(Task_ComputerScreenOpenEffect, increment, unused, priority);

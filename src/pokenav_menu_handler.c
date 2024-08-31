@@ -257,7 +257,7 @@ static u32 HandleMainMenuInput(struct Pokenav_Menu *menu)
     return POKENAV_MENU_FUNC_NONE;
 }
 
-// Force the player to select Match Call during the call Mr. Stone pokenav tutorial
+// Force the player to select Match Call during the call Mr. Stone PokéNav tutorial
 static u32 HandleMainMenuInputTutorial(struct Pokenav_Menu *menu)
 {
     if (UpdateMenuCursorPos(menu))
@@ -287,7 +287,7 @@ static u32 HandleMainMenuInputTutorial(struct Pokenav_Menu *menu)
     return POKENAV_MENU_FUNC_NONE;
 }
 
-// After calling Mr. Stone during the pokenav tutorial, force player to exit or use Match Call again
+// After calling Mr. Stone during the PokéNav tutorial, force player to exit or use Match Call again
 static u32 HandleMainMenuInputEndTutorial(struct Pokenav_Menu *menu)
 {
     if (UpdateMenuCursorPos(menu))

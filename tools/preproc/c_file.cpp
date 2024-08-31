@@ -30,56 +30,16 @@
 #include "char_util.h"
 #include "utf8.h"
 #include "string_parser.h"
+#include "io.h"
 
 CFile::CFile(const char * filenameCStr, bool isStdin)
 {
-    FILE *fp;
-
-    if (isStdin) {
-        fp = stdin;
+    if (isStdin)
         m_filename = std::string{"<stdin>/"}.append(filenameCStr);
-    } else {
-        fp = std::fopen(filenameCStr, "rb");
+    else
         m_filename = std::string(filenameCStr);
-    }
 
-    std::string& filename = m_filename;
-
-    if (fp == NULL)
-        FATAL_ERROR("Failed to open \"%s\" for reading.\n", filename.c_str());
-
-    m_size = 0;
-    m_buffer = (char *)malloc(CHUNK_SIZE + 1);
-    if (m_buffer == NULL) {
-        FATAL_ERROR("Failed to allocate memory to process file \"%s\"!", filename.c_str());
-    }
-
-    std::size_t numAllocatedBytes = CHUNK_SIZE + 1;
-    std::size_t bufferOffset = 0;
-    std::size_t count;
-
-    while ((count = std::fread(m_buffer + bufferOffset, 1, CHUNK_SIZE, fp)) != 0) {
-        if (!std::ferror(fp)) {
-            m_size += count;
-
-            if (std::feof(fp)) {
-                break;
-            }
-
-            numAllocatedBytes += CHUNK_SIZE;
-            bufferOffset += CHUNK_SIZE;
-            m_buffer = (char *)realloc(m_buffer, numAllocatedBytes);
-            if (m_buffer == NULL) {
-                FATAL_ERROR("Failed to allocate memory to process file \"%s\"!", filename.c_str());
-            }
-        } else {
-            FATAL_ERROR("Failed to read \"%s\". (error: %s)", filename.c_str(), std::strerror(errno));
-        }
-    }
-
-    m_buffer[m_size] = 0;
-
-    std::fclose(fp);
+    m_buffer = ReadFileToBuffer(filenameCStr, isStdin, &m_size);
 
     m_pos = 0;
     m_lineNum = 1;
