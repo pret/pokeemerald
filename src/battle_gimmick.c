@@ -144,7 +144,8 @@ void CreateGimmickTriggerSprite(u32 battler)
     // Exit if there shouldn't be a sprite produced.
     if (GetBattlerSide(battler) == B_SIDE_OPPONENT
      || gBattleStruct->gimmick.usableGimmick[battler] == GIMMICK_NONE
-     || gimmick->triggerSheet == NULL)
+     || gimmick->triggerSheet == NULL
+     || HasTrainerUsedGimmick(battler, gBattleStruct->gimmick.usableGimmick[battler]))
     {
         return;
     }
