@@ -293,6 +293,9 @@
 // If true, follower pokemon will bob up and down
 // during their idle & walking animations
 #define OW_MON_BOBBING  TRUE
+// If true, OW pokemon with `MOVEMENT_TYPE_WANDER*`
+// will walk-in-place in between steps
+#define OW_MON_WANDER_WALK TRUE
 
 // If true, adds a small amount of overhead
 // to OW code so that large (48x48, 64x64) OWs
