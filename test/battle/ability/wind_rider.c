@@ -107,8 +107,8 @@ SINGLE_BATTLE_TEST("Wind Rider activates when it's no longer effected by Neutral
 
 SINGLE_BATTLE_TEST("Wind Rider absorbs Wind moves and raises Attack by one stage")
 {
-    ASSUME(gMovesInfo[MOVE_GUST].windMove == TRUE);
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_GUST].windMove == TRUE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_BRAMBLIN) { Ability(ABILITY_WIND_RIDER); }
     } WHEN {

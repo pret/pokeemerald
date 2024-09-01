@@ -60,8 +60,8 @@ SINGLE_BATTLE_TEST("Harvest doesn't always restore a Berry if Cloud Nine/Air Loc
 
 SINGLE_BATTLE_TEST("Harvest restores a Berry even after being switched out and back in")
 {
-    ASSUME(gMovesInfo[MOVE_PARTING_SHOT].effect == EFFECT_PARTING_SHOT);
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_PARTING_SHOT].effect == EFFECT_PARTING_SHOT);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_EXEGGUTOR) { Ability(ABILITY_HARVEST); MaxHP(500); HP(251); Item(ITEM_SITRUS_BERRY); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -79,8 +79,8 @@ SINGLE_BATTLE_TEST("Harvest restores a Berry even after being switched out and b
 
 SINGLE_BATTLE_TEST("Harvest restores a Berry consumed by Fling")
 {
-    ASSUME(gMovesInfo[MOVE_FLING].effect == EFFECT_FLING);
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_FLING].effect == EFFECT_FLING);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_EXEGGUTOR) { Ability(ABILITY_HARVEST); Item(ITEM_SITRUS_BERRY); }
     } WHEN {
@@ -96,8 +96,8 @@ SINGLE_BATTLE_TEST("Harvest restores a Berry consumed by Fling")
 
 SINGLE_BATTLE_TEST("Harvest restores a Berry consumed by Natural Gift")
 {
-    ASSUME(gMovesInfo[MOVE_NATURAL_GIFT].effect == EFFECT_NATURAL_GIFT);
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_NATURAL_GIFT].effect == EFFECT_NATURAL_GIFT);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_EXEGGUTOR) { Ability(ABILITY_HARVEST); Item(ITEM_SITRUS_BERRY); }
     } WHEN {
@@ -116,8 +116,8 @@ TO_DO_BATTLE_TEST("Harvest only works once per turn"); // Check for berries that
 SINGLE_BATTLE_TEST("Harvest doesn't restore a Berry when destroyed by Incinerate")
 {
     PASSES_RANDOMLY(1, 1, RNG_HARVEST);
-    ASSUME(MoveHasAdditionalEffect(MOVE_INCINERATE, MOVE_EFFECT_INCINERATE));
     GIVEN {
+        ASSUME(MoveHasAdditionalEffect(MOVE_INCINERATE, MOVE_EFFECT_INCINERATE));
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_EXEGGUTOR) { Ability(ABILITY_HARVEST); Item(ITEM_SITRUS_BERRY); }
     } WHEN {
@@ -134,8 +134,8 @@ SINGLE_BATTLE_TEST("Harvest doesn't restore a Berry when destroyed by Incinerate
 SINGLE_BATTLE_TEST("Harvest doesn't restore a Berry when knocked off by Knock Off")
 {
     PASSES_RANDOMLY(1, 1, RNG_HARVEST);
-    ASSUME(MoveHasAdditionalEffect(MOVE_KNOCK_OFF, MOVE_EFFECT_KNOCK_OFF));
     GIVEN {
+        ASSUME(MoveHasAdditionalEffect(MOVE_KNOCK_OFF, MOVE_EFFECT_KNOCK_OFF));
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_EXEGGUTOR) { Ability(ABILITY_HARVEST); Item(ITEM_SITRUS_BERRY); }
     } WHEN {
@@ -152,8 +152,8 @@ SINGLE_BATTLE_TEST("Harvest doesn't restore a Berry when knocked off by Knock Of
 SINGLE_BATTLE_TEST("Harvest doesn't restore a Berry when eaten by Bug Bite/Pluck")
 {
     PASSES_RANDOMLY(1, 1, RNG_HARVEST);
-    ASSUME(MoveHasAdditionalEffect(MOVE_BUG_BITE, MOVE_EFFECT_BUG_BITE));
     GIVEN {
+        ASSUME(MoveHasAdditionalEffect(MOVE_BUG_BITE, MOVE_EFFECT_BUG_BITE));
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_EXEGGUTOR) { Ability(ABILITY_HARVEST); Item(ITEM_SITRUS_BERRY); }
     } WHEN {
@@ -208,8 +208,8 @@ DOUBLE_BATTLE_TEST("Harvest order is affected by speed")
 
 SINGLE_BATTLE_TEST("Harvest doesn't restore a Berry when transfered to another Pokémon")
 {
-    ASSUME(gMovesInfo[MOVE_TRICK].effect == EFFECT_TRICK);
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_TRICK].effect == EFFECT_TRICK);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_EXEGGUTOR) { Ability(ABILITY_HARVEST); Item(ITEM_SITRUS_BERRY); }
     } WHEN {
@@ -225,8 +225,8 @@ SINGLE_BATTLE_TEST("Harvest doesn't restore a Berry when transfered to another P
 
 SINGLE_BATTLE_TEST("Harvest can restore a Berry that was transferred from another Pokémon")
 {
-    ASSUME(gMovesInfo[MOVE_TRICK].effect == EFFECT_TRICK);
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_TRICK].effect == EFFECT_TRICK);
         PLAYER(SPECIES_TORKOAL) { Ability(ABILITY_DROUGHT); Item(ITEM_SITRUS_BERRY); }
         OPPONENT(SPECIES_EXEGGUTOR) { Ability(ABILITY_HARVEST); HP(100); MaxHP(500); }
     } WHEN {
@@ -244,9 +244,9 @@ SINGLE_BATTLE_TEST("Harvest can restore a Berry that was transferred from anothe
 
 SINGLE_BATTLE_TEST("Harvest can only restore the newest berry consumed that was transferred from another Pokémon instead of its original Berry")
 {
-    ASSUME(gMovesInfo[MOVE_TRICK].effect == EFFECT_TRICK);
-    ASSUME(gItemsInfo[ITEM_APICOT_BERRY].holdEffect == HOLD_EFFECT_SP_DEFENSE_UP);
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_TRICK].effect == EFFECT_TRICK);
+        ASSUME(gItemsInfo[ITEM_APICOT_BERRY].holdEffect == HOLD_EFFECT_SP_DEFENSE_UP);
         PLAYER(SPECIES_TORKOAL) { Ability(ABILITY_DROUGHT); Item(ITEM_SITRUS_BERRY); }
         OPPONENT(SPECIES_EXEGGUTOR) { Ability(ABILITY_HARVEST); HP(100); MaxHP(500); Item(ITEM_APICOT_BERRY); }
     } WHEN {

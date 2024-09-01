@@ -3,9 +3,8 @@
 
 SINGLE_BATTLE_TEST("Anger Point raises Attack stage to maximum after receiving a critical hit")
 {
-    ASSUME(gMovesInfo[MOVE_FROST_BREATH].alwaysCriticalHit);
-
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_FROST_BREATH].alwaysCriticalHit);
         PLAYER(SPECIES_PRIMEAPE) { Ability(ABILITY_ANGER_POINT); }
         OPPONENT(SPECIES_SNORUNT);
     } WHEN {
@@ -23,10 +22,9 @@ SINGLE_BATTLE_TEST("Anger Point raises Attack stage to maximum after receiving a
 
 SINGLE_BATTLE_TEST("Anger Point does not trigger when already at maximum Attack stage")
 {
-    ASSUME(gMovesInfo[MOVE_FROST_BREATH].alwaysCriticalHit);
-    ASSUME(gMovesInfo[MOVE_BELLY_DRUM].effect == EFFECT_BELLY_DRUM);
-
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_FROST_BREATH].alwaysCriticalHit);
+        ASSUME(gMovesInfo[MOVE_BELLY_DRUM].effect == EFFECT_BELLY_DRUM);
         PLAYER(SPECIES_PRIMEAPE) { Ability(ABILITY_ANGER_POINT); Speed(2); }
         OPPONENT(SPECIES_SNORUNT) { Speed(1); }
     } WHEN {
@@ -51,10 +49,9 @@ TO_DO_BATTLE_TEST("Anger Point triggers when a substitute takes the hit (Gen4)")
 
 SINGLE_BATTLE_TEST("Anger Point does not trigger when a substitute takes the hit (Gen5+)")
 {
-    ASSUME(gMovesInfo[MOVE_FROST_BREATH].alwaysCriticalHit);
-    ASSUME(gMovesInfo[MOVE_SUBSTITUTE].effect == EFFECT_SUBSTITUTE);
-
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_FROST_BREATH].alwaysCriticalHit);
+        ASSUME(gMovesInfo[MOVE_SUBSTITUTE].effect == EFFECT_SUBSTITUTE);
         PLAYER(SPECIES_PRIMEAPE) { Ability(ABILITY_ANGER_POINT); Speed(2); }
         OPPONENT(SPECIES_SNORUNT) { Speed(1); }
     } WHEN {

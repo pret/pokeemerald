@@ -23,8 +23,8 @@ DOUBLE_BATTLE_TEST("Instruct fails if target hasn't made a move")
 
 DOUBLE_BATTLE_TEST("Instruct fails if move is banned by Instruct")
 {
-    ASSUME(gMovesInfo[MOVE_BIDE].instructBanned == TRUE);
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_BIDE].instructBanned == TRUE);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_TACKLE, MOVE_POUND, MOVE_SCRATCH, MOVE_BIDE); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -59,8 +59,8 @@ DOUBLE_BATTLE_TEST("Instruct-called move targets the target of the move picked o
 
 DOUBLE_BATTLE_TEST("Instruct doesn't bypass sleep")
 {
-    ASSUME(gMovesInfo[MOVE_SPORE].effect == EFFECT_SLEEP);
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_SPORE].effect == EFFECT_SLEEP);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_TACKLE, MOVE_POUND, MOVE_SCRATCH, MOVE_GROWL); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -78,8 +78,8 @@ DOUBLE_BATTLE_TEST("Instruct doesn't bypass sleep")
 
 DOUBLE_BATTLE_TEST("Instruct fails if target doesn't know the last move it used")
 {
-    ASSUME(gMovesInfo[MOVE_DRAGON_DANCE].danceMove == TRUE);
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_DRAGON_DANCE].danceMove == TRUE);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_ORICORIO) { Moves(MOVE_TACKLE, MOVE_POUND, MOVE_SCRATCH, MOVE_CELEBRATE); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -99,8 +99,8 @@ DOUBLE_BATTLE_TEST("Instruct fails if target doesn't know the last move it used"
 
 DOUBLE_BATTLE_TEST("Instruct-called move fails if it can only be used on the first turn but consumes PP")
 {
-    ASSUME(gMovesInfo[MOVE_FAKE_OUT].effect == EFFECT_FIRST_TURN_ONLY);
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_FAKE_OUT].effect == EFFECT_FIRST_TURN_ONLY);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_TACKLE, MOVE_POUND, MOVE_SCRATCH, MOVE_FAKE_OUT); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -118,8 +118,8 @@ DOUBLE_BATTLE_TEST("Instruct-called move fails if it can only be used on the fir
 
 DOUBLE_BATTLE_TEST("Instruct-called move doesn't fail if tormented")
 {
-    ASSUME(gMovesInfo[MOVE_TORMENT].effect == EFFECT_TORMENT);
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_TORMENT].effect == EFFECT_TORMENT);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_TACKLE, MOVE_POUND, MOVE_SCRATCH, MOVE_FAKE_OUT); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -136,9 +136,9 @@ DOUBLE_BATTLE_TEST("Instruct-called move doesn't fail if tormented")
 
 DOUBLE_BATTLE_TEST("Instruct-called status moves don't fail if holding Assault Vest")
 {
-    ASSUME(gItemsInfo[ITEM_ASSAULT_VEST].holdEffect == HOLD_EFFECT_ASSAULT_VEST);
-    ASSUME(gMovesInfo[MOVE_TRICK].effect == EFFECT_TRICK);
     GIVEN {
+        ASSUME(gItemsInfo[ITEM_ASSAULT_VEST].holdEffect == HOLD_EFFECT_ASSAULT_VEST);
+        ASSUME(gMovesInfo[MOVE_TRICK].effect == EFFECT_TRICK);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_TACKLE, MOVE_POUND, MOVE_SCRATCH, MOVE_TRICK); }
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_ASSAULT_VEST); }
@@ -154,8 +154,8 @@ DOUBLE_BATTLE_TEST("Instruct-called status moves don't fail if holding Assault V
 
 DOUBLE_BATTLE_TEST("Instruct-called status move fails if taunted")
 {
-    ASSUME(gMovesInfo[MOVE_TAUNT].effect == EFFECT_TAUNT);
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_TAUNT].effect == EFFECT_TAUNT);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_TACKLE, MOVE_POUND, MOVE_SCRATCH, MOVE_GROWL); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -180,8 +180,8 @@ DOUBLE_BATTLE_TEST("Instruct-called status move fails if taunted")
 
 DOUBLE_BATTLE_TEST("Instruct-called moves fail if disabled")
 {
-    ASSUME(gMovesInfo[MOVE_DISABLE].effect == EFFECT_DISABLE);
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_DISABLE].effect == EFFECT_DISABLE);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_TACKLE, MOVE_POUND, MOVE_SCRATCH, MOVE_GROWL); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -200,9 +200,9 @@ DOUBLE_BATTLE_TEST("Instruct-called moves fail if disabled")
 
 DOUBLE_BATTLE_TEST("Instruct-called moves keep their priority")
 {
-    ASSUME(gMovesInfo[MOVE_QUICK_ATTACK].priority == 1);
-    ASSUME(gMovesInfo[MOVE_PSYCHIC_TERRAIN].effect == EFFECT_PSYCHIC_TERRAIN);
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_QUICK_ATTACK].priority == 1);
+        ASSUME(gMovesInfo[MOVE_PSYCHIC_TERRAIN].effect == EFFECT_PSYCHIC_TERRAIN);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_TACKLE, MOVE_POUND, MOVE_SCRATCH, MOVE_QUICK_ATTACK); }
         OPPONENT(SPECIES_WOBBUFFET);

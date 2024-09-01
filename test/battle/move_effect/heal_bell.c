@@ -88,9 +88,8 @@ SINGLE_BATTLE_TEST("Heal Bell cures inactive soundproof Pokemon")
 
 SINGLE_BATTLE_TEST("Heal Bell cures a soundproof user")
 {
-    ASSUME(B_HEAL_BELL_SOUNDPROOF == GEN_5 || B_HEAL_BELL_SOUNDPROOF >= GEN_8);
-
     GIVEN {
+        ASSUME(B_HEAL_BELL_SOUNDPROOF == GEN_5 || B_HEAL_BELL_SOUNDPROOF >= GEN_8);
         PLAYER(SPECIES_EXPLOUD) { Ability(ABILITY_SOUNDPROOF); Status1(STATUS1_POISON); }
         OPPONENT(SPECIES_WYNAUT);
     } WHEN {

@@ -1463,8 +1463,8 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Moves don't execute effects on fainted battler
 
 SINGLE_BATTLE_TEST("(DYNAMAX) Moxie clones can be triggered by Max Moves fainting opponents")
 {
-    ASSUME(gMovesInfo[MOVE_WATERFALL].power > 0);
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_WATERFALL].power > 0);
         PLAYER(SPECIES_GYARADOS) { Ability(ABILITY_MOXIE); }
         OPPONENT(SPECIES_WOBBUFFET) { HP(1); }
         OPPONENT(SPECIES_WYNAUT);
