@@ -1730,7 +1730,12 @@ static void AccuracyCheck(bool32 recalcDragonDarts, const u8 *nextInstr, const u
         else if (!JumpIfMoveAffectedByProtect(gCurrentMove))
             gBattlescriptCurrInstr = nextInstr;
         if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_DYNAMAX)
-            AbilityBattleEffects(ABILITYEFFECT_ABSORBING, gBattlerTarget, 0, 0, gCurrentMove);
+        {
+            if (gProtectStructs[gBattlerTarget].maxGuarded)
+                gBattlescriptCurrInstr = nextInstr;
+            else
+                AbilityBattleEffects(ABILITYEFFECT_ABSORBING, gBattlerTarget, 0, 0, gCurrentMove);
+        }
     }
     else if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_2ND_HIT
         || (gSpecialStatuses[gBattlerAttacker].multiHitOn

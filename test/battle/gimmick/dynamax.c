@@ -400,6 +400,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Moves deal 1/4 damage through protect", s16 da
     }
 }
 
+//  This test will fail if it's the first test a thread runs
 SINGLE_BATTLE_TEST("(DYNAMAX) Max Moves don't bypass Max Guard")
 {
     GIVEN {
@@ -1474,6 +1475,20 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Moxie clones can be triggered by Max Moves faintin
         MESSAGE("Foe Wobbuffet fainted!");
         ABILITY_POPUP(player, ABILITY_MOXIE);
         MESSAGE("Gyarados's Moxie raised its Attack!");
+    }
+}
+
+//  This test will fail if it's the first test a thread runs
+SINGLE_BATTLE_TEST("(DYNAMAX) Max Attacks prints a message when hitting into Max Guard")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_GROWL, gimmick: GIMMICK_DYNAMAX); MOVE(opponent, MOVE_TACKLE, gimmick: GIMMICK_DYNAMAX); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Max Guard!");
+        MESSAGE("Foe Wobbuffet used Max Strike!");
     }
 }
 
