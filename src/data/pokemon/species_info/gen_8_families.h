@@ -2620,6 +2620,14 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_Dipplin,
         .iconPalIndex = 1,
         FOOTPRINT(Dipplin)
+        OVERWORLD(
+            sPicTable_Dipplin,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            gOverworldPalette_Dipplin,
+            gShinyOverworldPalette_Dipplin
+        )
         .levelUpLearnset = sDipplinLevelUpLearnset,
         .teachableLearnset = sDipplinTeachableLearnset,
         .evolutions = EVOLUTION({EVO_MOVE, MOVE_DRAGON_CHEER, SPECIES_HYDRAPPLE}),
@@ -2673,6 +2681,14 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_Hydrapple,
         .iconPalIndex = 5,
         FOOTPRINT(Hydrapple)
+        OVERWORLD(
+            sPicTable_Hydrapple,
+            SIZE_64x64,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            gOverworldPalette_Hydrapple,
+            gShinyOverworldPalette_Hydrapple
+        )
         .levelUpLearnset = sHydrappleLevelUpLearnset,
         .teachableLearnset = sHydrappleTeachableLearnset,
     },
@@ -6018,6 +6034,14 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_Archaludon,
         .iconPalIndex = 0,
         FOOTPRINT(Archaludon)
+        OVERWORLD(
+            sPicTable_Archaludon,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            gOverworldPalette_Archaludon,
+            gShinyOverworldPalette_Archaludon
+        )
         .levelUpLearnset = sArchaludonLevelUpLearnset,
         .teachableLearnset = sArchaludonTeachableLearnset,
     },

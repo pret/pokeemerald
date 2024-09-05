@@ -9915,6 +9915,14 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .iconSprite = gMonIcon_Kingambit,
         .iconPalIndex = 0,
         FOOTPRINT(Kingambit)
+        OVERWORLD(
+            sPicTable_Kingambit,
+            SIZE_64x64,
+            SHADOW_SIZE_L,
+            TRACKS_NONE,
+            gOverworldPalette_Kingambit,
+            gShinyOverworldPalette_Kingambit
+        )
         .levelUpLearnset = sKingambitLevelUpLearnset,
         .teachableLearnset = sKingambitTeachableLearnset,
     },
