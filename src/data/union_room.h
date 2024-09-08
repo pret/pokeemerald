@@ -633,10 +633,10 @@ static const struct WindowTemplate sWindowTemplate_BButtonCancel = {
 
 // Minimum and maximum number of players for a link group
 // A minimum of 0 means the min and max are equal
-#define LINK_GROUP_CAPACITY(min, max)(((min) << 12) | ((max) << 8))
-#define GROUP_MAX(capacity)(capacity & 0x0F)
-#define GROUP_MIN(capacity)(capacity >> 4)
-#define GROUP_MIN2(capacity)(capacity & 0xF0) // Unnecessary to have both, but needed to match
+#define LINK_GROUP_CAPACITY(min, max) (((min) << 12) | ((max) << 8))
+#define GROUP_MAX(capacity) (capacity & 0x0F)
+#define GROUP_MIN(capacity) (capacity >> 4)
+#define GROUP_MIN2(capacity) (capacity & 0xF0) // Unnecessary to have both, but needed to match
 
 static const u32 sLinkGroupToActivityAndCapacity[NUM_LINK_GROUP_TYPES] = {
     [LINK_GROUP_SINGLE_BATTLE]     = ACTIVITY_BATTLE_SINGLE     | LINK_GROUP_CAPACITY(0, 2),
