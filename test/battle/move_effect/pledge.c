@@ -769,7 +769,7 @@ DOUBLE_BATTLE_TEST("Pledge move combo fails if ally fails to act - Flinch Both R
     }
 }
 
-DOUBLE_BATTLE_TEST("Pledge move combo doesn't trigger on opponent's Pledge move")
+DOUBLE_BATTLE_TEST("Pledge move combo doesn't trigger on opponent's Pledge move - Sleep")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
@@ -780,6 +780,27 @@ DOUBLE_BATTLE_TEST("Pledge move combo doesn't trigger on opponent's Pledge move"
         TURN { MOVE(opponentLeft, MOVE_FIRE_PLEDGE, target: playerLeft);
                MOVE(opponentRight, MOVE_GRASS_PLEDGE, target: playerLeft); 
                MOVE(playerLeft, MOVE_GRASS_PLEDGE, target: opponentRight); }
+    } SCENE {
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_FIRE_PLEDGE, opponentLeft);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_FIRE_PLEDGE, opponentRight);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_GRASS_PLEDGE, opponentRight);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_FIRE_PLEDGE, playerLeft);
+        }
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_GRASS_PLEDGE, playerLeft);
+        HP_BAR(opponentRight);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Pledge move combo doesn't trigger on opponent's Pledge move - Freeze")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
+        PLAYER(SPECIES_WYNAUT) { Speed(3); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(8); }
+        OPPONENT(SPECIES_WYNAUT) { Speed(5); Status1(STATUS1_FREEZE); }
+    } WHEN {
+        TURN { MOVE(opponentLeft, MOVE_FIRE_PLEDGE, target: playerLeft); MOVE(opponentRight, MOVE_GRASS_PLEDGE, target: playerLeft, WITH_RNG(RNG_FROZEN, 0)); MOVE(playerLeft, MOVE_GRASS_PLEDGE, target: opponentRight); }
     } SCENE {
         NONE_OF {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_FIRE_PLEDGE, opponentLeft);
