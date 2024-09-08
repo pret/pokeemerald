@@ -812,3 +812,27 @@ DOUBLE_BATTLE_TEST("Pledge move combo doesn't trigger on opponent's Pledge move 
         HP_BAR(opponentRight);
     }
 }
+
+DOUBLE_BATTLE_TEST("Pledge move combo doesn't trigger on opponent's Pledge move - Powder")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_POWDER, target: opponentRight);
+               MOVE(opponentLeft, MOVE_GRASS_PLEDGE, target: playerLeft);
+               MOVE(opponentRight, MOVE_FIRE_PLEDGE, target: playerLeft);
+               MOVE(playerRight, MOVE_FIRE_PLEDGE, target: opponentLeft); }
+    } SCENE {
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_FIRE_PLEDGE, opponentLeft);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_FIRE_PLEDGE, opponentRight);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_GRASS_PLEDGE, opponentRight);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_FIRE_PLEDGE, playerLeft);
+        }
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FIRE_PLEDGE, playerRight);
+        HP_BAR(opponentLeft);
+    }
+}
