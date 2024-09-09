@@ -508,7 +508,7 @@ BattleScript_EffectAttackUpUserAlly_TryAlly:
 BattleScript_EffectAttackUpUserAlly_End:
 	goto BattleScript_MoveEnd
 BattleScript_EffectAttackUpUserAlly_TryAlly_:
-	jumpifability BS_ATTACKER_PARTNER, ABILITY_SOUNDPROOF, BattleScript_EffectAttackUpUserAlly_TryAllyBlocked
+	jumpifblockedbysoundproof BS_ATTACKER_PARTNER, BattleScript_EffectAttackUpUserAlly_TryAllyBlocked
 	setstatchanger STAT_ATK, 1, FALSE
 	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_EffectAttackUpUserAlly_End
 	jumpifbyte CMP_NOT_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_EffectAttackUpUserAlly_AllyAnim
@@ -4281,7 +4281,7 @@ BattleScript_EffectPerishSong::
 	waitmessage B_WAIT_TIME_LONG
 	setbyte gBattlerTarget, 0
 BattleScript_PerishSongLoop::
-	jumpifability BS_TARGET, ABILITY_SOUNDPROOF, BattleScript_PerishSongBlocked
+	jumpifblockedbysoundproof BS_TARGET, BattleScript_PerishSongBlocked
 	jumpifpranksterblocked BS_TARGET, BattleScript_PerishSongNotAffected
 BattleScript_PerishSongLoopIncrement::
 	addbyte gBattlerTarget, 1
