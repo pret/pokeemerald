@@ -7439,9 +7439,9 @@ static void Cmd_switchineffects(void)
 
 static void Cmd_trainerslidein(void)
 {
-    CMD_ARGS(u8 battler);
+    CMD_ARGS(u8 position);
 
-    u32 battler = GetBattlerForBattleScript(cmd->battler);
+    u32 battler = GetBattlerForBattleScript(cmd->position);
     BtlController_EmitTrainerSlide(battler, BUFFER_A);
     MarkBattlerForControllerExec(battler);
 

@@ -507,9 +507,9 @@
 	.byte \battler
 	.endm
 
-	.macro trainerslidein battler:req
+	.macro trainerslidein position:req
 	.byte 0x53
-	.byte \battler
+	.byte \position
 	.endm
 
 	.macro playse song:req
