@@ -1328,7 +1328,8 @@ static u8 InitObjectEventStateFromTemplate(const struct ObjectEventTemplate *tem
     objectEvent->triggerGroundEffectsOnMove = TRUE;
     objectEvent->graphicsId = PackGraphicsId(template);
     SetObjectEventDynamicGraphicsId(objectEvent);
-    if (IS_OW_MON_OBJ(objectEvent)) {
+    if (IS_OW_MON_OBJ(objectEvent))
+    {
         if (template->script && template->script[0] == 0x7d)
             objectEvent->shiny = T1_READ_16(&template->script[2]) >> 15;
         else if (template->trainerRange_berryTreeId)
@@ -1531,11 +1532,13 @@ u16 LoadSheetGraphicsInfo(const struct ObjectEventGraphicsInfo *info, u16 uuid, 
             // Load, then free, in order to avoid displaying garbage data
             // before sprite's `sheetTileStart` is repointed
             tileStart = LoadCompressedSpriteSheetByTemplate(&template, TILE_SIZE_4BPP << sheetSpan);
-            if (oldTiles) {
+            if (oldTiles)
+            {
                 FieldEffectFreeTilesIfUnused(oldTiles);
                 // We weren't able to load the sheet;
                 // retry (after having freed), and set sprite to invisible until done
-                if (tileStart <= 0) {
+                if (tileStart <= 0)
+                {
                     if (sprite)
                         sprite->invisible = TRUE;
                     tileStart = LoadCompressedSpriteSheetByTemplate(&template, TILE_SIZE_4BPP << sheetSpan);
@@ -1648,7 +1651,8 @@ static u16 PackGraphicsId(const struct ObjectEventTemplate *template)
     u32 form = 0;
     // set form based on template's script,
     // if first command is bufferspeciesname
-    if (IS_OW_MON_OBJ(template)) {
+    if (IS_OW_MON_OBJ(template))
+    {
         if (template->script && template->script[0] == 0x7d)
         {
             form = T1_READ_16(&template->script[2]);
@@ -5353,23 +5357,31 @@ bool8 MovementType_FollowPlayer_Moving(struct ObjectEvent *objectEvent, struct S
 }
 
 // single function for updating an OW mon's walk-in-place movements
-static bool32 UpdateMonMoveInPlace(struct ObjectEvent *objectEvent, struct Sprite *sprite) {
-    if (!objectEvent->singleMovementActive) {
+static bool32 UpdateMonMoveInPlace(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    if (!objectEvent->singleMovementActive)
+    {
         // walk in place
         ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkInPlaceNormalMovementAction(objectEvent->facingDirection));
         objectEvent->singleMovementActive = TRUE;
         return TRUE;
-    } else if (ObjectEventExecSingleMovementAction(objectEvent, sprite)) {
+    }
+    else if (ObjectEventExecSingleMovementAction(objectEvent, sprite))
+    {
         // finish movement action
         objectEvent->singleMovementActive = FALSE;
-    } else if (OW_FOLLOWERS_BOBBING == TRUE && (sprite->data[3] & 7) == 2)
+    }
+    else if (OW_FOLLOWERS_BOBBING == TRUE && (sprite->data[3] & 7) == 2)
+    {
         sprite->y2 ^= -1;
+    }
     return FALSE;
 }
 
 bool8 FollowablePlayerMovement_Idle(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
-    if (UpdateMonMoveInPlace(objectEvent, sprite)) {
+    if (UpdateMonMoveInPlace(objectEvent, sprite))
+    {
         sprite->sTypeFuncId = 1;
         return TRUE;
     }
@@ -10154,11 +10166,12 @@ static void SetMovementDelay(struct Sprite *sprite, s16 timer)
 
 static bool8 WaitForMovementDelay(struct Sprite *sprite)
 {
-    if (--sprite->data[7] == 0) {
+    if (--sprite->data[7] == 0)
+    {
         sprite->data[3] = 0; // reset animation timer
         return TRUE;
-    } else
-        return FALSE;
+    }
+    return FALSE;
 }
 
 void SetAndStartSpriteAnim(struct Sprite *sprite, u8 animNum, u8 animCmdIndex)
