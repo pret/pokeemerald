@@ -2321,6 +2321,7 @@ enum
     ENDTURN_DYNAMAX,
     ENDTURN_GMAX_MOVE_RESIDUAL_DAMAGE,
     ENDTURN_SEA_OF_FIRE_DAMAGE,
+    ENDTURN_ITEMS3,
     ENDTURN_BATTLER_COUNT
 };
 
@@ -2451,6 +2452,15 @@ u8 DoBattlerEndTurnEffects(void)
         case ENDTURN_ITEMS2:  // item effects again
             if (ItemBattleEffects(ITEMEFFECT_NORMAL, battler, TRUE))
                 effect++;
+            gBattleStruct->turnEffectsTracker++;
+            break;
+        case ENDTURN_ITEMS3:  // berry effects
+            if (gItemsInfo[gBattleMons[battler].item].pocket == POCKET_BERRIES
+             || GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_RESTORE_HP)  // Edge case for Berry Juice
+            {
+                if (ItemBattleEffects(ITEMEFFECT_NORMAL, battler, FALSE))
+                    effect++;
+            }
             gBattleStruct->turnEffectsTracker++;
             break;
         case ENDTURN_ORBS:
