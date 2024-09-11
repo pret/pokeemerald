@@ -3,19 +3,20 @@ TITLE       := POKEMON EMER
 GAME_CODE   := BPEE
 MAKER_CODE  := 01
 REVISION    := 0
-MODERN      ?= 0
 
-# `File name`.gba ('_modern' will be appended to the modern builds)
+# `File name`.gba ('_agbcc' will be appended to the non-modern builds)
 FILE_NAME := pokeemerald
 BUILD_DIR := build
 
 # Builds the ROM using a modern compiler
-MODERN      ?= 0
+MODERN      ?= 1
 # Compares the ROM to a checksum of the original - only makes sense using when non-modern
 COMPARE     ?= 0
+# Executes the Test Runner System that checks that all mechanics work as expected
+TEST         ?= 0
 
-ifeq (modern,$(MAKECMDGOALS))
-  MODERN := 1
+ifeq (agbcc,$(MAKECMDGOALS))
+  MODERN := 0
 endif
 ifeq (compare,$(MAKECMDGOALS))
   COMPARE := 1
@@ -66,9 +67,9 @@ else
   CPP := $(PREFIX)cpp
 endif
 
-ROM_NAME := $(FILE_NAME).gba
+ROM_NAME := $(FILE_NAME)_agbcc.gba
 OBJ_DIR_NAME := $(BUILD_DIR)/emerald
-MODERN_ROM_NAME := $(FILE_NAME)_modern.gba
+MODERN_ROM_NAME := $(FILE_NAME).gba
 MODERN_OBJ_DIR_NAME := $(BUILD_DIR)/modern
 
 ELF_NAME := $(ROM_NAME:.gba=.elf)
@@ -116,7 +117,7 @@ INCLUDE_CPP_ARGS := $(INCLUDE_DIRS:%=-iquote %)
 INCLUDE_SCANINC_ARGS := $(INCLUDE_DIRS:%=-I %)
 
 O_LEVEL ?= 2
-CPPFLAGS := $(INCLUDE_CPP_ARGS) -iquote $(GFLIB_SUBDIR) -Wno-trigraphs -DMODERN=$(MODERN)
+CPPFLAGS := $(INCLUDE_CPP_ARGS) -iquote $(GFLIB_SUBDIR) -Wno-trigraphs -DMODERN=$(MODERN) -DTESTING=$(TEST)
 ifeq ($(MODERN),0)
   CPPFLAGS += -I tools/agbcc/include -I tools/agbcc -nostdinc -undef
   CC1 := tools/agbcc/bin/agbcc$(EXE)
@@ -166,7 +167,7 @@ MAKEFLAGS += --no-print-directory
 .SECONDEXPANSION:
 
 RULES_NO_SCAN += libagbsyscall clean clean-assets tidy tidymodern tidynonmodern generated clean-generated
-.PHONY: all rom modern compare
+.PHONY: all rom agbcc modern compare
 .PHONY: $(RULES_NO_SCAN)
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
@@ -226,6 +227,12 @@ $(shell mkdir -p $(SUBDIRS))
 # Pretend rules that are actually flags defer to `make all`
 modern: all
 compare: all
+# Uncomment the next line, and then comment the 4 lines after it to reenable agbcc.
+#agbcc: all
+agbcc:
+	@echo "'make agbcc' is deprecated as of pokeemerald-expansion 1.9 and will be removed in 1.10."
+	@echo "Search for 'agbcc: all' in Makefile to reenable agbcc."
+	@exit 1
 
 # Other rules
 rom: $(ROM)
