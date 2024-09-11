@@ -14,6 +14,8 @@ MODERN      ?= 1
 COMPARE     ?= 0
 # Executes the Test Runner System that checks that all mechanics work as expected
 TEST         ?= 0
+# Enables -fanalyzer C flag to analyze in depth potential UBs
+ANALYZE      ?= 0
 # Count unused warnings as errors. Used by RH-Hideout's repo
 UNUSED_ERROR ?= 0
 
@@ -132,6 +134,9 @@ else
   PATH_MODERNCC := PATH="$(PATH)" $(MODERNCC)
   CC1 := $(shell $(PATH_MODERNCC) --print-prog-name=cc1) -quiet
   override CFLAGS += -mthumb -mthumb-interwork -O$(O_LEVEL) -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -Wno-pointer-to-int-cast -std=gnu17 -Werror -Wall -Wno-strict-aliasing -Wno-attribute-alias -Woverride-init
+  ifeq ($(ANALYZE),1)
+    override CFLAGS += -fanalyzer
+  endif
   # Only throw an error for unused elements if its RH-Hideout's repo
   ifeq ($(UNUSED_ERROR),0)
     ifneq ($(GITHUB_REPOSITORY_OWNER),rh-hideout)
