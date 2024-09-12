@@ -231,3 +231,28 @@ SINGLE_BATTLE_TEST("Scale Shot decreases defense and increases speed after killi
         MESSAGE("Bagon's Speed rose!");
     }
 }
+
+SINGLE_BATTLE_TEST("Multi Hit moves will not disrupt Destiny Bond flag")
+{
+    u32 hp;
+    PARAMETRIZE { hp = 11; }
+    PARAMETRIZE { hp = 55; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { HP(55); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_DESTINY_BOND); MOVE(opponent, MOVE_BULLET_SEED); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DESTINY_BOND, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_BULLET_SEED, opponent);
+        if (hp == 55)
+        {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_BULLET_SEED, opponent);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_BULLET_SEED, opponent);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_BULLET_SEED, opponent);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_BULLET_SEED, opponent);
+        }
+        MESSAGE("Wobbuffet took Foe Wobbuffet with it!");
+        MESSAGE("Foe Wobbuffet fainted!");
+    }
+}

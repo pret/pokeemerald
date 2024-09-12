@@ -4686,7 +4686,8 @@ static void MoveValuesCleanUp(void)
     gIsCriticalHit = FALSE;
     gBattleScripting.moveEffect = 0;
     gBattleCommunication[MISS_TYPE] = 0;
-    gHitMarker &= ~HITMARKER_DESTINYBOND;
+    if (!gMultiHitCounter)
+        gHitMarker &= ~HITMARKER_DESTINYBOND;
     gHitMarker &= ~HITMARKER_SYNCHRONISE_EFFECT;
 }
 
