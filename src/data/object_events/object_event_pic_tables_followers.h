@@ -3078,9 +3078,9 @@ static const struct SpriteFrameImage sPicTable_Darkrai[] = {
 static const struct SpriteFrameImage sPicTable_ShayminLand[] = {
     overworld_ascending_frames(gObjectEventPic_ShayminLand, 4, 4),
 };
-/*static const struct SpriteFrameImage sPicTable_ShayminSky[] = {
+static const struct SpriteFrameImage sPicTable_ShayminSky[] = {
     overworld_ascending_frames(gObjectEventPic_ShayminSky, 4, 4),
-};*/
+};
 #endif //P_FAMILY_SHAYMIN
 
 #if P_FAMILY_ARCEUS
@@ -3914,9 +3914,9 @@ static const struct SpriteFrameImage sPicTable_Virizion[] = {
 static const struct SpriteFrameImage sPicTable_TornadusIncarnate[] = {
     overworld_ascending_frames(gObjectEventPic_TornadusIncarnate, 4, 4),
 };
-/*static const struct SpriteFrameImage sPicTable_TornadusTherian[] = {
+static const struct SpriteFrameImage sPicTable_TornadusTherian[] = {
     overworld_ascending_frames(gObjectEventPic_TornadusTherian, 4, 4),
-};*/
+};
 #endif //P_FAMILY_TORNADUS
 
 #if P_FAMILY_THUNDURUS
@@ -3924,9 +3924,9 @@ static const struct SpriteFrameImage sPicTable_TornadusIncarnate[] = {
 static const struct SpriteFrameImage sPicTable_ThundurusIncarnate[] = {
     overworld_ascending_frames(gObjectEventPic_ThundurusIncarnate, 4, 4),
 };
-/*static const struct SpriteFrameImage sPicTable_ThundurusTherian[] = {
+static const struct SpriteFrameImage sPicTable_ThundurusTherian[] = {
     overworld_ascending_frames(gObjectEventPic_ThundurusTherian, 4, 4),
-};*/
+};
 #endif //P_FAMILY_THUNDURUS
 
 #if P_FAMILY_RESHIRAM
@@ -3946,9 +3946,9 @@ static const struct SpriteFrameImage sPicTable_Zekrom[] = {
 static const struct SpriteFrameImage sPicTable_LandorusIncarnate[] = {
     overworld_ascending_frames(gObjectEventPic_LandorusIncarnate, 4, 4),
 };
-/*static const struct SpriteFrameImage sPicTable_LandorusTherian[] = {
+static const struct SpriteFrameImage sPicTable_LandorusTherian[] = {
     overworld_ascending_frames(gObjectEventPic_LandorusTherian, 4, 4),
-};*/
+};
 #endif //P_FAMILY_LANDORUS
 
 #if P_FAMILY_ENAMORUS
@@ -3965,12 +3965,12 @@ static const struct SpriteFrameImage sPicTable_Kyurem[] = {
     overworld_ascending_frames(gObjectEventPic_Kyurem, 4, 4),
 };
 #if P_FUSION_FORMS
-/*static const struct SpriteFrameImage sPicTable_KyuremWhite[] = {
+static const struct SpriteFrameImage sPicTable_KyuremWhite[] = {
     overworld_ascending_frames(gObjectEventPic_KyuremWhite, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_KyuremBlack[] = {
     overworld_ascending_frames(gObjectEventPic_KyuremBlack, 4, 4),
-};*/
+};
 #endif //P_FUSION_FORMS
 #endif //P_FAMILY_KYUREM
 
@@ -4416,7 +4416,7 @@ static const struct SpriteFrameImage sPicTable_Trevenant[] = {
 static const struct SpriteFrameImage sPicTable_PumpkabooAverage[] = {
     overworld_ascending_frames(gObjectEventPic_PumpkabooAverage, 4, 4),
 };
-/*static const struct SpriteFrameImage sPicTable_PumpkabooSmall[] = {
+static const struct SpriteFrameImage sPicTable_PumpkabooSmall[] = {
     overworld_ascending_frames(gObjectEventPic_PumpkabooSmall, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_PumpkabooLarge[] = {
@@ -4424,12 +4424,12 @@ static const struct SpriteFrameImage sPicTable_PumpkabooLarge[] = {
 };
 static const struct SpriteFrameImage sPicTable_PumpkabooSuper[] = {
     overworld_ascending_frames(gObjectEventPic_PumpkabooSuper, 4, 4),
-};*/
+};
 
 static const struct SpriteFrameImage sPicTable_GourgeistAverage[] = {
     overworld_ascending_frames(gObjectEventPic_GourgeistAverage, 4, 4),
 };
-/*static const struct SpriteFrameImage sPicTable_GourgeistSmall[] = {
+static const struct SpriteFrameImage sPicTable_GourgeistSmall[] = {
     overworld_ascending_frames(gObjectEventPic_GourgeistSmall, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_GourgeistLarge[] = {
@@ -4437,7 +4437,7 @@ static const struct SpriteFrameImage sPicTable_GourgeistLarge[] = {
 };
 static const struct SpriteFrameImage sPicTable_GourgeistSuper[] = {
     overworld_ascending_frames(gObjectEventPic_GourgeistSuper, 4, 4),
-};*/
+};
 #endif //P_FAMILY_PUMPKABOO
 
 #if P_FAMILY_BERGMITE
@@ -4484,12 +4484,12 @@ static const struct SpriteFrameImage sPicTable_Yveltal[] = {
 static const struct SpriteFrameImage sPicTable_Zygarde50[] = {
     overworld_ascending_frames(gObjectEventPic_Zygarde50, 4, 4),
 };
-//static const struct SpriteFrameImage sPicTable_Zygarde10[] = {
-//    overworld_ascending_frames(gObjectEventPic_Zygarde10, 4, 4),
-//};
-//static const struct SpriteFrameImage sPicTable_ZygardeComplete[] = {
-//    overworld_ascending_frames(gObjectEventPic_ZygardeComplete, 4, 4),
-//};
+static const struct SpriteFrameImage sPicTable_Zygarde10[] = {
+    overworld_ascending_frames(gObjectEventPic_Zygarde10, 4, 4),
+};
+static const struct SpriteFrameImage sPicTable_ZygardeComplete[] = {
+    overworld_ascending_frames(gObjectEventPic_ZygardeComplete, 4, 4),
+};
 
 #endif //P_FAMILY_ZYGARDE
 
@@ -4607,7 +4607,7 @@ static const struct SpriteFrameImage sPicTable_Crabominable[] = {
 static const struct SpriteFrameImage sPicTable_OricorioBaile[] = {
     overworld_ascending_frames(gObjectEventPic_OricorioBaile, 4, 4),
 };
-/*static const struct SpriteFrameImage sPicTable_OricorioPomPom[] = {
+static const struct SpriteFrameImage sPicTable_OricorioPomPom[] = {
     overworld_ascending_frames(gObjectEventPic_OricorioPomPom, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_OricorioPau[] = {
@@ -4615,7 +4615,7 @@ static const struct SpriteFrameImage sPicTable_OricorioPau[] = {
 };
 static const struct SpriteFrameImage sPicTable_OricorioSensu[] = {
     overworld_ascending_frames(gObjectEventPic_OricorioSensu, 4, 4),
-};*/
+};
 #endif //P_FAMILY_ORICORIO
 
 #if P_FAMILY_CUTIEFLY
@@ -4967,9 +4967,9 @@ static const struct SpriteFrameImage sPicTable_NecrozmaDawnWings[] = {
 static const struct SpriteFrameImage sPicTable_Magearna[] = {
     overworld_ascending_frames(gObjectEventPic_Magearna, 4, 4),
 };
-/*static const struct SpriteFrameImage sPicTable_MagearnaOriginalColor[] = {
+static const struct SpriteFrameImage sPicTable_MagearnaOriginalColor[] = {
     overworld_ascending_frames(gObjectEventPic_MagearnaOriginalColor, 4, 4),
-};*/
+};
 #endif //P_FAMILY_MAGEARNA
 
 #if P_FAMILY_MARSHADOW
