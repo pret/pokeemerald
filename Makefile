@@ -392,18 +392,14 @@ LD_SCRIPT := ld_script_modern.ld
 LD_SCRIPT_DEPS :=
 endif
 
-$(OBJ_DIR)/ld_script.ld: $(LD_SCRIPT) $(LD_SCRIPT_DEPS)
-	sed "s#tools/#tools/#g" $(LD_SCRIPT) > $(OBJ_DIR)/ld_script.ld
-
 # Final rules
 
 libagbsyscall:
 	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN) MODERN=$(MODERN)
 
 # Elf from object files
-$(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS) libagbsyscall
-	@echo "cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ <objects> <lib>"
-	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld --print-memory-usage -o ../../$@ $(OBJS_REL) $(LIB) | cat
+$(ELF): $(LD_SCRIPT) $(LD_SCRIPT_DEPS) $(OBJS) libagbsyscall
+	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$< --print-memory-usage -o ../../$@ $(OBJS_REL) $(LIB) | cat
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
 # Builds the rom from the elf file
