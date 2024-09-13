@@ -155,15 +155,16 @@ endif
 AUTO_GEN_TARGETS :=
 include make_tools.mk
 # Tool executables
-GFX       := $(TOOLS_DIR)/gbagfx/gbagfx$(EXE)
-AIF       := $(TOOLS_DIR)/aif2pcm/aif2pcm$(EXE)
-MID       := $(TOOLS_DIR)/mid2agb/mid2agb$(EXE)
-SCANINC   := $(TOOLS_DIR)/scaninc/scaninc$(EXE)
-PREPROC   := $(TOOLS_DIR)/preproc/preproc$(EXE)
-RAMSCRGEN := $(TOOLS_DIR)/ramscrgen/ramscrgen$(EXE)
-FIX       := $(TOOLS_DIR)/gbafix/gbafix$(EXE)
-MAPJSON   := $(TOOLS_DIR)/mapjson/mapjson$(EXE)
-JSONPROC  := $(TOOLS_DIR)/jsonproc/jsonproc$(EXE)
+GFX         := $(TOOLS_DIR)/gbagfx/gbagfx$(EXE)
+AIF         := $(TOOLS_DIR)/aif2pcm/aif2pcm$(EXE)
+MID         := $(TOOLS_DIR)/mid2agb/mid2agb$(EXE)
+SCANINC     := $(TOOLS_DIR)/scaninc/scaninc$(EXE)
+PREPROC     := $(TOOLS_DIR)/preproc/preproc$(EXE)
+RAMSCRGEN   := $(TOOLS_DIR)/ramscrgen/ramscrgen$(EXE)
+FIX         := $(TOOLS_DIR)/gbafix/gbafix$(EXE)
+MAPJSON     := $(TOOLS_DIR)/mapjson/mapjson$(EXE)
+JSONPROC    := $(TOOLS_DIR)/jsonproc/jsonproc$(EXE)
+TRAINERPROC := $(TOOLS_DIR)/trainerproc/trainerproc$(EXE)
 
 PERL := perl
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
@@ -304,6 +305,11 @@ sound/%.bin: sound/%.aif ; $(AIF) $< $@
 generated: tools $(AUTO_GEN_TARGETS)
 clean-generated:
 	-rm -f $(AUTO_GEN_TARGETS)
+
+COMPETITIVE_PARTY_SYNTAX := $(shell PATH="$(PATH)"; echo 'COMPETITIVE_PARTY_SYNTAX' | $(CPP) $(CPPFLAGS) -imacros include/gba/defines.h -imacros include/config/general.h | tail -n1)
+ifeq ($(COMPETITIVE_PARTY_SYNTAX),1)
+%.h: %.party tools ; $(CPP) $(CPPFLAGS) -traditional-cpp - < $< | $(TRAINERPROC) -o $@ -i $< -
+endif
 
 ifeq ($(MODERN),0)
 $(C_BUILDDIR)/libc.o: CC1 := $(TOOLS_DIR)/agbcc/bin/old_agbcc$(EXE)
