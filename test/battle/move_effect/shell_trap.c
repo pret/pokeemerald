@@ -166,3 +166,35 @@ DOUBLE_BATTLE_TEST("Shell Trap activates immediately after being hit on turn 3 a
         HP_BAR(opponentRight);
     }
 }
+
+DOUBLE_BATTLE_TEST("Shell Trap targets correctly if one of the opponents has fainted")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_SHELL_TRAP].target == MOVE_TARGET_BOTH);
+        PLAYER(SPECIES_GRENINJA) { Speed(60); }
+        PLAYER(SPECIES_TURTONATOR) { Speed(10); }
+        OPPONENT(SPECIES_BLASTOISE) { Speed(120); }
+        OPPONENT(SPECIES_SCIZOR) { Speed(100); }
+    } WHEN {
+        TURN {
+            MOVE(opponentLeft, MOVE_TACKLE, target: playerRight);
+            MOVE(playerRight, MOVE_SHELL_TRAP);
+        }
+        TURN {
+            MOVE(opponentLeft, MOVE_TACKLE, target: playerRight);
+            MOVE(playerRight, MOVE_SHELL_TRAP);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SHELL_TRAP_SETUP, playerRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponentLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SHELL_TRAP, playerRight);
+        MESSAGE("Foe Scizor fainted!");
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerLeft);
+
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SHELL_TRAP_SETUP, playerRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponentLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SHELL_TRAP, playerRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerLeft);
+    }
+}

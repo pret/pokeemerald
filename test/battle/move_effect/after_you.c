@@ -52,5 +52,39 @@ DOUBLE_BATTLE_TEST("After You does nothing if the target has already moved")
     }
 }
 
+DOUBLE_BATTLE_TEST("After You calculates correct targets if only one pokemon is left on the opposing side")
+{
+    GIVEN {
+        PLAYER(SPECIES_GRENINJA) { Speed(120); }
+        PLAYER(SPECIES_REGIROCK) { Speed(10); }
+        OPPONENT(SPECIES_PIDGEOT) { Speed(100); }
+        OPPONENT(SPECIES_DRAGONITE) { Speed(60); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_AFTER_YOU, target: playerRight);
+            MOVE(playerRight, MOVE_STONE_EDGE, target: opponentLeft);
+            MOVE(opponentRight, MOVE_CELEBRATE);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_AFTER_YOU, target: playerRight);
+            MOVE(playerRight, MOVE_STONE_EDGE, target: opponentRight);
+            MOVE(opponentRight, MOVE_CELEBRATE);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_AFTER_YOU, playerLeft);
+        MESSAGE("Regirock took the kind offer!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STONE_EDGE, playerRight);
+        HP_BAR(opponentLeft);
+        MESSAGE("Foe Pidgeot fainted!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentRight);
+
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_AFTER_YOU, playerLeft);
+        MESSAGE("Regirock took the kind offer!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STONE_EDGE, playerRight);
+        HP_BAR(opponentRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentRight);
+    }
+}
+
 TO_DO_BATTLE_TEST("After You doesn't fail if the turner remains the same after After You (Gen8+)");
 TO_DO_BATTLE_TEST("After You ignores the effects of Quash");
