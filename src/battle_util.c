@@ -3558,11 +3558,20 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
         case CANCELLER_POWDER_STATUS:
             if (gBattleMons[gBattlerAttacker].status2 & STATUS2_POWDER)
             {
-                if (moveType == TYPE_FIRE)
+                u32 partnerMove = gBattleMons[BATTLE_PARTNER(gBattlerAttacker)].moves[gBattleStruct->chosenMovePositions[BATTLE_PARTNER(gBattlerAttacker)]];
+                if ((moveType == TYPE_FIRE && !gBattleStruct->pledgeMove)
+                 || (gCurrentMove == MOVE_FIRE_PLEDGE && partnerMove == MOVE_GRASS_PLEDGE)
+                 || (gCurrentMove == MOVE_GRASS_PLEDGE && partnerMove == MOVE_FIRE_PLEDGE && gBattleStruct->pledgeMove))
                 {
                     gProtectStructs[gBattlerAttacker].powderSelfDmg = TRUE;
-                    gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 4;
-                    gBattlescriptCurrInstr = BattleScript_MoveUsedPowder;
+                    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD
+                    && (B_POWDER_RAIN < GEN_7 || !IsBattlerWeatherAffected(gBattlerAttacker, B_WEATHER_RAIN_PRIMAL)))
+                        gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 4;
+
+                    if (GetActiveGimmick(gBattlerAttacker) != GIMMICK_Z_MOVE
+                     || gBattleStruct->obedienceResult != OBEYS
+                     || HasTrainerUsedGimmick(gBattlerAttacker, GIMMICK_Z_MOVE))
+                        gBattlescriptCurrInstr = BattleScript_MoveUsedPowder;
                     gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                     effect = 1;
                 }
@@ -3592,7 +3601,15 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
                 SetGimmickAsActivated(gBattlerAttacker, GIMMICK_Z_MOVE);
 
                 gBattleScripting.battler = gBattlerAttacker;
-                if (gMovesInfo[gCurrentMove].category == DAMAGE_CATEGORY_STATUS)
+                if (gProtectStructs[gBattlerAttacker].powderSelfDmg)
+                {
+                    if (!alreadyUsed)
+                    {
+                        BattleScriptPushCursor();
+                        gBattlescriptCurrInstr = BattleScript_ZMoveActivatePowder;
+                    }
+                }
+                else if (gMovesInfo[gCurrentMove].category == DAMAGE_CATEGORY_STATUS)
                 {
                     if (!alreadyUsed)
                     {
@@ -6058,7 +6075,6 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             if (IsBattlerAlive(battler)
              && (gMovesInfo[gCurrentMove].danceMove)
              && !gSpecialStatuses[battler].dancerUsedMove
-             && (gHitMarker & HITMARKER_ATTACKSTRING_PRINTED)
              && gBattlerAttacker != battler)
             {
                 // Set bit and save Dancer mon's original target

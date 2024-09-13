@@ -9404,6 +9404,16 @@ BattleScript_ZMoveActivateStatus::
 	copybyte sSTATCHANGER, sSAVED_STAT_CHANGER
 	return
 
+BattleScript_ZMoveActivatePowder::
+	flushtextbox
+	trytrainerslidezmovemsg
+	savetarget
+	printstring STRINGID_ZPOWERSURROUNDS
+	playanimation BS_ATTACKER, B_ANIM_ZMOVE_ACTIVATE, NULL
+	setzeffect
+	restoretarget
+	goto BattleScript_MoveUsedPowder
+
 BattleScript_ZEffectPrintString::
 	printfromtable gZEffectStringIds
 	waitmessage B_WAIT_TIME_LONG

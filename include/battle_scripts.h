@@ -329,6 +329,7 @@ extern const u8 BattleScript_ProteanActivates[];
 extern const u8 BattleScript_DazzlingProtected[];
 extern const u8 BattleScript_MoveUsedPsychicTerrainPrevents[];
 extern const u8 BattleScript_MoveUsedPowder[];
+extern const u8 BattleScript_ZMoveActivatePowder[];
 extern const u8 BattleScript_SelectingNotAllowedStuffCheeks[];
 extern const u8 BattleScript_SelectingNotAllowedStuffCheeksInPalace[];
 extern const u8 BattleScript_SelectingNotAllowedBelch[];

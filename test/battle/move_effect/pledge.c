@@ -331,6 +331,51 @@ DOUBLE_BATTLE_TEST("Damage calculation: Combined pledge move")
     }
 }
 
+DOUBLE_BATTLE_TEST("Pledge move combo interactions with Powder are correct")
+{
+    // Fire Pledge as the first move or Fire Pledge combo should fail
+    u32 moveLeft, moveRight, speedLeft, speedRight;
+    PARAMETRIZE { moveLeft = MOVE_FIRE_PLEDGE; moveRight = MOVE_WATER_PLEDGE; speedLeft = 4; speedRight = 3; } // FAIL 1
+    PARAMETRIZE { moveLeft = MOVE_FIRE_PLEDGE; moveRight = MOVE_WATER_PLEDGE; speedLeft = 3; speedRight = 4; }
+    PARAMETRIZE { moveLeft = MOVE_WATER_PLEDGE; moveRight = MOVE_FIRE_PLEDGE; speedLeft = 4; speedRight = 3; }
+    PARAMETRIZE { moveLeft = MOVE_WATER_PLEDGE; moveRight = MOVE_FIRE_PLEDGE; speedLeft = 3; speedRight = 4; }
+    PARAMETRIZE { moveLeft = MOVE_FIRE_PLEDGE; moveRight = MOVE_GRASS_PLEDGE; speedLeft = 4; speedRight = 3; } // FAIL 1
+    PARAMETRIZE { moveLeft = MOVE_FIRE_PLEDGE; moveRight = MOVE_GRASS_PLEDGE; speedLeft = 3; speedRight = 4; } // FAIL 2
+    PARAMETRIZE { moveLeft = MOVE_GRASS_PLEDGE; moveRight = MOVE_FIRE_PLEDGE; speedLeft = 4; speedRight = 3; }
+    PARAMETRIZE { moveLeft = MOVE_GRASS_PLEDGE; moveRight = MOVE_FIRE_PLEDGE; speedLeft = 3; speedRight = 4; } // FAIL 2
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_FIRE_PLEDGE].type == TYPE_FIRE);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(speedLeft); }
+        PLAYER(SPECIES_WYNAUT) { Speed(speedRight); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(8); }
+        OPPONENT(SPECIES_VIVILLON) { Speed(5); }
+    } WHEN {
+        TURN { MOVE(opponentRight, MOVE_POWDER, target: playerLeft); MOVE(playerLeft, moveLeft, target: opponentLeft); MOVE(playerRight, moveRight, target: opponentLeft); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POWDER, opponentRight);
+        if (speedLeft > speedRight && moveLeft == MOVE_FIRE_PLEDGE) { // FAIL 1
+            NOT ANIMATION(ANIM_TYPE_MOVE, moveLeft, playerLeft);
+            HP_BAR(playerLeft);
+            ANIMATION(ANIM_TYPE_MOVE, moveRight, playerRight);
+        }
+        else if (speedLeft > speedRight) {
+            NOT HP_BAR(playerLeft);
+            if (moveLeft == MOVE_GRASS_PLEDGE)
+                ANIMATION(ANIM_TYPE_MOVE, MOVE_FIRE_PLEDGE, playerRight);
+            else
+                ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_PLEDGE, playerRight);
+        }
+        else if (moveLeft == MOVE_WATER_PLEDGE || moveRight == MOVE_WATER_PLEDGE) {
+            NOT HP_BAR(playerLeft);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_PLEDGE, playerLeft);
+        }
+        else { // FAIL 2
+            HP_BAR(playerLeft);
+            NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_FIRE_PLEDGE, playerLeft);
+        }
+    }
+}
+
 DOUBLE_BATTLE_TEST("Pledge move combo fails if ally fails to act - Sleep Right")
 {
     u32 speedPLeft, speedPRight, speedOLeft, speedORight;
