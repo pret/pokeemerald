@@ -3463,9 +3463,8 @@ bool8 MovementType_Wander_Step3(struct ObjectEvent *objectEvent, struct Sprite *
         ClearObjectEventMovement(objectEvent, sprite);
         sprite->sTypeFuncId = 4;
         return TRUE;
-    } else if (
-        OW_MON_WANDER_WALK == TRUE
-        && IS_OW_MON_OBJ(objectEvent))
+    }
+    else if (OW_MON_WANDER_WALK == TRUE && IS_OW_MON_OBJ(objectEvent))
     {
         UpdateMonMoveInPlace(objectEvent, sprite);
     }
@@ -5668,10 +5667,9 @@ bool8 MovementType_MoveInPlace_Step1(struct ObjectEvent *objectEvent, struct Spr
     if (ObjectEventExecSingleMovementAction(objectEvent, sprite))
         sprite->sTypeFuncId = 0;
     // similar to UpdateMonMoveInPlace
-    else if (
-        OW_FOLLOWERS_BOBBING == TRUE
-        && IS_OW_MON_OBJ(objectEvent)
-        && (sprite->data[3] & 7) == 2)
+    else if (OW_FOLLOWERS_BOBBING == TRUE
+          && IS_OW_MON_OBJ(objectEvent)
+          && (sprite->data[3] & 7) == 2)
     {
         sprite->y2 ^= 1;
     }
