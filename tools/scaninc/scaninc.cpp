@@ -125,7 +125,12 @@ int main(int argc, char **argv)
             if (!exists && (file.FileType() == SourceFileType::Asm || file.FileType() == SourceFileType::Inc))
             {
                 path = include;
+                if (CanOpenFile(path))
+                    exists = true;
             }
+            if (!exists)
+                continue;
+
             dependencies_includes.insert(path);
             bool inserted = dependencies.insert(path).second;
             if (inserted && exists)
