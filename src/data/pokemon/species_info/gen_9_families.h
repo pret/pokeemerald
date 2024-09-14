@@ -3215,12 +3215,12 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .iconSprite = gMonIcon_Scovillain,
         .iconPalIndex = 1,
         FOOTPRINT(Scovillain)
-        OVERWORLD(
+        OVERWORLD_SET_ANIM(
             sPicTable_Scovillain,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            //sAnimTable_Following_Asym,
+            sAnimTable_Following_Asym,
             gOverworldPalette_Scovillain,
             gShinyOverworldPalette_Scovillain
         )
@@ -3526,12 +3526,12 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .iconSprite = gMonIcon_Tinkatink,
         .iconPalIndex = 1,
         FOOTPRINT(Tinkatink)
-        OVERWORLD(
+        OVERWORLD_SET_ANIM(
             sPicTable_Tinkatink,
             SIZE_32x32,
             SHADOW_SIZE_S,
             TRACKS_FOOT,
-            //sAnimTable_Following_Asym,
+            sAnimTable_Following_Asym,
             gOverworldPalette_Tinkatink,
             gShinyOverworldPalette_Tinkatink
         )
@@ -3589,12 +3589,12 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .iconSprite = gMonIcon_Tinkatuff,
         .iconPalIndex = 1,
         FOOTPRINT(Tinkatuff)
-        OVERWORLD(
+        OVERWORLD_SET_ANIM(
             sPicTable_Tinkatuff,
             SIZE_32x32,
             SHADOW_SIZE_S,
             TRACKS_FOOT,
-            //sAnimTable_Following_Asym,
+            sAnimTable_Following_Asym,
             gOverworldPalette_Tinkatuff,
             gShinyOverworldPalette_Tinkatuff
         )
@@ -3651,12 +3651,12 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .iconSprite = gMonIcon_Tinkaton,
         .iconPalIndex = 1,
         FOOTPRINT(Tinkaton)
-        OVERWORLD(
+        OVERWORLD_SET_ANIM(
             sPicTable_Tinkaton,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            //sAnimTable_Following_Asym,
+            sAnimTable_Following_Asym,
             gOverworldPalette_Tinkaton,
             gShinyOverworldPalette_Tinkaton
         )
