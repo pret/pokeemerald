@@ -60,8 +60,8 @@ static void SpriteCB_PokemonLogoShine(struct Sprite *sprite);
 // const rom data
 static const u16 sUnusedUnknownPal[] = INCBIN_U16("graphics/title_screen/unused.gbapal");
 
-static const u32 sTitleScreenRayquazaGfx[] = INCBIN_U32("graphics/title_screen/rayquaza.4bpp.lz");
-static const u32 sTitleScreenRayquazaTilemap[] = INCBIN_U32("graphics/title_screen/rayquaza.bin.lz");
+static const u32 sTitleScreenRayquazaGfx[] = INCBIN_U32("graphics/title_screen/GHOST.4bpp.lz");
+static const u32 sTitleScreenRayquazaTilemap[] = INCBIN_U32("graphics/title_screen/GHOST.bin.lz");
 static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("graphics/title_screen/logo_shine.4bpp.lz");
 static const u32 sTitleScreenCloudsGfx[] = INCBIN_U32("graphics/title_screen/clouds.4bpp.lz");
 
@@ -603,8 +603,8 @@ void CB2_InitTitleScreen(void)
         LZ77UnCompVram(sTitleScreenRayquazaGfx, (void *)(BG_CHAR_ADDR(2)));
         LZ77UnCompVram(sTitleScreenRayquazaTilemap, (void *)(BG_SCREEN_ADDR(26)));
         // bg1
-        LZ77UnCompVram(sTitleScreenCloudsGfx, (void *)(BG_CHAR_ADDR(3)));
-        LZ77UnCompVram(gTitleScreenCloudsTilemap, (void *)(BG_SCREEN_ADDR(27)));
+        //LZ77UnCompVram(sTitleScreenCloudsGfx, (void *)(BG_CHAR_ADDR(3)));
+        //LZ77UnCompVram(gTitleScreenCloudsTilemap, (void *)(BG_SCREEN_ADDR(27)));
         ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
@@ -856,6 +856,7 @@ static void CB2_GoToBerryFixScreen(void)
 
 static void UpdateLegendaryMarkingColor(u8 frameNum)
 {
+    return;
     if ((frameNum % 4) == 0) // Change color every 4th frame
     {
         s32 intensity = Cos(frameNum, 128) + 128;
