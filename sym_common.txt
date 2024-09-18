@@ -1,17 +1,17 @@
 	.space 0x8
 	.include "main.o"
-	@ ../gflib/bg.o
+	@ ../src/bg.o
 	.align 2
 gWindowTileAutoAllocEnabled:
 	.space 4
-    @ ../gflib/window.o
+    @ ../src/window.o
 	.align 4
 gTransparentTileNumber:
 	.space 1
 	.align 4
 gWindowBgTilemapBuffers:
 	.space 16
-    @ ../gflib/text.o
+    @ ../src/text.o
 	.align 4
 gFonts:
 	.space 4
@@ -24,7 +24,7 @@ gCurGlyph:
 	.align 2
 gTextFlags:
 	.space 4
-    @ ../gflib/sprite.o
+    @ ../src/sprite.o
 	.align 2
 gOamMatrixAllocBitmap:
 	.space 4
