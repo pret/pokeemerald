@@ -4,14 +4,14 @@
 	.align 2
 gWindowTileAutoAllocEnabled:
 	.space 4
-    @ ../src/window.o
+	@ ../src/window.o
 	.align 4
 gTransparentTileNumber:
 	.space 1
 	.align 4
 gWindowBgTilemapBuffers:
 	.space 16
-    @ ../src/text.o
+	@ ../src/text.o
 	.align 4
 gFonts:
 	.space 4
@@ -24,7 +24,7 @@ gCurGlyph:
 	.align 2
 gTextFlags:
 	.space 4
-    @ ../src/sprite.o
+	@ ../src/sprite.o
 	.align 2
 gOamMatrixAllocBitmap:
 	.space 4
