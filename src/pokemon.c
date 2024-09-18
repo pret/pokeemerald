@@ -684,7 +684,7 @@ const struct NatureInfo gNaturesInfo[NUM_NATURES] =
 #elif P_LVL_UP_LEARNSETS >= GEN_8
 #include "data/pokemon/level_up_learnsets/gen_8.h" // Sword/Shield
 #elif P_LVL_UP_LEARNSETS >= GEN_7
-#include "data/pokemon/level_up_learnsets/gen_7.h" // Ultra Sun/ Ultra Moon
+#include "data/pokemon/level_up_learnsets/gen_7.h" // Ultra Sun/Ultra Moon
 #elif P_LVL_UP_LEARNSETS >= GEN_6
 #include "data/pokemon/level_up_learnsets/gen_6.h" // Omega Ruby/Alpha Sapphire
 #elif P_LVL_UP_LEARNSETS >= GEN_5
