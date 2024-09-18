@@ -8929,9 +8929,10 @@ static bool32 ChangeOrderTargetAfterAttacker(void)
     u8 data[MAX_BATTLERS_COUNT];
     u8 actionsData[MAX_BATTLERS_COUNT];
 
-    if (GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget)
-        || GetBattlerTurnOrderNum(gBattlerAttacker) + 1 == GetBattlerTurnOrderNum(gBattlerTarget))
+    if (GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget))
         return FALSE;
+    if (GetBattlerTurnOrderNum(gBattlerAttacker) + 1 == GetBattlerTurnOrderNum(gBattlerTarget))
+        return B_AFTER_YOU_TURN_ORDER >= GEN_8;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
@@ -8944,8 +8945,6 @@ static bool32 ChangeOrderTargetAfterAttacker(void)
         gActionsByTurnOrder[1] = actionsData[2];
         gBattlerByTurnOrder[2] = data[1];
         gActionsByTurnOrder[2] = actionsData[1];
-        gBattlerByTurnOrder[3] = data[3];
-        gActionsByTurnOrder[3] = actionsData[3];
     }
     else if (GetBattlerTurnOrderNum(gBattlerAttacker) == 0 && GetBattlerTurnOrderNum(gBattlerTarget) == 3)
     {
@@ -17110,7 +17109,7 @@ void BS_TryActivateGulpMissile(void)
 void BS_TryQuash(void)
 {
     NATIVE_ARGS(const u8 *failInstr);
-    u32 i;
+    u32 i, j;
 
     // It's true if foe is faster, has a bigger priority, or switches
     if (GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget))
@@ -17121,19 +17120,29 @@ void BS_TryQuash(void)
 
     // If the above condition is not true, it means we are faster than the foe, so we can set the quash bit
     gProtectStructs[gBattlerTarget].quash = TRUE;
-    for (i = 0; i < gBattlersCount; i++)
+    
+    if (B_QUASH_TURN_ORDER < GEN_8)
     {
-        gBattlerByTurnOrder[i] = i;
-    }
-    for (i = 0; i < gBattlersCount - 1; i++)
-    {
-        s32 j;
-        for (j = i + 1; j < gBattlersCount; j++)
+        // Gen 7- config makes target go last so that the order of quash targets is kept for the correct turn order
+        j = GetBattlerTurnOrderNum(gBattlerTarget);
+        for (i = j + 1; i < gBattlersCount; i++)
         {
-            if (!gProtectStructs[i].quash
-             && !gProtectStructs[j].quash
-             && GetWhichBattlerFaster(gBattlerByTurnOrder[i], gBattlerByTurnOrder[j], FALSE) == -1)
-                SwapTurnOrder(i, j);
+            SwapTurnOrder(i, j);
+            j++;
+        }
+    }
+    else
+    {
+        // Gen 8+ config only alters Turn Order of battlers affected by Quash, dynamic speed should handle the rest
+        for (i = gCurrentTurnActionNumber + 1; i < gBattlersCount - 1; i++)
+        {
+            for (j = i + 1; j < gBattlersCount; j++)
+            {
+                u32 battler1 = gBattlerByTurnOrder[i], battler2 = gBattlerByTurnOrder[j];
+                if ((gProtectStructs[battler1].quash || gProtectStructs[battler2].quash)
+                && GetWhichBattlerFaster(battler1, battler2, FALSE) == -1)
+                    SwapTurnOrder(i, j);
+            }
         }
     }
     gBattlescriptCurrInstr = cmd->nextInstr;

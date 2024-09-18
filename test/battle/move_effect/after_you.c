@@ -52,7 +52,7 @@ DOUBLE_BATTLE_TEST("After You does nothing if the target has already moved")
     }
 }
 
-DOUBLE_BATTLE_TEST("After You calculates correct targets if only one pokemon is left on the opposing side")
+DOUBLE_BATTLE_TEST("After You calculates correct turn order if only one pokemon is left on the opposing side")
 {
     GIVEN {
         PLAYER(SPECIES_GRENINJA) { Speed(120); }
@@ -86,5 +86,48 @@ DOUBLE_BATTLE_TEST("After You calculates correct targets if only one pokemon is 
     }
 }
 
-TO_DO_BATTLE_TEST("After You doesn't fail if the turner remains the same after After You (Gen8+)");
-TO_DO_BATTLE_TEST("After You ignores the effects of Quash");
+DOUBLE_BATTLE_TEST("After You doesn't fail if the turn order remains the same after After You (Gen8+)")
+{
+    GIVEN {
+        ASSUME(B_AFTER_YOU_TURN_ORDER >= GEN_8);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
+        PLAYER(SPECIES_WYNAUT) { Speed(1); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(2); }
+        OPPONENT(SPECIES_WYNAUT) { Speed(3); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_CELEBRATE);
+            MOVE(opponentRight, MOVE_AFTER_YOU, target: opponentLeft);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_AFTER_YOU, opponentRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerRight);
+    }
+}
+
+DOUBLE_BATTLE_TEST("After You ignores the effects of Quash")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_QUASH].effect == EFFECT_QUASH);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
+        PLAYER(SPECIES_WYNAUT) { Speed(1); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(2); }
+        OPPONENT(SPECIES_WYNAUT) { Speed(3); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_QUASH, target: opponentLeft);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_CELEBRATE);
+            MOVE(opponentRight, MOVE_AFTER_YOU, target: opponentLeft);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_QUASH, playerLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_AFTER_YOU, opponentRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerRight);
+    }
+}
