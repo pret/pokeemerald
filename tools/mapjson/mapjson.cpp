@@ -395,10 +395,10 @@ void process_heal_locations(const vector<string> &map_filepaths, string output_f
 
             // Add element to main heal locations array
             heal_locations_text << index_text << "\n\t{\n"
-                                << "\t\tMAP_GROUP(" << map_id << "),\n"
-                                << "\t\tMAP_NUM(" << map_id << "),\n"
-                                << "\t\t" << json_to_string(heal_location, "x") << ",\n"
-                                << "\t\t" << json_to_string(heal_location, "y") << ",\n"
+                                << "\t\t.mapGroup = MAP_GROUP(" << map_id << "),\n"
+                                << "\t\t.mapNum = MAP_NUM(" << map_id << "),\n"
+                                << "\t\t.x = " << json_to_string(heal_location, "x") << ",\n"
+                                << "\t\t.y = " << json_to_string(heal_location, "y") << ",\n"
                                 << "\t},\n";
 
             // Add element to respawn map array (if field is present)
