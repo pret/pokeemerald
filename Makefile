@@ -91,7 +91,6 @@ SYM := $(ROM:.gba=.sym)
 
 # Commonly used directories
 C_SUBDIR = src
-GFLIB_SUBDIR = gflib
 ASM_SUBDIR = asm
 DATA_SRC_SUBDIR = src/data
 DATA_ASM_SUBDIR = data
@@ -99,7 +98,6 @@ SONG_SUBDIR = sound/songs
 MID_SUBDIR = sound/songs/midi
 
 C_BUILDDIR = $(OBJ_DIR)/$(C_SUBDIR)
-GFLIB_BUILDDIR = $(OBJ_DIR)/$(GFLIB_SUBDIR)
 ASM_BUILDDIR = $(OBJ_DIR)/$(ASM_SUBDIR)
 DATA_ASM_BUILDDIR = $(OBJ_DIR)/$(DATA_ASM_SUBDIR)
 SONG_BUILDDIR = $(OBJ_DIR)/$(SONG_SUBDIR)
@@ -115,7 +113,7 @@ INCLUDE_CPP_ARGS := $(INCLUDE_DIRS:%=-iquote %)
 INCLUDE_SCANINC_ARGS := $(INCLUDE_DIRS:%=-I %)
 
 O_LEVEL ?= 2
-CPPFLAGS := $(INCLUDE_CPP_ARGS) -iquote $(GFLIB_SUBDIR) -Wno-trigraphs -DMODERN=$(MODERN)
+CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=$(MODERN)
 ifeq ($(MODERN),0)
   CPPFLAGS += -I tools/agbcc/include -I tools/agbcc -nostdinc -undef
   CC1 := tools/agbcc/bin/agbcc$(EXE)
@@ -193,9 +191,6 @@ C_SRCS_IN := $(wildcard $(C_SUBDIR)/*.c $(C_SUBDIR)/*/*.c $(C_SUBDIR)/*/*/*.c)
 C_SRCS := $(foreach src,$(C_SRCS_IN),$(if $(findstring .inc.c,$(src)),,$(src)))
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
 
-GFLIB_SRCS := $(wildcard $(GFLIB_SUBDIR)/*.c)
-GFLIB_OBJS := $(patsubst $(GFLIB_SUBDIR)/%.c,$(GFLIB_BUILDDIR)/%.o,$(GFLIB_SRCS))
-
 C_ASM_SRCS := $(wildcard $(C_SUBDIR)/*.s $(C_SUBDIR)/*/*.s $(C_SUBDIR)/*/*/*.s)
 C_ASM_OBJS := $(patsubst $(C_SUBDIR)/%.s,$(C_BUILDDIR)/%.o,$(C_ASM_SRCS))
 
@@ -214,7 +209,7 @@ SONG_OBJS := $(patsubst $(SONG_SUBDIR)/%.s,$(SONG_BUILDDIR)/%.o,$(SONG_SRCS))
 MID_SRCS := $(wildcard $(MID_SUBDIR)/*.mid)
 MID_OBJS := $(patsubst $(MID_SUBDIR)/%.mid,$(MID_BUILDDIR)/%.o,$(MID_SRCS))
 
-OBJS     := $(C_OBJS) $(GFLIB_OBJS) $(C_ASM_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS) $(MID_OBJS)
+OBJS     := $(C_OBJS) $(C_ASM_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS) $(MID_OBJS)
 OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
 
 SUBDIRS  := $(sort $(dir $(OBJS)))
@@ -321,7 +316,7 @@ else
 	$$(AS) $$(ASFLAGS) -o $$@ $3.s
 endif
 $1.d: $2
-	$(SCANINC) -M $1.d $(INCLUDE_SCANINC_ARGS) -I tools/agbcc/include -I gflib $2
+	$(SCANINC) -M $1.d $(INCLUDE_SCANINC_ARGS) -I tools/agbcc/include $2
 ifneq ($(NODEP),1)
 $1.o: $1.d
 -include $1.d
@@ -331,10 +326,8 @@ endef
 # Create generic rules if no dependency scanning, else create the real rules
 ifeq ($(NODEP),1)
 $(eval $(call C_DEP,$(C_BUILDDIR)/%,$(C_SUBDIR)/%.c))
-$(eval $(call C_DEP,$(GFLIB_BUILDDIR)/%,$(GFLIB_SUBDIR)/%.c))
 else
 $(foreach src,$(C_SRCS),$(eval $(call C_DEP,$(OBJ_DIR)/$(basename $(src)),$(src))))
-$(foreach src,$(GFLIB_SRCS),$(eval $(call C_DEP,$(OBJ_DIR)/$(basename $(src)),$(src))))
 endif
 
 # Similar methodology for Assembly files
