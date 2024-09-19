@@ -547,3 +547,22 @@ DOUBLE_BATTLE_TEST("Crafty Shield does not protect against moves that target all
         MESSAGE("Foe Sunflora's Defense rose!");
     }
 }
+
+SINGLE_BATTLE_TEST("Spiky Shield does not damage users on Counter or Mirror Coat")
+{
+    u32 move;
+    PARAMETRIZE { move = MOVE_MIRROR_COAT; }
+    PARAMETRIZE { move = MOVE_COUNTER; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SPIKY_SHIELD); MOVE(opponent, move); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPIKY_SHIELD, player);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, move, opponent);
+            HP_BAR(opponent);
+        }
+    }
+}

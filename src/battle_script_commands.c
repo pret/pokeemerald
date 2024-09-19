@@ -5448,7 +5448,9 @@ static void Cmd_moveend(void)
         case MOVEEND_PROTECT_LIKE_EFFECT:
             if (gProtectStructs[gBattlerAttacker].touchedProtectLike)
             {
-                if (gProtectStructs[gBattlerTarget].spikyShielded && GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
+                if (gProtectStructs[gBattlerTarget].spikyShielded
+                 && gMovesInfo[gCurrentMove].effect != EFFECT_COUNTER
+                 && GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
                 {
                     gProtectStructs[gBattlerAttacker].touchedProtectLike = FALSE;
                     gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 8;
