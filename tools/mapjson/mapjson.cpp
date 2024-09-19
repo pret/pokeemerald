@@ -739,7 +739,7 @@ int main(int argc, char *argv[]) {
         vector<string> filepaths;
         const int firstMapFileArg = 3;
         const int lastMapFileArg = argc - 2;
-        for (int i = firstMapFileArg; i < lastMapFileArg; i++) {
+        for (int i = firstMapFileArg; i <= lastMapFileArg; i++) {
             filepaths.push_back(argv[i]);
         }
         string output_file(argv[argc - 1]);
