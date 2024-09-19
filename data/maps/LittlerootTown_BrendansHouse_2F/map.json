@@ -266,5 +266,12 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "PlayersHouse_2F_EventScript_GameCube"
     }
+  ],
+  "heal_locations": [
+    {
+      "id": "HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F",
+      "x": 4,
+      "y": 2
+    }
   ]
 }
