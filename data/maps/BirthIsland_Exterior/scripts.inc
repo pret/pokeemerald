@@ -72,8 +72,8 @@ BirthIsland_Exterior_EventScript_Complete::
 BirthIsland_Exterior_EventScript_Deoxys::
 	waitse
 	setfieldeffectargument 0, LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK
-	setfieldeffectargument 1, MAP_NUM(BIRTH_ISLAND_EXTERIOR)
-	setfieldeffectargument 2, MAP_GROUP(BIRTH_ISLAND_EXTERIOR)
+	setfieldeffectargument 1, MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR)
+	setfieldeffectargument 2, MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR)
 	dofieldeffect FLDEFF_DESTROY_DEOXYS_ROCK
 	playbgm MUS_RG_ENCOUNTER_DEOXYS, FALSE
 	waitfieldeffect FLDEFF_DESTROY_DEOXYS_ROCK
