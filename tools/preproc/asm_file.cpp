@@ -26,7 +26,7 @@
 #include "char_util.h"
 #include "utf8.h"
 #include "string_parser.h"
-#include "../../gflib/characters.h"
+#include "../../include/constants/characters.h"
 #include "io.h"
 
 AsmFile::AsmFile(std::string filename, bool isStdin, bool doEnum) : m_filename(filename)
