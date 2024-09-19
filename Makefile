@@ -4,6 +4,7 @@ GAME_CODE   := BPEE
 MAKER_CODE  := 01
 REVISION    := 0
 MODERN      ?= 0
+KEEP_TEMPS  ?= 0
 
 # `File name`.gba ('_modern' will be appended to the modern builds)
 FILE_NAME := pokeemerald
@@ -256,18 +257,18 @@ include audio_rules.mk
 
 generated: $(AUTO_GEN_TARGETS)
 
-%.s: ;
+%.s:   ;
 %.png: ;
 %.pal: ;
 %.aif: ;
 
-%.1bpp: %.png  ; $(GFX) $< $@
-%.4bpp: %.png  ; $(GFX) $< $@
-%.8bpp: %.png  ; $(GFX) $< $@
-%.gbapal: %.pal ; $(GFX) $< $@
-%.gbapal: %.png ; $(GFX) $< $@
-%.lz: % ; $(GFX) $< $@
-%.rl: % ; $(GFX) $< $@
+%.1bpp:   %.png  ; $(GFX) $< $@
+%.4bpp:   %.png  ; $(GFX) $< $@
+%.8bpp:   %.png  ; $(GFX) $< $@
+%.gbapal: %.pal  ; $(GFX) $< $@
+%.gbapal: %.png  ; $(GFX) $< $@
+%.lz:     %      ; $(GFX) $< $@
+%.rl:     %      ; $(GFX) $< $@
 
 # NOTE: Tools must have been built prior (FIXME)
 generated: tools $(AUTO_GEN_TARGETS)
@@ -305,7 +306,7 @@ endef
 # $1: Output file without extension, $2 input file, $3 temp path (if keeping)
 define C_DEP_IMPL
 $1.o: $2
-ifeq (,$(KEEP_TEMPS))
+ifneq ($(KEEP_TEMPS),1)
 	@echo "$$(CC1) <flags> -o $$@ $$<"
 	@$$(CPP) $$(CPPFLAGS) $$< | $$(PREPROC) -i $$< charmap.txt | $$(CC1) $$(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $$(AS) $$(ASFLAGS) -o $$@ -
 else
@@ -314,15 +315,11 @@ else
 	@echo -e ".text\n\t.align\t2, 0\n" >> $3.s
 	$$(AS) $$(ASFLAGS) -o $$@ $3.s
 endif
-$(call C_SCANINC,$1,$2)
-endef
-# Calls SCANINC to find dependencies
-define C_SCANINC
-ifneq ($(NODEP),1)
-$1.o: $1.d
 $1.d: $2
 	$(SCANINC) -M $1.d $(INCLUDE_SCANINC_ARGS) -I tools/agbcc/include $2
-include $1.d
+ifneq ($(NODEP),1)
+$1.o: $1.d
+-include $1.d
 endif
 endef
 
@@ -352,7 +349,7 @@ ifneq ($(NODEP),1)
 $1.o: $1.d
 $1.d: $2
 	$(SCANINC) -M $1.d $(INCLUDE_SCANINC_ARGS) -I "" $2
-include $1.d
+-include $1.d
 endif
 endef
 
