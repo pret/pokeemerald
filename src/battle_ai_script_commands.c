@@ -1119,16 +1119,16 @@ static void Cmd_get_type(void)
     switch (typeVar)
     {
     case AI_TYPE1_USER: // AI user primary type
-        AI_THINKING_STRUCT->funcResult = gBattleMons[sBattler_AI].type1;
+        AI_THINKING_STRUCT->funcResult = gBattleMons[sBattler_AI].types[0];
         break;
     case AI_TYPE1_TARGET: // target primary type
-        AI_THINKING_STRUCT->funcResult = gBattleMons[gBattlerTarget].type1;
+        AI_THINKING_STRUCT->funcResult = gBattleMons[gBattlerTarget].types[0];
         break;
     case AI_TYPE2_USER: // AI user secondary type
-        AI_THINKING_STRUCT->funcResult = gBattleMons[sBattler_AI].type2;
+        AI_THINKING_STRUCT->funcResult = gBattleMons[sBattler_AI].types[1];
         break;
     case AI_TYPE2_TARGET: // target secondary type
-        AI_THINKING_STRUCT->funcResult = gBattleMons[gBattlerTarget].type2;
+        AI_THINKING_STRUCT->funcResult = gBattleMons[gBattlerTarget].types[1];
         break;
     case AI_TYPE_MOVE: // type of move being pointed to
         AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->moveConsidered].type;
@@ -1527,7 +1527,7 @@ static void Cmd_if_type_effectiveness(void)
 
     // TypeCalc does not assign to gMoveResultFlags, Cmd_typecalc does
     // This makes the check for gMoveResultFlags below always fail
-    // This is how you get the "dual non-immunity" glitch, where AI 
+    // This is how you get the "dual non-immunity" glitch, where AI
     // will use ineffective moves on immune pokémon if the second type
     // has a non-neutral, non-immune effectiveness
 #ifdef BUGFIX

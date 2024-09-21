@@ -1241,7 +1241,7 @@ static void ShowHideZoomingArea(bool8 show, bool8 zoomedIn)
 
 static void UpdateAreaHighlight(u8 cursorArea, u8 previousCursorArea)
 {
-    #define NON_HIGHLIGHT_AREA(area)((area) == CURSOR_AREA_NOTHING || (area) > CURSOR_AREA_CANCEL)
+    #define NON_HIGHLIGHT_AREA(area) ((area) == CURSOR_AREA_NOTHING || (area) > CURSOR_AREA_CANCEL)
 
     // If moving off highlightable area, unhighlight it
     switch (previousCursorArea)
