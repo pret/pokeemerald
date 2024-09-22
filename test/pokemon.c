@@ -325,25 +325,20 @@ TEST("givemon [vars]")
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_TERA_TYPE), TYPE_FIRE);
 }
 
-TEST("checkteratype works")
+TEST("checkteratype/setteratype work")
 {
     CreateMon(&gPlayerParty[0], SPECIES_WOBBUFFET, 100, 0, FALSE, 0, OT_ID_PRESET, 0);
 
     RUN_OVERWORLD_SCRIPT(
         checkteratype 0;
     );
-    EXPECT_EQ(VarGet(VAR_RESULT), TYPE_PSYCHIC);
-}
-
-TEST("setteratype works")
-{
-    CreateMon(&gPlayerParty[0], SPECIES_WOBBUFFET, 100, 0, FALSE, 0, OT_ID_PRESET, 0);
+    EXPECT(VarGet(VAR_RESULT) == TYPE_PSYCHIC);
 
     RUN_OVERWORLD_SCRIPT(
         setteratype TYPE_FIRE, 0;
         checkteratype 0;
     );
-    EXPECT_EQ(VarGet(VAR_RESULT), TYPE_FIRE);
+    EXPECT(VarGet(VAR_RESULT) == TYPE_FIRE);
 }
 
 TEST("createmon [simple]")
