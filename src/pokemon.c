@@ -2791,6 +2791,8 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
             {
                 const u8 *types = gSpeciesInfo[substruct0->species].types;
                 retVal = (boxMon->personality & 0x1) == 0 ? types[0] : types[1];
+                // To avoid this value changing upon form change/evolution, we directly set it for future cases
+                SetBoxMonData(boxMon, MON_DATA_TERA_TYPE, &retVal);
             }
             else
             {
