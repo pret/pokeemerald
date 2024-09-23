@@ -1566,7 +1566,7 @@ static const struct CompressedSpriteSheet sStatusIconsSpriteSheet =
 
 static const struct CompressedSpritePalette sStatusIconsSpritePalette =
 {
-#if BW_SUMMARY_BW_STATUS_ICONS
+#if BW_SUMMARY_BW_STATUS_ICONS == TRUE
     .data = sStatusPal_Icons,
 #else
     .data = gStatusPal_Icons,
