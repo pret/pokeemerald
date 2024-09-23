@@ -4976,11 +4976,6 @@ static u8 CreateMonSprite(struct Pokemon *unused, bool32 isShadow)
     gSprites[spriteId].callback = SpriteCB_Pokemon;
     gSprites[spriteId].oam.priority = 2;
 
-    if (!IsMonSpriteNotFlipped(summary->species2))
-        gSprites[spriteId].hFlip = FALSE;
-    else
-        gSprites[spriteId].hFlip = TRUE;
-
     if (isShadow)
     {
         shadowPalette = LoadSpritePalette(&sSpritePal_MonShadow);
@@ -4999,7 +4994,7 @@ static void SpriteCB_Pokemon(struct Sprite *sprite)
 
     if (!gPaletteFade.active && sprite->sDelayAnim != 1)
     {
-        sprite->sDontFlip = !IsMonSpriteNotFlipped(sprite->sSpecies);
+        sprite->sDontFlip = TRUE;
 
         if (!sMonSummaryScreen->monAnimPlayed) // only play cry on the first time mon is animated
             PlayMonCry();
