@@ -30,6 +30,7 @@
 #define BW_SUMMARY_ALPHA_BLEND                      TRUE                // enables alpha blending (semi-transparency)
 #define BW_SUMMARY_MON_IDLE_ANIMS                   TRUE                // loops the mon animations regularly as an "idle" anim
 #define BW_SUMMARY_MON_SHADOWS                      TRUE                // displays a shadow for the mon sprite
+#define BW_SUMMARY_SHOW_TERA_TYPE                   FALSE               // show tera type icons
 
 /* Info for users
 
