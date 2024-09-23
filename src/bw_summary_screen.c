@@ -1546,16 +1546,29 @@ static const union AnimCmd *const sSpriteAnimTable_StatusCondition[] = {
     sSpriteAnim_StatusFrostbite,
 };
 
+#if BW_SUMMARY_BW_STATUS_ICONS == TRUE
+static const u32 sStatusGfx_Icons[] = INCBIN_U32("graphics/summary_screen/bw/status_icons.4bpp.lz");
+static const u32 sStatusPal_Icons[] = INCBIN_U32("graphics/summary_screen/bw/status_icons.gbapal.lz");
+#endif
+
 static const struct CompressedSpriteSheet sStatusIconsSpriteSheet =
 {
+#if BW_SUMMARY_BW_STATUS_ICONS == TRUE
+    .data = sStatusGfx_Icons,
+#else
     .data = gStatusGfx_Icons,
+#endif
     .size = 0x400,
     .tag = TAG_MON_STATUS
 };
 
 static const struct CompressedSpritePalette sStatusIconsSpritePalette =
 {
+#if BW_SUMMARY_BW_STATUS_ICONS
+    .data = sStatusPal_Icons,
+#else
     .data = gStatusPal_Icons,
+#endif
     .tag = TAG_MON_STATUS
 };
 
