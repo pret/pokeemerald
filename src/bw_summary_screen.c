@@ -4989,6 +4989,7 @@ static u8 CreateMonSprite(struct Pokemon *unused, bool32 isShadow)
 
     if (isShadow)
     {
+        FreeSpritePaletteByTag(TAG_MON_SHADOW); // reload the palette entirely because some sprite anims modify it
         shadowPalette = LoadSpritePalette(&sSpritePal_MonShadow);
         gSprites[spriteId].oam.paletteNum = shadowPalette;
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
