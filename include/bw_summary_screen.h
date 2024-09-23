@@ -27,6 +27,7 @@
 #define BW_SUMMARY_ALPHA_BLEND                      TRUE                // enables alpha blending (semi-transparency)
 #define BW_SUMMARY_MON_IDLE_ANIMS                   TRUE                // loops the mon animations regularly as an "idle" anim
 #define BW_SUMMARY_MON_IDLE_ANIMS_FRAMES            300                 // number of frames between each idle anim. Emerald runs at 60FPS by default
+#define BW_SUMMARY_MON_SHADOWS                      TRUE                // displays a shadow for the mon sprite
 
 /* Info for users
 
