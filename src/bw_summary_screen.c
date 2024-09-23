@@ -2710,6 +2710,12 @@ static void PssScrollEnd(u8 taskId)
     if (sMonSummaryScreen->currPageIndex == PSS_PAGE_SKILLS && BW_SUMMARY_IV_EV_DISPLAY == BW_IV_EV_GRADED)
         ShowGradeIcons(SKILL_STATE_IVS);
 
+    if (sMonSummaryScreen->currPageIndex == PSS_PAGE_INFO)
+    {
+        if (sMonSummaryScreen->markingsSprite != NULL)
+           sMonSummaryScreen->markingsSprite->invisible = FALSE; 
+    } 
+
     SwitchTaskToFollowupFunc(taskId);
 }
 
@@ -4757,6 +4763,7 @@ static void HidePageSpecificSprites(void)
         if (sMonSummaryScreen->spriteIds[i] != SPRITE_NONE)
             SetSpriteInvisibility(i, TRUE);
     }
+    sMonSummaryScreen->markingsSprite->invisible = TRUE;
 }
 
 static void SetTypeIcons(void)
@@ -5081,8 +5088,8 @@ static void CreateMonMarkingsSprite(struct Pokemon *mon)
         StartSpriteAnim(sprite, GetMonData(mon, MON_DATA_MARKINGS));
         sMonSummaryScreen->markingsSprite->x = 19;
         sMonSummaryScreen->markingsSprite->y = 102;
-        sMonSummaryScreen->markingsSprite->oam.priority = 3;
-        if (sMonSummaryScreen->mode == BW_SUMMARY_MODE_SELECT_MOVE)
+        sMonSummaryScreen->markingsSprite->oam.priority = 2;
+        if (sMonSummaryScreen->currPageIndex != PSS_PAGE_INFO)
             sMonSummaryScreen->markingsSprite->invisible = TRUE;
     }
 }
