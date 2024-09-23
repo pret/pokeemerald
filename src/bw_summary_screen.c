@@ -1943,9 +1943,13 @@ static void InitBGs(void)
     ScheduleBgCopyTilemapToVram(2);
     ScheduleBgCopyTilemapToVram(1);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
-    if (BW_SUMMARY_ALPHA_BLEND)
+    if (BW_SUMMARY_BG_BLEND || BW_SUMMARY_MON_SHADOWS)
     {
-        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_BG3 | BLDCNT_TGT2_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1);
+        if (BW_SUMMARY_BG_BLEND)
+            SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_BG3 | BLDCNT_TGT2_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG1);
+        else
+            SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_BG3 | BLDCNT_TGT2_BG2 | BLDCNT_EFFECT_BLEND);
+
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(14, 6));
     }
     ShowBg(3);
@@ -2252,7 +2256,7 @@ static void CloseSummaryScreen(u8 taskId)
 {
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE && !gPaletteFade.active)
     {
-        if (BW_SUMMARY_ALPHA_BLEND)
+        if (BW_SUMMARY_BG_BLEND || BW_SUMMARY_MON_SHADOWS)
         {
             SetGpuReg(REG_OFFSET_BLDCNT, 0);
             SetGpuReg(REG_OFFSET_BLDALPHA, 0);

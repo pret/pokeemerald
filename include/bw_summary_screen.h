@@ -27,7 +27,7 @@
                                                                         // out of the box the vanilla icons don't fit well, this is mostly a compatibility
                                                                         // option for people who already use custom icons everywhere else
 #define BW_SUMMARY_SCROLLING_BG                     TRUE                // enables scrolling animated background
-#define BW_SUMMARY_ALPHA_BLEND                      TRUE                // enables alpha blending (semi-transparency)
+#define BW_SUMMARY_BG_BLEND                         TRUE                // enables alpha blending for the main UI (semi-transparency)
 #define BW_SUMMARY_MON_IDLE_ANIMS                   TRUE                // loops the mon animations regularly as an "idle" anim
 #define BW_SUMMARY_MON_SHADOWS                      TRUE                // displays a shadow for the mon sprite
 #define BW_SUMMARY_SHOW_TERA_TYPE                   FALSE               // show tera type icons
@@ -46,6 +46,15 @@ task functions.
 
 BG scrolling speed can be modified by altering the value parameter
 of the ChangeBgX and ChangeBgY functions in VBlank()
+
+Main UI and shadow transparency levels can be adjusted by changing the
+value written to the alpha blend register in this line in bw_summary_screen.c:
+
+static void InitBGs(void)
+...
+SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(14, 6));
+...
+}
 
 */
 
