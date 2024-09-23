@@ -11,6 +11,8 @@
 #define BW_IV_EV_HIDDEN                             0       // don't show IVs and EVs
 #define BW_IV_EV_GRADED                             1       // show graded values for IVs and EVs
 #define BW_IV_EV_PRECISE                            2       // show precise values for IVs and EVs
+#define BW_SUMMARY_MON_IDLE_ANIMS_FRAMES            300     // number of frames between each idle anim IF BW_SUMMARY_MON_IDLE_ANIMS is true.
+                                                            // for reference, Emerald runs at 60FPS by default
 
 // configs
 #define BW_SUMMARY_AUTO_FORMAT_MOVE_DESCRIPTIONS    TRUE                // automatically formats move descriptions to fit the new box size. disable if you want to format them manually
@@ -27,7 +29,6 @@
 #define BW_SUMMARY_SCROLLING_BG                     TRUE                // enables scrolling animated background
 #define BW_SUMMARY_ALPHA_BLEND                      TRUE                // enables alpha blending (semi-transparency)
 #define BW_SUMMARY_MON_IDLE_ANIMS                   TRUE                // loops the mon animations regularly as an "idle" anim
-#define BW_SUMMARY_MON_IDLE_ANIMS_FRAMES            300                 // number of frames between each idle anim. Emerald runs at 60FPS by default
 #define BW_SUMMARY_MON_SHADOWS                      TRUE                // displays a shadow for the mon sprite
 
 /* Info for users

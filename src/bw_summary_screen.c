@@ -768,6 +768,7 @@ static void (*const sTextPrinterTasks[])(u8 taskId) =
 #define TAG_STAT_GRADES 30007
 #define TAG_FRIENDSHIP_ICON 30008
 #define TAG_TERA_TYPE 30009
+#define TAG_MON_SHADOW 30010
 
 enum BWCategoryIcon
 {
@@ -1653,13 +1654,11 @@ static const struct SpriteTemplate sSpriteTemplate_PokerusCuredIcon =
     .callback = SpriteCallbackDummy
 };
 
-#define PALTAG_SHADOW 0x3000
+static const u16 sMonShadowPalette[] = INCBIN_U16("graphics/summary_screen/bw/shadow.gbapal");
 
-static const u16 sShadowPalette[] = INCBIN_U16("graphics/summary_screen/bw/shadow.gbapal");
-
-static const struct SpritePalette sSpritePal_Shadow =
+static const struct SpritePalette sSpritePal_MonShadow =
 {
-    sShadowPalette, PALTAG_SHADOW
+    sMonShadowPalette, TAG_MON_SHADOW
 };
 
 // code
@@ -4965,7 +4964,7 @@ static u8 CreateMonSprite(struct Pokemon *unused, bool32 isShadow)
 
     if (isShadow)
     {
-        shadowPalette = LoadSpritePalette(&sSpritePal_Shadow);
+        shadowPalette = LoadSpritePalette(&sSpritePal_MonShadow);
         gSprites[spriteId].oam.paletteNum = shadowPalette;
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
         gSprites[spriteId].x -= 5;
