@@ -4368,13 +4368,10 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
 
                 if (gSpecialStatuses[battler].switchInAbilityDone)
                     break;
-                if (gBattleResources->flags->flags[battler] & RESOURCE_FLAG_TRACED)
-                    break;
 
                 side = (BATTLE_OPPOSITE(GetBattlerPosition(battler))) & BIT_SIDE;
                 target1 = GetBattlerAtPosition(side);
                 target2 = GetBattlerAtPosition(side + BIT_FLANK);
-                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
                 if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
                 {
                     if (!gAbilitiesInfo[gBattleMons[target1].ability].cantBeTraced && gBattleMons[target1].hp != 0
@@ -4393,11 +4390,10 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
 
                 if (effect != 0)
                 {
-                    BattleScriptPushCursorAndCallback(BattleScript_TraceActivatesEnd3);
-                    gBattleResources->flags->flags[battler] &= ~RESOURCE_FLAG_TRACED;
+                    BattleScriptPushCursorAndCallback(BattleScript_TraceActivates);
                     gBattleStruct->tracedAbility[battler] = gLastUsedAbility = gBattleMons[chosenTarget].ability;
                     RecordAbilityBattle(chosenTarget, gLastUsedAbility); // Record the opposing battler has this ability
-                    battler = gBattlerAbility = gBattleScripting.battler = battler;
+                    gBattlerAbility = battler;
 
                     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, chosenTarget, gBattlerPartyIndexes[chosenTarget])
                     PREPARE_ABILITY_BUFFER(gBattleTextBuff2, gLastUsedAbility)
@@ -5214,7 +5210,6 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 break;
             case ABILITY_GOOD_AS_GOLD:
                 if (IS_MOVE_STATUS(gCurrentMove)
-                 && !(moveTarget & MOVE_TARGET_USER)
                  && !(moveTarget & MOVE_TARGET_OPPONENTS_FIELD)
                  && !(moveTarget & MOVE_TARGET_ALL_BATTLERS))
                     effect = 3;
@@ -6388,14 +6383,14 @@ bool32 TryPrimalReversion(u32 battler)
     {
         if (gBattlerAttacker == battler)
         {
-            BattleScriptExecute(BattleScript_PrimalReversion);
+            BattleScriptPushCursorAndCallback(BattleScript_PrimalReversion);
         }
         else
         {
             // edge case for scenarios like a switch-in after activated eject button
             gBattleScripting.savedBattler = gBattlerAttacker;
             gBattlerAttacker = battler;
-            BattleScriptExecute(BattleScript_PrimalReversionRestoreAttacker);
+            BattleScriptPushCursorAndCallback(BattleScript_PrimalReversionRestoreAttacker);
         }
         return TRUE;
     }
@@ -8706,7 +8701,7 @@ u32 CountBattlerStatIncreases(u32 battler, bool32 countEvasionAcc)
 
 u32 GetMoveTargetCount(u32 move, u32 battlerAtk, u32 battlerDef)
 {
-    switch (GetBattlerMoveTargetType(gBattlerAttacker, move))
+    switch (GetBattlerMoveTargetType(battlerAtk, move))
     {
     case MOVE_TARGET_BOTH:
         return !(gAbsentBattlerFlags & gBitTable[battlerDef])
@@ -11816,19 +11811,19 @@ bool32 CanTargetPartner(u32 battlerAtk, u32 battlerDef)
          && battlerDef != BATTLE_PARTNER(battlerAtk));
 }
 
-static inline bool32 DoesCurrentTargetHaveAbilityImmunity(void)
+static inline bool32 DoesBattlerHaveAbilityImmunity(u32 battlerDef)
 {
-    return (AbilityBattleEffects(ABILITYEFFECT_WOULD_BLOCK, gBattlerTarget, 0, 0, 0)
-         || AbilityBattleEffects(ABILITYEFFECT_WOULD_ABSORB, gBattlerTarget, 0, 0, 0));
+    return (AbilityBattleEffects(ABILITYEFFECT_WOULD_BLOCK, battlerDef, 0, 0, 0)
+         || AbilityBattleEffects(ABILITYEFFECT_WOULD_ABSORB, battlerDef, 0, 0, 0));
 }
 
-bool32 TargetFullyImmuneToCurrMove(u32 BattlerAtk, u32 battlerDef)
+bool32 TargetFullyImmuneToCurrMove(u32 battlerAtk, u32 battlerDef)
 {
     u32 moveType = 0;
     GET_MOVE_TYPE(gCurrentMove, moveType);
 
-    return ((CalcTypeEffectivenessMultiplier(gCurrentMove, moveType, BattlerAtk, battlerDef, GetBattlerAbility(battlerDef), FALSE) == UQ_4_12(0.0))
-         || IsBattlerProtected(BattlerAtk, battlerDef, gCurrentMove)
+    return ((CalcTypeEffectivenessMultiplier(gCurrentMove, moveType, battlerAtk, battlerDef, GetBattlerAbility(battlerDef), FALSE) == UQ_4_12(0.0))
+         || IsBattlerProtected(battlerAtk, battlerDef, gCurrentMove)
          || IsSemiInvulnerable(battlerDef, gCurrentMove)
-         || DoesCurrentTargetHaveAbilityImmunity());
+         || DoesBattlerHaveAbilityImmunity(battlerDef));
 }

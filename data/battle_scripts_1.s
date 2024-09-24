@@ -6961,12 +6961,12 @@ BattleScript_WishMegaEvolution::
 
 BattleScript_PrimalReversion::
 	call BattleScript_PrimalReversionRet
-	end2
+	end3
 
 BattleScript_PrimalReversionRestoreAttacker::
 	call BattleScript_PrimalReversionRet
 	copybyte gBattlerAttacker, sSAVED_BATTLER
-	end2
+	end3
 
 BattleScript_PrimalReversionRet::
 	flushtextbox
@@ -7675,15 +7675,11 @@ BattleScript_EmergencyExitWildNoPopUp::
 
 BattleScript_TraceActivates::
 	pause B_WAIT_TIME_SHORT
-	call BattleScript_AbilityPopUp
+	call BattleScript_AbilityPopUpScripting
 	printstring STRINGID_PKMNTRACED
 	waitmessage B_WAIT_TIME_LONG
 	settracedability BS_SCRIPTING
 	switchinabilities BS_SCRIPTING
-	return
-
-BattleScript_TraceActivatesEnd3::
-	call BattleScript_TraceActivates
 	end3
 
 BattleScript_ReceiverActivates::
@@ -10011,7 +10007,7 @@ BattleScript_BerserkGeneRet_End:
 
 BattleScript_BoosterEnergyEnd2::
 	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT, sB_ANIM_ARG1
-	call BattleScript_AbilityPopUpTarget
+	call BattleScript_AbilityPopUpScripting
 	printstring STRINGID_BOOSTERENERGYACTIVATES
 	waitmessage B_WAIT_TIME_MED
 	printstring STRINGID_STATWASHEIGHTENED
