@@ -19,7 +19,9 @@
       "direction": "left"
     }
   ],
-  "object_events": [],
+  "object_events": [
+
+  ],
   "warp_events": [
     {
       "x": 18,

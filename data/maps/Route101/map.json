@@ -104,7 +104,9 @@
       "flag": "FLAG_HIDE_ROUTE_101_BOY"
     }
   ],
-  "warp_events": [],
+  "warp_events": [
+
+  ],
   "coord_events": [
     {
       "type": "trigger",
