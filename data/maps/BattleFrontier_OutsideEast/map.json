@@ -525,5 +525,12 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Common_EventScript_ShowPokemonCenterSign"
     }
+  ],
+  "heal_locations": [
+    {
+      "id": "HEAL_LOCATION_BATTLE_FRONTIER_OUTSIDE_EAST",
+      "x": 3,
+      "y": 52
+    }
   ]
 }
