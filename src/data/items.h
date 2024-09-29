@@ -13867,6 +13867,7 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
+        .effect = gItemEffect_FullHeal,
         .flingPower = 30,
         .iconPic = gItemIcon_JubilifeMuffin,
         .iconPalette = gItemIconPalette_JubilifeMuffin,
