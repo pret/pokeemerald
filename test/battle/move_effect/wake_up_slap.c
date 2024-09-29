@@ -35,7 +35,7 @@ SINGLE_BATTLE_TEST("Wake-Up Slap does not cure paralyzed pokemons behind substit
     }
 }
 
-SINGLE_BATTLE_TEST("Wake-Up Slap get incread power vs. sleeping targets")
+SINGLE_BATTLE_TEST("Wake-Up Slap gets increased power against sleeping targets")
 {
     u32 status1;
     PARAMETRIZE { status1 = STATUS1_SLEEP; }
