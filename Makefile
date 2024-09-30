@@ -178,6 +178,8 @@ ifneq (,$(MAKECMDGOALS))
   endif
 endif
 
+.SHELLSTATUS ?= 0
+
 ifeq ($(SETUP_PREREQS),1)
   # If set on: Default target or a rule requiring a scan
   # Forcibly execute `make tools` since we need them for what we are doing.
