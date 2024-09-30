@@ -40,7 +40,7 @@ struct EReaderData
 
 static void Task_EReader(u8);
 
-struct EReaderData gEReaderData;
+COMMON_DATA struct EReaderData gEReaderData = {0};
 
 extern const u8 gMultiBootProgram_EReader_Start[];
 extern const u8 gMultiBootProgram_EReader_End[];

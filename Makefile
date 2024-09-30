@@ -181,9 +181,15 @@ endif
 ifeq ($(SETUP_PREREQS),1)
   # If set on: Default target or a rule requiring a scan
   # Forcibly execute `make tools` since we need them for what we are doing.
-  $(call infoshell, $(MAKE) -f make_tools.mk)
+  $(foreach line, $(shell $(MAKE) -f make_tools.mk | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
+  ifneq ($(.SHELLSTATUS),0)
+    $(error Errors occurred while building tools. See error messages above for more details)
+  endif
   # Oh and also generate mapjson sources before we use `SCANINC`.
-  $(call infoshell, $(MAKE) generated)
+  $(foreach line, $(shell $(MAKE) generated | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
+  ifneq ($(.SHELLSTATUS),0)
+    $(error Errors occurred while generating map-related sources. See error messages above for more details)
+  endif
 endif
 
 # Collect sources
@@ -255,6 +261,8 @@ include spritesheet_rules.mk
 include json_data_rules.mk
 include audio_rules.mk
 
+# NOTE: Tools must have been built prior (FIXME)
+# so you can't really call this rule directly
 generated: $(AUTO_GEN_TARGETS)
 
 %.s:   ;
@@ -270,8 +278,6 @@ generated: $(AUTO_GEN_TARGETS)
 %.lz:     %      ; $(GFX) $< $@
 %.rl:     %      ; $(GFX) $< $@
 
-# NOTE: Tools must have been built prior (FIXME)
-generated: tools $(AUTO_GEN_TARGETS)
 clean-generated:
 	-rm -f $(AUTO_GEN_TARGETS)
 
@@ -390,6 +396,7 @@ libagbsyscall:
 # Elf from object files
 $(ELF): $(LD_SCRIPT) $(LD_SCRIPT_DEPS) $(OBJS) libagbsyscall
 	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$< --print-memory-usage -o ../../$@ $(OBJS_REL) $(LIB) | cat
+	@echo "cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$< --print-memory-usage -o ../../$@ <objs> <libs> | cat"
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
 # Builds the rom from the elf file

@@ -1,5 +1,0 @@
-gRfuSlotStatusUNI
-gRfuSlotStatusNI
-gRfuLinkStatus
-gRfuStatic
-gRfuFixed
