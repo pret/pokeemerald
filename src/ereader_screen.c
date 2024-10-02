@@ -40,6 +40,9 @@ struct EReaderData
 
 static void Task_EReader(u8);
 
+// This belongs in COMMON somewhere between party_menu and ereader_screen, but it's unused so it's unclear where.
+UNUSED u8 gUnknownSpace[64];
+
 struct EReaderData gEReaderData;
 
 extern const u8 gMultiBootProgram_EReader_Start[];
