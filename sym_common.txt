@@ -26,9 +26,7 @@
 	.include "tv.o"
 	.include "mauville_old_man.o"
 	.include "image_processing_effects.o"
-
 	.align 4
-
 	.include "contest_painting.o"
 	.include "field_specials.o"
 	.include "evolution_scene.o"
@@ -39,9 +37,7 @@
 	.include "battle_anim_throw.o"
 	.include "battle_factory_screen.o"
 	.include "apprentice.o"
-
 	.align 4
-
 	.include "list_menu.o"
 	.include "party_menu.o"
 	.include "ereader_screen.o"
