@@ -823,7 +823,7 @@ DOUBLE_BATTLE_TEST("Pledge move combo doesn't trigger on opponent's Pledge move 
         OPPONENT(SPECIES_WYNAUT) { Speed(5); Status1(STATUS1_SLEEP_TURN(2)); }
     } WHEN {
         TURN { MOVE(opponentLeft, MOVE_FIRE_PLEDGE, target: playerLeft);
-               MOVE(opponentRight, MOVE_GRASS_PLEDGE, target: playerLeft); 
+               MOVE(opponentRight, MOVE_GRASS_PLEDGE, target: playerLeft);
                MOVE(playerLeft, MOVE_GRASS_PLEDGE, target: opponentRight); }
     } SCENE {
         NONE_OF {

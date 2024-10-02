@@ -21882,7 +21882,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gShinyOverworldPalette_OgerponCornerstoneMask[] = INCBIN_U32("graphics/pokemon/ogerpon/cornerstone/overworld_shiny.gbapal.lz");
     const u32 gOverworldPalette_OgerponTealMask[] = INCBIN_U32("graphics/pokemon/ogerpon/overworld_normal.gbapal.lz");
     const u32 gShinyOverworldPalette_OgerponTealMask[] = INCBIN_U32("graphics/pokemon/ogerpon/overworld_shiny.gbapal.lz");
-    
+
     const u32 gObjectEventPic_OgerponTealMaskTeraTera[] = INCBIN_COMP("graphics/pokemon/ogerpon/overworld.4bpp");
     const u32 gObjectEventPic_OgerponWellspringMaskTera[] = INCBIN_COMP("graphics/pokemon/ogerpon/wellspring/overworld.4bpp");
     const u32 gObjectEventPic_OgerponHearthflameMaskTera[] = INCBIN_COMP("graphics/pokemon/ogerpon/hearthflame/overworld.4bpp");
