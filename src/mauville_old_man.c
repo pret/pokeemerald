@@ -31,7 +31,7 @@ static void Storyteller_ResetFlag(void);
 
 static u8 sSelectedStory;
 
-struct BardSong gBardSong;
+COMMON_DATA struct BardSong gBardSong = {0};
 
 static EWRAM_DATA u16 sUnknownBardRelated = 0;
 static EWRAM_DATA struct MauvilleManStoryteller * sStorytellerPtr = NULL;

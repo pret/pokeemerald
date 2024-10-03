@@ -1,3 +1,0 @@
-gMonShrinkDuration
-gMonShrinkDelta
-gMonShrinkDistance

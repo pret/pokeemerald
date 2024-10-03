@@ -42,6 +42,7 @@ SECTIONS {
 
         /* COMMON starts at 0x30022A8 */
         INCLUDE "sym_common.ld"
+        src/*.o(COMMON);
         *libc.a:sbrkr.o(COMMON);
     } > IWRAM
 

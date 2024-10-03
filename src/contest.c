@@ -358,7 +358,7 @@ EWRAM_DATA bool8 gCurContestWinnerIsForArtist = 0;
 EWRAM_DATA u8 gCurContestWinnerSaveIdx = 0;
 
 // IWRAM common vars.
-u32 gContestRngValue;
+COMMON_DATA u32 gContestRngValue = 0;
 
 extern const u8 gText_LinkStandby4[];
 extern const u8 gText_BDot[];

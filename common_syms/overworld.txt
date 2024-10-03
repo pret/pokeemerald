@@ -1,8 +1,0 @@
-gOverworldTilemapBuffer_Bg2
-gOverworldTilemapBuffer_Bg1
-gOverworldTilemapBuffer_Bg3
-gHeldKeyCodeToSend
-gFieldCallback
-gFieldCallback2
-gLocalLinkPlayerId
-gFieldLinkPlayerCount

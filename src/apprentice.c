@@ -75,9 +75,9 @@ struct ApprenticeQuestionData
 };
 
 // IWRAM common
-struct ApprenticePartyMovesData *gApprenticePartyMovesData;
-struct ApprenticeQuestionData *gApprenticeQuestionData;
-void (*gApprenticeFunc)(void);
+COMMON_DATA struct ApprenticePartyMovesData *gApprenticePartyMovesData = NULL;
+COMMON_DATA struct ApprenticeQuestionData *gApprenticeQuestionData = NULL;
+COMMON_DATA void (*gApprenticeFunc)(void) = NULL;
 
 // This file's functions.
 static u16 GetRandomAlternateMove(u8 monId);

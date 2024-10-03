@@ -4,16 +4,16 @@
 #include "constants/rgb.h"
 
 // IWRAM common
-u8 gCanvasColumnStart;
-u16 *gCanvasPixels;
-u8 gCanvasRowEnd;
-u8 gCanvasHeight;
-u8 gCanvasColumnEnd;
-u8 gCanvasRowStart;
-u8 gCanvasMonPersonality;
-u8 gCanvasWidth;
-u16 *gCanvasPalette;
-u16 gCanvasPaletteStart;
+COMMON_DATA u8 gCanvasColumnStart = 0;
+COMMON_DATA u16 *gCanvasPixels = NULL;
+COMMON_DATA u8 gCanvasRowEnd = 0;
+COMMON_DATA u8 gCanvasHeight = 0;
+COMMON_DATA u8 gCanvasColumnEnd = 0;
+COMMON_DATA u8 gCanvasRowStart = 0;
+COMMON_DATA u8 gCanvasMonPersonality = 0;
+COMMON_DATA u8 gCanvasWidth = 0;
+COMMON_DATA u16 *gCanvasPalette = NULL;
+COMMON_DATA u16 gCanvasPaletteStart = 0;
 
 static void ApplyImageEffect_Pointillism(void);
 static void ApplyImageEffect_Blur(void);
