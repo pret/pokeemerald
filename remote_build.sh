@@ -25,7 +25,8 @@ git push build --force-with-lease
 if [[ $retVal -eq 0 ]]; then
     commit_msg=$(git log -1 --pretty=%B)
     if [[ "$commit_msg" == "$temp_commit_msg" ]]; then
-        git reset "$old_head" &>/dev/null
+        # Keep i(N)tent to add
+        git reset --mixed -N "$old_head" &>/dev/null
     fi
 fi
 set -x
