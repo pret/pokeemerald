@@ -112,9 +112,11 @@ extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
 extern const struct SpriteTemplate gAncientPowerRockSpriteTemplate[];
 
-#define COPYRIGHT_INITIALIZE     0
-#define COPYRIGHT_START_FADE     140
-#define COPYRIGHT_START_INTRO    141
+enum {
+    COPYRIGHT_INITIALIZE,
+    COPYRIGHT_START_FADE = 140,
+    COPYRIGHT_START_INTRO,
+};
 
 #define TAG_VOLBEAT   1500
 #define TAG_TORCHIC   1501
