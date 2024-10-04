@@ -11,7 +11,7 @@ These scripts exist to help developers make the transition between refactored sy
 All migration scripts require [`python3`](https://www.python.org/downloads/) to be installed. Migration scripts are executed by running the following commands from the root directory of a developer's project.
 
 ```bash
-chmod +x migration_scripts/*.py ; #give permision to make the script executable
+chmod +x migration_scripts/*.py ; #give permission to make the script executable
 python3 migration_scripts/*.py ; #run the migration script
 ```
 

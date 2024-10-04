@@ -2105,15 +2105,15 @@
 	@ The rest of the arguments are the stat change values to each stat.
 	@ For example, giving the first opponent +1 to atk and -2 to speed would be: settotemboost B_POSITION_OPPONENT_LEFT, 1, 0, -2
 	.macro settotemboost battler:req, atk=0,def=0,speed=0,spatk=0,spdef=0,acc=0,evas=0
-	setvar VAR_0x8000, \battler
-	setvar VAR_0x8001, \atk
-	setvar VAR_0x8002, \def
-	setvar VAR_0x8003, \speed
-	setvar VAR_0x8004, \spatk
-	setvar VAR_0x8005, \spdef
-	setvar VAR_0x8006, \acc
-	setvar VAR_0x8007, \evas
-	special SetTotemBoost
+	callnative ScriptSetTotemBoost
+	.2byte \battler
+	.2byte \atk
+	.2byte \def
+	.2byte \speed
+	.2byte \spatk
+	.2byte \spdef
+	.2byte \acc
+	.2byte \evas
 	.endm
 
 	@ useful totem boost macros

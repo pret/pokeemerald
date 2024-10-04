@@ -2559,7 +2559,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_TERA_SHIFT] =
     {
         .name = _("Tera Shift"),
-        .description = COMPOUND_STRING("Terasteralizes upon entry."),
+        .description = COMPOUND_STRING("Terastallizes upon entry."),
         .aiRating = 10,
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,

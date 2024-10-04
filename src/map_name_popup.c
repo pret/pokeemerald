@@ -625,7 +625,7 @@ static void LoadMapNamePopUpWindowBg(void)
         switch (popUpThemeId)
         {
             // add additional gen 5-style pop-up themes as cases here
-            case MAPPOPUP_THEME_BW_DEFAULT:
+            default: // MAPPOPUP_THEME_BW_DEFAULT
                 if (OW_POPUP_BW_COLOR == OW_POPUP_BW_COLOR_WHITE)
                     LoadPalette(sMapPopUpTilesPalette_BW_White, BG_PLTT_ID(14), sizeof(sMapPopUpTilesPalette_BW_White));
                 else

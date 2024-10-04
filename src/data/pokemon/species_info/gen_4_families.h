@@ -6348,6 +6348,14 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .iconSprite = gMonIcon_ShayminSky,
         .iconPalIndex = 1,
         FOOTPRINT(Shaymin)
+        OVERWORLD(
+            sPicTable_ShayminSky,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            gOverworldPalette_ShayminSky,
+            gShinyOverworldPalette_ShayminSky
+        )
         .isMythical = TRUE,
         .isFrontierBanned = TRUE,
         .levelUpLearnset = sShayminSkyLevelUpLearnset,
