@@ -100,3 +100,109 @@ SINGLE_BATTLE_TEST("Quark Drive activates on switch-in")
         MESSAGE("Iron Moth's Sp. Atk was heightened!");
     }
 }
+
+SINGLE_BATTLE_TEST("Quark Drive activates on Electric Terrain even if not grounded")
+{
+    GIVEN {
+        ASSUME(gSpeciesInfo[SPECIES_IRON_JUGULIS].types[0] == TYPE_FLYING || gSpeciesInfo[SPECIES_IRON_JUGULIS].types[1] == TYPE_FLYING);
+        PLAYER(SPECIES_IRON_JUGULIS) { Ability(ABILITY_QUARK_DRIVE); }
+        OPPONENT(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); };
+    } WHEN {
+        TURN { }
+    } SCENE {
+        ABILITY_POPUP(opponent, ABILITY_ELECTRIC_SURGE);
+        ABILITY_POPUP(player, ABILITY_QUARK_DRIVE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Quark Drive boosts Attack 1st in case of a stat tie")
+{
+    GIVEN {
+        PLAYER(SPECIES_IRON_TREADS) { Ability(ABILITY_QUARK_DRIVE); Attack(5); Defense(5); SpAttack(5); SpDefense(5); Speed(5); }
+        OPPONENT(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); Speed(5); }
+    } WHEN {
+        TURN { }
+    } SCENE {
+        ABILITY_POPUP(opponent, ABILITY_ELECTRIC_SURGE);
+        ABILITY_POPUP(player, ABILITY_QUARK_DRIVE);
+        MESSAGE("Iron Treads's Attack was heightened!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Quark Drive boosts Defense 2nd in case of a stat tie")
+{
+    GIVEN {
+        PLAYER(SPECIES_IRON_TREADS) { Ability(ABILITY_QUARK_DRIVE); Attack(4); Defense(5); SpAttack(5); SpDefense(5); Speed(5); }
+        OPPONENT(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); Speed(5); }
+    } WHEN {
+        TURN { }
+    } SCENE {
+        ABILITY_POPUP(opponent, ABILITY_ELECTRIC_SURGE);
+        ABILITY_POPUP(player, ABILITY_QUARK_DRIVE);
+        MESSAGE("Iron Treads's Defense was heightened!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Quark Drive boosts Special Attack 3rd in case of a stat tie")
+{
+    GIVEN {
+        PLAYER(SPECIES_IRON_TREADS) { Ability(ABILITY_QUARK_DRIVE); Attack(4); Defense(4); SpAttack(5); SpDefense(5); Speed(5); }
+        OPPONENT(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); Speed(5); }
+    } WHEN {
+        TURN { }
+    } SCENE {
+        ABILITY_POPUP(opponent, ABILITY_ELECTRIC_SURGE);
+        ABILITY_POPUP(player, ABILITY_QUARK_DRIVE);
+        MESSAGE("Iron Treads's Sp. Atk was heightened!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Quark Drive boosts Special Defense 4th in case of a stat tie")
+{
+    GIVEN {
+        PLAYER(SPECIES_IRON_TREADS) { Ability(ABILITY_QUARK_DRIVE); Attack(4); Defense(4); SpAttack(4); SpDefense(5); Speed(5); }
+        OPPONENT(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); Speed(5); }
+    } WHEN {
+        TURN { }
+    } SCENE {
+        ABILITY_POPUP(opponent, ABILITY_ELECTRIC_SURGE);
+        ABILITY_POPUP(player, ABILITY_QUARK_DRIVE);
+        MESSAGE("Iron Treads's Sp. Def was heightened!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Quark Drive activates in Electric Terrain before Booster Energy")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_IRON_TREADS) { Ability(ABILITY_QUARK_DRIVE); Item(ITEM_BOOSTER_ENERGY); }
+        OPPONENT(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); }
+    } WHEN {
+        TURN { SWITCH(player, 1); }
+    } SCENE {
+        ABILITY_POPUP(opponent, ABILITY_ELECTRIC_SURGE);
+        ABILITY_POPUP(player, ABILITY_QUARK_DRIVE);
+    } THEN {
+        EXPECT_EQ(player->item, ITEM_BOOSTER_ENERGY);
+    }
+}
+
+SINGLE_BATTLE_TEST("Quark Drive doesn't activate for a transformed battler")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_IRON_TREADS) { Ability(ABILITY_QUARK_DRIVE); Item(ITEM_BOOSTER_ENERGY); }
+        OPPONENT(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); Item(ITEM_BOOSTER_ENERGY); }
+    } WHEN {
+        TURN { SWITCH(player, 1); MOVE(opponent, MOVE_TRANSFORM); }
+    } SCENE {
+        ABILITY_POPUP(opponent, ABILITY_ELECTRIC_SURGE);
+        ABILITY_POPUP(player, ABILITY_QUARK_DRIVE);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TRANSFORM, opponent);
+        NOT ABILITY_POPUP(opponent, ABILITY_QUARK_DRIVE);
+    } THEN {
+        EXPECT_EQ(player->item, ITEM_BOOSTER_ENERGY);
+        EXPECT_EQ(opponent->item, ITEM_BOOSTER_ENERGY);
+        EXPECT_EQ(opponent->ability, ABILITY_QUARK_DRIVE);
+    }
+}
