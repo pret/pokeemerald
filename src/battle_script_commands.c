@@ -14150,6 +14150,7 @@ static void Cmd_tryswapitems(void)
                                   | (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE ? BATTLE_TYPE_TRAINER : 0)
                                   ))))
     {
+        DebugPrintf("tryswapitems failInstr"); //wiz1989
         gBattlescriptCurrInstr = cmd->failInstr;
     }
     else
@@ -14190,6 +14191,8 @@ static void Cmd_tryswapitems(void)
         {
             u16 oldItemAtk, *newItemAtk;
 
+            DebugPrintf("allow swap"); //wiz1989
+
             newItemAtk = &gBattleStruct->changedItems[gBattlerAttacker];
             oldItemAtk = gBattleMons[gBattlerAttacker].item;
             *newItemAtk = gBattleMons[gBattlerTarget].item;
@@ -14217,10 +14220,10 @@ static void Cmd_tryswapitems(void)
             if (!(sideAttacker == sideTarget && IsPartnerMonFromSameTrainer(gBattlerAttacker)))
             {
                 // if targeting your own side and you aren't in a multi battle, don't save items as stolen
-                //if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-                //    TrySaveExchangedItem(gBattlerAttacker, oldItemAtk);
+                if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
+                    TrySaveSwitchedItem(gBattlerAttacker, oldItemAtk); // Items switched on your own will won't be restored
                 if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
-                    TrySaveExchangedItem(gBattlerTarget, *newItemAtk);
+                    TrySaveExchangedItem(gBattlerTarget, *newItemAtk); // Items switched by your opponent can be restored
             }
 
             if (oldItemAtk != ITEM_NONE && *newItemAtk != ITEM_NONE)

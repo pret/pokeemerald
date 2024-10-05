@@ -596,8 +596,9 @@ struct BattleGimmickData
 
 struct LostItem
 {
-    u16 originalItem:15;
+    u16 originalItem:14;
     u16 stolen:1;
+    u16 exchanged:1;
 };
 
 #if HQ_RANDOM == TRUE
