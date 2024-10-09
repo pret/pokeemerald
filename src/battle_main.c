@@ -3750,7 +3750,6 @@ static void DoBattleIntro(void)
             gBattleStruct->eventsBeforeFirstTurnState = 0;
             gBattleStruct->switchInBattlerCounter = 0;
             gBattleStruct->overworldWeatherDone = FALSE;
-            SetAiLogicDataForTurn(AI_DATA); // get assumed abilities, hold effects, etc of all battlers
             Ai_InitPartyStruct(); // Save mons party counts, and first 2/4 mons on the battlefield.
 
             // Try to set a status to start the battle with
