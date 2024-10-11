@@ -315,10 +315,9 @@ else
 	@echo -e ".text\n\t.align\t2, 0\n" >> $3.s
 	$$(AS) $$(ASFLAGS) -o $$@ $3.s
 endif
+ifneq ($(NODEP),1)
 $1.d: $2
 	$(SCANINC) -M $1.d $(INCLUDE_SCANINC_ARGS) -I tools/agbcc/include $2
-ifneq ($(NODEP),1)
-$1.o: $1.d
 -include $1.d
 endif
 endef
@@ -346,7 +345,6 @@ endef
 
 define ASM_SCANINC
 ifneq ($(NODEP),1)
-$1.o: $1.d
 $1.d: $2
 	$(SCANINC) -M $1.d $(INCLUDE_SCANINC_ARGS) -I "" $2
 -include $1.d
