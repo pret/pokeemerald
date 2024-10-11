@@ -2384,6 +2384,8 @@ static u8 GetTreeMutationValue(u8 id)
     myMutation.asField.a = tree->mutationA;
     myMutation.asField.b = tree->mutationB;
     myMutation.asField.unused = 0;
+    if (myMutation.value == 0) // no mutation
+        return 0;
     return sBerryMutations[myMutation.value - 1][2];
 #else
     return 0;
