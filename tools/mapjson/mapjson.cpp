@@ -420,15 +420,8 @@ void process_heal_locations(const vector<string> &map_filepaths, string output_f
     ostringstream text;
     text << "//\n// DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/*/map.json\n//\n\n";
 
-    string arr_name;
-    if (version == "firered") {
-        arr_name = "sSpawnPoints";
-    } else {
-        arr_name = "sHealLocations";
-    }
-
     string arr_body = heal_locations_text.str();
-    text << "static const struct HealLocation " << arr_name << "[] =\n{\n" << arr_body << "};\n\n";
+    text << "static const struct HealLocation sHealLocations[] =\n{\n" << arr_body << "};\n\n";
 
     arr_body = respawn_maps_text.str();
     if (!arr_body.empty())
