@@ -13,5 +13,5 @@ SINGLE_BATTLE_TEST("Magic Guard prevents recoil damage to the user")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DOUBLE_EDGE, player);
         HP_BAR(opponent);
         NOT HP_BAR(player);
-    } 
+    }
 }

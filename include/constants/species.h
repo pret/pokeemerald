@@ -1736,6 +1736,7 @@
 #define SPECIES_SANDSHREW_ALOLA                         SPECIES_SANDSHREW_ALOLAN
 #define SPECIES_SANDSLASH_ALOLA                         SPECIES_SANDSLASH_ALOLAN
 #define SPECIES_SHELLOS_EAST                            SPECIES_SHELLOS_EAST_SEA
+#define SPECIES_SIRFETCH_D                              SPECIES_SIRFETCHD
 #define SPECIES_SLIGGOO_HISUI                           SPECIES_SLIGGOO_HISUIAN
 #define SPECIES_SLOWBRO_GALAR                           SPECIES_SLOWBRO_GALARIAN
 #define SPECIES_SLOWKING_GALAR                          SPECIES_SLOWKING_GALARIAN

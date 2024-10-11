@@ -1173,7 +1173,7 @@ const union AnimCmd *const sAnimTable_Following[] = {
 };
 
 // Like the above, but has separate frames for facing right
-static const union AnimCmd *const sAnimTable_Following_Asym[] = {
+const union AnimCmd *const sAnimTable_Following_Asym[] = {
     [ANIM_STD_FACE_SOUTH] = sAnim_FaceSouth,
     [ANIM_STD_FACE_NORTH] = sAnim_FaceNorth2F,
     [ANIM_STD_FACE_WEST] = sAnim_FaceWest2F,

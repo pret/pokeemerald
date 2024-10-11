@@ -139,6 +139,65 @@ SINGLE_BATTLE_TEST("Defiant activates after Sticky Web lowers Speed")
     }
 }
 
+SINGLE_BATTLE_TEST("Defiant doesn't activate after Sticky Web lowers Speed if Court Changed")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_MANKEY) { Ability(ABILITY_DEFIANT); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_STICKY_WEB); MOVE(opponent, MOVE_COURT_CHANGE); }
+        TURN { SWITCH(player, 1); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STICKY_WEB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_COURT_CHANGE, opponent);
+        // Switch-in - Sticky Web activates
+        SEND_IN_MESSAGE("Mankey");
+        MESSAGE("Mankey was caught in a Sticky Web!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        MESSAGE("Mankey's Speed fell!");
+        // Defiant doesn't activate
+        NONE_OF {
+            ABILITY_POPUP(player, ABILITY_DEFIANT);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+            MESSAGE("Mankey's Attack sharply rose!");
+        }
+    }
+}
+
+SINGLE_BATTLE_TEST("Defiant correctly activates after Sticky Web lowers Speed if Court Changed")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_MANKEY) { Ability(ABILITY_DEFIANT); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_STICKY_WEB); MOVE(opponent, MOVE_COURT_CHANGE); }
+        TURN { SWITCH(player, 1); }
+        TURN { MOVE(opponent, MOVE_GROWL);}
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STICKY_WEB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_COURT_CHANGE, opponent);
+        // Switch-in - Sticky Web activates
+        SEND_IN_MESSAGE("Mankey");
+        MESSAGE("Mankey was caught in a Sticky Web!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        MESSAGE("Mankey's Speed fell!");
+        // Defiant doesn't activate
+        NONE_OF {
+            ABILITY_POPUP(player, ABILITY_DEFIANT);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+            MESSAGE("Mankey's Attack sharply rose!");
+        }
+        // Defiant triggers correctly after Sticky Web
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_GROWL, opponent);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        MESSAGE("Mankey's Attack fell!");
+        ABILITY_POPUP(player, ABILITY_DEFIANT);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        MESSAGE("Mankey's Attack sharply rose!");
+    }
+}
 
 DOUBLE_BATTLE_TEST("Defiant is activated by Cotton Down for non-ally pokemon")
 {

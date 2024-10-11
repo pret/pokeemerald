@@ -10,7 +10,7 @@ ASSUMPTIONS
 DOUBLE_BATTLE_TEST("Heal Bell cures the entire party")
 {
     u32 move;
-    
+
     PARAMETRIZE { move = MOVE_HEAL_BELL; }
     PARAMETRIZE { move = MOVE_AROMATHERAPY; }
 
@@ -39,10 +39,10 @@ DOUBLE_BATTLE_TEST("Heal Bell cures the entire party")
 DOUBLE_BATTLE_TEST("Heal Bell does not cure soundproof partners")
 {
     u32 ability;
-    
+
     PARAMETRIZE { ability = ABILITY_SCRAPPY; }
     PARAMETRIZE { ability = ABILITY_SOUNDPROOF; }
-    
+
     ASSUME(B_HEAL_BELL_SOUNDPROOF != GEN_5);
 
     GIVEN {
@@ -65,10 +65,10 @@ DOUBLE_BATTLE_TEST("Heal Bell does not cure soundproof partners")
 SINGLE_BATTLE_TEST("Heal Bell cures inactive soundproof Pokemon")
 {
     u32 ability;
-    
+
     PARAMETRIZE { ability = ABILITY_SCRAPPY; }
     PARAMETRIZE { ability = ABILITY_SOUNDPROOF; }
-    
+
     ASSUME(B_HEAL_BELL_SOUNDPROOF >= GEN_5);
 
     GIVEN {
@@ -87,10 +87,9 @@ SINGLE_BATTLE_TEST("Heal Bell cures inactive soundproof Pokemon")
 
 
 SINGLE_BATTLE_TEST("Heal Bell cures a soundproof user")
-{    
-    ASSUME(B_HEAL_BELL_SOUNDPROOF == GEN_5 || B_HEAL_BELL_SOUNDPROOF >= GEN_8);
-
+{
     GIVEN {
+        ASSUME(B_HEAL_BELL_SOUNDPROOF == GEN_5 || B_HEAL_BELL_SOUNDPROOF >= GEN_8);
         PLAYER(SPECIES_EXPLOUD) { Ability(ABILITY_SOUNDPROOF); Status1(STATUS1_POISON); }
         OPPONENT(SPECIES_WYNAUT);
     } WHEN {

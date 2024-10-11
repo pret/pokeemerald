@@ -1063,7 +1063,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
         .abilities = { ABILITY_PRESSURE, ABILITY_UNNERVE, ABILITY_MIRROR_ARMOR },
         .bodyColor = BODY_COLOR_PURPLE,
-        .speciesName = _("Corviknigh"),
+        .speciesName = HANDLE_EXPANDED_SPECIES_NAME("Corviknigh", "Corviknight"),
         .cryId = CRY_CORVIKNIGHT,
         .natDexNum = NATIONAL_DEX_CORVIKNIGHT,
         .categoryName = _("Raven"),
@@ -2620,6 +2620,14 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_Dipplin,
         .iconPalIndex = 1,
         FOOTPRINT(Dipplin)
+        OVERWORLD(
+            sPicTable_Dipplin,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            gOverworldPalette_Dipplin,
+            gShinyOverworldPalette_Dipplin
+        )
         .levelUpLearnset = sDipplinLevelUpLearnset,
         .teachableLearnset = sDipplinTeachableLearnset,
         .evolutions = EVOLUTION({EVO_MOVE, MOVE_DRAGON_CHEER, SPECIES_HYDRAPPLE}),
@@ -2673,6 +2681,14 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_Hydrapple,
         .iconPalIndex = 5,
         FOOTPRINT(Hydrapple)
+        OVERWORLD(
+            sPicTable_Hydrapple,
+            SIZE_64x64,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            gOverworldPalette_Hydrapple,
+            gShinyOverworldPalette_Hydrapple
+        )
         .levelUpLearnset = sHydrappleLevelUpLearnset,
         .teachableLearnset = sHydrappleTeachableLearnset,
     },
@@ -3444,14 +3460,6 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_ToxtricityGigantamax,
         .iconPalIndex = 0,
         FOOTPRINT(Toxtricity)
-        OVERWORLD(
-            sPicTable_ToxtricityLowKey,
-            SIZE_32x32,
-            SHADOW_SIZE_M,
-            TRACKS_FOOT,
-            gOverworldPalette_ToxtricityLowKey,
-            gShinyOverworldPalette_ToxtricityLowKey
-        )
         .isGigantamax = TRUE,
         .levelUpLearnset = sToxtricityLowKeyLevelUpLearnset,
         .teachableLearnset = sToxtricityLowKeyTeachableLearnset,
@@ -3605,7 +3613,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
         .abilities = { ABILITY_FLASH_FIRE, ABILITY_WHITE_SMOKE, ABILITY_FLAME_BODY },
         .bodyColor = BODY_COLOR_RED,
-        .speciesName = _("Centiskorc"),
+        .speciesName = HANDLE_EXPANDED_SPECIES_NAME("Centiskorc", "Centiskorch"),
         .cryId = CRY_CENTISKORCH,
         .natDexNum = NATIONAL_DEX_CENTISKORCH,
         .categoryName = _("Radiator"),
@@ -5280,6 +5288,14 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_IndeedeeFemale,
         .iconPalIndex = 2,
         FOOTPRINT(Indeedee)
+        OVERWORLD(
+            sPicTable_IndeedeeFemale,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            gOverworldPalette_IndeedeeFemale,
+            gShinyOverworldPalette_IndeedeeFemale
+        )
         .levelUpLearnset = sIndeedeeFemaleLevelUpLearnset,
         .teachableLearnset = sIndeedeeFemaleTeachableLearnset,
         .eggMoveLearnset = sIndeedeeFemaleEggMoveLearnset,
@@ -6010,6 +6026,14 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .iconSprite = gMonIcon_Archaludon,
         .iconPalIndex = 0,
         FOOTPRINT(Archaludon)
+        OVERWORLD(
+            sPicTable_Archaludon,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            gOverworldPalette_Archaludon,
+            gShinyOverworldPalette_Archaludon
+        )
         .levelUpLearnset = sArchaludonLevelUpLearnset,
         .teachableLearnset = sArchaludonTeachableLearnset,
     },
@@ -7512,9 +7536,9 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
             sPicTable_EnamorusIncarnate,
             SIZE_64x64,
             SHADOW_SIZE_M,
-            TRACKS_NONE
-            //, gOverworldPalette_EnamorusIncarnate
-            //, gShinyOverworldPalette_EnamorusIncarnate
+            TRACKS_NONE,
+            gOverworldPalette_EnamorusIncarnate,
+            gShinyOverworldPalette_EnamorusIncarnate
         )
         .isLegendary = TRUE,
         .levelUpLearnset = sEnamorusLevelUpLearnset,
@@ -7574,9 +7598,9 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
             sPicTable_EnamorusTherian,
             SIZE_64x64,
             SHADOW_SIZE_M,
-            TRACKS_NONE
-            //, gOverworldPalette_EnamorusTherian
-            //, gShinyOverworldPalette_EnamorusTherian
+            TRACKS_NONE,
+            gOverworldPalette_EnamorusTherian,
+            gShinyOverworldPalette_EnamorusTherian
         )
         .isLegendary = TRUE,
         .levelUpLearnset = sEnamorusLevelUpLearnset,

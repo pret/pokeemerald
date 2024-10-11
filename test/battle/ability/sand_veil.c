@@ -28,3 +28,6 @@ SINGLE_BATTLE_TEST("Sand Veil increases evasion during sandstorm")
         HP_BAR(player);
     }
 }
+
+TO_DO_BATTLE_TEST("Sand Veil doesn't prevent Sandstorm damage if Cloud Nine/Air Lock is on the field");
+TO_DO_BATTLE_TEST("Sand Veil doesn't increase evasion if Cloud Nine/Air Lock is on the field");

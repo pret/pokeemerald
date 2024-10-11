@@ -127,7 +127,7 @@ SINGLE_BATTLE_TEST("Clear Body, Full Metal Body, and White Smoke don't prevent s
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUPERPOWER, opponent);
         NONE_OF {
-            ABILITY_POPUP(opponent, ability); 
+            ABILITY_POPUP(opponent, ability);
             MESSAGE("Foe Solgaleo's Full Metal Body prevents stat loss!");
             MESSAGE("Foe Torkoal's White Smoke prevents stat loss!");
             MESSAGE("Foe Metang's Clear Body prevents stat loss!");
@@ -186,7 +186,7 @@ SINGLE_BATTLE_TEST("Mold Breaker, Teravolt, and Turboblaze ignore Clear Body and
         else{
             ANIMATION(ANIM_TYPE_MOVE, move, player);
             NONE_OF {
-                ABILITY_POPUP(opponent, ability); 
+                ABILITY_POPUP(opponent, ability);
                 MESSAGE("Foe Solgaleo's Full Metal Body prevents stat loss!");
                 MESSAGE("Foe Torkoal's White Smoke prevents stat loss!");
                 MESSAGE("Foe Metang's Clear Body prevents stat loss!");

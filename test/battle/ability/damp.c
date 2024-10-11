@@ -57,7 +57,7 @@ SINGLE_BATTLE_TEST("Damp prevents explosion-like moves from self")
     }
 }
 
-SINGLE_BATTLE_TEST("Damp prevents damage from aftermath")
+SINGLE_BATTLE_TEST("Damp prevents damage from Aftermath")
 {
     GIVEN {
         ASSUME(gMovesInfo[MOVE_TACKLE].makesContact);

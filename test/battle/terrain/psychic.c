@@ -33,7 +33,7 @@ SINGLE_BATTLE_TEST("Psychic Terrain activates Psychic Seed and Mimicry")
         ABILITY_POPUP(opponent);
         MESSAGE("Foe Stunfisk's type changed to Psychic!");
     } THEN {
-        EXPECT_EQ(gBattleMons[B_POSITION_OPPONENT_LEFT].type1, TYPE_PSYCHIC);
+        EXPECT_EQ(gBattleMons[B_POSITION_OPPONENT_LEFT].types[0], TYPE_PSYCHIC);
     }
 }
 

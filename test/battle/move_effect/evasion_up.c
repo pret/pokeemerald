@@ -8,9 +8,9 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Double Team raises Evasion")
 {
-    ASSUME(gMovesInfo[MOVE_SCRATCH].accuracy == 100);
     PASSES_RANDOMLY(gMovesInfo[MOVE_SCRATCH].accuracy * 3 / 4, 100, RNG_ACCURACY);
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_SCRATCH].accuracy == 100);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

@@ -14,3 +14,5 @@ SINGLE_BATTLE_TEST("Hydration cures non-volatile Status conditions if it is rain
         STATUS_ICON(player, none: TRUE);
     }
 }
+
+TO_DO_BATTLE_TEST("Hydration doesn't cure status conditions if Cloud Nine/Air Lock is on the field");

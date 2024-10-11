@@ -5,7 +5,7 @@
 const struct GimmickInfo gGimmicksInfo[GIMMICKS_COUNT] =
 {
     [GIMMICK_NONE] = {0},
-    [GIMMICK_MEGA] = 
+    [GIMMICK_MEGA] =
     {
         .triggerSheet = &sSpriteSheet_MegaTrigger,
         .triggerPal = &sSpritePalette_MegaTrigger,
@@ -15,7 +15,7 @@ const struct GimmickInfo gGimmicksInfo[GIMMICKS_COUNT] =
         .CanActivate = CanMegaEvolve,
         .ActivateGimmick = ActivateMegaEvolution,
     },
-    [GIMMICK_Z_MOVE] = 
+    [GIMMICK_Z_MOVE] =
     {
         .triggerSheet = &sSpriteSheet_ZMoveTrigger,
         .triggerPal = &sSpritePalette_ZMoveTrigger,
@@ -23,7 +23,7 @@ const struct GimmickInfo gGimmicksInfo[GIMMICKS_COUNT] =
         .CanActivate = CanUseZMove,
         .ActivateGimmick = ActivateZMove,
     },
-    [GIMMICK_ULTRA_BURST] = 
+    [GIMMICK_ULTRA_BURST] =
     {
         .triggerSheet = &sSpriteSheet_BurstTrigger,
         .triggerPal = &sSpritePalette_BurstTrigger,
@@ -31,7 +31,7 @@ const struct GimmickInfo gGimmicksInfo[GIMMICKS_COUNT] =
         .CanActivate = CanUltraBurst,
         .ActivateGimmick = ActivateUltraBurst,
     },
-    [GIMMICK_DYNAMAX] = 
+    [GIMMICK_DYNAMAX] =
     {
         .triggerSheet = &sSpriteSheet_DynamaxTrigger,
         .triggerPal = &sSpritePalette_DynamaxTrigger,

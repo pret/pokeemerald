@@ -2137,7 +2137,7 @@ static void CalcDomeMonStats(const struct TrainerMon *fmon, int level, u8 ivs, i
 {
     int evs[NUM_STATS];
     int i;
-    
+
     for (i = 0; i < NUM_STATS; i++)
     {
         if (fmon->ev != NULL)
@@ -2145,7 +2145,7 @@ static void CalcDomeMonStats(const struct TrainerMon *fmon, int level, u8 ivs, i
         else
             evs[i] = 0;
     }
-    
+
     if (fmon->species == SPECIES_SHEDINJA)
     {
         stats[STAT_HP] = 1;
@@ -2200,7 +2200,7 @@ static void CreateDomeOpponentMon(u8 monPartyId, u16 tournamentTrainerId, u8 tou
     u8 fixedIv = GetDomeTrainerMonIvs(tournamentTrainerId); // BUG: Using the wrong ID. As a result, all Pokémon have ivs of 3.
     #endif
     u8 level = SetFacilityPtrsGetLevel();
-    
+
     CreateFacilityMon(&gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]],
                       level, fixedIv, otId, 0, &gEnemyParty[monPartyId]);
 }
@@ -2594,6 +2594,7 @@ static void SetDomeOpponentGraphicsId(void)
 
 static void SaveDomeChallenge(void)
 {
+    ClearEnemyPartyAfterChallenge();
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
@@ -4447,7 +4448,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                 else
                     allocatedArray[j] = 0;
             }
-            
+
             allocatedArray[NUM_STATS] += allocatedArray[STAT_HP];
             for (j = 0; j < NUM_NATURE_STATS; j++)
             {

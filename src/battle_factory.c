@@ -268,6 +268,7 @@ static void SetBattleFactoryData(void)
 
 static void SaveFactoryChallenge(void)
 {
+    ClearEnemyPartyAfterChallenge();
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
@@ -406,7 +407,7 @@ static void SetPlayerAndOpponentParties(void)
     u8 monLevel;
     u16 monId;
     u8 ivs;
-    
+
     if (gSaveBlock2Ptr->frontier.lvlMode == FRONTIER_LVL_TENT)
     {
         gFacilityTrainerMons = gSlateportBattleTentMons;
@@ -428,11 +429,8 @@ static void SetPlayerAndOpponentParties(void)
         {
             monId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
             ivs = gSaveBlock2Ptr->frontier.rentalMons[i].ivs;
-            
+
             CreateFacilityMon(&gFacilityTrainerMons[monId], monLevel, ivs, OT_ID_PLAYER_ID, FLAG_FRONTIER_MON_FACTORY, &gPlayerParty[i]);
-            SetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY,
-                    &gSaveBlock2Ptr->frontier.rentalMons[i].personality);
-            CalculateMonStats(&gPlayerParty[i]);
         }
     }
 
@@ -444,12 +442,7 @@ static void SetPlayerAndOpponentParties(void)
         {
             monId = gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].monId;
             ivs = gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].ivs;
-            CreateFacilityMon(&gFacilityTrainerMons[monId],
-                    monLevel, ivs, OT_ID_PLAYER_ID, FLAG_FRONTIER_MON_FACTORY,
-                    &gEnemyParty[i]);
-            SetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY,
-                    &gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].personality);
-            CalculateMonStats(&gPlayerParty[i]);
+            CreateFacilityMon(&gFacilityTrainerMons[monId], monLevel, ivs, OT_ID_PLAYER_ID, FLAG_FRONTIER_MON_FACTORY, &gEnemyParty[i]);
         }
         break;
     }

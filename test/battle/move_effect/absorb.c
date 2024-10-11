@@ -26,8 +26,8 @@ SINGLE_BATTLE_TEST("Absorb recovers 50% of the damage dealt")
 
 SINGLE_BATTLE_TEST("Absorb fails if Heal Block applies")
 {
-    ASSUME(B_HEAL_BLOCKING >= GEN_6);
     GIVEN {
+        ASSUME(B_HEAL_BLOCKING >= GEN_6);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

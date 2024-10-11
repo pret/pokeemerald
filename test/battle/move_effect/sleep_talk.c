@@ -14,7 +14,7 @@ SINGLE_BATTLE_TEST("Sleep Talk fails if not asleep")
     u32 status;
     PARAMETRIZE { status = STATUS1_SLEEP; }
     PARAMETRIZE { status = STATUS1_NONE; }
-    
+
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Status1(status); Moves(MOVE_SLEEP_TALK, MOVE_TACKLE, MOVE_POUND, MOVE_SCRATCH); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -35,7 +35,7 @@ SINGLE_BATTLE_TEST("Sleep Talk fails if not asleep")
 
 SINGLE_BATTLE_TEST("Sleep Talk works if user has Comatose")
 {
-    
+
     GIVEN {
         PLAYER(SPECIES_KOMALA) { Moves(MOVE_SLEEP_TALK, MOVE_TACKLE, MOVE_POUND, MOVE_SCRATCH); }
         OPPONENT(SPECIES_WOBBUFFET);

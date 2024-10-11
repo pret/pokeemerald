@@ -18,7 +18,7 @@ SINGLE_BATTLE_TEST("Chilly Reception sets up snow and switches the user out")
         MESSAGE("Slowking is preparing to tell a chillingly bad joke!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CHILLY_RECEPTION, player);
         MESSAGE("It started to snow!");
-        MESSAGE("Slowking went back to  1");
+        MESSAGE("Slowking went back to 1!");
         SEND_IN_MESSAGE("Slowpoke");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SNOW_CONTINUES);
     }
@@ -36,7 +36,7 @@ SINGLE_BATTLE_TEST("Chilly Reception switches the user out, even if the weather 
         MESSAGE("Slowking is preparing to tell a chillingly bad joke!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CHILLY_RECEPTION, player);
         MESSAGE("There is no relief from this heavy rain!");
-        MESSAGE("Slowking went back to  1");
+        MESSAGE("Slowking went back to 1!");
         SEND_IN_MESSAGE("Slowpoke");
         MESSAGE("Rain continues to fall.");
     }
@@ -53,7 +53,7 @@ SINGLE_BATTLE_TEST("Chilly Reception does not switch the user out if no replacem
         MESSAGE("Slowking is preparing to tell a chillingly bad joke!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CHILLY_RECEPTION, player);
         MESSAGE("It started to snow!");
-        NOT MESSAGE("Slowking went back to  1");
+        NOT MESSAGE("Slowking went back to 1!");
     }
 }
 
@@ -69,7 +69,7 @@ SINGLE_BATTLE_TEST("Chilly Reception does not switch the user out if replacement
         MESSAGE("Slowking is preparing to tell a chillingly bad joke!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CHILLY_RECEPTION, player);
         MESSAGE("It started to snow!");
-        NOT MESSAGE("Slowking went back to  1");
+        NOT MESSAGE("Slowking went back to 1!");
     }
 }
 
@@ -84,7 +84,8 @@ SINGLE_BATTLE_TEST("Chilly Reception changes the weather, even if the user canno
         MESSAGE("Slowking is preparing to tell a chillingly bad joke!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CHILLY_RECEPTION, player);
         MESSAGE("It started to snow!");
-        NOT MESSAGE("Slowking went back to  1");
+        NOT MESSAGE("Slowking went back to 1!");
     }
 }
 
+TO_DO_BATTLE_TEST("Chilly Reception doesn't announce its move if it's called by a different move");

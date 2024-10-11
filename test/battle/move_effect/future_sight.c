@@ -158,9 +158,9 @@ SINGLE_BATTLE_TEST("Future Sight will miss timing if target faints by residual d
 
 SINGLE_BATTLE_TEST("Future Sight breaks Focus Sash and doesn't make the holder endure another move")
 {
-    ASSUME(gMovesInfo[MOVE_PSYCHIC].power > 0);
-    ASSUME(gItemsInfo[ITEM_FOCUS_SASH].holdEffect == HOLD_EFFECT_FOCUS_SASH);
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_PSYCHIC].power > 0);
+        ASSUME(gItemsInfo[ITEM_FOCUS_SASH].holdEffect == HOLD_EFFECT_FOCUS_SASH);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_PIDGEY) { Level(1); Item(ITEM_FOCUS_SASH); }
     } WHEN {

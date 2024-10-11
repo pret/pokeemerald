@@ -482,3 +482,87 @@ DOUBLE_BATTLE_TEST("Crafty Shield protects self and ally from status moves")
         }
     }
 }
+
+SINGLE_BATTLE_TEST("Protect does not block Confide")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_CONFIDE].effect == EFFECT_SPECIAL_ATTACK_DOWN);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_PROTECT); MOVE(player, MOVE_CONFIDE); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Confide!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CONFIDE, player);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+        NOT MESSAGE("Foe Wobbuffet protected itself!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("Crafty Shield protects self and ally from Confide")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_CONFIDE].effect == EFFECT_SPECIAL_ATTACK_DOWN);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(opponentLeft, MOVE_CRAFTY_SHIELD); MOVE(playerLeft, MOVE_CONFIDE, target: opponentLeft); MOVE(playerRight, MOVE_CONFIDE, target: opponentRight); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Confide!");
+        MESSAGE("Foe Wobbuffet protected itself!");
+        MESSAGE("Wynaut used Confide!");
+        MESSAGE("Foe Wynaut protected itself!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("Crafty Shield does not protect against moves that target all battlers")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_FLOWER_SHIELD].target == MOVE_TARGET_ALL_BATTLERS);
+        ASSUME(gSpeciesInfo[SPECIES_TANGELA].types[0] == TYPE_GRASS);
+        ASSUME(gSpeciesInfo[SPECIES_TANGROWTH].types[0] == TYPE_GRASS);
+        ASSUME(gSpeciesInfo[SPECIES_SUNKERN].types[0] == TYPE_GRASS);
+        ASSUME(gSpeciesInfo[SPECIES_SUNFLORA].types[0] == TYPE_GRASS);
+        PLAYER(SPECIES_TANGELA);
+        PLAYER(SPECIES_TANGROWTH);
+        OPPONENT(SPECIES_SUNKERN);
+        OPPONENT(SPECIES_SUNFLORA);
+    } WHEN {
+        TURN { MOVE(opponentLeft, MOVE_CRAFTY_SHIELD); MOVE(opponentRight, MOVE_CELEBRATE); MOVE(playerLeft, MOVE_FLOWER_SHIELD); MOVE(playerRight, MOVE_CELEBRATE); }
+    } SCENE {
+        MESSAGE("Tangela used Flower Shield!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FLOWER_SHIELD, playerLeft);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
+        MESSAGE("Tangela's Defense rose!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FLOWER_SHIELD, playerLeft);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
+        MESSAGE("Foe Sunkern's Defense rose!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FLOWER_SHIELD, playerLeft);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
+        MESSAGE("Tangrowth's Defense rose!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FLOWER_SHIELD, playerLeft);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
+        MESSAGE("Foe Sunflora's Defense rose!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Spiky Shield does not damage users on Counter or Mirror Coat")
+{
+    u32 move;
+    PARAMETRIZE { move = MOVE_MIRROR_COAT; }
+    PARAMETRIZE { move = MOVE_COUNTER; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SPIKY_SHIELD); MOVE(opponent, move); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPIKY_SHIELD, player);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, move, opponent);
+            HP_BAR(opponent);
+        }
+    }
+}

@@ -76,6 +76,10 @@ bool32 CanDynamax(u32 battler)
     u16 species = gBattleMons[battler].species;
     u16 holdEffect = GetBattlerHoldEffect(battler, FALSE);
 
+    // Prevents Zigzagoon from dynamaxing in vanilla.
+    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE && GetBattlerSide(battler) == B_SIDE_OPPONENT)
+        return FALSE;
+
     // Check if Player has a Dynamax Band.
     if (!TESTING && (GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT
         || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT)))
@@ -402,7 +406,6 @@ static u8 GetMaxPowerTier(u32 move)
         case EFFECT_NATURAL_GIFT:
         case EFFECT_MIRROR_COAT:
         case EFFECT_FINAL_GAMBIT:
-        //case EFFECT_DRAGON_DARTS:
             return MAX_POWER_TIER_2;
         case EFFECT_OHKO:
         case EFFECT_RETURN:

@@ -488,7 +488,7 @@ static void Task_HandleScrollingMultichoiceInput(u8 taskId)
 {
     bool32 done = FALSE;
     s32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
-    
+
     switch (input)
     {
     case LIST_HEADER:

@@ -412,6 +412,10 @@
 #define ANIM_TAG_TERA_CRYSTAL               (ANIM_SPRITES_START + 398)
 #define ANIM_TAG_TERA_SHATTER               (ANIM_SPRITES_START + 399)
 #define ANIM_TAG_DREEPY_SHINY               (ANIM_SPRITES_START + 400)
+#define ANIM_TAG_BLOOD_MOON                 (ANIM_SPRITES_START + 401)
+#define ANIM_TAG_BEAM                       (ANIM_SPRITES_START + 402)
+#define ANIM_TAG_RED_EXPLOSION              (ANIM_SPRITES_START + 403)
+#define ANIM_TAG_PURPLE_CHAIN               (ANIM_SPRITES_START + 404)
 
 // battlers
 #define ANIM_ATTACKER         0

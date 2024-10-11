@@ -78,7 +78,7 @@ DOUBLE_BATTLE_TEST("Court Change swaps entry hazards used by the player")
     }
 }
 
-DOUBLE_BATTLE_TEST("Court Change used by the player swaps Mist, Safeguard, Lucky Chant, Reflect, Light Screen, Tailwind")
+DOUBLE_BATTLE_TEST("Court Change used by the player swaps Mist, Safeguard, Aurora Veil, Reflect, Light Screen, Tailwind")
 {
     GIVEN {
         PLAYER(SPECIES_WYNAUT);
@@ -88,8 +88,8 @@ DOUBLE_BATTLE_TEST("Court Change used by the player swaps Mist, Safeguard, Lucky
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(opponentLeft, MOVE_MIST); MOVE(opponentRight, MOVE_SAFEGUARD); }
-        TURN { MOVE(opponentLeft, MOVE_LUCKY_CHANT); MOVE(opponentRight, MOVE_REFLECT); }
+        TURN { MOVE(playerLeft, MOVE_SNOWSCAPE); MOVE(opponentLeft, MOVE_MIST); MOVE(opponentRight, MOVE_SAFEGUARD); }
+        TURN { MOVE(opponentLeft, MOVE_AURORA_VEIL); MOVE(opponentRight, MOVE_REFLECT); }
         TURN { MOVE(opponentLeft, MOVE_LIGHT_SCREEN); MOVE(opponentRight, MOVE_TAILWIND); }
         TURN { MOVE(playerLeft, MOVE_COURT_CHANGE); }
         TURN { }
@@ -97,9 +97,10 @@ DOUBLE_BATTLE_TEST("Court Change used by the player swaps Mist, Safeguard, Lucky
         TURN { }
         TURN { }
     } SCENE {
+        MESSAGE("Wynaut used Snowscape!");
         MESSAGE("Foe Wobbuffet used Mist!");
         MESSAGE("Foe Wobbuffet used Safeguard!");
-        MESSAGE("Foe Wobbuffet used Lucky Chant!");
+        MESSAGE("Foe Wobbuffet used Aurora Veil!");
         MESSAGE("Foe Wobbuffet used Reflect!");
         MESSAGE("Foe Wobbuffet used Light Screen!");
         MESSAGE("Foe Wobbuffet used Tailwind!");
@@ -109,13 +110,13 @@ DOUBLE_BATTLE_TEST("Court Change used by the player swaps Mist, Safeguard, Lucky
         MESSAGE("Ally's Mist wore off!");
         MESSAGE("Ally's party is no longer protected by Safeguard!");
         MESSAGE("Ally's Reflect wore off!");
-        MESSAGE("Your team's Lucky Chant wore off!");
+        MESSAGE("Ally's Aurora Veil wore off!");
         MESSAGE("Your team's tailwind petered out!");
         MESSAGE("Ally's Light Screen wore off!");
     }
 }
 
-DOUBLE_BATTLE_TEST("Court Change used by the opponent swaps Mist, Safeguard, Lucky Chant, Reflect, Light Screen, Tailwind")
+DOUBLE_BATTLE_TEST("Court Change used by the opponent swaps Mist, Safeguard, Aurora Veil, Reflect, Light Screen, Tailwind")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -125,8 +126,8 @@ DOUBLE_BATTLE_TEST("Court Change used by the opponent swaps Mist, Safeguard, Luc
         OPPONENT(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WYNAUT);
     } WHEN {
-        TURN { MOVE(playerLeft, MOVE_MIST); MOVE(playerRight, MOVE_SAFEGUARD); }
-        TURN { MOVE(playerLeft, MOVE_LUCKY_CHANT); MOVE(playerRight, MOVE_REFLECT); }
+        TURN { MOVE(opponentLeft, MOVE_SNOWSCAPE); MOVE(playerLeft, MOVE_MIST); MOVE(playerRight, MOVE_SAFEGUARD); }
+        TURN { MOVE(playerLeft, MOVE_AURORA_VEIL); MOVE(playerRight, MOVE_REFLECT); }
         TURN { MOVE(playerLeft, MOVE_LIGHT_SCREEN); MOVE(playerRight, MOVE_TAILWIND); }
         TURN { MOVE(opponentLeft, MOVE_COURT_CHANGE); }
         TURN { }
@@ -136,7 +137,7 @@ DOUBLE_BATTLE_TEST("Court Change used by the opponent swaps Mist, Safeguard, Luc
     } SCENE {
         MESSAGE("Wobbuffet used Mist!");
         MESSAGE("Wobbuffet used Safeguard!");
-        MESSAGE("Wobbuffet used Lucky Chant!");
+        MESSAGE("Wobbuffet used Aurora Veil!");
         MESSAGE("Wobbuffet used Reflect!");
         MESSAGE("Wobbuffet used Light Screen!");
         MESSAGE("Wobbuffet used Tailwind!");
@@ -146,8 +147,10 @@ DOUBLE_BATTLE_TEST("Court Change used by the opponent swaps Mist, Safeguard, Luc
         MESSAGE("Foe's Mist wore off!");
         MESSAGE("Foe's party is no longer protected by Safeguard!");
         MESSAGE("Foe's Reflect wore off!");
-        MESSAGE("The opposing team's Lucky Chant wore off!");
+        MESSAGE("Foe's Aurora Veil wore off!");
         MESSAGE("The opposing team's tailwind petered out!");
         MESSAGE("Foe's Light Screen wore off!");
     }
 }
+
+TO_DO_BATTLE_TEST("Court Change used by the player swaps G-Max Steelsurge, G-Max Vine Lash, G-Max Wildfire, G-Max Cannonade");

@@ -45,7 +45,7 @@ BattleScript_UseItemMessage:
 	printfromtable gTrainerUsedItemStringIds
 	waitmessage B_WAIT_TIME_LONG
 	return
-	
+
 BattleScript_ItemRestoreHPRet:
 	bichalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
@@ -238,7 +238,7 @@ BattleScript_ActionWallyThrow:
 	waitmessage B_WAIT_TIME_LONG
 	returnatktoball
 	waitstate
-	trainerslidein BS_TARGET
+	trainerslidein BS_PLAYER1
 	waitstate
 	printstring STRINGID_YOUTHROWABALLNOWRIGHT
 	waitmessage B_WAIT_TIME_LONG
@@ -246,10 +246,10 @@ BattleScript_ActionWallyThrow:
 
 BattleScript_TrainerASlideMsgRet::
 	handletrainerslidemsg BS_SCRIPTING, 0
-	trainerslidein B_POSITION_OPPONENT_LEFT
+	trainerslidein BS_OPPONENT1
 	handletrainerslidemsg BS_SCRIPTING, 1
 	waitstate
-	trainerslideout B_POSITION_OPPONENT_LEFT
+	trainerslideout BS_OPPONENT1
 	waitstate
 	handletrainerslidemsg BS_SCRIPTING, 2
 	return
@@ -260,10 +260,10 @@ BattleScript_TrainerASlideMsgEnd2::
 
 BattleScript_TrainerBSlideMsgRet::
 	handletrainerslidemsg BS_SCRIPTING, 0
-	trainerslidein B_POSITION_OPPONENT_RIGHT
+	trainerslidein BS_OPPONENT2
 	handletrainerslidemsg BS_SCRIPTING, 1
 	waitstate
-	trainerslideout B_POSITION_OPPONENT_RIGHT
+	trainerslideout BS_OPPONENT2
 	waitstate
 	handletrainerslidemsg BS_SCRIPTING, 2
 	return

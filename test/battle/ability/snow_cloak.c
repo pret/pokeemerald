@@ -27,3 +27,6 @@ SINGLE_BATTLE_TEST("Snow Cloak increases evasion during hail")
         HP_BAR(player);
     }
 }
+
+TO_DO_BATTLE_TEST("Snow Cloak doesn't prevent hail damage if Cloud Nine/Air Lock is on the field");
+TO_DO_BATTLE_TEST("Snow Cloak doesn't increase evasion if Cloud Nine/Air Lock is on the field");

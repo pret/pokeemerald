@@ -52,3 +52,5 @@ SINGLE_BATTLE_TEST("Utility Umbrella blocks Rain damage modifiers", s16 damage)
         EXPECT_MUL_EQ(results[2].damage, Q_4_12(1.5), results[3].damage);
     }
 }
+
+// Moves and abilities affected by Utility Umbrella have their tests in the respective files

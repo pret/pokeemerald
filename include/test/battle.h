@@ -3,10 +3,10 @@
  * To run all the tests use:
  *     make check -j
  * To run specific tests, e.g. Spikes ones, use:
- *     make check TESTS='Spikes'
+ *     make check TESTS="Spikes"
  * To build a ROM (pokemerald-test.elf) that can be opened in mgba to
  * view specific tests, e.g. Spikes ones, use:
- *     make pokeemerald-test.elf TESTS='Spikes'
+ *     make pokeemerald-test.elf TESTS="Spikes"
  *
  * Manually testing a battle mechanic often follows this pattern:
  * 1. Create a party which can activate the mechanic.
@@ -55,7 +55,7 @@
  * start with the same prefix, e.g. Stun Spore tests should start with
  * "Stun Spore", this allows just the Stun Spore-related tests to be run
  * with:
- *     make check TESTS='Stun Spore'
+ *     make check TESTS="Stun Spore"
  *
  * GIVEN initializes the parties, PLAYER and OPPONENT add a Pokémon to
  * their respective parties. They can both accept a block which further
@@ -328,7 +328,7 @@
  *
  * MOVE(battler, move | moveSlot:, [gimmick:], [hit:], [criticalHit:], [target:], [allowed:], [WITH_RNG(tag, value])
  * Used when the battler chooses Fight. Either the move ID or move slot
- * must be specified. gimmick: GIMMICK_MEGA causes the battler to Mega 
+ * must be specified. gimmick: GIMMICK_MEGA causes the battler to Mega
  * Evolve if able, hit: FALSE causes the move to miss, criticalHit: TRUE
  * causes the move to land a critical hit, target: is used in double
  * battles to choose the target (when necessary), and allowed: FALSE is
@@ -645,6 +645,15 @@ struct AILogLine
     s16 score;
 };
 
+// Data which is updated by the test runner during a battle and needs to
+// be reset between trials.
+struct BattleTrialData
+{
+    u8 lastActionTurn;
+    u8 queuedEvent;
+    u8 aiActionsPlayed[MAX_BATTLERS_COUNT];
+};
+
 struct BattleTestData
 {
     u8 stack[BATTLE_TEST_STACK_SIZE];
@@ -676,20 +685,19 @@ struct BattleTestData
     u8 battleRecordSourceLineOffsets[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE];
     u16 recordIndexes[MAX_BATTLERS_COUNT];
     struct BattlerTurn battleRecordTurns[MAX_TURNS][MAX_BATTLERS_COUNT];
-    u8 lastActionTurn;
 
     u8 queuedEventsCount;
     u8 queueGroupType;
     u8 queueGroupStart;
-    u8 queuedEvent;
     struct QueuedEvent queuedEvents[MAX_QUEUED_EVENTS];
     u8 expectedAiActionIndex[MAX_BATTLERS_COUNT];
-    u8 aiActionsPlayed[MAX_BATTLERS_COUNT];
     struct ExpectedAIAction expectedAiActions[MAX_BATTLERS_COUNT][MAX_EXPECTED_ACTIONS];
     struct ExpectedAiScore expectedAiScores[MAX_BATTLERS_COUNT][MAX_TURNS][MAX_AI_SCORE_COMPARISION_PER_TURN]; // Max 4 comparisions per turn
     struct AILogLine aiLogLines[MAX_BATTLERS_COUNT][MAX_MON_MOVES][MAX_AI_LOG_LINES];
     u8 aiLogPrintedForMove[MAX_BATTLERS_COUNT]; // Marks ai score log as printed for move, so the same log isn't displayed multiple times.
     u16 flagId;
+
+    struct BattleTrialData trial;
 };
 
 struct BattleTestRunnerState

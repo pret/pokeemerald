@@ -3620,7 +3620,7 @@ static const struct LevelUpMove sMoltresGalarianLevelUpLearnset[] = {
     LEVEL_UP_MOVE(60, MOVE_ENDURE),
     LEVEL_UP_MOVE(65, MOVE_MEMENTO),
     LEVEL_UP_MOVE(70, MOVE_SKY_ATTACK),
-	LEVEL_UP_END
+    LEVEL_UP_END
 };
 #endif //P_GALARIAN_FORMS
 #endif //P_FAMILY_MOLTRES

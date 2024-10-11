@@ -81,5 +81,5 @@ for file in pories_to_check:
         raw = re.sub("script %s[	 \n]*\{[	 \n]*finditem\((.*)\)[	 \n]*\}[	 \n]*" % unused, "", raw)
     with open(file, "w") as f2:
         f2.write(raw)
-    
+
 print("Done!")

@@ -10,7 +10,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Moves do not retain priority")
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(opponent, MOVE_TACKLE); 
+        TURN { MOVE(opponent, MOVE_TACKLE);
                MOVE(player, MOVE_QUICK_ATTACK, gimmick: GIMMICK_Z_MOVE); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
@@ -397,6 +397,60 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Sleep Talk turns Weather Ball into Breakneck Blit
     }
 }
 
+SINGLE_BATTLE_TEST("(Z-MOVE) Powder blocks Fire type Z-Moves and deals 25% of maximum HP to the user")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_EMBER].type == TYPE_FIRE);
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_FIRIUM_Z); }
+        OPPONENT(SPECIES_VIVILLON);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_POWDER); MOVE(player, MOVE_EMBER, gimmick: GIMMICK_Z_MOVE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POWDER, opponent);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ZMOVE_ACTIVATE, player);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_INFERNO_OVERDRIVE, player);
+    } THEN {
+        EXPECT_MUL_EQ(player->maxHP, UQ_4_12(0.75), player->hp);
+    }
+}
+
+DOUBLE_BATTLE_TEST("(Z-MOVE) Powder blocks Fire type Z-Moves (from Z-Mirror Move)")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_EMBER].type == TYPE_FIRE);
+        ASSUME(gMovesInfo[MOVE_MIRROR_MOVE].type == TYPE_FLYING);
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_FLYINIUM_Z); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_VIVILLON);
+    } WHEN {
+        TURN { MOVE(opponentRight, MOVE_POWDER, target: playerLeft); MOVE(opponentLeft, MOVE_EMBER, target: playerLeft); MOVE(playerLeft, MOVE_MIRROR_MOVE, gimmick: GIMMICK_Z_MOVE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POWDER, opponentRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_EMBER, opponentLeft);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ZMOVE_ACTIVATE, playerLeft);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_INFERNO_OVERDRIVE, playerLeft);
+    }
+}
+
+SINGLE_BATTLE_TEST("(Z-MOVE) Powder blocks Fire type Z-Moves but not boosts granted")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_WILL_O_WISP].type == TYPE_FIRE);
+        ASSUME(gMovesInfo[MOVE_WILL_O_WISP].zMove.effect == Z_EFFECT_ATK_UP_1);
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_FIRIUM_Z); }
+        OPPONENT(SPECIES_VIVILLON);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_POWDER); MOVE(player, MOVE_WILL_O_WISP, gimmick: GIMMICK_Z_MOVE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POWDER, opponent);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ZMOVE_ACTIVATE, player);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_WILL_O_WISP, player);
+    } THEN {
+        EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 1);
+    }
+}
+
 // Miscellaneous Interactions
 DOUBLE_BATTLE_TEST("(Z-MOVE) Instruct fails if the target last used a Z-Move")
 {
@@ -597,5 +651,24 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Searing Sunraze Smash ignores the target's abilitie
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SEARING_SUNRAZE_SMASH, player);
         HP_BAR(opponent);
         MESSAGE("A critical hit!");
-    } 
+    }
+}
+
+SINGLE_BATTLE_TEST("(Z-MOVE) Z-Revelation Dance always transforms into Breakneck Blitz")
+{
+    u16 species;
+    PARAMETRIZE { species = SPECIES_ORICORIO_BAILE; }
+    PARAMETRIZE { species = SPECIES_ORICORIO_PAU; }
+    PARAMETRIZE { species = SPECIES_ORICORIO_POM_POM; }
+    PARAMETRIZE { species = SPECIES_ORICORIO_SENSU; }
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_REVELATION_DANCE].type == TYPE_NORMAL);
+        PLAYER(species) { Item(ITEM_NORMALIUM_Z); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_REVELATION_DANCE, gimmick: GIMMICK_Z_MOVE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ZMOVE_ACTIVATE, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_BREAKNECK_BLITZ, player);
+    }
 }
