@@ -371,6 +371,69 @@ void process_map(string map_filepath, string layouts_filepath, string output_dir
     write_text_file(out_dir + "connections.inc", connections_text);
 }
 
+void process_heal_locations(const vector<string> &map_filepaths, string output_file) {
+    ostringstream heal_locations_text;
+    ostringstream respawn_maps_text;
+    ostringstream respawn_npcs_text;
+
+    // Get heal location data from each map
+    for (const string &filepath : map_filepaths) {
+        string err;
+        string map_json_text = read_text_file(filepath);
+        Json map_data = Json::parse(map_json_text, err);
+        if (map_data == Json())
+            FATAL_ERROR("Failed to read '%s' while generating '%s': %s\n", filepath.c_str(), output_file.c_str(), err.c_str());
+
+        // Skip if no heal locations present
+        if (map_data.object_items().find("heal_locations") == map_data.object_items().end() || map_data["heal_locations"].array_items().size() <= 0)
+            continue;
+
+        string map_id = json_to_string(map_data, "id");
+        for (auto &heal_location : map_data["heal_locations"].array_items()) {
+            // Each array is indexed with the heal location's ID, e.g. '[HEAL_LOCATION_NAME - 1] = '
+            string index_text = "\t[" + json_to_string(heal_location, "id") + " - 1] =";
+
+            // Add element to main heal locations array
+            heal_locations_text << index_text << "\n\t{\n"
+                                << "\t\t.mapGroup = MAP_GROUP(" << map_id << "),\n"
+                                << "\t\t.mapNum = MAP_NUM(" << map_id << "),\n"
+                                << "\t\t.x = " << json_to_string(heal_location, "x") << ",\n"
+                                << "\t\t.y = " << json_to_string(heal_location, "y") << ",\n"
+                                << "\t},\n";
+
+            // Add element to respawn map array (if field is present)
+            if (heal_location.object_items().find("respawn_map") != heal_location.object_items().end()) {
+                string respawn_map_id = json_to_string(heal_location, "respawn_map");
+                respawn_maps_text << index_text << " {"
+                                  << "MAP_GROUP(" << respawn_map_id << "), "
+                                  << "MAP_NUM(" << respawn_map_id << ")"
+                                  << "},\n";
+            }
+
+            // Add element to respawn NPC array (if field is present)
+            if (heal_location.object_items().find("respawn_npc") != heal_location.object_items().end()) {
+                respawn_npcs_text << index_text << " " << json_to_string(heal_location, "respawn_npc") << ",\n";
+            }
+        }
+    }
+
+    ostringstream text;
+    text << "//\n// DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/*/map.json\n//\n\n";
+
+    string arr_body = heal_locations_text.str();
+    text << "static const struct HealLocation sHealLocations[] =\n{\n" << arr_body << "};\n\n";
+
+    arr_body = respawn_maps_text.str();
+    if (!arr_body.empty())
+        text << "static const u16 sWhiteoutRespawnHealCenterMapIdxs[][2] =\n{\n" << arr_body << "};\n\n";
+
+    arr_body = respawn_npcs_text.str();
+    if (!arr_body.empty())
+        text << "static const u8 sWhiteoutRespawnHealerNpcIds[] =\n{\n" << arr_body << "};\n\n";
+
+    write_text_file(output_file, text.str());
+}
+
 string generate_groups_text(Json groups_data) {
     ostringstream text;
 
@@ -627,9 +690,6 @@ int main(int argc, char *argv[]) {
 
     char *mode_arg = argv[1];
     string mode(mode_arg);
-    if (mode != "layouts" && mode != "map" && mode != "groups")
-        FATAL_ERROR("ERROR: <mode> must be 'layouts', 'map', or 'groups'.\n");
-
     if (mode == "map") {
         if (argc != 6)
             FATAL_ERROR("USAGE: mapjson map <game-version> <map_file> <layouts_file> <output_dir>\n");
@@ -663,8 +723,24 @@ int main(int argc, char *argv[]) {
 
         process_layouts(filepath, output_asm, output_c);
     }
+    else if (mode == "heal_locations") {
+        if (argc < 5)
+            FATAL_ERROR("USAGE: mapjson heal_locations <game-version> <map_file> [additional_map_files] <output_file>");
+
+        infer_separator(argv[3]);
+
+        vector<string> filepaths;
+        const int firstMapFileArg = 3;
+        const int lastMapFileArg = argc - 2;
+        for (int i = firstMapFileArg; i <= lastMapFileArg; i++) {
+            filepaths.push_back(argv[i]);
+        }
+        string output_file(argv[argc - 1]);
+
+        process_heal_locations(filepaths, output_file);
+    }
     else {
-        FATAL_ERROR("ERROR: <mode> must be 'layouts', 'map', or 'groups'.\n");
+        FATAL_ERROR("ERROR: <mode> must be 'layouts', 'map', 'heal_locations', or 'groups'.\n");
     }
 
     return 0;
