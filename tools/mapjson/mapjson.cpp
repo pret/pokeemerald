@@ -422,12 +422,10 @@ void process_event_constants(const vector<string> &map_filepaths, string output_
         }
         // Get IDs from the warp events.
         auto warp_events = map_data["warp_events"].array_items();
-        if (warp_events.size()) {
-            for (unsigned int i = 0; i < warp_events.size(); i++) {
-                auto warp_event = warp_events[i];
-                if (warp_event.object_items().find("warp_id") != warp_event.object_items().end())
-                    map_ids_text << "#define " << json_to_string(warp_event, "warp_id") << " " << i << "\n";
-            }
+        for (unsigned int i = 0; i < warp_events.size(); i++) {
+            auto warp_event = warp_events[i];
+            if (warp_event.object_items().find("warp_id") != warp_event.object_items().end())
+                map_ids_text << "#define " << json_to_string(warp_event, "warp_id") << " " << i << "\n";
         }
         // Only output if we found any IDs
         string temp = map_ids_text.str();
