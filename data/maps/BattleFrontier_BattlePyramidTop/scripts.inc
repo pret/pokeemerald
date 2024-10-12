@@ -1,6 +1,3 @@
-.set LOCALID_ATTENDANT, 1
-.set LOCALID_BRANDON, 2
-
 BattleFrontier_BattlePyramidTop_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_BattlePyramidTop_OnResume
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePyramidTop_OnFrame
@@ -73,11 +70,11 @@ BattleFrontier_BattlePyramidTop_EventScript_Attendant::
 	goto_if_ne VAR_TEMP_C, FRONTIER_BRAIN_NOT_READY, BattleFrontier_BattlePyramidTop_EventScript_BrandonHereMoveAside
 	msgbox BattleFrontier_BattlePyramidTop_Text_ReachedSummitUpYouGo, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePyramidTop_Movement_AttendantMoveAside
+	applymovement LOCALID_PYRAMID_TOP_ATTENDANT, BattleFrontier_BattlePyramidTop_Movement_AttendantMoveAside
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePyramidTop_Movement_PlayerClimbToTop
 	waitmovement 0
-	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePyramidTop_Movement_AttendantBlockPath
+	applymovement LOCALID_PYRAMID_TOP_ATTENDANT, BattleFrontier_BattlePyramidTop_Movement_AttendantBlockPath
 	waitmovement 0
 	message BattleFrontier_BattlePyramidTop_Text_PlayerConqueredPyramid
 	waitmessage
@@ -97,7 +94,7 @@ BattleFrontier_BattlePyramidTop_EventScript_StepForwardWhenReady::
 
 BattleFrontier_BattlePyramidTop_EventScript_BrandonHereMoveAside::
 	msgbox BattleFrontier_BattlePyramidTop_Text_ChiefBeatYouHere, MSGBOX_DEFAULT
-	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePyramidTop_Movement_AttendantMoveAside
+	applymovement LOCALID_PYRAMID_TOP_ATTENDANT, BattleFrontier_BattlePyramidTop_Movement_AttendantMoveAside
 	setvar VAR_TEMP_D, 1
 	closemessage
 	end

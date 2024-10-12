@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "local_id": "LOCAL_ID_NAVEL_ROCK_HO_OH",
+      "local_id": "LOCALID_NAVEL_ROCK_HO_OH",
       "graphics_id": "OBJ_EVENT_GFX_HOOH",
       "x": 12,
       "y": 4,

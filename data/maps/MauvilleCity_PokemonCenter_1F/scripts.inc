@@ -14,7 +14,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_SetMauvilleOldManGfx::
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_Nurse::
-	setvar VAR_0x800B, LOCAL_ID_MAUVILLE_NURSE
+	setvar VAR_0x800B, LOCALID_MAUVILLE_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress

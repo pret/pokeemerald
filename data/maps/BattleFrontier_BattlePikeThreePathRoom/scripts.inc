@@ -1,5 +1,3 @@
-.set LOCALID_HINT_GIVER, 2
-
 BattleFrontier_BattlePikeThreePathRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_BattlePikeRoom_OnResume
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePikeThreePathRoom_OnFrame
@@ -160,12 +158,12 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_SetPikeQueenHint::
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_GivePikeQueenHint::
-	applymovement LOCALID_HINT_GIVER, BattleFrontier_BattlePikeThreePathRoom_Movement_HintGiverApproachPlayer
+	applymovement LOCALID_PIKE_HINT_GIVER, BattleFrontier_BattlePikeThreePathRoom_Movement_HintGiverApproachPlayer
 	waitmovement 0
 	lockall
 	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_TerrifyingEvent, MSGBOX_DEFAULT
 	releaseall
-	applymovement LOCALID_HINT_GIVER, BattleFrontier_BattlePikeThreePathRoom_Movement_HintGiverReturnToPos
+	applymovement LOCALID_PIKE_HINT_GIVER, BattleFrontier_BattlePikeThreePathRoom_Movement_HintGiverReturnToPos
 	waitmovement 0
 	setvar VAR_TEMP_5, 255
 	end
