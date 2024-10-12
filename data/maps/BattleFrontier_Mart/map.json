@@ -15,7 +15,7 @@
   "connections": null,
   "object_events": [
     {
-      "local_id": "LOCALID_BATTLE_FRONTIER_MART_CLERK",
+      "local_id": "LOCALID_FRONTIER_MART_CLERK",
       "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
       "x": 1,
       "y": 3,
@@ -29,6 +29,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_FRONTIER_MART_OLD_WOMAN",
       "graphics_id": "OBJ_EVENT_GFX_OLD_WOMAN",
       "x": 5,
       "y": 4,
