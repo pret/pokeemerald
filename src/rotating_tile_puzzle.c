@@ -109,7 +109,7 @@ u16 MoveRotatingTileObjects(u8 puzzleNumber)
 {
     u8 i;
     struct ObjectEventTemplate *objectEvents = gSaveBlock1Ptr->objectEventTemplates;
-    u16 localId = 0;
+    u16 localId = LOCALID_NONE;
 
     for (i = 0; i < OBJECT_EVENT_TEMPLATES_COUNT; i++)
     {

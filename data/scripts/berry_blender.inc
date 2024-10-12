@@ -1,11 +1,3 @@
-@ Note: local IDs shared with scripts.inc for LilycoveCity_ContestLobby
-.set LOCALID_MAN, 3
-.set LOCALID_BOY, 9
-.set LOCALID_TWIN, 10
-.set LOCALID_POKEFAN_F, 15
-.set LOCALID_EXPERT_M, 16
-.set LOCALID_GIRL, 17
-
 .set NUM_OPPONENTS, VAR_0x8009
 
 BerryBlender_Text_WantToMakePokeblocks:
@@ -246,7 +238,7 @@ BerryBlender_EventScript_BerryBlender1::
 	lockall
 	goto_if_unset FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER, BerryBlender_EventScript_BlendMasterPresent
 	setvar NUM_OPPONENTS, 1
-	applymovement LOCALID_EXPERT_M, BerryBlender_Movement_BlendLeaderWalkInPlace
+	applymovement LOCALID_BLEND_MASTER, BerryBlender_Movement_BlendLeaderWalkInPlace
 	waitmovement 0
 	msgbox BerryBlender_Text_WantToMakePokeblocks, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, BerryBlender_EventScript_TryUseBerryBlender1
@@ -325,8 +317,8 @@ BerryBlender_EventScript_Blender1NoCase:
 BerryBlender_EventScript_BerryBlender2::
 	lockall
 	setvar NUM_OPPONENTS, 2
-	applymovement LOCALID_TWIN, Common_Movement_FaceOriginalDirection
-	applymovement LOCALID_MAN, BerryBlender_Movement_BlendLeaderWalkInPlace
+	applymovement LOCALID_CONTEST_LOBBY_BLENDER_2_PARTICIPANT, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_CONTEST_LOBBY_BLENDER_2_LEADER, BerryBlender_Movement_BlendLeaderWalkInPlace
 	waitmovement 0
 	msgbox BerryBlender_Text_WantToBlendPokeblocksWithUs, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, BerryBlender_EventScript_TryUseBerryBlender2
@@ -382,10 +374,10 @@ BerryBlender_EventScript_Blender2NoCase:
 
 BerryBlender_EventScript_BerryBlender3::
 	lockall
-	setvar VAR_0x8008, LOCALID_POKEFAN_F
+	setvar VAR_0x8008, LOCALID_CONTEST_LOBBY_BLENDER_3_LEADER
 	setvar NUM_OPPONENTS, 3
-	applymovement LOCALID_BOY, Common_Movement_FaceOriginalDirection
-	applymovement LOCALID_GIRL, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_CONTEST_LOBBY_BLENDER_3_PARTICIPANT_1, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_CONTEST_LOBBY_BLENDER_3_PARTICIPANT_2, Common_Movement_FaceOriginalDirection
 	applymovement VAR_0x8008, BerryBlender_Movement_BlendLeaderWalkInPlace
 	waitmovement 0
 	msgbox BerryBlender_Text_LookGoodAtBlendingJoinUs, MSGBOX_YESNO

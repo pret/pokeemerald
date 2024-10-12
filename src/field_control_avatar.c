@@ -137,7 +137,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     u8 playerDirection;
     u16 metatileBehavior;
 
-    gSpecialVar_LastTalked = 0;
+    gSpecialVar_LastTalked = LOCALID_NONE;
     gSelectedObjectEvent = 0;
 
     playerDirection = GetPlayerFacingDirection();

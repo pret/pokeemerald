@@ -1023,7 +1023,7 @@ static void HidePyramidItem(void)
             break;
         }
         i++;
-        if (events[i].localId == 0)
+        if (events[i].localId == LOCALID_NONE)
             break;
     }
 }
@@ -1934,7 +1934,7 @@ u8 GetNumBattlePyramidObjectEvents(void)
 
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
-        if (events[i].localId == 0)
+        if (events[i].localId == LOCALID_NONE)
             break;
     }
 

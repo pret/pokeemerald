@@ -343,6 +343,7 @@
       "flag": "FLAG_HIDE_SLATEPORT_CITY_TM_SALESMAN"
     },
     {
+      "local_id": "LOCALID_SLATEPORT_ENERGY_GURU",
       "graphics_id": "OBJ_EVENT_GFX_POKEFAN_M",
       "x": 5,
       "y": 47,

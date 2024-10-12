@@ -1,5 +1,3 @@
-.set LOCALID_MOVE_DELETER, 1
-
 LilycoveCity_MoveDeletersHouse_MapScripts::
 	.byte 0
 

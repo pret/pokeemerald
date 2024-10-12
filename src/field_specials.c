@@ -563,8 +563,8 @@ void SpawnLinkPartnerObjectEvent(void)
                     linkSpriteId = OBJ_EVENT_GFX_RIVAL_MAY_NORMAL;
                 break;
             }
-            SpawnSpecialObjectEventParameterized(linkSpriteId, movementTypes[j], 240 - i, coordOffsets[j][0] + x + MAP_OFFSET, coordOffsets[j][1] + y + MAP_OFFSET, 0);
-            LoadLinkPartnerObjectEventSpritePalette(linkSpriteId, 240 - i, i);
+            SpawnSpecialObjectEventParameterized(linkSpriteId, movementTypes[j], LOCALID_BERRY_BLENDER_PLAYER_END - i, coordOffsets[j][0] + x + MAP_OFFSET, coordOffsets[j][1] + y + MAP_OFFSET, 0);
+            LoadLinkPartnerObjectEventSpritePalette(linkSpriteId, LOCALID_BERRY_BLENDER_PLAYER_END - i, i);
             j++;
             if (j == MAX_LINK_PLAYERS)
                 j = 0;

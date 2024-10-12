@@ -1,5 +1,3 @@
-.set LOCALID_TRICK_MASTER, 1
-
 Route110_TrickHouseEntrance_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHouseEntrance_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route110_TrickHouseEntrance_OnFrame
