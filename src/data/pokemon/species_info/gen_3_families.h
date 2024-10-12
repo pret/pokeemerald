@@ -4570,9 +4570,9 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .weight = 315,
         .description = COMPOUND_STRING(
             "It uses its amped-up willpower to create\n"
-            "additional arms for itself. The more it has\n"
-            "trained its spirit, the more realistic and\n"
-            "dexterous these self-created arms become."),
+            "additional arms for itself. The more it\n"
+            "has trained its spirit, the more realistic\n"
+            "and dexterous these arms become."),
         .pokemonScale = 298,
         .pokemonOffset = 5,
         .trainerScale = 256,

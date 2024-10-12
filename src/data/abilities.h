@@ -1550,7 +1550,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_SLUSH_RUSH] =
     {
         .name = _("Slush Rush"),
-        .description = COMPOUND_STRING("Raises Speed in Hail or Snow."),
+        .description = COMPOUND_STRING("Raises Speed in Hail/Snow."),
         .aiRating = 5,
     },
 
@@ -2573,7 +2573,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_TERA_SHELL] =
     {
         .name = _("Tera Shell"),
-        .description = COMPOUND_STRING("Resistant to types at full HP."),
+        .description = COMPOUND_STRING("Resists all at full HP."),
         .aiRating = 10,
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,
@@ -2588,7 +2588,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     #else
         .name = _("TeraformZero"),
     #endif
-        .description = COMPOUND_STRING("Removes weather and terrain."),
+        .description = COMPOUND_STRING("Zeroes weather and terrain."),
         .aiRating = 10,
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,

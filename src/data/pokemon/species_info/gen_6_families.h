@@ -640,11 +640,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .categoryName = _("Ninja"),
         .height = 15,
         .weight = 400,
-        .description = COMPOUND_STRING(
-            "It appears and vanishes with a ninja's\n"
-            "grace. It toys with its enemies using swift\n"
-            "movements, while slicing them with throwing\n"
-            "stars made of compressed water."),
+        .description = gGreninjaPokedexText,
         .pokemonScale = 268,
         .pokemonOffset = 2,
         .trainerScale = 271,
@@ -1806,8 +1802,8 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
     {
         FLORGES_MISC_INFO(Red, 0),
         .description = COMPOUND_STRING(
-            "This Pokémon creates an\n"
-            "impressive flower garden in its territory. It\n"
+            "This Pokémon creates an impressive\n"
+            "flower garden in its territory. It\n"
             "draws forth the power of the red\n"
             "flowers around its neck."),
     },
@@ -4213,8 +4209,8 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .height = 17,
         .weight = 3341,
         .description = COMPOUND_STRING(
-            "It loathes solitude and is\n"
-            "extremely clingy-it will fume and run riot if\n"
+            "It loathes solitude and is extremely\n"
+            "clingy--it will fume and run riot if\n"
             "those dearest to it ever leave its\n"
             "side."),
         .pokemonScale = 261,
@@ -5239,9 +5235,9 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .weight = 850,
         .description = COMPOUND_STRING(
             "They fly around on moonless nights and\n"
-            "attack careless prey. The ultrasonic waves\n"
-            "it emits from its ears can reduce a large\n"
-            "boulder to pebbles."),
+            "attack careless prey. The ultrasonic\n"
+            "waves it emits from its ears can reduce\n"
+            "a large boulder to pebbles."),
         .pokemonScale = 268,
         .pokemonOffset = 2,
         .trainerScale = 271,

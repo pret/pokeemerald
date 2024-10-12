@@ -3823,8 +3823,8 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .height = 5,
         .weight = 700,
         .description = COMPOUND_STRING(
-            "It takes control of anyone who puts a hand\n"
-            "in its mouth, to add to the accumulation\n"
+            "It takes control of anyone who puts a\n"
+            "hand in its mouth, to add to the pile\n"
             "of its sand-mound body. This Pokémon\n"
             "embodies the grudges of the departed."),
         .pokemonScale = 432,
@@ -6208,10 +6208,10 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .height = 38,
         .weight = 4600,
         .description = COMPOUND_STRING(
-            "This is its form while it is\n"
-            "devouring the light of Solgaleo. It pounces\n"
-            "on foes and then slashes them with\n"
-            "the claws on its four limbs and back."),
+            "This is its form while it is devouring\n"
+            "the light of Solgaleo. It pounces on\n"
+            "foes and then slashes them with the\n"
+            "claws on its four limbs and back."),
         .pokemonScale = 256,
         .pokemonOffset = 3,
         .trainerScale = 369,
@@ -6974,9 +6974,9 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .height = 25,
         .weight = 800,
         .description = COMPOUND_STRING(
-            "Revered long ago for its capacity to create\n"
-            "iron from nothing, for some reason it has\n"
-            "come back to life after 3,000 years."),
+            "Revered long ago for its capacity to\n"
+            "create iron from nothing, for some reason\n"
+            "it has come back to life after 3,000 years."),
         .pokemonScale = 257,
         .pokemonOffset = 10,
         .trainerScale = 423,

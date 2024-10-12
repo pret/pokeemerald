@@ -561,10 +561,10 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .height = 17,
         .weight = 845,
         .description = COMPOUND_STRING(
-            "The three horns that extend from its beak\n"
-            "attest to its power. It avoids unnecessary\n"
-            "disputes, but it will decimate anything\n"
-            "that threatens its pride."),
+            "The three horns that extend from its\n"
+            "beak attest to its power. It avoids\n"
+            "unnecessary disputes, but it will decimate\n"
+            "anything that threatens its pride."),
         .pokemonScale = 259,
         .pokemonOffset = 0,
         .trainerScale = 290,
@@ -4873,10 +4873,10 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .height = 3,
         .weight = 3,
         .description = COMPOUND_STRING(
-            "If the convection microwave oven is not\n"
-            "working properly, then the Rotom inhabiting\n"
-            "it will become lethargic. It will gleefully\n"
-            "burn your favorite outfit in mischief."),
+            "If the convection microwave oven is\n"
+            "not working properly, then the Rotom\n"
+            "inhabiting it will become lethargic. It\n"
+            "makes mischief by turning up the heat."),
         .pokemonScale = 530,
         .pokemonOffset = 13,
         .trainerScale = 256,

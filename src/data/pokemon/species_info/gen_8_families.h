@@ -885,8 +885,8 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .description = COMPOUND_STRING(
             "It will bravely challenge any opponent,\n"
             "no matter how powerful. This Pokémon\n"
-            "benefits from every battle--even a defeat\n"
-            "increases its strength a bit."),
+            "benefits from every battle--even a\n"
+            "defeat increases its strength a bit."),
         .pokemonScale = 682,
         .pokemonOffset = 24,
         .trainerScale = 256,
@@ -1318,8 +1318,8 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .height = 140,
         .weight = 0,
         .description = COMPOUND_STRING(
-            "Its brain has grown to a\n"
-            "gargantuan size, as has the rest of its body.\n"
+            "Its brain has grown to a gargantuan\n"
+            "size, as has the rest of its body.\n"
             "This Pokémon's intellect and\n"
             "psychic abilities are overpowering."),
         .pokemonScale = 491,
@@ -3621,9 +3621,9 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .weight = 0,
         .description = COMPOUND_STRING(
             "The heat that comes off a\n"
-            "Gigantamax Centiskorch may destabilize air\n"
-            "currents. Sometimes it can even\n"
-            "cause storms."),
+            "Gigantamax Centiskorch may\n"
+            "destabilize air currents. Sometimes\n"
+            "it can even cause storms."),
         .pokemonScale = 275,
         .pokemonOffset = 7,
         .trainerScale = 256,
@@ -4294,9 +4294,9 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .weight = 55,
         .description = COMPOUND_STRING(
             "Through its nose, it sucks in the\n"
-            "emanations produced by people and Pokémon\n"
-            "when they feel annoyed. It thrives off\n"
-            "this negative energy."),
+            "emanations produced by people and\n"
+            "Pokémon when they feel annoyed. It\n"
+            "thrives off this negative energy."),
         .pokemonScale = 491,
         .pokemonOffset = 12,
         .trainerScale = 256,
@@ -5577,9 +5577,9 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .height = 230,
         .weight = 0,
         .description = COMPOUND_STRING(
-            "After this Pokémon has\n"
-            "Gigantamaxed, its massive nose can utterly\n"
-            "demolish large structures with a single\n"
+            "After this Pokémon has Gigantamaxed,\n"
+            "its massive nose can utterly demolish\n"
+            "large structures with a single\n"
             "smashing blow."),
         .pokemonScale = 275,
         .pokemonOffset = 7,
@@ -6255,8 +6255,8 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .weight = 1100,
         .description = COMPOUND_STRING(
             "Known as a legendary hero, this Pokémon\n"
-            "absorbs metal particles, transforming them\n"
-            "into a weapon it uses to battle."),
+            "absorbs metal particles, transforming\n"
+            "them into a weapon it uses to battle."),
         .pokemonScale = 275,
         .pokemonOffset = 7,
         .trainerScale = 256,
