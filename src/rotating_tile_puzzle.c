@@ -100,7 +100,7 @@ void FreeRotatingTilePuzzle(void)
 
     TRY_FREE_AND_SET_NULL(sRotatingTilePuzzle);
 
-    id = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
+    id = GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[id]);
     ScriptMovement_UnfreezeObjectEvents();
 }

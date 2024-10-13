@@ -420,7 +420,7 @@ const u8 *GetRamScript(u8 localId, const u8 *script)
     }
 }
 
-#define NO_OBJECT OBJ_EVENT_ID_PLAYER
+#define NO_OBJECT LOCALID_PLAYER
 
 bool32 ValidateSavedRamScript(void)
 {

@@ -38,7 +38,7 @@ NavelRock_Top_EventScript_HoOh::
 	setvar VAR_0x8005, 35 @ delay
 	special LoopWingFlapSE
 	applymovement LOCALID_NAVEL_ROCK_HO_OH, NavelRock_Top_Movement_HoOhAppear
-	applymovement OBJ_EVENT_ID_CAMERA, NavelRock_Top_Movement_CameraPanUp
+	applymovement LOCALID_CAMERA, NavelRock_Top_Movement_CameraPanUp
 	waitmovement 0
 	delay 50
 	setweather WEATHER_NONE
@@ -51,7 +51,7 @@ NavelRock_Top_EventScript_HoOh::
 	setvar VAR_0x8004, 3  @ num loops
 	setvar VAR_0x8005, 35 @ delay
 	special LoopWingFlapSE
-	applymovement OBJ_EVENT_ID_CAMERA, NavelRock_Top_Movement_CameraPanDown
+	applymovement LOCALID_CAMERA, NavelRock_Top_Movement_CameraPanDown
 	applymovement LOCALID_NAVEL_ROCK_HO_OH, NavelRock_Top_Movement_HoOhApproach
 	waitmovement 0
 	special RemoveCameraObject

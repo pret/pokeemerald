@@ -1,5 +1,5 @@
 @ On this map the player will automatically walk into the room, but the camera is supposed to remain still.
-@ To do this GF sets the player (OBJ_EVENT_ID_PLAYER) invisible and creates a fake player object (LOCALID_VERDANTURF_TENT_BATTLE_PLAYER).
+@ To do this GF sets the player (LOCALID_PLAYER) invisible and creates a fake player object (LOCALID_VERDANTURF_TENT_BATTLE_PLAYER).
 @ The graphics of this fake player object are represented with VAR_OBJ_GFX_ID_1.
 @ The graphics of the opponent are represented with VAR_OBJ_GFX_ID_0, which will ultimately be set by tower_setopponent.
 VerdanturfTown_BattleTentBattleRoom_MapScripts::
@@ -132,7 +132,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_SetUpObjects::
 	hideobjectat LOCALID_VERDANTURF_TENT_BATTLE_PLAYER, MAP_VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM
 	call VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfx
 	setvar VAR_TEMP_1, 1
-	applymovement OBJ_EVENT_ID_PLAYER, VerdanturfTown_BattleTentBattleRoom_Movement_SetInvisible
+	applymovement LOCALID_PLAYER, VerdanturfTown_BattleTentBattleRoom_Movement_SetInvisible
 	removeobject LOCALID_VERDANTURF_TENT_BATTLE_OPPONENT
 	end
 

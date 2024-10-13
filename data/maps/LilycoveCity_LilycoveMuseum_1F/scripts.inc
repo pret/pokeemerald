@@ -43,7 +43,7 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_InterestedInPaintings::
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorNorth::
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_LilycoveMuseum_1F_Movement_FollowCuratorNorth
+	applymovement LOCALID_PLAYER, LilycoveCity_LilycoveMuseum_1F_Movement_FollowCuratorNorth
 	waitmovement 0
 	warp MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F, 11, 8
 	waitstate
@@ -51,7 +51,7 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorNorth::
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorWest::
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_LilycoveMuseum_1F_Movement_FollowCuratorWest
+	applymovement LOCALID_PLAYER, LilycoveCity_LilycoveMuseum_1F_Movement_FollowCuratorWest
 	waitmovement 0
 	warp MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F, 11, 8
 	waitstate
@@ -59,7 +59,7 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorWest::
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorEast::
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_LilycoveMuseum_1F_Movement_FollowCuratorEast
+	applymovement LOCALID_PLAYER, LilycoveCity_LilycoveMuseum_1F_Movement_FollowCuratorEast
 	waitmovement 0
 	warp MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F, 11, 8
 	waitstate

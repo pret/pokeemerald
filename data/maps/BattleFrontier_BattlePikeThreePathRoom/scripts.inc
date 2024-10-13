@@ -18,7 +18,7 @@ BattleFrontier_BattlePikeThreePathRoom_OnWarp:
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_TurnPlayerNorth::
 	setvar VAR_TEMP_4, 1
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	turnobject LOCALID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_GetChallengeStatus::
