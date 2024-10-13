@@ -1114,3 +1114,7 @@ EventScript_End:
 	.include "data/maps/PitArenaSpiderCave/scripts.inc"
 
 	.include "data/maps/PitArenaWhiteBark/scripts.inc"
+
+	.include "data/maps/PitRestFloor/scripts.inc"
+
+	.include "data/maps/PitBossArena/scripts.inc"

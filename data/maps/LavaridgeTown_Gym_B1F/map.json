@@ -3,7 +3,7 @@
   "name": "LavaridgeTown_Gym_B1F",
   "layout": "LAYOUT_LAVARIDGE_TOWN_GYM_B1F",
   "music": "MUS_GYM",
-  "region_map_section": "MAPSEC_LAVARIDGE_TOWN",
+  "region_map_section": "MAPSEC_PIT_BOSS",
   "requires_flash": false,
   "weather": "WEATHER_FOG_HORIZONTAL",
   "map_type": "MAP_TYPE_INDOOR",

@@ -7,7 +7,6 @@ PitArena_OnFrameRewardDrop::
 	lockall
 	setvar VAR_PIT_TUTOR_STATE, 0
 	setvar VAR_REWARD_STATE, 2
-	goto_if_eq VAR_PIT_FLOOR, 100, PitArena_OnFrameRewardDrop_4
 	goto_if_set FLAG_DOUBLES_MODE, PitArena_OnFrameRewardDrop_Doubles
 	random 3
 	switch VAR_RESULT
@@ -21,23 +20,23 @@ PitArena_OnFrameRewardDrop_1:
 
 PitArena_OnFrameRewardDrop_3:
 	clearflag FLAG_REWARD_ITEM_1
-	addobject 6
+	addobject 9
 	goto PitArena_OnFrameRewardDrop_1
 
 PitArena_OnFrameRewardDrop_4:
 	clearflag FLAG_REWARD_ITEM_1
 	clearflag FLAG_REWARD_ITEM_2
-	addobject 6
-	addobject 7
+	addobject 9
+	addobject 10
 	goto PitArena_OnFrameRewardDrop_1
 
 PitArena_OnFrameRewardDrop_5:
 	clearflag FLAG_REWARD_ITEM_1
 	clearflag FLAG_REWARD_ITEM_2
 	clearflag FLAG_REWARD_ITEM_3
-	addobject 6
-	addobject 7
-	addobject 12
+	addobject 9
+	addobject 10
+	addobject 11
 	goto PitArena_OnFrameRewardDrop_1
 
 PitArena_OnFrameRewardDrop_Doubles:
@@ -50,7 +49,7 @@ PitArena_OnFrameRewardDrop_Doubles:
 PitArena_OnResume:
 	callnative CheckFloorCleared
 	goto_if_unset FLAG_FLOOR_CLEARED, PitArena_OnResumeNormal
-	setmetatile 9, 9, METATILE_Cave_FLOOR_COMPLETE, FALSE
+	callnative SetWarpTileActive
 	setflashlevel 0
 	goto_if_eq VAR_PIT_FLOOR, 100, PitArena_OnResumeNormal
 	addvar VAR_REWARD_STATE, 1
@@ -78,8 +77,9 @@ PitArena_RewardDrop3::
 	end
 
 PitArena_Warp::
-	callnative SetAutosaveFlag
 	goto_if_unset FLAG_FLOOR_CLEARED, PitArena_WarpEnd
+Pit_Warp_Advance_Floor::
+	callnative SetAutosaveFlag
 	goto_if_unset FLAG_AUTO_SAVE, PitArenaNoAutoSave
 	clearflag FLAG_SAVING_FIELD_EFFECT
 	dofieldeffect(FLDEFF_SAVING)
@@ -98,14 +98,7 @@ PitArenaContinueAfterEvo::
 	setvar VAR_REWARD_STATE, 0
 	callnative BufferMapFloorString
 	callnative SetRandomTrainers
-	goto_if_eq VAR_PIT_FLOOR, 100, PitArena_WarpFloor100
-	warpteleport MAP_PIT_ARENA, 9, 7
-	waitstate
-	goto PitArena_WarpEnd
-PitArena_WarpFloor100::
-	setvar VAR_FINAL_FLOOR, 2
-	setvar VAR_REWARD_STATE, 2
-	warpteleport MAP_PIT_ARENA, 9, 11
+	warpteleport MAP_RANDOM, 9, 8
 	waitstate
 PitArena_WarpEnd::
 	releaseall

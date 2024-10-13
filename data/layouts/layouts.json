@@ -4560,6 +4560,26 @@
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/PitArenaWhiteBark/border.bin",
       "blockdata_filepath": "data/layouts/PitArenaWhiteBark/map.bin"
+    },
+    {
+      "id": "LAYOUT_PIT_REST_FLOOR",
+      "name": "PitRestFloor_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/PitRestFloor/border.bin",
+      "blockdata_filepath": "data/layouts/PitRestFloor/map.bin"
+    },
+    {
+      "id": "LAYOUT_PIT_BOSS_ARENA",
+      "name": "PitBossArena_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/PitBossArena/border.bin",
+      "blockdata_filepath": "data/layouts/PitBossArena/map.bin"
     }
   ]
 }

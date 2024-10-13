@@ -3,8 +3,8 @@
 
 #define MAPSEC_PIT_ENTRANCE              0x00
 #define MAPSEC_PIT_FLOORS                  0x01
-#define MAPSEC_DEWFORD_TOWN                 0x02
-#define MAPSEC_LAVARIDGE_TOWN               0x03
+#define MAPSEC_PIT_REST_FLOOR                 0x02
+#define MAPSEC_PIT_BOSS               0x03
 #define MAPSEC_FALLARBOR_TOWN               0x04
 #define MAPSEC_VERDANTURF_TOWN              0x05
 #define MAPSEC_PACIFIDLOG_TOWN              0x06

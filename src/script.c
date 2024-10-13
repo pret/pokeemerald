@@ -18,6 +18,8 @@
 #include "new_game.h"
 #include "ui_mode_menu.h"
 #include "start_menu.h"
+#include "constants/metatile_labels.h"
+#include "fieldmap.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
@@ -555,74 +557,13 @@ static const struct RandomTrainerNPC RandomNPCTrainers_Doubles[] =
 u16 ReturnLastSpokenVarObjGfxId()
 {   
     if(gSpecialVar_LastTalked > 4)
-        return VarGet(RandomNPCTrainers_Doubles[gSpecialVar_LastTalked - 15].gfxid);
+        return VarGet(RandomNPCTrainers_Doubles[gSpecialVar_LastTalked - 5].gfxid);
     else
         return VarGet(RandomNPCTrainers[gSpecialVar_LastTalked - 1].gfxid);
 }
 
 u16 ReturnNumberOfTrainersForFloor()
 {
-    FlagSet(FLAG_MOVER_OBJECT);
-
-    if(VarGet(VAR_PIT_FLOOR) == 100)
-    {
-        FlagClear(FLAG_END_GAME_ARCHIE);
-        //FlagClear(FLAG_END_GAME_STATUE);
-    }
-    else
-    {
-        FlagSet(FLAG_END_GAME_ARCHIE);
-        FlagSet(FLAG_END_GAME_STATUE);
-    }
-        
-
-    if((VarGet(VAR_PIT_FLOOR) % 5) == 0) // Heal Floor
-    {
-        FlagClear(FLAG_HEAL_NPC);
-        FlagClear(FLAG_SHOP_NPC);
-
-        if(FlagGet(FLAG_RANDOM_MODE))
-        {
-            if((VarGet(VAR_PIT_FLOOR) % 20) == 0) // Move Relearner/Tutor Floor
-            {
-                FlagClear(FLAG_MOVE_RELEARNER);
-            }
-        }
-        else
-        {
-            if(((VarGet(VAR_PIT_FLOOR) % 10) == 0) && !((VarGet(VAR_PIT_FLOOR) % 25) == 0)) // Move Relearner/Tutor Floor
-            {
-                FlagClear(FLAG_MOVE_RELEARNER);
-            }
-        }
-        
-        if(((VarGet(VAR_PIT_FLOOR) % 25) == 0) && (gSaveBlock2Ptr->mode3MonsOnly == 0)) // New Mon Floor
-        {
-            FlagClear(FLAG_GIVE_POKEMON);
-            FlagSet(FLAG_MOVE_RELEARNER);
-        }
-
-        if(FlagGet(FLAG_NO_EXP_MODE))
-            FlagClear(FLAG_MOVE_RELEARNER);
-
-        return 0;
-    }
-
-    FlagSet(FLAG_HEAL_NPC);
-    FlagSet(FLAG_SHOP_NPC);
-    FlagSet(FLAG_MOVE_RELEARNER);
-    FlagSet(FLAG_MOVER_OBJECT);
-    FlagSet(FLAG_GIVE_POKEMON);
-
-    if((VarGet(VAR_PIT_FLOOR) > 25) && ((VarGet(VAR_PIT_FLOOR) < 95) || (VarGet(VAR_PIT_FLOOR) > 101)))
-    {
-        if(!(Random() % 20))
-        {
-            FlagClear(FLAG_MOVER_OBJECT);
-            return 0;
-        }
-    }
-
     if(VarGet(VAR_LAST_FLOOR_TRAINER_NUMBER) == 4)
         return 1;
 
@@ -997,4 +938,49 @@ void LevelUpParty(void)
         MonTryLearningNewMove(mon, TRUE);
     }
     return;
+}
+
+
+#define RANDOM_MAP_COUNT ARRAY_COUNT(sRandomMapArray) // Possible Random Maps - Must Match sWarpTileActiveArray in Size For Now Too
+static const u16 sRandomMapArray[] = {
+    MAP_PIT_ARENA,                        
+    MAP_PIT_ARENA_WATER,         
+    MAP_PIT_ARENA_DESERT,        
+    MAP_PIT_ARENA_SNOW,          
+    MAP_PIT_ARENA_BEACH,         
+    MAP_PIT_ARENA_MUSHROOM_WOODS,   
+    MAP_PIT_ARENA_DIRT_PATH,     
+    MAP_PIT_ARENA_SPIDER_WOODS,  
+    MAP_PIT_ARENA_UNDERWATER,    
+    MAP_PIT_ARENA_MINE,          
+    MAP_PIT_ARENA_WHITE_BARK,    
+};
+
+#define WARP_TILE_ACTIVE_COUNT ARRAY_COUNT(sWarpTileActiveArray) // Array for Toggling Warp Tile On
+static const u16 sWarpTileActiveArray[] = {
+    METATILE_Cave_FLOOR_COMPLETE,                        
+    METATILE_PitWaterTheme_WATER_WARP_ACTIVE,         
+    METATILE_PitArenaDesert_DESERT_WARP_ACTIVE,        
+    METATILE_PitArenaSnow_SNOW_WARP_ACTIVE,          
+    METATILE_PitArenaBeach_BEACH_WARP_ACTIVE,         
+    METATILE_PitArenaMushroomWoods_MUSHROOM_WARP_ACTIVE,   
+    METATILE_PitArenaDirtPath_DIRT_PATH_WARP_ACTIVE,     
+    METATILE_PitArenaSpiderWoods_SPIDER_WOODS_WARP_ACTIVE,  
+    METATILE_PitArenaUnderwater_UNDERWATER_WARP_ACTIVE,    
+    METATILE_PitArenaMine_MINE_WARP_ACTIVE,           
+    METATILE_PitArenaWhiteBark_WHITEBARK_WARP_ACTIVE,    
+};
+
+u8 ReturnRandomMapNum(void)
+{
+    u16 index = Random() % RANDOM_MAP_COUNT;
+    VarSet(VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY, index);
+    return (u8)(sRandomMapArray[index] & 0x00FF);
+}
+
+void SetWarpTileActive(void)
+{
+    u16 currentIndex = VarGet(VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY);
+    if(currentIndex != 0xFF)
+        MapGridSetMetatileIdAt(9 + MAP_OFFSET, 9 + MAP_OFFSET, sWarpTileActiveArray[currentIndex]);
 }

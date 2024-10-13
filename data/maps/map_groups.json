@@ -1,5 +1,4 @@
 {
-  "layouts_table_label": "gMapLayouts",
   "group_order": [
     "gMapGroup_TownsAndRoutes",
     "gMapGroup_IndoorLittleroot",
@@ -108,7 +107,9 @@
     "PitArenaUnderwater",
     "PitArenaMine",
     "PitArenaSpiderCave",
-    "PitArenaWhiteBark"
+    "PitArenaWhiteBark",
+    "PitRestFloor",
+    "PitBossArena"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",

@@ -139,22 +139,20 @@ Debug_EventScript_Text_DefensiveIVs:
 
 PitArenaDebugNotOnWall::
 	setflag FLAG_FLOOR_CLEARED
-	setmetatile 9, 9, METATILE_Cave_FLOOR_COMPLETE, FALSE
-	setvar VAR_PIT_FLOOR, 24
-	additem ITEM_RARE_CANDY, 99
+	callnative SetWarpTileActive
 	special DrawWholeMapView
 	end
 
 PitArenaDebug2NotOnWall::
 	setflag FLAG_FLOOR_CLEARED
-	setmetatile 9, 9, METATILE_Cave_FLOOR_COMPLETE, FALSE
+	callnative SetWarpTileActive
 	addvar VAR_PIT_FLOOR, 24
 	special DrawWholeMapView
 	end
 
 PitArenaDebug3NotOnWall::
 	setflag FLAG_FLOOR_CLEARED
-	setmetatile 9, 9, METATILE_Cave_FLOOR_COMPLETE, FALSE
+	callnative SetWarpTileActive
 	setvar VAR_PIT_FLOOR, 99
 	additem ITEM_RARE_CANDY, 99
 	special DrawWholeMapView
@@ -162,7 +160,7 @@ PitArenaDebug3NotOnWall::
 
 PitArenaDebug4NotOnWall::
 	setflag FLAG_FLOOR_CLEARED
-	setmetatile 9, 9, METATILE_Cave_FLOOR_COMPLETE, FALSE
+	callnative SetWarpTileActive
 	setvar VAR_PIT_FLOOR, 19
 	additem ITEM_RARE_CANDY, 99
 	special DrawWholeMapView
@@ -195,7 +193,11 @@ Debug_EventScript_Script_6::
 	end
 
 Debug_EventScript_Script_7::
-	release
+	setflag FLAG_FLOOR_CLEARED
+	callnative SetWarpTileActive
+	setvar VAR_PIT_FLOOR, 24
+	additem ITEM_RARE_CANDY, 99
+	special DrawWholeMapView
 	end
 
 Debug_EventScript_Script_8::

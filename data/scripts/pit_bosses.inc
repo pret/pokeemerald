@@ -20,9 +20,9 @@ PitBoss_ArchieBattleFinished::
 	msgbox Pit_EndGameStatue_Text1, MSGBOX_DEFAULT
 	closemessage
 	fadescreen FADE_TO_BLACK
-	removeobject 11
+	removeobject 1
 	setflag FLAG_END_GAME_ARCHIE
-	addobject 10
+	addobject 2
 	clearflag FLAG_END_GAME_STATUE
 	fadescreen FADE_FROM_BLACK
 	callnative SetAutosaveFlag
@@ -78,27 +78,21 @@ Pit_EndGameStatue222::
 PitStatueNoAutoSave:
 	msgbox Pit_EndGameStatue_Text2, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Pit_EndGameStatue2
-	setvar VAR_REWARD_STATE, 2
-	clearflag FLAG_REWARD_ITEM_1
-	clearflag FLAG_REWARD_ITEM_2
-	additem 6
-	additem 7
-	callnative UpdateObjectEventsFromScript
-	removeobject 10
 	special HealPlayerParty
+	removeobject 2
 	setflag FLAG_FLOOR_CLEARED
-	setmetatile 9, 9, METATILE_Cave_FLOOR_COMPLETE, FALSE
+	callnative SetWarpTileActive
 	special DrawWholeMapView
 	releaseall
 	end
 
 Pit_EndGameStatue2::
 	msgbox Pit_EndGameStatue_Text3, MSGBOX_AUTOCLOSE 
+	fadescreen FADE_TO_BLACK
 	special GameClear
 	waitstate
 	releaseall
 	end
-
 
 Pit_EndGameStatue_Text1:
 	.string "Congratulations, you have.\n"

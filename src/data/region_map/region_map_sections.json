@@ -17,16 +17,16 @@
       "height": 1
     },
     {
-      "map_section": "MAPSEC_DEWFORD_TOWN",
-      "name": "DEWFORD TOWN",
+      "map_section": "MAPSEC_PIT_REST_FLOOR",
+      "name": "Pit Stop - {STR_VAR_1}",
       "x": 2,
       "y": 14,
       "width": 1,
       "height": 1
     },
     {
-      "map_section": "MAPSEC_LAVARIDGE_TOWN",
-      "name": "LAVARIDGE TOWN",
+      "map_section": "MAPSEC_PIT_BOSS",
+      "name": "Pit Boss - {STR_VAR_1}",
       "x": 5,
       "y": 3,
       "width": 1,

@@ -813,6 +813,34 @@ bool8 ScrCmd_warpteleport(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
+    if(mapNum == 0xFF)
+    {   
+        if(((VarGet(VAR_PIT_FLOOR) % 5) == 0) && (VarGet(VAR_PIT_FLOOR) != 100))
+        {
+            mapNum = MAP_PIT_REST_FLOOR;
+            mapGroup = 0;
+            VarSet(VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY, 0);
+            y = 9;
+        }
+        else if ((VarGet(VAR_PIT_FLOOR) == 100))
+        {
+            mapNum = MAP_PIT_BOSS_ARENA;
+            mapGroup = 0;
+            VarSet(VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY, 0);
+            y = 6;
+        }
+        else
+        {
+            mapNum = ReturnRandomMapNum();
+            mapGroup = 0;
+        }
+    }
+    else
+    {
+        VarSet(VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY, 0);
+    }
+    
+
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     DoTeleportTileWarp();
     ResetInitialPlayerAvatarState();

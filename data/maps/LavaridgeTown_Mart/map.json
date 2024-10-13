@@ -3,7 +3,7 @@
   "name": "LavaridgeTown_Mart",
   "layout": "LAYOUT_MART",
   "music": "MUS_POKE_MART",
-  "region_map_section": "MAPSEC_LAVARIDGE_TOWN",
+  "region_map_section": "MAPSEC_PIT_BOSS",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",

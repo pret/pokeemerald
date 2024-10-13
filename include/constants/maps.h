@@ -8,6 +8,7 @@
 #define MAP_DYNAMIC (0x7F | (0x7F << 8))
 
 #define MAP_UNDEFINED (0xFF | (0xFF << 8))
+#define MAP_RANDOM    (0xFF | (0xFF << 8))
 
 #define MAP_GROUP(map) (MAP_##map >> 8)
 #define MAP_NUM(map) (MAP_##map & 0xFF)

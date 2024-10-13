@@ -269,7 +269,7 @@
 #define VAR_FINAL_FLOOR                                0x40F9 // Unused Var
 #define VAR_LAST_FLOOR_TRAINER_NUMBER                                0x40FA // Unused Var
 #define VAR_BATTLE_SPEED                                0x40FB // Unused Var
-#define VAR_UNUSED_0x40FC                                0x40FC // Unused Var
+#define VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY                                0x40FC // Unused Var
 #define VAR_UNUSED_0x40FD                                0x40FD // Unused Var
 #define VAR_UNUSED_0x40FE                                0x40FE // Unused Var
 #define VAR_UNUSED_0x40FF                                0x40FF // Unused Var
