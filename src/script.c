@@ -20,6 +20,8 @@
 #include "start_menu.h"
 #include "constants/metatile_labels.h"
 #include "fieldmap.h"
+#include "field_screen_effect.h"
+#include "overworld.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
@@ -940,47 +942,120 @@ void LevelUpParty(void)
     return;
 }
 
+struct sRandomMap {
+    u16 mapConstant;
+    u16 warpMetatileId;
+    u16 dest_x;
+    u16 dest_y;
+    u16 warp_x;
+    u16 warp_y;
+};
 
 #define RANDOM_MAP_COUNT ARRAY_COUNT(sRandomMapArray) // Possible Random Maps - Must Match sWarpTileActiveArray in Size For Now Too
-static const u16 sRandomMapArray[] = {
-    MAP_PIT_ARENA,                        
-    MAP_PIT_ARENA_WATER,         
-    MAP_PIT_ARENA_DESERT,        
-    MAP_PIT_ARENA_SNOW,          
-    MAP_PIT_ARENA_BEACH,         
-    MAP_PIT_ARENA_MUSHROOM_WOODS,   
-    MAP_PIT_ARENA_DIRT_PATH,     
-    MAP_PIT_ARENA_SPIDER_WOODS,  
-    MAP_PIT_ARENA_UNDERWATER,    
-    MAP_PIT_ARENA_MINE,          
-    MAP_PIT_ARENA_WHITE_BARK,    
+static const struct sRandomMap sRandomMapArray[] = {
+    {
+        .mapConstant = MAP_PIT_ARENA,
+        .warpMetatileId = METATILE_Cave_FLOOR_COMPLETE,
+        .dest_x = 9,
+        .dest_y = 8,
+        .warp_x = 9,
+        .warp_y = 9,
+    },     
+    {
+        .mapConstant = MAP_PIT_ARENA_WATER,
+        .warpMetatileId = METATILE_PitWaterTheme_WATER_WARP_ACTIVE,
+        .dest_x = 9,
+        .dest_y = 8,
+        .warp_x = 9,
+        .warp_y = 9,
+    },  
+    {
+        .mapConstant = MAP_PIT_ARENA_DESERT,
+        .warpMetatileId = METATILE_PitArenaDesert_DESERT_WARP_ACTIVE,
+        .dest_x = 9,
+        .dest_y = 8,
+        .warp_x = 9,
+        .warp_y = 9,
+    },  
+    {
+        .mapConstant = MAP_PIT_ARENA_SNOW,
+        .warpMetatileId = METATILE_PitArenaSnow_SNOW_WARP_ACTIVE,
+        .dest_x = 9,
+        .dest_y = 8,
+        .warp_x = 9,
+        .warp_y = 9,
+    },  
+    {
+        .mapConstant = MAP_PIT_ARENA_BEACH,
+        .warpMetatileId = METATILE_PitArenaBeach_BEACH_WARP_ACTIVE,
+        .dest_x = 9,
+        .dest_y = 8,
+        .warp_x = 9,
+        .warp_y = 9,
+    },  
+    {
+        .mapConstant = MAP_PIT_ARENA_MUSHROOM_WOODS,
+        .warpMetatileId = METATILE_PitArenaMushroomWoods_MUSHROOM_WARP_ACTIVE,
+        .dest_x = 9,
+        .dest_y = 8,
+        .warp_x = 9,
+        .warp_y = 9,
+    },        
+    {
+        .mapConstant = MAP_PIT_ARENA_DIRT_PATH,
+        .warpMetatileId = METATILE_PitArenaDirtPath_DIRT_PATH_WARP_ACTIVE,
+        .dest_x = 9,
+        .dest_y = 8,
+        .warp_x = 9,
+        .warp_y = 9,
+    },    
+    {
+        .mapConstant = MAP_PIT_ARENA_SPIDER_WOODS,
+        .warpMetatileId = METATILE_PitArenaSpiderWoods_SPIDER_WOODS_WARP_ACTIVE,
+        .dest_x = 9,
+        .dest_y = 8,
+        .warp_x = 9,
+        .warp_y = 9,
+    },    
+    {
+        .mapConstant = MAP_PIT_ARENA_UNDERWATER,
+        .warpMetatileId = METATILE_PitArenaUnderwater_UNDERWATER_WARP_ACTIVE,
+        .dest_x = 9,
+        .dest_y = 8,
+        .warp_x = 9,
+        .warp_y = 9,
+    },    
+    {
+        .mapConstant = MAP_PIT_ARENA_MINE,
+        .warpMetatileId = METATILE_PitArenaMine_MINE_WARP_ACTIVE,
+        .dest_x = 9,
+        .dest_y = 8,
+        .warp_x = 9,
+        .warp_y = 9,
+    },    
+    {
+        .mapConstant = MAP_PIT_ARENA_WHITE_BARK,
+        .warpMetatileId = METATILE_PitArenaWhiteBark_WHITEBARK_WARP_ACTIVE,
+        .dest_x = 9,
+        .dest_y = 8,
+        .warp_x = 9,
+        .warp_y = 9,
+    },                   
 };
 
-#define WARP_TILE_ACTIVE_COUNT ARRAY_COUNT(sWarpTileActiveArray) // Array for Toggling Warp Tile On
-static const u16 sWarpTileActiveArray[] = {
-    METATILE_Cave_FLOOR_COMPLETE,                        
-    METATILE_PitWaterTheme_WATER_WARP_ACTIVE,         
-    METATILE_PitArenaDesert_DESERT_WARP_ACTIVE,        
-    METATILE_PitArenaSnow_SNOW_WARP_ACTIVE,          
-    METATILE_PitArenaBeach_BEACH_WARP_ACTIVE,         
-    METATILE_PitArenaMushroomWoods_MUSHROOM_WARP_ACTIVE,   
-    METATILE_PitArenaDirtPath_DIRT_PATH_WARP_ACTIVE,     
-    METATILE_PitArenaSpiderWoods_SPIDER_WOODS_WARP_ACTIVE,  
-    METATILE_PitArenaUnderwater_UNDERWATER_WARP_ACTIVE,    
-    METATILE_PitArenaMine_MINE_WARP_ACTIVE,           
-    METATILE_PitArenaWhiteBark_WHITEBARK_WARP_ACTIVE,    
-};
-
-u8 ReturnRandomMapNum(void)
+u8 WarpToRandomPitArena(void)
 {
     u16 index = Random() % RANDOM_MAP_COUNT;
     VarSet(VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY, index);
-    return (u8)(sRandomMapArray[index] & 0x00FF);
+    SetWarpDestination(0, (u8)(sRandomMapArray[index].mapConstant & 0x00FF), WARP_ID_NONE, sRandomMapArray[index].dest_x, sRandomMapArray[index].dest_y);
+    DoTeleportTileWarp();
+    ResetInitialPlayerAvatarState();
+    return;
 }
 
 void SetWarpTileActive(void)
 {
     u16 currentIndex = VarGet(VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY);
     if(currentIndex != 0xFF)
-        MapGridSetMetatileIdAt(9 + MAP_OFFSET, 9 + MAP_OFFSET, sWarpTileActiveArray[currentIndex]);
+        MapGridSetMetatileIdAt(sRandomMapArray[currentIndex].warp_x + MAP_OFFSET, sRandomMapArray[currentIndex].warp_y + MAP_OFFSET, sRandomMapArray[currentIndex].warpMetatileId);
 }

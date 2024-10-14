@@ -831,8 +831,8 @@ bool8 ScrCmd_warpteleport(struct ScriptContext *ctx)
         }
         else
         {
-            mapNum = ReturnRandomMapNum();
-            mapGroup = 0;
+            WarpToRandomPitArena();
+            return TRUE;
         }
     }
     else
