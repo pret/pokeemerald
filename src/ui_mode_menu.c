@@ -53,6 +53,8 @@
 #define NO              1
 #define MEGAS_ON        0
 #define MEGAS_OFF       1
+#define HEAL_FLOORS_5   0
+#define HEAL_FLOORS_10  1
 
 
 // This code is based on Ghoulslash's excellent UI tutorial:
@@ -92,6 +94,7 @@ enum MenuItems_Run
     #ifdef PIT_GEN_9_MODE
     MENUITEM_RUN_MEGAS,
     #endif
+    MENUITEM_RUN_HEALFLOORS,
     MENUITEM_RUN_CANCEL,
     MENUITEM_RUN_COUNT,
 };
@@ -283,6 +286,7 @@ static void DrawChoices_StatChanger(int selection, int y);
 static void DrawChoices_Legendaries(int selection, int y);
 static void DrawChoices_Duplicates(int selection, int y);
 static void DrawChoices_Megas(int selection, int y);
+static void DrawChoices_HealFloors(int selection, int y);
 static void DrawBgWindowFrames(void);
 
 // Menu draw and input functions
@@ -303,6 +307,7 @@ struct Menu_Run //MENU_RUN
     #ifdef PIT_GEN_9_MODE
     [MENUITEM_RUN_MEGAS]        = {DrawChoices_Megas,       ProcessInput_Options_Two},
     #endif
+    [MENUITEM_RUN_HEALFLOORS]   = {DrawChoices_HealFloors,  ProcessInput_Options_Two},
     [MENUITEM_RUN_CANCEL]       = {NULL, NULL},
 };
 
@@ -338,6 +343,7 @@ static const u8 sText_StatChanger[] = _("STAT CHANGER");
 static const u8 sText_Legendaries[] = _("LEGENDARIES");
 static const u8 sText_Duplicates[]  = _("DUPLICATES");
 static const u8 sText_Megas[]       = _("TRAINER MEGAS");
+static const u8 sText_HealFloors[]  = _("HEAL FLOORS");
 static const u8 sText_Cancel[]      = _("SAVE & LEAVE");
 
 static const u8 *const sModeMenuItemsNamesRun[MENUITEM_RUN_COUNT] =
@@ -353,6 +359,7 @@ static const u8 *const sModeMenuItemsNamesRun[MENUITEM_RUN_COUNT] =
     #ifdef PIT_GEN_9_MODE
     [MENUITEM_RUN_MEGAS]        = sText_Megas,
     #endif
+    [MENUITEM_RUN_HEALFLOORS]   = sText_HealFloors,
     [MENUITEM_RUN_CANCEL]       = sText_Cancel,
 };
 
@@ -402,6 +409,7 @@ static bool8 CheckConditions(int selection)
                 #ifdef PIT_GEN_9_MODE
                 case MENUITEM_RUN_MEGAS:          return TRUE;
                 #endif
+                case MENUITEM_RUN_HEALFLOORS:     return TRUE;
                 case MENUITEM_RUN_CANCEL:         return TRUE;
                 case MENUITEM_RUN_COUNT:          return TRUE;
                 default:                          return FALSE;
@@ -452,6 +460,8 @@ static const u8 sText_Desc_Duplicates_On[]      = _("Truly random. Duplicates ar
 static const u8 sText_Desc_Duplicates_Off[]     = _("Birch bag can't hold duplicates.");
 static const u8 sText_Desc_Megas_On[]           = _("Trainer Pokémon have a 40% chance\nto mega evolve if possible.");
 static const u8 sText_Desc_Megas_Off[]          = _("Trainer Pokémon can never mega\nevolve.");
+static const u8 sText_Desc_HealFloors_5[]       = _("Get a rest stop to heal every\n 5 floors.");
+static const u8 sText_Desc_HealFloors_10[]      = _("Get a rest stop to heal every\n 10 floors.");
 
 static const u8 *const sModeMenuItemDescriptionsRun[MENUITEM_RUN_COUNT][3] =
 {
@@ -466,6 +476,7 @@ static const u8 *const sModeMenuItemDescriptionsRun[MENUITEM_RUN_COUNT][3] =
     #ifdef PIT_GEN_9_MODE
     [MENUITEM_RUN_MEGAS]        = {sText_Desc_Megas_On,            sText_Desc_Megas_Off,           sText_Empty},
     #endif
+    [MENUITEM_RUN_HEALFLOORS]   = {sText_Desc_HealFloors_5,        sText_Desc_HealFloors_10,       sText_Empty},
     [MENUITEM_RUN_CANCEL]       = {sText_Desc_Save,                sText_Empty,                    sText_Empty},
 };
 
@@ -650,6 +661,7 @@ static void ModeMenu_SetupCB(void)
         #ifdef PIT_GEN_9_MODE
         sOptions->sel_run[MENUITEM_RUN_MEGAS]        = gSaveBlock2Ptr->modeMegas;
         #endif
+        sOptions->sel_run[MENUITEM_RUN_HEALFLOORS]   = gSaveBlock2Ptr->modeHealFloors10;
         gMain.state++;
         break;
     case 7:
@@ -1025,6 +1037,7 @@ static void Task_ModeMenuMainInput(u8 taskId)
                                 #ifdef PIT_GEN_9_MODE
                                 sOptions->sel_run[MENUITEM_RUN_MEGAS]        = MEGAS_OFF;
                                 #endif
+                                sOptions->sel_run[MENUITEM_RUN_HEALFLOORS]   = HEAL_FLOORS_5;
                                 break;
                             case MODE_HARD:
                                 sOptions->sel_run[MENUITEM_RUN_XPSHARE]      = XP_50;
@@ -1034,6 +1047,7 @@ static void Task_ModeMenuMainInput(u8 taskId)
                                 #ifdef PIT_GEN_9_MODE
                                 sOptions->sel_run[MENUITEM_RUN_MEGAS]        = MEGAS_ON;
                                 #endif
+                                sOptions->sel_run[MENUITEM_RUN_HEALFLOORS]   = HEAL_FLOORS_5;
                                 break;
                             default:
                                 break;
@@ -1092,6 +1106,7 @@ static void Task_ModeMenuSave(u8 taskId)
     gSaveBlock2Ptr->modeXPShare     = sOptions->sel_run[MENUITEM_RUN_XPSHARE];
     gSaveBlock2Ptr->modeStatChanger = sOptions->sel_run[MENUITEM_RUN_STAT_CHANGER];
     gSaveBlock2Ptr->modeLegendaries = sOptions->sel_run[MENUITEM_RUN_LEGENDARIES];
+    gSaveBlock2Ptr->modeHealFloors10 = sOptions->sel_run[MENUITEM_RUN_HEALFLOORS];
     //gSaveBlock2Ptr->modeDuplicates  = sOptions->sel_run[MENUITEM_RUN_DUPLICATES];
     #ifdef PIT_GEN_9_MODE
     gSaveBlock2Ptr->modeMegas       = sOptions->sel_run[MENUITEM_RUN_MEGAS];
@@ -1323,6 +1338,8 @@ static const u8 sText_StatChanger_On[]      = _("ACTIVE");
 static const u8 sText_StatChanger_Off[]     = _("INACTIVE");
 static const u8 sText_Choice_Yes[]          = _("YES");
 static const u8 sText_Choice_No[]           = _("NO");
+static const u8 sText_HealFloors_5[]        = _("5FLRS");
+static const u8 sText_HealFloors_10[]       = _("10FLRS");
 
 static void DrawChoices_Defaults(int selection, int y)
 {
@@ -1350,6 +1367,16 @@ static void DrawChoices_Autosave(int selection, int y)
     DrawModeMenuChoice(sText_Autosave_Off, 104, y, styles[0], active);
     DrawModeMenuChoice(sText_Autosave_5, xMid, y, styles[1], active);
     DrawModeMenuChoice(sText_Autosave_On, GetStringRightAlignXOffset(1, sText_Autosave_On, 198), y, styles[2], active);
+}
+
+static void DrawChoices_HealFloors(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_RUN_HEALFLOORS);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawModeMenuChoice(sText_HealFloors_5, 104, y, styles[0], active);
+    DrawModeMenuChoice(sText_HealFloors_10, GetStringRightAlignXOffset(FONT_NORMAL, sText_HealFloors_10, 198), y, styles[1], active);
 }
 
 static void DrawChoices_BattleMode(int selection, int y)

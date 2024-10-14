@@ -812,10 +812,11 @@ bool8 ScrCmd_warpteleport(struct ScriptContext *ctx)
     u8 warpId = ScriptReadByte(ctx);
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
+    u32 healFloorFreq = gSaveBlock2Ptr->modeHealFloors10 ? 10 : 5;
 
     if(mapNum == 0xFF)
     {   
-        if(((VarGet(VAR_PIT_FLOOR) % 5) == 0) && (VarGet(VAR_PIT_FLOOR) != 100))
+        if(((VarGet(VAR_PIT_FLOOR) % healFloorFreq) == 0) && (VarGet(VAR_PIT_FLOOR) != 100))
         {
             mapNum = MAP_PIT_REST_FLOOR;
             mapGroup = 0;

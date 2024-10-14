@@ -147,6 +147,7 @@ void SetDefaultOptions(void)
         gSaveBlock2Ptr->modeLegendaries = 0;
         gSaveBlock2Ptr->modeDuplicates = 1;
         gSaveBlock2Ptr->modeMegas = 1;
+        gSaveBlock2Ptr->modeHealFloors10 = 0;
         gSaveBlock2Ptr->randomMoves = 0;
         gSaveBlock2Ptr->randomAbilities = 0;
         gSaveBlock2Ptr->randomBST = 0;
