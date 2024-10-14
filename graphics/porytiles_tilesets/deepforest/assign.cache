@@ -1,0 +1,3 @@
+assign-algorithm=dfs
+explore-cutoff=1000000
+best-branches=smart
