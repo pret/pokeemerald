@@ -1016,7 +1016,7 @@ static const struct sRandomMap sRandomMapArray[] = {
     },                   
 };
 
-u8 WarpToRandomPitArena(void)
+void WarpToRandomPitArena(void)
 {
     u16 index = Random() % RANDOM_MAP_COUNT;
     VarSet(VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY, index);
