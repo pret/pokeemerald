@@ -719,8 +719,7 @@ static void ModeMenu_VBlankCB(void)
 static const u8 sText_TopBar_Run[]        = _("RUN SETTINGS");
 static const u8 sText_TopBar_Diff[]       = _("DIFFICULTY SETTINGS");
 static const u8 sText_TopBar_Rand[]       = _("RANDOMIZER SETTINGS");
-static const u8 sText_TopBar_Right[]      = _("{R_BUTTON}{L_BUTTON} CHANGE PAGE");
-//static const u8 sText_TopBar_Left[]       = _("{L_BUTTON}LAST PAGE");
+static const u8 sText_TopBar_Right[]      = _("{L_BUTTON}{R_BUTTON} CHANGE PAGE");
 static const u8 gText_SmallDot[]          = _("·");
 static const u8 gText_LargeDot[]          = _("{EMOJI_CIRCLE}");
 static void DrawTopBarText(void)
