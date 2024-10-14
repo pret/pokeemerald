@@ -951,95 +951,68 @@ struct sRandomMap {
     u16 warp_y;
 };
 
+// Default Coords for Random Maps size 20x20 with the warp in the center at 9x9
+#define DEFAULT_RANDOM_MAP_COORDS           .dest_x = 9,    \
+                                            .dest_y = 8,    \
+                                            .warp_x = 9,    \
+                                            .warp_y = 9,
+
 #define RANDOM_MAP_COUNT ARRAY_COUNT(sRandomMapArray)
 static const struct sRandomMap sRandomMapArray[] = {
     {
         .mapConstant = MAP_PIT_ARENA,
         .warpMetatileId = METATILE_Cave_FLOOR_COMPLETE,
-        .dest_x = 9,
-        .dest_y = 8,
-        .warp_x = 9,
-        .warp_y = 9,
+        DEFAULT_RANDOM_MAP_COORDS
     },     
     {
         .mapConstant = MAP_PIT_ARENA_WATER,
         .warpMetatileId = METATILE_PitWaterTheme_WATER_WARP_ACTIVE,
-        .dest_x = 9,
-        .dest_y = 8,
-        .warp_x = 9,
-        .warp_y = 9,
+        DEFAULT_RANDOM_MAP_COORDS
     },  
     {
         .mapConstant = MAP_PIT_ARENA_DESERT,
         .warpMetatileId = METATILE_PitArenaDesert_DESERT_WARP_ACTIVE,
-        .dest_x = 9,
-        .dest_y = 8,
-        .warp_x = 9,
-        .warp_y = 9,
+        DEFAULT_RANDOM_MAP_COORDS
     },  
     {
         .mapConstant = MAP_PIT_ARENA_SNOW,
         .warpMetatileId = METATILE_PitArenaSnow_SNOW_WARP_ACTIVE,
-        .dest_x = 9,
-        .dest_y = 8,
-        .warp_x = 9,
-        .warp_y = 9,
+        DEFAULT_RANDOM_MAP_COORDS
     },  
     {
         .mapConstant = MAP_PIT_ARENA_BEACH,
         .warpMetatileId = METATILE_PitArenaBeach_BEACH_WARP_ACTIVE,
-        .dest_x = 9,
-        .dest_y = 8,
-        .warp_x = 9,
-        .warp_y = 9,
+        DEFAULT_RANDOM_MAP_COORDS
     },  
     {
         .mapConstant = MAP_PIT_ARENA_MUSHROOM_WOODS,
         .warpMetatileId = METATILE_PitArenaMushroomWoods_MUSHROOM_WARP_ACTIVE,
-        .dest_x = 9,
-        .dest_y = 8,
-        .warp_x = 9,
-        .warp_y = 9,
+        DEFAULT_RANDOM_MAP_COORDS
     },        
     {
         .mapConstant = MAP_PIT_ARENA_DIRT_PATH,
         .warpMetatileId = METATILE_PitArenaDirtPath_DIRT_PATH_WARP_ACTIVE,
-        .dest_x = 9,
-        .dest_y = 8,
-        .warp_x = 9,
-        .warp_y = 9,
+        DEFAULT_RANDOM_MAP_COORDS
     },    
     {
         .mapConstant = MAP_PIT_ARENA_SPIDER_WOODS,
         .warpMetatileId = METATILE_PitArenaSpiderWoods_SPIDER_WOODS_WARP_ACTIVE,
-        .dest_x = 9,
-        .dest_y = 8,
-        .warp_x = 9,
-        .warp_y = 9,
+        DEFAULT_RANDOM_MAP_COORDS
     },    
     {
         .mapConstant = MAP_PIT_ARENA_UNDERWATER,
         .warpMetatileId = METATILE_PitArenaUnderwater_UNDERWATER_WARP_ACTIVE,
-        .dest_x = 9,
-        .dest_y = 8,
-        .warp_x = 9,
-        .warp_y = 9,
+        DEFAULT_RANDOM_MAP_COORDS
     },    
     {
         .mapConstant = MAP_PIT_ARENA_MINE,
         .warpMetatileId = METATILE_PitArenaMine_MINE_WARP_ACTIVE,
-        .dest_x = 9,
-        .dest_y = 8,
-        .warp_x = 9,
-        .warp_y = 9,
+        DEFAULT_RANDOM_MAP_COORDS
     },    
     {
         .mapConstant = MAP_PIT_ARENA_WHITE_BARK,
         .warpMetatileId = METATILE_PitArenaWhiteBark_WHITEBARK_WARP_ACTIVE,
-        .dest_x = 9,
-        .dest_y = 8,
-        .warp_x = 9,
-        .warp_y = 9,
+        DEFAULT_RANDOM_MAP_COORDS
     },                   
 };
 
