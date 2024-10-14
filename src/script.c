@@ -951,7 +951,7 @@ struct sRandomMap {
     u16 warp_y;
 };
 
-#define RANDOM_MAP_COUNT ARRAY_COUNT(sRandomMapArray) // Possible Random Maps - Must Match sWarpTileActiveArray in Size For Now Too
+#define RANDOM_MAP_COUNT ARRAY_COUNT(sRandomMapArray)
 static const struct sRandomMap sRandomMapArray[] = {
     {
         .mapConstant = MAP_PIT_ARENA,
