@@ -6478,7 +6478,7 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 dept
     const struct MapHeader *mapHeader;
     u16 targetSpecies = 0;
 
-    u16 item;
+    u16 item = ITEM_NONE;
 
     bool8 left = TRUE;
     u8 base_x = 13+8;

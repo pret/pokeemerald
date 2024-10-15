@@ -2764,7 +2764,7 @@ static void HandleBallPhysics(void)
 
     if ((ball->yPos >> 8) > 168)
     {
-        ball->yPos == 170 << 8;
+        //ball->yPos == 170 << 8;
         LoseBall();
     }
 }
@@ -3177,8 +3177,8 @@ static bool32 CheckStaticCollision(u8 gameType, struct Ball *ball, bool32 ballIs
 
 static u8 GetCollisionAttribute(u8 gameType, bool32 ballIsEntering, int index)
 {
-    const u8 *entranceCollisionMap;
-    const u8 *collisionMap;
+    const u8 *entranceCollisionMap = 0;
+    const u8 *collisionMap = 0;
 
     switch (gameType)
     {
@@ -3216,7 +3216,7 @@ static u8 GetCollisionMaskRow(u8 gameType, int collisionAttribute, int row)
 
     if (collisionAttribute < 0xE0)
     {
-        const u8 *masks;
+        const u8 *masks = 0;
         switch (gameType)
         {
         case GAME_TYPE_MEOWTH:
@@ -3748,7 +3748,7 @@ static bool32 CheckMeowthJewelsCollision(struct Ball *ball, struct Meowth *meowt
 
 static int GetNumActiveJewels(struct Meowth *meowth)
 {
-    int i, count;
+    int i, count = 0;
     for (i = 0; i < MAX_MEOWTH_JEWELS; i++)
     {
         if (meowth->jewels[i].state != JEWEL_STATE_HIDDEN)
