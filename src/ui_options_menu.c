@@ -301,7 +301,9 @@ static const u8 *const OptionTextDescription(void)
     u8 selection;
 
     if (!CheckConditions(menuItem))
-        return sOptionsMenuItemDescriptionsDisabledMain[menuItem];
+        return sText_Empty;
+        //return sOptionsMenuItemDescriptionsDisabledMain[menuItem];
+
     selection = sOptions->sel[menuItem];
     if (menuItem == MENUITEM_MAIN_TEXTSPEED)
         selection = 0;

@@ -387,6 +387,8 @@ static const u8 *const OptionTextRight(u8 menuItem)
             return sModeMenuItemsNamesDiff[menuItem];
         case MENU_RAND:
             return sModeMenuItemsNamesRand[menuItem];
+        default:
+            return gText_EmptyString2;
     }
 }
 
@@ -518,6 +520,8 @@ static const u8 *const OptionTextDescription(void)
     case MENU_RAND:
         selection = sOptions->sel_rand[menuItem];
         return sModeMenuItemDescriptionsRand[menuItem][selection];
+    default:
+        return gText_EmptyString2;
     }
 }
 
@@ -531,6 +535,8 @@ static u8 MenuItemCount(void)
             return MENUITEM_DIFF_COUNT;
         case MENU_RAND:
             return MENUITEM_RAND_COUNT;
+        default:
+            return 0;
     }
 }
 
@@ -544,6 +550,8 @@ static u8 MenuItemCancel(void)
             return MENUITEM_DIFF_CANCEL;
         case MENU_RAND:
             return MENUITEM_RAND_CANCEL;
+        default:
+            return 0;
     }
 }
 
@@ -1307,7 +1315,7 @@ static void ReDrawAll(void)
     else
     {
         if (sOptions->arrowTaskId == TASK_NONE)
-            sOptions->arrowTaskId = sOptions->arrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 240 / 2, 20, 110, MenuItemCount() - 1, 110, 110, 0);
+            sOptions->arrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 240 / 2, 20, 110, MenuItemCount() - 1, 110, 110, 0);
 
     }
 
