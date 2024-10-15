@@ -30,9 +30,9 @@ static EWRAM_DATA u8 sLinkSendTaskId = 0;
 static EWRAM_DATA u8 sLinkReceiveTaskId = 0;
 EWRAM_DATA struct UnusedControllerStruct gUnusedControllerStruct = {}; // Debug? Unused code that writes to it, never read
 
-void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(u32 battler);
-u8 gBattleControllerData[MAX_BATTLERS_COUNT]; // Used by the battle controllers to store misc sprite/task IDs for each battler
-void (*gBattlerControllerEndFuncs[MAX_BATTLERS_COUNT])(u32 battler); // Controller's buffer complete function for each battler
+COMMON_DATA void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(u32 battler) = {0};
+COMMON_DATA u8 gBattleControllerData[MAX_BATTLERS_COUNT] = {0}; // Used by the battle controllers to store misc sprite/task IDs for each battler
+COMMON_DATA void (*gBattlerControllerEndFuncs[MAX_BATTLERS_COUNT])(u32 battler) = {0}; // Controller's buffer complete function for each battler
 
 static void CreateTasksForSendRecvLinkBuffers(void);
 static void InitLinkBtlControllers(void);

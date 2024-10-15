@@ -47,7 +47,6 @@ SECTIONS {
         /* .bss starts at 0x3000000 */
         INCLUDE "sym_bss.ld"
         src/*.o(.bss);
-        gflib/*.o(.bss);
         data/*.o(.bss);
 
         /* .bss.code starts at 0x3001AA8 */
@@ -55,6 +54,7 @@ SECTIONS {
 
         /* COMMON starts at 0x30022A8 */
         INCLUDE "sym_common.ld"
+        src/*.o(COMMON);
         *libc.a:sbrkr.o(COMMON);
     } > IWRAM
 
@@ -69,15 +69,15 @@ SECTIONS {
         src/rom_header_rhh.o(.text.*);
         src/crt0.o(.text);
         src/main.o(.text);
-        gflib/malloc.o(.text);
-        gflib/dma3_manager.o(.text);
-        gflib/gpu_regs.o(.text);
-        gflib/bg.o(.text);
-        gflib/blit.o(.text);
-        gflib/window.o(.text);
-        gflib/text.o(.text);
-        gflib/sprite.o(.text);
-        gflib/string_util.o(.text);
+        src/malloc.o(.text);
+        src/dma3_manager.o(.text);
+        src/gpu_regs.o(.text);
+        src/bg.o(.text);
+        src/blit.o(.text);
+        src/window.o(.text);
+        src/text.o(.text);
+        src/sprite.o(.text);
+        src/string_util.o(.text);
         src/link.o(.text);
         src/AgbRfu_LinkManager.o(.text);
         src/link_rfu_3.o(.text);
@@ -464,12 +464,12 @@ SECTIONS {
         src/rom_header.o(.rodata);
         src/rom_header_gf.o(.rodata);
         src/main.o(.rodata);
-        gflib/bg.o(.rodata);
-        gflib/window.o(.rodata);
-        gflib/text.o(.rodata);
-        gflib/sprite.o(.rodata);
-        gflib/io_reg.o(.rodata);
-        gflib/string_util.o(.rodata);
+        src/bg.o(.rodata);
+        src/window.o(.rodata);
+        src/text.o(.rodata);
+        src/sprite.o(.rodata);
+        src/io_reg.o(.rodata);
+        src/string_util.o(.rodata);
         src/link.o(.rodata);
         src/link.o(.rodata.str1.4);
         src/AgbRfu_LinkManager.o(.rodata);
@@ -1336,9 +1336,7 @@ SECTIONS {
     ALIGN(4)
     {
         src/*.o(.text);
-        gflib/*.o(.text);
         src/*.o(.rodata);
-        gflib/*.o(.rodata);
         data/*.o(.rodata);
     } > ROM = 0
 

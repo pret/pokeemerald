@@ -50,6 +50,7 @@ SECTIONS {
 
         src/m4a.o(.bss.code);
 
+        src/*.o(common_data);
         src/*.o(COMMON);
         gflib/*.o(COMMON);
         data/*.o(COMMON);

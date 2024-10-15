@@ -82,19 +82,19 @@ STATIC_ASSERT(sizeof(struct SaveBlock2) <= SECTOR_DATA_SIZE, SaveBlock2FreeSpace
 STATIC_ASSERT(sizeof(struct SaveBlock1) <= SECTOR_DATA_SIZE * (SECTOR_ID_SAVEBLOCK1_END - SECTOR_ID_SAVEBLOCK1_START + 1), SaveBlock1FreeSpace);
 STATIC_ASSERT(sizeof(struct PokemonStorage) <= SECTOR_DATA_SIZE * (SECTOR_ID_PKMN_STORAGE_END - SECTOR_ID_PKMN_STORAGE_START + 1), PokemonStorageFreeSpace);
 
-u16 gLastWrittenSector;
-u32 gLastSaveCounter;
-u16 gLastKnownGoodSector;
-u32 gDamagedSaveSectors;
-u32 gSaveCounter;
-struct SaveSector *gReadWriteSector; // Pointer to a buffer for reading/writing a sector
-u16 gIncrementalSectorId;
-u16 gSaveUnusedVar;
-u16 gSaveFileStatus;
-void (*gGameContinueCallback)(void);
-struct SaveSectorLocation gRamSaveSectorLocations[NUM_SECTORS_PER_SLOT];
-u16 gSaveUnusedVar2;
-u16 gSaveAttemptStatus;
+COMMON_DATA u16 gLastWrittenSector = 0;
+COMMON_DATA u32 gLastSaveCounter = 0;
+COMMON_DATA u16 gLastKnownGoodSector = 0;
+COMMON_DATA u32 gDamagedSaveSectors = 0;
+COMMON_DATA u32 gSaveCounter = 0;
+COMMON_DATA struct SaveSector *gReadWriteSector = NULL; // Pointer to a buffer for reading/writing a sector
+COMMON_DATA u16 gIncrementalSectorId = 0;
+COMMON_DATA u16 gSaveUnusedVar = 0;
+COMMON_DATA u16 gSaveFileStatus = 0;
+COMMON_DATA void (*gGameContinueCallback)(void) = NULL;
+COMMON_DATA struct SaveSectorLocation gRamSaveSectorLocations[NUM_SECTORS_PER_SLOT] = {0};
+COMMON_DATA u16 gSaveUnusedVar2 = 0;
+COMMON_DATA u16 gSaveAttemptStatus = 0;
 
 EWRAM_DATA struct SaveSector gSaveDataBuffer = {0}; // Buffer used for reading/writing sectors
 

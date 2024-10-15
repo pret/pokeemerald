@@ -245,7 +245,7 @@ static EWRAM_DATA u8 sInitialLevel = 0;
 static EWRAM_DATA u8 sFinalLevel = 0;
 
 // IWRAM common
-void (*gItemUseCB)(u8, TaskFunc);
+COMMON_DATA void (*gItemUseCB)(u8, TaskFunc) = NULL;
 
 static void ResetPartyMenu(void);
 static void CB2_InitPartyMenu(void);

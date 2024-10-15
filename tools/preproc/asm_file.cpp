@@ -26,7 +26,7 @@
 #include "char_util.h"
 #include "utf8.h"
 #include "string_parser.h"
-#include "../../gflib/characters.h"
+#include "../../include/constants/characters.h"
 #include "io.h"
 
 AsmFile::AsmFile(std::string filename, bool isStdin, bool doEnum) : m_filename(filename)
@@ -523,6 +523,17 @@ bool AsmFile::ParseEnum()
     std::string enumBase = "0";
     long enumCounter = 0;
     long symbolCount = 0;
+
+    if (m_buffer[m_pos] == ':') // : <type>
+    {
+        m_pos++;
+        std::string underlyingType;
+        do {
+            currentHeaderLine += SkipWhitespaceAndEol();
+            underlyingType = ReadIdentifier();
+        } while (!underlyingType.empty());
+        currentHeaderLine += SkipWhitespaceAndEol();
+    }
 
     if (m_buffer[m_pos] != '{') // assume assembly macro, otherwise assume enum and report errors accordingly
     {

@@ -1,37 +1,10 @@
-	.space 0x8
+	.align 4
 	.include "main.o"
-	@ ../gflib/bg.o
-	.align 2
-gWindowTileAutoAllocEnabled:
-	.space 4
-    @ ../gflib/window.o
+	.include "bg.o"
 	.align 4
-gTransparentTileNumber:
-	.space 1
-	.align 4
-gWindowBgTilemapBuffers:
-	.space 16
-    @ ../gflib/text.o
-	.align 4
-gFonts:
-	.space 4
-	.align 2
-gDisableTextPrinters:
-	.space 1
-	.align 4
-gCurGlyph:
-	.space 132
-	.align 2
-gTextFlags:
-	.space 4
-    @ ../gflib/sprite.o
-	.align 2
-gOamMatrixAllocBitmap:
-	.space 4
-	.align 2
-gReservedSpritePaletteCount:
-	.space 1
-	.align 4
+	.include "window.o"
+	.include "text.o"
+	.include "sprite.o"
 	.include "link.o"
 	.include "AgbRfu_LinkManager.o"
 	.include "link_rfu_2.o"
@@ -54,9 +27,7 @@ gReservedSpritePaletteCount:
 	.include "tv.o"
 	.include "mauville_old_man.o"
 	.include "image_processing_effects.o"
-
-	.space 0x4
-
+	.align 4
 	.include "contest_painting.o"
 	.include "field_specials.o"
 	.include "evolution_scene.o"
@@ -67,14 +38,9 @@ gReservedSpritePaletteCount:
 	.include "battle_anim_throw.o"
 	.include "battle_factory_screen.o"
 	.include "apprentice.o"
-
-	.space 0x8
-
+	.align 4
 	.include "list_menu.o"
 	.include "party_menu.o"
-
-	.space 0x44
-
 	.include "ereader_screen.o"
 	.include "m4a.o"
 	.include "agb_flash.o"

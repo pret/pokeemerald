@@ -10,6 +10,7 @@
 #define EWRAM_DATA __attribute__((section(".sbss")))
 #define IWRAM_INIT __attribute__((section(".iwram")))
 #define EWRAM_INIT __attribute__((section(".ewram")))
+#define COMMON_DATA __attribute__((section("common_data")))
 #define UNUSED __attribute__((unused))
 
 #if MODERN
