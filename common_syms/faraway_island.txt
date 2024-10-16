@@ -1,3 +1,0 @@
-sPlayerToMewDeltaX
-sPlayerToMewDeltaY
-sMewDirectionCandidates
