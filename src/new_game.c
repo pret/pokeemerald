@@ -154,11 +154,18 @@ void SetDefaultOptions(void)
         gSaveBlock2Ptr->randomEvos = 1;
     }
 
-    //set flags
+    //set flags/vars
     if (gSaveBlock2Ptr->optionsFollowMonsOff)
         FlagSet(FLAG_FOLLOWERS_OFF);
     else
         FlagClear(FLAG_FOLLOWERS_OFF);
+
+    if (gSaveBlock2Ptr->optionsRandomMaps)
+        FlagSet(FLAG_RANDOM_MAPS);
+    else
+        FlagClear(FLAG_RANDOM_MAPS);
+
+    VarSet(VAR_PIT_AUTOSAVE, gSaveBlock2Ptr->optionsAutosave);
 }
 
 static void ClearPokedexFlags(void)

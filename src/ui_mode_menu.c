@@ -707,7 +707,7 @@ static void ModeMenu_SetupCB(void)
         LoadPalette(sModeMenuText_Pal, 16, sizeof(sModeMenuText_Pal));
         gMain.state++;
         break;
-    case 6: //ToDo
+    case 6:
         //run settings
         //sOptions->sel_run[MENUITEM_RUN_DEFAULTS]        = gSaveBlock2Ptr->modeDefault;
         //sOptions->sel_run[MENUITEM_RUN_AUTOSAVE]        = gSaveBlock2Ptr->optionsAutosave;
@@ -1082,7 +1082,7 @@ static void Task_ModeMenuMainInput(u8 taskId)
         HighlightModeMenuItem();
         DrawDescriptionText();
     }
-    else if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT)) //ToDo: update new logic!
+    else if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT)) //ToDo: cleanup after adding the PRESET feature
     {
         if (sOptions->submenu == MENU_RUN)
         {
@@ -1203,25 +1203,28 @@ static void Task_ModeMenuMainInput(u8 taskId)
     }
 }
 
-static void Task_ModeMenuSave(u8 taskId) // ToDo: Presets, order of options, option_menu, missing flag handling
+static void Task_ModeMenuSave(u8 taskId) // ToDo: add missing flags handling
 {
     //write in saveblock
+    //run settings
     //gSaveBlock2Ptr->modeDefault      = sOptions->sel_run[MENUITEM_RUN_DEFAULTS];
-    //gSaveBlock2Ptr->optionsAutosave  = sOptions->sel_run[MENUITEM_RUN_AUTOSAVE];
     gSaveBlock2Ptr->modeBattleMode   = sOptions->sel_run[MENUITEM_RUN_BATTLEMODE];
+    gSaveBlock2Ptr->mode3MonsOnly    = sOptions->sel_run[MENUITEM_RUN_3_MONS_ONLY];
+    gSaveBlock2Ptr->modeNoCaseChoice = sOptions->sel_run[MENUITEM_RUN_NO_CASE_CHOICE];
+    //gSaveBlock2Ptr->modeDuplicates   = sOptions->sel_run[MENUITEM_RUN_DUPLICATES];
+
+    //difficulty settings
     gSaveBlock2Ptr->modeXP           = sOptions->sel_diff[MENUITEM_DIFF_XPMODE];
     gSaveBlock2Ptr->modeStatChanger  = sOptions->sel_diff[MENUITEM_DIFF_STAT_CHANGER];
-    gSaveBlock2Ptr->modeLegendaries  = sOptions->sel_diff[MENUITEM_DIFF_LEGENDARIES];
     gSaveBlock2Ptr->modeHealFloors10 = sOptions->sel_diff[MENUITEM_DIFF_HEALFLOORS];
-    //gSaveBlock2Ptr->modeDuplicates   = sOptions->sel_run[MENUITEM_RUN_DUPLICATES];
+    gSaveBlock2Ptr->modeLegendaries  = sOptions->sel_diff[MENUITEM_DIFF_LEGENDARIES];
     #ifdef PIT_GEN_9_MODE
     gSaveBlock2Ptr->modeMegas        = sOptions->sel_diff[MENUITEM_DIFF_MEGAS];
     #endif
     gSaveBlock2Ptr->modeCashRewards  = sOptions->sel_diff[MENUITEM_DIFF_DOUBLE_CASH];
-    gSaveBlock2Ptr->mode3MonsOnly    = sOptions->sel_run[MENUITEM_RUN_3_MONS_ONLY];
-    gSaveBlock2Ptr->modeNoCaseChoice = sOptions->sel_run[MENUITEM_RUN_NO_CASE_CHOICE];
     gSaveBlock2Ptr->modeSaveDeletion = sOptions->sel_diff[MENUITEM_DIFF_SAVE_DELETION];
 
+    //randomizer settings
     gSaveBlock2Ptr->randomMoves      = sOptions->sel_rand[MENUITEM_RAND_MOVES];
     gSaveBlock2Ptr->randomAbilities  = sOptions->sel_rand[MENUITEM_RAND_ABILITIES];
     gSaveBlock2Ptr->randomBST        = sOptions->sel_rand[MENUITEM_RAND_BASE_STATS];
@@ -1229,9 +1232,7 @@ static void Task_ModeMenuSave(u8 taskId) // ToDo: Presets, order of options, opt
     //gSaveBlock2Ptr->randomEvos       = sOptions->sel_rand[MENUITEM_RAND_EVOS];
 
 
-    //set flags/VARs
-    //VarSet(VAR_PIT_AUTOSAVE, sOptions->sel_run[MENUITEM_RUN_AUTOSAVE]);
-
+    //set flags/vars
     if (sOptions->sel_run[MENUITEM_RUN_BATTLEMODE] == MODE_DOUBLES)
         FlagSet(FLAG_DOUBLES_MODE);
     else if(sOptions->sel_run[MENUITEM_RUN_BATTLEMODE] == MODE_MIXED_SINGLES_AND_DOUBLES)
