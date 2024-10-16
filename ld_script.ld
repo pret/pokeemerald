@@ -27,7 +27,6 @@ SECTIONS {
     {
         INCLUDE "sym_ewram.ld"
         src/*.o(.sbss);
-        gflib/*.o(.sbss);
 
         *libc.a:impure.o(.data);
         *libc.a:locale.o(.data);

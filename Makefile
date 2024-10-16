@@ -452,7 +452,7 @@ $(DATA_SRC_SUBDIR)/pokemon/teachable_learnsets.h: $(DATA_ASM_BUILDDIR)/event_scr
 
 # NOTE: Based on C_DEP above, but without NODEP and KEEP_TEMPS handling.
 define TEST_DEP
-$1: $2 $$(shell $(SCANINC) -I include -I $(TOOLS_DIR)/agbcc/include -I gflib $2)
+$1: $2 $$(shell $(SCANINC) -I include -I $(TOOLS_DIR)/agbcc/include $2)
 	@echo "$$(CC1) <flags> -o $$@ $$<"
 	@$$(CPP) $$(CPPFLAGS) $$< | $$(PREPROC) -i $$< charmap.txt | $$(CC1) $$(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $$(AS) $$(ASFLAGS) -o $$@ -
 endef

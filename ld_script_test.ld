@@ -25,7 +25,6 @@ SECTIONS {
     ALIGN(4)
     {
         src/*.o(.sbss);
-        gflib/*.o(.sbss);
         test/*.o(.sbss);
         . = ALIGN(4);
     } > EWRAM
@@ -43,7 +42,6 @@ SECTIONS {
     ALIGN(4)
     {
         src/*.o(.bss);
-        gflib/*.o(.bss);
         data/*.o(.bss);
         test/*.o(.bss);
         *libc.a:*.o(.bss*);
@@ -54,7 +52,6 @@ SECTIONS {
 
         src/*.o(common_data);
         src/*.o(COMMON);
-        gflib/*.o(COMMON);
         data/*.o(COMMON);
         test/*.o(COMMON);
         *libc.a:sbrkr.o(COMMON);
@@ -77,7 +74,6 @@ SECTIONS {
         src/rom_header_gf.o(.text.*);
         src/rom_header_rhh.o(.text.*);
         src/*.o(.text);
-        gflib/*.o(.text);
     } > ROM =0
 
     script_data :
@@ -99,7 +95,6 @@ SECTIONS {
     ALIGN(4)
     {
         src/*.o(.rodata*);
-        gflib/*.o(.rodata*);
         data/*.o(.rodata*);
     } > ROM =0
 

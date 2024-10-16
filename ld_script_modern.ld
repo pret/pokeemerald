@@ -27,7 +27,6 @@ SECTIONS {
     ALIGN(4)
     {
         src/*.o(.sbss);
-        gflib/*.o(.sbss);
     } > EWRAM
 
     .iwram ORIGIN(IWRAM) : AT (__iwram_lma)
