@@ -123,15 +123,13 @@ void SetDefaultOptions(void)
     {
         gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_INSTANT;
         gSaveBlock2Ptr->optionsWindowFrameType = 0;
-
         gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_STEREO;
         gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
-
         gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
         gSaveBlock2Ptr->regionMapZoom = FALSE;
-
         gSaveBlock2Ptr->optionsFollowMonsOff = FALSE;
         gSaveBlock2Ptr->optionsAutosave = 1;
+        gSaveBlock2Ptr->optionsRandomMaps = 0;
     }
     
     //game modes

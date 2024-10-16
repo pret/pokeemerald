@@ -1209,24 +1209,24 @@ static void Task_ModeMenuSave(u8 taskId) // ToDo: Presets, order of options, opt
     //gSaveBlock2Ptr->modeDefault      = sOptions->sel_run[MENUITEM_RUN_DEFAULTS];
     //gSaveBlock2Ptr->optionsAutosave  = sOptions->sel_run[MENUITEM_RUN_AUTOSAVE];
     gSaveBlock2Ptr->modeBattleMode   = sOptions->sel_run[MENUITEM_RUN_BATTLEMODE];
-    gSaveBlock2Ptr->modeXP           = sOptions->sel_run[MENUITEM_DIFF_XPMODE];
-    gSaveBlock2Ptr->modeStatChanger  = sOptions->sel_run[MENUITEM_DIFF_STAT_CHANGER];
-    gSaveBlock2Ptr->modeLegendaries  = sOptions->sel_run[MENUITEM_DIFF_LEGENDARIES];
-    gSaveBlock2Ptr->modeHealFloors10 = sOptions->sel_run[MENUITEM_DIFF_HEALFLOORS];
+    gSaveBlock2Ptr->modeXP           = sOptions->sel_diff[MENUITEM_DIFF_XPMODE];
+    gSaveBlock2Ptr->modeStatChanger  = sOptions->sel_diff[MENUITEM_DIFF_STAT_CHANGER];
+    gSaveBlock2Ptr->modeLegendaries  = sOptions->sel_diff[MENUITEM_DIFF_LEGENDARIES];
+    gSaveBlock2Ptr->modeHealFloors10 = sOptions->sel_diff[MENUITEM_DIFF_HEALFLOORS];
     //gSaveBlock2Ptr->modeDuplicates   = sOptions->sel_run[MENUITEM_RUN_DUPLICATES];
     #ifdef PIT_GEN_9_MODE
-    gSaveBlock2Ptr->modeMegas        = sOptions->sel_run[MENUITEM_DIFF_MEGAS];
+    gSaveBlock2Ptr->modeMegas        = sOptions->sel_diff[MENUITEM_DIFF_MEGAS];
     #endif
-    gSaveBlock2Ptr->modeCashRewards  = sOptions->sel_run[MENUITEM_DIFF_DOUBLE_CASH];
+    gSaveBlock2Ptr->modeCashRewards  = sOptions->sel_diff[MENUITEM_DIFF_DOUBLE_CASH];
     gSaveBlock2Ptr->mode3MonsOnly    = sOptions->sel_run[MENUITEM_RUN_3_MONS_ONLY];
     gSaveBlock2Ptr->modeNoCaseChoice = sOptions->sel_run[MENUITEM_RUN_NO_CASE_CHOICE];
-    gSaveBlock2Ptr->modeSaveDeletion = sOptions->sel_run[MENUITEM_DIFF_SAVE_DELETION];
+    gSaveBlock2Ptr->modeSaveDeletion = sOptions->sel_diff[MENUITEM_DIFF_SAVE_DELETION];
 
-    gSaveBlock2Ptr->randomMoves      = sOptions->sel_run[MENUITEM_RAND_MOVES];
-    gSaveBlock2Ptr->randomAbilities  = sOptions->sel_run[MENUITEM_RAND_ABILITIES];
-    gSaveBlock2Ptr->randomBST        = sOptions->sel_run[MENUITEM_RAND_BASE_STATS];
-    gSaveBlock2Ptr->randomType       = sOptions->sel_run[MENUITEM_RAND_TYPES];
-    //gSaveBlock2Ptr->randomEvos       = sOptions->sel_run[MENUITEM_RAND_EVOS];
+    gSaveBlock2Ptr->randomMoves      = sOptions->sel_rand[MENUITEM_RAND_MOVES];
+    gSaveBlock2Ptr->randomAbilities  = sOptions->sel_rand[MENUITEM_RAND_ABILITIES];
+    gSaveBlock2Ptr->randomBST        = sOptions->sel_rand[MENUITEM_RAND_BASE_STATS];
+    gSaveBlock2Ptr->randomType       = sOptions->sel_rand[MENUITEM_RAND_TYPES];
+    //gSaveBlock2Ptr->randomEvos       = sOptions->sel_rand[MENUITEM_RAND_EVOS];
 
 
     //set flags/VARs

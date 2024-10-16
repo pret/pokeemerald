@@ -535,7 +535,8 @@ struct SaveBlock2
              u16 randomEvos:1;
              u16 modeHealFloors10:1;
              u16 modeXP:2;
-             u16 filler_9912:8;
+             u16 optionsRandomMaps:1;
+             u16 filler_9912:7;
     /*0x92*/ u8 filler_91[0x4];
              u8 playerGfxType;
     /*0x98*/ struct Time localTimeOffset;
