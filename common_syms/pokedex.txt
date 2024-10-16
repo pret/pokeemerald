@@ -1,2 +1,0 @@
-gUnusedPokedexU8
-gPokedexVBlankCB

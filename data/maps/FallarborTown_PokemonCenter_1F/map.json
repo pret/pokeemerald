@@ -64,7 +64,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "FallarborTown_PokemonCenter_1F_EventScript_Lanette",
-      "flag": "FLAG_HIDE_FALLORBOR_POKEMON_CENTER_LANETTE"
+      "flag": "FLAG_HIDE_FALLARBOR_POKEMON_CENTER_LANETTE"
     }
   ],
   "warp_events": [
