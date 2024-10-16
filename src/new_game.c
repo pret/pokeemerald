@@ -131,28 +131,29 @@ void SetDefaultOptions(void)
         gSaveBlock2Ptr->regionMapZoom = FALSE;
 
         gSaveBlock2Ptr->optionsFollowMonsOff = FALSE;
+        gSaveBlock2Ptr->optionsAutosave = 1;
     }
     
     //game modes
     if (GetNationalPokedexCount(FLAG_GET_CAUGHT) < 1)
     {
         gSaveBlock2Ptr->modeDefault = 0;
-        gSaveBlock2Ptr->modeAutosave = 1;
-        gSaveBlock2Ptr->modeBattleMode = 0;
-        gSaveBlock2Ptr->modeRandomizer = 0;
-        gSaveBlock2Ptr->modeXPShare = 0;
+        gSaveBlock2Ptr->modeBattleMode = 2;
+        gSaveBlock2Ptr->modeNoCaseChoice = 1;
+        gSaveBlock2Ptr->modeSaveDeletion = 1;
+        gSaveBlock2Ptr->modeXP = 0;
         gSaveBlock2Ptr->modeStatChanger = 0;
-        gSaveBlock2Ptr->modeCashRewards = 0;
-        gSaveBlock2Ptr->mode3MonsOnly = 0;
+        gSaveBlock2Ptr->modeCashRewards = 1;
+        gSaveBlock2Ptr->mode3MonsOnly = 1;
         gSaveBlock2Ptr->modeLegendaries = 0;
         gSaveBlock2Ptr->modeDuplicates = 1;
         gSaveBlock2Ptr->modeMegas = 1;
         gSaveBlock2Ptr->modeHealFloors10 = 0;
-        gSaveBlock2Ptr->randomMoves = 0;
-        gSaveBlock2Ptr->randomAbilities = 0;
-        gSaveBlock2Ptr->randomBST = 0;
-        gSaveBlock2Ptr->randomType = 0;
-        gSaveBlock2Ptr->randomEvos = 0;
+        gSaveBlock2Ptr->randomMoves = 1;
+        gSaveBlock2Ptr->randomAbilities = 1;
+        gSaveBlock2Ptr->randomBST = 1;
+        gSaveBlock2Ptr->randomType = 1;
+        gSaveBlock2Ptr->randomEvos = 1;
     }
 
     //set flags

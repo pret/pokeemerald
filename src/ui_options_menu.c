@@ -550,7 +550,7 @@ void CB2_InitOptionsMenu(void)
         break;
     case 6:
         sOptions->sel[MENUITEM_MAIN_TEXTSPEED]   = gSaveBlock2Ptr->optionsTextSpeed;
-        sOptions->sel[MENUITEM_MAIN_AUTOSAVE]    = gSaveBlock2Ptr->modeAutosave;
+        sOptions->sel[MENUITEM_MAIN_AUTOSAVE]    = gSaveBlock2Ptr->optionsAutosave;
         sOptions->sel[MENUITEM_MAIN_FOLLOWMONS]  = gSaveBlock2Ptr->optionsFollowMonsOff;
         sOptions->sel[MENUITEM_MAIN_BATTLESCENE] = gSaveBlock2Ptr->optionsBattleSceneOff;
         sOptions->sel[MENUITEM_MAIN_BATTLESTYLE] = gSaveBlock2Ptr->optionsBattleStyle;
@@ -712,7 +712,7 @@ static void Task_OptionsMenuProcessInput(u8 taskId)
 static void Task_OptionsMenuSave(u8 taskId)
 {
     gSaveBlock2Ptr->optionsTextSpeed        = sOptions->sel[MENUITEM_MAIN_TEXTSPEED];
-    gSaveBlock2Ptr->modeAutosave            = sOptions->sel[MENUITEM_MAIN_AUTOSAVE];
+    gSaveBlock2Ptr->optionsAutosave            = sOptions->sel[MENUITEM_MAIN_AUTOSAVE];
     gSaveBlock2Ptr->optionsFollowMonsOff    = sOptions->sel[MENUITEM_MAIN_FOLLOWMONS];
     gSaveBlock2Ptr->optionsBattleSceneOff   = sOptions->sel[MENUITEM_MAIN_BATTLESCENE];
     gSaveBlock2Ptr->optionsBattleStyle      = sOptions->sel[MENUITEM_MAIN_BATTLESTYLE];

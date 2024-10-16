@@ -1299,7 +1299,8 @@ static void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2)
     }
     AddTextPrinterParameterized3(1, FONT_NORMAL, 70, 0x31, sPlayerInfoTextColors, TEXT_SKIP_DRAW, modeText);
 
-    switch(gSaveBlock2Ptr->modeRandomizer)
+    //ToDo: Needs reworking since the randomizer options logic has changed!
+    /*switch(gSaveBlock2Ptr->modeRandomizer)
     {
         case 0:
             modeText = sText_Randomizer_Mons;
@@ -1311,7 +1312,7 @@ static void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2)
             modeText = sText_Randomizer_Mons;
             break;
     }
-    AddTextPrinterParameterized3(1, FONT_NORMAL, 0, 0x41, sPlayerInfoTextColors, TEXT_SKIP_DRAW, modeText);
+    AddTextPrinterParameterized3(1, FONT_NORMAL, 0, 0x41, sPlayerInfoTextColors, TEXT_SKIP_DRAW, modeText);*/
 
     switch(gSaveBlock2Ptr->modeLegendaries)
     {

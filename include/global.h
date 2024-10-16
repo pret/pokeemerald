@@ -516,14 +516,14 @@ struct SaveBlock2
              //u16 padding1:4;
              //u16 padding2;
     /*0x18*/ struct Pokedex pokedex;
-    /*0x90*/ u16 modeDefault:2; //MENUITEM_MAIN_DEFAULTS
+    /*0x90*/ u16 modeDefault:2;
              u16 modeBattleMode:2;
-             u16 modeRandomizer:1;
-             u16 modeXPShare:1;
+             u16 modeNoCaseChoice:1;
+             u16 modeSaveDeletion:1;
              u16 modeStatChanger:1;
              u16 modeLegendaries:1;
              u16 modeDuplicates:1;
-             u16 modeAutosave:2;
+             u16 optionsAutosave:2;
              u16 modeMegas:1;
              u16 optionsFollowMonsOff:1;
              u16 modeCashRewards:2;
@@ -534,7 +534,8 @@ struct SaveBlock2
              u16 randomType:1;
              u16 randomEvos:1;
              u16 modeHealFloors10:1;
-             u16 filler_9912:10;
+             u16 modeXP:2;
+             u16 filler_9912:8;
     /*0x92*/ u8 filler_91[0x4];
              u8 playerGfxType;
     /*0x98*/ struct Time localTimeOffset;

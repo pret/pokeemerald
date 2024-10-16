@@ -851,7 +851,7 @@ void AutoSave(void)
 
 void SetAutosaveFlag(void)
 {
-    switch(gSaveBlock2Ptr->modeAutosave)
+    switch(gSaveBlock2Ptr->optionsAutosave)
     {
         case SAVE_NO:
             FlagClear(FLAG_AUTO_SAVE);
