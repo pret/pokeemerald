@@ -509,6 +509,7 @@ SINGLE_BATTLE_TEST("(TERA) Revelation Dance uses a Stellar-type Pokemon's base t
     }
 }
 
+#if B_UPDATED_CONVERSION_2 < GEN_5
 SINGLE_BATTLE_TEST("(TERA) Conversion2 fails if last hit by a Stellar-type move")
 {
     GIVEN {
@@ -526,6 +527,7 @@ SINGLE_BATTLE_TEST("(TERA) Conversion2 fails if last hit by a Stellar-type move"
         MESSAGE("But it failed!");
     }
 }
+#endif
 
 SINGLE_BATTLE_TEST("(TERA) Roost does not remove Flying-type ground immunity when Terastallized into the Stellar type")
 {

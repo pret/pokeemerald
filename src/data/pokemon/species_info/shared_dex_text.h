@@ -73,9 +73,9 @@ const u8 gGenesectPokedexText[] = _(
 // Gen 6 families
 const u8 gGreninjaPokedexText[] = _(
     "It appears and vanishes with a ninja's\n"
-    "grace. It toys with its enemies using swift\n"
-    "movements, while slicing them with throwing\n"
-    "stars made of compressed water.");
+    "grace. It toys with its enemies using\n"
+    "swift movements, while slicing them with\n"
+    "throwing stars made of compressed water.");
 
 const u8 gScatterbugPokedexText[] = _(
     "When under attack from bird Pokémon,\n"
@@ -207,7 +207,7 @@ const u8 gKommoOPokedexText[] = _(
 // Gen 8 families
 const u8 gAlcremieVanillaCreamPokedexText[] = _(
     "If Alcremie is content, the secreted cream\n"
-    "from its hands becomes sweeter and richer."
+    "from its hands becomes sweeter and richer.\n"
     "When it trusts a Trainer, it will treat\n"
     "them to berries it's decorated with cream.");
 
@@ -279,8 +279,8 @@ const u8 gOgerponWellspringMaskPokedexText[] = _(
 
 const u8 gOgerponHearthflameMaskPokedexText[] = _(
     "This form is the most aggressive,\n"
-    "bombarding enemies with the\n"
-    "intensity of flames blazing within a hearth.");
+    "bombarding enemies with the intensity\n"
+    "of flames blazing within a hearth.");
 
 const u8 gOgerponCornerstoneMaskPokedexText[] = _(
     "In this form, it draws on the power\n"

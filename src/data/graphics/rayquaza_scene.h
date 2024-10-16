@@ -24,9 +24,7 @@ const u32 gRaySceneTakesFlight_Bg_Tilemap[]       = INCBIN_U32("graphics/rayquaz
 
 // Scene 3 (RAY_ANIM_DESCENDS)
 const u32 gRaySceneDescends_Rayquaza_Gfx[]     = INCBIN_U32("graphics/rayquaza_scene/scene_3/rayquaza.4bpp.lz");
-// for some reason there are an extra 0xC bytes at the end of the original rayquaza_tail.4bpp, so in order to produce the correct lz,
-// we have to cat the bytes at the end with a make rule. not sure why those bytes are there, it may have been a bug in Game Freak's software.
-const u32 gRaySceneDescends_RayquazaTail_Gfx[] = INCBIN_U32("graphics/rayquaza_scene/scene_3/rayquaza_tail_fix.4bpp.lz");
+const u32 gRaySceneDescends_RayquazaTail_Gfx[] = INCBIN_U32("graphics/rayquaza_scene/scene_3/rayquaza_tail.4bpp.lz");
 const u32 gRaySceneDescends_Bg_Gfx[]           = INCBIN_U32("graphics/rayquaza_scene/scene_3/bg.4bpp.lz");
 const u32 gRaySceneDescends_Light_Gfx[]        = INCBIN_U32("graphics/rayquaza_scene/scene_3/light.4bpp.lz"); // uses pal 2 of gRaySceneDescends_Bg_Pal
 const u32 gRaySceneDescends_Bg_Pal[]           = INCBIN_U32("graphics/rayquaza_scene/scene_3/bg.gbapal.lz");
