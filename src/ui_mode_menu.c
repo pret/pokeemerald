@@ -76,6 +76,7 @@ enum MenuIds
     MENU_RUN,
     MENU_DIFF,
     MENU_RAND,
+    MENU_PRESETS,
     MENU_COUNT
 };
 
@@ -115,11 +116,18 @@ enum MenuItems_Randomizer
     MENUITEM_RAND_COUNT,
 };
 
+enum MenuItems_Presets
+{
+    MENUITEM_PRESET_MODE,
+    MENUITEM_PRESET_CANCEL,
+    MENUITEM_PRESET_SAVE,
+    MENUITEM_PRESET_COUNT,
+};
+
 enum Game_Presets
 {
     PRESET_NORMAL,
-    PRESET_HARD,
-    PRESET_CUST
+    PRESET_HARD
 };
 
 static EWRAM_DATA struct ModeMenuState *sModeMenuState = NULL;
@@ -203,6 +211,7 @@ static const struct WindowTemplate sModeMenuWindowTemplates[] =
 EWRAM_DATA static struct ModeMenu *sOptions = NULL;
 static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
 static EWRAM_DATA u8 *sBg3TilemapBuffer = NULL;
+//static EWRAM_DATA u8 *statePresets = 0;
 
 // const data
 static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/interface/option_menu_equals_sign.4bpp"); // note: this is only used in the Japanese release
@@ -239,6 +248,7 @@ struct ModeMenu
     u8 sel_run[MENUITEM_RUN_COUNT];
     u8 sel_diff[MENUITEM_DIFF_COUNT];
     u8 sel_rand[MENUITEM_RAND_COUNT];
+    u8 sel_presets[MENUITEM_PRESET_COUNT];
     int menuCursor[MENU_COUNT];
     int visibleCursor[MENU_COUNT];
     u8 arrowTaskId;
@@ -303,7 +313,10 @@ static void DrawChoices_Legendaries(int selection, int y);
 static void DrawChoices_Duplicates(int selection, int y);
 static void DrawChoices_Megas(int selection, int y);
 static void DrawChoices_HealFloors(int selection, int y);
+static void DrawChoices_PresetsMode(int selection, int y);
+static void DrawChoices_PresetsHard(int selection, int y);
 static void DrawBgWindowFrames(void);
+static void ApplyPresets(void);
 
 // Menu draw and input functions
 struct Menu_Run //MENU_RUN
@@ -351,6 +364,17 @@ struct Menu_Rand //MENU_RAND
     [MENUITEM_RAND_CANCEL]     = {NULL, NULL},
 };
 
+struct Menu_Presets //MENU_PRESETS
+{
+    void (*drawChoices)(int selection, int y);
+    int (*processInput)(int selection);
+} static const sItemFunctionsPresets[MENUITEM_PRESET_COUNT] =
+{
+    [MENUITEM_PRESET_MODE] = {DrawChoices_PresetsMode,     ProcessInput_Options_Two},
+    [MENUITEM_PRESET_CANCEL] = {NULL, NULL},
+    [MENUITEM_PRESET_SAVE]   = {NULL, NULL},
+};
+
 // Menu left side option names text
 static const u8 sText_Defaults[]     = _("PRESETS");
 static const u8 sText_Autosave[]     = _("AUTOSAVE");
@@ -374,6 +398,10 @@ static const u8 sText_BaseStats[]    = _("BASE STATS");
 static const u8 sText_Types[]        = _("TYPES");
 static const u8 sText_Evos[]         = _("EVOLUTIONS");
 static const u8 sText_Cancel[]       = _("SAVE & LEAVE");
+
+static const u8 sText_GameMode[]     = _("GAME MODE");
+static const u8 sText_CancelPreset[] = _("CANCEL&RETURN");
+static const u8 sText_SavePreset[]   = _("SAVE PRESETS");
 
 static const u8 *const sModeMenuItemsNamesRun[MENUITEM_RUN_COUNT] =
 {
@@ -408,6 +436,13 @@ static const u8 *const sModeMenuItemsNamesRand[MENUITEM_RAND_COUNT] =
     [MENUITEM_RAND_CANCEL]     = sText_Cancel,
 };
 
+static const u8 *const sModeMenuItemsNamesPresets[MENUITEM_PRESET_COUNT] =
+{
+    [MENUITEM_PRESET_MODE]   = sText_GameMode,
+    [MENUITEM_PRESET_CANCEL] = sText_CancelPreset,
+    [MENUITEM_PRESET_SAVE]   = sText_SavePreset,
+};
+
 static const u8 *const OptionTextRight(u8 menuItem)
 {
     switch (sOptions->submenu)
@@ -418,6 +453,8 @@ static const u8 *const OptionTextRight(u8 menuItem)
             return sModeMenuItemsNamesDiff[menuItem];
         case MENU_RAND:
             return sModeMenuItemsNamesRand[menuItem];
+        case MENU_PRESETS:
+            return sModeMenuItemsNamesPresets[menuItem];
         default:
             return gText_EmptyString2;
     }
@@ -467,6 +504,15 @@ static bool8 CheckConditions(int selection)
                 case MENUITEM_RAND_COUNT:         return TRUE;
                 default:                          return FALSE;
             }
+        case MENU_PRESETS:
+            switch(selection)
+            {
+                case MENUITEM_PRESET_MODE:        return TRUE;
+                case MENUITEM_PRESET_CANCEL:      return TRUE;
+                case MENUITEM_PRESET_SAVE:        return TRUE;
+                case MENUITEM_PRESET_COUNT:       return TRUE;
+                default:                          return FALSE;
+            }
         default: return FALSE;
     }
 }
@@ -474,6 +520,10 @@ static bool8 CheckConditions(int selection)
 // Descriptions
 static const u8 sText_Empty[]                   = _("");
 static const u8 sText_Desc_Save[]               = _("Save your settings.");
+static const u8 sText_Desc_CancelPreset[]       = _("Cancel and return without setting\na preset.");
+static const u8 sText_Desc_SavePreset[]         = _("Save preset and overwrite current\nmode choice.");
+static const u8 sText_Desc_NormalMode[]         = _("Normal mode uses 50% XP share.");
+static const u8 sText_Desc_HardMode[]           = _("Hard mode uses 75% XP share.");
 static const u8 sText_Desc_Defaults_Normal[]    = _("Sets all options for Normal Mode below.");
 static const u8 sText_Desc_Defaults_Hard[]      = _("Sets all options for Hard Mode below.");
 static const u8 sText_Desc_Defaults_Custom[]    = _("Is shown when manually changing\nmode settings.");
@@ -528,7 +578,7 @@ static const u8 *const sModeMenuItemDescriptionsRun[MENUITEM_RUN_COUNT][3] =
 
 static const u8 *const sModeMenuItemDescriptionsDiff[MENUITEM_DIFF_COUNT][3] =
 {
-    [MENUITEM_DIFF_XPMODE]        = {sText_Desc_XPMode_50,        sText_Desc_XPMode_75,         sText_Desc_XPMode_None},
+    [MENUITEM_DIFF_XPMODE]        = {sText_Desc_XPMode_75,        sText_Desc_XPMode_50,         sText_Desc_XPMode_None},
     [MENUITEM_DIFF_SAVE_DELETION] = {sText_Desc_SaveDeletion_On,  sText_Desc_SaveDeletion_Off,  sText_Empty},
     [MENUITEM_DIFF_STAT_CHANGER]  = {sText_Desc_StatChanger_On,   sText_Desc_StatChanger_Off,   sText_Empty},
     [MENUITEM_DIFF_DOUBLE_CASH]   = {sText_Desc_DoubleCash_On,    sText_Desc_DoubleCash_Off,    sText_Empty},
@@ -550,6 +600,13 @@ static const u8 *const sModeMenuItemDescriptionsRand[MENUITEM_RAND_COUNT][3] =
     [MENUITEM_RAND_CANCEL]        = {sText_Desc_Save,              sText_Empty,                   sText_Empty},
 };
 
+static const u8 *const sModeMenuItemDescriptionsPresets[MENUITEM_PRESET_COUNT][3] =
+{
+    [MENUITEM_PRESET_MODE]        = {sText_Desc_NormalMode,    sText_Desc_HardMode,           sText_Empty},
+    [MENUITEM_PRESET_CANCEL]      = {sText_Desc_CancelPreset,  sText_Empty,                   sText_Empty},
+    [MENUITEM_PRESET_SAVE]        = {sText_Desc_SavePreset,    sText_Empty,                   sText_Empty},
+};
+
 static const u8 *const OptionTextDescription(void)
 {
     u8 menuItem = sOptions->menuCursor[sOptions->submenu];;
@@ -558,11 +615,7 @@ static const u8 *const OptionTextDescription(void)
     switch (sOptions->submenu)
     {
     case MENU_RUN:
-        //if (!CheckConditions(menuItem))
-        //    return sOptionMenuItemDescriptionsDisabledMain[menuItem];
         selection = sOptions->sel_run[menuItem];
-        //if (menuItem == MENUITEM_MAIN_TEXTSPEED || menuItem == MENUITEM_MAIN_FRAMETYPE)
-        //    selection = 0;
         return sModeMenuItemDescriptionsRun[menuItem][selection];
     case MENU_DIFF:
         selection = sOptions->sel_diff[menuItem];
@@ -570,6 +623,9 @@ static const u8 *const OptionTextDescription(void)
     case MENU_RAND:
         selection = sOptions->sel_rand[menuItem];
         return sModeMenuItemDescriptionsRand[menuItem][selection];
+    case MENU_PRESETS:
+        selection = sOptions->sel_presets[menuItem];
+        return sModeMenuItemDescriptionsPresets[menuItem][selection];
     default:
         return gText_EmptyString2;
     }
@@ -585,6 +641,8 @@ static u8 MenuItemCount(void)
             return MENUITEM_DIFF_COUNT;
         case MENU_RAND:
             return MENUITEM_RAND_COUNT;
+        case MENU_PRESETS:
+            return MENUITEM_PRESET_COUNT;
         default:
             return 0;
     }
@@ -601,7 +659,29 @@ static u8 MenuItemCancel(void)
         case MENU_RAND:
             return MENUITEM_RAND_CANCEL;
         default:
-            return 0;
+            return 99;
+    }
+}
+
+static u8 MenuItemPresetsSave(void)
+{
+    switch (sOptions->submenu)
+    {
+        case MENU_PRESETS:
+            return MENUITEM_PRESET_SAVE;
+        default:
+            return 99;
+    }
+}
+
+static u8 MenuItemPresetsCancel(void)
+{
+    switch (sOptions->submenu)
+    {
+        case MENU_PRESETS:
+            return MENUITEM_PRESET_CANCEL;
+        default:
+            return 99;
     }
 }
 
@@ -807,36 +887,44 @@ static const u8 gText_LargeDot[]          = _("{EMOJI_CIRCLE}");
 static void DrawTopBarText(void)
 {
     const u8 color[3] = { 0, TEXT_COLOR_WHITE, TEXT_COLOR_OPTIONS_GRAY_FG };
-    u8 pageDots[2*MENU_COUNT] = _("");
+    u8 pageDots[2*(MENU_COUNT - 1)] = _("");
     int i;
 
-    //create navigation dots
-    for (i = 0; i < MENU_COUNT; i++)
+    if (sOptions->submenu != MENU_PRESETS)
     {
-        if (i == sOptions->submenu)
-            StringAppend(pageDots, gText_LargeDot);
-        else
-            StringAppend(pageDots, gText_SmallDot);
-        if (i < MENU_COUNT - 1)
-            StringAppend(pageDots, gText_Space);            
+        //create navigation dots
+        for (i = 0; i < (MENU_COUNT - 1); i++)
+        {
+            if (i == sOptions->submenu)
+                StringAppend(pageDots, gText_LargeDot);
+            else
+                StringAppend(pageDots, gText_SmallDot);
+            if (i < MENU_RAND)
+                StringAppend(pageDots, gText_Space);
+        }
+
+        FillWindowPixelBuffer(WIN_TOPBAR, PIXEL_FILL(0));
+        AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 2, 1, color, 0, pageDots);
+
+        switch (sOptions->submenu)
+        {
+            case MENU_RUN:
+                AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 40, 1, color, 0, sText_TopBar_Run);
+                break;
+            case MENU_DIFF:
+                AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 40, 1, color, 0, sText_TopBar_Diff);
+                break;
+            case MENU_RAND:
+                AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 40, 1, color, 0, sText_TopBar_Rand);
+                break;
+        }
+        AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 145, 1, color, 0, sText_TopBar_Right);
     }
-
-    FillWindowPixelBuffer(WIN_TOPBAR, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 2, 1, color, 0, pageDots);
-
-    switch (sOptions->submenu)
+    else
     {
-        case MENU_RUN:
-            AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 40, 1, color, 0, sText_TopBar_Run);
-            break;
-        case MENU_DIFF:
-            AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 40, 1, color, 0, sText_TopBar_Diff);
-            break;
-        case MENU_RAND:
-            AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 40, 1, color, 0, sText_TopBar_Rand);
-            break;
+        FillWindowPixelBuffer(WIN_TOPBAR, PIXEL_FILL(0));
+        AddTextPrinterParameterized3(WIN_TOPBAR, FONT_NORMAL, 40, 1, color, 0, sText_Defaults);
     }
-    AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 145, 1, color, 0, sText_TopBar_Right);
 
     PutWindowTilemap(WIN_TOPBAR);
     CopyWindowToVram(WIN_TOPBAR, COPYWIN_FULL);
@@ -943,6 +1031,10 @@ static void DrawChoices(u32 id, int y) //right side draw function
             if (sItemFunctionsRand[id].drawChoices != NULL)
                 sItemFunctionsRand[id].drawChoices(sOptions->sel_rand[id], y);
             break;
+        case MENU_PRESETS:
+            if (sItemFunctionsPresets[id].drawChoices != NULL)
+                sItemFunctionsPresets[id].drawChoices(sOptions->sel_presets[id], y);
+            break;
     }
 }
 
@@ -1024,9 +1116,22 @@ static void Task_ModeMenuMainInput(u8 taskId)
     {
         if (sOptions->menuCursor[sOptions->submenu] == MenuItemCancel())
             gTasks[taskId].func = Task_ModeMenuSave;
+        if (sOptions->menuCursor[sOptions->submenu] == MenuItemPresetsSave())
+            ApplyPresets();
+        if (sOptions->menuCursor[sOptions->submenu] == MenuItemPresetsCancel())
+        {
+            if (sOptions->submenu == MENU_PRESETS)
+            {
+                sOptions->submenu = MENU_RUN;
+                DrawTopBarText();
+                ReDrawAll();
+                HighlightModeMenuItem();
+                DrawDescriptionText();
+            }
+        }
     }
-    // Exit the menu when the player presses B
-    else if (JOY_NEW(SELECT_BUTTON) || JOY_NEW(START_BUTTON))
+    // Exit the menu when the player presses START
+    else if (JOY_NEW(START_BUTTON) && sOptions->submenu != MENU_PRESETS)
     {
         gTasks[taskId].func = Task_ModeMenuSave;
     }
@@ -1082,7 +1187,7 @@ static void Task_ModeMenuMainInput(u8 taskId)
         HighlightModeMenuItem();
         DrawDescriptionText();
     }
-    else if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT)) //ToDo: cleanup after adding the PRESET feature
+    else if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
     {
         if (sOptions->submenu == MENU_RUN)
         {
@@ -1093,47 +1198,6 @@ static void Task_ModeMenuMainInput(u8 taskId)
                 if (sItemFunctionsRun[cursor].processInput != NULL)
                 {
                     sOptions->sel_run[cursor] = sItemFunctionsRun[cursor].processInput(previousOption);
-
-                    /*//change selections based on defaults
-                    switch(sOptions->menuCursor[sOptions->submenu])
-                    {
-                        case MENUITEM_RUN_DEFAULTS: // 0 = first line => DEFAULT choice
-                            //populate default options to the other mode lines
-                            switch(sOptions->sel_run[cursor])
-                            {
-                                case PRESET_NORMAL:
-                                    sOptions->sel_run[MENUITEM_DIFF_XPMODE]      = XP_75;
-                                    sOptions->sel_run[MENUITEM_DIFF_STAT_CHANGER] = ACTIVE;
-                                    sOptions->sel_run[MENUITEM_DIFF_LEGENDARIES]  = YES;
-                                    //sOptions->sel_run[MENUITEM_RUN_DUPLICATES]   = NO;
-                                    #ifdef PIT_GEN_9_MODE
-                                    sOptions->sel_run[MENUITEM_DIFF_MEGAS]        = MEGAS_OFF;
-                                    #endif
-                                    sOptions->sel_run[MENUITEM_DIFF_HEALFLOORS]   = HEAL_FLOORS_5;
-                                    break;
-                                case PRESET_HARD:
-                                    sOptions->sel_run[MENUITEM_DIFF_XPMODE]      = XP_50;
-                                    sOptions->sel_run[MENUITEM_DIFF_STAT_CHANGER] = INACTIVE;
-                                    sOptions->sel_run[MENUITEM_DIFF_LEGENDARIES]  = NO;
-                                    //sOptions->sel_run[MENUITEM_RUN_DUPLICATES]   = NO;
-                                    #ifdef PIT_GEN_9_MODE
-                                    sOptions->sel_run[MENUITEM_DIFF_MEGAS]        = MEGAS_ON;
-                                    #endif
-                                    sOptions->sel_run[MENUITEM_DIFF_HEALFLOORS]   = HEAL_FLOORS_5;
-                                    break;
-                                default:
-                                    break;
-                            }
-                            break;
-                        case 0: //do nothing
-                        case 1: //do nothing
-                        case 2: //do nothing
-                            break;
-                        default: //set game mode to CUSTOM
-                            sOptions->sel_run[MENUITEM_RUN_DEFAULTS]   = PRESET_CUST;
-                            break;
-                    }*/
-
                     ReDrawAll();
                     DrawDescriptionText();
                 }
@@ -1176,30 +1240,76 @@ static void Task_ModeMenuMainInput(u8 taskId)
                     DrawChoices(cursor, sOptions->visibleCursor[sOptions->submenu] * Y_DIFF);
             }
         }
+        else if (sOptions->submenu == MENU_PRESETS)
+        {
+            int cursor = sOptions->menuCursor[sOptions->submenu];
+            u8 previousOption = sOptions->sel_presets[cursor];
+            if (CheckConditions(cursor))
+            {
+                if (sItemFunctionsPresets[cursor].processInput != NULL)
+                {
+                    sOptions->sel_presets[cursor] = sItemFunctionsPresets[cursor].processInput(previousOption);
+                    ReDrawAll();
+                    DrawDescriptionText();
+                }
+
+                if (previousOption != sOptions->sel_presets[cursor])
+                    DrawChoices(cursor, sOptions->visibleCursor[sOptions->submenu] * Y_DIFF);
+            }
+        }
     }
     else if (JOY_NEW(R_BUTTON))
     {
-        if (sOptions->submenu == MENU_COUNT - 1)
-            sOptions->submenu = 0;
+        if (sOptions->submenu != MENU_PRESETS)
+        {
+            if (sOptions->submenu == MENU_RAND)
+                sOptions->submenu = MENU_RUN;
+            else
+                sOptions->submenu++;
+
+            DrawTopBarText();
+            ReDrawAll();
+            HighlightModeMenuItem();
+            DrawDescriptionText();
+        }
+    }
+    else if (JOY_NEW(L_BUTTON))
+    {
+        if (sOptions->submenu != MENU_PRESETS)
+        {
+            if (sOptions->submenu == MENU_RUN)
+                sOptions->submenu = MENU_RAND;
+            else
+                sOptions->submenu--;
+            
+            DrawTopBarText();
+            ReDrawAll();
+            HighlightModeMenuItem();
+            DrawDescriptionText();
+        }
+    }
+    else if (JOY_NEW(SELECT_BUTTON))
+    {
+        if (sOptions->submenu != MENU_PRESETS)
+            sOptions->submenu = MENU_PRESETS;
         else
-            sOptions->submenu++;
+            sOptions->submenu = MENU_RUN;
 
         DrawTopBarText();
         ReDrawAll();
         HighlightModeMenuItem();
         DrawDescriptionText();
     }
-    else if (JOY_NEW(L_BUTTON))
+    else if (JOY_NEW(B_BUTTON)) //return from Presets view
     {
-        if (sOptions->submenu == 0)
-            sOptions->submenu = MENU_COUNT - 1;
-        else
-            sOptions->submenu--;
-        
-        DrawTopBarText();
-        ReDrawAll();
-        HighlightModeMenuItem();
-        DrawDescriptionText();
+        if (sOptions->submenu == MENU_PRESETS)
+        {
+            sOptions->submenu = MENU_RUN;
+            DrawTopBarText();
+            ReDrawAll();
+            HighlightModeMenuItem();
+            DrawDescriptionText();
+        }
     }
 }
 
@@ -1667,6 +1777,16 @@ static void DrawChoices_RandTypes(int selection, int y)
     DrawModeMenuChoice(sText_Choice_No, GetStringRightAlignXOffset(FONT_NORMAL, sText_Choice_No, 198), y, styles[1], active);
 }*/
 
+static void DrawChoices_PresetsMode(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_PRESET_MODE);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawModeMenuChoice(sText_ModeNormal, 104, y, styles[0], active);
+    DrawModeMenuChoice(sText_ModeHard, GetStringRightAlignXOffset(FONT_NORMAL, sText_ModeHard, 198), y, styles[1], active);
+}
+
 // Background tilemap
 #define TILE_TOP_CORNER_L 0x1A2 // 418
 #define TILE_TOP_EDGE     0x1A3 // 419
@@ -1715,4 +1835,58 @@ static void ModeMenu_FreeResources(void)
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     HideBg(2);
     HideBg(3);
+}
+
+static void ApplyPresets(void)
+{
+    int cursor = sOptions->visibleCursor[sOptions->submenu];
+    DebugPrintf("%d", sOptions->sel_presets[cursor]);
+
+    //general defaults:
+    //run settings
+    sOptions->sel_run[MENUITEM_RUN_BATTLEMODE]      = MODE_MIXED_SINGLES_AND_DOUBLES;
+    sOptions->sel_run[MENUITEM_RUN_3_MONS_ONLY]     = NO;
+    sOptions->sel_run[MENUITEM_RUN_NO_CASE_CHOICE]  = NO;
+    //difficulty settings
+    sOptions->sel_diff[MENUITEM_DIFF_DOUBLE_CASH]   = NO;
+    sOptions->sel_diff[MENUITEM_DIFF_HEALFLOORS]    = HEAL_FLOORS_5;
+    //randomizer settings
+    sOptions->sel_rand[MENUITEM_RAND_MOVES]         = NO;
+    sOptions->sel_rand[MENUITEM_RAND_ABILITIES]     = NO;
+    sOptions->sel_rand[MENUITEM_RAND_BASE_STATS]    = NO;
+    sOptions->sel_rand[MENUITEM_RAND_TYPES]         = NO;
+
+    switch(sOptions->sel_presets[MENUITEM_PRESET_MODE])
+    {
+        case PRESET_NORMAL:
+            sOptions->sel_diff[MENUITEM_DIFF_XPMODE]        = XP_75;
+            sOptions->sel_diff[MENUITEM_DIFF_SAVE_DELETION] = NO;
+            sOptions->sel_diff[MENUITEM_DIFF_STAT_CHANGER]  = ACTIVE;
+            sOptions->sel_diff[MENUITEM_DIFF_LEGENDARIES]   = YES;
+            #ifdef PIT_GEN_9_MODE
+            sOptions->sel_diff[MENUITEM_DIFF_MEGAS]         = MEGAS_OFF;
+            #endif
+            break;
+        case PRESET_HARD:
+            sOptions->sel_diff[MENUITEM_DIFF_XPMODE]        = XP_50;
+            sOptions->sel_diff[MENUITEM_DIFF_SAVE_DELETION] = YES;
+            sOptions->sel_diff[MENUITEM_DIFF_STAT_CHANGER]  = INACTIVE;
+            sOptions->sel_diff[MENUITEM_DIFF_LEGENDARIES]   = NO;
+            #ifdef PIT_GEN_9_MODE
+            sOptions->sel_diff[MENUITEM_DIFF_MEGAS]         = MEGAS_ON;
+            #endif
+            break;
+        default:
+            break;
+    }
+
+    //return to mode menu
+    if (sOptions->submenu == MENU_PRESETS)
+    {
+        sOptions->submenu = MENU_RUN;
+        DrawTopBarText();
+        ReDrawAll();
+        HighlightModeMenuItem();
+        DrawDescriptionText();
+    }
 }
