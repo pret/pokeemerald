@@ -30,6 +30,8 @@ using json11::Json;
 #include "mapjson.h"
 
 string version;
+// System directory separator
+string sep;
 
 string read_text_file(string filepath) {
     ifstream in_file(filepath);
@@ -195,7 +197,7 @@ string generate_map_events_text(Json map_data) {
 
     string mapName = json_to_string(map_data, "name");
 
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/" << mapName << "/map.json\n@\n\n";
+    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/" << mapName << "/map.json\n@\n\n\t.align 2\n\n";
 
     string objects_label, warps_label, coords_label, bgs_label;
 
@@ -330,13 +332,22 @@ string generate_map_events_text(Json map_data) {
     return text.str();
 }
 
-string get_directory_name(string filename) {
-    size_t dir_pos = filename.find_last_of("/\\");
+string strip_trailing_separator(string filename) {
+    if(filename.back() == '/' || filename.back() == '\\')
+        filename.pop_back();
 
+    return filename;
+}
+void infer_separator(string filename) {
+    size_t dir_pos = filename.find_last_of("/\\");
+    sep = filename[dir_pos];
+}
+string file_parent(string filename){
+    size_t dir_pos = filename.find_last_of("/\\");
     return filename.substr(0, dir_pos + 1);
 }
 
-void process_map(string map_filepath, string layouts_filepath) {
+void process_map(string map_filepath, string layouts_filepath, string output_dir) {
     string mapdata_err, layouts_err;
 
     string mapdata_json_text = read_text_file(map_filepath);
@@ -354,10 +365,10 @@ void process_map(string map_filepath, string layouts_filepath) {
     string events_text = generate_map_events_text(map_data);
     string connections_text = generate_map_connections_text(map_data);
 
-    string files_dir = get_directory_name(map_filepath);
-    write_text_file(files_dir + "header.inc", header_text);
-    write_text_file(files_dir + "events.inc", events_text);
-    write_text_file(files_dir + "connections.inc", connections_text);
+    string out_dir = strip_trailing_separator(output_dir).append(sep);
+    write_text_file(out_dir + "header.inc", header_text);
+    write_text_file(out_dir + "events.inc", events_text);
+    write_text_file(out_dir + "connections.inc", connections_text);
 }
 
 string generate_groups_text(Json groups_data) {
@@ -382,7 +393,7 @@ string generate_groups_text(Json groups_data) {
     return text.str();
 }
 
-string generate_connections_text(Json groups_data) {
+string generate_connections_text(Json groups_data, string include_path) {
     vector<Json> map_names;
 
     for (auto &group : groups_data["group_order"].array_items())
@@ -407,12 +418,12 @@ string generate_connections_text(Json groups_data) {
     text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/map_groups.json\n@\n\n";
 
     for (Json map_name : map_names)
-        text << "\t.include \"data/maps/" << json_to_string(map_name) << "/connections.inc\"\n";
+        text << "\t.include \"" << include_path << "/" <<  json_to_string(map_name) << "/connections.inc\"\n";
 
     return text.str();
 }
 
-string generate_headers_text(Json groups_data) {
+string generate_headers_text(Json groups_data, string include_path) {
     vector<string> map_names;
 
     for (auto &group : groups_data["group_order"].array_items())
@@ -424,12 +435,12 @@ string generate_headers_text(Json groups_data) {
     text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/map_groups.json\n@\n\n";
 
     for (string map_name : map_names)
-        text << "\t.include \"data/maps/" << map_name << "/header.inc\"\n";
+        text << "\t.include \"" << include_path << "/" << map_name << "/header.inc\"\n";
 
     return text.str();
 }
 
-string generate_events_text(Json groups_data) {
+string generate_events_text(Json groups_data, string include_path) {
     vector<string> map_names;
 
     for (auto &group : groups_data["group_order"].array_items())
@@ -438,17 +449,16 @@ string generate_events_text(Json groups_data) {
 
     ostringstream text;
 
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/map_groups.json\n@\n\n";
+    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from " << include_path << "/map_groups.json\n@\n\n";
 
     for (string map_name : map_names)
-        text << "\t.include \"data/maps/" << map_name << "/events.inc\"\n";
+        text << "\t.include \"" << include_path << "/" << map_name << "/events.inc\"\n";
 
     return text.str();
 }
 
 string generate_map_constants_text(string groups_filepath, Json groups_data) {
-    string file_dir = get_directory_name(groups_filepath);
-    char dir_separator = file_dir.back();
+    string file_dir = file_parent(groups_filepath) + sep;
 
     ostringstream text;
     ostringstream mapCountText;
@@ -470,7 +480,7 @@ string generate_map_constants_text(string groups_filepath, Json groups_data) {
         int map_count = 0; //DEBUG
 
         for (auto &map_name : groups_data[groupName].array_items()) {
-            string map_filepath = file_dir + json_to_string(map_name) + dir_separator + "map.json";
+            string map_filepath = file_dir + json_to_string(map_name) + sep + "map.json";
             string err_str;
             Json map_data = Json::parse(read_text_file(map_filepath), err_str);
             if (map_data == Json())
@@ -507,7 +517,11 @@ string generate_map_constants_text(string groups_filepath, Json groups_data) {
     return text.str();
 }
 
-void process_groups(string groups_filepath) {
+// Output paths are directories with trailing path separators
+void process_groups(string groups_filepath, string output_asm, string output_c) {
+    output_asm = strip_trailing_separator(output_asm); // Remove separator if existing.
+    output_c = strip_trailing_separator(output_c);
+
     string err;
     Json groups_data = Json::parse(read_text_file(groups_filepath), err);
 
@@ -515,19 +529,16 @@ void process_groups(string groups_filepath) {
         FATAL_ERROR("%s\n", err.c_str());
 
     string groups_text = generate_groups_text(groups_data);
-    string connections_text = generate_connections_text(groups_data);
-    string headers_text = generate_headers_text(groups_data);
-    string events_text = generate_events_text(groups_data);
+    string connections_text = generate_connections_text(groups_data, output_asm);
+    string headers_text = generate_headers_text(groups_data, output_asm);
+    string events_text = generate_events_text(groups_data, output_asm);
     string map_header_text = generate_map_constants_text(groups_filepath, groups_data);
 
-    string file_dir = get_directory_name(groups_filepath);
-    char s = file_dir.back();
-
-    write_text_file(file_dir + "groups.inc", groups_text);
-    write_text_file(file_dir + "connections.inc", connections_text);
-    write_text_file(file_dir + "headers.inc", headers_text);
-    write_text_file(file_dir + "events.inc", events_text);
-    write_text_file(file_dir + ".." + s + ".." + s + "include" + s + "constants" + s + "map_groups.h", map_header_text);
+    write_text_file(output_asm + sep + "groups.inc", groups_text);
+    write_text_file(output_asm + sep + "connections.inc", connections_text);
+    write_text_file(output_asm + sep + "headers.inc", headers_text);
+    write_text_file(output_asm + sep + "events.inc", events_text);
+    write_text_file(output_c + sep + "map_groups.h", map_header_text);
 }
 
 string generate_layout_headers_text(Json layouts_data) {
@@ -600,7 +611,10 @@ string generate_layouts_constants_text(Json layouts_data) {
     return text.str();
 }
 
-void process_layouts(string layouts_filepath) {
+void process_layouts(string layouts_filepath, string output_asm, string output_c) {
+    output_asm = strip_trailing_separator(output_asm).append(sep);
+    output_c = strip_trailing_separator(output_c).append(sep);
+
     string err;
     Json layouts_data = Json::parse(read_text_file(layouts_filepath), err);
 
@@ -611,12 +625,9 @@ void process_layouts(string layouts_filepath) {
     string layouts_table_text = generate_layouts_table_text(layouts_data);
     string layouts_constants_text = generate_layouts_constants_text(layouts_data);
 
-    string file_dir = get_directory_name(layouts_filepath);
-    char s = file_dir.back();
-
-    write_text_file(file_dir + "layouts.inc", layout_headers_text);
-    write_text_file(file_dir + "layouts_table.inc", layouts_table_text);
-    write_text_file(file_dir + ".." + s + ".." + s + "include" + s + "constants" + s + "layouts.h", layouts_constants_text);
+    write_text_file(output_asm + "layouts.inc", layout_headers_text);
+    write_text_file(output_asm + "layouts_table.inc", layouts_table_text);
+    write_text_file(output_c + "layouts.h", layouts_constants_text);
 }
 
 int main(int argc, char *argv[]) {
@@ -634,29 +645,40 @@ int main(int argc, char *argv[]) {
         FATAL_ERROR("ERROR: <mode> must be 'layouts', 'map', or 'groups'.\n");
 
     if (mode == "map") {
-        if (argc != 5)
-            FATAL_ERROR("USAGE: mapjson map <game-version> <map_file> <layouts_file>\n");
+        if (argc != 6)
+            FATAL_ERROR("USAGE: mapjson map <game-version> <map_file> <layouts_file> <output_dir>\n");
 
+        infer_separator(argv[3]);
         string filepath(argv[3]);
         string layouts_filepath(argv[4]);
+        string output_dir(argv[5]);
 
-        process_map(filepath, layouts_filepath);
+        process_map(filepath, layouts_filepath, output_dir);
     }
     else if (mode == "groups") {
-        if (argc != 4)
-            FATAL_ERROR("USAGE: mapjson groups <game-version> <groups_file>\n");
+        if (argc != 6)
+            FATAL_ERROR("USAGE: mapjson groups <game-version> <groups_file> <output_asm_dir> <output_c_dir>\n");
 
+        infer_separator(argv[3]);
         string filepath(argv[3]);
+        string output_asm(argv[4]);
+        string output_c(argv[5]);
 
-        process_groups(filepath);
+        process_groups(filepath, output_asm, output_c);
     }
     else if (mode == "layouts") {
-        if (argc != 4)
-            FATAL_ERROR("USAGE: mapjson layouts <game-version> <layouts_file>\n");
+        if (argc != 6)
+            FATAL_ERROR("USAGE: mapjson layouts <game-version> <layouts_file> <output_asm_dir> <output_c_dir>\n");
 
+        infer_separator(argv[3]);
         string filepath(argv[3]);
+        string output_asm(argv[4]);
+        string output_c(argv[5]);
 
-        process_layouts(filepath);
+        process_layouts(filepath, output_asm, output_c);
+    }
+    else {
+        FATAL_ERROR("ERROR: <mode> must be 'layouts', 'map', or 'groups'.\n");
     }
 
     return 0;

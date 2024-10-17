@@ -77,8 +77,8 @@ struct RfuDebug
     u8 unused4[88];
 };
 
-u32 gRfuAPIBuffer[RFU_API_BUFF_SIZE_RAM / 4];
-struct RfuManager gRfu;
+COMMON_DATA u32 gRfuAPIBuffer[RFU_API_BUFF_SIZE_RAM / 4] = {0};
+COMMON_DATA struct RfuManager gRfu = {0};
 
 static u8 sHeldKeyCount;
 static u8 sResendBlock8[CMD_LENGTH * 2];
@@ -138,7 +138,7 @@ static const u8 sAvailSlots[] = {
     [4] = AVAIL_SLOT4
 };
 
-#define BLOCK_MASK(bitNum)((1 << (bitNum)) - 1)
+#define BLOCK_MASK(bitNum) ((1 << (bitNum)) - 1)
 static const u32 sAllBlocksReceived[] = {
     BLOCK_MASK(0),
     BLOCK_MASK(1),

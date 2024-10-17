@@ -5,8 +5,8 @@
 #endif
 
 // IWRAM common
-rng_value_t gRngValue;
-rng_value_t gRng2Value;
+COMMON_DATA rng_value_t gRngValue = {0};
+COMMON_DATA rng_value_t gRng2Value = {0};
 
 #if HQ_RANDOM == TRUE
 

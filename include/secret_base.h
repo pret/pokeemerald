@@ -24,7 +24,6 @@ void SetCurSecretBaseIdFromPosition(const struct MapPosition *position, const st
 void TrySetCurSecretBaseIndex(void);
 void CheckPlayerHasSecretBase(void);
 void ToggleSecretBaseEntranceMetatile(void);
-void ScriptContext_Enable(void);
 void ReceiveSecretBasesData(void *records, size_t recordSize, u8 linkIdx);
 
 #endif //GUARD_SECRET_BASE_H

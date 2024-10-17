@@ -256,7 +256,7 @@ static struct FactorySelectScreen *sFactorySelectScreen;
 static void (*sSwap_CurrentOptionFunc)(u8 taskId);
 static struct FactorySwapScreen *sFactorySwapScreen;
 
-u8 (*gFactorySelect_CurrentOptionFunc)(void);
+COMMON_DATA u8 (*gFactorySelect_CurrentOptionFunc)(void) = NULL;
 
 static const u16 sPokeballGray_Pal[]         = INCBIN_U16("graphics/battle_frontier/factory_screen/pokeball_gray.gbapal");
 static const u16 sPokeballSelected_Pal[]     = INCBIN_U16("graphics/battle_frontier/factory_screen/pokeball_selected.gbapal");

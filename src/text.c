@@ -52,10 +52,10 @@ static u16 sLastTextBgColor;
 static u16 sLastTextFgColor;
 static u16 sLastTextShadowColor;
 
-const struct FontInfo *gFonts;
-bool8 gDisableTextPrinters;
-struct TextGlyph gCurGlyph;
-TextFlags gTextFlags;
+COMMON_DATA const struct FontInfo *gFonts = NULL;
+COMMON_DATA bool8 gDisableTextPrinters = 0;
+COMMON_DATA struct TextGlyph gCurGlyph = {0};
+COMMON_DATA TextFlags gTextFlags = {0};
 
 static const u8 sFontHalfRowOffsets[] =
 {

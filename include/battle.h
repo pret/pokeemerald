@@ -862,14 +862,14 @@ STATIC_ASSERT(sizeof(((struct BattleStruct *)0)->palaceFlags) * 8 >= MAX_BATTLER
                                         || gProtectStructs[battlerId].obstructed                                       \
                                         || gProtectStructs[battlerId].silkTrapped)
 
-#define GET_STAT_BUFF_ID(n)((n & 7))              // first three bits 0x1, 0x2, 0x4
-#define GET_STAT_BUFF_VALUE_WITH_SIGN(n)((n & 0xF8))
-#define GET_STAT_BUFF_VALUE(n)(((n >> 3) & 0xF))      // 0x8, 0x10, 0x20, 0x40
+#define GET_STAT_BUFF_ID(n) ((n & 7))              // first three bits 0x1, 0x2, 0x4
+#define GET_STAT_BUFF_VALUE_WITH_SIGN(n) ((n & 0xF8))
+#define GET_STAT_BUFF_VALUE(n) (((n >> 3) & 0xF))      // 0x8, 0x10, 0x20, 0x40
 #define STAT_BUFF_NEGATIVE 0x80                     // 0x80, the sign bit
 
-#define SET_STAT_BUFF_VALUE(n)((((n) << 3) & 0xF8))
+#define SET_STAT_BUFF_VALUE(n) ((((n) << 3) & 0xF8))
 
-#define SET_STATCHANGER(statId, stage, goesDown)(gBattleScripting.statChanger = (statId) + ((stage) << 3) + (goesDown << 7))
+#define SET_STATCHANGER(statId, stage, goesDown) (gBattleScripting.statChanger = (statId) + ((stage) << 3) + (goesDown << 7))
 #define SET_STATCHANGER2(dst, statId, stage, goesDown)(dst = (statId) + ((stage) << 3) + (goesDown << 7))
 
 // NOTE: The members of this struct have hard-coded offsets

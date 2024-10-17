@@ -38,7 +38,7 @@ static struct BgControl sGpuBgConfigs;
 static struct BgConfig2 sGpuBgConfigs2[NUM_BACKGROUNDS];
 static u32 sDmaBusyBitfield[NUM_BACKGROUNDS];
 
-u32 gWindowTileAutoAllocEnabled;
+COMMON_DATA u32 gWindowTileAutoAllocEnabled = 0;
 
 static const struct BgConfig sZeroedBgControlStruct = { 0 };
 

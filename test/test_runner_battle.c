@@ -5,7 +5,6 @@
 #include "battle_controllers.h"
 #include "battle_gimmick.h"
 #include "battle_z_move.h"
-#include "characters.h"
 #include "event_data.h"
 #include "fieldmap.h"
 #include "item_menu.h"
@@ -14,6 +13,7 @@
 #include "random.h"
 #include "test/battle.h"
 #include "window.h"
+#include "constants/characters.h"
 #include "constants/trainers.h"
 
 #if defined(__INTELLISENSE__)

@@ -96,7 +96,7 @@ static EWRAM_DATA u8 sFrontierExchangeCorner_ItemIconWindowId = 0;
 static EWRAM_DATA u8 sPCBoxToSendMon = 0;
 static EWRAM_DATA u32 sBattleTowerMultiBattleTypeFlags = 0;
 
-struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate;
+COMMON_DATA struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate = {0};
 EWRAM_DATA u16 gScrollableMultichoice_ScrollOffset = 0;
 
 void TryLoseFansFromPlayTime(void);
@@ -272,7 +272,7 @@ u16 GetRecordedCyclingRoadResults(void)
 
 void UpdateCyclingRoadState(void)
 {
-    if (gLastUsedWarp.mapNum == MAP_NUM(ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE) && gLastUsedWarp.mapGroup == MAP_GROUP(ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE))
+    if (gLastUsedWarp.mapNum == MAP_NUM(ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE) && gLastUsedWarp.mapGroup == MAP_GROUP(ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE))
         return;
 
     if (VarGet(VAR_CYCLING_CHALLENGE_STATE) == 2 || VarGet(VAR_CYCLING_CHALLENGE_STATE) == 3)
@@ -3550,7 +3550,7 @@ bool32 IsTrainerRegistered(void)
     int index = GetRematchIdxByTrainerIdx(gSpecialVar_0x8004);
     if (index >= 0)
     {
-        if (FlagGet(FLAG_MATCH_CALL_REGISTERED + index) == TRUE)
+        if (FlagGet(TRAINER_REGISTERED_FLAGS_START + index) == TRUE)
             return TRUE;
     }
     return FALSE;
@@ -3887,14 +3887,14 @@ bool8 InPokemonCenter(void)
 #define FANCLUB_BITFIELD (gSaveBlock1Ptr->vars[VAR_FANCLUB_FAN_COUNTER - VARS_START])
 #define FANCLUB_COUNTER    0x007F
 
-#define GET_TRAINER_FAN_CLUB_FLAG(flag) (FANCLUB_BITFIELD >> (flag) & 1)
-#define SET_TRAINER_FAN_CLUB_FLAG(flag) (FANCLUB_BITFIELD |= 1 << (flag))
-#define FLIP_TRAINER_FAN_CLUB_FLAG(flag)(FANCLUB_BITFIELD ^= 1 << (flag))
+#define GET_TRAINER_FAN_CLUB_FLAG(flag)  (FANCLUB_BITFIELD >> (flag) & 1)
+#define SET_TRAINER_FAN_CLUB_FLAG(flag)  (FANCLUB_BITFIELD |= 1 << (flag))
+#define FLIP_TRAINER_FAN_CLUB_FLAG(flag) (FANCLUB_BITFIELD ^= 1 << (flag))
 
-#define GET_TRAINER_FAN_CLUB_COUNTER        (FANCLUB_BITFIELD & FANCLUB_COUNTER)
-#define SET_TRAINER_FAN_CLUB_COUNTER(count) (FANCLUB_BITFIELD = (FANCLUB_BITFIELD & ~FANCLUB_COUNTER) | (count))
-#define INCR_TRAINER_FAN_CLUB_COUNTER(count)(FANCLUB_BITFIELD += (count))
-#define CLEAR_TRAINER_FAN_CLUB_COUNTER      (FANCLUB_BITFIELD &= ~FANCLUB_COUNTER)
+#define GET_TRAINER_FAN_CLUB_COUNTER         (FANCLUB_BITFIELD & FANCLUB_COUNTER)
+#define SET_TRAINER_FAN_CLUB_COUNTER(count)  (FANCLUB_BITFIELD = (FANCLUB_BITFIELD & ~FANCLUB_COUNTER) | (count))
+#define INCR_TRAINER_FAN_CLUB_COUNTER(count) (FANCLUB_BITFIELD += (count))
+#define CLEAR_TRAINER_FAN_CLUB_COUNTER       (FANCLUB_BITFIELD &= ~FANCLUB_COUNTER)
 
 void ResetFanClub(void)
 {

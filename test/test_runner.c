@@ -1,11 +1,11 @@
 #include <stdarg.h>
 #include "global.h"
-#include "characters.h"
 #include "gpu_regs.h"
 #include "load_save.h"
 #include "main.h"
 #include "malloc.h"
 #include "random.h"
+#include "constants/characters.h"
 #include "test_runner.h"
 #include "test/test.h"
 

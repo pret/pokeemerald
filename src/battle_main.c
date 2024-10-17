@@ -236,13 +236,13 @@ EWRAM_DATA u8 gPartyCriticalHits[PARTY_SIZE] = {0};
 EWRAM_DATA static u8 sTriedEvolving = 0;
 EWRAM_DATA u8 gCategoryIconSpriteId = 0;
 
-void (*gPreBattleCallback1)(void);
-void (*gBattleMainFunc)(void);
-struct BattleResults gBattleResults;
-u8 gLeveledUpInBattle;
-u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
-u8 gMultiUsePlayerCursor;
-u8 gNumberOfMovesToChoose;
+COMMON_DATA void (*gPreBattleCallback1)(void) = NULL;
+COMMON_DATA void (*gBattleMainFunc)(void) = NULL;
+COMMON_DATA struct BattleResults gBattleResults = {0};
+COMMON_DATA u8 gLeveledUpInBattle = 0;
+COMMON_DATA u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT] = {0};
+COMMON_DATA u8 gMultiUsePlayerCursor = 0;
+COMMON_DATA u8 gNumberOfMovesToChoose = 0;
 
 static const struct ScanlineEffectParams sIntroScanlineParams16Bit =
 {
