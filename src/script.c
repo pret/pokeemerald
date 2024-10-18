@@ -1115,6 +1115,9 @@ void SetRandomMonEncounter(void)
     if (Random() % 5) // Odds of A Random Encounter On Each Floor
         return;
 
+    if(VarGet(VAR_PIT_FLOOR) <= 5)
+        return;
+
     if(!RemainingEncounters()) // Cancel if All Random Encounters have been done
         return;
 
