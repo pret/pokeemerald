@@ -214,16 +214,17 @@ static EWRAM_DATA u8 *sBg3TilemapBuffer = NULL;
 //static EWRAM_DATA u8 *statePresets = 0;
 
 // const data
-static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/interface/option_menu_equals_sign.4bpp"); // note: this is only used in the Japanese release
-static const u16 sModeMenuBg_Pal[] = {RGB(17, 18, 31)};
+static const u8 sEqualSignGfx[]      = INCBIN_U8("graphics/interface/option_menu_equals_sign.4bpp"); // note: this is only used in the Japanese release
+static const u16 sModeMenuBg_Pal[]   = {RGB(17, 18, 31)};
 static const u16 sModeMenuText_Pal[] = INCBIN_U16("graphics/interface/option_menu_text_custom.gbapal");
+static const u8 sLR_ButtonGfx[]      = INCBIN_U8("graphics/ui_menu/r_button.4bpp");
 
-static const u32 sOptionsPlusTiles[] = INCBIN_U32("graphics/ui_mode_menu/mode_menu_tiles.4bpp.lz");
+static const u32 sOptionsPlusTiles[]   = INCBIN_U32("graphics/ui_mode_menu/mode_menu_tiles.4bpp.lz");
 static const u16 sOptionsPlusPalette[] = INCBIN_U16("graphics/ui_mode_menu/mode_menu_tiles.gbapal");
 static const u32 sOptionsPlusTilemap[] = INCBIN_U32("graphics/ui_mode_menu/mode_menu_tiles.bin.lz");
 
 // Scrolling Background
-static const u32 sScrollBgTiles[] = INCBIN_U32("graphics/ui_mode_menu/scroll_tiles.4bpp.lz");
+static const u32 sScrollBgTiles[]   = INCBIN_U32("graphics/ui_mode_menu/scroll_tiles.4bpp.lz");
 static const u32 sScrollBgTilemap[] = INCBIN_U32("graphics/ui_mode_menu/scroll_tiles.bin.lz");
 static const u16 sScrollBgPalette[] = INCBIN_U16("graphics/ui_mode_menu/scroll_tiles.gbapal");
 
@@ -881,7 +882,8 @@ static void ModeMenu_VBlankCB(void)
 static const u8 sText_TopBar_Run[]        = _("RUN SETTINGS");
 static const u8 sText_TopBar_Diff[]       = _("DIFFICULTY SETTINGS");
 static const u8 sText_TopBar_Rand[]       = _("RANDOMIZER SETTINGS");
-static const u8 sText_TopBar_Right[]      = _("{L_BUTTON}{R_BUTTON} CHANGE PAGE");
+static const u8 sText_TopBar_Select[]     = _("{SELECT_BUTTON} PRESETS");
+static const u8 sText_TopBar_Right[]      = _("PAGE");
 static const u8 gText_SmallDot[]          = _("·");
 static const u8 gText_LargeDot[]          = _("{EMOJI_CIRCLE}");
 static void DrawTopBarText(void)
@@ -904,7 +906,7 @@ static void DrawTopBarText(void)
         }
 
         FillWindowPixelBuffer(WIN_TOPBAR, PIXEL_FILL(0));
-        AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 2, 1, color, 0, pageDots);
+        AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 5, 1, color, 0, pageDots);
 
         switch (sOptions->submenu)
         {
@@ -918,12 +920,14 @@ static void DrawTopBarText(void)
                 AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 40, 1, color, 0, sText_TopBar_Rand);
                 break;
         }
-        AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 145, 1, color, 0, sText_TopBar_Right);
+        AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 125, 1, color, 0, sText_TopBar_Select);
+        BlitBitmapToWindow(WIN_TOPBAR, sLR_ButtonGfx, 190, 4, 24, 8);
+        AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 215, 1, color, 0, sText_TopBar_Right);
     }
     else
     {
         FillWindowPixelBuffer(WIN_TOPBAR, PIXEL_FILL(0));
-        AddTextPrinterParameterized3(WIN_TOPBAR, FONT_NORMAL, 40, 1, color, 0, sText_Defaults);
+        AddTextPrinterParameterized3(WIN_TOPBAR, FONT_NORMAL, 10, 1, color, 0, sText_Defaults);
     }
 
     PutWindowTilemap(WIN_TOPBAR);
