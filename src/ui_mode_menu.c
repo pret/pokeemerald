@@ -37,9 +37,6 @@
 #include "config/general.h"
 
 //defines
-#define MODE_NORMAL     0
-#define MODE_HARD       1
-#define MODE_CUSTOM     2
 #define MODE_SINGLES    0
 #define MODE_DOUBLES    1
 #define MODE_MIXED_SINGLES_AND_DOUBLES    2
@@ -47,6 +44,7 @@
 #define RANDOM_ALL      1
 #define XP_75           0
 #define XP_50           1
+#define XP_NONE         2
 #define ACTIVE          0
 #define INACTIVE        1
 #define YES             0
@@ -78,41 +76,58 @@ enum MenuIds
     MENU_RUN,
     MENU_DIFF,
     MENU_RAND,
+    MENU_PRESETS,
     MENU_COUNT
 };
 
 enum MenuItems_Run
 {
     MENUITEM_RUN_BATTLEMODE,
-    MENUITEM_RUN_RANDOMIZER,
-    MENUITEM_RUN_AUTOSAVE,
-    MENUITEM_RUN_DEFAULTS,
-    MENUITEM_RUN_XPSHARE,
-    MENUITEM_RUN_STAT_CHANGER,
-    MENUITEM_RUN_LEGENDARIES,
+    MENUITEM_RUN_3_MONS_ONLY,
+    MENUITEM_RUN_NO_CASE_CHOICE,
     //MENUITEM_RUN_DUPLICATES,
-    #ifdef PIT_GEN_9_MODE
-    MENUITEM_RUN_MEGAS,
-    #endif
-    MENUITEM_RUN_HEALFLOORS,
     MENUITEM_RUN_CANCEL,
     MENUITEM_RUN_COUNT,
 };
 
 enum MenuItems_Difficulty
 {
-    MENUITEM_DIFF_OPT1,
-    MENUITEM_DIFF_OPT2,
+    MENUITEM_DIFF_XPMODE,
+    MENUITEM_DIFF_SAVE_DELETION,
+    MENUITEM_DIFF_STAT_CHANGER,
+    MENUITEM_DIFF_DOUBLE_CASH,
+    MENUITEM_DIFF_HEALFLOORS,
+    MENUITEM_DIFF_LEGENDARIES,
+    #ifdef PIT_GEN_9_MODE
+    MENUITEM_DIFF_MEGAS,
+    #endif
     MENUITEM_DIFF_CANCEL,
     MENUITEM_DIFF_COUNT,
 };
 
 enum MenuItems_Randomizer
 {
-    MENUITEM_RAND_OPT1,
-    MENUITEM_RAND_OPT2,
+    MENUITEM_RAND_MOVES,
+    MENUITEM_RAND_ABILITIES,
+    MENUITEM_RAND_BASE_STATS,
+    MENUITEM_RAND_TYPES,
+    //MENUITEM_RAND_EVOS,
     MENUITEM_RAND_CANCEL,
     MENUITEM_RAND_COUNT,
+};
+
+enum MenuItems_Presets
+{
+    MENUITEM_PRESET_MODE,
+    MENUITEM_PRESET_CANCEL,
+    MENUITEM_PRESET_SAVE,
+    MENUITEM_PRESET_COUNT,
+};
+
+enum Game_Presets
+{
+    PRESET_NORMAL,
+    PRESET_HARD
 };
 
 static EWRAM_DATA struct ModeMenuState *sModeMenuState = NULL;
@@ -196,18 +211,20 @@ static const struct WindowTemplate sModeMenuWindowTemplates[] =
 EWRAM_DATA static struct ModeMenu *sOptions = NULL;
 static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
 static EWRAM_DATA u8 *sBg3TilemapBuffer = NULL;
+//static EWRAM_DATA u8 *statePresets = 0;
 
 // const data
-static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/interface/option_menu_equals_sign.4bpp"); // note: this is only used in the Japanese release
-static const u16 sModeMenuBg_Pal[] = {RGB(17, 18, 31)};
+static const u8 sEqualSignGfx[]      = INCBIN_U8("graphics/interface/option_menu_equals_sign.4bpp"); // note: this is only used in the Japanese release
+static const u16 sModeMenuBg_Pal[]   = {RGB(17, 18, 31)};
 static const u16 sModeMenuText_Pal[] = INCBIN_U16("graphics/interface/option_menu_text_custom.gbapal");
+static const u8 sLR_ButtonGfx[]      = INCBIN_U8("graphics/ui_menu/r_button.4bpp");
 
-static const u32 sOptionsPlusTiles[] = INCBIN_U32("graphics/ui_mode_menu/mode_menu_tiles.4bpp.lz");
+static const u32 sOptionsPlusTiles[]   = INCBIN_U32("graphics/ui_mode_menu/mode_menu_tiles.4bpp.lz");
 static const u16 sOptionsPlusPalette[] = INCBIN_U16("graphics/ui_mode_menu/mode_menu_tiles.gbapal");
 static const u32 sOptionsPlusTilemap[] = INCBIN_U32("graphics/ui_mode_menu/mode_menu_tiles.bin.lz");
 
 // Scrolling Background
-static const u32 sScrollBgTiles[] = INCBIN_U32("graphics/ui_mode_menu/scroll_tiles.4bpp.lz");
+static const u32 sScrollBgTiles[]   = INCBIN_U32("graphics/ui_mode_menu/scroll_tiles.4bpp.lz");
 static const u32 sScrollBgTilemap[] = INCBIN_U32("graphics/ui_mode_menu/scroll_tiles.bin.lz");
 static const u16 sScrollBgPalette[] = INCBIN_U16("graphics/ui_mode_menu/scroll_tiles.gbapal");
 
@@ -232,6 +249,7 @@ struct ModeMenu
     u8 sel_run[MENUITEM_RUN_COUNT];
     u8 sel_diff[MENUITEM_DIFF_COUNT];
     u8 sel_rand[MENUITEM_RAND_COUNT];
+    u8 sel_presets[MENUITEM_PRESET_COUNT];
     int menuCursor[MENU_COUNT];
     int visibleCursor[MENU_COUNT];
     u8 arrowTaskId;
@@ -277,17 +295,27 @@ static int XOptions_ProcessInput(int x, int selection);
 static int ProcessInput_Options_Two(int selection);
 static int ProcessInput_Options_Three(int selection);
 static void ReDrawAll(void);
-static void DrawChoices_Defaults(int selection, int y);
-static void DrawChoices_Autosave(int selection, int y);
+//static void DrawChoices_Autosave(int selection, int y);
 static void DrawChoices_BattleMode(int selection, int y);
-static void DrawChoices_Randomizer(int selection, int y);
-static void DrawChoices_XPShare(int selection, int y);
+//static void DrawChoices_Randomizer(int selection, int y);
+static void DrawChoices_3MonsOnly(int selection, int y);
+static void DrawChoices_NoCaseChoice(int selection, int y);
+static void DrawChoices_SaveDeletion(int selection, int y);
+static void DrawChoices_DoubleCash(int selection, int y);
+static void DrawChoices_RandMoves(int selection, int y);
+static void DrawChoices_RandAbilities(int selection, int y);
+static void DrawChoices_RandStats(int selection, int y);
+static void DrawChoices_RandTypes(int selection, int y);
+//static void DrawChoices_RandEvos(int selection, int y);
+static void DrawChoices_XPMode(int selection, int y);
 static void DrawChoices_StatChanger(int selection, int y);
 static void DrawChoices_Legendaries(int selection, int y);
 static void DrawChoices_Duplicates(int selection, int y);
 static void DrawChoices_Megas(int selection, int y);
 static void DrawChoices_HealFloors(int selection, int y);
+static void DrawChoices_PresetsMode(int selection, int y);
 static void DrawBgWindowFrames(void);
+static void ApplyPresets(void);
 
 // Menu draw and input functions
 struct Menu_Run //MENU_RUN
@@ -296,19 +324,11 @@ struct Menu_Run //MENU_RUN
     int (*processInput)(int selection);
 } static const sItemFunctionsRun[MENUITEM_RUN_COUNT] =
 {
-    [MENUITEM_RUN_DEFAULTS]     = {DrawChoices_Defaults,    ProcessInput_Options_Three},
-    [MENUITEM_RUN_AUTOSAVE]     = {DrawChoices_Autosave,    ProcessInput_Options_Three},
-    [MENUITEM_RUN_BATTLEMODE]   = {DrawChoices_BattleMode,  ProcessInput_Options_Three},
-    [MENUITEM_RUN_RANDOMIZER]   = {DrawChoices_Randomizer,  ProcessInput_Options_Two},
-    [MENUITEM_RUN_XPSHARE]      = {DrawChoices_XPShare,     ProcessInput_Options_Two},
-    [MENUITEM_RUN_STAT_CHANGER] = {DrawChoices_StatChanger, ProcessInput_Options_Two},
-    [MENUITEM_RUN_LEGENDARIES]  = {DrawChoices_Legendaries, ProcessInput_Options_Two},
-    //[MENUITEM_RUN_DUPLICATES]   = {DrawChoices_Duplicates,  ProcessInput_Options_Two},
-    #ifdef PIT_GEN_9_MODE
-    [MENUITEM_RUN_MEGAS]        = {DrawChoices_Megas,       ProcessInput_Options_Two},
-    #endif
-    [MENUITEM_RUN_HEALFLOORS]   = {DrawChoices_HealFloors,  ProcessInput_Options_Two},
-    [MENUITEM_RUN_CANCEL]       = {NULL, NULL},
+    [MENUITEM_RUN_BATTLEMODE]     = {DrawChoices_BattleMode,   ProcessInput_Options_Three},
+    [MENUITEM_RUN_3_MONS_ONLY]    = {DrawChoices_3MonsOnly,    ProcessInput_Options_Two},
+    [MENUITEM_RUN_NO_CASE_CHOICE] = {DrawChoices_NoCaseChoice, ProcessInput_Options_Two},
+    //[MENUITEM_RUN_DUPLICATES]     = {DrawChoices_Duplicates,  ProcessInput_Options_Two},
+    [MENUITEM_RUN_CANCEL]         = {NULL, NULL},
 };
 
 struct Menu_Diff //MENU_DIFF
@@ -316,10 +336,17 @@ struct Menu_Diff //MENU_DIFF
     void (*drawChoices)(int selection, int y);
     int (*processInput)(int selection);
 } static const sItemFunctionsDiff[MENUITEM_DIFF_COUNT] =
-{ //ToDo
-    [MENUITEM_DIFF_OPT1]     = {DrawChoices_XPShare,    ProcessInput_Options_Two},
-    [MENUITEM_DIFF_OPT2]     = {DrawChoices_XPShare,    ProcessInput_Options_Two},
-    [MENUITEM_DIFF_CANCEL]   = {NULL, NULL},
+{
+    [MENUITEM_DIFF_XPMODE]        = {DrawChoices_XPMode,       ProcessInput_Options_Three},
+    [MENUITEM_DIFF_SAVE_DELETION] = {DrawChoices_SaveDeletion, ProcessInput_Options_Two},
+    [MENUITEM_DIFF_STAT_CHANGER]  = {DrawChoices_StatChanger,  ProcessInput_Options_Two},
+    [MENUITEM_DIFF_DOUBLE_CASH]   = {DrawChoices_DoubleCash,   ProcessInput_Options_Two},
+    [MENUITEM_DIFF_HEALFLOORS]    = {DrawChoices_HealFloors,   ProcessInput_Options_Two},
+    [MENUITEM_DIFF_LEGENDARIES]   = {DrawChoices_Legendaries,  ProcessInput_Options_Two},
+    #ifdef PIT_GEN_9_MODE
+    [MENUITEM_DIFF_MEGAS]         = {DrawChoices_Megas,        ProcessInput_Options_Two},
+    #endif
+    [MENUITEM_DIFF_CANCEL]        = {NULL, NULL},
 };
 
 struct Menu_Rand //MENU_RAND
@@ -327,54 +354,92 @@ struct Menu_Rand //MENU_RAND
     void (*drawChoices)(int selection, int y);
     int (*processInput)(int selection);
 } static const sItemFunctionsRand[MENUITEM_RAND_COUNT] =
-{ //ToDo
-    [MENUITEM_RAND_OPT1]     = {DrawChoices_XPShare,    ProcessInput_Options_Two},
-    [MENUITEM_RAND_OPT2]     = {DrawChoices_XPShare,    ProcessInput_Options_Two},
-    [MENUITEM_RAND_CANCEL]   = {NULL, NULL},
+{
+    [MENUITEM_RAND_MOVES]      = {DrawChoices_RandMoves,     ProcessInput_Options_Two},
+    [MENUITEM_RAND_ABILITIES]  = {DrawChoices_RandAbilities, ProcessInput_Options_Two},
+    [MENUITEM_RAND_BASE_STATS] = {DrawChoices_RandStats,     ProcessInput_Options_Two},
+    [MENUITEM_RAND_TYPES]      = {DrawChoices_RandTypes,     ProcessInput_Options_Two},
+    //[MENUITEM_RAND_EVOS]       = {DrawChoices_RandEvos,      ProcessInput_Options_Two},
+    [MENUITEM_RAND_CANCEL]     = {NULL, NULL},
+};
+
+struct Menu_Presets //MENU_PRESETS
+{
+    void (*drawChoices)(int selection, int y);
+    int (*processInput)(int selection);
+} static const sItemFunctionsPresets[MENUITEM_PRESET_COUNT] =
+{
+    [MENUITEM_PRESET_MODE] = {DrawChoices_PresetsMode,     ProcessInput_Options_Two},
+    [MENUITEM_PRESET_CANCEL] = {NULL, NULL},
+    [MENUITEM_PRESET_SAVE]   = {NULL, NULL},
 };
 
 // Menu left side option names text
-static const u8 sText_Defaults[]    = _("PRESETS");
-static const u8 sText_Autosave[]    = _("AUTOSAVE");
-static const u8 sText_BattleMode[]  = _("BATTLE MODE");
-static const u8 sText_Randomizer[]  = _("RANDOMIZER");
-static const u8 sText_XPShare[]     = _("XP SHARE");
-static const u8 sText_StatChanger[] = _("STAT CHANGER");
-static const u8 sText_Legendaries[] = _("LEGENDARIES");
-static const u8 sText_Duplicates[]  = _("DUPLICATES");
-static const u8 sText_Megas[]       = _("TRAINER MEGAS");
-static const u8 sText_HealFloors[]  = _("HEAL FLOORS");
-static const u8 sText_Cancel[]      = _("SAVE & LEAVE");
+static const u8 sText_Defaults[]     = _("PRESETS");
+static const u8 sText_Autosave[]     = _("AUTOSAVE");
+static const u8 sText_BattleMode[]   = _("BATTLE MODE");
+static const u8 sText_Randomizer[]   = _("RANDOMIZER");
+static const u8 sText_XPMode[]       = _("XP MODE");
+static const u8 sText_StatChanger[]  = _("STAT CHANGER");
+static const u8 sText_Legendaries[]  = _("LEGENDARIES");
+static const u8 sText_Duplicates[]   = _("DUPLICATES");
+static const u8 sText_Megas[]        = _("TRAINER MEGAS");
+static const u8 sText_HealFloors[]   = _("HEAL FLOORS");
+
+static const u8 sText_3MonsOnly[]    = _("3 MONS ONLY");
+static const u8 sText_NoCaseChoice[] = _("NO BIRCH CASE");
+static const u8 sText_SaveDeletion[] = _("SAVE DELETION");
+static const u8 sText_DoubleCash[]   = _("DOUBLE CASH");
+
+static const u8 sText_Moves[]        = _("MOVES");
+static const u8 sText_Abilities[]    = _("ABILITIES");
+static const u8 sText_BaseStats[]    = _("BASE STATS");
+static const u8 sText_Types[]        = _("TYPES");
+static const u8 sText_Evos[]         = _("EVOLUTIONS");
+static const u8 sText_Cancel[]       = _("SAVE & LEAVE");
+
+static const u8 sText_GameMode[]     = _("GAME MODE");
+static const u8 sText_CancelPreset[] = _("CANCEL&RETURN");
+static const u8 sText_SavePreset[]   = _("SAVE PRESETS");
 
 static const u8 *const sModeMenuItemsNamesRun[MENUITEM_RUN_COUNT] =
 {
-    [MENUITEM_RUN_DEFAULTS]     = sText_Defaults,
-    [MENUITEM_RUN_AUTOSAVE]     = sText_Autosave,
-    [MENUITEM_RUN_BATTLEMODE]   = sText_BattleMode,
-    [MENUITEM_RUN_RANDOMIZER]   = sText_Randomizer,
-    [MENUITEM_RUN_XPSHARE]      = sText_XPShare,
-    [MENUITEM_RUN_STAT_CHANGER] = sText_StatChanger,
-    [MENUITEM_RUN_LEGENDARIES]  = sText_Legendaries,
+    [MENUITEM_RUN_BATTLEMODE]     = sText_BattleMode,
+    [MENUITEM_RUN_3_MONS_ONLY]    = sText_3MonsOnly,
+    [MENUITEM_RUN_NO_CASE_CHOICE] = sText_NoCaseChoice,
     //[MENUITEM_RUN_DUPLICATES]   = sText_Duplicates,
-    #ifdef PIT_GEN_9_MODE
-    [MENUITEM_RUN_MEGAS]        = sText_Megas,
-    #endif
-    [MENUITEM_RUN_HEALFLOORS]   = sText_HealFloors,
-    [MENUITEM_RUN_CANCEL]       = sText_Cancel,
+    [MENUITEM_RUN_CANCEL]         = sText_Cancel,
 };
 
 static const u8 *const sModeMenuItemsNamesDiff[MENUITEM_DIFF_COUNT] =
-{ //ToDo
-    [MENUITEM_DIFF_OPT1]     = sText_Defaults,
-    [MENUITEM_DIFF_OPT2]     = sText_Autosave,
-    [MENUITEM_DIFF_CANCEL]   = sText_Cancel,
+{
+    [MENUITEM_DIFF_XPMODE]        = sText_XPMode,
+    [MENUITEM_DIFF_SAVE_DELETION] = sText_SaveDeletion,
+    [MENUITEM_DIFF_STAT_CHANGER]  = sText_StatChanger,
+    [MENUITEM_DIFF_DOUBLE_CASH]   = sText_DoubleCash,
+    [MENUITEM_DIFF_HEALFLOORS]    = sText_HealFloors,
+    [MENUITEM_DIFF_LEGENDARIES]   = sText_Legendaries,
+    #ifdef PIT_GEN_9_MODE
+    [MENUITEM_DIFF_MEGAS]         = sText_Megas,
+    #endif
+    [MENUITEM_DIFF_CANCEL]        = sText_Cancel,
 };
 
 static const u8 *const sModeMenuItemsNamesRand[MENUITEM_RAND_COUNT] =
-{ //ToDo
-    [MENUITEM_RAND_OPT1]     = sText_Defaults,
-    [MENUITEM_RAND_OPT2]     = sText_Autosave,
-    [MENUITEM_RAND_CANCEL]   = sText_Cancel,
+{
+    [MENUITEM_RAND_MOVES]      = sText_Moves,
+    [MENUITEM_RAND_ABILITIES]  = sText_Abilities,
+    [MENUITEM_RAND_BASE_STATS] = sText_BaseStats,
+    [MENUITEM_RAND_TYPES]      = sText_Types,
+    //[MENUITEM_RAND_EVOS]       = sText_Evos,
+    [MENUITEM_RAND_CANCEL]     = sText_Cancel,
+};
+
+static const u8 *const sModeMenuItemsNamesPresets[MENUITEM_PRESET_COUNT] =
+{
+    [MENUITEM_PRESET_MODE]   = sText_GameMode,
+    [MENUITEM_PRESET_CANCEL] = sText_CancelPreset,
+    [MENUITEM_PRESET_SAVE]   = sText_SavePreset,
 };
 
 static const u8 *const OptionTextRight(u8 menuItem)
@@ -387,6 +452,8 @@ static const u8 *const OptionTextRight(u8 menuItem)
             return sModeMenuItemsNamesDiff[menuItem];
         case MENU_RAND:
             return sModeMenuItemsNamesRand[menuItem];
+        case MENU_PRESETS:
+            return sModeMenuItemsNamesPresets[menuItem];
         default:
             return gText_EmptyString2;
     }
@@ -400,18 +467,10 @@ static bool8 CheckConditions(int selection)
         case MENU_RUN:
             switch(selection)
             {
-                case MENUITEM_RUN_DEFAULTS:       return TRUE;
-                case MENUITEM_RUN_AUTOSAVE:       return TRUE;
                 case MENUITEM_RUN_BATTLEMODE:     return TRUE;
-                case MENUITEM_RUN_RANDOMIZER:     return TRUE;
-                case MENUITEM_RUN_XPSHARE:        return TRUE;
-                case MENUITEM_RUN_STAT_CHANGER:   return TRUE;
-                case MENUITEM_RUN_LEGENDARIES:    return TRUE;
+                case MENUITEM_RUN_3_MONS_ONLY:    return TRUE;
+                case MENUITEM_RUN_NO_CASE_CHOICE: return TRUE;
                 //case MENUITEM_RUN_DUPLICATES:     return TRUE;
-                #ifdef PIT_GEN_9_MODE
-                case MENUITEM_RUN_MEGAS:          return TRUE;
-                #endif
-                case MENUITEM_RUN_HEALFLOORS:     return TRUE;
                 case MENUITEM_RUN_CANCEL:         return TRUE;
                 case MENUITEM_RUN_COUNT:          return TRUE;
                 default:                          return FALSE;
@@ -419,20 +478,39 @@ static bool8 CheckConditions(int selection)
         case MENU_DIFF:
             switch(selection)
             {
-                case MENUITEM_DIFF_OPT1:       return TRUE;
-                case MENUITEM_DIFF_OPT2:       return TRUE;
-                case MENUITEM_DIFF_CANCEL:     return TRUE;
-                case MENUITEM_DIFF_COUNT:      return TRUE;
-                default:                       return FALSE;
+                case MENUITEM_DIFF_XPMODE:        return TRUE;
+                case MENUITEM_DIFF_SAVE_DELETION: return TRUE;
+                case MENUITEM_DIFF_STAT_CHANGER:  return TRUE;
+                case MENUITEM_DIFF_DOUBLE_CASH:   return TRUE;
+                case MENUITEM_DIFF_HEALFLOORS:    return TRUE;
+                case MENUITEM_DIFF_LEGENDARIES:   return TRUE;
+                #ifdef PIT_GEN_9_MODE
+                case MENUITEM_DIFF_MEGAS:         return TRUE;
+                #endif
+                case MENUITEM_DIFF_CANCEL:        return TRUE;
+                case MENUITEM_DIFF_COUNT:         return TRUE;
+                default:                          return FALSE;
             }
         case MENU_RAND:
             switch(selection)
             {
-                case MENUITEM_RAND_OPT1:       return TRUE;
-                case MENUITEM_RAND_OPT2:       return TRUE;
-                case MENUITEM_RAND_CANCEL:     return TRUE;
-                case MENUITEM_RAND_COUNT:      return TRUE;
-                default:                       return FALSE;
+                case MENUITEM_RAND_MOVES:         return TRUE;
+                case MENUITEM_RAND_ABILITIES:     return TRUE;
+                case MENUITEM_RAND_BASE_STATS:    return TRUE;
+                case MENUITEM_RAND_TYPES:         return TRUE;
+                //case MENUITEM_RAND_EVOS:          return TRUE;
+                case MENUITEM_RAND_CANCEL:        return TRUE;
+                case MENUITEM_RAND_COUNT:         return TRUE;
+                default:                          return FALSE;
+            }
+        case MENU_PRESETS:
+            switch(selection)
+            {
+                case MENUITEM_PRESET_MODE:        return TRUE;
+                case MENUITEM_PRESET_CANCEL:      return TRUE;
+                case MENUITEM_PRESET_SAVE:        return TRUE;
+                case MENUITEM_PRESET_COUNT:       return TRUE;
+                default:                          return FALSE;
             }
         default: return FALSE;
     }
@@ -441,6 +519,10 @@ static bool8 CheckConditions(int selection)
 // Descriptions
 static const u8 sText_Empty[]                   = _("");
 static const u8 sText_Desc_Save[]               = _("Save your settings.");
+static const u8 sText_Desc_CancelPreset[]       = _("Cancel and return without setting\na preset.");
+static const u8 sText_Desc_SavePreset[]         = _("Save preset and overwrite current\nmode choice.");
+static const u8 sText_Desc_NormalMode[]         = _("Normal mode uses 50% XP share.");
+static const u8 sText_Desc_HardMode[]           = _("Hard mode uses 75% XP share.");
 static const u8 sText_Desc_Defaults_Normal[]    = _("Sets all options for Normal Mode below.");
 static const u8 sText_Desc_Defaults_Hard[]      = _("Sets all options for Hard Mode below.");
 static const u8 sText_Desc_Defaults_Custom[]    = _("Is shown when manually changing\nmode settings.");
@@ -452,52 +534,76 @@ static const u8 sText_Desc_BattleMode_Doubles[] = _("Play only double battles.")
 static const u8 sText_Desc_BattleMode_Mix[]     = _("Play mixed singles and double battles.");
 static const u8 sText_Desc_Randomizer_Mons[]    = _("Only randomize Pokémon species,\ntrainers and item drops.");
 static const u8 sText_Desc_Randomizer_All[]     = _("Also randomize abilities and\nmoves.");
-static const u8 sText_Desc_XPShare_75[]         = _("Exp. Share gives 75% XP to\nparty mons.");
-static const u8 sText_Desc_XPShare_50[]         = _("Exp. Share gives 50% XP to\nparty mons. WARNING: Hard Mode.");
+static const u8 sText_Desc_XPMode_75[]          = _("Exp. Share gives 75% XP to party\nmembers.");
+static const u8 sText_Desc_XPMode_50[]          = _("Exp. Share gives 50% XP to party\nmembers. WARNING: Hard Mode!");
+static const u8 sText_Desc_XPMode_None[]        = _("You won't receive any XP from battles.\nLevels are tied to the floor.");
 static const u8 sText_Desc_StatChanger_On[]     = _("Enables the EV/IV Changer\nin the party menu.");
 static const u8 sText_Desc_StatChanger_Off[]    = _("Makes the EV/IV Changer read only\nand adds an IV merchant option.");
-static const u8 sText_Desc_Legendaries_On[]     = _("Legendaries can be found in\nthe Birch Bag.");
-static const u8 sText_Desc_Legendaries_Off[]    = _("Legendaries can not be found\nin the Birch Bag.");
-static const u8 sText_Desc_Duplicates_On[]      = _("Truly random. Duplicates are\npossible in the Birch Bag.");
-static const u8 sText_Desc_Duplicates_Off[]     = _("Birch bag can't hold duplicates.");
+static const u8 sText_Desc_Legendaries_On[]     = _("Legendaries can be found\nin the Birch Case.");
+static const u8 sText_Desc_Legendaries_Off[]    = _("Legendaries can not be found\nin the Birch Case.");
+static const u8 sText_Desc_Duplicates_On[]      = _("Truly random. Duplicates are\npossible in the Birch Case.");
+static const u8 sText_Desc_Duplicates_Off[]     = _("Birch Case can't hold duplicates.");
 static const u8 sText_Desc_Megas_On[]           = _("Trainer Pokémon have a 40% chance\nto mega evolve if possible.");
 static const u8 sText_Desc_Megas_Off[]          = _("Trainer Pokémon can never mega\nevolve.");
-static const u8 sText_Desc_HealFloors_5[]       = _("Get a rest stop to heal every\n 5 floors.");
-static const u8 sText_Desc_HealFloors_10[]      = _("Get a rest stop to heal every\n 10 floors.");
+static const u8 sText_Desc_HealFloors_5[]       = _("Get a rest stop to heal every\n5 floors.");
+static const u8 sText_Desc_HealFloors_10[]      = _("Get a rest stop to heal every\n10 floors.");
+static const u8 sText_Desc_3Mons_On[]           = _("Party size will never increase and\nremain at three (incl. trainers).");
+static const u8 sText_Desc_3Mons_Off[]          = _("Party size will increase by one\nevery 25 floors.");
+static const u8 sText_Desc_NoCaseChoice_On[]    = _("You can't choose your party\nand will be given random species.");
+static const u8 sText_Desc_NoCaseChoice_Off[]   = _("You can choose your party from\nthe random Birch Case options.");
+static const u8 sText_Desc_SaveDeletion_On[]    = _("Your save state will be deleted\nwhen fainting.");
+static const u8 sText_Desc_SaveDeletion_Off[]   = _("Your save state will not be deleted\nwhen fainting.");
+static const u8 sText_Desc_DoubleCash_On[]      = _("Doubles the amount of money\nreceived after winning a battle.");
+static const u8 sText_Desc_DoubleCash_Off[]     = _("Sets the default amount of money\nreceived after winning a battle.");
+static const u8 sText_Desc_RandMoves_On[]       = _("Randomizes the move learnsets.");
+static const u8 sText_Desc_RandMoves_Off[]      = _("Keeps the default move learnsets.");
+static const u8 sText_Desc_RandAbilities_On[]   = _("Randomizes the ability options.");
+static const u8 sText_Desc_RandAbilities_Off[]  = _("Keeps the default ability options.");
+static const u8 sText_Desc_RandStats_On[]       = _("Randomizes the base stats.");
+static const u8 sText_Desc_RandStats_Off[]      = _("Keeps the default base stats.");
+static const u8 sText_Desc_RandTypes_On[]       = _("Randomizes the species' type(s).");
+static const u8 sText_Desc_RandTypes_Off[]      = _("Keeps the species' default type(s).");
+static const u8 sText_Desc_RandEvos_On[]        = _("Randomizes the evolution species.");
+static const u8 sText_Desc_RandEvos_Off[]       = _("Keeps the default evo line.");
 
 static const u8 *const sModeMenuItemDescriptionsRun[MENUITEM_RUN_COUNT][3] =
 {
-    [MENUITEM_RUN_DEFAULTS]     = {sText_Desc_Defaults_Normal,     sText_Desc_Defaults_Hard,       sText_Desc_Defaults_Custom},
-    [MENUITEM_RUN_AUTOSAVE]     = {sText_Desc_Autosave_Off,        sText_Desc_Autosave_5,          sText_Desc_Autosave_On},
-    [MENUITEM_RUN_BATTLEMODE]   = {sText_Desc_BattleMode_Singles,  sText_Desc_BattleMode_Doubles,  sText_Desc_BattleMode_Mix},
-    [MENUITEM_RUN_RANDOMIZER]   = {sText_Desc_Randomizer_Mons,     sText_Desc_Randomizer_All,      sText_Empty},
-    [MENUITEM_RUN_XPSHARE]      = {sText_Desc_XPShare_75,          sText_Desc_XPShare_50,          sText_Empty},
-    [MENUITEM_RUN_STAT_CHANGER] = {sText_Desc_StatChanger_On,      sText_Desc_StatChanger_Off,     sText_Empty},
-    [MENUITEM_RUN_LEGENDARIES]  = {sText_Desc_Legendaries_On,      sText_Desc_Legendaries_Off,     sText_Empty},
-    //[MENUITEM_RUN_DUPLICATES]   = {sText_Desc_Duplicates_On,       sText_Desc_Duplicates_Off,      sText_Empty},
-    #ifdef PIT_GEN_9_MODE
-    [MENUITEM_RUN_MEGAS]        = {sText_Desc_Megas_On,            sText_Desc_Megas_Off,           sText_Empty},
-    #endif
-    [MENUITEM_RUN_HEALFLOORS]   = {sText_Desc_HealFloors_5,        sText_Desc_HealFloors_10,       sText_Empty},
-    [MENUITEM_RUN_CANCEL]       = {sText_Desc_Save,                sText_Empty,                    sText_Empty},
+    [MENUITEM_RUN_BATTLEMODE]     = {sText_Desc_BattleMode_Singles,  sText_Desc_BattleMode_Doubles,  sText_Desc_BattleMode_Mix},
+    [MENUITEM_RUN_3_MONS_ONLY]    = {sText_Desc_3Mons_On,            sText_Desc_3Mons_Off,           sText_Empty},
+    [MENUITEM_RUN_NO_CASE_CHOICE] = {sText_Desc_NoCaseChoice_On,     sText_Desc_NoCaseChoice_Off,    sText_Empty},
+    //[MENUITEM_RUN_DUPLICATES]     = {sText_Desc_Duplicates_On,       sText_Desc_Duplicates_Off,      sText_Empty},
+    [MENUITEM_RUN_CANCEL]         = {sText_Desc_Save,                sText_Empty,                    sText_Empty},
 };
-
-//Descriptions ToDo
 
 static const u8 *const sModeMenuItemDescriptionsDiff[MENUITEM_DIFF_COUNT][3] =
 {
-    [MENUITEM_DIFF_OPT1]         = {sText_Desc_Defaults_Normal,     sText_Desc_Defaults_Hard,       sText_Empty},
-    [MENUITEM_DIFF_OPT2]         = {sText_Desc_Autosave_Off,        sText_Desc_Autosave_5,          sText_Empty},
-    [MENUITEM_DIFF_CANCEL]       = {sText_Desc_Save,                sText_Empty,                    sText_Empty},
+    [MENUITEM_DIFF_XPMODE]        = {sText_Desc_XPMode_75,        sText_Desc_XPMode_50,         sText_Desc_XPMode_None},
+    [MENUITEM_DIFF_SAVE_DELETION] = {sText_Desc_SaveDeletion_On,  sText_Desc_SaveDeletion_Off,  sText_Empty},
+    [MENUITEM_DIFF_STAT_CHANGER]  = {sText_Desc_StatChanger_On,   sText_Desc_StatChanger_Off,   sText_Empty},
+    [MENUITEM_DIFF_DOUBLE_CASH]   = {sText_Desc_DoubleCash_On,    sText_Desc_DoubleCash_Off,    sText_Empty},
+    [MENUITEM_DIFF_HEALFLOORS]    = {sText_Desc_HealFloors_5,     sText_Desc_HealFloors_10,     sText_Empty},
+    [MENUITEM_DIFF_LEGENDARIES]   = {sText_Desc_Legendaries_On,   sText_Desc_Legendaries_Off,   sText_Empty},
+    #ifdef PIT_GEN_9_MODE
+    [MENUITEM_DIFF_MEGAS]         = {sText_Desc_Megas_On,         sText_Desc_Megas_Off,         sText_Empty},
+    #endif
+    [MENUITEM_DIFF_CANCEL]        = {sText_Desc_Save,             sText_Empty,                  sText_Empty},
 };
-
-//Descriptions ToDo
 
 static const u8 *const sModeMenuItemDescriptionsRand[MENUITEM_RAND_COUNT][3] =
 {
-    [MENUITEM_RAND_OPT1]         = {sText_Desc_Defaults_Normal,     sText_Desc_Defaults_Hard,       sText_Empty},
-    [MENUITEM_RAND_OPT2]         = {sText_Desc_Autosave_Off,        sText_Desc_Autosave_5,          sText_Empty},
-    [MENUITEM_RAND_CANCEL]       = {sText_Desc_Save,                sText_Empty,                    sText_Empty},
+    [MENUITEM_RAND_MOVES]         = {sText_Desc_RandMoves_On,      sText_Desc_RandMoves_Off,      sText_Empty},
+    [MENUITEM_RAND_ABILITIES]     = {sText_Desc_RandAbilities_On,  sText_Desc_RandAbilities_Off,  sText_Empty},
+    [MENUITEM_RAND_BASE_STATS]    = {sText_Desc_RandStats_On,      sText_Desc_RandStats_Off,      sText_Empty},
+    [MENUITEM_RAND_TYPES]         = {sText_Desc_RandTypes_On,      sText_Desc_RandTypes_Off,      sText_Empty},
+    //[MENUITEM_RAND_EVOS]          = {sText_Desc_RandEvos_On,       sText_Desc_RandEvos_Off,       sText_Empty},
+    [MENUITEM_RAND_CANCEL]        = {sText_Desc_Save,              sText_Empty,                   sText_Empty},
+};
+
+static const u8 *const sModeMenuItemDescriptionsPresets[MENUITEM_PRESET_COUNT][3] =
+{
+    [MENUITEM_PRESET_MODE]        = {sText_Desc_NormalMode,    sText_Desc_HardMode,           sText_Empty},
+    [MENUITEM_PRESET_CANCEL]      = {sText_Desc_CancelPreset,  sText_Empty,                   sText_Empty},
+    [MENUITEM_PRESET_SAVE]        = {sText_Desc_SavePreset,    sText_Empty,                   sText_Empty},
 };
 
 static const u8 *const OptionTextDescription(void)
@@ -508,11 +614,7 @@ static const u8 *const OptionTextDescription(void)
     switch (sOptions->submenu)
     {
     case MENU_RUN:
-        //if (!CheckConditions(menuItem))
-        //    return sOptionMenuItemDescriptionsDisabledMain[menuItem];
         selection = sOptions->sel_run[menuItem];
-        //if (menuItem == MENUITEM_MAIN_TEXTSPEED || menuItem == MENUITEM_MAIN_FRAMETYPE)
-        //    selection = 0;
         return sModeMenuItemDescriptionsRun[menuItem][selection];
     case MENU_DIFF:
         selection = sOptions->sel_diff[menuItem];
@@ -520,6 +622,9 @@ static const u8 *const OptionTextDescription(void)
     case MENU_RAND:
         selection = sOptions->sel_rand[menuItem];
         return sModeMenuItemDescriptionsRand[menuItem][selection];
+    case MENU_PRESETS:
+        selection = sOptions->sel_presets[menuItem];
+        return sModeMenuItemDescriptionsPresets[menuItem][selection];
     default:
         return gText_EmptyString2;
     }
@@ -535,6 +640,8 @@ static u8 MenuItemCount(void)
             return MENUITEM_DIFF_COUNT;
         case MENU_RAND:
             return MENUITEM_RAND_COUNT;
+        case MENU_PRESETS:
+            return MENUITEM_PRESET_COUNT;
         default:
             return 0;
     }
@@ -551,7 +658,29 @@ static u8 MenuItemCancel(void)
         case MENU_RAND:
             return MENUITEM_RAND_CANCEL;
         default:
-            return 0;
+            return 99;
+    }
+}
+
+static u8 MenuItemPresetsSave(void)
+{
+    switch (sOptions->submenu)
+    {
+        case MENU_PRESETS:
+            return MENUITEM_PRESET_SAVE;
+        default:
+            return 99;
+    }
+}
+
+static u8 MenuItemPresetsCancel(void)
+{
+    switch (sOptions->submenu)
+    {
+        case MENU_PRESETS:
+            return MENUITEM_PRESET_CANCEL;
+        default:
+            return 99;
     }
 }
 
@@ -658,18 +787,29 @@ static void ModeMenu_SetupCB(void)
         gMain.state++;
         break;
     case 6:
-        sOptions->sel_run[MENUITEM_RUN_DEFAULTS]     = gSaveBlock2Ptr->modeDefault;
-        sOptions->sel_run[MENUITEM_RUN_AUTOSAVE]     = gSaveBlock2Ptr->modeAutosave;
-        sOptions->sel_run[MENUITEM_RUN_BATTLEMODE]   = gSaveBlock2Ptr->modeBattleMode;
-        sOptions->sel_run[MENUITEM_RUN_RANDOMIZER]   = gSaveBlock2Ptr->modeRandomizer;
-        sOptions->sel_run[MENUITEM_RUN_XPSHARE]      = gSaveBlock2Ptr->modeXPShare;
-        sOptions->sel_run[MENUITEM_RUN_STAT_CHANGER] = gSaveBlock2Ptr->modeStatChanger;
-        sOptions->sel_run[MENUITEM_RUN_LEGENDARIES]  = gSaveBlock2Ptr->modeLegendaries;
-        //sOptions->sel_run[MENUITEM_RUN_DUPLICATES]   = gSaveBlock2Ptr->modeDuplicates;
+        //run settings
+        //sOptions->sel_run[MENUITEM_RUN_AUTOSAVE]        = gSaveBlock2Ptr->optionsAutosave;
+        sOptions->sel_run[MENUITEM_RUN_BATTLEMODE]      = gSaveBlock2Ptr->modeBattleMode;
+        sOptions->sel_run[MENUITEM_RUN_3_MONS_ONLY]     = gSaveBlock2Ptr->mode3MonsOnly;
+        sOptions->sel_run[MENUITEM_RUN_NO_CASE_CHOICE]  = gSaveBlock2Ptr->modeNoCaseChoice;
+        //sOptions->sel_run[MENUITEM_RUN_DUPLICATES]      = gSaveBlock2Ptr->modeDuplicates;
+        //sOptions->sel_run[MENUITEM_RUN_RANDOMIZER]      = gSaveBlock2Ptr->modeRandomizer;
+        //difficulty settings
+        sOptions->sel_diff[MENUITEM_DIFF_XPMODE]        = gSaveBlock2Ptr->modeXP;
+        sOptions->sel_diff[MENUITEM_DIFF_SAVE_DELETION] = gSaveBlock2Ptr->modeSaveDeletion;
+        sOptions->sel_diff[MENUITEM_DIFF_STAT_CHANGER]  = gSaveBlock2Ptr->modeStatChanger;
+        sOptions->sel_diff[MENUITEM_DIFF_DOUBLE_CASH]   = gSaveBlock2Ptr->modeCashRewards;
+        sOptions->sel_diff[MENUITEM_DIFF_HEALFLOORS]    = gSaveBlock2Ptr->modeHealFloors10;
+        sOptions->sel_diff[MENUITEM_DIFF_LEGENDARIES]   = gSaveBlock2Ptr->modeLegendaries;
         #ifdef PIT_GEN_9_MODE
-        sOptions->sel_run[MENUITEM_RUN_MEGAS]        = gSaveBlock2Ptr->modeMegas;
+        sOptions->sel_diff[MENUITEM_DIFF_MEGAS]         = gSaveBlock2Ptr->modeMegas;
         #endif
-        sOptions->sel_run[MENUITEM_RUN_HEALFLOORS]   = gSaveBlock2Ptr->modeHealFloors10;
+        //randomizer settings
+        sOptions->sel_rand[MENUITEM_RAND_MOVES]         = gSaveBlock2Ptr->randomMoves;
+        sOptions->sel_rand[MENUITEM_RAND_ABILITIES]     = gSaveBlock2Ptr->randomAbilities;
+        sOptions->sel_rand[MENUITEM_RAND_BASE_STATS]    = gSaveBlock2Ptr->randomBST;
+        sOptions->sel_rand[MENUITEM_RAND_TYPES]         = gSaveBlock2Ptr->randomType;
+        //sOptions->sel_rand[MENUITEM_RAND_EVOS]          = gSaveBlock2Ptr->randomEvos;
         gMain.state++;
         break;
     case 7:
@@ -739,42 +879,53 @@ static void ModeMenu_VBlankCB(void)
 static const u8 sText_TopBar_Run[]        = _("RUN SETTINGS");
 static const u8 sText_TopBar_Diff[]       = _("DIFFICULTY SETTINGS");
 static const u8 sText_TopBar_Rand[]       = _("RANDOMIZER SETTINGS");
-static const u8 sText_TopBar_Right[]      = _("{L_BUTTON}{R_BUTTON} CHANGE PAGE");
+static const u8 sText_TopBar_Select[]     = _("{SELECT_BUTTON} PRESETS");
+static const u8 sText_TopBar_Right[]      = _("PAGE");
 static const u8 gText_SmallDot[]          = _("·");
 static const u8 gText_LargeDot[]          = _("{EMOJI_CIRCLE}");
 static void DrawTopBarText(void)
 {
     const u8 color[3] = { 0, TEXT_COLOR_WHITE, TEXT_COLOR_OPTIONS_GRAY_FG };
-    u8 pageDots[2*MENU_COUNT] = _("");
+    u8 pageDots[2*(MENU_COUNT - 1)] = _("");
     int i;
 
-    //create navigation dots
-    for (i = 0; i < MENU_COUNT; i++)
+    if (sOptions->submenu != MENU_PRESETS)
     {
-        if (i == sOptions->submenu)
-            StringAppend(pageDots, gText_LargeDot);
-        else
-            StringAppend(pageDots, gText_SmallDot);
-        if (i < MENU_COUNT - 1)
-            StringAppend(pageDots, gText_Space);            
+        //create navigation dots
+        for (i = 0; i < (MENU_COUNT - 1); i++)
+        {
+            if (i == sOptions->submenu)
+                StringAppend(pageDots, gText_LargeDot);
+            else
+                StringAppend(pageDots, gText_SmallDot);
+            if (i < MENU_RAND)
+                StringAppend(pageDots, gText_Space);
+        }
+
+        FillWindowPixelBuffer(WIN_TOPBAR, PIXEL_FILL(0));
+        AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 5, 1, color, 0, pageDots);
+
+        switch (sOptions->submenu)
+        {
+            case MENU_RUN:
+                AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 40, 1, color, 0, sText_TopBar_Run);
+                break;
+            case MENU_DIFF:
+                AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 40, 1, color, 0, sText_TopBar_Diff);
+                break;
+            case MENU_RAND:
+                AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 40, 1, color, 0, sText_TopBar_Rand);
+                break;
+        }
+        AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 125, 1, color, 0, sText_TopBar_Select);
+        BlitBitmapToWindow(WIN_TOPBAR, sLR_ButtonGfx, 190, 4, 24, 8);
+        AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 215, 1, color, 0, sText_TopBar_Right);
     }
-
-    FillWindowPixelBuffer(WIN_TOPBAR, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 2, 1, color, 0, pageDots);
-
-    switch (sOptions->submenu)
+    else
     {
-        case MENU_RUN:
-            AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 40, 1, color, 0, sText_TopBar_Run);
-            break;
-        case MENU_DIFF:
-            AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 40, 1, color, 0, sText_TopBar_Diff);
-            break;
-        case MENU_RAND:
-            AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 40, 1, color, 0, sText_TopBar_Rand);
-            break;
+        FillWindowPixelBuffer(WIN_TOPBAR, PIXEL_FILL(0));
+        AddTextPrinterParameterized3(WIN_TOPBAR, FONT_NORMAL, 10, 1, color, 0, sText_Defaults);
     }
-    AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 145, 1, color, 0, sText_TopBar_Right);
 
     PutWindowTilemap(WIN_TOPBAR);
     CopyWindowToVram(WIN_TOPBAR, COPYWIN_FULL);
@@ -820,17 +971,11 @@ static void DrawLeftSideOptionText(int selection, int y)
 
     if (CheckConditions(selection))
     {
-        if (selection != MENUITEM_RUN_DEFAULTS)
-            AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_yellow, TEXT_SKIP_DRAW, OptionTextRight(selection));
-        else
-            AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_red, TEXT_SKIP_DRAW, OptionTextRight(selection));
+        AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_yellow, TEXT_SKIP_DRAW, OptionTextRight(selection));
     }
     else
     {
-        if (selection != MENUITEM_RUN_DEFAULTS)
-            AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_gray, TEXT_SKIP_DRAW, OptionTextRight(selection));
-        else
-            AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_red, TEXT_SKIP_DRAW, OptionTextRight(selection));
+        AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_gray, TEXT_SKIP_DRAW, OptionTextRight(selection));
     }
 }
 
@@ -880,6 +1025,10 @@ static void DrawChoices(u32 id, int y) //right side draw function
         case MENU_RAND:
             if (sItemFunctionsRand[id].drawChoices != NULL)
                 sItemFunctionsRand[id].drawChoices(sOptions->sel_rand[id], y);
+            break;
+        case MENU_PRESETS:
+            if (sItemFunctionsPresets[id].drawChoices != NULL)
+                sItemFunctionsPresets[id].drawChoices(sOptions->sel_presets[id], y);
             break;
     }
 }
@@ -962,9 +1111,22 @@ static void Task_ModeMenuMainInput(u8 taskId)
     {
         if (sOptions->menuCursor[sOptions->submenu] == MenuItemCancel())
             gTasks[taskId].func = Task_ModeMenuSave;
+        if (sOptions->menuCursor[sOptions->submenu] == MenuItemPresetsSave())
+            ApplyPresets();
+        if (sOptions->menuCursor[sOptions->submenu] == MenuItemPresetsCancel())
+        {
+            if (sOptions->submenu == MENU_PRESETS)
+            {
+                sOptions->submenu = MENU_RUN;
+                DrawTopBarText();
+                ReDrawAll();
+                HighlightModeMenuItem();
+                DrawDescriptionText();
+            }
+        }
     }
-    // Exit the menu when the player presses B
-    else if (JOY_NEW(SELECT_BUTTON) || JOY_NEW(START_BUTTON))
+    // Exit the menu when the player presses START
+    else if (JOY_NEW(START_BUTTON) && sOptions->submenu != MENU_PRESETS)
     {
         gTasks[taskId].func = Task_ModeMenuSave;
     }
@@ -1020,109 +1182,161 @@ static void Task_ModeMenuMainInput(u8 taskId)
         HighlightModeMenuItem();
         DrawDescriptionText();
     }
-    else if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT)) //ToDo: update new logic!
+    else if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
     {
-        int cursor = sOptions->menuCursor[sOptions->submenu];
-        u8 previousOption = sOptions->sel_run[cursor];
-        if (CheckConditions(cursor))
+        if (sOptions->submenu == MENU_RUN)
         {
-            if (sItemFunctionsRun[cursor].processInput != NULL)
+            int cursor = sOptions->menuCursor[sOptions->submenu];
+            u8 previousOption = sOptions->sel_run[cursor];
+            if (CheckConditions(cursor))
             {
-                sOptions->sel_run[cursor] = sItemFunctionsRun[cursor].processInput(previousOption);
-
-                //change selections based on defaults
-                switch(sOptions->menuCursor[sOptions->submenu])
+                if (sItemFunctionsRun[cursor].processInput != NULL)
                 {
-                    case MENUITEM_RUN_DEFAULTS: // 0 = first line => DEFAULT choice
-                        //populate default options to the other mode lines
-                        switch(sOptions->sel_run[cursor])
-                        {
-                            case MODE_NORMAL:
-                                sOptions->sel_run[MENUITEM_RUN_XPSHARE]      = XP_75;
-                                sOptions->sel_run[MENUITEM_RUN_STAT_CHANGER] = ACTIVE;
-                                sOptions->sel_run[MENUITEM_RUN_LEGENDARIES]  = YES;
-                                //sOptions->sel_run[MENUITEM_RUN_DUPLICATES]   = NO;
-                                #ifdef PIT_GEN_9_MODE
-                                sOptions->sel_run[MENUITEM_RUN_MEGAS]        = MEGAS_OFF;
-                                #endif
-                                sOptions->sel_run[MENUITEM_RUN_HEALFLOORS]   = HEAL_FLOORS_5;
-                                break;
-                            case MODE_HARD:
-                                sOptions->sel_run[MENUITEM_RUN_XPSHARE]      = XP_50;
-                                sOptions->sel_run[MENUITEM_RUN_STAT_CHANGER] = INACTIVE;
-                                sOptions->sel_run[MENUITEM_RUN_LEGENDARIES]  = NO;
-                                //sOptions->sel_run[MENUITEM_RUN_DUPLICATES]   = NO;
-                                #ifdef PIT_GEN_9_MODE
-                                sOptions->sel_run[MENUITEM_RUN_MEGAS]        = MEGAS_ON;
-                                #endif
-                                sOptions->sel_run[MENUITEM_RUN_HEALFLOORS]   = HEAL_FLOORS_5;
-                                break;
-                            default:
-                                break;
-                        }
-                        break;
-                    case 0: //do nothing
-                    case 1: //do nothing
-                    case 2: //do nothing
-                        break;
-                    default: //set game mode to CUSTOM
-                        sOptions->sel_run[MENUITEM_RUN_DEFAULTS]   = MODE_CUSTOM;
-                        break;
+                    sOptions->sel_run[cursor] = sItemFunctionsRun[cursor].processInput(previousOption);
+                    ReDrawAll();
+                    DrawDescriptionText();
                 }
 
-                ReDrawAll();
-                DrawDescriptionText();
+                if (previousOption != sOptions->sel_run[cursor])
+                    DrawChoices(cursor, sOptions->visibleCursor[sOptions->submenu] * Y_DIFF);
             }
+        }
+        else if (sOptions->submenu == MENU_DIFF)
+        {
+            int cursor = sOptions->menuCursor[sOptions->submenu];
+            u8 previousOption = sOptions->sel_diff[cursor];
+            if (CheckConditions(cursor))
+            {
+                if (sItemFunctionsDiff[cursor].processInput != NULL)
+                {
+                    sOptions->sel_diff[cursor] = sItemFunctionsDiff[cursor].processInput(previousOption);
+                    ReDrawAll();
+                    DrawDescriptionText();
+                }
 
-            if (previousOption != sOptions->sel_run[cursor])
-                DrawChoices(cursor, sOptions->visibleCursor[sOptions->submenu] * Y_DIFF);
+                if (previousOption != sOptions->sel_diff[cursor])
+                    DrawChoices(cursor, sOptions->visibleCursor[sOptions->submenu] * Y_DIFF);
+            }
+        }
+        else if (sOptions->submenu == MENU_RAND)
+        {
+            int cursor = sOptions->menuCursor[sOptions->submenu];
+            u8 previousOption = sOptions->sel_rand[cursor];
+            if (CheckConditions(cursor))
+            {
+                if (sItemFunctionsRand[cursor].processInput != NULL)
+                {
+                    sOptions->sel_rand[cursor] = sItemFunctionsRand[cursor].processInput(previousOption);
+                    ReDrawAll();
+                    DrawDescriptionText();
+                }
+
+                if (previousOption != sOptions->sel_rand[cursor])
+                    DrawChoices(cursor, sOptions->visibleCursor[sOptions->submenu] * Y_DIFF);
+            }
+        }
+        else if (sOptions->submenu == MENU_PRESETS)
+        {
+            int cursor = sOptions->menuCursor[sOptions->submenu];
+            u8 previousOption = sOptions->sel_presets[cursor];
+            if (CheckConditions(cursor))
+            {
+                if (sItemFunctionsPresets[cursor].processInput != NULL)
+                {
+                    sOptions->sel_presets[cursor] = sItemFunctionsPresets[cursor].processInput(previousOption);
+                    ReDrawAll();
+                    DrawDescriptionText();
+                }
+
+                if (previousOption != sOptions->sel_presets[cursor])
+                    DrawChoices(cursor, sOptions->visibleCursor[sOptions->submenu] * Y_DIFF);
+            }
         }
     }
     else if (JOY_NEW(R_BUTTON))
     {
-        if (sOptions->submenu == MENU_COUNT - 1)
-            sOptions->submenu = 0;
-        else
-            sOptions->submenu++;
+        if (sOptions->submenu != MENU_PRESETS)
+        {
+            if (sOptions->submenu == MENU_RAND)
+                sOptions->submenu = MENU_RUN;
+            else
+                sOptions->submenu++;
 
-        DrawTopBarText();
-        ReDrawAll();
-        HighlightModeMenuItem();
-        DrawDescriptionText();
+            DrawTopBarText();
+            ReDrawAll();
+            HighlightModeMenuItem();
+            DrawDescriptionText();
+        }
     }
     else if (JOY_NEW(L_BUTTON))
     {
-        if (sOptions->submenu == 0)
-            sOptions->submenu = MENU_COUNT - 1;
+        if (sOptions->submenu != MENU_PRESETS)
+        {
+            if (sOptions->submenu == MENU_RUN)
+                sOptions->submenu = MENU_RAND;
+            else
+                sOptions->submenu--;
+            
+            DrawTopBarText();
+            ReDrawAll();
+            HighlightModeMenuItem();
+            DrawDescriptionText();
+        }
+    }
+    else if (JOY_NEW(SELECT_BUTTON))
+    {
+        if (sOptions->submenu != MENU_PRESETS)
+            sOptions->submenu = MENU_PRESETS;
         else
-            sOptions->submenu--;
-        
+            sOptions->submenu = MENU_RUN;
+
         DrawTopBarText();
         ReDrawAll();
         HighlightModeMenuItem();
         DrawDescriptionText();
     }
+    else if (JOY_NEW(B_BUTTON)) //return from Presets view
+    {
+        if (sOptions->submenu == MENU_PRESETS)
+        {
+            sOptions->submenu = MENU_RUN;
+            DrawTopBarText();
+            ReDrawAll();
+            HighlightModeMenuItem();
+            DrawDescriptionText();
+        }
+    }
 }
 
-static void Task_ModeMenuSave(u8 taskId)
+static void Task_ModeMenuSave(u8 taskId) // ToDo: add missing flags handling
 {
     //write in saveblock
-    gSaveBlock2Ptr->modeDefault     = sOptions->sel_run[MENUITEM_RUN_DEFAULTS];
-    gSaveBlock2Ptr->modeAutosave    = sOptions->sel_run[MENUITEM_RUN_AUTOSAVE];
-    gSaveBlock2Ptr->modeBattleMode  = sOptions->sel_run[MENUITEM_RUN_BATTLEMODE];
-    gSaveBlock2Ptr->modeRandomizer  = sOptions->sel_run[MENUITEM_RUN_RANDOMIZER];
-    gSaveBlock2Ptr->modeXPShare     = sOptions->sel_run[MENUITEM_RUN_XPSHARE];
-    gSaveBlock2Ptr->modeStatChanger = sOptions->sel_run[MENUITEM_RUN_STAT_CHANGER];
-    gSaveBlock2Ptr->modeLegendaries = sOptions->sel_run[MENUITEM_RUN_LEGENDARIES];
-    gSaveBlock2Ptr->modeHealFloors10 = sOptions->sel_run[MENUITEM_RUN_HEALFLOORS];
-    //gSaveBlock2Ptr->modeDuplicates  = sOptions->sel_run[MENUITEM_RUN_DUPLICATES];
+    //run settings
+    gSaveBlock2Ptr->modeBattleMode   = sOptions->sel_run[MENUITEM_RUN_BATTLEMODE];
+    gSaveBlock2Ptr->mode3MonsOnly    = sOptions->sel_run[MENUITEM_RUN_3_MONS_ONLY];
+    gSaveBlock2Ptr->modeNoCaseChoice = sOptions->sel_run[MENUITEM_RUN_NO_CASE_CHOICE];
+    //gSaveBlock2Ptr->modeDuplicates   = sOptions->sel_run[MENUITEM_RUN_DUPLICATES];
+
+    //difficulty settings
+    gSaveBlock2Ptr->modeXP           = sOptions->sel_diff[MENUITEM_DIFF_XPMODE];
+    gSaveBlock2Ptr->modeStatChanger  = sOptions->sel_diff[MENUITEM_DIFF_STAT_CHANGER];
+    gSaveBlock2Ptr->modeHealFloors10 = sOptions->sel_diff[MENUITEM_DIFF_HEALFLOORS];
+    gSaveBlock2Ptr->modeLegendaries  = sOptions->sel_diff[MENUITEM_DIFF_LEGENDARIES];
     #ifdef PIT_GEN_9_MODE
-    gSaveBlock2Ptr->modeMegas       = sOptions->sel_run[MENUITEM_RUN_MEGAS];
+    gSaveBlock2Ptr->modeMegas        = sOptions->sel_diff[MENUITEM_DIFF_MEGAS];
     #endif
+    gSaveBlock2Ptr->modeCashRewards  = sOptions->sel_diff[MENUITEM_DIFF_DOUBLE_CASH];
+    gSaveBlock2Ptr->modeSaveDeletion = sOptions->sel_diff[MENUITEM_DIFF_SAVE_DELETION];
 
-    //set flags/VARs
-    VarSet(VAR_PIT_AUTOSAVE, sOptions->sel_run[MENUITEM_RUN_AUTOSAVE]);
+    //randomizer settings
+    gSaveBlock2Ptr->randomMoves      = sOptions->sel_rand[MENUITEM_RAND_MOVES];
+    gSaveBlock2Ptr->randomAbilities  = sOptions->sel_rand[MENUITEM_RAND_ABILITIES];
+    gSaveBlock2Ptr->randomBST        = sOptions->sel_rand[MENUITEM_RAND_BASE_STATS];
+    gSaveBlock2Ptr->randomType       = sOptions->sel_rand[MENUITEM_RAND_TYPES];
+    //gSaveBlock2Ptr->randomEvos       = sOptions->sel_rand[MENUITEM_RAND_EVOS];
 
+
+    //set flags/vars
     if (sOptions->sel_run[MENUITEM_RUN_BATTLEMODE] == MODE_DOUBLES)
         FlagSet(FLAG_DOUBLES_MODE);
     else if(sOptions->sel_run[MENUITEM_RUN_BATTLEMODE] == MODE_MIXED_SINGLES_AND_DOUBLES)
@@ -1136,27 +1350,27 @@ static void Task_ModeMenuSave(u8 taskId)
         FlagClear(FLAG_MIXED_DOUBLES_MODE);
     }
         
-    if (sOptions->sel_run[MENUITEM_RUN_RANDOMIZER] == RANDOM_ALL)
+    /*if (sOptions->sel_run[MENUITEM_RUN_RANDOMIZER] == RANDOM_ALL)
         FlagSet(FLAG_RANDOM_MODE);
     else
-        FlagClear(FLAG_RANDOM_MODE);
+        FlagClear(FLAG_RANDOM_MODE);*/
 
-    if (sOptions->sel_run[MENUITEM_RUN_DEFAULTS] == MODE_HARD)
-        FlagSet(FLAG_HARD_MODE);
+    if (sOptions->sel_diff[MENUITEM_DIFF_XPMODE] == XP_NONE)
+        FlagSet(FLAG_NO_EXP_MODE);
     else
-        FlagClear(FLAG_HARD_MODE);
+        FlagClear(FLAG_NO_EXP_MODE);
 
-    if (sOptions->sel_run[MENUITEM_RUN_XPSHARE] == XP_50)
+    if (sOptions->sel_diff[MENUITEM_DIFF_XPMODE] == XP_50)
         FlagSet(FLAG_XPSHARE_50);
     else
         FlagClear(FLAG_XPSHARE_50);
     
-    if (sOptions->sel_run[MENUITEM_RUN_STAT_CHANGER] == ACTIVE)
+    if (sOptions->sel_diff[MENUITEM_DIFF_STAT_CHANGER] == ACTIVE)
         FlagSet(FLAG_STAT_CHANGER);
     else
         FlagClear(FLAG_STAT_CHANGER);
 
-    if (sOptions->sel_run[MENUITEM_RUN_LEGENDARIES] == NO)
+    if (sOptions->sel_diff[MENUITEM_DIFF_LEGENDARIES] == NO)
         FlagSet(FLAG_NO_LEGENDARIES);
     else
         FlagClear(FLAG_NO_LEGENDARIES);
@@ -1168,7 +1382,7 @@ static void Task_ModeMenuSave(u8 taskId)
         FlagClear(FLAG_NO_DUPLICATES);*/
 
     #ifdef PIT_GEN_9_MODE
-    if (sOptions->sel_run[MENUITEM_RUN_MEGAS] == MEGAS_OFF)
+    if (sOptions->sel_diff[MENUITEM_DIFF_MEGAS] == MEGAS_OFF)
         FlagClear(FLAG_MEGAS);
     else
         FlagSet(FLAG_MEGAS);
@@ -1337,11 +1551,12 @@ static const u8 sText_Autosave_5[]          = _("5FLRS");
 static const u8 sText_Autosave_On[]         = _("ON");
 static const u8 sText_BattleMode_Singles[]  = _("SNGLS");
 static const u8 sText_BattleMode_Doubles[]  = _("DUOS");
-static const u8 sText_BattleMode_Mix[]  = _("MIX");
+static const u8 sText_BattleMode_Mix[]      = _("MIX");
 static const u8 sText_Randomizer_Mons[]     = _("MONS");
 static const u8 sText_Randomizer_All[]      = _("ALL");
 static const u8 sText_XPShare_75[]          = _("NORMAL");
 static const u8 sText_XPShare_50[]          = _("HARD");
+static const u8 sText_XPShare_None[]        = _("NONE");
 static const u8 sText_StatChanger_On[]      = _("ACTIVE");
 static const u8 sText_StatChanger_Off[]     = _("INACTIVE");
 static const u8 sText_Choice_Yes[]          = _("YES");
@@ -1349,21 +1564,7 @@ static const u8 sText_Choice_No[]           = _("NO");
 static const u8 sText_HealFloors_5[]        = _("5FLRS");
 static const u8 sText_HealFloors_10[]       = _("10FLRS");
 
-static void DrawChoices_Defaults(int selection, int y)
-{
-    bool8 active = CheckConditions(MENUITEM_RUN_DEFAULTS);
-    u8 styles[3] = {0};
-    int xMid;
-
-    styles[selection] = 1;
-    xMid = GetMiddleX(sText_ModeNormal, sText_ModeHard, sText_ModeCustom);
-
-    DrawModeMenuChoice(sText_ModeNormal, 104, y, styles[0], active);
-    DrawModeMenuChoice(sText_ModeHard, xMid, y, styles[1], active);
-    DrawModeMenuChoice(sText_ModeCustom, GetStringRightAlignXOffset(1, sText_ModeCustom, 198), y, styles[2], active);
-}
-
-static void DrawChoices_Autosave(int selection, int y)
+/*static void DrawChoices_Autosave(int selection, int y)
 {
     bool8 active = CheckConditions(MENUITEM_RUN_AUTOSAVE);
     u8 styles[3] = {0};
@@ -1375,11 +1576,51 @@ static void DrawChoices_Autosave(int selection, int y)
     DrawModeMenuChoice(sText_Autosave_Off, 104, y, styles[0], active);
     DrawModeMenuChoice(sText_Autosave_5, xMid, y, styles[1], active);
     DrawModeMenuChoice(sText_Autosave_On, GetStringRightAlignXOffset(1, sText_Autosave_On, 198), y, styles[2], active);
+}*/
+
+static void DrawChoices_3MonsOnly(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_RUN_3_MONS_ONLY);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawModeMenuChoice(sText_Choice_Yes, 104, y, styles[0], active);
+    DrawModeMenuChoice(sText_Choice_No, GetStringRightAlignXOffset(FONT_NORMAL, sText_Choice_No, 198), y, styles[1], active);
+}
+
+static void DrawChoices_NoCaseChoice(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_RUN_NO_CASE_CHOICE);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawModeMenuChoice(sText_Choice_Yes, 104, y, styles[0], active);
+    DrawModeMenuChoice(sText_Choice_No, GetStringRightAlignXOffset(FONT_NORMAL, sText_Choice_No, 198), y, styles[1], active);
+}
+
+static void DrawChoices_SaveDeletion(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_DIFF_SAVE_DELETION);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawModeMenuChoice(sText_Choice_Yes, 104, y, styles[0], active);
+    DrawModeMenuChoice(sText_Choice_No, GetStringRightAlignXOffset(FONT_NORMAL, sText_Choice_No, 198), y, styles[1], active);
+}
+
+static void DrawChoices_DoubleCash(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_DIFF_DOUBLE_CASH);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawModeMenuChoice(sText_Choice_Yes, 104, y, styles[0], active);
+    DrawModeMenuChoice(sText_Choice_No, GetStringRightAlignXOffset(FONT_NORMAL, sText_Choice_No, 198), y, styles[1], active);
 }
 
 static void DrawChoices_HealFloors(int selection, int y)
 {
-    bool8 active = CheckConditions(MENUITEM_RUN_HEALFLOORS);
+    bool8 active = CheckConditions(MENUITEM_DIFF_HEALFLOORS);
     u8 styles[2] = {0};
     styles[selection] = 1;
 
@@ -1394,11 +1635,11 @@ static void DrawChoices_BattleMode(int selection, int y)
     styles[selection] = 1;
 
     DrawModeMenuChoice(sText_BattleMode_Singles, 104, y, styles[0], active);
-    DrawModeMenuChoice(sText_BattleMode_Doubles, GetStringRightAlignXOffset(FONT_NORMAL, sText_BattleMode_Doubles, 198 - 32), y, styles[1], active);
+    DrawModeMenuChoice(sText_BattleMode_Doubles, GetStringRightAlignXOffset(FONT_NORMAL, sText_BattleMode_Doubles, 198 - 29), y, styles[1], active);
     DrawModeMenuChoice(sText_BattleMode_Mix, GetStringRightAlignXOffset(FONT_NORMAL, sText_BattleMode_Mix, 198), y, styles[2], active);
 }
 
-static void DrawChoices_Randomizer(int selection, int y)
+/*static void DrawChoices_Randomizer(int selection, int y)
 {
     bool8 active = CheckConditions(MENUITEM_RUN_RANDOMIZER);
     u8 styles[2] = {0};
@@ -1406,21 +1647,22 @@ static void DrawChoices_Randomizer(int selection, int y)
 
     DrawModeMenuChoice(sText_Randomizer_Mons, 104, y, styles[0], active);
     DrawModeMenuChoice(sText_Randomizer_All, GetStringRightAlignXOffset(FONT_NORMAL, sText_Randomizer_All, 198), y, styles[1], active);
-}
+}*/
 
-static void DrawChoices_XPShare(int selection, int y)
+static void DrawChoices_XPMode(int selection, int y)
 {
-    bool8 active = CheckConditions(MENUITEM_RUN_XPSHARE);
-    u8 styles[2] = {0};
+    bool8 active = CheckConditions(MENUITEM_DIFF_XPMODE);
+    u8 styles[3] = {0};
     styles[selection] = 1;
 
     DrawModeMenuChoice(sText_XPShare_75, 104, y, styles[0], active);
-    DrawModeMenuChoice(sText_XPShare_50, GetStringRightAlignXOffset(FONT_NORMAL, sText_XPShare_50, 198), y, styles[1], active);
+    DrawModeMenuChoice(sText_XPShare_50, GetStringRightAlignXOffset(FONT_NORMAL, sText_XPShare_50, 198 - 29), y, styles[1], active);
+    DrawModeMenuChoice(sText_XPShare_None, GetStringRightAlignXOffset(FONT_NORMAL, sText_XPShare_None, 198), y, styles[2], active);
 }
 
 static void DrawChoices_StatChanger(int selection, int y)
 {
-    bool8 active = CheckConditions(MENUITEM_RUN_STAT_CHANGER);
+    bool8 active = CheckConditions(MENUITEM_DIFF_STAT_CHANGER);
     u8 styles[2] = {0};
     styles[selection] = 1;
 
@@ -1430,7 +1672,7 @@ static void DrawChoices_StatChanger(int selection, int y)
 
 static void DrawChoices_Legendaries(int selection, int y)
 {
-    bool8 active = CheckConditions(MENUITEM_RUN_LEGENDARIES);
+    bool8 active = CheckConditions(MENUITEM_DIFF_LEGENDARIES);
     u8 styles[2] = {0};
     styles[selection] = 1;
 
@@ -1451,7 +1693,7 @@ static void DrawChoices_Duplicates(int selection, int y)
 #ifdef PIT_GEN_9_MODE
 static void DrawChoices_Megas(int selection, int y)
 {
-    bool8 active = CheckConditions(MENUITEM_RUN_MEGAS);
+    bool8 active = CheckConditions(MENUITEM_DIFF_MEGAS);
     u8 styles[2] = {0};
     styles[selection] = 1;
 
@@ -1459,6 +1701,66 @@ static void DrawChoices_Megas(int selection, int y)
     DrawModeMenuChoice(sText_Choice_No, GetStringRightAlignXOffset(FONT_NORMAL, sText_Choice_No, 198), y, styles[1], active);
 }
 #endif
+
+static void DrawChoices_RandMoves(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_RAND_MOVES);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawModeMenuChoice(sText_Choice_Yes, 104, y, styles[0], active);
+    DrawModeMenuChoice(sText_Choice_No, GetStringRightAlignXOffset(FONT_NORMAL, sText_Choice_No, 198), y, styles[1], active);
+}
+
+static void DrawChoices_RandAbilities(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_RAND_ABILITIES);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawModeMenuChoice(sText_Choice_Yes, 104, y, styles[0], active);
+    DrawModeMenuChoice(sText_Choice_No, GetStringRightAlignXOffset(FONT_NORMAL, sText_Choice_No, 198), y, styles[1], active);
+}
+
+static void DrawChoices_RandStats(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_RAND_BASE_STATS);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawModeMenuChoice(sText_Choice_Yes, 104, y, styles[0], active);
+    DrawModeMenuChoice(sText_Choice_No, GetStringRightAlignXOffset(FONT_NORMAL, sText_Choice_No, 198), y, styles[1], active);
+}
+
+static void DrawChoices_RandTypes(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_RAND_TYPES);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawModeMenuChoice(sText_Choice_Yes, 104, y, styles[0], active);
+    DrawModeMenuChoice(sText_Choice_No, GetStringRightAlignXOffset(FONT_NORMAL, sText_Choice_No, 198), y, styles[1], active);
+}
+
+/*static void DrawChoices_RandEvos(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_RAND_EVOS);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawModeMenuChoice(sText_Choice_Yes, 104, y, styles[0], active);
+    DrawModeMenuChoice(sText_Choice_No, GetStringRightAlignXOffset(FONT_NORMAL, sText_Choice_No, 198), y, styles[1], active);
+}*/
+
+static void DrawChoices_PresetsMode(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_PRESET_MODE);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawModeMenuChoice(sText_ModeNormal, 104, y, styles[0], active);
+    DrawModeMenuChoice(sText_ModeHard, GetStringRightAlignXOffset(FONT_NORMAL, sText_ModeHard, 198), y, styles[1], active);
+}
 
 // Background tilemap
 #define TILE_TOP_CORNER_L 0x1A2 // 418
@@ -1508,4 +1810,57 @@ static void ModeMenu_FreeResources(void)
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     HideBg(2);
     HideBg(3);
+}
+
+static void ApplyPresets(void)
+{
+    int cursor = sOptions->visibleCursor[sOptions->submenu];
+
+    //general defaults:
+    //run settings
+    sOptions->sel_run[MENUITEM_RUN_BATTLEMODE]      = MODE_MIXED_SINGLES_AND_DOUBLES;
+    sOptions->sel_run[MENUITEM_RUN_3_MONS_ONLY]     = NO;
+    sOptions->sel_run[MENUITEM_RUN_NO_CASE_CHOICE]  = NO;
+    //difficulty settings
+    sOptions->sel_diff[MENUITEM_DIFF_DOUBLE_CASH]   = NO;
+    sOptions->sel_diff[MENUITEM_DIFF_HEALFLOORS]    = HEAL_FLOORS_5;
+    //randomizer settings
+    sOptions->sel_rand[MENUITEM_RAND_MOVES]         = NO;
+    sOptions->sel_rand[MENUITEM_RAND_ABILITIES]     = NO;
+    sOptions->sel_rand[MENUITEM_RAND_BASE_STATS]    = NO;
+    sOptions->sel_rand[MENUITEM_RAND_TYPES]         = NO;
+
+    switch(sOptions->sel_presets[MENUITEM_PRESET_MODE])
+    {
+        case PRESET_NORMAL:
+            sOptions->sel_diff[MENUITEM_DIFF_XPMODE]        = XP_75;
+            sOptions->sel_diff[MENUITEM_DIFF_SAVE_DELETION] = NO;
+            sOptions->sel_diff[MENUITEM_DIFF_STAT_CHANGER]  = ACTIVE;
+            sOptions->sel_diff[MENUITEM_DIFF_LEGENDARIES]   = YES;
+            #ifdef PIT_GEN_9_MODE
+            sOptions->sel_diff[MENUITEM_DIFF_MEGAS]         = MEGAS_OFF;
+            #endif
+            break;
+        case PRESET_HARD:
+            sOptions->sel_diff[MENUITEM_DIFF_XPMODE]        = XP_50;
+            sOptions->sel_diff[MENUITEM_DIFF_SAVE_DELETION] = YES;
+            sOptions->sel_diff[MENUITEM_DIFF_STAT_CHANGER]  = INACTIVE;
+            sOptions->sel_diff[MENUITEM_DIFF_LEGENDARIES]   = NO;
+            #ifdef PIT_GEN_9_MODE
+            sOptions->sel_diff[MENUITEM_DIFF_MEGAS]         = MEGAS_ON;
+            #endif
+            break;
+        default:
+            break;
+    }
+
+    //return to mode menu
+    if (sOptions->submenu == MENU_PRESETS)
+    {
+        sOptions->submenu = MENU_RUN;
+        DrawTopBarText();
+        ReDrawAll();
+        HighlightModeMenuItem();
+        DrawDescriptionText();
+    }
 }

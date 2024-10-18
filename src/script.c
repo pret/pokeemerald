@@ -806,7 +806,7 @@ void AutoSave(void)
 
 void SetAutosaveFlag(void)
 {
-    switch(gSaveBlock2Ptr->modeAutosave)
+    switch(gSaveBlock2Ptr->optionsAutosave)
     {
         case SAVE_NO:
             FlagClear(FLAG_AUTO_SAVE);
@@ -974,6 +974,11 @@ static const struct sRandomMap sRandomMapArray[] = {
 void WarpToRandomPitArena(void)
 {
     u16 index = Random() % RANDOM_MAP_COUNT;
+
+    //return default map if randomization is turned off
+    if (!FlagGet(FLAG_RANDOM_MAPS))
+        index = 0;
+    
     VarSet(VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY, index);
     SetWarpDestination(0, (u8)(sRandomMapArray[index].mapConstant & 0x00FF), WARP_ID_NONE, sRandomMapArray[index].dest_x, sRandomMapArray[index].dest_y);
     DoTeleportTileWarp();
