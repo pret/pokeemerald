@@ -295,7 +295,6 @@ static int XOptions_ProcessInput(int x, int selection);
 static int ProcessInput_Options_Two(int selection);
 static int ProcessInput_Options_Three(int selection);
 static void ReDrawAll(void);
-//static void DrawChoices_Defaults(int selection, int y);
 //static void DrawChoices_Autosave(int selection, int y);
 static void DrawChoices_BattleMode(int selection, int y);
 //static void DrawChoices_Randomizer(int selection, int y);
@@ -315,7 +314,6 @@ static void DrawChoices_Duplicates(int selection, int y);
 static void DrawChoices_Megas(int selection, int y);
 static void DrawChoices_HealFloors(int selection, int y);
 static void DrawChoices_PresetsMode(int selection, int y);
-static void DrawChoices_PresetsHard(int selection, int y);
 static void DrawBgWindowFrames(void);
 static void ApplyPresets(void);
 
@@ -790,7 +788,6 @@ static void ModeMenu_SetupCB(void)
         break;
     case 6:
         //run settings
-        //sOptions->sel_run[MENUITEM_RUN_DEFAULTS]        = gSaveBlock2Ptr->modeDefault;
         //sOptions->sel_run[MENUITEM_RUN_AUTOSAVE]        = gSaveBlock2Ptr->optionsAutosave;
         sOptions->sel_run[MENUITEM_RUN_BATTLEMODE]      = gSaveBlock2Ptr->modeBattleMode;
         sOptions->sel_run[MENUITEM_RUN_3_MONS_ONLY]     = gSaveBlock2Ptr->mode3MonsOnly;
@@ -974,17 +971,11 @@ static void DrawLeftSideOptionText(int selection, int y)
 
     if (CheckConditions(selection))
     {
-        //if (selection != MENUITEM_RUN_DEFAULTS)
-            AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_yellow, TEXT_SKIP_DRAW, OptionTextRight(selection));
-        //else
-        //    AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_red, TEXT_SKIP_DRAW, OptionTextRight(selection));
+        AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_yellow, TEXT_SKIP_DRAW, OptionTextRight(selection));
     }
     else
     {
-        //if (selection != MENUITEM_RUN_DEFAULTS)
-            AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_gray, TEXT_SKIP_DRAW, OptionTextRight(selection));
-        //else
-        //    AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_red, TEXT_SKIP_DRAW, OptionTextRight(selection));
+        AddTextPrinterParameterized4(WIN_OPTIONS, FONT_NORMAL, 8, y, 0, 0, color_gray, TEXT_SKIP_DRAW, OptionTextRight(selection));
     }
 }
 
@@ -1321,7 +1312,6 @@ static void Task_ModeMenuSave(u8 taskId) // ToDo: add missing flags handling
 {
     //write in saveblock
     //run settings
-    //gSaveBlock2Ptr->modeDefault      = sOptions->sel_run[MENUITEM_RUN_DEFAULTS];
     gSaveBlock2Ptr->modeBattleMode   = sOptions->sel_run[MENUITEM_RUN_BATTLEMODE];
     gSaveBlock2Ptr->mode3MonsOnly    = sOptions->sel_run[MENUITEM_RUN_3_MONS_ONLY];
     gSaveBlock2Ptr->modeNoCaseChoice = sOptions->sel_run[MENUITEM_RUN_NO_CASE_CHOICE];
@@ -1364,11 +1354,6 @@ static void Task_ModeMenuSave(u8 taskId) // ToDo: add missing flags handling
         FlagSet(FLAG_RANDOM_MODE);
     else
         FlagClear(FLAG_RANDOM_MODE);*/
-
-    /*if (sOptions->sel_run[MENUITEM_RUN_DEFAULTS] == PRESET_HARD)
-        FlagSet(FLAG_HARD_MODE);
-    else
-        FlagClear(FLAG_HARD_MODE);*/
 
     if (sOptions->sel_diff[MENUITEM_DIFF_XPMODE] == XP_NONE)
         FlagSet(FLAG_NO_EXP_MODE);
@@ -1578,20 +1563,6 @@ static const u8 sText_Choice_Yes[]          = _("YES");
 static const u8 sText_Choice_No[]           = _("NO");
 static const u8 sText_HealFloors_5[]        = _("5FLRS");
 static const u8 sText_HealFloors_10[]       = _("10FLRS");
-
-/*static void DrawChoices_Defaults(int selection, int y)
-{
-    bool8 active = CheckConditions(MENUITEM_RUN_DEFAULTS);
-    u8 styles[3] = {0};
-    int xMid;
-
-    styles[selection] = 1;
-    xMid = GetMiddleX(sText_ModeNormal, sText_ModeHard, sText_ModeCustom);
-
-    DrawModeMenuChoice(sText_ModeNormal, 104, y, styles[0], active);
-    DrawModeMenuChoice(sText_ModeHard, xMid, y, styles[1], active);
-    DrawModeMenuChoice(sText_ModeCustom, GetStringRightAlignXOffset(1, sText_ModeCustom, 198), y, styles[2], active);
-}*/
 
 /*static void DrawChoices_Autosave(int selection, int y)
 {
@@ -1844,7 +1815,6 @@ static void ModeMenu_FreeResources(void)
 static void ApplyPresets(void)
 {
     int cursor = sOptions->visibleCursor[sOptions->submenu];
-    DebugPrintf("%d", sOptions->sel_presets[cursor]);
 
     //general defaults:
     //run settings
