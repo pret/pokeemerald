@@ -22,6 +22,7 @@
 #include "fieldmap.h"
 #include "field_screen_effect.h"
 #include "overworld.h"
+#include "event_scripts.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
@@ -710,100 +711,54 @@ void SetRandomTrainersMixedDoubles(void)
 {
     u16 iterator = 0;
     u16 trainerCount = ReturnNumberOfTrainersForFloor();
-    u16 trainers[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+    u16 trainers[4] = {0, 0, 0, 0};
 
     VarSet(VAR_LAST_FLOOR_TRAINER_NUMBER, trainerCount);
+
+    // Handle Random Trainer Objects That Aren't Spawned
+    for (iterator = 0; iterator < 4; iterator++)
+    {
+        FlagSet(RandomNPCTrainers_Doubles[iterator].objectflag);
+        SetTrainerFlag(RandomNPCTrainers_Doubles[iterator].trainerflag);
+
+        FlagSet(RandomNPCTrainers[iterator].objectflag);
+        SetTrainerFlag(RandomNPCTrainers[iterator].trainerflag);
+
+    }
 
     // Handle Random Trainers That Are Spawned
     for (iterator = 0; iterator < trainerCount; iterator++)
     {
-        u16 newTrainer = (Random() % 8);
+        u16 newTrainer = (Random() % 4);
         u8 reroll = FALSE;
-        if(newTrainer > 3)
-        {
-            if(trainers[newTrainer - 4] == 1)
-            {
-                reroll = TRUE;
-            }
-            else
-            {
-                reroll = FALSE;
-            }
-        }
-        else
-        {
-            if(trainers[newTrainer + 4] == 1)
-            {
-                reroll = TRUE;
-            }
-            else
-            {
-                reroll = FALSE;
-            }
-        }
 
         while(trainers[newTrainer] || reroll)
         {
-            newTrainer = (Random() % 8);
-            if(newTrainer > 3)
+            newTrainer = (Random() % 4);
+
+            if(trainers[newTrainer] == 1)
             {
-                if(newTrainer > 3)
-                {
-                    if(trainers[newTrainer - 4] == 1)
-                    {
-                        reroll = TRUE;
-                    }
-                    else
-                    {
-                        reroll = FALSE;
-                    }
-                }
-                else
-                {
-                    if(trainers[newTrainer + 4] == 1)
-                    {
-                        reroll = TRUE;
-                    }
-                    else
-                    {
-                        reroll = FALSE;
-                    }
-                }
+                reroll = TRUE;
+            }
+            else
+            {
+                reroll = FALSE;
             }
         }
 
         trainers[newTrainer] = 1;
 
-        if(newTrainer > 3)
+        if(Random() % 2)
         {
-            VarSet(RandomNPCTrainers_Doubles[newTrainer - 4].gfxid, (Random() % 53) + 5);
-            ClearTrainerFlag(RandomNPCTrainers_Doubles[newTrainer - 4].trainerflag); 
-            FlagClear(RandomNPCTrainers_Doubles[newTrainer - 4].objectflag); 
+            VarSet(RandomNPCTrainers_Doubles[newTrainer].gfxid, (Random() % 53) + 5);
+            ClearTrainerFlag(RandomNPCTrainers_Doubles[newTrainer].trainerflag); 
+            FlagClear(RandomNPCTrainers_Doubles[newTrainer].objectflag); 
         }
         else
         {
             VarSet(RandomNPCTrainers[newTrainer].gfxid, (Random() % 53) + 5);
             ClearTrainerFlag(RandomNPCTrainers[newTrainer].trainerflag); 
             FlagClear(RandomNPCTrainers[newTrainer].objectflag); 
-        }
-        
-    }
-
-    // Handle Random Trainer Objects That Aren't Spawned
-    for (iterator = 0; iterator < 8; iterator++)
-    {
-        if (!trainers[iterator])
-        {
-            if(iterator > 3)
-            {
-                FlagSet(RandomNPCTrainers_Doubles[iterator - 4].objectflag);
-                SetTrainerFlag(RandomNPCTrainers_Doubles[iterator - 4].trainerflag);
-            }
-            else
-            {
-                FlagSet(RandomNPCTrainers[iterator].objectflag);
-                SetTrainerFlag(RandomNPCTrainers[iterator].trainerflag);
-            }
         }
     }
 }
@@ -957,13 +912,18 @@ struct sRandomMap {
                                             .warp_x = 9,    \
                                             .warp_y = 9,
 
-#define RANDOM_MAP_COUNT ARRAY_COUNT(sRandomMapArray)
+#define RANDOM_MAP_COUNT    ARRAY_COUNT(sRandomMapArray)
 static const struct sRandomMap sRandomMapArray[] = {
     {
         .mapConstant = MAP_PIT_ARENA,
         .warpMetatileId = METATILE_Cave_FLOOR_COMPLETE,
         DEFAULT_RANDOM_MAP_COORDS
     },     
+    {
+        .mapConstant = MAP_PIT_ARENA_BEACH,
+        .warpMetatileId = METATILE_PitArenaBeach_BEACH_WARP_ACTIVE,
+        DEFAULT_RANDOM_MAP_COORDS
+    },  
     {
         .mapConstant = MAP_PIT_ARENA_WATER,
         .warpMetatileId = METATILE_PitWaterTheme_WATER_WARP_ACTIVE,
@@ -977,11 +937,6 @@ static const struct sRandomMap sRandomMapArray[] = {
     {
         .mapConstant = MAP_PIT_ARENA_SNOW,
         .warpMetatileId = METATILE_PitArenaSnow_SNOW_WARP_ACTIVE,
-        DEFAULT_RANDOM_MAP_COORDS
-    },  
-    {
-        .mapConstant = MAP_PIT_ARENA_BEACH,
-        .warpMetatileId = METATILE_PitArenaBeach_BEACH_WARP_ACTIVE,
         DEFAULT_RANDOM_MAP_COORDS
     },  
     {
@@ -1031,4 +986,190 @@ void SetWarpTileActive(void)
     u16 currentIndex = VarGet(VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY);
     if(currentIndex != 0xFF)
         MapGridSetMetatileIdAt(sRandomMapArray[currentIndex].warp_x + MAP_OFFSET, sRandomMapArray[currentIndex].warp_y + MAP_OFFSET, sRandomMapArray[currentIndex].warpMetatileId);
+}
+
+struct RandomMonEncounters {
+    u16 species;
+    u16 flagId; // id into gSaveBlock2Ptr->randomMonEncounters not normal flags
+    const u8 *monScript;
+};
+
+#define RANDOM_ENCOUNTER_COUNT ARRAY_COUNT(sRandomEncounterArray)
+static const struct RandomMonEncounters sRandomEncounterArray[] = {
+    {
+        .species = SPECIES_ABRA,
+        .flagId = 0,
+        .monScript = PitEncounter_Mover,
+    },
+    {
+        .species = SPECIES_JIRACHI,
+        .flagId = 1,
+        .monScript = PitEncounter_HealOneMon,
+    },
+    {
+        .species = SPECIES_SHEDINJA,
+        .flagId = 2,
+        .monScript = PitEncounter_ReviveOneMon,
+    },
+    {
+        .species = SPECIES_CHANSEY,
+        .flagId = 3,
+        .monScript = PitEncounter_LuckyEggDrop,
+    },
+    {
+        .species = SPECIES_MEOWTH,
+        .flagId = 4,
+        .monScript = PitEncounter_AmuletCoinDrop,
+    },
+    {
+        .species = SPECIES_DELIBIRD,
+        .flagId = 5,
+        .monScript = PitEncounter_NuggetDrop,
+    },
+    {
+        .species = SPECIES_ZIGZAGOON,
+        .flagId = 6,
+        .monScript = PitEncounter_WonderTrade,
+    },
+    {
+        .species = SPECIES_MILTANK,
+        .flagId = 7,
+        .monScript = PitEncounter_MooMooMilkDrop,
+    },
+    {
+        .species = SPECIES_CHIMECHO,
+        .flagId = 8,
+        .monScript = PitEncounter_CureAllStatus,
+    },
+    {
+        .species = SPECIES_MUNCHLAX,
+        .flagId = 9,
+        .monScript = PitEncounter_RareCandyDrop,
+    },
+};
+
+u8 *GetEncounterFlagPointer(u16 id)
+{
+    return &gSaveBlock2Ptr->randomMonEncounters[id / 8];
+}
+
+u8 EncounterFlagSet(u16 id)
+{
+    u8 *ptr = GetEncounterFlagPointer(id);
+    if (ptr)
+        *ptr |= 1 << (id & 7);
+    return 0;
+}
+
+u8 EncounterFlagClear(u16 id)
+{
+    u8 *ptr = GetEncounterFlagPointer(id);
+    if (ptr)
+        *ptr &= ~(1 << (id & 7));
+    return 0;
+}
+
+bool8 EncounterFlagGet(u16 id)
+{
+    u8 *ptr = GetEncounterFlagPointer(id);
+
+    if (!ptr)
+        return FALSE;
+
+    if (!(((*ptr) >> (id & 7)) & 1))
+        return FALSE;
+
+    return TRUE;
+}
+
+bool8 RemainingEncounters(void)
+{
+    u8 i = 0;
+    for(i = 0; i < RANDOM_ENCOUNTER_COUNT; i++)
+    {
+        if(!EncounterFlagGet(i))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+void ClearAllRandomEncounters(void)
+{
+    u8 i = 0;
+    for(i = 0; i < RANDOM_ENCOUNTER_COUNT; i++)
+    {
+        EncounterFlagClear(i);
+    }
+}
+
+void SetRandomMonEncounter(void)
+{
+    bool8 reroll = FALSE;
+    FlagSet(FLAG_OVERWORLD_MON_ENCOUNTER);
+
+    if (Random() % 5) // Odds of A Random Encounter On Each Floor
+        return;
+
+    if(!RemainingEncounters()) // Cancel if All Random Encounters have been done
+        return;
+
+    do {
+        u16 index = Random() % RANDOM_ENCOUNTER_COUNT;
+        if(EncounterFlagGet(index))
+        {
+            reroll = TRUE;
+        }
+        else
+        {
+            reroll = FALSE;
+            EncounterFlagSet(index);
+            VarSet(VAR_OVERWORLD_MON_SPECIES, sRandomEncounterArray[index].species);
+            VarSet(VAR_CURRENT_OVERWORLD_ENCOUNTER_INDEX, index);
+            FlagClear(FLAG_OVERWORLD_MON_ENCOUNTER);
+            FlagClear(FLAG_USED_RANDOM_ENCOUNTER_THIS_FLOOR);
+            return;
+        }
+    } while (reroll);
+
+}
+
+void CallRandomMonEncounterScript(void)
+{
+    if(FlagGet(FLAG_USED_RANDOM_ENCOUNTER_THIS_FLOOR))
+    {
+        ScriptContext_SetupScript(PitEncounter_Common_AlreadyUsedEffect); // Can Swap for a Mon Specific Post Script From the Struct if we want
+    }
+    else
+    {
+        ScriptContext_SetupScript(sRandomEncounterArray[VarGet(VAR_CURRENT_OVERWORLD_ENCOUNTER_INDEX)].monScript);
+    }
+}
+
+void HealPlayerPokemon(void)
+{
+    HealPokemon(&gPlayerParty[VarGet(VAR_0x8005)]);
+}
+
+void CheckMonFainted(void)
+{
+    struct Pokemon *pokemon = &gPlayerParty[VarGet(VAR_0x8005)];
+    u16 species = GetMonData(pokemon, MON_DATA_SPECIES_OR_EGG);
+    if (species == SPECIES_NONE || species == SPECIES_EGG)
+    {
+        VarSet(VAR_RESULT, FALSE);
+        return;
+    }
+    if ((GetMonData(pokemon, MON_DATA_HP) == 0))
+        VarSet(VAR_RESULT, TRUE);
+    else
+        VarSet(VAR_RESULT, FALSE);
+}
+
+void HealAllStatus(void)
+{
+    u32 status = 0;
+    for(u8 i = 0; i < 6; i++)
+    {
+        SetMonData(&gPlayerParty[i], MON_DATA_STATUS, &status);
+    }
 }

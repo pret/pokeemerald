@@ -290,6 +290,7 @@ EventScript_ResetAllMapFlags::
 	clearflag FLAG_NO_EXP_MODE
 	setflag FLAG_NO_DUPLICATES
 	setvar B_BATTLE_SPEED, 1
+	callnative ClearAllRandomEncounters
 	call EventScript_ResetAllBerries
 	end
 

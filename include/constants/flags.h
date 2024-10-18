@@ -88,8 +88,8 @@
 #define FLAG_UNUSED_0x04B    0x4B // Unused Flag
 #define FLAG_UNUSED_0x04C    0x4C // Unused Flag
 #define FLAG_UNUSED_0x04D    0x4D // Unused Flag
-#define FLAG_UNUSED_0x04E    0x4E // Unused Flag
-#define FLAG_UNUSED_0x04F    0x4F // Unused Flag
+#define FLAG_USED_RANDOM_ENCOUNTER_THIS_FLOOR    0x4E // Unused Flag
+#define FLAG_DONT_RANDOMIZE_NEXT_ITEM    0x4F // Unused Flag
 
 // Scripts
 #define FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL  0x50
@@ -738,7 +738,7 @@
 #define FLAG_UNUSED_0x2B7						0x2B7 // Unused Flag
 #define FLAG_UNUSED_0x2B8						0x2B8 // Unused Flag
 #define FLAG_UNUSED_0x2B9						0x2B9 // Unused Flag
-#define FLAG_UNUSED_0x2BA						0x2BA // Unused Flag
+#define FLAG_OVERWORLD_MON_ENCOUNTER						0x2BA // Unused Flag
 #define FLAG_TERA_CHARGED						0x2BB // Unused Flag
 
 // Event Flags

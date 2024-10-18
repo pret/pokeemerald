@@ -53,6 +53,7 @@ PitArena_OnResume:
 	setflashlevel 0
 	goto_if_eq VAR_PIT_FLOOR, 100, PitArena_OnResumeNormal
 	addvar VAR_REWARD_STATE, 1
+	goto_if_ne VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY, 0, PitArena_OnResumeNormal
 	setflashlevel 1
 PitArena_OnResumeNormal:
 	end
@@ -61,7 +62,12 @@ PitArena_OnTransition:
 	goto_if_unset FLAG_FLOOR_CLEARED, PitArena_OnTransitionNormal
 PitArena_OnTransitionNormal::
 	setrespawn HEAL_LOCATION_PETALBURG_CITY
+	goto_if_ne VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY, 0, PitArena_OnTransitionNormalNoFlash
 	setflashlevel 1
+	return
+
+PitArena_OnTransitionNormalNoFlash::
+	setflashlevel 0
 	return
 
 PitArena_RewardDrop1::
@@ -98,6 +104,7 @@ PitArenaContinueAfterEvo::
 	setvar VAR_REWARD_STATE, 0
 	callnative BufferMapFloorString
 	callnative SetRandomTrainers
+	callnative SetRandomMonEncounter
 	warpteleport MAP_RANDOM, 9, 8
 	waitstate
 PitArena_WarpEnd::

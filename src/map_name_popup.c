@@ -43,7 +43,7 @@ static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping[] =
 {
     [MAPSEC_PIT_ENTRANCE] = MAPPOPUP_THEME_BLACK,
     [MAPSEC_PIT_FLOORS] = MAPPOPUP_THEME_TRANSPARENT,
-    [MAPSEC_PIT_REST_FLOOR] = MAPPOPUP_THEME_BLACK,
+    [MAPSEC_PIT_REST_FLOOR] = MAPPOPUP_THEME_TRANSPARENT,
     [MAPSEC_PIT_BOSS] = MAPPOPUP_THEME_BLACK,
     [MAPSEC_FALLARBOR_TOWN] = MAPPOPUP_THEME_BLACK,
     [MAPSEC_VERDANTURF_TOWN] = MAPPOPUP_THEME_BLACK,
@@ -378,7 +378,18 @@ static void LoadMapNamePopUpWindowBgs(void)
         else
             regionMapSectionId = 0; // Discard kanto region sections;
     }
-    popupThemeId = sRegionMapSectionId_To_PopUpThemeIdMapping[regionMapSectionId];
+    if(regionMapSectionId == MAPSEC_PIT_FLOORS)
+    {
+        if(VarGet(VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY) != 0)
+        {
+            popupThemeId = MAPPOPUP_THEME_BLACK;
+        }
+        else
+            popupThemeId = sRegionMapSectionId_To_PopUpThemeIdMapping[regionMapSectionId];
+    }
+    else
+        popupThemeId = sRegionMapSectionId_To_PopUpThemeIdMapping[regionMapSectionId];
+
 
     if (VarGet(VAR_PIT_FLOOR) == 100)
     {

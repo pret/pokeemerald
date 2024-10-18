@@ -200,6 +200,7 @@ static void DestroyLevitateMovementTask(u8);
 static bool8 GetFollowerInfo(u16 *species, u8 *form, u8 *shiny);
 static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny);
 static const struct ObjectEventGraphicsInfo *SpeciesToGraphicsInfo(u16 species, u8 form);
+static const struct ObjectEventGraphicsInfo *RandomSpeciesToGraphicsInfo(u16 species, u8 form);
 static bool8 NpcTakeStep(struct Sprite *);
 static bool8 IsElevationMismatchAt(u8, s16, s16);
 static bool8 AreElevationsCompatible(u8, u8);
@@ -1599,6 +1600,8 @@ static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEven
         return OBJECT_EVENTS_COUNT;
 
     objectEvent = &gObjectEvents[objectEventId];
+    if (objectEvent->graphicsId == OBJ_EVENT_GFX_ZIGZAGOON_2)
+        objectEvent->graphicsId = (VarGet(VAR_OVERWORLD_MON_SPECIES) + OBJ_EVENT_GFX_MON_BASE);
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
     if (spriteTemplate->paletteTag != TAG_NONE && spriteTemplate->paletteTag != OBJ_EVENT_PAL_TAG_DYNAMIC)
         LoadObjectEventPalette(spriteTemplate->paletteTag);
@@ -1655,6 +1658,8 @@ static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEven
 static u16 PackGraphicsId(const struct ObjectEventTemplate *template)
 {
     u16 graphicsId = template->graphicsId;
+    if (graphicsId == OBJ_EVENT_GFX_ZIGZAGOON_2)
+        graphicsId = (VarGet(VAR_OVERWORLD_MON_SPECIES) + OBJ_EVENT_GFX_MON_BASE);
     u32 form = 0;
     // set form based on template's script,
     // if first command is bufferspeciesname
@@ -1900,6 +1905,33 @@ struct ObjectEvent *GetFollowerObject(void)
 static const struct ObjectEventGraphicsInfo *SpeciesToGraphicsInfo(u16 species, u8 form)
 {
     const struct ObjectEventGraphicsInfo *graphicsInfo = NULL;
+#if OW_POKEMON_OBJECT_EVENTS
+    switch (species)
+    {
+    case SPECIES_UNOWN: // Letters >A are defined as species >= NUM_SPECIES, so are not contiguous with A
+        form %= NUM_UNOWN_FORMS;
+        graphicsInfo = &gSpeciesInfo[form ? SPECIES_UNOWN_B + form - 1 : species].overworldData;
+        break;
+    default:
+        graphicsInfo = &gSpeciesInfo[species].overworldData;
+        break;
+    }
+    // Try to avoid OOB or undefined access
+    if ((graphicsInfo->tileTag == 0 && species < NUM_SPECIES) || (graphicsInfo->tileTag != TAG_NONE && species >= NUM_SPECIES))
+    {
+        if (OW_SUBSTITUTE_PLACEHOLDER)
+            return &gSpeciesInfo[SPECIES_NONE].overworldData;
+        return NULL;
+    }
+#endif // OW_POKEMON_OBJECT_EVENTS
+    return graphicsInfo;
+}
+
+static const struct ObjectEventGraphicsInfo *RandomSpeciesToGraphicsInfo(u16 species, u8 form)
+{
+    const struct ObjectEventGraphicsInfo *graphicsInfo = NULL;
+    species = VarGet(VAR_OVERWORLD_MON_SPECIES);
+
 #if OW_POKEMON_OBJECT_EVENTS
     switch (species)
     {
@@ -2598,6 +2630,9 @@ static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y)
     if (objectEvent->movementType == MOVEMENT_TYPE_PLAYER)
         objectEvent->graphicsId = GetPlayerAvatarGraphicsId(); 
 
+    if (objectEvent->graphicsId == OBJ_EVENT_GFX_ZIGZAGOON_2)
+        objectEvent->graphicsId = (VarGet(VAR_OVERWORLD_MON_SPECIES) + OBJ_EVENT_GFX_MON_BASE);
+    
     subspriteTables = NULL;
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
     CopyObjectGraphicsInfoToSpriteTemplate_WithMovementType(objectEvent->graphicsId, objectEvent->movementType, &spriteTemplate, &subspriteTables);
@@ -2818,6 +2853,9 @@ const struct ObjectEventGraphicsInfo *GetObjectEventGraphicsInfo(u16 graphicsId)
 
     if (graphicsId >= OBJ_EVENT_GFX_MON_BASE)
         return SpeciesToGraphicsInfo(graphicsId - OBJ_EVENT_GFX_MON_BASE, form);
+    
+    if (graphicsId == OBJ_EVENT_GFX_ZIGZAGOON_2 )
+        return RandomSpeciesToGraphicsInfo(graphicsId - OBJ_EVENT_GFX_MON_BASE, form);
 
     if (graphicsId >= NUM_OBJ_EVENT_GFX)
         graphicsId = OBJ_EVENT_GFX_NINJA_BOY;
@@ -3038,6 +3076,8 @@ void MoveObjectEventToMapCoords(struct ObjectEvent *objectEvent, s16 x, s16 y)
     const struct ObjectEventGraphicsInfo *graphicsInfo;
 
     sprite = &gSprites[objectEvent->spriteId];
+    if (objectEvent->graphicsId == OBJ_EVENT_GFX_ZIGZAGOON_2)
+        objectEvent->graphicsId = (VarGet(VAR_OVERWORLD_MON_SPECIES) + OBJ_EVENT_GFX_MON_BASE);
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
     SetObjectEventCoords(objectEvent, x, y);
     SetSpritePosToMapCoords(objectEvent->currentCoords.x, objectEvent->currentCoords.y, &sprite->x, &sprite->y);

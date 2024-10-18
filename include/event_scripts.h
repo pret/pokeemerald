@@ -649,4 +649,16 @@ extern const u8 EventScript_VsSeekerChargingDone[];
 extern const u8 Common_Movement_FollowerSafeStart[];
 extern const u8 Common_Movement_FollowerSafeEnd[];
 
+extern const u8 PitEncounter_Common_AlreadyUsedEffect[];
+extern const u8 PitEncounter_Mover[];
+extern const u8 PitEncounter_HealOneMon[];
+extern const u8 PitEncounter_ReviveOneMon[];
+extern const u8 PitEncounter_LuckyEggDrop[];
+extern const u8 PitEncounter_AmuletCoinDrop[];
+extern const u8 PitEncounter_NuggetDrop[];
+extern const u8 PitEncounter_WonderTrade[];
+extern const u8 PitEncounter_MooMooMilkDrop[];
+extern const u8 PitEncounter_CureAllStatus[];
+extern const u8 PitEncounter_RareCandyDrop[];
+
 #endif // GUARD_EVENT_SCRIPTS_H

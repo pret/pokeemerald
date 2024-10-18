@@ -1493,9 +1493,15 @@ u16 RandomItemId(u16 itemId)
 
 u16 RandomItem(void)
 {
-    u16 itemId = RandomItemId(gSpecialVar_0x8000);
+    u16 itemId = ITEM_NONE;
+    if(FlagGet(FLAG_DONT_RANDOMIZE_NEXT_ITEM))
+        itemId = gSpecialVar_0x8000;
+    else
+        itemId = RandomItemId(gSpecialVar_0x8000);
+    FlagClear(FLAG_DONT_RANDOMIZE_NEXT_ITEM);
 
     gSpecialVar_0x8000 = itemId;
+    gSpecialVar_0x8006 = itemId;
     return itemId;
 }
 

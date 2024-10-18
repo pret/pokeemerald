@@ -535,7 +535,8 @@ struct SaveBlock2
              u16 randomEvos:1;
              u16 modeHealFloors10:1;
              u16 filler_9912:10;
-    /*0x92*/ u8 filler_91[0x4];
+    /*0x92*/ u8 filler_91[2];
+             u8 randomMonEncounters[2];
              u8 playerGfxType;
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
