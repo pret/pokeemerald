@@ -735,6 +735,8 @@ extern struct BattleTestRunnerState *const gBattleTestRunnerState;
 #define APPEND_COMMA_TRUE(a) , a, TRUE
 #define R_APPEND_TRUE(...) __VA_OPT__(FIRST(__VA_ARGS__), TRUE RECURSIVELY(R_FOR_EACH(APPEND_COMMA_TRUE, EXCEPT_1(__VA_ARGS__))))
 
+#define AI_TRAINER_NAME "{PKMN} TRAINER LEAF"
+
 /* Test */
 
 #define TO_DO_BATTLE_TEST(_name) \
