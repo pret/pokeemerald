@@ -49,7 +49,7 @@ struct mini_buff
 
 static inline char mini_pchar_decode(char encoded)
 {
-    char ret = '?';
+    char ret = '~';
     if (encoded >= CHAR_a && encoded <= CHAR_z)
         ret = encoded-(CHAR_a-'a'); // lower-case characters
     else if (encoded >= CHAR_A && encoded <= CHAR_Z)
@@ -86,6 +86,8 @@ static inline char mini_pchar_decode(char encoded)
         ret = '('; // opening parentheses
     else if (encoded == CHAR_RIGHT_PAREN)
         ret = ')'; // closing parentheses
+    else if (encoded == CHAR_HYPHEN)
+        ret = '-'; // hyphen
     return ret;
 }
 
@@ -133,7 +135,31 @@ static s32 _putsEncoded(char *s, s32 len, void *buf)
         {
             break;
         }
-        *(b->pbuffer ++) = mini_pchar_decode(s[i]);
+        if (s[i] == CHAR_NEWLINE)
+        {
+            *(b->pbuffer ++) = '\\';
+            *(b->pbuffer ++) = 'n';
+        }
+        else if (s[i] == CHAR_PROMPT_SCROLL)
+        {
+            *(b->pbuffer ++) = '\\';
+            *(b->pbuffer ++) = 'l';
+        }
+        else if (s[i] == CHAR_PROMPT_CLEAR)
+        {
+            *(b->pbuffer ++) = '\\';
+            *(b->pbuffer ++) = 'p';
+        }
+        else if (s[i] == CHAR_ELLIPSIS)
+        {
+            *(b->pbuffer ++) = '.';
+            *(b->pbuffer ++) = '.';
+            *(b->pbuffer ++) = '.';
+        }
+        else
+        {
+            *(b->pbuffer ++) = mini_pchar_decode(s[i]);
+        }
     }
     *(b->pbuffer) = 0;
     return b->pbuffer - p0;
