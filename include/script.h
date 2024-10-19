@@ -61,6 +61,19 @@ u8 *GetSavedRamScriptIfValid(void);
 void InitRamScript_NoObjectEvent(u8 *script, u16 scriptSize);
 void WarpToRandomPitArena(void);
 
+struct RandomTrainerNPC 
+{
+    u16 gfxid;
+    u16 objectflag;
+    u16 trainerflag;
+    u16 defeatTextVar;
+};
+
+#define MAX_RANDOM_TRAINERS 4
+
+extern const struct RandomTrainerNPC RandomNPCTrainers[];
+extern const struct RandomTrainerNPC RandomNPCTrainers_Doubles[];
+
 // srccmd.h
 void SetMovingNpcId(u16 npcId);
 u16 ReturnLastSpokenVarObjGfxId();

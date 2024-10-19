@@ -114,34 +114,42 @@ PitArena_WarpEnd::
 
 PitArena_TrainerBattle::
 	trainerbattle_single TRAINER_RANDOM_BATTLE_0, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_TrainerBattleFinished
+	showpitdefeattext TRAINER_RANDOM_BATTLE_0
 	end
 
 PitArena_TrainerBattle1::
 	trainerbattle_single TRAINER_RANDOM_BATTLE_1, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_TrainerBattleFinished
+	showpitdefeattext TRAINER_RANDOM_BATTLE_1
 	end
 
 PitArena_TrainerBattle2::
 	trainerbattle_single TRAINER_RANDOM_BATTLE_2, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_TrainerBattleFinished
+	showpitdefeattext TRAINER_RANDOM_BATTLE_2
 	end
 
 PitArena_TrainerBattle3::
 	trainerbattle_single TRAINER_RANDOM_BATTLE_3, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_TrainerBattleFinished
+	showpitdefeattext TRAINER_RANDOM_BATTLE_3
 	end
 
 PitArena_TrainerBattle4::
 	trainerbattle_double TRAINER_RANDOM_BATTLE_4, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_Text_NotEnoughMons, PitArena_TrainerBattleFinished
+	showpitdefeattext TRAINER_RANDOM_BATTLE_4
 	end
 
 PitArena_TrainerBattle5::
 	trainerbattle_double TRAINER_RANDOM_BATTLE_5, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_Text_NotEnoughMons, PitArena_TrainerBattleFinished
+	showpitdefeattext TRAINER_RANDOM_BATTLE_5
 	end
 
 PitArena_TrainerBattle6::
 	trainerbattle_double TRAINER_RANDOM_BATTLE_6, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_Text_NotEnoughMons, PitArena_TrainerBattleFinished
+	showpitdefeattext TRAINER_RANDOM_BATTLE_6
 	end
 
 PitArena_TrainerBattle7::
 	trainerbattle_double TRAINER_RANDOM_BATTLE_7, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_Text_NotEnoughMons, PitArena_TrainerBattleFinished
+	showpitdefeattext TRAINER_RANDOM_BATTLE_7
 	end
 
 PitArena_Text_Intro:

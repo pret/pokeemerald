@@ -520,6 +520,7 @@
 #define TRAINER_RANDOM_BATTLE_1            	514
 #define TRAINER_RANDOM_BATTLE_2             515
 #define TRAINER_RANDOM_BATTLE_3             516
+#define FIRST_SINGLES_TRAINER_ID            TRAINER_RANDOM_BATTLE_0
 #define TRAINER_ARCHIE_PIT_BOSS             517
 #define TRAINER_ARCHIE_PIT_BOSS_DOUBLES     518
 #define TRAINER_WALLY_VR_1                  519

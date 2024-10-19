@@ -3743,7 +3743,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 }
                 else
                 {
-                    toCpy = GetTrainerALoseText();
+                    toCpy = GetTrainerALoseText(gTrainerBattleOpponent_A);
                 }
                 break;
             case B_TXT_TRAINER1_WIN_TEXT: // trainerA win text
@@ -3841,7 +3841,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 }
                 else
                 {
-                    toCpy = GetTrainerBLoseText();
+                    toCpy = GetTrainerBLoseText(gTrainerBattleOpponent_B);
                 }
                 break;
             case B_TXT_TRAINER2_WIN_TEXT:

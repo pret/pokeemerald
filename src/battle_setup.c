@@ -1809,18 +1809,44 @@ static const u8 *GetIntroSpeechOfApproachingTrainer(void)
         return ReturnEmptyStringIfNull(sRandomTrainerApproachTexts[Random() % 79]);
 }
 
-const u8 *GetTrainerALoseText(void)
+u16 GetPitDefeatTextIndex(u16 trainerID)
 {
+    u32 i;
+    u16 defeatTextIndex = 0;
+    if (trainerID >= FIRST_SINGLES_TRAINER_ID)
+    {
+        for (i = 0; i < MAX_RANDOM_TRAINERS && RandomNPCTrainers[i].trainerflag != trainerID; i++);
+        defeatTextIndex = VarGet(RandomNPCTrainers[i].defeatTextVar);
+    }
+    else
+    {
+        for (i = 0; i < MAX_RANDOM_TRAINERS && RandomNPCTrainers_Doubles[i].trainerflag != trainerID; i++);
+        defeatTextIndex = VarGet(RandomNPCTrainers_Doubles[i].defeatTextVar);
+    }
+    return defeatTextIndex;
+}
+
+const u8 *GetPitDefeatText(u16 index)
+{
+    return sRandomTrainerDefeatTexts[index];
+}
+
+const u8 *GetTrainerALoseText(u16 trainerID)
+{
+    u16 defeatTextIndex = GetPitDefeatTextIndex(trainerID);
+
     if(VarGet(VAR_PIT_FLOOR) == 100)
         StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(sArchieFinalDefeat[0]));
     else
-        StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(sRandomTrainerDefeatTexts[Random() % 77]));
+        StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(sRandomTrainerDefeatTexts[defeatTextIndex]));
     return gStringVar4;
 }
 
-const u8 *GetTrainerBLoseText(void)
+const u8 *GetTrainerBLoseText(u16 trainerID)
 {
-    StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(sRandomTrainerDefeatTexts[Random() % 77]));
+    u16 defeatTextIndex = GetPitDefeatTextIndex(trainerID);
+
+    StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(sRandomTrainerDefeatTexts[defeatTextIndex]));
     return gStringVar4;
 }
 

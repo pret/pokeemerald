@@ -231,6 +231,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_dynmultipush                      @ 0xe4
 	.4byte ScrCmd_showitemdesc              		@ 0xe5
 	.4byte ScrCmd_hideitemdesc              		@ 0xe6
+	.4byte ScrCmd_pitdefeattext              		@ 0xe7
 
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

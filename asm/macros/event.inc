@@ -1903,6 +1903,20 @@
 	.byte 0xe6
 	.endm
 
+	.macro pitdefeattext trainerID:req
+	.byte 0xe7
+	.2byte \trainerID
+	.endm
+
+	.macro showpitdefeattext trainerID:req
+	lock
+	faceplayer
+	pitdefeattext \trainerID
+	waitmessage
+	waitbuttonpress
+	release
+	end
+	.endm
 
 @ Supplementary
 

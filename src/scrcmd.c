@@ -2514,3 +2514,10 @@ void ScriptSetDoubleBattleFlag(struct ScriptContext *ctx)
 {
     sIsScriptedWildDouble = TRUE;
 }
+
+bool8 ScrCmd_pitdefeattext(struct ScriptContext *ctx)
+{
+    u16 trainerID = ScriptReadHalfword(ctx);
+    ShowFieldMessage(GetPitDefeatText(GetPitDefeatTextIndex(trainerID)));
+    return FALSE;
+}

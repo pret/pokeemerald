@@ -117,15 +117,16 @@
 #define VAR_ROUTE102_STATE                               0x4061 // Unused Var
 #define VAR_ROUTE103_STATE                               0x4062 // Unused Var
 #define VAR_ROUTE104_STATE                               0x4063
-#define VAR_ROUTE105_STATE                               0x4064 // Unused Var
-#define VAR_ROUTE106_STATE                               0x4065 // Unused Var
-#define VAR_ROUTE107_STATE                               0x4066 // Unused Var
-#define VAR_ROUTE108_STATE                               0x4067 // Unused Var
-#define VAR_ROUTE109_STATE                               0x4068 // Unused Var
-#define VAR_ROUTE110_STATE                               0x4069
-#define VAR_ROUTE111_STATE                               0x406A // Unused Var
-#define VAR_ROUTE112_STATE                               0x406B // Unused Var
-#define VAR_ROUTE113_STATE                               0x406C // Unused Var
+#define VAR_TRAINER_0_DEFEAT_TEXT                        0x4064
+#define VAR_TRAINER_1_DEFEAT_TEXT                        0x4065
+#define VAR_TRAINER_2_DEFEAT_TEXT                        0x4066
+#define VAR_TRAINER_3_DEFEAT_TEXT                        0x4067
+#define VAR_TRAINER_4_DEFEAT_TEXT                        0x4068
+#define VAR_TRAINER_5_DEFEAT_TEXT                        0x4069
+#define VAR_TRAINER_6_DEFEAT_TEXT                        0x406A
+#define VAR_TRAINER_7_DEFEAT_TEXT                        0x406B
+#define FIRST_TRAINER_DEFEAT_TEXT_VAR                    VAR_TRAINER_0_DEFEAT_TEXT
+#define VAR_ROUTE110_STATE                               0x406C // Unused Var
 #define VAR_ROUTE114_STATE                               0x406D // Unused Var
 #define VAR_ROUTE115_STATE                               0x406E // Unused Var
 #define VAR_ROUTE116_STATE                               0x406F

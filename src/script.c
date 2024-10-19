@@ -534,27 +534,20 @@ void InitTrainerIdAndNameData()
     NewGameBirchSpeech_SetDefaultPlayerName(Random() % 19);
 }
 
-struct RandomTrainerNPC 
+const struct RandomTrainerNPC RandomNPCTrainers[MAX_RANDOM_TRAINERS] = 
 {
-    u16 gfxid;
-    u16 objectflag;
-    u16 trainerflag;
+    [0] = {VAR_OBJ_GFX_ID_0, FLAG_TRAINER_0, TRAINER_RANDOM_BATTLE_0, VAR_TRAINER_0_DEFEAT_TEXT},
+    [1] = {VAR_OBJ_GFX_ID_1, FLAG_TRAINER_1, TRAINER_RANDOM_BATTLE_1, VAR_TRAINER_1_DEFEAT_TEXT},
+    [2] = {VAR_OBJ_GFX_ID_2, FLAG_TRAINER_2, TRAINER_RANDOM_BATTLE_2, VAR_TRAINER_2_DEFEAT_TEXT},
+    [3] = {VAR_OBJ_GFX_ID_3, FLAG_TRAINER_3, TRAINER_RANDOM_BATTLE_3, VAR_TRAINER_3_DEFEAT_TEXT},
 };
 
-static const struct RandomTrainerNPC RandomNPCTrainers[] = 
+const struct RandomTrainerNPC RandomNPCTrainers_Doubles[MAX_RANDOM_TRAINERS] = 
 {
-    [0] = {VAR_OBJ_GFX_ID_0, FLAG_TRAINER_0, TRAINER_RANDOM_BATTLE_0},
-    [1] = {VAR_OBJ_GFX_ID_1, FLAG_TRAINER_1, TRAINER_RANDOM_BATTLE_1},
-    [2] = {VAR_OBJ_GFX_ID_2, FLAG_TRAINER_2, TRAINER_RANDOM_BATTLE_2},
-    [3] = {VAR_OBJ_GFX_ID_3, FLAG_TRAINER_3, TRAINER_RANDOM_BATTLE_3},
-};
-
-static const struct RandomTrainerNPC RandomNPCTrainers_Doubles[] = 
-{
-    [0] = {VAR_OBJ_GFX_ID_0, FLAG_TRAINER_4, TRAINER_RANDOM_BATTLE_4},
-    [1] = {VAR_OBJ_GFX_ID_1, FLAG_TRAINER_5, TRAINER_RANDOM_BATTLE_5},
-    [2] = {VAR_OBJ_GFX_ID_2, FLAG_TRAINER_6, TRAINER_RANDOM_BATTLE_6},
-    [3] = {VAR_OBJ_GFX_ID_3, FLAG_TRAINER_7, TRAINER_RANDOM_BATTLE_7},
+    [0] = {VAR_OBJ_GFX_ID_0, FLAG_TRAINER_4, TRAINER_RANDOM_BATTLE_4, VAR_TRAINER_4_DEFEAT_TEXT},
+    [1] = {VAR_OBJ_GFX_ID_1, FLAG_TRAINER_5, TRAINER_RANDOM_BATTLE_5, VAR_TRAINER_5_DEFEAT_TEXT},
+    [2] = {VAR_OBJ_GFX_ID_2, FLAG_TRAINER_6, TRAINER_RANDOM_BATTLE_6, VAR_TRAINER_6_DEFEAT_TEXT},
+    [3] = {VAR_OBJ_GFX_ID_3, FLAG_TRAINER_7, TRAINER_RANDOM_BATTLE_7, VAR_TRAINER_7_DEFEAT_TEXT},
 };
 
 u16 ReturnLastSpokenVarObjGfxId()
@@ -666,12 +659,14 @@ void SetRandomTrainers(void)
         if(FlagGet(FLAG_DOUBLES_MODE))
         {
             VarSet(RandomNPCTrainers_Doubles[newTrainer].gfxid, (Random() % 53) + 5);
+            VarSet(RandomNPCTrainers_Doubles[newTrainer].defeatTextVar, Random() % 77);
             ClearTrainerFlag(RandomNPCTrainers_Doubles[newTrainer].trainerflag); 
             FlagClear(RandomNPCTrainers_Doubles[newTrainer].objectflag); 
         }
         else
         {
             VarSet(RandomNPCTrainers[newTrainer].gfxid, (Random() % 53) + 5);
+            VarSet(RandomNPCTrainers[newTrainer].defeatTextVar, Random() % 77);
             ClearTrainerFlag(RandomNPCTrainers[newTrainer].trainerflag); 
             FlagClear(RandomNPCTrainers[newTrainer].objectflag); 
         }
@@ -751,12 +746,14 @@ void SetRandomTrainersMixedDoubles(void)
         if(Random() % 2)
         {
             VarSet(RandomNPCTrainers_Doubles[newTrainer].gfxid, (Random() % 53) + 5);
+            VarSet(RandomNPCTrainers_Doubles[newTrainer].defeatTextVar, Random() % 77);
             ClearTrainerFlag(RandomNPCTrainers_Doubles[newTrainer].trainerflag); 
             FlagClear(RandomNPCTrainers_Doubles[newTrainer].objectflag); 
         }
         else
         {
             VarSet(RandomNPCTrainers[newTrainer].gfxid, (Random() % 53) + 5);
+            VarSet(RandomNPCTrainers[newTrainer].defeatTextVar, Random() % 77);
             ClearTrainerFlag(RandomNPCTrainers[newTrainer].trainerflag); 
             FlagClear(RandomNPCTrainers[newTrainer].objectflag); 
         }
