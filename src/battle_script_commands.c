@@ -10993,7 +10993,10 @@ static void Cmd_various(void)
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE &&
                 gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerAttacker)] == gSelectedMonPartyId)
             {
-                gBattleScripting.battler = BATTLE_PARTNER(gBattlerAttacker);
+                i = BATTLE_PARTNER(gBattlerAttacker);
+                gAbsentBattlerFlags &= ~(1u << i);
+                gBattleStruct->monToSwitchIntoId[i] = gSelectedMonPartyId;
+                gBattleScripting.battler = i;
                 gBattleCommunication[MULTIUSE_STATE] = TRUE;
             }
 

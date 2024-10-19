@@ -466,6 +466,9 @@ BattleScript_EffectRevivalBlessing::
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectRevivalBlessingSendOut:
+	getswitchedmondata BS_SCRIPTING
+	switchindataupdate BS_SCRIPTING
+	hpthresholds BS_SCRIPTING
 	switchinanim BS_SCRIPTING, FALSE
 	waitstate
 	switchineffects BS_SCRIPTING

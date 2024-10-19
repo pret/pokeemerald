@@ -952,7 +952,10 @@ struct MoveContext
     u16 gimmick:4;
     u16 explicitGimmick:1;
     u16 allowed:1;
+    // End of word
     u16 explicitAllowed:1;
+    u16 partyIndex:3; // Used for moves where you select a party member without swiching, such as Revival Blessing
+    u16 explicitPartyIndex:1;
     u16 notExpected:1; // Has effect only with EXPECT_MOVE
     u16 explicitNotExpected:1;
     struct BattlePokemon *target;

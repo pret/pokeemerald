@@ -2116,17 +2116,58 @@ void MoveGetIdAndSlot(s32 battlerId, struct MoveContext *ctx, u32 *moveId, u32 *
     }
 }
 
+u32 MoveGetFirstFainted(s32 battlerId)
+{
+    u32 i, partySize;
+    struct Pokemon *party;
+
+    if ((battlerId & BIT_SIDE) == B_SIDE_PLAYER)
+    {
+        partySize = DATA.playerPartySize;
+        party = DATA.recordedBattle.playerParty;
+    }
+    else
+    {
+        partySize = DATA.opponentPartySize;
+        party = DATA.recordedBattle.opponentParty;
+    }
+
+    // Loop through to find fainted battler.
+    for (i = 0; i < partySize; ++i)
+    {
+        u32 species = GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG);
+        if (species != SPECIES_NONE
+            && species != SPECIES_EGG
+            && GetMonData(&party[i], MON_DATA_HP) == 0)
+        {
+            return i;
+        }
+    }
+
+    // Returns PARTY_SIZE if none found.
+    return PARTY_SIZE;
+}
+
 void Move(u32 sourceLine, struct BattlePokemon *battler, struct MoveContext ctx)
 {
     s32 battlerId = battler - gBattleMons;
     u32 moveId, moveSlot;
     s32 target;
+    bool32 requirePartyIndex = FALSE;
 
     INVALID_IF(DATA.turnState == TURN_CLOSED, "MOVE outside TURN");
     INVALID_IF(IsAITest() && (battlerId & BIT_SIDE) == B_SIDE_OPPONENT, "MOVE is not allowed for opponent in AI tests. Use EXPECT_MOVE instead");
 
     MoveGetIdAndSlot(battlerId, &ctx, &moveId, &moveSlot, sourceLine);
     target = MoveGetTarget(battlerId, moveId, &ctx, sourceLine);
+
+    if (gMovesInfo[moveId].effect == EFFECT_REVIVAL_BLESSING)
+        requirePartyIndex = MoveGetFirstFainted(battlerId) != PARTY_SIZE;
+
+    // Check party menu moves.
+    INVALID_IF(requirePartyIndex && !ctx.explicitPartyIndex, "%S requires explicit party index", GetMoveName(moveId));
+    INVALID_IF(requirePartyIndex && ctx.partyIndex >= ((battlerId & BIT_SIDE) == B_SIDE_PLAYER ? DATA.playerPartySize : DATA.opponentPartySize), \
+                "MOVE to invalid party index");
 
     if (ctx.explicitHit)
         DATA.battleRecordTurns[DATA.turns][battlerId].hit = 1 + ctx.hit;
@@ -2147,6 +2188,9 @@ void Move(u32 sourceLine, struct BattlePokemon *battler, struct MoveContext ctx)
         PushBattlerAction(sourceLine, battlerId, RECORDED_MOVE_SLOT, moveSlot);
         PushBattlerAction(sourceLine, battlerId, RECORDED_MOVE_TARGET, target);
     }
+
+    if (ctx.explicitPartyIndex)
+        PushBattlerAction(sourceLine, battlerId, RECORDED_PARTY_INDEX, ctx.partyIndex);
 
     if (DATA.turnState == TURN_OPEN)
     {

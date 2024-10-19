@@ -3697,10 +3697,12 @@ void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst)
     dst->status2 = 0;
 }
 
-void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex)
+void CopyPartyMonToBattleData(u32 battlerId, u32 partyIndex)
 {
-    PokemonToBattleMon(&gPlayerParty[partyIndex], &gBattleMons[battlerId]);
-    gBattleStruct->hpOnSwitchout[GetBattlerSide(battlerId)] = gBattleMons[battlerId].hp;
+    u32 side = GetBattlerSide(battlerId);
+    struct Pokemon *party = GetSideParty(side);
+    PokemonToBattleMon(&party[partyIndex], &gBattleMons[battlerId]);
+    gBattleStruct->hpOnSwitchout[side] = gBattleMons[battlerId].hp;
     UpdateSentPokesToOpponentValue(battlerId);
     ClearTemporarySpeciesSpriteData(battlerId, FALSE);
 }
