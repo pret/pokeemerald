@@ -122,6 +122,7 @@ static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite);
 static u32 Crc32B (const u8 *data, u32 size);
 static u32 GeneratePartyHash(const struct Trainer *trainer, u32 i);
 static s32 Factorial(s32);
+static u16 GetRandomVictoryMusic(void);
 
 EWRAM_DATA u16 gBattle_BG0_X = 0;
 EWRAM_DATA u16 gBattle_BG0_Y = 0;
@@ -5640,7 +5641,7 @@ static void HandleEndTurn_BattleWon(void)
             PlayBGM(MUS_VICTORY_GYM_LEADER);
             break;
         default:
-            PlayBGM(MUS_VICTORY_TRAINER);
+            PlayBGM(GetRandomVictoryMusic());
             break;
         }
     }
@@ -5650,6 +5651,43 @@ static void HandleEndTurn_BattleWon(void)
     }
 
     gBattleMainFunc = HandleEndTurn_FinishBattle;
+}
+
+static u16 GetRandomVictoryMusic(void)
+{
+    switch(Random() % 14)
+    {
+    case 0:
+        return MUS_VICTORY_TRAINER;
+    case 1:
+        return MUS_RG_VICTORY_TRAINER;
+    case 2:
+        return MUS_DP_VICTORY_TRAINER;
+    case 3:
+        return MUS_HG_VICTORY_TRAINER;
+    case 4:
+        return MUS_VICTORY_GYM_LEADER;
+    case 5:
+        return MUS_VICTORY_LEAGUE;
+    case 6:
+        return MUS_RG_VICTORY_GYM_LEADER;
+    case 7:
+        return MUS_DP_VICTORY_GYM_LEADER;
+    case 8:
+        return MUS_DP_VICTORY_GALACTIC;
+    case 9:
+        return MUS_DP_VICTORY_ELITE_FOUR;
+    case 10:
+        return MUS_DP_VICTORY_CHAMPION;
+    case 11:
+        return MUS_PL_VICTORY_FRONTIER_BRAIN;
+    case 12:
+        return MUS_HG_VICTORY_GYM_LEADER;
+    case 13:
+        return MUS_HG_VICTORY_FRONTIER_BRAIN;
+    default:
+        return MUS_VICTORY_TRAINER;
+    }
 }
 
 static void HandleEndTurn_BattleLost(void)

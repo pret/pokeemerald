@@ -59,6 +59,7 @@ PitArena_OnResumeNormal:
 	end
 
 PitArena_OnTransition:
+	callnative TrySetRandomMusic
 	goto_if_unset FLAG_FLOOR_CLEARED, PitArena_OnTransitionNormal
 PitArena_OnTransitionNormal::
 	setrespawn HEAL_LOCATION_PETALBURG_CITY

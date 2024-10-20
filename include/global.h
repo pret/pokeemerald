@@ -536,7 +536,8 @@ struct SaveBlock2
              u16 modeHealFloors10:1;
              u16 modeXP:2;
              u16 optionsRandomMaps:1;
-             u16 filler_9912:7;
+             u16 optionsRandomMusic:1;
+             u16 filler_9912:6;
     /*0x92*/ u8 filler_91[2];
              u8 randomMonEncounters[2];
              u8 playerGfxType;
