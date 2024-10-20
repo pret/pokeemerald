@@ -2911,7 +2911,7 @@ u8 GetLevelFromMonExp(struct Pokemon *mon)
     while (level <= MAX_LEVEL && gExperienceTables[gSpeciesInfo[species].growthRate][level] <= exp)
         level++;
 
-    // In the event gExperience level is changed and level is 1, to prevent level from being 0.
+    // In the event gExperienceTables is changed and level is 1, to prevent level from being 0.
     // Does not happen in vanilla.
 #ifdef BUGFIX
     return level > 1 ? level - 1 : 1;
@@ -2929,7 +2929,13 @@ u8 GetLevelFromBoxMonExp(struct BoxPokemon *boxMon)
     while (level <= MAX_LEVEL && gExperienceTables[gSpeciesInfo[species].growthRate][level] <= exp)
         level++;
 
+    // In the event gExperienceTables is changed and level is 1, to prevent level from being 0.
+    // Does not happen in vanilla.
+#ifdef BUGFIX
+    return level > 1 ? level - 1 : 1;
+#else
     return level - 1;
+#endif
 }
 
 u16 GiveMoveToMon(struct Pokemon *mon, u16 move)
