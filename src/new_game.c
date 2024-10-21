@@ -130,6 +130,7 @@ void SetDefaultOptions(void)
         gSaveBlock2Ptr->optionsFollowMonsOff = FALSE;
         gSaveBlock2Ptr->optionsAutosave = 1;
         gSaveBlock2Ptr->optionsRandomMaps = 0;
+        gSaveBlock2Ptr->optionsRandomMusic = 0;
     }
     
     //game modes
