@@ -28,7 +28,7 @@ struct BardSong
     /*0x06*/ u16 volume;
     /*0x08*/ s16 pitch;
     /*0x0A*/ s16 voiceInflection;
-    /*0x0C*/ u16 lyrics[BARD_SOUND_MAX_LENGTH];
+    /*0x0C*/ u16 lyrics[NUM_BARD_SONG_WORDS];
     /*0x18*/ struct BardPhoneme phonemes[BARD_SOUND_MAX_LENGTH];
     /*0x30*/ const struct BardSound *sound;
 };

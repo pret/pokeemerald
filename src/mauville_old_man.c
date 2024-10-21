@@ -37,7 +37,7 @@ static EWRAM_DATA u16 sUnknownBardRelated = 0;
 static EWRAM_DATA struct MauvilleManStoryteller * sStorytellerPtr = NULL;
 static EWRAM_DATA u8 sStorytellerWindowId = 0;
 
-static const u16 sDefaultBardSongLyrics[BARD_SONG_LENGTH] = {
+static const u16 sDefaultBardSongLyrics[NUM_BARD_SONG_WORDS] = {
     EC_WORD_SHAKE,
     EC_WORD_IT,
     EC_WORD_DO,
@@ -79,7 +79,7 @@ static void SetupBard(void)
     bard->id = MAUVILLE_MAN_BARD;
     bard->hasChangedSong = FALSE;
     bard->language = gGameLanguage;
-    for (i = 0; i < BARD_SONG_LENGTH; i++)
+    for (i = 0; i < NUM_BARD_SONG_WORDS; i++)
         bard->songLyrics[i] = sDefaultBardSongLyrics[i];
 }
 
@@ -163,7 +163,7 @@ void SaveBardSongLyrics(void)
     for (i = 0; i < TRAINER_ID_LENGTH; i++)
         bard->playerTrainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
 
-    for (i = 0; i < BARD_SONG_LENGTH; i++)
+    for (i = 0; i < NUM_BARD_SONG_WORDS; i++)
         bard->songLyrics[i] = bard->temporaryLyrics[i];
 
     bard->hasChangedSong = TRUE;
@@ -467,7 +467,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
             lyrics = bard->songLyrics;
         else
             lyrics = bard->temporaryLyrics;
-        for (i = 0; i < BARD_SONG_LENGTH; i++)
+        for (i = 0; i < NUM_BARD_SONG_WORDS; i++)
             song->lyrics[i] = lyrics[i];
         song->currWord = 0;
     }
@@ -530,7 +530,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
             if (song->phonemeTimer == 0)
             {
                 song->currPhoneme++;
-                if (song->currPhoneme != 6 && song->sound[song->currPhoneme].songLengthId != 0xFF)
+                if (song->currPhoneme != BARD_SOUND_MAX_LENGTH && song->sound[song->currPhoneme].songLengthId != 0xFF)
                     song->state = 0;
                 else
                 {

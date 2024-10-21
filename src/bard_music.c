@@ -16,7 +16,7 @@ const struct BardSound *GetWordSounds(u16 word)
 {
     u32 category;
     u32 subword;
-    const struct BardSound (*ptr)[6];
+    const struct BardSound (*ptr)[BARD_SOUND_MAX_LENGTH];
 
     if (IsBardWordInvalid(word))
     {
