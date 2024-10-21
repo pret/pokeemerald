@@ -1,6 +1,8 @@
 #ifndef GUARD_BARD_MUSIC_H
 #define GUARD_BARD_MUSIC_H
 
+#define BARD_SOUND_MAX_LENGTH 6
+
 struct BardSound
 {
     /*0x00*/ u8 songLengthId;
@@ -26,8 +28,8 @@ struct BardSong
     /*0x06*/ u16 volume;
     /*0x08*/ s16 pitch;
     /*0x0A*/ s16 voiceInflection;
-    /*0x0C*/ u16 lyrics[6];
-    /*0x18*/ struct BardPhoneme phonemes[6];
+    /*0x0C*/ u16 lyrics[BARD_SOUND_MAX_LENGTH];
+    /*0x18*/ struct BardPhoneme phonemes[BARD_SOUND_MAX_LENGTH];
     /*0x30*/ const struct BardSound *sound;
 };
 
