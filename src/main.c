@@ -258,11 +258,13 @@ static void ReadKeys(void)
     // because it compares the raw key input with the remapped held keys.
     // Note that newAndRepeatedKeys is never remapped either.
 
+#ifdef BUGFIX
+    if (keyInput != 0 && gMain.heldKeysRaw == keyInput)
+#else
     if (keyInput != 0 && gMain.heldKeys == keyInput)
+#endif
     {
-        gMain.keyRepeatCounter--;
-
-        if (gMain.keyRepeatCounter == 0)
+        if (--gMain.keyRepeatCounter == 0)
         {
             gMain.newAndRepeatedKeys = keyInput;
             gMain.keyRepeatCounter = gKeyRepeatContinueDelay;
