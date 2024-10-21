@@ -1479,9 +1479,9 @@ void ShowEasyChatScreen(void)
     case EASY_CHAT_TYPE_BARD_SONG:
         bard = &gSaveBlock1Ptr->oldMan.bard;
         for (i = 0; i < NUM_BARD_SONG_WORDS; i ++)
-            bard->temporaryLyrics[i] = bard->songLyrics[i];
+            bard->newSongLyrics[i] = bard->songLyrics[i];
 
-        words = bard->temporaryLyrics;
+        words = bard->newSongLyrics;
         break;
     case EASY_CHAT_TYPE_INTERVIEW:
         words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].bravoTrainer.words;
