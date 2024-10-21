@@ -1,7 +1,7 @@
 #ifndef GUARD_DATA_BARD_MUSIC_HOBBIES_H
 #define GUARD_DATA_BARD_MUSIC_HOBBIES_H
 const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
-    {
+    [EC_INDEX(EC_WORD_IDOL)] = {
         { .songLengthId = 20 },
         { .songLengthId = 26 },
         { .songLengthId = 51 },
@@ -9,7 +9,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_ANIME)] = {
         { .songLengthId =  0 },
         { .songLengthId = 44 },
         { .songLengthId = 5 },
@@ -17,7 +17,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_SONG)] = {
         { .songLengthId = 23 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -25,7 +25,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_MOVIE)] = {
         { .songLengthId = 39 },
         { .songLengthId = 14 },
         { .songLengthId = 51 },
@@ -33,7 +33,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_SWEETS)] = {
         { .songLengthId = 14 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -41,7 +41,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_CHAT)] = {
         { .songLengthId =  1 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -49,7 +49,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_CHILD_S_PLAY)] = {
         { .songLengthId = 20 },
         { .songLengthId = 38 },
         { .songLengthId = 4 },
@@ -57,7 +57,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_TOYS)] = {
         { .songLengthId = 30 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -65,7 +65,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_MUSIC)] = {
         { .songLengthId = 47 },
         { .songLengthId = 17 },
         { .songLengthId = 51 },
@@ -73,7 +73,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_CARDS)] = {
         { .songLengthId = 23 },
         { .songLengthId = 42 },
         { .songLengthId = 51 },
@@ -81,7 +81,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_SHOPPING)] = {
         { .songLengthId = 21 },
         { .songLengthId = 12 },
         { .songLengthId = 51 },
@@ -89,7 +89,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_CAMERA)] = {
         { .songLengthId =  0 },
         { .songLengthId = 50 },
         { .songLengthId = 44 },
@@ -97,7 +97,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_VIEWING)] = {
         { .songLengthId = 47 },
         { .songLengthId = 12 },
         { .songLengthId = 51 },
@@ -105,7 +105,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_SPECTATOR)] = {
         { .songLengthId = 11 },
         { .songLengthId = 5 },
         { .songLengthId = 48 },
@@ -113,7 +113,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_GOURMET)] = {
         { .songLengthId = 38 },
         { .songLengthId = 5 },
         { .songLengthId = 51 },
@@ -121,7 +121,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_GAME)] = {
         { .songLengthId =  3 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -129,7 +129,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_RPG)] = {
         { .songLengthId = 27 },
         { .songLengthId = 12 },
         { .songLengthId = 12 },
@@ -137,7 +137,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_COLLECTION)] = {
         { .songLengthId = 44 },
         { .songLengthId = 11 },
         { .songLengthId = 27 },
@@ -145,7 +145,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         { .songLengthId = 51 },
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_COMPLETE)] = {
         { .songLengthId = 44 },
         { .songLengthId = 14 },
         { .songLengthId = 51 },
@@ -153,7 +153,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_MAGAZINE)] = {
         { .songLengthId =  2 },
         { .songLengthId = 44 },
         { .songLengthId = 12 },
@@ -161,7 +161,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_WALK)] = {
         { .songLengthId = 27 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -169,7 +169,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_BIKE)] = {
         { .songLengthId = 18 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -177,7 +177,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_HOBBY)] = {
         { .songLengthId = 21 },
         { .songLengthId = 14 },
         { .songLengthId = 51 },
@@ -185,7 +185,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_SPORTS)] = {
         { .songLengthId = 26 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -193,7 +193,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_SOFTWARE)] = {
         { .songLengthId = 23 },
         { .songLengthId = 11 },
         { .songLengthId = 51 },
@@ -201,7 +201,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_SONGS)] = {
         { .songLengthId = 23 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -209,7 +209,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_DIET)] = {
         { .songLengthId = 20 },
         { .songLengthId = 11 },
         { .songLengthId = 51 },
@@ -217,7 +217,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_TREASURE)] = {
         { .songLengthId = 10 },
         { .songLengthId = 50 },
         { .songLengthId = 51 },
@@ -225,7 +225,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_TRAVEL)] = {
         { .songLengthId =  0 },
         { .songLengthId = 38 },
         { .songLengthId = 51 },
@@ -233,7 +233,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_DANCE)] = {
         { .songLengthId =  0 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -241,7 +241,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_CHANNEL)] = {
         { .songLengthId =  0 },
         { .songLengthId = 38 },
         { .songLengthId = 51 },
@@ -249,7 +249,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_MAKING)] = {
         { .songLengthId = 5 },
         { .songLengthId = 14 },
         { .songLengthId = 51 },
@@ -257,7 +257,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_FISHING)] = {
         { .songLengthId = 17 },
         { .songLengthId = 12 },
         { .songLengthId = 51 },
@@ -265,7 +265,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_DATE)] = {
         { .songLengthId = 5 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -273,7 +273,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_DESIGN)] = {
         { .songLengthId = 14 },
         { .songLengthId = 18 },
         { .songLengthId = 51 },
@@ -281,7 +281,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_LOCOMOTIVE)] = {
         { .songLengthId = 26 },
         { .songLengthId = 44 },
         { .songLengthId = 26 },
@@ -289,7 +289,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_PLUSH_DOLL)] = {
         { .songLengthId = 44 },
         { .songLengthId = 29 },
         { .songLengthId = 51 },
@@ -297,7 +297,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_PC)] = {
         { .songLengthId = 14 },
         { .songLengthId = 12 },
         { .songLengthId = 51 },
@@ -305,7 +305,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_FLOWERS)] = {
         { .songLengthId = 33 },
         { .songLengthId = 48 },
         { .songLengthId = 51 },
@@ -313,7 +313,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_HERO)] = {
         { .songLengthId = 12 },
         { .songLengthId = 26 },
         { .songLengthId = 51 },
@@ -321,7 +321,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_NAP)] = {
         { .songLengthId =  2 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -329,7 +329,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_HEROINE)] = {
         { .songLengthId = 12 },
         { .songLengthId = 26 },
         { .songLengthId = 15 },
@@ -337,7 +337,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_FASHION)] = {
         { .songLengthId =  1 },
         { .songLengthId = 44 },
         { .songLengthId = 51 },
@@ -345,7 +345,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_ADVENTURE)] = {
         { .songLengthId =  0 },
         { .songLengthId = 11 },
         { .songLengthId = 50 },
@@ -353,7 +353,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_BOARD)] = {
         { .songLengthId = 26 },
         { .songLengthId = 42 },
         { .songLengthId = 51 },
@@ -361,7 +361,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_BALL)] = {
         { .songLengthId = 27 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -369,7 +369,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_BOOK)] = {
         { .songLengthId = 38 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -377,7 +377,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_FESTIVAL)] = {
         { .songLengthId = 11 },
         { .songLengthId = 14 },
         { .songLengthId = 8 },
@@ -385,7 +385,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_COMICS)] = {
         { .songLengthId = 27 },
         { .songLengthId = 17 },
         { .songLengthId = 51 },
@@ -393,7 +393,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_HOLIDAY)] = {
         { .songLengthId = 29 },
         { .songLengthId = 17 },
         { .songLengthId = 5 },
@@ -401,7 +401,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_PLANS)] = {
         { .songLengthId =  2 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -409,7 +409,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_TRENDY)] = {
         { .songLengthId = 9 },
         { .songLengthId = 14 },
         { .songLengthId = 51 },
@@ -417,7 +417,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_VACATION)] = {
         { .songLengthId =  3 },
         { .songLengthId = 5 },
         { .songLengthId = 29 },
@@ -425,7 +425,7 @@ const struct BardSound gBardSounds_Hobbies[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_LOOK)] = {
         { .songLengthId = 38 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },

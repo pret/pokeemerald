@@ -1,7 +1,7 @@
 #ifndef GUARD_DATA_BARD_MUSIC_SPEECH_H
 #define GUARD_DATA_BARD_MUSIC_SPEECH_H
 const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
-    {
+    [EC_INDEX(EC_WORD_LISTEN)] = {
         { .songLengthId = 9 },
         { .songLengthId = 16 },
         { .songLengthId = 51 },
@@ -9,7 +9,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_NOT_VERY)] = {
         { .songLengthId = 21 },
         { .songLengthId = 9 },
         { .songLengthId = 12 },
@@ -17,7 +17,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_MEAN)] = {
         { .songLengthId = 14 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -25,7 +25,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_LIE)] = {
         { .songLengthId = 18 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -33,7 +33,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_LAY)] = {
         { .songLengthId = 5 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -41,7 +41,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_RECOMMEND)] = {
         { .songLengthId = 9 },
         { .songLengthId = 44 },
         { .songLengthId = 10 },
@@ -49,7 +49,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_NITWIT)] = {
         { .songLengthId = 15 },
         { .songLengthId = 15 },
         { .songLengthId = 51 },
@@ -57,7 +57,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_QUITE)] = {
         { .songLengthId = 20 },
         { .songLengthId = 11 },
         { .songLengthId = 51 },
@@ -65,7 +65,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_FROM)] = {
         { .songLengthId = 43 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -73,7 +73,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_FEELING)] = {
         { .songLengthId = 12 },
         { .songLengthId = 14 },
         { .songLengthId = 51 },
@@ -81,7 +81,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_BUT)] = {
         { .songLengthId = 44 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -89,7 +89,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_HOWEVER)] = {
         { .songLengthId = 33 },
         { .songLengthId = 9 },
         { .songLengthId = 48 },
@@ -97,7 +97,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_CASE)] = {
         { .songLengthId = 12 },
         { .songLengthId = 11 },
         { .songLengthId = 51 },
@@ -105,7 +105,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_THE)] = {
         { .songLengthId = 43 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -113,7 +113,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_MISS)] = {
         { .songLengthId = 17 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
@@ -121,7 +121,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_HOW)] = {
         { .songLengthId = 33 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -129,7 +129,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_HIT)] = {
         { .songLengthId = 17 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -137,7 +137,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_ENOUGH)] = {
         { .songLengthId = 14 },
         { .songLengthId = 44 },
         { .songLengthId = 51 },
@@ -145,7 +145,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_A_LOT)] = {
         { .songLengthId =  3 },
         { .songLengthId = 23 },
         NULL_BARD_SOUND,
@@ -153,7 +153,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_A_LITTLE)] = {
         { .songLengthId =  3 },
         { .songLengthId = 17 },
         { .songLengthId = 38 },
@@ -161,7 +161,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_ABSOLUTELY)] = {
         { .songLengthId =  0 },
         { .songLengthId = 44 },
         { .songLengthId = 45 },
@@ -169,7 +169,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         { .songLengthId = 51 },
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_AND)] = {
         { .songLengthId =  0 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
@@ -177,7 +177,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_ONLY)] = {
         { .songLengthId = 26 },
         { .songLengthId = 14 },
         { .songLengthId = 51 },
@@ -185,7 +185,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_AROUND)] = {
         { .songLengthId = 10 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
@@ -193,7 +193,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_PROBABLY)] = {
         { .songLengthId = 21 },
         { .songLengthId = 44 },
         { .songLengthId = 14 },
@@ -201,7 +201,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_IF)] = {
         { .songLengthId = 17 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -209,7 +209,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_VERY)] = {
         { .songLengthId = 10 },
         { .songLengthId = 14 },
         { .songLengthId = 51 },
@@ -217,7 +217,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_A_TINY_BIT)] = {
         { .songLengthId = 44 },
         { .songLengthId = 20 },
         { .songLengthId = 12 },
@@ -225,7 +225,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_WILD)] = {
         { .songLengthId = 18 },
         { .songLengthId = 11 },
         { .songLengthId = 51 },
@@ -233,7 +233,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_THAT_S)] = {
         { .songLengthId =  0 },
         { .songLengthId = 11 },
         NULL_BARD_SOUND,
@@ -241,7 +241,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_JUST)] = {
         { .songLengthId = 44 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
@@ -249,7 +249,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_EVEN_SO)] = {
         { .songLengthId = 12 },
         { .songLengthId = 11 },
         { .songLengthId = 26 },
@@ -257,7 +257,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_MUST_BE)] = {
         { .songLengthId = 44 },
         { .songLengthId = 14 },
         { .songLengthId = 51 },
@@ -265,7 +265,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_NATURALLY)] = {
         { .songLengthId =  1 },
         { .songLengthId = 48 },
         { .songLengthId = 6 },
@@ -273,7 +273,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         { .songLengthId = 51 },
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_FOR_NOW)] = {
         { .songLengthId = 26 },
         { .songLengthId = 35 },
         NULL_BARD_SOUND,
@@ -281,7 +281,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_UNDERSTOOD)] = {
         { .songLengthId = 44 },
         { .songLengthId = 50 },
         { .songLengthId = 39 },
@@ -289,7 +289,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_JOKING)] = {
         { .songLengthId = 24 },
         { .songLengthId = 14 },
         { .songLengthId = 51 },
@@ -297,7 +297,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_READY)] = {
         { .songLengthId = 9 },
         { .songLengthId = 14 },
         { .songLengthId = 51 },
@@ -305,7 +305,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_SOMETHING)] = {
         { .songLengthId = 27 },
         { .songLengthId = 14 },
         NULL_BARD_SOUND,
@@ -313,7 +313,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_SOMEHOW)] = {
         { .songLengthId = 27 },
         { .songLengthId = 35 },
         { .songLengthId = 51 },
@@ -321,7 +321,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_ALTHOUGH)] = {
         { .songLengthId = 6 },
         { .songLengthId = 26 },
         { .songLengthId = 51 },
@@ -329,7 +329,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_ALSO)] = {
         { .songLengthId = 6 },
         { .songLengthId = 26 },
         { .songLengthId = 51 },
@@ -337,7 +337,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_PERFECT)] = {
         { .songLengthId = 50 },
         { .songLengthId = 11 },
         { .songLengthId = 51 },
@@ -345,7 +345,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_AS_MUCH_AS)] = {
         { .songLengthId =  1 },
         { .songLengthId = 44 },
         { .songLengthId =  1 },
@@ -353,7 +353,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_REALLY)] = {
         { .songLengthId = 12 },
         { .songLengthId = 10 },
         { .songLengthId = 14 },
@@ -361,7 +361,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_TRULY)] = {
         { .songLengthId = 39 },
         { .songLengthId = 12 },
         { .songLengthId = 51 },
@@ -369,7 +369,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_SERIOUSLY)] = {
         { .songLengthId = 17 },
         { .songLengthId = 14 },
         { .songLengthId = 38 },
@@ -377,7 +377,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         { .songLengthId = 51 },
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_TOTALLY)] = {
         { .songLengthId = 24 },
         { .songLengthId =  7 },
         { .songLengthId = 14 },
@@ -385,7 +385,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_UNTIL)] = {
         { .songLengthId = 44 },
         { .songLengthId = 16 },
         { .songLengthId = 51 },
@@ -393,7 +393,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_AS_IF)] = {
         { .songLengthId =  1 },
         { .songLengthId = 17 },
         { .songLengthId = 51 },
@@ -401,7 +401,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_MOOD)] = {
         { .songLengthId = 40 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -409,7 +409,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_RATHER)] = {
         { .songLengthId =  0 },
         { .songLengthId = 50 },
         { .songLengthId = 51 },
@@ -417,7 +417,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_AWFULLY)] = {
         { .songLengthId = 6 },
         { .songLengthId = 38 },
         { .songLengthId = 14 },
@@ -425,7 +425,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_MODE)] = {
         { .songLengthId = 26 },
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
@@ -433,7 +433,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_MORE)] = {
         { .songLengthId = 26 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -441,7 +441,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_TOO_LATE)] = {
         { .songLengthId = 39 },
         { .songLengthId = 5 },
         { .songLengthId = 51 },
@@ -449,7 +449,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_FINALLY)] = {
         { .songLengthId = 18 },
         { .songLengthId = 6 },
         { .songLengthId = 14 },
@@ -457,7 +457,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_ANY)] = {
         { .songLengthId = 8 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
@@ -465,7 +465,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_INSTEAD)] = {
         { .songLengthId = 15 },
         { .songLengthId = 11 },
         { .songLengthId = 51 },
@@ -473,7 +473,7 @@ const struct BardSound gBardSounds_Speech[][BARD_SOUND_MAX_LENGTH] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    {
+    [EC_INDEX(EC_WORD_FANTASTIC)] = {
         { .songLengthId = 43 },
         { .songLengthId = 51 },
         { .songLengthId = 51 },
