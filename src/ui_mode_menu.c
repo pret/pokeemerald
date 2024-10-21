@@ -805,10 +805,10 @@ static void ModeMenu_SetupCB(void)
         sOptions->sel_diff[MENUITEM_DIFF_MEGAS]         = gSaveBlock2Ptr->modeMegas;
         #endif
         //randomizer settings
-        sOptions->sel_rand[MENUITEM_RAND_MOVES]         = gSaveBlock2Ptr->randomMoves;
-        sOptions->sel_rand[MENUITEM_RAND_ABILITIES]     = gSaveBlock2Ptr->randomAbilities;
-        sOptions->sel_rand[MENUITEM_RAND_BASE_STATS]    = gSaveBlock2Ptr->randomBST;
-        sOptions->sel_rand[MENUITEM_RAND_TYPES]         = gSaveBlock2Ptr->randomType;
+        sOptions->sel_rand[MENUITEM_RAND_MOVES]         = !(gSaveBlock2Ptr->randomMoves);
+        sOptions->sel_rand[MENUITEM_RAND_ABILITIES]     = !(gSaveBlock2Ptr->randomAbilities);
+        sOptions->sel_rand[MENUITEM_RAND_BASE_STATS]    = !(gSaveBlock2Ptr->randomBST);
+        sOptions->sel_rand[MENUITEM_RAND_TYPES]         = !(gSaveBlock2Ptr->randomType);
         //sOptions->sel_rand[MENUITEM_RAND_EVOS]          = gSaveBlock2Ptr->randomEvos;
         gMain.state++;
         break;
@@ -1329,10 +1329,10 @@ static void Task_ModeMenuSave(u8 taskId) // ToDo: add missing flags handling
     gSaveBlock2Ptr->modeSaveDeletion = sOptions->sel_diff[MENUITEM_DIFF_SAVE_DELETION];
 
     //randomizer settings
-    gSaveBlock2Ptr->randomMoves      = sOptions->sel_rand[MENUITEM_RAND_MOVES];
-    gSaveBlock2Ptr->randomAbilities  = sOptions->sel_rand[MENUITEM_RAND_ABILITIES];
-    gSaveBlock2Ptr->randomBST        = sOptions->sel_rand[MENUITEM_RAND_BASE_STATS];
-    gSaveBlock2Ptr->randomType       = sOptions->sel_rand[MENUITEM_RAND_TYPES];
+    gSaveBlock2Ptr->randomMoves      = !(sOptions->sel_rand[MENUITEM_RAND_MOVES]);
+    gSaveBlock2Ptr->randomAbilities  = !(sOptions->sel_rand[MENUITEM_RAND_ABILITIES]);
+    gSaveBlock2Ptr->randomBST        = !(sOptions->sel_rand[MENUITEM_RAND_BASE_STATS]);
+    gSaveBlock2Ptr->randomType       = !(sOptions->sel_rand[MENUITEM_RAND_TYPES]);
     //gSaveBlock2Ptr->randomEvos       = sOptions->sel_rand[MENUITEM_RAND_EVOS];
 
 

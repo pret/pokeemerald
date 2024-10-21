@@ -148,11 +148,11 @@ void SetDefaultOptions(void)
         gSaveBlock2Ptr->modeDuplicates = 1;
         gSaveBlock2Ptr->modeMegas = 1;
         gSaveBlock2Ptr->modeHealFloors10 = 0;
-        gSaveBlock2Ptr->randomMoves = 1;
-        gSaveBlock2Ptr->randomAbilities = 1;
-        gSaveBlock2Ptr->randomBST = 1;
-        gSaveBlock2Ptr->randomType = 1;
-        gSaveBlock2Ptr->randomEvos = 1;
+        gSaveBlock2Ptr->randomMoves = 0;
+        gSaveBlock2Ptr->randomAbilities = 0;
+        gSaveBlock2Ptr->randomBST = 0;
+        gSaveBlock2Ptr->randomType = 0;
+        gSaveBlock2Ptr->randomEvos = 0;
     }
 
     //set flags/vars

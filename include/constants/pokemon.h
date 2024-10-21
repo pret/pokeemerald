@@ -25,6 +25,12 @@
 #define TYPE_STELLAR          20
 #define NUMBER_OF_MON_TYPES   21
 
+#if (GEN_LATEST >= GEN_6)
+#define RANDOM_MON_TYPES   20
+#else
+#define RANDOM_MON_TYPES   18
+#endif
+
 // Pokémon egg groups
 #define EGG_GROUP_NONE                0
 #define EGG_GROUP_MONSTER             1

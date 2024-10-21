@@ -9669,7 +9669,7 @@ void DebugTestRandomness(void)
 }
 
 #define RANDOM_TYPE_COUNT ARRAY_COUNT(sOneTypeChallengeValidTypes)
-static const u8  sOneTypeChallengeValidTypes[NUMBER_OF_MON_TYPES-1] =
+static const u8  sOneTypeChallengeValidTypes[RANDOM_MON_TYPES - 2] =
 {
     TYPE_NORMAL   ,
     TYPE_FIGHTING ,
@@ -9705,7 +9705,7 @@ u8 GetTypeBySpecies(u16 species, u8 typeNum)
     if (!gSaveBlock2Ptr->randomType)
         return type;
 
-    type = sOneTypeChallengeValidTypes[RandomSeededModulo2(type + typeNum + species, NUMBER_OF_MON_TYPES - 1)];
+    type = sOneTypeChallengeValidTypes[RandomSeededModulo2(type + typeNum + species, RANDOM_MON_TYPES - 2) % (RANDOM_MON_TYPES - 2)];
     return type;
 }
 
