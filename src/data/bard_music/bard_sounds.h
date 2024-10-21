@@ -24,7 +24,7 @@
 #include "events.h"
 #include "trendysaying.h"
 
-const struct BardSound (*const gBardSoundsTable[EC_NUM_GROUPS])[6] = {
+const struct BardSound (*const gBardSoundsTable[EC_NUM_GROUPS])[BARD_SOUND_MAX_LENGTH] = {
     [EC_GROUP_POKEMON]          = NULL, // Handled by gBardSounds_Pokemon
     [EC_GROUP_TRAINER]          = gBardSounds_Trainer,
     [EC_GROUP_STATUS]           = gBardSounds_Status,

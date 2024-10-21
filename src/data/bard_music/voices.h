@@ -1,6 +1,6 @@
 #ifndef GUARD_DATA_BARD_MUSIC_VOICES_H
 #define GUARD_DATA_BARD_MUSIC_VOICES_H
-const struct BardSound gBardSounds_Voices[][6] = {
+const struct BardSound gBardSounds_Voices[][BARD_SOUND_MAX_LENGTH] = {
     {
         { .songLengthId = 18 },
         { .songLengthId = 51 },

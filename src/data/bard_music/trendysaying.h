@@ -1,6 +1,6 @@
 #ifndef GUARD_DATA_BARD_MUSIC_TRENDYSAYING_H
 #define GUARD_DATA_BARD_MUSIC_TRENDYSAYING_H
-const struct BardSound gBardSounds_TrendySaying[][6] = {
+const struct BardSound gBardSounds_TrendySaying[][BARD_SOUND_MAX_LENGTH] = {
     {
         { .songLengthId = 5 },
         { .songLengthId =  2 },

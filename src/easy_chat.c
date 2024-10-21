@@ -1478,7 +1478,7 @@ void ShowEasyChatScreen(void)
         break;
     case EASY_CHAT_TYPE_BARD_SONG:
         bard = &gSaveBlock1Ptr->oldMan.bard;
-        for (i = 0; i < BARD_SONG_LENGTH; i ++)
+        for (i = 0; i < NUM_BARD_SONG_WORDS; i ++)
             bard->temporaryLyrics[i] = bard->songLyrics[i];
 
         words = bard->temporaryLyrics;
