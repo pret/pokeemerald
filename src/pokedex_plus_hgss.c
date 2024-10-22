@@ -460,7 +460,8 @@ struct PokedexView
     u16 maxScrollTimer;
     u16 scrollSpeed;
     u16 unkArr1[4]; // Cleared, never read
-    u8 filler[8];
+    u16 originalSearchSelectionNum;
+    u8 filler[6];
     u8 currentPage;
     u8 currentPageBackup;
     bool8 isSearchResults:1;
@@ -2139,6 +2140,7 @@ static void ResetPokedexView(struct PokedexView *pokedexView)
         pokedexView->unkArr2[i] = 0;
     for (i = 0; i < ARRAY_COUNT(pokedexView->unkArr3); i++)
         pokedexView->unkArr3[i] = 0;
+    pokedexView->originalSearchSelectionNum = 0;
 }
 
 static void VBlankCB_Pokedex(void)
@@ -2438,6 +2440,13 @@ static bool8 LoadPokedexListPage(u8 page)
     case 3:
         if (page == PAGE_MAIN)
             CreatePokedexList(sPokedexView->dexMode, sPokedexView->dexOrder);
+        if (sPokedexView->originalSearchSelectionNum != 0)
+        {
+            // when returning to search results after selecting an evo, we have to restore
+            // the original dexNum because the search results page doesn't rebuild the list
+            sPokedexListItem->dexNum = sPokedexView->originalSearchSelectionNum;
+            sPokedexView->originalSearchSelectionNum = 0;
+        }
         CreateMonSpritesAtPos(sPokedexView->selectedPokemon, 0xE);
         sPokedexView->statBarsSpriteId = 0xFF;  //stat bars
         CreateStatBars(&sPokedexView->pokedexList[sPokedexView->selectedPokemon]); //stat bars
@@ -6146,6 +6155,9 @@ static void Task_HandleEvolutionScreenInput(u8 taskId)
         {
             u16 targetSpecies   = sPokedexView->sEvoScreenData.targetSpecies[sPokedexView->sEvoScreenData.menuPos];
             u16 dexNum          = SpeciesToNationalPokedexNum(targetSpecies);
+            if (sPokedexView->isSearchResults && sPokedexView->originalSearchSelectionNum == 0)
+                sPokedexView->originalSearchSelectionNum = sPokedexListItem->dexNum;
+                
             sPokedexListItem->dexNum = dexNum;
             sPokedexListItem->seen   = GetSetPokedexFlag(dexNum, FLAG_GET_SEEN);
             sPokedexListItem->owned  = GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT);
@@ -6881,6 +6893,9 @@ static void Task_HandleFormsScreenInput(u8 taskId)
         {
             u8 formId = sPokedexView->sFormScreenData.formIds[menuPos];
             u16 formSpecies = GetFormSpeciesId(NationalPokedexNumToSpecies(sPokedexListItem->dexNum), formId);
+            if (sPokedexView->isSearchResults && sPokedexView->originalSearchSelectionNum == 0)
+                sPokedexView->originalSearchSelectionNum = sPokedexListItem->dexNum;
+
             if (formSpecies == GetFormSpeciesId(formSpecies, 0))
                 sPokedexView->formSpecies = 0;
             else
