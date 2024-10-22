@@ -281,7 +281,7 @@ EventScript_ResetAllMapFlags::
 	setflag FLAG_MOVE_RELEARNER
 	setflag FLAG_MOVER_OBJECT
 	setflag FLAG_END_GAME_STATUE
-	setflag FLAG_END_GAME_ARCHIE
+	setflag FLAG_BOSS_ENCOUNTER
 	clearflag FLAG_RANDOM_MODE
 	clearflag FLAG_DOUBLES_MODE
 	clearflag FLAG_FLOOR_100
@@ -291,6 +291,7 @@ EventScript_ResetAllMapFlags::
 	setflag FLAG_NO_DUPLICATES
 	setvar B_BATTLE_SPEED, 1
 	callnative ClearAllRandomEncounters
+	callnative ClearAllRandomBossEncounters
 	call EventScript_ResetAllBerries
 	end
 

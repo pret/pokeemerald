@@ -271,7 +271,7 @@
 #define VAR_LAST_FLOOR_TRAINER_NUMBER                                0x40FA // Unused Var
 #define VAR_BATTLE_SPEED                                0x40FB // Unused Var
 #define VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY                                0x40FC // Unused Var
-#define VAR_UNUSED_0x40FD                                0x40FD // Unused Var
+#define VAR_CURRENT_BOSS                                0x40FD // Unused Var
 #define VAR_CURRENT_OVERWORLD_ENCOUNTER_INDEX                                0x40FE // Unused Var
 #define VAR_OVERWORLD_MON_SPECIES                                0x40FF // Unused Var
 
@@ -301,7 +301,7 @@
 #define VAR_CONTEST_CATEGORY          0x8011
 #define VAR_MON_BOX_ID                0x8012
 #define VAR_MON_BOX_POS               0x8013
-#define VAR_UNUSED_0x8014             0x8014
+#define VAR_TRAINER_NUM             0x8014
 #define VAR_TRAINER_BATTLE_OPPONENT_A 0x8015 // Alias of gTrainerBattleOpponent_A
 
 #define SPECIAL_VARS_END              0x8015

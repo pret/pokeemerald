@@ -1,37 +1,52 @@
-
-PitBoss_Archie::
-	lockall
-	setflag FLAG_START_ARCHIE_BATTLE
-	setflag FLAG_FLOOR_100
+PitBoss_BossEncounter::
+	lock
+	faceplayer
+	setflag FLAG_START_BOSS_ENCOUNTER
 	special HealPlayerParty
-	goto_if_set FLAG_DOUBLES_MODE, PitBossDoublesArchie
-	trainerbattle_single TRAINER_ARCHIE_PIT_BOSS, PitArena_Text_Intro, PitArena_Text_Defeat, PitBoss_ArchieBattleFinished
+	goto_if_set FLAG_DOUBLES_MODE, PitBoss_CommonScriptDoubles
+	trainerbattle_single TRAINER_RANDOM_PIT_BOSS, PitArena_Text_Intro, PitArena_Text_Defeat, PitBoss_CommonAfterBattleScript
+	clearflag FLAG_START_BOSS_ENCOUNTER
 	releaseall
 	end
 
-PitBossDoublesArchie::
-	trainerbattle_double TRAINER_ARCHIE_PIT_BOSS_DOUBLES, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_Text_NotEnoughMons, PitBoss_ArchieBattleFinished
+PitBoss_CommonScriptDoubles::
+	trainerbattle_double TRAINER_RANDOM_PIT_BOSS_DOUBLES, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_Text_NotEnoughMons, PitBoss_CommonAfterBattleScript
 	releaseall
 	end
 
-PitBoss_ArchieBattleFinished::
-	lockall
-	clearflag FLAG_START_ARCHIE_BATTLE
-	msgbox Pit_EndGameStatue_Text1, MSGBOX_DEFAULT
-	closemessage
-	fadescreen FADE_TO_BLACK
-	removeobject 1
-	setflag FLAG_END_GAME_ARCHIE
-	addobject 2
-	clearflag FLAG_END_GAME_STATUE
-	fadescreen FADE_FROM_BLACK
+PitBoss_CommonAfterBattleScript::
+	clearflag FLAG_START_BOSS_ENCOUNTER
+	goto_if_eq VAR_PIT_FLOOR, 100, PitBoss_FinalBossAfterBattle
 	callnative SetAutosaveFlag
-	goto_if_unset FLAG_AUTO_SAVE, PitArchieNoAutoSave
+	goto_if_unset FLAG_AUTO_SAVE, PitBoss_NoAutoSave
 	clearflag FLAG_SAVING_FIELD_EFFECT
 	dofieldeffect(FLDEFF_SAVING)
 	waitfieldeffect(FLDEFF_SAVING)
 	callnative AutoSave
-PitArchieNoAutoSave:
+PitBoss_NoAutoSave::
+	lockall
+	callnative BufferMapFloorString
+	warpteleport MAP_PIT_REST_FLOOR, 9, 9
+	waitstate
+	releaseall
+	end
+
+PitBoss_FinalBossAfterBattle::
+	msgbox Pit_EndGameStatue_Text1, MSGBOX_DEFAULT
+	closemessage
+	fadescreen FADE_TO_BLACK
+	removeobject 1
+	setflag FLAG_BOSS_ENCOUNTER
+	addobject 2
+	clearflag FLAG_END_GAME_STATUE
+	fadescreen FADE_FROM_BLACK
+	callnative SetAutosaveFlag
+	goto_if_unset FLAG_AUTO_SAVE, PitFinalBossNoAutoSave
+	clearflag FLAG_SAVING_FIELD_EFFECT
+	dofieldeffect(FLDEFF_SAVING)
+	waitfieldeffect(FLDEFF_SAVING)
+	callnative AutoSave
+PitFinalBossNoAutoSave:
 	releaseall
 	end
 

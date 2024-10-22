@@ -581,7 +581,7 @@ static void CB2_InitBattleInternal(void)
 
     gBattleCommunication[MULTIUSE_STATE] = 0;
 
-    //DebugPrintf("Reached End Of Init Battle Internal: %d", gSpecialVar_Unused_0x8014);
+    //DebugPrintf("Reached End Of Init Battle Internal: %d", gSpecialVar_TrainerNumber);
 }
 
 #define BUFFER_PARTY_VS_SCREEN_STATUS(party, flags, i)                      \
@@ -2014,11 +2014,11 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
 
         if(!isPlayer)
         {
-            if ((VarGet(VAR_PIT_FLOOR) < 25) || (gSaveBlock2Ptr->mode3MonsOnly == 1))
+            if ((VarGet(VAR_PIT_FLOOR) <= 25) || (gSaveBlock2Ptr->mode3MonsOnly == 1))
                 monsCount = 3;
-            else if (VarGet(VAR_PIT_FLOOR) < 50)
+            else if (VarGet(VAR_PIT_FLOOR) <= 50)
                 monsCount = 4;
-            else if (VarGet(VAR_PIT_FLOOR) < 75)
+            else if (VarGet(VAR_PIT_FLOOR) <= 75)
                 monsCount = 5;
             else
                 monsCount = 6;
@@ -2031,18 +2031,20 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             s32 ball = -1;
             u32 personalityHash = GeneratePartyHash(trainer, i);
             const struct TrainerMon *partyData = trainer->party;
+            struct TrainerMon acePokemon = {0};
             u32 otIdType = OT_ID_RANDOM_NO_SHINY;
             u32 fixedOtId = 0;
             u32 ability = 0;
             u16 item = 0;
             u8 j = i;
+            u8 isAcePokemon = FALSE;
 
-            if((gSaveBlock2Ptr->mode3MonsOnly == 1) && !(isPlayer))
+            if (((gSpecialVar_TrainerNumber == TRAINER_RANDOM_PIT_BOSS) || (gSpecialVar_TrainerNumber == TRAINER_RANDOM_PIT_BOSS_DOUBLES)) && (j == (monsCount - 1)) && !(isPlayer)) 
             {
-                if (((gSpecialVar_Unused_0x8014 == TRAINER_ARCHIE_PIT_BOSS) || (gSpecialVar_Unused_0x8014 == TRAINER_ARCHIE_PIT_BOSS_DOUBLES)) && (i == 2)) 
-                {
-                    j = 5;
-                }
+                memcpy(&acePokemon, GetRandomBossEncounterAcePokemon(), sizeof(struct TrainerMon));
+                partyData = &acePokemon;
+                j = 0;
+                isAcePokemon = TRUE;
             }
 
             if (trainer->doubleBattle == TRUE)
@@ -2059,7 +2061,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(MON_FEMALE, partyData[j].species);
             else if (partyData[j].gender == TRAINER_MON_RANDOM_GENDER)
                 personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(Random() & 1 ? MON_MALE : MON_FEMALE, partyData[j].species);
-            ModifyPersonalityForNature(&personalityValue, partyData[i].nature);
+            ModifyPersonalityForNature(&personalityValue, partyData[j].nature);
             if (partyData[j].isShiny)
             {
                 otIdType = OT_ID_PRESET;
@@ -2072,13 +2074,9 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 u16 monLevel = VarGet(VAR_PIT_FLOOR);
                 if (monLevel > 100)
                     monLevel = 100;
-                if (((gSpecialVar_Unused_0x8014 == TRAINER_ARCHIE_PIT_BOSS) || (gSpecialVar_Unused_0x8014 == TRAINER_ARCHIE_PIT_BOSS_DOUBLES)) && (j == 5)) 
+                if (isAcePokemon)
                 {
-                    // = Kyogre slot
-                    monLevel = 100;
                     CreateMon(&party[i], partyData[j].species, monLevel, MAX_PER_STAT_IVS, TRUE, personalityValue, otIdType, fixedOtId);
-                    //if (!isPlayer)
-                       //DebugPrintf("Reached Create NPC Kyogre: %d", gSpecialVar_Unused_0x8014);
                 }
                 else if (monLevel == 100)
                 {
@@ -2091,7 +2089,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                         evolutions = GetSpeciesEvolutions(newSpecies);
                         //DebugPrintf("Evolved: %d", newSpecies);
                     }
-                    CreateMon(&party[i], newSpecies, monLevel, 0, TRUE, personalityValue, otIdType, fixedOtId);
+                    CreateMon(&party[i], newSpecies, monLevel, MAX_PER_STAT_IVS, TRUE, personalityValue, otIdType, fixedOtId);
                 }
                 else
                 {
@@ -2260,7 +2258,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     u8 retVal;
     if (trainerNum == TRAINER_SECRET_BASE)
         return 0;
-    gSpecialVar_Unused_0x8014 = trainerNum;
+    gSpecialVar_TrainerNumber = trainerNum;
     retVal = CreateNPCTrainerPartyFromTrainer(party, &gTrainers[trainerNum], firstTrainer, gBattleTypeFlags, FALSE);
 
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
@@ -2269,7 +2267,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     {   
         gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
     }
-    //DebugPrintf("Reached End Of Parent Function: %d", gSpecialVar_Unused_0x8014);
+    //DebugPrintf("Reached End Of Parent Function: %d", gSpecialVar_TrainerNumber);
     return retVal;
 }
 

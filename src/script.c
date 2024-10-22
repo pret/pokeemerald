@@ -25,6 +25,8 @@
 #include "event_scripts.h"
 #include "sound.h"
 #include "constants/songs.h"
+#include "constants/trainers.h"
+#include "data.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
@@ -1392,4 +1394,225 @@ void TrySetRandomMusic(void)
     u16 songIndex = Random() % NUM_OVERWORLD_SONGS;
     Overworld_SetSavedMusic(sRandomOverworldSongs[songIndex]);
     PlayNewMapMusic(sRandomOverworldSongs[songIndex]);
+}
+
+
+// Boss Encounter Code
+
+struct RandomBossEncounters {
+    u16 graphicsId;
+    u16 trainerPic;
+    u16 flagId; // id into gSaveBlock2Ptr->randomBossEncounters not normal flags
+    const u8 *bossName;
+    const u8 *bossApproachText;
+    const u8 *bossLoseText;
+    const u8 *bossAceText;
+    const struct TrainerMon trainerAce;
+};
+
+#define RANDOM_BOSS_ENCOUNTER_COUNT ARRAY_COUNT(sRandomBossEncounterArray)
+static const struct RandomBossEncounters sRandomBossEncounterArray[] = {
+    {
+        .graphicsId = OBJ_EVENT_GFX_ARCHIE,
+        .trainerPic = TRAINER_PIC_AQUA_LEADER_ARCHIE,
+        .flagId = 0,
+        .bossName = COMPOUND_STRING("Archie"),
+        .bossApproachText =  COMPOUND_STRING("You've made it quite far...\n"
+                                            "But your run ends here!$"),
+        .bossLoseText =     COMPOUND_STRING("Well... That went about as\n"
+                                            "well as dry land.$"),
+        .bossAceText =      COMPOUND_STRING("You have proven yourself worthy!\p"
+                                            "But I have one more trick\n"
+                                            "up my sleeve.\p"
+                                            "Welcome the GOD OF THE SEAS...$"),
+        .trainerAce =   {
+                            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+                            .ev = TRAINER_PARTY_EVS(0, 0, 4, 252, 252, 0),
+                            .lvl = 100,
+                            .species = SPECIES_KYOGRE,
+                            .heldItem = ITEM_LEFTOVERS,
+                            .ability = 0,
+                            .nature = NATURE_MODEST,
+                            .moves = {MOVE_LIQUIDATION, MOVE_THUNDER, MOVE_ORIGIN_PULSE, MOVE_ICE_BEAM}
+                        },
+    },
+    {
+        .graphicsId = OBJ_EVENT_GFX_MAXIE,
+        .trainerPic = TRAINER_PIC_MAGMA_LEADER_MAXIE,
+        .flagId = 1,
+        .bossName = COMPOUND_STRING("Maxie"),
+        .bossApproachText =  COMPOUND_STRING("You've made it quite far...\n"
+                                            "But your run ends here!$"),
+        .bossLoseText =     COMPOUND_STRING("Well... That went about as\n"
+                                            "well as the ocean.$"),
+        .bossAceText =      COMPOUND_STRING("You have proven yourself worthy!\p"
+                                            "But I have one more trick\n"
+                                            "up my sleeve.\p"
+                                            "Welcome the GOD OF THE EARTH...$"),
+        .trainerAce =   {
+                            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+                            .ev = TRAINER_PARTY_EVS(0, 0, 4, 252, 252, 0),
+                            .lvl = 100,
+                            .species = SPECIES_GROUDON,
+                            .heldItem = ITEM_LEFTOVERS,
+                            .ability = 0,
+                            .nature = NATURE_MODEST,
+                            .moves = {MOVE_LIQUIDATION, MOVE_THUNDER, MOVE_ORIGIN_PULSE, MOVE_ICE_BEAM}
+                        },
+    },
+    {
+        .graphicsId = OBJ_EVENT_GFX_WATTSON,
+        .trainerPic = TRAINER_PIC_LEADER_WATTSON,
+        .flagId = 2,
+        .bossName = COMPOUND_STRING("Watson"),
+        .bossApproachText =  COMPOUND_STRING("You've made it quite far...\n"
+                                            "But your run ends here!$"),
+        .bossLoseText =     COMPOUND_STRING("Well... That went about as\n"
+                                            "well as the ground.$"),
+        .bossAceText =      COMPOUND_STRING("You have proven yourself worthy!\p"
+                                            "But I have one more trick\n"
+                                            "up my sleeve.\p"
+                                            "Welcome the GOD OF THE LIGHTNING...$"),
+        .trainerAce =   {
+                            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+                            .ev = TRAINER_PARTY_EVS(0, 0, 4, 252, 252, 0),
+                            .lvl = 100,
+                            .species = SPECIES_MANECTRIC,
+                            .heldItem = ITEM_LEFTOVERS,
+                            .ability = 0,
+                            .nature = NATURE_MODEST,
+                            .moves = {MOVE_LIQUIDATION, MOVE_THUNDER, MOVE_ORIGIN_PULSE, MOVE_ICE_BEAM}
+                        },
+    },
+    {
+        .graphicsId = OBJ_EVENT_GFX_NORMAN,
+        .trainerPic = TRAINER_PIC_LEADER_NORMAN,
+        .flagId = 3,
+        .bossName = COMPOUND_STRING("Norman"),
+        .bossApproachText =  COMPOUND_STRING("You've made it quite far...\n"
+                                            "But your run ends here!$"),
+        .bossLoseText =     COMPOUND_STRING("Well... That went about as\n"
+                                            "well as the ground.$"),
+        .bossAceText =      COMPOUND_STRING("You have proven yourself worthy!\p"
+                                            "But I have one more trick\n"
+                                            "up my sleeve.\p"
+                                            "Welcome the GOD OF THE LIGHTNING...$"),
+        .trainerAce =   {
+                            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+                            .ev = TRAINER_PARTY_EVS(0, 0, 4, 252, 252, 0),
+                            .lvl = 100,
+                            .species = SPECIES_SLAKING,
+                            .heldItem = ITEM_LEFTOVERS,
+                            .ability = 0,
+                            .nature = NATURE_MODEST,
+                            .moves = {MOVE_LIQUIDATION, MOVE_THUNDER, MOVE_ORIGIN_PULSE, MOVE_ICE_BEAM}
+                        },
+    },
+};
+
+u8 *GetBossEncounterFlagPointer(u16 id)
+{
+    return &gSaveBlock2Ptr->randomBossEncounters[id / 8];
+}
+
+u8 BossEncounterFlagSet(u16 id)
+{
+    u8 *ptr = GetBossEncounterFlagPointer(id);
+    if (ptr)
+        *ptr |= 1 << (id & 7);
+    return 0;
+}
+
+u8 BossEncounterFlagClear(u16 id)
+{
+    u8 *ptr = GetBossEncounterFlagPointer(id);
+    if (ptr)
+        *ptr &= ~(1 << (id & 7));
+    return 0;
+}
+
+bool8 BossEncounterFlagGet(u16 id)
+{
+    u8 *ptr = GetBossEncounterFlagPointer(id);
+
+    if (!ptr)
+        return FALSE;
+
+    if (!(((*ptr) >> (id & 7)) & 1))
+        return FALSE;
+
+    return TRUE;
+}
+
+bool8 RemainingBossEncounters(void)
+{
+    u8 i = 0;
+    for(i = 0; i < RANDOM_ENCOUNTER_COUNT; i++)
+    {
+        if(!BossEncounterFlagGet(i))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+void ClearAllRandomBossEncounters(void)
+{
+    u8 i = 0;
+    for(i = 0; i < RANDOM_ENCOUNTER_COUNT; i++)
+    {
+        BossEncounterFlagClear(i);
+    }
+}
+
+void SetRandomBossEncounter(void)
+{
+    bool8 reroll = FALSE;
+        
+    do {
+        u16 index = Random() % RANDOM_BOSS_ENCOUNTER_COUNT;
+        if(BossEncounterFlagGet(index))
+        {
+            reroll = TRUE;
+        }
+        else
+        {
+            reroll = FALSE;
+            BossEncounterFlagSet(index);
+            VarSet(VAR_OBJ_GFX_ID_F, sRandomBossEncounterArray[index].graphicsId);
+            VarSet(VAR_CURRENT_BOSS, index);
+            FlagClear(FLAG_BOSS_ENCOUNTER);
+            return;
+        }
+    } while (reroll);
+
+}
+
+const struct TrainerMon *GetRandomBossEncounterAcePokemon(void)
+{
+    return &sRandomBossEncounterArray[VarGet(VAR_CURRENT_BOSS)].trainerAce;
+}
+
+u16 GetRandomBossEncounterTrainerPic(void)
+{
+    return sRandomBossEncounterArray[VarGet(VAR_CURRENT_BOSS)].trainerPic;
+}
+
+const u8 *GetRandomBossEncounterBossName(void)
+{
+    return sRandomBossEncounterArray[VarGet(VAR_CURRENT_BOSS)].bossName;
+}
+
+const u8 *GetRandomBossEncounterBossApproachText(void)
+{
+    return sRandomBossEncounterArray[VarGet(VAR_CURRENT_BOSS)].bossApproachText;
+}
+
+const u8 *GetRandomBossEncounterBossDefeatText(void)
+{
+    return sRandomBossEncounterArray[VarGet(VAR_CURRENT_BOSS)].bossLoseText;
+}
+
+const u8 *GetRandomBossEncounterBossAceText(void)
+{
+    return sRandomBossEncounterArray[VarGet(VAR_CURRENT_BOSS)].bossAceText;
 }

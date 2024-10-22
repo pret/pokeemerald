@@ -3417,10 +3417,10 @@ static const u8 *BattleStringGetOpponentNameByTrainerId(u16 trainerId, u8 *text,
     else
     {
         #define SEED_TRAINER_NAME (trainerId + VarGet(VAR_PIT_FLOOR) + gSaveBlock1Ptr->pos.x + (100 * gSaveBlock1Ptr->pos.y))
-        if(!FlagGet(FLAG_START_ARCHIE_BATTLE))
+        if(!FlagGet(FLAG_START_BOSS_ENCOUNTER))
             toCpy = ObjectEventToGender[ReturnLastSpokenVarObjGfxId()] == MALE ? gRandomTrainerNamesM[RandomSeededModulo2(SEED_TRAINER_NAME, TRAINER_NAME_COUNT)] : gRandomTrainerNamesF[RandomSeededModulo2(SEED_TRAINER_NAME, TRAINER_NAME_COUNT)];
         else
-            toCpy = gArchieNamesM;
+            toCpy = GetRandomBossEncounterBossName();
     }
 
     return toCpy;
@@ -4358,12 +4358,12 @@ static const struct TrainerSlide sTrainerSlides[] =
     },
     */
     {
-        .trainerId = TRAINER_ARCHIE_PIT_BOSS,
+        .trainerId = TRAINER_RANDOM_PIT_BOSS,
         .isFrontierTrainer = FALSE,
         .msgLastSwitchIn = sText_ArchieAce,
     },
     {
-        .trainerId = TRAINER_ARCHIE_PIT_BOSS_DOUBLES,
+        .trainerId = TRAINER_RANDOM_PIT_BOSS_DOUBLES,
         .isFrontierTrainer = FALSE,
         .msgLastSwitchIn = sText_ArchieAce,
     },
@@ -4454,8 +4454,11 @@ u32 ShouldDoTrainerSlide(u32 battler, u32 which)
             {
             case TRAINER_SLIDE_LAST_SWITCHIN:
                 if (sTrainerSlides[i].msgLastSwitchIn != NULL && !CanBattlerSwitch(battler))
-                {
-                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgLastSwitchIn;
+                {   
+                    if(FlagGet(FLAG_START_BOSS_ENCOUNTER))
+                        gBattleStruct->trainerSlideMsg = GetRandomBossEncounterBossAceText();
+                    else
+                        gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgLastSwitchIn;
                     return retValue;
                 }
                 break;

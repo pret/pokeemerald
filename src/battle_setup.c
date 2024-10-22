@@ -333,7 +333,7 @@ const struct RematchTrainer gRematchTable[REMATCH_TABLE_ENTRIES] =
     [REMATCH_AMY_AND_LIV] = REMATCH(TRAINER_AMY_AND_LIV_1, TRAINER_AMY_AND_LIV_2, TRAINER_AMY_AND_LIV_4, TRAINER_AMY_AND_LIV_5, TRAINER_AMY_AND_LIV_6, ROUTE103),
     [REMATCH_ERNEST] = REMATCH(TRAINER_ERNEST_1, TRAINER_ERNEST_2, TRAINER_ERNEST_3, TRAINER_ERNEST_4, TRAINER_ERNEST_5, ROUTE125),
     [REMATCH_CORY] = REMATCH(TRAINER_CORY_1, TRAINER_CORY_2, TRAINER_CORY_3, TRAINER_CORY_4, TRAINER_CORY_5, ROUTE108),
-    [REMATCH_EDWIN] = REMATCH(TRAINER_EDWIN_1, TRAINER_RANDOM_BATTLE_1, TRAINER_RANDOM_BATTLE_2, TRAINER_ARCHIE_PIT_BOSS, TRAINER_ARCHIE_PIT_BOSS_DOUBLES, ROUTE110),
+    [REMATCH_EDWIN] = REMATCH(TRAINER_EDWIN_1, TRAINER_RANDOM_BATTLE_1, TRAINER_RANDOM_BATTLE_2, TRAINER_RANDOM_PIT_BOSS, TRAINER_RANDOM_PIT_BOSS_DOUBLES, ROUTE110),
     [REMATCH_LYDIA] = REMATCH(TRAINER_LYDIA_1, TRAINER_LYDIA_2, TRAINER_LYDIA_3, TRAINER_LYDIA_4, TRAINER_LYDIA_5, ROUTE117),
     [REMATCH_ISAAC] = REMATCH(TRAINER_ISAAC_1, TRAINER_ISAAC_2, TRAINER_ISAAC_3, TRAINER_ISAAC_4, TRAINER_ISAAC_5, ROUTE117),
     [REMATCH_GABRIELLE] = REMATCH(TRAINER_GABRIELLE_1, TRAINER_GABRIELLE_2, TRAINER_GABRIELLE_3, TRAINER_GABRIELLE_4, TRAINER_GABRIELLE_5, MT_PYRE_3F),
@@ -752,6 +752,9 @@ u8 BattleSetup_GetTerrainId(void)
 
     PlayerGetDestCoords(&x, &y);
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
+
+    if (VarGet(VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY) == 0)
+        return BATTLE_TERRAIN_CAVE;
 
     if (MetatileBehavior_IsTallGrass(tileBehavior))
         return BATTLE_TERRAIN_GRASS;
@@ -1801,8 +1804,8 @@ static const u8 *const sRandomTrainerDefeatTexts[77] =
 
 static const u8 *GetIntroSpeechOfApproachingTrainer(void)
 {
-    if(VarGet(VAR_PIT_FLOOR) == 100)
-        return ReturnEmptyStringIfNull(sArchieFinalApproach[0]);
+    if(FlagGet(FLAG_START_BOSS_ENCOUNTER))
+        return ReturnEmptyStringIfNull(GetRandomBossEncounterBossApproachText());
     if (gApproachingTrainerId == 0)
         return ReturnEmptyStringIfNull(sRandomTrainerApproachTexts[Random() % 79]);
     else
@@ -1835,8 +1838,8 @@ const u8 *GetTrainerALoseText(u16 trainerID)
 {
     u16 defeatTextIndex = GetPitDefeatTextIndex(trainerID);
 
-    if(VarGet(VAR_PIT_FLOOR) == 100)
-        StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(sArchieFinalDefeat[0]));
+    if(FlagGet(FLAG_START_BOSS_ENCOUNTER))
+        StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(GetRandomBossEncounterBossDefeatText()));
     else
         StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(sRandomTrainerDefeatTexts[defeatTextIndex]));
     return gStringVar4;
@@ -1852,8 +1855,8 @@ const u8 *GetTrainerBLoseText(u16 trainerID)
 
 const u8 *GetTrainerWonSpeech(void)
 {
-    if(VarGet(VAR_PIT_FLOOR) == 100)
-        return ReturnEmptyStringIfNull(sArchieFinalApproach[0]);
+    if(FlagGet(FLAG_START_BOSS_ENCOUNTER))
+        return ReturnEmptyStringIfNull(GetRandomBossEncounterBossApproachText());
     return ReturnEmptyStringIfNull(sRandomTrainerApproachTexts[Random() % 70]);
 }
 

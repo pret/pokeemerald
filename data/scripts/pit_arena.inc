@@ -51,7 +51,6 @@ PitArena_OnResume:
 	goto_if_unset FLAG_FLOOR_CLEARED, PitArena_OnResumeNormal
 	callnative SetWarpTileActive
 	setflashlevel 0
-	goto_if_eq VAR_PIT_FLOOR, 100, PitArena_OnResumeNormal
 	addvar VAR_REWARD_STATE, 1
 	goto_if_ne VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY, 0, PitArena_OnResumeNormal
 	setflashlevel 1

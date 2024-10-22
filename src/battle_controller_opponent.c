@@ -470,10 +470,10 @@ static u32 OpponentGetTrainerPicId(u32 battlerId)
 {
     u32 trainerPicId;
 
-    if(!FlagGet(FLAG_START_ARCHIE_BATTLE))
+    if(!FlagGet(FLAG_START_BOSS_ENCOUNTER))
         trainerPicId = ObjectEventToTrainerPic[ReturnLastSpokenVarObjGfxId()];
     else
-        trainerPicId = TRAINER_PIC_AQUA_LEADER_ARCHIE;
+        trainerPicId = GetRandomBossEncounterTrainerPic();
 
     return trainerPicId;
 }

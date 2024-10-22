@@ -391,9 +391,9 @@ static void LoadMapNamePopUpWindowBgs(void)
         popupThemeId = sRegionMapSectionId_To_PopUpThemeIdMapping[regionMapSectionId];
 
 
-    if (VarGet(VAR_PIT_FLOOR) == 100)
+    if (VarGet(VAR_PIT_FLOOR) % BOSS_FLOOR_RATE)
     {
-        popupThemeId = MAPPOPUP_THEME_BLACK;
+        popupThemeId = MAPPOPUP_THEME_TRANSPARENT;
     }
 
     switch (popupThemeId) {

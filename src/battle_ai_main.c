@@ -180,7 +180,7 @@ static u32 GetAiFlags(u16 trainerId)
     }
 
     //add omniscient flag to trainers starting at floor 100
-    if(FlagGet(FLAG_FLOOR_100))
+    if(FlagGet(FLAG_START_BOSS_ENCOUNTER))
         flags |= AI_FLAG_OMNISCIENT;
 
     // Automatically includes AI_FLAG_SMART_MON_CHOICES to improve smart switching

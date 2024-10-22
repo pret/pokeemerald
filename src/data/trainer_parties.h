@@ -315,7 +315,7 @@ static const struct TrainerMon sParty_ShellySeafloorCavern[] = {
     }
 };
 
-static const struct TrainerMon sParty_Archie[] = {
+static const struct TrainerMon sParty_RandomPitBoss[] = {
     {
         .species = SPECIES_KINGDRA,
         .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),

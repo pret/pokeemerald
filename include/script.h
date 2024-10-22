@@ -60,6 +60,13 @@ bool32 ValidateSavedRamScript(void);
 u8 *GetSavedRamScriptIfValid(void);
 void InitRamScript_NoObjectEvent(u8 *script, u16 scriptSize);
 void WarpToRandomPitArena(void);
+void SetRandomBossEncounter(void);
+const struct TrainerMon *GetRandomBossEncounterAcePokemon(void);
+u16 GetRandomBossEncounterTrainerPic(void);
+const u8 *GetRandomBossEncounterBossName(void);
+const u8 *GetRandomBossEncounterBossApproachText(void);
+const u8 *GetRandomBossEncounterBossDefeatText(void);
+const u8 *GetRandomBossEncounterBossAceText(void);
 
 struct RandomTrainerNPC 
 {
@@ -70,6 +77,7 @@ struct RandomTrainerNPC
 };
 
 #define MAX_RANDOM_TRAINERS 4
+#define BOSS_FLOOR_RATE 25
 
 extern const struct RandomTrainerNPC RandomNPCTrainers[];
 extern const struct RandomTrainerNPC RandomNPCTrainers_Doubles[];

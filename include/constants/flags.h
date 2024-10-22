@@ -671,8 +671,8 @@
 #define FLAG_BUY_FROM_MART						0x274 // Unused Flag
 #define FLAG_EXP_SHARE							0x275 // Unused Flag
 #define FLAG_STARTER_CHOICE_BAG					0x276 // Unused Flag
-#define FLAG_END_GAME_ARCHIE					0x277 // Unused Flag
-#define FLAG_START_ARCHIE_BATTLE				0x278 // Unused Flag
+#define FLAG_BOSS_ENCOUNTER					0x277 // Unused Flag
+#define FLAG_START_BOSS_ENCOUNTER				0x278 // Unused Flag
 #define FLAG_REWARD_ITEM_3						0x279 // Unused Flag
 #define FLAG_MOVE_RELEARNER						0x27A // Unused Flag
 #define FLAG_RUN_ENDED_SCREEN					0x27B // Unused Flag

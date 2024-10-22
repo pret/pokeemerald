@@ -538,7 +538,7 @@ struct SaveBlock2
              u16 optionsRandomMaps:1;
              u16 optionsRandomMusic:1;
              u16 filler_9912:6;
-    /*0x92*/ u8 filler_91[2];
+             u8 randomBossEncounters[2];
              u8 randomMonEncounters[2];
              u8 playerGfxType;
     /*0x98*/ struct Time localTimeOffset;

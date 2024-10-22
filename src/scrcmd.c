@@ -816,18 +816,19 @@ bool8 ScrCmd_warpteleport(struct ScriptContext *ctx)
 
     if(mapNum == 0xFF)
     {   
-        if(((VarGet(VAR_PIT_FLOOR) % healFloorFreq) == 0) && (VarGet(VAR_PIT_FLOOR) != 100))
+        if(((VarGet(VAR_PIT_FLOOR) % healFloorFreq) == 0) && (VarGet(VAR_PIT_FLOOR) % BOSS_FLOOR_RATE))
         {
             mapNum = MAP_PIT_REST_FLOOR;
             mapGroup = 0;
             VarSet(VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY, 0);
             y = 9;
         }
-        else if ((VarGet(VAR_PIT_FLOOR) == 100))
+        else if (!(VarGet(VAR_PIT_FLOOR) % BOSS_FLOOR_RATE))
         {
             mapNum = MAP_PIT_BOSS_ARENA;
             mapGroup = 0;
             VarSet(VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY, 0);
+            SetRandomBossEncounter();
             y = 6;
         }
         else

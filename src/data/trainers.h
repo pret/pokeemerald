@@ -417,7 +417,7 @@
         .items = {ITEM_SUPER_POTION, ITEM_SUPER_POTION, ITEM_NONE, ITEM_NONE},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
-        .party = TRAINER_PARTY(sParty_Archie),
+        .party = TRAINER_PARTY(sParty_RandomPitBoss),
     },
 
     [TRAINER_LEAH] =
@@ -6214,28 +6214,28 @@
         .party = TRAINER_PARTY(sParty_RandomBattle),
     },
 
-    [TRAINER_ARCHIE_PIT_BOSS] =
+    [TRAINER_RANDOM_PIT_BOSS] =
     {
-        .trainerClass = TRAINER_CLASS_AQUA_LEADER,
+        .trainerClass = TRAINER_CLASS_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_AQUA,
         .trainerPic = TRAINER_PIC_AQUA_LEADER_ARCHIE,
         .trainerName = _("Archie"),
         .items = {ITEM_FULL_RESTORE, ITEM_FULL_RESTORE},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_ACE_POKEMON | AI_FLAG_OMNISCIENT | AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_STRONGEST_MOVE | AI_FLAG_HP_AWARE | AI_FLAG_WILL_SUICIDE | AI_FLAG_SMART_MON_CHOICES,
-        .party = TRAINER_PARTY(sParty_Archie),
+        .party = TRAINER_PARTY(sParty_RandomPitBoss),
     },
 
-    [TRAINER_ARCHIE_PIT_BOSS_DOUBLES] =
+    [TRAINER_RANDOM_PIT_BOSS_DOUBLES] =
     {
-        .trainerClass = TRAINER_CLASS_AQUA_LEADER,
+        .trainerClass = TRAINER_CLASS_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_AQUA,
         .trainerPic = TRAINER_PIC_AQUA_LEADER_ARCHIE,
         .trainerName = _("Archie"),
         .items = {ITEM_FULL_RESTORE, ITEM_FULL_RESTORE},
         .doubleBattle = TRUE,
         .aiFlags = AI_FLAG_ACE_POKEMON | AI_FLAG_OMNISCIENT | AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_PREFER_STRONGEST_MOVE | AI_FLAG_HP_AWARE | AI_FLAG_WILL_SUICIDE | AI_FLAG_SMART_MON_CHOICES,
-        .party = TRAINER_PARTY(sParty_Archie),
+        .party = TRAINER_PARTY(sParty_RandomPitBoss),
     },
 
     [TRAINER_WALLY_VR_1] =
