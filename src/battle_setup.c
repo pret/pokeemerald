@@ -747,65 +747,7 @@ static void CB2_EndScriptedWildBattle(void)
 
 u8 BattleSetup_GetTerrainId(void)
 {
-    u16 tileBehavior;
-    s16 x, y;
-
-    PlayerGetDestCoords(&x, &y);
-    tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
-
-    if (VarGet(VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY) == 0)
-        return BATTLE_TERRAIN_CAVE;
-
-    if (MetatileBehavior_IsTallGrass(tileBehavior))
-        return BATTLE_TERRAIN_GRASS;
-    if (MetatileBehavior_IsLongGrass(tileBehavior))
-        return BATTLE_TERRAIN_LONG_GRASS;
-    if (MetatileBehavior_IsSandOrDeepSand(tileBehavior))
-        return BATTLE_TERRAIN_SAND;
-
-    switch (gMapHeader.mapType)
-    {
-    case MAP_TYPE_TOWN:
-    case MAP_TYPE_CITY:
-    case MAP_TYPE_ROUTE:
-        break;
-    case MAP_TYPE_UNDERGROUND:
-        if (MetatileBehavior_IsIndoorEncounter(tileBehavior))
-            return BATTLE_TERRAIN_BUILDING;
-        if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
-            return BATTLE_TERRAIN_POND;
-        return BATTLE_TERRAIN_CAVE;
-    case MAP_TYPE_INDOOR:
-    case MAP_TYPE_SECRET_BASE:
-        return BATTLE_TERRAIN_BUILDING;
-    case MAP_TYPE_UNDERWATER:
-        return BATTLE_TERRAIN_UNDERWATER;
-    case MAP_TYPE_OCEAN_ROUTE:
-        if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
-            return BATTLE_TERRAIN_WATER;
-        return BATTLE_TERRAIN_PLAIN;
-    }
-    if (MetatileBehavior_IsDeepOrOceanWater(tileBehavior))
-        return BATTLE_TERRAIN_WATER;
-    if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
-        return BATTLE_TERRAIN_POND;
-    if (MetatileBehavior_IsMountain(tileBehavior))
-        return BATTLE_TERRAIN_MOUNTAIN;
-    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
-    {
-        // Is BRIDGE_TYPE_POND_*?
-        if (MetatileBehavior_GetBridgeType(tileBehavior) != BRIDGE_TYPE_OCEAN)
-            return BATTLE_TERRAIN_POND;
-
-        if (MetatileBehavior_IsBridgeOverWater(tileBehavior) == TRUE)
-            return BATTLE_TERRAIN_WATER;
-    }
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE113) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE113))
-        return BATTLE_TERRAIN_SAND;
-    if (GetSavedWeather() == WEATHER_SANDSTORM)
-        return BATTLE_TERRAIN_SAND;
-
-    return BATTLE_TERRAIN_GRASS;
+    return GetRandomMapTerrain();
 }
 
 static u8 GetBattleTransitionTypeByMap(void)

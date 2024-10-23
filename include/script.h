@@ -67,6 +67,7 @@ const u8 *GetRandomBossEncounterBossName(void);
 const u8 *GetRandomBossEncounterBossApproachText(void);
 const u8 *GetRandomBossEncounterBossDefeatText(void);
 const u8 *GetRandomBossEncounterBossAceText(void);
+u16 GetRandomMapTerrain(void);
 
 struct RandomTrainerNPC 
 {

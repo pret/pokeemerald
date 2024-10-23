@@ -27,6 +27,7 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "data.h"
+#include "constants/battle.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
@@ -901,6 +902,7 @@ void LevelUpParty(void)
 struct sRandomMap {
     u16 mapConstant;
     u16 warpMetatileId;
+    u16 battleTerrainId;
     u16 dest_x;
     u16 dest_y;
     u16 warp_x;
@@ -918,56 +920,67 @@ static const struct sRandomMap sRandomMapArray[] = {
     {
         .mapConstant = MAP_PIT_ARENA,
         .warpMetatileId = METATILE_Cave_FLOOR_COMPLETE,
+        .battleTerrainId = BATTLE_TERRAIN_CAVE,
         DEFAULT_RANDOM_MAP_COORDS
     },     
     {
         .mapConstant = MAP_PIT_ARENA_BEACH,
         .warpMetatileId = METATILE_PitArenaBeach_BEACH_WARP_ACTIVE,
+        .battleTerrainId = BATTLE_TERRAIN_SAND,
         DEFAULT_RANDOM_MAP_COORDS
     },  
     {
         .mapConstant = MAP_PIT_ARENA_WATER,
         .warpMetatileId = METATILE_PitWaterTheme_WATER_WARP_ACTIVE,
+        .battleTerrainId = BATTLE_TERRAIN_WATER,
         DEFAULT_RANDOM_MAP_COORDS
     },  
     {
         .mapConstant = MAP_PIT_ARENA_DESERT,
         .warpMetatileId = METATILE_PitArenaDesert_DESERT_WARP_ACTIVE,
+        .battleTerrainId = BATTLE_TERRAIN_SAND,
         DEFAULT_RANDOM_MAP_COORDS
     },  
     {
         .mapConstant = MAP_PIT_ARENA_SNOW,
         .warpMetatileId = METATILE_PitArenaSnow_SNOW_WARP_ACTIVE,
+        .battleTerrainId = BATTLE_TERRAIN_MOUNTAIN,
         DEFAULT_RANDOM_MAP_COORDS
     },  
     {
         .mapConstant = MAP_PIT_ARENA_MUSHROOM_WOODS,
         .warpMetatileId = METATILE_PitArenaMushroomWoods_MUSHROOM_WARP_ACTIVE,
+        .battleTerrainId = BATTLE_TERRAIN_GRASS,
         DEFAULT_RANDOM_MAP_COORDS
     },        
     {
         .mapConstant = MAP_PIT_ARENA_DIRT_PATH,
         .warpMetatileId = METATILE_PitArenaDirtPath_DIRT_PATH_WARP_ACTIVE,
+        .battleTerrainId = BATTLE_TERRAIN_MOUNTAIN,
         DEFAULT_RANDOM_MAP_COORDS
     },    
     {
         .mapConstant = MAP_PIT_ARENA_SPIDER_WOODS,
         .warpMetatileId = METATILE_PitArenaSpiderWoods_SPIDER_WOODS_WARP_ACTIVE,
+        .battleTerrainId = BATTLE_TERRAIN_GRASS,
         DEFAULT_RANDOM_MAP_COORDS
     },    
     {
         .mapConstant = MAP_PIT_ARENA_UNDERWATER,
         .warpMetatileId = METATILE_PitArenaUnderwater_UNDERWATER_WARP_ACTIVE,
+        .battleTerrainId = BATTLE_TERRAIN_UNDERWATER,
         DEFAULT_RANDOM_MAP_COORDS
     },    
     {
         .mapConstant = MAP_PIT_ARENA_MINE,
         .warpMetatileId = METATILE_PitArenaMine_MINE_WARP_ACTIVE,
+        .battleTerrainId = BATTLE_TERRAIN_CAVE,
         DEFAULT_RANDOM_MAP_COORDS
     },    
     {
         .mapConstant = MAP_PIT_ARENA_WHITE_BARK,
         .warpMetatileId = METATILE_PitArenaWhiteBark_WHITEBARK_WARP_ACTIVE,
+        .battleTerrainId = BATTLE_TERRAIN_GRASS,
         DEFAULT_RANDOM_MAP_COORDS
     },                   
 };
@@ -992,6 +1005,16 @@ void SetWarpTileActive(void)
     u16 currentIndex = VarGet(VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY);
     if(currentIndex != 0xFF)
         MapGridSetMetatileIdAt(sRandomMapArray[currentIndex].warp_x + MAP_OFFSET, sRandomMapArray[currentIndex].warp_y + MAP_OFFSET, sRandomMapArray[currentIndex].warpMetatileId);
+}
+
+u16 GetRandomMapTerrain(void)
+{   
+    u16 currentIndex = VarGet(VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY);
+    if(currentIndex != 0xFF)
+    {
+        return sRandomMapArray[currentIndex].battleTerrainId;
+    }
+    return BATTLE_TERRAIN_CAVE;
 }
 
 struct RandomMonEncounters {
