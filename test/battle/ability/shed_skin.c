@@ -1,11 +1,13 @@
 #include "global.h"
 #include "test/battle.h"
 
-SINGLE_BATTLE_TEST("Shed Skin triggers 30% of the time")
+SINGLE_BATTLE_TEST("Shed Skin triggers 33% of the time")
 {
-    PASSES_RANDOMLY(3, 10, RNG_SHED_SKIN);
+    if (B_ABILITY_TRIGGER_CHANCE == GEN_4)
+        PASSES_RANDOMLY(30, 100, RNG_SHED_SKIN);
+    else
+        PASSES_RANDOMLY(33, 100, RNG_SHED_SKIN);
     GIVEN {
-        ASSUME(B_ABILITY_TRIGGER_CHANCE >= GEN_4);
         ASSUME(gMovesInfo[MOVE_TACKLE].makesContact);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_ARBOK) { Status1(STATUS1_POISON); Ability(ABILITY_SHED_SKIN); }
