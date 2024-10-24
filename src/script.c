@@ -28,6 +28,8 @@
 #include "constants/trainers.h"
 #include "data.h"
 #include "constants/battle.h"
+#include "event_object_movement.h"
+#include "script_pokemon_util.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
@@ -1639,3 +1641,58 @@ const u8 *GetRandomBossEncounterBossAceText(void)
 {
     return sRandomBossEncounterArray[VarGet(VAR_CURRENT_BOSS)].bossAceText;
 }
+
+
+//
+//  Random GiveMon Reward Encounters Post Boss Fight 
+//
+
+const u16 variableGraphicsIdsForEncounters[9] = {VAR_OBJ_GFX_ID_4, VAR_OBJ_GFX_ID_5, VAR_OBJ_GFX_ID_6, VAR_OBJ_GFX_ID_7,
+                                            VAR_OBJ_GFX_ID_8, VAR_OBJ_GFX_ID_9, VAR_OBJ_GFX_ID_A, VAR_OBJ_GFX_ID_B, VAR_OBJ_GFX_ID_C};
+static EWRAM_DATA u16 loadedEncounters[9] = {0};
+
+void DebugPrintAllSpecies(void)
+{
+    for(u8 i = 0; i < 9; i++)
+    {
+        DebugPrintf("Species: %d", loadedEncounters[i]);
+    }
+}
+
+void SetRandomGiveMonRewardEncounters(void)
+{
+    bool8 reroll = FALSE;
+
+    for(u8 i = 0; i < 9; i++)
+    {
+        do {
+            u16 species = GetRandomSpeciesFlattenedCurve();
+            VarSet(variableGraphicsIdsForEncounters[i], species + OBJ_EVENT_GFX_MON_BASE);
+            loadedEncounters[i] = species;
+        } while (reroll);
+    }
+}
+
+void GiveRandomMonRewardEncounter(void)
+{
+    u8 mapGroup = gSaveBlock1Ptr->location.mapGroup;
+    u8 mapNum = gSaveBlock1Ptr->location.mapNum;
+    u16 species = loadedEncounters[gSpecialVar_LastTalked - 1];
+    u16 level = VarGet(VAR_PIT_FLOOR) <= 100 ? VarGet(VAR_PIT_FLOOR) : 100;
+    u8 evs[] = {0, 0, 0, 0, 0, 0};
+    u8 ivs[] = {31, 31, 31, 31, 31, 31};
+    u16 moves[] = {0, 0, 0, 0};
+    gSpecialVar_Result = ScriptGiveMonParameterized(species, level, ITEM_NONE, 0, NUM_NATURES, 3, 0, (u8 *) &evs, (u8 *) &ivs, (u16 *) &moves, 0, NUMBER_OF_MON_TYPES, 0);
+}
+
+void BufferNameText_RandomMonRewardEncounter(void)
+{
+    u16 species = loadedEncounters[gSpecialVar_LastTalked - 1];
+
+#ifdef POKEMON_EXPANSION
+    StringCopy(gStringVar2, GetSpeciesName(species));
+#else
+    StringCopy(gStringVar2, &gSpeciesNames[species][0]);
+#endif
+}
+

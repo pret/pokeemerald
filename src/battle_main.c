@@ -2031,7 +2031,6 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             s32 ball = -1;
             u32 personalityHash = GeneratePartyHash(trainer, i);
             const struct TrainerMon *partyData = trainer->party;
-            struct TrainerMon acePokemon = {0};
             u32 otIdType = OT_ID_RANDOM_NO_SHINY;
             u32 fixedOtId = 0;
             u32 ability = 0;
@@ -2041,8 +2040,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
 
             if (((gSpecialVar_TrainerNumber == TRAINER_RANDOM_PIT_BOSS) || (gSpecialVar_TrainerNumber == TRAINER_RANDOM_PIT_BOSS_DOUBLES)) && (j == (monsCount - 1)) && !(isPlayer)) 
             {
-                memcpy(&acePokemon, GetRandomBossEncounterAcePokemon(), sizeof(struct TrainerMon));
-                partyData = &acePokemon;
+                partyData = GetRandomBossEncounterAcePokemon();
                 j = 0;
                 isAcePokemon = TRUE;
             }

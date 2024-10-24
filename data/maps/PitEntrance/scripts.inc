@@ -222,8 +222,7 @@ PitEntrance_Sign_Option_HardMode:
 	.string "Hard Mode$"
 
 PitArena_ChangeAvatar::
-	lockall
-	faceplayer
+	lock
 	message PitArena_ChangeAvatarText
 	dynmultichoice 17, 1, 0, 5, 0, DYN_MULTICHOICE_CB_NONE, PitArena_NPCAvatarChange0, PitArena_NPCAvatarChange1, PitArena_NPCAvatarChange2, PitArena_NPCAvatarChange3, PitArena_NPCAvatarChange4, PitArena_NPCAvatarChange5, PitArena_NPCAvatarChange6, PitArena_NPCAvatarChange7, PitArena_NPCAvatarChange8, PitArena_NPCAvatarChange9, PitArena_NPCAvatarChange10, PitArena_NPCAvatarChange11
 	callnative SetPlayerAvatar
@@ -234,8 +233,7 @@ PitArena_ChangeAvatar::
 	end
 
 PitArena_ChangeAvatarDebug::
-	lockall
-	faceplayer
+	lock
 	message PitArena_ChangeAvatarText
 	dynmultichoice 17, 1, 0, 5, 0, DYN_MULTICHOICE_CB_NONE, PitArena_NPCAvatarChange0, PitArena_NPCAvatarChange1, PitArena_NPCAvatarChange2, PitArena_NPCAvatarChange3, PitArena_NPCAvatarChange4, PitArena_NPCAvatarChange5, PitArena_NPCAvatarChange6, PitArena_NPCAvatarChange7, PitArena_NPCAvatarChange8, PitArena_NPCAvatarChange9, PitArena_NPCAvatarChange10, PitArena_NPCAvatarChange11
 	callnative SetPlayerAvatar

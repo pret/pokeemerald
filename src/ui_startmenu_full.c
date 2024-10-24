@@ -172,6 +172,7 @@ static const struct WindowTemplate sStartMenuWindowTemplates[] =
         .paletteNum = 0,   // palette index to use for text
         .baseBlock = 1 + (9 * 15) + (30 * 2),     // tile start in VRAM
     },
+    DUMMY_WIN_TEMPLATE,
 };
 
 

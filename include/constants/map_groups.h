@@ -80,6 +80,7 @@
 #define MAP_PIT_ARENA_WHITE_BARK     (71 | (0 << 8))
 #define MAP_PIT_REST_FLOOR           (72 | (0 << 8))
 #define MAP_PIT_BOSS_ARENA           (73 | (0 << 8))
+#define MAP_PIT_WILD_ENCOUNTER_FLOOR (74 | (0 << 8))
 
 // gMapGroup_IndoorLittleroot
 #define MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F    (0 | (1 << 8))

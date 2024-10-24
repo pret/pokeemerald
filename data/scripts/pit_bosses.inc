@@ -6,12 +6,14 @@ PitBoss_BossEncounter::
 	goto_if_set FLAG_DOUBLES_MODE, PitBoss_CommonScriptDoubles
 	trainerbattle_single TRAINER_RANDOM_PIT_BOSS, PitArena_Text_Intro, PitArena_Text_Defeat, PitBoss_CommonAfterBattleScript
 	clearflag FLAG_START_BOSS_ENCOUNTER
-	releaseall
+	goto PitBoss_CommonAfterBattleScript
+	release
 	end
 
 PitBoss_CommonScriptDoubles::
 	trainerbattle_double TRAINER_RANDOM_PIT_BOSS_DOUBLES, PitArena_Text_Intro, PitArena_Text_Defeat, PitArena_Text_NotEnoughMons, PitBoss_CommonAfterBattleScript
-	releaseall
+	goto PitBoss_CommonAfterBattleScript
+	release
 	end
 
 PitBoss_CommonAfterBattleScript::
@@ -24,11 +26,12 @@ PitBoss_CommonAfterBattleScript::
 	waitfieldeffect(FLDEFF_SAVING)
 	callnative AutoSave
 PitBoss_NoAutoSave::
-	lockall
+	lock
 	callnative BufferMapFloorString
-	warpteleport MAP_PIT_REST_FLOOR, 9, 9
+	callnative SetRandomGiveMonRewardEncounters
+	warpteleport MAP_PIT_WILD_ENCOUNTER_FLOOR, 13, 13
 	waitstate
-	releaseall
+	release
 	end
 
 PitBoss_FinalBossAfterBattle::
@@ -47,17 +50,17 @@ PitBoss_FinalBossAfterBattle::
 	waitfieldeffect(FLDEFF_SAVING)
 	callnative AutoSave
 PitFinalBossNoAutoSave:
-	releaseall
+	release
 	end
 
 Pit_EndGameStatue:: 
-	lockall
+	lock
 	specialvar VAR_RESULT, GetPlayerFacingDirection
 	goto_if_eq VAR_RESULT, DIR_NORTH, Pit_EndGameStatue222
 	goto_if_eq VAR_RESULT, DIR_SOUTH, Pit_EndGameStatue222
 	goto_if_eq VAR_RESULT, DIR_WEST, Pit_EndGameStatue4
 	goto_if_eq VAR_RESULT, DIR_EAST, Pit_EndGameStatue3
-	releaseall
+	release
 	end
 
 Pit_EndGameStatue3::
@@ -98,7 +101,7 @@ PitStatueNoAutoSave:
 	setflag FLAG_FLOOR_CLEARED
 	callnative SetWarpTileActive
 	special DrawWholeMapView
-	releaseall
+	release
 	end
 
 Pit_EndGameStatue2::
@@ -106,7 +109,7 @@ Pit_EndGameStatue2::
 	fadescreen FADE_TO_BLACK
 	special GameClear
 	waitstate
-	releaseall
+	release
 	end
 
 Pit_EndGameStatue_Text1:

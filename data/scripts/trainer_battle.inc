@@ -36,9 +36,9 @@ EventScript_TryDoDoubleTrainerBattle::
 	goto EventScript_ShowTrainerIntroMsg
 
 EventScript_TurnTrainer::
-	lockall
+	lock
 	faceplayer
-	releaseall
+	release
 	end
 
 EventScript_NotEnoughMonsForDoubleBattle::

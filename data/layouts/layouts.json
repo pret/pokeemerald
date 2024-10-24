@@ -4580,6 +4580,16 @@
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/PitBossArena/border.bin",
       "blockdata_filepath": "data/layouts/PitBossArena/map.bin"
+    },
+    {
+      "id": "LAYOUT_PIT_WILD_ENCOUNTER_FLOOR",
+      "name": "PitWildEncounterFloor_Layout",
+      "width": 28,
+      "height": 28,
+      "primary_tileset": "gTileset_PitArenaSpiderWoods",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/PitWildEncounterFloor/border.bin",
+      "blockdata_filepath": "data/layouts/PitWildEncounterFloor/map.bin"
     }
   ]
 }

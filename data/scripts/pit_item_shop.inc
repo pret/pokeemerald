@@ -1,6 +1,6 @@
 
 PitShop_ShopNPC::
-	lockall
+	lock
 	faceplayer
 	setvar VAR_TEMP_9, 0
 PitShop_ShopNPCHook::

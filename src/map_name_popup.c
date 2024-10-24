@@ -390,10 +390,16 @@ static void LoadMapNamePopUpWindowBgs(void)
     else
         popupThemeId = sRegionMapSectionId_To_PopUpThemeIdMapping[regionMapSectionId];
 
+    u8 mapGroup = gSaveBlock1Ptr->location.mapGroup;
+    u8 mapNum = gSaveBlock1Ptr->location.mapNum;
 
-    if (VarGet(VAR_PIT_FLOOR) % BOSS_FLOOR_RATE)
+    if((mapNum | (mapGroup << 8)) == MAP_PIT_BOSS_ARENA)
     {
         popupThemeId = MAPPOPUP_THEME_TRANSPARENT;
+    }
+    if((mapNum | (mapGroup << 8)) == MAP_PIT_WILD_ENCOUNTER_FLOOR)
+    {
+        popupThemeId = MAPPOPUP_THEME_BLACK;
     }
 
     switch (popupThemeId) {

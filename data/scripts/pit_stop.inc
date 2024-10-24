@@ -1,7 +1,7 @@
 
 
 PitStop_HealNPC::
-	lockall
+	lock
 	faceplayer
 	special HealPlayerParty
 	msgbox PitStop_HealNPC_Text, MSGBOX_DEFAULT
@@ -11,54 +11,6 @@ PitStop_HealNPC::
 PitStop_HealNPC_Text:
 	.string "Your party has been healed.\p"
 	.string "Have a nice descent.$"
-
-
-
-PitStop_NewMon::
-	lockall
-	callnative PlayerPartyCountToResultVar
-	goto_if_eq VAR_RESULT, 6, PitStop_PartyFullRemoveOne
-PitStop_NewMon2::
-	callnative StartNewPokeballCaseUI
-   	waitstate
-	goto PitStop_EventScript_ReceiveMonParty
-	release
-	end
-
-PitStop_EventScript_ReceiveMonParty::
-	removeobject 8
-	releaseall
-	end
-
-PitStop_PartyFullRemoveOne::
-	message PitStop_GiveMonFullNothingChosen_Text1
-	waitbuttonpress
-	msgbox PitStop_GiveMonFullNothingChosen_Text2, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, PitStop_FullPartyNothingChosen
-	special ChoosePartyMon
-	waitstate
-	copyvar VAR_RESULT, VAR_0x8004
-	goto_if_eq VAR_RESULT, PARTY_NOTHING_CHOSEN, PitStop_FullPartyNothingChosen
-	callnative RemovePartyPokemon
-	goto PitStop_NewMon2
-	release
-	end
-
-PitStop_FullPartyNothingChosen::
-	release
-	end
-
-PitStop_GiveMonFullNothingChosen_Text1:
-	.string "Your party is too full.$"
-
-PitStop_GiveMonFullNothingChosen_Text2:
-	.string "Do you want to get rid\n"
-	.string "of a party member?$"
-
-PitStop_Text_ReceivedMon:
-	.string "{PLAYER} pulled a {STR_VAR_2}\n"
-	.string "from the bag.$"
-
 
 
 PitTutor_MoveRelearner::
