@@ -106,6 +106,28 @@ static const struct Symbol *lookup_address(uint32_t address)
     return NULL;
 }
 
+#ifndef _GNU_SOURCE
+// Very naive implementation of 'memmem' for systems which don't make it
+// available by default.
+void *memmem(const void *haystack, size_t haystacklen, const void *needle, size_t needlelen)
+{
+    const char *haystack_ = haystack;
+    const char *needle_ = needle;
+    for (size_t i = 0; i < haystacklen - needlelen; i++)
+    {
+        size_t j;
+        for (j = 0; j < needlelen; j++)
+        {
+            if (haystack_[i+j] != needle_[j])
+                break;
+        }
+        if (j == needlelen)
+            return (void *)&haystack_[i];
+    }
+    return NULL;
+}
+#endif
+
 // Similar to 'fwrite(buffer, 1, size, f)' except that anything which
 // looks like the output of '%p' (i.e. '<0x\d{7}>') is translated into
 // the name of a symbol (if it represents one).
