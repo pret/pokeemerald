@@ -829,7 +829,7 @@ bool8 ScrCmd_warpteleport(struct ScriptContext *ctx)
             mapGroup = 0;
             VarSet(VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY, 0);
             SetRandomBossEncounter();
-            y = 6;
+            y = 13;
         }
         else
         {

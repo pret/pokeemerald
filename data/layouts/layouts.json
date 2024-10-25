@@ -4576,8 +4576,8 @@
       "name": "PitBossArena_Layout",
       "width": 20,
       "height": 20,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Cave",
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_BattlePyramid",
       "border_filepath": "data/layouts/PitBossArena/border.bin",
       "blockdata_filepath": "data/layouts/PitBossArena/map.bin"
     },

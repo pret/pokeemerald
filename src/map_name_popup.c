@@ -395,7 +395,7 @@ static void LoadMapNamePopUpWindowBgs(void)
 
     if((mapNum | (mapGroup << 8)) == MAP_PIT_BOSS_ARENA)
     {
-        popupThemeId = MAPPOPUP_THEME_TRANSPARENT;
+        popupThemeId = MAPPOPUP_THEME_BLACK;
     }
     if((mapNum | (mapGroup << 8)) == MAP_PIT_WILD_ENCOUNTER_FLOOR)
     {
