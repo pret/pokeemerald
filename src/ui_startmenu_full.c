@@ -513,7 +513,7 @@ static const struct SpriteTemplate sSpriteTemplate_GreyMenuButtonParty =
 //
 //      Cursor Creation and Callback 
 //
-#define CURSOR_LEFT_COL_X   116
+#define CURSOR_LEFT_COL_X   112
 #define CURSOR_MID_COL_X    CURSOR_LEFT_COL_X + 46 + 6
 #define CURSOR_RIGHT_COL_X  CURSOR_MID_COL_X  + 46 + 6
 #define CURSOR_TOP_ROW_Y    88
