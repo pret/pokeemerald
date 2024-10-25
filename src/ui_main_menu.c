@@ -754,6 +754,75 @@ static void MoveHWindowsWithInput(void) // Update GPU windows after selection is
     SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(HWinCoords[sSelectedOption].winv.left, HWinCoords[sSelectedOption].winv.right));
 }
 
+void LoadMugshotIconGraphics(void)
+{
+    if(gSaveBlock2Ptr->playerGender == MALE)
+    {
+        if(gSaveBlock2Ptr->playerGfxType == 1){
+            LoadCompressedSpriteSheet(&sSpriteSheet_RedMugshot);
+            LoadSpritePalette(&sSpritePal_RedMugshot);
+        }
+        else if(gSaveBlock2Ptr->playerGfxType == 2)
+        {
+            LoadCompressedSpriteSheet(&sSpriteSheet_LucasMugshot);
+            LoadSpritePalette(&sSpritePal_LucasMugshot);
+        }
+        else if(gSaveBlock2Ptr->playerGfxType == 3)
+        {
+            LoadCompressedSpriteSheet(&sSpriteSheet_StevenMugshot);
+            LoadSpritePalette(&sSpritePal_StevenMugshot);
+        }
+        else if(gSaveBlock2Ptr->playerGfxType == 4)
+        {
+            LoadCompressedSpriteSheet(&sSpriteSheet_OakMugshot);
+            LoadSpritePalette(&sSpritePal_OakMugshot);
+        }
+        else if(gSaveBlock2Ptr->playerGfxType == 5)
+        {
+            LoadCompressedSpriteSheet(&sSpriteSheet_EthanMugshot);
+            LoadSpritePalette(&sSpritePal_EthanMugshot);
+        }
+        else
+        {
+            LoadCompressedSpriteSheet(&sSpriteSheet_BrendanMugshot);
+            LoadSpritePalette(&sSpritePal_BrendanMugshot);
+        }
+    }
+    else
+    {
+        if(gSaveBlock2Ptr->playerGfxType == 1)
+        {
+            LoadCompressedSpriteSheet(&sSpriteSheet_LeafMugshot);
+            LoadSpritePalette(&sSpritePal_LeafMugshot);
+        }
+        else if(gSaveBlock2Ptr->playerGfxType == 2)
+        {
+            LoadCompressedSpriteSheet(&sSpriteSheet_DawnMugshot);
+            LoadSpritePalette(&sSpritePal_DawnMugshot);
+        }
+        else if(gSaveBlock2Ptr->playerGfxType == 3)
+        {
+            LoadCompressedSpriteSheet(&sSpriteSheet_CynthiaMugshot);
+            LoadSpritePalette(&sSpritePal_CynthiaMugshot);
+        }
+        else if(gSaveBlock2Ptr->playerGfxType == 4)
+        {
+            LoadCompressedSpriteSheet(&sSpriteSheet_PhoebeMugshot);
+            LoadSpritePalette(&sSpritePal_PhoebeMugshot);
+        }
+        else if(gSaveBlock2Ptr->playerGfxType == 5)
+        {
+            LoadCompressedSpriteSheet(&sSpriteSheet_LyraMugshot);
+            LoadSpritePalette(&sSpritePal_LyraMugshot);
+        }
+        else
+        {
+            LoadCompressedSpriteSheet(&sSpriteSheet_MayMugshot);
+            LoadSpritePalette(&sSpritePal_MayMugshot);
+        }
+    }
+}
+
 static bool8 MainMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spritesheets, and palettes
 {
     switch (sMainMenuDataPtr->gfxLoadState)
@@ -798,77 +867,17 @@ static bool8 MainMenu_LoadGraphics(void) // Load all the tilesets, tilemaps, spr
         break;
     case 4:
     {
+        LoadMugshotIconGraphics();
         if(gSaveBlock2Ptr->playerGender == MALE)
         {
             LoadCompressedSpriteSheet(&sSpriteSheet_IconBox);
-            LoadSpritePalette(&sSpritePal_IconBox);
-            if(gSaveBlock2Ptr->playerGfxType == 1){
-                LoadCompressedSpriteSheet(&sSpriteSheet_RedMugshot);
-                LoadSpritePalette(&sSpritePal_RedMugshot);
-            }
-            else if(gSaveBlock2Ptr->playerGfxType == 2)
-            {
-                LoadCompressedSpriteSheet(&sSpriteSheet_LucasMugshot);
-                LoadSpritePalette(&sSpritePal_LucasMugshot);
-            }
-            else if(gSaveBlock2Ptr->playerGfxType == 3)
-            {
-                LoadCompressedSpriteSheet(&sSpriteSheet_StevenMugshot);
-                LoadSpritePalette(&sSpritePal_StevenMugshot);
-            }
-            else if(gSaveBlock2Ptr->playerGfxType == 4)
-            {
-                LoadCompressedSpriteSheet(&sSpriteSheet_OakMugshot);
-                LoadSpritePalette(&sSpritePal_OakMugshot);
-            }
-            else if(gSaveBlock2Ptr->playerGfxType == 5)
-            {
-                LoadCompressedSpriteSheet(&sSpriteSheet_EthanMugshot);
-                LoadSpritePalette(&sSpritePal_EthanMugshot);
-            }
-            else
-            {
-                LoadCompressedSpriteSheet(&sSpriteSheet_BrendanMugshot);
-                LoadSpritePalette(&sSpritePal_BrendanMugshot);
-            }
-            
+            LoadSpritePalette(&sSpritePal_IconBox);           
             LoadPalette(sMainBgPalette, 0, 32);
         }
         else
         {
             LoadCompressedSpriteSheet(&sSpriteSheet_IconBoxFem);
             LoadSpritePalette(&sSpritePal_IconBoxFem);
-            if(gSaveBlock2Ptr->playerGfxType == 1)
-            {
-                LoadCompressedSpriteSheet(&sSpriteSheet_LeafMugshot);
-                LoadSpritePalette(&sSpritePal_LeafMugshot);
-            }
-            else if(gSaveBlock2Ptr->playerGfxType == 2)
-            {
-                LoadCompressedSpriteSheet(&sSpriteSheet_DawnMugshot);
-                LoadSpritePalette(&sSpritePal_DawnMugshot);
-            }
-            else if(gSaveBlock2Ptr->playerGfxType == 3)
-            {
-                LoadCompressedSpriteSheet(&sSpriteSheet_CynthiaMugshot);
-                LoadSpritePalette(&sSpritePal_CynthiaMugshot);
-            }
-            else if(gSaveBlock2Ptr->playerGfxType == 4)
-            {
-                LoadCompressedSpriteSheet(&sSpriteSheet_PhoebeMugshot);
-                LoadSpritePalette(&sSpritePal_PhoebeMugshot);
-            }
-            else if(gSaveBlock2Ptr->playerGfxType == 5)
-            {
-                LoadCompressedSpriteSheet(&sSpriteSheet_LyraMugshot);
-                LoadSpritePalette(&sSpritePal_LyraMugshot);
-            }
-            else
-            {
-                LoadCompressedSpriteSheet(&sSpriteSheet_MayMugshot);
-                LoadSpritePalette(&sSpritePal_MayMugshot);
-            }
-            
             LoadPalette(sMainBgPaletteFem, 0, 32);
         }
         LoadPalette(sScrollBgPalette, 16, 32);
@@ -916,6 +925,15 @@ static void DestroyMugshot()
 {
     DestroySprite(&gSprites[sMainMenuDataPtr->mugshotSpriteId]);
     sMainMenuDataPtr->mugshotSpriteId = SPRITE_NONE;
+}
+
+u16 CreateMugshotExternal()
+{
+    u16 spriteId = CreateSprite(&sSpriteTemplate_Mugshot, 40, 111, 1);
+    gSprites[spriteId].invisible = FALSE;
+    StartSpriteAnim(&gSprites[spriteId], 0);
+    gSprites[spriteId].oam.priority = 0;
+    return spriteId;
 }
 
 //

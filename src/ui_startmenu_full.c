@@ -49,6 +49,7 @@
 #include "start_menu.h"
 #include "ui_mode_menu.h"
 #include "ui_outfits.h"
+#include "ui_main_menu.h"
 
 /*
     Full Screen Start Menu
@@ -76,6 +77,7 @@ struct StartMenuResources
     u16 selector_y;
     u16 selectedMenu;
     u16 greyMenuBoxIds[3];
+    u16 mugshotSpriteId;
 };
 
 enum WindowIds
@@ -87,11 +89,11 @@ enum WindowIds
 
 enum StartMenuBoxes
 {
-    START_MENU_POKEDEX,
-    START_MENU_PARTY,
     START_MENU_BAG,
+    START_MENU_PARTY,
+    START_MENU_POKEDEX,
     START_MENU_CARD,
-    START_MENU_MAP,
+    START_MENU_OUTFITS,
     START_MENU_OPTIONS,
 };
 
@@ -145,8 +147,8 @@ static const struct WindowTemplate sStartMenuWindowTemplates[] =
         .bg = 0,            // which bg to print text on
         .tilemapLeft = 1,   // position from left (per 8 pixels)
         .tilemapTop = 3,    // position from top (per 8 pixels)
-        .width = 9,        // width (per 8 pixels)
-        .height = 15,        // height (per 8 pixels)
+        .width = 30,        // width (per 8 pixels)
+        .height = 6,        // height (per 8 pixels)
         .paletteNum = 2,   // palette index to use for text
         .baseBlock = 1,     // tile start in VRAM
     },
@@ -159,7 +161,7 @@ static const struct WindowTemplate sStartMenuWindowTemplates[] =
         .width = 30,        // width (per 8 pixels)
         .height = 2,        // height (per 8 pixels)
         .paletteNum = 0,   // palette index to use for text
-        .baseBlock = 1 + (9 * 15),     // tile start in VRAM
+        .baseBlock = 1 + (30 * 6),     // tile start in VRAM
     },
 
     [WINDOW_BOTTOM_BAR] = // Window ID for the save confirmation box
@@ -170,7 +172,7 @@ static const struct WindowTemplate sStartMenuWindowTemplates[] =
         .width = 30,        // width (per 8 pixels)
         .height = 2,        // height (per 8 pixels)
         .paletteNum = 0,   // palette index to use for text
-        .baseBlock = 1 + (9 * 15) + (30 * 2),     // tile start in VRAM
+        .baseBlock = 1 + (30 * 6) + (30 * 2),     // tile start in VRAM
     },
     DUMMY_WIN_TEMPLATE,
 };
@@ -187,7 +189,7 @@ static const u16 sStartMenuPalette[] = INCBIN_U16("graphics/ui_startmenu_full/me
 //#if (FLAG_CLOCK_MODE != 0)
 //static const u32 sStartMenuTilemap[] = INCBIN_U32("graphics/ui_startmenu_full/menu_tilemap_alt.bin.lz");
 //#else
-static const u32 sStartMenuTilemap[] = INCBIN_U32("graphics/ui_startmenu_full/menu_tilemap.bin.lz");
+static const u32 sStartMenuTilemap[] = INCBIN_U32("graphics/ui_startmenu_full/menu_tiles.bin.lz");
 //#endif
 
 // Alternate Main Background for Female Player
@@ -511,11 +513,11 @@ static const struct SpriteTemplate sSpriteTemplate_GreyMenuButtonParty =
 //
 //      Cursor Creation and Callback 
 //
-#define CURSOR_LEFT_COL_X 128
-#define CURSOR_RIGHT_COL_X 128 + 64 + 8
-#define CURSOR_TOP_ROW_Y 40
-#define CURSOR_MID_ROW_Y 40 + 40
-#define CURSOR_BTM_ROW_Y 40 + 80
+#define CURSOR_LEFT_COL_X   116
+#define CURSOR_MID_COL_X    CURSOR_LEFT_COL_X + 46 + 6
+#define CURSOR_RIGHT_COL_X  CURSOR_MID_COL_X  + 46 + 6
+#define CURSOR_TOP_ROW_Y    88
+#define CURSOR_BTM_ROW_Y    CURSOR_TOP_ROW_Y + 32
 
 static void CreateCursor()
 {
@@ -534,6 +536,10 @@ static void DestroyCursor()
     if (sStartMenuDataPtr->cursorSpriteId != SPRITE_NONE)
         DestroySprite(&gSprites[sStartMenuDataPtr->cursorSpriteId]);
     sStartMenuDataPtr->cursorSpriteId = SPRITE_NONE;
+
+    if (sStartMenuDataPtr->mugshotSpriteId != SPRITE_NONE)
+        DestroySprite(&gSprites[sStartMenuDataPtr->mugshotSpriteId]);
+    sStartMenuDataPtr->mugshotSpriteId = SPRITE_NONE;
 }
 
 struct SpriteCordsStruct {
@@ -543,13 +549,12 @@ struct SpriteCordsStruct {
 
 static void CursorCallback(struct Sprite *sprite) // Sprite callback for the cursor that updates the position every frame when the input control code updates
 {
-    struct SpriteCordsStruct spriteCords[3][2] = {
-        {{CURSOR_LEFT_COL_X, CURSOR_TOP_ROW_Y}, {CURSOR_RIGHT_COL_X, CURSOR_TOP_ROW_Y}},
-        {{CURSOR_LEFT_COL_X, CURSOR_MID_ROW_Y}, {CURSOR_RIGHT_COL_X, CURSOR_MID_ROW_Y}},
-        {{CURSOR_LEFT_COL_X, CURSOR_BTM_ROW_Y}, {CURSOR_RIGHT_COL_X, CURSOR_BTM_ROW_Y}},
+    struct SpriteCordsStruct spriteCords[2][3] = {
+        {{CURSOR_LEFT_COL_X, CURSOR_TOP_ROW_Y}, {CURSOR_MID_COL_X, CURSOR_TOP_ROW_Y}, {CURSOR_RIGHT_COL_X, CURSOR_TOP_ROW_Y}},
+        {{CURSOR_LEFT_COL_X, CURSOR_BTM_ROW_Y}, {CURSOR_MID_COL_X, CURSOR_BTM_ROW_Y}, {CURSOR_RIGHT_COL_X, CURSOR_BTM_ROW_Y}},
     };
 
-    gSelectedMenu = sStartMenuDataPtr->selector_x + (sStartMenuDataPtr->selector_y * 2);
+    gSelectedMenu = sStartMenuDataPtr->selector_x + (sStartMenuDataPtr->selector_y * 3);
 
     sprite->x = spriteCords[sStartMenuDataPtr->selector_y][sStartMenuDataPtr->selector_x].x;
     sprite->y = spriteCords[sStartMenuDataPtr->selector_y][sStartMenuDataPtr->selector_x].y;
@@ -559,39 +564,37 @@ static void CursorCallback(struct Sprite *sprite) // Sprite callback for the cur
 
 static void InitCursorInPlace()
 {
-    if(gSelectedMenu % 2)
-        sStartMenuDataPtr->selector_x = 1;
-    else
-        sStartMenuDataPtr->selector_x = 0;
-
-    if(gSelectedMenu <= 1)
-        sStartMenuDataPtr->selector_y = 0;
-    else if (gSelectedMenu > 1 && gSelectedMenu <= 3)
+    if(gSelectedMenu > 2)
         sStartMenuDataPtr->selector_y = 1;
     else
-        sStartMenuDataPtr->selector_y = 2;
+        sStartMenuDataPtr->selector_y = 0;
+
+    if((gSelectedMenu == 0) || (gSelectedMenu == 3))
+        sStartMenuDataPtr->selector_x = 0;
+    else if ((gSelectedMenu == 1) || (gSelectedMenu == 4))
+        sStartMenuDataPtr->selector_x = 1;
+    else
+        sStartMenuDataPtr->selector_x = 2;
 }
 
 
 //
 //  Create Icon Box Sprites Behin the Icons
 //
-#define ICON_BOX_1_START_X          24
-#define ICON_BOX_1_START_Y          40
-#define ICON_BOX_X_DIFFERENCE       40
-#define ICON_BOX_Y_DIFFERENCE       40
+#define ICON_BOX_1_START_X          25
+#define ICON_BOX_1_START_Y          44
+#define ICON_BOX_X_DIFFERENCE       38
 static void CreateIconBox()
 {
     u8 i = 0;
 
-    sStartMenuDataPtr->iconBoxSpriteIds[0] = CreateSprite(&sSpriteTemplate_IconBox, ICON_BOX_1_START_X, ICON_BOX_1_START_Y, 2);
-    sStartMenuDataPtr->iconBoxSpriteIds[1] = CreateSprite(&sSpriteTemplate_IconBox, ICON_BOX_1_START_X + ICON_BOX_X_DIFFERENCE, ICON_BOX_1_START_Y, 2);
+    sStartMenuDataPtr->iconBoxSpriteIds[0] = CreateSprite(&sSpriteTemplate_IconBox, ICON_BOX_1_START_X + (ICON_BOX_X_DIFFERENCE * 0), ICON_BOX_1_START_Y, 2);
+    sStartMenuDataPtr->iconBoxSpriteIds[1] = CreateSprite(&sSpriteTemplate_IconBox, ICON_BOX_1_START_X + (ICON_BOX_X_DIFFERENCE * 1), ICON_BOX_1_START_Y, 2);
+    sStartMenuDataPtr->iconBoxSpriteIds[2] = CreateSprite(&sSpriteTemplate_IconBox, ICON_BOX_1_START_X + (ICON_BOX_X_DIFFERENCE * 2), ICON_BOX_1_START_Y, 2);
 
-    sStartMenuDataPtr->iconBoxSpriteIds[2] = CreateSprite(&sSpriteTemplate_IconBox, ICON_BOX_1_START_X, ICON_BOX_1_START_Y + (ICON_BOX_X_DIFFERENCE * 1), 2);
-    sStartMenuDataPtr->iconBoxSpriteIds[3] = CreateSprite(&sSpriteTemplate_IconBox, ICON_BOX_1_START_X + ICON_BOX_X_DIFFERENCE, ICON_BOX_1_START_Y + (ICON_BOX_Y_DIFFERENCE * 1), 2);
-
-    sStartMenuDataPtr->iconBoxSpriteIds[4] = CreateSprite(&sSpriteTemplate_IconBox, ICON_BOX_1_START_X, ICON_BOX_1_START_Y + (ICON_BOX_X_DIFFERENCE * 2), 2);
-    sStartMenuDataPtr->iconBoxSpriteIds[5] = CreateSprite(&sSpriteTemplate_IconBox, ICON_BOX_1_START_X + ICON_BOX_X_DIFFERENCE, ICON_BOX_1_START_Y + (ICON_BOX_Y_DIFFERENCE * 2), 2);
+    sStartMenuDataPtr->iconBoxSpriteIds[3] = CreateSprite(&sSpriteTemplate_IconBox, ICON_BOX_1_START_X + (ICON_BOX_X_DIFFERENCE * 3), ICON_BOX_1_START_Y, 2);
+    sStartMenuDataPtr->iconBoxSpriteIds[4] = CreateSprite(&sSpriteTemplate_IconBox, ICON_BOX_1_START_X + (ICON_BOX_X_DIFFERENCE * 4), ICON_BOX_1_START_Y, 2);
+    sStartMenuDataPtr->iconBoxSpriteIds[5] = CreateSprite(&sSpriteTemplate_IconBox, ICON_BOX_1_START_X + (ICON_BOX_X_DIFFERENCE * 5), ICON_BOX_1_START_Y, 2);
 
     for(i = 0; i < 6; i++)
     {
@@ -628,28 +631,28 @@ static void CreatePartyMonIcons()
         switch (i) // choose position for each icon
         {
             case 0:
-                x = ICON_BOX_1_START_X;
+                x = ICON_BOX_1_START_X + (ICON_BOX_X_DIFFERENCE * 0);
                 y = ICON_BOX_1_START_Y;
                 break;
             case 1:
-                x = ICON_BOX_1_START_X + ICON_BOX_X_DIFFERENCE;
+                x = ICON_BOX_1_START_X + (ICON_BOX_X_DIFFERENCE * 1);
                 y = ICON_BOX_1_START_Y;
                 break;
             case 2:
-                x = ICON_BOX_1_START_X;
-                y = ICON_BOX_1_START_Y + (ICON_BOX_Y_DIFFERENCE * 1);
+                x = ICON_BOX_1_START_X + (ICON_BOX_X_DIFFERENCE * 2);
+                y = ICON_BOX_1_START_Y;
                 break;
             case 3:
-                x = ICON_BOX_1_START_X + ICON_BOX_X_DIFFERENCE;
-                y = ICON_BOX_1_START_Y + (ICON_BOX_Y_DIFFERENCE * 1);
+                x = ICON_BOX_1_START_X + (ICON_BOX_X_DIFFERENCE * 3);
+                y = ICON_BOX_1_START_Y;
                 break;
             case 4:
-                x = ICON_BOX_1_START_X;
-                y = ICON_BOX_1_START_Y + (ICON_BOX_X_DIFFERENCE * 2);
+                x = ICON_BOX_1_START_X + (ICON_BOX_X_DIFFERENCE * 4);
+                y = ICON_BOX_1_START_Y;
                 break;
             case 5:
-                x = ICON_BOX_1_START_X + ICON_BOX_X_DIFFERENCE;
-                y = ICON_BOX_1_START_Y + (ICON_BOX_Y_DIFFERENCE * 2);
+                x = ICON_BOX_1_START_X + (ICON_BOX_X_DIFFERENCE * 5);
+                y = ICON_BOX_1_START_Y;
                 break;
         }
 
@@ -724,8 +727,8 @@ static u32 GetHPEggCyclePercent(u32 partyIndex)
         return ((GetMonData(mon, MON_DATA_FRIENDSHIP)) * 100 / (gSpeciesInfo[GetMonData(mon,MON_DATA_SPECIES)].eggCycles));
 }
 
-#define HP_BAR_X_START  0
-#define HP_BAR_Y_START  30
+#define HP_BAR_X_START  1
+#define HP_BAR_Y_START  36
 
 static void StartMenu_DisplayHP(void)
 {
@@ -748,20 +751,20 @@ static void StartMenu_DisplayHP(void)
                 y = HP_BAR_Y_START;
                 break;
             case 2:
-                x = HP_BAR_X_START;
-                y = HP_BAR_Y_START + (ICON_BOX_Y_DIFFERENCE * 1);
+                x = HP_BAR_X_START + ICON_BOX_X_DIFFERENCE + ICON_BOX_X_DIFFERENCE;
+                y = HP_BAR_Y_START;
                 break;
             case 3:
-                x = HP_BAR_X_START + ICON_BOX_X_DIFFERENCE;
-                y = HP_BAR_Y_START + (ICON_BOX_Y_DIFFERENCE * 1);
+                x = HP_BAR_X_START + ICON_BOX_X_DIFFERENCE + ICON_BOX_X_DIFFERENCE + ICON_BOX_X_DIFFERENCE;
+                y = HP_BAR_Y_START;
                 break;
             case 4:
-                x = HP_BAR_X_START;
-                y = HP_BAR_Y_START + (ICON_BOX_X_DIFFERENCE * 2);
+                x = HP_BAR_X_START + ICON_BOX_X_DIFFERENCE + ICON_BOX_X_DIFFERENCE + ICON_BOX_X_DIFFERENCE + ICON_BOX_X_DIFFERENCE;
+                y = HP_BAR_Y_START ;
                 break;
             case 5:
-                x = HP_BAR_X_START + ICON_BOX_X_DIFFERENCE;
-                y = HP_BAR_Y_START + (ICON_BOX_Y_DIFFERENCE * 2);
+                x = HP_BAR_X_START + ICON_BOX_X_DIFFERENCE + ICON_BOX_X_DIFFERENCE + ICON_BOX_X_DIFFERENCE + ICON_BOX_X_DIFFERENCE + ICON_BOX_X_DIFFERENCE;
+                y = HP_BAR_Y_START;
                 break;
         }
 
@@ -831,7 +834,7 @@ static void DestroyGreyMenuBoxes()
 #define AILMENT_FNT   7
 
 #define ICON_STATUS_1_START_X  24
-#define ICON_STATUS_1_START_Y  29
+#define ICON_STATUS_1_START_Y  33
 
 static void CreatePartyMonStatuses()
 {
@@ -849,24 +852,24 @@ static void CreatePartyMonStatuses()
                 y = ICON_STATUS_1_START_Y;
                 break;
             case 1:
-                x = ICON_STATUS_1_START_X + ICON_BOX_X_DIFFERENCE;
+                x = ICON_STATUS_1_START_X + ICON_BOX_X_DIFFERENCE + 1;
                 y = ICON_STATUS_1_START_Y;
                 break;
             case 2:
-                x = ICON_STATUS_1_START_X;
-                y = ICON_STATUS_1_START_Y + (ICON_BOX_Y_DIFFERENCE * 1);
+                x = ICON_STATUS_1_START_X + ICON_BOX_X_DIFFERENCE + ICON_BOX_X_DIFFERENCE + 1;
+                y = ICON_STATUS_1_START_Y;
                 break;
             case 3:
-                x = ICON_STATUS_1_START_X + ICON_BOX_X_DIFFERENCE;
-                y = ICON_STATUS_1_START_Y + (ICON_BOX_Y_DIFFERENCE * 1);
+                x = ICON_STATUS_1_START_X + ICON_BOX_X_DIFFERENCE + ICON_BOX_X_DIFFERENCE + ICON_BOX_X_DIFFERENCE + 1;
+                y = ICON_STATUS_1_START_Y;
                 break;
             case 4:
-                x = ICON_STATUS_1_START_X;
-                y = ICON_STATUS_1_START_Y + (ICON_BOX_X_DIFFERENCE * 2);
+                x = ICON_STATUS_1_START_X + ICON_BOX_X_DIFFERENCE + ICON_BOX_X_DIFFERENCE + ICON_BOX_X_DIFFERENCE + ICON_BOX_X_DIFFERENCE + 1;
+                y = ICON_STATUS_1_START_Y;
                 break;
             case 5:
-                x = ICON_STATUS_1_START_X + ICON_BOX_X_DIFFERENCE;
-                y = ICON_STATUS_1_START_Y + (ICON_BOX_Y_DIFFERENCE * 2);
+                x = ICON_STATUS_1_START_X + ICON_BOX_X_DIFFERENCE + ICON_BOX_X_DIFFERENCE + ICON_BOX_X_DIFFERENCE + ICON_BOX_X_DIFFERENCE + ICON_BOX_X_DIFFERENCE;
+                y = ICON_STATUS_1_START_Y;
                 break;
         }
 
@@ -925,6 +928,7 @@ void StartMenuFull_Init(MainCallback callback)
     sStartMenuDataPtr->gfxLoadState = 0;
     sStartMenuDataPtr->savedCallback = callback;
     sStartMenuDataPtr->cursorSpriteId = SPRITE_NONE;
+    sStartMenuDataPtr->mugshotSpriteId = SPRITE_NONE;
 
     for(i= 0; i < 6; i++)
     {
@@ -1009,9 +1013,10 @@ static bool8 StartMenuFull_DoGfxSetup(void) // base UI loader from Ghouls UI She
         break;
     case 5:
         PrintMapNameAndTime(); // print all sprites
-        CreateGreyedMenuBoxes();
+        //CreateGreyedMenuBoxes();
         CreateIconBox();
         CreateCursor();
+        sStartMenuDataPtr->mugshotSpriteId = CreateMugshotExternal();
         CreatePartyMonIcons();
         StartMenu_DisplayHP();
         CreatePartyMonStatuses();
@@ -1049,7 +1054,7 @@ static void StartMenuFull_FreeResources(void) // Clear Everything if Leaving
     DestroyIconBoxs();
     DestroyMonIcons();
     DestroyStatusSprites();
-    DestroyGreyMenuBoxes();
+    //DestroyGreyMenuBoxes();
     FreeAllWindowBuffers();    
 }
 
@@ -1146,10 +1151,12 @@ static bool8 StartMenuFull_LoadGraphics(void) // Load the Tilesets, Tilemaps, Sp
         LoadCompressedSpriteSheet(&sSpriteSheet_StatusIcons);
         LoadCompressedSpritePalette(&sSpritePalette_StatusIcons);
 
-        LoadCompressedSpriteSheet(&sSpriteSheet_GreyMenuButtonMap);
-        LoadCompressedSpriteSheet(&sSpriteSheet_GreyMenuButtonDex);
-        LoadCompressedSpriteSheet(&sSpriteSheet_GreyMenuButtonParty);
-        LoadSpritePalette(&sSpritePal_GreyMenuButton);
+        LoadMugshotIconGraphics();
+
+        //LoadCompressedSpriteSheet(&sSpriteSheet_GreyMenuButtonMap);
+        //LoadCompressedSpriteSheet(&sSpriteSheet_GreyMenuButtonDex);
+        //LoadCompressedSpriteSheet(&sSpriteSheet_GreyMenuButtonParty);
+        //LoadSpritePalette(&sSpritePal_GreyMenuButton);
         sStartMenuDataPtr->gfxLoadState++;
         break;
     }
@@ -1457,23 +1464,30 @@ static void Task_StartMenuFullMain(u8 taskId)
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_StartMenuFullTurnOff;
     }
-    if (JOY_NEW(DPAD_LEFT) || JOY_NEW(DPAD_RIGHT)) // these change the position of the selector, the actual x/y of the sprite is handled in its callback CursorCallback
+    if (JOY_NEW(DPAD_RIGHT)) // these change the position of the selector, the actual x/y of the sprite is handled in its callback CursorCallback
+    {
+        if(sStartMenuDataPtr->selector_x == 2)
+            sStartMenuDataPtr->selector_x = 0;
+        else
+            sStartMenuDataPtr->selector_x += 1; 
+    }
+    if (JOY_NEW(DPAD_LEFT)) // these change the position of the selector, the actual x/y of the sprite is handled in its callback CursorCallback
     {
         if(sStartMenuDataPtr->selector_x == 0)
-            sStartMenuDataPtr->selector_x = 1;
+            sStartMenuDataPtr->selector_x = 2;
         else
-            sStartMenuDataPtr->selector_x = 0; 
+            sStartMenuDataPtr->selector_x -= 1; 
     }
     if (JOY_NEW(DPAD_UP))
     {
         if (sStartMenuDataPtr->selector_y == 0)
-            sStartMenuDataPtr->selector_y = 2;
+            sStartMenuDataPtr->selector_y = 1;
         else
             sStartMenuDataPtr->selector_y--;
     }
     if (JOY_NEW(DPAD_DOWN))
     {
-        if (sStartMenuDataPtr->selector_y == 2)
+        if (sStartMenuDataPtr->selector_y == 1)
             sStartMenuDataPtr->selector_y = 0;
         else
             sStartMenuDataPtr->selector_y++;
@@ -1511,7 +1525,7 @@ static void Task_StartMenuFullMain(u8 taskId)
                     PlaySE(SE_BOO);
                 }
                 break;
-            case START_MENU_MAP:
+            case START_MENU_OUTFITS:
                 if(1)
                 {
                     PlaySE(SE_SELECT);
