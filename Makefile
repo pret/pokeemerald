@@ -86,8 +86,8 @@ ELF_NAME := $(ROM_NAME:.gba=.elf)
 MAP_NAME := $(ROM_NAME:.gba=.map)
 MODERN_ELF_NAME := $(MODERN_ROM_NAME:.gba=.elf)
 MODERN_MAP_NAME := $(MODERN_ROM_NAME:.gba=.map)
-TESTELF = $(ROM_NAME:.gba=-test.elf)
-HEADLESSELF = $(ROM_NAME:.gba=-test-headless.elf)
+TESTELF = $(MODERN_ROM_NAME:.gba=-test.elf)
+HEADLESSELF = $(MODERN_ROM_NAME:.gba=-test-headless.elf)
 
 # Pick our active variables
 ifeq ($(MODERN),0)
@@ -407,6 +407,13 @@ ifneq ($(NODEP),1)
 -include $(addprefix $(OBJ_DIR)/,$(C_SRCS:.c=.d))
 endif
 
+$(TEST_BUILDDIR)/%.o: $(TEST_SUBDIR)/%.c
+	@echo "$(CC1) <flags> -o $@ $<"
+	@$(CPP) $(CPPFLAGS) $< | $(PREPROC) -i $< charmap.txt | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
+
+$(TEST_BUILDDIR)/%.d: $(TEST_SUBDIR)/%.c
+	$(SCANINC) -M $@ $(INCLUDE_SCANINC_ARGS) -I tools/agbcc/include $<
+
 $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s
 	$(AS) $(ASFLAGS) -o $@ $<
 
@@ -449,14 +456,6 @@ $(OBJ_DIR)/sym_ewram.ld: sym_ewram.txt
 # NOTE: Depending on event_scripts.o is hacky, but we want to depend on everything event_scripts.s depends on without having to alter scaninc
 $(DATA_SRC_SUBDIR)/pokemon/teachable_learnsets.h: $(DATA_ASM_BUILDDIR)/event_scripts.o
 	python3 $(TOOLS_DIR)/learnset_helpers/teachable.py
-
-# NOTE: Based on C_DEP above, but without NODEP and KEEP_TEMPS handling.
-define TEST_DEP
-$1: $2 $$(shell $(SCANINC) -I include -I $(TOOLS_DIR)/agbcc/include $2)
-	@echo "$$(CC1) <flags> -o $$@ $$<"
-	@$$(CPP) $$(CPPFLAGS) $$< | $$(PREPROC) -i $$< charmap.txt | $$(CC1) $$(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $$(AS) $$(ASFLAGS) -o $$@ -
-endef
-$(foreach src, $(TEST_SRCS), $(eval $(call TEST_DEP,$(patsubst $(TEST_SUBDIR)/%.c,$(TEST_BUILDDIR)/%.o,$(src)),$(src),$(patsubst $(TEST_SUBDIR)/%.c,%,$(src)))))
 
 # Linker script
 ifeq ($(MODERN),0)
