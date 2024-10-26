@@ -4575,7 +4575,7 @@
       "id": "LAYOUT_PIT_BOSS_ARENA",
       "name": "PitBossArena_Layout",
       "width": 20,
-      "height": 20,
+      "height": 22,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_BattlePyramid",
       "border_filepath": "data/layouts/PitBossArena/border.bin",

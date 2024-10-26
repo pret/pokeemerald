@@ -30,6 +30,11 @@
 #include "constants/battle.h"
 #include "event_object_movement.h"
 #include "script_pokemon_util.h"
+#include "palette.h"
+#include "decompress.h"
+#include "window.h"
+#include "text.h"
+#include "menu.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
@@ -781,6 +786,19 @@ void CheckFloorCleared()
     if (trainerDefeated == 8)
         FlagSet(FLAG_FLOOR_CLEARED);
     return;
+}
+u16 ReturnTrainersRemaining()
+{
+    u16 iterator = 0;
+    u16 trainerDefeated = 0;
+    for (iterator = 0; iterator < 8; iterator++)
+    {
+        if(iterator > 3)
+            trainerDefeated = (u8) FlagGet(TRAINER_FLAGS_START + RandomNPCTrainers_Doubles[iterator - 4].trainerflag) + trainerDefeated;
+        else
+            trainerDefeated = (u8) FlagGet(TRAINER_FLAGS_START + RandomNPCTrainers[iterator].trainerflag) + trainerDefeated;
+    }
+    return 8 - trainerDefeated;
 }
 
 void BufferMapFloorString()
@@ -1696,3 +1714,144 @@ void BufferNameText_RandomMonRewardEncounter(void)
 #endif
 }
 
+
+//
+//  Overworld Trainers Left HUD
+//
+
+static void Task_DelayPrintOverworldHUD(u8 taskId);
+static void PrintWarpPriceOnTrainerCount(u32 spriteId, u32 bgColor, u32 startTile);
+
+static EWRAM_DATA u8 gOWHUDSprite;
+static EWRAM_DATA u8 gOWHUDSpriteMask;
+static const u32 sTrainerCountGfx[] = INCBIN_U32("graphics/interface/trainercount_hud.4bpp.lz");
+static const u16 sTrainerCountPal[] = INCBIN_U16("graphics/interface/trainercount_hud.gbapal");
+
+#define TRAINER_COUNT_PAL_TAG       OBJ_EVENT_PAL_TAG_NPC_4 // Shares the same pal as the trainer it uses
+#define TAG_TRAINER_COUNT_GFX 30050
+
+static const struct SpritePalette sSpritePal_TrainerCountHUD =
+{
+    .data = sTrainerCountPal,
+    .tag = TRAINER_COUNT_PAL_TAG,
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_TrainerCountHUD = 
+{
+    .data = sTrainerCountGfx,
+    .size = 32*32*1/2,
+    .tag = TAG_TRAINER_COUNT_GFX,
+};
+
+static const union AnimCmd sSpriteAnim_TrainerCountHUD0[] =
+{
+    ANIMCMD_FRAME(0, 60),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd *const sSpriteAnimTable_TrainerCountHUD[] =
+{
+    sSpriteAnim_TrainerCountHUD0,
+};
+
+static const struct OamData sOamData_TrainerCountHUD =
+{
+    .size = SPRITE_SIZE(32x32),
+    .shape = SPRITE_SHAPE(32x32),
+    .priority = 0,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_TrainerCountHUD =
+{
+    .tileTag = TAG_TRAINER_COUNT_GFX,
+    .paletteTag = TRAINER_COUNT_PAL_TAG,
+    .oam = &sOamData_TrainerCountHUD,
+    .anims = sSpriteAnimTable_TrainerCountHUD,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+void CreateOverworldHUD(void)
+{
+    if(FuncIsActiveTask(Task_DelayPrintOverworldHUD))
+        return;
+    u16 remainingTrainers = ReturnTrainersRemaining();
+    if ((remainingTrainers == 0) || (VarGet(VAR_PIT_FLOOR) == 0) || ((VarGet(VAR_PIT_FLOOR) % BOSS_FLOOR_RATE) == 0) || ((VarGet(VAR_PIT_FLOOR) % (gSaveBlock2Ptr->modeHealFloors10 ? 10 : 5)) == 0))
+        return;
+    CreateTask(Task_DelayPrintOverworldHUD, 15);
+}
+
+static void Task_DelayPrintOverworldHUD(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        LoadCompressedSpriteSheet(&sSpriteSheet_TrainerCountHUD);
+        LoadSpritePalette(&sSpritePal_TrainerCountHUD);
+        gOWHUDSprite = SPRITE_NONE;
+        gOWHUDSprite = CreateSprite(&sSpriteTemplate_TrainerCountHUD, 224, 16, 0);
+        gSprites[gOWHUDSprite].invisible = FALSE;
+
+        PrintWarpPriceOnTrainerCount(gOWHUDSprite, 0, gSprites[gOWHUDSprite].oam.tileNum + 6);
+
+        if (GetFlashLevel() > 0)
+        {
+            SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJWIN_ON);
+            SetGpuRegBits(REG_OFFSET_WINOUT, WINOUT_WINOBJ_OBJ);
+            gOWHUDSpriteMask = SPRITE_NONE;
+            gOWHUDSpriteMask = CreateSprite(&sSpriteTemplate_TrainerCountHUD, 224, 16, 0);
+            gSprites[gOWHUDSpriteMask].invisible = FALSE;
+            gSprites[gOWHUDSpriteMask].oam.objMode = ST_OAM_OBJ_WINDOW;
+        }
+        DestroyTask(taskId);
+    }
+}
+static const struct WindowTemplate sTrainerCountWindowTemplate = {
+    .bg = 0,
+    .tilemapLeft = 0,
+    .tilemapTop = 0,
+    .width = 2,
+    .height = 2,
+    .paletteNum = 0,
+    .baseBlock = 1 + 120
+};
+
+static u8 *AddTextPrinterAndCreateWindowOnTrainerCount(const u8 *str, u32 x, u32 y, u32 bgColor, u32 *windowId)
+{
+    u16 winId;
+    u8 color[3];
+    struct WindowTemplate winTemplate = sTrainerCountWindowTemplate;
+
+    winId = AddWindow(&winTemplate);
+    FillWindowPixelBuffer(winId, PIXEL_FILL(bgColor));
+
+    color[0] = bgColor;
+    color[1] = 14;
+    color[2] = 15;
+
+    AddTextPrinterParameterized4(winId, FONT_SMALL_NARROW, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
+
+    *windowId = winId;
+    return (u8 *)(GetWindowAttribute(winId, WINDOW_TILE_DATA));
+}
+
+static void WarpPriceTextIntoTrainerCountObject(void *dest, u8 *windowTileData, u32 windowWidth)
+{
+    CpuCopy32(windowTileData, dest, windowWidth * TILE_SIZE_4BPP);
+    CpuCopy32(windowTileData + (2 * TILE_SIZE_4BPP), dest + (4 * TILE_SIZE_4BPP), windowWidth * TILE_SIZE_4BPP);
+}
+
+static const u8 sText_TrainerCountPrefix[]         = _("x{STR_VAR_3}");
+static void PrintWarpPriceOnTrainerCount(u32 spriteId, u32 bgColor, u32 startTile) // 0xbc0 for one part of the TrainerCount
+{
+    u8 *windowTileData;
+    u32 windowId;
+
+    void *objVram = (void *)(OBJ_VRAM0);
+    ConvertIntToDecimalStringN(gStringVar3, ReturnTrainersRemaining(), STR_CONV_MODE_LEFT_ALIGN, 1);
+    StringExpandPlaceholders(gStringVar4, sText_TrainerCountPrefix);
+
+    windowTileData = AddTextPrinterAndCreateWindowOnTrainerCount(gStringVar4, 0, 0, bgColor, &windowId);
+    WarpPriceTextIntoTrainerCountObject(objVram + (startTile * TILE_SIZE_4BPP), windowTileData, 2);
+    RemoveWindow(windowId);
+}

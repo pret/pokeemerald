@@ -923,7 +923,7 @@ static void CreateMugshot()
 
 static void DestroyMugshot()
 {
-    DestroySprite(&gSprites[sMainMenuDataPtr->mugshotSpriteId]);
+    DestroySpriteAndFreeResources(&gSprites[sMainMenuDataPtr->mugshotSpriteId]);
     sMainMenuDataPtr->mugshotSpriteId = SPRITE_NONE;
 }
 

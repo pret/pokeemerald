@@ -537,8 +537,7 @@ static void DestroyCursor()
         DestroySprite(&gSprites[sStartMenuDataPtr->cursorSpriteId]);
     sStartMenuDataPtr->cursorSpriteId = SPRITE_NONE;
 
-    if (sStartMenuDataPtr->mugshotSpriteId != SPRITE_NONE)
-        DestroySprite(&gSprites[sStartMenuDataPtr->mugshotSpriteId]);
+    DestroySpriteAndFreeResources(&gSprites[sStartMenuDataPtr->mugshotSpriteId]);
     sStartMenuDataPtr->mugshotSpriteId = SPRITE_NONE;
 }
 
