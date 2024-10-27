@@ -26,6 +26,7 @@
 #include "text.h"
 #include "constants/abilities.h"
 #include "constants/songs.h"
+#include "script.h"
 
 static EWRAM_DATA u8 sLinkSendTaskId = 0;
 static EWRAM_DATA u8 sLinkReceiveTaskId = 0;
@@ -2529,36 +2530,9 @@ void BtlController_HandleDrawTrainerPic(u32 battler, u32 trainerPicId, bool32 is
         }
         else
         {
-            if (gSaveBlock2Ptr->playerGender != MALE)
-            {
-                if(gSaveBlock2Ptr->playerGfxType == 1)
-                    trainerPicId = TRAINER_BACK_PIC_LEAF;
-                else if(gSaveBlock2Ptr->playerGfxType == 2)
-                    trainerPicId = TRAINER_BACK_PIC_DAWN;
-                else if(gSaveBlock2Ptr->playerGfxType == 3)
-                    trainerPicId = TRAINER_BACK_PIC_CYNTHIA;
-                else if(gSaveBlock2Ptr->playerGfxType == 4)
-                    trainerPicId = TRAINER_BACK_PIC_PHOEBE;
-                else if(gSaveBlock2Ptr->playerGfxType == 5)
-                    trainerPicId = TRAINER_BACK_PIC_LYRA;
-                else
-                    trainerPicId = TRAINER_BACK_PIC_MAY;
-            }
-            else
-            {
-                if(gSaveBlock2Ptr->playerGfxType == 1)
-                    trainerPicId = TRAINER_BACK_PIC_RED;
-                else if(gSaveBlock2Ptr->playerGfxType == 2)
-                    trainerPicId = TRAINER_BACK_PIC_LUCAS;
-                else if(gSaveBlock2Ptr->playerGfxType == 3)
-                    trainerPicId = TRAINER_BACK_PIC_STEVEN;
-                else if(gSaveBlock2Ptr->playerGfxType == 4)
-                    trainerPicId = TRAINER_BACK_PIC_OAK;
-                else if(gSaveBlock2Ptr->playerGfxType == 5)
-                    trainerPicId = TRAINER_BACK_PIC_ETHAN;
-                else
-                    trainerPicId = TRAINER_BACK_PIC_BRENDAN;
-            }
+ 
+            trainerPicId = ReturnAvatarTrainerBackPicId(gSaveBlock2Ptr->playerGfxType);
+            
             DecompressTrainerBackPic(trainerPicId, battler);
             SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(battler));
             if (subpriority == -1)
@@ -2582,36 +2556,7 @@ void BtlController_HandleTrainerSlide(u32 battler, u32 trainerPicId)
 {
     if (GetBattlerSide(battler) == B_SIDE_PLAYER)
     {   
-        if (gSaveBlock2Ptr->playerGender != MALE)
-        {
-            if(gSaveBlock2Ptr->playerGfxType == 1)
-                trainerPicId = TRAINER_BACK_PIC_LEAF;
-            else if(gSaveBlock2Ptr->playerGfxType == 2)
-                trainerPicId = TRAINER_BACK_PIC_DAWN;
-            else if(gSaveBlock2Ptr->playerGfxType == 3)
-                    trainerPicId = TRAINER_BACK_PIC_CYNTHIA;
-            else if(gSaveBlock2Ptr->playerGfxType == 4)
-                    trainerPicId = TRAINER_BACK_PIC_PHOEBE;
-            else if(gSaveBlock2Ptr->playerGfxType == 5)
-                    trainerPicId = TRAINER_BACK_PIC_LYRA;
-            else
-                trainerPicId = TRAINER_BACK_PIC_MAY;
-        }
-        else
-        {
-            if(gSaveBlock2Ptr->playerGfxType == 1)
-                trainerPicId = TRAINER_BACK_PIC_RED;
-            else if(gSaveBlock2Ptr->playerGfxType == 2)
-                trainerPicId = TRAINER_BACK_PIC_LUCAS;
-            else if(gSaveBlock2Ptr->playerGfxType == 3)
-                    trainerPicId = TRAINER_BACK_PIC_STEVEN;
-            else if(gSaveBlock2Ptr->playerGfxType == 4)
-                    trainerPicId = TRAINER_BACK_PIC_OAK;
-            else if(gSaveBlock2Ptr->playerGfxType == 5)
-                    trainerPicId = TRAINER_BACK_PIC_ETHAN;
-            else
-                trainerPicId = TRAINER_BACK_PIC_BRENDAN;
-        }
+        trainerPicId = ReturnAvatarTrainerBackPicId(gSaveBlock2Ptr->playerGfxType);
         DecompressTrainerBackPic(trainerPicId, battler);
         SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(battler));
         gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate,

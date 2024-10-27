@@ -47,6 +47,7 @@
 #include "level_caps.h"
 #include "event_data.h"
 #include "field_weather.h"
+#include "script.h"
 
 static void ChangeMoveDisplayMode(u32 battler);
 #include "menu.h"
@@ -2013,41 +2014,12 @@ static void PlayerHandleSwitchInAnim(u32 battler)
 
 u32 LinkPlayerGetTrainerPicId(u32 multiplayerId)
 {
-    u32 trainerPicId;
-
-    u8 gender = gLinkPlayers[multiplayerId].gender;
-    u8 version = gLinkPlayers[multiplayerId].version & 0xFF;
-
-    if (gSaveBlock2Ptr->playerGfxType == 1)
-        trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_RED;
-    else if (gSaveBlock2Ptr->playerGfxType == 2)
-        trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_LUCAS;
-    else if (gSaveBlock2Ptr->playerGfxType == 3)
-        trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_STEVEN;
-    else if (gSaveBlock2Ptr->playerGfxType == 4)
-        trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_OAK;
-    else
-        trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_BRENDAN;
-
-    return trainerPicId;
+    return ReturnAvatarTrainerBackPicId(gSaveBlock2Ptr->playerGfxType);
 }
 
 static u32 PlayerGetTrainerBackPicId(void)
 {
-    u32 trainerPicId;
-
-    if (gSaveBlock2Ptr->playerGfxType == 1)
-        trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_RED;
-    else if (gSaveBlock2Ptr->playerGfxType == 2)
-        trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_LUCAS;
-    else if (gSaveBlock2Ptr->playerGfxType == 3)
-        trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_STEVEN;
-    else if (gSaveBlock2Ptr->playerGfxType == 4)
-        trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_OAK;
-    else
-        trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_BRENDAN;
-
-    return trainerPicId;
+    return ReturnAvatarTrainerBackPicId(gSaveBlock2Ptr->playerGfxType);
 }
 
 // In emerald it's possible to have a tag battle in the battle frontier facilities with AI
@@ -2414,7 +2386,7 @@ static void PlayerHandleOneReturnValue_Duplicate(u32 battler)
 
 static void PlayerHandleIntroTrainerBallThrow(u32 battler)
 {
-    const u32 *trainerPal = gTrainerBacksprites[gSaveBlock2Ptr->playerGender + (gSaveBlock2Ptr->playerGfxType * 2)].palette.data;
+    const u32 *trainerPal = gTrainerBacksprites[ReturnAvatarTrainerBackPicId(gSaveBlock2Ptr->playerGfxType)].palette.data;
     BtlController_HandleIntroTrainerBallThrow(battler, 0xD6F8, trainerPal, 31, Intro_TryShinyAnimShowHealthbox);
 }
 

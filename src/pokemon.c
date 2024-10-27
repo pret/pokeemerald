@@ -64,7 +64,7 @@
 #include "daycare.h"
 #include "config/general.h"
 #include "field_screen_effect.h"
-
+#include "script.h"
 #include "wild_encounter.h"
 
 #define FRIENDSHIP_EVO_THRESHOLD ((P_FRIENDSHIP_EVO_THRESHOLD >= GEN_9) ? 160 : 220)
@@ -7486,36 +7486,7 @@ u16 FacilityClassToPicIndex(u16 facilityClass)
 
 u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)
 {
-    if (playerGender != MALE)
-    {
-        if(gSaveBlock2Ptr->playerGfxType == 1)
-            return FacilityClassToPicIndex(FACILITY_CLASS_LEAF);
-        else if(gSaveBlock2Ptr->playerGfxType == 2)
-            return TRAINER_PIC_DAWN;
-        else if(gSaveBlock2Ptr->playerGfxType == 3)
-            return TRAINER_PIC_CYNTHIA;
-        else if(gSaveBlock2Ptr->playerGfxType == 4)
-            return TRAINER_PIC_ELITE_FOUR_PHOEBE;
-        else if(gSaveBlock2Ptr->playerGfxType == 5)
-            return TRAINER_PIC_LYRA;
-        else
-            return FacilityClassToPicIndex(FACILITY_CLASS_MAY);
-    }
-    else
-    {
-        if(gSaveBlock2Ptr->playerGfxType == 1)
-            return FacilityClassToPicIndex(FACILITY_CLASS_RED);
-        else if(gSaveBlock2Ptr->playerGfxType == 2)
-            return TRAINER_PIC_LUCAS;
-        else if(gSaveBlock2Ptr->playerGfxType == 3)
-            return TRAINER_PIC_STEVEN;
-        else if(gSaveBlock2Ptr->playerGfxType == 4)
-            return TRAINER_PIC_OAK;
-        else if(gSaveBlock2Ptr->playerGfxType == 5)
-            return TRAINER_PIC_ETHAN;
-        else
-            return FacilityClassToPicIndex(FACILITY_CLASS_BRENDAN);
-    }
+    return ReturnAvatarTrainerFrontPicId(gSaveBlock2Ptr->playerGfxType);
 }
 
 void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)

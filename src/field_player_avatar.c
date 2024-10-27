@@ -1232,103 +1232,12 @@ void StopPlayerAvatar(void)
 
 u16 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
 {
-    if(gSaveBlock2Ptr->playerGfxType == 1)
-    {
-        if(gender != MALE)
-        {
-            return OBJ_EVENT_GFX_LEAF;
-        } 
-        else
-        {
-            return OBJ_EVENT_GFX_RED;
-        }
-    }
-    if(gSaveBlock2Ptr->playerGfxType == 2)
-    {
-        if(gender != MALE)
-        {
-            return OBJ_EVENT_GFX_DAWN;
-        } 
-        else
-        {
-            return OBJ_EVENT_GFX_LUCAS;
-        }
-    }
-    if(gSaveBlock2Ptr->playerGfxType == 3)
-    {
-        if(gender != MALE)
-        {
-            return OBJ_EVENT_GFX_CYNTHIA;
-        } 
-        else
-        {
-            return OBJ_EVENT_GFX_STEVEN;
-        }
-    }
-    if(gSaveBlock2Ptr->playerGfxType == 4)
-    {
-        if(gender != MALE)
-        {
-            return OBJ_EVENT_GFX_PHOEBE;
-        } 
-        else
-        {
-            return OBJ_EVENT_GFX_OAK;
-        }
-    }
-    if(gSaveBlock2Ptr->playerGfxType == 5)
-    {
-        if(gender != MALE)
-        {
-            return OBJ_EVENT_GFX_LYRA;
-        } 
-        else
-        {
-            return OBJ_EVENT_GFX_ETHAN;
-        }
-    }
-
-    return sRivalAvatarGfxIds[state][gender];
+    return ReturnAvatarGraphicsId(gSaveBlock2Ptr->playerGfxType);
 }
 
 u8 GetPlayerAvatarGraphicsId()
 {
-    u8 gender = gSaveBlock2Ptr->playerGender;
-    switch(gSaveBlock2Ptr->playerGfxType)
-    {
-        case 0:
-            if(gender != MALE)
-                return OBJ_EVENT_GFX_MAY_NORMAL;
-            else
-                return OBJ_EVENT_GFX_BRENDAN_NORMAL;
-        case 1:
-            if(gender != MALE)
-                return OBJ_EVENT_GFX_LEAF;
-            else
-                return OBJ_EVENT_GFX_RED;
-        case 2:
-            if(gender != MALE)
-                return OBJ_EVENT_GFX_DAWN;
-            else
-                return OBJ_EVENT_GFX_LUCAS;
-        case 3:
-            if(gender != MALE)
-                return OBJ_EVENT_GFX_CYNTHIA;
-            else
-                return OBJ_EVENT_GFX_STEVEN;
-        case 4:
-            if(gender != MALE)
-                return OBJ_EVENT_GFX_PHOEBE;
-            else
-                return OBJ_EVENT_GFX_OAK;
-        case 5:
-            if(gender != MALE)
-                return OBJ_EVENT_GFX_LYRA;
-            else
-                return OBJ_EVENT_GFX_ETHAN;
-    }
-
-    return OBJ_EVENT_GFX_BRENDAN_NORMAL;
+    return ReturnAvatarGraphicsId(gSaveBlock2Ptr->playerGfxType);
 }
 
 u16 GetFRLGAvatarGraphicsIdByGender(u8 gender)

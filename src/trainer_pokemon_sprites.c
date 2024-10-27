@@ -8,6 +8,7 @@
 #include "data.h"
 #include "pokemon.h"
 #include "constants/trainers.h"
+#include "script.h"
 
 #define PICS_COUNT 8
 
@@ -348,36 +349,5 @@ u16 CreateTrainerCardTrainerPicSprite(u16 species, bool8 isFrontPic, u16 destX, 
 
 u16 PlayerGenderToFrontTrainerPicId_Debug(u8 gender, bool8 getClass)
 {   
-    u8 trainerPicId = 0;
-    if (gSaveBlock2Ptr->playerGender != MALE)
-    {
-        if(gSaveBlock2Ptr->playerGfxType == 1)
-            trainerPicId = TRAINER_PIC_LEAF;
-        else if(gSaveBlock2Ptr->playerGfxType == 2)
-            trainerPicId = TRAINER_PIC_DAWN;
-        else if(gSaveBlock2Ptr->playerGfxType == 3)
-            trainerPicId = TRAINER_PIC_CYNTHIA;
-        else if(gSaveBlock2Ptr->playerGfxType == 4)
-            trainerPicId = TRAINER_PIC_ELITE_FOUR_PHOEBE;
-        else if(gSaveBlock2Ptr->playerGfxType == 5)
-            trainerPicId = TRAINER_PIC_LYRA;
-        else
-            trainerPicId = TRAINER_PIC_MAY;
-    }
-    else
-    {
-        if(gSaveBlock2Ptr->playerGfxType == 1)
-            trainerPicId = TRAINER_PIC_RED;
-        else if(gSaveBlock2Ptr->playerGfxType == 2)
-            trainerPicId = TRAINER_PIC_LUCAS;
-        else if(gSaveBlock2Ptr->playerGfxType == 3)
-            trainerPicId = TRAINER_PIC_STEVEN;
-        else if(gSaveBlock2Ptr->playerGfxType == 4)
-            trainerPicId = TRAINER_PIC_OAK;
-        else if(gSaveBlock2Ptr->playerGfxType == 5)
-            trainerPicId = TRAINER_PIC_ETHAN;
-        else
-            trainerPicId = TRAINER_PIC_BRENDAN;
-    }
-    return trainerPicId;
+    return ReturnAvatarTrainerFrontPicId(gSaveBlock2Ptr->playerGfxType);
 }

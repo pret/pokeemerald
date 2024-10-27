@@ -32,6 +32,7 @@
 #include "constants/rgb.h"
 #include "constants/trainers.h"
 #include "constants/union_room.h"
+#include "script.h"
 
 enum {
     WIN_MSG,
@@ -1882,37 +1883,7 @@ static u8 VersionToCardType(u8 version)
 static void CreateTrainerCardTrainerPic(void)
 {
 
-    u16 facilityClass = 0;
-    if (gSaveBlock2Ptr->playerGender != MALE)
-    {
-        if(gSaveBlock2Ptr->playerGfxType == 1)
-            facilityClass = FacilityClassToPicIndex(FACILITY_CLASS_LEAF);
-        else if(gSaveBlock2Ptr->playerGfxType == 2)
-            facilityClass = TRAINER_PIC_DAWN;
-        else if(gSaveBlock2Ptr->playerGfxType == 3)
-            facilityClass = TRAINER_PIC_CYNTHIA;
-        else if(gSaveBlock2Ptr->playerGfxType == 4)
-            facilityClass = TRAINER_PIC_ELITE_FOUR_PHOEBE;
-        else if(gSaveBlock2Ptr->playerGfxType == 5)
-            facilityClass = TRAINER_PIC_LYRA;
-        else
-            facilityClass = FacilityClassToPicIndex(FACILITY_CLASS_MAY);
-    }
-    else
-    {
-        if(gSaveBlock2Ptr->playerGfxType == 1)
-            facilityClass = FacilityClassToPicIndex(FACILITY_CLASS_RED);
-        else if(gSaveBlock2Ptr->playerGfxType == 2)
-            facilityClass = TRAINER_PIC_LUCAS;
-        else if(gSaveBlock2Ptr->playerGfxType == 3)
-            facilityClass = TRAINER_PIC_STEVEN;
-        else if(gSaveBlock2Ptr->playerGfxType == 4)
-            facilityClass = TRAINER_PIC_OAK;
-        else if(gSaveBlock2Ptr->playerGfxType == 5)
-            facilityClass = TRAINER_PIC_ETHAN;
-        else 
-            facilityClass = FacilityClassToPicIndex(FACILITY_CLASS_BRENDAN);
-    }
+    u16 facilityClass = ReturnAvatarTrainerFrontPicId(gSaveBlock2Ptr->playerGfxType);
 
     if (InUnionRoom() == TRUE && gReceivedRemoteLinkPlayers == 1)
     {

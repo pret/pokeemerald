@@ -35,6 +35,7 @@
 #include "window.h"
 #include "text.h"
 #include "menu.h"
+#include "gpu_regs.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
@@ -846,59 +847,133 @@ void SetAutosaveFlag(void)
     
 }
 
+// Avatar Code
+enum {
+    AVATAR_BRENDAN,
+    AVATAR_MAY,
+    AVATAR_RED,
+    AVATAR_LEAF,
+    AVATAR_LUCAS,
+    AVATAR_DAWN,
+    AVATAR_STEVEN,
+    AVATAR_CYNTHIA,
+    AVATAR_OAK,
+    AVATAR_PHOEBE,
+    AVATAR_ETHAN,
+    AVATAR_LYRA,
+};
+struct PitAvatarInfo {
+    u16 mugshotId;
+    u16 graphicsId;
+    u16 trainerFrontPicId;
+    u16 trainerBackPicId;
+};
+
+#define PIT_AVATAR_COUNT ARRAY_COUNT(sPitAvatars)
+static const struct PitAvatarInfo sPitAvatars[] = {
+    {
+        .mugshotId = AVATAR_BRENDAN,
+        .graphicsId = OBJ_EVENT_GFX_BRENDAN_NORMAL,
+        .trainerFrontPicId = TRAINER_PIC_BRENDAN,
+        .trainerBackPicId = TRAINER_BACK_PIC_BRENDAN,
+    },
+    {
+        .mugshotId = AVATAR_MAY,
+        .graphicsId = OBJ_EVENT_GFX_MAY_NORMAL,
+        .trainerFrontPicId = TRAINER_PIC_MAY,
+        .trainerBackPicId = TRAINER_BACK_PIC_MAY,
+    },
+
+    {
+        .mugshotId = AVATAR_RED,
+        .graphicsId = OBJ_EVENT_GFX_RED,
+        .trainerFrontPicId = TRAINER_PIC_RED,
+        .trainerBackPicId = TRAINER_BACK_PIC_RED,
+    },
+    {
+        .mugshotId = AVATAR_LEAF,
+        .graphicsId = OBJ_EVENT_GFX_LEAF,
+        .trainerFrontPicId = TRAINER_PIC_LEAF,
+        .trainerBackPicId = TRAINER_BACK_PIC_LEAF,
+    },
+
+    {
+        .mugshotId = AVATAR_LUCAS,
+        .graphicsId = OBJ_EVENT_GFX_LUCAS,
+        .trainerFrontPicId = TRAINER_PIC_LUCAS,
+        .trainerBackPicId = TRAINER_BACK_PIC_LUCAS,
+    },
+    {
+        .mugshotId = AVATAR_DAWN,
+        .graphicsId = OBJ_EVENT_GFX_DAWN,
+        .trainerFrontPicId = TRAINER_PIC_DAWN,
+        .trainerBackPicId = TRAINER_BACK_PIC_DAWN,
+    },
+
+    {
+        .mugshotId = AVATAR_STEVEN,
+        .graphicsId = OBJ_EVENT_GFX_STEVEN,
+        .trainerFrontPicId = TRAINER_PIC_STEVEN,
+        .trainerBackPicId = TRAINER_BACK_PIC_STEVEN,
+    },
+    {
+        .mugshotId = AVATAR_CYNTHIA,
+        .graphicsId = OBJ_EVENT_GFX_CYNTHIA,
+        .trainerFrontPicId = TRAINER_PIC_CYNTHIA,
+        .trainerBackPicId = TRAINER_BACK_PIC_CYNTHIA,
+    },
+
+    {
+        .mugshotId = AVATAR_OAK,
+        .graphicsId = OBJ_EVENT_GFX_OAK,
+        .trainerFrontPicId = TRAINER_PIC_OAK,
+        .trainerBackPicId = TRAINER_BACK_PIC_OAK,
+    },
+    {
+        .mugshotId = AVATAR_PHOEBE,
+        .graphicsId = OBJ_EVENT_GFX_PHOEBE,
+        .trainerFrontPicId = TRAINER_PIC_ELITE_FOUR_PHOEBE,
+        .trainerBackPicId = TRAINER_BACK_PIC_PHOEBE,
+    },
+
+    {
+        .mugshotId = AVATAR_ETHAN,
+        .graphicsId = OBJ_EVENT_GFX_ETHAN,
+        .trainerFrontPicId = TRAINER_PIC_ETHAN,
+        .trainerBackPicId = TRAINER_BACK_PIC_ETHAN,
+    },
+    {
+        .mugshotId = AVATAR_LYRA,
+        .graphicsId = OBJ_EVENT_GFX_LYRA,
+        .trainerFrontPicId = TRAINER_PIC_LYRA,
+        .trainerBackPicId = TRAINER_BACK_PIC_LYRA,
+    },
+};
+
+u16 ReturnAvatarMugshotId(u16 avatarId)
+{
+    return sPitAvatars[avatarId].mugshotId;
+}
+
+u16 ReturnAvatarGraphicsId(u16 avatarId)
+{
+    return sPitAvatars[avatarId].graphicsId;
+}
+
+u16 ReturnAvatarTrainerFrontPicId(u16 avatarId)
+{
+    return sPitAvatars[avatarId].trainerFrontPicId;
+}
+
+u16 ReturnAvatarTrainerBackPicId(u16 avatarId)
+{
+    return sPitAvatars[avatarId].trainerBackPicId;
+}
+
 void SetPlayerAvatar(void)
 {
-    switch(VarGet(VAR_RESULT))
-    {
-        case 0:
-            gSaveBlock2Ptr->playerGender = MALE;
-            gSaveBlock2Ptr->playerGfxType = 0;
-            break;
-        case 1:
-            gSaveBlock2Ptr->playerGender = FEMALE;
-            gSaveBlock2Ptr->playerGfxType = 0;
-            break;
-        case 2:
-            gSaveBlock2Ptr->playerGender = MALE;
-            gSaveBlock2Ptr->playerGfxType = 1;
-            break;
-        case 3:
-            gSaveBlock2Ptr->playerGender = FEMALE;
-            gSaveBlock2Ptr->playerGfxType = 1;
-            break;
-        case 4:
-            gSaveBlock2Ptr->playerGender = MALE;
-            gSaveBlock2Ptr->playerGfxType = 2;
-            break;
-        case 5:
-            gSaveBlock2Ptr->playerGender = FEMALE;
-            gSaveBlock2Ptr->playerGfxType = 2;
-            break;
-        case 6:
-            gSaveBlock2Ptr->playerGender = MALE;
-            gSaveBlock2Ptr->playerGfxType = 3;
-            break;
-        case 7:
-            gSaveBlock2Ptr->playerGender = FEMALE;
-            gSaveBlock2Ptr->playerGfxType = 3;
-            break;
-        case 8:
-            gSaveBlock2Ptr->playerGender = MALE;
-            gSaveBlock2Ptr->playerGfxType = 4;
-            break;
-        case 9:
-            gSaveBlock2Ptr->playerGender = FEMALE;
-            gSaveBlock2Ptr->playerGfxType = 4;
-            break;
-        case 10:
-            gSaveBlock2Ptr->playerGender = MALE;
-            gSaveBlock2Ptr->playerGfxType = 5;
-            break;
-        case 11:
-            gSaveBlock2Ptr->playerGender = FEMALE;
-            gSaveBlock2Ptr->playerGfxType = 5;
-            break;
-    }
+    gSaveBlock2Ptr->playerGfxType = VarGet(VAR_RESULT);
+    gSaveBlock2Ptr->playerGender  = VarGet(VAR_RESULT) % 2;
 }
 
 void LevelUpParty(void)
@@ -1851,7 +1926,7 @@ static void PrintWarpPriceOnTrainerCount(u32 spriteId, u32 bgColor, u32 startTil
     ConvertIntToDecimalStringN(gStringVar3, ReturnTrainersRemaining(), STR_CONV_MODE_LEFT_ALIGN, 1);
     StringExpandPlaceholders(gStringVar4, sText_TrainerCountPrefix);
 
-    windowTileData = AddTextPrinterAndCreateWindowOnTrainerCount(gStringVar4, 0, 0, bgColor, &windowId);
+    windowTileData = AddTextPrinterAndCreateWindowOnTrainerCount(gStringVar4, 2, 0, bgColor, &windowId);
     WarpPriceTextIntoTrainerCountObject(objVram + (startTile * TILE_SIZE_4BPP), windowTileData, 2);
     RemoveWindow(windowId);
 }

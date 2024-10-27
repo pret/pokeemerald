@@ -84,6 +84,11 @@ struct RandomTrainerNPC
 extern const struct RandomTrainerNPC RandomNPCTrainers[];
 extern const struct RandomTrainerNPC RandomNPCTrainers_Doubles[];
 
+u16 ReturnAvatarMugshotId(u16 avatarId);
+u16 ReturnAvatarGraphicsId(u16 avatarId);
+u16 ReturnAvatarTrainerFrontPicId(u16 avatarId);
+u16 ReturnAvatarTrainerBackPicId(u16 avatarId);
+
 // srccmd.h
 void SetMovingNpcId(u16 npcId);
 u16 ReturnLastSpokenVarObjGfxId();
