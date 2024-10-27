@@ -670,46 +670,7 @@ void OutfitsMenu_Init(MainCallback callback)
 
     sOutfitsMenuDataPtr->gfxLoadState = 0;
     sOutfitsMenuDataPtr->savedCallback = callback;
-
-    switch(gSaveBlock2Ptr->playerGfxType)
-    {
-        case 0:
-            sSelectedOption = STATE_BRENDAN;
-            break;
-        case 1:
-            sSelectedOption = STATE_MAY;
-            break;
-        case 2:
-            sSelectedOption = STATE_RED;
-            break;
-        case 3:
-            sSelectedOption = STATE_LEAF;
-            break;
-        case 4:
-            sSelectedOption = STATE_LUCAS;
-            break;
-        case 5:
-            sSelectedOption = STATE_DAWN;
-            break;
-        case 6:
-            sSelectedOption = STATE_STEVEN;
-            break;
-        case 7:
-            sSelectedOption = STATE_CYNTHIA;
-            break;
-        case 8:
-            sSelectedOption = STATE_OAK;
-            break;
-        case 9:
-            sSelectedOption = STATE_PHOEBE;
-            break;
-        case 10:
-            sSelectedOption = STATE_ETHAN;
-            break;
-        case 11:
-            sSelectedOption = STATE_LYRA;
-            break;
-    }
+    sSelectedOption = gSaveBlock2Ptr->playerGfxType;
 
     for(i = 0; i < 12; i++)
     {
@@ -1097,57 +1058,8 @@ static void Task_OutfitsMenuMain(u8 taskId)
     {
         PlaySE(SE_SELECT);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-        switch(sSelectedOption)
-        {
-                case STATE_BRENDAN:
-                    gSaveBlock2Ptr->playerGender = MALE;
-                    gSaveBlock2Ptr->playerGfxType = 0;
-                    break;
-                case STATE_MAY:
-                    gSaveBlock2Ptr->playerGender = FEMALE;
-                    gSaveBlock2Ptr->playerGfxType = 1;
-                    break;
-                case STATE_RED:
-                    gSaveBlock2Ptr->playerGender = MALE;
-                    gSaveBlock2Ptr->playerGfxType = 2;
-                    break;
-                case STATE_LEAF:
-                    gSaveBlock2Ptr->playerGender = FEMALE;
-                    gSaveBlock2Ptr->playerGfxType = 3;
-                    break;
-                case STATE_LUCAS:
-                    gSaveBlock2Ptr->playerGender = MALE;
-                    gSaveBlock2Ptr->playerGfxType = 4;
-                    break;
-                case STATE_DAWN:
-                    gSaveBlock2Ptr->playerGender = FEMALE;
-                    gSaveBlock2Ptr->playerGfxType = 5;
-                    break;
-                case STATE_STEVEN:
-                    gSaveBlock2Ptr->playerGender = MALE;
-                    gSaveBlock2Ptr->playerGfxType = 6;
-                    break;
-                case STATE_CYNTHIA:
-                    gSaveBlock2Ptr->playerGender = FEMALE;
-                    gSaveBlock2Ptr->playerGfxType = 7;
-                    break;
-                case STATE_OAK:
-                    gSaveBlock2Ptr->playerGender = MALE;
-                    gSaveBlock2Ptr->playerGfxType = 8;
-                    break;
-                case STATE_PHOEBE:
-                    gSaveBlock2Ptr->playerGender = FEMALE;
-                    gSaveBlock2Ptr->playerGfxType = 9;
-                    break;
-                case STATE_ETHAN:
-                    gSaveBlock2Ptr->playerGender = MALE;
-                    gSaveBlock2Ptr->playerGfxType = 10;
-                    break;
-                case STATE_LYRA:
-                    gSaveBlock2Ptr->playerGender = FEMALE;
-                    gSaveBlock2Ptr->playerGfxType = 11;
-                    break;
-        }
+        gSaveBlock2Ptr->playerGfxType = sSelectedOption;
+        gSaveBlock2Ptr->playerGender = sSelectedOption % 2;
         gTasks[taskId].func = Task_OutfitsMenuTurnOff;
     }
 

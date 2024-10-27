@@ -855,12 +855,12 @@ enum {
     AVATAR_LEAF,
     AVATAR_LUCAS,
     AVATAR_DAWN,
+    AVATAR_ETHAN,
+    AVATAR_LYRA,
     AVATAR_STEVEN,
     AVATAR_CYNTHIA,
     AVATAR_OAK,
     AVATAR_PHOEBE,
-    AVATAR_ETHAN,
-    AVATAR_LYRA,
 };
 struct PitAvatarInfo {
     u16 mugshotId;
@@ -911,6 +911,19 @@ static const struct PitAvatarInfo sPitAvatars[] = {
     },
 
     {
+        .mugshotId = AVATAR_ETHAN,
+        .graphicsId = OBJ_EVENT_GFX_ETHAN,
+        .trainerFrontPicId = TRAINER_PIC_ETHAN,
+        .trainerBackPicId = TRAINER_BACK_PIC_ETHAN,
+    },
+    {
+        .mugshotId = AVATAR_LYRA,
+        .graphicsId = OBJ_EVENT_GFX_LYRA,
+        .trainerFrontPicId = TRAINER_PIC_LYRA,
+        .trainerBackPicId = TRAINER_BACK_PIC_LYRA,
+    },
+
+    {
         .mugshotId = AVATAR_STEVEN,
         .graphicsId = OBJ_EVENT_GFX_STEVEN,
         .trainerFrontPicId = TRAINER_PIC_STEVEN,
@@ -936,18 +949,6 @@ static const struct PitAvatarInfo sPitAvatars[] = {
         .trainerBackPicId = TRAINER_BACK_PIC_PHOEBE,
     },
 
-    {
-        .mugshotId = AVATAR_ETHAN,
-        .graphicsId = OBJ_EVENT_GFX_ETHAN,
-        .trainerFrontPicId = TRAINER_PIC_ETHAN,
-        .trainerBackPicId = TRAINER_BACK_PIC_ETHAN,
-    },
-    {
-        .mugshotId = AVATAR_LYRA,
-        .graphicsId = OBJ_EVENT_GFX_LYRA,
-        .trainerFrontPicId = TRAINER_PIC_LYRA,
-        .trainerBackPicId = TRAINER_BACK_PIC_LYRA,
-    },
 };
 
 u16 ReturnAvatarMugshotId(u16 avatarId)

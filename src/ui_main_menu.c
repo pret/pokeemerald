@@ -756,70 +756,53 @@ static void MoveHWindowsWithInput(void) // Update GPU windows after selection is
 
 void LoadMugshotIconGraphics(void)
 {
-    if(gSaveBlock2Ptr->playerGender == MALE)
-    {
-        if(gSaveBlock2Ptr->playerGfxType == 2){
-            LoadCompressedSpriteSheet(&sSpriteSheet_RedMugshot);
-            LoadSpritePalette(&sSpritePal_RedMugshot);
-        }
-        else if(gSaveBlock2Ptr->playerGfxType == 4)
-        {
-            LoadCompressedSpriteSheet(&sSpriteSheet_LucasMugshot);
-            LoadSpritePalette(&sSpritePal_LucasMugshot);
-        }
-        else if(gSaveBlock2Ptr->playerGfxType == 6)
-        {
-            LoadCompressedSpriteSheet(&sSpriteSheet_StevenMugshot);
-            LoadSpritePalette(&sSpritePal_StevenMugshot);
-        }
-        else if(gSaveBlock2Ptr->playerGfxType == 8)
-        {
-            LoadCompressedSpriteSheet(&sSpriteSheet_OakMugshot);
-            LoadSpritePalette(&sSpritePal_OakMugshot);
-        }
-        else if(gSaveBlock2Ptr->playerGfxType == 10)
-        {
-            LoadCompressedSpriteSheet(&sSpriteSheet_EthanMugshot);
-            LoadSpritePalette(&sSpritePal_EthanMugshot);
-        }
-        else
-        {
-            LoadCompressedSpriteSheet(&sSpriteSheet_BrendanMugshot);
-            LoadSpritePalette(&sSpritePal_BrendanMugshot);
-        }
+    if(gSaveBlock2Ptr->playerGfxType == 0) {
+        LoadCompressedSpriteSheet(&sSpriteSheet_BrendanMugshot);
+        LoadSpritePalette(&sSpritePal_BrendanMugshot);
     }
-    else
-    {
-        if(gSaveBlock2Ptr->playerGfxType == 3)
-        {
-            LoadCompressedSpriteSheet(&sSpriteSheet_LeafMugshot);
-            LoadSpritePalette(&sSpritePal_LeafMugshot);
-        }
-        else if(gSaveBlock2Ptr->playerGfxType == 5)
-        {
-            LoadCompressedSpriteSheet(&sSpriteSheet_DawnMugshot);
-            LoadSpritePalette(&sSpritePal_DawnMugshot);
-        }
-        else if(gSaveBlock2Ptr->playerGfxType == 7)
-        {
-            LoadCompressedSpriteSheet(&sSpriteSheet_CynthiaMugshot);
-            LoadSpritePalette(&sSpritePal_CynthiaMugshot);
-        }
-        else if(gSaveBlock2Ptr->playerGfxType == 9)
-        {
-            LoadCompressedSpriteSheet(&sSpriteSheet_PhoebeMugshot);
-            LoadSpritePalette(&sSpritePal_PhoebeMugshot);
-        }
-        else if(gSaveBlock2Ptr->playerGfxType == 11)
-        {
-            LoadCompressedSpriteSheet(&sSpriteSheet_LyraMugshot);
-            LoadSpritePalette(&sSpritePal_LyraMugshot);
-        }
-        else
-        {
-            LoadCompressedSpriteSheet(&sSpriteSheet_MayMugshot);
-            LoadSpritePalette(&sSpritePal_MayMugshot);
-        }
+    else if (gSaveBlock2Ptr->playerGfxType == 1){
+        LoadCompressedSpriteSheet(&sSpriteSheet_MayMugshot);
+        LoadSpritePalette(&sSpritePal_MayMugshot);
+    }
+    else if(gSaveBlock2Ptr->playerGfxType == 2){
+        LoadCompressedSpriteSheet(&sSpriteSheet_RedMugshot);
+        LoadSpritePalette(&sSpritePal_RedMugshot);
+    }
+    else if(gSaveBlock2Ptr->playerGfxType == 3){
+        LoadCompressedSpriteSheet(&sSpriteSheet_LeafMugshot);
+        LoadSpritePalette(&sSpritePal_LeafMugshot);
+    }
+    else if(gSaveBlock2Ptr->playerGfxType == 4) {
+        LoadCompressedSpriteSheet(&sSpriteSheet_LucasMugshot);
+        LoadSpritePalette(&sSpritePal_LucasMugshot);
+    }
+    else if(gSaveBlock2Ptr->playerGfxType == 5){
+        LoadCompressedSpriteSheet(&sSpriteSheet_DawnMugshot);
+        LoadSpritePalette(&sSpritePal_DawnMugshot);
+    }
+    else if(gSaveBlock2Ptr->playerGfxType == 6) {
+        LoadCompressedSpriteSheet(&sSpriteSheet_EthanMugshot);
+        LoadSpritePalette(&sSpritePal_EthanMugshot);
+    }
+    else if(gSaveBlock2Ptr->playerGfxType == 7){
+        LoadCompressedSpriteSheet(&sSpriteSheet_LyraMugshot);
+        LoadSpritePalette(&sSpritePal_LyraMugshot);
+    }
+    else if(gSaveBlock2Ptr->playerGfxType == 8) {
+        LoadCompressedSpriteSheet(&sSpriteSheet_StevenMugshot);
+        LoadSpritePalette(&sSpritePal_StevenMugshot);
+    }
+    else if(gSaveBlock2Ptr->playerGfxType == 9){
+        LoadCompressedSpriteSheet(&sSpriteSheet_CynthiaMugshot);
+        LoadSpritePalette(&sSpritePal_CynthiaMugshot);
+    }
+    else if(gSaveBlock2Ptr->playerGfxType == 10) {
+        LoadCompressedSpriteSheet(&sSpriteSheet_OakMugshot);
+        LoadSpritePalette(&sSpritePal_OakMugshot);
+    }
+    else if(gSaveBlock2Ptr->playerGfxType == 11){
+        LoadCompressedSpriteSheet(&sSpriteSheet_PhoebeMugshot);
+        LoadSpritePalette(&sSpritePal_PhoebeMugshot);
     }
 }
 
