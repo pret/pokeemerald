@@ -21,6 +21,7 @@
 #include <regex.h>
 #include <signal.h>
 #include <stdbool.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -32,6 +33,7 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include "elf.h"
 
 #define min(a, b) ((a) < (b) ? (a) : (b))
 
@@ -69,9 +71,124 @@ struct Runner
     char assumeFailed_FilenameLine[MAX_SUMMARY_TESTS_TO_LIST][MAX_TEST_LIST_BUFFER_LENGTH];
 };
 
+struct Symbol {
+    const char *name;
+    uint32_t address;
+    size_t size;
+};
+
+struct SymbolTable {
+    struct Symbol *symbols;
+    size_t symbols_n;
+};
+
 static unsigned nrunners = 0;
 static unsigned runners_digits = 0;
 static struct Runner *runners = NULL;
+
+// TODO: Build the symbol table on demand.
+static struct SymbolTable symbol_table = { NULL, 0 };
+
+static const struct Symbol *lookup_address(uint32_t address)
+{
+    int lo = 0, hi = symbol_table.symbols_n;
+    while (lo < hi)
+    {
+        int mi = lo + (hi - lo) / 2;
+        const struct Symbol *symbol = &symbol_table.symbols[mi];
+        if (address < symbol->address)
+            hi = mi;
+        else if (address >= symbol->address + symbol->size)
+            lo = mi + 1;
+        else
+            return symbol;
+    }
+    return NULL;
+}
+
+#ifndef _GNU_SOURCE
+// Very naive implementation of 'memmem' for systems which don't make it
+// available by default.
+void *memmem(const void *haystack, size_t haystacklen, const void *needle, size_t needlelen)
+{
+    const char *haystack_ = haystack;
+    const char *needle_ = needle;
+    for (size_t i = 0; i < haystacklen - needlelen; i++)
+    {
+        size_t j;
+        for (j = 0; j < needlelen; j++)
+        {
+            if (haystack_[i+j] != needle_[j])
+                break;
+        }
+        if (j == needlelen)
+            return (void *)&haystack_[i];
+    }
+    return NULL;
+}
+#endif
+
+// Similar to 'fwrite(buffer, 1, size, f)' except that anything which
+// looks like the output of '%p' (i.e. '<0x\d{7}>') is translated into
+// the name of a symbol (if it represents one).
+static void fprint_buffer(FILE *f, const char *buffer, size_t size)
+{
+    const char *buffer_end = buffer + size;
+    while (buffer < buffer_end)
+    {
+        // Find the next '<0x'.
+        char *buffer_ = memmem(buffer, buffer_end - buffer, "<0x", 3);
+
+        // No '<0x' or could not possibly match, print everything.
+        if (buffer_ == NULL || buffer_end - buffer_ < 11 || buffer_[10] != '>')
+        {
+            fwrite(buffer, 1, buffer_end - buffer, f);
+            break;
+        }
+
+        // Print everything before the '<0x'.
+        fwrite(buffer, 1, buffer_ - buffer, f);
+        buffer = buffer_;
+
+        unsigned long address = strtoul(buffer + 3, &buffer_, 16);
+        // Un-mirror EWRAM/IWRAM/ROM addresses.
+        switch (address & 0xF000000)
+        {
+        case 0x2000000: address = address & 0x203FFFF; break;
+        case 0x3000000: address = address & 0x3007FFF; break;
+        case 0x7000000: address = address & 0x70003FF; break;
+        case 0xA000000: address = address & 0x9FFFFFF; break;
+        case 0xB000000: address = address & 0x9FFFFFF; break;
+        case 0xC000000: address = address & 0x9FFFFFF; break;
+        case 0xD000000: address = address & 0x9FFFFFF; break;
+        }
+
+        // Not a 7-digit address, print the '<0x' part and loop.
+        if (buffer_ != buffer + 10)
+        {
+            fwrite(buffer, 1, 3, f);
+            buffer += 3;
+            continue;
+        }
+
+        const struct Symbol *symbol = lookup_address(address);
+
+        // Not a symbol, print the parsed part and loop.
+        if (symbol == NULL)
+        {
+            fwrite(buffer, 1, 11, f);
+            buffer += 11;
+            continue;
+        }
+
+        if (symbol->address == address)
+            fprintf(f, "<%s>", symbol->name);
+        else
+            fprintf(f, "<%s+0x%lx>", symbol->name, address - symbol->address);
+
+        buffer += 11;
+    }
+}
 
 static void handle_read(int i, struct Runner *runner)
 {
@@ -156,7 +273,7 @@ add_to_results:
                     soc += 2;
                     fprintf(stdout, "[%0*d] %s: ", runners_digits, i, runner->test_name);
                     fwrite(soc, 1, eol - soc, stdout);
-                    fwrite(runner->output_buffer, 1, runner->output_buffer_size, stdout);
+                    fprint_buffer(stdout, runner->output_buffer, runner->output_buffer_size);
                     strcpy(runner->test_name, "WAITING...");
                     runner->output_buffer_size = 0;
                     break;
@@ -186,11 +303,7 @@ buffer_output:
         }
         else
         {
-            if (write(STDOUT_FILENO, sol, eol - sol) == -1)
-            {
-                perror("write failed");
-                exit(2);
-            }
+            fwrite(sol, 1, eol - sol, stdout);
         }
         sol += n;
         consumed += n;
@@ -233,12 +346,80 @@ static void exit2(int _)
     exit(2);
 }
 
-int compare_strings(const void * a, const void * b)
+static int compare_addresses(const void *a, const void *b)
 {
-    const char *arg1 = (const char *) a;
-    const char *arg2 = (const char *) b;
+    const struct Symbol *sa = a, *sb = b;
+    if (sa->address < sb->address)
+        return -1;
+    else if (sa->address == sb->address)
+        return 0;
+    else
+        return 1;
+}
 
-    return strcmp(arg1, arg2);
+static void build_symbol_table(void *elf)
+{
+    if (memcmp(elf, ELFMAG, 4) != 0)
+        goto error;
+
+    size_t symbol_table_symbols_c = 1024;
+    symbol_table.symbols = malloc(symbol_table_symbols_c * sizeof(*symbol_table.symbols));
+    if (symbol_table.symbols == NULL)
+        goto error;
+
+    const Elf32_Ehdr *ehdr = (Elf32_Ehdr *)elf;
+    const Elf32_Shdr *shdrs = (Elf32_Shdr *)(elf + ehdr->e_shoff);
+
+    if (ehdr->e_shstrndx == SHN_UNDEF)
+        goto error;
+    const Elf32_Shdr *shdr_shstr = &shdrs[ehdr->e_shstrndx];
+    const char *shstr = (const char *)(elf + shdr_shstr->sh_offset);
+    const Elf32_Shdr *shdr_symtab = NULL;
+    const Elf32_Shdr *shdr_strtab = NULL;
+    for (int i = 0; i < ehdr->e_shnum; i++)
+    {
+        const char *sh_name = shstr + shdrs[i].sh_name;
+        if (strcmp(sh_name, ".symtab") == 0)
+            shdr_symtab = &shdrs[i];
+        else if (strcmp(sh_name, ".strtab") == 0)
+            shdr_strtab = &shdrs[i];
+    }
+    if (!shdr_symtab)
+        goto error;
+    if (!shdr_strtab)
+        goto error;
+
+    const Elf32_Sym *symtab = (Elf32_Sym *)(elf + shdr_symtab->sh_offset);
+    const char *strtab = (const char *)(elf + shdr_strtab->sh_offset);
+    for (int i = 0; i < shdr_symtab->sh_size / shdr_symtab->sh_entsize; i++)
+    {
+        if (symtab[i].st_name == 0) continue;
+        if (symtab[i].st_shndx > ehdr->e_shnum) continue;
+        if (symtab[i].st_value < 0x2000000 || symtab[i].st_size == 0) continue;
+        struct Symbol symbol =
+        {
+            .name = strtab + symtab[i].st_name,
+            .address = symtab[i].st_value,
+            .size = symtab[i].st_size,
+        };
+        if (symbol_table.symbols_n == symbol_table_symbols_c)
+        {
+            symbol_table_symbols_c *= 2;
+            void *symbols = realloc(symbol_table.symbols, symbol_table_symbols_c * sizeof(*symbol_table.symbols));
+            if (symbols == NULL)
+                goto error;
+            symbol_table.symbols = symbols;
+        }
+        symbol_table.symbols[symbol_table.symbols_n++] = symbol;
+    }
+
+    qsort(symbol_table.symbols, symbol_table.symbols_n, sizeof(*symbol_table.symbols), compare_addresses);
+    return;
+
+error:
+    free(symbol_table.symbols);
+    symbol_table.symbols = NULL;
+    symbol_table.symbols_n = 0;
 }
 
 int main(int argc, char *argv[])
@@ -291,6 +472,8 @@ int main(int argc, char *argv[])
         perror("mmap elffd failed");
         exit(2);
     }
+
+    build_symbol_table(elf);
 
     nrunners = 1;
     const char *makeflags = getenv("MAKEFLAGS");

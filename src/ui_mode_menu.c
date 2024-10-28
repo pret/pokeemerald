@@ -6,7 +6,7 @@
 #include "bg.h"
 #include "text_window.h"
 #include "window.h"
-#include "characters.h"
+#include "constants/characters.h"
 #include "palette.h"
 #include "task.h"
 #include "overworld.h"

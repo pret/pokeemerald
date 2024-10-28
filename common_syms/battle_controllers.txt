@@ -1,3 +1,0 @@
-gBattlerControllerFuncs
-gBattleControllerData
-gBattlerControllerEndFuncs

@@ -36,7 +36,7 @@
 #include "gba/types.h"
 #include "gba/defines.h"
 #include "config/general.h"
-#include "characters.h"
+#include "constants/characters.h"
 #include "string_util.h"
 
 #ifndef NDEBUG

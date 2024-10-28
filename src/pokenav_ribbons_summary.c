@@ -1082,7 +1082,7 @@ enum {
     RIBBONGFX_GIFT_3,
 };
 
-#define TO_PAL_OFFSET(palNum)((palNum) - PALTAG_RIBBON_ICONS_1)
+#define TO_PAL_OFFSET(palNum) ((palNum) - PALTAG_RIBBON_ICONS_1)
 
 struct
 {

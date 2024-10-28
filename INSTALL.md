@@ -24,7 +24,7 @@ Unscientific benchmarks suggest **msys2 is 2x slower** than WSL1, and **Cygwin i
 
 All of the Windows instructions assume that the default drive is C:\\. If this differs to your actual drive letter, then replace C with the correct drive letter when reading the instructions.
 
-**A note of caution**: As Windows 7 is officially unsupported by Microsoft and Windows 8 has very little usage, some maintainers are unwilling to maintain the Windows 7/8 instructions. Thus, these instructions may break in the future with fixes taking longer than fixes to the Windows 10 instructions.
+**A note of caution**: As Windows 7 and Windows 8 are officially unsupported by Microsoft, some maintainers are unwilling to maintain the Windows 7/8 instructions. Thus, these instructions may break in the future with fixes taking longer than fixes to the Windows 10/11 instructions.
 
 ## Windows 10/11 (WSL1)
 WSL1 is the preferred terminal to build **pokeemerald Expansion**. The following instructions will explain how to install WSL1 (referred to interchangeably as WSL).

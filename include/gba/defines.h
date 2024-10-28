@@ -10,6 +10,7 @@
 #define EWRAM_DATA __attribute__((section(".sbss")))
 #define IWRAM_INIT __attribute__((section(".iwram")))
 #define EWRAM_INIT __attribute__((section(".ewram")))
+#define COMMON_DATA __attribute__((section("common_data")))
 #define UNUSED __attribute__((unused))
 
 #if MODERN
@@ -81,7 +82,7 @@
 #define DISPLAY_TILE_HEIGHT (DISPLAY_HEIGHT / TILE_HEIGHT)
 
 // Size of different tile formats in bytes
-#define TILE_SIZE(bpp)((bpp) * TILE_WIDTH * TILE_HEIGHT / 8)
+#define TILE_SIZE(bpp) ((bpp) * TILE_WIDTH * TILE_HEIGHT / 8)
 #define TILE_SIZE_1BPP TILE_SIZE(1) // 8
 #define TILE_SIZE_4BPP TILE_SIZE(4) // 32
 #define TILE_SIZE_8BPP TILE_SIZE(8) // 64

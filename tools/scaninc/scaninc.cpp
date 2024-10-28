@@ -24,6 +24,9 @@
 #include <queue>
 #include <set>
 #include <string>
+#include <iostream>
+#include <tuple>
+#include <fstream>
 #include "scaninc.h"
 #include "source_file.h"
 
@@ -38,14 +41,18 @@ bool CanOpenFile(std::string path)
     return true;
 }
 
-const char *const USAGE = "Usage: scaninc [-I INCLUDE_PATH] FILE_PATH\n";
+const char *const USAGE = "Usage: scaninc [-I INCLUDE_PATH] [-M DEPENDENCY_OUT_PATH] FILE_PATH\n";
 
 int main(int argc, char **argv)
 {
     std::queue<std::string> filesToProcess;
     std::set<std::string> dependencies;
+    std::set<std::string> dependencies_includes;
 
     std::vector<std::string> includeDirs;
+
+    bool makeformat = false;
+    std::string make_outfile;
 
     argc--;
     argv++;
@@ -67,6 +74,13 @@ int main(int argc, char **argv)
                 includeDir += '/';
             }
             includeDirs.push_back(includeDir);
+        }
+        else if(arg.substr(0, 2) == "-M")
+        {
+            makeformat = true;
+            argc--;
+            argv++;
+            make_outfile = std::string(argv[0]);
         }
         else
         {
@@ -111,7 +125,13 @@ int main(int argc, char **argv)
             if (!exists && (file.FileType() == SourceFileType::Asm || file.FileType() == SourceFileType::Inc))
             {
                 path = include;
+                if (CanOpenFile(path))
+                    exists = true;
             }
+            if (!exists)
+                continue;
+
+            dependencies_includes.insert(path);
             bool inserted = dependencies.insert(path).second;
             if (inserted && exists)
             {
@@ -121,8 +141,46 @@ int main(int argc, char **argv)
         includeDirs.pop_back();
     }
 
-    for (const std::string &path : dependencies)
+    if(!makeformat)
     {
-        std::printf("%s\n", path.c_str());
+        for (const std::string &path : dependencies)
+        {
+            std::printf("%s\n", path.c_str());
+        }
+        std::cout << std::endl;
+    }
+    else
+    {
+        // Write out make rules to a file
+        std::ofstream output(make_outfile);
+
+        // Print a make rule for the object file
+        size_t ext_pos = make_outfile.find_last_of(".");
+        auto object_file = make_outfile.substr(0, ext_pos + 1) + "o";
+        output << object_file.c_str() << ":";
+        for (const std::string &path : dependencies)
+        {
+            output << " " << path;
+        }
+        output << '\n';
+
+        // Dependency list rule.
+        // Although these rules are identical, they need to be separate, else make will trigger the rule again after the file is created for the first time.
+        output << make_outfile.c_str() << ":";
+        for (const std::string &path : dependencies_includes)
+        {
+            output << " " << path;
+        }
+        output << '\n';
+
+        // Dummy rules
+        // If a dependency is deleted, make will try to make it, instead of rescanning the dependencies before trying to do that.
+        for (const std::string &path : dependencies)
+        {
+            output << path << ":\n";
+        }
+
+        output.flush();
+        output.close();
     }
 }

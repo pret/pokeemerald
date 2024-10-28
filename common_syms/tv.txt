@@ -1,4 +1,0 @@
-sCurTVShowSlot
-sTV_SecretBaseVisitMovesTemp
-sTV_DecorationsBuffer
-sTV_SecretBaseVisitMonsTemp

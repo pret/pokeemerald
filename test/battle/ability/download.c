@@ -94,3 +94,28 @@ SINGLE_BATTLE_TEST("Download doesn't activate if target hasn't been sent out yet
         EXPECT_MUL_EQ(results[0].damageSpecial, Q_4_12(1.5), results[1].damageSpecial);
     }
 }
+
+DOUBLE_BATTLE_TEST("Download raises Sp.Attack if enemies have lower total Sp. Def than Def", s16 damage)
+{
+    u32 ability;
+    PARAMETRIZE { ability = ABILITY_TRACE; }
+    PARAMETRIZE { ability = ABILITY_DOWNLOAD; }
+    GIVEN {
+        PLAYER(SPECIES_PORYGON) { Ability(ability); SpAttack(100); }
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET) { Defense(200); SpDefense(100); }
+        OPPONENT(SPECIES_WOBBUFFET) { Defense(100); SpDefense(150); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_TRI_ATTACK, target: opponentLeft ); }
+    } SCENE {
+        if (ability == ABILITY_DOWNLOAD)
+        {
+            ABILITY_POPUP(playerLeft, ABILITY_DOWNLOAD);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
+            MESSAGE("Porygon's Download raised its Sp. Atk!");
+        }
+        HP_BAR(opponentLeft, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_MUL_EQ(results[0].damage, Q_4_12(1.5), results[1].damage);
+    }
+}

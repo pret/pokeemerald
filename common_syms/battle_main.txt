@@ -1,7 +1,0 @@
-gPreBattleCallback1
-gBattleMainFunc
-gBattleResults
-gLeveledUpInBattle
-gHealthboxSpriteIds
-gMultiUsePlayerCursor
-gNumberOfMovesToChoose
