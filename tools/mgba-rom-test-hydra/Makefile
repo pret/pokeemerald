@@ -12,7 +12,7 @@ all: mgba-rom-test-hydra$(EXE)
 	@:
 
 mgba-rom-test-hydra$(EXE): $(SRCS)
-	$(CC) $(SRCS) -o $@ -lm $(LDFLAGS)
+	$(CC) $(SRCS) -Werror=implicit-function-declaration -o $@ -lm $(LDFLAGS)
 
 clean:
 	$(RM) mgba-rom-test-hydra$(EXE)

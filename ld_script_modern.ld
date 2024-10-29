@@ -19,6 +19,7 @@ SECTIONS {
     {
         __ewram_start = .;
         *(.ewram*)
+        . = ALIGN(4);
         __ewram_end = .;
     } > EWRAM
 
@@ -26,7 +27,6 @@ SECTIONS {
     ALIGN(4)
     {
         src/*.o(.sbss);
-        gflib/*.o(.sbss);
     } > EWRAM
 
     .iwram ORIGIN(IWRAM) : AT (__iwram_lma)
@@ -34,6 +34,7 @@ SECTIONS {
     {
         __iwram_start = .;
         *(.iwram*);
+        . = ALIGN(4);
         __iwram_end = .;
     } > IWRAM
 
@@ -41,15 +42,14 @@ SECTIONS {
     ALIGN(4)
     {
         src/*.o(.bss);
-        gflib/*.o(.bss);
         data/*.o(.bss);
         *libc.a:*.o(.bss*);
         *libnosys.a:*.o(.bss*);
 
         src/m4a.o(.bss.code);
 
+        src/*.o(common_data);
         src/*.o(COMMON);
-        gflib/*.o(COMMON);
         *libc.a:*.o(COMMON);
         *libnosys.a:*.o(COMMON);
     } > IWRAM
@@ -64,7 +64,6 @@ SECTIONS {
         src/rom_header_rhh.o(.text.*);
         src/crt0.o(.text);
         src/main.o(.text);
-        gflib/*.o(.text*);
         src/*.o(.text*);
         asm/*.o(.text*);
     } > ROM =0
@@ -100,7 +99,6 @@ SECTIONS {
     ALIGN(4)
     {
         src/*.o(.rodata*);
-        gflib/*.o(.rodata*);
         data/*.o(.rodata*);
     } > ROM =0
 

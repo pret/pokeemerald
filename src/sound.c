@@ -25,14 +25,13 @@ static u8 sMapMusicState;
 static u8 sMapMusicFadeInSpeed;
 static u16 sFanfareCounter;
 
-bool8 gDisableMusic;
+COMMON_DATA bool8 gDisableMusic = 0;
 
 extern struct ToneData gCryTable[];
 extern struct ToneData gCryTable_Reverse[];
 
 static void Task_Fanfare(u8 taskId);
 static void CreateFanfareTask(void);
-static void Task_DuckBGMForPokemonCry(u8 taskId);
 static void RestoreBGMVolumeAfterPokemonCry(void);
 
 static const struct Fanfare sFanfares[] = {
@@ -567,7 +566,7 @@ bool8 IsCryPlaying(void)
         return FALSE;
 }
 
-static void Task_DuckBGMForPokemonCry(u8 taskId)
+void Task_DuckBGMForPokemonCry(u8 taskId)
 {
     if (gPokemonCryBGMDuckingCounter)
     {

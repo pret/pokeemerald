@@ -114,6 +114,13 @@ extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
 extern const struct SpriteTemplate gAncientPowerRockSpriteTemplate[];
 
+enum {
+    COPYRIGHT_INITIALIZE,
+    COPYRIGHT_EMULATOR_BLEND,
+    COPYRIGHT_START_FADE = 140,
+    COPYRIGHT_START_INTRO,
+};
+
 #define TAG_VOLBEAT   1500
 #define TAG_TORCHIC   1501
 #define TAG_MANECTRIC 1502
@@ -174,8 +181,8 @@ static EWRAM_DATA u16 sIntroCharacterGender = 0;
 static EWRAM_DATA u16 UNUSED sUnusedVar = 0;
 static EWRAM_DATA u16 sFlygonYOffset = 0;
 
-u32 gIntroFrameCounter;
-struct GcmbStruct gMultibootProgramStruct;
+COMMON_DATA u32 gIntroFrameCounter = 0;
+COMMON_DATA struct GcmbStruct gMultibootProgramStruct = {0};
 
 static const u16 sIntroDrops_Pal[]            = INCBIN_U16("graphics/intro/scene_1/drops.gbapal");
 static const u16 sIntroLogo_Pal[]             = INCBIN_U16("graphics/intro/scene_1/logo.gbapal");
@@ -1069,7 +1076,7 @@ static u8 SetUpCopyrightScreen(void)
 {
     switch (gMain.state)
     {
-    case 0:
+    case COPYRIGHT_INITIALIZE:
         SetVBlankCallback(NULL);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
@@ -1100,14 +1107,14 @@ static u8 SetUpCopyrightScreen(void)
         GameCubeMultiBoot_Init(&gMultibootProgramStruct);
     // REG_DISPCNT needs to be overwritten the second time, because otherwise the intro won't show up on VBA 1.7.2 and John GBA Lite emulators.
     // The REG_DISPCNT overwrite is NOT needed in m-GBA, No$GBA, VBA 1.8.0, My Boy and Pizza Boy GBA emulators.
-    case 1:
+    case COPYRIGHT_EMULATOR_BLEND:
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON;
     default:
         UpdatePaletteFade();
         gMain.state++;
         GameCubeMultiBoot_Main(&gMultibootProgramStruct);
         break;
-    case 140:
+    case COPYRIGHT_START_FADE:
         GameCubeMultiBoot_Main(&gMultibootProgramStruct);
         if (gMultibootProgramStruct.gcmb_field_2 != 1)
         {
@@ -1115,7 +1122,7 @@ static u8 SetUpCopyrightScreen(void)
             gMain.state++;
         }
         break;
-    case 141:
+    case COPYRIGHT_START_INTRO:
         if (UpdatePaletteFade())
             break;
 #if EXPANSION_INTRO == TRUE

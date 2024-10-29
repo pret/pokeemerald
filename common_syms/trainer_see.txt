@@ -1,5 +1,0 @@
-gWhichTrainerToFaceAfterBattle
-gPostBattleMovementScript
-gApproachingTrainers
-gNoOfApproachingTrainers
-gTrainerApproachedPlayer

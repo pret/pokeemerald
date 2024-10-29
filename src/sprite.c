@@ -260,8 +260,8 @@ static struct AffineAnimState sAffineAnimStates[OAM_MATRIX_COUNT];
 static u16 sSpritePaletteTags[16];
 
 // iwram common
-u32 gOamMatrixAllocBitmap;
-u8 gReservedSpritePaletteCount;
+COMMON_DATA u32 gOamMatrixAllocBitmap = 0;
+COMMON_DATA u8 gReservedSpritePaletteCount = 0;
 
 EWRAM_DATA struct Sprite gSprites[MAX_SPRITES + 1] = {0};
 EWRAM_DATA static u8 sSpriteOrder[MAX_SPRITES] = {0};

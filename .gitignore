@@ -47,4 +47,6 @@ prefabs.json
 *.diff
 *.sym
 *.js
+/pokeemerald-*.png
+/pokeemerald_agbcc-*.png
 src/data/map_group_count.h
