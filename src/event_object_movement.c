@@ -1600,6 +1600,9 @@ static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEven
         return OBJECT_EVENTS_COUNT;
 
     objectEvent = &gObjectEvents[objectEventId];
+    if(objectEventTemplate->localId == OBJ_EVENT_ID_PLAYER)
+        DebugPrintf("Check Here GraphicsId: %d", objectEvent->graphicsId);
+
     if (objectEvent->graphicsId == OBJ_EVENT_GFX_ZIGZAGOON_2)
         objectEvent->graphicsId = (VarGet(VAR_OVERWORLD_MON_SPECIES) + OBJ_EVENT_GFX_MON_BASE);
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
@@ -2628,7 +2631,11 @@ static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y)
     objectEvent = &gObjectEvents[objectEventId];
 
     if (objectEvent->movementType == MOVEMENT_TYPE_PLAYER)
+    {
         objectEvent->graphicsId = GetPlayerAvatarGraphicsId(); 
+        if (objectEvent->graphicsId >= OBJ_EVENT_GFX_VARS && objectEvent->graphicsId <= OBJ_EVENT_GFX_VAR_F)
+            objectEvent->graphicsId = VarGetObjectEventGraphicsId(objectEvent->graphicsId - OBJ_EVENT_GFX_VARS);
+    }
 
     if (objectEvent->graphicsId == OBJ_EVENT_GFX_ZIGZAGOON_2)
         objectEvent->graphicsId = (VarGet(VAR_OVERWORLD_MON_SPECIES) + OBJ_EVENT_GFX_MON_BASE);

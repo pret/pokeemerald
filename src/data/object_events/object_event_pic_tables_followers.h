@@ -2233,7 +2233,7 @@ static const struct SpriteFrameImage sPicTable_Wailmer[] = {
     overworld_ascending_frames(gObjectEventPic_Wailmer, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_Wailord[] = {
-    overworld_ascending_frames(gObjectEventPic_Wailord, 4, 4),
+    overworld_ascending_frames(gObjectEventPic_Wailord, 8, 8),
 };
 #endif //P_FAMILY_WAILMER
 

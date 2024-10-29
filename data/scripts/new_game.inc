@@ -293,5 +293,6 @@ EventScript_ResetAllMapFlags::
 	callnative ClearAllRandomEncounters
 	callnative ClearAllRandomBossEncounters
 	call EventScript_ResetAllBerries
+	setvar VAR_AVATAR_POKEMON_CHOICE, SPECIES_MUDKIP
 	end
 

@@ -89,6 +89,22 @@ u16 ReturnAvatarGraphicsId(u16 avatarId);
 u16 ReturnAvatarTrainerFrontPicId(u16 avatarId);
 u16 ReturnAvatarTrainerBackPicId(u16 avatarId);
 
+enum {
+    AVATAR_BRENDAN,
+    AVATAR_MAY,
+    AVATAR_RED,
+    AVATAR_LEAF,
+    AVATAR_LUCAS,
+    AVATAR_DAWN,
+    AVATAR_ETHAN,
+    AVATAR_LYRA,
+    AVATAR_STEVEN,
+    AVATAR_CYNTHIA,
+    AVATAR_OAK,
+    AVATAR_PHOEBE,
+    AVATAR_POKEMON_CHOICE,
+};
+
 // srccmd.h
 void SetMovingNpcId(u16 npcId);
 u16 ReturnLastSpokenVarObjGfxId();

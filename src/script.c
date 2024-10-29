@@ -848,20 +848,7 @@ void SetAutosaveFlag(void)
 }
 
 // Avatar Code
-enum {
-    AVATAR_BRENDAN,
-    AVATAR_MAY,
-    AVATAR_RED,
-    AVATAR_LEAF,
-    AVATAR_LUCAS,
-    AVATAR_DAWN,
-    AVATAR_ETHAN,
-    AVATAR_LYRA,
-    AVATAR_STEVEN,
-    AVATAR_CYNTHIA,
-    AVATAR_OAK,
-    AVATAR_PHOEBE,
-};
+
 struct PitAvatarInfo {
     u16 mugshotId;
     u16 graphicsId;
@@ -949,6 +936,13 @@ static const struct PitAvatarInfo sPitAvatars[] = {
         .trainerBackPicId = TRAINER_BACK_PIC_PHOEBE,
     },
 
+    {
+        .mugshotId = AVATAR_POKEMON_CHOICE,
+        .graphicsId = 0xFFFF,
+        .trainerFrontPicId = TRAINER_PIC_BRENDAN,
+        .trainerBackPicId = TRAINER_BACK_PIC_BRENDAN,
+    },
+
 };
 
 u16 ReturnAvatarMugshotId(u16 avatarId)
@@ -958,7 +952,14 @@ u16 ReturnAvatarMugshotId(u16 avatarId)
 
 u16 ReturnAvatarGraphicsId(u16 avatarId)
 {
-    return sPitAvatars[avatarId].graphicsId;
+    u16 graphicsId = sPitAvatars[avatarId].graphicsId;
+    if(graphicsId == 0xFFFF)
+    {
+        graphicsId = OBJ_EVENT_GFX_VAR_D;
+        VarSet(VAR_AVATAR_POKEMON_CHOICE, SPECIES_LOTAD);
+        VarSet(VAR_OBJ_GFX_ID_D, VarGet(VAR_AVATAR_POKEMON_CHOICE) + OBJ_EVENT_GFX_MON_BASE);
+    }
+    return graphicsId;
 }
 
 u16 ReturnAvatarTrainerFrontPicId(u16 avatarId)
