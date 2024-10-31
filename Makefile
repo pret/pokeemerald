@@ -265,7 +265,12 @@ include audio_rules.mk
 
 # NOTE: Tools must have been built prior (FIXME)
 # so you can't really call this rule directly
-generated: $(AUTO_GEN_TARGETS)
+generated: generated_silent
+
+# Silence the "Nothing to be done for `generated'" message, which some people were confusing for an error.
+generated_silent: $(AUTO_GEN_TARGETS)
+	@:
+
 
 %.s:   ;
 %.png: ;
