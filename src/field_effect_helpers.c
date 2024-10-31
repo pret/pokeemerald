@@ -423,8 +423,20 @@ u32 FldEff_TallGrass(void)
     DebugPrintf("sprites - current map = %d", GetCurrentMapConstant());
     switch (GetCurrentMapConstant())
     {
+        case MAP_PIT_ARENA_WHITE_BARK:
+        case MAP_PIT_ARENA_DIRT_PATH:
+        case MAP_PIT_ARENA_MUSHROOM_WOODS:
         case MAP_PIT_ARENA_WATER:
             spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS_WATER], x, y, 0);
+            break;
+        case MAP_PIT_ARENA_DESERT:
+            spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS_DESERT], x, y, 0);
+            break;
+        case MAP_PIT_ARENA_SNOW:
+            spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS_SNOW], x, y, 0);
+            break;
+        case MAP_PIT_ARENA_UNDERWATER:
+            spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS_UNDERWATER], x, y, 0);
             break;
         default:
             spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS], x, y, 0);

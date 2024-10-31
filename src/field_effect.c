@@ -807,17 +807,31 @@ void FieldEffectScript_LoadFadedPalette_TallGrass(u8 **script)
     struct SpritePalette *palettes = (struct SpritePalette *)FieldEffectScript_ReadWord(script);
 
     //dynamically change TallGrass subsprites based on tileset
-    DebugPrintf("pals - current map = %d", GetCurrentMapConstant());
     switch (GetCurrentMapConstant())
     {
+        case MAP_PIT_ARENA_DIRT_PATH:
         case MAP_PIT_ARENA_WATER:
             palId = TALL_GRASS_WATER;
+            break;
+        case MAP_PIT_ARENA_WHITE_BARK:
+            palId = TALL_GRASS_WHITE_BARK;
+            break;
+        case MAP_PIT_ARENA_DESERT:
+            palId = TALL_GRASS_DESERT;
+            break;
+        case MAP_PIT_ARENA_SNOW:
+            palId = TALL_GRASS_SNOW;
+            break;
+        case MAP_PIT_ARENA_MUSHROOM_WOODS:
+            palId = TALL_GRASS_MUSHROOM_WOODS;
+            break;
+        case MAP_PIT_ARENA_UNDERWATER:
+            palId = TALL_GRASS_UNDERWATER;
             break;
         default:
             palId = TALL_GRASS_VANILLA;
             break;
     }
-    DebugPrintf("palId = %d", palId);
     LoadSpritePalette(&palettes[palId]);
     UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(palettes[palId].tag));
     (*script) += 4;
