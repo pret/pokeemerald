@@ -420,7 +420,6 @@ u32 FldEff_TallGrass(void)
     SetSpritePosToOffsetMapCoords(&x, &y, 8, 8);
 
     //dynamically change TallGrass subsprites based on tileset
-    DebugPrintf("sprites - current map = %d", GetCurrentMapConstant());
     switch (GetCurrentMapConstant())
     {
         case MAP_PIT_ARENA_WHITE_BARK:
@@ -435,8 +434,8 @@ u32 FldEff_TallGrass(void)
         case MAP_PIT_ARENA_SNOW:
             spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS_SNOW], x, y, 0);
             break;
-        case MAP_PIT_ARENA_UNDERWATER:
-            spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS_UNDERWATER], x, y, 0);
+        case MAP_PIT_ARENA_BEACH:
+            spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS_BEACH], x, y, 0);
             break;
         default:
             spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS], x, y, 0);

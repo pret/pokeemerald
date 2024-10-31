@@ -825,8 +825,8 @@ void FieldEffectScript_LoadFadedPalette_TallGrass(u8 **script)
         case MAP_PIT_ARENA_MUSHROOM_WOODS:
             palId = TALL_GRASS_MUSHROOM_WOODS;
             break;
-        case MAP_PIT_ARENA_UNDERWATER:
-            palId = TALL_GRASS_UNDERWATER;
+        case MAP_PIT_ARENA_BEACH:
+            palId = TALL_GRASS_BEACH;
             break;
         default:
             palId = TALL_GRASS_VANILLA;

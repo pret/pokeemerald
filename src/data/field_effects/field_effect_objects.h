@@ -9,7 +9,7 @@ const struct SpritePalette gSpritePalette_TallGrass[] =
     {gFieldEffectObjectPalette_TallGrass_Desert, FLDEFF_PAL_TAG_GRASS},
     {gFieldEffectObjectPalette_TallGrass_Snow, FLDEFF_PAL_TAG_GRASS},
     {gFieldEffectObjectPalette_TallGrass_Mushroom, FLDEFF_PAL_TAG_GRASS},
-    {gFieldEffectObjectPalette_TallGrass_Underwater, FLDEFF_PAL_TAG_GRASS},
+    {gFieldEffectObjectPalette_TallGrass_Beach, FLDEFF_PAL_TAG_GRASS},
 };
 
 
@@ -172,20 +172,20 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_TallGrass_Snow = {
 };
 
 //Underwater
-static const struct SpriteFrameImage sPicTable_TallGrass_Underwater[] = {
-    overworld_frame(gFieldEffectObjectPic_TallGrass_Underwater, 2, 2, 0),
-    overworld_frame(gFieldEffectObjectPic_TallGrass_Underwater, 2, 2, 1),
-    overworld_frame(gFieldEffectObjectPic_TallGrass_Underwater, 2, 2, 2),
-    overworld_frame(gFieldEffectObjectPic_TallGrass_Underwater, 2, 2, 3),
-    overworld_frame(gFieldEffectObjectPic_TallGrass_Underwater, 2, 2, 4),
+static const struct SpriteFrameImage sPicTable_TallGrass_Beach[] = {
+    overworld_frame(gFieldEffectObjectPic_TallGrass_Beach, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_TallGrass_Beach, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_TallGrass_Beach, 2, 2, 2),
+    overworld_frame(gFieldEffectObjectPic_TallGrass_Beach, 2, 2, 3),
+    overworld_frame(gFieldEffectObjectPic_TallGrass_Beach, 2, 2, 4),
 };
 
-const struct SpriteTemplate gFieldEffectObjectTemplate_TallGrass_Underwater = {
+const struct SpriteTemplate gFieldEffectObjectTemplate_TallGrass_Beach = {
     .tileTag = TAG_NONE,
     .paletteTag = FLDEFF_PAL_TAG_GRASS,
     .oam = &gObjectEventBaseOam_16x16,
     .anims = sAnimTable_TallGrass,
-    .images = sPicTable_TallGrass_Underwater,
+    .images = sPicTable_TallGrass_Beach,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateTallGrassFieldEffect,
 };

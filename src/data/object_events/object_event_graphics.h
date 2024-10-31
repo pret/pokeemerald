@@ -311,7 +311,7 @@ const u16 gFieldEffectObjectPalette_TallGrass_WhiteBark[] = INCBIN_U16("graphics
 const u16 gFieldEffectObjectPalette_TallGrass_Desert[] = INCBIN_U16("graphics/field_effects/palettes/tall_grass_desert.gbapal");
 const u16 gFieldEffectObjectPalette_TallGrass_Snow[] = INCBIN_U16("graphics/field_effects/palettes/tall_grass_snow.gbapal");
 const u16 gFieldEffectObjectPalette_TallGrass_Mushroom[] = INCBIN_U16("graphics/field_effects/palettes/tall_grass_mushroom.gbapal");
-const u16 gFieldEffectObjectPalette_TallGrass_Underwater[] = INCBIN_U16("graphics/field_effects/palettes/tall_grass_underwater.gbapal");
+const u16 gFieldEffectObjectPalette_TallGrass_Beach[] = INCBIN_U16("graphics/field_effects/palettes/tall_grass_beach.gbapal");
 //
 const u32 gFieldEffectObjectPic_GroundImpactDust[] = INCBIN_U32("graphics/field_effects/pics/ground_impact_dust.4bpp");
 const u32 gFieldEffectObjectPic_JumpTallGrass[] = INCBIN_U32("graphics/field_effects/pics/jump_tall_grass.4bpp");
@@ -324,7 +324,7 @@ const u32 gFieldEffectObjectPic_TallGrass[] = INCBIN_U32("graphics/field_effects
 const u32 gFieldEffectObjectPic_TallGrass_Water[] = INCBIN_U32("graphics/field_effects/pics/tall_grass_water.4bpp");
 const u32 gFieldEffectObjectPic_TallGrass_Desert[] = INCBIN_U32("graphics/field_effects/pics/tall_grass_desert.4bpp");
 const u32 gFieldEffectObjectPic_TallGrass_Snow[] = INCBIN_U32("graphics/field_effects/pics/tall_grass_snow.4bpp");
-const u32 gFieldEffectObjectPic_TallGrass_Underwater[] = INCBIN_U32("graphics/field_effects/pics/tall_grass_underwater.4bpp");
+const u32 gFieldEffectObjectPic_TallGrass_Beach[] = INCBIN_U32("graphics/field_effects/pics/tall_grass_beach.4bpp");
 const u32 gFieldEffectObjectPic_ShortGrass[] = INCBIN_U32("graphics/field_effects/pics/short_grass.4bpp");
 const u32 gFieldEffectObjectPic_SandFootprints[] = INCBIN_U32("graphics/field_effects/pics/sand_footprints.4bpp");
 const u32 gFieldEffectObjectPic_DeepSandFootprints[] = INCBIN_U32("graphics/field_effects/pics/deep_sand_footprints.4bpp");
