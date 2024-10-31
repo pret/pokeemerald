@@ -68,6 +68,7 @@ const u8 *GetRandomBossEncounterBossApproachText(void);
 const u8 *GetRandomBossEncounterBossDefeatText(void);
 const u8 *GetRandomBossEncounterBossAceText(void);
 u16 GetRandomMapTerrain(void);
+u16 GetCurrentMapConstant(void);
 void CreateOverworldHUD(void);
 
 struct RandomTrainerNPC 

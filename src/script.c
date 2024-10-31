@@ -1114,6 +1114,16 @@ u16 GetRandomMapTerrain(void)
     return BATTLE_TERRAIN_CAVE;
 }
 
+u16 GetCurrentMapConstant(void)
+{
+    u16 currentIndex = VarGet(VAR_PIT_CURRENT_MAP_INDEX_IN_ARRAY);
+    if(currentIndex != 0xFF)
+    {
+        return sRandomMapArray[currentIndex].mapConstant;
+    }
+    return MAP_PIT_ARENA;
+}
+
 struct RandomMonEncounters {
     u16 species;
     u16 flagId; // id into gSaveBlock2Ptr->randomMonEncounters not normal flags

@@ -1,5 +1,12 @@
 const struct SpritePalette gSpritePalette_GeneralFieldEffect0 = {gFieldEffectObjectPalette0, FLDEFF_PAL_TAG_GENERAL_0};
 const struct SpritePalette gSpritePalette_GeneralFieldEffect1 = {gFieldEffectObjectPalette1, FLDEFF_PAL_TAG_GENERAL_1};
+//adding new palettes for TallGrass sub sprites
+const struct SpritePalette gSpritePalette_TallGrass[] = 
+{
+    {gFieldEffectObjectPalette1, FLDEFF_PAL_TAG_GRASS}, //default pal
+    {gFieldEffectObjectPalette_TallGrass_Water, FLDEFF_PAL_TAG_GRASS},
+};
+
 
 static const union AnimCmd sAnim_Shadow[] =
 {
@@ -93,13 +100,34 @@ static const union AnimCmd *const sAnimTable_TallGrass[] =
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_TallGrass = {
     .tileTag = TAG_NONE,
-    .paletteTag = FLDEFF_PAL_TAG_GENERAL_1,
+    .paletteTag = FLDEFF_PAL_TAG_GRASS,
     .oam = &gObjectEventBaseOam_16x16,
     .anims = sAnimTable_TallGrass,
     .images = sPicTable_TallGrass,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateTallGrassFieldEffect,
 };
+
+//TallGrass variations for the pit
+//Water
+static const struct SpriteFrameImage sPicTable_TallGrass_Water[] = {
+    overworld_frame(gFieldEffectObjectPic_TallGrass_Water, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_TallGrass_Water, 2, 2, 1),
+    overworld_frame(gFieldEffectObjectPic_TallGrass_Water, 2, 2, 2),
+    overworld_frame(gFieldEffectObjectPic_TallGrass_Water, 2, 2, 3),
+    overworld_frame(gFieldEffectObjectPic_TallGrass_Water, 2, 2, 4),
+};
+
+const struct SpriteTemplate gFieldEffectObjectTemplate_TallGrass_Water = {
+    .tileTag = TAG_NONE,
+    .paletteTag = FLDEFF_PAL_TAG_GRASS,
+    .oam = &gObjectEventBaseOam_16x16,
+    .anims = sAnimTable_TallGrass,
+    .images = sPicTable_TallGrass_Water,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateTallGrassFieldEffect,
+};
+
 
 static const struct SpriteFrameImage sPicTable_Ripple[] = {
     overworld_frame(gFieldEffectObjectPic_Ripple, 2, 2, 0),

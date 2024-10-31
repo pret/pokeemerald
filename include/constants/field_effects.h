@@ -118,6 +118,7 @@
 #define FLDEFFOBJ_TRACKS_SLITHER        38
 #define FLDEFFOBJ_TRACKS_SPOT           39
 #define FLDEFFOBJ_TRACKS_BUG            40
+#define FLDEFFOBJ_TALL_GRASS_WATER      41
 
 #define FLDEFF_PAL_TAG_CUT_GRASS          0x1000
 #define FLDEFF_PAL_TAG_SECRET_POWER_TREE  0x1003
@@ -132,5 +133,13 @@
 #define FLDEFF_PAL_TAG_HOF_MONITOR        0x1010
 #define FLDEFF_PAL_TAG_UNKNOWN            0x1011
 #define FLDEFF_PAL_TAG_SAVING			  0x1012
+#define FLDEFF_PAL_TAG_GRASS         	  0x1013
+
+//TallGrass defines for dynamic palettes
+enum {
+    TALL_GRASS_VANILLA,
+    TALL_GRASS_WATER,
+    TALL_GRASS_COUNT
+};
 
 #endif // GUARD_FIELD_EFFECT_CONSTANTS_H
