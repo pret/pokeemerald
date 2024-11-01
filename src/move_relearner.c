@@ -150,10 +150,11 @@
 #define MENU_STATE_WAIT_FOR_FANFARE 32
 #define MENU_STATE_WAIT_FOR_A_BUTTON 33
 //Tutor states for VAR_PIT_TUTOR_STATE
-#define TUTOR_STATE_RELEARNER 0
-#define TUTOR_STATE_TUTOR_MOVES 1
-#define TUTOR_STATE_EGG_MOVES 2
-#define TUTOR_STATE_IV_EDITOR 3
+#define TUTOR_STATE_RELEARNER    0
+#define TUTOR_STATE_TUTOR_MOVES  1
+#define TUTOR_STATE_EGG_MOVES    2
+#define TUTOR_STATE_IV_EDITOR    3
+#define TUTOR_STATE_PREEVO_MOVES 4
 
 // The different versions of hearts are selected using animation
 // commands.
@@ -750,6 +751,8 @@ static void DoMoveRelearnerMain(void)
             //deduct money if a tutor move was taught
             if(VarGet(VAR_PIT_TUTOR_STATE) == TUTOR_STATE_EGG_MOVES)
                 RemoveMoney(&gSaveBlock1Ptr->money, 10000);
+            if(VarGet(VAR_PIT_TUTOR_STATE) == TUTOR_STATE_PREEVO_MOVES)
+                RemoveMoney(&gSaveBlock1Ptr->money, 5000);
 #ifndef PIT_GEN_9_MODE
             if (VarGet(VAR_PIT_TUTOR_STATE) == TUTOR_STATE_TUTOR_MOVES)
                 RemoveMoney(&gSaveBlock1Ptr->money, 10000);
@@ -948,6 +951,9 @@ static void CreateLearnableMovesList(void)
 			sMoveRelearnerStruct->numMenuChoices = GetTutorMoves(&gPlayerParty[sMoveRelearnerStruct->partyMon], sMoveRelearnerStruct->movesToLearn);
 		    break;
 #endif
+        case TUTOR_STATE_PREEVO_MOVES:
+            sMoveRelearnerStruct->numMenuChoices = GetPreEvoMoves(&gPlayerParty[sMoveRelearnerStruct->partyMon], sMoveRelearnerStruct->movesToLearn, FALSE);
+            break;
 	}
 
     for (i = 0; i < sMoveRelearnerStruct->numMenuChoices; i++)

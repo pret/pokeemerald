@@ -86,6 +86,7 @@
 #define TUTOR_STATE_TUTOR_MOVES 1
 #define TUTOR_STATE_EGG_MOVES 2
 #define TUTOR_STATE_IV_EDITOR 3
+#define TUTOR_STATE_PREEVO_MOVES 4
 
 enum {
     MENU_SUMMARY,
@@ -284,6 +285,7 @@ static void DrawEmptySlot_Equal(u8 windowId); //Custom party menu
 static void DisplayPartyPokemonDataForRelearner(u8);
 static void DisplayPartyPokemonDataForEggTutor(u8);
 static void DisplayPartyPokemonDataForMoveTutor(u8);
+static void DisplayPartyPokemonDataForPreEvoTutor(u8);
 static void DisplayPartyPokemonDataForContest(u8);
 static void DisplayPartyPokemonDataForChooseHalf(u8);
 static void DisplayPartyPokemonDataForWirelessMinigame(u8);
@@ -1017,6 +1019,8 @@ static void RenderPartyMenuBox(u8 slot)
                 DisplayPartyPokemonDataForEggTutor(slot);
             else if (gPartyMenu.menuType == PARTY_MENU_TYPE_MOVE_TUTOR)
                 DisplayPartyPokemonDataForMoveTutor(slot);
+            else if (gPartyMenu.menuType == PARTY_MENU_TYPE_PREEVO_TUTOR)
+                DisplayPartyPokemonDataForPreEvoTutor(slot);
             else if (gPartyMenu.menuType == PARTY_MENU_TYPE_CONTEST)
                 DisplayPartyPokemonDataForContest(slot);
             else if (gPartyMenu.menuType == PARTY_MENU_TYPE_CHOOSE_HALF)
@@ -1133,6 +1137,15 @@ static void DisplayPartyPokemonDataForEggTutor(u8 slot)
 static void DisplayPartyPokemonDataForMoveTutor(u8 slot)
 {
     if (GetNumberOfTutorMoves(&gPlayerParty[slot]) == 0)
+        DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_NOT_ABLE_2);
+    else
+        DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_ABLE_2);
+}
+
+static void DisplayPartyPokemonDataForPreEvoTutor(u8 slot)
+{
+    u16 dummyVar;
+    if (GetPreEvoMoves(&gPlayerParty[slot], &dummyVar, TRUE) == FALSE)
         DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_NOT_ABLE_2);
     else
         DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_ABLE_2);
@@ -7896,6 +7909,9 @@ static void Task_ChooseMonForMoveRelearner(u8 taskId)
             case TUTOR_STATE_IV_EDITOR:
                 InitPartyMenu(PARTY_MENU_TYPE_CHOOSE_MON, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_AND_CLOSE, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_ChooseMonForStatEditor);
                 break;
+            case TUTOR_STATE_PREEVO_MOVES:
+                InitPartyMenu(PARTY_MENU_TYPE_PREEVO_TUTOR, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_AND_CLOSE, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_ChooseMonForMoveRelearner);
+                break;
         }
         DestroyTask(taskId);
     }
@@ -7903,6 +7919,8 @@ static void Task_ChooseMonForMoveRelearner(u8 taskId)
 
 static void CB2_ChooseMonForMoveRelearner(void)
 {
+    u16 *dummyMoves[40]; //dummy var because the pointer's result doesn't matter here. The function only returns TRUE/FALSE.
+
     gSpecialVar_0x8004 = GetCursorSelectionMonId();
     if (gSpecialVar_0x8004 >= PARTY_SIZE)
         gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
@@ -7921,6 +7939,9 @@ static void CB2_ChooseMonForMoveRelearner(void)
                 gSpecialVar_0x8005 = GetNumberOfTutorMoves(&gPlayerParty[gSpecialVar_0x8004]);
                 break;
 #endif
+            case TUTOR_STATE_PREEVO_MOVES:
+                gSpecialVar_0x8005 = GetPreEvoMoves(&gPlayerParty[gSpecialVar_0x8004], dummyMoves, FALSE); //sMoveRelearnerStruct->movesToLearn
+                break;
         }
     }
     gFieldCallback2 = CB2_FadeFromPartyMenu;

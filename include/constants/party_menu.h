@@ -35,6 +35,7 @@
 #define PARTY_MENU_TYPE_STORE_PYRAMID_HELD_ITEMS  12
 #define PARTY_MENU_TYPE_MOVE_TUTOR                13
 #define PARTY_MENU_TYPE_EGG_TUTOR                 14
+#define PARTY_MENU_TYPE_PREEVO_TUTOR              15
 
 #define PARTY_ACTION_CHOOSE_MON         0
 #define PARTY_ACTION_SEND_OUT           1

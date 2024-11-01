@@ -863,6 +863,7 @@ static void DecryptBoxMon(struct BoxPokemon *boxMon);
 static void Task_PlayMapChosenOrBattleBGM(u8 taskId);
 static bool8 ShouldSkipFriendshipChange(void);
 static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv);
+static u16 GetPreEvolution(u16 species);
 void TrySpecialOverworldEvo();
 void TryLevelUpOverworldEvo();
 
@@ -9503,6 +9504,77 @@ u8 GetTutorMoves(struct Pokemon *mon, u16 *moves)
     return numMoves;
 }
 
+u8 GetPreEvoMoves(struct Pokemon *mon, u16 *moves, bool8 PreEvoCheckOnly)
+{
+    u16 learnedMoves[4];
+    u8 numMoves = 0;
+    u16 speciesPreEvo;
+    u16 speciesOriginal = GetMonData(mon, MON_DATA_SPECIES, 0);
+    u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
+    const struct LevelUpMove *learnset, *learnsetOriginal;
+    int i, j, k;
+
+    speciesPreEvo = GetPreEvolution(speciesOriginal);
+    learnset = GetSpeciesLevelUpLearnset(speciesPreEvo);
+    learnsetOriginal = GetSpeciesLevelUpLearnset(speciesOriginal);
+
+    //save current moveset
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
+
+    while (speciesPreEvo != SPECIES_NONE)
+    {
+        //iterate all level up moves
+        for (i = 0; i < MAX_LEVEL_UP_MOVES; i++)
+        {
+            u16 moveLevel;
+
+            //exit if last move from learnset is reached
+            if (learnset[i].move == LEVEL_UP_MOVE_END)
+                break;
+
+            //check if said move is not currently known
+            for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != learnset[i].move; j++)
+                ;
+
+            //if move is currently unknown
+            if (j == MAX_MON_MOVES)
+            {
+                //check if not already in the list
+                for (k = 0; k < numMoves && moves[k] != learnset[i].move; k++)
+                    ;
+
+                if (k == numMoves)
+                {
+                    // check if move is not learnable by level-up by original species
+                    // to identify if it as an actual PreEvo move
+                    for (j = 0; j < MAX_LEVEL_UP_MOVES; j++)
+                    {
+                        if (learnsetOriginal[j].move == learnset[i].move)
+                            break;
+                        if (learnsetOriginal[j].move == LEVEL_UP_MOVE_END)
+                        {
+                            j = 255;
+                            break;
+                        }
+                    }
+                    //found a PreEvo move
+                    if (j == 255)
+                    {
+                        if (PreEvoCheckOnly)
+                            return TRUE;
+                        moves[numMoves++] = learnset[i].move;
+                    }
+                }
+            }
+        }
+        speciesPreEvo = GetPreEvolution(speciesPreEvo);
+        learnset = GetSpeciesLevelUpLearnset(speciesPreEvo);
+    }
+
+    return numMoves;
+}
+
 #define TUTOR_MOVES_COUNT ARRAY_COUNT(sTutorMoves)
 static const u16 sTutorMoves[] =
 {
@@ -9737,4 +9809,22 @@ void UpdateDaysPassedSinceFormChange(u16 days)
             }
         }
     }
+}
+
+static u16 GetPreEvolution(u16 species)
+{
+    int i, j;
+
+    for (i = 1; i < NUM_SPECIES; i++)
+    {
+        const struct Evolution *evolutions = GetSpeciesEvolutions(i);
+        if (evolutions == NULL)
+            continue;
+        for (j = 0; evolutions[j].method != EVOLUTIONS_END; j++)
+        {
+            if (SanitizeSpeciesId(evolutions[j].targetSpecies) == species)
+                return i;
+        }
+    }
+    return SPECIES_NONE;
 }

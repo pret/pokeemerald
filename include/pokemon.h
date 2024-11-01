@@ -884,6 +884,7 @@ bool8 IsSpeciesParadoxMon(u16 species);
 const u8 *GetMoveAnimationScript(u16 moveId);
 void UpdateDaysPassedSinceFormChange(u16 days);
 void TrySetDayLimitToFormChange(struct Pokemon *mon);
+u8 GetPreEvoMoves(struct Pokemon *mon, u16 *moves, bool8 PreEvoCheckOnly);
 
 //tx_randomizer_and_challenges
 void RandomizeSpeciesListEWRAM(u16 seed);
