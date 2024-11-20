@@ -49,7 +49,7 @@ struct mini_buff
 
 static inline char mini_pchar_decode(char encoded)
 {
-    char ret = '~';
+    char ret = '?';
     if (encoded >= CHAR_a && encoded <= CHAR_z)
         ret = encoded-(CHAR_a-'a'); // lower-case characters
     else if (encoded >= CHAR_A && encoded <= CHAR_Z)
