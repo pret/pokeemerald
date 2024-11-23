@@ -1613,6 +1613,8 @@ AI_CV_Disable2:
 AI_CV_Disable_End:
 	end
 
+@ BUG: The original script would score up Counter when the target's types were not physical
+@      This is incorrect since Counter only deals double the damage received if hit by a physical attack
 AI_CV_Counter:
 	if_status AI_TARGET, STATUS1_SLEEP, AI_CV_Counter_ScoreDown1
 	if_status2 AI_TARGET, STATUS2_INFATUATION, AI_CV_Counter_ScoreDown1
@@ -1625,7 +1627,7 @@ AI_CV_Counter2:
 	if_random_less_than 100, AI_CV_Counter3
 	score -1
 AI_CV_Counter3:
-	if_has_move AI_USER, MOVE_MIRROR_COAT, AI_CV_Counter7
+	if_has_move AI_USER, MOVE_MIRROR_COAT, AI_CV_Counter8
 	get_last_used_bank_move AI_TARGET
 	get_move_power_from_result
 	if_equal 0, AI_CV_Counter5
@@ -1645,15 +1647,24 @@ AI_CV_Counter5:
 	if_random_less_than 100, AI_CV_Counter6
 	score +1
 AI_CV_Counter6:
+#ifdef BUGFIX
+	get_target_type1
+	if_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_Counter7
+	get_target_type2
+	if_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_Counter7
+	goto AI_CV_Counter_End
+#else
 	get_target_type1
 	if_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_Counter_End
 	get_target_type2
 	if_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_Counter_End
-	if_random_less_than 50, AI_CV_Counter_End
+#endif
 AI_CV_Counter7:
-	if_random_less_than 100, AI_CV_Counter8
-	score +4
+	if_random_less_than 50, AI_CV_Counter_End
 AI_CV_Counter8:
+	if_random_less_than 100, AI_CV_Counter9
+	score +4
+AI_CV_Counter9:
 	end
 
 AI_CV_Counter_ScoreDown1:
@@ -2100,6 +2111,8 @@ AI_CV_PsychUp_ScoreDown2:
 AI_CV_PsychUp_End:
 	end
 
+@ BUG: The original script would score up Mirror Coat when the target's types were not special
+@      This is incorrect since Mirror Coat only deals double the damage received if hit by a special attack
 AI_CV_MirrorCoat:
 	if_status AI_TARGET, STATUS1_SLEEP, AI_CV_MirrorCoat_ScoreDown1
 	if_status2 AI_TARGET, STATUS2_INFATUATION, AI_CV_MirrorCoat_ScoreDown1
@@ -2132,10 +2145,19 @@ AI_CV_MirrorCoat5:
 	if_random_less_than 100, AI_CV_MirrorCoat6
 	score +1
 AI_CV_MirrorCoat6:
+#ifdef BUGFIX
+	get_target_type1
+	if_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_MirrorCoat7
+	get_target_type2
+	if_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_MirrorCoat7
+	goto AI_CV_MirrorCoat_End
+#else
 	get_target_type1
 	if_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_MirrorCoat_End
 	get_target_type2
 	if_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_MirrorCoat_End
+#endif
+AI_CV_MirrorCoat7:
 	if_random_less_than 50, AI_CV_MirrorCoat_End
 AI_CV_MirrorCoat_ScoreUp4:
 	if_random_less_than 100, AI_CV_MirrorCoat_ScoreUp4_End

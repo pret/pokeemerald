@@ -48,7 +48,7 @@ void GetWordPhonemes(struct BardSong *song, u16 word)
     const struct BardSound *sound;
 
     song->length = 0;
-    for (i = 0; i < 6; i ++)
+    for (i = 0; i < BARD_SOUND_MAX_LENGTH; i ++)
     {
         sound = &song->sound[i];
         if (sound->songLengthId != 0xFF)
