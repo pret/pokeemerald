@@ -530,15 +530,42 @@ string generate_map_constants_text(string groups_filepath, Json groups_data) {
 
     text << "//\n// DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/map_groups.json\n//\n\n";
 
-    int group_num = 0;
+    // Map values consist of an 8 bit map number and an 8 bit map group.
+    // In theory this means there is a maximum of 256 map groups, each with 256 maps.
+    // There are two special map values -- MAP_UNDEFINED and MAP_DYNAMIC.
+    // Sometimes only the map number or map group is read when checking for these special values,
+    // so in practice the maximum is 254 map groups, each with 254 maps.
+    const int map_num_bits = 8;
+    const int map_num_max = ((1 << map_num_bits) - 2); // Exclude the two special map numbers.
 
-    for (auto &group : groups_data["group_order"].array_items()) {
+    int group_num = 0;
+    int dynamic_map_num = 127;
+
+    vector<Json> groups = groups_data["group_order"].array_items();
+    if (groups.size() > map_num_max) {
+        FATAL_ERROR("%s: Number of map groups (%lu) exceeds limit of %d.\n", groups_filepath.c_str(), groups.size(), map_num_max);
+    }
+    if (groups.size() > dynamic_map_num) {
+        // Increase the value of MAP_DYNAMIC to avoid value collision.
+        dynamic_map_num = groups.size();
+    }
+
+    for (auto &group : groups) {
         string groupName = json_to_string(group);
         text << "// " << groupName << "\n";
         vector<string> map_ids;
         size_t max_length = 0;
 
-        for (auto &map_name : groups_data[groupName].array_items()) {
+        vector<Json> map_names = groups_data[groupName].array_items();
+        if (map_names.size() > map_num_max) {
+            FATAL_ERROR("%s: Number of maps (%lu) in map group '%s' exceeds limit of %d.\n", groups_filepath.c_str(), map_names.size(), groupName.c_str(), map_num_max);
+        }
+        if (map_names.size() > dynamic_map_num) {
+            // Increase the value of MAP_DYNAMIC to avoid value collision.
+            dynamic_map_num = map_names.size();
+        }
+
+        for (auto &map_name : map_names) {
             string map_filepath = file_dir + json_to_string(map_name) + sep + "map.json";
             string err_str;
             Json map_data = Json::parse(read_text_file(map_filepath), err_str);
@@ -553,12 +580,21 @@ string generate_map_constants_text(string groups_filepath, Json groups_data) {
         int map_id_num = 0;
         for (string map_id : map_ids) {
             text << "#define " << map_id << string((max_length - map_id.length() + 1), ' ')
-                 << "(" << map_id_num++ << " | (" << group_num << " << 8))\n";
+                 << "(" << map_id_num++ << " | (" << group_num << " << " << map_num_bits << "))\n";
         }
         text << "\n";
 
         group_num++;
     }
+
+    // Add define for MAP_DYNAMIC
+    text << "// Warps using this map will instead use the warp data stored in gSaveBlock1Ptr->dynamicWarp.\n"
+         << "// Used for warps that need to change destinations, e.g. when stepping off an elevator.\n"
+         << "#define MAP_DYNAMIC (" << dynamic_map_num << " | (" << dynamic_map_num << " << " << map_num_bits << "))\n";
+    
+    // Add define for MAP_UNDEFINED
+    int last_map_num = (1 << map_num_bits) - 1;
+    text << "#define MAP_UNDEFINED (" << last_map_num << " | (" << last_map_num << " << " << map_num_bits << "))\n\n";
 
     text << "#define MAP_GROUPS_COUNT " << group_num << "\n\n";
     text << "#endif // GUARD_CONSTANTS_MAP_GROUPS_H\n";
