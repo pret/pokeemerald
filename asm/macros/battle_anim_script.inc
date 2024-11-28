@@ -340,6 +340,22 @@
 	createsprite gTailGlowOrbSpriteTemplate, \anim_battler, \subpriority_offset, \relative_to
 	.endm
 
+	.macro create_sharp_teeth_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, animation:req, x_velocity:req, y_velocity:req, half_duration:req
+	createsprite gSharpTeethSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \animation, 256 * \x_velocity, 256 * \y_velocity, \half_duration
+	.endm
+
+	.macro create_clamp_jaw_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, animation:req, x_velocity:req, y_velocity:req, half_duration:req
+	createsprite gClampJawSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \animation, 256 * \x_velocity, 256 * \y_velocity, \half_duration
+	.endm
+
+	.macro create_tear_drop_sprite anim_battler:req, subpriority_offset:req, relative_to:req, type:req
+	createsprite gTearDropSpriteTemplate, \anim_battler, \subpriority_offset, \relative_to, \type
+	.endm
+
+	.macro create_claw_slash_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, animation:req
+	createsprite gClawSlashSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \animation
+	.endm
+
 	.macro create_confusion_duck_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, wave_offset:req, wave_period:req, duration:req
 	createsprite gConfusionDuckSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \wave_offset, \wave_period, \duration
 	.endm
@@ -378,6 +394,30 @@
 
 @ createvisualtask wrappers
 @ The arguments are based on the CMD_ARGS of the task.
+
+	.macro metallic_shine priority=5, permanent:req, color
+	.ifb \color
+	createvisualtask AnimTask_MetallicShine, \priority, \permanent, FALSE, RGB_BLACK
+	.else
+	createvisualtask AnimTask_MetallicShine, \priority, \permanent, TRUE, \color
+	.endif
+	.endm
+
+	.macro set_grayscale_pal priority=5, battler:req
+	createvisualtask AnimTask_SetGrayscaleOrOriginalPal, \priority, \battler, FALSE
+	.endm
+
+	.macro set_original_pal priority=5, battler:req
+	createvisualtask AnimTask_SetGrayscaleOrOriginalPal, \priority, \battler, TRUE
+	.endm
+
+	.macro attacker_fade_to_invisible priority=2, step_delay:req
+	createvisualtask AnimTask_AttackerFadeToInvisible, \priority, \step_delay
+	.endm
+
+	.macro attacker_fade_from_invisible priority=2, step_delay:req
+	createvisualtask AnimTask_AttackerFadeFromInvisible, \priority, \step_delay
+	.endm
 
 	.macro blend_color_cycle priority=2, selector:req, delay:req, num_blends:req, initial_blend_y:req, target_blend_y:req, color:req
 	createvisualtask AnimTask_BlendColorCycle, \priority, \selector, \delay, \num_blends, \initial_blend_y, \target_blend_y, \color
