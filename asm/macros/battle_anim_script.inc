@@ -356,6 +356,30 @@
 	createsprite gClawSlashSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \animation
 	.endm
 
+	.macro create_outrage_flame_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, duration:req, x_velocity:req, y_velocity:req, flicker_duration:req
+	createsprite gOutrageFlameSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \duration, 256 * \x_velocity, 256 * \y_velocity, \flicker_duration
+	.endm
+
+	.macro create_dragon_breath_fire_sprite anim_battler:req, subpriority_offset:req, initial_x:req, initial_y:req, target_x:req, target_y:req, duration:req
+	createsprite gDragonBreathFireSpriteTemplate, \anim_battler, \subpriority_offset, \initial_x, \initial_y, \target_x, \target_y, \duration
+	.endm
+
+	.macro create_dragon_rage_fire_spit_sprite anim_battler:req, subpriority_offset:req, initial_x:req, initial_y:req, target_x:req, target_y:req, duration:req
+	createsprite gDragonRageFireSpitSpriteTemplate, \anim_battler, \subpriority_offset, \initial_x, \initial_y, \target_x, \target_y, \duration
+	.endm
+
+	.macro create_dragon_rage_fire_plume_sprite anim_battler:req, subpriority_offset:req, relative_to:req, x:req, y:req
+	createsprite gDragonRageFirePlumeSpriteTemplate, \anim_battler, \subpriority_offset, \relative_to, \x, \y
+	.endm
+
+	.macro create_dragon_dance_orb_sprite anim_battler:req, subpriority_offset:req, angle:req
+	createsprite gDragonDanceOrbSpriteTemplate, \anim_battler, \subpriority_offset, 256 * \angle
+	.endm
+
+	.macro create_overheat_flame_sprite anim_battler:req, subpriority_offset:req, speed:req, unk1:req, unk2:req, duration:req, y:req
+	createsprite gOverheatFlameSpriteTemplate, \anim_battler, \subpriority_offset, \speed, \unk1, \unk2, \duration, \y
+	.endm
+
 	.macro create_confusion_duck_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, wave_offset:req, wave_period:req, duration:req
 	createsprite gConfusionDuckSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \wave_offset, \wave_period, \duration
 	.endm
