@@ -312,6 +312,34 @@
 	.endif
 	.endm
 
+	.macro create_megahorn_horn_sprite anim_battler:req, subpriority_offset:req, x1:req, y1:req, x2:req, y2:req, duration:req
+	createsprite gMegahornHornSpriteTemplate, \anim_battler, \subpriority_offset, \x1, \y1, \x2, \y2, \duration
+	.endm
+
+	.macro create_leech_life_needle_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, duration:req
+	createsprite gLeechLifeNeedleSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \duration
+	.endm
+
+	.macro create_web_thread_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, unk2:req, amplitude:req, targets_both:req
+	createsprite gWebThreadSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \unk2, \amplitude, \targets_both
+	.endm
+
+	.macro create_string_wrap_sprite anim_battler:req, subpriority_offset:req, x:req, y:req
+	createsprite gStringWrapSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y
+	.endm
+
+	.macro create_linear_stinger_sprite anim_battler:req, subpriority_offset:req, initial_x:req, initial_y:req, target_x:req, target_y:req, duration:req
+	createsprite gLinearStingerSpriteTemplate, \anim_battler, \subpriority_offset, \initial_x, \initial_y, \target_x, \target_y, \duration
+	.endm
+
+	.macro create_pin_missile_sprite anim_battler:req, subpriority_offset:req, initial_x:req, initial_y:req, target_x:req, target_y:req, duration:req, wave_amplitude:req
+	createsprite gPinMissileSpriteTemplate, \anim_battler, \subpriority_offset, \initial_x, \initial_y, \target_x, \target_y, \duration, \wave_amplitude
+	.endm
+
+	.macro create_tail_glow_orb_sprite anim_battler:req, subpriority_offset:req, relative_to:req
+	createsprite gTailGlowOrbSpriteTemplate, \anim_battler, \subpriority_offset, \relative_to
+	.endm
+
 	.macro create_confusion_duck_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, wave_offset:req, wave_period:req, duration:req
 	createsprite gConfusionDuckSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \wave_offset, \wave_period, \duration
 	.endm
