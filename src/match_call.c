@@ -1698,50 +1698,50 @@ static void PopulateMapName(int matchCallId, u8 *destStr)
 }
 
 // Equivalent to ChooseWildMonIndex_Land
-// NUM_LAND_MONS_ENCOUNTER_SLOTS
+// NUM_LAND_ENCOUNTER_SLOTS
 static u8 GetLandEncounterSlot(void)
 {
-    int rand = Random() % ENCOUNTER_CHANCE_LAND_MONS_TOTAL;
+    int rand = Random() % ENCOUNTER_CHANCE_LAND_TOTAL;
 
-    if (rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_0)
+    if (rand < ENCOUNTER_CHANCE_LAND_SLOT_0)
         return 0;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_0 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_1)
+    else if (rand >= ENCOUNTER_CHANCE_LAND_SLOT_0 && rand < ENCOUNTER_CHANCE_LAND_SLOT_1)
         return 1;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_1 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_2)
+    else if (rand >= ENCOUNTER_CHANCE_LAND_SLOT_1 && rand < ENCOUNTER_CHANCE_LAND_SLOT_2)
         return 2;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_2 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_3)
+    else if (rand >= ENCOUNTER_CHANCE_LAND_SLOT_2 && rand < ENCOUNTER_CHANCE_LAND_SLOT_3)
         return 3;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_3 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_4)
+    else if (rand >= ENCOUNTER_CHANCE_LAND_SLOT_3 && rand < ENCOUNTER_CHANCE_LAND_SLOT_4)
         return 4;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_4 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_5)
+    else if (rand >= ENCOUNTER_CHANCE_LAND_SLOT_4 && rand < ENCOUNTER_CHANCE_LAND_SLOT_5)
         return 5;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_5 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_6)
+    else if (rand >= ENCOUNTER_CHANCE_LAND_SLOT_5 && rand < ENCOUNTER_CHANCE_LAND_SLOT_6)
         return 6;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_6 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_7)
+    else if (rand >= ENCOUNTER_CHANCE_LAND_SLOT_6 && rand < ENCOUNTER_CHANCE_LAND_SLOT_7)
         return 7;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_7 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_8)
+    else if (rand >= ENCOUNTER_CHANCE_LAND_SLOT_7 && rand < ENCOUNTER_CHANCE_LAND_SLOT_8)
         return 8;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_8 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_9)
+    else if (rand >= ENCOUNTER_CHANCE_LAND_SLOT_8 && rand < ENCOUNTER_CHANCE_LAND_SLOT_9)
         return 9;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_9 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_10)
+    else if (rand >= ENCOUNTER_CHANCE_LAND_SLOT_9 && rand < ENCOUNTER_CHANCE_LAND_SLOT_10)
         return 10;
     else
         return 11;
 }
 
 // Equivalent to ChooseWildMonIndex_WaterRock
-// NUM_WATER_MONS_ENCOUNTER_SLOTS
+// NUM_WATER_ENCOUNTER_SLOTS
 static u8 GetWaterEncounterSlot(void)
 {
-    int rand = Random() % ENCOUNTER_CHANCE_WATER_MONS_TOTAL;
+    int rand = Random() % ENCOUNTER_CHANCE_WATER_TOTAL;
 
-    if (rand < ENCOUNTER_CHANCE_WATER_MONS_SLOT_0)
+    if (rand < ENCOUNTER_CHANCE_WATER_SLOT_0)
         return 0;
-    else if (rand >= ENCOUNTER_CHANCE_WATER_MONS_SLOT_0 && rand < ENCOUNTER_CHANCE_WATER_MONS_SLOT_1)
+    else if (rand >= ENCOUNTER_CHANCE_WATER_SLOT_0 && rand < ENCOUNTER_CHANCE_WATER_SLOT_1)
         return 1;
-    else if (rand >= ENCOUNTER_CHANCE_WATER_MONS_SLOT_1 && rand < ENCOUNTER_CHANCE_WATER_MONS_SLOT_2)
+    else if (rand >= ENCOUNTER_CHANCE_WATER_SLOT_1 && rand < ENCOUNTER_CHANCE_WATER_SLOT_2)
         return 2;
-    else if (rand >= ENCOUNTER_CHANCE_WATER_MONS_SLOT_2 && rand < ENCOUNTER_CHANCE_WATER_MONS_SLOT_3)
+    else if (rand >= ENCOUNTER_CHANCE_WATER_SLOT_2 && rand < ENCOUNTER_CHANCE_WATER_SLOT_3)
         return 3;
     else
         return 4;
