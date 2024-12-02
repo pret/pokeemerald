@@ -3,12 +3,6 @@
 
 {{ doNotModifyHeader }}
 
-// TODO: Generate these as well
-#define LAND_WILD_COUNT     12
-#define WATER_WILD_COUNT    5
-#define ROCK_WILD_COUNT     5
-#define FISH_WILD_COUNT     10
-
 #define NUM_ALTERING_CAVE_TABLES 9
 
 ## for wild_encounter_group in wild_encounter_groups
@@ -21,12 +15,16 @@
 #define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_TOTAL (ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_SLOT_{{ getVar(wild_encounter_field.type) }})
 {% else %}
 ## for field_subgroup_key, field_subgroup_subarray in wild_encounter_field.groups
+{{ setVar("field_name", concat(concat(upper(wild_encounter_field.type), "_"), upper(field_subgroup_key))) }}
 ## for field_subgroup_index in field_subgroup_subarray
-#define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_{{ upper(field_subgroup_key) }}_SLOT_{{ field_subgroup_index }} ({% if loop.index == 0 %}{{ at(wild_encounter_field.encounter_rates, field_subgroup_index) }}{% else %}ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_{{ upper(field_subgroup_key) }}_SLOT_{{ getVar("previous_slot") }} + {{ at(wild_encounter_field.encounter_rates, field_subgroup_index) }}{% endif %}){{ setVarInt(concat(wild_encounter_field.type, field_subgroup_key), field_subgroup_index) }}{{ setVarInt("previous_slot", field_subgroup_index) }}
+#define ENCOUNTER_CHANCE_{{ getVar("field_name") }}_SLOT_{{ field_subgroup_index }} ({% if loop.index == 0 %}{{ at(wild_encounter_field.encounter_rates, field_subgroup_index) }}{% else %}ENCOUNTER_CHANCE_{{ getVar("field_name") }}_SLOT_{{ getVar("previous_slot") }} + {{ at(wild_encounter_field.encounter_rates, field_subgroup_index) }}{% endif %}){{ setVarInt(concat(wild_encounter_field.type, field_subgroup_key), field_subgroup_index) }}{{ setVarInt("previous_slot", field_subgroup_index) }}
 ## endfor
-#define ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_{{ upper(field_subgroup_key) }}_TOTAL (ENCOUNTER_CHANCE_{{ upper(wild_encounter_field.type) }}_{{ upper(field_subgroup_key) }}_SLOT_{{ getVar(concat(wild_encounter_field.type, field_subgroup_key)) }})
+#define ENCOUNTER_CHANCE_{{ getVar("field_name") }}_TOTAL (ENCOUNTER_CHANCE_{{ getVar("field_name") }}_SLOT_{{ getVar(concat(wild_encounter_field.type, field_subgroup_key)) }})
+#define NUM_{{ getVar("field_name") }}_ENCOUNTER_SLOTS ({{ length(field_subgroup_subarray) }})
 ## endfor
 {% endif %}
+#define NUM_{{ upper(wild_encounter_field.type) }}_ENCOUNTER_SLOTS ({{ length(wild_encounter_field.encounter_rates) }})
+
 ## endfor
 {% endif %}
 ## endfor
