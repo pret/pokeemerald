@@ -380,6 +380,106 @@
 	createsprite gOverheatFlameSpriteTemplate, \anim_battler, \subpriority_offset, \speed, \unk1, \unk2, \duration, \y
 	.endm
 
+	.macro create_sleep_powder_particle_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, duration:req, y_velocity:req, wave_amplitude:req, wave_speed:req
+	createsprite gSleepPowderParticleSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \duration, 256 * \y_velocity, \wave_amplitude, \wave_speed
+	.endm
+
+	.macro create_stun_spore_particle_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, duration:req, y_velocity:req, wave_amplitude:req, wave_speed:req
+	createsprite gStunSporeParticleSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \duration, 256 * \y_velocity, \wave_amplitude, \wave_speed
+	.endm
+
+	.macro create_poison_powder_particle_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, duration:req, y_velocity:req, wave_amplitude:req, wave_speed:req
+	createsprite gPoisonPowderParticleSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \duration, 256 * \y_velocity, \wave_amplitude, \wave_speed
+	.endm
+
+	.macro create_power_absorption_orb_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, duration:req
+	createsprite gPowerAbsorptionOrbSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \duration
+	.endm
+
+	.macro create_stockpile_absorption_orb_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, duration:req
+	createsprite gStockpileAbsorptionOrbSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \duration
+	.endm
+
+	.macro create_solar_beam_big_orb_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, duration:req, animation:req
+	createsprite gSolarBeamBigOrbSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \duration, \animation
+	.endm
+
+	.macro create_absorption_orb_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, wave_amplitude:req, wave_period:req
+	createsprite gAbsorptionOrbSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \wave_amplitude, \wave_period
+	.endm
+
+	.macro create_hyper_beam_orb_sprite anim_battler:req, subpriority_offset:req
+	createsprite gHyperBeamOrbSpriteTemplate, \anim_battler, \subpriority_offset
+	.endm
+
+	.macro createleechseedsprite anim_battler:req, subpriority_offset:req, initial_x:req, initial_y:req, target_x:req, target_y:req, duration:req, wave_amplitude:req
+	createsprite gLeechSeedSpriteTemplate, \anim_battler, \subpriority_offset, \initial_x, \initial_y, \target_x, \target_y, \duration, \wave_amplitude
+	.endm
+
+	.macro create_spore_particle_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, wave_offset:req, duration:req, blend:req
+	createsprite gSporeParticleSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \wave_offset, \duration, \blend
+	.endm
+
+	.macro create_petal_dance_big_flower_sprite anim_battler:req, subpriority_offset:req, initial_x:req, initial_y:req, target_y:req, duration:req
+	createsprite gPetalDanceBigFlowerSpriteTemplate, \anim_battler, \subpriority_offset, \initial_x, \initial_y, \target_y, \duration
+	.endm
+
+	.macro create_petal_dance_small_flower_sprite anim_battler:req, subpriority_offset:req, initial_x:req, initial_y:req, target_y:req, duration:req
+	createsprite gPetalDanceSmallFlowerSpriteTemplate, \anim_battler, \subpriority_offset, \initial_x, \initial_y, \target_y, \duration
+	.endm
+
+	.macro create_razor_leaf_particle_sprite anim_battler:req, subpriority_offset:req, upward_delta_x:req, upward_delta_y:req, upward_duration:req
+	createsprite gRazorLeafParticleSpriteTemplate, \anim_battler, \subpriority_offset, \upward_delta_x, \upward_delta_y, \upward_duration
+	.endm
+
+	.macro create_razor_leaf_cutter_sprite anim_battler:req, subpriority_offset:req, initial_x:req, initial_y:req, target_x:req, target_y:req, duration:req, wave_amplitude:req, target_both:req
+	createsprite gRazorLeafCutterSpriteTemplate, \anim_battler, \subpriority_offset, \initial_x, \initial_y, \target_x, \target_y, \duration, \wave_amplitude, \target_both
+	.endm
+
+	.macro create_swift_star_sprite anim_battler:req, subpriority_offset:req, initial_x:req, initial_y:req, target_x:req, target_y:req, duration:req, wave_amplitude:req, target_both:req
+	createsprite gSwiftStarSpriteTemplate, \anim_battler, \subpriority_offset, \initial_x, \initial_y, \target_x, \target_y, \duration, \wave_amplitude, \target_both
+	.endm
+
+	.macro create_twister_leaf_sprite anim_battler:req, subpriority_offset:req, duration:req, distance_y:req, wave_period:req, wave_amplitude:req, speed_up_on_frame:req
+	createsprite gTwisterLeafSpriteTemplate, \anim_battler, \subpriority_offset, \duration, \distance_y, \wave_period, \wave_amplitude, \speed_up_on_frame
+	.endm
+
+	.macro create_constrict_binding_sprite anim_battler:req, subpriority_offset:req, initial_x:req, initial_y:req, affine_animation:req, squeezes:req
+	createsprite gConstrictBindingSpriteTemplate, \anim_battler, \subpriority_offset, \initial_x, \initial_y, \affine_animation, \squeezes
+	.endm
+
+	.macro create_mimic_orb_sprite anim_battler:req, subpriority_offset:req, initial_x:req, initial_y:req
+	createsprite gMimicOrbSpriteTemplate, \anim_battler, \subpriority_offset, \initial_x, \initial_y
+	.endm
+
+	.macro create_ingrain_root_sprite anim_battler:req, subpriority_offset:req, offset_x:req, offset_y:req, subpriority:req, animation:req, duration:req
+	createsprite gIngrainRootSpriteTemplate, \anim_battler, \subpriority_offset, \offset_x, \offset_y, \subpriority - 30, \animation, \duration
+	.endm
+
+	.macro create_frenzy_plant_root_sprite anim_battler:req, subpriority_offset:req, interpolate_percent:req, offset_x:req, offset_y:req, subpriority:req, animation:req, duration:req
+	createsprite gFrenzyPlantRootSpriteTemplate, \anim_battler, \subpriority_offset, \interpolate_percent, \offset_x, \offset_y, \subpriority - 30, \animation, \duration
+	.endm
+
+	.macro create_ingrain_orb_sprite anim_battler:req, subpriority_offset:req, initial_x:req, initial_y:req, velocity_x:req, wave_amplitude:req, duration:req
+	createsprite gIngrainOrbSpriteTemplate, \anim_battler, \subpriority_offset, \initial_x, \initial_y, \velocity_x, \wave_amplitude, \duration
+	.endm
+
+	.macro create_present_sprite anim_battler:req, subpriority_offset:req, initial_x:req, initial_y:req, unk2:req, unk3:req, unk4:req
+	createsprite gPresentSpriteTemplate, \anim_battler, \subpriority_offset, \initial_x, \initial_y, \unk2, \unk3, \unk4
+	.endm
+
+	.macro create_present_heal_particle_sprite anim_battler:req, subpriority_offset:req, initial_x:req, initial_y:req, velocity_y:req, unused3=1
+	createsprite gPresentHealParticleSpriteTemplate, \anim_battler, \subpriority_offset, \initial_x, \initial_y, \velocity_y, \unused3
+	.endm
+
+	.macro create_item_steal_sprite anim_battler:req, subpriority_offset:req, initial_x:req, initial_y:req, unk2, unk3, unk4
+	createsprite gItemStealSpriteTemplate, \anim_battler, \subpriority_offset, \initial_x, \initial_y, \unk2, \unk3, \unk4
+	.endm
+
+	.macro create_trick_bag_sprite anim_battler:req, subpriority_offset:req, initial_y:req, wave_offset:req
+	createsprite gTrickBagSpriteTemplate, \anim_battler, \subpriority_offset, \initial_y, \wave_offset
+	.endm
+
 	.macro create_confusion_duck_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, wave_offset:req, wave_period:req, duration:req
 	createsprite gConfusionDuckSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \wave_offset, \wave_period, \duration
 	.endm
@@ -441,6 +541,14 @@
 
 	.macro attacker_fade_from_invisible priority=2, step_delay:req
 	createvisualtask AnimTask_AttackerFadeFromInvisible, \priority, \step_delay
+	.endm
+
+	.macro shrink_target_copy priority=5, unk0:req, unk1:req
+	createvisualtask AnimTask_ShrinkTargetCopy, \priority, \unk0, \unk1
+	.endm
+
+	.macro create_leaf_blade_task priority=5
+	createvisualtask AnimTask_LeafBlade, \priority
 	.endm
 
 	.macro blend_color_cycle priority=2, selector:req, delay:req, num_blends:req, initial_blend_y:req, target_blend_y:req, color:req
