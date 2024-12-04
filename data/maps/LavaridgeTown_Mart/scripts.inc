@@ -22,9 +22,7 @@ LavaridgeTown_Mart_Pokemart:
 	.2byte ITEM_REVIVE
 	.2byte ITEM_SUPER_REPEL
 	.2byte ITEM_X_SPEED
-	.2byte POKEMART_LIST_END
-	release
-	end
+	pokemartlistend
 
 LavaridgeTown_Mart_EventScript_ExpertM::
 	msgbox LavaridgeTown_Mart_Text_XSpeedFirstStrike, MSGBOX_NPC
