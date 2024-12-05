@@ -167,9 +167,9 @@ static s32 _putsEncoded(char *s, s32 len, void *buf)
 
 static s32 mini_strlen(const char *s)
 {
-	s32 len = 0;
-	while (s[len] != '\0') len++;
-	return len;
+    s32 len = 0;
+    while (s[len] != '\0') len++;
+    return len;
 }
 
 static s32 mini_itoa(s32 value, u32 radix, s32 uppercase, bool32 unsig, char *buffer)
@@ -274,7 +274,8 @@ s32 mini_vpprintf(void* buf, const char *fmt, va_list va)
         {
             len = 1;
             len = _putsAscii(&ch, len, buf);
-        } else
+        }
+        else
         {
             char pad_char = ' ';
             s32 pad_to = 0;
@@ -310,7 +311,8 @@ s32 mini_vpprintf(void* buf, const char *fmt, va_list va)
                     if(l)
                     {
                         len = mini_itoa(va_arg(va, u32), 10, 0, (ch=='u'), bf2);
-                    } else
+                    }
+                    else
                     {
                         if(ch == 'u')
                         {
@@ -352,7 +354,8 @@ s32 mini_vpprintf(void* buf, const char *fmt, va_list va)
                     {
                         len = mini_pad(ptr, len, pad_char, pad_to, bf);
                         len = _putsAscii(bf, len, buf);
-                    } else
+                    }
+                    else
                     {
                         len = _putsAscii(ptr, len, buf);
                     }
@@ -364,7 +367,8 @@ s32 mini_vpprintf(void* buf, const char *fmt, va_list va)
                     {
                         len = mini_pad(ptr, len, pad_char, pad_to, bf);
                         len = _putsEncoded(bf, len, buf);
-                    } else
+                    }
+                    else
                     {
                         len = _putsEncoded(ptr, len, buf);
                     }
