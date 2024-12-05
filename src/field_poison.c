@@ -92,7 +92,7 @@ static void Task_TryFieldPoisonWhiteOut(u8 taskId)
 #ifdef BUGFIX
             if (InBattlePyramid() || InBattlePike() || InTrainerHillChallenge())
 #else
-            if (InBattlePyramid() | InBattlePike() || InTrainerHillChallenge())
+            if (CurrentBattlePyramidLocation() | InBattlePike() || InTrainerHillChallenge())
 #endif
                 gSpecialVar_Result = FLDPSN_FRONTIER_WHITEOUT;
             else
