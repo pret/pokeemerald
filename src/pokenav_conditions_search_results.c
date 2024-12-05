@@ -184,13 +184,21 @@ static bool32 HandleConditionSearchInput_WaitSetup(struct Pokenav_SearchResults 
 static u32 HandleConditionSearchInput(struct Pokenav_SearchResults *menu)
 {
     if (JOY_REPEAT(DPAD_UP))
+    {
         return CONDITION_SEARCH_FUNC_MOVE_UP;
+    }
     else if (JOY_REPEAT(DPAD_DOWN))
+    {
         return CONDITION_SEARCH_FUNC_MOVE_DOWN;
+    }
     else if (JOY_NEW(DPAD_LEFT))
+    {
         return CONDITION_SEARCH_FUNC_PAGE_UP;
+    }
     else if (JOY_NEW(DPAD_RIGHT))
+    {
         return CONDITION_SEARCH_FUNC_PAGE_DOWN;
+    }
     else if (JOY_NEW(B_BUTTON))
     {
         // Exiting back to main search menu
@@ -207,7 +215,9 @@ static u32 HandleConditionSearchInput(struct Pokenav_SearchResults *menu)
         return CONDITION_SEARCH_FUNC_SELECT_MON;
     }
     else
+    {
         return CONDITION_SEARCH_FUNC_NONE;
+    }
 }
 
 static u32 ReturnToConditionSearchList(struct Pokenav_SearchResults *menu)

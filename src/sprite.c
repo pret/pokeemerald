@@ -1090,9 +1090,13 @@ void ContinueAffineAnim(struct Sprite *sprite)
         u8 matrixNum = GetSpriteMatrixNum(sprite);
 
         if (sAffineAnimStates[matrixNum].delayCounter)
+        {
             AffineAnimDelay(matrixNum, sprite);
+        }
         else if (sprite->affineAnimPaused)
+        {
             return;
+        }
         else
         {
             s16 type;
