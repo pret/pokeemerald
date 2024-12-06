@@ -23,9 +23,4 @@ void LoadBattlePyramidFloorObjectEventScripts(void);
 u8 GetNumBattlePyramidObjectEvents(void);
 u16 GetBattlePyramidPickupItemId(void);
 
-static inline bool8 InBattlePyramid()
-{
-    return (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE);
-}
-
 #endif // GUARD_BATTLE_PYRAMID_H
