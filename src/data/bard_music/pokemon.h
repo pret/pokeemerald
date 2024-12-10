@@ -3,7 +3,7 @@
 
 const u16 gNumBardWords_Species = NUM_SPECIES;
 
-const struct BardSound gBardSounds_Pokemon[NUM_SPECIES][6] = {
+const struct BardSound gBardSounds_Pokemon[NUM_SPECIES][BARD_SOUND_MAX_LENGTH] = {
     [SPECIES_NONE] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
