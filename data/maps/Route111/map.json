@@ -31,6 +31,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_ROUTE111_VICTOR",
       "graphics_id": "OBJ_EVENT_GFX_MAN_1",
       "x": 13,
       "y": 114,
@@ -44,6 +45,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_VICTOR_WINSTRATE"
     },
     {
+      "local_id": "LOCALID_ROUTE111_VICTORIA",
       "graphics_id": "OBJ_EVENT_GFX_POKEFAN_F",
       "x": 13,
       "y": 113,
@@ -57,6 +59,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_VICTORIA_WINSTRATE"
     },
     {
+      "local_id": "LOCALID_ROUTE111_VIVI",
       "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 13,
       "y": 113,
@@ -70,6 +73,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_VIVI_WINSTRATE"
     },
     {
+      "local_id": "LOCALID_ROUTE111_VICKY",
       "graphics_id": "OBJ_EVENT_GFX_EXPERT_F",
       "x": 13,
       "y": 113,
@@ -187,6 +191,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ROUTE111_TY_1",
       "graphics_id": "OBJ_EVENT_GFX_CAMERAMAN",
       "x": 14,
       "y": 86,
@@ -200,6 +205,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_1"
     },
     {
+      "local_id": "LOCALID_ROUTE111_GABBY_1",
       "graphics_id": "OBJ_EVENT_GFX_REPORTER_F",
       "x": 13,
       "y": 86,
@@ -291,6 +297,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ROUTE111_GABBY_2",
       "graphics_id": "OBJ_EVENT_GFX_REPORTER_F",
       "x": 13,
       "y": 86,
@@ -301,9 +308,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "GabbyAndTy_EventScript_GabbyBattle4",
-      "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_3"
+      "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_2"
     },
     {
+      "local_id": "LOCALID_ROUTE111_TY_2",
       "graphics_id": "OBJ_EVENT_GFX_CAMERAMAN",
       "x": 14,
       "y": 86,
@@ -314,9 +322,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "GabbyAndTy_EventScript_TyBattle4",
-      "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_3"
+      "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_2"
     },
     {
+      "local_id": "LOCALID_ROUTE111_GABBY_3",
       "graphics_id": "OBJ_EVENT_GFX_REPORTER_F",
       "x": 13,
       "y": 86,
@@ -327,9 +336,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "GabbyAndTy_EventScript_GabbyBattle6",
-      "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_2"
+      "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_3"
     },
     {
+      "local_id": "LOCALID_ROUTE111_TY_3",
       "graphics_id": "OBJ_EVENT_GFX_CAMERAMAN",
       "x": 14,
       "y": 86,
@@ -340,7 +350,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "GabbyAndTy_EventScript_TyBattle6",
-      "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_2"
+      "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_3"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -603,6 +613,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_DESERT_FOSSIL"
     },
     {
+      "local_id": "LOCALID_ROUTE111_PLAYER_FALLING",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 19,
       "y": 53,
@@ -616,6 +627,7 @@
       "flag": "FLAG_HIDE_ROUTE_111_PLAYER_DESCENT"
     },
     {
+      "local_id": "LOCALID_ROUTE111_ROCK_SMASH_MAN",
       "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 19,
       "y": 101,

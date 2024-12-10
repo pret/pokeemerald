@@ -28,6 +28,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_LOTTERY_CLERK",
       "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 10,
       "y": 2,

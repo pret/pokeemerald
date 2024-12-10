@@ -1,5 +1,3 @@
-@ Note: LOCALID_FARAWAY_ISLAND_MEW is a local id for this map used elsewhere. It's defined in event_objects.h
-
 FarawayIsland_Interior_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, FarawayIsland_Interior_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, FarawayIsland_Interior_OnTransition

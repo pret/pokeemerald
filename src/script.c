@@ -378,7 +378,7 @@ void ClearRamScript(void)
     CpuFill32(0, &gSaveBlock1Ptr->ramScript, sizeof(struct RamScript));
 }
 
-bool8 InitRamScript(const u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8 objectId)
+bool8 InitRamScript(const u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8 localId)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
 
@@ -390,13 +390,13 @@ bool8 InitRamScript(const u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8
     scriptData->magic = RAM_SCRIPT_MAGIC;
     scriptData->mapGroup = mapGroup;
     scriptData->mapNum = mapNum;
-    scriptData->objectId = objectId;
+    scriptData->localId = localId;
     memcpy(scriptData->script, script, scriptSize);
     gSaveBlock1Ptr->ramScript.checksum = CalculateRamScriptChecksum();
     return TRUE;
 }
 
-const u8 *GetRamScript(u8 objectId, const u8 *script)
+const u8 *GetRamScript(u8 localId, const u8 *script)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
     gRamScriptRetAddr = NULL;
@@ -406,7 +406,7 @@ const u8 *GetRamScript(u8 objectId, const u8 *script)
         return script;
     if (scriptData->mapNum != gSaveBlock1Ptr->location.mapNum)
         return script;
-    if (scriptData->objectId != objectId)
+    if (scriptData->localId != localId)
         return script;
     if (CalculateRamScriptChecksum() != gSaveBlock1Ptr->ramScript.checksum)
     {
@@ -420,7 +420,7 @@ const u8 *GetRamScript(u8 objectId, const u8 *script)
     }
 }
 
-#define NO_OBJECT OBJ_EVENT_ID_PLAYER
+#define NO_OBJECT LOCALID_PLAYER
 
 bool32 ValidateSavedRamScript(void)
 {
@@ -431,7 +431,7 @@ bool32 ValidateSavedRamScript(void)
         return FALSE;
     if (scriptData->mapNum != MAP_NUM(MAP_UNDEFINED))
         return FALSE;
-    if (scriptData->objectId != NO_OBJECT)
+    if (scriptData->localId != NO_OBJECT)
         return FALSE;
     if (CalculateRamScriptChecksum() != gSaveBlock1Ptr->ramScript.checksum)
         return FALSE;
@@ -449,7 +449,7 @@ u8 *GetSavedRamScriptIfValid(void)
         return NULL;
     if (scriptData->mapNum != MAP_NUM(MAP_UNDEFINED))
         return NULL;
-    if (scriptData->objectId != NO_OBJECT)
+    if (scriptData->localId != NO_OBJECT)
         return NULL;
     if (CalculateRamScriptChecksum() != gSaveBlock1Ptr->ramScript.checksum)
     {

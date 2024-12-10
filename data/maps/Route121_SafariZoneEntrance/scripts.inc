@@ -8,7 +8,7 @@ Route121_SafariZoneEntrance_OnFrame:
 
 Route121_SafariZoneEntrance_EventScript_ExitSafariZone::
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, Route121_SafariZoneEntrance_Movement_ExitSafariZone
+	applymovement LOCALID_PLAYER, Route121_SafariZoneEntrance_Movement_ExitSafariZone
 	waitmovement 0
 	setvar VAR_SAFARI_ZONE_STATE, 0
 	releaseall
@@ -45,7 +45,7 @@ Route121_SafariZoneEntrance_EventScript_FirstTimeInfo::
 
 Route121_SafariZoneEntrance_EventScript_EntranceCounterTrigger::
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	showmoneybox 0, 0
 	msgbox Route121_SafariZoneEntrance_Text_WouldYouLikeToPlay, MSGBOX_YESNO
@@ -71,7 +71,7 @@ Route121_SafariZoneEntrance_EventScript_TryEnterSafariZone::
 	msgbox Route121_SafariZoneEntrance_Text_PleaseEnjoyYourself, MSGBOX_DEFAULT
 	closemessage
 	hidemoneybox
-	applymovement OBJ_EVENT_ID_PLAYER, Route121_SafariZoneEntrance_Movement_EnterSafariZone
+	applymovement LOCALID_PLAYER, Route121_SafariZoneEntrance_Movement_EnterSafariZone
 	waitmovement 0
 	special EnterSafariMode
 	setvar VAR_SAFARI_ZONE_STATE, 2
@@ -105,7 +105,7 @@ Route121_SafariZoneEntrance_EventScript_NotEnoughMoney::
 Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter::
 	closemessage
 	hidemoneybox
-	applymovement OBJ_EVENT_ID_PLAYER, Route121_SafariZoneEntrance_Movement_BackAwayFromCounter
+	applymovement LOCALID_PLAYER, Route121_SafariZoneEntrance_Movement_BackAwayFromCounter
 	waitmovement 0
 	releaseall
 	end

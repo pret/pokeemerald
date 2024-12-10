@@ -93,6 +93,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_DEPARTMENT_STORE_STAIRS_WOMAN",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 9,
       "y": 5,

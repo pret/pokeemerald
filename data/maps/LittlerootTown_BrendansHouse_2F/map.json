@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_RIVALS_HOUSE_2F_RIVAL",
       "graphics_id": "OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL",
       "x": 7,
       "y": 1,
@@ -184,6 +185,7 @@
       "flag": "FLAG_DECORATION_12"
     },
     {
+      "local_id": "LOCALID_PLAYERS_HOUSE_2F_MOM",
       "graphics_id": "OBJ_EVENT_GFX_MOM",
       "x": 7,
       "y": 1,

@@ -366,13 +366,13 @@ static void FreeDataStruct(void)
     TRY_FREE_AND_SET_NULL(sHillData);
 }
 
-void CopyTrainerHillTrainerText(u8 which, u16 trainerId)
+void CopyTrainerHillTrainerText(u8 which, u16 localId)
 {
     u8 id, floorId;
 
     SetUpDataStruct();
     floorId = GetFloorId();
-    id = trainerId - 1;
+    id = localId - 1;
 
     switch (which)
     {

@@ -21,6 +21,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_LITTLEROOT_TWIN",
       "graphics_id": "OBJ_EVENT_GFX_TWIN",
       "x": 16,
       "y": 10,
@@ -60,6 +61,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_LITTLEROOT_MOM",
       "graphics_id": "OBJ_EVENT_GFX_MOM",
       "x": 5,
       "y": 8,
@@ -99,6 +101,7 @@
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_TRUCK"
     },
     {
+      "local_id": "LOCALID_LITTLEROOT_RIVAL",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 13,
       "y": 10,
@@ -112,6 +115,7 @@
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_RIVAL"
     },
     {
+      "local_id": "LOCALID_LITTLEROOT_BIRCH",
       "graphics_id": "OBJ_EVENT_GFX_PROF_BIRCH",
       "x": 14,
       "y": 10,

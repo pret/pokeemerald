@@ -28,6 +28,7 @@
       "flag": "FLAG_HIDE_SOUTHERN_ISLAND_EON_STONE"
     },
     {
+      "local_id": "LOCALID_SOUTHERN_ISLAND_LATI",
       "graphics_id": "OBJ_EVENT_GFX_VAR_1",
       "x": 13,
       "y": 2,
