@@ -902,7 +902,9 @@ void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language
                     trader->language[i] = LANGUAGE_JAPANESE;
                 }
                 else
+                {
                     trader->language[i] = language;
+                }
             }
         }
         else

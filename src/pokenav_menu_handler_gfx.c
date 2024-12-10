@@ -505,7 +505,9 @@ static u32 LoopedTask_OpenMenu(s32 state)
         ShowBg(2);
         ShowBg(3);
         if (gfx->pokenavAlreadyOpen)
+        {
             PokenavFadeScreen(POKENAV_FADE_FROM_BLACK);
+        }
         else
         {
             PlaySE(SE_POKENAV_ON);

@@ -3398,7 +3398,9 @@ static u32 Cmd_StopGame(struct BerryCrushGame *game, u8 *args)
         break;
     case 2:
         if (game->gfx.counter != 0)
+        {
             game->gfx.counter--;
+        }
         else
         {
             RunOrScheduleCommand(CMD_CLOSE_LINK, SCHEDULE_CMD, NULL);
