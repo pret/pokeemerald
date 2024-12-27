@@ -90,7 +90,7 @@ static void Task_TryFieldPoisonWhiteOut(u8 taskId)
         {
             // Battle facilities have their own white out script to handle the challenge loss
 #ifdef BUGFIX
-            if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || InBattlePike() || InTrainerHillChallenge())
+            if (CurrentBattlePyramidLocation() || InBattlePike() || InTrainerHillChallenge())
 #else
             if (CurrentBattlePyramidLocation() | InBattlePike() || InTrainerHillChallenge())
 #endif
