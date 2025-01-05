@@ -1,4 +1,7 @@
-# Pokémon Emerald
+# Pokémon Emerald Plus
+
+This is a very minimal pokemon rom hack with higher shiny rate and non-trade evolutions. 
+
 
 This is a decompilation of Pokémon Emerald.
 
