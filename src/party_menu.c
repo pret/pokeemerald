@@ -4800,7 +4800,9 @@ static void Task_LearnNextMoveOrClosePartyMenu(u8 taskId)
     if (IsFanfareTaskInactive() && ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON))))
     {
         if (gPartyMenu.learnMoveState == 1)
+        {
             Task_TryLearningNextMove(taskId);
+        }
         else
         {
             if (gPartyMenu.learnMoveState == 2) // never occurs
