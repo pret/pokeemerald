@@ -37,7 +37,7 @@ static void AnimRevengeScratch(struct Sprite *);
 static void AnimFocusPunchFist(struct Sprite *);
 static void AnimSpinningKickOrPunchFinish(struct Sprite *);
 
-extern struct SpriteTemplate gBasicHitSplatSpriteTemplate;
+extern const struct SpriteTemplate gBasicHitSplatSpriteTemplate;
 
 // Unused
 static const struct SpriteTemplate sUnusedHumanoidFootSpriteTemplate =
