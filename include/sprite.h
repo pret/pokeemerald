@@ -1,6 +1,7 @@
 #ifndef GUARD_SPRITE_H
 #define GUARD_SPRITE_H
 
+#define OAM_MATRIX_COUNT 32
 #define MAX_SPRITES 64
 #define SPRITE_NONE 0xFF
 #define TAG_NONE 0xFFFF
@@ -254,12 +255,12 @@ extern const union AffineAnimCmd *const gDummySpriteAffineAnimTable[];
 extern const struct SpriteTemplate gDummySpriteTemplate;
 
 extern u8 gReservedSpritePaletteCount;
-extern struct Sprite gSprites[];
+extern struct Sprite gSprites[MAX_SPRITES + 1];
 extern u8 gOamLimit;
 extern u16 gReservedSpriteTileCount;
 extern s16 gSpriteCoordOffsetX;
 extern s16 gSpriteCoordOffsetY;
-extern struct OamMatrix gOamMatrices[];
+extern struct OamMatrix gOamMatrices[OAM_MATRIX_COUNT];
 extern bool8 gAffineAnimsDisabled;
 
 void ResetSpriteData(void);
