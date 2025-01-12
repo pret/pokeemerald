@@ -264,7 +264,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
 
     if (moveInfo->moves[chosenMoveId] == MOVE_CURSE)
     {
-        if (moveInfo->monType1 != TYPE_GHOST && moveInfo->monType2 != TYPE_GHOST)
+        if (moveInfo->monTypes[0] != TYPE_GHOST && moveInfo->monTypes[1] != TYPE_GHOST)
             moveTarget = MOVE_TARGET_USER;
         else
             moveTarget = MOVE_TARGET_SELECTED;
@@ -773,13 +773,21 @@ bool8 BattleLoadAllHealthBoxesGfx(u8 state)
                     LoadCompressedSpriteSheet(&sSpriteSheet_SinglesPlayerHealthbox);
             }
             else if (state == 3)
+            {
                 LoadCompressedSpriteSheet(&sSpriteSheet_SinglesOpponentHealthbox);
+            }
             else if (state == 4)
+            {
                 LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[0]]);
+            }
             else if (state == 5)
+            {
                 LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[1]]);
+            }
             else
+            {
                 retVal = TRUE;
+            }
         }
         else
         {

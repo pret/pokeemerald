@@ -358,7 +358,7 @@ EWRAM_DATA bool8 gCurContestWinnerIsForArtist = 0;
 EWRAM_DATA u8 gCurContestWinnerSaveIdx = 0;
 
 // IWRAM common vars.
-u32 gContestRngValue;
+COMMON_DATA u32 gContestRngValue = 0;
 
 extern const u8 gText_LinkStandby4[];
 extern const u8 gText_BDot[];
@@ -858,23 +858,22 @@ static const struct CompressedSpriteSheet sSpriteSheets_ContestantsTurnBlinkEffe
     }
 };
 
-// Yup this is super dangerous but that's how it is here
 static const struct SpritePalette sSpritePalettes_ContestantsTurnBlinkEffect[CONTESTANT_COUNT] =
 {
     {
-        .data = (u16 *)(gHeap + 0x1A0A4),
+        .data = eContestTempSave.cachedWindowPalettes[5],
         .tag = TAG_BLINK_EFFECT_CONTESTANT0
     },
     {
-        .data = (u16 *)(gHeap + 0x1A0C4),
+        .data = eContestTempSave.cachedWindowPalettes[6],
         .tag = TAG_BLINK_EFFECT_CONTESTANT1
     },
     {
-        .data = (u16 *)(gHeap + 0x1A0E4),
+        .data = eContestTempSave.cachedWindowPalettes[7],
         .tag = TAG_BLINK_EFFECT_CONTESTANT2
     },
     {
-        .data = (u16 *)(gHeap + 0x1A104),
+        .data = eContestTempSave.cachedWindowPalettes[8],
         .tag = TAG_BLINK_EFFECT_CONTESTANT3
     }
 };
@@ -2668,7 +2667,9 @@ static void Task_EndAppeals(u8 taskId)
     CalculateFinalScores();
     ContestClearGeneralTextWindow();
     if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
+    {
         BravoTrainerPokemonProfile_BeforeInterview1(eContestantStatus[gContestPlayerMonIndex].prevMove);
+    }
     else
     {
         CalculateContestLiveUpdateData();
@@ -3170,16 +3171,19 @@ static u16 GetMoveEffectSymbolTileOffset(u16 move, u8 contestant)
 
     switch (gContestEffects[gContestMoves[move].effect].effectType)
     {
-    case 0:
-    case 1:
-    case 8:
+    case CONTEST_EFFECT_TYPE_APPEAL:
+    case CONTEST_EFFECT_TYPE_AVOID_STARTLE:
+    case CONTEST_EFFECT_TYPE_UNKNOWN:
         offset = 0x9082;
         break;
-    case 2:
-    case 3:
+    case CONTEST_EFFECT_TYPE_STARTLE_MON:
+    case CONTEST_EFFECT_TYPE_STARTLE_MONS:
         offset = 0x9088;
         break;
     default:
+    //case CONTEST_EFFECT_TYPE_WORSEN:
+    //case CONTEST_EFFECT_TYPE_SPECIAL_APPEAL:
+    //case CONTEST_EFFECT_TYPE_TURN_ORDER:
         offset = 0x9086;
         break;
     }

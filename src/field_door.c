@@ -437,7 +437,9 @@ static const struct DoorGraphics *GetDoorGraphics(const struct DoorGraphics *gfx
 static s8 StartDoorAnimationTask(const struct DoorGraphics *gfx, const struct DoorAnimFrame *frames, u32 x, u32 y)
 {
     if (FuncIsActiveTask(Task_AnimateDoor) == TRUE)
+    {
         return -1;
+    }
     else
     {
         u8 taskId = CreateTask(Task_AnimateDoor, 0x50);

@@ -1281,7 +1281,9 @@ bool32 IsEnigmaBerryValid(void)
 const struct Berry *GetBerryInfo(u8 berry)
 {
     if (berry == ITEM_TO_BERRY(ITEM_ENIGMA_BERRY) && IsEnigmaBerryValid())
+    {
         return (struct Berry *)(&gSaveBlock1Ptr->enigmaBerry.berry);
+    }
     else
     {
         if (berry == BERRY_NONE || berry > ITEM_TO_BERRY(LAST_BERRY_INDEX))
@@ -1520,7 +1522,9 @@ static u8 CalcBerryYieldInternal(u16 max, u16 min, u8 water)
     u32 extraYield;
 
     if (water == 0)
+    {
         return min;
+    }
     else
     {
         randMin = (max - min) * (water - 1);

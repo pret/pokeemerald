@@ -5,7 +5,7 @@
 
 const u16 gNumBardWords_Moves = MOVES_COUNT;
 
-const struct BardSound gBardSounds_Moves[MOVES_COUNT][6] = {
+const struct BardSound gBardSounds_Moves[MOVES_COUNT][BARD_SOUND_MAX_LENGTH] = {
     [MOVE_NONE] = {
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,

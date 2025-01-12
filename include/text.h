@@ -1,7 +1,7 @@
 #ifndef GUARD_TEXT_H
 #define GUARD_TEXT_H
 
-#include "characters.h"
+#include "constants/characters.h"
 
 // Given as a text speed when all the text should be
 // loaded at once but not copied to vram yet.

@@ -31,7 +31,7 @@ static void Storyteller_ResetFlag(void);
 
 static u8 sSelectedStory;
 
-struct BardSong gBardSong;
+COMMON_DATA struct BardSong gBardSong = {0};
 
 static EWRAM_DATA u16 sUnknownBardRelated = 0;
 static EWRAM_DATA struct MauvilleManStoryteller * sStorytellerPtr = NULL;
@@ -497,7 +497,9 @@ static void BardSing(struct Task *task, struct BardSong *song)
         GetWordPhonemes(song, MACRO1(word));
         song->currWord++;
         if (song->sound->songLengthId != 0xFF)
+        {
             song->state = 0;
+        }
         else
         {
             song->state = 3;
@@ -547,7 +549,9 @@ static void BardSing(struct Task *task, struct BardSong *song)
             {
                 song->currPhoneme++;
                 if (song->currPhoneme != 6 && song->sound[song->currPhoneme].songLengthId != 0xFF)
+                {
                     song->state = 0;
+                }
                 else
                 {
                     song->state = 3;
@@ -866,7 +870,9 @@ void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language
                     trader->language[i] = LANGUAGE_JAPANESE;
                 }
                 else
+                {
                     trader->language[i] = language;
+                }
             }
         }
         else
