@@ -11,7 +11,7 @@ jobs:
     env:
       GAME_VERSION: EMERALD
       GAME_REVISION: 0
-      GAME_LANGUAGE: ENGLISH
+      LANGUAGE: ENGLISH
       MODERN: 0
       COMPARE: 1
     steps:
@@ -57,42 +57,42 @@ jobs:
         env:
           MODERN: 0
           COMPARE: 1
-          GAME_LANGUAGE: FRENCH
+          LANGUAGE: FRENCH
         run: make -j${nproc}
 
       - name: French Modern
         env:
           MODERN: 1
           COMPARE: 0
-          GAME_LANGUAGE: FRENCH
+          LANGUAGE: FRENCH
         run: make -j${nproc}
 
       - name: Italian Compare
         env:
           MODERN: 0
           COMPARE: 1
-          GAME_LANGUAGE: ITALIAN
+          LANGUAGE: ITALIAN
         run: make -j${nproc}
 
       - name: Italian Modern
         env:
           MODERN: 1
           COMPARE: 0
-          GAME_LANGUAGE: ITALIAN
+          LANGUAGE: ITALIAN
         run: make -j${nproc}
 
       - name: Spanish Compare
         env:
           MODERN: 0
           COMPARE: 0 # Once all assets are ready, set to 1 instead
-          GAME_LANGUAGE: SPANISH
+          LANGUAGE: SPANISH
         run: make -j${nproc}
 
       - name: Spanish Modern
         env:
           MODERN: 1
           COMPARE: 0
-          GAME_LANGUAGE: SPANISH
+          LANGUAGE: SPANISH
         run: make -j${nproc}
 
       - name: Move symfiles
