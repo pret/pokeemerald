@@ -1,25 +1,24 @@
 
 EverGrandeCity_PhoebesRoom_Text_IntroSpeech:
-	.string "Ahahaha!\p"
-	.string "I'm PHOEBE of the ELITE FOUR.\n"
-	.string "I did my training on MT. PYRE.\p"
-	.string "While I trained, I gained the ability\n"
-	.string "to commune with GHOST-type POKéMON.\p"
-	.string "Yes, the bond I developed with POKéMON\n"
-	.string "is extremely tight.\p"
-	.string "So, come on, just try and see if you can\n"
-	.string "even inflict damage on my POKéMON!$"
+	.string "¡Ja, ja, ja!\p"
+	.string "Soy FÁTIMA, del ALTO MANDO.\n"
+	.string "Me he entrenado en el MONTE PÍRICO.\p"
+	.string "Allí desarrollé un estrecho vínculo\n"
+	.string "con los POKéMON de tipo FANTASMA.\p"
+	.string "Sí, ahora ellos y yo tenemos\n"
+	.string "una relación casi simbiótica.\p"
+	.string "¡Así que, adelante, prueba a ver\n"
+	.string "si puedes debilitar a mis POKéMON!$"
 
 EverGrandeCity_PhoebesRoom_Text_Defeat:
-	.string "Oh, darn.\n"
-	.string "I've gone and lost.$"
+	.string "Qué palo…\n"
+	.string "Me han derrotado…$"
 
 EverGrandeCity_PhoebesRoom_Text_PostBattleSpeech:
-	.string "There's a definite bond between you\n"
-	.string "and your POKéMON, too.\p"
-	.string "I didn't recognize it, so it's only\n"
-	.string "natural that I lost.\p"
-	.string "Yup, I'd like to see how far your bond\n"
-	.string "will carry you.\p"
-	.string "Go ahead, move on to the next room.$"
+	.string "Está claro que tú también tienes\n"
+	.string "un estrecho vínculo con tus POKéMON.\p"
+	.string "No supe verlo, por eso he perdido.\p"
+	.string "Me gustaría ver lo lejos que te lleva\n"
+	.string "esta relación especial que tenéis.\p"
+	.string "Ya puedes pasar a la siguiente sala.$"
 

@@ -1,17 +1,19 @@
 
 RustboroCity_PokemonCenter_1F_Text_PokemonHavePersonalities:
-	.string "My POKéMON has a NAIVE nature, and my\n"
-	.string "friend's has a JOLLY nature.\p"
-	.string "It's fascinating how POKéMON have\n"
-	.string "personalities!$"
+	.string "Mi POKéMON tiene una naturaleza\n"
+	.string "INGENUA y el de mi amigo tiene\l"
+	.string "una naturaleza ALEGRE.\p"
+	.string "¡Es increíble ver cómo cada POKéMON\n"
+	.string "tiene una personalidad diferente!$"
 
 RustboroCity_PokemonCenter_1F_Text_MaleAndFemalePokemon:
-	.string "Just like people, there are male and\n"
-	.string "female POKéMON.\p"
-	.string "But no one seems to have any idea how\n"
-	.string "they're different.$"
+	.string "Los POKéMON también pueden ser\n"
+	.string "machos o hembras.\p"
+	.string "Lo que no está claro es cuál\n"
+	.string "es la diferencia entre unos y otros.$"
 
 RustboroCity_PokemonCenter_1F_Text_HMCutNextDoor:
-	.string "The man next door gave me an HM!\p"
-	.string "I used it to teach my POKéMON how to\n"
-	.string "CUT down skinny trees.$"
+	.string "¡El hombre de ahí al lado me ha dado\n"
+	.string "una MO!\p"
+	.string "La he usado para enseñar a mi POKéMON\n"
+	.string "a usar CORTE con los árboles.$"

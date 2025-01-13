@@ -1,31 +1,32 @@
 
 PlayersHouse_2F_Text_ClockIsStopped:
-	.string "The clock is stopped…\p"
-	.string "Better set it and start it!$"
+	.string "El reloj está parado…\p"
+	.string "Será mejor ponerlo en hora.$"
 
 PlayersHouse_2F_Text_HowDoYouLikeYourRoom:
-	.string "MOM: {PLAYER}, how do you like your\n"
-	.string "new room?\p"
-	.string "Good! Everything's put away neatly!\p"
-	.string "They finished moving everything in\n"
-	.string "downstairs, too.\p"
-	.string "POKéMON movers are so convenient!\p"
-	.string "Oh, you should make sure that\n"
-	.string "everything's all there on your desk.$"
+	.string "MAMÁ: {PLAYER}, ¿te gusta\n"
+	.string "tu nuevo cuarto?\p"
+	.string "Bien. Todo está colocado como debe ser.\p"
+	.string "También han acabado con la mudanza\n"
+	.string "de la planta baja.\p"
+	.string "¡Este servicio de mudanzas POKéMON\n"
+	.string "es de lo más eficaz!\p"
+	.string "Oh, deberías comprobar que tienes\n"
+	.string "todas tus cosas en la mesa.$"
 
 PlayersHouse_2F_Text_Notebook:
-	.string "{PLAYER} flipped open the notebook.\p"
-	.string "ADVENTURE RULE NO. 1\n"
-	.string "Open the MENU with START.\p"
-	.string "ADVENTURE RULE NO. 2\n"
-	.string "Record your progress with SAVE.\p"
-	.string "The remaining pages are blank…$"
+	.string "{PLAYER} abrió el cuaderno.\p"
+	.string "“REGLA AVENTURERA N.º 1\n"
+	.string "Pulsa START para abrir el MENÚ.\p"
+	.string "REGLA AVENTURERA N.º 2\n"
+	.string "Elige GUARDAR para guardar la partida.”\p"
+	.string "Las demás páginas están en blanco…$"
 
 Common_Text_LookCloserAtMap:
-	.string "{PLAYER} took a closer look at the\n"
-	.string "HOENN region map.$"
+	.string "{PLAYER} miró más de cerca el mapa\n"
+	.string "de la región de HOENN.$"
 
 PlayersHouse_2F_Text_ItsAGameCube:
-	.string "It's a Nintendo GameCube.\p"
-	.string "A Game Boy Advance is connected to\n"
-	.string "serve as the Controller.$"
+	.string "Es una consola Nintendo GameCube.\p"
+	.string "Hay una consola Game Boy Advance\n"
+	.string "conectada a ella que sirve de Mando.$"

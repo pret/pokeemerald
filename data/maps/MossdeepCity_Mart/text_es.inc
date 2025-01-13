@@ -1,20 +1,21 @@
 
 MossdeepCity_Mart_Text_ReviveIsFantastic:
-	.string "REVIVE is fantastic!\p"
-	.string "Give it to a fainted POKéMON,\n"
-	.string "and the POKéMON will arise.\p"
-	.string "But be careful, REVIVE doesn't restore\n"
-	.string "the used-up PP of moves.$"
+	.string "¡REVIVIR es lo mejor!\p"
+	.string "Si se lo das a un POKéMON debilitado,\n"
+	.string "se recupera y puede luchar de nuevo.\p"
+	.string "Pero ten cuidado: REVIVIR no restaura\n"
+	.string "los PP usados de cada movimiento.$"
 
 MossdeepCity_Mart_Text_MaxRepelLastsLongest:
-	.string "MAX REPEL keeps all weak POKéMON away.\p"
-	.string "Out of all the REPEL sprays, it lasts\n"
-	.string "the longest.$"
+	.string "MÁX. REPEL mantiene alejados a todos\n"
+	.string "los POKéMON débiles.\p"
+	.string "Entre todos los REPELENTES,\n"
+	.string "éste es el que dura más tiempo.$"
 
 MossdeepCity_Mart_Text_NetAndDiveBallsRare:
-	.string "The NET and DIVE BALLS are rare POKé\n"
-	.string "BALLS that are only made in MOSSDEEP.\p"
-	.string "A NET BALL is effective against\n"
-	.string "BUG-type and WATER-type POKéMON.\p"
-	.string "A DIVE BALL works best on POKéMON\n"
-	.string "at the bottom of the sea.$"
+	.string "La MALLA BALL y la BUCEO BALL son\n"
+	.string "unas POKé BALLS propias de ALGARIA.\p"
+	.string "Una MALLA BALL es eficaz con los\n"
+	.string "POKéMON de los tipos BICHO y AGUA.\p"
+	.string "Una BUCEO BALL funciona mejor con los\n"
+	.string "POKéMON que viven en el fondo del mar.$"

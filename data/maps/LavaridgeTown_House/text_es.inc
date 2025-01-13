@@ -1,9 +1,9 @@
 
 LavaridgeTown_House_Text_WifeWarmingEggInHotSprings:
-	.string "My wife's warming an EGG in the hot\n"
-	.string "springs. This is what she told me.\p"
-	.string "She left two POKéMON with the DAY CARE.\n"
-	.string "And they discovered that EGG!$"
+	.string "Mi mujer está calentando un HUEVO\n"
+	.string "en los baños termales. Eso me ha dicho.\p"
+	.string "Resulta que dejó a dos POKéMON en la\n"
+	.string "GUARDERÍA… ¡y apareció ese HUEVO!$"
 
 LavaridgeTown_House_Text_Zigzagoon:
-	.string "ZIGZAGOON: Pshoo!$"
+	.string "ZIGZAGOON: ¡Zigzaaaa!$"

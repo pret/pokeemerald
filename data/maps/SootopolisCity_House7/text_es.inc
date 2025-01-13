@@ -1,15 +1,14 @@
 
 SootopolisCity_House7_Text_CityFromEruptedVolcano:
-	.string "An underwater volcano erupted and\n"
-	.string "forced itself up from the depths.\p"
-	.string "Its crater emerged from the sea and\n"
-	.string "became filled with rainwater.\p"
-	.string "That's how SOOTOPOLIS CITY came into\n"
-	.string "being.$"
+	.string "Un volcán submarino entró en erupción\n"
+	.string "y surgió desde el fondo del mar.\p"
+	.string "Una vez emergido, su cráter\n"
+	.string "se llenó de agua de lluvia.\p"
+	.string "Y así nació ARRECÍPOLIS.$"
 
 SootopolisCity_House7_Text_CaveMadeToKeepSomething:
-	.string "The cave that links SOOTOPOLIS and\n"
-	.string "the outside world…\p"
-	.string "It seems as if the cave was made to\n"
-	.string "keep something from getting out.\p"
-	.string "Or am I just imagining things?$"
+	.string "Esa cueva que une ARRECÍPOLIS\n"
+	.string "con el mundo exterior…\p"
+	.string "seguro que fue construida para evitar\n"
+	.string "que algo o alguien saliera.\p"
+	.string "¿O quizás son imaginaciones mías?$"

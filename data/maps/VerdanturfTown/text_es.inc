@@ -1,63 +1,65 @@
 
 VerdanturfTown_Text_ManTryingToDigTunnel:
-	.string "My papa told me.\p"
-	.string "He says this tunnel is full of\n"
-	.string "timid POKéMON.\p"
-	.string "They get all scared of loud noise and\n"
-	.string "make a big uproar.\p"
-	.string "So they had to stop the big tunnel\n"
-	.string "project.\p"
-	.string "But there's one man. He's trying to dig\n"
-	.string "the tunnel by himself!$"
+	.string "Me lo ha dicho mi papá.\p"
+	.string "Dice que este túnel está lleno\n"
+	.string "de POKéMON asustadizos.\p"
+	.string "Si escuchan algún ruido fuerte, se\n"
+	.string "asustan y montan alborotos.\p"
+	.string "Por eso detuvieron el proyecto de\n"
+	.string "construcción del túnel.\p"
+	.string "¡Pero hay un hombre empeñado en\n"
+	.string "terminar el túnel él solito!$"
 
 VerdanturfTown_Text_ManDugTunnelForLove:
-	.string "There was a man who dug a tunnel for\n"
-	.string "a lady he loved.\p"
-	.string "I don't really get it, but hey!$"
+	.string "Un hombre excavó un túnel para\n"
+	.string "la mujer que amaba…\p"
+	.string "Es decir, para poder ir a verla más\n"
+	.string "fácilmente. ¡Eso es amor, señores!$"
 
 VerdanturfTown_Text_AirCleanHere:
-	.string "The way the winds blow, volcanic ash\n"
-	.string "is never blown in this direction.\p"
-	.string "The air is clean and delicious here.\n"
-	.string "Living here should do wonders for even\l"
-	.string "frail and sickly people.$"
+	.string "Por cómo sopla el viento, aquí nunca\n"
+	.string "llega la ceniza volcánica.\p"
+	.string "Al contrario, el aire de aquí es puro\n"
+	.string "y agradable. Es muy bueno para las\l"
+	.string "personas de salud delicada.$"
 
 VerdanturfTown_Text_MakeBattleTentDebut:
-	.string "My POKéMON and I, we've been riding\n"
-	.string "a hot winning streak.\p"
-	.string "So I decided to make my BATTLE TENT\n"
-	.string "debut in this town.$"
+	.string "Mis POKéMON y yo estamos de racha.\p"
+	.string "Así que he decidido probar suerte en\n"
+	.string "la TIENDA de BATALLA que hay aquí.$"
 
 VerdanturfTown_Text_GuyTryingToBustThroughCave:
-	.string "Did you see the cave next to the\n"
-	.string "POKéMON MART?\p"
-	.string "There's a guy in there who's trying to\n"
-	.string "bust up boulders so he can bust out\l"
-	.string "through to the other side.\p"
-	.string "It'd be great if we could go through…\n"
-	.string "It'll make it easy to visit RUSTBORO.$"
+	.string "¿Has visto la cueva que hay cerca de\n"
+	.string "la TIENDA POKéMON?\p"
+	.string "Dentro hay un tipo que intenta romper\n"
+	.string "rocas para poder llegar al otro lado.\p"
+	.string "Sería estupendo tener el túnel…\n"
+	.string "Visitar CIUDAD FÉRRICA sería\l"
+	.string "más sencillo.$"
 
 VerdanturfTown_Text_EasyToGetToRustboroNow:
-	.string "That cave next to the POKéMON MART\n"
-	.string "is now a tunnel to the other side.\p"
-	.string "It's great--it's easy to go shop for\n"
-	.string "new DEVON products in RUSTBORO now.$"
+	.string "La cueva que hay cerca de la TIENDA\n"
+	.string "POKéMON es ahora un túnel que\l"
+	.string "conecta dos ciudades.\p"
+	.string "Es lo mejor. Ahora no cuesta nada ir\n"
+	.string "a comprar productos DEVON a\l"
+	.string "CIUDAD FÉRRICA.$"
 
 VerdanturfTown_Text_TownSign:
-	.string "VERDANTURF TOWN\p"
-	.string "“The windswept highlands with the\n"
-	.string "sweet fragrance of grass.”$"
+	.string "PUEBLO VERDEGAL\p"
+	.string "“Las ventosas tierras altas que\n"
+	.string "siempre huelen a hierba fresca.”$"
 
 VerdanturfTown_Text_WandasHouse:
-	.string "WANDA'S HOUSE$"
+	.string "CASA de CLARA$"
 
 VerdanturfTown_Text_BattleTentSign:
-	.string "BATTLE TENT VERDANTURF SITE\n"
-	.string "“Feast Your Eyes on Battles!”$"
+	.string "TIENDA de BATALLA de PUEBLO VERDEGAL\n"
+	.string "“¡Disfruta de los mejores combates!”$"
 
 VerdanturfTown_Text_RusturfTunnelSign:
-	.string "RUSTURF TUNNEL\n"
-	.string "“Linking RUSTBORO and VERDANTURF\p"
-	.string "“The tunnel project has been\n"
-	.string "canceled.”$"
+	.string "TÚNEL FERVERGAL\n"
+	.string "“Conecta CIUDAD FÉRRICA y VERDEGAL.\p"
+	.string "El proyecto de construcción del\n"
+	.string "túnel ha sido cancelado.”$"
 

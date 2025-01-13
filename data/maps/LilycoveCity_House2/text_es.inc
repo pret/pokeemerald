@@ -1,10 +1,10 @@
 
 LilycoveCity_House2_Text_NotAwakeYetHaveThis:
-	.string "Huh? What? What's that?\p"
-	.string "I'm not near awake yet…\n"
-	.string "You can have this…$"
+	.string "¿Eh? ¿Qué? ¿Cómo?\p"
+	.string "Estaba durmiendo…\n"
+	.string "Toma esto y déjame descansar…$"
 
 LilycoveCity_House2_Text_SleepIsEssential:
-	.string "Yawn…\p"
-	.string "Sleep is essential for good health…\n"
-	.string "Sleep and regain health…$"
+	.string "Auaaaaa…\p"
+	.string "Dormir es muy bueno para la salud…\n"
+	.string "El cerebro tiene que descansar…$"

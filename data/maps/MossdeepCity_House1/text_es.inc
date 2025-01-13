@@ -1,18 +1,18 @@
 
 MossdeepCity_House1_Text_HmmYourPokemon:
-	.string "Hmm!\n"
-	.string "Your {STR_VAR_1}…$"
+	.string "¡Ajá!\n"
+	.string "Tu {STR_VAR_1} lo tiene claro…$"
 
 MossdeepCity_House1_Text_ItLikesXPokeblocks:
-	.string "It likes {STR_VAR_1}S,\n"
-	.string "doesn't it?\p"
-	.string "No, I'm positive of it! It definitely\n"
-	.string "likes {STR_VAR_1}S!$"
+	.string "Lo que más le gusta en el mundo\n"
+	.string "es un {STR_VAR_1}, ¿a que sí?\p"
+	.string "Sí, sí, no cabe ninguna duda. ¡Haría lo\n"
+	.string "que fuera por un {STR_VAR_1}!$"
 
 MossdeepCity_House1_Text_DoesntLikeOrDislikePokeblocks:
-	.string "It doesn't appear to like or dislike\n"
-	.string "any {POKEBLOCK}S.$"
+	.string "Le da un poco igual qué tipo\n"
+	.string "de {POKEBLOCK}S le des, ¿no?$"
 
 MossdeepCity_House1_Text_HusbandCanTellPokeblockMonLikes:
-	.string "My husband can tell what kind of\n"
-	.string "{POKEBLOCK}S a POKéMON likes at a glance.$"
+	.string "Mi marido adivina enseguida qué tipo\n"
+	.string "de {POKEBLOCK}S prefiere cada POKéMON.$"

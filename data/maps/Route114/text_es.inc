@@ -1,24 +1,24 @@
 
 Route114_Text_AllMyMonDoesIsRoarTakeThis:
-	.string "All my POKéMON does is ROAR…\n"
-	.string "No one dares to come near me…\p"
-	.string "Sigh… If you would, please take\n"
-	.string "this TM away…$"
+	.string "Mi POKéMON sólo tiene que dar un\n"
+	.string "RUGIDO y nadie se atreve a acercarse…\p"
+	.string "Así que estoy más solo que la una, snif…\n"
+	.string "Mira, te voy a dar esta MT.$"
 
 Route114_Text_ExplainRoar:
-	.string "TM05 contains ROAR.\n"
-	.string "A ROAR sends POKéMON scurrying.$"
+	.string "La MT05 contiene RUGIDO.\n"
+	.string "Un RUGIDO asusta a los POKéMON.$"
 
 Route114_Text_Poochyena:
-	.string "Bow! Bowwow!$"
+	.string "¡Guau! ¡Guau! ¡Guau!$"
 
 Route114_Text_MeteorFallsSign:
-	.string "METEOR FALLS\n"
-	.string "RUSTBORO CITY THROUGH HERE$"
+	.string "CASCADA METEORO\n"
+	.string "DIRECCIÓN CIUDAD FÉRRICA$"
 
 Route114_Text_FossilManiacsHouseSign:
-	.string "FOSSIL MANIAC'S HOUSE\n"
-	.string "“Fossils gratefully accepted!”$"
+	.string "CASA del FOSILMANÍACO\n"
+	.string "“¡Se aceptan fósiles!”$"
 
 Route114_Text_LanettesHouse:
-	.string "LANETTE'S HOUSE$"
+	.string "CASA de AREDIA$"

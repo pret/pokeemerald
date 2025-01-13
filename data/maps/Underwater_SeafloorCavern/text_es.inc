@@ -1,8 +1,8 @@
 
 Underwater_SeafloorCavern_Text_SubExplorer1:
-	.string "“SUBMARINE EXPLORER 1” is painted\n"
-	.string "on the hull.\p"
-	.string "This is the submarine TEAM AQUA\n"
-	.string "stole in SLATEPORT!\p"
-	.string "TEAM AQUA must have gone\n"
-	.string "ashore here.$"
+	.string "En el casco pone: “SUBMARINO\n"
+	.string "EXPLORADOR 1”.\p"
+	.string "¡Es el submarino que robó el EQUIPO\n"
+	.string "AQUA en CIUDAD PORTUAL!\p"
+	.string "El EQUIPO AQUA debe de haber\n"
+	.string "desembarcado aquí.$"

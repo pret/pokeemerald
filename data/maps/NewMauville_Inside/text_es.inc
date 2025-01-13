@@ -1,17 +1,16 @@
 
 NewMauville_Inside_Text_GeneratorRadiatingHeat:
-	.string "The generator is radiating heat that\n"
-	.string "can be felt even at a distance.\p"
-	.string "It looks like it should be turned off\n"
-	.string "as soon as possible.$"
+	.string "El generador está irradiando\n"
+	.string "una gran cantidad de calor.\p"
+	.string "Se diría que habría que apagarlo\n"
+	.string "lo antes posible…$"
 
 NewMauville_Inside_Text_GeneratorQuietedDown:
-	.string "The generator quieted down.$"
+	.string "El generador está apagado.$"
 
 NewMauville_Inside_Text_SteppedOnSwitchGeneratorStopped:
-	.string "{PLAYER} stepped on the switch.\p"
-	.string "Click…\p"
-	.string "… … … … … … … …\n"
-	.string "… … … … … … … …\p"
-	.string "The generator appears to have\n"
-	.string "stopped…$"
+	.string "{PLAYER} pisó el interruptor.\p"
+	.string "Clic…\p"
+	.string "(…)\p"
+	.string "Parece que el generador\n"
+	.string "se ha apagado…$"

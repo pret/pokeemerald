@@ -1,34 +1,34 @@
 
 Route112_Text_LeaderGoingToAwakenThing:
-	.string "Hey, man, is our leader really going\n"
-	.string "to awaken that thing?$"
+	.string "Eh, ¿tú crees que nuestro líder\n"
+	.string "va a despertar de verdad a esa cosa?$"
 
 Route112_Text_YeahWeNeedMeteorite:
-	.string "Sounds like it, yeah. But I heard\n"
-	.string "we need a METEORITE to do it.$"
+	.string "Eso parece, colega, pero se ve que\n"
+	.string "necesita un METEORITO para hacerlo.$"
 
 Route112_Text_OhThatsWhyCrewWentToFallarbor:
-	.string "Oh, I get it now. That's why the rest\n"
-	.string "of the crew went out to FALLARBOR.$"
+	.string "Ah, ya lo pillo. Por eso los demás\n"
+	.string "han tirado para PUEBLO PARDAL.$"
 
 Route112_Text_CantLetAnyonePassUntilTheyreBack:
-	.string "You got it. And until they come back,\n"
-	.string "we're not to let anyone pass, right.$"
+	.string "Afirmativo. Y, hasta que vuelvan,\n"
+	.string "por aquí no pasa nadie.$"
 
 Route112_Text_NotEasyToGetBackToLavaridge:
-	.string "Eh, I'd like to get to MAUVILLE, but if\n"
-	.string "I went down these ledges, it'd be no\l"
-	.string "easy matter to get back to LAVARIDGE.$"
+	.string "Me gustaría ir a MALVALONA, pero si\n"
+	.string "salto por aquí luego no podré volver\l"
+	.string "a LAVACALDA tan fácilmente…$"
 
 Route112_Text_MtChimneyCableCarSign:
-	.string "MT. CHIMNEY CABLE CAR\n"
-	.string "“A short walk {UP_ARROW} way!”$"
+	.string "TELEFÉRICO del MONTE CENIZO\n"
+	.string "“¡Un paseíto hacia {UP_ARROW}!”$"
 
 Route112_Text_MtChimneySign:
-	.string "MT. CHIMNEY\p"
-	.string "“For LAVARIDGE TOWN or the summit,\n"
-	.string "please take the CABLE CAR.”$"
+	.string "MONTE CENIZO\p"
+	.string "“Para ir a PUEBLO LAVACALDA o a\n"
+	.string "la cima, coge el TELEFÉRICO.”$"
 
 Route112_Text_RouteSignLavaridge:
-	.string "ROUTE 112\n"
-	.string "{LEFT_ARROW} LAVARIDGE TOWN$"
+	.string "RUTA 112\n"
+	.string "{LEFT_ARROW} PUEBLO LAVACALDA$"

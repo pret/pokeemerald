@@ -1,52 +1,53 @@
 
 FallarborTown_CozmosHouse_Text_MeteoriteWillNeverBeMineNow:
 	.string "PROF. COZMO: Oh…\n"
-	.string "I never should have let myself be\l"
-	.string "conned into telling TEAM MAGMA where\l"
-	.string "you can find METEORITES…\p"
-	.string "That METEORITE from METEOR FALLS…\n"
-	.string "It's never going to be mine now…$"
+	.string "No debería haberme dejado\l"
+	.string "amedrentar por el EQUIPO MAGMA y\l"
+	.string "revelar dónde hay METEORITOS…\p"
+	.string "Ese METEORITO de la CASCADA METEORO…\n"
+	.string "Ya nunca lo recuperaré…$"
 
 FallarborTown_CozmosHouse_Text_IsThatMeteoriteMayIHaveIt:
-	.string "Oh!\n"
-	.string "Hah?\p"
-	.string "That item…\p"
-	.string "Could it be?\p"
-	.string "Is it the METEORITE that TEAM MAGMA\n"
-	.string "took from METEOR FALLS?\p"
-	.string "Please, may I have it?\p"
-	.string "I'm not asking for it for free.\n"
-	.string "How about in exchange for this TM?$"
+	.string "¡Eh!\n"
+	.string "¿Cómo?\p"
+	.string "Ese objeto…\p"
+	.string "¿Es posible…?\p"
+	.string "¿Es el METEORITO que el EQUIPO MAGMA\n"
+	.string "robó en la CASCADA METEORO?\p"
+	.string "Por favor, ¿puedo…?\p"
+	.string "No quiero quitártelo por la cara…\n"
+	.string "¿Qué te parece cambiarlo por esta MT?$"
 
 FallarborTown_CozmosHouse_Text_PleaseUseThisTM:
-	.string "PROF. COZMO: This TM, it represents\n"
-	.string "my feeling of gratitude.\l"
-	.string "Please use it!$"
+	.string "PROF. COZMO: Esta MT es un símbolo\n"
+	.string "de la enorme gratitud que siento.\l"
+	.string "¡No dejes de usarla!$"
 
 FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch:
-	.string "PROF. COZMO: Oh, I can't believe it.\n"
-	.string "This is really, really great!\p"
-	.string "This is really going to help my research!$"
+	.string "PROF. COZMO: ¡No puedo creerlo!\n"
+	.string "¡Es genial, maravilloso y estupendo!\p"
+	.string "¡Será de una enorme ayuda\n"
+	.string "en mi investigación!$"
 
 FallarborTown_CozmosHouse_Text_CrushedWithDisappointment:
-	.string "PROF. COZMO: Oh, but…\n"
-	.string "I'm crushed with disappointment…$"
+	.string "PROF. COZMO: Anda ya… ¿No?…\n"
+	.string "Me siento profundamente abatido…$"
 
 FallarborTown_CozmosHouse_Text_MayIHaveMeteorite:
-	.string "PROF. COZMO: Please, may I have that\n"
-	.string "METEORITE?\p"
-	.string "I'm not asking for it for free.\n"
-	.string "How about in exchange for this TM?$"
+	.string "PROF. COZMO: Por favor, ¿me darías\n"
+	.string "ese METEORITO?\p"
+	.string "No quiero quitártelo por la cara…\n"
+	.string "¿Qué te parece cambiarlo por esta MT?$"
 
 FallarborTown_CozmosHouse_Text_CozmoWentToMeteorFalls:
-	.string "PROF. COZMO went off to METEOR FALLS\n"
-	.string "on ROUTE 114 with some people from\l"
-	.string "TEAM MAGMA.$"
+	.string "El PROF. COZMO fue a la CASCADA\n"
+	.string "METEORO, en la RUTA 114, con algunos\l"
+	.string "miembros del EQUIPO MAGMA.$"
 
 FallarborTown_CozmosHouse_Text_FeelSorryForCozmo:
-	.string "Poor PROF. COZMO…\n"
-	.string "He's so depressed… I feel sorry for him.$"
+	.string "Pobre PROF. COZMO…\n"
+	.string "Está tan depre… Me da una pena…$"
 
 FallarborTown_CozmosHouse_Text_CozmoIsSoHappy:
-	.string "Look at PROF. COZMO…\n"
-	.string "He's so happy! I think it's cute.$"
+	.string "Mira al PROF. COZMO…\n"
+	.string "¡Está tan feliz! ¡Da gusto verle!$"

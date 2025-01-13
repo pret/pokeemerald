@@ -1,12 +1,12 @@
 
 DewfordTown_PokemonCenter_1F_Text_StoneCavern:
-	.string "There's a stone cavern at the edge\n"
-	.string "of town.\p"
-	.string "I've heard you can find rare stones\n"
-	.string "there.$"
+	.string "Hay una caverna de roca en la otra\n"
+	.string "punta del pueblo.\p"
+	.string "Creo que puedes encontrar piedras\n"
+	.string "raras por allí.$"
 
 DewfordTown_PokemonCenter_1F_Text_FaintedMonCanUseHM:
-	.string "Even if a POKéMON faints and can't\n"
-	.string "battle, it can still use a move learned\l"
-	.string "from a HIDDEN MACHINE (HM).$"
+	.string "Aunque un POKéMON esté debilitado,\n"
+	.string "todavía podrá usar un movimiento de\l"
+	.string "una Máquina Oculta, MO para abreviar.$"
 

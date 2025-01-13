@@ -1,10 +1,10 @@
 
 LilycoveCity_House4_Text_MysteriesAtBottomOfSea:
-	.string "This planet's biggest mysteries are\n"
-	.string "at the bottom of the sea.\p"
-	.string "Somebody said that, but I don't know…$"
+	.string "“Los mayores misterios de nuestro\n"
+	.string "planeta están en el fondo del mar.”\p"
+	.string "No me acuerdo de quién dijo eso…$"
 
 LilycoveCity_House4_Text_UnderwaterTrenchMossdeepSootopolis:
-	.string "There's a deep underwater trench\n"
-	.string "between MOSSDEEP and SOOTOPOLIS.\p"
-	.string "That's what someone told me, anyway.$"
+	.string "Hay una gran zanja submarina entre\n"
+	.string "ALGARIA y ARRECÍPOLIS.\p"
+	.string "Al menos eso tengo entendido…$"
