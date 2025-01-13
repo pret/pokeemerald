@@ -1,16 +1,14 @@
 
 VerdanturfTown_PokemonCenter_1F_Text_FaithInYourPokemon:
-	.string "You can't consider yourself a real\n"
-	.string "TRAINER if you don't have faith\l"
-	.string "in your POKéMON.\p"
-	.string "Only those people who can believe\n"
-	.string "in their battling POKéMON can win\l"
-	.string "through to the very end.$"
+	.string "¡Nadie puede considerarse ENTRENADOR\n"
+	.string "si no tiene fe en sus POKéMON!\p"
+	.string "Sólo aquellos que confían plenamente\n"
+	.string "en la habilidad de sus POKéMON podrán\l"
+	.string "llegar hasta el final.$"
 
 VerdanturfTown_PokemonCenter_1F_Text_VisitForBattleTent:
-	.string "The reason why anyone would visit\n"
-	.string "VERDANTURF…\p"
-	.string "It's the BATTLE TENT. It goes without\n"
-	.string "saying.\p"
-	.string "Or is there somebody here that you\n"
-	.string "came to see?$"
+	.string "La razón por la que todo el mundo\n"
+	.string "está viniendo a VERDEGAL…\p"
+	.string "Es su TIENDA de BATALLA.\n"
+	.string "No hace falta que lo diga.\p"
+	.string "¿O es que has venido a ver a alguien?$"

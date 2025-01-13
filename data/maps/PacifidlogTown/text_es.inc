@@ -1,25 +1,25 @@
 
 PacifidlogTown_Text_FastRunningCurrent:
-	.string "The sea between PACIFIDLOG and\n"
-	.string "SLATEPORT has a fast-running tide.\p"
-	.string "If you decide to SURF, you could end\n"
-	.string "up swept away somewhere else.$"
+	.string "El mar que separa OROMAR de CIUDAD\n"
+	.string "PORTUAL tiene muchas corrientes.\p"
+	.string "¡Si haces SURF en él, puedes acabar\n"
+	.string "en cualquier sitio!$"
 
 PacifidlogTown_Text_NeatHousesOnWater:
-	.string "See, isn't it neat?\n"
-	.string "These houses are on water!\p"
-	.string "I was born here!$"
+	.string "Mira qué cosa más chula.\n"
+	.string "¡Las casas flotan sobre el agua!\p"
+	.string "¡Yo he nacido aquí!$"
 
 PacifidlogTown_Text_SkyPillarTooScary:
-	.string "The SKY PILLAR?\p"
-	.string "…Oh, you must mean that tall, tall\n"
-	.string "tower a little further out.\p"
-	.string "If you asked me, I wouldn't climb it.\n"
-	.string "It's too scary to get up that high.\p"
-	.string "Life at sea level in PACIFIDLOG,\n"
-	.string "that suits me fine.$"
+	.string "¿El PILAR CELESTE?\p"
+	.string "Ah, tú te refieres a esa torre\n"
+	.string "altísima que está más allá.\p"
+	.string "Lo que es yo, no subía hasta arriba\n"
+	.string "ni loco. Ese sitio me da escalofríos.\p"
+	.string "Por el contrario, vivir a nivel del\n"
+	.string "mar en OROMAR es una gozada.$"
 
 PacifidlogTown_Text_TownSign:
-	.string "PACIFIDLOG TOWN\p"
-	.string "“Where the morning sun smiles upon\n"
-	.string "the waters.”$"
+	.string "PUEBLO OROMAR\p"
+	.string "“Donde el radiante sol ilumina\n"
+	.string "las aguas cada día.”$"

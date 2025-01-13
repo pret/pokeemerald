@@ -1,14 +1,14 @@
 
 SootopolisCity_House2_Text_DidYouKnowAboutMtPyreOrbs:
-	.string "MT. PYRE…\p"
-	.string "At its peak are two orbs placed side\n"
-	.string "by side. Did you know?$"
+	.string "El MONTE PÍRICO…\p"
+	.string "¿Sabías que en la cumbre hay\n"
+	.string "dos esferas, una al lado de otra?$"
 
 SootopolisCity_House2_Text_YesTwoOrbsSideBySide:
-	.string "Yes, two orbs side by side…\p"
-	.string "The sight of them together…\n"
-	.string "It is somehow soothing…$"
+	.string "Sí, dos esferas juntas…\p"
+	.string "Y cuando las ves te sientes mucho\n"
+	.string "más tranquila, no sé por qué.$"
 
 SootopolisCity_House2_Text_OughtToVisitAndSee:
-	.string "Is that so?\n"
-	.string "Perhaps you ought to visit and see…$"
+	.string "¿Sabes una cosa?\n"
+	.string "Quizás deberías ir a verlas tú.$"

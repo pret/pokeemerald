@@ -1,11 +1,11 @@
 
 Route110_SeasideCyclingRoadSouthEntrance_Text_GoAllOutOnCyclingRoad:
-	.string "On CYCLING ROAD, you can go all out\n"
-	.string "and cycle as fast as you'd like.\p"
-	.string "It feels great to go that fast, but try\n"
-	.string "not to crash into anyone!$"
+	.string "En el CAMINO de BICIS, puedes ir\n"
+	.string "tan rápido como quieras.\p"
+	.string "Es genial correr a esa velocidad, ¡pero\n"
+	.string "cuidado con no chocarte con nadie!$"
 
 Route110_SeasideCyclingRoadSouthEntrance_Text_TooDangerousToWalk:
-	.string "Sorry, you can't walk on CYCLING\n"
-	.string "ROAD. It's too dangerous.\p"
-	.string "Please come back with a BIKE.$"
+	.string "Lo siento. No puedes entrar a pie en el\n"
+	.string "CAMINO de BICIS. Puede ser peligroso.\p"
+	.string "Vuelve con una BICI y te dejaré pasar.$"

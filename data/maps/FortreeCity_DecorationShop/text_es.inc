@@ -1,13 +1,13 @@
 
 FortreeCity_DecorationShop_Text_MerchandiseSentToPC:
-	.string "Merchandise you buy here is sent to\n"
-	.string "your own PC.\p"
-	.string "That's fantastic! I wish they could\n"
-	.string "also deliver me home like that.$"
+	.string "Lo que compras aquí se envía\n"
+	.string "a tu PC.\p"
+	.string "¡Es superpráctico! Ojalá me pudieran\n"
+	.string "enviar a mí también a mi casita…$"
 
 FortreeCity_DecorationShop_Text_BuyingDeskForDolls:
-	.string "I'm buying a pretty desk and I'm\n"
-	.string "putting my cute DOLLS on it.\p"
-	.string "If I don't, when I decorate my\n"
-	.string "SECRET BASE, my DOLLS will get\l"
-	.string "dirty or poked with splinters.$"
+	.string "He comprado una bonita mesa para\n"
+	.string "colocar mis MUÑECOS encima.\p"
+	.string "Si no, se van a llenar de polvo o\n"
+	.string "astillas cuando decore mi BASE\l"
+	.string "SECRETA.$"

@@ -1,18 +1,18 @@
 
 Route121_Text_OkayMoveOutToMtPyre:
-	.string "Okay!\n"
-	.string "We're to move out to MT. PYRE!$"
+	.string "¡Muy bien!\n"
+	.string "¡Nos largamos al MONTE PÍRICO!$"
 
 Route121_Text_AheadLoomsMtPyre:
-	.string "Ahead looms MT. PYRE…\p"
-	.string "It is a natural monument to the spirits \n"
-	.string "of departed POKéMON…$"
+	.string "Más adelante se alza el MONTE PÍRICO…\p"
+	.string "Es un monumento natural a los espíritus\n"
+	.string "de los POKéMON que nos han dejado.$"
 
 Route121_Text_MtPyrePierSign:
-	.string "MT. PYRE PIER\p"
-	.string "…The sign is old and worn out.\n"
-	.string "The words are barely legible…$"
+	.string "MUELLE del MONTE PÍRICO\p"
+	.string "El cartel está viejo y desgastado.\n"
+	.string "Apenas se puede leer nada…$"
 
 Route121_Text_SafariZoneSign:
-	.string "“Filled with rare POKéMON!”\n"
-	.string "SAFARI ZONE$"
+	.string "ZONA SAFARI\n"
+	.string "“¡Llenita de POKéMON raros!”$"

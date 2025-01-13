@@ -1,14 +1,14 @@
 
 RustboroCity_Flat2_2F_Text_DevonWasTinyInOldDays:
-	.string "Way back in the old days, DEVON was just\n"
-	.string "a teeny, tiny company.$"
+	.string "Hace mucho, mucho tiempo, DEVON no\n"
+	.string "era más que una mini-empresa de nada.$"
 
 RustboroCity_Flat2_2F_Text_MyDaddyMadeThisYouCanHaveIt:
-	.string "My daddy's working at the CORPORATION.\p"
-	.string "My daddy made this!\n"
-	.string "But I can't use it, so you can have it.$"
+	.string "Mi papá trabaja en DEVON S.A.\p"
+	.string "¡Mi papá ha hecho esto!\n"
+	.string "Pero, como yo no puedo usarlo, te lo doy.$"
 
 RustboroCity_Flat2_2F_Text_GoingToWorkAtDevonToo:
-	.string "My daddy's working at the CORPORATION.\p"
-	.string "When I grow up, I'm going to work for\n"
-	.string "DEVON, too.$"
+	.string "Mi papá trabaja en DEVON S.A.\p"
+	.string "Cuando sea mayor, yo también\n"
+	.string "voy a trabajar en DEVON.$"

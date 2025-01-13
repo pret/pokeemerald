@@ -1,8 +1,8 @@
 
 OldaleTown_House1_Text_LeftPokemonGoesOutFirst:
-	.string "When a POKéMON battle starts, the one\n"
-	.string "at the left of the list goes out first.\p"
-	.string "So, when you get more POKéMON in your\n"
-	.string "party, try switching around the order\l"
-	.string "of your POKéMON.\p"
-	.string "It could give you an advantage.$"
+	.string "Cuando empieza un combate POKéMON,\n"
+	.string "el que está a la izquierda de la lista\l"
+	.string "sale a luchar primero.\p"
+	.string "Así que, cuando tengas varios POKéMON\n"
+	.string "en tu equipo, prueba a cambiar el orden.\p"
+	.string "En algunos casos, podría darte ventaja.$"

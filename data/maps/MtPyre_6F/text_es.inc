@@ -1,40 +1,41 @@
 
 MtPyre_6F_Text_ValerieIntro:
-	.string "When I'm here…\n"
-	.string "A curious power flows into me…$"
+	.string "Cuando estoy aquí…\n"
+	.string "siento un extraño poder dentro de mí.$"
 
 MtPyre_6F_Text_ValerieDefeat:
-	.string "The power is ebbing away…$"
+	.string "Pues esta vez no lo he sentido mucho…$"
 
 MtPyre_6F_Text_ValeriePostBattle:
-	.string "Perhaps the power is from the spirits\n"
-	.string "of POKéMON in fitful sleep here…$"
+	.string "Quizás provenga del espíritu de los\n"
+	.string "POKéMON que a veces acuden aquí…$"
 
 MtPyre_6F_Text_ValerieRegister:
-	.string "Fufufu… I lost the match, but…\n"
-	.string "I have this little ability…\p"
-	.string "Without ever laying my hands on\n"
-	.string "your POKéNAV… Hiyah!$"
+	.string "Ji, ji, ji… He perdido el combate, pero…\n"
+	.string "todavía puedo sorprenderte…\p"
+	.string "No hace falta ni que ponga mis manos\n"
+	.string "sobre tu POKéNAV… ¡Toma ya!$"
 
 MtPyre_6F_Text_ValerieRematchIntro:
-	.string "Behind you…\n"
-	.string "What is it…$"
+	.string "¡Detrás de ti!\n"
+	.string "¿Qué es eso?$"
 
 MtPyre_6F_Text_ValerieRematchDefeat:
-	.string "Something faded away…$"
+	.string "Pues juraría que había algo…$"
 
 MtPyre_6F_Text_ValeriePostRematch:
-	.string "The POKéMON at rest here…\n"
-	.string "Sometimes, they play…$"
+	.string "Los POKéMON que descansan aquí\n"
+	.string "pueden ser muy juguetones.$"
 
 MtPyre_6F_Text_CedricIntro:
-	.string "Have you lost your bearings?\n"
-	.string "Have no fear for I am here!$"
+	.string "¿Has perdido el norte?\n"
+	.string "¡No te preocupes, que aquí estoy yo!$"
 
 MtPyre_6F_Text_CedricDefeat:
-	.string "Weren't you lost?$"
+	.string "¿Pero tú no te habías perdido?$"
 
 MtPyre_6F_Text_CedricPostBattle:
-	.string "I had this feeling that a lost TRAINER\n"
-	.string "would be panicked and easy to beat.\p"
-	.string "It's dirty and I won't try it again…$"
+	.string "Pensaba que era más fácil derrotar\n"
+	.string "a los ENTRENADORES que se pierden.\p"
+	.string "No volveré a intentar un truco\n"
+	.string "tan sucio nunca más…$"

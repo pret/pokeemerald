@@ -1,14 +1,13 @@
 
 VerdanturfTown_House_Text_TrainersGatherAtPokemonLeague:
-	.string "Far away, deep in EVER GRANDE CITY,\n"
-	.string "is the POKéMON LEAGUE.\p"
-	.string "The TRAINERS who gather there are\n"
-	.string "all frighteningly well skilled.$"
+	.string "Lejos, muy lejos, en CIUDAD COLOSALIA,\n"
+	.string "está la LIGA POKéMON.\p"
+	.string "Los ENTRENADORES que se reúnen\n"
+	.string "allí son espeluznantemente buenos.$"
 
 VerdanturfTown_House_Text_DefeatEliteFourInARow:
-	.string "In the POKéMON LEAGUE, I think the\n"
-	.string "rules say that you have to battle the\l"
-	.string "ELITE FOUR all in a row.\p"
-	.string "If you lose to any of them, you have\n"
-	.string "to begin your challenge again from the\l"
-	.string "first one.$"
+	.string "Según las reglas de la LIGA POKéMON,\n"
+	.string "tienes que luchar contra los miembros\l"
+	.string "del ALTO MANDO uno tras otro, seguidos.\p"
+	.string "Si pierdes contra alguno de ellos, debes\n"
+	.string "comenzar otra vez desde el primero.$"

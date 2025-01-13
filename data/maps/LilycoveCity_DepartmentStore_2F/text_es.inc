@@ -1,12 +1,13 @@
 
 LilycoveCity_DepartmentStore_2F_Text_LearnToUseItemsProperly:
-	.string "Learn to use items properly.\n"
-	.string "That's basic, really.$"
+	.string "Aprende a usar bien los objetos.\n"
+	.string "Es algo verdaderamente fundamental.$"
 
 LilycoveCity_DepartmentStore_2F_Text_GoodGiftForHusband:
-	.string "My husband is waiting at home.\n"
-	.string "What would make a good gift for him?$"
+	.string "Hoy es el cumpleaños de mi marido\n"
+	.string "y todavía no he encontrado ningún\l"
+	.string "regalo que me guste…$"
 
 LilycoveCity_DepartmentStore_2F_Text_StockUpOnItems:
-	.string "I'm leaving on a long journey soon.\n"
-	.string "I need to stock up on items.$"
+	.string "Me voy de viaje muy pronto y tengo\n"
+	.string "que comprar todo lo que necesito.$"

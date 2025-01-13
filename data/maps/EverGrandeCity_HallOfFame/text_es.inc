@@ -1,15 +1,14 @@
 
 EverGrandeCity_HallOfFame_Text_HereWeHonorLeagueChampions:
-	.string "WALLACE: This room…\p"
-	.string "This is where we keep records of\n"
-	.string "POKéMON that prevailed through\l"
-	.string "harsh battles.\p"
-	.string "It is here that the LEAGUE CHAMPIONS\n"
-	.string "are honored.$"
+	.string "PLUBIO: Mira esta sala…\p"
+	.string "Aquí grabamos los nombres de los\n"
+	.string "POKéMON que vencieron en combate.\p"
+	.string "Aquí es donde los CAMPEONES\n"
+	.string "de la LIGA reciben todos los honores.$"
 
 EverGrandeCity_HallOfFame_Text_LetsRecordYouAndYourPartnersNames:
-	.string "WALLACE: Come on, let's record your\n"
-	.string "name as a TRAINER who triumphed over\l"
-	.string "the POKéMON LEAGUE, and the names of\l"
-	.string "the partners who battled with you.$"
+	.string "PLUBIO: Muy bien, grabemos tu nombre\n"
+	.string "y el de los compañeros que lucharon\l"
+	.string "contigo para que todos recuerden\l"
+	.string "que venciste en la LIGA POKéMON.$"
 

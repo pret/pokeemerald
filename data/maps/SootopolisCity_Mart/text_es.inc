@@ -1,21 +1,20 @@
 
 SootopolisCity_Mart_Text_PPUpIsGreat:
-	.string "PP UP is great!\p"
-	.string "It raises the POWER POINTS, the PP,\n"
-	.string "of a POKéMON move.$"
+	.string "¡MÁS PP es genial!\p"
+	.string "Aumenta los PUNTOS de PODER,\n"
+	.string "es decir, los PP, de un movimiento.$"
 
 SootopolisCity_Mart_Text_TooScaryOutside:
-	.string "What…\n"
-	.string "What is happening?\p"
-	.string "I really want to know, but it's too\n"
-	.string "scary to go outside.$"
+	.string "Pe-pero…, ¿qué está pasando?\p"
+	.string "Daría lo que fuera por saber qué ocurre,\n"
+	.string "pero me da miedo salir.$"
 
 SootopolisCity_Mart_Text_FullRestoreItemOfDreams:
-	.string "Do you know FULL RESTORE?\p"
-	.string "Full restoration of HP!\n"
-	.string "Eradication of all status problems!\p"
-	.string "It's truly an item of your dreams!$"
+	.string "¿Conoces RESTAURAR TODO?\p"
+	.string "¡Restaura todos tus PS!\n"
+	.string "¡Adiós a los problemas de estado!\p"
+	.string "¡Es el objeto perfecto!$"
 
 SootopolisCity_Mart_Text_DidSomethingAwaken:
-	.string "This weather…\n"
-	.string "Did something awaken?$"
+	.string "Vaya tiempecito…\p"
+	.string "Mmmm… Aquí ha pasado algo…$"

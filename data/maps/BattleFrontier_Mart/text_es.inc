@@ -1,19 +1,18 @@
 
 BattleFrontier_Mart_Text_ChaperonGrandson:
-	.string "We came here to chaperon our\n"
-	.string "grandson.\p"
-	.string "But since we're here, we thought\n"
-	.string "we should get some souvenirs.$"
+	.string "Hemos venido a animar a nuestro nieto.\p"
+	.string "Pero, ya que estamos aquí, he pensado\n"
+	.string "comprarme algo de recuerdo.$"
 
 BattleFrontier_Mart_Text_ProteinMakeNiceGift:
-	.string "Dear, what do you think of this?\n"
-	.string "Wouldn't this make a nice gift?\p"
-	.string "It's…PRO…TE…IN?\n"
-	.string "It sounds delicious, doesn't it?$"
+	.string "Oye, ¿qué te parece esto?\n"
+	.string "¿A que es un buen regalo?\p"
+	.string "¿Pone… PRO… TE… Í… NA?\n"
+	.string "Suena a algo delicioso, ¿no crees?$"
 
 BattleFrontier_Mart_Text_FacilitiesDontAllowItems:
-	.string "A lot of the BATTLE FRONTIER's\n"
-	.string "facilities don't allow the use of items\l"
-	.string "during battles.\p"
-	.string "That rule makes things tougher than\n"
-	.string "they already are!$"
+	.string "En muchos de los edificios del FRENTE\n"
+	.string "de BATALLA no permiten el uso\l"
+	.string "de objetos durante los combates.\p"
+	.string "¡Esa regla pone las cosas aún más\n"
+	.string "difíciles de lo que ya son!$"

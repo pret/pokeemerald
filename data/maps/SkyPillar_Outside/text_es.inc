@@ -1,32 +1,32 @@
 
 SkyPillar_Outside_Text_DoorIsClosed:
-	.string "The door is closed.$"
+	.string "La puerta está cerrada.$"
 
 SkyPillar_Outside_Text_OpenedDoorToSkyPillar:
-	.string "WALLACE: Oh, my, I'm terribly sorry!\p"
-	.string "In my haste, I didn't notice that\n"
-	.string "I'd left you behind!\p"
-	.string "I've opened the locked door of\n"
-	.string "the SKY PILLAR.\p"
-	.string "{PLAYER}{KUN}, let's be on our way!$"
+	.string "PLUBIO: ¡Vaya, cuánto lo siento!\p"
+	.string "¡Salí tan precipitadamente que no me di\n"
+	.string "cuenta de que te habías quedado atrás!\p"
+	.string "He logrado abrir la puerta\n"
+	.string "del PILAR CELESTE.\p"
+	.string "¡Vamos allá, {PLAYER}{KUN}!$"
 
 SkyPillar_Outside_Text_EarthquakeNotMomentToWaste:
-	.string "WALLACE: It's an earthquake!\p"
-	.string "There's not a moment to waste!\n"
-	.string "We've got to hurry!$"
+	.string "PLUBIO: ¡Un terremoto!\p"
+	.string "¡No hay un momento que perder!\n"
+	.string "¡Debemos apresurarnos!$"
 
 SkyPillar_Outside_Text_SituationGettingWorse:
-	.string "WALLACE: Hmm…\n"
-	.string "The situation is getting worse…$"
+	.string "PLUBIO: Mmm…\n"
+	.string "La situación está empeorando…$"
 
 SkyPillar_Outside_Text_GotToGoBackForSootopolis:
-	.string "WALLACE: This isn't good…\p"
-	.string "The weather distortion is spreading\n"
-	.string "even here…\p"
-	.string "{PLAYER}{KUN}.\p"
-	.string "RAYQUAZA should be farther up\n"
-	.string "from here.\p"
-	.string "I'm worried about SOOTOPOLIS.\n"
-	.string "I've got to go back.\p"
-	.string "Everything is in your hands now.\n"
-	.string "Don't fail us!$"
+	.string "PLUBIO: Esto no es bueno…\p"
+	.string "Las condiciones climáticas se han\n"
+	.string "alterado incluso aquí…\p"
+	.string "{PLAYER}{KUN}…\p"
+	.string "RAYQUAZA debería estar algo\n"
+	.string "más arriba.\p"
+	.string "Me preocupa ARRECÍPOLIS.\n"
+	.string "Voy para allá de nuevo.\p"
+	.string "Ahora todo depende de ti.\n"
+	.string "¡No nos falles!$"
