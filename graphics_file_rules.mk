@@ -40,13 +40,16 @@ $(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types
 
 ### French Types ###
 TYPESGFXDIR := graphics/types/french
-
 $(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)
 	@cat $^ >$@
 
 ### Italian Types ###
 TYPESGFXDIR := graphics/types/italian
+$(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)
+	@cat $^ >$@
 
+### Spanish Types ###
+TYPESGFXDIR := graphics/types/spanish
 $(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)
 	@cat $^ >$@
 

@@ -1205,6 +1205,8 @@ const u32 gStatusPal_Icons[] = INCBIN_U32("graphics/interface/status_icons.gbapa
 const u32 gMoveTypes_Gfx[] = INCBIN_U32("graphics/types/french/move_types.4bpp.lz");
 #elif ITALIAN
 const u32 gMoveTypes_Gfx[] = INCBIN_U32("graphics/types/italian/move_types.4bpp.lz");
+#elif SPANISH
+const u32 gMoveTypes_Gfx[] = INCBIN_U32("graphics/types/spanish/move_types.4bpp.lz");
 #else //ENGLISH
 const u32 gMoveTypes_Gfx[] = INCBIN_U32("graphics/types/move_types.4bpp.lz");
 #endif
