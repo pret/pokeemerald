@@ -53,7 +53,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-#if FRENCH || ITALIAN
+#if EUROPE
 #define TRADE_BOARD_FONT FONT_SMALL
 #else //ENGLISH
 #define TRADE_BOARD_FONT FONT_NORMAL

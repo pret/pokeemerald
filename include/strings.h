@@ -2487,7 +2487,7 @@ extern const u8 gText_MrStoneMatchCallDesc[];
 extern const u8 gText_MrStoneMatchCallName[];
 extern const u8 gText_StevenMatchCallDesc[];
 extern const u8 gText_StevenMatchCallName[];
-#if FRENCH || ITALIAN
+#if EUROPE
 extern const u8 gText_BrendanMatchCallDesc[];
 extern const u8 gText_MayMatchCallDesc[];
 #else //ENGLISH

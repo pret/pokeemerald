@@ -13,7 +13,7 @@
 #include "constants/trainers.h"
 
 
-#if FRENCH || ITALIAN
+#if EUROPE
 #define MAY_MATCH_CALL_DESC gText_MayMatchCallDesc
 #define BRENDAN_MATCH_CALL_DESC gText_BrendanMatchCallDesc
 #else //ENGLISH

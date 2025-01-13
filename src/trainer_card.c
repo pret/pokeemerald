@@ -39,7 +39,7 @@ enum {
     WIN_TRAINER_PIC,
 };
 
-#if ITALIAN
+#if ITALIAN || SPANISH
 #define CARD_NAME_BACK_LEFT 148
 #else //ENGLISH || FRENCH
 #define CARD_NAME_BACK_LEFT 136
@@ -1530,8 +1530,8 @@ static void DrawStarsAndBadgesOnCard(void)
 
 static void DrawCardBackStats(void)
 {
-// For some reason this function is emptied out in the French and Italian versions
-#if !defined(FRENCH) && !defined(ITALIAN)
+// For some reason this function is emptied out in the European versions
+#if !EUROPE
     if (sData->cardType == CARD_TYPE_FRLG)
     {
         if (sData->hasTrades)

@@ -586,7 +586,7 @@ static void CreateStarterPokemonLabel(u8 selection)
     sStarterLabelWindowId = AddWindow(&winTemplate);
     FillWindowPixelBuffer(sStarterLabelWindowId, PIXEL_FILL(0));
 
-#if FRENCH || ITALIAN
+#if EUROPE
     width = GetStringCenterAlignXOffset(FONT_NORMAL, speciesName, 104);
     AddTextPrinterParameterized3(sStarterLabelWindowId, FONT_NORMAL, width, 1, sTextColors, 0, speciesName);
 
