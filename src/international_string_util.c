@@ -243,7 +243,7 @@ void FillWindowTilesByRow(int windowId, int columnStart, int rowStart, int numFi
     }
 }
 
-#if FRENCH || ITALIAN
+#if EUROPE
 u8 *StringAppendWithPlaceholder(u8 *dest, const u8 *src, u8 *placeholderStr)
 {
     u8 text[32], c;
@@ -272,6 +272,8 @@ u8 *StringAppendWithPlaceholder(u8 *dest, const u8 *src, u8 *placeholderStr)
 const u8 gText_LevyTatia[] = _("LEVY&TATIA");
 #elif ITALIAN
 const u8 gText_LevyTatia[] = _("TELL & PAT");
+#elif SPANISH
+const u8 gText_LevyTatia[] = _("VITO-LETI");
 #endif
 
 const u8 *GetTrainerClassNameGenderSpecific(s32 trainerClassId, u32 trainerGender, const u8 *trainerName)

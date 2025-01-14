@@ -3030,7 +3030,7 @@ extern const u8 gText_Summary2[];
 extern const u8 gText_PkmnForSwap[];
 extern const u8 gText_SamePkmnInPartyAlready[];
 extern const u8 gText_Cancel3[];
-#if FRENCH || ITALIAN
+#if EUROPE
 extern const u8 gText_Eleve[];
 extern const u8 gText_Dresseur[];
 extern const u8 gText_Champion[];

@@ -4,7 +4,7 @@
 extern const u32 gTilesetTiles_General[];
 extern const u16 gTilesetPalettes_General[][16];
 
-#if FRENCH || ITALIAN
+#if EUROPE
 extern const u32 gTilesetTiles_Shop[];
 extern const u16 gTilesetPalettes_Shop[][16];
 
