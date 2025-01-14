@@ -6949,7 +6949,7 @@ const u8 *GetTrainerClassNameFromId(u16 trainerId)
 {
     if (trainerId >= TRAINERS_COUNT)
         trainerId = TRAINER_NONE;
-#if FRENCH || ITALIAN
+#if EUROPE
     return GetTrainerClassNameGenderSpecific(gTrainers[trainerId].trainerClass, gTrainers[trainerId].encounterMusic_gender, gTrainers[trainerId].trainerName);
 #else //ENGLISH
     return gTrainerClassNames[gTrainers[trainerId].trainerClass];
