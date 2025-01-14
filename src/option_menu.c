@@ -623,7 +623,7 @@ static void ButtonMode_DrawChoices(u8 selection)
     widthLR = GetStringWidth(FONT_NORMAL, gText_ButtonTypeLR, 0);
     widthLA = GetStringWidth(FONT_NORMAL, gText_ButtonTypeLEqualsA, 0);
 
-    widthLR -= 194 + XPOS;
+    widthLR -= 198 - XPOS;
     xLR = (widthNormal - widthLR - widthLA) / 2 + XPOS;
     DrawOptionMenuChoice(gText_ButtonTypeLR, xLR, YPOS_BUTTONMODE, styles[1]);
 
