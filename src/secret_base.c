@@ -179,9 +179,9 @@ static const struct WindowTemplate sRegistryWindowTemplates[] =
 {
     {
         .bg = 0,
-        .tilemapLeft = LANG_VAL(18, 17, 17),
+        .tilemapLeft = LANG_VAL(18, 17, 17, 17),
         .tilemapTop = 1,
-        .width = LANG_VAL(11, 12, 12),
+        .width = LANG_VAL(11, 12, 12, 12),
         .height = 18,
         .paletteNum = 15,
         .baseBlock = 0x01,
@@ -193,7 +193,7 @@ static const struct WindowTemplate sRegistryWindowTemplates[] =
         .width = 28,
         .height = 4,
         .paletteNum = 15,
-        .baseBlock = LANG_VAL(0xc7, 0xd9, 0xd9),
+        .baseBlock = LANG_VAL(0xc7, 0xd9, 0xd9, 0xd9),
     }
 };
 
@@ -729,7 +729,7 @@ static u8 *GetSecretBaseName(u8 *dest, u8 secretBaseIdx)
 {
     *StringCopyN(dest, gSaveBlock1Ptr->secretBases[secretBaseIdx].trainerName, GetNameLength(gSaveBlock1Ptr->secretBases[secretBaseIdx].trainerName)) = EOS;
     ConvertInternationalString(dest, gSaveBlock1Ptr->secretBases[secretBaseIdx].language);
-#if FRENCH || ITALIAN
+#if EUROPE
     return StringAppendWithPlaceholder(dest, gText_ApostropheSBase, dest);
 #else //ENGLISH
     return StringAppend(dest, gText_ApostropheSBase);

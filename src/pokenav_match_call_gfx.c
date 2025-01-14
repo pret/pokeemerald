@@ -115,18 +115,10 @@ static u32 ShowCheckPageDown(s32);
 static u32 ExitCheckPage(s32);
 static u32 ExitMatchCall(s32);
 
-#if FRENCH || ITALIAN
-#define MATCH_CALL_UI_PAL gMatchCallUI_Pal
-#define MATCH_CALL_UI_GFX gMatchCallUI_Gfx
-#define MATCH_CALL_UI_TILEMAP gMatchCallUI_Tilemap
-#else //ENGLISH
-static const u16 sMatchCallUI_Pal[] = INCBIN_U16("graphics/pokenav/match_call/ui.gbapal");
-static const u32 sMatchCallUI_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/ui.4bpp.lz");
-static const u32 sMatchCallUI_Tilemap[] = INCBIN_U32("graphics/pokenav/match_call/ui.bin.lz");
-
-#define MATCH_CALL_UI_PAL sMatchCallUI_Pal
-#define MATCH_CALL_UI_GFX sMatchCallUI_Gfx
-#define MATCH_CALL_UI_TILEMAP sMatchCallUI_Tilemap
+#if !EUROPE
+static const u16 gMatchCallUI_Pal[] = INCBIN_U16("graphics/pokenav/match_call/ui.gbapal");
+static const u32 gMatchCallUI_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/ui.4bpp.lz");
+static const u32 gMatchCallUI_Tilemap[] = INCBIN_U32("graphics/pokenav/match_call/ui.bin.lz");
 #endif
 static const u16 sOptionsCursor_Pal[] = INCBIN_U16("graphics/pokenav/match_call/options_cursor.gbapal");
 static const u32 sOptionsCursor_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/options_cursor.4bpp.lz");
@@ -340,11 +332,11 @@ static u32 LoopedTask_OpenMatchCall(s32 state)
         InitBgTemplates(sMatchCallBgTemplates, ARRAY_COUNT(sMatchCallBgTemplates));
         ChangeBgX(2, 0, BG_COORD_SET);
         ChangeBgY(2, 0, BG_COORD_SET);
-        DecompressAndCopyTileDataToVram(2, MATCH_CALL_UI_GFX, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(2, gMatchCallUI_Gfx, 0, 0, 0);
         SetBgTilemapBuffer(2, gfx->bgTilemapBuffer2);
-        CopyToBgTilemapBuffer(2, MATCH_CALL_UI_TILEMAP, 0, 0);
+        CopyToBgTilemapBuffer(2, gMatchCallUI_Tilemap, 0, 0);
         CopyBgTilemapBufferToVram(2);
-        CopyPaletteIntoBufferUnfaded(MATCH_CALL_UI_PAL, BG_PLTT_ID(2), sizeof(MATCH_CALL_UI_PAL));
+        CopyPaletteIntoBufferUnfaded(gMatchCallUI_Pal, BG_PLTT_ID(2), sizeof(gMatchCallUI_Pal));
         CopyBgTilemapBufferToVram(2);
         return LT_INC_AND_PAUSE;
     case 1:

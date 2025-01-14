@@ -31,7 +31,7 @@
 #define CURSOR_MINS_X 119
 #define CURSOR_SECS_X 134
 #define CURSOR_CONFIRM_X 183
-#else //ENGLISH
+#else //ENGLISH || SPANISH
 #define CURSOR_DAYS_X 53
 #define CURSOR_HOURS_X 86
 #define CURSOR_MINS_X 101

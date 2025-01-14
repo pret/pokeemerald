@@ -15,7 +15,7 @@
 #include "constants/songs.h"
 
 
-#if FRENCH || ITALIAN
+#if EUROPE
 #define FULL_TRAINER_STRING_CLEAR_WIDTH_1 57
 #define FULL_TRAINER_STRING_CLEAR_WIDTH_2 126
 #else //ENGLISH
@@ -499,19 +499,14 @@ void BufferMatchCallNameAndDesc(struct PokenavMatchCallEntry *matchCallEntry, u8
     const u8 *className;
     if (!matchCallEntry->isSpecialTrainer)
     {
-    #if FRENCH || ITALIAN
         const struct Trainer *trainer = &gTrainers[GetTrainerIdxByRematchIdx(matchCallEntry->headerId)];
         int class = trainer->trainerClass;
-        int gender = trainer->encounterMusic_gender;
-        className = GetTrainerClassNameGenderSpecific(class, gender, trainer->trainerName);
-        trainerName = trainer->trainerName;
+    #if EUROPE
+        className = GetTrainerClassNameGenderSpecific(class, trainer->encounterMusic_gender, trainer->trainerName);
     #else //ENGLISH
-        int index = GetTrainerIdxByRematchIdx(matchCallEntry->headerId);
-        const struct Trainer *trainer = &gTrainers[index];
-        int class = trainer->trainerClass;
         className = gTrainerClassNames[class];
-        trainerName = trainer->trainerName;
     #endif
+        trainerName = trainer->trainerName;
     }
     else
     {

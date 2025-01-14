@@ -5,7 +5,7 @@
 #include "main.h"
 #include "pokemon_storage_system.h"
 
-#if FRENCH || ITALIAN
+#if EUROPE
 #define POKENAV_LIST_ITEM_X 12
 #define POKENAV_LIST_WINDOW_WIDTH 17
 #else //ENGLISH

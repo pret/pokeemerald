@@ -78,19 +78,15 @@ static const LoopedTask sConditionSearchLoopedTaskFuncs[] =
     ConvertConditionsToListRanks
 };
 
-#if FRENCH || ITALIAN
-#define SEARCH_RESULT_TILES gConditionSearchResultTiles
-#define SEARCH_RESULT_TILEMAP gConditionSearchResultTilemap
+#if EUROPE
 #define SEARCH_RESULT_LIST_ITEM_X 12
 #define SEARCH_RESULT_LIST_WIN_WIDTH 18
 #else //ENGLISH
-static const u16 gConditionSearchResultFramePal[] = INCBIN_U16("graphics/pokenav/condition/search_results.gbapal");
-static const u32 sConditionSearchResultTiles[] = INCBIN_U32("graphics/pokenav/condition/search_results.4bpp.lz");
-static const u32 sConditionSearchResultTilemap[] = INCBIN_U32("graphics/pokenav/condition/search_results.bin.lz");
-#define SEARCH_RESULT_TILES sConditionSearchResultTiles
-#define SEARCH_RESULT_TILEMAP sConditionSearchResultTilemap
 #define SEARCH_RESULT_LIST_ITEM_X 13
 #define SEARCH_RESULT_LIST_WIN_WIDTH 17
+static const u16 gConditionSearchResultFramePal[] = INCBIN_U16("graphics/pokenav/condition/search_results.gbapal");
+static const u32 gConditionSearchResultTiles[] = INCBIN_U32("graphics/pokenav/condition/search_results.4bpp.lz");
+static const u32 gConditionSearchResultTilemap[] = INCBIN_U32("graphics/pokenav/condition/search_results.bin.lz");
 #endif
 static const u16 sListBg_Pal[] = INCBIN_U16("graphics/pokenav/condition/search_results_list.gbapal");
 
@@ -450,9 +446,9 @@ static u32 LoopedTask_OpenConditionSearchResults(s32 state)
     {
     case 0:
         InitBgTemplates(sConditionSearchResultBgTemplates, ARRAY_COUNT(sConditionSearchResultBgTemplates));
-        DecompressAndCopyTileDataToVram(1, SEARCH_RESULT_TILES, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, gConditionSearchResultTiles, 0, 0, 0);
         SetBgTilemapBuffer(1, gfx->buff);
-        CopyToBgTilemapBuffer(1, SEARCH_RESULT_TILEMAP, 0, 0);
+        CopyToBgTilemapBuffer(1, gConditionSearchResultTilemap, 0, 0);
         CopyBgTilemapBufferToVram(1);
         CopyPaletteIntoBufferUnfaded(gConditionSearchResultFramePal, BG_PLTT_ID(1), sizeof(gConditionSearchResultFramePal));
         CopyBgTilemapBufferToVram(1);

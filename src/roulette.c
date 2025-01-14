@@ -158,7 +158,7 @@
 
 #define NO_DELAY 0xFFFF
 
-#if FRENCH || ITALIAN
+#if EUROPE
 #define WIN_TILEMAP_LEFT 2
 #define WIN_WIDTH 26
 #define WIN_BASEBLOCK 0xBD
@@ -2333,7 +2333,7 @@ static void UpdateWheelPosition(void)
 }
 
 static const u8 sFiller[3] = {};
-#if FRENCH || ITALIAN
+#if EUROPE
 #define SHADOW_PAL       gRouletteShadow_Pal
 #define BALL_PAL         gRouletteBall_Pal
 #define BALL_COUNTER_PAL gRouletteBallCounter_Pal

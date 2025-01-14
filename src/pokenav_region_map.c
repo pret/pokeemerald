@@ -22,7 +22,7 @@
 
 #define NUM_CITY_MAPS 22
 
-#if FRENCH || ITALIAN
+#if EUROPE
 #define MAP_SEC_INFO_WIDTH 13
 #else //ENGLISH
 #define MAP_SEC_INFO_WIDTH 12
