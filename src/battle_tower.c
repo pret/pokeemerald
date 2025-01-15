@@ -1942,8 +1942,8 @@ static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId)
 
 void FrontierSpeechToString(const u16 *words)
 {
-#if FRENCH || ITALIAN
-    UnusedConvertEasyChatWordsToString(gStringVar4, words, 2, 3);
+#if EUROPE
+    ConvertEasyChatWordsToStringWithScroll(gStringVar4, words, 2, 3);
 #else //ENGLISH
     ConvertEasyChatWordsToString(gStringVar4, words, 3, 2);
     if (GetStringWidth(FONT_NORMAL, gStringVar4, -1) > 204u)
