@@ -88,12 +88,13 @@ int Intl_GetListMenuWidth(const struct ListMenuTemplate *listMenu)
 void CopyMonCategoryText(int dexNum, u8 *dest)
 {
 #if FRENCH
+    // Just category name in French
     u8 *str = StringCopy(dest, gPokedexEntries[dexNum].categoryName);
-#elif ITALIAN
-    const u8 *categoryText = gPokedexEntries[dexNum].categoryName;
+#elif ITALIAN || SPANISH
+    const u8 *categoryName = gPokedexEntries[dexNum].categoryName;
     u8 *str = StringCopy(dest, gText_Pokemon);
     *str++ = CHAR_SPACE;
-    StringCopy(str, categoryText);
+    StringCopy(str, categoryName);
 #else //ENGLISH
     u8 *str = StringCopy(dest, gPokedexEntries[dexNum].categoryName);
     *str = CHAR_SPACE;
@@ -243,7 +244,7 @@ void FillWindowTilesByRow(int windowId, int columnStart, int rowStart, int numFi
     }
 }
 
-#if FRENCH || ITALIAN
+#if EUROPE
 u8 *StringAppendWithPlaceholder(u8 *dest, const u8 *src, u8 *placeholderStr)
 {
     u8 text[32], c;
@@ -269,9 +270,11 @@ u8 *StringAppendWithPlaceholder(u8 *dest, const u8 *src, u8 *placeholderStr)
 }
 
 #if FRENCH
-const u8 gText_LevyTatia[] = _("LEVY&TATIA");
+const u8 gText_TateLiza[] = _("LEVY&TATIA");
 #elif ITALIAN
-const u8 gText_LevyTatia[] = _("TELL & PAT");
+const u8 gText_TateLiza[] = _("TELL & PAT");
+#elif SPANISH
+const u8 gText_TateLiza[] = _("VITO-LETI");
 #endif
 
 const u8 *GetTrainerClassNameGenderSpecific(s32 trainerClassId, u32 trainerGender, const u8 *trainerName)
@@ -280,16 +283,16 @@ const u8 *GetTrainerClassNameGenderSpecific(s32 trainerClassId, u32 trainerGende
     {
     case TRAINER_CLASS_SCHOOL_KID:
         if (trainerGender != 0)
-            return gText_Eleve; // ELEVE
+            return gText_SchoolKidFemale;
         return gTrainerClassNames[trainerClassId];
     case TRAINER_CLASS_RIVAL:
     case TRAINER_CLASS_RS_PROTAG:
         if (trainerGender != 0)
-            return gText_Dresseur; // DRESSEUR
+            return gText_TrainerFemale;
         break;
     case TRAINER_CLASS_LEADER:
-        if (trainerName != NULL && StringCompare(trainerName, gText_LevyTatia) == 0)
-            return gText_Champion; // CHAMPION
+        if (trainerName != NULL && StringCompare(trainerName, gText_TateLiza) == 0)
+            return gText_LeaderPlural; // Returns the plural for Leader for Tate & Liza's battle
         break;
     }
     trainerName = gTrainerClassNames[trainerClassId];

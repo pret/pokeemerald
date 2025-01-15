@@ -3054,17 +3054,10 @@ static const u16 sVenusaur_Pal[] = INCBIN_U16("graphics/pokemon_jump/venusaur.gb
 static const u32 sVenusaur_Gfx[] = INCBIN_U32("graphics/pokemon_jump/venusaur.4bpp.lz");
 static const u32 sVenusaur_Tilemap[] = INCBIN_U32("graphics/pokemon_jump/venusaur.bin.lz");
 
-#if FRENCH || ITALIAN
-#define BONUSES_PAL gPokeJumpBonuses_Pal
-#define BONUSES_GFX gPokeJumpBonuses_Gfx
-#define BONUSES_TILEMAP gPokeJumpBonuses_Tilemap
-#else //ENGLISH
-static const u16 sBonuses_Pal[] = INCBIN_U16("graphics/pokemon_jump/bonuses.gbapal");
-static const u32 sBonuses_Gfx[] = INCBIN_U32("graphics/pokemon_jump/bonuses.4bpp.lz");
-static const u32 sBonuses_Tilemap[] = INCBIN_U32("graphics/pokemon_jump/bonuses.bin.lz");
-#define BONUSES_PAL sBonuses_Pal
-#define BONUSES_GFX sBonuses_Gfx
-#define BONUSES_TILEMAP sBonuses_Tilemap
+#if !EUROPE
+static const u16 gPokeJumpBonuses_Pal[] = INCBIN_U16("graphics/pokemon_jump/bonuses.gbapal");
+static const u32 gPokeJumpBonuses_Gfx[] = INCBIN_U32("graphics/pokemon_jump/bonuses.4bpp.lz");
+static const u32 gPokeJumpBonuses_Tilemap[] = INCBIN_U32("graphics/pokemon_jump/bonuses.bin.lz");
 #endif
 
 static const struct BgTemplate sBgTemplates[] =
@@ -3199,9 +3192,9 @@ static void LoadPokeJumpGfx(void)
         LoadPalette(sVenusaur_Pal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
         DecompressAndCopyTileDataToVram(BG_VENUSAUR, sVenusaur_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(BG_VENUSAUR, sVenusaur_Tilemap, 0, 0, 1);
-        LoadPalette(BONUSES_PAL, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
-        DecompressAndCopyTileDataToVram(BG_BONUSES, BONUSES_GFX, 0, 0, 0);
-        DecompressAndCopyTileDataToVram(BG_BONUSES, BONUSES_TILEMAP, 0, 0, 1);
+        LoadPalette(gPokeJumpBonuses_Pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
+        DecompressAndCopyTileDataToVram(BG_BONUSES, gPokeJumpBonuses_Gfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(BG_BONUSES, gPokeJumpBonuses_Tilemap, 0, 0, 1);
         LoadPalette(sInterface_Pal, BG_PLTT_ID(2), PLTT_SIZE_4BPP);
         SetBgTilemapBuffer(BG_INTERFACE, sPokemonJumpGfx->tilemapBuffer);
         FillBgTilemapBufferRect_Palette0(BG_INTERFACE, 0, 0, 0, 0x20, 0x20);

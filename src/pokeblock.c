@@ -59,7 +59,7 @@
 #define WIN_TOSS_MSG_BASEBLOCK      0x1A0
 #define WIN_TOSS_PKBLOCK_BASEBLOCK  0x20C
 #define PKBLOCK_CASE_NAME_WIDTH     80
-#else //ENGLISH || ITALIAN
+#else //ENGLISH || ITALIAN || SPANISH
 #define WIN_TITLE_WIDTH             9
 #define WIN_LIST_BASEBLOCK          0x30
 #define WIN_SPICY_BASEBLOCK         0x12C
@@ -772,7 +772,11 @@ static void PutPokeblockListMenuString(u8 *dst, u16 pkblId)
 
     *(txtPtr++) = EXT_CTRL_CODE_BEGIN;
     *(txtPtr++) = EXT_CTRL_CODE_SKIP;
+#if SPANISH
+    *(txtPtr++) = CHAR_PO;
+#else //ENGLISH || FRENCH || ITALIAN
     *(txtPtr++) = CHAR_BLOCK_1;
+#endif
 
     ConvertIntToDecimalStringN(gStringVar1, GetHighestPokeblocksFlavorLevel(pkblock), STR_CONV_MODE_LEFT_ALIGN, 3);
     StringExpandPlaceholders(txtPtr, gText_LvVar1);

@@ -213,7 +213,7 @@ extern const u8 gMenuText_Walk[];
 extern const u8 gMenuText_Deselect[];
 extern const u8 gMenuText_CheckTag[];
 extern const u8 gMenuText_Confirm[];
-#if FRENCH || ITALIAN
+#if EUROPE
 extern const u8 gMenuText_Confirm2[];
 #endif
 extern const u8 gMenuText_Show[];
@@ -3030,10 +3030,10 @@ extern const u8 gText_Summary2[];
 extern const u8 gText_PkmnForSwap[];
 extern const u8 gText_SamePkmnInPartyAlready[];
 extern const u8 gText_Cancel3[];
-#if FRENCH || ITALIAN
-extern const u8 gText_Eleve[];
-extern const u8 gText_Dresseur[];
-extern const u8 gText_Champion[];
+#if EUROPE
+extern const u8 gText_SchoolKidFemale[];
+extern const u8 gText_TrainerFemale[];
+extern const u8 gText_LeaderPlural[];
 #endif
 
 // Naming Screen

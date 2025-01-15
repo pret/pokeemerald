@@ -2213,7 +2213,8 @@ void BufferBattleTowerElevatorFloors(void)
     u16 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
-#if FRENCH || ITALIAN
+#if EUROPE
+    // This whole section is absent in the English version.
     if (battleMode == FRONTIER_MODE_LINK_MULTIS)
     {
         gSpecialVar_0x8005 = 4;
@@ -2912,7 +2913,7 @@ void UpdateBattlePointsWindow(void)
 {
     u8 string[32];
     u32 x;
-#if ITALIAN
+#if ITALIAN || SPANISH
     u8 *strPtr;
 
     strPtr = ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->frontier.battlePoints, STR_CONV_MODE_RIGHT_ALIGN, 4);

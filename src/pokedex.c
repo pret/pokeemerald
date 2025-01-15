@@ -29,9 +29,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-#if FRENCH
-#define WEIGHT_LEFT 0x90
-#elif ITALIAN
+#if EUROPE
 #define WEIGHT_LEFT 0x90
 #else //ENGLISH
 #define WEIGHT_LEFT 0x81

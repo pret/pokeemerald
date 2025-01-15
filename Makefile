@@ -272,13 +272,18 @@ clean-assets:
 
 tidy: tidynonmodern tidymodern
 
+ALL_BUILDS := emerald emerald_fr emerald_it emerald_es
+MODERN_BUILDS := $(ALL_BUILDS:%=%_modern)
+ALL_BUILDS_DIRS := $(ALL_BUILDS:%=build/%)
+MODERN_BUILDS_DIRS := $(MODERN_BUILDS:%=build/%)
+
 tidynonmodern:
-	rm -f $(ROM_NAME) $(ELF_NAME) $(MAP_NAME)
-	rm -rf $(OBJ_DIR_NAME)
+	rm -f $(ALL_BUILDS:%=poke%{.gba,.elf,.map}) $(ROM_NAME) $(ELF_NAME) $(MAP_NAME)
+	rm -rf $(ALL_BUILDS_DIRS)
 
 tidymodern:
-	rm -f $(MODERN_ROM_NAME) $(MODERN_ELF_NAME) $(MODERN_MAP_NAME)
-	rm -rf $(MODERN_OBJ_DIR_NAME)
+	rm -f $(MODERN_BUILDS:%=poke%{.gba,.elf,.map}) $(MODERN_ROM_NAME) $(MODERN_ELF_NAME) $(MODERN_MAP_NAME)
+	rm -rf $(MODERN_BUILDS_DIRS)
 
 # Other rules
 include graphics_file_rules.mk

@@ -6686,9 +6686,9 @@ const u8 gText_PokeBalls[] = _("POKé BALLS");
 const u8 gText_Berry[] = _("BAIE");
 const u8 gText_Berries[] = _("BAIES");
 // new strings
-const u8 gText_Eleve[] = _("ELEVE");
-const u8 gText_Dresseur[] = _("DRESSEUR");
-const u8 gText_Champion[] = _("CHAMPION");
+const u8 gText_SchoolKidFemale[] = _("ELEVE");
+const u8 gText_TrainerFemale[] = _("DRESSEUR");
+const u8 gText_LeaderPlural[] = _("CHAMPION");
 
 #elif ITALIAN
 
@@ -6854,9 +6854,9 @@ const u8 gText_PokeBalls[] = _("POKé BALL");
 const u8 gText_Berry[] = _("BACCA");
 const u8 gText_Berries[] = _("BACCA");
 // new strings
-const u8 gText_Eleve[] = _("SCOLARA");
-const u8 gText_Dresseur[] = _("ALLENATORE");
-const u8 gText_Champion[] = _("CAPIPALESTRA");
+const u8 gText_SchoolKidFemale[] = _("SCOLARA");
+const u8 gText_TrainerFemale[] = _("ALLENATORE");
+const u8 gText_LeaderPlural[] = _("CAPIPALESTRA");
 
 #elif SPANISH
 
@@ -7022,9 +7022,9 @@ const u8 gText_PokeBalls[] = _("POKé BALLS");
 const u8 gText_Berry[] = _("BAYA");
 const u8 gText_Berries[] = _("BAYAS");
 // new strings
-const u8 gText_Eleve[] = _("ESCOLAR");
-const u8 gText_Dresseur[] = _("ENTRENADORA");
-const u8 gText_Champion[] = _("LÍDERES");
+const u8 gText_SchoolKidFemale[] = _("ESCOLAR");
+const u8 gText_TrainerFemale[] = _("ENTRENADORA");
+const u8 gText_LeaderPlural[] = _("LÍDERES");
 
 #else //ENGLISH
 

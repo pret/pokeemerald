@@ -39,38 +39,41 @@
 #include "party_menu.h"
 
 #if FRENCH
-#define TOWER_RESULT_X          16
-#define TOWER_STREAK_X1X2       72, 132
 #define DOME_STREAK_X2A         153
 #define DOME_STREAK_X2B         116
 #define PALACE_RESULT_X         16
-#define PALACE_STREAK_X1X2      72, 131
+#define PIKE_CLEARED_X1         64
 #define PIKE_CLEARED_X2A        138
 #define PIKE_CLEARED_X2B        118
 #define FACTORY_RENTALSWAP_X    158
-#define PYRAMID_STREAK_X2       111
+#define FACTORY_STREAK_X3       158
 #elif ITALIAN
-#define TOWER_RESULT_X          8
-#define TOWER_STREAK_X1X2       64, 125
 #define DOME_STREAK_X2A         113
 #define DOME_STREAK_X2B         113
 #define PALACE_RESULT_X         8
-#define PALACE_STREAK_X1X2      64, 125
+#define PIKE_CLEARED_X1         64
 #define PIKE_CLEARED_X2A        114
 #define PIKE_CLEARED_X2B        127
 #define FACTORY_RENTALSWAP_X    148
-#define PYRAMID_STREAK_X2       112
+#define FACTORY_STREAK_X3       158
+#elif SPANISH
+#define DOME_STREAK_X2A         117
+#define DOME_STREAK_X2B         137
+#define PALACE_RESULT_X         16
+#define PIKE_CLEARED_X1         72
+#define PIKE_CLEARED_X2A        134
+#define PIKE_CLEARED_X2B        132
+#define FACTORY_RENTALSWAP_X    149
+#define FACTORY_STREAK_X3       156
 #else //ENGLISH
-#define TOWER_RESULT_X          16
-#define TOWER_STREAK_X1X2       72, 132
 #define DOME_STREAK_X2A         121
 #define DOME_STREAK_X2B         112
 #define PALACE_RESULT_X         16
-#define PALACE_STREAK_X1X2      72, 131
+#define PIKE_CLEARED_X1         64
 #define PIKE_CLEARED_X2A        114
 #define PIKE_CLEARED_X2B        114
 #define FACTORY_RENTALSWAP_X    152
-#define PYRAMID_STREAK_X2       111
+#define FACTORY_STREAK_X3       158
 #endif
 
 struct FrontierBrainMon
@@ -1092,13 +1095,25 @@ static void ShowTowerResultsWindow(u8 battleMode)
         StringExpandPlaceholders(gStringVar4, gText_LinkMultiBattleRoomResults);
 
     PrintAligned(gStringVar4, 2);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Lv502, TOWER_RESULT_X, 49, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, TOWER_RESULT_X, 97, TEXT_SKIP_DRAW, NULL);
+#if ITALIAN
+    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Lv502, 8, 49, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, 8, 97, TEXT_SKIP_DRAW, NULL);
+#else
+    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Lv502, 16, 49, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, 16, 97, TEXT_SKIP_DRAW, NULL);
+#endif
     PrintHyphens(10);
-    TowerPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, TOWER_STREAK_X1X2, 49);
-    TowerPrintRecordStreak(battleMode, FRONTIER_LVL_50, TOWER_STREAK_X1X2, 65);
-    TowerPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, TOWER_STREAK_X1X2, 97);
-    TowerPrintRecordStreak(battleMode, FRONTIER_LVL_OPEN, TOWER_STREAK_X1X2, 113);
+#if ITALIAN
+    TowerPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, 64, 125, 49);
+    TowerPrintRecordStreak(battleMode, FRONTIER_LVL_50, 64, 125, 65);
+    TowerPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, 64, 125, 97);
+    TowerPrintRecordStreak(battleMode, FRONTIER_LVL_OPEN, 64, 125, 113);
+#else //ENGLISH
+    TowerPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, 72, 132, 49);
+    TowerPrintRecordStreak(battleMode, FRONTIER_LVL_50, 72, 132, 65);
+    TowerPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, 72, 132, 97);
+    TowerPrintRecordStreak(battleMode, FRONTIER_LVL_OPEN, 72, 132, 113);
+#endif
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
@@ -1238,10 +1253,17 @@ static void ShowPalaceResultsWindow(u8 battleMode)
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Lv502, PALACE_RESULT_X, 49, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, PALACE_RESULT_X, 97, TEXT_SKIP_DRAW, NULL);
     PrintHyphens(10);
-    PalacePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, PALACE_STREAK_X1X2, 49);
-    PalacePrintRecordStreak(battleMode, FRONTIER_LVL_50, PALACE_STREAK_X1X2, 65);
-    PalacePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, PALACE_STREAK_X1X2, 97);
-    PalacePrintRecordStreak(battleMode, FRONTIER_LVL_OPEN, PALACE_STREAK_X1X2, 113);
+#if ITALIAN
+    PalacePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, 64, 125, 49);
+    PalacePrintRecordStreak(battleMode, FRONTIER_LVL_50, 64, 125, 65);
+    PalacePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, 64, 125, 97);
+    PalacePrintRecordStreak(battleMode, FRONTIER_LVL_OPEN, 64, 125, 113);
+#else
+    PalacePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, 72, 131, 49);
+    PalacePrintRecordStreak(battleMode, FRONTIER_LVL_50, 72, 131, 65);
+    PalacePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, 72, 131, 97);
+    PalacePrintRecordStreak(battleMode, FRONTIER_LVL_OPEN, 72, 131, 113);
+#endif
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
@@ -1287,8 +1309,13 @@ static void ShowPikeResultsWindow(void)
     FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
     StringExpandPlaceholders(gStringVar4, gText_BattleChoiceResults);
     PrintAligned(gStringVar4, 0);
+#if SPANISH
+    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Lv502, 16, 33, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, 16, 97, TEXT_SKIP_DRAW, NULL);
+#else
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Lv502, 8, 33, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, 8, 97, TEXT_SKIP_DRAW, NULL);
+#endif
     PrintHyphens(10);
     PikePrintPrevOrCurrentStreak(FRONTIER_LVL_50, 64, PIKE_CLEARED_X2A, 33);
     PikePrintCleared(gText_Record, gText_RoomsCleared, gSaveBlock2Ptr->frontier.pikeRecordStreaks[FRONTIER_LVL_50], 64, PIKE_CLEARED_X2A, 49);
@@ -1350,12 +1377,21 @@ static void ShowArenaResultsWindow(void)
     PrintHyphens(10);
     StringExpandPlaceholders(gStringVar4, gText_SetKOTourneyResults);
     PrintAligned(gStringVar4, 2);
+#if SPANISH
+    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Lv502, 8, 49, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, 8, 97, TEXT_SKIP_DRAW, NULL);
+    ArenaPrintPrevOrCurrentStreak(FRONTIER_LVL_50, 64, 119, 49);
+    ArenaPrintRecordStreak(FRONTIER_LVL_50, 64, 119, 65);
+    ArenaPrintPrevOrCurrentStreak(FRONTIER_LVL_OPEN, 64, 119, 97);
+    ArenaPrintRecordStreak(FRONTIER_LVL_OPEN, 64, 119, 113);
+#else
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Lv502, 16, 49, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, 16, 97, TEXT_SKIP_DRAW, NULL);
     ArenaPrintPrevOrCurrentStreak(FRONTIER_LVL_50, 72, 126, 49);
     ArenaPrintRecordStreak(FRONTIER_LVL_50, 72, 126, 65);
     ArenaPrintPrevOrCurrentStreak(FRONTIER_LVL_OPEN, 72, 126, 97);
     ArenaPrintRecordStreak(FRONTIER_LVL_OPEN, 72, 126, 113);
+#endif
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
@@ -1443,10 +1479,10 @@ static void ShowFactoryResultsWindow(u8 battleMode)
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_RentalSwap, FACTORY_RENTALSWAP_X, 33, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, 8, 97, TEXT_SKIP_DRAW, NULL);
     PrintHyphens(10);
-    FactoryPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, 8, 64, 158, 49);
-    FactoryPrintRecordStreak(battleMode, FRONTIER_LVL_50, 8, 64, 158, 65);
-    FactoryPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, 8, 64, 158, 113);
-    FactoryPrintRecordStreak(battleMode, FRONTIER_LVL_OPEN, 8, 64, 158, 129);
+    FactoryPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, 8, 64, FACTORY_STREAK_X3, 49);
+    FactoryPrintRecordStreak(battleMode, FRONTIER_LVL_50, 8, 64, FACTORY_STREAK_X3, 65);
+    FactoryPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, 8, 64, FACTORY_STREAK_X3, 113);
+    FactoryPrintRecordStreak(battleMode, FRONTIER_LVL_OPEN, 8, 64, FACTORY_STREAK_X3, 129);
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
@@ -1503,10 +1539,22 @@ static void ShowPyramidResultsWindow(void)
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Lv502, 8, 49, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, 8, 97, TEXT_SKIP_DRAW, NULL);
     PrintHyphens(10);
-    PyramidPrintPrevOrCurrentStreak(FRONTIER_LVL_50, 64, PYRAMID_STREAK_X2, 49);
-    PyramidPrintRecordStreak(FRONTIER_LVL_50, 64, PYRAMID_STREAK_X2, 65);
-    PyramidPrintPrevOrCurrentStreak(FRONTIER_LVL_OPEN, 64, PYRAMID_STREAK_X2, 97);
-    PyramidPrintRecordStreak(FRONTIER_LVL_OPEN, 64, PYRAMID_STREAK_X2, 113);
+#if ITALIAN
+    PyramidPrintPrevOrCurrentStreak(FRONTIER_LVL_50, 64, 112, 49);
+    PyramidPrintRecordStreak(FRONTIER_LVL_50, 64, 112, 65);
+    PyramidPrintPrevOrCurrentStreak(FRONTIER_LVL_OPEN, 64, 112, 97);
+    PyramidPrintRecordStreak(FRONTIER_LVL_OPEN, 64, 112, 113);
+#elif SPANISH
+    PyramidPrintPrevOrCurrentStreak(FRONTIER_LVL_50, 72, 124, 49);
+    PyramidPrintRecordStreak(FRONTIER_LVL_50, 72, 124, 65);
+    PyramidPrintPrevOrCurrentStreak(FRONTIER_LVL_OPEN, 72, 124, 97);
+    PyramidPrintRecordStreak(FRONTIER_LVL_OPEN, 72, 124, 113);
+#else
+    PyramidPrintPrevOrCurrentStreak(FRONTIER_LVL_50, 64, 111, 49);
+    PyramidPrintRecordStreak(FRONTIER_LVL_50, 64, 111, 65);
+    PyramidPrintPrevOrCurrentStreak(FRONTIER_LVL_OPEN, 64, 111, 97);
+    PyramidPrintRecordStreak(FRONTIER_LVL_OPEN, 64, 111, 113);
+#endif
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
@@ -1543,11 +1591,19 @@ static void ShowLinkContestResultsWindow(void)
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, str, x, 25, TEXT_SKIP_DRAW, NULL);
 
     x = 6;
+#if SPANISH
+    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_CoolnessContest, x, 41, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_BeautyContest, x, 57, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_CutenessContest, x, 73, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_SmartnessContest, x, 89, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_ToughnessContest, x, 105, TEXT_SKIP_DRAW, NULL);
+#else
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Cool, x, 41, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Beauty, x, 57, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Cute, x, 73, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Smart, x, 89, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Tough, x, 105, TEXT_SKIP_DRAW, NULL);
+#endif
 
     for (i = 0; i < CONTEST_CATEGORIES_COUNT; i++)
     {
@@ -2509,7 +2565,7 @@ void CopyFrontierBrainTrainerName(u8 *dst)
     else
         facility = VarGet(VAR_FRONTIER_FACILITY);
 
-#if defined(BUGFIX) || FRENCH || ITALIAN
+#if defined(BUGFIX) || EUROPE
     for (i = 0; i < TRAINER_NAME_LENGTH + 1; i++)
 #else
     for (i = 0; i < PLAYER_NAME_LENGTH; i++)
