@@ -62,7 +62,7 @@ extern const u8 *const gBattleScriptsForMoveEffects[];
 #define TAG_LVLUP_BANNER_MON_ICON 55130
 
 // Arguments for 'destX' in CopyToBgTilemapBufferRect_ChangePalette
-#if FRENCH || ITALIAN
+#if EUROPE
 #define YESNOBOX_CURSOR_RECT_X 0x18
 #else //ENGLISH
 #define YESNOBOX_CURSOR_RECT_X 0x19
