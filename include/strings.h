@@ -213,7 +213,7 @@ extern const u8 gMenuText_Walk[];
 extern const u8 gMenuText_Deselect[];
 extern const u8 gMenuText_CheckTag[];
 extern const u8 gMenuText_Confirm[];
-#if FRENCH || ITALIAN
+#if EUROPE
 extern const u8 gMenuText_Confirm2[];
 #endif
 extern const u8 gMenuText_Show[];
