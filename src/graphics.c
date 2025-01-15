@@ -1117,9 +1117,9 @@ const u32 gBattleAnimBgTilemap_SolarBeam[] = INCBIN_U32("graphics/battle_anims/b
 
 const u32 gBerryBlenderCenter_Gfx[] = INCBIN_U32("graphics/berry_blender/center.8bpp.lz");
 #if FRENCH || ITALIAN
-const u32 gBerryBlenderOuter_Gfx[] = INCBIN_U32("graphics/berry_blender/french/outer.4bpp.lz");
-#else //ENGLISH
-const u32 gBerryBlenderOuter_Gfx[] = INCBIN_U32("graphics/berry_blender/outer.4bpp.lz");
+const u32 gBerryBlenderOuter_Gfx[] = INCBIN_U32("graphics/berry_blender/french/outer.4bpp.lz"); // Has a comma in the pic
+#else //ENGLISH || SPANISH
+const u32 gBerryBlenderOuter_Gfx[] = INCBIN_U32("graphics/berry_blender/outer.4bpp.lz"); // Has a dots in the pic
 #endif
 const u32 gBerryBlenderOuter_Tilemap[] = INCBIN_U32("graphics/berry_blender/outer_map.bin.lz");
 
@@ -2007,6 +2007,8 @@ const u16 gRouletteUnused4_Pal[] = INCBIN_U16("graphics/roulette/unused_4.gbapal
 const u32 gFrontierPassMapScreen_Gfx[] = INCBIN_U32("graphics/frontier_pass/french/map_screen.4bpp.lz");
 #elif ITALIAN
 const u32 gFrontierPassMapScreen_Gfx[] = INCBIN_U32("graphics/frontier_pass/italian/map_screen.4bpp.lz");
+#elif SPANISH
+const u32 gFrontierPassMapScreen_Gfx[] = INCBIN_U32("graphics/frontier_pass/spanish/map_screen.4bpp.lz");
 #endif
 
 // tiles battle dome
