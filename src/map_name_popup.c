@@ -195,6 +195,15 @@ static const u8 sText_PyramidFloor5[] = _("PIRAMIDE 5º P.");
 static const u8 sText_PyramidFloor6[] = _("PIRAMIDE 6º P.");
 static const u8 sText_PyramidFloor7[] = _("PIRAMIDE 7º P.");
 static const u8 sText_Pyramid[] = _("PIRAMIDE");
+#elif SPANISH
+static const u8 sText_PyramidFloor1[] = _("PIRÁMIDE- NV. 1");
+static const u8 sText_PyramidFloor2[] = _("PIRÁMIDE- NV. 2");
+static const u8 sText_PyramidFloor3[] = _("PIRÁMIDE- NV. 3");
+static const u8 sText_PyramidFloor4[] = _("PIRÁMIDE- NV. 4");
+static const u8 sText_PyramidFloor5[] = _("PIRÁMIDE- NV. 5");
+static const u8 sText_PyramidFloor6[] = _("PIRÁMIDE- NV. 6");
+static const u8 sText_PyramidFloor7[] = _("PIRÁMIDE- NV. 7");
+static const u8 sText_Pyramid[] = _("PIRÁMIDE");
 #else //ENGLISH
 static const u8 sText_PyramidFloor1[] = _("PYRAMID FLOOR 1");
 static const u8 sText_PyramidFloor2[] = _("PYRAMID FLOOR 2");

@@ -115,7 +115,8 @@ void GetBerryCountString(u8 *dst, const u8 *berryName, u32 quantity)
     else
         berryString = gText_Berries;
 
-#if FRENCH
+#if FRENCH || SPANISH
+    // Swaps berry name and string
     txtPtr = StringCopy(dst, berryString);
     *txtPtr = CHAR_SPACE;
     StringCopy(txtPtr + 1, berryName);

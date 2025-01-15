@@ -52,6 +52,13 @@ static const u16 sDefaultBardSongLyrics[BARD_SONG_LENGTH] = {
     EC_WORD_MAGAZINE,
     EC_WORD_LISTEN,
     EC_WORD_PLUS,
+#elif SPANISH
+    EC_WORD_WINNER,
+    EC_WORD_HIYAH,
+    EC_WORD_WINNER,
+    EC_WORD_HIYAH,
+    EC_WORD_WINNER,
+    EC_WORD_HIYAH,
 #else //ENGLISH
     EC_WORD_SHAKE,
     EC_WORD_IT,
