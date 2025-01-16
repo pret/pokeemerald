@@ -108,6 +108,44 @@ static const u8 sText_TransmissionFailureTryAgain[] = _(
     "La trasmissione non è riuscita.\n"
     "{COLOR 4}{SHADOW 5}Riprova.");
 
+#elif SPANISH
+
+static const u8 sText_BerryProgramUpdate[] = _("Actualización del programa de bayas");
+static const u8 sText_RubySapphire[] = _("Rubí/Zafiro");
+static const u8 sText_Emerald[] = _("Esmeralda");
+static const u8 sText_BerryProgramWillBeUpdatedPressA[] = _(
+    "Se va a actualizar el programa\n"
+    "de bayas del cartucho de Pokémon\n"
+    "Rubí o Zafiro.\n"
+    "{COLOR 4}{SHADOW 5}Pulsa el Botón A.");
+
+static const u8 sText_EnsureGBAConnectionMatches[] = _(
+    "¿Has conectado las consolas\n"
+    "como te mostramos?\n"
+    "{COLOR 4}{SHADOW 5}SÍ: pulsa el Botón A.\n"
+    "NO: apágalas (OFF) y prueba de nuevo.");
+
+static const u8 sText_TurnOffPowerHoldingStartSelect[] = _(
+    "Enciende (ON) la consola del cartucho\n"
+    "de Pokémon Rubí o Zafiro mientras\n"
+    "mantienes pulsados START y SELECT\n"
+    "hasta que aparezca esta imagen.");
+
+static const u8 sText_TransmittingPleaseWait[] = _(
+    "Transmitiendo datos…\n"
+    "{COLOR 4}{SHADOW 5}No apagues (OFF) la consola\n"
+    "Game Boy Advance ni desconectes el\n"
+    "cable Game Link de Game Boy Advance.");
+
+static const u8 sText_PleaseFollowInstructionsOnScreen[] = _(
+    "Sigue las instrucciones que aparezcan\n"
+    "en la pantalla de la consola del\n"
+    "cartucho de Pokémon Rubí o Zafiro.");
+
+static const u8 sText_TransmissionFailureTryAgain[] = _(
+    "Error de transmisión.\n"
+    "{COLOR 4}{SHADOW 5}Inténtalo de nuevo.");
+
 #else //ENGLISH
 static const u8 sText_BerryProgramUpdate[] = _("Berry Program Update");
 static const u8 sText_RubySapphire[] = _("Ruby/Sapphire");

@@ -48,6 +48,15 @@
 #define WIN_DESC_BASEBLOCK          170
 #define WIN_BERRY_TAG_BASEBLOCK     278
 #define BERRY_DESCRIPTION_X         5
+#elif SPANISH
+#define WIN_BERRY_NAME_WIDTH        8
+#define WIN_BERRY_NAME_BASEBLOCK    72
+#define WIN_SIZE_FIRM_BASEBLOCK     88
+#define WIN_DESC_TILEMAP_LEFT       3
+#define WIN_DESC_WIDTH              27
+#define WIN_DESC_BASEBLOCK          160
+#define WIN_BERRY_TAG_BASEBLOCK     268
+#define BERRY_DESCRIPTION_X         5
 #else //ENGLISH
 #define WIN_BERRY_NAME_WIDTH        8
 #define WIN_BERRY_NAME_BASEBLOCK    69
@@ -432,7 +441,7 @@ static void PrintAllBerryData(void)
 
 static void PrintBerryNumberAndName(void)
 {
-#if FRENCH
+#if FRENCH || SPANISH
     const struct Berry *berry;
     ConvertIntToDecimalStringN(gStringVar1, sBerryTag->berryId, STR_CONV_MODE_LEADING_ZEROS, 2);
     berry = GetBerryInfo(sBerryTag->berryId);
