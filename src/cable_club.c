@@ -35,7 +35,7 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
-#if FRENCH || ITALIAN
+#if EUROPE
 #define WAIT_FOR_LINK_TIMEOUT 480
 #else //ENGLISH
 #define WAIT_FOR_LINK_TIMEOUT 300
