@@ -148,11 +148,6 @@ void Script_GetCurrentMauvilleMan(void)
     gSpecialVar_Result = GetCurrentMauvilleOldMan();
 }
 
-// This var is set to 0 if the Bard's current song should be played,
-// and set to 1 if the new user-provided song should be played.
-// Its set in the scripts right before 'PlayBardSong' is called.
-#define USE_NEW_SONG (gSpecialVar_0x8004)
-
 void HasBardSongBeenChanged(void)
 {
     gSpecialVar_Result = (&gSaveBlock1Ptr->oldMan.bard)->hasChangedSong;
@@ -174,11 +169,14 @@ void SaveBardSongLyrics(void)
     bard->hasChangedSong = TRUE;
 }
 
-// Copies lyrics into gStringVar4
+// Copies lyrics into gStringVar4.
+// gSpecialVar_0x8004 is used in these functions to indicate which song should be played.
+// If it's set to 0 the Bard's current song should be played, otherwise the new user-provided song should be played.
+// Its set in the scripts right before 'PlayBardSong' is called.
 static void PrepareSongText(void)
 {
     struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
-    u16 * lyrics = !USE_NEW_SONG ? bard->songLyrics : bard->newSongLyrics;
+    u16 * lyrics = !gSpecialVar_0x8004 ? bard->songLyrics : bard->newSongLyrics;
     u8 * wordEnd = gStringVar4;
     u8 * str = wordEnd;
     u16 paragraphNum;
@@ -236,7 +234,7 @@ static void PrepareSongText(void)
 
 void PlayBardSong(void)
 {
-    StartBardSong(USE_NEW_SONG);
+    StartBardSong(gSpecialVar_0x8004);
     ScriptContext_Stop();
 }
 
@@ -492,7 +490,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
         s32 i;
 
         // Copy lyrics
-        if (!USE_NEW_SONG)
+        if (!gSpecialVar_0x8004)
             lyrics = bard->songLyrics;
         else
             lyrics = bard->newSongLyrics;
