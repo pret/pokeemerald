@@ -1,17 +1,17 @@
 	.ifndef SCRIPT_CMD_TABLE_ENTRY_MACRO
 	.set SCRIPT_CMD_TABLE_ENTRY_MACRO, 1
 	.macro script_cmd_table_entry constant:req value:req
-	.ifndef ALLOCATE_SCRIPT_CMD_TABLE
-	enum \constant
-	.else
+	.if ALLOCATE_SCRIPT_CMD_TABLE
 	.4byte \value
+	.else
+	enum \constant
 	.endif
 	.endm
 	.endif
 
 
 	enum_start
-	.ifdef ALLOCATE_SCRIPT_CMD_TABLE
+	.if ALLOCATE_SCRIPT_CMD_TABLE
 	.align 2
 gScriptCmdTable::
 	.endif
@@ -243,7 +243,7 @@ gScriptCmdTable::
 	script_cmd_table_entry SCR_OP_BUFFERCONTESTNAME             ScrCmd_buffercontestname              @ 0xe1
 	script_cmd_table_entry SCR_OP_BUFFERITEMNAMEPLURAL          ScrCmd_bufferitemnameplural           @ 0xe2
 
-	.ifdef ALLOCATE_SCRIPT_CMD_TABLE
+	.if ALLOCATE_SCRIPT_CMD_TABLE
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop
 	.endif
