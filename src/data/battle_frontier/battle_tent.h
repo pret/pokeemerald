@@ -991,6 +991,247 @@ const struct BattleFrontierTrainer gSlateportBattleTentTrainers[NUM_BATTLE_TENT_
         .speechLose = {EC_WORD_WITH, EC_WORD_FATHER, EC_WORD_IS, EC_WORD_LOWS, EC_WORD_A, EC_WORD_THIN},
         .monSet = gSlateportBattleTentTrainerMons_Tamia
     }
+#elif SPANISH
+    [SLATEPORT_TENT_TRAINER_JOLIE] = {
+        .facilityClass = FACILITY_CLASS_AROMA_LADY,
+        .trainerName = _("AZALEA"),
+        .speechBefore = {EC_WORD_WHOM, EC_WORD_NITWIT, EC_WORD_USING, EC_WORD_PLUS, EC_WORD_STRONG, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_WORD_A_LOT, EC_WORD_A_TINY_BIT, EC_WORD_FRIDAY, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_WORD_A_LOT, EC_WORD_A_TINY_BIT, EC_WORD_MONDAY, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Jolie
+    },
+    [SLATEPORT_TENT_TRAINER_MALACHI] = {
+        .facilityClass = FACILITY_CLASS_RUIN_MANIAC,
+        .trainerName = _("MALCHU"),
+        .speechBefore = {EC_WORD_EXCL_EXCL, EC_MOVE(SAND_TOMB), EC_WORD_IS, EC_WORD_LEFT, EC_WORD_DONE, EC_WORD_EXCL},
+        .speechWin = {EC_WORD_HAH, EC_WORD_HERE_IT_IS, EC_WORD_UH_HUH, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_EXCL_EXCL, EC_MOVE(SAND_TOMB), EC_WORD_IS, EC_WORD_VERY, EC_WORD_BAD, EC_WORD_EXCL},
+        .monSet = gSlateportBattleTentTrainerMons_Malachi
+    },
+    [SLATEPORT_TENT_TRAINER_KELSIE] = {
+        .facilityClass = FACILITY_CLASS_TUBER_F,
+        .trainerName = _("CHUSA"),
+        .speechBefore = {EC_WORD_EXCL_EXCL, EC_WORD_GO, EC_WORD_TOO_LATE, EC_WORD_POKEMON, EC_WORD_WATER, EC_WORD_EXCL},
+        .speechWin = {EC_WORD_EXCL_EXCL, EC_WORD_THING, EC_WORD_TOO_LATE, EC_WORD_POKEMON, EC_WORD_WATER, EC_WORD_EXCL},
+        .speechLose = {EC_WORD_EXCL_EXCL, EC_WORD_BANG, EC_WORD_TOO_LATE, EC_WORD_POKEMON, EC_WORD_WATER, EC_WORD_EXCL},
+        .monSet = gSlateportBattleTentTrainerMons_Kelsie
+    },
+    [SLATEPORT_TENT_TRAINER_DAVON] = {
+        .facilityClass = FACILITY_CLASS_TUBER_M,
+        .trainerName = _("DOTEO"),
+        .speechBefore = {EC_WORD_EXCL_EXCL, EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_WORD_A_TINY_BIT, EC_MOVE(WHIRLPOOL), EC_WORD_EXCL},
+        .speechWin = {EC_WORD_EXCL_EXCL, EC_MOVE(WHIRLPOOL), EC_WORD_IS, EC_WORD_LEFT, EC_WORD_BEING, EC_WORD_EXCL},
+        .speechLose = {EC_WORD_EXCL_EXCL, EC_WORD_I, EC_WORD_AIM, EC_WORD_A_TINY_BIT, EC_MOVE(WHIRLPOOL), EC_WORD_EXCL},
+        .monSet = gSlateportBattleTentTrainerMons_Davon
+    },
+    [SLATEPORT_TENT_TRAINER_GLENDA] = {
+        .facilityClass = FACILITY_CLASS_LADY,
+        .trainerName = _("ABINA"),
+        .speechBefore = {EC_WORD_LATER, EC_WORD_OVER, EC_WORD_TALKING, EC_WORD_NEAR, EC_WORD_IF, EC_WORD_DIDN_T},
+        .speechWin = {EC_WORD_QUES_EXCL, EC_WORD_DIDN_T, EC_WORD_TALKING, EC_WORD_NEAR, EC_WORD_NOW, EC_WORD_QUES},
+        .speechLose = {EC_WORD_SPIRALING, EC_WORD_WHERE, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Glenda
+    },
+    [SLATEPORT_TENT_TRAINER_HELENA] = {
+        .facilityClass = FACILITY_CLASS_BEAUTY,
+        .trainerName = _("GRETA"),
+        .speechBefore = {EC_WORD_QUES_EXCL, EC_WORD_BEAUTY, EC_WORD_LAY, EC_WORD_WITHOUT, EC_WORD_HAS, EC_WORD_QUES},
+        .speechWin = {EC_WORD_EXCL_EXCL, EC_WORD_DOWN, EC_WORD_GUARD, EC_WORD_PLUS, EC_WORD_CARE, EC_WORD_EXCL},
+        .speechLose = {EC_WORD_WHOM, EC_WORD_HAS, EC_WORD_LIE, EC_WORD_REALLY, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Helena
+    },
+    [SLATEPORT_TENT_TRAINER_RODOLFO] = {
+        .facilityClass = FACILITY_CLASS_RICH_BOY,
+        .trainerName = _("RODOLF"),
+        .speechBefore = {EC_WORD_SINCE, EC_WORD_FOR_NOW, EC_POKEMON(WHISCASH), EC_WORD_CHOICE, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_WHERE, EC_WORD_HAVE, EC_POKEMON(WHISCASH), EC_WORD_EXCUSE, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_A, EC_WORD_FOR_NOW, EC_POKEMON(WHISCASH), EC_WORD_CHOICE, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Rodolfo
+    },
+    [SLATEPORT_TENT_TRAINER_DAVION] = {
+        .facilityClass = FACILITY_CLASS_POKEMANIAC,
+        .trainerName = _("MADON"),
+        .speechBefore = {EC_WORD_ARRGH, EC_WORD_ARRGH, EC_WORD_ARRGH, EC_WORD_ARRGH, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_HMM, EC_WORD_HMM, EC_WORD_HMM, EC_WORD_HMM, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_MMM, EC_WORD_MMM, EC_WORD_MMM, EC_WORD_MMM, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Davion
+    },
+    [SLATEPORT_TENT_TRAINER_KENDALL] = {
+        .facilityClass = FACILITY_CLASS_SWIMMER_M,
+        .trainerName = _("DADOR"),
+        .speechBefore = {EC_WORD_QUES_EXCL, EC_WORD_LAY, EC_WORD_LIKE, EC_WORD_THAT_S, EC_MOVE2(PETAL_DANCE), EC_WORD_QUES},
+        .speechWin = {EC_WORD_IS, EC_WORD_JUST, EC_WORD_WORK, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_LET_S, EC_WORD_FIGHTING, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Kendall
+    },
+    [SLATEPORT_TENT_TRAINER_COLTEN] = {
+        .facilityClass = FACILITY_CLASS_CAMPER,
+        .trainerName = _("COLTE"),
+        .speechBefore = {EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_WORD_A_LOT, EC_WORD_RUN, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_RUN, EC_WORD_IS, EC_WORD_AROUND, EC_WORD_SPIRALING, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_SWIFT_SWIM, EC_WORD_WALKS, EC_WORD_ALWAYS, EC_WORD_THING, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Colten
+    },
+    [SLATEPORT_TENT_TRAINER_IRVIN] = {
+        .facilityClass = FACILITY_CLASS_BUG_MANIAC,
+        .trainerName = _("IRVINO"),
+        .speechBefore = {EC_WORD_WONDER, EC_WORD_LISTEN, EC_WORD_LIKELY_TO, EC_WORD_JUST, EC_MOVE(CONFUSE_RAY), EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_JUST, EC_MOVE(CONFUSE_RAY), EC_WORD_IS, EC_WORD_AROUND, EC_WORD_PLUS, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_ARRGH, EC_WORD_FUFUFU, EC_WORD_SORRY, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Irvin
+    },
+    [SLATEPORT_TENT_TRAINER_SHAUN] = {
+        .facilityClass = FACILITY_CLASS_GENTLEMAN,
+        .trainerName = _("CHANTEL"),
+        .speechBefore = {EC_WORD_HEY_THERE, EC_WORD_WHAT_S_UP_QUES, EC_WORD_OH_QUES, EC_WORD_BELOW, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_WHERE, EC_WORD_LET_S, EC_WORD_BEING, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_LET_S, EC_WORD_BEING, EC_WORD_UP, EC_WORD_UP, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Shaun
+    },
+    [SLATEPORT_TENT_TRAINER_KYLER] = {
+        .facilityClass = FACILITY_CLASS_GUITARIST,
+        .trainerName = _("MILER"),
+        .speechBefore = {EC_WORD_OH_QUES, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_WAY, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_URGH, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Kyler
+    },
+    [SLATEPORT_TENT_TRAINER_MAGGIE] = {
+        .facilityClass = FACILITY_CLASS_SCHOOL_KID_F,
+        .trainerName = _("MARINA"),
+        .speechBefore = {EC_POKEMON(VULPIX), EC_POKEMON(XATU), EC_POKEMON_NATIONAL(UMBREON), EC_EMPTY_WORD, EC_WORD_AVANT_GARDE, EC_EMPTY_WORD},
+        .speechWin = {EC_POKEMON(NOSEPASS), EC_POKEMON(SEVIPER), EC_WORD_DASH, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_POKEMON(NOSEPASS), EC_POKEMON_NATIONAL(SNORLAX), EC_WORD_EXCUSE_ME, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Maggie
+    },
+    [SLATEPORT_TENT_TRAINER_STEPHON] = {
+        .facilityClass = FACILITY_CLASS_COOLTRAINER_M,
+        .trainerName = _("ESTAN"),
+        .speechBefore = {EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_WORD_WASN_T, EC_WORD_EGG, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_THIS, EC_WORD_IS, EC_WORD_NATURALLY, EC_WORD_VICTORY, EC_WORD_LIE, EC_WORD_THESE_WERE},
+        .speechLose = {EC_WORD_MODERN, EC_WORD_HUMPH, EC_WORD_UGLY, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Stephon
+    },
+    [SLATEPORT_TENT_TRAINER_REBECCA] = {
+        .facilityClass = FACILITY_CLASS_COOLTRAINER_F,
+        .trainerName = _("REBECA"),
+        .speechBefore = {EC_WORD_A_TINY_BIT, EC_WORD_EGG, EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_WORD_RECOMMEND, EC_WORD_WASN_T},
+        .speechWin = {EC_WORD_BELONGS_TO, EC_WORD_FOR_NOW, EC_WORD_HOPELESS, EC_WORD_STENCH, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_WHERE, EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_WORD_A_TINY_BIT, EC_WORD_STENCH, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Rebecca
+    },
+    [SLATEPORT_TENT_TRAINER_REGGIE] = {
+        .facilityClass = FACILITY_CLASS_POKEFAN_M,
+        .trainerName = _("REN"),
+        .speechBefore = {EC_WORD_ONLY, EC_WORD_POKEMON, EC_WORD_WAS, EC_WORD_AROUND, EC_WORD_PLUS, EC_WORD_MATCH_UP},
+        .speechWin = {EC_WORD_ONLY, EC_WORD_POKEMON, EC_WORD_WAS, EC_WORD_JUST, EC_WORD_STRONG, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_ONLY, EC_WORD_POKEMON, EC_WORD_WAS, EC_WORD_NATURALLY, EC_MOVE(CHARGE), EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Reggie
+    },
+    [SLATEPORT_TENT_TRAINER_JANAE] = {
+        .facilityClass = FACILITY_CLASS_POKEFAN_F,
+        .trainerName = _("JANAE"),
+        .speechBefore = {EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_WORD_AWFULLY, EC_MOVE(FACADE), EC_WORD_APPROVED, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_WORD_EVEN_SO, EC_WORD_LET_S, EC_WORD_THE, EC_WORD_BATTLE},
+        .speechLose = {EC_WORD_LET_S, EC_WORD_HOPELESS, EC_WORD_THE, EC_WORD_BATTLE, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Janae
+    },
+    [SLATEPORT_TENT_TRAINER_CAIDEN] = {
+        .facilityClass = FACILITY_CLASS_EXPERT_M,
+        .trainerName = _("TRED"),
+        .speechBefore = {EC_WORD_JUST, EC_MOVE2(CURSE), EC_WORD_WEREN_T, EC_WORD_MISS, EC_WORD_CASE, EC_EMPTY_WORD},
+        .speechWin = {EC_MOVE2(CURSE), EC_WORD_WHERE, EC_WORD_IS, EC_WORD_EVERY, EC_WORD_HOPELESS, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_JUST, EC_MOVE2(CURSE), EC_WORD_IS, EC_WORD_RECOMMEND, EC_WORD_ALWAYS, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Caiden
+    },
+    [SLATEPORT_TENT_TRAINER_KIRSTEN] = {
+        .facilityClass = FACILITY_CLASS_EXPERT_F,
+        .trainerName = _("CARMEN"),
+        .speechBefore = {EC_WORD_QUES_EXCL, EC_WORD_NITWIT, EC_WORD_DIDN_T, EC_WORD_FIGHTS, EC_WORD_NEAR, EC_WORD_QUES},
+        .speechWin = {EC_WORD_LET_S, EC_WORD_APPROVED, EC_WORD_BUT, EC_WORD_WHERE, EC_WORD_EXCITING, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_SURRENDER, EC_WORD_NOT_VERY, EC_WORD_AWFULLY, EC_WORD_LOLLING, EC_WORD_STRONG, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Kirsten
+    },
+    [SLATEPORT_TENT_TRAINER_KURTIS] = {
+        .facilityClass = FACILITY_CLASS_YOUNGSTER,
+        .trainerName = _("CUREL"),
+        .speechBefore = {EC_WORD_OR, EC_WORD_LISTEN, EC_WORD_WIN, EC_WORD_SORRY, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_WHERE, EC_WORD_CAN_T, EC_WORD_CAN_T_WIN, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_WHERE, EC_WORD_WON, EC_WORD_ARRGH, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Kurtis
+    },
+    [SLATEPORT_TENT_TRAINER_STEFAN] = {
+        .facilityClass = FACILITY_CLASS_FISHERMAN,
+        .trainerName = _("ESTEFAN"),
+        .speechBefore = {EC_WORD_I, EC_WORD_SINCE, EC_WORD_POKEMON, EC_WORD_REAR, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_QUES_EXCL, EC_WORD_DOWN, EC_WORD_TYPE, EC_WORD_LAY, EC_WORD_LIKE, EC_WORD_QUES},
+        .speechLose = {EC_WORD_LET_S, EC_WORD_INCREDIBLE, EC_WORD_LIE, EC_WORD_THESE_WERE, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Stefan
+    },
+    [SLATEPORT_TENT_TRAINER_AVERY] = {
+        .facilityClass = FACILITY_CLASS_BIRD_KEEPER,
+        .trainerName = _("AVERO"),
+        .speechBefore = {EC_WORD_DASH_DASH_DASH, EC_EMPTY_WORD, EC_WORD_ISN_T_IT_QUES, EC_WORD_AROUND, EC_WORD_PLUS, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_DOWN, EC_WORD_WHY, EC_WORD_LIE, EC_WORD_LOSS, EC_WORD_PLUS, EC_WORD_SLIMY},
+        .speechLose = {EC_WORD_AWFULLY, EC_WORD_WHY, EC_WORD_LIE, EC_WORD_FIGHTS, EC_WORD_IS, EC_WORD_BEING},
+        .monSet = gSlateportBattleTentTrainerMons_Avery
+    },
+    [SLATEPORT_TENT_TRAINER_DWANE] = {
+        .facilityClass = FACILITY_CLASS_NINJA_BOY,
+        .trainerName = _("KEKO"),
+        .speechBefore = {EC_WORD_HMM, EC_WORD_EEK, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_GWAHAHAHA, EC_WORD_COME_OVER, EC_WORD_MUFUFU, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_OI_OI_OI, EC_WORD_OH_DEAR, EC_WORD_UNBELIEVABLE, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Dwane
+    },
+    [SLATEPORT_TENT_TRAINER_MCKENNA] = {
+        .facilityClass = FACILITY_CLASS_PARASOL_LADY,
+        .trainerName = _("MIQUENA"),
+        .speechBefore = {EC_WORD_WHERE, EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_WORD_A_LOT, EC_WORD_TALKING, EC_WORD_EH_QUES},
+        .speechWin = {EC_WORD_ELLIPSIS_EXCL, EC_WORD_HEHE, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_AGREE, EC_WORD_AGREE, EC_WORD_GOOD_BYE, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Mckenna
+    },
+    [SLATEPORT_TENT_TRAINER_CAMRYN] = {
+        .facilityClass = FACILITY_CLASS_SWIMMER_F,
+        .trainerName = _("CARMINA"),
+        .speechBefore = {EC_WORD_WONDER, EC_WORD_LISTEN, EC_WORD_LOSS, EC_WORD_COLD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_LET_S, EC_WORD_LEFT, EC_WORD_PATTERN, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_WHERE, EC_WORD_SURRENDER, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Camryn
+    },
+    [SLATEPORT_TENT_TRAINER_NATASHA] = {
+        .facilityClass = FACILITY_CLASS_PICNICKER,
+        .trainerName = _("NATACHA"),
+        .speechBefore = {EC_WORD_WHILE, EC_WORD_NEAR, EC_WORD_GWAH, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_ELLIPSIS_ELLIPSIS_ELLIPSIS, EC_WORD_SEE_YA, EC_WORD_GWAHAHAHA, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_WHOAH, EC_WORD_GIVE_ME, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Natasha
+    },
+    [SLATEPORT_TENT_TRAINER_AUSTYN] = {
+        .facilityClass = FACILITY_CLASS_SAILOR,
+        .trainerName = _("AITOR"),
+        .speechBefore = {EC_WORD_RECOMMEND, EC_WORD_FIGHTS, EC_WORD_BELONGS_TO, EC_WORD_NITWIT, EC_WORD_HOBBY, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_ONLY, EC_WORD_STUDY, EC_WORD_WAS, EC_WORD_AROUND, EC_WORD_PLUS, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_A, EC_WORD_HOBBY, EC_WORD_A_LOT, EC_WORD_PLUS, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Austyn
+    },
+    [SLATEPORT_TENT_TRAINER_DONOVAN] = {
+        .facilityClass = FACILITY_CLASS_COLLECTOR,
+        .trainerName = _("DESI"),
+        .speechBefore = {EC_WORD_TIMES, EC_WORD_NATURALLY, EC_WORD_STRONG, EC_WORD_LEFT, EC_WORD_SLIMY, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_WHERE, EC_WORD_LET_S, EC_WORD_SLIMY, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_YOU, EC_WORD_LET_S, EC_WORD_SLIMY, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Donovan
+    },
+    [SLATEPORT_TENT_TRAINER_TAMIA] = {
+        .facilityClass = FACILITY_CLASS_LASS,
+        .trainerName = _("TAMIA"),
+        .speechBefore = {EC_WORD_JUST, EC_WORD_FATHER, EC_WORD_ABSOLUTELY, EC_WORD_ANGERS, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_NOW, EC_WORD_WHERE, EC_WORD_ABSOLUTELY, EC_WORD_PLAYS, EC_WORD_MEET, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_SINCE, EC_WORD_A_LOT, EC_WORD_LISTEN, EC_WORD_JUST, EC_WORD_FATHER, EC_EMPTY_WORD},
+        .monSet = gSlateportBattleTentTrainerMons_Tamia
+    }
 #else //ENGLISH
     [SLATEPORT_TENT_TRAINER_JOLIE] = {
         .facilityClass = FACILITY_CLASS_AROMA_LADY,
@@ -2528,6 +2769,247 @@ const struct BattleFrontierTrainer gVerdanturfBattleTentTrainers[NUM_BATTLE_TENT
         .speechLose = {EC_WORD_IF_I_LOSE, EC_WORD_IS, EC_WORD_LOWS, EC_WORD_LISTEN, EC_WORD_FASHION, EC_WORD_QUES},
         .monSet = gVerdanturfBattleTentTrainerMons_Cecilia
     }
+#elif SPANISH
+    [VERDANTURF_TENT_TRAINER_BRENNA] = {
+        .facilityClass = FACILITY_CLASS_AROMA_LADY,
+        .trainerName = _("CAMELIA"),
+        .speechBefore = {EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_WORD_A_LOT, EC_WORD_USING, EC_MOVE(FAKE_TEARS), EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_VERY, EC_WORD_BREAK, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_THIS, EC_WORD_IS, EC_WORD_FOR_NOW, EC_MOVE(TORMENT), EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Brenna
+    },
+    [VERDANTURF_TENT_TRAINER_DILAN] = {
+        .facilityClass = FACILITY_CLASS_RUIN_MANIAC,
+        .trainerName = _("DIL"),
+        .speechBefore = {EC_WORD_WILL_BE_HERE, EC_WORD_VERY, EC_WORD_BORING, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_CHOICE, EC_WORD_WHERE, EC_WORD_WILL_BE_HERE, EC_WORD_BORING, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_LOSS, EC_WORD_WHERE, EC_WORD_IS, EC_WORD_BADLY, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Dilan
+    },
+    [VERDANTURF_TENT_TRAINER_ELIANA] = {
+        .facilityClass = FACILITY_CLASS_TUBER_F,
+        .trainerName = _("ELIDANA"),
+        .speechBefore = {EC_WORD_SOON, EC_WORD_ABSOLUTELY, EC_WORD_OR, EC_WORD_LIE, EC_WORD_VACATION, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_A, EC_WORD_MONEY, EC_WORD_RECOMMEND, EC_WORD_PROBABLY, EC_WORD_VACATION, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_WHERE, EC_WORD_SINCE, EC_WORD_PLUS, EC_WORD_LIE, EC_WORD_THIS, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Eliana
+    },
+    [VERDANTURF_TENT_TRAINER_MARKUS] = {
+        .facilityClass = FACILITY_CLASS_TUBER_M,
+        .trainerName = _("MARCUS"),
+        .speechBefore = {EC_WORD_ISN_T_IT_QUES, EC_WORD_BEING, EC_WORD_IF, EC_WORD_FAINTED, EC_WORD_USE, EC_MOVE(SELF_DESTRUCT)},
+        .speechWin = {EC_WORD_IS, EC_WORD_NATURALLY, EC_MOVE2(EXPLOSION), EC_WORD_LIE, EC_WORD_THAT, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_MEAN, EC_WORD_PLAYS, EC_WORD_LOSE, EC_WORD_USE, EC_MOVE(SELF_DESTRUCT), EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Markus
+    },
+    [VERDANTURF_TENT_TRAINER_CAITLYN] = {
+        .facilityClass = FACILITY_CLASS_LADY,
+        .trainerName = _("CARINA"),
+        .speechBefore = {EC_WORD_IS, EC_WORD_BORING, EC_WORD_BE, EC_WORD_IDOL, EC_WORD_LIE, EC_WORD_SOMEONE},
+        .speechWin = {EC_WORD_WIN, EC_WORD_WITHOUT, EC_WORD_QUITE, EC_WORD_THAT, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_LOSS, EC_WORD_WHERE, EC_WORD_ABSOLUTELY, EC_WORD_WITHOUT, EC_MOVE(GRUDGE), EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Caitlyn
+    },
+    [VERDANTURF_TENT_TRAINER_DESIREE] = {
+        .facilityClass = FACILITY_CLASS_BEAUTY,
+        .trainerName = _("DESIRA"),
+        .speechBefore = {EC_WORD_LAY, EC_WORD_LIKE, EC_WORD_JUST, EC_WORD_BEAUTY, EC_WORD_OH_QUES, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_LAY, EC_WORD_WITHOUT, EC_WORD_HAS, EC_WORD_JUST, EC_WORD_BEAUTY, EC_WORD_OH_QUES},
+        .speechLose = {EC_WORD_JUST, EC_WORD_BEAUTY, EC_WORD_WHERE, EC_WORD_IS, EC_WORD_EVERY, EC_WORD_MATCH_UP},
+        .monSet = gVerdanturfBattleTentTrainerMons_Desiree
+    },
+    [VERDANTURF_TENT_TRAINER_RONALD] = {
+        .facilityClass = FACILITY_CLASS_RICH_BOY,
+        .trainerName = _("RONALDO"),
+        .speechBefore = {EC_WORD_SINCE, EC_WORD_FIGHTS, EC_WORD_LIE, EC_WORD_THESE_WERE, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_BELONGS_TO, EC_WORD_NITWIT, EC_WORD_BE, EC_WORD_PERFECTION, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_A, EC_WORD_FOR_NOW, EC_MOVE2(BATON_PASS), EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Ronald
+    },
+    [VERDANTURF_TENT_TRAINER_ASHTEN] = {
+        .facilityClass = FACILITY_CLASS_POKEMANIAC,
+        .trainerName = _("ASTI"),
+        .speechBefore = {EC_WORD_SINCE, EC_WORD_FOR_NOW, EC_WORD_BATTLE, EC_WORD_CAN_WIN, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_AS_MUCH_AS, EC_WORD_POKEMON, EC_WORD_WAS, EC_WORD_SMOOTH, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_UNBELIEVABLE, EC_WORD_GIVE_ME, EC_WORD_APPRECIATE, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Ashten
+    },
+    [VERDANTURF_TENT_TRAINER_GERARD] = {
+        .facilityClass = FACILITY_CLASS_SWIMMER_M,
+        .trainerName = _("GERAR"),
+        .speechBefore = {EC_WORD_TOO, EC_WORD_JUST, EC_MOVE2(TEETER_DANCE), EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_ISN_T_IT_QUES, EC_WORD_BEING, EC_WORD_HEHE, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_PLAYS, EC_WORD_LOSE, EC_WORD_COUNT_ON, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Gerard
+    },
+    [VERDANTURF_TENT_TRAINER_BRADLY] = {
+        .facilityClass = FACILITY_CLASS_CAMPER,
+        .trainerName = _("BRADLI"),
+        .speechBefore = {EC_WORD_AN, EC_WORD_ALWAYS, EC_WORD_VACATION, EC_WORD_IS, EC_WORD_BORING, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_JUST, EC_MOVE(WITHDRAW), EC_WORD_IS, EC_WORD_JUST, EC_WORD_SHELL_ARMOR, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_ABSOLUTELY, EC_WORD_OR, EC_WORD_LISTEN, EC_WORD_WOULD, EC_WORD_DISAPPOINT, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Bradly
+    },
+    [VERDANTURF_TENT_TRAINER_DENNIS] = {
+        .facilityClass = FACILITY_CLASS_BUG_MANIAC,
+        .trainerName = _("DENIS"),
+        .speechBefore = {EC_WORD_QUES_EXCL, EC_WORD_LET_S, EC_WORD_APPROVED, EC_WORD_LIE, EC_WORD_THESE_WERE, EC_WORD_QUES},
+        .speechWin = {EC_WORD_HEHEHE, EC_WORD_HEHEHE, EC_WORD_HEHEHE, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_UNBELIEVABLE, EC_WORD_MODERN, EC_WORD_OH, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Dennis
+    },
+    [VERDANTURF_TENT_TRAINER_PRESTIN] = {
+        .facilityClass = FACILITY_CLASS_GENTLEMAN,
+        .trainerName = _("PRET"),
+        .speechBefore = {EC_WORD_FIGHTS, EC_WORD_WERE, EC_WORD_NATURALLY, EC_MOVE(NIGHTMARE), EC_WORD_RECOMMEND, EC_WORD_REALLY},
+        .speechWin = {EC_WORD_ISN_T_IT_QUES, EC_WORD_AWFULLY, EC_MOVE(NIGHTMARE), EC_WORD_OH_QUES, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_LET_S, EC_WORD_NATURALLY, EC_MOVE(NIGHTMARE), EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Prestin
+    },
+    [VERDANTURF_TENT_TRAINER_ERNESTO] = {
+        .facilityClass = FACILITY_CLASS_GUITARIST,
+        .trainerName = _("ERNES"),
+        .speechBefore = {EC_WORD_SINCE, EC_WORD_ABOUT, EC_WORD_THAT_S, EC_WORD_HOLIDAY, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_WORD_THAT_S, EC_WORD_HAPPILY, EC_WORD_MUSIC, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_THAT_S, EC_WORD_MUSIC, EC_WORD_ABSOLUTELY, EC_WORD_WITHOUT, EC_WORD_KNOCKOUT, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Ernesto
+    },
+    [VERDANTURF_TENT_TRAINER_NALA] = {
+        .facilityClass = FACILITY_CLASS_SCHOOL_KID_F,
+        .trainerName = _("NALA"),
+        .speechBefore = {EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_WORD_A_LOT, EC_WORD_A_TINY_BIT, EC_WORD_POPULAR, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_WHERE, EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_WORD_A_LOT, EC_WORD_THAT_S, EC_WORD_RADIO},
+        .speechLose = {EC_WORD_THIS, EC_WORD_WHERE, EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Nala
+    },
+    [VERDANTURF_TENT_TRAINER_DARNELL] = {
+        .facilityClass = FACILITY_CLASS_COOLTRAINER_M,
+        .trainerName = _("DARNE"),
+        .speechBefore = {EC_WORD_OR, EC_WORD_LISTEN, EC_WORD_BE, EC_WORD_ANTICIPATION, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_ISN_T_IT_QUES, EC_WORD_VERY, EC_WORD_ANTICIPATION, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_LET_S, EC_WORD_LEFT, EC_WORD_EXCITING, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Darnell
+    },
+    [VERDANTURF_TENT_TRAINER_ASHLYN] = {
+        .facilityClass = FACILITY_CLASS_COOLTRAINER_F,
+        .trainerName = _("ALESA"),
+        .speechBefore = {EC_WORD_QUES_EXCL, EC_WORD_WHOM, EC_MOVE(FACADE), EC_WORD_LIE, EC_WORD_APPROVED, EC_WORD_QUES},
+        .speechWin = {EC_WORD_THAT_S, EC_WORD_THESE_WERE, EC_WORD_IS, EC_WORD_NITWIT, EC_WORD_ISN_T_IT_QUES, EC_WORD_APPROVED},
+        .speechLose = {EC_WORD_LET_S, EC_WORD_HOPELESS, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Ashlyn
+    },
+    [VERDANTURF_TENT_TRAINER_ADDISON] = {
+        .facilityClass = FACILITY_CLASS_POKEFAN_M,
+        .trainerName = _("ADINO"),
+        .speechBefore = {EC_WORD_EXCL_EXCL, EC_WORD_HERE, EC_WORD_TOO_LATE, EC_WORD_SHINE, EC_WORD_POKEMON, EC_WORD_EXCL},
+        .speechWin = {EC_WORD_MUFUFU, EC_WORD_ELLIPSIS_EXCL, EC_WORD_OH_QUES, EC_WORD_GWAHAHAHA, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_OI_OI_OI, EC_WORD_LISTENING, EC_WORD_YO, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Addison
+    },
+    [VERDANTURF_TENT_TRAINER_JUSTINE] = {
+        .facilityClass = FACILITY_CLASS_POKEFAN_F,
+        .trainerName = _("JUSTINA"),
+        .speechBefore = {EC_WORD_HEY_THERE, EC_WORD_EH_QUES, EC_WORD_I_VE_ARRIVED, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_WHERE, EC_WORD_HAVE, EC_WORD_LEVEL, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_AWW, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Justine
+    },
+    [VERDANTURF_TENT_TRAINER_TYSON] = {
+        .facilityClass = FACILITY_CLASS_EXPERT_M,
+        .trainerName = _("TISON"),
+        .speechBefore = {EC_WORD_WHERE, EC_WORD_WHOM, EC_WORD_PRESSURE, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_WHERE, EC_WORD_LET_S, EC_WORD_FOR_NOW, EC_WORD_RIVAL, EC_WORD_INCREDIBLE, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_UP, EC_WORD_LET_S, EC_WORD_FOR_NOW, EC_WORD_RIVAL, EC_WORD_INCREDIBLE, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Tyson
+    },
+    [VERDANTURF_TENT_TRAINER_LAILA] = {
+        .facilityClass = FACILITY_CLASS_EXPERT_F,
+        .trainerName = _("LAILA"),
+        .speechBefore = {EC_WORD_FIGHTS, EC_WORD_WITHOUT, EC_WORD_A_LOT, EC_WORD_COOL, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_WHOM, EC_WORD_A_LOT, EC_WORD_COOL, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_WHERE, EC_WORD_HAVE, EC_WORD_COOL, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Laila
+    },
+    [VERDANTURF_TENT_TRAINER_WAREN] = {
+        .facilityClass = FACILITY_CLASS_YOUNGSTER,
+        .trainerName = _("ANTONI"),
+        .speechBefore = {EC_WORD_TIMES, EC_WORD_NITWIT, EC_WORD_FIGHTS, EC_WORD_IS, EC_WORD_DONE, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_I, EC_WORD_ISN_T_IT_QUES, EC_WORD_VERY, EC_WORD_DONE, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_DOES, EC_WORD_NITWIT, EC_WORD_FIGHTS, EC_WORD_IS, EC_WORD_DONE, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Waren
+    },
+    [VERDANTURF_TENT_TRAINER_TOBIAS] = {
+        .facilityClass = FACILITY_CLASS_FISHERMAN,
+        .trainerName = _("TOBI"),
+        .speechBefore = {EC_MOVE2(BARRIER), EC_WORD_WALKS, EC_WORD_LEFT, EC_WORD_VERY, EC_WORD_THING, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_AIYEEH, EC_WORD_DASH_DASH_DASH, EC_WORD_EXCUSE_ME, EC_WORD_UH_HUH, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_CONGRATS, EC_WORD_ABSOLUTELY, EC_WORD_TALENT, EC_WORD_A_LOT, EC_WORD_PLUS, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Tobias
+    },
+    [VERDANTURF_TENT_TRAINER_JOSIAH] = {
+        .facilityClass = FACILITY_CLASS_BIRD_KEEPER,
+        .trainerName = _("JUANMA"),
+        .speechBefore = {EC_WORD_IF, EC_WORD_FAINTED, EC_WORD_OR, EC_WORD_LISTEN, EC_WORD_USING, EC_MOVE(FLY)},
+        .speechWin = {EC_WORD_WHERE, EC_WORD_OR, EC_WORD_LISTEN, EC_WORD_USING, EC_MOVE(FLY), EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_OR, EC_WORD_LISTEN, EC_WORD_USING, EC_MOVE(FLY), EC_WORD_VERY, EC_WORD_SOON},
+        .monSet = gVerdanturfBattleTentTrainerMons_Josiah
+    },
+    [VERDANTURF_TENT_TRAINER_DION] = {
+        .facilityClass = FACILITY_CLASS_NINJA_BOY,
+        .trainerName = _("DION"),
+        .speechBefore = {EC_WORD_FAINT, EC_WORD_WITHOUT, EC_WORD_STRONG, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_THIS, EC_WORD_ABSOLUTELY, EC_WORD_WITHOUT, EC_WORD_STRONG, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_THIS, EC_WORD_WHERE, EC_WORD_ABSOLUTELY, EC_WORD_WITHOUT, EC_WORD_STRONG, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Dion
+    },
+    [VERDANTURF_TENT_TRAINER_KENZIE] = {
+        .facilityClass = FACILITY_CLASS_PARASOL_LADY,
+        .trainerName = _("HORTEN"),
+        .speechBefore = {EC_WORD_A_TINY_BIT, EC_MOVE(MORNING_SUN), EC_WORD_ABSOLUTELY, EC_WORD_WITHOUT, EC_WORD_PURE_POWER, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_THAT_S, EC_MOVE2(MOONLIGHT), EC_WORD_WITHOUT, EC_WORD_QUITE, EC_WORD_PURE_POWER, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_LET_S, EC_WORD_MEAN, EC_WORD_NATURALLY, EC_MOVE(SANDSTORM), EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Kenzie
+    },
+    [VERDANTURF_TENT_TRAINER_LILLIAN] = {
+        .facilityClass = FACILITY_CLASS_SWIMMER_F,
+        .trainerName = _("LILIAN"),
+        .speechBefore = {EC_WORD_AROUND, EC_WORD_MAKE, EC_WORD_CASE, EC_WORD_LISTEN, EC_WORD_JUST, EC_WORD_OWN_TEMPO},
+        .speechWin = {EC_WORD_WON, EC_WORD_MODERN, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_A, EC_WORD_NATURALLY, EC_WORD_NAP, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Lillian
+    },
+    [VERDANTURF_TENT_TRAINER_LESLEY] = {
+        .facilityClass = FACILITY_CLASS_PICNICKER,
+        .trainerName = _("LESLIA"),
+        .speechBefore = {EC_WORD_HAVE, EC_WORD_NITWIT, EC_WORD_BE, EC_WORD_OVERWHELMING, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_I, EC_WORD_ISN_T_IT_QUES, EC_WORD_VERY, EC_WORD_OVERWHELMING, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_WHOM, EC_WORD_NITWIT, EC_WORD_BE, EC_WORD_OVERWHELMING, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Lesley
+    },
+    [VERDANTURF_TENT_TRAINER_MARQUIS] = {
+        .facilityClass = FACILITY_CLASS_SAILOR,
+        .trainerName = _("MARTI"),
+        .speechBefore = {EC_WORD_QUES_EXCL, EC_WORD_LET_S, EC_WORD_LIE, EC_WORD_THESE_WERE, EC_WORD_NORMAL, EC_WORD_QUES},
+        .speechWin = {EC_WORD_I, EC_WORD_WHERE, EC_WORD_ISN_T_IT_QUES, EC_WORD_NORMAL, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_DOWN, EC_WORD_LOLLING, EC_MOVE(UPROAR), EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Marquis
+    },
+    [VERDANTURF_TENT_TRAINER_FREDDY] = {
+        .facilityClass = FACILITY_CLASS_COLLECTOR,
+        .trainerName = _("FRED"),
+        .speechBefore = {EC_WORD_LET_S, EC_WORD_MEAN, EC_WORD_FOR_NOW, EC_WORD_IDOL, EC_WORD_LIE, EC_WORD_TELEVISION},
+        .speechWin = {EC_WORD_QUES_EXCL, EC_WORD_LAY, EC_WORD_WILL, EC_WORD_MEET, EC_WORD_A_LOT, EC_WORD_QUES},
+        .speechLose = {EC_WORD_ABSOLUTELY, EC_WORD_PLAYS, EC_WORD_MEET, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Freddy
+    },
+    [VERDANTURF_TENT_TRAINER_CECILIA] = {
+        .facilityClass = FACILITY_CLASS_LASS,
+        .trainerName = _("CECIL"),
+        .speechBefore = {EC_WORD_MEETS, EC_WORD_JUST, EC_WORD_INCREDIBLE, EC_WORD_CUTE, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_WHOM, EC_WORD_CUTE_CHARM, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_WHERE, EC_WORD_LET_S, EC_WORD_VERY, EC_WORD_CUTENESS, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gVerdanturfBattleTentTrainerMons_Cecilia
+    }
 #else //ENGLISH
     [VERDANTURF_TENT_TRAINER_BRENNA] = {
         .facilityClass = FACILITY_CLASS_AROMA_LADY,
@@ -3891,6 +4373,248 @@ const struct BattleFrontierTrainer gFallarborBattleTentTrainers[NUM_BATTLE_TENT_
         .speechBefore = {EC_WORD_SAID, EC_WORD_NITWIT, EC_WORD_FORGET, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
         .speechWin = {EC_WORD_HOW, EC_WORD_PLEASE, EC_WORD_FORGET, EC_WORD_OFF, EC_WORD_VICTORY, EC_WORD_QUES},
         .speechLose = {EC_WORD_HOW, EC_WORD_PLEASE, EC_WORD_FORGET, EC_WORD_OFF, EC_WORD_LOSS, EC_WORD_QUES},
+        .monSet = gFallarborBattleTentTrainerMons_Kianna
+    }
+#elif ITALIAN
+
+        [FALLARBOR_TENT_TRAINER_AMBER] = {
+        .facilityClass = FACILITY_CLASS_AROMA_LADY,
+        .trainerName = _("AMAPOLA"),
+        .speechBefore = {EC_WORD_WILL_BE_HERE, EC_WORD_DISLIKE, EC_WORD_LISTEN, EC_WORD_DAILY, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_ALWAYS, EC_WORD_WHOM, EC_WORD_TOTALLY, EC_WORD_CUTENESS, EC_WORD_RECOMMEND, EC_WORD_WASN_T},
+        .speechLose = {EC_WORD_DOWN, EC_WORD_FINAL, EC_WORD_PLUS, EC_MOVE2(ACID), EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Amber
+    },
+    [FALLARBOR_TENT_TRAINER_JAVIER] = {
+        .facilityClass = FACILITY_CLASS_RUIN_MANIAC,
+        .trainerName = _("JAVI"),
+        .speechBefore = {EC_WORD_FOREVER, EC_WORD_WHOM, EC_WORD_QUITE, EC_WORD_MONEY, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_WON, EC_WORD_BUT, EC_WORD_A, EC_WORD_MONEY, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_A, EC_WORD_MONEY, EC_WORD_RECOMMEND, EC_WORD_FOR_NOW, EC_MOVE2(MILK_DRINK), EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Javier
+    },
+    [FALLARBOR_TENT_TRAINER_NATALIA] = {
+        .facilityClass = FACILITY_CLASS_TUBER_F,
+        .trainerName = _("NATALIA"),
+        .speechBefore = {EC_WORD_ISN_T_IT_QUES, EC_WORD_NEGATIVE, EC_WORD_ALT_COLOR, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_LET_S, EC_WORD_FUNNY, EC_WORD_RECOMMEND, EC_WORD_THIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_ISN_T_IT_QUES, EC_WORD_FUNNY, EC_WORD_RECOMMEND, EC_WORD_THIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Natalie
+    },
+    [FALLARBOR_TENT_TRAINER_TREVE] = {
+        .facilityClass = FACILITY_CLASS_TUBER_M,
+        .trainerName = _("TREVE"),
+        .speechBefore = {EC_WORD_OR, EC_WORD_LISTEN, EC_WORD_USING, EC_MOVE2(METRONOME), EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_MOVE(HYPNOSIS), EC_WORD_DON_T, EC_WORD_VERY, EC_WORD_THING, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_MOVE(HYPNOSIS), EC_WORD_WHERE, EC_WORD_WALKS, EC_WORD_ALWAYS, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Treve
+    },
+    [FALLARBOR_TENT_TRAINER_ARIANNA] = {
+        .facilityClass = FACILITY_CLASS_LADY,
+        .trainerName = _("ARIANA"),
+        .speechBefore = {EC_WORD_SINCE, EC_WORD_POKEMON, EC_WORD_RECOMMEND, EC_WORD_TOO_LATE, EC_WORD_COLLECTION, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_AS_MUCH_AS, EC_WORD_POKEMON, EC_WORD_WHERE, EC_WORD_WAS, EC_WORD_LIE, EC_WORD_LEVEL},
+        .speechLose = {EC_WORD_PLAYS, EC_WORD_LOSE, EC_WORD_FEVER, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Arianna
+    },
+    [FALLARBOR_TENT_TRAINER_JADYN] = {
+        .facilityClass = FACILITY_CLASS_BEAUTY,
+        .trainerName = _("JADINA"),
+        .speechBefore = {EC_WORD_I, EC_WORD_ISN_T_IT_QUES, EC_WORD_LEFT, EC_WORD_VERY, EC_WORD_NEGATIVE, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_I, EC_WORD_ISN_T_IT_QUES, EC_WORD_PLUS, EC_WORD_NITWIT, EC_WORD_NEGATIVE, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_YOU, EC_WORD_LET_S, EC_WORD_SOMEONE, EC_WORD_VERY, EC_WORD_MYSTERY, EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Jadyn
+    },
+    [FALLARBOR_TENT_TRAINER_GERARDO] = {
+        .facilityClass = FACILITY_CLASS_RICH_BOY,
+        .trainerName = _("GERO"),
+        .speechBefore = {EC_WORD_EXCL_EXCL, EC_WORD_ISN_T_IT_QUES, EC_WORD_CASE, EC_WORD_FOR_NOW, EC_WORD_GENIUS, EC_WORD_EXCL},
+        .speechWin = {EC_WORD_QUES_EXCL, EC_WORD_NITWIT, EC_WORD_WHERE, EC_WORD_ISN_T_IT_QUES, EC_WORD_BEING, EC_WORD_QUES},
+        .speechLose = {EC_WORD_EXCL_EXCL, EC_WORD_LET_S, EC_WORD_LIE, EC_WORD_THESE_WERE, EC_WORD_BEING, EC_WORD_EXCL},
+        .monSet = gFallarborBattleTentTrainerMons_Gerardo
+    },
+    [FALLARBOR_TENT_TRAINER_JONN] = {
+        .facilityClass = FACILITY_CLASS_POKEMANIAC,
+        .trainerName = _("JON"),
+        .speechBefore = {EC_WORD_EXCL_EXCL, EC_WORD_LISTEN, EC_WORD_LIKELY_TO, EC_WORD_WHO, EC_WORD_WINS, EC_WORD_EXCL},
+        .speechWin = {EC_WORD_EXCL_EXCL, EC_WORD_I, EC_WORD_ISN_T_IT_QUES, EC_WORD_A_TINY_BIT, EC_WORD_SPIRALING, EC_WORD_EXCL},
+        .speechLose = {EC_WORD_EXCL_EXCL, EC_WORD_LET_S, EC_WORD_SPIRALING, EC_WORD_NITWIT, EC_WORD_I, EC_WORD_EXCL},
+        .monSet = gFallarborBattleTentTrainerMons_Jonn
+    },
+    [FALLARBOR_TENT_TRAINER_ESTEBAN] = {
+        .facilityClass = FACILITY_CLASS_SWIMMER_M,
+        .trainerName = _("TEBAN"),
+        .speechBefore = {EC_WORD_QUES_EXCL, EC_WORD_CAN_T, EC_WORD_FORGETS, EC_WORD_MISS, EC_WORD_HUSTLE, EC_WORD_QUES},
+        .speechWin = {EC_WORD_I, EC_WORD_DOES, EC_WORD_FORGETS, EC_WORD_MISS, EC_WORD_HUSTLE, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_WILL, EC_WORD_POINTS, EC_WORD_MISS, EC_WORD_QUITE, EC_WORD_HUSTLE, EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Esteban
+    },
+    [FALLARBOR_TENT_TRAINER_JAMESON] = {
+        .facilityClass = FACILITY_CLASS_CAMPER,
+        .trainerName = _("JAIMI"),
+        .speechBefore = {EC_WORD_TOO_LATE, EC_WORD_POKEMON, EC_WORD_WAS, EC_WORD_TWIRLING, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_WHOM, EC_WORD_POKEMON, EC_WORD_VERY, EC_WORD_TWIRLING, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_WHERE, EC_WORD_WAS, EC_WORD_EVERY, EC_WORD_TWIRLING, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Jameson
+    },
+    [FALLARBOR_TENT_TRAINER_ALANZO] = {
+        .facilityClass = FACILITY_CLASS_BUG_MANIAC,
+        .trainerName = _("ARAN"),
+        .speechBefore = {EC_WORD_I, EC_WORD_ATTACK, EC_WORD_MISS, EC_MOVE2(FORESIGHT), EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_MOVE2(FORESIGHT), EC_WORD_UP, EC_WORD_NITWIT, EC_WORD_WALKS, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_MOVE2(FORESIGHT), EC_WORD_WHERE, EC_WORD_WALKS, EC_WORD_ALWAYS, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Alanzo
+    },
+    [FALLARBOR_TENT_TRAINER_HOWARD] = {
+        .facilityClass = FACILITY_CLASS_GENTLEMAN,
+        .trainerName = _("ELOT"),
+        .speechBefore = {EC_WORD_AS_MUCH_AS, EC_WORD_POKEMON, EC_WORD_WHERE, EC_WORD_WAS, EC_WORD_ONLY, EC_WORD_THIRSTY},
+        .speechWin = {EC_WORD_WHERE, EC_WORD_WAS, EC_WORD_ONLY, EC_WORD_THIRSTY, EC_WORD_WHERE, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_UP, EC_WORD_WAS, EC_WORD_ONLY, EC_WORD_THIRSTY, EC_WORD_UP, EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Howard
+    },
+    [FALLARBOR_TENT_TRAINER_CONRAD] = {
+        .facilityClass = FACILITY_CLASS_GUITARIST,
+        .trainerName = _("CONRA"),
+        .speechBefore = {EC_WORD_QUES_EXCL, EC_WORD_WAS, EC_WORD_AS_MUCH_AS, EC_WORD_POKEMON, EC_WORD_THIN, EC_WORD_QUES},
+        .speechWin = {EC_WORD_AS_MUCH_AS, EC_WORD_POKEMON, EC_WORD_WHERE, EC_WORD_WAS, EC_WORD_THIN, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_TOO_LATE, EC_WORD_POKEMON, EC_WORD_WHERE, EC_WORD_WAS, EC_WORD_THIN, EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Conrad
+    },
+    [FALLARBOR_TENT_TRAINER_MAKENNA] = {
+        .facilityClass = FACILITY_CLASS_SCHOOL_KID_F,
+        .trainerName = _("MALENA"),
+        .speechBefore = {EC_WORD_QUES_EXCL, EC_WORD_LAY, EC_WORD_TEACH, EC_WORD_JUST, EC_WORD_STRATEGY, EC_WORD_QUES},
+        .speechWin = {EC_WORD_HAVE, EC_WORD_NITWIT, EC_WORD_HOBBY, EC_WORD_LISTEN, EC_WORD_DAILY, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_A, EC_WORD_HOBBY, EC_WORD_PLUS, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Makenna
+    },
+    [FALLARBOR_TENT_TRAINER_BRAYAN] = {
+        .facilityClass = FACILITY_CLASS_COOLTRAINER_M,
+        .trainerName = _("BRANAN"),
+        .speechBefore = {EC_WORD_QUES_EXCL, EC_WORD_LAY, EC_WORD_TEACH, EC_WORD_JUST, EC_WORD_POWER, EC_WORD_QUES},
+        .speechWin = {EC_WORD_WHOM, EC_WORD_A_LOT, EC_WORD_POWER, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_CAN_T_WIN, EC_WORD_WENT, EC_WORD_WEAKENED, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Brayan
+    },
+    [FALLARBOR_TENT_TRAINER_MARIANA] = {
+        .facilityClass = FACILITY_CLASS_COOLTRAINER_F,
+        .trainerName = _("MARIANA"),
+        .speechBefore = {EC_WORD_I, EC_WORD_WHERE, EC_WORD_SURRENDER, EC_WORD_SKILL, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_PLAYS, EC_WORD_PLAYED, EC_WORD_QUITE, EC_WORD_THING, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_EXCL_EXCL, EC_WORD_DOWN, EC_WORD_WANDERING, EC_WORD_EVERY, EC_WORD_HOPELESS, EC_WORD_EXCL},
+        .monSet = gFallarborBattleTentTrainerMons_Mariana
+    },
+    [FALLARBOR_TENT_TRAINER_SHELDON] = {
+        .facilityClass = FACILITY_CLASS_POKEFAN_M,
+        .trainerName = _("CHELDO"),
+        .speechBefore = {EC_WORD_FOR_NOW, EC_WORD_MASTER, EC_WORD_POKEMON, EC_WORD_WHERE, EC_WORD_PRAISE, EC_MOVE2(REST)},
+        .speechWin = {EC_WORD_JUST, EC_WORD_THIS_IS_IT_EXCL, EC_WORD_ABSOLUTELY, EC_WORD_WITHOUT, EC_MOVE(AGILITY), EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_A, EC_WORD_PLUS, EC_WORD_THIS_IS_IT_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Sheldon
+    },
+    [FALLARBOR_TENT_TRAINER_GIANNA] = {
+        .facilityClass = FACILITY_CLASS_POKEFAN_F,
+        .trainerName = _("GIANA"),
+        .speechBefore = {EC_WORD_CONCEDE, EC_WORD_NITWIT, EC_WORD_ABSOLUTELY, EC_WORD_IT, EC_WORD_ONLY, EC_WORD_POKEMON},
+        .speechWin = {EC_WORD_ABSOLUTELY, EC_WORD_IT, EC_WORD_A_LOT, EC_WORD_A_LOT, EC_WORD_A_LOT, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_QUES_EXCL, EC_WORD_LAY, EC_WORD_IT, EC_WORD_ONLY, EC_WORD_POKEMON, EC_WORD_QUES},
+        .monSet = gFallarborBattleTentTrainerMons_Gianna
+    },
+    [FALLARBOR_TENT_TRAINER_YAHIR] = {
+        .facilityClass = FACILITY_CLASS_EXPERT_M,
+        .trainerName = _("GALDO"),
+        .speechBefore = {EC_WORD_HEH, EC_WORD_HEH, EC_WORD_HEH, EC_WORD_MOVE, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_WOWEE, EC_WORD_TCH, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_FUFUFU, EC_WORD_NO, EC_WORD_HUMPH, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Yahir
+    },
+    [FALLARBOR_TENT_TRAINER_BRITNEY] = {
+        .facilityClass = FACILITY_CLASS_EXPERT_F,
+        .trainerName = _("BRITA"),
+        .speechBefore = {EC_WORD_THOSE, EC_WORD_NITWIT, EC_WORD_LET_S, EC_WORD_SHALLOW, EC_WORD_LOUSY, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_WHERE, EC_WORD_LET_S, EC_WORD_EVERY, EC_WORD_LOUSY, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_UP, EC_WORD_NITWIT, EC_WORD_LET_S, EC_WORD_SHALLOW, EC_WORD_LOUSY, EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Britney
+    },
+    [FALLARBOR_TENT_TRAINER_HECTER] = {
+        .facilityClass = FACILITY_CLASS_YOUNGSTER,
+        .trainerName = _("LUCEO"),
+        .speechBefore = {EC_WORD_JUST, EC_MOVE2(HIDDEN_POWER), EC_WORD_SHADY, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_AND, EC_WORD_I, EC_WORD_ISN_T_IT_QUES, EC_WORD_FOR_NOW, EC_WORD_IDOL, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_QUES_EXCL, EC_WORD_YOU, EC_WORD_HAVE, EC_WORD_FOR_NOW, EC_MOVE2(HIDDEN_POWER), EC_WORD_QUES},
+        .monSet = gFallarborBattleTentTrainerMons_Hecter
+    },
+    [FALLARBOR_TENT_TRAINER_TANNOR] = {
+        .facilityClass = FACILITY_CLASS_FISHERMAN,
+        .trainerName = _("TANO"),
+        .speechBefore = {EC_WORD_SEARCH, EC_WORD_FOR_NOW, EC_WORD_RIVAL, EC_WORD_LIE, EC_WORD_THESE_WERE, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_WHERE, EC_WORD_LET_S, EC_WORD_A_TINY_BIT, EC_WORD_SPIRALING, EC_WORD_RIVAL, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_I, EC_WORD_WHERE, EC_WORD_ISN_T_IT_QUES, EC_WORD_RIVAL, EC_WORD_ANTICIPATION, EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Tannor
+    },
+    [FALLARBOR_TENT_TRAINER_BENJI] = {
+        .facilityClass = FACILITY_CLASS_BIRD_KEEPER,
+        .trainerName = _("BENJI"),
+        .speechBefore = {EC_WORD_WHERE, EC_WORD_AT, EC_WORD_NITWIT, EC_WORD_LET_S, EC_WORD_VERY, EC_WORD_LOUSY},
+        .speechWin = {EC_WORD_I, EC_WORD_UP, EC_WORD_NITWIT, EC_WORD_ISN_T_IT_QUES, EC_WORD_LOUSY, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_WHERE, EC_WORD_ISN_T_IT_QUES, EC_WORD_VERY, EC_WORD_LOUSY, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Benji
+    },
+    [FALLARBOR_TENT_TRAINER_RORY] = {
+        .facilityClass = FACILITY_CLASS_NINJA_BOY,
+        .trainerName = _("RORI"),
+        .speechBefore = {EC_WORD_WHERE, EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_WORD_A_TINY_BIT, EC_MOVE(UPROAR), EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_WHERE, EC_WORD_A, EC_MOVE(UPROAR), EC_WORD_YOUR, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_NOW, EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_WORD_A_TINY_BIT, EC_MOVE(UPROAR), EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Rory
+    },
+    [FALLARBOR_TENT_TRAINER_ELEANOR] = {
+        .facilityClass = FACILITY_CLASS_PARASOL_LADY,
+        .trainerName = _("ELEANOR"),
+        .speechBefore = {EC_WORD_A, EC_WORD_NATURALLY, EC_WORD_HOLIDAY, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_NATURALLY, EC_WORD_HOLIDAY, EC_WORD_WERE, EC_WORD_BREAK, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_QUES_EXCL, EC_WORD_LAY, EC_WORD_LIKE, EC_WORD_THAT_S, EC_WORD_HOLIDAY, EC_WORD_QUES},
+        .monSet = gFallarborBattleTentTrainerMons_Eleanor
+    },
+    [FALLARBOR_TENT_TRAINER_EVELYN] = {
+        .facilityClass = FACILITY_CLASS_SWIMMER_F,
+        .trainerName = _("EVELINA"),
+        .speechBefore = {EC_WORD_JUST, EC_WORD_PC, EC_WORD_IS, EC_WORD_JUST, EC_WORD_SECRET_BASE, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_JUST, EC_WORD_PC, EC_WORD_IS, EC_WORD_COLD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_EXCL_EXCL, EC_WORD_CHOICE, EC_WORD_WHERE, EC_WORD_SINCE, EC_WORD_PC, EC_WORD_EXCL},
+        .monSet = gFallarborBattleTentTrainerMons_Evelyn
+    },
+    [FALLARBOR_TENT_TRAINER_ARIELLE] = {
+        .facilityClass = FACILITY_CLASS_PICNICKER,
+        .trainerName = _("ARIELA"),
+        .speechBefore = {EC_WORD_WHERE, EC_WORD_WHOM, EC_WORD_BEAUTY, EC_WORD_BUT, EC_WORD_ISN_T_IT_QUES, EC_WORD_HAPPILY},
+        .speechWin = {EC_WORD_QUES_EXCL, EC_WORD_NITWIT, EC_WORD_WHERE, EC_WORD_ISN_T_IT_QUES, EC_WORD_HAPPILY, EC_WORD_QUES},
+        .speechLose = {EC_MOVE2(WISH), EC_WORD_BE, EC_WORD_A_LOT, EC_WORD_SPIRALING, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Arielle
+    },
+    [FALLARBOR_TENT_TRAINER_CONNAR] = {
+        .facilityClass = FACILITY_CLASS_SAILOR,
+        .trainerName = _("CONAR"),
+        .speechBefore = {EC_WORD_WHERE, EC_WORD_ISN_T_IT_QUES, EC_WORD_QUITE, EC_WORD_APPROVED, EC_WORD_RECOMMEND, EC_WORD_THIS},
+        .speechWin = {EC_WORD_QUES_EXCL, EC_WORD_LAY, EC_WORD_CAPABLE, EC_WORD_THING, EC_WORD_HERE, EC_WORD_QUES},
+        .speechLose = {EC_WORD_GOOD_BYE, EC_WORD_YEAH, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Connar
+    },
+    [FALLARBOR_TENT_TRAINER_MAURICE] = {
+        .facilityClass = FACILITY_CLASS_COLLECTOR,
+        .trainerName = _("MAURI"),
+        .speechBefore = {EC_WORD_HERE, EC_WORD_WHERE, EC_WORD_BELONGS_TO, EC_WORD_RADIO, EC_WORD_ENOUGH, EC_WORD_TELEVISION},
+        .speechWin = {EC_WORD_BUT, EC_WORD_BELONGS_TO, EC_WORD_POKEMON, EC_WORD_HAPPENING, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .speechLose = {EC_WORD_AN, EC_WORD_MONEY, EC_WORD_IS, EC_WORD_BADLY, EC_EMPTY_WORD, EC_EMPTY_WORD},
+        .monSet = gFallarborBattleTentTrainerMons_Maurice
+    },
+    [FALLARBOR_TENT_TRAINER_KIANNA] = {
+        .facilityClass = FACILITY_CLASS_LASS,
+        .trainerName = _("QUINIA"),
+        .speechBefore = {EC_WORD_ABSOLUTELY, EC_WORD_IT, EC_WORD_A_LOT, EC_WORD_PROBABLY, EC_WORD_DEPT_STORE, EC_EMPTY_WORD},
+        .speechWin = {EC_WORD_QUES_EXCL, EC_WORD_LAY, EC_WORD_IT, EC_WORD_PROBABLY, EC_WORD_DEPT_STORE, EC_WORD_QUES},
+        .speechLose = {EC_WORD_CHOICE, EC_WORD_WHERE, EC_WORD_ABSOLUTELY, EC_WORD_IT, EC_WORD_PROBABLY, EC_WORD_DEPT_STORE},
         .monSet = gFallarborBattleTentTrainerMons_Kianna
     }
 #else //ENGLISH

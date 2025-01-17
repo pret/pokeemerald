@@ -384,6 +384,13 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                 .speechWin = {EC_WORD_IT, EC_WORD_WITH, EC_WORD_LISTENS, EC_WORD_AS_IF, EC_WORD_IS, EC_WORD_NATURAL},
                 .speechLose = {EC_WORD_IS, EC_WORD_A, EC_MOVE(NIGHTMARE), EC_WORD_QUES, EC_EMPTY_WORD, EC_EMPTY_WORD},
                 .speechAfter = {EC_WORD_WHOM, EC_WORD_TRAINS, EC_WORD_IF_I_LOSE, EC_WORD_ALTHOUGH, EC_WORD_DARK, EC_WORD_ELLIPSIS},
+            #elif SPANISH
+                .name = _("ALAINA"),
+                .facilityClass = FACILITY_CLASS_HEX_MANIAC,
+                .speechBefore = {EC_WORD_WHOM, EC_WORD_FOR_NOW, EC_WORD_POWER, EC_WORD_LEFT, EC_WORD_INCREDIBLE, EC_EMPTY_WORD},
+                .speechWin = {EC_WORD_OK_QUES, EC_WORD_NITWIT, EC_WORD_ISN_T_IT_QUES, EC_WORD_A_LITTLE, EC_WORD_INCREDIBLE, EC_EMPTY_WORD},
+                .speechLose = {EC_WORD_THIS, EC_WORD_IS, EC_WORD_NATURALLY, EC_WORD_DESTROYED, EC_MOVE(NIGHTMARE), EC_EMPTY_WORD},
+                .speechAfter = {EC_WORD_WHERE, EC_WORD_SINCE, EC_WORD_FIGHTS, EC_WORD_PLUS, EC_WORD_WHERE, EC_EMPTY_WORD},
             #else //ENGLISH
                 .name = _("ALAINA"),
                 .facilityClass = FACILITY_CLASS_HEX_MANIAC,
@@ -411,7 +418,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 24,
                         .abilityNum = 0,
                         .personality = 0x0,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("MISDREAVUS"),
                     #elif FRENCH
                         .nickname = _("FEUFOREVE"),
@@ -436,7 +443,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 24,
                         .abilityNum = 0,
                         .personality = 0xF,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("SOLROCK"),
                     #elif FRENCH
                         .nickname = _("SOLAROC"),
@@ -460,7 +467,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 24,
                         .abilityNum = 0,
                         .personality = 0xC,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("CLAYDOL"),
                     #elif FRENCH
                         .nickname = _("KAORINE"),
@@ -484,7 +491,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 24,
                         .abilityNum = 0,
                         .personality = 0x80,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("WEEZING"),
                     #elif FRENCH
                         .nickname = _("SMOGOGO"),
@@ -509,7 +516,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 24,
                         .abilityNum = 0,
                         .personality = 0xF,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("LUNATONE"),
                     #elif FRENCH
                         .nickname = _("SELEROC"),
@@ -533,7 +540,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 24,
                         .abilityNum = 0,
                         .personality = 0x83,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("FLYGON"),
                     #elif FRENCH
                         .nickname = _("LIBEGON"),
@@ -558,6 +565,13 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                 .speechWin = {EC_WORD_WEREN_T, EC_WORD_BETTER, EC_WORD_BIKE, EC_WORD_IS, EC_WORD_SUPER, EC_WORD_EXCL},
                 .speechLose = {EC_WORD_WEREN_T, EC_WORD_BETTER, EC_WORD_BIKE, EC_WORD_QUES_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD},
                 .speechAfter = {EC_WORD_WEREN_T, EC_WORD_BIKE, EC_WORD_IS, EC_WORD_ABOVE, EC_WORD_NOT_VERY, EC_WORD_TRAIN},
+            #elif SPANISH
+                .name = _("ALFONSI"),
+                .facilityClass = FACILITY_CLASS_CYCLING_TRIATHLETE_M,
+                .speechBefore = {EC_WORD_WHERE, EC_WORD_ABSOLUTELY, EC_WORD_IT, EC_WORD_ONLY, EC_WORD_LOCOMOTIVE, EC_EMPTY_WORD},
+                .speechWin = {EC_WORD_TODAY, EC_WORD_ABSOLUTELY, EC_WORD_TIMES, EC_MOVE2(SUPERSONIC), EC_WORD_OH_YEAH, EC_EMPTY_WORD},
+                .speechLose = {EC_WORD_TIMES, EC_WORD_NITWIT, EC_WORD_ABSOLUTELY, EC_WORD_WHICH, EC_WORD_A_LITTLE, EC_EMPTY_WORD},
+                .speechAfter = {EC_WORD_EXCL_EXCL, EC_WORD_NITWIT, EC_WORD_WHERE, EC_WORD_SINCE, EC_WORD_LOCOMOTIVE, EC_WORD_EXCL},
             #else //ENGLISH
                 .name = _("ALFONSO"),
                 .facilityClass = FACILITY_CLASS_CYCLING_TRIATHLETE_M,
@@ -584,7 +598,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 0,
                         .personality = 0xF,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("SEALEO"),
                     #elif FRENCH
                         .nickname = _("PHOGLEUR"),
@@ -607,7 +621,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 0,
                         .personality = 0xF,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("AMPHAROS"),
                     #elif FRENCH
                         .nickname = _("PHARAMP"),
@@ -630,7 +644,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 0,
                         .personality = 0x4E,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("MACHOKE"),
                     #elif FRENCH
                         .nickname = _("MACHOPEUR"),
@@ -653,7 +667,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 0,
                         .personality = 0x28,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("FLAREON"),
                     #elif FRENCH
                         .nickname = _("PYROLI"),
@@ -696,7 +710,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 0,
                         .personality = 0x85,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("PINSIR"),
                     #elif FRENCH
                         .nickname = _("SCARABRUTE"),
@@ -736,6 +750,13 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                 .speechWin = {EC_WORD_HAHAHA, EC_WORD_ELLIPSIS_ELLIPSIS_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
                 .speechLose = {EC_WORD_IS_IT_QUES, EC_WORD_TEACHES, EC_WORD_REFRESHING, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
                 .speechAfter = {EC_WORD_WILL, EC_WORD_SMACK, EC_WORD_TAKE_THAT, EC_WORD_WEREN_T, EC_WORD_BETTER, EC_MOVE(STRENGTH)},
+            #elif SPANISH
+                .name = _("TEODORO"),
+                .facilityClass = FACILITY_CLASS_BLACK_BELT,
+                .speechBefore = {EC_WORD_LAY, EC_WORD_OR, EC_WORD_LISTEN, EC_WORD_PUSHOVER, EC_WORD_MISS, EC_WORD_PURE_POWER},
+                .speechWin = {EC_WORD_WOWEE, EC_WORD_WOWEE, EC_WORD_WOWEE, EC_WORD_WOWEE, EC_WORD_UH_HUH, EC_WORD_UH_HUH},
+                .speechLose = {EC_WORD_OK_QUES, EC_WORD_NITWIT, EC_WORD_A_TINY_BIT, EC_MOVE(ENDEAVOR), EC_WORD_WENT, EC_WORD_EXCITING},
+                .speechAfter = {EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_WORD_AWFULLY, EC_MOVE(FACADE), EC_WORD_UP, EC_EMPTY_WORD},
             #else //ENGLISH
                 .name = _("THEODORE"),
                 .facilityClass = FACILITY_CLASS_BLACK_BELT,
@@ -763,7 +784,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 20,
                         .abilityNum = 0,
                         .personality = 0x80,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("MEDITITE"),
                     #elif FRENCH
                         .nickname = _("MEDITIKKA"),
@@ -787,7 +808,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 20,
                         .abilityNum = 1,
                         .personality = 0x80,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("HERACROSS"),
                     #elif FRENCH
                         .nickname = _("SCARHINO"),
@@ -811,7 +832,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 20,
                         .abilityNum = 0,
                         .personality = 0x3,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("HITMONTOP"),
                     #elif FRENCH
                         .nickname = _("KAPOERA"),
@@ -835,7 +856,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 20,
                         .abilityNum = 0,
                         .personality = 0x4E,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("MACHOP"),
                     #elif FRENCH
                         .nickname = _("MACHOC"),
@@ -859,7 +880,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 20,
                         .abilityNum = 0,
                         .personality = 0x80,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("PINSIR"),
                     #elif FRENCH
                         .nickname = _("SCARABRUTE"),
@@ -883,7 +904,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 20,
                         .abilityNum = 0,
                         .personality = 0x3,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("HITMONCHAN"),
                     #elif FRENCH
                         .nickname = _("TYGNON"),
@@ -908,6 +929,13 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                 .speechWin = {EC_WORD_HOW, EC_WORD_IS, EC_WORD_BEAUTIFUL, EC_WORD_IF_I_WIN, EC_WORD_ME, EC_WORD_EXCL},
                 .speechLose = {EC_WORD_AS_IF, EC_WORD_IS, EC_WORD_BEAUTIFUL, EC_WORD_IF_I_LOSE, EC_WORD_ME, EC_WORD_EXCL},
                 .speechAfter = {EC_WORD_NATURALLY, EC_WORD_WHOM, EC_WORD_OK_QUES, EC_WORD_COME, EC_WORD_A, EC_WORD_BOY},
+            #elif SPANISH
+                .name = _("JAIDA"),
+                .facilityClass = FACILITY_CLASS_PKMN_BREEDER_F,
+                .speechBefore = {EC_WORD_BELONGS_TO, EC_WORD_THINGS, EC_WORD_NITWIT, EC_WORD_BELONGS_TO, EC_WORD_NITWIT, EC_WORD_HOBBY},
+                .speechWin = {EC_WORD_BELONGS_TO, EC_WORD_NITWIT, EC_WORD_HOBBY, EC_WORD_MISS, EC_WORD_TOTALLY, EC_WORD_WHO_IS},
+                .speechLose = {EC_WORD_QUES_EXCL, EC_WORD_DIDN_T, EC_WORD_HOBBY, EC_WORD_A_LITTLE, EC_WORD_NEAR, EC_WORD_QUES},
+                .speechAfter = {EC_WORD_OK_QUES, EC_WORD_NITWIT, EC_WORD_A, EC_WORD_LISTEN, EC_WORD_FOR_NOW, EC_WORD_WHO_IS},
             #else //ENGLISH
                 .name = _("JAYDEN"),
                 .facilityClass = FACILITY_CLASS_PKMN_BREEDER_F,
@@ -935,7 +963,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 0,
                         .personality = 0xF,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("VULPIX"),
                     #elif FRENCH
                         .nickname = _("GOUPIX"),
@@ -959,7 +987,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 0,
                         .personality = 0x8C,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("MINUN"),
                     #elif FRENCH
                         .nickname = _("NEGAPI"),
@@ -1003,7 +1031,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 0,
                         .personality = 0x82,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("MR. MIME"),
                     #elif FRENCH
                         .nickname = _("M. MIME"),
@@ -1027,7 +1055,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 0,
                         .personality = 0x5,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("PLUSLE"),
                     #elif FRENCH
                         .nickname = _("POSIPI"),
@@ -1087,6 +1115,13 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                 .speechWin = {EC_WORD_ABOVE, EC_WORD_IF, EC_WORD_REFUSE, EC_WORD_MEAN, EC_WORD_HOME, EC_WORD_ELLIPSIS},
                 .speechLose = {EC_WORD_AS_IF, EC_WORD_WILL, EC_WORD_SAYS, EC_WORD_THOSE_ARE, EC_WORD_MEAN, EC_WORD_IF_I_WIN},
                 .speechAfter = {EC_WORD_AS_IF, EC_WORD_OVER, EC_WORD_WILL, EC_WORD_MUST_BE, EC_WORD_WHERE, EC_WORD_QUES},
+            #elif SPANISH
+                .name = _("SALVA"),
+                .facilityClass = FACILITY_CLASS_PKMN_BREEDER_M,
+                .speechBefore = {EC_WORD_BELONGS_TO, EC_WORD_NITWIT, EC_WORD_USING, EC_MOVE2(WRAP), EC_WORD_OH_QUES, EC_EMPTY_WORD},
+                .speechWin = {EC_WORD_QUES_EXCL, EC_WORD_DIDN_T, EC_WORD_USING, EC_WORD_JUST, EC_MOVE2(WRAP), EC_WORD_QUES},
+                .speechLose = {EC_WORD_HERE, EC_WORD_BELONGS_TO, EC_WORD_SOMEONE, EC_WORD_SHOULD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                .speechAfter = {EC_WORD_QUES_EXCL, EC_WORD_IF, EC_WORD_OK_QUES, EC_WORD_THE, EC_WORD_REALLY, EC_WORD_QUES},
             #else //ENGLISH
                 .name = _("SALVADORE"),
                 .facilityClass = FACILITY_CLASS_PKMN_BREEDER_M,
@@ -1114,7 +1149,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 0,
                         .personality = 0x37,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("VAPOREON"),
                     #elif FRENCH
                         .nickname = _("AQUALI"),
@@ -1158,7 +1193,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 0,
                         .personality = 0x14,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("OMASTAR"),
                     #elif FRENCH
                         .nickname = _("AMONISTAR"),
@@ -1182,7 +1217,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 0,
                         .personality = 0x8,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("LICKITUNG"),
                     #elif FRENCH
                         .nickname = _("EXCELANGUE"),
@@ -1206,7 +1241,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 1,
                         .personality = 0x94,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("SLOWBRO"),
                     #elif FRENCH
                         .nickname = _("FLAGADOSS"),
@@ -1230,7 +1265,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 0,
                         .personality = 0x8,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("LINOONE"),
                     #elif FRENCH
                         .nickname = _("LINEON"),
@@ -1255,6 +1290,13 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                 .speechWin = {EC_WORD_ARE, EC_WORD_PERFECT, EC_WORD_WEREN_T, EC_WORD_PLUS, EC_WORD_SILKY, EC_WORD_EXCL},
                 .speechLose = {EC_WORD_TODAY, EC_WORD_AS_IF, EC_WORD_ARE, EC_WORD_VERY, EC_WORD_ALONE, EC_WORD_ELLIPSIS},
                 .speechAfter = {EC_WORD_NOW, EC_WORD_ARE, EC_WORD_INSIDE, EC_WORD_LISTEN, EC_WORD_DON_T, EC_WORD_EXCL},
+            #elif SPANISH
+                .name = _("VERO"),
+                .facilityClass = FACILITY_CLASS_PKMN_BREEDER_F,
+                .speechBefore = {EC_WORD_ISN_T_IT_QUES, EC_WORD_THAT_S, EC_MOVE(FACADE), EC_WORD_LIE, EC_WORD_THAT_S, EC_WORD_BEAUTY},
+                .speechWin = {EC_WORD_ISN_T_IT_QUES, EC_WORD_APPROVED, EC_WORD_AND, EC_WORD_WHOM, EC_WORD_BEAUTY, EC_EMPTY_WORD},
+                .speechLose = {EC_WORD_WHOM, EC_WORD_BEAUTY, EC_WORD_BUT, EC_WORD_WILL_BE_HERE, EC_WORD_IMPORTANT, EC_EMPTY_WORD},
+                .speechAfter = {EC_WORD_EXCL_EXCL, EC_WORD_WILL_BE_HERE, EC_WORD_VERY, EC_WORD_ANGER, EC_WORD_UP, EC_WORD_EXCL},
             #else //ENGLISH
                 .name = _("VERONICA"),
                 .facilityClass = FACILITY_CLASS_PKMN_BREEDER_F,
@@ -1301,7 +1343,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 0,
                         .personality = 0xD,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("MEDICHAM"),
                     #elif FRENCH
                         .nickname = _("CHARMINA"),
@@ -1325,7 +1367,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 0,
                         .personality = 0x3,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("STANTLER"),
                     #elif FRENCH
                         .nickname = _("CERFROUSSE"),
@@ -1369,7 +1411,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 0,
                         .personality = 0xD7,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("NINETALES"),
                     #elif FRENCH
                         .nickname = _("FEUNARD"),
@@ -1393,7 +1435,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 0,
                         .personality = 0x28,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("CHARIZARD"),
                     #elif FRENCH
                         .nickname = _("DRACAUFEU"),
@@ -1433,6 +1475,13 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                 .speechWin = {EC_WORD_ONLY, EC_WORD_IT, EC_WORD_BEGINNING, EC_WORD_LISTEN, EC_WORD_IF_I_LOSE, EC_WORD_EXCL},
                 .speechLose = {EC_WORD_ONLY, EC_WORD_IT, EC_WORD_BEGINNING, EC_WORD_LISTEN, EC_WORD_IF_I_WIN, EC_WORD_EXCL},
                 .speechAfter = {EC_WORD_WILL, EC_WORD_BEGINNING, EC_WORD_NITWIT, EC_WORD_TO, EC_WORD_WORD, EC_WORD_QUES},
+            #elif SPANISH
+                .name = _("GRUNO"),
+                .facilityClass = FACILITY_CLASS_PSYCHIC_M,
+                .speechBefore = {EC_WORD_THAN, EC_WORD_HAVE, EC_WORD_NITWIT, EC_WORD_FIGHTS, EC_WORD_GWAH, EC_EMPTY_WORD},
+                .speechWin = {EC_WORD_WENT, EC_WORD_FOR_NOW, EC_WORD_OBLIVIOUS, EC_WORD_INSTEAD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                .speechLose = {EC_WORD_WENT, EC_WORD_FOR_NOW, EC_WORD_OBLIVIOUS, EC_WORD_ANY, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                .speechAfter = {EC_WORD_WHERE, EC_WORD_SINCE, EC_WORD_CONVERSATION, EC_WORD_NOW, EC_EMPTY_WORD, EC_EMPTY_WORD},
             #else //ENGLISH
                 .name = _("KEENAN"),
                 .facilityClass = FACILITY_CLASS_PSYCHIC_M,
@@ -1479,7 +1528,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 5,
                         .abilityNum = 1,
                         .personality = 0xF,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("BLISSEY"),
                     #elif FRENCH
                         .nickname = _("LEUPHORIE"),
@@ -1503,7 +1552,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 5,
                         .abilityNum = 0,
                         .personality = 0x8C,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("GRUMPIG"),
                     #elif FRENCH
                         .nickname = _("GRORET"),
@@ -1545,7 +1594,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 5,
                         .abilityNum = 0,
                         .personality = 0x80,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("VENOMOTH"),
                     #elif FRENCH
                         .nickname = _("AEROMITE"),
@@ -1568,7 +1617,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 5,
                         .abilityNum = 0,
                         .personality = 0xF,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("ESPEON"),
                     #elif FRENCH
                         .nickname = _("MENTALI"),
@@ -1593,6 +1642,13 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                 .speechWin = {EC_WORD_IT, EC_WORD_STENCH, EC_WORD_THAT_S, EC_WORD_WHOM, EC_WORD_LIKES, EC_WORD_ELLIPSIS},
                 .speechLose = {EC_WORD_LOWS, EC_WORD_IT, EC_WORD_STENCH, EC_WORD_AS_IF, EC_WORD_IS, EC_WORD_THOSE_WERE},
                 .speechAfter = {EC_WORD_IT, EC_WORD_STENCH, EC_WORD_IS, EC_WORD_ABOVE, EC_WORD_NOT_VERY, EC_MOVE(SWEET_SCENT)},
+            #elif SPANISH
+                .name = _("CRISTILA"),
+                .facilityClass = FACILITY_CLASS_AROMA_LADY,
+                .speechBefore = {EC_WORD_A_TINY_BIT, EC_WORD_APPROVED, EC_WORD_STENCH, EC_WORD_WITHOUT, EC_WORD_A_LOT, EC_MOVE(OVERHEAT)},
+                .speechWin = {EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_WORD_THAT_S, EC_WORD_OFFENSIVE, EC_WORD_MISS, EC_WORD_STENCH},
+                .speechLose = {EC_WORD_AIM, EC_WORD_A_TINY_BIT, EC_WORD_STENCH, EC_WORD_NITWIT, EC_WORD_TIMES, EC_WORD_HERE},
+                .speechAfter = {EC_WORD_STENCH, EC_WORD_WHERE, EC_WORD_IS, EC_WORD_MEAN, EC_MOVE(SWEET_SCENT), EC_EMPTY_WORD},
             #else //ENGLISH
                 .name = _("KRISTINA"),
                 .facilityClass = FACILITY_CLASS_AROMA_LADY,
@@ -1619,7 +1675,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 0,
                         .personality = 0x3,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("WEEZING"),
                     #elif FRENCH
                         .nickname = _("SMOGOGO"),
@@ -1642,7 +1698,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 0,
                         .personality = 0x8C,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("GLOOM"),
                     #elif FRENCH
                         .nickname = _("ORTIDE"),
@@ -1665,7 +1721,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 0,
                         .personality = 0x3,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("MUK"),
                     #elif FRENCH
                         .nickname = _("GROTADMORV"),
@@ -1708,7 +1764,7 @@ static const struct TrainerHillFloor sFloors_Normal[] =
                         .spDefenseIV = 15,
                         .abilityNum = 0,
                         .personality = 0x6,
-                    #if ENGLISH || ITALIAN
+                    #if ENGLISH || ITALIAN || SPANISH
                         .nickname = _("BELLOSSOM"),
                     #elif FRENCH
                         .nickname = _("JOLIFLOR"),
@@ -1779,6 +1835,13 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                             .speechWin = {EC_WORD_WEREN_T, EC_WORD_BETTER, EC_WORD_VICTORY, EC_WORD_IS, EC_WORD_IT, EC_MOVE2(PRESENT)},
                             .speechLose = {EC_WORD_IS, EC_WORD_PERFECT, EC_WORD_ON, EC_WORD_IT, EC_WORD_WITH, EC_MOVE2(PRESENT)},
                             .speechAfter = {EC_WORD_WHICH, EC_WORD_GIVE, EC_WORD_ALL, EC_WORD_TOO, EC_WORD_CONGRATS, EC_WORD_EXCL},
+                        #elif SPANISH
+                            .name = _("TIRENO"),
+                            .facilityClass = FACILITY_CLASS_GENTLEMAN,
+                            .speechBefore = {EC_WORD_FOR_NOW, EC_MOVE2(PRESENT), EC_WORD_ALWAYS, EC_WORD_LIKE, EC_WORD_OH_QUES, EC_EMPTY_WORD},
+                            .speechWin = {EC_WORD_JUST, EC_WORD_VICTORY, EC_WORD_IS, EC_WORD_A_TINY_BIT, EC_WORD_SPIRALING, EC_MOVE2(PRESENT)},
+                            .speechLose = {EC_WORD_LOSS, EC_WORD_IS, EC_WORD_JUST, EC_MOVE2(PRESENT), EC_WORD_RECOMMEND, EC_WORD_REALLY},
+                            .speechAfter = {EC_WORD_ANTICIPATION, EC_WORD_JOKING, EC_WORD_JUST, EC_WORD_CONGRATS, EC_WORD_LIE, EC_WORD_THESE_WERE},
                         #else //ENGLISH
                             .name = _("TERRANCE"),
                             .facilityClass = FACILITY_CLASS_GENTLEMAN,
@@ -1805,7 +1868,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 1,
                                             .personality = 0x8A,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("DELIBIRD"),
                                         #elif FRENCH
                                             .nickname = _("CADOIZO"),
@@ -1828,7 +1891,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0xD,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("CLEFAIRY"),
                                         #elif FRENCH
                                             .nickname = _("MELOFEE"),
@@ -1889,7 +1952,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0xD,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("JIGGLYPUFF"),
                                         #elif FRENCH
                                             .nickname = _("RONDOUDOU"),
@@ -1933,6 +1996,13 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                             .speechWin = {EC_WORD_MISS, EC_WORD_SHINE, EC_WORD_HEH, EC_WORD_QUES, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechLose = {EC_WORD_AS_IF, EC_WORD_ALWAYS, EC_WORD_STORES, EC_WORD_HERE, EC_WORD_THOSE_ARE, EC_WORD_ELLIPSIS},
                             .speechAfter = {EC_WORD_NOW, EC_WORD_ARE, EC_WORD_PERFECT, EC_WORD_SAD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                        #elif SPANISH
+                            .name = _("ELISIA"),
+                            .facilityClass = FACILITY_CLASS_LADY,
+                            .speechBefore = {EC_WORD_QUES_EXCL, EC_WORD_DIGITAL, EC_WORD_JUST, EC_WORD_LOLLING, EC_MOVE(FOCUS_ENERGY), EC_WORD_QUES},
+                            .speechWin = {EC_WORD_OK_QUES, EC_WORD_NITWIT, EC_WORD_ISN_T_IT_QUES, EC_WORD_HAPPILY, EC_WORD_THE, EC_WORD_BATTLE},
+                            .speechLose = {EC_WORD_JUST, EC_MOVE(FOCUS_ENERGY), EC_WORD_WENT, EC_WORD_VERY, EC_WORD_FUNNY, EC_EMPTY_WORD},
+                            .speechAfter = {EC_WORD_EXCL_EXCL, EC_WORD_DOWN, EC_WORD_DISAPPOINTS, EC_WORD_NITWIT, EC_WORD_WILL_BE_HERE, EC_WORD_EXCL},
                         #else //ENGLISH
                             .name = _("ELIZABETH"),
                             .facilityClass = FACILITY_CLASS_LADY,
@@ -1959,7 +2029,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 5,
                                             .abilityNum = 0,
                                             .personality = 0xC1,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("WIGGLYTUFF"),
                                         #elif FRENCH
                                             .nickname = _("GRODOUDOU"),
@@ -1982,7 +2052,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 5,
                                             .abilityNum = 0,
                                             .personality = 0x87,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("SABLEYE"),
                                         #elif FRENCH
                                             .nickname = _("TENEFIX"),
@@ -2005,7 +2075,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 5,
                                             .abilityNum = 0,
                                             .personality = 0xA,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("GRUMPIG"),
                                         #elif FRENCH
                                             .nickname = _("GRORET"),
@@ -2028,7 +2098,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 5,
                                             .abilityNum = 0,
                                             .personality = 0x12,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("CORSOLA"),
                                         #elif FRENCH
                                             .nickname = _("CORAYON"),
@@ -2051,7 +2121,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 5,
                                             .abilityNum = 0,
                                             .personality = 0xA,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("CLAMPERL"),
                                         #elif FRENCH
                                             .nickname = _("COQUIPERL"),
@@ -2074,7 +2144,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 5,
                                             .abilityNum = 0,
                                             .personality = 0xA,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("STARMIE"),
                                         #elif FRENCH
                                             .nickname = _("STAROSS"),
@@ -2114,6 +2184,13 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                             .speechWin = {EC_WORD_AS_IF, EC_WORD_WILL_BE_HERE, EC_WORD_ALONE, EC_WORD_TODAY, EC_WORD_HEH, EC_WORD_QUES},
                             .speechLose = {EC_WORD_WILL_BE_HERE, EC_WORD_PERFECT, EC_WORD_ALONE, EC_WORD_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_ALL, EC_WORD_DID, EC_WORD_POKEMON, EC_WORD_ARE, EC_WORD_LOWS, EC_WORD_ALONE},
+                        #elif SPANISH
+                            .name = _("BELANA"),
+                            .facilityClass = FACILITY_CLASS_PARASOL_LADY,
+                            .speechBefore = {EC_WORD_QUES_EXCL, EC_WORD_HAVE, EC_WORD_STRONG, EC_WORD_RECOMMEND, EC_WORD_WIN, EC_WORD_QUES},
+                            .speechWin = {EC_WORD_UPBEAT, EC_WORD_NITWIT, EC_WORD_HAVE, EC_WORD_HAH, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                            .speechLose = {EC_WORD_UPBEAT, EC_WORD_NITWIT, EC_WORD_WHOM, EC_WORD_SIGH, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                            .speechAfter = {EC_WORD_THAT_S, EC_WORD_WHY, EC_WORD_LIE, EC_WORD_AS_MUCH_AS, EC_WORD_POKEMON, EC_WORD_LIKE},
                         #else //ENGLISH
                             .name = _("ANNABELL"),
                             .facilityClass = FACILITY_CLASS_PARASOL_LADY,
@@ -2144,7 +2221,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 5,
                                             .abilityNum = 0,
                                             .personality = 0x0,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("JIGGLYPUFF"),
                                         #elif FRENCH
                                             .nickname = _("RONDOUDOU"),
@@ -2171,7 +2248,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 5,
                                             .abilityNum = 0,
                                             .personality = 0x0,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("JYNX"),
                                         #elif FRENCH
                                             .nickname = _("LIPPOUTOU"),
@@ -2198,7 +2275,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 5,
                                             .abilityNum = 0,
                                             .personality = 0x96,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("EXPLOUD"),
                                         #elif FRENCH
                                             .nickname = _("BROUHABAM"),
@@ -2248,7 +2325,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 5,
                                             .abilityNum = 0,
                                             .personality = 0x96,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("PIDGEOTTO"),
                                         #elif FRENCH
                                             .nickname = _("ROUCOUPS"),
@@ -2296,6 +2373,13 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                             .speechWin = {EC_WORD_IS_IT_QUES, EC_WORD_WON, EC_WORD_NITWIT, EC_WORD_IT, EC_WORD_WITH, EC_WORD_IDOL},
                             .speechLose = {EC_WORD_IF_I_LOSE, EC_WORD_LAY, EC_WORD_DO, EC_WORD_AS_IF, EC_WORD_SORRY, EC_WORD_ELLIPSIS},
                             .speechAfter = {EC_WORD_WILL_BE_HERE, EC_WORD_LET_S, EC_WORD_IT, EC_WORD_WITH, EC_WORD_IDOL, EC_WORD_QUES},
+                        #elif SPANISH
+                            .name = _("CELTO"),
+                            .facilityClass = FACILITY_CLASS_COLLECTOR,
+                            .speechBefore = {EC_WORD_A, EC_WORD_LISTEN, EC_WORD_TOTALLY, EC_WORD_IDOL, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                            .speechWin = {EC_WORD_QUES_EXCL, EC_WORD_OR, EC_WORD_LISTEN, EC_WORD_AN, EC_WORD_IDOL, EC_WORD_QUES},
+                            .speechLose = {EC_WORD_LET_S, EC_WORD_MEAN, EC_WORD_NATURALLY, EC_MOVE(HEAL_BELL), EC_EMPTY_WORD, EC_EMPTY_WORD},
+                            .speechAfter = {EC_WORD_LAY, EC_WORD_SINCE, EC_WORD_LISTEN, EC_WORD_REALLY, EC_WORD_MEAN, EC_WORD_IDOL},
                         #else //ENGLISH
                             .name = _("COLEMAN"),
                             .facilityClass = FACILITY_CLASS_COLLECTOR,
@@ -2323,7 +2407,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 5,
                                             .abilityNum = 0,
                                             .personality = 0xD,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("CHIMECHO"),
                                         #elif FRENCH
                                             .nickname = _("EOKO"),
@@ -2347,7 +2431,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 5,
                                             .abilityNum = 0,
                                             .personality = 0xD,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("WHISMUR"),
                                         #elif FRENCH
                                             .nickname = _("CHUCHMUR"),
@@ -2391,7 +2475,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 5,
                                             .abilityNum = 0,
                                             .personality = 0xA,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("ILLUMISE"),
                                         #elif FRENCH
                                             .nickname = _("LUMIVOLE"),
@@ -2415,7 +2499,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 5,
                                             .abilityNum = 0,
                                             .personality = 0xA,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("SPHEAL"),
                                         #elif FRENCH
                                             .nickname = _("OBALIE"),
@@ -2475,6 +2559,13 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                             .speechWin = {EC_WORD_UNBELIEVABLE, EC_WORD_WILL, EC_WORD_LOST, EC_WORD_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechLose = {EC_WORD_AS_IF, EC_WORD_WHOM, EC_WORD_WILL, EC_WORD_SAYS, EC_WORD_IF_I_WIN, EC_WORD_ELLIPSIS},
                             .speechAfter = {EC_WORD_AGREE, EC_WORD_IS_IT_QUES, EC_WORD_COOLNESS, EC_WORD_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                        #elif SPANISH
+                            .name = _("RIQUE"),
+                            .facilityClass = FACILITY_CLASS_RICH_BOY,
+                            .speechBefore = {EC_WORD_SINCE, EC_WORD_FOR_NOW, EC_WORD_BATTLE, EC_WORD_INCREDIBLE, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                            .speechWin = {EC_WORD_JUST, EC_WORD_STRATEGY, EC_WORD_UP, EC_WORD_NITWIT, EC_WORD_WENT, EC_WORD_INCREDIBLE},
+                            .speechLose = {EC_WORD_AWW, EC_WORD_WHERE, EC_WORD_OR, EC_WORD_LISTEN, EC_WORD_WIN, EC_WORD_FOREVER},
+                            .speechAfter = {EC_WORD_QUES_EXCL, EC_WORD_NITWIT, EC_WORD_WHOM, EC_WORD_HAPPILY, EC_WORD_STRATEGY, EC_WORD_QUES},
                         #else //ENGLISH
                             .name = _("ENRIQUE"),
                             .facilityClass = FACILITY_CLASS_RICH_BOY,
@@ -2502,7 +2593,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x8C,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("WOOPER"),
                                         #elif FRENCH
                                             .nickname = _("AXOLOTO"),
@@ -2526,7 +2617,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 1,
                                             .personality = 0x3,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("POLIWAG"),
                                         #elif FRENCH
                                             .nickname = _("PTITARD"),
@@ -2550,7 +2641,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x3,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("PSYDUCK"),
                                         #elif FRENCH
                                             .nickname = _("PSYKOKWAK"),
@@ -2574,7 +2665,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x96,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("RHYDON"),
                                         #elif FRENCH
                                             .nickname = _("RHINOFEROS"),
@@ -2598,7 +2689,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x3,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("RHYHORN"),
                                         #elif FRENCH
                                             .nickname = _("RHINOCORNE"),
@@ -2622,7 +2713,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 1,
                                             .personality = 0x80,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("CUBONE"),
                                         #elif FRENCH
                                             .nickname = _("OSSELAIT"),
@@ -2647,6 +2738,13 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                             .speechWin = {EC_WORD_IT, EC_WORD_ANIME, EC_WORD_WHOM, EC_WORD_PLAYED, EC_WORD_IF_I_WIN, EC_WORD_EXCL},
                             .speechLose = {EC_WORD_IS, EC_WORD_WEREN_T, EC_WORD_END, EC_WORD_NOT_VERY, EC_WORD_WITH, EC_WORD_DREAM},
                             .speechAfter = {EC_WORD_AS_IF, EC_WORD_IS_IT_QUES, EC_WORD_LOST, EC_WORD_IT, EC_WORD_ANIME, EC_WORD_EXCL},
+                        #elif SPANISH
+                            .name = _("FENELA"),
+                            .facilityClass = FACILITY_CLASS_LADY,
+                            .speechBefore = {EC_WORD_A_TINY_BIT, EC_WORD_TYPE, EC_WORD_ROCK, EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_WORD_QUITE},
+                            .speechWin = {EC_WORD_A_TINY_BIT, EC_WORD_TYPE, EC_WORD_ROCK, EC_WORD_IS, EC_WORD_FOR_NOW, EC_MOVE2(HELPING_HAND)},
+                            .speechLose = {EC_WORD_A, EC_WORD_FOR_NOW, EC_MOVE2(HELPING_HAND), EC_WORD_RECOMMEND, EC_WORD_TOO_LATE, EC_WORD_POKEMON},
+                            .speechAfter = {EC_WORD_A_TINY_BIT, EC_WORD_TYPE, EC_WORD_ROCK, EC_WORD_ABSOLUTELY, EC_WORD_PRAISE, EC_WORD_LONESOME},
                         #else //ENGLISH
                             .name = _("COLLEEN"),
                             .facilityClass = FACILITY_CLASS_LADY,
@@ -2674,7 +2772,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x8C,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("MAGNEMITE"),
                                         #elif FRENCH
                                             .nickname = _("MAGNETI"),
@@ -2698,7 +2796,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x41,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("ELECTABUZZ"),
                                         #elif FRENCH
                                             .nickname = _("ELEKTEK"),
@@ -2721,7 +2819,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x0,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("FLAAFFY"),
                                         #elif FRENCH
                                             .nickname = _("LAINERGIE"),
@@ -2745,7 +2843,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x3,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("BALTOY"),
                                         #elif FRENCH
                                             .nickname = _("BALBUTO"),
@@ -2769,7 +2867,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x3,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("PINECO"),
                                         #elif FRENCH
                                             .nickname = _("POMDEPIK"),
@@ -2793,7 +2891,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x80,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("VOLTORB"),
                                         #elif FRENCH
                                             .nickname = _("VOLTORBE"),
@@ -2833,6 +2931,13 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                             .speechWin = {EC_WORD_AS_IF, EC_WORD_ARE, EC_WORD_JUST, EC_WORD_THOSE_WERE, EC_WORD_NO, EC_WORD_QUES},
                             .speechLose = {EC_WORD_WILL_BE_HERE, EC_WORD_LOWS, EC_WORD_WANDERING, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_IT, EC_WORD_WITH, EC_WORD_WORK, EC_WORD_SOMETIME, EC_WORD_IS, EC_WORD_ENTERTAINING},
+                        #elif SPANISH
+                            .name = _("FINTIA"),
+                            .facilityClass = FACILITY_CLASS_POKEFAN_F,
+                            .speechBefore = {EC_WORD_I, EC_WORD_MAKE, EC_WORD_CASE, EC_WORD_LISTEN, EC_WORD_JUST, EC_WORD_OWN_TEMPO},
+                            .speechWin = {EC_WORD_QUES_EXCL, EC_WORD_NITWIT, EC_WORD_WHERE, EC_WORD_ISN_T_IT_QUES, EC_WORD_HARD, EC_WORD_QUES},
+                            .speechLose = {EC_WORD_OK_QUES, EC_WORD_NITWIT, EC_WORD_LET_S, EC_WORD_VERY, EC_WORD_FIGHTING, EC_EMPTY_WORD},
+                            .speechAfter = {EC_WORD_JUST, EC_WORD_OWN_TEMPO, EC_WORD_IS, EC_WORD_JUST, EC_WORD_SPIRALING, EC_MOVE2(BARRIER)},
                         #else //ENGLISH
                             .name = _("KIMBERLY"),
                             .facilityClass = FACILITY_CLASS_POKEFAN_F,
@@ -2859,7 +2964,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x202,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("UNOWN"),
                                         #elif FRENCH
                                             .nickname = _("ZARBI"),
@@ -2882,7 +2987,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x10001,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("UNOWN"),
                                         #elif FRENCH
                                             .nickname = _("ZARBI"),
@@ -2905,7 +3010,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 30,
                                             .abilityNum = 0,
                                             .personality = 0x102,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("UNOWN"),
                                         #elif FRENCH
                                             .nickname = _("ZARBI"),
@@ -2948,7 +3053,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0xF,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("PLUSLE"),
                                         #elif FRENCH
                                             .nickname = _("POSIPI"),
@@ -2971,7 +3076,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 1,
                                             .personality = 0xF,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("VOLBEAT"),
                                         #elif FRENCH
                                             .nickname = _("MUCIOLE"),
@@ -2996,6 +3101,13 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                             .speechWin = {EC_WORD_NITWIT, EC_WORD_ON, EC_WORD_WIN, EC_WORD_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechLose = {EC_WORD_THE, EC_WORD_AS_IF, EC_WORD_WHICH, EC_WORD_PLEASE, EC_WORD_TAKE_THAT, EC_WORD_EXCL},
                             .speechAfter = {EC_WORD_YES, EC_WORD_ELLIPSIS, EC_WORD_THANKS, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                        #elif SPANISH
+                            .name = _("FRANCISCO"),
+                            .facilityClass = FACILITY_CLASS_POKEFAN_M,
+                            .speechBefore = {EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_WORD_HOBBY, EC_WORD_AND, EC_WORD_FIGHTS, EC_WORD_RIGHT},
+                            .speechWin = {EC_WORD_QUES_EXCL, EC_WORD_LET_S, EC_WORD_PERSON, EC_WORD_LIE, EC_WORD_LOSS, EC_WORD_QUES},
+                            .speechLose = {EC_WORD_I, EC_WORD_WHERE, EC_WORD_FAINTED, EC_WORD_WHERE, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                            .speechAfter = {EC_WORD_FUFUFU, EC_WORD_HUMPH, EC_WORD_FUFUFU, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
                         #else //ENGLISH
                             .name = _("FRANCISCO"),
                             .facilityClass = FACILITY_CLASS_POKEFAN_M,
@@ -3042,7 +3154,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x8C,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("MINUN"),
                                         #elif FRENCH
                                             .nickname = _("NEGAPI"),
@@ -3065,7 +3177,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0xF,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("ILLUMISE"),
                                         #elif FRENCH
                                             .nickname = _("LUMIVOLE"),
@@ -3088,7 +3200,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x302,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("UNOWN"),
                                         #elif FRENCH
                                             .nickname = _("ZARBI"),
@@ -3111,7 +3223,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = 30,
                                             .abilityNum = 0,
                                             .personality = 0x203,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("UNOWN"),
                                         #elif FRENCH
                                             .nickname = _("ZARBI"),
@@ -3134,7 +3246,7 @@ static const struct TrainerHillFloor sFloors_Variety[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x301,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("UNOWN"),
                                         #elif FRENCH
                                             .nickname = _("ZARBI"),
@@ -3185,6 +3297,13 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                             .speechWin = {EC_WORD_YES, EC_WORD_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechLose = {EC_WORD_NO, EC_WORD_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_SAD, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                        #elif SPANISH
+                            .name = _("MELENIA"),
+                            .facilityClass = FACILITY_CLASS_PKMN_RANGER_F,
+                            .speechBefore = {EC_WORD_HMM, EC_WORD_HMM, EC_WORD_HMM, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                            .speechWin = {EC_WORD_OH, EC_WORD_WAY, EC_WORD_WAY, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                            .speechLose = {EC_WORD_AWW, EC_WORD_AWW, EC_WORD_AWW, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                            .speechAfter = {EC_WORD_CRIES, EC_WORD_WILL_BE_HERE, EC_WORD_PLUS, EC_WORD_NITWIT, EC_WORD_SAD, EC_EMPTY_WORD},
                         #else //ENGLISH
                             .name = _("MEREDITH"),
                             .facilityClass = FACILITY_CLASS_PKMN_RANGER_F,
@@ -3212,7 +3331,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x0,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("SUNFLORA"),
                                         #elif FRENCH
                                             .nickname = _("HELIATRONC"),
@@ -3235,7 +3354,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x91,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("TANGELA"),
                                         #elif FRENCH
                                             .nickname = _("SAQUEDENEU"),
@@ -3261,7 +3380,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x1F,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("VENUSAUR"),
                                         #elif FRENCH
                                             .nickname = _("FLORIZARRE"),
@@ -3303,7 +3422,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 1,
                                             .personality = 0xF,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("MANECTRIC"),
                                         #elif FRENCH
                                             .nickname = _("ELECSPRINT"),
@@ -3347,6 +3466,13 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                             .speechWin = {EC_WORD_AS_IF, EC_WORD_IS_IT_QUES, EC_WORD_LOST, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechLose = {EC_WORD_MISS, EC_WORD_PERSON, EC_WORD_WANDERING, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_OVERDO, EC_WORD_MEETS, EC_WORD_IT, EC_WORD_DISAPPOINTED, EC_WORD_LISTEN, EC_WORD_STEEL},
+                        #elif SPANISH
+                            .name = _("BERNAR"),
+                            .facilityClass = FACILITY_CLASS_KINDLER,
+                            .speechBefore = {EC_WORD_WHERE, EC_WORD_CAN, EC_WORD_LOSS, EC_WORD_FOR_NOW, EC_WORD_NONE, EC_WORD_BATTLE},
+                            .speechWin = {EC_WORD_WENT, EC_WORD_NATURALLY, EC_WORD_VICTORY, EC_WORD_PREPOSTEROUS, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                            .speechLose = {EC_WORD_LET_S, EC_WORD_NATURALLY, EC_WORD_PERSON, EC_WORD_SCATTER, EC_WORD_AND, EC_WORD_FIGHTING},
+                            .speechAfter = {EC_WORD_LET_S, EC_WORD_FIERY, EC_MOVE(SHEER_COLD), EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
                         #else //ENGLISH
                             .name = _("BERNARD"),
                             .facilityClass = FACILITY_CLASS_KINDLER,
@@ -3393,7 +3519,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0xF,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("GOLDUCK"),
                                         #elif FRENCH
                                             .nickname = _("AKWAKWAK"),
@@ -3416,7 +3542,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x28,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("BLASTOISE"),
                                         #elif FRENCH
                                             .nickname = _("TORTANK"),
@@ -3439,7 +3565,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 1,
                                             .personality = 0x93,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("MAGCARGO"),
                                         #elif FRENCH
                                             .nickname = _("VOLCAROPOD"),
@@ -3462,7 +3588,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 1,
                                             .personality = 0xF,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("RAPIDASH"),
                                         #elif FRENCH
                                             .nickname = _("GALOPA"),
@@ -3485,7 +3611,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0xF,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("MOLTRES"),
                                         #elif FRENCH
                                             .nickname = _("SULFURA"),
@@ -3525,6 +3651,13 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                             .speechWin = {EC_WORD_IS_IT_QUES, EC_WORD_LOWS, EC_WORD_A, EC_WORD_THIN, EC_WORD_POKEMON, EC_WORD_EXCL},
                             .speechLose = {EC_WORD_IS_IT_QUES, EC_WORD_SAYS, EC_MOVE2(CONFUSION), EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_IS_IT_QUES, EC_WORD_TO, EC_WORD_MOVE, EC_WORD_VERY, EC_WORD_ENTERTAINING, EC_WORD_ELLIPSIS},
+                        #elif SPANISH
+                            .name = _("ARANO"),
+                            .facilityClass = FACILITY_CLASS_RUIN_MANIAC,
+                            .speechBefore = {EC_WORD_DOES, EC_WORD_NITWIT, EC_WORD_ISN_T_IT_QUES, EC_WORD_GOOD, EC_WORD_AROUND, EC_WORD_DOES},
+                            .speechWin = {EC_WORD_ISN_T_IT_QUES, EC_WORD_GOOD, EC_WORD_ALT_COLOR, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                            .speechLose = {EC_WORD_WHOM, EC_WORD_A_LITTLE, EC_WORD_LIE, EC_MOVE2(CONFUSION), EC_WORD_NOW, EC_EMPTY_WORD},
+                            .speechAfter = {EC_WORD_LET_S, EC_WORD_BECOMES, EC_WORD_LIE, EC_WORD_CAUSE, EC_MOVE2(CONFUSION), EC_EMPTY_WORD},
                         #else //ENGLISH
                             .name = _("ABRAHAM"),
                             .facilityClass = FACILITY_CLASS_RUIN_MANIAC,
@@ -3552,7 +3685,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x8A,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("SMEARGLE"),
                                         #elif FRENCH
                                             .nickname = _("QUEULORIOR"),
@@ -3576,7 +3709,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x87,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("SMEARGLE"),
                                         #elif FRENCH
                                             .nickname = _("QUEULORIOR"),
@@ -3600,7 +3733,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0xD,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("SMEARGLE"),
                                         #elif FRENCH
                                             .nickname = _("QUEULORIOR"),
@@ -3624,7 +3757,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0xA,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("SMEARGLE"),
                                         #elif FRENCH
                                             .nickname = _("QUEULORIOR"),
@@ -3648,7 +3781,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0xA,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("SMEARGLE"),
                                         #elif FRENCH
                                             .nickname = _("QUEULORIOR"),
@@ -3672,7 +3805,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x8A,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("SMEARGLE"),
                                         #elif FRENCH
                                             .nickname = _("QUEULORIOR"),
@@ -3697,6 +3830,13 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                             .speechWin = {EC_WORD_NO, EC_WORD_ELLIPSIS, EC_WORD_AS_IF, EC_WORD_IS, EC_WORD_ENTERTAINING, EC_WORD_ELLIPSIS},
                             .speechLose = {EC_WORD_WEREN_T, EC_WORD_BETTER, EC_WORD_MOVE, EC_WORD_IS, EC_WORD_WEAK, EC_WORD_WEAK},
                             .speechAfter = {EC_WORD_ARE, EC_WORD_SMART, EC_WORD_BUT, EC_WORD_AS_IF, EC_WORD_STRONG, EC_WORD_ELLIPSIS},
+                        #elif SPANISH
+                            .name = _("LUCA"),
+                            .facilityClass = FACILITY_CLASS_TUBER_M,
+                            .speechBefore = {EC_WORD_IF, EC_WORD_ATTACK, EC_WORD_WHOM, EC_WORD_A_LOT, EC_WORD_COOL, EC_EMPTY_WORD},
+                            .speechWin = {EC_WORD_WHOM, EC_WORD_COOL, EC_WORD_AND, EC_WORD_QUITE, EC_WORD_THIS_IS_IT_EXCL, EC_EMPTY_WORD},
+                            .speechLose = {EC_WORD_QUES_EXCL, EC_WORD_NITWIT, EC_WORD_WHERE, EC_WORD_WHOM, EC_WORD_COOL, EC_WORD_QUES},
+                            .speechAfter = {EC_WORD_WHOM, EC_WORD_COOL, EC_WORD_BUT, EC_WORD_ISN_T_IT_QUES, EC_WORD_VERY, EC_WORD_FUNNY},
                         #else //ENGLISH
                             .name = _("LUC"),
                             .facilityClass = FACILITY_CLASS_TUBER_M,
@@ -3724,7 +3864,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 5,
                                             .abilityNum = 1,
                                             .personality = 0xA,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("STARYU"),
                                         #elif FRENCH
                                             .nickname = _("STARI"),
@@ -3748,7 +3888,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 5,
                                             .abilityNum = 0,
                                             .personality = 0xD,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("MEOWTH"),
                                         #elif FRENCH
                                             .nickname = _("MIAOUSS"),
@@ -3772,7 +3912,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 5,
                                             .abilityNum = 0,
                                             .personality = 0x28,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("BLAZIKEN"),
                                         #elif FRENCH
                                             .nickname = _("BRASEGALI"),
@@ -3796,7 +3936,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 5,
                                             .abilityNum = 1,
                                             .personality = 0x16,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("CUBONE"),
                                         #elif FRENCH
                                             .nickname = _("OSSELAIT"),
@@ -3819,7 +3959,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 5,
                                             .abilityNum = 0,
                                             .personality = 0x8A,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("BEEDRILL"),
                                         #elif FRENCH
                                             .nickname = _("DARDARGNAN"),
@@ -3843,7 +3983,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 5,
                                             .abilityNum = 1,
                                             .personality = 0xD,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("RATICATE"),
                                         #elif FRENCH
                                             .nickname = _("RATTATAC"),
@@ -3883,6 +4023,13 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                             .speechWin = {EC_WORD_SORRY, EC_WORD_NITWIT, EC_WORD_ALL, EC_WORD_DID, EC_WORD_POKEMON, EC_WORD_ELLIPSIS},
                             .speechLose = {EC_WORD_AS_IF, EC_WORD_ALWAYS, EC_WORD_LEGEND, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_IS_IT_QUES, EC_WORD_GOTCHA, EC_WORD_A, EC_WORD_EGG, EC_WORD_LISTEN, EC_WORD_POKEMON},
+                        #elif SPANISH
+                            .name = _("BREIDEN"),
+                            .facilityClass = FACILITY_CLASS_YOUNGSTER,
+                            .speechBefore = {EC_WORD_THINKS, EC_WORD_A_LOT, EC_WORD_THE, EC_WORD_AS_MUCH_AS, EC_WORD_POKEMON, EC_EMPTY_WORD},
+                            .speechWin = {EC_WORD_THINKS, EC_WORD_THE, EC_WORD_AS_MUCH_AS, EC_WORD_POKEMON, EC_WORD_RECOMMEND, EC_WORD_WIN},
+                            .speechLose = {EC_WORD_THINKS, EC_WORD_NITWIT, EC_WORD_WHERE, EC_WORD_ALWAYS, EC_WORD_SERIOUSLY, EC_WORD_WINS},
+                            .speechAfter = {EC_WORD_THINKS, EC_WORD_NITWIT, EC_WORD_BELONGS_TO, EC_WORD_NITWIT, EC_WORD_HOBBY, EC_WORD_PLUS},
                         #else //ENGLISH
                             .name = _("BREYDEN"),
                             .facilityClass = FACILITY_CLASS_YOUNGSTER,
@@ -3910,7 +4057,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 25,
                                             .abilityNum = 0,
                                             .personality = 0x32,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("CHARMELEON"),
                                         #elif FRENCH
                                             .nickname = _("REPTINCEL"),
@@ -3933,7 +4080,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 25,
                                             .abilityNum = 0,
                                             .personality = 0x0,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("WARTORTLE"),
                                         #elif FRENCH
                                             .nickname = _("CARABAFFE"),
@@ -3957,7 +4104,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 25,
                                             .abilityNum = 0,
                                             .personality = 0x0,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("IVYSAUR"),
                                         #elif FRENCH
                                             .nickname = _("HERBIZARRE"),
@@ -3981,7 +4128,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 25,
                                             .abilityNum = 0,
                                             .personality = 0x32,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("BAYLEEF"),
                                         #elif FRENCH
                                             .nickname = _("MACRONIUM"),
@@ -4005,7 +4152,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 25,
                                             .abilityNum = 0,
                                             .personality = 0x3,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("CROCONAW"),
                                         #elif FRENCH
                                             .nickname = _("CROCRODIL"),
@@ -4029,7 +4176,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x28,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("QUILAVA"),
                                         #elif FRENCH
                                             .nickname = _("FEURISSON"),
@@ -4054,6 +4201,13 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                             .speechWin = {EC_WORD_IS_IT_QUES, EC_WORD_AWFULLY, EC_WORD_WON, EC_WORD_OLDEN, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechLose = {EC_WORD_HIT, EC_WORD_QUES_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_WILL, EC_WORD_VERY, EC_WORD_WORK, EC_WORD_QUES, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                        #elif SPANISH
+                            .name = _("ANIYA"),
+                            .facilityClass = FACILITY_CLASS_TUBER_F,
+                            .speechBefore = {EC_WORD_QUES_EXCL, EC_WORD_HAVE, EC_WORD_FOR_NOW, EC_WORD_EGG, EC_WORD_POKEMON, EC_WORD_QUES},
+                            .speechWin = {EC_WORD_I, EC_WORD_CHOICE, EC_WORD_WHOM, EC_WORD_THIS_IS_IT_EXCL, EC_WORD_THE, EC_WORD_THIS},
+                            .speechLose = {EC_WORD_A, EC_WORD_QUITE, EC_WORD_PLUS, EC_WORD_THIS_IS_IT_EXCL, EC_WORD_AND, EC_WORD_THOSE_ARE},
+                            .speechAfter = {EC_WORD_WHERE, EC_WORD_BELONGS_TO, EC_WORD_NITWIT, EC_WORD_LOSS, EC_WORD_ALWAYS, EC_EMPTY_WORD},
                         #else //ENGLISH
                             .name = _("ANIYA"),
                             .facilityClass = FACILITY_CLASS_TUBER_F,
@@ -4081,7 +4235,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x32,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("SMOOCHUM"),
                                         #elif FRENCH
                                             .nickname = _("LIPPOUTI"),
@@ -4145,7 +4299,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x0,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("CLEFFA"),
                                         #elif FRENCH
                                             .nickname = _("MELO"),
@@ -4169,7 +4323,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x84,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("WYNAUT"),
                                         #elif FRENCH
                                             .nickname = _("OKEOKE"),
@@ -4229,6 +4383,13 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                             .speechWin = {EC_WORD_MISS, EC_WORD_BEAUTIFUL, EC_WORD_TRAVEL, EC_WORD_AND, EC_WORD_HEARING, EC_WORD_ELLIPSIS},
                             .speechLose = {EC_WORD_ALL, EC_WORD_TOO, EC_WORD_POKEMON, EC_WORD_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_DREAM, EC_WORD_ABOUT, EC_WORD_VACATION, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                        #elif SPANISH
+                            .name = _("DANE"),
+                            .facilityClass = FACILITY_CLASS_BIRD_KEEPER,
+                            .speechBefore = {EC_WORD_A, EC_WORD_VACATION, EC_WORD_RECOMMEND, EC_WORD_TOO_LATE, EC_WORD_POKEMON, EC_EMPTY_WORD},
+                            .speechWin = {EC_WORD_ABSOLUTELY, EC_WORD_LIKE, EC_WORD_A_LOT, EC_WORD_TRAVEL, EC_WORD_AND, EC_WORD_FIGHTS},
+                            .speechLose = {EC_WORD_EXCL_EXCL, EC_WORD_TOO_LATE, EC_WORD_POKEMON, EC_WORD_WHERE, EC_WORD_IT, EC_WORD_EXCL},
+                            .speechAfter = {EC_WORD_PROBABLY, EC_WORD_VACATION, EC_WORD_IT, EC_WORD_LISTEN, EC_WORD_TO_THEM, EC_EMPTY_WORD},
                         #else //ENGLISH
                             .name = _("DANE"),
                             .facilityClass = FACILITY_CLASS_BIRD_KEEPER,
@@ -4256,7 +4417,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x80,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("SUDOWOODO"),
                                         #elif FRENCH
                                             .nickname = _("SIMULARBRE"),
@@ -4279,7 +4440,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 1,
                                             .personality = 0x8C,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("SLOWKING"),
                                         #elif FRENCH
                                             .nickname = _("ROIGADA"),
@@ -4321,7 +4482,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x3,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("HITMONCHAN"),
                                         #elif FRENCH
                                             .nickname = _("TYGNON"),
@@ -4344,7 +4505,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 1,
                                             .personality = 0x6,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("MANTINE"),
                                         #elif FRENCH
                                             .nickname = _("DEMANTA"),
@@ -4367,7 +4528,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x18,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("ZAPDOS"),
                                         #elif FRENCH
                                             .nickname = _("ELECTHOR"),
@@ -4392,6 +4553,13 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                             .speechWin = {EC_WORD_NOW, EC_WORD_WORKS, EC_WORD_HOW, EC_WORD_WIN, EC_WORD_ISN_T_IT_QUES, EC_WORD_ELLIPSIS},
                             .speechLose = {EC_WORD_NOW, EC_WORD_WORKS, EC_WORD_HOW, EC_WORD_SPIRIT, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_WILL, EC_WORD_WON, EC_WORD_WILL_BE_HERE, EC_WORD_HAPPY, EC_WORD_NOW, EC_WORD_QUES},
+                        #elif SPANISH
+                            .name = _("FANI"),
+                            .facilityClass = FACILITY_CLASS_SWIMMING_TRIATHLETE_F,
+                            .speechBefore = {EC_WORD_DOES, EC_WORD_WIN, EC_WORD_LIE, EC_WORD_NATURALLY, EC_WORD_WHY, EC_EMPTY_WORD},
+                            .speechWin = {EC_WORD_RECOMMEND, EC_WORD_WIN, EC_WORD_ABSOLUTELY, EC_MOVE(ENDEAVOR), EC_WORD_MEAN, EC_WORD_YOURS},
+                            .speechLose = {EC_WORD_A, EC_WORD_PLUS, EC_MOVE(ENDEAVOR), EC_WORD_AND, EC_WORD_HAPPILY, EC_WORD_STRATEGY},
+                            .speechAfter = {EC_WORD_RECOMMEND, EC_WORD_PUSHOVER, EC_WORD_WHERE, EC_WORD_BELONGS_TO, EC_WORD_NITWIT, EC_WORD_SMACK},
                         #else //ENGLISH
                             .name = _("STEPHANIE"),
                             .facilityClass = FACILITY_CLASS_SWIMMING_TRIATHLETE_F,
@@ -4418,7 +4586,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x3,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("HITMONLEE"),
                                         #elif FRENCH
                                             .nickname = _("KICKLEE"),
@@ -4479,7 +4647,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 1,
                                             .personality = 0xF,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("HOUNDOOM"),
                                         #elif FRENCH
                                             .nickname = _("DEMOLOSSE"),
@@ -4502,7 +4670,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0x3,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("STANTLER"),
                                         #elif FRENCH
                                             .nickname = _("CERFROUSSE"),
@@ -4525,7 +4693,7 @@ static const struct TrainerHillFloor sFloors_Unique[] = {
                                             .spDefenseIV = 15,
                                             .abilityNum = 0,
                                             .personality = 0xF,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("ARTICUNO"),
                                         #elif FRENCH
                                             .nickname = _("ARTIKODIN"),
@@ -4576,6 +4744,13 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                             .speechWin = {EC_WORD_OR, EC_WORD_PERFECT, EC_WORD_OKAY, EC_WORD_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechLose = {EC_WORD_WEREN_T, EC_WORD_AT, EC_WORD_STRATEGY, EC_WORD_AS_IF, EC_WORD_IS, EC_WORD_OKAY},
                             .speechAfter = {EC_WORD_WHOM, EC_WORD_OK_QUES, EC_WORD_COME, EC_WORD_PLUS, EC_WORD_WORK, EC_WORD_ELLIPSIS},
+                        #elif SPANISH
+                            .name = _("ALFI"),
+                            .facilityClass = FACILITY_CLASS_COOLTRAINER_M,
+                            .speechBefore = {EC_WORD_FIGHT, EC_WORD_MISS, EC_WORD_CASE, EC_WORD_TYPE, EC_WORD_LIE, EC_WORD_POKEMON},
+                            .speechWin = {EC_WORD_ALWAYS, EC_WORD_DOES, EC_WORD_FIGHTS, EC_WORD_I, EC_WORD_WHERE, EC_WORD_STORY},
+                            .speechLose = {EC_WORD_LOSS, EC_WORD_IS, EC_WORD_TICKLISH, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                            .speechAfter = {EC_WORD_AROUND, EC_WORD_TIMES, EC_WORD_A_LOT, EC_WORD_REAR, EC_WORD_POKEMON, EC_EMPTY_WORD},
                         #else //ENGLISH
                             .name = _("ALFRED"),
                             .facilityClass = FACILITY_CLASS_COOLTRAINER_M,
@@ -4603,7 +4778,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x35,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("SNORLAX"),
                                         #elif FRENCH
                                             .nickname = _("RONFLEX"),
@@ -4627,7 +4802,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x3,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("MILTANK"),
                                         #elif FRENCH
                                             .nickname = _("ECREMEUH"),
@@ -4671,7 +4846,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x80,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("SLAKING"),
                                         #elif FRENCH
                                             .nickname = _("MONAFLEMIT"),
@@ -4695,7 +4870,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x3,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("KANGASKHAN"),
                                         #elif FRENCH
                                             .nickname = _("KANGOUREX"),
@@ -4719,7 +4894,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x80,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("ZANGOOSE"),
                                         #elif FRENCH
                                             .nickname = _("MANGRIFF"),
@@ -4744,6 +4919,13 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                             .speechWin = {EC_WORD_WEREN_T, EC_WORD_BETTER, EC_WORD_STRATEGY, EC_WORD_IS, EC_WORD_FROM, EC_WORD_FEAR},
                             .speechLose = {EC_WORD_NO, EC_WORD_ELLIPSIS, EC_WORD_AS_IF, EC_WORD_LEARN, EC_WORD_IF_I_WIN, EC_WORD_ELLIPSIS},
                             .speechAfter = {EC_WORD_TRAINS, EC_WORD_TO, EC_WORD_SCHOOL, EC_WORD_FROM, EC_WORD_TRAINER, EC_WORD_ELLIPSIS},
+                        #elif SPANISH
+                            .name = _("EDI"),
+                            .facilityClass = FACILITY_CLASS_PSYCHIC_F,
+                            .speechBefore = {EC_WORD_A_TINY_BIT, EC_WORD_CHALLENGE, EC_WORD_WHERE, EC_WORD_MOOD, EC_WORD_WITHOUT, EC_WORD_HAS},
+                            .speechWin = {EC_WORD_JUST, EC_WORD_STRATEGY, EC_WORD_WENT, EC_WORD_CHALLENGE, EC_WORD_RECOMMEND, EC_WORD_REALLY},
+                            .speechLose = {EC_WORD_OH, EC_WORD_WHOAH, EC_WORD_HUMPH, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                            .speechAfter = {EC_WORD_SINCE, EC_WORD_HEARING, EC_WORD_LISTEN, EC_WORD_SOMEONE, EC_WORD_MISS, EC_WORD_THIS_IS_IT_EXCL},
                         #else //ENGLISH
                             .name = _("EDIE"),
                             .facilityClass = FACILITY_CLASS_PSYCHIC_F,
@@ -4771,7 +4953,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 1,
                                             .personality = 0xF,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("SLOWKING"),
                                         #elif FRENCH
                                             .nickname = _("ROIGADA"),
@@ -4795,7 +4977,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x28,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("ESPEON"),
                                         #elif FRENCH
                                             .nickname = _("MENTALI"),
@@ -4819,7 +5001,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 1,
                                             .personality = 0xF,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("STARMIE"),
                                         #elif FRENCH
                                             .nickname = _("STAROSS"),
@@ -4843,7 +5025,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0xF,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("GENGAR"),
                                         #elif FRENCH
                                             .nickname = _("ECTOPLASMA"),
@@ -4923,6 +5105,13 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                             .speechWin = {EC_WORD_NITWIT, EC_WORD_DON_T, EC_WORD_WEREN_T, EC_WORD_VICTORY, EC_WORD_IS, EC_WORD_NATURAL},
                             .speechLose = {EC_WORD_AS_IF, EC_WORD_WHOM, EC_WORD_LIKES, EC_WORD_IF_I_LOSE, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_HOW, EC_WORD_IS, EC_WORD_IT, EC_WORD_EVER, EC_WORD_TEACHER, EC_WORD_QUES},
+                        #elif SPANISH
+                            .name = _("RODI"),
+                            .facilityClass = FACILITY_CLASS_COOLTRAINER_M,
+                            .speechBefore = {EC_WORD_WHERE, EC_WORD_DOES, EC_WORD_WIN, EC_WORD_MISS, EC_MOVE2(HELPING_HAND), EC_EMPTY_WORD},
+                            .speechWin = {EC_WORD_I, EC_WORD_DOES, EC_WORD_WIN, EC_WORD_LIE, EC_WORD_WHY, EC_WORD_AWAY},
+                            .speechLose = {EC_MOVE2(HELPING_HAND), EC_WORD_IS, EC_WORD_GOOD, EC_WORD_WILD, EC_WORD_MATCH_UP, EC_EMPTY_WORD},
+                            .speechAfter = {EC_WORD_HEART, EC_WORD_LIE, EC_WORD_BATTLE, EC_WORD_BANG, EC_EMPTY_WORD, EC_EMPTY_WORD},
                         #else //ENGLISH
                             .name = _("RODERICK"),
                             .facilityClass = FACILITY_CLASS_COOLTRAINER_M,
@@ -4950,7 +5139,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x3,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("SWELLOW"),
                                         #elif FRENCH
                                             .nickname = _("HELEDELLE"),
@@ -4974,7 +5163,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x3,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("MACHAMP"),
                                         #elif FRENCH
                                             .nickname = _("MACKOGNEUR"),
@@ -5018,7 +5207,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x80,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("KINGLER"),
                                         #elif FRENCH
                                             .nickname = _("KRABBOSS"),
@@ -5042,7 +5231,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x80,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("TYRANITAR"),
                                         #elif FRENCH
                                             .nickname = _("TYRANOCIF"),
@@ -5066,7 +5255,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x80,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("DRAGONITE"),
                                         #elif FRENCH
                                             .nickname = _("DRACOLOSSE"),
@@ -5091,6 +5280,13 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                             .speechWin = {EC_WORD_SIMPLE, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechLose = {EC_WORD_INCREDIBLE, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_PLEASE, EC_WORD_CONCEDE, EC_WORD_WEREN_T, EC_WORD_SINCE, EC_WORD_TEACHER, EC_WORD_POKEMON},
+                        #elif SPANISH
+                            .name = _("CARLA"),
+                            .facilityClass = FACILITY_CLASS_COOLTRAINER_F,
+                            .speechBefore = {EC_WORD_I, EC_WORD_RECOMMEND, EC_WORD_WIN, EC_WORD_WHERE, EC_WORD_SINCE, EC_MOVE2(HELPING_HAND)},
+                            .speechWin = {EC_WORD_YOU, EC_WORD_UP, EC_WORD_HAVE, EC_WORD_NITWIT, EC_WORD_USING, EC_MOVE2(HELPING_HAND)},
+                            .speechLose = {EC_WORD_WENT, EC_WORD_FOR_NOW, EC_WORD_BATTLE, EC_WORD_LEFT, EC_WORD_HOPELESS, EC_EMPTY_WORD},
+                            .speechAfter = {EC_WORD_WHOM, EC_WORD_PLUS, EC_WORD_THIS_IS_IT_EXCL, EC_WORD_NITWIT, EC_WORD_AS_MUCH_AS, EC_WORD_POKEMON},
                         #else //ENGLISH
                             .name = _("ALICIA"),
                             .facilityClass = FACILITY_CLASS_COOLTRAINER_F,
@@ -5118,7 +5314,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0xA,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("JOLTEON"),
                                         #elif FRENCH
                                             .nickname = _("VOLTALI"),
@@ -5162,7 +5358,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 1,
                                             .personality = 0xA,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("STARMIE"),
                                         #elif FRENCH
                                             .nickname = _("STAROSS"),
@@ -5186,7 +5382,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x82,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("DUSCLOPS"),
                                         #elif FRENCH
                                             .nickname = _("TERACLOPE"),
@@ -5210,7 +5406,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0xD2,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("NINETALES"),
                                         #elif FRENCH
                                             .nickname = _("FEUNARD"),
@@ -5234,7 +5430,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x85,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("BANETTE"),
                                         #elif FRENCH
                                             .nickname = _("BRANETTE"),
@@ -5274,6 +5470,13 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                             .speechWin = {EC_WORD_ARE, EC_WORD_PERFECT, EC_WORD_BORED, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechLose = {EC_WORD_SORRY, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_SINCE, EC_WORD_GRANDMOTHER, EC_WORD_IS, EC_WORD_VERY, EC_WORD_STRONG, EC_WORD_QUES},
+                        #elif SPANISH
+                            .name = _("TEREN"),
+                            .facilityClass = FACILITY_CLASS_EXPERT_M,
+                            .speechBefore = {EC_WORD_SORRY, EC_WORD_EEK, EC_WORD_GWAH, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                            .speechWin = {EC_WORD_SORRY, EC_WORD_APOLOGIZE, EC_WORD_GOOD_BYE, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                            .speechLose = {EC_WORD_SORRY, EC_WORD_PARDON, EC_WORD_FUFUFU, EC_WORD_WAAAH, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                            .speechAfter = {EC_WORD_QUES_EXCL, EC_WORD_IS, EC_WORD_APPROVED, EC_WORD_AWFULLY, EC_WORD_GRANDMOTHER, EC_WORD_QUES},
                         #else //ENGLISH
                             .name = _("TERRENCE"),
                             .facilityClass = FACILITY_CLASS_EXPERT_M,
@@ -5301,7 +5504,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x94,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("WOBBUFFET"),
                                         #elif FRENCH
                                             .nickname = _("QULBUTOKE"),
@@ -5325,7 +5528,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x85,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("EXPLOUD"),
                                         #elif FRENCH
                                             .nickname = _("BROUHABAM"),
@@ -5349,7 +5552,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x0,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("CROBAT"),
                                         #elif FRENCH
                                             .nickname = _("NOSTENFER"),
@@ -5373,7 +5576,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 1,
                                             .personality = 0xD,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("DUGTRIO"),
                                         #elif FRENCH
                                             .nickname = _("TRIOPIKEUR"),
@@ -5417,7 +5620,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x14,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("GENGAR"),
                                         #elif FRENCH
                                             .nickname = _("ECTOPLASMA"),
@@ -5442,6 +5645,13 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                             .speechWin = {EC_WORD_LATER, EC_WORD_PLAYS, EC_WORD_TO, EC_WORD_SILKY, EC_WORD_PARTY, EC_WORD_QUES},
                             .speechLose = {EC_WORD_SORRY, EC_WORD_JUST, EC_WORD_NITWIT, EC_WORD_WEREN_T, EC_WORD_DISAPPOINT, EC_WORD_EXCL},
                             .speechAfter = {EC_WORD_EVER, EC_WORD_GRANDFATHER, EC_WORD_IS, EC_WORD_VERY, EC_WORD_STRONG, EC_WORD_QUES},
+                        #elif SPANISH
+                            .name = _("CARLOTA"),
+                            .facilityClass = FACILITY_CLASS_EXPERT_F,
+                            .speechBefore = {EC_WORD_SORRY, EC_WORD_FOE, EC_WORD_GWAH, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                            .speechWin = {EC_WORD_SORRY, EC_WORD_MUFUFU, EC_WORD_GOOD_BYE, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                            .speechLose = {EC_WORD_SORRY, EC_WORD_WAAAH, EC_WORD_FUFUFU, EC_WORD_WAAAH, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                            .speechAfter = {EC_WORD_QUES_EXCL, EC_WORD_PRAISE, EC_WORD_COOL, EC_WORD_AWFULLY, EC_WORD_GRANDFATHER, EC_WORD_QUES},
                         #else //ENGLISH
                             .name = _("CARLOTTA"),
                             .facilityClass = FACILITY_CLASS_EXPERT_F,
@@ -5469,7 +5679,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x82,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("LAPRAS"),
                                         #elif FRENCH
                                             .nickname = _("LOKHLASS"),
@@ -5533,7 +5743,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x14,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("DEWGONG"),
                                         #elif FRENCH
                                             .nickname = _("LAMANTINE"),
@@ -5557,7 +5767,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 1,
                                             .personality = 0x14,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("POLITOED"),
                                         #elif FRENCH
                                             .nickname = _("TARPAUD"),
@@ -5581,7 +5791,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 1,
                                             .personality = 0x17,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("MAROWAK"),
                                         #elif FRENCH
                                             .nickname = _("OSSATUEUR"),
@@ -5621,6 +5831,13 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                             .speechWin = {EC_WORD_OFF, EC_WORD_IS, EC_WORD_WEREN_T, EC_WORD_HAPPINESS, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechLose = {EC_WORD_ON, EC_WORD_IS, EC_WORD_SAD, EC_WORD_ELLIPSIS, EC_EMPTY_WORD, EC_EMPTY_WORD},
                             .speechAfter = {EC_WORD_WROOOAAR_EXCL, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD, EC_EMPTY_WORD},
+                        #elif SPANISH
+                            .name = _("NORALA"),
+                            .facilityClass = FACILITY_CLASS_PKMN_RANGER_F,
+                            .speechBefore = {EC_WORD_EXCL_EXCL, EC_WORD_DOWN, EC_WORD_THAT, EC_WORD_EVERY, EC_WORD_BEING, EC_WORD_EXCL},
+                            .speechWin = {EC_WORD_EXCL_EXCL, EC_WORD_DOWN, EC_WORD_THAT, EC_WORD_EVERY, EC_WORD_LESS, EC_WORD_EXCL},
+                            .speechLose = {EC_WORD_EXCL_EXCL, EC_WORD_DOWN, EC_WORD_THAT, EC_WORD_EVERY, EC_WORD_HARD, EC_WORD_EXCL},
+                            .speechAfter = {EC_WORD_EXCL_EXCL, EC_WORD_DOWN, EC_WORD_THAT, EC_WORD_EVERY, EC_WORD_HOPELESS, EC_WORD_EXCL},
                         #else //ENGLISH
                             .name = _("NORA"),
                             .facilityClass = FACILITY_CLASS_PKMN_RANGER_F,
@@ -5648,7 +5865,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x3,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("FORRETRESS"),
                                         #elif FRENCH
                                             .nickname = _("FORETRESS"),
@@ -5690,7 +5907,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x7F,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("EXEGGUTOR"),
                                         #elif FRENCH
                                             .nickname = _("NOADKOKO"),
@@ -5714,7 +5931,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x93,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("DUSCLOPS"),
                                         #elif FRENCH
                                             .nickname = _("TERACLOPE"),
@@ -5737,7 +5954,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0xF,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("NINETALES"),
                                         #elif FRENCH
                                             .nickname = _("FEUNARD"),
@@ -5760,7 +5977,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x96,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("BANETTE"),
                                         #elif FRENCH
                                             .nickname = _("BRANETTE"),
@@ -5785,6 +6002,13 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                             .speechWin = {EC_WORD_ARE, EC_WORD_LOWS, EC_WORD_A, EC_WORD_TRAINER, EC_WORD_COOL, EC_WORD_ELLIPSIS},
                             .speechLose = {EC_WORD_NO, EC_WORD_ELLIPSIS, EC_WORD_AS_IF, EC_WORD_ARE, EC_WORD_JUST, EC_WORD_STRONG},
                             .speechAfter = {EC_WORD_MISS, EC_WORD_THIN, EC_WORD_FIGHTING, EC_WORD_LISTEN, EC_WORD_POKEMON, EC_WORD_EXCL},
+                        #elif SPANISH
+                            .name = _("GAB"),
+                            .facilityClass = FACILITY_CLASS_PKMN_RANGER_M,
+                            .speechBefore = {EC_WORD_EXCL_EXCL, EC_WORD_DOWN, EC_WORD_THAT, EC_WORD_EVERY, EC_WORD_INCREDIBLE, EC_WORD_EXCL},
+                            .speechWin = {EC_WORD_EXCL_EXCL, EC_WORD_DOWN, EC_WORD_COOL, EC_WORD_NITWIT, EC_WORD_WHOM, EC_WORD_EXCL},
+                            .speechLose = {EC_WORD_EXCL_EXCL, EC_WORD_ABSOLUTELY, EC_WORD_WHICH, EC_WORD_A_LOT, EC_WORD_COOL, EC_WORD_EXCL},
+                            .speechAfter = {EC_WORD_EXCL_EXCL, EC_WORD_ABSOLUTELY, EC_WORD_WHICH, EC_WORD_QUITE, EC_WORD_SMART, EC_WORD_EXCL},
                         #else //ENGLISH
                             .name = _("GAV"),
                             .facilityClass = FACILITY_CLASS_PKMN_RANGER_M,
@@ -5811,7 +6035,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x95,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("SALAMENCE"),
                                         #elif FRENCH
                                             .nickname = _("DRATTAK"),
@@ -5834,7 +6058,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x8C,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("GENGAR"),
                                         #elif FRENCH
                                             .nickname = _("ECTOPLASMA"),
@@ -5857,7 +6081,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x3,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("GYARADOS"),
                                         #elif FRENCH
                                             .nickname = _("LEVIATOR"),
@@ -5880,7 +6104,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x3,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("GENGAR"),
                                         #elif FRENCH
                                             .nickname = _("ECTOPLASMA"),
@@ -5904,7 +6128,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x14,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("DUSCLOPS"),
                                         #elif FRENCH
                                             .nickname = _("TERACLOPE"),
@@ -5928,7 +6152,7 @@ static const struct TrainerHillFloor sFloors_Expert[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x85,
-                                        #if ENGLISH || ITALIAN
+                                        #if ENGLISH || ITALIAN || SPANISH
                                             .nickname = _("MISDREAVUS"),
                                         #elif FRENCH
                                             .nickname = _("FEUFOREVE"),

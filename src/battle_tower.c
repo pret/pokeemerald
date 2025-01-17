@@ -154,6 +154,8 @@ const u16 gBattleFrontierHeldItems[] =
 #include "data/battle_frontier/battle_frontier_trainers_fr.h"
 #elif ITALIAN
 #include "data/battle_frontier/battle_frontier_trainers_it.h"
+#elif SPANISH
+#include "data/battle_frontier/battle_frontier_trainers_es.h"
 #else //ENGLISH
 #include "data/battle_frontier/battle_frontier_trainers.h"
 #endif
