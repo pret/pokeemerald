@@ -495,12 +495,16 @@ const u32 gJPContestVoltagePal[] = INCBIN_U32("graphics/contest/japanese/voltage
 const u32 gContestResults_Gfx[]                  = INCBIN_U32("graphics/contest/french/results_screen/tiles.4bpp.lz");
 #elif ITALIAN
 const u32 gContestResults_Gfx[]                  = INCBIN_U32("graphics/contest/italian/results_screen/tiles.4bpp.lz");
+//#elif SPANISH
+//const u32 gContestResults_Gfx[]                  = INCBIN_U32("graphics/contest/spanish/results_screen/tiles.4bpp.lz");
 #else //ENGLISH
 const u32 gContestResults_Gfx[]                  = INCBIN_U32("graphics/contest/results_screen/tiles.4bpp.lz");
 #endif
 const u32 gContestResults_WinnerBanner_Tilemap[] = INCBIN_U32("graphics/contest/results_screen/winner_banner.bin.lz");
 const u32 gContestResults_Interface_Tilemap[]    = INCBIN_U32("graphics/contest/results_screen/interface.bin.lz");
 const u32 gContestResults_Bg_Tilemap[]           = INCBIN_U32("graphics/contest/results_screen/bg.bin.lz");
+//#elif SPANISH
+//const u32 gContestResults_Pal[]                  = INCBIN_U32("graphics/contest/spanish/results_screen/tiles.gbapal.lz");
 const u32 gContestResults_Pal[]                  = INCBIN_U32("graphics/contest/results_screen/tiles.gbapal.lz");
 
 const u32 gBattleAnimSpriteGfx_Impact[] = INCBIN_U32("graphics/battle_anims/sprites/impact.4bpp.lz");
@@ -1448,6 +1452,20 @@ const u16 gContestResultsTitle_Cute_Tilemap[]   = INCBIN_U16("graphics/contest/i
 const u16 gContestResultsTitle_Smart_Tilemap[]  = INCBIN_U16("graphics/contest/results_screen/title_smart.bin");
 const u16 gContestResultsTitle_Tough_Tilemap[]  = INCBIN_U16("graphics/contest/italian/results_screen/title_tough.bin");
 const u16 gContestResultsTitle_Tilemap[]        = INCBIN_U16("graphics/contest/italian/results_screen/title.bin");
+#elif SPANISH
+const u8 gBagMenuHMIcon_Gfx[] = INCBIN_U8("graphics/bag/spanish/hm.4bpp");
+// contest results screen
+const u16 gContestResultsTitle_Normal_Tilemap[] = INCBIN_U16("graphics/contest/spanish/results_screen/title_normal.bin");
+const u16 gContestResultsTitle_Super_Tilemap[]  = INCBIN_U16("graphics/contest/spanish/results_screen/title_super.bin");
+const u16 gContestResultsTitle_Hyper_Tilemap[]  = INCBIN_U16("graphics/contest/spanish/results_screen/title_hyper.bin");
+const u16 gContestResultsTitle_Master_Tilemap[] = INCBIN_U16("graphics/contest/spanish/results_screen/title_master.bin");
+const u16 gContestResultsTitle_Link_Tilemap[]   = INCBIN_U16("graphics/contest/spanish/results_screen/title_link.bin");
+const u16 gContestResultsTitle_Cool_Tilemap[]   = INCBIN_U16("graphics/contest/spanish/results_screen/title_cool.bin");
+const u16 gContestResultsTitle_Beauty_Tilemap[] = INCBIN_U16("graphics/contest/spanish/results_screen/title_beauty.bin");
+const u16 gContestResultsTitle_Cute_Tilemap[]   = INCBIN_U16("graphics/contest/spanish/results_screen/title_cute.bin");
+const u16 gContestResultsTitle_Smart_Tilemap[]  = INCBIN_U16("graphics/contest/results_screen/title_smart.bin");
+const u16 gContestResultsTitle_Tough_Tilemap[]  = INCBIN_U16("graphics/contest/spanish/results_screen/title_tough.bin");
+const u16 gContestResultsTitle_Tilemap[]        = INCBIN_U16("graphics/contest/spanish/results_screen/title.bin");
 #else //ENGLISH
 const u8 gBagMenuHMIcon_Gfx[] = INCBIN_U8("graphics/bag/hm.4bpp");
 // contest results screen
@@ -1661,6 +1679,12 @@ const u32 gHoennTrainerCardBg_Tilemap[] = INCBIN_U32("graphics/trainer_card/bg.b
 const u32 gHoennTrainerCardFront_Tilemap[] = INCBIN_U32("graphics/trainer_card/front.bin.lz");
 const u32 gHoennTrainerCardBack_Tilemap[] = INCBIN_U32("graphics/trainer_card/back.bin.lz");
 const u32 gHoennTrainerCardFrontLink_Tilemap[] = INCBIN_U32("graphics/trainer_card/front_link.bin.lz");
+#elif SPANISH
+const u32 gHoennTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/spanish/tiles.4bpp.lz");
+const u32 gHoennTrainerCardBg_Tilemap[] = INCBIN_U32("graphics/trainer_card/bg.bin.lz");
+const u32 gHoennTrainerCardFront_Tilemap[] = INCBIN_U32("graphics/trainer_card/front.bin.lz");
+const u32 gHoennTrainerCardBack_Tilemap[] = INCBIN_U32("graphics/trainer_card/back.bin.lz");
+const u32 gHoennTrainerCardFrontLink_Tilemap[] = INCBIN_U32("graphics/trainer_card/front_link.bin.lz");
 #else //ENGLISH
 const u32 gHoennTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/tiles.4bpp.lz");
 const u32 gHoennTrainerCardBg_Tilemap[] = INCBIN_U32("graphics/trainer_card/bg.bin.lz");
@@ -1680,6 +1704,11 @@ const u32 gKantoTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/frlg/itali
 const u32 gKantoTrainerCardBg_Tilemap[] = INCBIN_U32("graphics/trainer_card/frlg/bg.bin.lz");
 const u32 gKantoTrainerCardFront_Tilemap[] = INCBIN_U32("graphics/trainer_card/frlg/front.bin.lz");
 const u32 gKantoTrainerCardBack_Tilemap[] = INCBIN_U32("graphics/trainer_card/frlg/italian/back.bin.lz");
+#elif SPANISH
+const u32 gKantoTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/frlg/spanish/tiles.4bpp.lz");
+const u32 gKantoTrainerCardBg_Tilemap[] = INCBIN_U32("graphics/trainer_card/frlg/bg.bin.lz");
+const u32 gKantoTrainerCardFront_Tilemap[] = INCBIN_U32("graphics/trainer_card/frlg/front.bin.lz");
+const u32 gKantoTrainerCardBack_Tilemap[] = INCBIN_U32("graphics/trainer_card/frlg/spanish/back.bin.lz");
 #else //ENGLISH
 const u32 gKantoTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/frlg/tiles.4bpp.lz");
 const u32 gKantoTrainerCardBg_Tilemap[] = INCBIN_U32("graphics/trainer_card/frlg/bg.bin.lz");
@@ -1756,6 +1785,10 @@ const u32 gUnionRoomChat_Background_Tilemap[] = INCBIN_U32("graphics/union_room_
 const u16 gUnionRoomChat_Background_Pal[] = INCBIN_U16("graphics/union_room_chat/italian/background.gbapal");
 const u32 gUnionRoomChat_Background_Gfx[] = INCBIN_U32("graphics/union_room_chat/italian/background.4bpp.lz");
 const u32 gUnionRoomChat_Background_Tilemap[] = INCBIN_U32("graphics/union_room_chat/italian/background.bin.lz");
+#elif SPANISH
+const u16 gUnionRoomChat_Background_Pal[] = INCBIN_U16("graphics/union_room_chat/spanish/background.gbapal");
+const u32 gUnionRoomChat_Background_Gfx[] = INCBIN_U32("graphics/union_room_chat/spanish/background.4bpp.lz");
+const u32 gUnionRoomChat_Background_Tilemap[] = INCBIN_U32("graphics/union_room_chat/spanish/background.bin.lz");
 #else //ENGLISH
 const u16 gUnionRoomChat_Background_Pal[] = INCBIN_U16("graphics/union_room_chat/background.gbapal");
 const u32 gUnionRoomChat_Background_Gfx[] = INCBIN_U32("graphics/union_room_chat/background.4bpp.lz");

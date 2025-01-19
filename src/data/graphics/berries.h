@@ -6,6 +6,10 @@ const u32 gBerryTag_Gfx[] = INCBIN_U32("graphics/bag/french/berry_tag.bin.lz");
 const u32 gBerryCheck_Gfx[] = INCBIN_U32("graphics/bag/italian/check_berry.4bpp.lz");
 const u32 gBerryCheck_Pal[] = INCBIN_U32("graphics/bag/check_berry.gbapal.lz");
 const u32 gBerryTag_Gfx[] = INCBIN_U32("graphics/bag/italian/berry_tag.bin.lz");
+#elif SPANISH
+const u32 gBerryCheck_Gfx[] = INCBIN_U32("graphics/bag/spanish/check_berry.4bpp.lz");
+const u32 gBerryCheck_Pal[] = INCBIN_U32("graphics/bag/check_berry.gbapal.lz");
+const u32 gBerryTag_Gfx[] = INCBIN_U32("graphics/bag/spanish/berry_tag.bin.lz");
 #else //ENGLISH
 const u32 gBerryCheck_Gfx[] = INCBIN_U32("graphics/bag/check_berry.4bpp.lz");
 const u32 gBerryCheck_Pal[] = INCBIN_U32("graphics/bag/check_berry.gbapal.lz");
