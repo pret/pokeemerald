@@ -1200,6 +1200,8 @@ const u32 gPartyMenuPokeball_Pal[] = INCBIN_U32("graphics/party_menu/pokeball.gb
 const u32 gStatusGfx_Icons[] = INCBIN_U32("graphics/interface/french/status_icons.4bpp.lz");
 #elif ITALIAN
 const u32 gStatusGfx_Icons[] = INCBIN_U32("graphics/interface/italian/status_icons.4bpp.lz");
+#elif SPANISH
+const u32 gStatusGfx_Icons[] = INCBIN_U32("graphics/interface/spanish/status_icons.4bpp.lz");
 #else //ENGLISH
 const u32 gStatusGfx_Icons[] = INCBIN_U32("graphics/interface/status_icons.4bpp.lz");
 #endif
@@ -1420,6 +1422,8 @@ const u16 gMenuInfoElements3_Pal[] = INCBIN_U16("graphics/interface/menu_info3.g
 const u8 gMenuInfoElements_Gfx[] = INCBIN_U8("graphics/interface/french/menu_info.4bpp");
 #elif ITALIAN
 const u8 gMenuInfoElements_Gfx[] = INCBIN_U8("graphics/interface/italian/menu_info.4bpp");
+#elif SPANISH
+const u8 gMenuInfoElements_Gfx[] = INCBIN_U8("graphics/interface/spanish/menu_info.4bpp");
 #else //ENGLISH
 const u8 gMenuInfoElements_Gfx[] = INCBIN_U8("graphics/interface/menu_info.4bpp");
 #endif
@@ -1579,6 +1583,13 @@ const u8 gPokenavConditionCancel_Gfx[] = INCBIN_U8("graphics/pokenav/condition/i
 
 const u16 gMonMarkingsMenu_Pal[] = INCBIN_U16("graphics/interface/mon_markings_menu.gbapal");
 const u8 gMonMarkingsMenu_Gfx[] = INCBIN_U8("graphics/interface/italian/mon_markings_menu.4bpp");
+#elif SPANISH
+const u32 gRegionMapCityZoomText_Gfx[] = INCBIN_U32("graphics/pokenav/region_map/spanish/city_zoom_text.4bpp.lz");
+const u16 gPokenavConditionCancel_Pal[] = INCBIN_U16("graphics/pokenav/condition/cancel.gbapal");
+const u8 gPokenavConditionCancel_Gfx[] = INCBIN_U8("graphics/pokenav/condition/spanish/cancel.4bpp");
+
+const u16 gMonMarkingsMenu_Pal[] = INCBIN_U16("graphics/interface/mon_markings_menu.gbapal");
+const u8 gMonMarkingsMenu_Gfx[] = INCBIN_U8("graphics/interface/spanish/mon_markings_menu.4bpp");
 #else //ENGLISH
 const u32 gRegionMapCityZoomText_Gfx[] = INCBIN_U32("graphics/pokenav/region_map/city_zoom_text.4bpp.lz");
 const u16 gPokenavConditionCancel_Pal[] = INCBIN_U16("graphics/pokenav/condition/cancel.gbapal");
