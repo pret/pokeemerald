@@ -53,6 +53,8 @@ const u16 gMetatileAttributes_InsideBuilding[] = INCBIN_U16("data/tilesets/prima
 const u16 gMetatiles_Shop[] = INCBIN_U16("data/tilesets/secondary/shop/french/metatiles.bin");
 #elif ITALIAN
 const u16 gMetatiles_Shop[] = INCBIN_U16("data/tilesets/secondary/shop/italian/metatiles.bin");
+#elif SPANISH
+const u16 gMetatiles_Shop[] = INCBIN_U16("data/tilesets/secondary/shop/spanish/metatiles.bin");
 #else //ENGLISH
 const u16 gMetatiles_Shop[] = INCBIN_U16("data/tilesets/secondary/shop/metatiles.bin");
 #endif

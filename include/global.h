@@ -152,17 +152,17 @@
 #define STATIC_ASSERT(expr, id) typedef char id[(expr) ? 1 : -1];
 
 #if FRENCH
-#define LANG_VAL(_english, _french, _italian, ...) (_french)
-#define LANGUAGE_STRING(_english, _french, _italian, ...) _(_french)
+#define LANG_VAL(_english, _french, _italian, _spanish) (_french)
+#define LANGUAGE_STRING(_english, _french, _italian, _spanish) _(_french)
 #elif ITALIAN
-#define LANG_VAL(_english, _french, _italian, ...) (_italian)
-#define LANGUAGE_STRING(_english, _french, _italian, ...) _(_italian)
+#define LANG_VAL(_english, _french, _italian, _spanish) (_italian)
+#define LANGUAGE_STRING(_english, _french, _italian, _spanish) _(_italian)
 #elif SPANISH
-#define LANG_VAL(_english, _french, _italian, ...) (_english)
-#define LANGUAGE_STRING(_english, _french, _italian, ...) _(_english)
+#define LANG_VAL(_english, _french, _italian, _spanish) (_spanish)
+#define LANGUAGE_STRING(_english, _french, _italian, _spanish) _(_spanish)
 #else //ENGLISH
-#define LANG_VAL(_english, _french, _italian, ...) (_english)
-#define LANGUAGE_STRING(_english, _french, _italian, ...) _(_english)
+#define LANG_VAL(_english, _french, _italian, _spanish) (_english)
+#define LANGUAGE_STRING(_english, _french, _italian, _spanish) _(_english)
 #endif
 
 struct Coords8

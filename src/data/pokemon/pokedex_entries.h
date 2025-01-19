@@ -2,13 +2,7 @@ const struct PokedexEntry gPokedexEntries[] =
 {
     [NATIONAL_DEX_NONE] =
     {
-    #if FRENCH
-        .categoryName = _("INCONNU"),
-    #elif ITALIAN
-        .categoryName = _("SCONOSC"),
-    #else //ENGLISH
-        .categoryName = _("UNKNOWN"),
-    #endif
+        .categoryName = LANGUAGE_STRING("UNKNOWN", "INCONNU", "SCONOSC", "DESCON."),
         .height = 0,
         .weight = 0,
         .description = gDummyPokedexText,
@@ -20,13 +14,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BULBASAUR] =
     {
-    #if FRENCH
-        .categoryName = _("GRAINE"),
-    #elif ITALIAN
-        .categoryName = _("SEME"),
-    #else //ENGLISH
-        .categoryName = _("SEED"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SEED", "GRAINE", "SEME", "SEMILLA"),
         .height = 7,
         .weight = 69,
         .description = gBulbasaurPokedexText,
@@ -38,13 +26,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_IVYSAUR] =
     {
-    #if FRENCH
-        .categoryName = _("GRAINE"),
-    #elif ITALIAN
-        .categoryName = _("SEME"),
-    #else //ENGLISH
-        .categoryName = _("SEED"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SEED", "GRAINE", "SEME", "SEMILLA"),
         .height = 10,
         .weight = 130,
         .description = gIvysaurPokedexText,
@@ -56,13 +38,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_VENUSAUR] =
     {
-    #if FRENCH
-        .categoryName = _("GRAINE"),
-    #elif ITALIAN
-        .categoryName = _("SEME"),
-    #else //ENGLISH
-        .categoryName = _("SEED"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SEED", "GRAINE", "SEME", "SEMILLA"),
         .height = 20,
         .weight = 1000,
         .description = gVenusaurPokedexText,
@@ -74,13 +50,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CHARMANDER] =
     {
-    #if FRENCH
-        .categoryName = _("LEZARD"),
-    #elif ITALIAN
-        .categoryName = _("LUCERTOLA"),
-    #else //ENGLISH
-        .categoryName = _("LIZARD"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LIZARD", "LEZARD", "LUCERTOLA", "LAGARTIJA"),
         .height = 6,
         .weight = 85,
         .description = gCharmanderPokedexText,
@@ -92,13 +62,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CHARMELEON] =
     {
-    #if FRENCH
-        .categoryName = _("FLAMME"),
-    #elif ITALIAN
-        .categoryName = _("FIAMMA"),
-    #else //ENGLISH
-        .categoryName = _("FLAME"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FLAME", "FLAMME", "FIAMMA", "LLAMA"),
         .height = 11,
         .weight = 190,
         .description = gCharmeleonPokedexText,
@@ -110,13 +74,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CHARIZARD] =
     {
-    #if FRENCH
-        .categoryName = _("FLAMME"),
-    #elif ITALIAN
-        .categoryName = _("FIAMMA"),
-    #else //ENGLISH
-        .categoryName = _("FLAME"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FLAME", "FLAMME", "FIAMMA", "LLAMA"),
         .height = 17,
         .weight = 905,
         .description = gCharizardPokedexText,
@@ -128,13 +86,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SQUIRTLE] =
     {
-    #if FRENCH
-        .categoryName = _("MINITORTUE"),
-    #elif ITALIAN
-        .categoryName = _("TARTAGHINA"),
-    #else //ENGLISH
-        .categoryName = _("TINY TURTLE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("TINY TURTLE", "MINITORTUE", "TARTAGHINA", "TORTUGUITA"),
         .height = 5,
         .weight = 90,
         .description = gSquirtlePokedexText,
@@ -146,13 +98,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WARTORTLE] =
     {
-    #if FRENCH
-        .categoryName = _("TORTUE"),
-    #elif ITALIAN
-        .categoryName = _("TARTARUGA"),
-    #else //ENGLISH
-        .categoryName = _("TURTLE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("TURTLE", "TORTUE", "TARTARUGA", "TORTUGA"),
         .height = 10,
         .weight = 225,
         .description = gWartortlePokedexText,
@@ -164,13 +110,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BLASTOISE] =
     {
-    #if FRENCH
-        .categoryName = _("CARAPACE"),
-    #elif ITALIAN
-        .categoryName = _("CROSTACEO"),
-    #else //ENGLISH
-        .categoryName = _("SHELLFISH"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SHELLFISH", "CARAPACE", "CROSTACEO", "MARISCO"),
         .height = 16,
         .weight = 855,
         .description = gBlastoisePokedexText,
@@ -182,13 +122,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CATERPIE] =
     {
-    #if FRENCH
-        .categoryName = _("VER"),
-    #elif ITALIAN
-        .categoryName = _("BACO"),
-    #else //ENGLISH
-        .categoryName = _("WORM"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WORM", "VER", "BACO", "GUSANO"),
         .height = 3,
         .weight = 29,
         .description = gCaterpiePokedexText,
@@ -200,13 +134,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_METAPOD] =
     {
-    #if FRENCH
-        .categoryName = _("COCON"),
-    #elif ITALIAN
-        .categoryName = _("BOZZOLO"),
-    #else //ENGLISH
-        .categoryName = _("COCOON"),
-    #endif
+        .categoryName = LANGUAGE_STRING("COCOON", "COCON", "BOZZOLO", "CAPULLO"),
         .height = 7,
         .weight = 99,
         .description = gMetapodPokedexText,
@@ -218,13 +146,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BUTTERFREE] =
     {
-    #if FRENCH
-        .categoryName = _("PAPILLON"),
-    #elif ITALIAN
-        .categoryName = _("FARFALLA"),
-    #else //ENGLISH
-        .categoryName = _("BUTTERFLY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BUTTERFLY", "PAPILLON", "FARFALLA", "MARIPOSA"),
         .height = 11,
         .weight = 320,
         .description = gButterfreePokedexText,
@@ -236,13 +158,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WEEDLE] =
     {
-    #if FRENCH
-        .categoryName = _("INSECTOPIC"),
-    #elif ITALIAN
-        .categoryName = _("MILLEPIEDI"),
-    #else //ENGLISH
-        .categoryName = _("HAIRY BUG"),
-    #endif
+        .categoryName = LANGUAGE_STRING("HAIRY BUG", "INSECTOPIC", "MILLEPIEDI", "ORUGA"),
         .height = 3,
         .weight = 32,
         .description = gWeedlePokedexText,
@@ -254,13 +170,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_KAKUNA] =
     {
-    #if FRENCH
-        .categoryName = _("COCON"),
-    #elif ITALIAN
-        .categoryName = _("BOZZOLO"),
-    #else //ENGLISH
-        .categoryName = _("COCOON"),
-    #endif
+        .categoryName = LANGUAGE_STRING("COCOON", "COCON", "BOZZOLO", "CAPULLO"),
         .height = 6,
         .weight = 100,
         .description = gKakunaPokedexText,
@@ -272,13 +182,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BEEDRILL] =
     {
-    #if FRENCH
-        .categoryName = _("GUEPOISON"),
-    #elif ITALIAN
-        .categoryName = _("VELENAPE"),
-    #else //ENGLISH
-        .categoryName = _("POISON BEE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("POISON BEE", "GUEPOISON", "VELENAPE", "ABEJA VEN."),
         .height = 10,
         .weight = 295,
         .description = gBeedrillPokedexText,
@@ -290,13 +194,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PIDGEY] =
     {
-    #if FRENCH
-        .categoryName = _("MINOISEAU"),
-    #elif ITALIAN
-        .categoryName = _("UCCELLINO"),
-    #else //ENGLISH
-        .categoryName = _("TINY BIRD"),
-    #endif
+        .categoryName = LANGUAGE_STRING("TINY BIRD", "MINOISEAU", "UCCELLINO", "PAJARITO"),
         .height = 3,
         .weight = 18,
         .description = gPidgeyPokedexText,
@@ -308,13 +206,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PIDGEOTTO] =
     {
-    #if FRENCH
-        .categoryName = _("OISEAU"),
-    #elif ITALIAN
-        .categoryName = _("UCCELLO"),
-    #else //ENGLISH
-        .categoryName = _("BIRD"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BIRD", "OISEAU", "UCCELLO", "PÁJARO"),
         .height = 11,
         .weight = 300,
         .description = gPidgeottoPokedexText,
@@ -326,13 +218,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PIDGEOT] =
     {
-    #if FRENCH
-        .categoryName = _("OISEAU"),
-    #elif ITALIAN
-        .categoryName = _("UCCELLO"),
-    #else //ENGLISH
-        .categoryName = _("BIRD"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BIRD", "OISEAU", "UCCELLO", "PÁJARO"),
         .height = 15,
         .weight = 395,
         .description = gPidgeotPokedexText,
@@ -344,13 +230,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_RATTATA] =
     {
-    #if FRENCH
-        .categoryName = _("SOURIS"),
-    #elif ITALIAN
-        .categoryName = _("TOPO"),
-    #else //ENGLISH
-        .categoryName = _("MOUSE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MOUSE", "SOURIS", "TOPO", "RATÓN"),
         .height = 3,
         .weight = 35,
         .description = gRattataPokedexText,
@@ -362,13 +242,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_RATICATE] =
     {
-    #if FRENCH
-        .categoryName = _("SOURIS"),
-    #elif ITALIAN
-        .categoryName = _("TOPO"),
-    #else //ENGLISH
-        .categoryName = _("MOUSE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MOUSE", "SOURIS", "TOPO", "RATÓN"),
         .height = 7,
         .weight = 185,
         .description = gRaticatePokedexText,
@@ -380,13 +254,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SPEAROW] =
     {
-    #if FRENCH
-        .categoryName = _("MINOISEAU"),
-    #elif ITALIAN
-        .categoryName = _("UCCELLINO"),
-    #else //ENGLISH
-        .categoryName = _("TINY BIRD"),
-    #endif
+        .categoryName = LANGUAGE_STRING("TINY BIRD", "MINOISEAU", "UCCELLINO", "PAJARITO"),
         .height = 3,
         .weight = 20,
         .description = gSpearowPokedexText,
@@ -398,13 +266,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_FEAROW] =
     {
-    #if FRENCH
-        .categoryName = _("BEC-OISEAU"),
-    #elif ITALIAN
-        .categoryName = _("BECCO"),
-    #else //ENGLISH
-        .categoryName = _("BEAK"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BEAK", "BEC-OISEAU", "BECCO", "PICO"),
         .height = 12,
         .weight = 380,
         .description = gFearowPokedexText,
@@ -416,13 +278,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_EKANS] =
     {
-    #if FRENCH
-        .categoryName = _("SERPENT"),
-    #elif ITALIAN
-        .categoryName = _("SERPENTE"),
-    #else //ENGLISH
-        .categoryName = _("SNAKE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SNAKE", "SERPENT", "SERPENTE", "SERPIENTE"),
         .height = 20,
         .weight = 69,
         .description = gEkansPokedexText,
@@ -434,13 +290,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ARBOK] =
     {
-    #if FRENCH
-        .categoryName = _("COBRA"),
-    #elif ITALIAN
-        .categoryName = _("COBRA"),
-    #else //ENGLISH
-        .categoryName = _("COBRA"),
-    #endif
+        .categoryName = LANGUAGE_STRING("COBRA", "COBRA", "COBRA", "COBRA"),
         .height = 35,
         .weight = 650,
         .description = gArbokPokedexText,
@@ -452,13 +302,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PIKACHU] =
     {
-    #if FRENCH
-        .categoryName = _("SOURIS"),
-    #elif ITALIAN
-        .categoryName = _("TOPO"),
-    #else //ENGLISH
-        .categoryName = _("MOUSE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MOUSE", "SOURIS", "TOPO", "RATÓN"),
         .height = 4,
         .weight = 60,
         .description = gPikachuPokedexText,
@@ -470,13 +314,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_RAICHU] =
     {
-    #if FRENCH
-        .categoryName = _("SOURIS"),
-    #elif ITALIAN
-        .categoryName = _("TOPO"),
-    #else //ENGLISH
-        .categoryName = _("MOUSE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MOUSE", "SOURIS", "TOPO", "RATÓN"),
         .height = 8,
         .weight = 300,
         .description = gRaichuPokedexText,
@@ -488,13 +326,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SANDSHREW] =
     {
-    #if FRENCH
-        .categoryName = _("SOURIS"),
-    #elif ITALIAN
-        .categoryName = _("TOPO"),
-    #else //ENGLISH
-        .categoryName = _("MOUSE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MOUSE", "SOURIS", "TOPO", "RATÓN"),
         .height = 6,
         .weight = 120,
         .description = gSandshrewPokedexText,
@@ -506,13 +338,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SANDSLASH] =
     {
-    #if FRENCH
-        .categoryName = _("SOURIS"),
-    #elif ITALIAN
-        .categoryName = _("TOPO"),
-    #else //ENGLISH
-        .categoryName = _("MOUSE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MOUSE", "SOURIS", "TOPO", "RATÓN"),
         .height = 10,
         .weight = 295,
         .description = gSandslashPokedexText,
@@ -524,13 +350,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NIDORAN_F] =
     {
-    #if FRENCH
-        .categoryName = _("VENEPIC"),
-    #elif ITALIAN
-        .categoryName = _("VELENAGO"),
-    #else //ENGLISH
-        .categoryName = _("POISON PIN"),
-    #endif
+        .categoryName = LANGUAGE_STRING("POISON PIN", "VENEPIC", "VELENAGO", "PIN VENENO"),
         .height = 4,
         .weight = 70,
         .description = gNidoranFPokedexText,
@@ -542,13 +362,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NIDORINA] =
     {
-    #if FRENCH
-        .categoryName = _("VENEPIC"),
-    #elif ITALIAN
-        .categoryName = _("VELENAGO"),
-    #else //ENGLISH
-        .categoryName = _("POISON PIN"),
-    #endif
+        .categoryName = LANGUAGE_STRING("POISON PIN", "VENEPIC", "VELENAGO", "PIN VENENO"),
         .height = 8,
         .weight = 200,
         .description = gNidorinaPokedexText,
@@ -560,13 +374,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NIDOQUEEN] =
     {
-    #if FRENCH
-        .categoryName = _("PERCEUR"),
-    #elif ITALIAN
-        .categoryName = _("TRAPANO"),
-    #else //ENGLISH
-        .categoryName = _("DRILL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DRILL", "PERCEUR", "TRAPANO", "TALADRO"),
         .height = 13,
         .weight = 600,
         .description = gNidoqueenPokedexText,
@@ -578,13 +386,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NIDORAN_M] =
     {
-    #if FRENCH
-        .categoryName = _("VENEPIC"),
-    #elif ITALIAN
-        .categoryName = _("VELENAGO"),
-    #else //ENGLISH
-        .categoryName = _("POISON PIN"),
-    #endif
+        .categoryName = LANGUAGE_STRING("POISON PIN", "VENEPIC", "VELENAGO", "PIN VENENO"),
         .height = 5,
         .weight = 90,
         .description = gNidoranMPokedexText,
@@ -596,13 +398,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NIDORINO] =
     {
-    #if FRENCH
-        .categoryName = _("VENEPIC"),
-    #elif ITALIAN
-        .categoryName = _("VELENAGO"),
-    #else //ENGLISH
-        .categoryName = _("POISON PIN"),
-    #endif
+        .categoryName = LANGUAGE_STRING("POISON PIN", "VENEPIC", "VELENAGO", "PIN VENENO"),
         .height = 9,
         .weight = 195,
         .description = gNidorinoPokedexText,
@@ -614,13 +410,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NIDOKING] =
     {
-    #if FRENCH
-        .categoryName = _("PERCEUR"),
-    #elif ITALIAN
-        .categoryName = _("TRAPANO"),
-    #else //ENGLISH
-        .categoryName = _("DRILL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DRILL", "PERCEUR", "TRAPANO", "TALADRO"),
         .height = 14,
         .weight = 620,
         .description = gNidokingPokedexText,
@@ -632,13 +422,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CLEFAIRY] =
     {
-    #if FRENCH
-        .categoryName = _("FEE"),
-    #elif ITALIAN
-        .categoryName = _("FATA"),
-    #else //ENGLISH
-        .categoryName = _("FAIRY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FAIRY", "FEE", "FATA", "HADA"),
         .height = 6,
         .weight = 75,
         .description = gClefairyPokedexText,
@@ -650,13 +434,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CLEFABLE] =
     {
-    #if FRENCH
-        .categoryName = _("FEE"),
-    #elif ITALIAN
-        .categoryName = _("FATA"),
-    #else //ENGLISH
-        .categoryName = _("FAIRY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FAIRY", "FEE", "FATA", "HADA"),
         .height = 13,
         .weight = 400,
         .description = gClefablePokedexText,
@@ -668,13 +446,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_VULPIX] =
     {
-    #if FRENCH
-        .categoryName = _("RENARD"),
-    #elif ITALIAN
-        .categoryName = _("VOLPE"),
-    #else //ENGLISH
-        .categoryName = _("FOX"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FOX", "RENARD", "VOLPE", "ZORRO"),
         .height = 6,
         .weight = 99,
         .description = gVulpixPokedexText,
@@ -686,13 +458,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NINETALES] =
     {
-    #if FRENCH
-        .categoryName = _("RENARD"),
-    #elif ITALIAN
-        .categoryName = _("VOLPE"),
-    #else //ENGLISH
-        .categoryName = _("FOX"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FOX", "RENARD", "VOLPE", "ZORRO"),
         .height = 11,
         .weight = 199,
         .description = gNinetalesPokedexText,
@@ -704,13 +470,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_JIGGLYPUFF] =
     {
-    #if FRENCH
-        .categoryName = _("BOUBOULE"),
-    #elif ITALIAN
-        .categoryName = _("PALLONE"),
-    #else //ENGLISH
-        .categoryName = _("BALLOON"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BALLOON", "BOUBOULE", "PALLONE", "GLOBO"),
         .height = 5,
         .weight = 55,
         .description = gJigglypuffPokedexText,
@@ -722,13 +482,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WIGGLYTUFF] =
     {
-    #if FRENCH
-        .categoryName = _("BOUBOULE"),
-    #elif ITALIAN
-        .categoryName = _("PALLONE"),
-    #else //ENGLISH
-        .categoryName = _("BALLOON"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BALLOON", "BOUBOULE", "PALLONE", "GLOBO"),
         .height = 10,
         .weight = 120,
         .description = gWigglytuffPokedexText,
@@ -740,13 +494,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ZUBAT] =
     {
-    #if FRENCH
-        .categoryName = _("CHOVSOURIS"),
-    #elif ITALIAN
-        .categoryName = _("PIPISTREL."),
-    #else //ENGLISH
-        .categoryName = _("BAT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BAT", "CHOVSOURIS", "PIPISTREL.", "MURCIÉLAGO"),
         .height = 8,
         .weight = 75,
         .description = gZubatPokedexText,
@@ -758,13 +506,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GOLBAT] =
     {
-    #if FRENCH
-        .categoryName = _("CHOVSOURIS"),
-    #elif ITALIAN
-        .categoryName = _("PIPISTREL."),
-    #else //ENGLISH
-        .categoryName = _("BAT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BAT", "CHOVSOURIS", "PIPISTREL.", "MURCIÉLAGO"),
         .height = 16,
         .weight = 550,
         .description = gGolbatPokedexText,
@@ -776,13 +518,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ODDISH] =
     {
-    #if FRENCH
-        .categoryName = _("RACINE"),
-    #elif ITALIAN
-        .categoryName = _("MALERBA"),
-    #else //ENGLISH
-        .categoryName = _("WEED"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WEED", "RACINE", "MALERBA", "HIERBAJO"),
         .height = 5,
         .weight = 54,
         .description = gOddishPokedexText,
@@ -794,13 +530,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GLOOM] =
     {
-    #if FRENCH
-        .categoryName = _("RACINE"),
-    #elif ITALIAN
-        .categoryName = _("MALERBA"),
-    #else //ENGLISH
-        .categoryName = _("WEED"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WEED", "RACINE", "MALERBA", "HIERBAJO"),
         .height = 8,
         .weight = 86,
         .description = gGloomPokedexText,
@@ -812,13 +542,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_VILEPLUME] =
     {
-    #if FRENCH
-        .categoryName = _("FLEUR"),
-    #elif ITALIAN
-        .categoryName = _("FIORE"),
-    #else //ENGLISH
-        .categoryName = _("FLOWER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FLOWER", "FLEUR", "FIORE", "FLOR"),
         .height = 12,
         .weight = 186,
         .description = gVileplumePokedexText,
@@ -830,13 +554,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PARAS] =
     {
-    #if FRENCH
-        .categoryName = _("CHAMPIGNON"),
-    #elif ITALIAN
-        .categoryName = _("FUNGO"),
-    #else //ENGLISH
-        .categoryName = _("MUSHROOM"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MUSHROOM", "CHAMPIGNON", "FUNGO", "HONGO"),
         .height = 3,
         .weight = 54,
         .description = gParasPokedexText,
@@ -848,13 +566,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PARASECT] =
     {
-    #if FRENCH
-        .categoryName = _("CHAMPIGNON"),
-    #elif ITALIAN
-        .categoryName = _("FUNGO"),
-    #else //ENGLISH
-        .categoryName = _("MUSHROOM"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MUSHROOM", "CHAMPIGNON", "FUNGO", "HONGO"),
         .height = 10,
         .weight = 295,
         .description = gParasectPokedexText,
@@ -866,13 +578,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_VENONAT] =
     {
-    #if FRENCH
-        .categoryName = _("VERMINE"),
-    #elif ITALIAN
-        .categoryName = _("INSETTO"),
-    #else //ENGLISH
-        .categoryName = _("INSECT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("INSECT", "VERMINE", "INSETTO", "INSECTO"),
         .height = 10,
         .weight = 300,
         .description = gVenonatPokedexText,
@@ -884,13 +590,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_VENOMOTH] =
     {
-    #if FRENCH
-        .categoryName = _("PAPIPOISON"),
-    #elif ITALIAN
-        .categoryName = _("VELENTARMA"),
-    #else //ENGLISH
-        .categoryName = _("POISON MOTH"),
-    #endif
+        .categoryName = LANGUAGE_STRING("POISON MOTH", "PAPIPOISON", "VELENTARMA", "POLILLA V."),
         .height = 15,
         .weight = 125,
         .description = gVenomothPokedexText,
@@ -902,13 +602,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DIGLETT] =
     {
-    #if FRENCH
-        .categoryName = _("TAUPE"),
-    #elif ITALIAN
-        .categoryName = _("TALPA"),
-    #else //ENGLISH
-        .categoryName = _("MOLE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MOLE", "TAUPE", "TALPA", "TOPO"),
         .height = 2,
         .weight = 8,
         .description = gDiglettPokedexText,
@@ -920,13 +614,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DUGTRIO] =
     {
-    #if FRENCH
-        .categoryName = _("TAUPE"),
-    #elif ITALIAN
-        .categoryName = _("TALPA"),
-    #else //ENGLISH
-        .categoryName = _("MOLE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MOLE", "TAUPE", "TALPA", "TOPO"),
         .height = 7,
         .weight = 333,
         .description = gDugtrioPokedexText,
@@ -938,13 +626,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MEOWTH] =
     {
-    #if FRENCH
-        .categoryName = _("CHADEGOUT"),
-    #elif ITALIAN
-        .categoryName = _("GRAFFIMIAO"),
-    #else //ENGLISH
-        .categoryName = _("SCRATCH CAT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SCRATCH CAT", "CHADEGOUT", "GRAFFIMIAO", "GATO ARAÑA"),
         .height = 4,
         .weight = 42,
         .description = gMeowthPokedexText,
@@ -956,13 +638,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PERSIAN] =
     {
-    #if FRENCH
-        .categoryName = _("CHADEVILLE"),
-    #elif ITALIAN
-        .categoryName = _("NOBILGATTO"),
-    #else //ENGLISH
-        .categoryName = _("CLASSY CAT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("CLASSY CAT", "CHADEVILLE", "NOBILGATTO", "GATO FINO"),
         .height = 10,
         .weight = 320,
         .description = gPersianPokedexText,
@@ -974,13 +650,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PSYDUCK] =
     {
-    #if FRENCH
-        .categoryName = _("CANARD"),
-    #elif ITALIAN
-        .categoryName = _("PAPERO"),
-    #else //ENGLISH
-        .categoryName = _("DUCK"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DUCK", "CANARD", "PAPERO", "PATO"),
         .height = 8,
         .weight = 196,
         .description = gPsyduckPokedexText,
@@ -992,13 +662,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GOLDUCK] =
     {
-    #if FRENCH
-        .categoryName = _("CANARD"),
-    #elif ITALIAN
-        .categoryName = _("PAPERO"),
-    #else //ENGLISH
-        .categoryName = _("DUCK"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DUCK", "CANARD", "PAPERO", "PATO"),
         .height = 17,
         .weight = 766,
         .description = gGolduckPokedexText,
@@ -1010,13 +674,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MANKEY] =
     {
-    #if FRENCH
-        .categoryName = _("PORSINGE"),
-    #elif ITALIAN
-        .categoryName = _("SUINPANZÉ"),
-    #else //ENGLISH
-        .categoryName = _("PIG MONKEY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("PIG MONKEY", "PORSINGE", "SUINPANZÉ", "MONO CERDO"),
         .height = 5,
         .weight = 280,
         .description = gMankeyPokedexText,
@@ -1028,13 +686,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PRIMEAPE] =
     {
-    #if FRENCH
-        .categoryName = _("PORSINGE"),
-    #elif ITALIAN
-        .categoryName = _("SUINPANZÉ"),
-    #else //ENGLISH
-        .categoryName = _("PIG MONKEY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("PIG MONKEY", "PORSINGE", "SUINPANZÉ", "MONO CERDO"),
         .height = 10,
         .weight = 320,
         .description = gPrimeapePokedexText,
@@ -1046,13 +698,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GROWLITHE] =
     {
-    #if FRENCH
-        .categoryName = _("CHIOT"),
-    #elif ITALIAN
-        .categoryName = _("CAGNOLINO"),
-    #else //ENGLISH
-        .categoryName = _("PUPPY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("PUPPY", "CHIOT", "CAGNOLINO", "PERRITO"),
         .height = 7,
         .weight = 190,
         .description = gGrowlithePokedexText,
@@ -1064,13 +710,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ARCANINE] =
     {
-    #if FRENCH
-        .categoryName = _("LEGENDAIRE"),
-    #elif ITALIAN
-        .categoryName = _("LEGGENDA"),
-    #else //ENGLISH
-        .categoryName = _("LEGENDARY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LEGENDARY", "LEGENDAIRE", "LEGGENDA", "LEGENDARIO"),
         .height = 19,
         .weight = 1550,
         .description = gArcaninePokedexText,
@@ -1082,13 +722,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_POLIWAG] =
     {
-    #if FRENCH
-        .categoryName = _("TETARD"),
-    #elif ITALIAN
-        .categoryName = _("GIRINO"),
-    #else //ENGLISH
-        .categoryName = _("TADPOLE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("TADPOLE", "TETARD", "GIRINO", "RENACUAJO"),
         .height = 6,
         .weight = 124,
         .description = gPoliwagPokedexText,
@@ -1100,13 +734,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_POLIWHIRL] =
     {
-    #if FRENCH
-        .categoryName = _("TETARD"),
-    #elif ITALIAN
-        .categoryName = _("GIRINO"),
-    #else //ENGLISH
-        .categoryName = _("TADPOLE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("TADPOLE", "TETARD", "GIRINO", "RENACUAJO"),
         .height = 10,
         .weight = 200,
         .description = gPoliwhirlPokedexText,
@@ -1118,13 +746,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_POLIWRATH] =
     {
-    #if FRENCH
-        .categoryName = _("TETARD"),
-    #elif ITALIAN
-        .categoryName = _("GIRINO"),
-    #else //ENGLISH
-        .categoryName = _("TADPOLE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("TADPOLE", "TETARD", "GIRINO", "RENACUAJO"),
         .height = 13,
         .weight = 540,
         .description = gPoliwrathPokedexText,
@@ -1136,13 +758,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ABRA] =
     {
-    #if FRENCH
-        .categoryName = _("PSY"),
-    #elif ITALIAN
-        .categoryName = _("PSICO"),
-    #else //ENGLISH
-        .categoryName = _("PSI"),
-    #endif
+        .categoryName = LANGUAGE_STRING("PSI", "PSY", "PSICO", "PSI"),
         .height = 9,
         .weight = 195,
         .description = gAbraPokedexText,
@@ -1154,13 +770,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_KADABRA] =
     {
-    #if FRENCH
-        .categoryName = _("PSY"),
-    #elif ITALIAN
-        .categoryName = _("PSICO"),
-    #else //ENGLISH
-        .categoryName = _("PSI"),
-    #endif
+        .categoryName = LANGUAGE_STRING("PSI", "PSY", "PSICO", "PSI"),
         .height = 13,
         .weight = 565,
         .description = gKadabraPokedexText,
@@ -1172,13 +782,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ALAKAZAM] =
     {
-    #if FRENCH
-        .categoryName = _("PSY"),
-    #elif ITALIAN
-        .categoryName = _("PSICO"),
-    #else //ENGLISH
-        .categoryName = _("PSI"),
-    #endif
+        .categoryName = LANGUAGE_STRING("PSI", "PSY", "PSICO", "PSI"),
         .height = 15,
         .weight = 480,
         .description = gAlakazamPokedexText,
@@ -1190,13 +794,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MACHOP] =
     {
-    #if FRENCH
-        .categoryName = _("COLOSSE"),
-    #elif ITALIAN
-        .categoryName = _("MEGAFORZA"),
-    #else //ENGLISH
-        .categoryName = _("SUPERPOWER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SUPERPOWER", "COLOSSE", "MEGAFORZA", "SUPERPODER"),
         .height = 8,
         .weight = 195,
         .description = gMachopPokedexText,
@@ -1208,13 +806,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MACHOKE] =
     {
-    #if FRENCH
-        .categoryName = _("COLOSSE"),
-    #elif ITALIAN
-        .categoryName = _("MEGAFORZA"),
-    #else //ENGLISH
-        .categoryName = _("SUPERPOWER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SUPERPOWER", "COLOSSE", "MEGAFORZA", "SUPERPODER"),
         .height = 15,
         .weight = 705,
         .description = gMachokePokedexText,
@@ -1226,13 +818,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MACHAMP] =
     {
-    #if FRENCH
-        .categoryName = _("COLOSSE"),
-    #elif ITALIAN
-        .categoryName = _("MEGAFORZA"),
-    #else //ENGLISH
-        .categoryName = _("SUPERPOWER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SUPERPOWER", "COLOSSE", "MEGAFORZA", "SUPERPODER"),
         .height = 16,
         .weight = 1300,
         .description = gMachampPokedexText,
@@ -1244,13 +830,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BELLSPROUT] =
     {
-    #if FRENCH
-        .categoryName = _("FLEUR"),
-    #elif ITALIAN
-        .categoryName = _("FIORE"),
-    #else //ENGLISH
-        .categoryName = _("FLOWER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FLOWER", "FLEUR", "FIORE", "FLOR"),
         .height = 7,
         .weight = 40,
         .description = gBellsproutPokedexText,
@@ -1262,13 +842,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WEEPINBELL] =
     {
-    #if FRENCH
-        .categoryName = _("CARNIVORE"),
-    #elif ITALIAN
-        .categoryName = _("MOSCHIVORO"),
-    #else //ENGLISH
-        .categoryName = _("FLYCATCHER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FLYCATCHER", "CARNIVORE", "MOSCHIVORO", "MATAMOSCAS"),
         .height = 10,
         .weight = 64,
         .description = gWeepinbellPokedexText,
@@ -1280,13 +854,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_VICTREEBEL] =
     {
-    #if FRENCH
-        .categoryName = _("CARNIVORE"),
-    #elif ITALIAN
-        .categoryName = _("MOSCHIVORO"),
-    #else //ENGLISH
-        .categoryName = _("FLYCATCHER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FLYCATCHER", "CARNIVORE", "MOSCHIVORO", "MATAMOSCAS"),
         .height = 17,
         .weight = 155,
         .description = gVictreebelPokedexText,
@@ -1298,13 +866,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TENTACOOL] =
     {
-    #if FRENCH
-        .categoryName = _("MOLLUSQUE"),
-    #elif ITALIAN
-        .categoryName = _("MEDUSA"),
-    #else //ENGLISH
-        .categoryName = _("JELLYFISH"),
-    #endif
+        .categoryName = LANGUAGE_STRING("JELLYFISH", "MOLLUSQUE", "MEDUSA", "MEDUSA"),
         .height = 9,
         .weight = 455,
         .description = gTentacoolPokedexText,
@@ -1316,13 +878,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TENTACRUEL] =
     {
-    #if FRENCH
-        .categoryName = _("MOLLUSQUE"),
-    #elif ITALIAN
-        .categoryName = _("MEDUSA"),
-    #else //ENGLISH
-        .categoryName = _("JELLYFISH"),
-    #endif
+        .categoryName = LANGUAGE_STRING("JELLYFISH", "MOLLUSQUE", "MEDUSA", "MEDUSA"),
         .height = 16,
         .weight = 550,
         .description = gTentacruelPokedexText,
@@ -1334,13 +890,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GEODUDE] =
     {
-    #if FRENCH
-        .categoryName = _("ROCHE"),
-    #elif ITALIAN
-        .categoryName = _("ROCCIA"),
-    #else //ENGLISH
-        .categoryName = _("ROCK"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ROCK", "ROCHE", "ROCCIA", "ROCA"),
         .height = 4,
         .weight = 200,
         .description = gGeodudePokedexText,
@@ -1352,13 +902,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GRAVELER] =
     {
-    #if FRENCH
-        .categoryName = _("ROCHE"),
-    #elif ITALIAN
-        .categoryName = _("ROCCIA"),
-    #else //ENGLISH
-        .categoryName = _("ROCK"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ROCK", "ROCHE", "ROCCIA", "ROCA"),
         .height = 10,
         .weight = 1050,
         .description = gGravelerPokedexText,
@@ -1370,13 +914,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GOLEM] =
     {
-    #if FRENCH
-        .categoryName = _("TITANESQUE"),
-    #elif ITALIAN
-        .categoryName = _("MEGATONE"),
-    #else //ENGLISH
-        .categoryName = _("MEGATON"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MEGATON", "TITANESQUE", "MEGATONE", "MEGATÓN"),
         .height = 14,
         .weight = 3000,
         .description = gGolemPokedexText,
@@ -1388,13 +926,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PONYTA] =
     {
-    #if FRENCH
-        .categoryName = _("CHEVAL FEU"),
-    #elif ITALIAN
-        .categoryName = _("CAVALFUOCO"),
-    #else //ENGLISH
-        .categoryName = _("FIRE HORSE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FIRE HORSE", "CHEVAL FEU", "CAVALFUOCO", "CABALLO F."),
         .height = 10,
         .weight = 300,
         .description = gPonytaPokedexText,
@@ -1406,13 +938,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_RAPIDASH] =
     {
-    #if FRENCH
-        .categoryName = _("CHEVAL FEU"),
-    #elif ITALIAN
-        .categoryName = _("CAVALFUOCO"),
-    #else //ENGLISH
-        .categoryName = _("FIRE HORSE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FIRE HORSE", "CHEVAL FEU", "CAVALFUOCO", "CABALLO F."),
         .height = 17,
         .weight = 950,
         .description = gRapidashPokedexText,
@@ -1424,13 +950,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SLOWPOKE] =
     {
-    #if FRENCH
-        .categoryName = _("CRETIN"),
-    #elif ITALIAN
-        .categoryName = _("RONFONE"),
-    #else //ENGLISH
-        .categoryName = _("DOPEY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DOPEY", "CRETIN", "RONFONE", "ATONTADO"),
         .height = 12,
         .weight = 360,
         .description = gSlowpokePokedexText,
@@ -1442,13 +962,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SLOWBRO] =
     {
-    #if FRENCH
-        .categoryName = _("SYMBIOSE"),
-    #elif ITALIAN
-        .categoryName = _("PAGURO"),
-    #else //ENGLISH
-        .categoryName = _("HERMIT CRAB"),
-    #endif
+        .categoryName = LANGUAGE_STRING("HERMIT CRAB", "SYMBIOSE", "PAGURO", "ERMITAÑO"),
         .height = 16,
         .weight = 785,
         .description = gSlowbroPokedexText,
@@ -1460,13 +974,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MAGNEMITE] =
     {
-    #if FRENCH
-        .categoryName = _("MAGNETIQUE"),
-    #elif ITALIAN
-        .categoryName = _("CALAMITA"),
-    #else //ENGLISH
-        .categoryName = _("MAGNET"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MAGNET", "MAGNETIQUE", "CALAMITA", "IMÁN"),
         .height = 3,
         .weight = 60,
         .description = gMagnemitePokedexText,
@@ -1478,13 +986,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MAGNETON] =
     {
-    #if FRENCH
-        .categoryName = _("MAGNETIQUE"),
-    #elif ITALIAN
-        .categoryName = _("CALAMITA"),
-    #else //ENGLISH
-        .categoryName = _("MAGNET"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MAGNET", "MAGNETIQUE", "CALAMITA", "IMÁN"),
         .height = 10,
         .weight = 600,
         .description = gMagnetonPokedexText,
@@ -1496,13 +998,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_FARFETCHD] =
     {
-    #if FRENCH
-        .categoryName = _("CANARD FOU"),
-    #elif ITALIAN
-        .categoryName = _("SELVANATRA"),
-    #else //ENGLISH
-        .categoryName = _("WILD DUCK"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WILD DUCK", "CANARD FOU", "SELVANATRA", "PATO SALV."),
         .height = 8,
         .weight = 150,
         .description = gFarfetchdPokedexText,
@@ -1514,13 +1010,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DODUO] =
     {
-    #if FRENCH
-        .categoryName = _("DUOISEAU"),
-    #elif ITALIAN
-        .categoryName = _("BIUCCELLO"),
-    #else //ENGLISH
-        .categoryName = _("TWIN BIRD"),
-    #endif
+        .categoryName = LANGUAGE_STRING("TWIN BIRD", "DUOISEAU", "BIUCCELLO", "AVE GEMELA"),
         .height = 14,
         .weight = 392,
         .description = gDoduoPokedexText,
@@ -1532,13 +1022,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DODRIO] =
     {
-    #if FRENCH
-        .categoryName = _("TRIOISEAU"),
-    #elif ITALIAN
-        .categoryName = _("TRIUCCELLO"),
-    #else //ENGLISH
-        .categoryName = _("TRIPLE BIRD"),
-    #endif
+        .categoryName = LANGUAGE_STRING("TRIPLE BIRD", "TRIOISEAU", "TRIUCCELLO", "AVE TRIPLE"),
         .height = 18,
         .weight = 852,
         .description = gDodrioPokedexText,
@@ -1550,13 +1034,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SEEL] =
     {
-    #if FRENCH
-        .categoryName = _("OTARIE"),
-    #elif ITALIAN
-        .categoryName = _("OTARIA"),
-    #else //ENGLISH
-        .categoryName = _("SEA LION"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SEA LION", "OTARIE", "OTARIA", "LEÓN MAR."),
         .height = 11,
         .weight = 900,
         .description = gSeelPokedexText,
@@ -1568,13 +1046,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DEWGONG] =
     {
-    #if FRENCH
-        .categoryName = _("OTARIE"),
-    #elif ITALIAN
-        .categoryName = _("OTARIA"),
-    #else //ENGLISH
-        .categoryName = _("SEA LION"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SEA LION", "OTARIE", "OTARIA", "LEÓN MAR."),
         .height = 17,
         .weight = 1200,
         .description = gDewgongPokedexText,
@@ -1586,13 +1058,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GRIMER] =
     {
-    #if FRENCH
-        .categoryName = _("DEGUEU"),
-    #elif ITALIAN
-        .categoryName = _("MELMA"),
-    #else //ENGLISH
-        .categoryName = _("SLUDGE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SLUDGE", "DEGUEU", "MELMA", "LODO"),
         .height = 9,
         .weight = 300,
         .description = gGrimerPokedexText,
@@ -1604,13 +1070,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MUK] =
     {
-    #if FRENCH
-        .categoryName = _("DEGUEU"),
-    #elif ITALIAN
-        .categoryName = _("MELMA"),
-    #else //ENGLISH
-        .categoryName = _("SLUDGE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SLUDGE", "DEGUEU", "MELMA", "LODO"),
         .height = 12,
         .weight = 300,
         .description = gMukPokedexText,
@@ -1622,13 +1082,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SHELLDER] =
     {
-    #if FRENCH
-        .categoryName = _("BIVALVE"),
-    #elif ITALIAN
-        .categoryName = _("BIVALVE"),
-    #else //ENGLISH
-        .categoryName = _("BIVALVE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BIVALVE", "BIVALVE", "BIVALVE", "BIVALVO"),
         .height = 3,
         .weight = 40,
         .description = gShellderPokedexText,
@@ -1640,13 +1094,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CLOYSTER] =
     {
-    #if FRENCH
-        .categoryName = _("BIVALVE"),
-    #elif ITALIAN
-        .categoryName = _("BIVALVE"),
-    #else //ENGLISH
-        .categoryName = _("BIVALVE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BIVALVE", "BIVALVE", "BIVALVE", "BIVALVO"),
         .height = 15,
         .weight = 1325,
         .description = gCloysterPokedexText,
@@ -1658,13 +1106,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GASTLY] =
     {
-    #if FRENCH
-        .categoryName = _("GAZ"),
-    #elif ITALIAN
-        .categoryName = _("GAS"),
-    #else //ENGLISH
-        .categoryName = _("GAS"),
-    #endif
+        .categoryName = LANGUAGE_STRING("GAS", "GAZ", "GAS", "GAS"),
         .height = 13,
         .weight = 1,
         .description = gGastlyPokedexText,
@@ -1676,13 +1118,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_HAUNTER] =
     {
-    #if FRENCH
-        .categoryName = _("GAZ"),
-    #elif ITALIAN
-        .categoryName = _("GAS"),
-    #else //ENGLISH
-        .categoryName = _("GAS"),
-    #endif
+        .categoryName = LANGUAGE_STRING("GAS", "GAZ", "GAS", "GAS"),
         .height = 16,
         .weight = 1,
         .description = gHaunterPokedexText,
@@ -1694,13 +1130,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GENGAR] =
     {
-    #if FRENCH
-        .categoryName = _("OMBRE"),
-    #elif ITALIAN
-        .categoryName = _("OMBRA"),
-    #else //ENGLISH
-        .categoryName = _("SHADOW"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SHADOW", "OMBRE", "OMBRA", "SOMBRA"),
         .height = 15,
         .weight = 405,
         .description = gGengarPokedexText,
@@ -1712,13 +1142,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ONIX] =
     {
-    #if FRENCH
-        .categoryName = _("SERPENROC"),
-    #elif ITALIAN
-        .categoryName = _("SERPESASSO"),
-    #else //ENGLISH
-        .categoryName = _("ROCK SNAKE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ROCK SNAKE", "SERPENROC", "SERPESASSO", "SERP. ROCA"),
         .height = 88,
         .weight = 2100,
         .description = gOnixPokedexText,
@@ -1730,13 +1154,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DROWZEE] =
     {
-    #if FRENCH
-        .categoryName = _("HYPNOSE"),
-    #elif ITALIAN
-        .categoryName = _("IPNOSI"),
-    #else //ENGLISH
-        .categoryName = _("HYPNOSIS"),
-    #endif
+        .categoryName = LANGUAGE_STRING("HYPNOSIS", "HYPNOSE", "IPNOSI", "HIPNOSIS"),
         .height = 10,
         .weight = 324,
         .description = gDrowzeePokedexText,
@@ -1748,13 +1166,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_HYPNO] =
     {
-    #if FRENCH
-        .categoryName = _("HYPNOSE"),
-    #elif ITALIAN
-        .categoryName = _("IPNOSI"),
-    #else //ENGLISH
-        .categoryName = _("HYPNOSIS"),
-    #endif
+        .categoryName = LANGUAGE_STRING("HYPNOSIS", "HYPNOSE", "IPNOSI", "HIPNOSIS"),
         .height = 16,
         .weight = 756,
         .description = gHypnoPokedexText,
@@ -1766,13 +1178,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_KRABBY] =
     {
-    #if FRENCH
-        .categoryName = _("DOUX CRABE"),
-    #elif ITALIAN
-        .categoryName = _("GRANCHIO"),
-    #else //ENGLISH
-        .categoryName = _("RIVER CRAB"),
-    #endif
+        .categoryName = LANGUAGE_STRING("RIVER CRAB", "DOUX CRABE", "GRANCHIO", "CANGREJO"),
         .height = 4,
         .weight = 65,
         .description = gKrabbyPokedexText,
@@ -1784,13 +1190,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_KINGLER] =
     {
-    #if FRENCH
-        .categoryName = _("PINCE"),
-    #elif ITALIAN
-        .categoryName = _("CHELA"),
-    #else //ENGLISH
-        .categoryName = _("PINCER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("PINCER", "PINCE", "CHELA", "TENAZA"),
         .height = 13,
         .weight = 600,
         .description = gKinglerPokedexText,
@@ -1802,13 +1202,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_VOLTORB] =
     {
-    #if FRENCH
-        .categoryName = _("BALLE"),
-    #elif ITALIAN
-        .categoryName = _("BALL"),
-    #else //ENGLISH
-        .categoryName = _("BALL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BALL", "BALLE", "BALL", "BOLA"),
         .height = 5,
         .weight = 104,
         .description = gVoltorbPokedexText,
@@ -1820,13 +1214,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ELECTRODE] =
     {
-    #if FRENCH
-        .categoryName = _("BALLE"),
-    #elif ITALIAN
-        .categoryName = _("BALL"),
-    #else //ENGLISH
-        .categoryName = _("BALL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BALL", "BALLE", "BALL", "BOLA"),
         .height = 12,
         .weight = 666,
         .description = gElectrodePokedexText,
@@ -1838,13 +1226,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_EXEGGCUTE] =
     {
-    #if FRENCH
-        .categoryName = _("OEUF"),
-    #elif ITALIAN
-        .categoryName = _("UOVO"),
-    #else //ENGLISH
-        .categoryName = _("EGG"),
-    #endif
+        .categoryName = LANGUAGE_STRING("EGG", "OEUF", "UOVO", "HUEVO"),
         .height = 4,
         .weight = 25,
         .description = gExeggcutePokedexText,
@@ -1856,13 +1238,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_EXEGGUTOR] =
     {
-    #if FRENCH
-        .categoryName = _("FRUITPALME"),
-    #elif ITALIAN
-        .categoryName = _("NOCECOCCO"),
-    #else //ENGLISH
-        .categoryName = _("COCONUT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("COCONUT", "FRUITPALME", "NOCECOCCO", "COCO"),
         .height = 20,
         .weight = 1200,
         .description = gExeggutorPokedexText,
@@ -1874,13 +1250,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CUBONE] =
     {
-    #if FRENCH
-        .categoryName = _("SOLITAIRE"),
-    #elif ITALIAN
-        .categoryName = _("SOLITARIO"),
-    #else //ENGLISH
-        .categoryName = _("LONELY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LONELY", "SOLITAIRE", "SOLITARIO", "SOLITARIO"),
         .height = 4,
         .weight = 65,
         .description = gCubonePokedexText,
@@ -1892,13 +1262,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MAROWAK] =
     {
-    #if FRENCH
-        .categoryName = _("GARD'OS"),
-    #elif ITALIAN
-        .categoryName = _("GUARDAOSSI"),
-    #else //ENGLISH
-        .categoryName = _("BONE KEEPER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BONE KEEPER", "GARD'OS", "GUARDAOSSI", "APILAHUESO"),
         .height = 10,
         .weight = 450,
         .description = gMarowakPokedexText,
@@ -1910,13 +1274,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_HITMONLEE] =
     {
-    #if FRENCH
-        .categoryName = _("LATTEUR"),
-    #elif ITALIAN
-        .categoryName = _("TIRACALCI"),
-    #else //ENGLISH
-        .categoryName = _("KICKING"),
-    #endif
+        .categoryName = LANGUAGE_STRING("KICKING", "LATTEUR", "TIRACALCI", "PATADA"),
         .height = 15,
         .weight = 498,
         .description = gHitmonleePokedexText,
@@ -1928,13 +1286,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_HITMONCHAN] =
     {
-    #if FRENCH
-        .categoryName = _("PUNCHEUR"),
-    #elif ITALIAN
-        .categoryName = _("TIRAPUGNI"),
-    #else //ENGLISH
-        .categoryName = _("PUNCHING"),
-    #endif
+        .categoryName = LANGUAGE_STRING("PUNCHING", "PUNCHEUR", "TIRAPUGNI", "PUÑETAZO"),
         .height = 14,
         .weight = 502,
         .description = gHitmonchanPokedexText,
@@ -1946,13 +1298,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LICKITUNG] =
     {
-    #if FRENCH
-        .categoryName = _("LECHEUR"),
-    #elif ITALIAN
-        .categoryName = _("LINGUACCIA"),
-    #else //ENGLISH
-        .categoryName = _("LICKING"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LICKING", "LECHEUR", "LINGUACCIA", "LAMETAZO"),
         .height = 12,
         .weight = 655,
         .description = gLickitungPokedexText,
@@ -1964,13 +1310,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_KOFFING] =
     {
-    #if FRENCH
-        .categoryName = _("GAZ MORTEL"),
-    #elif ITALIAN
-        .categoryName = _("VELENUVOLA"),
-    #else //ENGLISH
-        .categoryName = _("POISON GAS"),
-    #endif
+        .categoryName = LANGUAGE_STRING("POISON GAS", "GAZ MORTEL", "VELENUVOLA", "GAS VENENO"),
         .height = 6,
         .weight = 10,
         .description = gKoffingPokedexText,
@@ -1982,13 +1322,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WEEZING] =
     {
-    #if FRENCH
-        .categoryName = _("GAZ MORTEL"),
-    #elif ITALIAN
-        .categoryName = _("VELENUVOLA"),
-    #else //ENGLISH
-        .categoryName = _("POISON GAS"),
-    #endif
+        .categoryName = LANGUAGE_STRING("POISON GAS", "GAZ MORTEL", "VELENUVOLA", "GAS VENENO"),
         .height = 12,
         .weight = 95,
         .description = gWeezingPokedexText,
@@ -2000,13 +1334,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_RHYHORN] =
     {
-    #if FRENCH
-        .categoryName = _("PIQUANT"),
-    #elif ITALIAN
-        .categoryName = _("PUNZONI"),
-    #else //ENGLISH
-        .categoryName = _("SPIKES"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SPIKES", "PIQUANT", "PUNZONI", "CLAVOS"),
         .height = 10,
         .weight = 1150,
         .description = gRhyhornPokedexText,
@@ -2018,13 +1346,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_RHYDON] =
     {
-    #if FRENCH
-        .categoryName = _("PERCEUR"),
-    #elif ITALIAN
-        .categoryName = _("TRAPANO"),
-    #else //ENGLISH
-        .categoryName = _("DRILL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DRILL", "PERCEUR", "TRAPANO", "TALADRO"),
         .height = 19,
         .weight = 1200,
         .description = gRhydonPokedexText,
@@ -2036,13 +1358,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CHANSEY] =
     {
-    #if FRENCH
-        .categoryName = _("OEUF"),
-    #elif ITALIAN
-        .categoryName = _("UOVO"),
-    #else //ENGLISH
-        .categoryName = _("EGG"),
-    #endif
+        .categoryName = LANGUAGE_STRING("EGG", "OEUF", "UOVO", "HUEVO"),
         .height = 11,
         .weight = 346,
         .description = gChanseyPokedexText,
@@ -2054,13 +1370,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TANGELA] =
     {
-    #if FRENCH
-        .categoryName = _("VIGNE"),
-    #elif ITALIAN
-        .categoryName = _("LIANA"),
-    #else //ENGLISH
-        .categoryName = _("VINE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("VINE", "VIGNE", "LIANA", "ENREDADERA"),
         .height = 10,
         .weight = 350,
         .description = gTangelaPokedexText,
@@ -2072,13 +1382,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_KANGASKHAN] =
     {
-    #if FRENCH
-        .categoryName = _("MATERNEL"),
-    #elif ITALIAN
-        .categoryName = _("GENITORE"),
-    #else //ENGLISH
-        .categoryName = _("PARENT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("PARENT", "MATERNEL", "GENITORE", "PADRES"),
         .height = 22,
         .weight = 800,
         .description = gKangaskhanPokedexText,
@@ -2090,13 +1394,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_HORSEA] =
     {
-    #if FRENCH
-        .categoryName = _("DRAGON"),
-    #elif ITALIAN
-        .categoryName = _("DRAGO"),
-    #else //ENGLISH
-        .categoryName = _("DRAGON"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DRAGON", "DRAGON", "DRAGO", "DRAGÓN"),
         .height = 4,
         .weight = 80,
         .description = gHorseaPokedexText,
@@ -2108,13 +1406,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SEADRA] =
     {
-    #if FRENCH
-        .categoryName = _("DRAGON"),
-    #elif ITALIAN
-        .categoryName = _("DRAGO"),
-    #else //ENGLISH
-        .categoryName = _("DRAGON"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DRAGON", "DRAGON", "DRAGO", "DRAGÓN"),
         .height = 12,
         .weight = 250,
         .description = gSeadraPokedexText,
@@ -2126,13 +1418,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GOLDEEN] =
     {
-    #if FRENCH
-        .categoryName = _("POISSON"),
-    #elif ITALIAN
-        .categoryName = _("PESCEROSSO"),
-    #else //ENGLISH
-        .categoryName = _("GOLDFISH"),
-    #endif
+        .categoryName = LANGUAGE_STRING("GOLDFISH", "POISSON", "PESCEROSSO", "PEZ COLOR"),
         .height = 6,
         .weight = 150,
         .description = gGoldeenPokedexText,
@@ -2144,13 +1430,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SEAKING] =
     {
-    #if FRENCH
-        .categoryName = _("POISSON"),
-    #elif ITALIAN
-        .categoryName = _("PESCEROSSO"),
-    #else //ENGLISH
-        .categoryName = _("GOLDFISH"),
-    #endif
+        .categoryName = LANGUAGE_STRING("GOLDFISH", "POISSON", "PESCEROSSO", "PEZ COLOR"),
         .height = 13,
         .weight = 390,
         .description = gSeakingPokedexText,
@@ -2162,13 +1442,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_STARYU] =
     {
-    #if FRENCH
-        .categoryName = _("ETOILE"),
-    #elif ITALIAN
-        .categoryName = _("STELLA"),
-    #else //ENGLISH
-        .categoryName = _("STAR SHAPE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("STAR SHAPE", "ETOILE", "STELLA", "ESTRELLADA"),
         .height = 8,
         .weight = 345,
         .description = gStaryuPokedexText,
@@ -2180,13 +1454,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_STARMIE] =
     {
-    #if FRENCH
-        .categoryName = _("MYSTERIEUX"),
-    #elif ITALIAN
-        .categoryName = _("MISTERIOSO"),
-    #else //ENGLISH
-        .categoryName = _("MYSTERIOUS"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MYSTERIOUS", "MYSTERIEUX", "MISTERIOSO", "MISTERIOSO"),
         .height = 11,
         .weight = 800,
         .description = gStarmiePokedexText,
@@ -2198,13 +1466,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MR_MIME] =
     {
-    #if FRENCH
-        .categoryName = _("BLOQUEUR"),
-    #elif ITALIAN
-        .categoryName = _("BARRIERA"),
-    #else //ENGLISH
-        .categoryName = _("BARRIER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BARRIER", "BLOQUEUR", "BARRIERA", "BARRERA"),
         .height = 13,
         .weight = 545,
         .description = gMrMimePokedexText,
@@ -2216,13 +1478,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SCYTHER] =
     {
-    #if FRENCH
-        .categoryName = _("MANTE"),
-    #elif ITALIAN
-        .categoryName = _("MANTIDE"),
-    #else //ENGLISH
-        .categoryName = _("MANTIS"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MANTIS", "MANTE", "MANTIDE", "MANTIS"),
         .height = 15,
         .weight = 560,
         .description = gScytherPokedexText,
@@ -2234,13 +1490,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_JYNX] =
     {
-    #if FRENCH
-        .categoryName = _("HUMANOIDE"),
-    #elif ITALIAN
-        .categoryName = _("UMANOIDE"),
-    #else //ENGLISH
-        .categoryName = _("HUMAN SHAPE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("HUMAN SHAPE", "HUMANOIDE", "UMANOIDE", "F. HUMANA"),
         .height = 14,
         .weight = 406,
         .description = gJynxPokedexText,
@@ -2252,13 +1502,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ELECTABUZZ] =
     {
-    #if FRENCH
-        .categoryName = _("ELECTRIQUE"),
-    #elif ITALIAN
-        .categoryName = _("ELETTRICO"),
-    #else //ENGLISH
-        .categoryName = _("ELECTRIC"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ELECTRIC", "ELECTRIQUE", "ELETTRICO", "ELÉCTRICO"),
         .height = 11,
         .weight = 300,
         .description = gElectabuzzPokedexText,
@@ -2270,13 +1514,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MAGMAR] =
     {
-    #if FRENCH
-        .categoryName = _("CRACHE-FEU"),
-    #elif ITALIAN
-        .categoryName = _("SPUTAFUOCO"),
-    #else //ENGLISH
-        .categoryName = _("SPITFIRE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SPITFIRE", "CRACHE-FEU", "SPUTAFUOCO", "ESCUPFUEGO"),
         .height = 13,
         .weight = 445,
         .description = gMagmarPokedexText,
@@ -2288,13 +1526,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PINSIR] =
     {
-    #if FRENCH
-        .categoryName = _("SCARABEE"),
-    #elif ITALIAN
-        .categoryName = _("CERVOLANTE"),
-    #else //ENGLISH
-        .categoryName = _("STAG BEETLE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("STAG BEETLE", "SCARABEE", "CERVOLANTE", "ESCARABAJO"),
         .height = 15,
         .weight = 550,
         .description = gPinsirPokedexText,
@@ -2306,13 +1538,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TAUROS] =
     {
-    #if FRENCH
-        .categoryName = _("BUFFLE"),
-    #elif ITALIAN
-        .categoryName = _("TOROBRADO"),
-    #else //ENGLISH
-        .categoryName = _("WILD BULL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WILD BULL", "BUFFLE", "TOROBRADO", "TORO BRAVO"),
         .height = 14,
         .weight = 884,
         .description = gTaurosPokedexText,
@@ -2324,13 +1550,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MAGIKARP] =
     {
-    #if FRENCH
-        .categoryName = _("POISSON"),
-    #elif ITALIAN
-        .categoryName = _("PESCE"),
-    #else //ENGLISH
-        .categoryName = _("FISH"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FISH", "POISSON", "PESCE", "PEZ"),
         .height = 9,
         .weight = 100,
         .description = gMagikarpPokedexText,
@@ -2342,13 +1562,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GYARADOS] =
     {
-    #if FRENCH
-        .categoryName = _("TERRIFIANT"),
-    #elif ITALIAN
-        .categoryName = _("ATROCE"),
-    #else //ENGLISH
-        .categoryName = _("ATROCIOUS"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ATROCIOUS", "TERRIFIANT", "ATROCE", "ATROCIDAD"),
         .height = 65,
         .weight = 2350,
         .description = gGyaradosPokedexText,
@@ -2360,13 +1574,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LAPRAS] =
     {
-    #if FRENCH
-        .categoryName = _("TRANSPORT"),
-    #elif ITALIAN
-        .categoryName = _("TRASPORTO"),
-    #else //ENGLISH
-        .categoryName = _("TRANSPORT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("TRANSPORT", "TRANSPORT", "TRASPORTO", "TRANSPORTE"),
         .height = 25,
         .weight = 2200,
         .description = gLaprasPokedexText,
@@ -2378,13 +1586,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DITTO] =
     {
-    #if FRENCH
-        .categoryName = _("MORPHING"),
-    #elif ITALIAN
-        .categoryName = _("MUTANTE"),
-    #else //ENGLISH
-        .categoryName = _("TRANSFORM"),
-    #endif
+        .categoryName = LANGUAGE_STRING("TRANSFORM", "MORPHING", "MUTANTE", "TRANSFORM."),
         .height = 3,
         .weight = 40,
         .description = gDittoPokedexText,
@@ -2396,13 +1598,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_EEVEE] =
     {
-    #if FRENCH
-        .categoryName = _("EVOLUTIF"),
-    #elif ITALIAN
-        .categoryName = _("EVOLUZIONE"),
-    #else //ENGLISH
-        .categoryName = _("EVOLUTION"),
-    #endif
+        .categoryName = LANGUAGE_STRING("EVOLUTION", "EVOLUTIF", "EVOLUZIONE", "EVOLUCIÓN"),
         .height = 3,
         .weight = 65,
         .description = gEeveePokedexText,
@@ -2414,13 +1610,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_VAPOREON] =
     {
-    #if FRENCH
-        .categoryName = _("BULLEUR"),
-    #elif ITALIAN
-        .categoryName = _("BOLLAJET"),
-    #else //ENGLISH
-        .categoryName = _("BUBBLE JET"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BUBBLE JET", "BULLEUR", "BOLLAJET", "BURBUJA"),
         .height = 10,
         .weight = 290,
         .description = gVaporeonPokedexText,
@@ -2432,13 +1622,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_JOLTEON] =
     {
-    #if FRENCH
-        .categoryName = _("ORAGE"),
-    #elif ITALIAN
-        .categoryName = _("LUMINOSO"),
-    #else //ENGLISH
-        .categoryName = _("LIGHTNING"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LIGHTNING", "ORAGE", "LUMINOSO", "RELÁMPAGO"),
         .height = 8,
         .weight = 245,
         .description = gJolteonPokedexText,
@@ -2450,13 +1634,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_FLAREON] =
     {
-    #if FRENCH
-        .categoryName = _("FLAMME"),
-    #elif ITALIAN
-        .categoryName = _("FIAMMA"),
-    #else //ENGLISH
-        .categoryName = _("FLAME"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FLAME", "FLAMME", "FIAMMA", "LLAMA"),
         .height = 9,
         .weight = 250,
         .description = gFlareonPokedexText,
@@ -2468,13 +1646,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PORYGON] =
     {
-    #if FRENCH
-        .categoryName = _("VIRTUEL"),
-    #elif ITALIAN
-        .categoryName = _("VIRTUALE"),
-    #else //ENGLISH
-        .categoryName = _("VIRTUAL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("VIRTUAL", "VIRTUEL", "VIRTUALE", "VIRTUAL"),
         .height = 8,
         .weight = 365,
         .description = gPorygonPokedexText,
@@ -2486,13 +1658,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_OMANYTE] =
     {
-    #if FRENCH
-        .categoryName = _("SPIRALE"),
-    #elif ITALIAN
-        .categoryName = _("SPIRALE"),
-    #else //ENGLISH
-        .categoryName = _("SPIRAL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SPIRAL", "SPIRALE", "SPIRALE", "ESPIRAL"),
         .height = 4,
         .weight = 75,
         .description = gOmanytePokedexText,
@@ -2504,13 +1670,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_OMASTAR] =
     {
-    #if FRENCH
-        .categoryName = _("SPIRALE"),
-    #elif ITALIAN
-        .categoryName = _("SPIRALE"),
-    #else //ENGLISH
-        .categoryName = _("SPIRAL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SPIRAL", "SPIRALE", "SPIRALE", "ESPIRAL"),
         .height = 10,
         .weight = 350,
         .description = gOmastarPokedexText,
@@ -2522,13 +1682,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_KABUTO] =
     {
-    #if FRENCH
-        .categoryName = _("CARAPACE"),
-    #elif ITALIAN
-        .categoryName = _("CROSTACEO"),
-    #else //ENGLISH
-        .categoryName = _("SHELLFISH"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SHELLFISH", "CARAPACE", "CROSTACEO", "MARISCO"),
         .height = 5,
         .weight = 115,
         .description = gKabutoPokedexText,
@@ -2540,13 +1694,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_KABUTOPS] =
     {
-    #if FRENCH
-        .categoryName = _("CARAPACE"),
-    #elif ITALIAN
-        .categoryName = _("CROSTACEO"),
-    #else //ENGLISH
-        .categoryName = _("SHELLFISH"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SHELLFISH", "CARAPACE", "CROSTACEO", "MARISCO"),
         .height = 13,
         .weight = 405,
         .description = gKabutopsPokedexText,
@@ -2558,13 +1706,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_AERODACTYL] =
     {
-    #if FRENCH
-        .categoryName = _("FOSSILE"),
-    #elif ITALIAN
-        .categoryName = _("FOSSILE"),
-    #else //ENGLISH
-        .categoryName = _("FOSSIL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FOSSIL", "FOSSILE", "FOSSILE", "FÓSIL"),
         .height = 18,
         .weight = 590,
         .description = gAerodactylPokedexText,
@@ -2576,13 +1718,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SNORLAX] =
     {
-    #if FRENCH
-        .categoryName = _("PIONCEUR"),
-    #elif ITALIAN
-        .categoryName = _("SONNO"),
-    #else //ENGLISH
-        .categoryName = _("SLEEPING"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SLEEPING", "PIONCEUR", "SONNO", "DORMIR"),
         .height = 21,
         .weight = 4600,
         .description = gSnorlaxPokedexText,
@@ -2594,13 +1730,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ARTICUNO] =
     {
-    #if FRENCH
-        .categoryName = _("GLACIAIRE"),
-    #elif ITALIAN
-        .categoryName = _("GELO"),
-    #else //ENGLISH
-        .categoryName = _("FREEZE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FREEZE", "GLACIAIRE", "GELO", "CONGELAR"),
         .height = 17,
         .weight = 554,
         .description = gArticunoPokedexText,
@@ -2612,13 +1742,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ZAPDOS] =
     {
-    #if FRENCH
-        .categoryName = _("ELECTRIQUE"),
-    #elif ITALIAN
-        .categoryName = _("ELETTRICO"),
-    #else //ENGLISH
-        .categoryName = _("ELECTRIC"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ELECTRIC", "ELECTRIQUE", "ELETTRICO", "ELÉCTRICO"),
         .height = 16,
         .weight = 526,
         .description = gZapdosPokedexText,
@@ -2630,13 +1754,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MOLTRES] =
     {
-    #if FRENCH
-        .categoryName = _("FLAMME"),
-    #elif ITALIAN
-        .categoryName = _("FIAMMA"),
-    #else //ENGLISH
-        .categoryName = _("FLAME"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FLAME", "FLAMME", "FIAMMA", "LLAMA"),
         .height = 20,
         .weight = 600,
         .description = gMoltresPokedexText,
@@ -2648,13 +1766,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DRATINI] =
     {
-    #if FRENCH
-        .categoryName = _("DRAGON"),
-    #elif ITALIAN
-        .categoryName = _("DRAGO"),
-    #else //ENGLISH
-        .categoryName = _("DRAGON"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DRAGON", "DRAGON", "DRAGO", "DRAGÓN"),
         .height = 18,
         .weight = 33,
         .description = gDratiniPokedexText,
@@ -2666,13 +1778,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DRAGONAIR] =
     {
-    #if FRENCH
-        .categoryName = _("DRAGON"),
-    #elif ITALIAN
-        .categoryName = _("DRAGO"),
-    #else //ENGLISH
-        .categoryName = _("DRAGON"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DRAGON", "DRAGON", "DRAGO", "DRAGÓN"),
         .height = 40,
         .weight = 165,
         .description = gDragonairPokedexText,
@@ -2684,13 +1790,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DRAGONITE] =
     {
-    #if FRENCH
-        .categoryName = _("DRAGON"),
-    #elif ITALIAN
-        .categoryName = _("DRAGO"),
-    #else //ENGLISH
-        .categoryName = _("DRAGON"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DRAGON", "DRAGON", "DRAGO", "DRAGÓN"),
         .height = 22,
         .weight = 2100,
         .description = gDragonitePokedexText,
@@ -2702,13 +1802,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MEWTWO] =
     {
-    #if FRENCH
-        .categoryName = _("GENETIQUE"),
-    #elif ITALIAN
-        .categoryName = _("GENETICO"),
-    #else //ENGLISH
-        .categoryName = _("GENETIC"),
-    #endif
+        .categoryName = LANGUAGE_STRING("GENETIC", "GENETIQUE", "GENETICO", "GENÉTICO"),
         .height = 20,
         .weight = 1220,
         .description = gMewtwoPokedexText,
@@ -2720,13 +1814,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MEW] =
     {
-    #if FRENCH
-        .categoryName = _("NOUVEAU"),
-    #elif ITALIAN
-        .categoryName = _("NOVASPECIE"),
-    #else //ENGLISH
-        .categoryName = _("NEW SPECIES"),
-    #endif
+        .categoryName = LANGUAGE_STRING("NEW SPECIES", "NOUVEAU", "NOVASPECIE", "N. ESPECIE"),
         .height = 4,
         .weight = 40,
         .description = gMewPokedexText,
@@ -2738,13 +1826,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CHIKORITA] =
     {
-    #if FRENCH
-        .categoryName = _("FEUILLE"),
-    #elif ITALIAN
-        .categoryName = _("FOGLIA"),
-    #else //ENGLISH
-        .categoryName = _("LEAF"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LEAF", "FEUILLE", "FOGLIA", "HOJA"),
         .height = 9,
         .weight = 64,
         .description = gChikoritaPokedexText,
@@ -2756,13 +1838,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BAYLEEF] =
     {
-    #if FRENCH
-        .categoryName = _("FEUILLE"),
-    #elif ITALIAN
-        .categoryName = _("FOGLIA"),
-    #else //ENGLISH
-        .categoryName = _("LEAF"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LEAF", "FEUILLE", "FOGLIA", "HOJA"),
         .height = 12,
         .weight = 158,
         .description = gBayleefPokedexText,
@@ -2774,13 +1850,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MEGANIUM] =
     {
-    #if FRENCH
-        .categoryName = _("HERBE"),
-    #elif ITALIAN
-        .categoryName = _("ERBE"),
-    #else //ENGLISH
-        .categoryName = _("HERB"),
-    #endif
+        .categoryName = LANGUAGE_STRING("HERB", "HERBE", "ERBE", "HIERBA"),
         .height = 18,
         .weight = 1005,
         .description = gMeganiumPokedexText,
@@ -2792,13 +1862,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CYNDAQUIL] =
     {
-    #if FRENCH
-        .categoryName = _("SOURIS FEU"),
-    #elif ITALIAN
-        .categoryName = _("FUOCOTOPO"),
-    #else //ENGLISH
-        .categoryName = _("FIRE MOUSE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FIRE MOUSE", "SOURIS FEU", "FUOCOTOPO", "RATÓNFUEGO"),
         .height = 5,
         .weight = 79,
         .description = gCyndaquilPokedexText,
@@ -2810,13 +1874,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_QUILAVA] =
     {
-    #if FRENCH
-        .categoryName = _("VOLCAN"),
-    #elif ITALIAN
-        .categoryName = _("VULCANO"),
-    #else //ENGLISH
-        .categoryName = _("VOLCANO"),
-    #endif
+        .categoryName = LANGUAGE_STRING("VOLCANO", "VOLCAN", "VULCANO", "VOLCÁN"),
         .height = 9,
         .weight = 190,
         .description = gQuilavaPokedexText,
@@ -2828,13 +1886,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TYPHLOSION] =
     {
-    #if FRENCH
-        .categoryName = _("VOLCAN"),
-    #elif ITALIAN
-        .categoryName = _("VULCANO"),
-    #else //ENGLISH
-        .categoryName = _("VOLCANO"),
-    #endif
+        .categoryName = LANGUAGE_STRING("VOLCANO", "VOLCAN", "VULCANO", "VOLCÁN"),
         .height = 17,
         .weight = 795,
         .description = gTyphlosionPokedexText,
@@ -2846,13 +1898,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TOTODILE] =
     {
-    #if FRENCH
-        .categoryName = _("MACHOIRE"),
-    #elif ITALIAN
-        .categoryName = _("MASCELLONE"),
-    #else //ENGLISH
-        .categoryName = _("BIG JAW"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BIG JAW", "MACHOIRE", "MASCELLONE", "FAUCES"),
         .height = 6,
         .weight = 95,
         .description = gTotodilePokedexText,
@@ -2864,13 +1910,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CROCONAW] =
     {
-    #if FRENCH
-        .categoryName = _("MACHOIRE"),
-    #elif ITALIAN
-        .categoryName = _("MASCELLONE"),
-    #else //ENGLISH
-        .categoryName = _("BIG JAW"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BIG JAW", "MACHOIRE", "MASCELLONE", "FAUCES"),
         .height = 11,
         .weight = 250,
         .description = gCroconawPokedexText,
@@ -2882,13 +1922,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_FERALIGATR] =
     {
-    #if FRENCH
-        .categoryName = _("MACHOIRE"),
-    #elif ITALIAN
-        .categoryName = _("MASCELLONE"),
-    #else //ENGLISH
-        .categoryName = _("BIG JAW"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BIG JAW", "MACHOIRE", "MASCELLONE", "FAUCES"),
         .height = 23,
         .weight = 888,
         .description = gFeraligatrPokedexText,
@@ -2900,13 +1934,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SENTRET] =
     {
-    #if FRENCH
-        .categoryName = _("ESPION"),
-    #elif ITALIAN
-        .categoryName = _("ESPLORANTE"),
-    #else //ENGLISH
-        .categoryName = _("SCOUT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SCOUT", "ESPION", "ESPLORANTE", "EXPLORADOR"),
         .height = 8,
         .weight = 60,
         .description = gSentretPokedexText,
@@ -2918,13 +1946,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_FURRET] =
     {
-    #if FRENCH
-        .categoryName = _("ALLONGE"),
-    #elif ITALIAN
-        .categoryName = _("LUNGOCORPO"),
-    #else //ENGLISH
-        .categoryName = _("LONG BODY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LONG BODY", "ALLONGE", "LUNGOCORPO", "ALARGADO"),
         .height = 18,
         .weight = 325,
         .description = gFurretPokedexText,
@@ -2936,13 +1958,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_HOOTHOOT] =
     {
-    #if FRENCH
-        .categoryName = _("HIBOU"),
-    #elif ITALIAN
-        .categoryName = _("GUFO"),
-    #else //ENGLISH
-        .categoryName = _("OWL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("OWL", "HIBOU", "GUFO", "BÚHO"),
         .height = 7,
         .weight = 212,
         .description = gHoothootPokedexText,
@@ -2954,13 +1970,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NOCTOWL] =
     {
-    #if FRENCH
-        .categoryName = _("HIBOU"),
-    #elif ITALIAN
-        .categoryName = _("GUFO"),
-    #else //ENGLISH
-        .categoryName = _("OWL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("OWL", "HIBOU", "GUFO", "BÚHO"),
         .height = 16,
         .weight = 408,
         .description = gNoctowlPokedexText,
@@ -2972,13 +1982,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LEDYBA] =
     {
-    #if FRENCH
-        .categoryName = _("5 ETOILES"),
-    #elif ITALIAN
-        .categoryName = _("PENTASTRA"),
-    #else //ENGLISH
-        .categoryName = _("FIVE STAR"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FIVE STAR", "5 ETOILES", "PENTASTRA", "5ESTRELLAS"),
         .height = 10,
         .weight = 108,
         .description = gLedybaPokedexText,
@@ -2990,13 +1994,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LEDIAN] =
     {
-    #if FRENCH
-        .categoryName = _("5 ETOILES"),
-    #elif ITALIAN
-        .categoryName = _("PENTASTRA"),
-    #else //ENGLISH
-        .categoryName = _("FIVE STAR"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FIVE STAR", "5 ETOILES", "PENTASTRA", "5ESTRELLAS"),
         .height = 14,
         .weight = 356,
         .description = gLedianPokedexText,
@@ -3008,13 +2006,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SPINARAK] =
     {
-    #if FRENCH
-        .categoryName = _("CRACHE FIL"),
-    #elif ITALIAN
-        .categoryName = _("TELA"),
-    #else //ENGLISH
-        .categoryName = _("STRING SPIT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("STRING SPIT", "CRACHE FIL", "TELA", "ESCUPESOGA"),
         .height = 5,
         .weight = 85,
         .description = gSpinarakPokedexText,
@@ -3026,13 +2018,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ARIADOS] =
     {
-    #if FRENCH
-        .categoryName = _("LONG-PATTE"),
-    #elif ITALIAN
-        .categoryName = _("LUNGAZAMPA"),
-    #else //ENGLISH
-        .categoryName = _("LONG LEG"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LONG LEG", "LONG-PATTE", "LUNGAZAMPA", "PATA LARGA"),
         .height = 11,
         .weight = 335,
         .description = gAriadosPokedexText,
@@ -3044,13 +2030,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CROBAT] =
     {
-    #if FRENCH
-        .categoryName = _("CHOVSOURIS"),
-    #elif ITALIAN
-        .categoryName = _("PIPISTREL."),
-    #else //ENGLISH
-        .categoryName = _("BAT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BAT", "CHOVSOURIS", "PIPISTREL.", "MURCIÉLAGO"),
         .height = 18,
         .weight = 750,
         .description = gCrobatPokedexText,
@@ -3062,13 +2042,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CHINCHOU] =
     {
-    #if FRENCH
-        .categoryName = _("POISSON"),
-    #elif ITALIAN
-        .categoryName = _("PESCATORE"),
-    #else //ENGLISH
-        .categoryName = _("ANGLER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ANGLER", "POISSON", "PESCATORE", "RAPE"),
         .height = 5,
         .weight = 120,
         .description = gChinchouPokedexText,
@@ -3080,13 +2054,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LANTURN] =
     {
-    #if FRENCH
-        .categoryName = _("LUMIERE"),
-    #elif ITALIAN
-        .categoryName = _("LUCE"),
-    #else //ENGLISH
-        .categoryName = _("LIGHT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LIGHT", "LUMIERE", "LUCE", "LUZ"),
         .height = 12,
         .weight = 225,
         .description = gLanturnPokedexText,
@@ -3098,13 +2066,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PICHU] =
     {
-    #if FRENCH
-        .categoryName = _("MINISOURIS"),
-    #elif ITALIAN
-        .categoryName = _("TOPINO"),
-    #else //ENGLISH
-        .categoryName = _("TINY MOUSE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("TINY MOUSE", "MINISOURIS", "TOPINO", "RATONCITO"),
         .height = 3,
         .weight = 20,
         .description = gPichuPokedexText,
@@ -3116,13 +2078,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CLEFFA] =
     {
-    #if FRENCH
-        .categoryName = _("ETOILE"),
-    #elif ITALIAN
-        .categoryName = _("STELLA"),
-    #else //ENGLISH
-        .categoryName = _("STAR SHAPE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("STAR SHAPE", "ETOILE", "STELLA", "ESTRELLADA"),
         .height = 3,
         .weight = 30,
         .description = gCleffaPokedexText,
@@ -3134,13 +2090,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_IGGLYBUFF] =
     {
-    #if FRENCH
-        .categoryName = _("BOUBOULE"),
-    #elif ITALIAN
-        .categoryName = _("PALLONE"),
-    #else //ENGLISH
-        .categoryName = _("BALLOON"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BALLOON", "BOUBOULE", "PALLONE", "GLOBO"),
         .height = 3,
         .weight = 10,
         .description = gIgglybuffPokedexText,
@@ -3152,13 +2102,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TOGEPI] =
     {
-    #if FRENCH
-        .categoryName = _("BALLE PIC"),
-    #elif ITALIAN
-        .categoryName = _("PALLAPUNTE"),
-    #else //ENGLISH
-        .categoryName = _("SPIKE BALL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SPIKE BALL", "BALLE PIC", "PALLAPUNTE", "BOLACLAVOS"),
         .height = 3,
         .weight = 15,
         .description = gTogepiPokedexText,
@@ -3170,13 +2114,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TOGETIC] =
     {
-    #if FRENCH
-        .categoryName = _("BONHEUR"),
-    #elif ITALIAN
-        .categoryName = _("FELICITÀ"),
-    #else //ENGLISH
-        .categoryName = _("HAPPINESS"),
-    #endif
+        .categoryName = LANGUAGE_STRING("HAPPINESS", "BONHEUR", "FELICITÀ", "FELICIDAD"),
         .height = 6,
         .weight = 32,
         .description = gTogeticPokedexText,
@@ -3188,13 +2126,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NATU] =
     {
-    #if FRENCH
-        .categoryName = _("MINOISEAU"),
-    #elif ITALIAN
-        .categoryName = _("UCCELLINO"),
-    #else //ENGLISH
-        .categoryName = _("TINY BIRD"),
-    #endif
+        .categoryName = LANGUAGE_STRING("TINY BIRD", "MINOISEAU", "UCCELLINO", "PAJARITO"),
         .height = 2,
         .weight = 20,
         .description = gNatuPokedexText,
@@ -3206,13 +2138,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_XATU] =
     {
-    #if FRENCH
-        .categoryName = _("MYSTIQUE"),
-    #elif ITALIAN
-        .categoryName = _("MAGICO"),
-    #else //ENGLISH
-        .categoryName = _("MYSTIC"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MYSTIC", "MYSTIQUE", "MAGICO", "MÍSTICO"),
         .height = 15,
         .weight = 150,
         .description = gXatuPokedexText,
@@ -3224,13 +2150,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MAREEP] =
     {
-    #if FRENCH
-        .categoryName = _("LAINE"),
-    #elif ITALIAN
-        .categoryName = _("LANA"),
-    #else //ENGLISH
-        .categoryName = _("WOOL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WOOL", "LAINE", "LANA", "LANA"),
         .height = 6,
         .weight = 78,
         .description = gMareepPokedexText,
@@ -3242,13 +2162,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_FLAAFFY] =
     {
-    #if FRENCH
-        .categoryName = _("LAINE"),
-    #elif ITALIAN
-        .categoryName = _("LANA"),
-    #else //ENGLISH
-        .categoryName = _("WOOL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WOOL", "LAINE", "LANA", "LANA"),
         .height = 8,
         .weight = 133,
         .description = gFlaaffyPokedexText,
@@ -3260,13 +2174,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_AMPHAROS] =
     {
-    #if FRENCH
-        .categoryName = _("LUMIERE"),
-    #elif ITALIAN
-        .categoryName = _("LUCE"),
-    #else //ENGLISH
-        .categoryName = _("LIGHT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LIGHT", "LUMIERE", "LUCE", "LUZ"),
         .height = 14,
         .weight = 615,
         .description = gAmpharosPokedexText,
@@ -3278,13 +2186,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BELLOSSOM] =
     {
-    #if FRENCH
-        .categoryName = _("FLEUR"),
-    #elif ITALIAN
-        .categoryName = _("FIORE"),
-    #else //ENGLISH
-        .categoryName = _("FLOWER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FLOWER", "FLEUR", "FIORE", "FLOR"),
         .height = 4,
         .weight = 58,
         .description = gBellossomPokedexText,
@@ -3296,13 +2198,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MARILL] =
     {
-    #if FRENCH
-        .categoryName = _("AQUASOURIS"),
-    #elif ITALIAN
-        .categoryName = _("ACQUATOPO"),
-    #else //ENGLISH
-        .categoryName = _("AQUA MOUSE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("AQUA MOUSE", "AQUASOURIS", "ACQUATOPO", "RATÓN AGUA"),
         .height = 4,
         .weight = 85,
         .description = gMarillPokedexText,
@@ -3314,13 +2210,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_AZUMARILL] =
     {
-    #if FRENCH
-        .categoryName = _("AQUALAPIN"),
-    #elif ITALIAN
-        .categoryName = _("ACQUNIGLIO"),
-    #else //ENGLISH
-        .categoryName = _("AQUA RABBIT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("AQUA RABBIT", "AQUALAPIN", "ACQUNIGLIO", "CONEJOAGUA"),
         .height = 8,
         .weight = 285,
         .description = gAzumarillPokedexText,
@@ -3332,13 +2222,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SUDOWOODO] =
     {
-    #if FRENCH
-        .categoryName = _("IMITATION"),
-    #elif ITALIAN
-        .categoryName = _("IMITAZIONE"),
-    #else //ENGLISH
-        .categoryName = _("IMITATION"),
-    #endif
+        .categoryName = LANGUAGE_STRING("IMITATION", "IMITATION", "IMITAZIONE", "IMITACIÓN"),
         .height = 12,
         .weight = 380,
         .description = gSudowoodoPokedexText,
@@ -3350,13 +2234,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_POLITOED] =
     {
-    #if FRENCH
-        .categoryName = _("GRENOUILLE"),
-    #elif ITALIAN
-        .categoryName = _("RANA"),
-    #else //ENGLISH
-        .categoryName = _("FROG"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FROG", "GRENOUILLE", "RANA", "RANA"),
         .height = 11,
         .weight = 339,
         .description = gPolitoedPokedexText,
@@ -3368,13 +2246,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_HOPPIP] =
     {
-    #if FRENCH
-        .categoryName = _("PISSENLIT"),
-    #elif ITALIAN
-        .categoryName = _("GRAMIGNA"),
-    #else //ENGLISH
-        .categoryName = _("COTTONWEED"),
-    #endif
+        .categoryName = LANGUAGE_STRING("COTTONWEED", "PISSENLIT", "GRAMIGNA", "ALGADÓN"),
         .height = 4,
         .weight = 5,
         .description = gHoppipPokedexText,
@@ -3386,13 +2258,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SKIPLOOM] =
     {
-    #if FRENCH
-        .categoryName = _("PISSENLIT"),
-    #elif ITALIAN
-        .categoryName = _("GRAMIGNA"),
-    #else //ENGLISH
-        .categoryName = _("COTTONWEED"),
-    #endif
+        .categoryName = LANGUAGE_STRING("COTTONWEED", "PISSENLIT", "GRAMIGNA", "ALGADÓN"),
         .height = 6,
         .weight = 10,
         .description = gSkiploomPokedexText,
@@ -3404,13 +2270,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_JUMPLUFF] =
     {
-    #if FRENCH
-        .categoryName = _("PISSENLIT"),
-    #elif ITALIAN
-        .categoryName = _("GRAMIGNA"),
-    #else //ENGLISH
-        .categoryName = _("COTTONWEED"),
-    #endif
+        .categoryName = LANGUAGE_STRING("COTTONWEED", "PISSENLIT", "GRAMIGNA", "ALGADÓN"),
         .height = 8,
         .weight = 30,
         .description = gJumpluffPokedexText,
@@ -3422,13 +2282,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_AIPOM] =
     {
-    #if FRENCH
-        .categoryName = _("LONGQUEUE"),
-    #elif ITALIAN
-        .categoryName = _("LUNGACODA"),
-    #else //ENGLISH
-        .categoryName = _("LONG TAIL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LONG TAIL", "LONGQUEUE", "LUNGACODA", "COLA LARGA"),
         .height = 8,
         .weight = 115,
         .description = gAipomPokedexText,
@@ -3440,13 +2294,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SUNKERN] =
     {
-    #if FRENCH
-        .categoryName = _("GRAINE"),
-    #elif ITALIAN
-        .categoryName = _("SEME"),
-    #else //ENGLISH
-        .categoryName = _("SEED"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SEED", "GRAINE", "SEME", "SEMILLA"),
         .height = 3,
         .weight = 18,
         .description = gSunkernPokedexText,
@@ -3458,13 +2306,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SUNFLORA] =
     {
-    #if FRENCH
-        .categoryName = _("SOLEIL"),
-    #elif ITALIAN
-        .categoryName = _("SOLE"),
-    #else //ENGLISH
-        .categoryName = _("SUN"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SUN", "SOLEIL", "SOLE", "SOL"),
         .height = 8,
         .weight = 85,
         .description = gSunfloraPokedexText,
@@ -3476,13 +2318,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_YANMA] =
     {
-    #if FRENCH
-        .categoryName = _("TRANSLAILE"),
-    #elif ITALIAN
-        .categoryName = _("ALACHIARA"),
-    #else //ENGLISH
-        .categoryName = _("CLEAR WING"),
-    #endif
+        .categoryName = LANGUAGE_STRING("CLEAR WING", "TRANSLAILE", "ALACHIARA", "ALA CLARA"),
         .height = 12,
         .weight = 380,
         .description = gYanmaPokedexText,
@@ -3494,13 +2330,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WOOPER] =
     {
-    #if FRENCH
-        .categoryName = _("POISSON"),
-    #elif ITALIAN
-        .categoryName = _("ACQUAPESCE"),
-    #else //ENGLISH
-        .categoryName = _("WATER FISH"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WATER FISH", "POISSON", "ACQUAPESCE", "PEZ AGUA"),
         .height = 4,
         .weight = 85,
         .description = gWooperPokedexText,
@@ -3512,13 +2342,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_QUAGSIRE] =
     {
-    #if FRENCH
-        .categoryName = _("POISSON"),
-    #elif ITALIAN
-        .categoryName = _("ACQUAPESCE"),
-    #else //ENGLISH
-        .categoryName = _("WATER FISH"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WATER FISH", "POISSON", "ACQUAPESCE", "PEZ AGUA"),
         .height = 14,
         .weight = 750,
         .description = gQuagsirePokedexText,
@@ -3530,13 +2354,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ESPEON] =
     {
-    #if FRENCH
-        .categoryName = _("SOLEIL"),
-    #elif ITALIAN
-        .categoryName = _("SOLE"),
-    #else //ENGLISH
-        .categoryName = _("SUN"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SUN", "SOLEIL", "SOLE", "SOL"),
         .height = 9,
         .weight = 265,
         .description = gEspeonPokedexText,
@@ -3548,13 +2366,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_UMBREON] =
     {
-    #if FRENCH
-        .categoryName = _("LUNE"),
-    #elif ITALIAN
-        .categoryName = _("LUCELUNARE"),
-    #else //ENGLISH
-        .categoryName = _("MOONLIGHT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MOONLIGHT", "LUNE", "LUCELUNARE", "LUZ LUNAR"),
         .height = 10,
         .weight = 270,
         .description = gUmbreonPokedexText,
@@ -3566,13 +2378,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MURKROW] =
     {
-    #if FRENCH
-        .categoryName = _("OBSCURITE"),
-    #elif ITALIAN
-        .categoryName = _("OSCURITÀ"),
-    #else //ENGLISH
-        .categoryName = _("DARKNESS"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DARKNESS", "OBSCURITE", "OSCURITÀ", "OSCURIDAD"),
         .height = 5,
         .weight = 21,
         .description = gMurkrowPokedexText,
@@ -3584,13 +2390,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SLOWKING] =
     {
-    #if FRENCH
-        .categoryName = _("ROYAL"),
-    #elif ITALIAN
-        .categoryName = _("REALE"),
-    #else //ENGLISH
-        .categoryName = _("ROYAL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ROYAL", "ROYAL", "REALE", "REGIO"),
         .height = 20,
         .weight = 795,
         .description = gSlowkingPokedexText,
@@ -3602,13 +2402,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MISDREAVUS] =
     {
-    #if FRENCH
-        .categoryName = _("STRIDENT"),
-    #elif ITALIAN
-        .categoryName = _("STRIDO"),
-    #else //ENGLISH
-        .categoryName = _("SCREECH"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SCREECH", "STRIDENT", "STRIDO", "CHIRRIDO"),
         .height = 7,
         .weight = 10,
         .description = gMisdreavusPokedexText,
@@ -3620,13 +2414,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_UNOWN] =
     {
-    #if FRENCH
-        .categoryName = _("SYMBOLIQUE"),
-    #elif ITALIAN
-        .categoryName = _("SIMBOLO"),
-    #else //ENGLISH
-        .categoryName = _("SYMBOL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SYMBOL", "SYMBOLIQUE", "SIMBOLO", "SÍMBOLO"),
         .height = 5,
         .weight = 50,
         .description = gUnownPokedexText,
@@ -3638,13 +2426,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WOBBUFFET] =
     {
-    #if FRENCH
-        .categoryName = _("PATIENT"),
-    #elif ITALIAN
-        .categoryName = _("PAZIENZA"),
-    #else //ENGLISH
-        .categoryName = _("PATIENT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("PATIENT", "PATIENT", "PAZIENZA", "PACIENTE"),
         .height = 13,
         .weight = 285,
         .description = gWobbuffetPokedexText,
@@ -3656,13 +2438,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GIRAFARIG] =
     {
-    #if FRENCH
-        .categoryName = _("LONG-COU"),
-    #elif ITALIAN
-        .categoryName = _("LUNGOCOLLO"),
-    #else //ENGLISH
-        .categoryName = _("LONG NECK"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LONG NECK", "LONG-COU", "LUNGOCOLLO", "GRANCUELLO"),
         .height = 15,
         .weight = 415,
         .description = gGirafarigPokedexText,
@@ -3674,13 +2450,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PINECO] =
     {
-    #if FRENCH
-        .categoryName = _("VER CACHE"),
-    #elif ITALIAN
-        .categoryName = _("LARVA"),
-    #else //ENGLISH
-        .categoryName = _("BAGWORM"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BAGWORM", "VER CACHE", "LARVA", "LARVA"),
         .height = 6,
         .weight = 72,
         .description = gPinecoPokedexText,
@@ -3692,13 +2462,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_FORRETRESS] =
     {
-    #if FRENCH
-        .categoryName = _("VER CACHE"),
-    #elif ITALIAN
-        .categoryName = _("LARVA"),
-    #else //ENGLISH
-        .categoryName = _("BAGWORM"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BAGWORM", "VER CACHE", "LARVA", "LARVA"),
         .height = 12,
         .weight = 1258,
         .description = gForretressPokedexText,
@@ -3710,13 +2474,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DUNSPARCE] =
     {
-    #if FRENCH
-        .categoryName = _("SERPENT"),
-    #elif ITALIAN
-        .categoryName = _("TERRASERPE"),
-    #else //ENGLISH
-        .categoryName = _("LAND SNAKE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LAND SNAKE", "SERPENT", "TERRASERPE", "SERPTIERRA"),
         .height = 15,
         .weight = 140,
         .description = gDunsparcePokedexText,
@@ -3728,13 +2486,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GLIGAR] =
     {
-    #if FRENCH
-        .categoryName = _("SCORPIVOL"),
-    #elif ITALIAN
-        .categoryName = _("ALISCORPIO"),
-    #else //ENGLISH
-        .categoryName = _("FLYSCORPION"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FLYSCORPION", "SCORPIVOL", "ALISCORPIO", "ESCORPIALA"),
         .height = 11,
         .weight = 648,
         .description = gGligarPokedexText,
@@ -3746,13 +2498,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_STEELIX] =
     {
-    #if FRENCH
-        .categoryName = _("SERPENFER"),
-    #elif ITALIAN
-        .categoryName = _("FERROSERPE"),
-    #else //ENGLISH
-        .categoryName = _("IRON SNAKE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("IRON SNAKE", "SERPENFER", "FERROSERPE", "SERPFÉRREA"),
         .height = 92,
         .weight = 4000,
         .description = gSteelixPokedexText,
@@ -3764,13 +2510,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SNUBBULL] =
     {
-    #if FRENCH
-        .categoryName = _("FEE"),
-    #elif ITALIAN
-        .categoryName = _("FATA"),
-    #else //ENGLISH
-        .categoryName = _("FAIRY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FAIRY", "FEE", "FATA", "HADA"),
         .height = 6,
         .weight = 78,
         .description = gSnubbullPokedexText,
@@ -3782,13 +2522,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GRANBULL] =
     {
-    #if FRENCH
-        .categoryName = _("FEE"),
-    #elif ITALIAN
-        .categoryName = _("FATA"),
-    #else //ENGLISH
-        .categoryName = _("FAIRY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FAIRY", "FEE", "FATA", "HADA"),
         .height = 14,
         .weight = 487,
         .description = gGranbullPokedexText,
@@ -3800,13 +2534,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_QWILFISH] =
     {
-    #if FRENCH
-        .categoryName = _("BOUBOULE"),
-    #elif ITALIAN
-        .categoryName = _("PALLONE"),
-    #else //ENGLISH
-        .categoryName = _("BALLOON"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BALLOON", "BOUBOULE", "PALLONE", "GLOBO"),
         .height = 5,
         .weight = 39,
         .description = gQwilfishPokedexText,
@@ -3818,13 +2546,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SCIZOR] =
     {
-    #if FRENCH
-        .categoryName = _("PINCE"),
-    #elif ITALIAN
-        .categoryName = _("CHELA"),
-    #else //ENGLISH
-        .categoryName = _("PINCER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("PINCER", "PINCE", "CHELA", "TENAZA"),
         .height = 18,
         .weight = 1180,
         .description = gScizorPokedexText,
@@ -3836,13 +2558,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SHUCKLE] =
     {
-    #if FRENCH
-        .categoryName = _("POURRI"),
-    #elif ITALIAN
-        .categoryName = _("MUFFA"),
-    #else //ENGLISH
-        .categoryName = _("MOLD"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MOLD", "POURRI", "MUFFA", "MOHO"),
         .height = 6,
         .weight = 205,
         .description = gShucklePokedexText,
@@ -3854,13 +2570,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_HERACROSS] =
     {
-    #if FRENCH
-        .categoryName = _("UNICORNE"),
-    #elif ITALIAN
-        .categoryName = _("MONOCORNO"),
-    #else //ENGLISH
-        .categoryName = _("SINGLE HORN"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SINGLE HORN", "UNICORNE", "MONOCORNO", "UNICORNIO"),
         .height = 15,
         .weight = 540,
         .description = gHeracrossPokedexText,
@@ -3872,13 +2582,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SNEASEL] =
     {
-    #if FRENCH
-        .categoryName = _("GRIFACEREE"),
-    #elif ITALIAN
-        .categoryName = _("LAMARTIGLI"),
-    #else //ENGLISH
-        .categoryName = _("SHARP CLAW"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SHARP CLAW", "GRIFACEREE", "LAMARTIGLI", "GARRA FILO"),
         .height = 9,
         .weight = 280,
         .description = gSneaselPokedexText,
@@ -3890,13 +2594,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TEDDIURSA] =
     {
-    #if FRENCH
-        .categoryName = _("MINI OURS"),
-    #elif ITALIAN
-        .categoryName = _("ORSETTO"),
-    #else //ENGLISH
-        .categoryName = _("LITTLE BEAR"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LITTLE BEAR", "MINI OURS", "ORSETTO", "OSITO"),
         .height = 6,
         .weight = 88,
         .description = gTeddiursaPokedexText,
@@ -3908,13 +2606,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_URSARING] =
     {
-    #if FRENCH
-        .categoryName = _("HIBERNANT"),
-    #elif ITALIAN
-        .categoryName = _("LETARGO"),
-    #else //ENGLISH
-        .categoryName = _("HIBERNATOR"),
-    #endif
+        .categoryName = LANGUAGE_STRING("HIBERNATOR", "HIBERNANT", "LETARGO", "HIBERNANTE"),
         .height = 18,
         .weight = 1258,
         .description = gUrsaringPokedexText,
@@ -3926,13 +2618,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SLUGMA] =
     {
-    #if FRENCH
-        .categoryName = _("LAVE"),
-    #elif ITALIAN
-        .categoryName = _("LAVA"),
-    #else //ENGLISH
-        .categoryName = _("LAVA"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LAVA", "LAVE", "LAVA", "LAVA"),
         .height = 7,
         .weight = 350,
         .description = gSlugmaPokedexText,
@@ -3944,13 +2630,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MAGCARGO] =
     {
-    #if FRENCH
-        .categoryName = _("LAVE"),
-    #elif ITALIAN
-        .categoryName = _("LAVA"),
-    #else //ENGLISH
-        .categoryName = _("LAVA"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LAVA", "LAVE", "LAVA", "LAVA"),
         .height = 8,
         .weight = 550,
         .description = gMagcargoPokedexText,
@@ -3962,13 +2642,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SWINUB] =
     {
-    #if FRENCH
-        .categoryName = _("COCHON"),
-    #elif ITALIAN
-        .categoryName = _("MAIALE"),
-    #else //ENGLISH
-        .categoryName = _("PIG"),
-    #endif
+        .categoryName = LANGUAGE_STRING("PIG", "COCHON", "MAIALE", "CERDO"),
         .height = 4,
         .weight = 65,
         .description = gSwinubPokedexText,
@@ -3980,13 +2654,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PILOSWINE] =
     {
-    #if FRENCH
-        .categoryName = _("PORC"),
-    #elif ITALIAN
-        .categoryName = _("SUINO"),
-    #else //ENGLISH
-        .categoryName = _("SWINE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SWINE", "PORC", "SUINO", "PUERCO"),
         .height = 11,
         .weight = 558,
         .description = gPiloswinePokedexText,
@@ -3998,13 +2666,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CORSOLA] =
     {
-    #if FRENCH
-        .categoryName = _("CORAIL"),
-    #elif ITALIAN
-        .categoryName = _("CORALLO"),
-    #else //ENGLISH
-        .categoryName = _("CORAL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("CORAL", "CORAIL", "CORALLO", "CORAL"),
         .height = 6,
         .weight = 50,
         .description = gCorsolaPokedexText,
@@ -4016,13 +2678,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_REMORAID] =
     {
-    #if FRENCH
-        .categoryName = _("JET"),
-    #elif ITALIAN
-        .categoryName = _("JET"),
-    #else //ENGLISH
-        .categoryName = _("JET"),
-    #endif
+        .categoryName = LANGUAGE_STRING("JET", "JET", "JET", "REACTOR"),
         .height = 6,
         .weight = 120,
         .description = gRemoraidPokedexText,
@@ -4034,13 +2690,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_OCTILLERY] =
     {
-    #if FRENCH
-        .categoryName = _("JET"),
-    #elif ITALIAN
-        .categoryName = _("JET"),
-    #else //ENGLISH
-        .categoryName = _("JET"),
-    #endif
+        .categoryName = LANGUAGE_STRING("JET", "JET", "JET", "REACTOR"),
         .height = 9,
         .weight = 285,
         .description = gOctilleryPokedexText,
@@ -4052,13 +2702,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DELIBIRD] =
     {
-    #if FRENCH
-        .categoryName = _("LIVRAISON"),
-    #elif ITALIAN
-        .categoryName = _("CONSEGNA"),
-    #else //ENGLISH
-        .categoryName = _("DELIVERY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DELIVERY", "LIVRAISON", "CONSEGNA", "REPARTO"),
         .height = 9,
         .weight = 160,
         .description = gDelibirdPokedexText,
@@ -4070,13 +2714,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MANTINE] =
     {
-    #if FRENCH
-        .categoryName = _("CERVOLANT"),
-    #elif ITALIAN
-        .categoryName = _("AQUILONE"),
-    #else //ENGLISH
-        .categoryName = _("KITE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("KITE", "CERVOLANT", "AQUILONE", "MILANO"),
         .height = 21,
         .weight = 2200,
         .description = gMantinePokedexText,
@@ -4088,13 +2726,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SKARMORY] =
     {
-    #if FRENCH
-        .categoryName = _("ARMOISEAU"),
-    #elif ITALIAN
-        .categoryName = _("ARMUCCELLO"),
-    #else //ENGLISH
-        .categoryName = _("ARMOR BIRD"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ARMOR BIRD", "ARMOISEAU", "ARMUCCELLO", "CORAZA AVE"),
         .height = 17,
         .weight = 505,
         .description = gSkarmoryPokedexText,
@@ -4106,13 +2738,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_HOUNDOUR] =
     {
-    #if FRENCH
-        .categoryName = _("SOMBRE"),
-    #elif ITALIAN
-        .categoryName = _("BUIO"),
-    #else //ENGLISH
-        .categoryName = _("DARK"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DARK", "SOMBRE", "BUIO", "SINIESTRO"),
         .height = 6,
         .weight = 108,
         .description = gHoundourPokedexText,
@@ -4124,13 +2750,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_HOUNDOOM] =
     {
-    #if FRENCH
-        .categoryName = _("SOMBRE"),
-    #elif ITALIAN
-        .categoryName = _("BUIO"),
-    #else //ENGLISH
-        .categoryName = _("DARK"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DARK", "SOMBRE", "BUIO", "SINIESTRO"),
         .height = 14,
         .weight = 350,
         .description = gHoundoomPokedexText,
@@ -4142,13 +2762,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_KINGDRA] =
     {
-    #if FRENCH
-        .categoryName = _("DRAGON"),
-    #elif ITALIAN
-        .categoryName = _("DRAGO"),
-    #else //ENGLISH
-        .categoryName = _("DRAGON"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DRAGON", "DRAGON", "DRAGO", "DRAGÓN"),
         .height = 18,
         .weight = 1520,
         .description = gKingdraPokedexText,
@@ -4160,13 +2774,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PHANPY] =
     {
-    #if FRENCH
-        .categoryName = _("LONG-NEZ"),
-    #elif ITALIAN
-        .categoryName = _("NASONE"),
-    #else //ENGLISH
-        .categoryName = _("LONG NOSE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LONG NOSE", "LONG-NEZ", "NASONE", "NARIZOTAS"),
         .height = 5,
         .weight = 335,
         .description = gPhanpyPokedexText,
@@ -4178,13 +2786,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DONPHAN] =
     {
-    #if FRENCH
-        .categoryName = _("ARMURE"),
-    #elif ITALIAN
-        .categoryName = _("ARMATURA"),
-    #else //ENGLISH
-        .categoryName = _("ARMOR"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ARMOR", "ARMURE", "ARMATURA", "CORAZA"),
         .height = 11,
         .weight = 1200,
         .description = gDonphanPokedexText,
@@ -4196,13 +2798,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PORYGON2] =
     {
-    #if FRENCH
-        .categoryName = _("VIRTUEL"),
-    #elif ITALIAN
-        .categoryName = _("VIRTUALE"),
-    #else //ENGLISH
-        .categoryName = _("VIRTUAL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("VIRTUAL", "VIRTUEL", "VIRTUALE", "VIRTUAL"),
         .height = 6,
         .weight = 325,
         .description = gPorygon2PokedexText,
@@ -4214,13 +2810,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_STANTLER] =
     {
-    #if FRENCH
-        .categoryName = _("MAXI CORNE"),
-    #elif ITALIAN
-        .categoryName = _("GRANCORNO"),
-    #else //ENGLISH
-        .categoryName = _("BIG HORN"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BIG HORN", "MAXI CORNE", "GRANCORNO", "GRANCUERNO"),
         .height = 14,
         .weight = 712,
         .description = gStantlerPokedexText,
@@ -4232,13 +2822,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SMEARGLE] =
     {
-    #if FRENCH
-        .categoryName = _("PEINTRE"),
-    #elif ITALIAN
-        .categoryName = _("PITTORE"),
-    #else //ENGLISH
-        .categoryName = _("PAINTER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("PAINTER", "PEINTRE", "PITTORE", "PINTOR"),
         .height = 12,
         .weight = 580,
         .description = gSmearglePokedexText,
@@ -4250,13 +2834,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TYROGUE] =
     {
-    #if FRENCH
-        .categoryName = _("BAGARREUR"),
-    #elif ITALIAN
-        .categoryName = _("BARUFFA"),
-    #else //ENGLISH
-        .categoryName = _("SCUFFLE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SCUFFLE", "BAGARREUR", "BARUFFA", "PELEÓN"),
         .height = 7,
         .weight = 210,
         .description = gTyroguePokedexText,
@@ -4268,13 +2846,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_HITMONTOP] =
     {
-    #if FRENCH
-        .categoryName = _("POIRIER"),
-    #elif ITALIAN
-        .categoryName = _("VERTICALE"),
-    #else //ENGLISH
-        .categoryName = _("HANDSTAND"),
-    #endif
+        .categoryName = LANGUAGE_STRING("HANDSTAND", "POIRIER", "VERTICALE", "BOCA ABAJO"),
         .height = 14,
         .weight = 480,
         .description = gHitmontopPokedexText,
@@ -4286,13 +2858,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SMOOCHUM] =
     {
-    #if FRENCH
-        .categoryName = _("BISOU"),
-    #elif ITALIAN
-        .categoryName = _("BACIO"),
-    #else //ENGLISH
-        .categoryName = _("KISS"),
-    #endif
+        .categoryName = LANGUAGE_STRING("KISS", "BISOU", "BACIO", "BESO"),
         .height = 4,
         .weight = 60,
         .description = gSmoochumPokedexText,
@@ -4304,13 +2870,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ELEKID] =
     {
-    #if FRENCH
-        .categoryName = _("ELECTRIQUE"),
-    #elif ITALIAN
-        .categoryName = _("ELETTRICO"),
-    #else //ENGLISH
-        .categoryName = _("ELECTRIC"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ELECTRIC", "ELECTRIQUE", "ELETTRICO", "ELÉCTRICO"),
         .height = 6,
         .weight = 235,
         .description = gElekidPokedexText,
@@ -4322,13 +2882,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MAGBY] =
     {
-    #if FRENCH
-        .categoryName = _("CHARBON"),
-    #elif ITALIAN
-        .categoryName = _("CARBONVIVO"),
-    #else //ENGLISH
-        .categoryName = _("LIVE COAL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LIVE COAL", "CHARBON", "CARBONVIVO", "ASCUAS"),
         .height = 7,
         .weight = 214,
         .description = gMagbyPokedexText,
@@ -4340,13 +2894,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MILTANK] =
     {
-    #if FRENCH
-        .categoryName = _("VACHALAIT"),
-    #elif ITALIAN
-        .categoryName = _("BOVINO"),
-    #else //ENGLISH
-        .categoryName = _("MILK COW"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MILK COW", "VACHALAIT", "BOVINO", "LECHERA"),
         .height = 12,
         .weight = 755,
         .description = gMiltankPokedexText,
@@ -4358,13 +2906,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BLISSEY] =
     {
-    #if FRENCH
-        .categoryName = _("BONHEUR"),
-    #elif ITALIAN
-        .categoryName = _("FELICITÀ"),
-    #else //ENGLISH
-        .categoryName = _("HAPPINESS"),
-    #endif
+        .categoryName = LANGUAGE_STRING("HAPPINESS", "BONHEUR", "FELICITÀ", "FELICIDAD"),
         .height = 15,
         .weight = 468,
         .description = gBlisseyPokedexText,
@@ -4376,13 +2918,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_RAIKOU] =
     {
-    #if FRENCH
-        .categoryName = _("FOUDRE"),
-    #elif ITALIAN
-        .categoryName = _("TUONO"),
-    #else //ENGLISH
-        .categoryName = _("THUNDER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("THUNDER", "FOUDRE", "TUONO", "TRUENO"),
         .height = 19,
         .weight = 1780,
         .description = gRaikouPokedexText,
@@ -4394,13 +2930,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ENTEI] =
     {
-    #if FRENCH
-        .categoryName = _("VOLCAN"),
-    #elif ITALIAN
-        .categoryName = _("VULCANO"),
-    #else //ENGLISH
-        .categoryName = _("VOLCANO"),
-    #endif
+        .categoryName = LANGUAGE_STRING("VOLCANO", "VOLCAN", "VULCANO", "VOLCÁN"),
         .height = 21,
         .weight = 1980,
         .description = gEnteiPokedexText,
@@ -4412,13 +2942,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SUICUNE] =
     {
-    #if FRENCH
-        .categoryName = _("AURORE"),
-    #elif ITALIAN
-        .categoryName = _("AURORA"),
-    #else //ENGLISH
-        .categoryName = _("AURORA"),
-    #endif
+        .categoryName = LANGUAGE_STRING("AURORA", "AURORE", "AURORA", "AURORA"),
         .height = 20,
         .weight = 1870,
         .description = gSuicunePokedexText,
@@ -4430,13 +2954,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LARVITAR] =
     {
-    #if FRENCH
-        .categoryName = _("PEAUPIERRE"),
-    #elif ITALIAN
-        .categoryName = _("PELDISASSO"),
-    #else //ENGLISH
-        .categoryName = _("ROCK SKIN"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ROCK SKIN", "PEAUPIERRE", "PELDISASSO", "PIEL ROCA"),
         .height = 6,
         .weight = 720,
         .description = gLarvitarPokedexText,
@@ -4448,13 +2966,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PUPITAR] =
     {
-    #if FRENCH
-        .categoryName = _("CARAPADURE"),
-    #elif ITALIAN
-        .categoryName = _("GUSCIODURO"),
-    #else //ENGLISH
-        .categoryName = _("HARD SHELL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("HARD SHELL", "CARAPADURE", "GUSCIODURO", "CAPARAZÓN"),
         .height = 12,
         .weight = 1520,
         .description = gPupitarPokedexText,
@@ -4466,13 +2978,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TYRANITAR] =
     {
-    #if FRENCH
-        .categoryName = _("ARMURE"),
-    #elif ITALIAN
-        .categoryName = _("ARMATURA"),
-    #else //ENGLISH
-        .categoryName = _("ARMOR"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ARMOR", "ARMURE", "ARMATURA", "CORAZA"),
         .height = 20,
         .weight = 2020,
         .description = gTyranitarPokedexText,
@@ -4484,13 +2990,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LUGIA] =
     {
-    #if FRENCH
-        .categoryName = _("PLONGEON"),
-    #elif ITALIAN
-        .categoryName = _("IMMERSIONE"),
-    #else //ENGLISH
-        .categoryName = _("DIVING"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DIVING", "PLONGEON", "IMMERSIONE", "BUCEO"),
         .height = 52,
         .weight = 2160,
         .description = gLugiaPokedexText,
@@ -4502,13 +3002,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_HO_OH] =
     {
-    #if FRENCH
-        .categoryName = _("ARCENCIEL"),
-    #elif ITALIAN
-        .categoryName = _("ARCOBALENO"),
-    #else //ENGLISH
-        .categoryName = _("RAINBOW"),
-    #endif
+        .categoryName = LANGUAGE_STRING("RAINBOW", "ARCENCIEL", "ARCOBALENO", "ARCO IRIS"),
         .height = 38,
         .weight = 1990,
         .description = gHoOhPokedexText,
@@ -4520,13 +3014,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CELEBI] =
     {
-    #if FRENCH
-        .categoryName = _("TEMPOREL"),
-    #elif ITALIAN
-        .categoryName = _("TEMPOVIA"),
-    #else //ENGLISH
-        .categoryName = _("TIME TRAVEL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("TIME TRAVEL", "TEMPOREL", "TEMPOVIA", "VIAJETIEMPO"),
         .height = 6,
         .weight = 50,
         .description = gCelebiPokedexText,
@@ -4538,13 +3026,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TREECKO] =
     {
-    #if FRENCH
-        .categoryName = _("BOIS GECKO"),
-    #elif ITALIAN
-        .categoryName = _("LEGNOGECO"),
-    #else //ENGLISH
-        .categoryName = _("WOOD GECKO"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WOOD GECKO", "BOIS GECKO", "LEGNOGECO", "GECO BOSQUE"),
         .height = 5,
         .weight = 50,
         .description = gTreeckoPokedexText,
@@ -4556,13 +3038,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GROVYLE] =
     {
-    #if FRENCH
-        .categoryName = _("BOIS GECKO"),
-    #elif ITALIAN
-        .categoryName = _("LEGNOGECO"),
-    #else //ENGLISH
-        .categoryName = _("WOOD GECKO"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WOOD GECKO", "BOIS GECKO", "LEGNOGECO", "GECO BOSQUE"),
         .height = 9,
         .weight = 216,
         .description = gGrovylePokedexText,
@@ -4574,13 +3050,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SCEPTILE] =
     {
-    #if FRENCH
-        .categoryName = _("FORET"),
-    #elif ITALIAN
-        .categoryName = _("FORESTA"),
-    #else //ENGLISH
-        .categoryName = _("FOREST"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FOREST", "FORET", "FORESTA", "MONTE"),
         .height = 17,
         .weight = 522,
         .description = gSceptilePokedexText,
@@ -4592,13 +3062,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TORCHIC] =
     {
-    #if FRENCH
-        .categoryName = _("POUSSIN"),
-    #elif ITALIAN
-        .categoryName = _("PULCINO"),
-    #else //ENGLISH
-        .categoryName = _("CHICK"),
-    #endif
+        .categoryName = LANGUAGE_STRING("CHICK", "POUSSIN", "PULCINO", "POLLUELO"),
         .height = 4,
         .weight = 25,
         .description = gTorchicPokedexText,
@@ -4610,13 +3074,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_COMBUSKEN] =
     {
-    #if FRENCH
-        .categoryName = _("POULET"),
-    #elif ITALIAN
-        .categoryName = _("RAMPOLLO"),
-    #else //ENGLISH
-        .categoryName = _("YOUNG FOWL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("YOUNG FOWL", "POULET", "RAMPOLLO", "AVE CORRAL"),
         .height = 9,
         .weight = 195,
         .description = gCombuskenPokedexText,
@@ -4628,13 +3086,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BLAZIKEN] =
     {
-    #if FRENCH
-        .categoryName = _("ARDENT"),
-    #elif ITALIAN
-        .categoryName = _("VAMPE"),
-    #else //ENGLISH
-        .categoryName = _("BLAZE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BLAZE", "ARDENT", "VAMPE", "LLAMEANTE"),
         .height = 19,
         .weight = 520,
         .description = gBlazikenPokedexText,
@@ -4646,13 +3098,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MUDKIP] =
     {
-    #if FRENCH
-        .categoryName = _("POISSONBOUE"),
-    #elif ITALIAN
-        .categoryName = _("FANGO PESCE"),
-    #else //ENGLISH
-        .categoryName = _("MUD FISH"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MUD FISH", "POISSONBOUE", "FANGO PESCE", "PEZ LODO"),
         .height = 4,
         .weight = 76,
         .description = gMudkipPokedexText,
@@ -4664,13 +3110,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MARSHTOMP] =
     {
-    #if FRENCH
-        .categoryName = _("POISSONBOUE"),
-    #elif ITALIAN
-        .categoryName = _("FANGO PESCE"),
-    #else //ENGLISH
-        .categoryName = _("MUD FISH"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MUD FISH", "POISSONBOUE", "FANGO PESCE", "PEZ LODO"),
         .height = 7,
         .weight = 280,
         .description = gMarshtompPokedexText,
@@ -4682,13 +3122,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SWAMPERT] =
     {
-    #if FRENCH
-        .categoryName = _("POISSONBOUE"),
-    #elif ITALIAN
-        .categoryName = _("FANGO PESCE"),
-    #else //ENGLISH
-        .categoryName = _("MUD FISH"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MUD FISH", "POISSONBOUE", "FANGO PESCE", "PEZ LODO"),
         .height = 15,
         .weight = 819,
         .description = gSwampertPokedexText,
@@ -4700,13 +3134,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_POOCHYENA] =
     {
-    #if FRENCH
-        .categoryName = _("MORSURE"),
-    #elif ITALIAN
-        .categoryName = _("MORSO"),
-    #else //ENGLISH
-        .categoryName = _("BITE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BITE", "MORSURE", "MORSO", "MORDISCO"),
         .height = 5,
         .weight = 136,
         .description = gPoochyenaPokedexText,
@@ -4718,13 +3146,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MIGHTYENA] =
     {
-    #if FRENCH
-        .categoryName = _("MORSURE"),
-    #elif ITALIAN
-        .categoryName = _("MORSO"),
-    #else //ENGLISH
-        .categoryName = _("BITE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BITE", "MORSURE", "MORSO", "MORDISCO"),
         .height = 10,
         .weight = 370,
         .description = gMightyenaPokedexText,
@@ -4736,13 +3158,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ZIGZAGOON] =
     {
-    #if FRENCH
-        .categoryName = _("PETIT RATON"),
-    #elif ITALIAN
-        .categoryName = _("PROCIONE"),
-    #else //ENGLISH
-        .categoryName = _("TINYRACCOON"),
-    #endif
+        .categoryName = LANGUAGE_STRING("TINYRACCOON", "PETIT RATON", "PROCIONE", "MAPACHITO"),
         .height = 4,
         .weight = 175,
         .description = gZigzagoonPokedexText,
@@ -4754,13 +3170,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LINOONE] =
     {
-    #if FRENCH
-        .categoryName = _("FONCEUR"),
-    #elif ITALIAN
-        .categoryName = _("SFRECCIANTE"),
-    #else //ENGLISH
-        .categoryName = _("RUSHING"),
-    #endif
+        .categoryName = LANGUAGE_STRING("RUSHING", "FONCEUR", "SFRECCIANTE", "LANZADO"),
         .height = 5,
         .weight = 325,
         .description = gLinoonePokedexText,
@@ -4772,13 +3182,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WURMPLE] =
     {
-    #if FRENCH
-        .categoryName = _("VER"),
-    #elif ITALIAN
-        .categoryName = _("BACO"),
-    #else //ENGLISH
-        .categoryName = _("WORM"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WORM", "VER", "BACO", "GUSANO"),
         .height = 3,
         .weight = 36,
         .description = gWurmplePokedexText,
@@ -4790,13 +3194,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SILCOON] =
     {
-    #if FRENCH
-        .categoryName = _("COCON"),
-    #elif ITALIAN
-        .categoryName = _("BOZZOLO"),
-    #else //ENGLISH
-        .categoryName = _("COCOON"),
-    #endif
+        .categoryName = LANGUAGE_STRING("COCOON", "COCON", "BOZZOLO", "CAPULLO"),
         .height = 6,
         .weight = 100,
         .description = gSilcoonPokedexText,
@@ -4808,13 +3206,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BEAUTIFLY] =
     {
-    #if FRENCH
-        .categoryName = _("PAPILLON"),
-    #elif ITALIAN
-        .categoryName = _("FARFALLA"),
-    #else //ENGLISH
-        .categoryName = _("BUTTERFLY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BUTTERFLY", "PAPILLON", "FARFALLA", "MARIPOSA"),
         .height = 10,
         .weight = 284,
         .description = gBeautiflyPokedexText,
@@ -4826,13 +3218,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CASCOON] =
     {
-    #if FRENCH
-        .categoryName = _("COCON"),
-    #elif ITALIAN
-        .categoryName = _("BOZZOLO"),
-    #else //ENGLISH
-        .categoryName = _("COCOON"),
-    #endif
+        .categoryName = LANGUAGE_STRING("COCOON", "COCON", "BOZZOLO", "CAPULLO"),
         .height = 7,
         .weight = 115,
         .description = gCascoonPokedexText,
@@ -4844,13 +3230,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DUSTOX] =
     {
-    #if FRENCH
-        .categoryName = _("PAPIPOISON"),
-    #elif ITALIAN
-        .categoryName = _("VELENTARMA"),
-    #else //ENGLISH
-        .categoryName = _("POISON MOTH"),
-    #endif
+        .categoryName = LANGUAGE_STRING("POISON MOTH", "PAPIPOISON", "VELENTARMA", "POLILLA V."),
         .height = 12,
         .weight = 316,
         .description = gDustoxPokedexText,
@@ -4862,13 +3242,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LOTAD] =
     {
-    #if FRENCH
-        .categoryName = _("AQUAPLANTE"),
-    #elif ITALIAN
-        .categoryName = _("ALGA"),
-    #else //ENGLISH
-        .categoryName = _("WATER WEED"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WATER WEED", "AQUAPLANTE", "ALGA", "ALGA"),
         .height = 5,
         .weight = 26,
         .description = gLotadPokedexText,
@@ -4880,13 +3254,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LOMBRE] =
     {
-    #if FRENCH
-        .categoryName = _("JOVIAL"),
-    #elif ITALIAN
-        .categoryName = _("GIOCOSO"),
-    #else //ENGLISH
-        .categoryName = _("JOLLY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("JOLLY", "JOVIAL", "GIOCOSO", "ALEGRE"),
         .height = 12,
         .weight = 325,
         .description = gLombrePokedexText,
@@ -4898,13 +3266,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LUDICOLO] =
     {
-    #if FRENCH
-        .categoryName = _("INSOUCIANT"),
-    #elif ITALIAN
-        .categoryName = _("SPENSIERATO"),
-    #else //ENGLISH
-        .categoryName = _("CAREFREE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("CAREFREE", "INSOUCIANT", "SPENSIERATO", "OPTIMISTA"),
         .height = 15,
         .weight = 550,
         .description = gLudicoloPokedexText,
@@ -4916,13 +3278,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SEEDOT] =
     {
-    #if FRENCH
-        .categoryName = _("GLAND"),
-    #elif ITALIAN
-        .categoryName = _("GHIANDA"),
-    #else //ENGLISH
-        .categoryName = _("ACORN"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ACORN", "GLAND", "GHIANDA", "BELLOTA"),
         .height = 5,
         .weight = 40,
         .description = gSeedotPokedexText,
@@ -4934,13 +3290,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NUZLEAF] =
     {
-    #if FRENCH
-        .categoryName = _("MALIN"),
-    #elif ITALIAN
-        .categoryName = _("SCALTRO"),
-    #else //ENGLISH
-        .categoryName = _("WILY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WILY", "MALIN", "SCALTRO", "ASTUTO"),
         .height = 10,
         .weight = 280,
         .description = gNuzleafPokedexText,
@@ -4952,13 +3302,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SHIFTRY] =
     {
-    #if FRENCH
-        .categoryName = _("MALVEILLANT"),
-    #elif ITALIAN
-        .categoryName = _("BURBERO"),
-    #else //ENGLISH
-        .categoryName = _("WICKED"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WICKED", "MALVEILLANT", "BURBERO", "MALVADO"),
         .height = 13,
         .weight = 596,
         .description = gShiftryPokedexText,
@@ -4970,13 +3314,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TAILLOW] =
     {
-    #if FRENCH
-        .categoryName = _("MINIRONDEL"),
-    #elif ITALIAN
-        .categoryName = _("RONDINELLA"),
-    #else //ENGLISH
-        .categoryName = _("TINYSWALLOW"),
-    #endif
+        .categoryName = LANGUAGE_STRING("TINYSWALLOW", "MINIRONDEL", "RONDINELLA", "PEQUEBUCHE"),
         .height = 3,
         .weight = 23,
         .description = gTaillowPokedexText,
@@ -4988,13 +3326,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SWELLOW] =
     {
-    #if FRENCH
-        .categoryName = _("HIRONDELLE"),
-    #elif ITALIAN
-        .categoryName = _("RONDINE"),
-    #else //ENGLISH
-        .categoryName = _("SWALLOW"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SWALLOW", "HIRONDELLE", "RONDINE", "BUCHE"),
         .height = 7,
         .weight = 198,
         .description = gSwellowPokedexText,
@@ -5006,13 +3338,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WINGULL] =
     {
-    #if FRENCH
-        .categoryName = _("MOUETTE"),
-    #elif ITALIAN
-        .categoryName = _("GABBIANO"),
-    #else //ENGLISH
-        .categoryName = _("SEAGULL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SEAGULL", "MOUETTE", "GABBIANO", "GAVIOTA"),
         .height = 6,
         .weight = 95,
         .description = gWingullPokedexText,
@@ -5024,13 +3350,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PELIPPER] =
     {
-    #if FRENCH
-        .categoryName = _("OISEAUDO"),
-    #elif ITALIAN
-        .categoryName = _("ALACQUATICO"),
-    #else //ENGLISH
-        .categoryName = _("WATER BIRD"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WATER BIRD", "OISEAUDO", "ALACQUATICO", "AVE AGUA"),
         .height = 12,
         .weight = 280,
         .description = gPelipperPokedexText,
@@ -5042,13 +3362,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_RALTS] =
     {
-    #if FRENCH
-        .categoryName = _("SENTIMENT"),
-    #elif ITALIAN
-        .categoryName = _("SENSAZIONE"),
-    #else //ENGLISH
-        .categoryName = _("FEELING"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FEELING", "SENTIMENT", "SENSAZIONE", "SENSIBLE"),
         .height = 4,
         .weight = 66,
         .description = gRaltsPokedexText,
@@ -5060,13 +3374,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_KIRLIA] =
     {
-    #if FRENCH
-        .categoryName = _("EMOTION"),
-    #elif ITALIAN
-        .categoryName = _("EMOZIONE"),
-    #else //ENGLISH
-        .categoryName = _("EMOTION"),
-    #endif
+        .categoryName = LANGUAGE_STRING("EMOTION", "EMOTION", "EMOZIONE", "SENSORIO"),
         .height = 8,
         .weight = 202,
         .description = gKirliaPokedexText,
@@ -5078,13 +3386,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GARDEVOIR] =
     {
-    #if FRENCH
-        .categoryName = _("ETREINTE"),
-    #elif ITALIAN
-        .categoryName = _("ABBRACCIO"),
-    #else //ENGLISH
-        .categoryName = _("EMBRACE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("EMBRACE", "ETREINTE", "ABBRACCIO", "ENVOLVENTE"),
         .height = 16,
         .weight = 484,
         .description = gGardevoirPokedexText,
@@ -5096,13 +3398,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SURSKIT] =
     {
-    #if FRENCH
-        .categoryName = _("MARESURFEUR"),
-    #elif ITALIAN
-        .categoryName = _("SFIORAPOZZE"),
-    #else //ENGLISH
-        .categoryName = _("POND SKATER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("POND SKATER", "MARESURFEUR", "SFIORAPOZZE", "ZAPATERO"),
         .height = 5,
         .weight = 17,
         .description = gSurskitPokedexText,
@@ -5114,13 +3410,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MASQUERAIN] =
     {
-    #if FRENCH
-        .categoryName = _("BOULE OEIL"),
-    #elif ITALIAN
-        .categoryName = _("OCCHI"),
-    #else //ENGLISH
-        .categoryName = _("EYEBALL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("EYEBALL", "BOULE OEIL", "OCCHI", "GLOBOCULAR"),
         .height = 8,
         .weight = 36,
         .description = gMasquerainPokedexText,
@@ -5132,13 +3422,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SHROOMISH] =
     {
-    #if FRENCH
-        .categoryName = _("CHAMPIGNON"),
-    #elif ITALIAN
-        .categoryName = _("FUNGO"),
-    #else //ENGLISH
-        .categoryName = _("MUSHROOM"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MUSHROOM", "CHAMPIGNON", "FUNGO", "HONGO"),
         .height = 4,
         .weight = 45,
         .description = gShroomishPokedexText,
@@ -5150,13 +3434,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BRELOOM] =
     {
-    #if FRENCH
-        .categoryName = _("CHAMPIGNON"),
-    #elif ITALIAN
-        .categoryName = _("FUNGO"),
-    #else //ENGLISH
-        .categoryName = _("MUSHROOM"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MUSHROOM", "CHAMPIGNON", "FUNGO", "HONGO"),
         .height = 12,
         .weight = 392,
         .description = gBreloomPokedexText,
@@ -5168,13 +3446,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SLAKOTH] =
     {
-    #if FRENCH
-        .categoryName = _("FLANEUR"),
-    #elif ITALIAN
-        .categoryName = _("OZIOSO"),
-    #else //ENGLISH
-        .categoryName = _("SLACKER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SLACKER", "FLANEUR", "OZIOSO", "GANDUL"),
         .height = 8,
         .weight = 240,
         .description = gSlakothPokedexText,
@@ -5186,13 +3458,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_VIGOROTH] =
     {
-    #if FRENCH
-        .categoryName = _("TURBUSINGE"),
-    #elif ITALIAN
-        .categoryName = _("INDOCILE"),
-    #else //ENGLISH
-        .categoryName = _("WILD MONKEY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WILD MONKEY", "TURBUSINGE", "INDOCILE", "MONO FEROZ"),
         .height = 14,
         .weight = 465,
         .description = gVigorothPokedexText,
@@ -5204,13 +3470,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SLAKING] =
     {
-    #if FRENCH
-        .categoryName = _("FAINEANT"),
-    #elif ITALIAN
-        .categoryName = _("PIGRIZIA"),
-    #else //ENGLISH
-        .categoryName = _("LAZY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LAZY", "FAINEANT", "PIGRIZIA", "HOLGAZÁN"),
         .height = 20,
         .weight = 1305,
         .description = gSlakingPokedexText,
@@ -5222,13 +3482,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NINCADA] =
     {
-    #if FRENCH
-        .categoryName = _("APPRENTI"),
-    #elif ITALIAN
-        .categoryName = _("NOVIZIO"),
-    #else //ENGLISH
-        .categoryName = _("TRAINEE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("TRAINEE", "APPRENTI", "NOVIZIO", "APRENDIZ"),
         .height = 5,
         .weight = 55,
         .description = gNincadaPokedexText,
@@ -5240,13 +3494,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NINJASK] =
     {
-    #if FRENCH
-        .categoryName = _("NINJA"),
-    #elif ITALIAN
-        .categoryName = _("NINJA"),
-    #else //ENGLISH
-        .categoryName = _("NINJA"),
-    #endif
+        .categoryName = LANGUAGE_STRING("NINJA", "NINJA", "NINJA", "NINJA"),
         .height = 8,
         .weight = 120,
         .description = gNinjaskPokedexText,
@@ -5258,13 +3506,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SHEDINJA] =
     {
-    #if FRENCH
-        .categoryName = _("EXUVIE"),
-    #elif ITALIAN
-        .categoryName = _("CAMBIAPELLE"),
-    #else //ENGLISH
-        .categoryName = _("SHED"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SHED", "EXUVIE", "CAMBIAPELLE", "MUDA"),
         .height = 8,
         .weight = 12,
         .description = gShedinjaPokedexText,
@@ -5276,13 +3518,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WHISMUR] =
     {
-    #if FRENCH
-        .categoryName = _("CHUCHOTEUR"),
-    #elif ITALIAN
-        .categoryName = _("SUSSURRO"),
-    #else //ENGLISH
-        .categoryName = _("WHISPER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WHISPER", "CHUCHOTEUR", "SUSSURRO", "SUSURRO"),
         .height = 6,
         .weight = 163,
         .description = gWhismurPokedexText,
@@ -5294,13 +3530,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LOUDRED] =
     {
-    #if FRENCH
-        .categoryName = _("GROSSE VOIX"),
-    #elif ITALIAN
-        .categoryName = _("VOCIONE"),
-    #else //ENGLISH
-        .categoryName = _("BIG VOICE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BIG VOICE", "GROSSE VOIX", "VOCIONE", "CHILLÓN"),
         .height = 10,
         .weight = 405,
         .description = gLoudredPokedexText,
@@ -5312,13 +3542,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_EXPLOUD] =
     {
-    #if FRENCH
-        .categoryName = _("BRUIT SOURD"),
-    #elif ITALIAN
-        .categoryName = _("FRAGORE"),
-    #else //ENGLISH
-        .categoryName = _("LOUD NOISE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LOUD NOISE", "BRUIT SOURD", "FRAGORE", "ESCANDALOSO"),
         .height = 15,
         .weight = 840,
         .description = gExploudPokedexText,
@@ -5330,13 +3554,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MAKUHITA] =
     {
-    #if FRENCH
-        .categoryName = _("TENACE"),
-    #elif ITALIAN
-        .categoryName = _("CORAGGIO"),
-    #else //ENGLISH
-        .categoryName = _("GUTS"),
-    #endif
+        .categoryName = LANGUAGE_STRING("GUTS", "TENACE", "CORAGGIO", "VALIENTE"),
         .height = 10,
         .weight = 864,
         .description = gMakuhitaPokedexText,
@@ -5348,13 +3566,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_HARIYAMA] =
     {
-    #if FRENCH
-        .categoryName = _("COGNEUR"),
-    #elif ITALIAN
-        .categoryName = _("SBERLETESE"),
-    #else //ENGLISH
-        .categoryName = _("ARM THRUST"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ARM THRUST", "COGNEUR", "SBERLETESE", "EMPUJE"),
         .height = 23,
         .weight = 2538,
         .description = gHariyamaPokedexText,
@@ -5366,13 +3578,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_AZURILL] =
     {
-    #if FRENCH
-        .categoryName = _("POINT POLKA"),
-    #elif ITALIAN
-        .categoryName = _("POIS"),
-    #else //ENGLISH
-        .categoryName = _("POLKA DOT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("POLKA DOT", "POINT POLKA", "POIS", "A TOPOS"),
         .height = 2,
         .weight = 20,
         .description = gAzurillPokedexText,
@@ -5384,13 +3590,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NOSEPASS] =
     {
-    #if FRENCH
-        .categoryName = _("BOUSSOLE"),
-    #elif ITALIAN
-        .categoryName = _("BUSSOLA"),
-    #else //ENGLISH
-        .categoryName = _("COMPASS"),
-    #endif
+        .categoryName = LANGUAGE_STRING("COMPASS", "BOUSSOLE", "BUSSOLA", "BRÚJULA"),
         .height = 10,
         .weight = 970,
         .description = gNosepassPokedexText,
@@ -5402,13 +3602,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SKITTY] =
     {
-    #if FRENCH
-        .categoryName = _("CHATON"),
-    #elif ITALIAN
-        .categoryName = _("MICIO"),
-    #else //ENGLISH
-        .categoryName = _("KITTEN"),
-    #endif
+        .categoryName = LANGUAGE_STRING("KITTEN", "CHATON", "MICIO", "GATITO"),
         .height = 6,
         .weight = 110,
         .description = gSkittyPokedexText,
@@ -5420,13 +3614,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DELCATTY] =
     {
-    #if FRENCH
-        .categoryName = _("GUINDE"),
-    #elif ITALIAN
-        .categoryName = _("FINEZZA"),
-    #else //ENGLISH
-        .categoryName = _("PRIM"),
-    #endif
+        .categoryName = LANGUAGE_STRING("PRIM", "GUINDE", "FINEZZA", "CURSI"),
         .height = 11,
         .weight = 326,
         .description = gDelcattyPokedexText,
@@ -5438,13 +3626,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SABLEYE] =
     {
-    #if FRENCH
-        .categoryName = _("OBSCURITE"),
-    #elif ITALIAN
-        .categoryName = _("OSCURITÀ"),
-    #else //ENGLISH
-        .categoryName = _("DARKNESS"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DARKNESS", "OBSCURITE", "OSCURITÀ", "OSCURIDAD"),
         .height = 5,
         .weight = 110,
         .description = gSableyePokedexText,
@@ -5456,13 +3638,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MAWILE] =
     {
-    #if FRENCH
-        .categoryName = _("TROMPEUR"),
-    #elif ITALIAN
-        .categoryName = _("INGANNO"),
-    #else //ENGLISH
-        .categoryName = _("DECEIVER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DECEIVER", "TROMPEUR", "INGANNO", "TRAMPOSO"),
         .height = 6,
         .weight = 115,
         .description = gMawilePokedexText,
@@ -5474,13 +3650,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ARON] =
     {
-    #if FRENCH
-        .categoryName = _("ARMURFER"),
-    #elif ITALIAN
-        .categoryName = _("CORAZZA"),
-    #else //ENGLISH
-        .categoryName = _("IRON ARMOR"),
-    #endif
+        .categoryName = LANGUAGE_STRING("IRON ARMOR", "ARMURFER", "CORAZZA", "COR. FÉRREA"),
         .height = 4,
         .weight = 600,
         .description = gAronPokedexText,
@@ -5492,13 +3662,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LAIRON] =
     {
-    #if FRENCH
-        .categoryName = _("ARMURFER"),
-    #elif ITALIAN
-        .categoryName = _("CORAZZA"),
-    #else //ENGLISH
-        .categoryName = _("IRON ARMOR"),
-    #endif
+        .categoryName = LANGUAGE_STRING("IRON ARMOR", "ARMURFER", "CORAZZA", "COR. FÉRREA"),
         .height = 9,
         .weight = 1200,
         .description = gLaironPokedexText,
@@ -5510,13 +3674,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_AGGRON] =
     {
-    #if FRENCH
-        .categoryName = _("ARMURFER"),
-    #elif ITALIAN
-        .categoryName = _("CORAZZA"),
-    #else //ENGLISH
-        .categoryName = _("IRON ARMOR"),
-    #endif
+        .categoryName = LANGUAGE_STRING("IRON ARMOR", "ARMURFER", "CORAZZA", "COR. FÉRREA"),
         .height = 21,
         .weight = 3600,
         .description = gAggronPokedexText,
@@ -5528,13 +3686,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MEDITITE] =
     {
-    #if FRENCH
-        .categoryName = _("MEDITATION"),
-    #elif ITALIAN
-        .categoryName = _("MEDITAZIONE"),
-    #else //ENGLISH
-        .categoryName = _("MEDITATE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MEDITATE", "MEDITATION", "MEDITAZIONE", "MEDITADOR"),
         .height = 6,
         .weight = 112,
         .description = gMedititePokedexText,
@@ -5546,13 +3698,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MEDICHAM] =
     {
-    #if FRENCH
-        .categoryName = _("MEDITATION"),
-    #elif ITALIAN
-        .categoryName = _("MEDITAZIONE"),
-    #else //ENGLISH
-        .categoryName = _("MEDITATE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MEDITATE", "MEDITATION", "MEDITAZIONE", "MEDITADOR"),
         .height = 13,
         .weight = 315,
         .description = gMedichamPokedexText,
@@ -5564,13 +3710,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ELECTRIKE] =
     {
-    #if FRENCH
-        .categoryName = _("ORAGE"),
-    #elif ITALIAN
-        .categoryName = _("LAMPO"),
-    #else //ENGLISH
-        .categoryName = _("LIGHTNING"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LIGHTNING", "ORAGE", "LAMPO", "CALAMBRE"),
         .height = 6,
         .weight = 152,
         .description = gElectrikePokedexText,
@@ -5582,13 +3722,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MANECTRIC] =
     {
-    #if FRENCH
-        .categoryName = _("DECHARGE"),
-    #elif ITALIAN
-        .categoryName = _("SCOSSA"),
-    #else //ENGLISH
-        .categoryName = _("DISCHARGE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DISCHARGE", "DECHARGE", "SCOSSA", "DESCARGA"),
         .height = 15,
         .weight = 402,
         .description = gManectricPokedexText,
@@ -5600,13 +3734,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PLUSLE] =
     {
-    #if FRENCH
-        .categoryName = _("ACCLAMEUR"),
-    #elif ITALIAN
-        .categoryName = _("INCITAMENTO"),
-    #else //ENGLISH
-        .categoryName = _("CHEERING"),
-    #endif
+        .categoryName = LANGUAGE_STRING("CHEERING", "ACCLAMEUR", "INCITAMENTO", "ÁNIMO"),
         .height = 4,
         .weight = 42,
         .description = gPluslePokedexText,
@@ -5618,13 +3746,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MINUN] =
     {
-    #if FRENCH
-        .categoryName = _("ACCLAMEUR"),
-    #elif ITALIAN
-        .categoryName = _("INCITAMENTO"),
-    #else //ENGLISH
-        .categoryName = _("CHEERING"),
-    #endif
+        .categoryName = LANGUAGE_STRING("CHEERING", "ACCLAMEUR", "INCITAMENTO", "ÁNIMO"),
         .height = 4,
         .weight = 42,
         .description = gMinunPokedexText,
@@ -5636,13 +3758,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_VOLBEAT] =
     {
-    #if FRENCH
-        .categoryName = _("LUCIOLE"),
-    #elif ITALIAN
-        .categoryName = _("LUCCIOLA"),
-    #else //ENGLISH
-        .categoryName = _("FIREFLY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FIREFLY", "LUCIOLE", "LUCCIOLA", "LUCIÉRNAGA"),
         .height = 7,
         .weight = 177,
         .description = gVolbeatPokedexText,
@@ -5654,13 +3770,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ILLUMISE] =
     {
-    #if FRENCH
-        .categoryName = _("LUCIOLE"),
-    #elif ITALIAN
-        .categoryName = _("LUCCIOLA"),
-    #else //ENGLISH
-        .categoryName = _("FIREFLY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FIREFLY", "LUCIOLE", "LUCCIOLA", "LUCIÉRNAGA"),
         .height = 6,
         .weight = 177,
         .description = gIllumisePokedexText,
@@ -5672,13 +3782,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ROSELIA] =
     {
-    #if FRENCH
-        .categoryName = _("EPINE"),
-    #elif ITALIAN
-        .categoryName = _("SPINA"),
-    #else //ENGLISH
-        .categoryName = _("THORN"),
-    #endif
+        .categoryName = LANGUAGE_STRING("THORN", "EPINE", "SPINA", "ESPINA"),
         .height = 3,
         .weight = 20,
         .description = gRoseliaPokedexText,
@@ -5690,13 +3794,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GULPIN] =
     {
-    #if FRENCH
-        .categoryName = _("ESTOMAC"),
-    #elif ITALIAN
-        .categoryName = _("STOMACO"),
-    #else //ENGLISH
-        .categoryName = _("STOMACH"),
-    #endif
+        .categoryName = LANGUAGE_STRING("STOMACH", "ESTOMAC", "STOMACO", "ESTÓMAGO"),
         .height = 4,
         .weight = 103,
         .description = gGulpinPokedexText,
@@ -5708,13 +3806,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SWALOT] =
     {
-    #if FRENCH
-        .categoryName = _("SAC POISON"),
-    #elif ITALIAN
-        .categoryName = _("VELENOSACCO"),
-    #else //ENGLISH
-        .categoryName = _("POISON BAG"),
-    #endif
+        .categoryName = LANGUAGE_STRING("POISON BAG", "SAC POISON", "VELENOSACCO", "BOLSA VEN."),
         .height = 17,
         .weight = 800,
         .description = gSwalotPokedexText,
@@ -5726,13 +3818,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CARVANHA] =
     {
-    #if FRENCH
-        .categoryName = _("FEROCE"),
-    #elif ITALIAN
-        .categoryName = _("FEROCE"),
-    #else //ENGLISH
-        .categoryName = _("SAVAGE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SAVAGE", "FEROCE", "FEROCE", "FEROZ"),
         .height = 8,
         .weight = 208,
         .description = gCarvanhaPokedexText,
@@ -5744,13 +3830,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SHARPEDO] =
     {
-    #if FRENCH
-        .categoryName = _("BRUTAL"),
-    #elif ITALIAN
-        .categoryName = _("BRUTALE"),
-    #else //ENGLISH
-        .categoryName = _("BRUTAL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BRUTAL", "BRUTAL", "BRUTALE", "VORAZ"),
         .height = 18,
         .weight = 888,
         .description = gSharpedoPokedexText,
@@ -5762,13 +3842,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WAILMER] =
     {
-    #if FRENCH
-        .categoryName = _("BALEINBOULE"),
-    #elif ITALIAN
-        .categoryName = _("BALENOTTERO"),
-    #else //ENGLISH
-        .categoryName = _("BALL WHALE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BALL WHALE", "BALEINBOULE", "BALENOTTERO", "BALLENABOLA"),
         .height = 20,
         .weight = 1300,
         .description = gWailmerPokedexText,
@@ -5780,13 +3854,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WAILORD] =
     {
-    #if FRENCH
-        .categoryName = _("CACHABOUEE"),
-    #elif ITALIAN
-        .categoryName = _("MEGABALENA"),
-    #else //ENGLISH
-        .categoryName = _("FLOAT WHALE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FLOAT WHALE", "CACHABOUEE", "MEGABALENA", "BALLENAFLOT"),
         .height = 145,
         .weight = 3980,
         .description = gWailordPokedexText,
@@ -5798,13 +3866,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NUMEL] =
     {
-    #if FRENCH
-        .categoryName = _("ENGOURDI"),
-    #elif ITALIAN
-        .categoryName = _("TORPORE"),
-    #else //ENGLISH
-        .categoryName = _("NUMB"),
-    #endif
+        .categoryName = LANGUAGE_STRING("NUMB", "ENGOURDI", "TORPORE", "TORPE"),
         .height = 7,
         .weight = 240,
         .description = gNumelPokedexText,
@@ -5816,13 +3878,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CAMERUPT] =
     {
-    #if FRENCH
-        .categoryName = _("ERUPTION"),
-    #elif ITALIAN
-        .categoryName = _("ERUZIONE"),
-    #else //ENGLISH
-        .categoryName = _("ERUPTION"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ERUPTION", "ERUPTION", "ERUZIONE", "ERUPCIÓN"),
         .height = 19,
         .weight = 2200,
         .description = gCameruptPokedexText,
@@ -5834,13 +3890,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TORKOAL] =
     {
-    #if FRENCH
-        .categoryName = _("CHARBON"),
-    #elif ITALIAN
-        .categoryName = _("CARBONE"),
-    #else //ENGLISH
-        .categoryName = _("COAL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("COAL", "CHARBON", "CARBONE", "CARBÓN"),
         .height = 5,
         .weight = 804,
         .description = gTorkoalPokedexText,
@@ -5852,13 +3902,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SPOINK] =
     {
-    #if FRENCH
-        .categoryName = _("REBOND"),
-    #elif ITALIAN
-        .categoryName = _("MOLLA"),
-    #else //ENGLISH
-        .categoryName = _("BOUNCE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BOUNCE", "REBOND", "MOLLA", "SALTARÍN"),
         .height = 7,
         .weight = 306,
         .description = gSpoinkPokedexText,
@@ -5870,13 +3914,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GRUMPIG] =
     {
-    #if FRENCH
-        .categoryName = _("MAGOUILLEUR"),
-    #elif ITALIAN
-        .categoryName = _("RAGGIRO"),
-    #else //ENGLISH
-        .categoryName = _("MANIPULATE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MANIPULATE", "MAGOUILLEUR", "RAGGIRO", "MANIPULADOR"),
         .height = 9,
         .weight = 715,
         .description = gGrumpigPokedexText,
@@ -5888,13 +3926,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SPINDA] =
     {
-    #if FRENCH
-        .categoryName = _("PANDA TACHE"),
-    #elif ITALIAN
-        .categoryName = _("MACCHIPANDA"),
-    #else //ENGLISH
-        .categoryName = _("SPOT PANDA"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SPOT PANDA", "PANDA TACHE", "MACCHIPANDA", "PANDA TOPOS"),
         .height = 11,
         .weight = 50,
         .description = gSpindaPokedexText,
@@ -5906,13 +3938,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TRAPINCH] =
     {
-    #if FRENCH
-        .categoryName = _("PIEGEUR"),
-    #elif ITALIAN
-        .categoryName = _("TRAPPOLA"),
-    #else //ENGLISH
-        .categoryName = _("ANT PIT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ANT PIT", "PIEGEUR", "TRAPPOLA", "HORMIGALEÓN"),
         .height = 7,
         .weight = 150,
         .description = gTrapinchPokedexText,
@@ -5924,13 +3950,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_VIBRAVA] =
     {
-    #if FRENCH
-        .categoryName = _("VIBRATION"),
-    #elif ITALIAN
-        .categoryName = _("VIBRAZIONE"),
-    #else //ENGLISH
-        .categoryName = _("VIBRATION"),
-    #endif
+        .categoryName = LANGUAGE_STRING("VIBRATION", "VIBRATION", "VIBRAZIONE", "VIBRANTE"),
         .height = 11,
         .weight = 153,
         .description = gVibravaPokedexText,
@@ -5942,13 +3962,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_FLYGON] =
     {
-    #if FRENCH
-        .categoryName = _("MYSTIQUE"),
-    #elif ITALIAN
-        .categoryName = _("MAGICO"),
-    #else //ENGLISH
-        .categoryName = _("MYSTIC"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MYSTIC", "MYSTIQUE", "MAGICO", "MÍSTICO"),
         .height = 20,
         .weight = 820,
         .description = gFlygonPokedexText,
@@ -5960,13 +3974,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CACNEA] =
     {
-    #if FRENCH
-        .categoryName = _("CACTUS"),
-    #elif ITALIAN
-        .categoryName = _("CACTUS"),
-    #else //ENGLISH
-        .categoryName = _("CACTUS"),
-    #endif
+        .categoryName = LANGUAGE_STRING("CACTUS", "CACTUS", "CACTUS", "CACTUS"),
         .height = 4,
         .weight = 513,
         .description = gCacneaPokedexText,
@@ -5978,13 +3986,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CACTURNE] =
     {
-    #if FRENCH
-        .categoryName = _("EPOUVANTAIL"),
-    #elif ITALIAN
-        .categoryName = _("SPAVENTO"),
-    #else //ENGLISH
-        .categoryName = _("SCARECROW"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SCARECROW", "EPOUVANTAIL", "SPAVENTO", "ESPANTAJO"),
         .height = 13,
         .weight = 774,
         .description = gCacturnePokedexText,
@@ -5996,13 +3998,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SWABLU] =
     {
-    #if FRENCH
-        .categoryName = _("OISEAUCOTON"),
-    #elif ITALIAN
-        .categoryName = _("ALIDICOTONE"),
-    #else //ENGLISH
-        .categoryName = _("COTTON BIRD"),
-    #endif
+        .categoryName = LANGUAGE_STRING("COTTON BIRD", "OISEAUCOTON", "ALIDICOTONE", "AVE ALGODÓN"),
         .height = 4,
         .weight = 12,
         .description = gSwabluPokedexText,
@@ -6014,13 +4010,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ALTARIA] =
     {
-    #if FRENCH
-        .categoryName = _("VIREVOLTEUR"),
-    #elif ITALIAN
-        .categoryName = _("CANTERINO"),
-    #else //ENGLISH
-        .categoryName = _("HUMMING"),
-    #endif
+        .categoryName = LANGUAGE_STRING("HUMMING", "VIREVOLTEUR", "CANTERINO", "CANTOR"),
         .height = 11,
         .weight = 206,
         .description = gAltariaPokedexText,
@@ -6032,13 +4022,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ZANGOOSE] =
     {
-    #if FRENCH
-        .categoryName = _("CHAT FURET"),
-    #elif ITALIAN
-        .categoryName = _("FUROGATTO"),
-    #else //ENGLISH
-        .categoryName = _("CAT FERRET"),
-    #endif
+        .categoryName = LANGUAGE_STRING("CAT FERRET", "CHAT FURET", "FUROGATTO", "GATO HURÓN"),
         .height = 13,
         .weight = 403,
         .description = gZangoosePokedexText,
@@ -6050,13 +4034,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SEVIPER] =
     {
-    #if FRENCH
-        .categoryName = _("SERPACROC"),
-    #elif ITALIAN
-        .categoryName = _("ZANNASERPE"),
-    #else //ENGLISH
-        .categoryName = _("FANG SNAKE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FANG SNAKE", "SERPACROC", "ZANNASERPE", "COLMILLOS"),
         .height = 27,
         .weight = 525,
         .description = gSeviperPokedexText,
@@ -6068,13 +4046,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LUNATONE] =
     {
-    #if FRENCH
-        .categoryName = _("METEORITE"),
-    #elif ITALIAN
-        .categoryName = _("METEORITE"),
-    #else //ENGLISH
-        .categoryName = _("METEORITE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("METEORITE", "METEORITE", "METEORITE", "METEORITO"),
         .height = 10,
         .weight = 1680,
         .description = gLunatonePokedexText,
@@ -6086,13 +4058,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SOLROCK] =
     {
-    #if FRENCH
-        .categoryName = _("METEORITE"),
-    #elif ITALIAN
-        .categoryName = _("METEORITE"),
-    #else //ENGLISH
-        .categoryName = _("METEORITE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("METEORITE", "METEORITE", "METEORITE", "METEORITO"),
         .height = 12,
         .weight = 1540,
         .description = gSolrockPokedexText,
@@ -6104,13 +4070,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BARBOACH] =
     {
-    #if FRENCH
-        .categoryName = _("BARBILLON"),
-    #elif ITALIAN
-        .categoryName = _("BAFFETTI"),
-    #else //ENGLISH
-        .categoryName = _("WHISKERS"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WHISKERS", "BARBILLON", "BAFFETTI", "BIGOTUDO"),
         .height = 4,
         .weight = 19,
         .description = gBarboachPokedexText,
@@ -6122,13 +4082,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WHISCASH] =
     {
-    #if FRENCH
-        .categoryName = _("BARBILLON"),
-    #elif ITALIAN
-        .categoryName = _("BAFFETTI"),
-    #else //ENGLISH
-        .categoryName = _("WHISKERS"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WHISKERS", "BARBILLON", "BAFFETTI", "BIGOTUDO"),
         .height = 9,
         .weight = 236,
         .description = gWhiscashPokedexText,
@@ -6140,13 +4094,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CORPHISH] =
     {
-    #if FRENCH
-        .categoryName = _("BRUTE"),
-    #elif ITALIAN
-        .categoryName = _("BIRBONE"),
-    #else //ENGLISH
-        .categoryName = _("RUFFIAN"),
-    #endif
+        .categoryName = LANGUAGE_STRING("RUFFIAN", "BRUTE", "BIRBONE", "RUFIÁN"),
         .height = 6,
         .weight = 115,
         .description = gCorphishPokedexText,
@@ -6158,13 +4106,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CRAWDAUNT] =
     {
-    #if FRENCH
-        .categoryName = _("CRAPULE"),
-    #elif ITALIAN
-        .categoryName = _("CANAGLIA"),
-    #else //ENGLISH
-        .categoryName = _("ROGUE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ROGUE", "CRAPULE", "CANAGLIA", "GRANUJA"),
         .height = 11,
         .weight = 328,
         .description = gCrawdauntPokedexText,
@@ -6176,13 +4118,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BALTOY] =
     {
-    #if FRENCH
-        .categoryName = _("POUPARGILE"),
-    #elif ITALIAN
-        .categoryName = _("ARGILLA"),
-    #else //ENGLISH
-        .categoryName = _("CLAY DOLL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("CLAY DOLL", "POUPARGILE", "ARGILLA", "MUÑ. BARRO"),
         .height = 5,
         .weight = 215,
         .description = gBaltoyPokedexText,
@@ -6194,13 +4130,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CLAYDOL] =
     {
-    #if FRENCH
-        .categoryName = _("POUPARGILE"),
-    #elif ITALIAN
-        .categoryName = _("ARGILLA"),
-    #else //ENGLISH
-        .categoryName = _("CLAY DOLL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("CLAY DOLL", "POUPARGILE", "ARGILLA", "MUÑ. BARRO"),
         .height = 15,
         .weight = 1080,
         .description = gClaydolPokedexText,
@@ -6212,13 +4142,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LILEEP] =
     {
-    #if FRENCH
-        .categoryName = _("LIS D'EAU"),
-    #elif ITALIAN
-        .categoryName = _("FIORDIMARE"),
-    #else //ENGLISH
-        .categoryName = _("SEA LILY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SEA LILY", "LIS D'EAU", "FIORDIMARE", "LILA MAR"),
         .height = 10,
         .weight = 238,
         .description = gLileepPokedexText,
@@ -6230,13 +4154,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CRADILY] =
     {
-    #if FRENCH
-        .categoryName = _("BERNACLE"),
-    #elif ITALIAN
-        .categoryName = _("LEPADE"),
-    #else //ENGLISH
-        .categoryName = _("BARNACLE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BARNACLE", "BERNACLE", "LEPADE", "PERCEBE"),
         .height = 15,
         .weight = 604,
         .description = gCradilyPokedexText,
@@ -6248,13 +4166,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ANORITH] =
     {
-    #if FRENCH
-        .categoryName = _("CRUSTAGE"),
-    #elif ITALIAN
-        .categoryName = _("PRIMACEO"),
-    #else //ENGLISH
-        .categoryName = _("OLD SHRIMP"),
-    #endif
+        .categoryName = LANGUAGE_STRING("OLD SHRIMP", "CRUSTAGE", "PRIMACEO", "CAMARÓN"),
         .height = 7,
         .weight = 125,
         .description = gAnorithPokedexText,
@@ -6266,13 +4178,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ARMALDO] =
     {
-    #if FRENCH
-        .categoryName = _("BLINDAGE"),
-    #elif ITALIAN
-        .categoryName = _("PIASTRE"),
-    #else //ENGLISH
-        .categoryName = _("PLATE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("PLATE", "BLINDAGE", "PIASTRE", "ARMADURA"),
         .height = 15,
         .weight = 682,
         .description = gArmaldoPokedexText,
@@ -6284,13 +4190,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_FEEBAS] =
     {
-    #if FRENCH
-        .categoryName = _("POISSON"),
-    #elif ITALIAN
-        .categoryName = _("PESCE"),
-    #else //ENGLISH
-        .categoryName = _("FISH"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FISH", "POISSON", "PESCE", "PEZ"),
         .height = 6,
         .weight = 74,
         .description = gFeebasPokedexText,
@@ -6302,13 +4202,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MILOTIC] =
     {
-    #if FRENCH
-        .categoryName = _("TENDRE"),
-    #elif ITALIAN
-        .categoryName = _("TENEREZZA"),
-    #else //ENGLISH
-        .categoryName = _("TENDER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("TENDER", "TENDRE", "TENEREZZA", "TIERNO"),
         .height = 62,
         .weight = 1620,
         .description = gMiloticPokedexText,
@@ -6320,13 +4214,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CASTFORM] =
     {
-    #if FRENCH
-        .categoryName = _("CLIMAT"),
-    #elif ITALIAN
-        .categoryName = _("METEO"),
-    #else //ENGLISH
-        .categoryName = _("WEATHER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WEATHER", "CLIMAT", "METEO", "CLIMA"),
         .height = 3,
         .weight = 8,
         .description = gCastformPokedexText,
@@ -6338,13 +4226,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_KECLEON] =
     {
-    #if FRENCH
-        .categoryName = _("MULTICOLOR"),
-    #elif ITALIAN
-        .categoryName = _("MUTACOLORE"),
-    #else //ENGLISH
-        .categoryName = _("COLOR SWAP"),
-    #endif
+        .categoryName = LANGUAGE_STRING("COLOR SWAP", "MULTICOLOR", "MUTACOLORE", "CAMALEÓNICO"),
         .height = 10,
         .weight = 220,
         .description = gKecleonPokedexText,
@@ -6356,13 +4238,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SHUPPET] =
     {
-    #if FRENCH
-        .categoryName = _("POUPEE"),
-    #elif ITALIAN
-        .categoryName = _("PUPAZZO"),
-    #else //ENGLISH
-        .categoryName = _("PUPPET"),
-    #endif
+        .categoryName = LANGUAGE_STRING("PUPPET", "POUPEE", "PUPAZZO", "TÍTERE"),
         .height = 6,
         .weight = 23,
         .description = gShuppetPokedexText,
@@ -6374,13 +4250,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BANETTE] =
     {
-    #if FRENCH
-        .categoryName = _("MARIONETTE"),
-    #elif ITALIAN
-        .categoryName = _("MARIONETTA"),
-    #else //ENGLISH
-        .categoryName = _("MARIONETTE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("MARIONETTE", "MARIONETTE", "MARIONETTA", "MARIONETA"),
         .height = 11,
         .weight = 125,
         .description = gBanettePokedexText,
@@ -6392,13 +4262,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DUSKULL] =
     {
-    #if FRENCH
-        .categoryName = _("REQUIEM"),
-    #elif ITALIAN
-        .categoryName = _("REQUIEM"),
-    #else //ENGLISH
-        .categoryName = _("REQUIEM"),
-    #endif
+        .categoryName = LANGUAGE_STRING("REQUIEM", "REQUIEM", "REQUIEM", "RÉQUIEM"),
         .height = 8,
         .weight = 150,
         .description = gDuskullPokedexText,
@@ -6410,13 +4274,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DUSCLOPS] =
     {
-    #if FRENCH
-        .categoryName = _("APPEL"),
-    #elif ITALIAN
-        .categoryName = _("IPNOSGUARDO"),
-    #else //ENGLISH
-        .categoryName = _("BECKON"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BECKON", "APPEL", "IPNOSGUARDO", "ATRAYENTE"),
         .height = 16,
         .weight = 306,
         .description = gDusclopsPokedexText,
@@ -6428,13 +4286,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TROPIUS] =
     {
-    #if FRENCH
-        .categoryName = _("FRUIT"),
-    #elif ITALIAN
-        .categoryName = _("FRUTTO"),
-    #else //ENGLISH
-        .categoryName = _("FRUIT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FRUIT", "FRUIT", "FRUTTO", "FRUTO"),
         .height = 20,
         .weight = 1000,
         .description = gTropiusPokedexText,
@@ -6446,13 +4298,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CHIMECHO] =
     {
-    #if FRENCH
-        .categoryName = _("CARILLON"),
-    #elif ITALIAN
-        .categoryName = _("VENCAMPANA"),
-    #else //ENGLISH
-        .categoryName = _("WIND CHIME"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WIND CHIME", "CARILLON", "VENCAMPANA", "SONIDO AIRE"),
         .height = 6,
         .weight = 10,
         .description = gChimechoPokedexText,
@@ -6464,13 +4310,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ABSOL] =
     {
-    #if FRENCH
-        .categoryName = _("DESASTRE"),
-    #elif ITALIAN
-        .categoryName = _("CATASTROFE"),
-    #else //ENGLISH
-        .categoryName = _("DISASTER"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DISASTER", "DESASTRE", "CATASTROFE", "CATÁSTROFE"),
         .height = 12,
         .weight = 470,
         .description = gAbsolPokedexText,
@@ -6482,13 +4322,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WYNAUT] =
     {
-    #if FRENCH
-        .categoryName = _("RAVI"),
-    #elif ITALIAN
-        .categoryName = _("BRILLANTE"),
-    #else //ENGLISH
-        .categoryName = _("BRIGHT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BRIGHT", "RAVI", "BRILLANTE", "RADIANTE"),
         .height = 6,
         .weight = 140,
         .description = gWynautPokedexText,
@@ -6500,13 +4334,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SNORUNT] =
     {
-    #if FRENCH
-        .categoryName = _("CAPUCHE"),
-    #elif ITALIAN
-        .categoryName = _("CAPPELNEVE"),
-    #else //ENGLISH
-        .categoryName = _("SNOW HAT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SNOW HAT", "CAPUCHE", "CAPPELNEVE", "GORRO NIEVE"),
         .height = 7,
         .weight = 168,
         .description = gSnoruntPokedexText,
@@ -6518,13 +4346,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GLALIE] =
     {
-    #if FRENCH
-        .categoryName = _("FACE"),
-    #elif ITALIAN
-        .categoryName = _("TUTTOMUSO"),
-    #else //ENGLISH
-        .categoryName = _("FACE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("FACE", "FACE", "TUTTOMUSO", "CARA"),
         .height = 15,
         .weight = 2565,
         .description = gGlaliePokedexText,
@@ -6536,13 +4358,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SPHEAL] =
     {
-    #if FRENCH
-        .categoryName = _("CLAP CLAP"),
-    #elif ITALIAN
-        .categoryName = _("ROTOLANTE"),
-    #else //ENGLISH
-        .categoryName = _("CLAP"),
-    #endif
+        .categoryName = LANGUAGE_STRING("CLAP", "CLAP CLAP", "ROTOLANTE", "APLAUSO"),
         .height = 8,
         .weight = 395,
         .description = gSphealPokedexText,
@@ -6554,13 +4370,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SEALEO] =
     {
-    #if FRENCH
-        .categoryName = _("ROULE BOULE"),
-    #elif ITALIAN
-        .categoryName = _("ROTAPALLA"),
-    #else //ENGLISH
-        .categoryName = _("BALL ROLL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BALL ROLL", "ROULE BOULE", "ROTAPALLA", "RODABOLA"),
         .height = 11,
         .weight = 876,
         .description = gSealeoPokedexText,
@@ -6572,13 +4382,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WALREIN] =
     {
-    #if FRENCH
-        .categoryName = _("BRISE GLACE"),
-    #elif ITALIAN
-        .categoryName = _("SPACCAGELO"),
-    #else //ENGLISH
-        .categoryName = _("ICE BREAK"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ICE BREAK", "BRISE GLACE", "SPACCAGELO", "ROMPEHIELO"),
         .height = 14,
         .weight = 1506,
         .description = gWalreinPokedexText,
@@ -6590,13 +4394,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CLAMPERL] =
     {
-    #if FRENCH
-        .categoryName = _("BIVALVE"),
-    #elif ITALIAN
-        .categoryName = _("BIVALVE"),
-    #else //ENGLISH
-        .categoryName = _("BIVALVE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("BIVALVE", "BIVALVE", "BIVALVE", "BIVALVO"),
         .height = 4,
         .weight = 525,
         .description = gClamperlPokedexText,
@@ -6608,13 +4406,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_HUNTAIL] =
     {
-    #if FRENCH
-        .categoryName = _("ABYSSE"),
-    #elif ITALIAN
-        .categoryName = _("ABISSI"),
-    #else //ENGLISH
-        .categoryName = _("DEEP SEA"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DEEP SEA", "ABYSSE", "ABISSI", "ABISAL"),
         .height = 17,
         .weight = 270,
         .description = gHuntailPokedexText,
@@ -6626,13 +4418,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GOREBYSS] =
     {
-    #if FRENCH
-        .categoryName = _("MER DU SUD"),
-    #elif ITALIAN
-        .categoryName = _("SUDMARINO"),
-    #else //ENGLISH
-        .categoryName = _("SOUTH SEA"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SOUTH SEA", "MER DU SUD", "SUDMARINO", "MAR DEL SUR"),
         .height = 18,
         .weight = 226,
         .description = gGorebyssPokedexText,
@@ -6644,13 +4430,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_RELICANTH] =
     {
-    #if FRENCH
-        .categoryName = _("LONGEVITE"),
-    #elif ITALIAN
-        .categoryName = _("LONGEVITÀ"),
-    #else //ENGLISH
-        .categoryName = _("LONGEVITY"),
-    #endif
+        .categoryName = LANGUAGE_STRING("LONGEVITY", "LONGEVITE", "LONGEVITÀ", "LONGEVO"),
         .height = 10,
         .weight = 234,
         .description = gRelicanthPokedexText,
@@ -6662,13 +4442,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LUVDISC] =
     {
-    #if FRENCH
-        .categoryName = _("RENDEZVOUS"),
-    #elif ITALIAN
-        .categoryName = _("RENDEZVOUS"),
-    #else //ENGLISH
-        .categoryName = _("RENDEZVOUS"),
-    #endif
+        .categoryName = LANGUAGE_STRING("RENDEZVOUS", "RENDEZVOUS", "RENDEZVOUS", "CITA"),
         .height = 6,
         .weight = 87,
         .description = gLuvdiscPokedexText,
@@ -6680,13 +4454,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BAGON] =
     {
-    #if FRENCH
-        .categoryName = _("TETE DE ROC"),
-    #elif ITALIAN
-        .categoryName = _("ROCCIOTESTA"),
-    #else //ENGLISH
-        .categoryName = _("ROCK HEAD"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ROCK HEAD", "TETE DE ROC", "ROCCIOTESTA", "CABEZA ROCA"),
         .height = 6,
         .weight = 421,
         .description = gBagonPokedexText,
@@ -6698,13 +4466,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SHELGON] =
     {
-    #if FRENCH
-        .categoryName = _("ENDURANT"),
-    #elif ITALIAN
-        .categoryName = _("RESISTENZA"),
-    #else //ENGLISH
-        .categoryName = _("ENDURANCE"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ENDURANCE", "ENDURANT", "RESISTENZA", "RESISTENCIA"),
         .height = 11,
         .weight = 1105,
         .description = gShelgonPokedexText,
@@ -6716,13 +4478,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SALAMENCE] =
     {
-    #if FRENCH
-        .categoryName = _("DRAGON"),
-    #elif ITALIAN
-        .categoryName = _("DRAGO"),
-    #else //ENGLISH
-        .categoryName = _("DRAGON"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DRAGON", "DRAGON", "DRAGO", "DRAGÓN"),
         .height = 15,
         .weight = 1026,
         .description = gSalamencePokedexText,
@@ -6734,13 +4490,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BELDUM] =
     {
-    #if FRENCH
-        .categoryName = _("BOULEFER"),
-    #elif ITALIAN
-        .categoryName = _("FERROSFERA"),
-    #else //ENGLISH
-        .categoryName = _("IRON BALL"),
-    #endif
+        .categoryName = LANGUAGE_STRING("IRON BALL", "BOULEFER", "FERROSFERA", "BOLA HIERRO"),
         .height = 6,
         .weight = 952,
         .description = gBeldumPokedexText,
@@ -6752,13 +4502,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_METANG] =
     {
-    #if FRENCH
-        .categoryName = _("PINCEFER"),
-    #elif ITALIAN
-        .categoryName = _("FERRUNGHIA"),
-    #else //ENGLISH
-        .categoryName = _("IRON CLAW"),
-    #endif
+        .categoryName = LANGUAGE_STRING("IRON CLAW", "PINCEFER", "FERRUNGHIA", "GARRAHIERRO"),
         .height = 12,
         .weight = 2025,
         .description = gMetangPokedexText,
@@ -6770,13 +4514,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_METAGROSS] =
     {
-    #if FRENCH
-        .categoryName = _("PATTEFER"),
-    #elif ITALIAN
-        .categoryName = _("FERRARTO"),
-    #else //ENGLISH
-        .categoryName = _("IRON LEG"),
-    #endif
+        .categoryName = LANGUAGE_STRING("IRON LEG", "PATTEFER", "FERRARTO", "PATA HIERRO"),
         .height = 16,
         .weight = 5500,
         .description = gMetagrossPokedexText,
@@ -6788,13 +4526,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_REGIROCK] =
     {
-    #if FRENCH
-        .categoryName = _("PIC ROCHEUX"),
-    #elif ITALIAN
-        .categoryName = _("PICCO"),
-    #else //ENGLISH
-        .categoryName = _("ROCK PEAK"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ROCK PEAK", "PIC ROCHEUX", "PICCO", "PICO ROCA"),
         .height = 17,
         .weight = 2300,
         .description = gRegirockPokedexText,
@@ -6806,13 +4538,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_REGICE] =
     {
-    #if FRENCH
-        .categoryName = _("ICEBERG"),
-    #elif ITALIAN
-        .categoryName = _("ICEBERG"),
-    #else //ENGLISH
-        .categoryName = _("ICEBERG"),
-    #endif
+        .categoryName = LANGUAGE_STRING("ICEBERG", "ICEBERG", "ICEBERG", "ICEBERG"),
         .height = 18,
         .weight = 1750,
         .description = gRegicePokedexText,
@@ -6824,13 +4550,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_REGISTEEL] =
     {
-    #if FRENCH
-        .categoryName = _("FER"),
-    #elif ITALIAN
-        .categoryName = _("FERRO"),
-    #else //ENGLISH
-        .categoryName = _("IRON"),
-    #endif
+        .categoryName = LANGUAGE_STRING("IRON", "FER", "FERRO", "HIERRO"),
         .height = 19,
         .weight = 2050,
         .description = gRegisteelPokedexText,
@@ -6842,13 +4562,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LATIAS] =
     {
-    #if FRENCH
-        .categoryName = _("EON"),
-    #elif ITALIAN
-        .categoryName = _("EONE"),
-    #else //ENGLISH
-        .categoryName = _("EON"),
-    #endif
+        .categoryName = LANGUAGE_STRING("EON", "EON", "EONE", "EÓN"),
         .height = 14,
         .weight = 400,
         .description = gLatiasPokedexText,
@@ -6860,13 +4574,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LATIOS] =
     {
-    #if FRENCH
-        .categoryName = _("EON"),
-    #elif ITALIAN
-        .categoryName = _("EONE"),
-    #else //ENGLISH
-        .categoryName = _("EON"),
-    #endif
+        .categoryName = LANGUAGE_STRING("EON", "EON", "EONE", "EÓN"),
         .height = 20,
         .weight = 600,
         .description = gLatiosPokedexText,
@@ -6878,13 +4586,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_KYOGRE] =
     {
-    #if FRENCH
-        .categoryName = _("BASSINMARIN"),
-    #elif ITALIAN
-        .categoryName = _("OCEANO"),
-    #else //ENGLISH
-        .categoryName = _("SEA BASIN"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SEA BASIN", "BASSINMARIN", "OCEANO", "CUENCA MAR"),
         .height = 45,
         .weight = 3520,
         .description = gKyogrePokedexText,
@@ -6896,13 +4598,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GROUDON] =
     {
-    #if FRENCH
-        .categoryName = _("CONTINENT"),
-    #elif ITALIAN
-        .categoryName = _("CONTINENTE"),
-    #else //ENGLISH
-        .categoryName = _("CONTINENT"),
-    #endif
+        .categoryName = LANGUAGE_STRING("CONTINENT", "CONTINENT", "CONTINENTE", "CONTINENTE"),
         .height = 35,
         .weight = 9500,
         .description = gGroudonPokedexText,
@@ -6914,13 +4610,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_RAYQUAZA] =
     {
-    #if FRENCH
-        .categoryName = _("CIEUX"),
-    #elif ITALIAN
-        .categoryName = _("STRATOSFERA"),
-    #else //ENGLISH
-        .categoryName = _("SKY HIGH"),
-    #endif
+        .categoryName = LANGUAGE_STRING("SKY HIGH", "CIEUX", "STRATOSFERA", "CIELO"),
         .height = 70,
         .weight = 2065,
         .description = gRayquazaPokedexText,
@@ -6932,13 +4622,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_JIRACHI] =
     {
-    #if FRENCH
-        .categoryName = _("SOUHAIT"),
-    #elif ITALIAN
-        .categoryName = _("DESIDERIO"),
-    #else //ENGLISH
-        .categoryName = _("WISH"),
-    #endif
+        .categoryName = LANGUAGE_STRING("WISH", "SOUHAIT", "DESIDERIO", "DESEO"),
         .height = 3,
         .weight = 11,
         .description = gJirachiPokedexText,
@@ -6950,13 +4634,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DEOXYS] =
     {
-    #if FRENCH
-        .categoryName = _("ADN"),
-    #elif ITALIAN
-        .categoryName = _("DNA"),
-    #else //ENGLISH
-        .categoryName = _("DNA"),
-    #endif
+        .categoryName = LANGUAGE_STRING("DNA", "ADN", "DNA", "ADN"),
         .height = 17,
         .weight = 608,
         .description = gDeoxysPokedexText,
@@ -6966,3 +4644,4 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 2,
     },
 };
+

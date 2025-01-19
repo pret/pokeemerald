@@ -135,6 +135,9 @@ $(TILESETGFXDIR)/secondary/shop/french/tiles.4bpp: %.4bpp: %.png
 $(TILESETGFXDIR)/secondary/shop/italian/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 502
 
+$(TILESETGFXDIR)/secondary/shop/spanish/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 502
+
 $(TILESETGFXDIR)/secondary/pokemon_center/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 478 -Wnum_tiles
 
@@ -301,6 +304,9 @@ $(FONTGFXDIR)/french/small.latfont: $(FONTGFXDIR)/french/latin_small.png
 $(FONTGFXDIR)/italian/small.latfont: $(FONTGFXDIR)/italian/latin_small.png
 	$(GFX) $< $@
 
+$(FONTGFXDIR)/spanish/small.latfont: $(FONTGFXDIR)/spanish/latin_small.png
+	$(GFX) $< $@
+
 $(FONTGFXDIR)/normal.latfont: $(FONTGFXDIR)/latin_normal.png
 	$(GFX) $< $@
 
@@ -308,6 +314,9 @@ $(FONTGFXDIR)/french/normal.latfont: $(FONTGFXDIR)/french/latin_normal.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/italian/normal.latfont: $(FONTGFXDIR)/italian/latin_normal.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/spanish/normal.latfont: $(FONTGFXDIR)/spanish/latin_normal.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/short.latfont: $(FONTGFXDIR)/latin_short.png
@@ -319,6 +328,9 @@ $(FONTGFXDIR)/french/short.latfont: $(FONTGFXDIR)/french/latin_short.png
 $(FONTGFXDIR)/italian/short.latfont: $(FONTGFXDIR)/italian/latin_short.png
 	$(GFX) $< $@
 
+$(FONTGFXDIR)/spanish/short.latfont: $(FONTGFXDIR)/spanish/latin_short.png
+	$(GFX) $< $@
+
 $(FONTGFXDIR)/narrow.latfont: $(FONTGFXDIR)/latin_narrow.png
 	$(GFX) $< $@
 
@@ -328,6 +340,9 @@ $(FONTGFXDIR)/french/narrow.latfont: $(FONTGFXDIR)/french/latin_narrow.png
 $(FONTGFXDIR)/italian/narrow.latfont: $(FONTGFXDIR)/italian/latin_narrow.png
 	$(GFX) $< $@
 
+$(FONTGFXDIR)/spanish/narrow.latfont: $(FONTGFXDIR)/spanish/latin_narrow.png
+	$(GFX) $< $@
+
 $(FONTGFXDIR)/small_narrow.latfont: $(FONTGFXDIR)/latin_small_narrow.png
 	$(GFX) $< $@
 
@@ -335,6 +350,9 @@ $(FONTGFXDIR)/french/small_narrow.latfont: $(FONTGFXDIR)/french/latin_small_narr
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/italian/small_narrow.latfont: $(FONTGFXDIR)/italian/latin_small_narrow.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/spanish/small_narrow.latfont: $(FONTGFXDIR)/spanish/latin_small_narrow.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/small.hwjpnfont: $(FONTGFXDIR)/japanese_small.png

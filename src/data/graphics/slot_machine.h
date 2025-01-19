@@ -1,5 +1,5 @@
 const u16 gSlotMachineMenu_Pal[] = INCBIN_U16("graphics/slot_machine/menu.gbapal");
-#if FRENCH
+#if FRENCH || SPANISH
 const u32 gSlotMachineMenu_Gfx[] = INCBIN_U32("graphics/slot_machine/french/menu.4bpp.lz");
 const u16 gSlotMachineMenu_Tilemap[] = INCBIN_U16("graphics/slot_machine/menu.bin");
 

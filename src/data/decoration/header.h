@@ -6,7 +6,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "SMALL DESK",
             "PETIT BUREAU",
-            "TAVOLO PICCOLO"),
+            "TAVOLO PICCOLO",
+            "MESA PEQUEÑA"),
         .permission = DECORPERM_SOLID_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DESK,
@@ -21,7 +22,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "SMALL DESK",
             "PETIT BUREAU",
-            "TAVOLO PICCOLO"),
+            "TAVOLO PICCOLO",
+            "MESA PEQUEÑA"),
         .permission = DECORPERM_SOLID_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DESK,
@@ -36,7 +38,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "POKéMON DESK",
             "BUREAU POKéMON",
-            "TAVOLO POKéMON"),
+            "TAVOLO POKéMON",
+            "MESA POKéMON"),
         .permission = DECORPERM_SOLID_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DESK,
@@ -51,7 +54,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "HEAVY DESK",
             "GRAND BUREAU",
-            "TAVOLO PESANTE"),
+            "TAVOLO PESANTE",
+            "MESA PESADA"),
         .permission = DECORPERM_SOLID_FLOOR,
         .shape = DECORSHAPE_3x2,
         .category = DECORCAT_DESK,
@@ -66,7 +70,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "RAGGED DESK",
             "BUREAU BRUT",
-            "TAVOLO GREZZO"),
+            "TAVOLO GREZZO",
+            "MESA RÚSTICA"),
         .permission = DECORPERM_SOLID_FLOOR,
         .shape = DECORSHAPE_3x2,
         .category = DECORCAT_DESK,
@@ -81,7 +86,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "COMFORT DESK",
             "BUREAU COQUET",
-            "TAVOLO COMODO"),
+            "TAVOLO COMODO",
+            "MESA CÓMODA"),
         .permission = DECORPERM_SOLID_FLOOR,
         .shape = DECORSHAPE_3x2,
         .category = DECORCAT_DESK,
@@ -96,7 +102,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "PRETTY DESK",
             "JOLI BUREAU",
-            "BEL TAVOLO"),
+            "BEL TAVOLO",
+            "MESA BONITA"),
         .permission = DECORPERM_SOLID_FLOOR,
         .shape = DECORSHAPE_3x3,
         .category = DECORCAT_DESK,
@@ -111,7 +118,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "BRICK DESK",
             "BUREAU BRIQUES",
-            "TAVOLO MATTONI"),
+            "TAVOLO MATTONI",
+            "MESA LADRILLO"),
         .permission = DECORPERM_SOLID_FLOOR,
         .shape = DECORSHAPE_3x3,
         .category = DECORCAT_DESK,
@@ -126,7 +134,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "CAMP DESK",
             "BUREAU CAMPEUR",
-            "TAVOLO DA CAMPO"),
+            "TAVOLO DA CAMPO",
+            "MESA DE CAMPO"),
         .permission = DECORPERM_SOLID_FLOOR,
         .shape = DECORSHAPE_3x3,
         .category = DECORCAT_DESK,
@@ -141,7 +150,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "HARD DESK",
             "BUREAU PIERRES",
-            "TAVOLO DURO"),
+            "TAVOLO DURO",
+            "MESA FUERTE"),
         .permission = DECORPERM_SOLID_FLOOR,
         .shape = DECORSHAPE_3x3,
         .category = DECORCAT_DESK,
@@ -156,7 +166,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "SMALL CHAIR",
             "PETITE CHAISE",
-            "SEDIA PICCOLA"),
+            "SEDIA PICCOLA",
+            "SILLA PEQUEÑA"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_CHAIR,
@@ -171,7 +182,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "POKéMON CHAIR",
             "CHAISE POKéMON",
-            "SEDIA POKéMON"),
+            "SEDIA POKéMON",
+            "SILLA POKéMON"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_CHAIR,
@@ -186,7 +198,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "HEAVY CHAIR",
             "GRANDE CHAISE",
-            "SEDIA PESANTE"),
+            "SEDIA PESANTE",
+            "SILLA PESADA"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_CHAIR,
@@ -201,7 +214,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "PRETTY CHAIR",
             "JOLIE CHAISE",
-            "BELLA SEDIA"),
+            "BELLA SEDIA",
+            "SILLA BONITA"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_CHAIR,
@@ -216,7 +230,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "COMFORT CHAIR",
             "CHAISE COQUETTE",
-            "SEDIA COMODA"),
+            "SEDIA COMODA",
+            "SILLA CÓMODA"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_CHAIR,
@@ -231,7 +246,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "RAGGED CHAIR",
             "CHAISE BRUTE",
-            "SEDIA GREZZA"),
+            "SEDIA GREZZA",
+            "SILLA RÚSTICA"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_CHAIR,
@@ -246,7 +262,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "BRICK CHAIR",
             "CHAISE BRIQUES",
-            "SEDIA MATTONI"),
+            "SEDIA MATTONI",
+            "SILLA LADRILLO"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_CHAIR,
@@ -261,7 +278,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "CAMP CHAIR",
             "CHAISE CAMPEUR",
-            "SEDIA DA CAMPO"),
+            "SEDIA DA CAMPO",
+            "SILLA DE CAMPO"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_CHAIR,
@@ -276,7 +294,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "HARD CHAIR",
             "CHAISE PIERRES",
-            "SEDIA DURA"),
+            "SEDIA DURA",
+            "SILLA FUERTE"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_CHAIR,
@@ -291,7 +310,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "RED PLANT",
             "PLANTE ROUGE",
-            "PIANTA ROSSA"),
+            "PIANTA ROSSA",
+            "PLANTA ROJA"),
         .permission = DECORPERM_BEHIND_FLOOR,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_PLANT,
@@ -306,7 +326,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "TROPICAL PLANT",
             "PLANTE TROPIC",
-            "TROPICPIANTA"),
+            "TROPICPIANTA",
+            "PL. TROPICAL"),
         .permission = DECORPERM_BEHIND_FLOOR,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_PLANT,
@@ -321,7 +342,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "PRETTY FLOWERS",
             "JOLIES FLEURS",
-            "BEI FIORI"),
+            "BEI FIORI",
+            "FLORES BONITAS"),
         .permission = DECORPERM_BEHIND_FLOOR,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_PLANT,
@@ -336,7 +358,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "COLORFUL PLANT",
             "PLANTE COLOREE",
-            "PIANTA COLORATA"),
+            "PIANTA COLORATA",
+            "PL. COLORIDA"),
         .permission = DECORPERM_BEHIND_FLOOR,
         .shape = DECORSHAPE_2x2,
         .category = DECORCAT_PLANT,
@@ -351,7 +374,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "BIG PLANT",
             "GROSSE PLANTE",
-            "PIANTA GRANDE"),
+            "PIANTA GRANDE",
+            "PLANTA GRANDE"),
         .permission = DECORPERM_BEHIND_FLOOR,
         .shape = DECORSHAPE_2x2,
         .category = DECORCAT_PLANT,
@@ -366,7 +390,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "GORGEOUS PLANT",
             "BELLE PLANTE",
-            "PIANTA CHIC"),
+            "PIANTA CHIC",
+            "PLANTA ENORME"),
         .permission = DECORPERM_BEHIND_FLOOR,
         .shape = DECORSHAPE_2x2,
         .category = DECORCAT_PLANT,
@@ -381,7 +406,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "RED BRICK",
             "BRIQUE ROUGE",
-            "MATTONE ROSSO"),
+            "MATTONE ROSSO",
+            "LADRILLO ROJO"),
         .permission = DECORPERM_SOLID_FLOOR,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_ORNAMENT,
@@ -396,7 +422,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "YELLOW BRICK",
             "BRIQUE JAUNE",
-            "MATTONE GIALLO"),
+            "MATTONE GIALLO",
+            "LADR. AMARILLO"),
         .permission = DECORPERM_SOLID_FLOOR,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_ORNAMENT,
@@ -411,7 +438,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "BLUE BRICK",
             "BRIQUE BLEUE",
-            "MATTONE BLU"),
+            "MATTONE BLU",
+            "LADRILLO AZUL"),
         .permission = DECORPERM_SOLID_FLOOR,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_ORNAMENT,
@@ -426,7 +454,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "RED BALLOON",
             "BALLON ROUGE",
-            "PALLONE ROSSO"),
+            "PALLONE ROSSO",
+            "GLOBO ROJO"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_ORNAMENT,
@@ -441,7 +470,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "BLUE BALLOON",
             "BALLON BLEU",
-            "PALLONE BLU"),
+            "PALLONE BLU",
+            "GLOBO AZUL"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_ORNAMENT,
@@ -456,7 +486,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "YELLOW BALLOON",
             "BALLON JAUNE",
-            "PALLONE GIALLO"),
+            "PALLONE GIALLO",
+            "GLOBO AMARILLO"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_ORNAMENT,
@@ -471,7 +502,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "RED TENT",
             "TENTE ROUGE",
-            "TENDA ROSSA"),
+            "TENDA ROSSA",
+            "TIENDA ROJA"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_3x3,
         .category = DECORCAT_ORNAMENT,
@@ -486,7 +518,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "BLUE TENT",
             "TENTE BLEUE",
-            "TENDA BLU"),
+            "TENDA BLU",
+            "TIENDA AZUL"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_3x3,
         .category = DECORCAT_ORNAMENT,
@@ -501,7 +534,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "SOLID BOARD",
             "PLANCHE SOLIDE",
-            "ASSE SOLIDA"),
+            "ASSE SOLIDA",
+            "TABLA"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_ORNAMENT,
@@ -516,7 +550,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "SLIDE",
             "TOBOGGAN",
-            "SCIVOLO"),
+            "SCIVOLO",
+            "TOBOGÁN"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_2x4,
         .category = DECORCAT_ORNAMENT,
@@ -531,7 +566,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "FENCE LENGTH",
             "BARRIERE HAUTE",
-            "BARRIERA LUNGA"),
+            "BARRIERA LUNGA",
+            "VALLA LARGA"),
         .permission = DECORPERM_SOLID_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_ORNAMENT,
@@ -546,7 +582,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "FENCE WIDTH",
             "BARRIERE LARGE",
-            "BARRIERA LARGA"),
+            "BARRIERA LARGA",
+            "VALLA ANCHA"),
         .permission = DECORPERM_SOLID_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_ORNAMENT,
@@ -561,7 +598,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "TIRE",
             "PNEU",
-            "CERCHIONE"),
+            "CERCHIONE",
+            "NEUMÁTICO"),
         .permission = DECORPERM_SOLID_FLOOR,
         .shape = DECORSHAPE_2x2,
         .category = DECORCAT_ORNAMENT,
@@ -576,7 +614,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "STAND",
             "ESTRADE",
-            "PALCHETTO"),
+            "PALCHETTO",
+            "PODIO"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_4x2,
         .category = DECORCAT_ORNAMENT,
@@ -591,7 +630,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "MUD BALL",
             "BOULE DE BOUE",
-            "PALLA FANGO"),
+            "PALLA FANGO",
+            "BOLA DE LODO"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_ORNAMENT,
@@ -606,7 +646,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "BREAKABLE DOOR",
             "PORTE CASSABLE",
-            "PORTA FRAGILE"),
+            "PORTA FRAGILE",
+            "PUERTA RARA"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_ORNAMENT,
@@ -621,7 +662,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "SAND ORNAMENT",
             "DECO DE SABLE",
-            "STATUA FRAGILE"),
+            "STATUA FRAGILE",
+            "ADORNO ARENA"),
         .permission = DECORPERM_BEHIND_FLOOR,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_ORNAMENT,
@@ -636,7 +678,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "SILVER SHIELD",
             "BOUCLIER ARGENT",
-            "SCUDO ARGENTEO"),
+            "SCUDO ARGENTEO",
+            "ESCUDO PLATA"),
         .permission = DECORPERM_BEHIND_FLOOR,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_ORNAMENT,
@@ -651,7 +694,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "GOLD SHIELD",
             "BOUCLIER OR",
-            "SCUDO AUREO"),
+            "SCUDO AUREO",
+            "ESCUDO DE ORO"),
         .permission = DECORPERM_BEHIND_FLOOR,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_ORNAMENT,
@@ -666,7 +710,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "GLASS ORNAMENT",
             "ORNEMENT VERRE",
-            "STATUA VITREA"),
+            "STATUA VITREA",
+            "ADORNO CRISTAL"),
         .permission = DECORPERM_BEHIND_FLOOR,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_ORNAMENT,
@@ -681,7 +726,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "TV",
             "TV",
-            "TV"),
+            "TV",
+            "TELEVISIÓN"),
         .permission = DECORPERM_SOLID_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_ORNAMENT,
@@ -696,7 +742,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "ROUND TV",
             "TV RONDE",
-            "TV ROTONDA"),
+            "TV ROTONDA",
+            "TELE REDONDA"),
         .permission = DECORPERM_SOLID_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_ORNAMENT,
@@ -711,7 +758,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "CUTE TV",
             "JOLIE TV",
-            "TV CARINA"),
+            "TV CARINA",
+            "TELE BONITA"),
         .permission = DECORPERM_SOLID_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_ORNAMENT,
@@ -726,7 +774,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "GLITTER MAT",
             "TAPIS BRILLANT",
-            "TAPP. BRILLANTE"),
+            "TAPP. BRILLANTE",
+            "TAPETE BRILLO"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_MAT,
@@ -741,7 +790,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "JUMP MAT",
             "TAPIS SAUTEUR",
-            "TAPPETO SALTO"),
+            "TAPPETO SALTO",
+            "TAPETE MUELLE"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_MAT,
@@ -756,7 +806,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "SPIN MAT",
             "TAPIS TOURNANT",
-            "TAPPETO GIRO"),
+            "TAPPETO GIRO",
+            "TAPETE GIRO"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_MAT,
@@ -771,7 +822,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "C Low NOTE MAT",
             "TAPIS DO GRAVE",
-            "TAPP. DO BASSO"),
+            "TAPP. DO BASSO",
+            "TAP. DO MENOR"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_MAT,
@@ -786,7 +838,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "D NOTE MAT",
             "TAPIS RE",
-            "TAPPETO RE"),
+            "TAPPETO RE",
+            "TAPETE NOTA RE"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_MAT,
@@ -801,7 +854,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "E NOTE MAT",
             "TAPIS MI",
-            "TAPPETO MI"),
+            "TAPPETO MI",
+            "TAPETE NOTA MI"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_MAT,
@@ -816,7 +870,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "F NOTE MAT",
             "TAPIS FA",
-            "TAPPETO FA"),
+            "TAPPETO FA",
+            "TAPETE NOTA FA"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_MAT,
@@ -831,7 +886,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "G NOTE MAT",
             "TAPIS SOL",
-            "TAPPETO SOL"),
+            "TAPPETO SOL",
+            "TAP. NOTA SOL"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_MAT,
@@ -846,7 +902,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "A NOTE MAT",
             "TAPIS LA",
-            "TAPPETO LA"),
+            "TAPPETO LA",
+            "TAPETE NOTA LA"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_MAT,
@@ -861,7 +918,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "B NOTE MAT",
             "TAPIS SI",
-            "TAPPETO SI"),
+            "TAPPETO SI",
+            "TAPETE NOTA SI"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_MAT,
@@ -876,7 +934,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "C High NOTE MAT",
             "TAPIS DO AIGU",
-            "TAPPETO DO ALTO"),
+            "TAPPETO DO ALTO",
+            "TAP. DO MAYOR"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_MAT,
@@ -891,7 +950,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "SURF MAT",
             "TAPIS SURF",
-            "TAPPETO SURF"),
+            "TAPPETO SURF",
+            "TAPETE SURF"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_3x3,
         .category = DECORCAT_MAT,
@@ -906,7 +966,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "THUNDER MAT",
             "TA.FATAL-FOUDRE",
-            "TAPPETO TUONO"),
+            "TAPPETO TUONO",
+            "TAPETE TRUENO"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_3x3,
         .category = DECORCAT_MAT,
@@ -921,7 +982,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "FIRE BLAST MAT",
             "TA.DEFLAGRATION",
-            "TAPP.FUOCOBOMBA"),
+            "TAPP.FUOCOBOMBA",
+            "TAP. LLAMARADA"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_3x3,
         .category = DECORCAT_MAT,
@@ -936,7 +998,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "POWDER SNOW MAT",
             "TAPIS POUDREUSE",
-            "TAPP. POLNEVE"),
+            "TAPP. POLNEVE",
+            "T. NIEVE POLVO"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_3x3,
         .category = DECORCAT_MAT,
@@ -951,7 +1014,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "ATTRACT MAT",
             "TAP. ATTRACTION",
-            "TAPP.ATTRAZIONE"),
+            "TAPP.ATTRAZIONE",
+            "TAP. ATRACCIÓN"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_3x3,
         .category = DECORCAT_MAT,
@@ -966,7 +1030,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "FISSURE MAT",
             "TAPIS ABIME",
-            "TAPP. ABISSO"),
+            "TAPP. ABISSO",
+            "TAPETE FISURA"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_3x3,
         .category = DECORCAT_MAT,
@@ -981,7 +1046,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "SPIKES MAT",
             "TAPIS PICOTS",
-            "TAPP. PUNTE"),
+            "TAPP. PUNTE",
+            "TAPETE PÚAS"),
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_3x3,
         .category = DECORCAT_MAT,
@@ -996,7 +1062,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "BALL POSTER",
             "POSTER BALL",
-            "POSTER BALL"),
+            "POSTER BALL",
+            "P. POKé BALL"),
         .permission = DECORPERM_NA_WALL,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_POSTER,
@@ -1011,7 +1078,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "GREEN POSTER",
             "POSTER VERT",
-            "POSTER VERDE"),
+            "POSTER VERDE",
+            "PÓSTER VERDE"),
         .permission = DECORPERM_NA_WALL,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_POSTER,
@@ -1026,7 +1094,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "RED POSTER",
             "POSTER ROUGE",
-            "POSTER ROSSO"),
+            "POSTER ROSSO",
+            "PÓSTER ROJO"),
         .permission = DECORPERM_NA_WALL,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_POSTER,
@@ -1041,7 +1110,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "BLUE POSTER",
             "POSTER BLEU",
-            "POSTER BLU"),
+            "POSTER BLU",
+            "PÓSTER AZUL"),
         .permission = DECORPERM_NA_WALL,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_POSTER,
@@ -1056,7 +1126,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "CUTE POSTER",
             "JOLI POSTER",
-            "POSTER CARINO"),
+            "POSTER CARINO",
+            "PÓSTER BONITO"),
         .permission = DECORPERM_NA_WALL,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_POSTER,
@@ -1071,7 +1142,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "PIKA POSTER",
             "POSTER PIKA",
-            "POSTER PIKA"),
+            "POSTER PIKA",
+            "PÓSTER PIKA"),
         .permission = DECORPERM_NA_WALL,
         .shape = DECORSHAPE_2x1,
         .category = DECORCAT_POSTER,
@@ -1086,7 +1158,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "LONG POSTER",
             "GRAND POSTER",
-            "POSTER LUNGO"),
+            "POSTER LUNGO",
+            "PÓSTER GRANDE"),
         .permission = DECORPERM_NA_WALL,
         .shape = DECORSHAPE_2x1,
         .category = DECORCAT_POSTER,
@@ -1101,7 +1174,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "SEA POSTER",
             "POSTER OCEAN",
-            "POSTER MARE"),
+            "POSTER MARE",
+            "PÓSTER MAR"),
         .permission = DECORPERM_NA_WALL,
         .shape = DECORSHAPE_2x1,
         .category = DECORCAT_POSTER,
@@ -1116,7 +1190,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "SKY POSTER",
             "POSTER CIEL",
-            "POSTER CIELO"),
+            "POSTER CIELO",
+            "PÓSTER CIELO"),
         .permission = DECORPERM_NA_WALL,
         .shape = DECORSHAPE_2x1,
         .category = DECORCAT_POSTER,
@@ -1131,7 +1206,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "KISS POSTER",
             "POSTER BAISER",
-            "POSTER SMACK"),
+            "POSTER SMACK",
+            "PÓSTER BESO"),
         .permission = DECORPERM_NA_WALL,
         .shape = DECORSHAPE_2x1,
         .category = DECORCAT_POSTER,
@@ -1146,7 +1222,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "PICHU DOLL",
             "POUPEE PICHU",
-            "BAMBOLA PICHU"),
+            "BAMBOLA PICHU",
+            "MUÑECO PICHU"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1161,7 +1238,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "PIKACHU DOLL",
             "POUPEE PIKACHU",
-            "BAMBOLA PIKACHU"),
+            "BAMBOLA PIKACHU",
+            "MUÑECO PIKACHU"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1176,7 +1254,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "MARILL DOLL",
             "POUPEE MARILL",
-            "BAMBOLA MARILL"),
+            "BAMBOLA MARILL",
+            "MUÑECO MARILL"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1191,7 +1270,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "TOGEPI DOLL",
             "POUPEE TOGEPI",
-            "BAMBOLA TOGEPI"),
+            "BAMBOLA TOGEPI",
+            "MUÑECO TOGEPI"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1206,7 +1286,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "CYNDAQUIL DOLL",
             "POUP.HERICENDRE",
-            "BAMB. CYNDAQUIL"),
+            "BAMB. CYNDAQUIL",
+            "MUÑ. CYNDAQUIL"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1221,7 +1302,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "CHIKORITA DOLL",
             "POUP. GERMIGNON",
-            "BAMB. CHIKORITA"),
+            "BAMB. CHIKORITA",
+            "MUÑ. CHIKORITA"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1236,7 +1318,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "TOTODILE DOLL",
             "POUPEE KAIMINUS",
-            "BAMB. TOTODILE"),
+            "BAMB. TOTODILE",
+            "MUÑ. TOTODILE"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1251,7 +1334,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "JIGGLYPUFF DOLL",
             "POUP. RONDOUDOU",
-            "BAMB.JIGGLYPUFF"),
+            "BAMB.JIGGLYPUFF",
+            "MUÑ. JIGGLYPUFF"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1266,7 +1350,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "MEOWTH DOLL",
             "POUPEE MIAOUSS",
-            "BAMB. MEOWTH"),
+            "BAMB. MEOWTH",
+            "MUÑECO MEOWTH"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1281,7 +1366,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "CLEFAIRY DOLL",
             "POUPEE MELOFEE",
-            "BAMB. CLEFAIRY"),
+            "BAMB. CLEFAIRY",
+            "MUÑECO CLEFAIRY"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1296,7 +1382,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "DITTO DOLL",
             "POUP. METAMORPH",
-            "BAMBOLA DITTO"),
+            "BAMBOLA DITTO",
+            "MUÑECO DITTO"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1311,7 +1398,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "SMOOCHUM DOLL",
             "POUPEE LIPPOUTI",
-            "BAMB. SMOOCHUM"),
+            "BAMB. SMOOCHUM",
+            "MUÑECO SMOOCHUM"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1326,7 +1414,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "TREECKO DOLL",
             "POUPEE ARCKO",
-            "BAMBOLA TREECKO"),
+            "BAMBOLA TREECKO",
+            "MUÑECO TREECKO"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1341,7 +1430,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "TORCHIC DOLL",
             "POUP.POUSSIFEU",
-            "BAMBOLA TORCHIC"),
+            "BAMBOLA TORCHIC",
+            "MUÑECO TORCHIC"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1356,7 +1446,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "MUDKIP DOLL",
             "POUPEE GOBOU",
-            "BAMBOLA MUDKIP"),
+            "BAMBOLA MUDKIP",
+            "MUÑECO MUDKIP"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1371,7 +1462,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "DUSKULL DOLL",
             "POUPEE SKELENOX",
-            "BAMBOLA DUSKULL"),
+            "BAMBOLA DUSKULL",
+            "MUÑECO DUSKULL"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1386,7 +1478,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "WYNAUT DOLL",
             "POUPEE OKEOKE",
-            "BAMBOLA WYNAUT"),
+            "BAMBOLA WYNAUT",
+            "MUÑECO WYNAUT"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1401,7 +1494,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "BALTOY DOLL",
             "POUPEE BALBUTO",
-            "BAMBOLA BALTOY"),
+            "BAMBOLA BALTOY",
+            "MUÑECO BALTOY"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1416,7 +1510,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "KECLEON DOLL",
             "POUPEE KECLEON",
-            "BAMBOLA KECLEON"),
+            "BAMBOLA KECLEON",
+            "MUÑECO KECLEON"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1431,7 +1526,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "AZURILL DOLL",
             "POUPEE AZURILL",
-            "BAMBOLA AZURILL"),
+            "BAMBOLA AZURILL",
+            "MUÑECO AZURILL"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1446,7 +1542,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "SKITTY DOLL",
             "POUPEE SKITTY",
-            "BAMBOLA SKITTY"),
+            "BAMBOLA SKITTY",
+            "MUÑECO SKITTY"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1461,7 +1558,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "SWABLU DOLL",
             "POUPEE TYLTON",
-            "BAMBOLA SWABLU"),
+            "BAMBOLA SWABLU",
+            "MUÑECO SWABLU"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1476,7 +1574,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "GULPIN DOLL",
             "POUPEE GLOUPTI",
-            "BAMBOLA GULPIN"),
+            "BAMBOLA GULPIN",
+            "MUÑECO GULPIN"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1491,7 +1590,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "LOTAD DOLL",
             "POUPEE NENUPIOT",
-            "BAMBOLA LOTAD"),
+            "BAMBOLA LOTAD",
+            "MUÑECO LOTAD"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1506,7 +1606,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "SEEDOT DOLL",
             "POUP.GRAINIPIOT",
-            "BAMBOLA SEEDOT"),
+            "BAMBOLA SEEDOT",
+            "MUÑECO SEEDOT"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DOLL,
@@ -1521,7 +1622,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "PIKA CUSHION",
             "COUSSIN PIKACHU",
-            "CUSCINO PIKA"),
+            "CUSCINO PIKA",
+            "COJÍN PIKA"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_CUSHION,
@@ -1536,7 +1638,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "ROUND CUSHION",
             "COUSSIN ROND",
-            "CUSCINO ROTONDO"),
+            "CUSCINO ROTONDO",
+            "COJÍN REDONDO"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_CUSHION,
@@ -1551,7 +1654,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "KISS CUSHION",
             "COUSSIN BAISER",
-            "CUSCINO SMACK"),
+            "CUSCINO SMACK",
+            "COJÍN BESO"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_CUSHION,
@@ -1566,7 +1670,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "ZIGZAG CUSHION",
             "COUSSIN ZIGZAG",
-            "CUSCINO ZIGZAG"),
+            "CUSCINO ZIGZAG",
+            "COJÍN ZIGZAGOON"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_CUSHION,
@@ -1581,7 +1686,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "SPIN CUSHION",
             "COUSSIN SPIRALE",
-            "CUSCINO GIRO"),
+            "CUSCINO GIRO",
+            "COJÍN SPINDA"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_CUSHION,
@@ -1596,7 +1702,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "DIAMOND CUSHION",
             "COUSSIN DIAMANT",
-            "CUSC. DIAMANTE"),
+            "CUSC. DIAMANTE",
+            "COJÍN DIAMANTE"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_CUSHION,
@@ -1611,7 +1718,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "BALL CUSHION",
             "COUSSIN BALL",
-            "CUSCINO BALL"),
+            "CUSCINO BALL",
+            "COJÍN BALL"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_CUSHION,
@@ -1626,7 +1734,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "GRASS CUSHION",
             "COUSSIN PLANTE",
-            "CUSCINO ERBA"),
+            "CUSCINO ERBA",
+            "COJÍN PLANTA"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_CUSHION,
@@ -1641,7 +1750,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "FIRE CUSHION",
             "COUSSIN FEU",
-            "CUSCINO FUOCO"),
+            "CUSCINO FUOCO",
+            "COJÍN FUEGO"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_CUSHION,
@@ -1656,7 +1766,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "WATER CUSHION",
             "COUSSIN EAU",
-            "CUSCINO ACQUA"),
+            "CUSCINO ACQUA",
+            "COJÍN AGUA"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_CUSHION,
@@ -1671,7 +1782,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "SNORLAX DOLL",
             "POUPEE RONFLEX",
-            "BAMBOLA SNORLAX"),
+            "BAMBOLA SNORLAX",
+            "MUÑECO SNORLAX"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_DOLL,
@@ -1686,7 +1798,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "RHYDON DOLL",
             "POUP.RHINOFEROS",
-            "BAMBOLA RHYDON"),
+            "BAMBOLA RHYDON",
+            "MUÑECO RHYDON"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_DOLL,
@@ -1701,7 +1814,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "LAPRAS DOLL",
             "POUPEE LOKHLASS",
-            "BAMBOLA LAPRAS"),
+            "BAMBOLA LAPRAS",
+            "MUÑECO LAPRAS"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_DOLL,
@@ -1716,7 +1830,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "VENUSAUR DOLL",
             "POUP.FLORIZARRE",
-            "BAMB. VENUSAUR"),
+            "BAMB. VENUSAUR",
+            "MUÑECO VENUSAUR"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_DOLL,
@@ -1731,7 +1846,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "CHARIZARD DOLL",
             "POUP. DRACAUFEU",
-            "BAMB. CHARIZARD"),
+            "BAMB. CHARIZARD",
+            "MUÑECO CHARIZAR"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_DOLL,
@@ -1746,7 +1862,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "BLASTOISE DOLL",
             "POUPEE TORTANK",
-            "BAMB. BLASTOISE"),
+            "BAMB. BLASTOISE",
+            "MUÑ. BLASTOISE"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_DOLL,
@@ -1761,7 +1878,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "WAILMER DOLL",
             "POUPEE WAILMER",
-            "BAMB. WAILMER"),
+            "BAMB. WAILMER",
+            "MUÑECO WAILMER"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_DOLL,
@@ -1776,7 +1894,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "REGIROCK DOLL",
             "POUPEE REGIROCK",
-            "BAMB. REGIROCK"),
+            "BAMB. REGIROCK",
+            "MUÑECO REGIROCK"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_DOLL,
@@ -1791,7 +1910,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "REGICE DOLL",
             "POUPEE REGICE",
-            "BAMBOLA REGICE"),
+            "BAMBOLA REGICE",
+            "MUÑECO REGICE"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_DOLL,
@@ -1806,7 +1926,8 @@ const struct Decoration gDecorations[] =
         .name = LANGUAGE_STRING(
             "REGISTEEL DOLL",
             "POUP. REGISTEEL",
-            "BAMB. REGISTEEL"),
+            "BAMB. REGISTEEL",
+            "MUÑ. REGISTEEL"),
         .permission = DECORPERM_SPRITE,
         .shape = DECORSHAPE_1x2,
         .category = DECORCAT_DOLL,
@@ -1815,3 +1936,4 @@ const struct Decoration gDecorations[] =
         .tiles = DecorGfx_REGISTEEL_DOLL,
     }
 };
+

@@ -154,6 +154,9 @@ const struct ContestWinner gDefaultContestWinners[] =
     #elif ITALIAN
         .monName = _("ELECTER"),
         .trainerName = _("EZRA"),
+    #elif SPANISH
+        .monName = _("ELETRI"),
+        .trainerName = _("ERORO"),
     #else //ENGLISH
         .monName = _("ELECTER"),
         .trainerName = _("EZRA"),
@@ -168,10 +171,10 @@ const struct ContestWinner gDefaultContestWinners[] =
     #if FRENCH
         .monName = _("TROPO"),
         .trainerName = _("NICOLAS"),
-    #elif ITALIAN
-        .monName = _("TROPO"),
-        .trainerName = _("ALLAN"),
-    #else //ENGLISH
+    #elif SPANISH
+        .monName = _("TROPILI"),
+        .trainerName = _("ALAN"),
+    #else //ENGLISH || ITALIAN
         .monName = _("TROPO"),
         .trainerName = _("ALLAN"),
     #endif
@@ -185,10 +188,10 @@ const struct ContestWinner gDefaultContestWinners[] =
     #if FRENCH
         .monName = _("TUXA"),
         .trainerName = _("JULIA"),
-    #elif ITALIAN
-        .monName = _("TUXA"),
-        .trainerName = _("JULIET"),
-    #else //ENGLISH
+    #elif SPANISH
+        .monName = _("CHATU"),
+        .trainerName = _("JULIA"),
+    #else //ENGLISH || ITALIAN
         .monName = _("TUXA"),
         .trainerName = _("JULIET"),
     #endif
@@ -204,6 +207,9 @@ const struct ContestWinner gDefaultContestWinners[] =
         .trainerName = _("ELTON"),
     #elif ITALIAN
         .monName = _("PULSE"),
+        .trainerName = _("LEIO"),
+    #elif SPANISH
+        .monName = _("PUSLITO"),
         .trainerName = _("LEIO"),
     #else //ENGLISH
         .monName = _("PULSE"),
@@ -222,6 +228,9 @@ const struct ContestWinner gDefaultContestWinners[] =
     #elif ITALIAN
         .monName = _("SHUPUP"),
         .trainerName = _("MELANY"),
+    #elif SPANISH
+        .monName = _("CHUPETE"),
+        .trainerName = _("MELADIA"),
     #else //ENGLISH
         .monName = _("SHUPUP"),
         .trainerName = _("MELANY"),
@@ -239,6 +248,9 @@ const struct ContestWinner gDefaultContestWinners[] =
     #elif ITALIAN
         .monName = _("GOOZAN"),
         .trainerName = _("HANA"),
+    #elif SPANISH
+        .monName = _("ZANGO"),
+        .trainerName = _("JANA"),
     #else //ENGLISH
         .monName = _("GOOZAN"),
         .trainerName = _("HANA"),
@@ -256,6 +268,9 @@ const struct ContestWinner gDefaultContestWinners[] =
     #elif ITALIAN
         .monName = _("LOUDED"),
         .trainerName = _("BERTO"),
+    #elif SPANISH
+        .monName = _("LOUDED"),
+        .trainerName = _("BASILIO"),
     #else //ENGLISH
         .monName = _("LOUDED"),
         .trainerName = _("BRYANT"),
@@ -273,6 +288,9 @@ const struct ContestWinner gDefaultContestWinners[] =
     #elif ITALIAN
         .monName = _("KITSY"),
         .trainerName = _("OMAR"),
+    #elif SPANISH
+        .monName = _("KITSY"),
+        .trainerName = _("OTILIO"),
     #else //ENGLISH
         .monName = _("KITSY"),
         .trainerName = _("OMAR"),
@@ -291,6 +309,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("POOCHY"),
         .trainerName = _("JIMMY"),
+    #elif SPANISH
+        .nickname = _("POOCHY"),
+        .trainerName = _("JULAN"),
     #else //ENGLISH
         .nickname = _("POOCHY"),
         .trainerName = _("JIMMY"),
@@ -327,6 +348,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("MUSILLE"),
         .trainerName = _("AMBRA"),
+    #elif SPANISH
+        .nickname = _("ILLUMI"),
+        .trainerName = _("JUDITH"),
     #else //ENGLISH
         .nickname = _("MUSILLE"),
         .trainerName = _("EDITH"),
@@ -363,6 +387,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("DUSTER"),
         .trainerName = _("IVANO"),
+    #elif SPANISH
+        .nickname = _("DUSTER"),
+        .trainerName = _("ELVIO"),
     #else //ENGLISH
         .nickname = _("DUSTER"),
         .trainerName = _("EVAN"),
@@ -399,6 +426,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("DOTS"),
         .trainerName = _("CAROLA"),
+    #elif SPANISH
+        .nickname = _("DOTS"),
+        .trainerName = _("KIKA"),
     #else //ENGLISH
         .nickname = _("DOTS"),
         .trainerName = _("KELSEY"),
@@ -435,6 +465,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("TATAY"),
         .trainerName = _("LILLY"),
+    #elif SPANISH
+        .nickname = _("TATAY"),
+        .trainerName = _("MARISOL"),
     #else //ENGLISH
         .nickname = _("TATAY"),
         .trainerName = _("MADISON"),
@@ -471,6 +504,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("NINDA"),
         .trainerName = _("RAYMOND"),
+    #elif SPANISH
+        .nickname = _("NINDA"),
+        .trainerName = _("MONCHO"),
     #else //ENGLISH
         .nickname = _("NINDA"),
         .trainerName = _("RAYMOND"),
@@ -507,6 +543,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("SMISH"),
         .trainerName = _("GIGIO"),
+    #elif SPANISH
+        .nickname = _("SMISH"),
+        .trainerName = _("GONZALO"),
     #else //ENGLISH
         .nickname = _("SMISH"),
         .trainerName = _("GRANT"),
@@ -543,6 +582,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("SPHELI"),
         .trainerName = _("LORENA"),
+    #elif SPANISH
+        .nickname = _("SPHELI"),
+        .trainerName = _("PAZ"),
     #else //ENGLISH
         .nickname = _("SLEAL"),
         .trainerName = _("PAIGE"),
@@ -579,6 +621,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("SLOKTH"),
         .trainerName = _("EZIO"),
+    #elif SPANISH
+        .nickname = _("SLOKTH"),
+        .trainerName = _("ABEL"),
     #else //ENGLISH
         .nickname = _("SLOKTH"),
         .trainerName = _("ALEC"),
@@ -615,6 +660,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("WHIRIS"),
         .trainerName = _("LUANA"),
+    #elif SPANISH
+        .nickname = _("WHIRIS"),
+        .trainerName = _("SONIA"),
     #else //ENGLISH
         .nickname = _("WHIRIS"),
         .trainerName = _("SYDNEY"),
@@ -651,6 +699,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("MAHITA"),
         .trainerName = _("SABINO"),
+    #elif SPANISH
+        .nickname = _("MAHITA"),
+        .trainerName = _("MAURI"),
     #else //ENGLISH
         .nickname = _("MAHITA"),
         .trainerName = _("MORRIS"),
@@ -687,6 +738,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("RONAR"),
         .trainerName = _("LIALA"),
+    #elif SPANISH
+        .nickname = _("RONAR"),
+        .trainerName = _("MARILIA"),
     #else //ENGLISH
         .nickname = _("RONAR"),
         .trainerName = _("MARIAH"),
@@ -723,6 +777,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("BATRO"),
         .trainerName = _("GIULIO"),
+    #elif SPANISH
+        .nickname = _("CROBI"),
+        .trainerName = _("ROSENDO"),
     #else //ENGLISH
         .nickname = _("BATRO"),
         .trainerName = _("RUSSELL"),
@@ -759,6 +816,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("GULIN"),
         .trainerName = _("MELANIE"),
+    #elif SPANISH
+        .nickname = _("GULIN"),
+        .trainerName = _("MELANIA"),
     #else //ENGLISH
         .nickname = _("GULIN"),
         .trainerName = _("MELANIE"),
@@ -795,6 +855,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("RIKELEC"),
         .trainerName = _("BIAGIO"),
+    #elif SPANISH
+        .nickname = _("RIKELEC"),
+        .trainerName = _("ISIDRO"),
     #else //ENGLISH
         .nickname = _("RIKELEC"),
         .trainerName = _("CHANCE"),
@@ -831,6 +894,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("BULBY"),
         .trainerName = _("AGATHA"),
+    #elif SPANISH
+        .nickname = _("BULBI"),
+        .trainerName = _("ALICIA"),
     #else //ENGLISH
         .nickname = _("BULBY"),
         .trainerName = _("AGATHA"),
@@ -867,6 +933,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("FUTTERBE"),
         .trainerName = _("BEBA"),
+    #elif SPANISH
+        .nickname = _("BUTTI"),
+        .trainerName = _("BUSI"),
     #else //ENGLISH
         .nickname = _("FUTTERBE"),
         .trainerName = _("BEAU"),
@@ -903,6 +972,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("PIDEOT"),
         .trainerName = _("KALY"),
+    #elif SPANISH
+        .nickname = _("PIDGE"),
+        .trainerName = _("LERE"),
     #else //ENGLISH
         .nickname = _("PIDEOT"),
         .trainerName = _("KAY"),
@@ -939,6 +1011,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("DIGLE"),
         .trainerName = _("CARLINO"),
+    #elif SPANISH
+        .nickname = _("DIGLIT"),
+        .trainerName = _("DINO"),
     #else //ENGLISH
         .nickname = _("DIGLE"),
         .trainerName = _("CALE"),
@@ -972,7 +1047,7 @@ const struct ContestPokemon gContestOpponents[] =
     #if FRENCH
         .nickname = _("TARPI"),
         .trainerName = _("EMMA"),
-    #elif ITALIAN
+    #elif ITALIAN || SPANISH
         .nickname = _("POLI"),
         .trainerName = _("CADALIA"),
     #else //ENGLISH
@@ -1011,6 +1086,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("TOTDIL"),
         .trainerName = _("CICCO"),
+    #elif SPANISH
+        .nickname = _("TOTODIL"),
+        .trainerName = _("CHECHU"),
     #else //ENGLISH
         .nickname = _("TOTDIL"),
         .trainerName = _("COLBY"),
@@ -1047,6 +1125,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("BALEDY"),
         .trainerName = _("KYLIE"),
+    #elif SPANISH
+        .nickname = _("LEDYBI"),
+        .trainerName = _("NARA"),
     #else //ENGLISH
         .nickname = _("BALEDY"),
         .trainerName = _("KYLIE"),
@@ -1083,6 +1164,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("BIRDLY"),
         .trainerName = _("LARO"),
+    #elif SPANISH
+        .nickname = _("DELIBI"),
+        .trainerName = _("LINO"),
     #else //ENGLISH
         .nickname = _("BIRDLY"),
         .trainerName = _("LIAM"),
@@ -1118,6 +1202,9 @@ const struct ContestPokemon gContestOpponents[] =
         .trainerName = _("SAM"),
     #elif ITALIAN
         .nickname = _("TARVITAR"),
+        .trainerName = _("MILO"),
+    #elif SPANISH
+        .nickname = _("LARVITI"),
         .trainerName = _("MILO"),
     #else //ENGLISH
         .nickname = _("TARVITAR"),
@@ -1155,6 +1242,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("RELIA"),
         .trainerName = _("BRUNA"),
+    #elif SPANISH
+        .nickname = _("RELIA"),
+        .trainerName = _("CARINA"),
     #else //ENGLISH
         .nickname = _("RELIA"),
         .trainerName = _("KARINA"),
@@ -1191,6 +1281,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("DUODO"),
         .trainerName = _("BOBBY"),
+    #elif SPANISH
+        .nickname = _("DUODO"),
+        .trainerName = _("BRAULIO"),
     #else //ENGLISH
         .nickname = _("DUODO"),
         .trainerName = _("BOBBY"),
@@ -1227,6 +1320,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("PINCHIN"),
         .trainerName = _("CLARA"),
+    #elif SPANISH
+        .nickname = _("PINCHIN"),
+        .trainerName = _("INGRID"),
     #else //ENGLISH
         .nickname = _("PINCHIN"),
         .trainerName = _("CLAIRE"),
@@ -1263,6 +1359,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("NACAC"),
         .trainerName = _("WILLY"),
+    #elif SPANISH
+        .nickname = _("NACAC"),
+        .trainerName = _("GUILLE"),
     #else //ENGLISH
         .nickname = _("NACAC"),
         .trainerName = _("WILLIE"),
@@ -1299,6 +1398,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("SHRAND"),
         .trainerName = _("CLOE"),
+    #elif SPANISH
+        .nickname = _("SHRAND"),
+        .trainerName = _("CASILDA"),
     #else //ENGLISH
         .nickname = _("SHRAND"),
         .trainerName = _("CASSIDY"),
@@ -1335,6 +1437,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("TOYBAL"),
         .trainerName = _("DAVIDE"),
+    #elif SPANISH
+        .nickname = _("TOYBAL"),
+        .trainerName = _("MARGO"),
     #else //ENGLISH
         .nickname = _("TOYBAL"),
         .trainerName = _("MORGAN"),
@@ -1371,6 +1476,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("CHAMCHAM"),
         .trainerName = _("DIANA"),
+    #elif SPANISH
+        .nickname = _("MEDICHI"),
+        .trainerName = _("SABINA"),
     #else //ENGLISH
         .nickname = _("CHAMCHAM"),
         .trainerName = _("SUMMER"),
@@ -1407,6 +1515,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("SPININ"),
         .trainerName = _("MARK"),
+    #elif SPANISH
+        .nickname = _("SPININ"),
+        .trainerName = _("MARIO"),
     #else //ENGLISH
         .nickname = _("SPININ"),
         .trainerName = _("MILES"),
@@ -1443,6 +1554,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("SWABY"),
         .trainerName = _("AZZURRA"),
+    #elif SPANISH
+        .nickname = _("SWABY"),
+        .trainerName = _("AURORA"),
     #else //ENGLISH
         .nickname = _("SWABY"),
         .trainerName = _("AUDREY"),
@@ -1479,6 +1593,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("POINKER"),
         .trainerName = _("FABIO"),
+    #elif SPANISH
+        .nickname = _("SPON"),
+        .trainerName = _("VARO"),
     #else //ENGLISH
         .nickname = _("POINKER"),
         .trainerName = _("AVERY"),
@@ -1515,6 +1632,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("KECON"),
         .trainerName = _("TAMY"),
+    #elif SPANISH
+        .nickname = _("KECON"),
+        .trainerName = _("ADRIANA"),
     #else //ENGLISH
         .nickname = _("KECON"),
         .trainerName = _("ARIANA"),
@@ -1551,6 +1671,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("GOLDEN"),
         .trainerName = _("ENZO"),
+    #elif SPANISH
+        .nickname = _("GOLDEN"),
+        .trainerName = _("AUGUSTO"),
     #else //ENGLISH
         .nickname = _("GOLDEN"),
         .trainerName = _("ASHTON"),
@@ -1587,7 +1710,7 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("BOBOACH"),
         .trainerName = _("SANDRA"),
-    #else //ENGLISH
+    #else //ENGLISH || SPANISH
         .nickname = _("BOBOACH"),
         .trainerName = _("SANDRA"),
     #endif
@@ -1623,6 +1746,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("SKARMY"),
         .trainerName = _("PIERRE"),
+    #elif SPANISH
+        .nickname = _("SKAMY"),
+        .trainerName = _("CIRILO"),
     #else //ENGLISH
         .nickname = _("CORPY"),
         .trainerName = _("CARSON"),
@@ -1659,6 +1785,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("TADO"),
         .trainerName = _("KATRINA"),
+    #elif SPANISH
+        .nickname = _("TADO"),
+        .trainerName = _("LINA"),
     #else //ENGLISH
         .nickname = _("TADO"),
         .trainerName = _("KATRINA"),
@@ -1695,6 +1824,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("BROWLO"),
         .trainerName = _("LUKE"),
+    #elif SPANISH
+        .nickname = _("SLOWBI"),
+        .trainerName = _("LUQUE"),
     #else //ENGLISH
         .nickname = _("BROWLO"),
         .trainerName = _("LUKE"),
@@ -1731,6 +1863,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("FARFI"),
         .trainerName = _("RINO"),
+    #elif SPANISH
+        .nickname = _("FARFI"),
+        .trainerName = _("ORIOL"),
     #else //ENGLISH
         .nickname = _("FETCHIN"),
         .trainerName = _("RAUL"),
@@ -1766,6 +1901,9 @@ const struct ContestPokemon gContestOpponents[] =
         .trainerName = _("JADE"),
     #elif ITALIAN
         .nickname = _("SEELEY"),
+        .trainerName = _("JADA"),
+    #elif SPANISH
+        .nickname = _("SELI"),
         .trainerName = _("JADA"),
     #else //ENGLISH
         .nickname = _("SEELEY"),
@@ -1803,6 +1941,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("DROWZIN"),
         .trainerName = _("JACK"),
+    #elif SPANISH
+        .nickname = _("DROW"),
+        .trainerName = _("CURRO"),
     #else //ENGLISH
         .nickname = _("DROWZIN"),
         .trainerName = _("ZEEK"),
@@ -1839,6 +1980,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("HITEMON"),
         .trainerName = _("GIOVI"),
+    #elif SPANISH
+        .nickname = _("HITMOCHI"),
+        .trainerName = _("DIEGO"),
     #else //ENGLISH
         .nickname = _("HITEMON"),
         .trainerName = _("DIEGO"),
@@ -1875,6 +2019,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("BLISS"),
         .trainerName = _("LELY"),
+    #elif SPANISH
+        .nickname = _("BLISSI"),
+        .trainerName = _("LETI"),
     #else //ENGLISH
         .nickname = _("BLISS"),
         .trainerName = _("ALIYAH"),
@@ -1911,6 +2058,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("KIDLEK"),
         .trainerName = _("NATALIA"),
+    #elif SPANISH
+        .nickname = _("ELEKI"),
+        .trainerName = _("NATALIA"),
     #else //ENGLISH
         .nickname = _("KIDLEK"),
         .trainerName = _("NATALIA"),
@@ -1944,10 +2094,10 @@ const struct ContestPokemon gContestOpponents[] =
     #if FRENCH
         .nickname = _("SNUBBINS"),
         .trainerName = _("MARCO"),
-    #elif ITALIAN
-        .nickname = _("SNUBBINS"),
-        .trainerName = _("DEVIN"),
-    #else //ENGLISH
+    #elif SPANISH
+        .nickname = _("SNUBBI"),
+        .trainerName = _("PEPITO"),
+    #else //ENGLISH || ITALIAN
         .nickname = _("SNUBBINS"),
         .trainerName = _("DEVIN"),
     #endif
@@ -1983,6 +2133,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("DREAVIS"),
         .trainerName = _("TATA"),
+    #elif SPANISH
+        .nickname = _("MISDRI"),
+        .trainerName = _("TILE"),
     #else //ENGLISH
         .nickname = _("DREAVIS"),
         .trainerName = _("TYLOR"),
@@ -2019,6 +2172,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("LAIRN"),
         .trainerName = _("RONNIE"),
+    #elif SPANISH
+        .nickname = _("LAIRN"),
+        .trainerName = _("ROQUE"),
     #else //ENGLISH
         .nickname = _("LAIRN"),
         .trainerName = _("RONNIE"),
@@ -2055,7 +2211,7 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("SHIFTY"),
         .trainerName = _("DENISE"),
-    #else //ENGLISH
+    #else //ENGLISH || SPANISH
         .nickname = _("SHIFTY"),
         .trainerName = _("CLAUDIA"),
     #endif
@@ -2091,6 +2247,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("NINAS"),
         .trainerName = _("ELIAS"),
+    #elif SPANISH
+        .nickname = _("NINAS"),
+        .trainerName = _("ELADIO"),
     #else //ENGLISH
         .nickname = _("NINAS"),
         .trainerName = _("ELIAS"),
@@ -2127,6 +2286,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("WELOW"),
         .trainerName = _("GIADA"),
+    #elif SPANISH
+        .nickname = _("WELOW"),
+        .trainerName = _("IRMA"),
     #else //ENGLISH
         .nickname = _("WELOW"),
         .trainerName = _("JADE"),
@@ -2163,6 +2325,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("YENA"),
         .trainerName = _("FRANCIS"),
+    #elif SPANISH
+        .nickname = _("YENA"),
+        .trainerName = _("FRAN"),
     #else //ENGLISH
         .nickname = _("YENA"),
         .trainerName = _("FRANCIS"),
@@ -2199,6 +2364,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("TIFLY"),
         .trainerName = _("ALISHA"),
+    #elif SPANISH
+        .nickname = _("TIFLY"),
+        .trainerName = _("OLGA"),
     #else //ENGLISH
         .nickname = _("TIFLY"),
         .trainerName = _("ALISHA"),
@@ -2235,6 +2403,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("KINGSEA"),
         .trainerName = _("SAUL"),
+    #elif SPANISH
+        .nickname = _("KINGSEA"),
+        .trainerName = _("SALVA"),
     #else //ENGLISH
         .nickname = _("KINGSEA"),
         .trainerName = _("SAUL"),
@@ -2271,6 +2442,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("CASTER"),
         .trainerName = _("LIZIA"),
+    #elif SPANISH
+        .nickname = _("CASTI"),
+        .trainerName = _("FELICIA"),
     #else //ENGLISH
         .nickname = _("CASTER"),
         .trainerName = _("FELICIA"),
@@ -2307,6 +2481,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("CHOKEM"),
         .trainerName = _("PACO"),
+    #elif SPANISH
+        .nickname = _("MACHOKI"),
+        .trainerName = _("EMILIO"),
     #else //ENGLISH
         .nickname = _("CHOKEM"),
         .trainerName = _("EMILIO"),
@@ -2340,7 +2517,7 @@ const struct ContestPokemon gContestOpponents[] =
     #if FRENCH
         .nickname = _("LOMBE"),
         .trainerName = _("CARLA"),
-    #elif ITALIAN
+    #elif ITALIAN || SPANISH
         .nickname = _("LOMBE"),
         .trainerName = _("CARLA"),
     #else //ENGLISH
@@ -2379,6 +2556,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("VIPES"),
         .trainerName = _("RAUL"),
+    #elif SPANISH
+        .nickname = _("VIPES"),
+        .trainerName = _("DAVID"),
     #else //ENGLISH
         .nickname = _("VIPES"),
         .trainerName = _("DARRYL"),
@@ -2415,6 +2595,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("MERAIL"),
         .trainerName = _("SELENA"),
+    #elif SPANISH
+        .nickname = _("MERAIL"),
+        .trainerName = _("SERENA"),
     #else //ENGLISH
         .nickname = _("MERAIL"),
         .trainerName = _("SELENA"),
@@ -2449,6 +2632,9 @@ const struct ContestPokemon gContestOpponents[] =
         .nickname = _("KARPAG"),
         .trainerName = _("NOEL"),
     #elif ITALIAN
+        .nickname = _("KARPAG"),
+        .trainerName = _("NOEL"),
+    #elif SPANISH
         .nickname = _("KARPAG"),
         .trainerName = _("NOEL"),
     #else //ENGLISH
@@ -2487,6 +2673,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("LUNONE"),
         .trainerName = _("LACEY"),
+    #elif SPANISH
+        .nickname = _("LUNONE"),
+        .trainerName = _("LUZ"),
     #else //ENGLISH
         .nickname = _("LUNONE"),
         .trainerName = _("LACEY"),
@@ -2523,6 +2712,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("ABSO"),
         .trainerName = _("ELIO"),
+    #elif SPANISH
+        .nickname = _("ABSI"),
+        .trainerName = _("COCO"),
     #else //ENGLISH
         .nickname = _("ABSO"),
         .trainerName = _("CORBIN"),
@@ -2559,6 +2751,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("EGGSOR"),
         .trainerName = _("GRACIE"),
+    #elif SPANISH
+        .nickname = _("EXEGGUT"),
+        .trainerName = _("GRACIA"),
     #else //ENGLISH
         .nickname = _("EGGSOR"),
         .trainerName = _("GRACIE"),
@@ -2595,6 +2790,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("CUBIN"),
         .trainerName = _("COLTIN"),
+    #elif SPANISH
+        .nickname = _("CUBONI"),
+        .trainerName = _("CUCHO"),
     #else //ENGLISH
         .nickname = _("CUBIN"),
         .trainerName = _("COLTIN"),
@@ -2631,6 +2829,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("HITMON"),
         .trainerName = _("ELLIE"),
+    #elif SPANISH
+        .nickname = _("HITMON"),
+        .trainerName = _("ELIA"),
     #else //ENGLISH
         .nickname = _("HITMON"),
         .trainerName = _("ELLIE"),
@@ -2667,6 +2868,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("SURTLE"),
         .trainerName = _("MARZIO"),
+    #elif SPANISH
+        .nickname = _("SQUIRTI"),
+        .trainerName = _("MARCOS"),
     #else //ENGLISH
         .nickname = _("SURTLE"),
         .trainerName = _("MARCUS"),
@@ -2703,6 +2907,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("KHANKAN"),
         .trainerName = _("KIARA"),
+    #elif SPANISH
+        .nickname = _("KANGASI"),
+        .trainerName = _("LARA"),
     #else //ENGLISH
         .nickname = _("KHANKAN"),
         .trainerName = _("KIARA"),
@@ -2739,6 +2946,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("PINOC"),
         .trainerName = _("BICIO"),
+    #elif SPANISH
+        .nickname = _("PINECHI"),
+        .trainerName = _("BRUSO"),
     #else //ENGLISH
         .nickname = _("PINOC"),
         .trainerName = _("BRYCE"),
@@ -2775,6 +2985,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("DILTOT"),
         .trainerName = _("JAMIE"),
+    #elif SPANISH
+        .nickname = _("TOTOLI"),
+        .trainerName = _("JAIRA"),
     #else //ENGLISH
         .nickname = _("DILTOT"),
         .trainerName = _("JAMIE"),
@@ -2810,6 +3023,9 @@ const struct ContestPokemon gContestOpponents[] =
         .trainerName = _("JOSE"),
     #elif ITALIAN
         .nickname = _("DOOMOND"),
+        .trainerName = _("JORGE"),
+    #elif SPANISH
+        .nickname = _("HOUNDI"),
         .trainerName = _("JORGE"),
     #else //ENGLISH
         .nickname = _("DOOMOND"),
@@ -2847,6 +3063,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("MILKAN"),
         .trainerName = _("DANI"),
+    #elif SPANISH
+        .nickname = _("MILTANI"),
+        .trainerName = _("DANI"),
     #else //ENGLISH
         .nickname = _("MILKAN"),
         .trainerName = _("DEVON"),
@@ -2883,6 +3102,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("RADOS"),
         .trainerName = _("JUSTINA"),
+    #elif SPANISH
+        .nickname = _("RADOS"),
+        .trainerName = _("JUSTA"),
     #else //ENGLISH
         .nickname = _("RADOS"),
         .trainerName = _("JUSTINA"),
@@ -2919,6 +3141,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("LOUDERD"),
         .trainerName = _("RALPH"),
+    #elif SPANISH
+        .nickname = _("LOUDERD"),
+        .trainerName = _("RAFA"),
     #else //ENGLISH
         .nickname = _("LOUDERD"),
         .trainerName = _("RALPH"),
@@ -2955,6 +3180,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("SITTY"),
         .trainerName = _("ROSALIA"),
+    #elif SPANISH
+        .nickname = _("STITI"),
+        .trainerName = _("ROSITA"),
     #else //ENGLISH
         .nickname = _("SITTY"),
         .trainerName = _("ROSA"),
@@ -2991,6 +3219,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("SLING"),
         .trainerName = _("KEATON"),
+    #elif SPANISH
+        .nickname = _("SLING"),
+        .trainerName = _("COSME"),
     #else //ENGLISH
         .nickname = _("SLING"),
         .trainerName = _("KEATON"),
@@ -3027,6 +3258,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("TARIA"),
         .trainerName = _("MARA"),
+    #elif SPANISH
+        .nickname = _("TARIA"),
+        .trainerName = _("MAIRA"),
     #else //ENGLISH
         .nickname = _("TARIA"),
         .trainerName = _("MAYRA"),
@@ -3063,6 +3297,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("LIRKI"),
         .trainerName = _("FIORE"),
+    #elif SPANISH
+        .nickname = _("LIRKI"),
+        .trainerName = _("LUCIO"),
     #else //ENGLISH
         .nickname = _("LIRKI"),
         .trainerName = _("LAMAR"),
@@ -3099,6 +3336,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("BLOSSOM"),
         .trainerName = _("ROBERTA"),
+    #elif SPANISH
+        .nickname = _("BELLI"),
+        .trainerName = _("NALE"),
     #else //ENGLISH
         .nickname = _("BLOSSOM"),
         .trainerName = _("AUBREY"),
@@ -3135,6 +3375,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("EYESAB"),
         .trainerName = _("NIGEL"),
+    #elif SPANISH
+        .nickname = _("SABLI"),
+        .trainerName = _("NACHO"),
     #else //ENGLISH
         .nickname = _("EYESAB"),
         .trainerName = _("NIGEL"),
@@ -3171,6 +3414,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("UTAN"),
         .trainerName = _("CAMILLA"),
+    #elif SPANISH
+        .nickname = _("UTAN"),
+        .trainerName = _("CAMILA"),
     #else //ENGLISH
         .nickname = _("UTAN"),
         .trainerName = _("CAMILLE"),
@@ -3207,6 +3453,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("PEDOS"),
         .trainerName = _("LEONIO"),
+    #elif SPANISH
+        .nickname = _("SHARPI"),
+        .trainerName = _("ABRAHAM"),
     #else //ENGLISH
         .nickname = _("PEDOS"),
         .trainerName = _("DEON"),
@@ -3243,6 +3492,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("LUVIS"),
         .trainerName = _("JANETTE"),
+    #elif SPANISH
+        .nickname = _("LUVIS"),
+        .trainerName = _("JULIETA"),
     #else //ENGLISH
         .nickname = _("LUVIS"),
         .trainerName = _("JANELLE"),
@@ -3279,6 +3531,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("HEROSS"),
         .trainerName = _("HEATH"),
+    #elif SPANISH
+        .nickname = _("HEROSS"),
+        .trainerName = _("JULIO"),
     #else //ENGLISH
         .nickname = _("HEROSS"),
         .trainerName = _("HEATH"),
@@ -3315,6 +3570,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("RODLECT"),
         .trainerName = _("SASHA"),
+    #elif SPANISH
+        .nickname = _("RODLECT"),
+        .trainerName = _("FREDA"),
     #else //ENGLISH
         .nickname = _("RODLECT"),
         .trainerName = _("SASHA"),
@@ -3351,6 +3609,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("CHUPY"),
         .trainerName = _("VICTOR"),
+    #elif SPANISH
+        .nickname = _("CHUPY"),
+        .trainerName = _("SANCHO"),
     #else //ENGLISH
         .nickname = _("CHUPY"),
         .trainerName = _("FRANKIE"),
@@ -3387,6 +3648,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("WOBET"),
         .trainerName = _("HELEN"),
+    #elif SPANISH
+        .nickname = _("WOBET"),
+        .trainerName = _("ELENA"),
     #else //ENGLISH
         .nickname = _("WOBET"),
         .trainerName = _("HELEN"),
@@ -3423,6 +3687,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("GAREN"),
         .trainerName = _("CAMILLE"),
+    #elif SPANISH
+        .nickname = _("GENGA"),
+        .trainerName = _("CAMILIA"),
     #else //ENGLISH
         .nickname = _("GAREN"),
         .trainerName = _("CAMILE"),
@@ -3459,6 +3726,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("GONPOR"),
         .trainerName = _("MARTIN"),
+    #elif SPANISH
+        .nickname = _("PORY"),
+        .trainerName = _("MARCO"),
     #else //ENGLISH
         .nickname = _("GONPOR"),
         .trainerName = _("MARTIN"),
@@ -3494,6 +3764,9 @@ const struct ContestPokemon gContestOpponents[] =
         .trainerName = _("DJAMEL"),
     #elif ITALIAN
         .nickname = _("DRITE"),
+        .trainerName = _("SERENO"),
+    #elif SPANISH
+        .nickname = _("DRNITE"),
         .trainerName = _("SERENO"),
     #else //ENGLISH
         .nickname = _("DRITE"),
@@ -3531,6 +3804,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("MEOWY"),
         .trainerName = _("KAILEY"),
+    #elif SPANISH
+        .nickname = _("MEOWY"),
+        .trainerName = _("NORA"),
     #else //ENGLISH
         .nickname = _("MEOWY"),
         .trainerName = _("KAILEY"),
@@ -3567,6 +3843,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("NYX"),
         .trainerName = _("PEPA"),
+    #elif SPANISH
+        .nickname = _("NYXI"),
+        .trainerName = _("PEPA"),
     #else //ENGLISH
         .nickname = _("NYX"),
         .trainerName = _("PERLA"),
@@ -3600,10 +3879,7 @@ const struct ContestPokemon gContestOpponents[] =
     #if FRENCH
         .nickname = _("PIGETO"),
         .trainerName = _("CLARA"),
-    #elif ITALIAN
-        .nickname = _("GEPITO"),
-        .trainerName = _("CLARA"),
-    #else //ENGLISH
+    #else //ENGLISH || ITALIAN || SPANISH
         .nickname = _("GEPITO"),
         .trainerName = _("CLARA"),
     #endif
@@ -3639,6 +3915,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("SPEON"),
         .trainerName = _("JAKOB"),
+    #elif SPANISH
+        .nickname = _("SEPEON"),
+        .trainerName = _("JUACO"),
     #else //ENGLISH
         .nickname = _("SPEON"),
         .trainerName = _("JAKOB"),
@@ -3675,6 +3954,9 @@ const struct ContestPokemon gContestOpponents[] =
     #elif ITALIAN
         .nickname = _("SLOWGO"),
         .trainerName = _("TREY"),
+    #elif SPANISH
+        .nickname = _("SLOKI"),
+        .trainerName = _("TONINO"),
     #else //ENGLISH
         .nickname = _("SLOWGO"),
         .trainerName = _("TREY"),
@@ -3710,6 +3992,9 @@ const struct ContestPokemon gContestOpponents[] =
         .trainerName = _("VICTOR"),
     #elif ITALIAN
         .nickname = _("URSING"),
+        .trainerName = _("LENO"),
+    #elif SPANISH
+        .nickname = _("URSARI"),
         .trainerName = _("LENO"),
     #else //ENGLISH
         .nickname = _("URSING"),

@@ -1797,6 +1797,8 @@ const u16 gTilesetPalettes_General[][16] =
 const u32 gTilesetTiles_General[] = INCBIN_U32("data/tilesets/primary/general/french/tiles.4bpp.lz");
 #elif ITALIAN
 const u32 gTilesetTiles_General[] = INCBIN_U32("data/tilesets/primary/general/italian/tiles.4bpp.lz");
+#elif SPANISH
+const u32 gTilesetTiles_General[] = INCBIN_U32("data/tilesets/primary/general/spanish/tiles.4bpp.lz");
 #else //ENGLISH
 const u32 gTilesetTiles_General[] = INCBIN_U32("data/tilesets/primary/general/tiles.4bpp.lz");
 #endif
