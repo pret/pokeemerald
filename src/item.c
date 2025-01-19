@@ -24,6 +24,8 @@ EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
 #include "data/text/french/item_descriptions.h"
 #elif ITALIAN
 #include "data/text/italian/item_descriptions.h"
+#elif SPANISH
+#include "data/text/spanish/item_descriptions.h"
 #else //ENGLISH
 #include "data/text/item_descriptions.h"
 #endif

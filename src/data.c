@@ -332,6 +332,11 @@ const union AnimCmd *const gAnims_MonPic[MAX_MON_PIC_FRAMES] =
 #include "data/trainers.h"
 #include "data/text/species_names.h"
 #include "data/text/italian/move_names.h"
+#elif SPANISH
+#include "data/text/spanish/trainer_class_names.h"
+#include "data/trainers.h"
+#include "data/text/species_names.h"
+#include "data/text/spanish/move_names.h"
 #else //ENGLISH
 #include "data/text/trainer_class_names.h"
 #include "data/trainers.h"

@@ -49,6 +49,8 @@ static bool32 ShouldDoNearbyMessage(void);
 #include "data/text/french/match_call_messages.h"
 #elif ITALIAN
 #include "data/text/italian/match_call_messages.h"
+#elif SPANISH
+#include "data/text/spanish/match_call_messages.h"
 #else //ENGLISH
 #include "data/text/match_call_messages.h"
 #endif
