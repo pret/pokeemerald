@@ -7210,7 +7210,7 @@ static void Cmd_forcerandomswitch(void)
             {
                 firstMonId = PARTY_SIZE / 2;
                 #ifdef BUGFIX
-                lastMonId = PARTY_SIZE; - 1
+                lastMonId = PARTY_SIZE - 1;
                 #else
                 lastMonId = PARTY_SIZE;
                 #endif
@@ -7236,7 +7236,7 @@ static void Cmd_forcerandomswitch(void)
             {
                 firstMonId = PARTY_SIZE / 2;
                 #ifdef BUGFIX
-                lastMonId = PARTY_SIZE -  1;
+                lastMonId = PARTY_SIZE - 1;
                 #else
                 lastMonId = PARTY_SIZE;
                 #endif
@@ -7351,7 +7351,7 @@ static void Cmd_forcerandomswitch(void)
                 } while (GetMonData(&party[i], MON_DATA_SPECIES) == SPECIES_NONE
                        || GetMonData(&party[i], MON_DATA_IS_EGG) == TRUE
                        || GetMonData(&party[i], MON_DATA_HP) == 0); //should be one while loop, but that doesn't match.
-            *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = i;
+                *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = i;
 
                 if (!IsMultiBattle())
                     SwitchPartyOrder(gBattlerTarget);
