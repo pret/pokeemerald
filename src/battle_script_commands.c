@@ -7210,18 +7210,18 @@ static void Cmd_forcerandomswitch(void)
             {
                 firstMonId = PARTY_SIZE / 2;
                 #ifdef BUGFIX
-                    lastMonId = PARTY_SIZE - 1;
+                lastMonId = PARTY_SIZE; - 1
                 #else
-                    lastMonId = PARTY_SIZE;
+                lastMonId = PARTY_SIZE;
                 #endif
             }
             else
             {
                 firstMonId = 0;
                 #ifdef BUGFIX
-                    lastMonId = PARTY_SIZE / 2 - 1;
+                lastMonId = PARTY_SIZE / 2 - 1;
                 #else
-                    lastMonId = PARTY_SIZE;
+                lastMonId = PARTY_SIZE / 2;
                 #endif
             }
             monsCount = PARTY_SIZE / 2;
@@ -7236,18 +7236,18 @@ static void Cmd_forcerandomswitch(void)
             {
                 firstMonId = PARTY_SIZE / 2;
                 #ifdef BUGFIX
-                    lastMonId = PARTY_SIZE - 1;
+                lastMonId = PARTY_SIZE -  1;
                 #else
-                    lastMonId = PARTY_SIZE;
+                lastMonId = PARTY_SIZE;
                 #endif
             }
             else
             {
                 firstMonId = 0;
                 #ifdef BUGFIX
-                    lastMonId = PARTY_SIZE / 2 - 1;
+                lastMonId = PARTY_SIZE / 2 - 1;
                 #else
-                    lastMonId = PARTY_SIZE;
+                lastMonId = PARTY_SIZE / 2;
                 #endif
             }
             monsCount = PARTY_SIZE / 2;
@@ -7261,9 +7261,9 @@ static void Cmd_forcerandomswitch(void)
             {
                 firstMonId = 0;
                 #ifdef BUGFIX
-                    lastMonId = PARTY_SIZE - 1;
+                lastMonId = PARTY_SIZE - 1;
                 #else
-                    lastMonId = PARTY_SIZE;
+                lastMonId = PARTY_SIZE;
                 #endif
                 monsCount = PARTY_SIZE;
                 minNeeded = 2; // since there are two opponents, it has to be a double battle
@@ -7274,18 +7274,18 @@ static void Cmd_forcerandomswitch(void)
                 {
                     firstMonId = PARTY_SIZE / 2;
                     #ifdef BUGFIX
-                        lastMonId = PARTY_SIZE - 1;
+                    lastMonId = PARTY_SIZE - 1;
                     #else
-                        lastMonId = PARTY_SIZE;
+                    lastMonId = PARTY_SIZE;
                     #endif
                 }
                 else
                 {
                     firstMonId = 0;
                     #ifdef BUGFIX
-                        lastMonId = PARTY_SIZE / 2 - 1;
+                    lastMonId = PARTY_SIZE / 2 - 1;
                     #else
-                        lastMonId = PARTY_SIZE / 2;
+                    lastMonId = PARTY_SIZE / 2;
                     #endif
                 }
                 monsCount = PARTY_SIZE / 2;
@@ -7298,10 +7298,10 @@ static void Cmd_forcerandomswitch(void)
         {
             firstMonId = 0;
             #ifdef BUGFIX
-                lastMonId = PARTY_SIZE - 1;
+            lastMonId = PARTY_SIZE - 1;
             #else
-                lastMonId = PARTY_SIZE;
-            #endif           
+            lastMonId = PARTY_SIZE;
+            #endif
             monsCount = PARTY_SIZE;
             minNeeded = 2;
             battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
@@ -7311,10 +7311,10 @@ static void Cmd_forcerandomswitch(void)
         {
             firstMonId = 0;
             #ifdef BUGFIX
-                lastMonId = PARTY_SIZE - 1;
+            lastMonId = PARTY_SIZE - 1;
             #else
-                lastMonId = PARTY_SIZE;
-            #endif 
+            lastMonId = PARTY_SIZE;
+            #endif
             monsCount = PARTY_SIZE;
             minNeeded = 1;
             battler2PartyId = gBattlerPartyIndexes[gBattlerTarget]; // there is only one Pokémon out in single battles
@@ -7337,6 +7337,7 @@ static void Cmd_forcerandomswitch(void)
         }
         else
         {
+            #ifdef BUGFIX
             if (TryDoForceSwitchOut())
             {
                 do
@@ -7350,9 +7351,7 @@ static void Cmd_forcerandomswitch(void)
                 } while (GetMonData(&party[i], MON_DATA_SPECIES) == SPECIES_NONE
                        || GetMonData(&party[i], MON_DATA_IS_EGG) == TRUE
                        || GetMonData(&party[i], MON_DATA_HP) == 0); //should be one while loop, but that doesn't match.
-            
-        #ifdef BUGFIX
-                *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = i;
+            *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = i;
 
                 if (!IsMultiBattle())
                     SwitchPartyOrder(gBattlerTarget);
@@ -7369,25 +7368,39 @@ static void Cmd_forcerandomswitch(void)
                 if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
                     SwitchPartyOrderInGameMulti(gBattlerTarget, i);
             }
-        #else   
+            #else
+            if (TryDoForceSwitchOut())
+            {
+                do
+                {
+                    do
+                    {
+                        i = Random() % monsCount;
+                        i += firstMonId;
+                    }
+                    while (i == battler2PartyId || i == battler1PartyId);
+                } while (GetMonData(&party[i], MON_DATA_SPECIES) == SPECIES_NONE
+                       || GetMonData(&party[i], MON_DATA_IS_EGG) == TRUE
+                       || GetMonData(&party[i], MON_DATA_HP) == 0); //should be one while loop, but that doesn't match.
+            }
+            *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = i;
+
+            if (!IsMultiBattle())
+                SwitchPartyOrder(gBattlerTarget);
+
+            if ((gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
+                || (gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI)
+                || (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK && gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
+                || (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI))
+            {
+                SwitchPartyOrderLinkMulti(gBattlerTarget, i, 0);
+                SwitchPartyOrderLinkMulti(BATTLE_PARTNER(gBattlerTarget), i, 1);
+            }
+
+            if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+                SwitchPartyOrderInGameMulti(gBattlerTarget, i);
+            #endif
         }
-        *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = i;
-
-        if (!IsMultiBattle())
-            SwitchPartyOrder(gBattlerTarget);
-
-        if ((gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
-            || (gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI)
-            || (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK && gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
-            || (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI))
-        {
-            SwitchPartyOrderLinkMulti(gBattlerTarget, i, 0);
-            SwitchPartyOrderLinkMulti(BATTLE_PARTNER(gBattlerTarget), i, 1);
-        }
-
-        if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
-            SwitchPartyOrderInGameMulti(gBattlerTarget, i);
-        #endif
     }
     else
     {
