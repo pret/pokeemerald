@@ -7189,7 +7189,7 @@ static void Cmd_forcerandomswitch(void)
     s32 battler2PartyId = 0;
 
     s32 firstMonId;
-    s32 lastMonId = 0; // + 1
+    s32 lastMonId = 0;
     s32 monsCount;
     struct Pokemon *party = NULL;
     s32 validMons = 0;
