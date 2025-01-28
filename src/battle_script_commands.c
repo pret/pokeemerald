@@ -7210,7 +7210,7 @@ static void Cmd_forcerandomswitch(void)
             {
                 firstMonId = PARTY_SIZE / 2;
                 #ifdef BUGFIX
-                lastMonId = PARTY_SIZE; - 1
+                lastMonId = PARTY_SIZE - 1;
                 #else
                 lastMonId = PARTY_SIZE;
                 #endif
