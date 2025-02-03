@@ -1,21 +1,3 @@
-.set LOCALID_EXPERT, 1
-.set LOCALID_WOMAN_2, 2
-.set LOCALID_KIRI, 3
-.set LOCALID_NINJA_BOY, 4
-.set LOCALID_BOY_1, 5
-.set LOCALID_STEVEN, 7
-.set LOCALID_WOMAN_1, 8
-.set LOCALID_GROUDON, 9
-.set LOCALID_KYOGRE, 10
-.set LOCALID_RAYQUAZA, 11
-.set LOCALID_MANIAC, 12
-.set LOCALID_GIRL, 13
-.set LOCALID_BLACK_BELT, 14
-.set LOCALID_BOY_2, 15
-.set LOCALID_MAXIE, 16
-.set LOCALID_ARCHIE, 17
-.set LOCALID_WALLACE, 18
-
 SootopolisCity_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, SootopolisCity_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_OnTransition
@@ -73,13 +55,13 @@ SootopolisCity_EventScript_HideMapNamePopup::
 
 SootopolisCity_EventScript_SetBattleSpectators::
 	setobjectxyperm LOCALID_KIRI, 13, 48
-	setobjectxyperm LOCALID_BOY_1, 46, 32
-	setobjectxyperm LOCALID_NINJA_BOY, 48, 41
-	setobjectxyperm LOCALID_WOMAN_1, 45, 43
+	setobjectxyperm LOCALID_SOOTOPOLIS_BOY_1, 46, 32
+	setobjectxyperm LOCALID_SOOTOPOLIS_NINJA_BOY, 48, 41
+	setobjectxyperm LOCALID_SOOTOPOLIS_WOMAN_1, 45, 43
 	setobjectmovementtype LOCALID_KIRI, MOVEMENT_TYPE_FACE_UP
-	setobjectmovementtype LOCALID_BOY_1, MOVEMENT_TYPE_FACE_LEFT
-	setobjectmovementtype LOCALID_NINJA_BOY, MOVEMENT_TYPE_FACE_LEFT
-	setobjectmovementtype LOCALID_WOMAN_1, MOVEMENT_TYPE_FACE_LEFT
+	setobjectmovementtype LOCALID_SOOTOPOLIS_BOY_1, MOVEMENT_TYPE_FACE_LEFT
+	setobjectmovementtype LOCALID_SOOTOPOLIS_NINJA_BOY, MOVEMENT_TYPE_FACE_LEFT
+	setobjectmovementtype LOCALID_SOOTOPOLIS_WOMAN_1, MOVEMENT_TYPE_FACE_LEFT
 	return
 
 SootopolisCity_EventScript_SetLayout::
@@ -119,43 +101,43 @@ SootopolisCity_EventScript_CheckSetEnterCaveOfOriginObjPos::
 	return
 
 SootopolisCity_EventScript_SetEnterCaveOfOriginObjPos::
-	setobjectxyperm LOCALID_EXPERT, 30, 18
-	setobjectxyperm LOCALID_STEVEN, 32, 18
+	setobjectxyperm LOCALID_SOOTOPOLIS_EXPERT, 30, 18
+	setobjectxyperm LOCALID_SOOTOPOLIS_STEVEN, 32, 18
 	return
 
 SootopolisCity_EventScript_SetExitCaveOfOriginObjPos::
-	setobjectxyperm LOCALID_EXPERT, 30, 18
-	setobjectxyperm LOCALID_WALLACE, 31, 18
-	setobjectxyperm LOCALID_STEVEN, 32, 18
+	setobjectxyperm LOCALID_SOOTOPOLIS_EXPERT, 30, 18
+	setobjectxyperm LOCALID_SOOTOPOLIS_WALLACE, 31, 18
+	setobjectxyperm LOCALID_SOOTOPOLIS_STEVEN, 32, 18
 	end
 
 SootopolisCity_EventScript_SetOutsideGymObjPos::
-	setobjectxyperm LOCALID_EXPERT, 31, 18
-	setobjectxyperm LOCALID_STEVEN, 29, 33
-	setobjectxyperm LOCALID_MAXIE, 33, 35
-	setobjectxyperm LOCALID_ARCHIE, 34, 35
+	setobjectxyperm LOCALID_SOOTOPOLIS_EXPERT, 31, 18
+	setobjectxyperm LOCALID_SOOTOPOLIS_STEVEN, 29, 33
+	setobjectxyperm LOCALID_SOOTOPOLIS_MAXIE, 33, 35
+	setobjectxyperm LOCALID_SOOTOPOLIS_ARCHIE, 34, 35
 	call_if_eq VAR_SOOTOPOLIS_WALLACE_STATE, 0, SootopolisCity_EventScript_SetWallaceMiddle
 	call_if_eq VAR_SOOTOPOLIS_WALLACE_STATE, 1, SootopolisCity_EventScript_SetWallaceRight
 	call_if_eq VAR_SOOTOPOLIS_WALLACE_STATE, 2, SootopolisCity_EventScript_SetWallaceLeft
 	return
 
 SootopolisCity_EventScript_SetWallaceMiddle::
-	setobjectxyperm LOCALID_WALLACE, 31, 33
-	setobjectmovementtype LOCALID_WALLACE, MOVEMENT_TYPE_FACE_DOWN
+	setobjectxyperm LOCALID_SOOTOPOLIS_WALLACE, 31, 33
+	setobjectmovementtype LOCALID_SOOTOPOLIS_WALLACE, MOVEMENT_TYPE_FACE_DOWN
 	return
 
 SootopolisCity_EventScript_SetWallaceRight::
-	setobjectxyperm LOCALID_WALLACE, 32, 33
-	setobjectmovementtype LOCALID_WALLACE, MOVEMENT_TYPE_FACE_DOWN
+	setobjectxyperm LOCALID_SOOTOPOLIS_WALLACE, 32, 33
+	setobjectmovementtype LOCALID_SOOTOPOLIS_WALLACE, MOVEMENT_TYPE_FACE_DOWN
 	return
 
 SootopolisCity_EventScript_SetWallaceLeft::
-	setobjectxyperm LOCALID_WALLACE, 30, 33
-	setobjectmovementtype LOCALID_WALLACE, MOVEMENT_TYPE_FACE_DOWN
+	setobjectxyperm LOCALID_SOOTOPOLIS_WALLACE, 30, 33
+	setobjectmovementtype LOCALID_SOOTOPOLIS_WALLACE, MOVEMENT_TYPE_FACE_DOWN
 	return
 
 SootopolisCity_EventScript_SetExpertBlockCaveEntrance::
-	setobjectxyperm LOCALID_EXPERT, 31, 18
+	setobjectxyperm LOCALID_SOOTOPOLIS_EXPERT, 31, 18
 	return
 
 SootopolisCity_OnWarp:
@@ -168,11 +150,11 @@ SootopolisCity_EventScript_PlayerFaceLegendaries::
 	end
 
 SootopolisCity_EventScript_PlayerFaceLegendaries1::
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	turnobject LOCALID_PLAYER, DIR_NORTH
 	return
 
 SootopolisCity_EventScript_PlayerFaceLegendaries2::
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	turnobject LOCALID_PLAYER, DIR_NORTH
 	setvar VAR_SKY_PILLAR_STATE, 3
 	return
 
@@ -197,7 +179,7 @@ SootopolisCity_EventScript_StartLegendariesScene::
 SootopolisCity_EventScript_LegendariesSceneFromPokeCenter::
 	delay 60
 	special SpawnCameraObject
-	applymovement OBJ_EVENT_ID_CAMERA, SootopolisCity_Movement_PanToActionFromPokeCenter
+	applymovement LOCALID_CAMERA, SootopolisCity_Movement_PanToActionFromPokeCenter
 	waitmovement 0
 	special RemoveCameraObject
 	delay 60
@@ -207,14 +189,14 @@ SootopolisCity_EventScript_LegendariesSceneFromPokeCenter::
 	setvar VAR_0x8004, FALSE @ Just do Groudon/Kyogre fight scene
 	special Script_DoRayquazaScene
 	waitstate
-	applymovement LOCALID_KYOGRE, Common_Movement_WalkInPlaceFasterLeft
-	applymovement LOCALID_GROUDON, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_SOOTOPOLIS_KYOGRE, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_SOOTOPOLIS_GROUDON, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 60
 	waitse
 	playmoncry SPECIES_KYOGRE, CRY_MODE_ENCOUNTER
-	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreAttack
-	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonDefend
+	applymovement LOCALID_SOOTOPOLIS_KYOGRE, SootopolisCity_Movement_KyogreAttack
+	applymovement LOCALID_SOOTOPOLIS_GROUDON, SootopolisCity_Movement_GroudonDefend
 	waitmovement 0
 	setvar VAR_0x8004, 1  @ vertical pan
 	setvar VAR_0x8005, 1  @ horizontal pan
@@ -222,13 +204,13 @@ SootopolisCity_EventScript_LegendariesSceneFromPokeCenter::
 	setvar VAR_0x8007, 5  @ shake delay
 	special ShakeCamera
 	waitstate
-	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreMoveBack
-	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonMoveBack
+	applymovement LOCALID_SOOTOPOLIS_KYOGRE, SootopolisCity_Movement_KyogreMoveBack
+	applymovement LOCALID_SOOTOPOLIS_GROUDON, SootopolisCity_Movement_GroudonMoveBack
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_GROUDON, CRY_MODE_ENCOUNTER
-	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreDefend
-	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonAttack
+	applymovement LOCALID_SOOTOPOLIS_KYOGRE, SootopolisCity_Movement_KyogreDefend
+	applymovement LOCALID_SOOTOPOLIS_GROUDON, SootopolisCity_Movement_GroudonAttack
 	waitmovement 0
 	setvar VAR_0x8004, 1  @ vertical pan
 	setvar VAR_0x8005, 1  @ horizontal pan
@@ -236,13 +218,13 @@ SootopolisCity_EventScript_LegendariesSceneFromPokeCenter::
 	setvar VAR_0x8007, 5  @ shake delay
 	special ShakeCamera
 	waitstate
-	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreMoveBack
-	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonMoveBack
+	applymovement LOCALID_SOOTOPOLIS_KYOGRE, SootopolisCity_Movement_KyogreMoveBack
+	applymovement LOCALID_SOOTOPOLIS_GROUDON, SootopolisCity_Movement_GroudonMoveBack
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_KYOGRE, CRY_MODE_ENCOUNTER
-	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreAttack
-	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonDefend
+	applymovement LOCALID_SOOTOPOLIS_KYOGRE, SootopolisCity_Movement_KyogreAttack
+	applymovement LOCALID_SOOTOPOLIS_GROUDON, SootopolisCity_Movement_GroudonDefend
 	waitmovement 0
 	setvar VAR_0x8004, 1  @ vertical pan
 	setvar VAR_0x8005, 1  @ horizontal pan
@@ -250,13 +232,13 @@ SootopolisCity_EventScript_LegendariesSceneFromPokeCenter::
 	setvar VAR_0x8007, 5  @ shake delay
 	special ShakeCamera
 	waitstate
-	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreMoveBack
-	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonMoveBack
+	applymovement LOCALID_SOOTOPOLIS_KYOGRE, SootopolisCity_Movement_KyogreMoveBack
+	applymovement LOCALID_SOOTOPOLIS_GROUDON, SootopolisCity_Movement_GroudonMoveBack
 	waitmovement 0
 	special SpawnCameraObject
-	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreIdle
-	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonIdle
-	applymovement OBJ_EVENT_ID_CAMERA, SootopolisCity_Movement_PanBackToPokeCenter
+	applymovement LOCALID_SOOTOPOLIS_KYOGRE, SootopolisCity_Movement_KyogreIdle
+	applymovement LOCALID_SOOTOPOLIS_GROUDON, SootopolisCity_Movement_GroudonIdle
+	applymovement LOCALID_CAMERA, SootopolisCity_Movement_PanBackToPokeCenter
 	waitmovement 0
 	special RemoveCameraObject
 	setvar VAR_SOOTOPOLIS_CITY_STATE, 2
@@ -297,7 +279,7 @@ SootopolisCity_Movement_PanBackToPokeCenter:
 SootopolisCity_EventScript_LegendariesSceneFromDive::
 	delay 60
 	special SpawnCameraObject
-	applymovement OBJ_EVENT_ID_CAMERA, SootopolisCity_Movement_PanToActionFromDive
+	applymovement LOCALID_CAMERA, SootopolisCity_Movement_PanToActionFromDive
 	waitmovement 0
 	special RemoveCameraObject
 	delay 60
@@ -307,14 +289,14 @@ SootopolisCity_EventScript_LegendariesSceneFromDive::
 	setvar VAR_0x8004, FALSE @ Just do Groudon/Kyogre fight scene
 	special Script_DoRayquazaScene
 	waitstate
-	applymovement LOCALID_KYOGRE, Common_Movement_WalkInPlaceFasterLeft
-	applymovement LOCALID_GROUDON, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_SOOTOPOLIS_KYOGRE, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_SOOTOPOLIS_GROUDON, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 60
 	waitse
 	playmoncry SPECIES_KYOGRE, CRY_MODE_ENCOUNTER
-	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreAttack
-	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonDefend
+	applymovement LOCALID_SOOTOPOLIS_KYOGRE, SootopolisCity_Movement_KyogreAttack
+	applymovement LOCALID_SOOTOPOLIS_GROUDON, SootopolisCity_Movement_GroudonDefend
 	waitmovement 0
 	setvar VAR_0x8004, 1  @ vertical pan
 	setvar VAR_0x8005, 1  @ horizontal pan
@@ -322,13 +304,13 @@ SootopolisCity_EventScript_LegendariesSceneFromDive::
 	setvar VAR_0x8007, 5  @ shake delay
 	special ShakeCamera
 	waitstate
-	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreMoveBack
-	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonMoveBack
+	applymovement LOCALID_SOOTOPOLIS_KYOGRE, SootopolisCity_Movement_KyogreMoveBack
+	applymovement LOCALID_SOOTOPOLIS_GROUDON, SootopolisCity_Movement_GroudonMoveBack
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_GROUDON, CRY_MODE_ENCOUNTER
-	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreDefend
-	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonAttack
+	applymovement LOCALID_SOOTOPOLIS_KYOGRE, SootopolisCity_Movement_KyogreDefend
+	applymovement LOCALID_SOOTOPOLIS_GROUDON, SootopolisCity_Movement_GroudonAttack
 	waitmovement 0
 	setvar VAR_0x8004, 1  @ vertical pan
 	setvar VAR_0x8005, 1  @ horizontal pan
@@ -336,13 +318,13 @@ SootopolisCity_EventScript_LegendariesSceneFromDive::
 	setvar VAR_0x8007, 5  @ shake delay
 	special ShakeCamera
 	waitstate
-	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreMoveBack
-	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonMoveBack
+	applymovement LOCALID_SOOTOPOLIS_KYOGRE, SootopolisCity_Movement_KyogreMoveBack
+	applymovement LOCALID_SOOTOPOLIS_GROUDON, SootopolisCity_Movement_GroudonMoveBack
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_KYOGRE, CRY_MODE_ENCOUNTER
-	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreAttack
-	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonDefend
+	applymovement LOCALID_SOOTOPOLIS_KYOGRE, SootopolisCity_Movement_KyogreAttack
+	applymovement LOCALID_SOOTOPOLIS_GROUDON, SootopolisCity_Movement_GroudonDefend
 	waitmovement 0
 	setvar VAR_0x8004, 1  @ vertical pan
 	setvar VAR_0x8005, 1  @ horizontal pan
@@ -350,13 +332,13 @@ SootopolisCity_EventScript_LegendariesSceneFromDive::
 	setvar VAR_0x8007, 5  @ shake delay
 	special ShakeCamera
 	waitstate
-	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreMoveBack
-	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonMoveBack
+	applymovement LOCALID_SOOTOPOLIS_KYOGRE, SootopolisCity_Movement_KyogreMoveBack
+	applymovement LOCALID_SOOTOPOLIS_GROUDON, SootopolisCity_Movement_GroudonMoveBack
 	waitmovement 0
 	special SpawnCameraObject
-	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreIdle
-	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonIdle
-	applymovement OBJ_EVENT_ID_CAMERA, SootopolisCity_Movement_PanBackToDive
+	applymovement LOCALID_SOOTOPOLIS_KYOGRE, SootopolisCity_Movement_KyogreIdle
+	applymovement LOCALID_SOOTOPOLIS_GROUDON, SootopolisCity_Movement_GroudonIdle
+	applymovement LOCALID_CAMERA, SootopolisCity_Movement_PanBackToDive
 	waitmovement 0
 	special RemoveCameraObject
 	setvar VAR_SOOTOPOLIS_CITY_STATE, 2
@@ -486,21 +468,21 @@ SootopolisCity_EventScript_StartRayquazaScene::
 SootopolisCity_EventScript_RayquazaSceneFromPokeCenter::
 	delay 60
 	special SpawnCameraObject
-	applymovement OBJ_EVENT_ID_CAMERA, SootopolisCity_Movement_PanToActionFromPokeCenter
+	applymovement LOCALID_CAMERA, SootopolisCity_Movement_PanToActionFromPokeCenter
 	waitmovement 0
 	special RemoveCameraObject
 	delay 60
 	fadescreenspeed FADE_TO_BLACK, 8
 	call SootopolisCity_EventScript_SetRoughWater
-	removeobject LOCALID_GROUDON
-	removeobject LOCALID_KYOGRE
-	addobject LOCALID_RAYQUAZA
+	removeobject LOCALID_SOOTOPOLIS_GROUDON
+	removeobject LOCALID_SOOTOPOLIS_KYOGRE
+	addobject LOCALID_SOOTOPOLIS_RAYQUAZA
 	setvar VAR_0x8004, TRUE
 	special Script_DoRayquazaScene
 	waitstate
 	playse SE_THUNDER
 	special SpawnCameraObject
-	applymovement OBJ_EVENT_ID_CAMERA, SootopolisCity_Movement_PanUp
+	applymovement LOCALID_CAMERA, SootopolisCity_Movement_PanUp
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_RAYQUAZA, CRY_MODE_ENCOUNTER
@@ -521,9 +503,9 @@ SootopolisCity_EventScript_RayquazaSceneFromPokeCenter::
 	waitmoncry
 	setweather WEATHER_NONE
 	doweather
-	applymovement LOCALID_RAYQUAZA, SootopolisCity_Movement_RayquazaFlyOff
+	applymovement LOCALID_SOOTOPOLIS_RAYQUAZA, SootopolisCity_Movement_RayquazaFlyOff
 	waitmovement 0
-	removeobject LOCALID_RAYQUAZA
+	removeobject LOCALID_SOOTOPOLIS_RAYQUAZA
 	special WaitWeather
 	waitstate
 	clearflag FLAG_SYS_WEATHER_CTRL
@@ -539,21 +521,21 @@ SootopolisCity_EventScript_RayquazaSceneFromPokeCenter::
 SootopolisCity_EventScript_RayquazaSceneFromDive::
 	delay 60
 	special SpawnCameraObject
-	applymovement OBJ_EVENT_ID_CAMERA, SootopolisCity_Movement_PanToActionFromDive
+	applymovement LOCALID_CAMERA, SootopolisCity_Movement_PanToActionFromDive
 	waitmovement 0
 	special RemoveCameraObject
 	delay 60
 	fadescreenspeed FADE_TO_BLACK, 8
 	call SootopolisCity_EventScript_SetRoughWater
-	removeobject LOCALID_GROUDON
-	removeobject LOCALID_KYOGRE
-	addobject LOCALID_RAYQUAZA
+	removeobject LOCALID_SOOTOPOLIS_GROUDON
+	removeobject LOCALID_SOOTOPOLIS_KYOGRE
+	addobject LOCALID_SOOTOPOLIS_RAYQUAZA
 	setvar VAR_0x8004, TRUE
 	special Script_DoRayquazaScene
 	waitstate
 	special SpawnCameraObject
-	applymovement OBJ_EVENT_ID_CAMERA, SootopolisCity_Movement_PanUp
-	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Movement_PlayerApproachLegendaries
+	applymovement LOCALID_CAMERA, SootopolisCity_Movement_PanUp
+	applymovement LOCALID_PLAYER, SootopolisCity_Movement_PlayerApproachLegendaries
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_RAYQUAZA, CRY_MODE_ENCOUNTER
@@ -574,9 +556,9 @@ SootopolisCity_EventScript_RayquazaSceneFromDive::
 	waitmoncry
 	setweather WEATHER_NONE
 	doweather
-	applymovement LOCALID_RAYQUAZA, SootopolisCity_Movement_RayquazaFlyOff
+	applymovement LOCALID_SOOTOPOLIS_RAYQUAZA, SootopolisCity_Movement_RayquazaFlyOff
 	waitmovement 0
-	removeobject LOCALID_RAYQUAZA
+	removeobject LOCALID_SOOTOPOLIS_RAYQUAZA
 	special WaitWeather
 	waitstate
 	clearflag FLAG_SYS_WEATHER_CTRL
@@ -771,12 +753,12 @@ SootopolisCity_EventScript_KiriLikeSeasonBornIn::
 
 SootopolisCity_EventScript_Woman2::
 	lockall
-	applymovement LOCALID_WOMAN_2, Common_Movement_FacePlayer
+	applymovement LOCALID_SOOTOPOLIS_WOMAN_2, Common_Movement_FacePlayer
 	waitmovement 0
 	goto_if_eq VAR_SOOTOPOLIS_CITY_STATE, 5, SootopolisCity_EventScript_Woman2Rayquaza
 	msgbox SootopolisCity_Text_WeatherWentWild, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_WOMAN_2, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_SOOTOPOLIS_WOMAN_2, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
@@ -812,7 +794,7 @@ SootopolisCity_EventScript_Woman1::
 SootopolisCity_EventScript_Woman1Legendaries::
 	msgbox SootopolisCity_Text_GiganticPokemonFight, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_WOMAN_1, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_SOOTOPOLIS_WOMAN_1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -829,14 +811,14 @@ SootopolisCity_EventScript_Woman1Rayquaza::
 
 SootopolisCity_EventScript_NinjaBoy::
 	lockall
-	applymovement LOCALID_NINJA_BOY, Common_Movement_FacePlayer
+	applymovement LOCALID_SOOTOPOLIS_NINJA_BOY, Common_Movement_FacePlayer
 	waitmovement 0
 	goto_if_eq VAR_SOOTOPOLIS_CITY_STATE, 5, SootopolisCity_EventScript_NinjaBoyRayquaza
 	goto_if_ge VAR_SOOTOPOLIS_CITY_STATE, 6, SootopolisCity_EventScript_NinjaBoyNormal
 	goto_if_le VAR_SOOTOPOLIS_CITY_STATE, 1, SootopolisCity_EventScript_NinjaBoyNormal
 	msgbox SootopolisCity_Text_ThisIsWicked, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_NINJA_BOY, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_SOOTOPOLIS_NINJA_BOY, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -853,7 +835,7 @@ SootopolisCity_EventScript_NinjaBoyRayquaza::
 
 SootopolisCity_EventScript_Boy1::
 	lockall
-	applymovement LOCALID_BOY_1, Common_Movement_FacePlayer
+	applymovement LOCALID_SOOTOPOLIS_BOY_1, Common_Movement_FacePlayer
 	waitmovement 0
 	goto_if_eq VAR_SOOTOPOLIS_CITY_STATE, 5, SootopolisCity_EventScript_Boy1Rayquaza
 	goto_if_set FLAG_SYS_GAME_CLEAR, SootopolisCity_EventScript_Boy1GameClear
@@ -861,7 +843,7 @@ SootopolisCity_EventScript_Boy1::
 	goto_if_le VAR_SOOTOPOLIS_CITY_STATE, 1, SootopolisCity_EventScript_Boy1Normal
 	msgbox SootopolisCity_Text_GiantPokemonSuddenlyAppeared, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_BOY_1, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_SOOTOPOLIS_BOY_1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -895,7 +877,7 @@ EventScript_ClosedSootopolisDoor::
 
 SootopolisCity_EventScript_Steven::
 	lockall
-	applymovement LOCALID_STEVEN, Common_Movement_FacePlayer
+	applymovement LOCALID_SOOTOPOLIS_STEVEN, Common_Movement_FacePlayer
 	waitmovement 0
 	call_if_unset FLAG_STEVEN_GUIDES_TO_CAVE_OF_ORIGIN, SootopolisCity_EventScript_StevenLeadPlayerCaveOfOrigin
 	goto_if_eq VAR_SOOTOPOLIS_CITY_STATE, 2, SootopolisCity_EventScript_StevenHelpWallace
@@ -928,33 +910,33 @@ SootopolisCity_EventScript_StevenLeadPlayerCaveOfOrigin::
 	call_if_eq VAR_FACING, DIR_NORTH, SootopolisCity_EventScript_StartWalkToCaveOfOriginNorth
 	msgbox SootopolisCity_Text_DoesThisMakeYourFearPokemon, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_STEVEN, SootopolisCity_Movement_StevenWalkToCaveOfOrigin
-	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Movement_PlayerWalkToCaveOfOrigin
+	applymovement LOCALID_SOOTOPOLIS_STEVEN, SootopolisCity_Movement_StevenWalkToCaveOfOrigin
+	applymovement LOCALID_PLAYER, SootopolisCity_Movement_PlayerWalkToCaveOfOrigin
 	waitmovement 0
 	delay 120
-	applymovement LOCALID_EXPERT, SootopolisCity_Movement_ExpertMoveAside
+	applymovement LOCALID_SOOTOPOLIS_EXPERT, SootopolisCity_Movement_ExpertMoveAside
 	waitmovement 0
-	applymovement LOCALID_STEVEN, SootopolisCity_Movement_StevenArriveCaveEntrance
-	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Movement_PlayerArriveCaveEntrance
+	applymovement LOCALID_SOOTOPOLIS_STEVEN, SootopolisCity_Movement_StevenArriveCaveEntrance
+	applymovement LOCALID_PLAYER, SootopolisCity_Movement_PlayerArriveCaveEntrance
 	waitmovement 0
 	msgbox SootopolisCity_Text_HereWereAreHelpWallace, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_STEVEN_GUIDES_TO_CAVE_OF_ORIGIN
-	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Movement_PlayerEnterCaveOfOrigin
+	applymovement LOCALID_PLAYER, SootopolisCity_Movement_PlayerEnterCaveOfOrigin
 	waitmovement 0
 	warp MAP_CAVE_OF_ORIGIN_ENTRANCE, 9, 20
 	waitstate
 	end
 
 SootopolisCity_EventScript_StartWalkToCaveOfOriginWest::
-	applymovement LOCALID_STEVEN, SootopolisCity_Movement_StevenStartWalkToCaveOfOrigin
-	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Movement_PlayerStartWalkToCaveOfOriginWest
+	applymovement LOCALID_SOOTOPOLIS_STEVEN, SootopolisCity_Movement_StevenStartWalkToCaveOfOrigin
+	applymovement LOCALID_PLAYER, SootopolisCity_Movement_PlayerStartWalkToCaveOfOriginWest
 	waitmovement 0
 	return
 
 SootopolisCity_EventScript_StartWalkToCaveOfOriginNorth::
-	applymovement LOCALID_STEVEN, SootopolisCity_Movement_StevenStartWalkToCaveOfOrigin
-	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Movement_PlayerStartWalkToCaveOfOriginNorth
+	applymovement LOCALID_SOOTOPOLIS_STEVEN, SootopolisCity_Movement_StevenStartWalkToCaveOfOrigin
+	applymovement LOCALID_PLAYER, SootopolisCity_Movement_PlayerStartWalkToCaveOfOriginNorth
 	waitmovement 0
 	return
 
@@ -1224,12 +1206,12 @@ SootopolisCity_Movement_PlayerEnterCaveOfOrigin:
 
 SootopolisCity_EventScript_Boy2::
 	lockall
-	applymovement LOCALID_BOY_2, Common_Movement_FacePlayer
+	applymovement LOCALID_SOOTOPOLIS_BOY_2, Common_Movement_FacePlayer
 	waitmovement 0
 	goto_if_eq VAR_SOOTOPOLIS_CITY_STATE, 5, SootopolisCity_EventScript_Boy2Rayquaza
 	msgbox SootopolisCity_Text_TwoPokemonArentAngry, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_BOY_2, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_SOOTOPOLIS_BOY_2, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
@@ -1245,17 +1227,17 @@ SootopolisCity_EventScript_BlackBelt::
 	goto_if_eq VAR_SOOTOPOLIS_CITY_STATE, 5, SootopolisCity_EventScript_BlackBeltRayquaza
 	msgbox SootopolisCity_Text_GoRedAndBlueMon, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_BLACK_BELT, Common_Movement_FacePlayer
+	applymovement LOCALID_SOOTOPOLIS_BLACK_BELT, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox SootopolisCity_Text_DoYouKnowMonNames, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_BLACK_BELT, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_SOOTOPOLIS_BLACK_BELT, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
 
 SootopolisCity_EventScript_BlackBeltRayquaza::
-	applymovement LOCALID_BLACK_BELT, Common_Movement_FacePlayer
+	applymovement LOCALID_SOOTOPOLIS_BLACK_BELT, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox SootopolisCity_Text_GreenOneSettlesThings, MSGBOX_DEFAULT
 	releaseall
@@ -1263,12 +1245,12 @@ SootopolisCity_EventScript_BlackBeltRayquaza::
 
 SootopolisCity_EventScript_Girl::
 	lockall
-	applymovement LOCALID_GIRL, Common_Movement_FacePlayer
+	applymovement LOCALID_SOOTOPOLIS_GIRL, Common_Movement_FacePlayer
 	waitmovement 0
 	goto_if_eq VAR_SOOTOPOLIS_CITY_STATE, 5, SootopolisCity_EventScript_GirlRayquaza
 	msgbox SootopolisCity_Text_SootopolisWillBeWrecked, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_GIRL, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_SOOTOPOLIS_GIRL, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
@@ -1281,12 +1263,12 @@ SootopolisCity_EventScript_GirlRayquaza::
 
 SootopolisCity_EventScript_Maniac::
 	lockall
-	applymovement LOCALID_MANIAC, Common_Movement_FacePlayer
+	applymovement LOCALID_SOOTOPOLIS_MANIAC, Common_Movement_FacePlayer
 	waitmovement 0
 	goto_if_eq VAR_SOOTOPOLIS_CITY_STATE, 5, SootopolisCity_EventScript_ManiacRayquaza
 	msgbox SootopolisCity_Text_SeeingLegendWithOwnEyes, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_MANIAC, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_SOOTOPOLIS_MANIAC, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
@@ -1319,16 +1301,16 @@ SootopolisCity_EventScript_GiveWaterfall::
 	end
 
 SootopolisCity_EventScript_WallaceMoveFromGym::
-	applymovement LOCALID_WALLACE, SootopolisCity_Movement_WallaceMoveFromGym
+	applymovement LOCALID_SOOTOPOLIS_WALLACE, SootopolisCity_Movement_WallaceMoveFromGym
 	waitmovement 0
-	copyobjectxytoperm LOCALID_WALLACE
+	copyobjectxytoperm LOCALID_SOOTOPOLIS_WALLACE
 	setvar VAR_SOOTOPOLIS_WALLACE_STATE, 1
 	return
 
 SootopolisCity_EventScript_WallaceMoveFromGymWest::
-	applymovement LOCALID_WALLACE, SootopolisCity_Movement_WallaceMoveFromGymWest
+	applymovement LOCALID_SOOTOPOLIS_WALLACE, SootopolisCity_Movement_WallaceMoveFromGymWest
 	waitmovement 0
-	copyobjectxytoperm LOCALID_WALLACE
+	copyobjectxytoperm LOCALID_SOOTOPOLIS_WALLACE
 	setvar VAR_SOOTOPOLIS_WALLACE_STATE, 2
 	return
 

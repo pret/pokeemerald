@@ -11,6 +11,7 @@ INCLUDECONSTS_OUTDIR := include/constants
 
 AUTO_GEN_TARGETS += $(INCLUDECONSTS_OUTDIR)/map_groups.h
 AUTO_GEN_TARGETS += $(INCLUDECONSTS_OUTDIR)/layouts.h
+AUTO_GEN_TARGETS += $(INCLUDECONSTS_OUTDIR)/map_event_ids.h
 AUTO_GEN_TARGETS += $(DATA_SRC_SUBDIR)/heal_locations.h
 
 MAP_DIRS := $(dir $(wildcard $(MAPS_DIR)/*/map.json))
@@ -34,5 +35,11 @@ $(MAPS_OUTDIR)/connections.inc $(MAPS_OUTDIR)/groups.inc $(MAPS_OUTDIR)/events.i
 $(LAYOUTS_OUTDIR)/layouts.inc $(LAYOUTS_OUTDIR)/layouts_table.inc $(INCLUDECONSTS_OUTDIR)/layouts.h: $(LAYOUTS_DIR)/layouts.json
 	$(MAPJSON) layouts emerald $< $(LAYOUTS_OUTDIR) $(INCLUDECONSTS_OUTDIR)
 
-$(DATA_SRC_SUBDIR)/heal_locations.h: $(MAP_JSONS)
-	@$(MAPJSON) heal_locations emerald $^ $(DATA_SRC_SUBDIR)/heal_locations.h
+# Generate files that depends on data that's distributed across the map.json files.
+# There's a lot of map.json files, so we print an abbreviated output with echo.
+# We're also not using a pattern rule, and we only want this to run once for both targets,
+# so we use a separate target 'event_constants'.
+$(INCLUDECONSTS_OUTDIR)/map_event_ids.h $(DATA_SRC_SUBDIR)/heal_locations.h: .event_constants ;
+.event_constants: $(MAP_JSONS)
+	@$(MAPJSON) event_constants emerald $^ $(INCLUDECONSTS_OUTDIR)/map_event_ids.h $(DATA_SRC_SUBDIR)/heal_locations.h
+	@echo "$(MAPJSON) event_constants emerald <MAP_JSONS> $(INCLUDECONSTS_OUTDIR)/map_event_ids.h $(DATA_SRC_SUBDIR)/heal_locations.h"
