@@ -603,12 +603,5 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "RustboroCity_EventScript_CuttersHouseSign"
     }
-  ],
-  "heal_locations": [
-    {
-      "id": "HEAL_LOCATION_RUSTBORO_CITY",
-      "x": 16,
-      "y": 39
-    }
   ]
 }

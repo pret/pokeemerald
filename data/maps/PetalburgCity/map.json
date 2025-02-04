@@ -331,12 +331,5 @@
       "item": "ITEM_RARE_CANDY",
       "flag": "FLAG_HIDDEN_ITEM_PETALBURG_CITY_RARE_CANDY"
     }
-  ],
-  "heal_locations": [
-    {
-      "id": "HEAL_LOCATION_PETALBURG_CITY",
-      "x": 20,
-      "y": 17
-    }
   ]
 }

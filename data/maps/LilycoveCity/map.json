@@ -520,12 +520,5 @@
       "item": "ITEM_POKE_BALL",
       "flag": "FLAG_HIDDEN_ITEM_LILYCOVE_CITY_POKE_BALL"
     }
-  ],
-  "heal_locations": [
-    {
-      "id": "HEAL_LOCATION_LILYCOVE_CITY",
-      "x": 24,
-      "y": 15
-    }
   ]
 }
