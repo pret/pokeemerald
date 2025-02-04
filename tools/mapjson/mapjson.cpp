@@ -391,18 +391,13 @@ void process_map(string map_filepath, string layouts_filepath, string output_dir
     write_text_file(out_dir + "connections.inc", connections_text);
 }
 
-void process_event_constants(const vector<string> &map_filepaths, string output_ids_file, string output_heal_locations_file) {
+void process_event_constants(const vector<string> &map_filepaths, string output_ids_file) {
     string warning = get_generated_warning("data/maps/*/map.json", false);
-
-    ostringstream heal_locations_arr_text;
-    ostringstream respawn_maps_arr_text;
-    ostringstream respawn_npcs_arr_text;
 
     string guard_name = "CONSTANTS_MAP_EVENT_IDS";
     ostringstream ids_file_text;
     ids_file_text << get_include_guard_start(guard_name) << warning;
 
-    // Get heal location data from each map
     for (const string &filepath : map_filepaths) {
         string err;
         string map_json_text = read_text_file(filepath);
@@ -432,59 +427,10 @@ void process_event_constants(const vector<string> &map_filepaths, string output_
         if (!temp.empty()) {
             ids_file_text << "// " << map_id << "\n" << temp << "\n";
         }
-
-        // Process heal locations. Maps are not required to have a heal locations array, so we check if it exists first.
-        if (map_data.object_items().find("heal_locations") != map_data.object_items().end()) {
-            for (auto &heal_location : map_data["heal_locations"].array_items()) {
-                // Each array is indexed with the heal location's ID, e.g. '[HEAL_LOCATION_NAME - 1] = '
-                string index_text = "\t[" + json_to_string(heal_location, "id") + " - 1] =";
-
-                // Add element to main heal locations array
-                heal_locations_arr_text << index_text << "\n\t{\n"
-                                         << "\t\t.mapGroup = MAP_GROUP(" << map_id << "),\n"
-                                         << "\t\t.mapNum = MAP_NUM(" << map_id << "),\n"
-                                         << "\t\t.x = " << json_to_string(heal_location, "x") << ",\n"
-                                         << "\t\t.y = " << json_to_string(heal_location, "y") << ",\n"
-                                         << "\t},\n";
-
-                // Add element to respawn map array (if field is present)
-                if (heal_location.object_items().find("respawn_map") != heal_location.object_items().end()) {
-                    string respawn_map_id = json_to_string(heal_location, "respawn_map");
-                    respawn_maps_arr_text << index_text << " {"
-                                          << "MAP_GROUP(" << respawn_map_id << "), "
-                                          << "MAP_NUM(" << respawn_map_id << ")"
-                                          << "},\n";
-                }
-
-                // Add element to respawn NPC array (if field is present)
-                if (heal_location.object_items().find("respawn_npc") != heal_location.object_items().end()) {
-                    respawn_npcs_arr_text << index_text << " " << json_to_string(heal_location, "respawn_npc") << ",\n";
-                }
-            }
-        }
     }
 
-    // Write event ids file
     ids_file_text << get_include_guard_end(guard_name);
     write_text_file(output_ids_file, ids_file_text.str());
-
-
-    // Write heal locations data file
-    ostringstream heal_locations_file_text;
-    heal_locations_file_text << warning;
-
-    string arr_body = heal_locations_arr_text.str();
-    heal_locations_file_text << "static const struct HealLocation sHealLocations[] =\n{\n" << arr_body << "};\n\n";
-
-    arr_body = respawn_maps_arr_text.str();
-    if (!arr_body.empty())
-        heal_locations_file_text << "static const u16 sWhiteoutRespawnHealCenterMapIdxs[][2] =\n{\n" << arr_body << "};\n\n";
-
-    arr_body = respawn_npcs_arr_text.str();
-    if (!arr_body.empty())
-        heal_locations_file_text << "static const u8 sWhiteoutRespawnHealerNpcIds[] =\n{\n" << arr_body << "};\n\n";
-
-    write_text_file(output_heal_locations_file, heal_locations_file_text.str());
 }
 
 string generate_groups_text(Json groups_data) {
@@ -771,21 +717,20 @@ int main(int argc, char *argv[]) {
         process_layouts(filepath, output_asm, output_c);
     }
     else if (mode == "event_constants") {
-        if (argc < 6)
-            FATAL_ERROR("USAGE: mapjson event_constants <game-version> <map_file> [additional_map_files] <output_ids_file> <output_heal_locations_file>");
+        if (argc < 5)
+            FATAL_ERROR("USAGE: mapjson event_constants <game-version> <map_file> [additional_map_files] <output_ids_file>");
 
         infer_separator(argv[3]);
 
         vector<string> filepaths;
         const int firstMapFileArg = 3;
-        const int lastMapFileArg = argc - 3;
+        const int lastMapFileArg = argc - 2;
         for (int i = firstMapFileArg; i <= lastMapFileArg; i++) {
             filepaths.push_back(argv[i]);
         }
-        string output_ids_file(argv[argc - 2]);
-        string output_heal_locations_file(argv[argc - 1]);
+        string output_ids_file(argv[argc - 1]);
 
-        process_event_constants(filepaths, output_ids_file, output_heal_locations_file);
+        process_event_constants(filepaths, output_ids_file);
     }
     else {
         FATAL_ERROR("ERROR: <mode> must be 'layouts', 'map', 'event_constants', or 'groups'.\n");

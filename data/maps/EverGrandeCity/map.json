@@ -192,17 +192,5 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "Common_EventScript_ShowPokemonCenterSign"
     }
-  ],
-  "heal_locations": [
-    {
-      "id": "HEAL_LOCATION_EVER_GRANDE_CITY",
-      "x": 27,
-      "y": 49
-    },
-    {
-      "id": "HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE",
-      "x": 18,
-      "y": 6
-    }
   ]
 }
