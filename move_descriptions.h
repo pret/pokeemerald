@@ -146,7 +146,7 @@ static const u8 sTakeDownDescription[] = _(
     "that also hurts the user.");
 
 static const u8 sThrashDescription[] = _(
-    "A rampage of 2 to 3 turns\n"
+    "A rampage of 2 or 3 turns\n"
     "that confuses the user.");
 
 static const u8 sDoubleEdgeDescription[] = _(
@@ -178,8 +178,8 @@ static const u8 sBiteDescription[] = _(
     "May cause flinching.");
 
 static const u8 sGrowlDescription[] = _(
-    "Growls cutely to reduce the\n"
-    "foe's ATTACK.");
+    "Crys out cutely to reduce\n"
+    "the foe's ATTACK.");
 
 static const u8 sRoarDescription[] = _(
     "Makes the foe flee to end\n"
@@ -203,7 +203,7 @@ static const u8 sDisableDescription[] = _(
 
 static const u8 sAcidDescription[] = _(
     "Sprays a hide-melting acid.\n"
-    "May lower DEFENSE.");
+    "May lower SP. DEFENSE.");
 
 static const u8 sEmberDescription[] = _(
     "A weak fire attack that may\n"
@@ -215,7 +215,7 @@ static const u8 sFlamethrowerDescription[] = _(
 
 static const u8 sMistDescription[] = _(
     "Creates a mist that stops\n"
-    "reduction of abilities.");
+    "reduction of stats.");
 
 static const u8 sWaterGunDescription[] = _(
     "Squirts water to attack\n"
@@ -255,7 +255,7 @@ static const u8 sHyperBeamDescription[] = _(
 
 static const u8 sPeckDescription[] = _(
     "Attacks the foe with a\n"
-    "jabbing beak, etc.");
+    "jabbing beak or horn.");
 
 static const u8 sDrillPeckDescription[] = _(
     "A corkscrewing attack with\n"
@@ -318,7 +318,7 @@ static const u8 sSleepPowderDescription[] = _(
     "cause the foe to sleep.");
 
 static const u8 sPetalDanceDescription[] = _(
-    "A rampage of 2 to 3 turns\n"
+    "A dance of 2 or 3 turns\n"
     "that confuses the user.");
 
 static const u8 sStringShotDescription[] = _(
