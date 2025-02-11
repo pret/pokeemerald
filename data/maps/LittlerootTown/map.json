@@ -268,17 +268,5 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "LittlerootTown_EventScript_MaysHouseSign"
     }
-  ],
-  "heal_locations": [
-    {
-      "id": "HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE",
-      "x": 5,
-      "y": 9
-    },
-    {
-      "id": "HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE",
-      "x": 14,
-      "y": 9
-    }
   ]
 }
