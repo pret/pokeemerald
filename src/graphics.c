@@ -382,6 +382,20 @@ const u8 gHealthboxElementsGfxTable[] = INCBIN_U8("graphics/battle_interface/ita
                                                   "graphics/battle_interface/italian/status4.4bpp",  // coloring them is an extreme headache and wont be done for now
                                                   "graphics/battle_interface/healthbox_doubles_frameend.4bpp",
                                                   "graphics/battle_interface/healthbox_doubles_frameend_bar.4bpp");
+#elif SPANISH
+const u8 gHealthboxElementsGfxTable[] = INCBIN_U8("graphics/battle_interface/spanish/hpbar.4bpp",
+                                                  "graphics/battle_interface/expbar.4bpp",
+                                                  "graphics/battle_interface/spanish/status.4bpp",
+                                                  "graphics/battle_interface/misc.4bpp",
+                                                  "graphics/battle_interface/hpbar_anim.4bpp",
+                                                  "graphics/battle_interface/misc_frameend.4bpp",
+                                                  "graphics/battle_interface/ball_display.4bpp",
+                                                  "graphics/battle_interface/ball_caught_indicator.4bpp",
+                                                  "graphics/battle_interface/spanish/status2.4bpp",  // these three duplicate sets of graphics are for the opponent pokemon
+                                                  "graphics/battle_interface/spanish/status3.4bpp",  // and are also for use in double battles. they use dynamic palettes so
+                                                  "graphics/battle_interface/spanish/status4.4bpp",  // coloring them is an extreme headache and wont be done for now
+                                                  "graphics/battle_interface/healthbox_doubles_frameend.4bpp",
+                                                  "graphics/battle_interface/healthbox_doubles_frameend_bar.4bpp");
 #else //ENGLISH
 const u8 gHealthboxElementsGfxTable[] = INCBIN_U8("graphics/battle_interface/hpbar.4bpp",
                                                   "graphics/battle_interface/expbar.4bpp",
@@ -477,6 +491,8 @@ const u32 gContestCurtainTilemap[] = INCBIN_U32("graphics/contest/curtain.bin.lz
 const u32 gContestInterfaceGfx[] = INCBIN_U32("graphics/contest/french/interface.4bpp.lz");
 #elif ITALIAN
 const u32 gContestInterfaceGfx[] = INCBIN_U32("graphics/contest/italian/interface.4bpp.lz");
+#elif SPANISH
+const u32 gContestInterfaceGfx[] = INCBIN_U32("graphics/contest/spanish/interface.4bpp.lz");
 #else //ENGLISH
 const u32 gContestInterfaceGfx[] = INCBIN_U32("graphics/contest/interface.4bpp.lz");
 #endif
@@ -495,8 +511,8 @@ const u32 gJPContestVoltagePal[] = INCBIN_U32("graphics/contest/japanese/voltage
 const u32 gContestResults_Gfx[]                  = INCBIN_U32("graphics/contest/french/results_screen/tiles.4bpp.lz");
 #elif ITALIAN
 const u32 gContestResults_Gfx[]                  = INCBIN_U32("graphics/contest/italian/results_screen/tiles.4bpp.lz");
-//#elif SPANISH
-//const u32 gContestResults_Gfx[]                  = INCBIN_U32("graphics/contest/spanish/results_screen/tiles.4bpp.lz");
+#elif SPANISH
+const u32 gContestResults_Gfx[]                  = INCBIN_U32("graphics/contest/spanish/results_screen/tiles.4bpp.lz");
 #else //ENGLISH
 const u32 gContestResults_Gfx[]                  = INCBIN_U32("graphics/contest/results_screen/tiles.4bpp.lz");
 #endif
@@ -675,6 +691,8 @@ const u32 gBattleAnimSpritePal_Tendrils[] = INCBIN_U32("graphics/battle_anims/sp
 const u32 gHealthboxSinglesPlayerGfx[] = INCBIN_U32("graphics/battle_interface/french/healthbox_singles_player.4bpp.lz");
 #elif ITALIAN
 const u32 gHealthboxSinglesPlayerGfx[] = INCBIN_U32("graphics/battle_interface/italian/healthbox_singles_player.4bpp.lz");
+#elif SPANISH
+const u32 gHealthboxSinglesPlayerGfx[] = INCBIN_U32("graphics/battle_interface/spanish/healthbox_singles_player.4bpp.lz");
 #else //ENGLISH
 const u32 gHealthboxSinglesPlayerGfx[] = INCBIN_U32("graphics/battle_interface/healthbox_singles_player.4bpp.lz");
 #endif
@@ -1010,6 +1028,8 @@ const u32 gDomeTourneyInfoCardBg_Tilemap[] = INCBIN_U32("graphics/battle_frontie
 const u32 gDomeTourneyTreeButtons_Gfx[] = INCBIN_U32("graphics/battle_frontier/french/tourney_buttons.4bpp.lz"); // exit/cancel and Poké Ball buttons
 #elif ITALIAN
 const u32 gDomeTourneyTreeButtons_Gfx[] = INCBIN_U32("graphics/battle_frontier/italian/tourney_buttons.4bpp.lz"); // exit/cancel and Poké Ball buttons
+#elif SPANISH
+const u32 gDomeTourneyTreeButtons_Gfx[] = INCBIN_U32("graphics/battle_frontier/spanish/tourney_buttons.4bpp.lz"); // exit/cancel and Poké Ball buttons
 #else //ENGLISH
 const u32 gDomeTourneyTreeButtons_Gfx[] = INCBIN_U32("graphics/battle_frontier/tourney_buttons.4bpp.lz"); // exit/cancel and Poké Ball buttons
 #endif
@@ -1058,6 +1078,8 @@ const u32 gBattleAnimSpritePal_IcicleSpear[] = INCBIN_U32("graphics/battle_anims
 const u32 gContestNextTurnGfx[] = INCBIN_U32("graphics/contest/french/nextturn.4bpp.lz");
 #elif ITALIAN
 const u32 gContestNextTurnGfx[] = INCBIN_U32("graphics/contest/italian/nextturn.4bpp.lz");
+#elif SPANISH
+const u32 gContestNextTurnGfx[] = INCBIN_U32("graphics/contest/spanish/nextturn.4bpp.lz");
 #else //ENGLISH
 const u32 gContestNextTurnGfx[] = INCBIN_U32("graphics/contest/nextturn.4bpp.lz");
 #endif
@@ -1074,6 +1096,8 @@ const u32 gBattleAnimSpritePal_StunSpore[] = INCBIN_U32("graphics/battle_anims/s
 const u32 gContestApplauseGfx[] = INCBIN_U32("graphics/contest/french/applause.4bpp.lz");
 #elif ITALIAN
 const u32 gContestApplauseGfx[] = INCBIN_U32("graphics/contest/italian/applause.4bpp.lz");
+#elif SPANISH
+const u32 gContestApplauseGfx[] = INCBIN_U32("graphics/contest/spanish/applause.4bpp.lz");
 #else //ENGLISH
 const u32 gContestApplauseGfx[] = INCBIN_U32("graphics/contest/applause.4bpp.lz");
 #endif
@@ -1610,6 +1634,8 @@ const u8 gBerryBlenderCountdownNumbers_Gfx[] = INCBIN_U8("graphics/berry_blender
 const u8 gBerryBlenderStart_Gfx[] = INCBIN_U8("graphics/berry_blender/french/start.4bpp");
 #elif ITALIAN
 const u8 gBerryBlenderStart_Gfx[] = INCBIN_U8("graphics/berry_blender/italian/start.4bpp");
+#elif SPANISH
+const u8 gBerryBlenderStart_Gfx[] = INCBIN_U8("graphics/berry_blender/spanish/start.4bpp");
 #else //ENGLISH
 const u8 gBerryBlenderStart_Gfx[] = INCBIN_U8("graphics/berry_blender/start.4bpp");
 #endif
