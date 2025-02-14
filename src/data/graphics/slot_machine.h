@@ -1,9 +1,14 @@
 const u16 gSlotMachineMenu_Pal[] = INCBIN_U16("graphics/slot_machine/menu.gbapal");
-#if FRENCH || SPANISH
+#if FRENCH
 const u32 gSlotMachineMenu_Gfx[] = INCBIN_U32("graphics/slot_machine/french/menu.4bpp.lz");
 const u16 gSlotMachineMenu_Tilemap[] = INCBIN_U16("graphics/slot_machine/menu.bin");
 
 const u16 gSlotMachineInfoBox_Tilemap[] = INCBIN_U16("graphics/slot_machine/french/info_box.bin");
+#elif SPANISH
+const u32 gSlotMachineMenu_Gfx[] = INCBIN_U32("graphics/slot_machine/spanish/menu.4bpp.lz");
+const u16 gSlotMachineMenu_Tilemap[] = INCBIN_U16("graphics/slot_machine/menu.bin");
+
+const u16 gSlotMachineInfoBox_Tilemap[] = INCBIN_U16("graphics/slot_machine/spanish/info_box.bin");
 #elif ITALIAN
 const u32 gSlotMachineMenu_Gfx[] = INCBIN_U32("graphics/slot_machine/italian/menu.4bpp.lz");
 const u16 gSlotMachineMenu_Tilemap[] = INCBIN_U16("graphics/slot_machine/menu.bin");
@@ -34,6 +39,11 @@ const u8 gSlotMachineReelSymbol6Tiles[] = INCBIN_U8("graphics/slot_machine/reel_
 const u8 gSlotMachineReelSymbol7Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/7.4bpp");
  // The 'REG' text is missing in the French and Italian versions.
 const u32 gSlotMachineDigitalDisplay_Gfx[] = INCBIN_U32("graphics/slot_machine/french/digital_display.4bpp.lz");
+#elif SPANISH
+const u8 gSlotMachineReelSymbol6Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/6.4bpp");
+const u8 gSlotMachineReelSymbol7Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/spanish/7.4bpp");
+
+const u32 gSlotMachineDigitalDisplay_Gfx[] = INCBIN_U32("graphics/slot_machine/digital_display.4bpp.lz");
 #else //ENGLISH
 const u8 gSlotMachineReelSymbol6Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/6.4bpp");
 const u8 gSlotMachineReelSymbol7Tiles[] = INCBIN_U8("graphics/slot_machine/reel_symbols/7.4bpp");
