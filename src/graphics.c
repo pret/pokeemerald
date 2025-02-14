@@ -1529,6 +1529,12 @@ const u32 gPokenavCondition_Tilemap[] = INCBIN_U32("graphics/pokenav/condition/g
 
 const u16 gPokenavOptions_Tilemap[] = INCBIN_U16("graphics/pokenav/options/options.bin");
 const u32 gPokenavOptions_Gfx[] = INCBIN_U32("graphics/pokenav/options/italian/options.4bpp.lz");
+#elif SPANISH
+const u32 gPokenavCondition_Gfx[] = INCBIN_U32("graphics/pokenav/condition/spanish/graph.4bpp.lz");
+const u32 gPokenavCondition_Tilemap[] = INCBIN_U32("graphics/pokenav/condition/graph.bin.lz");
+
+const u16 gPokenavOptions_Tilemap[] = INCBIN_U16("graphics/pokenav/options/options.bin");
+const u32 gPokenavOptions_Gfx[] = INCBIN_U32("graphics/pokenav/options/spanish/options.4bpp.lz");
 #else //ENGLISH
 const u32 gPokenavCondition_Gfx[] = INCBIN_U32("graphics/pokenav/condition/graph.4bpp.lz");
 const u32 gPokenavCondition_Tilemap[] = INCBIN_U32("graphics/pokenav/condition/graph.bin.lz");
