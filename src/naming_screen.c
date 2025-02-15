@@ -283,7 +283,7 @@ static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
 // This handles what characters get inserted when a key is pressed
 // The keys shown on the keyboard are handled separately by sNamingScreenKeyboardText
 static const u8 sKeyboardChars[KBPAGE_COUNT][KBROW_COUNT][KBCOL_COUNT] = {
-#if ENGLISH || ITALIAN
+#if ENGLISH || ITALIAN || SPANISH
     [KEYBOARD_LETTERS_LOWER] = {
         __("abcdef ."),
         __("ghijkl ,"),
@@ -331,7 +331,7 @@ static const u8 sPageColumnCounts[KBPAGE_COUNT] = {
 };
 
 static const u8 sPageColumnXPos[KBPAGE_COUNT][KBCOL_COUNT] = {
-#if ENGLISH || ITALIAN
+#if ENGLISH || ITALIAN || SPANISH
     [KEYBOARD_LETTERS_LOWER] = {0, 12, 24, 56, 68, 80, 92, 123},
     [KEYBOARD_LETTERS_UPPER] = {0, 12, 24, 56, 68, 80, 92, 123},
     [KEYBOARD_SYMBOLS]       = {0, 22, 44, 66, 88, 110}

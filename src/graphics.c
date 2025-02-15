@@ -1605,7 +1605,7 @@ const u32 gPokenavHeader_Tilemap[] = INCBIN_U32("graphics/pokenav/spanish/header
 const u16 gPokenavLeftHeader_Pal[] = INCBIN_U16("graphics/pokenav/left_headers/palette.gbapal");
 const u32 gPokenavLeftHeaderBeauty_Gfx[] = INCBIN_U32("graphics/pokenav/left_headers/spanish/beauty.4bpp.lz");
 const u32 gPokenavLeftHeaderSmart_Gfx[] = INCBIN_U32("graphics/pokenav/left_headers/spanish/smart.4bpp.lz");
-const u32 gPokenavLeftHeaderCondition_Gfx[] = INCBIN_U32("graphics/pokenav/left_headers/condition.4bpp.lz");
+const u32 gPokenavLeftHeaderCondition_Gfx[] = INCBIN_U32("graphics/pokenav/left_headers/spanish/condition.4bpp.lz");
 const u32 gPokenavLeftHeaderCute_Gfx[] = INCBIN_U32("graphics/pokenav/left_headers/spanish/cute.4bpp.lz");
 const u32 gPokenavLeftHeaderMatchCall_Gfx[] = INCBIN_U32("graphics/pokenav/left_headers/spanish/match_call.4bpp.lz");
 const u32 gPokenavLeftHeaderMainMenu_Gfx[] = INCBIN_U32("graphics/pokenav/left_headers/spanish/main_menu.4bpp.lz");
@@ -1776,7 +1776,7 @@ const u32 gHoennTrainerCardFrontLink_Tilemap[] = INCBIN_U32("graphics/trainer_ca
 #elif SPANISH
 const u32 gHoennTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/spanish/tiles.4bpp.lz");
 const u32 gHoennTrainerCardBg_Tilemap[] = INCBIN_U32("graphics/trainer_card/bg.bin.lz");
-const u32 gHoennTrainerCardFront_Tilemap[] = INCBIN_U32("graphics/trainer_card/front.bin.lz");
+const u32 gHoennTrainerCardFront_Tilemap[] = INCBIN_U32("graphics/trainer_card/spanish/front.bin.lz");
 const u32 gHoennTrainerCardBack_Tilemap[] = INCBIN_U32("graphics/trainer_card/back.bin.lz");
 const u32 gHoennTrainerCardFrontLink_Tilemap[] = INCBIN_U32("graphics/trainer_card/front_link.bin.lz");
 #else //ENGLISH
@@ -1905,6 +1905,8 @@ const u32 gUnionRoomChat_Keyboard_Tilemap[] = INCBIN_U32("graphics/union_room_ch
 const u32 gUnionRoomChat_RButtonLabels[] = INCBIN_U32("graphics/union_room_chat/french/r_button_labels.4bpp.lz");
 #elif ITALIAN
 const u32 gUnionRoomChat_RButtonLabels[] = INCBIN_U32("graphics/union_room_chat/italian/r_button_labels.4bpp.lz");
+#elif SPANISH
+const u32 gUnionRoomChat_RButtonLabels[] = INCBIN_U32("graphics/union_room_chat/spanish/r_button_labels.4bpp.lz");
 #else //ENGLISH
 const u32 gUnionRoomChat_RButtonLabels[] = INCBIN_U32("graphics/union_room_chat/r_button_labels.4bpp.lz");
 #endif
@@ -2187,12 +2189,10 @@ const u32 gTilesetTiles_BattleDome[] = INCBIN_U32("data/tilesets/secondary/battl
 
 // pokenav match call gfx
 const u16 gMatchCallUI_Pal[] = INCBIN_U16("graphics/pokenav/match_call/ui.gbapal");
-#if FRENCH
+#if FRENCH || SPANISH
 const u32 gMatchCallUI_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/french/ui.4bpp.lz");
 #elif ITALIAN
 const u32 gMatchCallUI_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/italian/ui.4bpp.lz");
-#elif SPANISH
-const u32 gMatchCallUI_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/spanish/ui.4bpp.lz");
 #endif
 const u32 gMatchCallUI_Tilemap[] = INCBIN_U32("graphics/pokenav/match_call/ui.bin.lz");
 
@@ -2233,6 +2233,8 @@ const u8 gCryMeter_Gfx[] = INCBIN_U8("graphics/pokedex/cry_meter.4bpp.lz");
 static const u8 sEmpty3[0x4EA98] = {0};
 #elif ITALIAN
 static const u8 sEmpty3[0x4EC30] = {0};
+#elif SPANISH
+static const u8 sEmpty3[0x4EAF8] = {0};
 #else //ENGLISH
 static const u8 sEmpty3[0x54BAC] = {0};
 #endif

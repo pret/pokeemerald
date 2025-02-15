@@ -1317,12 +1317,12 @@ static void ShowPikeResultsWindow(void)
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, 8, 97, TEXT_SKIP_DRAW, NULL);
 #endif
     PrintHyphens(10);
-    PikePrintPrevOrCurrentStreak(FRONTIER_LVL_50, 64, PIKE_CLEARED_X2A, 33);
-    PikePrintCleared(gText_Record, gText_RoomsCleared, gSaveBlock2Ptr->frontier.pikeRecordStreaks[FRONTIER_LVL_50], 64, PIKE_CLEARED_X2A, 49);
-    PikePrintCleared(gText_Total, gText_TimesCleared, gSaveBlock2Ptr->frontier.pikeTotalStreaks[FRONTIER_LVL_50], 64, PIKE_CLEARED_X2B, 65);
-    PikePrintPrevOrCurrentStreak(FRONTIER_LVL_OPEN, 64, PIKE_CLEARED_X2A, 97);
-    PikePrintCleared(gText_Record, gText_RoomsCleared, gSaveBlock2Ptr->frontier.pikeRecordStreaks[FRONTIER_LVL_OPEN], 64, PIKE_CLEARED_X2A, 113);
-    PikePrintCleared(gText_Total, gText_TimesCleared, gSaveBlock2Ptr->frontier.pikeTotalStreaks[FRONTIER_LVL_OPEN], 64, PIKE_CLEARED_X2B, 129);
+    PikePrintPrevOrCurrentStreak(FRONTIER_LVL_50, PIKE_CLEARED_X1, PIKE_CLEARED_X2A, 33);
+    PikePrintCleared(gText_Record, gText_RoomsCleared, gSaveBlock2Ptr->frontier.pikeRecordStreaks[FRONTIER_LVL_50], PIKE_CLEARED_X1, PIKE_CLEARED_X2A, 49);
+    PikePrintCleared(gText_Total, gText_TimesCleared, gSaveBlock2Ptr->frontier.pikeTotalStreaks[FRONTIER_LVL_50], PIKE_CLEARED_X1, PIKE_CLEARED_X2B, 65);
+    PikePrintPrevOrCurrentStreak(FRONTIER_LVL_OPEN, PIKE_CLEARED_X1, PIKE_CLEARED_X2A, 97);
+    PikePrintCleared(gText_Record, gText_RoomsCleared, gSaveBlock2Ptr->frontier.pikeRecordStreaks[FRONTIER_LVL_OPEN], PIKE_CLEARED_X1, PIKE_CLEARED_X2A, 113);
+    PikePrintCleared(gText_Total, gText_TimesCleared, gSaveBlock2Ptr->frontier.pikeTotalStreaks[FRONTIER_LVL_OPEN], PIKE_CLEARED_X1, PIKE_CLEARED_X2B, 129);
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
