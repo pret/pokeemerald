@@ -295,6 +295,10 @@ TrainerHill_Entrance_Pokemart_Expanded:
 .ifdef ITALIAN
 	.include "data/maps/TrainerHill_Entrance/text_it.inc"
 .else
+.ifdef SPANISH
+	.include "data/maps/TrainerHill_Entrance/text_es.inc"
+.else
 	.include "data/maps/TrainerHill_Entrance/text.inc"
+.endif
 .endif
 .endif

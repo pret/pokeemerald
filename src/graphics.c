@@ -1514,7 +1514,7 @@ const u16 gContestResultsTitle_Link_Tilemap[]   = INCBIN_U16("graphics/contest/s
 const u16 gContestResultsTitle_Cool_Tilemap[]   = INCBIN_U16("graphics/contest/spanish/results_screen/title_cool.bin");
 const u16 gContestResultsTitle_Beauty_Tilemap[] = INCBIN_U16("graphics/contest/spanish/results_screen/title_beauty.bin");
 const u16 gContestResultsTitle_Cute_Tilemap[]   = INCBIN_U16("graphics/contest/spanish/results_screen/title_cute.bin");
-const u16 gContestResultsTitle_Smart_Tilemap[]  = INCBIN_U16("graphics/contest/results_screen/title_smart.bin");
+const u16 gContestResultsTitle_Smart_Tilemap[]  = INCBIN_U16("graphics/contest/spanish/results_screen/title_smart.bin");
 const u16 gContestResultsTitle_Tough_Tilemap[]  = INCBIN_U16("graphics/contest/spanish/results_screen/title_tough.bin");
 const u16 gContestResultsTitle_Tilemap[]        = INCBIN_U16("graphics/contest/spanish/results_screen/title.bin");
 #else //ENGLISH

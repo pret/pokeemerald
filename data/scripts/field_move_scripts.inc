@@ -67,6 +67,17 @@ Text_MonUsedFieldMove:
 Text_CantCut:
 	.string "L’albero si può abbattere con TAGLIO.$"
 .else
+.ifdef SPANISH
+Text_WantToCut:
+	.string "Parece que puedes CORTAR este árbol.\p"
+	.string "¿Usas CORTE?$"
+
+Text_MonUsedFieldMove:
+	.string "{STR_VAR_1} usó {STR_VAR_2}.$"
+
+Text_CantCut:
+	.string "Parece que puedes CORTAR este árbol.$"
+.else
 Text_WantToCut:
 	.string "This tree looks like it can be\n"
 	.string "CUT down!\p"
@@ -78,6 +89,7 @@ Text_MonUsedFieldMove:
 Text_CantCut:
 	.string "This tree looks like it can be\n"
 	.string "CUT down!$"
+.endif
 .endif
 .endif
 
@@ -155,6 +167,15 @@ Text_CantSmash:
 	.string "È una roccia dura, ma un POKéMON\n"
 	.string "dovrebbe poterla frantumare.$"
 .else
+.ifdef SPANISH
+Text_WantToSmash:
+	.string "Parece que se puede romper esta roca.\n"
+	.string "¿Usas GOLPE ROCA?$"
+
+Text_CantSmash:
+	.string "Es una roca muy dura, pero un\n"
+	.string "POKéMON podría hacerla añicos.$"
+.else
 Text_WantToSmash:
 	.string "This rock appears to be breakable.\n"
 	.string "Would you like to use ROCK SMASH?$"
@@ -162,6 +183,7 @@ Text_WantToSmash:
 Text_CantSmash:
 	.string "It's a rugged rock, but a POKéMON\n"
 	.string "may be able to smash it.$"
+.endif
 .endif
 .endif
 
@@ -245,6 +267,25 @@ Text_StrengthActivated:
 	.string "FORZA ha reso possibile spostare\n"
 	.string "i massi.$"
 .else
+.ifdef SPANISH
+Text_WantToStrength:
+	.string "Es una roca enorme, pero un\n"
+	.string "POKéMON podría moverla.\p"
+	.string "¿Usas FUERZA?$"
+
+Text_MonUsedStrength:
+	.string "{STR_VAR_1} usó FUERZA.\p"
+	.string "La FUERZA de {STR_VAR_1} logró\n"
+	.string "desplazar la roca a un lado.$"
+
+Text_CantStrength:
+	.string "Es una roca enorme, pero un\n"
+	.string "POKéMON podría apartarla.$"
+
+Text_StrengthActivated:
+	.string "Usar FUERZA ha permitido desplazar\n"
+	.string "la roca a un lado.$"
+.else
 Text_WantToStrength:
 	.string "It's a big boulder, but a POKéMON\n"
 	.string "may be able to push it aside.\p"
@@ -262,6 +303,7 @@ Text_CantStrength:
 Text_StrengthActivated:
 	.string "STRENGTH made it possible to move\n"
 	.string "boulders around.$"
+.endif
 .endif
 .endif
 
@@ -311,6 +353,18 @@ Text_WantToWaterfall:
 Text_MonUsedWaterfall:
 	.string "{STR_VAR_1} usa CASCATA.$"
 .else
+.ifdef SPANISH
+Text_CantWaterfall:
+	.string "Un muro de agua cae\n"
+	.string "con un estruendo estremecedor…$"
+
+Text_WantToWaterfall:
+	.string "Es una gran catarata.\n"
+	.string "¿Usas CASCADA?$"
+
+Text_MonUsedWaterfall:
+	.string "{STR_VAR_1} usó CASCADA.$"
+.else
 Text_CantWaterfall:
 	.string "A wall of water is crashing down with\n"
 	.string "a mighty roar.$"
@@ -321,6 +375,7 @@ Text_WantToWaterfall:
 
 Text_MonUsedWaterfall:
 	.string "{STR_VAR_1} used WATERFALL.$"
+.endif
 .endif
 .endif
 
@@ -425,6 +480,33 @@ EventScript_FailSweetScent::
 Text_FailSweetScent:
 	.string "Pare non ci sia nulla qui…$"
 .else
+.ifdef SPANISH
+Text_CantDive:
+	.string "El mar es muy profundo en esta zona.\n"
+	.string "Un POKéMON podría bucear aquí.$"
+
+Text_WantToDive:
+	.string "El mar es muy profundo en esta zona.\n"
+	.string "¿Usas BUCEO?$"
+
+Text_MonUsedDive:
+	.string "{STR_VAR_1} usó BUCEO.$"
+
+Text_CantSurface:
+	.string "La luz se filtra desde la superficie.\n"
+	.string "Un POKéMON puede emerger aquí.$"
+
+Text_WantToSurface:
+	.string "La luz se filtra desde la superficie.\n"
+	.string "¿Usas BUCEO?$"
+
+EventScript_FailSweetScent::
+	msgbox Text_FailSweetScent, MSGBOX_SIGN
+	end
+
+Text_FailSweetScent:
+	.string "Parece que aquí no hay nada…$"
+.else
 Text_CantDive:
 	.string "The sea is deep here. A POKéMON\n"
 	.string "may be able to go underwater.$"
@@ -450,5 +532,6 @@ EventScript_FailSweetScent::
 
 Text_FailSweetScent:
 	.string "Looks like there's nothing here…$"
+.endif
 .endif
 .endif

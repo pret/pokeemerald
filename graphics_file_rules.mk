@@ -491,6 +491,9 @@ graphics/party_menu/french/bg.4bpp: %.4bpp: %.png
 graphics/party_menu/italian/bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 62 -Wnum_tiles
 
+graphics/party_menu/spanish/bg.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 62 -Wnum_tiles
+
 graphics/bag/menu.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53 -Wnum_tiles
 
@@ -796,6 +799,9 @@ $(PKNAVOPTIONSGFXDIR)/options.4bpp: $(PKNAVOPTIONSGFXDIR)/hoenn_map.4bpp \
 	@cat $^ >$@
 
 $(PKNAVGFXDIR)/header.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 53 -Wnum_tiles
+
+$(PKNAVGFXDIR)/spanish/header.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53 -Wnum_tiles
 
 $(PKNAVGFXDIR)/device_outline.4bpp: %.4bpp: %.png

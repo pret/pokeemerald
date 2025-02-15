@@ -1256,6 +1256,8 @@ static const u8 *const sFooterTextOptions[NUM_FOOTER_TYPES][4] = {
 #include "data/easy_chat/french/easy_chat_words_by_letter.h"
 #elif ITALIAN
 #include "data/easy_chat/italian/easy_chat_words_by_letter.h"
+#elif SPANISH
+#include "data/easy_chat/spanish/easy_chat_words_by_letter.h"
 #else //ENGLISH
 #include "data/easy_chat/easy_chat_words_by_letter.h"
 #endif

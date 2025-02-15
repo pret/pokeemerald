@@ -1,42 +1,42 @@
 Roulette_Text_PlayMinimumWagerIsX::
-	.string "The minimum wager at this table\n"
-	.string "is {STR_VAR_1}. Do you want to play?$"
+	.string "La apuesta mínima en esta mesa\n"
+	.string "es {STR_VAR_1}. ¿Quieres jugar?$"
 
 Roulette_Text_NotEnoughCoins::
-	.string "You don't have enough COINS.$"
+	.string "No tienes bastantes FICHAS.$"
 
 Roulette_Text_SpecialRateTable::
-	.string "Special rate table right now!$"
+	.string "¡Hora de la bonificación especial!$"
 
 Roulette_Text_ControlsInstruction::
-	.string "Place your wager with the + Control\n"
-	.string "Pad, then press the A Button.$"
+	.string "Coloca tu apuesta con el + Panel\n"
+	.string "de Control y pulsa el Botón A.$"
 
 Roulette_Text_ItsAHit::
-	.string "It's a hit!$"
+	.string "¡Premio!$"
 
 Roulette_Text_Jackpot::
-	.string "Jackpot!$"
+	.string "¡Premio gordo!$"
 
 Roulette_Text_NothingDoing::
-	.string "Nothing doing!$"
+	.string "¡Gana la casa!$"
 
 Roulette_Text_YouveWonXCoins::
-	.string "You've won {STR_VAR_1} COINS!$"
+	.string "¡Has ganado {STR_VAR_1} FICHAS!$"
 
 Roulette_Text_NoCoinsLeft::
-	.string "No COINS left…$"
+	.string "No tienes bastantes FICHAS.$"
 
 Roulette_Text_KeepPlaying::
-	.string "Keep playing?$"
+	.string "¿Quieres seguir jugando?$"
 
 Roulette_Text_BoardWillBeCleared::
-	.string "The ROULETTE board will be cleared.$"
+	.string "Se va a limpiar la mesa de la RULETA.$"
 
 @ Unused
 Roulette_Text_YouDontHaveACoinCase::
-	.string "You don't have a COIN CASE.$"
+	.string "You don’t have a COIN CASE.$"
 
 Roulette_Text_CoinCaseIsFull::
-	.string "Your COIN CASE is full!\n"
-	.string "Coins can be exchanged for prizes.$"
+	.string "¡Tu MONEDERO está lleno!\n"
+	.string "Cambia tus FICHAS por premios.$"

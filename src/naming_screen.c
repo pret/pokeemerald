@@ -1743,7 +1743,7 @@ static void DrawNormalTextEntryBox(void)
 
 static void DrawMonTextEntryBox(void)
 {
-#if FRENCH || ITALIAN
+#if EUROPE
     // StringVar1 is used as a buffer here
     u8 buffer[48];
 

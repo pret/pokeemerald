@@ -71,6 +71,44 @@ Route111_Text_DontHaveAnyRoom:
 	.string "La conserverò per te, puoi venire\n"
 	.string "a prenderla un’altra volta, ok?$"
 .else
+.ifdef SPANISH
+Route111_Text_MakingRoomUseTMToMakeYourOwn:
+	.string "¿Qué es esto?\n"
+	.string "¿Qué he hecho?\p"
+	.string "¡Anda, qué guay! Me he construido mi\n"
+	.string "propio cuartel general aquí gracias a\l"
+	.string "un movimiento POKéMON.\p"
+	.string "¡Tengo una idea! Te daré esta MT para\n"
+	.string "que tú también te construyas el tuyo.$"
+
+Route111_Text_ExplainSecretPower:
+	.string "Busca un árbol grande que sea un poco\n"
+	.string "más ancho que todos los demás.\p"
+	.string "Usa DAÑO SECRETO delante.\n"
+	.string "Caerá una liana y podrás\l"
+	.string "trepar hasta la copa.\p"
+	.string "Tendrás un montón de espacio\n"
+	.string "para poner tus cosas.\p"
+	.string "Será tu cuartel general…\n"
+	.string "¡TU BASE SECRETA!\p"
+	.string "Hazte una corriendo…\p"
+	.string "Otra cosa: no hace falta hacerse la\n"
+	.string "BASE SECRETA en un árbol.\p"
+	.string "Usa DAÑO SECRETO en paredes\n"
+	.string "rocosas que tengan muescas.\p"
+	.string "Yo también voy a buscar lugares\n"
+	.string "donde crear mi base. ¡Me piro!$"
+
+Route111_Text_DontWantThis:
+	.string "Oh, ¿no lo quieres?\n"
+	.string "Bueno, aquí estaré por si cambias\l"
+	.string "de idea.$"
+
+Route111_Text_DontHaveAnyRoom:
+	.string "Vaya, no tienes sitio para esto.\p"
+	.string "Te lo voy a guardar, así que vuelve\n"
+	.string "cuando quieras a por él, ¿eh?$"
+.else
 Route111_Text_MakingRoomUseTMToMakeYourOwn:
 	.string "What's that?\n"
 	.string "What am I doing?\p"
@@ -105,6 +143,7 @@ Route111_Text_DontHaveAnyRoom:
 	.string "Oh, you don't have any room for this.\p"
 	.string "I'll hold on to it, so come back for it\n"
 	.string "another time, okay?$"
+.endif
 .endif
 .endif
 

@@ -227,7 +227,7 @@ u8 MailboxMenu_AddWindow(u8 windowIdx)
             template.width = GetMaxWidthInMenuTable(&gMailboxMailOptions[0], 4);
             sMailboxWindowIds[windowIdx] = AddWindow(&template);
         }
-    #if FRENCH || ITALIAN
+    #if EUROPE
         else if (windowIdx == MAILBOXWIN_TITLE)
         {
             struct WindowTemplate template = sWindowTemplates_MailboxMenu[windowIdx];

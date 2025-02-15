@@ -229,6 +229,20 @@ SecretBase_Text_DiscoveredSmallCavern::
 SecretBase_Text_WantToMakeYourSecretBaseHere:
 	.string "Vuoi creare qui la tua BASE SEGRETA?$"
 .else
+.ifdef SPANISH
+SecretBase_Text_SmallIndentInWall::
+	.string "Hay una muesca en la roca.$"
+
+SecretBase_Text_IndentUseSecretPower::
+	.string "Hay una muesca en la roca.\p"
+	.string "¿Usas DAÑO SECRETO?$"
+
+SecretBase_Text_DiscoveredSmallCavern::
+	.string "¡Has descubierto una pequeña caverna!$"
+
+SecretBase_Text_WantToMakeYourSecretBaseHere:
+	.string "¿Estableces aquí tu BASE SECRETA?$"
+.else
 SecretBase_Text_SmallIndentInWall::
 	.string "There's a small indent in the wall.$"
 
@@ -241,5 +255,6 @@ SecretBase_Text_DiscoveredSmallCavern::
 
 SecretBase_Text_WantToMakeYourSecretBaseHere:
 	.string "Want to make your SECRET BASE here?$"
+.endif
 .endif
 .endif

@@ -85,6 +85,20 @@ sText_FullParty:
 	.string "Torna a trovarmi dopo aver\n"
 	.string "depositato uno o più\l"
 	.string "POKéMON nel PC.$"
+.else
+.ifdef SPANISH
+sText_MysteryGiftEgg:
+	.string "Gracias por usar el sistema\n"
+	.string "del REGALO MISTERIOSO.\p"
+	.string "Tenemos un REGALO del CENTRO\n"
+	.string "POKéMON: ¡un HUEVO POKéMON!\p"
+	.string "Cuídalo con tacto y cariño.$"
+
+sText_FullParty:
+	.string "Parece que tu equipo está\n"
+	.string "completo.\p"
+	.string "Vuelve cuando dejes algún POKéMON\n"
+	.string "en el PC.$"
 .else @ENGLISH
 sText_MysteryGiftEgg:
 	.string "Thank you for using the MYSTERY\n"
@@ -98,5 +112,6 @@ sText_FullParty:
 	.string "Oh, your party appears to be full.\p"
 	.string "Please come see me after storing\n"
 	.string "a POKéMON on a PC.$"
+.endif
 .endif
 .endif

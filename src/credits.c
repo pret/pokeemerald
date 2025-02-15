@@ -120,7 +120,7 @@ static void SpriteCB_Rival(struct Sprite *);
 static u8 CreateCreditsMonSprite(u16, s16, s16, u16);
 static void DeterminePokemonToShow(void);
 
-#if !defined(FRENCH) && !defined(ITALIAN)
+#if !EUROPE
 static const u8 sTheEnd_LetterMap_T[] =
 {
     0,    1, 0,
@@ -1322,7 +1322,7 @@ static void LoadTheEndScreen(u16 tileOffsetLoad, u16 tileOffsetWrite, u16 palOff
     #endif
 }
 
-#if FRENCH || ITALIAN
+#if EUROPE
 static void DrawTheEnd(u16 offset, u16 palette)
 {
     LZ77UnCompVram(gCreditsCopyrightEnd_Tilemap, ((u16 *) (VRAM + offset)));

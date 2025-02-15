@@ -28,11 +28,19 @@ sText_MysteryGiftStampCard:
 	.string "Il numero di BOLLINI che ancora ti\n"
 	.string "serve per completare la SCHEDA\l"
 	.string "è {STR_VAR_1}.$"
+.else
+.ifdef SPANISH
+sText_MysteryGiftStampCard:
+	.string "Gracias por usar el sistema\n"
+	.string "de SELLOS.\p"
+	.string "Para completar la TARJETA\n"
+	.string "de SELLOS, te faltan {STR_VAR_1}.$"
 .else @ENGLISH
 sText_MysteryGiftStampCard:
 	.string "Thank you for using the STAMP CARD\n"
 	.string "System.\p"
 	.string "You have {STR_VAR_1} more to collect to\n"
 	.string "fill your STAMP CARD.$"
+.endif
 .endif
 .endif

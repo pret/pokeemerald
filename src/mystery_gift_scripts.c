@@ -7,6 +7,8 @@
 static const u8 sText_CanceledReadingCard[] = _("Annuler la lecture\nde la carte.");
 #elif ITALIAN
 static const u8 sText_CanceledReadingCard[] = _("Lettura scheda\nannullata.");
+#elif SPANISH
+static const u8 sText_CanceledReadingCard[] = _("Cancelada la lectura\nde la tarjeta.");
 #else //ENGLISH
 static const u8 sText_CanceledReadingCard[] = _("Canceled reading\nthe Card.");
 #endif

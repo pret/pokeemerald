@@ -80,6 +80,29 @@ sText_MysticTicketBagFull:
 	.string "BASE del tuo ZAINO è piena.\p"
 	.string "Torna a trovarmi dopo aver\n"
 	.string "depositato qualcosa nel PC.$"
+.else
+.ifdef SPANISH
+sText_MysticTicketForYou:
+	.string "Gracias por usar el sistema\n"
+	.string "del REGALO MISTERIOSO.\p"
+	.string "Debes de ser {PLAYER}, ¿no?\p"
+	.string "Pues tenemos un ticket para ti.$"
+
+sText_MysticTicketUseAtPort:
+	.string "Parece que puedes usarlo en el\n"
+	.string "puerto de CIUDAD CALAGUA.\p"
+	.string "¿Por qué no curioseas un poco\n"
+	.string "para ver de qué va la cosa?$"
+
+sText_MysticTicketThankYou:
+	.string "Gracias por usar el sistema\n"
+	.string "del REGALO MISTERIOSO.$"
+
+sText_MysticTicketBagFull:
+	.string "Lo siento, {PLAYER}. El BOLSILLO\n"
+	.string "de los OBJETOS CLAVE está lleno.\p"
+	.string "Guarda algo en el PC y vuelve\n"
+	.string "más tarde.$"
 .else @ENGLISH
 sText_MysticTicketForYou:
 	.string "Thank you for using the MYSTERY\n"
@@ -102,5 +125,6 @@ sText_MysticTicketBagFull:
 	.string "Your BAG's KEY ITEMS POCKET is full.\p"
 	.string "Please store something on your PC,\n"
 	.string "then come back for this.$"
+.endif
 .endif
 .endif

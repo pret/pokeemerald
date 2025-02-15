@@ -66,6 +66,29 @@ sText_MysteryGiftBattleCountCard_WonPrize:
 	.string "Speriamo che questo ti aiuti ad\n"
 	.string "impegnarti ancora di più nella\l"
 	.string "lotta!$"
+.else
+.ifdef SPANISH
+sText_MysteryGiftBattleCountCard:
+	.string "Gracias por usar el sistema\n"
+	.string "del REGALO MISTERIOSO.\p"
+	.string "Tu TARJETA de RECUENTO de\n"
+	.string "COMBATES te muestra los récords\p"
+	.string "de los combates mantenidos con\n"
+	.string "ENTRENADORES que tienen la\l"
+	.string "misma TARJETA.\p"
+	.string "Busca ENTRENADORES que\n"
+	.string "tengan la misma TARJETA que tú.\p"
+	.string "Cuando leas las NOTICIAS,\n"
+	.string "podrás ver las clasificaciones.\p"
+	.string "¡No te lo pierdas!$"
+
+sText_MysteryGiftBattleCountCard_WonPrize:
+	.string "Gracias por usar el sistema\n"
+	.string "del REGALO MISTERIOSO.\p"
+	.string "¡Enhorabuena!\p"
+	.string "¡Has ganado un premio por vencer\n"
+	.string "a tu rival en tres combates!\p"
+	.string "¡Esperamos que sigas luchando!$"
 .else @ENGLISH
 sText_MysteryGiftBattleCountCard:
 	.string "Thank you for using the MYSTERY\n"
@@ -87,5 +110,6 @@ sText_MysteryGiftBattleCountCard_WonPrize:
 	.string "three battles!\p"
 	.string "We hope you will be inspired to\n"
 	.string "battle some more.$"
+.endif
 .endif
 .endif
