@@ -26,7 +26,7 @@
 #include "constants/songs.h"
 #include "gba/io_reg.h"
 
-#if FRENCH || ITALIAN
+#if EUROPE
 #define MAILBOXWIN_TITLE_WIDTH             24
 #define MAILBOXWIN_LISTOPTIONS_BASEBLOCK   0x38
 #else //ENGLISH

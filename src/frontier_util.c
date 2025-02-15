@@ -1536,20 +1536,26 @@ static void ShowPyramidResultsWindow(void)
     FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
     StringExpandPlaceholders(gStringVar4, gText_BattleQuestResults);
     PrintAligned(gStringVar4, 2);
+#if ITALIAN
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Lv502, 8, 49, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, 8, 97, TEXT_SKIP_DRAW, NULL);
     PrintHyphens(10);
-#if ITALIAN
     PyramidPrintPrevOrCurrentStreak(FRONTIER_LVL_50, 64, 112, 49);
     PyramidPrintRecordStreak(FRONTIER_LVL_50, 64, 112, 65);
     PyramidPrintPrevOrCurrentStreak(FRONTIER_LVL_OPEN, 64, 112, 97);
     PyramidPrintRecordStreak(FRONTIER_LVL_OPEN, 64, 112, 113);
 #elif SPANISH
+    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Lv502, 16, 49, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, 16, 97, TEXT_SKIP_DRAW, NULL);
+    PrintHyphens(10);
     PyramidPrintPrevOrCurrentStreak(FRONTIER_LVL_50, 72, 124, 49);
     PyramidPrintRecordStreak(FRONTIER_LVL_50, 72, 124, 65);
     PyramidPrintPrevOrCurrentStreak(FRONTIER_LVL_OPEN, 72, 124, 97);
     PyramidPrintRecordStreak(FRONTIER_LVL_OPEN, 72, 124, 113);
 #else
+    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Lv502, 8, 49, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, 8, 97, TEXT_SKIP_DRAW, NULL);
+    PrintHyphens(10);
     PyramidPrintPrevOrCurrentStreak(FRONTIER_LVL_50, 64, 111, 49);
     PyramidPrintRecordStreak(FRONTIER_LVL_50, 64, 111, 65);
     PyramidPrintPrevOrCurrentStreak(FRONTIER_LVL_OPEN, 64, 111, 97);

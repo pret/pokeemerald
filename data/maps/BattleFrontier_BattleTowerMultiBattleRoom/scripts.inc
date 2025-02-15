@@ -90,8 +90,12 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_DoOpponentIntrosLink::
 .else
 .ifdef ITALIAN
 	tower_getopponentintro2 0
+.else
+.ifdef SPANISH
+	tower_getopponentintro2 0
 .else @ENGLISH
 	tower_getopponentintro 0
+.endif
 .endif
 .endif
 	delay 15
@@ -105,8 +109,12 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_DoOpponentIntrosLink::
 .else
 .ifdef ITALIAN
 	tower_getopponentintro2 1
+.else
+.ifdef SPANISH
+	tower_getopponentintro2 1
 .else @ENGLISH
 	tower_getopponentintro 1
+.endif
 .endif
 .endif
 	applymovement LOCALID_OPPONENT_2, BattleFrontier_BattleTowerMultiBattleRoom_Movement_WalkInPlaceLeft
