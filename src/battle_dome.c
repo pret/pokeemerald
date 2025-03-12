@@ -2417,7 +2417,20 @@ static void InitDomeTrainers(void)
         monTypesBits >>= 1;
     }
 
-    monLevel = SetFacilityPtrsGetLevel();
+    #ifdef BUGFIX
+    // Instead of global "SetFacilityPtrsGetLevel()", use the highest level among the actually selected Pokémon.
+    s32 highestLevel = 0;
+    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
+    {
+        trainerId = gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1;
+        s32 level = GetMonData(&gPlayerParty[trainerId], MON_DATA_LEVEL, NULL);
+        if (level > highestLevel)
+            highestLevel = level;
+    }
+    monLevel = highestLevel;
+    #else
+    monLevel = SetFacilityPtrsGetLevel(); //Bug: This function is looking up the highest level in the entire party, not just the selected mons for the challenge.
+    #endif
     rankingScores[0] += (monTypesCount * monLevel) / 20;
 
     // Calculate rankingScores for the opponent trainers
