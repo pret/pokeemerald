@@ -2529,6 +2529,10 @@ static void CalcDomeMonStats(u16 species, int level, int ivs, u8 evBits, u8 natu
             count++;
     }
 
+    #ifdef BUGFIX
+    bits = evBits; //bits must be re-initialized here or (evBits & bits) will always be 0
+    #endif
+    
     resultingEvs = MAX_TOTAL_EVS / count;
     for (i = 0; i < NUM_STATS; bits <<= 1, i++)
     {
