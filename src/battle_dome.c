@@ -2507,7 +2507,12 @@ static void InitDomeTrainers(void)
 {                                                                                           \
     u8 baseStat = gSpeciesInfo[species].base;                                                 \
     stats[statIndex] = (((2 * baseStat + ivs + evs[statIndex] / 4) * level) / 100) + 5;     \
+    #ifdef BUGFIX
+    /* If the stat is over 255, the (u8) cast will cause it to overflow. */    \
+    stats[statIndex] = ModifyStatByNature(nature, stats[statIndex], statIndex);   \
+    #else
     stats[statIndex] = (u8) ModifyStatByNature(nature, stats[statIndex], statIndex);        \
+    #endif
 }
 
 static void CalcDomeMonStats(u16 species, int level, int ivs, u8 evBits, u8 nature, int *stats)
