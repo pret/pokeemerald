@@ -3307,7 +3307,7 @@ extern const u16 gPokedexSearchMenu_Pal[];
 extern const u32 gBerryCheck_Gfx[];
 extern const u32 gBerryCheck_Pal[];
 extern const u32 gBerryTag_Gfx[];
-extern const u32 gBerryTag_Pal[];
+extern const u32 gBerryTag_Tilemap[];
 
 // rayquaza scene gfx
 extern const u32 gRaySceneDuoFight_Groudon_Gfx[];
