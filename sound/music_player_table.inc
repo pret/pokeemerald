@@ -5,6 +5,7 @@
 	.equiv NUM_TRACKS_SE3, 1
 
     .bss
+    .align 2
 
 gMPlayTrack_BGM::
     .space TRACK_SIZE * NUM_TRACKS_BGM
