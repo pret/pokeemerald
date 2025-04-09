@@ -56,7 +56,7 @@ struct FallAnim_Fossil
 
 #define TAG_CEILING_CRUMBLE 4000
 
-#define MIRAGE_TOWER_GFX_LENGTH (sizeof(sBlankTile_Gfx) + sizeof(sMirageTower_Gfx))
+#define MIRAGE_TOWER_GFX_LENGTH (sizeof(sMirageTower_Gfx))
 #define FOSSIL_DISINTEGRATE_LENGTH 0x100
 
 static void PlayerDescendMirageTower(u8);
@@ -72,8 +72,7 @@ static void Task_FossilFallAndSink(u8);
 static void SpriteCB_FallingFossil(struct Sprite *);
 static void UpdateDisintegrationEffect(u8 *, u16, u8, u8, u8);
 
-static const u8 ALIGNED(2) sBlankTile_Gfx[32] = {0};
-static const u8 sMirageTower_Gfx[] = INCBIN_U8("graphics/misc/mirage_tower.4bpp");
+static const ALIGNED(2) u8 sMirageTower_Gfx[] = INCBIN_U8("graphics/misc/mirage_tower.4bpp");
 static const u16 sMirageTowerTilemap[] = INCBIN_U16("graphics/misc/mirage_tower.bin");
 static const u16 sFossil_Pal[] = INCBIN_U16("graphics/object_events/pics/misc/fossil.gbapal"); // Unused
 static const u8 sFossil_Gfx[] = INCBIN_U8("graphics/object_events/pics/misc/fossil.4bpp"); // Duplicate of gObjectEventPic_Fossil
@@ -546,7 +545,7 @@ static void InitMirageTowerShake(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 2:
-        CpuSet(sBlankTile_Gfx, sMirageTowerGfxBuffer, MIRAGE_TOWER_GFX_LENGTH / 2);
+        CpuSet(sMirageTower_Gfx, sMirageTowerGfxBuffer, MIRAGE_TOWER_GFX_LENGTH / 2);
         LoadBgTiles(0, sMirageTowerGfxBuffer, MIRAGE_TOWER_GFX_LENGTH, 0);
         gTasks[taskId].tState++;
         break;
