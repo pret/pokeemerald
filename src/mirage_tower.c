@@ -59,9 +59,6 @@ struct FallAnim_Fossil
 #define MIRAGE_TOWER_GFX_LENGTH (sizeof(sBlankTile_Gfx) + sizeof(sMirageTower_Gfx))
 #define FOSSIL_DISINTEGRATE_LENGTH 0x100
 
-static const struct SpriteSheet sCeilingCrumbleSpriteSheets[];
-static const s16 sCeilingCrumblePositions[][3];
-
 static void PlayerDescendMirageTower(u8);
 static void DoScreenShake(u8);
 static void IncrementCeilingCrumbleFinishedCount(void);
@@ -445,37 +442,43 @@ static void FinishCeilingCrumbleTask(u8 taskId)
     ScriptContext_Enable();
 }
 
+#define sIndex   data[0]
+#define sYOffset data[1]
+
 static void CreateCeilingCrumbleSprites(void)
 {
     u8 i;
     u8 spriteId;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < ARRAY_COUNT(sCeilingCrumblePositions); i++)
     {
         spriteId = CreateSprite(&sSpriteTemplate_CeilingCrumbleLarge, sCeilingCrumblePositions[i][0] + 120, sCeilingCrumblePositions[i][1], 8);
         gSprites[spriteId].oam.priority = 0;
-        gSprites[spriteId].oam.paletteNum = 0;
-        gSprites[spriteId].data[0] = i;
+        gSprites[spriteId].oam.paletteNum = PALSLOT_PLAYER; // These sprites use color index 11 from the player's sprite palette
+        gSprites[spriteId].sIndex = i;
     }
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < ARRAY_COUNT(sCeilingCrumblePositions); i++)
     {
         spriteId = CreateSprite(&sSpriteTemplate_CeilingCrumbleSmall, sCeilingCrumblePositions[i][0] + 115, sCeilingCrumblePositions[i][1] - 3, 8);
         gSprites[spriteId].oam.priority = 0;
-        gSprites[spriteId].oam.paletteNum = 0;
-        gSprites[spriteId].data[0] = i;
+        gSprites[spriteId].oam.paletteNum = PALSLOT_PLAYER;
+        gSprites[spriteId].sIndex = i;
     }
 }
 
 static void SpriteCB_CeilingCrumble(struct Sprite *sprite)
 {
-    sprite->data[1] += 2;
-    sprite->y2 = sprite->data[1] / 2;
-    if(((sprite->y) + (sprite->y2)) >  sCeilingCrumblePositions[sprite->data[0]][2])
+    sprite->sYOffset += 2;
+    sprite->y2 = sprite->sYOffset / 2;
+    if ((sprite->y + sprite->y2) >  sCeilingCrumblePositions[sprite->sIndex][2])
     {
         DestroySprite(sprite);
         IncrementCeilingCrumbleFinishedCount();
     }
 }
+
+#undef sIndex
+#undef sYOffset
 
 static void SetInvisibleMirageTowerMetatiles(void)
 {
