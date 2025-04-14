@@ -174,8 +174,8 @@ struct BerryBlender
     u16 progressBarValue;
     u16 maxProgressBarValue;
     u16 centerScale;
-    u16 bg_X;
-    u16 bg_Y;
+    s16 bg_X;
+    s16 bg_Y;
     u8 opponentTaskIds[BLENDER_MAX_PLAYERS - 1];
     u8 perfectOpponents; // for debugging, NPCs will always hit Best
     u16 scores[BLENDER_MAX_PLAYERS][NUM_SCORE_TYPES];

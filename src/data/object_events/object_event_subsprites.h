@@ -1,3 +1,6 @@
+#ifndef OBJECT_EVENT_SUBSPRITES_H
+#define OBJECT_EVENT_SUBSPRITES_H
+
 static const struct Subsprite sOamTable_16x16_0[] = {
     {
         .x = -8,
@@ -1528,3 +1531,5 @@ static const struct SubspriteTable sOamTables_88x32[] = {
     {ARRAY_COUNT(sOamTable_88x32_3), sOamTable_88x32_3},
     {ARRAY_COUNT(sOamTable_88x32_3), sOamTable_88x32_3}
 };
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef POKEMON_LEVEL_UP_LEARNSETS_H
+#define POKEMON_LEVEL_UP_LEARNSETS_H
+
 #define LEVEL_UP_MOVE(lvl, move) ((lvl << 9) | move)
 
 static const u16 sBulbasaurLevelUpLearnset[] = {
@@ -5615,3 +5618,5 @@ static const u16 sChimechoLevelUpLearnset[] = {
     LEVEL_UP_MOVE(46, MOVE_PSYCHIC),
     LEVEL_UP_END
 };
+
+#endif

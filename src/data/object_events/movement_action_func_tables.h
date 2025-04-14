@@ -1,3 +1,7 @@
+#if CLANGD
+#pragma clang diagnostic ignored "-Wtentative-definition-array"
+#endif
+
 u8 MovementAction_FaceDown_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_FaceDown_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_PauseSpriteAnim(struct ObjectEvent *, struct Sprite *);

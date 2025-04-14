@@ -1,5 +1,7 @@
 #include "gba/m4a_internal.h"
 
+#undef MOD // modulo macro from global.h
+
 // Some of these functions have different signatures, so we need to make this
 // an array of void pointers or a struct. It's simpler to just make it an array
 // for now.
@@ -243,7 +245,7 @@ const u8 gClockTable[] =
 #define BENDR  0xc1
 #define LFOS   0xc2
 #define LFODL  0xc3
-#define MOD    0xc4
+#define MOD  0xc4
 #define MODT   0xc5
 #define TUNE   0xc8
 

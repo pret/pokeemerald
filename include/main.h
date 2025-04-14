@@ -1,6 +1,7 @@
 #ifndef GUARD_MAIN_H
 #define GUARD_MAIN_H
 
+#include <stdint.h>
 typedef void (*MainCallback)(void);
 typedef void (*IntrCallback)(void);
 typedef void (*IntrFunc)(void);
@@ -31,7 +32,7 @@ struct Main
     /*0x034*/ bool16 watchedKeysPressed; // whether one of the watched keys was pressed
     /*0x036*/ u16 watchedKeysMask;       // bit mask for watched keys
 
-    /*0x038*/ struct OamData oamBuffer[128];
+    /*0x038*/ struct OamData ALIGNED(4) oamBuffer[128];
 
     /*0x438*/ u8 state;
 

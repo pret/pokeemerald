@@ -1,6 +1,8 @@
 #ifndef GUARD_LINKMANAGER_H
 #define GUARD_LINKMANAGER_H
 
+#include "librfu.h"
+
 //-----------------------------------------------------------------
 // Constant definition
 //-----------------------------------------------------------------

@@ -1,6 +1,16 @@
 #ifndef GUARD_BATTLE_PYRAMID_H
 #define GUARD_BATTLE_PYRAMID_H
 
+// Const rom data.
+#define ABILITY_RANDOM 2 // For wild mons data.
+
+struct PyramidWildMon {
+  u16 species;
+  u8 lvl;
+  u8 abilityNum;
+  u16 moves[MAX_MON_MOVES];
+};
+
 void CallBattlePyramidFunction(void);
 u16 LocalIdToPyramidTrainerId(u8 localId);
 bool8 GetBattlePyramidTrainerFlag(u8 eventId);

@@ -4452,7 +4452,14 @@ static void AnimBowMon_Step1_Callback(struct Sprite *sprite)
     {
         sprite->data[3] = gBattlerSpriteIds[gBattleAnimAttacker];
         PrepareBattlerSpriteForRotScale(sprite->data[3], ST_OAM_OBJ_NORMAL);
+#ifdef CLANGD
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wconstant-conversion"
+#endif
         sprite->data[4] = (sprite->data[6] = GetBattlerSide(gBattleAnimAttacker)) ? 0x300 : 0xFFFFFD00;
+#ifdef CLANGD
+#pragma clang diagnostic pop
+#endif
         sprite->data[5] = 0;
     }
 

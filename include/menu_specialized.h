@@ -133,8 +133,8 @@ u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices);
 void InitMoveRelearnerWindows(bool8 useContestWindow);
 
 // Level up window
-void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bgClr, u8 fgClr, u8 shadowClr);
-void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgClr, u8 fgClr, u8 shadowClr);
+void DrawLevelUpWindowPg1(u16 windowId, s16 *statsBefore, s16 *statsAfter, u8 bgClr, u8 fgClr, u8 shadowClr);
+void DrawLevelUpWindowPg2(u16 windowId, s16 *currStats, u8 bgClr, u8 fgClr, u8 shadowClr);
 void GetMonLevelUpWindowStats(struct Pokemon *mon, u16 *currStats);
 
 #endif // GUARD_MENU_SPECIALIZED_H

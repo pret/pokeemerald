@@ -6,6 +6,15 @@
 // Exported type declarations
 #define MAP_NAME_LENGTH 16
 
+#define MAP_WIDTH 28
+#define MAP_HEIGHT 15
+#define MAPCURSOR_X_MIN 1
+#define MAPCURSOR_Y_MIN 2
+#define MAPCURSOR_X_MAX (MAPCURSOR_X_MIN + MAP_WIDTH - 1)
+#define MAPCURSOR_Y_MAX (MAPCURSOR_Y_MIN + MAP_HEIGHT - 1)
+
+#define FLYDESTICON_RED_OUTLINE 6
+
 enum
 {
     MAP_INPUT_NONE,

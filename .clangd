@@ -1,0 +1,93 @@
+Diagnostics:
+  ClangTidy:
+    FastCheckFilter: None
+---
+If:
+  PathMatch: (src|include)/.*.[ch]
+Diagnostics:
+  UnusedIncludes: None
+  MissingIncludes: None
+CompileFlags:
+  Add:
+    - "--target=arm"
+    - "-mcpu=arm7tdmi"
+    - "-mthumb"
+    - "-mabi=apcs-gnu"
+    - "-mtune=arm7tdmi"
+    - "-march=armv4t"
+    - "-Iinclude"
+    - "-I../include"
+    - "-I../../include"
+    - "-DCLANGD=1"
+    - "-DMODERN=1"
+    - "--verbose"
+    - "-isysroot../tools/agbcc/include"
+    - "-isystem../tools/agbcc/include"
+    - "-isystem../../tools/agbcc/include"
+    - "-isystem../../../tools/agbcc/include"
+    - "-resource-dir=../tools/agbcc/include"
+    - "-Wno-gnu-alignof-expression"
+    - "-Wno-gnu-folding-constant"
+    - "-Wno-single-bit-bitfield-constant-conversion"
+    - "-Wno-trigraphs"
+---
+If:
+  PathMatch:
+   - (src|include)/[^/]+.[ch]
+   - (src|include)/data/.*.[ch]
+Diagnostics:
+  UnusedIncludes: None
+  MissingIncludes: None
+CompileFlags:
+  Add:
+    - "-includeglobal.h"
+---
+If:
+  PathMatch: ".*\\.h$"
+CompileFlags:
+  Add:
+    - "-xc-header"
+---
+If:
+  PathMatch: src/data/.*.h
+CompileFlags:
+  Add:
+   - "-iquote../../../include"
+   - "-include../../../include/trainer_hill.h" # needs explicit path because there's another file called trainer_hill.h in src/data/battle_frontier
+   - "-include./description.h"
+   - "-include./tiles.h"
+   - "-includeapprentice.h"
+   - "-includebard_music.h"
+   - "-includebattle_pyramid.h"
+   - "-includebattle_tower.h"
+   - "-includeconstants/abilities.h"
+   - "-includeconstants/battle_frontier_mons.h"
+   - "-includeconstants/battle_frontier.h"
+   - "-includeconstants/battle_pyramid.h"
+   - "-includeconstants/battle_tent_mons.h"
+   - "-includeconstants/battle_tent_trainers.h"
+   - "-includeconstants/decorations.h"
+   - "-includeconstants/easy_chat.h"
+   - "-includeconstants/event_object_movement.h"
+   - "-includeconstants/event_objects.h"
+   - "-includeconstants/field_effects.h"
+   - "-includeconstants/item_effects.h"
+   - "-includeconstants/items.h"
+   - "-includeconstants/mauville_old_man.h"
+   - "-includeconstants/metatile_labels.h"
+   - "-includeconstants/moves.h"
+   - "-includeconstants/party_menu.h"
+   - "-includeconstants/region_map_sections.h"
+   - "-includeconstants/songs.h"
+   - "-includeconstants/tms_hms.h"
+   - "-includeconstants/trainers.h"
+   - "-includedata.h"
+   - "-includedecoration.h"
+   - "-includeeasy_chat.h"
+   - "-includeevent_object_movement.h"
+   - "-includefield_effect_helpers.h"
+   - "-includefield_effect.h"
+   - "-includefieldmap.h"
+   - "-includegraphics.h"
+   - "-includeregion_map.h"
+   - "-includestrings.h"

@@ -1,4 +1,9 @@
-﻿static const union AnimCmd sAnim_None_1[] =
+﻿#if CLANGD
+#pragma clang diagnostic ignored "-Wtentative-definition-array"
+#endif
+static const union AnimCmd sAnim_GeneralFrame0[];
+
+static const union AnimCmd sAnim_None_1[] =
 {
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_FRAME(1, 30),
@@ -4822,7 +4827,7 @@ static const union AnimCmd *const sAnims_##name[] = \
     sAnim_##name##_2,                               \
 }
 
-SINGLE_ANIMATION(None);
+    SINGLE_ANIMATION(None);
 SINGLE_ANIMATION(Bulbasaur);
 SINGLE_ANIMATION(Ivysaur);
 SINGLE_ANIMATION(Venusaur);

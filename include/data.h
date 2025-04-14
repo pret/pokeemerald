@@ -3,6 +3,10 @@
 
 #include "constants/moves.h"
 
+#define SPECIES_SPRITE(species, sprite) [SPECIES_##species] = {sprite, MON_PIC_SIZE, SPECIES_##species}
+#define SPECIES_PAL(species, pal)       [SPECIES_##species] = {pal, SPECIES_##species}
+#define SPECIES_SHINY_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species + SPECIES_SHINY_TAG}
+
 #define SPECIES_SHINY_TAG 500
 
 #define MAX_TRAINER_ITEMS 4

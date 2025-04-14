@@ -1,3 +1,6 @@
+#ifndef OBJECT_EVENTS_ANIMS_H
+#define OBJECT_EVENTS_ANIMS_H
+
 static const union AnimCmd sAnim_StayStill[] =
 {
     ANIMCMD_FRAME(0, 8),
@@ -1175,3 +1178,5 @@ static const struct StepAnimTable sStepAnimTables[] = {
     },
     {},
 };
+
+#endif
