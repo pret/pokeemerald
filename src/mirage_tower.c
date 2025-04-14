@@ -56,11 +56,8 @@ struct FallAnim_Fossil
 
 #define TAG_CEILING_CRUMBLE 4000
 
-#define MIRAGE_TOWER_GFX_LENGTH (sizeof(sBlankTile_Gfx) + sizeof(sMirageTower_Gfx))
+#define MIRAGE_TOWER_GFX_LENGTH (sizeof(sMirageTower_Gfx))
 #define FOSSIL_DISINTEGRATE_LENGTH 0x100
-
-static const struct SpriteSheet sCeilingCrumbleSpriteSheets[];
-static const s16 sCeilingCrumblePositions[][3];
 
 static void PlayerDescendMirageTower(u8);
 static void DoScreenShake(u8);
@@ -75,8 +72,7 @@ static void Task_FossilFallAndSink(u8);
 static void SpriteCB_FallingFossil(struct Sprite *);
 static void UpdateDisintegrationEffect(u8 *, u16, u8, u8, u8);
 
-static const u8 ALIGNED(2) sBlankTile_Gfx[32] = {0};
-static const u8 sMirageTower_Gfx[] = INCBIN_U8("graphics/misc/mirage_tower.4bpp");
+static const ALIGNED(2) u8 sMirageTower_Gfx[] = INCBIN_U8("graphics/misc/mirage_tower.4bpp");
 static const u16 sMirageTowerTilemap[] = INCBIN_U16("graphics/misc/mirage_tower.bin");
 static const u16 sFossil_Pal[] = INCBIN_U16("graphics/object_events/pics/misc/fossil.gbapal"); // Unused
 static const u8 sFossil_Gfx[] = INCBIN_U8("graphics/object_events/pics/misc/fossil.4bpp"); // Duplicate of gObjectEventPic_Fossil
@@ -445,37 +441,46 @@ static void FinishCeilingCrumbleTask(u8 taskId)
     ScriptContext_Enable();
 }
 
+#define sIndex   data[0]
+#define sYOffset data[1]
+
 static void CreateCeilingCrumbleSprites(void)
 {
     u8 i;
     u8 spriteId;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < ARRAY_COUNT(sCeilingCrumblePositions); i++)
     {
         spriteId = CreateSprite(&sSpriteTemplate_CeilingCrumbleLarge, sCeilingCrumblePositions[i][0] + 120, sCeilingCrumblePositions[i][1], 8);
         gSprites[spriteId].oam.priority = 0;
-        gSprites[spriteId].oam.paletteNum = 0;
-        gSprites[spriteId].data[0] = i;
+        // These sprites use color index 11 from the player's sprite palette. This probably wasn't intentional.
+        // The palettes for Brendan and May have different shades of green at this index, so the color of these sprites changes
+        // depending on the player's gender (and neither shade of green particularly fits a crumbling yellow/brown ceiling).
+        gSprites[spriteId].oam.paletteNum = PALSLOT_PLAYER;
+        gSprites[spriteId].sIndex = i;
     }
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < ARRAY_COUNT(sCeilingCrumblePositions); i++)
     {
         spriteId = CreateSprite(&sSpriteTemplate_CeilingCrumbleSmall, sCeilingCrumblePositions[i][0] + 115, sCeilingCrumblePositions[i][1] - 3, 8);
         gSprites[spriteId].oam.priority = 0;
-        gSprites[spriteId].oam.paletteNum = 0;
-        gSprites[spriteId].data[0] = i;
+        gSprites[spriteId].oam.paletteNum = PALSLOT_PLAYER;
+        gSprites[spriteId].sIndex = i;
     }
 }
 
 static void SpriteCB_CeilingCrumble(struct Sprite *sprite)
 {
-    sprite->data[1] += 2;
-    sprite->y2 = sprite->data[1] / 2;
-    if(((sprite->y) + (sprite->y2)) >  sCeilingCrumblePositions[sprite->data[0]][2])
+    sprite->sYOffset += 2;
+    sprite->y2 = sprite->sYOffset / 2;
+    if ((sprite->y + sprite->y2) >  sCeilingCrumblePositions[sprite->sIndex][2])
     {
         DestroySprite(sprite);
         IncrementCeilingCrumbleFinishedCount();
     }
 }
+
+#undef sIndex
+#undef sYOffset
 
 static void SetInvisibleMirageTowerMetatiles(void)
 {
@@ -543,7 +548,7 @@ static void InitMirageTowerShake(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 2:
-        CpuSet(sBlankTile_Gfx, sMirageTowerGfxBuffer, MIRAGE_TOWER_GFX_LENGTH / 2);
+        CpuSet(sMirageTower_Gfx, sMirageTowerGfxBuffer, MIRAGE_TOWER_GFX_LENGTH / 2);
         LoadBgTiles(0, sMirageTowerGfxBuffer, MIRAGE_TOWER_GFX_LENGTH, 0);
         gTasks[taskId].tState++;
         break;
