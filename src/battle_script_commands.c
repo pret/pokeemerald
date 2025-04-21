@@ -2669,7 +2669,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
             case MOVE_EFFECT_SP_DEF_MINUS_1:
             case MOVE_EFFECT_ACC_MINUS_1:
             case MOVE_EFFECT_EVS_MINUS_1:
-                if (ChangeStatBuffs((s8) (SET_STAT_BUFF_VALUE(1) | STAT_BUFF_NEGATIVE),
+                if (ChangeStatBuffs((s8)(SET_STAT_BUFF_VALUE(1) | STAT_BUFF_NEGATIVE),
                                     gBattleCommunication[MOVE_EFFECT_BYTE] - MOVE_EFFECT_ATK_MINUS_1 + 1,
                                     affectsUser, 0))
                 {
@@ -2711,7 +2711,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
             case MOVE_EFFECT_SP_DEF_MINUS_2:
             case MOVE_EFFECT_ACC_MINUS_2:
             case MOVE_EFFECT_EVS_MINUS_2:
-                if (ChangeStatBuffs((s8) (SET_STAT_BUFF_VALUE(2) | STAT_BUFF_NEGATIVE),
+                if (ChangeStatBuffs((s8)(SET_STAT_BUFF_VALUE(2) | STAT_BUFF_NEGATIVE),
                                     gBattleCommunication[MOVE_EFFECT_BYTE] - MOVE_EFFECT_ATK_MINUS_2 + 1,
                                     affectsUser, 0))
                 {

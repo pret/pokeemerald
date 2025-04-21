@@ -9453,7 +9453,7 @@ u32 GetBoxMonLevelAt(u8 boxId, u8 boxPosition)
 #ifdef BUGFIX
     else
 #endif
-        lvl = 0; // NOLINT(readability-misleading-indentation)
+    lvl = 0;
 
     return lvl;
 }

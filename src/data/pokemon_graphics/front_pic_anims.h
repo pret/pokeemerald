@@ -4827,7 +4827,7 @@ static const union AnimCmd *const sAnims_##name[] = \
     sAnim_##name##_2,                               \
 }
 
-    SINGLE_ANIMATION(None);
+SINGLE_ANIMATION(None);
 SINGLE_ANIMATION(Bulbasaur);
 SINGLE_ANIMATION(Ivysaur);
 SINGLE_ANIMATION(Venusaur);
