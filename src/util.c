@@ -124,12 +124,16 @@ u8 CreateInvisibleSpriteWithCallback(void (*callback)(struct Sprite *))
     return sprite;
 }
 
-void StoreWordInTwoHalfwords(u16 *h, u32 w) {
-  h[0] = (u16)(w);
-  h[1] = (u16)(w >> 16);
+void StoreWordInTwoHalfwords(u16 *h, u32 w)
+{
+    h[0] = (u16)(w);
+    h[1] = (u16)(w >> 16);
 }
 
-void LoadWordFromTwoHalfwords(u16 *h, u32 *w) { *w = h[0] | (s16)h[1] << 16; }
+void LoadWordFromTwoHalfwords(u16 *h, u32 *w)
+{
+    *w = h[0] | (s16)h[1] << 16;
+}
 
 void SetBgAffineStruct(struct BgAffineSrcData *src, u32 texX, u32 texY, s16 scrX, s16 scrY, s16 sx, s16 sy, u16 alpha)
 {
