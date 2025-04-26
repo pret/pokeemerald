@@ -204,7 +204,7 @@ u32 BattlePalace_TryEscapeStatus(u8 battlerId)
     if (effect == 2)
     {
         gActiveBattler = battlerId;
-        BtlController_EmitSetMonData(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
+        BtlController_EmitSetMonData(BATTLELINKCOMMTYPE_ENGINE_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
         MarkBattlerForControllerExec(gActiveBattler);
     }
 

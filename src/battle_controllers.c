@@ -659,11 +659,11 @@ static void PrepareBufferDataTransfer(u8 bufferId, u8 *data, u16 size)
     {
         switch (bufferId)
         {
-        case BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER:
+        case BATTLELINKCOMMTYPE_ENGINE_TO_CONTROLLER:
             for (i = 0; i < size; data++, i++)
                 gBattleBufferA[gActiveBattler][i] = *data;
             break;
-        case BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE:
+        case BATTLELINKCOMMTYPE_CONTROLLER_TO_ENGINE:
             for (i = 0; i < size; data++, i++)
                 gBattleBufferB[gActiveBattler][i] = *data;
             break;
@@ -724,7 +724,7 @@ enum
 };
 
 // We want to send a message. Place it into the "send" buffer.
-// First argument is a BATTLELINKMSGTYPE_...
+// First argument is a BATTLELINKCOMMTYPE_...
 void PrepareBufferDataTransferLink(u8 bufferId, u16 size, u8 *data)
 {
     s32 alignedSize;
@@ -922,7 +922,7 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
 
         switch (BYTE_TO_RECEIVE(0))
         {
-        case BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER:
+        case BATTLELINKCOMMTYPE_ENGINE_TO_CONTROLLER:
             if (IS_BATTLE_CONTROLLER_ACTIVE_ON_LOCAL(battlerId))
                 return;
 
@@ -937,10 +937,10 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
                 gEffectBattler      = BYTE_TO_RECEIVE(LINK_BUFF_EFFECT_BATTLER);
             }
             break;
-        case BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE:
+        case BATTLELINKCOMMTYPE_CONTROLLER_TO_ENGINE:
             memcpy(gBattleBufferB[battlerId], &gLinkBattleRecvBuffer[gTasks[taskId].tCurrentBlock_Start + LINK_BUFF_DATA], blockSize);
             break;
-        case BATTLELINKMSGTYPE_CONTROLLER_BECOMING_IDLE:
+        case BATTLELINKCOMMTYPE_CONTROLLER_BECOMING_IDLE:
             playerId = BYTE_TO_RECEIVE(LINK_BUFF_DATA);
             MARK_BATTLE_CONTROLLER_IDLE_FOR_PLAYER(battlerId, playerId);
             break;

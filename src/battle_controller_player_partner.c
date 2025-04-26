@@ -332,7 +332,7 @@ static void Task_GiveExpToMon(u8 taskId)
             gainedExp -= nextLvlExp - currExp;
             savedActiveBank = gActiveBattler;
             gActiveBattler = battlerId;
-            BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, RET_VALUE_LEVELED_UP, gainedExp);
+            BtlController_EmitTwoReturnValues(BATTLELINKCOMMTYPE_CONTROLLER_TO_ENGINE, RET_VALUE_LEVELED_UP, gainedExp);
             gActiveBattler = savedActiveBank;
 
             if (IsDoubleBattle() == TRUE
@@ -411,7 +411,7 @@ static void Task_GiveExpWithExpBar(u8 taskId)
                 gainedExp -= expOnNextLvl - currExp;
                 savedActiveBank = gActiveBattler;
                 gActiveBattler = battlerId;
-                BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, RET_VALUE_LEVELED_UP, gainedExp);
+                BtlController_EmitTwoReturnValues(BATTLELINKCOMMTYPE_CONTROLLER_TO_ENGINE, RET_VALUE_LEVELED_UP, gainedExp);
                 gActiveBattler = savedActiveBank;
                 gTasks[taskId].func = Task_LaunchLvlUpAnim;
             }
@@ -584,7 +584,7 @@ static void PlayerPartnerBufferExecCompleted(void)
     {
         u8 playerId = GetMultiplayerId();
 
-        PrepareBufferDataTransferLink(BATTLELINKMSGTYPE_CONTROLLER_BECOMING_IDLE, 4, &playerId);
+        PrepareBufferDataTransferLink(BATTLELINKCOMMTYPE_CONTROLLER_BECOMING_IDLE, 4, &playerId);
         gBattleBufferA[gActiveBattler][0] = CONTROLLER_TERMINATOR_NOP;
     }
     else
@@ -626,7 +626,7 @@ static void PlayerPartnerHandleGetMonData(void)
             monToCheck >>= 1;
         }
     }
-    BtlController_EmitDataTransfer(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, size, monData);
+    BtlController_EmitDataTransfer(BATTLELINKCOMMTYPE_CONTROLLER_TO_ENGINE, size, monData);
     PlayerPartnerBufferExecCompleted();
 }
 
@@ -1527,7 +1527,7 @@ static void PlayerPartnerHandleChooseMove(void)
             gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
     }
 
-    BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, 10, chosenMoveId | (gBattlerTarget << 8));
+    BtlController_EmitTwoReturnValues(BATTLELINKCOMMTYPE_CONTROLLER_TO_ENGINE, 10, chosenMoveId | (gBattlerTarget << 8));
     PlayerPartnerBufferExecCompleted();
 }
 
@@ -1557,7 +1557,7 @@ static void PlayerPartnerHandleChoosePokemon(void)
     }
 
     *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = chosenMonId;
-    BtlController_EmitChosenMonReturnValue(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, chosenMonId, NULL);
+    BtlController_EmitChosenMonReturnValue(BATTLELINKCOMMTYPE_CONTROLLER_TO_ENGINE, chosenMonId, NULL);
     PlayerPartnerBufferExecCompleted();
 }
 

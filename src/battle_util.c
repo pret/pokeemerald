@@ -759,7 +759,7 @@ void PressurePPLose(u8 target, u8 attacker, u16 move)
     if (MOVE_IS_PERMANENT(attacker, moveIndex))
     {
         gActiveBattler = attacker;
-        BtlController_EmitSetMonData(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, REQUEST_PPMOVE1_BATTLE + moveIndex, 0, 1, &gBattleMons[gActiveBattler].pp[moveIndex]);
+        BtlController_EmitSetMonData(BATTLELINKCOMMTYPE_ENGINE_TO_CONTROLLER, REQUEST_PPMOVE1_BATTLE + moveIndex, 0, 1, &gBattleMons[gActiveBattler].pp[moveIndex]);
         MarkBattlerForControllerExec(gActiveBattler);
     }
 }
@@ -791,7 +791,7 @@ void PressurePPLoseOnUsingImprison(u8 attacker)
     if (imprisonPos != MAX_MON_MOVES && MOVE_IS_PERMANENT(attacker, imprisonPos))
     {
         gActiveBattler = attacker;
-        BtlController_EmitSetMonData(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, REQUEST_PPMOVE1_BATTLE + imprisonPos, 0, 1, &gBattleMons[gActiveBattler].pp[imprisonPos]);
+        BtlController_EmitSetMonData(BATTLELINKCOMMTYPE_ENGINE_TO_CONTROLLER, REQUEST_PPMOVE1_BATTLE + imprisonPos, 0, 1, &gBattleMons[gActiveBattler].pp[imprisonPos]);
         MarkBattlerForControllerExec(gActiveBattler);
     }
 }
@@ -822,7 +822,7 @@ void PressurePPLoseOnUsingPerishSong(u8 attacker)
     if (perishSongPos != MAX_MON_MOVES && MOVE_IS_PERMANENT(attacker, perishSongPos))
     {
         gActiveBattler = attacker;
-        BtlController_EmitSetMonData(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, REQUEST_PPMOVE1_BATTLE + perishSongPos, 0, 1, &gBattleMons[gActiveBattler].pp[perishSongPos]);
+        BtlController_EmitSetMonData(BATTLELINKCOMMTYPE_ENGINE_TO_CONTROLLER, REQUEST_PPMOVE1_BATTLE + perishSongPos, 0, 1, &gBattleMons[gActiveBattler].pp[perishSongPos]);
         MarkBattlerForControllerExec(gActiveBattler);
     }
 }
@@ -905,7 +905,7 @@ bool8 WasUnableToUseMove(u8 battler)
 void PrepareStringBattle(u16 stringId, u8 battler)
 {
     gActiveBattler = battler;
-    BtlController_EmitPrintString(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, stringId);
+    BtlController_EmitPrintString(BATTLELINKCOMMTYPE_ENGINE_TO_CONTROLLER, stringId);
     MarkBattlerForControllerExec(gActiveBattler);
 }
 
@@ -1634,7 +1634,7 @@ u8 DoBattlerEndTurnEffects(void)
                             gBattleCommunication[MULTISTRING_CHOOSER] = 1;
                             BattleScriptExecute(BattleScript_MonWokeUpInUproar);
                             gActiveBattler = gBattlerAttacker;
-                            BtlController_EmitSetMonData(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
+                            BtlController_EmitSetMonData(BATTLELINKCOMMTYPE_ENGINE_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
                             MarkBattlerForControllerExec(gActiveBattler);
                             break;
                         }
@@ -1759,7 +1759,7 @@ u8 DoBattlerEndTurnEffects(void)
                     {
                         CancelMultiTurnMoves(gActiveBattler);
                         gBattleMons[gActiveBattler].status1 |= STATUS1_SLEEP_TURN((Random() & 3) + 2); // 2-5 turns of sleep
-                        BtlController_EmitSetMonData(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
+                        BtlController_EmitSetMonData(BATTLELINKCOMMTYPE_ENGINE_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
                         MarkBattlerForControllerExec(gActiveBattler);
                         gEffectBattler = gActiveBattler;
                         BattleScriptExecute(BattleScript_YawnMakesAsleep);
@@ -2269,7 +2269,7 @@ u8 AtkCanceller_UnableToUseMove(void)
     if (effect == 2)
     {
         gActiveBattler = gBattlerAttacker;
-        BtlController_EmitSetMonData(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
+        BtlController_EmitSetMonData(BATTLELINKCOMMTYPE_ENGINE_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
         MarkBattlerForControllerExec(gActiveBattler);
     }
     return effect;
@@ -2633,7 +2633,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                         gBattleMons[battler].status2 &= ~STATUS2_NIGHTMARE;  // fix nightmare glitch
                         gBattleScripting.battler = gActiveBattler = battler;
                         BattleScriptPushCursorAndCallback(BattleScript_ShedSkinActivates);
-                        BtlController_EmitSetMonData(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[battler].status1);
+                        BtlController_EmitSetMonData(BATTLELINKCOMMTYPE_ENGINE_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[battler].status1);
                         MarkBattlerForControllerExec(gActiveBattler);
                         effect++;
                     }
@@ -2945,7 +2945,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     gBattlescriptCurrInstr = BattleScript_AbilityCuredStatus;
                     gBattleScripting.battler = battler;
                     gActiveBattler = battler;
-                    BtlController_EmitSetMonData(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
+                    BtlController_EmitSetMonData(BATTLELINKCOMMTYPE_ENGINE_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
                     MarkBattlerForControllerExec(gActiveBattler);
                     return effect;
                 }
@@ -3373,7 +3373,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                         PREPARE_MOVE_BUFFER(gBattleTextBuff1, move);
 
                         BattleScriptExecute(BattleScript_BerryPPHealEnd2);
-                        BtlController_EmitSetMonData(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, i + REQUEST_PPMOVE1_BATTLE, 0, 1, &changedPP);
+                        BtlController_EmitSetMonData(BATTLELINKCOMMTYPE_ENGINE_TO_CONTROLLER, i + REQUEST_PPMOVE1_BATTLE, 0, 1, &changedPP);
                         MarkBattlerForControllerExec(gActiveBattler);
                         effect = ITEM_PP_CHANGE;
                     }
@@ -3608,7 +3608,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 switch (effect)
                 {
                 case ITEM_STATUS_CHANGE:
-                    BtlController_EmitSetMonData(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[battlerId].status1);
+                    BtlController_EmitSetMonData(BATTLELINKCOMMTYPE_ENGINE_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[battlerId].status1);
                     MarkBattlerForControllerExec(gActiveBattler);
                     break;
                 case ITEM_PP_CHANGE:
@@ -3759,7 +3759,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 gBattleScripting.battler = battlerId;
                 gPotentialItemEffectBattler = battlerId;
                 gActiveBattler = battlerId;
-                BtlController_EmitSetMonData(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
+                BtlController_EmitSetMonData(BATTLELINKCOMMTYPE_ENGINE_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
                 MarkBattlerForControllerExec(gActiveBattler);
                 break;
             }
