@@ -561,7 +561,7 @@ static void OpponentHandleGetMonData(void)
             monToCheck >>= 1;
         }
     }
-    BtlController_EmitDataTransfer(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, size, monData);
+    BtlController_EmitDataTransfer(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, size, monData);
     OpponentBufferExecCompleted();
 }
 
@@ -881,7 +881,7 @@ static void OpponentHandleGetRawMonData(void)
     for (i = 0; i < gBattleBufferA[gActiveBattler][2]; i++)
         dst[i] = src[i];
 
-    BtlController_EmitDataTransfer(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, gBattleBufferA[gActiveBattler][2], dst);
+    BtlController_EmitDataTransfer(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, gBattleBufferA[gActiveBattler][2], dst);
     OpponentBufferExecCompleted();
 }
 
@@ -1552,7 +1552,7 @@ static void OpponentHandleChooseMove(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
     {
-        BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, 10, ChooseMoveAndTargetInBattlePalace());
+        BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, 10, ChooseMoveAndTargetInBattlePalace());
         OpponentBufferExecCompleted();
     }
     else
@@ -1569,13 +1569,13 @@ static void OpponentHandleChooseMove(void)
             switch (chosenMoveId)
             {
             case AI_CHOICE_WATCH:
-                BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, B_ACTION_SAFARI_WATCH_CAREFULLY, 0);
+                BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, B_ACTION_SAFARI_WATCH_CAREFULLY, 0);
                 break;
             case AI_CHOICE_FLEE:
-                BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, B_ACTION_RUN, 0);
+                BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, B_ACTION_RUN, 0);
                 break;
             case 6:
-                BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, 15, gBattlerTarget);
+                BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, 15, gBattlerTarget);
                 break;
             default:
                 if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
@@ -1586,7 +1586,7 @@ static void OpponentHandleChooseMove(void)
                     if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
                         gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
                 }
-                BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, 10, (chosenMoveId) | (gBattlerTarget << 8));
+                BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, 10, (chosenMoveId) | (gBattlerTarget << 8));
                 break;
             }
             OpponentBufferExecCompleted();
@@ -1601,11 +1601,11 @@ static void OpponentHandleChooseMove(void)
             } while (move == MOVE_NONE);
 
             if (gBattleMoves[move].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
-                BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, 10, (chosenMoveId) | (gActiveBattler << 8));
+                BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, 10, (chosenMoveId) | (gActiveBattler << 8));
             else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, 10, (chosenMoveId) | (GetBattlerAtPosition(Random() & 2) << 8));
+                BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, 10, (chosenMoveId) | (GetBattlerAtPosition(Random() & 2) << 8));
             else
-                BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, 10, (chosenMoveId) | (GetBattlerAtPosition(B_POSITION_PLAYER_LEFT) << 8));
+                BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, 10, (chosenMoveId) | (GetBattlerAtPosition(B_POSITION_PLAYER_LEFT) << 8));
 
             OpponentBufferExecCompleted();
         }
@@ -1614,7 +1614,7 @@ static void OpponentHandleChooseMove(void)
 
 static void OpponentHandleChooseItem(void)
 {
-    BtlController_EmitOneReturnValue(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, *(gBattleStruct->chosenItem + (gActiveBattler / 2) * 2));
+    BtlController_EmitOneReturnValue(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, *(gBattleStruct->chosenItem + (gActiveBattler / 2) * 2));
     OpponentBufferExecCompleted();
 }
 
@@ -1671,7 +1671,7 @@ static void OpponentHandleChoosePokemon(void)
 
 
     *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = chosenMonId;
-    BtlController_EmitChosenMonReturnValue(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, chosenMonId, NULL);
+    BtlController_EmitChosenMonReturnValue(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, chosenMonId, NULL);
     OpponentBufferExecCompleted();
 }
 

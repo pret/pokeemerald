@@ -517,7 +517,7 @@ static void RecordedPlayerHandleGetMonData(void)
             monToCheck >>= 1;
         }
     }
-    BtlController_EmitDataTransfer(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, size, monData);
+    BtlController_EmitDataTransfer(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, size, monData);
     RecordedPlayerBufferExecCompleted();
 }
 
@@ -1414,7 +1414,7 @@ static void ChooseActionInBattlePalace(void)
 {
     if (gBattleCommunication[4] >= gBattlersCount / 2)
     {
-        BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, RecordedBattle_GetBattlerAction(gActiveBattler), 0);
+        BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, RecordedBattle_GetBattlerAction(gActiveBattler), 0);
         RecordedPlayerBufferExecCompleted();
     }
 }
@@ -1427,7 +1427,7 @@ static void RecordedPlayerHandleChooseAction(void)
     }
     else
     {
-        BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, RecordedBattle_GetBattlerAction(gActiveBattler), 0);
+        BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, RecordedBattle_GetBattlerAction(gActiveBattler), 0);
         RecordedPlayerBufferExecCompleted();
     }
 }
@@ -1441,13 +1441,13 @@ static void RecordedPlayerHandleChooseMove(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
     {
-        BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, 10, ChooseMoveAndTargetInBattlePalace());
+        BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, 10, ChooseMoveAndTargetInBattlePalace());
     }
     else
     {
         u8 moveId = RecordedBattle_GetBattlerAction(gActiveBattler);
         u8 target = RecordedBattle_GetBattlerAction(gActiveBattler);
-        BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, 10, moveId | (target << 8));
+        BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, 10, moveId | (target << 8));
     }
 
     RecordedPlayerBufferExecCompleted();
@@ -1461,7 +1461,7 @@ static void RecordedPlayerHandleChooseItem(void)
 static void RecordedPlayerHandleChoosePokemon(void)
 {
     *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = RecordedBattle_GetBattlerAction(gActiveBattler);
-    BtlController_EmitChosenMonReturnValue(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, *(gBattleStruct->monToSwitchIntoId + gActiveBattler), NULL);
+    BtlController_EmitChosenMonReturnValue(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, *(gBattleStruct->monToSwitchIntoId + gActiveBattler), NULL);
     RecordedPlayerBufferExecCompleted();
 }
 

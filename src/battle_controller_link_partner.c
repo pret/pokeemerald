@@ -442,7 +442,7 @@ static void LinkPartnerHandleGetMonData(void)
             monToCheck >>= 1;
         }
     }
-    BtlController_EmitDataTransfer(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, size, monData);
+    BtlController_EmitDataTransfer(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, size, monData);
     LinkPartnerBufferExecCompleted();
 }
 

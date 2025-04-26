@@ -176,16 +176,16 @@ static void HandleInputChooseAction(void)
         switch (gActionSelectionCursor[gActiveBattler])
         {
         case 0:
-            BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, B_ACTION_SAFARI_BALL, 0);
+            BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, B_ACTION_SAFARI_BALL, 0);
             break;
         case 1:
-            BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, B_ACTION_SAFARI_POKEBLOCK, 0);
+            BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, B_ACTION_SAFARI_POKEBLOCK, 0);
             break;
         case 2:
-            BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, B_ACTION_SAFARI_GO_NEAR, 0);
+            BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, B_ACTION_SAFARI_GO_NEAR, 0);
             break;
         case 3:
-            BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, B_ACTION_SAFARI_RUN, 0);
+            BtlController_EmitTwoReturnValues(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, B_ACTION_SAFARI_RUN, 0);
             break;
         }
         SafariBufferExecCompleted();
@@ -280,7 +280,7 @@ static void CompleteWhenChosePokeblock(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
-        BtlController_EmitOneReturnValue(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, gSpecialVar_ItemId);
+        BtlController_EmitOneReturnValue(BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, gSpecialVar_ItemId);
         SafariBufferExecCompleted();
     }
 }
