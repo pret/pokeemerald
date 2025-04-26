@@ -834,7 +834,7 @@ static void UNUSED MarkAllBattlersForControllerExec(void)
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         for (i = 0; i < gBattlersCount; i++)
-            gBattleControllerExecFlags |= gBitTable[i] << (32 - MAX_BATTLERS_COUNT);
+            gBattleControllerExecFlags |= MARK_BATTLE_CONTROLLER_MESSAGE_OUTBOUND_OVER_LINK(i);
     }
     else
     {
