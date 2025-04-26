@@ -1615,7 +1615,7 @@ void DrawLevelUpWindowPg2(u16 windowId, s16 *currStats, u8 bgClr, u8 fgClr, u8 s
     }
 }
 
-void GetMonLevelUpWindowStats(struct Pokemon *mon, u16 *currStats)
+void GetMonLevelUpWindowStats(struct Pokemon *mon, s16 *currStats)
 {
     currStats[STAT_HP]    = GetMonData(mon, MON_DATA_MAX_HP);
     currStats[STAT_ATK]   = GetMonData(mon, MON_DATA_ATK);
