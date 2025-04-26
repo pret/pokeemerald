@@ -73,25 +73,25 @@ enum {
 // directly.
 
 #define MARK_BATTLE_CONTROLLER_ACTIVE_ON_LOCAL(battlerId) \
-   do { gBattleControllerExecFlags |= gBitTable[battlerId]; } while (0)
+   gBattleControllerExecFlags |= gBitTable[battlerId]
 
 #define MARK_BATTLE_CONTROLLER_IDLE_ON_LOCAL(battlerId) \
-   do { gBattleControllerExecFlags &= ~gBitTable(battlerId); } while (0)
+   gBattleControllerExecFlags &= ~gBitTable(battlerId)
 
 #define IS_BATTLE_CONTROLLER_ACTIVE_ON_LOCAL(battlerId) \
    (gBattleControllerExecFlags & gBitTable[battlerId])
 
 #define MARK_BATTLE_CONTROLLER_MESSAGE_OUTBOUND_OVER_LINK(battlerId) \
-   do { gBattleControllerExecFlags |= gBitTable[battlerId] << 28; } while (0)
+   gBattleControllerExecFlags |= gBitTable[battlerId] << (32 - MAX_BATTLERS_COUNT)
 
 #define MARK_BATTLE_CONTROLLER_MESSAGE_SYNCHRONIZED_OVER_LINK(battlerId) \
-   do { gBattleControllerExecFlags &= ~((1 << 28) << (battlerId)); } while (0)
+   gBattleControllerExecFlags &= ~((1 << 28) << (battlerId))
 
 #define MARK_BATTLE_CONTROLLER_ACTIVE_FOR_PLAYER(battlerId, playerId) \
-   do { gBattleControllerExecFlags |= gBitTable[battlerId] << ((playerId) << 2); } while (0)
+   gBattleControllerExecFlags |= gBitTable[battlerId] << ((playerId) << 2)
 
 #define MARK_BATTLE_CONTROLLER_IDLE_FOR_PLAYER(battlerId, playerId) \
-   do { gBattleControllerExecFlags &= ~(gBitTable[battlerId] << ((playerId) * 4)); } while (0)
+   gBattleControllerExecFlags &= ~(gBitTable[battlerId] << ((playerId) * 4))
 
 #define IS_BATTLE_CONTROLLER_ACTIVE_FOR_PLAYER(battlerId, playerId) \
    (gBattleControllerExecFlags & (gBitTable[battlerId] << ((playerId) * 4)))
@@ -108,9 +108,9 @@ enum {
 // Special arguments for Battle Controller functions.
 
 enum {
-   BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER     = 0, // gBattleBufferA
-   BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE     = 1, // gBattleBufferB
-   BATTLELINKMSGTYPE_CONTROLLER_BECOMING_IDLE = 2,
+   BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, // gBattleBufferA
+   BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE, // gBattleBufferB
+   BATTLELINKMSGTYPE_CONTROLLER_BECOMING_IDLE
 };
 
 enum {
