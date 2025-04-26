@@ -400,7 +400,7 @@ static void LinkPartnerBufferExecCompleted(void)
     {
         u8 playerId = GetMultiplayerId();
 
-        PrepareBufferDataTransferLink(2, 4, &playerId);
+        PrepareBufferDataTransferLink(BATTLELINKMSGTYPE_CONTROLLER_BECOMING_IDLE, 4, &playerId);
         gBattleBufferA[gActiveBattler][0] = CONTROLLER_TERMINATOR_NOP;
     }
     else
@@ -442,7 +442,7 @@ static void LinkPartnerHandleGetMonData(void)
             monToCheck >>= 1;
         }
     }
-    BtlController_EmitDataTransfer(BUFFER_B, size, monData);
+    BtlController_EmitDataTransfer(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER, size, monData);
     LinkPartnerBufferExecCompleted();
 }
 

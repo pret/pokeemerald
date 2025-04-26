@@ -66,9 +66,10 @@ enum {
 
 // Special arguments for Battle Controller functions.
 
-enum { // Values given to the emit functions to choose gBattleBufferA or gBattleBufferB
-    BUFFER_A,
-    BUFFER_B
+enum {
+   BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER     = 0, // gBattleBufferA
+   BATTLELINKMSGTYPE_CONTROLLER_TO_ENGINE     = 1, // gBattleBufferB
+   BATTLELINKMSGTYPE_CONTROLLER_BECOMING_IDLE = 2,
 };
 
 enum {
