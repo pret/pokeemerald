@@ -104,14 +104,14 @@ extern const struct SpriteFrameImage gBattlerPicTable_PlayerLeft[];
 extern const struct SpriteFrameImage gBattlerPicTable_OpponentLeft[];
 extern const struct SpriteFrameImage gBattlerPicTable_PlayerRight[];
 extern const struct SpriteFrameImage gBattlerPicTable_OpponentRight[];
-extern const struct SpriteFrameImage gTrainerBackPicTable_Brendan[];
-extern const struct SpriteFrameImage gTrainerBackPicTable_May[];
-extern const struct SpriteFrameImage gTrainerBackPicTable_Red[];
-extern const struct SpriteFrameImage gTrainerBackPicTable_Leaf[];
-extern const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireBrendan[];
-extern const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireMay[];
-extern const struct SpriteFrameImage gTrainerBackPicTable_Wally[];
-extern const struct SpriteFrameImage gTrainerBackPicTable_Steven[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Brendan[4];
+extern const struct SpriteFrameImage gTrainerBackPicTable_May[4];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Red[5];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Leaf[5];
+extern const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireBrendan[4];
+extern const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireMay[4];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Wally[4];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Steven[4];
 
 extern const union AffineAnimCmd *const gAffineAnims_BattleSpritePlayerSide[];
 extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteOpponentSide[];
@@ -142,5 +142,8 @@ extern const struct Trainer gTrainers[];
 extern const u8 gTrainerClassNames[][13];
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 extern const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1];
+
+extern const union AnimCmd sAnim_GeneralFrame0[];
+extern const union AnimCmd sAnim_GeneralFrame3[];
 
 #endif // GUARD_DATA_H

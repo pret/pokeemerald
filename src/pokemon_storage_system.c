@@ -339,13 +339,6 @@ enum {
     WIN_ITEM_DESC,
 };
 
-struct Wallpaper
-{
-    const u32 *tiles;
-    const u32 *tilemap;
-    const u16 *palettes;
-};
-
 struct StorageMessage
 {
     const u8 *text;

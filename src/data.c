@@ -46,7 +46,7 @@ const struct SpriteFrameImage gBattlerPicTable_OpponentRight[] =
     {BATTLER_OFFSET(15), MON_PIC_SIZE},
 };
 
-const struct SpriteFrameImage gTrainerBackPicTable_Brendan[] =
+const struct SpriteFrameImage gTrainerBackPicTable_Brendan[4] =
 {
     {gTrainerBackPic_Brendan + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
     {gTrainerBackPic_Brendan + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
@@ -54,7 +54,7 @@ const struct SpriteFrameImage gTrainerBackPicTable_Brendan[] =
     {gTrainerBackPic_Brendan + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
 };
 
-const struct SpriteFrameImage gTrainerBackPicTable_May[] =
+const struct SpriteFrameImage gTrainerBackPicTable_May[4] =
 {
     {gTrainerBackPic_May + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
     {gTrainerBackPic_May + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
@@ -62,7 +62,7 @@ const struct SpriteFrameImage gTrainerBackPicTable_May[] =
     {gTrainerBackPic_May + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
 };
 
-const struct SpriteFrameImage gTrainerBackPicTable_Red[] =
+const struct SpriteFrameImage gTrainerBackPicTable_Red[5] =
 {
     {gTrainerBackPic_Red + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
     {gTrainerBackPic_Red + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
@@ -71,7 +71,7 @@ const struct SpriteFrameImage gTrainerBackPicTable_Red[] =
     {gTrainerBackPic_Red + TRAINER_PIC_SIZE * 4, TRAINER_PIC_SIZE},
 };
 
-const struct SpriteFrameImage gTrainerBackPicTable_Leaf[] =
+const struct SpriteFrameImage gTrainerBackPicTable_Leaf[5] =
 {
     {gTrainerBackPic_Leaf + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
     {gTrainerBackPic_Leaf + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
@@ -80,7 +80,7 @@ const struct SpriteFrameImage gTrainerBackPicTable_Leaf[] =
     {gTrainerBackPic_Leaf + TRAINER_PIC_SIZE * 4, TRAINER_PIC_SIZE},
 };
 
-const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireBrendan[] =
+const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireBrendan[4] =
 {
     {gTrainerBackPic_RubySapphireBrendan + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
     {gTrainerBackPic_RubySapphireBrendan + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
@@ -88,7 +88,7 @@ const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireBrendan[] =
     {gTrainerBackPic_RubySapphireBrendan + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
 };
 
-const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireMay[] =
+const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireMay[4] =
 {
     {gTrainerBackPic_RubySapphireMay + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
     {gTrainerBackPic_RubySapphireMay + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
@@ -96,7 +96,7 @@ const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireMay[] =
     {gTrainerBackPic_RubySapphireMay + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
 };
 
-const struct SpriteFrameImage gTrainerBackPicTable_Wally[] =
+const struct SpriteFrameImage gTrainerBackPicTable_Wally[4] =
 {
     {gTrainerBackPic_Wally + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
     {gTrainerBackPic_Wally + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
@@ -104,7 +104,7 @@ const struct SpriteFrameImage gTrainerBackPicTable_Wally[] =
     {gTrainerBackPic_Wally + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
 };
 
-const struct SpriteFrameImage gTrainerBackPicTable_Steven[] =
+const struct SpriteFrameImage gTrainerBackPicTable_Steven[4] =
 {
     {gTrainerBackPic_Steven + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
     {gTrainerBackPic_Steven + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
@@ -112,13 +112,13 @@ const struct SpriteFrameImage gTrainerBackPicTable_Steven[] =
     {gTrainerBackPic_Steven + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
 };
 
-static const union AnimCmd sAnim_GeneralFrame0[] =
+const union AnimCmd sAnim_GeneralFrame0[] =
 {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_GeneralFrame3[] =
+const union AnimCmd sAnim_GeneralFrame3[] =
 {
     ANIMCMD_FRAME(3, 0),
     ANIMCMD_END,
@@ -317,8 +317,6 @@ const union AnimCmd *const gAnims_MonPic[MAX_MON_PIC_FRAMES] =
 #include "data/pokemon_graphics/front_pic_table.h"
 #include "data/pokemon_graphics/unknown_table.h"
 
-#include "data/trainer_parties.h"
-#include "data/text/trainer_class_names.h"
 #include "data/trainers.h"
 #include "data/text/species_names.h"
 #include "data/text/move_names.h"

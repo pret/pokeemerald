@@ -1,3 +1,6 @@
+#include "data.h"
+#include "sprite.h"
+
 const struct MonCoords gTrainerBackPicCoords[] =
 {
     [TRAINER_BACK_PIC_BRENDAN] = {.size = 8, .y_offset = 4},

@@ -59,27 +59,6 @@ enum {
 #define tPrintedPage       data[14]
 #define tTaskId_UpdatePage data[15]
 
-#define NUM_MON_SLIDES 71
-
-struct CreditsData
-{
-    u16 monToShow[NUM_MON_SLIDES]; // List of Pokémon species ids that will show during the credits
-    u16 imgCounter; //how many mon images have been shown
-    u16 nextImgPos; //if the next image spawns left/center/right
-    u16 currShownMon; //index into monToShow
-    u16 numMonToShow; //number of Pokémon to show, always NUM_MON_SLIDES after determine function
-    u16 caughtMonIds[NATIONAL_DEX_COUNT]; //temporary location to hold a condensed array of all caught Pokémon
-    u16 numCaughtMon; //count of filled spaces in caughtMonIds
-    u16 unused[7];
-};
-
-struct CreditsEntry
-{
-    u8 unk; // Never read
-    bool8 isTitle;
-    const u8 *text;
-};
-
 static EWRAM_DATA s16 UNUSED sUnkVar = 0; // Never read, only set to 0
 static EWRAM_DATA u16 sSavedTaskId = 0;
 EWRAM_DATA bool8 gHasHallOfFameRecords = 0;

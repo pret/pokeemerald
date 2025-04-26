@@ -1,7 +1,6 @@
 ﻿#if CLANGD
 #pragma clang diagnostic ignored "-Wtentative-definition-array"
 #endif
-static const union AnimCmd sAnim_GeneralFrame0[];
 
 static const union AnimCmd sAnim_None_1[] =
 {
