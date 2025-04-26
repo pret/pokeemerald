@@ -3427,7 +3427,7 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
 
         if (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_LEFT)
         {
-            BtlController_EmitDrawTrainerPic(BUFFER_A);
+            BtlController_EmitDrawTrainerPic(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER);
             MarkBattlerForControllerExec(gActiveBattler);
         }
 
@@ -3435,7 +3435,7 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
         {
             if (GetBattlerPosition(gActiveBattler) == B_POSITION_OPPONENT_LEFT)
             {
-                BtlController_EmitDrawTrainerPic(BUFFER_A);
+                BtlController_EmitDrawTrainerPic(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER);
                 MarkBattlerForControllerExec(gActiveBattler);
             }
             if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT
@@ -3460,7 +3460,7 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
                 {
                     HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBattler].species), FLAG_SET_SEEN, gBattleMons[gActiveBattler].personality);
                 }
-                BtlController_EmitLoadMonSprite(BUFFER_A);
+                BtlController_EmitLoadMonSprite(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER);
                 MarkBattlerForControllerExec(gActiveBattler);
                 gBattleResults.lastOpponentSpecies = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES, NULL);
             }
@@ -3471,14 +3471,14 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
             if (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT
              || GetBattlerPosition(gActiveBattler) == B_POSITION_OPPONENT_RIGHT)
             {
-                BtlController_EmitDrawTrainerPic(BUFFER_A);
+                BtlController_EmitDrawTrainerPic(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER);
                 MarkBattlerForControllerExec(gActiveBattler);
             }
         }
 
         if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && GetBattlerPosition(gActiveBattler) == B_POSITION_OPPONENT_RIGHT)
         {
-            BtlController_EmitDrawTrainerPic(BUFFER_A);
+            BtlController_EmitDrawTrainerPic(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER);
             MarkBattlerForControllerExec(gActiveBattler);
         }
 
@@ -3631,7 +3631,7 @@ static void BattleIntroOpponent2SendsOutMonAnimation(void)
     {
         if (GetBattlerPosition(gActiveBattler) == position)
         {
-            BtlController_EmitIntroTrainerBallThrow(BUFFER_A);
+            BtlController_EmitIntroTrainerBallThrow(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER);
             MarkBattlerForControllerExec(gActiveBattler);
         }
     }
@@ -3669,7 +3669,7 @@ static void BattleIntroOpponent1SendsOutMonAnimation(void)
     {
         if (GetBattlerPosition(gActiveBattler) == position)
         {
-            BtlController_EmitIntroTrainerBallThrow(BUFFER_A);
+            BtlController_EmitIntroTrainerBallThrow(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER);
             MarkBattlerForControllerExec(gActiveBattler);
             if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS))
             {
@@ -3761,7 +3761,7 @@ static void BattleIntroPlayer2SendsOutMonAnimation(void)
     {
         if (GetBattlerPosition(gActiveBattler) == position)
         {
-            BtlController_EmitIntroTrainerBallThrow(BUFFER_A);
+            BtlController_EmitIntroTrainerBallThrow(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER);
             MarkBattlerForControllerExec(gActiveBattler);
         }
     }
@@ -3800,7 +3800,7 @@ static void BattleIntroPlayer1SendsOutMonAnimation(void)
     {
         if (GetBattlerPosition(gActiveBattler) == position)
         {
-            BtlController_EmitIntroTrainerBallThrow(BUFFER_A);
+            BtlController_EmitIntroTrainerBallThrow(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER);
             MarkBattlerForControllerExec(gActiveBattler);
             if (gBattleTypeFlags & (BATTLE_TYPE_MULTI))
             {
@@ -4286,7 +4286,7 @@ static void HandleTurnActionSelectionState(void)
                     if (gBattleMons[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)))].status2 & STATUS2_MULTIPLETURNS
                         || gBattleMons[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)))].status2 & STATUS2_RECHARGE)
                     {
-                        BtlController_EmitEndBounceEffect(BUFFER_A);
+                        BtlController_EmitEndBounceEffect(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER);
                         MarkBattlerForControllerExec(gActiveBattler);
                         return;
                     }
@@ -4314,7 +4314,7 @@ static void HandleTurnActionSelectionState(void)
                     {
                         RecordedBattle_ClearBattlerAction(GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler))), 3);
                     }
-                    BtlController_EmitEndBounceEffect(BUFFER_A);
+                    BtlController_EmitEndBounceEffect(BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER);
                     MarkBattlerForControllerExec(gActiveBattler);
                     return;
                 }

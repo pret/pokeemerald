@@ -73,10 +73,10 @@ enum {
 // directly.
 
 #define MARK_BATTLE_CONTROLLER_ACTIVE_ON_LOCAL(battlerId) \
-   do { gBattleControllerExecFlags |= gBitTable[battlerId] } while (0)
+   do { gBattleControllerExecFlags |= gBitTable[battlerId]; } while (0)
 
 #define MARK_BATTLE_CONTROLLER_IDLE_ON_LOCAL(battlerId) \
-   do { gBattleControllerExecFlags &= ~gBitTable(battlerId) } while (0)
+   do { gBattleControllerExecFlags &= ~gBitTable(battlerId); } while (0)
 
 #define IS_BATTLE_CONTROLLER_ACTIVE_ON_LOCAL(battlerId) \
    (gBattleControllerExecFlags & gBitTable[battlerId])
@@ -85,7 +85,7 @@ enum {
    do { gBattleControllerExecFlags |= gBitTable[battlerId] << 28; } while (0)
 
 #define MARK_BATTLE_CONTROLLER_MESSAGE_SYNCHRONIZED_OVER_LINK(battlerId) \
-   do { gBattleControllerExecFlags &= ~((1 << 28) << (battlerId)); }
+   do { gBattleControllerExecFlags &= ~((1 << 28) << (battlerId)); } while (0)
 
 #define MARK_BATTLE_CONTROLLER_ACTIVE_FOR_PLAYER(battlerId, playerId) \
    do { gBattleControllerExecFlags |= gBitTable[battlerId] << ((playerId) << 2); } while (0)
@@ -103,7 +103,7 @@ enum {
     | (gBitTable[battlerId] << 4)  \
     | (gBitTable[battlerId] << 8)  \
     | (gBitTable[battlerId] << 12) \
-   )
+   ))
 
 // Special arguments for Battle Controller functions.
 
