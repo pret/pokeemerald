@@ -827,6 +827,7 @@ void PressurePPLoseOnUsingPerishSong(u8 attacker)
     }
 }
 
+// See comments for MarkBattlerForControllerExec.
 static void UNUSED MarkAllBattlersForControllerExec(void)
 {
     int i;

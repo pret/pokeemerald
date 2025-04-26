@@ -96,6 +96,9 @@ enum {
 #define IS_BATTLE_CONTROLLER_ACTIVE_FOR_PLAYER(battlerId, playerId) \
    (gBattleControllerExecFlags & (gBitTable[battlerId] << ((playerId) * 4)))
 
+// This actually checks if a specific controller is active on any player or if 
+// *any* controlleris pending sync over link communications, but the macro name 
+// can only be so specific before it just gets ridiculous.
 #define IS_BATTLE_CONTROLLER_ACTIVE_OR_PENDING_SYNC_ANYWHERE(battlerId) \
    (gBattleControllerExecFlags & ( \
       (gBitTable[battlerId])       \
