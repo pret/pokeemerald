@@ -855,6 +855,13 @@ static void Task_HandleSendLinkBuffersData(u8 taskId)
 }
 
 // We have received a message. Place it into the "receive" buffer.
+//
+// Counterintuitively, we also "receive" the outbound messages that
+// we send to other players. The GBA basically stores communicated
+// data for all four players, so inbound and outbound data can be
+// handled uniformly unless a game specifically decides to do
+// otherwise. Pokemon, evidently, did not specifically decide to do
+// otherwise.
 void TryReceiveLinkBattleData(void)
 {
     u8 i;
@@ -916,7 +923,7 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
         switch (BYTE_TO_RECEIVE(0))
         {
         case BATTLELINKMSGTYPE_ENGINE_TO_CONTROLLER:
-            if (gBattleControllerExecFlags & gBitTable[battlerId])
+            if (IS_BATTLE_CONTROLLER_ACTIVE_ON_LOCAL(battlerId))
                 return;
 
             memcpy(gBattleBufferA[battlerId], &BYTE_TO_RECEIVE(LINK_BUFF_DATA), blockSize);
@@ -935,7 +942,7 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
             break;
         case BATTLELINKMSGTYPE_CONTROLLER_BECOMING_IDLE:
             playerId = BYTE_TO_RECEIVE(LINK_BUFF_DATA);
-            gBattleControllerExecFlags &= ~(gBitTable[battlerId] << (playerId * 4));
+            MARK_BATTLE_CONTROLLER_IDLE_FOR_PLAYER(battlerId, playerId);
             break;
         }
 

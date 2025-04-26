@@ -839,26 +839,38 @@ static void UNUSED MarkAllBattlersForControllerExec(void)
     else
     {
         for (i = 0; i < gBattlersCount; i++)
-            gBattleControllerExecFlags |= gBitTable[i];
+            MARK_BATTLE_CONTROLLER_ACTIVE_ON_LOCAL(i);
     }
 }
 
+// Called when the battle engine dispatches a message to a battle controller.
+//
+// During a singleplayer battle, we just immediately mark the controller as
+// active. During a multiplayer link, we do things a little differently. We
+// set a bit indicating that we're sending a message over the link. That
+// message will be received by all other players... *and* by us, the player
+// sending it, at which point we'll invoke MarkBattlerReceivedLinkData,
+// below, to clear the "we're sending a message" bit and set the "controller 
+// is now active" bit.
 void MarkBattlerForControllerExec(u8 battlerId)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-        gBattleControllerExecFlags |= gBitTable[battlerId] << (32 - MAX_BATTLERS_COUNT);
+        MARK_BATTLE_CONTROLLER_MESSAGE_OUTBOUND_OVER_LINK(battlerId);
     else
-        gBattleControllerExecFlags |= gBitTable[battlerId];
+        MARK_BATTLE_CONTROLLER_ACTIVE_ON_LOCAL(battlerId);
 }
 
+// Called when a message dispatched from the battle engine to a battle 
+// controller is received over link communications. All players assume
+// that if they've received the message, everyone else has as well.
 void MarkBattlerReceivedLinkData(u8 battlerId)
 {
     s32 i;
 
     for (i = 0; i < GetLinkPlayerCount(); i++)
-        gBattleControllerExecFlags |= gBitTable[battlerId] << (i << 2);
+        MARK_BATTLE_CONTROLLER_ACTIVE_FOR_PLAYER(battlerId, i);
 
-    gBattleControllerExecFlags &= ~((1 << 28) << battlerId);
+    MARK_BATTLE_CONTROLLER_MESSAGE_SYNCHRONIZED_OVER_LINK(battlerId);
 }
 
 void CancelMultiTurnMoves(u8 battler)
