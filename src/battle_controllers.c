@@ -852,7 +852,7 @@ void TryReceiveLinkBattleData(void)
 static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
 {
     u16 blockSize;
-    u8 battlerId;
+    u8 battler;
     u8 var;
 
     if (gTasks[taskId].data[15] != gTasks[taskId].data[14])
@@ -863,17 +863,17 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
             gTasks[taskId].data[12] = 0;
             gTasks[taskId].data[15] = 0;
         }
-        battlerId = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_ACTIVE_BATTLER];
+        battler = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_ACTIVE_BATTLER];
         blockSize = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_SIZE_LO] | (gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_SIZE_HI] << 8);
 
         switch (gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 0])
         {
         case 0:
-            if (gBattleControllerExecFlags & gBitTable[battlerId])
+            if (gBattleControllerExecFlags & gBitTable[battler])
                 return;
 
-            memcpy(gBattleBufferA[battlerId], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA], blockSize);
-            MarkBattlerReceivedLinkData(battlerId);
+            memcpy(gBattleBufferA[battler], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA], blockSize);
+            MarkBattlerReceivedLinkData(battler);
 
             if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
             {
@@ -884,11 +884,11 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
             }
             break;
         case 1:
-            memcpy(gBattleBufferB[battlerId], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA], blockSize);
+            memcpy(gBattleBufferB[battler], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA], blockSize);
             break;
         case 2:
             var = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA];
-            gBattleControllerExecFlags &= ~(gBitTable[battlerId] << (var * 4));
+            gBattleControllerExecFlags &= ~(gBitTable[battler] << (var * 4));
             break;
         }
 
