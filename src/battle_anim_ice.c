@@ -1371,9 +1371,9 @@ static void AnimTask_Hail2(u8 taskId)
             if (GenerateHailParticle(task->tHailStructId, task->tHailAffineAnimNum, taskId, 1))
                 task->tSpriteCount++;
 
-            if (++task->tHailAffineAnimNum == 3) // i.e. ARRAY_COUNT(sAffineAnims_HailParticle)
+            if (++task->tHailAffineAnimNum == (int)ARRAY_COUNT(sAffineAnims_HailParticle))
             {
-                if (++task->tHailStructId == 10) // i.e. ARRAY_COUNT(sHailCoordData)
+                if (++task->tHailStructId == (int)ARRAY_COUNT(sHailCoordData))
                     task->tState++;
                 else
                     task->tState--;
