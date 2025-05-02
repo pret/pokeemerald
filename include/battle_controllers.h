@@ -111,9 +111,18 @@ enum {
 // Special arguments for Battle Controller functions.
 
 enum {
-   BATTLELINKCOMMTYPE_ENGINE_TO_CONTROLLER, // gBattleBufferA
-   BATTLELINKCOMMTYPE_CONTROLLER_TO_ENGINE, // gBattleBufferB
-   BATTLELINKCOMMTYPE_CONTROLLER_BECOMING_IDLE
+   // For commands sent from the core battle engine to a controller.
+   B_COMM_TO_CONTROLLER, // gBattleBufferA
+   
+   // For replies sent from a controller to the core battle engine.
+   B_COMM_TO_ENGINE, // gBattleBufferB
+   
+   // During local play, a controller must directly mark itself as 
+   // inactive when it's done processing, whether or not it sends 
+   // a reply. During multiplayer, it must NOT directly mark itself 
+   // as inactive, but instead send one of these, with the player's 
+   // multiplayer ID as data.
+   B_COMM_CONTROLLER_IS_DONE
 };
 
 enum {
