@@ -28,9 +28,7 @@ BattleFrontier_Mart_Pokemart:
 	.2byte ITEM_ZINC
 	.2byte ITEM_CARBOS
 	.2byte ITEM_HP_UP
-	.2byte ITEM_NONE
-	release
-	end
+	pokemartlistend
 
 BattleFrontier_Mart_EventScript_OldMan::
 	msgbox BattleFrontier_Mart_Text_ChaperonGrandson, MSGBOX_NPC

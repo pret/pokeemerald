@@ -5,8 +5,6 @@
 
 #define MAX_SPRITE_COPY_REQUESTS 64
 
-#define OAM_MATRIX_COUNT 32
-
 #define sAnchorX data[6]
 #define sAnchorY data[7]
 
@@ -1090,9 +1088,13 @@ void ContinueAffineAnim(struct Sprite *sprite)
         u8 matrixNum = GetSpriteMatrixNum(sprite);
 
         if (sAffineAnimStates[matrixNum].delayCounter)
+        {
             AffineAnimDelay(matrixNum, sprite);
+        }
         else if (sprite->affineAnimPaused)
+        {
             return;
+        }
         else
         {
             s16 type;
