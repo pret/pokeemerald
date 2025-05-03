@@ -1,3 +1,7 @@
+#if CLANGD
+#pragma clang diagnostic ignored "-Wtentative-definition-array"
+#endif
+
 // unused and unkown
 static const union AnimCmd sUnusedAnim_Blaziken_1[] =
 {

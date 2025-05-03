@@ -61,7 +61,7 @@ static u16 sUnusedVar; // Never read
 
 COMMON_DATA u16 gKeyRepeatStartDelay = 0;
 COMMON_DATA bool8 gLinkTransferringData = 0;
-COMMON_DATA struct Main gMain = {0};
+COMMON_DATA struct Main ALIGNED(8) gMain = {0};
 COMMON_DATA u16 gKeyRepeatContinueDelay = 0;
 COMMON_DATA bool8 gSoftResetDisabled = 0;
 COMMON_DATA IntrFunc gIntrTable[INTR_COUNT] = {0};

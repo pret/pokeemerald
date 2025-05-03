@@ -1,3 +1,5 @@
+#include "battle_frontier_trainer_mons.h"
+
 const struct BattleFrontierTrainer gBattleFrontierTrainers[FRONTIER_TRAINERS_COUNT] =
 {
     [FRONTIER_TRAINER_BRADY] = {

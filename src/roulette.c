@@ -40,7 +40,7 @@
 #define NUM_ROULETTE_SLOTS (NUM_BOARD_COLORS * NUM_BOARD_POKES)
 
 // The degree change between each slot on the roulette wheel
-#define DEGREES_PER_SLOT (360 / NUM_ROULETTE_SLOTS)
+#define DEGREES_PER_SLOT ((u16)(360 / NUM_ROULETTE_SLOTS))
 
 // Where in the slot the ball will drop when landing
 #define SLOT_MIDPOINT (DEGREES_PER_SLOT / 2 - 1)

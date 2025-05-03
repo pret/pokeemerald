@@ -475,7 +475,7 @@ STATIC_ASSERT(sizeof(((struct BattleStruct *)0)->palaceFlags) * 8 >= MAX_BATTLER
 #define GET_STAT_BUFF_ID(n) ((n & 0xF))              // first four bits 0x1, 0x2, 0x4, 0x8
 #define GET_STAT_BUFF_VALUE2(n) ((n & 0xF0))
 #define GET_STAT_BUFF_VALUE(n) (((n >> 4) & 7))      // 0x10, 0x20, 0x40
-#define STAT_BUFF_NEGATIVE 0x80                     // 0x80, the sign bit
+#define STAT_BUFF_NEGATIVE (0x80)                    // 0x80, the sign bit
 
 #define SET_STAT_BUFF_VALUE(n) ((((n) << 4) & 0xF0))
 

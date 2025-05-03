@@ -1,3 +1,6 @@
+#include "./trainer_parties.h"
+#include "./text/trainer_class_names.h"
+
 const struct Trainer gTrainers[] = {
     [TRAINER_NONE] =
     {

@@ -1,6 +1,12 @@
 #ifndef GUARD_BARD_MUSIC_H
 #define GUARD_BARD_MUSIC_H
 
+// Indicates that the previous sound should be held.
+#define PREV_BARD_SOUND {.songId = NUM_PHONEME_SONGS}
+
+// Invalid sound, indicates the end of the sounds for the word.
+#define NULL_BARD_SOUND {.songId = PHONEME_ID_NONE}
+
 // The maximum number of BardSoundTemplates/BardSounds there can be for each easy chat word.
 #define MAX_BARD_SOUNDS_PER_WORD 6
 

@@ -1,3 +1,5 @@
+#include "../../include/trade.h"
+
 #define GFXTAG_MENU_TEXT       200 // Used as a base tag in CB2_CreateTradeMenu and CB2_ReturnToTradeMenu
 #define GFXTAG_CURSOR          300
 #define GFXTAG_LINK_MON_GLOW   5550

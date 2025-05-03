@@ -1,3 +1,6 @@
+#ifndef OBJECT_EVENTS_BASE_OAM_H
+#define OBJECT_EVENTS_BASE_OAM_H
+
 const struct OamData gObjectEventBaseOam_8x8 = {
     .shape = SPRITE_SHAPE(8x8),
     .size = SPRITE_SIZE(8x8),
@@ -45,3 +48,5 @@ const struct OamData gObjectEventBaseOam_64x64 = {
     .size = SPRITE_SIZE(64x64),
     .priority = 2
 };
+
+#endif

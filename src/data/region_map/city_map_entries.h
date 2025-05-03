@@ -1,3 +1,9 @@
+#include "pokenav_region_map.h"
+
+#if CLANGD
+#include "city_map_tilemaps.h"
+#endif
+
 static const struct CityMapEntry sPokenavCityMaps[NUM_CITY_MAPS] =
 {
     {

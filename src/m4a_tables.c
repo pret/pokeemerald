@@ -1,5 +1,7 @@
 #include "gba/m4a_internal.h"
 
+#undef MOD // modulo macro from global.h
+
 // Some of these functions have different signatures, so we need to make this
 // an array of void pointers or a struct. It's simpler to just make it an array
 // for now.

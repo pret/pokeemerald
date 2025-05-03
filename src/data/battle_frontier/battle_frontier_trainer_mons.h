@@ -1,3 +1,6 @@
+#ifndef BATTLE_FRONTIER_TRAINER_MONS_H
+#define BATTLE_FRONTIER_TRAINER_MONS_H
+
 // Also used by early Pkmn Breeder, Collector, and Beauty trainers
 #define FRONTIER_MONS_YOUNGSTER_LASS_1 \
     FRONTIER_MON_SUNKERN,       \
@@ -7367,3 +7370,5 @@ const u16 gBattleFrontierTrainerMons_Gretel[] =
 {
     FRONTIER_MONS_AROMA_LADY_3
 };
+
+#endif

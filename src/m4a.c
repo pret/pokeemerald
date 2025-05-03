@@ -1,6 +1,10 @@
 #include <string.h>
 #include "gba/m4a_internal.h"
 
+#ifdef CLANGD
+#pragma clang diagnostic ignored "-Wdeprecated-non-prototype"
+#endif
+
 extern const u8 gCgb3Vol[];
 
 #define BSS_CODE __attribute__((section(".bss.code")))

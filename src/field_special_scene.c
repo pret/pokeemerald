@@ -280,7 +280,7 @@ void EndTruckSequence(u8 taskId)
 
 bool8 TrySetPortholeWarpDestination(void)
 {
-    s8 mapGroup, mapNum;
+    u8 mapGroup, mapNum;
     s16 x, y;
 
     if (GetSSTidalLocation(&mapGroup, &mapNum, &x, &y) != SS_TIDAL_LOCATION_CURRENTS)

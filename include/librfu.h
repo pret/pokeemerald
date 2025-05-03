@@ -4,6 +4,10 @@
 #include "global.h"
 #include "main.h"
 
+#ifdef CLANGD
+#pragma clang diagnostic ignored "-Wdeprecated-non-prototype"
+#endif
+
 #define LIBRFU_VERSION 1026
 
 /* TODOs:
@@ -316,6 +320,7 @@ struct STWIStatus
     u8 recoveryCount;
     u8 unk_16;
     u8 unk_17;
+    // The callback can take 2 or 3 arguments.
     void (*callbackM)();
     void (*callbackS)(u16);
     void (*callbackID)(void);

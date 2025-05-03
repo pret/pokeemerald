@@ -25,6 +25,10 @@
 #include "constants/trainers.h"
 #include "constants/rgb.h"
 
+#ifdef CLANGD
+#pragma clang diagnostic ignored "-Wpointer-sign"
+#endif
+
 #define PALTAG_UNUSED_MUGSHOT 0x100A
 
 #define B_TRANS_DMA_FLAGS (1 | ((DMA_SRC_INC | DMA_DEST_FIXED | DMA_REPEAT | DMA_16BIT | DMA_START_HBLANK | DMA_ENABLE) << 16))

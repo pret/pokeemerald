@@ -164,10 +164,10 @@ const struct PulseBlendSettings gMirageTowerPulseBlendSettings = {
     .numColors = 15,
     .delay = 5,
     .numFadeCycles = -1,
-    .maxBlendCoeff = 11,
+    .maxBlendCoeff = -5,
     .fadeType = 1,
     .restorePaletteOnUnload = FALSE,
-    .unk7_7 = 1,
+    .unk7_7 = -1,
 };
 
 static const union AnimCmd sAnim_CeilingCrumbleSmall[] =

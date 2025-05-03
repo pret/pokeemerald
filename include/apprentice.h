@@ -22,4 +22,31 @@ void ResetAllApprenticeData(void);
 void CallApprenticeFunction(void);
 const u8 *GetApprenticeNameInLanguage(u32 apprenticeId, s32 language);
 
+static void Script_GivenApprenticeLvlMode(void);
+static void Script_SetApprenticeLvlMode(void);
+static void Script_SetApprenticeId(void);
+static void ShuffleApprenticeSpecies(void);
+static void Script_SetRandomQuestionData(void);
+static void IncrementQuestionsAnswered(void);
+static void IsFinalQuestion(void);
+static void Script_CreateApprenticeMenu(void);
+static void Script_PrintApprenticeMessage(void);
+static void Script_ResetPlayerApprentice(void);
+static void GetShouldCheckApprenticeGone(void);
+static void ApprenticeGetQuestion(void);
+static void GetNumApprenticePartyMonsAssigned(void);
+static void SetApprenticePartyMon(void);
+static void InitQuestionData(void);
+static void FreeQuestionData(void);
+static void ApprenticeBufferString(void);
+static void SetApprenticeMonMove(void);
+static void SetLeadApprenticeMon(void);
+static void Script_ApprenticeOpenBagMenu(void);
+static void TrySetApprenticeHeldItem(void);
+static void SaveApprentice(void);
+static void SetSavedApprenticeTrainerGfxId(void);
+static void SetPlayerApprenticeTrainerGfxId(void);
+static void GetShouldApprenticeLeave(void);
+static void ShiftSavedApprentices(void);
+
 #endif // GUARD_APPRENTICE_H

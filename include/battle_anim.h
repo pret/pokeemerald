@@ -2,6 +2,7 @@
 #define GUARD_BATTLE_ANIM_H
 
 #include "battle.h"
+#include "constants/battle.h"
 #include "constants/battle_anim.h"
 #include "task.h"
 
@@ -44,11 +45,22 @@ extern s32 gAnimMoveDmg;
 extern u16 gAnimMovePower;
 extern u8 gAnimFriendship;
 extern u16 gWeatherMoveAnim;
-extern s16 gBattleAnimArgs[ANIM_ARGS_COUNT];
-extern u8 gAnimMoveTurn;
-extern u8 gBattleAnimAttacker;
-extern u8 gBattleAnimTarget;
-extern u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT];
+typedef union {
+    struct {
+        s16 gBattleAnimArgs[ANIM_ARGS_COUNT];
+        u8 gAnimMoveTurn;
+        u8 gBattleAnimAttacker;
+        u8 gBattleAnimTarget;
+        u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT];
+    } normal;
+    s16 gBattleAnimArgsOverflow[(2 * ANIM_ARGS_COUNT + 1 + 1 + 1 + 2 * MAX_BATTLERS_COUNT) / 2];
+} BattleAnimArgsOOBAccess;
+extern BattleAnimArgsOOBAccess gBattleAnimArgsOOBAccess;
+#define gBattleAnimArgs gBattleAnimArgsOOBAccess.normal.gBattleAnimArgs
+#define gAnimMoveTurn gBattleAnimArgsOOBAccess.normal.gAnimMoveTurn
+#define gBattleAnimAttacker gBattleAnimArgsOOBAccess.normal.gBattleAnimAttacker
+#define gBattleAnimTarget gBattleAnimArgsOOBAccess.normal.gBattleAnimTarget
+#define gAnimBattlerSpecies gBattleAnimArgsOOBAccess.normal.gAnimBattlerSpecies
 extern u8 gAnimCustomPanning;
 
 void ClearBattleAnimationVars(void);

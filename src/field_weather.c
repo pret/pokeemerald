@@ -864,7 +864,7 @@ void LoadCustomWeatherSpritePalette(const u16 *palette)
     UpdateSpritePaletteWithWeather(gWeatherPtr->weatherPicSpritePalIndex);
 }
 
-static void LoadDroughtWeatherPalette(u8 *palsIndex, u8 *palsOffset)
+static void LoadDroughtWeatherPalette(s8 *palsIndex, s8 *palsOffset)
 {
     *palsIndex = 0x20;
     *palsOffset = 0x20;

@@ -35,6 +35,16 @@
 #define INCBIN_S8   INCBIN
 #define INCBIN_S16  INCBIN
 #define INCBIN_S32  INCBIN
+#elif defined(CLANGD)
+#define _(x)        {}
+#define __(x)       {}
+#define INCBIN(...) {}
+#define INCBIN_U8   INCBIN
+#define INCBIN_U16  INCBIN
+#define INCBIN_U32  INCBIN
+#define INCBIN_S8   INCBIN
+#define INCBIN_S16  INCBIN
+#define INCBIN_S32  INCBIN
 #endif // IDE support
 
 #define ARRAY_COUNT(array) (size_t)(sizeof(array) / sizeof((array)[0]))
@@ -149,7 +159,14 @@
 
 // This produces an error at compile-time if expr is zero.
 // It looks like file.c:line: size of array `id' is negative
+#ifdef CLANGD
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu-folding-constant"
 #define STATIC_ASSERT(expr, id) typedef char id[(expr) ? 1 : -1];
+#pragma clang diagnostic pop
+#else
+#define STATIC_ASSERT(expr, id) typedef char id[(expr) ? 1 : -1];
+#endif
 
 struct Coords8
 {

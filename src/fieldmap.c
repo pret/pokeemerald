@@ -805,7 +805,7 @@ static void UNUSED SetCameraCoords(u16 x, u16 y)
     gSaveBlock1Ptr->pos.y = y;
 }
 
-void GetCameraCoords(u16 *x, u16 *y)
+void GetCameraCoords(s16 *x, s16 *y)
 {
     *x = gSaveBlock1Ptr->pos.x;
     *y = gSaveBlock1Ptr->pos.y;

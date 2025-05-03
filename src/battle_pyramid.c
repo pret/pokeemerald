@@ -42,14 +42,6 @@
 
 extern const struct MapLayout *const gMapLayouts[];
 
-struct PyramidWildMon
-{
-    u16 species;
-    u8 lvl;
-    u8 abilityNum;
-    u16 moves[MAX_MON_MOVES];
-};
-
 struct PyramidFloorTemplate
 {
     u8 numItems;
@@ -97,9 +89,6 @@ static bool8 SetPyramidObjectPositionsInAndNearSquare(u8, u8);
 static bool8 SetPyramidObjectPositionsNearSquare(u8, u8);
 static bool8 TrySetPyramidObjectEventPositionInSquare(u8, u8 *, u8, u8);
 static bool8 TrySetPyramidObjectEventPositionAtCoords(bool8, u8, u8, u8 *, u8, u8);
-
-// Const rom data.
-#define ABILITY_RANDOM 2 // For wild mons data.
 
 #include "data/battle_frontier/battle_pyramid_level_50_wild_mons.h"
 #include "data/battle_frontier/battle_pyramid_open_level_wild_mons.h"

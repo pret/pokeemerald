@@ -1,3 +1,6 @@
+#include "pokedex_text.h"
+#include "pokedex.h"
+
 const struct PokedexEntry gPokedexEntries[] =
 {
     [NATIONAL_DEX_NONE] =

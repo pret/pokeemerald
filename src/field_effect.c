@@ -2615,7 +2615,7 @@ static void FieldMoveShowMonOutdoorsEffect_Init(struct Task *task)
     task->data[11] = REG_WININ;
     task->data[12] = REG_WINOUT;
     StoreWordInTwoHalfwords((u16*) &task->data[13], (u32)gMain.vblankCallback);
-    task->tWinHoriz = WIN_RANGE(DISPLAY_WIDTH, DISPLAY_WIDTH + 1);
+    task->tWinHoriz = (s16)WIN_RANGE(DISPLAY_WIDTH, DISPLAY_WIDTH + 1);
     task->tWinVert = WIN_RANGE(DISPLAY_HEIGHT / 2, DISPLAY_HEIGHT / 2 + 1);
     task->tWinIn = WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR;
     task->tWinOut = WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR;

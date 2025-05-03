@@ -158,5 +158,9 @@ void CreateTask_LinkMysteryGiftOverWireless(u32 activity);
 void CreateTask_SendMysteryGift(u32 activity);
 u8 CreateTask_ListenToWireless(void);
 void StartUnionRoomBattle(u16 battleFlags);
+static void ItemPrintFunc_PossibleGroupMembers(u8, u32, u8);
+static void ListMenuItemPrintFunc_UnionRoomGroups(u8, u32, u8);
+static void TradeBoardListMenuItemPrintFunc(u8, u32, u8);
+static void ItemPrintFunc_EmptyList(u8, u32, u8);
 
 #endif //GUARD_UNION_ROOM_H

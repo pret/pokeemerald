@@ -1,3 +1,8 @@
+#ifndef OBJECT_EVENTS_BERRY_TREE_GRAPHICS_TABLES_H
+#define OBJECT_EVENTS_BERRY_TREE_GRAPHICS_TABLES_H
+
+#include "object_event_graphics.h"
+
 static const struct SpriteFrameImage sPicTable_PechaBerryTree[] = {
     overworld_frame(gObjectEventPic_BerryTreeDirtPile, 2, 2, 0),
     overworld_frame(gObjectEventPic_BerryTreeSprout, 2, 2, 0),
@@ -563,3 +568,5 @@ const u8 *const gBerryTreeObjectEventGraphicsIdTablePointers[] = {
     [ITEM_UNUSED_BERRY_2 - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
     [ITEM_UNUSED_BERRY_3 - FIRST_BERRY_INDEX] = gBerryTreeObjectEventGraphicsIdTable,
 };
+
+#endif

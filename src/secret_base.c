@@ -298,7 +298,7 @@ void GetSecretBaseTypeInFrontOfPlayer(void)
     gSpecialVar_0x8007 = GetSecretBaseTypeInFrontOfPlayer_();
 }
 
-static void FindMetatileIdMapCoords(s16 *x, s16 *y, u16 metatileId)
+static void FindMetatileIdMapCoords(u16 *x, u16 *y, u16 metatileId)
 {
     s16 i, j;
     const struct MapLayout *mapLayout = gMapHeader.mapLayout;
@@ -474,7 +474,7 @@ static void EnterNewlyCreatedSecretBase_StartFadeIn(void)
 
     LockPlayerFieldControls();
     HideMapNamePopUpWindow();
-    FindMetatileIdMapCoords(&x, &y, METATILE_SecretBase_PC);
+    FindMetatileIdMapCoords((u16 *)&x, (u16 *)&y, METATILE_SecretBase_PC);
     x += MAP_OFFSET;
     y += MAP_OFFSET;
     MapGridSetMetatileIdAt(x, y, METATILE_SecretBase_PC | MAPGRID_COLLISION_MASK);
@@ -987,14 +987,14 @@ static void FinalizeRegistryMenu(u8 taskId)
 static void AddRegistryMenuScrollArrows(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    tArrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 188, 12, 148, tNumBases - tMaxShownItems, TAG_SCROLL_ARROW, TAG_SCROLL_ARROW, &tScrollOffset);
+    tArrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 188, 12, 148, tNumBases - tMaxShownItems, TAG_SCROLL_ARROW, TAG_SCROLL_ARROW, (u16*)&tScrollOffset);
 }
 
 static void HandleRegistryMenuInput(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     s32 input = ListMenu_ProcessInput(tListTaskId);
-    ListMenuGetScrollAndRow(tListTaskId, &tScrollOffset, &tSelectedRow);
+    ListMenuGetScrollAndRow(tListTaskId, (u16 *)&tScrollOffset, (u16 *)&tSelectedRow);
 
     switch (input)
     {
@@ -1076,10 +1076,10 @@ void DeleteRegistry_Yes_Callback(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     ClearDialogWindowAndFrame(0, FALSE);
-    DestroyListMenuTask(tListTaskId, &tScrollOffset, &tSelectedRow);
+    DestroyListMenuTask(tListTaskId, (u16 *)&tScrollOffset, (u16 *)&tSelectedRow);
     gSaveBlock1Ptr->secretBases[tSelectedBaseId].registryStatus = UNREGISTERED;
     BuildRegistryMenuItems(taskId);
-    SetCursorWithinListBounds(&tScrollOffset, &tSelectedRow, tMaxShownItems, tNumBases);
+    SetCursorWithinListBounds((u16 *)&tScrollOffset, (u16 *)&tSelectedRow, tMaxShownItems, tNumBases);
     FinalizeRegistryMenu(taskId);
     gTasks[taskId].func = HandleRegistryMenuInput;
 }
@@ -1093,7 +1093,7 @@ static void DeleteRegistry_No(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     ClearDialogWindowAndFrame(0, FALSE);
-    DestroyListMenuTask(tListTaskId, &tScrollOffset, &tSelectedRow);
+    DestroyListMenuTask(tListTaskId, (u16 *)&tScrollOffset, (u16*)&tSelectedRow);
     FinalizeRegistryMenu(taskId);
     gTasks[taskId].func = HandleRegistryMenuInput;
 }

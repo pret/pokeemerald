@@ -74,29 +74,6 @@ enum {
     CB_IDLE = 100,
 };
 
-// Indexes for sActionTexts
-enum {
-    TEXT_CANCEL,
-    TEXT_CHOOSE_MON,
-    TEXT_SUMMARY,
-    TEXT_TRADE,
-    TEXT_CANCEL_TRADE,
-    TEXT_JP_QUIT,
-};
-
-// Indexes for sMessages
-enum {
-    MSG_STANDBY,
-    MSG_CANCELED,
-    MSG_ONLY_MON1,
-    MSG_ONLY_MON2,
-    MSG_WAITING_FOR_FRIEND,
-    MSG_FRIEND_WANTS_TO_TRADE,
-    MSG_MON_CANT_BE_TRADED,
-    MSG_EGG_CANT_BE_TRADED,
-    MSG_FRIENDS_MON_CANT_BE_TRADED,
-};
-
 // IDs for QueueAction
 enum {
     QUEUE_SEND_DATA,
@@ -146,22 +123,6 @@ enum {
 
 // Checked to confirm DrawSelectedMonScreen has reached final state
 #define DRAW_SELECTED_FINISH 5
-
-struct InGameTrade {
-    u8 nickname[POKEMON_NAME_LENGTH + 1];
-    u16 species;
-    u8 ivs[NUM_STATS];
-    u8 abilityNum;
-    u32 otId;
-    u8 conditions[CONTEST_CATEGORIES_COUNT];
-    u32 personality;
-    u16 heldItem;
-    u8 mailNum;
-    u8 otName[TRAINER_NAME_LENGTH + 1];
-    u8 otGender;
-    u8 sheen;
-    u16 requestedSpecies;
-};
 
 static EWRAM_DATA u8 *sMenuTextTileBuffer = NULL;
 
@@ -275,8 +236,6 @@ static void PrintLevelAndGender(u8, u8, u8, u8, u8, u8);
 static void PrintPartyLevelsAndGenders(u8);
 static void PrintTradePartnerPartyNicknames(void);
 static void RedrawPartyWindow(u8);
-static void Task_DrawSelectionSummary(u8);
-static void Task_DrawSelectionTrade(u8);
 static void QueueAction(u16, u8);
 static u32 GetNumQueuedActions(void);
 static void DoQueuedActions(void);
@@ -288,11 +247,7 @@ static void ComputePartyHPBarLevels(u8);
 static void SetTradePartyHPBarSprites(void);
 static void SaveTradeGiftRibbons(void);
 static u32 CanTradeSelectedMon(struct Pokemon *, int, int);
-static void SpriteCB_LinkMonGlow(struct Sprite *);
-static void SpriteCB_LinkMonShadow(struct Sprite *);
-static void SpriteCB_CableEndSending(struct Sprite *);
-static void SpriteCB_CableEndReceiving(struct Sprite *);
-static void SpriteCB_GbaScreen(struct Sprite *);
+
 static void TradeAnimInit_LoadGfx(void);
 static void CB2_InGameTrade(void);
 static void SetTradeSequenceBgGpuRegs(u8);
@@ -301,10 +256,6 @@ static void BufferTradeSceneStrings(void);
 static bool8 DoTradeAnim(void);
 static bool8 DoTradeAnim_Cable(void);
 static bool8 DoTradeAnim_Wireless(void);
-static void SpriteCB_BouncingPokeball(struct Sprite *);
-static void SpriteCB_BouncingPokeballDepart(struct Sprite *);
-static void SpriteCB_BouncingPokeballDepartEnd(struct Sprite *);
-static void SpriteCB_BouncingPokeballArrive(struct Sprite *);
 static void BufferInGameTradeMonName(void);
 static void GetInGameTradeMail(struct Mail *, const struct InGameTrade *);
 static void CB2_UpdateLinkTrade(void);

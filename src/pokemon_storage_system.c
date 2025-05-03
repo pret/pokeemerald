@@ -339,13 +339,6 @@ enum {
     WIN_ITEM_DESC,
 };
 
-struct Wallpaper
-{
-    const u32 *tiles;
-    const u32 *tilemap;
-    const u16 *palettes;
-};
-
 struct StorageMessage
 {
     const u8 *text;
@@ -9453,7 +9446,7 @@ u32 GetBoxMonLevelAt(u8 boxId, u8 boxPosition)
 #ifdef BUGFIX
     else
 #endif
-        lvl = 0;
+    lvl = 0;
 
     return lvl;
 }

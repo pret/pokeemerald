@@ -60,6 +60,27 @@ enum
     PAGE_COUNT
 };
 
+#define NUM_MON_SLIDES 71
+
+struct CreditsData
+{
+    u16 monToShow[NUM_MON_SLIDES]; // List of Pokémon species ids that will show during the credits
+    u16 imgCounter; //how many mon images have been shown
+    u16 nextImgPos; //if the next image spawns left/center/right
+    u16 currShownMon; //index into monToShow
+    u16 numMonToShow; //number of Pokémon to show, always NUM_MON_SLIDES after determine function
+    u16 caughtMonIds[NATIONAL_DEX_COUNT]; //temporary location to hold a condensed array of all caught Pokémon
+    u16 numCaughtMon; //count of filled spaces in caughtMonIds
+    u16 unused[7];
+};
+
+struct CreditsEntry
+{
+    u8 unk; // Never read
+    bool8 isTitle;
+    const u8 *text;
+};
+
 #define ENTRIES_PER_PAGE 5
 
 static const u8 sCreditsText_EmptyString[]                    = _("");
@@ -381,6 +402,7 @@ static const struct CreditsEntry sCreditsEntry_NicolaPrattBarlow                
 static const struct CreditsEntry sCreditsEntry_ShellieDow                       = { 0, FALSE, sCreditsText_ShellieDow};
 static const struct CreditsEntry sCreditsEntry_ErikJohnson                      = { 0, FALSE, sCreditsText_ErikJohnson};
 
+#undef _
 #define _ &sCreditsEntry_EmptyString
 static const struct CreditsEntry *const sCreditsEntryPointerTable[PAGE_COUNT][ENTRIES_PER_PAGE] =
 {

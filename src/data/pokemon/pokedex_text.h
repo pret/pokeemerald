@@ -1,3 +1,6 @@
+#ifndef POKEMON_POKEDEX_TEXT_H
+#define POKEMON_POKEDEX_TEXT_H
+
 const u8 gDummyPokedexText[] = _(
     "This is a newly discovered POKéMON.\n"
     "It is currently under investigation.\n"
@@ -2319,3 +2322,5 @@ const u8 gDeoxysPokedexText[] = _(
     "extraterrestrial virus exposed to a laser\n"
     "beam. Its body is configured for superior\n"
     "agility and speed.");
+
+#endif

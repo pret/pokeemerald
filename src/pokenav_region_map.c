@@ -13,14 +13,13 @@
 #include "task.h"
 #include "text_window.h"
 #include "window.h"
+#include "pokenav_region_map.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/region_map_sections.h"
 
 #define GFXTAG_CITY_ZOOM 6
 #define PALTAG_CITY_ZOOM 11
-
-#define NUM_CITY_MAPS 22
 
 struct Pokenav_RegionMapMenu
 {
@@ -37,13 +36,6 @@ struct Pokenav_RegionMapGfx
     struct Sprite *cityZoomTextSprites[3];
     u8 ALIGNED(2) tilemapBuffer[BG_SCREEN_SIZE];
     u8 cityZoomPics[NUM_CITY_MAPS][200];
-};
-
-struct CityMapEntry
-{
-    u16 mapSecId;
-    u16 index;
-    const u32 *tilemap;
 };
 
 static u32 HandleRegionMapInput(struct Pokenav_RegionMapMenu *);

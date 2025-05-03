@@ -1,3 +1,9 @@
+#ifndef FIELD_EFFECT_OBJECTS_H
+#define FIELD_EFFECT_OBJECTS_H
+
+#include "../object_events/object_event_graphics.h"
+#include "../object_events/base_oam.h"
+
 const struct SpritePalette gSpritePalette_GeneralFieldEffect0 = {gFieldEffectObjectPalette0, FLDEFF_PAL_TAG_GENERAL_0};
 const struct SpritePalette gSpritePalette_GeneralFieldEffect1 = {gFieldEffectObjectPalette1, FLDEFF_PAL_TAG_GENERAL_1};
 
@@ -1287,3 +1293,5 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_Rayquaza = {
 };
 
 static const struct SpritePalette sSpritePalette_Unused = {gObjectEventPal_Npc3, FLDEFF_PAL_TAG_UNKNOWN};
+
+#endif

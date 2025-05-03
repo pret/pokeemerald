@@ -87,32 +87,7 @@ static u8 CreateAndShowWindow(u8 left, u8 top, u8 width, u8 height);
 static void RemoveAndHideWindow(u8 windowId);
 static void ExecuteFuncAfterButtonPress(void (*func)(void));
 
-static void Script_GivenApprenticeLvlMode(void);
-static void Script_SetApprenticeLvlMode(void);
-static void Script_SetApprenticeId(void);
-static void ShuffleApprenticeSpecies(void);
-static void Script_SetRandomQuestionData(void);
-static void IncrementQuestionsAnswered(void);
-static void IsFinalQuestion(void);
-static void Script_CreateApprenticeMenu(void);
-static void Script_PrintApprenticeMessage(void);
-static void Script_ResetPlayerApprentice(void);
-static void GetShouldCheckApprenticeGone(void);
-static void ApprenticeGetQuestion(void);
-static void GetNumApprenticePartyMonsAssigned(void);
-static void SetApprenticePartyMon(void);
-static void InitQuestionData(void);
-static void FreeQuestionData(void);
-static void ApprenticeBufferString(void);
-static void SetApprenticeMonMove(void);
-static void SetLeadApprenticeMon(void);
-static void Script_ApprenticeOpenBagMenu(void);
-static void TrySetApprenticeHeldItem(void);
-static void SaveApprentice(void);
-static void SetSavedApprenticeTrainerGfxId(void);
-static void SetPlayerApprenticeTrainerGfxId(void);
-static void GetShouldApprenticeLeave(void);
-static void ShiftSavedApprentices(void);
+
 
 #include "data/battle_frontier/apprentice.h"
 
