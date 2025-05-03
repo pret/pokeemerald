@@ -6983,7 +6983,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
         txtPtr[1] = EOS;
 
         if (sStorage->displayMonItemId != ITEM_NONE)
-            StringCopyPadded(sStorage->displayMonItemName, ItemId_GetName(sStorage->displayMonItemId), CHAR_SPACE, 8);
+            StringCopyPadded(sStorage->displayMonItemName, GetItemName(sStorage->displayMonItemId), CHAR_SPACE, 8);
         else
             StringFill(sStorage->displayMonItemName, CHAR_SPACE, 8);
     }
@@ -8986,7 +8986,7 @@ static bool8 IsMovingItem(void)
 
 static const u8 *GetMovingItemName(void)
 {
-    return ItemId_GetName(sStorage->movingItemId);
+    return GetItemName(sStorage->movingItemId);
 }
 
 static u16 GetMovingItemId(void)
@@ -9181,9 +9181,9 @@ static void PrintItemDescription(void)
     const u8 *description;
 
     if (IsMovingItem())
-        description = ItemId_GetDescription(sStorage->movingItemId);
+        description = GetItemDescription(sStorage->movingItemId);
     else
-        description = ItemId_GetDescription(sStorage->displayMonItemId);
+        description = GetItemDescription(sStorage->displayMonItemId);
 
     FillWindowPixelBuffer(WIN_ITEM_DESC, PIXEL_FILL(1));
     AddTextPrinterParameterized5(WIN_ITEM_DESC, FONT_NORMAL, description, 4, 0, 0, NULL, 0, 1);
