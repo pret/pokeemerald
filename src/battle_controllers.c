@@ -659,11 +659,11 @@ static void PrepareBufferDataTransfer(u8 bufferId, u8 *data, u16 size)
     {
         switch (bufferId)
         {
-        case BUFFER_A:
+        case B_COMM_TO_CONTROLLER:
             for (i = 0; i < size; data++, i++)
                 gBattleBufferA[gActiveBattler][i] = *data;
             break;
-        case BUFFER_B:
+        case B_COMM_TO_ENGINE:
             for (i = 0; i < size; data++, i++)
                 gBattleBufferB[gActiveBattler][i] = *data;
             break;
@@ -671,20 +671,41 @@ static void PrepareBufferDataTransfer(u8 bufferId, u8 *data, u16 size)
     }
 }
 
+#define tInitialDelayTimer      data[10]
+#define tState                  data[11]
+#define tCurrentBlock_WrapFrom  data[12]
+#define tBlockSendDelayTimer    data[13]
+#define tCurrentBlock_End       data[14]
+#define tCurrentBlock_Start     data[15]
+//
+// Inbound communications are stored in one buffer; outbound communications
+// in another. Both buffers work pretty similarly: the next message will be
+// written into the buffer after the previous message (with 4-byte alignment),
+// unless we're too close to the end of the buffer, in which case we jump back
+// to the start.
+//
+// Regarding the task variable names above: these variables are altered in-
+// place, so the precise operational definition of "current" depends on when
+// the variables are being accessed. When data is present in the send and
+// receive buffers, "current" refers to the most recently received message;
+// but when a message is actually being placed in the buffers, "current"
+// refers to the previous message, until such time that we finish updating it
+// to refer to the new message.
+
 static void CreateTasksForSendRecvLinkBuffers(void)
 {
     sLinkSendTaskId = CreateTask(Task_HandleSendLinkBuffersData, 0);
-    gTasks[sLinkSendTaskId].data[11] = 0;
-    gTasks[sLinkSendTaskId].data[12] = 0;
-    gTasks[sLinkSendTaskId].data[13] = 0;
-    gTasks[sLinkSendTaskId].data[14] = 0;
-    gTasks[sLinkSendTaskId].data[15] = 0;
+    gTasks[sLinkSendTaskId].tState                 = 0;
+    gTasks[sLinkSendTaskId].tCurrentBlock_WrapFrom = 0;
+    gTasks[sLinkSendTaskId].tBlockSendDelayTimer   = 0;
+    gTasks[sLinkSendTaskId].tCurrentBlock_End      = 0;
+    gTasks[sLinkSendTaskId].tCurrentBlock_Start    = 0;
 
     sLinkReceiveTaskId = CreateTask(Task_HandleCopyReceivedLinkBuffersData, 0);
-    gTasks[sLinkReceiveTaskId].data[12] = 0;
-    gTasks[sLinkReceiveTaskId].data[13] = 0;
-    gTasks[sLinkReceiveTaskId].data[14] = 0;
-    gTasks[sLinkReceiveTaskId].data[15] = 0;
+    gTasks[sLinkReceiveTaskId].tCurrentBlock_WrapFrom = 0;
+    gTasks[sLinkReceiveTaskId].tBlockSendDelayTimer   = 0; // not used by "receive" task
+    gTasks[sLinkReceiveTaskId].tCurrentBlock_End      = 0;
+    gTasks[sLinkReceiveTaskId].tCurrentBlock_Start    = 0;
 
     sUnused = 0;
 }
@@ -702,52 +723,72 @@ enum
     LINK_BUFF_DATA,
 };
 
+// We want to send a message. Place it into the "send" buffer.
+// First argument is a BATTLELINKCOMMTYPE_...
 void PrepareBufferDataTransferLink(u8 bufferId, u16 size, u8 *data)
 {
     s32 alignedSize;
     s32 i;
 
     alignedSize = size - size % 4 + 4;
-    if (gTasks[sLinkSendTaskId].data[14] + alignedSize + LINK_BUFF_DATA + 1 > BATTLE_BUFFER_LINK_SIZE)
+    if (gTasks[sLinkSendTaskId].tCurrentBlock_End + alignedSize + LINK_BUFF_DATA + 1 > BATTLE_BUFFER_LINK_SIZE)
     {
-        gTasks[sLinkSendTaskId].data[12] = gTasks[sLinkSendTaskId].data[14];
-        gTasks[sLinkSendTaskId].data[14] = 0;
+        gTasks[sLinkSendTaskId].tCurrentBlock_WrapFrom = gTasks[sLinkSendTaskId].tCurrentBlock_End;
+        gTasks[sLinkSendTaskId].tCurrentBlock_End      = 0;
     }
-    gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_BUFFER_ID] = bufferId;
-    gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_ACTIVE_BATTLER] = gActiveBattler;
-    gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_ATTACKER] = gBattlerAttacker;
-    gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_TARGET] = gBattlerTarget;
-    gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_SIZE_LO] = alignedSize;
-    gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_SIZE_HI] = (alignedSize & 0x0000FF00) >> 8;
-    gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_ABSENT_BATTLER_FLAGS] = gAbsentBattlerFlags;
-    gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_EFFECT_BATTLER] = gEffectBattler;
+    
+    #define BYTE_TO_SEND(offset) \
+        gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].tCurrentBlock_End + offset]
+    
+    BYTE_TO_SEND(LINK_BUFF_BUFFER_ID)            = bufferId;
+    BYTE_TO_SEND(LINK_BUFF_ACTIVE_BATTLER)       = gActiveBattler;
+    BYTE_TO_SEND(LINK_BUFF_ATTACKER)             = gBattlerAttacker;
+    BYTE_TO_SEND(LINK_BUFF_TARGET)               = gBattlerTarget;
+    BYTE_TO_SEND(LINK_BUFF_SIZE_LO)              = alignedSize;
+    BYTE_TO_SEND(LINK_BUFF_SIZE_HI)              = (alignedSize & 0x0000FF00) >> 8;
+    BYTE_TO_SEND(LINK_BUFF_ABSENT_BATTLER_FLAGS) = gAbsentBattlerFlags;
+    BYTE_TO_SEND(LINK_BUFF_EFFECT_BATTLER)       = gEffectBattler;
 
     for (i = 0; i < size; i++)
-        gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_DATA + i] = data[i];
+        BYTE_TO_SEND(LINK_BUFF_DATA + i) = data[i];
 
-    gTasks[sLinkSendTaskId].data[14] = gTasks[sLinkSendTaskId].data[14] + alignedSize + LINK_BUFF_DATA;
+    #undef BYTE_TO_SEND
+
+    gTasks[sLinkSendTaskId].tCurrentBlock_End = gTasks[sLinkSendTaskId].tCurrentBlock_End + alignedSize + LINK_BUFF_DATA;
 }
+
+enum {
+   SENDTASK_STATE_INITIALIZE        = 0,
+   SENDTASK_STATE_INITIAL_DELAY     = 1,
+   SENDTASK_STATE_COUNT_PLAYERS     = 2,
+   SENDTASK_STATE_BEGIN_SEND_BLOCK  = 3,
+   SENDTASK_STATE_FINISH_SEND_BLOCK = 4,
+   SENDTASK_STATE_UNUSED_STATE      = 5,
+};
 
 static void Task_HandleSendLinkBuffersData(u8 taskId)
 {
     u16 numPlayers;
     u16 blockSize;
+    
+    #define BYTE_TO_SEND(offset) \
+        gLinkBattleSendBuffer[gTasks[taskId].tCurrentBlock_Start + offset]
 
-    switch (gTasks[taskId].data[11])
+    switch (gTasks[taskId].tState)
     {
-    case 0:
-        gTasks[taskId].data[10] = 100;
-        gTasks[taskId].data[11]++;
+    case SENDTASK_STATE_INITIALIZE:
+        gTasks[taskId].tInitialDelayTimer = 100;
+        gTasks[taskId].tState++;
         break;
-    case 1:
-        gTasks[taskId].data[10]--;
-        if (gTasks[taskId].data[10] == 0)
-            gTasks[taskId].data[11]++;
+    case SENDTASK_STATE_INITIAL_DELAY:
+        gTasks[taskId].tInitialDelayTimer--;
+        if (gTasks[taskId].tInitialDelayTimer == 0)
+            gTasks[taskId].tState++;
         break;
-    case 2:
+    case SENDTASK_STATE_COUNT_PLAYERS:
         if (gWirelessCommType)
         {
-            gTasks[taskId].data[11]++;
+            gTasks[taskId].tState++;
         }
         else
         {
@@ -761,56 +802,66 @@ static void Task_HandleSendLinkBuffersData(u8 taskId)
                 if (IsLinkMaster())
                 {
                     CheckShouldAdvanceLinkState();
-                    gTasks[taskId].data[11]++;
+                    gTasks[taskId].tState++;
                 }
                 else
                 {
-                    gTasks[taskId].data[11]++;
+                    gTasks[taskId].tState++;
                 }
             }
         }
         break;
-    case 3:
-        if (gTasks[taskId].data[15] != gTasks[taskId].data[14])
+    case SENDTASK_STATE_BEGIN_SEND_BLOCK:
+        if (gTasks[taskId].tCurrentBlock_Start != gTasks[taskId].tCurrentBlock_End)
         {
-            if (gTasks[taskId].data[13] == 0)
+            if (gTasks[taskId].tBlockSendDelayTimer == 0)
             {
-                if (gTasks[taskId].data[15] > gTasks[taskId].data[14]
-                 && gTasks[taskId].data[15] == gTasks[taskId].data[12])
+                if (gTasks[taskId].tCurrentBlock_Start >  gTasks[taskId].tCurrentBlock_End
+                 && gTasks[taskId].tCurrentBlock_Start == gTasks[taskId].tCurrentBlock_WrapFrom)
                 {
-                    gTasks[taskId].data[12] = 0;
-                    gTasks[taskId].data[15] = 0;
+                    gTasks[taskId].tCurrentBlock_WrapFrom = 0;
+                    gTasks[taskId].tCurrentBlock_Start    = 0;
                 }
-                blockSize = (gLinkBattleSendBuffer[gTasks[taskId].data[15] + LINK_BUFF_SIZE_LO] | (gLinkBattleSendBuffer[gTasks[taskId].data[15] + LINK_BUFF_SIZE_HI] << 8)) + LINK_BUFF_DATA;
-                SendBlock(BitmaskAllOtherLinkPlayers(), &gLinkBattleSendBuffer[gTasks[taskId].data[15]], blockSize);
-                gTasks[taskId].data[11]++;
+                blockSize = (BYTE_TO_SEND(LINK_BUFF_SIZE_LO) | (BYTE_TO_SEND(LINK_BUFF_SIZE_HI) << 8)) + LINK_BUFF_DATA;
+                SendBlock(BitmaskAllOtherLinkPlayers(), &BYTE_TO_SEND(0), blockSize);
+                gTasks[taskId].tState++;
             }
             else
             {
-                gTasks[taskId].data[13]--;
+                gTasks[taskId].tBlockSendDelayTimer--;
                 break;
             }
         }
         break;
-    case 4:
+    case SENDTASK_STATE_FINISH_SEND_BLOCK:
         if (IsLinkTaskFinished())
         {
-            blockSize = gLinkBattleSendBuffer[gTasks[taskId].data[15] + LINK_BUFF_SIZE_LO] | (gLinkBattleSendBuffer[gTasks[taskId].data[15] + LINK_BUFF_SIZE_HI] << 8);
-            gTasks[taskId].data[13] = 1;
-            gTasks[taskId].data[15] = gTasks[taskId].data[15] + blockSize + LINK_BUFF_DATA;
-            gTasks[taskId].data[11] = 3;
+            blockSize = BYTE_TO_SEND(LINK_BUFF_SIZE_LO) | (BYTE_TO_SEND(LINK_BUFF_SIZE_HI) << 8);
+            gTasks[taskId].tBlockSendDelayTimer = 1;
+            gTasks[taskId].tCurrentBlock_Start  = gTasks[taskId].tCurrentBlock_Start + blockSize + LINK_BUFF_DATA;
+            gTasks[taskId].tState = SENDTASK_STATE_BEGIN_SEND_BLOCK;
         }
         break;
-    case 5:
-        if (--gTasks[taskId].data[13] == 0)
+    case SENDTASK_STATE_UNUSED_STATE:
+        if (--gTasks[taskId].tBlockSendDelayTimer == 0)
         {
-            gTasks[taskId].data[13] = 1;
-            gTasks[taskId].data[11] = 3;
+            gTasks[taskId].tBlockSendDelayTimer = 1;
+            gTasks[taskId].tState = SENDTASK_STATE_BEGIN_SEND_BLOCK;
         }
         break;
     }
+    
+    #undef BYTE_TO_SEND
 }
 
+// We have received a message. Place it into the "receive" buffer.
+//
+// Counterintuitively, we also "receive" the outbound messages that
+// we send to other players. The GBA basically stores communicated
+// data for all four players, so inbound and outbound data can be
+// handled uniformly unless a game specifically decides to do
+// otherwise. Pokemon, evidently, did not specifically decide to do
+// otherwise.
 void TryReceiveLinkBattleData(void)
 {
     u8 i;
@@ -830,19 +881,19 @@ void TryReceiveLinkBattleData(void)
                     u8 *dest, *src;
                     u16 dataSize = gBlockRecvBuffer[i][2];
 
-                    if (gTasks[sLinkReceiveTaskId].data[14] + 9 + dataSize > 0x1000)
+                    if (gTasks[sLinkReceiveTaskId].tCurrentBlock_End + 9 + dataSize > 0x1000)
                     {
-                        gTasks[sLinkReceiveTaskId].data[12] = gTasks[sLinkReceiveTaskId].data[14];
-                        gTasks[sLinkReceiveTaskId].data[14] = 0;
+                        gTasks[sLinkReceiveTaskId].tCurrentBlock_WrapFrom = gTasks[sLinkReceiveTaskId].tCurrentBlock_End;
+                        gTasks[sLinkReceiveTaskId].tCurrentBlock_End = 0;
                     }
 
-                    dest = &gLinkBattleRecvBuffer[gTasks[sLinkReceiveTaskId].data[14]];
+                    dest = &gLinkBattleRecvBuffer[gTasks[sLinkReceiveTaskId].tCurrentBlock_End];
                     src = recvBuffer;
 
                     for (j = 0; j < dataSize + 8; j++)
                         dest[j] = src[j];
 
-                    gTasks[sLinkReceiveTaskId].data[14] = gTasks[sLinkReceiveTaskId].data[14] + dataSize + 8;
+                    gTasks[sLinkReceiveTaskId].tCurrentBlock_End = gTasks[sLinkReceiveTaskId].tCurrentBlock_End + dataSize + 8;
                 }
             }
         }
@@ -853,48 +904,60 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
 {
     u16 blockSize;
     u8 battlerId;
-    u8 var;
+    u8 playerId;
+    
+    #define BYTE_TO_RECEIVE(offset) \
+        gLinkBattleRecvBuffer[gTasks[taskId].tCurrentBlock_Start + offset]
 
-    if (gTasks[taskId].data[15] != gTasks[taskId].data[14])
+    if (gTasks[taskId].tCurrentBlock_Start != gTasks[taskId].tCurrentBlock_End)
     {
-        if (gTasks[taskId].data[15] > gTasks[taskId].data[14]
-         && gTasks[taskId].data[15] == gTasks[taskId].data[12])
+        if (gTasks[taskId].tCurrentBlock_Start >  gTasks[taskId].tCurrentBlock_End
+         && gTasks[taskId].tCurrentBlock_Start == gTasks[taskId].tCurrentBlock_WrapFrom)
         {
-            gTasks[taskId].data[12] = 0;
-            gTasks[taskId].data[15] = 0;
+            gTasks[taskId].tCurrentBlock_WrapFrom = 0;
+            gTasks[taskId].tCurrentBlock_Start    = 0;
         }
-        battlerId = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_ACTIVE_BATTLER];
-        blockSize = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_SIZE_LO] | (gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_SIZE_HI] << 8);
+        battlerId = BYTE_TO_RECEIVE(LINK_BUFF_ACTIVE_BATTLER);
+        blockSize = BYTE_TO_RECEIVE(LINK_BUFF_SIZE_LO) | (BYTE_TO_RECEIVE(LINK_BUFF_SIZE_HI) << 8);
 
-        switch (gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 0])
+        switch (BYTE_TO_RECEIVE(0))
         {
-        case 0:
-            if (gBattleControllerExecFlags & gBitTable[battlerId])
+        case B_COMM_TO_CONTROLLER:
+            if (IS_BATTLE_CONTROLLER_ACTIVE_ON_LOCAL(battlerId))
                 return;
 
-            memcpy(gBattleBufferA[battlerId], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA], blockSize);
+            memcpy(gBattleBufferA[battlerId], &BYTE_TO_RECEIVE(LINK_BUFF_DATA), blockSize);
             MarkBattlerReceivedLinkData(battlerId);
 
             if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
             {
-                gBattlerAttacker = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_ATTACKER];
-                gBattlerTarget = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_TARGET];
-                gAbsentBattlerFlags = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_ABSENT_BATTLER_FLAGS];
-                gEffectBattler = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_EFFECT_BATTLER];
+                gBattlerAttacker    = BYTE_TO_RECEIVE(LINK_BUFF_ATTACKER);
+                gBattlerTarget      = BYTE_TO_RECEIVE(LINK_BUFF_TARGET);
+                gAbsentBattlerFlags = BYTE_TO_RECEIVE(LINK_BUFF_ABSENT_BATTLER_FLAGS);
+                gEffectBattler      = BYTE_TO_RECEIVE(LINK_BUFF_EFFECT_BATTLER);
             }
             break;
-        case 1:
-            memcpy(gBattleBufferB[battlerId], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA], blockSize);
+        case B_COMM_TO_ENGINE:
+            memcpy(gBattleBufferB[battlerId], &gLinkBattleRecvBuffer[gTasks[taskId].tCurrentBlock_Start + LINK_BUFF_DATA], blockSize);
             break;
-        case 2:
-            var = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA];
-            gBattleControllerExecFlags &= ~(gBitTable[battlerId] << (var * 4));
+        case B_COMM_CONTROLLER_IS_DONE:
+            playerId = BYTE_TO_RECEIVE(LINK_BUFF_DATA);
+            MARK_BATTLE_CONTROLLER_IDLE_FOR_PLAYER(battlerId, playerId);
             break;
         }
 
-        gTasks[taskId].data[15] = gTasks[taskId].data[15] + blockSize + LINK_BUFF_DATA;
+        gTasks[taskId].tCurrentBlock_Start = gTasks[taskId].tCurrentBlock_Start + blockSize + LINK_BUFF_DATA;
     }
+    
+    #undef BYTE_TO_RECEIVE
 }
+
+#undef tInitialDelayTimer
+#undef tState
+#undef tCurrentBlock_WrapFrom
+#undef tBlockSendDelayTimer
+#undef tCurrentBlock_End
+#undef tCurrentBlock_Start
 
 void BtlController_EmitGetMonData(u8 bufferId, u8 requestId, u8 monToCheck)
 {

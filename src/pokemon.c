@@ -5074,7 +5074,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
 
                                         temp2 = gActiveBattler;
                                         gActiveBattler = battlerId;
-                                        BtlController_EmitGetMonData(BUFFER_A, REQUEST_ALL_BATTLE, 0);
+                                        BtlController_EmitGetMonData(B_COMM_TO_CONTROLLER, REQUEST_ALL_BATTLE, 0);
                                         MarkBattlerForControllerExec(gActiveBattler);
                                         gActiveBattler = temp2;
                                     }

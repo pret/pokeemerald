@@ -64,11 +64,65 @@ enum {
     REQUEST_TOUGH_RIBBON_BATTLE,
 };
 
+// Accessors for gBattleControllerExecFlags.
+//
+// These are provided for documentation purposes, to make the battle 
+// controller internals and the link communication internals more 
+// legible. Several of these have functions that you should call 
+// (e.g. MarkBattlerForControllerExec) instead of using these macros 
+// directly.
+
+#define MARK_BATTLE_CONTROLLER_ACTIVE_ON_LOCAL(battlerId) \
+   gBattleControllerExecFlags |= gBitTable[battlerId]
+
+#define MARK_BATTLE_CONTROLLER_IDLE_ON_LOCAL(battlerId) \
+   gBattleControllerExecFlags &= ~gBitTable(battlerId)
+
+#define IS_BATTLE_CONTROLLER_ACTIVE_ON_LOCAL(battlerId) \
+   (gBattleControllerExecFlags & gBitTable[battlerId])
+
+#define MARK_BATTLE_CONTROLLER_MESSAGE_OUTBOUND_OVER_LINK(battlerId) \
+   gBattleControllerExecFlags |= gBitTable[battlerId] << (32 - MAX_BATTLERS_COUNT)
+
+#define MARK_BATTLE_CONTROLLER_MESSAGE_SYNCHRONIZED_OVER_LINK(battlerId) \
+   gBattleControllerExecFlags &= ~((1 << 28) << (battlerId))
+
+#define MARK_BATTLE_CONTROLLER_ACTIVE_FOR_PLAYER(battlerId, playerId) \
+   gBattleControllerExecFlags |= gBitTable[battlerId] << ((playerId) << 2)
+
+#define MARK_BATTLE_CONTROLLER_IDLE_FOR_PLAYER(battlerId, playerId) \
+   gBattleControllerExecFlags &= ~(gBitTable[battlerId] << ((playerId) * 4))
+
+#define IS_BATTLE_CONTROLLER_ACTIVE_FOR_PLAYER(battlerId, playerId) \
+   (gBattleControllerExecFlags & (gBitTable[battlerId] << ((playerId) * 4)))
+
+// This actually checks if a specific controller is active on any player or if 
+// *any* controller is pending sync over link communications, but the macro name 
+// can only be so specific before it just gets ridiculous.
+#define IS_BATTLE_CONTROLLER_ACTIVE_OR_PENDING_SYNC_ANYWHERE(battlerId) \
+   (gBattleControllerExecFlags & ( \
+      (gBitTable[battlerId])       \
+    | (0xF << 28)                  \
+    | (gBitTable[battlerId] << 4)  \
+    | (gBitTable[battlerId] << 8)  \
+    | (gBitTable[battlerId] << 12) \
+   ))
+
 // Special arguments for Battle Controller functions.
 
-enum { // Values given to the emit functions to choose gBattleBufferA or gBattleBufferB
-    BUFFER_A,
-    BUFFER_B
+enum {
+   // For commands sent from the core battle engine to a controller.
+   B_COMM_TO_CONTROLLER, // gBattleBufferA
+   
+   // For replies sent from a controller to the core battle engine.
+   B_COMM_TO_ENGINE, // gBattleBufferB
+   
+   // During local play, a controller must directly mark itself as 
+   // inactive when it's done processing, whether or not it sends 
+   // a reply. During multiplayer, it must NOT directly mark itself 
+   // as inactive, but instead send one of these, with the player's 
+   // multiplayer ID as data.
+   B_COMM_CONTROLLER_IS_DONE
 };
 
 enum {
