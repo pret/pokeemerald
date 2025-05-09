@@ -1125,7 +1125,7 @@ void TryPutLinkBattleTvShowOnAir(void)
     }
 
     move = GetMonData(&gPlayerParty[playerBestMonId], MON_DATA_MOVE1 + i, NULL);
-    if (playerBestSum == 0 || move == 0)
+    if (playerBestSum == 0 || move == MOVE_NONE)
         return;
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
