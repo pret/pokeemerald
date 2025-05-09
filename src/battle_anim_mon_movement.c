@@ -156,7 +156,7 @@ void AnimTask_ShakeMon2(u8 taskId)
 {
     u8 spriteId;
     bool8 abort = FALSE;
-    u8 battlerId;
+    u8 battler;
 
     if (gBattleAnimArgs[0] < MAX_BATTLERS_COUNT)
     {
@@ -169,24 +169,24 @@ void AnimTask_ShakeMon2(u8 taskId)
         switch (gBattleAnimArgs[0])
         {
         case ANIM_PLAYER_LEFT:
-            battlerId = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+            battler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
             break;
         case ANIM_PLAYER_RIGHT:
-            battlerId = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+            battler = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
             break;
         case ANIM_OPPONENT_LEFT:
-            battlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+            battler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
             break;
         case ANIM_OPPONENT_RIGHT:
         default:
-            battlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+            battler = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
             break;
         }
 
-        if (IsBattlerSpriteVisible(battlerId) == FALSE)
+        if (IsBattlerSpriteVisible(battler) == FALSE)
             abort = TRUE;
 
-        spriteId = gBattlerSpriteIds[battlerId];
+        spriteId = gBattlerSpriteIds[battler];
     }
     else
     {
@@ -578,16 +578,16 @@ static void SlideMonToOffset(struct Sprite *sprite)
 static void SlideMonToOffsetAndBack(struct Sprite *sprite)
 {
     u8 spriteId;
-    u8 battlerId;
+    u8 battler;
     sprite->invisible = TRUE;
 
     if (gBattleAnimArgs[0] == ANIM_ATTACKER)
-        battlerId = gBattleAnimAttacker;
+        battler = gBattleAnimAttacker;
     else
-        battlerId = gBattleAnimTarget;
+        battler = gBattleAnimTarget;
 
-    spriteId = gBattlerSpriteIds[battlerId];
-    if (GetBattlerSide(battlerId))
+    spriteId = gBattlerSpriteIds[battler];
+    if (GetBattlerSide(battler))
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         if (gBattleAnimArgs[3] == 1)

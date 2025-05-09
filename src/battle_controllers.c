@@ -736,10 +736,10 @@ void PrepareBufferDataTransferLink(u8 bufferId, u16 size, u8 *data)
         gTasks[sLinkSendTaskId].tCurrentBlock_WrapFrom = gTasks[sLinkSendTaskId].tCurrentBlock_End;
         gTasks[sLinkSendTaskId].tCurrentBlock_End      = 0;
     }
-    
+
     #define BYTE_TO_SEND(offset) \
         gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].tCurrentBlock_End + offset]
-    
+
     BYTE_TO_SEND(LINK_BUFF_BUFFER_ID)            = bufferId;
     BYTE_TO_SEND(LINK_BUFF_ACTIVE_BATTLER)       = gActiveBattler;
     BYTE_TO_SEND(LINK_BUFF_ATTACKER)             = gBattlerAttacker;
@@ -770,7 +770,7 @@ static void Task_HandleSendLinkBuffersData(u8 taskId)
 {
     u16 numPlayers;
     u16 blockSize;
-    
+
     #define BYTE_TO_SEND(offset) \
         gLinkBattleSendBuffer[gTasks[taskId].tCurrentBlock_Start + offset]
 
@@ -850,7 +850,7 @@ static void Task_HandleSendLinkBuffersData(u8 taskId)
         }
         break;
     }
-    
+
     #undef BYTE_TO_SEND
 }
 
@@ -903,9 +903,9 @@ void TryReceiveLinkBattleData(void)
 static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
 {
     u16 blockSize;
-    u8 battlerId;
+    u8 battler;
     u8 playerId;
-    
+
     #define BYTE_TO_RECEIVE(offset) \
         gLinkBattleRecvBuffer[gTasks[taskId].tCurrentBlock_Start + offset]
 
@@ -917,17 +917,17 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
             gTasks[taskId].tCurrentBlock_WrapFrom = 0;
             gTasks[taskId].tCurrentBlock_Start    = 0;
         }
-        battlerId = BYTE_TO_RECEIVE(LINK_BUFF_ACTIVE_BATTLER);
+        battler = BYTE_TO_RECEIVE(LINK_BUFF_ACTIVE_BATTLER);
         blockSize = BYTE_TO_RECEIVE(LINK_BUFF_SIZE_LO) | (BYTE_TO_RECEIVE(LINK_BUFF_SIZE_HI) << 8);
 
         switch (BYTE_TO_RECEIVE(0))
         {
         case B_COMM_TO_CONTROLLER:
-            if (IS_BATTLE_CONTROLLER_ACTIVE_ON_LOCAL(battlerId))
+            if (IS_BATTLE_CONTROLLER_ACTIVE_ON_LOCAL(battler))
                 return;
 
-            memcpy(gBattleBufferA[battlerId], &BYTE_TO_RECEIVE(LINK_BUFF_DATA), blockSize);
-            MarkBattlerReceivedLinkData(battlerId);
+            memcpy(gBattleBufferA[battler], &BYTE_TO_RECEIVE(LINK_BUFF_DATA), blockSize);
+            MarkBattlerReceivedLinkData(battler);
 
             if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
             {
@@ -938,17 +938,17 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
             }
             break;
         case B_COMM_TO_ENGINE:
-            memcpy(gBattleBufferB[battlerId], &gLinkBattleRecvBuffer[gTasks[taskId].tCurrentBlock_Start + LINK_BUFF_DATA], blockSize);
+            memcpy(gBattleBufferB[battler], &gLinkBattleRecvBuffer[gTasks[taskId].tCurrentBlock_Start + LINK_BUFF_DATA], blockSize);
             break;
         case B_COMM_CONTROLLER_IS_DONE:
             playerId = BYTE_TO_RECEIVE(LINK_BUFF_DATA);
-            MARK_BATTLE_CONTROLLER_IDLE_FOR_PLAYER(battlerId, playerId);
+            MARK_BATTLE_CONTROLLER_IDLE_FOR_PLAYER(battler, playerId);
             break;
         }
 
         gTasks[taskId].tCurrentBlock_Start = gTasks[taskId].tCurrentBlock_Start + blockSize + LINK_BUFF_DATA;
     }
-    
+
     #undef BYTE_TO_RECEIVE
 }
 
