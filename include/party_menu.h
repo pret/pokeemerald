@@ -16,7 +16,7 @@ struct PartyMenu
     s8 slotId2;
     u8 action;
     u16 bagItem;
-    s16 data1;           // used variously as a moveId, counter, moveSlotId, or cursorPos
+    s16 data1;           // used variously as a move, counter, moveSlotId, or cursorPos
     s16 learnMoveState;  // data2, used only as a learn move state
 };
 

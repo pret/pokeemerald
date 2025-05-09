@@ -545,7 +545,7 @@ static void Task_ClearBitWhenSpecialAnimDone(u8 taskId)
 #undef tBattlerId
 
 // Great function to include newly added moves that don't have animation yet.
-bool8 IsMoveWithoutAnimation(u16 moveId, u8 animationTurn)
+bool8 IsMoveWithoutAnimation(u16 move, u8 animationTurn)
 {
     return FALSE;
 }
