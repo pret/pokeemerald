@@ -5,7 +5,7 @@ extern u8 *const gTVStringVarPtrs[3];
 
 void ClearTVShowData(void);
 void TryPutBreakingNewsOnAir(void);
-void TryPutBattleSeminarOnAir(u16 foeSpecies, u16 species, u8 moveIdx, const u16 *movePtr, u16 betterMove);
+void TryPutBattleSeminarOnAir(u16 foeSpecies, u16 species, u8 moveIndex, const u16 *movePtr, u16 betterMove);
 void TryPutFrontierTVShowOnAir(u16 winStreak, u8 facility);
 void DoTVShow(void);
 void DoTVShowInSearchOfTrainers(void);

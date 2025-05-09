@@ -6,6 +6,6 @@ void BattleTv_SetDataBasedOnMove(u16 move, u16 weatherFlags, struct DisableStruc
 void BattleTv_SetDataBasedOnAnimation(u8 animationId);
 void TryPutLinkBattleTvShowOnAir(void);
 void BattleTv_ClearExplosionFaintCause(void);
-u8 GetBattlerMoveSlotId(u8 battler, u16 moveId);
+u8 GetBattlerMoveSlotId(u8 battler, u16 move);
 
 #endif // GUARD_BATTLE_TV_H

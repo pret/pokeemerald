@@ -1607,9 +1607,9 @@ bool8 ScrCmd_bufferdecorationname(struct ScriptContext *ctx)
 bool8 ScrCmd_buffermovename(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
-    u16 moveId = VarGet(ScriptReadHalfword(ctx));
+    u16 move = VarGet(ScriptReadHalfword(ctx));
 
-    StringCopy(sScriptStringVars[stringVarIndex], gMoveNames[moveId]);
+    StringCopy(sScriptStringVars[stringVarIndex], gMoveNames[move]);
     return FALSE;
 }
 
@@ -1712,7 +1712,7 @@ bool8 ScrCmd_setmonmove(struct ScriptContext *ctx)
 bool8 ScrCmd_checkpartymove(struct ScriptContext *ctx)
 {
     u8 i;
-    u16 moveId = ScriptReadHalfword(ctx);
+    u16 move = ScriptReadHalfword(ctx);
 
     gSpecialVar_Result = PARTY_SIZE;
     for (i = 0; i < PARTY_SIZE; i++)
@@ -1720,7 +1720,7 @@ bool8 ScrCmd_checkpartymove(struct ScriptContext *ctx)
         u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
         if (!species)
             break;
-        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) && MonKnowsMove(&gPlayerParty[i], moveId) == TRUE)
+        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) && MonKnowsMove(&gPlayerParty[i], move) == TRUE)
         {
             gSpecialVar_Result = i;
             gSpecialVar_0x8004 = species;

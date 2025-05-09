@@ -1445,9 +1445,9 @@ static void RecordedPlayerHandleChooseMove(void)
     }
     else
     {
-        u8 moveId = RecordedBattle_GetBattlerAction(gActiveBattler);
+        u8 move = RecordedBattle_GetBattlerAction(gActiveBattler);
         u8 target = RecordedBattle_GetBattlerAction(gActiveBattler);
-        BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, 10, moveId | (target << 8));
+        BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, 10, move | (target << 8));
     }
 
     RecordedPlayerBufferExecCompleted();

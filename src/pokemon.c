@@ -5095,17 +5095,17 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                             // Heal PP for all moves
                             for (temp2 = 0; (signed)(temp2) < (signed)(MAX_MON_MOVES); temp2++)
                             {
-                                u16 moveId;
+                                u16 move;
                                 dataUnsigned = GetMonData(mon, MON_DATA_PP1 + temp2, NULL);
-                                moveId = GetMonData(mon, MON_DATA_MOVE1 + temp2, NULL);
-                                if (dataUnsigned != CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), temp2))
+                                move = GetMonData(mon, MON_DATA_MOVE1 + temp2, NULL);
+                                if (dataUnsigned != CalculatePPWithBonus(move, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), temp2))
                                 {
                                     dataUnsigned += itemEffect[itemEffectParam];
-                                    moveId = GetMonData(mon, MON_DATA_MOVE1 + temp2, NULL); // Redundant
-                                    if (dataUnsigned > CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), temp2))
+                                    move = GetMonData(mon, MON_DATA_MOVE1 + temp2, NULL); // Redundant
+                                    if (dataUnsigned > CalculatePPWithBonus(move, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), temp2))
                                     {
-                                        moveId = GetMonData(mon, MON_DATA_MOVE1 + temp2, NULL); // Redundant
-                                        dataUnsigned = CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), temp2);
+                                        move = GetMonData(mon, MON_DATA_MOVE1 + temp2, NULL); // Redundant
+                                        dataUnsigned = CalculatePPWithBonus(move, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), temp2);
                                     }
                                     SetMonData(mon, MON_DATA_PP1 + temp2, &dataUnsigned);
 
@@ -5121,17 +5121,17 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                         else
                         {
                             // Heal PP for one move
-                            u16 moveId;
+                            u16 move;
                             dataUnsigned = GetMonData(mon, MON_DATA_PP1 + moveIndex, NULL);
-                            moveId = GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL);
-                            if (dataUnsigned != CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex))
+                            move = GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL);
+                            if (dataUnsigned != CalculatePPWithBonus(move, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex))
                             {
                                 dataUnsigned += itemEffect[itemEffectParam++];
-                                moveId = GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL); // Redundant
-                                if (dataUnsigned > CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex))
+                                move = GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL); // Redundant
+                                if (dataUnsigned > CalculatePPWithBonus(move, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex))
                                 {
-                                    moveId = GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL); // Redundant
-                                    dataUnsigned = CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex);
+                                    move = GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL); // Redundant
+                                    dataUnsigned = CalculatePPWithBonus(move, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex);
                                 }
                                 SetMonData(mon, MON_DATA_PP1 + moveIndex, &dataUnsigned);
 

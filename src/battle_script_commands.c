@@ -5464,8 +5464,8 @@ static void Cmd_yesnoboxlearnmove(void)
             }
             else
             {
-                u16 moveId = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MOVE1 + movePosition);
-                if (IsHMMove2(moveId))
+                u16 move = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MOVE1 + movePosition);
+                if (IsHMMove2(move))
                 {
                     PrepareStringBattle(STRINGID_HMMOVESCANTBEFORGOTTEN, gActiveBattler);
                     gBattleScripting.learnMoveState = 6;
@@ -5474,7 +5474,7 @@ static void Cmd_yesnoboxlearnmove(void)
                 {
                     gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
 
-                    PREPARE_MOVE_BUFFER(gBattleTextBuff2, moveId)
+                    PREPARE_MOVE_BUFFER(gBattleTextBuff2, move)
 
                     RemoveMonPPBonus(&gPlayerParty[gBattleStruct->expGetterMonId], movePosition);
                     SetMonMoveSlot(&gPlayerParty[gBattleStruct->expGetterMonId], gMoveToLearn, movePosition);
@@ -9508,7 +9508,7 @@ static void Cmd_assistattackselect(void)
 {
     s32 chooseableMovesNo = 0;
     struct Pokemon *party;
-    s32 monId, moveId;
+    s32 monId, moveIndex;
     u16 *validMoves = gBattleStruct->assistPossibleMoves;
 
     if (GET_BATTLER_SIDE(gBattlerAttacker) != B_SIDE_PLAYER)
@@ -9525,10 +9525,10 @@ static void Cmd_assistattackselect(void)
         if (GetMonData(&party[monId], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
             continue;
 
-        for (moveId = 0; moveId < MAX_MON_MOVES; moveId++)
+        for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
         {
             s32 i = 0;
-            u16 move = GetMonData(&party[monId], MON_DATA_MOVE1 + moveId);
+            u16 move = GetMonData(&party[monId], MON_DATA_MOVE1 + moveIndex);
 
             if (IsInvalidForSleepTalkOrAssist(move))
                 continue;
