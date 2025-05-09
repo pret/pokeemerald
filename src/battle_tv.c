@@ -1056,7 +1056,7 @@ void TryPutLinkBattleTvShowOnAir(void)
     u8 countPlayer = 0, countOpponent = 0;
     s16 sum = 0;
     u16 species = 0;
-    u16 move = 0;
+    u16 move = MOVE_NONE;
     s32 i, j;
     int zero = 0, one = 1; //needed for matching
 
