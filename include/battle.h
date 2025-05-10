@@ -636,7 +636,7 @@ extern u8 gActiveBattler;
 extern u32 gBattleControllerExecFlags;
 extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
-extern u8 gBattlerPositions[MAX_BATTLERS_COUNT];
+extern u8 gBattlerPositions[MAX_POSITION_COUNT];
 extern u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT];
 extern u8 gBattlerByTurnOrder[MAX_BATTLERS_COUNT];
 extern u8 gCurrentTurnActionNumber;

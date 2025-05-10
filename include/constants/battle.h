@@ -23,12 +23,23 @@
  *   +---------------------------+
  */
 
-#define MAX_BATTLERS_COUNT  4
+enum BattlerPosition
+{
+    B_POSITION_PLAYER_LEFT,
+    B_POSITION_OPPONENT_LEFT,
+    B_POSITION_PLAYER_RIGHT,
+    B_POSITION_OPPONENT_RIGHT,
+    MAX_POSITION_COUNT,
+};
 
-#define B_POSITION_PLAYER_LEFT        0
-#define B_POSITION_OPPONENT_LEFT      1
-#define B_POSITION_PLAYER_RIGHT       2
-#define B_POSITION_OPPONENT_RIGHT     3
+enum BattlerId
+{
+    B_BATTLER_PLAYER_LEFT,
+    B_BATTLER_OPPONENT_LEFT,
+    B_BATTLER_PLAYER_RIGHT,
+    B_BATTLER_OPPONENT_RIGHT,
+    MAX_BATTLERS_COUNT,
+};
 
 // These macros can be used with either battler ID or positions to get the partner or the opposite mon
 #define BATTLE_OPPOSITE(id) ((id) ^ BIT_SIDE)
