@@ -114,31 +114,31 @@ static void InitSinglePlayerBtlControllers(void)
 
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         {
-            gBattlerControllerFuncs[B_BATTLER_PLAYER_LEFT] = SetControllerToRecordedPlayer;
-            gBattlerPositions[B_BATTLER_PLAYER_LEFT] = B_POSITION_PLAYER_LEFT;
+            gBattlerControllerFuncs[B_BATTLER_0] = SetControllerToRecordedPlayer;
+            gBattlerPositions[B_BATTLER_0] = B_POSITION_PLAYER_LEFT;
 
-            gBattlerControllerFuncs[B_BATTLER_OPPONENT_LEFT] = SetControllerToOpponent;
-            gBattlerPositions[B_BATTLER_OPPONENT_LEFT] = B_POSITION_OPPONENT_LEFT;
+            gBattlerControllerFuncs[B_BATTLER_1] = SetControllerToOpponent;
+            gBattlerPositions[B_BATTLER_1] = B_POSITION_OPPONENT_LEFT;
 
-            gBattlerControllerFuncs[B_BATTLER_PLAYER_RIGHT] = SetControllerToPlayerPartner;
-            gBattlerPositions[B_BATTLER_PLAYER_RIGHT] = B_POSITION_PLAYER_RIGHT;
+            gBattlerControllerFuncs[B_BATTLER_2] = SetControllerToPlayerPartner;
+            gBattlerPositions[B_BATTLER_2] = B_POSITION_PLAYER_RIGHT;
 
-            gBattlerControllerFuncs[B_BATTLER_OPPONENT_RIGHT] = SetControllerToOpponent;
-            gBattlerPositions[B_BATTLER_OPPONENT_RIGHT] = B_POSITION_OPPONENT_RIGHT;
+            gBattlerControllerFuncs[B_BATTLER_3] = SetControllerToOpponent;
+            gBattlerPositions[B_BATTLER_3] = B_POSITION_OPPONENT_RIGHT;
         }
         else
         {
-            gBattlerControllerFuncs[B_BATTLER_PLAYER_LEFT] = SetControllerToPlayer;
-            gBattlerPositions[B_BATTLER_PLAYER_LEFT] = B_POSITION_PLAYER_LEFT;
+            gBattlerControllerFuncs[B_BATTLER_0] = SetControllerToPlayer;
+            gBattlerPositions[B_BATTLER_0] = B_POSITION_PLAYER_LEFT;
 
-            gBattlerControllerFuncs[B_BATTLER_OPPONENT_LEFT] = SetControllerToOpponent;
-            gBattlerPositions[B_BATTLER_OPPONENT_LEFT] = B_POSITION_OPPONENT_LEFT;
+            gBattlerControllerFuncs[B_BATTLER_1] = SetControllerToOpponent;
+            gBattlerPositions[B_BATTLER_1] = B_POSITION_OPPONENT_LEFT;
 
-            gBattlerControllerFuncs[B_BATTLER_PLAYER_RIGHT] = SetControllerToPlayerPartner;
-            gBattlerPositions[B_BATTLER_PLAYER_RIGHT] = B_POSITION_PLAYER_RIGHT;
+            gBattlerControllerFuncs[B_BATTLER_2] = SetControllerToPlayerPartner;
+            gBattlerPositions[B_BATTLER_2] = B_POSITION_PLAYER_RIGHT;
 
-            gBattlerControllerFuncs[B_BATTLER_OPPONENT_RIGHT] = SetControllerToOpponent;
-            gBattlerPositions[B_BATTLER_OPPONENT_RIGHT] = B_POSITION_OPPONENT_RIGHT;
+            gBattlerControllerFuncs[B_BATTLER_3] = SetControllerToOpponent;
+            gBattlerPositions[B_BATTLER_3] = B_POSITION_OPPONENT_RIGHT;
         }
 
         gBattlersCount = MAX_BATTLERS_COUNT;
@@ -158,16 +158,16 @@ static void InitSinglePlayerBtlControllers(void)
         gBattleMainFunc = BeginBattleIntro;
 
         if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-            gBattlerControllerFuncs[B_BATTLER_PLAYER_LEFT] = SetControllerToSafari;
+            gBattlerControllerFuncs[B_BATTLER_0] = SetControllerToSafari;
         else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
-            gBattlerControllerFuncs[B_BATTLER_PLAYER_LEFT] = SetControllerToWally;
+            gBattlerControllerFuncs[B_BATTLER_0] = SetControllerToWally;
         else
-            gBattlerControllerFuncs[B_BATTLER_PLAYER_LEFT] = SetControllerToPlayer;
+            gBattlerControllerFuncs[B_BATTLER_0] = SetControllerToPlayer;
 
-        gBattlerPositions[B_BATTLER_PLAYER_LEFT] = B_POSITION_PLAYER_LEFT;
+        gBattlerPositions[B_BATTLER_0] = B_POSITION_PLAYER_LEFT;
 
-        gBattlerControllerFuncs[B_BATTLER_OPPONENT_LEFT] = SetControllerToOpponent;
-        gBattlerPositions[B_BATTLER_OPPONENT_LEFT] = B_POSITION_OPPONENT_LEFT;
+        gBattlerControllerFuncs[B_BATTLER_1] = SetControllerToOpponent;
+        gBattlerPositions[B_BATTLER_1] = B_POSITION_OPPONENT_LEFT;
 
         gBattlersCount = 2;
 
@@ -179,32 +179,32 @@ static void InitSinglePlayerBtlControllers(void)
                 {
                     gBattleMainFunc = BeginBattleIntro;
 
-                    gBattlerControllerFuncs[B_BATTLER_PLAYER_LEFT] = SetControllerToRecordedPlayer;
-                    gBattlerPositions[B_BATTLER_PLAYER_LEFT] = B_POSITION_PLAYER_LEFT;
+                    gBattlerControllerFuncs[B_BATTLER_0] = SetControllerToRecordedPlayer;
+                    gBattlerPositions[B_BATTLER_0] = B_POSITION_PLAYER_LEFT;
 
-                    gBattlerControllerFuncs[B_BATTLER_OPPONENT_LEFT] = SetControllerToRecordedOpponent;
-                    gBattlerPositions[B_BATTLER_OPPONENT_LEFT] = B_POSITION_OPPONENT_LEFT;
+                    gBattlerControllerFuncs[B_BATTLER_1] = SetControllerToRecordedOpponent;
+                    gBattlerPositions[B_BATTLER_1] = B_POSITION_OPPONENT_LEFT;
 
                     gBattlersCount = 2;
                 }
                 else // see how the banks are switched
                 {
-                    gBattlerControllerFuncs[B_BATTLER_OPPONENT_LEFT] = SetControllerToRecordedPlayer;
-                    gBattlerPositions[B_BATTLER_OPPONENT_LEFT] = B_POSITION_PLAYER_LEFT;
+                    gBattlerControllerFuncs[B_BATTLER_1] = SetControllerToRecordedPlayer;
+                    gBattlerPositions[B_BATTLER_1] = B_POSITION_PLAYER_LEFT;
 
-                    gBattlerControllerFuncs[B_BATTLER_PLAYER_LEFT] = SetControllerToRecordedOpponent;
-                    gBattlerPositions[B_BATTLER_PLAYER_LEFT] = B_POSITION_OPPONENT_LEFT;
+                    gBattlerControllerFuncs[B_BATTLER_0] = SetControllerToRecordedOpponent;
+                    gBattlerPositions[B_BATTLER_0] = B_POSITION_OPPONENT_LEFT;
 
                     gBattlersCount = 2;
                 }
             }
             else
             {
-                gBattlerControllerFuncs[B_BATTLER_PLAYER_LEFT] = SetControllerToRecordedPlayer;
-                gBattlerPositions[B_BATTLER_PLAYER_LEFT] = B_POSITION_PLAYER_LEFT;
+                gBattlerControllerFuncs[B_BATTLER_0] = SetControllerToRecordedPlayer;
+                gBattlerPositions[B_BATTLER_0] = B_POSITION_PLAYER_LEFT;
 
-                gBattlerControllerFuncs[B_BATTLER_OPPONENT_LEFT] = SetControllerToOpponent;
-                gBattlerPositions[B_BATTLER_OPPONENT_LEFT] = B_POSITION_OPPONENT_LEFT;
+                gBattlerControllerFuncs[B_BATTLER_1] = SetControllerToOpponent;
+                gBattlerPositions[B_BATTLER_1] = B_POSITION_OPPONENT_LEFT;
             }
         }
     }
@@ -212,17 +212,17 @@ static void InitSinglePlayerBtlControllers(void)
     {
         gBattleMainFunc = BeginBattleIntro;
 
-        gBattlerControllerFuncs[B_BATTLER_PLAYER_LEFT] = SetControllerToPlayer;
-        gBattlerPositions[B_BATTLER_PLAYER_LEFT] = B_POSITION_PLAYER_LEFT;
+        gBattlerControllerFuncs[B_BATTLER_0] = SetControllerToPlayer;
+        gBattlerPositions[B_BATTLER_0] = B_POSITION_PLAYER_LEFT;
 
-        gBattlerControllerFuncs[B_BATTLER_OPPONENT_LEFT] = SetControllerToOpponent;
-        gBattlerPositions[B_BATTLER_OPPONENT_LEFT] = B_POSITION_OPPONENT_LEFT;
+        gBattlerControllerFuncs[B_BATTLER_1] = SetControllerToOpponent;
+        gBattlerPositions[B_BATTLER_1] = B_POSITION_OPPONENT_LEFT;
 
-        gBattlerControllerFuncs[B_BATTLER_PLAYER_RIGHT] = SetControllerToPlayer;
-        gBattlerPositions[B_BATTLER_PLAYER_RIGHT] = B_POSITION_PLAYER_RIGHT;
+        gBattlerControllerFuncs[B_BATTLER_2] = SetControllerToPlayer;
+        gBattlerPositions[B_BATTLER_2] = B_POSITION_PLAYER_RIGHT;
 
-        gBattlerControllerFuncs[B_BATTLER_OPPONENT_RIGHT] = SetControllerToOpponent;
-        gBattlerPositions[B_BATTLER_OPPONENT_RIGHT] = B_POSITION_OPPONENT_RIGHT;
+        gBattlerControllerFuncs[B_BATTLER_3] = SetControllerToOpponent;
+        gBattlerPositions[B_BATTLER_3] = B_POSITION_OPPONENT_RIGHT;
 
         gBattlersCount = MAX_BATTLERS_COUNT;
 
@@ -232,17 +232,17 @@ static void InitSinglePlayerBtlControllers(void)
             {
                 gBattleMainFunc = BeginBattleIntro;
 
-                gBattlerControllerFuncs[B_BATTLER_PLAYER_LEFT] = SetControllerToRecordedPlayer;
-                gBattlerPositions[B_BATTLER_PLAYER_LEFT] = B_POSITION_PLAYER_LEFT;
+                gBattlerControllerFuncs[B_BATTLER_0] = SetControllerToRecordedPlayer;
+                gBattlerPositions[B_BATTLER_0] = B_POSITION_PLAYER_LEFT;
 
-                gBattlerControllerFuncs[B_BATTLER_OPPONENT_LEFT] = SetControllerToOpponent;
-                gBattlerPositions[B_BATTLER_OPPONENT_LEFT] = B_POSITION_OPPONENT_LEFT;
+                gBattlerControllerFuncs[B_BATTLER_1] = SetControllerToOpponent;
+                gBattlerPositions[B_BATTLER_1] = B_POSITION_OPPONENT_LEFT;
 
-                gBattlerControllerFuncs[B_BATTLER_PLAYER_RIGHT] = SetControllerToRecordedPlayer;
-                gBattlerPositions[B_BATTLER_PLAYER_RIGHT] = B_POSITION_PLAYER_RIGHT;
+                gBattlerControllerFuncs[B_BATTLER_2] = SetControllerToRecordedPlayer;
+                gBattlerPositions[B_BATTLER_2] = B_POSITION_PLAYER_RIGHT;
 
-                gBattlerControllerFuncs[B_BATTLER_OPPONENT_RIGHT] = SetControllerToOpponent;
-                gBattlerPositions[B_BATTLER_OPPONENT_RIGHT] = B_POSITION_OPPONENT_RIGHT;
+                gBattlerControllerFuncs[B_BATTLER_3] = SetControllerToOpponent;
+                gBattlerPositions[B_BATTLER_3] = B_POSITION_OPPONENT_RIGHT;
 
                 gBattlersCount = MAX_BATTLERS_COUNT;
 
@@ -330,52 +330,52 @@ static void InitSinglePlayerBtlControllers(void)
             }
             else if (gBattleTypeFlags & BATTLE_TYPE_IS_MASTER)
             {
-                gBattlerControllerFuncs[B_BATTLER_PLAYER_LEFT] = SetControllerToRecordedPlayer;
-                gBattlerPositions[B_BATTLER_PLAYER_LEFT] = B_POSITION_PLAYER_LEFT;
+                gBattlerControllerFuncs[B_BATTLER_0] = SetControllerToRecordedPlayer;
+                gBattlerPositions[B_BATTLER_0] = B_POSITION_PLAYER_LEFT;
 
-                gBattlerControllerFuncs[B_BATTLER_PLAYER_RIGHT] = SetControllerToRecordedPlayer;
-                gBattlerPositions[B_BATTLER_PLAYER_RIGHT] = B_POSITION_PLAYER_RIGHT;
+                gBattlerControllerFuncs[B_BATTLER_2] = SetControllerToRecordedPlayer;
+                gBattlerPositions[B_BATTLER_2] = B_POSITION_PLAYER_RIGHT;
 
                 if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
                 {
-                  gBattlerControllerFuncs[B_BATTLER_OPPONENT_LEFT] = SetControllerToRecordedOpponent;
-                  gBattlerPositions[B_BATTLER_OPPONENT_LEFT] = B_POSITION_OPPONENT_LEFT;
+                  gBattlerControllerFuncs[B_BATTLER_1] = SetControllerToRecordedOpponent;
+                  gBattlerPositions[B_BATTLER_1] = B_POSITION_OPPONENT_LEFT;
 
-                  gBattlerControllerFuncs[B_BATTLER_OPPONENT_RIGHT] = SetControllerToRecordedOpponent;
-                  gBattlerPositions[B_BATTLER_OPPONENT_RIGHT] = B_POSITION_OPPONENT_RIGHT;
+                  gBattlerControllerFuncs[B_BATTLER_3] = SetControllerToRecordedOpponent;
+                  gBattlerPositions[B_BATTLER_3] = B_POSITION_OPPONENT_RIGHT;
                 }
                 else
                 {
-                  gBattlerControllerFuncs[B_BATTLER_OPPONENT_LEFT] = SetControllerToOpponent;
-                  gBattlerPositions[B_BATTLER_OPPONENT_LEFT] = B_POSITION_OPPONENT_LEFT;
+                  gBattlerControllerFuncs[B_BATTLER_1] = SetControllerToOpponent;
+                  gBattlerPositions[B_BATTLER_1] = B_POSITION_OPPONENT_LEFT;
 
-                  gBattlerControllerFuncs[B_BATTLER_OPPONENT_RIGHT] = SetControllerToOpponent;
-                  gBattlerPositions[B_BATTLER_OPPONENT_RIGHT] = B_POSITION_OPPONENT_RIGHT;
+                  gBattlerControllerFuncs[B_BATTLER_3] = SetControllerToOpponent;
+                  gBattlerPositions[B_BATTLER_3] = B_POSITION_OPPONENT_RIGHT;
                 }
             }
             else
             {
-                gBattlerControllerFuncs[B_BATTLER_OPPONENT_LEFT] = SetControllerToRecordedPlayer;
-                gBattlerPositions[B_BATTLER_OPPONENT_LEFT] = B_POSITION_PLAYER_LEFT;
+                gBattlerControllerFuncs[B_BATTLER_1] = SetControllerToRecordedPlayer;
+                gBattlerPositions[B_BATTLER_1] = B_POSITION_PLAYER_LEFT;
 
-                gBattlerControllerFuncs[B_BATTLER_OPPONENT_RIGHT] = SetControllerToRecordedPlayer;
-                gBattlerPositions[B_BATTLER_OPPONENT_RIGHT] = B_POSITION_PLAYER_RIGHT;
+                gBattlerControllerFuncs[B_BATTLER_3] = SetControllerToRecordedPlayer;
+                gBattlerPositions[B_BATTLER_3] = B_POSITION_PLAYER_RIGHT;
 
                 if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
                 {
-                    gBattlerControllerFuncs[B_BATTLER_PLAYER_LEFT] = SetControllerToRecordedOpponent;
-                    gBattlerPositions[B_BATTLER_PLAYER_LEFT] = B_POSITION_OPPONENT_LEFT;
+                    gBattlerControllerFuncs[B_BATTLER_0] = SetControllerToRecordedOpponent;
+                    gBattlerPositions[B_BATTLER_0] = B_POSITION_OPPONENT_LEFT;
 
-                    gBattlerControllerFuncs[B_BATTLER_PLAYER_RIGHT] = SetControllerToRecordedOpponent;
-                    gBattlerPositions[B_BATTLER_PLAYER_RIGHT] = B_POSITION_OPPONENT_RIGHT;
+                    gBattlerControllerFuncs[B_BATTLER_2] = SetControllerToRecordedOpponent;
+                    gBattlerPositions[B_BATTLER_2] = B_POSITION_OPPONENT_RIGHT;
                 }
                 else
                 {
-                    gBattlerControllerFuncs[B_BATTLER_PLAYER_LEFT] = SetControllerToOpponent;
-                    gBattlerPositions[B_BATTLER_PLAYER_LEFT] = B_POSITION_OPPONENT_LEFT;
+                    gBattlerControllerFuncs[B_BATTLER_0] = SetControllerToOpponent;
+                    gBattlerPositions[B_BATTLER_0] = B_POSITION_OPPONENT_LEFT;
 
-                    gBattlerControllerFuncs[B_BATTLER_PLAYER_RIGHT] = SetControllerToOpponent;
-                    gBattlerPositions[B_BATTLER_PLAYER_RIGHT] = B_POSITION_OPPONENT_RIGHT;
+                    gBattlerControllerFuncs[B_BATTLER_2] = SetControllerToOpponent;
+                    gBattlerPositions[B_BATTLER_2] = B_POSITION_OPPONENT_RIGHT;
                 }
             }
         }
@@ -393,21 +393,21 @@ static void InitLinkBtlControllers(void)
         {
             gBattleMainFunc = BeginBattleIntro;
 
-            gBattlerControllerFuncs[B_BATTLER_PLAYER_LEFT] = SetControllerToPlayer;
-            gBattlerPositions[B_BATTLER_PLAYER_LEFT] = B_POSITION_PLAYER_LEFT;
+            gBattlerControllerFuncs[B_BATTLER_0] = SetControllerToPlayer;
+            gBattlerPositions[B_BATTLER_0] = B_POSITION_PLAYER_LEFT;
 
-            gBattlerControllerFuncs[B_BATTLER_OPPONENT_LEFT] = SetControllerToLinkOpponent;
-            gBattlerPositions[B_BATTLER_OPPONENT_LEFT] = B_POSITION_OPPONENT_LEFT;
+            gBattlerControllerFuncs[B_BATTLER_1] = SetControllerToLinkOpponent;
+            gBattlerPositions[B_BATTLER_1] = B_POSITION_OPPONENT_LEFT;
 
             gBattlersCount = 2;
         }
         else
         {
-            gBattlerControllerFuncs[B_BATTLER_OPPONENT_LEFT] = SetControllerToPlayer;
-            gBattlerPositions[B_BATTLER_OPPONENT_LEFT] = B_POSITION_PLAYER_LEFT;
+            gBattlerControllerFuncs[B_BATTLER_1] = SetControllerToPlayer;
+            gBattlerPositions[B_BATTLER_1] = B_POSITION_PLAYER_LEFT;
 
-            gBattlerControllerFuncs[B_BATTLER_PLAYER_LEFT] = SetControllerToLinkOpponent;
-            gBattlerPositions[B_BATTLER_PLAYER_LEFT] = B_POSITION_OPPONENT_LEFT;
+            gBattlerControllerFuncs[B_BATTLER_0] = SetControllerToLinkOpponent;
+            gBattlerPositions[B_BATTLER_0] = B_POSITION_OPPONENT_LEFT;
 
             gBattlersCount = 2;
         }
@@ -418,33 +418,33 @@ static void InitLinkBtlControllers(void)
         {
             gBattleMainFunc = BeginBattleIntro;
 
-            gBattlerControllerFuncs[B_BATTLER_PLAYER_LEFT] = SetControllerToPlayer;
-            gBattlerPositions[B_BATTLER_PLAYER_LEFT] = B_POSITION_PLAYER_LEFT;
+            gBattlerControllerFuncs[B_BATTLER_0] = SetControllerToPlayer;
+            gBattlerPositions[B_BATTLER_0] = B_POSITION_PLAYER_LEFT;
 
-            gBattlerControllerFuncs[B_BATTLER_OPPONENT_LEFT] = SetControllerToLinkOpponent;
-            gBattlerPositions[B_BATTLER_OPPONENT_LEFT] = B_POSITION_OPPONENT_LEFT;
+            gBattlerControllerFuncs[B_BATTLER_1] = SetControllerToLinkOpponent;
+            gBattlerPositions[B_BATTLER_1] = B_POSITION_OPPONENT_LEFT;
 
-            gBattlerControllerFuncs[B_BATTLER_PLAYER_RIGHT] = SetControllerToPlayer;
-            gBattlerPositions[B_BATTLER_PLAYER_RIGHT] = B_POSITION_PLAYER_RIGHT;
+            gBattlerControllerFuncs[B_BATTLER_2] = SetControllerToPlayer;
+            gBattlerPositions[B_BATTLER_2] = B_POSITION_PLAYER_RIGHT;
 
-            gBattlerControllerFuncs[B_BATTLER_OPPONENT_RIGHT] = SetControllerToLinkOpponent;
-            gBattlerPositions[B_BATTLER_OPPONENT_RIGHT] = B_POSITION_OPPONENT_RIGHT;
+            gBattlerControllerFuncs[B_BATTLER_3] = SetControllerToLinkOpponent;
+            gBattlerPositions[B_BATTLER_3] = B_POSITION_OPPONENT_RIGHT;
 
             gBattlersCount = MAX_BATTLERS_COUNT;
         }
         else
         {
-            gBattlerControllerFuncs[B_BATTLER_OPPONENT_LEFT] = SetControllerToPlayer;
-            gBattlerPositions[B_BATTLER_OPPONENT_LEFT] = B_POSITION_PLAYER_LEFT;
+            gBattlerControllerFuncs[B_BATTLER_1] = SetControllerToPlayer;
+            gBattlerPositions[B_BATTLER_1] = B_POSITION_PLAYER_LEFT;
 
-            gBattlerControllerFuncs[B_BATTLER_PLAYER_LEFT] = SetControllerToLinkOpponent;
-            gBattlerPositions[B_BATTLER_PLAYER_LEFT] = B_POSITION_OPPONENT_LEFT;
+            gBattlerControllerFuncs[B_BATTLER_0] = SetControllerToLinkOpponent;
+            gBattlerPositions[B_BATTLER_0] = B_POSITION_OPPONENT_LEFT;
 
-            gBattlerControllerFuncs[B_BATTLER_OPPONENT_RIGHT] = SetControllerToPlayer;
-            gBattlerPositions[B_BATTLER_OPPONENT_RIGHT] = B_POSITION_PLAYER_RIGHT;
+            gBattlerControllerFuncs[B_BATTLER_3] = SetControllerToPlayer;
+            gBattlerPositions[B_BATTLER_3] = B_POSITION_PLAYER_RIGHT;
 
-            gBattlerControllerFuncs[B_BATTLER_PLAYER_RIGHT] = SetControllerToLinkOpponent;
-            gBattlerPositions[B_BATTLER_PLAYER_RIGHT] = B_POSITION_OPPONENT_RIGHT;
+            gBattlerControllerFuncs[B_BATTLER_2] = SetControllerToLinkOpponent;
+            gBattlerPositions[B_BATTLER_2] = B_POSITION_OPPONENT_RIGHT;
 
             gBattlersCount = MAX_BATTLERS_COUNT;
         }
@@ -455,33 +455,33 @@ static void InitLinkBtlControllers(void)
         {
             gBattleMainFunc = BeginBattleIntro;
 
-            gBattlerControllerFuncs[B_BATTLER_PLAYER_LEFT] = SetControllerToPlayer;
-            gBattlerPositions[B_BATTLER_PLAYER_LEFT] = B_POSITION_PLAYER_LEFT;
+            gBattlerControllerFuncs[B_BATTLER_0] = SetControllerToPlayer;
+            gBattlerPositions[B_BATTLER_0] = B_POSITION_PLAYER_LEFT;
 
-            gBattlerControllerFuncs[B_BATTLER_OPPONENT_LEFT] = SetControllerToOpponent;
-            gBattlerPositions[B_BATTLER_OPPONENT_LEFT] = B_POSITION_OPPONENT_LEFT;
+            gBattlerControllerFuncs[B_BATTLER_1] = SetControllerToOpponent;
+            gBattlerPositions[B_BATTLER_1] = B_POSITION_OPPONENT_LEFT;
 
-            gBattlerControllerFuncs[B_BATTLER_PLAYER_RIGHT] = SetControllerToLinkPartner;
-            gBattlerPositions[B_BATTLER_PLAYER_RIGHT] = B_POSITION_PLAYER_RIGHT;
+            gBattlerControllerFuncs[B_BATTLER_2] = SetControllerToLinkPartner;
+            gBattlerPositions[B_BATTLER_2] = B_POSITION_PLAYER_RIGHT;
 
-            gBattlerControllerFuncs[B_BATTLER_OPPONENT_RIGHT] = SetControllerToOpponent;
-            gBattlerPositions[B_BATTLER_OPPONENT_RIGHT] = B_POSITION_OPPONENT_RIGHT;
+            gBattlerControllerFuncs[B_BATTLER_3] = SetControllerToOpponent;
+            gBattlerPositions[B_BATTLER_3] = B_POSITION_OPPONENT_RIGHT;
 
             gBattlersCount = MAX_BATTLERS_COUNT;
         }
         else
         {
-            gBattlerControllerFuncs[B_BATTLER_PLAYER_LEFT] = SetControllerToLinkPartner;
-            gBattlerPositions[B_BATTLER_PLAYER_LEFT] = B_POSITION_PLAYER_LEFT;
+            gBattlerControllerFuncs[B_BATTLER_0] = SetControllerToLinkPartner;
+            gBattlerPositions[B_BATTLER_0] = B_POSITION_PLAYER_LEFT;
 
-            gBattlerControllerFuncs[B_BATTLER_OPPONENT_LEFT] = SetControllerToLinkOpponent;
-            gBattlerPositions[B_BATTLER_OPPONENT_LEFT] = B_POSITION_OPPONENT_LEFT;
+            gBattlerControllerFuncs[B_BATTLER_1] = SetControllerToLinkOpponent;
+            gBattlerPositions[B_BATTLER_1] = B_POSITION_OPPONENT_LEFT;
 
-            gBattlerControllerFuncs[B_BATTLER_PLAYER_RIGHT] = SetControllerToPlayer;
-            gBattlerPositions[B_BATTLER_PLAYER_RIGHT] = B_POSITION_PLAYER_RIGHT;
+            gBattlerControllerFuncs[B_BATTLER_2] = SetControllerToPlayer;
+            gBattlerPositions[B_BATTLER_2] = B_POSITION_PLAYER_RIGHT;
 
-            gBattlerControllerFuncs[B_BATTLER_OPPONENT_RIGHT] = SetControllerToLinkOpponent;
-            gBattlerPositions[B_BATTLER_OPPONENT_RIGHT] = B_POSITION_OPPONENT_RIGHT;
+            gBattlerControllerFuncs[B_BATTLER_3] = SetControllerToLinkOpponent;
+            gBattlerPositions[B_BATTLER_3] = B_POSITION_OPPONENT_RIGHT;
 
             gBattlersCount = MAX_BATTLERS_COUNT;
         }

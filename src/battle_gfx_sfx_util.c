@@ -778,11 +778,11 @@ bool8 BattleLoadAllHealthBoxesGfx(u8 state)
             }
             else if (state == 4)
             {
-                LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[B_BATTLER_PLAYER_LEFT]]);
+                LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[B_BATTLER_0]]);
             }
             else if (state == 5)
             {
-                LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[B_BATTLER_OPPONENT_LEFT]]);
+                LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[B_BATTLER_1]]);
             }
             else
             {
@@ -800,13 +800,13 @@ bool8 BattleLoadAllHealthBoxesGfx(u8 state)
             else if (state == 5)
                 LoadCompressedSpriteSheet(&sSpriteSheets_DoublesOpponentHealthbox[1]);
             else if (state == 6)
-                LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[B_BATTLER_PLAYER_LEFT]]);
+                LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[B_BATTLER_0]]);
             else if (state == 7)
-                LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[B_BATTLER_OPPONENT_LEFT]]);
+                LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[B_BATTLER_1]]);
             else if (state == 8)
-                LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[B_BATTLER_PLAYER_RIGHT]]);
+                LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[B_BATTLER_2]]);
             else if (state == 9)
-                LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[B_BATTLER_OPPONENT_RIGHT]]);
+                LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[B_BATTLER_3]]);
             else
                 retVal = TRUE;
         }
