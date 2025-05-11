@@ -1347,13 +1347,13 @@ static bool8 SetupContestGraphics(u8 *stateVar)
         CreateApplauseMeterSprite();
         CreateJudgeAttentionEyeTask();
         CreateUnusedBlendTask();
-        gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
-        gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
-        gBattlerPositions[2] = B_POSITION_OPPONENT_RIGHT;
-        gBattlerPositions[3] = B_POSITION_PLAYER_RIGHT;
+        gBattlerPositions[B_BATTLER_0] = B_POSITION_PLAYER_LEFT;
+        gBattlerPositions[B_BATTLER_1] = B_POSITION_OPPONENT_LEFT;
+        gBattlerPositions[B_BATTLER_2] = B_POSITION_OPPONENT_RIGHT;
+        gBattlerPositions[B_BATTLER_3] = B_POSITION_PLAYER_RIGHT;
         gBattleTypeFlags = 0;
-        gBattlerAttacker = B_POSITION_PLAYER_RIGHT;
-        gBattlerTarget = B_POSITION_OPPONENT_RIGHT;
+        gBattlerAttacker = B_BATTLER_2;
+        gBattlerTarget = B_BATTLER_3;
         // Unclear why judge sprite is assigned here
         // Overwritten in APPEALSTATE_SLIDE_MON_IN with the attacking contest mon
         gBattlerSpriteIds[gBattlerAttacker] = CreateJudgeSprite();
