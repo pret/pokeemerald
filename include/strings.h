@@ -1,6 +1,8 @@
 #ifndef GUARD_STRINGS_H
 #define GUARD_STRINGS_H
 
+#include "gba/types.h"
+
 // Placeholders
 extern const u8 gText_ExpandedPlaceholder_Empty[];
 extern const u8 gText_ExpandedPlaceholder_Kun[];

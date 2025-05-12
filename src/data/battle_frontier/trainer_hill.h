@@ -1,3 +1,7 @@
+#if CLANGD
+#pragma clang diagnostic ignored "-Wbitfield-constant-conversion"
+#endif
+
 // NOTE: Each of these macros turn data into one byte. Therefore ranges for all arguments is 0-15
 // See struct TrainerHillFloorMap for more info about each
 #define COORDS_XY(x,y)      ((y<<4)|(x))

@@ -1,6 +1,8 @@
 #ifndef GUARD_GBA_MULTIBOOT_H
 #define GUARD_GBA_MULTIBOOT_H
 
+#include "types.h"
+
 #define MULTIBOOT_NCHILD        3       // Maximum number of slaves
 #define MULTIBOOT_HEADER_SIZE   0xc0    // Header size
 #define MULTIBOOT_SEND_SIZE_MIN 0x100   // Minimum transmission size

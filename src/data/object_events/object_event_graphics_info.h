@@ -1,3 +1,15 @@
+#if CLANGD
+#include "berry_tree_graphics_tables.h"
+#endif
+
+#include "object_event_pic_tables.h"
+#include "object_event_anims.h"
+#include "object_event_subsprites.h"
+#include "base_oam.h"
+#include "event_object_movement.h"
+
+static const struct SpriteFrameImage sPicTable_PechaBerryTree[];
+
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanNormal = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN,

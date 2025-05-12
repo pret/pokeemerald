@@ -1,3 +1,5 @@
+#include "level_up_learnsets.h"
+
 const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
 {
     [SPECIES_NONE] = sBulbasaurLevelUpLearnset,

@@ -73,80 +73,6 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-enum {
-    MENU_SUMMARY,
-    MENU_SWITCH,
-    MENU_CANCEL1,
-    MENU_ITEM,
-    MENU_GIVE,
-    MENU_TAKE_ITEM,
-    MENU_MAIL,
-    MENU_TAKE_MAIL,
-    MENU_READ,
-    MENU_CANCEL2,
-    MENU_SHIFT,
-    MENU_SEND_OUT,
-    MENU_ENTER,
-    MENU_NO_ENTRY,
-    MENU_STORE,
-    MENU_REGISTER,
-    MENU_TRADE1,
-    MENU_TRADE2,
-    MENU_TOSS,
-    MENU_FIELD_MOVES
-};
-
-// IDs for the action lists that appear when a party mon is selected
-enum {
-    ACTIONS_NONE,
-    ACTIONS_SWITCH,
-    ACTIONS_SHIFT,
-    ACTIONS_SEND_OUT,
-    ACTIONS_ENTER,
-    ACTIONS_NO_ENTRY,
-    ACTIONS_STORE,
-    ACTIONS_SUMMARY_ONLY,
-    ACTIONS_ITEM,
-    ACTIONS_MAIL,
-    ACTIONS_REGISTER,
-    ACTIONS_TRADE,
-    ACTIONS_SPIN_TRADE,
-    ACTIONS_TAKEITEM_TOSS,
-};
-
-// In CursorCb_FieldMove, field moves <= FIELD_MOVE_WATERFALL are assumed to line up with the badge flags.
-// Badge flag names are commented here for people searching for references to remove the badge requirement.
-enum {
-    FIELD_MOVE_CUT,         // FLAG_BADGE01_GET
-    FIELD_MOVE_FLASH,       // FLAG_BADGE02_GET
-    FIELD_MOVE_ROCK_SMASH,  // FLAG_BADGE03_GET
-    FIELD_MOVE_STRENGTH,    // FLAG_BADGE04_GET
-    FIELD_MOVE_SURF,        // FLAG_BADGE05_GET
-    FIELD_MOVE_FLY,         // FLAG_BADGE06_GET
-    FIELD_MOVE_DIVE,        // FLAG_BADGE07_GET
-    FIELD_MOVE_WATERFALL,   // FLAG_BADGE08_GET
-    FIELD_MOVE_TELEPORT,
-    FIELD_MOVE_DIG,
-    FIELD_MOVE_SECRET_POWER,
-    FIELD_MOVE_MILK_DRINK,
-    FIELD_MOVE_SOFT_BOILED,
-    FIELD_MOVE_SWEET_SCENT,
-    FIELD_MOVES_COUNT
-};
-
-enum {
-    PARTY_BOX_LEFT_COLUMN,
-    PARTY_BOX_RIGHT_COLUMN,
-};
-
-enum {
-    TAG_POKEBALL = 1200,
-    TAG_POKEBALL_SMALL,
-    TAG_STATUS_ICONS,
-};
-
-#define TAG_HELD_ITEM 55120
-
 #define PARTY_PAL_SELECTED     (1 << 0)
 #define PARTY_PAL_FAINTED      (1 << 1)
 #define PARTY_PAL_TO_SWITCH    (1 << 2)
@@ -166,21 +92,6 @@ enum {
     CANNOT_LEARN_MOVE,
     ALREADY_KNOWS_MOVE,
     CANNOT_LEARN_MOVE_IS_EGG
-};
-
-enum {
-    // Window ids 0-5 are implicitly assigned to each party Pokémon in InitPartyMenuBoxes
-    WIN_MSG = PARTY_SIZE,
-};
-
-struct PartyMenuBoxInfoRects
-{
-    void (*blitFunc)(u8, u8, u8, u8, u8, bool8);
-    u8 dimensions[24];
-    u8 descTextLeft;
-    u8 descTextTop;
-    u8 descTextWidth;
-    u8 descTextHeight;
 };
 
 struct PartyMenuInternal
@@ -455,31 +366,6 @@ static void Task_ChooseMonForMoveRelearner(u8);
 static void CB2_ChooseMonForMoveRelearner(void);
 static void Task_BattlePyramidChooseMonHeldItems(u8);
 static void ShiftMoveSlot(struct Pokemon *, u8, u8);
-static void BlitBitmapToPartyWindow_LeftColumn(u8, u8, u8, u8, u8, bool8);
-static void BlitBitmapToPartyWindow_RightColumn(u8, u8, u8, u8, u8, bool8);
-static void CursorCb_Summary(u8);
-static void CursorCb_Switch(u8);
-static void CursorCb_Cancel1(u8);
-static void CursorCb_Item(u8);
-static void CursorCb_Give(u8);
-static void CursorCb_TakeItem(u8);
-static void CursorCb_Mail(u8);
-static void CursorCb_Read(u8);
-static void CursorCb_TakeMail(u8);
-static void CursorCb_Cancel2(u8);
-static void CursorCb_SendMon(u8);
-static void CursorCb_Enter(u8);
-static void CursorCb_NoEntry(u8);
-static void CursorCb_Store(u8);
-static void CursorCb_Register(u8);
-static void CursorCb_Trade1(u8);
-static void CursorCb_Trade2(u8);
-static void CursorCb_Toss(u8);
-static void CursorCb_FieldMove(u8);
-static bool8 SetUpFieldMove_Surf(void);
-static bool8 SetUpFieldMove_Fly(void);
-static bool8 SetUpFieldMove_Waterfall(void);
-static bool8 SetUpFieldMove_Dive(void);
 
 // static const data
 #include "data/pokemon/tutor_learnsets.h"

@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_MESSAGE_H
 #define GUARD_BATTLE_MESSAGE_H
 
+#include "constants/battle.h"
+
 // This buffer can hold many different things. Some of the things it can hold
 // that have explicit sizes are listed below to ensure it can contain them.
 #define TEXT_BUFF_ARRAY_COUNT   max(16, \

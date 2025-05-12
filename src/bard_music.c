@@ -3,12 +3,6 @@
 #include "easy_chat.h"
 #include "constants/songs.h"
 
-// Indicates that the previous sound should be held.
-#define PREV_BARD_SOUND { .songId = NUM_PHONEME_SONGS }
-
-// Invalid sound, indicates the end of the sounds for the word.
-#define NULL_BARD_SOUND { .songId = PHONEME_ID_NONE }
-
 #include "data/bard_music/pokemon.h"
 #include "data/bard_music/moves.h"
 #include "data/bard_music/trainer.h"

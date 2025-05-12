@@ -733,7 +733,7 @@ static void SetBattlersXOffsetForShake(struct Task *task)
 
 void AnimTask_IsPowerOver99(u8 taskId)
 {
-    gBattleAnimArgs[15] = gAnimMovePower > 99;
+    gBattleAnimArgsOOBAccess.gBattleAnimArgsOverflow[15] = gAnimMovePower > 99;
     DestroyAnimVisualTask(taskId);
 }
 

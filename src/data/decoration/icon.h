@@ -1,3 +1,5 @@
+#include <stddef.h>
+
 const u32 *const gDecorIconTable[][2] =
 {
     [DECOR_NONE]            = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},

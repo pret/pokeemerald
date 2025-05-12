@@ -1,4 +1,8 @@
-﻿static const union AnimCmd sAnim_None_1[] =
+﻿#if CLANGD
+#pragma clang diagnostic ignored "-Wtentative-definition-array"
+#endif
+
+static const union AnimCmd sAnim_None_1[] =
 {
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_FRAME(1, 30),

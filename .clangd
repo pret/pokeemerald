@@ -1,0 +1,132 @@
+Diagnostics:
+  ClangTidy:
+    FastCheckFilter: None
+---
+If:
+  PathMatch: (src|include)/.*.[ch]
+Diagnostics:
+  UnusedIncludes: None
+  MissingIncludes: None
+CompileFlags:
+  Add:
+    - "--target=arm"
+    - "-mcpu=arm7tdmi"
+    - "-mthumb"
+    - "-mabi=apcs-gnu"
+    - "-mtune=arm7tdmi"
+    - "-march=armv4t"
+    - "-Iinclude"
+    - "-I../include"
+    - "-I../../include"
+    - "-DCLANGD=1"
+    - "-DMODERN=1"
+    - "--verbose"
+    - "-isysroot../tools/agbcc/include"
+    - "-isystem../tools/agbcc/include"
+    - "-isystem../../tools/agbcc/include"
+    - "-isystem../../../tools/agbcc/include"
+    - "-resource-dir=../tools/agbcc/include"
+    - "-Wno-gnu-alignof-expression"
+    - "-Wno-gnu-folding-constant"
+    - "-Wno-single-bit-bitfield-constant-conversion"
+    - "-Wno-trigraphs"
+---
+If:
+  PathMatch:
+   - (src|include)/[^/]+.[ch]
+   - (src|include)/data/.*.[ch]
+Diagnostics:
+  UnusedIncludes: None
+  MissingIncludes: None
+CompileFlags:
+  Add:
+    - "-includeglobal.h"
+---
+If:
+  PathMatch: ".*\\.h$"
+CompileFlags:
+  Add:
+    - "-xc-header"
+---
+If:
+  PathMatch: src/data/.*.h
+CompileFlags:
+  Add:
+   - "-iquote../../../include"
+   # these need an explicit path because there are other files with the ssame name
+   - "-include../../../include/trainer_hill.h"
+   - "-include../include/apprentice.h"
+   - "-include../include/battle_anim.h"
+   - "-include../include/data.h"
+   - "-include../include/union_room.h"
+   - "-include../include/wild_encounter.h"
+   - "-include../text/item_descriptions.h"
+   - "-include./metatiles.h"
+   - "-include./tiles.h"
+   - "-includebard_music.h"
+   - "-includebattle_pyramid.h"
+   - "-includebattle_tower.h"
+   - "-includebattle.h"
+   - "-includeconstants/abilities.h"
+   - "-includeconstants/apprentice.h"
+   - "-includeconstants/battle_ai.h"
+   - "-includeconstants/battle_anim.h"
+   - "-includeconstants/battle_frontier_mons.h"
+   - "-includeconstants/battle_frontier.h"
+   - "-includeconstants/battle_move_effects.h"
+   - "-includeconstants/battle_pyramid.h"
+   - "-includeconstants/battle_tent_mons.h"
+   - "-includeconstants/battle_tent_trainers.h"
+   - "-includeconstants/contest.h"
+   - "-includeconstants/decorations.h"
+   - "-includeconstants/easy_chat.h"
+   - "-includeconstants/event_object_movement.h"
+   - "-includeconstants/event_objects.h"
+   - "-includeconstants/field_effects.h"
+   - "-includeconstants/heal_locations.h"
+   - "-includeconstants/hold_effects.h"
+   - "-includeconstants/item_effects.h"
+   - "-includeconstants/item.h"
+   - "-includeconstants/items.h"
+   - "-includeconstants/mauville_old_man.h"
+   - "-includeconstants/metatile_labels.h"
+   - "-includeconstants/moves.h"
+   - "-includeconstants/party_menu.h"
+   - "-includeconstants/region_map_sections.h"
+   - "-includeconstants/rgb.h"
+   - "-includeconstants/script_menu.h"
+   - "-includeconstants/songs.h"
+   - "-includeconstants/tms_hms.h"
+   - "-includeconstants/trade.h"
+   - "-includeconstants/trainers.h"
+   - "-includeconstants/union_room.h"
+   - "-includecontest_effect.h"
+   - "-includecontest.h"
+   - "-includedata.h"
+   - "-includedata/item.h"
+   - "-includedecoration.h"
+   - "-includeeasy_chat.h"
+   - "-includeevent_object_movement.h"
+   - "-includefield_effect_helpers.h"
+   - "-includefield_effect.h"
+   - "-includefieldmap.h"
+   - "-includegraphics.h"
+   - "-includeheal_location.h"
+   - "-includeitem_use.h"
+   - "-includeitem.h"
+   - "-includelink_rfu.h"
+   - "-includelist_menu.h"
+   - "-includemenu.h"
+   - "-includepokedex_area_screen.h"
+   - "-includepokenav.h"
+   - "-includeregion_map.h"
+   - "-includesprite.h"
+   - "-includestrings.h"
+   - "-includetileset_anims.h"
+   - "-includetilesets.h"
+---
+If:
+  PathMatch: src/data/decoration/(header).h
+CompileFlags:
+  Add:
+    - "-include./description.h"

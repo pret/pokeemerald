@@ -1,6 +1,8 @@
 #ifndef GUARD_UNION_ROOM_PLAYER_AVATAR_H
 #define GUARD_UNION_ROOM_PLAYER_AVATAR_H
 
+#include "union_room.h"
+
 u8 InitUnionRoomPlayerObjects(struct UnionRoomObject *players);
 void DestroyUnionRoomPlayerObjects(void);
 void CreateUnionRoomPlayerSprites(u8 *spriteIds, s32 leaderId);
