@@ -238,27 +238,27 @@ static u32 GetReturningFromGraph(void)
 
 static struct PokenavMonListItem * GetSearchResultsMonDataList(void)
 {
-    struct Pokenav_SearchResults * menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
+    struct Pokenav_SearchResults *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
     return menu->monList->monData;
 }
 
 static u16 GetSearchResultsMonListCount(void)
 {
-    struct Pokenav_SearchResults * menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
+    struct Pokenav_SearchResults *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
     return menu->monList->listCount;
 }
 
 // data below has been set by ConvertConditionsToListRanks
 static s32 GetSearchResultsSelectedMonRank(void)
 {
-    struct Pokenav_SearchResults * menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
+    struct Pokenav_SearchResults *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
     s32 i = PokenavList_GetSelectedIndex();
     return menu->monList->monData[i].data;
 }
 
 static u16 GetSearchResultsCurrentListIndex(void)
 {
-    struct Pokenav_SearchResults * menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
+    struct Pokenav_SearchResults *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
     return menu->monList->currIndex;
 }
 
@@ -271,7 +271,7 @@ static u32 BuildPartyMonSearchResults(s32 state)
 {
     s32 i;
     struct PokenavMonListItem item;
-    struct Pokenav_SearchResults * menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
+    struct Pokenav_SearchResults *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
 
     menu->monList->listCount = 0;
     menu->monList->currIndex = 0;
@@ -294,7 +294,7 @@ static u32 BuildPartyMonSearchResults(s32 state)
 
 static u32 InitBoxMonSearchResults(s32 state)
 {
-    struct Pokenav_SearchResults * menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
+    struct Pokenav_SearchResults *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
     menu->monId = 0;
     menu->boxId = 0;
     return LT_INC_AND_CONTINUE;
@@ -302,7 +302,7 @@ static u32 InitBoxMonSearchResults(s32 state)
 
 static u32 BuildBoxMonSearchResults(s32 state)
 {
-    struct Pokenav_SearchResults * menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
+    struct Pokenav_SearchResults *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
     s32 boxId = menu->boxId;
     s32 monId = menu->monId;
     s32 boxCount = 0;
@@ -340,7 +340,7 @@ static u32 BuildBoxMonSearchResults(s32 state)
 // The condition value in data is then overwritten with their ranking.
 static u32 ConvertConditionsToListRanks(s32 state)
 {
-    struct Pokenav_SearchResults * menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
+    struct Pokenav_SearchResults *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_SEARCH_RESULTS);
     s32 listCount = menu->monList->listCount;
     s32 prevCondition = menu->monList->monData[0].data;
     s32 i;
@@ -698,12 +698,12 @@ static void CreateSearchResultsList(void)
     CreatePokenavList(&sConditionSearchResultBgTemplates[1], &template, 0);
 }
 
-static void BufferSearchMonListItem(struct PokenavMonListItem * item, u8 * dest)
+static void BufferSearchMonListItem(struct PokenavMonListItem *item, u8 *dest)
 {
     u8 gender;
     u8 level;
-    u8 * s;
-    const u8 * genderStr;
+    u8 *s;
+    const u8 *genderStr;
 
     // Mon is in party
     if (item->boxId == TOTAL_BOXES_COUNT)
@@ -716,7 +716,7 @@ static void BufferSearchMonListItem(struct PokenavMonListItem * item, u8 * dest)
     // Mon is in PC
     else
     {
-        struct BoxPokemon * mon = GetBoxedMonPtr(item->boxId, item->monId);
+        struct BoxPokemon *mon = GetBoxedMonPtr(item->boxId, item->monId);
         gender = GetBoxMonGender(mon);
         level = GetLevelFromBoxMonExp(mon);
         GetBoxMonData(mon, MON_DATA_NICKNAME, gStringVar3);
