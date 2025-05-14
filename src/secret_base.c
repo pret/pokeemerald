@@ -771,7 +771,7 @@ static u8 GetAverageEVs(struct Pokemon *pokemon)
 void SetPlayerSecretBaseParty(void)
 {
     u16 i;
-    u16 moveIdx;
+    u16 moveIndex;
     u16 partyId;
     struct SecretBaseParty *party;
 
@@ -781,8 +781,8 @@ void SetPlayerSecretBaseParty(void)
     {
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            for (moveIdx = 0; moveIdx < MAX_MON_MOVES; moveIdx++)
-                party->moves[i * MAX_MON_MOVES + moveIdx] = MOVE_NONE;
+            for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+                party->moves[i * MAX_MON_MOVES + moveIndex] = MOVE_NONE;
 
             party->species[i] = SPECIES_NONE;
             party->heldItems[i] = ITEM_NONE;
@@ -793,8 +793,8 @@ void SetPlayerSecretBaseParty(void)
             if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE
             && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
             {
-                for (moveIdx = 0; moveIdx < MAX_MON_MOVES; moveIdx++)
-                    party->moves[partyId * MAX_MON_MOVES + moveIdx] = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + moveIdx);
+                for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+                    party->moves[partyId * MAX_MON_MOVES + moveIndex] = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + moveIndex);
 
                 party->species[partyId] = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
                 party->heldItems[partyId] = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);

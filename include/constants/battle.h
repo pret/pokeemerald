@@ -23,12 +23,23 @@
  *   +---------------------------+
  */
 
-#define MAX_BATTLERS_COUNT  4
+enum BattlerPosition
+{
+    B_POSITION_PLAYER_LEFT,
+    B_POSITION_OPPONENT_LEFT,
+    B_POSITION_PLAYER_RIGHT,
+    B_POSITION_OPPONENT_RIGHT,
+    MAX_POSITION_COUNT,
+};
 
-#define B_POSITION_PLAYER_LEFT        0
-#define B_POSITION_OPPONENT_LEFT      1
-#define B_POSITION_PLAYER_RIGHT       2
-#define B_POSITION_OPPONENT_RIGHT     3
+enum BattlerId
+{
+    B_BATTLER_0,
+    B_BATTLER_1,
+    B_BATTLER_2,
+    B_BATTLER_3,
+    MAX_BATTLERS_COUNT,
+};
 
 // These macros can be used with either battler ID or positions to get the partner or the opposite mon
 #define BATTLE_OPPOSITE(id) ((id) ^ BIT_SIDE)
@@ -296,17 +307,17 @@
 #define MOVE_EFFECT_AFFECTS_USER        (1 << 6) // 64
 #define MOVE_EFFECT_CERTAIN             (1 << 7) // 128
 
-// Battle terrain defines for gBattleTerrain.
-#define BATTLE_TERRAIN_GRASS        0
-#define BATTLE_TERRAIN_LONG_GRASS   1
-#define BATTLE_TERRAIN_SAND         2
-#define BATTLE_TERRAIN_UNDERWATER   3
-#define BATTLE_TERRAIN_WATER        4
-#define BATTLE_TERRAIN_POND         5
-#define BATTLE_TERRAIN_MOUNTAIN     6
-#define BATTLE_TERRAIN_CAVE         7
-#define BATTLE_TERRAIN_BUILDING     8
-#define BATTLE_TERRAIN_PLAIN        9
+// Battle environment defines for gBattleEnvironment.
+#define BATTLE_ENVIRONMENT_GRASS        0
+#define BATTLE_ENVIRONMENT_LONG_GRASS   1
+#define BATTLE_ENVIRONMENT_SAND         2
+#define BATTLE_ENVIRONMENT_UNDERWATER   3
+#define BATTLE_ENVIRONMENT_WATER        4
+#define BATTLE_ENVIRONMENT_POND         5
+#define BATTLE_ENVIRONMENT_MOUNTAIN     6
+#define BATTLE_ENVIRONMENT_CAVE         7
+#define BATTLE_ENVIRONMENT_BUILDING     8
+#define BATTLE_ENVIRONMENT_PLAIN        9
 
 #define B_WAIT_TIME_LONG  64
 #define B_WAIT_TIME_MED   48

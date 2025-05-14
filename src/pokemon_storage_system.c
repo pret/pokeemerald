@@ -432,7 +432,7 @@ struct PokemonStorageSystemData
     u16 scrollUnused5; // Never read
     u16 scrollUnused6; // Never read
     u8 filler1[22];
-    u8 boxTitleTiles[1024];
+    u8 ALIGNED(2) boxTitleTiles[1024];
     u8 boxTitleCycleId;
     u8 wallpaperLoadState; // Written to, but never read.
     u8 wallpaperLoadBoxId;
@@ -9633,9 +9633,9 @@ u32 CountAllStorageMons(void)
     return count;
 }
 
-bool32 AnyStorageMonWithMove(u16 moveId)
+bool32 AnyStorageMonWithMove(u16 move)
 {
-    u16 moves[] = {moveId, MOVES_COUNT};
+    u16 moves[] = {move, MOVES_COUNT};
     s32 i, j;
 
     for (i = 0; i < TOTAL_BOXES_COUNT; i++)

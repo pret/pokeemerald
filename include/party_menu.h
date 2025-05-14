@@ -16,7 +16,7 @@ struct PartyMenu
     s8 slotId2;
     u8 action;
     u16 bagItem;
-    s16 data1;           // used variously as a moveId, counter, moveSlotId, or cursorPos
+    s16 data1;           // used variously as a move, counter, moveSlotId, or cursorPos
     s16 learnMoveState;  // data2, used only as a learn move state
 };
 
@@ -71,8 +71,8 @@ void ChooseMonForWirelessMinigame(void);
 void OpenPartyMenuInBattle(u8 partyAction);
 void ChooseMonForInBattleItem(void);
 void BufferBattlePartyCurrentOrder(void);
-void BufferBattlePartyCurrentOrderBySide(u8 battlerId, u8 flankId);
-void SwitchPartyOrderLinkMulti(u8 battlerId, u8 slot, u8 arrayIndex);
+void BufferBattlePartyCurrentOrderBySide(u8 battler, u8 flankId);
+void SwitchPartyOrderLinkMulti(u8 battler, u8 slot, u8 arrayIndex);
 void SwitchPartyMonSlots(u8 slot, u8 slot2);
 u8 GetPartyIdFromBattlePartyId(u8 slot);
 void ShowPartyMenuToShowcaseMultiBattleParty(void);

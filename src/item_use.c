@@ -122,7 +122,9 @@ static void SetUpItemUseOnFieldCallback(u8 taskId)
         SetUpItemUseCallback(taskId);
     }
     else
+    {
         sItemUseOnFieldCB(taskId);
+    }
 }
 
 static void FieldCB_UseItemOnField(void)
@@ -148,7 +150,9 @@ static void DisplayCannotUseItemMessage(u8 taskId, bool8 isUsingRegisteredKeyIte
             DisplayItemMessageInBattlePyramid(taskId, gText_DadsAdvice, Task_CloseBattlePyramidBagMessage);
     }
     else
+    {
         DisplayItemMessageOnField(taskId, gStringVar4, Task_CloseCantUseKeyItemMessage);
+    }
 }
 
 static void DisplayDadsAdviceCannotUseItemMessage(u8 taskId, bool8 isUsingRegisteredKeyItemOnField)
@@ -202,7 +206,9 @@ void ItemUseOutOfBattle_Bike(u8 taskId)
     PlayerGetDestCoords(&coordsX, &coordsY);
     behavior = MapGridGetMetatileBehaviorAt(coordsX, coordsY);
     if (FlagGet(FLAG_SYS_CYCLING_ROAD) == TRUE || MetatileBehavior_IsVerticalRail(behavior) == TRUE || MetatileBehavior_IsHorizontalRail(behavior) == TRUE || MetatileBehavior_IsIsolatedVerticalRail(behavior) == TRUE || MetatileBehavior_IsIsolatedHorizontalRail(behavior) == TRUE)
+    {
         DisplayCannotDismountBikeMessage(taskId, tUsingRegisteredKeyItem);
+    }
     else
     {
         if (Overworld_IsBikingAllowed() == TRUE && IsBikingDisallowedByPlayer() == 0)
@@ -211,7 +217,9 @@ void ItemUseOutOfBattle_Bike(u8 taskId)
             SetUpItemUseOnFieldCallback(taskId);
         }
         else
+        {
             DisplayDadsAdviceCannotUseItemMessage(taskId, tUsingRegisteredKeyItem);
+        }
     }
 }
 
@@ -264,7 +272,9 @@ void ItemUseOutOfBattle_Rod(u8 taskId)
         SetUpItemUseOnFieldCallback(taskId);
     }
     else
+    {
         DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+    }
 }
 
 static void ItemUseOnFieldCB_Rod(u8 taskId)
@@ -951,7 +961,9 @@ void ItemUseInBattle_PokeBall(u8 taskId)
         DisplayItemMessage(taskId, FONT_NORMAL, gText_BoxFull, CloseItemMessage);
     }
     else
+    {
         DisplayItemMessageInBattlePyramid(taskId, gText_BoxFull, Task_CloseBattlePyramidBagMessage);
+    }
 }
 
 static void Task_CloseStatIncreaseMessage(u8 taskId)

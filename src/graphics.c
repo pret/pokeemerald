@@ -257,7 +257,7 @@ const u16 gBattleAnimUnused_Unknown2[] = INCBIN_U16("graphics/battle_anims/unuse
 const u16 gBattleAnimUnused_Unknown3[] = INCBIN_U16("graphics/battle_anims/unused/unknown_3.bin");
 
 const u32 gBattleAnimUnusedGfx_LineSketch2[] = INCBIN_U32("graphics/battle_anims/unused/line_sketch_2.8bpp.lz");
-const u16 gBattleAnimUnusedPal_LineSketch2[] = INCBIN_U16("graphics/battle_anims/unused/line_sketch_2.gbapal.lz");
+const u32 gBattleAnimUnusedPal_LineSketch2[] = INCBIN_U32("graphics/battle_anims/unused/line_sketch_2.gbapal.lz");
 const u32 gBattleAnimUnusedTilemap_LineSketch2[] = INCBIN_U32("graphics/battle_anims/unused/line_sketch_2.bin.lz");
 
 const u32 gBattleAnimSpriteGfx_BlueLines[] = INCBIN_U32("graphics/battle_anims/sprites/blue_lines.4bpp.lz");
@@ -942,7 +942,7 @@ const u32 gBattleVSFrame_Pal[] = INCBIN_U32("graphics/battle_transitions/vs_fram
 
 const u32 gVsLettersGfx[] = INCBIN_U32("graphics/battle_transitions/vs.4bpp.lz");
 
-#include "data/graphics/battle_terrain.h"
+#include "data/graphics/battle_environment.h"
 
 // Battle Dome
 const u32 gDomeTourneyTree_Gfx[] = INCBIN_U32("graphics/battle_frontier/tourney_tree.4bpp.lz");

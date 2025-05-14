@@ -260,9 +260,7 @@ TrainerHill_Entrance_Pokemart_Basic:
 	.2byte ITEM_DIRE_HIT
 	.2byte ITEM_GUARD_SPEC
 	.2byte ITEM_X_ACCURACY
-	.2byte ITEM_NONE
-	release
-	end
+	pokemartlistend
 
 TrainerHill_Entrance_EventScript_ExpandedPokemart::
 	pokemart TrainerHill_Entrance_Pokemart_Expanded
@@ -284,9 +282,7 @@ TrainerHill_Entrance_Pokemart_Expanded:
 	.2byte ITEM_DIRE_HIT
 	.2byte ITEM_GUARD_SPEC
 	.2byte ITEM_X_ACCURACY
-	.2byte ITEM_NONE
-	release
-	end
+	pokemartlistend
 
 TrainerHill_Entrance_Text_StillGettingReady:
 	.string "This is the TRAINER HILL where\n"
