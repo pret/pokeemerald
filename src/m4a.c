@@ -1,4 +1,3 @@
-#include <string.h>
 #include "global.h"
 #include "gba/m4a_internal.h"
 
