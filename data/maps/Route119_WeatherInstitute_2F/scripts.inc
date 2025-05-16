@@ -1,10 +1,3 @@
-.set LOCALID_GRUNT_1, 1
-.set LOCALID_GRUNT_2, 2
-.set LOCALID_SHELLY, 3
-.set LOCALID_SCIENTIST, 5
-.set LOCALID_GRUNT_3, 7
-.set LOCALID_GRUNT_4, 8
-
 Route119_WeatherInstitute_2F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route119_WeatherInstitute_2F_OnTransition
 	.byte 0
@@ -16,18 +9,18 @@ Route119_WeatherInstitute_2F_OnTransition:
 	end
 
 Route119_WeatherInstitute_2F_EventScript_SetScientistPosAquaHere::
-	setobjectxyperm LOCALID_SCIENTIST, 1, 6
-	setobjectmovementtype LOCALID_SCIENTIST, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectxyperm LOCALID_WEATHER_INSTITUTE_2F_SCIENTIST, 1, 6
+	setobjectmovementtype LOCALID_WEATHER_INSTITUTE_2F_SCIENTIST, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 Route119_WeatherInstitute_2F_EventScript_SetScientistPosAquaGone::
-	setobjectxyperm LOCALID_SCIENTIST, 4, 6
-	setobjectmovementtype LOCALID_SCIENTIST, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectxyperm LOCALID_WEATHER_INSTITUTE_2F_SCIENTIST, 4, 6
+	setobjectmovementtype LOCALID_WEATHER_INSTITUTE_2F_SCIENTIST, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 Route119_WeatherInstitute_2F_EventScript_SetScientistPosGameClear::
-	setobjectxyperm LOCALID_SCIENTIST, 2, 2
-	setobjectmovementtype LOCALID_SCIENTIST, MOVEMENT_TYPE_FACE_UP
+	setobjectxyperm LOCALID_WEATHER_INSTITUTE_2F_SCIENTIST, 2, 2
+	setobjectmovementtype LOCALID_WEATHER_INSTITUTE_2F_SCIENTIST, MOVEMENT_TYPE_FACE_UP
 	return
 
 Route119_WeatherInstitute_2F_EventScript_Grunt5::
@@ -53,16 +46,16 @@ Route119_WeatherInstitute_2F_EventScript_Shelly::
 Route119_WeatherInstitute_2F_EventScript_ShellyDefeated::
 	msgbox Route119_WeatherInstitute_2F_Text_ShellyPostBattle, MSGBOX_DEFAULT
 	closemessage
-	addobject LOCALID_GRUNT_3
-	applymovement LOCALID_GRUNT_3, Route119_WeatherInstitute_2F_Movement_GruntApproachShelly
-	applymovement OBJ_EVENT_ID_PLAYER, Route119_WeatherInstitute_2F_Movement_ShovePlayerOutOfWay
+	addobject LOCALID_WEATHER_INSTITUTE_2F_GRUNT_3
+	applymovement LOCALID_WEATHER_INSTITUTE_2F_GRUNT_3, Route119_WeatherInstitute_2F_Movement_GruntApproachShelly
+	applymovement LOCALID_PLAYER, Route119_WeatherInstitute_2F_Movement_ShovePlayerOutOfWay
 	waitmovement 0
 	msgbox Route119_WeatherInstitute_2F_Text_TeamMagmaJustPassedBy, MSGBOX_DEFAULT
 	closemessage
 	playse SE_PIN
-	applymovement LOCALID_SHELLY, Common_Movement_ExclamationMark
+	applymovement LOCALID_WEATHER_INSTITUTE_2F_SHELLY, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_SHELLY, Common_Movement_Delay48
+	applymovement LOCALID_WEATHER_INSTITUTE_2F_SHELLY, Common_Movement_Delay48
 	waitmovement 0
 	msgbox Route119_WeatherInstitute_2F_Text_WeHaveToHurryToMtPyre, MSGBOX_DEFAULT
 	closemessage
@@ -72,17 +65,17 @@ Route119_WeatherInstitute_2F_EventScript_ShellyDefeated::
 	fadescreen FADE_TO_BLACK
 	setflag FLAG_HIDE_ROUTE_119_TEAM_AQUA
 	setflag FLAG_HIDE_WEATHER_INSTITUTE_2F_AQUA_GRUNT_M
-	removeobject LOCALID_GRUNT_1
-	removeobject LOCALID_GRUNT_2
-	removeobject LOCALID_SHELLY
-	removeobject LOCALID_GRUNT_4
-	removeobject LOCALID_GRUNT_3
-	applymovement OBJ_EVENT_ID_PLAYER, Route119_WeatherInstitute_2F_Movement_PlayerReturnToPosition
+	removeobject LOCALID_WEATHER_INSTITUTE_2F_GRUNT_1
+	removeobject LOCALID_WEATHER_INSTITUTE_2F_GRUNT_2
+	removeobject LOCALID_WEATHER_INSTITUTE_2F_SHELLY
+	removeobject LOCALID_WEATHER_INSTITUTE_2F_GRUNT_4
+	removeobject LOCALID_WEATHER_INSTITUTE_2F_GRUNT_3
+	applymovement LOCALID_PLAYER, Route119_WeatherInstitute_2F_Movement_PlayerReturnToPosition
 	waitmovement 0
 	fadescreen FADE_FROM_BLACK
-	applymovement LOCALID_SCIENTIST, Route119_WeatherInstitute_2F_Movement_ScientistApproachPlayer
+	applymovement LOCALID_WEATHER_INSTITUTE_2F_SCIENTIST, Route119_WeatherInstitute_2F_Movement_ScientistApproachPlayer
 	waitmovement 0
-	copyobjectxytoperm LOCALID_SCIENTIST
+	copyobjectxytoperm LOCALID_WEATHER_INSTITUTE_2F_SCIENTIST
 	goto Route119_WeatherInstitute_2F_EventScript_ReceiveCastform
 	end
 

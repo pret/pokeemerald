@@ -10,7 +10,7 @@ u32 GetHealLocationIndexByMap(u16 mapGroup, u16 mapNum)
 
     for (i = 0; i < ARRAY_COUNT(sHealLocations); i++)
     {
-        if (sHealLocations[i].group == mapGroup && sHealLocations[i].map == mapNum)
+        if (sHealLocations[i].mapGroup == mapGroup && sHealLocations[i].mapNum == mapNum)
             return i + 1;
     }
     return HEAL_LOCATION_NONE;

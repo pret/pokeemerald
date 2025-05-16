@@ -1,5 +1,3 @@
-.set LOCALID_WALLYS_DAD, 1
-
 PetalburgCity_WallysHouse_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, PetalburgCity_WallysHouse_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PetalburgCity_WallysHouse_OnWarp
@@ -10,8 +8,8 @@ PetalburgCity_WallysHouse_OnWarp:
 	.2byte 0
 
 PetalburgCity_WallysHouse_EventScript_PlayerWallysDadFaceEachOther::
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_EAST
-	turnobject LOCALID_WALLYS_DAD, DIR_WEST
+	turnobject LOCALID_PLAYER, DIR_EAST
+	turnobject LOCALID_WALLYS_HOUSE_WALLYS_DAD, DIR_WEST
 	end
 
 PetalburgCity_WallysHouse_OnFrame:

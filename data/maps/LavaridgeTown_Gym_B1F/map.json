@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_JACE",
       "graphics_id": "OBJ_EVENT_GFX_MAN_5",
       "x": 4,
       "y": 18,
@@ -28,6 +29,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_KEEGAN",
       "graphics_id": "OBJ_EVENT_GFX_MAN_5",
       "x": 3,
       "y": 6,
@@ -41,6 +43,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_JEFF",
       "graphics_id": "OBJ_EVENT_GFX_MAN_5",
       "x": 13,
       "y": 17,
@@ -54,6 +57,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ELI",
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 4,
       "y": 16,

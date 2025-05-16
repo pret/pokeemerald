@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_MOTEL_OWNER",
       "graphics_id": "OBJ_EVENT_GFX_MAN_1",
       "x": 10,
       "y": 3,
