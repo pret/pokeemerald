@@ -75,16 +75,16 @@ struct MysteryGiftClient
     u32 funcId;
     u32 funcState;
     u32 cmdidx;
-    void * sendBuffer;
-    void * recvBuffer;
-    struct MysteryGiftClientCmd * script;
-    void * msg;
+    void *sendBuffer;
+    void *recvBuffer;
+    struct MysteryGiftClientCmd *script;
+    void *msg;
     struct MysteryGiftLink link;
     bool32 isWonderNews;
 };
 
 void MysteryGiftClient_Create(bool32 isWonderNews);
-u32 MysteryGiftClient_Run(u16 * endVal);
+u32 MysteryGiftClient_Run(u16 *endVal);
 void MysteryGiftClient_AdvanceState(void);
 void * MysteryGiftClient_GetMsg(void);
 void MysteryGiftClient_SetParam(u32 value);

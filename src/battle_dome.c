@@ -997,7 +997,7 @@ static const union AnimCmd sSpriteAnim_TourneyTreePokeballSelected[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd * const sSpriteAnimTable_TourneyTreePokeball[] =
+static const union AnimCmd *const sSpriteAnimTable_TourneyTreePokeball[] =
 {
     sSpriteAnim_TourneyTreePokeballNormal,
     sSpriteAnim_TourneyTreePokeballSelected,
@@ -1027,7 +1027,7 @@ static const union AnimCmd sSpriteAnim_TourneyTreeCancelButtonSelected[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd * const sSpriteAnimTable_TourneyTreeCancelButton[] =
+static const union AnimCmd *const sSpriteAnimTable_TourneyTreeCancelButton[] =
 {
     sSpriteAnim_TourneyTreeCancelButtonNormal,
     sSpriteAnim_TourneyTreeCancelButtonSelected,
@@ -1056,7 +1056,7 @@ static const union AnimCmd sSpriteAnim_TourneyTreeExitButtonSelected[] =
     ANIMCMD_END,
  };
 
-static const union AnimCmd * const sSpriteAnimTable_TourneyTreeExitButton[] =
+static const union AnimCmd *const sSpriteAnimTable_TourneyTreeExitButton[] =
 {
     sSpriteAnim_TourneyTreeExitButtonNormal,
     sSpriteAnim_TourneyTreeExitButtonSelected,
@@ -1097,13 +1097,13 @@ static const union AnimCmd sSpriteAnim_RightArrow[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd * const sSpriteAnimTable_VerticalScrollArrow[] =
+static const union AnimCmd *const sSpriteAnimTable_VerticalScrollArrow[] =
 {
     sSpriteAnim_UpArrow,
     sSpriteAnim_DownArrow,
 };
 
-static const union AnimCmd * const sSpriteAnimTable_HorizontalScrollArrow[] =
+static const union AnimCmd *const sSpriteAnimTable_HorizontalScrollArrow[] =
 {
     sSpriteAnim_LeftArrow,
     sSpriteAnim_RightArrow,
@@ -1134,7 +1134,7 @@ static const struct SpriteTemplate sVerticalScrollArrowSpriteTemplate =
 // Organized by seed starting position, i.e. seed 0 battles seed 8 first
 static const u8 sTourneyTreeTrainerIds[DOME_TOURNAMENT_TRAINERS_COUNT] = {0, 8, 12, 4, 7, 15, 11, 3, 2, 10, 14, 6, 5, 13, 9, 1};
 
-static void (* const sBattleDomeFunctions[])(void) =
+static void (*const sBattleDomeFunctions[])(void) =
 {
     [BATTLE_DOME_FUNC_INIT]                     = InitDomeChallenge,
     [BATTLE_DOME_FUNC_GET_DATA]                 = GetDomeData,

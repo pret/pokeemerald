@@ -33,7 +33,7 @@ typedef void (*PokenavListBufferItemFunc)(struct PokenavListItem *, u8 *);
 
 struct PokenavListTemplate
 {
-    struct PokenavListItem * list;
+    struct PokenavListItem *list;
     u16 count;
     u16 startIndex;
     u8 itemSize;
