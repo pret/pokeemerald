@@ -306,8 +306,8 @@ void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite);
 void CB2_SetUpReshowBattleScreenAfterMenu(void);
 void CB2_SetUpReshowBattleScreenAfterMenu2(void);
 void Task_PlayerController_RestoreBgmAfterCry(u8 taskId);
-void ActionSelectionCreateCursorAt(u8 cursorPos, u8 unused);
-void ActionSelectionDestroyCursorAt(u8 cursorPos);
+void ActionSelectionCreateCursorAt(u8 cursorPosition, u8 baseTileNum);
+void ActionSelectionDestroyCursorAt(u8 cursorPosition);
 void InitMoveSelectionsVarsAndStrings(void);
 
 // recorded player controller

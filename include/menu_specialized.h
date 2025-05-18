@@ -112,7 +112,7 @@ bool8 ConditionMenu_UpdateMonExit(struct ConditionGraph *graph, s16 *x);
 bool8 MoveConditionMonOnscreen(s16 *x);
 bool8 MoveConditionMonOffscreen(s16 *x);
 void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u16 boxId, u16 monId, u16 partyId, u16 numMons, bool8 excludesCancel);
-void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *sheen, u16 boxId, u16 monId, u16 partyId, u16 id, u16 numMons, bool8 excludesCancel);
+void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *numSparkles, u16 boxId, u16 monId, u16 partyId, u16 id, u16 numMons, bool8 excludesCancel);
 void GetConditionMenuMonGfx(void *tilesDst, void *palDst, u16 boxId, u16 monId, u16 partyId, u16 numMons, bool8 excludesCancel);
 void LoadConditionMonPicTemplate(struct SpriteSheet *sheet, struct SpriteTemplate *template, struct SpritePalette *pal);
 void LoadConditionSelectionIcons(struct SpriteSheet *sheets, struct SpriteTemplate *template, struct SpritePalette *pals);
@@ -121,7 +121,7 @@ s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u8 *dst);
 // Condition sparkles
 void LoadConditionSparkle(struct SpriteSheet *sheet, struct SpritePalette *pal);
 void ResetConditionSparkleSprites(struct Sprite **sprites);
-void CreateConditionSparkleSprites(struct Sprite **sprites, u8 monSpriteId, u8 count);
+void CreateConditionSparkleSprites(struct Sprite **sprites, u8 monSpriteId, u8 _count);
 void DestroyConditionSparkleSprites(struct Sprite **sprites);
 void FreeConditionSparkles(struct Sprite **sprites);
 

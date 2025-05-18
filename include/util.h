@@ -6,9 +6,9 @@
 extern const u8 gMiscBlank_Gfx[]; // unused in Emerald
 extern const u32 gBitTable[];
 
-u8 CreateInvisibleSpriteWithCallback(void (*)(struct Sprite *));
-void StoreWordInTwoHalfwords(u16 *, u32);
-void LoadWordFromTwoHalfwords(u16 *, u32 *);
+u8 CreateInvisibleSpriteWithCallback(void (*callback)(struct Sprite *));
+void StoreWordInTwoHalfwords(u16 *h, u32 w);
+void LoadWordFromTwoHalfwords(u16 *h, u32 *w);
 int CountTrailingZeroBits(u32 value);
 u16 CalcCRC16(const u8 *data, s32 length);
 u16 CalcCRC16WithTable(const u8 *data, u32 length);

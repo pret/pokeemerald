@@ -6,7 +6,7 @@ extern struct BardSong gBardSong;
 void SetMauvilleOldMan(void);
 u8 GetCurrentMauvilleOldMan(void);
 void SetMauvilleOldManObjEventGfx(void);
-void SanitizeMauvilleOldManForRuby(OldMan *dest);
+void SanitizeMauvilleOldManForRuby(union OldMan *oldMan);
 void SanitizeReceivedRubyOldMan(union OldMan *oldMan, u32 version, u32 language);
 void SanitizeReceivedEmeraldOldMan(union OldMan *oldMan, u32 version, u32 language);
 void ResetMauvilleOldManFlag(void);
