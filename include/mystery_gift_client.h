@@ -87,6 +87,6 @@ void MysteryGiftClient_Create(bool32 isWonderNews);
 u32 MysteryGiftClient_Run(u16 *endVal);
 void MysteryGiftClient_AdvanceState(void);
 void * MysteryGiftClient_GetMsg(void);
-void MysteryGiftClient_SetParam(u32 value);
+void MysteryGiftClient_SetParam(u32 val);
 
 #endif //GUARD_MYSTERY_GIFT_CLIENT_H

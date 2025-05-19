@@ -519,7 +519,7 @@ void rfu_REQ_endSearchParent(void);
 void rfu_REQ_startConnectParent(u16 pid);
 void rfu_REQ_pollConnectParent(void);
 void rfu_REQ_endConnectParent(void);
-u16 rfu_getConnectParentStatus(u8 *status,u8 *connectSlotNo);
+u16 rfu_getConnectParentStatus(u8 *status, u8 *connectSlotNo);
     // Restore link from child device
 void rfu_REQ_CHILD_startConnectRecovery(u8 bmRecoverySlot);
 void rfu_REQ_CHILD_pollConnectRecovery(void);
@@ -611,7 +611,7 @@ void STWI_send_DataRxREQ(void);
 void STWI_send_MS_ChangeREQ(void);
 void STWI_send_StopModeREQ(void);
 void STWI_send_SystemStatusREQ(void);
-void STWI_send_GameConfigREQ(const u8 *serial_uname, const u8 *gname);
+void STWI_send_GameConfigREQ(const u8 *serial_gname, const u8 *uname);
 void STWI_send_ResetREQ(void);
 void STWI_send_LinkStatusREQ(void);
 void STWI_send_VersionStatusREQ(void);

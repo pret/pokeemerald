@@ -14,7 +14,7 @@ void RecordedBattle_SetBattlerAction(u8 battler, u8 action);
 void RecordedBattle_ClearBattlerAction(u8 battler, u8 bytesToClear);
 u8 RecordedBattle_GetBattlerAction(u8 battler);
 u8 RecordedBattle_BufferNewBattlerData(u8 *dst);
-void RecordedBattle_RecordAllBattlerData(u8 *data);
+void RecordedBattle_RecordAllBattlerData(u8 *src);
 bool32 CanCopyRecordedBattleSaveData(void);
 bool32 MoveRecordedBattleToSaveData(void);
 void PlayRecordedBattle(void (*CB2_After)(void));

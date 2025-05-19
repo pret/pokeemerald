@@ -93,8 +93,8 @@ struct MysteryGiftServer
     struct MysteryGiftLink link;
 };
 
-void MysterGiftServer_CreateForCard();
-void MysterGiftServer_CreateForNews();
+void MysterGiftServer_CreateForCard(void);
+void MysterGiftServer_CreateForNews(void);
 u32 MysterGiftServer_Run(u16 *endVal);
 
 #endif //GUARD_MYSTERY_GIFT_SERVER_H
