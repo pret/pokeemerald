@@ -170,7 +170,7 @@ struct SoundChannel
 
 struct MusicPlayerInfo;
 
-#if !MODERN
+#if __STDC_VERSION__ < 202311L
 typedef void (*MPlayFunc)();
 #else
 typedef void (*MPlayFunc)(...);

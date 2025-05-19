@@ -283,7 +283,7 @@ void MPlayExtender(struct CgbChannel *cgbChans)
 
     soundInfo->ident++;
 
-#if !MODERN
+#if __STDC_VERSION__ < 202311L
     gMPlayJumpTable[8] = ply_memacc;
     gMPlayJumpTable[17] = ply_lfos;
     gMPlayJumpTable[19] = ply_mod;
@@ -332,7 +332,7 @@ void MusicPlayerJumpTableCopy(void)
 
 void ClearChain(void *x)
 {
-#if !MODERN
+#if __STDC_VERSION__ < 202311L
     void (*func)(void *) = *(&gMPlayJumpTable[34]);
 #else
     void (*func)(...) = *(&gMPlayJumpTable[34]);
@@ -342,7 +342,7 @@ void ClearChain(void *x)
 
 void Clear64byte(void *x)
 {
-#if !MODERN
+#if __STDC_VERSION__ < 202311L
     void (*func)(void *) = *(&gMPlayJumpTable[35]);
 #else
     void (*func)(...) = *(&gMPlayJumpTable[35]);

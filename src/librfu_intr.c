@@ -7,7 +7,7 @@ static u16 handshake_wait(u16 slot);
 static void STWI_set_timer_in_RAM(u8 count);
 static void STWI_stop_timer_in_RAM(void);
 static void STWI_init_slave(void);
-#if !MODERN
+#if __STDC_VERSION__ < 202311L
 static void Callback_Dummy_M(int reqCommandId, int error, void (*callbackM)());
 #else
 static void Callback_Dummy_M(int reqCommandId, int error, void (*callbackM)(...));
@@ -139,7 +139,7 @@ static void sio32intr_clock_master(void)
         }
         gSTWIStatus->sending = 0;
         if (gSTWIStatus->callbackM != NULL)
-#if !MODERN
+#if __STDC_VERSION__ < 202311L
             Callback_Dummy_M(gSTWIStatus->reqActiveCommand, gSTWIStatus->error, gSTWIStatus->callbackM);
 #else
             Callback_Dummy_M(gSTWIStatus->reqActiveCommand, gSTWIStatus->error, (void (*)(...))gSTWIStatus->callbackM);
@@ -396,7 +396,7 @@ static void STWI_init_slave(void)
 }
 
 NAKED
-#if !MODERN
+#if __STDC_VERSION__ < 202311L
 static void Callback_Dummy_M(int reqCommandId, int error, void (*callbackM)())
 #else
 static void Callback_Dummy_M(int reqCommandId, int error, void (*callbackM)(...))
