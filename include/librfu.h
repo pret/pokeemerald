@@ -316,7 +316,7 @@ struct STWIStatus
     u8 recoveryCount;
     u8 unk_16;
     u8 unk_17;
-#if !MODERN
+#if __STDC_VERSION__ < 202311L
     void (*callbackM)();
 #else
     void (*callbackM)(...);
