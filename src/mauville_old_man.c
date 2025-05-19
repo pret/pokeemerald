@@ -34,7 +34,7 @@ static u8 sSelectedStory;
 COMMON_DATA struct BardSong gBardSong = {0};
 
 static EWRAM_DATA u16 sUnusedPitchTableIndex = 0;
-static EWRAM_DATA struct MauvilleManStoryteller * sStorytellerPtr = NULL;
+static EWRAM_DATA struct MauvilleManStoryteller *sStorytellerPtr = NULL;
 static EWRAM_DATA u8 sStorytellerWindowId = 0;
 
 static const u16 sDefaultBardSongLyrics[NUM_BARD_SONG_WORDS] = {
@@ -46,7 +46,7 @@ static const u16 sDefaultBardSongLyrics[NUM_BARD_SONG_WORDS] = {
     EC_WORD_DANCE
 };
 
-static const u8 * const sGiddyAdjectives[] = {
+static const u8 *const sGiddyAdjectives[] = {
     GiddyText_SoPretty,
     GiddyText_SoDarling,
     GiddyText_SoRelaxed,
@@ -60,7 +60,7 @@ static const u8 * const sGiddyAdjectives[] = {
 // Non-random lines Giddy can say. Not all are strictly
 // questions, but most are, and the player will receive
 // a Yes/No prompt afterwards regardless.
-static const u8 * const sGiddyQuestions[GIDDY_MAX_QUESTIONS] = {
+static const u8 *const sGiddyQuestions[GIDDY_MAX_QUESTIONS] = {
     GiddyText_ISoWantToGoOnAVacation,
     GiddyText_IBoughtCrayonsWith120Colors,
     GiddyText_WouldntItBeNiceIfWeCouldFloat,
@@ -176,9 +176,9 @@ void SaveBardSongLyrics(void)
 static void PrepareSongText(void)
 {
     struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
-    u16 * lyrics = !gSpecialVar_0x8004 ? bard->songLyrics : bard->newSongLyrics;
-    u8 * wordEnd = gStringVar4;
-    u8 * str = wordEnd;
+    u16 *lyrics = !gSpecialVar_0x8004 ? bard->songLyrics : bard->newSongLyrics;
+    u8 *wordEnd = gStringVar4;
+    u8 *str = wordEnd;
     u16 paragraphNum;
 
     // Easy chat "words" aren't strictly single words, e.g. EC_WORD_MATCH_UP is the string "MATCH UP".
@@ -454,12 +454,12 @@ static void EnableTextPrinters(void)
     gDisableTextPrinters = FALSE;
 }
 
-static void DisableTextPrinters(struct TextPrinterTemplate * printer, u16 renderCmd)
+static void DisableTextPrinters(struct TextPrinterTemplate *printer, u16 renderCmd)
 {
     gDisableTextPrinters = TRUE;
 }
 
-static void DrawSongTextWindow(const u8 * str)
+static void DrawSongTextWindow(const u8 *str)
 {
     DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, str, 0, 1, 1, DisableTextPrinters);
@@ -750,7 +750,7 @@ void SetMauvilleOldManObjEventGfx(void)
 
 // Language fixers?
 
-void SanitizeMauvilleOldManForRuby(union OldMan * oldMan)
+void SanitizeMauvilleOldManForRuby(union OldMan *oldMan)
 {
     s32 i;
     u8 playerName[PLAYER_NAME_LENGTH + 1];
@@ -759,7 +759,7 @@ void SanitizeMauvilleOldManForRuby(union OldMan * oldMan)
     {
     case MAUVILLE_MAN_TRADER:
     {
-        struct MauvilleOldManTrader * trader = &oldMan->trader;
+        struct MauvilleOldManTrader *trader = &oldMan->trader;
         for (i = 0; i < NUM_TRADER_ITEMS; i++)
         {
             if (trader->language[i] == LANGUAGE_JAPANESE)
@@ -769,7 +769,7 @@ void SanitizeMauvilleOldManForRuby(union OldMan * oldMan)
     }
     case MAUVILLE_MAN_STORYTELLER:
     {
-        struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
+        struct MauvilleManStoryteller *storyteller = &oldMan->storyteller;
         for (i = 0; i < NUM_STORYTELLER_TALES; i++)
         {
             if (storyteller->gameStatIDs[i] != 0)
@@ -790,7 +790,7 @@ void SanitizeMauvilleOldManForRuby(union OldMan * oldMan)
     }
 }
 
-static void UNUSED SetMauvilleOldManLanguage(union OldMan * oldMan, u32 language1, u32 language2, u32 language3)
+static void UNUSED SetMauvilleOldManLanguage(union OldMan *oldMan, u32 language1, u32 language2, u32 language3)
 {
     s32 i;
 
@@ -798,7 +798,7 @@ static void UNUSED SetMauvilleOldManLanguage(union OldMan * oldMan, u32 language
     {
     case MAUVILLE_MAN_TRADER:
     {
-        struct MauvilleOldManTrader * trader = &oldMan->trader;
+        struct MauvilleOldManTrader *trader = &oldMan->trader;
 
         for (i = 0; i < NUM_TRADER_ITEMS; i++)
         {
@@ -811,7 +811,7 @@ static void UNUSED SetMauvilleOldManLanguage(union OldMan * oldMan, u32 language
     break;
     case MAUVILLE_MAN_STORYTELLER:
     {
-        struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
+        struct MauvilleManStoryteller *storyteller = &oldMan->storyteller;
 
         for (i = 0; i < NUM_STORYTELLER_TALES; i++)
         {
@@ -824,7 +824,7 @@ static void UNUSED SetMauvilleOldManLanguage(union OldMan * oldMan, u32 language
     break;
     case MAUVILLE_MAN_BARD:
     {
-        struct MauvilleManBard * bard = &oldMan->bard;
+        struct MauvilleManBard *bard = &oldMan->bard;
 
         if (language3 == LANGUAGE_JAPANESE)
             bard->language = language1;
@@ -834,7 +834,7 @@ static void UNUSED SetMauvilleOldManLanguage(union OldMan * oldMan, u32 language
     break;
     case MAUVILLE_MAN_HIPSTER:
     {
-        struct MauvilleManHipster * hipster = &oldMan->hipster;
+        struct MauvilleManHipster *hipster = &oldMan->hipster;
 
         if (language3 == LANGUAGE_JAPANESE)
             hipster->language = language1;
@@ -844,7 +844,7 @@ static void UNUSED SetMauvilleOldManLanguage(union OldMan * oldMan, u32 language
     break;
     case MAUVILLE_MAN_GIDDY:
     {
-        struct MauvilleManGiddy * giddy = &oldMan->giddy;
+        struct MauvilleManGiddy *giddy = &oldMan->giddy;
 
         if (language3 == LANGUAGE_JAPANESE)
             giddy->language = language1;
@@ -855,13 +855,13 @@ static void UNUSED SetMauvilleOldManLanguage(union OldMan * oldMan, u32 language
     }
 }
 
-void SanitizeReceivedEmeraldOldMan(union OldMan * oldMan, u32 version, u32 language)
+void SanitizeReceivedEmeraldOldMan(union OldMan *oldMan, u32 version, u32 language)
 {
     u8 playerName[PLAYER_NAME_LENGTH + 1];
     s32 i;
     if (oldMan->common.id == MAUVILLE_MAN_STORYTELLER && language == LANGUAGE_JAPANESE)
     {
-        struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
+        struct MauvilleManStoryteller *storyteller = &oldMan->storyteller;
 
         for (i = 0; i < NUM_STORYTELLER_TALES; i++)
         {
@@ -878,7 +878,7 @@ void SanitizeReceivedEmeraldOldMan(union OldMan * oldMan, u32 version, u32 langu
     }
 }
 
-void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language)
+void SanitizeReceivedRubyOldMan(union OldMan *oldMan, u32 version, u32 language)
 {
     bool32 isRuby = (version == VERSION_SAPPHIRE || version == VERSION_RUBY);
 
@@ -886,14 +886,14 @@ void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language
     {
     case MAUVILLE_MAN_TRADER:
     {
-        struct MauvilleOldManTrader * trader = &oldMan->trader;
+        struct MauvilleOldManTrader *trader = &oldMan->trader;
         s32 i;
 
         if (isRuby)
         {
             for (i = 0; i < NUM_TRADER_ITEMS; i++)
             {
-                u8 * str = trader->playerNames[i];
+                u8 *str = trader->playerNames[i];
                 if (str[0] == EXT_CTRL_CODE_BEGIN && str[1] == EXT_CTRL_CODE_JPN)
                 {
                     StripExtCtrlCodes(str);
@@ -920,7 +920,7 @@ void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language
     case MAUVILLE_MAN_STORYTELLER:
     {
 
-        struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
+        struct MauvilleManStoryteller *storyteller = &oldMan->storyteller;
         s32 i;
 
         if (isRuby)
@@ -935,7 +935,7 @@ void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language
     break;
     case MAUVILLE_MAN_BARD:
     {
-        struct MauvilleManBard * bard = &oldMan->bard;
+        struct MauvilleManBard *bard = &oldMan->bard;
 
         if (isRuby)
         {
@@ -945,7 +945,7 @@ void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language
     break;
     case MAUVILLE_MAN_HIPSTER:
     {
-        struct MauvilleManHipster * hipster = &oldMan->hipster;
+        struct MauvilleManHipster *hipster = &oldMan->hipster;
 
         if (isRuby)
         {
@@ -955,7 +955,7 @@ void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language
     break;
     case MAUVILLE_MAN_GIDDY:
     {
-        struct MauvilleManGiddy * giddy = &oldMan->giddy;
+        struct MauvilleManGiddy *giddy = &oldMan->giddy;
 
         if (isRuby)
         {
@@ -1299,9 +1299,9 @@ static void GetStoryByStattellerPlayerName(u32 player, void *dst)
     memcpy(dst, name, PLAYER_NAME_LENGTH);
 }
 
-static void StorytellerSetPlayerName(u32 player, const u8 * src)
+static void StorytellerSetPlayerName(u32 player, const u8 *src)
 {
-    u8 * name = sStorytellerPtr->trainerNames[player];
+    u8 *name = sStorytellerPtr->trainerNames[player];
     memset(name, EOS, PLAYER_NAME_LENGTH);
     memcpy(name, src, PLAYER_NAME_LENGTH);
 }
@@ -1317,7 +1317,7 @@ static void StorytellerRecordNewStat(u32 player, u32 stat)
     sStorytellerPtr->language[player] = gGameLanguage;
 }
 
-static void ScrambleStatList(u8 * arr, s32 count)
+static void ScrambleStatList(u8 *arr, s32 count)
 {
     s32 i;
 

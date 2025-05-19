@@ -115,7 +115,7 @@ EWRAM_DATA u8 gAnimCustomPanning = 0;
 
 #include "data/battle_anim.h"
 
-static void (* const sScriptCmdTable[])(void) =
+static void (*const sScriptCmdTable[])(void) =
 {
     Cmd_loadspritegfx,        // 0x00
     Cmd_unloadspritegfx,      // 0x01
