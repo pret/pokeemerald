@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_FOSSIL_MANIAC",
       "graphics_id": "OBJ_EVENT_GFX_MANIAC",
       "x": 5,
       "y": 3,

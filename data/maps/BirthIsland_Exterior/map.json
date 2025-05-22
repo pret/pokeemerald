@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK",
       "graphics_id": "OBJ_EVENT_GFX_DEOXYS_TRIANGLE",
       "x": 15,
       "y": 12,
@@ -28,6 +29,7 @@
       "flag": "FLAG_HIDE_BIRTH_ISLAND_DEOXYS_TRIANGLE"
     },
     {
+      "local_id": "LOCALID_BIRTH_ISLAND_DEOXYS",
       "graphics_id": "OBJ_EVENT_GFX_DEOXYS",
       "x": 15,
       "y": 3,

@@ -1,8 +1,3 @@
-.equ LOCALID_JACE, 1
-.equ LOCALID_KEEGAN, 2
-.equ LOCALID_JEFF, 3
-.equ LOCALID_ELI, 4
-
 LavaridgeTown_Gym_B1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LavaridgeTown_Gym_B1F_OnTransition
 	.byte 0

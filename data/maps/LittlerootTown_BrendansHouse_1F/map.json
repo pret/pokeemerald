@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_PLAYERS_HOUSE_1F_MOM",
       "graphics_id": "OBJ_EVENT_GFX_MOM",
       "x": 2,
       "y": 6,
@@ -54,6 +55,7 @@
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_1"
     },
     {
+      "local_id": "LOCALID_RIVALS_HOUSE_1F_MOM",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_4",
       "x": 2,
       "y": 7,
@@ -67,6 +69,7 @@
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_MOM"
     },
     {
+      "local_id": "LOCALID_PLAYERS_HOUSE_1F_DAD",
       "graphics_id": "OBJ_EVENT_GFX_NORMAN",
       "x": 5,
       "y": 6,
@@ -93,6 +96,7 @@
       "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_SIBLING"
     },
     {
+      "local_id": "LOCALID_RIVALS_HOUSE_1F_RIVAL",
       "graphics_id": "OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL",
       "x": 8,
       "y": 8,

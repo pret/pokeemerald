@@ -98,7 +98,7 @@ void FreezeObjects_WaitForPlayerAndSelected(void)
 
 void ScriptUnfreezeObjectEvents(void)
 {
-    u8 playerObjectId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
+    u8 playerObjectId = GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[playerObjectId]);
     ScriptMovement_UnfreezeObjectEvents();
     UnfreezeObjectEvents();
@@ -110,7 +110,7 @@ void UnionRoom_UnlockPlayerAndChatPartner(void)
 
     if (gObjectEvents[gSelectedObjectEvent].active)
         ObjectEventClearHeldMovementIfFinished(&gObjectEvents[gSelectedObjectEvent]);
-    playerObjectId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
+    playerObjectId = GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[playerObjectId]);
     ScriptMovement_UnfreezeObjectEvents();
     UnfreezeObjectEvents();

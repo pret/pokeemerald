@@ -39,6 +39,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_DEWFORD_BRINEY",
       "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
       "x": 12,
       "y": 9,
@@ -65,6 +66,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_DEWFORD_BOAT",
       "graphics_id": "OBJ_EVENT_GFX_MR_BRINEYS_BOAT",
       "x": 12,
       "y": 8,

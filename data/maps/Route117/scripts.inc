@@ -1,5 +1,3 @@
-.set LOCALID_DAYCARE_MAN, 3
-
 Route117_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route117_OnTransition
 	.byte 0

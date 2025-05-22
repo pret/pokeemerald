@@ -31,6 +31,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_SAFARI_EXIT_ATTENDANT",
       "graphics_id": "OBJ_EVENT_GFX_CAMPER",
       "x": 32,
       "y": 34,

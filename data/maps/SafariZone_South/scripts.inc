@@ -1,5 +1,3 @@
-.set LOCALID_ATTENDANT, 1
-
 SafariZone_South_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SafariZone_South_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SafariZone_South_OnFrame
@@ -11,11 +9,11 @@ SafariZone_South_OnFrame:
 
 SafariZone_South_EventScript_EnterSafariZone::
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, SafariZone_South_Movement_PlayerEnter
+	applymovement LOCALID_PLAYER, SafariZone_South_Movement_PlayerEnter
 	waitmovement 0
-	applymovement LOCALID_ATTENDANT, SafariZone_South_Movement_ExitAttendantBlockDoor
+	applymovement LOCALID_SAFARI_EXIT_ATTENDANT, SafariZone_South_Movement_ExitAttendantBlockDoor
 	waitmovement 0
-	setobjectxyperm LOCALID_ATTENDANT, 32, 34
+	setobjectxyperm LOCALID_SAFARI_EXIT_ATTENDANT, 32, 34
 	setvar VAR_SAFARI_ZONE_STATE, 0
 	releaseall
 	end
@@ -25,7 +23,7 @@ SafariZone_South_OnTransition:
 	end
 
 SafariZone_South_EventScript_SetExitAttendantAside::
-	setobjectxyperm LOCALID_ATTENDANT, 31, 34
+	setobjectxyperm LOCALID_SAFARI_EXIT_ATTENDANT, 31, 34
 	return
 
 SafariZone_South_Movement_PlayerEnter:
@@ -74,17 +72,17 @@ SafariZone_South_EventScript_ExitEarly::
 	end
 
 SafariZone_South_EventScript_ExitEarlyNorth::
-	applymovement LOCALID_ATTENDANT, SafariZone_South_Movement_MoveExitAttendantNorth
+	applymovement LOCALID_SAFARI_EXIT_ATTENDANT, SafariZone_South_Movement_MoveExitAttendantNorth
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, SafariZone_South_Movement_PlayerExitNorth
+	applymovement LOCALID_PLAYER, SafariZone_South_Movement_PlayerExitNorth
 	waitmovement 0
 	goto SafariZone_South_EventScript_Exit
 	end
 
 SafariZone_South_EventScript_ExitEarlyEast::
-	applymovement LOCALID_ATTENDANT, SafariZone_South_Movement_MoveExitAttendantEast
+	applymovement LOCALID_SAFARI_EXIT_ATTENDANT, SafariZone_South_Movement_MoveExitAttendantEast
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, SafariZone_South_Movement_PlayerExitEast
+	applymovement LOCALID_PLAYER, SafariZone_South_Movement_PlayerExitEast
 	waitmovement 0
 	goto SafariZone_South_EventScript_Exit
 	end

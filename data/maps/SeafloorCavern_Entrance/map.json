@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_SEAFLOOR_CAVERN_ENTRANCE_GRUNT",
       "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
       "x": 10,
       "y": 2,
