@@ -948,7 +948,7 @@ static const u8 sQuestionPossibilities[MAX_APPRENTICE_QUESTIONS] =
     QUESTION_ID_WIN_SPEECH
 };
 
-static void (* const sApprenticeFunctions[])(void) =
+static void (*const sApprenticeFunctions[])(void) =
 {
     [APPRENTICE_FUNC_GAVE_LVLMODE]        = Script_GivenApprenticeLvlMode,
     [APPRENTICE_FUNC_SET_LVLMODE]         = Script_SetApprenticeLvlMode,

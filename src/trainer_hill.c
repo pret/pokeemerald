@@ -217,7 +217,7 @@ static const u8 *const sFloorStrings[] =
     gText_TrainerHill4F,
 };
 
-static void (* const sHillFunctions[])(void) =
+static void (*const sHillFunctions[])(void) =
 {
     [TRAINER_HILL_FUNC_START]                 = TrainerHillStartChallenge,
     [TRAINER_HILL_FUNC_GET_OWNER_STATE]       = GetOwnerState,

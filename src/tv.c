@@ -2199,7 +2199,7 @@ void TryPutLotteryWinnerReportOnAir(void)
     }
 }
 
-void TryPutBattleSeminarOnAir(u16 foeSpecies, u16 species, u8 moveIdx, const u16 *movePtr, u16 betterMove)
+void TryPutBattleSeminarOnAir(u16 foeSpecies, u16 species, u8 moveIndex, const u16 *movePtr, u16 betterMove)
 {
     TVShow *show;
     u8 i;
@@ -2214,10 +2214,10 @@ void TryPutBattleSeminarOnAir(u16 foeSpecies, u16 species, u8 moveIdx, const u16
         StringCopy(show->battleSeminar.playerName, gSaveBlock2Ptr->playerName);
         show->battleSeminar.foeSpecies = foeSpecies;
         show->battleSeminar.species = species;
-        show->battleSeminar.move = movePtr[moveIdx];
+        show->battleSeminar.move = movePtr[moveIndex];
         for (i = 0, j = 0; i < MAX_MON_MOVES; i++)
         {
-            if (i != moveIdx && movePtr[i])
+            if (i != moveIndex && movePtr[i])
             {
                 show->battleSeminar.otherMoves[j] = movePtr[i];
                 j++;

@@ -38,14 +38,13 @@ EWRAM_DATA struct ObjectEvent gObjectEvents[OBJECT_EVENTS_COUNT] = {};
 EWRAM_DATA struct PlayerAvatar gPlayerAvatar = {};
 
 // static declarations
-
-static u8 ObjectEventCB2_NoMovement2();
+static u8 ObjectEventCB2_NoMovement2(void);
 static bool8 TryInterruptObjectEventSpecialAnim(struct ObjectEvent *, u8);
 static void npc_clear_strange_bits(struct ObjectEvent *);
 static void MovePlayerAvatarUsingKeypadInput(u8, u16, u16);
-static void PlayerAllowForcedMovementIfMovingSameDirection();
-static bool8 TryDoMetatileBehaviorForcedMovement();
-static u8 GetForcedMovementByMetatileBehavior();
+static void PlayerAllowForcedMovementIfMovingSameDirection(void);
+static bool8 TryDoMetatileBehaviorForcedMovement(void);
+static u8 GetForcedMovementByMetatileBehavior(void);
 
 static bool8 ForcedMovement_None(void);
 static bool8 ForcedMovement_Slip(void);
@@ -232,7 +231,7 @@ static bool8 (*const sArrowWarpMetatileBehaviorChecks[])(u8) =
     [DIR_EAST - 1]  = MetatileBehavior_IsEastArrowWarp,
 };
 
-static const u8 sRivalAvatarGfxIds[][2] =
+static const u8 sRivalAvatarGfxIds[][GENDER_COUNT] =
 {
     [PLAYER_AVATAR_STATE_NORMAL]     = {OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL,     OBJ_EVENT_GFX_RIVAL_MAY_NORMAL},
     [PLAYER_AVATAR_STATE_MACH_BIKE]  = {OBJ_EVENT_GFX_RIVAL_BRENDAN_MACH_BIKE,  OBJ_EVENT_GFX_RIVAL_MAY_MACH_BIKE},
@@ -244,7 +243,7 @@ static const u8 sRivalAvatarGfxIds[][2] =
     [PLAYER_AVATAR_STATE_WATERING]   = {OBJ_EVENT_GFX_BRENDAN_WATERING,         OBJ_EVENT_GFX_MAY_WATERING}
 };
 
-static const u8 sPlayerAvatarGfxIds[][2] =
+static const u8 sPlayerAvatarGfxIds[][GENDER_COUNT] =
 {
     [PLAYER_AVATAR_STATE_NORMAL]     = {OBJ_EVENT_GFX_BRENDAN_NORMAL,     OBJ_EVENT_GFX_MAY_NORMAL},
     [PLAYER_AVATAR_STATE_MACH_BIKE]  = {OBJ_EVENT_GFX_BRENDAN_MACH_BIKE,  OBJ_EVENT_GFX_MAY_MACH_BIKE},
@@ -318,7 +317,7 @@ static bool8 (*const sPlayerAvatarSecretBaseMatSpin[])(struct Task *, struct Obj
 
 void MovementType_Player(struct Sprite *sprite)
 {
-    UpdateObjectEventCurrentMovement(&gObjectEvents[sprite->data[0]], sprite, ObjectEventCB2_NoMovement2);
+    UpdateObjectEventCurrentMovement(&gObjectEvents[sprite->data[0]], sprite, (bool8 (*)(struct ObjectEvent *, struct Sprite *))ObjectEventCB2_NoMovement2);
 }
 
 static u8 ObjectEventCB2_NoMovement2(void)

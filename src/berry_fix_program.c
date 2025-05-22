@@ -26,7 +26,7 @@ struct {
     u8 curScene;
     u16 timer;
     struct MultiBootParam mb;
-} static * sBerryFix;
+} static *sBerryFix;
 
 static void BerryFix_Main(void);
 static void BerryFix_GpuSet(void);

@@ -327,7 +327,7 @@ static const union AnimCmd sAnim_PyramidBag[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd * const sAnims_PyramidBag[] =
+static const union AnimCmd *const sAnims_PyramidBag[] =
 {
     sAnim_PyramidBag,
 };
@@ -352,7 +352,7 @@ enum {
     ANIM_BAG_SHAKE,
 };
 
-static const union AffineAnimCmd * const sAffineAnims_PyramidBag[] =
+static const union AffineAnimCmd *const sAffineAnims_PyramidBag[] =
 {
     [ANIM_BAG_STILL] = sAffineAnim_PyramidBag_Still,
     [ANIM_BAG_SHAKE] = sAffineAnim_PyramidBag_Shake,

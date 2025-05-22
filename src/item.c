@@ -632,7 +632,7 @@ void SortBerriesOrTMHMs(struct BagPocket *bagPocket)
     }
 }
 
-void MoveItemSlotInList(struct ItemSlot* itemSlots_, u32 from, u32 to_)
+void MoveItemSlotInList(struct ItemSlot *itemSlots_, u32 from, u32 to_)
 {
     // dumb assignments needed to match
     struct ItemSlot *itemSlots = itemSlots_;
