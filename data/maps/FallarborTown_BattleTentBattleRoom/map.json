@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_FALLARBOR_TENT_BATTLE_PLAYER",
       "graphics_id": "OBJ_EVENT_GFX_VAR_1",
       "x": 4,
       "y": 8,
@@ -28,6 +29,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_FALLARBOR_TENT_BATTLE_ATTENDANT",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 3,
       "y": 2,
@@ -41,6 +43,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_FALLARBOR_TENT_BATTLE_OPPONENT",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 5,
       "y": 1,
