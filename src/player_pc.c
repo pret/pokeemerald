@@ -1273,7 +1273,7 @@ static void ItemStorage_ExitItemList(u8 taskId)
 static void ItemStorage_StartItemSwap(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    ListMenuSetUnkIndicatorsStructField(tListTaskId, 16, 1);
+    ListMenuSetTemplateField(tListTaskId, 16, 1);
     sItemStorageMenu->toSwapPos = gPlayerPCItemPageInfo.itemsAbove + gPlayerPCItemPageInfo.cursorPos;
     ItemStorage_SetSwapArrow(tListTaskId, 0, 0);
     ItemStorage_UpdateSwapLinePos(sItemStorageMenu->toSwapPos);

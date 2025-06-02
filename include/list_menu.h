@@ -27,6 +27,28 @@ enum {
     SCROLL_ARROW_DOWN
 };
 
+// For ListMenuGet/SetTemplateField
+enum ListMenuFields
+{
+    LISTFIELD_MOVECURSORFUNC = 0,
+    LISTFIELD_MOVECURSORFUNC2,
+    LISTFIELD_TOTALITEMS,
+    LISTFIELD_MAXSHOWED,
+    LISTFIELD_WINDOWID,
+    LISTFIELD_HEADERX,
+    LISTFIELD_ITEMX,
+    LISTFIELD_CURSORX,
+    LISTFIELD_UPTEXTY,
+    LISTFIELD_CURSORPAL,
+    LISTFIELD_FILLVALUE,
+    LISTFIELD_CURSORSHADOWPAL,
+    LISTFIELD_LETTERSPACING,
+    LISTFIELD_ITEMVERTICALPADDING,
+    LISTFIELD_SCROLLMULTIPLE,
+    LISTFIELD_FONTID,
+    LISTFIELD_CURSORKIND,
+};
+
 struct ListMenu;
 
 struct ListMenuItem
@@ -120,8 +142,8 @@ void ListMenuGetScrollAndRow(u8 listTaskId, u16 *scrollOffset, u16 *selectedRow)
 u16 ListMenuGetYCoordForPrintingArrowCursor(u8 listTaskId);
 void ListMenuOverrideSetColors(u8 cursorPal, u8 fillValue, u8 cursorShadowPal);
 void ListMenuDefaultCursorMoveFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list);
-s32 ListMenuGetUnkIndicatorsStructFields(u8 taskId, u8 field);
-void ListMenuSetUnkIndicatorsStructField(u8 taskId, u8 field, s32 value);
+s32 ListMenuGetTemplateField(u8 taskId, u8 field);
+void ListMenuSetTemplateField(u8 taskId, u8 field, s32 value);
 u8 AddScrollIndicatorArrowPair(const struct ScrollArrowsTemplate *arrowInfo, u16 *scrollOffset);
 u8 AddScrollIndicatorArrowPairParameterized(u32 arrowType, s32 commonPos, s32 firstPos, s32 secondPos, s32 fullyDownThreshold, s32 tileTag, s32 palTag, u16 *scrollOffset);
 void RemoveScrollIndicatorArrowPair(u8 taskId);
