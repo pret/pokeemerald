@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_m_acid_armor_grp, voicegroup128
+	.equ	se_m_acid_armor_grp, voicegroup_rs_sfx_2
 	.equ	se_m_acid_armor_pri, 4
 	.equ	se_m_acid_armor_rev, reverb_set+50
 	.equ	se_m_acid_armor_mvl, 127
