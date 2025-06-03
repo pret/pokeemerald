@@ -1312,7 +1312,7 @@ static void Task_BeginItemSwap(u8 taskId)
 
     tListPos = gPyramidBagMenuState.scrollPosition + gPyramidBagMenuState.cursorPosition;
     gPyramidBagMenu->toSwapPos = tListPos;
-    ListMenuSetUnkIndicatorsStructField(tListTaskId, 0x10, 1);
+    ListMenuSetTemplateField(tListTaskId, LISTFIELD_CURSORKIND, CURSOR_INVISIBLE);
     CopyItemName(gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode][tListPos], gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_MoveVar1Where);
     FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
