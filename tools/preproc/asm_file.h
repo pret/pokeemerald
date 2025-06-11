@@ -48,7 +48,7 @@ public:
     int ReadString(unsigned char* s);
     int ReadBraille(unsigned char* s);
     bool IsAtEnd();
-    void OutputLine();
+    void OutputLine(bool doFixedPoint);
     void OutputLocation();
     bool ParseEnum();
 
@@ -63,6 +63,8 @@ private:
 
     bool ConsumeComma();
     int ReadPadLength();
+    bool CheckIdentifier(const std::string& ident);
+    bool TryConvertFixedPointPseudoMacro();
     void RemoveComments();
     bool CheckForDirective(std::string name);
     void SkipWhitespace();
