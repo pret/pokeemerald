@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_TOWER_ATTENDANT_SINGLES",
       "graphics_id": "OBJ_EVENT_GFX_TEALA",
       "x": 6,
       "y": 5,
@@ -67,6 +68,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_TOWER_LOBBY_REPORTER",
       "graphics_id": "OBJ_EVENT_GFX_REPORTER_F",
       "x": 11,
       "y": 9,
@@ -80,6 +82,7 @@
       "flag": "FLAG_HIDE_BATTLE_TOWER_REPORTER"
     },
     {
+      "local_id": "LOCALID_APPRENTICE",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 1,
       "y": 5,
@@ -93,6 +96,7 @@
       "flag": "FLAG_HIDE_APPRENTICE"
     },
     {
+      "local_id": "LOCALID_TOWER_ATTENDANT_DOUBLES",
       "graphics_id": "OBJ_EVENT_GFX_TEALA",
       "x": 10,
       "y": 5,
@@ -106,6 +110,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_TOWER_ATTENDANT_MULTIS",
       "graphics_id": "OBJ_EVENT_GFX_TEALA",
       "x": 14,
       "y": 5,
@@ -119,6 +124,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_TOWER_ATTENDANT_LINK_MULTIS",
       "graphics_id": "OBJ_EVENT_GFX_TEALA",
       "x": 18,
       "y": 5,

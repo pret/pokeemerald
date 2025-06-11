@@ -67,6 +67,7 @@
       "flag": "FLAG_HIDE_WEATHER_INSTITUTE_1F_WORKERS"
     },
     {
+      "local_id": "LOCALID_WEATHER_INSTITUTE_LITTLE_BOY",
       "graphics_id": "OBJ_EVENT_GFX_NINJA_BOY",
       "x": 14,
       "y": 11,

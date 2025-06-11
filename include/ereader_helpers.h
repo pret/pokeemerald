@@ -49,10 +49,10 @@ struct EReaderTrainerHillSet
     u8 unk_ec0[40];
 }; // size = 0xf00
 
-bool8 ValidateTrainerHillData(struct EReaderTrainerHillSet *);
-bool32 TryWriteTrainerHill(struct EReaderTrainerHillSet *);
+bool8 ValidateTrainerHillData(struct EReaderTrainerHillSet *hillSet);
+bool32 TryWriteTrainerHill(struct EReaderTrainerHillSet *hillSet);
 bool32 ReadTrainerHillAndValidate(void);
-int EReaderHandleTransfer(u8, size_t, const void *, void *);
+int EReaderHandleTransfer(u8 mode, size_t size, const void *data, void *recvBuffer);
 void EReaderHelper_Timer3Callback(void);
 void EReaderHelper_SerialCallback(void);
 void EReaderHelper_SaveRegsState(void);
