@@ -989,7 +989,7 @@ ALIGNED(4) static const u8 sText_WhichMonWillYouOffer[] = _(
     "voulez-vous échanger?\p");
 
 ALIGNED(4) static const u8 sText_RegistrationCanceled[] = _("L’enregistrement a été annulé.\p");
-ALIGNED(4) static const u8 sText_RegistraionCompleted[] = _("L’enregistrement est terminé.\p");
+ALIGNED(4) static const u8 sText_RegistrationCompleted[] = _("L’enregistrement est terminé.\p");
 ALIGNED(4) static const u8 sText_TradeCanceled[] = _("L’échange a été annulé.\p");
 
 ALIGNED(4) static const u8 sText_CancelRegistrationOfMon[] = _(
@@ -1051,7 +1051,7 @@ ALIGNED(4) static const u8 sText_NobodyHasRegistered[] = _("Nobody has registere
 ALIGNED(4) static const u8 sText_ChooseRequestedMonType[] = _("Scegli il tipo del POKéMON che\ncerchi.\n");
 ALIGNED(4) static const u8 sText_WhichMonWillYouOffer[] = _("Quale POKéMON della tua squadra\nvuoi offrire per uno scambio?\p");
 ALIGNED(4) static const u8 sText_RegistrationCanceled[] = _("La registrazione è stata annullata.\p");
-ALIGNED(4) static const u8 sText_RegistraionCompleted[] = _("La registrazione è stata\ncompletata.\p");
+ALIGNED(4) static const u8 sText_RegistrationCompleted[] = _("La registrazione è stata\ncompletata.\p");
 ALIGNED(4) static const u8 sText_TradeCanceled[] = _("Lo scambio è stato annullato.\p");
 ALIGNED(4) static const u8 sText_CancelRegistrationOfMon[] = _("Annulli la registrazione di\n{STR_VAR_1} di L. {STR_VAR_2}?");
 ALIGNED(4) static const u8 sText_CancelRegistrationOfEgg[] = _("Annulli la registrazione\ndell’UOVO?");
@@ -1074,7 +1074,7 @@ ALIGNED(4) static const u8 sText_NobodyHasRegistered[] = _("Nobody has registere
 ALIGNED(4) static const u8 sText_ChooseRequestedMonType[] = _("Elige el tipo de POKéMON que\nte gustaría recibir.\n");
 ALIGNED(4) static const u8 sText_WhichMonWillYouOffer[] = _("¿A qué miembro de tu equipo\nPOKéMON ofreces en el intercambio?\p");
 ALIGNED(4) static const u8 sText_RegistrationCanceled[] = _("Se ha cancelado el registro.\p");
-ALIGNED(4) static const u8 sText_RegistraionCompleted[] = _("Se ha finalizado el registro.\p");
+ALIGNED(4) static const u8 sText_RegistrationCompleted[] = _("Se ha finalizado el registro.\p");
 ALIGNED(4) static const u8 sText_TradeCanceled[] = _("Se ha cancelado el intercambio.\p");
 ALIGNED(4) static const u8 sText_CancelRegistrationOfMon[] = _("¿Cancelas el registro\nde tu {STR_VAR_1} de nivel {STR_VAR_2}?");
 ALIGNED(4) static const u8 sText_CancelRegistrationOfEgg[] = _("¿Cancelas el registro\nde tu HUEVO?");
@@ -1133,7 +1133,7 @@ ALIGNED(4) static const u8 sText_WhichMonWillYouOffer[] = _(
     "you offer in trade?\p");
 
 ALIGNED(4) static const u8 sText_RegistrationCanceled[] = _("Registration has been canceled.\p");
-ALIGNED(4) static const u8 sText_RegistraionCompleted[] = _("Registration has been completed.\p");
+ALIGNED(4) static const u8 sText_RegistrationCompleted[] = _("Registration has been completed.\p");
 ALIGNED(4) static const u8 sText_TradeCanceled[] = _("The trade has been canceled.\p");
 
 ALIGNED(4) static const u8 sText_CancelRegistrationOfMon[] = _(

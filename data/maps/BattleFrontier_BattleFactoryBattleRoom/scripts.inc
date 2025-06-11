@@ -1,20 +1,13 @@
-.set LOCALID_SCIENTIST_1, 1
-.set LOCALID_OPPONENT, 2
-.set LOCALID_SCIENTIST_2, 3
-.set LOCALID_SCIENTIST_3, 4
-.set LOCALID_SCIENTIST_4, 5
-.set LOCALID_SCIENTIST_5, 6
-.set LOCALID_SCIENTIST_6, 7
-.set LOCALID_PLAYER, 8
+@ On this map the player will automatically walk into the room, but the camera is supposed to remain still.
+@ To do this GF sets the player (LOCALID_PLAYER) invisible and creates a fake player object (LOCALID_FACTORY_BATTLE_PLAYER).
+@ The graphics of this fake player object are represented with VAR_OBJ_GFX_ID_F.
+@ The graphics of the opponent are represented with VAR_OBJ_GFX_ID_0, which will ultimately be set by factory_setopponentgfx.
 
 BattleFrontier_BattleFactoryBattleRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleFactoryBattleRoom_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleFactoryBattleRoom_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleFactoryBattleRoom_OnFrame
 	.byte 0
-
-	@ On this map the player (OBJ_EVENT_ID_PLAYER) is hidden
-	@ The player is represented instead by LOCALID_PLAYER, which has the gfx id VAR_OBJ_GFX_ID_F
 
 BattleFrontier_BattleFactoryBattleRoom_OnTransition:
 	frontier_settrainers
@@ -28,7 +21,7 @@ BattleFrontier_BattleFactoryBattleRoom_OnTransition:
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_SetUpFactoryHeadObj::
 	call BattleFrontier_EventScript_SetBrainObjectGfx
-	setobjectxyperm LOCALID_OPPONENT, 7, 9
+	setobjectxyperm LOCALID_FACTORY_BATTLE_OPPONENT, 7, 9
 	end
 
 BattleFrontier_BattleFactoryBattleRoom_OnWarp:
@@ -37,9 +30,9 @@ BattleFrontier_BattleFactoryBattleRoom_OnWarp:
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_HideObjects::
 	setvar VAR_TEMP_1, 1
-	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM
+	hideobjectat LOCALID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM
 	goto_if_ne VAR_TEMP_F, FRONTIER_BRAIN_NOT_READY, BattleFrontier_BattleFactoryBattleRoom_EventScript_EndHideObjects
-	hideobjectat LOCALID_OPPONENT, MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM
+	hideobjectat LOCALID_FACTORY_BATTLE_OPPONENT, MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM
 BattleFrontier_BattleFactoryBattleRoom_EventScript_EndHideObjects::
 	end
 
@@ -58,9 +51,9 @@ BattleFrontier_BattleFactoryBattleRoom_OnFrame:
 BattleFrontier_BattleFactoryBattleRoom_EventScript_EnterRoomFactoryHeadBattle::
 	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_GetAMoveOn, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_OPPONENT, BattleFrontier_BattleFactoryBattleRoom_Movement_NolandMoveToBattle
+	applymovement LOCALID_FACTORY_BATTLE_OPPONENT, BattleFrontier_BattleFactoryBattleRoom_Movement_NolandMoveToBattle
+	applymovement LOCALID_FACTORY_BATTLE_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerEnterRoom
 	applymovement LOCALID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerEnterRoom
-	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerEnterRoom
 	waitmovement 0
 	call BattleFrontier_BattleFactoryBattleRoom_EventScript_ScientistsFaceBattle
 	goto BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleOpponent
@@ -68,15 +61,15 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_EnterRoomFactoryHeadBattle::
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_EnterRoom::
 	goto_if_ne VAR_TEMP_F, FRONTIER_BRAIN_NOT_READY, BattleFrontier_BattleFactoryBattleRoom_EventScript_EnterRoomFactoryHeadBattle
+	applymovement LOCALID_FACTORY_BATTLE_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerEnterRoom
 	applymovement LOCALID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerEnterRoom
-	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerEnterRoom
 	waitmovement 0
 	call BattleFrontier_BattleFactoryBattleRoom_EventScript_ScientistsFaceBattle
 	factory_setopponentgfx
-	removeobject LOCALID_OPPONENT
-	setobjectxyperm LOCALID_OPPONENT, 7, 1
-	addobject LOCALID_OPPONENT
-	applymovement LOCALID_OPPONENT, BattleFrontier_BattleFactoryBattleRoom_Movement_OpponentEnter
+	removeobject LOCALID_FACTORY_BATTLE_OPPONENT
+	setobjectxyperm LOCALID_FACTORY_BATTLE_OPPONENT, 7, 1
+	addobject LOCALID_FACTORY_BATTLE_OPPONENT
+	applymovement LOCALID_FACTORY_BATTLE_OPPONENT, BattleFrontier_BattleFactoryBattleRoom_Movement_OpponentEnter
 	waitmovement 0
 BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleOpponent::
 	goto_if_ne VAR_TEMP_F, FRONTIER_BRAIN_NOT_READY, BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNoland
@@ -138,7 +131,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNolandSilver::
 	goto_if_ne VAR_RESULT, 0, BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNoland
 	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_NolandLetsSeeFrontierPass, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerApproachNoland
+	applymovement LOCALID_FACTORY_BATTLE_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerApproachNoland
 	waitmovement 0
 	playfanfare MUS_OBTAIN_SYMBOL
 	message BattleFrontier_BattleFactoryBattleRoom_Text_ReceivedKnowledgeSymbol
@@ -164,7 +157,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNolandGold::
 	goto_if_eq VAR_RESULT, 2, BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNoland
 	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_OutOfMyLeagueLetsSeePass, MSGBOX_DEFAULT
 	waitmessage
-	applymovement LOCALID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerApproachNoland
+	applymovement LOCALID_FACTORY_BATTLE_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerApproachNoland
 	waitmovement 0
 	playfanfare MUS_OBTAIN_SYMBOL
 	message BattleFrontier_BattleFactoryBattleRoom_Text_KnowledgeSymbolTookGoldenShine
@@ -241,12 +234,12 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyDoubles::
 	end
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_ScientistsFaceBattle::
-	applymovement LOCALID_SCIENTIST_1, Common_Movement_WalkInPlaceFasterRight
-	applymovement LOCALID_SCIENTIST_2, Common_Movement_WalkInPlaceFasterRight
-	applymovement LOCALID_SCIENTIST_3, Common_Movement_WalkInPlaceFasterRight
-	applymovement LOCALID_SCIENTIST_4, Common_Movement_WalkInPlaceFasterLeft
-	applymovement LOCALID_SCIENTIST_5, Common_Movement_WalkInPlaceFasterLeft
-	applymovement LOCALID_SCIENTIST_6, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_FACTORY_BATTLE_SCIENTIST_1, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_FACTORY_BATTLE_SCIENTIST_2, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_FACTORY_BATTLE_SCIENTIST_3, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_FACTORY_BATTLE_SCIENTIST_4, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_FACTORY_BATTLE_SCIENTIST_5, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_FACTORY_BATTLE_SCIENTIST_6, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 

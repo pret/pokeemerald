@@ -1,12 +1,3 @@
-.set LOCALID_SS_TIDAL, 2
-.set LOCALID_FERRY_ATTENDANT, 3
-.set LOCALID_MANIAC_1, 9
-.set LOCALID_MANIAC_2, 10
-.set LOCALID_GIRL, 12
-.set LOCALID_CAMPER, 14
-.set LOCALID_FISHERMAN_2, 18
-.set LOCALID_MAN_4, 23
-
 BattleFrontier_OutsideWest_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_OutsideWest_OnTransition
 	.byte 0
@@ -72,8 +63,8 @@ BattleFrontier_OutsideWest_EventScript_BoardFerry::
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 30
-	hideobjectat LOCALID_FERRY_ATTENDANT, MAP_BATTLE_FRONTIER_OUTSIDE_WEST
-	setvar VAR_0x8004, LOCALID_SS_TIDAL
+	hideobjectat LOCALID_FRONTIER_FERRY_ATTENDANT, MAP_BATTLE_FRONTIER_OUTSIDE_WEST
+	setvar VAR_0x8004, LOCALID_FRONTIER_SS_TIDAL
 	call Common_EventScript_FerryDepartIsland
 	return
 
@@ -113,7 +104,7 @@ BattleFrontier_OutsideWest_EventScript_Fisherman2::
 	faceplayer
 	message BattleFrontier_OutsideWest_Text_GotSeasickOnWayHere
 	waitmessage
-	applymovement LOCALID_FISHERMAN_2, Common_Movement_FaceAwayPlayer
+	applymovement LOCALID_FRONTIER_FISHERMAN_2, Common_Movement_FaceAwayPlayer
 	waitmovement 0
 	waitbuttonpress
 	release
@@ -134,16 +125,16 @@ BattleFrontier_OutsideWest_EventScript_Maniac2::
 	end
 
 BattleFrontier_OutsideWest_EventScript_FactoryChallengersTalk::
-	applymovement LOCALID_MANIAC_1, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_FRONTIER_MANIAC_1, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox BattleFrontier_OutsideWest_Text_SureWeCanChallengeWithNoMons, MSGBOX_DEFAULT
-	applymovement LOCALID_MANIAC_2, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_FRONTIER_MANIAC_2, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox BattleFrontier_OutsideWest_Text_BigGuySaidIllLendYouMons, MSGBOX_DEFAULT
 	closemessage
 	delay 25
-	applymovement LOCALID_MANIAC_1, Common_Movement_WalkInPlaceFasterUp
-	applymovement LOCALID_MANIAC_2, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_FRONTIER_MANIAC_1, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_FRONTIER_MANIAC_2, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	release
 	end
@@ -161,7 +152,7 @@ BattleFrontier_OutsideWest_EventScript_Camper::
 	end
 
 BattleFrontier_OutsideWest_EventScript_CamperFaceFactory::
-	applymovement LOCALID_CAMPER, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_FRONTIER_CAMPER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
@@ -182,22 +173,22 @@ BattleFrontier_OutsideWest_EventScript_Girl::
 	end
 
 BattleFrontier_OutsideWest_EventScript_GirlShudderNorth::
-	applymovement LOCALID_GIRL, BattleFrontier_OutsideWest_Movement_GirlShudderNorth
+	applymovement LOCALID_FRONTIER_GIRL, BattleFrontier_OutsideWest_Movement_GirlShudderNorth
 	waitmovement 0
 	return
 
 BattleFrontier_OutsideWest_EventScript_GirlShudderSouth::
-	applymovement LOCALID_GIRL, BattleFrontier_OutsideWest_Movement_GirlShudderSouth
+	applymovement LOCALID_FRONTIER_GIRL, BattleFrontier_OutsideWest_Movement_GirlShudderSouth
 	waitmovement 0
 	return
 
 BattleFrontier_OutsideWest_EventScript_GirlShudderWest::
-	applymovement LOCALID_GIRL, BattleFrontier_OutsideWest_Movement_GirlShudderWest
+	applymovement LOCALID_FRONTIER_GIRL, BattleFrontier_OutsideWest_Movement_GirlShudderWest
 	waitmovement 0
 	return
 
 BattleFrontier_OutsideWest_EventScript_GirlShudderEast::
-	applymovement LOCALID_GIRL, BattleFrontier_OutsideWest_Movement_GirlShudderEast
+	applymovement LOCALID_FRONTIER_GIRL, BattleFrontier_OutsideWest_Movement_GirlShudderEast
 	waitmovement 0
 	return
 
@@ -298,7 +289,7 @@ BattleFrontier_OutsideWest_EventScript_Man4::
 	faceplayer
 	msgbox BattleFrontier_OutsideWest_Text_FansOverThereUsedToBeTrainers, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_MAN_4, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_FRONTIER_MAN_4, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

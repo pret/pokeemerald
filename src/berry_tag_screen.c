@@ -370,7 +370,7 @@ static bool8 LoadBerryTagGfx(void)
         }
         break;
     case 2:
-        LZDecompressWram(gBerryTag_Pal, sBerryTag->tilemapBuffers[2]);
+        LZDecompressWram(gBerryTag_Tilemap, sBerryTag->tilemapBuffers[2]);
         sBerryTag->gfxState++;
         break;
     case 3:
@@ -448,7 +448,7 @@ static void PrintBerryNumberAndName(void)
     StringCopy(gStringVar2, berry->name);
 #elif ITALIAN
     ConvertIntToDecimalStringN(gStringVar1, sBerryTag->berryId, STR_CONV_MODE_LEADING_ZEROS, 2);
-    StringCopy(gStringVar2, ItemId_GetName(BERRY_TO_ITEM(sBerryTag->berryId)));
+    StringCopy(gStringVar2, GetItemName(BERRY_TO_ITEM(sBerryTag->berryId)));
 #else //ENGLISH
     const struct Berry *berry = GetBerryInfo(sBerryTag->berryId);
     ConvertIntToDecimalStringN(gStringVar1, sBerryTag->berryId, STR_CONV_MODE_LEADING_ZEROS, 2);

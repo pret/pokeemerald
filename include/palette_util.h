@@ -66,18 +66,18 @@ struct RouletteFlashUtil
     struct RouletteFlashPalette palettes[16];
 };
 
-int InitPulseBlendPaletteSettings(struct PulseBlend *, const struct PulseBlendSettings *);
-void InitPulseBlend(struct PulseBlend *);
-void MarkUsedPulseBlendPalettes(struct PulseBlend *, u16, u8);
-void UnloadUsedPulseBlendPalettes(struct PulseBlend *, u16, u8);
-void UnmarkUsedPulseBlendPalettes(struct PulseBlend *, u16, u8);
-void UpdatePulseBlend(struct PulseBlend *);
-void FillTilemapRect(u16 *dest, u16 src, u8 left, u8 top, u8 width, u8 height);
+int InitPulseBlendPaletteSettings(struct PulseBlend *pulseBlend, const struct PulseBlendSettings *settings);
+void InitPulseBlend(struct PulseBlend *pulseBlend);
+void MarkUsedPulseBlendPalettes(struct PulseBlend *pulseBlend, u16 pulseBlendPaletteSelector, u8 multiSelection);
+void UnloadUsedPulseBlendPalettes(struct PulseBlend *pulseBlend, u16 pulseBlendPaletteSelector, u8 multiSelection);
+void UnmarkUsedPulseBlendPalettes(struct PulseBlend *pulseBlend, u16 pulseBlendPaletteSelector, u8 multiSelection);
+void UpdatePulseBlend(struct PulseBlend *pulseBlend);
+void FillTilemapRect(u16 *dest, u16 value, u8 left, u8 top, u8 width, u8 height);
 void SetTilemapRect(u16 *dest, u16 *src, u8 left, u8 top, u8 width, u8 height);
-void RouletteFlash_Run(struct RouletteFlashUtil *r0);
-void RouletteFlash_Reset(struct RouletteFlashUtil *r0);
-u8 RouletteFlash_Add(struct RouletteFlashUtil *r0, u8 r1, const struct RouletteFlashSettings *r2);
-void RouletteFlash_Stop(struct RouletteFlashUtil *r0, u16 r1);
-void RouletteFlash_Enable(struct RouletteFlashUtil *r0, u16 r1);
+void RouletteFlash_Run(struct RouletteFlashUtil *flash);
+void RouletteFlash_Reset(struct RouletteFlashUtil *flash);
+u8 RouletteFlash_Add(struct RouletteFlashUtil *flash, u8 id, const struct RouletteFlashSettings *settings);
+void RouletteFlash_Stop(struct RouletteFlashUtil *flash, u16 flags);
+void RouletteFlash_Enable(struct RouletteFlashUtil *flash, u16 flags);
 
 #endif // GUARD_PALETTE_UTIL_H

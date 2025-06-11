@@ -34,6 +34,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_FRONTIER_SS_TIDAL",
       "graphics_id": "OBJ_EVENT_GFX_SS_TIDAL",
       "x": 20,
       "y": 70,
@@ -47,6 +48,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_FRONTIER_FERRY_ATTENDANT",
       "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 19,
       "y": 68,
@@ -125,6 +127,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_FRONTIER_MANIAC_1",
       "graphics_id": "OBJ_EVENT_GFX_MANIAC",
       "x": 13,
       "y": 44,
@@ -138,6 +141,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_FRONTIER_MANIAC_2",
       "graphics_id": "OBJ_EVENT_GFX_MANIAC",
       "x": 14,
       "y": 44,
@@ -164,6 +168,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_FRONTIER_GIRL",
       "graphics_id": "OBJ_EVENT_GFX_GIRL_1",
       "x": 38,
       "y": 27,
@@ -190,6 +195,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_FRONTIER_CAMPER",
       "graphics_id": "OBJ_EVENT_GFX_CAMPER",
       "x": 9,
       "y": 47,
@@ -242,6 +248,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_FRONTIER_FISHERMAN_2",
       "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
       "x": 42,
       "y": 48,
@@ -307,6 +314,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_FRONTIER_MAN_4",
       "graphics_id": "OBJ_EVENT_GFX_MAN_4",
       "x": 8,
       "y": 5,

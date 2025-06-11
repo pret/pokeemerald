@@ -45,8 +45,8 @@ struct Pokenav_MenuGfx
     u8 numIconsBlending;
     bool8 pokenavAlreadyOpen;
     bool32 iconVisible[MAX_POKENAV_MENUITEMS];
-    struct Sprite * blueLightSprite;
-    struct Sprite * iconSprites[MAX_POKENAV_MENUITEMS][NUM_OPTION_SUBSPRITES];
+    struct Sprite *blueLightSprite;
+    struct Sprite *iconSprites[MAX_POKENAV_MENUITEMS][NUM_OPTION_SUBSPRITES];
     u8 bg1TilemapBuffer[BG_SCREEN_SIZE];
 };
 
@@ -380,7 +380,7 @@ static bool32 AreAnyTrainerRematchesNearby(void)
 
 bool32 OpenPokenavMenuInitial(void)
 {
-    struct Pokenav_MenuGfx * gfx = OpenPokenavMenu();
+    struct Pokenav_MenuGfx *gfx = OpenPokenavMenu();
 
     if (gfx == NULL)
         return FALSE;
@@ -391,7 +391,7 @@ bool32 OpenPokenavMenuInitial(void)
 
 bool32 OpenPokenavMenuNotInitial(void)
 {
-    struct Pokenav_MenuGfx * gfx = OpenPokenavMenu();
+    struct Pokenav_MenuGfx *gfx = OpenPokenavMenu();
 
     if (gfx == NULL)
         return FALSE;
@@ -402,7 +402,7 @@ bool32 OpenPokenavMenuNotInitial(void)
 
 static struct Pokenav_MenuGfx * OpenPokenavMenu(void)
 {
-    struct Pokenav_MenuGfx * gfx = AllocSubstruct(POKENAV_SUBSTRUCT_MENU_GFX, sizeof(struct Pokenav_MenuGfx));
+    struct Pokenav_MenuGfx *gfx = AllocSubstruct(POKENAV_SUBSTRUCT_MENU_GFX, sizeof(struct Pokenav_MenuGfx));
 
     if (gfx != NULL)
     {
@@ -416,20 +416,20 @@ static struct Pokenav_MenuGfx * OpenPokenavMenu(void)
 
 void CreateMenuHandlerLoopedTask(s32 ltIdx)
 {
-    struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
+    struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
     gfx->loopedTaskId = CreateLoopedTask(sMenuHandlerLoopTaskFuncs[ltIdx], 1);
     gfx->isTaskActiveCB = GetCurrentLoopedTaskActive;
 }
 
 bool32 IsMenuHandlerLoopedTaskActive(void)
 {
-    struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
+    struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
     return gfx->isTaskActiveCB();
 }
 
 void FreeMenuHandlerSubstruct2(void)
 {
-    struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
+    struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
 
     DestroyMovingDotsBgTask();
     RemoveWindow(gfx->optionDescWindowId);
@@ -440,14 +440,14 @@ void FreeMenuHandlerSubstruct2(void)
 
 static bool32 GetCurrentLoopedTaskActive(void)
 {
-    struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
+    struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
 
     return IsLoopedTaskActive(gfx->loopedTaskId);
 }
 
 static u32 LoopedTask_OpenMenu(s32 state)
 {
-    struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
+    struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
 
     switch (state)
     {
@@ -817,7 +817,7 @@ static void FreeAndDestroyMainMenuSprites(void)
 static void CreateMenuOptionSprites(void)
 {
     s32 i, j;
-    struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
+    struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
 
     for (i = 0; i < MAX_POKENAV_MENUITEMS; i++)
     {
@@ -833,7 +833,7 @@ static void CreateMenuOptionSprites(void)
 static void DestroyMenuOptionSprites(void)
 {
     s32 i, j;
-    struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
+    struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
 
     for (i = 0; i < MAX_POKENAV_MENUITEMS; i++)
     {
@@ -854,7 +854,7 @@ static void DrawCurrentMenuOptionLabels(void)
 static void DrawOptionLabelGfx(const u16 *const *optionGfx, s32 yPos, s32 deltaY)
 {
     s32 i, j;
-    struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
+    struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
     s32 baseTile = GetSpriteTileStartByTag(GFXTAG_OPTIONS);
 
     for (i = 0; i < MAX_POKENAV_MENUITEMS; i++)
@@ -987,7 +987,7 @@ static bool32 AreMenuOptionSpritesMoving(void)
 #define sSlideSpeed data[2]
 #define sSlideEndX  data[7]
 
-static void StartOptionSlide(struct Sprite ** sprites, s32 startX, s32 endX, s32 time)
+static void StartOptionSlide(struct Sprite **sprites, s32 startX, s32 endX, s32 time)
 {
     s32 i;
 
@@ -1016,10 +1016,10 @@ static void StartOptionSlide(struct Sprite ** sprites, s32 startX, s32 endX, s32
 
 // When an option is selected it zooms in and blends away as part
 // of the transition to the next screen.
-static void StartOptionZoom(struct Sprite ** sprites)
+static void StartOptionZoom(struct Sprite **sprites)
 {
     s32 i;
-    struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
+    struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
     u8 taskId;
 
     for (i = 0; i < NUM_OPTION_SUBSPRITES; i++)
@@ -1041,7 +1041,7 @@ static void StartOptionZoom(struct Sprite ** sprites)
     gfx->numIconsBlending++;
 }
 
-static void SetOptionInvisibility(struct Sprite ** sprites, bool32 invisible)
+static void SetOptionInvisibility(struct Sprite **sprites, bool32 invisible)
 {
     s32 i;
 
@@ -1052,7 +1052,7 @@ static void SetOptionInvisibility(struct Sprite ** sprites, bool32 invisible)
     }
 }
 
-static void SpriteCB_OptionSlide(struct Sprite * sprite)
+static void SpriteCB_OptionSlide(struct Sprite *sprite)
 {
     sprite->sSlideTime--;
     if (sprite->sSlideTime != -1)
@@ -1072,7 +1072,7 @@ static void SpriteCB_OptionSlide(struct Sprite * sprite)
 #undef sSlideSpeed
 #undef sSlideEndX
 
-static void SpriteCB_OptionZoom(struct Sprite * sprite)
+static void SpriteCB_OptionZoom(struct Sprite *sprite)
 {
     s32 temp;
     s32 x;
@@ -1133,7 +1133,7 @@ static void SpriteCB_OptionZoom(struct Sprite * sprite)
 
 static void Task_OptionBlend(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
     if (tBlendDelay == 0)
     {
@@ -1185,7 +1185,7 @@ static void Task_OptionBlend(u8 taskId)
 // Blue light that blinks if there are available rematches nearby
 static void CreateMatchCallBlueLightSprite(void)
 {
-    struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
+    struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
     u8 spriteId = CreateSprite(&sMatchCallBlueLightSpriteTemplate, 0x10, 0x60, 4);
     gfx->blueLightSprite = &gSprites[spriteId];
     if (AreAnyTrainerRematchesNearby())
@@ -1200,7 +1200,7 @@ static void DestroyRematchBlueLightSprite(void)
     DestroySprite(gfx->blueLightSprite);
 }
 
-static void SpriteCB_BlinkingBlueLight(struct Sprite * sprite)
+static void SpriteCB_BlinkingBlueLight(struct Sprite *sprite)
 {
     sprite->data[0]++;
     if (sprite->data[0] > 8)
@@ -1212,7 +1212,7 @@ static void SpriteCB_BlinkingBlueLight(struct Sprite * sprite)
 
 static void AddOptionDescriptionWindow(void)
 {
-    struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
+    struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
 
     gfx->optionDescWindowId = AddWindow(&sOptionDescWindowTemplate);
     PutWindowTilemap(gfx->optionDescWindowId);
@@ -1222,9 +1222,9 @@ static void AddOptionDescriptionWindow(void)
 
 static void PrintCurrentOptionDescription(void)
 {
-    struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
+    struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
     int menuItem = GetCurrentMenuItemId();
-    const u8 * desc = sPageDescriptions[menuItem];
+    const u8 *desc = sPageDescriptions[menuItem];
     u32 width = GetStringWidth(FONT_NORMAL, desc, -1);
     FillWindowPixelBuffer(gfx->optionDescWindowId, PIXEL_FILL(6));
     AddTextPrinterParameterized3(gfx->optionDescWindowId, FONT_NORMAL, (192 - width) / 2, 1, sOptionDescTextColors, 0, desc);
@@ -1234,8 +1234,8 @@ static void PrintCurrentOptionDescription(void)
 // Can occur by obtaining a mon with a ribbon and then releasing all ribbon winners
 static void PrintNoRibbonWinners(void)
 {
-    struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
-    const u8 * s = gText_NoRibbonWinners;
+    struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
+    const u8 *s = gText_NoRibbonWinners;
     u32 width = GetStringWidth(FONT_NORMAL, s, -1);
     FillWindowPixelBuffer(gfx->optionDescWindowId, PIXEL_FILL(6));
     AddTextPrinterParameterized3(gfx->optionDescWindowId, FONT_NORMAL, (192 - width) / 2, 1, sOptionDescTextColors2, 0, s);
@@ -1248,13 +1248,13 @@ static bool32 IsDma3ManagerBusyWithBgCopy_(void)
 
 static void CreateMovingBgDotsTask(void)
 {
-    struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
+    struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
     gfx->bg3ScrollTaskId = CreateTask(Task_MoveBgDots, 2);
 }
 
 static void DestroyMovingDotsBgTask(void)
 {
-    struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
+    struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
     DestroyTask(gfx->bg3ScrollTaskId);
 }
 
@@ -1290,9 +1290,9 @@ static bool32 IsTaskActive_UpdateBgDotsPalette(void)
 static void Task_UpdateBgDotsPalette(u8 taskId)
 {
     u16 sp8[2];
-    s16 * data = gTasks[taskId].data;
-    const u16 * pal1 = (const u16 *)GetWordTaskArg(taskId, 1);
-    const u16 * pal2 = (const u16 *)GetWordTaskArg(taskId, 3);
+    s16 *data = gTasks[taskId].data;
+    const u16 *pal1 = (const u16 *)GetWordTaskArg(taskId, 1);
+    const u16 *pal2 = (const u16 *)GetWordTaskArg(taskId, 3);
 
     PokenavCopyPalette(pal1, pal2, 2, 12, ++data[0], sp8);
     LoadPalette(sp8, BG_PLTT_ID(3) + 1, PLTT_SIZEOF(2));
@@ -1345,7 +1345,7 @@ static void InitMenuOptionGlow(void)
 
 static void Task_CurrentMenuOptionGlow(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     data[0]++;
     if (data[0] > 0)
     {

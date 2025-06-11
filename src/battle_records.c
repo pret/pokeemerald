@@ -201,7 +201,7 @@ static void UpdateLinkBattleGameStats(s32 battleOutcome)
         IncrementGameStat(stat);
 }
 
-static void UpdateLinkBattleRecords(struct LinkBattleRecords *records, const u8 *name, u16 trainerId, s32 battleOutcome, u8 battlerId)
+static void UpdateLinkBattleRecords(struct LinkBattleRecords *records, const u8 *name, u16 trainerId, s32 battleOutcome, u8 battler)
 {
     s32 index;
 
@@ -214,7 +214,7 @@ static void UpdateLinkBattleRecords(struct LinkBattleRecords *records, const u8 
         ClearLinkBattleRecord(&records->entries[index]);
         StringCopyN(records->entries[index].name, name, PLAYER_NAME_LENGTH);
         records->entries[index].trainerId = trainerId;
-        records->languages[index] = gLinkPlayers[battlerId].language;
+        records->languages[index] = gLinkPlayers[battler].language;
     }
     UpdateLinkBattleRecord(&records->entries[index], battleOutcome);
     SortLinkBattleRecords(records);
@@ -225,48 +225,48 @@ void ClearPlayerLinkBattleRecords(void)
     ClearLinkBattleRecords(gSaveBlock1Ptr->linkBattleRecords.entries);
 }
 
-static void IncTrainerCardWins(s32 battlerId)
+static void IncTrainerCardWins(s32 battler)
 {
-    u16 *wins = &gTrainerCards[battlerId].linkBattleWins;
+    u16 *wins = &gTrainerCards[battler].linkBattleWins;
     (*wins)++;
     if (*wins > 9999)
         *wins = 9999;
 }
 
-static void IncTrainerCardLosses(s32 battlerId)
+static void IncTrainerCardLosses(s32 battler)
 {
-    u16 *losses = &gTrainerCards[battlerId].linkBattleLosses;
+    u16 *losses = &gTrainerCards[battler].linkBattleLosses;
     (*losses)++;
     if (*losses > 9999)
         *losses = 9999;
 }
 
-static void UpdateTrainerCardWinsLosses(s32 battlerId)
+static void UpdateTrainerCardWinsLosses(s32 battler)
 {
     switch (gBattleOutcome)
     {
     case B_OUTCOME_WON:
-        IncTrainerCardWins(BATTLE_OPPOSITE(battlerId));
-        IncTrainerCardLosses(battlerId);
+        IncTrainerCardWins(BATTLE_OPPOSITE(battler));
+        IncTrainerCardLosses(battler);
         break;
     case B_OUTCOME_LOST:
-        IncTrainerCardLosses(BATTLE_OPPOSITE(battlerId));
-        IncTrainerCardWins(battlerId);
+        IncTrainerCardLosses(BATTLE_OPPOSITE(battler));
+        IncTrainerCardWins(battler);
         break;
     }
 }
 
-void UpdatePlayerLinkBattleRecords(s32 battlerId)
+void UpdatePlayerLinkBattleRecords(s32 battler)
 {
     if (InUnionRoom() != TRUE)
     {
-        UpdateTrainerCardWinsLosses(battlerId);
+        UpdateTrainerCardWinsLosses(battler);
         UpdateLinkBattleRecords(
             &gSaveBlock1Ptr->linkBattleRecords,
-            gTrainerCards[battlerId].playerName,
-            gTrainerCards[battlerId].trainerId,
+            gTrainerCards[battler].playerName,
+            gTrainerCards[battler].trainerId,
             gBattleOutcome,
-            battlerId);
+            battler);
     }
 }
 
