@@ -2,7 +2,7 @@ AncientTomb_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, AncientTomb_OnResume
 	map_script MAP_SCRIPT_ON_LOAD, AncientTomb_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, AncientTomb_OnTransition
-	.byte 0
+	end_map_scripts
 
 AncientTomb_OnResume:
 	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, AncientTomb_EventScript_TryRemoveRegisteel

@@ -1,5 +1,5 @@
 SootopolisCity_House4_MapScripts::
-	.byte 0
+	end_map_scripts
 
 SootopolisCity_House4_EventScript_Man::
 	msgbox SootopolisCity_House4_Text_AncientTreasuresWaitingInSea, MSGBOX_NPC

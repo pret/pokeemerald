@@ -1,6 +1,6 @@
 ShoalCave_LowTideStairsRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, ShoalCave_LowTideStairsRoom_OnLoad
-	.byte 0
+	end_map_scripts
 
 ShoalCave_LowTideStairsRoom_OnLoad:
 	call ShoalCave_LowTideStairsRoom_EventScript_SetShoalItemMetatiles
