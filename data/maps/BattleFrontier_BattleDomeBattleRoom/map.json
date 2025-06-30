@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_DOME_ANNOUNCER",
       "graphics_id": "OBJ_EVENT_GFX_REPORTER_M",
       "x": 5,
       "y": 4,
@@ -28,6 +29,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_DOME_AUDIENCE_TWIN",
       "graphics_id": "OBJ_EVENT_GFX_TWIN",
       "x": 7,
       "y": 2,
@@ -80,6 +82,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_DOME_AUDIENCE_WALKING",
       "graphics_id": "OBJ_EVENT_GFX_MAN_1",
       "x": 4,
       "y": 2,
@@ -119,6 +122,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_DOME_REFEREE",
       "graphics_id": "OBJ_EVENT_GFX_MAN_2",
       "x": 0,
       "y": 4,
@@ -171,6 +175,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_DOME_PLAYER",
       "graphics_id": "OBJ_EVENT_GFX_VAR_1",
       "x": 4,
       "y": 9,
@@ -197,6 +202,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_DOME_OPPONENT",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 11,
       "y": 6,

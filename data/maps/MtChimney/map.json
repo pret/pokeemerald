@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_MT_CHIMNEY_ARCHIE",
       "graphics_id": "OBJ_EVENT_GFX_ARCHIE",
       "x": 24,
       "y": 19,
@@ -28,6 +29,7 @@
       "flag": "FLAG_HIDE_MT_CHIMNEY_TEAM_AQUA"
     },
     {
+      "local_id": "LOCALID_MT_CHIMNEY_MAXIE",
       "graphics_id": "OBJ_EVENT_GFX_MAXIE",
       "x": 13,
       "y": 6,
@@ -41,6 +43,7 @@
       "flag": "FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA"
     },
     {
+      "local_id": "LOCALID_MT_CHIMNEY_TABITHA",
       "graphics_id": "OBJ_EVENT_GFX_MAGMA_MEMBER_M",
       "x": 12,
       "y": 11,
@@ -288,6 +291,7 @@
       "flag": "FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA"
     },
     {
+      "local_id": "LOCALID_MT_CHIMNEY_MAGMA_GRUNT_2",
       "graphics_id": "OBJ_EVENT_GFX_MAGMA_MEMBER_M",
       "x": 9,
       "y": 16,
@@ -379,6 +383,7 @@
       "flag": "FLAG_HIDE_MT_CHIMNEY_TRAINERS"
     },
     {
+      "local_id": "LOCALID_MT_CHIMNEY_MAGMA_GRUNT_1",
       "graphics_id": "OBJ_EVENT_GFX_MAGMA_MEMBER_F",
       "x": 13,
       "y": 16,

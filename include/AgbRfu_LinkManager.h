@@ -189,9 +189,9 @@ extern struct linkManagerTag lman;
 
 u32 rfu_LMAN_REQBN_softReset_and_checkID(void);
 void rfu_LMAN_requestChangeAgbClockMaster(void);
-void rfu_LMAN_initializeRFU(INIT_PARAM *init_params);
+void rfu_LMAN_initializeRFU(INIT_PARAM *init_parameters);
 u8 rfu_LMAN_establishConnection(u8 parent_child, u16 connect_period, u16 name_accept_period, u16 *acceptable_serialNo_list);
-void rfu_LMAN_stopManager(bool8 forced_stop_and_RFU_reset_flag);
+void rfu_LMAN_stopManager(u8 forced_stop_and_RFU_reset_flag);
 void rfu_LMAN_setMSCCallback(void (*MSC_callback_p)(u16));
 void rfu_LMAN_REQ_sendData(bool8 clockChangeFlag);
 void rfu_LMAN_powerDownRFU(void);

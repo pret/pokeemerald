@@ -1,5 +1,3 @@
-.set LOCALID_WOMAN, 7
-
 LilycoveCity_DepartmentStore_5F_MapScripts::
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LilycoveCity_DepartmentStore_5F_OnWarp
 	.byte 0
@@ -13,8 +11,8 @@ LilycoveCity_DepartmentStore_5F_OnWarp:
 	.2byte 0
 
 LilycoveCity_DepartmentStore_5F_EventScript_BlockRoofStairs::
-	setobjectxy LOCALID_WOMAN, 16, 2
-	turnobject LOCALID_WOMAN, DIR_NORTH
+	setobjectxy LOCALID_DEPARTMENT_STORE_STAIRS_WOMAN, 16, 2
+	turnobject LOCALID_DEPARTMENT_STORE_STAIRS_WOMAN, DIR_NORTH
 	end
 
 LilycoveCity_DepartmentStore_5F_EventScript_ClerkFarLeft::
@@ -119,7 +117,7 @@ LilycoveCity_DepartmentStore_5F_EventScript_PokefanF::
 
 LilycoveCity_DepartmentStore_5F_EventScript_Woman::
 	lockall
-	applymovement LOCALID_WOMAN, Common_Movement_FacePlayer
+	applymovement LOCALID_DEPARTMENT_STORE_STAIRS_WOMAN, Common_Movement_FacePlayer
 	waitmovement 0
 	goto_if_eq VAR_SOOTOPOLIS_CITY_STATE, 0, LilycoveCity_DepartmentStore_5F_EventScript_WomanNormal
 	goto_if_ge VAR_SOOTOPOLIS_CITY_STATE, 4, LilycoveCity_DepartmentStore_5F_EventScript_WomanNormal
@@ -135,7 +133,7 @@ LilycoveCity_DepartmentStore_5F_EventScript_WomanNormal::
 LilycoveCity_DepartmentStore_5F_EventScript_WomanLegendaryWeather::
 	msgbox LilycoveCity_DepartmentStore_5F_Text_ClosedRooftopForWeather, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_WOMAN, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_DEPARTMENT_STORE_STAIRS_WOMAN, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	releaseall
 	end

@@ -41,6 +41,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
+      "local_id": "LOCALID_PETALBURG_WOODS_GRUNT",
       "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
       "x": 26,
       "y": 17,
@@ -54,6 +55,7 @@
       "flag": "FLAG_HIDE_PETALBURG_WOODS_AQUA_GRUNT"
     },
     {
+      "local_id": "LOCALID_PETALBURG_WOODS_DEVON_EMPLOYEE",
       "graphics_id": "OBJ_EVENT_GFX_MAN_2",
       "x": 26,
       "y": 20,

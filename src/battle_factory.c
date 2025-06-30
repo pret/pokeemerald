@@ -121,7 +121,7 @@ static const u16 *const sMoveStyles[FACTORY_NUM_STYLES - 1] =
     [FACTORY_STYLE_WEATHER - 1]       = sMoves_DependsOnTheBattlesFlow,
 };
 
-static void (* const sBattleFactoryFunctions[])(void) =
+static void (*const sBattleFactoryFunctions[])(void) =
 {
     [BATTLE_FACTORY_FUNC_INIT]                   = InitFactoryChallenge,
     [BATTLE_FACTORY_FUNC_GET_DATA]               = GetBattleFactoryData,

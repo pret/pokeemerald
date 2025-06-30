@@ -15,8 +15,8 @@ static bool8 IsNotSpecialBattleString(u16 stringId);
 static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3);
 static void TrySetBattleSeminarShow(void);
 static void AddPointsOnFainting(bool8 targetFainted);
-static void AddPointsBasedOnWeather(u16 weatherFlags, u16 moveId, u8 moveSlot);
-static bool8 ShouldCalculateDamage(u16 moveId, s32 *dmg, u16 *powerOverride);
+static void AddPointsBasedOnWeather(u16 weatherFlags, u16 move, u8 moveSlot);
+static bool8 ShouldCalculateDamage(u16 move, s32 *dmg, u16 *powerOverride);
 
 #define TABLE_END ((u16)-1)
 
@@ -1056,7 +1056,7 @@ void TryPutLinkBattleTvShowOnAir(void)
     u8 countPlayer = 0, countOpponent = 0;
     s16 sum = 0;
     u16 species = 0;
-    u16 moveId = 0;
+    u16 move = MOVE_NONE;
     s32 i, j;
     int zero = 0, one = 1; //needed for matching
 
@@ -1124,8 +1124,8 @@ void TryPutLinkBattleTvShowOnAir(void)
         }
     }
 
-    moveId = GetMonData(&gPlayerParty[playerBestMonId], MON_DATA_MOVE1 + i, NULL);
-    if (playerBestSum == 0 || moveId == 0)
+    move = GetMonData(&gPlayerParty[playerBestMonId], MON_DATA_MOVE1 + i, NULL);
+    if (playerBestSum == 0 || move == MOVE_NONE)
         return;
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
@@ -1134,12 +1134,12 @@ void TryPutLinkBattleTvShowOnAir(void)
          || (playerBestMonId >= MULTI_PARTY_SIZE && GetLinkTrainerFlankId(gBattleScripting.multiplayerId)))
         {
             j = (opponentBestMonId < MULTI_PARTY_SIZE) ? FALSE : TRUE;
-            PutBattleUpdateOnTheAir(GetOpposingLinkMultiBattlerId(j, gBattleScripting.multiplayerId), moveId, playerBestSpecies, opponentBestSpecies);
+            PutBattleUpdateOnTheAir(GetOpposingLinkMultiBattlerId(j, gBattleScripting.multiplayerId), move, playerBestSpecies, opponentBestSpecies);
         }
     }
     else
     {
-        PutBattleUpdateOnTheAir(gBattleScripting.multiplayerId ^ 1, moveId, playerBestSpecies, opponentBestSpecies);
+        PutBattleUpdateOnTheAir(gBattleScripting.multiplayerId ^ 1, move, playerBestSpecies, opponentBestSpecies);
     }
 }
 
@@ -1505,9 +1505,9 @@ static void TrySetBattleSeminarShow(void)
     gCurrentMove = currMoveSaved;
 }
 
-static bool8 ShouldCalculateDamage(u16 moveId, s32 *dmg, u16 *powerOverride)
+static bool8 ShouldCalculateDamage(u16 move, s32 *dmg, u16 *powerOverride)
 {
-    if (gBattleMoves[moveId].power == 0)
+    if (gBattleMoves[move].power == 0)
     {
         *dmg = 0;
         return FALSE;
@@ -1517,7 +1517,7 @@ static bool8 ShouldCalculateDamage(u16 moveId, s32 *dmg, u16 *powerOverride)
         s32 i = 0;
         do
         {
-            if (moveId == sVariableDmgMoves[i])
+            if (move == sVariableDmgMoves[i])
                 break;
             i++;
         } while (sVariableDmgMoves[i] != TABLE_END);
@@ -1527,13 +1527,13 @@ static bool8 ShouldCalculateDamage(u16 moveId, s32 *dmg, u16 *powerOverride)
             *dmg = 0;
             return FALSE;
         }
-        else if (moveId == MOVE_PSYWAVE)
+        else if (move == MOVE_PSYWAVE)
         {
             *dmg = gBattleMons[gBattlerAttacker].level;
             *dmg /= 2;
             return FALSE;
         }
-        else if (moveId == MOVE_MAGNITUDE)
+        else if (move == MOVE_MAGNITUDE)
         {
             *powerOverride = 10;
             return TRUE;
@@ -1568,12 +1568,12 @@ void BattleTv_ClearExplosionFaintCause(void)
     }
 }
 
-u8 GetBattlerMoveSlotId(u8 battlerId, u16 moveId)
+u8 GetBattlerMoveSlotId(u8 battler, u16 move)
 {
     s32 i;
     struct Pokemon *party;
 
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
+    if (GetBattlerSide(battler) == B_SIDE_PLAYER)
         party = gPlayerParty;
     else
         party = gEnemyParty;
@@ -1583,7 +1583,7 @@ u8 GetBattlerMoveSlotId(u8 battlerId, u16 moveId)
     {
         if (i >= MAX_MON_MOVES)
             break;
-        if (GetMonData(&party[gBattlerPartyIndexes[battlerId]], MON_DATA_MOVE1 + i, NULL) == moveId)
+        if (GetMonData(&party[gBattlerPartyIndexes[battler]], MON_DATA_MOVE1 + i, NULL) == move)
             break;
         i++;
     }
@@ -1591,14 +1591,14 @@ u8 GetBattlerMoveSlotId(u8 battlerId, u16 moveId)
     return i;
 }
 
-static void AddPointsBasedOnWeather(u16 weatherFlags, u16 moveId, u8 moveSlot)
+static void AddPointsBasedOnWeather(u16 weatherFlags, u16 move, u8 moveSlot)
 {
     if (weatherFlags & B_WEATHER_RAIN)
-        AddMovePoints(PTS_RAIN, moveId, moveSlot, 0);
+        AddMovePoints(PTS_RAIN, move, moveSlot, 0);
     else if (weatherFlags & B_WEATHER_SUN)
-        AddMovePoints(PTS_SUN, moveId, moveSlot, 0);
+        AddMovePoints(PTS_SUN, move, moveSlot, 0);
     else if (weatherFlags & B_WEATHER_SANDSTORM)
-        AddMovePoints(PTS_SANDSTORM, moveId, moveSlot, 0);
+        AddMovePoints(PTS_SANDSTORM, move, moveSlot, 0);
     else if (weatherFlags & B_WEATHER_HAIL)
-        AddMovePoints(PTS_HAIL, moveId, moveSlot, 0);
+        AddMovePoints(PTS_HAIL, move, moveSlot, 0);
 }

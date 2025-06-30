@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_TOWER_BATTLE_OPPONENT",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 5,
       "y": 1,
@@ -28,6 +29,7 @@
       "flag": "FLAG_HIDE_BATTLE_TOWER_OPPONENT"
     },
     {
+      "local_id": "LOCALID_TOWER_BATTLE_ATTENDANT_1",
       "graphics_id": "OBJ_EVENT_GFX_TEALA",
       "x": 1,
       "y": 7,
@@ -41,6 +43,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_TOWER_BATTLE_ATTENDANT_2",
       "graphics_id": "OBJ_EVENT_GFX_TEALA",
       "x": 4,
       "y": 8,
