@@ -108,7 +108,7 @@ enum {
 // the lower 8 bits are a timer to the next state.
 // When the timer is incremented above 255, it increments
 // the vine state and the timer is reset.
-#define VINE_STATE_TIMER(vineState)(((vineState) << 8) | 0xFF)
+#define VINE_STATE_TIMER(vineState) (((vineState) << 8) | 0xFF)
 
 enum {
     MONSTATE_NORMAL, // Pokémon is either on the ground or in the middle of a jump
@@ -799,7 +799,7 @@ static void RecvLinkData_Leader(void)
         sPokemonJump->allPlayersReady = TRUE;
 }
 
-static bool32 (* const sPokeJumpLeaderFuncs[])(void) =
+static bool32 (*const sPokeJumpLeaderFuncs[])(void) =
 {
     [FUNC_GAME_INTRO]     = GameIntro_Leader,
     [FUNC_WAIT_ROUND]     = WaitRound_Leader,
@@ -898,7 +898,7 @@ static void RecvLinkData_Member(void)
     }
 }
 
-static bool32 (* const sPokeJumpMemberFuncs[])(void) =
+static bool32 (*const sPokeJumpMemberFuncs[])(void) =
 {
     [FUNC_GAME_INTRO]     = GameIntro_Member,
     [FUNC_WAIT_ROUND]     = WaitRound_Member,

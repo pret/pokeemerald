@@ -476,7 +476,7 @@ static const u8 sFrontierBrainStreakAppearances[NUM_FRONTIER_FACILITIES][4] =
     [FRONTIER_FACILITY_PYRAMID] = {21,  70, 35, 0},
 };
 
-static void (* const sBattlePikeFunctions[])(void) =
+static void (*const sBattlePikeFunctions[])(void) =
 {
     [BATTLE_PIKE_FUNC_SET_ROOM_TYPE]           = SetRoomType,
     [BATTLE_PIKE_FUNC_GET_DATA]                = GetBattlePikeData,
@@ -531,7 +531,7 @@ static const u8 sNumMonsToHealBeforePikeQueen[][3] =
     {0, 1, 2},
 };
 
-static bool8 (* const sStatusInflictionScreenFlashFuncs[])(struct Task *) =
+static bool8 (*const sStatusInflictionScreenFlashFuncs[])(struct Task *) =
 {
     StatusInflictionFadeOut, StatusInflictionFadeIn
 };
@@ -1267,7 +1267,7 @@ static void TryHealMons(u8 healCount)
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
         indices[i] = i;
 
-    // Only 'healCount' number of pokemon will be healed.
+    // Only 'healCount' number of Pokémon will be healed.
     // The order in which they're (attempted to be) healed is random,
     // and determined by performing 10 random swaps to this index array.
     for (k = 0; k < 10; k++)

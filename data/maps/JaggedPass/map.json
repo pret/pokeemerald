@@ -67,6 +67,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_MAGMA_HIDEOUT_GUARD",
       "graphics_id": "OBJ_EVENT_GFX_MAGMA_MEMBER_M",
       "x": 16,
       "y": 19,

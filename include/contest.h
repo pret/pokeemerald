@@ -209,7 +209,7 @@ struct ContestantStatus
     u8 comboAppealBonus;
     u8 repeatJam;
     u8 nextTurnOrder;  // turn position
-    u8 attentionLevel;  // How much the Pokemon "stood out"
+    u8 attentionLevel;  // How much the Pokémon "stood out"
     u8 contestantAnimTarget;
 };
 
@@ -290,11 +290,11 @@ struct ContestResources
     struct ContestGraphicsState *gfxState;
     struct ContestMoveAnimData *moveAnim;
     struct ContestTV *tv;
-    struct ContestUnused * unused;
-    u8 * contestBgTilemaps[CONTESTANT_COUNT];
-    void * boxBlinkTiles1;
-    void * boxBlinkTiles2;
-    void * animBgTileBuffer;
+    struct ContestUnused *unused;
+    u8 *contestBgTilemaps[CONTESTANT_COUNT];
+    void *boxBlinkTiles1;
+    void *boxBlinkTiles2;
+    void *animBgTileBuffer;
 };
 
 #define eContest (*gContestResources->contest)

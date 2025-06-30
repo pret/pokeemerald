@@ -7,6 +7,6 @@ EverGrandeCity_Hall5_OnWarp:
 	end_map_script_table
 
 EverGrandeCity_Hall5_EventScript_TurnPlayerNorth::
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	turnobject LOCALID_PLAYER, DIR_NORTH
 	end
 

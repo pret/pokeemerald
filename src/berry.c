@@ -980,7 +980,9 @@ bool32 IsEnigmaBerryValid(void)
 const struct Berry *GetBerryInfo(u8 berry)
 {
     if (berry == ITEM_TO_BERRY(ITEM_ENIGMA_BERRY) && IsEnigmaBerryValid())
+    {
         return (struct Berry *)(&gSaveBlock1Ptr->enigmaBerry.berry);
+    }
     else
     {
         if (berry == BERRY_NONE || berry > ITEM_TO_BERRY(LAST_BERRY_INDEX))
@@ -1202,15 +1204,9 @@ static u8 GetNumStagesWateredByBerryTreeId(u8 id)
     return BerryTreeGetNumStagesWatered(GetBerryTreeInfo(id));
 }
 
-// Berries can be watered at 4 stages of growth. This function is likely meant
-// to divide the berry yield range equally into quartiles. If you watered the
-// tree n times, your yield is a random number in the nth quartile.
-//
-// However, this function actually skews towards higher berry yields, because
-// it rounds `extraYield` to the nearest whole number.
-//
-// See resulting yields: https://gist.github.com/hondew/2a099dbe54aa91414decdbfaa524327d,
-// and bug fix: https://gist.github.com/hondew/0f0164e5b9dadfd72d24f30f2c049a0b.
+// Berries can be watered at 4 stages of growth. The distribution is largely
+// even but slightly prefers middle berry yields, since it uniformly draws from
+// a subset of the total yield range.
 static u8 CalcBerryYieldInternal(u16 max, u16 min, u8 water)
 {
     u32 randMin;
@@ -1219,7 +1215,9 @@ static u8 CalcBerryYieldInternal(u16 max, u16 min, u8 water)
     u32 extraYield;
 
     if (water == 0)
+    {
         return min;
+    }
     else
     {
         randMin = (max - min) * (water - 1);

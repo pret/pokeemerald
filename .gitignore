@@ -21,7 +21,6 @@ sound/**/*.bin
 sound/songs/midi/*.s
 tools/agbcc
 *.map
-*.ld
 *.bat
 *.dump
 *.sa*
@@ -39,3 +38,5 @@ prefabs.json
 *.diff
 *.sym
 *.js
+/pokeemerald-*.png
+/pokeemerald_modern-*.png

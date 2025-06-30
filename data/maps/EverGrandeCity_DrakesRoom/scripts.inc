@@ -10,7 +10,7 @@ EverGrandeCity_DrakesRoom_OnWarp:
 	end_map_script_table
 
 EverGrandeCity_DrakesRoom_EventScript_PlayerTurnNorth::
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	turnobject LOCALID_PLAYER, DIR_NORTH
 	end
 
 EverGrandeCity_DrakesRoom_OnFrame:

@@ -1,5 +1,3 @@
-.set LOCALID_MOVE_RELEARNER, 1
-
 FallarborTown_MoveRelearnersHouse_MapScripts::
 	end_map_scripts
 

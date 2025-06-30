@@ -28,7 +28,7 @@ EverGrandeCity_SidneysRoom_OnWarp:
 	end_map_script_table
 
 EverGrandeCity_SidneysRoom_EventScript_PlayerTurnNorth::
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	turnobject LOCALID_PLAYER, DIR_NORTH
 	end
 
 EverGrandeCity_SidneysRoom_OnFrame:

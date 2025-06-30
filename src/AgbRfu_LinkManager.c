@@ -14,7 +14,7 @@
 #define FSP_ON    0x01
 #define FSP_START 0x02
 
-LINK_MANAGER lman;
+COMMON_DATA LINK_MANAGER lman = {0};
 
 static void rfu_LMAN_clearVariables(void);
 static void rfu_LMAN_settingPCSWITCH(u32 rand);
@@ -59,7 +59,9 @@ void rfu_LMAN_REQ_sendData(bool8 clockChangeFlag)
             clockChangeFlag = FALSE;
     }
     else
+    {
         lman.parentAck_flag = 0;
+    }
     rfu_REQ_sendData(clockChangeFlag);
 }
 

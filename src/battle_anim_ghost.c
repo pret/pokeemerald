@@ -280,7 +280,9 @@ static void AnimConfuseRayBallBounce_Step2(struct Sprite *sprite)
         sprite->callback = DestroyAnimSpriteAndDisableBlend;
     }
     else
+    {
         UpdateConfuseRayBallBlend(sprite);
+    }
 }
 
 static void UpdateConfuseRayBallBlend(struct Sprite *sprite)
@@ -628,11 +630,13 @@ static void AnimTask_SpiteTargetShadow_Step1(u8 taskId)
                 task->data[3] = 16;
                 task->data[13] = GetAnimBattlerSpriteId(ANIM_TARGET);
                 task->data[4] = OBJ_PLTT_ID2(gSprites[task->data[13]].oam.paletteNum);
-                if (position == 1) {
+                if (position == 1)
+                {
                     u16 mask = DISPCNT_BG1_ON;
                     mask2 = mask;
                 }
-                else {
+                else
+                {
                     u16 mask = DISPCNT_BG2_ON;
                     mask2 = mask;
                 }

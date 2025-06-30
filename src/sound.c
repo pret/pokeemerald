@@ -14,7 +14,7 @@ struct Fanfare
     u16 duration;
 };
 
-EWRAM_DATA struct MusicPlayerInfo* gMPlay_PokemonCry = NULL;
+EWRAM_DATA struct MusicPlayerInfo *gMPlay_PokemonCry = NULL;
 EWRAM_DATA u8 gPokemonCryBGMDuckingCounter = 0;
 
 static u16 sCurrentMapMusic;
@@ -23,7 +23,7 @@ static u8 sMapMusicState;
 static u8 sMapMusicFadeInSpeed;
 static u16 sFanfareCounter;
 
-bool8 gDisableMusic;
+COMMON_DATA bool8 gDisableMusic = 0;
 
 extern struct ToneData gCryTable[];
 extern struct ToneData gCryTable_Reverse[];
@@ -463,9 +463,9 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     SetPokemonCryChorus(chorus);
     SetPokemonCryPriority(priority);
 
-    // This is a fancy way to get a cry of a pokemon.
+    // This is a fancy way to get a cry of a Pokémon.
     // It creates 4 sets of 128 mini cry tables.
-    // If you wish to expand pokemon, you need to
+    // If you wish to expand Pokémon, you need to
     // append new cases to the switch.
     species = SpeciesToCryId(species);
     index = species % 128;

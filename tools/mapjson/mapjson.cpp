@@ -30,6 +30,8 @@ using json11::Json;
 #include "mapjson.h"
 
 string version;
+// System directory separator
+string sep;
 
 string read_text_file(string filepath) {
     ifstream in_file(filepath);
@@ -94,6 +96,29 @@ string json_to_string(const Json &data, const string &field = "", bool silent = 
     return output;
 }
 
+string get_generated_warning(const string &filename, bool isAsm) {
+    string comment = isAsm ? "@" : "//";
+
+    ostringstream warning;
+    warning << comment << "\n"
+            << comment << " DO NOT MODIFY THIS FILE! It is auto-generated from " << filename << "\n"
+            << comment << "\n\n";
+    return warning.str();
+}
+
+string get_include_guard_start(const string &name) {
+    ostringstream guard;
+    guard << "#ifndef GUARD_" << name << "_H\n"
+          << "#define GUARD_" << name << "_H\n\n";
+    return guard.str();
+}
+
+string get_include_guard_end(const string &name) {
+    ostringstream guard;
+    guard << "#endif // GUARD_" << name << "_H\n";
+    return guard.str();
+}
+
 string generate_map_header_text(Json map_data, Json layouts_data) {
     string map_layout_id = json_to_string(map_data, "layout");
 
@@ -112,8 +137,7 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
     ostringstream text;
 
     string mapName = json_to_string(map_data, "name");
-
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/" << mapName << "/map.json\n@\n\n";
+    text << get_generated_warning("data/maps/" + mapName + "/map.json", true);
 
     text << mapName << ":\n"
          << "\t.4byte " << json_to_string(layout, "name") << "\n";
@@ -165,12 +189,10 @@ string generate_map_connections_text(Json map_data) {
     if (map_data["connections"] == Json())
         return string("\n");
 
-    ostringstream text;
-
     string mapName = json_to_string(map_data, "name");
 
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/" << mapName << "/map.json\n@\n\n";
-
+    ostringstream text;
+    text << get_generated_warning("data/maps/" + mapName + "/map.json", true);
     text << mapName << "_MapConnectionsList:\n";
 
     for (auto &connection : map_data["connections"].array_items()) {
@@ -191,11 +213,11 @@ string generate_map_events_text(Json map_data) {
     if (map_data.object_items().find("shared_events_map") != map_data.object_items().end())
         return string("\n");
 
-    ostringstream text;
-
     string mapName = json_to_string(map_data, "name");
 
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/" << mapName << "/map.json\n@\n\n";
+    ostringstream text;
+    text << get_generated_warning("data/maps/" + mapName + "/map.json", true);
+    text << "\t.align 2\n\n";
 
     string objects_label, warps_label, coords_label, bgs_label;
 
@@ -330,13 +352,22 @@ string generate_map_events_text(Json map_data) {
     return text.str();
 }
 
-string get_directory_name(string filename) {
-    size_t dir_pos = filename.find_last_of("/\\");
+string strip_trailing_separator(string filename) {
+    if(filename.back() == '/' || filename.back() == '\\')
+        filename.pop_back();
 
+    return filename;
+}
+void infer_separator(string filename) {
+    size_t dir_pos = filename.find_last_of("/\\");
+    sep = filename[dir_pos];
+}
+string file_parent(string filename){
+    size_t dir_pos = filename.find_last_of("/\\");
     return filename.substr(0, dir_pos + 1);
 }
 
-void process_map(string map_filepath, string layouts_filepath) {
+void process_map(string map_filepath, string layouts_filepath, string output_dir) {
     string mapdata_err, layouts_err;
 
     string mapdata_json_text = read_text_file(map_filepath);
@@ -354,16 +385,58 @@ void process_map(string map_filepath, string layouts_filepath) {
     string events_text = generate_map_events_text(map_data);
     string connections_text = generate_map_connections_text(map_data);
 
-    string files_dir = get_directory_name(map_filepath);
-    write_text_file(files_dir + "header.inc", header_text);
-    write_text_file(files_dir + "events.inc", events_text);
-    write_text_file(files_dir + "connections.inc", connections_text);
+    string out_dir = strip_trailing_separator(output_dir).append(sep);
+    write_text_file(out_dir + "header.inc", header_text);
+    write_text_file(out_dir + "events.inc", events_text);
+    write_text_file(out_dir + "connections.inc", connections_text);
+}
+
+void process_event_constants(const vector<string> &map_filepaths, string output_ids_file) {
+    string warning = get_generated_warning("data/maps/*/map.json", false);
+
+    string guard_name = "CONSTANTS_MAP_EVENT_IDS";
+    ostringstream ids_file_text;
+    ids_file_text << get_include_guard_start(guard_name) << warning;
+
+    for (const string &filepath : map_filepaths) {
+        string err;
+        string map_json_text = read_text_file(filepath);
+        Json map_data = Json::parse(map_json_text, err);
+        if (map_data == Json())
+            FATAL_ERROR("Failed to read '%s' while generating map event constants: %s\n", filepath.c_str(), err.c_str());
+
+        string map_id = json_to_string(map_data, "id");
+
+        // Get IDs from the object/clone events.
+        ostringstream map_ids_text;
+        auto obj_events = map_data["object_events"].array_items();
+        for (unsigned int i = 0; i < obj_events.size(); i++) {
+            auto obj_event = obj_events[i];
+            if (obj_event.object_items().find("local_id") != obj_event.object_items().end())
+                map_ids_text << "#define " << json_to_string(obj_event, "local_id") << " " << i + 1 << "\n";
+        }
+        // Get IDs from the warp events.
+        auto warp_events = map_data["warp_events"].array_items();
+        for (unsigned int i = 0; i < warp_events.size(); i++) {
+            auto warp_event = warp_events[i];
+            if (warp_event.object_items().find("warp_id") != warp_event.object_items().end())
+                map_ids_text << "#define " << json_to_string(warp_event, "warp_id") << " " << i << "\n";
+        }
+        // Only output if we found any IDs
+        string temp = map_ids_text.str();
+        if (!temp.empty()) {
+            ids_file_text << "// " << map_id << "\n" << temp << "\n";
+        }
+    }
+
+    ids_file_text << get_include_guard_end(guard_name);
+    write_text_file(output_ids_file, ids_file_text.str());
 }
 
 string generate_groups_text(Json groups_data) {
     ostringstream text;
 
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/map_groups.json\n@\n\n";
+    text << get_generated_warning("data/maps/map_groups.json", true);
 
     for (auto &key : groups_data["group_order"].array_items()) {
         string group = json_to_string(key);
@@ -382,7 +455,7 @@ string generate_groups_text(Json groups_data) {
     return text.str();
 }
 
-string generate_connections_text(Json groups_data) {
+string generate_connections_text(Json groups_data, string include_path) {
     vector<Json> map_names;
 
     for (auto &group : groups_data["group_order"].array_items())
@@ -404,15 +477,15 @@ string generate_connections_text(Json groups_data) {
 
     ostringstream text;
 
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/map_groups.json\n@\n\n";
+    text << get_generated_warning("data/maps/map_groups.json", true);
 
     for (Json map_name : map_names)
-        text << "\t.include \"data/maps/" << json_to_string(map_name) << "/connections.inc\"\n";
+        text << "\t.include \"" << include_path << "/" <<  json_to_string(map_name) << "/connections.inc\"\n";
 
     return text.str();
 }
 
-string generate_headers_text(Json groups_data) {
+string generate_headers_text(Json groups_data, string include_path) {
     vector<string> map_names;
 
     for (auto &group : groups_data["group_order"].array_items())
@@ -421,15 +494,15 @@ string generate_headers_text(Json groups_data) {
 
     ostringstream text;
 
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/map_groups.json\n@\n\n";
+    text << get_generated_warning("data/maps/map_groups.json", true);
 
     for (string map_name : map_names)
-        text << "\t.include \"data/maps/" << map_name << "/header.inc\"\n";
+        text << "\t.include \"" << include_path << "/" << map_name << "/header.inc\"\n";
 
     return text.str();
 }
 
-string generate_events_text(Json groups_data) {
+string generate_events_text(Json groups_data, string include_path) {
     vector<string> map_names;
 
     for (auto &group : groups_data["group_order"].array_items())
@@ -438,24 +511,20 @@ string generate_events_text(Json groups_data) {
 
     ostringstream text;
 
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/map_groups.json\n@\n\n";
+    text << get_generated_warning(include_path + "/map_groups.json", true);
 
     for (string map_name : map_names)
-        text << "\t.include \"data/maps/" << map_name << "/events.inc\"\n";
+        text << "\t.include \"" << include_path << "/" << map_name << "/events.inc\"\n";
 
     return text.str();
 }
 
 string generate_map_constants_text(string groups_filepath, Json groups_data) {
-    string file_dir = get_directory_name(groups_filepath);
-    char dir_separator = file_dir.back();
+    string file_dir = file_parent(groups_filepath) + sep;
 
+    string guard_name = "CONSTANTS_MAP_GROUPS";
     ostringstream text;
-
-    text << "#ifndef GUARD_CONSTANTS_MAP_GROUPS_H\n"
-         << "#define GUARD_CONSTANTS_MAP_GROUPS_H\n\n";
-
-    text << "//\n// DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/map_groups.json\n//\n\n";
+    text << get_include_guard_start(guard_name) << get_generated_warning("data/maps/map_groups.json", false);
 
     int group_num = 0;
 
@@ -466,7 +535,7 @@ string generate_map_constants_text(string groups_filepath, Json groups_data) {
         size_t max_length = 0;
 
         for (auto &map_name : groups_data[groupName].array_items()) {
-            string map_filepath = file_dir + json_to_string(map_name) + dir_separator + "map.json";
+            string map_filepath = file_dir + json_to_string(map_name) + sep + "map.json";
             string err_str;
             Json map_data = Json::parse(read_text_file(map_filepath), err_str);
             if (map_data == Json())
@@ -488,12 +557,16 @@ string generate_map_constants_text(string groups_filepath, Json groups_data) {
     }
 
     text << "#define MAP_GROUPS_COUNT " << group_num << "\n\n";
-    text << "#endif // GUARD_CONSTANTS_MAP_GROUPS_H\n";
+    text << get_include_guard_end(guard_name);
 
     return text.str();
 }
 
-void process_groups(string groups_filepath) {
+// Output paths are directories with trailing path separators
+void process_groups(string groups_filepath, string output_asm, string output_c) {
+    output_asm = strip_trailing_separator(output_asm); // Remove separator if existing.
+    output_c = strip_trailing_separator(output_c);
+
     string err;
     Json groups_data = Json::parse(read_text_file(groups_filepath), err);
 
@@ -501,25 +574,22 @@ void process_groups(string groups_filepath) {
         FATAL_ERROR("%s\n", err.c_str());
 
     string groups_text = generate_groups_text(groups_data);
-    string connections_text = generate_connections_text(groups_data);
-    string headers_text = generate_headers_text(groups_data);
-    string events_text = generate_events_text(groups_data);
+    string connections_text = generate_connections_text(groups_data, output_asm);
+    string headers_text = generate_headers_text(groups_data, output_asm);
+    string events_text = generate_events_text(groups_data, output_asm);
     string map_header_text = generate_map_constants_text(groups_filepath, groups_data);
 
-    string file_dir = get_directory_name(groups_filepath);
-    char s = file_dir.back();
-
-    write_text_file(file_dir + "groups.inc", groups_text);
-    write_text_file(file_dir + "connections.inc", connections_text);
-    write_text_file(file_dir + "headers.inc", headers_text);
-    write_text_file(file_dir + "events.inc", events_text);
-    write_text_file(file_dir + ".." + s + ".." + s + "include" + s + "constants" + s + "map_groups.h", map_header_text);
+    write_text_file(output_asm + sep + "groups.inc", groups_text);
+    write_text_file(output_asm + sep + "connections.inc", connections_text);
+    write_text_file(output_asm + sep + "headers.inc", headers_text);
+    write_text_file(output_asm + sep + "events.inc", events_text);
+    write_text_file(output_c + sep + "map_groups.h", map_header_text);
 }
 
 string generate_layout_headers_text(Json layouts_data) {
     ostringstream text;
 
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/layouts/layouts.json\n@\n\n";
+    text << get_generated_warning("data/layouts/layouts.json", true);
 
     for (auto &layout : layouts_data["layouts"].array_items()) {
         if (layout == Json::object()) continue;
@@ -552,7 +622,7 @@ string generate_layout_headers_text(Json layouts_data) {
 string generate_layouts_table_text(Json layouts_data) {
     ostringstream text;
 
-    text << "@\n@ DO NOT MODIFY THIS FILE! It is auto-generated from data/layouts/layouts.json\n@\n\n";
+    text << get_generated_warning("data/layouts/layouts.json", true);
 
     text << "\t.align 2\n"
          << json_to_string(layouts_data, "layouts_table_label") << "::\n";
@@ -567,12 +637,9 @@ string generate_layouts_table_text(Json layouts_data) {
 }
 
 string generate_layouts_constants_text(Json layouts_data) {
+    string guard_name = "CONSTANTS_LAYOUTS";
     ostringstream text;
-
-    text << "#ifndef GUARD_CONSTANTS_LAYOUTS_H\n"
-         << "#define GUARD_CONSTANTS_LAYOUTS_H\n\n";
-
-    text << "//\n// DO NOT MODIFY THIS FILE! It is auto-generated from data/layouts/layouts.json\n//\n\n";
+    text << get_include_guard_start(guard_name) << get_generated_warning("data/layouts/layouts.json", false);
 
     int i = 1;
     for (auto &layout : layouts_data["layouts"].array_items()) {
@@ -581,12 +648,15 @@ string generate_layouts_constants_text(Json layouts_data) {
         i++;
     }
 
-    text << "\n#endif // GUARD_CONSTANTS_LAYOUTS_H\n";
+    text << get_include_guard_end(guard_name);
 
     return text.str();
 }
 
-void process_layouts(string layouts_filepath) {
+void process_layouts(string layouts_filepath, string output_asm, string output_c) {
+    output_asm = strip_trailing_separator(output_asm).append(sep);
+    output_c = strip_trailing_separator(output_c).append(sep);
+
     string err;
     Json layouts_data = Json::parse(read_text_file(layouts_filepath), err);
 
@@ -597,12 +667,9 @@ void process_layouts(string layouts_filepath) {
     string layouts_table_text = generate_layouts_table_text(layouts_data);
     string layouts_constants_text = generate_layouts_constants_text(layouts_data);
 
-    string file_dir = get_directory_name(layouts_filepath);
-    char s = file_dir.back();
-
-    write_text_file(file_dir + "layouts.inc", layout_headers_text);
-    write_text_file(file_dir + "layouts_table.inc", layouts_table_text);
-    write_text_file(file_dir + ".." + s + ".." + s + "include" + s + "constants" + s + "layouts.h", layouts_constants_text);
+    write_text_file(output_asm + "layouts.inc", layout_headers_text);
+    write_text_file(output_asm + "layouts_table.inc", layouts_table_text);
+    write_text_file(output_c + "layouts.h", layouts_constants_text);
 }
 
 int main(int argc, char *argv[]) {
@@ -616,33 +683,57 @@ int main(int argc, char *argv[]) {
 
     char *mode_arg = argv[1];
     string mode(mode_arg);
-    if (mode != "layouts" && mode != "map" && mode != "groups")
-        FATAL_ERROR("ERROR: <mode> must be 'layouts', 'map', or 'groups'.\n");
-
     if (mode == "map") {
-        if (argc != 5)
-            FATAL_ERROR("USAGE: mapjson map <game-version> <map_file> <layouts_file>\n");
+        if (argc != 6)
+            FATAL_ERROR("USAGE: mapjson map <game-version> <map_file> <layouts_file> <output_dir>\n");
 
+        infer_separator(argv[3]);
         string filepath(argv[3]);
         string layouts_filepath(argv[4]);
+        string output_dir(argv[5]);
 
-        process_map(filepath, layouts_filepath);
+        process_map(filepath, layouts_filepath, output_dir);
     }
     else if (mode == "groups") {
-        if (argc != 4)
-            FATAL_ERROR("USAGE: mapjson groups <game-version> <groups_file>\n");
+        if (argc != 6)
+            FATAL_ERROR("USAGE: mapjson groups <game-version> <groups_file> <output_asm_dir> <output_c_dir>\n");
 
+        infer_separator(argv[3]);
         string filepath(argv[3]);
+        string output_asm(argv[4]);
+        string output_c(argv[5]);
 
-        process_groups(filepath);
+        process_groups(filepath, output_asm, output_c);
     }
     else if (mode == "layouts") {
-        if (argc != 4)
-            FATAL_ERROR("USAGE: mapjson layouts <game-version> <layouts_file>\n");
+        if (argc != 6)
+            FATAL_ERROR("USAGE: mapjson layouts <game-version> <layouts_file> <output_asm_dir> <output_c_dir>\n");
 
+        infer_separator(argv[3]);
         string filepath(argv[3]);
+        string output_asm(argv[4]);
+        string output_c(argv[5]);
 
-        process_layouts(filepath);
+        process_layouts(filepath, output_asm, output_c);
+    }
+    else if (mode == "event_constants") {
+        if (argc < 5)
+            FATAL_ERROR("USAGE: mapjson event_constants <game-version> <map_file> [additional_map_files] <output_ids_file>");
+
+        infer_separator(argv[3]);
+
+        vector<string> filepaths;
+        const int firstMapFileArg = 3;
+        const int lastMapFileArg = argc - 2;
+        for (int i = firstMapFileArg; i <= lastMapFileArg; i++) {
+            filepaths.push_back(argv[i]);
+        }
+        string output_ids_file(argv[argc - 1]);
+
+        process_event_constants(filepaths, output_ids_file);
+    }
+    else {
+        FATAL_ERROR("ERROR: <mode> must be 'layouts', 'map', 'event_constants', or 'groups'.\n");
     }
 
     return 0;
