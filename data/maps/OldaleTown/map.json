@@ -44,6 +44,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_OLDALE_MART_EMPLOYEE",
       "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
       "x": 13,
       "y": 7,
@@ -57,6 +58,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_FOOTPRINTS_MAN",
       "graphics_id": "OBJ_EVENT_GFX_MANIAC",
       "x": 8,
       "y": 9,
@@ -70,6 +72,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_OLDALE_RIVAL",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 11,
       "y": 19,

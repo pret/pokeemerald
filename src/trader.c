@@ -15,7 +15,7 @@
 #include "task.h"
 #include "script_menu.h"
 
-static const u8 * const sDefaultTraderNames[NUM_TRADER_ITEMS] =
+static const u8 *const sDefaultTraderNames[NUM_TRADER_ITEMS] =
 {
     gText_Tristan,
     gText_Philip,
@@ -58,7 +58,7 @@ void Trader_ResetFlag(void)
 void CreateAvailableDecorationsMenu(u8 taskId)
 {
     u8 i;
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     struct MauvilleOldManTrader *trader = &gSaveBlock1Ptr->oldMan.trader;
     struct WindowTemplate windowTemplate = {
         .bg = 0,
@@ -98,7 +98,7 @@ void CreateAvailableDecorationsMenu(u8 taskId)
 
 void Task_BufferDecorSelectionAndCloseWindow(u8 taskId, u8 decorationId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     if (decorationId > NUM_DECORATIONS)
         gSpecialVar_0x8004 = 0xFFFF;
     else

@@ -880,7 +880,9 @@ static void Mailbox_CancelMoveToBag(u8 taskId)
 static void Mailbox_Give(u8 taskId)
 {
     if (CalculatePlayerPartyCount() == 0)
+    {
         Mailbox_NoPokemonForMail(taskId);
+    }
     else
     {
         FadeScreen(FADE_TO_BLACK, 0);
@@ -1049,7 +1051,7 @@ static void ItemStorage_PrintDescription(s32 id)
 
     // Get item description (or Cancel text)
     if (id != LIST_CANCEL)
-        description = (u8 *)ItemId_GetDescription(gSaveBlock1Ptr->pcItems[id].itemId);
+        description = (u8 *)GetItemDescription(gSaveBlock1Ptr->pcItems[id].itemId);
     else
         description = ItemStorage_GetMessage(MSG_GO_BACK_TO_PREV);
 
@@ -1193,7 +1195,7 @@ static const u8 *ItemStorage_GetMessage(u16 itemId)
         string = gText_MoveVar1Where;
         break;
     default:
-        string = ItemId_GetDescription(itemId);
+        string = GetItemDescription(itemId);
         break;
     }
     return string;
@@ -1271,7 +1273,7 @@ static void ItemStorage_ExitItemList(u8 taskId)
 static void ItemStorage_StartItemSwap(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    ListMenuSetUnkIndicatorsStructField(tListTaskId, 16, 1);
+    ListMenuSetTemplateField(tListTaskId, LISTFIELD_CURSORKIND, CURSOR_INVISIBLE);
     sItemStorageMenu->toSwapPos = gPlayerPCItemPageInfo.itemsAbove + gPlayerPCItemPageInfo.cursorPos;
     ItemStorage_SetSwapArrow(tListTaskId, 0, 0);
     ItemStorage_UpdateSwapLinePos(sItemStorageMenu->toSwapPos);
@@ -1445,7 +1447,7 @@ static void ItemStorage_DoItemToss(u8 taskId)
     s16 *data = gTasks[taskId].data;
     u16 pos = gPlayerPCItemPageInfo.cursorPos + gPlayerPCItemPageInfo.itemsAbove;
 
-    if (!ItemId_GetImportance(gSaveBlock1Ptr->pcItems[pos].itemId))
+    if (!GetItemImportance(gSaveBlock1Ptr->pcItems[pos].itemId))
     {
         // Show toss confirmation prompt
         CopyItemName(gSaveBlock1Ptr->pcItems[pos].itemId, gStringVar1);

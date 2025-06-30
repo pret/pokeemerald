@@ -34,7 +34,7 @@ struct PokenavListWindowState {
     u16 selectedIndexOffset;
     u16 entriesOnscreen;
     u32 listItemSize;
-    void * listPtr;
+    void *listPtr;
 };
 
 struct PokenavListSub
@@ -43,7 +43,7 @@ struct PokenavListSub
     u32 printStart;
     u32 printIndex;
     u32 itemSize;
-    void * listPtr;
+    void *listPtr;
     s32 startBgY;
     s32 endBgY;
     u32 loopedTaskId;
@@ -192,7 +192,7 @@ static void InitListItems(struct PokenavListWindowState *windowState, struct Pok
     PrintListItems(windowState->listPtr, windowState->windowTopIndex, numToPrint, windowState->listItemSize, 0, subPtr);
 }
 
-static void PrintListItems(void * listPtr, u32 topIndex, u32 numItems, u32 itemSize, u32 printStart, struct PokenavListSub *list)
+static void PrintListItems(void *listPtr, u32 topIndex, u32 numItems, u32 itemSize, u32 printStart, struct PokenavListSub *list)
 {
     if (numItems == 0)
         return;

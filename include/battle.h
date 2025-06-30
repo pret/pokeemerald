@@ -218,11 +218,11 @@ struct StatsArray
 
 struct BattleResources
 {
-    struct SecretBase* secretBase;
+    struct SecretBase *secretBase;
     struct ResourceFlags *flags;
-    struct BattleScriptsStack* battleScriptsStack;
-    struct BattleCallbacksStack* battleCallbackStack;
-    struct StatsArray* beforeLvlUp;
+    struct BattleScriptsStack *battleScriptsStack;
+    struct BattleCallbacksStack *battleCallbackStack;
+    struct StatsArray *beforeLvlUp;
     struct AI_ThinkingStruct *ai;
     struct BattleHistory *battleHistory;
     struct BattleScriptsStack *AI_ScriptsStack;
@@ -465,11 +465,11 @@ STATIC_ASSERT(sizeof(((struct BattleStruct *)0)->palaceFlags) * 8 >= MAX_BATTLER
 
 #define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0))
 
-#define IS_BATTLER_OF_TYPE(battlerId, type) ((gBattleMons[battlerId].types[0] == type || gBattleMons[battlerId].types[1] == type))
-#define SET_BATTLER_TYPE(battlerId, type)   \
+#define IS_BATTLER_OF_TYPE(battler, type) ((gBattleMons[battler].types[0] == type || gBattleMons[battler].types[1] == type))
+#define SET_BATTLER_TYPE(battler, type)   \
 {                                           \
-    gBattleMons[battlerId].types[0] = type;    \
-    gBattleMons[battlerId].types[1] = type;    \
+    gBattleMons[battler].types[0] = type;    \
+    gBattleMons[battler].types[1] = type;    \
 }
 
 #define GET_STAT_BUFF_ID(n) ((n & 0xF))              // first four bits 0x1, 0x2, 0x4, 0x8
@@ -626,7 +626,7 @@ extern u8 gBattleTextBuff1[TEXT_BUFF_ARRAY_COUNT];
 extern u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT];
 extern u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT];
 extern u32 gBattleTypeFlags;
-extern u8 gBattleTerrain;
+extern u8 gBattleEnvironment;
 extern u32 gUnusedFirstBattleVar1;
 extern u8 *gBattleAnimBgTileBuffer;
 extern u8 *gBattleAnimBgTilemapBuffer;

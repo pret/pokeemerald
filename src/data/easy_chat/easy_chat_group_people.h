@@ -78,451 +78,451 @@ const struct EasyChatWordInfo gEasyChatGroup_People[] = {
     [EC_INDEX(EC_WORD_OPPONENT)] =
     {
         .text = gEasyChatWord_Opponent,
-        .alphabeticalOrder = 13,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_ADULT),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_I)] =
     {
         .text = gEasyChatWord_I,
-        .alphabeticalOrder = 52,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_ALLY),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_YOU)] =
     {
         .text = gEasyChatWord_You,
-        .alphabeticalOrder = 31,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_AREN_T),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_YOURS)] =
     {
         .text = gEasyChatWord_Yours,
-        .alphabeticalOrder = 17,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_AUNT),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_SON)] =
     {
         .text = gEasyChatWord_Son,
-        .alphabeticalOrder = 22,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_BABE),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_YOUR)] =
     {
         .text = gEasyChatWord_Your,
-        .alphabeticalOrder = 62,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_BEEN),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_YOU_RE)] =
     {
         .text = gEasyChatWord_Youre,
-        .alphabeticalOrder = 12,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_BOY),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_YOU_VE)] =
     {
         .text = gEasyChatWord_Youve,
-        .alphabeticalOrder = 14,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_BROTHER),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_MOTHER)] =
     {
         .text = gEasyChatWord_Mother,
-        .alphabeticalOrder = 34,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_CHILDREN),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_GRANDFATHER)] =
     {
         .text = gEasyChatWord_Grandfather,
-        .alphabeticalOrder = 28,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_DAUGHTER),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_UNCLE)] =
     {
         .text = gEasyChatWord_Uncle,
-        .alphabeticalOrder = 54,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_DUDE),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_FATHER)] =
     {
         .text = gEasyChatWord_Father,
-        .alphabeticalOrder = 23,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_FAMILY),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_BOY)] =
     {
         .text = gEasyChatWord_Boy,
-        .alphabeticalOrder = 11,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_FATHER),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_ADULT)] =
     {
         .text = gEasyChatWord_Adult,
-        .alphabeticalOrder = 51,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_FRIEND),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_BROTHER)] =
     {
         .text = gEasyChatWord_Brother,
-        .alphabeticalOrder = 21,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_GIRL),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_SISTER)] =
     {
         .text = gEasyChatWord_Sister,
-        .alphabeticalOrder = 9,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_GRANDFATHER),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_GRANDMOTHER)] =
     {
         .text = gEasyChatWord_Grandmother,
-        .alphabeticalOrder = 16,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_GRANDMOTHER),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_AUNT)] =
     {
         .text = gEasyChatWord_Aunt,
-        .alphabeticalOrder = 26,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_HE),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_PARENT)] =
     {
         .text = gEasyChatWord_Parent,
-        .alphabeticalOrder = 30,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_HE_S),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_MAN)] =
     {
         .text = gEasyChatWord_Man,
-        .alphabeticalOrder = 24,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_HER),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_ME)] =
     {
         .text = gEasyChatWord_Me,
-        .alphabeticalOrder = 72,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_HERS),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_GIRL)] =
     {
         .text = gEasyChatWord_Girl,
-        .alphabeticalOrder = 25,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_HIM),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_BABE)] =
     {
         .text = gEasyChatWord_Babe,
-        .alphabeticalOrder = 29,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_HIS),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_FAMILY)] =
     {
         .text = gEasyChatWord_Family,
-        .alphabeticalOrder = 1,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_I),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_HER)] =
     {
         .text = gEasyChatWord_Her,
-        .alphabeticalOrder = 41,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_I_AM),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_HIM)] =
     {
         .text = gEasyChatWord_Him,
-        .alphabeticalOrder = 38,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_I_WAS),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_HE)] =
     {
         .text = gEasyChatWord_He,
-        .alphabeticalOrder = 42,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_I_VE),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_PLACE)] =
     {
         .text = gEasyChatWord_Place,
-        .alphabeticalOrder = 49,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_IT_S),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_DAUGHTER)] =
     {
         .text = gEasyChatWord_Daughter,
-        .alphabeticalOrder = 33,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_KID),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_HIS)] =
     {
         .text = gEasyChatWord_His,
-        .alphabeticalOrder = 50,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_LADY),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_HE_S)] =
     {
         .text = gEasyChatWord_Hes,
-        .alphabeticalOrder = 19,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_MAN),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_AREN_T)] =
     {
         .text = gEasyChatWord_Arent,
-        .alphabeticalOrder = 20,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_ME),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_SIBLINGS)] =
     {
         .text = gEasyChatWord_Siblings,
-        .alphabeticalOrder = 8,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_MOTHER),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_KID)] =
     {
         .text = gEasyChatWord_Kid,
-        .alphabeticalOrder = 35,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_MR),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_CHILDREN)] =
     {
         .text = gEasyChatWord_Children,
-        .alphabeticalOrder = 36,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_MRS),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_MR)] =
     {
         .text = gEasyChatWord_Mr,
-        .alphabeticalOrder = 40,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_MY),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_MRS)] =
     {
         .text = gEasyChatWord_Mrs,
-        .alphabeticalOrder = 37,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_MYSELF),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_MYSELF)] =
     {
         .text = gEasyChatWord_Myself,
-        .alphabeticalOrder = 0,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_OPPONENT),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_I_WAS)] =
     {
         .text = gEasyChatWord_IWas,
-        .alphabeticalOrder = 64,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_OUR),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_TO_ME)] =
     {
         .text = gEasyChatWord_ToMe,
-        .alphabeticalOrder = 18,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_PARENT),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_MY)] =
     {
         .text = gEasyChatWord_My,
-        .alphabeticalOrder = 53,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_PERSON),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_I_AM)] =
     {
         .text = gEasyChatWord_IAm,
-        .alphabeticalOrder = 27,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_PLACE),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_I_VE)] =
     {
         .text = gEasyChatWord_Ive,
-        .alphabeticalOrder = 66,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_RIVAL),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_WHO)] =
     {
         .text = gEasyChatWord_Who,
-        .alphabeticalOrder = 69,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_SHE),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_SOMEONE)] =
     {
         .text = gEasyChatWord_Someone,
-        .alphabeticalOrder = 73,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_SHE_IS),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_WHO_WAS)] =
     {
         .text = gEasyChatWord_WhoWas,
-        .alphabeticalOrder = 70,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_SHE_WAS),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_TO_WHOM)] =
     {
         .text = gEasyChatWord_ToWhom,
-        .alphabeticalOrder = 32,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_SIBLINGS),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_WHOSE)] =
     {
         .text = gEasyChatWord_Whose,
-        .alphabeticalOrder = 15,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_SISTER),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_WHO_IS)] =
     {
         .text = gEasyChatWord_WhoIs,
-        .alphabeticalOrder = 74,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_SOME),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_IT_S)] =
     {
         .text = gEasyChatWord_Its,
-        .alphabeticalOrder = 44,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_SOMEONE),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_LADY)] =
     {
         .text = gEasyChatWord_Lady,
-        .alphabeticalOrder = 4,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_SON),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_FRIEND)] =
     {
         .text = gEasyChatWord_Friend,
-        .alphabeticalOrder = 58,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_THEIR),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_ALLY)] =
     {
         .text = gEasyChatWord_Ally,
-        .alphabeticalOrder = 55,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_THEY),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_PERSON)] =
     {
         .text = gEasyChatWord_Person,
-        .alphabeticalOrder = 56,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_THEY_WERE),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_DUDE)] =
     {
         .text = gEasyChatWord_Dude,
-        .alphabeticalOrder = 59,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_THEY_RE),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_THEY)] =
     {
         .text = gEasyChatWord_They,
-        .alphabeticalOrder = 60,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_THEY_VE),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_THEY_WERE)] =
     {
         .text = gEasyChatWord_TheyWere,
-        .alphabeticalOrder = 71,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_TO_HER),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_TO_THEM)] =
     {
         .text = gEasyChatWord_ToThem,
-        .alphabeticalOrder = 39,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_TO_ME),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_THEIR)] =
     {
         .text = gEasyChatWord_Their,
-        .alphabeticalOrder = 57,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_TO_THEM),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_THEY_RE)] =
     {
         .text = gEasyChatWord_Theyre,
-        .alphabeticalOrder = 63,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_TO_US),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_THEY_VE)] =
     {
         .text = gEasyChatWord_Theyve,
-        .alphabeticalOrder = 46,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_TO_WHOM),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_WE)] =
     {
         .text = gEasyChatWord_We,
-        .alphabeticalOrder = 10,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_UNCLE),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_BEEN)] =
     {
         .text = gEasyChatWord_Been,
-        .alphabeticalOrder = 61,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_WE),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_TO_US)] =
     {
         .text = gEasyChatWord_ToUs,
-        .alphabeticalOrder = 65,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_WE_RE),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_OUR)] =
     {
         .text = gEasyChatWord_Our,
-        .alphabeticalOrder = 67,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_WE_VE),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_WE_RE)] =
     {
         .text = gEasyChatWord_WeRe,
-        .alphabeticalOrder = 43,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_WHO),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_RIVAL)] =
     {
         .text = gEasyChatWord_Rival,
-        .alphabeticalOrder = 48,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_WHO_IS),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_WE_VE)] =
     {
         .text = gEasyChatWord_Weve,
-        .alphabeticalOrder = 45,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_WHO_WAS),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_WOMAN)] =
     {
         .text = gEasyChatWord_Woman,
-        .alphabeticalOrder = 47,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_WHOSE),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_SHE)] =
     {
         .text = gEasyChatWord_She,
-        .alphabeticalOrder = 68,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_WOMAN),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_SHE_WAS)] =
     {
         .text = gEasyChatWord_SheWas,
-        .alphabeticalOrder = 2,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_YOU),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_TO_HER)] =
     {
         .text = gEasyChatWord_ToHer,
-        .alphabeticalOrder = 6,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_YOU_RE),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_HERS)] =
     {
         .text = gEasyChatWord_Hers,
-        .alphabeticalOrder = 7,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_YOU_VE),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_SHE_IS)] =
     {
         .text = gEasyChatWord_SheIs,
-        .alphabeticalOrder = 5,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_YOUR),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_SOME)] =
     {
         .text = gEasyChatWord_Some,
-        .alphabeticalOrder = 3,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_YOURS),
         .enabled = TRUE,
     },
 };
