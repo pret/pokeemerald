@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_MECHADOLL_1",
       "graphics_id": "OBJ_EVENT_GFX_MAN_1",
       "x": 6,
       "y": 17,
@@ -28,6 +29,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_MECHADOLL_2",
       "graphics_id": "OBJ_EVENT_GFX_MAN_1",
       "x": 0,
       "y": 7,
@@ -41,6 +43,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_MECHADOLL_3",
       "graphics_id": "OBJ_EVENT_GFX_MAN_1",
       "x": 14,
       "y": 10,
@@ -54,6 +57,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_MECHADOLL_4",
       "graphics_id": "OBJ_EVENT_GFX_MAN_1",
       "x": 14,
       "y": 19,
@@ -67,6 +71,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_MECHADOLL_5",
       "graphics_id": "OBJ_EVENT_GFX_MAN_1",
       "x": 10,
       "y": 4,

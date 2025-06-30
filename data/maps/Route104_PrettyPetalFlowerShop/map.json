@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_FLOWER_SHOP_OWNER",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 0,
       "y": 3,

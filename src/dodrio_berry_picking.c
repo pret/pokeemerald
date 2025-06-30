@@ -275,13 +275,13 @@ struct DodrioGame
     /*0x3308*/ struct DodrioGame_ScoreResults scoreResults[MAX_RFU_PLAYERS];
 }; // size = 0x3330
 
-EWRAM_DATA static struct DodrioGame * sGame = NULL;
-EWRAM_DATA static u16 * sDodrioSpriteIds[MAX_RFU_PLAYERS] = {NULL};
-EWRAM_DATA static u16 * sCloudSpriteIds[NUM_CLOUDS] = {NULL};
-EWRAM_DATA static u16 * sBerrySpriteIds[NUM_BERRY_COLUMNS] = {NULL};
-EWRAM_DATA static u16 * sBerryIconSpriteIds[NUM_BERRY_TYPES] = {NULL};
-EWRAM_DATA static struct StatusBar * sStatusBar = NULL;
-EWRAM_DATA static struct DodrioGame_Gfx * sGfx = NULL;
+EWRAM_DATA static struct DodrioGame *sGame = NULL;
+EWRAM_DATA static u16 *sDodrioSpriteIds[MAX_RFU_PLAYERS] = {NULL};
+EWRAM_DATA static u16 *sCloudSpriteIds[NUM_CLOUDS] = {NULL};
+EWRAM_DATA static u16 *sBerrySpriteIds[NUM_BERRY_COLUMNS] = {NULL};
+EWRAM_DATA static u16 *sBerryIconSpriteIds[NUM_BERRY_TYPES] = {NULL};
+EWRAM_DATA static struct StatusBar *sStatusBar = NULL;
+EWRAM_DATA static struct DodrioGame_Gfx *sGfx = NULL;
 
 static bool32 sExitingGame;
 
@@ -695,7 +695,7 @@ static void ResetTasksAndSprites(void)
     FreeAllSpritePalettes();
 }
 
-static void InitDodrioGame(struct DodrioGame * game)
+static void InitDodrioGame(struct DodrioGame *game)
 {
     u8 i;
 
@@ -1433,7 +1433,7 @@ static void Task_NewGameIntro(u8 taskId)
 
 static void Task_CommunicateMonInfo(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     u8 i;
 
     switch (tState)
@@ -1759,7 +1759,7 @@ static void HandleSound_Member(void)
     }
     for (i = berryStart; i < berryEnd; i++)
     {
-        struct DodrioGame_Berries * berries = &sGame->players[sGame->multiplayerId].berries;
+        struct DodrioGame_Berries *berries = &sGame->players[sGame->multiplayerId].berries;
         if (berries->fallDist[i] >= MAX_FALL_DIST)
         {
             if (!sGame->playingSquishSound[i])
@@ -1802,7 +1802,7 @@ static void VBlankCB_DodrioGame(void)
     ProcessSpriteCopyRequests();
 }
 
-static void InitMonInfo(struct DodrioGame_MonInfo * monInfo, struct Pokemon *mon)
+static void InitMonInfo(struct DodrioGame_MonInfo *monInfo, struct Pokemon *mon)
 {
     monInfo->isShiny = IsMonShiny(mon);
 }
@@ -1861,7 +1861,7 @@ static void InitFirstWaveOfBerries(void)
 
     for (i = berryStart; i < berryEnd; i++)
     {
-        struct DodrioGame_Berries * berries = &sGame->player.berries;
+        struct DodrioGame_Berries *berries = &sGame->player.berries;
         berries->fallDist[i] = (i % 2 == 0) ? 1 : 0;
         berries->ids[i] = BERRY_BLUE;
     }
@@ -1995,7 +1995,7 @@ static bool32 TryPickBerry(u8 playerId, u8 pickState, u8 column)
 {
     s32 pick = 0;
     u8 numPlayersIdx = sGame->numPlayers - 1;
-    struct DodrioGame_Berries * berries = &sGame->player.berries;
+    struct DodrioGame_Berries *berries = &sGame->player.berries;
 
     switch (pickState)
     {
@@ -3841,7 +3841,7 @@ static void LoadDodrioGfx(void)
     LoadSpritePalette(&shiny);
 }
 
-static void CreateDodrioSprite(struct DodrioGame_MonInfo * monInfo, u8 playerId, u8 id, u8 numPlayers)
+static void CreateDodrioSprite(struct DodrioGame_MonInfo *monInfo, u8 playerId, u8 id, u8 numPlayers)
 {
     struct SpriteTemplate template =
     {

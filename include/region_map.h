@@ -95,7 +95,7 @@ struct RegionMapLocation
 void InitRegionMapData(struct RegionMap *regionMap, const struct BgTemplate *template, bool8 zoomed);
 bool8 LoadRegionMapGfx(void);
 void UpdateRegionMapVideoRegs(void);
-void InitRegionMap(struct RegionMap *regionMap, u8 argument);
+void InitRegionMap(struct RegionMap *regionMap, bool8 zoomed);
 u8 DoRegionMapInputCallback(void);
 bool8 UpdateRegionMapZoom(void);
 void FreeRegionMapIconResources(void);
@@ -103,7 +103,7 @@ u16 GetRegionMapSecIdAt(u16 x, u16 y);
 void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag);
 void CreateRegionMapCursor(u16 tileTag, u16 paletteTag);
 bool32 IsEventIslandMapSecId(u8 mapSecId);
-u8 *GetMapName(u8 *, u16, u16);
+u8 *GetMapName(u8 *dest, u16 regionMapId, u16 padLength);
 u8 *GetMapNameGeneric(u8 *dest, u16 mapSecId);
 u8 *GetMapNameHandleAquaHideout(u8 *dest, u16 mapSecId);
 u16 CorrectSpecialMapSecId(u16 mapSecId);
