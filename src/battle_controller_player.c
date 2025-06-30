@@ -204,7 +204,7 @@ static void PlayerBufferExecCompleted(void)
     {
         u8 playerId = GetMultiplayerId();
 
-        PrepareBufferDataTransferLink(2, 4, &playerId);
+        PrepareBufferDataTransferLink(B_COMM_CONTROLLER_IS_DONE, 4, &playerId);
         gBattleBufferA[gActiveBattler][0] = CONTROLLER_TERMINATOR_NOP;
     }
     else
@@ -249,16 +249,16 @@ static void HandleInputChooseAction(void)
         switch (gActionSelectionCursor[gActiveBattler])
         {
         case 0: // Top left
-            BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_USE_MOVE, 0);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_USE_MOVE, 0);
             break;
         case 1: // Top right
-            BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_USE_ITEM, 0);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_USE_ITEM, 0);
             break;
         case 2: // Bottom left
-            BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_SWITCH, 0);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_SWITCH, 0);
             break;
         case 3: // Bottom right
-            BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_RUN, 0);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_RUN, 0);
             break;
         }
         PlayerBufferExecCompleted();
@@ -319,7 +319,7 @@ static void HandleInputChooseAction(void)
                     return;
             }
             PlaySE(SE_SELECT);
-            BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_CANCEL_PARTNER, 0);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_CANCEL_PARTNER, 0);
             PlayerBufferExecCompleted();
         }
     }
@@ -365,7 +365,7 @@ static void HandleInputChooseTarget(void)
     {
         PlaySE(SE_SELECT);
         gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCB_HideAsMoveTarget;
-        BtlController_EmitTwoReturnValues(BUFFER_B, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
+        BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
         EndBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX);
         PlayerBufferExecCompleted();
     }
@@ -523,7 +523,7 @@ static void HandleInputChooseMove(void)
 
         if (!canSelectTarget)
         {
-            BtlController_EmitTwoReturnValues(BUFFER_B, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
             PlayerBufferExecCompleted();
         }
         else
@@ -543,7 +543,7 @@ static void HandleInputChooseMove(void)
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
     {
         PlaySE(SE_SELECT);
-        BtlController_EmitTwoReturnValues(BUFFER_B, 10, 0xFFFF);
+        BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, 10, 0xFFFF);
         PlayerBufferExecCompleted();
     }
     else if (JOY_NEW(DPAD_LEFT))
@@ -1154,10 +1154,10 @@ static void CompleteOnInactiveTextPrinter(void)
 static void Task_GiveExpToMon(u8 taskId)
 {
     u32 monId = (u8)(gTasks[taskId].tExpTask_monId);
-    u8 battlerId = gTasks[taskId].tExpTask_battler;
+    u8 battler = gTasks[taskId].tExpTask_battler;
     s16 gainedExp = gTasks[taskId].tExpTask_gainedExp;
 
-    if (IsDoubleBattle() == TRUE || monId != gBattlerPartyIndexes[battlerId]) // Give exp without moving the expbar.
+    if (IsDoubleBattle() == TRUE || monId != gBattlerPartyIndexes[battler]) // Give exp without moving the expbar.
     {
         struct Pokemon *mon = &gPlayerParty[monId];
         u16 species = GetMonData(mon, MON_DATA_SPECIES);
@@ -1173,12 +1173,12 @@ static void Task_GiveExpToMon(u8 taskId)
             CalculateMonStats(mon);
             gainedExp -= nextLvlExp - currExp;
             savedActiveBattler = gActiveBattler;
-            gActiveBattler = battlerId;
-            BtlController_EmitTwoReturnValues(BUFFER_B, RET_VALUE_LEVELED_UP, gainedExp);
+            gActiveBattler = battler;
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, RET_VALUE_LEVELED_UP, gainedExp);
             gActiveBattler = savedActiveBattler;
 
             if (IsDoubleBattle() == TRUE
-             && ((u16)(monId) == gBattlerPartyIndexes[battlerId] || (u16)(monId) == gBattlerPartyIndexes[BATTLE_PARTNER(battlerId)]))
+             && ((u16)(monId) == gBattlerPartyIndexes[battler] || (u16)(monId) == gBattlerPartyIndexes[BATTLE_PARTNER(battler)]))
                 gTasks[taskId].func = Task_LaunchLvlUpAnim;
             else
                 gTasks[taskId].func = DestroyExpTaskAndCompleteOnInactiveTextPrinter;
@@ -1187,7 +1187,7 @@ static void Task_GiveExpToMon(u8 taskId)
         {
             currExp += gainedExp;
             SetMonData(mon, MON_DATA_EXP, &currExp);
-            gBattlerControllerFuncs[battlerId] = CompleteOnInactiveTextPrinter;
+            gBattlerControllerFuncs[battler] = CompleteOnInactiveTextPrinter;
             DestroyTask(taskId);
         }
     }
@@ -1201,7 +1201,7 @@ static void Task_PrepareToGiveExpWithExpBar(u8 taskId)
 {
     u8 monIndex = gTasks[taskId].tExpTask_monId;
     s32 gainedExp = gTasks[taskId].tExpTask_gainedExp;
-    u8 battlerId = gTasks[taskId].tExpTask_battler;
+    u8 battler = gTasks[taskId].tExpTask_battler;
     struct Pokemon *mon = &gPlayerParty[monIndex];
     u8 level = GetMonData(mon, MON_DATA_LEVEL);
     u16 species = GetMonData(mon, MON_DATA_SPECIES);
@@ -1211,7 +1211,7 @@ static void Task_PrepareToGiveExpWithExpBar(u8 taskId)
 
     exp -= currLvlExp;
     expToNextLvl = gExperienceTables[gSpeciesInfo[species].growthRate][level + 1] - currLvlExp;
-    SetBattleBarStruct(battlerId, gHealthboxSpriteIds[battlerId], expToNextLvl, exp, -gainedExp);
+    SetBattleBarStruct(battler, gHealthboxSpriteIds[battler], expToNextLvl, exp, -gainedExp);
     PlaySE(SE_EXP);
     gTasks[taskId].func = Task_GiveExpWithExpBar;
 }
@@ -1226,11 +1226,11 @@ static void Task_GiveExpWithExpBar(u8 taskId)
     {
         u8 monId = gTasks[taskId].tExpTask_monId;
         s16 gainedExp = gTasks[taskId].tExpTask_gainedExp;
-        u8 battlerId = gTasks[taskId].tExpTask_battler;
+        u8 battler = gTasks[taskId].tExpTask_battler;
         s16 newExpPoints;
 
-        newExpPoints = MoveBattleBar(battlerId, gHealthboxSpriteIds[battlerId], EXP_BAR, 0);
-        SetHealthboxSpriteVisible(gHealthboxSpriteIds[battlerId]);
+        newExpPoints = MoveBattleBar(battler, gHealthboxSpriteIds[battler], EXP_BAR, 0);
+        SetHealthboxSpriteVisible(gHealthboxSpriteIds[battler]);
         if (newExpPoints == -1) // The bar has been filled with given exp points.
         {
             u8 level;
@@ -1252,8 +1252,8 @@ static void Task_GiveExpWithExpBar(u8 taskId)
                 CalculateMonStats(&gPlayerParty[monId]);
                 gainedExp -= expOnNextLvl - currExp;
                 savedActiveBattler = gActiveBattler;
-                gActiveBattler = battlerId;
-                BtlController_EmitTwoReturnValues(BUFFER_B, RET_VALUE_LEVELED_UP, gainedExp);
+                gActiveBattler = battler;
+                BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, RET_VALUE_LEVELED_UP, gainedExp);
                 gActiveBattler = savedActiveBattler;
                 gTasks[taskId].func = Task_LaunchLvlUpAnim;
             }
@@ -1261,7 +1261,7 @@ static void Task_GiveExpWithExpBar(u8 taskId)
             {
                 currExp += gainedExp;
                 SetMonData(&gPlayerParty[monId], MON_DATA_EXP, &currExp);
-                gBattlerControllerFuncs[battlerId] = CompleteOnInactiveTextPrinter;
+                gBattlerControllerFuncs[battler] = CompleteOnInactiveTextPrinter;
                 DestroyTask(taskId);
             }
         }
@@ -1270,30 +1270,30 @@ static void Task_GiveExpWithExpBar(u8 taskId)
 
 static void Task_LaunchLvlUpAnim(u8 taskId)
 {
-    u8 battlerId = gTasks[taskId].tExpTask_battler;
+    u8 battler = gTasks[taskId].tExpTask_battler;
     u8 monIndex = gTasks[taskId].tExpTask_monId;
 
-    if (IsDoubleBattle() == TRUE && monIndex == gBattlerPartyIndexes[BATTLE_PARTNER(battlerId)])
-        battlerId ^= BIT_FLANK;
+    if (IsDoubleBattle() == TRUE && monIndex == gBattlerPartyIndexes[BATTLE_PARTNER(battler)])
+        battler ^= BIT_FLANK;
 
-    InitAndLaunchSpecialAnimation(battlerId, battlerId, battlerId, B_ANIM_LVL_UP);
+    InitAndLaunchSpecialAnimation(battler, battler, battler, B_ANIM_LVL_UP);
     gTasks[taskId].func = Task_UpdateLvlInHealthbox;
 }
 
 static void Task_UpdateLvlInHealthbox(u8 taskId)
 {
-    u8 battlerId = gTasks[taskId].tExpTask_battler;
+    u8 battler = gTasks[taskId].tExpTask_battler;
 
-    if (!gBattleSpritesDataPtr->healthBoxesData[battlerId].specialAnimActive)
+    if (!gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive)
     {
         u8 monIndex = gTasks[taskId].tExpTask_monId;
 
         GetMonData(&gPlayerParty[monIndex], MON_DATA_LEVEL);  // Unused return value.
 
-        if (IsDoubleBattle() == TRUE && monIndex == gBattlerPartyIndexes[BATTLE_PARTNER(battlerId)])
-            UpdateHealthboxAttribute(gHealthboxSpriteIds[BATTLE_PARTNER(battlerId)], &gPlayerParty[monIndex], HEALTHBOX_ALL);
+        if (IsDoubleBattle() == TRUE && monIndex == gBattlerPartyIndexes[BATTLE_PARTNER(battler)])
+            UpdateHealthboxAttribute(gHealthboxSpriteIds[BATTLE_PARTNER(battler)], &gPlayerParty[monIndex], HEALTHBOX_ALL);
         else
-            UpdateHealthboxAttribute(gHealthboxSpriteIds[battlerId], &gPlayerParty[monIndex], HEALTHBOX_ALL);
+            UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &gPlayerParty[monIndex], HEALTHBOX_ALL);
 
         gTasks[taskId].func = DestroyExpTaskAndCompleteOnInactiveTextPrinter;
     }
@@ -1302,12 +1302,12 @@ static void Task_UpdateLvlInHealthbox(u8 taskId)
 static void DestroyExpTaskAndCompleteOnInactiveTextPrinter(u8 taskId)
 {
     u8 monIndex;
-    u8 battlerId;
+    u8 battler;
 
     monIndex = gTasks[taskId].tExpTask_monId;
     GetMonData(&gPlayerParty[monIndex], MON_DATA_LEVEL);  // Unused return value.
-    battlerId = gTasks[taskId].tExpTask_battler;
-    gBattlerControllerFuncs[battlerId] = CompleteOnInactiveTextPrinter;
+    battler = gTasks[taskId].tExpTask_battler;
+    gBattlerControllerFuncs[battler] = CompleteOnInactiveTextPrinter;
     DestroyTask(taskId);
 }
 
@@ -1361,9 +1361,9 @@ static void WaitForMonSelection(void)
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
         if (gPartyMenuUseExitCallback == TRUE)
-            BtlController_EmitChosenMonReturnValue(BUFFER_B, gSelectedMonPartyId, gBattlePartyCurrentOrder);
+            BtlController_EmitChosenMonReturnValue(B_COMM_TO_ENGINE, gSelectedMonPartyId, gBattlePartyCurrentOrder);
         else
-            BtlController_EmitChosenMonReturnValue(BUFFER_B, PARTY_SIZE, NULL);
+            BtlController_EmitChosenMonReturnValue(B_COMM_TO_ENGINE, PARTY_SIZE, NULL);
 
         if ((gBattleBufferA[gActiveBattler][1] & 0xF) == 1)
             PrintLinkStandbyMsg();
@@ -1387,7 +1387,7 @@ static void CompleteWhenChoseItem(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
-        BtlController_EmitOneReturnValue(BUFFER_B, gSpecialVar_ItemId);
+        BtlController_EmitOneReturnValue(B_COMM_TO_ENGINE, gSpecialVar_ItemId);
         PlayerBufferExecCompleted();
     }
 }
@@ -1439,9 +1439,9 @@ static void PlayerHandleYesNoInput(void)
         PlaySE(SE_SELECT);
 
         if (gMultiUsePlayerCursor != 0)
-            BtlController_EmitTwoReturnValues(BUFFER_B, 0xE, 0);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, 0xE, 0);
         else
-            BtlController_EmitTwoReturnValues(BUFFER_B, 0xD, 0);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, 0xD, 0);
 
         PlayerBufferExecCompleted();
     }
@@ -1600,7 +1600,7 @@ static void PlayerHandleGetMonData(void)
             monToCheck >>= 1;
         }
     }
-    BtlController_EmitDataTransfer(BUFFER_B, size, monData);
+    BtlController_EmitDataTransfer(B_COMM_TO_ENGINE, size, monData);
     PlayerBufferExecCompleted();
 }
 
@@ -1920,7 +1920,7 @@ void PlayerHandleGetRawMonData(void)
     for (i = 0; i < gBattleBufferA[gActiveBattler][2]; i++)
         dst[i] = src[i];
 
-    BtlController_EmitDataTransfer(BUFFER_B, gBattleBufferA[gActiveBattler][2], dst);
+    BtlController_EmitDataTransfer(B_COMM_TO_ENGINE, gBattleBufferA[gActiveBattler][2], dst);
     PlayerBufferExecCompleted();
 }
 
@@ -2193,35 +2193,35 @@ static void PlayerHandleSwitchInAnim(void)
     gBattlerControllerFuncs[gActiveBattler] = SwitchIn_TryShinyAnimShowHealthbox;
 }
 
-static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit)
+static void StartSendOutAnim(u8 battler, bool8 dontClearSubstituteBit)
 {
     u16 species;
 
-    ClearTemporarySpeciesSpriteData(battlerId, dontClearSubstituteBit);
-    gBattlerPartyIndexes[battlerId] = gBattleBufferA[battlerId][1];
-    species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
-    gBattleControllerData[battlerId] = CreateInvisibleSpriteWithCallback(SpriteCB_WaitForBattlerBallReleaseAnim);
-    SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battlerId));
+    ClearTemporarySpeciesSpriteData(battler, dontClearSubstituteBit);
+    gBattlerPartyIndexes[battler] = gBattleBufferA[battler][1];
+    species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
+    gBattleControllerData[battler] = CreateInvisibleSpriteWithCallback(SpriteCB_WaitForBattlerBallReleaseAnim);
+    SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battler));
 
-    gBattlerSpriteIds[battlerId] = CreateSprite(
+    gBattlerSpriteIds[battler] = CreateSprite(
       &gMultiuseSpriteTemplate,
-      GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2),
-      GetBattlerSpriteDefault_Y(battlerId),
-      GetBattlerSpriteSubpriority(battlerId));
+      GetBattlerSpriteCoord(battler, BATTLER_COORD_X_2),
+      GetBattlerSpriteDefault_Y(battler),
+      GetBattlerSpriteSubpriority(battler));
 
-    gSprites[gBattleControllerData[battlerId]].data[1] = gBattlerSpriteIds[battlerId];
-    gSprites[gBattleControllerData[battlerId]].data[2] = battlerId;
+    gSprites[gBattleControllerData[battler]].data[1] = gBattlerSpriteIds[battler];
+    gSprites[gBattleControllerData[battler]].data[2] = battler;
 
-    gSprites[gBattlerSpriteIds[battlerId]].data[0] = battlerId;
-    gSprites[gBattlerSpriteIds[battlerId]].data[2] = species;
-    gSprites[gBattlerSpriteIds[battlerId]].oam.paletteNum = battlerId;
+    gSprites[gBattlerSpriteIds[battler]].data[0] = battler;
+    gSprites[gBattlerSpriteIds[battler]].data[2] = species;
+    gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
 
-    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerId]], gBattleMonForms[battlerId]);
+    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], gBattleMonForms[battler]);
 
-    gSprites[gBattlerSpriteIds[battlerId]].invisible = TRUE;
-    gSprites[gBattlerSpriteIds[battlerId]].callback = SpriteCallbackDummy;
+    gSprites[gBattlerSpriteIds[battler]].invisible = TRUE;
+    gSprites[gBattlerSpriteIds[battler]].callback = SpriteCallbackDummy;
 
-    gSprites[gBattleControllerData[battlerId]].data[0] = DoPokeballSendOutAnimation(0, POKEBALL_PLAYER_SENDOUT);
+    gSprites[gBattleControllerData[battler]].data[0] = DoPokeballSendOutAnimation(0, POKEBALL_PLAYER_SENDOUT);
 }
 
 static void PlayerHandleReturnMonToBall(void)
@@ -2621,7 +2621,7 @@ static void PlayerChooseMoveInBattlePalace(void)
     if (--*(gBattleStruct->arenaMindPoints + gActiveBattler) == 0)
     {
         gBattlePalaceMoveSelectionRngValue = gRngValue;
-        BtlController_EmitTwoReturnValues(BUFFER_B, 10, ChooseMoveAndTargetInBattlePalace());
+        BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, 10, ChooseMoveAndTargetInBattlePalace());
         PlayerBufferExecCompleted();
     }
 }
@@ -2671,7 +2671,7 @@ static void PlayerHandleChoosePokemon(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA && (gBattleBufferA[gActiveBattler][1] & 0xF) != PARTY_ACTION_CANT_SWITCH)
     {
-        BtlController_EmitChosenMonReturnValue(BUFFER_B, gBattlerPartyIndexes[gActiveBattler] + 1, gBattlePartyCurrentOrder);
+        BtlController_EmitChosenMonReturnValue(B_COMM_TO_ENGINE, gBattlerPartyIndexes[gActiveBattler] + 1, gBattlePartyCurrentOrder);
         PlayerBufferExecCompleted();
     }
     else
@@ -2756,11 +2756,11 @@ static void PlayerHandleStatusIconUpdate(void)
 {
     if (!IsBattleSEPlaying(gActiveBattler))
     {
-        u8 battlerId;
+        u8 battler;
 
         UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], HEALTHBOX_STATUS_ICON);
-        battlerId = gActiveBattler;
-        gBattleSpritesDataPtr->healthBoxesData[battlerId].statusAnimActive = 0;
+        battler = gActiveBattler;
+        gBattleSpritesDataPtr->healthBoxesData[battler].statusAnimActive = 0;
         gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedStatusAnimation;
     }
 }
@@ -2828,25 +2828,25 @@ static void PlayerHandleCmd32(void)
 
 static void PlayerHandleTwoReturnValues(void)
 {
-    BtlController_EmitTwoReturnValues(BUFFER_B, 0, 0);
+    BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, 0, 0);
     PlayerBufferExecCompleted();
 }
 
 static void PlayerHandleChosenMonReturnValue(void)
 {
-    BtlController_EmitChosenMonReturnValue(BUFFER_B, 0, NULL);
+    BtlController_EmitChosenMonReturnValue(B_COMM_TO_ENGINE, 0, NULL);
     PlayerBufferExecCompleted();
 }
 
 static void PlayerHandleOneReturnValue(void)
 {
-    BtlController_EmitOneReturnValue(BUFFER_B, 0);
+    BtlController_EmitOneReturnValue(B_COMM_TO_ENGINE, 0);
     PlayerBufferExecCompleted();
 }
 
 static void PlayerHandleOneReturnValue_Duplicate(void)
 {
-    BtlController_EmitOneReturnValue_Duplicate(BUFFER_B, 0);
+    BtlController_EmitOneReturnValue_Duplicate(B_COMM_TO_ENGINE, 0);
     PlayerBufferExecCompleted();
 }
 
@@ -2975,7 +2975,7 @@ static void PlayerHandleIntroTrainerBallThrow(void)
 
 void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite)
 {
-    u8 battlerId = sprite->sBattlerId;
+    u8 battler = sprite->sBattlerId;
 
     // Free player trainer sprite
     FreeSpriteOamMatrix(sprite);
@@ -2983,8 +2983,8 @@ void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite)
     DestroySprite(sprite);
 
     // Load mon sprite
-    BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battlerId]], battlerId);
-    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerId]], 0);
+    BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
+    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], 0);
 }
 
 #undef sBattlerId

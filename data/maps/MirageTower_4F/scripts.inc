@@ -1,6 +1,3 @@
-.set LOCALID_ROOT_FOSSIL, 1
-.set LOCALID_CLAW_FOSSIL, 2
-
 MirageTower_4F_MapScripts::
 	.byte 0
 
@@ -13,7 +10,7 @@ MirageTower_4F_EventScript_RootFossil::
 	closemessage
 	setflag FLAG_HIDE_MIRAGE_TOWER_ROOT_FOSSIL
 	setflag FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL
-	removeobject LOCALID_ROOT_FOSSIL
+	removeobject LOCALID_MIRAGE_ROOT_FOSSIL
 	delay 30
 	setflag FLAG_CHOSE_ROOT_FOSSIL
 	goto MirageTower_4F_EventScript_CollapseMirageTower
@@ -33,7 +30,7 @@ MirageTower_4F_EventScript_ClawFossil::
 	closemessage
 	setflag FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL
 	setflag FLAG_HIDE_MIRAGE_TOWER_ROOT_FOSSIL
-	removeobject LOCALID_CLAW_FOSSIL
+	removeobject LOCALID_MIRAGE_CLAW_FOSSIL
 	delay 30
 	setflag FLAG_CHOSE_CLAW_FOSSIL
 	goto MirageTower_4F_EventScript_CollapseMirageTower

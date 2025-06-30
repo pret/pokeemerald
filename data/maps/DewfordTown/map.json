@@ -39,6 +39,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_DEWFORD_BRINEY",
       "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
       "x": 12,
       "y": 9,
@@ -65,6 +66,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_DEWFORD_BOAT",
       "graphics_id": "OBJ_EVENT_GFX_MR_BRINEYS_BOAT",
       "x": 12,
       "y": 8,
@@ -169,13 +171,6 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "DewfordTown_EventScript_HallSign"
-    }
-  ],
-  "heal_locations": [
-    {
-      "id": "HEAL_LOCATION_DEWFORD_TOWN",
-      "x": 2,
-      "y": 11
     }
   ]
 }

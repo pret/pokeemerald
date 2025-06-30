@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_RIVALS_HOUSE_2F_RIVAL",
       "graphics_id": "OBJ_EVENT_GFX_RIVAL_MAY_NORMAL",
       "x": 1,
       "y": 1,
@@ -184,6 +185,7 @@
       "flag": "FLAG_DECORATION_12"
     },
     {
+      "local_id": "LOCALID_PLAYERS_HOUSE_2F_MOM",
       "graphics_id": "OBJ_EVENT_GFX_MOM",
       "x": 1,
       "y": 1,
@@ -265,13 +267,6 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "LittlerootTown_MaysHouse_2F_EventScript_PC"
-    }
-  ],
-  "heal_locations": [
-    {
-      "id": "HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F",
-      "x": 4,
-      "y": 2
     }
   ]
 }

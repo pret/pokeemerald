@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_MUSEUM_2F_CURATOR",
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 10,
       "y": 8,

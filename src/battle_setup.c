@@ -39,6 +39,7 @@
 #include "data.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_setup.h"
+#include "constants/event_objects.h"
 #include "constants/game_stat.h"
 #include "constants/items.h"
 #include "constants/songs.h"
@@ -405,7 +406,7 @@ static void DoStandardWildBattle(void)
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = 0;
-    if (InBattlePyramid())
+    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
     {
         VarSet(VAR_TEMP_PLAYING_PYRAMID_MUSIC, 0);
         gBattleTypeFlags |= BATTLE_TYPE_PYRAMID;
@@ -465,7 +466,7 @@ static void DoTrainerBattle(void)
 
 static void DoBattlePyramidTrainerHillBattle(void)
 {
-    if (InBattlePyramid())
+    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
         CreateBattleStartTask(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_PYRAMID), 0);
     else
         CreateBattleStartTask(GetSpecialBattleTransition(B_TRANSITION_GROUP_TRAINER_HILL), 0);
@@ -603,7 +604,7 @@ static void CB2_EndWildBattle(void)
     CpuFill16(0, (void *)(BG_PLTT), BG_PLTT_SIZE);
     ResetOamRange(0, 128);
 
-    if (IsPlayerDefeated(gBattleOutcome) == TRUE && !InBattlePyramid() && !InBattlePike())
+    if (IsPlayerDefeated(gBattleOutcome) == TRUE && CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE && !InBattlePike())
     {
         SetMainCallback2(CB2_WhiteOut);
     }
@@ -621,7 +622,7 @@ static void CB2_EndScriptedWildBattle(void)
 
     if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {
-        if (InBattlePyramid())
+        if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         else
             SetMainCallback2(CB2_WhiteOut);
@@ -632,7 +633,7 @@ static void CB2_EndScriptedWildBattle(void)
     }
 }
 
-u8 BattleSetup_GetTerrainId(void)
+u8 BattleSetup_GetEnvironmentId(void)
 {
     u16 tileBehavior;
     s16 x, y;
@@ -641,11 +642,11 @@ u8 BattleSetup_GetTerrainId(void)
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
 
     if (MetatileBehavior_IsTallGrass(tileBehavior))
-        return BATTLE_TERRAIN_GRASS;
+        return BATTLE_ENVIRONMENT_GRASS;
     if (MetatileBehavior_IsLongGrass(tileBehavior))
-        return BATTLE_TERRAIN_LONG_GRASS;
+        return BATTLE_ENVIRONMENT_LONG_GRASS;
     if (MetatileBehavior_IsSandOrDeepSand(tileBehavior))
-        return BATTLE_TERRAIN_SAND;
+        return BATTLE_ENVIRONMENT_SAND;
 
     switch (gMapHeader.mapType)
     {
@@ -655,41 +656,41 @@ u8 BattleSetup_GetTerrainId(void)
         break;
     case MAP_TYPE_UNDERGROUND:
         if (MetatileBehavior_IsIndoorEncounter(tileBehavior))
-            return BATTLE_TERRAIN_BUILDING;
+            return BATTLE_ENVIRONMENT_BUILDING;
         if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
-            return BATTLE_TERRAIN_POND;
-        return BATTLE_TERRAIN_CAVE;
+            return BATTLE_ENVIRONMENT_POND;
+        return BATTLE_ENVIRONMENT_CAVE;
     case MAP_TYPE_INDOOR:
     case MAP_TYPE_SECRET_BASE:
-        return BATTLE_TERRAIN_BUILDING;
+        return BATTLE_ENVIRONMENT_BUILDING;
     case MAP_TYPE_UNDERWATER:
-        return BATTLE_TERRAIN_UNDERWATER;
+        return BATTLE_ENVIRONMENT_UNDERWATER;
     case MAP_TYPE_OCEAN_ROUTE:
         if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
-            return BATTLE_TERRAIN_WATER;
-        return BATTLE_TERRAIN_PLAIN;
+            return BATTLE_ENVIRONMENT_WATER;
+        return BATTLE_ENVIRONMENT_PLAIN;
     }
     if (MetatileBehavior_IsDeepOrOceanWater(tileBehavior))
-        return BATTLE_TERRAIN_WATER;
+        return BATTLE_ENVIRONMENT_WATER;
     if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
-        return BATTLE_TERRAIN_POND;
+        return BATTLE_ENVIRONMENT_POND;
     if (MetatileBehavior_IsMountain(tileBehavior))
-        return BATTLE_TERRAIN_MOUNTAIN;
+        return BATTLE_ENVIRONMENT_MOUNTAIN;
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     {
         // Is BRIDGE_TYPE_POND_*?
         if (MetatileBehavior_GetBridgeType(tileBehavior) != BRIDGE_TYPE_OCEAN)
-            return BATTLE_TERRAIN_POND;
+            return BATTLE_ENVIRONMENT_POND;
 
         if (MetatileBehavior_IsBridgeOverWater(tileBehavior) == TRUE)
-            return BATTLE_TERRAIN_WATER;
+            return BATTLE_ENVIRONMENT_WATER;
     }
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE113) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE113))
-        return BATTLE_TERRAIN_SAND;
+        return BATTLE_ENVIRONMENT_SAND;
     if (GetSavedWeather() == WEATHER_SANDSTORM)
-        return BATTLE_TERRAIN_SAND;
+        return BATTLE_ENVIRONMENT_SAND;
 
-    return BATTLE_TERRAIN_PLAIN;
+    return BATTLE_ENVIRONMENT_PLAIN;
 }
 
 static u8 GetBattleTransitionTypeByMap(void)
@@ -794,14 +795,14 @@ static u8 GetWildBattleTransition(void)
 
     if (enemyLevel < playerLevel)
     {
-        if (InBattlePyramid())
+        if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
             return B_TRANSITION_BLUR;
         else
             return sBattleTransitionTable_Wild[transitionType][0];
     }
     else
     {
-        if (InBattlePyramid())
+        if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
             return B_TRANSITION_GRID_SQUARES;
         else
             return sBattleTransitionTable_Wild[transitionType][1];
@@ -1092,7 +1093,7 @@ static void TrainerBattleLoadArgs(const struct TrainerBattleParameter *specs, co
 
 void SetMapVarsToTrainer(void)
 {
-    if (sTrainerObjectEventLocalId != 0)
+    if (sTrainerObjectEventLocalId != LOCALID_NONE)
     {
         gSpecialVar_LastTalked = sTrainerObjectEventLocalId;
         gSelectedObjectEvent = GetObjectEventIdByLocalIdAndMap(sTrainerObjectEventLocalId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
@@ -1233,7 +1234,7 @@ u8 GetTrainerBattleMode(void)
 
 bool8 GetTrainerFlag(void)
 {
-    if (InBattlePyramid())
+    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
         return GetBattlePyramidTrainerFlag(gSelectedObjectEvent);
     else if (InTrainerHill())
         return GetHillTrainerFlag(gSelectedObjectEvent);
@@ -1275,7 +1276,7 @@ void BattleSetup_StartTrainerBattle(void)
     else
         gBattleTypeFlags = (BATTLE_TYPE_TRAINER);
 
-    if (InBattlePyramid())
+    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
     {
         VarSet(VAR_TEMP_PLAYING_PYRAMID_MUSIC, 0);
         gBattleTypeFlags |= BATTLE_TYPE_PYRAMID;
@@ -1315,7 +1316,7 @@ void BattleSetup_StartTrainerBattle(void)
     gWhichTrainerToFaceAfterBattle = 0;
     gMain.savedCallback = CB2_EndTrainerBattle;
 
-    if (InBattlePyramid() || InTrainerHillChallenge())
+    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || InTrainerHillChallenge())
         DoBattlePyramidTrainerHillBattle();
     else
         DoTrainerBattle();
@@ -1331,7 +1332,7 @@ static void CB2_EndTrainerBattle(void)
     }
     else if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {
-        if (InBattlePyramid() || InTrainerHillChallenge())
+        if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || InTrainerHillChallenge())
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         else
             SetMainCallback2(CB2_WhiteOut);
@@ -1339,7 +1340,7 @@ static void CB2_EndTrainerBattle(void)
     else
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-        if (!InBattlePyramid() && !InTrainerHillChallenge())
+        if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE && !InTrainerHillChallenge())
         {
             RegisterTrainerInMatchCall();
             SetBattledTrainersFlags();
@@ -1376,7 +1377,7 @@ void BattleSetup_StartRematchBattle(void)
 
 void ShowTrainerIntroSpeech(void)
 {
-    if (InBattlePyramid())
+    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
     {
         if (gNoOfApproachingTrainers == 0 || gNoOfApproachingTrainers == 1)
             CopyPyramidTrainerSpeechBefore(LocalIdToPyramidTrainerId(gSpecialVar_LastTalked));

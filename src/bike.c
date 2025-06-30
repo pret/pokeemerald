@@ -372,7 +372,9 @@ static u8 AcroBikeHandleInputWheelieStanding(u8 *newDirection, u16 newKeys, u16 
     gPlayerAvatar.runningState = NOT_MOVING;
 
     if (heldKeys & B_BUTTON)
+    {
         gPlayerAvatar.bikeFrameCounter++;
+    }
     else
     {
         // B button was released.

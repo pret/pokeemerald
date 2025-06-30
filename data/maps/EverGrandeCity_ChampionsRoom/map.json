@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_CHAMPIONS_ROOM_WALLACE",
       "graphics_id": "OBJ_EVENT_GFX_WALLACE",
       "x": 6,
       "y": 5,
@@ -28,6 +29,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_CHAMPIONS_ROOM_RIVAL",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 6,
       "y": 12,
@@ -41,6 +43,7 @@
       "flag": "FLAG_HIDE_CHAMPIONS_ROOM_RIVAL"
     },
     {
+      "local_id": "LOCALID_CHAMPIONS_ROOM_BIRCH",
       "graphics_id": "OBJ_EVENT_GFX_PROF_BIRCH",
       "x": 6,
       "y": 12,

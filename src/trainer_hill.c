@@ -217,7 +217,7 @@ static const u8 *const sFloorStrings[] =
     gText_TrainerHill4F,
 };
 
-static void (* const sHillFunctions[])(void) =
+static void (*const sHillFunctions[])(void) =
 {
     [TRAINER_HILL_FUNC_START]                 = TrainerHillStartChallenge,
     [TRAINER_HILL_FUNC_GET_OWNER_STATE]       = GetOwnerState,
@@ -366,13 +366,13 @@ static void FreeDataStruct(void)
     TRY_FREE_AND_SET_NULL(sHillData);
 }
 
-void CopyTrainerHillTrainerText(u8 which, u16 trainerId)
+void CopyTrainerHillTrainerText(u8 which, u16 localId)
 {
     u8 id, floorId;
 
     SetUpDataStruct();
     floorId = GetFloorId();
-    id = trainerId - 1;
+    id = localId - 1;
 
     switch (which)
     {
