@@ -54,7 +54,7 @@ struct WirelessCommunicationStatusScreen
     u8 filler[10];
 };
 
-static struct WirelessCommunicationStatusScreen * sStatusScreen;
+static struct WirelessCommunicationStatusScreen *sStatusScreen;
 
 static void CB2_InitWirelessCommunicationScreen(void);
 static void Task_WirelessCommunicationScreen(u8);
@@ -247,7 +247,7 @@ static void CB2_ExitWirelessCommunicationStatusScreen(void)
 }
 
 // Cycle through palettes that relocate various shades of blue to create the wave effect at the bottom of the screen.
-static void CyclePalette(s16 * counter, s16 * palIdx)
+static void CyclePalette(s16 *counter, s16 *palIdx)
 {
     s32 idx;
     if (++(*counter) > 5)
@@ -345,7 +345,7 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
 
 #undef tState
 
-static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 mode)
+static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 mode)
 {
     u8 color[3];
 
@@ -381,7 +381,7 @@ static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * 
     AddTextPrinterParameterized4(windowId, fontId, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
-static u32 CountPlayersInGroupAndGetActivity(struct RfuPlayer * player, u32 * groupCounts)
+static u32 CountPlayersInGroupAndGetActivity(struct RfuPlayer *player, u32 *groupCounts)
 {
     int i, j, k;
     u32 activity = player->rfu.data.activity;
@@ -422,7 +422,7 @@ static u32 CountPlayersInGroupAndGetActivity(struct RfuPlayer * player, u32 * gr
     #undef group_players
 }
 
-static bool32 HaveCountsChanged(u32 * currCounts, u32 * prevCounts)
+static bool32 HaveCountsChanged(u32 *currCounts, u32 *prevCounts)
 {
     s32 i;
     for (i = 0; i < NUM_GROUPTYPES; i++)
@@ -433,11 +433,11 @@ static bool32 HaveCountsChanged(u32 * currCounts, u32 * prevCounts)
     return FALSE;
 }
 
-static bool32 UpdateCommunicationCounts(u32 * groupCounts, u32 * prevGroupCounts, u32 * activities, u8 taskId)
+static bool32 UpdateCommunicationCounts(u32 *groupCounts, u32 *prevGroupCounts, u32 *activities, u8 taskId)
 {
     bool32 activitiesChanged = FALSE;
     u32 groupCountBuffer[NUM_GROUPTYPES] = {0, 0, 0, 0};
-    struct RfuPlayer ** players = (void *)gTasks[taskId].data;
+    struct RfuPlayer **players = (void *)gTasks[taskId].data;
     s32 i;
 
     for (i = 0; i < NUM_TASK_DATA; i++)

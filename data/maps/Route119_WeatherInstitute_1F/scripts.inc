@@ -1,5 +1,3 @@
-.set LOCALID_LITTLE_BOY, 5
-
 Route119_WeatherInstitute_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route119_WeatherInstitute_1F_OnTransition
 	.byte 0
@@ -9,8 +7,8 @@ Route119_WeatherInstitute_1F_OnTransition:
 	end
 
 Route119_WeatherInstitute_1F_EventScript_SetLittleBoyPos::
-	setobjectxyperm LOCALID_LITTLE_BOY, 0, 5
-	setobjectmovementtype LOCALID_LITTLE_BOY, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectxyperm LOCALID_WEATHER_INSTITUTE_LITTLE_BOY, 0, 5
+	setobjectmovementtype LOCALID_WEATHER_INSTITUTE_LITTLE_BOY, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 Route119_WeatherInstitute_1F_EventScript_LittleBoy::

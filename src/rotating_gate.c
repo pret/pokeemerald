@@ -3,6 +3,7 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "fieldmap.h"
+#include "rotating_gate.h"
 #include "sound.h"
 #include "sprite.h"
 #include "constants/songs.h"
@@ -623,14 +624,14 @@ static EWRAM_DATA u8 sRotatingGate_PuzzleCount = 0;
 
 static s32 GetCurrentMapRotatingGatePuzzleType(void)
 {
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(FORTREE_CITY_GYM) &&
-        gSaveBlock1Ptr->location.mapNum == MAP_NUM(FORTREE_CITY_GYM))
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_FORTREE_CITY_GYM) &&
+        gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_FORTREE_CITY_GYM))
     {
         return PUZZLE_FORTREE_CITY_GYM;
     }
 
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE110_TRICK_HOUSE_PUZZLE6) &&
-        gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE110_TRICK_HOUSE_PUZZLE6))
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE110_TRICK_HOUSE_PUZZLE6) &&
+        gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE110_TRICK_HOUSE_PUZZLE6))
     {
         return PUZZLE_ROUTE110_TRICK_HOUSE_PUZZLE6;
     }
@@ -938,7 +939,7 @@ void RotatingGate_InitPuzzle(void)
     }
 }
 
-void RotatingGatePuzzleCameraUpdate(u16 deltaX, u16 deltaY)
+void RotatingGatePuzzleCameraUpdate(s16 deltaX, s16 deltaY)
 {
     if (GetCurrentMapRotatingGatePuzzleType())
     {
@@ -957,7 +958,7 @@ void RotatingGate_InitPuzzleAndGraphics(void)
     }
 }
 
-bool8 CheckForRotatingGatePuzzleCollision(u8 direction, s16 x, s16 y)
+bool32 CheckForRotatingGatePuzzleCollision(u8 direction, s16 x, s16 y)
 {
     s32 i;
 
@@ -995,7 +996,7 @@ bool8 CheckForRotatingGatePuzzleCollision(u8 direction, s16 x, s16 y)
     return FALSE;
 }
 
-bool8 CheckForRotatingGatePuzzleCollisionWithoutAnimation(u8 direction, s16 x, s16 y)
+bool32 CheckForRotatingGatePuzzleCollisionWithoutAnimation(u8 direction, s16 x, s16 y)
 {
     s32 i;
 

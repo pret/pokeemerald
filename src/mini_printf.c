@@ -214,11 +214,11 @@ static s32 mini_itoa(s32 value, u32 radix, s32 uppercase, bool32 unsig, char *bu
     return len;
 }
 
-static s32 mini_pad(char* ptr, s32 len, char pad_char, s32 pad_to, char *buffer)
+static s32 mini_pad(char *ptr, s32 len, char pad_char, s32 pad_to, char *buffer)
 {
     s32 i;
     bool32 overflow = FALSE;
-    char * pbuffer = buffer;
+    char *pbuffer = buffer;
     if(pad_to == 0)
         pad_to = len;
     if (len > pad_to)
@@ -260,7 +260,7 @@ s32 mini_vsnprintf(char *buffer, u32 buffer_len, const char *fmt, va_list va)
     return b.pbuffer - b.buffer;
 }
 
-s32 mini_vpprintf(void* buf, const char *fmt, va_list va)
+s32 mini_vpprintf(void *buf, const char *fmt, va_list va)
 {
     char bf[24];
     char bf2[24];

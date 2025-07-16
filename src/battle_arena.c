@@ -341,7 +341,7 @@ static const struct CompressedSpriteSheet sBattleArenaJudgmentSymbolsSpriteSheet
     {0}
 };
 
-static void (* const sArenaFunctions[])(void) =
+static void (*const sArenaFunctions[])(void) =
 {
     [BATTLE_ARENA_FUNC_INIT]             = InitArenaChallenge,
     [BATTLE_ARENA_FUNC_GET_DATA]         = GetArenaData,

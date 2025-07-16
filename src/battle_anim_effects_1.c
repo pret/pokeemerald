@@ -3082,20 +3082,18 @@ static void AnimPresent(struct Sprite *sprite)
 
 static void AnimKnockOffOpponentsItem(struct Sprite *sprite)
 {
-    int zero;
     sprite->data[0] += ((sprite->data[3] * 128) / sprite->data[4]);
-    zero = 0;
     if (sprite->data[0] > 0x7F)
     {
         sprite->data[1]++;
-        sprite->data[0] = zero;
+        sprite->data[0] = 0;
     }
 
     sprite->y2 = Sin(sprite->data[0] + 0x80, 30 - sprite->data[1] * 8);
     if (moveAlongLinearPath(sprite))
     {
-        sprite->y2 = zero;
-        sprite->data[0] = zero;
+        sprite->y2 = 0;
+        sprite->data[0] = 0;
         DestroyAnimSprite(sprite);
     }
 }
@@ -3173,13 +3171,11 @@ static void AnimItemSteal(struct Sprite *sprite)
 
 static void AnimItemSteal_Step3(struct Sprite *sprite)
 {
-    int zero;
     sprite->data[0] += ((sprite->data[3] * 128) / sprite->data[4]);
-    zero = 0;
     if (sprite->data[0] > 127)
     {
         sprite->data[1]++;
-        sprite->data[0] = zero;
+        sprite->data[0] = 0;
     }
 
     sprite->y2 = Sin(sprite->data[0] + 0x80, 30 - sprite->data[1] * 8);

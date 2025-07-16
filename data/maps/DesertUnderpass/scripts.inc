@@ -1,5 +1,3 @@
-.set LOCALID_FOSSIL, 1
-
 DesertUnderpass_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, DesertUnderpass_OnTransition
 	.byte 0
@@ -18,13 +16,13 @@ DesertUnderpass_EventScript_Fossil::
 
 DesertUnderpass_EventScript_GiveClawFossil::
 	giveitem ITEM_CLAW_FOSSIL
-	removeobject LOCALID_FOSSIL
+	removeobject LOCALID_UNDERPASS_FOSSIL
 	release
 	end
 
 DesertUnderpass_EventScript_GiveRootFossil::
 	giveitem ITEM_ROOT_FOSSIL
-	removeobject LOCALID_FOSSIL
+	removeobject LOCALID_UNDERPASS_FOSSIL
 	release
 	end
 
