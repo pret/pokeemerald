@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_m_belly_drum_grp, voicegroup128
+	.equ	se_m_belly_drum_grp, voicegroup_rs_sfx_2
 	.equ	se_m_belly_drum_pri, 4
 	.equ	se_m_belly_drum_rev, reverb_set+50
 	.equ	se_m_belly_drum_mvl, 127
