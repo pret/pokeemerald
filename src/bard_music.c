@@ -9,6 +9,70 @@
 // Invalid sound, indicates the end of the sounds for the word.
 #define NULL_BARD_SOUND { .songId = PHONEME_ID_NONE }
 
+#if FRENCH
+#include "data/bard_music/french/pokemon.h"
+#include "data/bard_music/french/moves.h"
+#include "data/bard_music/french/trainer.h"
+#include "data/bard_music/french/status.h"
+#include "data/bard_music/french/battle.h"
+#include "data/bard_music/french/greetings.h"
+#include "data/bard_music/french/people.h"
+#include "data/bard_music/french/voices.h"
+#include "data/bard_music/french/speech.h"
+#include "data/bard_music/french/endings.h"
+#include "data/bard_music/french/feelings.h"
+#include "data/bard_music/french/conditions.h"
+#include "data/bard_music/french/actions.h"
+#include "data/bard_music/french/lifestyle.h"
+#include "data/bard_music/french/hobbies.h"
+#include "data/bard_music/french/time.h"
+#include "data/bard_music/french/misc.h"
+#include "data/bard_music/french/adjectives.h"
+#include "data/bard_music/french/events.h"
+#include "data/bard_music/french/trendysaying.h"
+#elif ITALIAN
+#include "data/bard_music/italian/pokemon.h"
+#include "data/bard_music/italian/moves.h"
+#include "data/bard_music/italian/trainer.h"
+#include "data/bard_music/italian/status.h"
+#include "data/bard_music/italian/battle.h"
+#include "data/bard_music/italian/greetings.h"
+#include "data/bard_music/italian/people.h"
+#include "data/bard_music/italian/voices.h"
+#include "data/bard_music/italian/speech.h"
+#include "data/bard_music/italian/endings.h"
+#include "data/bard_music/italian/feelings.h"
+#include "data/bard_music/italian/conditions.h"
+#include "data/bard_music/italian/actions.h"
+#include "data/bard_music/italian/lifestyle.h"
+#include "data/bard_music/italian/hobbies.h"
+#include "data/bard_music/italian/time.h"
+#include "data/bard_music/italian/misc.h"
+#include "data/bard_music/italian/adjectives.h"
+#include "data/bard_music/italian/events.h"
+#include "data/bard_music/italian/trendysaying.h"
+#elif SPANISH
+#include "data/bard_music/spanish/pokemon.h"
+#include "data/bard_music/spanish/moves.h"
+#include "data/bard_music/spanish/trainer.h"
+#include "data/bard_music/spanish/status.h"
+#include "data/bard_music/spanish/battle.h"
+#include "data/bard_music/spanish/greetings.h"
+#include "data/bard_music/spanish/people.h"
+#include "data/bard_music/spanish/voices.h"
+#include "data/bard_music/spanish/speech.h"
+#include "data/bard_music/spanish/endings.h"
+#include "data/bard_music/spanish/feelings.h"
+#include "data/bard_music/spanish/conditions.h"
+#include "data/bard_music/spanish/actions.h"
+#include "data/bard_music/spanish/lifestyle.h"
+#include "data/bard_music/spanish/hobbies.h"
+#include "data/bard_music/spanish/time.h"
+#include "data/bard_music/spanish/misc.h"
+#include "data/bard_music/spanish/adjectives.h"
+#include "data/bard_music/spanish/events.h"
+#include "data/bard_music/spanish/trendysaying.h"
+#else //ENGLISH
 #include "data/bard_music/pokemon.h"
 #include "data/bard_music/moves.h"
 #include "data/bard_music/trainer.h"
@@ -29,6 +93,7 @@
 #include "data/bard_music/adjectives.h"
 #include "data/bard_music/events.h"
 #include "data/bard_music/trendysaying.h"
+#endif
 
 static const struct BardSoundTemplate (*const sBardSoundTemplatesTable[EC_NUM_GROUPS])[MAX_BARD_SOUNDS_PER_WORD] = {
     [EC_GROUP_POKEMON]          = NULL, // Handled by sBardSoundTemplates_Pokemon
@@ -130,6 +195,35 @@ static const struct BardSoundTemplate sEmptyPhonemeTemplate[] = {
 };
 
 static const int sPhonemeLengths[NUM_PHONEME_SONGS + 1] = {
+#if ITALIAN
+    18, 31, 24, 25,
+    48, 30, 18, 39,
+    33, 24, 34, 21,
+    31, 54, 33, 24,
+    49, 18, 30, 51,
+    27, 18, 31, 24,
+    36, 57, 27, 36,
+    42, 33, 34, 48,
+    28, 25, 63, 27,
+    18, 54, 24, 21,
+    48, 32, 14, 54,
+    21, 30, 57, 21,
+    30, 78, 27, 24
+#elif SPANISH
+    16, 29, 22, 23,
+    46, 28, 16, 37,
+    31, 22, 32, 19,
+    29, 52, 31, 22,
+    47, 16, 28, 49,
+    25, 16, 29, 22,
+    34, 55, 25, 34,
+    40, 31, 32, 46,
+    26, 23, 61, 25,
+    16, 52, 22, 19,
+    46, 30, 12, 52,
+    19, 28, 55, 19,
+    28, 76, 25, 22,
+#else //ENGLISH || FRENCH
     [PHONEME_ID(PH_TRAP_BLEND)] = 9,
     [PHONEME_ID(PH_TRAP_HELD)] = 22,
     [PHONEME_ID(PH_TRAP_SOLO)] = 15,
@@ -182,6 +276,7 @@ static const int sPhonemeLengths[NUM_PHONEME_SONGS + 1] = {
     [PHONEME_ID(PH_NURSE_HELD)] = 69,
     [PHONEME_ID(PH_NURSE_SOLO)] = 18,
     [NUM_PHONEME_SONGS] = 15, // This is the length that will be used by PREV_BARD_SOUND to hold the previous phoneme sound.
+#endif
 };
 
 static s16 GetWordPitch(int tableIndex, int pitchIndex)

@@ -1,0 +1,111 @@
+
+SSTidalRooms_Text_TakeRestOnBed:
+	.string "There's a bed…\n"
+	.string "Let's take a rest.$"
+
+SSTidalRooms_Text_ColtonIntro:
+	.string "I often sail to LILYCOVE CITY.\p"
+	.string "I enjoy attending CONTESTS,\n"
+	.string "you see.$"
+
+SSTidalRooms_Text_ColtonDefeat:
+	.string "That was an enjoyable match!$"
+
+SSTidalRooms_Text_ColtonPostBattle:
+	.string "I get so excited imagining what kinds\n"
+	.string "of POKéMON I'll get to see in the next\l"
+	.string "CONTEST. The anticipation of it thrills!$"
+
+SSTidalRooms_Text_MicahIntro:
+	.string "Are your friends strong?$"
+
+SSTidalRooms_Text_MicahDefeat:
+	.string "Your friends are, indeed, strong.$"
+
+SSTidalRooms_Text_MicahPostBattle:
+	.string "Friends need not be human.\n"
+	.string "For me, POKéMON are treasured friends!$"
+
+SSTidalRooms_Text_ThomasIntro:
+	.string "Child…\n"
+	.string "Did you knock on the door?$"
+
+SSTidalRooms_Text_ThomasDefeat:
+	.string "A loss is to be accepted without haste\n"
+	.string "or panic.$"
+
+SSTidalRooms_Text_ThomasPostBattle:
+	.string "To be never ruffled in any situation is\n"
+	.string "the GENTLEMAN's code of conduct.$"
+
+SSTidalRooms_Text_JedIntro:
+	.string "JED: I feel a little shy about this, but…\n"
+	.string "We'll show you our lovey-dovey power!$"
+
+SSTidalRooms_Text_JedDefeat:
+	.string "JED: Sigh…$"
+
+SSTidalRooms_Text_JedPostBattle:
+	.string "JED: It's the first time that our lovey-\n"
+	.string "dovey power couldn't prevail!\l"
+	.string "You must be an awesome TRAINER!$"
+
+SSTidalRooms_Text_JedNotEnoughMons:
+	.string "JED: You only have one POKéMON?\n"
+	.string "Isn't that just too lonesome?$"
+
+SSTidalRooms_Text_LeaIntro:
+	.string "LEA: I feel a little silly, but…\n"
+	.string "We'll show you our lovey-dovey power!$"
+
+SSTidalRooms_Text_LeaDefeat:
+	.string "LEA: Oh, boo!$"
+
+SSTidalRooms_Text_LeaPostBattle:
+	.string "LEA: I can't believe it!\n"
+	.string "Our lovey-dovey power failed…\l"
+	.string "You must be an awesome TRAINER!$"
+
+SSTidalRooms_Text_LeaNotEnoughMons:
+	.string "LEA: I wanted to battle…\n"
+	.string "But you don't even have two POKéMON…$"
+
+SSTidalRooms_Text_GarretIntro:
+	.string "Ah, you've come just in time.\p"
+	.string "I'm bored, you see.\n"
+	.string "You may entertain me.$"
+
+SSTidalRooms_Text_GarretDefeat:
+	.string "…That will do.$"
+
+SSTidalRooms_Text_GarretPostBattle:
+	.string "Perhaps I shall get Father to acquire\n"
+	.string "a yacht for me.\l"
+	.string "A yacht for me and POKéMON!$"
+
+SSTidalRooms_Text_NaomiIntro:
+	.string "Oh, you're such an adorable TRAINER.\n"
+	.string "Would you like to have tea?\l"
+	.string "Or would you rather battle?$"
+
+SSTidalRooms_Text_NaomiDefeat:
+	.string "I see.\n"
+	.string "You're the active sort.$"
+
+SSTidalRooms_Text_NaomiPostBattle:
+	.string "A world cruise on a luxury liner has its\n"
+	.string "charms, I must say…\p"
+	.string "But, I will admit there is an appealing\n"
+	.string "side to touring HOENN by ferry.$"
+
+SSTidalRooms_Text_NotSuspiciousTakeThis:
+	.string "Uh… Hi! I… I'm not acting suspicious!\n"
+	.string "Uh… You can have this! For free!\p"
+	.string "It… Honestly, I didn't SNATCH it from\n"
+	.string "someone! I'd never do such a thing!\l"
+	.string "It's clean! You can use it!$"
+
+SSTidalRooms_Text_ExplainSnatch:
+	.string "SNATCH steals the beneficial effects\n"
+	.string "of certain moves before they can be\l"
+	.string "used by a foe or ally.$"

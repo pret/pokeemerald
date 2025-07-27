@@ -1170,7 +1170,7 @@ static void ShowNumToToss(void)
     ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     DrawTossNumberWindow(WIN_TOSS_NUM);
-    x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 0x28);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 40);
     AddTextPrinterParameterized(WIN_TOSS_NUM, FONT_NORMAL, gStringVar4, x, 2, 0, NULL);
 }
 
@@ -1179,7 +1179,7 @@ static void UpdateNumToToss(s16 num)
     s32 x;
     ConvertIntToDecimalStringN(gStringVar1, num, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
-    x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 0x28);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 40);
     AddTextPrinterParameterized(WIN_TOSS_NUM, FONT_NORMAL, gStringVar4, x, 2, 0, NULL);
 }
 

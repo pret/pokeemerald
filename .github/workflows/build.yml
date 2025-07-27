@@ -11,7 +11,7 @@ jobs:
     env:
       GAME_VERSION: EMERALD
       GAME_REVISION: 0
-      GAME_LANGUAGE: ENGLISH
+      LANGUAGE: ENGLISH
       MODERN: 0
       COMPARE: 1
     steps:
@@ -52,6 +52,48 @@ jobs:
           MODERN: 1
           COMPARE: 0
         run: make -j${nproc} all
+
+      - name: French Compare
+        env:
+          MODERN: 0
+          COMPARE: 1
+          LANGUAGE: FRENCH
+        run: make -j${nproc}
+
+      - name: French Modern
+        env:
+          MODERN: 1
+          COMPARE: 0
+          LANGUAGE: FRENCH
+        run: make -j${nproc}
+
+      - name: Italian Compare
+        env:
+          MODERN: 0
+          COMPARE: 1
+          LANGUAGE: ITALIAN
+        run: make -j${nproc}
+
+      - name: Italian Modern
+        env:
+          MODERN: 1
+          COMPARE: 0
+          LANGUAGE: ITALIAN
+        run: make -j${nproc}
+
+      - name: Spanish Compare
+        env:
+          MODERN: 0
+          COMPARE: 1
+          LANGUAGE: SPANISH
+        run: make -j${nproc}
+
+      - name: Spanish Modern
+        env:
+          MODERN: 1
+          COMPARE: 0
+          LANGUAGE: SPANISH
+        run: make -j${nproc}
 
       - name: Move symfiles
         if: ${{ github.event_name == 'push' }}

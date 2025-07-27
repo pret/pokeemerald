@@ -8,9 +8,9 @@
 #include "match_call.h"
 #include "pokenav.h"
 #include "strings.h"
+#include "international_string_util.h"
 #include "constants/region_map_sections.h"
 #include "constants/trainers.h"
-
 
 // NPC below means non-trainer character (no rematch or check page)
 // Steven also uses this type but has a check page by using a MatchCallCheckPageOverride
@@ -279,7 +279,11 @@ static const struct MatchCallRival sMayMatchCallHeader =
     .type = MC_TYPE_RIVAL,
     .playerGender = MALE,
     .flag = FLAG_ENABLE_RIVAL_MATCH_CALL,
+#if EUROPE
+    .desc = gText_MayMatchCallDesc,
+#else //ENGLISH
     .desc = gText_MayBrendanMatchCallDesc,
+#endif
     .name = gText_ExpandedPlaceholder_May,
     .textData = sMayTextScripts
 };
@@ -308,7 +312,11 @@ static const struct MatchCallRival sBrendanMatchCallHeader =
     .type = MC_TYPE_RIVAL,
     .playerGender = FEMALE,
     .flag = FLAG_ENABLE_RIVAL_MATCH_CALL,
+#if EUROPE
+    .desc = gText_BrendanMatchCallDesc,
+#else //ENGLISH
     .desc = gText_MayBrendanMatchCallDesc,
+#endif
     .name = gText_ExpandedPlaceholder_Brendan,
     .textData = sBrendanTextScripts
 };
@@ -1088,7 +1096,11 @@ static void MatchCall_GetNameAndDesc_Birch(match_call_t matchCall, const u8 **de
 static void MatchCall_GetNameAndDescByRematchIdx(u32 idx, const u8 **desc, const u8 **name)
 {
     const struct Trainer *trainer = gTrainers + GetTrainerIdxByRematchIdx(idx);
+#if EUROPE
+    *desc = GetTrainerClassNameGenderSpecific(trainer->trainerClass, trainer->encounterMusic_gender, trainer->trainerName);
+#else //ENGLISH
     *desc = gTrainerClassNames[trainer->trainerClass];
+#endif
     *name = trainer->trainerName;
 }
 

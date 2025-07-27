@@ -1,0 +1,86 @@
+
+RivalsHouse_1F_Text_OhYoureTheNewNeighbor:
+	.string "Hola. ¿Quién eres tú?\p"
+	.string "Ah…\n"
+	.string "Ya…\p"
+	.string "¡Tú eres {PLAYER}{KUN} y te acabas\n"
+	.string "de mudar aquí al lado! ¿Qué tal?\p"
+	.string "Nuestro {STR_VAR_1} tiene más\n"
+	.string "o menos tu edad.\p"
+	.string "Se ha emocionado tantísimo cuando\n"
+	.string "ha sabido que venías a vivir aquí…\p"
+	.string "Ahora está arriba, creo.$"
+
+RivalsHouse_1F_Text_LikeChildLikeFather:
+	.string "De tal padre, tal retoño.\p"
+	.string "¡Mi marido está igual de entusiasmado\n"
+	.string "por los POKéMON que nuestro retoño!\p"
+	.string "Cuando no está en su LABORATORIO,\n"
+	.string "anda perdido entre las hierbas altas.$"
+
+RivalsHouse_1F_Text_TooBusyToNoticeVisit:
+	.string "¡Ay! ¡{RIVAL}!\p"
+	.string "¡Estos niños están tan ocupados\n"
+	.string "con sus POKéMON que no se acuerdan\l"
+	.string "de venir a ver a sus padres, {PLAYER}{KUN}!$"
+
+RivalsHouse_1F_Text_WentOutToRoute103:
+	.string "Oh, {RIVAL} ha ido a la RUTA 103.\p"
+	.string "De tal palo, tal astilla.\n"
+	.string "{RIVAL} es incapaz de quedarse\l"
+	.string "en casa sin hacer nada.$"
+
+RivalsHouse_1F_Text_ShouldGoHomeEverySoOften:
+	.string "Creo que viajar con POKéMON\n"
+	.string "es de lo mejor que hay.\p"
+	.string "Pero deberías ir a casa alguna vez\n"
+	.string "a decir a tu madre que estás bien…\p"
+	.string "Puede que ella no te lo diga, pero\n"
+	.string "estará preocupada por ti, {PLAYER}{KUN}.$"
+
+RivalsHouse_1F_Text_MayWhoAreYou:
+	.string "¿Eh?\n"
+	.string "¿Quién…? ¿Quién eres tú?\p"
+	.string "Ah…\n"
+	.string "Ya…\p"
+	.string "Eres {PLAYER}{KUN}.\n"
+	.string "Y te acabas de mudar.\p"
+	.string "Mmm… Yo me llamo AURA.\n"
+	.string "¡Encantada!\p"
+	.string "Yo…\n"
+	.string "sueño con hacerme amiga de miles\l"
+	.string "de POKéMON de todo el mundo.\p"
+	.string "He… oído algo sobre ti, {PLAYER}{KUN}.\n"
+	.string "Me lo ha dicho mi padre, el PROF. ABEDUL.\p"
+	.string "Tenía muchas ganas de que nos\n"
+	.string "cayéramos bien e hiciéramos amistad.\p"
+	.string "Qué tontería, ¿no?\n"
+	.string "Si acabo de conocerte, {PLAYER}{KUN}…\p"
+	.string "Ji, ji, ji…\p"
+	.string "¡Ahí va! ¡Se me había olvidado!\p"
+	.string "¡Tenía que ir a ayudar a mi padre\n"
+	.string "a atrapar POKéMON salvajes!\p"
+	.string "¡{PLAYER}{KUN}, nos vemos luego!$"
+
+RivalsHouse_1F_Text_BrendanWhoAreYou:
+	.string "¿Eh?\n"
+	.string "¿Tú…?\p"
+	.string "¿Quién eres tú?\p"
+	.string "Ya… Eres {PLAYER}, ¿no?\n"
+	.string "Y te acabas de mudar, ¿verdad?\p"
+	.string "Y mi padre, el PROF. ABEDUL,\n"
+	.string "me ha dicho que tu padre es un\l"
+	.string "LÍDER de GIMNASIO, ¿cierto?\p"
+	.string "Yo me llamo BRUNO.\n"
+	.string "¡Hola, vecina!\p"
+	.string "¿Y eso? {PLAYER}, ¿no tienes\n"
+	.string "ningún POKéMON?\p"
+	.string "¿Quieres que atrape uno para ti?\p"
+	.string "¡Ahí va! ¡Se me había olvidado!\p"
+	.string "Tengo que ir a ayudar a mi padre\n"
+	.string "a atrapar POKéMON salvajes…\p"
+	.string "Bueno, pues otro día, ¿vale?$"
+
+RivalsHouse_1F_Text_DoYouHavePokemon:
+	.string "¡Anda, hola!\p"
+	.string "¿Ya tienes tu propio POKéMON?$"

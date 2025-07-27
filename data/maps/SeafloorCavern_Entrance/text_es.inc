@@ -1,0 +1,26 @@
+
+SeafloorCavern_Entrance_Text_HearMagmaNearMossdeep:
+	.string "¡Eh!\n"
+	.string "¡Tu cara me suena!\p"
+	.string "¡Si estás por aquí, seguro que\n"
+	.string "pretendes volver a fastidiarnos!\p"
+	.string "Mequetrefe, ¿de veras piensas\n"
+	.string "que puedes vencer al EQUIPO AQUA?\p"
+	.string "¡Pues me parece a mí que no!\p"
+	.string "¡Tú flipas en colores, como los\n"
+	.string "del EQUIPO MAGMA!\p"
+	.string "Hablando del EQUIPO MAGMA, parece\n"
+	.string "que los han visto por CIUDAD ALGARIA.\p"
+	.string "Menuda panda de maleantes…\n"
+	.string "¡No deberían ni acercarse al mar!$"
+
+SeafloorCavern_Entrance_Text_HearMagmaNearMossdeepShort:
+	.string "Mequetrefe, ¿de veras piensas que\n"
+	.string "puedes vencer al EQUIPO AQUA?\p"
+	.string "¡Pues me parece a mí que no!\p"
+	.string "¡Tú flipas en colores, como los\n"
+	.string "del EQUIPO MAGMA!\p"
+	.string "Hablando del EQUIPO MAGMA, parece\n"
+	.string "que los han visto por CIUDAD ALGARIA.\p"
+	.string "Menuda panda de maleantes…\n"
+	.string "¡No deberían ni acercarse al mar!$"

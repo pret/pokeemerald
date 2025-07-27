@@ -201,6 +201,48 @@ SecretBase_EventScript_SkittyTV::
 	msgbox SecretBase_Text_SkittyTV, MSGBOX_SIGN
 	end
 
+.ifdef FRENCH
+SecretBase_Text_SmallIndentInWall::
+	.string "Il y a une petite fissure dans le mur.$"
+
+SecretBase_Text_IndentUseSecretPower::
+	.string "Il y a une petite fissure dans le mur.\p"
+	.string "Voulez-vous utiliser FORCE CACHEE?$"
+
+SecretBase_Text_DiscoveredSmallCavern::
+	.string "Une petite caverne a été découverte!$"
+
+SecretBase_Text_WantToMakeYourSecretBaseHere:
+	.string "Créer une BASE SECRETE ici?$"
+.else
+.ifdef ITALIAN
+SecretBase_Text_SmallIndentInWall::
+	.string "C’è una piccola rientranza nella parete.$"
+
+SecretBase_Text_IndentUseSecretPower::
+	.string "C’è una piccola rientranza nella parete.\p"
+	.string "Vuoi usare FORZASEGRETA?$"
+
+SecretBase_Text_DiscoveredSmallCavern::
+	.string "Scoperta una piccola grotta!$"
+
+SecretBase_Text_WantToMakeYourSecretBaseHere:
+	.string "Vuoi creare qui la tua BASE SEGRETA?$"
+.else
+.ifdef SPANISH
+SecretBase_Text_SmallIndentInWall::
+	.string "Hay una muesca en la roca.$"
+
+SecretBase_Text_IndentUseSecretPower::
+	.string "Hay una muesca en la roca.\p"
+	.string "¿Usas DAÑO SECRETO?$"
+
+SecretBase_Text_DiscoveredSmallCavern::
+	.string "¡Has descubierto una pequeña caverna!$"
+
+SecretBase_Text_WantToMakeYourSecretBaseHere:
+	.string "¿Estableces aquí tu BASE SECRETA?$"
+.else
 SecretBase_Text_SmallIndentInWall::
 	.string "There's a small indent in the wall.$"
 
@@ -213,3 +255,6 @@ SecretBase_Text_DiscoveredSmallCavern::
 
 SecretBase_Text_WantToMakeYourSecretBaseHere:
 	.string "Want to make your SECRET BASE here?$"
+.endif
+.endif
+.endif

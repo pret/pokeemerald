@@ -15,10 +15,16 @@ RustboroCity_Flat2_1F_EventScript_Skitty::
 	release
 	end
 
-RustboroCity_Flat2_1F_Text_DevonWorkersLiveHere:
-	.string "DEVON CORPORATION's workers live in\n"
-	.string "this building.$"
-
-RustboroCity_Flat2_1F_Text_Skitty:
-	.string "SKITTY: Gyaaaah!$"
-
+.ifdef FRENCH
+	.include "data/maps/RustboroCity_Flat2_1F/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/RustboroCity_Flat2_1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/RustboroCity_Flat2_1F/text_es.inc"
+.else
+	.include "data/maps/RustboroCity_Flat2_1F/text.inc"
+.endif
+.endif
+.endif

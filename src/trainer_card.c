@@ -39,6 +39,12 @@ enum {
     WIN_TRAINER_PIC,
 };
 
+#if ITALIAN || SPANISH
+#define CARD_NAME_BACK_LEFT 148
+#else //ENGLISH || FRENCH
+#define CARD_NAME_BACK_LEFT 136
+#endif
+
 struct TrainerCardData
 {
     u8 mainState;
@@ -1175,7 +1181,7 @@ static void BufferNameForCardBack(void)
 static void PrintNameOnCardBack(void)
 {
     if (!sData->isHoenn)
-        AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, 136, 9, sTrainerCardTextColors, TEXT_SKIP_DRAW, sData->textPlayersCard);
+        AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, CARD_NAME_BACK_LEFT, 9, sTrainerCardTextColors, TEXT_SKIP_DRAW, sData->textPlayersCard);
     else
         AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, GetStringRightAlignXOffset(FONT_NORMAL, sData->textPlayersCard, 216), 9, sTrainerCardTextColors, TEXT_SKIP_DRAW, sData->textPlayersCard);
 }
@@ -1524,6 +1530,8 @@ static void DrawStarsAndBadgesOnCard(void)
 
 static void DrawCardBackStats(void)
 {
+// For some reason this function is emptied out in the European versions
+#if !EUROPE
     if (sData->cardType == CARD_TYPE_FRLG)
     {
         if (sData->hasTrades)
@@ -1562,6 +1570,7 @@ static void DrawCardBackStats(void)
             FillBgTilemapBufferRect(3, 156, 27, 16, 1, 1, 0);
         }
     }
+#endif
     CopyBgTilemapBufferToVram(3);
 }
 

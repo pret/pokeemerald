@@ -13,6 +13,7 @@
 #include "event_data.h"
 #include "evolution_scene.h"
 #include "field_specials.h"
+#include "international_string_util.h"
 #include "item.h"
 #include "link.h"
 #include "main.h"
@@ -6948,7 +6949,11 @@ const u8 *GetTrainerClassNameFromId(u16 trainerId)
 {
     if (trainerId >= TRAINERS_COUNT)
         trainerId = TRAINER_NONE;
+#if EUROPE
+    return GetTrainerClassNameGenderSpecific(gTrainers[trainerId].trainerClass, gTrainers[trainerId].encounterMusic_gender, gTrainers[trainerId].trainerName);
+#else //ENGLISH
     return gTrainerClassNames[gTrainers[trainerId].trainerClass];
+#endif
 }
 
 const u8 *GetTrainerNameFromId(u16 trainerId)

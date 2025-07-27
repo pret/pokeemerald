@@ -9,16 +9,16 @@ PetalburgCity_House2_EventScript_SchoolKid::
 	msgbox PetalburgCity_House2_Text_BattledNormanOnce, MSGBOX_NPC
 	end
 
-PetalburgCity_House2_Text_NormanBecameGymLeader:
-	.string "NORMAN became our town's new\n"
-	.string "GYM LEADER.\p"
-	.string "I think he called his family over from\n"
-	.string "somewhere far away.$"
-
-PetalburgCity_House2_Text_BattledNormanOnce:
-	.string "I battled NORMAN once, but, whew,\n"
-	.string "he was way too strong.\p"
-	.string "How would I put it?\p"
-	.string "I just got the feeling that he\n"
-	.string "lives for POKéMON.$"
-
+.ifdef FRENCH
+	.include "data/maps/PetalburgCity_House2/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/PetalburgCity_House2/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/PetalburgCity_House2/text_es.inc"
+.else
+	.include "data/maps/PetalburgCity_House2/text.inc"
+.endif
+.endif
+.endif

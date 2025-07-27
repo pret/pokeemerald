@@ -588,7 +588,7 @@ void PrintOnTrainerHillRecordsWindow(void)
 
     SetUpDataStruct();
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    x = GetStringCenterAlignXOffset(FONT_NORMAL, gText_TimeBoard, 0xD0);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, gText_TimeBoard, 208);
     AddTextPrinterParameterized3(0, FONT_NORMAL, x, 2, sRecordWinColors, TEXT_SKIP_DRAW, gText_TimeBoard);
 
     y = 18;

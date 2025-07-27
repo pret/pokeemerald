@@ -1,10 +1,11 @@
 # GBA rom header
 TITLE       := POKEMON EMER
-GAME_CODE   := BPEE
+GAME_CODE   := BPE
 MAKER_CODE  := 01
 REVISION    := 0
 MODERN      ?= 0
 KEEP_TEMPS  ?= 0
+LANGUAGE    ?= ENGLISH
 
 # `File name`.gba ('_modern' will be appended to the modern builds)
 FILE_NAME := pokeemerald
@@ -20,6 +21,29 @@ ifeq (modern,$(MAKECMDGOALS))
 endif
 ifeq (compare,$(MAKECMDGOALS))
   COMPARE := 1
+endif
+
+# Language
+ifeq ($(LANGUAGE), ENGLISH)
+  GAME_CODE := $(GAME_CODE)E
+  BUILD_SUFIX  := 
+else
+ifeq ($(LANGUAGE), FRENCH)
+  GAME_CODE  := $(GAME_CODE)F
+  BUILD_SUFIX := _fr
+else
+ifeq ($(LANGUAGE), ITALIAN)
+  GAME_CODE  := $(GAME_CODE)I
+  BUILD_SUFIX := _it
+else
+ifeq ($(LANGUAGE), SPANISH)
+  GAME_CODE  := $(GAME_CODE)S
+  BUILD_SUFIX := _es
+else
+  $(error unknown language $(LANGUAGE))
+endif
+endif
+endif
 endif
 
 # Default make rule
@@ -67,10 +91,10 @@ else
   CPP := $(PREFIX)cpp
 endif
 
-ROM_NAME := $(FILE_NAME).gba
-OBJ_DIR_NAME := $(BUILD_DIR)/emerald
-MODERN_ROM_NAME := $(FILE_NAME)_modern.gba
-MODERN_OBJ_DIR_NAME := $(BUILD_DIR)/modern
+ROM_NAME := $(FILE_NAME)$(BUILD_SUFIX).gba
+OBJ_DIR_NAME := $(BUILD_DIR)/emerald$(BUILD_SUFIX)
+MODERN_ROM_NAME := $(FILE_NAME)$(BUILD_SUFIX)_modern.gba
+MODERN_OBJ_DIR_NAME := $(BUILD_DIR)/modern$(BUILD_SUFIX)
 
 ELF_NAME := $(ROM_NAME:.gba=.elf)
 MAP_NAME := $(ROM_NAME:.gba=.map)
@@ -106,14 +130,14 @@ MID_BUILDDIR = $(OBJ_DIR)/$(MID_SUBDIR)
 SHELL := bash -o pipefail
 
 # Set flags for tools
-ASFLAGS := -mcpu=arm7tdmi --defsym MODERN=$(MODERN)
+ASFLAGS := -mcpu=arm7tdmi --defsym MODERN=$(MODERN) --defsym $(LANGUAGE)=1
 
 INCLUDE_DIRS := include
 INCLUDE_CPP_ARGS := $(INCLUDE_DIRS:%=-iquote %)
 INCLUDE_SCANINC_ARGS := $(INCLUDE_DIRS:%=-I %)
 
 O_LEVEL ?= 2
-CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=$(MODERN)
+CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=$(MODERN) -D $(LANGUAGE)
 ifeq ($(MODERN),0)
   CPPFLAGS += -I tools/agbcc/include -I tools/agbcc -nostdinc -undef -std=gnu89
   CC1 := tools/agbcc/bin/agbcc$(EXE)
@@ -230,7 +254,7 @@ compare: all
 # Other rules
 rom: $(ROM)
 ifeq ($(COMPARE),1)
-	@$(SHA1) rom.sha1
+	@$(SHA1) rom$(BUILD_SUFIX).sha1
 endif
 
 syms: $(SYM)
@@ -248,13 +272,18 @@ clean-assets:
 
 tidy: tidynonmodern tidymodern
 
+ALL_BUILDS := emerald emerald_fr emerald_it emerald_es
+MODERN_BUILDS := $(ALL_BUILDS:%=%_modern)
+ALL_BUILDS_DIRS := $(ALL_BUILDS:%=build/%)
+MODERN_BUILDS_DIRS := $(MODERN_BUILDS:%=build/%)
+
 tidynonmodern:
-	rm -f $(ROM_NAME) $(ELF_NAME) $(MAP_NAME)
-	rm -rf $(OBJ_DIR_NAME)
+	rm -f $(ALL_BUILDS:%=poke%{.gba,.elf,.map}) $(ROM_NAME) $(ELF_NAME) $(MAP_NAME)
+	rm -rf $(ALL_BUILDS_DIRS)
 
 tidymodern:
-	rm -f $(MODERN_ROM_NAME) $(MODERN_ELF_NAME) $(MODERN_MAP_NAME)
-	rm -rf $(MODERN_OBJ_DIR_NAME)
+	rm -f $(MODERN_BUILDS:%=poke%{.gba,.elf,.map}) $(MODERN_ROM_NAME) $(MODERN_ELF_NAME) $(MODERN_MAP_NAME)
+	rm -rf $(MODERN_BUILDS_DIRS)
 
 # Other rules
 include graphics_file_rules.mk
@@ -267,7 +296,6 @@ include audio_rules.mk
 # so you can't really call this rule directly
 generated: $(AUTO_GEN_TARGETS)
 	@: # Silence the "Nothing to be done for `generated'" message, which some people were confusing for an error.
-
 
 %.s:   ;
 %.png: ;

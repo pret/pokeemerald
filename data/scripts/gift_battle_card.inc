@@ -23,6 +23,73 @@ MysteryGiftScript_BattleCardInfo:
 	release
 	end
 
+.ifdef FRENCH
+sText_MysteryGiftBattleCountCard:
+	.string "Merci d’utiliser le système\n"
+	.string "CADEAU MYST.\p"
+	.string "La CARTE COMBAT garde la trace\n"
+	.string "de vos combats contre les\p"
+	.string "DRESSEURS ayant la même\n"
+	.string "CARTE.\p"
+	.string "Recherchez les DRESSEURS ayant\n"
+	.string "la même carte que vous.\p"
+	.string "Vous pouvez voir le classement\n"
+	.string "général en lisant les JOURNAUX.\p"
+	.string "Vous devriez essayer!$"
+
+sText_MysteryGiftBattleCountCard_WonPrize:
+	.string "Merci d’utiliser le système\n"
+	.string "CADEAU MYST.\p"
+	.string "Félicitations!\p"
+	.string "Vous recevez un prix pour avoir\n"
+	.string "gagné trois combats!\p"
+	.string "On espère que ça vous donnera\n"
+	.string "encore plus envie de combattre.$"
+.else
+.ifdef ITALIAN
+sText_MysteryGiftBattleCountCard:
+	.string "Grazie per usare il Sistema\n"
+	.string "DONO SEGRETO.\p"
+	.string "La tua SCHEDA CONTALOTTE\n"
+	.string "calcola il numero di LOTTE contro\l"
+	.string "ALLENATORI con la stessa SCHEDA.\p"
+	.string "Cerca altri ALLENATORI che hanno\n"
+	.string "la SCHEDA CONTALOTTE e sfidali!\p"
+	.string "I risultati saranno diffusi tra le\n"
+	.string "NOTIZIE!$"
+
+sText_MysteryGiftBattleCountCard_WonPrize:
+	.string "Grazie per usare il Sistema\n"
+	.string "DONO SEGRETO!\p"
+	.string "Congratulazioni! Hai ottenuto\n"
+	.string "un premio per aver vinto tre lotte!\p"
+	.string "Speriamo che questo ti aiuti ad\n"
+	.string "impegnarti ancora di più nella\l"
+	.string "lotta!$"
+.else
+.ifdef SPANISH
+sText_MysteryGiftBattleCountCard:
+	.string "Gracias por usar el sistema\n"
+	.string "del REGALO MISTERIOSO.\p"
+	.string "Tu TARJETA de RECUENTO de\n"
+	.string "COMBATES te muestra los récords\p"
+	.string "de los combates mantenidos con\n"
+	.string "ENTRENADORES que tienen la\l"
+	.string "misma TARJETA.\p"
+	.string "Busca ENTRENADORES que\n"
+	.string "tengan la misma TARJETA que tú.\p"
+	.string "Cuando leas las NOTICIAS,\n"
+	.string "podrás ver las clasificaciones.\p"
+	.string "¡No te lo pierdas!$"
+
+sText_MysteryGiftBattleCountCard_WonPrize:
+	.string "Gracias por usar el sistema\n"
+	.string "del REGALO MISTERIOSO.\p"
+	.string "¡Enhorabuena!\p"
+	.string "¡Has ganado un premio por vencer\n"
+	.string "a tu rival en tres combates!\p"
+	.string "¡Esperamos que sigas luchando!$"
+.else @ENGLISH
 sText_MysteryGiftBattleCountCard:
 	.string "Thank you for using the MYSTERY\n"
 	.string "GIFT System.\p"
@@ -43,3 +110,6 @@ sText_MysteryGiftBattleCountCard_WonPrize:
 	.string "three battles!\p"
 	.string "We hope you will be inspired to\n"
 	.string "battle some more.$"
+.endif
+.endif
+.endif

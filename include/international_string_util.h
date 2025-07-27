@@ -20,5 +20,9 @@ void ConvertInternationalPlayerNameStripChar(u8 *str, u8 removeChar);
 void ConvertInternationalContestantName(u8 *str);
 int GetNicknameLanguage(u8 *str);
 void FillWindowTilesByRow(int windowId, int columnStart, int rowStart, int numFillTiles, int numRows);
+#if EUROPE
+u8 *StringAppendWithPlaceholder(u8 *dest, const u8 *src, u8 *placeholderStr);
+const u8 *GetTrainerClassNameGenderSpecific(s32 trainerClassId, u32 trainerGender, const u8 *trainerName);
+#endif
 
 #endif // GUARD_INTERNATIONAL_STRING_UTIL_H
