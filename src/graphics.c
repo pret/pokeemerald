@@ -1,4 +1,5 @@
 #include "global.h"
+#include "graphics.h"
 
 const u32 gBattleTextboxTiles[] = INCBIN_U32("graphics/battle_interface/textbox.4bpp.lz");
 const u32 gBattleTextboxPalette[] = INCBIN_U32("graphics/battle_interface/textbox.gbapal.lz");
@@ -355,7 +356,7 @@ const u16 gBattleInterface_BallStatusBarPal[] = INCBIN_U16("graphics/battle_inte
 const u16 gBattleInterface_BallDisplayPal[] = INCBIN_U16("graphics/battle_interface/ball_display.gbapal");
 
 #if FRENCH
-const u8 gHealthboxElementsGfxTable[] = INCBIN_U8("graphics/battle_interface/french/hpbar.4bpp",
+const u8 gHealthboxElementsGfxTable[][32] = INCBIN_U8("graphics/battle_interface/french/hpbar.4bpp",
                                                   "graphics/battle_interface/expbar.4bpp",
                                                   "graphics/battle_interface/french/status.4bpp",
                                                   "graphics/battle_interface/misc.4bpp",
@@ -369,7 +370,7 @@ const u8 gHealthboxElementsGfxTable[] = INCBIN_U8("graphics/battle_interface/fre
                                                   "graphics/battle_interface/healthbox_doubles_frameend.4bpp",
                                                   "graphics/battle_interface/healthbox_doubles_frameend_bar.4bpp");
 #elif ITALIAN
-const u8 gHealthboxElementsGfxTable[] = INCBIN_U8("graphics/battle_interface/italian/hpbar.4bpp",
+const u8 gHealthboxElementsGfxTable[][32] = INCBIN_U8("graphics/battle_interface/italian/hpbar.4bpp",
                                                   "graphics/battle_interface/expbar.4bpp",
                                                   "graphics/battle_interface/italian/status.4bpp",
                                                   "graphics/battle_interface/misc.4bpp",
@@ -383,7 +384,7 @@ const u8 gHealthboxElementsGfxTable[] = INCBIN_U8("graphics/battle_interface/ita
                                                   "graphics/battle_interface/healthbox_doubles_frameend.4bpp",
                                                   "graphics/battle_interface/healthbox_doubles_frameend_bar.4bpp");
 #elif SPANISH
-const u8 gHealthboxElementsGfxTable[] = INCBIN_U8("graphics/battle_interface/spanish/hpbar.4bpp",
+const u8 gHealthboxElementsGfxTable[][32] = INCBIN_U8("graphics/battle_interface/spanish/hpbar.4bpp",
                                                   "graphics/battle_interface/expbar.4bpp",
                                                   "graphics/battle_interface/spanish/status.4bpp",
                                                   "graphics/battle_interface/misc.4bpp",
@@ -397,7 +398,7 @@ const u8 gHealthboxElementsGfxTable[] = INCBIN_U8("graphics/battle_interface/spa
                                                   "graphics/battle_interface/healthbox_doubles_frameend.4bpp",
                                                   "graphics/battle_interface/healthbox_doubles_frameend_bar.4bpp");
 #else //ENGLISH
-const u8 gHealthboxElementsGfxTable[] = INCBIN_U8("graphics/battle_interface/hpbar.4bpp",
+const u8 gHealthboxElementsGfxTable[][32] = INCBIN_U8("graphics/battle_interface/hpbar.4bpp",
                                                   "graphics/battle_interface/expbar.4bpp",
                                                   "graphics/battle_interface/status.4bpp",
                                                   "graphics/battle_interface/misc.4bpp",
@@ -1050,7 +1051,7 @@ const u16 gTilesetAnims_BattleDomePals0_3[] = INCBIN_U16("graphics/battle_fronti
 
 static const u16 sUnused0[] = {0x13F, 0x119, 0x113, 0x10E};
 
-const u16 gBattlePyramidFloor_Pal[] = INCBIN_U16("graphics/battle_frontier/pyramid_floor.gbapal");
+const u16 gBattlePyramidFloor_Pal[][16] = INCBIN_U16("graphics/battle_frontier/pyramid_floor.gbapal");
 
 const u32 gMultiBattleIntroBg_Opponent_Tilemap[] = INCBIN_U32("graphics/battle_frontier/multi_battle_intro_bg_opponent.bin.lz");
 const u32 gMultiBattleIntroBg_Player_Tilemap[] = INCBIN_U32("graphics/battle_frontier/multi_battle_intro_bg_player.bin.lz");
@@ -2037,7 +2038,7 @@ const u32 gTitleScreenPressStartGfx[]      = INCBIN_U32("graphics/title_screen/e
 #endif
 const u32 gTitleScreenPokemonLogoTilemap[] = INCBIN_U32("graphics/title_screen/pokemon_logo.bin.lz");
 
-const u16 gFrontierPassBg_Pal[]                          = INCBIN_U16("graphics/frontier_pass/bg.gbapal"); // 8 x 16
+const u16 gFrontierPassBg_Pal[][16]                      = INCBIN_U16("graphics/frontier_pass/bg.gbapal"); // 8 x 16
 #if FRENCH
 const u32 gFrontierPassBg_Gfx[]                          = INCBIN_U32("graphics/frontier_pass/french/bg.4bpp.lz");
 const u32 gFrontierPassMapAndCard_Gfx[]                  = INCBIN_U32("graphics/frontier_pass/french/map_and_card.8bpp.lz");
@@ -2055,8 +2056,8 @@ const u32 gFrontierPassBg_Gfx[]                          = INCBIN_U32("graphics/
 const u32 gFrontierPassMapAndCard_Gfx[]                  = INCBIN_U32("graphics/frontier_pass/map_and_card.8bpp.lz");
 const u32 gFrontierPassBg_Tilemap[]                      = INCBIN_U32("graphics/frontier_pass/bg.bin.lz");
 #endif
-const u16 gFrontierPassCancelButton_Tilemap[]            = INCBIN_U16("graphics/frontier_pass/cancel.bin");
-const u16 gFrontierPassCancelButtonHighlighted_Tilemap[] = INCBIN_U16("graphics/frontier_pass/cancel_highlighted.bin");
+const u32 gFrontierPassCancelButton_Tilemap[]            = INCBIN_U32("graphics/frontier_pass/cancel.bin");
+const u32 gFrontierPassCancelButtonHighlighted_Tilemap[] = INCBIN_U32("graphics/frontier_pass/cancel_highlighted.bin");
 
 // Berry Crush
 const u16 gBerryCrush_Crusher_Pal[] = INCBIN_U16("graphics/berry_crush/crusher.gbapal");

@@ -679,7 +679,7 @@ void AsmFile::RaiseWarning(const char* format, ...)
 int AsmFile::SkipWhitespaceAndEol()
 {
     int newlines = 0;
-    while (m_buffer[m_pos] == '\t' || m_buffer[m_pos] == ' ' || m_buffer[m_pos] == '\n')
+    while (m_buffer[m_pos] == '\t' || m_buffer[m_pos] == ' ' || m_buffer[m_pos] == '\r' || m_buffer[m_pos] == '\n')
     {
         if (m_buffer[m_pos] == '\n')
             newlines++;
@@ -702,14 +702,14 @@ int AsmFile::FindLastLineNumber(std::string& filename)
 
     if (pos < 0)
         RaiseError("line indicator for header file not found before `enum`");
-    
+
     pos++;
     while (m_buffer[pos] == ' ' || m_buffer[pos] == '\t')
         pos++;
 
     if (!IsAsciiDigit(m_buffer[pos]))
         RaiseError("malformatted line indicator found before `enum`, expected line number");
-    
+
     unsigned n = 0;
     int digit = 0;
     while ((digit = ConvertDigit(m_buffer[pos++], 10)) != -1)
@@ -744,7 +744,7 @@ int AsmFile::FindLastLineNumber(std::string& filename)
 
         filename += c;
     }
-    
+
     return n + linebreaks - 1;
 }
 

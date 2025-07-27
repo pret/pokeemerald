@@ -1229,9 +1229,9 @@ static void ShowDecorationOnMap_(u16 mapX, u16 mapY, u8 decWidth, u8 decHeight, 
         {
             x = mapX + i;
             attributes = GetMetatileAttributesById(NUM_TILES_IN_PRIMARY + gDecorations[decoration].tiles[j * decWidth + i]);
-            if (MetatileBehavior_IsSecretBaseImpassable(attributes & METATILE_ATTR_BEHAVIOR_MASK) == TRUE
+            if (MetatileBehavior_IsSecretBaseImpassable(UNPACK_BEHAVIOR(attributes)) == TRUE
              || (gDecorations[decoration].permission != DECORPERM_PASS_FLOOR && (attributes >> METATILE_ATTR_LAYER_SHIFT) != METATILE_LAYER_TYPE_NORMAL))
-                impassableFlag = MAPGRID_COLLISION_MASK;
+                impassableFlag = MAPGRID_IMPASSABLE;
             else
                 impassableFlag = 0;
 
@@ -1522,6 +1522,17 @@ static bool8 IsFloorOrBoardAndHole(u16 behaviorAt, const struct Decoration *deco
     return FALSE;
 }
 
+#ifdef BUGFIX
+#define GetLayerType(tileId) UNPACK_LAYER_TYPE(GetMetatileAttributesById(tileId))
+#else
+// This incompletely extracts the layer type data. The result is that comparisons against any nonzero
+// value in the valid range always have the same result.
+// Because GF only compares against 0 (METATILE_LAYER_TYPE_NORMAL) there are no ill effects and it's possible this
+// is what they intended. We use the named constant for the comparisons, which implies you can use nonzero constants at
+// those locations (which you can't), so to avoid this trap and keep the better documentation this is included as a bug fix.
+#define GetLayerType(tileId) GetMetatileAttributesById(tileId) & METATILE_ATTR_LAYER_MASK
+#endif
+
 static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
 {
     u8 i;
@@ -1546,7 +1557,7 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
             {
                 curX = gTasks[taskId].tCursorX + j;
                 behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-                layerType = GetMetatileAttributesById(NUM_TILES_IN_PRIMARY + decoration->tiles[(mapY - 1 - i) * mapX + j]) & METATILE_ATTR_LAYER_MASK;
+                layerType = GetLayerType(NUM_TILES_IN_PRIMARY + decoration->tiles[(mapY - 1 - i) * mapX + j]);
                 if (!IsFloorOrBoardAndHole(behaviorAt, decoration))
                     return FALSE;
 
@@ -1567,7 +1578,7 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
             {
                 curX = gTasks[taskId].tCursorX + j;
                 behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-                layerType = GetMetatileAttributesById(NUM_TILES_IN_PRIMARY + decoration->tiles[(mapY - 1 - i) * mapX + j]) & METATILE_ATTR_LAYER_MASK;
+                layerType = GetLayerType(NUM_TILES_IN_PRIMARY + decoration->tiles[(mapY - 1 - i) * mapX + j]);
                 if (!MetatileBehavior_IsNormal(behaviorAt) && !IsSecretBaseTrainerSpot(behaviorAt, layerType))
                     return FALSE;
 
@@ -1584,7 +1595,7 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
         {
             curX = gTasks[taskId].tCursorX + j;
             behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-            layerType = GetMetatileAttributesById(NUM_TILES_IN_PRIMARY + decoration->tiles[j]) & METATILE_ATTR_LAYER_MASK;
+            layerType = GetLayerType(NUM_TILES_IN_PRIMARY + decoration->tiles[j]);
             if (!MetatileBehavior_IsNormal(behaviorAt) && !MetatileBehavior_IsSecretBaseNorthWall(behaviorAt))
                 return FALSE;
 

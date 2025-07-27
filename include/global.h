@@ -119,6 +119,9 @@
 #define T2_READ_32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
 #define T2_READ_PTR(ptr) (void *) T2_READ_32(ptr)
 
+#define PACK(data, shift, mask)   ( ((data) << (shift)) & (mask) )
+#define UNPACK(data, shift, mask) ( ((data) & (mask)) >> (shift) )
+
 // Macros for checking the joypad
 #define TEST_BUTTON(field, button) ((field) & (button))
 #define JOY_NEW(button) TEST_BUTTON(gMain.newKeys,  button)
