@@ -277,6 +277,7 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_OLD_UNOWN_Y] = _("?"),
     [SPECIES_OLD_UNOWN_Z] = _("?"),
     [SPECIES_TREECKO] = _("TREECKO"),
+    [SPECIES_ROWLET] = _("ROWLET"),
     [SPECIES_GROVYLE] = _("GROVYLE"),
     [SPECIES_SCEPTILE] = _("SCEPTILE"),
     [SPECIES_TORCHIC] = _("TORCHIC"),

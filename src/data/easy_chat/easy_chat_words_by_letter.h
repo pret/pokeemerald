@@ -1358,6 +1358,7 @@ const u16 gEasyChatWordsByLetter_R[] = {
     EC_WORD_ROOM,
     EC_POKEMON(ROSELIA),
     EC_WORD_ROUGH_SKIN,
+    EC_POKEMON(ROWLET),
     EC_WORD_RPG,
     EC_WORD_RUBY,
     EC_WORD_RULE,
