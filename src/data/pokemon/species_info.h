@@ -7646,6 +7646,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .noFlip = FALSE,
     },
 
+
     [SPECIES_GROVYLE] =
     {
         .baseHP        = 50,
@@ -7673,6 +7674,36 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .abilities = {ABILITY_OVERGROW, ABILITY_NONE},
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
+        .noFlip = FALSE,
+    },
+
+    [SPECIES_ROWLET] =
+    {
+        .baseHP        = 68,
+        .baseAttack    = 55,
+        .baseDefense   = 55,
+        .baseSpeed     = 42,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 50,
+        .types = { TYPE_GRASS, TYPE_FLYING },
+        .catchRate = 45,
+        .expYield = 64,
+        .evYield_HP        = 1,
+        .evYield_Attack    = 0,
+        .evYield_Defense   = 0,
+        .evYield_Speed     = 0,
+        .evYield_SpAttack  = 0,
+        .evYield_SpDefense = 0,
+        .itemCommon = ITEM_NONE,
+        .itemRare   = ITEM_NONE,
+        .genderRatio = PERCENT_FEMALE(12.5),
+        .eggCycles = 15,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = { EGG_GROUP_FLYING },
+        .abilities = {ABILITY_OVERGROW, ABILITY_NONE},
+        .safariZoneFleeRate = 0,
+        .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },
 

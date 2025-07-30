@@ -2927,6 +2927,16 @@ static const union AnimCmd sAnim_Treecko_1[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sAnim_Rowlet_1[] =
+{
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_END,
+};
+
 static const union AnimCmd sAnim_Grovyle_1[] =
 {
     ANIMCMD_FRAME(0, 10),
@@ -5076,6 +5086,7 @@ SINGLE_ANIMATION(HoOh);
 SINGLE_ANIMATION(Celebi);
 SINGLE_ANIMATION(OldUnownB);
 SINGLE_ANIMATION(Treecko);
+SINGLE_ANIMATION(Rowlet);
 SINGLE_ANIMATION(Grovyle);
 SINGLE_ANIMATION(Sceptile);
 SINGLE_ANIMATION(Torchic);
@@ -5532,6 +5543,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     [SPECIES_OLD_UNOWN_Y] = sAnims_OldUnownB,
     [SPECIES_OLD_UNOWN_Z] = sAnims_OldUnownB,
     [SPECIES_TREECKO]     = sAnims_Treecko,
+    [SPECIES_ROWLET]     = sAnims_Rowlet,
     [SPECIES_GROVYLE]     = sAnims_Grovyle,
     [SPECIES_SCEPTILE]    = sAnims_Sceptile,
     [SPECIES_TORCHIC]     = sAnims_Torchic,

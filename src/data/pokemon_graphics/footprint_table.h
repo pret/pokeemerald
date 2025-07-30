@@ -278,6 +278,7 @@ const u8 *const gMonFootprintTable[] =
     [SPECIES_OLD_UNOWN_Y] = gMonFootprint_QuestionMark,
     [SPECIES_OLD_UNOWN_Z] = gMonFootprint_QuestionMark,
     [SPECIES_TREECKO] = gMonFootprint_Treecko,
+    [SPECIES_ROWLET] = gMonFootprint_Rowlet,
     [SPECIES_GROVYLE] = gMonFootprint_Grovyle,
     [SPECIES_SCEPTILE] = gMonFootprint_Sceptile,
     [SPECIES_TORCHIC] = gMonFootprint_Torchic,

@@ -1516,6 +1516,11 @@ const u8 gTreeckoPokedexText[] = _(
     "anything nearing its territory. It is said\n"
     "to be the protector of the forest's trees.");
 
+const u8 gRowletPokedexText[] = _(
+    "This wary Pokémon uses photosynthesis\n"
+    "to store up energy during the day,\n"
+    "while becoming active at night.");
+
 const u8 gGrovylePokedexText[] = _(
     "Leaves grow out of this POKéMON's body.\n"
     "They help obscure a GROVYLE from the eyes\n"

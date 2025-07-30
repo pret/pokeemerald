@@ -282,6 +282,7 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_OLD_UNOWN_Y] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  2 },
     [SPECIES_OLD_UNOWN_Z] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  2 },
     [SPECIES_TREECKO]     = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  6 },
+    [SPECIES_ROWLET]      = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  6 },
     [SPECIES_GROVYLE]     = { .size = MON_COORDS_SIZE(64, 48), .y_offset =  8 },
     [SPECIES_SCEPTILE]    = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  1 },
     [SPECIES_TORCHIC]     = { .size = MON_COORDS_SIZE(48, 56), .y_offset =  5 },

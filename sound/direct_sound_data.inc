@@ -1483,6 +1483,10 @@ Cry_Treecko::
 	.incbin "sound/direct_sound_samples/cries/treecko.bin"
 
 	.align 2
+Cry_Rowlet::
+	.incbin "sound/direct_sound_samples/cries/rowlet.bin"
+
+	.align 2
 Cry_Grovyle::
 	.incbin "sound/direct_sound_samples/cries/grovyle.bin"
 

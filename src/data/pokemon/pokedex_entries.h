@@ -3036,6 +3036,18 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_ROWLET] =
+    {
+        .categoryName = _("GRASS QUILL"),
+        .height = 3,
+        .weight = 40,
+        .description = gRowletPokedexText,
+        .pokemonScale = 541,
+        .pokemonOffset = 19,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
     [NATIONAL_DEX_GROVYLE] =
     {
         .categoryName = _("WOOD GECKO"),

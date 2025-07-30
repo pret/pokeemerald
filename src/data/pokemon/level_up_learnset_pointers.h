@@ -278,6 +278,7 @@ const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_OLD_UNOWN_Y] = sSpecies275LevelUpLearnset,
     [SPECIES_OLD_UNOWN_Z] = sSpecies276LevelUpLearnset,
     [SPECIES_TREECKO] = sTreeckoLevelUpLearnset,
+    [SPECIES_ROWLET] = sRowletLevelUpLearnset,
     [SPECIES_GROVYLE] = sGrovyleLevelUpLearnset,
     [SPECIES_SCEPTILE] = sSceptileLevelUpLearnset,
     [SPECIES_TORCHIC] = sTorchicLevelUpLearnset,
