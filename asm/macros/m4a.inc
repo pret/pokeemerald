@@ -21,3 +21,18 @@
 		.set voicegroup_\label, . - \starting_note * 0xC
 	.endif
 	.endm
+
+	.macro keysplit label:req, starting_note
+	.ifb \starting_note
+		.global keysplit_\label
+		keysplit_\label:
+	.else
+		.set keysplit_\label, . - \starting_note
+	.endif
+	.endm
+
+	.macro split voice:req, n:req
+	.rept \n
+	  .byte \voice
+	.endr
+	.endm

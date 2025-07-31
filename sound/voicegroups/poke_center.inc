@@ -1,5 +1,5 @@
 voice_group poke_center
-	voice_keysplit voicegroup_piano_keysplit, KeySplitTable1
+	voice_keysplit voicegroup_piano_keysplit, keysplit_piano
 	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_14, 0, 1, 12, 0
 	voice_square_1_alt 60, 0, 0, 0, 1, 1, 9, 0
 	voice_square_2_alt 60, 0, 2, 0, 2, 6, 3
@@ -47,7 +47,7 @@ voice_group poke_center
 	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_pizzicato_strings, 255, 226, 0, 165
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_keysplit voicegroup_strings_keysplit, KeySplitTable2
+	voice_keysplit voicegroup_strings_keysplit, keysplit_strings
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
