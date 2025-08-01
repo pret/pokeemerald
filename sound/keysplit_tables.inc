@@ -11,25 +11,25 @@
 @ any extra offset calculation.
 
 keysplit piano, 36
-	split 0, 19 @ 36
-	split 1, 15 @ 55
-	split 2, 21 @ 70
-	split 3, 17 @ 91
+	split 0, 55
+	split 1, 70
+	split 2, 91
+	split 3, 108
 
 keysplit strings, 36
-	split 0, 33 @ 36
-	split 1, 12 @ 69
-	split 2, 27 @ 81
+	split 0, 69
+	split 1, 81
+	split 2, 108
 
 keysplit trumpet, 36
-	split 0, 30 @ 36
-	split 1, 18 @ 66
-	split 2, 24 @ 84
+	split 0, 66
+	split 1, 84
+	split 2, 108
 
 keysplit tuba, 24
-	split 0, 18 @ 24
-	split 1, 66 @ 42
+	split 0, 42
+	split 1, 108
 
 keysplit french_horn, 36
-	split 0, 30 @ 36
-	split 1, 42 @ 66
+	split 0, 66
+	split 1, 108
