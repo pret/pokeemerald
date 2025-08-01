@@ -26,13 +26,16 @@
 	.ifb \starting_note
 		.global keysplit_\label
 		keysplit_\label:
+		.set _last_note, 0
 	.else
 		.set keysplit_\label, . - \starting_note
+		.set _last_note, \starting_note
 	.endif
 	.endm
 
-	.macro split voice:req, n:req
-	.rept \n
+	.macro split voice:req, ending_note:req
+	.rept \ending_note - _last_note
 	  .byte \voice
 	.endr
+	.set _last_note, \ending_note
 	.endm
