@@ -31,11 +31,21 @@
 		.set keysplit_\label, . - \starting_note
 		.set _last_note, \starting_note
 	.endif
+	.set _last_split, 0
 	.endm
 
-	.macro split voice:req, ending_note:req
+	.macro split index:req, ending_note:req
+	.if \ending_note < _last_note
+		.if _last_split == 0
+			.error "split's ending_note earlier than previous keysplit's starting_note"
+		.else
+			.error "split's ending_note earlier than previous split's ending_note"
+		.endif
+	.else
 	.rept \ending_note - _last_note
-	  .byte \voice
+	  .byte \index
 	.endr
+	.endif
 	.set _last_note, \ending_note
+	.set _last_split, 1
 	.endm
