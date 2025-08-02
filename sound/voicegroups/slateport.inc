@@ -1,6 +1,6 @@
 voice_group slateport
 	voice_keysplit_all voicegroup_rs_drumset
-	voice_keysplit voicegroup_piano_keysplit, KeySplitTable1
+	voice_keysplit voicegroup_piano_keysplit, keysplit_piano
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -47,7 +47,7 @@ voice_group slateport
 	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_pizzicato_strings, 255, 226, 0, 38
 	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_harp, 255, 242, 51, 242
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_keysplit voicegroup_strings_keysplit, KeySplitTable2
+	voice_keysplit voicegroup_strings_keysplit, keysplit_strings
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

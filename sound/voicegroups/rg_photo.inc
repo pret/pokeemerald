@@ -1,6 +1,6 @@
 voice_group rg_photo
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_keysplit voicegroup_piano_keysplit, KeySplitTable1
+	voice_keysplit voicegroup_piano_keysplit, keysplit_piano
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_sd90_classical_detuned_ep1_low, 64, 249, 0, 188
