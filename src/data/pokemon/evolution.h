@@ -184,4 +184,8 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_SHELGON]    = {{EVO_LEVEL, 50, SPECIES_SALAMENCE}},
     [SPECIES_BELDUM]     = {{EVO_LEVEL, 20, SPECIES_METANG}},
     [SPECIES_METANG]     = {{EVO_LEVEL, 45, SPECIES_METAGROSS}},
+
+    // Added evolutions for the Rowlet line
+    [SPECIES_ROWLET]     = {{EVO_LEVEL, 17, SPECIES_DARTRIX}},
+    [SPECIES_DARTRIX]    = {{EVO_LEVEL, 34, SPECIES_DECIDUEYE}},
 };
