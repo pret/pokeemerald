@@ -281,7 +281,11 @@
 #define SPECIES_OLD_UNOWN_Z 276
 
 #define SPECIES_TREECKO 277
+// Newly added species from Generation 7 starters
 #define SPECIES_ROWLET 412
+#define SPECIES_DARTRIX 413
+#define SPECIES_DECIDUEYE 414
+//End new additons
 #define SPECIES_GROVYLE 278
 #define SPECIES_SCEPTILE 279
 #define SPECIES_TORCHIC 280
@@ -415,8 +419,14 @@
 #define SPECIES_LATIOS 408
 #define SPECIES_JIRACHI 409
 #define SPECIES_DEOXYS 410
+#define SPECIES_DEOXYS 410
+
 #define SPECIES_CHIMECHO 411
-#define SPECIES_EGG 413
+
+// Move EGG species down to make room for the new evolutions.  SPECIES_EGG is used
+// by the game for placeholder data and as the marker for NUM_SPECIES.  It needs
+// to come after all real Pokémon species definitions.
+#define SPECIES_EGG 415
 
 #define NUM_SPECIES SPECIES_EGG
 
