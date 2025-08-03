@@ -282,7 +282,14 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_OLD_UNOWN_Y] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  2 },
     [SPECIES_OLD_UNOWN_Z] = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  2 },
     [SPECIES_TREECKO]     = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  6 },
-    [SPECIES_ROWLET]      = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  6 },
+    // Adjust Rowlet's back sprite y_offset so it sits lower on the screen.  Previously
+    // this entry used a y_offset of 6, which caused the sprite to float too high
+    // above the ground in battle.  Increasing the offset moves the sprite down.
+    // Further lower Rowlet's back sprite.  A y_offset of 8 still left part of the body
+    // visible above the battle menu and allowed the sprite to bounce up, revealing
+    // its bottom.  Increasing the y_offset to 12 positions the sprite lower and
+    // keeps the bottom hidden behind the menu even during animation.
+    [SPECIES_ROWLET]      = { .size = MON_COORDS_SIZE(64, 56), .y_offset = 16 },
     [SPECIES_GROVYLE]     = { .size = MON_COORDS_SIZE(64, 48), .y_offset =  8 },
     [SPECIES_SCEPTILE]    = { .size = MON_COORDS_SIZE(64, 64), .y_offset =  1 },
     [SPECIES_TORCHIC]     = { .size = MON_COORDS_SIZE(48, 56), .y_offset =  5 },
