@@ -259,7 +259,8 @@ const u32 gMonFrontPic_DoubleQuestionMark[] = INCBIN_U32("graphics/pokemon/quest
 
 const u32 gMonFrontPic_Treecko[] = INCBIN_U32("graphics/pokemon/treecko/anim_front.4bpp.lz");
 const u32 gMonFrontPic_Rowlet[] = INCBIN_U32("graphics/pokemon/rowlet/anim_front.4bpp.lz");
-const u32 gMonFrontPic_Grovyle[] = INCBIN_U32("graphics/pokemon/grovyle/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Dartrix[] = INCBIN_U32("graphics/pokemon/dartrix/anim_front.4bpp.lz");
+const u32 gMonFrontPic_Decidueye[] = INCBIN_U32("graphics/pokemon/decidueye/anim_front.4bpp.lz");const u32 gMonFrontPic_Grovyle[] = INCBIN_U32("graphics/pokemon/grovyle/anim_front.4bpp.lz");
 const u32 gMonFrontPic_Sceptile[] = INCBIN_U32("graphics/pokemon/sceptile/anim_front.4bpp.lz");
 const u32 gMonFrontPic_Torchic[] = INCBIN_U32("graphics/pokemon/torchic/anim_front.4bpp.lz");
 const u32 gMonFrontPic_Combusken[] = INCBIN_U32("graphics/pokemon/combusken/anim_front.4bpp.lz");
