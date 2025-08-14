@@ -1597,7 +1597,7 @@ static void WarpForWirelessMinigame(u16 linkService, u16 x, u16 y)
     WarpIntoMap();
 }
 
-static void WarpForCableClubActivity(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 linkService)
+static void WarpForCableClubActivity(u8 mapGroup, u8 mapNum, s32 x, s32 y, u16 linkService)
 {
     gSpecialVar_0x8004 = linkService;
     VarSet(VAR_CABLE_CLUB_STATE, linkService);

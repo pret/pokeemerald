@@ -3,8 +3,8 @@
 
 struct HealLocation
 {
-    s8 mapGroup;
-    s8 mapNum;
+    OverworldMapValue mapGroup;
+    OverworldMapValue mapNum;
     u16 x;
     u16 y;
 };

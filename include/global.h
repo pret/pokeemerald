@@ -158,6 +158,17 @@
 // It looks like file.c:line: size of array `id' is negative
 #define STATIC_ASSERT(expr, id) typedef char id[(expr) ? 1 : -1];
 
+// MAP_GROUP and MAP_NUM values are not consistently given the same data type.
+// It's possible for a map value to start as a u8, get cast to s8, then get cast again to u16.
+// This can cause out of bounds reads when a map value exceeds 127. The vanilla game has no map
+// values large enough for this to be a problem, except for the special map value MAP_UNDEFINED
+// (which shouldn't be used to read from anything anyway) so this fix is only for maps added downstream.
+#ifdef UBFIX
+    #define OverworldMapValue u8
+#else
+    #define OverworldMapValue s8
+#endif
+
 struct Coords8
 {
     s8 x;
@@ -579,8 +590,8 @@ struct SecretBase
 
 struct WarpData
 {
-    s8 mapGroup;
-    s8 mapNum;
+    OverworldMapValue mapGroup;
+    OverworldMapValue mapNum;
     s8 warpId;
     //u8 padding;
     s16 x, y;

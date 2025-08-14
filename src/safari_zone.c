@@ -16,7 +16,7 @@ struct PokeblockFeeder
 {
     /*0x00*/ s16 x;
     /*0x02*/ s16 y;
-    /*0x04*/ s8 mapNum;
+    /*0x04*/ OverworldMapValue mapNum;
     /*0x05*/ u8 stepCounter;
     /*0x08*/ struct Pokeblock pokeblock;
 };
