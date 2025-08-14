@@ -26,6 +26,11 @@
 #include "c_file.h"
 #include "charmap.h"
 
+#ifdef _WIN32
+#include <io.h>
+#include <fcntl.h>
+#endif
+
 static void UsageAndExit(const char *program);
 
 Charmap* g_charmap;
@@ -178,6 +183,11 @@ int main(int argc, char **argv)
     charmap = argv[optind + 1];
 
     g_charmap = new Charmap(charmap);
+
+#ifdef _WIN32
+	// On Windows, piping from stdout can break newlines. Treat stdout as binary stream to avoid this.
+	_setmode(_fileno(stdout), _O_BINARY);
+#endif
 
     const char* extension = GetFileExtension(source);
 

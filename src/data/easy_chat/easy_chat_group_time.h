@@ -48,271 +48,271 @@ const struct EasyChatWordInfo gEasyChatGroup_Time[] = {
     [EC_INDEX(EC_WORD_FALL)] =
     {
         .text = gEasyChatWord_Fall,
-        .alphabeticalOrder = 29,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_AGE),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_MORNING)] =
     {
         .text = gEasyChatWord_Morning,
-        .alphabeticalOrder = 39,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_ALMOST),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_TOMORROW)] =
     {
         .text = gEasyChatWord_Tomorrow,
-        .alphabeticalOrder = 6,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_ALWAYS),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_LAST)] =
     {
         .text = gEasyChatWord_Last,
-        .alphabeticalOrder = 18,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_ANOTHER),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_DAY)] =
     {
         .text = gEasyChatWord_Day,
-        .alphabeticalOrder = 33,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_BEGINNING),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_SOMETIME)] =
     {
         .text = gEasyChatWord_Sometime,
-        .alphabeticalOrder = 7,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_CURRENT),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_ALWAYS)] =
     {
         .text = gEasyChatWord_Always,
-        .alphabeticalOrder = 37,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_DAILY),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_CURRENT)] =
     {
         .text = gEasyChatWord_Current,
-        .alphabeticalOrder = 4,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_DAY),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_FOREVER)] =
     {
         .text = gEasyChatWord_Forever,
-        .alphabeticalOrder = 9,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_DAYS),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_DAYS)] =
     {
         .text = gEasyChatWord_Days,
-        .alphabeticalOrder = 35,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_DAYTIME),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_END)] =
     {
         .text = gEasyChatWord_End,
-        .alphabeticalOrder = 17,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_EARLIER),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_TUESDAY)] =
     {
         .text = gEasyChatWord_Tuesday,
-        .alphabeticalOrder = 10,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_END),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_YESTERDAY)] =
     {
         .text = gEasyChatWord_Yesterday,
-        .alphabeticalOrder = 0,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_FALL),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_TODAY)] =
     {
         .text = gEasyChatWord_Today,
-        .alphabeticalOrder = 27,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_FINAL),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_FRIDAY)] =
     {
         .text = gEasyChatWord_Friday,
-        .alphabeticalOrder = 20,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_FINISH),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_MONDAY)] =
     {
         .text = gEasyChatWord_Monday,
-        .alphabeticalOrder = 8,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_FOREVER),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_LATER)] =
     {
         .text = gEasyChatWord_Later,
-        .alphabeticalOrder = 14,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_FRIDAY),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_EARLIER)] =
     {
         .text = gEasyChatWord_Earlier,
-        .alphabeticalOrder = 3,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_LAST),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_ANOTHER)] =
     {
         .text = gEasyChatWord_Another,
-        .alphabeticalOrder = 16,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_LATER),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_TIME)] =
     {
         .text = gEasyChatWord_Time,
-        .alphabeticalOrder = 15,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_MONDAY),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_FINISH)] =
     {
         .text = gEasyChatWord_Finish,
-        .alphabeticalOrder = 24,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_MONTH),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_WEDNESDAY)] =
     {
         .text = gEasyChatWord_Wednesday,
-        .alphabeticalOrder = 1,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_MORNING),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_SOON)] =
     {
         .text = gEasyChatWord_Soon,
-        .alphabeticalOrder = 40,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_NEARLY),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_START)] =
     {
         .text = gEasyChatWord_Start,
-        .alphabeticalOrder = 28,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_NEXT),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_MONTH)] =
     {
         .text = gEasyChatWord_Month,
-        .alphabeticalOrder = 43,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_NIGHT),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_STOP)] =
     {
         .text = gEasyChatWord_Stop,
-        .alphabeticalOrder = 42,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_NIGHTTIME),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_NOW)] =
     {
         .text = gEasyChatWord_Now,
-        .alphabeticalOrder = 26,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_NOW),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_FINAL)] =
     {
         .text = gEasyChatWord_Final,
-        .alphabeticalOrder = 38,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_OLDEN),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_NEXT)] =
     {
         .text = gEasyChatWord_Next,
-        .alphabeticalOrder = 30,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_SATURDAY),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_AGE)] =
     {
         .text = gEasyChatWord_Age,
-        .alphabeticalOrder = 5,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_SOMETIME),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_SATURDAY)] =
     {
         .text = gEasyChatWord_Saturday,
-        .alphabeticalOrder = 22,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_SOON),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_SUMMER)] =
     {
         .text = gEasyChatWord_Summer,
-        .alphabeticalOrder = 34,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_SPRING),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_SUNDAY)] =
     {
         .text = gEasyChatWord_Sunday,
-        .alphabeticalOrder = 23,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_START),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_BEGINNING)] =
     {
         .text = gEasyChatWord_Beginning,
-        .alphabeticalOrder = 25,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_STOP),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_SPRING)] =
     {
         .text = gEasyChatWord_Spring,
-        .alphabeticalOrder = 31,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_SUMMER),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_DAYTIME)] =
     {
         .text = gEasyChatWord_Daytime,
-        .alphabeticalOrder = 32,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_SUNDAY),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_WINTER)] =
     {
         .text = gEasyChatWord_Winter,
-        .alphabeticalOrder = 41,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_THURSDAY),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_DAILY)] =
     {
         .text = gEasyChatWord_Daily,
-        .alphabeticalOrder = 19,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_TIME),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_OLDEN)] =
     {
         .text = gEasyChatWord_Olden,
-        .alphabeticalOrder = 13,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_TODAY),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_ALMOST)] =
     {
         .text = gEasyChatWord_Almost,
-        .alphabeticalOrder = 2,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_TOMORROW),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_NEARLY)] =
     {
         .text = gEasyChatWord_Nearly,
-        .alphabeticalOrder = 11,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_TUESDAY),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_THURSDAY)] =
     {
         .text = gEasyChatWord_Thursday,
-        .alphabeticalOrder = 21,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_WEDNESDAY),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_NIGHTTIME)] =
     {
         .text = gEasyChatWord_Nighttime,
-        .alphabeticalOrder = 44,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_WEEK),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_NIGHT)] =
     {
         .text = gEasyChatWord_Night,
-        .alphabeticalOrder = 36,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_WINTER),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_WEEK)] =
     {
         .text = gEasyChatWord_Week,
-        .alphabeticalOrder = 12,
+        .alphabeticalOrder = EC_INDEX(EC_WORD_YESTERDAY),
         .enabled = TRUE,
     },
 };

@@ -9,12 +9,12 @@ enum {
     NEWS_INPUT_NONE = 0xFF
 };
 
-bool32 WonderCard_Init(struct WonderCard * card, struct WonderCardMetadata * metadata);
-bool32 WonderNews_Init(const struct WonderNews * news);
+bool32 WonderCard_Init(struct WonderCard *card, struct WonderCardMetadata *metadata);
+bool32 WonderNews_Init(const struct WonderNews *news);
 s32 WonderCard_Enter(void);
 s32 WonderNews_Enter(void);
-s32 WonderCard_Exit(bool32 flag);
-s32 WonderNews_Exit(bool32 flag);
+s32 WonderCard_Exit(bool32 useCancel);
+s32 WonderNews_Exit(bool32 useCancel);
 void WonderCard_Destroy(void);
 void WonderNews_Destroy(void);
 u32 WonderNews_GetInput(u16 input);
