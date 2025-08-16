@@ -1,0 +1,738 @@
+asm/macros/contest_ai_script.inc:392:@ whether the current move is a combo starter (with another move in the moveset)
+asm/macros/contest_ai_script.inc:394:	.macro check_combo_starter
+asm/macros/contest_ai_script.inc:398:	.macro if_combo_starter destination:req
+asm/macros/contest_ai_script.inc:403:	.macro if_not_combo_starter destination:req
+asm/macros/contest_ai_script.inc:475:@ whether the mon used a combo starter move
+asm/macros/contest_ai_script.inc:479:	.macro get_used_combo_starter mon:req
+asm/macros/contest_ai_script.inc:484:	.macro if_used_combo_starter_less_than mon:req, num:req, destination:req
+asm/macros/contest_ai_script.inc:491:	.macro if_used_combo_starter_more_than mon:req, num:req, destination:req
+asm/macros/contest_ai_script.inc:499:	.macro if_used_combo_starter_eq mon:req, num:req, destination:req
+asm/macros/contest_ai_script.inc:506:	.macro if_used_combo_starter_not_eq mon:req, num:req, destination:req
+asm/macros/contest_ai_script.inc:513:	.macro if_used_combo_starter mon:req, destination:req
+asm/macros/contest_ai_script.inc:514:	if_used_combo_starter_eq \mon, TRUE, \destination
+asm/macros/contest_ai_script.inc:517:	.macro if_not_used_combo_starter mon:req, destination:req
+asm/macros/contest_ai_script.inc:518:	if_used_combo_starter_eq \mon, FALSE, \destination
+data/contest_ai_scripts.s:218:@ Discourages using a combo finisher when its combo starter hasnt been used yet
+data/contest_ai_scripts.s:221:	call AI_CheckCombo_CheckStarter
+data/contest_ai_scripts.s:222:	call AI_CheckCombo_CheckFinisherWithoutStarter
+data/contest_ai_scripts.s:224:AI_CheckCombo_CheckStarter:
+data/contest_ai_scripts.s:226:	if_not_combo_starter AI_CheckCombo_End
+data/contest_ai_scripts.s:227:	if_user_order_eq MON_1, AI_CheckCombo_Starter1stUp
+data/contest_ai_scripts.s:228:	if_user_order_eq MON_2, AI_CheckCombo_Starter2ndUp
+data/contest_ai_scripts.s:229:	if_user_order_eq MON_3, AI_CheckCombo_Starter3rdUp
+data/contest_ai_scripts.s:230:	if_user_order_eq MON_4, AI_CheckCombo_StarterLast
+data/contest_ai_scripts.s:232:AI_CheckCombo_CheckFinisherWithoutStarter:
+data/contest_ai_scripts.s:239:AI_CheckCombo_Starter1stUp:
+data/contest_ai_scripts.s:240:	if_last_appeal AI_CheckCombo_StarterOnLastAppeal
+data/contest_ai_scripts.s:244:AI_CheckCombo_Starter2ndUp:
+data/contest_ai_scripts.s:245:	if_last_appeal AI_CheckCombo_StarterOnLastAppeal
+data/contest_ai_scripts.s:249:AI_CheckCombo_Starter3rdUp:
+data/contest_ai_scripts.s:250:	if_last_appeal AI_CheckCombo_StarterOnLastAppeal
+data/contest_ai_scripts.s:254:AI_CheckCombo_StarterLast:
+data/contest_ai_scripts.s:255:	if_last_appeal AI_CheckCombo_StarterOnLastAppeal
+data/contest_ai_scripts.s:258:AI_CheckCombo_StarterOnLastAppeal:
+data/contest_ai_scripts.s:542:@ BUG: Incorrectly uses if_used_combo_starter below, instead of if_not_used_combo_starter
+data/contest_ai_scripts.s:551:	if_not_used_combo_starter MON_1, AI_CGM_TargetMonWithJudgesAttention_CheckMon2
+data/contest_ai_scripts.s:553:	if_used_combo_starter MON_1, AI_CGM_TargetMonWithJudgesAttention_CheckMon2
+data/contest_ai_scripts.s:564:	if_not_used_combo_starter MON_2, AI_CGM_TargetMonWithJudgesAttention_CheckMon3
+data/contest_ai_scripts.s:566:	if_used_combo_starter MON_2, AI_CGM_TargetMonWithJudgesAttention_CheckMon3
+data/contest_ai_scripts.s:577:	if_not_used_combo_starter MON_3, AI_CGM_End
+data/contest_ai_scripts.s:579:	if_used_combo_starter MON_3, AI_CGM_End
+data/contest_ai_scripts.s:594:	if_not_used_combo_starter MON_4, AI_CGM_MakeFollowingMonsNervous_CheckMon3
+data/contest_ai_scripts.s:602:	if_not_used_combo_starter MON_3, AI_CGM_MakeFollowingMonsNervous_CheckMon2
+data/contest_ai_scripts.s:610:	if_not_used_combo_starter MON_2, AI_CGM_End
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:12:	@ 5: Birch told player to choose Johto starter
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:13:	@ 6: Chose Johto starter
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:17:	@ 2: Chose starter
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:18:	@ 3: Received starter in lab
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:25:	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_SetAfterJohtoStarterLayout
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:26:	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_SetJohtoStarterLayout
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:27:	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3, LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForJohtoStarter
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:30:LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForJohtoStarter::
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:32:	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_SetReadyForJohtoStarter
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:37:LittlerootTown_ProfessorBirchsLab_EventScript_SetReadyForJohtoStarter::
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:39:	goto LittlerootTown_ProfessorBirchsLab_EventScript_SetJohtoStarterLayout
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:41:LittlerootTown_ProfessorBirchsLab_EventScript_SetJohtoStarterLayout::
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:45:LittlerootTown_ProfessorBirchsLab_EventScript_SetAfterJohtoStarterLayout::
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:52:	map_script_2 VAR_BIRCH_LAB_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_SetPlayerPosForReceiveStarter
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:57:	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForJohtoStarters
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:58:	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForJohtoStarters
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:61:LittlerootTown_ProfessorBirchsLab_EventScript_SetPlayerPosForReceiveStarter::
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:81:LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForJohtoStarters::
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:99:	map_script_2 VAR_BIRCH_LAB_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:102:	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_ChooseJohtoStarter
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:105:@ The starter is technically given prior to this on Route 101 by special ChooseStarter
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:107:LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent::
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:115:	goto_if_eq VAR_RESULT, YES, LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:119:LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter::
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:250:LittlerootTown_ProfessorBirchsLab_EventScript_ChooseJohtoStarter::
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:252:	applymovement LOCALID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForJohtoStarter
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:259:LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForJohtoStarter:
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:272:	goto_if_ge VAR_BIRCH_LAB_STATE, 3, LittlerootTown_ProfessorBirchsLab_EventScript_AideReceivedStarter
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:284:LittlerootTown_ProfessorBirchsLab_EventScript_AideReceivedStarter::
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:291:	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:302:	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:313:	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:322:LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter::
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:344:	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:354:	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:385:	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:395:	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:426:	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:436:	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:456:LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter::
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:458:	message LittlerootTown_ProfessorBirchsLab_Text_ReceivedJohtoStarter
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:928:LittlerootTown_ProfessorBirchsLab_Text_ReceivedJohtoStarter:
+data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:933:LittlerootTown_ProfessorBirchsLab_Text_NicknameJohtoStarter:
+data/maps/MauvilleCity_GameCorner/scripts.inc:382:	goto_if_set FLAG_RECEIVED_STARTER_DOLL, MauvilleCity_GameCorner_EventScript_ReceivedStarterDoll
+data/maps/MauvilleCity_GameCorner/scripts.inc:384:	goto_if_eq VAR_RESULT, NO, MauvilleCity_GameCorner_EventScript_DeclineStarterDoll
+data/maps/MauvilleCity_GameCorner/scripts.inc:394:	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_GameCorner_EventScript_NoRoomForStarterDoll
+data/maps/MauvilleCity_GameCorner/scripts.inc:398:	goto MauvilleCity_GameCorner_EventScript_ReceivedStarterDoll
+data/maps/MauvilleCity_GameCorner/scripts.inc:404:	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_GameCorner_EventScript_NoRoomForStarterDoll
+data/maps/MauvilleCity_GameCorner/scripts.inc:408:	goto MauvilleCity_GameCorner_EventScript_ReceivedStarterDoll
+data/maps/MauvilleCity_GameCorner/scripts.inc:414:	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_GameCorner_EventScript_NoRoomForStarterDoll
+data/maps/MauvilleCity_GameCorner/scripts.inc:418:	goto MauvilleCity_GameCorner_EventScript_ReceivedStarterDoll
+data/maps/MauvilleCity_GameCorner/scripts.inc:421:MauvilleCity_GameCorner_EventScript_NoRoomForStarterDoll::
+data/maps/MauvilleCity_GameCorner/scripts.inc:427:MauvilleCity_GameCorner_EventScript_DeclineStarterDoll::
+data/maps/MauvilleCity_GameCorner/scripts.inc:432:MauvilleCity_GameCorner_EventScript_ReceivedStarterDoll::
+data/maps/PetalburgCity_PokemonCenter_1F/scripts.inc:31:	specialvar VAR_RESULT, IsStarterInParty
+data/maps/PetalburgCity_PokemonCenter_1F/scripts.inc:32:	goto_if_eq VAR_RESULT, TRUE, PetalburgCity_PokemonCenter_1F_EventScript_SayStarterTypeInfo
+data/maps/PetalburgCity_PokemonCenter_1F/scripts.inc:36:PetalburgCity_PokemonCenter_1F_EventScript_SayStarterTypeInfo::
+data/maps/Route101/scripts.inc:228:	special ChooseStarter
+data/specials.inc:170:	def_special ChooseStarter
+data/specials.inc:315:	def_special IsStarterInParty
+graphics_file_rules.mk:22:STARTERGFXDIR := graphics/starter_choose
+include/battle_setup.h:32:void ChooseStarter(void);
+include/constants/species.h:283:#define SPECIES_TREECKO 277
+include/constants/species.h:286:#define SPECIES_TORCHIC 280
+include/constants/species.h:289:#define SPECIES_MUDKIP 283
+include/contest_effect.h:8:    u8 comboStarterId;
+include/starter_choose.h:10:u16 GetStarterPokemon(u16 chosenStarterId);
+include/starter_choose.h:11:void CB2_ChooseStarter(void);
+include/strings.h:397:extern const u8 gText_ConfirmStarterChoice[];
+ld_script.ld:223:        src/starter_choose.o(.text);
+ld_script.ld:598:        src/starter_choose.o(.rodata);
+src/battle_factory_screen.c:27:#include "starter_choose.h"
+src/battle_setup.c:14:#include "starter_choose.h"
+src/battle_setup.c:84:static void CB2_GiveStarter(void);
+src/battle_setup.c:911:void ChooseStarter(void)
+src/battle_setup.c:913:    SetMainCallback2(CB2_ChooseStarter);
+src/battle_setup.c:914:    gMain.savedCallback = CB2_GiveStarter;
+src/battle_setup.c:917:static void CB2_GiveStarter(void)
+src/battle_setup.c:919:    u16 starterMon;
+src/battle_setup.c:922:    starterMon = GetStarterPokemon(gSpecialVar_Result);
+src/battle_setup.c:923:    ScriptGiveMon(starterMon, 5, ITEM_NONE, 0, 0, 0);
+src/contest.c:4491:            if (gContestMoves[eContestantStatus[contestant].currMove].comboStarterId != 0)
+src/contest_ai.c:78:static void ContestAICmd_check_combo_starter(void);
+src/contest_ai.c:79:static void ContestAICmd_if_combo_starter(void);
+src/contest_ai.c:80:static void ContestAICmd_if_not_combo_starter(void);
+src/contest_ai.c:92:static void ContestAICmd_get_used_combo_starter(void);
+src/contest_ai.c:93:static void ContestAICmd_if_used_combo_starter_less_than(void);
+src/contest_ai.c:94:static void ContestAICmd_if_used_combo_starter_more_than(void);
+src/contest_ai.c:95:static void ContestAICmd_if_used_combo_starter_eq(void);
+src/contest_ai.c:96:static void ContestAICmd_if_used_combo_starter_not_eq(void);
+src/contest_ai.c:219:    ContestAICmd_check_combo_starter,                 // 0x40
+src/contest_ai.c:220:    ContestAICmd_if_combo_starter,                    // 0x41
+src/contest_ai.c:221:    ContestAICmd_if_not_combo_starter,                // 0x42
+src/contest_ai.c:233:    ContestAICmd_get_used_combo_starter,              // 0x4E
+src/contest_ai.c:234:    ContestAICmd_if_used_combo_starter_less_than,     // 0x4F
+src/contest_ai.c:235:    ContestAICmd_if_used_combo_starter_more_than,     // 0x50
+src/contest_ai.c:236:    ContestAICmd_if_used_combo_starter_eq,            // 0x51
+src/contest_ai.c:237:    ContestAICmd_if_used_combo_starter_not_eq,        // 0x52
+src/contest_ai.c:1025:static void ContestAICmd_check_combo_starter(void)
+src/contest_ai.c:1051:static void ContestAICmd_if_combo_starter(void)
+src/contest_ai.c:1053:    ContestAICmd_check_combo_starter();
+src/contest_ai.c:1061:static void ContestAICmd_if_not_combo_starter(void)
+src/contest_ai.c:1063:    ContestAICmd_check_combo_starter();
+src/contest_ai.c:1200:static void ContestAICmd_get_used_combo_starter(void)
+src/contest_ai.c:1206:        result = gContestMoves[eContestantStatus[contestant].prevMove].comboStarterId ? TRUE : FALSE;
+src/contest_ai.c:1212:static void ContestAICmd_if_used_combo_starter_less_than(void)
+src/contest_ai.c:1214:    ContestAICmd_get_used_combo_starter();
+src/contest_ai.c:1222:static void ContestAICmd_if_used_combo_starter_more_than(void)
+src/contest_ai.c:1224:    ContestAICmd_get_used_combo_starter();
+src/contest_ai.c:1232:static void ContestAICmd_if_used_combo_starter_eq(void)
+src/contest_ai.c:1234:    ContestAICmd_get_used_combo_starter();
+src/contest_ai.c:1242:static void ContestAICmd_if_used_combo_starter_not_eq(void)
+src/contest_ai.c:1244:    ContestAICmd_get_used_combo_starter();
+src/contest_effect.c:63:    u8 lastMoveComboStarterId = gContestMoves[lastMove].comboStarterId;
+src/contest_effect.c:69:    if (lastMoveComboStarterId == 0)
+src/contest_effect.c:71:    else if (lastMoveComboStarterId == nextMoveComboMoves[0]
+src/contest_effect.c:72:          || lastMoveComboStarterId == nextMoveComboMoves[1]
+src/contest_effect.c:73:          || lastMoveComboStarterId == nextMoveComboMoves[2]
+src/contest_effect.c:74:          || lastMoveComboStarterId == nextMoveComboMoves[3])
+src/contest_effect.c:75:        return gComboStarterLookupTable[lastMoveComboStarterId];
+src/contest_effect.c:431:            oddsMod[i] = gComboStarterLookupTable[gContestMoves[eContestantStatus[i].prevMove].comboStarterId] * 10;
+src/credits.c:16:#include "starter_choose.h"
+src/credits.c:1553:    u16 starter = SpeciesToNationalPokedexNum(GetStarterPokemon(VarGet(VAR_STARTER_MON)));
+src/credits.c:1573:    // Cap the number of Pokémon we care about to NUM_MON_SLIDES, the max we show in the credits scene (-1 for the starter)
+src/credits.c:1612:        // Ensure the last Pokémon is our starter
+src/credits.c:1613:        sCreditsData->monToShow[NUM_MON_SLIDES - 1] = starter;
+src/credits.c:1617:        // Check to see if our starter has already appeared in this list, break if it has
+src/credits.c:1618:        for (dexNum = 0; sCreditsData->monToShow[dexNum] != starter && dexNum < NUM_MON_SLIDES; dexNum++);
+src/credits.c:1620:        // If it has, swap it with the last Pokémon, to ensure our starter is the last image
+src/credits.c:1624:            sCreditsData->monToShow[NUM_MON_SLIDES - 1] = starter;
+src/credits.c:1628:            // Ensure the last Pokémon is our starter
+src/credits.c:1629:            sCreditsData->monToShow[NUM_MON_SLIDES - 1] = starter;
+src/data/bard_music/pokemon.h:2223:    [SPECIES_TREECKO] = {
+src/data/bard_music/pokemon.h:2247:    [SPECIES_TORCHIC] = {
+src/data/bard_music/pokemon.h:2271:    [SPECIES_MUDKIP] = {
+src/data/battle_frontier/battle_frontier_mons.h:662:        .species = SPECIES_TREECKO,
+src/data/battle_frontier/battle_frontier_mons.h:669:        .species = SPECIES_TORCHIC,
+src/data/battle_frontier/battle_frontier_mons.h:676:        .species = SPECIES_MUDKIP,
+src/data/contest_moves.h:9:        .comboStarterId = COMBO_STARTER_POUND,
+src/data/contest_moves.h:17:        .comboStarterId = 0,
+src/data/contest_moves.h:25:        .comboStarterId = 0,
+src/data/contest_moves.h:33:        .comboStarterId = 0,
+src/data/contest_moves.h:41:        .comboStarterId = 0,
+src/data/contest_moves.h:49:        .comboStarterId = 0,
+src/data/contest_moves.h:57:        .comboStarterId = COMBO_STARTER_FIRE_PUNCH,
+src/data/contest_moves.h:65:        .comboStarterId = COMBO_STARTER_ICE_PUNCH,
+src/data/contest_moves.h:73:        .comboStarterId = COMBO_STARTER_THUNDER_PUNCH,
+src/data/contest_moves.h:81:        .comboStarterId = COMBO_STARTER_SCRATCH,
+src/data/contest_moves.h:89:        .comboStarterId = COMBO_STARTER_VICE_GRIP,
+src/data/contest_moves.h:97:        .comboStarterId = 0,
+src/data/contest_moves.h:105:        .comboStarterId = 0,
+src/data/contest_moves.h:113:        .comboStarterId = COMBO_STARTER_SWORDS_DANCE,
+src/data/contest_moves.h:121:        .comboStarterId = 0,
+src/data/contest_moves.h:129:        .comboStarterId = 0,
+src/data/contest_moves.h:137:        .comboStarterId = 0,
+src/data/contest_moves.h:145:        .comboStarterId = 0,
+src/data/contest_moves.h:153:        .comboStarterId = 0,
+src/data/contest_moves.h:161:        .comboStarterId = 0,
+src/data/contest_moves.h:169:        .comboStarterId = 0,
+src/data/contest_moves.h:177:        .comboStarterId = 0,
+src/data/contest_moves.h:185:        .comboStarterId = 0,{0, COMBO_STARTER_LEER},
+src/data/contest_moves.h:192:        .comboStarterId = 0,
+src/data/contest_moves.h:200:        .comboStarterId = 0,
+src/data/contest_moves.h:208:        .comboStarterId = 0,
+src/data/contest_moves.h:216:        .comboStarterId = 0,
+src/data/contest_moves.h:224:        .comboStarterId = COMBO_STARTER_SAND_ATTACK,
+src/data/contest_moves.h:232:        .comboStarterId = 0,
+src/data/contest_moves.h:240:        .comboStarterId = COMBO_STARTER_HORN_ATTACK,
+src/data/contest_moves.h:248:        .comboStarterId = 0,
+src/data/contest_moves.h:256:        .comboStarterId = 0,
+src/data/contest_moves.h:264:        .comboStarterId = 0,
+src/data/contest_moves.h:272:        .comboStarterId = 0,
+src/data/contest_moves.h:280:        .comboStarterId = 0,
+src/data/contest_moves.h:288:        .comboStarterId = 0,
+src/data/contest_moves.h:296:        .comboStarterId = 0,
+src/data/contest_moves.h:304:        .comboStarterId = 0,
+src/data/contest_moves.h:312:        .comboStarterId = 0,
+src/data/contest_moves.h:320:        .comboStarterId = 0,
+src/data/contest_moves.h:328:        .comboStarterId = 0,
+src/data/contest_moves.h:336:        .comboStarterId = 0,
+src/data/contest_moves.h:344:        .comboStarterId = COMBO_STARTER_LEER,
+src/data/contest_moves.h:352:        .comboStarterId = 0,
+src/data/contest_moves.h:360:        .comboStarterId = 0,
+src/data/contest_moves.h:368:        .comboStarterId = 0,
+src/data/contest_moves.h:376:        .comboStarterId = COMBO_STARTER_SING,
+src/data/contest_moves.h:384:        .comboStarterId = 0,
+src/data/contest_moves.h:392:        .comboStarterId = 0,
+src/data/contest_moves.h:400:        .comboStarterId = 0,
+src/data/contest_moves.h:408:        .comboStarterId = 0,
+src/data/contest_moves.h:416:        .comboStarterId = 0,
+src/data/contest_moves.h:424:        .comboStarterId = 0,
+src/data/contest_moves.h:432:        .comboStarterId = 0,
+src/data/contest_moves.h:440:        .comboStarterId = 0,
+src/data/contest_moves.h:448:        .comboStarterId = 0,
+src/data/contest_moves.h:456:        .comboStarterId = COMBO_STARTER_SURF,
+src/data/contest_moves.h:464:        .comboStarterId = 0,
+src/data/contest_moves.h:472:        .comboStarterId = 0,
+src/data/contest_moves.h:480:        .comboStarterId = 0,
+src/data/contest_moves.h:488:        .comboStarterId = 0,
+src/data/contest_moves.h:496:        .comboStarterId = 0,
+src/data/contest_moves.h:504:        .comboStarterId = 0,
+src/data/contest_moves.h:512:        .comboStarterId = COMBO_STARTER_PECK,
+src/data/contest_moves.h:520:        .comboStarterId = 0,
+src/data/contest_moves.h:528:        .comboStarterId = 0,
+src/data/contest_moves.h:536:        .comboStarterId = 0,
+src/data/contest_moves.h:544:        .comboStarterId = 0,
+src/data/contest_moves.h:552:        .comboStarterId = 0,
+src/data/contest_moves.h:560:        .comboStarterId = 0,
+src/data/contest_moves.h:568:        .comboStarterId = 0,
+src/data/contest_moves.h:576:        .comboStarterId = 0,
+src/data/contest_moves.h:584:        .comboStarterId = 0,
+src/data/contest_moves.h:592:        .comboStarterId = COMBO_STARTER_GROWTH,
+src/data/contest_moves.h:600:        .comboStarterId = 0,
+src/data/contest_moves.h:608:        .comboStarterId = 0,
+src/data/contest_moves.h:616:        .comboStarterId = 0,
+src/data/contest_moves.h:624:        .comboStarterId = 0,
+src/data/contest_moves.h:632:        .comboStarterId = 0,
+src/data/contest_moves.h:640:        .comboStarterId = 0,
+src/data/contest_moves.h:648:        .comboStarterId = COMBO_STARTER_STRING_SHOT,
+src/data/contest_moves.h:656:        .comboStarterId = COMBO_STARTER_DRAGON_RAGE,
+src/data/contest_moves.h:664:        .comboStarterId = 0,
+src/data/contest_moves.h:672:        .comboStarterId = 0,
+src/data/contest_moves.h:680:        .comboStarterId = 0,
+src/data/contest_moves.h:688:        .comboStarterId = 0,
+src/data/contest_moves.h:696:        .comboStarterId = 0,
+src/data/contest_moves.h:704:        .comboStarterId = COMBO_STARTER_ROCK_THROW,
+src/data/contest_moves.h:712:        .comboStarterId = COMBO_STARTER_EARTHQUAKE,
+src/data/contest_moves.h:720:        .comboStarterId = 0,
+src/data/contest_moves.h:728:        .comboStarterId = 0,
+src/data/contest_moves.h:736:        .comboStarterId = 0,
+src/data/contest_moves.h:744:        .comboStarterId = COMBO_STARTER_CONFUSION,
+src/data/contest_moves.h:752:        .comboStarterId = COMBO_STARTER_PSYCHIC,
+src/data/contest_moves.h:760:        .comboStarterId = COMBO_STARTER_HYPNOSIS,
+src/data/contest_moves.h:768:        .comboStarterId = 0,
+src/data/contest_moves.h:776:        .comboStarterId = 0,
+src/data/contest_moves.h:784:        .comboStarterId = 0,
+src/data/contest_moves.h:792:        .comboStarterId = COMBO_STARTER_RAGE,
+src/data/contest_moves.h:800:        .comboStarterId = 0,
+src/data/contest_moves.h:808:        .comboStarterId = 0,
+src/data/contest_moves.h:816:        .comboStarterId = 0,
+src/data/contest_moves.h:824:        .comboStarterId = 0,
+src/data/contest_moves.h:832:        .comboStarterId = COMBO_STARTER_DOUBLE_TEAM,
+src/data/contest_moves.h:840:        .comboStarterId = 0,
+src/data/contest_moves.h:848:        .comboStarterId = COMBO_STARTER_HARDEN,
+src/data/contest_moves.h:856:        .comboStarterId = 0,
+src/data/contest_moves.h:864:        .comboStarterId = 0,
+src/data/contest_moves.h:872:        .comboStarterId = 0,
+src/data/contest_moves.h:880:        .comboStarterId = 0,
+src/data/contest_moves.h:888:        .comboStarterId = COMBO_STARTER_DEFENSE_CURL,
+src/data/contest_moves.h:896:        .comboStarterId = 0,
+src/data/contest_moves.h:904:        .comboStarterId = 0,
+src/data/contest_moves.h:912:        .comboStarterId = 0,
+src/data/contest_moves.h:920:        .comboStarterId = 0,
+src/data/contest_moves.h:928:        .comboStarterId = COMBO_STARTER_FOCUS_ENERGY,
+src/data/contest_moves.h:936:        .comboStarterId = 0,
+src/data/contest_moves.h:944:        .comboStarterId = 0,
+src/data/contest_moves.h:952:        .comboStarterId = 0,
+src/data/contest_moves.h:960:        .comboStarterId = 0,
+src/data/contest_moves.h:968:        .comboStarterId = 0,
+src/data/contest_moves.h:976:        .comboStarterId = 0,
+src/data/contest_moves.h:984:        .comboStarterId = COMBO_STARTER_SMOG,
+src/data/contest_moves.h:992:        .comboStarterId = COMBO_STARTER_SLUDGE,
+src/data/contest_moves.h:1000:        .comboStarterId = COMBO_STARTER_BONE_CLUB,
+src/data/contest_moves.h:1008:        .comboStarterId = 0,
+src/data/contest_moves.h:1016:        .comboStarterId = 0,
+src/data/contest_moves.h:1024:        .comboStarterId = 0,
+src/data/contest_moves.h:1032:        .comboStarterId = 0,
+src/data/contest_moves.h:1040:        .comboStarterId = 0,
+src/data/contest_moves.h:1048:        .comboStarterId = 0,
+src/data/contest_moves.h:1056:        .comboStarterId = 0,
+src/data/contest_moves.h:1064:        .comboStarterId = 0,
+src/data/contest_moves.h:1072:        .comboStarterId = COMBO_STARTER_KINESIS,
+src/data/contest_moves.h:1080:        .comboStarterId = COMBO_STARTER_SOFT_BOILED,
+src/data/contest_moves.h:1088:        .comboStarterId = 0,
+src/data/contest_moves.h:1096:        .comboStarterId = 0,
+src/data/contest_moves.h:1104:        .comboStarterId = 0,
+src/data/contest_moves.h:1112:        .comboStarterId = 0,
+src/data/contest_moves.h:1120:        .comboStarterId = 0,
+src/data/contest_moves.h:1128:        .comboStarterId = 0,
+src/data/contest_moves.h:1136:        .comboStarterId = 0,
+src/data/contest_moves.h:1144:        .comboStarterId = 0,
+src/data/contest_moves.h:1152:        .comboStarterId = 0,
+src/data/contest_moves.h:1160:        .comboStarterId = 0,
+src/data/contest_moves.h:1168:        .comboStarterId = 0,
+src/data/contest_moves.h:1176:        .comboStarterId = 0,
+src/data/contest_moves.h:1184:        .comboStarterId = 0,
+src/data/contest_moves.h:1192:        .comboStarterId = 0,
+src/data/contest_moves.h:1200:        .comboStarterId = 0,
+src/data/contest_moves.h:1208:        .comboStarterId = 0,
+src/data/contest_moves.h:1216:        .comboStarterId = 0,
+src/data/contest_moves.h:1224:        .comboStarterId = 0,
+src/data/contest_moves.h:1232:        .comboStarterId = 0,
+src/data/contest_moves.h:1240:        .comboStarterId = COMBO_STARTER_BONEMERANG,
+src/data/contest_moves.h:1248:        .comboStarterId = COMBO_STARTER_REST,
+src/data/contest_moves.h:1256:        .comboStarterId = 0,
+src/data/contest_moves.h:1264:        .comboStarterId = 0,
+src/data/contest_moves.h:1272:        .comboStarterId = 0,
+src/data/contest_moves.h:1280:        .comboStarterId = 0,
+src/data/contest_moves.h:1288:        .comboStarterId = 0,
+src/data/contest_moves.h:1296:        .comboStarterId = 0,
+src/data/contest_moves.h:1304:        .comboStarterId = 0,
+src/data/contest_moves.h:1312:        .comboStarterId = 0,
+src/data/contest_moves.h:1320:        .comboStarterId = 0,
+src/data/contest_moves.h:1328:        .comboStarterId = 0,
+src/data/contest_moves.h:1336:        .comboStarterId = 0,
+src/data/contest_moves.h:1344:        .comboStarterId = 0,
+src/data/contest_moves.h:1352:        .comboStarterId = 0,
+src/data/contest_moves.h:1360:        .comboStarterId = COMBO_STARTER_MIND_READER,
+src/data/contest_moves.h:1368:        .comboStarterId = 0,
+src/data/contest_moves.h:1376:        .comboStarterId = 0,
+src/data/contest_moves.h:1384:        .comboStarterId = 0,
+src/data/contest_moves.h:1392:        .comboStarterId = COMBO_STARTER_CURSE,
+src/data/contest_moves.h:1400:        .comboStarterId = 0,
+src/data/contest_moves.h:1408:        .comboStarterId = 0,
+src/data/contest_moves.h:1416:        .comboStarterId = 0,
+src/data/contest_moves.h:1424:        .comboStarterId = 0,
+src/data/contest_moves.h:1432:        .comboStarterId = 0,
+src/data/contest_moves.h:1440:        .comboStarterId = 0,
+src/data/contest_moves.h:1448:        .comboStarterId = COMBO_STARTER_POWDER_SNOW,
+src/data/contest_moves.h:1456:        .comboStarterId = 0,
+src/data/contest_moves.h:1464:        .comboStarterId = 0,
+src/data/contest_moves.h:1472:        .comboStarterId = COMBO_STARTER_SCARY_FACE,
+src/data/contest_moves.h:1480:        .comboStarterId = 0,
+src/data/contest_moves.h:1488:        .comboStarterId = 0,
+src/data/contest_moves.h:1496:        .comboStarterId = COMBO_STARTER_BELLY_DRUM,
+src/data/contest_moves.h:1504:        .comboStarterId = COMBO_STARTER_SLUDGE_BOMB,
+src/data/contest_moves.h:1512:        .comboStarterId = COMBO_STARTER_MUD_SLAP,
+src/data/contest_moves.h:1520:        .comboStarterId = 0,
+src/data/contest_moves.h:1528:        .comboStarterId = 0,
+src/data/contest_moves.h:1536:        .comboStarterId = 0,
+src/data/contest_moves.h:1544:        .comboStarterId = 0,
+src/data/contest_moves.h:1552:        .comboStarterId = 0,
+src/data/contest_moves.h:1560:        .comboStarterId = 0,
+src/data/contest_moves.h:1568:        .comboStarterId = 0,
+src/data/contest_moves.h:1576:        .comboStarterId = 0,
+src/data/contest_moves.h:1584:        .comboStarterId = COMBO_STARTER_BONE_RUSH,
+src/data/contest_moves.h:1592:        .comboStarterId = COMBO_STARTER_LOCK_ON,
+src/data/contest_moves.h:1600:        .comboStarterId = 0,
+src/data/contest_moves.h:1608:        .comboStarterId = COMBO_STARTER_SANDSTORM,
+src/data/contest_moves.h:1616:        .comboStarterId = 0,
+src/data/contest_moves.h:1624:        .comboStarterId = COMBO_STARTER_ENDURE,
+src/data/contest_moves.h:1632:        .comboStarterId = COMBO_STARTER_CHARM,
+src/data/contest_moves.h:1640:        .comboStarterId = 0,
+src/data/contest_moves.h:1648:        .comboStarterId = 0,
+src/data/contest_moves.h:1656:        .comboStarterId = 0,
+src/data/contest_moves.h:1664:        .comboStarterId = 0,
+src/data/contest_moves.h:1672:        .comboStarterId = 0,
+src/data/contest_moves.h:1680:        .comboStarterId = 0,
+src/data/contest_moves.h:1688:        .comboStarterId = 0,
+src/data/contest_moves.h:1696:        .comboStarterId = COMBO_STARTER_MEAN_LOOK,
+src/data/contest_moves.h:1704:        .comboStarterId = 0,
+src/data/contest_moves.h:1712:        .comboStarterId = 0,
+src/data/contest_moves.h:1720:        .comboStarterId = 0,
+src/data/contest_moves.h:1728:        .comboStarterId = 0,
+src/data/contest_moves.h:1736:        .comboStarterId = 0,
+src/data/contest_moves.h:1744:        .comboStarterId = 0,
+src/data/contest_moves.h:1752:        .comboStarterId = 0,
+src/data/contest_moves.h:1760:        .comboStarterId = 0,
+src/data/contest_moves.h:1768:        .comboStarterId = 0,
+src/data/contest_moves.h:1776:        .comboStarterId = 0,
+src/data/contest_moves.h:1784:        .comboStarterId = 0,
+src/data/contest_moves.h:1792:        .comboStarterId = 0,
+src/data/contest_moves.h:1800:        .comboStarterId = COMBO_STARTER_DRAGON_BREATH,
+src/data/contest_moves.h:1808:        .comboStarterId = 0,
+src/data/contest_moves.h:1816:        .comboStarterId = 0,
+src/data/contest_moves.h:1824:        .comboStarterId = 0,
+src/data/contest_moves.h:1832:        .comboStarterId = 0,
+src/data/contest_moves.h:1840:        .comboStarterId = COMBO_STARTER_SWEET_SCENT,
+src/data/contest_moves.h:1848:        .comboStarterId = 0,
+src/data/contest_moves.h:1856:        .comboStarterId = 0,
+src/data/contest_moves.h:1864:        .comboStarterId = 0,
+src/data/contest_moves.h:1872:        .comboStarterId = 0,
+src/data/contest_moves.h:1880:        .comboStarterId = 0,
+src/data/contest_moves.h:1888:        .comboStarterId = 0,
+src/data/contest_moves.h:1896:        .comboStarterId = 0,
+src/data/contest_moves.h:1904:        .comboStarterId = 0,
+src/data/contest_moves.h:1912:        .comboStarterId = 0,
+src/data/contest_moves.h:1920:        .comboStarterId = COMBO_STARTER_RAIN_DANCE,
+src/data/contest_moves.h:1928:        .comboStarterId = COMBO_STARTER_SUNNY_DAY,
+src/data/contest_moves.h:1936:        .comboStarterId = 0,
+src/data/contest_moves.h:1944:        .comboStarterId = 0,
+src/data/contest_moves.h:1952:        .comboStarterId = 0,
+src/data/contest_moves.h:1960:        .comboStarterId = 0,
+src/data/contest_moves.h:1968:        .comboStarterId = 0,
+src/data/contest_moves.h:1976:        .comboStarterId = 0,
+src/data/contest_moves.h:1984:        .comboStarterId = 0,
+src/data/contest_moves.h:1992:        .comboStarterId = 0,
+src/data/contest_moves.h:2000:        .comboStarterId = 0,
+src/data/contest_moves.h:2008:        .comboStarterId = 0,
+src/data/contest_moves.h:2016:        .comboStarterId = COMBO_STARTER_FAKE_OUT,
+src/data/contest_moves.h:2024:        .comboStarterId = 0,
+src/data/contest_moves.h:2032:        .comboStarterId = COMBO_STARTER_STOCKPILE,
+src/data/contest_moves.h:2040:        .comboStarterId = 0,
+src/data/contest_moves.h:2048:        .comboStarterId = 0,
+src/data/contest_moves.h:2056:        .comboStarterId = 0,
+src/data/contest_moves.h:2064:        .comboStarterId = COMBO_STARTER_HAIL,
+src/data/contest_moves.h:2072:        .comboStarterId = 0,
+src/data/contest_moves.h:2080:        .comboStarterId = 0,
+src/data/contest_moves.h:2088:        .comboStarterId = 0,
+src/data/contest_moves.h:2096:        .comboStarterId = 0,
+src/data/contest_moves.h:2104:        .comboStarterId = 0,
+src/data/contest_moves.h:2112:        .comboStarterId = 0,
+src/data/contest_moves.h:2120:        .comboStarterId = 0,
+src/data/contest_moves.h:2128:        .comboStarterId = 0,
+src/data/contest_moves.h:2136:        .comboStarterId = 0,
+src/data/contest_moves.h:2144:        .comboStarterId = COMBO_STARTER_CHARGE,
+src/data/contest_moves.h:2152:        .comboStarterId = COMBO_STARTER_TAUNT,
+src/data/contest_moves.h:2160:        .comboStarterId = 0,
+src/data/contest_moves.h:2168:        .comboStarterId = 0,
+src/data/contest_moves.h:2176:        .comboStarterId = 0,
+src/data/contest_moves.h:2184:        .comboStarterId = 0,
+src/data/contest_moves.h:2192:        .comboStarterId = 0,
+src/data/contest_moves.h:2200:        .comboStarterId = 0,
+src/data/contest_moves.h:2208:        .comboStarterId = 0,
+src/data/contest_moves.h:2216:        .comboStarterId = 0,
+src/data/contest_moves.h:2224:        .comboStarterId = 0,
+src/data/contest_moves.h:2232:        .comboStarterId = 0,
+src/data/contest_moves.h:2240:        .comboStarterId = 0,
+src/data/contest_moves.h:2248:        .comboStarterId = COMBO_STARTER_YAWN,
+src/data/contest_moves.h:2256:        .comboStarterId = 0,
+src/data/contest_moves.h:2264:        .comboStarterId = 0,
+src/data/contest_moves.h:2272:        .comboStarterId = 0,
+src/data/contest_moves.h:2280:        .comboStarterId = 0,
+src/data/contest_moves.h:2288:        .comboStarterId = 0,
+src/data/contest_moves.h:2296:        .comboStarterId = 0,
+src/data/contest_moves.h:2304:        .comboStarterId = 0,
+src/data/contest_moves.h:2312:        .comboStarterId = 0,
+src/data/contest_moves.h:2320:        .comboStarterId = 0,
+src/data/contest_moves.h:2328:        .comboStarterId = COMBO_STARTER_DIVE,
+src/data/contest_moves.h:2336:        .comboStarterId = 0,
+src/data/contest_moves.h:2344:        .comboStarterId = 0,
+src/data/contest_moves.h:2352:        .comboStarterId = 0,
+src/data/contest_moves.h:2360:        .comboStarterId = 0,
+src/data/contest_moves.h:2368:        .comboStarterId = 0,
+src/data/contest_moves.h:2376:        .comboStarterId = 0,
+src/data/contest_moves.h:2384:        .comboStarterId = 0,
+src/data/contest_moves.h:2392:        .comboStarterId = 0,
+src/data/contest_moves.h:2400:        .comboStarterId = COMBO_STARTER_MUD_SPORT,
+src/data/contest_moves.h:2408:        .comboStarterId = 0,
+src/data/contest_moves.h:2416:        .comboStarterId = 0,
+src/data/contest_moves.h:2424:        .comboStarterId = 0,
+src/data/contest_moves.h:2432:        .comboStarterId = 0,
+src/data/contest_moves.h:2440:        .comboStarterId = 0,
+src/data/contest_moves.h:2448:        .comboStarterId = 0,
+src/data/contest_moves.h:2456:        .comboStarterId = 0,
+src/data/contest_moves.h:2464:        .comboStarterId = 0,
+src/data/contest_moves.h:2472:        .comboStarterId = 0,
+src/data/contest_moves.h:2480:        .comboStarterId = 0,
+src/data/contest_moves.h:2488:        .comboStarterId = 0,
+src/data/contest_moves.h:2496:        .comboStarterId = 0,
+src/data/contest_moves.h:2504:        .comboStarterId = 0,
+src/data/contest_moves.h:2512:        .comboStarterId = 0,
+src/data/contest_moves.h:2520:        .comboStarterId = 0,
+src/data/contest_moves.h:2528:        .comboStarterId = 0,
+src/data/contest_moves.h:2536:        .comboStarterId = 0,
+src/data/contest_moves.h:2544:        .comboStarterId = 0,
+src/data/contest_moves.h:2552:        .comboStarterId = COMBO_STARTER_METAL_SOUND,
+src/data/contest_moves.h:2560:        .comboStarterId = 0,
+src/data/contest_moves.h:2568:        .comboStarterId = 0,
+src/data/contest_moves.h:2576:        .comboStarterId = 0,
+src/data/contest_moves.h:2584:        .comboStarterId = 0,
+src/data/contest_moves.h:2592:        .comboStarterId = 0,
+src/data/contest_moves.h:2600:        .comboStarterId = 0,
+src/data/contest_moves.h:2608:        .comboStarterId = 0,
+src/data/contest_moves.h:2616:        .comboStarterId = 0,
+src/data/contest_moves.h:2624:        .comboStarterId = 0,
+src/data/contest_moves.h:2632:        .comboStarterId = 0,
+src/data/contest_moves.h:2640:        .comboStarterId = 0,
+src/data/contest_moves.h:2648:        .comboStarterId = 0,
+src/data/contest_moves.h:2656:        .comboStarterId = 0,
+src/data/contest_moves.h:2664:        .comboStarterId = 0,
+src/data/contest_moves.h:2672:        .comboStarterId = 0,
+src/data/contest_moves.h:2680:        .comboStarterId = 0,
+src/data/contest_moves.h:2688:        .comboStarterId = 0,
+src/data/contest_moves.h:2696:        .comboStarterId = 0,
+src/data/contest_moves.h:2704:        .comboStarterId = 0,
+src/data/contest_moves.h:2712:        .comboStarterId = 0,
+src/data/contest_moves.h:2720:        .comboStarterId = 0,
+src/data/contest_moves.h:2728:        .comboStarterId = 0,
+src/data/contest_moves.h:2736:        .comboStarterId = 0,
+src/data/contest_moves.h:2744:        .comboStarterId = 0,
+src/data/contest_moves.h:2752:        .comboStarterId = 0,
+src/data/contest_moves.h:2760:        .comboStarterId = 0,
+src/data/contest_moves.h:2768:        .comboStarterId = COMBO_STARTER_WATER_SPORT,
+src/data/contest_moves.h:2776:        .comboStarterId = COMBO_STARTER_CALM_MIND,
+src/data/contest_moves.h:2784:        .comboStarterId = 0,
+src/data/contest_moves.h:2792:        .comboStarterId = COMBO_STARTER_DRAGON_DANCE,
+src/data/contest_moves.h:2800:        .comboStarterId = 0,
+src/data/contest_moves.h:2808:        .comboStarterId = 0,
+src/data/contest_moves.h:2816:        .comboStarterId = 0,
+src/data/contest_moves.h:2824:        .comboStarterId = 0,
+src/data/contest_moves.h:2832:        .comboStarterId = 0,
+src/data/contest_moves.h:3129:// A lookup table with TRUE for each combo starter ID and FALSE for ID 0,
+src/data/contest_moves.h:3130:// which means "not a combo starter move".
+src/data/contest_moves.h:3131:const bool8 gComboStarterLookupTable[] =
+src/data/contest_text_tables.h:273:// All of the moves except Conversion are combo starters, so this may have
+src/data/contest_text_tables.h:274:// been an early list of combo starters.
+src/data/easy_chat/easy_chat_group_pokemon.h:113:    SPECIES_MUDKIP,
+src/data/easy_chat/easy_chat_group_pokemon.h:178:    SPECIES_TORCHIC,
+src/data/easy_chat/easy_chat_group_pokemon.h:181:    SPECIES_TREECKO,
+src/data/pokemon/cry_ids.h:3:    [SPECIES_TREECKO - 277] = 273,
+src/data/pokemon/cry_ids.h:6:    [SPECIES_TORCHIC - 277] = 270,
+src/data/pokemon/cry_ids.h:9:    [SPECIES_MUDKIP - 277] = 276,
+src/data/pokemon/evolution.h:125:    [SPECIES_TREECKO]    = {{EVO_LEVEL, 16, SPECIES_GROVYLE}},
+src/data/pokemon/evolution.h:127:    [SPECIES_TORCHIC]    = {{EVO_LEVEL, 16, SPECIES_COMBUSKEN}},
+src/data/pokemon/evolution.h:129:    [SPECIES_MUDKIP]     = {{EVO_LEVEL, 16, SPECIES_MARSHTOMP}},
+src/data/pokemon/level_up_learnset_pointers.h:280:    [SPECIES_TREECKO] = sTreeckoLevelUpLearnset,
+src/data/pokemon/level_up_learnset_pointers.h:283:    [SPECIES_TORCHIC] = sTorchicLevelUpLearnset,
+src/data/pokemon/level_up_learnset_pointers.h:286:    [SPECIES_MUDKIP] = sMudkipLevelUpLearnset,
+src/data/pokemon/species_info.h:7619:    [SPECIES_TREECKO] =
+src/data/pokemon/species_info.h:7709:    [SPECIES_TORCHIC] =
+src/data/pokemon/species_info.h:7799:    [SPECIES_MUDKIP] =
+src/data/pokemon/tmhm_learnsets.h:6638:    [SPECIES_TREECKO] = { .learnset = {
+src/data/pokemon/tmhm_learnsets.h:6726:    [SPECIES_TORCHIC] = { .learnset = {
+src/data/pokemon/tmhm_learnsets.h:6804:    [SPECIES_MUDKIP] = { .learnset = {
+src/data/pokemon/tutor_learnsets.h:3656:    [SPECIES_TREECKO]          = (TUTOR(MOVE_MEGA_PUNCH)
+src/data/pokemon/tutor_learnsets.h:3713:    [SPECIES_TORCHIC]          = (TUTOR(MOVE_MEGA_PUNCH)
+src/data/pokemon/tutor_learnsets.h:3772:    [SPECIES_MUDKIP]           = (TUTOR(MOVE_BODY_SLAM)
+src/data/pokemon_graphics/back_pic_coordinates.h:284:    [SPECIES_TREECKO]     = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  6 },
+src/data/pokemon_graphics/back_pic_coordinates.h:287:    [SPECIES_TORCHIC]     = { .size = MON_COORDS_SIZE(48, 56), .y_offset =  5 },
+src/data/pokemon_graphics/back_pic_coordinates.h:290:    [SPECIES_MUDKIP]      = { .size = MON_COORDS_SIZE(56, 56), .y_offset =  5 },
+src/data/pokemon_graphics/footprint_table.h:280:    [SPECIES_TREECKO] = gMonFootprint_Treecko,
+src/data/pokemon_graphics/footprint_table.h:283:    [SPECIES_TORCHIC] = gMonFootprint_Torchic,
+src/data/pokemon_graphics/footprint_table.h:286:    [SPECIES_MUDKIP] = gMonFootprint_Mudkip,
+src/data/pokemon_graphics/front_pic_anims.h:5534:    [SPECIES_TREECKO]     = sAnims_Treecko,
+src/data/pokemon_graphics/front_pic_anims.h:5537:    [SPECIES_TORCHIC]     = sAnims_Torchic,
+src/data/pokemon_graphics/front_pic_anims.h:5540:    [SPECIES_MUDKIP]      = sAnims_Mudkip,
+src/data/pokemon_graphics/front_pic_coordinates.h:284:    [SPECIES_TREECKO]     = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  8 },
+src/data/pokemon_graphics/front_pic_coordinates.h:287:    [SPECIES_TORCHIC]     = { .size = MON_COORDS_SIZE(40, 48), .y_offset =  8 },
+src/data/pokemon_graphics/front_pic_coordinates.h:290:    [SPECIES_MUDKIP]      = { .size = MON_COORDS_SIZE(40, 48), .y_offset = 12 },
+src/data/pokemon_graphics/unknown_table.h:281:    [SPECIES_TREECKO]     = 0x886,
+src/data/pokemon_graphics/unknown_table.h:284:    [SPECIES_TORCHIC]     = 0x88,
+src/data/pokemon_graphics/unknown_table.h:287:    [SPECIES_MUDKIP]      = 0x886,
+src/data/pokemon_graphics/unused_anims.h:1661:    [SPECIES_TREECKO] = sUnusedAnims_Treecko,
+src/data/pokemon_graphics/unused_anims.h:1664:    [SPECIES_TORCHIC] = sUnusedAnims_Torchic,
+src/data/pokemon_graphics/unused_anims.h:1667:    [SPECIES_MUDKIP] = sUnusedAnims_Mudkip,
+src/data/text/species_names.h:279:    [SPECIES_TREECKO] = _("TREECKO"),
+src/data/text/species_names.h:282:    [SPECIES_TORCHIC] = _("TORCHIC"),
+src/data/text/species_names.h:285:    [SPECIES_MUDKIP] = _("MUDKIP"),
+src/data/trainer_parties.h:6788:    .species = SPECIES_TREECKO,
+src/data/trainer_parties.h:6832:    .species = SPECIES_TORCHIC,
+src/data/trainer_parties.h:6876:    .species = SPECIES_MUDKIP,
+src/data/trainer_parties.h:6920:    .species = SPECIES_TREECKO,
+src/data/trainer_parties.h:6964:    .species = SPECIES_TORCHIC,
+src/data/trainer_parties.h:7008:    .species = SPECIES_MUDKIP,
+src/data/trainer_parties.h:7845:    .species = SPECIES_TORCHIC,
+src/data/trainer_parties.h:7858:    .species = SPECIES_TREECKO,
+src/data/trainer_parties.h:7941:    .species = SPECIES_MUDKIP,
+src/data/trainer_parties.h:7954:    .species = SPECIES_TREECKO,
+src/data/trainer_parties.h:10284:    .species = SPECIES_TORCHIC,
+src/data/trainer_parties.h:10297:    .species = SPECIES_MUDKIP,
+src/field_specials.c:40:#include "starter_choose.h"
+src/field_specials.c:1437:bool8 IsStarterInParty(void)
+src/field_specials.c:1440:    u16 starter = GetStarterPokemon(VarGet(VAR_STARTER_MON));
+src/field_specials.c:1444:        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) == starter)
+src/pokemon.c:1658:    [SPECIES_TREECKO - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
+src/pokemon.c:1661:    [SPECIES_TORCHIC - 1]     = ANIM_H_STRETCH,
+src/pokemon.c:1664:    [SPECIES_MUDKIP - 1]      = ANIM_CIRCULAR_STRETCH_TWICE,
+src/pokemon.c:5679:    if (species < SPECIES_TREECKO - 1)
+src/pokemon.c:5682:    return gSpeciesIdToCryId[species - (SPECIES_TREECKO - 1)];
+src/pokemon_animation.c:466:    [SPECIES_TREECKO]    = BACK_ANIM_CONCAVE_ARC_LARGE,
+src/pokemon_animation.c:469:    [SPECIES_TORCHIC]    = BACK_ANIM_CONCAVE_ARC_SMALL,
+src/pokemon_animation.c:472:    [SPECIES_MUDKIP]     = BACK_ANIM_H_SLIDE,
+src/pokemon_icon.c:303:    [SPECIES_TREECKO] = gMonIcon_Treecko,
+src/pokemon_icon.c:306:    [SPECIES_TORCHIC] = gMonIcon_Torchic,
+src/pokemon_icon.c:309:    [SPECIES_MUDKIP] = gMonIcon_Mudkip,
+src/pokemon_icon.c:747:    [SPECIES_TREECKO] = 1,
+src/pokemon_icon.c:750:    [SPECIES_TORCHIC] = 0,
+src/pokemon_icon.c:753:    [SPECIES_MUDKIP] = 0,
+src/pokemon_jump.c:488:    { .species = SPECIES_TREECKO,    .jumpType = JUMP_TYPE_FAST, },
+src/pokemon_jump.c:489:    { .species = SPECIES_TORCHIC,    .jumpType = JUMP_TYPE_SLOW, },
+src/pokemon_jump.c:490:    { .species = SPECIES_MUDKIP,     .jumpType = JUMP_TYPE_NORMAL, },
+src/save_failed_screen.c:13:#include "starter_choose.h"
+src/starter_choose.c:16:#include "starter_choose.h"
+src/starter_choose.c:29:// Position of the sprite of the selected starter Pokémon
+src/starter_choose.c:36:static void CB2_StarterChoose(void);
+src/starter_choose.c:37:static void ClearStarterLabel(void);
+src/starter_choose.c:38:static void Task_StarterChoose(u8 taskId);
+src/starter_choose.c:39:static void Task_HandleStarterChooseInput(u8 taskId);
+src/starter_choose.c:40:static void Task_WaitForStarterSprite(u8 taskId);
+src/starter_choose.c:41:static void Task_AskConfirmStarter(u8 taskId);
+src/starter_choose.c:42:static void Task_HandleConfirmStarterInput(u8 taskId);
+src/starter_choose.c:43:static void Task_DeclineStarter(u8 taskId);
+src/starter_choose.c:44:static void Task_MoveStarterChooseCursor(u8 taskId);
+src/starter_choose.c:45:static void Task_CreateStarterLabel(u8 taskId);
+src/starter_choose.c:46:static void CreateStarterPokemonLabel(u8 selection);
+src/starter_choose.c:50:static void SpriteCB_StarterPokemon(struct Sprite *sprite);
+src/starter_choose.c:52:static u16 sStarterLabelWindowId;
+src/starter_choose.c:54:const u16 gBirchBagGrass_Pal[] = INCBIN_U16("graphics/starter_choose/tiles.gbapal");
+src/starter_choose.c:55:static const u16 sPokeballSelection_Pal[] = INCBIN_U16("graphics/starter_choose/pokeball_selection.gbapal");
+src/starter_choose.c:56:static const u16 sStarterCircle_Pal[] = INCBIN_U16("graphics/starter_choose/starter_circle.gbapal");
+src/starter_choose.c:57:const u32 gBirchBagTilemap[] = INCBIN_U32("graphics/starter_choose/birch_bag.bin.lz");
+src/starter_choose.c:58:const u32 gBirchGrassTilemap[] = INCBIN_U32("graphics/starter_choose/birch_grass.bin.lz");
+src/starter_choose.c:59:const u32 gBirchBagGrass_Gfx[] = INCBIN_U32("graphics/starter_choose/tiles.4bpp.lz");
+src/starter_choose.c:60:const u32 gPokeballSelection_Gfx[] = INCBIN_U32("graphics/starter_choose/pokeball_selection.4bpp.lz");
+src/starter_choose.c:61:static const u32 sStarterCircle_Gfx[] = INCBIN_U32("graphics/starter_choose/starter_circle.4bpp.lz");
+src/starter_choose.c:77:static const struct WindowTemplate sWindowTemplate_ConfirmStarter =
+src/starter_choose.c:88:static const struct WindowTemplate sWindowTemplate_StarterLabel =
+src/starter_choose.c:106:static const u8 sStarterLabelCoords[STARTER_MON_COUNT][2] =
+src/starter_choose.c:113:static const u16 sStarterMon[STARTER_MON_COUNT] =
+src/starter_choose.c:115:    SPECIES_TREECKO,
+src/starter_choose.c:116:    SPECIES_TORCHIC,
+src/starter_choose.c:117:    SPECIES_MUDKIP,
+src/starter_choose.c:187:static const struct OamData sOam_StarterCircle =
+src/starter_choose.c:245:static const union AnimCmd sAnim_StarterCircle[] =
+src/starter_choose.c:262:static const union AnimCmd *const sAnims_StarterCircle[] =
+src/starter_choose.c:264:    sAnim_StarterCircle,
+src/starter_choose.c:267:static const union AffineAnimCmd sAffineAnim_StarterPokemon[] =
+src/starter_choose.c:274:static const union AffineAnimCmd sAffineAnim_StarterCircle[] =
+src/starter_choose.c:281:static const union AffineAnimCmd *const sAffineAnims_StarterPokemon = {sAffineAnim_StarterPokemon};
+src/starter_choose.c:282:static const union AffineAnimCmd *const sAffineAnims_StarterCircle[] = {sAffineAnim_StarterCircle};
+src/starter_choose.c:294:static const struct CompressedSpriteSheet sSpriteSheet_StarterCircle[] =
+src/starter_choose.c:297:        .data = sStarterCircle_Gfx,
+src/starter_choose.c:304:static const struct SpritePalette sSpritePalettes_StarterChoose[] =
+src/starter_choose.c:311:        .data = sStarterCircle_Pal,
+src/starter_choose.c:339:static const struct SpriteTemplate sSpriteTemplate_StarterCircle =
+src/starter_choose.c:343:    .oam = &sOam_StarterCircle,
+src/starter_choose.c:344:    .anims = sAnims_StarterCircle,
+src/starter_choose.c:346:    .affineAnims = sAffineAnims_StarterCircle,
+src/starter_choose.c:347:    .callback = SpriteCB_StarterPokemon
+src/starter_choose.c:351:u16 GetStarterPokemon(u16 chosenStarterId)
+src/starter_choose.c:353:    if (chosenStarterId > STARTER_MON_COUNT)
+src/starter_choose.c:354:        chosenStarterId = 0;
+src/starter_choose.c:355:    return sStarterMon[chosenStarterId];
+src/starter_choose.c:358:static void VblankCB_StarterChoose(void)
+src/starter_choose.c:365:// Data for Task_StarterChoose
+src/starter_choose.c:366:#define tStarterSelection   data[0]
+src/starter_choose.c:374:void CB2_ChooseStarter(void)
+src/starter_choose.c:421:    LoadCompressedSpriteSheet(&sSpriteSheet_StarterCircle[0]);
+src/starter_choose.c:422:    LoadSpritePalettes(sSpritePalettes_StarterChoose);
+src/starter_choose.c:426:    SetVBlankCallback(VblankCB_StarterChoose);
+src/starter_choose.c:427:    SetMainCallback2(CB2_StarterChoose);
+src/starter_choose.c:442:    taskId = CreateTask(Task_StarterChoose, 0);
+src/starter_choose.c:443:    gTasks[taskId].tStarterSelection = 1;
+src/starter_choose.c:462:    sStarterLabelWindowId = WINDOW_NONE;
+src/starter_choose.c:465:static void CB2_StarterChoose(void)
+src/starter_choose.c:474:static void Task_StarterChoose(u8 taskId)
+src/starter_choose.c:476:    CreateStarterPokemonLabel(gTasks[taskId].tStarterSelection);
+src/starter_choose.c:481:    gTasks[taskId].func = Task_HandleStarterChooseInput;
+src/starter_choose.c:484:static void Task_HandleStarterChooseInput(u8 taskId)
+src/starter_choose.c:486:    u8 selection = gTasks[taskId].tStarterSelection;
+src/starter_choose.c:492:        ClearStarterLabel();
+src/starter_choose.c:495:        spriteId = CreateSprite(&sSpriteTemplate_StarterCircle, sPokeballCoords[selection][0], sPokeballCoords[selection][1], 1);
+src/starter_choose.c:499:        spriteId = CreatePokemonFrontSprite(GetStarterPokemon(gTasks[taskId].tStarterSelection), sPokeballCoords[selection][0], sPokeballCoords[selection][1]);
+src/starter_choose.c:500:        gSprites[spriteId].affineAnims = &sAffineAnims_StarterPokemon;
+src/starter_choose.c:501:        gSprites[spriteId].callback = SpriteCB_StarterPokemon;
+src/starter_choose.c:504:        gTasks[taskId].func = Task_WaitForStarterSprite;
+src/starter_choose.c:508:        gTasks[taskId].tStarterSelection--;
+src/starter_choose.c:509:        gTasks[taskId].func = Task_MoveStarterChooseCursor;
+src/starter_choose.c:513:        gTasks[taskId].tStarterSelection++;
+src/starter_choose.c:514:        gTasks[taskId].func = Task_MoveStarterChooseCursor;
+src/starter_choose.c:518:static void Task_WaitForStarterSprite(u8 taskId)
+src/starter_choose.c:524:        gTasks[taskId].func = Task_AskConfirmStarter;
+src/starter_choose.c:528:static void Task_AskConfirmStarter(u8 taskId)
+src/starter_choose.c:530:    PlayCry_Normal(GetStarterPokemon(gTasks[taskId].tStarterSelection), 0);
+src/starter_choose.c:532:    AddTextPrinterParameterized(0, FONT_NORMAL, gText_ConfirmStarterChoice, 0, 1, 0, NULL);
+src/starter_choose.c:534:    CreateYesNoMenu(&sWindowTemplate_ConfirmStarter, 0x2A8, 0xD, 0);
+src/starter_choose.c:535:    gTasks[taskId].func = Task_HandleConfirmStarterInput;
+src/starter_choose.c:538:static void Task_HandleConfirmStarterInput(u8 taskId)
+src/starter_choose.c:545:        // Return the starter choice and exit.
+src/starter_choose.c:546:        gSpecialVar_Result = gTasks[taskId].tStarterSelection;
+src/starter_choose.c:560:        gTasks[taskId].func = Task_DeclineStarter;
+src/starter_choose.c:565:static void Task_DeclineStarter(u8 taskId)
+src/starter_choose.c:567:    gTasks[taskId].func = Task_StarterChoose;
+src/starter_choose.c:570:static void CreateStarterPokemonLabel(u8 selection)
+src/starter_choose.c:578:    u16 species = GetStarterPokemon(selection);
+src/starter_choose.c:582:    winTemplate = sWindowTemplate_StarterLabel;
+src/starter_choose.c:583:    winTemplate.tilemapLeft = sStarterLabelCoords[selection][0];
+src/starter_choose.c:584:    winTemplate.tilemapTop = sStarterLabelCoords[selection][1];
+src/starter_choose.c:586:    sStarterLabelWindowId = AddWindow(&winTemplate);
+src/starter_choose.c:587:    FillWindowPixelBuffer(sStarterLabelWindowId, PIXEL_FILL(0));
+src/starter_choose.c:590:    AddTextPrinterParameterized3(sStarterLabelWindowId, FONT_NARROW, width, 1, sTextColors, 0, categoryText);
+src/starter_choose.c:593:    AddTextPrinterParameterized3(sStarterLabelWindowId, FONT_NORMAL, width, 17, sTextColors, 0, speciesName);
+src/starter_choose.c:595:    PutWindowTilemap(sStarterLabelWindowId);
+src/starter_choose.c:598:    labelLeft = sStarterLabelCoords[selection][0] * 8 - 4;
+src/starter_choose.c:599:    labelRight = (sStarterLabelCoords[selection][0] + 13) * 8 + 4;
+src/starter_choose.c:600:    labelTop = sStarterLabelCoords[selection][1] * 8;
+src/starter_choose.c:601:    labelBottom = (sStarterLabelCoords[selection][1] + 4) * 8;
+src/starter_choose.c:606:static void ClearStarterLabel(void)
+src/starter_choose.c:608:    FillWindowPixelBuffer(sStarterLabelWindowId, PIXEL_FILL(0));
+src/starter_choose.c:609:    ClearWindowTilemap(sStarterLabelWindowId);
+src/starter_choose.c:610:    RemoveWindow(sStarterLabelWindowId);
+src/starter_choose.c:611:    sStarterLabelWindowId = WINDOW_NONE;
+src/starter_choose.c:617:static void Task_MoveStarterChooseCursor(u8 taskId)
+src/starter_choose.c:619:    ClearStarterLabel();
+src/starter_choose.c:620:    gTasks[taskId].func = Task_CreateStarterLabel;
+src/starter_choose.c:623:static void Task_CreateStarterLabel(u8 taskId)
+src/starter_choose.c:625:    CreateStarterPokemonLabel(gTasks[taskId].tStarterSelection);
+src/starter_choose.c:626:    gTasks[taskId].func = Task_HandleStarterChooseInput;
+src/starter_choose.c:641:    sprite->x = sCursorCoords[gTasks[sprite->data[0]].tStarterSelection][0];
+src/starter_choose.c:642:    sprite->y = sCursorCoords[gTasks[sprite->data[0]].tStarterSelection][1];
+src/starter_choose.c:650:    if (gTasks[sprite->sTaskId].tStarterSelection == sprite->sBallId)
+src/starter_choose.c:656:static void SpriteCB_StarterPokemon(struct Sprite *sprite)
+src/strings.c:178:const u8 gText_ConfirmStarterChoice[] = _("Do you choose this POKéMON?");
+sym_bss.txt:41:	.include "src/starter_choose.o"

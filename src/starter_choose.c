@@ -24,6 +24,7 @@
 #include "constants/songs.h"
 #include "constants/rgb.h"
 
+
 #define STARTER_MON_COUNT   3
 
 // Position of the sprite of the selected starter Pokémon
@@ -348,11 +349,24 @@ static const struct SpriteTemplate sSpriteTemplate_StarterCircle =
 };
 
 // .text
+
+/*
 u16 GetStarterPokemon(u16 chosenStarterId)
 {
     if (chosenStarterId > STARTER_MON_COUNT)
         chosenStarterId = 0;
     return sStarterMon[chosenStarterId];
+}
+    */
+
+u16 GetStarterPokemon(u16 chosenStarterId)
+{
+    // Example override: Always Pikachu
+    u16 forcedSpecies = SPECIES_PIKACHU;
+
+  
+
+    return forcedSpecies;
 }
 
 static void VblankCB_StarterChoose(void)
