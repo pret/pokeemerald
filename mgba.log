@@ -1,0 +1,5 @@
+QOpenGLContext::swapBuffers() called with non-exposed window, behavior is undefined
+QOpenGLContext::swapBuffers() called with non-exposed window, behavior is undefined
+QOpenGLContext::swapBuffers() called with non-exposed window, behavior is undefined
+QOpenGLContext::swapBuffers() called with non-exposed window, behavior is undefined
+Cannot make QOpenGLContext current in a different thread

@@ -1,0 +1,91 @@
+diff --git a/include/global.h b/include/global.h
+index 1234567..89abcde 100644
+--- a/include/global.h
++++ b/include/global.h
+@@
+ #include "gba/types.h"
+ #include "gba/io_reg.h"
+ #include "gba/keys.h"
++
++// --- mGBA debug logger ---
++#include "mgba.h"
++
++#ifndef DEBUG_PRINT
++#define DEBUG_PRINT(fmt, ...) do { \
++    MgbaPrintf(MGBA_LOG_INFO, fmt, ##__VA_ARGS__); \
++} while (0)
++#endif
+diff --git a/include/mgba.h b/include/mgba.h
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/include/mgba.h
+@@
++#pragma once
++
++enum MgbaLogLevel {
++    MGBA_LOG_FATAL,
++    MGBA_LOG_ERROR,
++    MGBA_LOG_WARN,
++    MGBA_LOG_INFO,
++    MGBA_LOG_DEBUG,
++    MGBA_LOG_STUB,
++};
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++void MgbaOpen(void);
++int MgbaPrintf(enum MgbaLogLevel level, const char *fmt, ...);
++
++#ifdef __cplusplus
++}
++#endif
+diff --git a/src/mgba.c b/src/mgba.c
+new file mode 100644
+index 0000000..2222222
+--- /dev/null
++++ b/src/mgba.c
+@@
++#include "gba/gba.h"
++#include "mgba.h"
++#include <stdarg.h>
++#include <stdio.h>
++
++#define REG_DEBUG_ENABLE  (*(vu16 *)0x4FFF780)
++#define REG_DEBUG_FLAGS   (*(vu16 *)0x4FFF700)
++#define REG_DEBUG_STRING  ((char *)0x4FFF600)
++
++void MgbaOpen(void) {
++    REG_DEBUG_ENABLE = 0xC0DE;
++}
++
++int MgbaPrintf(enum MgbaLogLevel level, const char *fmt, ...) {
++    if (!REG_DEBUG_ENABLE)
++        return 0;
++
++    va_list args;
++    va_start(args, fmt);
++    int ret = vsnprintf(REG_DEBUG_STRING, 256, fmt, args);
++    va_end(args);
++
++    REG_DEBUG_FLAGS = (1 << level);
++    return ret;
++}
+diff --git a/src/main.c b/src/main.c
+index abcdef0..fedcba9 100644
+--- a/src/main.c
++++ b/src/main.c
+@@
+ void AgbMain(void)
+ {
++#ifdef ENABLE_SPY
++    MgbaOpen();
++    MgbaPrintf(MGBA_LOG_INFO, "[Spy] online");
++#endif
++
+     RegisterRamReset(RESET_EWRAM | RESET_IWRAM | RESET_PALETTE |
+                      RESET_VRAM | RESET_OAM | RESET_SIO | RESET_SOUND |
+                      RESET_OTHER);
+

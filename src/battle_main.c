@@ -1,3 +1,4 @@
+#include "debug.h"
 #include "global.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -1862,6 +1863,7 @@ static void CB2_HandleStartMultiBattle(void)
 
 void BattleMainCB2(void)
 {
+    DebugHook_Battle();
     AnimateSprites();
     BuildOamBuffer();
     RunTextPrinters();

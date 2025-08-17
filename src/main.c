@@ -24,6 +24,7 @@
 #include "main.h"
 #include "trainer_hill.h"
 #include "constants/rgb.h"
+#include "spylog.h"
 
 static void VBlankIntr(void);
 static void HBlankIntr(void);
@@ -88,6 +89,10 @@ void EnableVCountIntrAtLine150(void);
 
 void AgbMain(void)
 {
+#ifdef ENABLE_SPY
+    SpyMgbaOpen();
+    SpyMgbaPrintf(MGBA_LOG_INFO, "[Spy] online");
+#endif
     // Modern compilers are liberal with the stack on entry to this function,
     // so RegisterRamReset may crash if it resets IWRAM.
 #if !MODERN

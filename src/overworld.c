@@ -1,3 +1,4 @@
+#include "debug.h"
 #include "global.h"
 #include "overworld.h"
 #include "battle_pyramid.h"
@@ -66,7 +67,7 @@
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
-
+#include "debug.h"
 struct CableClubPlayer
 {
     u8 playerId;
@@ -1478,6 +1479,7 @@ static void OverworldBasic(void)
 // This CB2 is used when starting
 void CB2_OverworldBasic(void)
 {
+    DebugHook_Overworld();
     OverworldBasic();
 }
 
