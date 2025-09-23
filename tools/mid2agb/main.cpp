@@ -35,7 +35,7 @@ FILE* g_outputFile = nullptr;
 
 std::string g_asmLabel;
 int g_masterVolume = 127;
-int g_voiceGroup = 0;
+std::string g_voiceGroup = "_dummy";
 int g_priority = 0;
 int g_reverb = -1;
 int g_clocksPerBeat = 1;
@@ -52,7 +52,7 @@ bool g_compressionEnabled = true;
         "\n"
         "options  -L???  label for assembler (default:output_file)\n"
         "         -V???  master volume (default:127)\n"
-        "         -G???  voice group number (default:0)\n"
+        "         -G???  voice group label (default:_dummy)\n"
         "         -P???  priority (default:0)\n"
         "         -R???  reverb (default:off)\n"
         "            -X  48 clocks/beat (default:24 clocks/beat)\n"
@@ -149,7 +149,7 @@ int main(int argc, char** argv)
                 arg = GetArgument(argc, argv, i);
                 if (arg == nullptr)
                     PrintUsage();
-                g_voiceGroup = std::stoi(arg);
+                g_voiceGroup = arg;
                 break;
             case 'L':
                 arg = GetArgument(argc, argv, i);

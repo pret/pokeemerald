@@ -432,7 +432,7 @@ struct PokemonStorageSystemData
     u16 scrollUnused5; // Never read
     u16 scrollUnused6; // Never read
     u8 filler1[22];
-    u8 boxTitleTiles[1024];
+    u8 ALIGNED(2) boxTitleTiles[1024];
     u8 boxTitleCycleId;
     u8 wallpaperLoadState; // Written to, but never read.
     u8 wallpaperLoadBoxId;
@@ -6497,10 +6497,10 @@ struct
 {
     {MAP_GROUPS_COUNT, 0, MOVE_SURF},
     {MAP_GROUPS_COUNT, 0, MOVE_DIVE},
-    {MAP_GROUP(EVER_GRANDE_CITY_POKEMON_LEAGUE_1F), MAP_NUM(EVER_GRANDE_CITY_POKEMON_LEAGUE_1F), MOVE_STRENGTH},
-    {MAP_GROUP(EVER_GRANDE_CITY_POKEMON_LEAGUE_1F), MAP_NUM(EVER_GRANDE_CITY_POKEMON_LEAGUE_1F), MOVE_ROCK_SMASH},
-    {MAP_GROUP(EVER_GRANDE_CITY_POKEMON_LEAGUE_2F), MAP_NUM(EVER_GRANDE_CITY_POKEMON_LEAGUE_2F), MOVE_STRENGTH},
-    {MAP_GROUP(EVER_GRANDE_CITY_POKEMON_LEAGUE_2F), MAP_NUM(EVER_GRANDE_CITY_POKEMON_LEAGUE_2F), MOVE_ROCK_SMASH},
+    {MAP_GROUP(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F), MAP_NUM(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F), MOVE_STRENGTH},
+    {MAP_GROUP(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F), MAP_NUM(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F), MOVE_ROCK_SMASH},
+    {MAP_GROUP(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F), MAP_NUM(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F), MOVE_STRENGTH},
+    {MAP_GROUP(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F), MAP_NUM(MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_2F), MOVE_ROCK_SMASH},
 };
 
 static void GetRestrictedReleaseMoves(u16 *moves)
@@ -6983,7 +6983,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
         txtPtr[1] = EOS;
 
         if (sStorage->displayMonItemId != ITEM_NONE)
-            StringCopyPadded(sStorage->displayMonItemName, ItemId_GetName(sStorage->displayMonItemId), CHAR_SPACE, 8);
+            StringCopyPadded(sStorage->displayMonItemName, GetItemName(sStorage->displayMonItemId), CHAR_SPACE, 8);
         else
             StringFill(sStorage->displayMonItemName, CHAR_SPACE, 8);
     }
@@ -8986,7 +8986,7 @@ static bool8 IsMovingItem(void)
 
 static const u8 *GetMovingItemName(void)
 {
-    return ItemId_GetName(sStorage->movingItemId);
+    return GetItemName(sStorage->movingItemId);
 }
 
 static u16 GetMovingItemId(void)
@@ -9181,9 +9181,9 @@ static void PrintItemDescription(void)
     const u8 *description;
 
     if (IsMovingItem())
-        description = ItemId_GetDescription(sStorage->movingItemId);
+        description = GetItemDescription(sStorage->movingItemId);
     else
-        description = ItemId_GetDescription(sStorage->displayMonItemId);
+        description = GetItemDescription(sStorage->displayMonItemId);
 
     FillWindowPixelBuffer(WIN_ITEM_DESC, PIXEL_FILL(1));
     AddTextPrinterParameterized5(WIN_ITEM_DESC, FONT_NORMAL, description, 4, 0, 0, NULL, 0, 1);
@@ -9633,9 +9633,9 @@ u32 CountAllStorageMons(void)
     return count;
 }
 
-bool32 AnyStorageMonWithMove(u16 moveId)
+bool32 AnyStorageMonWithMove(u16 move)
 {
-    u16 moves[] = {moveId, MOVES_COUNT};
+    u16 moves[] = {move, MOVES_COUNT};
     s32 i, j;
 
     for (i = 0; i < TOTAL_BOXES_COUNT; i++)

@@ -237,7 +237,7 @@ static void SpriteCB_MovePlayerDownWhileShrinking(struct Sprite *);
 static void Task_NewGameBirchSpeech_WaitForPlayerShrink(u8);
 static void Task_NewGameBirchSpeech_FadePlayerToWhite(u8);
 static void Task_NewGameBirchSpeech_Cleanup(u8);
-static void SpriteCB_Null();
+static void SpriteCB_Null(struct Sprite *);
 static void Task_NewGameBirchSpeech_ReturnFromNamingScreenShowTextbox(u8);
 static void MainMenu_FormatSavegamePlayer(void);
 static void MainMenu_FormatSavegamePokedex(void);
@@ -527,6 +527,7 @@ enum
 };
 
 #define MAIN_MENU_BORDER_TILE   0x1D5
+#define BIRCH_DLG_BASE_TILE_NUM 0xFC
 
 static void CB2_MainMenu(void)
 {
@@ -1329,7 +1330,7 @@ static void Task_NewGameBirchSpeech_WaitForSpriteFadeInWelcome(u8 taskId)
         {
             InitWindows(sNewGameBirchSpeechTextWindows);
             LoadMainMenuWindowFrameTiles(0, 0xF3);
-            LoadMessageBoxGfx(0, 0xFC, BG_PLTT_ID(15));
+            LoadMessageBoxGfx(0, BIRCH_DLG_BASE_TILE_NUM, BG_PLTT_ID(15));
             NewGameBirchSpeech_ShowDialogueWindow(0, 1);
             PutWindowTilemap(0);
             CopyWindowToVram(0, COPYWIN_GFX);
@@ -1855,7 +1856,7 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
     SetMainCallback2(CB2_MainMenu);
     InitWindows(sNewGameBirchSpeechTextWindows);
     LoadMainMenuWindowFrameTiles(0, 0xF3);
-    LoadMessageBoxGfx(0, 0xFC, BG_PLTT_ID(15));
+    LoadMessageBoxGfx(0, BIRCH_DLG_BASE_TILE_NUM, BG_PLTT_ID(15));
     PutWindowTilemap(0);
     CopyWindowToVram(0, COPYWIN_FULL);
 }
@@ -2277,20 +2278,20 @@ static void NewGameBirchSpeech_ShowDialogueWindow(u8 windowId, u8 copyToVram)
 
 static void NewGameBirchSpeech_CreateDialogueWindowBorder(u8 bg, u8 x, u8 y, u8 width, u8 height, u8 palNum)
 {
-    FillBgTilemapBufferRect(bg, 0xFD,  x-2,       y-1, 1,       1, palNum);
-    FillBgTilemapBufferRect(bg, 0xFF,  x-1,       y-1, 1,       1, palNum);
-    FillBgTilemapBufferRect(bg, 0x100, x,         y-1, width,   1, palNum);
-    FillBgTilemapBufferRect(bg, 0x101, x+width-1, y-1, 1,       1, palNum);
-    FillBgTilemapBufferRect(bg, 0x102, x+width,   y-1, 1,       1, palNum);
-    FillBgTilemapBufferRect(bg, 0x103, x-2,       y,   1,       5, palNum);
-    FillBgTilemapBufferRect(bg, 0x105, x-1,       y,   width+1, 5, palNum);
-    FillBgTilemapBufferRect(bg, 0x106, x+width,   y,   1,       5, palNum);
+    FillBgTilemapBufferRect(bg, BIRCH_DLG_BASE_TILE_NUM +  1, x-2,       y-1, 1,       1, palNum);
+    FillBgTilemapBufferRect(bg, BIRCH_DLG_BASE_TILE_NUM +  3, x-1,       y-1, 1,       1, palNum);
+    FillBgTilemapBufferRect(bg, BIRCH_DLG_BASE_TILE_NUM +  4, x,         y-1, width,   1, palNum);
+    FillBgTilemapBufferRect(bg, BIRCH_DLG_BASE_TILE_NUM +  5, x+width-1, y-1, 1,       1, palNum);
+    FillBgTilemapBufferRect(bg, BIRCH_DLG_BASE_TILE_NUM +  6, x+width,   y-1, 1,       1, palNum);
+    FillBgTilemapBufferRect(bg, BIRCH_DLG_BASE_TILE_NUM +  7, x-2,       y,   1,       5, palNum);
+    FillBgTilemapBufferRect(bg, BIRCH_DLG_BASE_TILE_NUM +  9, x-1,       y,   width+1, 5, palNum);
+    FillBgTilemapBufferRect(bg, BIRCH_DLG_BASE_TILE_NUM + 10, x+width,   y,   1,       5, palNum);
 
-    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(0xFD),  x-2,       y+height, 1,       1, palNum);
-    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(0xFF),  x-1,       y+height, 1,       1, palNum);
-    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(0x100), x,         y+height, width-1, 1, palNum);
-    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(0x101), x+width-1, y+height, 1,       1, palNum);
-    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(0x102), x+width,   y+height, 1,       1, palNum);
+    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(BIRCH_DLG_BASE_TILE_NUM + 1), x-2,       y+height, 1,       1, palNum);
+    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(BIRCH_DLG_BASE_TILE_NUM + 3), x-1,       y+height, 1,       1, palNum);
+    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(BIRCH_DLG_BASE_TILE_NUM + 4), x,         y+height, width-1, 1, palNum);
+    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(BIRCH_DLG_BASE_TILE_NUM + 5), x+width-1, y+height, 1,       1, palNum);
+    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(BIRCH_DLG_BASE_TILE_NUM + 6), x+width,   y+height, 1,       1, palNum);
 }
 
 static void Task_NewGameBirchSpeech_ReturnFromNamingScreenShowTextbox(u8 taskId)

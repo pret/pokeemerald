@@ -79,7 +79,7 @@ struct RectangularSpiralLine
 {
     u8 state;
     s16 position;
-    u8 moveIdx;
+    u8 moveIndex;
     s16 reboundPosition;
     bool8 outward;
 };
@@ -278,7 +278,7 @@ static s16 IsTrainerPicSlideDone(s16);
 static bool8 TransitionIntro_FadeToGray(struct Task *);
 static bool8 TransitionIntro_FadeFromGray(struct Task *);
 static bool8 IsIntroTaskDone(void);
-static bool16 UpdateRectangularSpiralLine(const s16 * const *, struct RectangularSpiralLine *);
+static bool16 UpdateRectangularSpiralLine(const s16 *const *, struct RectangularSpiralLine *);
 static void SpriteCB_FldEffPokeballTrail(struct Sprite *);
 static void SpriteCB_MugshotTrainerPic(struct Sprite *);
 static void SpriteCB_WhiteBarFade(struct Sprite *);
@@ -3204,28 +3204,28 @@ static bool8 RectangularSpiral_Init(struct Task *task)
     // Line starting in top left
     sRectangularSpiralLines[0].state = SPIRAL_INWARD_START;
     sRectangularSpiralLines[0].position = -1;
-    sRectangularSpiralLines[0].moveIdx = 1;
+    sRectangularSpiralLines[0].moveIndex = 1;
     sRectangularSpiralLines[0].reboundPosition = 308;
     sRectangularSpiralLines[0].outward = FALSE;
 
     // Line starting in bottom right
     sRectangularSpiralLines[1].state = SPIRAL_INWARD_START;
     sRectangularSpiralLines[1].position = -1;
-    sRectangularSpiralLines[1].moveIdx = 1;
+    sRectangularSpiralLines[1].moveIndex = 1;
     sRectangularSpiralLines[1].reboundPosition = 308;
     sRectangularSpiralLines[1].outward = FALSE;
 
     // Line starting in top right
     sRectangularSpiralLines[2].state = SPIRAL_INWARD_START;
     sRectangularSpiralLines[2].position = -3;
-    sRectangularSpiralLines[2].moveIdx = 1;
+    sRectangularSpiralLines[2].moveIndex = 1;
     sRectangularSpiralLines[2].reboundPosition = 307;
     sRectangularSpiralLines[2].outward = FALSE;
 
     // Line starting in bottom left
     sRectangularSpiralLines[3].state = SPIRAL_INWARD_START;
     sRectangularSpiralLines[3].position = -3;
-    sRectangularSpiralLines[3].moveIdx = 1;
+    sRectangularSpiralLines[3].moveIndex = 1;
     sRectangularSpiralLines[3].reboundPosition = 307;
     sRectangularSpiralLines[3].outward = FALSE;
 
@@ -3281,14 +3281,14 @@ static bool8 RectangularSpiral_End(struct Task *task)
 }
 
 // Returns TRUE if a tile should be drawn, FALSE otherwise
-static bool16 UpdateRectangularSpiralLine(const s16 * const *moveDataTable, struct RectangularSpiralLine *line)
+static bool16 UpdateRectangularSpiralLine(const s16 *const *moveDataTable, struct RectangularSpiralLine *line)
 {
     const s16 *moveData = moveDataTable[line->state];
 
     // Has spiral finished?
     // Note that most move data arrays endsin SPIRAL_END but it is
     // only ever reached on the final array of spiraling outward.
-    if (moveData[line->moveIdx] == SPIRAL_END)
+    if (moveData[line->moveIndex] == SPIRAL_END)
         return FALSE;
 
     // Presumably saving data for debug.
@@ -3319,21 +3319,21 @@ static bool16 UpdateRectangularSpiralLine(const s16 * const *moveDataTable, stru
 
     // Below check is never true.
     // SPIRAL_END was already checked, and position is never >= 640
-    if (line->position >= 640 || moveData[line->moveIdx] == SPIRAL_END)
+    if (line->position >= 640 || moveData[line->moveIndex] == SPIRAL_END)
         return FALSE;
 
-    if (!line->outward && moveData[line->moveIdx] == SPIRAL_REBOUND)
+    if (!line->outward && moveData[line->moveIndex] == SPIRAL_REBOUND)
     {
         // Line has reached the final point of spiraling inward.
         // Time to flip and start spiraling outward.
         line->outward = TRUE;
-        line->moveIdx = 1;
+        line->moveIndex = 1;
         line->position = line->reboundPosition;
         line->state = SPIRAL_OUTWARD_START;
     }
 
     // Reached move target, advance to next movement.
-    if (line->position == moveData[line->moveIdx])
+    if (line->position == moveData[line->moveIndex])
     {
         line->state++;
         if (line->outward == TRUE)
@@ -3343,7 +3343,7 @@ static bool16 UpdateRectangularSpiralLine(const s16 * const *moveDataTable, stru
                 // Still spiraling outward, loop back to the first state
                 // but use the second set of move targets.
                 // For example, the 28 in sRectangularSpiral_Major_OutwardUp
-                line->moveIdx++;
+                line->moveIndex++;
                 line->state = SPIRAL_OUTWARD_START;
             }
         }
@@ -3354,7 +3354,7 @@ static bool16 UpdateRectangularSpiralLine(const s16 * const *moveDataTable, stru
                 // Still spiraling inward, loop back to the first state
                 // but use the second set of move targets.
                 // For example, the 275 in sRectangularSpiral_Major_InwardRight
-                line->moveIdx++;
+                line->moveIndex++;
                 line->state = SPIRAL_INWARD_START;
             }
         }

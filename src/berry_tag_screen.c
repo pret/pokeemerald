@@ -331,7 +331,7 @@ static bool8 LoadBerryTagGfx(void)
         }
         break;
     case 2:
-        LZDecompressWram(gBerryTag_Pal, sBerryTag->tilemapBuffers[2]);
+        LZDecompressWram(gBerryTag_Tilemap, sBerryTag->tilemapBuffers[2]);
         sBerryTag->gfxState++;
         break;
     case 3:

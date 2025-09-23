@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_RUSTURF_TUNNEL_WANDAS_BF",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 23,
       "y": 5,
@@ -67,6 +68,7 @@
       "flag": "FLAG_ITEM_RUSTURF_TUNNEL_MAX_ETHER"
     },
     {
+      "local_id": "LOCALID_RUSTURF_TUNNEL_BRINEY",
       "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
       "x": 5,
       "y": 4,
@@ -80,6 +82,7 @@
       "flag": "FLAG_HIDE_RUSTURF_TUNNEL_BRINEY"
     },
     {
+      "local_id": "LOCALID_RUSTURF_TUNNEL_GRUNT",
       "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
       "x": 14,
       "y": 5,
@@ -93,6 +96,7 @@
       "flag": "FLAG_HIDE_RUSTURF_TUNNEL_AQUA_GRUNT"
     },
     {
+      "local_id": "LOCALID_RUSTURF_TUNNEL_PEEKO",
       "graphics_id": "OBJ_EVENT_GFX_WINGULL",
       "x": 14,
       "y": 4,
@@ -132,6 +136,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_RUSTURF_TUNNEL_WANDA",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 25,
       "y": 4,

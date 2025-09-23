@@ -217,26 +217,26 @@ static u32 UpdateMonListBgs(void)
 
 static struct PokenavMonListItem *GetMonRibbonMonListData(void)
 {
-    struct Pokenav_RibbonsMonList * list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_LIST);
+    struct Pokenav_RibbonsMonList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_LIST);
     return list->monList->monData;
 }
 
 static s32 GetRibbonsMonListCount(void)
 {
-    struct Pokenav_RibbonsMonList * list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_LIST);
+    struct Pokenav_RibbonsMonList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_LIST);
     return list->monList->listCount;
 }
 
 static s32 UNUSED GetMonRibbonSelectedMonData(void)
 {
-    struct Pokenav_RibbonsMonList * list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_LIST);
+    struct Pokenav_RibbonsMonList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_LIST);
     s32 idx = PokenavList_GetSelectedIndex();
     return list->monList->monData[idx].data;
 }
 
 static s32 GetRibbonListMenuCurrIndex(void)
 {
-    struct Pokenav_RibbonsMonList * list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_LIST);
+    struct Pokenav_RibbonsMonList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_LIST);
     return list->monList->currIndex;
 }
 
@@ -249,7 +249,7 @@ static u32 BuildPartyMonRibbonList(s32 state)
 {
     s32 i;
     struct PokenavMonListItem item;
-    struct Pokenav_RibbonsMonList * list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_LIST);
+    struct Pokenav_RibbonsMonList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_LIST);
 
     list->monList->listCount = 0;
     list->monList->currIndex = 0;
@@ -284,7 +284,7 @@ static u32 InitBoxMonRibbonList(s32 state)
 
 static u32 BuildBoxMonRibbonList(s32 state)
 {
-    struct Pokenav_RibbonsMonList * list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_LIST);
+    struct Pokenav_RibbonsMonList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_LIST);
     s32 boxId = list->boxId;
     s32 monId = list->monId;
     s32 boxCount = 0;
@@ -408,13 +408,13 @@ bool32 IsRibbonsMonListLoopedTaskActive(void)
 
 bool32 GetRibbonsMonCurrentLoopedTaskActive(void)
 {
-    struct Pokenav_RibbonsMonMenu * menu = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_MENU);
+    struct Pokenav_RibbonsMonMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_MENU);
     return IsLoopedTaskActive(menu->loopedTaskId);
 }
 
 void FreeRibbonsMonMenu(void)
 {
-    struct Pokenav_RibbonsMonMenu * menu = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_MENU);
+    struct Pokenav_RibbonsMonMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_MON_MENU);
     DestroyPokenavList();
     RemoveWindow(menu->winid);
     FreePokenavSubstruct(POKENAV_SUBSTRUCT_RIBBONS_MON_MENU);
@@ -668,7 +668,7 @@ static void DrawListIndexNumber(s32 windowId, s32 index, s32 max)
     u8 strbuf[16];
     u32 x;
 
-    u8 * ptr = strbuf;
+    u8 *ptr = strbuf;
     ptr = ConvertIntToDecimalStringN(ptr, index, STR_CONV_MODE_RIGHT_ALIGN, 3);
     *ptr++ = CHAR_SLASH;
     ConvertIntToDecimalStringN(ptr, max, STR_CONV_MODE_RIGHT_ALIGN, 3);
@@ -695,13 +695,13 @@ static void CreateRibbonMonsList(void)
 }
 
 // Buffers the "Nickname gender/level" text for the ribbon mon list
-static void BufferRibbonMonInfoText(struct PokenavListItem * listItem, u8 * dest)
+static void BufferRibbonMonInfoText(struct PokenavListItem *listItem, u8 *dest)
 {
     u8 gender;
     u8 level;
-    u8 * s;
-    const u8 * genderStr;
-    struct PokenavMonListItem * item = (struct PokenavMonListItem *)listItem;
+    u8 *s;
+    const u8 *genderStr;
+    struct PokenavMonListItem *item = (struct PokenavMonListItem *)listItem;
 
     // Mon is in party
     if (item->boxId == TOTAL_BOXES_COUNT)
@@ -714,7 +714,7 @@ static void BufferRibbonMonInfoText(struct PokenavListItem * listItem, u8 * dest
     // Mon is in PC
     else
     {
-        struct BoxPokemon * mon = GetBoxedMonPtr(item->boxId, item->monId);
+        struct BoxPokemon *mon = GetBoxedMonPtr(item->boxId, item->monId);
         gender = GetBoxMonGender(mon);
         level = GetLevelFromBoxMonExp(mon);
         GetBoxMonData(mon, MON_DATA_NICKNAME, gStringVar3);

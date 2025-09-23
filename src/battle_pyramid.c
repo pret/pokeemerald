@@ -79,7 +79,7 @@ static void HidePyramidItem(void);
 static void SetPyramidFacilityTrainers(void);
 static void ShowPostBattleHintText(void);
 static void UpdatePyramidWinStreak(void);
-static void GetInBattlePyramid(void);
+static void GetCurrentBattlePyramidLocation(void);
 static void UpdatePyramidLightRadius(void);
 static void ClearPyramidPartyHeldItems(void);
 static void SetPyramidFloorPalette(void);
@@ -784,7 +784,7 @@ static const u8 sHintTextTypes[] =
     HINT_EXIT_SHORT_REMAINING_ITEMS,
 };
 
-static void (* const sBattlePyramidFunctions[])(void) =
+static void (*const sBattlePyramidFunctions[])(void) =
 {
     [BATTLE_PYRAMID_FUNC_INIT]              = InitPyramidChallenge,
     [BATTLE_PYRAMID_FUNC_GET_DATA]          = GetBattlePyramidData,
@@ -798,7 +798,7 @@ static void (* const sBattlePyramidFunctions[])(void) =
     [BATTLE_PYRAMID_FUNC_SET_TRAINERS]      = SetPyramidFacilityTrainers,
     [BATTLE_PYRAMID_FUNC_SHOW_HINT_TEXT]    = ShowPostBattleHintText,
     [BATTLE_PYRAMID_FUNC_UPDATE_STREAK]     = UpdatePyramidWinStreak,
-    [BATTLE_PYRAMID_FUNC_IS_IN]             = GetInBattlePyramid,
+    [BATTLE_PYRAMID_FUNC_CURRENT_LOCATION]  = GetCurrentBattlePyramidLocation,
     [BATTLE_PYRAMID_FUNC_UPDATE_LIGHT]      = UpdatePyramidLightRadius,
     [BATTLE_PYRAMID_FUNC_CLEAR_HELD_ITEMS]  = ClearPyramidPartyHeldItems,
     [BATTLE_PYRAMID_FUNC_SET_FLOOR_PALETTE] = SetPyramidFloorPalette,
@@ -1023,7 +1023,7 @@ static void HidePyramidItem(void)
             break;
         }
         i++;
-        if (events[i].localId == 0)
+        if (events[i].localId == LOCALID_NONE)
             break;
     }
 }
@@ -1113,9 +1113,9 @@ static void UpdatePyramidWinStreak(void)
         gSaveBlock2Ptr->frontier.pyramidRecordStreaks[lvlMode] = gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode];
 }
 
-static void GetInBattlePyramid(void)
+static void GetCurrentBattlePyramidLocation(void)
 {
-    gSpecialVar_Result = InBattlePyramid();
+    gSpecialVar_Result = CurrentBattlePyramidLocation();
 }
 
 static void UpdatePyramidLightRadius(void)
@@ -1419,14 +1419,14 @@ u8 GetPyramidRunMultiplier(void)
     return sPyramidFloorTemplates[id].runMultiplier;
 }
 
-u8 InBattlePyramid(void)
+u8 CurrentBattlePyramidLocation(void)
 {
     if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
-        return 1;
+        return PYRAMID_LOCATION_FLOOR;
     else if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP)
-        return 2;
+        return PYRAMID_LOCATION_TOP;
     else
-        return FALSE;
+        return PYRAMID_LOCATION_NONE;
 }
 
 bool8 InBattlePyramid_(void)
@@ -1437,7 +1437,7 @@ bool8 InBattlePyramid_(void)
 
 void PausePyramidChallenge(void)
 {
-    if (InBattlePyramid())
+    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
     {
         RestorePyramidPlayerParty();
         gSaveBlock2Ptr->frontier.challengeStatus = CHALLENGE_STATUS_PAUSED;
@@ -1448,7 +1448,7 @@ void PausePyramidChallenge(void)
 
 void SoftResetInBattlePyramid(void)
 {
-    if (InBattlePyramid())
+    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
         DoSoftReset();
 }
 
@@ -1557,6 +1557,7 @@ void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPositio
                         gSaveBlock1Ptr->pos.x = (mapLayout->width * (i % PYRAMID_FLOOR_SQUARES_WIDE)) + x;
                         gSaveBlock1Ptr->pos.y = (mapLayout->height * (i / PYRAMID_FLOOR_SQUARES_WIDE)) + y;
                     }
+                    // Copy the elevation and collision, but overwrite the metatile ID
                     map[x] = (layoutMap[x] & (MAPGRID_ELEVATION_MASK | MAPGRID_COLLISION_MASK)) | METATILE_BattlePyramid_Floor;
                 }
                 else
@@ -1857,7 +1858,7 @@ static bool8 TrySetPyramidObjectEventPositionAtCoords(u8 objType, u8 x, u8 y, u8
     const struct MapHeader *mapHeader;
     struct ObjectEventTemplate *floorEvents = gSaveBlock1Ptr->objectEventTemplates;
 
-    mapHeader = Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(BATTLE_PYRAMID_SQUARE01), floorLayoutOffsets[squareId] + MAP_NUM(BATTLE_PYRAMID_SQUARE01));
+    mapHeader = Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_BATTLE_PYRAMID_SQUARE01), floorLayoutOffsets[squareId] + MAP_NUM(MAP_BATTLE_PYRAMID_SQUARE01));
     for (i = 0; i < mapHeader->events->objectEventCount; i++)
     {
         if (mapHeader->events->objectEvents[i].x != x || mapHeader->events->objectEvents[i].y != y)
@@ -1934,7 +1935,7 @@ u8 GetNumBattlePyramidObjectEvents(void)
 
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
-        if (events[i].localId == 0)
+        if (events[i].localId == LOCALID_NONE)
             break;
     }
 

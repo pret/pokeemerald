@@ -1,10 +1,3 @@
-.set LOCALID_ATTENDANT_SINGLES, 1
-.set LOCALID_ATTENDANT_DOUBLES, 7
-.set LOCALID_ATTENDANT_MULTIS, 8
-.set LOCALID_ATTENDANT_LINK_MULTIS, 9
-
-@ Note: LOCALID_BATTLE_TOWER_LOBBY_REPORTER is a local id for this map used elsewhere. It's defined in event_objects.h
-
 BattleFrontier_BattleTowerLobby_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_BattleTowerLobby_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleTowerLobby_OnTransition
@@ -37,7 +30,7 @@ BattleFrontier_BattleTowerLobby_OnWarp:
 
 BattleFrontier_BattleTowerLobby_EventScript_PlayerFaceNorth::
 	setvar VAR_TEMP_1, 1
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	turnobject LOCALID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattleTowerLobby_OnFrame:
@@ -621,12 +614,12 @@ BattleFrontier_BattleTowerLobby_EventScript_WalkToElevator::
 	call BattleFrontier_BattleTowerLobby_EventScript_SetAttendantTalkedTo
 	call BattleFrontier_BattleTowerLobby_EventScript_GetDoorXCoord
 	applymovement VAR_LAST_TALKED, BattleFrontier_BattleTowerLobby_Movement_WalkToElevator
-	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerLobby_Movement_WalkToElevator
+	applymovement LOCALID_PLAYER, BattleFrontier_BattleTowerLobby_Movement_WalkToElevator
 	waitmovement 0
 	opendoor VAR_0x8004, 1
 	waitdooranim
 	applymovement VAR_LAST_TALKED, BattleFrontier_BattleTowerLobby_Movement_AttendantEnterElevator
-	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerLobby_Movement_PlayerEnterElevator
+	applymovement LOCALID_PLAYER, BattleFrontier_BattleTowerLobby_Movement_PlayerEnterElevator
 	waitmovement 0
 	closedoor VAR_0x8004, 1
 	waitdooranim
@@ -690,19 +683,19 @@ BattleFrontier_BattleTowerLobby_EventScript_SetAttendantTalkedTo::
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_TalkedToSinglesAttendant::
-	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_SINGLES
+	setvar VAR_LAST_TALKED, LOCALID_TOWER_ATTENDANT_SINGLES
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_TalkedToDoublesAttendant::
-	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_DOUBLES
+	setvar VAR_LAST_TALKED, LOCALID_TOWER_ATTENDANT_DOUBLES
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_TalkedToMultisAttendant::
-	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_MULTIS
+	setvar VAR_LAST_TALKED, LOCALID_TOWER_ATTENDANT_MULTIS
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_TalkedToLinkMultisAttendant::
-	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_LINK_MULTIS
+	setvar VAR_LAST_TALKED, LOCALID_TOWER_ATTENDANT_LINK_MULTIS
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_GetDoorXCoord::
