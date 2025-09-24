@@ -1,4 +1,5 @@
 #include "global.h"
+#include "gametypes.h"
 #include "main.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -143,7 +144,7 @@ static EWRAM_DATA struct PokemonSummaryScreenData
         u8 ribbonCount; // 0x6
         u8 ailment; // 0x7
         u8 abilityNum; // 0x8
-        u8 metLocation; // 0x9
+        metloc_t metLocation; // 0x9
         u8 metLevel; // 0xA
         u8 metGame; // 0xB
         u32 pid; // 0xC

@@ -3,6 +3,7 @@
 #include "data.h"
 #include "decompress.h"
 #include "dma3.h"
+#include "gametypes.h"
 #include "international_string_util.h"
 #include "main.h"
 #include "match_call.h"
@@ -1022,7 +1023,7 @@ static void PrintMatchCallLocation(struct Pokenav_MatchCallGfx *gfx, int delta)
     u8 mapName[32];
     int x;
     int index = PokenavList_GetSelectedIndex() + delta;
-    int mapSec = GetMatchCallMapSec(index);
+    mapsec_int_t mapSec = GetMatchCallMapSec(index);
     if (mapSec != MAPSEC_NONE)
         GetMapName(mapName, mapSec, 0);
     else

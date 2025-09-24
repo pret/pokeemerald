@@ -1,4 +1,5 @@
 #include "global.h"
+#include "gametypes.h"
 #include "gpu_regs.h"
 #include "main.h"
 #include "trainer_card.h"
@@ -606,7 +607,7 @@ static void LeaveFrontierPass(void)
 
 static u32 AllocateFrontierPassData(void (*callback)(void))
 {
-    u8 i;
+    mapsec_t i;
 
     if (sPassData != NULL)
         return ERR_ALREADY_DONE;

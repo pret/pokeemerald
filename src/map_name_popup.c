@@ -1,4 +1,5 @@
 #include "global.h"
+#include "gametypes.h"
 #include "battle_pyramid.h"
 #include "bg.h"
 #include "event_data.h"
@@ -404,7 +405,7 @@ static void LoadMapNamePopUpWindowBg(void)
 {
     u8 popUpThemeId;
     u8 popupWindowId = GetMapNamePopUpWindowId();
-    u16 regionMapSectionId = gMapHeader.regionMapSectionId;
+    mapsec_min16_t regionMapSectionId = gMapHeader.regionMapSectionId;
 
     if (regionMapSectionId >= KANTO_MAPSEC_START)
     {
