@@ -363,7 +363,7 @@ static void AddHatchedMonToParty(u8 id)
     u8 name[POKEMON_NAME_LENGTH + 1];
     u16 ball;
     u16 metLevel;
-    metloc_t metLocation;
+    metloc_u8_t metLocation;
     struct Pokemon *mon = &gPlayerParty[id];
 
     CreateHatchedMon(mon, &gEnemyParty[0]);

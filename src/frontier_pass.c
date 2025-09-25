@@ -609,7 +609,7 @@ static u32 AllocateFrontierPassData(void (*callback)(void))
 {
     // This variable is a MAPSEC initially, but is recycled as a 
     // bare integer near the end of the function.
-    mapsec_t i;
+    mapsec_u8_t i;
 
     if (sPassData != NULL)
         return ERR_ALREADY_DONE;

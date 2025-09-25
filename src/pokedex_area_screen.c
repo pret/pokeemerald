@@ -59,7 +59,7 @@ struct OverworldArea
 {
     u8 mapGroup;
     u8 mapNum;
-    mapsec_min16_t regionMapSectionId;
+    mapsec_u16_t regionMapSectionId;
 };
 
 struct
@@ -80,7 +80,7 @@ struct
     /*0x61C*/ u16 areaShadeBldArgHi;
     /*0x61E*/ bool8 showingMarkers;
     /*0x61F*/ u8 markerFlashCounter;
-    /*0x620*/ mapsec_min16_t specialAreaRegionMapSectionIds[MAX_AREA_MARKERS];
+    /*0x620*/ mapsec_u16_t specialAreaRegionMapSectionIds[MAX_AREA_MARKERS];
     /*0x660*/ struct Sprite *areaMarkerSprites[MAX_AREA_MARKERS];
     /*0x6E0*/ u16 numAreaMarkerSprites;
     /*0x6E2*/ u16 alteringCaveCounter;
@@ -96,7 +96,7 @@ static void FindMapsWithMon(u16);
 static void BuildAreaGlowTilemap(void);
 static void SetAreaHasMon(u16, u16);
 static void SetSpecialMapHasMon(u16, u16);
-static mapsec_min16_t GetRegionMapSectionId(u8, u8);
+static mapsec_u16_t GetRegionMapSectionId(u8, u8);
 static bool8 MapHasSpecies(const struct WildPokemonHeader *, u16);
 static bool8 MonListHasSpecies(const struct WildPokemonInfo *, u16, u16);
 static void DoAreaGlow(void);
@@ -113,11 +113,11 @@ static const u32 sAreaGlow_Gfx[] = INCBIN_U32("graphics/pokedex/area_glow.4bpp.l
 
 static const u16 sSpeciesHiddenFromAreaScreen[] = { SPECIES_WYNAUT };
 
-static const mapsec_min16_t sMovingRegionMapSections[3] =
+static const mapsec_u16_t sMovingRegionMapSections[3] =
 {
     MAPSEC_MARINE_CAVE,
     MAPSEC_UNDERWATER_MARINE_CAVE,
-    MAPSEC_TERRA_CAVE
+    mapsec_u8_tERRA_CAVE
 };
 
 static const u16 sFeebasData[][3] =
@@ -126,7 +126,7 @@ static const u16 sFeebasData[][3] =
     {NUM_SPECIES}
 };
 
-static const mapsec_min16_t sLandmarkData[][2] =
+static const mapsec_u16_t sLandmarkData[][2] =
 {
     {MAPSEC_SKY_PILLAR,       FLAG_LANDMARK_SKY_PILLAR},
     {MAPSEC_SEAFLOOR_CAVERN,  FLAG_LANDMARK_SEAFLOOR_CAVERN},
@@ -337,7 +337,7 @@ static void SetSpecialMapHasMon(u16 mapGroup, u16 mapNum)
 
     if (sPokedexAreaScreen->numSpecialAreas < MAX_AREA_MARKERS)
     {
-        mapsec_min16_t regionMapSectionId = GetRegionMapSectionId(mapGroup, mapNum);
+        mapsec_u16_t regionMapSectionId = GetRegionMapSectionId(mapGroup, mapNum);
         if (regionMapSectionId < MAPSEC_NONE)
         {
             // Don't highlight the area if it's a moving area (Marine/Terra Cave)
@@ -371,7 +371,7 @@ static void SetSpecialMapHasMon(u16 mapGroup, u16 mapNum)
     }
 }
 
-static mapsec_min16_t GetRegionMapSectionId(u8 mapGroup, u8 mapNum)
+static mapsec_u16_t GetRegionMapSectionId(u8 mapGroup, u8 mapNum)
 {
     return Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum)->regionMapSectionId;
 }
@@ -711,7 +711,7 @@ static void CreateAreaMarkerSprites(void)
     static s16 x;
     static s16 y;
     static s16 i;
-    static mapsec_min16_s_t mapSecId;
+    static mapsec_s16_t mapSecId;
     static s16 numSprites;
 
     LoadSpriteSheet(&sAreaMarkerSpriteSheet);

@@ -42,7 +42,7 @@ struct Pokenav_RegionMapGfx
 
 struct CityMapEntry
 {
-    mapsec_min16_t mapSecId;
+    mapsec_u16_t mapSecId;
     u16 index;
     const u32 *tilemap;
 };
