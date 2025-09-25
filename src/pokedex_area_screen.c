@@ -117,7 +117,7 @@ static const mapsec_u16_t sMovingRegionMapSections[3] =
 {
     MAPSEC_MARINE_CAVE,
     MAPSEC_UNDERWATER_MARINE_CAVE,
-    mapsec_u8_tERRA_CAVE
+    MAPSEC_TERRA_CAVE
 };
 
 static const u16 sFeebasData[][3] =
