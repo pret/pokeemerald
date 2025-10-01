@@ -106,7 +106,7 @@ enum {
 
 struct FrontierPassData
 {
-    void (*callback)(void);
+    MainCallback callback;
     u16 state;
     u16 battlePoints;
     s16 cursorX;
@@ -137,14 +137,14 @@ struct FrontierPassGfx
 
 struct FrontierPassSaved
 {
-    void (*callback)(void);
+    MainCallback callback;
     s16 cursorX;
     s16 cursorY;
 };
 
 struct FrontierMapData
 {
-    void (*callback)(void);
+    MainCallback callback;
     struct Sprite *cursorSprite;
     struct Sprite *playerHeadSprite;
     struct Sprite *mapIndicatorSprite;
@@ -160,8 +160,8 @@ static EWRAM_DATA struct FrontierPassGfx *sPassGfx = NULL;
 static EWRAM_DATA struct FrontierMapData *sMapData = NULL;
 static EWRAM_DATA struct FrontierPassSaved sSavedPassData = {0};
 
-static u32 AllocateFrontierPassData(void (*callback)(void));
-static void ShowFrontierMap(void (*callback)(void));
+static u32 AllocateFrontierPassData(MainCallback callback);
+static void ShowFrontierMap(MainCallback callback);
 static void CB2_InitFrontierPass(void);
 static void DrawFrontierPassBg(void);
 static void FreeCursorAndSymbolSprites(void);
@@ -604,7 +604,7 @@ static void LeaveFrontierPass(void)
     FreeFrontierPassData();
 }
 
-static u32 AllocateFrontierPassData(void (*callback)(void))
+static u32 AllocateFrontierPassData(MainCallback callback)
 {
     u8 i;
 
@@ -1363,7 +1363,7 @@ static void PrintOnFrontierMap(void);
 static void InitFrontierMapSprites(void);
 static void HandleFrontierMapCursorMove(u8 direction);
 
-static void ShowFrontierMap(void (*callback)(void))
+static void ShowFrontierMap(MainCallback callback)
 {
     if (sMapData != NULL)
         SetMainCallback2(callback); // This line doesn't make sense at all, since it gets overwritten later anyway.

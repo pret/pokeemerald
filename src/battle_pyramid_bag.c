@@ -16,7 +16,6 @@
 #include "item_use.h"
 #include "list_menu.h"
 #include "mail.h"
-#include "main.h"
 #include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
@@ -414,7 +413,7 @@ void CB2_ReturnToPyramidBagMenu(void)
     GoToBattlePyramidBagMenu(PYRAMIDBAG_LOC_PREV, gPyramidBagMenuState.exitCallback);
 }
 
-void GoToBattlePyramidBagMenu(u8 location, void (*exitCallback)(void))
+void GoToBattlePyramidBagMenu(u8 location, MainCallback exitCallback)
 {
     gPyramidBagMenu = AllocZeroed(sizeof(*gPyramidBagMenu));
 

@@ -2,6 +2,7 @@
 #define GUARD_BATTLE_PYRAMID_BAG_H
 
 #include "list_menu.h"
+#include "main.h"
 
 enum {
     PYRAMIDBAG_LOC_FIELD,
@@ -29,7 +30,7 @@ enum {
 
 struct PyramidBagMenu
 {
-    void (*newScreenCallback)(void);
+    MainCallback newScreenCallback;
     u8 tilemapBuffer[BG_SCREEN_SIZE];
     u8 spriteIds[PBAG_SPRITE_COUNT];
     u8 windowIds[5];
@@ -49,7 +50,7 @@ struct PyramidBagMenu
 
 struct PyramidBagMenuState
 {
-    void (*exitCallback)(void);
+    MainCallback exitCallback;
     u8 location;
     u16 cursorPosition;
     u16 scrollPosition;
@@ -63,7 +64,7 @@ void CB2_PyramidBagMenuFromStartMenu(void);
 void CB2_ReturnToPyramidBagMenu(void);
 void UpdatePyramidBagList(void);
 void UpdatePyramidBagCursorPos(void);
-void GoToBattlePyramidBagMenu(u8 location, void (*exitCallback)(void));
+void GoToBattlePyramidBagMenu(u8 location, MainCallback exitCallback);
 void Task_CloseBattlePyramidBagMessage(u8 taskId);
 void TryStoreHeldItemsInPyramidBag(void);
 void ChooseItemsToTossFromPyramidBag(void);

@@ -50,7 +50,7 @@ enum {
 struct UsePokeblockSession
 {
     void (*callback)(void);
-    void (*exitCallback)(void);
+    MainCallback exitCallback;
     struct Pokeblock *pokeblock;
     struct Pokemon *mon;
     u8 stringBuffer[64];
@@ -162,7 +162,7 @@ extern const u16 gConditionText_Pal[];
 // The below 3 are saved for returning to the screen after feeding a pokeblock to a mon
 // so that the rest of the data can be freed
 static EWRAM_DATA struct UsePokeblockSession *sInfo = NULL;
-static EWRAM_DATA void (*sExitCallback)(void) = NULL;
+static EWRAM_DATA MainCallback sExitCallback = NULL;
 static EWRAM_DATA struct Pokeblock *sPokeblock = NULL;
 EWRAM_DATA u8 gPokeblockMonId = 0;
 EWRAM_DATA s16 gPokeblockGain = 0;
