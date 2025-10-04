@@ -42,14 +42,14 @@
 ## 🧩 Branch Plan
 Each major feature will get its own branch:
 
-`Pokemon Rebalance` - base stat changes, moveset changes, move changes
-`Gym Challenge Rebalance` - gym leader, E4, champ, and rival team rebalances
-`Evil Team Rebalance` - admins, grunts, & leaders of A&M rebalanced
-`Ordinary Trainer Rebalance` team tweaks for regular trainers throughout the game
-`Pokemon Availability` changes to wild Pokemon locations and when Pokemon can be obtained
-`Move QoL` - shops to sell TMs throughout the game and tutors reteach moves
-`Berry tweaks` - shops to sell berries and also improve berry growing system
-`Catch-all Item QoL` - other shops added and items placed to change game balance
+- `Pokemon Rebalance` - base stat changes, moveset changes, move changes
+- `Gym Challenge Rebalance` - gym leader, E4, champ, and rival team rebalances
+- `Evil Team Rebalance` - admins, grunts, & leaders of A&M rebalanced
+- `Ordinary Trainer Rebalance` team tweaks for regular trainers throughout the game
+- `Pokemon Availability` changes to wild Pokemon locations and when Pokemon can be obtained
+- `Move QoL` - shops to sell TMs throughout the game and tutors reteach moves
+- `Berry tweaks` - shops to sell berries and also improve berry growing system
+- `Catch-all Item QoL` - other shops added and items placed to change game balance
 
 ---
 
