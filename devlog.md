@@ -42,7 +42,8 @@
 ## 🧩 Branch Plan
 Each major feature will get its own branch:
 
-- `Pokemon Rebalance` - base stat changes, moveset changes, move changes
+- `Pokemon Rebalance` - base stat changes, moveset changes, stat screen colors
+- `Battle Rebalance` - move changes, ghost is special & dark is physical, buffs to sandstorm & hail, hold item tweaks
 - `Gym Challenge Rebalance` - gym leader, E4, champ, and rival team rebalances
 - `Evil Team Rebalance` - admins, grunts, & leaders of A&M rebalanced
 - `Ordinary Trainer Rebalance` team tweaks for regular trainers throughout the game
