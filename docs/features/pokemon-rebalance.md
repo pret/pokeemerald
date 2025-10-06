@@ -140,3 +140,171 @@ file: src/data/pokemon/species_info.h
 
 10/5/25 - Commit made
 file: src/data/pokemon/species_info.h
+
+10/5/25 - Battle Move Changes
+file: src/data/battle_moves.h
+- Crush Claw: BP 75->85, PP 10->15
+- Dizzy Punch: PP 10->15
+- DoubleSlap: ACC 85->100, PP 10->15
+- ExtremeSpeed: PP 5->10
+- Fury Attack: BP 15->18, ACC 85->100
+- Fury Swipes: BP 18->20, ACC 80->100, PP 15->20
+- Glare: ACC 75->90
+- Hyper Voice: BP 90->100, PP 10->15
+- Recover: PP 20->10
+- Slam: ACC 75->95
+- Sonicboom: ACC 90->100
+- Supersonic: ACC 55->70
+- Tackle: ACC 95->100
+- Take Down: ACC 85->95
+- Bullet Seed: BP 10->15
+- Giga Drain: BP 60->75, PP 5->10
+- Leaf Blade: BP 70->90
+- Mega Drain: PP 10->20
+- Needle Arm: BP 60->90
+- Petal Dance: BP 70->90
+- Blaze Kick: BP 85->100, ACC 90->95
+- Fire Spin: BP 15->35, ACC 70->100
+- Flame Wheel: BP 60->65
+- Heat Wave: Chance to burn 10%->30%
+- Sunny Day: PP 5->10
+- Clamp: ACC 75->100
+- Crabhammer: BP 90->110, ACC 85->90, PP 10->15
+- Muddy Water: BP 95->100, ACC 85->90, PP 10->15
+- Rain Dance: PP 5->10
+- Waterfall: BP 80->70, now has 30% chance to cause flinch
+
+10/6/25 - Battle Move Changes
+file: src/data/battle_moves.h
+- Barrage: BP 15->20, ACC 85->100
+- Bind: BP 15->35, ACC 75->100
+- Comet Punch: BP 18->25, ACC 85->100, PP 15->25
+- Constrict: BP 10->30, chance to lower speed 10%->30%
+- Covet: BP 40->60, PP 40->15
+- Disable: ACC 55->85
+- Flash: ACC 70->100
+- Hyper Voice: now has 30% chance to confuse
+- Skull Base: BP 100->130
+- Smellingsalt: BP 60->75, PP 10->15
+- Snore: BP 40->60, PP 15->20
+- Thrash: BP 90->100
+- Tri Attack: BP 80->85, PP 10->15
+- Uproar: BP 50->65, PP 10->20
+- Vicegrip: now has 20% chance to lower attack
+- Weather Ball: PP 10->20
+- Wrap: BP 15->35, ACC 85->100
+- Arm Thrust: BP 15->18
+- Cross Chop: ACC 80->90, PP 5->10
+- Dynamic Punch: ACC 50->70, PP 5->10
+- Hi Jump Kick: BP 85->100
+- Jump Kick: BP 70->80
+- Rock Smash: BP 20->60, chance to lower defense 50%->20%
+- Rolling Kick: BP 60->70, ACC 85->100, PP 15->25
+- Sky Uppercut: BP 85->90, ACC 90->95
+- Submission: BP 80->90, ACC 80->100
+- Triple Kick: BP 10->30, ACC 90->100, PP 10->15
+- Vital Throw: PP 10->20
+- Bubble: BP 20->30
+- Dive: BP 60->80, PP 10->15
+- Hydro Pump: ACC 80->85
+- Octazooka: BP 65->70, ACC 85->100, PP 10->15
+- Whirlpool: BP 15->35, ACC 70->100
+- Sacred Fire: PP 5->10
+- Will-o-Wisp: ACC 75->90
+- AncientPower: PP 5->10
+- Rock Blast: ACC 80->90, PP 10->15
+- Rock Slide: BP 75->90, PP 10->15
+- Rock Throw: ACC 90->95, PP 15->25
+- Rock Tomb: BP 50->60, ACC 80->90, PP 10->15
+- Cut: BP 50->55, PP 30->25, now Bug Type, now high crit ratio
+- Leech Life: BP 20->40, PP 15->25
+- Pin Missile: BP 14->19, ACC 85->100
+- Signal Beam: BP 75->85
+- Silver Wind: PP 5->10
+- Twineedle: BP 25->40
+- Egg Bomb: ACC 75->90, PP 10->15, now Grass Type
+- Grasswhistle: ACC 55->75
+- Vine Whip: BP 35->40, PP 10->25
+- Bone Club: ACC 85->100, PP 20->25
+- Bone Rush: ACC 80->100, PP 10->20
+- Bonemerang: PP 10->20
+- Dig: BP 60->70, PP 10->20
+- Mud Slap: BP 20->30, PP 10->15
+- Sand Tomb: BP 15->35, ACC 70->100
+- Aeroblast: PP 5->10
+- Air Cutter: BP 55->65
+- Bounce: ACC 85->95, PP 5->15
+- Fly: ACC 95->100
+- Razor Wind: BP 80->75, ACC 100->95, PP 10->15, now flying type, no longer has charge up turn, now has 30% chance to flinch
+- Sky Attack: BP 140->120, PP 5->10, no longer has charge up turn, has 30% chance to cause flinch
+- Zap Cannon: ACC 50->70, PP 5->10
+- Blizzard: now always hits during hail
+- Ice Beam: PP 10->15
+- Icicle Spear: BP 10->25, PP 30->25
+- Icy Wind: PP 15->20
+- Astonish: BP 30->50
+- Lick: BP 20->40
+- Shadow Punch: BP 60->80
+- Beat Up: BP 10->20
+- Crunch: chance to lower SPDEF->DEF
+- Faint Attack: BP 60->70
+- Knock Off: BP 20->50
+- Thief: BP 40->60, PP 10->15
+- Future Sight: BP 80->120, ACC 90->100
+- Luster Purge: PP 5->15
+- Mist Ball: PP 5->15
+- Psychic: PP 10->15
+- Psywave: ACC 80->95
+- Poison Fang: BP 50->60
+- Poison Gas: ACC 55->70
+- Poison Sting: BP 15->30
+- Poison Tail: BP 50->80
+- Poison Powder: ACC 75->85
+- Sludge Bomb: PP 10->15
+- Smog: ACC 70->100
+- Dragon Claw: BP 80->90
+- Dragon Breath: BP 60->70
+- Outrage: BP 90->110
+- Twister: BP 40->50
+- Doom Desire: BP 120->150, ACC 85->100
+- Iron Tail: ACC 75->90, has 30%->20% chance to lower defense
+- Metal Claw: BP 50->60, has 10%->20% chance to increase attack
+- Meteor Mash: ACC 85->90
+- Spike Cannon: BP 20->30, now steel type
+- Steel Wing: ACC 90->95
+
+10/6/25 - Change move animations
+file: data/battle_anim_scrips.s
+- Razor Wind now always goes to "unleash" animation as it is no longer a two-turn move
+- Sky Attack now always goes to "unleash" animation as it is no longer a two-turn move
+
+10/6/25 - Implementing "blizzard" move effect
+files: include/constants/battle_move_effects.h
+- added constant for "blizzard" move effect
+files: src/battle.tv
+- added in "blizzard" effect
+files: data/battle_scripts_1.s
+- implementing script for "blizzard" effect
+files: src/battle_script_commands.c
+- make blizzard skip accurary check in hail
+
+10/6/25 - hail & sandstorm defense boosts
+files: src/pokemon.c
+- Rock Types get 50% SPDEF boost in sandstorm and Ice Types get 50% DEF boost in hail
+
+10/6/25 - making dark physical and ghost special
+files: /include/battle.h
+
+10/6/25 - update move descriptions based on changes
+files: /src/data/text/move_descriptions.h
+
+10/6/25 - commit made
+files: data/battle_anim_scripts.s
+       data/battle_scripts.s
+       include/battle.h
+       include/constants/battle_move_effects.h
+       src/battle_script_commands.c
+       src/battle_tv.c
+       src/pokemon.c
+       src/data/battle_moves.h
+       src/data/text/move_descriptions.h

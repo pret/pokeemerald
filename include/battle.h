@@ -460,8 +460,8 @@ STATIC_ASSERT(sizeof(((struct BattleStruct *)0)->palaceFlags) * 8 >= MAX_BATTLER
         typeArg = gBattleMoves[move].type;                            \
 }
 
-#define IS_TYPE_PHYSICAL(moveType) (moveType < TYPE_MYSTERY)
-#define IS_TYPE_SPECIAL(moveType) (moveType > TYPE_MYSTERY)
+#define IS_TYPE_PHYSICAL(moveType)((moveType < TYPE_MYSTERY && moveType != TYPE_GHOST) || moveType == TYPE_DARK) // Doing dark/ghost switch this way to preserve IDs for pkhex/trade functionality
+#define IS_TYPE_SPECIAL(moveType)((moveType > TYPE_MYSTERY && moveType != TYPE_DARK) || moveType == TYPE_GHOST)
 
 #define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0))
 

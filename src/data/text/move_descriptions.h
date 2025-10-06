@@ -42,24 +42,24 @@ static const u8 sScratchDescription[] = _(
     "sharp claws.");
 
 static const u8 sViceGripDescription[] = _(
-    "Grips the foe with large and\n"
-    "powerful pincers.");
+    "Grips the foe with powerful\n"
+    "pincers. May lower ATTACK.");
 
 static const u8 sGuillotineDescription[] = _(
     "A powerful pincer attack\n"
     "that may cause fainting.");
 
 static const u8 sRazorWindDescription[] = _(
-    "A 2-turn move that strikes\n"
-    "the foe on the 2nd turn.");
+    "Strong winds slice to attack.\n"
+    "May cause the foe to flinch.");
 
 static const u8 sSwordsDanceDescription[] = _(
     "A fighting dance that\n"
     "sharply raises ATTACK.");
 
 static const u8 sCutDescription[] = _(
-    "Cuts the foe with sharp\n"
-    "scythes, claws, etc.");
+    "Cuts sharp claws, etc. Has\n"
+    "a high critical-hit ratio");
 
 static const u8 sGustDescription[] = _(
     "Strikes the foe with a gust\n"
@@ -506,8 +506,8 @@ static const u8 sFireBlastDescription[] = _(
     "strikes. May cause a burn.");
 
 static const u8 sWaterfallDescription[] = _(
-    "Charges the foe with speed\n"
-    "to climb waterfalls.");
+    "A charge with speed to climb\n"
+    "waterfalls. May cause flinch.");
 
 static const u8 sClampDescription[] = _(
     "Traps and squeezes the\n"
@@ -522,8 +522,8 @@ static const u8 sSkullBashDescription[] = _(
     "attacks on the next turn.");
 
 static const u8 sSpikeCannonDescription[] = _(
-    "Launches sharp spikes that\n"
-    "strike 2 to 5 times.");
+    "Launches sharp steel spikes\n"
+    "that strike 2 to 5 times.");
 
 static const u8 sConstrictDescription[] = _(
     "Constricts to inflict pain.\n"
@@ -570,8 +570,8 @@ static const u8 sLovelyKissDescription[] = _(
     "face that induces sleep.");
 
 static const u8 sSkyAttackDescription[] = _(
-    "Searches out weak spots,\n"
-    "then strikes the next turn.");
+    "A powerful aerial attack that\n"
+    "may cause the foe to flinch.");
 
 static const u8 sTransformDescription[] = _(
     "Alters the user's cells to\n"
@@ -967,7 +967,7 @@ static const u8 sSunnyDayDescription[] = _(
 
 static const u8 sCrunchDescription[] = _(
     "Crunches with sharp fangs.\n"
-    "May lower SP. DEF.");
+    "May lower DEFENSE.");
 
 static const u8 sMirrorCoatDescription[] = _(
     "Counters the foe's special\n"
@@ -1214,8 +1214,8 @@ static const u8 sSlackOffDescription[] = _(
     "half the maximum HP.");
 
 static const u8 sHyperVoiceDescription[] = _(
-    "A loud attack that uses\n"
-    "sound waves to injure.");
+    "A loud sound wave attack\n"
+    "that may confuse the foe.");
 
 static const u8 sPoisonFangDescription[] = _(
     "A sharp-fanged attack.\n"
