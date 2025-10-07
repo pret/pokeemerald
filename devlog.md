@@ -27,30 +27,25 @@
 ---
 
 ## 🗂️ To-Do List (General)
-- [ ] Pokemon Base Stat Changes
-- [ ] Move Changes
+- [X] Pokemon Base Stat Changes
+- [X] Move Changes
 - [ ] Tweaks to berry growing system
 - [ ] Changes to Pokemon lvl up movesets
 - [ ] Changes to rival trainer teams
 - [ ] Changes to Pokemon Availability
 - [ ] Added shops for items & TMs
 - [ ] Move Tutors are reusable
-- [ ] Light tweaks to battle system around weather (hail & sandstorm)
+- [X] Light tweaks to battle system around weather (hail & sandstorm)
 
 ---
 
 ## 🧩 Branch Plan
 Each major feature will get its own branch:
 
-- `Pokemon Rebalance` - base stat changes, moveset changes, stat screen colors
-- `Battle Rebalance` - move changes, ghost is special & dark is physical, buffs to sandstorm & hail, hold item tweaks
-- `Gym Challenge Rebalance` - gym leader, E4, champ, and rival team rebalances
-- `Evil Team Rebalance` - admins, grunts, & leaders of A&M rebalanced
-- `Ordinary Trainer Rebalance` team tweaks for regular trainers throughout the game
+- `Pokemon Rebalance` - base stat changes, moveset changes, stat screen colors, move changes, ghost is special & dark is physical, buffs to sandstorm & hail, hold item tweaks
+- `Trainer Rebalance` - gym leader, E4, champ, and rival team rebalances, evil teams, general trainers
 - `Pokemon Availability` changes to wild Pokemon locations and when Pokemon can be obtained
-- `Move QoL` - shops to sell TMs throughout the game and tutors reteach moves
-- `Berry tweaks` - shops to sell berries and also improve berry growing system
-- `Catch-all Item QoL` - other shops added and items placed to change game balance
+- `QoL` - shops to sell TMs throughout the game and tutors reteach moves, shops to sell berries and also improve berry growing system, other shops added and items placed to change game balance
 
 ---
 

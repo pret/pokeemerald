@@ -39,12 +39,16 @@ This feature will focus on:
 ---
 
 ## ✅ To-Do
-- [ ] Implement all base stat changes
+- [X] Implement all base stat changes
 - [ ] Implement evolution changes
-- [ ] Implement move changes
+- [X] Implement move changes
 - [ ] Implement level-up learnset changes
 - [ ] Implement TM learnset changes
 - [ ] Implement tutor learnset changes
+- [X] Dark Physical & Ghost Special
+- [X] Buffs to Sandstorm & Hail
+- [ ] Summary Screen Shows Stats affected by nature
+- [ ] Buffs to Hold Item Effects
 
 ---
 
@@ -308,3 +312,34 @@ files: data/battle_anim_scripts.s
        src/pokemon.c
        src/data/battle_moves.h
        src/data/text/move_descriptions.h
+
+10/6/25 - Evolution Changes
+files: src/data/pokemon/evolution.h
+       src/data/items.h
+- Haunter -> Gengar; Trade -> Lv 42
+- Kadabra -> Alakazam; Trade -> Lv 42
+- Graveler -> Golem; Trade -> Lv 38
+- Machoke -> Machamp; Trade -> Lv 38
+- Clamperl -> Gorebyss; Trade w/ DeepSeaScale -> Use DeepSeaScale
+- Clamperl -> Huntail; Trade w/ DeepSeaTooth -> Use DeepSeaTooth
+- Seadra -> Kingdra; Trade w/ Dragon Scale -> Use Dragon Scale
+- Poliwhirl -> Politoed; Trade w/ King's Rock -> Use King's Rock
+- Slowpoke -> Slowking; Trade w/ King's Rock -> Use King's Rock
+- Onix -> Steelix; Trade w/ Metal Coat -> Use Metal Coat
+- Scyther -> Scizor; Trade w/ Metal Coat -> Use Metal Coat
+- Porygon -> Porygon2; Trade w/ Upgrade -> Use Upgrade
+- Goldeen -> Seaking; Lv 33 -> Lv 28
+- Spinarak -> Ariados; Lv 22 -> Lv 21
+- Pineco -> Forretress; Lv 31 -> Lv 25
+- Slugma -> Magcargo; Lv 38 -> Lv 27
+- Ralts -> Kirlia; Lv 20 -> Lv 18
+- Aron -> Lairon; Lv 32 -> Lv 28
+- Meditite -> Medicham; Lv 37 -> Lv 33
+- Trapinch -> Vibrava; Lv 35 -> Lv 32
+- Vibrava -> Flygon; Lv 45 -> Lv 42
+- Snorunt -> Glalie; Lv 42 -> Lv 36
+
+10/7/25 - commit made
+files: src/data/pokemon/evolution.h
+       src/data/items.h
+
