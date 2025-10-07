@@ -343,3 +343,29 @@ files: src/data/pokemon/evolution.h
 files: src/data/pokemon/evolution.h
        src/data/items.h
 
+10/7/25 - Hold Item Buffs
+files: src/data/items.h
+Buff type damage by 10%->20%
+- Silk Scarf
+- Miracle Seed
+- Soft Sand
+- Charcoal
+- Mystic Water
+- Sharp Beak
+- Silver Powder
+- Dragon Fang
+- Black Belt
+- Metal Coat
+- Hard Stone
+- Twisted Spoon
+- Spell Tag
+- Black Glasses
+- Poison Barb
+- Magnet
+- Sea Incense (this actually is a buff of 5%->20%)
+- NevermeltIce
+Buff lax incense
+- Lax incense 5%->10% chance to miss
+
+10/7/25 - commit made
+fiels: src/data/items.h
