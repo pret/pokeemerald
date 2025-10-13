@@ -378,6 +378,13 @@ files: src/data/pokemon/level_up_learnsets.h
 files: src/data/pokemon/level_up_learnsets.h
 - Learnsets up to Kangaskhan
 
-10/13/25
-files: src/data-pokemon/level_up_learnsets.h
+10/13/25 - Levelup Learnset Edits
+files: src/data/pokemon/level_up_learnsets.h
 - Learnsets up to Mew
+
+10/13/25 - commit made
+files :src/data/pokemon/level_up_learnsets.h
+
+10/13/25 - Levelup Learnset Edits
+files: src/data/pokemon/level_up_learnsets.h
+- Learnsets up to Celebi
