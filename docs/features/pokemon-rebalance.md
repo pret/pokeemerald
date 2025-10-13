@@ -40,7 +40,7 @@ This feature will focus on:
 
 ## ✅ To-Do
 - [X] Implement all base stat changes
-- [ ] Implement evolution changes
+- [X] Implement evolution changes
 - [X] Implement move changes
 - [ ] Implement level-up learnset changes
 - [ ] Implement TM learnset changes
@@ -48,7 +48,7 @@ This feature will focus on:
 - [X] Dark Physical & Ghost Special
 - [X] Buffs to Sandstorm & Hail
 - [ ] Summary Screen Shows Stats affected by nature
-- [ ] Buffs to Hold Item Effects
+- [X] Buffs to Hold Item Effects
 
 ---
 
@@ -368,4 +368,16 @@ Buff lax incense
 - Lax incense 5%->10% chance to miss
 
 10/7/25 - commit made
-fiels: src/data/items.h
+files: src/data/items.h
+
+10/10/25 - Levelup Learnset Edits
+files: src/data/pokemon/level_up_learnsets.h
+- Learnsets up to Vileplume
+
+10/11/25 - Levelup Learnset Edits
+files: src/data/pokemon/level_up_learnsets.h
+- Learnsets up to Kangaskhan
+
+10/13/25
+files: src/data-pokemon/level_up_learnsets.h
+- Learnsets up to Mew
