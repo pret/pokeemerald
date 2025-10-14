@@ -357,6 +357,26 @@ nix-shell -p pkgsCross.arm-embedded.stdenv.cc git pkg-config libpng
 ```
 Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to-store-pokeemerald-linux).
 
+### OpenBSD
+Install requirements:
+```bash
+pkg_add gmake bash arm-none-eabi-binutils clang git
+```
+
+Clone pokeemerald & agbcc, and Build agbcc
+```bash
+git clone https://github.com/pret/pokeemerald
+git clone https://github.com/pret/agbcc
+cd agbcc && ./build.sh
+./install.sh ../pokeemerald
+```
+
+Build the ROM:
+```bash
+cd ../pokeemerald
+gmake
+```
+
 ### Other distributions
 _(Specific instructions for other distributions would be greatly appreciated!)_
 
