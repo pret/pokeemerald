@@ -333,6 +333,9 @@ void HandleJascToGbaPaletteCommand(char *inputPath, char *outputPath, int argc, 
 
             if (numColors < 1)
                 FATAL_ERROR("Number of colors must be positive.\n");
+            
+            if (numColors > 255)
+                FATAL_ERROR("Number of colors must be less than 256.\n");
         }
         else
         {

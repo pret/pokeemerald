@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_m_heat_wave_grp, voicegroup128
+	.equ	se_m_heat_wave_grp, voicegroup_rs_sfx_2
 	.equ	se_m_heat_wave_pri, 4
 	.equ	se_m_heat_wave_rev, reverb_set+50
 	.equ	se_m_heat_wave_mvl, 127

@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_m_surf_grp, voicegroup128
+	.equ	se_m_surf_grp, voicegroup_rs_sfx_2
 	.equ	se_m_surf_pri, 4
 	.equ	se_m_surf_rev, reverb_set+50
 	.equ	se_m_surf_mvl, 127
