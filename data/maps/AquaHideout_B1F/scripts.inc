@@ -1,7 +1,7 @@
 AquaHideout_B1F_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, AquaHideout_B1F_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, AquaHideout_B1F_OnTransition
-	.byte 0
+	end_map_scripts
 
 AquaHideout_B1F_OnResume:
 	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, AquaHideout_B1F_EventScript_TryRemoveElectrode

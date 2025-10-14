@@ -1,6 +1,6 @@
 Route113_GlassWorkshop_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route113_GlassWorkshop_OnTransition
-	.byte 0
+	end_map_scripts
 
 	.set BLUE_FLUTE_PRICE,   250
 	.set YELLOW_FLUTE_PRICE, 500

@@ -1,11 +1,11 @@
 EverGrandeCity_HallOfFame_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_HallOfFame_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_HallOfFame_OnWarp
-	.byte 0
+	end_map_scripts
 
 EverGrandeCity_HallOfFame_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_HallOfFame_EventScript_TurnPlayerNorth
-	.2byte 0
+	end_map_script_table
 
 EverGrandeCity_HallOfFame_EventScript_TurnPlayerNorth::
 	turnobject LOCALID_PLAYER, DIR_NORTH
@@ -13,7 +13,7 @@ EverGrandeCity_HallOfFame_EventScript_TurnPlayerNorth::
 
 EverGrandeCity_HallOfFame_OnFrame:
 	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_HallOfFame_EventScript_EnterHallOfFame
-	.2byte 0
+	end_map_script_table
 
 EverGrandeCity_HallOfFame_EventScript_EnterHallOfFame::
 	lockall

@@ -1,5 +1,5 @@
 BattleFrontier_Lounge8_MapScripts::
-	.byte 0
+	end_map_scripts
 
 BattleFrontier_Lounge8_EventScript_Man::
 	msgbox BattleFrontier_Lounge8_Text_WhatATrainerNeeds, MSGBOX_NPC
