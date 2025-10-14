@@ -455,7 +455,7 @@ static void Task_GoToBuyOrSellMenu(u8 taskId)
     if (!gPaletteFade.active)
     {
         DestroyTask(taskId);
-        SetMainCallback2((void *)((u16)tCallbackHi << 16 | (u16)tCallbackLo));
+        SetMainCallback2((MainCallback)((u16)tCallbackHi << 16 | (u16)tCallbackLo));
     }
 }
 

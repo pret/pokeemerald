@@ -77,7 +77,7 @@ struct TrainerCardData
     u8 cardType;
     bool8 isHoenn;
     u16 blendColor;
-    void (*callback2)(void);
+    MainCallback callback2;
     struct TrainerCard trainerCard;
     u16 frontTilemap[600];
     u16 backTilemap[600];
