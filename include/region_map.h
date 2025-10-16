@@ -23,7 +23,7 @@ enum {
     MAPSECTYPE_CITY_CANFLY,
     MAPSECTYPE_CITY_CANTFLY,
     MAPSECTYPE_BATTLE_FRONTIER,
-    NUM_mapsec_u8_tYPES
+    NUM_MAPSEC_TYPES
 };
 
 struct RegionMap {

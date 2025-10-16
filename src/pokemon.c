@@ -4079,13 +4079,14 @@ u32 GetBoxMonData2(struct BoxPokemon *boxMon, s32 field) __attribute__((alias("G
 // anything whose typedef is in gametypes.h).
 //
 #define SET_BY_WIDTH(lhs) \
-   if (sizeof(lhs) == 1) { \
-      SET8(lhs); \
-   } else if (sizeof(lhs) == 2) { \
-      SET16(lhs); \
-   } else if (sizeof(lhs) == 4) { \
-      SET32(lhs); \
-   }
+    do { \
+       if (sizeof(lhs) == 1) \
+          SET8(lhs); \
+       else if (sizeof(lhs) == 2) \
+          SET16(lhs); \
+       else if (sizeof(lhs) == 4) \
+          SET32(lhs); \
+   } while (0)
 
 void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
 {

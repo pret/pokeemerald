@@ -52,7 +52,7 @@
 typedef u8  mapsec_u8_t;
 typedef u16 mapsec_u16_t;
 typedef s16 mapsec_s16_t;
-typedef int mapsec_int_t;
+typedef s32 mapsec_s32_t;
 
 // Met Locations for caught Pokemon use the same values as Map Sections, 
 // except that 0xFD, 0xFE, and 0xFF have special meanings.
