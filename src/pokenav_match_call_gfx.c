@@ -3,7 +3,6 @@
 #include "data.h"
 #include "decompress.h"
 #include "dma3.h"
-#include "gametypes.h"
 #include "international_string_util.h"
 #include "main.h"
 #include "match_call.h"

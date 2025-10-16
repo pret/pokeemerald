@@ -1,7 +1,6 @@
 #include "global.h"
 #include "bg.h"
 #include "decompress.h"
-#include "gametypes.h"
 #include "landmark.h"
 #include "main.h"
 #include "menu.h"

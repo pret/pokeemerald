@@ -2,7 +2,6 @@
 #define GUARD_POKENAV_H
 
 #include "bg.h"
-#include "gametypes.h"
 #include "main.h"
 #include "pokemon_storage_system.h"
 

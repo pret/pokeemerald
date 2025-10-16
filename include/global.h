@@ -5,6 +5,7 @@
 #include <limits.h>
 #include "config.h" // we need to define config before gba headers as print stuff needs the functions nulled before defines.
 #include "gba/gba.h"
+#include "gametypes.h"
 #include "constants/global.h"
 #include "constants/flags.h"
 #include "constants/vars.h"

@@ -2,7 +2,6 @@
 #include "battle_setup.h"
 #include "data.h"
 #include "event_data.h"
-#include "gametypes.h"
 #include "string_util.h"
 #include "battle.h"
 #include "gym_leader_rematch.h"

@@ -1,7 +1,6 @@
 #ifndef GUARD_POKEMON_H
 #define GUARD_POKEMON_H
 
-#include "gametypes.h"
 #include "sprite.h"
 
 // Property labels for Get(Box)MonData / Set(Box)MonData

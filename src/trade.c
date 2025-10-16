@@ -1,5 +1,4 @@
 #include "global.h"
-#include "gametypes.h"
 #include "malloc.h"
 #include "battle_anim.h"
 #include "battle_interface.h"

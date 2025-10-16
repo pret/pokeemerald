@@ -1,5 +1,4 @@
 #include "global.h"
-#include "gametypes.h"
 #include "pokemon.h"
 #include "egg_hatch.h"
 #include "pokedex.h"

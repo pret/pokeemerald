@@ -1,8 +1,6 @@
 #ifndef GUARD_OVERWORLD_H
 #define GUARD_OVERWORLD_H
 
-#include "gametypes.h"
-
 #define LINK_KEY_CODE_NULL 0x00
 #define LINK_KEY_CODE_EMPTY 0x11
 #define LINK_KEY_CODE_DPAD_DOWN 0x12

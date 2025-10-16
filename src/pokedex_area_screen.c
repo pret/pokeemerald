@@ -1,7 +1,6 @@
 #include "global.h"
 #include "bg.h"
 #include "event_data.h"
-#include "gametypes.h"
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "main.h"

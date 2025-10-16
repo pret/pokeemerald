@@ -2,7 +2,6 @@
 #define GUARD_REGION_MAP_H
 
 #include "bg.h"
-#include "gametypes.h"
 
 // Exported type declarations
 #define MAP_NAME_LENGTH 16

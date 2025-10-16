@@ -2,7 +2,6 @@
 #define GUARD_GLOBAL_TV_H
 
 #include "constants/tv.h"
-#include "gametypes.h"
 
 typedef union // size = 0x24
 {

@@ -2,7 +2,6 @@
 #include "pokemon.h"
 #include "battle.h"
 #include "daycare.h"
-#include "gametypes.h"
 #include "string_util.h"
 #include "mail.h"
 #include "pokemon_storage_system.h"

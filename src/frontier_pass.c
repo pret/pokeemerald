@@ -1,5 +1,4 @@
 #include "global.h"
-#include "gametypes.h"
 #include "gpu_regs.h"
 #include "main.h"
 #include "trainer_card.h"

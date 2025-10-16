@@ -7,7 +7,6 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
-#include "gametypes.h"
 #include "main.h"
 #include "match_call.h"
 #include "menu.h"
