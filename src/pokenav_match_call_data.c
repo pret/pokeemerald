@@ -118,7 +118,7 @@ static bool32 MatchCall_GetEnabled_Birch(match_call_t);
 static bool32 MatchCall_GetEnabled_Rival(match_call_t);
 
 static mapsec_u8_t MatchCall_GetMapSec_NPC(match_call_t);
-static mapsec_u8_t MatchCall_Getmapsec_u8_trainer(match_call_t);
+static mapsec_u8_t MatchCall_GetMapSec_Trainer(match_call_t);
 static mapsec_u8_t MatchCall_GetMapSec_Wally(match_call_t);
 static mapsec_u8_t MatchCall_GetMapSec_Birch(match_call_t);
 static mapsec_u8_t MatchCall_GetMapSec_Rival(match_call_t);
@@ -796,7 +796,7 @@ static mapsec_u8_t MatchCall_GetMapSec_NPC(match_call_t matchCall)
     return matchCall.npc->mapSec;
 }
 
-static mapsec_u8_t MatchCall_Getmapsec_u8_trainer(match_call_t matchCall)
+static mapsec_u8_t MatchCall_GetMapSec_Trainer(match_call_t matchCall)
 {
     return matchCall.trainer->mapSec;
 }
