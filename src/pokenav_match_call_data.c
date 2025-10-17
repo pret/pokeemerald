@@ -611,7 +611,7 @@ static bool32 (*const sMatchCallGetEnabledFuncs[])(match_call_t) = {
 
 static mapsec_u8_t (*const sMatchCallGetMapSecFuncs[])(match_call_t) = {
     MatchCall_GetMapSec_NPC,
-    MatchCall_Getmapsec_u8_trainer,
+    MatchCall_GetMapSec_Trainer,
     MatchCall_GetMapSec_Wally,
     MatchCall_GetMapSec_Rival,
     MatchCall_GetMapSec_Birch
