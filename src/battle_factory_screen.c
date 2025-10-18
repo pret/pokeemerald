@@ -125,7 +125,7 @@ struct FactorySelectScreen
 struct SwapScreenAction
 {
     u8 id;
-    void (*func)(u8 taskId);
+    TaskFunc func;
 };
 
 struct FactorySwapScreen
@@ -253,7 +253,7 @@ static EWRAM_DATA u8 *sSwapMenuTilemapBuffer = NULL;
 static EWRAM_DATA u8 *sSwapMonPicBgTilemapBuffer = NULL;
 
 static struct FactorySelectScreen *sFactorySelectScreen;
-static void (*sSwap_CurrentOptionFunc)(u8 taskId);
+static TaskFunc sSwap_CurrentOptionFunc;
 static struct FactorySwapScreen *sFactorySwapScreen;
 
 COMMON_DATA u8 (*gFactorySelect_CurrentOptionFunc)(void) = NULL;
@@ -886,7 +886,7 @@ static const struct SpriteTemplate sSpriteTemplate_Swap_MonPicBgAnim =
     .callback = SpriteCallbackDummy
 };
 
-void static (*const sSwap_MenuOptionFuncs[])(u8 taskId) =
+static const TaskFunc sSwap_MenuOptionFuncs[] =
 {
     Swap_OptionSummary,
     Swap_OptionSwap,

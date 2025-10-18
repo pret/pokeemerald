@@ -339,9 +339,9 @@ bool8 IsComputerScreenCloseEffectActive(void)
 #define tBlendCnt      data[7]
 #define tBlendY        data[8]
 
-static void CreateComputerScreenEffectTask(void (*taskfunc) (u8), u16 increment, u16 unused, u8 priority)
+static void CreateComputerScreenEffectTask(TaskFunc func, u16 increment, u16 unused, u8 priority)
 {
-    u8 taskId = CreateTask(taskfunc, priority);
+    u8 taskId = CreateTask(func, priority);
 
     gTasks[taskId].tState = 0;
     gTasks[taskId].tHorzIncrement = increment == 0 ? 16 : increment;

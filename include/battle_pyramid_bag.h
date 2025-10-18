@@ -3,6 +3,7 @@
 
 #include "list_menu.h"
 #include "main.h"
+#include "task.h"
 
 enum {
     PYRAMIDBAG_LOC_FIELD,
@@ -69,6 +70,6 @@ void Task_CloseBattlePyramidBagMessage(u8 taskId);
 void TryStoreHeldItemsInPyramidBag(void);
 void ChooseItemsToTossFromPyramidBag(void);
 void CloseBattlePyramidBag(u8 taskId);
-void DisplayItemMessageInBattlePyramid(u8 taskId, const u8 *str, void (*callback)(u8 taskId));
+void DisplayItemMessageInBattlePyramid(u8 taskId, const u8 *str, TaskFunc callback);
 
 #endif // GUARD_BATTLE_PYRAMID_BAG_H
