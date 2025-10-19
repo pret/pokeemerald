@@ -47,12 +47,6 @@
 
 #define FLYDESTICON_RED_OUTLINE 6
 
-enum {
-    TAG_CURSOR,
-    TAG_PLAYER_ICON,
-    TAG_FLY_ICON,
-};
-
 // Window IDs for the fly map
 enum {
     WIN_MAPSEC_NAME,
@@ -240,13 +234,13 @@ static const union AnimCmd *const sRegionMapCursorAnimTable[] =
 static const struct SpritePalette sRegionMapCursorSpritePalette =
 {
     .data = sRegionMapCursorPal,
-    .tag = TAG_CURSOR
+    .tag = TAG_REGION_MAP_CURSOR
 };
 
 static const struct SpriteTemplate sRegionMapCursorSpriteTemplate =
 {
-    .tileTag = TAG_CURSOR,
-    .paletteTag = TAG_CURSOR,
+    .tileTag = TAG_REGION_MAP_CURSOR,
+    .paletteTag = TAG_REGION_MAP_CURSOR,
     .oam = &sRegionMapCursorOam,
     .anims = sRegionMapCursorAnimTable,
     .images = NULL,
@@ -418,7 +412,7 @@ static const struct WindowTemplate sFlyMapWindowTemplates[] =
 static const struct SpritePalette sFlyTargetIconsSpritePalette =
 {
     .data = sFlyTargetIcons_Pal,
-    .tag = TAG_FLY_ICON
+    .tag = TAG_REGION_MAP_FLY_ICON
 };
 
 static const mapsec_u16_t sRedOutlineFlyDestinations[][2] =
@@ -496,8 +490,8 @@ static const union AnimCmd *const sFlyDestIcon_Anims[] =
 
 static const struct SpriteTemplate sFlyDestIconSpriteTemplate =
 {
-    .tileTag = TAG_FLY_ICON,
-    .paletteTag = TAG_FLY_ICON,
+    .tileTag = TAG_REGION_MAP_FLY_ICON,
+    .paletteTag = TAG_REGION_MAP_FLY_ICON,
     .oam = &sFlyDestIcon_OamData,
     .anims = sFlyDestIcon_Anims,
     .images = NULL,
@@ -1690,8 +1684,8 @@ void CB2_OpenFlyMap(void)
         break;
     case 4:
         InitRegionMap(&sFlyMap->regionMap, FALSE);
-        CreateRegionMapCursor(TAG_CURSOR, TAG_CURSOR);
-        CreateRegionMapPlayerIcon(TAG_PLAYER_ICON, TAG_PLAYER_ICON);
+        CreateRegionMapCursor(TAG_REGION_MAP_CURSOR, TAG_REGION_MAP_CURSOR);
+        CreateRegionMapPlayerIcon(TAG_REGION_MAP_PLAYER_ICON, TAG_REGION_MAP_PLAYER_ICON);
         sFlyMap->mapSecId = sFlyMap->regionMap.mapSecId;
         StringFill(sFlyMap->nameBuffer, CHAR_SPACE, MAP_NAME_LENGTH);
         sDrawFlyDestTextWindow = TRUE;
@@ -1825,7 +1819,7 @@ static void LoadFlyDestIcons(void)
     LZ77UnCompWram(sFlyTargetIcons_Gfx, sFlyMap->tileBuffer);
     sheet.data = sFlyMap->tileBuffer;
     sheet.size = sizeof(sFlyMap->tileBuffer);
-    sheet.tag = TAG_FLY_ICON;
+    sheet.tag = TAG_REGION_MAP_FLY_ICON;
     LoadSpriteSheet(&sheet);
     LoadSpritePalette(&sFlyTargetIconsSpritePalette);
     CreateFlyDestIcons();

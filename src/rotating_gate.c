@@ -8,7 +8,6 @@
 #include "sprite.h"
 #include "constants/songs.h"
 
-#define ROTATING_GATE_TILE_TAG 0x1300
 #define ROTATING_GATE_PUZZLE_MAX 12
 #define GATE_ARM_MAX_LENGTH 2
 
@@ -270,14 +269,14 @@ static const struct OamData sOamData_RotatingGateRegular =
 
 static const struct SpriteSheet sRotatingGatesGraphicsTable[] =
 {
-    {sRotatingGateTiles_1, sizeof(sRotatingGateTiles_1), ROTATING_GATE_TILE_TAG + GATE_SHAPE_L1},
-    {sRotatingGateTiles_2, sizeof(sRotatingGateTiles_2), ROTATING_GATE_TILE_TAG + GATE_SHAPE_L2},
-    {sRotatingGateTiles_3, sizeof(sRotatingGateTiles_3), ROTATING_GATE_TILE_TAG + GATE_SHAPE_L3},
-    {sRotatingGateTiles_4, sizeof(sRotatingGateTiles_4), ROTATING_GATE_TILE_TAG + GATE_SHAPE_L4},
-    {sRotatingGateTiles_5, sizeof(sRotatingGateTiles_5), ROTATING_GATE_TILE_TAG + GATE_SHAPE_T1},
-    {sRotatingGateTiles_6, sizeof(sRotatingGateTiles_6), ROTATING_GATE_TILE_TAG + GATE_SHAPE_T2},
-    {sRotatingGateTiles_7, sizeof(sRotatingGateTiles_7), ROTATING_GATE_TILE_TAG + GATE_SHAPE_T3},
-    {sRotatingGateTiles_8, sizeof(sRotatingGateTiles_8), ROTATING_GATE_TILE_TAG + GATE_SHAPE_T4},
+    {sRotatingGateTiles_1, sizeof(sRotatingGateTiles_1), GFX_TAG_ROTATING_GATE + GATE_SHAPE_L1},
+    {sRotatingGateTiles_2, sizeof(sRotatingGateTiles_2), GFX_TAG_ROTATING_GATE + GATE_SHAPE_L2},
+    {sRotatingGateTiles_3, sizeof(sRotatingGateTiles_3), GFX_TAG_ROTATING_GATE + GATE_SHAPE_L3},
+    {sRotatingGateTiles_4, sizeof(sRotatingGateTiles_4), GFX_TAG_ROTATING_GATE + GATE_SHAPE_L4},
+    {sRotatingGateTiles_5, sizeof(sRotatingGateTiles_5), GFX_TAG_ROTATING_GATE + GATE_SHAPE_T1},
+    {sRotatingGateTiles_6, sizeof(sRotatingGateTiles_6), GFX_TAG_ROTATING_GATE + GATE_SHAPE_T2},
+    {sRotatingGateTiles_7, sizeof(sRotatingGateTiles_7), GFX_TAG_ROTATING_GATE + GATE_SHAPE_T3},
+    {sRotatingGateTiles_8, sizeof(sRotatingGateTiles_8), GFX_TAG_ROTATING_GATE + GATE_SHAPE_T4},
     {NULL},
 };
 
@@ -465,7 +464,7 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_RotatingGate[] =
 
 static const struct SpriteTemplate sSpriteTemplate_RotatingGateLarge =
 {
-    .tileTag = ROTATING_GATE_TILE_TAG,
+    .tileTag = GFX_TAG_ROTATING_GATE,
     .paletteTag = TAG_NONE,
     .oam = &sOamData_RotatingGateLarge,
     .anims = sSpriteAnimTable_RotatingGateLarge,
@@ -476,7 +475,7 @@ static const struct SpriteTemplate sSpriteTemplate_RotatingGateLarge =
 
 static const struct SpriteTemplate sSpriteTemplate_RotatingGateRegular =
 {
-    .tileTag = ROTATING_GATE_TILE_TAG,
+    .tileTag = GFX_TAG_ROTATING_GATE,
     .paletteTag = TAG_NONE,
     .oam = &sOamData_RotatingGateRegular,
     .anims = sSpriteAnimTable_RotatingGateRegular,
@@ -739,7 +738,7 @@ static u8 RotatingGate_CreateGate(u8 gateId, s16 deltaX, s16 deltaY)
     else
         template = sSpriteTemplate_RotatingGateLarge;
 
-    template.tileTag = gate->shape + ROTATING_GATE_TILE_TAG;
+    template.tileTag = gate->shape + GFX_TAG_ROTATING_GATE;
 
     spriteId = CreateSprite(&template, 0, 0, 0x94);
     if (spriteId == MAX_SPRITES)

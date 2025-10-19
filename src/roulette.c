@@ -121,32 +121,6 @@
 
 #define MAX_MULTIPLIER 12
 
-#define PALTAG_SHADOW 1
-#define PALTAG_BALL 2
-#define PALTAG_BALL_COUNTER 3
-#define PALTAG_CURSOR 4
-#define PALTAG_INTERFACE 5
-#define PALTAG_SHROOMISH 6
-#define PALTAG_TAILLOW   7
-#define PALTAG_GRID_ICONS 8
-#define PALTAG_WYNAUT    9
-#define PALTAG_AZURILL   10
-#define PALTAG_SKITTY    11
-#define PALTAG_MAKUHITA  12
-
-#define GFXTAG_WHEEL_ICONS 0
-#define GFXTAG_HEADERS 4
-#define GFXTAG_GRID_ICONS 5
-#define GFXTAG_WHEEL_CENTER 6
-#define GFXTAG_CREDIT 7
-#define GFXTAG_CREDIT_DIGIT 8
-#define GFXTAG_MULTIPLIER 9
-#define GFXTAG_BALL_COUNTER 10
-#define GFXTAG_CURSOR 11
-#define GFXTAG_BALL 12
-#define GFXTAG_SHROOMISH_TAILLOW 13
-#define GFXTAG_SHADOW 14
-
 // 2 different Roulette tables with 2 different rates (normal vs service day special)
 // & 1 gets which table, >> 7 gets if ROULETTE_SPECIAL_RATE is set
 #define GET_MIN_BET_ID(var) (((var) & 1) + (((var) >> 7) * 2))
@@ -2349,18 +2323,18 @@ static const u32 sCursor_Gfx[] = INCBIN_U32("graphics/roulette/cursor.4bpp.lz");
 
 static const struct SpritePalette sSpritePalettes[] =
 {
-    { .data = sShadow_Pal,      .tag = PALTAG_SHADOW },
-    { .data = sBall_Pal,        .tag = PALTAG_BALL },
-    { .data = sBallCounter_Pal, .tag = PALTAG_BALL_COUNTER },
-    { .data = sCursor_Pal,      .tag = PALTAG_CURSOR },
-    { .data = sCredit_Pal,      .tag = PALTAG_INTERFACE },
-    { .data = sShroomish_Pal,   .tag = PALTAG_SHROOMISH },
-    { .data = sTaillow_Pal,     .tag = PALTAG_TAILLOW },
-    { .data = sGridIcons_Pal,   .tag = PALTAG_GRID_ICONS },
-    { .data = sWynaut_Pal,      .tag = PALTAG_WYNAUT },
-    { .data = sAzurill_Pal,     .tag = PALTAG_AZURILL },
-    { .data = sSkitty_Pal,      .tag = PALTAG_SKITTY },
-    { .data = sMakuhita_Pal,    .tag = PALTAG_MAKUHITA },
+    { .data = sShadow_Pal,      .tag = PAL_TAG_ROULETTE_SHADOW },
+    { .data = sBall_Pal,        .tag = PAL_TAG_ROULETTE_BALL },
+    { .data = sBallCounter_Pal, .tag = PAL_TAG_ROULETTE_BALL_COUNTER },
+    { .data = sCursor_Pal,      .tag = PAL_TAG_ROULETTE_CURSOR },
+    { .data = sCredit_Pal,      .tag = PAL_TAG_ROULETTE_INTERFACE },
+    { .data = sShroomish_Pal,   .tag = PAL_TAG_ROULETTE_SHROOMISH },
+    { .data = sTaillow_Pal,     .tag = PAL_TAG_ROULETTE_TAILLOW },
+    { .data = sGridIcons_Pal,   .tag = PAL_TAG_ROULETTE_GRID_ICONS },
+    { .data = sWynaut_Pal,      .tag = PAL_TAG_ROULETTE_WYNAUT },
+    { .data = sAzurill_Pal,     .tag = PAL_TAG_ROULETTE_AZURILL },
+    { .data = sSkitty_Pal,      .tag = PAL_TAG_ROULETTE_SKITTY },
+    { .data = sMakuhita_Pal,    .tag = PAL_TAG_ROULETTE_MAKUHITA },
     {}
 };
 
@@ -2417,7 +2391,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_WheelIcons =
 {
     .data = sWheelIcons_Gfx,
     .size = 0xC00,
-    .tag = GFXTAG_WHEEL_ICONS
+    .tag = GFX_TAG_ROULETTE_WHEEL_ICONS
 };
 
 static const union AnimCmd sAnim_WheelIcons[] =
@@ -2501,14 +2475,14 @@ static const struct CompressedSpriteSheet sSpriteSheet_Headers =
 {
     .data = gRouletteHeaders_Gfx,
     .size = 0x1600,
-    .tag = GFXTAG_HEADERS
+    .tag = GFX_TAG_ROULETTE_HEADERS
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_GridIcons =
 {
     .data = sGridIcons_Gfx,
     .size = 0x400,
-    .tag = GFXTAG_GRID_ICONS
+    .tag = GFX_TAG_ROULETTE_GRID_ICONS
 };
 
 static const union AnimCmd sAnim_Headers[] =
@@ -2594,8 +2568,8 @@ static const union AnimCmd *const sAnim_GridIcon_Makuhita[] =
 static const struct SpriteTemplate sSpriteTemplates_PokeHeaders[NUM_BOARD_POKES] =
 {
     {
-        .tileTag = GFXTAG_HEADERS,
-        .paletteTag = PALTAG_GRID_ICONS,
+        .tileTag = GFX_TAG_ROULETTE_HEADERS,
+        .paletteTag = PAL_TAG_ROULETTE_GRID_ICONS,
         .oam = &sOam_GridHeader,
         .anims = sAnim_WynautHeader,
         .images = NULL,
@@ -2603,8 +2577,8 @@ static const struct SpriteTemplate sSpriteTemplates_PokeHeaders[NUM_BOARD_POKES]
         .callback = SpriteCB_GridSquare
     },
     {
-        .tileTag = GFXTAG_HEADERS,
-        .paletteTag = PALTAG_GRID_ICONS,
+        .tileTag = GFX_TAG_ROULETTE_HEADERS,
+        .paletteTag = PAL_TAG_ROULETTE_GRID_ICONS,
         .oam = &sOam_GridHeader,
         .anims = sAnim_AzurillHeader,
         .images = NULL,
@@ -2612,8 +2586,8 @@ static const struct SpriteTemplate sSpriteTemplates_PokeHeaders[NUM_BOARD_POKES]
         .callback = SpriteCB_GridSquare
     },
     {
-        .tileTag = GFXTAG_HEADERS,
-        .paletteTag = PALTAG_GRID_ICONS,
+        .tileTag = GFX_TAG_ROULETTE_HEADERS,
+        .paletteTag = PAL_TAG_ROULETTE_GRID_ICONS,
         .oam = &sOam_GridHeader,
         .anims = sAnim_SkittyHeader,
         .images = NULL,
@@ -2621,8 +2595,8 @@ static const struct SpriteTemplate sSpriteTemplates_PokeHeaders[NUM_BOARD_POKES]
         .callback = SpriteCB_GridSquare
     },
     {
-        .tileTag = GFXTAG_HEADERS,
-        .paletteTag = PALTAG_GRID_ICONS,
+        .tileTag = GFX_TAG_ROULETTE_HEADERS,
+        .paletteTag = PAL_TAG_ROULETTE_GRID_ICONS,
         .oam = &sOam_GridHeader,
         .anims = sAnim_MakuhitaHeader,
         .images = NULL,
@@ -2634,8 +2608,8 @@ static const struct SpriteTemplate sSpriteTemplates_PokeHeaders[NUM_BOARD_POKES]
 static const struct SpriteTemplate sSpriteTemplates_ColorHeaders[NUM_BOARD_COLORS] =
 {
     {
-        .tileTag = GFXTAG_HEADERS,
-        .paletteTag = PALTAG_GRID_ICONS,
+        .tileTag = GFX_TAG_ROULETTE_HEADERS,
+        .paletteTag = PAL_TAG_ROULETTE_GRID_ICONS,
         .oam = &sOam_GridHeader,
         .anims = sAnim_OrangeHeader,
         .images = NULL,
@@ -2643,8 +2617,8 @@ static const struct SpriteTemplate sSpriteTemplates_ColorHeaders[NUM_BOARD_COLOR
         .callback = SpriteCB_GridSquare
     },
     {
-        .tileTag = GFXTAG_HEADERS,
-        .paletteTag = PALTAG_GRID_ICONS,
+        .tileTag = GFX_TAG_ROULETTE_HEADERS,
+        .paletteTag = PAL_TAG_ROULETTE_GRID_ICONS,
         .oam = &sOam_GridHeader,
         .anims = sAnim_GreenHeader,
         .images = NULL,
@@ -2652,8 +2626,8 @@ static const struct SpriteTemplate sSpriteTemplates_ColorHeaders[NUM_BOARD_COLOR
         .callback = SpriteCB_GridSquare
     },
     {
-        .tileTag = GFXTAG_HEADERS,
-        .paletteTag = PALTAG_GRID_ICONS,
+        .tileTag = GFX_TAG_ROULETTE_HEADERS,
+        .paletteTag = PAL_TAG_ROULETTE_GRID_ICONS,
         .oam = &sOam_GridHeader,
         .anims = sAnim_PurpleHeader,
         .images = NULL,
@@ -2665,8 +2639,8 @@ static const struct SpriteTemplate sSpriteTemplates_ColorHeaders[NUM_BOARD_COLOR
 static const struct SpriteTemplate sSpriteTemplates_GridIcons[NUM_BOARD_POKES] =
 {
     {
-        .tileTag = GFXTAG_GRID_ICONS,
-        .paletteTag = PALTAG_GRID_ICONS,
+        .tileTag = GFX_TAG_ROULETTE_GRID_ICONS,
+        .paletteTag = PAL_TAG_ROULETTE_GRID_ICONS,
         .oam = &sOam_GridIcon,
         .anims = sAnim_GridIcon_Wynaut,
         .images = NULL,
@@ -2674,8 +2648,8 @@ static const struct SpriteTemplate sSpriteTemplates_GridIcons[NUM_BOARD_POKES] =
         .callback = SpriteCB_GridSquare
     },
     {
-        .tileTag = GFXTAG_GRID_ICONS,
-        .paletteTag = PALTAG_GRID_ICONS,
+        .tileTag = GFX_TAG_ROULETTE_GRID_ICONS,
+        .paletteTag = PAL_TAG_ROULETTE_GRID_ICONS,
         .oam = &sOam_GridIcon,
         .anims = sAnim_GridIcon_Azurill,
         .images = NULL,
@@ -2683,8 +2657,8 @@ static const struct SpriteTemplate sSpriteTemplates_GridIcons[NUM_BOARD_POKES] =
         .callback = SpriteCB_GridSquare
     },
     {
-        .tileTag = GFXTAG_GRID_ICONS,
-        .paletteTag = PALTAG_GRID_ICONS,
+        .tileTag = GFX_TAG_ROULETTE_GRID_ICONS,
+        .paletteTag = PAL_TAG_ROULETTE_GRID_ICONS,
         .oam = &sOam_GridIcon,
         .anims = sAnim_GridIcon_Skitty,
         .images = NULL,
@@ -2692,8 +2666,8 @@ static const struct SpriteTemplate sSpriteTemplates_GridIcons[NUM_BOARD_POKES] =
         .callback = SpriteCB_GridSquare
     },
     {
-        .tileTag = GFXTAG_GRID_ICONS,
-        .paletteTag = PALTAG_GRID_ICONS,
+        .tileTag = GFX_TAG_ROULETTE_GRID_ICONS,
+        .paletteTag = PAL_TAG_ROULETTE_GRID_ICONS,
         .oam = &sOam_GridIcon,
         .anims = sAnim_GridIcon_Makuhita,
         .images = NULL,
@@ -2707,8 +2681,8 @@ static const struct SpriteTemplate sSpriteTemplates_GridIcons[NUM_BOARD_POKES] =
 static const struct SpriteTemplate sSpriteTemplates_WheelIcons[NUM_ROULETTE_SLOTS] =
 {
     {
-        .tileTag = GFXTAG_WHEEL_ICONS,
-        .paletteTag = PALTAG_WYNAUT,
+        .tileTag = GFX_TAG_ROULETTE_WHEEL_ICONS,
+        .paletteTag = PAL_TAG_ROULETTE_WYNAUT,
         .oam = &sOam_WheelIcon,
         .anims = sAnim_WheelIcon_OrangeWynaut,
         .images = NULL,
@@ -2716,8 +2690,8 @@ static const struct SpriteTemplate sSpriteTemplates_WheelIcons[NUM_ROULETTE_SLOT
         .callback = SpriteCB_WheelIcon
     },
     {
-        .tileTag = GFXTAG_WHEEL_ICONS,
-        .paletteTag = PALTAG_AZURILL,
+        .tileTag = GFX_TAG_ROULETTE_WHEEL_ICONS,
+        .paletteTag = PAL_TAG_ROULETTE_AZURILL,
         .oam = &sOam_WheelIcon,
         .anims = sAnim_WheelIcon_GreenAzurill,
         .images = NULL,
@@ -2725,8 +2699,8 @@ static const struct SpriteTemplate sSpriteTemplates_WheelIcons[NUM_ROULETTE_SLOT
         .callback = SpriteCB_WheelIcon
     },
     {
-        .tileTag = GFXTAG_WHEEL_ICONS,
-        .paletteTag = PALTAG_SKITTY,
+        .tileTag = GFX_TAG_ROULETTE_WHEEL_ICONS,
+        .paletteTag = PAL_TAG_ROULETTE_SKITTY,
         .oam = &sOam_WheelIcon,
         .anims = sAnim_WheelIcon_PurpleSkitty,
         .images = NULL,
@@ -2734,8 +2708,8 @@ static const struct SpriteTemplate sSpriteTemplates_WheelIcons[NUM_ROULETTE_SLOT
         .callback = SpriteCB_WheelIcon
     },
     {
-        .tileTag = GFXTAG_WHEEL_ICONS,
-        .paletteTag = PALTAG_MAKUHITA,
+        .tileTag = GFX_TAG_ROULETTE_WHEEL_ICONS,
+        .paletteTag = PAL_TAG_ROULETTE_MAKUHITA,
         .oam = &sOam_WheelIcon,
         .anims = sAnim_WheelIcon_OrangeMakuhita,
         .images = NULL,
@@ -2743,8 +2717,8 @@ static const struct SpriteTemplate sSpriteTemplates_WheelIcons[NUM_ROULETTE_SLOT
         .callback = SpriteCB_WheelIcon
     },
     {
-        .tileTag = GFXTAG_WHEEL_ICONS,
-        .paletteTag = PALTAG_WYNAUT,
+        .tileTag = GFX_TAG_ROULETTE_WHEEL_ICONS,
+        .paletteTag = PAL_TAG_ROULETTE_WYNAUT,
         .oam = &sOam_WheelIcon,
         .anims = sAnim_WheelIcon_GreenWynaut,
         .images = NULL,
@@ -2752,8 +2726,8 @@ static const struct SpriteTemplate sSpriteTemplates_WheelIcons[NUM_ROULETTE_SLOT
         .callback = SpriteCB_WheelIcon
     },
     {
-        .tileTag = GFXTAG_WHEEL_ICONS,
-        .paletteTag = PALTAG_AZURILL,
+        .tileTag = GFX_TAG_ROULETTE_WHEEL_ICONS,
+        .paletteTag = PAL_TAG_ROULETTE_AZURILL,
         .oam = &sOam_WheelIcon,
         .anims = sAnim_WheelIcon_PurpleAzurill,
         .images = NULL,
@@ -2761,8 +2735,8 @@ static const struct SpriteTemplate sSpriteTemplates_WheelIcons[NUM_ROULETTE_SLOT
         .callback = SpriteCB_WheelIcon
     },
     {
-        .tileTag = GFXTAG_WHEEL_ICONS,
-        .paletteTag = PALTAG_SKITTY,
+        .tileTag = GFX_TAG_ROULETTE_WHEEL_ICONS,
+        .paletteTag = PAL_TAG_ROULETTE_SKITTY,
         .oam = &sOam_WheelIcon,
         .anims = sAnim_WheelIcon_OrangeSkitty,
         .images = NULL,
@@ -2770,8 +2744,8 @@ static const struct SpriteTemplate sSpriteTemplates_WheelIcons[NUM_ROULETTE_SLOT
         .callback = SpriteCB_WheelIcon
     },
     {
-        .tileTag = GFXTAG_WHEEL_ICONS,
-        .paletteTag = PALTAG_MAKUHITA,
+        .tileTag = GFX_TAG_ROULETTE_WHEEL_ICONS,
+        .paletteTag = PAL_TAG_ROULETTE_MAKUHITA,
         .oam = &sOam_WheelIcon,
         .anims = sAnim_WheelIcon_GreenMakuhita,
         .images = NULL,
@@ -2779,8 +2753,8 @@ static const struct SpriteTemplate sSpriteTemplates_WheelIcons[NUM_ROULETTE_SLOT
         .callback = SpriteCB_WheelIcon
     },
     {
-        .tileTag = GFXTAG_WHEEL_ICONS,
-        .paletteTag = PALTAG_WYNAUT,
+        .tileTag = GFX_TAG_ROULETTE_WHEEL_ICONS,
+        .paletteTag = PAL_TAG_ROULETTE_WYNAUT,
         .oam = &sOam_WheelIcon,
         .anims = sAnim_WheelIcon_PurpleWynaut,
         .images = NULL,
@@ -2788,8 +2762,8 @@ static const struct SpriteTemplate sSpriteTemplates_WheelIcons[NUM_ROULETTE_SLOT
         .callback = SpriteCB_WheelIcon
     },
     {
-        .tileTag = GFXTAG_WHEEL_ICONS,
-        .paletteTag = PALTAG_AZURILL,
+        .tileTag = GFX_TAG_ROULETTE_WHEEL_ICONS,
+        .paletteTag = PAL_TAG_ROULETTE_AZURILL,
         .oam = &sOam_WheelIcon,
         .anims = sAnim_WheelIcon_OrangeAzurill,
         .images = NULL,
@@ -2797,8 +2771,8 @@ static const struct SpriteTemplate sSpriteTemplates_WheelIcons[NUM_ROULETTE_SLOT
         .callback = SpriteCB_WheelIcon
     },
     {
-        .tileTag = GFXTAG_WHEEL_ICONS,
-        .paletteTag = PALTAG_SKITTY,
+        .tileTag = GFX_TAG_ROULETTE_WHEEL_ICONS,
+        .paletteTag = PAL_TAG_ROULETTE_SKITTY,
         .oam = &sOam_WheelIcon,
         .anims = sAnim_WheelIcon_GreenSkitty,
         .images = NULL,
@@ -2806,8 +2780,8 @@ static const struct SpriteTemplate sSpriteTemplates_WheelIcons[NUM_ROULETTE_SLOT
         .callback = SpriteCB_WheelIcon
     },
     {
-        .tileTag = GFXTAG_WHEEL_ICONS,
-        .paletteTag = PALTAG_MAKUHITA,
+        .tileTag = GFX_TAG_ROULETTE_WHEEL_ICONS,
+        .paletteTag = PAL_TAG_ROULETTE_MAKUHITA,
         .oam = &sOam_WheelIcon,
         .anims = sAnim_WheelIcon_PurpleMakuhita,
         .images = NULL,
@@ -2857,27 +2831,27 @@ static const struct CompressedSpriteSheet sSpriteSheets_Interface[] =
     {
         .data = gRouletteCredit_Gfx,
         .size = 0x400,
-        .tag = GFXTAG_CREDIT
+        .tag = GFX_TAG_ROULETTE_CREDIT
     },
     {
         .data = gRouletteNumbers_Gfx,
         .size = 0x280,
-        .tag = GFXTAG_CREDIT_DIGIT
+        .tag = GFX_TAG_ROULETTE_CREDIT_DIGIT
     },
     {
         .data = gRouletteMultiplier_Gfx,
         .size = 0x500,
-        .tag = GFXTAG_MULTIPLIER
+        .tag = GFX_TAG_ROULETTE_MULTIPLIER
     },
     {
         .data = sBallCounter_Gfx,
         .size = 0x140,
-        .tag = GFXTAG_BALL_COUNTER
+        .tag = GFX_TAG_ROULETTE_BALL_COUNTER
     },
     {
         .data = sCursor_Gfx,
         .size = 0x200,
-        .tag = GFXTAG_CURSOR
+        .tag = GFX_TAG_ROULETTE_CURSOR
     },
     {}
 };
@@ -2938,8 +2912,8 @@ static const union AnimCmd *const sAnims_BallCounter[] =
 
 static const struct SpriteTemplate sSpriteTemplate_Credit =
 {
-    .tileTag = GFXTAG_CREDIT,
-    .paletteTag = PALTAG_INTERFACE,
+    .tileTag = GFX_TAG_ROULETTE_CREDIT,
+    .paletteTag = PAL_TAG_ROULETTE_INTERFACE,
     .oam = &sOam_Credit,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -2949,8 +2923,8 @@ static const struct SpriteTemplate sSpriteTemplate_Credit =
 
 static const struct SpriteTemplate sSpriteTemplate_CreditDigit =
 {
-    .tileTag = GFXTAG_CREDIT_DIGIT,
-    .paletteTag = PALTAG_INTERFACE,
+    .tileTag = GFX_TAG_ROULETTE_CREDIT_DIGIT,
+    .paletteTag = PAL_TAG_ROULETTE_INTERFACE,
     .oam = &sOam_CreditDigit,
     .anims = sAnims_CreditDigit,
     .images = NULL,
@@ -2960,8 +2934,8 @@ static const struct SpriteTemplate sSpriteTemplate_CreditDigit =
 
 static const struct SpriteTemplate sSpriteTemplate_Multiplier =
 {
-    .tileTag = GFXTAG_MULTIPLIER,
-    .paletteTag = PALTAG_INTERFACE,
+    .tileTag = GFX_TAG_ROULETTE_MULTIPLIER,
+    .paletteTag = PAL_TAG_ROULETTE_INTERFACE,
     .oam = &sOam_Multiplier,
     .anims = sAnims_Multiplier,
     .images = NULL,
@@ -2971,8 +2945,8 @@ static const struct SpriteTemplate sSpriteTemplate_Multiplier =
 
 static const struct SpriteTemplate sSpriteTemplate_BallCounter =
 {
-    .tileTag = GFXTAG_BALL_COUNTER,
-    .paletteTag = PALTAG_BALL_COUNTER,
+    .tileTag = GFX_TAG_ROULETTE_BALL_COUNTER,
+    .paletteTag = PAL_TAG_ROULETTE_BALL_COUNTER,
     .oam = &sOam_BallCounter,
     .anims = sAnims_BallCounter,
     .images = NULL,
@@ -2983,8 +2957,8 @@ static const struct SpriteTemplate sSpriteTemplate_BallCounter =
 // NOTE: This cursor is only used to identify the winning square on the grid
 static const struct SpriteTemplate sSpriteTemplate_Cursor =
 {
-    .tileTag = GFXTAG_CURSOR,
-    .paletteTag = PALTAG_INTERFACE,
+    .tileTag = GFX_TAG_ROULETTE_CURSOR,
+    .paletteTag = PAL_TAG_ROULETTE_INTERFACE,
     .oam = &sOam_GridHeader,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -3004,7 +2978,7 @@ static const struct OamData sOam_Ball =
 static const struct CompressedSpriteSheet sSpriteSheet_Ball = {
     .data = sBall_Gfx,
     .size = 0x200,
-    .tag = GFXTAG_BALL
+    .tag = GFX_TAG_ROULETTE_BALL
 };
 
 static const union AnimCmd sAnim_Ball_RollFast[] =
@@ -3092,8 +3066,8 @@ static const union AnimCmd *const sAnims_Ball[] =
 
 static const struct SpriteTemplate sSpriteTemplate_Ball =
 {
-    .tileTag = GFXTAG_BALL,
-    .paletteTag = PALTAG_BALL,
+    .tileTag = GFX_TAG_ROULETTE_BALL,
+    .paletteTag = PAL_TAG_ROULETTE_BALL,
     .oam = &sOam_Ball,
     .anims = sAnims_Ball,
     .images = NULL,
@@ -3115,13 +3089,13 @@ static const struct CompressedSpriteSheet sSpriteSheet_WheelCenter =
 {
     .data = gRouletteCenter_Gfx,
     .size = 0x800,
-    .tag = GFXTAG_WHEEL_CENTER
+    .tag = GFX_TAG_ROULETTE_WHEEL_CENTER
 };
 
 static const struct SpriteTemplate sSpriteTemplate_WheelCenter =
 {
-    .tileTag = GFXTAG_WHEEL_CENTER,
-    .paletteTag = PALTAG_BALL,
+    .tileTag = GFX_TAG_ROULETTE_WHEEL_CENTER,
+    .paletteTag = PAL_TAG_ROULETTE_BALL,
     .oam = &sOam_WheelCenter,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -3151,7 +3125,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_ShroomishTaillow =
 {
     .data = sShroomishTaillow_Gfx,
     .size = 0xE00,
-    .tag = GFXTAG_SHROOMISH_TAILLOW
+    .tag = GFX_TAG_ROULETTE_SHROOMISH_TAILLOW
 };
 
 static const union AnimCmd sAnim_Shroomish[] =
@@ -3222,8 +3196,8 @@ static const union AnimCmd *const sAnims_Taillow[] =
 
 static const struct SpriteTemplate sSpriteTemplate_Shroomish =
 {
-    .tileTag = GFXTAG_SHROOMISH_TAILLOW,
-    .paletteTag = PALTAG_SHROOMISH,
+    .tileTag = GFX_TAG_ROULETTE_SHROOMISH_TAILLOW,
+    .paletteTag = PAL_TAG_ROULETTE_SHROOMISH,
     .oam = &sOam_Shroomish,
     .anims = sAnims_Shroomish,
     .images = NULL,
@@ -3233,8 +3207,8 @@ static const struct SpriteTemplate sSpriteTemplate_Shroomish =
 
 static const struct SpriteTemplate sSpriteTemplate_Taillow =
 {
-    .tileTag = GFXTAG_SHROOMISH_TAILLOW,
-    .paletteTag = PALTAG_TAILLOW,
+    .tileTag = GFX_TAG_ROULETTE_SHROOMISH_TAILLOW,
+    .paletteTag = PAL_TAG_ROULETTE_TAILLOW,
     .oam = &sOam_Taillow,
     .anims = sAnims_Taillow,
     .images = NULL,
@@ -3273,7 +3247,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_Shadow =
 {
     .data = sShadow_Gfx,
     .size = 0x180,
-    .tag = GFXTAG_SHADOW
+    .tag = GFX_TAG_ROULETTE_SHADOW
 };
 
 static const union AffineAnimCmd sAffineAnim_Unused3[] =
@@ -3339,8 +3313,8 @@ static const struct SpriteTemplate sSpriteTemplate_ShroomishShadow[] =
 {
     // Ball's shadow as it flies up
     {
-        .tileTag = GFXTAG_SHADOW,
-        .paletteTag = PALTAG_SHADOW,
+        .tileTag = GFX_TAG_ROULETTE_SHADOW,
+        .paletteTag = PAL_TAG_ROULETTE_SHADOW,
         .oam = &sOam_ShroomishBallShadow,
         .anims = sAnims_ShroomishBallShadow,
         .images = NULL,
@@ -3349,8 +3323,8 @@ static const struct SpriteTemplate sSpriteTemplate_ShroomishShadow[] =
     },
     // Shroomish's Shadow
     {
-        .tileTag = GFXTAG_SHADOW,
-        .paletteTag = PALTAG_SHADOW,
+        .tileTag = GFX_TAG_ROULETTE_SHADOW,
+        .paletteTag = PAL_TAG_ROULETTE_SHADOW,
         .oam = &sOam_ShroomishShadow,
         .anims = sAnims_UnstickMonShadow,
         .images = NULL,
@@ -3361,8 +3335,8 @@ static const struct SpriteTemplate sSpriteTemplate_ShroomishShadow[] =
 
 static const struct SpriteTemplate sSpriteTemplate_TaillowShadow =
 {
-    .tileTag = GFXTAG_SHADOW,
-    .paletteTag = PALTAG_SHADOW,
+    .tileTag = GFX_TAG_ROULETTE_SHADOW,
+    .paletteTag = PAL_TAG_ROULETTE_SHADOW,
     .oam = &sOam_TaillowShadow,
     .anims = sAnims_UnstickMonShadow,
     .images = NULL,
@@ -3494,9 +3468,9 @@ static void LoadOrFreeMiscSpritePalettesAndSheets(bool8 free)
     else
     {
         // Unused
-        FreeSpriteTilesByTag(GFXTAG_SHADOW);
-        FreeSpriteTilesByTag(GFXTAG_SHROOMISH_TAILLOW);
-        FreeSpriteTilesByTag(GFXTAG_BALL);
+        FreeSpriteTilesByTag(GFX_TAG_ROULETTE_SHADOW);
+        FreeSpriteTilesByTag(GFX_TAG_ROULETTE_SHROOMISH_TAILLOW);
+        FreeSpriteTilesByTag(GFX_TAG_ROULETTE_BALL);
         FreeAllSpritePalettes();
     }
 }

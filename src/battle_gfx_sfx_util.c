@@ -44,43 +44,43 @@ static void ClearSpritesBattlerHealthboxAnimData(void);
 // const rom data
 static const struct CompressedSpriteSheet sSpriteSheet_SinglesPlayerHealthbox =
 {
-    gHealthboxSinglesPlayerGfx, 0x1000, TAG_HEALTHBOX_PLAYER1_TILE
+    gHealthboxSinglesPlayerGfx, 0x1000, GFX_TAG_HEALTHBOX_PLAYER1
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_SinglesOpponentHealthbox =
 {
-    gHealthboxSinglesOpponentGfx, 0x1000, TAG_HEALTHBOX_OPPONENT1_TILE
+    gHealthboxSinglesOpponentGfx, 0x1000, GFX_TAG_HEALTHBOX_OPPONENT1
 };
 
 static const struct CompressedSpriteSheet sSpriteSheets_DoublesPlayerHealthbox[2] =
 {
-    {gHealthboxDoublesPlayerGfx, 0x800, TAG_HEALTHBOX_PLAYER1_TILE},
-    {gHealthboxDoublesPlayerGfx, 0x800, TAG_HEALTHBOX_PLAYER2_TILE}
+    {gHealthboxDoublesPlayerGfx, 0x800, GFX_TAG_HEALTHBOX_PLAYER1},
+    {gHealthboxDoublesPlayerGfx, 0x800, GFX_TAG_HEALTHBOX_PLAYER2}
 };
 
 static const struct CompressedSpriteSheet sSpriteSheets_DoublesOpponentHealthbox[2] =
 {
-    {gHealthboxDoublesOpponentGfx, 0x800, TAG_HEALTHBOX_OPPONENT1_TILE},
-    {gHealthboxDoublesOpponentGfx, 0x800, TAG_HEALTHBOX_OPPONENT2_TILE}
+    {gHealthboxDoublesOpponentGfx, 0x800, GFX_TAG_HEALTHBOX_OPPONENT1},
+    {gHealthboxDoublesOpponentGfx, 0x800, GFX_TAG_HEALTHBOX_OPPONENT2}
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_SafariHealthbox =
 {
-    gHealthboxSafariGfx, 0x1000, TAG_HEALTHBOX_SAFARI_TILE
+    gHealthboxSafariGfx, 0x1000, GFX_TAG_HEALTHBOX_SAFARI
 };
 
 static const struct CompressedSpriteSheet sSpriteSheets_HealthBar[MAX_BATTLERS_COUNT] =
 {
-    {gBlankGfxCompressed, 0x0100, TAG_HEALTHBAR_PLAYER1_TILE},
-    {gBlankGfxCompressed, 0x0120, TAG_HEALTHBAR_OPPONENT1_TILE},
-    {gBlankGfxCompressed, 0x0100, TAG_HEALTHBAR_PLAYER2_TILE},
-    {gBlankGfxCompressed, 0x0120, TAG_HEALTHBAR_OPPONENT2_TILE}
+    {gBlankGfxCompressed, 0x0100, GFX_TAG_HEALTHBAR_PLAYER1},
+    {gBlankGfxCompressed, 0x0120, GFX_TAG_HEALTHBAR_OPPONENT1},
+    {gBlankGfxCompressed, 0x0100, GFX_TAG_HEALTHBAR_PLAYER2},
+    {gBlankGfxCompressed, 0x0120, GFX_TAG_HEALTHBAR_OPPONENT2}
 };
 
 static const struct SpritePalette sSpritePalettes_HealthBoxHealthBar[2] =
 {
-    {gBattleInterface_BallStatusBarPal, TAG_HEALTHBOX_PAL},
-    {gBattleInterface_BallDisplayPal, TAG_HEALTHBAR_PAL}
+    {gBattleInterface_BallStatusBarPal, PAL_TAG_HEALTHBOX},
+    {gBattleInterface_BallDisplayPal, PAL_TAG_HEALTHBAR}
 };
 
 // code

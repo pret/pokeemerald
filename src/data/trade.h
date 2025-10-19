@@ -1,17 +1,3 @@
-#define GFXTAG_MENU_TEXT       200 // Used as a base tag in CB2_CreateTradeMenu and CB2_ReturnToTradeMenu
-#define GFXTAG_CURSOR          300
-#define GFXTAG_LINK_MON_GLOW   5550
-#define GFXTAG_LINK_MON_SHADOW 5552
-#define GFXTAG_CABLE_END       5554
-#define GFXTAG_GBA_SCREEN      5556
-#define GFXTAG_POKEBALL        5557
-
-#define PALTAG_CURSOR    2345
-#define PALTAG_MENU_TEXT 4925
-#define PALTAG_LINK_MON  5551
-#define PALTAG_GBA       5555
-#define PALTAG_POKEBALL  5558
-
 // Exists unused in RS as well
 static const u32 sUnusedStructSizes[] =
 {
@@ -96,13 +82,13 @@ static const struct SpriteSheet sCursor_SpriteSheet =
 {
     .data = gTradeCursor_Gfx,
     .size = 0x800,
-    .tag = GFXTAG_CURSOR
+    .tag = GFX_TAG_TRADE_CURSOR
 };
 
 static const struct SpritePalette sCursor_SpritePalette =
 {
     .data = gTradeCursor_Pal,
-    .tag = PALTAG_CURSOR
+    .tag = PAL_TAG_TRADE_CURSOR
 };
 
 static const union AnimCmd sAnim_MenuText_0[] =
@@ -154,8 +140,8 @@ static const union AnimCmd *const sAnims_MenuText[] =
 
 static const struct SpriteTemplate sSpriteTemplate_Cursor =
 {
-    .tileTag = GFXTAG_CURSOR,
-    .paletteTag = PALTAG_CURSOR,
+    .tileTag = GFX_TAG_TRADE_CURSOR,
+    .paletteTag = PAL_TAG_TRADE_CURSOR,
     .oam = &sOamData_Cursor,
     .anims = sAnims_Cursor,
     .images = NULL,
@@ -165,8 +151,8 @@ static const struct SpriteTemplate sSpriteTemplate_Cursor =
 
 static const struct SpriteTemplate sSpriteTemplate_MenuText =
 {
-    .tileTag = GFXTAG_MENU_TEXT,
-    .paletteTag = PALTAG_MENU_TEXT,
+    .tileTag = GFX_TAG_TRADE_MENU_TEXT,
+    .paletteTag = PAL_TAG_TRADE_MENU_TEXT,
     .oam = &sOamData_MenuText,
     .anims = sAnims_MenuText,
     .images = NULL,
@@ -178,7 +164,7 @@ static const u16 sMenuText_Pal[] = INCBIN_U16("graphics/trade/text.gbapal");
 static const struct SpritePalette sSpritePalette_MenuText =
 {
     .data = sMenuText_Pal,
-    .tag = PALTAG_MENU_TEXT
+    .tag = PAL_TAG_TRADE_MENU_TEXT
 };
 
 // This is used to determine the next mon to select when the D-Pad is
@@ -731,19 +717,19 @@ static const struct SpriteSheet sPokeBallSpriteSheet =
 {
     .data = sPokeball_Gfx,
     .size = sizeof(sPokeball_Gfx),
-    .tag = GFXTAG_POKEBALL
+    .tag = GFX_TAG_TRADE_POKEBALL
 };
 
 static const struct SpritePalette sPokeBallSpritePalette =
 {
     .data = sPokeball_Pal,
-    .tag = PALTAG_POKEBALL
+    .tag = PAL_TAG_TRADE_POKEBALL
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Pokeball =
 {
-    .tileTag = GFXTAG_POKEBALL,
-    .paletteTag = PALTAG_POKEBALL,
+    .tileTag = GFX_TAG_TRADE_POKEBALL,
+    .paletteTag = PAL_TAG_TRADE_POKEBALL,
     .oam = &sOamData_Pokeball,
     .anims = sAnims_Pokeball,
     .images = NULL,
@@ -787,25 +773,25 @@ static const struct SpriteSheet sSpriteSheet_LinkMonGlow =
 {
     .data = sLinkMonGlow_Gfx,
     .size = sizeof(sLinkMonGlow_Gfx),
-    .tag = GFXTAG_LINK_MON_GLOW
+    .tag = GFX_TAG_TRADE_LINK_MON_GLOW
 };
 
 static const struct SpritePalette sSpritePalette_LinkMon =
 {
     .data = sLinkMon_Pal,
-    .tag = PALTAG_LINK_MON
+    .tag = PAL_TAG_TRADE_LINK_MON
 };
 
 static const struct SpritePalette sSpritePalette_Gba =
 {
     .data = sGba_Pal,
-    .tag = PALTAG_GBA
+    .tag = PAL_TAG_TRADE_GBA
 };
 
 static const struct SpriteTemplate sSpriteTemplate_LinkMonGlow =
 {
-    .tileTag = GFXTAG_LINK_MON_GLOW,
-    .paletteTag = PALTAG_LINK_MON,
+    .tileTag = GFX_TAG_TRADE_LINK_MON_GLOW,
+    .paletteTag = PAL_TAG_TRADE_LINK_MON,
     .oam = &sOamData_LinkMonGlow,
     .anims = sAnims_LinkMonGlow,
     .images = NULL,
@@ -847,13 +833,13 @@ static const struct SpriteSheet sSpriteSheet_LinkMonShadow =
 {
     .data = sLinkMonShadow_Gfx,
     .size = 0x300,
-    .tag = GFXTAG_LINK_MON_SHADOW
+    .tag = GFX_TAG_TRADE_LINK_MON_SHADOW
 };
 
 static const struct SpriteTemplate sSpriteTemplate_LinkMonShadow =
 {
-    .tileTag = GFXTAG_LINK_MON_SHADOW,
-    .paletteTag = PALTAG_LINK_MON,
+    .tileTag = GFX_TAG_TRADE_LINK_MON_SHADOW,
+    .paletteTag = PAL_TAG_TRADE_LINK_MON,
     .oam = &sOamData_LinkMonShadow,
     .anims = sAnims_LinkMonShadow,
     .images = NULL,
@@ -883,13 +869,13 @@ static const struct SpriteSheet sSpriteSheet_CableEnd =
 {
     .data = sCableEnd_Gfx,
     .size = 0x100,
-    .tag = GFXTAG_CABLE_END
+    .tag = GFX_TAG_TRADE_CABLE_END
 };
 
 static const struct SpriteTemplate sSpriteTemplate_CableEnd =
 {
-    .tileTag = GFXTAG_CABLE_END,
-    .paletteTag = PALTAG_GBA,
+    .tileTag = GFX_TAG_TRADE_CABLE_END,
+    .paletteTag = PAL_TAG_TRADE_GBA,
     .oam = &sOamData_CableEnd,
     .anims = sAnims_CableEnd,
     .images = NULL,
@@ -944,13 +930,13 @@ static const struct SpriteSheet sSpriteSheet_GbaScreen =
 {
     .data = sGbaScreen_Gfx,
     .size = sizeof(sGbaScreen_Gfx),
-    .tag = GFXTAG_GBA_SCREEN
+    .tag = GFX_TAG_TRADE_GBA_SCREEN
 };
 
 static const struct SpriteTemplate sSpriteTemplate_GbaScreenFlash_Long =
 {
-    .tileTag = GFXTAG_GBA_SCREEN,
-    .paletteTag = PALTAG_GBA,
+    .tileTag = GFX_TAG_TRADE_GBA_SCREEN,
+    .paletteTag = PAL_TAG_TRADE_GBA,
     .oam = &sOamData_GbaScreen,
     .anims = sAnims_GbaScreen_Long,
     .images = NULL,
@@ -960,8 +946,8 @@ static const struct SpriteTemplate sSpriteTemplate_GbaScreenFlash_Long =
 
 static const struct SpriteTemplate sSpriteTemplate_GbaScreenFlash_Short =
 {
-    .tileTag = GFXTAG_GBA_SCREEN,
-    .paletteTag = PALTAG_GBA,
+    .tileTag = GFX_TAG_TRADE_GBA_SCREEN,
+    .paletteTag = PAL_TAG_TRADE_GBA,
     .oam = &sOamData_GbaScreen,
     .anims = sAnims_GbaScreen_Short,
     .images = NULL,

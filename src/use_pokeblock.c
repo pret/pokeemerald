@@ -40,9 +40,6 @@ enum {
     WIN_COUNT
 };
 
-#define TAG_UP_DOWN     0
-#define TAG_CONDITION   1
-
 // At any one time, the currently selected mon and its two adjacent neighbors can be loaded
 // IDs to refer to one of these 3 are called "load id" in this file
 #define NUM_SELECTIONS_LOADED 3
@@ -297,12 +294,12 @@ static const u8 *const sConditionNames[CONDITION_COUNT] =
 
 static const struct SpriteSheet sSpriteSheet_UpDown =
 {
-    gUsePokeblockUpDown_Gfx, 0x200, TAG_UP_DOWN
+    gUsePokeblockUpDown_Gfx, 0x200, TAG_USE_POKEBLOCK_MENU_UP_DOWN
 };
 
 static const struct SpritePalette sSpritePalette_UpDown =
 {
-    gUsePokeblockUpDown_Pal, TAG_UP_DOWN
+    gUsePokeblockUpDown_Pal, TAG_USE_POKEBLOCK_MENU_UP_DOWN
 };
 
 static const s16 sUpDownCoordsOnGraph[CONDITION_COUNT][2] =
@@ -348,8 +345,8 @@ static const union AnimCmd *const sAnims_UpDown[] =
 
 static const struct SpriteTemplate sSpriteTemplate_UpDown =
 {
-    .tileTag = TAG_UP_DOWN,
-    .paletteTag = TAG_UP_DOWN,
+    .tileTag = TAG_USE_POKEBLOCK_MENU_UP_DOWN,
+    .paletteTag = TAG_USE_POKEBLOCK_MENU_UP_DOWN,
     .oam = &sOam_UpDown,
     .anims = sAnims_UpDown,
     .images = NULL,
@@ -398,8 +395,8 @@ static const union AnimCmd *const sAnims_Condition[] =
 
 static const struct SpriteTemplate sSpriteTemplate_Condition =
 {
-    .tileTag = TAG_CONDITION,
-    .paletteTag = TAG_CONDITION,
+    .tileTag = TAG_USE_POKEBLOCK_MENU_CONDITION,
+    .paletteTag = TAG_USE_POKEBLOCK_MENU_CONDITION,
     .oam = &sOam_Condition,
     .anims = sAnims_Condition,
     .images = NULL,
@@ -409,7 +406,7 @@ static const struct SpriteTemplate sSpriteTemplate_Condition =
 
 static const struct SpritePalette sSpritePalette_Condition =
 {
-    gUsePokeblockCondition_Pal, TAG_CONDITION
+    gUsePokeblockCondition_Pal, TAG_USE_POKEBLOCK_MENU_CONDITION
 };
 
 // When first opening the selection screen
@@ -842,10 +839,10 @@ static void CloseUsePokeblockMenu(void)
         for (i = 0; i < ARRAY_COUNT(sMenu->selectionIconSpriteIds); i++)
             DestroySprite(&gSprites[sMenu->selectionIconSpriteIds[i]]);
 
-        FreeSpriteTilesByTag(TAG_UP_DOWN);
-        FreeSpriteTilesByTag(TAG_CONDITION);
-        FreeSpritePaletteByTag(TAG_UP_DOWN);
-        FreeSpritePaletteByTag(TAG_CONDITION);
+        FreeSpriteTilesByTag(TAG_USE_POKEBLOCK_MENU_UP_DOWN);
+        FreeSpriteTilesByTag(TAG_USE_POKEBLOCK_MENU_CONDITION);
+        FreeSpritePaletteByTag(TAG_USE_POKEBLOCK_MENU_UP_DOWN);
+        FreeSpritePaletteByTag(TAG_USE_POKEBLOCK_MENU_CONDITION);
 
         for (i = 0; i < ARRAY_COUNT(sMenu->condition); i++)
             DestroySprite(sMenu->condition[i]);
@@ -1226,8 +1223,8 @@ static void UpdateMonPic(u8 loadId)
         sMenu->curMonSpriteId = spriteId;
         if (spriteId == MAX_SPRITES)
         {
-            FreeSpriteTilesByTag(TAG_CONDITION_MON);
-            FreeSpritePaletteByTag(TAG_CONDITION_MON);
+            FreeSpriteTilesByTag(TAG_POKENAV_CONDITION_MON);
+            FreeSpritePaletteByTag(TAG_POKENAV_CONDITION_MON);
             sMenu->curMonSpriteId = SPRITE_NONE;
         }
         else
@@ -1276,7 +1273,7 @@ static void LoadAndCreateSelectionIcons(void)
     }
 
     // Fill placeholder icons for remaining (empty) party slots
-    spriteTemplate.tileTag = TAG_CONDITION_BALL_PLACEHOLDER;
+    spriteTemplate.tileTag = TAG_POKENAV_CONDITION_BALL_PLACEHOLDER;
     for (; i < PARTY_SIZE; i++)
     {
         spriteId = CreateSprite(&spriteTemplate, 230, (i * 20) + 8, 0);
@@ -1292,7 +1289,7 @@ static void LoadAndCreateSelectionIcons(void)
     }
 
     // Add cancel selection icon at bottom
-    spriteTemplate.tileTag = TAG_CONDITION_CANCEL;
+    spriteTemplate.tileTag = TAG_POKENAV_CONDITION_CANCEL;
     spriteTemplate.callback = SpriteCB_SelectionIconCancel;
     spriteId = CreateSprite(&spriteTemplate, 222, (i * 20) + 8, 0);
     if (spriteId != MAX_SPRITES)
@@ -1588,9 +1585,9 @@ static void SpriteCB_SelectionIconPokeball(struct Sprite *sprite)
 static void SpriteCB_SelectionIconCancel(struct Sprite *sprite)
 {
     if (sMenu->info.curSelection == sMenu->info.numSelections - 1)
-        sprite->oam.paletteNum = IndexOfSpritePaletteTag(TAG_CONDITION_BALL);
+        sprite->oam.paletteNum = IndexOfSpritePaletteTag(TAG_POKENAV_CONDITION_BALL);
     else
-        sprite->oam.paletteNum = IndexOfSpritePaletteTag(TAG_CONDITION_CANCEL);
+        sprite->oam.paletteNum = IndexOfSpritePaletteTag(TAG_POKENAV_CONDITION_CANCEL);
 }
 
 // Calculate the max id for sparkles/stars that appear around the Pokémon on the condition screen
@@ -1610,7 +1607,7 @@ static void LoadConditionGfx(void)
     spritePalette = sSpritePalette_Condition;
     spriteSheet.data = gUsePokeblockCondition_Gfx;
     spriteSheet.size = 0x800;
-    spriteSheet.tag = TAG_CONDITION;
+    spriteSheet.tag = TAG_USE_POKEBLOCK_MENU_CONDITION;
     LoadCompressedSpriteSheet(&spriteSheet);
     LoadSpritePalette(&spritePalette);
 }

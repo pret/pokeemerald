@@ -118,20 +118,6 @@ enum {
     COPYRIGHT_START_INTRO,
 };
 
-#define TAG_VOLBEAT   1500
-#define TAG_TORCHIC   1501
-#define TAG_MANECTRIC 1502
-#define TAG_LIGHTNING 1503
-#define TAG_BUBBLES   1504
-#define TAG_SPARKLE   1505
-
-#define GFXTAG_DROPS_LOGO 2000
-#define PALTAG_DROPS      2000
-#define PALTAG_LOGO       2001
-
-#define TAG_FLYGON_SILHOUETTE 2002
-#define TAG_RAYQUAZA_ORB      2003
-
 #define COLOSSEUM_GAME_CODE 0x65366347 // "Gc6e" in ASCII
 
 // Used by various tasks and sprites
@@ -209,12 +195,12 @@ static const u8 sUnusedData[] = {
 };
 static const struct CompressedSpriteSheet sSpriteSheet_Sparkle[] =
 {
-    {gIntroSparkle_Gfx, 0x400, TAG_SPARKLE},
+    {gIntroSparkle_Gfx, 0x400, TAG_INTRO_SPARKLE},
     {},
 };
 static const struct SpritePalette sSpritePalette_Sparkle[] =
 {
-    {gIntroLightning_Pal, TAG_SPARKLE}, // Lightning palette re-used
+    {gIntroLightning_Pal, TAG_INTRO_SPARKLE}, // Lightning palette re-used
     {},
 };
 static const struct OamData sOamData_Sparkle =
@@ -248,8 +234,8 @@ static const union AnimCmd *const sAnims_Sparkle[] =
 };
 static const struct SpriteTemplate sSpriteTemplate_Sparkle =
 {
-    .tileTag = TAG_SPARKLE,
-    .paletteTag = TAG_SPARKLE,
+    .tileTag = TAG_INTRO_SPARKLE,
+    .paletteTag = TAG_INTRO_SPARKLE,
     .oam = &sOamData_Sparkle,
     .anims = sAnims_Sparkle,
     .images = NULL,
@@ -273,16 +259,16 @@ static const u8 sSparkleCoords[][2] =
 };
 static const struct CompressedSpriteSheet sSpriteSheet_RunningPokemon[] =
 {
-    {gIntroVolbeat_Gfx, 0x400, TAG_VOLBEAT},
-    {gIntroTorchic_Gfx, 0xC00, TAG_TORCHIC},
-    {gIntroManectric_Gfx, 0x2000, TAG_MANECTRIC},
+    {gIntroVolbeat_Gfx, 0x400, TAG_INTRO_VOLBEAT},
+    {gIntroTorchic_Gfx, 0xC00, TAG_INTRO_TORCHIC},
+    {gIntroManectric_Gfx, 0x2000, TAG_INTRO_MANECTRIC},
     {},
 };
 static const struct SpritePalette sSpritePalettes_RunningPokemon[] =
 {
-    {gIntroVolbeat_Pal, TAG_VOLBEAT},
-    {gIntroTorchic_Pal, TAG_TORCHIC},
-    {gIntroManectric_Pal, TAG_MANECTRIC},
+    {gIntroVolbeat_Pal, TAG_INTRO_VOLBEAT},
+    {gIntroTorchic_Pal, TAG_INTRO_TORCHIC},
+    {gIntroManectric_Pal, TAG_INTRO_MANECTRIC},
     {},
 };
 static const struct OamData sOamData_Volbeat =
@@ -313,8 +299,8 @@ static const union AnimCmd *const sAnims_Volbeat[] =
 };
 static const struct SpriteTemplate sSpriteTemplate_Volbeat =
 {
-    .tileTag = TAG_VOLBEAT,
-    .paletteTag = TAG_VOLBEAT,
+    .tileTag = TAG_INTRO_VOLBEAT,
+    .paletteTag = TAG_INTRO_VOLBEAT,
     .oam = &sOamData_Volbeat,
     .anims = sAnims_Volbeat,
     .images = NULL,
@@ -373,8 +359,8 @@ static const union AnimCmd *const sAnims_Torchic[] =
 };
 static const struct SpriteTemplate sSpriteTemplate_Torchic =
 {
-    .tileTag = TAG_TORCHIC,
-    .paletteTag = TAG_TORCHIC,
+    .tileTag = TAG_INTRO_TORCHIC,
+    .paletteTag = TAG_INTRO_TORCHIC,
     .oam = &sOamData_Torchic,
     .anims = sAnims_Torchic,
     .images = NULL,
@@ -411,8 +397,8 @@ static const union AnimCmd *const sAnims_Manectric[] =
 };
 static const struct SpriteTemplate sSpriteTemplate_Manectric =
 {
-    .tileTag = TAG_MANECTRIC,
-    .paletteTag = TAG_MANECTRIC,
+    .tileTag = TAG_INTRO_MANECTRIC,
+    .paletteTag = TAG_INTRO_MANECTRIC,
     .oam = &sOamData_Manectric,
     .anims = sAnims_Manectric,
     .images = NULL,
@@ -421,12 +407,12 @@ static const struct SpriteTemplate sSpriteTemplate_Manectric =
 };
 static const struct CompressedSpriteSheet sSpriteSheet_Lightning[] =
 {
-    {gIntroLightning_Gfx, 0xC00, TAG_LIGHTNING},
+    {gIntroLightning_Gfx, 0xC00, TAG_INTRO_LIGHTNING},
     {},
 };
 static const struct SpritePalette sSpritePalette_Lightning[] =
 {
-    {gIntroLightning_Pal, TAG_LIGHTNING},
+    {gIntroLightning_Pal, TAG_INTRO_LIGHTNING},
     {},
 };
 static const struct OamData sOamData_Lightning =
@@ -471,8 +457,8 @@ static const union AnimCmd *const sAnims_Lightning[] =
 };
 static const struct SpriteTemplate sSpriteTemplate_Lightning =
 {
-    .tileTag = TAG_LIGHTNING,
-    .paletteTag = TAG_LIGHTNING,
+    .tileTag = TAG_INTRO_LIGHTNING,
+    .paletteTag = TAG_INTRO_LIGHTNING,
     .oam = &sOamData_Lightning,
     .anims = sAnims_Lightning,
     .images = NULL,
@@ -492,12 +478,12 @@ static const s16 sGroudonRockData[][3] =
 };
 static const struct CompressedSpriteSheet sSpriteSheet_Bubbles[] =
 {
-    {gIntroBubbles_Gfx, 0x600, TAG_BUBBLES},
+    {gIntroBubbles_Gfx, 0x600, TAG_INTRO_BUBBLES},
     {},
 };
 static const struct SpritePalette sSpritePalette_Bubbles[] =
 {
-    {gIntroBubbles_Pal, TAG_BUBBLES},
+    {gIntroBubbles_Pal, TAG_INTRO_BUBBLES},
     {},
 };
 #define NUM_BUBBLES_IN_SET 6
@@ -551,8 +537,8 @@ static const union AnimCmd *const sAnims_Bubbles[] =
 };
 static const struct SpriteTemplate sSpriteTemplate_Bubbles =
 {
-    .tileTag = TAG_BUBBLES,
-    .paletteTag = TAG_BUBBLES,
+    .tileTag = TAG_INTRO_BUBBLES,
+    .paletteTag = TAG_INTRO_BUBBLES,
     .oam = &sOamData_Bubbles,
     .anims = sAnims_Bubbles,
     .images = NULL,
@@ -610,8 +596,8 @@ static const union AnimCmd *const sAnims_WaterDrop[] =
 };
 static const struct SpriteTemplate sSpriteTemplate_WaterDrop =
 {
-    .tileTag = GFXTAG_DROPS_LOGO,
-    .paletteTag = PALTAG_DROPS,
+    .tileTag = GFX_TAG_INTRO_DROPS_LOGO,
+    .paletteTag = PAL_TAG_INTRO_DROPS,
     .oam = &sOamData_WaterDrop,
     .anims = sAnims_WaterDrop,
     .images = NULL,
@@ -891,8 +877,8 @@ static const u16 sGameFreakLettersMoveSpeed[NUM_GF_LETTERS] =
 };
 static const struct SpriteTemplate sSpriteTemplate_GameFreakLetter =
 {
-    .tileTag = GFXTAG_DROPS_LOGO,
-    .paletteTag = PALTAG_LOGO,
+    .tileTag = GFX_TAG_INTRO_DROPS_LOGO,
+    .paletteTag = PAL_TAG_INTRO_LOGO,
     .oam = &sOamData_GameFreakLetter,
     .anims = sAnims_GameFreakLetter,
     .images = NULL,
@@ -902,8 +888,8 @@ static const struct SpriteTemplate sSpriteTemplate_GameFreakLetter =
 // Unused
 static const struct SpriteTemplate sSpriteTemplate_PresentsLetter =
 {
-    .tileTag = GFXTAG_DROPS_LOGO,
-    .paletteTag = PALTAG_LOGO,
+    .tileTag = GFX_TAG_INTRO_DROPS_LOGO,
+    .paletteTag = PAL_TAG_INTRO_LOGO,
     .oam = &sOamData_PresentsLetter,
     .anims = sAnims_PresentsLetter,
     .images = NULL,
@@ -912,8 +898,8 @@ static const struct SpriteTemplate sSpriteTemplate_PresentsLetter =
 };
 static const struct SpriteTemplate sSpriteTemplate_GameFreakLogo =
 {
-    .tileTag = GFXTAG_DROPS_LOGO,
-    .paletteTag = PALTAG_LOGO,
+    .tileTag = GFX_TAG_INTRO_DROPS_LOGO,
+    .paletteTag = PAL_TAG_INTRO_LOGO,
     .oam = &sOamData_GameFreakLogo,
     .anims = sAnims_GameFreakLogo,
     .images = NULL,
@@ -959,8 +945,8 @@ static const union AnimCmd *const sAnims_FlygonSilhouette[] =
 };
 static const struct SpriteTemplate sSpriteTemplate_FlygonSilhouette =
 {
-    .tileTag = TAG_FLYGON_SILHOUETTE,
-    .paletteTag = TAG_FLYGON_SILHOUETTE,
+    .tileTag = TAG_INTRO_FLYGON_SILHOUETTE,
+    .paletteTag = TAG_INTRO_FLYGON_SILHOUETTE,
     .oam = &sOamData_FlygonSilhouette,
     .anims = sAnims_FlygonSilhouette,
     .images = NULL,
@@ -969,19 +955,19 @@ static const struct SpriteTemplate sSpriteTemplate_FlygonSilhouette =
 };
 static const struct CompressedSpriteSheet sSpriteSheet_WaterDropsAndLogo[] =
 {
-    {sIntroDropsLogo_Gfx, 0x1400, GFXTAG_DROPS_LOGO},
+    {sIntroDropsLogo_Gfx, 0x1400, GFX_TAG_INTRO_DROPS_LOGO},
     {},
 };
 static const struct CompressedSpriteSheet sSpriteSheet_FlygonSilhouette[] =
 {
-    {gIntroFlygonSilhouette_Gfx, 0x400, TAG_FLYGON_SILHOUETTE},
+    {gIntroFlygonSilhouette_Gfx, 0x400, TAG_INTRO_FLYGON_SILHOUETTE},
     {},
 };
 static const struct SpritePalette sSpritePalettes_Intro1[] =
 {
-    {sIntroDrops_Pal, PALTAG_DROPS},
-    {sIntroLogo_Pal, PALTAG_LOGO},
-    {sIntroFlygonSilhouette_Pal, TAG_FLYGON_SILHOUETTE},
+    {sIntroDrops_Pal, PAL_TAG_INTRO_DROPS},
+    {sIntroLogo_Pal, PAL_TAG_INTRO_LOGO},
+    {sIntroFlygonSilhouette_Pal, TAG_INTRO_FLYGON_SILHOUETTE},
     {},
 };
 static const struct OamData sOamData_RayquazaOrb =
@@ -1011,8 +997,8 @@ static const union AnimCmd *const sAnims_RayquazaOrb[] =
 };
 static const struct SpriteTemplate sSpriteTemplate_RayquazaOrb =
 {
-    .tileTag = TAG_RAYQUAZA_ORB,
-    .paletteTag = TAG_RAYQUAZA_ORB,
+    .tileTag = TAG_INTRO_RAYQUAZA_ORB,
+    .paletteTag = TAG_INTRO_RAYQUAZA_ORB,
     .oam = &sOamData_RayquazaOrb,
     .anims = sAnims_RayquazaOrb,
     .images = NULL,
@@ -1021,12 +1007,12 @@ static const struct SpriteTemplate sSpriteTemplate_RayquazaOrb =
 };
 static const struct CompressedSpriteSheet sSpriteSheet_RayquazaOrb[] =
 {
-    {sIntroMisc_Gfx, 0xA00, TAG_RAYQUAZA_ORB},
+    {sIntroMisc_Gfx, 0xA00, TAG_INTRO_RAYQUAZA_ORB},
     {},
 };
 static const struct SpritePalette sSpritePalette_RayquazaOrb[] =
 {
-    {sIntroRayquzaOrb_Pal, TAG_RAYQUAZA_ORB},
+    {sIntroRayquzaOrb_Pal, TAG_INTRO_RAYQUAZA_ORB},
     {},
 };
 
@@ -1780,8 +1766,8 @@ static void Task_Scene3_LoadGroudon(u8 taskId)
         LZDecompressVram(gIntroGroudon_Tilemap, (void *)(BG_CHAR_ADDR(3)));
         LZDecompressVram(gIntroLegendBg_Gfx, (void *)(BG_CHAR_ADDR(1)));
         LZDecompressVram(gIntroGroudonBg_Tilemap, (void *)(BG_SCREEN_ADDR(28)));
-        LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_ROCKS)]);
-        LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_ROCKS)]);
+        LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(TAG_BATTLE_ANIM_ROCKS)]);
+        LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(TAG_BATTLE_ANIM_ROCKS)]);
         CpuCopy16(gIntro3Bg_Pal, gPlttBufferUnfaded, sizeof(gIntro3Bg_Pal));
         gTasks[taskId].func = Task_Scene3_InitGroudonBg;
     }

@@ -79,9 +79,6 @@ enum {
     MSG_GO_BACK_TO_PREV
 };
 
-#define TAG_ITEM_ICON    5110
-#define TAG_SCROLL_ARROW 5112
-
 // Item list ID for toSwapPos to indicate an item is not currently being swapped
 #define NOT_SWAPPING 0xFF
 
@@ -1064,8 +1061,8 @@ static void ItemStorage_AddScrollIndicator(void)
     if (gPlayerPCItemPageInfo.scrollIndicatorTaskId == TASK_NONE)
         gPlayerPCItemPageInfo.scrollIndicatorTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 176, 12, 148,
                                                                                                 gPlayerPCItemPageInfo.count - gPlayerPCItemPageInfo.pageItems,
-                                                                                                TAG_SCROLL_ARROW,
-                                                                                                TAG_SCROLL_ARROW,
+                                                                                                TAG_PLAYER_PC_MENU_SCROLL_ARROW,
+                                                                                                TAG_PLAYER_PC_MENU_SCROLL_ARROW,
                                                                                                 &gPlayerPCItemPageInfo.itemsAbove);
 }
 
@@ -1099,9 +1096,9 @@ static void ItemStorage_DrawItemIcon(u16 itemId)
 
     if (*spriteIdLoc == SPRITE_NONE)
     {
-        FreeSpriteTilesByTag(TAG_ITEM_ICON);
-        FreeSpritePaletteByTag(TAG_ITEM_ICON);
-        spriteId = AddItemIconSprite(TAG_ITEM_ICON, TAG_ITEM_ICON, itemId);
+        FreeSpriteTilesByTag(TAG_PLAYER_PC_MENU_ITEM_ICON);
+        FreeSpritePaletteByTag(TAG_PLAYER_PC_MENU_ITEM_ICON);
+        spriteId = AddItemIconSprite(TAG_PLAYER_PC_MENU_ITEM_ICON, TAG_PLAYER_PC_MENU_ITEM_ICON, itemId);
         if (spriteId != MAX_SPRITES)
         {
             *spriteIdLoc = spriteId;
@@ -1117,8 +1114,8 @@ static void ItemStorage_EraseItemIcon(void)
     u8 *spriteIdLoc = &sItemStorageMenu->spriteId;
     if (*spriteIdLoc != SPRITE_NONE)
     {
-        FreeSpriteTilesByTag(TAG_ITEM_ICON);
-        FreeSpritePaletteByTag(TAG_ITEM_ICON);
+        FreeSpriteTilesByTag(TAG_PLAYER_PC_MENU_ITEM_ICON);
+        FreeSpritePaletteByTag(TAG_PLAYER_PC_MENU_ITEM_ICON);
         DestroySprite(&gSprites[*spriteIdLoc]);
         *spriteIdLoc = SPRITE_NONE;
     }

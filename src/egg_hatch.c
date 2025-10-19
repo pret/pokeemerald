@@ -38,11 +38,6 @@
 #include "battle.h" // to get rid of later
 #include "constants/rgb.h"
 
-#define GFXTAG_EGG       12345
-#define GFXTAG_EGG_SHARD 23456
-
-#define PALTAG_EGG       54321
-
 #define EGG_X (DISPLAY_WIDTH / 2)
 #define EGG_Y (DISPLAY_HEIGHT / 2 - 5)
 
@@ -146,26 +141,26 @@ static const struct SpriteSheet sEggHatch_Sheet =
 {
     .data = sEggHatchTiles,
     .size = sizeof(sEggHatchTiles),
-    .tag = GFXTAG_EGG,
+    .tag = GFX_TAG_EGG,
 };
 
 static const struct SpriteSheet sEggShards_Sheet =
 {
     .data = sEggShardTiles,
     .size = sizeof(sEggShardTiles),
-    .tag = GFXTAG_EGG_SHARD,
+    .tag = GFX_TAG_EGG_SHARD,
 };
 
 static const struct SpritePalette sEgg_SpritePalette =
 {
     .data = sEggPalette,
-    .tag = PALTAG_EGG
+    .tag = PAL_TAG_EGG
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Egg =
 {
-    .tileTag = GFXTAG_EGG,
-    .paletteTag = PALTAG_EGG,
+    .tileTag = GFX_TAG_EGG,
+    .paletteTag = PAL_TAG_EGG,
     .oam = &sOamData_Egg,
     .anims = sSpriteAnimTable_Egg,
     .images = NULL,
@@ -224,8 +219,8 @@ static const union AnimCmd *const sSpriteAnimTable_EggShard[] =
 
 static const struct SpriteTemplate sSpriteTemplate_EggShard =
 {
-    .tileTag = GFXTAG_EGG_SHARD,
-    .paletteTag = PALTAG_EGG,
+    .tileTag = GFX_TAG_EGG_SHARD,
+    .paletteTag = PAL_TAG_EGG,
     .oam = &sOamData_EggShard,
     .anims = sSpriteAnimTable_EggShard,
     .images = NULL,

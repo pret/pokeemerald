@@ -40,8 +40,6 @@ static void ShowJudgmentSprite(u8 x, u8 y, u8 category, u8 battler);
 
 #define JUDGMENT_STATE_FINISHED 8
 
-#define TAG_JUDGMENT_ICON 1000
-
 enum {
     ANIM_ICON_X,        // Player lost
     ANIM_ICON_TRIANGLE, // Tie
@@ -326,7 +324,7 @@ static const union AnimCmd *const sAnims_JudgmentIcon[] =
 
 static const struct SpriteTemplate sSpriteTemplate_JudgmentIcon =
 {
-    .tileTag = TAG_JUDGMENT_ICON,
+    .tileTag = TAG_BATTLE_ARENA_JUDGMENT_ICON,
     .paletteTag = TAG_NONE,
     .oam = &sOam_JudgmentIcon,
     .anims = sAnims_JudgmentIcon,
@@ -337,7 +335,7 @@ static const struct SpriteTemplate sSpriteTemplate_JudgmentIcon =
 
 static const struct CompressedSpriteSheet sBattleArenaJudgmentSymbolsSpriteSheet[] =
 {
-    {gBattleArenaJudgmentSymbolsGfx, 0x200, TAG_JUDGMENT_ICON},
+    {gBattleArenaJudgmentSymbolsGfx, 0x200, TAG_BATTLE_ARENA_JUDGMENT_ICON},
     {0}
 };
 
@@ -498,7 +496,7 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         if (!gPaletteFade.active)
         {
             SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_ALL | WININ_WIN1_ALL);
-            FreeSpriteTilesByTag(TAG_JUDGMENT_ICON);
+            FreeSpriteTilesByTag(TAG_BATTLE_ARENA_JUDGMENT_ICON);
             result = ARENA_RESULT_STEP_DONE;
             (*state)++;
         }

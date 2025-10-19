@@ -215,46 +215,6 @@ enum {
 #define BOXID_NONE_CHOSEN 200
 #define BOXID_CANCELED    201
 
-enum {
-    PALTAG_MON_ICON_0 = POKE_ICON_BASE_PAL_TAG,
-    PALTAG_MON_ICON_1, // Used implicitly in CreateMonIconSprite
-    PALTAG_MON_ICON_2, // Used implicitly in CreateMonIconSprite
-    PALTAG_3, // Unused
-    PALTAG_4, // Unused
-    PALTAG_5, // Unused
-    PALTAG_DISPLAY_MON,
-    PALTAG_MISC_1,
-    PALTAG_MARKING_COMBO,
-    PALTAG_BOX_TITLE,
-    PALTAG_MISC_2,
-    PALTAG_ITEM_ICON_0,
-    PALTAG_ITEM_ICON_1, // Used implicitly in CreateItemIconSprites
-    PALTAG_ITEM_ICON_2, // Used implicitly in CreateItemIconSprites
-    PALTAG_MARKING_MENU,
-};
-
-enum {
-    GFXTAG_CURSOR,
-    GFXTAG_CURSOR_SHADOW,
-    GFXTAG_DISPLAY_MON,
-    GFXTAG_BOX_TITLE,
-    GFXTAG_BOX_TITLE_ALT,
-    GFXTAG_WAVEFORM,
-    GFXTAG_ARROW,
-    GFXTAG_ITEM_ICON_0,
-    GFXTAG_ITEM_ICON_1, // Used implicitly in CreateItemIconSprites
-    GFXTAG_ITEM_ICON_2, // Used implicitly in CreateItemIconSprites
-    GFXTAG_CHOOSE_BOX_MENU,
-    GFXTAG_CHOOSE_BOX_MENU_SIDES, // Used implicitly in LoadChooseBoxMenuGfx
-    GFXTAG_12, // Unused
-    GFXTAG_MARKING_MENU,
-    GFXTAG_14, // Unused
-    GFXTAG_15, // Unused
-    GFXTAG_MARKING_COMBO,
-    GFXTAG_17, // Unused
-    GFXTAG_MON_ICON,
-};
-
 // The maximum number of Pokémon icons that can appear on-screen.
 // By default the limit is 40 (though in practice only 37 can be).
 #define MAX_MON_ICONS max(IN_BOX_COUNT + PARTY_SIZE + 1, 40)
@@ -1042,19 +1002,19 @@ static const struct BgTemplate sBgTemplates[] =
 
 static const struct SpritePalette sWaveformSpritePalette =
 {
-    sWaveform_Pal, PALTAG_MISC_2
+    sWaveform_Pal, PAL_TAG_MON_STORAGE_SYSTEM_MISC_2
 };
 
 static const struct SpriteSheet sSpriteSheet_Waveform =
 {
-    sWaveform_Gfx, sizeof(sWaveform_Gfx), GFXTAG_WAVEFORM
+    sWaveform_Gfx, sizeof(sWaveform_Gfx), GFX_TAG_MON_STORAGE_SYSTEM_WAVEFORM
 };
 
 static const struct OamData sOamData_DisplayMon;
 static const struct SpriteTemplate sSpriteTemplate_DisplayMon =
 {
-    .tileTag = GFXTAG_DISPLAY_MON,
-    .paletteTag = PALTAG_DISPLAY_MON,
+    .tileTag = GFX_TAG_MON_STORAGE_SYSTEM_DISPLAY_MON,
+    .paletteTag = PAL_TAG_MON_STORAGE_SYSTEM_DISPLAY_MON,
     .oam = &sOamData_DisplayMon,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -1180,8 +1140,8 @@ static const union AnimCmd *const sAnims_Waveform[] =
 
 static const struct SpriteTemplate sSpriteTemplate_Waveform =
 {
-    .tileTag = GFXTAG_WAVEFORM,
-    .paletteTag = PALTAG_MISC_2,
+    .tileTag = GFX_TAG_MON_STORAGE_SYSTEM_WAVEFORM,
+    .paletteTag = PAL_TAG_MON_STORAGE_SYSTEM_MISC_2,
     .oam = &sOamData_Waveform,
     .anims = sAnims_Waveform,
     .images = NULL,
@@ -1192,8 +1152,8 @@ static const struct SpriteTemplate sSpriteTemplate_Waveform =
 static const struct OamData sOamData_MonIcon;
 static const struct SpriteTemplate sSpriteTemplate_MonIcon =
 {
-    .tileTag = GFXTAG_MON_ICON,
-    .paletteTag = PALTAG_MON_ICON_0,
+    .tileTag = GFX_TAG_MON_STORAGE_SYSTEM_MON_ICON,
+    .paletteTag = PAL_TAG_MON_ICON_0,
     .oam = &sOamData_MonIcon,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -1241,7 +1201,7 @@ static const union AffineAnimCmd *const sAffineAnims_ReleaseMon[] =
 
 static const u16 sUnusedColor = RGB(26, 29, 8);
 
-static const struct SpriteSheet sSpriteSheet_Arrow = {sArrow_Gfx, sizeof(sArrow_Gfx), GFXTAG_ARROW};
+static const struct SpriteSheet sSpriteSheet_Arrow = {sArrow_Gfx, sizeof(sArrow_Gfx), GFX_TAG_MON_STORAGE_SYSTEM_ARROW};
 
 static const struct OamData sOamData_BoxTitle =
 {
@@ -1270,8 +1230,8 @@ static const union AnimCmd *const sAnims_BoxTitle[] =
 
 static const struct SpriteTemplate sSpriteTemplate_BoxTitle =
 {
-    .tileTag = GFXTAG_BOX_TITLE,
-    .paletteTag = PALTAG_BOX_TITLE,
+    .tileTag = GFX_TAG_MON_STORAGE_SYSTEM_BOX_TITLE,
+    .paletteTag = PAL_TAG_MON_STORAGE_SYSTEM_BOX_TITLE,
     .oam = &sOamData_BoxTitle,
     .anims = sAnims_BoxTitle,
     .images = NULL,
@@ -1306,8 +1266,8 @@ static const union AnimCmd *const sAnims_Arrow[] =
 
 static const struct SpriteTemplate sSpriteTemplate_Arrow =
 {
-    .tileTag = GFXTAG_ARROW,
-    .paletteTag = PALTAG_MISC_2,
+    .tileTag = GFX_TAG_MON_STORAGE_SYSTEM_ARROW,
+    .paletteTag = PAL_TAG_MON_STORAGE_SYSTEM_MISC_2,
     .oam = &sOamData_Arrow,
     .anims = sAnims_Arrow,
     .images = NULL,
@@ -1761,7 +1721,7 @@ void ResetPokemonStorageSystem(void)
 static void LoadChooseBoxMenuGfx(struct ChooseBoxMenu *menu, u16 tileTag, u16 palTag, u8 subpriority, bool32 loadPal)
 {
     // Because loadPal is always false, the below palette is never used.
-    // The Choose Box menu instead uses the palette indicated by palTag, which is always PALTAG_MISC_1 (sHandCursor_Pal)
+    // The Choose Box menu instead uses the palette indicated by palTag, which is always PAL_TAG_MON_STORAGE_SYSTEM_MISC_1 (sHandCursor_Pal)
     struct SpritePalette palette =
     {
         sChooseBoxMenu_Pal, palTag
@@ -2167,8 +2127,8 @@ static void Task_InitPokeStorage(u8 taskId)
 
         if (sStorage->boxOption != OPTION_MOVE_ITEMS)
         {
-            sStorage->markMenu.baseTileTag = GFXTAG_MARKING_MENU;
-            sStorage->markMenu.basePaletteTag = PALTAG_MARKING_MENU;
+            sStorage->markMenu.baseTileTag = GFX_TAG_MON_STORAGE_SYSTEM_MARKING_MENU;
+            sStorage->markMenu.basePaletteTag = PAL_TAG_MON_STORAGE_SYSTEM_MARKING_MENU;
             InitMonMarkingsMenu(&sStorage->markMenu);
             BufferMonMarkingsMenuTiles();
         }
@@ -2852,7 +2812,7 @@ static void Task_DepositMenu(u8 taskId)
     {
     case 0:
         PrintMessage(MSG_DEPOSIT_IN_WHICH_BOX);
-        LoadChooseBoxMenuGfx(&sStorage->chooseBoxMenu, GFXTAG_CHOOSE_BOX_MENU, PALTAG_MISC_1, 3, FALSE);
+        LoadChooseBoxMenuGfx(&sStorage->chooseBoxMenu, GFX_TAG_MON_STORAGE_SYSTEM_CHOOSE_BOX_MENU, PAL_TAG_MON_STORAGE_SYSTEM_MISC_1, 3, FALSE);
         CreateChooseBoxMenuSprites(sDepositBoxId);
         sStorage->state++;
         break;
@@ -3507,7 +3467,7 @@ static void Task_JumpBox(u8 taskId)
     {
     case 0:
         PrintMessage(MSG_JUMP_TO_WHICH_BOX);
-        LoadChooseBoxMenuGfx(&sStorage->chooseBoxMenu, GFXTAG_CHOOSE_BOX_MENU, PALTAG_MISC_1, 3, FALSE);
+        LoadChooseBoxMenuGfx(&sStorage->chooseBoxMenu, GFX_TAG_MON_STORAGE_SYSTEM_CHOOSE_BOX_MENU, PAL_TAG_MON_STORAGE_SYSTEM_MISC_1, 3, FALSE);
         CreateChooseBoxMenuSprites(StorageGetCurrentBox());
         sStorage->state++;
         break;
@@ -3864,12 +3824,12 @@ static void InitPalettesAndSprites(void)
 
 static void CreateMarkingComboSprite(void)
 {
-    sStorage->markingComboSprite = CreateMonMarkingComboSprite(GFXTAG_MARKING_COMBO, PALTAG_MARKING_COMBO, NULL);
+    sStorage->markingComboSprite = CreateMonMarkingComboSprite(GFX_TAG_MON_STORAGE_SYSTEM_MARKING_COMBO, PAL_TAG_MON_STORAGE_SYSTEM_MARKING_COMBO, NULL);
     sStorage->markingComboSprite->oam.priority = 1;
     sStorage->markingComboSprite->subpriority = 1;
     sStorage->markingComboSprite->x = 40;
     sStorage->markingComboSprite->y = 150;
-    sStorage->markingComboTilesPtr = (void *) OBJ_VRAM0 + 32 * GetSpriteTileStartByTag(GFXTAG_MARKING_COMBO);
+    sStorage->markingComboTilesPtr = (void *) OBJ_VRAM0 + 32 * GetSpriteTileStartByTag(GFX_TAG_MON_STORAGE_SYSTEM_MARKING_COMBO);
 }
 
 static void CreateWaveformSprites(void)
@@ -3930,8 +3890,8 @@ static void CreateDisplayMonSprite(void)
     u16 tileStart;
     u8 palSlot;
     u8 spriteId;
-    struct SpriteSheet sheet = {sStorage->tileBuffer, MON_PIC_SIZE, GFXTAG_DISPLAY_MON};
-    struct SpritePalette palette = {sStorage->displayMonPalBuffer, PALTAG_DISPLAY_MON};
+    struct SpriteSheet sheet = {sStorage->tileBuffer, MON_PIC_SIZE, GFX_TAG_MON_STORAGE_SYSTEM_DISPLAY_MON};
+    struct SpritePalette palette = {sStorage->displayMonPalBuffer, PAL_TAG_MON_STORAGE_SYSTEM_DISPLAY_MON};
     struct SpriteTemplate template = sSpriteTemplate_DisplayMon;
 
     for (i = 0; i < MON_PIC_SIZE; i++)
@@ -3962,8 +3922,8 @@ static void CreateDisplayMonSprite(void)
 
     if (sStorage->displayMonSprite == NULL)
     {
-        FreeSpriteTilesByTag(GFXTAG_DISPLAY_MON);
-        FreeSpritePaletteByTag(PALTAG_DISPLAY_MON);
+        FreeSpriteTilesByTag(GFX_TAG_MON_STORAGE_SYSTEM_DISPLAY_MON);
+        FreeSpritePaletteByTag(PAL_TAG_MON_STORAGE_SYSTEM_DISPLAY_MON);
     }
 }
 
@@ -5144,7 +5104,7 @@ static struct Sprite *CreateMonIconSprite(u16 species, u32 personality, s16 x, s
     struct SpriteTemplate template = sSpriteTemplate_MonIcon;
 
     species = GetIconSpecies(species, personality);
-    template.paletteTag = PALTAG_MON_ICON_0 + gMonIconPaletteIndices[species];
+    template.paletteTag = PAL_TAG_MON_ICON_0 + gMonIconPaletteIndices[species];
     tileNum = TryLoadMonIconTiles(species);
     if (tileNum == 0xFFFF)
         return NULL;
@@ -5472,9 +5432,9 @@ static void InitBoxTitle(u8 boxId)
     s16 x;
     u16 i;
 
-    struct SpriteSheet spriteSheet = {sStorage->boxTitleTiles, 0x200, GFXTAG_BOX_TITLE};
+    struct SpriteSheet spriteSheet = {sStorage->boxTitleTiles, 0x200, GFX_TAG_MON_STORAGE_SYSTEM_BOX_TITLE};
     struct SpritePalette palettes[] = {
-        {sStorage->boxTitlePal, PALTAG_BOX_TITLE},
+        {sStorage->boxTitlePal, PAL_TAG_MON_STORAGE_SYSTEM_BOX_TITLE},
         {}
     };
 
@@ -5485,7 +5445,7 @@ static void InitBoxTitle(u8 boxId)
     LoadSpritePalettes(palettes);
     sStorage->wallpaperPalBits = 0x3f0;
 
-    tagIndex = IndexOfSpritePaletteTag(PALTAG_BOX_TITLE);
+    tagIndex = IndexOfSpritePaletteTag(PAL_TAG_MON_STORAGE_SYSTEM_BOX_TITLE);
     sStorage->boxTitlePalOffset = OBJ_PLTT_ID(tagIndex) + 14;
     sStorage->wallpaperPalBits |= (1 << 16) << tagIndex;
 
@@ -5493,7 +5453,7 @@ static void InitBoxTitle(u8 boxId)
     // the incoming wallpaper title's palette, but as they now
     // share a palette tag, all colors (and fields in some cases)
     // this is redundant along with the use of boxTitleAltPalOffset
-    tagIndex = IndexOfSpritePaletteTag(PALTAG_BOX_TITLE);
+    tagIndex = IndexOfSpritePaletteTag(PAL_TAG_MON_STORAGE_SYSTEM_BOX_TITLE);
     sStorage->boxTitleAltPalOffset = OBJ_PLTT_ID(tagIndex) + 14;
     sStorage->wallpaperPalBits |= (1 << 16) << tagIndex;
 
@@ -5525,21 +5485,21 @@ static void CreateIncomingBoxTitle(u8 boxId, s8 direction)
     u16 palOffset;
     s16 x, adjustedX;
     u16 i;
-    struct SpriteSheet spriteSheet = {sStorage->boxTitleTiles, 0x200, GFXTAG_BOX_TITLE};
+    struct SpriteSheet spriteSheet = {sStorage->boxTitleTiles, 0x200, GFX_TAG_MON_STORAGE_SYSTEM_BOX_TITLE};
     struct SpriteTemplate template = sSpriteTemplate_BoxTitle;
 
     sStorage->boxTitleCycleId = (sStorage->boxTitleCycleId == 0);
     if (sStorage->boxTitleCycleId == 0)
     {
-        spriteSheet.tag = GFXTAG_BOX_TITLE;
+        spriteSheet.tag = GFX_TAG_MON_STORAGE_SYSTEM_BOX_TITLE;
         palOffset = sStorage->boxTitlePalOffset;
     }
     else
     {
-        spriteSheet.tag = GFXTAG_BOX_TITLE_ALT;
+        spriteSheet.tag = GFX_TAG_MON_STORAGE_SYSTEM_BOX_TITLE_ALT;
         palOffset = sStorage->boxTitlePalOffset;
-        template.tileTag = GFXTAG_BOX_TITLE_ALT;
-        template.paletteTag = PALTAG_BOX_TITLE;
+        template.tileTag = GFX_TAG_MON_STORAGE_SYSTEM_BOX_TITLE_ALT;
+        template.paletteTag = PAL_TAG_MON_STORAGE_SYSTEM_BOX_TITLE;
     }
 
     StringCopyPadded(sStorage->boxTitleText, GetBoxNamePtr(boxId), 0, BOX_NAME_LENGTH);
@@ -5571,9 +5531,9 @@ static void CreateIncomingBoxTitle(u8 boxId, s8 direction)
 static void CycleBoxTitleSprites(void)
 {
     if (sStorage->boxTitleCycleId == 0)
-        FreeSpriteTilesByTag(GFXTAG_BOX_TITLE_ALT);
+        FreeSpriteTilesByTag(GFX_TAG_MON_STORAGE_SYSTEM_BOX_TITLE_ALT);
     else
-        FreeSpriteTilesByTag(GFXTAG_BOX_TITLE);
+        FreeSpriteTilesByTag(GFX_TAG_MON_STORAGE_SYSTEM_BOX_TITLE);
 
     sStorage->curBoxTitleSprites[0] = sStorage->nextBoxTitleSprites[0];
     sStorage->curBoxTitleSprites[1] = sStorage->nextBoxTitleSprites[1];
@@ -7739,14 +7699,14 @@ static void CreateCursorSprites(void)
     u8 priority, subpriority;
     struct SpriteSheet spriteSheets[] =
     {
-        {sHandCursor_Gfx, 0x800, GFXTAG_CURSOR},
-        {sHandCursorShadow_Gfx, 0x80, GFXTAG_CURSOR_SHADOW},
+        {sHandCursor_Gfx, 0x800, GFX_TAG_MON_STORAGE_SYSTEM_CURSOR},
+        {sHandCursorShadow_Gfx, 0x80, GFX_TAG_MON_STORAGE_SYSTEM_CURSOR_SHADOW},
         {}
     };
 
     struct SpritePalette spritePalettes[] =
     {
-        {sHandCursor_Pal, PALTAG_MISC_1},
+        {sHandCursor_Pal, PAL_TAG_MON_STORAGE_SYSTEM_MISC_1},
         {}
     };
 
@@ -7795,8 +7755,8 @@ static void CreateCursorSprites(void)
 
     static const struct SpriteTemplate sSpriteTemplate_Cursor =
     {
-        .tileTag = GFXTAG_CURSOR,
-        .paletteTag = PALTAG_MISC_2,
+        .tileTag = GFX_TAG_MON_STORAGE_SYSTEM_CURSOR,
+        .paletteTag = PAL_TAG_MON_STORAGE_SYSTEM_MISC_2,
         .oam = &sOamData_Cursor,
         .anims = sAnims_Cursor,
         .images = NULL,
@@ -7806,8 +7766,8 @@ static void CreateCursorSprites(void)
 
     static const struct SpriteTemplate sSpriteTemplate_CursorShadow =
     {
-        .tileTag = GFXTAG_CURSOR_SHADOW,
-        .paletteTag = PALTAG_MISC_2,
+        .tileTag = GFX_TAG_MON_STORAGE_SYSTEM_CURSOR_SHADOW,
+        .paletteTag = PAL_TAG_MON_STORAGE_SYSTEM_MISC_2,
         .oam = &sOamData_CursorShadow,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -7817,8 +7777,8 @@ static void CreateCursorSprites(void)
 
     LoadSpriteSheets(spriteSheets);
     LoadSpritePalettes(spritePalettes);
-    sStorage->cursorPalNums[0] = IndexOfSpritePaletteTag(PALTAG_MISC_2); // White hand, normal
-    sStorage->cursorPalNums[1] = IndexOfSpritePaletteTag(PALTAG_MISC_1); // Yellow hand, when auto-action is on
+    sStorage->cursorPalNums[0] = IndexOfSpritePaletteTag(PAL_TAG_MON_STORAGE_SYSTEM_MISC_2); // White hand, normal
+    sStorage->cursorPalNums[1] = IndexOfSpritePaletteTag(PAL_TAG_MON_STORAGE_SYSTEM_MISC_1); // Yellow hand, when auto-action is on
 
     GetCursorCoordsByPos(sCursorArea, sCursorPosition, &x, &y);
     spriteId = CreateSprite(&sSpriteTemplate_Cursor, x, y, 6);
@@ -8714,8 +8674,8 @@ static const union AffineAnimCmd *const sAffineAnims_ItemIcon[] =
 
 static const struct SpriteTemplate sSpriteTemplate_ItemIcon =
 {
-    .tileTag = GFXTAG_ITEM_ICON_0,
-    .paletteTag = PALTAG_ITEM_ICON_0,
+    .tileTag = GFX_TAG_MON_STORAGE_SYSTEM_ITEM_ICON_0,
+    .paletteTag = PAL_TAG_MON_STORAGE_SYSTEM_ITEM_ICON_0,
     .oam = &sOamData_ItemIcon,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -8738,13 +8698,13 @@ static void CreateItemIconSprites(void)
 
         for (i = 0; i < MAX_ITEM_ICONS; i++)
         {
-            spriteSheet.tag = GFXTAG_ITEM_ICON_0 + i;
+            spriteSheet.tag = GFX_TAG_MON_STORAGE_SYSTEM_ITEM_ICON_0 + i;
             LoadCompressedSpriteSheet(&spriteSheet);
             sStorage->itemIcons[i].tiles = GetSpriteTileStartByTag(spriteSheet.tag) * TILE_SIZE_4BPP + (void *)(OBJ_VRAM0);
-            sStorage->itemIcons[i].palIndex = AllocSpritePalette(PALTAG_ITEM_ICON_0 + i);
+            sStorage->itemIcons[i].palIndex = AllocSpritePalette(PAL_TAG_MON_STORAGE_SYSTEM_ITEM_ICON_0 + i);
             sStorage->itemIcons[i].palIndex = OBJ_PLTT_ID(sStorage->itemIcons[i].palIndex);
-            spriteTemplate.tileTag = GFXTAG_ITEM_ICON_0 + i;
-            spriteTemplate.paletteTag = PALTAG_ITEM_ICON_0 + i;
+            spriteTemplate.tileTag = GFX_TAG_MON_STORAGE_SYSTEM_ITEM_ICON_0 + i;
+            spriteTemplate.paletteTag = PAL_TAG_MON_STORAGE_SYSTEM_ITEM_ICON_0 + i;
             spriteId = CreateSprite(&spriteTemplate, 0, 0, 11);
             sStorage->itemIcons[i].sprite = &gSprites[spriteId];
             sStorage->itemIcons[i].sprite->invisible = TRUE;

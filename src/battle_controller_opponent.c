@@ -253,8 +253,8 @@ static void Intro_WaitForShinyAnimAndHealthbox(void)
                 gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = FALSE;
                 gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(gActiveBattler)].triedShinyMonAnim = FALSE;
                 gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(gActiveBattler)].finishedShinyMonAnim = FALSE;
-                FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-                FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+                FreeSpriteTilesByTag(TAG_BATTLE_ANIM_GOLD_STARS);
+                FreeSpritePaletteByTag(TAG_BATTLE_ANIM_GOLD_STARS);
             }
             else
             {
@@ -268,8 +268,8 @@ static void Intro_WaitForShinyAnimAndHealthbox(void)
                 if (!gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(gActiveBattler)].triedShinyMonAnim
                  && !gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(gActiveBattler)].finishedShinyMonAnim)
                 {
-                    FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-                    FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+                    FreeSpriteTilesByTag(TAG_BATTLE_ANIM_GOLD_STARS);
+                    FreeSpritePaletteByTag(TAG_BATTLE_ANIM_GOLD_STARS);
                 }
                 else
                 {
@@ -394,8 +394,8 @@ static void TryShinyAnimAfterMonAnim(void)
     {
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = FALSE;
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = FALSE;
-        FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-        FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+        FreeSpriteTilesByTag(TAG_BATTLE_ANIM_GOLD_STARS);
+        FreeSpritePaletteByTag(TAG_BATTLE_ANIM_GOLD_STARS);
         OpponentBufferExecCompleted();
     }
 }
@@ -486,8 +486,8 @@ static void SwitchIn_ShowHealthbox(void)
     {
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = FALSE;
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = FALSE;
-        FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-        FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+        FreeSpriteTilesByTag(TAG_BATTLE_ANIM_GOLD_STARS);
+        FreeSpritePaletteByTag(TAG_BATTLE_ANIM_GOLD_STARS);
         StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 0);
         UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], HEALTHBOX_ALL);
         StartHealthboxSlideIn(gActiveBattler);

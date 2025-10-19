@@ -17,18 +17,6 @@
 #include "constants/songs.h"
 #include "constants/rgb.h"
 
-#define GFXTAG_BLUE_LIGHT 1
-#define GFXTAG_OPTIONS    3
-
-#define PALTAG_BLUE_LIGHT 3
-#define PALTAG_OPTIONS_DEFAULT 4 // Includes green for Smart/Region Map and yellow for Tough
-#define PALTAG_OPTIONS_BLUE 5
-#define PALTAG_OPTIONS_PINK 6
-#define PALTAG_OPTIONS_BEIGE 7
-#define PALTAG_OPTIONS_RED 8
-
-#define PALTAG_OPTIONS_START PALTAG_OPTIONS_DEFAULT
-
 #define NUM_OPTION_SUBSPRITES 4
 
 #define OPTION_DEFAULT_X   140
@@ -154,40 +142,40 @@ static const struct CompressedSpriteSheet sPokenavOptionsSpriteSheets[] =
     {
         .data = gPokenavOptions_Gfx,
         .size = 0x3400,
-        .tag = GFXTAG_OPTIONS
+        .tag = GFX_TAG_POKENAV_MENU_OPTIONS
     },
     {
         .data = sMatchCallBlueLightTiles,
         .size = 0x0100,
-        .tag = GFXTAG_BLUE_LIGHT
+        .tag = GFX_TAG_POKENAV_MENU_BLUE_LIGHT
     }
 };
 
 static const struct SpritePalette sPokenavOptionsSpritePalettes[] =
 {
-    {&gPokenavOptions_Pal[0x00], PALTAG_OPTIONS_DEFAULT},
-    {&gPokenavOptions_Pal[0x10], PALTAG_OPTIONS_BLUE},
-    {&gPokenavOptions_Pal[0x20], PALTAG_OPTIONS_PINK},
-    {&gPokenavOptions_Pal[0x30], PALTAG_OPTIONS_BEIGE},
-    {&gPokenavOptions_Pal[0x40], PALTAG_OPTIONS_RED},
-    {sMatchCallBlueLightPal, PALTAG_BLUE_LIGHT},
+    {&gPokenavOptions_Pal[0x00], PAL_TAG_POKENAV_MENU_OPTIONS_DEFAULT},
+    {&gPokenavOptions_Pal[0x10], PAL_TAG_POKENAV_MENU_OPTIONS_BLUE},
+    {&gPokenavOptions_Pal[0x20], PAL_TAG_POKENAV_MENU_OPTIONS_PINK},
+    {&gPokenavOptions_Pal[0x30], PAL_TAG_POKENAV_MENU_OPTIONS_BEIGE},
+    {&gPokenavOptions_Pal[0x40], PAL_TAG_POKENAV_MENU_OPTIONS_RED},
+    {sMatchCallBlueLightPal, PAL_TAG_POKENAV_MENU_BLUE_LIGHT},
     {}
 };
 
 // Tile number, palette tag offset
-static const u16 sOptionsLabelGfx_RegionMap[] = {0x000, PALTAG_OPTIONS_DEFAULT - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_Condition[] = {0x020, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_MatchCall[] = {0x040, PALTAG_OPTIONS_RED - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_Ribbons[]   = {0x060, PALTAG_OPTIONS_PINK - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_SwitchOff[] = {0x080, PALTAG_OPTIONS_BEIGE - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_Party[]     = {0x0A0, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_Search[]    = {0x0C0, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_Cool[]      = {0x0E0, PALTAG_OPTIONS_RED - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_Beauty[]    = {0x100, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_Cute[]      = {0x120, PALTAG_OPTIONS_PINK - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_Smart[]     = {0x140, PALTAG_OPTIONS_DEFAULT - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_Tough[]     = {0x160, PALTAG_OPTIONS_DEFAULT - PALTAG_OPTIONS_START};
-static const u16 sOptionsLabelGfx_Cancel[]    = {0x180, PALTAG_OPTIONS_BEIGE - PALTAG_OPTIONS_START};
+static const u16 sOptionsLabelGfx_RegionMap[] = {0x000, PAL_TAG_POKENAV_MENU_OPTIONS_DEFAULT - PAL_TAG_POKENAV_MENU_OPTIONS_START};
+static const u16 sOptionsLabelGfx_Condition[] = {0x020, PAL_TAG_POKENAV_MENU_OPTIONS_BLUE - PAL_TAG_POKENAV_MENU_OPTIONS_START};
+static const u16 sOptionsLabelGfx_MatchCall[] = {0x040, PAL_TAG_POKENAV_MENU_OPTIONS_RED - PAL_TAG_POKENAV_MENU_OPTIONS_START};
+static const u16 sOptionsLabelGfx_Ribbons[]   = {0x060, PAL_TAG_POKENAV_MENU_OPTIONS_PINK - PAL_TAG_POKENAV_MENU_OPTIONS_START};
+static const u16 sOptionsLabelGfx_SwitchOff[] = {0x080, PAL_TAG_POKENAV_MENU_OPTIONS_BEIGE - PAL_TAG_POKENAV_MENU_OPTIONS_START};
+static const u16 sOptionsLabelGfx_Party[]     = {0x0A0, PAL_TAG_POKENAV_MENU_OPTIONS_BLUE - PAL_TAG_POKENAV_MENU_OPTIONS_START};
+static const u16 sOptionsLabelGfx_Search[]    = {0x0C0, PAL_TAG_POKENAV_MENU_OPTIONS_BLUE - PAL_TAG_POKENAV_MENU_OPTIONS_START};
+static const u16 sOptionsLabelGfx_Cool[]      = {0x0E0, PAL_TAG_POKENAV_MENU_OPTIONS_RED - PAL_TAG_POKENAV_MENU_OPTIONS_START};
+static const u16 sOptionsLabelGfx_Beauty[]    = {0x100, PAL_TAG_POKENAV_MENU_OPTIONS_BLUE - PAL_TAG_POKENAV_MENU_OPTIONS_START};
+static const u16 sOptionsLabelGfx_Cute[]      = {0x120, PAL_TAG_POKENAV_MENU_OPTIONS_PINK - PAL_TAG_POKENAV_MENU_OPTIONS_START};
+static const u16 sOptionsLabelGfx_Smart[]     = {0x140, PAL_TAG_POKENAV_MENU_OPTIONS_DEFAULT - PAL_TAG_POKENAV_MENU_OPTIONS_START};
+static const u16 sOptionsLabelGfx_Tough[]     = {0x160, PAL_TAG_POKENAV_MENU_OPTIONS_DEFAULT - PAL_TAG_POKENAV_MENU_OPTIONS_START};
+static const u16 sOptionsLabelGfx_Cancel[]    = {0x180, PAL_TAG_POKENAV_MENU_OPTIONS_BEIGE - PAL_TAG_POKENAV_MENU_OPTIONS_START};
 
 struct
 {
@@ -321,8 +309,8 @@ static const union AffineAnimCmd *const sAffineAnims_MenuOption[] =
 
 static const struct SpriteTemplate sMenuOptionSpriteTemplate =
 {
-    .tileTag = GFXTAG_OPTIONS,
-    .paletteTag = PALTAG_OPTIONS_START,
+    .tileTag = GFX_TAG_POKENAV_MENU_OPTIONS,
+    .paletteTag = PAL_TAG_POKENAV_MENU_OPTIONS_START,
     .oam = &sOamData_MenuOption,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -346,8 +334,8 @@ static const struct OamData sBlueLightOamData =
 
 static const struct SpriteTemplate sMatchCallBlueLightSpriteTemplate =
 {
-    .tileTag = GFXTAG_BLUE_LIGHT,
-    .paletteTag = PALTAG_BLUE_LIGHT,
+    .tileTag = GFX_TAG_POKENAV_MENU_BLUE_LIGHT,
+    .paletteTag = PAL_TAG_POKENAV_MENU_BLUE_LIGHT,
     .oam = &sBlueLightOamData,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -802,14 +790,14 @@ static void LoadPokenavOptionPalettes(void)
 
 static void FreeAndDestroyMainMenuSprites(void)
 {
-    FreeSpriteTilesByTag(GFXTAG_OPTIONS);
-    FreeSpriteTilesByTag(GFXTAG_BLUE_LIGHT);
-    FreeSpritePaletteByTag(PALTAG_OPTIONS_DEFAULT);
-    FreeSpritePaletteByTag(PALTAG_OPTIONS_BLUE);
-    FreeSpritePaletteByTag(PALTAG_OPTIONS_PINK);
-    FreeSpritePaletteByTag(PALTAG_OPTIONS_BEIGE);
-    FreeSpritePaletteByTag(PALTAG_OPTIONS_RED);
-    FreeSpritePaletteByTag(PALTAG_BLUE_LIGHT);
+    FreeSpriteTilesByTag(GFX_TAG_POKENAV_MENU_OPTIONS);
+    FreeSpriteTilesByTag(GFX_TAG_POKENAV_MENU_BLUE_LIGHT);
+    FreeSpritePaletteByTag(PAL_TAG_POKENAV_MENU_OPTIONS_DEFAULT);
+    FreeSpritePaletteByTag(PAL_TAG_POKENAV_MENU_OPTIONS_BLUE);
+    FreeSpritePaletteByTag(PAL_TAG_POKENAV_MENU_OPTIONS_PINK);
+    FreeSpritePaletteByTag(PAL_TAG_POKENAV_MENU_OPTIONS_BEIGE);
+    FreeSpritePaletteByTag(PAL_TAG_POKENAV_MENU_OPTIONS_RED);
+    FreeSpritePaletteByTag(PAL_TAG_POKENAV_MENU_BLUE_LIGHT);
     DestroyMenuOptionSprites();
     DestroyRematchBlueLightSprite();
 }
@@ -855,7 +843,7 @@ static void DrawOptionLabelGfx(const u16 *const *optionGfx, s32 yPos, s32 deltaY
 {
     s32 i, j;
     struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
-    s32 baseTile = GetSpriteTileStartByTag(GFXTAG_OPTIONS);
+    s32 baseTile = GetSpriteTileStartByTag(GFX_TAG_POKENAV_MENU_OPTIONS);
 
     for (i = 0; i < MAX_POKENAV_MENUITEMS; i++)
     {
@@ -864,7 +852,7 @@ static void DrawOptionLabelGfx(const u16 *const *optionGfx, s32 yPos, s32 deltaY
             for (j = 0; j < NUM_OPTION_SUBSPRITES; j++)
             {
                 gfx->iconSprites[i][j]->oam.tileNum = (*optionGfx)[0] + baseTile + 8 * j;
-                gfx->iconSprites[i][j]->oam.paletteNum = IndexOfSpritePaletteTag((*optionGfx)[1] + PALTAG_OPTIONS_START);
+                gfx->iconSprites[i][j]->oam.paletteNum = IndexOfSpritePaletteTag((*optionGfx)[1] + PAL_TAG_POKENAV_MENU_OPTIONS_START);
                 gfx->iconSprites[i][j]->invisible = TRUE;
                 gfx->iconSprites[i][j]->y = yPos;
                 gfx->iconSprites[i][j]->x = OPTION_DEFAULT_X;

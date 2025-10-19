@@ -93,16 +93,6 @@ enum {
 #define PROGRESS_BAR_EMPTY_BOTTOM  0x80F1
 #define RPM_DIGIT 0x8072
 
-// Tile and palette tags
-#define GFXTAG_COUNTDOWN_NUMBERS 12345
-#define GFXTAG_START             12346
-#define GFXTAG_PARTICLES         23456
-#define GFXTAG_PLAYER_ARROW      46545
-#define GFXTAG_SCORE_SYMBOLS     48888
-
-#define PALTAG_PLAYER_ARROW      12312
-#define PALTAG_MISC              46546
-
 // Last berry that an NPC can put in
 #define NUM_NPC_BERRIES ITEM_TO_BERRY(ITEM_ASPEAR_BERRY)
 
@@ -577,23 +567,23 @@ static const union AnimCmd *const sAnims_PlayerArrow[] =
 
 static const struct SpriteSheet sSpriteSheet_PlayerArrow =
 {
-    gBerryBlenderPlayerArrow_Gfx, 0x800, GFXTAG_PLAYER_ARROW
+    gBerryBlenderPlayerArrow_Gfx, 0x800, GFX_TAG_BERRY_BLENDER_PLAYER_ARROW
 };
 
 static const struct SpritePalette sSpritePal_BlenderMisc =
 {
-    gBerryBlenderMiscPalette, PALTAG_MISC
+    gBerryBlenderMiscPalette, PAL_TAG_BERRY_BLENDER_MISC
 };
 
 static const struct SpritePalette sSpritePal_PlayerArrow =
 {
-    gBerryBlenderArrowPalette, PALTAG_PLAYER_ARROW
+    gBerryBlenderArrowPalette, PAL_TAG_BERRY_BLENDER_PLAYER_ARROW
 };
 
 static const struct SpriteTemplate sSpriteTemplate_PlayerArrow =
 {
-    .tileTag = GFXTAG_PLAYER_ARROW,
-    .paletteTag = PALTAG_PLAYER_ARROW,
+    .tileTag = GFX_TAG_BERRY_BLENDER_PLAYER_ARROW,
+    .paletteTag = PAL_TAG_BERRY_BLENDER_PLAYER_ARROW,
     .oam = &sOam_PlayerArrow,
     .anims = sAnims_PlayerArrow,
     .images = NULL,
@@ -656,13 +646,13 @@ static const union AnimCmd *const sAnims_ScoreSymbols[] =
 
 static const struct SpriteSheet sSpriteSheet_ScoreSymbols =
 {
-    gBerryBlenderScoreSymbols_Gfx, 0x200, GFXTAG_SCORE_SYMBOLS
+    gBerryBlenderScoreSymbols_Gfx, 0x200, GFX_TAG_BERRY_BLENDER_SCORE_SYMBOLS
 };
 
 static const struct SpriteTemplate sSpriteTemplate_ScoreSymbols =
 {
-    .tileTag = GFXTAG_SCORE_SYMBOLS,
-    .paletteTag = PALTAG_MISC,
+    .tileTag = GFX_TAG_BERRY_BLENDER_SCORE_SYMBOLS,
+    .paletteTag = PAL_TAG_BERRY_BLENDER_MISC,
     .oam = &sOam_ScoreSymbols,
     .anims = sAnims_ScoreSymbols,
     .images = NULL,
@@ -743,13 +733,13 @@ static const union AnimCmd *const sAnims_Particles[] =
 
 static const struct SpriteSheet sSpriteSheet_Particles =
 {
-    gBerryBlenderParticles_Gfx, 0xE0, GFXTAG_PARTICLES
+    gBerryBlenderParticles_Gfx, 0xE0, GFX_TAG_BERRY_BLENDER_PARTICLES
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Particles =
 {
-    .tileTag = GFXTAG_PARTICLES,
-    .paletteTag = PALTAG_MISC,
+    .tileTag = GFX_TAG_BERRY_BLENDER_PARTICLES,
+    .paletteTag = PAL_TAG_BERRY_BLENDER_MISC,
     .oam = &sOam_Particles,
     .anims = sAnims_Particles,
     .images = NULL,
@@ -801,13 +791,13 @@ static const union AnimCmd *const sAnims_CountdownNumbers[] =
 
 static const struct SpriteSheet sSpriteSheet_CountdownNumbers =
 {
-    gBerryBlenderCountdownNumbers_Gfx, 0x600, GFXTAG_COUNTDOWN_NUMBERS
+    gBerryBlenderCountdownNumbers_Gfx, 0x600, GFX_TAG_BERRY_BLENDER_COUNTDOWN_NUMBERS
 };
 
 static const struct SpriteTemplate sSpriteTemplate_CountdownNumbers =
 {
-    .tileTag = GFXTAG_COUNTDOWN_NUMBERS,
-    .paletteTag = PALTAG_MISC,
+    .tileTag = GFX_TAG_BERRY_BLENDER_COUNTDOWN_NUMBERS,
+    .paletteTag = PAL_TAG_BERRY_BLENDER_MISC,
     .oam = &sOam_CountdownNumbers,
     .anims = sAnims_CountdownNumbers,
     .images = NULL,
@@ -845,13 +835,13 @@ static const union AnimCmd *const sAnims_Start[] =
 
 static const struct SpriteSheet sSpriteSheet_Start =
 {
-    gBerryBlenderStart_Gfx, 0x400, GFXTAG_START
+    gBerryBlenderStart_Gfx, 0x400, GFX_TAG_BERRY_BLENDER_START
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Start =
 {
-    .tileTag = GFXTAG_START,
-    .paletteTag = PALTAG_MISC,
+    .tileTag = GFX_TAG_BERRY_BLENDER_START,
+    .paletteTag = PAL_TAG_BERRY_BLENDER_MISC,
     .oam = &sOam_Start,
     .anims = sAnims_Start,
     .images = NULL,

@@ -66,11 +66,6 @@
 #include "constants/metatile_labels.h"
 #include "palette.h"
 
-#define TAG_ITEM_ICON 5500
-
-#define GFXTAG_MULTICHOICE_SCROLL_ARROWS 2000
-#define PALTAG_MULTICHOICE_SCROLL_ARROWS 100
-
 #define ELEVATOR_WINDOW_WIDTH  3
 #define ELEVATOR_WINDOW_HEIGHT 3
 #define ELEVATOR_LIGHT_STAGES  3
@@ -2731,8 +2726,8 @@ static void ScrollableMultichoice_UpdateScrollArrows(u8 taskId)
         .secondY = 0,
         .fullyUpThreshold = 0,
         .fullyDownThreshold = 0,
-        .tileTag = GFXTAG_MULTICHOICE_SCROLL_ARROWS,
-        .palTag = PALTAG_MULTICHOICE_SCROLL_ARROWS,
+        .tileTag = GFX_TAG_FIELD_SPECIALS_MULTICHOICE_SCROLL_ARROWS,
+        .palTag = PAL_TAG_FIELD_SPECIALS_MULTICHOICE_SCROLL_ARROWS,
         .palNum = 0
     };
 
@@ -2995,9 +2990,9 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
             }
             else
             {
-                FreeSpriteTilesByTag(TAG_ITEM_ICON);
-                FreeSpritePaletteByTag(TAG_ITEM_ICON);
-                sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor1[selection], 33, 88, 0, TAG_ITEM_ICON, TAG_ITEM_ICON);
+                FreeSpriteTilesByTag(TAG_FIELD_SPECIALS_ITEM_ICON);
+                FreeSpritePaletteByTag(TAG_FIELD_SPECIALS_ITEM_ICON);
+                sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor1[selection], 33, 88, 0, TAG_FIELD_SPECIALS_ITEM_ICON, TAG_FIELD_SPECIALS_ITEM_ICON);
             }
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
@@ -3008,9 +3003,9 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
             }
             else
             {
-                FreeSpriteTilesByTag(TAG_ITEM_ICON);
-                FreeSpritePaletteByTag(TAG_ITEM_ICON);
-                sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2[selection], 33, 88, 0, TAG_ITEM_ICON, TAG_ITEM_ICON);
+                FreeSpriteTilesByTag(TAG_FIELD_SPECIALS_ITEM_ICON);
+                FreeSpritePaletteByTag(TAG_FIELD_SPECIALS_ITEM_ICON);
+                sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2[selection], 33, 88, 0, TAG_FIELD_SPECIALS_ITEM_ICON, TAG_FIELD_SPECIALS_ITEM_ICON);
             }
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
@@ -3027,9 +3022,9 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
 
 static void ShowFrontierExchangeCornerItemIcon(u16 item)
 {
-    FreeSpriteTilesByTag(TAG_ITEM_ICON);
-    FreeSpritePaletteByTag(TAG_ITEM_ICON);
-    sScrollableMultichoice_ItemSpriteId = AddItemIconSprite(TAG_ITEM_ICON, TAG_ITEM_ICON, item);
+    FreeSpriteTilesByTag(TAG_FIELD_SPECIALS_ITEM_ICON);
+    FreeSpritePaletteByTag(TAG_FIELD_SPECIALS_ITEM_ICON);
+    sScrollableMultichoice_ItemSpriteId = AddItemIconSprite(TAG_FIELD_SPECIALS_ITEM_ICON, TAG_FIELD_SPECIALS_ITEM_ICON, item);
 
     if (sScrollableMultichoice_ItemSpriteId != MAX_SPRITES)
     {

@@ -39,9 +39,6 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-#define TAG_SCROLL_ARROW   2100
-#define TAG_ITEM_ICON_BASE 2110
-
 #define MAX_ITEMS_SHOWN 8
 #define SHOP_MENU_PALETTE_ID 12
 
@@ -656,8 +653,8 @@ static void BuyMenuAddScrollIndicatorArrows(void)
             12,
             148,
             sMartInfo.itemCount - (MAX_ITEMS_SHOWN - 1),
-            TAG_SCROLL_ARROW,
-            TAG_SCROLL_ARROW,
+            TAG_SHOP_MENU_SCROLL_ARROW,
+            TAG_SHOP_MENU_SCROLL_ARROW,
             &sShopData->scrollOffset);
     }
 }
@@ -686,7 +683,7 @@ static void BuyMenuAddItemIcon(u16 item, u8 iconSlot)
 
     if (sMartInfo.martType == MART_TYPE_NORMAL || item == ITEM_LIST_END)
     {
-        spriteId = AddItemIconSprite(iconSlot + TAG_ITEM_ICON_BASE, iconSlot + TAG_ITEM_ICON_BASE, item);
+        spriteId = AddItemIconSprite(iconSlot + TAG_SHOP_MENU_ITEM_ICON_BASE, iconSlot + TAG_SHOP_MENU_ITEM_ICON_BASE, item);
         if (spriteId != MAX_SPRITES)
         {
             *spriteIdPtr = spriteId;
@@ -696,7 +693,7 @@ static void BuyMenuAddItemIcon(u16 item, u8 iconSlot)
     }
     else
     {
-        spriteId = AddDecorationIconObject(item, 20, 84, 1, iconSlot + TAG_ITEM_ICON_BASE, iconSlot + TAG_ITEM_ICON_BASE);
+        spriteId = AddDecorationIconObject(item, 20, 84, 1, iconSlot + TAG_SHOP_MENU_ITEM_ICON_BASE, iconSlot + TAG_SHOP_MENU_ITEM_ICON_BASE);
         if (spriteId != MAX_SPRITES)
             *spriteIdPtr = spriteId;
     }
@@ -708,8 +705,8 @@ static void BuyMenuRemoveItemIcon(u16 item, u8 iconSlot)
     if (*spriteIdPtr == SPRITE_NONE)
         return;
 
-    FreeSpriteTilesByTag(iconSlot + TAG_ITEM_ICON_BASE);
-    FreeSpritePaletteByTag(iconSlot + TAG_ITEM_ICON_BASE);
+    FreeSpriteTilesByTag(iconSlot + TAG_SHOP_MENU_ITEM_ICON_BASE);
+    FreeSpritePaletteByTag(iconSlot + TAG_SHOP_MENU_ITEM_ICON_BASE);
     DestroySprite(&gSprites[*spriteIdPtr]);
     *spriteIdPtr = SPRITE_NONE;
 }

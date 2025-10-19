@@ -83,49 +83,12 @@ enum {
     SYMBOL_REPLAY,
 };
 
-enum
-{
-    GFXTAG_7_RED,
-    GFXTAG_7_BLUE,
-    GFXTAG_AZURILL,
-    GFXTAG_LOTAD,
-    GFXTAG_CHERRY,
-    GFXTAG_POWER,
-    GFXTAG_REPLAY,
-    GFXTAG_NUM_0,
-    GFXTAG_NUM_1,
-    GFXTAG_NUM_2,
-    GFXTAG_NUM_3,
-    GFXTAG_NUM_4,
-    GFXTAG_NUM_5,
-    GFXTAG_NUM_6,
-    GFXTAG_NUM_7,
-    GFXTAG_NUM_8,
-    GFXTAG_NUM_9,
-    GFXTAG_REEL_BG,
-    GFXTAG_STOP,
-    GFXTAG_BONUS,
-    GFXTAG_BIG,
-    GFXTAG_REG,
-};
-
-#define GFXTAG_SYMBOLS_START (GFXTAG_7_RED)
-#define GFXTAG_NUMBERS_START (GFXTAG_NUM_0)
+#define GFX_TAG_SLOT_MACHINE_SYMBOLS_START (GFX_TAG_SLOT_MACHINE_7_RED)
+#define GFX_TAG_SLOT_MACHINE_NUMBERS_START (GFX_TAG_SLOT_MACHINE_NUM_0)
 
 #define REEL_NORMAL_SPEED  8
 #define REEL_HALF_SPEED    4
 #define REEL_QUARTER_SPEED 2
-
-enum {
-    PALTAG_REEL,
-    PALTAG_REEL_TIME_PIKACHU,
-    PALTAG_REEL_TIME_MISC,
-    PALTAG_REEL_TIME_MACHINE,
-    PALTAG_MISC,
-    PALTAG_EXPLOSION,
-    PALTAG_DIG_DISPLAY,
-    PALTAG_PIKA_AURA,
-};
 
 enum {
     MATCH_CHERRY,        // Cherry in center of first reel
@@ -4136,7 +4099,7 @@ static void SpriteCB_CoinNumber(struct Sprite *sprite)
         tag %= (u16)sprite->sDigitMax;
         tag /= (u16)sprite->sDigitMin;
 
-        tag += GFXTAG_NUM_0;
+        tag += GFX_TAG_SLOT_MACHINE_NUM_0;
         sprite->sheetTileStart = GetSpriteTileStartByTag(tag);
         SetSpriteSheetFrameTileNum(sprite);
     }
@@ -4430,7 +4393,7 @@ static void SpriteCB_ReelTimePikachuAura(struct Sprite *sprite)
     u8 colors[] = {16, 0};
     if (sprite->sFlashPal && --sprite->sDelayTimer <= 0)
     {
-        MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_PIKA_AURA)) + 3, colors[sprite->sColorIdx], colors[sprite->sColorIdx], colors[sprite->sColorIdx]);
+        MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(PAL_TAG_SLOT_MACHINE_PIKA_AURA)) + 3, colors[sprite->sColorIdx], colors[sprite->sColorIdx], colors[sprite->sColorIdx]);
         ++sprite->sColorIdx;
         sprite->sColorIdx &= 1;
         sprite->sDelayTimer = sprite->sDelay;
@@ -4445,7 +4408,7 @@ static void SetReelTimePikachuAuraFlashDelay(s16 delay)
 static void DestroyReelTimePikachuAuraSprites(void)
 {
     u8 i;
-    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_PIKA_AURA)) + 3, 0, 0, 0);
+    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(PAL_TAG_SLOT_MACHINE_PIKA_AURA)) + 3, 0, 0, 0);
     for (i = 0; i < ARRAY_COUNT(sSlotMachine->reelTimePikachuAuraSpriteIds); i++)
         DestroySprite(&gSprites[sSlotMachine->reelTimePikachuAuraSpriteIds[i]]);
 }
@@ -4860,7 +4823,7 @@ static void SpriteCB_DigitalDisplay_PokeballShining(struct Sprite *sprite)
 {
     if (sprite->sCounter < 3)
     {
-        LoadPalette(sPokeballShiningPalTable[sprite->sCounter], OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_DIG_DISPLAY)), PLTT_SIZE_4BPP);
+        LoadPalette(sPokeballShiningPalTable[sprite->sCounter], OBJ_PLTT_ID(IndexOfSpritePaletteTag(PAL_TAG_SLOT_MACHINE_DIG_DISPLAY)), PLTT_SIZE_4BPP);
         if (++sprite->data[2] >= 4)
         {
             sprite->data[1]++;
@@ -4869,7 +4832,7 @@ static void SpriteCB_DigitalDisplay_PokeballShining(struct Sprite *sprite)
     }
     else
     {
-        LoadPalette(sPokeballShiningPalTable[sprite->sCounter], OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_DIG_DISPLAY)), PLTT_SIZE_4BPP);
+        LoadPalette(sPokeballShiningPalTable[sprite->sCounter], OBJ_PLTT_ID(IndexOfSpritePaletteTag(PAL_TAG_SLOT_MACHINE_DIG_DISPLAY)), PLTT_SIZE_4BPP);
         if (++sprite->data[2] >= 25)
         {
             sprite->sCounter = 0;
@@ -4998,7 +4961,7 @@ static void EndDigitalDisplayScene_StopReel(void)
 
 static void EndDigitalDisplayScene_Win(void)
 {
-    LoadPalette(sDigitalDisplay_Pal, OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_DIG_DISPLAY)), PLTT_SIZE_4BPP);
+    LoadPalette(sDigitalDisplay_Pal, OBJ_PLTT_ID(IndexOfSpritePaletteTag(PAL_TAG_SLOT_MACHINE_DIG_DISPLAY)), PLTT_SIZE_4BPP);
 }
 
 static void EndDigitalDisplayScene_InsertBet(void)
@@ -5025,10 +4988,10 @@ static void LoadSlotMachineGfx(void)
         sSlotMachineSpritesheetsPtr[i].size = sSlotMachineSpriteSheets[i].size;
         sSlotMachineSpritesheetsPtr[i].tag = sSlotMachineSpriteSheets[i].tag;
     }
-    sSlotMachineSpritesheetsPtr[GFXTAG_STOP - 1].data = sDigitalDisplayGfxPtr + 0xA00;
-    sSlotMachineSpritesheetsPtr[GFXTAG_BONUS - 1].data = sDigitalDisplayGfxPtr + 0x1400;
-    sSlotMachineSpritesheetsPtr[GFXTAG_BIG - 1].data = sDigitalDisplayGfxPtr + 0x1600;
-    sSlotMachineSpritesheetsPtr[GFXTAG_REG - 1].data = sDigitalDisplayGfxPtr + 0x1900;
+    sSlotMachineSpritesheetsPtr[GFX_TAG_SLOT_MACHINE_STOP - 1].data = sDigitalDisplayGfxPtr + 0xA00;
+    sSlotMachineSpritesheetsPtr[GFX_TAG_SLOT_MACHINE_BONUS - 1].data = sDigitalDisplayGfxPtr + 0x1400;
+    sSlotMachineSpritesheetsPtr[GFX_TAG_SLOT_MACHINE_BIG - 1].data = sDigitalDisplayGfxPtr + 0x1600;
+    sSlotMachineSpritesheetsPtr[GFX_TAG_SLOT_MACHINE_REG - 1].data = sDigitalDisplayGfxPtr + 0x1900;
     LoadSpriteSheets(sSlotMachineSpritesheetsPtr);
     LoadSpritePalettes(sSlotMachineSpritePalettes);
 }
@@ -5048,7 +5011,7 @@ static void LoadReelBackground(void)
     }
     sReelBackgroundSpriteSheet->data = sReelBackground_Gfx;
     sReelBackgroundSpriteSheet->size = 0x800;
-    sReelBackgroundSpriteSheet->tag  = GFXTAG_REEL_BG;
+    sReelBackgroundSpriteSheet->tag  = GFX_TAG_SLOT_MACHINE_REEL_BG;
     LoadSpriteSheet(sReelBackgroundSpriteSheet);
 }
 
@@ -6108,8 +6071,8 @@ static const union AffineAnimCmd *const sAffineAnims_PikaPowerBolt[] =
 
 static const struct SpriteTemplate sSpriteTemplate_ReelSymbol =
 {
-    .tileTag = GFXTAG_SYMBOLS_START,
-    .paletteTag = PALTAG_REEL,
+    .tileTag = GFX_TAG_SLOT_MACHINE_SYMBOLS_START,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_REEL,
     .oam = &sOam_32x32,
     .anims = sAnims_SingleFrame,
     .images = NULL,
@@ -6119,8 +6082,8 @@ static const struct SpriteTemplate sSpriteTemplate_ReelSymbol =
 
 static const struct SpriteTemplate sSpriteTemplate_CoinNumber =
 {
-    .tileTag = GFXTAG_NUMBERS_START,
-    .paletteTag = PALTAG_MISC,
+    .tileTag = GFX_TAG_SLOT_MACHINE_NUMBERS_START,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_MISC,
     .oam = &sOam_8x16,
     .anims = sAnims_SingleFrame,
     .images = NULL,
@@ -6130,8 +6093,8 @@ static const struct SpriteTemplate sSpriteTemplate_CoinNumber =
 
 static const struct SpriteTemplate sSpriteTemplate_ReelBackground =
 {
-    .tileTag = GFXTAG_REEL_BG,
-    .paletteTag = PALTAG_REEL,
+    .tileTag = GFX_TAG_SLOT_MACHINE_REEL_BG,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_REEL,
     .oam = &sOam_64x64,
     .anims = sAnims_SingleFrame,
     .images = NULL,
@@ -6142,7 +6105,7 @@ static const struct SpriteTemplate sSpriteTemplate_ReelBackground =
 static const struct SpriteTemplate sSpriteTemplate_ReelTimePikachu =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_REEL_TIME_PIKACHU,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_REEL_TIME_PIKACHU,
     .oam = &sOam_64x64,
     .anims = sAnims_ReelTimePikachu,
     .images = NULL,
@@ -6153,7 +6116,7 @@ static const struct SpriteTemplate sSpriteTemplate_ReelTimePikachu =
 static const struct SpriteTemplate sSpriteTemplate_ReelTimeMachineAntennae =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_REEL_TIME_MISC,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_REEL_TIME_MISC,
     .oam = &sOam_8x16,
     .anims = sAnims_SingleFrame,
     .images = NULL,
@@ -6164,7 +6127,7 @@ static const struct SpriteTemplate sSpriteTemplate_ReelTimeMachineAntennae =
 static const struct SpriteTemplate sSpriteTemplate_ReelTimeMachine =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_REEL_TIME_MACHINE,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_REEL_TIME_MACHINE,
     .oam = &sOam_8x16,
     .anims = sAnims_SingleFrame,
     .images = NULL,
@@ -6175,7 +6138,7 @@ static const struct SpriteTemplate sSpriteTemplate_ReelTimeMachine =
 static const struct SpriteTemplate sSpriteTemplate_BrokenReelTimeMachine =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_REEL_TIME_MACHINE,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_REEL_TIME_MACHINE,
     .oam = &sOam_8x16,
     .anims = sAnims_SingleFrame,
     .images = NULL,
@@ -6186,7 +6149,7 @@ static const struct SpriteTemplate sSpriteTemplate_BrokenReelTimeMachine =
 static const struct SpriteTemplate sSpriteTemplate_ReelTimeNumbers =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_MISC,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_MISC,
     .oam = &sOam_16x16,
     .anims = sAnims_ReelTimeNumbers,
     .images = sImageTable_ReelTimeNumbers,
@@ -6197,7 +6160,7 @@ static const struct SpriteTemplate sSpriteTemplate_ReelTimeNumbers =
 static const struct SpriteTemplate sSpriteTemplate_ReelTimeShadow =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_MISC,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_MISC,
     .oam = &sOam_16x16,
     .anims = sAnims_SingleFrame,
     .images = sImageTable_ReelTimeShadow,
@@ -6208,7 +6171,7 @@ static const struct SpriteTemplate sSpriteTemplate_ReelTimeShadow =
 static const struct SpriteTemplate sSpriteTemplate_ReelTimeNumberGap =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_MISC,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_MISC,
     .oam = &sOam_16x16,
     .anims = sAnims_SingleFrame,
     .images = sImageTable_ReelTimeNumberGap,
@@ -6219,7 +6182,7 @@ static const struct SpriteTemplate sSpriteTemplate_ReelTimeNumberGap =
 static const struct SpriteTemplate sSpriteTemplate_ReelTimeBolt =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_MISC,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_MISC,
     .oam = &sOam_16x32,
     .anims = sAnims_ReelTimeBolt,
     .images = sImageTable_ReelTimeBolt,
@@ -6230,7 +6193,7 @@ static const struct SpriteTemplate sSpriteTemplate_ReelTimeBolt =
 static const struct SpriteTemplate sSpriteTemplate_ReelTimePikachuAura =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_PIKA_AURA,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_PIKA_AURA,
     .oam = &sOam_32x64,
     .anims = sAnims_SingleFrame,
     .images = sImageTable_ReelTimePikachuAura,
@@ -6241,7 +6204,7 @@ static const struct SpriteTemplate sSpriteTemplate_ReelTimePikachuAura =
 static const struct SpriteTemplate sSpriteTemplate_ReelTimeExplosion =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_EXPLOSION,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_EXPLOSION,
     .oam = &sOam_32x32,
     .anims = sAnims_ReelTimeExplosion,
     .images = sImageTable_ReelTimeExplosion,
@@ -6252,7 +6215,7 @@ static const struct SpriteTemplate sSpriteTemplate_ReelTimeExplosion =
 static const struct SpriteTemplate sSpriteTemplate_ReelTimeDuck =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_MISC,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_MISC,
     .oam = &sOam_8x8,
     .anims = sAnims_ReelTimeDuck,
     .images = sImageTable_ReelTimeDuck,
@@ -6263,7 +6226,7 @@ static const struct SpriteTemplate sSpriteTemplate_ReelTimeDuck =
 static const struct SpriteTemplate sSpriteTemplate_ReelTimeSmoke =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_MISC,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_MISC,
     .oam = &sOam_16x16,
     .anims = sAnims_SingleFrame,
     .images = sImageTable_ReelTimeSmoke,
@@ -6274,7 +6237,7 @@ static const struct SpriteTemplate sSpriteTemplate_ReelTimeSmoke =
 static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Reel =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_DIG_DISPLAY,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_DIG_DISPLAY,
     .oam = &sOam_8x8,
     .anims = sAnims_SingleFrame,
     .images = NULL,
@@ -6285,7 +6248,7 @@ static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Reel =
 static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Time =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_DIG_DISPLAY,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_DIG_DISPLAY,
     .oam = &sOam_8x8,
     .anims = sAnims_SingleFrame,
     .images = NULL,
@@ -6296,7 +6259,7 @@ static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Time =
 static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Insert =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_DIG_DISPLAY,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_DIG_DISPLAY,
     .oam = &sOam_8x8,
     .anims = sAnims_SingleFrame,
     .images = NULL,
@@ -6306,8 +6269,8 @@ static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Insert =
 
 static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Stop =
 {
-    .tileTag = GFXTAG_STOP,
-    .paletteTag = PALTAG_DIG_DISPLAY,
+    .tileTag = GFX_TAG_SLOT_MACHINE_STOP,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_DIG_DISPLAY,
     .oam = &sOam_8x8,
     .anims = sAnims_SingleFrame,
     .images = NULL,
@@ -6318,7 +6281,7 @@ static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Stop =
 static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Win =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_DIG_DISPLAY,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_DIG_DISPLAY,
     .oam = &sOam_64x32,
     .anims = sAnims_SingleFrame,
     .images = NULL,
@@ -6329,7 +6292,7 @@ static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Win =
 static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Lose =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_DIG_DISPLAY,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_DIG_DISPLAY,
     .oam = &sOam_64x32,
     .anims = sAnims_SingleFrame,
     .images = NULL,
@@ -6339,8 +6302,8 @@ static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Lose =
 
 static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Bonus =
 {
-    .tileTag = GFXTAG_BONUS,
-    .paletteTag = PALTAG_DIG_DISPLAY,
+    .tileTag = GFX_TAG_SLOT_MACHINE_BONUS,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_DIG_DISPLAY,
     .oam = &sOam_8x8,
     .anims = sAnims_SingleFrame,
     .images = NULL,
@@ -6350,8 +6313,8 @@ static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Bonus =
 
 static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Big =
 {
-    .tileTag = GFXTAG_BIG,
-    .paletteTag = PALTAG_DIG_DISPLAY,
+    .tileTag = GFX_TAG_SLOT_MACHINE_BIG,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_DIG_DISPLAY,
     .oam = &sOam_8x8,
     .anims = sAnims_SingleFrame,
     .images = NULL,
@@ -6361,8 +6324,8 @@ static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Big =
 
 static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Reg =
 {
-    .tileTag = GFXTAG_REG,
-    .paletteTag = PALTAG_DIG_DISPLAY,
+    .tileTag = GFX_TAG_SLOT_MACHINE_REG,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_DIG_DISPLAY,
     .oam = &sOam_8x8,
     .anims = sAnims_SingleFrame,
     .images = NULL,
@@ -6373,7 +6336,7 @@ static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Reg =
 static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_AButton =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_DIG_DISPLAY,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_DIG_DISPLAY,
     .oam = &sOam_32x32,
     .anims = sAnims_DigitalDisplay_AButton,
     .images = NULL,
@@ -6384,7 +6347,7 @@ static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_AButton =
 static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Smoke =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_DIG_DISPLAY,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_DIG_DISPLAY,
     .oam = &sOam_8x8,
     .anims = sAnims_SingleFrame,
     .images = NULL,
@@ -6395,7 +6358,7 @@ static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Smoke =
 static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Number =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_DIG_DISPLAY,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_DIG_DISPLAY,
     .oam = &sOam_16x16,
     .anims = sAnims_DigitalDisplay_Number,
     .images = NULL,
@@ -6406,7 +6369,7 @@ static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Number =
 static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Pokeball =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_DIG_DISPLAY,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_DIG_DISPLAY,
     .oam = &sOam_8x8,
     .anims = sAnims_DigitalDisplay_Pokeball,
     .images = NULL,
@@ -6417,7 +6380,7 @@ static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_Pokeball =
 static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_DPad =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_DIG_DISPLAY,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_DIG_DISPLAY,
     .oam = &sOam_8x8,
     .anims = sAnims_DigitalDisplay_DPad,
     .images = NULL,
@@ -6428,7 +6391,7 @@ static const struct SpriteTemplate sSpriteTemplate_DigitalDisplay_DPad =
 static const struct SpriteTemplate sSpriteTemplate_PikaPowerBolt =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_MISC,
+    .paletteTag = PAL_TAG_SLOT_MACHINE_MISC,
     .oam = &sOam_8x8,
     .anims = sAnims_SingleFrame,
     .images = sImageTable_PikaPowerBolt,
@@ -7819,29 +7782,29 @@ static const struct SubspriteTable *const sSubspriteTables_DigitalDisplay[NUM_DI
 
 static const struct SpriteSheet sSlotMachineSpriteSheets[22] =
 {
-    { .data = gSlotMachineReelSymbol1Tiles, .size = 0x200, .tag = GFXTAG_7_RED },
-    { .data = gSlotMachineReelSymbol2Tiles, .size = 0x200, .tag = GFXTAG_7_BLUE },
-    { .data = gSlotMachineReelSymbol3Tiles, .size = 0x200, .tag = GFXTAG_AZURILL },
-    { .data = gSlotMachineReelSymbol4Tiles, .size = 0x200, .tag = GFXTAG_LOTAD },
-    { .data = gSlotMachineReelSymbol5Tiles, .size = 0x200, .tag = GFXTAG_CHERRY },
-    { .data = gSlotMachineReelSymbol6Tiles, .size = 0x200, .tag = GFXTAG_POWER },
-    { .data = gSlotMachineReelSymbol7Tiles, .size = 0x200, .tag = GFXTAG_REPLAY },
-    { .data = gSlotMachineNumber0Tiles, .size = 0x40, .tag = GFXTAG_NUM_0 },
-    { .data = gSlotMachineNumber1Tiles, .size = 0x40, .tag = GFXTAG_NUM_1 },
-    { .data = gSlotMachineNumber2Tiles, .size = 0x40, .tag = GFXTAG_NUM_2 },
-    { .data = gSlotMachineNumber3Tiles, .size = 0x40, .tag = GFXTAG_NUM_3 },
-    { .data = gSlotMachineNumber4Tiles, .size = 0x40, .tag = GFXTAG_NUM_4 },
-    { .data = gSlotMachineNumber5Tiles, .size = 0x40, .tag = GFXTAG_NUM_5 },
-    { .data = gSlotMachineNumber6Tiles, .size = 0x40, .tag = GFXTAG_NUM_6 },
-    { .data = gSlotMachineNumber7Tiles, .size = 0x40, .tag = GFXTAG_NUM_7 },
-    { .data = gSlotMachineNumber8Tiles, .size = 0x40, .tag = GFXTAG_NUM_8 },
-    { .data = gSlotMachineNumber9Tiles, .size = 0x40, .tag = GFXTAG_NUM_9 },
-    // skips GFXTAG_REEL_BG, which has its own spritesheet
+    { .data = gSlotMachineReelSymbol1Tiles, .size = 0x200, .tag = GFX_TAG_SLOT_MACHINE_7_RED },
+    { .data = gSlotMachineReelSymbol2Tiles, .size = 0x200, .tag = GFX_TAG_SLOT_MACHINE_7_BLUE },
+    { .data = gSlotMachineReelSymbol3Tiles, .size = 0x200, .tag = GFX_TAG_SLOT_MACHINE_AZURILL },
+    { .data = gSlotMachineReelSymbol4Tiles, .size = 0x200, .tag = GFX_TAG_SLOT_MACHINE_LOTAD },
+    { .data = gSlotMachineReelSymbol5Tiles, .size = 0x200, .tag = GFX_TAG_SLOT_MACHINE_CHERRY },
+    { .data = gSlotMachineReelSymbol6Tiles, .size = 0x200, .tag = GFX_TAG_SLOT_MACHINE_POWER },
+    { .data = gSlotMachineReelSymbol7Tiles, .size = 0x200, .tag = GFX_TAG_SLOT_MACHINE_REPLAY },
+    { .data = gSlotMachineNumber0Tiles, .size = 0x40, .tag = GFX_TAG_SLOT_MACHINE_NUM_0 },
+    { .data = gSlotMachineNumber1Tiles, .size = 0x40, .tag = GFX_TAG_SLOT_MACHINE_NUM_1 },
+    { .data = gSlotMachineNumber2Tiles, .size = 0x40, .tag = GFX_TAG_SLOT_MACHINE_NUM_2 },
+    { .data = gSlotMachineNumber3Tiles, .size = 0x40, .tag = GFX_TAG_SLOT_MACHINE_NUM_3 },
+    { .data = gSlotMachineNumber4Tiles, .size = 0x40, .tag = GFX_TAG_SLOT_MACHINE_NUM_4 },
+    { .data = gSlotMachineNumber5Tiles, .size = 0x40, .tag = GFX_TAG_SLOT_MACHINE_NUM_5 },
+    { .data = gSlotMachineNumber6Tiles, .size = 0x40, .tag = GFX_TAG_SLOT_MACHINE_NUM_6 },
+    { .data = gSlotMachineNumber7Tiles, .size = 0x40, .tag = GFX_TAG_SLOT_MACHINE_NUM_7 },
+    { .data = gSlotMachineNumber8Tiles, .size = 0x40, .tag = GFX_TAG_SLOT_MACHINE_NUM_8 },
+    { .data = gSlotMachineNumber9Tiles, .size = 0x40, .tag = GFX_TAG_SLOT_MACHINE_NUM_9 },
+    // skips GFX_TAG_SLOT_MACHINE_REEL_BG, which has its own spritesheet
     // the data for these sheets is determined at runtime
-    { .data = NULL, .size = 0x200, .tag = GFXTAG_STOP },
-    { .data = NULL, .size = 0x200, .tag = GFXTAG_BONUS },
-    { .data = NULL, .size = 0x300, .tag = GFXTAG_BIG },
-    { .data = NULL, .size = 0x300, .tag = GFXTAG_REG },
+    { .data = NULL, .size = 0x200, .tag = GFX_TAG_SLOT_MACHINE_STOP },
+    { .data = NULL, .size = 0x200, .tag = GFX_TAG_SLOT_MACHINE_BONUS },
+    { .data = NULL, .size = 0x300, .tag = GFX_TAG_SLOT_MACHINE_BIG },
+    { .data = NULL, .size = 0x300, .tag = GFX_TAG_SLOT_MACHINE_REG },
     {},
 };
 
@@ -7934,14 +7897,14 @@ static const u16 sUnkPalette[16] = {
 
 static const struct SpritePalette sSlotMachineSpritePalettes[] =
 {
-    { .data = gSlotMachineReelSymbols_Pal,       .tag = PALTAG_REEL},
-    { .data = gSlotMachineReelTimePikachu_Pal,   .tag = PALTAG_REEL_TIME_PIKACHU},
-    { .data = gSlotMachineReelTimeMisc_Pal,      .tag = PALTAG_REEL_TIME_MISC},
-    { .data = gSlotMachineReelTimeMachine_Pal,   .tag = PALTAG_REEL_TIME_MACHINE},
-    { .data = gSlotMachineMisc_Pal,              .tag = PALTAG_MISC},
-    { .data = gSlotMachineReelTimeExplosion_Pal, .tag = PALTAG_EXPLOSION},
-    { .data = gSlotMachineDigitalDisplay_Pal,    .tag = PALTAG_DIG_DISPLAY},
-    { .data = gSlotMachineMisc_Pal,              .tag = PALTAG_PIKA_AURA},
+    { .data = gSlotMachineReelSymbols_Pal,       .tag = PAL_TAG_SLOT_MACHINE_REEL},
+    { .data = gSlotMachineReelTimePikachu_Pal,   .tag = PAL_TAG_SLOT_MACHINE_REEL_TIME_PIKACHU},
+    { .data = gSlotMachineReelTimeMisc_Pal,      .tag = PAL_TAG_SLOT_MACHINE_REEL_TIME_MISC},
+    { .data = gSlotMachineReelTimeMachine_Pal,   .tag = PAL_TAG_SLOT_MACHINE_REEL_TIME_MACHINE},
+    { .data = gSlotMachineMisc_Pal,              .tag = PAL_TAG_SLOT_MACHINE_MISC},
+    { .data = gSlotMachineReelTimeExplosion_Pal, .tag = PAL_TAG_SLOT_MACHINE_EXPLOSION},
+    { .data = gSlotMachineDigitalDisplay_Pal,    .tag = PAL_TAG_SLOT_MACHINE_DIG_DISPLAY},
+    { .data = gSlotMachineMisc_Pal,              .tag = PAL_TAG_SLOT_MACHINE_PIKA_AURA},
     {}
 };
 

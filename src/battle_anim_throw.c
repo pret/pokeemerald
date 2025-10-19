@@ -127,19 +127,6 @@ static const struct CaptureStar sCaptureStars[] =
     },
 };
 
-#define TAG_PARTICLES_POKEBALL    55020
-#define TAG_PARTICLES_GREATBALL   55021
-#define TAG_PARTICLES_SAFARIBALL  55022
-#define TAG_PARTICLES_ULTRABALL   55023
-#define TAG_PARTICLES_MASTERBALL  55024
-#define TAG_PARTICLES_NETBALL     55025
-#define TAG_PARTICLES_DIVEBALL    55026
-#define TAG_PARTICLES_NESTBALL    55027
-#define TAG_PARTICLES_REPEATBALL  55028
-#define TAG_PARTICLES_TIMERBALL   55029
-#define TAG_PARTICLES_LUXURYBALL  55030
-#define TAG_PARTICLES_PREMIERBALL 55031
-
 static const struct CompressedSpriteSheet sBallParticleSpriteSheets[POKEBALL_COUNT] =
 {
     [BALL_POKE]    = {gBattleAnimSpriteGfx_Particles, 0x100, TAG_PARTICLES_POKEBALL},
@@ -396,8 +383,8 @@ const u16 gBallOpenFadeColors[] =
 
 const struct SpriteTemplate gPokeblockSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_POKEBLOCK,
-    .paletteTag = ANIM_TAG_POKEBLOCK,
+    .tileTag = TAG_BATTLE_ANIM_POKEBLOCK,
+    .paletteTag = TAG_BATTLE_ANIM_POKEBLOCK,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -418,8 +405,8 @@ static const union AnimCmd *const sAnims_SafariRock[] = {
 // Unused, leftover from FRLG
 static const struct SpriteTemplate sSafariRockSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ROCKS,
-    .paletteTag = ANIM_TAG_ROCKS,
+    .tileTag = TAG_BATTLE_ANIM_ROCKS,
+    .paletteTag = TAG_BATTLE_ANIM_ROCKS,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_SafariRock,
     .images = NULL,
@@ -550,8 +537,8 @@ static void LoadHealthboxPalsForLevelUp(u8 *paletteId1, u8 *paletteId2, u8 battl
     healthBoxSpriteId = gHealthboxSpriteIds[battler];
     spriteId1 = gSprites[healthBoxSpriteId].oam.affineParam;
     spriteId2 = gSprites[healthBoxSpriteId].data[5];
-    *paletteId1 = AllocSpritePalette(TAG_HEALTHBOX_PALS_1);
-    *paletteId2 = AllocSpritePalette(TAG_HEALTHBOX_PALS_2);
+    *paletteId1 = AllocSpritePalette(PAL_TAG_HEALTHBOX_LVLUP_1);
+    *paletteId2 = AllocSpritePalette(PAL_TAG_HEALTHBOX_LVLUP_2);
 
     offset1 = OBJ_PLTT_ID(gSprites[healthBoxSpriteId].oam.paletteNum);
     offset2 = OBJ_PLTT_ID(gSprites[spriteId2].oam.paletteNum);
@@ -580,10 +567,10 @@ static void FreeHealthboxPalsForLevelUp(u8 battler)
     spriteId1 = gSprites[healthBoxSpriteId].oam.affineParam;
     spriteId2 = gSprites[healthBoxSpriteId].data[5];
 
-    FreeSpritePaletteByTag(TAG_HEALTHBOX_PALS_1);
-    FreeSpritePaletteByTag(TAG_HEALTHBOX_PALS_2);
-    paletteId1 = IndexOfSpritePaletteTag(TAG_HEALTHBOX_PAL);
-    paletteId2 = IndexOfSpritePaletteTag(TAG_HEALTHBAR_PAL);
+    FreeSpritePaletteByTag(PAL_TAG_HEALTHBOX_LVLUP_1);
+    FreeSpritePaletteByTag(PAL_TAG_HEALTHBOX_LVLUP_2);
+    paletteId1 = IndexOfSpritePaletteTag(PAL_TAG_HEALTHBOX);
+    paletteId2 = IndexOfSpritePaletteTag(PAL_TAG_HEALTHBAR);
     gSprites[healthBoxSpriteId].oam.paletteNum = paletteId1;
     gSprites[spriteId1].oam.paletteNum = paletteId1;
     gSprites[spriteId2].oam.paletteNum = paletteId2;
@@ -611,7 +598,7 @@ static void AnimTask_FlashHealthboxOnLevelUp_Step(u8 taskId)
     if (gTasks[taskId].data[0]++ >= gTasks[taskId].data[11])
     {
         gTasks[taskId].data[0] = 0;
-        paletteNum = IndexOfSpritePaletteTag(TAG_HEALTHBOX_PALS_1);
+        paletteNum = IndexOfSpritePaletteTag(PAL_TAG_HEALTHBOX_LVLUP_1);
         colorOffset = gTasks[taskId].data[10] == 0 ? 6 : 2;
         switch (gTasks[taskId].data[1])
         {
@@ -2245,10 +2232,10 @@ void TryShinyAnimation(u8 battler, struct Pokemon *mon)
 
         if (isShiny)
         {
-            if (GetSpriteTileStartByTag(ANIM_TAG_GOLD_STARS) == 0xFFFF)
+            if (GetSpriteTileStartByTag(TAG_BATTLE_ANIM_GOLD_STARS) == 0xFFFF)
             {
-                LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[ANIM_TAG_GOLD_STARS - ANIM_SPRITES_START]);
-                LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[ANIM_TAG_GOLD_STARS - ANIM_SPRITES_START]);
+                LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(TAG_BATTLE_ANIM_GOLD_STARS)]);
+                LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(TAG_BATTLE_ANIM_GOLD_STARS)]);
             }
 
             taskCirc = CreateTask(Task_ShinyStars, 10);
@@ -2402,16 +2389,16 @@ void AnimTask_LoadPokeblockGfx(u8 taskId)
 {
     u8 UNUSED paletteIndex;
 
-    LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[ANIM_TAG_POKEBLOCK - ANIM_SPRITES_START]);
-    LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[ANIM_TAG_POKEBLOCK - ANIM_SPRITES_START]);
-    paletteIndex = IndexOfSpritePaletteTag(ANIM_TAG_POKEBLOCK);
+    LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(TAG_BATTLE_ANIM_POKEBLOCK)]);
+    LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(TAG_BATTLE_ANIM_POKEBLOCK)]);
+    paletteIndex = IndexOfSpritePaletteTag(TAG_BATTLE_ANIM_POKEBLOCK);
     DestroyAnimVisualTask(taskId);
 }
 
 void AnimTask_FreePokeblockGfx(u8 taskId)
 {
-    FreeSpriteTilesByTag(ANIM_TAG_POKEBLOCK);
-    FreeSpritePaletteByTag(ANIM_TAG_POKEBLOCK);
+    FreeSpriteTilesByTag(TAG_BATTLE_ANIM_POKEBLOCK);
+    FreeSpritePaletteByTag(TAG_BATTLE_ANIM_POKEBLOCK);
     DestroyAnimVisualTask(taskId);
 }
 

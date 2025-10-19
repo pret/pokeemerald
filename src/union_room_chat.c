@@ -106,17 +106,6 @@ enum {
 };
 
 enum {
-    GFXTAG_KEYBOARD_CURSOR,
-    GFXTAG_TEXT_ENTRY_ARROW,
-    GFXTAG_TEXT_ENTRY_CURSOR,
-    GFXTAG_RBUTTON_ICON,
-    GFXTAG_RBUTTON_LABELS,
-};
-
-// Shared by all above
-#define PALTAG_INTERFACE 0
-
-enum {
     WIN_CHAT_HISTORY,
     WIN_TEXT_ENTRY,
     WIN_KEYBOARD,
@@ -758,15 +747,15 @@ static const u32 sTextEntryArrowTiles[] = INCBIN_U32("graphics/union_room_chat/t
 static const u32 sRButtonGfxTiles[] = INCBIN_U32("graphics/union_room_chat/r_button.4bpp.lz");
 
 static const struct CompressedSpriteSheet sSpriteSheets[] = {
-    {.data = sKeyboardCursorTiles,         .size = 0x1000, .tag = GFXTAG_KEYBOARD_CURSOR},
-    {.data = sTextEntryArrowTiles,         .size = 0x0040, .tag = GFXTAG_TEXT_ENTRY_ARROW},
-    {.data = sTextEntryCursorTiles,        .size = 0x0040, .tag = GFXTAG_TEXT_ENTRY_CURSOR},
-    {.data = sRButtonGfxTiles,             .size = 0x0080, .tag = GFXTAG_RBUTTON_ICON},
-    {.data = gUnionRoomChat_RButtonLabels, .size = 0x0400, .tag = GFXTAG_RBUTTON_LABELS}
+    {.data = sKeyboardCursorTiles,         .size = 0x1000, .tag = GFX_TAG_UNION_ROOM_CHAT_KEYBOARD_CURSOR},
+    {.data = sTextEntryArrowTiles,         .size = 0x0040, .tag = GFX_TAG_UNION_ROOM_CHAT_TEXT_ENTRY_ARROW},
+    {.data = sTextEntryCursorTiles,        .size = 0x0040, .tag = GFX_TAG_UNION_ROOM_CHAT_TEXT_ENTRY_CURSOR},
+    {.data = sRButtonGfxTiles,             .size = 0x0080, .tag = GFX_TAG_UNION_ROOM_CHAT_RBUTTON_ICON},
+    {.data = gUnionRoomChat_RButtonLabels, .size = 0x0400, .tag = GFX_TAG_UNION_ROOM_CHAT_RBUTTON_LABELS}
 };
 
 static const struct SpritePalette sSpritePalette = {
-    .data = sUnionRoomChatInterfacePal, .tag = PALTAG_INTERFACE
+    .data = sUnionRoomChatInterfacePal, .tag = PAL_TAG_UNION_ROOM_CHAT_INTERFACE
 };
 
 static const struct OamData sOam_KeyboardCursor = {
@@ -804,8 +793,8 @@ static const union AnimCmd *const sAnims_KeyboardCursor[] = {
 
 static const struct SpriteTemplate sSpriteTemplate_KeyboardCursor =
 {
-    .tileTag = GFXTAG_KEYBOARD_CURSOR,
-    .paletteTag = PALTAG_INTERFACE,
+    .tileTag = GFX_TAG_UNION_ROOM_CHAT_KEYBOARD_CURSOR,
+    .paletteTag = PAL_TAG_UNION_ROOM_CHAT_INTERFACE,
     .oam = &sOam_KeyboardCursor,
     .anims = sAnims_KeyboardCursor,
     .images = NULL,
@@ -821,8 +810,8 @@ static const struct OamData sOam_TextEntrySprite = {
 
 static const struct SpriteTemplate sSpriteTemplate_TextEntryCursor =
 {
-    .tileTag = GFXTAG_TEXT_ENTRY_CURSOR,
-    .paletteTag = PALTAG_INTERFACE,
+    .tileTag = GFX_TAG_UNION_ROOM_CHAT_TEXT_ENTRY_CURSOR,
+    .paletteTag = PAL_TAG_UNION_ROOM_CHAT_INTERFACE,
     .oam = &sOam_TextEntrySprite,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -832,8 +821,8 @@ static const struct SpriteTemplate sSpriteTemplate_TextEntryCursor =
 
 static const struct SpriteTemplate sSpriteTemplate_TextEntryArrow =
 {
-    .tileTag = GFXTAG_TEXT_ENTRY_ARROW,
-    .paletteTag = PALTAG_INTERFACE,
+    .tileTag = GFX_TAG_UNION_ROOM_CHAT_TEXT_ENTRY_ARROW,
+    .paletteTag = PAL_TAG_UNION_ROOM_CHAT_INTERFACE,
     .oam = &sOam_TextEntrySprite,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -882,8 +871,8 @@ static const union AnimCmd *const sAnims_RButtonLabels[] = {
 
 static const struct SpriteTemplate sSpriteTemplate_RButtonIcon =
 {
-    .tileTag = GFXTAG_RBUTTON_ICON,
-    .paletteTag = PALTAG_INTERFACE,
+    .tileTag = GFX_TAG_UNION_ROOM_CHAT_RBUTTON_ICON,
+    .paletteTag = PAL_TAG_UNION_ROOM_CHAT_INTERFACE,
     .oam = &sOam_RButtonIcon,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -893,8 +882,8 @@ static const struct SpriteTemplate sSpriteTemplate_RButtonIcon =
 
 static const struct SpriteTemplate sSpriteTemplate_RButtonLabels =
 {
-    .tileTag = GFXTAG_RBUTTON_LABELS,
-    .paletteTag = PALTAG_INTERFACE,
+    .tileTag = GFX_TAG_UNION_ROOM_CHAT_RBUTTON_LABELS,
+    .paletteTag = PAL_TAG_UNION_ROOM_CHAT_INTERFACE,
     .oam = &sOam_RButtonLabel,
     .anims = sAnims_RButtonLabels,
     .images = NULL,
@@ -3215,7 +3204,7 @@ static void MoveKeyboardCursor(void)
 static void SetRegisteredTextPalette(bool32 registering)
 {
     const u16 *palette = &sUnionRoomChatInterfacePal[registering * 2 + 1];
-    u8 index = IndexOfSpritePaletteTag(PALTAG_INTERFACE);
+    u8 index = IndexOfSpritePaletteTag(PAL_TAG_UNION_ROOM_CHAT_INTERFACE);
     LoadPalette(palette, OBJ_PLTT_ID(index) + 1, PLTT_SIZEOF(2));
 }
 
