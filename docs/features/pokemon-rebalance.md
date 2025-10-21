@@ -11,7 +11,6 @@ This feature will focus on:
 - Revising **level-up movesets** for most Pokemon available in Hoenn Dex
 - Tweaking **moves** that are weak or underutilized.
 - Adjusting **TM and tutor compatibility** for better type coverage.
-- Making the **Hoenn Pokédex fully completable**.
 
 ---
 
@@ -47,7 +46,8 @@ This feature will focus on:
 - [X] Implement egg move changes
 - [X] Dark Physical & Ghost Special
 - [X] Buffs to Sandstorm & Hail
-- [X] Summary Screen Shows Stats affected by nature
+- [X] Summary Screen shows Stats affected by nature
+- [X] Summary Screen shows evs and ivs
 - [X] Buffs to Hold Item Effects
 
 ---
@@ -439,3 +439,10 @@ files: src/data/pokemon/egg_moves.h
 10/21/25 - colors to show nature changes on stats screen
 files: src/pokemon_summary_screen.c
 - Colors indicate how natures are affected by nature on summary screen
+
+10/21/25 - commit made
+files: src/pokemon_summary_screen.c
+
+10/21/25 - show ivs and evs on stat screen
+files: graphics/summary_screen/tiles.ping
+       src/pokemon_summary_screen.c
