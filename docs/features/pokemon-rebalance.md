@@ -388,3 +388,30 @@ files :src/data/pokemon/level_up_learnsets.h
 10/13/25 - Levelup Learnset Edits
 files: src/data/pokemon/level_up_learnsets.h
 - Learnsets up to Celebi
+
+10/13/25 - commit made
+files: src/data/pokemon/level_up_learnsets.h
+
+10/13/25 - Levelup Learnset Edits
+files: src/data/pokemon/level_up_learnsets.h
+- Learnsets up to Wailord
+
+10/14/25 - Levelup Learnset Edits
+files: src/data/pokemon/level_up_learnsets.h
+- Learnsets up to Slaking
+
+10/15/25 - Levelup Learnset Edits
+files: src/data/pokemon/level_up_learnsets.h
+- Learnsets up to Absol
+
+10/16/25 - Levelup Learnset Edits
+files: src/data/pokemon/level_up_learnsets.h
+- Learnsets up to Illumise
+
+10/20/25 - Levelup Learnset Edits
+files: src/data/pokemon/level_up_learnsets.h
+- Learnsets up to Metagross
+
+10/21/25 - Levelup Learnset Edits
+files: src/data/pokemon/level_up_learnsets.h
+- All learnsets finished
