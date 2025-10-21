@@ -47,7 +47,7 @@ This feature will focus on:
 - [X] Implement egg move changes
 - [X] Dark Physical & Ghost Special
 - [X] Buffs to Sandstorm & Hail
-- [ ] Summary Screen Shows Stats affected by nature
+- [X] Summary Screen Shows Stats affected by nature
 - [X] Buffs to Hold Item Effects
 
 ---
@@ -423,9 +423,19 @@ files: src/data/pokemon/level_up_learnsets.h
 files: src/data/pokemon/tmhm_learnsets.h
 - All TM/HM learnsets updated
 
+10/21/25 - commit made
+files: src/data/pokemon/tmhm_learnsets.h
+
 10/21/25 - Tutor Move review
 - Tutor moves were reviewed and no changes were made
 
 10/21/25 - Egg Moves
 files: src/data/pokemon/egg_moves.h
 - All Egg moves updated
+
+10/21/25 - commit made
+files: src/data/pokemon/egg_moves.h
+
+10/21/25 - colors to show nature changes on stats screen
+files: src/pokemon_summary_screen.c
+- Colors indicate how natures are affected by nature on summary screen
