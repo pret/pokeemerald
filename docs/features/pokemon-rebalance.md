@@ -43,8 +43,8 @@ This feature will focus on:
 - [X] Implement evolution changes
 - [X] Implement move changes
 - [X] Implement level-up learnset changes
-- [ ] Implement TM learnset changes
-- [ ] Implement tutor learnset changes
+- [X] Implement TM learnset changes
+- [X] Implement egg move changes
 - [X] Dark Physical & Ghost Special
 - [X] Buffs to Sandstorm & Hail
 - [ ] Summary Screen Shows Stats affected by nature
@@ -422,3 +422,10 @@ files: src/data/pokemon/level_up_learnsets.h
 10/21/25 - TM Learnset Changes
 files: src/data/pokemon/tmhm_learnsets.h
 - All TM/HM learnsets updated
+
+10/21/25 - Tutor Move review
+- Tutor moves were reviewed and no changes were made
+
+10/21/25 - Egg Moves
+files: src/data/pokemon/egg_moves.h
+- All Egg moves updated

@@ -30,7 +30,7 @@
 - [X] Pokemon Base Stat Changes
 - [X] Move Changes
 - [ ] Tweaks to berry growing system
-- [ ] Changes to Pokemon lvl up movesets
+- [X] Changes to Pokemon lvl up movesets
 - [ ] Changes to rival trainer teams
 - [ ] Changes to Pokemon Availability
 - [ ] Added shops for items & TMs
