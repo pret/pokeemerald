@@ -4450,6 +4450,36 @@
       "secondary_tileset": "gTileset_Lavaridge",
       "border_filepath": "data/layouts/NorthKava/border.bin",
       "blockdata_filepath": "data/layouts/NorthKava/map.bin"
+    },
+    {
+      "id": "LAYOUT_KAVA_VILLAGE",
+      "name": "KavaVillage_Layout",
+      "width": 25,
+      "height": 25,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Lavaridge",
+      "border_filepath": "data/layouts/KavaVillage/border.bin",
+      "blockdata_filepath": "data/layouts/KavaVillage/map.bin"
+    },
+    {
+      "id": "LAYOUT_KAVA_LAB",
+      "name": "KavaLab_Layout",
+      "width": 10,
+      "height": 10,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Facility",
+      "border_filepath": "data/layouts/KavaLab/border.bin",
+      "blockdata_filepath": "data/layouts/KavaLab/map.bin"
+    },
+    {
+      "id": "LAYOUT_KAVA_HOUSE1",
+      "name": "KavaHouse1_Layout",
+      "width": 10,
+      "height": 10,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/KavaHouse1/border.bin",
+      "blockdata_filepath": "data/layouts/KavaHouse1/map.bin"
     }
   ]
 }

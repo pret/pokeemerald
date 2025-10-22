@@ -17,6 +17,11 @@
       "map": "MAP_KAVA_MOUNTAIN",
       "offset": 7,
       "direction": "up"
+    },
+    {
+      "map": "MAP_KAVA_VILLAGE",
+      "offset": 5,
+      "direction": "down"
     }
   ],
   "object_events": [],

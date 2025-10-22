@@ -626,6 +626,9 @@
     "StartingCave",
     "TrialCave",
     "KavaMountain",
-    "NorthKava"
+    "NorthKava",
+    "KavaVillage",
+    "KavaLab",
+    "KavaHouse1"
   ]
 }

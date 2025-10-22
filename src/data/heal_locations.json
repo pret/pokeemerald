@@ -137,6 +137,18 @@
       "map": "MAP_STARTING_CAVE",
       "x": 7,
       "y": 8
+    },
+    {
+      "id": "HEAL_LOCATION_KAVA_VILLAGE",
+      "map": "MAP_KAVA_VILLAGE",
+      "x": 14,
+      "y": 11
+    },
+    {
+      "id": "HEAL_LOCATION_NORTH_KAVA",
+      "map": "MAP_NORTH_KAVA",
+      "x": 13,
+      "y": 12
     }
   ]
 }
