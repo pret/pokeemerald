@@ -62,22 +62,22 @@
       "x": 4,
       "y": 1,
       "elevation": 0,
-      "dest_map": "MAP_DYNAMIC",
-      "dest_warp_id": "WARP_ID_DYNAMIC"
+      "dest_map": "MAP_STARTING_CAVE",
+      "dest_warp_id": "0"
     },
     {
       "x": 4,
       "y": 2,
       "elevation": 0,
-      "dest_map": "MAP_DYNAMIC",
-      "dest_warp_id": "WARP_ID_DYNAMIC"
+      "dest_map": "MAP_STARTING_CAVE",
+      "dest_warp_id": "0"
     },
     {
       "x": 4,
       "y": 3,
       "elevation": 0,
-      "dest_map": "MAP_DYNAMIC",
-      "dest_warp_id": "WARP_ID_DYNAMIC"
+      "dest_map": "MAP_STARTING_CAVE",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

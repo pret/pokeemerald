@@ -4410,6 +4410,26 @@
       "secondary_tileset": "gTileset_MysteryEventsHouse",
       "border_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/border.bin",
       "blockdata_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/map.bin"
+    },
+    {
+      "id": "LAYOUT_STARTING_CAVE",
+      "name": "StartingCave_Layout",
+      "width": 15,
+      "height": 15,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/StartingCave/border.bin",
+      "blockdata_filepath": "data/layouts/StartingCave/map.bin"
+    },
+    {
+      "id": "LAYOUT_TRIAL_CAVE",
+      "name": "TrialCave_Layout",
+      "width": 11,
+      "height": 15,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/TrialCave/border.bin",
+      "blockdata_filepath": "data/layouts/TrialCave/map.bin"
     }
   ]
 }

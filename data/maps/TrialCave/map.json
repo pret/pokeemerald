@@ -1,0 +1,35 @@
+{
+  "id": "MAP_TRIAL_CAVE",
+  "name": "TrialCave",
+  "layout": "LAYOUT_TRIAL_CAVE",
+  "music": "MUS_DUMMY",
+  "region_map_section": "MAPSEC_SimcoxMaps",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 5,
+      "y": 13,
+      "elevation": 0,
+      "dest_map": "MAP_STARTING_CAVE",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 5,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_TRIAL_CAVE",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}
