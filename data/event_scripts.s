@@ -1061,3 +1061,7 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/maps/StartingCave/scripts.inc"
 
 	.include "data/maps/TrialCave/scripts.inc"
+
+	.include "data/maps/KavaMountain/scripts.inc"
+
+	.include "data/maps/NorthKava/scripts.inc"

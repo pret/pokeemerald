@@ -131,6 +131,12 @@
       "map": "MAP_BATTLE_FRONTIER_OUTSIDE_EAST",
       "x": 3,
       "y": 52
+    },
+    {
+      "id": "HEAL_LOCATION_STARTING_CAVE",
+      "map": "MAP_STARTING_CAVE",
+      "x": 7,
+      "y": 8
     }
   ]
 }

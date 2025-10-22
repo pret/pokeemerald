@@ -490,7 +490,7 @@
     },
     {
       "id": "MAPSEC_ABANDONED_SHIP",
-      "name": "ABANDONED SHIP",
+      "name": "North Kava Village",
       "x": 6,
       "y": 14,
       "width": 1,
@@ -1233,7 +1233,7 @@
     },
     {
       "id": "MAPSEC_SimcoxMaps",
-      "name": "Cave of Trials"
+      "name": "Kava Mountain"
     }
   ]
 }

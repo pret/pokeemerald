@@ -4430,6 +4430,26 @@
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/TrialCave/border.bin",
       "blockdata_filepath": "data/layouts/TrialCave/map.bin"
+    },
+    {
+      "id": "LAYOUT_KAVA_MOUNTAIN",
+      "name": "KavaMountain_Layout",
+      "width": 15,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_LavaridgeGym",
+      "border_filepath": "data/layouts/KavaMountain/border.bin",
+      "blockdata_filepath": "data/layouts/KavaMountain/map.bin"
+    },
+    {
+      "id": "LAYOUT_NORTH_KAVA",
+      "name": "NorthKava_Layout",
+      "width": 30,
+      "height": 23,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Lavaridge",
+      "border_filepath": "data/layouts/NorthKava/border.bin",
+      "blockdata_filepath": "data/layouts/NorthKava/map.bin"
     }
   ]
 }
