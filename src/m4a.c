@@ -41,7 +41,7 @@ u32 MidiKeyToFreq(struct WaveData *wav, u8 key, u8 fineAdjust)
     return umul3232H32(wav->freq, val1 + umul3232H32(val2 - val1, fineAdjustShifted));
 }
 
-void UnusedDummyFunc(void)
+static void UNUSED UnusedDummyFunc(void)
 {
 }
 
@@ -135,7 +135,7 @@ void m4aSongNumStartOrChange(u16 n)
     }
 }
 
-void m4aSongNumStartOrContinue(u16 n)
+static void UNUSED m4aSongNumStartOrContinue(u16 n)
 {
     const struct MusicPlayer *mplayTable = gMPlayTable;
     const struct Song *songTable = gSongTable;
@@ -161,7 +161,7 @@ void m4aSongNumStop(u16 n)
         m4aMPlayStop(mplay->info);
 }
 
-void m4aSongNumContinue(u16 n)
+static void UNUSED m4aSongNumContinue(u16 n)
 {
     const struct MusicPlayer *mplayTable = gMPlayTable;
     const struct Song *songTable = gSongTable;
@@ -325,7 +325,7 @@ void MPlayExtender(struct CgbChannel *cgbChans)
     soundInfo->ident = ident;
 }
 
-void MusicPlayerJumpTableCopy(void)
+static void UNUSED MusicPlayerJumpTableCopy(void)
 {
     asm("swi 0x2A");
 }
