@@ -36,7 +36,6 @@
 #include "constants/rgb.h"
 
 #define HALL_OF_FAME_MAX_TEAMS 50
-#define TAG_CONFETTI 1001
 
 struct HallofFameMon
 {
@@ -150,13 +149,13 @@ static const u8 sUnusedTextColors[4] = {TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED, TE
 
 static const struct CompressedSpriteSheet sSpriteSheet_Confetti[] =
 {
-    {.data = gConfetti_Gfx, .size = 0x220, .tag = TAG_CONFETTI},
+    {.data = gConfetti_Gfx, .size = 0x220, .tag = TAG_HALL_OF_FAME_CONFETTI},
     {},
 };
 
 static const struct CompressedSpritePalette sSpritePalette_Confetti[] =
 {
-    {.data = gConfetti_Pal, .tag = TAG_CONFETTI},
+    {.data = gConfetti_Pal, .tag = TAG_HALL_OF_FAME_CONFETTI},
     {},
 };
 
@@ -319,8 +318,8 @@ static const union AnimCmd *const sAnims_Confetti[] =
 
 static const struct SpriteTemplate sSpriteTemplate_HofConfetti =
 {
-    .tileTag = TAG_CONFETTI,
-    .paletteTag = TAG_CONFETTI,
+    .tileTag = TAG_HALL_OF_FAME_CONFETTI,
+    .paletteTag = TAG_HALL_OF_FAME_CONFETTI,
     .oam = &sOamData_Confetti,
     .anims = sAnims_Confetti,
     .images = NULL,
@@ -1444,8 +1443,8 @@ static void StopDomeConfetti(void)
         DestroyTask(taskId);
 
     ConfettiUtil_Free();
-    FreeSpriteTilesByTag(TAG_CONFETTI);
-    FreeSpritePaletteByTag(TAG_CONFETTI);
+    FreeSpriteTilesByTag(TAG_HALL_OF_FAME_CONFETTI);
+    FreeSpritePaletteByTag(TAG_HALL_OF_FAME_CONFETTI);
 }
 
 static void UpdateDomeConfetti(struct ConfettiUtil *util)
@@ -1499,8 +1498,8 @@ static void Task_DoDomeConfetti(u8 taskId)
         {
             // Create new confetti every 3 frames
             id = ConfettiUtil_AddNew(&sOamData_Confetti,
-                              TAG_CONFETTI,
-                              TAG_CONFETTI,
+                              TAG_HALL_OF_FAME_CONFETTI,
+                              TAG_HALL_OF_FAME_CONFETTI,
                               Random() % DISPLAY_WIDTH,
                               -(Random() % 8),
                               Random() % ARRAY_COUNT(sAnims_Confetti),

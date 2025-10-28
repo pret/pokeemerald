@@ -15,8 +15,6 @@
     The other (used) version has the numbers squish and bounce up as they appear.
 */
 
-#define TAG_STATIC_COUNTDOWN 0x2000
-
 enum {
     STATE_IDLE = 1,
     STATE_START,
@@ -53,13 +51,13 @@ static const u32 s321Start_Static_Gfx[] = INCBIN_U32("graphics/link/321start_sta
 
 static const struct CompressedSpriteSheet sSpriteSheet_321Start_Static[] =
 {
-    {s321Start_Static_Gfx, 0xC00, TAG_STATIC_COUNTDOWN},
+    {s321Start_Static_Gfx, 0xC00, TAG_MINIGAME_STATIC_COUNTDOWN},
     {},
 };
 
 static const struct SpritePalette sSpritePalette_321Start_Static[] =
 {
-    {s321Start_Static_Pal, TAG_STATIC_COUNTDOWN},
+    {s321Start_Static_Pal, TAG_MINIGAME_STATIC_COUNTDOWN},
     {},
 };
 
@@ -112,8 +110,8 @@ static const union AnimCmd *const sAnims_StaticCountdown[] =
 static const struct SpriteTemplate sSpriteTemplate_StaticCountdown[] =
 {
     {
-        .tileTag = TAG_STATIC_COUNTDOWN,
-        .paletteTag = TAG_STATIC_COUNTDOWN,
+        .tileTag = TAG_MINIGAME_STATIC_COUNTDOWN,
+        .paletteTag = TAG_MINIGAME_STATIC_COUNTDOWN,
         .oam = &gOamData_AffineOff_ObjNormal_32x32,
         .anims = sAnims_StaticCountdown,
         .images = NULL,

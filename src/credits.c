@@ -26,8 +26,6 @@
 #define COLOR_DARK_GREEN RGB(7, 11, 6)
 #define COLOR_LIGHT_GREEN RGB(13, 20, 12)
 
-#define TAG_MON_BG 1001
-
 // Positions for the Pokémon images
 enum {
     POS_LEFT,
@@ -273,11 +271,11 @@ static const union AnimCmd *const sAnims_Rival[] =
 
 #define MONBG_OFFSET (MON_PIC_SIZE * 3)
 static const struct SpriteSheet sSpriteSheet_MonBg[] = {
-    { gDecompressionBuffer, MONBG_OFFSET, TAG_MON_BG },
+    { gDecompressionBuffer, MONBG_OFFSET, TAG_CREDITS_MON_BG },
     {},
 };
 static const struct SpritePalette sSpritePalette_MonBg[] = {
-    { (const u16 *)&gDecompressionBuffer[MONBG_OFFSET], TAG_MON_BG },
+    { (const u16 *)&gDecompressionBuffer[MONBG_OFFSET], TAG_CREDITS_MON_BG },
     {},
 };
 
@@ -325,8 +323,8 @@ static const union AnimCmd *const sAnims_MonBg[] =
 
 static const struct SpriteTemplate sSpriteTemplate_CreditsMonBg =
 {
-    .tileTag = TAG_MON_BG,
-    .paletteTag = TAG_MON_BG,
+    .tileTag = TAG_CREDITS_MON_BG,
+    .paletteTag = TAG_CREDITS_MON_BG,
     .oam = &sOamData_MonBg,
     .anims = sAnims_MonBg,
     .images = NULL,

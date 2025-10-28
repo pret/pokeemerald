@@ -152,10 +152,10 @@ enum {
     JAM_HEART_FULL,
 };
 
-#define TAG_MODE_ARROWS 5325
-#define TAG_LIST_ARROWS 5425
-#define GFXTAG_UI       5525
-#define PALTAG_UI       5526
+#define TAG_MOVE_RELEARNER_MODE_ARROWS 5325
+#define TAG_MOVE_RELEARNER_LIST_ARROWS 5425
+#define GFX_TAG_MOVE_RELEARNER_UI       5525
+#define PAL_TAG_MOVE_RELEARNER_UI       5526
 
 #define MAX_RELEARNER_MOVES max(MAX_LEVEL_UP_MOVES, 25)
 
@@ -242,13 +242,13 @@ static const struct SpriteSheet sMoveRelearnerSpriteSheet =
 {
     .data = sUI_Tiles,
     .size = sizeof(sUI_Tiles),
-    .tag = GFXTAG_UI
+    .tag = GFX_TAG_MOVE_RELEARNER_UI
 };
 
 static const struct SpritePalette sMoveRelearnerPalette =
 {
     .data = sUI_Pal,
-    .tag = PALTAG_UI
+    .tag = PAL_TAG_MOVE_RELEARNER_UI
 };
 
 static const struct ScrollArrowsTemplate sDisplayModeArrowsTemplate =
@@ -261,8 +261,8 @@ static const struct ScrollArrowsTemplate sDisplayModeArrowsTemplate =
     .secondY = 16,
     .fullyUpThreshold = -1,
     .fullyDownThreshold = -1,
-    .tileTag = TAG_MODE_ARROWS,
-    .palTag = TAG_MODE_ARROWS,
+    .tileTag = TAG_MOVE_RELEARNER_MODE_ARROWS,
+    .palTag = TAG_MOVE_RELEARNER_MODE_ARROWS,
     .palNum = 0,
 };
 
@@ -276,8 +276,8 @@ static const struct ScrollArrowsTemplate sMoveListScrollArrowsTemplate =
     .secondY = 104,
     .fullyUpThreshold = 0,
     .fullyDownThreshold = 0,
-    .tileTag = TAG_LIST_ARROWS,
-    .palTag = TAG_LIST_ARROWS,
+    .tileTag = TAG_MOVE_RELEARNER_LIST_ARROWS,
+    .palTag = TAG_MOVE_RELEARNER_LIST_ARROWS,
     .palNum = 0,
 };
 
@@ -315,8 +315,8 @@ static const union AnimCmd *const sHeartSpriteAnimationCommands[] =
 
 static const struct SpriteTemplate sConstestMoveHeartSprite =
 {
-    .tileTag = GFXTAG_UI,
-    .paletteTag = PALTAG_UI,
+    .tileTag = GFX_TAG_MOVE_RELEARNER_UI,
+    .paletteTag = PAL_TAG_MOVE_RELEARNER_UI,
     .oam = &sHeartSpriteOamData,
     .anims = sHeartSpriteAnimationCommands,
     .images = NULL,
