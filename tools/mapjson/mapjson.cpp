@@ -526,11 +526,13 @@ string generate_map_constants_text(string groups_filepath, Json groups_data) {
     ostringstream text;
     text << get_include_guard_start(guard_name) << get_generated_warning("data/maps/map_groups.json", false);
 
+    text << "enum\n{\n";
+
     int group_num = 0;
 
     for (auto &group : groups_data["group_order"].array_items()) {
         string groupName = json_to_string(group);
-        text << "// " << groupName << "\n";
+        text << "    // " << groupName << "\n";
         vector<string> map_ids;
         size_t max_length = 0;
 
@@ -548,13 +550,15 @@ string generate_map_constants_text(string groups_filepath, Json groups_data) {
 
         int map_id_num = 0;
         for (string map_id : map_ids) {
-            text << "#define " << map_id << string((max_length - map_id.length() + 1), ' ')
-                 << "(" << map_id_num++ << " | (" << group_num << " << 8))\n";
+            text << "    " << map_id << string(max_length - map_id.length(), ' ')
+                 << " = (" << map_id_num++ << " | (" << group_num << " << 8)),\n";
         }
         text << "\n";
 
         group_num++;
     }
+
+    text << "};\n\n";
 
     text << "#define MAP_GROUPS_COUNT " << group_num << "\n\n";
     text << get_include_guard_end(guard_name);
