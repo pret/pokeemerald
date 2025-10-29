@@ -5,12 +5,6 @@
 
 enum
 {
-    // Some usages of showobjectat/hideobjectat for LOCALID_PLAYER
-    // use this dummy argument rather than specify the actual map. This
-    // works because GetObjectEventIdByLocalIdAndMap ignores the map for
-    // LOCALID_PLAYER (and a few others).
-    MAP_DUMMY = 0,
-
     // Warps using this map will instead use the warp data stored in gSaveBlock1Ptr->dynamicWarp.
     // Used for warps that need to change destinations, e.g. when stepping off an elevator.
     MAP_DYNAMIC = (0x7F | (0x7F << 8)),
