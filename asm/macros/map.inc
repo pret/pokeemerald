@@ -2,8 +2,12 @@
 
 	@ Takes a MAP constant and outputs the map group and map number as separate bytes
 	.macro map map_id:req
+	.ifdef \map_id
 	.byte \map_id >> 8    @ map group
 	.byte \map_id & 0xFF  @ map num
+	.else
+	.error "undefined map (check for typos)"
+	.endif
 	.endm
 
 	@ Defines a map script. 'type' is any MAP_SCRIPT_* constant (see include/constants/map_scripts.h)
