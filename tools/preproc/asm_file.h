@@ -73,6 +73,7 @@ private:
     void VerifyStringLength(int length);
     int SkipWhitespaceAndEol();
     int FindLastLineNumber(std::string& filename);
+    int ParseLineSkipInEnum(void);
     std::string ReadIdentifier();
     long ReadInteger(std::string filename, long line);
 };

@@ -584,7 +584,11 @@ bool AsmFile::ParseEnum()
             RaiseError("%s:%ld: empty enum is invalid", headerFilename.c_str(), currentHeaderLine);
         }
 
-        if (m_buffer[m_pos] != ',')
+        if (m_buffer[m_pos] == '#')
+        {
+            currentHeaderLine = ParseLineSkipInEnum();
+        }
+        else if (m_buffer[m_pos] != ',')
         {
             currentHeaderLine += SkipWhitespaceAndEol();
             if (m_buffer[m_pos++] == '}' && m_buffer[m_pos++] == ';')
@@ -686,6 +690,50 @@ int AsmFile::SkipWhitespaceAndEol()
         m_pos++;
     }
     return newlines;
+}
+
+int AsmFile::ParseLineSkipInEnum(void)
+{
+    m_pos++;
+    while (m_buffer[m_pos] == ' ' || m_buffer[m_pos] == '\t')
+        m_pos++;
+
+     if (!IsAsciiDigit(m_buffer[m_pos]))
+        RaiseError("malformatted line indicator found inside `enum`, expected line number");
+
+    unsigned n = 0;
+    int digit = 0;
+    while ((digit = ConvertDigit(m_buffer[m_pos++], 10)) != -1)
+        n = 10 * n + digit;
+
+    while (m_buffer[m_pos] == ' ' || m_buffer[m_pos] == '\t')
+        m_pos++;
+
+    if (m_buffer[m_pos++] != '"')
+        RaiseError("malformatted line indicator found before `enum`, expected filename");
+
+    while (m_buffer[m_pos] != '"')
+    {
+        unsigned char c = m_buffer[m_pos++];
+
+        if (c == 0)
+        {
+            if (m_pos >= m_size)
+                RaiseError("unexpected EOF in line indicator");
+            else
+                RaiseError("unexpected null character in line indicator");
+        }
+
+        if (!IsAsciiPrintable(c))
+            RaiseError("unexpected character '\\x%02X' in line indicator", c);
+
+        if (c == '\\')
+        {
+            c = m_buffer[m_pos];
+            RaiseError("unexpected escape '\\%c' in line indicator", c);
+        }
+    }
+    return n - 1;
 }
 
 // returns the last line indicator and its corresponding file name without modifying the token index
