@@ -1,3 +1,3 @@
 RecordCorner_MapScripts::
-	.byte 0
+	end_map_scripts
 

@@ -1,5 +1,5 @@
 BattleFrontier_Lounge7_MapScripts::
-	.byte 0
+	end_map_scripts
 
 BattleFrontier_Lounge7_EventScript_LeftMoveTutor::
 	lock

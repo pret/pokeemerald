@@ -1,7 +1,7 @@
 AbandonedShip_HiddenFloorCorridors_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, AbandonedShip_HiddenFloorCorridors_OnResume
 	map_script MAP_SCRIPT_ON_LOAD, AbandonedShip_HiddenFloorCorridors_OnLoad
-	.byte 0
+	end_map_scripts
 
 AbandonedShip_HiddenFloorCorridors_OnResume:
 	setdivewarp MAP_ABANDONED_SHIP_UNDERWATER1, 5, 4

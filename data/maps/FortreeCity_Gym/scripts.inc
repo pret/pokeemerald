@@ -1,7 +1,7 @@
 FortreeCity_Gym_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, FortreeCity_Gym_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, FortreeCity_Gym_OnWarp
-	.byte 0
+	end_map_scripts
 
 FortreeCity_Gym_OnTransition:
 	special RotatingGate_InitPuzzle
@@ -9,7 +9,7 @@ FortreeCity_Gym_OnTransition:
 
 FortreeCity_Gym_OnWarp:
 	map_script_2 VAR_TEMP_0, VAR_TEMP_0, FortreeCity_Gym_EventScript_InitRotatingGates
-	.2byte 0
+	end_map_script_table
 
 @ NOTE: This rotating gate puzzle makes use of VAR_TEMP_0 - VAR_TEMP_3
 FortreeCity_Gym_EventScript_InitRotatingGates::
