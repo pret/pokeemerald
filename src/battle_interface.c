@@ -209,8 +209,8 @@ static const struct OamData sOamData_64x32 =
 static const struct SpriteTemplate sHealthboxPlayerSpriteTemplates[2] =
 {
     {
-        .tileTag = TAG_HEALTHBOX_PLAYER1_TILE,
-        .paletteTag = TAG_HEALTHBOX_PAL,
+        .tileTag = GFX_TAG_HEALTHBOX_PLAYER1,
+        .paletteTag = PAL_TAG_HEALTHBOX,
         .oam = &sOamData_64x32,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -218,8 +218,8 @@ static const struct SpriteTemplate sHealthboxPlayerSpriteTemplates[2] =
         .callback = SpriteCallbackDummy
     },
     {
-        .tileTag = TAG_HEALTHBOX_PLAYER2_TILE,
-        .paletteTag = TAG_HEALTHBOX_PAL,
+        .tileTag = GFX_TAG_HEALTHBOX_PLAYER2,
+        .paletteTag = PAL_TAG_HEALTHBOX,
         .oam = &sOamData_64x32,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -231,8 +231,8 @@ static const struct SpriteTemplate sHealthboxPlayerSpriteTemplates[2] =
 static const struct SpriteTemplate sHealthboxOpponentSpriteTemplates[2] =
 {
     {
-        .tileTag = TAG_HEALTHBOX_OPPONENT1_TILE,
-        .paletteTag = TAG_HEALTHBOX_PAL,
+        .tileTag = GFX_TAG_HEALTHBOX_OPPONENT1,
+        .paletteTag = PAL_TAG_HEALTHBOX,
         .oam = &sOamData_64x32,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -240,8 +240,8 @@ static const struct SpriteTemplate sHealthboxOpponentSpriteTemplates[2] =
         .callback = SpriteCallbackDummy
     },
     {
-        .tileTag = TAG_HEALTHBOX_OPPONENT2_TILE,
-        .paletteTag = TAG_HEALTHBOX_PAL,
+        .tileTag = GFX_TAG_HEALTHBOX_OPPONENT2,
+        .paletteTag = PAL_TAG_HEALTHBOX,
         .oam = &sOamData_64x32,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -252,8 +252,8 @@ static const struct SpriteTemplate sHealthboxOpponentSpriteTemplates[2] =
 
 static const struct SpriteTemplate sHealthboxSafariSpriteTemplate =
 {
-    .tileTag = TAG_HEALTHBOX_SAFARI_TILE,
-    .paletteTag = TAG_HEALTHBOX_PAL,
+    .tileTag = GFX_TAG_HEALTHBOX_SAFARI,
+    .paletteTag = PAL_TAG_HEALTHBOX,
     .oam = &sOamData_64x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -281,8 +281,8 @@ static const struct OamData sOamData_Healthbar =
 static const struct SpriteTemplate sHealthbarSpriteTemplates[MAX_BATTLERS_COUNT] =
 {
     {
-        .tileTag = TAG_HEALTHBAR_PLAYER1_TILE,
-        .paletteTag = TAG_HEALTHBAR_PAL,
+        .tileTag = GFX_TAG_HEALTHBAR_PLAYER1,
+        .paletteTag = PAL_TAG_HEALTHBAR,
         .oam = &sOamData_Healthbar,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -290,8 +290,8 @@ static const struct SpriteTemplate sHealthbarSpriteTemplates[MAX_BATTLERS_COUNT]
         .callback = SpriteCB_HealthBar
     },
     {
-        .tileTag = TAG_HEALTHBAR_OPPONENT1_TILE,
-        .paletteTag = TAG_HEALTHBAR_PAL,
+        .tileTag = GFX_TAG_HEALTHBAR_OPPONENT1,
+        .paletteTag = PAL_TAG_HEALTHBAR,
         .oam = &sOamData_Healthbar,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -299,8 +299,8 @@ static const struct SpriteTemplate sHealthbarSpriteTemplates[MAX_BATTLERS_COUNT]
         .callback = SpriteCB_HealthBar
     },
     {
-        .tileTag = TAG_HEALTHBAR_PLAYER2_TILE,
-        .paletteTag = TAG_HEALTHBAR_PAL,
+        .tileTag = GFX_TAG_HEALTHBAR_PLAYER2,
+        .paletteTag = PAL_TAG_HEALTHBAR,
         .oam = &sOamData_Healthbar,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -308,8 +308,8 @@ static const struct SpriteTemplate sHealthbarSpriteTemplates[MAX_BATTLERS_COUNT]
         .callback = SpriteCB_HealthBar
     },
     {
-        .tileTag = TAG_HEALTHBAR_OPPONENT2_TILE,
-        .paletteTag = TAG_HEALTHBAR_PAL,
+        .tileTag = GFX_TAG_HEALTHBAR_OPPONENT2,
+        .paletteTag = PAL_TAG_HEALTHBAR,
         .oam = &sOamData_Healthbar,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -639,22 +639,22 @@ static const u8 sUnusedStatusSummary[] = INCBIN_U8("graphics/battle_interface/un
 
 static const struct CompressedSpriteSheet sStatusSummaryBarSpriteSheet =
 {
-    gBattleInterface_BallStatusBarGfx, 0x200, TAG_STATUS_SUMMARY_BAR_TILE
+    gBattleInterface_BallStatusBarGfx, 0x200, GFX_TAG_STATUS_SUMMARY_BAR
 };
 
 static const struct SpritePalette sStatusSummaryBarSpritePal =
 {
-    gBattleInterface_BallStatusBarPal, TAG_STATUS_SUMMARY_BAR_PAL
+    gBattleInterface_BallStatusBarPal, PAL_TAG_STATUS_SUMMARY_BAR
 };
 
 static const struct SpritePalette sStatusSummaryBallsSpritePal =
 {
-    gBattleInterface_BallDisplayPal, TAG_STATUS_SUMMARY_BALLS_PAL
+    gBattleInterface_BallDisplayPal, PAL_TAG_STATUS_SUMMARY_BALLS
 };
 
 static const struct SpriteSheet sStatusSummaryBallsSpriteSheet =
 {
-    &gHealthboxElementsGfxTable[HEALTHBOX_GFX_STATUS_BALL], 0x80, TAG_STATUS_SUMMARY_BALLS_TILE
+    &gHealthboxElementsGfxTable[HEALTHBOX_GFX_STATUS_BALL], 0x80, GFX_TAG_STATUS_SUMMARY_BALLS
 };
 
 // unused oam data
@@ -695,8 +695,8 @@ static const struct OamData sOamData_StatusSummaryBalls =
 static const struct SpriteTemplate sStatusSummaryBarSpriteTemplates[2] =
 {
     { // Player
-        .tileTag = TAG_STATUS_SUMMARY_BAR_TILE,
-        .paletteTag = TAG_STATUS_SUMMARY_BAR_PAL,
+        .tileTag = GFX_TAG_STATUS_SUMMARY_BAR,
+        .paletteTag = PAL_TAG_STATUS_SUMMARY_BAR,
         .oam = &sOamData_64x32,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -704,8 +704,8 @@ static const struct SpriteTemplate sStatusSummaryBarSpriteTemplates[2] =
         .callback = SpriteCB_StatusSummaryBar_Enter
     },
     { // Opponent
-        .tileTag = TAG_STATUS_SUMMARY_BAR_TILE,
-        .paletteTag = TAG_STATUS_SUMMARY_BAR_PAL,
+        .tileTag = GFX_TAG_STATUS_SUMMARY_BAR,
+        .paletteTag = PAL_TAG_STATUS_SUMMARY_BAR,
         .oam = &sOamData_64x32,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -717,8 +717,8 @@ static const struct SpriteTemplate sStatusSummaryBarSpriteTemplates[2] =
 static const struct SpriteTemplate sStatusSummaryBallsSpriteTemplates[2] =
 {
     {
-        .tileTag = TAG_STATUS_SUMMARY_BALLS_TILE,
-        .paletteTag = TAG_STATUS_SUMMARY_BALLS_PAL,
+        .tileTag = GFX_TAG_STATUS_SUMMARY_BALLS,
+        .paletteTag = PAL_TAG_STATUS_SUMMARY_BALLS,
         .oam = &sOamData_StatusSummaryBalls,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -726,8 +726,8 @@ static const struct SpriteTemplate sStatusSummaryBallsSpriteTemplates[2] =
         .callback = SpriteCB_StatusSummaryBalls_Enter
     },
     {
-        .tileTag = TAG_STATUS_SUMMARY_BALLS_TILE,
-        .paletteTag = TAG_STATUS_SUMMARY_BALLS_PAL,
+        .tileTag = GFX_TAG_STATUS_SUMMARY_BALLS,
+        .paletteTag = PAL_TAG_STATUS_SUMMARY_BALLS,
         .oam = &sOamData_StatusSummaryBalls,
         .anims = gDummySpriteAnimTable,
         .images = NULL,

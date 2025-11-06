@@ -24,11 +24,6 @@
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
 
-#define GFXTAG_CURSOR 7
-#define GFXTAG_TRAINER_PIC 8
-#define PALTAG_CURSOR 12
-#define PALTAG_TRAINER_PIC 13
-
 struct Pokenav_MatchCallGfx
 {
     bool32 (*isTaskActiveCB)(void);
@@ -220,12 +215,12 @@ static const struct WindowTemplate sCallMsgBoxWindowTemplate =
 
 static const struct CompressedSpriteSheet sOptionsCursorSpriteSheets[1] =
 {
-    {sOptionsCursor_Gfx, 0x40, GFXTAG_CURSOR}
+    {sOptionsCursor_Gfx, 0x40, GFX_TAG_POKENAV_MATCH_CALL_CURSOR}
 };
 
 static const struct SpritePalette sOptionsCursorSpritePalettes[2] =
 {
-    {sOptionsCursor_Pal, PALTAG_CURSOR}
+    {sOptionsCursor_Pal, PAL_TAG_POKENAV_MATCH_CALL_CURSOR}
 };
 
 static const struct OamData sOptionsCursorOamData =
@@ -244,8 +239,8 @@ static const struct OamData sOptionsCursorOamData =
 
 static const struct SpriteTemplate sOptionsCursorSpriteTemplate =
 {
-    .tileTag = GFXTAG_CURSOR,
-    .paletteTag = PALTAG_CURSOR,
+    .tileTag = GFX_TAG_POKENAV_MATCH_CALL_CURSOR,
+    .paletteTag = PAL_TAG_POKENAV_MATCH_CALL_CURSOR,
     .oam = &sOptionsCursorOamData,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -269,8 +264,8 @@ static const struct OamData sTrainerPicOamData =
 
 static const struct SpriteTemplate sTrainerPicSpriteTemplate =
 {
-    .tileTag = GFXTAG_TRAINER_PIC,
-    .paletteTag = PALTAG_TRAINER_PIC,
+    .tileTag = GFX_TAG_POKENAV_MATCH_CALL_TRAINER_PIC,
+    .paletteTag = PAL_TAG_POKENAV_MATCH_CALL_TRAINER_PIC,
     .oam = &sTrainerPicOamData,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -1183,9 +1178,9 @@ static void AllocMatchCallSprites(void)
     // Load trainer pic gfx
     spriteSheet.data = gfx->trainerPicGfx;
     spriteSheet.size = sizeof(gfx->trainerPicGfx);
-    spriteSheet.tag = GFXTAG_TRAINER_PIC;
+    spriteSheet.tag = GFX_TAG_POKENAV_MATCH_CALL_TRAINER_PIC;
     gfx->trainerPicGfxPtr = (u8 *)OBJ_VRAM0 + LoadSpriteSheet(&spriteSheet) * 0x20;
-    paletteNum = AllocSpritePalette(PALTAG_TRAINER_PIC);
+    paletteNum = AllocSpritePalette(PAL_TAG_POKENAV_MATCH_CALL_TRAINER_PIC);
     gfx->trainerPicPalOffset = OBJ_PLTT_ID(paletteNum);
     gfx->trainerPicSprite = CreateTrainerPicSprite();
     gfx->trainerPicSprite->invisible = TRUE;
@@ -1199,10 +1194,10 @@ static void FreeMatchCallSprites(void)
     if (gfx->trainerPicSprite)
         DestroySprite(gfx->trainerPicSprite);
 
-    FreeSpriteTilesByTag(GFXTAG_TRAINER_PIC);
-    FreeSpriteTilesByTag(GFXTAG_CURSOR);
-    FreeSpritePaletteByTag(PALTAG_CURSOR);
-    FreeSpritePaletteByTag(PALTAG_TRAINER_PIC);
+    FreeSpriteTilesByTag(GFX_TAG_POKENAV_MATCH_CALL_TRAINER_PIC);
+    FreeSpriteTilesByTag(GFX_TAG_POKENAV_MATCH_CALL_CURSOR);
+    FreeSpritePaletteByTag(PAL_TAG_POKENAV_MATCH_CALL_CURSOR);
+    FreeSpritePaletteByTag(PAL_TAG_POKENAV_MATCH_CALL_TRAINER_PIC);
 }
 
 static void CreateOptionsCursorSprite(struct Pokenav_MatchCallGfx *gfx, int top)

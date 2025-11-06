@@ -144,19 +144,6 @@ enum {
 // the values 0-9 are unique 'valid' columns
 #define NUM_BERRY_COLUMNS 11
 
-#define GFXTAG_DODRIO    0
-#define GFXTAG_STATUS    1
-#define GFXTAG_BERRIES   2
-#define GFXTAG_CLOUD     5
-#define GFXTAG_COUNTDOWN 7
-
-#define PALTAG_DODRIO_NORMAL 0
-#define PALTAG_DODRIO_SHINY  1
-#define PALTAG_STATUS        2
-#define PALTAG_BERRIES       3
-#define PALTAG_CLOUD         6
-#define PALTAG_COUNTDOWN     8
-
 #define NUM_CLOUDS 2
 
 #define PLAYER_NONE 0xFF
@@ -872,7 +859,7 @@ static void DoCountdown(void)
     switch (sGame->state)
     {
     case 0:
-        StartMinigameCountdown(GFXTAG_COUNTDOWN, PALTAG_COUNTDOWN, 120, 80, 0);
+        StartMinigameCountdown(GFX_TAG_DODRIO_BERRY_PICKING_COUNTDOWN, PAL_TAG_DODRIO_BERRY_PICKING_COUNTDOWN, 120, 80, 0);
         sGame->state++;
         break;
     case 1:
@@ -3826,13 +3813,13 @@ static const union AnimCmd *const sAnims_Cloud[] =
 static void LoadDodrioGfx(void)
 {
     void *ptr = AllocZeroed(0x3000);
-    struct SpritePalette normal = {sDodrioNormal_Pal, PALTAG_DODRIO_NORMAL};
-    struct SpritePalette shiny = {sDodrioShiny_Pal, PALTAG_DODRIO_SHINY};
+    struct SpritePalette normal = {sDodrioNormal_Pal, PAL_TAG_DODRIO_BERRY_PICKING_DODRIO_NORMAL};
+    struct SpritePalette shiny = {sDodrioShiny_Pal, PAL_TAG_DODRIO_BERRY_PICKING_DODRIO_SHINY};
 
     LZ77UnCompWram(sDodrio_Gfx, ptr);
     if (ptr)
     {
-        struct SpriteSheet sheet = {ptr, 0x3000, GFXTAG_DODRIO};
+        struct SpriteSheet sheet = {ptr, 0x3000, GFX_TAG_DODRIO_BERRY_PICKING_DODRIO};
         LoadSpriteSheet(&sheet);
         Free(ptr);
     }
@@ -3844,8 +3831,8 @@ static void CreateDodrioSprite(struct DodrioGame_MonInfo *monInfo, u8 playerId, 
 {
     struct SpriteTemplate template =
     {
-        .tileTag = GFXTAG_DODRIO,
-        .paletteTag = monInfo->isShiny, // PALTAG_DODRIO_NORMAL / PALTAG_DODRIO_SHINY
+        .tileTag = GFX_TAG_DODRIO_BERRY_PICKING_DODRIO,
+        .paletteTag = monInfo->isShiny, // PAL_TAG_DODRIO_BERRY_PICKING_DODRIO_NORMAL / PAL_TAG_DODRIO_BERRY_PICKING_DODRIO_SHINY
         .oam = &sOamData_Dodrio,
         .anims = sAnims_Dodrio,
         .images = NULL,
@@ -4010,17 +3997,17 @@ static void CreateStatusBarSprites(void)
 {
     u8 i;
     void *ptr = AllocZeroed(0x180);
-    struct SpritePalette pal = {sStatus_Pal, PALTAG_STATUS};
+    struct SpritePalette pal = {sStatus_Pal, PAL_TAG_DODRIO_BERRY_PICKING_STATUS};
 
     LZ77UnCompWram(sStatus_Gfx, ptr);
     // This check should be one line up.
     if (ptr)
     {
-        struct SpriteSheet sheet = {ptr, 0x180, GFXTAG_STATUS};
+        struct SpriteSheet sheet = {ptr, 0x180, GFX_TAG_DODRIO_BERRY_PICKING_STATUS};
         struct SpriteTemplate template =
         {
-            .tileTag = GFXTAG_STATUS,
-            .paletteTag = PALTAG_STATUS,
+            .tileTag = GFX_TAG_DODRIO_BERRY_PICKING_STATUS,
+            .paletteTag = PAL_TAG_DODRIO_BERRY_PICKING_STATUS,
             .oam = &sOamData_16x16_Priority0,
             .anims = sAnims_StatusBar,
             .images = NULL,
@@ -4152,12 +4139,12 @@ static const u8 sUnusedSounds[] = {
 static void LoadBerryGfx(void)
 {
     void *ptr = AllocZeroed(0x480);
-    struct SpritePalette pal = {sBerries_Pal, PALTAG_BERRIES};
+    struct SpritePalette pal = {sBerries_Pal, PAL_TAG_DODRIO_BERRY_PICKING_BERRIES};
 
     LZ77UnCompWram(sBerries_Gfx, ptr);
     if (ptr)
     {
-        struct SpriteSheet sheet = {ptr, 0x480, GFXTAG_BERRIES};
+        struct SpriteSheet sheet = {ptr, 0x480, GFX_TAG_DODRIO_BERRY_PICKING_BERRIES};
         LoadSpriteSheet(&sheet);
     }
 
@@ -4174,8 +4161,8 @@ static void CreateBerrySprites(void)
 
     struct SpriteTemplate berry =
     {
-        .tileTag = GFXTAG_BERRIES,
-        .paletteTag = PALTAG_BERRIES,
+        .tileTag = GFX_TAG_DODRIO_BERRY_PICKING_BERRIES,
+        .paletteTag = PAL_TAG_DODRIO_BERRY_PICKING_BERRIES,
         .oam = &sOamData_Berry,
         .anims = sAnims_Berry,
         .images = NULL,
@@ -4184,8 +4171,8 @@ static void CreateBerrySprites(void)
     };
     struct SpriteTemplate berryIcon =
     {
-        .tileTag = GFXTAG_BERRIES,
-        .paletteTag = PALTAG_BERRIES,
+        .tileTag = GFX_TAG_DODRIO_BERRY_PICKING_BERRIES,
+        .paletteTag = PAL_TAG_DODRIO_BERRY_PICKING_BERRIES,
         .oam = &sOamData_16x16_Priority0,
         .anims = sAnims_Berry,
         .images = NULL,
@@ -4300,16 +4287,16 @@ static void CreateCloudSprites(void)
 {
     u8 i;
     void *ptr = AllocZeroed(0x400);
-    struct SpritePalette pal = {sCloud_Pal, PALTAG_CLOUD};
+    struct SpritePalette pal = {sCloud_Pal, PAL_TAG_DODRIO_BERRY_PICKING_CLOUD};
 
     LZ77UnCompWram(sCloud_Gfx, ptr);
     if (ptr)
     {
-        struct SpriteSheet sheet = {ptr, 0x400, GFXTAG_CLOUD};
+        struct SpriteSheet sheet = {ptr, 0x400, GFX_TAG_DODRIO_BERRY_PICKING_CLOUD};
         struct SpriteTemplate template =
         {
-            .tileTag = GFXTAG_CLOUD,
-            .paletteTag = PALTAG_CLOUD,
+            .tileTag = GFX_TAG_DODRIO_BERRY_PICKING_CLOUD,
+            .paletteTag = PAL_TAG_DODRIO_BERRY_PICKING_CLOUD,
             .oam = &sOamData_Cloud,
             .anims = sAnims_Cloud,
             .images = NULL,

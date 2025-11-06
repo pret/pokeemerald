@@ -1543,7 +1543,7 @@ u16 GetSpriteTileStartByTag(u16 tag)
 {
     u8 index = IndexOfSpriteTileTag(tag);
     if (index == 0xFF)
-        return 0xFFFF;
+        return TAG_NONE;
     return sSpriteTileRanges[index * 2];
 }
 

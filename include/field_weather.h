@@ -4,21 +4,6 @@
 #include "sprite.h"
 #include "constants/field_weather.h"
 
-#define TAG_WEATHER_START 0x1200
-enum {
-    GFXTAG_CLOUD = TAG_WEATHER_START,
-    GFXTAG_FOG_H,
-    GFXTAG_ASH,
-    GFXTAG_FOG_D,
-    GFXTAG_SANDSTORM,
-    GFXTAG_BUBBLE,
-    GFXTAG_RAIN,
-};
-enum {
-    PALTAG_WEATHER = TAG_WEATHER_START,
-    PALTAG_WEATHER_2
-};
-
 #define NUM_WEATHER_COLOR_MAPS 19
 
 struct Weather

@@ -17,9 +17,6 @@
 #include "constants/songs.h"
 #include "constants/region_map_sections.h"
 
-#define GFXTAG_CITY_ZOOM 6
-#define PALTAG_CITY_ZOOM 11
-
 #define NUM_CITY_MAPS 22
 
 struct Pokenav_RegionMapMenu
@@ -124,12 +121,12 @@ static const LoopedTask sRegionMapLoopTaskFuncs[] =
 
 static const struct CompressedSpriteSheet sCityZoomTextSpriteSheet[1] =
 {
-    {gRegionMapCityZoomText_Gfx, 0x800, GFXTAG_CITY_ZOOM}
+    {gRegionMapCityZoomText_Gfx, 0x800, GFX_TAG_POKENAV_MAP_CITY_ZOOM}
 };
 
 static const struct SpritePalette sCityZoomTilesSpritePalette[] =
 {
-    {gRegionMapCityZoomTiles_Pal, PALTAG_CITY_ZOOM},
+    {gRegionMapCityZoomTiles_Pal, PAL_TAG_POKENAV_MAP_CITY_ZOOM},
     {}
 };
 
@@ -162,8 +159,8 @@ static const struct OamData sCityZoomTextSprite_OamData =
 
 static const struct SpriteTemplate sCityZoomTextSpriteTemplate =
 {
-    .tileTag = GFXTAG_CITY_ZOOM,
-    .paletteTag = PALTAG_CITY_ZOOM,
+    .tileTag = GFX_TAG_POKENAV_MAP_CITY_ZOOM,
+    .paletteTag = PAL_TAG_POKENAV_MAP_CITY_ZOOM,
     .oam = &sCityZoomTextSprite_OamData,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -496,8 +493,8 @@ static void FreeCityZoomViewGfx(void)
 {
     int i;
     struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
-    FreeSpriteTilesByTag(GFXTAG_CITY_ZOOM);
-    FreeSpritePaletteByTag(PALTAG_CITY_ZOOM);
+    FreeSpriteTilesByTag(GFX_TAG_POKENAV_MAP_CITY_ZOOM);
+    FreeSpritePaletteByTag(PAL_TAG_POKENAV_MAP_CITY_ZOOM);
     for (i = 0; i < (int)ARRAY_COUNT(state->cityZoomTextSprites); i++)
         DestroySprite(state->cityZoomTextSprites[i]);
 }
