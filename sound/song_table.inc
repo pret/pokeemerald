@@ -619,4 +619,4 @@ gSongTable::
 
 	.align 2
 dummy_song_header:
-        .byte 0, 0, 0, 0
+    .byte 0, 0, 0, 0
