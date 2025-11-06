@@ -344,7 +344,7 @@ bool8 SiiRtcSetTime(struct SiiRtcInfo *rtc)
     return TRUE;
 }
 
-bool8 SiiRtcSetAlarm(struct SiiRtcInfo *rtc)
+static bool8 UNUSED SiiRtcSetAlarm(struct SiiRtcInfo *rtc)
 {
     u8 i;
     u8 alarmData[2];
