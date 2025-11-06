@@ -3,7 +3,11 @@ CaveHole_CheckFallDownHole:
 	.2byte 0
 
 CaveHole_FixCrackedGround:
-	copyvar VAR_ICE_STEP_COUNT, 1
+#if UBFIX
+	setvar VAR_ICE_STEP_COUNT, 1
+#else
+	copyvar VAR_ICE_STEP_COUNT, 1, warn=FALSE
+#endif
 	end
 
 EventScript_FallDownHole::
