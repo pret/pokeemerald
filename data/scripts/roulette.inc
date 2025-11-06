@@ -20,7 +20,6 @@ Roulette_EventScript_Table2::
 
 Roulette_EventScript_Play::
 	special PlayRoulette
-	waitstate
 	end
 
 Roulette_Text_PlayMinimumWagerIsX::

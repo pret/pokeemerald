@@ -139,7 +139,6 @@ BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout::
 	waitmessage
 	setvar VAR_0x8004, SCROLL_MULTI_BF_RECEPTIONIST
 	special ShowScrollableMultichoice
-	waitstate
 	switch VAR_RESULT
 	case 0, BattleFrontier_ReceptionGate_EventScript_BattleTower
 	case 1, BattleFrontier_ReceptionGate_EventScript_BattleDome

@@ -37,7 +37,6 @@ LilycoveCity_Harbor_EventScript_NoFirstTimeEventTickets::
 LilycoveCity_Harbor_EventScript_FerryRegularLocationSelect::
 	setvar VAR_0x8004, 0
 	special ScriptMenu_CreateLilycoveSSTidalMultichoice
-	waitstate
 	special GetLilycoveSSTidalSelection
 	switch VAR_RESULT
 	case 0, LilycoveCity_Harbor_EventScript_GoToSlateport
@@ -285,7 +284,6 @@ LilycoveCity_Harbor_EventScript_MultipleEventTicketsFirstTime::
 	waitmessage
 	setvar VAR_0x8004, 1
 	special ScriptMenu_CreateLilycoveSSTidalMultichoice
-	waitstate
 	special GetLilycoveSSTidalSelection
 	switch VAR_RESULT
 	case 2, LilycoveCity_Harbor_EventScript_GoToSouthernIslandFirstTime
