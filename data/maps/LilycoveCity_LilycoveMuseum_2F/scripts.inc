@@ -76,7 +76,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_ShowExhibitHall::
 	applymovement LOCALID_PLAYER, LilycoveCity_LilycoveMuseum_2F_Movement_PlayerWalkInPlaceLeft
 	waitmovement 0
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_PleaseObtainPaintingsForExhibit, MSGBOX_SIGN
-#if UBFIX
+#ifdef UBFIX
 	setvar VAR_LILYCOVE_MUSEUM_2F_STATE, 1
 #else
 	copyvar VAR_LILYCOVE_MUSEUM_2F_STATE, 1, warn=FALSE

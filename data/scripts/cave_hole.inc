@@ -3,7 +3,7 @@ CaveHole_CheckFallDownHole:
 	.2byte 0
 
 CaveHole_FixCrackedGround:
-#if UBFIX
+#ifdef UBFIX
 	setvar VAR_ICE_STEP_COUNT, 1
 #else
 	copyvar VAR_ICE_STEP_COUNT, 1, warn=FALSE
