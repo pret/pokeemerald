@@ -349,7 +349,7 @@ LilycoveCity_ContestLobby_EventScript_SetMasterContestType::
 @ Functionally unused
 LilycoveCity_ContestLobby_EventScript_SetDebug::
 	setflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
-#if UBFIX
+#ifdef UBFIX
 	setvar VAR_LILYCOVE_MUSEUM_2F_STATE, 1
 #else
 	copyvar VAR_LILYCOVE_MUSEUM_2F_STATE, 1, warn=FALSE
