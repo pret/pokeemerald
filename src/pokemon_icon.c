@@ -4,7 +4,6 @@
 #include "palette.h"
 #include "pokemon_icon.h"
 #include "sprite.h"
-#include "constants/pokemon_icon.h"
 
 #define INVALID_ICON_SPECIES SPECIES_OLD_UNOWN_J // Oddly specific, used when an icon should be a ?. Any of the 'old unown' would work
 
