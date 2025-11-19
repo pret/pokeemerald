@@ -33,11 +33,6 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-#define TAG_SCROLL_ARROW  2910
-#define TAG_PYRAMID_BAG   4132
-#define TAG_ITEM_ICON     4133
-#define TAG_ITEM_ICON_ALT 4134
-
 #define POS_NONE ((u8)-1)
 
 enum {
@@ -357,12 +352,12 @@ static const union AffineAnimCmd *const sAffineAnims_PyramidBag[] =
     [ANIM_BAG_SHAKE] = sAffineAnim_PyramidBag_Shake,
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_PyramidBag = {gBattlePyramidBag_Gfx, 0x0800, TAG_PYRAMID_BAG};
+static const struct CompressedSpriteSheet sSpriteSheet_PyramidBag = {gBattlePyramidBag_Gfx, 0x0800, TAG_BATTLE_PYRAMID_BAG};
 
 static const struct SpriteTemplate sSpriteTemplate_PyramidBag =
 {
-    .tileTag = TAG_PYRAMID_BAG,
-    .paletteTag = TAG_PYRAMID_BAG,
+    .tileTag = TAG_BATTLE_PYRAMID_BAG,
+    .paletteTag = TAG_BATTLE_PYRAMID_BAG,
     .oam = &sOamData_PyramidBag,
     .anims = sAnims_PyramidBag,
     .images = NULL,
@@ -697,7 +692,7 @@ static void AddScrollArrows(void)
     if (gPyramidBagMenu->scrollIndicatorsTaskId == TASK_NONE)
         gPyramidBagMenu->scrollIndicatorsTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 172, 12, 148,
                                                                                             gPyramidBagMenu->listMenuCount - gPyramidBagMenu->listMenuMaxShown,
-                                                                                            TAG_SCROLL_ARROW, TAG_SCROLL_ARROW,
+                                                                                            TAG_BATTLE_PYRAMID_BAG_MENU_SCROLL_ARROW, TAG_BATTLE_PYRAMID_BAG_MENU_SCROLL_ARROW,
                                                                                             &gPyramidBagMenuState.scrollPosition);
 }
 
@@ -1523,9 +1518,9 @@ static void FreeItemIconSprite(u8 spriteArrId)
     if (*spriteId != SPRITE_NONE)
     {
         // spriteArrId is PBAG_SPRITE_ITEM_ICON / PBAG_SPRITE_ITEM_ICON_ALT here (1-2)
-        // so tag will be TAG_ITEM_ICON / TAG_ITEM_ICON_ALT
-        FreeSpriteTilesByTag(TAG_ITEM_ICON - 1 + spriteArrId);
-        FreeSpritePaletteByTag(TAG_ITEM_ICON - 1 + spriteArrId);
+        // so tag will be TAG_BATTLE_PYRAMID_BAG_MENU_ITEM_ICON / TAG_BATTLE_PYRAMID_BAG_MENU_ICON_ALT
+        FreeSpriteTilesByTag(TAG_BATTLE_PYRAMID_BAG_MENU_ITEM_ICON - 1 + spriteArrId);
+        FreeSpritePaletteByTag(TAG_BATTLE_PYRAMID_BAG_MENU_ITEM_ICON - 1 + spriteArrId);
         FreeSpriteOamMatrix(&gSprites[*spriteId]);
         DestroySprite(&gSprites[*spriteId]);
         *spriteId = SPRITE_NONE;
@@ -1539,7 +1534,7 @@ static void LoadPyramidBagPalette(void)
 
     LZDecompressWram(gBattlePyramidBag_Pal, palPtr);
     spritePalette.data = palPtr + PLTT_ID(gSaveBlock2Ptr->frontier.lvlMode);
-    spritePalette.tag = TAG_PYRAMID_BAG;
+    spritePalette.tag = TAG_BATTLE_PYRAMID_BAG;
     LoadSpritePalette(&spritePalette);
     Free(palPtr);
 }
@@ -1575,9 +1570,9 @@ static void ShowItemIcon(u16 itemId, bool8 isAlt)
     u8 *spriteId = &gPyramidBagMenu->spriteIds[isAlt + PBAG_SPRITE_ITEM_ICON];
     if (*spriteId == SPRITE_NONE)
     {
-        FreeSpriteTilesByTag(TAG_ITEM_ICON + isAlt);
-        FreeSpritePaletteByTag(TAG_ITEM_ICON + isAlt);
-        itemSpriteId = AddItemIconSprite(TAG_ITEM_ICON + isAlt, TAG_ITEM_ICON + isAlt, itemId);
+        FreeSpriteTilesByTag(TAG_BATTLE_PYRAMID_BAG_MENU_ITEM_ICON + isAlt);
+        FreeSpritePaletteByTag(TAG_BATTLE_PYRAMID_BAG_MENU_ITEM_ICON + isAlt);
+        itemSpriteId = AddItemIconSprite(TAG_BATTLE_PYRAMID_BAG_MENU_ITEM_ICON + isAlt, TAG_BATTLE_PYRAMID_BAG_MENU_ITEM_ICON + isAlt, itemId);
         if (itemSpriteId != MAX_SPRITES)
         {
             *spriteId = itemSpriteId;

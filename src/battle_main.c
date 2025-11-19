@@ -2121,8 +2121,8 @@ static void SpriteCB_VsLetter(struct Sprite *sprite)
 
     if (sprite->affineAnimEnded)
     {
-        FreeSpriteTilesByTag(ANIM_SPRITES_START);
-        FreeSpritePaletteByTag(ANIM_SPRITES_START);
+        FreeSpriteTilesByTag(TAG_LINK_BATTLE_VS_LETTERS);
+        FreeSpritePaletteByTag(TAG_LINK_BATTLE_VS_LETTERS);
         FreeSpriteOamMatrix(sprite);
         DestroySprite(sprite);
     }

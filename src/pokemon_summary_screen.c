@@ -729,11 +729,6 @@ static const u8 sStatsLeftColumnLayout[] = _("{DYNAMIC 0}/{DYNAMIC 1}\n{DYNAMIC 
 static const u8 sStatsRightColumnLayout[] = _("{DYNAMIC 0}\n{DYNAMIC 1}\n{DYNAMIC 2}");
 static const u8 sMovesPPLayout[] = _("{PP}{DYNAMIC 0}/{DYNAMIC 1}");
 
-#define TAG_MOVE_SELECTOR 30000
-#define TAG_MON_STATUS 30001
-#define TAG_MOVE_TYPES 30002
-#define TAG_MON_MARKINGS 30003
-
 static const struct OamData sOamData_MoveTypes =
 {
     .y = 0,
@@ -872,12 +867,12 @@ static const struct CompressedSpriteSheet sSpriteSheet_MoveTypes =
 {
     .data = gMoveTypes_Gfx,
     .size = (NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT) * 0x100,
-    .tag = TAG_MOVE_TYPES
+    .tag = TAG_MON_SUMMARY_SCREEN_MOVE_TYPES
 };
 static const struct SpriteTemplate sSpriteTemplate_MoveTypes =
 {
-    .tileTag = TAG_MOVE_TYPES,
-    .paletteTag = TAG_MOVE_TYPES,
+    .tileTag = TAG_MON_SUMMARY_SCREEN_MOVE_TYPES,
+    .paletteTag = TAG_MON_SUMMARY_SCREEN_MOVE_TYPES,
     .oam = &sOamData_MoveTypes,
     .anims = sSpriteAnimTable_MoveTypes,
     .images = NULL,
@@ -983,17 +978,17 @@ static const struct CompressedSpriteSheet sMoveSelectorSpriteSheet =
 {
     .data = gSummaryMoveSelect_Gfx,
     .size = 0x400,
-    .tag = TAG_MOVE_SELECTOR
+    .tag = TAG_MON_SUMMARY_SCREEN_MOVE_SELECTOR
 };
 static const struct CompressedSpritePalette sMoveSelectorSpritePal =
 {
     .data = gSummaryMoveSelect_Pal,
-    .tag = TAG_MOVE_SELECTOR
+    .tag = TAG_MON_SUMMARY_SCREEN_MOVE_SELECTOR
 };
 static const struct SpriteTemplate sMoveSelectorSpriteTemplate =
 {
-    .tileTag = TAG_MOVE_SELECTOR,
-    .paletteTag = TAG_MOVE_SELECTOR,
+    .tileTag = TAG_MON_SUMMARY_SCREEN_MOVE_SELECTOR,
+    .paletteTag = TAG_MON_SUMMARY_SCREEN_MOVE_SELECTOR,
     .oam = &sOamData_MoveSelector,
     .anims = sSpriteAnimTable_MoveSelector,
     .images = NULL,
@@ -1057,17 +1052,17 @@ static const struct CompressedSpriteSheet sStatusIconsSpriteSheet =
 {
     .data = gStatusGfx_Icons,
     .size = 0x380,
-    .tag = TAG_MON_STATUS
+    .tag = TAG_MON_SUMMARY_SCREEN_MON_STATUS
 };
 static const struct CompressedSpritePalette sStatusIconsSpritePalette =
 {
     .data = gStatusPal_Icons,
-    .tag = TAG_MON_STATUS
+    .tag = TAG_MON_SUMMARY_SCREEN_MON_STATUS
 };
 static const struct SpriteTemplate sSpriteTemplate_StatusCondition =
 {
-    .tileTag = TAG_MON_STATUS,
-    .paletteTag = TAG_MON_STATUS,
+    .tileTag = TAG_MON_SUMMARY_SCREEN_MON_STATUS,
+    .paletteTag = TAG_MON_SUMMARY_SCREEN_MON_STATUS,
     .oam = &sOamData_StatusCondition,
     .anims = sSpriteAnimTable_StatusCondition,
     .images = NULL,
@@ -4019,7 +4014,7 @@ static void StopPokemonAnimations(void)  // A subtle effect, this function stops
 
 static void CreateMonMarkingsSprite(struct Pokemon *mon)
 {
-    struct Sprite *sprite = CreateMonMarkingAllCombosSprite(TAG_MON_MARKINGS, TAG_MON_MARKINGS, sMarkings_Pal);
+    struct Sprite *sprite = CreateMonMarkingAllCombosSprite(TAG_MON_SUMMARY_SCREEN_MON_MARKINGS, TAG_MON_SUMMARY_SCREEN_MON_MARKINGS, sMarkings_Pal);
 
     sMonSummaryScreen->markingsSprite = sprite;
     if (sprite != NULL)
@@ -4034,7 +4029,7 @@ static void CreateMonMarkingsSprite(struct Pokemon *mon)
 static void RemoveAndCreateMonMarkingsSprite(struct Pokemon *mon)
 {
     DestroySprite(sMonSummaryScreen->markingsSprite);
-    FreeSpriteTilesByTag(TAG_MON_MARKINGS);
+    FreeSpriteTilesByTag(TAG_MON_SUMMARY_SCREEN_MON_MARKINGS);
     CreateMonMarkingsSprite(mon);
 }
 

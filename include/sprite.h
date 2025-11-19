@@ -1,10 +1,11 @@
 #ifndef GUARD_SPRITE_H
 #define GUARD_SPRITE_H
 
+#include "constants/sprite_tags.h"
+
 #define OAM_MATRIX_COUNT 32
 #define MAX_SPRITES 64
 #define SPRITE_NONE 0xFF
-#define TAG_NONE 0xFFFF
 
 // Given to SetSpriteMatrixAnchor to skip anchoring one of the coords.
 #define NO_ANCHOR 0x800
