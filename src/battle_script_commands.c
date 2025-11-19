@@ -281,7 +281,7 @@ static void Cmd_trymemento(void);
 static void Cmd_setforcedtarget(void);
 static void Cmd_setcharge(void);
 static void Cmd_callenvironmentattack(void);
-static void Cmd_cureifburnedparalysedorpoisoned(void);
+static void Cmd_cureifburnedparalyzedorpoisoned(void);
 static void Cmd_settorment(void);
 static void Cmd_jumpifnodamage(void);
 static void Cmd_settaunt(void);
@@ -533,7 +533,7 @@ void (*const gBattleScriptingCommandsTable[])(void) =
     Cmd_setforcedtarget,                         //0xCA
     Cmd_setcharge,                               //0xCB
     Cmd_callenvironmentattack,                   //0xCC
-    Cmd_cureifburnedparalysedorpoisoned,         //0xCD
+    Cmd_cureifburnedparalyzedorpoisoned,         //0xCD
     Cmd_settorment,                              //0xCE
     Cmd_jumpifnodamage,                          //0xCF
     Cmd_settaunt,                                //0xD0
@@ -2507,7 +2507,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
              {
                 u8 *synchronizeEffect = &gBattleStruct->synchronizeMoveEffect;
                 *synchronizeEffect = gBattleCommunication[MOVE_EFFECT_BYTE];
-                gHitMarker |= HITMARKER_SYNCHRONISE_EFFECT;
+                gHitMarker |= HITMARKER_SYNCHRONIZE_EFFECT;
              }
             return;
         }
@@ -3626,7 +3626,7 @@ static void MoveValuesCleanUp(void)
     gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
     gBattleCommunication[MISS_TYPE] = 0;
     gHitMarker &= ~HITMARKER_DESTINYBOND;
-    gHitMarker &= ~HITMARKER_SYNCHRONISE_EFFECT;
+    gHitMarker &= ~HITMARKER_SYNCHRONIZE_EFFECT;
 }
 
 static void Cmd_movevaluescleanup(void)
@@ -9116,7 +9116,7 @@ static void Cmd_callenvironmentattack(void)
 }
 
 // Refresh
-static void Cmd_cureifburnedparalysedorpoisoned(void)
+static void Cmd_cureifburnedparalyzedorpoisoned(void)
 {
     if (gBattleMons[gBattlerAttacker].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON))
     {
