@@ -1992,7 +1992,7 @@ enum
     CANCELER_TAUNTED,
     CANCELER_IMPRISONED,
     CANCELER_CONFUSED,
-    CANCELER_PARALYSED,
+    CANCELER_PARALYZED,
     CANCELER_IN_LOVE,
     CANCELER_BIDE,
     CANCELER_THAW,
@@ -2185,7 +2185,7 @@ u8 AtkCanceler_UnableToUseMove(void)
             }
             gBattleStruct->atkCancelerTracker++;
             break;
-        case CANCELER_PARALYSED: // paralysis
+        case CANCELER_PARALYZED: // paralysis
             if ((gBattleMons[gBattlerAttacker].status1 & STATUS1_PARALYSIS) && (Random() % 4) == 0)
             {
                 gProtectStructs[gBattlerAttacker].prlzImmobility = 1;
