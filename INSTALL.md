@@ -339,7 +339,7 @@ Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to
 ### Arch Linux
 Run this command as root to install the necessary packages:
 ```bash
-pacman -S base-devel arm-none-eabi-binutils git libpng
+pacman -S base-devel arm-none-eabi-binutils arm-none-eabi-newlib git libpng
 ```
 Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to-store-pokeemerald-linux).
 <details>
