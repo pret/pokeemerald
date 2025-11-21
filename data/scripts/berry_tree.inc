@@ -39,7 +39,6 @@ BerryTree_EventScript_ChooseBerryToPlant::
 	fadescreen FADE_TO_BLACK
 	closemessage
 	special Bag_ChooseBerry
-	waitstate
 	goto_if_eq VAR_ITEM_ID, 0, BerryTree_EventScript_CancelPlanting
 	removeitem VAR_ITEM_ID
 	call BerryTree_EventScript_PlantBerry
@@ -165,7 +164,6 @@ BerryTree_EventScript_WaterBerry::
 	waitmessage
 	special ObjectEventInteractionWaterBerryTree
 	special DoWateringBerryTreeAnim
-	waitstate
 	message BerryTree_Text_PlantIsDelighted
 	waitmessage
 	waitbuttonpress
