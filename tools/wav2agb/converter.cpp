@@ -99,6 +99,7 @@ static bool wav_rate_override = false;
 
 static bool dpcm_verbose = false;
 static bool dpcm_lookahead_fast = false;
+static bool dpcm_include_padding = true;
 static size_t dpcm_enc_lookahead = 3;
 static const size_t DPCM_BLK_SIZE = 0x40;
 static const std::vector<int8_t> dpcmLookupTable = { 
@@ -235,13 +236,14 @@ static void convert_dpcm_impl(wav_file& wf, InitialSampleWriter writeInitialSamp
         }
 
         size_t innerLoopCount = 1;
+        size_t samples_to_process = dpcm_include_padding ? DPCM_BLK_SIZE : samples_in_block;
         uint8_t outData = 0;
         size_t sampleBufReadLen;
 
         goto initial_loop_enter;
 
         do {
-            if (innerLoopCount >= samples_in_block)
+            if (innerLoopCount >= samples_to_process)
                 break;
             sampleBufReadLen = std::min(dpcm_enc_lookahead, DPCM_BLK_SIZE - innerLoopCount);
             dpcm_lookahead(
@@ -254,7 +256,7 @@ static void convert_dpcm_impl(wav_file& wf, InitialSampleWriter writeInitialSamp
             }
             innerLoopCount += 1;
 initial_loop_enter:
-            if (innerLoopCount >= samples_in_block)
+            if (innerLoopCount >= samples_to_process)
                 break;
             sampleBufReadLen = std::min(dpcm_enc_lookahead, DPCM_BLK_SIZE - innerLoopCount);
             dpcm_lookahead(
@@ -302,6 +304,11 @@ void enable_dpcm_verbose()
 void enable_dpcm_lookahead_fast()
 {
     dpcm_lookahead_fast = true;
+}
+
+void disable_dpcm_padding()
+{
+    dpcm_include_padding = false;
 }
 
 void set_dpcm_lookahead(size_t lookahead)

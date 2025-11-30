@@ -14,6 +14,7 @@ enum class out_type {
 
 void enable_dpcm_verbose();
 void enable_dpcm_lookahead_fast();
+void disable_dpcm_padding();
 void set_dpcm_lookahead(size_t lookahead);
 void set_wav_loop_start(uint32_t start);
 void set_wav_loop_end(uint32_t end);

@@ -18,6 +18,7 @@ static void usage() {
     fprintf(stderr, "-l, --lookahead <amount> | DPCM compression lookahead 1..8 (default: 3)\n");
     fprintf(stderr, "-c, --compress           | compress output with DPCM\n");
     fprintf(stderr, "-f, --fast-compress      | compress output with DPCM fast\n");
+    fprintf(stderr, "--no-pad                 | omit trailing padding in compressed output\n");
     fprintf(stderr, "-b, --binary             | output raw binary instead of assembly\n");
     fprintf(stderr, "--loop-start <pos>       | override loop start (integer)\n");
     fprintf(stderr, "--loop-end <pos>         | override loop end (integer)\n");
@@ -123,6 +124,8 @@ int main(int argc, char *argv[]) {
             } else if (st == "-f" || st == "--compress-fast") {
                 arg_compress = cmp_type::dpcm;
                 enable_dpcm_lookahead_fast();
+            } else if (st == "--no-pad") {
+                disable_dpcm_padding();
             } else if (st == "-b" || st == "--binary") {
                 arg_output_type = out_type::binary;
             } else if (st == "--verbose") {
