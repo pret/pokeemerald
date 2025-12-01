@@ -41,22 +41,6 @@ enum
     RAY_ANIM_END
 };
 
-#define TAG_DUOFIGHT_GROUDON             30505
-#define TAG_DUOFIGHT_GROUDON_SHOULDER    30506
-#define TAG_DUOFIGHT_GROUDON_CLAW        30507
-#define TAG_DUOFIGHT_KYOGRE              30508
-#define TAG_DUOFIGHT_KYOGRE_PECTORAL_FIN 30509
-#define TAG_DUOFIGHT_KYOGRE_DORSAL_FIN   30510
-#define TAG_FLIGHT_SMOKE                 30555
-#define TAG_DESCENDS_RAYQUAZA            30556
-#define TAG_DESCENDS_RAYQUAZA_TAIL       30557
-#define TAG_CHASE_GROUDON                30565
-#define TAG_CHASE_GROUDON_TAIL           30566
-#define TAG_CHASE_KYOGRE                 30568
-#define TAG_CHASE_RAYQUAZA               30569
-#define TAG_CHASE_RAYQUAZA_TAIL          30570
-#define TAG_CHASE_SPLASH                 30571
-
 #define MAX_SMOKE 10
 
 typedef u8 ALIGNED(4) TilemapBuffer[BG_SCREEN_SIZE];
@@ -312,8 +296,8 @@ static const union AnimCmd *const sAnims_DuoFightPre_Groudon[] =
 
 static const struct SpriteTemplate sSpriteTemplate_DuoFightPre_Groudon =
 {
-    .tileTag = TAG_DUOFIGHT_GROUDON,
-    .paletteTag = TAG_DUOFIGHT_GROUDON,
+    .tileTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_GROUDON,
+    .paletteTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_GROUDON,
     .oam = &sOam_64x64,
     .anims = sAnims_DuoFightPre_Groudon,
     .images = NULL,
@@ -334,8 +318,8 @@ static const union AnimCmd *const sAnims_DuoFightPre_GroudonShoulderKyogreDorsal
 
 static const struct SpriteTemplate sSpriteTemplate_DuoFightPre_GroudonShoulder =
 {
-    .tileTag = TAG_DUOFIGHT_GROUDON_SHOULDER,
-    .paletteTag = TAG_DUOFIGHT_GROUDON,
+    .tileTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_GROUDON_SHOULDER,
+    .paletteTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_GROUDON,
     .oam = &sOam_32x32,
     .anims = sAnims_DuoFightPre_GroudonShoulderKyogreDorsalFin,
     .images = NULL,
@@ -356,8 +340,8 @@ static const union AnimCmd *const sAnims_DuoFightPre_GroudonClaw[] =
 
 static const struct SpriteTemplate sSpriteTemplate_DuoFightPre_GroudonClaw =
 {
-    .tileTag = TAG_DUOFIGHT_GROUDON_CLAW,
-    .paletteTag = TAG_DUOFIGHT_GROUDON,
+    .tileTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_GROUDON_CLAW,
+    .paletteTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_GROUDON,
     .oam = &sOam_64x32,
     .anims = sAnims_DuoFightPre_GroudonClaw,
     .images = NULL,
@@ -444,8 +428,8 @@ static const union AnimCmd *const sAnims_DuoFightPre_Kyogre[] =
 
 static const struct SpriteTemplate sSpriteTemplate_DuoFightPre_Kyogre =
 {
-    .tileTag = TAG_DUOFIGHT_KYOGRE,
-    .paletteTag = TAG_DUOFIGHT_KYOGRE,
+    .tileTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_KYOGRE,
+    .paletteTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_KYOGRE,
     .oam = &sOam_32x16,
     .anims = sAnims_DuoFightPre_Kyogre,
     .images = NULL,
@@ -469,8 +453,8 @@ static const union AnimCmd *const sAnims_DuoFightPre_KyogrePectoralFin[] =
 
 static const struct SpriteTemplate sSpriteTemplate_DuoFightPre_KyogrePectoralFin =
 {
-    .tileTag = TAG_DUOFIGHT_KYOGRE_PECTORAL_FIN,
-    .paletteTag = TAG_DUOFIGHT_KYOGRE,
+    .tileTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_KYOGRE_PECTORAL_FIN,
+    .paletteTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_KYOGRE,
     .oam = &sOam_16x8,
     .anims = sAnims_DuoFightPre_KyogrePectoralFin,
     .images = NULL,
@@ -480,8 +464,8 @@ static const struct SpriteTemplate sSpriteTemplate_DuoFightPre_KyogrePectoralFin
 
 static const struct SpriteTemplate sSpriteTemplate_DuoFightPre_KyogreDorsalFin =
 {
-    .tileTag = TAG_DUOFIGHT_KYOGRE_DORSAL_FIN,
-    .paletteTag = TAG_DUOFIGHT_KYOGRE,
+    .tileTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_KYOGRE_DORSAL_FIN,
+    .paletteTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_KYOGRE,
     .oam = &sOam_32x32,
     .anims = sAnims_DuoFightPre_GroudonShoulderKyogreDorsalFin,
     .images = NULL,
@@ -553,18 +537,18 @@ static const union AnimCmd *const sAnims_DuoFight_Groudon[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_DuoFight_Groudon =
 {
-    gRaySceneDuoFight_Groudon_Gfx, 0x3000, TAG_DUOFIGHT_GROUDON
+    gRaySceneDuoFight_Groudon_Gfx, 0x3000, TAG_RAYQUAZA_SCENE_DUOFIGHT_GROUDON
 };
 
 static const struct CompressedSpritePalette sSpritePal_DuoFight_Groudon =
 {
-    gRaySceneDuoFight_Groudon_Pal, TAG_DUOFIGHT_GROUDON
+    gRaySceneDuoFight_Groudon_Pal, TAG_RAYQUAZA_SCENE_DUOFIGHT_GROUDON
 };
 
 static const struct SpriteTemplate sSpriteTemplate_DuoFight_Groudon =
 {
-    .tileTag = TAG_DUOFIGHT_GROUDON,
-    .paletteTag = TAG_DUOFIGHT_GROUDON,
+    .tileTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_GROUDON,
+    .paletteTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_GROUDON,
     .oam = &sOam_64x64,
     .anims = sAnims_DuoFight_Groudon,
     .images = NULL,
@@ -585,13 +569,13 @@ static const union AnimCmd *const sAnims_DuoFight_GroudonShoulderKyogreDorsalFin
 
 static const struct CompressedSpriteSheet sSpriteSheet_DuoFight_GroudonShoulder =
 {
-    gRaySceneDuoFight_GroudonShoulder_Gfx, 0x200, TAG_DUOFIGHT_GROUDON_SHOULDER
+    gRaySceneDuoFight_GroudonShoulder_Gfx, 0x200, TAG_RAYQUAZA_SCENE_DUOFIGHT_GROUDON_SHOULDER
 };
 
 static const struct SpriteTemplate sSpriteTemplate_DuoFight_GroudonShoulder =
 {
-    .tileTag = TAG_DUOFIGHT_GROUDON_SHOULDER,
-    .paletteTag = TAG_DUOFIGHT_GROUDON,
+    .tileTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_GROUDON_SHOULDER,
+    .paletteTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_GROUDON,
     .oam = &sOam_32x32,
     .anims = sAnims_DuoFight_GroudonShoulderKyogreDorsalFin,
     .images = NULL,
@@ -612,13 +596,13 @@ static const union AnimCmd *const sAnims_DuoFight_GroudonClaw[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_DuoFight_GroudonClaw =
 {
-    gRaySceneDuoFight_GroudonClaw_Gfx, 0x400, TAG_DUOFIGHT_GROUDON_CLAW
+    gRaySceneDuoFight_GroudonClaw_Gfx, 0x400, TAG_RAYQUAZA_SCENE_DUOFIGHT_GROUDON_CLAW
 };
 
 static const struct SpriteTemplate sSpriteTemplate_DuoFight_GroudonClaw =
 {
-    .tileTag = TAG_DUOFIGHT_GROUDON_CLAW,
-    .paletteTag = TAG_DUOFIGHT_GROUDON,
+    .tileTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_GROUDON_CLAW,
+    .paletteTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_GROUDON,
     .oam = &sOam_64x32,
     .anims = sAnims_DuoFight_GroudonClaw,
     .images = NULL,
@@ -704,18 +688,18 @@ static const union AnimCmd *const sAnims_DuoFight_Kyogre[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_DuoFight_Kyogre =
 {
-    gRaySceneDuoFight_Kyogre_Gfx, 0xF00, TAG_DUOFIGHT_KYOGRE
+    gRaySceneDuoFight_Kyogre_Gfx, 0xF00, TAG_RAYQUAZA_SCENE_DUOFIGHT_KYOGRE
 };
 
 static const struct CompressedSpritePalette sSpritePal_DuoFight_Kyogre =
 {
-    gRaySceneDuoFight_Kyogre_Pal, TAG_DUOFIGHT_KYOGRE
+    gRaySceneDuoFight_Kyogre_Pal, TAG_RAYQUAZA_SCENE_DUOFIGHT_KYOGRE
 };
 
 static const struct SpriteTemplate sSpriteTemplate_DuoFight_Kyogre =
 {
-    .tileTag = TAG_DUOFIGHT_KYOGRE,
-    .paletteTag = TAG_DUOFIGHT_KYOGRE,
+    .tileTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_KYOGRE,
+    .paletteTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_KYOGRE,
     .oam = &sOam_32x16,
     .anims = sAnims_DuoFight_Kyogre,
     .images = NULL,
@@ -739,13 +723,13 @@ static const union AnimCmd *const sAnims_DuoFight_KyogrePectoralFin[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_DuoFight_KyogrePectoralFin =
 {
-    gRaySceneDuoFight_KyogrePectoralFin_Gfx, 0xC0, TAG_DUOFIGHT_KYOGRE_PECTORAL_FIN
+    gRaySceneDuoFight_KyogrePectoralFin_Gfx, 0xC0, TAG_RAYQUAZA_SCENE_DUOFIGHT_KYOGRE_PECTORAL_FIN
 };
 
 static const struct SpriteTemplate sSpriteTemplate_DuoFight_KyogrePectoralFin =
 {
-    .tileTag = TAG_DUOFIGHT_KYOGRE_PECTORAL_FIN,
-    .paletteTag = TAG_DUOFIGHT_KYOGRE,
+    .tileTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_KYOGRE_PECTORAL_FIN,
+    .paletteTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_KYOGRE,
     .oam = &sOam_16x8,
     .anims = sAnims_DuoFight_KyogrePectoralFin,
     .images = NULL,
@@ -755,13 +739,13 @@ static const struct SpriteTemplate sSpriteTemplate_DuoFight_KyogrePectoralFin =
 
 static const struct CompressedSpriteSheet sSpriteSheet_DuoFight_KyogreDorsalFin =
 {
-    gRaySceneDuoFight_KyogreDorsalFin_Gfx, 0x200, TAG_DUOFIGHT_KYOGRE_DORSAL_FIN
+    gRaySceneDuoFight_KyogreDorsalFin_Gfx, 0x200, TAG_RAYQUAZA_SCENE_DUOFIGHT_KYOGRE_DORSAL_FIN
 };
 
 static const struct SpriteTemplate sSpriteTemplate_DuoFight_KyogreDorsalFin =
 {
-    .tileTag = TAG_DUOFIGHT_KYOGRE_DORSAL_FIN,
-    .paletteTag = TAG_DUOFIGHT_KYOGRE,
+    .tileTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_KYOGRE_DORSAL_FIN,
+    .paletteTag = TAG_RAYQUAZA_SCENE_DUOFIGHT_KYOGRE,
     .oam = &sOam_32x32,
     .anims = sAnims_DuoFight_GroudonShoulderKyogreDorsalFin,
     .images = NULL,
@@ -826,18 +810,18 @@ static const union AffineAnimCmd *const sAffineAnims_TakesFlight_Smoke[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_TakesFlight_Smoke =
 {
-    gRaySceneTakesFlight_Smoke_Gfx, 0x100, TAG_FLIGHT_SMOKE
+    gRaySceneTakesFlight_Smoke_Gfx, 0x100, TAG_RAYQUAZA_SCENE_FLIGHT_SMOKE
 };
 
 static const struct CompressedSpritePalette sSpritePal_TakesFlight_Smoke =
 {
-    gRaySceneTakesFlight_Smoke_Pal, TAG_FLIGHT_SMOKE
+    gRaySceneTakesFlight_Smoke_Pal, TAG_RAYQUAZA_SCENE_FLIGHT_SMOKE
 };
 
 static const struct SpriteTemplate sSpriteTemplate_TakesFlight_Smoke =
 {
-    .tileTag = TAG_FLIGHT_SMOKE,
-    .paletteTag = TAG_FLIGHT_SMOKE,
+    .tileTag = TAG_RAYQUAZA_SCENE_FLIGHT_SMOKE,
+    .paletteTag = TAG_RAYQUAZA_SCENE_FLIGHT_SMOKE,
     .oam = &sOam_32x16,
     .anims = sAnims_TakesFlight_Smoke,
     .images = NULL,
@@ -925,23 +909,23 @@ static const union AnimCmd *const sAnims_Descends_RayquazaTail[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_Descends_Rayquaza =
 {
-    gRaySceneDescends_Rayquaza_Gfx, 0x1000, TAG_DESCENDS_RAYQUAZA
+    gRaySceneDescends_Rayquaza_Gfx, 0x1000, TAG_RAYQUAZA_SCENE_DESCENDS_RAYQUAZA
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_Descends_RayquazaTail =
 {
-    gRaySceneDescends_RayquazaTail_Gfx, 0x200, TAG_DESCENDS_RAYQUAZA_TAIL
+    gRaySceneDescends_RayquazaTail_Gfx, 0x200, TAG_RAYQUAZA_SCENE_DESCENDS_RAYQUAZA_TAIL
 };
 
 static const struct CompressedSpritePalette sSpritePal_Descends_Rayquaza =
 {
-    gRaySceneTakesFlight_Rayquaza_Pal, TAG_DESCENDS_RAYQUAZA // "Takes flight" palette re-used here
+    gRaySceneTakesFlight_Rayquaza_Pal, TAG_RAYQUAZA_SCENE_DESCENDS_RAYQUAZA // "Takes flight" palette re-used here
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Descends_Rayquaza =
 {
-    .tileTag = TAG_DESCENDS_RAYQUAZA,
-    .paletteTag = TAG_DESCENDS_RAYQUAZA,
+    .tileTag = TAG_RAYQUAZA_SCENE_DESCENDS_RAYQUAZA,
+    .paletteTag = TAG_RAYQUAZA_SCENE_DESCENDS_RAYQUAZA,
     .oam = &sOam_64x64,
     .anims = sAnims_Descends_Rayquaza,
     .images = NULL,
@@ -951,8 +935,8 @@ static const struct SpriteTemplate sSpriteTemplate_Descends_Rayquaza =
 
 static const struct SpriteTemplate sSpriteTemplate_Descends_RayquazaTail =
 {
-    .tileTag = TAG_DESCENDS_RAYQUAZA_TAIL,
-    .paletteTag = TAG_DESCENDS_RAYQUAZA,
+    .tileTag = TAG_RAYQUAZA_SCENE_DESCENDS_RAYQUAZA_TAIL,
+    .paletteTag = TAG_RAYQUAZA_SCENE_DESCENDS_RAYQUAZA,
     .oam = &sOam_16x32,
     .anims = sAnims_Descends_RayquazaTail,
     .images = NULL,
@@ -1139,58 +1123,58 @@ static const union AnimCmd *const sAnims_ChasesAway_KyogreSplash[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_ChasesAway_Groudon =
 {
-    gRaySceneChasesAway_Groudon_Gfx, 0x1800, TAG_CHASE_GROUDON
+    gRaySceneChasesAway_Groudon_Gfx, 0x1800, TAG_RAYQUAZA_SCENE_CHASE_GROUDON
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_ChasesAway_GroudonTail =
 {
-    gRaySceneChasesAway_GroudonTail_Gfx, 0x80, TAG_CHASE_GROUDON_TAIL
+    gRaySceneChasesAway_GroudonTail_Gfx, 0x80, TAG_RAYQUAZA_SCENE_CHASE_GROUDON_TAIL
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_ChasesAway_Kyogre =
 {
-    gRaySceneChasesAway_Kyogre_Gfx, 0x600, TAG_CHASE_KYOGRE
+    gRaySceneChasesAway_Kyogre_Gfx, 0x600, TAG_RAYQUAZA_SCENE_CHASE_KYOGRE
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_ChasesAway_Rayquaza =
 {
-    gRaySceneChasesAway_Rayquaza_Gfx, 0x2000, TAG_CHASE_RAYQUAZA
+    gRaySceneChasesAway_Rayquaza_Gfx, 0x2000, TAG_RAYQUAZA_SCENE_CHASE_RAYQUAZA
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_ChasesAway_RayquazaTail =
 {
-    gRaySceneChasesAway_RayquazaTail_Gfx, 0x800, TAG_CHASE_RAYQUAZA_TAIL
+    gRaySceneChasesAway_RayquazaTail_Gfx, 0x800, TAG_RAYQUAZA_SCENE_CHASE_RAYQUAZA_TAIL
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_ChasesAway_KyogreSplash =
 {
-    gRaySceneChasesAway_KyogreSplash_Gfx, 0x300, TAG_CHASE_SPLASH
+    gRaySceneChasesAway_KyogreSplash_Gfx, 0x300, TAG_RAYQUAZA_SCENE_CHASE_SPLASH
 };
 
 static const struct CompressedSpritePalette sSpritePal_ChasesAway_Groudon =
 {
-    gRaySceneChasesAway_Groudon_Pal, TAG_CHASE_GROUDON
+    gRaySceneChasesAway_Groudon_Pal, TAG_RAYQUAZA_SCENE_CHASE_GROUDON
 };
 
 static const struct CompressedSpritePalette sSpritePal_ChasesAway_Kyogre =
 {
-    gRaySceneChasesAway_Kyogre_Pal, TAG_CHASE_KYOGRE
+    gRaySceneChasesAway_Kyogre_Pal, TAG_RAYQUAZA_SCENE_CHASE_KYOGRE
 };
 
 static const struct CompressedSpritePalette sSpritePal_ChasesAway_Rayquaza =
 {
-    gRaySceneChasesAway_Rayquaza_Pal, TAG_CHASE_RAYQUAZA
+    gRaySceneChasesAway_Rayquaza_Pal, TAG_RAYQUAZA_SCENE_CHASE_RAYQUAZA
 };
 
 static const struct CompressedSpritePalette sSpritePal_ChasesAway_KyogreSplash =
 {
-    gRaySceneChasesAway_KyogreSplash_Pal, TAG_CHASE_SPLASH
+    gRaySceneChasesAway_KyogreSplash_Pal, TAG_RAYQUAZA_SCENE_CHASE_SPLASH
 };
 
 static const struct SpriteTemplate sSpriteTemplate_ChasesAway_Groudon =
 {
-    .tileTag = TAG_CHASE_GROUDON,
-    .paletteTag = TAG_CHASE_GROUDON,
+    .tileTag = TAG_RAYQUAZA_SCENE_CHASE_GROUDON,
+    .paletteTag = TAG_RAYQUAZA_SCENE_CHASE_GROUDON,
     .oam = &sOam_64x64,
     .anims = sAnims_ChasesAway_Groudon,
     .images = NULL,
@@ -1200,8 +1184,8 @@ static const struct SpriteTemplate sSpriteTemplate_ChasesAway_Groudon =
 
 static const struct SpriteTemplate sSpriteTemplate_ChasesAway_GroudonTail =
 {
-    .tileTag = TAG_CHASE_GROUDON_TAIL,
-    .paletteTag = TAG_CHASE_GROUDON,
+    .tileTag = TAG_RAYQUAZA_SCENE_CHASE_GROUDON_TAIL,
+    .paletteTag = TAG_RAYQUAZA_SCENE_CHASE_GROUDON,
     .oam = &sOam_16x16,
     .anims = sAnims_ChasesAway_GroudonTail,
     .images = NULL,
@@ -1211,8 +1195,8 @@ static const struct SpriteTemplate sSpriteTemplate_ChasesAway_GroudonTail =
 
 static const struct SpriteTemplate sSpriteTemplate_ChasesAway_Kyogre =
 {
-    .tileTag = TAG_CHASE_KYOGRE,
-    .paletteTag = TAG_CHASE_KYOGRE,
+    .tileTag = TAG_RAYQUAZA_SCENE_CHASE_KYOGRE,
+    .paletteTag = TAG_RAYQUAZA_SCENE_CHASE_KYOGRE,
     .oam = &sOam_32x32,
     .anims = sAnims_ChasesAway_Kyogre,
     .images = NULL,
@@ -1222,8 +1206,8 @@ static const struct SpriteTemplate sSpriteTemplate_ChasesAway_Kyogre =
 
 static const struct SpriteTemplate sSpriteTemplate_ChasesAway_Rayquaza =
 {
-    .tileTag = TAG_CHASE_RAYQUAZA,
-    .paletteTag = TAG_CHASE_RAYQUAZA,
+    .tileTag = TAG_RAYQUAZA_SCENE_CHASE_RAYQUAZA,
+    .paletteTag = TAG_RAYQUAZA_SCENE_CHASE_RAYQUAZA,
     .oam = &sOam_64x64,
     .anims = sAnims_ChasesAway_Rayquaza,
     .images = NULL,
@@ -1233,8 +1217,8 @@ static const struct SpriteTemplate sSpriteTemplate_ChasesAway_Rayquaza =
 
 static const struct SpriteTemplate sSpriteTemplate_ChasesAway_RayquazaTail =
 {
-    .tileTag = TAG_CHASE_RAYQUAZA_TAIL,
-    .paletteTag = TAG_CHASE_RAYQUAZA,
+    .tileTag = TAG_RAYQUAZA_SCENE_CHASE_RAYQUAZA_TAIL,
+    .paletteTag = TAG_RAYQUAZA_SCENE_CHASE_RAYQUAZA,
     .oam = &sOam_32x32,
     .anims = sAnims_ChasesAway_RayquazaTail,
     .images = NULL,
@@ -1244,8 +1228,8 @@ static const struct SpriteTemplate sSpriteTemplate_ChasesAway_RayquazaTail =
 
 static const struct SpriteTemplate sSpriteTemplate_ChasesAway_KyogreSplash =
 {
-    .tileTag = TAG_CHASE_SPLASH,
-    .paletteTag = TAG_CHASE_SPLASH,
+    .tileTag = TAG_RAYQUAZA_SCENE_CHASE_SPLASH,
+    .paletteTag = TAG_RAYQUAZA_SCENE_CHASE_SPLASH,
     .oam = &sOam_32x8,
     .anims = sAnims_ChasesAway_KyogreSplash,
     .images = NULL,

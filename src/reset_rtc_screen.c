@@ -19,8 +19,6 @@
 #include "gpu_regs.h"
 #include "constants/rgb.h"
 
-#define PALTAG_ARROW 0x1000
-
 // Task data for the Task_ResetRtc_* series of tasks, when setting the time on the clock
 // Data from these tasks is also used by the cursors and the main task (Task_ResetRtcScreen)
 enum {
@@ -188,7 +186,7 @@ static const struct SpriteFrameImage sPicTable_Arrow[] =
 
 static const struct SpritePalette sSpritePalette_Arrow =
 {
-    sArrow_Pal, PALTAG_ARROW
+    sArrow_Pal, PAL_TAG_RESET_RTC_SCREEN_ARROW
 };
 
 static const union AnimCmd sAnim_Arrow_Down[] =
@@ -225,7 +223,7 @@ static const union AnimCmd *const sAnims_Arrow[] =
 static const struct SpriteTemplate sSpriteTemplate_Arrow =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_ARROW,
+    .paletteTag = PAL_TAG_RESET_RTC_SCREEN_ARROW,
     .oam = &sOamData_Arrow,
     .anims = sAnims_Arrow,
     .images = sPicTable_Arrow,

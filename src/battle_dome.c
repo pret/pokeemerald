@@ -40,8 +40,6 @@
 #include "constants/battle_frontier.h"
 #include "constants/rgb.h"
 
-#define TAG_BUTTONS 0
-
 // Enough space to hold 2 match info cards worth of trainers and their parties
 #define NUM_INFOCARD_SPRITES ((FRONTIER_PARTY_SIZE + 1) * 4)
 #define NUM_INFOCARD_TRAINERS 2
@@ -906,14 +904,14 @@ static const struct ScanlineEffectParams sTourneyTreeScanlineEffectParams =
 
 static const struct CompressedSpriteSheet sTourneyTreeButtonsSpriteSheet[] =
 {
-    {.data = gDomeTourneyTreeButtons_Gfx, .size = 0x0600, .tag = TAG_BUTTONS},
+    {.data = gDomeTourneyTreeButtons_Gfx, .size = 0x0600, .tag = TAG_BATTLE_DOME_TOURNEY_TREE_BUTTONS},
     {},
 };
 
 // Unused
 static const struct CompressedSpritePalette sTourneyTreeButtonsSpritePal[] =
 {
-    {.data = gDomeTourneyTreeButtons_Pal, .tag = TAG_BUTTONS},
+    {.data = gDomeTourneyTreeButtons_Pal, .tag = TAG_BATTLE_DOME_TOURNEY_TREE_BUTTONS},
     {},
 };
 
@@ -1006,7 +1004,7 @@ static const union AnimCmd *const sSpriteAnimTable_TourneyTreePokeball[] =
 // Sprite template for the pokeballs on the tourney tree that act as buttons to view a trainer/match info card
 static const struct SpriteTemplate sTourneyTreePokeballSpriteTemplate =
 {
-    .tileTag = TAG_BUTTONS,
+    .tileTag = TAG_BATTLE_DOME_TOURNEY_TREE_BUTTONS,
     .paletteTag = TAG_NONE,
     .oam = &sOamData_TourneyTreePokeball,
     .anims = sSpriteAnimTable_TourneyTreePokeball,
@@ -1035,7 +1033,7 @@ static const union AnimCmd *const sSpriteAnimTable_TourneyTreeCancelButton[] =
 
 static const struct SpriteTemplate sCancelButtonSpriteTemplate =
 {
-    .tileTag = TAG_BUTTONS,
+    .tileTag = TAG_BATTLE_DOME_TOURNEY_TREE_BUTTONS,
     .paletteTag = TAG_NONE,
     .oam = &sOamData_TourneyTreeCloseButton,
     .anims = sSpriteAnimTable_TourneyTreeCancelButton,
@@ -1064,7 +1062,7 @@ static const union AnimCmd *const sSpriteAnimTable_TourneyTreeExitButton[] =
 
 static const struct SpriteTemplate sExitButtonSpriteTemplate =
 {
-    .tileTag = TAG_BUTTONS,
+    .tileTag = TAG_BATTLE_DOME_TOURNEY_TREE_BUTTONS,
     .paletteTag = TAG_NONE,
     .oam = &sOamData_TourneyTreeCloseButton,
     .anims = sSpriteAnimTable_TourneyTreeExitButton,
@@ -1111,7 +1109,7 @@ static const union AnimCmd *const sSpriteAnimTable_HorizontalScrollArrow[] =
 
 static const struct SpriteTemplate sHorizontalScrollArrowSpriteTemplate =
 {
-    .tileTag = TAG_BUTTONS,
+    .tileTag = TAG_BATTLE_DOME_TOURNEY_TREE_BUTTONS,
     .paletteTag = TAG_NONE,
     .oam = &sOamData_HorizontalScrollArrow,
     .anims = sSpriteAnimTable_HorizontalScrollArrow,
@@ -1122,7 +1120,7 @@ static const struct SpriteTemplate sHorizontalScrollArrowSpriteTemplate =
 
 static const struct SpriteTemplate sVerticalScrollArrowSpriteTemplate =
 {
-    .tileTag = TAG_BUTTONS,
+    .tileTag = TAG_BATTLE_DOME_TOURNEY_TREE_BUTTONS,
     .paletteTag = TAG_NONE,
     .oam = &sOamData_VerticalScrollArrow,
     .anims = sSpriteAnimTable_VerticalScrollArrow,

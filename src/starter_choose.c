@@ -30,9 +30,6 @@
 #define STARTER_PKMN_POS_X (DISPLAY_WIDTH / 2)
 #define STARTER_PKMN_POS_Y 64
 
-#define TAG_POKEBALL_SELECT 0x1000
-#define TAG_STARTER_CIRCLE  0x1001
-
 static void CB2_StarterChoose(void);
 static void ClearStarterLabel(void);
 static void Task_StarterChoose(u8 taskId);
@@ -286,7 +283,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_PokeballSelect[] =
     {
         .data = gPokeballSelection_Gfx,
         .size = 0x0800,
-        .tag = TAG_POKEBALL_SELECT
+        .tag = TAG_STARTER_CHOOSE_POKEBALL_SELECT
     },
     {}
 };
@@ -296,7 +293,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_StarterCircle[] =
     {
         .data = sStarterCircle_Gfx,
         .size = 0x0800,
-        .tag = TAG_STARTER_CIRCLE
+        .tag = TAG_STARTER_CHOOSE_STARTER_CIRCLE
     },
     {}
 };
@@ -305,19 +302,19 @@ static const struct SpritePalette sSpritePalettes_StarterChoose[] =
 {
     {
         .data = sPokeballSelection_Pal,
-        .tag = TAG_POKEBALL_SELECT
+        .tag = TAG_STARTER_CHOOSE_POKEBALL_SELECT
     },
     {
         .data = sStarterCircle_Pal,
-        .tag = TAG_STARTER_CIRCLE
+        .tag = TAG_STARTER_CHOOSE_STARTER_CIRCLE
     },
     {},
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Hand =
 {
-    .tileTag = TAG_POKEBALL_SELECT,
-    .paletteTag = TAG_POKEBALL_SELECT,
+    .tileTag = TAG_STARTER_CHOOSE_POKEBALL_SELECT,
+    .paletteTag = TAG_STARTER_CHOOSE_POKEBALL_SELECT,
     .oam = &sOam_Hand,
     .anims = sAnims_Hand,
     .images = NULL,
@@ -327,8 +324,8 @@ static const struct SpriteTemplate sSpriteTemplate_Hand =
 
 static const struct SpriteTemplate sSpriteTemplate_Pokeball =
 {
-    .tileTag = TAG_POKEBALL_SELECT,
-    .paletteTag = TAG_POKEBALL_SELECT,
+    .tileTag = TAG_STARTER_CHOOSE_POKEBALL_SELECT,
+    .paletteTag = TAG_STARTER_CHOOSE_POKEBALL_SELECT,
     .oam = &sOam_Pokeball,
     .anims = sAnims_Pokeball,
     .images = NULL,
@@ -338,8 +335,8 @@ static const struct SpriteTemplate sSpriteTemplate_Pokeball =
 
 static const struct SpriteTemplate sSpriteTemplate_StarterCircle =
 {
-    .tileTag = TAG_STARTER_CIRCLE,
-    .paletteTag = TAG_STARTER_CIRCLE,
+    .tileTag = TAG_STARTER_CHOOSE_STARTER_CIRCLE,
+    .paletteTag = TAG_STARTER_CHOOSE_STARTER_CIRCLE,
     .oam = &sOam_StarterCircle,
     .anims = sAnims_StarterCircle,
     .images = NULL,

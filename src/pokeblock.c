@@ -40,9 +40,6 @@
 #define TILE_HIGHLIGHT_BLUE 0x1005 // Tile number for the bg of a selected menu item
 #define TILE_HIGHLIGHT_RED  0x2005 // Tile number for the bg of a menu item to swap
 
-#define TAG_POKEBLOCK_CASE  14800
-#define TAG_SCROLL_ARROW    1110
-
 #define POKEBLOCK_MAX_FEEL 99
 
 enum {
@@ -921,7 +918,7 @@ static void CreateScrollArrows(void)
     if (sPokeblockMenu->arrowTaskId == TASK_NONE)
     {
         sPokeblockMenu->arrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 0xB0, 8, 0x98, sPokeblockMenu->itemsNo - sPokeblockMenu->maxShowed,
-                                                                               TAG_SCROLL_ARROW, TAG_SCROLL_ARROW, &sSavedPokeblockData.scrollOffset);
+                                                                               TAG_POKEBLOCK_CASE_SCROLL_ARROW, TAG_POKEBLOCK_CASE_SCROLL_ARROW, &sSavedPokeblockData.scrollOffset);
     }
 }
 

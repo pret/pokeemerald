@@ -51,9 +51,6 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-#define TAG_POCKET_SCROLL_ARROW 110
-#define TAG_BAG_SCROLL_ARROW    111
-
 // The buffer for the bag item list needs to be large enough to hold the maximum
 // number of item slots that could fit in a single pocket, + 1 for Cancel.
 // This constant picks the max of the existing pocket sizes.
@@ -366,8 +363,8 @@ static const struct ScrollArrowsTemplate sBagScrollArrowsTemplate = {
     .secondY = 16,
     .fullyUpThreshold = -1,
     .fullyDownThreshold = -1,
-    .tileTag = TAG_BAG_SCROLL_ARROW,
-    .palTag = TAG_BAG_SCROLL_ARROW,
+    .tileTag = TAG_ITEM_MENU_SCROLL_ARROW,
+    .palTag = TAG_ITEM_MENU_SCROLL_ARROW,
     .palNum = 0,
 };
 
@@ -1033,8 +1030,8 @@ static void CreatePocketScrollArrowPair(void)
             12,
             148,
             gBagMenu->numItemStacks[gBagPosition.pocket] - gBagMenu->numShownItems[gBagPosition.pocket],
-            TAG_POCKET_SCROLL_ARROW,
-            TAG_POCKET_SCROLL_ARROW,
+            TAG_ITEM_MENU_POCKET_SCROLL_ARROW,
+            TAG_ITEM_MENU_POCKET_SCROLL_ARROW,
             &gBagPosition.scrollPosition[gBagPosition.pocket]);
 }
 
