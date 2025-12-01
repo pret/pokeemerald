@@ -382,7 +382,6 @@ void convert(const std::string& wav_file_str, const std::string& out_file_str,
     else
         throw std::runtime_error("convert: invalid compression type");
 
-    // Calculate pitch for display/comment purposes
     double pitch;
     if (wf.midiKey == 60 && wf.tuning == 0.0) {
         pitch = wf.sampleRate;
@@ -414,7 +413,7 @@ void convert(const std::string& wav_file_str, const std::string& out_file_str,
         // Bytes 8-11: loop start
         bin_write_u32_le(bin_data, wf.loopStart);
 
-        // Bytes 12-15: loop end (adjusted to match aif2pcm format: num_samples - 1)
+        // Bytes 12-15: loop end
         // wf.loopEnd is the exclusive end position; binary format expects (end - 1)
         bin_write_u32_le(bin_data, wf.loopEnd > 0 ? wf.loopEnd - 1 : 0);
 
