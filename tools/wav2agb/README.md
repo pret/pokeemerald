@@ -6,7 +6,7 @@ This copy has been slightly modified from [ipatix's original implementation](htt
 2. Support reading an override "pitch" value from a custom `agbp` RIFF chunk.
    - This is needed to properly match some samples, due to float-point rounding errors when attempting to infer the pitch/sample rate from the .wav file's sample rate.
    - If the custom `agbp` chunk isn't present, it will simply use the .wav's sample rate to calculate this "pitch" value.
-3. Omits trailing padding from compressed output.
+3. Optionally omits trailing padding from compressed output.
 
 Usage: 
 ```
@@ -17,6 +17,7 @@ Options:
 -l, --lookahead <amount> | DPCM compression lookahead 1..8 (default: 3)
 -c, --compress           | compress output with DPCM
 -f, --fast-compress      | compress output with DPCM fast
+--no-pad                 | omit trailing padding in compressed output
 -b, --binary             | output raw binary instead of assembly
 --loop-start <pos>       | override loop start (integer)
 --loop-end <pos>         | override loop end (integer)
