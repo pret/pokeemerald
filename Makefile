@@ -139,7 +139,7 @@ AUTO_GEN_TARGETS :=
 include make_tools.mk
 # Tool executables
 GFX       := $(TOOLS_DIR)/gbagfx/gbagfx$(EXE)
-AIF       := $(TOOLS_DIR)/aif2pcm/aif2pcm$(EXE)
+WAV2AGB   := $(TOOLS_DIR)/wav2agb/wav2agb$(EXE)
 MID       := $(TOOLS_DIR)/mid2agb/mid2agb$(EXE)
 SCANINC   := $(TOOLS_DIR)/scaninc/scaninc$(EXE)
 PREPROC   := $(TOOLS_DIR)/preproc/preproc$(EXE)
@@ -272,7 +272,7 @@ generated: $(AUTO_GEN_TARGETS)
 %.s:   ;
 %.png: ;
 %.pal: ;
-%.aif: ;
+%.wav: ;
 
 %.1bpp:   %.png  ; $(GFX) $< $@
 %.4bpp:   %.png  ; $(GFX) $< $@

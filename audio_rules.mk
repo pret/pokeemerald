@@ -17,12 +17,13 @@ $(MID_BUILDDIR)/%.o: $(MID_ASM_DIR)/%.s
 	$(AS) $(ASFLAGS) -I sound -o $@ $<
 
 # Compressed cries
-$(CRY_BIN_DIR)/%.bin: $(CRY_SUBDIR)/%.aif 
-	$(AIF) $< $@ --compress
+$(CRY_BIN_DIR)/%.bin: $(CRY_SUBDIR)/%.wav
+# NOTE: If using ipatix's High Quality Audio Mixer, remove "--no-pad" below.
+	$(WAV2AGB) -b -c -l 1 --no-pad $< $@
 
 # Uncompressed sounds
-$(SOUND_BIN_DIR)/%.bin: sound/%.aif 
-	$(AIF) $< $@
+$(SOUND_BIN_DIR)/%.bin: sound/%.wav 
+	$(WAV2AGB) -b $< $@
 
 # For each line in midi.cfg, we do some trickery to convert it into a make rule for the `.mid` file described on the line
 # Data following the colon in said file corresponds to arguments passed into mid2agb
