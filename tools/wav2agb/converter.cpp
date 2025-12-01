@@ -84,6 +84,11 @@ static void convert_uncompressed_bin(wav_file& wf, std::vector<uint8_t>& data)
 
         bin_write_u8(data, static_cast<uint8_t>(s));
     }
+
+    // Align to 4 bytes.
+    while (data.size() % 4 != 0) {
+        bin_write_u8(data, 0);
+    }
 }
 
 static uint32_t wav_loop_start;
