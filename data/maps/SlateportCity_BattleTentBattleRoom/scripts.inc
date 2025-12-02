@@ -59,7 +59,6 @@ SlateportCity_BattleTentBattleRoom_EventScript_EnterRoom::
 	setvar VAR_0x8004, SPECIAL_BATTLE_FACTORY
 	setvar VAR_0x8005, 0
 	special DoSpecialTrainerBattle
-	waitstate
 	switch VAR_RESULT
 	case 1, SlateportCity_BattleTentBattleRoom_EventScript_DefeatedOpponent
 SlateportCity_BattleTent_EventScript_WarpToLobbyLost::
