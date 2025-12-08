@@ -8,9 +8,6 @@
 #include "decompress.h"
 #include "international_string_util.h"
 
-#define GFXTAG_ARROW 10
-#define PALTAG_ARROW 20
-
 struct PokenavListMenuWindow {
     u8 bg;
     u8 fillValue;
@@ -770,7 +767,7 @@ static const struct CompressedSpriteSheet sListArrowSpriteSheets[] =
     {
         .data = sListArrow_Gfx,
         .size = 0xC0,
-        .tag = GFXTAG_ARROW
+        .tag = GFX_TAG_POKENAV_LIST_ARROW
     }
 };
 
@@ -778,7 +775,7 @@ static const struct SpritePalette sListArrowPalettes[] =
 {
     {
         .data = sListArrow_Pal,
-        .tag = PALTAG_ARROW
+        .tag = PAL_TAG_POKENAV_LIST_ARROW
     },
     {}
 };
@@ -799,8 +796,8 @@ static const struct OamData sOamData_RightArrow =
 
 static const struct SpriteTemplate sSpriteTemplate_RightArrow =
 {
-    .tileTag = GFXTAG_ARROW,
-    .paletteTag = PALTAG_ARROW,
+    .tileTag = GFX_TAG_POKENAV_LIST_ARROW,
+    .paletteTag = PAL_TAG_POKENAV_LIST_ARROW,
     .oam = &sOamData_RightArrow,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -824,8 +821,8 @@ static const struct OamData sOamData_UpDownArrow =
 
 static const struct SpriteTemplate sSpriteTemplate_UpDownArrow =
 {
-    .tileTag = GFXTAG_ARROW,
-    .paletteTag = PALTAG_ARROW,
+    .tileTag = GFX_TAG_POKENAV_LIST_ARROW,
+    .paletteTag = PAL_TAG_POKENAV_LIST_ARROW,
     .oam = &sOamData_UpDownArrow,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -869,8 +866,8 @@ static void DestroyListArrows(struct PokenavListSub *list)
     DestroySprite(list->rightArrow);
     DestroySprite(list->upArrow);
     DestroySprite(list->downArrow);
-    FreeSpriteTilesByTag(GFXTAG_ARROW);
-    FreeSpritePaletteByTag(PALTAG_ARROW);
+    FreeSpriteTilesByTag(GFX_TAG_POKENAV_LIST_ARROW);
+    FreeSpritePaletteByTag(PAL_TAG_POKENAV_LIST_ARROW);
 }
 
 static void ToggleListArrows(struct PokenavListSub *list, bool32 invisible)

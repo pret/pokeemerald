@@ -51,10 +51,6 @@ static void SpriteCB_AMIndicator(struct Sprite *sprite);
 #define tPeriod          data[5]
 #define tMoveSpeed       data[6]
 
-#define GFXTAG_WALL_CLOCK_HAND   0x1000
-#define PALTAG_WALL_CLOCK_MALE   0x1000
-#define PALTAG_WALL_CLOCK_FEMALE 0x1001
-
 enum {
     PERIOD_AM,
     PERIOD_PM,
@@ -132,7 +128,7 @@ static const struct BgTemplate sBgTemplates[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_ClockHand =
 {
-    sHand_Gfx, 0x2000, GFXTAG_WALL_CLOCK_HAND
+    sHand_Gfx, 0x2000, GFX_TAG_WALL_CLOCK_HAND
 };
 
 static const u8 sUnused[8] = {0};
@@ -141,11 +137,11 @@ static const struct SpritePalette sSpritePalettes_Clock[] =
 {
     {
         .data = gWallClockMale_Pal,
-        .tag = PALTAG_WALL_CLOCK_MALE
+        .tag = PAL_TAG_WALL_CLOCK_MALE
     },
     {
         .data = gWallClockFemale_Pal,
-        .tag = PALTAG_WALL_CLOCK_FEMALE
+        .tag = PAL_TAG_WALL_CLOCK_FEMALE
     },
     {}
 };
@@ -182,8 +178,8 @@ static const union AnimCmd *const sAnims_HourHand[] =
 
 static const struct SpriteTemplate sSpriteTemplate_MinuteHand =
 {
-    .tileTag = GFXTAG_WALL_CLOCK_HAND,
-    .paletteTag = PALTAG_WALL_CLOCK_MALE,
+    .tileTag = GFX_TAG_WALL_CLOCK_HAND,
+    .paletteTag = PAL_TAG_WALL_CLOCK_MALE,
     .oam = &sOam_ClockHand,
     .anims = sAnims_MinuteHand,
     .images = NULL,
@@ -193,8 +189,8 @@ static const struct SpriteTemplate sSpriteTemplate_MinuteHand =
 
 static const struct SpriteTemplate sSpriteTemplate_HourHand =
 {
-    .tileTag = GFXTAG_WALL_CLOCK_HAND,
-    .paletteTag = PALTAG_WALL_CLOCK_MALE,
+    .tileTag = GFX_TAG_WALL_CLOCK_HAND,
+    .paletteTag = PAL_TAG_WALL_CLOCK_MALE,
     .oam = &sOam_ClockHand,
     .anims = sAnims_HourHand,
     .images = NULL,
@@ -234,8 +230,8 @@ static const union AnimCmd *const sAnims_AM[] =
 
 static const struct SpriteTemplate sSpriteTemplate_PM =
 {
-    .tileTag = GFXTAG_WALL_CLOCK_HAND,
-    .paletteTag = PALTAG_WALL_CLOCK_MALE,
+    .tileTag = GFX_TAG_WALL_CLOCK_HAND,
+    .paletteTag = PAL_TAG_WALL_CLOCK_MALE,
     .oam = &sOam_PeriodIndicator,
     .anims = sAnims_PM,
     .images = NULL,
@@ -245,8 +241,8 @@ static const struct SpriteTemplate sSpriteTemplate_PM =
 
 static const struct SpriteTemplate sSpriteTemplate_AM =
 {
-    .tileTag = GFXTAG_WALL_CLOCK_HAND,
-    .paletteTag = PALTAG_WALL_CLOCK_MALE,
+    .tileTag = GFX_TAG_WALL_CLOCK_HAND,
+    .paletteTag = PAL_TAG_WALL_CLOCK_MALE,
     .oam = &sOam_PeriodIndicator,
     .anims = sAnims_AM,
     .images = NULL,

@@ -47,32 +47,6 @@ enum {
 #define KBCOL_COUNT 8
 
 enum {
-    GFXTAG_BACK_BUTTON,
-    GFXTAG_OK_BUTTON,
-    GFXTAG_PAGE_SWAP_FRAME,
-    GFXTAG_PAGE_SWAP_BUTTON,
-    GFXTAG_PAGE_SWAP_UPPER,
-    GFXTAG_PAGE_SWAP_LOWER,
-    GFXTAG_PAGE_SWAP_OTHERS,
-    GFXTAG_CURSOR,
-    GFXTAG_CURSOR_SQUISHED,
-    GFXTAG_CURSOR_FILLED,
-    GFXTAG_INPUT_ARROW,
-    GFXTAG_UNDERSCORE,
-};
-
-enum {
-    PALTAG_MENU, // Also the PC icon
-    PALTAG_PAGE_SWAP_UPPER,
-    PALTAG_PAGE_SWAP_LOWER,
-    PALTAG_PAGE_SWAP_OTHERS, // Also the input arrow/underscore
-    PALTAG_PAGE_SWAP,
-    PALTAG_CURSOR,
-    PALTAG_BACK_BUTTON,
-    PALTAG_OK_BUTTON,
-};
-
-enum {
     WIN_KB_PAGE_1, // Which of these two windows is in front is cycled as the player swaps
     WIN_KB_PAGE_2, // Initially WIN_KB_PAGE_1 is in front, with WIN_KB_PAGE_2 on deck
     WIN_TEXT_ENTRY,
@@ -978,10 +952,10 @@ static u16 GetButtonPalOffset(u8 button)
 {
     const u16 palOffsets[BUTTON_COUNT + 1] =
     {
-        [BUTTON_PAGE]  = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_PAGE_SWAP)) + 14,
-        [BUTTON_BACK]  = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_BACK_BUTTON)) + 14,
-        [BUTTON_OK]    = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_OK_BUTTON)) + 14,
-        [BUTTON_COUNT] = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_OK_BUTTON)) + 1,
+        [BUTTON_PAGE]  = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PAL_TAG_NAMING_SCREEN_PAGE_SWAP)) + 14,
+        [BUTTON_BACK]  = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PAL_TAG_NAMING_SCREEN_BACK_BUTTON)) + 14,
+        [BUTTON_OK]    = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PAL_TAG_NAMING_SCREEN_OK_BUTTON)) + 14,
+        [BUTTON_COUNT] = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PAL_TAG_NAMING_SCREEN_OK_BUTTON)) + 1,
     };
 
     return palOffsets[button];
@@ -1051,7 +1025,7 @@ static void SpriteCB_Cursor(struct Sprite *sprite)
     {
         s8 gb = sprite->sColor;
         s8 r = sprite->sColor >> 1;
-        u16 index = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_CURSOR)) + 1;
+        u16 index = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PAL_TAG_NAMING_SCREEN_CURSOR)) + 1;
 
         MultiplyInvertedPaletteRGBComponents(index, r, gb, gb);
     }
@@ -1308,15 +1282,15 @@ static bool8 PageSwapSprite_SlideOn(struct Sprite *sprite)
 }
 
 static const u16 sPageSwapPalTags[] = {
-    [PAGE_SWAP_UPPER]  = PALTAG_PAGE_SWAP_UPPER,
-    [PAGE_SWAP_OTHERS] = PALTAG_PAGE_SWAP_OTHERS,
-    [PAGE_SWAP_LOWER]  = PALTAG_PAGE_SWAP_LOWER
+    [PAGE_SWAP_UPPER]  = PAL_TAG_NAMING_SCREEN_PAGE_SWAP_UPPER,
+    [PAGE_SWAP_OTHERS] = PAL_TAG_NAMING_SCREEN_PAGE_SWAP_OTHERS,
+    [PAGE_SWAP_LOWER]  = PAL_TAG_NAMING_SCREEN_PAGE_SWAP_LOWER
 };
 
 static const u16 sPageSwapGfxTags[] = {
-    [PAGE_SWAP_UPPER]  = GFXTAG_PAGE_SWAP_UPPER,
-    [PAGE_SWAP_OTHERS] = GFXTAG_PAGE_SWAP_OTHERS,
-    [PAGE_SWAP_LOWER]  = GFXTAG_PAGE_SWAP_LOWER
+    [PAGE_SWAP_UPPER]  = GFX_TAG_NAMING_SCREEN_PAGE_SWAP_UPPER,
+    [PAGE_SWAP_OTHERS] = GFX_TAG_NAMING_SCREEN_PAGE_SWAP_OTHERS,
+    [PAGE_SWAP_LOWER]  = GFX_TAG_NAMING_SCREEN_PAGE_SWAP_LOWER
 };
 
 static void SetPageSwapButtonGfx(u8 page, struct Sprite *text, struct Sprite *button)
@@ -2433,8 +2407,8 @@ static const union AnimCmd *const sAnims_PCIcon[] =
 
 static const struct SpriteTemplate sSpriteTemplate_PageSwapFrame =
 {
-    .tileTag = GFXTAG_PAGE_SWAP_FRAME,
-    .paletteTag = PALTAG_PAGE_SWAP,
+    .tileTag = GFX_TAG_NAMING_SCREEN_PAGE_SWAP_FRAME,
+    .paletteTag = PAL_TAG_NAMING_SCREEN_PAGE_SWAP,
     .oam = &sOam_8x8,
     .anims = sAnims_Loop,
     .images = NULL,
@@ -2444,8 +2418,8 @@ static const struct SpriteTemplate sSpriteTemplate_PageSwapFrame =
 
 static const struct SpriteTemplate sSpriteTemplate_PageSwapButton =
 {
-    .tileTag = GFXTAG_PAGE_SWAP_BUTTON,
-    .paletteTag = PALTAG_PAGE_SWAP_UPPER,
+    .tileTag = GFX_TAG_NAMING_SCREEN_PAGE_SWAP_BUTTON,
+    .paletteTag = PAL_TAG_NAMING_SCREEN_PAGE_SWAP_UPPER,
     .oam = &sOam_32x16,
     .anims = sAnims_Loop,
     .images = NULL,
@@ -2455,8 +2429,8 @@ static const struct SpriteTemplate sSpriteTemplate_PageSwapButton =
 
 static const struct SpriteTemplate sSpriteTemplate_PageSwapText =
 {
-    .tileTag = GFXTAG_PAGE_SWAP_UPPER,
-    .paletteTag = PALTAG_PAGE_SWAP,
+    .tileTag = GFX_TAG_NAMING_SCREEN_PAGE_SWAP_UPPER,
+    .paletteTag = PAL_TAG_NAMING_SCREEN_PAGE_SWAP,
     .oam = &sOam_8x8,
     .anims = sAnims_Loop,
     .images = NULL,
@@ -2466,8 +2440,8 @@ static const struct SpriteTemplate sSpriteTemplate_PageSwapText =
 
 static const struct SpriteTemplate sSpriteTemplate_BackButton =
 {
-    .tileTag = GFXTAG_BACK_BUTTON,
-    .paletteTag = PALTAG_BACK_BUTTON,
+    .tileTag = GFX_TAG_NAMING_SCREEN_BACK_BUTTON,
+    .paletteTag = PAL_TAG_NAMING_SCREEN_BACK_BUTTON,
     .oam = &sOam_8x8,
     .anims = sAnims_Loop,
     .images = NULL,
@@ -2477,8 +2451,8 @@ static const struct SpriteTemplate sSpriteTemplate_BackButton =
 
 static const struct SpriteTemplate sSpriteTemplate_OkButton =
 {
-    .tileTag = GFXTAG_OK_BUTTON,
-    .paletteTag = PALTAG_OK_BUTTON,
+    .tileTag = GFX_TAG_NAMING_SCREEN_OK_BUTTON,
+    .paletteTag = PAL_TAG_NAMING_SCREEN_OK_BUTTON,
     .oam = &sOam_8x8,
     .anims = sAnims_Loop,
     .images = NULL,
@@ -2488,8 +2462,8 @@ static const struct SpriteTemplate sSpriteTemplate_OkButton =
 
 static const struct SpriteTemplate sSpriteTemplate_Cursor =
 {
-    .tileTag = GFXTAG_CURSOR,
-    .paletteTag = PALTAG_CURSOR,
+    .tileTag = GFX_TAG_NAMING_SCREEN_CURSOR,
+    .paletteTag = PAL_TAG_NAMING_SCREEN_CURSOR,
     .oam = &sOam_16x16,
     .anims = sAnims_Cursor,
     .images = NULL,
@@ -2499,8 +2473,8 @@ static const struct SpriteTemplate sSpriteTemplate_Cursor =
 
 static const struct SpriteTemplate sSpriteTemplate_InputArrow =
 {
-    .tileTag = GFXTAG_INPUT_ARROW,
-    .paletteTag = PALTAG_PAGE_SWAP_OTHERS,
+    .tileTag = GFX_TAG_NAMING_SCREEN_INPUT_ARROW,
+    .paletteTag = PAL_TAG_NAMING_SCREEN_PAGE_SWAP_OTHERS,
     .oam = &sOam_8x8,
     .anims = sAnims_Loop,
     .images = NULL,
@@ -2510,8 +2484,8 @@ static const struct SpriteTemplate sSpriteTemplate_InputArrow =
 
 static const struct SpriteTemplate sSpriteTemplate_Underscore =
 {
-    .tileTag = GFXTAG_UNDERSCORE,
-    .paletteTag = PALTAG_PAGE_SWAP_OTHERS,
+    .tileTag = GFX_TAG_NAMING_SCREEN_UNDERSCORE,
+    .paletteTag = PAL_TAG_NAMING_SCREEN_PAGE_SWAP_OTHERS,
     .oam = &sOam_8x8,
     .anims = sAnims_Loop,
     .images = NULL,
@@ -2522,7 +2496,7 @@ static const struct SpriteTemplate sSpriteTemplate_Underscore =
 static const struct SpriteTemplate sSpriteTemplate_PCIcon =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = PALTAG_MENU,
+    .paletteTag = PAL_TAG_NAMING_SCREEN_MENU,
     .oam = &sOam_8x8,
     .anims = sAnims_PCIcon,
     .images = sImageTable_PCIcon,
@@ -2557,31 +2531,31 @@ static const u8 *const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT] =
 
 static const struct SpriteSheet sSpriteSheets[] =
 {
-    {gNamingScreenBackButton_Gfx,     0x1E0,  GFXTAG_BACK_BUTTON},
-    {gNamingScreenOKButton_Gfx,       0x1E0,  GFXTAG_OK_BUTTON},
-    {gNamingScreenPageSwapFrame_Gfx,  0x280,  GFXTAG_PAGE_SWAP_FRAME},
-    {gNamingScreenPageSwapButton_Gfx, 0x100,  GFXTAG_PAGE_SWAP_BUTTON},
-    {gNamingScreenPageSwapUpper_Gfx,  0x060,  GFXTAG_PAGE_SWAP_UPPER},
-    {gNamingScreenPageSwapLower_Gfx,  0x060,  GFXTAG_PAGE_SWAP_LOWER},
-    {gNamingScreenPageSwapOthers_Gfx, 0x060,  GFXTAG_PAGE_SWAP_OTHERS},
-    {gNamingScreenCursor_Gfx,         0x080,  GFXTAG_CURSOR},
-    {gNamingScreenCursorSquished_Gfx, 0x080,  GFXTAG_CURSOR_SQUISHED},
-    {gNamingScreenCursorFilled_Gfx,   0x080,  GFXTAG_CURSOR_FILLED},
-    {gNamingScreenInputArrow_Gfx,     0x020,  GFXTAG_INPUT_ARROW},
-    {gNamingScreenUnderscore_Gfx,     0x020,  GFXTAG_UNDERSCORE},
+    {gNamingScreenBackButton_Gfx,     0x1E0,  GFX_TAG_NAMING_SCREEN_BACK_BUTTON},
+    {gNamingScreenOKButton_Gfx,       0x1E0,  GFX_TAG_NAMING_SCREEN_OK_BUTTON},
+    {gNamingScreenPageSwapFrame_Gfx,  0x280,  GFX_TAG_NAMING_SCREEN_PAGE_SWAP_FRAME},
+    {gNamingScreenPageSwapButton_Gfx, 0x100,  GFX_TAG_NAMING_SCREEN_PAGE_SWAP_BUTTON},
+    {gNamingScreenPageSwapUpper_Gfx,  0x060,  GFX_TAG_NAMING_SCREEN_PAGE_SWAP_UPPER},
+    {gNamingScreenPageSwapLower_Gfx,  0x060,  GFX_TAG_NAMING_SCREEN_PAGE_SWAP_LOWER},
+    {gNamingScreenPageSwapOthers_Gfx, 0x060,  GFX_TAG_NAMING_SCREEN_PAGE_SWAP_OTHERS},
+    {gNamingScreenCursor_Gfx,         0x080,  GFX_TAG_NAMING_SCREEN_CURSOR},
+    {gNamingScreenCursorSquished_Gfx, 0x080,  GFX_TAG_NAMING_SCREEN_CURSOR_SQUISHED},
+    {gNamingScreenCursorFilled_Gfx,   0x080,  GFX_TAG_NAMING_SCREEN_CURSOR_FILLED},
+    {gNamingScreenInputArrow_Gfx,     0x020,  GFX_TAG_NAMING_SCREEN_INPUT_ARROW},
+    {gNamingScreenUnderscore_Gfx,     0x020,  GFX_TAG_NAMING_SCREEN_UNDERSCORE},
     {}
 };
 
 static const struct SpritePalette sSpritePalettes[] =
 {
-    {gNamingScreenMenu_Pal[0], PALTAG_MENU},
-    {gNamingScreenMenu_Pal[1], PALTAG_PAGE_SWAP_UPPER},
-    {gNamingScreenMenu_Pal[2], PALTAG_PAGE_SWAP_LOWER},
-    {gNamingScreenMenu_Pal[3], PALTAG_PAGE_SWAP_OTHERS},
-    {gNamingScreenMenu_Pal[4], PALTAG_PAGE_SWAP},
-    {gNamingScreenMenu_Pal[5], PALTAG_CURSOR},
-    {gNamingScreenMenu_Pal[4], PALTAG_BACK_BUTTON},
-    {gNamingScreenMenu_Pal[4], PALTAG_OK_BUTTON},
+    {gNamingScreenMenu_Pal[0], PAL_TAG_NAMING_SCREEN_MENU},
+    {gNamingScreenMenu_Pal[1], PAL_TAG_NAMING_SCREEN_PAGE_SWAP_UPPER},
+    {gNamingScreenMenu_Pal[2], PAL_TAG_NAMING_SCREEN_PAGE_SWAP_LOWER},
+    {gNamingScreenMenu_Pal[3], PAL_TAG_NAMING_SCREEN_PAGE_SWAP_OTHERS},
+    {gNamingScreenMenu_Pal[4], PAL_TAG_NAMING_SCREEN_PAGE_SWAP},
+    {gNamingScreenMenu_Pal[5], PAL_TAG_NAMING_SCREEN_CURSOR},
+    {gNamingScreenMenu_Pal[4], PAL_TAG_NAMING_SCREEN_BACK_BUTTON},
+    {gNamingScreenMenu_Pal[4], PAL_TAG_NAMING_SCREEN_OK_BUTTON},
     {}
 };
 

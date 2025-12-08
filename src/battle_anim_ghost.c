@@ -56,8 +56,8 @@ static const union AffineAnimCmd *const sAffineAnims_ConfuseRayBallBounce[] =
 
 const struct SpriteTemplate gConfuseRayBallBounceSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_YELLOW_BALL,
-    .paletteTag = ANIM_TAG_YELLOW_BALL,
+    .tileTag = TAG_BATTLE_ANIM_YELLOW_BALL,
+    .paletteTag = TAG_BATTLE_ANIM_YELLOW_BALL,
     .oam = &gOamData_AffineDouble_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -67,8 +67,8 @@ const struct SpriteTemplate gConfuseRayBallBounceSpriteTemplate =
 
 const struct SpriteTemplate gConfuseRayBallSpiralSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_YELLOW_BALL,
-    .paletteTag = ANIM_TAG_YELLOW_BALL,
+    .tileTag = TAG_BATTLE_ANIM_YELLOW_BALL,
+    .paletteTag = TAG_BATTLE_ANIM_YELLOW_BALL,
     .oam = &gOamData_AffineOff_ObjBlend_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -89,8 +89,8 @@ static const union AffineAnimCmd *const sAffineAnims_ShadowBall[] =
 
 const struct SpriteTemplate gShadowBallSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SHADOW_BALL,
-    .paletteTag = ANIM_TAG_SHADOW_BALL,
+    .tileTag = TAG_BATTLE_ANIM_SHADOW_BALL,
+    .paletteTag = TAG_BATTLE_ANIM_SHADOW_BALL,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -115,8 +115,8 @@ static const union AnimCmd *const sAnims_Lick[] =
 
 const struct SpriteTemplate gLickSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_LICK,
-    .paletteTag = ANIM_TAG_LICK,
+    .tileTag = TAG_BATTLE_ANIM_LICK,
+    .paletteTag = TAG_BATTLE_ANIM_LICK,
     .oam = &gOamData_AffineOff_ObjNormal_16x32,
     .anims = sAnims_Lick,
     .images = NULL,
@@ -138,8 +138,8 @@ static const union AffineAnimCmd *const sAffineAnims_Unused[] =
 
 const struct SpriteTemplate gDestinyBondWhiteShadowSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_WHITE_SHADOW,
-    .paletteTag = ANIM_TAG_WHITE_SHADOW,
+    .tileTag = TAG_BATTLE_ANIM_WHITE_SHADOW,
+    .paletteTag = TAG_BATTLE_ANIM_WHITE_SHADOW,
     .oam = &gOamData_AffineOff_ObjBlend_64x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -149,8 +149,8 @@ const struct SpriteTemplate gDestinyBondWhiteShadowSpriteTemplate =
 
 const struct SpriteTemplate gCurseNailSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_NAIL,
-    .paletteTag = ANIM_TAG_NAIL,
+    .tileTag = TAG_BATTLE_ANIM_NAIL,
+    .paletteTag = TAG_BATTLE_ANIM_NAIL,
     .oam = &gOamData_AffineOff_ObjBlend_32x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -160,8 +160,8 @@ const struct SpriteTemplate gCurseNailSpriteTemplate =
 
 const struct SpriteTemplate gCurseGhostSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_GHOSTLY_SPIRIT,
-    .paletteTag = ANIM_TAG_GHOSTLY_SPIRIT,
+    .tileTag = TAG_BATTLE_ANIM_GHOSTLY_SPIRIT,
+    .paletteTag = TAG_BATTLE_ANIM_GHOSTLY_SPIRIT,
     .oam = &gOamData_AffineOff_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -171,8 +171,8 @@ const struct SpriteTemplate gCurseGhostSpriteTemplate =
 
 const struct SpriteTemplate gNightmareDevilSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_DEVIL,
-    .paletteTag = ANIM_TAG_DEVIL,
+    .tileTag = TAG_BATTLE_ANIM_DEVIL,
+    .paletteTag = TAG_BATTLE_ANIM_DEVIL,
     .oam = &gOamData_AffineOff_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -196,8 +196,8 @@ static const union AnimCmd *const sAnims_GrudgeFlame[] =
 
 const struct SpriteTemplate gGrudgeFlameSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_PURPLE_FLAME,
-    .paletteTag = ANIM_TAG_PURPLE_FLAME,
+    .tileTag = TAG_BATTLE_ANIM_PURPLE_FLAME,
+    .paletteTag = TAG_BATTLE_ANIM_PURPLE_FLAME,
     .oam = &gOamData_AffineOff_ObjBlend_16x32,
     .anims = sAnims_GrudgeFlame,
     .images = NULL,
@@ -605,7 +605,7 @@ static void AnimTask_SpiteTargetShadow_Step1(u8 taskId)
     switch (task->data[15])
     {
     case 0:
-        task->data[14] = AllocSpritePalette(ANIM_TAG_BENT_SPOON);
+        task->data[14] = AllocSpritePalette(TAG_BATTLE_ANIM_BENT_SPOON);
         if (task->data[14] == 0xFF || task->data[14] == 0xF)
         {
             DestroyAnimVisualTask(taskId);
@@ -615,7 +615,7 @@ static void AnimTask_SpiteTargetShadow_Step1(u8 taskId)
             task->data[0] = CloneBattlerSpriteWithBlend(ANIM_TARGET);
             if (task->data[0] < 0)
             {
-                FreeSpritePaletteByTag(ANIM_TAG_BENT_SPOON);
+                FreeSpritePaletteByTag(TAG_BATTLE_ANIM_BENT_SPOON);
                 DestroyAnimVisualTask(taskId);
             }
             else
@@ -728,7 +728,7 @@ static void AnimTask_SpiteTargetShadow_Step3(u8 taskId)
     case 2:
         gSprites[task->data[14]].invisible = TRUE;
         DestroySpriteWithActiveSheet(&gSprites[task->data[0]]);
-        FreeSpritePaletteByTag(ANIM_TAG_BENT_SPOON);
+        FreeSpritePaletteByTag(TAG_BATTLE_ANIM_BENT_SPOON);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         if (rank == 1)
