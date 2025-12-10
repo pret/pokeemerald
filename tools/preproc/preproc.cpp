@@ -51,7 +51,7 @@ void PrintAsmBytes(unsigned char *s, int length)
     }
 }
 
-void PreprocAsmFile(std::string filename, bool isStdin, bool doEnum)
+void PreprocAsmFile(std::string filename, bool isStdin, bool doEnum, bool doFixedPoint)
 {
     std::stack<AsmFile> stack;
 
@@ -95,7 +95,7 @@ void PreprocAsmFile(std::string filename, bool isStdin, bool doEnum)
         case Directive::Enum:
         {
             if (!stack.top().ParseEnum())
-                stack.top().OutputLine();
+                stack.top().OutputLine(doFixedPoint);
             break;
         }
         case Directive::Unknown:
@@ -109,7 +109,7 @@ void PreprocAsmFile(std::string filename, bool isStdin, bool doEnum)
             }
             else
             {
-                stack.top().OutputLine();
+                stack.top().OutputLine(doFixedPoint);
             }
 
             break;
@@ -147,7 +147,7 @@ const char* GetFileExtension(const char* filename)
 
 static void UsageAndExit(const char *program)
 {
-    std::fprintf(stderr, "Usage: %s [-i] [-e] SRC_FILE CHARMAP_FILE\nwhere -i denotes if input is from stdin\n      -e enables enum handling\n", program);
+    std::fprintf(stderr, "Usage: %s [-i] [-e] SRC_FILE CHARMAP_FILE\nwhere -i denotes if input is from stdin\n      -e enables enum handling\n      -q enables fixed-point macro (Q_8_8, UQ_8_8) handling\n", program);
     std::exit(EXIT_FAILURE);
 }
 
@@ -158,9 +158,10 @@ int main(int argc, char **argv)
     const char *charmap = NULL;
     bool isStdin = false;
     bool doEnum = false;
+    bool doFixedPoint = false;
 
     /* preproc [-i] [-e] SRC_FILE CHARMAP_FILE */
-    while ((opt = getopt(argc, argv, "ie")) != -1)
+    while ((opt = getopt(argc, argv, "ieq")) != -1)
     {
         switch (opt)
         {
@@ -169,6 +170,9 @@ int main(int argc, char **argv)
             break;
         case 'e':
             doEnum = true;
+            break;
+        case 'q':
+            doFixedPoint = true;
             break;
         default:
             UsageAndExit(argv[0]);
@@ -196,12 +200,15 @@ int main(int argc, char **argv)
 
     if ((extension[0] == 's') && extension[1] == 0)
     {
-        PreprocAsmFile(source, isStdin, doEnum);
+        PreprocAsmFile(source, isStdin, doEnum, doFixedPoint);
     }
     else if ((extension[0] == 'c' || extension[0] == 'i') && extension[1] == 0)
     {
         if (doEnum)
             FATAL_ERROR("-e is invalid for C sources\n");
+        else if (doFixedPoint)
+            FATAL_ERROR("-q is invalid for C sources\n");
+
         PreprocCFile(source, isStdin);
     }
     else
