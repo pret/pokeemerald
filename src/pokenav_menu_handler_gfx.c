@@ -1315,7 +1315,14 @@ static void SetupPokenavMenuScanlineEffects(void)
     SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
     SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_ALL);
     SetGpuRegBits(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ);
+#ifdef BUGFIX
+    // BUGFIX: Use full register write instead of |=.
+    // SetGpuRegBits left leftover window values from the Party screen,
+    // causing partial/missing glow highlights. SetGpuReg clears them fully.
+    SetGpuReg(REG_OFFSET_WIN0V, DISPLAY_HEIGHT);
+#else
     SetGpuRegBits(REG_OFFSET_WIN0V, DISPLAY_HEIGHT);
+#endif
     ScanlineEffect_Stop();
     SetMenuOptionGlow();
     ScanlineEffect_SetParams(sPokenavMainMenuScanlineEffectParams);
