@@ -1643,6 +1643,15 @@ static void Cmd_if_status_not_in_party(void)
 
 static void Cmd_get_weather(void)
 {
+    // BUG: due to the lack of an assignment in the case of there not being any
+    //      weather set any previously set value could possibly be interpreted
+    //      as a result of this function.
+    //      Assigning AI_WEATHER_NONE here matches the fix implemented in future
+    //      generations.
+    #ifdef BUGFIX
+        AI_THINKING_STRUCT->funcResult = AI_WEATHER_NONE;
+    #endif
+
     if (gBattleWeather & B_WEATHER_RAIN)
         AI_THINKING_STRUCT->funcResult = AI_WEATHER_RAIN;
     if (gBattleWeather & B_WEATHER_SANDSTORM)
