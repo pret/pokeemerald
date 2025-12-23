@@ -48,7 +48,7 @@ static void QueueAnimTiles_General_Water(u16);
 static void QueueAnimTiles_General_SandWaterEdge(u16);
 static void QueueAnimTiles_General_Waterfall(u16);
 static void QueueAnimTiles_General_LandWaterEdge(u16);
-static void QueueAnimTiles_Building_TVTurnedOn(u16);
+static void QueueAnimTiles_Building_TvTurnedOn(u16);
 static void QueueAnimTiles_Rustboro_WindyWater(u16, u8);
 static void QueueAnimTiles_Rustboro_Fountain(u16);
 static void QueueAnimTiles_Dewford_Flag(u16);
@@ -646,7 +646,7 @@ static void TilesetAnim_General(u16 timer)
 static void TilesetAnim_Building(u16 timer)
 {
     if (timer % 8 == 0)
-        QueueAnimTiles_Building_TVTurnedOn(timer / 8);
+        QueueAnimTiles_Building_TvTurnedOn(timer / 8);
 }
 
 static void QueueAnimTiles_General_Flower(u16 timer)
@@ -1110,7 +1110,7 @@ static void TilesetAnim_BattleDome2(u16 timer)
         BlendAnimPalette_BattleDome_FloorLightsNoBlend(timer / 4);
 }
 
-static void QueueAnimTiles_Building_TVTurnedOn(u16 timer)
+static void QueueAnimTiles_Building_TvTurnedOn(u16 timer)
 {
     u16 i = timer % ARRAY_COUNT(gTilesetAnims_Building_TvTurnedOn);
     AppendTilesetAnimToBuffer(gTilesetAnims_Building_TvTurnedOn[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(496)), 4 * TILE_SIZE_4BPP);
