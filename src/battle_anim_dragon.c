@@ -34,8 +34,8 @@ static const union AnimCmd *const sAnims_OutrageOverheatFire[] =
 
 const struct SpriteTemplate gOutrageFlameSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_EMBER,
-    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_EMBER,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_OutrageOverheatFire,
     .images = NULL,
@@ -87,8 +87,8 @@ static const union AffineAnimCmd *const sAffineAnims_DragonBreathFire[] =
 
 const struct SpriteTemplate gDragonBreathFireSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_EMBER,
-    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_EMBER,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_EMBER,
     .oam = &gOamData_AffineDouble_ObjNormal_32x32,
     .anims = sAnims_DragonBreathFire,
     .images = NULL,
@@ -113,8 +113,8 @@ static const union AnimCmd *const sAnims_DragonRageFirePlume[] =
 
 const struct SpriteTemplate gDragonRageFirePlumeSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_FIRE_PLUME,
-    .paletteTag = ANIM_TAG_FIRE_PLUME,
+    .tileTag = TAG_BATTLE_ANIM_FIRE_PLUME,
+    .paletteTag = TAG_BATTLE_ANIM_FIRE_PLUME,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_DragonRageFirePlume,
     .images = NULL,
@@ -156,8 +156,8 @@ static const union AffineAnimCmd *const sAffineAnims_DragonRageFire[] =
 
 const struct SpriteTemplate gDragonRageFireSpitSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_EMBER,
-    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_EMBER,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_EMBER,
     .oam = &gOamData_AffineDouble_ObjNormal_32x32,
     .anims = sAnims_DragonRageFire,
     .images = NULL,
@@ -167,8 +167,8 @@ const struct SpriteTemplate gDragonRageFireSpitSpriteTemplate =
 
 const struct SpriteTemplate gDragonDanceOrbSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_HOLLOW_ORB,
-    .paletteTag = ANIM_TAG_HOLLOW_ORB,
+    .tileTag = TAG_BATTLE_ANIM_HOLLOW_ORB,
+    .paletteTag = TAG_BATTLE_ANIM_HOLLOW_ORB,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -178,8 +178,8 @@ const struct SpriteTemplate gDragonDanceOrbSpriteTemplate =
 
 const struct SpriteTemplate gOverheatFlameSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_EMBER,
-    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_EMBER,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_OutrageOverheatFire,
     .images = NULL,

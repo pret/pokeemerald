@@ -1174,12 +1174,12 @@ static const union AnimCmd *const sAnims_ConditionSelectionIcon[] =
 // Just loads the generic data, up to the caller to load the actual sheet/pal for the specific mon
 void LoadConditionMonPicTemplate(struct SpriteSheet *sheet, struct SpriteTemplate *template, struct SpritePalette *pal)
 {
-    struct SpriteSheet dataSheet = {NULL, MON_PIC_SIZE, TAG_CONDITION_MON};
+    struct SpriteSheet dataSheet = {NULL, MON_PIC_SIZE, TAG_POKENAV_CONDITION_MON};
 
     struct SpriteTemplate dataTemplate =
     {
-        .tileTag = TAG_CONDITION_MON,
-        .paletteTag = TAG_CONDITION_MON,
+        .tileTag = TAG_POKENAV_CONDITION_MON,
+        .paletteTag = TAG_POKENAV_CONDITION_MON,
         .oam = &sOam_ConditionMonPic,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -1187,7 +1187,7 @@ void LoadConditionMonPicTemplate(struct SpriteSheet *sheet, struct SpriteTemplat
         .callback = SpriteCallbackDummy,
     };
 
-    struct SpritePalette dataPal = {NULL, TAG_CONDITION_MON};
+    struct SpritePalette dataPal = {NULL, TAG_POKENAV_CONDITION_MON};
 
     *sheet = dataSheet;
     *template = dataTemplate;
@@ -1200,24 +1200,24 @@ void LoadConditionSelectionIcons(struct SpriteSheet *sheets, struct SpriteTempla
 
     struct SpriteSheet dataSheets[] =
     {
-        {sConditionPokeball_Gfx, 0x100, TAG_CONDITION_BALL},
-        {sConditionPokeballPlaceholder_Gfx, 0x20, TAG_CONDITION_BALL_PLACEHOLDER},
-        {gPokenavConditionCancel_Gfx, 0x100, TAG_CONDITION_CANCEL},
+        {sConditionPokeball_Gfx, 0x100, TAG_POKENAV_CONDITION_BALL},
+        {sConditionPokeballPlaceholder_Gfx, 0x20, TAG_POKENAV_CONDITION_BALL_PLACEHOLDER},
+        {gPokenavConditionCancel_Gfx, 0x100, TAG_POKENAV_CONDITION_CANCEL},
         {},
     };
 
     struct SpritePalette dataPals[] =
     {
-        {gPokenavConditionCancel_Pal, TAG_CONDITION_BALL},
-        {gPokenavConditionCancel_Pal + 16, TAG_CONDITION_CANCEL},
+        {gPokenavConditionCancel_Pal, TAG_POKENAV_CONDITION_BALL},
+        {gPokenavConditionCancel_Pal + 16, TAG_POKENAV_CONDITION_CANCEL},
         {},
     };
 
     // Tag is overwritten for the other selection icons
     struct SpriteTemplate dataTemplate =
     {
-        .tileTag = TAG_CONDITION_BALL,
-        .paletteTag = TAG_CONDITION_BALL,
+        .tileTag = TAG_POKENAV_CONDITION_BALL,
+        .paletteTag = TAG_POKENAV_CONDITION_BALL,
         .oam = &sOam_ConditionSelectionIcon,
         .anims = sAnims_ConditionSelectionIcon,
         .images = NULL,
@@ -1243,8 +1243,8 @@ void LoadConditionSelectionIcons(struct SpriteSheet *sheets, struct SpriteTempla
 
 void LoadConditionSparkle(struct SpriteSheet *sheet, struct SpritePalette *pal)
 {
-    struct SpriteSheet dataSheet = {sConditionSparkle_Pal, 0x380, TAG_CONDITION_SPARKLE};
-    struct SpritePalette dataPal = {sConditionSparkle_Gfx, TAG_CONDITION_SPARKLE};
+    struct SpriteSheet dataSheet = {sConditionSparkle_Pal, 0x380, TAG_POKENAV_CONDITION_SPARKLE};
+    struct SpritePalette dataPal = {sConditionSparkle_Gfx, TAG_POKENAV_CONDITION_SPARKLE};
 
     *sheet = dataSheet;
     *pal = dataPal;
@@ -1305,8 +1305,8 @@ static const union AnimCmd *const sAnims_ConditionSparkle[] =
 
 static const struct SpriteTemplate sSpriteTemplate_ConditionSparkle =
 {
-    .tileTag = TAG_CONDITION_SPARKLE,
-    .paletteTag = TAG_CONDITION_SPARKLE,
+    .tileTag = TAG_POKENAV_CONDITION_SPARKLE,
+    .paletteTag = TAG_POKENAV_CONDITION_SPARKLE,
     .oam = &sOam_ConditionSparkle,
     .anims = sAnims_ConditionSparkle,
     .images = NULL,
@@ -1440,8 +1440,8 @@ void DestroyConditionSparkleSprites(struct Sprite **sprites)
 void FreeConditionSparkles(struct Sprite **sprites)
 {
     DestroyConditionSparkleSprites(sprites);
-    FreeSpriteTilesByTag(TAG_CONDITION_SPARKLE);
-    FreeSpritePaletteByTag(TAG_CONDITION_SPARKLE);
+    FreeSpriteTilesByTag(TAG_POKENAV_CONDITION_SPARKLE);
+    FreeSpritePaletteByTag(TAG_POKENAV_CONDITION_SPARKLE);
 }
 
 static void SpriteCB_ConditionSparkle(struct Sprite *sprite)

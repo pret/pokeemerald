@@ -88,15 +88,6 @@ enum {
     MAP_INDICATOR_SQUARE,
 };
 
-enum {
-    TAG_CURSOR,
-    TAG_MAP_INDICATOR,
-    TAG_MEDAL_SILVER,
-    TAG_MEDAL_GOLD,
-    TAG_HEAD_MALE,
-    TAG_HEAD_FEMALE,
-};
-
 // Error return codes. Never read
 enum {
     SUCCESS,
@@ -362,25 +353,25 @@ static const sPassAreasLayout[CURSOR_AREA_COUNT - 1] =
 
 static const struct CompressedSpriteSheet sCursorSpriteSheets[] =
 {
-    {sCursor_Gfx, 0x100, TAG_CURSOR},
-    {sMapCursor_Gfx, 0x400, TAG_MAP_INDICATOR},
-    {gFrontierPassMedals_Gfx, 0x380, TAG_MEDAL_SILVER},
+    {sCursor_Gfx, 0x100, TAG_FRONTIER_PASS_CURSOR},
+    {sMapCursor_Gfx, 0x400, TAG_FRONTIER_PASS_MAP_INDICATOR},
+    {gFrontierPassMedals_Gfx, 0x380, TAG_FRONTIER_PASS_MEDAL_SILVER},
 };
 
 static const struct CompressedSpriteSheet sHeadsSpriteSheet[] =
 {
-    {sHeads_Gfx, 0x100, TAG_HEAD_MALE},
+    {sHeads_Gfx, 0x100, TAG_FRONTIER_PASS_HEAD_MALE},
     {}
 };
 
 static const struct SpritePalette sSpritePalettes[] =
 {
-    {gFrontierPassCursor_Pal,       TAG_CURSOR},
-    {gFrontierPassMapCursor_Pal,    TAG_MAP_INDICATOR},
-    {gFrontierPassMedalsSilver_Pal, TAG_MEDAL_SILVER},
-    {gFrontierPassMedalsGold_Pal,   TAG_MEDAL_GOLD},
-    {sMaleHead_Pal,                 TAG_HEAD_MALE},
-    {sFemaleHead_Pal,               TAG_HEAD_FEMALE},
+    {gFrontierPassCursor_Pal,       TAG_FRONTIER_PASS_CURSOR},
+    {gFrontierPassMapCursor_Pal,    TAG_FRONTIER_PASS_MAP_INDICATOR},
+    {gFrontierPassMedalsSilver_Pal, TAG_FRONTIER_PASS_MEDAL_SILVER},
+    {gFrontierPassMedalsGold_Pal,   TAG_FRONTIER_PASS_MEDAL_GOLD},
+    {sMaleHead_Pal,                 TAG_FRONTIER_PASS_HEAD_MALE},
+    {sFemaleHead_Pal,               TAG_FRONTIER_PASS_HEAD_FEMALE},
     {}
 };
 
@@ -485,8 +476,8 @@ static const struct SpriteTemplate sSpriteTemplates_Cursors[] =
 {
     // Triangular cursor
     {
-        .tileTag = TAG_CURSOR,
-        .paletteTag = TAG_CURSOR,
+        .tileTag = TAG_FRONTIER_PASS_CURSOR,
+        .paletteTag = TAG_FRONTIER_PASS_CURSOR,
         .oam = &gOamData_AffineOff_ObjNormal_16x16,
         .anims = sAnims_TwoFrame,
         .images = NULL,
@@ -495,8 +486,8 @@ static const struct SpriteTemplate sSpriteTemplates_Cursors[] =
     },
     // Map indicator cursor
     {
-        .tileTag = TAG_MAP_INDICATOR,
-        .paletteTag = TAG_MAP_INDICATOR,
+        .tileTag = TAG_FRONTIER_PASS_MAP_INDICATOR,
+        .paletteTag = TAG_FRONTIER_PASS_MAP_INDICATOR,
         .oam = &gOamData_AffineOff_ObjNormal_32x16,
         .anims = sAnims_MapIndicatorCursor,
         .images = NULL,
@@ -507,8 +498,8 @@ static const struct SpriteTemplate sSpriteTemplates_Cursors[] =
 
 static const struct SpriteTemplate sSpriteTemplate_Medal =
 {
-    .tileTag = TAG_MEDAL_SILVER,
-    .paletteTag = TAG_MEDAL_SILVER,
+    .tileTag = TAG_FRONTIER_PASS_MEDAL_SILVER,
+    .paletteTag = TAG_FRONTIER_PASS_MEDAL_SILVER,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = sAnims_Medal,
     .images = NULL,
@@ -518,8 +509,8 @@ static const struct SpriteTemplate sSpriteTemplate_Medal =
 
 static const struct SpriteTemplate sSpriteTemplate_PlayerHead =
 {
-    .tileTag = TAG_HEAD_MALE,
-    .paletteTag = TAG_HEAD_MALE,
+    .tileTag = TAG_FRONTIER_PASS_HEAD_MALE,
+    .paletteTag = TAG_FRONTIER_PASS_HEAD_MALE,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = sAnims_TwoFrame,
     .images = NULL,
@@ -1324,7 +1315,7 @@ static void LoadCursorAndSymbolSprites(void)
         {
             struct SpriteTemplate sprite = sSpriteTemplate_Medal;
 
-            sprite.paletteTag += sPassData->facilitySymbols[i] - 1; // Adds 1 if gold for TAG_MEDAL_GOLD
+            sprite.paletteTag += sPassData->facilitySymbols[i] - 1; // Adds 1 if gold for TAG_FRONTIER_PASS_MEDAL_GOLD
             spriteId = CreateSprite(&sprite, sPassAreasLayout[i + CURSOR_AREA_SYMBOL - 1].xStart + 8, sPassAreasLayout[i + CURSOR_AREA_SYMBOL - 1].yStart + 6, i + 1);
             sPassGfx->symbolSprites[i] = &gSprites[spriteId];
             sPassGfx->symbolSprites[i]->oam.priority = 2;
@@ -1348,8 +1339,8 @@ static void FreeCursorAndSymbolSprites(void)
         }
     }
     FreeAllSpritePalettes();
-    FreeSpriteTilesByTag(TAG_MEDAL_SILVER);
-    FreeSpriteTilesByTag(TAG_CURSOR);
+    FreeSpriteTilesByTag(TAG_FRONTIER_PASS_MEDAL_SILVER);
+    FreeSpriteTilesByTag(TAG_FRONTIER_PASS_CURSOR);
 }
 
 static void SpriteCB_PlayerHead(struct Sprite *sprite)
@@ -1475,17 +1466,17 @@ static bool32 ExitFrontierMap(void)
         if (sMapData->cursorSprite != NULL)
         {
             DestroySprite(sMapData->cursorSprite);
-            FreeSpriteTilesByTag(TAG_CURSOR);
+            FreeSpriteTilesByTag(TAG_FRONTIER_PASS_CURSOR);
         }
         if (sMapData->mapIndicatorSprite != NULL)
         {
             DestroySprite(sMapData->mapIndicatorSprite);
-            FreeSpriteTilesByTag(TAG_MAP_INDICATOR);
+            FreeSpriteTilesByTag(TAG_FRONTIER_PASS_MAP_INDICATOR);
         }
         if (sMapData->playerHeadSprite != NULL)
         {
             DestroySprite(sMapData->playerHeadSprite);
-            FreeSpriteTilesByTag(TAG_HEAD_MALE);
+            FreeSpriteTilesByTag(TAG_FRONTIER_PASS_HEAD_MALE);
         }
         FreeAllWindowBuffers();
         break;
@@ -1695,7 +1686,7 @@ static void InitFrontierMapSprites(void)
 
         LoadCompressedSpriteSheet(sHeadsSpriteSheet);
         sprite = sSpriteTemplate_PlayerHead;
-        sprite.paletteTag = gSaveBlock2Ptr->playerGender + TAG_HEAD_MALE; // TAG_HEAD_FEMALE if gender is FEMALE
+        sprite.paletteTag = gSaveBlock2Ptr->playerGender + TAG_FRONTIER_PASS_HEAD_MALE; // TAG_FRONTIER_PASS_HEAD_FEMALE if gender is FEMALE
         if (id != 0)
         {
             spriteId = CreateSprite(&sprite, x, y, 0);

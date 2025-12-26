@@ -113,7 +113,7 @@ enum {
 #define QUEUE_DELAY_MSG   3
 #define QUEUE_DELAY_DATA  5
 
-// The following tags are offsets from GFXTAG_MENU_TEXT
+// The following tags are offsets from GFX_TAG_TRADE_MENU_TEXT
 // They're looped over in CB2_CreateTradeMenu and CB2_ReturnToTradeMenu
 // and used as indexes into sMenuTextTileBuffers
 enum {
@@ -2234,7 +2234,7 @@ static bool8 LoadUISpriteGfx(void)
     {
         sheet.data = sMenuTextTileBuffers[sTradeMenu->timer];
         sheet.size = 0x100;
-        sheet.tag = GFXTAG_MENU_TEXT + sTradeMenu->timer;
+        sheet.tag = GFX_TAG_TRADE_MENU_TEXT + sTradeMenu->timer;
     }
 
     switch (sTradeMenu->timer)

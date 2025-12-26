@@ -240,24 +240,6 @@ enum {
 
 #define MOVE_WINDOWS_START WIN_MOVE0
 
-#define TAG_CONTEST_SYMBOLS_PAL 0xABE0
-#define TAG_JUDGE_SYMBOLS_GFX   0xABE0
-#define TAG_FACES_GFX           0xABE1
-#define TAG_APPLAUSE_METER      0xABE2
-
-#define TAG_SLIDER_HEART    0x4E20
-#define TAG_JUDGE           0x4E21
-#define TAG_NEXT_TURN_PAL   0x4E22
-#define TAG_NEXT_TURN_1_GFX 0x4E22
-#define TAG_NEXT_TURN_2_GFX 0x4E23
-#define TAG_NEXT_TURN_3_GFX 0x4E24
-#define TAG_NEXT_TURN_4_GFX 0x4E25
-
-#define TAG_BLINK_EFFECT_CONTESTANT0 0x80E8
-#define TAG_BLINK_EFFECT_CONTESTANT1 0x80E9
-#define TAG_BLINK_EFFECT_CONTESTANT2 0x80EA
-#define TAG_BLINK_EFFECT_CONTESTANT3 0x80EB
-
 #define TILE_FILLED_APPEAL_HEART 0x5012
 #define TILE_FILLED_JAM_HEART    0x5014
 #define TILE_EMPTY_APPEAL_HEART  0x5035
@@ -380,7 +362,7 @@ static const struct SpriteSheet sSpriteSheet_SliderHeart =
 {
     .data = gContestSliderHeart_Gfx,
     .size = 0x20,
-    .tag = TAG_SLIDER_HEART
+    .tag = TAG_CONTEST_SLIDER_HEART
 };
 
 static const struct OamData sOam_SliderHeart =
@@ -429,8 +411,8 @@ static const union AffineAnimCmd *const sAffineAnims_SliderHeart[] =
 
 static const struct SpriteTemplate sSpriteTemplate_SliderHeart =
 {
-    .tileTag = TAG_SLIDER_HEART,
-    .paletteTag = TAG_CONTEST_SYMBOLS_PAL,
+    .tileTag = TAG_CONTEST_SLIDER_HEART,
+    .paletteTag = PAL_TAG_CONTEST_SYMBOLS,
     .oam = &sOam_SliderHeart,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -443,29 +425,29 @@ static const struct CompressedSpriteSheet sSpriteSheet_NextTurn[CONTESTANT_COUNT
     {
         .data = gContestNextTurnGfx,
         .size = 0x100,
-        .tag = TAG_NEXT_TURN_1_GFX
+        .tag = GFX_TAG_CONTEST_NEXT_TURN_1
     },
     {
         .data = gContestNextTurnGfx,
         .size = 0x100,
-        .tag = TAG_NEXT_TURN_2_GFX
+        .tag = GFX_TAG_CONTEST_NEXT_TURN_2
     },
     {
         .data = gContestNextTurnGfx,
         .size = 0x100,
-        .tag = TAG_NEXT_TURN_3_GFX
+        .tag = GFX_TAG_CONTEST_NEXT_TURN_3
     },
     {
         .data = gContestNextTurnGfx,
         .size = 0x100,
-        .tag = TAG_NEXT_TURN_4_GFX
+        .tag = GFX_TAG_CONTEST_NEXT_TURN_4
     }
 };
 
 static const struct SpritePalette sSpritePalette_NextTurn =
 {
     .data = gContestPal,
-    .tag = TAG_NEXT_TURN_PAL
+    .tag = PAL_TAG_CONTEST_NEXT_TURN
 };
 
 static const struct OamData sOam_NextTurn =
@@ -488,8 +470,8 @@ static const struct OamData sOam_NextTurn =
 static const struct SpriteTemplate sSpriteTemplates_NextTurn[CONTESTANT_COUNT] =
 {
     {
-        .tileTag = TAG_NEXT_TURN_1_GFX,
-        .paletteTag = TAG_NEXT_TURN_PAL,
+        .tileTag = GFX_TAG_CONTEST_NEXT_TURN_1,
+        .paletteTag = PAL_TAG_CONTEST_NEXT_TURN,
         .oam = &sOam_NextTurn,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -497,8 +479,8 @@ static const struct SpriteTemplate sSpriteTemplates_NextTurn[CONTESTANT_COUNT] =
         .callback = SpriteCallbackDummy,
     },
     {
-        .tileTag = TAG_NEXT_TURN_2_GFX,
-        .paletteTag = TAG_NEXT_TURN_PAL,
+        .tileTag = GFX_TAG_CONTEST_NEXT_TURN_2,
+        .paletteTag = PAL_TAG_CONTEST_NEXT_TURN,
         .oam = &sOam_NextTurn,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -506,8 +488,8 @@ static const struct SpriteTemplate sSpriteTemplates_NextTurn[CONTESTANT_COUNT] =
         .callback = SpriteCallbackDummy,
     },
     {
-        .tileTag = TAG_NEXT_TURN_3_GFX,
-        .paletteTag = TAG_NEXT_TURN_PAL,
+        .tileTag = GFX_TAG_CONTEST_NEXT_TURN_3,
+        .paletteTag = PAL_TAG_CONTEST_NEXT_TURN,
         .oam = &sOam_NextTurn,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -515,8 +497,8 @@ static const struct SpriteTemplate sSpriteTemplates_NextTurn[CONTESTANT_COUNT] =
         .callback = SpriteCallbackDummy,
     },
     {
-        .tileTag = TAG_NEXT_TURN_4_GFX,
-        .paletteTag = TAG_NEXT_TURN_PAL,
+        .tileTag = GFX_TAG_CONTEST_NEXT_TURN_4,
+        .paletteTag = PAL_TAG_CONTEST_NEXT_TURN,
         .oam = &sOam_NextTurn,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -561,7 +543,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_Faces =
 {
     .data = gContestFaces_Gfx,
     .size = 0x180,
-    .tag = TAG_FACES_GFX
+    .tag = GFX_TAG_CONTEST_FACES
 };
 
 static const struct OamData sOam_Faces =
@@ -581,8 +563,8 @@ static const struct OamData sOam_Faces =
 // Unused
 static const struct SpriteTemplate sSpriteTemplate_Faces =
 {
-    .tileTag = TAG_FACES_GFX,
-    .paletteTag = TAG_CONTEST_SYMBOLS_PAL,
+    .tileTag = GFX_TAG_CONTEST_FACES,
+    .paletteTag = PAL_TAG_CONTEST_SYMBOLS,
     .oam = &sOam_Faces,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -594,13 +576,13 @@ static const struct CompressedSpriteSheet sSpriteSheet_ApplauseMeter =
 {
     .data = gContestApplauseGfx,
     .size = 0x400,
-    .tag = TAG_APPLAUSE_METER
+    .tag = TAG_CONTEST_APPLAUSE_METER
 };
 
 static const struct SpritePalette sSpritePalette_ApplauseMeter =
 {
     .data = gContestPal,
-    .tag = TAG_APPLAUSE_METER
+    .tag = TAG_CONTEST_APPLAUSE_METER
 };
 
 static const struct OamData sOam_ApplauseMeter =
@@ -619,8 +601,8 @@ static const struct OamData sOam_ApplauseMeter =
 
 static const struct SpriteTemplate sSpriteTemplate_ApplauseMeter =
 {
-    .tileTag = TAG_APPLAUSE_METER,
-    .paletteTag = TAG_APPLAUSE_METER,
+    .tileTag = TAG_CONTEST_APPLAUSE_METER,
+    .paletteTag = TAG_CONTEST_APPLAUSE_METER,
     .oam = &sOam_ApplauseMeter,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -644,8 +626,8 @@ static const struct OamData sOam_Judge =
 
 static const struct SpriteTemplate sSpriteTemplate_Judge =
 {
-    .tileTag = TAG_JUDGE,
-    .paletteTag = TAG_JUDGE,
+    .tileTag = TAG_CONTEST_JUDGE,
+    .paletteTag = TAG_CONTEST_JUDGE,
     .oam = &sOam_Judge,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -657,26 +639,26 @@ static const struct CompressedSpriteSheet sSpriteSheet_Judge =
 {
     .data = gContestJudgeGfx,
     .size = 0x800,
-    .tag = TAG_JUDGE
+    .tag = TAG_CONTEST_JUDGE
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_JudgeSymbols =
 {
     .data = gContestJudgeSymbolsGfx,
     .size = 0x380,
-    .tag = TAG_JUDGE_SYMBOLS_GFX
+    .tag = GFX_TAG_CONTEST_JUDGE_SYMBOLS
 };
 
 static const struct CompressedSpritePalette sSpritePalette_JudgeSymbols =
 {
     .data = gContestJudgeSymbolsPal,
-    .tag = TAG_CONTEST_SYMBOLS_PAL
+    .tag = PAL_TAG_CONTEST_SYMBOLS
 };
 
 static const struct SpriteTemplate sSpriteTemplate_JudgeSpeechBubble =
 {
-    .tileTag = TAG_JUDGE_SYMBOLS_GFX,
-    .paletteTag = TAG_CONTEST_SYMBOLS_PAL,
+    .tileTag = GFX_TAG_CONTEST_JUDGE_SYMBOLS,
+    .paletteTag = PAL_TAG_CONTEST_SYMBOLS,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -839,22 +821,22 @@ static const struct CompressedSpriteSheet sSpriteSheets_ContestantsTurnBlinkEffe
     {
         .data = gBlankGfxCompressed,
         .size = 0x1000,
-        .tag = TAG_BLINK_EFFECT_CONTESTANT0
+        .tag = TAG_CONTEST_BLINK_EFFECT_CONTESTANT0
     },
     {
         .data = gBlankGfxCompressed,
         .size = 0x1000,
-        .tag = TAG_BLINK_EFFECT_CONTESTANT1
+        .tag = TAG_CONTEST_BLINK_EFFECT_CONTESTANT1
     },
     {
         .data = gBlankGfxCompressed,
         .size = 0x1000,
-        .tag = TAG_BLINK_EFFECT_CONTESTANT2
+        .tag = TAG_CONTEST_BLINK_EFFECT_CONTESTANT2
     },
     {
         .data = gBlankGfxCompressed,
         .size = 0x1000,
-        .tag = TAG_BLINK_EFFECT_CONTESTANT3
+        .tag = TAG_CONTEST_BLINK_EFFECT_CONTESTANT3
     }
 };
 
@@ -862,19 +844,19 @@ static const struct SpritePalette sSpritePalettes_ContestantsTurnBlinkEffect[CON
 {
     {
         .data = eContestTempSave.cachedWindowPalettes[5],
-        .tag = TAG_BLINK_EFFECT_CONTESTANT0
+        .tag = TAG_CONTEST_BLINK_EFFECT_CONTESTANT0
     },
     {
         .data = eContestTempSave.cachedWindowPalettes[6],
-        .tag = TAG_BLINK_EFFECT_CONTESTANT1
+        .tag = TAG_CONTEST_BLINK_EFFECT_CONTESTANT1
     },
     {
         .data = eContestTempSave.cachedWindowPalettes[7],
-        .tag = TAG_BLINK_EFFECT_CONTESTANT2
+        .tag = TAG_CONTEST_BLINK_EFFECT_CONTESTANT2
     },
     {
         .data = eContestTempSave.cachedWindowPalettes[8],
-        .tag = TAG_BLINK_EFFECT_CONTESTANT3
+        .tag = TAG_CONTEST_BLINK_EFFECT_CONTESTANT3
     }
 };
 
@@ -917,8 +899,8 @@ static const union AffineAnimCmd *const sAffineAnims_ContestantsTurnBlinkEffect[
 static const struct SpriteTemplate sSpriteTemplates_ContestantsTurnBlinkEffect[CONTESTANT_COUNT] =
 {
     {
-        .tileTag = TAG_BLINK_EFFECT_CONTESTANT0,
-        .paletteTag = TAG_BLINK_EFFECT_CONTESTANT0,
+        .tileTag = TAG_CONTEST_BLINK_EFFECT_CONTESTANT0,
+        .paletteTag = TAG_CONTEST_BLINK_EFFECT_CONTESTANT0,
         .oam = &sOam_ContestantsTurnBlinkEffect,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -926,8 +908,8 @@ static const struct SpriteTemplate sSpriteTemplates_ContestantsTurnBlinkEffect[C
         .callback = SpriteCallbackDummy
     },
     {
-        .tileTag = TAG_BLINK_EFFECT_CONTESTANT1,
-        .paletteTag = TAG_BLINK_EFFECT_CONTESTANT1,
+        .tileTag = TAG_CONTEST_BLINK_EFFECT_CONTESTANT1,
+        .paletteTag = TAG_CONTEST_BLINK_EFFECT_CONTESTANT1,
         .oam = &sOam_ContestantsTurnBlinkEffect,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -935,8 +917,8 @@ static const struct SpriteTemplate sSpriteTemplates_ContestantsTurnBlinkEffect[C
         .callback = SpriteCallbackDummy
     },
     {
-        .tileTag = TAG_BLINK_EFFECT_CONTESTANT2,
-        .paletteTag = TAG_BLINK_EFFECT_CONTESTANT2,
+        .tileTag = TAG_CONTEST_BLINK_EFFECT_CONTESTANT2,
+        .paletteTag = TAG_CONTEST_BLINK_EFFECT_CONTESTANT2,
         .oam = &sOam_ContestantsTurnBlinkEffect,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -944,8 +926,8 @@ static const struct SpriteTemplate sSpriteTemplates_ContestantsTurnBlinkEffect[C
         .callback = SpriteCallbackDummy
     },
     {
-        .tileTag = TAG_BLINK_EFFECT_CONTESTANT3,
-        .paletteTag = TAG_BLINK_EFFECT_CONTESTANT3,
+        .tileTag = TAG_CONTEST_BLINK_EFFECT_CONTESTANT3,
+        .paletteTag = TAG_CONTEST_BLINK_EFFECT_CONTESTANT3,
         .oam = &sOam_ContestantsTurnBlinkEffect,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
@@ -4755,7 +4737,7 @@ static u8 StartApplauseOverflowAnimation(void)
     u8 taskId = CreateTask(Task_ApplauseOverflowAnimation, 10);
 
     gTasks[taskId].data[1] = 1;
-    gTasks[taskId].data[2] = IndexOfSpritePaletteTag(TAG_APPLAUSE_METER);
+    gTasks[taskId].data[2] = IndexOfSpritePaletteTag(TAG_CONTEST_APPLAUSE_METER);
     return taskId;
 }
 

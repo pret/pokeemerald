@@ -54,8 +54,8 @@ static const union AnimCmd *const sAnims_FlyingRock[] =
 
 const struct SpriteTemplate gFallingRockSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ROCKS,
-    .paletteTag = ANIM_TAG_ROCKS,
+    .tileTag = TAG_BATTLE_ANIM_ROCKS,
+    .paletteTag = TAG_BATTLE_ANIM_ROCKS,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_FlyingRock,
     .images = NULL,
@@ -65,8 +65,8 @@ const struct SpriteTemplate gFallingRockSpriteTemplate =
 
 const struct SpriteTemplate gRockFragmentSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ROCKS,
-    .paletteTag = ANIM_TAG_ROCKS,
+    .tileTag = TAG_BATTLE_ANIM_ROCKS,
+    .paletteTag = TAG_BATTLE_ANIM_ROCKS,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_FlyingRock,
     .images = NULL,
@@ -76,8 +76,8 @@ const struct SpriteTemplate gRockFragmentSpriteTemplate =
 
 const struct SpriteTemplate gSwirlingDirtSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_MUD_SAND,
-    .paletteTag = ANIM_TAG_MUD_SAND,
+    .tileTag = TAG_BATTLE_ANIM_MUD_SAND,
+    .paletteTag = TAG_BATTLE_ANIM_MUD_SAND,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -100,8 +100,8 @@ static const union AffineAnimCmd *const sAffineAnims_Whirlpool[] =
 
 const struct SpriteTemplate gWhirlpoolSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_WATER_ORB,
-    .paletteTag = ANIM_TAG_WATER_ORB,
+    .tileTag = TAG_BATTLE_ANIM_WATER_ORB,
+    .paletteTag = TAG_BATTLE_ANIM_WATER_ORB,
     .oam = &gOamData_AffineNormal_ObjBlend_16x16,
     .anims = gAnims_WaterMudOrb,
     .images = NULL,
@@ -111,8 +111,8 @@ const struct SpriteTemplate gWhirlpoolSpriteTemplate =
 
 const struct SpriteTemplate gFireSpinSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_EMBER,
-    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_EMBER,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gAnims_BasicFire,
     .images = NULL,
@@ -122,8 +122,8 @@ const struct SpriteTemplate gFireSpinSpriteTemplate =
 
 const struct SpriteTemplate gFlyingSandCrescentSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_FLYING_DIRT,
-    .paletteTag = ANIM_TAG_FLYING_DIRT,
+    .tileTag = TAG_BATTLE_ANIM_FLYING_DIRT,
+    .paletteTag = TAG_BATTLE_ANIM_FLYING_DIRT,
     .oam = &gOamData_AffineOff_ObjNormal_32x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -190,8 +190,8 @@ static const union AnimCmd *const sAnims_BasicRock[] =
 
 const struct SpriteTemplate gAncientPowerRockSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ROCKS,
-    .paletteTag = ANIM_TAG_ROCKS,
+    .tileTag = TAG_BATTLE_ANIM_ROCKS,
+    .paletteTag = TAG_BATTLE_ANIM_ROCKS,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_BasicRock,
     .images = NULL,
@@ -201,8 +201,8 @@ const struct SpriteTemplate gAncientPowerRockSpriteTemplate =
 
 const struct SpriteTemplate gRolloutMudSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_MUD_SAND,
-    .paletteTag = ANIM_TAG_MUD_SAND,
+    .tileTag = TAG_BATTLE_ANIM_MUD_SAND,
+    .paletteTag = TAG_BATTLE_ANIM_MUD_SAND,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -212,8 +212,8 @@ const struct SpriteTemplate gRolloutMudSpriteTemplate =
 
 const struct SpriteTemplate gRolloutRockSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ROCKS,
-    .paletteTag = ANIM_TAG_ROCKS,
+    .tileTag = TAG_BATTLE_ANIM_ROCKS,
+    .paletteTag = TAG_BATTLE_ANIM_ROCKS,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -223,8 +223,8 @@ const struct SpriteTemplate gRolloutRockSpriteTemplate =
 
 const struct SpriteTemplate gRockTombRockSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ROCKS,
-    .paletteTag = ANIM_TAG_ROCKS,
+    .tileTag = TAG_BATTLE_ANIM_ROCKS,
+    .paletteTag = TAG_BATTLE_ANIM_ROCKS,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = sAnims_BasicRock,
     .images = NULL,
@@ -252,8 +252,8 @@ static const union AffineAnimCmd *const sAffineAnims_BasicRock[] =
 
 const struct SpriteTemplate gRockBlastRockSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ROCKS,
-    .paletteTag = ANIM_TAG_ROCKS,
+    .tileTag = TAG_BATTLE_ANIM_ROCKS,
+    .paletteTag = TAG_BATTLE_ANIM_ROCKS,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = sAnims_BasicRock,
     .images = NULL,
@@ -263,8 +263,8 @@ const struct SpriteTemplate gRockBlastRockSpriteTemplate =
 
 const struct SpriteTemplate gRockScatterSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ROCKS,
-    .paletteTag = ANIM_TAG_ROCKS,
+    .tileTag = TAG_BATTLE_ANIM_ROCKS,
+    .paletteTag = TAG_BATTLE_ANIM_ROCKS,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = sAnims_BasicRock,
     .images = NULL,
@@ -274,8 +274,8 @@ const struct SpriteTemplate gRockScatterSpriteTemplate =
 
 const struct SpriteTemplate gTwisterRockSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ROCKS,
-    .paletteTag = ANIM_TAG_ROCKS,
+    .tileTag = TAG_BATTLE_ANIM_ROCKS,
+    .paletteTag = TAG_BATTLE_ANIM_ROCKS,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = &sAnims_BasicRock[4],
     .images = NULL,
@@ -285,8 +285,8 @@ const struct SpriteTemplate gTwisterRockSpriteTemplate =
 
 const struct SpriteTemplate gWeatherBallRockDownSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_ROCKS,
-    .paletteTag = ANIM_TAG_ROCKS,
+    .tileTag = TAG_BATTLE_ANIM_ROCKS,
+    .paletteTag = TAG_BATTLE_ANIM_ROCKS,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = &sAnims_BasicRock[2],
     .images = NULL,

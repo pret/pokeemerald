@@ -125,25 +125,6 @@ enum {
 #define PLAY_AGAIN_NO  1
 #define PLAY_AGAIN_YES 2
 
-#define TAG_MON1 0
-#define TAG_MON2 1 // MON2-5 used implicitly by adding multiplayer id to tag
-#define TAG_MON3 2
-#define TAG_MON4 3
-#define TAG_MON5 4
-
-#define GFXTAG_VINE1     5
-#define GFXTAG_VINE2     6
-#define GFXTAG_VINE3     7
-#define GFXTAG_VINE4     8
-#define GFXTAG_COUNTDOWN 9
-#define GFXTAG_STAR      10
-
-#define PALTAG_1         5
-#define PALTAG_2         6
-#define PALTAG_COUNTDOWN 7
-
-#define TAG_DIGITS 800
-
 #define VINE_SPRITES_PER_SIDE 4 // Vine rope is divided into 8 sprites, 4 per side copied and flipped horizontally
 
 // Used by SetLinkTimeInterval to get a bit mask for capping
@@ -2378,17 +2359,17 @@ static const u32 sStar_Gfx[] = INCBIN_U32("graphics/pokemon_jump/star.4bpp.lz");
 
 static const struct CompressedSpriteSheet sCompressedSpriteSheets[] =
 {
-    {sVine1_Gfx, 0x600, GFXTAG_VINE1},
-    {sVine2_Gfx, 0xC00, GFXTAG_VINE2},
-    {sVine3_Gfx, 0x600, GFXTAG_VINE3},
-    {sVine4_Gfx, 0x600, GFXTAG_VINE4},
-    {sStar_Gfx,  0x200, GFXTAG_STAR},
+    {sVine1_Gfx, 0x600, GFX_TAG_POKEMON_JUMP_VINE1},
+    {sVine2_Gfx, 0xC00, GFX_TAG_POKEMON_JUMP_VINE2},
+    {sVine3_Gfx, 0x600, GFX_TAG_POKEMON_JUMP_VINE3},
+    {sVine4_Gfx, 0x600, GFX_TAG_POKEMON_JUMP_VINE4},
+    {sStar_Gfx,  0x200, GFX_TAG_POKEMON_JUMP_STAR},
 };
 
 static const struct SpritePalette sSpritePalettes[] =
 {
-    {sPokeJumpPal1, PALTAG_1},
-    {sPokeJumpPal2, PALTAG_2},
+    {sPokeJumpPal1, PAL_TAG_POKEMON_JUMP_1},
+    {sPokeJumpPal2, PAL_TAG_POKEMON_JUMP_2},
 };
 
 static const struct OamData sOamData_JumpMon;
@@ -2399,8 +2380,8 @@ static const struct SpriteTemplate sSpriteTemplate_Vine4;
 
 static const struct SpriteTemplate sSpriteTemplate_JumpMon =
 {
-    .tileTag = TAG_MON1,
-    .paletteTag = TAG_MON1,
+    .tileTag = TAG_POKEMON_JUMP_MON1,
+    .paletteTag = TAG_POKEMON_JUMP_MON1,
     .oam = &sOamData_JumpMon,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -2589,8 +2570,8 @@ static const union AnimCmd *const sAnims_VineTall[] =
 
 static const struct SpriteTemplate sSpriteTemplate_Vine1 =
 {
-    .tileTag = GFXTAG_VINE1,
-    .paletteTag = PALTAG_1,
+    .tileTag = GFX_TAG_POKEMON_JUMP_VINE1,
+    .paletteTag = PAL_TAG_POKEMON_JUMP_1,
     .oam = &sOamData_Vine16x32,
     .anims = sAnims_Vine,
     .images = NULL,
@@ -2600,8 +2581,8 @@ static const struct SpriteTemplate sSpriteTemplate_Vine1 =
 
 static const struct SpriteTemplate sSpriteTemplate_Vine2 =
 {
-    .tileTag = GFXTAG_VINE2,
-    .paletteTag = PALTAG_1,
+    .tileTag = GFX_TAG_POKEMON_JUMP_VINE2,
+    .paletteTag = PAL_TAG_POKEMON_JUMP_1,
     .oam = &sOamData_Vine32x32,
     .anims = sAnims_VineTall,
     .images = NULL,
@@ -2611,8 +2592,8 @@ static const struct SpriteTemplate sSpriteTemplate_Vine2 =
 
 static const struct SpriteTemplate sSpriteTemplate_Vine3 =
 {
-    .tileTag = GFXTAG_VINE3,
-    .paletteTag = PALTAG_1,
+    .tileTag = GFX_TAG_POKEMON_JUMP_VINE3,
+    .paletteTag = PAL_TAG_POKEMON_JUMP_1,
     .oam = &sOamData_Vine32x16,
     .anims = sAnims_Vine,
     .images = NULL,
@@ -2622,8 +2603,8 @@ static const struct SpriteTemplate sSpriteTemplate_Vine3 =
 
 static const struct SpriteTemplate sSpriteTemplate_Vine4 =
 {
-    .tileTag = GFXTAG_VINE4,
-    .paletteTag = PALTAG_1,
+    .tileTag = GFX_TAG_POKEMON_JUMP_VINE4,
+    .paletteTag = PAL_TAG_POKEMON_JUMP_1,
     .oam = &sOamData_Vine32x16,
     .anims = sAnims_Vine,
     .images = NULL,
@@ -2673,8 +2654,8 @@ static const union AnimCmd *const sAnims_Star[] =
 
 static const struct SpriteTemplate sSpriteTemplate_Star =
 {
-    .tileTag = GFXTAG_STAR,
-    .paletteTag = PALTAG_1,
+    .tileTag = GFX_TAG_POKEMON_JUMP_STAR,
+    .paletteTag = PAL_TAG_POKEMON_JUMP_1,
     .oam = &sOamData_Star,
     .anims = sAnims_Star,
     .images = NULL,
@@ -2692,8 +2673,8 @@ static void LoadSpriteSheetsAndPalettes(struct PokemonJumpGfx *jumpGfx)
     for (i = 0; i < ARRAY_COUNT(sSpritePalettes); i++)
         LoadSpritePalette(&sSpritePalettes[i]);
 
-    jumpGfx->vinePalNumDownswing = IndexOfSpritePaletteTag(PALTAG_1);
-    jumpGfx->vinePalNumUpswing = IndexOfSpritePaletteTag(PALTAG_2);
+    jumpGfx->vinePalNumDownswing = IndexOfSpritePaletteTag(PAL_TAG_POKEMON_JUMP_1);
+    jumpGfx->vinePalNumUpswing = IndexOfSpritePaletteTag(PAL_TAG_POKEMON_JUMP_2);
 }
 
 static void ResetPokeJumpSpriteData(struct Sprite *sprite)
@@ -3009,7 +2990,7 @@ static void UpdateVineAnim(struct PokemonJumpGfx *jumpGfx, int vineState)
 
 static void StartPokeJumpCountdown(struct PokemonJumpGfx *jumpGfx)
 {
-    StartMinigameCountdown(GFXTAG_COUNTDOWN, PALTAG_COUNTDOWN, 120, 80, 0);
+    StartMinigameCountdown(GFX_TAG_POKEMON_JUMP_COUNTDOWN, PAL_TAG_POKEMON_JUMP_COUNTDOWN, 120, 80, 0);
     Gfx_ResetMonSpriteSubpriorities(jumpGfx);
 }
 
@@ -3660,8 +3641,8 @@ static const u8 sVenusaurStates[] = {
     [VINE_UPSWING_HIGHER]   = VENUSAUR_UP,
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_Digits = {gMinigameDigits_Gfx, 0, TAG_DIGITS};
-static const struct SpritePalette sSpritePalette_Digits = {gMinigameDigits_Pal, TAG_DIGITS};
+static const struct CompressedSpriteSheet sSpriteSheet_Digits = {gMinigameDigits_Gfx, 0, TAG_POKEMON_JUMP_DIGITS};
+static const struct SpritePalette sSpritePalette_Digits = {gMinigameDigits_Pal, TAG_POKEMON_JUMP_DIGITS};
 
 static const u16 sPlayerNameWindowCoords_2Players[] = {
      6, 8,

@@ -39,8 +39,6 @@
 #include "constants/region_map_sections.h"
 #include "constants/metatile_labels.h"
 
-#define PLACE_DECORATION_SELECTOR_TAG 0xbe5
-#define PLACE_DECORATION_PLAYER_TAG   0x008
 #define NUM_DECORATION_FLAGS (FLAG_DECORATION_14 - FLAG_DECORATION_1 + 1)
 
 #define tCursorX data[0]
@@ -358,7 +356,7 @@ static const struct SpriteFrameImage sDecorSelectorSpriteFrameImages =
 static const struct SpriteTemplate sDecorationSelectorSpriteTemplate =
 {
     TAG_NONE,
-    PLACE_DECORATION_SELECTOR_TAG,
+    PAL_TAG_PLACE_DECORATION_SELECTOR,
     &sDecorSelectorOam,
     sDecorSelectorAnimCmds,
     &sDecorSelectorSpriteFrameImages,
@@ -380,7 +378,7 @@ static const struct SpriteTemplate sDecorWhilePlacingSpriteTemplate =
 static const struct SpritePalette sSpritePal_PlaceDecoration =
 {
     .data = (const u16 *)&sPlaceDecorationGraphicsDataBuffer.palette,
-    .tag = PLACE_DECORATION_SELECTOR_TAG,
+    .tag = PAL_TAG_PLACE_DECORATION_SELECTOR,
 };
 
 static const struct YesNoFuncTable sPlaceDecorationYesNoFunctions =
@@ -455,13 +453,13 @@ static const u8 sDecorationPuttingAwayCursor[] = INCBIN_U8("graphics/decorations
 static const struct SpritePalette sSpritePal_PuttingAwayCursorBrendan =
 {
     .data = sBrendanPalette,
-    .tag = PLACE_DECORATION_PLAYER_TAG,
+    .tag = PAL_TAG_PLACE_DECORATION_PLAYER,
 };
 
 static const struct SpritePalette sSpritePal_PuttingAwayCursorMay =
 {
     .data = sMayPalette,
-    .tag = PLACE_DECORATION_PLAYER_TAG,
+    .tag = PAL_TAG_PLACE_DECORATION_PLAYER,
 };
 
 static const struct OamData sPuttingAwayCursorOamData =
@@ -498,7 +496,7 @@ static const struct SpriteFrameImage sPuttingAwayCursorPicTable =
 static const struct SpriteTemplate sPuttingAwayCursorSpriteTemplate =
 {
     TAG_NONE,
-    PLACE_DECORATION_PLAYER_TAG,
+    PAL_TAG_PLACE_DECORATION_PLAYER,
     &sPuttingAwayCursorOamData,
     sPuttingAwayCursorAnimCmds,
     &sPuttingAwayCursorPicTable,
@@ -1753,7 +1751,7 @@ static void c1_overworld_prev_quest(u8 taskId)
         break;
     case 1:
         FreePlayerSpritePalette();
-        FreeSpritePaletteByTag(PLACE_DECORATION_SELECTOR_TAG);
+        FreeSpritePaletteByTag(PAL_TAG_PLACE_DECORATION_SELECTOR);
         gFieldCallback = FieldCB_InitDecorationItemsWindow;
         SetMainCallback2(CB2_ReturnToField);
         DestroyTask(taskId);
@@ -2054,7 +2052,7 @@ static u8 gpu_pal_decompress_alloc_tag_and_upload(struct PlaceDecorationGraphics
     if (data->decoration->permission == DECORPERM_SPRITE)
         return CreateObjectGraphicsSprite(data->decoration->tiles[0], SpriteCallbackDummy, 0, 0, 1);
 
-    FreeSpritePaletteByTag(PLACE_DECORATION_SELECTOR_TAG);
+    FreeSpritePaletteByTag(PAL_TAG_PLACE_DECORATION_SELECTOR);
     SetDecorSelectionMetatiles(data);
     SetDecorSelectionBoxOamAttributes(data->decoration->shape);
     SetDecorSelectionBoxTiles(data);
@@ -2713,7 +2711,7 @@ static void LoadPlayerSpritePalette(void)
 
 static void FreePlayerSpritePalette(void)
 {
-    FreeSpritePaletteByTag(PLACE_DECORATION_PLAYER_TAG);
+    FreeSpritePaletteByTag(PAL_TAG_PLACE_DECORATION_PLAYER);
 }
 
 static void DecorationItemsMenuAction_AttemptToss(u8 taskId)
