@@ -83,7 +83,6 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleOpponent::
 	setvar VAR_0x8004, SPECIAL_BATTLE_FACTORY
 	setvar VAR_0x8005, 0
 	special DoSpecialTrainerBattle
-	waitstate
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedOpponent
 BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyLost::
@@ -174,7 +173,6 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_DoNolandBattle::
 	setvar VAR_0x8004, SPECIAL_BATTLE_FACTORY
 	setvar VAR_0x8005, 0
 	special DoSpecialTrainerBattle
-	waitstate
 	return
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNoland::
