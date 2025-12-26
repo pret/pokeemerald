@@ -1,5 +1,5 @@
 AbandonedShip_CaptainsOffice_MapScripts::
-	.byte 0
+	end_map_scripts
 
 AbandonedShip_CaptainsOffice_EventScript_CaptSternAide::
 	lock

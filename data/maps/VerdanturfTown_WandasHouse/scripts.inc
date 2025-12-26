@@ -1,5 +1,5 @@
 VerdanturfTown_WandasHouse_MapScripts::
-	.byte 0
+	end_map_scripts
 
 VerdanturfTown_WandasHouse_EventScript_Wally::
 	lock
