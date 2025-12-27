@@ -1612,26 +1612,26 @@ void ply_xswee(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track
     track->cmdPtr++;
 }
 
-void ply_xcmd_0C(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
+void ply_xwait(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
 {
-    u32 unk;
+    u32 len;
 
 #ifdef UBFIX
-    unk = 0;
+    len = 0;
 #endif
 
-    READ_XCMD_BYTE(unk, 0) // UB: uninitialized variable
-    READ_XCMD_BYTE(unk, 1)
+    READ_XCMD_BYTE(len, 0) // UB: uninitialized variable
+    READ_XCMD_BYTE(len, 1)
 
-    if (track->unk_3A < (u16)unk)
+    if (track->timer < (u16)len)
     {
-        track->unk_3A++;
+        track->timer++;
         track->cmdPtr -= 2;
         track->wait = 1;
     }
     else
     {
-        track->unk_3A = 0;
+        track->timer = 0;
         track->cmdPtr += 2;
     }
 }
@@ -1719,7 +1719,7 @@ void SetPokemonCryPitch(s16 val)
 
 void SetPokemonCryLength(u16 val)
 {
-    gPokemonCrySong.unkCmd0CParam = val;
+    gPokemonCrySong.length = val;
 }
 
 void SetPokemonCryRelease(u8 val)
