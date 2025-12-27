@@ -257,8 +257,8 @@ struct PokemonCrySong
     u8 tieCmd; // 0x29
     u8 tieKeyValue; // 0x2A
     u8 tieVelocityValue; // 0x2B
-    u8 unkCmd0C[2]; // 0x2C
-    u16 unkCmd0CParam; // 0x2E
+    u8 xwaitCmd[2]; // 0x2C
+    u16 length; // 0x2E
     u8 end[2]; // 0x30
 };
 
@@ -306,7 +306,7 @@ struct MusicPlayerTrack
     struct SoundChannel *chan;
     struct ToneData tone;
     u8 gap[10];
-    u16 unk_3A;
+    u16 timer;
     u32 unk_3C;
     u8 *cmdPtr;
     u8 *patternStack[3];
@@ -495,7 +495,7 @@ void ply_xiecv(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xiecl(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xleng(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xswee(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
-void ply_xcmd_0C(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_xwait(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xcmd_0D(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 
 #endif // GUARD_GBA_M4A_INTERNAL_H
