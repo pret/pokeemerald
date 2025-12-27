@@ -35,4 +35,5 @@ public:
     uint8_t midiKey = 60;
     uint32_t sampleRate;
     uint32_t agbPitch = 0; // optional: exact GBA pitch value from 'agbp' chunk (0 = not present)
+    uint32_t agbLoopEnd = 0; // optional: exact loop end from 'agbl' chunk (0 = not present)
 };
