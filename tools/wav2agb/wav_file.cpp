@@ -169,6 +169,12 @@ wav_file::wav_file(const std::string& path) : loadBuffer(loadChunkSize)
             if (chunkLen >= 4) {
                 this->agbPitch = arr_u32(agbpChunk, 0);
             }
+        } else if (chunkId == "agbl") {
+            // Custom chunk: exact loop end override (handles off-by-one from original game)
+            std::vector<uint8_t> agblChunk = read_arr(ifs, chunkLen);
+            if (chunkLen >= 4) {
+                this->agbLoopEnd = arr_u32(agblChunk, 0);
+            }
         } else {
             //fprintf(stderr, "WARNING: ignoring unknown chunk type: <%s>\n", chunkId.c_str());
             ifs.seekg(chunkLen, ifs.cur);
