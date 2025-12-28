@@ -7,6 +7,7 @@
 #include <string>
 
 #include "converter.h"
+#include "wav_file.h"
 
 static void usage() {
     fprintf(stderr, "wav2agb\n");
@@ -25,6 +26,7 @@ static void usage() {
     fprintf(stderr, "--tune <cents>           | override tuning (float)\n");
     fprintf(stderr, "--key <key>              | override midi key (int)\n");
     fprintf(stderr, "--rate <rate>            | override base samplerate (int)\n");
+    fprintf(stderr, "--set-agbl <loop-end>    | adds the custom agbl chunk to the given input .wav file\n");
     exit(1);
 }
 
@@ -106,6 +108,8 @@ static bool arg_input_file_read = false;
 static bool arg_output_file_read = false;
 static std::string arg_input_file;
 static std::string arg_output_file;
+static bool arg_set_agbl = false;
+static int32_t arg_agbl_value = 0;
 
 int main(int argc, char *argv[]) {
     try {
@@ -163,6 +167,11 @@ int main(int argc, char *argv[]) {
                     die("--rate: missing parameter");
                 uint32_t rate = static_cast<uint32_t>(std::stoul(argv[i], nullptr, 10));
                 set_wav_rate(rate);
+            } else if (st == "--set-agbl") {
+                if (++i >= argc)
+                    die("--set-agbl: missing parameter");
+                arg_agbl_value = std::stoi(argv[i], nullptr, 10);
+                arg_set_agbl = true;
             } else {
                 if (st == "--") {
                     if (++i >= argc)
@@ -191,7 +200,9 @@ int main(int argc, char *argv[]) {
 
         if (!arg_output_file_read) {
             // create output file name if none is provided
-            if (arg_output_type == out_type::binary) {
+            if (arg_set_agbl) {
+                arg_output_file = arg_input_file;
+            } else if (arg_output_type == out_type::binary) {
                 arg_output_file = filename_without_ext(arg_input_file) + ".bin";
             } else {
                 arg_output_file = filename_without_ext(arg_input_file) + ".s";
@@ -202,6 +213,29 @@ int main(int argc, char *argv[]) {
         if (arg_sym.size() == 0) {
             arg_sym = filename_without_dir(filename_without_ext(arg_output_file));
             fix_str(arg_sym);
+        }
+
+        if (arg_set_agbl) {
+            // Parse the WAV file once to get both chunks and metadata
+            wav_file wav(arg_input_file);
+
+            // Calculate actual loop-end value
+            uint32_t loop_end_value;
+            if (arg_agbl_value < 0) {
+                // Negative value: offset from end of samples
+                int64_t calculated = static_cast<int64_t>(wav.numSamples) + arg_agbl_value;
+                if (calculated < 0) {
+                    die("--set-agbl: negative offset %d exceeds total samples %u\n",
+                        arg_agbl_value, wav.numSamples);
+                }
+                loop_end_value = static_cast<uint32_t>(calculated);
+            } else {
+                // Positive value: use directly
+                loop_end_value = static_cast<uint32_t>(arg_agbl_value);
+            }
+
+            write_wav_with_agbl_chunk(arg_output_file, wav.chunks, loop_end_value);
+            return 0;
         }
 
         convert(arg_input_file, arg_output_file, arg_sym, arg_compress, arg_output_type);
