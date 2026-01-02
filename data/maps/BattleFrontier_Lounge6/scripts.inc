@@ -12,7 +12,6 @@ BattleFrontier_Lounge6_EventScript_Trader::
 	msgbox BattleFrontier_Lounge6_Text_WouldYouLikeToTrade, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, BattleFrontier_Lounge6_EventScript_DeclineTrade
 	special ChoosePartyMon
-	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, BattleFrontier_Lounge6_EventScript_DeclineTrade
 	copyvar VAR_0x8005, VAR_0x800A
@@ -23,7 +22,6 @@ BattleFrontier_Lounge6_EventScript_Trader::
 	copyvar VAR_0x8005, VAR_0x800A
 	special CreateInGameTradePokemon
 	special DoInGameTradeScene
-	waitstate
 	msgbox BattleFrontier_Lounge6_Text_PromiseIllBeGoodToIt, MSGBOX_DEFAULT
 	setflag FLAG_BATTLE_FRONTIER_TRADE_DONE
 	release
