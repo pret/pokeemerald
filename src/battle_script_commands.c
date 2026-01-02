@@ -328,255 +328,255 @@ static void Cmd_trainerslideout(void);
 
 void (*const gBattleScriptingCommandsTable[])(void) =
 {
-    Cmd_attackcanceler,                          //0x0
-    Cmd_accuracycheck,                           //0x1
-    Cmd_attackstring,                            //0x2
-    Cmd_ppreduce,                                //0x3
-    Cmd_critcalc,                                //0x4
-    Cmd_damagecalc,                              //0x5
-    Cmd_typecalc,                                //0x6
-    Cmd_adjustnormaldamage,                      //0x7
-    Cmd_adjustnormaldamage2,                     //0x8
-    Cmd_attackanimation,                         //0x9
-    Cmd_waitanimation,                           //0xA
-    Cmd_healthbarupdate,                         //0xB
-    Cmd_datahpupdate,                            //0xC
-    Cmd_critmessage,                             //0xD
-    Cmd_effectivenesssound,                      //0xE
-    Cmd_resultmessage,                           //0xF
-    Cmd_printstring,                             //0x10
-    Cmd_printselectionstring,                    //0x11
-    Cmd_waitmessage,                             //0x12
-    Cmd_printfromtable,                          //0x13
-    Cmd_printselectionstringfromtable,           //0x14
-    Cmd_seteffectwithchance,                     //0x15
-    Cmd_seteffectprimary,                        //0x16
-    Cmd_seteffectsecondary,                      //0x17
-    Cmd_clearstatusfromeffect,                   //0x18
-    Cmd_tryfaintmon,                             //0x19
-    Cmd_dofaintanimation,                        //0x1A
-    Cmd_cleareffectsonfaint,                     //0x1B
-    Cmd_jumpifstatus,                            //0x1C
-    Cmd_jumpifstatus2,                           //0x1D
-    Cmd_jumpifability,                           //0x1E
-    Cmd_jumpifsideaffecting,                     //0x1F
-    Cmd_jumpifstat,                              //0x20
-    Cmd_jumpifstatus3condition,                  //0x21
-    Cmd_jumpiftype,                              //0x22
-    Cmd_getexp,                                  //0x23
-    Cmd_checkteamslost,                          //0x24
-    Cmd_movevaluescleanup,                       //0x25
-    Cmd_setmultihit,                             //0x26
-    Cmd_decrementmultihit,                       //0x27
-    Cmd_goto,                                    //0x28
-    Cmd_jumpifbyte,                              //0x29
-    Cmd_jumpifhalfword,                          //0x2A
-    Cmd_jumpifword,                              //0x2B
-    Cmd_jumpifarrayequal,                        //0x2C
-    Cmd_jumpifarraynotequal,                     //0x2D
-    Cmd_setbyte,                                 //0x2E
-    Cmd_addbyte,                                 //0x2F
-    Cmd_subbyte,                                 //0x30
-    Cmd_copyarray,                               //0x31
-    Cmd_copyarraywithindex,                      //0x32
-    Cmd_orbyte,                                  //0x33
-    Cmd_orhalfword,                              //0x34
-    Cmd_orword,                                  //0x35
-    Cmd_bicbyte,                                 //0x36
-    Cmd_bichalfword,                             //0x37
-    Cmd_bicword,                                 //0x38
-    Cmd_pause,                                   //0x39
-    Cmd_waitstate,                               //0x3A
-    Cmd_healthbar_update,                        //0x3B
-    Cmd_return,                                  //0x3C
-    Cmd_end,                                     //0x3D
-    Cmd_end2,                                    //0x3E
-    Cmd_end3,                                    //0x3F
-    Cmd_jumpifaffectedbyprotect,                 //0x40
-    Cmd_call,                                    //0x41
-    Cmd_jumpiftype2,                             //0x42
-    Cmd_jumpifabilitypresent,                    //0x43
-    Cmd_endselectionscript,                      //0x44
-    Cmd_playanimation,                           //0x45
-    Cmd_playanimation_var,                       //0x46
-    Cmd_setgraphicalstatchangevalues,            //0x47
-    Cmd_playstatchangeanimation,                 //0x48
-    Cmd_moveend,                                 //0x49
-    Cmd_typecalc2,                               //0x4A
-    Cmd_returnatktoball,                         //0x4B
-    Cmd_getswitchedmondata,                      //0x4C
-    Cmd_switchindataupdate,                      //0x4D
-    Cmd_switchinanim,                            //0x4E
-    Cmd_jumpifcantswitch,                        //0x4F
-    Cmd_openpartyscreen,                         //0x50
-    Cmd_switchhandleorder,                       //0x51
-    Cmd_switchineffects,                         //0x52
-    Cmd_trainerslidein,                          //0x53
-    Cmd_playse,                                  //0x54
-    Cmd_fanfare,                                 //0x55
-    Cmd_playfaintcry,                            //0x56
-    Cmd_endlinkbattle,                           //0x57
-    Cmd_returntoball,                            //0x58
-    Cmd_handlelearnnewmove,                      //0x59
-    Cmd_yesnoboxlearnmove,                       //0x5A
-    Cmd_yesnoboxstoplearningmove,                //0x5B
-    Cmd_hitanimation,                            //0x5C
-    Cmd_getmoneyreward,                          //0x5D
-    Cmd_updatebattlermoves,                      //0x5E
-    Cmd_swapattackerwithtarget,                  //0x5F
-    Cmd_incrementgamestat,                       //0x60
-    Cmd_drawpartystatussummary,                  //0x61
-    Cmd_hidepartystatussummary,                  //0x62
-    Cmd_jumptocalledmove,                        //0x63
-    Cmd_statusanimation,                         //0x64
-    Cmd_status2animation,                        //0x65
-    Cmd_chosenstatusanimation,                   //0x66
-    Cmd_yesnobox,                                //0x67
-    Cmd_cancelallactions,                        //0x68
-    Cmd_adjustsetdamage,                         //0x69
-    Cmd_removeitem,                              //0x6A
-    Cmd_atknameinbuff1,                          //0x6B
-    Cmd_drawlvlupbox,                            //0x6C
-    Cmd_resetsentmonsvalue,                      //0x6D
-    Cmd_setatktoplayer0,                         //0x6E
-    Cmd_makevisible,                             //0x6F
-    Cmd_recordlastability,                       //0x70
-    Cmd_buffermovetolearn,                       //0x71
-    Cmd_jumpifplayerran,                         //0x72
-    Cmd_hpthresholds,                            //0x73
-    Cmd_hpthresholds2,                           //0x74
-    Cmd_useitemonopponent,                       //0x75
-    Cmd_various,                                 //0x76
-    Cmd_setprotectlike,                          //0x77
-    Cmd_tryexplosion,                            //0x78
-    Cmd_setatkhptozero,                          //0x79
-    Cmd_jumpifnexttargetvalid,                   //0x7A
-    Cmd_tryhealhalfhealth,                       //0x7B
-    Cmd_trymirrormove,                           //0x7C
-    Cmd_setrain,                                 //0x7D
-    Cmd_setreflect,                              //0x7E
-    Cmd_setseeded,                               //0x7F
-    Cmd_manipulatedamage,                        //0x80
-    Cmd_trysetrest,                              //0x81
-    Cmd_jumpifnotfirstturn,                      //0x82
-    Cmd_nop,                                     //0x83
-    Cmd_jumpifcantmakeasleep,                    //0x84
-    Cmd_stockpile,                               //0x85
-    Cmd_stockpiletobasedamage,                   //0x86
-    Cmd_stockpiletohpheal,                       //0x87
-    Cmd_negativedamage,                          //0x88
-    Cmd_statbuffchange,                          //0x89
-    Cmd_normalisebuffs,                          //0x8A
-    Cmd_setbide,                                 //0x8B
-    Cmd_confuseifrepeatingattackends,            //0x8C
-    Cmd_setmultihitcounter,                      //0x8D
-    Cmd_initmultihitstring,                      //0x8E
-    Cmd_forcerandomswitch,                       //0x8F
-    Cmd_tryconversiontypechange,                 //0x90
-    Cmd_givepaydaymoney,                         //0x91
-    Cmd_setlightscreen,                          //0x92
-    Cmd_tryKO,                                   //0x93
-    Cmd_damagetohalftargethp,                    //0x94
-    Cmd_setsandstorm,                            //0x95
-    Cmd_weatherdamage,                           //0x96
-    Cmd_tryinfatuating,                          //0x97
-    Cmd_updatestatusicon,                        //0x98
-    Cmd_setmist,                                 //0x99
-    Cmd_setfocusenergy,                          //0x9A
-    Cmd_transformdataexecution,                  //0x9B
-    Cmd_setsubstitute,                           //0x9C
-    Cmd_mimicattackcopy,                         //0x9D
-    Cmd_metronome,                               //0x9E
-    Cmd_dmgtolevel,                              //0x9F
-    Cmd_psywavedamageeffect,                     //0xA0
-    Cmd_counterdamagecalculator,                 //0xA1
-    Cmd_mirrorcoatdamagecalculator,              //0xA2
-    Cmd_disablelastusedattack,                   //0xA3
-    Cmd_trysetencore,                            //0xA4
-    Cmd_painsplitdmgcalc,                        //0xA5
-    Cmd_settypetorandomresistance,               //0xA6
-    Cmd_setalwayshitflag,                        //0xA7
-    Cmd_copymovepermanently,                     //0xA8
-    Cmd_trychoosesleeptalkmove,                  //0xA9
-    Cmd_setdestinybond,                          //0xAA
-    Cmd_trysetdestinybondtohappen,               //0xAB
-    Cmd_remaininghptopower,                      //0xAC
-    Cmd_tryspiteppreduce,                        //0xAD
-    Cmd_healpartystatus,                         //0xAE
-    Cmd_cursetarget,                             //0xAF
-    Cmd_trysetspikes,                            //0xB0
-    Cmd_setforesight,                            //0xB1
-    Cmd_trysetperishsong,                        //0xB2
-    Cmd_rolloutdamagecalculation,                //0xB3
-    Cmd_jumpifconfusedandstatmaxed,              //0xB4
-    Cmd_furycuttercalc,                          //0xB5
-    Cmd_friendshiptodamagecalculation,           //0xB6
-    Cmd_presentdamagecalculation,                //0xB7
-    Cmd_setsafeguard,                            //0xB8
-    Cmd_magnitudedamagecalculation,              //0xB9
-    Cmd_jumpifnopursuitswitchdmg,                //0xBA
-    Cmd_setsunny,                                //0xBB
-    Cmd_maxattackhalvehp,                        //0xBC
-    Cmd_copyfoestats,                            //0xBD
-    Cmd_rapidspinfree,                           //0xBE
-    Cmd_setdefensecurlbit,                       //0xBF
-    Cmd_recoverbasedonsunlight,                  //0xC0
-    Cmd_hiddenpowercalc,                         //0xC1
-    Cmd_selectfirstvalidtarget,                  //0xC2
-    Cmd_trysetfutureattack,                      //0xC3
-    Cmd_trydobeatup,                             //0xC4
-    Cmd_setsemiinvulnerablebit,                  //0xC5
-    Cmd_clearsemiinvulnerablebit,                //0xC6
-    Cmd_setminimize,                             //0xC7
-    Cmd_sethail,                                 //0xC8
-    Cmd_trymemento,                              //0xC9
-    Cmd_setforcedtarget,                         //0xCA
-    Cmd_setcharge,                               //0xCB
-    Cmd_callenvironmentattack,                   //0xCC
-    Cmd_cureifburnedparalyzedorpoisoned,         //0xCD
-    Cmd_settorment,                              //0xCE
-    Cmd_jumpifnodamage,                          //0xCF
-    Cmd_settaunt,                                //0xD0
-    Cmd_trysethelpinghand,                       //0xD1
-    Cmd_tryswapitems,                            //0xD2
-    Cmd_trycopyability,                          //0xD3
-    Cmd_trywish,                                 //0xD4
-    Cmd_trysetroots,                             //0xD5
-    Cmd_doubledamagedealtifdamaged,              //0xD6
-    Cmd_setyawn,                                 //0xD7
-    Cmd_setdamagetohealthdifference,             //0xD8
-    Cmd_scaledamagebyhealthratio,                //0xD9
-    Cmd_tryswapabilities,                        //0xDA
-    Cmd_tryimprison,                             //0xDB
-    Cmd_trysetgrudge,                            //0xDC
-    Cmd_weightdamagecalculation,                 //0xDD
-    Cmd_assistattackselect,                      //0xDE
-    Cmd_trysetmagiccoat,                         //0xDF
-    Cmd_trysetsnatch,                            //0xE0
-    Cmd_trygetintimidatetarget,                  //0xE1
-    Cmd_switchoutabilities,                      //0xE2
-    Cmd_jumpifhasnohp,                           //0xE3
-    Cmd_getsecretpowereffect,                    //0xE4
-    Cmd_pickup,                                  //0xE5
-    Cmd_docastformchangeanimation,               //0xE6
-    Cmd_trycastformdatachange,                   //0xE7
-    Cmd_settypebasedhalvers,                     //0xE8
-    Cmd_setweatherballtype,                      //0xE9
-    Cmd_tryrecycleitem,                          //0xEA
-    Cmd_settypetoenvironment,                    //0xEB
-    Cmd_pursuitdoubles,                          //0xEC
-    Cmd_snatchsetbattlers,                       //0xED
-    Cmd_removelightscreenreflect,                //0xEE
-    Cmd_handleballthrow,                         //0xEF
-    Cmd_givecaughtmon,                           //0xF0
-    Cmd_trysetcaughtmondexflags,                 //0xF1
-    Cmd_displaydexinfo,                          //0xF2
-    Cmd_trygivecaughtmonnick,                    //0xF3
-    Cmd_subattackerhpbydmg,                      //0xF4
-    Cmd_removeattackerstatus1,                   //0xF5
-    Cmd_finishaction,                            //0xF6
-    Cmd_finishturn,                              //0xF7
-    Cmd_trainerslideout                          //0xF8
+    [B_SCR_OP_ATTACKCANCELER]                  = Cmd_attackcanceler,                          //0x0
+    [B_SCR_OP_ACCURACYCHECK]                   = Cmd_accuracycheck,                           //0x1
+    [B_SCR_OP_ATTACKSTRING]                    = Cmd_attackstring,                            //0x2
+    [B_SCR_OP_PPREDUCE]                        = Cmd_ppreduce,                                //0x3
+    [B_SCR_OP_CRITCALC]                        = Cmd_critcalc,                                //0x4
+    [B_SCR_OP_DAMAGECALC]                      = Cmd_damagecalc,                              //0x5
+    [B_SCR_OP_TYPECALC]                        = Cmd_typecalc,                                //0x6
+    [B_SCR_OP_ADJUSTNORMALDAMAGE]              = Cmd_adjustnormaldamage,                      //0x7
+    [B_SCR_OP_ADJUSTNORMALDAMAGE2]             = Cmd_adjustnormaldamage2,                     //0x8
+    [B_SCR_OP_ATTACKANIMATION]                 = Cmd_attackanimation,                         //0x9
+    [B_SCR_OP_WAITANIMATION]                   = Cmd_waitanimation,                           //0xA
+    [B_SCR_OP_HEALTHBARUPDATE]                 = Cmd_healthbarupdate,                         //0xB
+    [B_SCR_OP_DATAHPUPDATE]                    = Cmd_datahpupdate,                            //0xC
+    [B_SCR_OP_CRITMESSAGE]                     = Cmd_critmessage,                             //0xD
+    [B_SCR_OP_EFFECTIVENESSSOUND]              = Cmd_effectivenesssound,                      //0xE
+    [B_SCR_OP_RESULTMESSAGE]                   = Cmd_resultmessage,                           //0xF
+    [B_SCR_OP_PRINTSTRING]                     = Cmd_printstring,                             //0x10
+    [B_SCR_OP_PRINTSELECTIONSTRING]            = Cmd_printselectionstring,                    //0x11
+    [B_SCR_OP_WAITMESSAGE]                     = Cmd_waitmessage,                             //0x12
+    [B_SCR_OP_PRINTFROMTABLE]                  = Cmd_printfromtable,                          //0x13
+    [B_SCR_OP_PRINTSELECTIONSTRINGFROMTABLE]   = Cmd_printselectionstringfromtable,           //0x14
+    [B_SCR_OP_SETEFFECTWITHCHANCE]             = Cmd_seteffectwithchance,                     //0x15
+    [B_SCR_OP_SETEFFECTPRIMARY]                = Cmd_seteffectprimary,                        //0x16
+    [B_SCR_OP_SETEFFECTSECONDARY]              = Cmd_seteffectsecondary,                      //0x17
+    [B_SCR_OP_CLEARSTATUSFROMEFFECT]           = Cmd_clearstatusfromeffect,                   //0x18
+    [B_SCR_OP_TRYFAINTMON]                     = Cmd_tryfaintmon,                             //0x19
+    [B_SCR_OP_DOFAINTANIMATION]                = Cmd_dofaintanimation,                        //0x1A
+    [B_SCR_OP_CLEAREFFECTSONFAINT]             = Cmd_cleareffectsonfaint,                     //0x1B
+    [B_SCR_OP_JUMPIFSTATUS]                    = Cmd_jumpifstatus,                            //0x1C
+    [B_SCR_OP_JUMPIFSTATUS2]                   = Cmd_jumpifstatus2,                           //0x1D
+    [B_SCR_OP_JUMPIFABILITY]                   = Cmd_jumpifability,                           //0x1E
+    [B_SCR_OP_JUMPIFSIDEAFFECTING]             = Cmd_jumpifsideaffecting,                     //0x1F
+    [B_SCR_OP_JUMPIFSTAT]                      = Cmd_jumpifstat,                              //0x20
+    [B_SCR_OP_JUMPIFSTATUS3CONDITION]          = Cmd_jumpifstatus3condition,                  //0x21
+    [B_SCR_OP_JUMPIFTYPE]                      = Cmd_jumpiftype,                              //0x22
+    [B_SCR_OP_GETEXP]                          = Cmd_getexp,                                  //0x23
+    [B_SCR_OP_CHECKTEAMSLOST]                  = Cmd_checkteamslost,                          //0x24
+    [B_SCR_OP_MOVEVALUESCLEANUP]               = Cmd_movevaluescleanup,                       //0x25
+    [B_SCR_OP_SETMULTIHIT]                     = Cmd_setmultihit,                             //0x26
+    [B_SCR_OP_DECREMENTMULTIHIT]               = Cmd_decrementmultihit,                       //0x27
+    [B_SCR_OP_GOTO]                            = Cmd_goto,                                    //0x28
+    [B_SCR_OP_JUMPIFBYTE]                      = Cmd_jumpifbyte,                              //0x29
+    [B_SCR_OP_JUMPIFHALFWORD]                  = Cmd_jumpifhalfword,                          //0x2A
+    [B_SCR_OP_JUMPIFWORD]                      = Cmd_jumpifword,                              //0x2B
+    [B_SCR_OP_JUMPIFARRAYEQUAL]                = Cmd_jumpifarrayequal,                        //0x2C
+    [B_SCR_OP_JUMPIFARRAYNOTEQUAL]             = Cmd_jumpifarraynotequal,                     //0x2D
+    [B_SCR_OP_SETBYTE]                         = Cmd_setbyte,                                 //0x2E
+    [B_SCR_OP_ADDBYTE]                         = Cmd_addbyte,                                 //0x2F
+    [B_SCR_OP_SUBBYTE]                         = Cmd_subbyte,                                 //0x30
+    [B_SCR_OP_COPYARRAY]                       = Cmd_copyarray,                               //0x31
+    [B_SCR_OP_COPYARRAYWITHINDEX]              = Cmd_copyarraywithindex,                      //0x32
+    [B_SCR_OP_ORBYTE]                          = Cmd_orbyte,                                  //0x33
+    [B_SCR_OP_ORHALFWORD]                      = Cmd_orhalfword,                              //0x34
+    [B_SCR_OP_ORWORD]                          = Cmd_orword,                                  //0x35
+    [B_SCR_OP_BICBYTE]                         = Cmd_bicbyte,                                 //0x36
+    [B_SCR_OP_BICHALFWORD]                     = Cmd_bichalfword,                             //0x37
+    [B_SCR_OP_BICWORD]                         = Cmd_bicword,                                 //0x38
+    [B_SCR_OP_PAUSE]                           = Cmd_pause,                                   //0x39
+    [B_SCR_OP_WAITSTATE]                       = Cmd_waitstate,                               //0x3A
+    [B_SCR_OP_HEALTHBAR_UPDATE]                = Cmd_healthbar_update,                        //0x3B
+    [B_SCR_OP_RETURN]                          = Cmd_return,                                  //0x3C
+    [B_SCR_OP_END]                             = Cmd_end,                                     //0x3D
+    [B_SCR_OP_END2]                            = Cmd_end2,                                    //0x3E
+    [B_SCR_OP_END3]                            = Cmd_end3,                                    //0x3F
+    [B_SCR_OP_JUMPIFAFFECTEDBYPROTECT]         = Cmd_jumpifaffectedbyprotect,                 //0x40
+    [B_SCR_OP_CALL]                            = Cmd_call,                                    //0x41
+    [B_SCR_OP_JUMPIFTYPE2]                     = Cmd_jumpiftype2,                             //0x42
+    [B_SCR_OP_JUMPIFABILITYPRESENT]            = Cmd_jumpifabilitypresent,                    //0x43
+    [B_SCR_OP_ENDSELECTIONSCRIPT]              = Cmd_endselectionscript,                      //0x44
+    [B_SCR_OP_PLAYANIMATION]                   = Cmd_playanimation,                           //0x45
+    [B_SCR_OP_PLAYANIMATION_VAR]               = Cmd_playanimation_var,                       //0x46
+    [B_SCR_OP_SETGRAPHICALSTATCHANGEVALUES]    = Cmd_setgraphicalstatchangevalues,            //0x47
+    [B_SCR_OP_PLAYSTATCHANGEANIMATION]         = Cmd_playstatchangeanimation,                 //0x48
+    [B_SCR_OP_MOVEEND]                         = Cmd_moveend,                                 //0x49
+    [B_SCR_OP_TYPECALC2]                       = Cmd_typecalc2,                               //0x4A
+    [B_SCR_OP_RETURNATKTOBALL]                 = Cmd_returnatktoball,                         //0x4B
+    [B_SCR_OP_GETSWITCHEDMONDATA]              = Cmd_getswitchedmondata,                      //0x4C
+    [B_SCR_OP_SWITCHINDATAUPDATE]              = Cmd_switchindataupdate,                      //0x4D
+    [B_SCR_OP_SWITCHINANIM]                    = Cmd_switchinanim,                            //0x4E
+    [B_SCR_OP_JUMPIFCANTSWITCH]                = Cmd_jumpifcantswitch,                        //0x4F
+    [B_SCR_OP_OPENPARTYSCREEN]                 = Cmd_openpartyscreen,                         //0x50
+    [B_SCR_OP_SWITCHHANDLEORDER]               = Cmd_switchhandleorder,                       //0x51
+    [B_SCR_OP_SWITCHINEFFECTS]                 = Cmd_switchineffects,                         //0x52
+    [B_SCR_OP_TRAINERSLIDEIN]                  = Cmd_trainerslidein,                          //0x53
+    [B_SCR_OP_PLAYSE]                          = Cmd_playse,                                  //0x54
+    [B_SCR_OP_FANFARE]                         = Cmd_fanfare,                                 //0x55
+    [B_SCR_OP_PLAYFAINTCRY]                    = Cmd_playfaintcry,                            //0x56
+    [B_SCR_OP_ENDLINKBATTLE]                   = Cmd_endlinkbattle,                           //0x57
+    [B_SCR_OP_RETURNTOBALL]                    = Cmd_returntoball,                            //0x58
+    [B_SCR_OP_HANDLELEARNNEWMOVE]              = Cmd_handlelearnnewmove,                      //0x59
+    [B_SCR_OP_YESNOBOXLEARNMOVE]               = Cmd_yesnoboxlearnmove,                       //0x5A
+    [B_SCR_OP_YESNOBOXSTOPLEARNINGMOVE]        = Cmd_yesnoboxstoplearningmove,                //0x5B
+    [B_SCR_OP_HITANIMATION]                    = Cmd_hitanimation,                            //0x5C
+    [B_SCR_OP_GETMONEYREWARD]                  = Cmd_getmoneyreward,                          //0x5D
+    [B_SCR_OP_UPDATEBATTLERMOVES]              = Cmd_updatebattlermoves,                      //0x5E
+    [B_SCR_OP_SWAPATTACKERWITHTARGET]          = Cmd_swapattackerwithtarget,                  //0x5F
+    [B_SCR_OP_INCREMENTGAMESTAT]               = Cmd_incrementgamestat,                       //0x60
+    [B_SCR_OP_DRAWPARTYSTATUSSUMMARY]          = Cmd_drawpartystatussummary,                  //0x61
+    [B_SCR_OP_HIDEPARTYSTATUSSUMMARY]          = Cmd_hidepartystatussummary,                  //0x62
+    [B_SCR_OP_JUMPTOCALLEDMOVE]                = Cmd_jumptocalledmove,                        //0x63
+    [B_SCR_OP_STATUSANIMATION]                 = Cmd_statusanimation,                         //0x64
+    [B_SCR_OP_STATUS2ANIMATION]                = Cmd_status2animation,                        //0x65
+    [B_SCR_OP_CHOSENSTATUSANIMATION]           = Cmd_chosenstatusanimation,                   //0x66
+    [B_SCR_OP_YESNOBOX]                        = Cmd_yesnobox,                                //0x67
+    [B_SCR_OP_CANCELALLACTIONS]                = Cmd_cancelallactions,                        //0x68
+    [B_SCR_OP_ADJUSTSETDAMAGE]                 = Cmd_adjustsetdamage,                         //0x69
+    [B_SCR_OP_REMOVEITEM]                      = Cmd_removeitem,                              //0x6A
+    [B_SCR_OP_ATKNAMEINBUFF1]                  = Cmd_atknameinbuff1,                          //0x6B
+    [B_SCR_OP_DRAWLVLUPBOX]                    = Cmd_drawlvlupbox,                            //0x6C
+    [B_SCR_OP_RESETSENTMONSVALUE]              = Cmd_resetsentmonsvalue,                      //0x6D
+    [B_SCR_OP_SETATKTOPLAYER0]                 = Cmd_setatktoplayer0,                         //0x6E
+    [B_SCR_OP_MAKEVISIBLE]                     = Cmd_makevisible,                             //0x6F
+    [B_SCR_OP_RECORDLASTABILITY]               = Cmd_recordlastability,                       //0x70
+    [B_SCR_OP_BUFFERMOVETOLEARN]               = Cmd_buffermovetolearn,                       //0x71
+    [B_SCR_OP_JUMPIFPLAYERRAN]                 = Cmd_jumpifplayerran,                         //0x72
+    [B_SCR_OP_HPTHRESHOLDS]                    = Cmd_hpthresholds,                            //0x73
+    [B_SCR_OP_HPTHRESHOLDS2]                   = Cmd_hpthresholds2,                           //0x74
+    [B_SCR_OP_USEITEMONOPPONENT]               = Cmd_useitemonopponent,                       //0x75
+    [B_SCR_OP_VARIOUS]                         = Cmd_various,                                 //0x76
+    [B_SCR_OP_SETPROTECTLIKE]                  = Cmd_setprotectlike,                          //0x77
+    [B_SCR_OP_TRYEXPLOSION]                    = Cmd_tryexplosion,                            //0x78
+    [B_SCR_OP_SETATKHPTOZERO]                  = Cmd_setatkhptozero,                          //0x79
+    [B_SCR_OP_JUMPIFNEXTTARGETVALID]           = Cmd_jumpifnexttargetvalid,                   //0x7A
+    [B_SCR_OP_TRYHEALHALFHEALTH]               = Cmd_tryhealhalfhealth,                       //0x7B
+    [B_SCR_OP_TRYMIRRORMOVE]                   = Cmd_trymirrormove,                           //0x7C
+    [B_SCR_OP_SETRAIN]                         = Cmd_setrain,                                 //0x7D
+    [B_SCR_OP_SETREFLECT]                      = Cmd_setreflect,                              //0x7E
+    [B_SCR_OP_SETSEEDED]                       = Cmd_setseeded,                               //0x7F
+    [B_SCR_OP_MANIPULATEDAMAGE]                = Cmd_manipulatedamage,                        //0x80
+    [B_SCR_OP_TRYSETREST]                      = Cmd_trysetrest,                              //0x81
+    [B_SCR_OP_JUMPIFNOTFIRSTTURN]              = Cmd_jumpifnotfirstturn,                      //0x82
+    [B_SCR_OP_NOP]                             = Cmd_nop,                                     //0x83
+    [B_SCR_OP_JUMPIFCANTMAKEASLEEP]            = Cmd_jumpifcantmakeasleep,                    //0x84
+    [B_SCR_OP_STOCKPILE]                       = Cmd_stockpile,                               //0x85
+    [B_SCR_OP_STOCKPILETOBASEDAMAGE]           = Cmd_stockpiletobasedamage,                   //0x86
+    [B_SCR_OP_STOCKPILETOHPHEAL]               = Cmd_stockpiletohpheal,                       //0x87
+    [B_SCR_OP_NEGATIVEDAMAGE]                  = Cmd_negativedamage,                          //0x88
+    [B_SCR_OP_STATBUFFCHANGE]                  = Cmd_statbuffchange,                          //0x89
+    [B_SCR_OP_NORMALISEBUFFS]                  = Cmd_normalisebuffs,                          //0x8A
+    [B_SCR_OP_SETBIDE]                         = Cmd_setbide,                                 //0x8B
+    [B_SCR_OP_CONFUSEIFREPEATINGATTACKENDS]    = Cmd_confuseifrepeatingattackends,            //0x8C
+    [B_SCR_OP_SETMULTIHITCOUNTER]              = Cmd_setmultihitcounter,                      //0x8D
+    [B_SCR_OP_INITMULTIHITSTRING]              = Cmd_initmultihitstring,                      //0x8E
+    [B_SCR_OP_FORCERANDOMSWITCH]               = Cmd_forcerandomswitch,                       //0x8F
+    [B_SCR_OP_TRYCONVERSIONTYPECHANGE]         = Cmd_tryconversiontypechange,                 //0x90
+    [B_SCR_OP_GIVEPAYDAYMONEY]                 = Cmd_givepaydaymoney,                         //0x91
+    [B_SCR_OP_SETLIGHTSCREEN]                  = Cmd_setlightscreen,                          //0x92
+    [B_SCR_OP_TRYKO]                           = Cmd_tryKO,                                   //0x93
+    [B_SCR_OP_DAMAGETOHALFTARGETHP]            = Cmd_damagetohalftargethp,                    //0x94
+    [B_SCR_OP_SETSANDSTORM]                    = Cmd_setsandstorm,                            //0x95
+    [B_SCR_OP_WEATHERDAMAGE]                   = Cmd_weatherdamage,                           //0x96
+    [B_SCR_OP_TRYINFATUATING]                  = Cmd_tryinfatuating,                          //0x97
+    [B_SCR_OP_UPDATESTATUSICON]                = Cmd_updatestatusicon,                        //0x98
+    [B_SCR_OP_SETMIST]                         = Cmd_setmist,                                 //0x99
+    [B_SCR_OP_SETFOCUSENERGY]                  = Cmd_setfocusenergy,                          //0x9A
+    [B_SCR_OP_TRANSFORMDATAEXECUTION]          = Cmd_transformdataexecution,                  //0x9B
+    [B_SCR_OP_SETSUBSTITUTE]                   = Cmd_setsubstitute,                           //0x9C
+    [B_SCR_OP_MIMICATTACKCOPY]                 = Cmd_mimicattackcopy,                         //0x9D
+    [B_SCR_OP_METRONOME]                       = Cmd_metronome,                               //0x9E
+    [B_SCR_OP_DMGTOLEVEL]                      = Cmd_dmgtolevel,                              //0x9F
+    [B_SCR_OP_PSYWAVEDAMAGEEFFECT]             = Cmd_psywavedamageeffect,                     //0xA0
+    [B_SCR_OP_COUNTERDAMAGECALCULATOR]         = Cmd_counterdamagecalculator,                 //0xA1
+    [B_SCR_OP_MIRRORCOATDAMAGECALCULATOR]      = Cmd_mirrorcoatdamagecalculator,              //0xA2
+    [B_SCR_OP_DISABLELASTUSEDATTACK]           = Cmd_disablelastusedattack,                   //0xA3
+    [B_SCR_OP_TRYSETENCORE]                    = Cmd_trysetencore,                            //0xA4
+    [B_SCR_OP_PAINSPLITDMGCALC]                = Cmd_painsplitdmgcalc,                        //0xA5
+    [B_SCR_OP_SETTYPETORANDOMRESISTANCE]       = Cmd_settypetorandomresistance,               //0xA6
+    [B_SCR_OP_SETALWAYSHITFLAG]                = Cmd_setalwayshitflag,                        //0xA7
+    [B_SCR_OP_COPYMOVEPERMANENTLY]             = Cmd_copymovepermanently,                     //0xA8
+    [B_SCR_OP_TRYCHOOSESLEEPTALKMOVE]          = Cmd_trychoosesleeptalkmove,                  //0xA9
+    [B_SCR_OP_SETDESTINYBOND]                  = Cmd_setdestinybond,                          //0xAA
+    [B_SCR_OP_TRYSETDESTINYBONDTOHAPPEN]       = Cmd_trysetdestinybondtohappen,               //0xAB
+    [B_SCR_OP_REMAININGHPTOPOWER]              = Cmd_remaininghptopower,                      //0xAC
+    [B_SCR_OP_TRYSPITEPPREDUCE]                = Cmd_tryspiteppreduce,                        //0xAD
+    [B_SCR_OP_HEALPARTYSTATUS]                 = Cmd_healpartystatus,                         //0xAE
+    [B_SCR_OP_CURSETARGET]                     = Cmd_cursetarget,                             //0xAF
+    [B_SCR_OP_TRYSETSPIKES]                    = Cmd_trysetspikes,                            //0xB0
+    [B_SCR_OP_SETFORESIGHT]                    = Cmd_setforesight,                            //0xB1
+    [B_SCR_OP_TRYSETPERISHSONG]                = Cmd_trysetperishsong,                        //0xB2
+    [B_SCR_OP_ROLLOUTDAMAGECALCULATION]        = Cmd_rolloutdamagecalculation,                //0xB3
+    [B_SCR_OP_JUMPIFCONFUSEDANDSTATMAXED]      = Cmd_jumpifconfusedandstatmaxed,              //0xB4
+    [B_SCR_OP_FURYCUTTERCALC]                  = Cmd_furycuttercalc,                          //0xB5
+    [B_SCR_OP_FRIENDSHIPTODAMAGECALCULATION]   = Cmd_friendshiptodamagecalculation,           //0xB6
+    [B_SCR_OP_PRESENTDAMAGECALCULATION]        = Cmd_presentdamagecalculation,                //0xB7
+    [B_SCR_OP_SETSAFEGUARD]                    = Cmd_setsafeguard,                            //0xB8
+    [B_SCR_OP_MAGNITUDEDAMAGECALCULATION]      = Cmd_magnitudedamagecalculation,              //0xB9
+    [B_SCR_OP_JUMPIFNOPURSUITSWITCHDMG]        = Cmd_jumpifnopursuitswitchdmg,                //0xBA
+    [B_SCR_OP_SETSUNNY]                        = Cmd_setsunny,                                //0xBB
+    [B_SCR_OP_MAXATTACKHALVEHP]                = Cmd_maxattackhalvehp,                        //0xBC
+    [B_SCR_OP_COPYFOESTATS]                    = Cmd_copyfoestats,                            //0xBD
+    [B_SCR_OP_RAPIDSPINFREE]                   = Cmd_rapidspinfree,                           //0xBE
+    [B_SCR_OP_SETDEFENSECURLBIT]               = Cmd_setdefensecurlbit,                       //0xBF
+    [B_SCR_OP_RECOVERBASEDONSUNLIGHT]          = Cmd_recoverbasedonsunlight,                  //0xC0
+    [B_SCR_OP_HIDDENPOWERCALC]                 = Cmd_hiddenpowercalc,                         //0xC1
+    [B_SCR_OP_SELECTFIRSTVALIDTARGET]          = Cmd_selectfirstvalidtarget,                  //0xC2
+    [B_SCR_OP_TRYSETFUTUREATTACK]              = Cmd_trysetfutureattack,                      //0xC3
+    [B_SCR_OP_TRYDOBEATUP]                     = Cmd_trydobeatup,                             //0xC4
+    [B_SCR_OP_SETSEMIINVULNERABLEBIT]          = Cmd_setsemiinvulnerablebit,                  //0xC5
+    [B_SCR_OP_CLEARSEMIINVULNERABLEBIT]        = Cmd_clearsemiinvulnerablebit,                //0xC6
+    [B_SCR_OP_SETMINIMIZE]                     = Cmd_setminimize,                             //0xC7
+    [B_SCR_OP_SETHAIL]                         = Cmd_sethail,                                 //0xC8
+    [B_SCR_OP_TRYMEMENTO]                      = Cmd_trymemento,                              //0xC9
+    [B_SCR_OP_SETFORCEDTARGET]                 = Cmd_setforcedtarget,                         //0xCA
+    [B_SCR_OP_SETCHARGE]                       = Cmd_setcharge,                               //0xCB
+    [B_SCR_OP_CALLENVIRONMENTATTACK]           = Cmd_callenvironmentattack,                   //0xCC
+    [B_SCR_OP_CUREIFBURNEDPARALYZEDORPOISONED] = Cmd_cureifburnedparalyzedorpoisoned,         //0xCD
+    [B_SCR_OP_SETTORMENT]                      = Cmd_settorment,                              //0xCE
+    [B_SCR_OP_JUMPIFNODAMAGE]                  = Cmd_jumpifnodamage,                          //0xCF
+    [B_SCR_OP_SETTAUNT]                        = Cmd_settaunt,                                //0xD0
+    [B_SCR_OP_TRYSETHELPINGHAND]               = Cmd_trysethelpinghand,                       //0xD1
+    [B_SCR_OP_TRYSWAPITEMS]                    = Cmd_tryswapitems,                            //0xD2
+    [B_SCR_OP_TRYCOPYABILITY]                  = Cmd_trycopyability,                          //0xD3
+    [B_SCR_OP_TRYWISH]                         = Cmd_trywish,                                 //0xD4
+    [B_SCR_OP_TRYSETROOTS]                     = Cmd_trysetroots,                             //0xD5
+    [B_SCR_OP_DOUBLEDAMAGEDEALTIFDAMAGED]      = Cmd_doubledamagedealtifdamaged,              //0xD6
+    [B_SCR_OP_SETYAWN]                         = Cmd_setyawn,                                 //0xD7
+    [B_SCR_OP_SETDAMAGETOHEALTHDIFFERENCE]     = Cmd_setdamagetohealthdifference,             //0xD8
+    [B_SCR_OP_SCALEDAMAGEBYHEALTHRATIO]        = Cmd_scaledamagebyhealthratio,                //0xD9
+    [B_SCR_OP_TRYSWAPABILITIES]                = Cmd_tryswapabilities,                        //0xDA
+    [B_SCR_OP_TRYIMPRISON]                     = Cmd_tryimprison,                             //0xDB
+    [B_SCR_OP_TRYSETGRUDGE]                    = Cmd_trysetgrudge,                            //0xDC
+    [B_SCR_OP_WEIGHTDAMAGECALCULATION]         = Cmd_weightdamagecalculation,                 //0xDD
+    [B_SCR_OP_ASSISTATTACKSELECT]              = Cmd_assistattackselect,                      //0xDE
+    [B_SCR_OP_TRYSETMAGICCOAT]                 = Cmd_trysetmagiccoat,                         //0xDF
+    [B_SCR_OP_TRYSETSNATCH]                    = Cmd_trysetsnatch,                            //0xE0
+    [B_SCR_OP_TRYGETINTIMIDATETARGET]          = Cmd_trygetintimidatetarget,                  //0xE1
+    [B_SCR_OP_SWITCHOUTABILITIES]              = Cmd_switchoutabilities,                      //0xE2
+    [B_SCR_OP_JUMPIFHASNOHP]                   = Cmd_jumpifhasnohp,                           //0xE3
+    [B_SCR_OP_GETSECRETPOWEREFFECT]            = Cmd_getsecretpowereffect,                    //0xE4
+    [B_SCR_OP_PICKUP]                          = Cmd_pickup,                                  //0xE5
+    [B_SCR_OP_DOCASTFORMCHANGEANIMATION]       = Cmd_docastformchangeanimation,               //0xE6
+    [B_SCR_OP_TRYCASTFORMDATACHANGE]           = Cmd_trycastformdatachange,                   //0xE7
+    [B_SCR_OP_SETTYPEBASEDHALVERS]             = Cmd_settypebasedhalvers,                     //0xE8
+    [B_SCR_OP_SETWEATHERBALLTYPE]              = Cmd_setweatherballtype,                      //0xE9
+    [B_SCR_OP_TRYRECYCLEITEM]                  = Cmd_tryrecycleitem,                          //0xEA
+    [B_SCR_OP_SETTYPETOENVIRONMENT]            = Cmd_settypetoenvironment,                    //0xEB
+    [B_SCR_OP_PURSUITDOUBLES]                  = Cmd_pursuitdoubles,                          //0xEC
+    [B_SCR_OP_SNATCHSETBATTLERS]               = Cmd_snatchsetbattlers,                       //0xED
+    [B_SCR_OP_REMOVELIGHTSCREENREFLECT]        = Cmd_removelightscreenreflect,                //0xEE
+    [B_SCR_OP_HANDLEBALLTHROW]                 = Cmd_handleballthrow,                         //0xEF
+    [B_SCR_OP_GIVECAUGHTMON]                   = Cmd_givecaughtmon,                           //0xF0
+    [B_SCR_OP_TRYSETCAUGHTMONDEXFLAGS]         = Cmd_trysetcaughtmondexflags,                 //0xF1
+    [B_SCR_OP_DISPLAYDEXINFO]                  = Cmd_displaydexinfo,                          //0xF2
+    [B_SCR_OP_TRYGIVECAUGHTMONNICK]            = Cmd_trygivecaughtmonnick,                    //0xF3
+    [B_SCR_OP_SUBATTACKERHPBYDMG]              = Cmd_subattackerhpbydmg,                      //0xF4
+    [B_SCR_OP_REMOVEATTACKERSTATUS1]           = Cmd_removeattackerstatus1,                   //0xF5
+    [B_SCR_OP_FINISHACTION]                    = Cmd_finishaction,                            //0xF6
+    [B_SCR_OP_FINISHTURN]                      = Cmd_finishturn,                              //0xF7
+    [B_SCR_OP_TRAINERSLIDEOUT]                 = Cmd_trainerslideout                          //0xF8
 };
 
 struct StatFractions
