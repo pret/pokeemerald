@@ -116,6 +116,8 @@ static bool8 ShouldSwitchIfWonderGuard(void)
     return FALSE; // There is not a single Pokémon in the party that has a super effective move against a mon with Wonder Guard.
 }
 
+// Will never return TRUE and lead to a switch out, as gLastLandedMoves
+// gets reset in HandleAction_ActionFinished before ShouldSwitch gets called
 static bool8 FindMonThatAbsorbsOpponentsMove(void)
 {
     u8 battlerIn1, battlerIn2;
@@ -404,15 +406,22 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
         moveFlags = AI_TypeCalc(gLastLandedMoves[gActiveBattler], species, monAbility);
         if (moveFlags & flags)
         {
+#ifdef BUGFIX
+            u8 target = gLastHitBy[gActiveBattler];
+#else
             battlerIn1 = gLastHitBy[gActiveBattler];
+#endif
 
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 move = GetMonData(&party[i], MON_DATA_MOVE1 + j);
                 if (move == 0)
                     continue;
-
+#ifdef BUGFIX
+                moveFlags = AI_TypeCalc(move, gBattleMons[target].species, gBattleMons[target].ability);
+#else
                 moveFlags = AI_TypeCalc(move, gBattleMons[battlerIn1].species, gBattleMons[battlerIn1].ability);
+#endif
                 if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE && Random() % moduloPercent == 0)
                 {
                     *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = i;
