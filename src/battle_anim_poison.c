@@ -29,8 +29,8 @@ static const union AnimCmd *const sAnims_ToxicBubble[] =
 
 const struct SpriteTemplate gToxicBubbleSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_TOXIC_BUBBLE,
-    .paletteTag = ANIM_TAG_TOXIC_BUBBLE,
+    .tileTag = TAG_BATTLE_ANIM_TOXIC_BUBBLE,
+    .paletteTag = TAG_BATTLE_ANIM_TOXIC_BUBBLE,
     .oam = &gOamData_AffineOff_ObjNormal_16x32,
     .anims = sAnims_ToxicBubble,
     .images = NULL,
@@ -89,8 +89,8 @@ static const union AffineAnimCmd *const sAffineAnims_SludgeBombHit[] =
 
 const struct SpriteTemplate gSludgeProjectileSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_POISON_BUBBLE,
-    .paletteTag = ANIM_TAG_POISON_BUBBLE,
+    .tileTag = TAG_BATTLE_ANIM_POISON_BUBBLE,
+    .paletteTag = TAG_BATTLE_ANIM_POISON_BUBBLE,
     .oam = &gOamData_AffineDouble_ObjNormal_16x16,
     .anims = sAnims_PoisonProjectile,
     .images = NULL,
@@ -100,8 +100,8 @@ const struct SpriteTemplate gSludgeProjectileSpriteTemplate =
 
 const struct SpriteTemplate gAcidPoisonBubbleSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_POISON_BUBBLE,
-    .paletteTag = ANIM_TAG_POISON_BUBBLE,
+    .tileTag = TAG_BATTLE_ANIM_POISON_BUBBLE,
+    .paletteTag = TAG_BATTLE_ANIM_POISON_BUBBLE,
     .oam = &gOamData_AffineDouble_ObjNormal_16x16,
     .anims = sAnims_PoisonProjectile,
     .images = NULL,
@@ -111,8 +111,8 @@ const struct SpriteTemplate gAcidPoisonBubbleSpriteTemplate =
 
 const struct SpriteTemplate gSludgeBombHitParticleSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_POISON_BUBBLE,
-    .paletteTag = ANIM_TAG_POISON_BUBBLE,
+    .tileTag = TAG_BATTLE_ANIM_POISON_BUBBLE,
+    .paletteTag = TAG_BATTLE_ANIM_POISON_BUBBLE,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = &sAnims_PoisonProjectile[2],
     .images = NULL,
@@ -134,8 +134,8 @@ const union AffineAnimCmd *const gAffineAnims_Droplet[] =
 
 const struct SpriteTemplate gAcidPoisonDropletSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_POISON_BUBBLE,
-    .paletteTag = ANIM_TAG_POISON_BUBBLE,
+    .tileTag = TAG_BATTLE_ANIM_POISON_BUBBLE,
+    .paletteTag = TAG_BATTLE_ANIM_POISON_BUBBLE,
     .oam = &gOamData_AffineDouble_ObjNormal_16x16,
     .anims = &sAnims_PoisonProjectile[1],
     .images = NULL,
@@ -157,8 +157,8 @@ static const union AffineAnimCmd *const sAffineAnims_Bubble[] =
 
 const struct SpriteTemplate gPoisonBubbleSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_POISON_BUBBLE,
-    .paletteTag = ANIM_TAG_POISON_BUBBLE,
+    .tileTag = TAG_BATTLE_ANIM_POISON_BUBBLE,
+    .paletteTag = TAG_BATTLE_ANIM_POISON_BUBBLE,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = sAnims_PoisonProjectile,
     .images = NULL,
@@ -168,8 +168,8 @@ const struct SpriteTemplate gPoisonBubbleSpriteTemplate =
 
 const struct SpriteTemplate gWaterBubbleSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_SMALL_BUBBLES,
-    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
+    .tileTag = TAG_BATTLE_ANIM_SMALL_BUBBLES,
+    .paletteTag = TAG_BATTLE_ANIM_SMALL_BUBBLES,
     .oam = &gOamData_AffineNormal_ObjBlend_16x16,
     .anims = gAnims_WaterBubble,
     .images = NULL,

@@ -15,8 +15,6 @@
 EWRAM_DATA static u8 sMoneyBoxWindowId = 0;
 EWRAM_DATA static u8 sMoneyLabelSpriteId = 0;
 
-#define MONEY_LABEL_TAG 0x2722
-
 static const struct OamData sOamData_MoneyLabel =
 {
     .y = 0,
@@ -47,8 +45,8 @@ static const union AnimCmd *const sSpriteAnimTable_MoneyLabel[] =
 
 static const struct SpriteTemplate sSpriteTemplate_MoneyLabel =
 {
-    .tileTag = MONEY_LABEL_TAG,
-    .paletteTag = MONEY_LABEL_TAG,
+    .tileTag = TAG_MONEY_BOX_LABEL,
+    .paletteTag = TAG_MONEY_BOX_LABEL,
     .oam = &sOamData_MoneyLabel,
     .anims = sSpriteAnimTable_MoneyLabel,
     .images = NULL,
@@ -60,13 +58,13 @@ static const struct CompressedSpriteSheet sSpriteSheet_MoneyLabel =
 {
     .data = gShopMenuMoney_Gfx,
     .size = 256,
-    .tag = MONEY_LABEL_TAG,
+    .tag = TAG_MONEY_BOX_LABEL,
 };
 
 static const struct CompressedSpritePalette sSpritePalette_MoneyLabel =
 {
     .data = gShopMenu_Pal,
-    .tag = MONEY_LABEL_TAG
+    .tag = TAG_MONEY_BOX_LABEL
 };
 
 u32 GetMoney(u32 *moneyPtr)

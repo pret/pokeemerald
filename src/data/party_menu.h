@@ -838,18 +838,18 @@ static const union AnimCmd *const sSpriteAnimTable_HeldItem[] =
 
 static const struct SpriteSheet sSpriteSheet_HeldItem =
 {
-    .data = sHeldItemGfx, .size = sizeof(sHeldItemGfx), .tag = TAG_HELD_ITEM
+    .data = sHeldItemGfx, .size = sizeof(sHeldItemGfx), .tag = TAG_PARTY_MENU_HELD_ITEM
 };
 
 static const struct SpritePalette sSpritePalette_HeldItem =
 {
-    .data = sHeldItemPalette, .tag = TAG_HELD_ITEM
+    .data = sHeldItemPalette, .tag = TAG_PARTY_MENU_HELD_ITEM
 };
 
 static const struct SpriteTemplate sSpriteTemplate_HeldItem =
 {
-    .tileTag = TAG_HELD_ITEM,
-    .paletteTag = TAG_HELD_ITEM,
+    .tileTag = TAG_PARTY_MENU_HELD_ITEM,
+    .paletteTag = TAG_PARTY_MENU_HELD_ITEM,
     .oam = &sOamData_HeldItem,
     .anims = sSpriteAnimTable_HeldItem,
     .images = NULL,
@@ -894,19 +894,19 @@ static const union AnimCmd *const sSpriteAnimTable_MenuPokeball[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_MenuPokeball =
 {
-    gPartyMenuPokeball_Gfx, 0x400, TAG_POKEBALL
+    gPartyMenuPokeball_Gfx, 0x400, TAG_PARTY_MENU_POKEBALL
 };
 
 static const struct CompressedSpritePalette sSpritePalette_MenuPokeball =
 {
-    gPartyMenuPokeball_Pal, TAG_POKEBALL
+    gPartyMenuPokeball_Pal, TAG_PARTY_MENU_POKEBALL
 };
 
 // Used for the Poké Ball sprite on each party slot / Cancel button
 static const struct SpriteTemplate sSpriteTemplate_MenuPokeball =
 {
-    .tileTag = TAG_POKEBALL,
-    .paletteTag = TAG_POKEBALL,
+    .tileTag = TAG_PARTY_MENU_POKEBALL,
+    .paletteTag = TAG_PARTY_MENU_POKEBALL,
     .oam = &sOamData_MenuPokeball,
     .anims = sSpriteAnimTable_MenuPokeball,
     .images = NULL,
@@ -980,14 +980,14 @@ static const union AnimCmd *const sSpriteAnimTable_MenuPokeballSmall[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_MenuPokeballSmall =
 {
-    gPartyMenuPokeballSmall_Gfx, 0x0300, TAG_POKEBALL_SMALL
+    gPartyMenuPokeballSmall_Gfx, 0x0300, TAG_PARTY_MENU_POKEBALL_SMALL
 };
 
 // Used for the pokeball sprite next to Cancel and Confirm when both are present, otherwise sSpriteTemplate_MenuPokeball is used
 static const struct SpriteTemplate sSpriteTemplate_MenuPokeballSmall =
 {
-    .tileTag = TAG_POKEBALL_SMALL,
-    .paletteTag = TAG_POKEBALL,
+    .tileTag = TAG_PARTY_MENU_POKEBALL_SMALL,
+    .paletteTag = TAG_PARTY_MENU_POKEBALL,
     .oam = &sOamData_MenuPokeballSmall,
     .anims = sSpriteAnimTable_MenuPokeballSmall,
     .images = NULL,
@@ -1074,18 +1074,18 @@ static const union AnimCmd *const sSpriteTemplate_StatusCondition[] =
 
 static const struct CompressedSpriteSheet sSpriteSheet_StatusIcons =
 {
-    gStatusGfx_Icons, 0x400, TAG_STATUS_ICONS
+    gStatusGfx_Icons, 0x400, TAG_PARTY_MENU_STATUS_ICONS
 };
 
 static const struct CompressedSpritePalette sSpritePalette_StatusIcons =
 {
-    gStatusPal_Icons, TAG_STATUS_ICONS
+    gStatusPal_Icons, TAG_PARTY_MENU_STATUS_ICONS
 };
 
 static const struct SpriteTemplate sSpriteTemplate_StatusIcons =
 {
-    .tileTag = TAG_STATUS_ICONS,
-    .paletteTag = TAG_STATUS_ICONS,
+    .tileTag = TAG_PARTY_MENU_STATUS_ICONS,
+    .paletteTag = TAG_PARTY_MENU_STATUS_ICONS,
     .oam = &sOamData_StatusCondition,
     .anims = sSpriteTemplate_StatusCondition,
     .images = NULL,

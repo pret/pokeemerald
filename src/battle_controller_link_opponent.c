@@ -247,8 +247,8 @@ static void Intro_WaitForShinyAnimAndHealthbox(void)
             gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(gActiveBattler)].triedShinyMonAnim = FALSE;
             gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(gActiveBattler)].finishedShinyMonAnim = FALSE;
 
-            FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-            FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+            FreeSpriteTilesByTag(TAG_BATTLE_ANIM_GOLD_STARS);
+            FreeSpritePaletteByTag(TAG_BATTLE_ANIM_GOLD_STARS);
         }
         else
         {
@@ -260,8 +260,8 @@ static void Intro_WaitForShinyAnimAndHealthbox(void)
 
             if (GetBattlerPosition(gActiveBattler) == B_POSITION_OPPONENT_RIGHT)
             {
-                FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-                FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+                FreeSpriteTilesByTag(TAG_BATTLE_ANIM_GOLD_STARS);
+                FreeSpritePaletteByTag(TAG_BATTLE_ANIM_GOLD_STARS);
             }
         }
 
@@ -372,8 +372,8 @@ static void TryShinyAnimAfterMonAnim(void)
         {
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = FALSE;
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = FALSE;
-            FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-            FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+            FreeSpriteTilesByTag(TAG_BATTLE_ANIM_GOLD_STARS);
+            FreeSpritePaletteByTag(TAG_BATTLE_ANIM_GOLD_STARS);
             LinkOpponentBufferExecCompleted();
         }
     }
@@ -469,8 +469,8 @@ static void SwitchIn_ShowHealthbox(void)
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim = FALSE;
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = FALSE;
 
-        FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-        FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+        FreeSpriteTilesByTag(TAG_BATTLE_ANIM_GOLD_STARS);
+        FreeSpritePaletteByTag(TAG_BATTLE_ANIM_GOLD_STARS);
 
         StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 0);
 
