@@ -116,8 +116,8 @@ static bool8 ShouldSwitchIfWonderGuard(void)
     return FALSE; // There is not a single Pokémon in the party that has a super effective move against a mon with Wonder Guard.
 }
 
-// Will never return TRUE and lead to a switch out, as gLastLandedMoves
-// gets reset in HandleAction_ActionFinished before ShouldSwitch gets called
+// Can only return TRUE and lead to a switch out, if AI moved first in the previous turn as
+// gLastLandedMoves gets reset in HandleAction_ActionFinished before ShouldSwitch gets called.
 static bool8 FindMonThatAbsorbsOpponentsMove(void)
 {
     u8 battlerIn1, battlerIn2;
