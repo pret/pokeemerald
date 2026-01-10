@@ -8071,6 +8071,9 @@ static void Cmd_painsplitdmgcalc(void)
 }
 
 // Conversion 2
+// Bug: If the user used an action after getting hit last turn and
+// first this turn, Conversion 2 will check against TYPE_NORMAL
+// because gLastHitByType gets reset in HandleAction_ActionFinished.
 static void Cmd_settypetorandomresistance(void)
 {
     if (gLastLandedMoves[gBattlerAttacker] == MOVE_NONE
