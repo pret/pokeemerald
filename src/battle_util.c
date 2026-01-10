@@ -667,13 +667,13 @@ void HandleAction_ActionFinished(void)
                     | HITMARKER_OBEYS | HITMARKER_WAKE_UP_CLEAR | HITMARKER_SYNCHRONIZE_EFFECT
                     | HITMARKER_CHARGING | HITMARKER_NEVER_SET);
 
-    gCurrentMove = 0;
+    gCurrentMove = MOVE_NONE;
     gBattleMoveDamage = 0;
     gMoveResultFlags = 0;
     gBattleScripting.animTurn = 0;
     gBattleScripting.animTargetsHit = 0;
-    gLastLandedMoves[gBattlerAttacker] = 0;
-    gLastHitByType[gBattlerAttacker] = 0;
+    gLastLandedMoves[gBattlerAttacker] = MOVE_NONE;
+    gLastHitByType[gBattlerAttacker] = TYPE_NORMAL;
     gBattleStruct->dynamicMoveType = 0;
     gDynamicBasePower = 0;
     gBattleScripting.moveendState = 0;
