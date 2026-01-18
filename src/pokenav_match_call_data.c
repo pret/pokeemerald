@@ -159,6 +159,7 @@ static void MatchCall_GetNameAndDescByRematchIdx(u32, const u8 **, const u8 **);
 
 #define ALWAYS_AVAILABLE 0xFFFF
 #define NO_FLAG_TO_SET   0xFFFF
+#define MATCH_CALL_TEXT_END {NULL, ALWAYS_AVAILABLE, NO_FLAG_TO_SET}
 
 // .rodata
 
@@ -174,7 +175,7 @@ static const match_call_text_data_t sMrStoneTextScripts[] = {
     { MatchCall_Text_MrStone9,  FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, NO_FLAG_TO_SET },
     { MatchCall_Text_MrStone10, FLAG_DEFEATED_SOOTOPOLIS_GYM,        NO_FLAG_TO_SET },
     { MatchCall_Text_MrStone11, FLAG_SYS_GAME_CLEAR,                 NO_FLAG_TO_SET },
-    { NULL,                     ALWAYS_AVAILABLE,                    NO_FLAG_TO_SET }
+    MATCH_CALL_TEXT_END
 };
 
 static const struct MatchCallStructNPC sMrStoneMatchCallHeader =
@@ -197,7 +198,7 @@ static const match_call_text_data_t sNormanTextScripts[] = {
     { MatchCall_Text_Norman7, FLAG_SYS_GAME_CLEAR,           NO_FLAG_TO_SET },
     { MatchCall_Text_Norman8, FLAG_SYS_GAME_CLEAR,           NO_FLAG_TO_SET },
     { MatchCall_Text_Norman9, FLAG_SYS_GAME_CLEAR,           NO_FLAG_TO_SET },
-    { NULL,                   ALWAYS_AVAILABLE,              NO_FLAG_TO_SET }
+    MATCH_CALL_TEXT_END
 };
 
 static const struct MatchCallStructTrainer sNormanMatchCallHeader =
@@ -224,7 +225,7 @@ static const match_call_text_data_t sMomTextScripts[] = {
     { MatchCall_Text_Mom1, ALWAYS_AVAILABLE,            NO_FLAG_TO_SET },
     { MatchCall_Text_Mom2, FLAG_DEFEATED_PETALBURG_GYM, NO_FLAG_TO_SET },
     { MatchCall_Text_Mom3, FLAG_SYS_GAME_CLEAR,         NO_FLAG_TO_SET },
-    { NULL,                ALWAYS_AVAILABLE,            NO_FLAG_TO_SET }
+    MATCH_CALL_TEXT_END
 };
 
 static const struct MatchCallStructNPC sMomMatchCallHeader =
@@ -245,7 +246,7 @@ static const match_call_text_data_t sStevenTextScripts[] = {
     { MatchCall_Text_Steven5, FLAG_DEFEATED_MOSSDEEP_GYM,          NO_FLAG_TO_SET },
     { MatchCall_Text_Steven6, FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, NO_FLAG_TO_SET },
     { MatchCall_Text_Steven7, FLAG_SYS_GAME_CLEAR,                 NO_FLAG_TO_SET },
-    { NULL,                   ALWAYS_AVAILABLE,                    NO_FLAG_TO_SET },
+    MATCH_CALL_TEXT_END,
 };
 
 static const struct MatchCallStructNPC sStevenMatchCallHeader =
@@ -274,7 +275,7 @@ static const match_call_text_data_t sMayTextScripts[] = {
     { MatchCall_Text_May13, FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, NO_FLAG_TO_SET },
     { MatchCall_Text_May14, FLAG_DEFEATED_SOOTOPOLIS_GYM,        NO_FLAG_TO_SET },
     { MatchCall_Text_May15, FLAG_SYS_GAME_CLEAR,                 NO_FLAG_TO_SET },
-    { NULL,                 ALWAYS_AVAILABLE,                    NO_FLAG_TO_SET }
+    MATCH_CALL_TEXT_END
 };
 
 static const struct MatchCallRival sMayMatchCallHeader =
@@ -303,7 +304,7 @@ static const match_call_text_data_t sBrendanTextScripts[] = {
     { MatchCall_Text_Brendan13, FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, NO_FLAG_TO_SET },
     { MatchCall_Text_Brendan14, FLAG_DEFEATED_SOOTOPOLIS_GYM,        NO_FLAG_TO_SET },
     { MatchCall_Text_Brendan15, FLAG_SYS_GAME_CLEAR,                 NO_FLAG_TO_SET },
-    { NULL,                     ALWAYS_AVAILABLE,                    NO_FLAG_TO_SET }
+    MATCH_CALL_TEXT_END
 };
 
 static const struct MatchCallRival sBrendanMatchCallHeader =
@@ -324,7 +325,7 @@ static const match_call_text_data_t sWallyTextScripts[] = {
     { MatchCall_Text_Wally5, FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, NO_FLAG_TO_SET },
     { MatchCall_Text_Wally6, FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, NO_FLAG_TO_SET },
     { MatchCall_Text_Wally7, FLAG_DEFEATED_WALLY_VICTORY_ROAD,    NO_FLAG_TO_SET },
-    { NULL,                  ALWAYS_AVAILABLE,                    NO_FLAG_TO_SET }
+    MATCH_CALL_TEXT_END
 };
 
 static const struct MatchCallLocationOverride sWallyLocationData[] = {
@@ -353,7 +354,7 @@ static const match_call_text_data_t sScottTextScripts[] = {
     { MatchCall_Text_Scott5, FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, NO_FLAG_TO_SET },
     { MatchCall_Text_Scott6, FLAG_DEFEATED_SOOTOPOLIS_GYM,        NO_FLAG_TO_SET },
     { MatchCall_Text_Scott7, FLAG_SYS_GAME_CLEAR,                 NO_FLAG_TO_SET },
-    { NULL,                  ALWAYS_AVAILABLE,                    NO_FLAG_TO_SET }
+    MATCH_CALL_TEXT_END
 };
 
 
@@ -372,7 +373,7 @@ static const match_call_text_data_t sRoxanneTextScripts[] = {
     { MatchCall_Text_Roxanne2, ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
     { MatchCall_Text_Roxanne3, ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
     { MatchCall_Text_Roxanne4, FLAG_SYS_GAME_CLEAR, NO_FLAG_TO_SET },
-    { NULL,                    ALWAYS_AVAILABLE,    NO_FLAG_TO_SET }
+    MATCH_CALL_TEXT_END
 };
 
 static const struct MatchCallStructTrainer sRoxanneMatchCallHeader =
@@ -391,7 +392,7 @@ static const match_call_text_data_t sBrawlyTextScripts[] = {
     { MatchCall_Text_Brawly2, ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
     { MatchCall_Text_Brawly3, ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
     { MatchCall_Text_Brawly4, FLAG_SYS_GAME_CLEAR, NO_FLAG_TO_SET },
-    { NULL,                   ALWAYS_AVAILABLE,    NO_FLAG_TO_SET }
+    MATCH_CALL_TEXT_END
 };
 
 static const struct MatchCallStructTrainer sBrawlyMatchCallHeader =
@@ -410,7 +411,7 @@ static const match_call_text_data_t sWattsonTextScripts[] = {
     { MatchCall_Text_Wattson2, ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
     { MatchCall_Text_Wattson3, ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
     { MatchCall_Text_Wattson4, FLAG_SYS_GAME_CLEAR, NO_FLAG_TO_SET },
-    { NULL,                    ALWAYS_AVAILABLE,    NO_FLAG_TO_SET }
+    MATCH_CALL_TEXT_END
 };
 
 static const struct MatchCallStructTrainer sWattsonMatchCallHeader =
@@ -429,7 +430,7 @@ static const match_call_text_data_t sFlanneryTextScripts[] = {
     { MatchCall_Text_Flannery2, ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
     { MatchCall_Text_Flannery3, ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
     { MatchCall_Text_Flannery4, FLAG_SYS_GAME_CLEAR, NO_FLAG_TO_SET },
-    { NULL,                     ALWAYS_AVAILABLE,    NO_FLAG_TO_SET }
+    MATCH_CALL_TEXT_END
 };
 
 static const struct MatchCallStructTrainer sFlanneryMatchCallHeader =
@@ -448,7 +449,7 @@ static const match_call_text_data_t sWinonaTextScripts[] = {
     { MatchCall_Text_Winona2, ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
     { MatchCall_Text_Winona3, ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
     { MatchCall_Text_Winona4, FLAG_SYS_GAME_CLEAR, NO_FLAG_TO_SET },
-    { NULL,                   ALWAYS_AVAILABLE,    NO_FLAG_TO_SET }
+    MATCH_CALL_TEXT_END
 };
 
 static const struct MatchCallStructTrainer sWinonaMatchCallHeader =
@@ -467,7 +468,7 @@ static const match_call_text_data_t sTateLizaTextScripts[] = {
     { MatchCall_Text_TateLiza2, ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
     { MatchCall_Text_TateLiza3, ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
     { MatchCall_Text_TateLiza4, FLAG_SYS_GAME_CLEAR, NO_FLAG_TO_SET },
-    { NULL,                     ALWAYS_AVAILABLE,    NO_FLAG_TO_SET }
+    MATCH_CALL_TEXT_END
 };
 
 static const struct MatchCallStructTrainer sTateLizaMatchCallHeader =
@@ -486,7 +487,7 @@ static const match_call_text_data_t sJuanTextScripts[] = {
     { MatchCall_Text_Juan2, ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
     { MatchCall_Text_Juan3, ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
     { MatchCall_Text_Juan4, FLAG_SYS_GAME_CLEAR, NO_FLAG_TO_SET },
-    { NULL,                 ALWAYS_AVAILABLE,    NO_FLAG_TO_SET }
+    MATCH_CALL_TEXT_END
 };
 
 static const struct MatchCallStructTrainer sJuanMatchCallHeader =
@@ -502,7 +503,7 @@ static const struct MatchCallStructTrainer sJuanMatchCallHeader =
 
 static const match_call_text_data_t sSidneyTextScripts[] = {
     { MatchCall_Text_Sidney, ALWAYS_AVAILABLE, NO_FLAG_TO_SET },
-    { NULL,                  ALWAYS_AVAILABLE, NO_FLAG_TO_SET }
+    MATCH_CALL_TEXT_END
 };
 
 static const struct MatchCallStructTrainer sSidneyMatchCallHeader =
@@ -518,7 +519,7 @@ static const struct MatchCallStructTrainer sSidneyMatchCallHeader =
 
 static const match_call_text_data_t sPhoebeTextScripts[] = {
     { MatchCall_Text_Phoebe, ALWAYS_AVAILABLE, NO_FLAG_TO_SET },
-    { NULL,                  ALWAYS_AVAILABLE, NO_FLAG_TO_SET }
+    MATCH_CALL_TEXT_END
 };
 
 static const struct MatchCallStructTrainer sPhoebeMatchCallHeader =
@@ -534,7 +535,7 @@ static const struct MatchCallStructTrainer sPhoebeMatchCallHeader =
 
 static const match_call_text_data_t sGlaciaTextScripts[] = {
     { MatchCall_Text_Glacia, ALWAYS_AVAILABLE, NO_FLAG_TO_SET },
-    { NULL,                  ALWAYS_AVAILABLE, NO_FLAG_TO_SET }
+    MATCH_CALL_TEXT_END
 };
 
 static const struct MatchCallStructTrainer sGlaciaMatchCallHeader =
@@ -550,7 +551,7 @@ static const struct MatchCallStructTrainer sGlaciaMatchCallHeader =
 
 static const match_call_text_data_t sDrakeTextScripts[] = {
     { MatchCall_Text_Drake, ALWAYS_AVAILABLE, NO_FLAG_TO_SET },
-    { NULL,                 ALWAYS_AVAILABLE, NO_FLAG_TO_SET }
+    MATCH_CALL_TEXT_END
 };
 
 static const struct MatchCallStructTrainer sDrakeMatchCallHeader =
@@ -566,7 +567,7 @@ static const struct MatchCallStructTrainer sDrakeMatchCallHeader =
 
 static const match_call_text_data_t sWallaceTextScripts[] = {
     { MatchCall_Text_Wallace, ALWAYS_AVAILABLE, NO_FLAG_TO_SET },
-    { NULL,                   ALWAYS_AVAILABLE, NO_FLAG_TO_SET }
+    MATCH_CALL_TEXT_END
 };
 
 static const struct MatchCallStructTrainer sWallaceMatchCallHeader =
