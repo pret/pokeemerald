@@ -996,7 +996,7 @@ static void MatchCall_BufferCallMessageText(const match_call_text_data_t *textDa
         i--;
     while (i)
     {
-        if (textData[i].availabilityFlag != ALWAYS_AVAILABLE && FlagGet(textData[i].flag) == TRUE)
+        if (textData[i].availabilityFlag != ALWAYS_AVAILABLE && FlagGet(textData[i].availabilityFlag) == TRUE)
             break;
         i--;
     }
@@ -1012,7 +1012,7 @@ static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_d
     {
         if (textData[i].availabilityFlag == 0xFFFE)
             break;
-        if (textData[i].availabilityFlag != ALWAYS_AVAILABLE && !FlagGet(textData[i].flag))
+        if (textData[i].availabilityFlag != ALWAYS_AVAILABLE && !FlagGet(textData[i].availabilityFlag))
             break;
     }
     if (textData[i].availabilityFlag != 0xFFFE)
