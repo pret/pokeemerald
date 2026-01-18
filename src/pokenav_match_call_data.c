@@ -28,8 +28,8 @@ enum
 
 typedef struct MatchCallTextDataStruct {
     const u8 *text;
-    u16 flag;
-    u16 flag2;
+    u16 availabilityFlag;
+    u16 flagToSetOnCompletion;
 } match_call_text_data_t;
 
 struct MatchCallStructCommon {
@@ -993,12 +993,12 @@ static void MatchCall_BufferCallMessageText(const match_call_text_data_t *textDa
         i--;
     while (i)
     {
-        if (textData[i].flag != 0xFFFF && FlagGet(textData[i].flag) == TRUE)
+        if (textData[i].availabilityFlag != 0xFFFF && FlagGet(textData[i].flag) == TRUE)
             break;
         i--;
     }
-    if (textData[i].flag2 != 0xFFFF)
-        FlagSet(textData[i].flag2);
+    if (textData[i].flagToSetOnCompletion != 0xFFFF)
+        FlagSet(textData[i].flagToSetOnCompletion);
     StringExpandPlaceholders(dest, textData[i].text);
 }
 
@@ -1007,17 +1007,17 @@ static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_d
     u32 i;
     for (i = 0; textData[i].text != NULL; i++)
     {
-        if (textData[i].flag == 0xFFFE)
+        if (textData[i].availabilityFlag == 0xFFFE)
             break;
-        if (textData[i].flag != 0xFFFF && !FlagGet(textData[i].flag))
+        if (textData[i].availabilityFlag != 0xFFFF && !FlagGet(textData[i].flag))
             break;
     }
-    if (textData[i].flag != 0xFFFE)
+    if (textData[i].availabilityFlag != 0xFFFE)
     {
         if (i)
             i--;
-        if (textData[i].flag2 != 0xFFFF)
-            FlagSet(textData[i].flag2);
+        if (textData[i].flagToSetOnCompletion != 0xFFFF)
+            FlagSet(textData[i].flagToSetOnCompletion);
         StringExpandPlaceholders(dest, textData[i].text);
     }
     else
