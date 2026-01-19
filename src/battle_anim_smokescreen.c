@@ -7,11 +7,6 @@
 #include "util.h"
 #include "constants/battle_palace.h"
 
-#define TAG_SMOKESCREEN 55019
-
-#define PALTAG_SHADOW 55039
-#define GFXTAG_SHADOW 55129
-
 static void SpriteCB_SmokescreenImpactMain(struct Sprite *);
 static void SpriteCB_SmokescreenImpact(struct Sprite *);
 
@@ -48,12 +43,12 @@ const u8 gBattlePalaceNatureToMoveTarget[NUM_NATURES] =
 
 static const struct CompressedSpriteSheet sSmokescreenImpactSpriteSheet =
 {
-    .data = gSmokescreenImpactTiles, .size = 0x180, .tag = TAG_SMOKESCREEN
+    .data = gSmokescreenImpactTiles, .size = 0x180, .tag = TAG_BATTLE_ANIM_SMOKESCREEN
 };
 
 static const struct CompressedSpritePalette sSmokescreenImpactSpritePalette =
 {
-    .data = gSmokescreenImpactPalette, .tag = TAG_SMOKESCREEN
+    .data = gSmokescreenImpactPalette, .tag = TAG_BATTLE_ANIM_SMOKESCREEN
 };
 
 static const struct OamData sOamData_SmokescreenImpact =
@@ -115,8 +110,8 @@ static const union AnimCmd *const sAnims_SmokescreenImpact[] =
 
 static const struct SpriteTemplate sSmokescreenImpactSpriteTemplate =
 {
-    .tileTag = TAG_SMOKESCREEN,
-    .paletteTag = TAG_SMOKESCREEN,
+    .tileTag = TAG_BATTLE_ANIM_SMOKESCREEN,
+    .paletteTag = TAG_BATTLE_ANIM_SMOKESCREEN,
     .oam = &sOamData_SmokescreenImpact,
     .anims = sAnims_SmokescreenImpact,
     .images = NULL,
@@ -126,7 +121,7 @@ static const struct SpriteTemplate sSmokescreenImpactSpriteTemplate =
 
 const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow =
 {
-    .data = gEnemyMonShadow_Gfx, .size = 0x80, .tag = GFXTAG_SHADOW
+    .data = gEnemyMonShadow_Gfx, .size = 0x80, .tag = GFX_TAG_ENEMY_SHADOW
 };
 
 static const struct OamData sOamData_EnemyShadow =
@@ -148,8 +143,8 @@ static const struct OamData sOamData_EnemyShadow =
 
 const struct SpriteTemplate gSpriteTemplate_EnemyShadow =
 {
-    .tileTag = GFXTAG_SHADOW,
-    .paletteTag = PALTAG_SHADOW,
+    .tileTag = GFX_TAG_ENEMY_SHADOW,
+    .paletteTag = PAL_TAG_ENEMY_SHADOW,
     .oam = &sOamData_EnemyShadow,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

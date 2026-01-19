@@ -226,23 +226,6 @@ static void DoQuizQuestionEasyChatScreen(void);
 static void DoQuizSetAnswerEasyChatScreen(void);
 static void DoQuizSetQuestionEasyChatScreen(void);
 
-enum {
-    PALTAG_TRIANGLE_CURSOR,
-    PALTAG_RECTANGLE_CURSOR,
-    PALTAG_MISC_UI,
-    PALTAG_RS_INTERVIEW_FRAME,
-};
-
-enum {
-    GFXTAG_TRIANGLE_CURSOR,
-    GFXTAG_RECTANGLE_CURSOR,
-    GFXTAG_SCROLL_INDICATOR,
-    GFXTAG_START_SELECT_BUTTONS,
-    GFXTAG_MODE_WINDOW,
-    GFXTAG_RS_INTERVIEW_FRAME,
-    GFXTAG_BUTTON_WINDOW,
-};
-
 
 // State values for sEasyChatScreen->inputState
 // Control which input handler to use in HandleEasyChatInput
@@ -880,17 +863,17 @@ static const struct SpriteSheet sSpriteSheets[] = {
     {
         .data = sTriangleCursor_Gfx,
         .size = sizeof(sTriangleCursor_Gfx),
-        .tag = GFXTAG_TRIANGLE_CURSOR
+        .tag = TAG_EASY_CHAT_TRIANGLE_CURSOR
     },
     {
         .data = sScrollIndicator_Gfx,
         .size = sizeof(sScrollIndicator_Gfx),
-        .tag = GFXTAG_SCROLL_INDICATOR
+        .tag = GFX_TAG_EASY_CHAT_SCROLL_INDICATOR
     },
     {
         .data = sStartSelectButtons_Gfx,
         .size = sizeof(sStartSelectButtons_Gfx),
-        .tag = GFXTAG_START_SELECT_BUTTONS
+        .tag = GFX_TAG_EASY_CHAT_START_SELECT_BUTTONS
     },
     {0}
 };
@@ -898,19 +881,19 @@ static const struct SpriteSheet sSpriteSheets[] = {
 static const struct SpritePalette sSpritePalettes[] = {
     {
         .data = sTriangleCursor_Pal,
-        .tag = PALTAG_TRIANGLE_CURSOR,
+        .tag = TAG_EASY_CHAT_TRIANGLE_CURSOR,
     },
     {
         .data = gEasyChatRectangleCursor_Pal,
-        .tag = PALTAG_RECTANGLE_CURSOR,
+        .tag = TAG_EASY_CHAT_RECTANGLE_CURSOR,
     },
     {
         .data = gEasyChatButtonWindow_Pal,
-        .tag = PALTAG_MISC_UI, // The palette is generated from the button window but used for various parts of the UI
+        .tag = PAL_TAG_EASY_CHAT_MISC_UI, // The palette is generated from the button window but used for various parts of the UI
     },
     {
         .data = sRSInterviewFrame_Pal,
-        .tag = PALTAG_RS_INTERVIEW_FRAME,
+        .tag = PAL_TAG_EASY_CHAT_RS_INTERVIEW_FRAME,
     },
     {0}
 };
@@ -919,22 +902,22 @@ static const struct CompressedSpriteSheet sCompressedSpriteSheets[] = {
     {
         .data = sRSInterviewFrame_Gfx,
         .size = 0x800,
-        .tag = GFXTAG_RS_INTERVIEW_FRAME,
+        .tag = GFX_TAG_EASY_CHAT_RS_INTERVIEW_FRAME,
     },
     {
         .data = gEasyChatRectangleCursor_Gfx,
         .size = 0x1000,
-        .tag = GFXTAG_RECTANGLE_CURSOR,
+        .tag = TAG_EASY_CHAT_RECTANGLE_CURSOR,
     },
     {
         .data = gEasyChatButtonWindow_Gfx,
         .size = 0x800,
-        .tag = GFXTAG_BUTTON_WINDOW,
+        .tag = GFX_TAG_EASY_CHAT_BUTTON_WINDOW,
     },
     {
         .data = gEasyChatMode_Gfx,
         .size = 0x1000,
-        .tag = GFXTAG_MODE_WINDOW,
+        .tag = GFX_TAG_EASY_CHAT_MODE_WINDOW,
     },
 };
 
@@ -958,8 +941,8 @@ static const struct OamData sOamData_TriangleCursor = {
 
 static const struct SpriteTemplate sSpriteTemplate_TriangleCursor =
 {
-    .tileTag = PALTAG_TRIANGLE_CURSOR,
-    .paletteTag = GFXTAG_TRIANGLE_CURSOR,
+    .tileTag = TAG_EASY_CHAT_TRIANGLE_CURSOR,
+    .paletteTag = TAG_EASY_CHAT_TRIANGLE_CURSOR,
     .oam = &sOamData_TriangleCursor,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -1020,8 +1003,8 @@ static const union AnimCmd *const sAnims_RectangleCursor[] = {
 
 static const struct SpriteTemplate sSpriteTemplate_RectangleCursor =
 {
-    .tileTag = GFXTAG_RECTANGLE_CURSOR,
-    .paletteTag = PALTAG_RECTANGLE_CURSOR,
+    .tileTag = TAG_EASY_CHAT_RECTANGLE_CURSOR,
+    .paletteTag = TAG_EASY_CHAT_RECTANGLE_CURSOR,
     .oam = &sOamData_RectangleCursor,
     .anims = sAnims_RectangleCursor,
     .images = NULL,
@@ -1091,8 +1074,8 @@ static const union AnimCmd *const sAnims_ModeWindow[] = {
 
 static const struct SpriteTemplate sSpriteTemplate_ModeWindow =
 {
-    .tileTag = GFXTAG_MODE_WINDOW,
-    .paletteTag = PALTAG_MISC_UI,
+    .tileTag = GFX_TAG_EASY_CHAT_MODE_WINDOW,
+    .paletteTag = PAL_TAG_EASY_CHAT_MISC_UI,
     .oam = &sOamData_ModeWindow,
     .anims = sAnims_ModeWindow,
     .images = NULL,
@@ -1118,8 +1101,8 @@ static const struct OamData sOamData_ButtonWindow = {
 
 static const struct SpriteTemplate sSpriteTemplate_ButtonWindow =
 {
-    .tileTag = GFXTAG_BUTTON_WINDOW,
-    .paletteTag = PALTAG_MISC_UI,
+    .tileTag = GFX_TAG_EASY_CHAT_BUTTON_WINDOW,
+    .paletteTag = PAL_TAG_EASY_CHAT_MISC_UI,
     .oam = &sOamData_ButtonWindow,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -1177,8 +1160,8 @@ static const union AnimCmd *const sAnims_TwoFrame[] = {
 
 static const struct SpriteTemplate sSpriteTemplate_StartSelectButton =
 {
-    .tileTag = GFXTAG_START_SELECT_BUTTONS,
-    .paletteTag = PALTAG_MISC_UI,
+    .tileTag = GFX_TAG_EASY_CHAT_START_SELECT_BUTTONS,
+    .paletteTag = PAL_TAG_EASY_CHAT_MISC_UI,
     .oam = &sOamData_StartSelectButton,
     .anims = sAnims_TwoFrame,
     .images = NULL,
@@ -1188,8 +1171,8 @@ static const struct SpriteTemplate sSpriteTemplate_StartSelectButton =
 
 static const struct SpriteTemplate sSpriteTemplate_ScrollIndicator =
 {
-    .tileTag = GFXTAG_SCROLL_INDICATOR,
-    .paletteTag = PALTAG_MISC_UI,
+    .tileTag = GFX_TAG_EASY_CHAT_SCROLL_INDICATOR,
+    .paletteTag = PAL_TAG_EASY_CHAT_MISC_UI,
     .oam = &sOamData_ScrollIndicator,
     .anims = sAnims_TwoFrame,
     .images = NULL,

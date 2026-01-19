@@ -91,12 +91,10 @@ static const union AffineAnimCmd *const sVsLetterAffineAnimTable[] =
     sVsLetterAffineAnimCmds1,
 };
 
-#define TAG_VS_LETTERS 10000
-
 static const struct SpriteTemplate sVsLetter_V_SpriteTemplate =
 {
-    .tileTag = TAG_VS_LETTERS,
-    .paletteTag = TAG_VS_LETTERS,
+    .tileTag = TAG_LINK_BATTLE_VS_LETTERS,
+    .paletteTag = TAG_LINK_BATTLE_VS_LETTERS,
     .oam = &sVsLetter_V_OamData,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -106,8 +104,8 @@ static const struct SpriteTemplate sVsLetter_V_SpriteTemplate =
 
 static const struct SpriteTemplate sVsLetter_S_SpriteTemplate =
 {
-    .tileTag = TAG_VS_LETTERS,
-    .paletteTag = TAG_VS_LETTERS,
+    .tileTag = TAG_LINK_BATTLE_VS_LETTERS,
+    .paletteTag = TAG_LINK_BATTLE_VS_LETTERS,
     .oam = &sVsLetter_S_OamData,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -117,7 +115,7 @@ static const struct SpriteTemplate sVsLetter_S_SpriteTemplate =
 
 static const struct CompressedSpriteSheet sVsLettersSpriteSheet =
 {
-    gVsLettersGfx, 0x1000, TAG_VS_LETTERS
+    gVsLettersGfx, 0x1000, TAG_LINK_BATTLE_VS_LETTERS
 };
 
 const struct BgTemplate gBattleBgTemplates[] =
@@ -1071,7 +1069,7 @@ void InitLinkBattleVsScreen(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 1:
-        palId = AllocSpritePalette(TAG_VS_LETTERS);
+        palId = AllocSpritePalette(TAG_LINK_BATTLE_VS_LETTERS);
         gPlttBufferUnfaded[OBJ_PLTT_ID(palId) + 15] = gPlttBufferFaded[OBJ_PLTT_ID(palId) + 15] = RGB_WHITE;
         gBattleStruct->linkBattleVsSpriteId_V = CreateSprite(&sVsLetter_V_SpriteTemplate, 111, 80, 0);
         gBattleStruct->linkBattleVsSpriteId_S = CreateSprite(&sVsLetter_S_SpriteTemplate, 129, 80, 0);

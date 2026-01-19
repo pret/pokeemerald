@@ -59,8 +59,6 @@ extern const u8 *const gBattleScriptsForMoveEffects[];
 #define LEVEL_UP_BANNER_START 416
 #define LEVEL_UP_BANNER_END   512
 
-#define TAG_LVLUP_BANNER_MON_ICON 55130
-
 static bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);
 static u8 AttacksThisTurn(u8 battler, u16 move); // Note: returns 1 if it's a charging turn, otherwise 2.

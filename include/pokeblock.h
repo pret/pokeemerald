@@ -1,8 +1,6 @@
 #ifndef GUARD_POKEBLOCK_H
 #define GUARD_POKEBLOCK_H
 
-#define TAG_POKEBLOCK       14818
-
 enum
 {
     PBLOCK_CLR_NONE,

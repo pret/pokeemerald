@@ -11,15 +11,6 @@
 #include "window.h"
 #include "constants/items.h"
 
-enum {
-    TAG_BAG_GFX = 100,
-    TAG_ROTATING_BALL_GFX,
-    TAG_ITEM_ICON,
-    TAG_ITEM_ICON_ALT,
-};
-#define TAG_BERRY_CHECK_CIRCLE_GFX 10000
-#define TAG_BERRY_PIC_PAL 30020
-
 struct CompressedTilesPal
 {
     const u32 *tiles;
@@ -129,23 +120,23 @@ static const union AffineAnimCmd *const sBagAffineAnimCmds[] =
 
 const struct CompressedSpriteSheet gBagMaleSpriteSheet =
 {
-    gBagMaleTiles, 0x3000, TAG_BAG_GFX
+    gBagMaleTiles, 0x3000, TAG_ITEM_MENU_ICONS_BAG
 };
 
 const struct CompressedSpriteSheet gBagFemaleSpriteSheet =
 {
-    gBagFemaleTiles, 0x3000, TAG_BAG_GFX
+    gBagFemaleTiles, 0x3000, TAG_ITEM_MENU_ICONS_BAG
 };
 
 const struct CompressedSpritePalette gBagPaletteTable =
 {
-    gBagPalette, TAG_BAG_GFX
+    gBagPalette, TAG_ITEM_MENU_ICONS_BAG
 };
 
 static const struct SpriteTemplate sBagSpriteTemplate =
 {
-    .tileTag = TAG_BAG_GFX,
-    .paletteTag = TAG_BAG_GFX,
+    .tileTag = TAG_ITEM_MENU_ICONS_BAG,
+    .paletteTag = TAG_ITEM_MENU_ICONS_BAG,
     .oam = &sBagOamData,
     .anims = sBagSpriteAnimTable,
     .images = NULL,
@@ -205,18 +196,18 @@ static const union AffineAnimCmd *const sRotatingBallAnimCmds_FullRotation[] =
 
 static const struct SpriteSheet sRotatingBallTable =
 {
-    sRotatingBall_Gfx, sizeof(sRotatingBall_Gfx), TAG_ROTATING_BALL_GFX
+    sRotatingBall_Gfx, sizeof(sRotatingBall_Gfx), TAG_ITEM_MENU_ICONS_ROTATING_BALL
 };
 
 static const struct SpritePalette sRotatingBallPaletteTable =
 {
-    sRotatingBall_Pal, TAG_ROTATING_BALL_GFX
+    sRotatingBall_Pal, TAG_ITEM_MENU_ICONS_ROTATING_BALL
 };
 
 static const struct SpriteTemplate sRotatingBallSpriteTemplate =
 {
-    .tileTag = TAG_ROTATING_BALL_GFX,
-    .paletteTag = TAG_ROTATING_BALL_GFX,
+    .tileTag = TAG_ITEM_MENU_ICONS_ROTATING_BALL,
+    .paletteTag = TAG_ITEM_MENU_ICONS_ROTATING_BALL,
     .oam = &sRotatingBallOamData,
     .anims = sRotatingBallSpriteAnimTable,
     .images = NULL,
@@ -277,7 +268,7 @@ static const struct SpriteFrameImage sBerryPicSpriteImageTable[] =
 static const struct SpriteTemplate sBerryPicSpriteTemplate =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = TAG_BERRY_PIC_PAL,
+    .paletteTag = PAL_TAG_BERRY_CHECK_PIC,
     .oam = &sBerryPicOamData,
     .anims = sBerryPicSpriteAnimTable,
     .images = sBerryPicSpriteImageTable,
@@ -316,7 +307,7 @@ static const union AffineAnimCmd *const sBerryPicRotatingAnimCmds[] =
 static const struct SpriteTemplate sBerryPicRotatingSpriteTemplate =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = TAG_BERRY_PIC_PAL,
+    .paletteTag = PAL_TAG_BERRY_CHECK_PIC,
     .oam = &sBerryPicRotatingOamData,
     .anims = sBerryPicSpriteAnimTable,
     .images = sBerryPicSpriteImageTable,
@@ -373,12 +364,12 @@ static const struct CompressedTilesPal sBerryPicTable[] =
 
 const struct CompressedSpriteSheet gBerryCheckCircleSpriteSheet =
 {
-    gBerryCheckCircle_Gfx, 0x800, TAG_BERRY_CHECK_CIRCLE_GFX
+    gBerryCheckCircle_Gfx, 0x800, GFX_TAG_BERRY_CHECK_FLAVOR_CIRCLE
 };
 
 const struct CompressedSpritePalette gBerryCheckCirclePaletteTable =
 {
-    gBerryCheck_Pal, TAG_BERRY_CHECK_CIRCLE_GFX
+    gBerryCheck_Pal, GFX_TAG_BERRY_CHECK_FLAVOR_CIRCLE
 };
 
 static const struct OamData sBerryCheckCircleOamData =
@@ -411,8 +402,8 @@ static const union AnimCmd *const sBerryCheckCircleSpriteAnimTable[] =
 
 static const struct SpriteTemplate sBerryCheckCircleSpriteTemplate =
 {
-    .tileTag = TAG_BERRY_CHECK_CIRCLE_GFX,
-    .paletteTag = TAG_BERRY_CHECK_CIRCLE_GFX,
+    .tileTag = GFX_TAG_BERRY_CHECK_FLAVOR_CIRCLE,
+    .paletteTag = GFX_TAG_BERRY_CHECK_FLAVOR_CIRCLE,
     .oam = &sBerryCheckCircleOamData,
     .anims = sBerryCheckCircleSpriteAnimTable,
     .images = NULL,
@@ -426,8 +417,8 @@ void RemoveBagSprite(u8 id)
     u8 *spriteId = &gBagMenu->spriteIds[id];
     if (*spriteId != SPRITE_NONE)
     {
-        FreeSpriteTilesByTag(id + TAG_BAG_GFX);
-        FreeSpritePaletteByTag(id + TAG_BAG_GFX);
+        FreeSpriteTilesByTag(id + TAG_ITEM_MENU_ICONS_BAG);
+        FreeSpritePaletteByTag(id + TAG_ITEM_MENU_ICONS_BAG);
         FreeSpriteOamMatrix(&gSprites[*spriteId]);
         DestroySprite(&gSprites[*spriteId]);
         *spriteId = SPRITE_NONE;
@@ -539,10 +530,10 @@ void AddBagItemIconSprite(u16 itemId, u8 id)
     {
         u8 iconSpriteId;
 
-        // Either TAG_ITEM_ICON or TAG_ITEM_ICON_ALT
-        FreeSpriteTilesByTag(id + TAG_ITEM_ICON);
-        FreeSpritePaletteByTag(id + TAG_ITEM_ICON);
-        iconSpriteId = AddItemIconSprite(id + TAG_ITEM_ICON, id + TAG_ITEM_ICON, itemId);
+        // Either TAG_ITEM_MENU_ICONS_ITEM_ICON or TAG_ITEM_MENU_ICONS_ITEM_ICON_ALT
+        FreeSpriteTilesByTag(id + TAG_ITEM_MENU_ICONS_ITEM_ICON);
+        FreeSpritePaletteByTag(id + TAG_ITEM_MENU_ICONS_ITEM_ICON);
+        iconSpriteId = AddItemIconSprite(id + TAG_ITEM_MENU_ICONS_ITEM_ICON, id + TAG_ITEM_MENU_ICONS_ITEM_ICON, itemId);
         if (iconSpriteId != MAX_SPRITES)
         {
             *spriteId = iconSpriteId;
@@ -625,7 +616,7 @@ static void LoadBerryGfx(u8 berryId)
     }
 
     pal.data = sBerryPicTable[berryId].pal;
-    pal.tag = TAG_BERRY_PIC_PAL;
+    pal.tag = PAL_TAG_BERRY_CHECK_PIC;
     LoadCompressedSpritePalette(&pal);
     LZDecompressWram(sBerryPicTable[berryId].tiles, &gDecompressionBuffer[0x1000]);
     ArrangeBerryGfx(&gDecompressionBuffer[0x1000], &gDecompressionBuffer[0]);
@@ -639,7 +630,7 @@ u8 CreateBerryTagSprite(u8 id, s16 x, s16 y)
 
 void FreeBerryTagSpritePalette(void)
 {
-    FreeSpritePaletteByTag(TAG_BERRY_PIC_PAL);
+    FreeSpritePaletteByTag(PAL_TAG_BERRY_CHECK_PIC);
 }
 
 // For throwing berries into the Berry Blender
@@ -647,7 +638,7 @@ u8 CreateSpinningBerrySprite(u8 berryId, u8 x, u8 y, bool8 startAffine)
 {
     u8 spriteId;
 
-    FreeSpritePaletteByTag(TAG_BERRY_PIC_PAL);
+    FreeSpritePaletteByTag(PAL_TAG_BERRY_CHECK_PIC);
     LoadBerryGfx(berryId);
     spriteId = CreateSprite(&sBerryPicRotatingSpriteTemplate, x, y, 0);
     if (startAffine == TRUE)

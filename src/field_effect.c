@@ -333,7 +333,7 @@ static const struct SpriteFrameImage sPicTable_NewGameBirch[] =
 static const struct SpritePalette sSpritePalette_NewGameBirch =
 {
     .data = sNewGameBirch_Pal,
-    .tag = 0x1006
+    .tag = PAL_TAG_FLDEFF_NEW_GAME_BIRCH
 };
 
 static const union AnimCmd sAnim_NewGameBirch[] =
@@ -350,7 +350,7 @@ static const union AnimCmd *const sAnimTable_NewGameBirch[] =
 static const struct SpriteTemplate sSpriteTemplate_NewGameBirch =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = 0x1006,
+    .paletteTag = PAL_TAG_FLDEFF_NEW_GAME_BIRCH,
     .oam = &sOam_64x64,
     .anims = sAnimTable_NewGameBirch,
     .images = sPicTable_NewGameBirch,
@@ -361,13 +361,13 @@ static const struct SpriteTemplate sSpriteTemplate_NewGameBirch =
 const struct SpritePalette gSpritePalette_PokeballGlow =
 {
     .data = sPokeballGlow_Pal,
-    .tag = FLDEFF_PAL_TAG_POKEBALL_GLOW
+    .tag = PAL_TAG_FLDEFF_POKEBALL_GLOW
 };
 
 const struct SpritePalette gSpritePalette_HofMonitor =
 {
     .data = sHofMonitor_Pal,
-    .tag = FLDEFF_PAL_TAG_HOF_MONITOR
+    .tag = PAL_TAG_FLDEFF_HOF_MONITOR
 };
 
 static const struct OamData sOam_32x16 =
@@ -525,7 +525,7 @@ static const union AnimCmd *const sAnims_HofMonitor[] =
 static const struct SpriteTemplate sSpriteTemplate_PokeballGlow =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = FLDEFF_PAL_TAG_POKEBALL_GLOW,
+    .paletteTag = PAL_TAG_FLDEFF_POKEBALL_GLOW,
     .oam = &sOam_8x8,
     .anims = sAnims_Flicker,
     .images = sPicTable_PokeballGlow,
@@ -536,7 +536,7 @@ static const struct SpriteTemplate sSpriteTemplate_PokeballGlow =
 static const struct SpriteTemplate sSpriteTemplate_PokecenterMonitor =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = FLDEFF_PAL_TAG_GENERAL_0,
+    .paletteTag = PAL_TAG_FLDEFF_GENERAL_0,
     .oam = &sOam_16x16,
     .anims = sAnims_Flicker,
     .images = sPicTable_PokecenterMonitor,
@@ -547,7 +547,7 @@ static const struct SpriteTemplate sSpriteTemplate_PokecenterMonitor =
 static const struct SpriteTemplate sSpriteTemplate_HofMonitorBig =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = FLDEFF_PAL_TAG_HOF_MONITOR,
+    .paletteTag = PAL_TAG_FLDEFF_HOF_MONITOR,
     .oam = &sOam_16x16,
     .anims = sAnims_HofMonitor,
     .images = sPicTable_HofMonitorBig,
@@ -558,7 +558,7 @@ static const struct SpriteTemplate sSpriteTemplate_HofMonitorBig =
 static const struct SpriteTemplate sSpriteTemplate_HofMonitorSmall =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = FLDEFF_PAL_TAG_HOF_MONITOR,
+    .paletteTag = PAL_TAG_FLDEFF_HOF_MONITOR,
     .oam = &sOam_32x16,
     .anims = sAnims_HofMonitor,
     .images = sPicTable_HofMonitorSmall,
@@ -1190,14 +1190,14 @@ static void PokeballGlowEffect_Flash1(struct Sprite *sprite)
             sprite->data[3]++;
     }
     phase = (sprite->sCounter + 3) & 3;
-    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_POKEBALL_GLOW)) + 8, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
+    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(PAL_TAG_FLDEFF_POKEBALL_GLOW)) + 8, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
     phase = (sprite->sCounter + 2) & 3;
-    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_POKEBALL_GLOW)) + 6, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
+    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(PAL_TAG_FLDEFF_POKEBALL_GLOW)) + 6, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
     phase = (sprite->sCounter + 1) & 3;
-    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_POKEBALL_GLOW)) + 2, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
+    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(PAL_TAG_FLDEFF_POKEBALL_GLOW)) + 2, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
     phase = sprite->sCounter;
-    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_POKEBALL_GLOW)) + 5, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
-    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_POKEBALL_GLOW)) + 3, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
+    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(PAL_TAG_FLDEFF_POKEBALL_GLOW)) + 5, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
+    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(PAL_TAG_FLDEFF_POKEBALL_GLOW)) + 3, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
     if (sprite->data[3] > 2)
     {
         sprite->sState++;
@@ -1221,11 +1221,11 @@ static void PokeballGlowEffect_Flash2(struct Sprite *sprite)
         }
     }
     phase = sprite->sCounter;
-    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_POKEBALL_GLOW)) + 8, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
-    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_POKEBALL_GLOW)) + 6, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
-    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_POKEBALL_GLOW)) + 2, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
-    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_POKEBALL_GLOW)) + 5, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
-    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_POKEBALL_GLOW)) + 3, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
+    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(PAL_TAG_FLDEFF_POKEBALL_GLOW)) + 8, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
+    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(PAL_TAG_FLDEFF_POKEBALL_GLOW)) + 6, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
+    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(PAL_TAG_FLDEFF_POKEBALL_GLOW)) + 2, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
+    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(PAL_TAG_FLDEFF_POKEBALL_GLOW)) + 5, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
+    MultiplyInvertedPaletteRGBComponents(OBJ_PLTT_ID(IndexOfSpritePaletteTag(PAL_TAG_FLDEFF_POKEBALL_GLOW)) + 3, sPokeballGlowReds[phase], sPokeballGlowGreens[phase], sPokeballGlowBlues[phase]);
 }
 
 static void PokeballGlowEffect_WaitAfterFlash(struct Sprite *sprite)
@@ -3782,7 +3782,7 @@ static const union AnimCmd *const sAnims_DeoxysRockFragment[] = {
 static const struct SpriteTemplate sSpriteTemplate_DeoxysRockFragment =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = 4378,
+    .paletteTag = PAL_TAG_OBJ_EVENT_BIRTH_ISLAND_STONE_FRAGMENT,
     .oam = &sOam_8x8,
     .anims = sAnims_DeoxysRockFragment,
     .images = sImages_DeoxysRockFragment,

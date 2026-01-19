@@ -1770,7 +1770,7 @@ static void AnimTask_BlendMonInAndOut_Step(u8 taskId)
     }
 }
 
-// See AnimTask_BlendMonInAndOut. Same, but ANIM_TAG_* instead of mon
+// See AnimTask_BlendMonInAndOut. Same, but TAG_BATTLE_ANIM_* instead of mon
 void AnimTask_BlendPalInAndOutByTag(u8 task)
 {
     u8 palette = IndexOfSpritePaletteTag(gBattleAnimArgs[0]);
@@ -2416,7 +2416,7 @@ void AnimTask_AttackerPunchWithTrace(u8 taskId)
     task->tState = 0;
     task->tCounter = 0;
     gSprites[task->tBattlerSpriteId].x2 -= task->tBattlerSpriteId;
-    task->tPaletteNum = AllocSpritePalette(ANIM_TAG_BENT_SPOON);
+    task->tPaletteNum = AllocSpritePalette(TAG_BATTLE_ANIM_BENT_SPOON);
     task->tNumTracesActive = 0;
 
     dest = OBJ_PLTT_ID2(task->tPaletteNum);
@@ -2462,7 +2462,7 @@ static void AnimTask_AttackerPunchWithTrace_Step(u8 taskId)
     case 2:
         if (task->tNumTracesActive == 0)
         {
-            FreeSpritePaletteByTag(ANIM_TAG_BENT_SPOON);
+            FreeSpritePaletteByTag(TAG_BATTLE_ANIM_BENT_SPOON);
             DestroyAnimVisualTask(taskId);
         }
         break;

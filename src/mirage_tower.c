@@ -54,8 +54,6 @@ struct FallAnim_Fossil
     u16 disintegrateIdx;
 };
 
-#define TAG_CEILING_CRUMBLE 4000
-
 #define MIRAGE_TOWER_GFX_LENGTH (sizeof(sMirageTower_Gfx))
 #define FOSSIL_DISINTEGRATE_LENGTH 0x100
 
@@ -93,7 +91,7 @@ static const s16 sCeilingCrumblePositions[][3] =
 
 static const struct SpriteSheet sCeilingCrumbleSpriteSheets[] =
 {
-    {sMirageTowerCrumbles_Gfx, sizeof(sMirageTowerCrumbles_Gfx), TAG_CEILING_CRUMBLE},
+    {sMirageTowerCrumbles_Gfx, sizeof(sMirageTowerCrumbles_Gfx), TAG_MIRAGE_TOWER_CEILING_CRUMBLE},
     {}
 };
 
@@ -200,7 +198,7 @@ static const struct OamData sOamData_CeilingCrumbleSmall =
 
 static const struct SpriteTemplate sSpriteTemplate_CeilingCrumbleSmall =
 {
-    .tileTag = TAG_CEILING_CRUMBLE,
+    .tileTag = TAG_MIRAGE_TOWER_CEILING_CRUMBLE,
     .paletteTag = TAG_NONE,
     .oam = &sOamData_CeilingCrumbleSmall,
     .anims = sAnims_CeilingCrumbleSmall,
@@ -239,7 +237,7 @@ static const struct OamData sOamData_CeilingCrumbleLarge =
 
 static const struct SpriteTemplate sSpriteTemplate_CeilingCrumbleLarge =
 {
-    .tileTag = TAG_CEILING_CRUMBLE,
+    .tileTag = TAG_MIRAGE_TOWER_CEILING_CRUMBLE,
     .paletteTag = TAG_NONE,
     .oam = &sOamData_CeilingCrumbleLarge,
     .anims = sAnims_CeilingCrumbleLarge,
@@ -436,7 +434,7 @@ static void WaitCeilingCrumble(u8 taskId)
 
 static void FinishCeilingCrumbleTask(u8 taskId)
 {
-    FreeSpriteTilesByTag(TAG_CEILING_CRUMBLE);
+    FreeSpriteTilesByTag(TAG_MIRAGE_TOWER_CEILING_CRUMBLE);
     DestroyTask(taskId);
     ScriptContext_Enable();
 }

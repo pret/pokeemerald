@@ -47,8 +47,6 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
-#define TAG_SCROLL_ARROW 5112
-
 // Values for registryStatus
 enum {
     UNREGISTERED,
@@ -987,7 +985,7 @@ static void FinalizeRegistryMenu(u8 taskId)
 static void AddRegistryMenuScrollArrows(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    tArrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 188, 12, 148, tNumBases - tMaxShownItems, TAG_SCROLL_ARROW, TAG_SCROLL_ARROW, &tScrollOffset);
+    tArrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 188, 12, 148, tNumBases - tMaxShownItems, TAG_SECRET_BASE_REGISTRY_MENU_SCROLL_ARROW, TAG_SECRET_BASE_REGISTRY_MENU_SCROLL_ARROW, &tScrollOffset);
 }
 
 static void HandleRegistryMenuInput(u8 taskId)
