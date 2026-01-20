@@ -1452,7 +1452,7 @@ FuryCutterStrong:
 	complex_palette_blend unused_anim_battler=ANIM_ATTACKER, unused_subpriority_offset=2, selector=F_PAL_BG | F_PAL_BATTLERS, delay=3, num_blends=3, color1=RGB(9, 8, 10), blend_y1=4, color2=RGB_BLACK, blend_y2=0
 	goto FuryCutterContinue2
 FuryCutterStrongest:
-        complex_palette_blend unused_anim_battler=ANIM_ATTACKER, unused_subpriority_offset=2, selector=F_PAL_BG | F_PAL_BATTLERS, delay=3, num_blends=3, color1=RGB(9, 8, 10), blend_y1=4, color2=RGB_BLACK, blend_y2=0
+	complex_palette_blend unused_anim_battler=ANIM_ATTACKER, unused_subpriority_offset=2, selector=F_PAL_BG | F_PAL_BATTLERS, delay=3, num_blends=3, color1=RGB(9, 8, 10), blend_y1=4, color2=RGB_BLACK, blend_y2=0
 	goto FuryCutterContinue2
 
 Move_SELF_DESTRUCT:
@@ -2054,7 +2054,7 @@ Move_CONFUSE_RAY:
 	fadetobg BG_GHOST
 	waitbgfadein
 	createvisualtask SoundTask_AdjustPanningVar, 2, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 2, 0
-        blend_color_cyclebytag tag=ANIM_TAG_YELLOW_BALL, delay=0, num_blends=6, initial_blend_y=0, target_blend_y=14, color=RGB(31, 10, 0)
+	blend_color_cyclebytag tag=ANIM_TAG_YELLOW_BALL, delay=0, num_blends=6, initial_blend_y=0, target_blend_y=14, color=RGB(31, 10, 0)
 	createsprite gConfuseRayBallBounceSpriteTemplate, ANIM_TARGET, 2, 28, 0, 288
 	waitforvisualfinish
 	setalpha 8, 8
@@ -2097,7 +2097,7 @@ Move_MEAN_LOOK:
 
 Move_ROCK_THROW:
 	loadspritegfx ANIM_TAG_ROCKS
-        shake_mon_or_platform unused_anim_battler=ANIM_TARGET, velocity=6, shake_timer=1, shake_duration=15, type=SHAKE_BG_Y
+	shake_mon_or_platform unused_anim_battler=ANIM_TARGET, velocity=6, shake_timer=1, shake_duration=15, type=SHAKE_BG_Y
 	createsprite gFallingRockSpriteTemplate, ANIM_TARGET, 2, 0, 1, 0, 0
 	playsewithpan SE_M_ROCK_THROW, SOUND_PAN_TARGET
 	delay 6
@@ -2119,7 +2119,7 @@ Move_ROCK_THROW:
 Move_ROCK_SLIDE:
 	loadspritegfx ANIM_TAG_ROCKS
 	monbg ANIM_DEF_PARTNER
-        shake_mon_or_platform velocity=7, shake_timer=1, shake_duration=11, type=SHAKE_BG_Y
+	shake_mon_or_platform velocity=7, shake_timer=1, shake_duration=11, type=SHAKE_BG_Y
 	createsprite gFallingRockSpriteTemplate, ANIM_TARGET, 2, -5, 1, -5, 1
 	playsewithpan SE_M_ROCK_THROW, SOUND_PAN_TARGET
 	delay 2
@@ -2909,7 +2909,7 @@ Move_BARRAGE:
 	createvisualtask AnimTask_BarrageBall, 3
 	playsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER
 	delay 24
-        shake_mon_or_platform velocity=8, shake_timer=1, shake_duration=40, type=SHAKE_BG_Y
+	shake_mon_or_platform velocity=8, shake_timer=1, shake_duration=40, type=SHAKE_BG_Y
 	createvisualtask AnimTask_ShakeMon, 3, ANIM_TARGET, 0, 4, 20, 1
 	createvisualtask AnimTask_ShakeMon, 3, ANIM_DEF_PARTNER, 0, 4, 20, 1
 	loopsewithpan SE_M_STRENGTH, SOUND_PAN_TARGET, 8, 2
@@ -3660,7 +3660,7 @@ Move_SUPERPOWER:
 	createsprite gSuperpowerOrbSpriteTemplate, ANIM_TARGET, 2, ANIM_ATTACKER
 	playsewithpan SE_M_MEGA_KICK, SOUND_PAN_ATTACKER
 	delay 20
-        shake_mon_or_platform velocity=4, shake_timer=1, shake_duration=180, type=SHAKE_BG_Y
+	shake_mon_or_platform velocity=4, shake_timer=1, shake_duration=180, type=SHAKE_BG_Y
 	createvisualtask SoundTask_PlaySE2WithPanning, 5, SE_M_EARTHQUAKE, 0
 	delay 40
 	createsprite gSuperpowerRockSpriteTemplate, ANIM_ATTACKER, 41, 200, 96, 1, 120
@@ -4769,7 +4769,7 @@ Move_THUNDER:
 	waitbgfadein
 	simple_palette_blend selector=F_PAL_BG, delay=2, initial_blend_y=0, target_blend_y=16, color=RGB_BLACK
 	delay 16
-        invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
+	invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
 	playsewithpan SE_M_THUNDER_WAVE, SOUND_PAN_TARGET
 	delay 1
 	createsprite gLightningSpriteTemplate, ANIM_TARGET, 2, 16, -36
@@ -4786,7 +4786,7 @@ Move_THUNDER:
 	createsprite gLightningSpriteTemplate, ANIM_TARGET, 6, -16, 16
 	playsewithpan SE_M_THUNDER_WAVE, SOUND_PAN_TARGET
 	delay 5
-        invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
+	invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
 	delay 1
 	createsprite gLightningSpriteTemplate, ANIM_TARGET, 2, 24, -32
 	delay 1
@@ -4794,9 +4794,9 @@ Move_THUNDER:
 	delay 1
 	createsprite gLightningSpriteTemplate, ANIM_TARGET, 2, 24, 16
 	delay 30
-        invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
+	invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
 	delay 5
-        invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
+	invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
 	delay 1
 	createsprite gLightningSpriteTemplate, ANIM_TARGET, 2, 0, -32
 	playsewithpan SE_M_TRI_ATTACK2, SOUND_PAN_TARGET
@@ -4805,11 +4805,11 @@ Move_THUNDER:
 	delay 1
 	createsprite gLightningSpriteTemplate, ANIM_TARGET, 2, 0, 16
 	delay 10
-        invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
+	invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
 	delay 1
 	createvisualtask AnimTask_ShakeTargetInPattern, 2, 30, 3, TRUE, 0
 	delay 2
-        invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
+	invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
 	delay 1
 	simple_palette_blend unused_anim_battler=ANIM_TARGET, selector=F_PAL_BG, delay=2, initial_blend_y=16, target_blend_y=0, color=RGB_BLACK
 	waitforvisualfinish
@@ -4831,7 +4831,7 @@ Move_THUNDER_PUNCH:
 	createsprite gFistFootSpriteTemplate, ANIM_TARGET, 4, 0, 0, 8, 1, 0
 	create_basic_hitsplat_sprite ANIM_TARGET, 3, x=0, y=0, relative_to=ANIM_TARGET, animation=1
 	delay 1
-        invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
+	invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
 	delay 1
 	createsprite gLightningSpriteTemplate, ANIM_TARGET, 2, 0, -48
 	delay 1
@@ -4840,7 +4840,7 @@ Move_THUNDER_PUNCH:
 	createsprite gLightningSpriteTemplate, ANIM_ATTACKER, 2, 0, 16
 	delay 1
 	playsewithpan SE_M_TRI_ATTACK2, SOUND_PAN_TARGET
-        invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
+	invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
 	delay 2
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 3, 15, 1
 	create_basic_hitsplat_sprite ANIM_ATTACKER, 3, x=0, y=0, relative_to=ANIM_TARGET, animation=2
@@ -4868,12 +4868,12 @@ Move_SACRED_FIRE:
 	delay 1
 	createsprite gFirePlumeSpriteTemplate, ANIM_ATTACKER, 2, 20, 10, 50, 5, 1, 1
 	delay 1
-        invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
+	invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
 	delay 1
 	createsprite gFirePlumeSpriteTemplate, ANIM_ATTACKER, 2, 0, 16, 50, 5, 0, 1
 	delay 1
 	createsprite gFirePlumeSpriteTemplate, ANIM_ATTACKER, 2, -20, 10, 50, 5, -1, 1
-        invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
+	invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
 	delay 1
 	waitforvisualfinish
 	playsewithpan SE_M_SACRED_FIRE2, SOUND_PAN_TARGET
@@ -4885,10 +4885,10 @@ Move_SACRED_FIRE:
 	playsewithpan SE_M_SACRED_FIRE2, SOUND_PAN_TARGET
 	createsprite gLargeFlameSpriteTemplate, ANIM_TARGET, 2, 16, 0, 80, 16, 0, 1
 	delay 1
-        invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
+	invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
 	delay 1
 	waitforvisualfinish
-        invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
+	invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
 	delay 1
 	playsewithpan SE_M_FLAME_WHEEL2, SOUND_PAN_TARGET
 	createsprite gLargeFlameScatterSpriteTemplate, ANIM_TARGET, 2, 0, 0, 30, 30, -1, 0
@@ -5011,7 +5011,7 @@ SnoreEffect:
 	playsewithpan SE_M_SNORE, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 7, ANIM_ATTACKER, 1
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 7, 1
-        shake_mon_or_platform velocity=6, shake_timer=1, shake_duration=14, type=SHAKE_BG_X, battler_selector=SHAKE_MON_ATTACKER
+	shake_mon_or_platform velocity=6, shake_timer=1, shake_duration=14, type=SHAKE_BG_X, battler_selector=SHAKE_MON_ATTACKER
 	createsprite gSnoreZSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, -42, -38, 24, 0, 0
 	createsprite gSnoreZSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 0, -42, 24, 0, 0
 	createsprite gSnoreZSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 42, -38, 24, 0, 0
@@ -6871,7 +6871,7 @@ Move_ANCIENT_POWER:
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_DEF_PARTNER
 	setalpha 12, 8
-        shake_mon_or_platform velocity=4, shake_timer=1, shake_duration=10, type=SHAKE_BG_Y
+	shake_mon_or_platform velocity=4, shake_timer=1, shake_duration=10, type=SHAKE_BG_Y
 	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, 20, 32, -48, 50, 2
 	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, 0, 32, -38, 25, 5
 	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, 32, 32, -28, 40, 3
@@ -7265,7 +7265,7 @@ Move_POISON_TAIL:
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_POISON_BUBBLE
 	loopsewithpan SE_M_HARDEN, SOUND_PAN_ATTACKER, 28, 2
-        metallic_shine permanent=TRUE, color=RGB(24, 6, 23)
+	metallic_shine permanent=TRUE, color=RGB(24, 6, 23)
 	waitforvisualfinish
 	monbg ANIM_TARGET
 	setalpha 12, 8
@@ -7292,14 +7292,14 @@ Move_METAL_CLAW:
 	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
 	create_claw_slash_sprite ANIM_TARGET, 2, x=-10, y=-10, animation=0
 	create_claw_slash_sprite ANIM_TARGET, 2, x=-10, y=10, animation=0
-        shake_mon_or_platform velocity=-4, shake_timer=1, shake_duration=10, type=SHAKE_MON_Y, battler_selector=SHAKE_MON_TARGET
+	shake_mon_or_platform velocity=-4, shake_timer=1, shake_duration=10, type=SHAKE_MON_Y, battler_selector=SHAKE_MON_TARGET
 	delay 8
 	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 6, 4
 	delay 2
 	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
 	create_claw_slash_sprite ANIM_TARGET, 2, x=10, y=-10, animation=1
 	create_claw_slash_sprite ANIM_TARGET, 2, x=10, y=10, animation=1
-        shake_mon_or_platform velocity=-4, shake_timer=1, shake_duration=10, type=SHAKE_MON_Y, battler_selector=SHAKE_MON_TARGET
+	shake_mon_or_platform velocity=-4, shake_timer=1, shake_duration=10, type=SHAKE_MON_Y, battler_selector=SHAKE_MON_TARGET
 	waitforvisualfinish
 	end
 
@@ -8049,7 +8049,7 @@ Move_TRI_ATTACK:
 	createvisualtask AnimTask_ShakeTargetInPattern, 2, 20, 3, TRUE, 1
 	waitforvisualfinish
 	loadspritegfx ANIM_TAG_LIGHTNING
-        invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
+	invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
 	playsewithpan SE_M_TRI_ATTACK2, SOUND_PAN_TARGET
 	createsprite gLightningSpriteTemplate, ANIM_TARGET, 2, 0, -48
 	delay 1
@@ -8059,7 +8059,7 @@ Move_TRI_ATTACK:
 	delay 20
 	createvisualtask AnimTask_ShakeTargetInPattern, 2, 20, 3, TRUE, 0
 	delay 2
-        invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
+	invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
 	waitforvisualfinish
 	loadspritegfx ANIM_TAG_ICE_CRYSTALS
 	call IceCrystalEffectShort
@@ -8637,7 +8637,7 @@ Move_DRAGON_CLAW:
 	createvisualtask SoundTask_PlaySE1WithPanning, 5, SE_M_RAZOR_WIND, SOUND_PAN_TARGET
 	create_claw_slash_sprite ANIM_TARGET, 2, x=-10, y=-10, animation=0
 	create_claw_slash_sprite ANIM_TARGET, 2, x=-10, y=10, animation=0
-        shake_mon_or_platform velocity=-4, shake_timer=1, shake_duration=10, type=SHAKE_MON_Y, battler_selector=SHAKE_MON_TARGET
+	shake_mon_or_platform velocity=-4, shake_timer=1, shake_duration=10, type=SHAKE_MON_Y, battler_selector=SHAKE_MON_TARGET
 	createsprite gFireSpinSpriteTemplate, ANIM_ATTACKER, 2, 0, 32, 480, 20, 16, -46, ANIM_ATTACKER
 	delay 2
 	createsprite gFireSpinSpriteTemplate, ANIM_ATTACKER, 2, 0, 33, 576, 20, 8, 42, ANIM_ATTACKER
@@ -8650,7 +8650,7 @@ Move_DRAGON_CLAW:
 	createvisualtask SoundTask_PlaySE1WithPanning, 5, SE_M_RAZOR_WIND, SOUND_PAN_TARGET
 	create_claw_slash_sprite ANIM_TARGET, 2, x=10, y=-10, animation=1
 	create_claw_slash_sprite ANIM_TARGET, 2, x=10, y=10, animation=1
-        shake_mon_or_platform velocity=-4, shake_timer=1, shake_duration=10, type=SHAKE_MON_Y, battler_selector=SHAKE_MON_TARGET
+	shake_mon_or_platform velocity=-4, shake_timer=1, shake_duration=10, type=SHAKE_MON_Y, battler_selector=SHAKE_MON_TARGET
 	createsprite gFireSpinSpriteTemplate, ANIM_ATTACKER, 2, 0, 33, 464, 30, 15, -50, ANIM_ATTACKER
 	delay 2
 	createsprite gFireSpinSpriteTemplate, ANIM_ATTACKER, 2, 0, 28, 528, 30, 13, 50, ANIM_ATTACKER
@@ -9102,7 +9102,7 @@ Move_BLAST_BURN:
 	createsprite gFirePlumeSpriteTemplate, ANIM_ATTACKER, 66, 40, 20, 24, 0, 0, 0
 	createsprite gFirePlumeSpriteTemplate, ANIM_ATTACKER, 2, 0, 32, 24, 0, 0, 0
 	createsprite gFirePlumeSpriteTemplate, ANIM_ATTACKER, 2, -40, 20, 24, 0, 0, 0
-        invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
+	invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
 	delay 25
 	playsewithpan SE_M_FLAME_WHEEL2, SOUND_PAN_ATTACKER
 	createsprite gFirePlumeSpriteTemplate, ANIM_ATTACKER, 2, -96, 0, 24, 0, 0, 0
@@ -9116,7 +9116,7 @@ Move_BLAST_BURN:
 	createsprite gFirePlumeSpriteTemplate, ANIM_ATTACKER, 66, 60, 30, 24, 0, 0, 0
 	createsprite gFirePlumeSpriteTemplate, ANIM_ATTACKER, 2, 0, 48, 24, 0, 0, 0
 	createsprite gFirePlumeSpriteTemplate, ANIM_ATTACKER, 2, -60, 30, 24, 0, 0, 0
-        invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
+	invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -9368,7 +9368,7 @@ Move_HYDRO_CANNON:
 	playsewithpan SE_M_SURF, SOUND_PAN_ATTACKER
 	createsprite gHydroCannonChargeSpriteTemplate, ANIM_TARGET, 2
 	delay 10
-        invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
+	invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
 	delay 30
 	panse SE_M_HYDRO_PUMP, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
 	call HydroCannonBeam
@@ -9385,7 +9385,7 @@ Move_HYDRO_CANNON:
 	call HydroCannonBeam
 	createsprite gWaterHitSplatSpriteTemplate, ANIM_TARGET, 2, 0, 0, ANIM_TARGET, 0
 	waitforvisualfinish
-        invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
+	invert_screen_color scenery=TRUE, attacker=TRUE, target=TRUE
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
