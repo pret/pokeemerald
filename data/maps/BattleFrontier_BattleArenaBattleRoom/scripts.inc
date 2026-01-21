@@ -367,7 +367,6 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_DoArenaBattle::
 	setvar VAR_0x8004, SPECIAL_BATTLE_ARENA
 	setvar VAR_0x8005, 0
 	special DoSpecialTrainerBattle
-	waitstate
 	frontier_restorehelditems
 	special HealPlayerParty
 	frontier_resetsketch

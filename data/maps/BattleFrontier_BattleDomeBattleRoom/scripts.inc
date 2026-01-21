@@ -448,7 +448,6 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_DoDomeBattle::
 	setvar VAR_0x8005, 0
 	setvar VAR_TEMP_9, 1
 	special DoSpecialTrainerBattle
-	waitstate
 	setvar VAR_TEMP_9, 0
 	dome_restorehelditems
 	special HealPlayerParty
