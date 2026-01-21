@@ -1,5 +1,5 @@
 LavaridgeTown_House_MapScripts::
-	.byte 0
+	end_map_scripts
 
 LavaridgeTown_House_EventScript_OldMan::
 	msgbox LavaridgeTown_House_Text_WifeWarmingEggInHotSprings, MSGBOX_NPC

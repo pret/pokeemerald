@@ -1,5 +1,5 @@
 RustboroCity_House1_MapScripts::
-	.byte 0
+	end_map_scripts
 
 RustboroCity_House1_EventScript_Trader::
 	lock

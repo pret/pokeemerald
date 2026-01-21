@@ -1,3 +1,3 @@
 MossdeepCity_GameCorner_B1F_MapScripts::
-	.byte 0
+	end_map_scripts
 
