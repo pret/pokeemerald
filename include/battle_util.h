@@ -47,6 +47,10 @@
 #define WEATHER_HAS_EFFECT ((!ABILITY_ON_FIELD(ABILITY_CLOUD_NINE) && !ABILITY_ON_FIELD(ABILITY_AIR_LOCK)))
 #define WEATHER_HAS_EFFECT2 ((!ABILITY_ON_FIELD2(ABILITY_CLOUD_NINE) && !ABILITY_ON_FIELD2(ABILITY_AIR_LOCK)))
 
+#define DISOBEDIENCE_OBEDIENT 0
+#define DISOBEDIENCE_IGNORED  1 // command is ignored
+#define DISOBEDIENCE_OTHER    2 // random move or self-hit
+
 void HandleAction_UseMove(void);
 void HandleAction_Switch(void);
 void HandleAction_UseItem(void);
