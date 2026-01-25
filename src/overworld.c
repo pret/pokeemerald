@@ -475,8 +475,8 @@ void LoadObjEventTemplatesFromHeader(void)
 
     // Copy map header events to save block
     CpuCopy32(gMapHeader.events->objectEvents,
-        gSaveBlock1Ptr->objectEventTemplates,
-        gMapHeader.events->objectEventCount * sizeof(struct ObjectEventTemplate));
+              gSaveBlock1Ptr->objectEventTemplates,
+              gMapHeader.events->objectEventCount * sizeof(struct ObjectEventTemplate));
 }
 
 void LoadSaveblockObjEventScripts(void)
@@ -1017,25 +1017,25 @@ static bool16 ShouldLegendaryMusicPlayAtLocation(struct WarpData* warp)
     {
         switch (warp->mapNum)
         {
-        case MAP_NUM(LILYCOVE_CITY):
-        case MAP_NUM(MOSSDEEP_CITY):
-        case MAP_NUM(SOOTOPOLIS_CITY):
-        case MAP_NUM(EVER_GRANDE_CITY):
-        case MAP_NUM(ROUTE124):
-        case MAP_NUM(ROUTE125):
-        case MAP_NUM(ROUTE126):
-        case MAP_NUM(ROUTE127):
-        case MAP_NUM(ROUTE128):
-            return TRUE;
-        default:
-            if (VarGet(VAR_SOOTOPOLIS_CITY_STATE) < 4)
-                return FALSE;
+            case MAP_NUM(LILYCOVE_CITY):
+            case MAP_NUM(MOSSDEEP_CITY):
+            case MAP_NUM(SOOTOPOLIS_CITY):
+            case MAP_NUM(EVER_GRANDE_CITY):
+            case MAP_NUM(ROUTE124):
+            case MAP_NUM(ROUTE125):
+            case MAP_NUM(ROUTE126):
+            case MAP_NUM(ROUTE127):
+            case MAP_NUM(ROUTE128):
+                return TRUE;
+            default:
+                if (VarGet(VAR_SOOTOPOLIS_CITY_STATE) < 4)
+                    return FALSE;
             switch (warp->mapNum)
             {
-            case MAP_NUM(ROUTE129):
-            case MAP_NUM(ROUTE130):
-            case MAP_NUM(ROUTE131):
-                return TRUE;
+                case MAP_NUM(ROUTE129):
+                case MAP_NUM(ROUTE130):
+                case MAP_NUM(ROUTE131):
+                    return TRUE;
             }
         }
     }
@@ -1274,45 +1274,45 @@ void UpdateAmbientCry(s16* state, u16* delayCounter)
 
     switch (*state)
     {
-    case AMB_CRY_INIT:
-        // This state will be revisited whenever ResetFieldTasksArgs is called (which happens on map transition)
-        if (sAmbientCrySpecies == SPECIES_NONE)
-            *state = AMB_CRY_IDLE;
+        case AMB_CRY_INIT:
+            // This state will be revisited whenever ResetFieldTasksArgs is called (which happens on map transition)
+            if (sAmbientCrySpecies == SPECIES_NONE)
+                *state = AMB_CRY_IDLE;
         else
             *state = AMB_CRY_FIRST;
         break;
-    case AMB_CRY_FIRST:
-        // It takes between 1200-3599 frames (~20-60 seconds) to play the first ambient cry after entering a map
-        *delayCounter = (Random() % 2400) + 1200;
-        *state = AMB_CRY_WAIT;
-        break;
-    case AMB_CRY_RESET:
-        divBy = 1;
-        monsCount = CalculatePlayerPartyCount();
-        for (i = 0; i < monsCount; i++)
-        {
-            if (!GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_EGG)
-                && GetMonAbility(&gPlayerParty[0]) == ABILITY_SWARM)
+        case AMB_CRY_FIRST:
+            // It takes between 1200-3599 frames (~20-60 seconds) to play the first ambient cry after entering a map
+            *delayCounter = (Random() % 2400) + 1200;
+            *state = AMB_CRY_WAIT;
+            break;
+        case AMB_CRY_RESET:
+            divBy = 1;
+            monsCount = CalculatePlayerPartyCount();
+            for (i = 0; i < monsCount; i++)
             {
-                divBy = 2;
-                break;
+                if (!GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_EGG)
+                    && GetMonAbility(&gPlayerParty[0]) == ABILITY_SWARM)
+                {
+                    divBy = 2;
+                    break;
+                }
             }
-        }
-        // Ambient cries after the first one take between 1200-2399 frames (~20-40 seconds)
-        // If the player has a Pokémon with the ability Swarm in their party, the time is halved to 600-1199 frames (~10-20 seconds)
-        *delayCounter = ((Random() % 1200) + 1200) / divBy;
-        *state = AMB_CRY_WAIT;
-        break;
-    case AMB_CRY_WAIT:
-        if (--(*delayCounter) == 0)
-        {
-            PlayAmbientCry();
-            *state = AMB_CRY_RESET;
-        }
-        break;
-    case AMB_CRY_IDLE:
-        // No land/water Pokémon on this map
-        break;
+            // Ambient cries after the first one take between 1200-2399 frames (~20-40 seconds)
+            // If the player has a Pokémon with the ability Swarm in their party, the time is halved to 600-1199 frames (~10-20 seconds)
+            *delayCounter = ((Random() % 1200) + 1200) / divBy;
+            *state = AMB_CRY_WAIT;
+            break;
+        case AMB_CRY_WAIT:
+            if (--(*delayCounter) == 0)
+            {
+                PlayAmbientCry();
+                *state = AMB_CRY_RESET;
+            }
+            break;
+        case AMB_CRY_IDLE:
+            // No land/water Pokémon on this map
+            break;
     }
 }
 
@@ -1814,76 +1814,76 @@ static bool32 LoadMapInStepsLink(u8* state)
 {
     switch (*state)
     {
-    case 0:
-        InitOverworldBgs();
-        ScriptContext_Init();
-        UnlockPlayerFieldControls();
-        ResetMirageTowerAndSaveBlockPtrs();
-        ResetScreenForMapLoad();
-        (*state)++;
-        break;
-    case 1:
-        LoadMapFromWarp(TRUE);
-        (*state)++;
-        break;
-    case 2:
-        ResumeMap(TRUE);
-        (*state)++;
-        break;
-    case 3:
-        OffsetCameraFocusByLinkPlayerId();
-        InitObjectEventsLink();
-        SpawnLinkPlayers();
-        SetCameraToTrackGuestPlayer();
-        (*state)++;
-        break;
-    case 4:
-        InitCurrentFlashLevelScanlineEffect();
-        InitOverworldGraphicsRegisters();
-        InitTextBoxGfxAndPrinters();
-        (*state)++;
-        break;
-    case 5:
-        ResetFieldCamera();
-        (*state)++;
-        break;
-    case 6:
-        CopyPrimaryTilesetToVram(gMapHeader.mapLayout);
-        (*state)++;
-        break;
-    case 7:
-        CopySecondaryTilesetToVram(gMapHeader.mapLayout);
-        (*state)++;
-        break;
-    case 8:
-        if (FreeTempTileDataBuffersIfPossible() != TRUE)
-        {
-            LoadMapTilesetPalettes(gMapHeader.mapLayout);
+        case 0:
+            InitOverworldBgs();
+            ScriptContext_Init();
+            UnlockPlayerFieldControls();
+            ResetMirageTowerAndSaveBlockPtrs();
+            ResetScreenForMapLoad();
             (*state)++;
-        }
-        break;
-    case 9:
-        DrawWholeMapView();
-        (*state)++;
-        break;
-    case 10:
-        InitTilesetAnimations();
-        (*state)++;
-        break;
-    case 11:
-        if (gWirelessCommType != 0)
-        {
-            LoadWirelessStatusIndicatorSpriteGfx();
-            CreateWirelessStatusIndicatorSprite(0, 0);
-        }
-        (*state)++;
-        break;
-    case 12:
-        if (RunFieldCallback())
+            break;
+        case 1:
+            LoadMapFromWarp(TRUE);
             (*state)++;
+            break;
+        case 2:
+            ResumeMap(TRUE);
+            (*state)++;
+            break;
+        case 3:
+            OffsetCameraFocusByLinkPlayerId();
+            InitObjectEventsLink();
+            SpawnLinkPlayers();
+            SetCameraToTrackGuestPlayer();
+            (*state)++;
+            break;
+        case 4:
+            InitCurrentFlashLevelScanlineEffect();
+            InitOverworldGraphicsRegisters();
+            InitTextBoxGfxAndPrinters();
+            (*state)++;
+            break;
+        case 5:
+            ResetFieldCamera();
+            (*state)++;
+            break;
+        case 6:
+            CopyPrimaryTilesetToVram(gMapHeader.mapLayout);
+            (*state)++;
+            break;
+        case 7:
+            CopySecondaryTilesetToVram(gMapHeader.mapLayout);
+            (*state)++;
+            break;
+        case 8:
+            if (FreeTempTileDataBuffersIfPossible() != TRUE)
+            {
+                LoadMapTilesetPalettes(gMapHeader.mapLayout);
+                (*state)++;
+            }
+            break;
+        case 9:
+            DrawWholeMapView();
+            (*state)++;
+            break;
+        case 10:
+            InitTilesetAnimations();
+            (*state)++;
+            break;
+        case 11:
+            if (gWirelessCommType != 0)
+            {
+                LoadWirelessStatusIndicatorSpriteGfx();
+                CreateWirelessStatusIndicatorSprite(0, 0);
+            }
+            (*state)++;
+            break;
+        case 12:
+            if (RunFieldCallback())
+                (*state)++;
         break;
-    case 13:
-        return TRUE;
+        case 13:
+            return TRUE;
     }
 
     return FALSE;
@@ -1893,69 +1893,69 @@ static bool32 LoadMapInStepsLocal(u8* state, bool32 a2)
 {
     switch (*state)
     {
-    case 0:
-        FieldClearVBlankHBlankCallbacks();
-        LoadMapFromWarp(a2);
-        (*state)++;
-        break;
-    case 1:
-        ResetMirageTowerAndSaveBlockPtrs();
-        ResetScreenForMapLoad();
-        (*state)++;
-        break;
-    case 2:
-        ResumeMap(a2);
-        (*state)++;
-        break;
-    case 3:
-        InitObjectEventsLocal();
-        SetCameraToTrackPlayer();
-        (*state)++;
-        break;
-    case 4:
-        InitCurrentFlashLevelScanlineEffect();
-        InitOverworldGraphicsRegisters();
-        InitTextBoxGfxAndPrinters();
-        (*state)++;
-        break;
-    case 5:
-        ResetFieldCamera();
-        (*state)++;
-        break;
-    case 6:
-        CopyPrimaryTilesetToVram(gMapHeader.mapLayout);
-        (*state)++;
-        break;
-    case 7:
-        CopySecondaryTilesetToVram(gMapHeader.mapLayout);
-        (*state)++;
-        break;
-    case 8:
-        if (FreeTempTileDataBuffersIfPossible() != TRUE)
-        {
-            LoadMapTilesetPalettes(gMapHeader.mapLayout);
+        case 0:
+            FieldClearVBlankHBlankCallbacks();
+            LoadMapFromWarp(a2);
             (*state)++;
-        }
-        break;
-    case 9:
-        DrawWholeMapView();
-        (*state)++;
-        break;
-    case 10:
-        InitTilesetAnimations();
-        (*state)++;
-        break;
-    case 11:
-        if (gMapHeader.showMapName == TRUE && SecretBaseMapPopupEnabled() == TRUE)
-            ShowMapNamePopup();
-        (*state)++;
-        break;
-    case 12:
-        if (RunFieldCallback())
+            break;
+        case 1:
+            ResetMirageTowerAndSaveBlockPtrs();
+            ResetScreenForMapLoad();
             (*state)++;
+            break;
+        case 2:
+            ResumeMap(a2);
+            (*state)++;
+            break;
+        case 3:
+            InitObjectEventsLocal();
+            SetCameraToTrackPlayer();
+            (*state)++;
+            break;
+        case 4:
+            InitCurrentFlashLevelScanlineEffect();
+            InitOverworldGraphicsRegisters();
+            InitTextBoxGfxAndPrinters();
+            (*state)++;
+            break;
+        case 5:
+            ResetFieldCamera();
+            (*state)++;
+            break;
+        case 6:
+            CopyPrimaryTilesetToVram(gMapHeader.mapLayout);
+            (*state)++;
+            break;
+        case 7:
+            CopySecondaryTilesetToVram(gMapHeader.mapLayout);
+            (*state)++;
+            break;
+        case 8:
+            if (FreeTempTileDataBuffersIfPossible() != TRUE)
+            {
+                LoadMapTilesetPalettes(gMapHeader.mapLayout);
+                (*state)++;
+            }
+            break;
+        case 9:
+            DrawWholeMapView();
+            (*state)++;
+            break;
+        case 10:
+            InitTilesetAnimations();
+            (*state)++;
+            break;
+        case 11:
+            if (gMapHeader.showMapName == TRUE && SecretBaseMapPopupEnabled() == TRUE)
+                ShowMapNamePopup();
+        (*state)++;
         break;
-    case 13:
-        return TRUE;
+        case 12:
+            if (RunFieldCallback())
+                (*state)++;
+        break;
+        case 13:
+            return TRUE;
     }
 
     return FALSE;
@@ -1965,25 +1965,25 @@ static bool32 ReturnToFieldLocal(u8* state)
 {
     switch (*state)
     {
-    case 0:
-        ResetMirageTowerAndSaveBlockPtrs();
-        ResetScreenForMapLoad();
-        ResumeMap(FALSE);
-        InitObjectEventsReturnToField();
-        SetCameraToTrackPlayer();
-        (*state)++;
-        break;
-    case 1:
-        InitViewGraphics();
-        TryLoadTrainerHillEReaderPalette();
-        (*state)++;
-        break;
-    case 2:
-        if (RunFieldCallback())
+        case 0:
+            ResetMirageTowerAndSaveBlockPtrs();
+            ResetScreenForMapLoad();
+            ResumeMap(FALSE);
+            InitObjectEventsReturnToField();
+            SetCameraToTrackPlayer();
             (*state)++;
+            break;
+        case 1:
+            InitViewGraphics();
+            TryLoadTrainerHillEReaderPalette();
+            (*state)++;
+            break;
+        case 2:
+            if (RunFieldCallback())
+                (*state)++;
         break;
-    case 3:
-        return TRUE;
+        case 3:
+            return TRUE;
     }
 
     return FALSE;
@@ -1993,74 +1993,74 @@ static bool32 ReturnToFieldLink(u8* state)
 {
     switch (*state)
     {
-    case 0:
-        FieldClearVBlankHBlankCallbacks();
-        ResetMirageTowerAndSaveBlockPtrs();
-        ResetScreenForMapLoad();
-        (*state)++;
-        break;
-    case 1:
-        ResumeMap(TRUE);
-        (*state)++;
-        break;
-    case 2:
-        CreateLinkPlayerSprites();
-        InitObjectEventsReturnToField();
-        SetCameraToTrackGuestPlayer_2();
-        (*state)++;
-        break;
-    case 3:
-        InitCurrentFlashLevelScanlineEffect();
-        InitOverworldGraphicsRegisters();
-        InitTextBoxGfxAndPrinters();
-        (*state)++;
-        break;
-    case 4:
-        ResetFieldCamera();
-        (*state)++;
-        break;
-    case 5:
-        CopyPrimaryTilesetToVram(gMapHeader.mapLayout);
-        (*state)++;
-        break;
-    case 6:
-        CopySecondaryTilesetToVram(gMapHeader.mapLayout);
-        (*state)++;
-        break;
-    case 7:
-        if (FreeTempTileDataBuffersIfPossible() != TRUE)
-        {
-            LoadMapTilesetPalettes(gMapHeader.mapLayout);
+        case 0:
+            FieldClearVBlankHBlankCallbacks();
+            ResetMirageTowerAndSaveBlockPtrs();
+            ResetScreenForMapLoad();
             (*state)++;
-        }
-        break;
-    case 8:
-        DrawWholeMapView();
-        (*state)++;
-        break;
-    case 9:
-        InitTilesetAnimations();
-        (*state)++;
-        break;
-    case 11:
-        if (gWirelessCommType != 0)
-        {
-            LoadWirelessStatusIndicatorSpriteGfx();
-            CreateWirelessStatusIndicatorSprite(0, 0);
-        }
-        (*state)++;
-        break;
-    case 12:
-        if (RunFieldCallback())
+            break;
+        case 1:
+            ResumeMap(TRUE);
             (*state)++;
+            break;
+        case 2:
+            CreateLinkPlayerSprites();
+            InitObjectEventsReturnToField();
+            SetCameraToTrackGuestPlayer_2();
+            (*state)++;
+            break;
+        case 3:
+            InitCurrentFlashLevelScanlineEffect();
+            InitOverworldGraphicsRegisters();
+            InitTextBoxGfxAndPrinters();
+            (*state)++;
+            break;
+        case 4:
+            ResetFieldCamera();
+            (*state)++;
+            break;
+        case 5:
+            CopyPrimaryTilesetToVram(gMapHeader.mapLayout);
+            (*state)++;
+            break;
+        case 6:
+            CopySecondaryTilesetToVram(gMapHeader.mapLayout);
+            (*state)++;
+            break;
+        case 7:
+            if (FreeTempTileDataBuffersIfPossible() != TRUE)
+            {
+                LoadMapTilesetPalettes(gMapHeader.mapLayout);
+                (*state)++;
+            }
+            break;
+        case 8:
+            DrawWholeMapView();
+            (*state)++;
+            break;
+        case 9:
+            InitTilesetAnimations();
+            (*state)++;
+            break;
+        case 11:
+            if (gWirelessCommType != 0)
+            {
+                LoadWirelessStatusIndicatorSpriteGfx();
+                CreateWirelessStatusIndicatorSprite(0, 0);
+            }
+            (*state)++;
+            break;
+        case 12:
+            if (RunFieldCallback())
+                (*state)++;
         break;
-    case 10:
-        (*state)++;
-        break;
-    case 13:
-        SetFieldVBlankCallback();
-        (*state)++;
-        return TRUE;
+        case 10:
+            (*state)++;
+            break;
+        case 13:
+            SetFieldVBlankCallback();
+            (*state)++;
+            return TRUE;
     }
 
     return FALSE;
@@ -2108,7 +2108,7 @@ static void InitOverworldGraphicsRegisters(void)
     SetGpuReg(REG_OFFSET_WIN1H, 0xFFFF);
     SetGpuReg(REG_OFFSET_WIN1V, 0xFFFF);
     SetGpuReg(REG_OFFSET_BLDCNT, gOverworldBackgroundLayerFlags[1] | gOverworldBackgroundLayerFlags[2] | gOverworldBackgroundLayerFlags[3]
-        | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
+    | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(13, 7));
     InitOverworldBgs();
     ScheduleBgCopyTilemapToVram(1);
@@ -2123,7 +2123,7 @@ static void InitOverworldGraphicsRegisters(void)
     ChangeBgX(3, 0, BG_COORD_SET);
     ChangeBgY(3, 0, BG_COORD_SET);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_WIN0_ON | DISPCNT_WIN1_ON
-        | DISPCNT_OBJ_1D_MAP | DISPCNT_HBLANK_INTERVAL);
+    | DISPCNT_OBJ_1D_MAP | DISPCNT_HBLANK_INTERVAL);
     ShowBg(0);
     ShowBg(1);
     ShowBg(2);
@@ -2351,81 +2351,81 @@ static void HandleLinkPlayerKeyInput(u32 playerId, u16 key, struct CableClubPlay
 
         switch (key)
         {
-        case LINK_KEY_CODE_START_BUTTON:
-            if (CanCableClubPlayerPressStart(trainer))
-            {
-                sPlayerLinkStates[playerId] = PLAYER_LINK_STATE_BUSY;
-                if (trainer->isLocalPlayer)
+            case LINK_KEY_CODE_START_BUTTON:
+                if (CanCableClubPlayerPressStart(trainer))
                 {
-                    SetKeyInterceptCallback(KeyInterCB_DeferToEventScript);
-                    InitLinkRoomStartMenuScript();
+                    sPlayerLinkStates[playerId] = PLAYER_LINK_STATE_BUSY;
+                    if (trainer->isLocalPlayer)
+                    {
+                        SetKeyInterceptCallback(KeyInterCB_DeferToEventScript);
+                        InitLinkRoomStartMenuScript();
+                    }
                 }
-            }
-            break;
-        case LINK_KEY_CODE_DPAD_DOWN:
-            if (PlayerIsAtSouthExit(trainer) == TRUE)
-            {
-                sPlayerLinkStates[playerId] = PLAYER_LINK_STATE_BUSY;
-                if (trainer->isLocalPlayer)
+                break;
+            case LINK_KEY_CODE_DPAD_DOWN:
+                if (PlayerIsAtSouthExit(trainer) == TRUE)
                 {
-                    SetKeyInterceptCallback(KeyInterCB_DeferToEventScript);
-                    RunConfirmLeaveCableClubScript();
+                    sPlayerLinkStates[playerId] = PLAYER_LINK_STATE_BUSY;
+                    if (trainer->isLocalPlayer)
+                    {
+                        SetKeyInterceptCallback(KeyInterCB_DeferToEventScript);
+                        RunConfirmLeaveCableClubScript();
+                    }
                 }
-            }
-            break;
-        case LINK_KEY_CODE_A_BUTTON:
-            script = TryInteractWithPlayer(trainer);
-            if (script)
-            {
-                sPlayerLinkStates[playerId] = PLAYER_LINK_STATE_BUSY;
-                if (trainer->isLocalPlayer)
+                break;
+            case LINK_KEY_CODE_A_BUTTON:
+                script = TryInteractWithPlayer(trainer);
+                if (script)
                 {
-                    SetKeyInterceptCallback(KeyInterCB_DeferToEventScript);
-                    InitMenuBasedScript(script);
+                    sPlayerLinkStates[playerId] = PLAYER_LINK_STATE_BUSY;
+                    if (trainer->isLocalPlayer)
+                    {
+                        SetKeyInterceptCallback(KeyInterCB_DeferToEventScript);
+                        InitMenuBasedScript(script);
+                    }
                 }
-            }
-            break;
-        case LINK_KEY_CODE_HANDLE_RECV_QUEUE:
-            if (IsCableClubPlayerUnfrozen(trainer))
-            {
-                sPlayerLinkStates[playerId] = PLAYER_LINK_STATE_BUSY;
-                if (trainer->isLocalPlayer)
+                break;
+            case LINK_KEY_CODE_HANDLE_RECV_QUEUE:
+                if (IsCableClubPlayerUnfrozen(trainer))
                 {
-                    SetKeyInterceptCallback(KeyInterCB_DeferToRecvQueue);
-                    InitLinkPlayerQueueScript();
+                    sPlayerLinkStates[playerId] = PLAYER_LINK_STATE_BUSY;
+                    if (trainer->isLocalPlayer)
+                    {
+                        SetKeyInterceptCallback(KeyInterCB_DeferToRecvQueue);
+                        InitLinkPlayerQueueScript();
+                    }
                 }
-            }
-            break;
-        case LINK_KEY_CODE_HANDLE_SEND_QUEUE:
-            if (IsCableClubPlayerUnfrozen(trainer))
-            {
-                sPlayerLinkStates[playerId] = PLAYER_LINK_STATE_BUSY;
-                if (trainer->isLocalPlayer)
+                break;
+            case LINK_KEY_CODE_HANDLE_SEND_QUEUE:
+                if (IsCableClubPlayerUnfrozen(trainer))
                 {
-                    SetKeyInterceptCallback(KeyInterCB_DeferToSendQueue);
-                    InitLinkPlayerQueueScript();
+                    sPlayerLinkStates[playerId] = PLAYER_LINK_STATE_BUSY;
+                    if (trainer->isLocalPlayer)
+                    {
+                        SetKeyInterceptCallback(KeyInterCB_DeferToSendQueue);
+                        InitLinkPlayerQueueScript();
+                    }
                 }
-            }
-            break;
+                break;
         }
     }
 
     switch (key)
     {
-    case LINK_KEY_CODE_EXIT_ROOM:
-        sPlayerLinkStates[playerId] = PLAYER_LINK_STATE_EXITING_ROOM;
+        case LINK_KEY_CODE_EXIT_ROOM:
+            sPlayerLinkStates[playerId] = PLAYER_LINK_STATE_EXITING_ROOM;
+            break;
+        case LINK_KEY_CODE_READY:
+            sPlayerLinkStates[playerId] = PLAYER_LINK_STATE_READY;
+            break;
+        case LINK_KEY_CODE_IDLE:
+            sPlayerLinkStates[playerId] = PLAYER_LINK_STATE_IDLE;
+            if (trainer->isLocalPlayer)
+                SetKeyInterceptCallback(KeyInterCB_SelfIdle);
         break;
-    case LINK_KEY_CODE_READY:
-        sPlayerLinkStates[playerId] = PLAYER_LINK_STATE_READY;
-        break;
-    case LINK_KEY_CODE_IDLE:
-        sPlayerLinkStates[playerId] = PLAYER_LINK_STATE_IDLE;
-        if (trainer->isLocalPlayer)
-            SetKeyInterceptCallback(KeyInterCB_SelfIdle);
-        break;
-    case LINK_KEY_CODE_EXIT_SEAT:
-        if (sPlayerLinkStates[playerId] == PLAYER_LINK_STATE_READY)
-            sPlayerLinkStates[playerId] = PLAYER_LINK_STATE_BUSY;
+        case LINK_KEY_CODE_EXIT_SEAT:
+            if (sPlayerLinkStates[playerId] == PLAYER_LINK_STATE_READY)
+                sPlayerLinkStates[playerId] = PLAYER_LINK_STATE_BUSY;
         break;
     }
 }
@@ -2461,15 +2461,15 @@ static void UpdateHeldKeyCode(u16 key)
     {
         switch (key)
         {
-        case LINK_KEY_CODE_EMPTY:
-        case LINK_KEY_CODE_DPAD_DOWN:
-        case LINK_KEY_CODE_DPAD_UP:
-        case LINK_KEY_CODE_DPAD_LEFT:
-        case LINK_KEY_CODE_DPAD_RIGHT:
-        case LINK_KEY_CODE_START_BUTTON:
-        case LINK_KEY_CODE_A_BUTTON:
-            gHeldKeyCodeToSend = LINK_KEY_CODE_NULL;
-            break;
+            case LINK_KEY_CODE_EMPTY:
+            case LINK_KEY_CODE_DPAD_DOWN:
+            case LINK_KEY_CODE_DPAD_UP:
+            case LINK_KEY_CODE_DPAD_LEFT:
+            case LINK_KEY_CODE_DPAD_RIGHT:
+            case LINK_KEY_CODE_START_BUTTON:
+            case LINK_KEY_CODE_A_BUTTON:
+                gHeldKeyCodeToSend = LINK_KEY_CODE_NULL;
+                break;
         }
     }
 }
@@ -2495,16 +2495,16 @@ static u16 GetDirectionForDpadKey(u16 key)
 {
     switch (key)
     {
-    case LINK_KEY_CODE_DPAD_RIGHT:
-        return FACING_RIGHT;
-    case LINK_KEY_CODE_DPAD_LEFT:
-        return FACING_LEFT;
-    case LINK_KEY_CODE_DPAD_UP:
-        return FACING_UP;
-    case LINK_KEY_CODE_DPAD_DOWN:
-        return FACING_DOWN;
-    default:
-        return FACING_NONE;
+        case LINK_KEY_CODE_DPAD_RIGHT:
+            return FACING_RIGHT;
+        case LINK_KEY_CODE_DPAD_LEFT:
+            return FACING_LEFT;
+        case LINK_KEY_CODE_DPAD_UP:
+            return FACING_UP;
+        case LINK_KEY_CODE_DPAD_DOWN:
+            return FACING_DOWN;
+        default:
+            return FACING_NONE;
     }
 }
 
@@ -3060,12 +3060,12 @@ static void SetPlayerFacingDirection(u8 linkPlayerId, u8 facing)
         {
             // This is a hack to split this code onto two separate lines, without declaring a local variable.
             // C++ style inline variables would be nice here.
-#define TEMP sLinkPlayerMovementModes[linkPlayerObjEvent->movementMode](linkPlayerObjEvent, objEvent, facing)
+            #define TEMP sLinkPlayerMovementModes[linkPlayerObjEvent->movementMode](linkPlayerObjEvent, objEvent, facing)
 
             sMovementStatusHandler[TEMP](linkPlayerObjEvent, objEvent);
 
             // Clean up the hack.
-#undef TEMP
+            #undef TEMP
         }
     }
 }
@@ -3143,18 +3143,18 @@ static u8 FlipVerticalAndClearForced(u8 newFacing, u8 oldFacing)
 {
     switch (newFacing)
     {
-    case FACING_UP:
-    case FACING_FORCED_UP:
-        return DIR_NORTH;
-    case FACING_DOWN:
-    case FACING_FORCED_DOWN:
-        return DIR_SOUTH;
-    case FACING_LEFT:
-    case FACING_FORCED_LEFT:
-        return DIR_WEST;
-    case FACING_RIGHT:
-    case FACING_FORCED_RIGHT:
-        return DIR_EAST;
+        case FACING_UP:
+        case FACING_FORCED_UP:
+            return DIR_NORTH;
+        case FACING_DOWN:
+        case FACING_FORCED_DOWN:
+            return DIR_SOUTH;
+        case FACING_LEFT:
+        case FACING_FORCED_LEFT:
+            return DIR_WEST;
+        case FACING_RIGHT:
+        case FACING_FORCED_RIGHT:
+            return DIR_EAST;
     }
     return oldFacing;
 }
@@ -3187,17 +3187,17 @@ static void CreateLinkPlayerSprite(u8 linkPlayerId, u8 gameVersion)
     {
         switch (gameVersion)
         {
-        case VERSION_FIRE_RED:
-        case VERSION_LEAF_GREEN:
-            objEvent->spriteId = CreateObjectGraphicsSprite(GetFRLGAvatarGraphicsIdByGender(linkGender(objEvent)), SpriteCB_LinkPlayer, 0, 0, 0);
-            break;
-        case VERSION_RUBY:
-        case VERSION_SAPPHIRE:
-            objEvent->spriteId = CreateObjectGraphicsSprite(GetRSAvatarGraphicsIdByGender(linkGender(objEvent)), SpriteCB_LinkPlayer, 0, 0, 0);
-            break;
-        case VERSION_EMERALD:
-            objEvent->spriteId = CreateObjectGraphicsSprite(GetRivalAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, linkGender(objEvent)), SpriteCB_LinkPlayer, 0, 0, 0);
-            break;
+            case VERSION_FIRE_RED:
+            case VERSION_LEAF_GREEN:
+                objEvent->spriteId = CreateObjectGraphicsSprite(GetFRLGAvatarGraphicsIdByGender(linkGender(objEvent)), SpriteCB_LinkPlayer, 0, 0, 0);
+                break;
+            case VERSION_RUBY:
+            case VERSION_SAPPHIRE:
+                objEvent->spriteId = CreateObjectGraphicsSprite(GetRSAvatarGraphicsIdByGender(linkGender(objEvent)), SpriteCB_LinkPlayer, 0, 0, 0);
+                break;
+            case VERSION_EMERALD:
+                objEvent->spriteId = CreateObjectGraphicsSprite(GetRivalAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, linkGender(objEvent)), SpriteCB_LinkPlayer, 0, 0, 0);
+                break;
         }
 
         sprite = &gSprites[objEvent->spriteId];
