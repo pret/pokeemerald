@@ -61,7 +61,7 @@ static const struct ContestWinner sContestWinnerPicDummy =
     .trainerName = _("")
 };
 
-void SetTrainerId(u32 trainerId, u8 *dst)
+void SetTrainerId(u32 trainerId, u8* dst)
 {
     dst[0] = trainerId;
     dst[1] = trainerId >> 8;
@@ -69,12 +69,12 @@ void SetTrainerId(u32 trainerId, u8 *dst)
     dst[3] = trainerId >> 24;
 }
 
-u32 GetTrainerId(u8 *trainerId)
+u32 GetTrainerId(u8* trainerId)
 {
     return (trainerId[3] << 24) | (trainerId[2] << 16) | (trainerId[1] << 8) | (trainerId[0]);
 }
 
-void CopyTrainerId(u8 *dst, u8 *src)
+void CopyTrainerId(u8* dst, u8* src)
 {
     s32 i;
     for (i = 0; i < TRAINER_ID_LENGTH; i++)
@@ -126,7 +126,7 @@ static void ClearFrontierRecord(void)
 
 static void WarpToTruck(void)
 {
-    SetWarpDestination(MAP_GROUP(MAP_INSIDE_OF_TRUCK), MAP_NUM(MAP_INSIDE_OF_TRUCK), WARP_ID_NONE, -1, -1);
+    SetWarpDestination(MAP_GROUP(TEST), MAP_NUM(TEST), WARP_ID_NONE, -1, -1);
     WarpIntoMap();
 }
 
@@ -204,6 +204,7 @@ void NewGameInitData(void)
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
+
 }
 
 static void ResetMiniGamesRecords(void)
