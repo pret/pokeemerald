@@ -114,7 +114,6 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_ChooseParty::
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_KeepItTo3On3, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
-	waitstate
 	return
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_EnterBasementNorth::

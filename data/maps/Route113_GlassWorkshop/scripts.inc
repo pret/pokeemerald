@@ -57,7 +57,6 @@ Route113_GlassWorkshop_EventScript_ChooseGlassItem::
 	setvar VAR_0x8009, 0
 	setvar VAR_0x8004, SCROLL_MULTI_GLASS_WORKSHOP_VENDOR
 	special ShowScrollableMultichoice
-	waitstate
 	switch VAR_RESULT
 	case 0, Route113_GlassWorkshop_EventScript_BlueFlute
 	case 1, Route113_GlassWorkshop_EventScript_YellowFlute
