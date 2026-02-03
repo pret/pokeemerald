@@ -1,6 +1,6 @@
 FallarborTown_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, FallarborTown_OnTransition
-	.byte 0
+	end_map_scripts
 
 FallarborTown_OnTransition:
 	setflag FLAG_VISITED_FALLARBOR_TOWN

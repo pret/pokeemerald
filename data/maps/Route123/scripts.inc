@@ -1,6 +1,6 @@
 Route123_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route123_OnTransition
-	.byte 0
+	end_map_scripts
 
 Route123_OnTransition:
 	special SetRoute123Weather
