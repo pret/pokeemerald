@@ -579,3 +579,7 @@
 	.macro shake_battle_platforms priority=2, x_offset:req, y_offset:req, shakes:req, delay:req
 	createvisualtask AnimTask_ShakeBattlePlatforms, \priority, \x_offset, \y_offset, \shakes, \delay
 	.endm
+
+	.macro create_surf_wave priority=2, palette:req
+	createvisualtask AnimTask_CreateSurfWave, \priority, \palette
+	.endm

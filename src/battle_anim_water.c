@@ -514,7 +514,7 @@ static void AnimRainDrop_Step(struct Sprite *sprite)
     if (++sprite->data[0] <= 13)
     {
         //
-        // Make the raindrop fall, but only until it reaches the 
+        // Make the raindrop fall, but only until it reaches the
         // impact/splash frames of its animation.
         //
         sprite->x2++;
@@ -838,7 +838,7 @@ void AnimTask_CreateSurfWave(u8 taskId)
         AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimBgTilemap_SurfContest, TRUE);
     }
     AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_Surf, animBg.tilesOffset);
-    if (gBattleAnimArgs[0] == 0)
+    if (gBattleAnimArgs[0] == ANIM_SURF_PAL_SURF)
         LoadCompressedPalette(gBattleAnimBgPalette_Surf, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
     else
         LoadCompressedPalette(gBattleAnimBackgroundImageMuddyWater_Pal, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
