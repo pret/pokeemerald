@@ -2468,7 +2468,7 @@ Move_HORN_DRILL:
 	jumpifcontest HornDrillInContest
 	fadetobg BG_DRILL
 	waitbgfadeout
-	createvisualtask AnimTask_StartSlidingBg, 5, -2304, 768, 1, -1
+	createvisualtask AnimTask_StartSlidingBg, 5, Q_8_8(-9.0), Q_8_8(3.0), TRUE, -1
 HornDrillContinue:
 	waitbgfadein
 	setalpha 12, 8
@@ -9060,7 +9060,7 @@ Move_COSMIC_POWER:
 	waitforvisualfinish
 	fadetobg BG_COSMIC
 	waitbgfadeout
-	createvisualtask AnimTask_StartSlidingBg, 2, 0, 128, 0, -1
+	createvisualtask AnimTask_StartSlidingBg, 2, Q_8_8(0.0), Q_8_8(0.5), 0, -1
 	waitbgfadein
 	delay 70
 	createvisualtask SoundTask_PlaySE1WithPanning, 5, SE_M_MORNING_SUN, SOUND_PAN_ATTACKER
