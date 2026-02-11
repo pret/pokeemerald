@@ -728,7 +728,7 @@ static u8 CheckForObjectEventStaticCollision(struct ObjectEvent *objectEvent, s1
 
 static bool8 CanStopSurfing(s16 x, s16 y, u8 direction)
 {
-    if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING) && MapGridGetElevationAt(x, y) == ELEVATION_0x3 && GetObjectEventIdByPosition(x, y, ELEVATION_0x3) == OBJECT_EVENTS_COUNT)
+    if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING) && MapGridGetElevationAt(x, y) == ELEVATION_DEFAULT && GetObjectEventIdByPosition(x, y, ELEVATION_DEFAULT) == OBJECT_EVENTS_COUNT)
     {
         CreateStopSurfingTask(direction);
         return TRUE;
@@ -1325,7 +1325,7 @@ bool8 IsPlayerFacingSurfableFishableWater(void)
 
     MoveCoords(playerObjEvent->facingDirection, &x, &y);
     if (GetCollisionAtCoords(playerObjEvent, x, y, playerObjEvent->facingDirection) == COLLISION_ELEVATION_MISMATCH
-     && PlayerGetElevation() == ELEVATION_0x3
+     && PlayerGetElevation() == ELEVATION_DEFAULT
      && MetatileBehavior_IsSurfableFishableWater(MapGridGetMetatileBehaviorAt(x, y)))
         return TRUE;
     else

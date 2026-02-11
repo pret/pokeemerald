@@ -409,26 +409,16 @@ static const struct YesNoFuncTable sPlacePutAwayYesNoFunctions[] =
 
 static const u8 sDecorationStandElevations[] =
 {
-    ELEVATION_0x4,
-    ELEVATION_0x4,
-    ELEVATION_0x4,
-    ELEVATION_0x4,
-    ELEVATION_TRANSITION,
-    ELEVATION_0x3,
-    ELEVATION_0x3,
-    ELEVATION_TRANSITION
+    4, 4, 4, 4,
+    0, 3, 3, 0
 };
 
 static const u8 sDecorationSlideElevation[] =
 {
-    ELEVATION_0x4,
-    ELEVATION_0x4,
-    ELEVATION_0x4,
-    ELEVATION_0x4,
-    ELEVATION_TRANSITION,
-    ELEVATION_0x4,
-    ELEVATION_0x3,
-    ELEVATION_TRANSITION
+    4, 4,
+    4, 4,
+    0, 4,
+    3, 0,
 };
 
 static const u16 sDecorShapeSizes[] = {

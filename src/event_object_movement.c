@@ -7723,60 +7723,15 @@ static bool8 IsElevationMismatchAt(u8 elevation, s16 x, s16 y)
 }
 
 static const u8 sElevationToSubpriority[] = {
-    [ELEVATION_TRANSITION]  = 115,
-    [ELEVATION_SURF]        = 115,
-    [ELEVATION_0x2]         = 83,
-    [ELEVATION_0x3]         = 115,
-    [ELEVATION_0x4]         = 83,
-    [ELEVATION_0x5]         = 115,
-    [ELEVATION_0x6]         = 83,
-    [ELEVATION_0x7]         = 115,
-    [ELEVATION_0x8]         = 83,
-    [ELEVATION_0x9]         = 115,
-    [ELEVATION_0xA]         = 83,
-    [ELEVATION_0xB]         = 115,
-    [ELEVATION_0xC]         = 83,
-    [ELEVATION_0xD]         = 0,
-    [ELEVATION_0xE]         = 0,
-    [ELEVATION_MULTI_LEVEL] = 115
+    115, 115, 83, 115, 83, 115, 83, 115, 83, 115, 83, 115, 83, 0, 0, 115
 };
 
 static const u8 sElevationToPriority[] = {
-    [ELEVATION_TRANSITION]  = 2,
-    [ELEVATION_SURF]        = 2,
-    [ELEVATION_0x2]         = 2,
-    [ELEVATION_0x3]         = 2,
-    [ELEVATION_0x4]         = 1,
-    [ELEVATION_0x5]         = 2,
-    [ELEVATION_0x6]         = 1,
-    [ELEVATION_0x7]         = 2,
-    [ELEVATION_0x8]         = 1,
-    [ELEVATION_0x9]         = 2,
-    [ELEVATION_0xA]         = 1,
-    [ELEVATION_0xB]         = 2,
-    [ELEVATION_0xC]         = 1,
-    [ELEVATION_0xD]         = 0,
-    [ELEVATION_0xE]         = 0,
-    [ELEVATION_MULTI_LEVEL] = 2
+    2, 2, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 0, 0, 2
 };
 
 static const u8 sElevationToSubspriteTableNum[] = {
-    [ELEVATION_TRANSITION]  = 1,
-    [ELEVATION_SURF]        = 1,
-    [ELEVATION_0x2]         = 1,
-    [ELEVATION_0x3]         = 1,
-    [ELEVATION_0x4]         = 2,
-    [ELEVATION_0x5]         = 1,
-    [ELEVATION_0x6]         = 2,
-    [ELEVATION_0x7]         = 1,
-    [ELEVATION_0x8]         = 2,
-    [ELEVATION_0x9]         = 1,
-    [ELEVATION_0xA]         = 2,
-    [ELEVATION_0xB]         = 1,
-    [ELEVATION_0xC]         = 2,
-    [ELEVATION_0xD]         = 0,
-    [ELEVATION_0xE]         = 0,
-    [ELEVATION_MULTI_LEVEL] = 1
+    1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0, 0, 1,
 };
 
 static void UpdateObjectEventElevationAndPriority(struct ObjectEvent *objEvent, struct Sprite *sprite)
