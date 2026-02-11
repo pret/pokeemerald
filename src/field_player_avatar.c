@@ -728,7 +728,9 @@ static u8 CheckForObjectEventStaticCollision(struct ObjectEvent *objectEvent, s1
 
 static bool8 CanStopSurfing(s16 x, s16 y, u8 direction)
 {
-    if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING) && MapGridGetElevationAt(x, y) == ELEVATION_DEFAULT && GetObjectEventIdByPosition(x, y, ELEVATION_DEFAULT) == OBJECT_EVENTS_COUNT)
+    if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
+     && MapGridGetElevationAt(x, y) == ELEVATION_DEFAULT
+     && GetObjectEventIdByPosition(x, y, ELEVATION_DEFAULT) == OBJECT_EVENTS_COUNT)
     {
         CreateStopSurfingTask(direction);
         return TRUE;
