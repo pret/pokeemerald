@@ -673,7 +673,7 @@ void HandleAction_ActionFinished(void)
     gBattleScripting.animTurn = 0;
     gBattleScripting.animTargetsHit = 0;
     gLastLandedMoves[gBattlerAttacker] = MOVE_NONE;
-    gLastHitByType[gBattlerAttacker] = TYPE_NORMAL;
+    gLastHitByType[gBattlerAttacker] = 0;
     gBattleStruct->dynamicMoveType = 0;
     gDynamicBasePower = 0;
     gBattleScripting.moveendState = 0;

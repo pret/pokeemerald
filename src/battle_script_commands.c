@@ -996,7 +996,7 @@ static void Cmd_attackcanceler(void)
         CancelMultiTurnMoves(gBattlerAttacker);
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gLastLandedMoves[gBattlerTarget] = MOVE_NONE;
-        gLastHitByType[gBattlerTarget] = TYPE_NORMAL;
+        gLastHitByType[gBattlerTarget] = 0;
         gBattleCommunication[MISS_TYPE] = B_MSG_PROTECTED;
         gBattlescriptCurrInstr++;
     }
@@ -1012,7 +1012,7 @@ static void JumpIfMoveFailed(u8 adder, u16 move)
     if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
     {
         gLastLandedMoves[gBattlerTarget] = MOVE_NONE;
-        gLastHitByType[gBattlerTarget] = TYPE_NORMAL;
+        gLastHitByType[gBattlerTarget] = 0;
         BS_ptr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
     else
@@ -1377,7 +1377,7 @@ static void Cmd_typecalc(void)
         gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
         gMoveResultFlags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
         gLastLandedMoves[gBattlerTarget] = MOVE_NONE;
-        gLastHitByType[gBattlerTarget] = TYPE_NORMAL;
+        gLastHitByType[gBattlerTarget] = 0;
         gBattleCommunication[MISS_TYPE] = B_MSG_GROUND_MISS;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
     }
@@ -1413,7 +1413,7 @@ static void Cmd_typecalc(void)
         gLastUsedAbility = ABILITY_WONDER_GUARD;
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gLastLandedMoves[gBattlerTarget] = MOVE_NONE;
-        gLastHitByType[gBattlerTarget] = TYPE_NORMAL;
+        gLastHitByType[gBattlerTarget] = 0;
         gBattleCommunication[MISS_TYPE] = B_MSG_AVOIDED_DMG;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
     }
