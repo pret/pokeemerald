@@ -58,7 +58,6 @@ NavelRock_Top_EventScript_HoOh::
 	seteventmon SPECIES_HO_OH, 70
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
-	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	setvar VAR_LAST_TALKED, LOCALID_NAVEL_ROCK_HO_OH
 	specialvar VAR_RESULT, GetBattleOutcome

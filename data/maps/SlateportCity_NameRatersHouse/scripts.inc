@@ -12,7 +12,6 @@ SlateportCity_NameRatersHouse_EventScript_NameRater::
 SlateportCity_NameRatersHouse_EventScript_ChooseMonToRate::
 	msgbox SlateportCity_NameRatersHouse_Text_CritiqueWhichMonNickname, MSGBOX_DEFAULT
 	special ChoosePartyMon
-	waitstate
 	goto_if_ne VAR_0x8004, PARTY_NOTHING_CHOSEN, SlateportCity_NameRatersHouse_EventScript_RateMonNickname
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, SlateportCity_NameRatersHouse_EventScript_DeclineNameRate
 	end

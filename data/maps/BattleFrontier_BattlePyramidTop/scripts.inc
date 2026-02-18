@@ -183,7 +183,6 @@ BattleFrontier_BattlePyramidTop_EventScript_DoBrandonBattle::
 	setvar VAR_0x8004, SPECIAL_BATTLE_PYRAMID
 	setvar VAR_0x8005, 0
 	special DoSpecialTrainerBattle
-	waitstate
 	return
 
 BattleFrontier_BattlePyramidTop_Movement_AttendantMoveAside:

@@ -511,7 +511,6 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer::
 	waitmessage
 	setvar VAR_0x8004, SCROLL_MULTI_POKEMON_FAN_CLUB_RATER
 	special ShowScrollableMultichoice
-	waitstate
 	setvar VAR_0x8004, FANCLUB_MEMBER1
 	switch VAR_RESULT
 	case 11, LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer
