@@ -1,6 +1,6 @@
 Route109_SeashoreHouse_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route109_SeashoreHouse_OnTransition
-	.byte 0
+	end_map_scripts
 
 Route109_SeashoreHouse_OnTransition:
 	setflag FLAG_LANDMARK_SEASHORE_HOUSE

@@ -1,5 +1,5 @@
 MirageTower_4F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 MirageTower_4F_EventScript_RootFossil::
 	lock

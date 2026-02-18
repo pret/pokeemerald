@@ -1,6 +1,6 @@
 Underwater_SealedChamber_MapScripts::
 	map_script MAP_SCRIPT_ON_DIVE_WARP, Underwater_SealedChamber_OnDive
-	.byte 0
+	end_map_scripts
 
 Underwater_SealedChamber_OnDive:
 	getplayerxy VAR_0x8004, VAR_0x8005

@@ -1,5 +1,5 @@
 FortreeCity_House5_MapScripts::
-	.byte 0
+	end_map_scripts
 
 FortreeCity_House5_EventScript_PokefanF::
 	msgbox FortreeCity_House5_Text_TreeHousesAreGreat, MSGBOX_NPC

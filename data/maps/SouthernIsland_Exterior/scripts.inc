@@ -1,6 +1,6 @@
 SouthernIsland_Exterior_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SouthernIsland_Exterior_OnTransition
-	.byte 0
+	end_map_scripts
 
 SouthernIsland_Exterior_OnTransition:
 	setflag FLAG_LANDMARK_SOUTHERN_ISLAND

@@ -2,7 +2,7 @@ Underwater_SeafloorCavern_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, Underwater_SeafloorCavern_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, Underwater_SeafloorCavern_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Underwater_SeafloorCavern_OnLoad
-	.byte 0
+	end_map_scripts
 
 Underwater_SeafloorCavern_OnTransition:
 	setflag FLAG_LANDMARK_SEAFLOOR_CAVERN

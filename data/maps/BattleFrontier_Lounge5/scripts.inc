@@ -1,5 +1,5 @@
 BattleFrontier_Lounge5_MapScripts::
-	.byte 0
+	end_map_scripts
 
 BattleFrontier_Lounge5_EventScript_NatureGirl::
 	lock

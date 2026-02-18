@@ -1,5 +1,5 @@
 BattleFrontier_ExchangeServiceCorner_MapScripts::
-	.byte 0
+	end_map_scripts
 
 BattleFrontier_ExchangeServiceCorner_EventScript_ClerkWelcome::
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrize, MSGBOX_DEFAULT

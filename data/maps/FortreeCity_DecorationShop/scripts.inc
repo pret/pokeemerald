@@ -1,5 +1,5 @@
 FortreeCity_DecorationShop_MapScripts::
-	.byte 0
+	end_map_scripts
 
 FortreeCity_DecorationShop_EventScript_PokefanM::
 	msgbox FortreeCity_DecorationShop_Text_MerchandiseSentToPC, MSGBOX_NPC

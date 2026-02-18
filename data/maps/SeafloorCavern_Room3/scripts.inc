@@ -1,5 +1,5 @@
 SeafloorCavern_Room3_MapScripts::
-	.byte 0
+	end_map_scripts
 
 SeafloorCavern_Room3_EventScript_Shelly::
 	trainerbattle_single TRAINER_SHELLY_SEAFLOOR_CAVERN, SeafloorCavern_Room3_Text_ShellyIntro, SeafloorCavern_Room3_Text_ShellyDefeat

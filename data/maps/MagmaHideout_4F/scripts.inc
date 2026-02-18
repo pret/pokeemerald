@@ -1,5 +1,5 @@
 MagmaHideout_4F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 MagmaHideout_4F_EventScript_Maxie::
 	lockall

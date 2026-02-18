@@ -3,7 +3,7 @@ Route110_TrickHousePuzzle7_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle7_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route110_TrickHousePuzzle7_OnLoad
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route110_TrickHousePuzzle7_OnFrame
-	.byte 0
+	end_map_scripts
 
 @ Puzzle Room 7 in RSE uses whatever puzzle Mossdeep Gym uses
 @ Because Mossdeep Gym was redesigned for Emerald, theres a good deal of leftover script from the old R/S puzzle
@@ -89,7 +89,7 @@ Route110_TrickHousePuzzle7_OnLoad:
 
 Route110_TrickHousePuzzle7_OnFrame:
 	map_script_2 VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 1, Route110_TrickHousePuzzle7_EventScript_ClearState2
-	.2byte 0
+	end_map_script_table
 
 Route110_TrickHousePuzzle7_EventScript_ClearState2::
 	setvar VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 0

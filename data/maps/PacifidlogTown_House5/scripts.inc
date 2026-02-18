@@ -1,5 +1,5 @@
 PacifidlogTown_House5_MapScripts::
-	.byte 0
+	end_map_scripts
 
 PacifidlogTown_House5_EventScript_MirageIslandWatcher::
 	lock

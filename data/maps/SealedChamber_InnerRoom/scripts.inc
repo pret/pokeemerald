@@ -1,5 +1,5 @@
 SealedChamber_InnerRoom_MapScripts::
-	.byte 0
+	end_map_scripts
 
 SealedChamber_InnerRoom_EventScript_BrailleBackWall::
 	lockall

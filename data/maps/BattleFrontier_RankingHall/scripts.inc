@@ -1,5 +1,5 @@
 BattleFrontier_RankingHall_MapScripts::
-	.byte 0
+	end_map_scripts
 
 BattleFrontier_RankingHall_EventScript_TowerSinglesRecords::
 	lockall

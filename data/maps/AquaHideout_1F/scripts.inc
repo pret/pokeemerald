@@ -1,5 +1,5 @@
 AquaHideout_1F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 @ The below two entrance guards give hints about what to do to progress the story
 AquaHideout_1F_EventScript_HideoutEntranceGrunt1::

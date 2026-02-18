@@ -1,6 +1,6 @@
 Route114_LanettesHouse_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route114_LanettesHouse_OnTransition
-	.byte 0
+	end_map_scripts
 
 Route114_LanettesHouse_OnTransition:
 	setflag FLAG_LANDMARK_LANETTES_HOUSE

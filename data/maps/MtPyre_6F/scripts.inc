@@ -1,5 +1,5 @@
 MtPyre_6F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 MtPyre_6F_EventScript_Valerie::
 	trainerbattle_single TRAINER_VALERIE_1, MtPyre_6F_Text_ValerieIntro, MtPyre_6F_Text_ValerieDefeat, MtPyre_6F_EventScript_RegisterValerie

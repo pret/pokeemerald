@@ -6,7 +6,7 @@ VerdanturfTown_BattleTentBattleRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, VerdanturfTown_BattleTentBattleRoom_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, VerdanturfTown_BattleTentBattleRoom_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, VerdanturfTown_BattleTentBattleRoom_OnWarp
-	.byte 0
+	end_map_scripts
 
 VerdanturfTown_BattleTentBattleRoom_OnTransition:
 	call VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfx
@@ -30,7 +30,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale::
 
 VerdanturfTown_BattleTentBattleRoom_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, VerdanturfTown_BattleTentBattleRoom_EventScript_EnterRoom
-	.2byte 0
+	end_map_script_table
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_EnterRoom::
 	showobjectat LOCALID_VERDANTURF_TENT_BATTLE_PLAYER, MAP_VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM
@@ -126,7 +126,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_PauseChallenge::
 
 VerdanturfTown_BattleTentBattleRoom_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, VerdanturfTown_BattleTentBattleRoom_EventScript_SetUpObjects
-	.2byte 0
+	end_map_script_table
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_SetUpObjects::
 	hideobjectat LOCALID_VERDANTURF_TENT_BATTLE_PLAYER, MAP_VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM

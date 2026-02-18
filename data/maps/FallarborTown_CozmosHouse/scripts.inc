@@ -1,5 +1,5 @@
 FallarborTown_CozmosHouse_MapScripts::
-	.byte 0
+	end_map_scripts
 
 FallarborTown_CozmosHouse_EventScript_ProfCozmo::
 	lock

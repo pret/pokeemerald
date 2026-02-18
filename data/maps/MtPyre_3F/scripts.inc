@@ -1,5 +1,5 @@
 MtPyre_3F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 MtPyre_3F_EventScript_William::
 	trainerbattle_single TRAINER_WILLIAM, MtPyre_3F_Text_WilliamIntro, MtPyre_3F_Text_WilliamDefeat

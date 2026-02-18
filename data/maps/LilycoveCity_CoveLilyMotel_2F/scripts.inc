@@ -1,5 +1,5 @@
 LilycoveCity_CoveLilyMotel_2F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_GameDesigner::
 	lock

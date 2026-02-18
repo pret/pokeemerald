@@ -1,5 +1,5 @@
 VictoryRoad_B2F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 VictoryRoad_B2F_EventScript_Vito::
 	trainerbattle_single TRAINER_VITO, VictoryRoad_B2F_Text_VitoIntro, VictoryRoad_B2F_Text_VitoDefeat
