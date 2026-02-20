@@ -995,7 +995,7 @@ static void Cmd_attackcanceler(void)
     {
         CancelMultiTurnMoves(gBattlerAttacker);
         gMoveResultFlags |= MOVE_RESULT_MISSED;
-        gLastLandedMoves[gBattlerTarget] = 0;
+        gLastLandedMoves[gBattlerTarget] = MOVE_NONE;
         gLastHitByType[gBattlerTarget] = 0;
         gBattleCommunication[MISS_TYPE] = B_MSG_PROTECTED;
         gBattlescriptCurrInstr++;
@@ -1011,7 +1011,7 @@ static void JumpIfMoveFailed(u8 adder, u16 move)
     const u8 *BS_ptr = gBattlescriptCurrInstr + adder;
     if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
     {
-        gLastLandedMoves[gBattlerTarget] = 0;
+        gLastLandedMoves[gBattlerTarget] = MOVE_NONE;
         gLastHitByType[gBattlerTarget] = 0;
         BS_ptr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
@@ -1376,7 +1376,7 @@ static void Cmd_typecalc(void)
     {
         gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
         gMoveResultFlags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
-        gLastLandedMoves[gBattlerTarget] = 0;
+        gLastLandedMoves[gBattlerTarget] = MOVE_NONE;
         gLastHitByType[gBattlerTarget] = 0;
         gBattleCommunication[MISS_TYPE] = B_MSG_GROUND_MISS;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
@@ -1412,7 +1412,7 @@ static void Cmd_typecalc(void)
     {
         gLastUsedAbility = ABILITY_WONDER_GUARD;
         gMoveResultFlags |= MOVE_RESULT_MISSED;
-        gLastLandedMoves[gBattlerTarget] = 0;
+        gLastLandedMoves[gBattlerTarget] = MOVE_NONE;
         gLastHitByType[gBattlerTarget] = 0;
         gBattleCommunication[MISS_TYPE] = B_MSG_AVOIDED_DMG;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
@@ -4507,7 +4507,7 @@ static void Cmd_typecalc2(void)
     {
         gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
         gMoveResultFlags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
-        gLastLandedMoves[gBattlerTarget] = 0;
+        gLastLandedMoves[gBattlerTarget] = MOVE_NONE;
         gBattleCommunication[MISS_TYPE] = B_MSG_GROUND_MISS;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
     }
@@ -4582,7 +4582,7 @@ static void Cmd_typecalc2(void)
     {
         gLastUsedAbility = ABILITY_WONDER_GUARD;
         gMoveResultFlags |= MOVE_RESULT_MISSED;
-        gLastLandedMoves[gBattlerTarget] = 0;
+        gLastLandedMoves[gBattlerTarget] = MOVE_NONE;
         gBattleCommunication[MISS_TYPE] = B_MSG_AVOIDED_DMG;
         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
     }
@@ -8071,6 +8071,9 @@ static void Cmd_painsplitdmgcalc(void)
 }
 
 // Conversion 2
+// Bug: If the user used an action after getting hit last turn and
+// first this turn, Conversion 2 will check against TYPE_NORMAL
+// because gLastHitByType gets reset in HandleAction_ActionFinished.
 static void Cmd_settypetorandomresistance(void)
 {
     if (gLastLandedMoves[gBattlerAttacker] == MOVE_NONE
