@@ -21,6 +21,8 @@
 #include <cstdio>
 #include <cstdarg>
 #include <stdexcept>
+#include <sstream>
+#include <cmath>
 #include "preproc.h"
 #include "asm_file.h"
 #include "char_util.h"
@@ -480,18 +482,172 @@ int AsmFile::ReadPadLength()
     return n;
 }
 
-// Outputs the current line and moves to the next one.
-void AsmFile::OutputLine()
+bool AsmFile::CheckIdentifier(const std::string& ident)
 {
-    while (m_buffer[m_pos] != '\n' && m_buffer[m_pos] != 0)
+    unsigned int i;
+
+    for (i = 0; i < ident.length() && m_pos + i < (unsigned)m_size; i++)
+        if (ident[i] != m_buffer[m_pos + i])
+            return false;
+
+    return (i == ident.length());
+}
+
+std::string fixedPointPseudoMacros[2] = { "Q_8_8", "UQ_8_8" };
+
+bool AsmFile::TryConvertFixedPointPseudoMacro()
+{
+    int incbinType = -1;
+
+    for (int i = 0; i < 2; i++)
+    {
+        if (CheckIdentifier(fixedPointPseudoMacros[i]))
+        {
+            incbinType = i;
+            break;
+        }
+    }
+
+    if (incbinType == -1) {
+        return false;
+    }
+
+    m_pos += fixedPointPseudoMacros[incbinType].length();
+
+    SkipWhitespace();
+
+    if (m_buffer[m_pos] != '(')
+    {
+        RaiseError("expected '(' after %s macro, got '%c'", fixedPointPseudoMacros[incbinType].c_str(), m_buffer[m_pos]);
+    }
+
+    m_pos++;
+
+    std::stringstream fixedPointNumStream;
+    bool foundDecimalPoint = false;
+    bool isFirstChar = true;
+
+    SkipWhitespace();
+
+    while (true)
+    {
+        char curChar;
+
+        curChar = m_buffer[m_pos];
+
+        if (curChar == 0) {
+            if (m_pos >= m_size)
+                RaiseError("unexpected EOF in fixed-point macro arg");
+            else
+                RaiseError("unexpected null character in fixed-point macro arg");
+        }
+
+        if (curChar == '\r' || curChar == '\n')
+            RaiseError("unexpected end of line character in path string");
+
+        if (isFirstChar && curChar == '-') {
+            fixedPointNumStream << curChar;
+        } else if (curChar == '.') {
+            if (foundDecimalPoint) {
+                RaiseError("Multiple decimal points found in fixed-point macro arg");
+            }
+            fixedPointNumStream << curChar;
+        } else if (std::isdigit(curChar)) {
+            fixedPointNumStream << curChar;
+        } else if (curChar == ')') {
+            m_pos++;
+            break;
+        } else {
+            RaiseError("unexpected character '%c' in fixed-point macro arg (note that only a single decimal number is currently supported, i.e. no expressions)", curChar);
+        }
+
         m_pos++;
+        isFirstChar = false;
+    }
+
+    float fixedPointNum = 0.0;
+    bool parseError = false;
+
+    fixedPointNumStream >> fixedPointNum;
+    if (fixedPointNumStream.fail()) {
+        parseError = true;
+    } else {
+        fixedPointNum *= 256;
+    }
+
+    if (parseError || std::isnan(fixedPointNum) || std::isinf(fixedPointNum)) {
+        std::string fixedPointNumStr = fixedPointNumStream.str();
+        RaiseError("invalid fixed-point macro arg '%s' (note that only a single decimal number is currently supported, i.e. no expressions)", fixedPointNumStr.c_str());
+    }
+
+    //Q_8_8
+    if (incbinType == 0) {
+        // Q_8_8(-128.0) is the least value
+        // anything lesser results in underflow
+        if (fixedPointNum < -32768) {
+            std::string fixedPointNumStr = fixedPointNumStream.str();
+            RaiseError("fixed-point macro arg '%s' too small for Q_8_8 (must be in range [-128, 128).)", fixedPointNumStr.c_str());
+        } else if (fixedPointNum >= 32768) {
+            std::string fixedPointNumStr = fixedPointNumStream.str();
+            RaiseError("fixed-point macro arg '%s' too large for Q_8_8 (must be in range [-128, 128).)", fixedPointNumStr.c_str());
+        }
+    //UQ_8_8
+    } else {
+        // Q_8_8(-128.0) is the least value
+        // anything lesser results in underflow
+        if (fixedPointNum < 0) {
+            std::string fixedPointNumStr = fixedPointNumStream.str();
+            RaiseError("fixed-point macro arg '%s' cannot be negative for UQ_8_8", fixedPointNumStr.c_str());
+        } else if (fixedPointNum >= 65536) {
+            std::string fixedPointNumStr = fixedPointNumStream.str();
+            RaiseError("fixed-point macro arg '%s' too large for UQ_8_8 (must be in range [0,256).)", fixedPointNumStr.c_str());
+        }
+    }
+
+    int fixedPointNumAsInt = ((int)fixedPointNum) & 0xffff;
+
+    std::printf("%d", fixedPointNumAsInt);
+
+    return true;
+}
+
+// Outputs the current line and moves to the next one.
+void AsmFile::OutputLine(bool doFixedPoint)
+{
+    // have to restart to the current line because whitespace was skipped earlier in GetDirective
+
+    m_pos = m_lineStart;
+
+    if (doFixedPoint) {
+        while (true) {
+            char curChar = m_buffer[m_pos];
+            if (curChar == '\n' || curChar == 0) {
+                break;
+            }
+    
+            // return true if fixed point macro happened
+            if (!TryConvertFixedPointPseudoMacro()) {
+                std::putchar(curChar);
+                m_pos++;
+            }
+        }
+    } else {
+        while (true) {
+            char curChar = m_buffer[m_pos];
+            if (curChar == '\n' || curChar == 0) {
+                break;
+            }
+            std::putchar(curChar);
+            m_pos++;
+        }
+    }
 
     if (m_buffer[m_pos] == 0)
     {
         if (m_pos >= m_size)
         {
             RaiseWarning("file doesn't end with newline");
-            puts(&m_buffer[m_lineStart]);
+            std::putchar('\n');
         }
         else
         {
@@ -500,9 +656,8 @@ void AsmFile::OutputLine()
     }
     else
     {
-        m_buffer[m_pos] = 0;
-        puts(&m_buffer[m_lineStart]);
         m_buffer[m_pos] = '\n';
+        std::putchar('\n');
         m_pos++;
         m_lineStart = m_pos;
         m_lineNum++;
