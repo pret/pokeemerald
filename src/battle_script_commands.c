@@ -946,12 +946,12 @@ static void Cmd_attackcanceler(void)
         i = IsMonDisobedient(); // why use the 'i' variable...?
         switch (i)
         {
-        case 0:
+        case DISOBEDIENCE_OBEDIENT:
             break;
-        case 2:
+        case DISOBEDIENCE_OTHER:
             gHitMarker |= HITMARKER_OBEYS;
             return;
-        default:
+        default: // DISOBEDIENCE_IGNORED
             gMoveResultFlags |= MOVE_RESULT_MISSED;
             return;
         }
