@@ -413,11 +413,9 @@ const u8 *GetRamScript(u8 localId, const u8 *script)
         ClearRamScript();
         return script;
     }
-    else
-    {
-        gRamScriptRetAddr = script;
-        return scriptData->script;
-    }
+
+    gRamScriptRetAddr = script;
+    return scriptData->script;
 }
 
 #define NO_OBJECT LOCALID_PLAYER

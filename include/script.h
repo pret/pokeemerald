@@ -11,7 +11,7 @@ struct ScriptContext
     u8 stackDepth;
     u8 mode;
     u8 comparisonResult;
-    u8 (*nativePtr)(void);
+    bool8 (*nativePtr)(void);
     const u8 *scriptPtr;
     const u8 *stack[20];
     ScrCmdFunc *cmdTable;
