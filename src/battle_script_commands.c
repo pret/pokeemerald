@@ -3295,7 +3295,7 @@ static void Cmd_getexp(void)
                 *exp = 1;
 
             // Bonus EXP amount for each Pokémon holding Exp. Share.
-            gExpShareExp = calculatedExp / 4;
+            gExpShareExp = calculatedExp / 2;
             if (gExpShareExp == 0)
                 gExpShareExp = 1;
 
