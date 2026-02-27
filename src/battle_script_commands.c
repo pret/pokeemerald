@@ -3294,10 +3294,7 @@ static void Cmd_getexp(void)
             if (*exp == 0)
                 *exp = 1;
 
-            // Bonus EXP amount for each Pokémon holding Exp. Share.
-            gExpShareExp = calculatedExp / 2;
-            if (gExpShareExp == 0)
-                gExpShareExp = 1;
+            gExpShareExp = 0;
 
             gBattleScripting.getexpState++;
             gBattleStruct->expGetterMonId = 0;
@@ -3338,13 +3335,13 @@ static void Cmd_getexp(void)
                     if (gBattleStruct->koExpGetterMonId < PARTY_SIZE
                      && gBattleStruct->expGetterMonId == gBattleStruct->koExpGetterMonId)
                         gBattleMoveDamage += *exp;
+                    else
+                    {
+                        gBattleMoveDamage += *exp / 2;
+                        if (gBattleMoveDamage == 0)
+                            gBattleMoveDamage = 1;
+                    }
 
-                    // Give bonus EXP to any Pokémon holding Exp. Share, except the KOer.
-                    if (holdEffect == HOLD_EFFECT_EXP_SHARE
-                     && gBattleStruct->expGetterMonId != gBattleStruct->koExpGetterMonId)
-                        gBattleMoveDamage += gExpShareExp;
-
-                    // If this Pokémon is not the KOer and doesn't hold Exp. Share, skip giving EXP.
                     if (gBattleMoveDamage == 0)
                     {
                         gBattleStruct->sentInPokes >>= 1;
