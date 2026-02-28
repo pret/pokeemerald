@@ -1917,6 +1917,13 @@ bool8 HandleFaintedMonActions(void)
                  && !(gBattleStruct->givenExpMons & gBitTable[gBattlerPartyIndexes[gBattleStruct->faintedActionsBattlerId]])
                  && !(gAbsentBattlerFlags & gBitTable[gBattleStruct->faintedActionsBattlerId]))
                 {
+                    // Record the player party index of the Pokémon that delivered the KO, if any.
+                    if (GetBattlerSide(gBattleStruct->faintedActionsBattlerId) == B_SIDE_OPPONENT
+                     && GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
+                        gBattleStruct->koExpGetterMonId = gBattlerPartyIndexes[gBattlerAttacker];
+                    else
+                        gBattleStruct->koExpGetterMonId = PARTY_SIZE;
+
                     BattleScriptExecute(BattleScript_GiveExp);
                     gBattleStruct->faintedActionsState = 2;
                     return TRUE;

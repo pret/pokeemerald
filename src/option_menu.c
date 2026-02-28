@@ -23,6 +23,7 @@
 #define tSound data[4]
 #define tButtonMode data[5]
 #define tWindowFrameType data[6]
+#define tModernExpShare data[7]
 
 enum
 {
@@ -32,6 +33,7 @@ enum
     MENUITEM_SOUND,
     MENUITEM_BUTTONMODE,
     MENUITEM_FRAMETYPE,
+    MENUITEM_MODERNEXPSHARE,
     MENUITEM_CANCEL,
     MENUITEM_COUNT,
 };
@@ -48,6 +50,7 @@ enum
 #define YPOS_SOUND        (MENUITEM_SOUND * 16)
 #define YPOS_BUTTONMODE   (MENUITEM_BUTTONMODE * 16)
 #define YPOS_FRAMETYPE    (MENUITEM_FRAMETYPE * 16)
+#define YPOS_MODERNEXPSHARE (MENUITEM_MODERNEXPSHARE * 16)
 
 static void Task_OptionMenuFadeIn(u8 taskId);
 static void Task_OptionMenuProcessInput(u8 taskId);
@@ -66,6 +69,8 @@ static u8 FrameType_ProcessInput(u8 selection);
 static void FrameType_DrawChoices(u8 selection);
 static u8 ButtonMode_ProcessInput(u8 selection);
 static void ButtonMode_DrawChoices(u8 selection);
+static u8 ModernExpShare_ProcessInput(u8 selection);
+static void ModernExpShare_DrawChoices(u8 selection);
 static void DrawHeaderText(void);
 static void DrawOptionMenuTexts(void);
 static void DrawBgWindowFrames(void);
@@ -84,6 +89,7 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
     [MENUITEM_SOUND]       = gText_Sound,
     [MENUITEM_BUTTONMODE]  = gText_ButtonMode,
     [MENUITEM_FRAMETYPE]   = gText_Frame,
+    [MENUITEM_MODERNEXPSHARE] = gText_ModernExpShare,
     [MENUITEM_CANCEL]      = gText_OptionMenuCancel,
 };
 
@@ -103,7 +109,7 @@ static const struct WindowTemplate sOptionMenuWinTemplates[] =
         .tilemapLeft = 2,
         .tilemapTop = 5,
         .width = 26,
-        .height = 14,
+        .height = 18,
         .paletteNum = 1,
         .baseBlock = 0x36
     },
@@ -234,6 +240,7 @@ void CB2_InitOptionMenu(void)
         gTasks[taskId].tSound = gSaveBlock2Ptr->optionsSound;
         gTasks[taskId].tButtonMode = gSaveBlock2Ptr->optionsButtonMode;
         gTasks[taskId].tWindowFrameType = gSaveBlock2Ptr->optionsWindowFrameType;
+        gTasks[taskId].tModernExpShare = gSaveBlock2Ptr->optionsModernExpShare;
 
         TextSpeed_DrawChoices(gTasks[taskId].tTextSpeed);
         BattleScene_DrawChoices(gTasks[taskId].tBattleSceneOff);
@@ -241,6 +248,7 @@ void CB2_InitOptionMenu(void)
         Sound_DrawChoices(gTasks[taskId].tSound);
         ButtonMode_DrawChoices(gTasks[taskId].tButtonMode);
         FrameType_DrawChoices(gTasks[taskId].tWindowFrameType);
+        ModernExpShare_DrawChoices(gTasks[taskId].tModernExpShare);
         HighlightOptionMenuItem(gTasks[taskId].tMenuSelection);
 
         CopyWindowToVram(WIN_OPTIONS, COPYWIN_FULL);
@@ -336,6 +344,13 @@ static void Task_OptionMenuProcessInput(u8 taskId)
             if (previousOption != gTasks[taskId].tWindowFrameType)
                 FrameType_DrawChoices(gTasks[taskId].tWindowFrameType);
             break;
+        case MENUITEM_MODERNEXPSHARE:
+            previousOption = gTasks[taskId].tModernExpShare;
+            gTasks[taskId].tModernExpShare = ModernExpShare_ProcessInput(gTasks[taskId].tModernExpShare);
+
+            if (previousOption != gTasks[taskId].tModernExpShare)
+                ModernExpShare_DrawChoices(gTasks[taskId].tModernExpShare);
+            break;
         default:
             return;
         }
@@ -356,6 +371,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsSound = gTasks[taskId].tSound;
     gSaveBlock2Ptr->optionsButtonMode = gTasks[taskId].tButtonMode;
     gSaveBlock2Ptr->optionsWindowFrameType = gTasks[taskId].tWindowFrameType;
+    gSaveBlock2Ptr->optionsModernExpShare = gTasks[taskId].tModernExpShare;
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
@@ -615,6 +631,30 @@ static void ButtonMode_DrawChoices(u8 selection)
     DrawOptionMenuChoice(gText_ButtonTypeLEqualsA, GetStringRightAlignXOffset(FONT_NORMAL, gText_ButtonTypeLEqualsA, 198), YPOS_BUTTONMODE, styles[2]);
 }
 
+static u8 ModernExpShare_ProcessInput(u8 selection)
+{
+    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
+    {
+        selection ^= 1;
+        sArrowPressed = TRUE;
+    }
+
+    return selection;
+}
+
+static void ModernExpShare_DrawChoices(u8 selection)
+{
+    u8 styles[2];
+
+    styles[0] = 0;
+    styles[1] = 0;
+    styles[selection] = 1;
+
+    /* selection 0 = No (vanilla), selection 1 = Yes (modern); match optionsModernExpShare */
+    DrawOptionMenuChoice(gText_ModernExpShareNo, 104, YPOS_MODERNEXPSHARE, styles[0]);
+    DrawOptionMenuChoice(gText_ModernExpShareYes, GetStringRightAlignXOffset(FONT_NORMAL, gText_ModernExpShareYes, 198), YPOS_MODERNEXPSHARE, styles[1]);
+}
+
 static void DrawHeaderText(void)
 {
     FillWindowPixelBuffer(WIN_HEADER, PIXEL_FILL(1));
@@ -660,9 +700,9 @@ static void DrawBgWindowFrames(void)
     FillBgTilemapBufferRect(1, TILE_TOP_CORNER_R, 28,  4,  1,  1,  7);
     FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1,  5,  1, 18,  7);
     FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28,  5,  1, 18,  7);
-    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_L,  1, 19,  1,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_BOT_EDGE,      2, 19, 26,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_R, 28, 19,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_L,  1, 23,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_BOT_EDGE,      2, 23, 26,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_R, 28, 23,  1,  1,  7);
 
     CopyBgTilemapBufferToVram(1);
 }
