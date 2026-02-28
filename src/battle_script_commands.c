@@ -3283,18 +3283,58 @@ static void Cmd_getexp(void)
             gBattleStruct->givenExpMons |= gBitTable[gBattlerPartyIndexes[gBattlerFainted]];
         }
         break;
-    case 1: // calculate base experience value
+    case 1: // calculate experience value
         {
             u16 calculatedExp;
 
             calculatedExp = gSpeciesInfo[gBattleMons[gBattlerFainted].species].expYield * gBattleMons[gBattlerFainted].level / 7;
 
-            // Base EXP amount for the Pokémon that delivered the KO.
-            *exp = calculatedExp;
-            if (*exp == 0)
-                *exp = 1;
+            if (gSaveBlock2Ptr->optionsModernExpShare)
+            {
+                // Modern: KOer gets 100%, rest get 50% each.
+                *exp = calculatedExp;
+                if (*exp == 0)
+                    *exp = 1;
+                gExpShareExp = 0;
+            }
+            else
+            {
+                // Vanilla: participants share; Exp. Share holders share the other half.
+                s32 viaSentIn = 0;
+                s32 viaExpShare = 0;
 
-            gExpShareExp = 0;
+                for (i = 0; i < PARTY_SIZE; i++)
+                {
+                    if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE || GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
+                        continue;
+                    if (gBitTable[i] & sentIn)
+                        viaSentIn++;
+                    item = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+                    if (item == ITEM_ENIGMA_BERRY)
+                        holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
+                    else
+                        holdEffect = GetItemHoldEffect(item);
+                    if (holdEffect == HOLD_EFFECT_EXP_SHARE)
+                        viaExpShare++;
+                }
+
+                if (viaExpShare)
+                {
+                    *exp = SAFE_DIV(calculatedExp / 2, viaSentIn);
+                    if (*exp == 0)
+                        *exp = 1;
+                    gExpShareExp = calculatedExp / 2 / viaExpShare;
+                    if (gExpShareExp == 0)
+                        gExpShareExp = 1;
+                }
+                else
+                {
+                    *exp = SAFE_DIV(calculatedExp, viaSentIn);
+                    if (*exp == 0)
+                        *exp = 1;
+                    gExpShareExp = 0;
+                }
+            }
 
             gBattleScripting.getexpState++;
             gBattleStruct->expGetterMonId = 0;
@@ -3331,15 +3371,26 @@ static void Cmd_getexp(void)
                 {
                     gBattleMoveDamage = 0;
 
-                    // Give full base EXP to the Pokémon that delivered the KO.
-                    if (gBattleStruct->koExpGetterMonId < PARTY_SIZE
-                     && gBattleStruct->expGetterMonId == gBattleStruct->koExpGetterMonId)
-                        gBattleMoveDamage += *exp;
+                    if (gSaveBlock2Ptr->optionsModernExpShare)
+                    {
+                        // Modern: KOer gets 100%, rest get 50%.
+                        if (gBattleStruct->koExpGetterMonId < PARTY_SIZE
+                         && gBattleStruct->expGetterMonId == gBattleStruct->koExpGetterMonId)
+                            gBattleMoveDamage += *exp;
+                        else
+                        {
+                            gBattleMoveDamage += *exp / 2;
+                            if (gBattleMoveDamage == 0)
+                                gBattleMoveDamage = 1;
+                        }
+                    }
                     else
                     {
-                        gBattleMoveDamage += *exp / 2;
-                        if (gBattleMoveDamage == 0)
-                            gBattleMoveDamage = 1;
+                        // Vanilla: participant share + Exp. Share share.
+                        if (gBattleStruct->sentInPokes & 1)
+                            gBattleMoveDamage += *exp;
+                        if (holdEffect == HOLD_EFFECT_EXP_SHARE)
+                            gBattleMoveDamage += gExpShareExp;
                     }
 
                     if (gBattleMoveDamage == 0)
