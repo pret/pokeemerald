@@ -764,7 +764,11 @@ static void rfu_CB_pollConnectParent(u8 reqCommand, u16 reqResult)
     u16 id;
     u8 slot;
     u8 bm_slot_flag, i;
+#ifdef UBFIX
+    struct RfuTgtData *target_p = NULL;
+#else
     struct RfuTgtData *target_p;
+#endif
     struct RfuTgtData target_local;
 
     if (reqResult == 0)
