@@ -214,6 +214,33 @@ static s32 mini_itoa(s32 value, u32 radix, s32 uppercase, bool32 unsig, char *bu
     return len;
 }
 
+static s32 mini_itoa_bin(u32 value, char *buffer)
+{
+    char *pbuffer = buffer;
+    s32 i, len;
+
+    /* This builds the string back to front ... */
+    do
+    {
+        *(pbuffer++) = '0' + (value & 1);
+        value /= 2;   
+    } while (value > 0);
+
+    *(pbuffer) = '\0';
+
+    /* ... now we reverse it (could do it recursively but will
+     * conserve the stack space) */
+    len = (pbuffer - buffer);
+    for (i = 0; i < len / 2; i++)
+    {
+        char j = buffer[i];
+        buffer[i] = buffer[len-i-1];
+        buffer[len-i-1] = j;
+    }
+
+    return len;
+}
+
 static s32 mini_pad(char *ptr, s32 len, char pad_char, s32 pad_to, char *buffer)
 {
     s32 i;
@@ -340,7 +367,11 @@ s32 mini_vpprintf(void *buf, const char *fmt, va_list va)
                     len = mini_pad(bf2, len, pad_char, pad_to, bf);
                     len = _putsAscii(bf, len, buf);
                     break;
-
+                case 'b':
+                    len = mini_itoa_bin(va_arg(va, u32), bf2);
+                    len = mini_pad(bf2, len, pad_char, pad_to, bf);
+                    len = _putsAscii(bf, len, buf);
+                    break;
                 case 'c' :
                     ch = (char)(va_arg(va, s32));
                     len = mini_pad(&ch, 1, pad_char, pad_to, bf);
