@@ -4346,7 +4346,7 @@ static void SpriteCB_RollBall_Start(struct Sprite *sprite)
 
 static void CreateShroomishSprite(struct Sprite *ball)
 {
-    u16 t;
+    s16 t;
     u8 i;
     s16 coords[2][2] = {
         {116, 44},

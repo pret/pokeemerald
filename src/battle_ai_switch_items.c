@@ -429,42 +429,34 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
 static bool8 ShouldSwitch(void)
 {
     u8 battlerIn1, battlerIn2;
-    u8 *activeBattlerPtr; // Needed to match.
     s32 firstId;
     s32 lastId; // + 1
     struct Pokemon *party;
     s32 i;
     s32 availableToSwitch;
 
-    if (gBattleMons[*(activeBattlerPtr = &gActiveBattler)].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION))
-        return FALSE;
-    if (gStatuses3[gActiveBattler] & STATUS3_ROOTED)
-        return FALSE;
-    if (ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_SHADOW_TAG))
-        return FALSE;
-    if (ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_ARENA_TRAP)) // Misses the flying type and Levitate check.
-        return FALSE;
-    if (ABILITY_ON_FIELD2(ABILITY_MAGNET_PULL))
-    {
-        if (IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL))
-            return FALSE;
-    }
-    if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
+    if (gBattleMons[gActiveBattler].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION) ||
+    (gStatuses3[gActiveBattler] & STATUS3_ROOTED) ||
+    (ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_SHADOW_TAG)) ||
+    (ABILITY_ON_OPPOSING_FIELD(gActiveBattler, ABILITY_ARENA_TRAP)) ||
+    ((ABILITY_ON_FIELD2(ABILITY_MAGNET_PULL)) &&
+    ((IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL)))) ||
+        (gBattleTypeFlags & BATTLE_TYPE_ARENA))
         return FALSE;
 
     availableToSwitch = 0;
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        battlerIn1 = *activeBattlerPtr;
-        if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(*activeBattlerPtr)))])
-            battlerIn2 = *activeBattlerPtr;
+        battlerIn1 = gActiveBattler;
+        if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)))])
+            battlerIn2 = gActiveBattler;
         else
-            battlerIn2 = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(*activeBattlerPtr)));
+            battlerIn2 = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)));
     }
     else
     {
-        battlerIn1 = *activeBattlerPtr;
-        battlerIn2 = *activeBattlerPtr;
+        battlerIn1 = gActiveBattler;
+        battlerIn2 = gActiveBattler;
     }
 
     if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TOWER_LINK_MULTI))
@@ -504,23 +496,25 @@ static bool8 ShouldSwitch(void)
         availableToSwitch++;
     }
 
-    if (availableToSwitch == 0)
-        return FALSE;
-    if (ShouldSwitchIfPerishSong())
-        return TRUE;
-    if (ShouldSwitchIfWonderGuard())
-        return TRUE;
-    if (FindMonThatAbsorbsOpponentsMove())
-        return TRUE;
-    if (ShouldSwitchIfNaturalCure())
-        return TRUE;
-    if (HasSuperEffectiveMoveAgainstOpponents(FALSE))
-        return FALSE;
-    if (AreStatsRaised())
-        return FALSE;
-    if (FindMonWithFlagsAndSuperEffective(MOVE_RESULT_DOESNT_AFFECT_FOE, 2)
-        || FindMonWithFlagsAndSuperEffective(MOVE_RESULT_NOT_VERY_EFFECTIVE, 3))
-        return TRUE;
+    if (availableToSwitch)
+    {
+        if (ShouldSwitchIfPerishSong())
+            return TRUE;
+        if (ShouldSwitchIfWonderGuard())
+            return TRUE;
+        if (FindMonThatAbsorbsOpponentsMove())
+            return TRUE;
+        if (ShouldSwitchIfNaturalCure())
+            return TRUE;
+        if (HasSuperEffectiveMoveAgainstOpponents(FALSE))
+            return FALSE;
+        if (AreStatsRaised())
+            return FALSE;
+        if (FindMonWithFlagsAndSuperEffective(MOVE_RESULT_DOESNT_AFFECT_FOE, 2))
+            return TRUE;
+        if (FindMonWithFlagsAndSuperEffective(MOVE_RESULT_NOT_VERY_EFFECTIVE, 3))
+            return TRUE;
+    }
 
     return FALSE;
 }
