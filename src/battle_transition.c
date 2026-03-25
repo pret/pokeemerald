@@ -1837,35 +1837,34 @@ static void SpriteCB_FldEffPokeballTrail(struct Sprite *sprite)
     if (sprite->sDelay != 0)
     {
         sprite->sDelay--;
+        return;
     }
-    else
+
+    if (sprite->x >= 0 && sprite->x <= DISPLAY_WIDTH)
     {
-        if (sprite->x >= 0 && sprite->x <= DISPLAY_WIDTH)
+        // Set Pokéball position
+        s16 posX = sprite->x >> 3;
+        s16 posY = sprite->y >> 3;
+
+        // If Pokéball moved forward clear trail behind it
+        if (posX != sprite->sPrevX)
         {
-            // Set Pokéball position
-            s16 posX = sprite->x >> 3;
-            s16 posY = sprite->y >> 3;
+            u16 var;
+            vu16 *ptr;
 
-            // If Pokéball moved forward clear trail behind it
-            if (posX != sprite->sPrevX)
-            {
-                u32 var;
-                u16 *ptr;
+            sprite->sPrevX = posX;
+            var = ((REG_BG0CNT >> 8) & 0x1F);
+            ptr = (vu16 *)(BG_VRAM + (var << 11));
 
-                sprite->sPrevX = posX;
-                var = ((REG_BG0CNT >> 8) & 0x1F) << 11;
-                ptr = (u16 *)(BG_VRAM + var);
-
-                SET_TILE(ptr, posY - 2, posX, 1);
-                SET_TILE(ptr, posY - 1, posX, 1);
-                SET_TILE(ptr, posY - 0, posX, 1);
-                SET_TILE(ptr, posY + 1, posX, 1);
-            }
+            SET_TILE(ptr, posY - 2, posX, 1);
+            SET_TILE(ptr, posY - 1, posX, 1);
+            SET_TILE(ptr, posY - 0, posX, 1);
+            SET_TILE(ptr, posY + 1, posX, 1);
         }
-        sprite->x += speeds[sprite->sSide];
-        if (sprite->x < -15 || sprite->x > DISPLAY_WIDTH + 15)
-            FieldEffectStop(sprite, FLDEFF_POKEBALL_TRAIL);
     }
+    sprite->x += speeds[sprite->sSide];
+    if (sprite->x < -15 || sprite->x > DISPLAY_WIDTH + 15)
+        FieldEffectStop(sprite, FLDEFF_POKEBALL_TRAIL);
 }
 
 #undef sSide
@@ -2352,7 +2351,6 @@ static bool8 Mugshot_ShowBanner(struct Task *task)
     u8 i, sinIndex;
     u16 *toStore;
     s16 x;
-    s32 mergedValue;
 
     sTransitionData->VBlank_DMA = FALSE;
 
@@ -2391,8 +2389,7 @@ static bool8 Mugshot_ShowBanner(struct Task *task)
     if (task->tBottomBannerX < 0)
         task->tBottomBannerX = 0;
 
-    mergedValue = *(s32 *)(&task->tTopBannerX);
-    if (mergedValue == DISPLAY_WIDTH)
+    if (task->tTopBannerX == DISPLAY_WIDTH && task->tBottomBannerX == 0)
         task->tState++;
 
     sTransitionData->BG0HOFS_Lower -= 8;
@@ -3793,7 +3790,7 @@ static bool8 GridSquares_Main(struct Task *task)
         GetBg0TilemapDst(&tileset);
         task->tDelay = 3;
         task->tShrinkStage++;
-        CpuSet(&sShrinkingBoxTileset[task->tShrinkStage * 8], tileset, 16);
+        CpuSet(&sShrinkingBoxTileset[task->tShrinkStage << 3], tileset, 16);
         if (task->tShrinkStage > 13)
         {
             task->tState++;
@@ -4377,7 +4374,7 @@ static bool8 FrontierLogoWave_Main(struct Task *task)
     // Move logo up and down and distort it
     for (i = 0; i < DISPLAY_HEIGHT; i++, sinVal += sinSpread)
     {
-        s16 index = sinVal / 256;
+        s16 index = sinVal >> 8;
         gScanlineEffectRegBuffers[0][i] = sTransitionData->cameraY + Sin(index & 0xff, amplitude);
     }
 
@@ -4649,13 +4646,13 @@ static bool8 FrontierSquares_End(struct Task *task)
 
 static void Task_ScrollBg(u8 taskId)
 {
-    if (!(gTasks[taskId].tScrollUpdateFlag ^= 1))
-    {
-        SetGpuReg(REG_OFFSET_BG0VOFS, gBattle_BG0_X);
-        SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_Y);
-        gBattle_BG0_X += gTasks[taskId].tScrollXDir;
-        gBattle_BG0_Y += gTasks[taskId].tScrollYDir;
-    }
+    gTasks[taskId].tScrollUpdateFlag ^= 1;
+    if (gTasks[taskId].tScrollUpdateFlag)
+        return;
+    SetGpuReg(REG_OFFSET_BG0VOFS, gBattle_BG0_X);
+    SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_Y);
+    gBattle_BG0_X += gTasks[taskId].tScrollXDir;
+    gBattle_BG0_Y += gTasks[taskId].tScrollYDir;
 }
 
 static bool8 FrontierSquaresScroll_Init(struct Task *task)
