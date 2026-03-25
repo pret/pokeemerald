@@ -1182,7 +1182,7 @@ void CopyTileMapEntry(const u16 *src, u16 *dest, s32 palette1, s32 tileOffset, s
         var |= (*src + tileOffset) & 0x3FF;
         break;
     default:
-    case 17 ... INT_MAX:
+    case 17:
         var = *src + tileOffset + (palette2 << 12);
         break;
     }
