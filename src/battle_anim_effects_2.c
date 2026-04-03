@@ -1511,7 +1511,7 @@ static void AnimSonicBoomProjectile(struct Sprite *sprite)
     targetXPos = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) + gBattleAnimArgs[2];
     targetYPos = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[3];
     rotation = ArcTan2Neg(targetXPos - sprite->x, targetYPos - sprite->y);
-    rotation += 0xF000;
+    rotation -= 0x1000;
     if (IsContest())
         rotation -= 0x6000;
 
@@ -1554,9 +1554,9 @@ static void AnimAirWaveProjectile_Step1(struct Sprite *sprite)
         sprite->x2 = (u16)sprite->data[1] >> 8;
 
     if (1 & task->data[8])
-        sprite->y2 = ((u16)sprite->data[2] / 256u) * -1;
+        sprite->y2 = ((u16)sprite->data[2] >> 8) * -1;
     else
-        sprite->y2 = (u16)sprite->data[2] / 256u;
+        sprite->y2 = (u16)sprite->data[2] >> 8;
 
     if (sprite->data[0]-- <= 0)
     {
@@ -1574,15 +1574,15 @@ static void AnimAirWaveProjectile(struct Sprite *sprite)
     struct Task *task = &gTasks[sprite->data[7]];
     sprite->data[1] += (-2 & task->data[7]);
     sprite->data[2] += (-2 & task->data[8]);
-    if (1 & task->data[7])
+    if (task->data[7] & 1)
         sprite->x2 = ((u16)sprite->data[1] >> 8) * -1;
     else
         sprite->x2 = (u16)sprite->data[1] >> 8;
 
-    if (1 & task->data[8])
-        sprite->y2 = ((u16)sprite->data[2] / 256u) * -1;
+    if (task->data[8] & 1)
+        sprite->y2 = ((u16)sprite->data[2] >> 8) * -1;
     else
-        sprite->y2 = (u16)sprite->data[2] / 256u;
+        sprite->y2 = ((u16)sprite->data[2] >> 8);
 
     if (sprite->data[0]-- <= 0)
     {
@@ -1654,7 +1654,7 @@ void AnimTask_AirCutterProjectile(u8 taskId)
     s16 attackerX = 0;
     s16 targetX = 0;
     s16 targetY = 0;
-    s16 xDiff, yDiff;
+    s16 xDiff;
 
     if (IsContest())
     {
@@ -1704,13 +1704,11 @@ void AnimTask_AirCutterProjectile(u8 taskId)
     gTasks[taskId].data[7] = gBattleAnimArgs[2];
     if (targetY >= attackerY)
     {
-        yDiff = targetY - attackerY;
-        gTasks[taskId].data[8] = MathUtil_Mul16(yDiff, MathUtil_Inv16(gTasks[taskId].data[5])) & ~1;
+        gTasks[taskId].data[8] = MathUtil_Mul16(targetY - attackerY, MathUtil_Inv16(gTasks[taskId].data[5])) & ~1;
     }
     else
     {
-        yDiff = attackerY - targetY;
-        gTasks[taskId].data[8] = MathUtil_Mul16(yDiff, MathUtil_Inv16(gTasks[taskId].data[5])) | 1;
+        gTasks[taskId].data[8] = MathUtil_Mul16(attackerY - targetY, MathUtil_Inv16(gTasks[taskId].data[5])) | 1;
     }
 
     gTasks[taskId].data[3] = gBattleAnimArgs[3];
@@ -1789,7 +1787,7 @@ static void AnimCoinThrow(struct Sprite *sprite)
 
     r6 += gBattleAnimArgs[2];
     var = ArcTan2Neg(r6 - sprite->x, r7 - sprite->y);
-    var += 0xC000;
+    var -= 0x4000;
     TrySetSpriteRotScale(sprite, FALSE, 0x100, 0x100, var);
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = r6;
@@ -2592,8 +2590,8 @@ static void AnimHyperVoiceRing_WaitEnd(struct Sprite *sprite)
 
 static void AnimHyperVoiceRing(struct Sprite *sprite)
 {
-    u16 startX = 0;
-    u16 startY = 0;
+    s16 startX = 0;
+    s16 startY = 0;
     s16 x = 0;
     s16 y = 0;
     u8 yCoordType;
@@ -3048,7 +3046,7 @@ void AnimTask_FreeMusicNotesPals(u8 taskId)
 static void SetMusicNotePalette(struct Sprite *sprite, u8 a, u8 b)
 {
     u8 tile = (b & 1) ? 32 : 0;
-    sprite->oam.tileNum += tile + (a << 2);
+    sprite->oam.tileNum += tile + a * 4;
     sprite->oam.paletteNum = IndexOfSpritePaletteTag(sMusicNotePaletteTagsTable[b >> 1]);
 }
 
@@ -3476,8 +3474,8 @@ static void AnimOrbitScatter_Step(struct Sprite *sprite)
 {
     sprite->x2 += sprite->data[0];
     sprite->y2 += sprite->data[1];
-    if (sprite->x + sprite->x2 + 16 > ((u32)DISPLAY_WIDTH + 32)
-     || sprite->y + sprite->y2 > DISPLAY_HEIGHT || sprite->y + sprite->y2 < -16)
+    if (sprite->x + sprite->x2 > (DISPLAY_WIDTH + 16) || sprite->x + sprite->x2 < -16 ||
+        sprite->y + sprite->y2 > DISPLAY_HEIGHT || sprite->y + sprite->y2 < -16)
         DestroyAnimSprite(sprite);
 }
 
@@ -3685,8 +3683,8 @@ static void AnimJaggedMusicNote(struct Sprite *sprite)
     sprite->x = GetBattlerSpriteCoord(battler, BATTLER_COORD_X_2)  + gBattleAnimArgs[1];
     sprite->y = GetBattlerSpriteCoord(battler, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[2];
     sprite->data[0] = 0;
-    sprite->data[1] = (u16)sprite->x << 3;
-    sprite->data[2] = (u16)sprite->y << 3;
+    sprite->data[1] = sprite->x << 3;
+    sprite->data[2] = sprite->y << 3;
     sprite->data[3] = (gBattleAnimArgs[1] << 3) / 8;
     sprite->data[4] = (gBattleAnimArgs[2] << 3) / 8;
 
@@ -3721,13 +3719,12 @@ static void AnimPerishSongMusicNote2(struct Sprite *sprite)
 
 static void AnimPerishSongMusicNote(struct Sprite *sprite)
 {
-    int index;
-    int var2;
+    u16 index;
 
     if (!sprite->data[0])
     {
         sprite->x = 120;
-        sprite->y = (gBattleAnimArgs[0] + (((u16)gBattleAnimArgs[0]) >> 31)) / 2 - 15;
+        sprite->y = gBattleAnimArgs[0] / 2 - 15;
 
         StartSpriteAnim(sprite, gBattleAnimArgs[1]);
 
@@ -3737,12 +3734,12 @@ static void AnimPerishSongMusicNote(struct Sprite *sprite)
 
     sprite->data[0]++;
 
-    sprite->data[1] = (sprite->data[0] + ((u16)sprite->data[0] >> 31)) / 2;
-    index = ((sprite->data[0] * 3) + (u16)sprite->data[3]);
-    var2 = 0xFF;
-    sprite->data[6] = (sprite->data[6] + 10) & 0xFF;
+    sprite->data[1] = sprite->data[0] / 2;
 
-    index &= var2;
+    index = ((sprite->data[0] * 3) + sprite->data[3]) & 0xff;
+    sprite->data[6] += 10;
+    sprite->data[6] &= 0xff;
+
     sprite->x2 = Cos(index, 100);
 
     sprite->y2 = sprite->data[1] + Sin(index, 10) + Cos(sprite->data[6], 4);
