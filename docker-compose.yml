@@ -1,0 +1,13 @@
+services:
+  pokeemerald:
+    build: .
+    working_dir: /workspace
+    environment:
+      CCACHE_DIR: /ccache
+    volumes:
+      - ./:/workspace
+      - pokeemerald_ccache:/ccache
+    command: bash -lc "make clean-tools && make MODERN=1 -j$$(nproc)"
+
+volumes:
+  pokeemerald_ccache:
