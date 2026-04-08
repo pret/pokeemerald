@@ -321,30 +321,6 @@ void PrintMemAcc(const Event& event)
         PrintByte("MEMACC, mem_mem_blo, 0x%02X, 0x%02X", s_memaccParam1, event.param2);
         PrintWord("%s_%u_L%u", g_asmLabel.c_str(), g_agbTrack, s_memaccParam2);
         break;
-    case 0x46:
-        break;
-    case 0x47:
-        break;
-    case 0x48:
-        break;
-    case 0x49:
-        break;
-    case 0x4A:
-        break;
-    case 0x4B:
-        break;
-    case 0x4C:
-        break;
-    case 0x4D:
-        break;
-    case 0x4E:
-        break;
-    case 0x4F:
-        break;
-    case 0x50:
-        break;
-    case 0x51:
-        break;
     default:
         break;
     }
