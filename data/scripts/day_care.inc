@@ -170,7 +170,7 @@ Route117_PokemonDayCare_EventScript_TryRetrieveMon::
 	end
 
 Route117_PokemonDayCare_EventScript_CostPrompt::
-	special GetDaycareCost
+	special GetDaycareCostAndPrepareString
 	msgbox Route117_PokemonDayCare_Text_ItWillCostX, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, Route117_PokemonDayCare_EventScript_CheckEnoughMoney
 	goto Route117_PokemonDayCare_EventScript_ComeAgain

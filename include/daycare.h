@@ -16,7 +16,7 @@ u8 CountPokemonInDaycare(struct DayCare *daycare);
 void InitDaycareMailRecordMixing(struct DayCare *daycare, struct RecordMixingDaycareMail *mixMail);
 void StoreSelectedPokemonInDaycare(void);
 u16 TakePokemonFromDaycare(void);
-void GetDaycareCost(void);
+void GetDaycareCostAndPrepareString(void);
 u8 GetNumLevelsGainedFromDaycare(void);
 void TriggerPendingDaycareEgg(void);
 void RejectEggFromDayCare(void);
