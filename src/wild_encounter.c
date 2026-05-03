@@ -612,7 +612,7 @@ bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
             }
             else
             {
-                #if BUGFIX
+                #ifdef BUGFIX
                     // The bugfix prevents the game from trying to get a regular tall grass encounter on the same tile the repel blocked a mass outbreak encounter
                     if (DoMassOutbreakEncounterTest() == TRUE)
                     {
