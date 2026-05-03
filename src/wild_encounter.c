@@ -612,11 +612,22 @@ bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
             }
             else
             {
+                #if BUGFIX
+                    // The bugfix prevents the game from trying to get a regular tall grass encounter on the same tile the repel blocked a mass outbreak encounter
+                    if (DoMassOutbreakEncounterTest() == TRUE)
+                    {
+                        if (!SetUpMassOutbreakEncounter(WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE))
+                            return FALSE;
+                        BattleSetup_StartWildBattle();
+                        return TRUE;
+                    }
+                #else
                 if (DoMassOutbreakEncounterTest() == TRUE && SetUpMassOutbreakEncounter(WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
                 {
                     BattleSetup_StartWildBattle();
                     return TRUE;
                 }
+                #endif
 
                 // try a regular wild land encounter
                 if (TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
