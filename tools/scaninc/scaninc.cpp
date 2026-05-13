@@ -18,6 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#include <algorithm>
 #include <cctype>
 #include <cstdio>
 #include <cstdlib>
@@ -225,19 +226,24 @@ int main(int argc, char **argv)
         // GNU make will issue a warning if there is more than one
         // recipe for a target. This would occur whenever a target is
         // 'INCGFX'ed multiple times, which is something that happens a
-        // few times in vanilla. As a workaround, we maintain a variable
-        // with all the 'INCGFX' targets and only emit the recipe if
-        // the target is not in that variable. This is safe, because
+        // few times in vanilla. As a workaround, we define a variable
+        // with the target's name sanitized and only emit the recipe if
+        // the target is not yet defined. This is safe, because
         // targets with the same name necessarily have the same recipe.
-        output
-            << "ifndef _INCGFX\n"
-            << "_INCGFX :=\n"
-            << "endif\n";
         for (auto gfx_rule : dependencies_gfx_rules)
         {
+            std::string gfx_var_name = gfx_rule.first;
+            gfx_var_name.erase(
+                std::remove_if(
+                    gfx_var_name.begin(), 
+                    gfx_var_name.end(), 
+                    [] (char c) { return c == '#' || c == ':' || c == '='; } // invalid chars in GNU Make variables
+                ), gfx_var_name.end()
+            );
+            
             output
-                << "ifeq (,$(findstring " << gfx_rule.first << ",$(_INCGFX)))\n"
-                << "_INCGFX += " << gfx_rule.first << "\n"
+                << "ifndef " << gfx_var_name << "\n"
+                << gfx_var_name << " := defined\n"
                 << gfx_rule.first << ": " << gfx_rule.second.first << "\n" << gfx_rule.second.second
                 << "endif\n";
         }
