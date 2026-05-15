@@ -156,6 +156,8 @@ Directive AsmFile::GetDirective()
         return Directive::Braille;
     else if (CheckForDirective("enum"))
         return Directive::Enum;
+    else if (CheckForDirective(".macro"))
+        return Directive::Macro;
     else
         return Directive::Unknown;
 }
