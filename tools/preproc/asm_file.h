@@ -32,6 +32,7 @@ enum class Directive
     String,
     Braille,
     Enum,
+    Macro,
     Unknown
 };
 

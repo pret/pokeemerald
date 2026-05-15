@@ -98,6 +98,20 @@ void PreprocAsmFile(std::string filename, bool isStdin, bool doEnum)
                 stack.top().OutputLine();
             break;
         }
+        case Directive::Macro:
+        {
+            // GNU as misreports the filename (but not line!) when an
+            // error occurs in a macro, so we work around this bug by
+            // emitting an explicit location inside the macro
+            // definition.
+            // ... but only on the first pass, because on the second
+            // pass we have lost track of our location.
+            if (!isStdin)
+            {
+                stack.top().OutputLine();
+                stack.top().OutputLocation();
+            }
+        }
         case Directive::Unknown:
         {
             std::string globalLabel = stack.top().GetGlobalLabel();
