@@ -406,7 +406,7 @@ B_BUFF3 = FD 34
 NAME_END = FC 00
 
 @ special 0xF7 character
-DYNAMIC  =   F7
+DYNAMIC = F7
 
 @ more text functions
 
