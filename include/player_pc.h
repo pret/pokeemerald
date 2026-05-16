@@ -17,7 +17,7 @@ extern struct PlayerPCItemPageStruct gPlayerPCItemPageInfo;
 
 extern const struct MenuAction gMailboxMailOptions[];
 
-void ReshowPlayerPC(u8 taskId);
+void ReshowPlayerPC(u8 var);
 void CB2_PlayerPCExitBagMenu(void);
 void Mailbox_ReturnToMailListAfterDeposit(void);
 void NewGameInitPCItems(void);

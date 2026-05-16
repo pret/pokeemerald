@@ -1,5 +1,3 @@
-.set LOCALID_LOTTERY_CLERK, 2
-
 LilycoveCity_DepartmentStore_1F_MapScripts::
 	.byte 0
 

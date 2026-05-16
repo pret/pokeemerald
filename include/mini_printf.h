@@ -45,8 +45,8 @@
 
 #else
 
-s32 mini_vsnprintf(char* buffer, u32 buffer_len, const char *fmt, va_list va);
-s32 mini_vpprintf(void* buf, const char *fmt, va_list va);
+s32 mini_vsnprintf(char *buffer, u32 buffer_len, const char *fmt, va_list va);
+s32 mini_vpprintf(void *buf, const char *fmt, va_list va);
 
 #endif
 #endif

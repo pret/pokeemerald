@@ -3,13 +3,17 @@ CaveHole_CheckFallDownHole:
 	.2byte 0
 
 CaveHole_FixCrackedGround:
-	copyvar VAR_ICE_STEP_COUNT, 1
+#ifdef UBFIX
+	setvar VAR_ICE_STEP_COUNT, 1
+#else
+	copyvar VAR_ICE_STEP_COUNT, 1, warn=FALSE
+#endif
 	end
 
 EventScript_FallDownHole::
 	lockall
 	delay 20
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_SetInvisible
+	applymovement LOCALID_PLAYER, Movement_SetInvisible
 	waitmovement 0
 	playse SE_FALL
 	delay 60
@@ -20,12 +24,11 @@ EventScript_FallDownHole::
 EventScript_FallDownHoleMtPyre::
 	lockall
 	delay 20
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_SetInvisible
+	applymovement LOCALID_PLAYER, Movement_SetInvisible
 	waitmovement 0
 	playse SE_FALL
 	delay 60
 	special DoFallWarp
-	waitstate
 	end
 
 Movement_SetInvisible:

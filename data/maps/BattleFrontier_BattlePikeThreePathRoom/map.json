@@ -28,6 +28,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_PIKE_HINT_GIVER",
       "graphics_id": "OBJ_EVENT_GFX_LINK_RECEPTIONIST",
       "x": 8,
       "y": 5,

@@ -1,125 +1,125 @@
-const u32 gDecorIcon_HeavyDesk[] = INCBIN_U32("graphics/decorations/heavy_desk.4bpp.lz");
-const u32 gDecorIconPalette_HeavyDesk[] = INCBIN_U32("graphics/decorations/heavy_desk.gbapal.lz");
+const u32 gDecorIcon_HeavyDesk[] = INCGFX_U32("graphics/decorations/heavy_desk.png", ".4bpp.lz");
+const u32 gDecorIconPalette_HeavyDesk[] = INCGFX_U32("graphics/decorations/heavy_desk.png", ".gbapal.lz");
 
-const u32 gDecorIcon_RaggedDesk[] = INCBIN_U32("graphics/decorations/ragged_desk.4bpp.lz");
-const u32 gDecorIconPalette_RaggedDesk[] = INCBIN_U32("graphics/decorations/ragged_desk.gbapal.lz");
+const u32 gDecorIcon_RaggedDesk[] = INCGFX_U32("graphics/decorations/ragged_desk.png", ".4bpp.lz");
+const u32 gDecorIconPalette_RaggedDesk[] = INCGFX_U32("graphics/decorations/ragged_desk.png", ".gbapal.lz");
 
-const u32 gDecorIcon_ComfortDesk[] = INCBIN_U32("graphics/decorations/comfort_desk.4bpp.lz");
-const u32 gDecorIconPalette_ComfortDesk[] = INCBIN_U32("graphics/decorations/comfort_desk.gbapal.lz");
+const u32 gDecorIcon_ComfortDesk[] = INCGFX_U32("graphics/decorations/comfort_desk.png", ".4bpp.lz");
+const u32 gDecorIconPalette_ComfortDesk[] = INCGFX_U32("graphics/decorations/comfort_desk.png", ".gbapal.lz");
 
-const u32 gDecorIcon_PrettyDesk[] = INCBIN_U32("graphics/decorations/pretty_desk.4bpp.lz");
-const u32 gDecorIconPalette_PrettyDesk[] = INCBIN_U32("graphics/decorations/pretty_desk.gbapal.lz");
+const u32 gDecorIcon_PrettyDesk[] = INCGFX_U32("graphics/decorations/pretty_desk.png", ".4bpp.lz");
+const u32 gDecorIconPalette_PrettyDesk[] = INCGFX_U32("graphics/decorations/pretty_desk.png", ".gbapal.lz");
 
-const u32 gDecorIcon_BrickDesk[] = INCBIN_U32("graphics/decorations/brick_desk.4bpp.lz");
-const u32 gDecorIconPalette_BrickDesk[] = INCBIN_U32("graphics/decorations/brick_desk.gbapal.lz");
+const u32 gDecorIcon_BrickDesk[] = INCGFX_U32("graphics/decorations/brick_desk.png", ".4bpp.lz");
+const u32 gDecorIconPalette_BrickDesk[] = INCGFX_U32("graphics/decorations/brick_desk.png", ".gbapal.lz");
 
-const u32 gDecorIcon_CampDesk[] = INCBIN_U32("graphics/decorations/camp_desk.4bpp.lz");
-const u32 gDecorIconPalette_CampDesk[] = INCBIN_U32("graphics/decorations/camp_desk.gbapal.lz");
+const u32 gDecorIcon_CampDesk[] = INCGFX_U32("graphics/decorations/camp_desk.png", ".4bpp.lz");
+const u32 gDecorIconPalette_CampDesk[] = INCGFX_U32("graphics/decorations/camp_desk.png", ".gbapal.lz");
 
-const u32 gDecorIcon_HardDesk[] = INCBIN_U32("graphics/decorations/hard_desk.4bpp.lz");
-const u32 gDecorIconPalette_HardDesk[] = INCBIN_U32("graphics/decorations/hard_desk.gbapal.lz");
+const u32 gDecorIcon_HardDesk[] = INCGFX_U32("graphics/decorations/hard_desk.png", ".4bpp.lz");
+const u32 gDecorIconPalette_HardDesk[] = INCGFX_U32("graphics/decorations/hard_desk.png", ".gbapal.lz");
 
-const u32 gDecorIcon_RedPlant[] = INCBIN_U32("graphics/decorations/red_plant.4bpp.lz");
-const u32 gDecorIconPalette_RedPlant[] = INCBIN_U32("graphics/decorations/red_plant.gbapal.lz");
+const u32 gDecorIcon_RedPlant[] = INCGFX_U32("graphics/decorations/red_plant.png", ".4bpp.lz");
+const u32 gDecorIconPalette_RedPlant[] = INCGFX_U32("graphics/decorations/red_plant.png", ".gbapal.lz");
 
-const u32 gDecorIcon_TropicalPlant[] = INCBIN_U32("graphics/decorations/tropical_plant.4bpp.lz");
-const u32 gDecorIconPalette_TropicalPlant[] = INCBIN_U32("graphics/decorations/tropical_plant.gbapal.lz");
+const u32 gDecorIcon_TropicalPlant[] = INCGFX_U32("graphics/decorations/tropical_plant.png", ".4bpp.lz");
+const u32 gDecorIconPalette_TropicalPlant[] = INCGFX_U32("graphics/decorations/tropical_plant.png", ".gbapal.lz");
 
-const u32 gDecorIcon_PrettyFlowers[] = INCBIN_U32("graphics/decorations/pretty_flowers.4bpp.lz");
-const u32 gDecorIconPalette_PrettyFlowers[] = INCBIN_U32("graphics/decorations/pretty_flowers.gbapal.lz");
+const u32 gDecorIcon_PrettyFlowers[] = INCGFX_U32("graphics/decorations/pretty_flowers.png", ".4bpp.lz");
+const u32 gDecorIconPalette_PrettyFlowers[] = INCGFX_U32("graphics/decorations/pretty_flowers.png", ".gbapal.lz");
 
-const u32 gDecorIcon_ColorfulPlant[] = INCBIN_U32("graphics/decorations/colorful_plant.4bpp.lz");
-const u32 gDecorIconPalette_ColorfulPlant[] = INCBIN_U32("graphics/decorations/colorful_plant.gbapal.lz");
+const u32 gDecorIcon_ColorfulPlant[] = INCGFX_U32("graphics/decorations/colorful_plant.png", ".4bpp.lz");
+const u32 gDecorIconPalette_ColorfulPlant[] = INCGFX_U32("graphics/decorations/colorful_plant.png", ".gbapal.lz");
 
-const u32 gDecorIcon_BigPlant[] = INCBIN_U32("graphics/decorations/big_plant.4bpp.lz");
-const u32 gDecorIconPalette_BigPlant[] = INCBIN_U32("graphics/decorations/big_plant.gbapal.lz");
+const u32 gDecorIcon_BigPlant[] = INCGFX_U32("graphics/decorations/big_plant.png", ".4bpp.lz");
+const u32 gDecorIconPalette_BigPlant[] = INCGFX_U32("graphics/decorations/big_plant.png", ".gbapal.lz");
 
-const u32 gDecorIcon_GorgeousPlant[] = INCBIN_U32("graphics/decorations/gorgeous_plant.4bpp.lz");
-const u32 gDecorIconPalette_GorgeousPlant[] = INCBIN_U32("graphics/decorations/gorgeous_plant.gbapal.lz");
+const u32 gDecorIcon_GorgeousPlant[] = INCGFX_U32("graphics/decorations/gorgeous_plant.png", ".4bpp.lz");
+const u32 gDecorIconPalette_GorgeousPlant[] = INCGFX_U32("graphics/decorations/gorgeous_plant.png", ".gbapal.lz");
 
-const u32 gDecorIcon_RedBrick[] = INCBIN_U32("graphics/decorations/red_brick.4bpp.lz");
-const u32 gDecorIconPalette_RedBrick[] = INCBIN_U32("graphics/decorations/red_brick.gbapal.lz");
+const u32 gDecorIcon_RedBrick[] = INCGFX_U32("graphics/decorations/red_brick.png", ".4bpp.lz");
+const u32 gDecorIconPalette_RedBrick[] = INCGFX_U32("graphics/decorations/red_brick.png", ".gbapal.lz");
 
-const u32 gDecorIcon_YellowBrick[] = INCBIN_U32("graphics/decorations/yellow_brick.4bpp.lz");
-const u32 gDecorIconPalette_YellowBrick[] = INCBIN_U32("graphics/decorations/yellow_brick.gbapal.lz");
+const u32 gDecorIcon_YellowBrick[] = INCGFX_U32("graphics/decorations/yellow_brick.png", ".4bpp.lz");
+const u32 gDecorIconPalette_YellowBrick[] = INCGFX_U32("graphics/decorations/yellow_brick.png", ".gbapal.lz");
 
-const u32 gDecorIcon_BlueBrick[] = INCBIN_U32("graphics/decorations/blue_brick.4bpp.lz");
-const u32 gDecorIconPalette_BlueBrick[] = INCBIN_U32("graphics/decorations/blue_brick.gbapal.lz");
+const u32 gDecorIcon_BlueBrick[] = INCGFX_U32("graphics/decorations/blue_brick.png", ".4bpp.lz");
+const u32 gDecorIconPalette_BlueBrick[] = INCGFX_U32("graphics/decorations/blue_brick.png", ".gbapal.lz");
 
-const u32 gDecorIcon_RedTent[] = INCBIN_U32("graphics/decorations/red_tent.4bpp.lz");
-const u32 gDecorIconPalette_RedTent[] = INCBIN_U32("graphics/decorations/red_tent.gbapal.lz");
+const u32 gDecorIcon_RedTent[] = INCGFX_U32("graphics/decorations/red_tent.png", ".4bpp.lz");
+const u32 gDecorIconPalette_RedTent[] = INCGFX_U32("graphics/decorations/red_tent.png", ".gbapal.lz");
 
-const u32 gDecorIcon_BlueTent[] = INCBIN_U32("graphics/decorations/blue_tent.4bpp.lz");
-const u32 gDecorIconPalette_BlueTent[] = INCBIN_U32("graphics/decorations/blue_tent.gbapal.lz");
+const u32 gDecorIcon_BlueTent[] = INCGFX_U32("graphics/decorations/blue_tent.png", ".4bpp.lz");
+const u32 gDecorIconPalette_BlueTent[] = INCGFX_U32("graphics/decorations/blue_tent.png", ".gbapal.lz");
 
-const u32 gDecorIcon_SolidBoard[] = INCBIN_U32("graphics/decorations/solid_board.4bpp.lz");
-const u32 gDecorIconPalette_SolidBoard[] = INCBIN_U32("graphics/decorations/solid_board.gbapal.lz");
+const u32 gDecorIcon_SolidBoard[] = INCGFX_U32("graphics/decorations/solid_board.png", ".4bpp.lz");
+const u32 gDecorIconPalette_SolidBoard[] = INCGFX_U32("graphics/decorations/solid_board.png", ".gbapal.lz");
 
-const u32 gDecorIcon_Slide[] = INCBIN_U32("graphics/decorations/slide.4bpp.lz");
-const u32 gDecorIconPalette_Slide[] = INCBIN_U32("graphics/decorations/slide.gbapal.lz");
+const u32 gDecorIcon_Slide[] = INCGFX_U32("graphics/decorations/slide.png", ".4bpp.lz");
+const u32 gDecorIconPalette_Slide[] = INCGFX_U32("graphics/decorations/slide.png", ".gbapal.lz");
 
-const u32 gDecorIcon_Tire[] = INCBIN_U32("graphics/decorations/tire.4bpp.lz");
-const u32 gDecorIconPalette_Tire[] = INCBIN_U32("graphics/decorations/tire.gbapal.lz");
+const u32 gDecorIcon_Tire[] = INCGFX_U32("graphics/decorations/tire.png", ".4bpp.lz");
+const u32 gDecorIconPalette_Tire[] = INCGFX_U32("graphics/decorations/tire.png", ".gbapal.lz");
 
-const u32 gDecorIcon_Stand[] = INCBIN_U32("graphics/decorations/stand.4bpp.lz");
-const u32 gDecorIconPalette_Stand[] = INCBIN_U32("graphics/decorations/stand.gbapal.lz");
+const u32 gDecorIcon_Stand[] = INCGFX_U32("graphics/decorations/stand.png", ".4bpp.lz");
+const u32 gDecorIconPalette_Stand[] = INCGFX_U32("graphics/decorations/stand.png", ".gbapal.lz");
 
-const u32 gDecorIcon_BreakableDoor[] = INCBIN_U32("graphics/decorations/breakable_door.4bpp.lz");
-const u32 gDecorIconPalette_BreakableDoor[] = INCBIN_U32("graphics/decorations/breakable_door.gbapal.lz");
+const u32 gDecorIcon_BreakableDoor[] = INCGFX_U32("graphics/decorations/breakable_door.png", ".4bpp.lz");
+const u32 gDecorIconPalette_BreakableDoor[] = INCGFX_U32("graphics/decorations/breakable_door.png", ".gbapal.lz");
 
-const u32 gDecorIcon_SandOrnament[] = INCBIN_U32("graphics/decorations/sand_ornament.4bpp.lz");
-const u32 gDecorIconPalette_SandOrnament[] = INCBIN_U32("graphics/decorations/sand_ornament.gbapal.lz");
+const u32 gDecorIcon_SandOrnament[] = INCGFX_U32("graphics/decorations/sand_ornament.png", ".4bpp.lz");
+const u32 gDecorIconPalette_SandOrnament[] = INCGFX_U32("graphics/decorations/sand_ornament.png", ".gbapal.lz");
 
-const u32 gDecorIcon_GlassOrnament[] = INCBIN_U32("graphics/decorations/glass_ornament.4bpp.lz");
-const u32 gDecorIconPalette_GlassOrnament[] = INCBIN_U32("graphics/decorations/glass_ornament.gbapal.lz");
+const u32 gDecorIcon_GlassOrnament[] = INCGFX_U32("graphics/decorations/glass_ornament.png", ".4bpp.lz");
+const u32 gDecorIconPalette_GlassOrnament[] = INCGFX_U32("graphics/decorations/glass_ornament.png", ".gbapal.lz");
 
-const u32 gDecorIcon_SurfMat[] = INCBIN_U32("graphics/decorations/surf_mat.4bpp.lz");
-const u32 gDecorIconPalette_SurfMat[] = INCBIN_U32("graphics/decorations/surf_mat.gbapal.lz");
+const u32 gDecorIcon_SurfMat[] = INCGFX_U32("graphics/decorations/surf_mat.png", ".4bpp.lz");
+const u32 gDecorIconPalette_SurfMat[] = INCGFX_U32("graphics/decorations/surf_mat.png", ".gbapal.lz");
 
-const u32 gDecorIcon_ThunderMat[] = INCBIN_U32("graphics/decorations/thunder_mat.4bpp.lz");
-const u32 gDecorIconPalette_ThunderMat[] = INCBIN_U32("graphics/decorations/thunder_mat.gbapal.lz");
+const u32 gDecorIcon_ThunderMat[] = INCGFX_U32("graphics/decorations/thunder_mat.png", ".4bpp.lz");
+const u32 gDecorIconPalette_ThunderMat[] = INCGFX_U32("graphics/decorations/thunder_mat.png", ".gbapal.lz");
 
-const u32 gDecorIcon_FireBlastMat[] = INCBIN_U32("graphics/decorations/fire_blast_mat.4bpp.lz");
-const u32 gDecorIconPalette_FireBlastMat[] = INCBIN_U32("graphics/decorations/fire_blast_mat.gbapal.lz");
+const u32 gDecorIcon_FireBlastMat[] = INCGFX_U32("graphics/decorations/fire_blast_mat.png", ".4bpp.lz");
+const u32 gDecorIconPalette_FireBlastMat[] = INCGFX_U32("graphics/decorations/fire_blast_mat.png", ".gbapal.lz");
 
-const u32 gDecorIcon_PowderSnowMat[] = INCBIN_U32("graphics/decorations/powder_snow_mat.4bpp.lz");
-const u32 gDecorIconPalette_PowderSnowMat[] = INCBIN_U32("graphics/decorations/powder_snow_mat.gbapal.lz");
+const u32 gDecorIcon_PowderSnowMat[] = INCGFX_U32("graphics/decorations/powder_snow_mat.png", ".4bpp.lz");
+const u32 gDecorIconPalette_PowderSnowMat[] = INCGFX_U32("graphics/decorations/powder_snow_mat.png", ".gbapal.lz");
 
-const u32 gDecorIcon_AttractMat[] = INCBIN_U32("graphics/decorations/attract_mat.4bpp.lz");
-const u32 gDecorIconPalette_AttractMat[] = INCBIN_U32("graphics/decorations/attract_mat.gbapal.lz");
+const u32 gDecorIcon_AttractMat[] = INCGFX_U32("graphics/decorations/attract_mat.png", ".4bpp.lz");
+const u32 gDecorIconPalette_AttractMat[] = INCGFX_U32("graphics/decorations/attract_mat.png", ".gbapal.lz");
 
-const u32 gDecorIcon_FissureMat[] = INCBIN_U32("graphics/decorations/fissure_mat.4bpp.lz");
-const u32 gDecorIconPalette_FissureMat[] = INCBIN_U32("graphics/decorations/fissure_mat.gbapal.lz");
+const u32 gDecorIcon_FissureMat[] = INCGFX_U32("graphics/decorations/fissure_mat.png", ".4bpp.lz");
+const u32 gDecorIconPalette_FissureMat[] = INCGFX_U32("graphics/decorations/fissure_mat.png", ".gbapal.lz");
 
-const u32 gDecorIcon_SpikesMat[] = INCBIN_U32("graphics/decorations/spikes_mat.4bpp.lz");
-const u32 gDecorIconPalette_SpikesMat[] = INCBIN_U32("graphics/decorations/spikes_mat.gbapal.lz");
+const u32 gDecorIcon_SpikesMat[] = INCGFX_U32("graphics/decorations/spikes_mat.png", ".4bpp.lz");
+const u32 gDecorIconPalette_SpikesMat[] = INCGFX_U32("graphics/decorations/spikes_mat.png", ".gbapal.lz");
 
-const u32 gDecorIcon_SnorlaxDoll[] = INCBIN_U32("graphics/decorations/snorlax_doll.4bpp.lz");
-const u32 gDecorIconPalette_SnorlaxDoll[] = INCBIN_U32("graphics/decorations/snorlax_doll.gbapal.lz");
+const u32 gDecorIcon_SnorlaxDoll[] = INCGFX_U32("graphics/decorations/snorlax_doll.png", ".4bpp.lz");
+const u32 gDecorIconPalette_SnorlaxDoll[] = INCGFX_U32("graphics/decorations/snorlax_doll.png", ".gbapal.lz");
 
-const u32 gDecorIcon_RhydonDoll[] = INCBIN_U32("graphics/decorations/rhydon_doll.4bpp.lz");
-const u32 gDecorIconPalette_RhydonDoll[] = INCBIN_U32("graphics/decorations/rhydon_doll.gbapal.lz");
+const u32 gDecorIcon_RhydonDoll[] = INCGFX_U32("graphics/decorations/rhydon_doll.png", ".4bpp.lz");
+const u32 gDecorIconPalette_RhydonDoll[] = INCGFX_U32("graphics/decorations/rhydon_doll.png", ".gbapal.lz");
 
-const u32 gDecorIcon_LaprasDoll[] = INCBIN_U32("graphics/decorations/lapras_doll.4bpp.lz");
-const u32 gDecorIconPalette_LaprasDoll[] = INCBIN_U32("graphics/decorations/lapras_doll.gbapal.lz");
+const u32 gDecorIcon_LaprasDoll[] = INCGFX_U32("graphics/decorations/lapras_doll.png", ".4bpp.lz");
+const u32 gDecorIconPalette_LaprasDoll[] = INCGFX_U32("graphics/decorations/lapras_doll.png", ".gbapal.lz");
 
-const u32 gDecorIcon_VenusaurDoll[] = INCBIN_U32("graphics/decorations/venusaur_doll.4bpp.lz");
-const u32 gDecorIconPalette_VenusaurDoll[] = INCBIN_U32("graphics/decorations/venusaur_doll.gbapal.lz");
+const u32 gDecorIcon_VenusaurDoll[] = INCGFX_U32("graphics/decorations/venusaur_doll.png", ".4bpp.lz");
+const u32 gDecorIconPalette_VenusaurDoll[] = INCGFX_U32("graphics/decorations/venusaur_doll.png", ".gbapal.lz");
 
-const u32 gDecorIcon_CharizardDoll[] = INCBIN_U32("graphics/decorations/charizard_doll.4bpp.lz");
-const u32 gDecorIconPalette_CharizardDoll[] = INCBIN_U32("graphics/decorations/charizard_doll.gbapal.lz");
+const u32 gDecorIcon_CharizardDoll[] = INCGFX_U32("graphics/decorations/charizard_doll.png", ".4bpp.lz");
+const u32 gDecorIconPalette_CharizardDoll[] = INCGFX_U32("graphics/decorations/charizard_doll.png", ".gbapal.lz");
 
-const u32 gDecorIcon_BlastoiseDoll[] = INCBIN_U32("graphics/decorations/blastoise_doll.4bpp.lz");
-const u32 gDecorIconPalette_BlastoiseDoll[] = INCBIN_U32("graphics/decorations/blastoise_doll.gbapal.lz");
+const u32 gDecorIcon_BlastoiseDoll[] = INCGFX_U32("graphics/decorations/blastoise_doll.png", ".4bpp.lz");
+const u32 gDecorIconPalette_BlastoiseDoll[] = INCGFX_U32("graphics/decorations/blastoise_doll.png", ".gbapal.lz");
 
-const u32 gDecorIcon_WailmerDoll[] = INCBIN_U32("graphics/decorations/wailmer_doll.4bpp.lz");
-const u32 gDecorIconPalette_WailmerDoll[] = INCBIN_U32("graphics/decorations/wailmer_doll.gbapal.lz");
+const u32 gDecorIcon_WailmerDoll[] = INCGFX_U32("graphics/decorations/wailmer_doll.png", ".4bpp.lz");
+const u32 gDecorIconPalette_WailmerDoll[] = INCGFX_U32("graphics/decorations/wailmer_doll.png", ".gbapal.lz");
 
-const u32 gDecorIcon_RegiceDoll[] = INCBIN_U32("graphics/decorations/regice_doll.4bpp.lz");
-const u32 gDecorIconPalette_RegiceDoll[] = INCBIN_U32("graphics/decorations/regice_doll.gbapal.lz");
+const u32 gDecorIcon_RegiceDoll[] = INCGFX_U32("graphics/decorations/regice_doll.png", ".4bpp.lz");
+const u32 gDecorIconPalette_RegiceDoll[] = INCGFX_U32("graphics/decorations/regice_doll.png", ".gbapal.lz");
 
-const u32 gDecorIcon_RegirockDoll[] = INCBIN_U32("graphics/decorations/regirock_doll.4bpp.lz");
-const u32 gDecorIconPalette_RegirockDoll[] = INCBIN_U32("graphics/decorations/regirock_doll.gbapal.lz");
+const u32 gDecorIcon_RegirockDoll[] = INCGFX_U32("graphics/decorations/regirock_doll.png", ".4bpp.lz");
+const u32 gDecorIconPalette_RegirockDoll[] = INCGFX_U32("graphics/decorations/regirock_doll.png", ".gbapal.lz");
 
-const u32 gDecorIcon_RegisteelDoll[] = INCBIN_U32("graphics/decorations/registeel_doll.4bpp.lz");
-const u32 gDecorIconPalette_RegisteelDoll[] = INCBIN_U32("graphics/decorations/registeel_doll.gbapal.lz");
+const u32 gDecorIcon_RegisteelDoll[] = INCGFX_U32("graphics/decorations/registeel_doll.png", ".4bpp.lz");
+const u32 gDecorIconPalette_RegisteelDoll[] = INCGFX_U32("graphics/decorations/registeel_doll.png", ".gbapal.lz");

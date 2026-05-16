@@ -17,7 +17,7 @@ extern bool8 gTrainerApproachedPlayer;
 extern u8 gApproachingTrainerId;
 
 bool8 CheckForTrainersWantingBattle(void);
-void SetBuriedTrainerMovement(struct ObjectEvent *var);
+void SetBuriedTrainerMovement(struct ObjectEvent *objEvent);
 void DoTrainerApproach(void);
 void TryPrepareSecondApproachingTrainer(void);
 u8 FldEff_ExclamationMarkIcon(void);

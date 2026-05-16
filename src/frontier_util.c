@@ -604,7 +604,7 @@ static const u16 sBattledBrainBitFlags[NUM_FRONTIER_FACILITIES][2] =
     [FRONTIER_FACILITY_PYRAMID] = {1 << 12, 1 << 13},
 };
 
-static void (* const sFrontierUtilFuncs[])(void) =
+static void (*const sFrontierUtilFuncs[])(void) =
 {
     [FRONTIER_UTIL_FUNC_GET_STATUS]            = GetChallengeStatus,
     [FRONTIER_UTIL_FUNC_GET_DATA]              = GetFrontierData,

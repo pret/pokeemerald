@@ -170,7 +170,11 @@ struct SoundChannel
 
 struct MusicPlayerInfo;
 
+#if __STDC_VERSION__ < 202311L
 typedef void (*MPlayFunc)();
+#else
+typedef void (*MPlayFunc)(...);
+#endif
 typedef void (*PlyNoteFunc)(u32, struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 typedef void (*CgbSoundFunc)(void);
 typedef void (*CgbOscOffFunc)(u8);
@@ -253,8 +257,8 @@ struct PokemonCrySong
     u8 tieCmd; // 0x29
     u8 tieKeyValue; // 0x2A
     u8 tieVelocityValue; // 0x2B
-    u8 unkCmd0C[2]; // 0x2C
-    u16 unkCmd0CParam; // 0x2E
+    u8 xwaitCmd[2]; // 0x2C
+    u16 length; // 0x2E
     u8 end[2]; // 0x30
 };
 
@@ -302,7 +306,7 @@ struct MusicPlayerTrack
     struct SoundChannel *chan;
     struct ToneData tone;
     u8 gap[10];
-    u16 unk_3A;
+    u16 timer;
     u32 unk_3C;
     u8 *cmdPtr;
     u8 *patternStack[3];
@@ -397,7 +401,7 @@ extern const u8 gNoiseTable[];
 
 extern const struct PokemonCrySong gPokemonCrySongTemplate;
 
-extern const struct ToneData voicegroup000;
+extern const struct ToneData voicegroup_dummy;
 
 extern char gNumMusicPlayers[];
 extern char gMaxLines[];
@@ -491,7 +495,7 @@ void ply_xiecv(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xiecl(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xleng(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xswee(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
-void ply_xcmd_0C(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_xwait(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xcmd_0D(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 
 #endif // GUARD_GBA_M4A_INTERNAL_H

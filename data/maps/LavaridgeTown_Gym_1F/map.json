@@ -28,6 +28,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_COLE",
       "graphics_id": "OBJ_EVENT_GFX_MAN_5",
       "x": 3,
       "y": 14,
@@ -41,6 +42,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_GERALD",
       "graphics_id": "OBJ_EVENT_GFX_MAN_3",
       "x": 2,
       "y": 15,
@@ -54,6 +56,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_AXLE",
       "graphics_id": "OBJ_EVENT_GFX_MAN_5",
       "x": 3,
       "y": 10,
@@ -67,6 +70,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_DANIELLE",
       "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
       "x": 5,
       "y": 2,

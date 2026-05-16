@@ -23,6 +23,7 @@
 #define AI_EFFECTIVENESS_x0     0
 
 // ai weather
+#define AI_WEATHER_NONE UINT32_MAX // added as part of bugfix, see Cmd_weather_get in battle_ai_script_commands.c
 #define AI_WEATHER_SUN 0
 #define AI_WEATHER_RAIN 1
 #define AI_WEATHER_SANDSTORM 2

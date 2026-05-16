@@ -339,7 +339,7 @@ Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to
 ### Arch Linux
 Run this command as root to install the necessary packages:
 ```bash
-pacman -S base-devel arm-none-eabi-binutils git libpng
+pacman -S base-devel arm-none-eabi-binutils arm-none-eabi-newlib git libpng
 ```
 Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to-store-pokeemerald-linux).
 <details>
@@ -356,6 +356,26 @@ Run the following command to start an interactive shell with the necessary packa
 nix-shell -p pkgsCross.arm-embedded.stdenv.cc git pkg-config libpng
 ```
 Then proceed to [Choosing where to store pokeemerald (Linux)](#choosing-where-to-store-pokeemerald-linux).
+
+### OpenBSD
+Install requirements:
+```bash
+pkg_add gmake bash arm-none-eabi-binutils clang git
+```
+
+Clone pokeemerald & agbcc, and Build agbcc
+```bash
+git clone https://github.com/pret/pokeemerald
+git clone https://github.com/pret/agbcc
+cd agbcc && ./build.sh
+./install.sh ../pokeemerald
+```
+
+Build the ROM:
+```bash
+cd ../pokeemerald
+gmake
+```
 
 ### Other distributions
 _(Specific instructions for other distributions would be greatly appreciated!)_

@@ -190,6 +190,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_FRONTIER_SUDOWOODO",
       "graphics_id": "OBJ_EVENT_GFX_SUDOWOODO",
       "x": 54,
       "y": 62,

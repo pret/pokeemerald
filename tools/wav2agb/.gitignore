@@ -1,0 +1,10 @@
+*.o
+*.exe
+*.s
+*.gba
+*.sdf
+
+wav2agb
+Debug
+Release
+.vs

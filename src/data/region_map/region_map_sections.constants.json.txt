@@ -1,0 +1,22 @@
+{{ doNotModifyHeader }}
+#ifndef GUARD_CONSTANTS_REGION_MAP_SECTIONS_H
+#define GUARD_CONSTANTS_REGION_MAP_SECTIONS_H
+
+enum {
+## for map_section in map_sections
+    {{ map_section.id }},
+## endfor
+    MAPSEC_NONE,
+    MAPSEC_COUNT
+};
+
+// Special location IDs that use the same value space as MAPSECs.
+#define METLOC_SPECIAL_EGG         0xFD
+#define METLOC_IN_GAME_TRADE       0xFE
+#define METLOC_FATEFUL_ENCOUNTER   0xFF
+
+#define KANTO_MAPSEC_START  MAPSEC_PALLET_TOWN
+#define KANTO_MAPSEC_END    MAPSEC_SPECIAL_AREA
+#define KANTO_MAPSEC_COUNT (KANTO_MAPSEC_END - KANTO_MAPSEC_START + 1)
+
+#endif // GUARD_CONSTANTS_REGION_MAP_SECTIONS_H

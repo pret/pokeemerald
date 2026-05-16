@@ -21,9 +21,10 @@
 #ifndef C_FILE_H
 #define C_FILE_H
 
-#include <string>
-#include <set>
 #include <memory>
+#include <set>
+#include <string>
+#include <utility>
 #include "scaninc.h"
 
 class CFile
@@ -33,6 +34,7 @@ public:
     ~CFile();
     void FindIncbins();
     const std::set<std::string>& GetIncbins() { return m_incbins; }
+    const std::set<Incgfx>& GetIncgfxs() { return m_incgfxs; }
     const std::set<std::string>& GetIncludes() { return m_includes; }
 
 private:
@@ -42,6 +44,7 @@ private:
     int m_lineNum;
     std::string m_path;
     std::set<std::string> m_incbins;
+    std::set<Incgfx> m_incgfxs;
     std::set<std::string> m_includes;
 
     bool ConsumeHorizontalWhitespace();
@@ -51,7 +54,9 @@ private:
     bool CheckIdentifier(const std::string& ident);
     void CheckInclude();
     void CheckIncbin();
+    void CheckIncgfx();
     std::string ReadPath();
+    std::string ReadString();
 };
 
 #endif // C_FILE_H

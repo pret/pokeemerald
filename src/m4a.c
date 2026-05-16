@@ -1,4 +1,4 @@
-#include <string.h>
+#include "global.h"
 #include "gba/m4a_internal.h"
 
 extern const u8 gCgb3Vol[];
@@ -41,7 +41,7 @@ u32 MidiKeyToFreq(struct WaveData *wav, u8 key, u8 fineAdjust)
     return umul3232H32(wav->freq, val1 + umul3232H32(val2 - val1, fineAdjustShifted));
 }
 
-void UnusedDummyFunc(void)
+static void UNUSED UnusedDummyFunc(void)
 {
 }
 
@@ -135,7 +135,7 @@ void m4aSongNumStartOrChange(u16 n)
     }
 }
 
-void m4aSongNumStartOrContinue(u16 n)
+static void UNUSED m4aSongNumStartOrContinue(u16 n)
 {
     const struct MusicPlayer *mplayTable = gMPlayTable;
     const struct Song *songTable = gSongTable;
@@ -161,7 +161,7 @@ void m4aSongNumStop(u16 n)
         m4aMPlayStop(mplay->info);
 }
 
-void m4aSongNumContinue(u16 n)
+static void UNUSED m4aSongNumContinue(u16 n)
 {
     const struct MusicPlayer *mplayTable = gMPlayTable;
     const struct Song *songTable = gSongTable;
@@ -283,6 +283,7 @@ void MPlayExtender(struct CgbChannel *cgbChans)
 
     soundInfo->ident++;
 
+#if __STDC_VERSION__ < 202311L
     gMPlayJumpTable[8] = ply_memacc;
     gMPlayJumpTable[17] = ply_lfos;
     gMPlayJumpTable[19] = ply_mod;
@@ -292,6 +293,17 @@ void MPlayExtender(struct CgbChannel *cgbChans)
     gMPlayJumpTable[31] = TrackStop;
     gMPlayJumpTable[32] = FadeOutBody;
     gMPlayJumpTable[33] = TrkVolPitSet;
+#else
+    gMPlayJumpTable[8] = (void (*)(...))ply_memacc;
+    gMPlayJumpTable[17] = (void (*)(...))ply_lfos;
+    gMPlayJumpTable[19] = (void (*)(...))ply_mod;
+    gMPlayJumpTable[28] = (void (*)(...))ply_xcmd;
+    gMPlayJumpTable[29] = (void (*)(...))ply_endtie;
+    gMPlayJumpTable[30] = (void (*)(...))SampleFreqSet;
+    gMPlayJumpTable[31] = (void (*)(...))TrackStop;
+    gMPlayJumpTable[32] = (void (*)(...))FadeOutBody;
+    gMPlayJumpTable[33] = (void (*)(...))TrkVolPitSet;
+#endif
 
     soundInfo->cgbChans = cgbChans;
     soundInfo->CgbSound = CgbSound;
@@ -313,20 +325,28 @@ void MPlayExtender(struct CgbChannel *cgbChans)
     soundInfo->ident = ident;
 }
 
-void MusicPlayerJumpTableCopy(void)
+static void UNUSED MusicPlayerJumpTableCopy(void)
 {
     asm("swi 0x2A");
 }
 
 void ClearChain(void *x)
 {
+#if __STDC_VERSION__ < 202311L
     void (*func)(void *) = *(&gMPlayJumpTable[34]);
+#else
+    void (*func)(...) = *(&gMPlayJumpTable[34]);
+#endif
     func(x);
 }
 
 void Clear64byte(void *x)
 {
+#if __STDC_VERSION__ < 202311L
     void (*func)(void *) = *(&gMPlayJumpTable[35]);
+#else
+    void (*func)(...) = *(&gMPlayJumpTable[35]);
+#endif
     func(x);
 }
 
@@ -1592,26 +1612,26 @@ void ply_xswee(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track
     track->cmdPtr++;
 }
 
-void ply_xcmd_0C(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
+void ply_xwait(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
 {
-    u32 unk;
+    u32 len;
 
 #ifdef UBFIX
-    unk = 0;
+    len = 0;
 #endif
 
-    READ_XCMD_BYTE(unk, 0) // UB: uninitialized variable
-    READ_XCMD_BYTE(unk, 1)
+    READ_XCMD_BYTE(len, 0) // UB: uninitialized variable
+    READ_XCMD_BYTE(len, 1)
 
-    if (track->unk_3A < (u16)unk)
+    if (track->timer < (u16)len)
     {
-        track->unk_3A++;
+        track->timer++;
         track->cmdPtr -= 2;
         track->wait = 1;
     }
     else
     {
-        track->unk_3A = 0;
+        track->timer = 0;
         track->cmdPtr += 2;
     }
 }
@@ -1699,7 +1719,7 @@ void SetPokemonCryPitch(s16 val)
 
 void SetPokemonCryLength(u16 val)
 {
-    gPokemonCrySong.unkCmd0CParam = val;
+    gPokemonCrySong.length = val;
 }
 
 void SetPokemonCryRelease(u8 val)

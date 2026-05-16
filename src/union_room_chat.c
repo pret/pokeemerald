@@ -155,7 +155,7 @@ struct UnionRoomChat
 
 struct UnionRoomChatDisplay_Subtask
 {
-    bool32 (* callback)(u8 *);
+    bool32 (*callback)(u8 *);
     bool8 active;
     u8 state;
 };
@@ -189,7 +189,7 @@ struct UnionRoomChatSprites
 struct SubtaskInfo
 {
     u16 idx;
-    bool32 (* callback)(u8 *);
+    bool32 (*callback)(u8 *);
 };
 
 struct MessageWindowInfo
@@ -526,8 +526,8 @@ static const u8 *const sUnionRoomKeyboardText[UNION_ROOM_KB_PAGE_COUNT - 1][UNIO
     }
 };
 
-static const u16 sUnusedPalette[] = INCBIN_U16("graphics/union_room_chat/unused.gbapal"); // Loaded but never apparently used
-static const u16 sChatMessagesWindow_Pal[] = INCBIN_U16("graphics/union_room_chat/chat_messages_window.gbapal");
+static const u16 sUnusedPalette[] = INCGFX_U16("graphics/union_room_chat/unused.pal", ".gbapal"); // Loaded but never apparently used
+static const u16 sChatMessagesWindow_Pal[] = INCGFX_U16("graphics/union_room_chat/chat_messages_window.pal", ".gbapal");
 
 static const struct BgTemplate sBgTemplates[] = {
     {
@@ -751,11 +751,11 @@ static const struct MenuAction sKeyboardPageTitleTexts[UNION_ROOM_KB_PAGE_COUNT 
     [UNION_ROOM_KB_PAGE_COUNT]    = {gText_Exit2, {NULL}},
 };
 
-static const u16 sUnionRoomChatInterfacePal[] = INCBIN_U16("graphics/union_room_chat/interface.gbapal");
-static const u32 sKeyboardCursorTiles[] = INCBIN_U32("graphics/union_room_chat/keyboard_cursor.4bpp.lz");
-static const u32 sTextEntryCursorTiles[] = INCBIN_U32("graphics/union_room_chat/text_entry_cursor.4bpp.lz");
-static const u32 sTextEntryArrowTiles[] = INCBIN_U32("graphics/union_room_chat/text_entry_arrow.4bpp.lz");
-static const u32 sRButtonGfxTiles[] = INCBIN_U32("graphics/union_room_chat/r_button.4bpp.lz");
+static const u16 sUnionRoomChatInterfacePal[] = INCGFX_U16("graphics/union_room_chat/interface.pal", ".gbapal");
+static const u32 sKeyboardCursorTiles[] = INCGFX_U32("graphics/union_room_chat/keyboard_cursor.png", ".4bpp.lz");
+static const u32 sTextEntryCursorTiles[] = INCGFX_U32("graphics/union_room_chat/text_entry_cursor.png", ".4bpp.lz");
+static const u32 sTextEntryArrowTiles[] = INCGFX_U32("graphics/union_room_chat/text_entry_arrow.png", ".4bpp.lz");
+static const u32 sRButtonGfxTiles[] = INCGFX_U32("graphics/union_room_chat/r_button.png", ".4bpp.lz");
 
 static const struct CompressedSpriteSheet sSpriteSheets[] = {
     {.data = sKeyboardCursorTiles,         .size = 0x1000, .tag = GFXTAG_KEYBOARD_CURSOR},
@@ -1953,7 +1953,7 @@ static u8 *GetLimitedMessageStartPtr(void)
     for (i = 0; i < numChars; i++)
     {
         if (*str == CHAR_EXTRA_SYMBOL)
-            *str++;
+            str++;
 
         str++;
     }

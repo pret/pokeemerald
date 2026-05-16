@@ -54,6 +54,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_DEWFORD_HALL_EXPERT_M",
       "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
       "x": 9,
       "y": 3,
@@ -67,6 +68,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_DEWFORD_HALL_TWIN",
       "graphics_id": "OBJ_EVENT_GFX_TWIN",
       "x": 5,
       "y": 2,
@@ -93,6 +95,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_DEWFORD_HALL_SCHOOL_KID_M",
       "graphics_id": "OBJ_EVENT_GFX_SCHOOL_KID_M",
       "x": 12,
       "y": 3,
@@ -106,6 +109,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_DEWFORD_HALL_PSYCHIC_M",
       "graphics_id": "OBJ_EVENT_GFX_PSYCHIC_M",
       "x": 15,
       "y": 3,

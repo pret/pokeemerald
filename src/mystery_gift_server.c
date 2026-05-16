@@ -13,7 +13,7 @@ enum {
     FUNC_RUN,
 };
 
-EWRAM_DATA static struct MysteryGiftServer * sServer = NULL;
+EWRAM_DATA static struct MysteryGiftServer *sServer = NULL;
 
 static void MysteryGiftServer_Init(struct MysteryGiftServer *, const void *, u32, u32);
 static void MysteryGiftServer_Free(struct MysteryGiftServer *);
@@ -34,7 +34,7 @@ void MysterGiftServer_CreateForCard(void)
     MysteryGiftServer_Init(sServer, gMysteryGiftServerScript_SendWonderCard, 0, 1);
 }
 
-u32 MysterGiftServer_Run(u16 * endVal)
+u32 MysterGiftServer_Run(u16 *endVal)
 {
     u32 result;
     if (sServer == NULL)
@@ -49,7 +49,7 @@ u32 MysterGiftServer_Run(u16 * endVal)
     return result;
 }
 
-static void MysteryGiftServer_Init(struct MysteryGiftServer * svr, const void * script, u32 sendPlayerId, u32 recvPlayerId)
+static void MysteryGiftServer_Init(struct MysteryGiftServer *svr, const void *script, u32 sendPlayerId, u32 recvPlayerId)
 {
     svr->unused = 0;
     svr->funcId = FUNC_INIT;
@@ -62,7 +62,7 @@ static void MysteryGiftServer_Init(struct MysteryGiftServer * svr, const void * 
     MysteryGiftLink_Init(&svr->link, sendPlayerId, recvPlayerId);
 }
 
-static void MysteryGiftServer_Free(struct MysteryGiftServer * svr)
+static void MysteryGiftServer_Free(struct MysteryGiftServer *svr)
 {
     Free(svr->card);
     Free(svr->news);
@@ -70,7 +70,7 @@ static void MysteryGiftServer_Free(struct MysteryGiftServer * svr)
     Free(svr->linkGameData);
 }
 
-static void MysteryGiftServer_InitSend(struct MysteryGiftServer * svr, u32 ident, const void * src, u32 size)
+static void MysteryGiftServer_InitSend(struct MysteryGiftServer *svr, u32 ident, const void *src, u32 size)
 {
     AGB_ASSERT(size <= MG_LINK_BUFFER_SIZE);
     MysteryGiftLink_InitSend(&svr->link, ident, src, size);
@@ -78,7 +78,7 @@ static void MysteryGiftServer_InitSend(struct MysteryGiftServer * svr, u32 ident
 
 // Given the command pointer parameter and the 'default' normal data.
 // If the command's pointer is not empty use that as the send data, otherwise use the default.
-static const void * MysteryGiftServer_GetSendData(const void * dynamicData, const void * defaultData)
+static const void * MysteryGiftServer_GetSendData(const void *dynamicData, const void *defaultData)
 {
     if (dynamicData != NULL)
         return dynamicData;
@@ -86,7 +86,7 @@ static const void * MysteryGiftServer_GetSendData(const void * dynamicData, cons
         return defaultData;
 }
 
-static u32 MysteryGiftServer_Compare(const void * a, const void * b)
+static u32 MysteryGiftServer_Compare(const void *a, const void *b)
 {
     if (b < a)
         return 0;
@@ -96,36 +96,36 @@ static u32 MysteryGiftServer_Compare(const void * a, const void * b)
         return 2;
 }
 
-static u32 Server_Init(struct MysteryGiftServer * svr)
+static u32 Server_Init(struct MysteryGiftServer *svr)
 {
     svr->funcId = FUNC_RUN;
     return SVR_RET_INIT;
 }
 
-static u32 Server_Done(struct MysteryGiftServer * svr)
+static u32 Server_Done(struct MysteryGiftServer *svr)
 {
     return SVR_RET_END;
 }
 
-static u32 Server_Recv(struct MysteryGiftServer * svr)
+static u32 Server_Recv(struct MysteryGiftServer *svr)
 {
     if (MysteryGiftLink_Recv(&svr->link))
         svr->funcId = FUNC_RUN;
     return SVR_RET_ACTIVE;
 }
 
-static u32 Server_Send(struct MysteryGiftServer * svr)
+static u32 Server_Send(struct MysteryGiftServer *svr)
 {
     if (MysteryGiftLink_Send(&svr->link))
         svr->funcId = FUNC_RUN;
     return SVR_RET_ACTIVE;
 }
 
-static u32 Server_Run(struct MysteryGiftServer * svr)
+static u32 Server_Run(struct MysteryGiftServer *svr)
 {
     // process command
-    const struct MysteryGiftServerCmd * cmd = &svr->script[svr->cmdidx];
-    const void * ptr;
+    const struct MysteryGiftServerCmd *cmd = &svr->script[svr->cmdidx];
+    const void *ptr;
     svr->cmdidx++;
 
     switch (cmd->instr)
@@ -280,7 +280,7 @@ static u32 (*const sFuncTable[])(struct MysteryGiftServer *) = {
     [FUNC_RUN] = Server_Run
 };
 
-static u32 MysteryGiftServer_CallFunc(struct MysteryGiftServer * svr)
+static u32 MysteryGiftServer_CallFunc(struct MysteryGiftServer *svr)
 {
     u32 response;
     AGB_ASSERT(svr->funcId < ARRAY_COUNT(sFuncTable));

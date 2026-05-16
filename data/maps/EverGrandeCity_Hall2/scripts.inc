@@ -7,6 +7,6 @@ EverGrandeCity_Hall2_OnWarp:
 	.2byte 0
 
 EverGrandeCity_Hall2_EventScript_TurnPlayerNorth::
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	turnobject LOCALID_PLAYER, DIR_NORTH
 	end
 

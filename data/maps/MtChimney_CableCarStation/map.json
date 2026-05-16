@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_MT_CHIMNEY_CABLE_CAR_ATTENDANT",
       "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 6,
       "y": 6,

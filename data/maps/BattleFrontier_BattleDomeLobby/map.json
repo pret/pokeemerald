@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_DOME_ATTENDANT_SINGLES",
       "graphics_id": "OBJ_EVENT_GFX_TEALA",
       "x": 5,
       "y": 10,
@@ -80,6 +81,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_DOME_ATTENDANT_DOUBLES",
       "graphics_id": "OBJ_EVENT_GFX_TEALA",
       "x": 17,
       "y": 10,

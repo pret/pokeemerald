@@ -52,6 +52,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_DAYCARE_MAN",
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
       "x": 47,
       "y": 4,

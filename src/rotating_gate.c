@@ -225,14 +225,14 @@ static const struct RotatingGatePuzzle sRotatingGate_TrickHousePuzzleConfig[] =
 // something else, using vars that persist when exiting the map could softlock the puzzle.
 STATIC_ASSERT(MAX_GATES <= (2 * NUM_TEMP_VARS), TooManyRotatingGates)
 
-static const u8 sRotatingGateTiles_1[] = INCBIN_U8("graphics/rotating_gates/l1.4bpp");
-static const u8 sRotatingGateTiles_2[] = INCBIN_U8("graphics/rotating_gates/l2.4bpp");
-static const u8 sRotatingGateTiles_3[] = INCBIN_U8("graphics/rotating_gates/l3.4bpp");
-static const u8 sRotatingGateTiles_4[] = INCBIN_U8("graphics/rotating_gates/l4.4bpp");
-static const u8 sRotatingGateTiles_5[] = INCBIN_U8("graphics/rotating_gates/t1.4bpp");
-static const u8 sRotatingGateTiles_6[] = INCBIN_U8("graphics/rotating_gates/t2.4bpp");
-static const u8 sRotatingGateTiles_7[] = INCBIN_U8("graphics/rotating_gates/t3.4bpp");
-static const u8 sRotatingGateTiles_8[] = INCBIN_U8("graphics/rotating_gates/t4.4bpp");
+static const u8 sRotatingGateTiles_1[] = INCGFX_U8("graphics/rotating_gates/l1.png", ".4bpp");
+static const u8 sRotatingGateTiles_2[] = INCGFX_U8("graphics/rotating_gates/l2.png", ".4bpp");
+static const u8 sRotatingGateTiles_3[] = INCGFX_U8("graphics/rotating_gates/l3.png", ".4bpp");
+static const u8 sRotatingGateTiles_4[] = INCGFX_U8("graphics/rotating_gates/l4.png", ".4bpp");
+static const u8 sRotatingGateTiles_5[] = INCGFX_U8("graphics/rotating_gates/t1.png", ".4bpp");
+static const u8 sRotatingGateTiles_6[] = INCGFX_U8("graphics/rotating_gates/t2.png", ".4bpp");
+static const u8 sRotatingGateTiles_7[] = INCGFX_U8("graphics/rotating_gates/t3.png", ".4bpp");
+static const u8 sRotatingGateTiles_8[] = INCGFX_U8("graphics/rotating_gates/t4.png", ".4bpp");
 
 static const struct OamData sOamData_RotatingGateLarge =
 {
@@ -624,14 +624,14 @@ static EWRAM_DATA u8 sRotatingGate_PuzzleCount = 0;
 
 static s32 GetCurrentMapRotatingGatePuzzleType(void)
 {
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(FORTREE_CITY_GYM) &&
-        gSaveBlock1Ptr->location.mapNum == MAP_NUM(FORTREE_CITY_GYM))
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_FORTREE_CITY_GYM) &&
+        gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_FORTREE_CITY_GYM))
     {
         return PUZZLE_FORTREE_CITY_GYM;
     }
 
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE110_TRICK_HOUSE_PUZZLE6) &&
-        gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE110_TRICK_HOUSE_PUZZLE6))
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE110_TRICK_HOUSE_PUZZLE6) &&
+        gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE110_TRICK_HOUSE_PUZZLE6))
     {
         return PUZZLE_ROUTE110_TRICK_HOUSE_PUZZLE6;
     }

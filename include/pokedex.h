@@ -33,11 +33,11 @@ struct PokedexEntry
 
 void ResetPokedex(void);
 u16 GetPokedexHeightWeight(u16 dexNum, u8 data);
-u16 GetNationalPokedexCount(u8);
-u16 GetHoennPokedexCount(u8);
+u16 GetNationalPokedexCount(u8 caseID);
+u16 GetHoennPokedexCount(u8 caseID);
 u8 DisplayCaughtMonDexPage(u16 dexNum, u32 otId, u32 personality);
-s8 GetSetPokedexFlag(u16 nationalNum, u8 caseId);
-u16 CreateMonSpriteFromNationalDexNumber(u16, s16, s16, u16);
+s8 GetSetPokedexFlag(u16 nationalDexNo, u8 caseID);
+u16 CreateMonSpriteFromNationalDexNumber(u16 nationalNum, s16 x, s16 y, u16 paletteSlot);
 bool16 HasAllHoennMons(void);
 void ResetPokedexScrollPositions(void);
 bool16 HasAllMons(void);

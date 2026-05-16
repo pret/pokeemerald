@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_CONTEST_LOBBY_RECEPTIONIST",
       "graphics_id": "OBJ_EVENT_GFX_TEALA",
       "x": 14,
       "y": 2,
@@ -28,6 +29,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_CONTEST_LOBBY_LINK_RECEPTIONIST",
       "graphics_id": "OBJ_EVENT_GFX_TEALA",
       "x": 15,
       "y": 2,
@@ -41,6 +43,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_CONTEST_LOBBY_BLENDER_2_LEADER",
       "graphics_id": "OBJ_EVENT_GFX_MAN_4",
       "x": 26,
       "y": 9,
@@ -54,6 +57,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_CONTEST_LOBBY_ARTIST",
       "graphics_id": "OBJ_EVENT_GFX_ARTIST",
       "x": 9,
       "y": 1,
@@ -119,6 +123,7 @@
       "flag": "FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER"
     },
     {
+      "local_id": "LOCALID_CONTEST_LOBBY_BLENDER_3_PARTICIPANT_1",
       "graphics_id": "OBJ_EVENT_GFX_BOY_1",
       "x": 23,
       "y": 8,
@@ -132,6 +137,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_CONTEST_LOBBY_BLENDER_2_PARTICIPANT",
       "graphics_id": "OBJ_EVENT_GFX_TWIN",
       "x": 28,
       "y": 9,
@@ -145,6 +151,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_CONTEST_LOBBY_LINK_ARTIST",
       "graphics_id": "OBJ_EVENT_GFX_ARTIST",
       "x": 21,
       "y": 1,
@@ -197,6 +204,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_CONTEST_LOBBY_BLENDER_3_LEADER",
       "graphics_id": "OBJ_EVENT_GFX_POKEFAN_F",
       "x": 22,
       "y": 9,
@@ -210,6 +218,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_BLEND_MASTER",
       "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
       "x": 26,
       "y": 5,
@@ -223,6 +232,7 @@
       "flag": "FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_REPLACEMENT"
     },
     {
+      "local_id": "LOCALID_CONTEST_LOBBY_BLENDER_3_PARTICIPANT_2",
       "graphics_id": "OBJ_EVENT_GFX_GIRL_1",
       "x": 24,
       "y": 9,

@@ -171,6 +171,7 @@
       "flag": "FLAG_HIDE_SLATEPORT_MUSEUM_POPULATION"
     },
     {
+      "local_id": "LOCALID_OCEANIC_MUSEUM_FAMILIAR_GRUNT",
       "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
       "x": 9,
       "y": 4,

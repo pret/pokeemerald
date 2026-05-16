@@ -18,9 +18,9 @@
 
 // this file's functions
 static void CB2_ReshowBattleScreenAfterMenu(void);
-static bool8 LoadBattlerSpriteGfx(u8 battlerId);
-static void CreateBattlerSprite(u8 battlerId);
-static void CreateHealthboxSprite(u8 battlerId);
+static bool8 LoadBattlerSpriteGfx(u8 battler);
+static void CreateBattlerSprite(u8 battler);
+static void CreateHealthboxSprite(u8 battler);
 static void ClearBattleBgCntBaseBlocks(void);
 
 void ReshowBattleScreenDummy(void)

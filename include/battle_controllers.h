@@ -64,11 +64,65 @@ enum {
     REQUEST_TOUGH_RIBBON_BATTLE,
 };
 
+// Accessors for gBattleControllerExecFlags.
+//
+// These are provided for documentation purposes, to make the battle
+// controller internals and the link communication internals more
+// legible. Several of these have functions that you should call
+// (e.g. MarkBattlerForControllerExec) instead of using these macros
+// directly.
+
+#define MARK_BATTLE_CONTROLLER_ACTIVE_ON_LOCAL(battler) \
+   gBattleControllerExecFlags |= gBitTable[battler]
+
+#define MARK_BATTLE_CONTROLLER_IDLE_ON_LOCAL(battler) \
+   gBattleControllerExecFlags &= ~gBitTable(battler)
+
+#define IS_BATTLE_CONTROLLER_ACTIVE_ON_LOCAL(battler) \
+   (gBattleControllerExecFlags & gBitTable[battler])
+
+#define MARK_BATTLE_CONTROLLER_MESSAGE_OUTBOUND_OVER_LINK(battler) \
+   gBattleControllerExecFlags |= gBitTable[battler] << (32 - MAX_BATTLERS_COUNT)
+
+#define MARK_BATTLE_CONTROLLER_MESSAGE_SYNCHRONIZED_OVER_LINK(battler) \
+   gBattleControllerExecFlags &= ~((1 << 28) << (battler))
+
+#define MARK_BATTLE_CONTROLLER_ACTIVE_FOR_PLAYER(battler, playerId) \
+   gBattleControllerExecFlags |= gBitTable[battler] << ((playerId) << 2)
+
+#define MARK_BATTLE_CONTROLLER_IDLE_FOR_PLAYER(battler, playerId) \
+   gBattleControllerExecFlags &= ~(gBitTable[battler] << ((playerId) * 4))
+
+#define IS_BATTLE_CONTROLLER_ACTIVE_FOR_PLAYER(battler, playerId) \
+   (gBattleControllerExecFlags & (gBitTable[battler] << ((playerId) * 4)))
+
+// This actually checks if a specific controller is active on any player or if
+// *any* controller is pending sync over link communications, but the macro name
+// can only be so specific before it just gets ridiculous.
+#define IS_BATTLE_CONTROLLER_ACTIVE_OR_PENDING_SYNC_ANYWHERE(battler) \
+   (gBattleControllerExecFlags & ( \
+      (gBitTable[battler])       \
+    | (0xF << 28)                  \
+    | (gBitTable[battler] << 4)  \
+    | (gBitTable[battler] << 8)  \
+    | (gBitTable[battler] << 12) \
+   ))
+
 // Special arguments for Battle Controller functions.
 
-enum { // Values given to the emit functions to choose gBattleBufferA or gBattleBufferB
-    BUFFER_A,
-    BUFFER_B
+enum {
+   // For commands sent from the core battle engine to a controller.
+   B_COMM_TO_CONTROLLER, // gBattleBufferA
+
+   // For replies sent from a controller to the core battle engine.
+   B_COMM_TO_ENGINE, // gBattleBufferB
+
+   // During local play, a controller must directly mark itself as
+   // inactive when it's done processing, whether or not it sends
+   // a reply. During multiplayer, it must NOT directly mark itself
+   // as inactive, but instead send one of these, with the player's
+   // multiplayer ID as data.
+   B_COMM_CONTROLLER_IS_DONE
 };
 
 enum {
@@ -232,9 +286,9 @@ void BtlController_EmitCantSwitch(u8 bufferId);
 void BtlController_EmitPlaySE(u8 bufferId, u16 songId);
 void BtlController_EmitPlayFanfareOrBGM(u8 bufferId, u16 songId, bool8 playBGM);
 void BtlController_EmitFaintingCry(u8 bufferId);
-void BtlController_EmitIntroSlide(u8 bufferId, u8 terrainId);
+void BtlController_EmitIntroSlide(u8 bufferId, u8 environmentId);
 void BtlController_EmitIntroTrainerBallThrow(u8 bufferId);
-void BtlController_EmitDrawPartyStatusSummary(u8 bufferId, struct HpAndStatus* hpAndStatus, u8 flags);
+void BtlController_EmitDrawPartyStatusSummary(u8 bufferId, struct HpAndStatus *hpAndStatus, u8 flags);
 void BtlController_EmitHidePartyStatusSummary(u8 bufferId);
 void BtlController_EmitEndBounceEffect(u8 bufferId);
 void BtlController_EmitSpriteInvisibility(u8 bufferId, bool8 isInvisible);
@@ -252,8 +306,8 @@ void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite);
 void CB2_SetUpReshowBattleScreenAfterMenu(void);
 void CB2_SetUpReshowBattleScreenAfterMenu2(void);
 void Task_PlayerController_RestoreBgmAfterCry(u8 taskId);
-void ActionSelectionCreateCursorAt(u8 cursorPos, u8 unused);
-void ActionSelectionDestroyCursorAt(u8 cursorPos);
+void ActionSelectionCreateCursorAt(u8 cursorPosition, u8 baseTileNum);
+void ActionSelectionDestroyCursorAt(u8 cursorPosition);
 void InitMoveSelectionsVarsAndStrings(void);
 
 // recorded player controller

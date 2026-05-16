@@ -33,7 +33,7 @@
 #define ABILITYEFFECT_WATER_SPORT                254
 #define ABILITYEFFECT_SWITCH_IN_WEATHER          255
 
-#define ABILITY_ON_OPPOSING_FIELD(battlerId, abilityId) (AbilityBattleEffects(ABILITYEFFECT_CHECK_OTHER_SIDE, battlerId, abilityId, 0, 0))
+#define ABILITY_ON_OPPOSING_FIELD(battler, abilityId) (AbilityBattleEffects(ABILITYEFFECT_CHECK_OTHER_SIDE, battler, abilityId, 0, 0))
 #define ABILITY_ON_FIELD(abilityId) (AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, abilityId, 0, 0))
 #define ABILITY_ON_FIELD2(abilityId) (AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, abilityId, 0, 0))
 
@@ -46,6 +46,10 @@
 
 #define WEATHER_HAS_EFFECT ((!ABILITY_ON_FIELD(ABILITY_CLOUD_NINE) && !ABILITY_ON_FIELD(ABILITY_AIR_LOCK)))
 #define WEATHER_HAS_EFFECT2 ((!ABILITY_ON_FIELD2(ABILITY_CLOUD_NINE) && !ABILITY_ON_FIELD2(ABILITY_AIR_LOCK)))
+
+#define DISOBEDIENCE_OBEDIENT 0
+#define DISOBEDIENCE_IGNORED  1 // command is ignored
+#define DISOBEDIENCE_OTHER    2 // random move or self-hit
 
 void HandleAction_UseMove(void);
 void HandleAction_Switch(void);
@@ -64,34 +68,34 @@ u8 GetBattlerForBattleScript(u8 caseId);
 void PressurePPLose(u8 target, u8 attacker, u16 move);
 void PressurePPLoseOnUsingPerishSong(u8 attacker);
 void PressurePPLoseOnUsingImprison(u8 attacker);
-void MarkBattlerForControllerExec(u8 battlerId);
-void MarkBattlerReceivedLinkData(u8 battlerId);
-void CancelMultiTurnMoves(u8 battlerId);
-bool8 WasUnableToUseMove(u8 battlerId);
-void PrepareStringBattle(u16 stringId, u8 battlerId);
+void MarkBattlerForControllerExec(u8 battler);
+void MarkBattlerReceivedLinkData(u8 battler);
+void CancelMultiTurnMoves(u8 battler);
+bool8 WasUnableToUseMove(u8 battler);
+void PrepareStringBattle(u16 stringId, u8 battler);
 void ResetSentPokesToOpponentValue(void);
-void OpponentSwitchInResetSentPokesToOpponentValue(u8 battlerId);
-void UpdateSentPokesToOpponentValue(u8 battlerId);
+void OpponentSwitchInResetSentPokesToOpponentValue(u8 battler);
+void UpdateSentPokesToOpponentValue(u8 battler);
 void BattleScriptPush(const u8 *bsPtr);
 void BattleScriptPushCursor(void);
 void BattleScriptPop(void);
 u8 TrySetCantSelectMoveBattleScript(void);
-u8 CheckMoveLimitations(u8 battlerId, u8 unusableMoves, u8 check);
+u8 CheckMoveLimitations(u8 battler, u8 unusableMoves, u8 check);
 bool8 AreAllMovesUnusable(void);
-u8 GetImprisonedMovesCount(u8 battlerId, u16 move);
+u8 GetImprisonedMovesCount(u8 battler, u16 move);
 u8 DoFieldEndTurnEffects(void);
 u8 DoBattlerEndTurnEffects(void);
 bool8 HandleWishPerishSongOnTurnEnd(void);
 bool8 HandleFaintedMonActions(void);
 void TryClearRageStatuses(void);
-u8 AtkCanceller_UnableToUseMove(void);
-bool8 HasNoMonsToSwitch(u8 battlerId, u8 r1, u8 r2);
-u8 CastformDataTypeChange(u8 battlerId);
-u8 AbilityBattleEffects(u8 caseID, u8 battlerId, u8 ability, u8 special, u16 moveArg);
+u8 AtkCanceler_UnableToUseMove(void);
+bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2);
+u8 CastformDataTypeChange(u8 battler);
+u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveArg);
 void BattleScriptExecute(const u8 *BS_ptr);
 void BattleScriptPushCursorAndCallback(const u8 *BS_ptr);
-u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn);
-void ClearFuryCutterDestinyBondGrudge(u8 battlerId);
+u8 ItemBattleEffects(u8 caseID, u8 battler, bool8 moveTurn);
+void ClearFuryCutterDestinyBondGrudge(u8 battler);
 void HandleAction_RunBattleScript(void);
 u8 GetMoveTarget(u16 move, u8 setTarget);
 u8 IsMonDisobedient(void);

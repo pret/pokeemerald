@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_FACTORY_BATTLE_SCIENTIST_1",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
       "x": 0,
       "y": 6,
@@ -28,6 +29,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_FACTORY_BATTLE_OPPONENT",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 7,
       "y": 4,
@@ -41,6 +43,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_FACTORY_BATTLE_SCIENTIST_2",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
       "x": 0,
       "y": 4,
@@ -54,6 +57,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_FACTORY_BATTLE_SCIENTIST_3",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
       "x": 0,
       "y": 8,
@@ -67,6 +71,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_FACTORY_BATTLE_SCIENTIST_4",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
       "x": 12,
       "y": 4,
@@ -80,6 +85,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_FACTORY_BATTLE_SCIENTIST_5",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
       "x": 12,
       "y": 6,
@@ -93,6 +99,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_FACTORY_BATTLE_SCIENTIST_6",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
       "x": 12,
       "y": 8,
@@ -106,6 +113,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_FACTORY_BATTLE_PLAYER",
       "graphics_id": "OBJ_EVENT_GFX_VAR_F",
       "x": 5,
       "y": 11,

@@ -58,23 +58,23 @@ u16 BagGetItemIdByPocketPosition(u8 pocketId, u16 pocketPos);
 u16 BagGetQuantityByPocketPosition(u8 pocketId, u16 pocketPos);
 void CompactItemsInBagPocket(struct BagPocket *bagPocket);
 void SortBerriesOrTMHMs(struct BagPocket *bagPocket);
-void MoveItemSlotInList(struct ItemSlot* itemSlots_, u32 from, u32 to_);
+void MoveItemSlotInList(struct ItemSlot *itemSlots_, u32 from, u32 to_);
 void ClearBag(void);
 u16 CountTotalItemQuantityInBag(u16 itemId);
 bool8 AddPyramidBagItem(u16 itemId, u16 count);
 bool8 RemovePyramidBagItem(u16 itemId, u16 count);
-const u8 *ItemId_GetName(u16 itemId);
-u16 ItemId_GetPrice(u16 itemId);
-u8 ItemId_GetHoldEffect(u16 itemId);
-u8 ItemId_GetHoldEffectParam(u16 itemId);
-const u8 *ItemId_GetDescription(u16 itemId);
-u8 ItemId_GetImportance(u16 itemId);
-u8 ItemId_GetPocket(u16 itemId);
-u8 ItemId_GetType(u16 itemId);
-ItemUseFunc ItemId_GetFieldFunc(u16 itemId);
-u8 ItemId_GetBattleUsage(u16 itemId);
-ItemUseFunc ItemId_GetBattleFunc(u16 itemId);
-u8 ItemId_GetSecondaryId(u16 itemId);
+const u8 *GetItemName(u16 itemId);
+u16 GetItemPrice(u16 itemId);
+u8 GetItemHoldEffect(u16 itemId);
+u8 GetItemHoldEffectParam(u16 itemId);
+const u8 *GetItemDescription(u16 itemId);
+u8 GetItemImportance(u16 itemId);
+u8 GetItemPocket(u16 itemId);
+u8 GetItemType(u16 itemId);
+ItemUseFunc GetItemFieldFunc(u16 itemId);
+u8 GetItemBattleUsage(u16 itemId);
+ItemUseFunc GetItemBattleFunc(u16 itemId);
+u8 GetItemSecondaryId(u16 itemId);
 
 /* Expands to:
  * enum

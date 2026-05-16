@@ -72,6 +72,7 @@ SourceFile::SourceFile(std::string path)
     {
         AsmFile file(path);
         std::set<std::string> incbins;
+        std::set<Incgfx> incgfxs;
         std::set<std::string> includes;
 
         IncDirectiveType incDirectiveType;
@@ -85,7 +86,7 @@ SourceFile::SourceFile(std::string path)
                 incbins.insert(outputPath);
         }
 
-        new (&m_source_file.asm_wrapper) SourceFile::InnerUnion::AsmWrapper{incbins, includes};
+        new (&m_source_file.asm_wrapper) SourceFile::InnerUnion::AsmWrapper{incbins, incgfxs, includes};
     }
 }
 
@@ -103,6 +104,7 @@ SourceFile::~SourceFile()
     else
     {
         m_source_file.asm_wrapper.asm_incbins.~set();
+        m_source_file.asm_wrapper.asm_incgfxs.~set();
         m_source_file.asm_wrapper.asm_includes.~set();
     }
 }
@@ -113,6 +115,14 @@ const std::set<std::string>& SourceFile::GetIncbins()
         return m_source_file.c_file.GetIncbins();
     else
         return m_source_file.asm_wrapper.asm_incbins;
+}
+
+const std::set<Incgfx>& SourceFile::GetIncgfxs()
+{
+    if (m_file_type == SourceFileType::Cpp || m_file_type == SourceFileType::Header)
+        return m_source_file.c_file.GetIncgfxs();
+    else
+        return m_source_file.asm_wrapper.asm_incgfxs;
 }
 
 const std::set<std::string>& SourceFile::GetIncludes()

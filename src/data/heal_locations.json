@@ -1,0 +1,136 @@
+{
+  "heal_locations": [
+    {
+      "id": "HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F",
+      "map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F",
+      "x": 4,
+      "y": 2
+    },
+    {
+      "id": "HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F",
+      "map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F",
+      "x": 4,
+      "y": 2
+    },
+    {
+      "id": "HEAL_LOCATION_PETALBURG_CITY",
+      "map": "MAP_PETALBURG_CITY",
+      "x": 20,
+      "y": 17
+    },
+    {
+      "id": "HEAL_LOCATION_SLATEPORT_CITY",
+      "map": "MAP_SLATEPORT_CITY",
+      "x": 19,
+      "y": 20
+    },
+    {
+      "id": "HEAL_LOCATION_MAUVILLE_CITY",
+      "map": "MAP_MAUVILLE_CITY",
+      "x": 22,
+      "y": 6
+    },
+    {
+      "id": "HEAL_LOCATION_RUSTBORO_CITY",
+      "map": "MAP_RUSTBORO_CITY",
+      "x": 16,
+      "y": 39
+    },
+    {
+      "id": "HEAL_LOCATION_FORTREE_CITY",
+      "map": "MAP_FORTREE_CITY",
+      "x": 5,
+      "y": 7
+    },
+    {
+      "id": "HEAL_LOCATION_LILYCOVE_CITY",
+      "map": "MAP_LILYCOVE_CITY",
+      "x": 24,
+      "y": 15
+    },
+    {
+      "id": "HEAL_LOCATION_MOSSDEEP_CITY",
+      "map": "MAP_MOSSDEEP_CITY",
+      "x": 28,
+      "y": 17
+    },
+    {
+      "id": "HEAL_LOCATION_SOOTOPOLIS_CITY",
+      "map": "MAP_SOOTOPOLIS_CITY",
+      "x": 43,
+      "y": 32
+    },
+    {
+      "id": "HEAL_LOCATION_EVER_GRANDE_CITY",
+      "map": "MAP_EVER_GRANDE_CITY",
+      "x": 27,
+      "y": 49
+    },
+    {
+      "id": "HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE",
+      "map": "MAP_LITTLEROOT_TOWN",
+      "x": 5,
+      "y": 9
+    },
+    {
+      "id": "HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE",
+      "map": "MAP_LITTLEROOT_TOWN",
+      "x": 14,
+      "y": 9
+    },
+    {
+      "id": "HEAL_LOCATION_OLDALE_TOWN",
+      "map": "MAP_OLDALE_TOWN",
+      "x": 6,
+      "y": 17
+    },
+    {
+      "id": "HEAL_LOCATION_DEWFORD_TOWN",
+      "map": "MAP_DEWFORD_TOWN",
+      "x": 2,
+      "y": 11
+    },
+    {
+      "id": "HEAL_LOCATION_LAVARIDGE_TOWN",
+      "map": "MAP_LAVARIDGE_TOWN",
+      "x": 9,
+      "y": 7
+    },
+    {
+      "id": "HEAL_LOCATION_FALLARBOR_TOWN",
+      "map": "MAP_FALLARBOR_TOWN",
+      "x": 14,
+      "y": 8
+    },
+    {
+      "id": "HEAL_LOCATION_VERDANTURF_TOWN",
+      "map": "MAP_VERDANTURF_TOWN",
+      "x": 16,
+      "y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_PACIFIDLOG_TOWN",
+      "map": "MAP_PACIFIDLOG_TOWN",
+      "x": 8,
+      "y": 16
+    },
+    {
+      "id": "HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE",
+      "map": "MAP_EVER_GRANDE_CITY",
+      "x": 18,
+      "y": 6
+    },
+    {
+      "id": "HEAL_LOCATION_SOUTHERN_ISLAND_EXTERIOR",
+      "map": "MAP_SOUTHERN_ISLAND_EXTERIOR",
+      "x": 15,
+      "y": 20
+    },
+    {
+      "id": "HEAL_LOCATION_BATTLE_FRONTIER_OUTSIDE_EAST",
+      "map": "MAP_BATTLE_FRONTIER_OUTSIDE_EAST",
+      "x": 3,
+      "y": 52
+    }
+  ]
+}

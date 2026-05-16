@@ -61,17 +61,17 @@ static void SpriteCB_SandPillar_BreakTop(struct Sprite *);
 static void SpriteCB_SandPillar_BreakBase(struct Sprite *);
 static void SpriteCB_SandPillar_End(struct Sprite *);
 
-static const u8 sSecretPowerCave_Gfx[] = INCBIN_U8("graphics/field_effects/pics/secret_power_cave.4bpp");
+static const u8 sSecretPowerCave_Gfx[] = INCGFX_U8("graphics/field_effects/pics/secret_power_cave.png", ".4bpp", "-mwidth 2 -mheight 2");
 static const u8 sFiller[32] = {0};
-static const u16 sSecretPowerCave_Pal[] = INCBIN_U16("graphics/field_effects/palettes/secret_power_cave.gbapal");
-static const u8 sSecretPowerShrub_Gfx[] = INCBIN_U8("graphics/field_effects/pics/secret_power_shrub.4bpp");
-static const u8 sSecretPowerTree_Gfx[] = INCBIN_U8("graphics/field_effects/pics/secret_power_tree.4bpp");
-static const u16 sSecretPowerPlant_Pal[] = INCBIN_U16("graphics/field_effects/palettes/secret_power_plant.gbapal");
+static const u16 sSecretPowerCave_Pal[] = INCGFX_U16("graphics/field_effects/palettes/secret_power_cave.pal", ".gbapal");
+static const u8 sSecretPowerShrub_Gfx[] = INCGFX_U8("graphics/field_effects/pics/secret_power_shrub.png", ".4bpp", "-mwidth 2 -mheight 2");
+static const u8 sSecretPowerTree_Gfx[] = INCGFX_U8("graphics/field_effects/pics/secret_power_tree.png", ".4bpp", "-mwidth 2 -mheight 2");
+static const u16 sSecretPowerPlant_Pal[] = INCGFX_U16("graphics/field_effects/palettes/secret_power_plant.pal", ".gbapal");
 
 // TODO: These should also be combined into a single image, not matching for some reason
-static const u8 sSandPillar0_Gfx[] = INCBIN_U8("graphics/field_effects/pics/sand_pillar/0.4bpp");
-static const u8 sSandPillar1_Gfx[] = INCBIN_U8("graphics/field_effects/pics/sand_pillar/1.4bpp");
-static const u8 sSandPillar2_Gfx[] = INCBIN_U8("graphics/field_effects/pics/sand_pillar/2.4bpp");
+static const u8 sSandPillar0_Gfx[] = INCGFX_U8("graphics/field_effects/pics/sand_pillar/0.png", ".4bpp");
+static const u8 sSandPillar1_Gfx[] = INCGFX_U8("graphics/field_effects/pics/sand_pillar/1.png", ".4bpp");
+static const u8 sSandPillar2_Gfx[] = INCGFX_U8("graphics/field_effects/pics/sand_pillar/2.png", ".4bpp");
 
 static const struct OamData sOam_SecretPower =
 {
@@ -272,8 +272,8 @@ static const struct SpriteTemplate sSpriteTemplate_SandPillar =
 
 const struct SpritePalette gSpritePalette_SandPillar = {gTilesetPalettes_SecretBase[5], FLDEFF_PAL_TAG_SAND_PILLAR};
 
-static const u8 sRecordMixLights_Gfx[] = INCBIN_U8("graphics/field_effects/pics/record_mix_lights.4bpp");
-static const u16 sRecordMixLights_Pal[] = INCBIN_U16("graphics/field_effects/palettes/record_mix_lights.gbapal");
+static const u8 sRecordMixLights_Gfx[] = INCGFX_U8("graphics/field_effects/pics/record_mix_lights.png", ".4bpp", "-mwidth 4 -mheight 1");
+static const u16 sRecordMixLights_Pal[] = INCGFX_U16("graphics/field_effects/palettes/record_mix_lights.pal", ".gbapal");
 
 static const struct SpriteFrameImage sPicTable_RecordMixLights[] =
 {
@@ -339,9 +339,9 @@ bool8 IsComputerScreenCloseEffectActive(void)
 #define tBlendCnt      data[7]
 #define tBlendY        data[8]
 
-static void CreateComputerScreenEffectTask(void (*taskfunc) (u8), u16 increment, u16 unused, u8 priority)
+static void CreateComputerScreenEffectTask(TaskFunc func, u16 increment, u16 unused, u8 priority)
 {
-    u8 taskId = CreateTask(taskfunc, priority);
+    u8 taskId = CreateTask(func, priority);
 
     gTasks[taskId].tState = 0;
     gTasks[taskId].tHorzIncrement = increment == 0 ? 16 : increment;
@@ -840,9 +840,9 @@ void DoSecretBasePCTurnOffEffect(void)
     PlaySE(SE_PC_OFF);
 
     if (!VarGet(VAR_CURRENT_SECRET_BASE))
-        MapGridSetMetatileIdAt(x, y, METATILE_SecretBase_PC | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(x, y, METATILE_SecretBase_PC | MAPGRID_IMPASSABLE);
     else
-        MapGridSetMetatileIdAt(x, y, METATILE_SecretBase_RegisterPC | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(x, y, METATILE_SecretBase_RegisterPC | MAPGRID_IMPASSABLE);
 
     CurrentMapDrawMetatileAt(x, y);
 }
@@ -1083,7 +1083,7 @@ static void SpriteCB_SandPillar_BreakTop(struct Sprite *sprite)
     PlaySE(SE_M_ROCK_THROW);
 
     if (MapGridGetMetatileIdAt(gFieldEffectArguments[5], gFieldEffectArguments[6] - 1) == METATILE_SecretBase_SandOrnament_TopWall)
-        MapGridSetMetatileIdAt(gFieldEffectArguments[5], gFieldEffectArguments[6] - 1, METATILE_SecretBase_Wall_TopMid | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(gFieldEffectArguments[5], gFieldEffectArguments[6] - 1, METATILE_SecretBase_Wall_TopMid | MAPGRID_IMPASSABLE);
     else
         MapGridSetMetatileIdAt(gFieldEffectArguments[5], gFieldEffectArguments[6] - 1, METATILE_SecretBase_SandOrnament_BrokenTop);
 
@@ -1103,7 +1103,7 @@ static void SpriteCB_SandPillar_BreakBase(struct Sprite *sprite)
     }
     else
     {
-        MapGridSetMetatileIdAt(gFieldEffectArguments[5], gFieldEffectArguments[6], METATILE_SecretBase_SandOrnament_BrokenBase | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(gFieldEffectArguments[5], gFieldEffectArguments[6], METATILE_SecretBase_SandOrnament_BrokenBase | MAPGRID_IMPASSABLE);
         CurrentMapDrawMetatileAt(gFieldEffectArguments[5], gFieldEffectArguments[6]);
         sprite->data[0] = 0;
         sprite->callback = SpriteCB_SandPillar_End;

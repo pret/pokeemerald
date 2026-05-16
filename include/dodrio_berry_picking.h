@@ -1,7 +1,9 @@
 #ifndef GUARD_DODRIO_BERRY_PICKING_H
 #define GUARD_DODRIO_BERRY_PICKING_H
 
-void StartDodrioBerryPicking(u16 partyId, void (*exitCallback)(void));
+#include "main.h"
+
+void StartDodrioBerryPicking(u16 partyId, MainCallback exitCallback);
 void IsDodrioInParty(void);
 void ShowDodrioBerryPickingRecords(void);
 

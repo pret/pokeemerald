@@ -2,8 +2,12 @@
 
 	@ Takes a MAP constant and outputs the map group and map number as separate bytes
 	.macro map map_id:req
+	.ifdef \map_id
 	.byte \map_id >> 8    @ map group
 	.byte \map_id & 0xFF  @ map num
+	.else
+	.error "undefined map (check for typos)"
+	.endif
 	.endm
 
 	@ Defines a map script. 'type' is any MAP_SCRIPT_* constant (see include/constants/map_scripts.h)
@@ -105,6 +109,9 @@
 
 	@ Defines a background hidden item event for map data
 	.macro bg_hidden_item_event x:req, y:req, elevation:req, item:req, flag:req
+	.if \flag < FLAG_HIDDEN_ITEMS_START
+	.error "Hidden Item flag \flag is too small. Must be >= FLAG_HIDDEN_ITEMS_START."
+	.endif
 	bg_event \x, \y, \elevation, BG_EVENT_HIDDEN_ITEM, \item, ((\flag) - FLAG_HIDDEN_ITEMS_START)
 	.endm
 

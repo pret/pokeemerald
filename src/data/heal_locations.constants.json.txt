@@ -1,0 +1,14 @@
+#ifndef GUARD_CONSTANTS_HEAL_LOCATIONS_H
+#define GUARD_CONSTANTS_HEAL_LOCATIONS_H
+
+{{ doNotModifyHeader }}
+
+enum {
+    HEAL_LOCATION_NONE,
+## for heal_location in heal_locations
+    {{ heal_location.id }},
+## endfor
+    NUM_HEAL_LOCATIONS
+};
+
+#endif // GUARD_CONSTANTS_HEAL_LOCATIONS_H

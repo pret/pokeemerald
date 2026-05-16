@@ -1,5 +1,3 @@
-.set LOCALID_NURSE, 1
-
 MossdeepCity_PokemonCenter_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
@@ -10,7 +8,7 @@ MossdeepCity_PokemonCenter_1F_OnTransition:
 	end
 
 MossdeepCity_PokemonCenter_1F_EventScript_Nurse::
-	setvar VAR_0x800B, LOCALID_NURSE
+	setvar VAR_0x800B, LOCALID_MOSSDEEP_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress

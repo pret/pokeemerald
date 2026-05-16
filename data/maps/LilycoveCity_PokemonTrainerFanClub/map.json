@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_TRAINER_FAN_CLUB_LASS",
       "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 3,
       "y": 11,
@@ -28,6 +29,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_TRAINER_FAN_CLUB_MAN",
       "graphics_id": "OBJ_EVENT_GFX_MAN_4",
       "x": 8,
       "y": 10,
@@ -41,6 +43,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_TRAINER_FAN_CLUB_POKEFAN_M",
       "graphics_id": "OBJ_EVENT_GFX_POKEFAN_M",
       "x": 6,
       "y": 11,
@@ -54,6 +57,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_TRAINER_FAN_CLUB_LITTLE_GIRL",
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
       "x": 5,
       "y": 8,
@@ -67,6 +71,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_TRAINER_FAN_CLUB_NINJA_BOY",
       "graphics_id": "OBJ_EVENT_GFX_NINJA_BOY",
       "x": 7,
       "y": 11,
@@ -80,6 +85,7 @@
       "flag": "FLAG_HIDE_FANCLUB_LITTLE_BOY"
     },
     {
+      "local_id": "LOCALID_TRAINER_FAN_CLUB_BOY",
       "graphics_id": "OBJ_EVENT_GFX_BOY_2",
       "x": 1,
       "y": 9,
@@ -93,6 +99,7 @@
       "flag": "FLAG_HIDE_FANCLUB_BOY"
     },
     {
+      "local_id": "LOCALID_TRAINER_FAN_CLUB_WOMAN",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_3",
       "x": 3,
       "y": 10,
@@ -106,6 +113,7 @@
       "flag": "FLAG_HIDE_FANCLUB_LADY"
     },
     {
+      "local_id": "LOCALID_TRAINER_FAN_CLUB_EXPERT_F",
       "graphics_id": "OBJ_EVENT_GFX_EXPERT_F",
       "x": 10,
       "y": 10,

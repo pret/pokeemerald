@@ -12,7 +12,6 @@ FortreeCity_House1_EventScript_Trader::
 	msgbox FortreeCity_House1_Text_YouWillTradeWontYou, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, FortreeCity_House1_EventScript_DeclineTrade
 	special ChoosePartyMon
-	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, FortreeCity_House1_EventScript_DeclineTrade
 	copyvar VAR_0x8005, VAR_0x800A
@@ -23,7 +22,6 @@ FortreeCity_House1_EventScript_Trader::
 	copyvar VAR_0x8005, VAR_0x800A
 	special CreateInGameTradePokemon
 	special DoInGameTradeScene
-	waitstate
 	bufferspeciesname STR_VAR_1, VAR_0x8009
 	msgbox FortreeCity_House1_Text_MonYouTakeCare, MSGBOX_DEFAULT
 	setflag FLAG_FORTREE_NPC_TRADE_COMPLETED

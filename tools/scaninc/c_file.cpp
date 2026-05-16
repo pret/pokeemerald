@@ -18,6 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#include <cstring>
 #include "c_file.h"
 
 CFile::CFile(std::string path)
@@ -86,6 +87,7 @@ void CFile::FindIncbins()
             SkipWhitespace();
             CheckInclude();
             CheckIncbin();
+            CheckIncgfx();
 
             if (m_pos >= m_size)
                 break;
@@ -215,13 +217,13 @@ void CFile::CheckIncbin()
        && m_buffer[m_pos+5] == 'N'
        && m_buffer[m_pos+6] == '_'))
     {
-            return;
+        return;
     }
 
-    std::string idents[6] = { "INCBIN_S8", "INCBIN_U8", "INCBIN_S16", "INCBIN_U16", "INCBIN_S32", "INCBIN_U32" };
+    std::string idents[3] = { "INCBIN_U8", "INCBIN_U16", "INCBIN_U32" };
     int incbinType = -1;
 
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 3; i++)
     {
         if (CheckIdentifier(idents[i]))
         {
@@ -272,6 +274,86 @@ void CFile::CheckIncbin()
 
 }
 
+void CFile::CheckIncgfx()
+{
+    // Optimization: assume most lines are not incgfxs
+    if (!(m_buffer[m_pos+0] == 'I'
+       && m_buffer[m_pos+1] == 'N'
+       && m_buffer[m_pos+2] == 'C'
+       && m_buffer[m_pos+3] == 'G'
+       && m_buffer[m_pos+4] == 'F'
+       && m_buffer[m_pos+5] == 'X'
+       && m_buffer[m_pos+6] == '_'))
+    {
+        return;
+    }
+
+    std::string idents[3] = { "INCGFX_U8", "INCGFX_U16", "INCGFX_U32" };
+    int incgfxType = -1;
+
+    for (int i = 0; i < 3; i++)
+    {
+        if (CheckIdentifier(idents[i]))
+        {
+            incgfxType = i;
+            break;
+        }
+    }
+
+    if (incgfxType == -1)
+        return;
+
+    long oldPos = m_pos;
+    long oldLineNum = m_lineNum;
+
+    m_pos += idents[incgfxType].length();
+
+    SkipWhitespace();
+    if (m_buffer[m_pos] != '(')
+    {
+        m_pos = oldPos;
+        m_lineNum = oldLineNum;
+        return;
+    }
+    m_pos++;
+
+    SkipWhitespace();
+    std::string path = ReadPath();
+
+    SkipWhitespace();
+    if (m_buffer[m_pos] != ',')
+        FATAL_INPUT_ERROR("expected ','");
+    m_pos++;
+
+    SkipWhitespace();
+    std::string extensions = ReadString();
+
+    SkipWhitespace();
+    std::string arguments;
+    if (m_buffer[m_pos] == ',')
+    {
+        m_pos++;
+        SkipWhitespace();
+        arguments = ReadString();
+
+        SkipWhitespace();
+        if (m_buffer[m_pos] != ')')
+            FATAL_INPUT_ERROR("expected ')'");
+        m_pos++;
+    }
+    else if (m_buffer[m_pos] == ')')
+    {
+        m_pos++;
+    }
+    else
+    {
+        FATAL_INPUT_ERROR("expected ')' or ','");
+    }
+
+    Incgfx incgfx = { path, extensions, arguments };
+    m_incgfxs.emplace(incgfx);
+}
+
 std::string CFile::ReadPath()
 {
     if (m_buffer[m_pos] != '"')
@@ -285,7 +367,7 @@ std::string CFile::ReadPath()
 
     m_pos++;
 
-    int startPos = m_pos;
+    long startPos = m_pos;
 
     while (m_buffer[m_pos] != '"')
     {
@@ -306,6 +388,37 @@ std::string CFile::ReadPath()
         m_pos++;
     }
 
+    m_pos++;
+
+    return std::string(m_buffer + startPos, m_pos - 1 - startPos);
+}
+
+std::string CFile::ReadString()
+{
+    if (m_buffer[m_pos] != '"')
+        FATAL_INPUT_ERROR("expected '\"', got: '%c'", m_buffer[m_pos]);
+    m_pos++;
+
+    long startPos = m_pos;
+
+    while (m_buffer[m_pos] != '"')
+    {
+        if (m_buffer[m_pos] == 0)
+        {
+            if (m_pos >= m_size)
+                FATAL_INPUT_ERROR("expected EOF in string");
+            else
+                FATAL_INPUT_ERROR("unexpected null character in string");
+        }
+
+        if (m_buffer[m_pos] == '\r' || m_buffer[m_pos] == '\n')
+            FATAL_INPUT_ERROR("unexpected end of line character in string");
+
+        if (m_buffer[m_pos] == '\\')
+            FATAL_INPUT_ERROR("unexpected escape in string");
+
+        m_pos++;
+    }
     m_pos++;
 
     return std::string(m_buffer + startPos, m_pos - 1 - startPos);

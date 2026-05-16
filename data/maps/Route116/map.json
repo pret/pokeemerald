@@ -156,6 +156,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ROUTE116_BRINEY",
       "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
       "x": 46,
       "y": 9,
@@ -286,6 +287,7 @@
       "flag": "FLAG_ITEM_ROUTE_116_X_SPECIAL"
     },
     {
+      "local_id": "LOCALID_ROUTE116_WANDAS_BF",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 38,
       "y": 9,

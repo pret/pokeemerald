@@ -101,6 +101,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_MAUVILLE_WALLY",
       "graphics_id": "OBJ_EVENT_GFX_WALLY",
       "x": 8,
       "y": 6,
@@ -114,6 +115,7 @@
       "flag": "FLAG_HIDE_MAUVILLE_CITY_WALLY"
     },
     {
+      "local_id": "LOCALID_MAUVILLE_WALLYS_UNCLE",
       "graphics_id": "OBJ_EVENT_GFX_POKEFAN_M",
       "x": 9,
       "y": 6,
@@ -166,6 +168,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_MAUVILLE_SCOTT",
       "graphics_id": "OBJ_EVENT_GFX_SCOTT",
       "x": 12,
       "y": 14,

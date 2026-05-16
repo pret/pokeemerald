@@ -1,7 +1,6 @@
 #include "global.h"
 #include "mail.h"
 #include "constants/items.h"
-#include "main.h"
 #include "overworld.h"
 #include "task.h"
 #include "scanline_effect.h"
@@ -48,8 +47,8 @@ struct MailLayout
 struct MailGraphics
 {
     const u16 *palette;
-    const u8 *tiles;
-    const u8 *tileMap;
+    const u32 *tiles;
+    const u32 *tileMap;
     u32 unused;
     u16 textColor;
     u16 textShadow;
@@ -443,7 +442,7 @@ static const struct MailLayout sMailLayouts_Tall[] = {
     },
 };
 
-void ReadMail(struct Mail *mail, void (*exitCallback)(void), bool8 hasText)
+void ReadMail(struct Mail *mail, MainCallback exitCallback, bool8 hasText)
 {
     u16 buffer[2];
     u16 species;

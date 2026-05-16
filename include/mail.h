@@ -1,6 +1,8 @@
 #ifndef GUARD_MAIL_H
 #define GUARD_MAIL_H
 
+#include "main.h"
+
 #define IS_ITEM_MAIL(itemId) ((itemId == ITEM_ORANGE_MAIL           \
                               || itemId == ITEM_HARBOR_MAIL         \
                               || itemId == ITEM_GLITTER_MAIL        \
@@ -15,7 +17,7 @@
                               || itemId == ITEM_RETRO_MAIL))
 
 // mail.h
-void ReadMail(struct Mail *mail, void (*exitCallback)(void), bool8 hasText);
+void ReadMail(struct Mail *mail, MainCallback exitCallback, bool8 hasText);
 
 // mail_data.h
 void ClearAllMail(void);

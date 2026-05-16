@@ -1,5 +1,3 @@
-.set LOCALID_LUGIA, 1
-
 NavelRock_Bottom_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, NavelRock_Bottom_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, NavelRock_Bottom_OnResume
@@ -26,7 +24,7 @@ NavelRock_Bottom_OnResume:
 NavelRock_Bottom_EventScript_TryRemoveLugia::
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
-	removeobject LOCALID_LUGIA
+	removeobject LOCALID_NAVEL_ROCK_LUGIA
 	return
 
 NavelRock_Bottom_EventScript_Lugia::
@@ -56,7 +54,6 @@ NavelRock_Bottom_EventScript_Lugia::
 	seteventmon SPECIES_LUGIA, 70
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
-	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NavelRock_Bottom_EventScript_DefeatedLugia

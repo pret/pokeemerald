@@ -10,7 +10,7 @@ enum
     CONTESTAI_DO_NOT_PROCESS
 };
 
-void ContestAI_ResetAI(u8);
+void ContestAI_ResetAI(u8 contestantAI);
 u8 ContestAI_GetActionToUse(void);
 
 #endif // GUARD_CONTESTAI_H

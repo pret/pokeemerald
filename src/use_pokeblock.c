@@ -50,7 +50,7 @@ enum {
 struct UsePokeblockSession
 {
     void (*callback)(void);
-    void (*exitCallback)(void);
+    MainCallback exitCallback;
     struct Pokeblock *pokeblock;
     struct Pokemon *mon;
     u8 stringBuffer[64];
@@ -162,7 +162,7 @@ extern const u16 gConditionText_Pal[];
 // The below 3 are saved for returning to the screen after feeding a pokeblock to a mon
 // so that the rest of the data can be freed
 static EWRAM_DATA struct UsePokeblockSession *sInfo = NULL;
-static EWRAM_DATA void (*sExitCallback)(void) = NULL;
+static EWRAM_DATA MainCallback sExitCallback = NULL;
 static EWRAM_DATA struct Pokeblock *sPokeblock = NULL;
 EWRAM_DATA u8 gPokeblockMonId = 0;
 EWRAM_DATA s16 gPokeblockGain = 0;
@@ -172,9 +172,9 @@ static EWRAM_DATA u8 *sMonFrame_TilemapPtr = NULL;
 static EWRAM_DATA struct UsePokeblockMenu *sMenu = NULL;
 
 static const u32 sMonFrame_Pal[] = INCBIN_U32("graphics/pokeblock/use_screen/mon_frame_pal.bin");
-static const u32 sMonFrame_Gfx[] = INCBIN_U32("graphics/pokeblock/use_screen/mon_frame.4bpp");
-static const u32 sMonFrame_Tilemap[] = INCBIN_U32("graphics/pokeblock/use_screen/mon_frame.bin.lz");
-static const u32 sGraphData_Tilemap[] = INCBIN_U32("graphics/pokeblock/use_screen/graph_data.bin.lz");
+static const u32 sMonFrame_Gfx[] = INCGFX_U32("graphics/pokeblock/use_screen/mon_frame.png", ".4bpp");
+static const u32 sMonFrame_Tilemap[] = INCGFX_U32("graphics/pokeblock/use_screen/mon_frame.bin", ".lz");
+static const u32 sGraphData_Tilemap[] = INCGFX_U32("graphics/pokeblock/use_screen/graph_data.bin", ".lz");
 
 // The condition/flavors aren't listed in their normal order in this file, they're listed as shown on the graph going counter-clockwise
 // Normally they would go Cool/Spicy, Beauty/Dry, Cute/Sweet, Smart/Bitter, Tough/Sour (also graph order, but clockwise)

@@ -1,5 +1,3 @@
-.set LOCALID_FOSSIL_SCIENTIST, 5
-
 RustboroCity_DevonCorp_2F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_DevonCorp_2F_OnTransition
 	.byte 0

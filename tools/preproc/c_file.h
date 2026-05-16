@@ -30,7 +30,7 @@
 class CFile
 {
 public:
-    CFile(const char * filenameCStr, bool isStdin);
+    CFile(const char * filenameCStr, bool isStdin, const char * graphicsRootCStr);
     CFile(CFile&& other);
     CFile(const CFile&) = delete;
     ~CFile();
@@ -40,17 +40,24 @@ private:
     char* m_buffer;
     long m_pos;
     long m_size;
-    long m_lineNum;
-    std::string m_filename;
+    struct LogicalLocation {
+        std::string filename;
+        long lineNum;
+        bool acceptLineMarker;
+    } m_location;
     bool m_isStdin;
+    std::string m_graphicsRoot;
 
     bool ConsumeHorizontalWhitespace();
     bool ConsumeNewline();
+    void Newline();
     void SkipWhitespace();
     void TryConvertString();
     std::unique_ptr<unsigned char[]> ReadWholeFile(const std::string& path, int& size);
     bool CheckIdentifier(const std::string& ident);
+    std::string ReadString();
     void TryConvertIncbin();
+    void TryConvertIncgfx();
     void ReportDiagnostic(const char* type, const char* format, std::va_list args);
     void RaiseError(const char* format, ...);
     void RaiseWarning(const char* format, ...);

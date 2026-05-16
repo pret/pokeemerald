@@ -1,6 +1,11 @@
 	.set ALLOCATE_SCRIPT_CMD_TABLE, 0
 	.include "data/script_cmd_table.inc"
 
+	.set ALLOCATE_SPECIAL_TABLE, 0
+	.include "data/specials.inc"
+
+	.set _last_implicit_waitstate, -1
+
 	@ Does nothing.
 	.macro nop
 	.byte SCR_OP_NOP
@@ -145,7 +150,10 @@
 	.endm
 
 	@ Changes the value of destination to value.
-	.macro setvar destination:req, value:req
+	.macro setvar destination:req, value:req, warn=TRUE
+	.if \warn && ((\value >= VARS_START && \value <= VARS_END) || (\value >= SPECIAL_VARS_START && \value <= SPECIAL_VARS_END))
+	.warning "setvar with a value that might be a VAR_ constant; did you mean copyvar instead?"
+	.endif
 	.byte SCR_OP_SETVAR
 	.2byte \destination
 	.2byte \value
@@ -166,7 +174,10 @@
 	.endm
 
 	@ Copies the value of source into destination.
-	.macro copyvar destination:req, source:req
+	.macro copyvar destination:req, source:req, warn=TRUE
+	.if \warn && !((\source >= VARS_START && \source <= VARS_END) || (\source >= SPECIAL_VARS_START && \source <= SPECIAL_VARS_END))
+	.warning "copyvar with a value that is not a VAR_ constant; did you mean setvar instead?"
+	.endif
 	.byte SCR_OP_COPYVAR
 	.2byte \destination
 	.2byte \source
@@ -269,6 +280,9 @@
 	.macro special function:req
 	.byte SCR_OP_SPECIAL
 	.2byte SPECIAL_\function
+	.if SPECIAL_WAITSTATE_\function
+	waitstate implicit=1
+	.endif
 	.endm
 
 	@ Calls a function listed in the table in data/specials.inc.
@@ -277,12 +291,25 @@
 	.byte SCR_OP_SPECIALVAR
 	.2byte \output
 	.2byte SPECIAL_\function
+	.if SPECIAL_WAITSTATE_\function
+	waitstate implicit=1
+	.endif
 	.endm
 
 	@ Blocks script execution until a command or C code manually unblocks it. Generally used with specific
 	@ commands and specials. Calling ScriptContext_Enable for instance will allow execution to continue.
-	.macro waitstate
+	@
+	@ implicit is set when a waitstate is generated as part of another command (e.g. special)
+	@ if an implicit waitstate is immediately followed by another waitstate, a warning is raised
+	.macro waitstate, implicit=0
+	.if _last_implicit_waitstate == .
+	.warning "explicit waitstate follows implicit waitstate, ignoring"
+	.else
 	.byte SCR_OP_WAITSTATE
+	.endif
+	.if \implicit
+	.set _last_implicit_waitstate, .
+	.endif
 	.endm
 
 	@ Blocks script execution for frames. (Pokemon Emerald runs at just shy of 60 frames per second.)
@@ -607,10 +634,10 @@
 	.endm
 
 	@ Blocks script execution until the movements being applied to the specified (localId) object finish.
-	@ If localId is 0, then the id of the last-moved object will be used instead. If the specified object
-	@ is not currently being manipulated with applymovement, then this command does nothing.
+	@ If localId is LOCALID_NONE (0), then the id of the last-moved object will be used instead.
+	@ If the specified object is not currently being manipulated with applymovement, then this command does nothing.
 	@ If no map is specified, then the current map is used.
-	.macro waitmovement localId:req, map
+	.macro waitmovement localId=LOCALID_NONE, map
 		.ifb \map
 			.byte SCR_OP_WAITMOVEMENT
 			.2byte \localId
@@ -664,11 +691,27 @@
 	map \map
 	.endm
 
+	@ Set the player object's invisibility to FALSE.
+	.macro showplayer
+	.byte SCR_OP_SHOWOBJECTAT
+	.2byte LOCALID_PLAYER
+	.byte 0 @ map group
+	.byte 0 @ map num
+	.endm
+
 	@ Sets the specified object's invisibility to TRUE.
 	.macro hideobjectat localId:req, map:req
 	.byte SCR_OP_HIDEOBJECTAT
 	.2byte \localId
 	map \map
+	.endm
+
+	@ Set the player object's invisibility to TRUE.
+	.macro hideplayer
+	.byte SCR_OP_HIDEOBJECTAT
+	.2byte LOCALID_PLAYER
+	.byte 0 @ map group
+	.byte 0 @ map num
 	.endm
 
 	@ Turns the currently selected object (if there is one) to face the player.
@@ -744,11 +787,11 @@
 	@ When used with an event script, you can also pass in an optional flag to disable music
 	.macro trainerbattle_single trainer:req, intro_text:req, lose_text:req, event_script=FALSE, music=TRUE
 	.if \event_script == FALSE
-	trainerbattle TRAINER_BATTLE_SINGLE, \trainer, 0, \intro_text, \lose_text
+	trainerbattle TRAINER_BATTLE_SINGLE, \trainer, LOCALID_NONE, \intro_text, \lose_text
 	.elseif \music == TRUE
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, \trainer, 0, \intro_text, \lose_text, \event_script
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, \trainer, LOCALID_NONE, \intro_text, \lose_text, \event_script
 	.else
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC, \trainer, 0, \intro_text, \lose_text, \event_script
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC, \trainer, LOCALID_NONE, \intro_text, \lose_text, \event_script
 	.endif
 	.endm
 
@@ -756,27 +799,27 @@
 	@ and an optional event script. When used with an event script you can pass in an optional flag to disable music
 	.macro trainerbattle_double trainer:req, intro_text:req, lose_text:req, not_enough_pkmn_text:req, event_script=FALSE, music=TRUE
 	.if \event_script == FALSE
-	trainerbattle TRAINER_BATTLE_DOUBLE, \trainer, 0, \intro_text, \lose_text, \not_enough_pkmn_text
+	trainerbattle TRAINER_BATTLE_DOUBLE, \trainer, LOCALID_NONE, \intro_text, \lose_text, \not_enough_pkmn_text
 	.elseif \music == TRUE
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE, \trainer, 0, \intro_text, \lose_text, \not_enough_pkmn_text, \event_script
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE, \trainer, LOCALID_NONE, \intro_text, \lose_text, \not_enough_pkmn_text, \event_script
 	.else
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC, \trainer, 0, \intro_text, \lose_text, \not_enough_pkmn_text, \event_script
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC, \trainer, LOCALID_NONE, \intro_text, \lose_text, \not_enough_pkmn_text, \event_script
 	.endif
 	.endm
 
 	@ Starts a rematch battle. Takes a trainer, intro text and loss text
 	.macro trainerbattle_rematch trainer:req, intro_text:req, lose_text:req
-	trainerbattle TRAINER_BATTLE_REMATCH, \trainer, 0, \intro_text, \lose_text
+	trainerbattle TRAINER_BATTLE_REMATCH, \trainer, LOCALID_NONE, \intro_text, \lose_text
 	.endm
 
 	@ Starts a rematch double battle. Takes a trainer, intro text, loss text, and text for when you have too few pokemon
 	.macro trainerbattle_rematch_double trainer:req, intro_text:req, lose_text:req, not_enough_pkmn_text:req
-	trainerbattle TRAINER_BATTLE_REMATCH_DOUBLE, \trainer, 0, \intro_text, \lose_text, \not_enough_pkmn_text
+	trainerbattle TRAINER_BATTLE_REMATCH_DOUBLE, \trainer, LOCALID_NONE, \intro_text, \lose_text, \not_enough_pkmn_text
 	.endm
 
 	@ Starts a trainer battle, skipping intro text. Takes a trainer and loss text
 	.macro trainerbattle_no_intro trainer:req, lose_text:req
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, \trainer, 0, \lose_text
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, \trainer, LOCALID_NONE, \lose_text
 	.endm
 
 

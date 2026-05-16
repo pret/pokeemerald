@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_BRINEYS_HOUSE_BRINEY",
       "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
       "x": 5,
       "y": 3,
@@ -28,6 +29,7 @@
       "flag": "FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY"
     },
     {
+      "local_id": "LOCALID_BRINEYS_HOUSE_PEEKO",
       "graphics_id": "OBJ_EVENT_GFX_WINGULL",
       "x": 6,
       "y": 3,

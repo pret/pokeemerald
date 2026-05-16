@@ -56,4 +56,18 @@ do {                                        \
 
 #define SCANINC_MAX_PATH 255
 
+struct Incgfx
+{
+    std::string source;
+    std::string extensions;
+    std::string arguments;
+
+    bool operator<(const struct Incgfx &rhs) const
+    {
+        return source < rhs.source
+            || extensions < rhs.extensions
+            || arguments < rhs.arguments;
+    }
+};
+
 #endif // SCANINC_H

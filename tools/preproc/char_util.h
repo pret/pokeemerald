@@ -56,6 +56,11 @@ inline bool IsAsciiPrintable(unsigned char c)
     return (c >= ' ' && c <= '~');
 }
 
+inline bool IsAsciiWhitespace(unsigned char c)
+{
+    return c == ' ' || c == '\t' || c == '\f' || c == '\n' || c == '\r' || c == '\v';
+}
+
 // Returns whether the character can start a C identifier or the identifier of a "{FOO}" constant in strings.
 inline bool IsIdentifierStartingChar(unsigned char c)
 {

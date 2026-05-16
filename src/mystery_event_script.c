@@ -7,7 +7,7 @@
 #include "mystery_event_script.h"
 #include "pokedex.h"
 #include "pokemon.h"
-#include "pokemon_size_record.h"
+#include "give_gift_ribbon_to_party.h"
 #include "script.h"
 #include "strings.h"
 #include "string_util.h"

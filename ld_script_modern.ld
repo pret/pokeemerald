@@ -150,6 +150,9 @@ SECTIONS {
     .debug_loc      0 : { *(.debug_loc) }
     .debug_macinfo  0 : { *(.debug_macinfo) }
 
+    /* DWARF 5*/
+    .debug_line_str     0 : { *(.debug_line_str) }
+
     /* Discard everything not specifically mentioned above. */
     /DISCARD/ :
     {

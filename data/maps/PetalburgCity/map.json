@@ -39,6 +39,7 @@
       "flag": "FLAG_HIDE_PETALBURG_CITY_WALLYS_MOM"
     },
     {
+      "local_id": "LOCALID_PETALBURG_WALLY",
       "graphics_id": "OBJ_EVENT_GFX_WALLY",
       "x": 15,
       "y": 10,
@@ -52,6 +53,7 @@
       "flag": "FLAG_HIDE_PETALBURG_CITY_WALLY"
     },
     {
+      "local_id": "LOCALID_PETALBURG_BOY",
       "graphics_id": "OBJ_EVENT_GFX_BOY_1",
       "x": 8,
       "y": 22,
@@ -78,6 +80,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_PETALBURG_WALLYS_DAD",
       "graphics_id": "OBJ_EVENT_GFX_POKEFAN_M",
       "x": 15,
       "y": 10,
@@ -117,6 +120,7 @@
       "flag": "FLAG_ITEM_PETALBURG_CITY_ETHER"
     },
     {
+      "local_id": "LOCALID_GYM_BOY",
       "graphics_id": "OBJ_EVENT_GFX_BOY_2",
       "x": 12,
       "y": 15,
@@ -130,6 +134,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_PETALBURG_SCOTT",
       "graphics_id": "OBJ_EVENT_GFX_SCOTT",
       "x": 13,
       "y": 12,

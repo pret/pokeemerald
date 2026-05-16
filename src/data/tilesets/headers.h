@@ -636,8 +636,8 @@ const struct Tileset gTileset_SecretBase =
     .callback = NULL,
 };
 
-const struct Tileset * const gTilesetPointer_SecretBase = &gTileset_SecretBase;
-const struct Tileset * const gTilesetPointer_SecretBaseRedCave = &gTileset_SecretBaseRedCave;
+const struct Tileset *const gTilesetPointer_SecretBase = &gTileset_SecretBase;
+const struct Tileset *const gTilesetPointer_SecretBaseRedCave = &gTileset_SecretBaseRedCave;
 
 const struct Tileset gTileset_EliteFour =
 {

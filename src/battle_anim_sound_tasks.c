@@ -144,29 +144,29 @@ void SoundTask_PlayCryHighPitch(u8 taskId)
     }
     else
     {
-        u8 battlerId;
+        u8 battler;
 
         // Get wanted battler.
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
-            battlerId = gBattleAnimAttacker;
+            battler = gBattleAnimAttacker;
         else if (gBattleAnimArgs[0] == ANIM_TARGET)
-            battlerId = gBattleAnimTarget;
+            battler = gBattleAnimTarget;
         else if (gBattleAnimArgs[0] == ANIM_ATK_PARTNER)
-            battlerId = BATTLE_PARTNER(gBattleAnimAttacker);
+            battler = BATTLE_PARTNER(gBattleAnimAttacker);
         else
-            battlerId = BATTLE_PARTNER(gBattleAnimTarget);
+            battler = BATTLE_PARTNER(gBattleAnimTarget);
 
         // Check if battler is visible.
-        if ((gBattleAnimArgs[0] == ANIM_TARGET || gBattleAnimArgs[0] == ANIM_DEF_PARTNER) && !IsBattlerSpriteVisible(battlerId))
+        if ((gBattleAnimArgs[0] == ANIM_TARGET || gBattleAnimArgs[0] == ANIM_DEF_PARTNER) && !IsBattlerSpriteVisible(battler))
         {
             DestroyAnimVisualTask(taskId);
             return;
         }
 
-        if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)
-            species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
+        if (GetBattlerSide(battler) != B_SIDE_PLAYER)
+            species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
         else
-            species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
+            species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
     }
 
     if (species != SPECIES_NONE)
@@ -192,29 +192,29 @@ void SoundTask_PlayDoubleCry(u8 taskId)
     }
     else
     {
-        u8 battlerId;
+        u8 battler;
 
         // Get wanted battler.
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
-            battlerId = gBattleAnimAttacker;
+            battler = gBattleAnimAttacker;
         else if (gBattleAnimArgs[0] == ANIM_TARGET)
-            battlerId = gBattleAnimTarget;
+            battler = gBattleAnimTarget;
         else if (gBattleAnimArgs[0] == ANIM_ATK_PARTNER)
-            battlerId = BATTLE_PARTNER(gBattleAnimAttacker);
+            battler = BATTLE_PARTNER(gBattleAnimAttacker);
         else
-            battlerId = BATTLE_PARTNER(gBattleAnimTarget);
+            battler = BATTLE_PARTNER(gBattleAnimTarget);
 
         // Check if battler is visible.
-        if ((gBattleAnimArgs[0] == ANIM_TARGET || gBattleAnimArgs[0] == ANIM_DEF_PARTNER) && !IsBattlerSpriteVisible(battlerId))
+        if ((gBattleAnimArgs[0] == ANIM_TARGET || gBattleAnimArgs[0] == ANIM_DEF_PARTNER) && !IsBattlerSpriteVisible(battler))
         {
             DestroyAnimVisualTask(taskId);
             return;
         }
 
-        if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)
-            species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
+        if (GetBattlerSide(battler) != B_SIDE_PLAYER)
+            species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
         else
-            species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
+            species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
     }
 
     gTasks[taskId].data[0] = gBattleAnimArgs[1];

@@ -1,3 +1,6 @@
 # Will be moved to build/ eventually
 map_groups.h
 layouts.h
+region_map_sections.h
+map_event_ids.h
+heal_locations.h

@@ -99,6 +99,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_LAVARIDGE_RIVAL_ON_BIKE",
       "graphics_id": "OBJ_EVENT_GFX_VAR_3",
       "x": 6,
       "y": 16,
@@ -112,6 +113,7 @@
       "flag": "FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_ON_BIKE"
     },
     {
+      "local_id": "LOCALID_LAVARIDGE_RIVAL",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 12,
       "y": 15,

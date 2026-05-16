@@ -8,7 +8,7 @@
 
 #define EMPTY_SLOT 0xFF
 
-static u8 sGpuRegBuffer[GPU_REG_BUF_SIZE];
+static ALIGNED(2) u8 sGpuRegBuffer[GPU_REG_BUF_SIZE]; // sGpuRegBuffer is read as u16 so it needs to be properly aligned
 static u8 sGpuRegWaitingList[GPU_REG_BUF_SIZE];
 static volatile bool8 sGpuRegBufferLocked;
 static volatile bool8 sShouldSyncRegIE;

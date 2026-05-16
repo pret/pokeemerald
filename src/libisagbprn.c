@@ -224,7 +224,7 @@ void MgbaClose(void)
     *REG_DEBUG_ENABLE = 0;
 }
 
-void MgbaPrintf(s32 level, const char* ptr, ...)
+void MgbaPrintf(s32 level, const char *ptr, ...)
 {
     va_list args;
 

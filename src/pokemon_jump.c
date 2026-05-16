@@ -799,7 +799,7 @@ static void RecvLinkData_Leader(void)
         sPokemonJump->allPlayersReady = TRUE;
 }
 
-static bool32 (* const sPokeJumpLeaderFuncs[])(void) =
+static bool32 (*const sPokeJumpLeaderFuncs[])(void) =
 {
     [FUNC_GAME_INTRO]     = GameIntro_Leader,
     [FUNC_WAIT_ROUND]     = WaitRound_Leader,
@@ -898,7 +898,7 @@ static void RecvLinkData_Member(void)
     }
 }
 
-static bool32 (* const sPokeJumpMemberFuncs[])(void) =
+static bool32 (*const sPokeJumpMemberFuncs[])(void) =
 {
     [FUNC_GAME_INTRO]     = GameIntro_Member,
     [FUNC_WAIT_ROUND]     = WaitRound_Member,
@@ -2366,15 +2366,15 @@ void IsPokemonJumpSpeciesInParty(void)
     gSpecialVar_Result = FALSE;
 }
 
-static const u16 sPokeJumpPal1[] = INCBIN_U16("graphics/pokemon_jump/pal1.gbapal");
-static const u16 sPokeJumpPal2[] = INCBIN_U16("graphics/pokemon_jump/pal2.gbapal");
+static const u16 sPokeJumpPal1[] = INCGFX_U16("graphics/pokemon_jump/pal1.pal", ".gbapal");
+static const u16 sPokeJumpPal2[] = INCGFX_U16("graphics/pokemon_jump/pal2.pal", ".gbapal");
 
-static const u32 sVine1_Gfx[] = INCBIN_U32("graphics/pokemon_jump/vine1.4bpp.lz");
-static const u32 sVine2_Gfx[] = INCBIN_U32("graphics/pokemon_jump/vine2.4bpp.lz");
-static const u32 sVine3_Gfx[] = INCBIN_U32("graphics/pokemon_jump/vine3.4bpp.lz");
-static const u32 sVine4_Gfx[] = INCBIN_U32("graphics/pokemon_jump/vine4.4bpp.lz");
+static const u32 sVine1_Gfx[] = INCGFX_U32("graphics/pokemon_jump/vine1.png", ".4bpp.lz");
+static const u32 sVine2_Gfx[] = INCGFX_U32("graphics/pokemon_jump/vine2.png", ".4bpp.lz");
+static const u32 sVine3_Gfx[] = INCGFX_U32("graphics/pokemon_jump/vine3.png", ".4bpp.lz");
+static const u32 sVine4_Gfx[] = INCGFX_U32("graphics/pokemon_jump/vine4.png", ".4bpp.lz");
 
-static const u32 sStar_Gfx[] = INCBIN_U32("graphics/pokemon_jump/star.4bpp.lz");
+static const u32 sStar_Gfx[] = INCGFX_U32("graphics/pokemon_jump/star.png", ".4bpp.lz");
 
 static const struct CompressedSpriteSheet sCompressedSpriteSheets[] =
 {
@@ -3043,19 +3043,19 @@ static void InitPokeJumpGfx(struct PokemonJumpGfx *jumpGfx)
     jumpGfx->msgWindowId = WINDOW_NONE;
 }
 
-static const u16 sInterface_Pal[] = INCBIN_U16("graphics/pokemon_jump/interface.gbapal");
+static const u16 sInterface_Pal[] = INCGFX_U16("graphics/pokemon_jump/interface.pal", ".gbapal");
 
-static const u16 sBg_Pal[] = INCBIN_U16("graphics/pokemon_jump/bg.gbapal");
-static const u32 sBg_Gfx[] = INCBIN_U32("graphics/pokemon_jump/bg.4bpp.lz");
-static const u32 sBg_Tilemap[] = INCBIN_U32("graphics/pokemon_jump/bg.bin.lz");
+static const u16 sBg_Pal[] = INCGFX_U16("graphics/pokemon_jump/bg.png", ".gbapal");
+static const u32 sBg_Gfx[] = INCGFX_U32("graphics/pokemon_jump/bg.png", ".4bpp.lz", "-num_tiles 63 -Wnum_tiles");
+static const u32 sBg_Tilemap[] = INCGFX_U32("graphics/pokemon_jump/bg.bin", ".lz");
 
-static const u16 sVenusaur_Pal[] = INCBIN_U16("graphics/pokemon_jump/venusaur.gbapal");
-static const u32 sVenusaur_Gfx[] = INCBIN_U32("graphics/pokemon_jump/venusaur.4bpp.lz");
-static const u32 sVenusaur_Tilemap[] = INCBIN_U32("graphics/pokemon_jump/venusaur.bin.lz");
+static const u16 sVenusaur_Pal[] = INCGFX_U16("graphics/pokemon_jump/venusaur.png", ".gbapal");
+static const u32 sVenusaur_Gfx[] = INCGFX_U32("graphics/pokemon_jump/venusaur.png", ".4bpp.lz");
+static const u32 sVenusaur_Tilemap[] = INCGFX_U32("graphics/pokemon_jump/venusaur.bin", ".lz");
 
-static const u16 sBonuses_Pal[] = INCBIN_U16("graphics/pokemon_jump/bonuses.gbapal");
-static const u32 sBonuses_Gfx[] = INCBIN_U32("graphics/pokemon_jump/bonuses.4bpp.lz");
-static const u32 sBonuses_Tilemap[] = INCBIN_U32("graphics/pokemon_jump/bonuses.bin.lz");
+static const u16 sBonuses_Pal[] = INCGFX_U16("graphics/pokemon_jump/bonuses.png", ".gbapal");
+static const u32 sBonuses_Gfx[] = INCGFX_U32("graphics/pokemon_jump/bonuses.png", ".4bpp.lz");
+static const u32 sBonuses_Tilemap[] = INCGFX_U32("graphics/pokemon_jump/bonuses.bin", ".lz");
 
 static const struct BgTemplate sBgTemplates[] =
 {

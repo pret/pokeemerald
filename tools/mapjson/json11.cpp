@@ -23,6 +23,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <limits>
+#include <cstdint>
 
 namespace json11 {
 

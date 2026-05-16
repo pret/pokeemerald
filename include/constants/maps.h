@@ -3,14 +3,17 @@
 
 #include "map_groups.h"
 
-// Warps using this map will instead use the warp data stored in gSaveBlock1Ptr->dynamicWarp.
-// Used for warps that need to change destinations, e.g. when stepping off an elevator.
-#define MAP_DYNAMIC (0x7F | (0x7F << 8))
+enum
+{
+    // Warps using this map will instead use the warp data stored in gSaveBlock1Ptr->dynamicWarp.
+    // Used for warps that need to change destinations, e.g. when stepping off an elevator.
+    MAP_DYNAMIC = (0x7F | (0x7F << 8)),
 
-#define MAP_UNDEFINED (0xFF | (0xFF << 8))
+    MAP_UNDEFINED = (0xFF | (0xFF << 8)),
+};
 
-#define MAP_GROUP(map) (MAP_##map >> 8)
-#define MAP_NUM(map) (MAP_##map & 0xFF)
+#define MAP_GROUP(map) (map >> 8)
+#define MAP_NUM(map) (map & 0xFF)
 
 // IDs for dynamic warps. Both are used in the dest_warp_id field for warp events, but they
 // are never read in practice. A dest_map of MAP_DYNAMIC is used to indicate that a

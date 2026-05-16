@@ -26,7 +26,7 @@ static void SetRandomPalacePrize(void);
 static void GivePalacePrize(void);
 
 // Const rom data.
-static void (* const sBattlePalaceFunctions[])(void) =
+static void (*const sBattlePalaceFunctions[])(void) =
 {
     [BATTLE_PALACE_FUNC_INIT]               = InitPalaceChallenge,
     [BATTLE_PALACE_FUNC_GET_DATA]           = GetPalaceData,
