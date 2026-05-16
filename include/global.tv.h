@@ -486,7 +486,7 @@ typedef union // size = 0x24
         /*0x13*/ u8 probability;
         /*0x14*/ u8 level;
         /*0x15*/ u8 unused5;
-        /*0x16*/ u16 daysLeft;
+        /*0x16*/ u16 daysBeforeOutbreak;
         /*0x18*/ u8 language;
         /*0x19*/ //u8 padding;
     } massOutbreak;
