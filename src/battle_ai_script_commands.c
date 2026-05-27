@@ -1803,7 +1803,13 @@ static void Cmd_if_cant_faint(void)
 static void Cmd_if_has_move(void)
 {
     s32 i;
+
+#ifdef BUGFIX
+    const u16 move = T1_READ_16(gAIScriptPtr + 2);
+    const u16 *movePtr = &move;    
+#else
     const u16 *movePtr = (u16 *)(gAIScriptPtr + 2);
+#endif
 
     switch (gAIScriptPtr[1])
     {
@@ -1855,7 +1861,13 @@ static void Cmd_if_has_move(void)
 static void Cmd_if_doesnt_have_move(void)
 {
     s32 i;
+
+#ifdef BUGFIX
+    const u16 move = T1_READ_16(gAIScriptPtr + 2);
+    const u16 *movePtr = &move;    
+#else
     const u16 *movePtr = (u16 *)(gAIScriptPtr + 2);
+#endif
 
     switch(gAIScriptPtr[1])
     {
