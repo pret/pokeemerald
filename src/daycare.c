@@ -51,7 +51,7 @@ static const struct WindowTemplate sDaycareLevelMenuWindowTemplate =
 };
 
 // Indices here are assigned by Task_HandleDaycareLevelMenuInput to VAR_RESULT,
-// which is copied to VAR_0x8004 and used as an index for GetDaycareCost
+// which is copied to VAR_0x8004 and used as an index for GetDaycareCostAndPrepareString
 static const struct ListMenuItem sLevelMenuItems[] =
 {
     {gText_ExpandedPlaceholder_Empty, 0},
@@ -310,7 +310,7 @@ static u8 GetNumLevelsGainedForDaycareMon(struct DaycareMon *daycareMon)
     return numLevelsGained;
 }
 
-static u32 GetDaycareCostForSelectedMon(struct DaycareMon *daycareMon)
+static u32 PrepareDaycareCostStringForSelectedMon(struct DaycareMon *daycareMon)
 {
     u32 cost;
 
@@ -321,14 +321,14 @@ static u32 GetDaycareCostForSelectedMon(struct DaycareMon *daycareMon)
     return cost;
 }
 
-static u16 GetDaycareCostForMon(struct DayCare *daycare, u8 slotId)
+static u16 PrepareDaycareCostStringForMon(struct DayCare *daycare, u8 slotId)
 {
-    return GetDaycareCostForSelectedMon(&daycare->mons[slotId]);
+    return PrepareDaycareCostStringForSelectedMon(&daycare->mons[slotId]);
 }
 
-void GetDaycareCost(void)
+void GetDaycareCostAndPrepareString(void)
 {
-    gSpecialVar_0x8005 = GetDaycareCostForMon(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
+    gSpecialVar_0x8005 = PrepareDaycareCostStringForMon(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
 }
 
 static void UNUSED Debug_AddDaycareSteps(u16 numSteps)
