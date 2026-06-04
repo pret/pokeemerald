@@ -90,12 +90,12 @@ static EWRAM_DATA u8 sCurrentReflectionType = 0;
 static EWRAM_DATA u16 sCurrentSpecialObjectPaletteTag = 0;
 static EWRAM_DATA struct LockedAnimObjectEvents *sLockedAnimObjectEvents = {0};
 
-static void MoveCoordsInDirection(u32, s16 *, s16 *, s16, s16);
+static void MoveCoordsInDirection(u8, s16 *, s16 *, s16, s16);
 static bool8 ObjectEventExecSingleMovementAction(struct ObjectEvent *, struct Sprite *);
 static void SetMovementDelay(struct Sprite *, s16);
 static bool8 WaitForMovementDelay(struct Sprite *);
 static u8 GetCollisionInDirection(struct ObjectEvent *, u8);
-static u32 GetCopyDirection(u8, u32, u32);
+static u8 GetCopyDirection(u8, u8, u8);
 static void TryEnableObjectEventAnim(struct ObjectEvent *, struct Sprite *);
 static void ObjectEventExecHeldMovementAction(struct ObjectEvent *, struct Sprite *);
 static void UpdateObjectEventSpriteAnimPause(struct ObjectEvent *, struct Sprite *);
@@ -2360,13 +2360,9 @@ u8 CreateCopySpriteAt(struct Sprite *sprite, s16 x, s16 y, u8 subpriority)
 
 void SetObjectEventDirection(struct ObjectEvent *objectEvent, u8 direction)
 {
-    s8 d2;
     objectEvent->previousMovementDirection = objectEvent->facingDirection;
     if (!objectEvent->facingDirectionLocked)
-    {
-        d2 = direction;
-        objectEvent->facingDirection = d2;
-    }
+        objectEvent->facingDirection = direction;
     objectEvent->movementDirection = direction;
 }
 
@@ -4190,7 +4186,8 @@ bool8 CopyablePlayerMovement_None(struct ObjectEvent *objectEvent, struct Sprite
 
 bool8 CopyablePlayerMovement_FaceDirection(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
-    ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(GetCopyDirection(gInitialMovementTypeFacingDirections[objectEvent->movementType], objectEvent->directionSequenceIndex, playerDirection)));
+    playerDirection = GetCopyDirection(gInitialMovementTypeFacingDirections[objectEvent->movementType], objectEvent->directionSequenceIndex, playerDirection);
+    ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(playerDirection));
     objectEvent->singleMovementActive = TRUE;
     sprite->sTypeFuncId = 2;
     return TRUE;
@@ -4198,34 +4195,33 @@ bool8 CopyablePlayerMovement_FaceDirection(struct ObjectEvent *objectEvent, stru
 
 bool8 CopyablePlayerMovement_WalkNormal(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
-    u32 direction;
-    s16 x;
-    s16 y;
+    s16 x, y;
+    u8 direction;
 
-    direction = playerDirection;
-    if (ObjectEventIsFarawayIslandMew(objectEvent))
+    if (!ObjectEventIsFarawayIslandMew(objectEvent)) {
+        playerDirection = GetCopyDirection(gInitialMovementTypeFacingDirections[objectEvent->movementType], objectEvent->directionSequenceIndex, playerDirection);
+    }
+    else
     {
-        direction = GetMewMoveDirection();
-        if (direction == DIR_NONE)
+        direction = playerDirection;
+        playerDirection = GetMewMoveDirection();
+        if (playerDirection == DIR_NONE)
         {
-            direction = playerDirection;
-            direction = GetCopyDirection(gInitialMovementTypeFacingDirections[objectEvent->movementType], objectEvent->directionSequenceIndex, direction);
-            ObjectEventMoveDestCoords(objectEvent, direction, &x, &y);
-            ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(direction));
+            playerDirection = direction;
+            playerDirection = GetCopyDirection(gInitialMovementTypeFacingDirections[objectEvent->movementType], objectEvent->directionSequenceIndex, playerDirection);
+            ObjectEventMoveDestCoords(objectEvent, playerDirection, &x, &y);
+            ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(playerDirection));
             objectEvent->singleMovementActive = TRUE;
             sprite->sTypeFuncId = 2;
             return TRUE;
         }
     }
-    else
-    {
-        direction = GetCopyDirection(gInitialMovementTypeFacingDirections[objectEvent->movementType], objectEvent->directionSequenceIndex, direction);
-    }
-    ObjectEventMoveDestCoords(objectEvent, direction, &x, &y);
-    ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkNormalMovementAction(direction));
 
-    if (GetCollisionAtCoords(objectEvent, x, y, direction) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
-        ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(direction));
+    ObjectEventMoveDestCoords(objectEvent, playerDirection, &x, &y);
+    ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkNormalMovementAction(playerDirection));
+
+    if (GetCollisionAtCoords(objectEvent, x, y, playerDirection) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
+        ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(playerDirection));
 
     objectEvent->singleMovementActive = TRUE;
     sprite->sTypeFuncId = 2;
@@ -4234,17 +4230,15 @@ bool8 CopyablePlayerMovement_WalkNormal(struct ObjectEvent *objectEvent, struct 
 
 bool8 CopyablePlayerMovement_WalkFast(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
-    u32 direction;
     s16 x;
     s16 y;
 
-    direction = playerDirection;
-    direction = GetCopyDirection(gInitialMovementTypeFacingDirections[objectEvent->movementType], objectEvent->directionSequenceIndex, direction);
-    ObjectEventMoveDestCoords(objectEvent, direction, &x, &y);
-    ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkFastMovementAction(direction));
+    playerDirection = GetCopyDirection(gInitialMovementTypeFacingDirections[objectEvent->movementType], objectEvent->directionSequenceIndex, playerDirection);
+    ObjectEventMoveDestCoords(objectEvent, playerDirection, &x, &y);
+    ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkFastMovementAction(playerDirection));
 
-    if (GetCollisionAtCoords(objectEvent, x, y, direction) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
-        ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(direction));
+    if (GetCollisionAtCoords(objectEvent, x, y, playerDirection) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
+        ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(playerDirection));
 
     objectEvent->singleMovementActive = TRUE;
     sprite->sTypeFuncId = 2;
@@ -4253,17 +4247,15 @@ bool8 CopyablePlayerMovement_WalkFast(struct ObjectEvent *objectEvent, struct Sp
 
 bool8 CopyablePlayerMovement_WalkFaster(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
-    u32 direction;
     s16 x;
     s16 y;
 
-    direction = playerDirection;
-    direction = GetCopyDirection(gInitialMovementTypeFacingDirections[objectEvent->movementType], objectEvent->directionSequenceIndex, direction);
-    ObjectEventMoveDestCoords(objectEvent, direction, &x, &y);
-    ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkFasterMovementAction(direction));
+    playerDirection = GetCopyDirection(gInitialMovementTypeFacingDirections[objectEvent->movementType], objectEvent->directionSequenceIndex, playerDirection);
+    ObjectEventMoveDestCoords(objectEvent, playerDirection, &x, &y);
+    ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkFasterMovementAction(playerDirection));
 
-    if (GetCollisionAtCoords(objectEvent, x, y, direction) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
-        ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(direction));
+    if (GetCollisionAtCoords(objectEvent, x, y, playerDirection) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
+        ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(playerDirection));
 
     objectEvent->singleMovementActive = TRUE;
     sprite->sTypeFuncId = 2;
@@ -4272,17 +4264,15 @@ bool8 CopyablePlayerMovement_WalkFaster(struct ObjectEvent *objectEvent, struct 
 
 bool8 CopyablePlayerMovement_Slide(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
-    u32 direction;
     s16 x;
     s16 y;
 
-    direction = playerDirection;
-    direction = GetCopyDirection(gInitialMovementTypeFacingDirections[objectEvent->movementType], objectEvent->directionSequenceIndex, direction);
-    ObjectEventMoveDestCoords(objectEvent, direction, &x, &y);
-    ObjectEventSetSingleMovement(objectEvent, sprite, GetSlideMovementAction(direction));
+    playerDirection = GetCopyDirection(gInitialMovementTypeFacingDirections[objectEvent->movementType], objectEvent->directionSequenceIndex, playerDirection);
+    ObjectEventMoveDestCoords(objectEvent, playerDirection, &x, &y);
+    ObjectEventSetSingleMovement(objectEvent, sprite, GetSlideMovementAction(playerDirection));
 
-    if (GetCollisionAtCoords(objectEvent, x, y, direction) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
-        ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(direction));
+    if (GetCollisionAtCoords(objectEvent, x, y, playerDirection) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
+        ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(playerDirection));
 
     objectEvent->singleMovementActive = TRUE;
     sprite->sTypeFuncId = 2;
@@ -4291,11 +4281,8 @@ bool8 CopyablePlayerMovement_Slide(struct ObjectEvent *objectEvent, struct Sprit
 
 bool8 CopyablePlayerMovement_JumpInPlace(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
-    u32 direction;
-
-    direction = playerDirection;
-    direction = GetCopyDirection(gInitialMovementTypeFacingDirections[objectEvent->movementType], objectEvent->directionSequenceIndex, direction);
-    ObjectEventSetSingleMovement(objectEvent, sprite, GetJumpInPlaceMovementAction(direction));
+    playerDirection = GetCopyDirection(gInitialMovementTypeFacingDirections[objectEvent->movementType], objectEvent->directionSequenceIndex, playerDirection);
+    ObjectEventSetSingleMovement(objectEvent, sprite, GetJumpInPlaceMovementAction(playerDirection));
     objectEvent->singleMovementActive = TRUE;
     sprite->sTypeFuncId = 2;
     return TRUE;
@@ -4303,17 +4290,15 @@ bool8 CopyablePlayerMovement_JumpInPlace(struct ObjectEvent *objectEvent, struct
 
 bool8 CopyablePlayerMovement_Jump(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
-    u32 direction;
     s16 x;
     s16 y;
 
-    direction = playerDirection;
-    direction = GetCopyDirection(gInitialMovementTypeFacingDirections[objectEvent->movementType], objectEvent->directionSequenceIndex, direction);
-    ObjectEventMoveDestCoords(objectEvent, direction, &x, &y);
-    ObjectEventSetSingleMovement(objectEvent, sprite, GetJumpMovementAction(direction));
+    playerDirection = GetCopyDirection(gInitialMovementTypeFacingDirections[objectEvent->movementType], objectEvent->directionSequenceIndex, playerDirection);
+    ObjectEventMoveDestCoords(objectEvent, playerDirection, &x, &y);
+    ObjectEventSetSingleMovement(objectEvent, sprite, GetJumpMovementAction(playerDirection));
 
-    if (GetCollisionAtCoords(objectEvent, x, y, direction) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
-        ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(direction));
+    if (GetCollisionAtCoords(objectEvent, x, y, playerDirection) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
+        ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(playerDirection));
 
     objectEvent->singleMovementActive = TRUE;
     sprite->sTypeFuncId = 2;
@@ -4322,19 +4307,17 @@ bool8 CopyablePlayerMovement_Jump(struct ObjectEvent *objectEvent, struct Sprite
 
 bool8 CopyablePlayerMovement_Jump2(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
-    u32 direction;
     s16 x;
     s16 y;
 
-    direction = playerDirection;
-    direction = GetCopyDirection(gInitialMovementTypeFacingDirections[objectEvent->movementType], objectEvent->directionSequenceIndex, direction);
+    playerDirection = GetCopyDirection(gInitialMovementTypeFacingDirections[objectEvent->movementType], objectEvent->directionSequenceIndex, playerDirection);
     x = objectEvent->currentCoords.x;
     y = objectEvent->currentCoords.y;
-    MoveCoordsInDirection(direction, &x, &y, 2, 2);
-    ObjectEventSetSingleMovement(objectEvent, sprite, GetJump2MovementAction(direction));
+    MoveCoordsInDirection(playerDirection, &x, &y, 2, 2);
+    ObjectEventSetSingleMovement(objectEvent, sprite, GetJump2MovementAction(playerDirection));
 
-    if (GetCollisionAtCoords(objectEvent, x, y, direction) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
-        ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(direction));
+    if (GetCollisionAtCoords(objectEvent, x, y, playerDirection) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
+        ObjectEventSetSingleMovement(objectEvent, sprite, GetFaceDirectionMovementAction(playerDirection));
 
     objectEvent->singleMovementActive = TRUE;
     sprite->sTypeFuncId = 2;
@@ -4655,14 +4638,13 @@ static u8 GetCollisionInDirection(struct ObjectEvent *objectEvent, u8 direction)
     return GetCollisionAtCoords(objectEvent, x, y, direction);
 }
 
-u8 GetCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u32 dir)
+u8 GetCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 dir)
 {
-    u8 direction = dir;
     if (IsCoordOutsideObjectEventMovementRange(objectEvent, x, y))
         return COLLISION_OUTSIDE_RANGE;
-    else if (MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, x, y, direction))
+    else if (MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, x, y, dir))
         return COLLISION_IMPASSABLE;
-    else if (objectEvent->trackedByCamera && !CanCameraMoveInDirection(direction))
+    else if (objectEvent->trackedByCamera && !CanCameraMoveInDirection(dir))
         return COLLISION_IMPASSABLE;
     else if (IsElevationMismatchAt(objectEvent->currentElevation, x, y))
         return COLLISION_ELEVATION_MISMATCH;
@@ -4775,19 +4757,16 @@ static void UNUSED MoveCoordsInMapCoordIncrement(u8 direction, s16 *x, s16 *y)
     *y += sDirectionToVectors[direction].y << 4;
 }
 
-static void MoveCoordsInDirection(u32 dir, s16 *x, s16 *y, s16 deltaX, s16 deltaY)
+static void MoveCoordsInDirection(u8 dir, s16 *x, s16 *y, s16 deltaX, s16 deltaY)
 {
-    u8 direction = dir;
-    s16 dx2 = (u16)deltaX;
-    s16 dy2 = (u16)deltaY;
-    if (sDirectionToVectors[direction].x > 0)
-        *x += dx2;
-    if (sDirectionToVectors[direction].x < 0)
-        *x -= dx2;
-    if (sDirectionToVectors[direction].y > 0)
-        *y += dy2;
-    if (sDirectionToVectors[direction].y < 0)
-        *y -= dy2;
+    if (sDirectionToVectors[dir].x > 0)
+        *x += deltaX;
+    if (sDirectionToVectors[dir].x < 0)
+        *x -= deltaX;
+    if (sDirectionToVectors[dir].y > 0)
+        *y += deltaY;
+    if (sDirectionToVectors[dir].y < 0)
+        *y -= deltaY;
 }
 
 void GetMapCoordsFromSpritePos(s16 x, s16 y, s16 *destX, s16 *destY)
@@ -4843,12 +4822,11 @@ static void GetObjectEventMovingCameraOffset(s16 *x, s16 *y)
         (*y)--;
 }
 
-void ObjectEventMoveDestCoords(struct ObjectEvent *objectEvent, u32 direction, s16 *x, s16 *y)
+void ObjectEventMoveDestCoords(struct ObjectEvent *objectEvent, u8 direction, s16 *x, s16 *y)
 {
-    u8 newDirn = direction;
     *x = objectEvent->currentCoords.x;
     *y = objectEvent->currentCoords.y;
-    MoveCoords(newDirn, x, y);
+    MoveCoords(direction, x, y);
 }
 
 bool8 ObjectEventIsMovementOverridden(struct ObjectEvent *objectEvent)
@@ -4944,11 +4922,9 @@ void UpdateObjectEventCurrentMovement(struct ObjectEvent *objectEvent, struct Sp
 }
 
 #define dirn_to_anim(name, table)\
-u8 name(u32 idx)\
+u8 name(u8 direction)\
 {\
-    u8 direction;\
     u8 animIds[sizeof(table)];\
-    direction = idx;\
     memcpy(animIds, (table), sizeof(table));\
     if (direction > DIR_EAST) direction = 0;\
     return animIds[direction];\
@@ -4993,7 +4969,7 @@ u8 GetOppositeDirection(u8 direction)
     u8 directions[sizeof sOppositeDirections];
 
     memcpy(directions, sOppositeDirections, sizeof sOppositeDirections);
-    if (direction <= DIR_NONE || direction > (sizeof sOppositeDirections))
+    if (direction == DIR_NONE || direction > (sizeof sOppositeDirections))
         return direction;
 
     return directions[direction - 1];
@@ -5001,7 +4977,7 @@ u8 GetOppositeDirection(u8 direction)
 
 // Takes the player's original and current direction and gives a direction the copy NPC should consider as the player's direction.
 // See comments at the table's definition.
-static u32 GetPlayerDirectionForCopy(u8 initDir, u8 moveDir)
+static u8 GetPlayerDirectionForCopy(u8 initDir, u8 moveDir)
 {
     return sPlayerDirectionsForCopy[initDir - 1][moveDir - 1];
 }
@@ -5009,17 +4985,14 @@ static u32 GetPlayerDirectionForCopy(u8 initDir, u8 moveDir)
 // copyInitDir is the initial facing direction of the copying NPC.
 // playerInitDir is the direction the player was facing when the copying NPC was spawned, as set by MovementType_CopyPlayer_Step0.
 // playerMoveDir is the direction the player is currently moving.
-static u32 GetCopyDirection(u8 copyInitDir, u32 playerInitDir, u32 playerMoveDir)
+static u8 GetCopyDirection(u8 copyInitDir, u8 playerInitDir, u8 playerMoveDir)
 {
-    u32 dir;
-    u8 _playerInitDir = playerInitDir;
-    u8 _playerMoveDir = playerMoveDir;
-    if (_playerInitDir == DIR_NONE || _playerMoveDir == DIR_NONE
-      || _playerInitDir > DIR_EAST || _playerMoveDir > DIR_EAST)
+    if (playerInitDir == DIR_NONE || playerMoveDir == DIR_NONE
+      || playerInitDir > DIR_EAST || playerMoveDir > DIR_EAST)
         return DIR_NONE;
 
-    dir = GetPlayerDirectionForCopy(_playerInitDir, playerMoveDir);
-    return sPlayerDirectionToCopyDirection[copyInitDir - 1][dir - 1];
+    playerMoveDir = GetPlayerDirectionForCopy(playerInitDir, playerMoveDir);
+    return sPlayerDirectionToCopyDirection[copyInitDir - 1][playerMoveDir - 1];
 }
 
 static void ObjectEventExecHeldMovementAction(struct ObjectEvent *objectEvent, struct Sprite *sprite)
@@ -7350,8 +7323,8 @@ static void UpdateObjectEventVisibility(struct ObjectEvent *objectEvent, struct 
 
 static void UpdateObjectEventOffscreen(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    u16 x, y;
-    u16 x2, y2;
+    s16 x, y;
+    s16 x2, y2;
     const struct ObjectEventGraphicsInfo *graphicsInfo;
 
     objectEvent->offScreen = FALSE;
@@ -7367,15 +7340,13 @@ static void UpdateObjectEventOffscreen(struct ObjectEvent *objectEvent, struct S
         x = sprite->x + sprite->x2 + sprite->centerToCornerVecX;
         y = sprite->y + sprite->y2 + sprite->centerToCornerVecY;
     }
-    x2 = graphicsInfo->width;
-    x2 += x;
-    y2 = y;
-    y2 += graphicsInfo->height;
+    x2 = (u16)x + (u16)graphicsInfo->width;
+    y2 = (u16)y + (u16)graphicsInfo->height;
 
-    if ((s16)x >= DISPLAY_WIDTH + 16 || (s16)x2 < -16)
+    if (x >= DISPLAY_WIDTH + 16 || x2 < -16)
         objectEvent->offScreen = TRUE;
 
-    if ((s16)y >= DISPLAY_HEIGHT + 16 || (s16)y2 < -16)
+    if (y >= DISPLAY_HEIGHT + 16 || y2 < -16)
         objectEvent->offScreen = TRUE;
 }
 
@@ -7493,8 +7464,7 @@ static void GetGroundEffectFlags_SandHeap(struct ObjectEvent *objEvent, u32 *fla
     {
         if (!objEvent->inSandPile)
         {
-            objEvent->inSandPile = FALSE;
-            objEvent->inSandPile = TRUE;
+            objEvent->inSandPile++;
             *flags |= GROUND_EFFECT_FLAG_SAND_PILE;
         }
     }
@@ -7513,8 +7483,7 @@ static void GetGroundEffectFlags_ShallowFlowingWater(struct ObjectEvent *objEven
     {
         if (!objEvent->inShallowFlowingWater)
         {
-            objEvent->inShallowFlowingWater = FALSE;
-            objEvent->inShallowFlowingWater = TRUE;
+            objEvent->inShallowFlowingWater++;
             *flags |= GROUND_EFFECT_FLAG_SHALLOW_FLOWING_WATER;
         }
     }
@@ -7544,8 +7513,7 @@ static void GetGroundEffectFlags_ShortGrass(struct ObjectEvent *objEvent, u32 *f
     {
         if (!objEvent->inShortGrass)
         {
-            objEvent->inShortGrass = FALSE;
-            objEvent->inShortGrass = TRUE;
+            objEvent->inShortGrass++;
             *flags |= GROUND_EFFECT_FLAG_SHORT_GRASS;
         }
     }
@@ -7562,8 +7530,7 @@ static void GetGroundEffectFlags_HotSprings(struct ObjectEvent *objEvent, u32 *f
     {
         if (!objEvent->inHotSprings)
         {
-            objEvent->inHotSprings = FALSE;
-            objEvent->inHotSprings = TRUE;
+            objEvent->inHotSprings++;
             *flags |= GROUND_EFFECT_FLAG_HOT_SPRINGS;
         }
     }
@@ -7626,12 +7593,12 @@ static u8 ObjectEventGetNearbyReflectionType(struct ObjectEvent *objEvent)
 {
     const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(objEvent->graphicsId);
 
-    // ceil div by tile width?
+    // Ceil div by tile width. Size / 16 + 1;
     s16 width = (info->width + 8) >> 4;
     s16 height = (info->height + 8) >> 4;
     s16 i, j;
     u8 result, b; // used by RETURN_REFLECTION_TYPE_AT
-    s16 one = 1;
+    s16 one = 1; // + 1
 
     for (i = 0; i < height; i++)
     {
@@ -7671,18 +7638,17 @@ u8 GetLedgeJumpDirection(s16 x, s16 y, u8 direction)
     };
 
     u8 behavior;
-    u8 index = direction;
 
-    if (index == DIR_NONE)
+    if (direction == DIR_NONE)
         return DIR_NONE;
-    else if (index > DIR_EAST)
-        index -= DIR_EAST;
+    else if (direction > DIR_EAST)
+        direction -= DIR_EAST;
 
-    index--;
+    direction--;
     behavior = MapGridGetMetatileBehaviorAt(x, y);
 
-    if (ledgeBehaviorFuncs[index](behavior) == TRUE)
-        return index + 1;
+    if (ledgeBehaviorFuncs[direction](behavior) == TRUE)
+        return direction + 1;
 
     return DIR_NONE;
 }
@@ -8196,26 +8162,26 @@ static void Step1(struct Sprite *sprite, u8 dir)
 
 static void Step2(struct Sprite *sprite, u8 dir)
 {
-    sprite->x += 2 * (u16) sDirectionToVectors[dir].x;
-    sprite->y += 2 * (u16) sDirectionToVectors[dir].y;
+    sprite->x += sDirectionToVectors[dir].x << 1;
+    sprite->y += sDirectionToVectors[dir].y << 1;
 }
 
 static void Step3(struct Sprite *sprite, u8 dir)
 {
-    sprite->x += 2 * (u16) sDirectionToVectors[dir].x + (u16) sDirectionToVectors[dir].x;
-    sprite->y += 2 * (u16) sDirectionToVectors[dir].y + (u16) sDirectionToVectors[dir].y;
+    sprite->x += (sDirectionToVectors[dir].x << 1) + sDirectionToVectors[dir].x;
+    sprite->y += (sDirectionToVectors[dir].y << 1) + sDirectionToVectors[dir].y;
 }
 
 static void Step4(struct Sprite *sprite, u8 dir)
 {
-    sprite->x += 4 * (u16) sDirectionToVectors[dir].x;
-    sprite->y += 4 * (u16) sDirectionToVectors[dir].y;
+    sprite->x += sDirectionToVectors[dir].x << 2;
+    sprite->y += sDirectionToVectors[dir].y << 2;
 }
 
 static void Step8(struct Sprite *sprite, u8 dir)
 {
-    sprite->x += 8 * (u16) sDirectionToVectors[dir].x;
-    sprite->y += 8 * (u16) sDirectionToVectors[dir].y;
+    sprite->x += sDirectionToVectors[dir].x << 3;
+    sprite->y += sDirectionToVectors[dir].y << 3;
 }
 
 #define sSpeed data[4]
@@ -8559,7 +8525,7 @@ bool8 SpriteAnimEnded(struct Sprite *sprite)
 
 void UpdateObjectEventSpriteInvisibility(struct Sprite *sprite, bool8 invisible)
 {
-    u16 x, y;
+    s16 x, y;
     s16 x2, y2;
 
     sprite->invisible = invisible;
@@ -8575,12 +8541,12 @@ void UpdateObjectEventSpriteInvisibility(struct Sprite *sprite, bool8 invisible)
         y = sprite->y + sprite->y2 + sprite->centerToCornerVecY;
     }
 
-    x2 = x - (sprite->centerToCornerVecX >> 1);
-    y2 = y - (sprite->centerToCornerVecY >> 1);
+    x2 = (u16)x - (u16)(sprite->centerToCornerVecX >> 1);
+    y2 = (u16)y - (u16)(sprite->centerToCornerVecY >> 1);
 
-    if ((s16)x >= DISPLAY_WIDTH + 16 || x2 < -16)
+    if (x >= DISPLAY_WIDTH + 16 || x2 < -16)
         sprite->invisible = TRUE;
-    if ((s16)y >= DISPLAY_HEIGHT + 16 || y2 < -16)
+    if (y >= DISPLAY_HEIGHT + 16 || y2 < -16)
         sprite->invisible = TRUE;
 }
 
@@ -8732,13 +8698,13 @@ static void VirtualObject_UpdateAnim(struct Sprite *sprite)
 {
     switch(sprite->sAnimNum)
     {
+    case UNION_ROOM_SPAWN_NONE:
+        break;
     case UNION_ROOM_SPAWN_IN:
         MoveUnionRoomObjectDown(sprite);
         break;
     case UNION_ROOM_SPAWN_OUT:
         MoveUnionRoomObjectUp(sprite);
-        break;
-    case 0:
         break;
     default:
         sprite->sAnimNum = 0;
