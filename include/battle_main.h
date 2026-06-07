@@ -10,16 +10,16 @@ struct TrainerMoney
 // For displaying a multi battle partner's Pokémon in the party menu
 struct MultiPartnerMenuPokemon
 {
-    /*0x00*/ u16 species;
-    /*0x02*/ u16 heldItem;
-    /*0x04*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
-    /*0x0F*/ u8 level;
-    /*0x10*/ u16 hp;
-    /*0x12*/ u16 maxhp;
-    /*0x14*/ u32 status;
-    /*0x18*/ u32 personality;
-    /*0x1C*/ u8 gender;
-    /*0x1D*/ u8 language;
+    u16 species;
+    u16 heldItem;
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u8 level;
+    u16 hp;
+    u16 maxhp;
+    u32 status;
+    u32 personality;
+    u8 gender;
+    u8 language;
 };
 
 // defines for the u8 array gTypeEffectiveness

@@ -63,23 +63,23 @@ typedef void (*TilesetCB)(void);
 
 struct Tileset
 {
-    /*0x00*/ bool8 isCompressed;
-    /*0x01*/ bool8 isSecondary;
-    /*0x04*/ const u32 *tiles;
-    /*0x08*/ const u16 (*palettes)[16];
-    /*0x0C*/ const u16 *metatiles;
-    /*0x10*/ const u16 *metatileAttributes;
-    /*0x14*/ TilesetCB callback;
+    bool8 isCompressed;
+    bool8 isSecondary;
+    const u32 *tiles;
+    const u16 (*palettes)[16];
+    const u16 *metatiles;
+    const u16 *metatileAttributes;
+    TilesetCB callback;
 };
 
 struct MapLayout
 {
-    /*0x00*/ s32 width;
-    /*0x04*/ s32 height;
-    /*0x08*/ const u16 *border;
-    /*0x0C*/ const u16 *map;
-    /*0x10*/ const struct Tileset *primaryTileset;
-    /*0x14*/ const struct Tileset *secondaryTileset;
+    s32 width;
+    s32 height;
+    const u16 *border;
+    const u16 *map;
+    const struct Tileset *primaryTileset;
+    const struct Tileset *secondaryTileset;
 };
 
 struct BackupMapLayout
@@ -91,22 +91,22 @@ struct BackupMapLayout
 
 struct ObjectEventTemplate
 {
-    /*0x00*/ u8 localId;
-    /*0x01*/ u8 graphicsId;
-    /*0x02*/ u8 kind; // Always OBJ_KIND_NORMAL in Emerald.
-    /*0x03*/ //u8 padding1;
-    /*0x04*/ s16 x;
-    /*0x06*/ s16 y;
-    /*0x08*/ u8 elevation;
-    /*0x09*/ u8 movementType;
-    /*0x0A*/ u16 movementRangeX:4;
-             u16 movementRangeY:4;
-             //u16 padding2:8;
-    /*0x0C*/ u16 trainerType;
-    /*0x0E*/ u16 trainerRange_berryTreeId;
-    /*0x10*/ const u8 *script;
-    /*0x14*/ u16 flagId;
-    /*0x16*/ //u8 padding3[2];
+    u8 localId;
+    u8 graphicsId;
+    u8 kind; // Always OBJ_KIND_NORMAL in Emerald.
+    //u8 padding1;
+    s16 x;
+    s16 y;
+    u8 elevation;
+    u8 movementType;
+    u16 movementRangeX:4;
+    u16 movementRangeY:4;
+    //u16 padding2:8;
+    u16 trainerType;
+    u16 trainerRange_berryTreeId;
+    const u8 *script;
+    u16 flagId;
+    //u8 padding3[2];
 };
 
 struct WarpEvent
@@ -170,108 +170,107 @@ struct MapConnections
 
 struct MapHeader
 {
-    /* 0x00 */ const struct MapLayout *mapLayout;
-    /* 0x04 */ const struct MapEvents *events;
-    /* 0x08 */ const u8 *mapScripts;
-    /* 0x0C */ const struct MapConnections *connections;
-    /* 0x10 */ u16 music;
-    /* 0x12 */ u16 mapLayoutId;
-    /* 0x14 */ mapsec_u8_t regionMapSectionId;
-    /* 0x15 */ u8 cave;
-    /* 0x16 */ u8 weather;
-    /* 0x17 */ u8 mapType;
-    /* 0x18 */ u8 filler_18[2];
-               // fields correspond to the arguments in the map_header_flags macro
-    /* 0x1A */ bool8 allowCycling:1;
-               bool8 allowEscaping:1; // Escape Rope and Dig
-               bool8 allowRunning:1;
-               bool8 showMapName:5; // the last 4 bits are unused
-                                    // but the 5 bit sized bitfield is required to match
-    /* 0x1B */ u8 battleType;
+    const struct MapLayout *mapLayout;
+    const struct MapEvents *events;
+    const u8 *mapScripts;
+    const struct MapConnections *connections;
+    u16 music;
+    u16 mapLayoutId;
+    mapsec_u8_t regionMapSectionId;
+    u8 cave;
+    u8 weather;
+    u8 mapType;
+    u8 filler_18[2];
+    // fields correspond to the arguments in the map_header_flags macro
+    bool8 allowCycling:1;
+    bool8 allowEscaping:1; // Escape Rope and Dig
+    bool8 allowRunning:1;
+    bool8 showMapName:5; // the last 4 bits are unused
+                         // but the 5 bit sized bitfield is required to match
+    u8 battleType;
 };
 
 
 struct ObjectEvent
 {
-    /*0x00*/ u32 active:1;
-             u32 singleMovementActive:1;
-             u32 triggerGroundEffectsOnMove:1;
-             u32 triggerGroundEffectsOnStop:1;
-             u32 disableCoveringGroundEffects:1;
-             u32 landingJump:1;
-             u32 heldMovementActive:1;
-             u32 heldMovementFinished:1;
-    /*0x01*/ u32 frozen:1;
-             u32 facingDirectionLocked:1;
-             u32 disableAnim:1;
-             u32 enableAnim:1;
-             u32 inanimate:1;
-             u32 invisible:1;
-             u32 offScreen:1;
-             u32 trackedByCamera:1;
-    /*0x02*/ u32 isPlayer:1;
-             u32 hasReflection:1;
-             u32 inShortGrass:1;
-             u32 inShallowFlowingWater:1;
-             u32 inSandPile:1;
-             u32 inHotSprings:1;
-             u32 hasShadow:1;
-             u32 spriteAnimPausedBackup:1;
-    /*0x03*/ u32 spriteAffineAnimPausedBackup:1;
-             u32 disableJumpLandingGroundEffect:1;
-             u32 fixedPriority:1;
-             u32 hideReflection:1;
-             //u32 padding:4;
-    /*0x04*/ u8 spriteId;
-    /*0x05*/ u8 graphicsId;
-    /*0x06*/ u8 movementType;
-    /*0x07*/ u8 trainerType;
-    /*0x08*/ u8 localId;
-    /*0x09*/ u8 mapNum;
-    /*0x0A*/ u8 mapGroup;
-    /*0x0B*/ u8 currentElevation:4;
-             u8 previousElevation:4;
-    /*0x0C*/ struct Coords16 initialCoords;
-    /*0x10*/ struct Coords16 currentCoords;
-    /*0x14*/ struct Coords16 previousCoords;
-    /*0x18*/ u16 facingDirection:4; // current direction?
-             u16 movementDirection:4;
-             struct __attribute__((packed))
-             {
-                u8 rangeX:4;
-                u8 rangeY:4;
-             } range;
-    /*0x1A*/ u8 fieldEffectSpriteId;
-    /*0x1B*/ u8 warpArrowSpriteId;
-    /*0x1C*/ u8 movementActionId;
-    /*0x1D*/ u8 trainerRange_berryTreeId;
-    /*0x1E*/ u8 currentMetatileBehavior;
-    /*0x1F*/ u8 previousMetatileBehavior;
-    /*0x20*/ u8 previousMovementDirection;
-    /*0x21*/ u8 directionSequenceIndex;
-    /*0x22*/ u8 playerCopyableMovement; // COPY_MOVE_*
-    /*0x23*/ //u8 padding2;
-    /*size = 0x24*/
+    u32 active:1;
+    u32 singleMovementActive:1;
+    u32 triggerGroundEffectsOnMove:1;
+    u32 triggerGroundEffectsOnStop:1;
+    u32 disableCoveringGroundEffects:1;
+    u32 landingJump:1;
+    u32 heldMovementActive:1;
+    u32 heldMovementFinished:1;
+    u32 frozen:1;
+    u32 facingDirectionLocked:1;
+    u32 disableAnim:1;
+    u32 enableAnim:1;
+    u32 inanimate:1;
+    u32 invisible:1;
+    u32 offScreen:1;
+    u32 trackedByCamera:1;
+    u32 isPlayer:1;
+    u32 hasReflection:1;
+    u32 inShortGrass:1;
+    u32 inShallowFlowingWater:1;
+    u32 inSandPile:1;
+    u32 inHotSprings:1;
+    u32 hasShadow:1;
+    u32 spriteAnimPausedBackup:1;
+    u32 spriteAffineAnimPausedBackup:1;
+    u32 disableJumpLandingGroundEffect:1;
+    u32 fixedPriority:1;
+    u32 hideReflection:1;
+    //u32 padding:4;
+    u8 spriteId;
+    u8 graphicsId;
+    u8 movementType;
+    u8 trainerType;
+    u8 localId;
+    u8 mapNum;
+    u8 mapGroup;
+    u8 currentElevation:4;
+    u8 previousElevation:4;
+    struct Coords16 initialCoords;
+    struct Coords16 currentCoords;
+    struct Coords16 previousCoords;
+    u16 facingDirection:4; // current direction?
+    u16 movementDirection:4;
+    struct __attribute__((packed))
+    {
+       u8 rangeX:4;
+       u8 rangeY:4;
+    } range;
+    u8 fieldEffectSpriteId;
+    u8 warpArrowSpriteId;
+    u8 movementActionId;
+    u8 trainerRange_berryTreeId;
+    u8 currentMetatileBehavior;
+    u8 previousMetatileBehavior;
+    u8 previousMovementDirection;
+    u8 directionSequenceIndex;
+    u8 playerCopyableMovement; // COPY_MOVE_*
+    //u8 padding2;
 };
 
 struct ObjectEventGraphicsInfo
 {
-    /*0x00*/ u16 tileTag;
-    /*0x02*/ u16 paletteTag;
-    /*0x04*/ u16 reflectionPaletteTag;
-    /*0x06*/ u16 size;
-    /*0x08*/ s16 width;
-    /*0x0A*/ s16 height;
-    /*0x0C*/ u8 paletteSlot:4;
-             u8 shadowSize:2;
-             u8 inanimate:1;
-             u8 disableReflectionPaletteLoad:1;
-    /*0x0D*/ u8 tracks;
-    /*0x10*/ const struct OamData *oam;
-    /*0x14*/ const struct SubspriteTable *subspriteTables;
-    /*0x18*/ const union AnimCmd *const *anims;
-    /*0x1C*/ const struct SpriteFrameImage *images;
-    /*0x20*/ const union AffineAnimCmd *const *affineAnims;
+    u16 tileTag;
+    u16 paletteTag;
+    u16 reflectionPaletteTag;
+    u16 size;
+    s16 width;
+    s16 height;
+    u8 paletteSlot:4;
+    u8 shadowSize:2;
+    u8 inanimate:1;
+    u8 disableReflectionPaletteLoad:1;
+    u8 tracks;
+    const struct OamData *oam;
+    const struct SubspriteTable *subspriteTables;
+    const union AnimCmd *const *anims;
+    const struct SpriteFrameImage *images;
+    const union AffineAnimCmd *const *affineAnims;
 };
 
 enum {
@@ -341,24 +340,24 @@ enum
 
 struct PlayerAvatar
 {
-    /*0x00*/ u8 flags;
-    /*0x01*/ u8 transitionFlags; // used to be named bike, but its definitely not that. seems to be some transition flags
-    /*0x02*/ u8 runningState; // this is a static running state. 00 is not moving, 01 is turn direction, 02 is moving.
-    /*0x03*/ u8 tileTransitionState; // this is a transition running state: 00 is not moving, 01 is transition between tiles, 02 means you are on the frame in which you have centered on a tile but are about to keep moving, even if changing directions. 2 is also used for a ledge hop, since you are transitioning.
-    /*0x04*/ u8 spriteId;
-    /*0x05*/ u8 objectEventId;
-    /*0x06*/ bool8 preventStep;
-    /*0x07*/ u8 gender;
-    /*0x08*/ u8 acroBikeState; // 00 is normal, 01 is turning, 02 is standing wheelie, 03 is hopping wheelie
-    /*0x09*/ u8 newDirBackup; // during bike movement, the new direction as opposed to player's direction is backed up here.
-    /*0x0A*/ u8 bikeFrameCounter; // on the mach bike, when this value is 1, the bike is moving but not accelerating yet for 1 tile. on the acro bike, this acts as a timer for acro bike.
-    /*0x0B*/ u8 bikeSpeed;
+    u8 flags;
+    u8 transitionFlags; // used to be named bike, but its definitely not that. seems to be some transition flags
+    u8 runningState; // this is a static running state. 00 is not moving, 01 is turn direction, 02 is moving.
+    u8 tileTransitionState; // this is a transition running state: 00 is not moving, 01 is transition between tiles, 02 means you are on the frame in which you have centered on a tile but are about to keep moving, even if changing directions. 2 is also used for a ledge hop, since you are transitioning.
+    u8 spriteId;
+    u8 objectEventId;
+    bool8 preventStep;
+    u8 gender;
+    u8 acroBikeState; // 00 is normal, 01 is turning, 02 is standing wheelie, 03 is hopping wheelie
+    u8 newDirBackup; // during bike movement, the new direction as opposed to player's direction is backed up here.
+    u8 bikeFrameCounter; // on the mach bike, when this value is 1, the bike is moving but not accelerating yet for 1 tile. on the acro bike, this acts as a timer for acro bike.
+    u8 bikeSpeed;
     // acro bike only
-    /*0x0C*/ u32 directionHistory; // up/down/left/right history is stored in each nybble, but using the field directions and not the io inputs.
-    /*0x10*/ u32 abStartSelectHistory; // same as above but for A + B + start + select only
+    u32 directionHistory; // up/down/left/right history is stored in each nybble, but using the field directions and not the io inputs.
+    u32 abStartSelectHistory; // same as above but for A + B + start + select only
     // these two are timer history arrays which [0] is the active timer for acro bike. every element is backed up to the next element upon update.
-    /*0x14*/ u8 dirTimerHistory[8];
-    /*0x1C*/ u8 abStartSelectTimerHistory[8];
+    u8 dirTimerHistory[8];
+    u8 abStartSelectTimerHistory[8];
 };
 
 struct Camera

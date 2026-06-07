@@ -14,11 +14,11 @@
 
 struct PokeblockFeeder
 {
-    /*0x00*/ s16 x;
-    /*0x02*/ s16 y;
-    /*0x04*/ s8 mapNum;
-    /*0x05*/ u8 stepCounter;
-    /*0x08*/ struct Pokeblock pokeblock;
+    s16 x;
+    s16 y;
+    s8 mapNum;
+    u8 stepCounter;
+    struct Pokeblock pokeblock;
 };
 
 #define NUM_POKEBLOCK_FEEDERS 10

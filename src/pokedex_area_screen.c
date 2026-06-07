@@ -63,32 +63,32 @@ struct OverworldArea
 
 struct
 {
-    /*0x000*/ void (*callback)(void); // unused
-    /*0x004*/ MainCallback prev; // unused
-    /*0x008*/ MainCallback next; // unused
-    /*0x00C*/ u16 state; // unused
-    /*0x00E*/ u16 species;
-    /*0x010*/ struct OverworldArea overworldAreasWithMons[MAX_AREA_HIGHLIGHTS];
-    /*0x110*/ u16 numOverworldAreas;
-    /*0x112*/ u16 numSpecialAreas;
-    /*0x114*/ u16 drawAreaGlowState;
-    /*0x116*/ u16 areaGlowTilemap[AREA_SCREEN_WIDTH * AREA_SCREEN_HEIGHT];
-    /*0x616*/ u16 markerTimer;
-    /*0x618*/ u16 glowTimer;
-    /*0x61A*/ u16 areaShadeBldArgLo;
-    /*0x61C*/ u16 areaShadeBldArgHi;
-    /*0x61E*/ bool8 showingMarkers;
-    /*0x61F*/ u8 markerFlashCounter;
-    /*0x620*/ mapsec_u16_t specialAreaRegionMapSectionIds[MAX_AREA_MARKERS];
-    /*0x660*/ struct Sprite *areaMarkerSprites[MAX_AREA_MARKERS];
-    /*0x6E0*/ u16 numAreaMarkerSprites;
-    /*0x6E2*/ u16 alteringCaveCounter;
-    /*0x6E4*/ u16 alteringCaveId;
-    /*0x6E8*/ u8 *screenSwitchState;
-    /*0x6EC*/ struct RegionMap regionMap;
-    /*0xF70*/ u8 charBuffer[64];
-    /*0xFB0*/ struct Sprite *areaUnknownSprites[3];
-    /*0xFBC*/ u8 areaUnknownGraphicsBuffer[0x600];
+    void (*callback)(void); // unused
+    MainCallback prev; // unused
+    MainCallback next; // unused
+    u16 state; // unused
+    u16 species;
+    struct OverworldArea overworldAreasWithMons[MAX_AREA_HIGHLIGHTS];
+    u16 numOverworldAreas;
+    u16 numSpecialAreas;
+    u16 drawAreaGlowState;
+    u16 areaGlowTilemap[AREA_SCREEN_WIDTH * AREA_SCREEN_HEIGHT];
+    u16 markerTimer;
+    u16 glowTimer;
+    u16 areaShadeBldArgLo;
+    u16 areaShadeBldArgHi;
+    bool8 showingMarkers;
+    u8 markerFlashCounter;
+    mapsec_u16_t specialAreaRegionMapSectionIds[MAX_AREA_MARKERS];
+    struct Sprite *areaMarkerSprites[MAX_AREA_MARKERS];
+    u16 numAreaMarkerSprites;
+    u16 alteringCaveCounter;
+    u16 alteringCaveId;
+    u8 *screenSwitchState;
+    struct RegionMap regionMap;
+    u8 charBuffer[64];
+    struct Sprite *areaUnknownSprites[3];
+    u8 areaUnknownGraphicsBuffer[0x600];
 } static EWRAM_DATA *sPokedexAreaScreen = NULL;
 
 static void FindMapsWithMon(u16);

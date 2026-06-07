@@ -366,58 +366,58 @@ enum {
 //   fill your gauge further.
 struct SlotMachine
 {
-    /*0x00*/ u8 state;
-    /*0x01*/ u8 machineId;
-    /*0x02*/ u8 pikaPowerBolts;
-    /*0x03*/ bool8 luckyGame;
-    /*0x04*/ u8 machineBias;
-    /*0x05*/ u8 reelTimeDraw;
-    /*0x06*/ bool8 didNotFailBias;
-    /*0x07*/ u8 biasSymbol;
-    /*0x08*/ u16 matches;
-    /*0x0A*/ u8 reelTimeSpinsLeft;
-    /*0x0B*/ u8 reelTimeSpinsUsed;
-    /*0x0C*/ s16 coins;
-    /*0x0E*/ s16 payout;
-    /*0x10*/ s16 netCoinLoss; // never negative
-    /*0x12*/ s16 bet;
-    /*0x14*/ s16 reeltimePixelOffset;
-    /*0x16*/ s16 reeltimePosition;
-    /*0x18*/ s16 currentReel;
-    /*0x1A*/ s16 reelSpeed;
-    /*0x1C*/ s16 reelPixelOffsets[NUM_REELS];
-    /*0x22*/ u16 reelShockOffsets[NUM_REELS];
-    /*0x28*/ s16 reelPositions[NUM_REELS];
-    /*0x2E*/ s16 reelExtraTurns[NUM_REELS];
-    /*0x34*/ s16 winnerRows[NUM_REELS];
-    /*0x3A*/ u8 slotReelTasks[NUM_REELS];
-    /*0x3D*/ u8 digDisplayTaskId;
-    /*0x3E*/ u8 pikaPowerBoltTaskId;
-    /*0x3F*/ u8 reelTimePikachuSpriteId;
-    /*0x40*/ u8 reelTimeNumberGapSpriteId;
-    /*0x41*/ u8 reelTimeExplosionSpriteId;
-    /*0x42*/ u8 reelTimeBrokenMachineSpriteId;
-    /*0x43*/ u8 reelTimeSmokeSpriteId;
-    /*0x44*/ u8 flashMatchLineSpriteIds[NUM_MATCH_LINES];
-    /*0x49*/ u8 reelTimeMachineSpriteIds[2];
-    /*0x49*/ u8 reelTimeNumberSpriteIds[3];
-    /*0x4E*/ u8 reelTimeShadowSpriteIds[2];
-    /*0x50*/ u8 reelTimeBoltSpriteIds[2];
-    /*0x52*/ u8 reelTimePikachuAuraSpriteIds[2];
-    /*0x54*/ u8 reelTimeDuckSpriteIds[4];
-    /*0x58*/ u16 win0h;
-    /*0x5a*/ u16 win0v;
-    /*0x5c*/ u16 winIn;
-    /*0x5e*/ u16 winOut;
-    /*0x60*/ u16 backupMapMusic;
-    /*0x64*/ MainCallback prevMainCb;
+    u8 state;
+    u8 machineId;
+    u8 pikaPowerBolts;
+    bool8 luckyGame;
+    u8 machineBias;
+    u8 reelTimeDraw;
+    bool8 didNotFailBias;
+    u8 biasSymbol;
+    u16 matches;
+    u8 reelTimeSpinsLeft;
+    u8 reelTimeSpinsUsed;
+    s16 coins;
+    s16 payout;
+    s16 netCoinLoss; // never negative
+    s16 bet;
+    s16 reeltimePixelOffset;
+    s16 reeltimePosition;
+    s16 currentReel;
+    s16 reelSpeed;
+    s16 reelPixelOffsets[NUM_REELS];
+    u16 reelShockOffsets[NUM_REELS];
+    s16 reelPositions[NUM_REELS];
+    s16 reelExtraTurns[NUM_REELS];
+    s16 winnerRows[NUM_REELS];
+    u8 slotReelTasks[NUM_REELS];
+    u8 digDisplayTaskId;
+    u8 pikaPowerBoltTaskId;
+    u8 reelTimePikachuSpriteId;
+    u8 reelTimeNumberGapSpriteId;
+    u8 reelTimeExplosionSpriteId;
+    u8 reelTimeBrokenMachineSpriteId;
+    u8 reelTimeSmokeSpriteId;
+    u8 flashMatchLineSpriteIds[NUM_MATCH_LINES];
+    u8 reelTimeMachineSpriteIds[2];
+    u8 reelTimeNumberSpriteIds[3];
+    u8 reelTimeShadowSpriteIds[2];
+    u8 reelTimeBoltSpriteIds[2];
+    u8 reelTimePikachuAuraSpriteIds[2];
+    u8 reelTimeDuckSpriteIds[4];
+    u16 win0h;
+    u16 win0v;
+    u16 winIn;
+    u16 winOut;
+    u16 backupMapMusic;
+    MainCallback prevMainCb;
 };
 
 struct DigitalDisplaySprite
 {
-    /*0x00*/ u8 spriteTemplateId;
-    /*0x01*/ u8 dispInfoId;
-    /*0x02*/ s16 spriteId;
+    u8 spriteTemplateId;
+    u8 dispInfoId;
+    s16 spriteId;
 };
 
 static void CB2_SlotMachineSetup(void);

@@ -19,30 +19,30 @@ struct EasyChatScreenTemplate
 
 struct EasyChatScreen
 {
-    /*0x00*/ u8 type;
-    /*0x01*/ u8 templateId;
-    /*0x02*/ u8 numColumns;
-    /*0x03*/ u8 numRows;
-    /*0x04*/ u8 inputState;
-    /*0x05*/ s8 mainCursorColumn;
-    /*0x06*/ s8 mainCursorRow;
-    /*0x07*/ u8 maxWords;
-    /*0x08*/ u8 inputStateBackup;
-    /*0x09*/ bool8 inAlphabetMode;
-    /*0x0A*/ s8 keyboardColumn;
-    /*0x0B*/ s8 keyboardRow;
-    /*0x0C*/ u8 keyboardScrollOffset;
-    /*0x0D*/ u8 keyboardLastRow;
-    /*0x0E*/ u8 wordSelectScrollOffset;
-    /*0x0F*/ u8 wordSelectLastRow;
-    /*0x10*/ s8 wordSelectColumn;
-    /*0x11*/ s8 wordSelectRow;
-    /*0x12*/ u8 displayedPersonType;
-    /*0x13*/ u8 unused; // Set to 0, never read
-    /*0x14*/ u8 quizTitle[32];
-    /*0x34*/ const u8 *titleText;
-    /*0x38*/ u16 *savedPhrase;
-    /*0x3C*/ u16 currentPhrase[9];
+    u8 type;
+    u8 templateId;
+    u8 numColumns;
+    u8 numRows;
+    u8 inputState;
+    s8 mainCursorColumn;
+    s8 mainCursorRow;
+    u8 maxWords;
+    u8 inputStateBackup;
+    bool8 inAlphabetMode;
+    s8 keyboardColumn;
+    s8 keyboardRow;
+    u8 keyboardScrollOffset;
+    u8 keyboardLastRow;
+    u8 wordSelectScrollOffset;
+    u8 wordSelectLastRow;
+    s8 wordSelectColumn;
+    s8 wordSelectRow;
+    u8 displayedPersonType;
+    u8 unused; // Set to 0, never read
+    u8 quizTitle[32];
+    const u8 *titleText;
+    u16 *savedPhrase;
+    u16 currentPhrase[9];
 };
 
 struct EasyChatScreenControl

@@ -193,52 +193,52 @@ struct SpriteTemplate
 // icon palette to flicker when changing items in the bag.
 struct Sprite
 {
-    /*0x00*/ struct OamData oam;
-    /*0x08*/ const union AnimCmd *const *anims;
-    /*0x0C*/ const struct SpriteFrameImage *images;
-    /*0x10*/ const union AffineAnimCmd *const *affineAnims;
-    /*0x14*/ const struct SpriteTemplate *template;
-    /*0x18*/ const struct SubspriteTable *subspriteTables;
-    /*0x1C*/ SpriteCallback callback;
+    struct OamData oam;
+    const union AnimCmd *const *anims;
+    const struct SpriteFrameImage *images;
+    const union AffineAnimCmd *const *affineAnims;
+    const struct SpriteTemplate *template;
+    const struct SubspriteTable *subspriteTables;
+    SpriteCallback callback;
 
-    /*0x20*/ s16 x, y;
-    /*0x24*/ s16 x2, y2;
-    /*0x28*/ s8 centerToCornerVecX;
-    /*0x29*/ s8 centerToCornerVecY;
+    s16 x, y;
+    s16 x2, y2;
+    s8 centerToCornerVecX;
+    s8 centerToCornerVecY;
 
-    /*0x2A*/ u8 animNum;
-    /*0x2B*/ u8 animCmdIndex;
-    /*0x2C*/ u8 animDelayCounter:6;
-             bool8 animPaused:1;
-             bool8 affineAnimPaused:1;
-    /*0x2D*/ u8 animLoopCounter;
+    u8 animNum;
+    u8 animCmdIndex;
+    u8 animDelayCounter:6;
+    bool8 animPaused:1;
+    bool8 affineAnimPaused:1;
+    u8 animLoopCounter;
 
     // general purpose data fields
-    /*0x2E*/ s16 data[8];
+    s16 data[8];
 
-    /*0x3E*/ bool16 inUse:1;               //1
-             bool16 coordOffsetEnabled:1;  //2
-             bool16 invisible:1;           //4
-             bool16 flags_3:1;             //8
-             bool16 flags_4:1;             //0x10
-             bool16 flags_5:1;             //0x20
-             bool16 flags_6:1;             //0x40
-             bool16 flags_7:1;             //0x80
-    /*0x3F*/ bool16 hFlip:1;               //1
-             bool16 vFlip:1;               //2
-             bool16 animBeginning:1;       //4
-             bool16 affineAnimBeginning:1; //8
-             bool16 animEnded:1;           //0x10
-             bool16 affineAnimEnded:1;     //0x20
-             bool16 usingSheet:1;          //0x40
-             bool16 anchored:1;            //0x80
+    bool16 inUse:1;
+    bool16 coordOffsetEnabled:1;
+    bool16 invisible:1;
+    bool16 flags_3:1;
+    bool16 flags_4:1;
+    bool16 flags_5:1;
+    bool16 flags_6:1;
+    bool16 flags_7:1;
+    bool16 hFlip:1;
+    bool16 vFlip:1;
+    bool16 animBeginning:1;
+    bool16 affineAnimBeginning:1;
+    bool16 animEnded:1;
+    bool16 affineAnimEnded:1;
+    bool16 usingSheet:1;
+    bool16 anchored:1;
 
-    /*0x40*/ u16 sheetTileStart;
+    u16 sheetTileStart;
 
-    /*0x42*/ u8 subspriteTableNum:6;
-             u8 subspriteMode:2;
+    u8 subspriteTableNum:6;
+    u8 subspriteMode:2;
 
-    /*0x43*/ u8 subpriority;
+    u8 subpriority;
 };
 
 struct OamMatrix

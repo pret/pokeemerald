@@ -75,16 +75,16 @@ enum {
 
 struct ConditionGraph
 {
-    /*0x000*/ u8 conditions[CONDITION_GRAPH_LOAD_MAX][CONDITION_COUNT];
-    /*0x014*/ struct UCoords16 savedPositions[CONDITION_GRAPH_LOAD_MAX][CONDITION_COUNT];
-    /*0x064*/ struct UCoords16 newPositions[CONDITION_GRAPH_UPDATE_STEPS][CONDITION_COUNT];
-    /*0x12C*/ struct UCoords16 curPositions[CONDITION_COUNT];
-    /*0x140*/ u16 scanlineRight[CONDITION_GRAPH_HEIGHT][2];
-    /*0x248*/ u16 scanlineLeft[CONDITION_GRAPH_HEIGHT][2];
-    /*0x350*/ u16 bottom;
-    /*0x352*/ u16 updateCounter;
-    /*0x354*/ bool8 needsDraw;
-    /*0x355*/ u8 scanlineResetState;
+    u8 conditions[CONDITION_GRAPH_LOAD_MAX][CONDITION_COUNT];
+    struct UCoords16 savedPositions[CONDITION_GRAPH_LOAD_MAX][CONDITION_COUNT];
+    struct UCoords16 newPositions[CONDITION_GRAPH_UPDATE_STEPS][CONDITION_COUNT];
+    struct UCoords16 curPositions[CONDITION_COUNT];
+    u16 scanlineRight[CONDITION_GRAPH_HEIGHT][2];
+    u16 scanlineLeft[CONDITION_GRAPH_HEIGHT][2];
+    u16 bottom;
+    u16 updateCounter;
+    bool8 needsDraw;
+    u8 scanlineResetState;
 };
 
 // Mailbox menu

@@ -222,56 +222,56 @@ struct DodrioGame_ScoreResults
 
 struct DodrioGame
 {
-    /*0x0000*/ MainCallback exitCallback;
-    /*0x0004*/ u8 ALIGNED(4) taskId;
-    /*0x0008*/ u8 ALIGNED(4) playersReceived;
-    /*0x000C*/ u8 ALIGNED(4) startState;
-    /*0x0010*/ u8 ALIGNED(4) state;
-    /*0x0014*/ u8 ALIGNED(4) timer;
-    /*0x0018*/ u8 ALIGNED(4) funcId;
-    /*0x001C*/ u8 ALIGNED(4) prevFuncId; // Set, never read
-    /*0x0020*/ bool8 ALIGNED(4) isLeader;
-    /*0x0024*/ u8 ALIGNED(4) numPlayers;
-    /*0x0028*/ u8 ALIGNED(4) multiplayerId;
-    /*0x0029*/ u8 unused1[7];
-    /*0x0030*/ u8 ALIGNED(4) countdownEndDelay;
-    /*0x0034*/ u8 ALIGNED(4) posToPlayerId[MAX_RFU_PLAYERS];
-    /*0x003C*/ u8 ALIGNED(4) unused2; // Set to 0, never read
-    /*0x0040*/ u8 ALIGNED(4) numGraySquares;
-    /*0x0044*/ u8 ALIGNED(4) berryColStart;
-    /*0x0048*/ u8 ALIGNED(4) berryColEnd;
-    /*0x004A*/ u16 berryResults[MAX_RFU_PLAYERS][NUM_BERRY_IDS];
-    /*0x0086*/ u16 berriesEaten[MAX_RFU_PLAYERS];
-    /*0x0090*/ u8 ALIGNED(4) difficulty[MAX_RFU_PLAYERS];
-    /*0x0098*/ u8 ALIGNED(4) pickStateQueue[4];
-    /*0x009C*/ u8 ALIGNED(4) eatTimer[NUM_BERRY_COLUMNS];
-    /*0x00A8*/ u8 ALIGNED(4) inputState[MAX_RFU_PLAYERS];
-    /*0x00B0*/ u8 ALIGNED(4) inputDelay[MAX_RFU_PLAYERS];
-    /*0x00B8*/ u8 ALIGNED(4) berryEatenBy[NUM_BERRY_COLUMNS];
-    /*0x00C4*/ u8 ALIGNED(4) berryState[NUM_BERRY_COLUMNS];
-    /*0x00D0*/ u8 ALIGNED(4) fallTimer[NUM_BERRY_COLUMNS];
-    /*0x00DC*/ u8 ALIGNED(4) newBerryTimer[NUM_BERRY_COLUMNS];
-    /*0x00E8*/ u8 ALIGNED(4) prevBerryIds[NUM_BERRY_COLUMNS];
-    /*0x00F4*/ u8 ALIGNED(4) playersAttemptingPick[NUM_BERRY_COLUMNS][2];
-    /*0x010C*/ u8 ALIGNED(4) playAgainStates[MAX_RFU_PLAYERS];
-    /*0x0112*/ u16 berriesPickedInRow;
-    /*0x0114*/ u16 maxBerriesPickedInRow;
-    /*0x0118*/ bool32 startCountdown; // Never read
-    /*0x011C*/ bool32 startGame;
-    /*0x0120*/ bool32 berriesFalling;
-    /*0x0124*/ u8 ALIGNED(4) clearRecvCmdTimer;
-    /*0x0128*/ bool8 ALIGNED(4) clearRecvCmds;
-    /*0x012C*/ bool32 allReadyToEnd;
-    /*0x0130*/ bool32 readyToEnd[MAX_RFU_PLAYERS];
-    /*0x0144*/ bool8 ALIGNED(4) playingPickSound;
-    /*0x0148*/ bool8 ALIGNED(4) playingSquishSound[NUM_BERRY_COLUMNS];
-    /*0x0154*/ u8 ALIGNED(4) endSoundState;
-    /*0x0158*/ bool8 ALIGNED(4) readyToStart[MAX_RFU_PLAYERS];
-    /*0x0160*/ struct DodrioGame_Gfx gfx;
-    /*0x318C*/ struct DodrioGame_MonInfo monInfo[MAX_RFU_PLAYERS];
-    /*0x31A0*/ struct DodrioGame_Player players[MAX_RFU_PLAYERS];
-    /*0x32CC*/ struct DodrioGame_Player player;
-    /*0x3308*/ struct DodrioGame_ScoreResults scoreResults[MAX_RFU_PLAYERS];
+    MainCallback exitCallback;
+    u8 ALIGNED(4) taskId;
+    u8 ALIGNED(4) playersReceived;
+    u8 ALIGNED(4) startState;
+    u8 ALIGNED(4) state;
+    u8 ALIGNED(4) timer;
+    u8 ALIGNED(4) funcId;
+    u8 ALIGNED(4) prevFuncId; // Set, never read
+    bool8 ALIGNED(4) isLeader;
+    u8 ALIGNED(4) numPlayers;
+    u8 ALIGNED(4) multiplayerId;
+    u8 unused1[7];
+    u8 ALIGNED(4) countdownEndDelay;
+    u8 ALIGNED(4) posToPlayerId[MAX_RFU_PLAYERS];
+    u8 ALIGNED(4) unused2; // Set to 0, never read
+    u8 ALIGNED(4) numGraySquares;
+    u8 ALIGNED(4) berryColStart;
+    u8 ALIGNED(4) berryColEnd;
+    u16 berryResults[MAX_RFU_PLAYERS][NUM_BERRY_IDS];
+    u16 berriesEaten[MAX_RFU_PLAYERS];
+    u8 ALIGNED(4) difficulty[MAX_RFU_PLAYERS];
+    u8 ALIGNED(4) pickStateQueue[4];
+    u8 ALIGNED(4) eatTimer[NUM_BERRY_COLUMNS];
+    u8 ALIGNED(4) inputState[MAX_RFU_PLAYERS];
+    u8 ALIGNED(4) inputDelay[MAX_RFU_PLAYERS];
+    u8 ALIGNED(4) berryEatenBy[NUM_BERRY_COLUMNS];
+    u8 ALIGNED(4) berryState[NUM_BERRY_COLUMNS];
+    u8 ALIGNED(4) fallTimer[NUM_BERRY_COLUMNS];
+    u8 ALIGNED(4) newBerryTimer[NUM_BERRY_COLUMNS];
+    u8 ALIGNED(4) prevBerryIds[NUM_BERRY_COLUMNS];
+    u8 ALIGNED(4) playersAttemptingPick[NUM_BERRY_COLUMNS][2];
+    u8 ALIGNED(4) playAgainStates[MAX_RFU_PLAYERS];
+    u16 berriesPickedInRow;
+    u16 maxBerriesPickedInRow;
+    bool32 startCountdown; // Never read
+    bool32 startGame;
+    bool32 berriesFalling;
+    u8 ALIGNED(4) clearRecvCmdTimer;
+    bool8 ALIGNED(4) clearRecvCmds;
+    bool32 allReadyToEnd;
+    bool32 readyToEnd[MAX_RFU_PLAYERS];
+    bool8 ALIGNED(4) playingPickSound;
+    bool8 ALIGNED(4) playingSquishSound[NUM_BERRY_COLUMNS];
+    u8 ALIGNED(4) endSoundState;
+    bool8 ALIGNED(4) readyToStart[MAX_RFU_PLAYERS];
+    struct DodrioGame_Gfx gfx;
+    struct DodrioGame_MonInfo monInfo[MAX_RFU_PLAYERS];
+    struct DodrioGame_Player players[MAX_RFU_PLAYERS];
+    struct DodrioGame_Player player;
+    struct DodrioGame_ScoreResults scoreResults[MAX_RFU_PLAYERS];
 }; // size = 0x3330
 
 EWRAM_DATA static struct DodrioGame *sGame = NULL;

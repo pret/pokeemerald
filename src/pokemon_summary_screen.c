@@ -127,44 +127,44 @@ enum
 
 static EWRAM_DATA struct PokemonSummaryScreenData
 {
-    /*0x00*/ union {
+    union {
         struct Pokemon *mons;
         struct BoxPokemon *boxMons;
     } monList;
-    /*0x04*/ MainCallback callback;
-    /*0x08*/ struct Sprite *markingsSprite;
-    /*0x0C*/ struct Pokemon currentMon;
-    /*0x70*/ struct PokeSummary
+    MainCallback callback;
+    struct Sprite *markingsSprite;
+    struct Pokemon currentMon;
+    struct PokeSummary
     {
-        u16 species; // 0x0
-        u16 species2; // 0x2
-        u8 isEgg; // 0x4
-        u8 level; // 0x5
-        u8 ribbonCount; // 0x6
-        u8 ailment; // 0x7
-        u8 abilityNum; // 0x8
-        metloc_u8_t metLocation; // 0x9
-        u8 metLevel; // 0xA
-        u8 metGame; // 0xB
-        u32 pid; // 0xC
-        u32 exp; // 0x10
-        u16 moves[MAX_MON_MOVES]; // 0x14
-        u8 pp[MAX_MON_MOVES]; // 0x1C
-        u16 currentHP; // 0x20
-        u16 maxHP; // 0x22
-        u16 atk; // 0x24
-        u16 def; // 0x26
-        u16 spatk; // 0x28
-        u16 spdef; // 0x2A
-        u16 speed; // 0x2C
-        u16 item; // 0x2E
-        u16 friendship; // 0x30
-        u8 OTGender; // 0x32
-        u8 nature; // 0x33
-        u8 ppBonuses; // 0x34
-        u8 sanity; // 0x35
-        u8 OTName[17]; // 0x36
-        u32 OTID; // 0x48
+        u16 species;
+        u16 species2;
+        u8 isEgg;
+        u8 level;
+        u8 ribbonCount;
+        u8 ailment;
+        u8 abilityNum;
+        metloc_u8_t metLocation;
+        u8 metLevel;
+        u8 metGame;
+        u32 pid;
+        u32 exp;
+        u16 moves[MAX_MON_MOVES];
+        u8 pp[MAX_MON_MOVES];
+        u16 currentHP;
+        u16 maxHP;
+        u16 atk;
+        u16 def;
+        u16 spatk;
+        u16 spdef;
+        u16 speed;
+        u16 item;
+        u16 friendship;
+        u8 OTGender;
+        u8 nature;
+        u8 ppBonuses;
+        u8 sanity;
+        u8 OTName[17];
+        u32 OTID;
     } summary;
     u16 bgTilemapBuffers[PSS_PAGE_COUNT][2][0x400];
     u8 mode;

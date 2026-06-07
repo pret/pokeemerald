@@ -3,14 +3,14 @@
 
 struct RSBattleTowerRecord
 {
-    /*0x00*/ u8 lvlMode; // 0 = level 50, 1 = level 100
-    /*0x01*/ u8 facilityClass;
-    /*0x02*/ u16 winStreak;
-    /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
-    /*0x0C*/ u8 trainerId[TRAINER_ID_LENGTH];
-    /*0x10*/ u16 greeting[EASY_CHAT_BATTLE_WORDS_COUNT];
-    /*0x1C*/ struct BattleTowerPokemon party[FRONTIER_PARTY_SIZE];
-    /*0xA0*/ u32 checksum;
+    u8 lvlMode; // 0 = level 50, 1 = level 100
+    u8 facilityClass;
+    u16 winStreak;
+    u8 name[PLAYER_NAME_LENGTH + 1];
+    u8 trainerId[TRAINER_ID_LENGTH];
+    u16 greeting[EASY_CHAT_BATTLE_WORDS_COUNT];
+    struct BattleTowerPokemon party[FRONTIER_PARTY_SIZE];
+    u32 checksum;
 };
 
 struct BattleFrontierTrainer

@@ -56,12 +56,12 @@ enum {
 
 struct ResetRtcInputMap
 {
-    /*0x0*/ u8 dataIndex;
-    /*0x2*/ u16 minVal;
-    /*0x4*/ u16 maxVal;
-    /*0x6*/ u8 left;
-    /*0x7*/ u8 right;
-    /*0x8*/ u8 unk; // never read
+    u8 dataIndex;
+    u16 minVal;
+    u16 maxVal;
+    u8 left;
+    u8 right;
+    u8 unk; // never read
 };
 
 static void CB2_ResetRtcScreen(void);

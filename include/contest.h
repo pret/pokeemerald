@@ -225,19 +225,19 @@ struct ContestAppealMoveResults
 
 struct ContestAIInfo
 {
-    /*0x00*/ u8 aiState;
-    /*0x02*/ u16 nextMove;
-    /*0x04*/ u8 nextMoveIndex;
-    /*0x05*/ u8 moveScores[MAX_MON_MOVES];
-    /*0x09*/ u8 aiAction;
-    /*0x0A*/ u8 filler[6];
-    /*0x10*/ u8 currentAIFlag;
-    /*0x14*/ u32 aiFlags;
-    /*0x18*/ s16 scriptResult;
-    /*0x1A*/ s16 vars[3];
-    /*0x20*/ const u8 *stack[8];
-    /*0x40*/ u8 stackSize;
-    /*0x41*/ u8 contestantId;
+    u8 aiState;
+    u16 nextMove;
+    u8 nextMoveIndex;
+    u8 moveScores[MAX_MON_MOVES];
+    u8 aiAction;
+    u8 filler[6];
+    u8 currentAIFlag;
+    u32 aiFlags;
+    s16 scriptResult;
+    s16 vars[3];
+    const u8 *stack[8];
+    u8 stackSize;
+    u8 contestantId;
 };
 
 struct ContestExcitement

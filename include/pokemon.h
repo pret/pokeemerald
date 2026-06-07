@@ -130,49 +130,49 @@ struct PokemonSubstruct2
 
 struct PokemonSubstruct3
 {
- /* 0x00 */ u8 pokerus;
- /* 0x01 */ metloc_u8_t metLocation;
+    u8 pokerus;
+    metloc_u8_t metLocation;
 
- /* 0x02 */ u16 metLevel:7;
- /* 0x02 */ u16 metGame:4;
- /* 0x03 */ u16 pokeball:4;
- /* 0x03 */ u16 otGender:1;
+    u16 metLevel:7;
+    u16 metGame:4;
+    u16 pokeball:4;
+    u16 otGender:1;
 
- /* 0x04 */ u32 hpIV:5;
- /* 0x04 */ u32 attackIV:5;
- /* 0x05 */ u32 defenseIV:5;
- /* 0x05 */ u32 speedIV:5;
- /* 0x05 */ u32 spAttackIV:5;
- /* 0x06 */ u32 spDefenseIV:5;
- /* 0x07 */ u32 isEgg:1;
- /* 0x07 */ u32 abilityNum:1;
+    u32 hpIV:5;
+    u32 attackIV:5;
+    u32 defenseIV:5;
+    u32 speedIV:5;
+    u32 spAttackIV:5;
+    u32 spDefenseIV:5;
+    u32 isEgg:1;
+    u32 abilityNum:1;
 
- /* 0x08 */ u32 coolRibbon:3;               // Stores the highest contest rank achieved in the Cool category.
- /* 0x08 */ u32 beautyRibbon:3;             // Stores the highest contest rank achieved in the Beauty category.
- /* 0x08 */ u32 cuteRibbon:3;               // Stores the highest contest rank achieved in the Cute category.
- /* 0x09 */ u32 smartRibbon:3;              // Stores the highest contest rank achieved in the Smart category.
- /* 0x09 */ u32 toughRibbon:3;              // Stores the highest contest rank achieved in the Tough category.
- /* 0x09 */ u32 championRibbon:1;           // Given when defeating the Champion. Because both RSE and FRLG use it, later generations don't specify from which region it comes from.
- /* 0x0A */ u32 winningRibbon:1;            // Given at the Battle Tower's Level 50 challenge by winning a set of seven battles that extends the current streak to 56 or more.
- /* 0x0A */ u32 victoryRibbon:1;            // Given at the Battle Tower's Level 100 challenge by winning a set of seven battles that extends the current streak to 56 or more.
- /* 0x0A */ u32 artistRibbon:1;             // Given at the Contest Hall by winning a Master Rank contest with at least 800 points, and agreeing to have the Pokémon's portrait placed in the museum after being offered.
- /* 0x0A */ u32 effortRibbon:1;             // Given at Slateport's market to Pokémon with maximum EVs.
- /* 0x0A */ u32 marineRibbon:1;             // Never distributed.
- /* 0x0A */ u32 landRibbon:1;               // Never distributed.
- /* 0x0A */ u32 skyRibbon:1;                // Never distributed.
- /* 0x0A */ u32 countryRibbon:1;            // Distributed during Pokémon Festa '04 and '05 to tournament winners.
- /* 0x0B */ u32 nationalRibbon:1;           // Given to purified Shadow Pokémon in Colosseum/XD.
- /* 0x0B */ u32 earthRibbon:1;              // Given to teams that have beaten Mt. Battle's 100-battle challenge in Colosseum/XD.
- /* 0x0B */ u32 worldRibbon:1;              // Distributed during Pokémon Festa '04 and '05 to tournament winners.
- /* 0x0B */ u32 unusedRibbons:4;            // Discarded in Gen 4.
+    u32 coolRibbon:3;               // Stores the highest contest rank achieved in the Cool category.
+    u32 beautyRibbon:3;             // Stores the highest contest rank achieved in the Beauty category.
+    u32 cuteRibbon:3;               // Stores the highest contest rank achieved in the Cute category.
+    u32 smartRibbon:3;              // Stores the highest contest rank achieved in the Smart category.
+    u32 toughRibbon:3;              // Stores the highest contest rank achieved in the Tough category.
+    u32 championRibbon:1;           // Given when defeating the Champion. Because both RSE and FRLG use it, later generations don't specify from which region it comes from.
+    u32 winningRibbon:1;            // Given at the Battle Tower's Level 50 challenge by winning a set of seven battles that extends the current streak to 56 or more.
+    u32 victoryRibbon:1;            // Given at the Battle Tower's Level 100 challenge by winning a set of seven battles that extends the current streak to 56 or more.
+    u32 artistRibbon:1;             // Given at the Contest Hall by winning a Master Rank contest with at least 800 points, and agreeing to have the Pokémon's portrait placed in the museum after being offered.
+    u32 effortRibbon:1;             // Given at Slateport's market to Pokémon with maximum EVs.
+    u32 marineRibbon:1;             // Never distributed.
+    u32 landRibbon:1;               // Never distributed.
+    u32 skyRibbon:1;                // Never distributed.
+    u32 countryRibbon:1;            // Distributed during Pokémon Festa '04 and '05 to tournament winners.
+    u32 nationalRibbon:1;           // Given to purified Shadow Pokémon in Colosseum/XD.
+    u32 earthRibbon:1;              // Given to teams that have beaten Mt. Battle's 100-battle challenge in Colosseum/XD.
+    u32 worldRibbon:1;              // Distributed during Pokémon Festa '04 and '05 to tournament winners.
+    u32 unusedRibbons:4;            // Discarded in Gen 4.
 
- // The functionality of this bit changed in FRLG:
- // In RS, this bit does nothing, is never set, & is accidentally unset when hatching Eggs.
- // In FRLG & Emerald, this controls Mew & Deoxys obedience and whether they can be traded.
- // If set, a Pokémon is a fateful encounter in FRLG's summary screen if hatched & for all Pokémon in Gen 4+ summary screens.
- // Set for in-game event island legendaries, events distributed after a certain date, & Pokémon from XD: Gale of Darkness.
- // Not to be confused with METLOC_FATEFUL_ENCOUNTER.
- /* 0x0B */ u32 modernFatefulEncounter:1;
+    // The functionality of this bit changed in FRLG:
+    // In RS, this bit does nothing, is never set, & is accidentally unset when hatching Eggs.
+    // In FRLG & Emerald, this controls Mew & Deoxys obedience and whether they can be traded.
+    // If set, a Pokémon is a fateful encounter in FRLG's summary screen if hatched & for all Pokémon in Gen 4+ summary screens.
+    // Set for in-game event island legendaries, events distributed after a certain date, & Pokémon from XD: Gale of Darkness.
+    // Not to be confused with METLOC_FATEFUL_ENCOUNTER.
+    u32 modernFatefulEncounter:1;
 };
 
 // Number of bytes in the largest Pokémon substruct.
@@ -259,69 +259,69 @@ enum {
 
 struct BattlePokemon
 {
-    /*0x00*/ u16 species;
-    /*0x02*/ u16 attack;
-    /*0x04*/ u16 defense;
-    /*0x06*/ u16 speed;
-    /*0x08*/ u16 spAttack;
-    /*0x0A*/ u16 spDefense;
-    /*0x0C*/ u16 moves[MAX_MON_MOVES];
-    /*0x14*/ u32 hpIV:5;
-    /*0x14*/ u32 attackIV:5;
-    /*0x15*/ u32 defenseIV:5;
-    /*0x15*/ u32 speedIV:5;
-    /*0x16*/ u32 spAttackIV:5;
-    /*0x17*/ u32 spDefenseIV:5;
-    /*0x17*/ u32 isEgg:1;
-    /*0x17*/ u32 abilityNum:1;
-    /*0x18*/ s8 statStages[NUM_BATTLE_STATS];
-    /*0x20*/ u8 ability;
-    /*0x21*/ u8 types[2];
-    /*0x23*/ u8 unknown;
-    /*0x24*/ u8 pp[MAX_MON_MOVES];
-    /*0x28*/ u16 hp;
-    /*0x2A*/ u8 level;
-    /*0x2B*/ u8 friendship;
-    /*0x2C*/ u16 maxHP;
-    /*0x2E*/ u16 item;
-    /*0x30*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
-    /*0x3B*/ u8 ppBonuses;
-    /*0x3C*/ u8 otName[PLAYER_NAME_LENGTH + 1];
-    /*0x44*/ u32 experience;
-    /*0x48*/ u32 personality;
-    /*0x4C*/ u32 status1;
-    /*0x50*/ u32 status2;
-    /*0x54*/ u32 otId;
+    u16 species;
+    u16 attack;
+    u16 defense;
+    u16 speed;
+    u16 spAttack;
+    u16 spDefense;
+    u16 moves[MAX_MON_MOVES];
+    u32 hpIV:5;
+    u32 attackIV:5;
+    u32 defenseIV:5;
+    u32 speedIV:5;
+    u32 spAttackIV:5;
+    u32 spDefenseIV:5;
+    u32 isEgg:1;
+    u32 abilityNum:1;
+    s8 statStages[NUM_BATTLE_STATS];
+    u8 ability;
+    u8 types[2];
+    u8 unknown;
+    u8 pp[MAX_MON_MOVES];
+    u16 hp;
+    u8 level;
+    u8 friendship;
+    u16 maxHP;
+    u16 item;
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u8 ppBonuses;
+    u8 otName[PLAYER_NAME_LENGTH + 1];
+    u32 experience;
+    u32 personality;
+    u32 status1;
+    u32 status2;
+    u32 otId;
 };
 
 struct SpeciesInfo
 {
- /* 0x00 */ u8 baseHP;
- /* 0x01 */ u8 baseAttack;
- /* 0x02 */ u8 baseDefense;
- /* 0x03 */ u8 baseSpeed;
- /* 0x04 */ u8 baseSpAttack;
- /* 0x05 */ u8 baseSpDefense;
- /* 0x06 */ u8 types[2];
- /* 0x08 */ u8 catchRate;
- /* 0x09 */ u8 expYield;
- /* 0x0A */ u16 evYield_HP:2;
- /* 0x0A */ u16 evYield_Attack:2;
- /* 0x0A */ u16 evYield_Defense:2;
- /* 0x0A */ u16 evYield_Speed:2;
- /* 0x0B */ u16 evYield_SpAttack:2;
- /* 0x0B */ u16 evYield_SpDefense:2;
- /* 0x0C */ u16 itemCommon;
- /* 0x0E */ u16 itemRare;
- /* 0x10 */ u8 genderRatio;
- /* 0x11 */ u8 eggCycles;
- /* 0x12 */ u8 friendship;
- /* 0x13 */ u8 growthRate;
- /* 0x14 */ u8 eggGroups[2];
- /* 0x16 */ u8 abilities[2];
- /* 0x18 */ u8 safariZoneFleeRate;
- /* 0x19 */ u8 bodyColor : 7;
-            u8 noFlip : 1;
+    u8 baseHP;
+    u8 baseAttack;
+    u8 baseDefense;
+    u8 baseSpeed;
+    u8 baseSpAttack;
+    u8 baseSpDefense;
+    u8 types[2];
+    u8 catchRate;
+    u8 expYield;
+    u16 evYield_HP:2;
+    u16 evYield_Attack:2;
+    u16 evYield_Defense:2;
+    u16 evYield_Speed:2;
+    u16 evYield_SpAttack:2;
+    u16 evYield_SpDefense:2;
+    u16 itemCommon;
+    u16 itemRare;
+    u8 genderRatio;
+    u8 eggCycles;
+    u8 friendship;
+    u8 growthRate;
+    u8 eggGroups[2];
+    u8 abilities[2];
+    u8 safariZoneFleeRate;
+    u8 bodyColor : 7;
+    u8 noFlip : 1;
 };
 
 struct BattleMove

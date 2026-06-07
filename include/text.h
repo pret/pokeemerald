@@ -52,7 +52,7 @@ enum {
 
 struct TextPrinterSubStruct
 {
-    u8 fontId:4;  // 0x14
+    u8 fontId:4;
     bool8 hasPrintBeenSpedUp:1;
     u8 unk:3;
     u8 downArrowDelay:5;
@@ -68,11 +68,11 @@ struct TextPrinterTemplate
     u8 fontId;
     u8 x;
     u8 y;
-    u8 currentX;        // 0x8
+    u8 currentX;
     u8 currentY;
     u8 letterSpacing;
     u8 lineSpacing;
-    u8 unk:4;   // 0xC
+    u8 unk:4;
     u8 fgColor:4;
     u8 bgColor:4;
     u8 shadowColor:4;
@@ -82,15 +82,15 @@ struct TextPrinter
 {
     struct TextPrinterTemplate printerTemplate;
 
-    void (*callback)(struct TextPrinterTemplate *, u16); // 0x10
+    void (*callback)(struct TextPrinterTemplate *, u16);
 
     u8 subStructFields[7]; // always cast to struct TextPrinterSubStruct... so why bother
     u8 active;
-    u8 state;       // 0x1C
+    u8 state;
     u8 textSpeed;
     u8 delayCounter;
     u8 scrollDistance;
-    u8 minLetterSpacing;  // 0x20
+    u8 minLetterSpacing;
     u8 japanese;
 };
 
