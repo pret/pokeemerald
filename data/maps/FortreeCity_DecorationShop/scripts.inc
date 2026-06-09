@@ -53,16 +53,16 @@ FortreeCity_DecorationShop_PokemartDecor_Chairs:
 	.2byte DECOR_HARD_CHAIR
 	pokemartlistend
 
-FortreeCity_DecorationShop_Text_MerchandiseSentToPC:
-	.string "Merchandise you buy here is sent to\n"
-	.string "your own PC.\p"
-	.string "That's fantastic! I wish they could\n"
-	.string "also deliver me home like that.$"
-
-FortreeCity_DecorationShop_Text_BuyingDeskForDolls:
-	.string "I'm buying a pretty desk and I'm\n"
-	.string "putting my cute DOLLS on it.\p"
-	.string "If I don't, when I decorate my\n"
-	.string "SECRET BASE, my DOLLS will get\l"
-	.string "dirty or poked with splinters.$"
-
+.ifdef FRENCH
+	.include "data/maps/FortreeCity_DecorationShop/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/FortreeCity_DecorationShop/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/FortreeCity_DecorationShop/text_es.inc"
+.else
+	.include "data/maps/FortreeCity_DecorationShop/text.inc"
+.endif
+.endif
+.endif

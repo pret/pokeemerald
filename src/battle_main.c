@@ -450,6 +450,64 @@ const u8 gTypeEffectiveness[336] =
 
 const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1] =
 {
+#if FRENCH
+    [TYPE_NORMAL] = _("NORMAL"),
+    [TYPE_FIGHTING] = _("COMBAT"),
+    [TYPE_FLYING] = _("VOL"),
+    [TYPE_POISON] = _("POISON"),
+    [TYPE_GROUND] = _("SOL"),
+    [TYPE_ROCK] = _("ROCHE"),
+    [TYPE_BUG] = _("INSECT"),
+    [TYPE_GHOST] = _("SPECTR"),
+    [TYPE_STEEL] = _("ACIER"),
+    [TYPE_MYSTERY] = _("???"),
+    [TYPE_FIRE] = _("FEU"),
+    [TYPE_WATER] = _("EAU"),
+    [TYPE_GRASS] = _("PLANTE"),
+    [TYPE_ELECTRIC] = _("ELECTR"),
+    [TYPE_PSYCHIC] = _("PSY"),
+    [TYPE_ICE] = _("GLACE"),
+    [TYPE_DRAGON] = _("DRAGON"),
+    [TYPE_DARK] = _("TENEBR"),
+#elif ITALIAN
+    [TYPE_NORMAL] = _("NORM"),
+    [TYPE_FIGHTING] = _("LOTTA"),
+    [TYPE_FLYING] = _("VOLAN"),
+    [TYPE_POISON] = _("VELENO"),
+    [TYPE_GROUND] = _("TERRA"),
+    [TYPE_ROCK] = _("ROCCIA"),
+    [TYPE_BUG] = _("COLEOT"),
+    [TYPE_GHOST] = _("SP.TRO"),
+    [TYPE_STEEL] = _("ACC.IO"),
+    [TYPE_MYSTERY] = _("???"),
+    [TYPE_FIRE] = _("FUOCO"),
+    [TYPE_WATER] = _("ACQUA"),
+    [TYPE_GRASS] = _("ERBA"),
+    [TYPE_ELECTRIC] = _("ELETT"),
+    [TYPE_PSYCHIC] = _("PSICO"),
+    [TYPE_ICE] = _("GHIACC"),
+    [TYPE_DRAGON] = _("DRAGO"),
+    [TYPE_DARK] = _("BUIO"),
+#elif SPANISH
+    [TYPE_NORMAL] = _("NORMAL"),
+    [TYPE_FIGHTING] = _("LUCHA"),
+    [TYPE_FLYING] = _("VOLAD."),
+    [TYPE_POISON] = _("VENENO"),
+    [TYPE_GROUND] = _("TIERRA"),
+    [TYPE_ROCK] = _("ROCA"),
+    [TYPE_BUG] = _("BICHO"),
+    [TYPE_GHOST] = _("FANT."),
+    [TYPE_STEEL] = _("ACERO"),
+    [TYPE_MYSTERY] = _("(?)"),
+    [TYPE_FIRE] = _("FUEGO"),
+    [TYPE_WATER] = _("AGUA"),
+    [TYPE_GRASS] = _("PLANTA"),
+    [TYPE_ELECTRIC] = _("ELÉCT."),
+    [TYPE_PSYCHIC] = _("PSÍQ."),
+    [TYPE_ICE] = _("HIELO"),
+    [TYPE_DRAGON] = _("DRAGÓN"),
+    [TYPE_DARK] = _("SINIE."),
+#else //ENGLISH
     [TYPE_NORMAL] = _("NORMAL"),
     [TYPE_FIGHTING] = _("FIGHT"),
     [TYPE_FLYING] = _("FLYING"),
@@ -468,6 +526,7 @@ const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1] =
     [TYPE_ICE] = _("ICE"),
     [TYPE_DRAGON] = _("DRAGON"),
     [TYPE_DARK] = _("DARK"),
+#endif
 };
 
 // This is a factor in how much money you get for beating a trainer.
@@ -531,7 +590,15 @@ const struct TrainerMoney gTrainerMoneyTable[] =
     {0xFF, 5}, // Any trainer class not listed above uses this
 };
 
+#if FRENCH
+#include "data/text/french/abilities.h"
+#elif ITALIAN
+#include "data/text/italian/abilities.h"
+#elif SPANISH
+#include "data/text/spanish/abilities.h"
+#else //ENGLISH
 #include "data/text/abilities.h"
+#endif
 
 static void (*const sTurnActionsFuncsTable[])(void) =
 {

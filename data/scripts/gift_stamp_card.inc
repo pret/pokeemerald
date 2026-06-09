@@ -14,8 +14,33 @@ MysteryGiftScript_StampCard::
 	release
 	end
 
+.ifdef FRENCH
+sText_MysteryGiftStampCard:
+	.string "Merci d’utiliser le système\n"
+	.string "CARTE TAMPON.\p"
+	.string "Il vous en faut {STR_VAR_1} de plus pour\n"
+	.string "remplir complètement la carte.$"
+.else
+.ifdef ITALIAN
+sText_MysteryGiftStampCard:
+	.string "Grazie per usare il Sistema SCHEDA\n"
+	.string "BOLLINI.\p"
+	.string "Il numero di BOLLINI che ancora ti\n"
+	.string "serve per completare la SCHEDA\l"
+	.string "è {STR_VAR_1}.$"
+.else
+.ifdef SPANISH
+sText_MysteryGiftStampCard:
+	.string "Gracias por usar el sistema\n"
+	.string "de SELLOS.\p"
+	.string "Para completar la TARJETA\n"
+	.string "de SELLOS, te faltan {STR_VAR_1}.$"
+.else @ENGLISH
 sText_MysteryGiftStampCard:
 	.string "Thank you for using the STAMP CARD\n"
 	.string "System.\p"
 	.string "You have {STR_VAR_1} more to collect to\n"
 	.string "fill your STAMP CARD.$"
+.endif
+.endif
+.endif

@@ -34,6 +34,76 @@ OldSeaMap_Obtained:
 	release
 	end
 
+.ifdef FRENCH
+sText_MysteryGiftOldSeaMapForYou:
+	.string "Merci d’utiliser le système\n"
+	.string "CADEAU MYST.\p"
+	.string "Vous devez être {PLAYER}.\n"
+	.string "Il y a une VIEILLECARTE pour vous.$"
+
+sText_MysteryGiftOldSeaMapUseAtPort:
+	.string "Elle peut être utilisée au port de\n"
+	.string "NENUCRIQUE.\p"
+	.string "Essayez-la pour voir de quoi \n"
+	.string "il s’agit.$"
+
+sText_MysteryGiftOldSeaMapThankYou:
+	.string "Merci d’utiliser le système\n"
+	.string "CADEAU MYST.$"
+
+sText_MysteryGiftOldSeaMapBagFull:
+	.string "Oh, je regrette, {PLAYER}. La POCHE\n"
+	.string "OBJ. RARES du SAC est pleine.\p"
+	.string "Faites de la place dans votre SAC\n"
+	.string "et revenez me voir.$"
+.else
+.ifdef ITALIAN
+sText_MysteryGiftOldSeaMapForYou:
+	.string "Grazie per usare il Sistema\n"
+	.string "DONO SEGRETO.\p"
+	.string "Tu sei {PLAYER}, vero? Ho qui\n"
+	.string "una MAPPA STINTA per te.$"
+
+sText_MysteryGiftOldSeaMapUseAtPort:
+	.string "Dovrebbe servirti allo scalo di\n"
+	.string "PORTO ALGHEPOLI.\p"
+	.string "Ti conviene andare a vedere\n"
+	.string "di persona.$"
+
+sText_MysteryGiftOldSeaMapThankYou:
+	.string "Grazie per usare il Sistema\n"
+	.string "DONO SEGRETO.$"
+
+sText_MysteryGiftOldSeaMapBagFull:
+	.string "Oh, mi spiace. La TASCA STRUMENTI\n"
+	.string "BASE del tuo ZAINO è piena.\p"
+	.string "Torna a trovarmi dopo aver\n"
+	.string "depositato qualcosa nel PC.$"
+.else
+.ifdef SPANISH
+sText_MysteryGiftOldSeaMapForYou:
+	.string "Gracias por usar el sistema\n"
+	.string "del REGALO MISTERIOSO.\p"
+	.string "Debes de ser {PLAYER}, ¿no?\p"
+	.string "Pues tenemos una CARTA MARINA para ti.$"
+
+sText_MysteryGiftOldSeaMapUseAtPort:
+	.string "Parece que puedes usarlo en el\n"
+	.string "puerto de CIUDAD CALAGUA.\p"
+	.string "¿Por qué no curioseas un poco\n"
+	.string "para ver de qué va la cosa?$"
+
+sText_MysteryGiftOldSeaMapThankYou:
+	.string "Gracias por usar el sistema\n"
+	.string "del REGALO MISTERIOSO.$"
+
+sText_MysteryGiftOldSeaMapBagFull:
+	.string "Lo siento, {PLAYER}. El BOLSILLO\n"
+	.string "de los OBJETOS CLAVE está lleno.\p"
+	.string "Guarda algo en el PC y vuelve más\n"
+	.string "tarde.$"
+
+.else @ENGLISH
 sText_MysteryGiftOldSeaMapForYou:
 	.string "Thank you for using the MYSTERY\n"
 	.string "GIFT System.\p"
@@ -56,3 +126,6 @@ sText_MysteryGiftOldSeaMapBagFull:
 	.string "Your BAG's KEY ITEMS POCKET is full.\p"
 	.string "Please store something on your PC,\n"
 	.string "then come back for this.$"
+.endif
+.endif
+.endif

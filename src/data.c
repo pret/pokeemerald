@@ -322,7 +322,24 @@ const union AnimCmd *const gAnims_MonPic[MAX_MON_PIC_FRAMES] =
 #include "data/pokemon_graphics/unknown_table.h"
 
 #include "data/trainer_parties.h"
+#if FRENCH
+#include "data/text/french/trainer_class_names.h"
+#include "data/trainers.h"
+#include "data/text/french/species_names.h"
+#include "data/text/french/move_names.h"
+#elif ITALIAN
+#include "data/text/italian/trainer_class_names.h"
+#include "data/trainers.h"
+#include "data/text/species_names.h"
+#include "data/text/italian/move_names.h"
+#elif SPANISH
+#include "data/text/spanish/trainer_class_names.h"
+#include "data/trainers.h"
+#include "data/text/species_names.h"
+#include "data/text/spanish/move_names.h"
+#else //ENGLISH
 #include "data/text/trainer_class_names.h"
 #include "data/trainers.h"
 #include "data/text/species_names.h"
 #include "data/text/move_names.h"
+#endif

@@ -178,6 +178,16 @@ SkyPillar_Top_Movement_CameraPanDown:
 	walk_slow_down
 	step_end
 
-SkyPillar_Top_Text_RayquazaFlewOff:
-	.string "The awakened RAYQUAZA flew off…$"
-
+.ifdef FRENCH
+	.include "data/maps/SkyPillar_Top/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/SkyPillar_Top/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/SkyPillar_Top/text_es.inc"
+.else
+	.include "data/maps/SkyPillar_Top/text.inc"
+.endif
+.endif
+.endif

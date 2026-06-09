@@ -213,6 +213,9 @@ extern const u8 gMenuText_Walk[];
 extern const u8 gMenuText_Deselect[];
 extern const u8 gMenuText_CheckTag[];
 extern const u8 gMenuText_Confirm[];
+#if EUROPE
+extern const u8 gMenuText_Confirm2[];
+#endif
 extern const u8 gMenuText_Show[];
 extern const u8 gMenuText_Give2[];
 
@@ -527,6 +530,10 @@ extern const u8 gText_NumberClear01[];
 extern const u8 gText_5MarksPokemon[];
 extern const u8 gText_UnkHeight[];
 extern const u8 gText_UnkWeight[];
+#ifdef UNITS_METRIC
+extern const u8 gText_EmptyHeight[];
+extern const u8 gText_EmptyWeight[];
+#endif
 extern const u8 gText_HTHeight[];
 extern const u8 gText_WTWeight[];
 extern const u8 gText_SearchingPleaseWait[];
@@ -2480,7 +2487,12 @@ extern const u8 gText_MrStoneMatchCallDesc[];
 extern const u8 gText_MrStoneMatchCallName[];
 extern const u8 gText_StevenMatchCallDesc[];
 extern const u8 gText_StevenMatchCallName[];
+#if EUROPE
+extern const u8 gText_BrendanMatchCallDesc[];
+extern const u8 gText_MayMatchCallDesc[];
+#else //ENGLISH
 extern const u8 gText_MayBrendanMatchCallDesc[];
+#endif
 extern const u8 gText_WallyMatchCallDesc[];
 extern const u8 gText_NormanMatchCallDesc[];
 extern const u8 gText_NormanMatchCallName[];
@@ -3018,6 +3030,11 @@ extern const u8 gText_Summary2[];
 extern const u8 gText_PkmnForSwap[];
 extern const u8 gText_SamePkmnInPartyAlready[];
 extern const u8 gText_Cancel3[];
+#if EUROPE
+extern const u8 gText_SchoolKidFemale[];
+extern const u8 gText_TrainerFemale[];
+extern const u8 gText_LeaderPlural[];
+#endif
 
 // Naming Screen
 extern const u8 gText_MoveOkBack[];

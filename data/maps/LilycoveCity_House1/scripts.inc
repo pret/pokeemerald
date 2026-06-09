@@ -15,12 +15,16 @@ LilycoveCity_House1_EventScript_Kecleon::
 	release
 	end
 
-LilycoveCity_House1_Text_PokemonPartnersNotTools:
-	.string "POKéMON are partners to people.\n"
-	.string "They aren't our tools.\p"
-	.string "Unfortunately, there are some people\n"
-	.string "who fail to understand that…$"
-
-LilycoveCity_House1_Text_Kecleon:
-	.string "KECLEON: Ruroro?$"
-
+.ifdef FRENCH
+	.include "data/maps/LilycoveCity_House1/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/LilycoveCity_House1/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/LilycoveCity_House1/text_es.inc"
+.else
+	.include "data/maps/LilycoveCity_House1/text.inc"
+.endif
+.endif
+.endif

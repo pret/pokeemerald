@@ -350,6 +350,7 @@ const u16 gTilesetPalettes_InsideBuilding[][16] =
 	INCBIN_U16("data/tilesets/primary/building/palettes/15.gbapal"),
 };
 
+#if !EUROPE
 const u32 gTilesetTiles_Shop[] = INCBIN_U32("data/tilesets/secondary/shop/tiles.4bpp.lz");
 
 const u16 gTilesetPalettes_Shop[][16] =
@@ -371,6 +372,7 @@ const u16 gTilesetPalettes_Shop[][16] =
 	INCBIN_U16("data/tilesets/secondary/shop/palettes/14.gbapal"),
 	INCBIN_U16("data/tilesets/secondary/shop/palettes/15.gbapal"),
 };
+#endif
 
 const u32 gTilesetTiles_PokemonCenter[] = INCBIN_U32("data/tilesets/secondary/pokemon_center/tiles.4bpp.lz");
 
@@ -1327,6 +1329,7 @@ const u16 gTilesetPalettes_BattlePalace[][16] =
 	INCBIN_U16("data/tilesets/secondary/battle_palace/palettes/15.gbapal"),
 };
 
+#if !EUROPE
 const u32 gTilesetTiles_BattleDome[] = INCBIN_U32("data/tilesets/secondary/battle_dome/tiles.4bpp.lz");
 
 const u16 gTilesetPalettes_BattleDome[][16] =
@@ -1348,6 +1351,7 @@ const u16 gTilesetPalettes_BattleDome[][16] =
 	INCBIN_U16("data/tilesets/secondary/battle_dome/palettes/14.gbapal"),
 	INCBIN_U16("data/tilesets/secondary/battle_dome/palettes/15.gbapal"),
 };
+#endif
 
 const u32 gTilesetTiles_BattleFactory[] = INCBIN_U32("data/tilesets/secondary/battle_factory/tiles.4bpp.lz");
 

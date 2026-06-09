@@ -1,4 +1,3 @@
-
 gPokeNewsTextSlateport_Upcoming::
 	.string "Greetings!\n"
 	.string "It's time for POKéMON NEWS.\p"

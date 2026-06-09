@@ -313,7 +313,15 @@ static void KeepMoveSelectorVisible(u8);
 static void SummaryScreen_DestroyAnimDelayTask(void);
 
 // const rom data
+#if FRENCH
+#include "data/text/french/move_descriptions.h"
+#elif ITALIAN
+#include "data/text/italian/move_descriptions.h"
+#elif SPANISH
+#include "data/text/spanish/move_descriptions.h"
+#else //ENGLISH
 #include "data/text/move_descriptions.h"
+#endif
 #include "data/text/nature_names.h"
 
 static const struct BgTemplate sBgTemplates[] =
@@ -592,7 +600,11 @@ static const struct WindowTemplate sPageInfoTemplate[] =
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 9,
+    #if EUROPE
+        .width = 19,
+    #else //ENGLISH
         .width = 18,
+    #endif
         .height = 4,
         .paletteNum = 6,
         .baseBlock = 485,
@@ -604,7 +616,11 @@ static const struct WindowTemplate sPageInfoTemplate[] =
         .width = 18,
         .height = 6,
         .paletteNum = 6,
+    #if EUROPE
+        .baseBlock = 561
+    #else //ENGLISH
         .baseBlock = 557,
+    #endif
     },
 };
 static const struct WindowTemplate sPageSkillsTemplate[] =
@@ -3685,7 +3701,11 @@ static void PrintNewMoveDetailsOrCancelText(void)
 static void AddAndFillMoveNamesWindow(void)
 {
     u8 windowId = AddWindowFromTemplateList(sPageMovesTemplate, PSS_DATA_WINDOW_MOVE_NAMES);
+#if EUROPE
+    FillWindowPixelRect(windowId, PIXEL_FILL(0), 0, 65, 72, 15);
+#else //ENGLISH
     FillWindowPixelRect(windowId, PIXEL_FILL(0), 0, 66, 72, 16);
+#endif
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 

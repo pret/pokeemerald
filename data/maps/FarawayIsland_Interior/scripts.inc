@@ -183,5 +183,16 @@ FarawayIsland_Interior_EventScript_HideMewWhenGrassCut::
 	releaseall
 	end
 
-FarawayIsland_Interior_Text_TheFeelingOfBeingWatchedFaded:
-	.string "The feeling of being watched faded…$"
+.ifdef FRENCH
+	.include "data/maps/FarawayIsland_Interior/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/FarawayIsland_Interior/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/FarawayIsland_Interior/text_es.inc"
+.else
+	.include "data/maps/FarawayIsland_Interior/text.inc"
+.endif
+.endif
+.endif

@@ -168,21 +168,16 @@ Route121_EventScript_RematchCristin::
 	msgbox Route121_Text_CristinPostRematch, MSGBOX_AUTOCLOSE
 	end
 
-Route121_Text_OkayMoveOutToMtPyre:
-	.string "Okay!\n"
-	.string "We're to move out to MT. PYRE!$"
-
-Route121_Text_AheadLoomsMtPyre:
-	.string "Ahead looms MT. PYRE…\p"
-	.string "It is a natural monument to the spirits \n"
-	.string "of departed POKéMON…$"
-
-Route121_Text_MtPyrePierSign:
-	.string "MT. PYRE PIER\p"
-	.string "…The sign is old and worn out.\n"
-	.string "The words are barely legible…$"
-
-Route121_Text_SafariZoneSign:
-	.string "“Filled with rare POKéMON!”\n"
-	.string "SAFARI ZONE$"
-
+.ifdef FRENCH
+	.include "data/maps/Route121/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/Route121/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/Route121/text_es.inc"
+.else
+	.include "data/maps/Route121/text.inc"
+.endif
+.endif
+.endif

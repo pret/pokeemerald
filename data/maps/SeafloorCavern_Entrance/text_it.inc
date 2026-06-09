@@ -1,0 +1,28 @@
+
+SeafloorCavern_Entrance_Text_HearMagmaNearMossdeep:
+	.string "Ehi!\n"
+	.string "La tua faccia non mi è nuova!\p"
+	.string "Sei qui per intrometterti di nuovo\n"
+	.string "nelle nostre faccende?\p"
+	.string "Giovane come sei, pensi proprio\n"
+	.string "di poter tener testa al TEAM IDRO?\p"
+	.string "Fra un miliardo di anni forse sarai\n"
+	.string "al nostro livello!\p"
+	.string "Andresti però bene per il TEAM MAGMA!\p"
+	.string "A proposito, pare che quelli del TEAM\n"
+	.string "MAGMA siano dalle parti di\l"
+	.string "VERDEAZZUPOLI.\p"
+	.string "A quei tipacci il mare non giova\n"
+	.string "di certo!$"
+
+SeafloorCavern_Entrance_Text_HearMagmaNearMossdeepShort:
+	.string "Giovane come sei, pensi proprio\n"
+	.string "di poter tener testa al TEAM IDRO?\p"
+	.string "Fra un miliardo di anni forse sarai\n"
+	.string "al nostro livello!\p"
+	.string "Andresti però bene per il TEAM MAGMA!\p"
+	.string "A proposito, pare che quelli del TEAM\n"
+	.string "MAGMA siano dalle parti di\l"
+	.string "VERDEAZZUPOLI.\p"
+	.string "A quei tipacci il mare non giova\n"
+	.string "di certo!$"

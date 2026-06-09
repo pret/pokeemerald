@@ -27,6 +27,31 @@ TITLESCREENGFXDIR := graphics/title_screen
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
 
+### Types Palettes ###
+
+$(TYPESGFXDIR)/move_types.gbapal: $(TYPESGFXDIR)/move_types_1.gbapal \
+                                  $(TYPESGFXDIR)/move_types_2.gbapal \
+                                  $(TYPESGFXDIR)/move_types_3.gbapal
+	@cat $^ >$@
+
+## English types ##
+$(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)
+	@cat $^ >$@
+
+### French Types ###
+TYPESGFXDIR := graphics/types/french
+$(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)
+	@cat $^ >$@
+
+### Italian Types ###
+TYPESGFXDIR := graphics/types/italian
+$(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)
+	@cat $^ >$@
+
+### Spanish Types ###
+TYPESGFXDIR := graphics/types/spanish
+$(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)
+	@cat $^ >$@
 
 
 ### Castform ###
@@ -103,6 +128,15 @@ $(TILESETGFXDIR)/primary/building/tiles.4bpp: %.4bpp: %.png
 
 $(TILESETGFXDIR)/secondary/shop/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 502 -Wnum_tiles
+
+$(TILESETGFXDIR)/secondary/shop/french/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 502
+
+$(TILESETGFXDIR)/secondary/shop/italian/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 502
+
+$(TILESETGFXDIR)/secondary/shop/spanish/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 502
 
 $(TILESETGFXDIR)/secondary/pokemon_center/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 478 -Wnum_tiles
@@ -264,16 +298,61 @@ $(TILESETGFXDIR)/secondary/mystery_events_house/tiles.4bpp: %.4bpp: %.png
 $(FONTGFXDIR)/small.latfont: $(FONTGFXDIR)/latin_small.png
 	$(GFX) $< $@
 
+$(FONTGFXDIR)/french/small.latfont: $(FONTGFXDIR)/french/latin_small.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/italian/small.latfont: $(FONTGFXDIR)/italian/latin_small.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/spanish/small.latfont: $(FONTGFXDIR)/spanish/latin_small.png
+	$(GFX) $< $@
+
 $(FONTGFXDIR)/normal.latfont: $(FONTGFXDIR)/latin_normal.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/french/normal.latfont: $(FONTGFXDIR)/french/latin_normal.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/italian/normal.latfont: $(FONTGFXDIR)/italian/latin_normal.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/spanish/normal.latfont: $(FONTGFXDIR)/spanish/latin_normal.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/short.latfont: $(FONTGFXDIR)/latin_short.png
 	$(GFX) $< $@
 
+$(FONTGFXDIR)/french/short.latfont: $(FONTGFXDIR)/french/latin_short.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/italian/short.latfont: $(FONTGFXDIR)/italian/latin_short.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/spanish/short.latfont: $(FONTGFXDIR)/spanish/latin_short.png
+	$(GFX) $< $@
+
 $(FONTGFXDIR)/narrow.latfont: $(FONTGFXDIR)/latin_narrow.png
 	$(GFX) $< $@
 
+$(FONTGFXDIR)/french/narrow.latfont: $(FONTGFXDIR)/french/latin_narrow.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/italian/narrow.latfont: $(FONTGFXDIR)/italian/latin_narrow.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/spanish/narrow.latfont: $(FONTGFXDIR)/spanish/latin_narrow.png
+	$(GFX) $< $@
+
 $(FONTGFXDIR)/small_narrow.latfont: $(FONTGFXDIR)/latin_small_narrow.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/french/small_narrow.latfont: $(FONTGFXDIR)/french/latin_small_narrow.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/italian/small_narrow.latfont: $(FONTGFXDIR)/italian/latin_small_narrow.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/spanish/small_narrow.latfont: $(FONTGFXDIR)/spanish/latin_small_narrow.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/small.hwjpnfont: $(FONTGFXDIR)/japanese_small.png
@@ -303,7 +382,7 @@ $(FONTGFXDIR)/frlg_female.fwjpnfont: $(FONTGFXDIR)/japanese_frlg_female.png
 $(TITLESCREENGFXDIR)/pokemon_logo.gbapal: %.gbapal: %.pal
 	$(GFX) $< $@ -num_colors 224
 
-$(TITLESCREENGFXDIR)/emerald_version.8bpp: %.8bpp: %.png
+$(TITLESCREENGFXDIR)/english/emerald_version.8bpp: %.8bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 4
 
 graphics/pokemon_jump/bg.4bpp: %.4bpp: %.png
@@ -409,13 +488,14 @@ $(BATTRANSGFXDIR)/vs_frame.4bpp: %.4bpp: %.png
 graphics/party_menu/bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 62 -Wnum_tiles
 
-$(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)
-	@cat $^ >$@
+graphics/party_menu/french/bg.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 62 -Wnum_tiles
 
-$(TYPESGFXDIR)/move_types.gbapal: $(TYPESGFXDIR)/move_types_1.gbapal \
-                                  $(TYPESGFXDIR)/move_types_2.gbapal \
-                                  $(TYPESGFXDIR)/move_types_3.gbapal
-	@cat $^ >$@
+graphics/party_menu/italian/bg.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 62 -Wnum_tiles
+
+graphics/party_menu/spanish/bg.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 62 -Wnum_tiles
 
 graphics/bag/menu.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53 -Wnum_tiles
@@ -651,6 +731,61 @@ $(BATTRANSGFXDIR)/frontier_logo_center.4bpp: %.4bpp: %.png
 
 ### Pokenav ###
 
+## English options ##
+$(PKNAVOPTIONSGFXDIR)/options.4bpp: $(PKNAVOPTIONSGFXDIR)/hoenn_map.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/condition.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/match_call.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/ribbons.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/switch_off.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/party.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/search.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/cool.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/beauty.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/cute.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/smart.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/tough.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/cancel.4bpp
+	@cat $^ >$@
+
+### French options ###
+PKNAVOPTIONSGFXDIR := graphics/pokenav/options/french
+
+$(PKNAVOPTIONSGFXDIR)/options.4bpp: $(PKNAVOPTIONSGFXDIR)/hoenn_map.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/condition.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/match_call.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/ribbons.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/switch_off.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/party.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/search.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/cool.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/beauty.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/cute.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/smart.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/tough.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/cancel.4bpp
+	@cat $^ >$@
+
+### Italian options ###
+PKNAVOPTIONSGFXDIR := graphics/pokenav/options/italian
+
+$(PKNAVOPTIONSGFXDIR)/options.4bpp: $(PKNAVOPTIONSGFXDIR)/hoenn_map.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/condition.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/match_call.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/ribbons.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/switch_off.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/party.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/search.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/cool.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/beauty.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/cute.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/smart.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/tough.4bpp \
+                                    $(PKNAVOPTIONSGFXDIR)/cancel.4bpp
+	@cat $^ >$@
+
+### Spanish options ###
+PKNAVOPTIONSGFXDIR := graphics/pokenav/options/spanish
+
 $(PKNAVOPTIONSGFXDIR)/options.4bpp: $(PKNAVOPTIONSGFXDIR)/hoenn_map.4bpp \
                                     $(PKNAVOPTIONSGFXDIR)/condition.4bpp \
                                     $(PKNAVOPTIONSGFXDIR)/match_call.4bpp \
@@ -673,6 +808,12 @@ $(PKNAVGFXDIR)/device_outline.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53 -Wnum_tiles
 
 $(PKNAVGFXDIR)/match_call/ui.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 13 -Wnum_tiles
+
+$(PKNAVGFXDIR)/match_call/french/ui.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 13 -Wnum_tiles
+	
+$(PKNAVGFXDIR)/match_call/italian/ui.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 13 -Wnum_tiles
 
 $(POKEDEXGFXDIR)/region_map.8bpp: %.8bpp: %.png

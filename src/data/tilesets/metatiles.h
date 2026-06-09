@@ -49,7 +49,15 @@ const u16 gMetatileAttributes_BattleFrontierOutsideEast[] = INCBIN_U16("data/til
 const u16 gMetatiles_InsideBuilding[] = INCBIN_U16("data/tilesets/primary/building/metatiles.bin");
 const u16 gMetatileAttributes_InsideBuilding[] = INCBIN_U16("data/tilesets/primary/building/metatile_attributes.bin");
 
+#if FRENCH
+const u16 gMetatiles_Shop[] = INCBIN_U16("data/tilesets/secondary/shop/french/metatiles.bin");
+#elif ITALIAN
+const u16 gMetatiles_Shop[] = INCBIN_U16("data/tilesets/secondary/shop/italian/metatiles.bin");
+#elif SPANISH
+const u16 gMetatiles_Shop[] = INCBIN_U16("data/tilesets/secondary/shop/spanish/metatiles.bin");
+#else //ENGLISH
 const u16 gMetatiles_Shop[] = INCBIN_U16("data/tilesets/secondary/shop/metatiles.bin");
+#endif
 const u16 gMetatileAttributes_Shop[] = INCBIN_U16("data/tilesets/secondary/shop/metatile_attributes.bin");
 
 const u16 gMetatiles_PokemonCenter[] = INCBIN_U16("data/tilesets/secondary/pokemon_center/metatiles.bin");

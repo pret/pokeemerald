@@ -29,6 +29,12 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+#if EUROPE
+#define WEIGHT_LEFT 0x90
+#else //ENGLISH
+#define WEIGHT_LEFT 0x81
+#endif
+
 enum
 {
     PAGE_MAIN,
@@ -455,6 +461,14 @@ static const union AnimCmd sSpriteAnim_MenuText[] =
     ANIMCMD_END
 };
 
+#if FRENCH
+static const union AnimCmd sSpriteAnim_Unused[] =
+{
+    ANIMCMD_FRAME(200, 30),
+    ANIMCMD_END
+};
+#endif
+
 static const union AnimCmd sSpriteAnim_SeenText[] =
 {
     ANIMCMD_FRAME(64, 30),
@@ -627,6 +641,13 @@ static const union AnimCmd *const sSpriteAnimTable_InterfaceText[] =
     sSpriteAnim_SelectButton,
     sSpriteAnim_MenuText
 };
+
+#if FRENCH
+static const union AnimCmd *const sSpriteAnimTable_Unused[] =
+{
+    sSpriteAnim_Unused
+};
+#endif
 
 static const union AnimCmd *const sSpriteAnimTable_SeenOwnText[] =
 {
@@ -850,7 +871,15 @@ static const u8 sText_TenDashes[] = _("----------");
 
 ALIGNED(4) static const u8 sExpandedPlaceholder_PokedexDescription[] = _("");
 
+#if FRENCH
+#include "data/pokemon/french/pokedex_text.h"
+#elif ITALIAN
+#include "data/pokemon/italian/pokedex_text.h"
+#elif SPANISH
+#include "data/pokemon/spanish/pokedex_text.h"
+#else //ENGLISH
 #include "data/pokemon/pokedex_text.h"
+#endif
 #include "data/pokemon/pokedex_entries.h"
 
 static const u16 sSizeScreenSilhouette_Pal[] = INCBIN_U16("graphics/pokedex/size_silhouette.gbapal");
@@ -2800,6 +2829,11 @@ static void CreateInterfaceSprites(u8 page)
     spriteId = CreateSprite(&sInterfaceTextSpriteTemplate, 48, DISPLAY_HEIGHT - 16, 0);
     StartSpriteAnim(&gSprites[spriteId], 1);
 
+#if FRENCH
+    spriteId = CreateSprite(&sInterfaceTextSpriteTemplate, 80, DISPLAY_HEIGHT - 16, 0);
+    StartSpriteAnim(&gSprites[spriteId], 4);
+#endif
+
     spriteId = CreateSprite(&sRotatingPokeBallSpriteTemplate, 0, DISPLAY_HEIGHT / 2, 2);
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 30;
@@ -4134,16 +4168,18 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     PrintInfoScreenText(category, 0x64, 0x29);
     PrintInfoScreenText(gText_HTHeight, 0x60, 0x39);
     PrintInfoScreenText(gText_WTWeight, 0x60, 0x49);
+
     if (owned)
     {
-        PrintMonHeight(gPokedexEntries[num].height, 0x81, 0x39);
-        PrintMonWeight(gPokedexEntries[num].weight, 0x81, 0x49);
+        PrintMonHeight(gPokedexEntries[num].height, WEIGHT_LEFT, 0x39);
+        PrintMonWeight(gPokedexEntries[num].weight, WEIGHT_LEFT, 0x49);
     }
     else
     {
-        PrintInfoScreenText(gText_UnkHeight, 0x81, 0x39);
-        PrintInfoScreenText(gText_UnkWeight, 0x81, 0x49);
+        PrintInfoScreenText(gText_UnkHeight, WEIGHT_LEFT, 0x39);
+        PrintInfoScreenText(gText_UnkWeight, WEIGHT_LEFT, 0x49);
     }
+
     if (owned)
         description = gPokedexEntries[num].description;
     else
@@ -4153,6 +4189,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
 
 static void PrintMonHeight(u16 height, u8 left, u8 top)
 {
+#ifdef UNITS_IMPERIAL
     u8 buffer[16];
     u32 inches, feet;
     u8 i = 0;
@@ -4182,10 +4219,15 @@ static void PrintMonHeight(u16 height, u8 left, u8 top)
     buffer[i++] = CHAR_DBL_QUOTE_RIGHT;
     buffer[i++] = EOS;
     PrintInfoScreenText(buffer, left, top);
+#else
+    PrintInfoScreenText(gText_EmptyHeight, left, top);
+    PrintDecimalNum(0, height, left, top);
+#endif
 }
 
 static void PrintMonWeight(u16 weight, u8 left, u8 top)
 {
+#ifdef UNITS_IMPERIAL
     u8 buffer[16];
     bool8 output;
     u8 i;
@@ -4240,6 +4282,10 @@ static void PrintMonWeight(u16 weight, u8 left, u8 top)
     buffer[i++] = CHAR_PERIOD;
     buffer[i++] = EOS;
     PrintInfoScreenText(buffer, left, top);
+#else
+    PrintInfoScreenText(gText_EmptyWeight, left, top);
+    PrintDecimalNum(0, weight, left, top);
+#endif
 }
 
 const u8 *GetPokedexCategoryName(u16 dexNum) // unused

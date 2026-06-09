@@ -1,5 +1,6 @@
 #include "global.h"
 #include "pokenav.h"
+#include "graphics.h"
 #include "bg.h"
 #include "menu.h"
 #include "palette.h"
@@ -72,9 +73,11 @@ static const LoopedTask sMonRibbonListLoopTaskFuncs[] =
     BuildBoxMonRibbonList
 };
 
-static const u16 sMonRibbonListFramePal[] = INCBIN_U16("graphics/pokenav/ribbons/list_bg.gbapal");
-static const u32 sMonRibbonListFrameTiles[] = INCBIN_U32("graphics/pokenav/ribbons/list_bg.4bpp.lz");
-static const u32 sMonRibbonListFrameTilemap[] = INCBIN_U32("graphics/pokenav/ribbons/list_bg.bin.lz");
+#if !EUROPE
+static const u16 gMonRibbonListFramePal[] = INCBIN_U16("graphics/pokenav/ribbons/list_bg.gbapal");
+static const u32 gMonRibbonListFrameTiles[] = INCBIN_U32("graphics/pokenav/ribbons/list_bg.4bpp.lz");
+static const u32 gMonRibbonListFrameTilemap[] = INCBIN_U32("graphics/pokenav/ribbons/list_bg.bin.lz");
+#endif
 static const u16 sMonRibbonListUi_Pal[] = INCBIN_U16("graphics/pokenav/ribbons/list_ui.gbapal");
 
 static const struct BgTemplate sMonRibbonListBgTemplates[] =
@@ -427,10 +430,10 @@ static u32 LoopedTask_OpenRibbonsMonList(s32 state)
     {
     case 0:
         InitBgTemplates(sMonRibbonListBgTemplates, ARRAY_COUNT(sMonRibbonListBgTemplates));
-        DecompressAndCopyTileDataToVram(1, sMonRibbonListFrameTiles, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, gMonRibbonListFrameTiles, 0, 0, 0);
         SetBgTilemapBuffer(1, menu->buff);
-        CopyToBgTilemapBuffer(1, sMonRibbonListFrameTilemap, 0, 0);
-        CopyPaletteIntoBufferUnfaded(sMonRibbonListFramePal, BG_PLTT_ID(1), sizeof(sMonRibbonListFramePal));
+        CopyToBgTilemapBuffer(1, gMonRibbonListFrameTilemap, 0, 0);
+        CopyPaletteIntoBufferUnfaded(gMonRibbonListFramePal, BG_PLTT_ID(1), sizeof(gMonRibbonListFramePal));
         CopyBgTilemapBufferToVram(1);
         return LT_INC_AND_PAUSE;
     case 1:
@@ -683,8 +686,8 @@ static void CreateRibbonMonsList(void)
     template.count = GetRibbonsMonListCount();
     template.itemSize = sizeof(struct PokenavListItem);
     template.startIndex = GetRibbonListMenuCurrIndex();
-    template.item_X = 13;
-    template.windowWidth = 17;
+    template.item_X = POKENAV_LIST_ITEM_X;
+    template.windowWidth = POKENAV_LIST_WINDOW_WIDTH + 1;
     template.listTop = 1;
     template.maxShowed = 8;
     template.fillValue = 2;

@@ -8,15 +8,16 @@ MtPyre_5F_EventScript_Atsushi::
 	msgbox MtPyre_5F_Text_AtsushiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtPyre_5F_Text_AtsushiIntro:
-	.string "Teacher…\n"
-	.string "Please watch over my progress!$"
-
-MtPyre_5F_Text_AtsushiDefeat:
-	.string "Teacher…\n"
-	.string "Please forgive me!$"
-
-MtPyre_5F_Text_AtsushiPostBattle:
-	.string "Until I improve, my teacher, who rests\n"
-	.string "here, will never find true peace…$"
-
+.ifdef FRENCH
+	.include "data/maps/MtPyre_4F/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/MtPyre_4F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/MtPyre_4F/text_es.inc"
+.else
+	.include "data/maps/MtPyre_4F/text.inc"
+.endif
+.endif
+.endif

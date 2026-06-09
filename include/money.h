@@ -1,6 +1,14 @@
 #ifndef GUARD_MONEY_H
 #define GUARD_MONEY_H
 
+#if ITALIAN
+#define MONEY_LABEL_X_OFFSET 19
+#elif FRENCH
+#define MONEY_LABEL_X_OFFSET 24
+#else //ENGLISH
+#define MONEY_LABEL_X_OFFSET 19
+#endif
+
 u32 GetMoney(u32 *moneyPtr);
 void SetMoney(u32 *moneyPtr, u32 newValue);
 bool8 IsEnoughMoney(u32 *moneyPtr, u32 cost);

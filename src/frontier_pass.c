@@ -41,6 +41,14 @@
 #define NUM_BG_PAL_SLOTS 13
 #endif
 
+#if SPANISH
+#define SYMBOLS_FONT FONT_NARROW
+#define RECORD_FONT FONT_NARROW
+#else
+#define SYMBOLS_FONT FONT_NORMAL
+#define RECORD_FONT FONT_NORMAL
+#endif
+
 // All windows displayed in the frontier pass.
 enum
 {
@@ -178,7 +186,9 @@ static void SpriteCB_PlayerHead(struct Sprite *);
 
 static const u16 sMaleHead_Pal[]                 = INCBIN_U16("graphics/frontier_pass/map_heads.gbapal");
 static const u16 sFemaleHead_Pal[]               = INCBIN_U16("graphics/frontier_pass/map_heads_female.gbapal");
-static const u32 sMapScreen_Gfx[]                = INCBIN_U32("graphics/frontier_pass/map_screen.4bpp.lz");
+#if !EUROPE
+static const u32 gFrontierPassMapScreen_Gfx[]    = INCBIN_U32("graphics/frontier_pass/map_screen.4bpp.lz");
+#endif
 static const u32 sCursor_Gfx[]                   = INCBIN_U32("graphics/frontier_pass/cursor.4bpp.lz");
 static const u32 sHeads_Gfx[]                    = INCBIN_U32("graphics/frontier_pass/map_heads.4bpp.lz");
 static const u32 sMapCursor_Gfx[]                = INCBIN_U32("graphics/frontier_pass/map_cursor.4bpp.lz");
@@ -1160,11 +1170,11 @@ static void ShowAndPrintWindows(void)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
     }
 
-    x = GetStringCenterAlignXOffset(FONT_NORMAL, gText_SymbolsEarned, 96);
-    AddTextPrinterParameterized3(WINDOW_EARNED_SYMBOLS, FONT_NORMAL, x, 5, sTextColors[0], 0, gText_SymbolsEarned);
+    x = GetStringCenterAlignXOffset(SYMBOLS_FONT, gText_SymbolsEarned, 96);
+    AddTextPrinterParameterized3(WINDOW_EARNED_SYMBOLS, SYMBOLS_FONT, x, 5, sTextColors[0], 0, gText_SymbolsEarned);
 
-    x = GetStringCenterAlignXOffset(FONT_NORMAL, gText_BattleRecord, 96);
-    AddTextPrinterParameterized3(WINDOW_BATTLE_RECORD, FONT_NORMAL, x, 5, sTextColors[0], 0, gText_BattleRecord);
+    x = GetStringCenterAlignXOffset(RECORD_FONT, gText_BattleRecord, 96);
+    AddTextPrinterParameterized3(WINDOW_BATTLE_RECORD, RECORD_FONT, x, 5, sTextColors[0], 0, gText_BattleRecord);
 
     AddTextPrinterParameterized3(WINDOW_BATTLE_POINTS, FONT_SMALL_NARROW, 5, 4, sTextColors[0], 0, gText_BattlePoints);
     ConvertIntToDecimalStringN(gStringVar4, sPassData->battlePoints, STR_CONV_MODE_LEFT_ALIGN, 5);
@@ -1418,7 +1428,7 @@ static bool32 InitFrontierMap(void)
         InitWindows(sMapWindowTemplates);
         DeactivateAllTextPrinters();
         PrintOnFrontierMap();
-        DecompressAndCopyTileDataToVram(1, sMapScreen_Gfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, gFrontierPassMapScreen_Gfx, 0, 0, 0);
         break;
     case 5:
         if (FreeTempTileDataBuffersIfPossible())

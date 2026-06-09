@@ -46,13 +46,16 @@ NewMauville_Entrance_EventScript_DontOpenDoor::
 	releaseall
 	end
 
-NewMauville_Entrance_Text_DoorIsLocked:
-	.string "The door is locked.$"
-
-NewMauville_Entrance_Text_UseBasementKey:
-	.string "Use the BASEMENT KEY?$"
-
-NewMauville_Entrance_Text_UsedBasementKey:
-	.string "{PLAYER} used the BASEMENT KEY.\p"
-	.string "The door opened!$"
-
+.ifdef FRENCH
+	.include "data/maps/NewMauville_Entrance/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/NewMauville_Entrance/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/NewMauville_Entrance/text_es.inc"
+.else
+	.include "data/maps/NewMauville_Entrance/text.inc"
+.endif
+.endif
+.endif

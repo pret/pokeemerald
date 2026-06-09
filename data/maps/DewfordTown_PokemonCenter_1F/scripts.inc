@@ -24,14 +24,17 @@ DewfordTown_PokemonCenter_1F_EventScript_Man::
 	msgbox DewfordTown_PokemonCenter_1F_Text_FaintedMonCanUseHM, MSGBOX_NPC
 	end
 
-DewfordTown_PokemonCenter_1F_Text_StoneCavern:
-	.string "There's a stone cavern at the edge\n"
-	.string "of town.\p"
-	.string "I've heard you can find rare stones\n"
-	.string "there.$"
-
-DewfordTown_PokemonCenter_1F_Text_FaintedMonCanUseHM:
-	.string "Even if a POKéMON faints and can't\n"
-	.string "battle, it can still use a move learned\l"
-	.string "from a HIDDEN MACHINE (HM).$"
+.ifdef FRENCH
+	.include "data/maps/DewfordTown_PokemonCenter_1F/text_fr.inc"
+.else
+.ifdef ITALIAN
+	.include "data/maps/DewfordTown_PokemonCenter_1F/text_it.inc"
+.else
+.ifdef SPANISH
+	.include "data/maps/DewfordTown_PokemonCenter_1F/text_es.inc"
+.else
+	.include "data/maps/DewfordTown_PokemonCenter_1F/text.inc"
+.endif
+.endif
+.endif
 
