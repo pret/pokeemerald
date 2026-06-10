@@ -45,7 +45,7 @@ static void sio32intr_clock_master(void)
         {
             if (gSTWIStatus->reqNext <= gSTWIStatus->reqLength)
             {
-                REG_SIODATA32 = ((u32 *)gSTWIStatus->txPacket->rfuPacket8.data)[gSTWIStatus->reqNext];
+                REG_SIODATA32 = ((u32 *)gSTWIStatus->txPacket)[gSTWIStatus->reqNext];
                 gSTWIStatus->reqNext++;
             }
             else
@@ -68,9 +68,11 @@ static void sio32intr_clock_master(void)
             gSTWIStatus->ackNext = 0;
             ((u32 *)gSTWIStatus->rxPacket)[gSTWIStatus->ackNext] = regSIODATA32;
             gSTWIStatus->ackNext++;
-            gSTWIStatus->ackActiveCommand = regSIODATA32;
-            gSTWIStatus->ackLength = ackLen = regSIODATA32 >> 8;
-            if ((ackLen = gSTWIStatus->ackLength) >= gSTWIStatus->ackNext)
+            gSTWIStatus->ackActiveCommand = (u8)regSIODATA32;
+            ackLen = regSIODATA32 >> 8;
+            gSTWIStatus->ackLength = ackLen;
+            ackLen = gSTWIStatus->ackLength;
+            if (ackLen >= gSTWIStatus->ackNext)
             {
                 gSTWIStatus->state = 2; // master receive ack
                 REG_SIODATA32 = 0x80000000;
@@ -166,17 +168,15 @@ static void sio32intr_clock_slave(void)
     regSIODATA32 = REG_SIODATA32;
     if (gSTWIStatus->state == 5) // slave receive req init
     {
-        ((u32 *)gSTWIStatus->rxPacket)[0] = regSIODATA32;
+        *(u32 *)&gSTWIStatus->rxPacket->rfuPacket32.command = regSIODATA32;
         gSTWIStatus->reqNext = 1;
         r0 = 0x99660000;
-        // variable reuse required
         reqLen = (regSIODATA32 >> 16);
         if (reqLen == (r0 >> 16))
         {
-            // only reqLen = regSIODATA32 >> 8 is needed to match, but it looks a bit
-            // more consistent when both lines update the variables. Might have been a macro?
-            gSTWIStatus->reqLength = reqLen = (regSIODATA32 >> 8);
-            gSTWIStatus->reqActiveCommand = reqLen = (regSIODATA32 >> 0);
+            reqLen = regSIODATA32 >> 8;
+            gSTWIStatus->reqLength = reqLen;
+            gSTWIStatus->reqActiveCommand = (u8)regSIODATA32;
             if (gSTWIStatus->reqLength == 0)
             {
                 if (
@@ -187,24 +187,24 @@ static void sio32intr_clock_slave(void)
                 )
                 {
                     gSTWIStatus->ackActiveCommand = gSTWIStatus->reqActiveCommand + 0x80;
-                    ((u32 *)gSTWIStatus->txPacket)[0] = 0x99660000 + gSTWIStatus->ackActiveCommand;
+                    *(u32 *)&gSTWIStatus->txPacket->rfuPacket32.command = 0x99660000 + gSTWIStatus->ackActiveCommand;
                     gSTWIStatus->ackLength = 0;
                 }
                 else
                 {
-                    ((u32 *)gSTWIStatus->txPacket)[0] = 0x996601EE;
+                    *(u32 *)&gSTWIStatus->txPacket->rfuPacket32.command = 0x996601EE;
                     if (gSTWIStatus->reqActiveCommand >= 0x10 && gSTWIStatus->reqActiveCommand <= 0x3D)
                     {
-                        ((u32 *)gSTWIStatus->txPacket)[1] = 1;
+                        gSTWIStatus->txPacket->rfuPacket32.data[0] = 1;
                     }
                     else
                     {
-                        ((u32 *)gSTWIStatus->txPacket)[1] = 2;
+                        gSTWIStatus->txPacket->rfuPacket32.data[0] = 2;
                     }
                     gSTWIStatus->ackLength = 1;
                     gSTWIStatus->error = ERR_REQ_CMD_ACK_REJECTION;
                 }
-                REG_SIODATA32 = ((u32 *)gSTWIStatus->txPacket)[0];
+                REG_SIODATA32 = gSTWIStatus->txPacket->rfuPacket32.command;
                 gSTWIStatus->ackNext = 1;
                 gSTWIStatus->state = 7; // slave send ack
             }
@@ -235,24 +235,24 @@ static void sio32intr_clock_slave(void)
             )
             {
                 gSTWIStatus->ackActiveCommand = gSTWIStatus->reqActiveCommand + 0x80;
-                ((u32 *)gSTWIStatus->txPacket)[0] = 0x99660000 | gSTWIStatus->ackActiveCommand;
+                *(u32 *)&gSTWIStatus->txPacket->rfuPacket32.command = 0x99660000 | gSTWIStatus->ackActiveCommand;
                 gSTWIStatus->ackLength = 0;
             }
             else
             {
-                ((u32 *)gSTWIStatus->txPacket)[0] = 0x996601EE;
+                *(u32 *)&gSTWIStatus->txPacket->rfuPacket32.command = 0x996601EE;
                 if (gSTWIStatus->reqActiveCommand >= 0x10 && gSTWIStatus->reqActiveCommand <= 0x3D)
                 {
-                    ((u32 *)gSTWIStatus->txPacket)[1] = 1;
+                    gSTWIStatus->txPacket->rfuPacket32.data[0] = 1;
                 }
                 else
                 {
-                    ((u32 *)gSTWIStatus->txPacket)[1] = 2;
+                    gSTWIStatus->txPacket->rfuPacket32.data[0] = 2;
                 }
                 gSTWIStatus->ackLength = 1;
                 gSTWIStatus->error = ERR_REQ_CMD_ACK_REJECTION;
             }
-            REG_SIODATA32 = ((u32 *)gSTWIStatus->txPacket)[0];
+            REG_SIODATA32 = gSTWIStatus->txPacket->rfuPacket32.command;
             gSTWIStatus->ackNext = 1;
             gSTWIStatus->state = 7; // slave send ack
         }

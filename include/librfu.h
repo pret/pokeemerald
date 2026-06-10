@@ -79,6 +79,7 @@
 #define ID_DISCONNECTED_AND_CHANGE_REQ              0x0029
 #define ID_DATA_READY_AND_CHANGE_REQ                0x0028
 #define ID_DRAC_REQ_WITH_ACK_FLAG                   0x0128
+#define ID_MSC_LINK_LOSS_REQ                        0x0136
 
 // --------------------------------------------------------------------------
 //
@@ -130,6 +131,13 @@
 // u8 connTypeFlag specified by rfu_clearSlot
 #define TYPE_UNI_SEND                   0x01               // UNI-type send
 #define TYPE_UNI_RECV                   0x02               // UNI-type receive
+#define RFU_STC_SEND_UNI                0x10
+#define RFU_STC_SEND_NI                 0x20
+#define RFU_STC_SEND_NI_GAMENAME        0x40
+#define RFU_FLAG_CLK_SLAVE              0x02
+#define RFU_FLAG_WATCHDOG               0x04
+#define RFU_FLAG_REQ_CALLBACK           0x08
+#define RFU_FLAG_MBOOT                  0x80
 #define TYPE_NI_SEND                    0x04               // NI-type send
 #define TYPE_NI_RECV                    0x08               // NI-type receive
 
@@ -295,7 +303,7 @@ union RfuPacket
 
 struct STWIStatus
 {
-    vs32 state;
+    vu32 state;
     u8 reqLength;
     u8 reqNext;
     u8 reqActiveCommand;
@@ -440,7 +448,7 @@ struct RfuLinkStatus
 struct RfuFixed
 {
     void (*reqCallback)(u16, u16);
-    void (*fastCopyPtr)(const u8 **, u8 **, s32);
+    void (*fastCopyPtr)(const u8 **, u8 **, u32);
     u16 fastCopyBuffer[24];
     u32 fastCopyBuffer2[12];
     u32 LLFBuffer[29];
@@ -477,7 +485,7 @@ extern struct RfuSlotStatusNI *gRfuSlotStatusNI[RFU_CHILD_MAX];
 extern struct RfuSlotStatusUNI *gRfuSlotStatusUNI[RFU_CHILD_MAX];
 
 // librfu_sio32id
-s32 AgbRFU_checkID(u8 maxTries);
+u32 AgbRFU_checkID(u8 maxTries);
 
 // Arguments with "bm..." specify slots of the form (0x01 << slot number) that are the object of a function operation.
 
@@ -602,7 +610,7 @@ void STWI_init_Callback_M(void);
 void STWI_init_Callback_S(void);
 void STWI_set_Callback_M(void *callbackM);
 void STWI_set_Callback_S(void (*callbackS)(u16));
-void STWI_init_timer(IntrFunc *interrupt, s32 timerSelect);
+void STWI_init_timer(IntrFunc *interrupt, u8 timerSelect);
 void AgbRFU_SoftReset(void);
 void STWI_set_Callback_ID(void (*func)(void));
 u16 STWI_read_status(u8 index);

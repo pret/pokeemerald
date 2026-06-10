@@ -47,7 +47,7 @@ void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, b
     IntrEnable(INTR_FLAG_SERIAL);
 }
 
-void STWI_init_timer(IntrFunc *interrupt, s32 timerSelect)
+void STWI_init_timer(IntrFunc *interrupt, u8 timerSelect)
 {
     *interrupt = STWI_intr_timer;
     gSTWIStatus->timerSelect = timerSelect;
@@ -594,9 +594,7 @@ static s32 STWI_start_Command(void)
 {
     u16 imeTemp;
 
-    // equivalent to gSTWIStatus->txPacket->rfuPacket32.command,
-    // but the cast here is required to avoid register issue
-    *(u32 *)gSTWIStatus->txPacket->rfuPacket8.data = 0x99660000 | (gSTWIStatus->reqLength << 8) | gSTWIStatus->reqActiveCommand;
+    *(u32 *)&gSTWIStatus->txPacket->rfuPacket32.command = 0x99660000 | (gSTWIStatus->reqLength << 8) | gSTWIStatus->reqActiveCommand;
     REG_SIODATA32 = gSTWIStatus->txPacket->rfuPacket32.command;
     gSTWIStatus->state = 0; // master send req
     gSTWIStatus->reqNext = 1;
