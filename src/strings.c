@@ -1495,8 +1495,11 @@ const u8 gText_ButtonTypeNormal[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}NORMAL")
 const u8 gText_ButtonTypeLR[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}LR");
 const u8 gText_ButtonTypeLEqualsA[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}L=A");
 const u8 gText_ModernExpShare[] = _("MODERN EXP SHARE");
-const u8 gText_ModernExpShareYes[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}YES");
-const u8 gText_ModernExpShareNo[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}NO");
+const u8 gText_ModernExpShareOn[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}ON");
+const u8 gText_ModernExpShareOff[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}OFF");
+const u8 gText_InfiniteTMs[] = _("Infinite TMs");
+const u8 gText_InfiniteTMsOn[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}ON");
+const u8 gText_InfiniteTMsOff[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}OFF");
 const u8 gText_NumPlayerLink[] = _("{STR_VAR_1}P LINK");
 const u8 gText_BronzeCard[] = _("BRONZE");
 const u8 gText_CopperCard[] = _("COPPER");
