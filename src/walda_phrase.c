@@ -233,16 +233,16 @@ static bool8 GetWallpaperDataBit(const u8 *data, u32 bitNum)
 
 static void SetWallpaperDataBit(u8 *data, u32 bitNum)
 {
-    u32 i = bitNum >> 3;
-    u8 flag = (1 << 7) >> (bitNum & 0x07);
+    u32 i = bitNum / 8;
+    u8 flag = (1 << 7) >> (bitNum % 8);
 
     data[i] |= flag;
 }
 
 static void ClearWallpaperDataBit(u8 *data, u32 bitNum)
 {
-    u32 i = bitNum >> 3;
-    u8 mask = ~((1 << 7) >> (bitNum & 0x07));
+    u32 i = bitNum / 8;
+    u8 mask = ~((1 << 7) >> (bitNum % 8));
 
     data[i] &= mask;
 }
