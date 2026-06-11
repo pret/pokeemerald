@@ -78,11 +78,13 @@ struct TextPrinterTemplate
     u8 shadowColor:4;
 };
 
+typedef void (*TextPrinterCallback)(struct TextPrinterTemplate *printerTemplate, u16 renderCmd);
+
 struct TextPrinter
 {
     struct TextPrinterTemplate printerTemplate;
 
-    void (*callback)(struct TextPrinterTemplate *, u16); // 0x10
+    TextPrinterCallback callback; // 0x10
 
     u8 subStructFields[7]; // always cast to struct TextPrinterSubStruct... so why bother
     u8 active;
@@ -132,12 +134,12 @@ struct TextGlyph
 
 extern TextFlags gTextFlags;
 
-extern u8 gDisableTextPrinters;
+extern bool8 gDisableTextPrinters;
 extern struct TextGlyph gCurGlyph;
 
 void DeactivateAllTextPrinters(void);
-u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
-bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
+bool16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, TextPrinterCallback callback);
+bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, TextPrinterCallback callback);
 void RunTextPrinters(void);
 bool16 IsTextPrinterActive(u8 id);
 void GenerateFontHalfRowLookupTable(u8 fgColor, u8 bgColor, u8 shadowColor);
