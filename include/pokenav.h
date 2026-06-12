@@ -324,7 +324,7 @@ void SetPokenavVBlankCallback(void);
 void SetVBlankCallback_(IntrCallback callback);
 
 // pokenav_list.c
-bool32 CreatePokenavList(const struct BgTemplate *bgTemplate, struct PokenavListTemplate *listTemplate, s32 tileOffset);
+bool32 CreatePokenavList(const struct BgTemplate *bgTemplate, struct PokenavListTemplate *listTemplate, u32 tileOffset);
 bool32 IsCreatePokenavListTaskActive(void);
 void DestroyPokenavList(void);
 u32 PokenavList_GetSelectedIndex(void);
