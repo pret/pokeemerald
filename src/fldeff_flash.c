@@ -122,8 +122,6 @@ static void VBC_ChangeMapVBlank(void)
 
 void CB2_DoChangeMap(void)
 {
-    u16 ime;
-
     SetVBlankCallback(NULL);
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     SetGpuReg(REG_OFFSET_BG2CNT, 0);
@@ -141,10 +139,7 @@ void CB2_DoChangeMap(void)
     ResetPaletteFade();
     ResetTasks();
     ResetSpriteData();
-    ime = REG_IME;
-    REG_IME = 0;
-    REG_IE |= INTR_FLAG_VBLANK;
-    REG_IME = ime;
+    IntrEnable(INTR_FLAG_VBLANK);
     SetVBlankCallback(VBC_ChangeMapVBlank);
     SetMainCallback2(CB2_ChangeMapMain);
     if (!TryDoMapTransition())
