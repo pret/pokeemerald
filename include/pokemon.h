@@ -441,12 +441,29 @@ void SetMultiuseSpriteTemplateToTrainerFront(u16 trainerPicId, u8 battlerPositio
  * either Get(Box)MonData2 or Get(Box)MonData3 based on the number of
  * arguments. The two functions are aliases of each other, but they
  * differ for matching purposes in the caller's codegen. */
-#define GetMonData(...) CAT(GetMonData, NARG_8(__VA_ARGS__))(__VA_ARGS__)
-#define GetBoxMonData(...) CAT(GetBoxMonData, NARG_8(__VA_ARGS__))(__VA_ARGS__)
-u32 GetMonData3(struct Pokemon *mon, s32 field, u8 *data);
+#ifndef UBFIX
+#define DISPATCH_MATCH(FUNC, ...) CAT(FUNC, NARG_8(__VA_ARGS__))(__VA_ARGS__)
+
+#define GetMonData(...)    DISPATCH_MATCH(GetMonData, __VA_ARGS__)
+#define GetBoxMonData(...) DISPATCH_MATCH(GetBoxMonData, __VA_ARGS__)
+
+// agbcc still needs to know about the 2-argument aliases
 u32 GetMonData2(struct Pokemon *mon, s32 field);
-u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data);
 u32 GetBoxMonData2(struct BoxPokemon *boxMon, s32 field);
+#else
+#define GetMonData_(mon, field, data, ...) (GetMonData)(mon, field, data)
+#define GetMonData(...) GetMonData_(__VA_ARGS__, NULL, NULL)
+
+#define GetBoxMonData_(boxMon, field, data, ...) (GetBoxMonData)(boxMon, field, data)
+#define GetBoxMonData(...) GetBoxMonData_(__VA_ARGS__, NULL, NULL)
+
+// Intercept calls
+#define GetMonData2(mon, field)          (GetMonData)(mon, field, NULL)
+#define GetBoxMonData2(boxMon, field)    (GetBoxMonData)(boxMon, field, NULL)
+#endif
+
+u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data);
+u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data);
 
 void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg);
 void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg);
