@@ -1284,7 +1284,7 @@ void SecretBasePerStepCallback(u8 taskId)
             PopSecretBaseBalloon(MapGridGetMetatileIdAt(x, y), x, y);
             if (sInFriendSecretBase == TRUE)
             {
-                switch ((int)MapGridGetMetatileIdAt(x, y))
+                switch (MapGridGetMetatileIdAt(x, y))
                 {
                 case METATILE_SecretBase_RedBalloon:
                 case METATILE_SecretBase_BlueBalloon:
@@ -2063,7 +2063,7 @@ void CheckInteractedWithFriendsSandOrnament(void)
     s16 x, y;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
-    switch ((int)MapGridGetMetatileIdAt(x, y))
+    switch (MapGridGetMetatileIdAt(x, y))
     {
         case METATILE_SecretBase_SandOrnament_Base1:
         case METATILE_SecretBase_SandOrnament_Base2:
