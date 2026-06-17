@@ -301,7 +301,7 @@
 	@
 	@ implicit is set when a waitstate is generated as part of another command (e.g. special)
 	@ if an implicit waitstate is immediately followed by another waitstate, a warning is raised
-	.macro waitstate, implicit=0
+	.macro waitstate implicit=0
 	.if _last_implicit_waitstate == .
 	.warning "explicit waitstate follows implicit waitstate, ignoring"
 	.else
