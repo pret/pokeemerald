@@ -3474,9 +3474,13 @@ static void AnimOrbitScatter_Step(struct Sprite *sprite)
 {
     sprite->x2 += sprite->data[0];
     sprite->y2 += sprite->data[1];
-    if (sprite->x + sprite->x2 > (DISPLAY_WIDTH + 16) || sprite->x + sprite->x2 < -16 ||
-        sprite->y + sprite->y2 > DISPLAY_HEIGHT || sprite->y + sprite->y2 < -16)
+    if (sprite->x + sprite->x2 > (DISPLAY_WIDTH + 16)
+     || sprite->x + sprite->x2 < -16
+     || sprite->y + sprite->y2 > DISPLAY_HEIGHT
+     || sprite->y + sprite->y2 < -16)
+    {
         DestroyAnimSprite(sprite);
+    }
 }
 
 static void AnimSpitUpOrb_Step(struct Sprite *sprite)
@@ -3736,9 +3740,9 @@ static void AnimPerishSongMusicNote(struct Sprite *sprite)
 
     sprite->data[1] = sprite->data[0] / 2;
 
-    index = ((sprite->data[0] * 3) + sprite->data[3]) & 0xff;
+    index = ((sprite->data[0] * 3) + sprite->data[3]) & 0xFF;
     sprite->data[6] += 10;
-    sprite->data[6] &= 0xff;
+    sprite->data[6] &= 0xFF;
 
     sprite->x2 = Cos(index, 100);
 
