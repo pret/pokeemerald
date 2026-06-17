@@ -207,7 +207,7 @@ static void ShowContestPainting(void)
         break;
     case 1:
         ResetPaletteFade();
-        DmaFillLarge32(3, 0, (void *)VRAM, VRAM_SIZE, 0x1000);
+        DmaClearLarge32(3, (void *)VRAM, VRAM_SIZE, 0x1000);
         ResetSpriteData();
         gMain.state++;
         break;

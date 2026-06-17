@@ -156,15 +156,15 @@
     u32 _size = size;                                     \
     while (1)                                             \
     {                                                     \
-        DmaCopy##bit(dmaNum, _src, _dest, (block));       \
-        _src += (block);                                  \
-        _dest += (block);                                 \
-        _size -= (block);                                 \
         if (_size <= (block))                             \
         {                                                 \
             DmaCopy##bit(dmaNum, _src, _dest, _size);     \
             break;                                        \
         }                                                 \
+        DmaCopy##bit(dmaNum, _src, _dest, (block));       \
+        _src += (block);                                  \
+        _dest += (block);                                 \
+        _size -= (block);                                 \
     }                                                     \
 }
 
@@ -193,22 +193,7 @@
 
 #define DmaFillLarge32(dmaNum, value, dest, size, block) DmaFillLarge(dmaNum, value, dest, size, block, 32)
 
-#define DmaClearLarge(dmaNum, dest, size, block, bit) \
-{                                                           \
-    void *_dest = dest;                                     \
-    u32 _size = size;                                       \
-    while (1)                                               \
-    {                                                       \
-        DmaFill##bit(dmaNum, 0, _dest, (block));       \
-        _dest += (block);                                   \
-        _size -= (block);                                   \
-        if (_size <= (block))                               \
-        {                                                   \
-            DmaFill##bit(dmaNum, 0, _dest, _size);     \
-            break;                                          \
-        }                                                   \
-    }                                                       \
-}
+#define DmaClearLarge(dmaNum, dest, size, block, bit) DmaFillLarge(dmaNum, 0, dest, size, block, bit)
 
 #define DmaClearLarge16(dmaNum, dest, size, block) DmaClearLarge(dmaNum, dest, size, block, 16)
 
