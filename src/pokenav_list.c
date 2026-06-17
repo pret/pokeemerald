@@ -11,7 +11,8 @@
 #define GFXTAG_ARROW 10
 #define PALTAG_ARROW 20
 
-struct PokenavListMenuWindow {
+struct PokenavListMenuWindow
+{
     u8 bg;
     u8 fillValue;
     u8 x;
@@ -25,7 +26,8 @@ struct PokenavListMenuWindow {
     u16 numToPrint;
 };
 
-struct PokenavListWindowState {
+struct PokenavListWindowState
+{
     // The index of the element at the top of the window.
     u16 windowTopIndex;
     u16 listLength;
