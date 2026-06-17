@@ -579,7 +579,6 @@ static u32 LoopedTask_ReshowListFromCheckPage(s32 state)
 {
     struct PokenavList *list, *listAlias; // listAlias is needed for matching.
     struct PokenavListWindowState *windowState;
-    s32 r5, *ptr;
 
     if (IsDma3ManagerBusyWithBgCopy())
         return LT_PAUSE;
@@ -596,23 +595,22 @@ static u32 LoopedTask_ReshowListFromCheckPage(s32 state)
         PrintMatchCallListTrainerName(windowState, listAlias);
         return LT_INC_AND_PAUSE;
     case 1:
-        ptr = &list->eraseIndex;
-        if (++(*ptr) < list->windowState.entriesOnscreen)
+        if (++list->eraseIndex < list->windowState.entriesOnscreen)
         {
-            EraseListEntry(&listAlias->listWindow, *ptr, 1);
+            EraseListEntry(&listAlias->listWindow, list->eraseIndex, 1);
             return LT_PAUSE;
         }
 
-        *ptr = 0;
+        list->eraseIndex = 0;
+
         if (windowState->listLength <= windowState->entriesOnscreen)
         {
             if (windowState->windowTopIndex != 0)
             {
-                s32 r4 = windowState->windowTopIndex;
-                r5 = -r4;
-                EraseListEntry(&listAlias->listWindow, r5, r4);
-                windowState->selectedIndexOffset = r4;
-                *ptr = r5;
+                s32 entries = windowState->windowTopIndex;
+                EraseListEntry(&listAlias->listWindow, -entries, entries);
+                windowState->selectedIndexOffset = entries;
+                list->eraseIndex = -entries;
                 return LT_INC_AND_PAUSE;
             }
         }
@@ -620,11 +618,10 @@ static u32 LoopedTask_ReshowListFromCheckPage(s32 state)
         {
             if (windowState->windowTopIndex + windowState->entriesOnscreen > windowState->listLength)
             {
-                s32 r4 = windowState->windowTopIndex + windowState->entriesOnscreen - windowState->listLength;
-                r5 = -r4;
-                EraseListEntry(&listAlias->listWindow, r5, r4);
-                windowState->selectedIndexOffset = r4;
-                *ptr = r5;
+                s32 entries = windowState->windowTopIndex + windowState->entriesOnscreen - windowState->listLength;
+                EraseListEntry(&listAlias->listWindow, -entries, entries);
+                windowState->selectedIndexOffset = entries;
+                list->eraseIndex = -entries;
                 return LT_INC_AND_PAUSE;
             }
         }
