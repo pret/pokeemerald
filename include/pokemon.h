@@ -436,17 +436,24 @@ void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition);
 void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerPicId, u8 battlerPosition);
 void SetMultiuseSpriteTemplateToTrainerFront(u16 trainerPicId, u8 battlerPosition);
 
+#define GetMonData(...) CAT(GetMonData, NARG_8(__VA_ARGS__))(__VA_ARGS__)
+#define GetBoxMonData(...) CAT(GetBoxMonData, NARG_8(__VA_ARGS__))(__VA_ARGS__)
+u32 GetMonData3(struct Pokemon *mon, s32 field, u8 *data);
+u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data);
+
+#ifndef UBFIX
 /* GameFreak called Get(Box)MonData with either 2 or 3 arguments, for
  * type safety we have a Get(Box)MonData macro which dispatches to
  * either Get(Box)MonData2 or Get(Box)MonData3 based on the number of
  * arguments. The two functions are aliases of each other, but they
  * differ for matching purposes in the caller's codegen. */
-#define GetMonData(...) CAT(GetMonData, NARG_8(__VA_ARGS__))(__VA_ARGS__)
-#define GetBoxMonData(...) CAT(GetBoxMonData, NARG_8(__VA_ARGS__))(__VA_ARGS__)
-u32 GetMonData3(struct Pokemon *mon, s32 field, u8 *data);
 u32 GetMonData2(struct Pokemon *mon, s32 field);
-u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data);
 u32 GetBoxMonData2(struct BoxPokemon *boxMon, s32 field);
+#else
+/* Just call Get(Box)MonData3 with an explicit NULL. */
+#define GetMonData2(mon, field) GetMonData3(mon, field, NULL)
+#define GetBoxMonData2(boxMon, field) GetBoxMonData3(boxMon, field, NULL)
+#endif
 
 void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg);
 void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg);
