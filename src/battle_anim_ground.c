@@ -415,7 +415,7 @@ static void AnimTask_DigSetVisibleUnderground(u8 taskId)
 
 static void AnimTask_DigRiseUpFromHole(u8 taskId)
 {
-    u8 var0;
+    u8 y;
     struct Task *task = &gTasks[taskId];
 
     switch (task->data[0])
@@ -428,9 +428,9 @@ static void AnimTask_DigRiseUpFromHole(u8 taskId)
         else
             task->data[12] = gBattle_BG2_X;
 
-        var0 = GetBattlerYCoordWithElevation(gBattleAnimAttacker);
-        task->data[14] = var0 - 32;
-        task->data[15] = var0 + 32;
+        y = GetBattlerYCoordWithElevation(gBattleAnimAttacker);
+task->data[14] = y - 32;
+task->data[15] = y + 32;
         task->data[0]++;
         break;
     case 1:
