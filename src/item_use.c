@@ -510,12 +510,9 @@ static void SetDistanceOfClosestHiddenItem(u8 taskId, s16 itemDistanceX, s16 ite
         // New item is closer
         tItemDistanceX = itemDistanceX;
         tItemDistanceY = itemDistanceY;
-        return;
     }
-
-    if (oldItemAbsX + oldItemAbsY == newItemAbsX + newItemAbsY &&
-        (oldItemAbsY > newItemAbsY ||
-            (oldItemAbsY == newItemAbsY && tItemDistanceY < itemDistanceY)))
+    else if (oldItemAbsX + oldItemAbsY == newItemAbsX + newItemAbsY
+          && (oldItemAbsY > newItemAbsY || (oldItemAbsY == newItemAbsY && tItemDistanceY < itemDistanceY)))
     {
         // If items are equal distance, use whichever is closer on the Y axis or further south
         tItemDistanceX = itemDistanceX;
@@ -549,22 +546,24 @@ static u8 GetDirectionToHiddenItem(s16 itemDistanceX, s16 itemDistanceY)
         else
             return DIR_NORTH;
     }
-
-    if (absX < absY)
+    else if (absX < absY)
     {
         if (itemDistanceY < 0)
             return DIR_SOUTH;
         else
             return DIR_WEST;
     }
-    if (absX == absY)
+    else if (absX == absY)
     {
         if (itemDistanceY < 0)
             return DIR_SOUTH;
         else
             return DIR_WEST;
     }
-    return DIR_NONE; // Unreachable
+    else
+    {
+        return DIR_NONE; // Unreachable
+    }
 }
 
 static void PlayerFaceHiddenItem(u8 direction)
