@@ -27,7 +27,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_EnterSingleBattleRoom::
 	applymovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_ApproachPlayer
 	waitmovement 0
 	pike_gettrainerintro 0
-	msgbox gStringVar4, MSGBOX_DEFAULT
+	msgbox gStringVarBuffer, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	releaseall
@@ -56,7 +56,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_EnterHardBattleRoom::
 	applymovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_ApproachPlayer
 	waitmovement 0
 	pike_gettrainerintro 0
-	msgbox gStringVar4, MSGBOX_DEFAULT
+	msgbox gStringVarBuffer, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	releaseall
@@ -242,13 +242,13 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_EnterDoubleBattleRoom::
 	applymovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoomNormal_Movement_PlayerFaceTrainer1
 	waitmovement 0
 	pike_gettrainerintro 0
-	msgbox gStringVar4, MSGBOX_DEFAULT
+	msgbox gStringVarBuffer, MSGBOX_DEFAULT
 	closemessage
 	delay 16
 	applymovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoomNormal_Movement_PlayerFaceTrainer2
 	waitmovement 0
 	pike_gettrainerintro 1
-	msgbox gStringVar4, MSGBOX_DEFAULT
+	msgbox gStringVarBuffer, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, SPECIAL_BATTLE_PIKE_DOUBLE
 	setvar VAR_0x8005, 0
@@ -530,7 +530,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_NormalNPC::
 	lock
 	faceplayer
 	pike_getnpcmsg
-	msgbox gStringVar4, MSGBOX_DEFAULT
+	msgbox gStringVarBuffer, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	release
