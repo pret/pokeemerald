@@ -1,6 +1,6 @@
 SkyPillar_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SkyPillar_1F_OnTransition
-	.byte 0
+	end_map_scripts
 
 SkyPillar_1F_OnTransition:
 	call_if_lt VAR_SKY_PILLAR_STATE, 2, SkyPillar_1F_EventScript_CleanFloor

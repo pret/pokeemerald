@@ -1,5 +1,5 @@
 AbandonedShip_Rooms2_B1F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 AbandonedShip_Rooms2_B1F_EventScript_Camper::
 	msgbox AbandonedShip_Rooms2_B1F_Text_PerfectPlaceToGoExploring, MSGBOX_NPC

@@ -1,10 +1,10 @@
 AbandonedShip_HiddenFloorRooms_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, AbandonedShip_HiddenFloorRooms_OnFrame
-	.byte 0
+	end_map_scripts
 
 AbandonedShip_HiddenFloorRooms_OnFrame:
 	map_script_2 VAR_TEMP_1, 0, AbandonedShip_HiddenFloorRooms_EventScript_DoHiddenItemSparkle
-	.2byte 0
+	end_map_script_table
 
 @ After the below calculation, VAR_TEMP_4 is the room number of the door the player entered
 @ Bottom row, left column   (Rm 1)

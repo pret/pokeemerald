@@ -1,5 +1,5 @@
 FallarborTown_MoveRelearnersHouse_MapScripts::
-	.byte 0
+	end_map_scripts
 
 FallarborTown_MoveRelearnersHouse_EventScript_MoveRelearner::
 	lockall

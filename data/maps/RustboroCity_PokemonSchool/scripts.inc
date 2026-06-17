@@ -1,5 +1,5 @@
 RustboroCity_PokemonSchool_MapScripts::
-	.byte 0
+	end_map_scripts
 
 RustboroCity_PokemonSchool_EventScript_Blackboard::
 	lockall

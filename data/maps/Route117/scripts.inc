@@ -1,6 +1,6 @@
 Route117_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route117_OnTransition
-	.byte 0
+	end_map_scripts
 
 Route117_OnTransition:
 	call Route117_EventScript_TryMoveDayCareMan

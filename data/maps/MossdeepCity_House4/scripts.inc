@@ -1,5 +1,5 @@
 MossdeepCity_House4_MapScripts::
-	.byte 0
+	end_map_scripts
 
 MossdeepCity_House4_EventScript_Woman::
 	lock

@@ -1,5 +1,5 @@
 DewfordTown_House1_MapScripts::
-	.byte 0
+	end_map_scripts
 
 DewfordTown_House1_EventScript_Man::
 	msgbox DewfordTown_House1_Text_LotToBeSaidForLivingOnIsland, MSGBOX_NPC

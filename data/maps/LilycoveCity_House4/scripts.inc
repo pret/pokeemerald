@@ -1,5 +1,5 @@
 LilycoveCity_House4_MapScripts::
-	.byte 0
+	end_map_scripts
 
 LilycoveCity_House4_EventScript_Man1::
 	msgbox LilycoveCity_House4_Text_MysteriesAtBottomOfSea, MSGBOX_NPC

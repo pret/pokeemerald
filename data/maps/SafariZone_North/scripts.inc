@@ -1,5 +1,5 @@
 SafariZone_North_MapScripts::
-	.byte 0
+	end_map_scripts
 
 SafariZone_North_EventScript_Fisherman::
 	msgbox SafariZone_North_Text_Fisherman, MSGBOX_NPC

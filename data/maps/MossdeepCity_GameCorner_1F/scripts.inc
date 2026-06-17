@@ -2,15 +2,15 @@ MossdeepCity_GameCorner_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, MossdeepCity_GameCorner_1F_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, MossdeepCity_GameCorner_1F_OnWarp
 	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad
-	.byte 0
+	end_map_scripts
 
 MossdeepCity_GameCorner_1F_OnWarp:
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_MINIGAME, CableClub_EventScript_CheckTurnAttendant
-	.2byte 0
+	end_map_script_table
 
 MossdeepCity_GameCorner_1F_OnFrame:
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_MINIGAME, CableClub_EventScript_ExitMinigameRoom
-	.2byte 0
+	end_map_script_table
 
 @ Script is redundant, the label in the goto also does lock and faceplayer
 MossdeepCity_GameCorner_1F_EventScript_InfoMan::

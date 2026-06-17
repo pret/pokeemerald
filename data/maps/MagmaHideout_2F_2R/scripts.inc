@@ -1,5 +1,5 @@
 MagmaHideout_2F_2R_MapScripts::
-	.byte 0
+	end_map_scripts
 
 MagmaHideout_2F_2R_EventScript_Grunt15::
 	trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_15, MagmaHideout_2F_2R_Text_Grunt15Intro, MagmaHideout_2F_2R_Text_Grunt15Defeat

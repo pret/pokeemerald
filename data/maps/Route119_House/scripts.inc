@@ -1,5 +1,5 @@
 Route119_House_MapScripts::
-	.byte 0
+	end_map_scripts
 
 Route119_House_EventScript_Woman::
 	msgbox Route119_House_Text_RumorAboutCaveOfOrigin, MSGBOX_NPC

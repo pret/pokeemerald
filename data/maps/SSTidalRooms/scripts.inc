@@ -1,5 +1,5 @@
 SSTidalRooms_MapScripts::
-	.byte 0
+	end_map_scripts
 
 SSTidalRooms_EventScript_SnatchGiver::
 	lock

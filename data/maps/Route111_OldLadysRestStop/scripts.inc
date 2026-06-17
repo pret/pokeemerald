@@ -1,6 +1,6 @@
 Route111_OldLadysRestStop_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route111_OldLadysRestStop_OnTransition
-	.byte 0
+	end_map_scripts
 
 Route111_OldLadysRestStop_OnTransition:
 	setflag FLAG_LANDMARK_OLD_LADY_REST_SHOP

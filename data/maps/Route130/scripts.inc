@@ -1,6 +1,6 @@
 Route130_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route130_OnTransition
-	.byte 0
+	end_map_scripts
 
 Route130_OnTransition:
 	call_if_ge VAR_SOOTOPOLIS_CITY_STATE, 4, Route130_EventScript_CheckSetAbnormalWeather

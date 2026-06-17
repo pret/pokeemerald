@@ -1,5 +1,5 @@
 LilycoveCity_DepartmentStoreElevator_MapScripts::
-	.byte 0
+	end_map_scripts
 
 LilycoveCity_DepartmentStoreElevator_EventScript_Attendant::
 	lock

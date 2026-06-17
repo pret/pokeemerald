@@ -1,5 +1,5 @@
 LilycoveCity_DepartmentStore_1F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 LilycoveCity_DepartmentStore_1F_EventScript_Greeter::
 	msgbox LilycoveCity_DepartmentStore_1F_Text_WelcomeToDeptStore, MSGBOX_NPC

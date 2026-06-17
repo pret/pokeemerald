@@ -1,5 +1,5 @@
 SootopolisCity_Gym_B1F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 SootopolisCity_Gym_B1F_EventScript_Andrea::
 	trainerbattle_single TRAINER_ANDREA, SootopolisCity_Gym_B1F_Text_AndreaIntro, SootopolisCity_Gym_B1F_Text_AndreaDefeat

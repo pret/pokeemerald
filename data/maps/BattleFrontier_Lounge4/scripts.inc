@@ -1,5 +1,5 @@
 BattleFrontier_Lounge4_MapScripts::
-	.byte 0
+	end_map_scripts
 
 BattleFrontier_Lounge4_EventScript_Woman::
 	msgbox BattleFrontier_Lounge4_Text_WonderIfInterviewsAiring, MSGBOX_NPC
