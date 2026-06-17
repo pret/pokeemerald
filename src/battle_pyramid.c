@@ -1016,12 +1016,13 @@ static void HidePyramidItem(void)
         {
             // Rather than using event flags to hide the item object event,
             // it moves them far off the map bounds.
-            events[i].x = SHRT_MAX;
-            events[i].y = SHRT_MAX;
+            events[i].x = INT16_MAX;
+            events[i].y = INT16_MAX;
             break;
         }
         i++;
-    } while (events[i].localId != LOCALID_NONE);
+    }
+    while (events[i].localId != LOCALID_NONE);
 }
 
 static void SetPyramidFacilityTrainers(void)
@@ -1298,7 +1299,7 @@ static u8 GetPostBattleDirectionHintTextIndex(int *hintType, u8 minDistanceForEx
                 return textIndex;
             }
         }
-        map += MAP_OFFSET_W + 32;
+        map += MAP_OFFSET_W + 32; // HINT: x == 32.
     }
 
     return textIndex;
@@ -1538,7 +1539,8 @@ void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPositio
         gBackupMapLayout.width = mapLayout->width * PYRAMID_FLOOR_SQUARES_WIDE + MAP_OFFSET_W;
         gBackupMapLayout.height = mapLayout->height * PYRAMID_FLOOR_SQUARES_HIGH + MAP_OFFSET_H;
         map = gBackupMapLayout.map;
-        map += (gBackupMapLayout.width * (MAP_OFFSET + (i / PYRAMID_FLOOR_SQUARES_WIDE * mapLayout->height)) + MAP_OFFSET + (i % PYRAMID_FLOOR_SQUARES_WIDE * mapLayout->width));
+        map += gBackupMapLayout.width * (MAP_OFFSET + (i / PYRAMID_FLOOR_SQUARES_WIDE * mapLayout->height))
+            +  MAP_OFFSET + (i % PYRAMID_FLOOR_SQUARES_WIDE * mapLayout->width);
         for (y = 0; y < mapLayout->height; y++)
         {
             for (x = 0; x < mapLayout->width; x++)

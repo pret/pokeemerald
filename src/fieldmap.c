@@ -44,9 +44,9 @@ static void FillEastConnection(struct MapHeader const *mapHeader, struct MapHead
 static void InitBackupMapLayoutConnections(const struct MapHeader *mapHeader);
 static void LoadSavedMapView(void);
 static bool8 SkipCopyingMetatileFromSavedMap(u16 *mapBlock, u16 mapWidth, u8 yMode);
-static const struct MapConnection *GetIncomingConnection(u8 direction, int x, int y);
-static bool8 IsPosInIncomingConnectingMap(u8 direction, int x, int y, const struct MapConnection *connection);
-static bool8 IsCoordInIncomingConnectingMap(int coord, int srcMax, int destMax, int offset);
+static const struct MapConnection *GetIncomingConnection(u8 direction, s32 x, s32 y);
+static bool8 IsPosInIncomingConnectingMap(u8 direction, s32 x, s32 y, const struct MapConnection *connection);
+static bool8 IsCoordInIncomingConnectingMap(s32 coord, s32 srcMax, s32 destMax, s32 offset);
 
 #define GetBorderBlockAt(x, y) (gMapHeader.mapLayout->border[((x + 1) & 1) + (((y + 1) & 1) << 1)] | MAPGRID_IMPASSABLE)
 
@@ -107,7 +107,7 @@ static void InitMapLayoutData(const struct MapHeader *mapHeader)
 static void InitBackupMapLayoutData(const u16 *map, u16 width, u16 height)
 {
     u16 *dest;
-    int y;
+    s32 y;
     dest = gBackupMapLayout.map;
     dest += gBackupMapLayout.width * MAP_OFFSET + MAP_OFFSET;
     for (y = 0; y < height; y++)
@@ -120,7 +120,7 @@ static void InitBackupMapLayoutData(const u16 *map, u16 width, u16 height)
 
 static void InitBackupMapLayoutConnections(const struct MapHeader *mapHeader)
 {
-    int count, i, offset;
+    s32 count, i, offset;
     const struct MapConnection *connection;
     const struct MapHeader *cMap;
 
@@ -156,12 +156,12 @@ static void InitBackupMapLayoutConnections(const struct MapHeader *mapHeader)
     }
 }
 
-static void FillConnection(int x, int y, const struct MapHeader *connectedMapHeader, int x2, int y2, int width, int height)
+static void FillConnection(s32 x, s32 y, const struct MapHeader *connectedMapHeader, s32 x2, s32 y2, s32 width, s32 height)
 {
-    int i;
+    s32 i;
     const u16 *src;
     u16 *dest;
-    int mapWidth;
+    s32 mapWidth;
 
     mapWidth = connectedMapHeader->mapLayout->width;
     src = &connectedMapHeader->mapLayout->map[mapWidth * y2 + x2];
@@ -177,10 +177,10 @@ static void FillConnection(int x, int y, const struct MapHeader *connectedMapHea
 
 static void FillSouthConnection(const struct MapHeader *mapHeader, const struct MapHeader *connectedMapHeader, s32 offset)
 {
-    int x, y;
-    int x2;
-    int width;
-    int cWidth;
+    s32 x, y;
+    s32 x2;
+    s32 width;
+    s32 cWidth;
 
     if (!connectedMapHeader)
         return;
@@ -212,10 +212,10 @@ static void FillSouthConnection(const struct MapHeader *mapHeader, const struct 
 
 static void FillNorthConnection(const struct MapHeader *mapHeader, const struct MapHeader *connectedMapHeader, s32 offset)
 {
-    int x;
-    int x2, y2;
-    int width;
-    int cWidth, cHeight;
+    s32 x;
+    s32 x2, y2;
+    s32 width;
+    s32 cWidth, cHeight;
 
     if (!connectedMapHeader)
         return;
@@ -248,10 +248,10 @@ static void FillNorthConnection(const struct MapHeader *mapHeader, const struct 
 
 static void FillWestConnection(const struct MapHeader *mapHeader, const struct MapHeader *connectedMapHeader, s32 offset)
 {
-    int y;
-    int x2, y2;
-    int height;
-    int cWidth, cHeight;
+    s32 y;
+    s32 x2, y2;
+    s32 height;
+    s32 cWidth, cHeight;
 
     if (!connectedMapHeader)
         return;
@@ -283,10 +283,10 @@ static void FillWestConnection(const struct MapHeader *mapHeader, const struct M
 
 static void FillEastConnection(const struct MapHeader *mapHeader, const struct MapHeader *connectedMapHeader, s32 offset)
 {
-    int x, y;
-    int y2;
-    int height;
-    int cHeight;
+    s32 x, y;
+    s32 y2;
+    s32 height;
+    s32 cHeight;
     if (!connectedMapHeader)
         return;
 
@@ -314,7 +314,7 @@ static void FillEastConnection(const struct MapHeader *mapHeader, const struct M
     FillConnection(x, y, connectedMapHeader, /*x2*/ 0, y2, /*width*/ MAP_OFFSET + 1, height);
 }
 
-u8 MapGridGetElevationAt(int x, int y)
+u8 MapGridGetElevationAt(s32 x, s32 y)
 {
     u16 block = GetMapGridBlockAt(x, y);
 
@@ -324,7 +324,7 @@ u8 MapGridGetElevationAt(int x, int y)
     return UNPACK_ELEVATION(block);
 }
 
-u8 MapGridGetCollisionAt(int x, int y)
+u8 MapGridGetCollisionAt(s32 x, s32 y)
 {
     u16 block = GetMapGridBlockAt(x, y);
 
@@ -334,9 +334,9 @@ u8 MapGridGetCollisionAt(int x, int y)
     return UNPACK_COLLISION(block);
 }
 
-int MapGridGetMetatileIdAt(int x, int y)
+s32 MapGridGetMetatileIdAt(s32 x, s32 y)
 {
-    int block = GetMapGridBlockAt(x, y);
+    s32 block = GetMapGridBlockAt(x, y);
 
     if (block == MAPGRID_UNDEFINED)
         return UNPACK_METATILE(GetBorderBlockAt(x, y));
@@ -344,17 +344,17 @@ int MapGridGetMetatileIdAt(int x, int y)
     return UNPACK_METATILE(block);
 }
 
-int MapGridGetMetatileBehaviorAt(int x, int y)
+s32 MapGridGetMetatileBehaviorAt(s32 x, s32 y)
 {
     return UNPACK_BEHAVIOR(GetMetatileAttributesById(MapGridGetMetatileIdAt(x, y)));
 }
 
-u8 MapGridGetMetatileLayerTypeAt(int x, int y)
+u8 MapGridGetMetatileLayerTypeAt(s32 x, s32 y)
 {
     return UNPACK_LAYER_TYPE(GetMetatileAttributesById(MapGridGetMetatileIdAt(x, y)));
 }
 
-void MapGridSetMetatileIdAt(int x, int y, u16 metatile)
+void MapGridSetMetatileIdAt(s32 x, s32 y, u16 metatile)
 {
     if (AreCoordsWithinMapGridBounds(x, y))
     {
@@ -364,7 +364,7 @@ void MapGridSetMetatileIdAt(int x, int y, u16 metatile)
     }
 }
 
-void MapGridSetMetatileEntryAt(int x, int y, u16 metatile)
+void MapGridSetMetatileEntryAt(s32 x, s32 y, u16 metatile)
 {
     if (AreCoordsWithinMapGridBounds(x, y))
     {
@@ -390,10 +390,10 @@ u16 GetMetatileAttributesById(u16 metatile)
 
 void SaveMapView(void)
 {
-    int i, j;
-    int x, y;
+    s32 i, j;
+    s32 x, y;
     u16 *mapView;
-    int width;
+    s32 width;
     mapView = gSaveBlock1Ptr->mapView;
     width = gBackupMapLayout.width;
     x = gSaveBlock1Ptr->pos.x;
@@ -411,11 +411,9 @@ static bool32 SavedMapViewIsEmpty(void)
     u32 marker = 0;
 
 #ifndef UBFIX
-    // BUG: This loop extends past the bounds of the mapView array. Its size is only 0x100.
     for (i = 0; i < sizeof(gSaveBlock1Ptr->mapView); i++)
         marker |= gSaveBlock1Ptr->mapView[i];
 #else
-    // UBFIX: Only iterate over 0x100
     for (i = 0; i < ARRAY_COUNT(gSaveBlock1Ptr->mapView); i++)
         marker |= gSaveBlock1Ptr->mapView[i];
 #endif
@@ -435,10 +433,10 @@ static void ClearSavedMapView(void)
 static void LoadSavedMapView(void)
 {
     u8 yMode;
-    int i, j;
-    int x, y;
+    s32 i, j;
+    s32 x, y;
     u16 *mapView;
-    int width;
+    s32 width;
     mapView = gSaveBlock1Ptr->mapView;
     if (SavedMapViewIsEmpty())
         return;
@@ -474,11 +472,11 @@ static void LoadSavedMapView(void)
 
 static void MoveMapViewToBackup(u8 direction)
 {
-    int width;
-    int x0, y0;
-    int x2, y2;
-    int x, y;
-    int i, j;
+    s32 width;
+    s32 x0, y0;
+    s32 x2, y2;
+    s32 x, y;
+    s32 i, j;
 
     u16 *mapView = gSaveBlock1Ptr->mapView;
     
@@ -521,7 +519,7 @@ static void MoveMapViewToBackup(u8 direction)
     ClearSavedMapView();
 }
 
-int GetMapBorderIdAt(int x, int y)
+s32 GetMapBorderIdAt(s32 x, s32 y)
 {
     if (GetMapGridBlockAt(x, y) == MAPGRID_UNDEFINED)
         return CONNECTION_INVALID;
@@ -560,14 +558,14 @@ int GetMapBorderIdAt(int x, int y)
     }
 }
 
-int GetPostCameraMoveMapBorderId(int x, int y)
+s32 GetPostCameraMoveMapBorderId(s32 x, s32 y)
 {
     return GetMapBorderIdAt(gSaveBlock1Ptr->pos.x + MAP_OFFSET + x, gSaveBlock1Ptr->pos.y + MAP_OFFSET + y);
 }
 
-bool32 CanCameraMoveInDirection(int direction)
+bool32 CanCameraMoveInDirection(s32 direction)
 {
-    int x, y;
+    s32 x, y;
     x = gSaveBlock1Ptr->pos.x + MAP_OFFSET + gDirectionToVectors[direction].x;
     y = gSaveBlock1Ptr->pos.y + MAP_OFFSET + gDirectionToVectors[direction].y;
 
@@ -577,7 +575,7 @@ bool32 CanCameraMoveInDirection(int direction)
     return TRUE;
 }
 
-static void SetPositionFromConnection(const struct MapConnection *connection, int direction, int x, int y)
+static void SetPositionFromConnection(const struct MapConnection *connection, s32 direction, s32 x, s32 y)
 {
     struct MapHeader const *mapHeader;
     mapHeader = GetMapHeaderFromConnection(connection);
@@ -602,11 +600,11 @@ static void SetPositionFromConnection(const struct MapConnection *connection, in
     }
 }
 
-bool8 CameraMove(int x, int y)
+bool8 CameraMove(s32 x, s32 y)
 {
-    int direction;
+    s32 direction;
     const struct MapConnection *connection;
-    int old_x, old_y;
+    s32 old_x, old_y;
     gCamera.active = FALSE;
     direction = GetPostCameraMoveMapBorderId(x, y);
     if (direction == CONNECTION_NONE || direction == CONNECTION_INVALID)
@@ -633,10 +631,10 @@ bool8 CameraMove(int x, int y)
     return gCamera.active;
 }
 
-static const struct MapConnection *GetIncomingConnection(u8 direction, int x, int y)
+static const struct MapConnection *GetIncomingConnection(u8 direction, s32 x, s32 y)
 {
-    int count;
-    int i;
+    s32 count;
+    s32 i;
     const struct MapConnection *connection;
     const struct MapConnections *connections = gMapHeader.connections;
 
@@ -654,7 +652,7 @@ static const struct MapConnection *GetIncomingConnection(u8 direction, int x, in
     return NULL;
 }
 
-static bool8 IsPosInIncomingConnectingMap(u8 direction, int x, int y, const struct MapConnection *connection)
+static bool8 IsPosInIncomingConnectingMap(u8 direction, s32 x, s32 y, const struct MapConnection *connection)
 {
     struct MapHeader const *mapHeader;
     mapHeader = GetMapHeaderFromConnection(connection);
@@ -670,9 +668,9 @@ static bool8 IsPosInIncomingConnectingMap(u8 direction, int x, int y, const stru
     return FALSE;
 }
 
-static bool8 IsCoordInIncomingConnectingMap(int coord, int srcMax, int destMax, int offset)
+static bool8 IsCoordInIncomingConnectingMap(s32 coord, s32 srcMax, s32 destMax, s32 offset)
 {
-    int min, max;
+    s32 min, max;
 
     if (offset < 0)
         min = 0;
@@ -690,7 +688,7 @@ static bool8 IsCoordInIncomingConnectingMap(int coord, int srcMax, int destMax, 
     return FALSE;
 }
 
-static int IsCoordInConnectingMap(int coord, int max)
+static s32 IsCoordInConnectingMap(s32 coord, s32 max)
 {
     if (coord >= 0 && coord < max)
         return TRUE;
@@ -698,7 +696,7 @@ static int IsCoordInConnectingMap(int coord, int max)
     return FALSE;
 }
 
-static int IsPosInConnectingMap(const struct MapConnection *connection, int x, int y)
+static s32 IsPosInConnectingMap(const struct MapConnection *connection, s32 x, s32 y)
 {
     struct MapHeader const *mapHeader;
     mapHeader = GetMapHeaderFromConnection(connection);
@@ -716,9 +714,9 @@ static int IsPosInConnectingMap(const struct MapConnection *connection, int x, i
 
 const struct MapConnection *GetMapConnectionAtPos(s16 x, s16 y)
 {
-    int count;
+    s32 count;
     const struct MapConnection *connection;
-    int i;
+    s32 i;
     u8 direction;
     if (!gMapHeader.connections)
     {
@@ -730,18 +728,19 @@ const struct MapConnection *GetMapConnectionAtPos(s16 x, s16 y)
     for (i = 0; i < count; i++, connection++)
     {
         direction = connection->direction;
-        if ((direction == CONNECTION_DIVE || direction == CONNECTION_EMERGE) ||
-            (direction == CONNECTION_NORTH && y >= MAP_OFFSET) ||
-            (direction == CONNECTION_SOUTH && y < gMapHeader.mapLayout->height + MAP_OFFSET) ||
-            (direction == CONNECTION_WEST && x >= MAP_OFFSET) ||
-            (direction == CONNECTION_EAST && x < gMapHeader.mapLayout->width + MAP_OFFSET))
-        {
+        if (direction == CONNECTION_DIVE || direction == CONNECTION_EMERGE)
             continue;
-        }
+        else if (direction == CONNECTION_NORTH && y > MAP_OFFSET - 1)
+            continue;
+        else if (direction == CONNECTION_SOUTH && y < gMapHeader.mapLayout->height + MAP_OFFSET)
+            continue;
+        else if (direction == CONNECTION_WEST && x > MAP_OFFSET - 1)
+            continue;
+        else if (direction == CONNECTION_EAST && x < gMapHeader.mapLayout->width + MAP_OFFSET)
+            continue;
+
         if (IsPosInConnectingMap(connection, x - MAP_OFFSET, y - MAP_OFFSET) == TRUE)
-        {
             return connection;
-        }
     }
     return NULL;
 }
@@ -770,7 +769,7 @@ void GetCameraCoords(u16 *x, u16 *y)
     *y = gSaveBlock1Ptr->pos.y;
 }
 
-void MapGridSetMetatileImpassabilityAt(int x, int y, bool32 impassable)
+void MapGridSetMetatileImpassabilityAt(s32 x, s32 y, bool32 impassable)
 {
     if (AreCoordsWithinMapGridBounds(x, y))
     {
