@@ -411,11 +411,9 @@ static bool32 SavedMapViewIsEmpty(void)
     u32 marker = 0;
 
 #ifndef UBFIX
-    // BUG: This loop extends past the bounds of the mapView array. Its size is only 0x100.
     for (i = 0; i < sizeof(gSaveBlock1Ptr->mapView); i++)
         marker |= gSaveBlock1Ptr->mapView[i];
 #else
-    // UBFIX: Only iterate over 0x100
     for (i = 0; i < ARRAY_COUNT(gSaveBlock1Ptr->mapView); i++)
         marker |= gSaveBlock1Ptr->mapView[i];
 #endif
@@ -730,18 +728,19 @@ const struct MapConnection *GetMapConnectionAtPos(s16 x, s16 y)
     for (i = 0; i < count; i++, connection++)
     {
         direction = connection->direction;
-        if ((direction == CONNECTION_DIVE || direction == CONNECTION_EMERGE) ||
-            (direction == CONNECTION_NORTH && y >= MAP_OFFSET) ||
-            (direction == CONNECTION_SOUTH && y < gMapHeader.mapLayout->height + MAP_OFFSET) ||
-            (direction == CONNECTION_WEST && x >= MAP_OFFSET) ||
-            (direction == CONNECTION_EAST && x < gMapHeader.mapLayout->width + MAP_OFFSET))
-        {
+        if (direction == CONNECTION_DIVE || direction == CONNECTION_EMERGE)
             continue;
-        }
+        else if (direction == CONNECTION_NORTH && y > MAP_OFFSET - 1)
+            continue;
+        else if (direction == CONNECTION_SOUTH && y < gMapHeader.mapLayout->height + MAP_OFFSET)
+            continue;
+        else if (direction == CONNECTION_WEST && x > MAP_OFFSET - 1)
+            continue;
+        else if (direction == CONNECTION_EAST && x < gMapHeader.mapLayout->width + MAP_OFFSET)
+            continue;
+
         if (IsPosInConnectingMap(connection, x - MAP_OFFSET, y - MAP_OFFSET) == TRUE)
-        {
             return connection;
-        }
     }
     return NULL;
 }
