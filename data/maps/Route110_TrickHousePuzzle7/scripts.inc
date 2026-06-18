@@ -229,9 +229,7 @@ Route110_TrickHousePuzzle7_EventScript_YellowButton::
 	playse SE_REPEL
 	initrotatingtilepuzzle TRUE
 	moverotatingtileobjects 0
-	waitmovement 0
 	turnrotatingtileobjects
-	waitmovement 0
 	freerotatingtilepuzzle
 	end
 
@@ -241,9 +239,7 @@ Route110_TrickHousePuzzle7_EventScript_BlueButton::
 	playse SE_REPEL
 	initrotatingtilepuzzle TRUE
 	moverotatingtileobjects 1
-	waitmovement 0
 	turnrotatingtileobjects
-	waitmovement 0
 	freerotatingtilepuzzle
 	end
 
@@ -253,9 +249,7 @@ Route110_TrickHousePuzzle7_EventScript_GreenButton::
 	playse SE_REPEL
 	initrotatingtilepuzzle TRUE
 	moverotatingtileobjects 2
-	waitmovement 0
 	turnrotatingtileobjects
-	waitmovement 0
 	freerotatingtilepuzzle
 	end
 
@@ -265,9 +259,7 @@ Route110_TrickHousePuzzle7_EventScript_PurpleButton::
 	playse SE_REPEL
 	initrotatingtilepuzzle TRUE
 	moverotatingtileobjects 3
-	waitmovement 0
 	turnrotatingtileobjects
-	waitmovement 0
 	freerotatingtilepuzzle
 	end
 
@@ -278,9 +270,7 @@ Route110_TrickHousePuzzle7_EventScript_RedButton::
 	playse SE_REPEL
 	initrotatingtilepuzzle TRUE
 	moverotatingtileobjects 4
-	waitmovement 0
 	turnrotatingtileobjects
-	waitmovement 0
 	freerotatingtilepuzzle
 	end
 
