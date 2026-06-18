@@ -57,8 +57,7 @@ TrainerHill_Entrance_OnFrame:
 
 TrainerHill_Entrance_EventScript_ExitElevator::
 	lockall
-	applymovement LOCALID_PLAYER, TrainerHill_Entrance_Movement_PlayerExitElevator
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, TrainerHill_Entrance_Movement_PlayerExitElevator
 	setmetatile 17, 10, METATILE_TrainerHill_CounterDoor, TRUE
 	special DrawWholeMapView
 	playse SE_CLICK
@@ -165,8 +164,7 @@ TrainerHill_Entrance_EventScript_CancelEntry::
 	setvar VAR_TEMP_5, 0
 	msgbox TrainerHill_Entrance_Text_PleaseVisitUsAgain, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_PLAYER, TrainerHill_Entrance_Movement_PushPlayerBackFromCounter
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, TrainerHill_Entrance_Movement_PushPlayerBackFromCounter
 	releaseall
 	end
 
@@ -187,8 +185,7 @@ TrainerHill_Entrance_EventScript_SaveFailed::
 TrainerHill_Entrance_EventScript_Closed::
 	msgbox TrainerHill_Entrance_Text_StillGettingReady, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_PLAYER, TrainerHill_Entrance_Movement_PushPlayerBackFromCounter
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, TrainerHill_Entrance_Movement_PushPlayerBackFromCounter
 	releaseall
 	end
 

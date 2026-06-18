@@ -45,8 +45,7 @@ Route119_EventScript_RivalEncounter::
 	delay 65
 	call_if_eq VAR_TEMP_1, 1, Route119_EventScript_RivalEnter1
 	call_if_eq VAR_TEMP_1, 2, Route119_EventScript_RivalEnter2
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	delay 30
 	call_if_eq VAR_TEMP_1, 1, Route119_EventScript_SetRivalPos1
 	call_if_eq VAR_TEMP_1, 2, Route119_EventScript_SetRivalPos2
@@ -149,8 +148,7 @@ Route119_EventScript_RivalExitScottArrive::
 	call_if_eq VAR_TEMP_1, 1, Route119_EventScript_SetScottPos1
 	call_if_eq VAR_TEMP_1, 2, Route119_EventScript_SetScottPos2
 	addobject LOCALID_ROUTE119_SCOTT
-	applymovement LOCALID_ROUTE119_SCOTT, Route119_Movement_ScottEnter
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE119_SCOTT, Route119_Movement_ScottEnter
 	addvar VAR_SCOTT_STATE, 1
 	msgbox Route119_Text_ScottWayToGoBeSeeingYou, MSGBOX_DEFAULT
 	closemessage
@@ -169,23 +167,19 @@ Route119_EventScript_SetScottPos2::
 	return
 
 Route119_EventScript_ScottExit1::
-	applymovement LOCALID_ROUTE119_SCOTT, Route119_Movement_ScottExit1
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE119_SCOTT, Route119_Movement_ScottExit1
 	return
 
 Route119_EventScript_ScottExit2::
-	applymovement LOCALID_ROUTE119_SCOTT, Route119_Movement_ScottExit2
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE119_SCOTT, Route119_Movement_ScottExit2
 	return
 
 Route119_EventScript_RivalEnter1::
-	applymovement LOCALID_ROUTE119_RIVAL_ON_BIKE, Route119_Movement_RivalEnter1
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE119_RIVAL_ON_BIKE, Route119_Movement_RivalEnter1
 	return
 
 Route119_EventScript_RivalEnter2::
-	applymovement LOCALID_ROUTE119_RIVAL_ON_BIKE, Route119_Movement_RivalEnter2
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE119_RIVAL_ON_BIKE, Route119_Movement_RivalEnter2
 	return
 
 Route119_EventScript_RivalExit1::
@@ -439,8 +433,7 @@ Route119_EventScript_BridgeAquaGrunt1::
 	faceplayer
 	msgbox Route119_Text_StayAwayFromWeatherInstitute, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	release
 	end
 
@@ -449,8 +442,7 @@ Route119_EventScript_BridgeAquaGrunt2::
 	faceplayer
 	msgbox Route119_Text_DontGoNearWeatherInstitute, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	release
 	end
 

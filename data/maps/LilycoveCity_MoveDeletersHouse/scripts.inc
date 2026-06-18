@@ -3,8 +3,7 @@ LilycoveCity_MoveDeletersHouse_MapScripts::
 
 LilycoveCity_MoveDeletersHouse_EventScript_MoveDeleter::
 	lockall
-	applymovement LOCALID_MOVE_DELETER, Common_Movement_FacePlayer
-	waitmovement 0
+	applywaitmovement LOCALID_MOVE_DELETER, Common_Movement_FacePlayer
 	msgbox LilycoveCity_MoveDeletersHouse_Text_ICanMakeMonForgetMove, MSGBOX_YESNO
 	switch VAR_RESULT
 	case YES, LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget

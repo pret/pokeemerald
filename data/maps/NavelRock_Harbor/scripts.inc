@@ -8,8 +8,7 @@ NavelRock_Harbor_EventScript_Sailor::
 	goto_if_eq VAR_RESULT, NO, NavelRock_Harbor_EventScript_AsYouLike
 	msgbox EventTicket_Text_SailHome, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	delay 30
 	hideobjectat LOCALID_NAVEL_ROCK_SAILOR, MAP_NAVEL_ROCK_HARBOR
 	setvar VAR_0x8004, LOCALID_NAVEL_ROCK_SS_TIDAL

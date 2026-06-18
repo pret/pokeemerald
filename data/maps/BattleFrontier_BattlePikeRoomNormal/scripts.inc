@@ -24,8 +24,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_EnterRoom::
 BattleFrontier_BattlePikeRoomNormal_EventScript_EnterSingleBattleRoom::
 	lockall
 	delay 16
-	applymovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_ApproachPlayer
-	waitmovement 0
+	applywaitmovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_ApproachPlayer
 	pike_gettrainerintro 0
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
@@ -43,8 +42,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_WarpToLobbyLost::
 	end
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_WonSingleBattle::
-	applymovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_NPCExit
-	waitmovement 0
+	applywaitmovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_NPCExit
 	end
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_EnterHardBattleRoom::
@@ -53,8 +51,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_EnterHardBattleRoom::
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_BattleSomewhatToughTrainer, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
-	applymovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_ApproachPlayer
-	waitmovement 0
+	applywaitmovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_ApproachPlayer
 	pike_gettrainerintro 0
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
@@ -69,10 +66,8 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_EnterHardBattleRoom::
 	end
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_WonHardBattle::
-	applymovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_NPCExit
-	waitmovement 0
-	applymovement LOCALID_PIKE_ROOM_NPC_2, BattleFrontier_BattlePikeRoomNormal_Movement_HealNPCApproachPlayer
-	waitmovement 0
+	applywaitmovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_NPCExit
+	applywaitmovement LOCALID_PIKE_ROOM_NPC_2, BattleFrontier_BattlePikeRoomNormal_Movement_HealNPCApproachPlayer
 	lock
 	faceplayer
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_RestoreToFullHealth, MSGBOX_DEFAULT
@@ -82,15 +77,13 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_WonHardBattle::
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_EnjoyRestOfChallenge2, MSGBOX_DEFAULT
 	closemessage
 	release
-	applymovement LOCALID_PIKE_ROOM_NPC_2, BattleFrontier_BattlePikeRoomNormal_Movement_NPCExit
-	waitmovement 0
+	applywaitmovement LOCALID_PIKE_ROOM_NPC_2, BattleFrontier_BattlePikeRoomNormal_Movement_NPCExit
 	end
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_EnterBrainRoom::
 	delay 22
 	lockall
-	applymovement LOCALID_PIKE_ROOM_NPC_2, BattleFrontier_BattlePikeRoomNormal_Movement_PreQueenHealNPCApproachPlayer
-	waitmovement 0
+	applywaitmovement LOCALID_PIKE_ROOM_NPC_2, BattleFrontier_BattlePikeRoomNormal_Movement_PreQueenHealNPCApproachPlayer
 	pike_prequeenheal
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePikeRoomNormal_EventScript_PreQueenNoHeal
@@ -122,8 +115,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_LucyEnter::
 	delay 4
 	call BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesOpen
 	waitse
-	applymovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_LucyEnter
-	waitmovement 0
+	applywaitmovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_LucyEnter
 	pike_getbrainstatus
 	switch VAR_RESULT
 	case FRONTIER_BRAIN_GOLD, BattleFrontier_BattlePikeRoomNormal_EventScript_IntroLucyGold
@@ -180,10 +172,8 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucyGold::
 	end
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucy::
-	applymovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_LucyMoveAside
-	waitmovement 0
-	applymovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoomNormal_Movement_PlayerWalkUp2
-	waitmovement 0
+	applywaitmovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_LucyMoveAside
+	applywaitmovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoomNormal_Movement_PlayerWalkUp2
 	pike_get PIKE_DATA_WIN_STREAK
 	addvar VAR_RESULT, 1
 	pike_set PIKE_DATA_WIN_STREAK, VAR_RESULT
@@ -213,8 +203,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_PreQueenHealTwoMons::
 BattleFrontier_BattlePikeRoomNormal_EventScript_EnterFullHealRoom::
 	lockall
 	delay 16
-	applymovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_ApproachPlayer
-	waitmovement 0
+	applywaitmovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_ApproachPlayer
 	message BattleFrontier_BattlePikeRoomNormal_Text_WillRestoreToFullHealth
 	waitmessage
 	playfanfare MUS_HEAL
@@ -222,8 +211,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_EnterFullHealRoom::
 	special HealPlayerParty
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_EnjoyRestOfChallenge, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_NPCExit
-	waitmovement 0
+	applywaitmovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_NPCExit
 	releaseall
 	end
 
@@ -239,14 +227,12 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_EnterDoubleBattleRoom::
 	applymovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_Trainer1FacePlayer
 	applymovement LOCALID_PIKE_ROOM_NPC_2, BattleFrontier_BattlePikeRoomNormal_Movement_Trainer2FacePlayer
 	waitmovement 0
-	applymovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoomNormal_Movement_PlayerFaceTrainer1
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoomNormal_Movement_PlayerFaceTrainer1
 	pike_gettrainerintro 0
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	closemessage
 	delay 16
-	applymovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoomNormal_Movement_PlayerFaceTrainer2
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoomNormal_Movement_PlayerFaceTrainer2
 	pike_gettrainerintro 1
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	closemessage
@@ -259,21 +245,16 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_EnterDoubleBattleRoom::
 	end
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_WonDoubleBattle::
-	applymovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoomNormal_Movement_PlayerFaceTrainer2
-	waitmovement 0
-	applymovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_Trainer1Exit
-	waitmovement 0
-	applymovement LOCALID_PIKE_ROOM_NPC_2, BattleFrontier_BattlePikeRoomNormal_Movement_Trainer2Exit
-	waitmovement 0
-	applymovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoomNormal_Movement_PlayerFaceUp
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoomNormal_Movement_PlayerFaceTrainer2
+	applywaitmovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_Trainer1Exit
+	applywaitmovement LOCALID_PIKE_ROOM_NPC_2, BattleFrontier_BattlePikeRoomNormal_Movement_Trainer2Exit
+	applywaitmovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoomNormal_Movement_PlayerFaceUp
 	end
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_EnterStatusRoom::
 	lockall
 	message BattleFrontier_BattlePikeRoomNormal_Text_WatchOut
-	applymovement LOCALID_PIKE_ROOM_NPC_2, BattleFrontier_BattlePikeRoomNormal_Movement_MonApproachPlayer
-	waitmovement 0
+	applywaitmovement LOCALID_PIKE_ROOM_NPC_2, BattleFrontier_BattlePikeRoomNormal_Movement_MonApproachPlayer
 	pike_getstatusmon
 	copyvar VAR_0x8004, VAR_RESULT
 	call_if_eq VAR_0x8004, PIKE_STATUSMON_KIRLIA, BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaAttack
@@ -296,10 +277,8 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaAttack::
 	call_if_eq VAR_RESULT, PIKE_STATUS_SLEEP, BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaUsedHypnosis
 	pike_flashscreen
 	waitstate
-	applymovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_NPCApproachMon
-	waitmovement 0
-	applymovement LOCALID_PIKE_ROOM_NPC_2, BattleFrontier_BattlePikeRoomNormal_Movement_MonFaceNPC
-	waitmovement 0
+	applywaitmovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_NPCApproachMon
+	applywaitmovement LOCALID_PIKE_ROOM_NPC_2, BattleFrontier_BattlePikeRoomNormal_Movement_MonFaceNPC
 	waitse
 	playmoncry SPECIES_KIRLIA, CRY_MODE_NORMAL
 	waitmoncry
@@ -325,10 +304,8 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsAttack::
 	call_if_eq VAR_RESULT, PIKE_STATUS_BURN, BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsUsedWillOWisp
 	pike_flashscreen
 	waitstate
-	applymovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_NPCApproachMon
-	waitmovement 0
-	applymovement LOCALID_PIKE_ROOM_NPC_2, BattleFrontier_BattlePikeRoomNormal_Movement_MonFaceNPC
-	waitmovement 0
+	applywaitmovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_NPCApproachMon
+	applywaitmovement LOCALID_PIKE_ROOM_NPC_2, BattleFrontier_BattlePikeRoomNormal_Movement_MonFaceNPC
 	waitse
 	playmoncry SPECIES_DUSCLOPS, CRY_MODE_NORMAL
 	waitmoncry
@@ -375,8 +352,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsUsedWillOWisp::
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_DoPikeQueenBattle::
 	closemessage
-	applymovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoomNormal_Movement_PlayerWalkUp2
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoomNormal_Movement_PlayerWalkUp2
 	setvar VAR_0x8004, SPECIAL_BATTLE_PIKE_SINGLE
 	setvar VAR_0x8005, 0
 	special DoSpecialTrainerBattle
@@ -553,8 +529,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_HealNPC::
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_BestOfLuckFarewell, MSGBOX_DEFAULT
 	closemessage
 	release
-	applymovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_HealNPCExit
-	waitmovement 0
+	applywaitmovement LOCALID_PIKE_ROOM_NPC_1, BattleFrontier_BattlePikeRoomNormal_Movement_HealNPCExit
 	end
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_WillRestoreOneMon::
@@ -578,8 +553,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_StatusMon::
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_Silence, MSGBOX_DEFAULT
 	closemessage
 	release
-	applymovement LOCALID_PIKE_ROOM_NPC_2, BattleFrontier_BattlePikeRoomNormal_Movement_MonFaceRight
-	waitmovement 0
+	applywaitmovement LOCALID_PIKE_ROOM_NPC_2, BattleFrontier_BattlePikeRoomNormal_Movement_MonFaceRight
 	end
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesMostlyClosed::

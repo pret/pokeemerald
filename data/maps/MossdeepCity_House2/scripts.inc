@@ -26,13 +26,11 @@ MossdeepCity_House2_EventScript_Wingull::
 	end
 
 MossdeepCity_House2_EventScript_WingullExitNorth::
-	applymovement LOCALID_MOSSDEEP_HOUSE_WINGULL, MossdeepCity_House2_Movement_WingullExitNorth
-	waitmovement 0
+	applywaitmovement LOCALID_MOSSDEEP_HOUSE_WINGULL, MossdeepCity_House2_Movement_WingullExitNorth
 	return
 
 MossdeepCity_House2_EventScript_WingullExitWest::
-	applymovement LOCALID_MOSSDEEP_HOUSE_WINGULL, MossdeepCity_House2_Movement_WingullExitEast
-	waitmovement 0
+	applywaitmovement LOCALID_MOSSDEEP_HOUSE_WINGULL, MossdeepCity_House2_Movement_WingullExitEast
 	return
 
 MossdeepCity_House2_Movement_WingullExitNorth:

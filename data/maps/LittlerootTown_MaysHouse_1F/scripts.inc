@@ -86,10 +86,8 @@ LittlerootTown_MaysHouse_1F_EventScript_PetalburgGymReport::
 LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor::
 	lockall
 	playse SE_PIN
-	applymovement LOCALID_RIVALS_HOUSE_1F_MOM, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_RIVALS_HOUSE_1F_MOM, Common_Movement_Delay48
-	waitmovement 0
+	applywaitmovement LOCALID_RIVALS_HOUSE_1F_MOM, Common_Movement_ExclamationMark
+	applywaitmovement LOCALID_RIVALS_HOUSE_1F_MOM, Common_Movement_Delay48
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	applymovement LOCALID_RIVALS_HOUSE_1F_MOM, LittlerootTown_MaysHouse_1F_Movement_RivalMomApproach
 	waitmovement 0
@@ -147,8 +145,7 @@ LittlerootTown_MaysHouse_1F_EventScript_GoSeeRoom::
 	lockall
 	setvar VAR_0x8004, LOCALID_PLAYERS_HOUSE_1F_MOM
 	setvar VAR_0x8005, FEMALE
-	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
+	applywaitmovement VAR_0x8004, Common_Movement_WalkInPlaceFasterRight
 	goto PlayersHouse_1F_EventScript_MomGoSeeRoom
 	end
 
@@ -176,10 +173,8 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival::
 	addobject LOCALID_RIVALS_HOUSE_1F_RIVAL
 	delay 30
 	playse SE_PIN
-	applymovement LOCALID_RIVALS_HOUSE_1F_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_RIVALS_HOUSE_1F_RIVAL, Common_Movement_Delay48
-	waitmovement 0
+	applywaitmovement LOCALID_RIVALS_HOUSE_1F_RIVAL, Common_Movement_ExclamationMark
+	applywaitmovement LOCALID_RIVALS_HOUSE_1F_RIVAL, Common_Movement_Delay48
 	call_if_ne VAR_0x8008, 1, LittlerootTown_MaysHouse_1F_EventScript_PlayerFaceMay
 	playbgm MUS_ENCOUNTER_MAY, TRUE
 	call_if_eq VAR_0x8008, 0, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer0
@@ -204,23 +199,19 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival::
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_PlayerFaceMay::
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer0::
-	applymovement LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer0
-	waitmovement 0
+	applywaitmovement LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer0
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer1::
-	applymovement LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer1
-	waitmovement 0
+	applywaitmovement LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer1
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer2::
-	applymovement LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer2
-	waitmovement 0
+	applywaitmovement LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer2
 	return
 
 LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer0:

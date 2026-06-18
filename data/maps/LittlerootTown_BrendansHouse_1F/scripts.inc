@@ -87,10 +87,8 @@ LittlerootTown_BrendansHouse_1F_EventScript_PetalburgGymReport::
 LittlerootTown_BrendansHouse_1F_EventScript_YoureNewNeighbor::
 	lockall
 	playse SE_PIN
-	applymovement LOCALID_RIVALS_HOUSE_1F_MOM, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_RIVALS_HOUSE_1F_MOM, Common_Movement_Delay48
-	waitmovement 0
+	applywaitmovement LOCALID_RIVALS_HOUSE_1F_MOM, Common_Movement_ExclamationMark
+	applywaitmovement LOCALID_RIVALS_HOUSE_1F_MOM, Common_Movement_Delay48
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	applymovement LOCALID_RIVALS_HOUSE_1F_MOM, LittlerootTown_BrendansHouse_1F_Movement_RivalMomApproach
 	waitmovement 0
@@ -114,8 +112,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_GoSeeRoom::
 	lockall
 	setvar VAR_0x8004, LOCALID_PLAYERS_HOUSE_1F_MOM
 	setvar VAR_0x8005, MALE
-	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
+	applywaitmovement VAR_0x8004, Common_Movement_WalkInPlaceFasterLeft
 	goto PlayersHouse_1F_EventScript_MomGoSeeRoom
 	end
 
@@ -143,10 +140,8 @@ LittlerootTown_BrendansHouse_1F_EventScript_MeetRival::
 	addobject LOCALID_RIVALS_HOUSE_1F_RIVAL
 	delay 30
 	playse SE_PIN
-	applymovement LOCALID_RIVALS_HOUSE_1F_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_RIVALS_HOUSE_1F_RIVAL, Common_Movement_Delay48
-	waitmovement 0
+	applywaitmovement LOCALID_RIVALS_HOUSE_1F_RIVAL, Common_Movement_ExclamationMark
+	applywaitmovement LOCALID_RIVALS_HOUSE_1F_RIVAL, Common_Movement_Delay48
 	call_if_ne VAR_0x8008, 1, LittlerootTown_BrendansHouse_1F_EventScript_PlayerFaceBrendan
 	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
 	call_if_eq VAR_0x8008, 0, LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer0
@@ -171,23 +166,19 @@ LittlerootTown_BrendansHouse_1F_EventScript_MeetRival::
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_PlayerFaceBrendan::
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer0::
-	applymovement LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_BrendansHouse_1F_Movement_BrendanApproachPlayer0
-	waitmovement 0
+	applywaitmovement LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_BrendansHouse_1F_Movement_BrendanApproachPlayer0
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer1::
-	applymovement LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_BrendansHouse_1F_Movement_BrendanApproachPlayer1
-	waitmovement 0
+	applywaitmovement LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_BrendansHouse_1F_Movement_BrendanApproachPlayer1
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer2::
-	applymovement LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_BrendansHouse_1F_Movement_BrendanApproachPlayer2
-	waitmovement 0
+	applywaitmovement LOCALID_RIVALS_HOUSE_1F_RIVAL, LittlerootTown_BrendansHouse_1F_Movement_BrendanApproachPlayer2
 	return
 
 LittlerootTown_BrendansHouse_1F_Movement_BrendanApproachPlayer0:

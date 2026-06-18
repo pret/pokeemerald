@@ -51,12 +51,9 @@ FarawayIsland_Interior_OnFrame:
 FarawayIsland_Interior_EventScript_FindMew::
 	lockall
 	playse SE_PIN
-	applymovement LOCALID_FARAWAY_ISLAND_MEW, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_FARAWAY_ISLAND_MEW, Common_Movement_Delay48
-	waitmovement 0
-	applymovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewMoveAndHide
-	waitmovement 0
+	applywaitmovement LOCALID_FARAWAY_ISLAND_MEW, Common_Movement_ExclamationMark
+	applywaitmovement LOCALID_FARAWAY_ISLAND_MEW, Common_Movement_Delay48
+	applywaitmovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewMoveAndHide
 	copyobjectxytoperm LOCALID_FARAWAY_ISLAND_MEW
 	setvar VAR_TEMP_1, 1
 	releaseall
@@ -113,8 +110,7 @@ FarawayIsland_Interior_Movement_MewFloatUpEast:
 FarawayIsland_Interior_EventScript_Mew::
 	lock
 	faceplayer
-	applymovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewAppear
-	waitmovement 0
+	applywaitmovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewAppear
 	setvar VAR_0x8004, 0
 	special SetMewAboveGrass
 	message FarawayIsland_Interior_Text_Mew
@@ -152,23 +148,19 @@ FarawayIsland_Interior_EventScript_PlayerOrMewRan::
 	end
 
 FarawayIsland_Interior_EventScript_FoundMewNorth::
-	applymovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewFloatUpNorth
-	waitmovement 0
+	applywaitmovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewFloatUpNorth
 	return
 
 FarawayIsland_Interior_EventScript_FoundMewSouth::
-	applymovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewFloatUpSouth
-	waitmovement 0
+	applywaitmovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewFloatUpSouth
 	return
 
 FarawayIsland_Interior_EventScript_FoundMewWest::
-	applymovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewFloatUpWest
-	waitmovement 0
+	applywaitmovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewFloatUpWest
 	return
 
 FarawayIsland_Interior_EventScript_FoundMewEast::
-	applymovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewFloatUpEast
-	waitmovement 0
+	applywaitmovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewFloatUpEast
 	return
 
 FarawayIsland_Interior_EventScript_HideMewWhenGrassCut::

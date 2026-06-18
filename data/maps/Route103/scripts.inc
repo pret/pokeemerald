@@ -28,12 +28,9 @@ Route103_EventScript_RivalMay::
 	msgbox Route103_Text_MayRoute103Pokemon, MSGBOX_DEFAULT
 	closemessage
 	playbgm MUS_ENCOUNTER_MAY, TRUE
-	applymovement LOCALID_ROUTE103_RIVAL, Common_Movement_FacePlayer
-	waitmovement 0
-	applymovement LOCALID_ROUTE103_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_ROUTE103_RIVAL, Common_Movement_Delay48
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE103_RIVAL, Common_Movement_FacePlayer
+	applywaitmovement LOCALID_ROUTE103_RIVAL, Common_Movement_ExclamationMark
+	applywaitmovement LOCALID_ROUTE103_RIVAL, Common_Movement_Delay48
 	msgbox Route103_Text_MayLetsBattle, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, Route103_EventScript_StartMayBattleTreecko
@@ -45,12 +42,9 @@ Route103_EventScript_RivalBrendan::
 	msgbox Route103_Text_BrendanRoute103Pokemon, MSGBOX_DEFAULT
 	closemessage
 	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
-	applymovement LOCALID_ROUTE103_RIVAL, Common_Movement_FacePlayer
-	waitmovement 0
-	applymovement LOCALID_ROUTE103_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_ROUTE103_RIVAL, Common_Movement_Delay48
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE103_RIVAL, Common_Movement_FacePlayer
+	applywaitmovement LOCALID_ROUTE103_RIVAL, Common_Movement_ExclamationMark
+	applywaitmovement LOCALID_ROUTE103_RIVAL, Common_Movement_Delay48
 	msgbox Route103_Text_BrendanLetsBattle, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, Route103_EventScript_StartBrendanBattleTreecko
@@ -112,8 +106,7 @@ Route103_EventScript_RivalExitFacingNorth::
 	applymovement LOCALID_ROUTE103_RIVAL, Route103_Movement_RivalExitFacingNorth1
 	waitmovement 0
 	playse SE_LEDGE
-	applymovement LOCALID_ROUTE103_RIVAL, Route103_Movement_RivalExitFacingNorth2
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE103_RIVAL, Route103_Movement_RivalExitFacingNorth2
 	goto Route103_EventScript_RivalEnd
 	end
 
@@ -122,17 +115,14 @@ Route103_EventScript_RivalExitFacingEastOrWest::
 	applymovement LOCALID_ROUTE103_RIVAL, Route103_Movement_RivalExit1
 	waitmovement 0
 	playse SE_LEDGE
-	applymovement LOCALID_ROUTE103_RIVAL, Route103_Movement_RivalExit2
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE103_RIVAL, Route103_Movement_RivalExit2
 	goto Route103_EventScript_RivalEnd
 	end
 
 Route103_EventScript_RivalExitFacingSouth::
-	applymovement LOCALID_ROUTE103_RIVAL, Route103_Movement_RivalExit1
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE103_RIVAL, Route103_Movement_RivalExit1
 	playse SE_LEDGE
-	applymovement LOCALID_ROUTE103_RIVAL, Route103_Movement_RivalExit2
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE103_RIVAL, Route103_Movement_RivalExit2
 	goto Route103_EventScript_RivalEnd
 	end
 

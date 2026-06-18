@@ -19,8 +19,7 @@ BattleFrontier_BattlePikeCorridor_EventScript_EnterCorridor::
 	msgbox BattleFrontier_BattlePikeCorridor_Text_YourChallengeHasBegun, MSGBOX_DEFAULT
 	closemessage
 	releaseall
-	applymovement LOCALID_PLAYER, BattleFrontier_BattlePikeCorridor_Movement_PlayerExitCorridor
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, BattleFrontier_BattlePikeCorridor_Movement_PlayerExitCorridor
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 99
 	call BattleFrontier_BattlePike_EventScript_CloseCurtain
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM, 6, 10

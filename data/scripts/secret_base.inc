@@ -144,8 +144,7 @@ SecretBase_EventScript_InitSecretBase::
 	end
 
 SecretBase_EventScript_FirstEntrance::
-	applymovement LOCALID_PLAYER, SecretBase_Movement_EnterBase
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, SecretBase_Movement_EnterBase
 	setvar VAR_INIT_SECRET_BASE, 1
 	msgbox SecretBase_Text_WantToMakeYourSecretBaseHere, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, SecretBase_EventScript_SetAsBase

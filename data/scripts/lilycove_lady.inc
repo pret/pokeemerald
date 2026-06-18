@@ -378,11 +378,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_GivePokeblock::
 
 @ VAR_0x8004 here is the return value from GivePokeblockToContestLady
 LilycoveCity_PokemonCenter_1F_EventScript_FeedPokeblock::
-	applymovement LOCALID_LILYCOVE_LADY, LilycoveCity_PokemonCenter_1F_Movement_LadyFaceMon
-	waitmovement 0
+	applywaitmovement LOCALID_LILYCOVE_LADY, LilycoveCity_PokemonCenter_1F_Movement_LadyFaceMon
 	delay 60
-	applymovement LOCALID_LILYCOVE_LADYS_MON, LilycoveCity_PokemonCenter_1F_Movement_MonFaceLady
-	waitmovement 0
+	applywaitmovement LOCALID_LILYCOVE_LADYS_MON, LilycoveCity_PokemonCenter_1F_Movement_MonFaceLady
 	delay 60
 	waitse
 	playmoncry VAR_0x8005, CRY_MODE_NORMAL
@@ -394,12 +392,10 @@ LilycoveCity_PokemonCenter_1F_EventScript_FeedPokeblock::
 
 @ VAR_0x8004 here is the return value from GivePokeblockToContestLady
 LilycoveCity_PokemonCenter_1F_EventScript_MonEnjoyPokeblock::
-	applymovement LOCALID_LILYCOVE_LADYS_MON, LilycoveCity_PokemonCenter_1F_Movement_MonJump
-	waitmovement 0
+	applywaitmovement LOCALID_LILYCOVE_LADYS_MON, LilycoveCity_PokemonCenter_1F_Movement_MonJump
 	delay 60
 LilycoveCity_PokemonCenter_1F_EventScript_FinishFeedPokeblock::
-	applymovement LOCALID_LILYCOVE_LADY, LilycoveCity_PokemonCenter_1F_Movement_LadyFacePlayer
-	waitmovement 0
+	applywaitmovement LOCALID_LILYCOVE_LADY, LilycoveCity_PokemonCenter_1F_Movement_LadyFacePlayer
 	delay 60
 	goto_if_eq VAR_0x8004, 0, LilycoveCity_PokemonCenter_1F_EventScript_MonDislikedPokeblock
 	goto_if_eq VAR_0x8004, 1, LilycoveCity_PokemonCenter_1F_EventScript_MonLikedPokeblock

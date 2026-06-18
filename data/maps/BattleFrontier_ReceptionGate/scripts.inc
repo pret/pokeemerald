@@ -15,14 +15,11 @@ BattleFrontier_ReceptionGate_EventScript_FirstTimeEntering::
 	lockall
 	setvar VAR_HAS_ENTERED_BATTLE_FRONTIER, 1
 	playse SE_PIN
-	applymovement LOCALID_FRONTIER_RECEPTION_GREETER, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_FRONTIER_RECEPTION_GREETER, Common_Movement_Delay48
-	waitmovement 0
+	applywaitmovement LOCALID_FRONTIER_RECEPTION_GREETER, Common_Movement_ExclamationMark
+	applywaitmovement LOCALID_FRONTIER_RECEPTION_GREETER, Common_Movement_Delay48
 	msgbox BattleFrontier_ReceptionGate_Text_FirstTimeHereThisWay, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_PLAYER, BattleFrontier_ReceptionGate_Movement_PlayerApproachCounter
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, BattleFrontier_ReceptionGate_Movement_PlayerApproachCounter
 	goto BattleFrontier_ReceptionGate_EventScript_ScottScene
 	end
 
@@ -56,8 +53,7 @@ BattleFrontier_ReceptionGate_EventScript_ScottScene::
 	waitmovement 0
 	msgbox BattleFrontier_ReceptionGate_Text_ScottGreatToSeeYouHere, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_FRONTIER_RECEPTION_SCOTT, BattleFrontier_ReceptionGate_Movement_ScottExit
-	waitmovement 0
+	applywaitmovement LOCALID_FRONTIER_RECEPTION_SCOTT, BattleFrontier_ReceptionGate_Movement_ScottExit
 	removeobject LOCALID_FRONTIER_RECEPTION_SCOTT
 	releaseall
 	end

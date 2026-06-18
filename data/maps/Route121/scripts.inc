@@ -16,8 +16,7 @@ Route121_EventScript_SafariZoneSign::
 Route121_EventScript_AquaGruntsMoveOut::
 	lockall
 	playbgm MUS_ENCOUNTER_AQUA, FALSE
-	applymovement LOCALID_ROUTE121_GRUNT_2, Common_Movement_WalkInPlaceRight
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE121_GRUNT_2, Common_Movement_WalkInPlaceRight
 	msgbox Route121_Text_OkayMoveOutToMtPyre, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_ROUTE121_GRUNT_1, Route121_Movement_Grunt1Exit

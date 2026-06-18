@@ -30,16 +30,13 @@ MossdeepCity_SpaceCenter_2F_OnFrame:
 
 MossdeepCity_SpaceCenter_2F_EventScript_ThreeMagmaGrunts::
 	playse SE_PIN
-	applymovement LOCALID_PLAYER, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_PLAYER, Common_Movement_Delay48
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, Common_Movement_ExclamationMark
+	applywaitmovement LOCALID_PLAYER, Common_Movement_Delay48
 	msgbox MossdeepCity_SpaceCenter_2F_Text_YoureOutnumberedTakeUsOn, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, MossdeepCity_SpaceCenter_2F_EventScript_BattleThreeMagmaGrunts
 	msgbox MossdeepCity_SpaceCenter_2F_Text_GoodAnswer, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_PLAYER, MossdeepCity_SpaceCenter_2F_Movement_PlayerExit
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, MossdeepCity_SpaceCenter_2F_Movement_PlayerExit
 	warp MAP_MOSSDEEP_CITY_SPACE_CENTER_1F, 13, 1
 	waitstate
 	releaseall
@@ -52,20 +49,15 @@ MossdeepCity_SpaceCenter_2F_Movement_PlayerExit:
 MossdeepCity_SpaceCenter_2F_EventScript_BattleThreeMagmaGrunts::
 	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt5Intro, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_SPACE_CENTER_5, MossdeepCity_SpaceCenter_2F_Text_Grunt5Defeat
-	applymovement LOCALID_SPACE_CENTER_GRUNT_5, MossdeepCity_SpaceCenter_2F_Movement_Grunt5Defeated
-	waitmovement 0
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
+	applywaitmovement LOCALID_SPACE_CENTER_GRUNT_5, MossdeepCity_SpaceCenter_2F_Movement_Grunt5Defeated
+	applywaitmovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt6Intro, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_SPACE_CENTER_6, MossdeepCity_SpaceCenter_2F_Text_Grunt6Defeat
-	applymovement LOCALID_SPACE_CENTER_GRUNT_6, MossdeepCity_SpaceCenter_2F_Movement_Grunt6Defeated
-	waitmovement 0
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
+	applywaitmovement LOCALID_SPACE_CENTER_GRUNT_6, MossdeepCity_SpaceCenter_2F_Movement_Grunt6Defeated
+	applywaitmovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt7Intro, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_SPACE_CENTER_7, MossdeepCity_SpaceCenter_2F_Text_Grunt7Defeat
-	applymovement LOCALID_SPACE_CENTER_GRUNT_7, MossdeepCity_SpaceCenter_2F_Movement_Grunt7Defeated
-	waitmovement 0
+	applywaitmovement LOCALID_SPACE_CENTER_GRUNT_7, MossdeepCity_SpaceCenter_2F_Movement_Grunt7Defeated
 	setvar VAR_MOSSDEEP_SPACE_CENTER_STATE, 2
 	copyobjectxytoperm LOCALID_SPACE_CENTER_GRUNT_6
 	copyobjectxytoperm LOCALID_SPACE_CENTER_GRUNT_7
@@ -165,8 +157,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_Tabitha::
 	lock
 	faceplayer
 	msgbox MossdeepCity_SpaceCenter_2F_Text_WellTakeCareOfYou, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	release
 	end
 
@@ -187,14 +178,12 @@ MossdeepCity_SpaceCenter_2F_EventScript_Steven::
 	playse SE_NOT_EFFECTIVE
 	switch VAR_FACING
 	case DIR_SOUTH, MossdeepCity_SpaceCenter_2F_EventScript_StevenFightMovementSouth
-	applymovement LOCALID_SPACE_CENTER_2F_STEVEN, MossdeepCity_SpaceCenter_2F_Movement_StevenFight
-	waitmovement 0
+	applywaitmovement LOCALID_SPACE_CENTER_2F_STEVEN, MossdeepCity_SpaceCenter_2F_Movement_StevenFight
 	releaseall
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_StevenFightMovementSouth::
-	applymovement LOCALID_SPACE_CENTER_2F_STEVEN, MossdeepCity_SpaceCenter_2F_Movement_StevenFightSouth
-	waitmovement 0
+	applywaitmovement LOCALID_SPACE_CENTER_2F_STEVEN, MossdeepCity_SpaceCenter_2F_Movement_StevenFightSouth
 	releaseall
 	end
 
@@ -223,20 +212,17 @@ MossdeepCity_SpaceCenter_2F_Movement_StevenFightSouth:
 	step_end
 
 MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt::
-	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	msgbox MossdeepCity_SpaceCenter_2F_Text_StevenAreYouReadyToBattle, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle
 	msgbox MossdeepCity_SpaceCenter_2F_Text_StevenHurryGetReadyQuickly, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	releaseall
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle::
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	special SavePlayerParty
 	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle

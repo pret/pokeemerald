@@ -482,8 +482,7 @@ MauvilleCity_GameCorner_EventScript_Man::
 
 MauvilleCity_GameCorner_EventScript_NPCReturnToSlots::
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	release
 	end
 

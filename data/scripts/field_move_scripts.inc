@@ -25,8 +25,7 @@ EventScript_UseCut::
 	end
 
 EventScript_CutTreeDown::
-	applymovement VAR_LAST_TALKED, Movement_CutTreeDown
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Movement_CutTreeDown
 	removeobject VAR_LAST_TALKED
 	releaseall
 	end
@@ -84,8 +83,7 @@ EventScript_UseRockSmash::
 	end
 
 EventScript_SmashRock::
-	applymovement VAR_LAST_TALKED, Movement_SmashRock
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Movement_SmashRock
 	removeobject VAR_LAST_TALKED
 	specialvar VAR_RESULT, TryUpdateRusturfTunnelState
 	goto_if_eq VAR_RESULT, TRUE, EventScript_EndSmash

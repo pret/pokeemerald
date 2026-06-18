@@ -97,42 +97,32 @@ LavaridgeTown_EventScript_PlayBrendanMusic::
 	return
 
 LavaridgeTown_EventScript_RivalNoticePlayer::
-	applymovement LOCALID_LAVARIDGE_RIVAL, Common_Movement_WalkInPlaceFasterUp
-	waitmovement 0
+	applywaitmovement LOCALID_LAVARIDGE_RIVAL, Common_Movement_WalkInPlaceFasterUp
 	playse SE_PIN
-	applymovement LOCALID_LAVARIDGE_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_LAVARIDGE_RIVAL, Common_Movement_Delay48
-	waitmovement 0
+	applywaitmovement LOCALID_LAVARIDGE_RIVAL, Common_Movement_ExclamationMark
+	applywaitmovement LOCALID_LAVARIDGE_RIVAL, Common_Movement_Delay48
 	return
 
 LavaridgeTown_EventScript_RivalExitHerbShop::
 	opendoor 12, 15
 	waitdooranim
 	addobject LOCALID_LAVARIDGE_RIVAL
-	applymovement LOCALID_LAVARIDGE_RIVAL, LavaridgeTown_Movement_RivalExitHerbShop
-	waitmovement 0
+	applywaitmovement LOCALID_LAVARIDGE_RIVAL, LavaridgeTown_Movement_RivalExitHerbShop
 	closedoor 12, 15
 	waitdooranim
-	applymovement LOCALID_LAVARIDGE_RIVAL, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
+	applywaitmovement LOCALID_LAVARIDGE_RIVAL, Common_Movement_WalkInPlaceFasterLeft
 	playse SE_PIN
-	applymovement LOCALID_LAVARIDGE_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_LAVARIDGE_RIVAL, Common_Movement_Delay48
-	waitmovement 0
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
+	applywaitmovement LOCALID_LAVARIDGE_RIVAL, Common_Movement_ExclamationMark
+	applywaitmovement LOCALID_LAVARIDGE_RIVAL, Common_Movement_Delay48
+	applywaitmovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	return
 
 LavaridgeTown_EventScript_RivalApproachPlayer1::
-	applymovement LOCALID_LAVARIDGE_RIVAL, LavaridgeTown_Movement_RivalApproachPlayer1
-	waitmovement 0
+	applywaitmovement LOCALID_LAVARIDGE_RIVAL, LavaridgeTown_Movement_RivalApproachPlayer1
 	return
 
 LavaridgeTown_EventScript_RivalApproachPlayer2::
-	applymovement LOCALID_LAVARIDGE_RIVAL, LavaridgeTown_Movement_RivalApproachPlayer2
-	waitmovement 0
+	applywaitmovement LOCALID_LAVARIDGE_RIVAL, LavaridgeTown_Movement_RivalApproachPlayer2
 	return
 
 LavaridgeTown_EventScript_RivalExit1::
@@ -142,8 +132,7 @@ LavaridgeTown_EventScript_RivalExit1::
 	return
 
 LavaridgeTown_EventScript_RivalExit2::
-	applymovement LOCALID_LAVARIDGE_RIVAL_ON_BIKE, LavaridgeTown_Movement_RivalExit2
-	waitmovement 0
+	applywaitmovement LOCALID_LAVARIDGE_RIVAL_ON_BIKE, LavaridgeTown_Movement_RivalExit2
 	return
 
 LavaridgeTown_Movement_RivalExit2:

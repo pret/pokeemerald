@@ -207,15 +207,13 @@ Apprentice_EventScript_SetHideFlags:
 Apprentice_EventScript_LeaveNorth:
 	apprentice_shouldleave
 	goto_if_eq VAR_0x8004, FALSE, Apprentice_EventScript_DontMove  @ VAR_0x8004 always TRUE here
-	applymovement LOCALID_APPRENTICE, Apprentice_Movement_LeaveNorth
-	waitmovement 0
+	applywaitmovement LOCALID_APPRENTICE, Apprentice_Movement_LeaveNorth
 	end
 
 Apprentice_EventScript_Leave:
 	apprentice_shouldleave
 	goto_if_eq VAR_0x8004, FALSE, Apprentice_EventScript_DontMove  @ VAR_0x8004 always TRUE here
-	applymovement LOCALID_APPRENTICE, Apprentice_Movement_Leave
-	waitmovement 0
+	applywaitmovement LOCALID_APPRENTICE, Apprentice_Movement_Leave
 	end
 
 Apprentice_EventScript_Gone:

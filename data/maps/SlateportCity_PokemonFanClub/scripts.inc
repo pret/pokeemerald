@@ -198,10 +198,8 @@ SlateportCity_PokemonFanClub_EventScript_SootheBellWoman::
 
 SlateportCity_PokemonFanClub_EventScript_GiveSootheBell::
 	playse SE_PIN
-	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement VAR_LAST_TALKED, Common_Movement_Delay48
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_Delay48
 	msgbox SlateportCity_PokemonFanClub_Text_PokemonAdoresYou, MSGBOX_DEFAULT
 	giveitem ITEM_SOOTHE_BELL
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull

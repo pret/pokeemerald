@@ -20,8 +20,7 @@ Route110_SeasideCyclingRoadSouthEntrance_EventScript_BikeCheck::
 Route110_SeasideCyclingRoadSouthEntrance_EventScript_NoBike::
 	msgbox Route110_SeasideCyclingRoadSouthEntrance_Text_TooDangerousToWalk, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_PLAYER, Route110_SeasideCyclingRoadSouthEntrance_Movement_PushPlayerBackFromCounter
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, Route110_SeasideCyclingRoadSouthEntrance_Movement_PushPlayerBackFromCounter
 	releaseall
 	end
 

@@ -13,8 +13,7 @@ SouthernIsland_Exterior_EventScript_Sailor::
 	goto_if_eq VAR_RESULT, NO, SouthernIsland_Exterior_EventScript_AsYouLike
 	msgbox EventTicket_Text_SailHome, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	delay 30
 	hideobjectat LOCALID_SOUTHERN_ISLAND_SAILOR, MAP_SOUTHERN_ISLAND_EXTERIOR
 	setvar VAR_0x8004, LOCALID_SOUTHERN_ISLAND_SS_TIDAL
@@ -30,13 +29,11 @@ SouthernIsland_Exterior_EventScript_AsYouLike::
 	end
 
 Ferry_EventScript_DepartIslandSouth::
-	applymovement LOCALID_PLAYER, Ferry_Movement_DepartIslandBoardSouth
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, Ferry_Movement_DepartIslandBoardSouth
 	return
 
 Ferry_EventScript_DepartIslandWest::
-	applymovement LOCALID_PLAYER, Ferry_Movement_DepartIslandBoardWest
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, Ferry_Movement_DepartIslandBoardWest
 	return
 
 Ferry_Movement_DepartIslandBoardSouth:

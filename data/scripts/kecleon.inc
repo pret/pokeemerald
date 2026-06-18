@@ -63,10 +63,8 @@ EventScript_AskUseDevonScope::
 EventScript_BattleKecleon::
 	msgbox Kecleon_Text_UseDevonScopeMonAttacked, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
-	waitmovement 0
-	applymovement VAR_LAST_TALKED, Movement_KecleonAppears
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_FacePlayer
+	applywaitmovement VAR_LAST_TALKED, Movement_KecleonAppears
 	waitse
 	playmoncry SPECIES_KECLEON, CRY_MODE_ENCOUNTER
 	delay 40

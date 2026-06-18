@@ -196,11 +196,9 @@ LilycoveCity_EventScript_WailmerTrainerGrunt::
 	lockall
 	goto_if_set FLAG_MET_WAILMER_TRAINER, LilycoveCity_EventScript_MetWailmerTrainer
 	msgbox LilycoveCity_Text_WailmerLeapOutOfWater, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	msgbox LilycoveCity_Text_GetLostMessingUpTraining, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	setflag FLAG_MET_WAILMER_TRAINER
 	releaseall
 	end
@@ -378,8 +376,7 @@ LilycoveCity_EventScript_BrendanBattleFrontier::
 
 LilycoveCity_EventScript_RivalFlyAway::
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	delay 50
 	setfieldeffectargument 0, 1
 	dofieldeffect FLDEFF_NPCFLY_OUT

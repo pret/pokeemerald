@@ -33,12 +33,10 @@ EventScript_PkmnCenterNurse_IllTakeYourPkmn2::
 	return
 
 EventScript_PkmnCenterNurse_TakeAndHealPkmn::
-	applymovement VAR_0x800B, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
+	applywaitmovement VAR_0x800B, Common_Movement_WalkInPlaceFasterLeft
 	dofieldeffect FLDEFF_POKECENTER_HEAL
 	waitfieldeffect FLDEFF_POKECENTER_HEAL
-	applymovement VAR_0x800B, Common_Movement_WalkInPlaceFasterDown
-	waitmovement 0
+	applywaitmovement VAR_0x800B, Common_Movement_WalkInPlaceFasterDown
 	special HealPlayerParty
 	return
 
@@ -56,16 +54,14 @@ EventScript_PkmnCenterNurse_ReturnPkmn::
 	goto_if_eq VAR_0x8004, 1, EventScript_PkmnCenterNurse_ReturnPkmn2
 	message gText_RestoredPkmnToFullHealth
 	waitmessage
-	applymovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
-	waitmovement 0
+	applywaitmovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
 	message gText_WeHopeToSeeYouAgain
 	return
 
 EventScript_PkmnCenterNurse_ReturnPkmn2::
 	message gText_ThankYouForWaiting
 	waitmessage
-	applymovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
-	waitmovement 0
+	applywaitmovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
 	message gText_WeHopeToSeeYouAgain2
 	return
 
@@ -75,8 +71,7 @@ EventScript_PkmnCenterNurse_PlayerWaitingInUnionRoom::
 	setflag FLAG_NURSE_UNION_ROOM_REMINDER
 	message CableClub_Text_PlayerIsWaiting
 	waitmessage
-	applymovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
-	waitmovement 0
+	applywaitmovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
 	message gText_WeHopeToSeeYouAgain
 	return
 
@@ -96,10 +91,8 @@ EventScript_PkmnCenterNurse_GoldCard::
 	setflag FLAG_NURSE_MENTIONS_GOLD_CARD
 	msgbox gText_WelcomeCutShort, MSGBOX_DEFAULT
 	playse SE_PIN
-	applymovement VAR_0x800B, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement VAR_0x800B, Common_Movement_Delay48
-	waitmovement 0
+	applywaitmovement VAR_0x800B, Common_Movement_ExclamationMark
+	applywaitmovement VAR_0x800B, Common_Movement_Delay48
 	msgbox gText_NoticesGoldCard, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, EventScript_PkmnCenterNurse_GoldCardHealPkmn
 	message gText_WeHopeToSeeYouAgain2

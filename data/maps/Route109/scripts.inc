@@ -8,8 +8,7 @@ Route109_EventScript_StartDepartForDewford::
 	call EventScript_BackupMrBrineyLocation
 	setobjectsubpriority LOCALID_ROUTE109_BRINEY, MAP_ROUTE109, 0
 	setobjectsubpriority LOCALID_PLAYER, MAP_ROUTE109, 0
-	applymovement LOCALID_ROUTE109_BRINEY, Route109_Movement_BrineyEnterBoat
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE109_BRINEY, Route109_Movement_BrineyEnterBoat
 	removeobject LOCALID_ROUTE109_BRINEY
 	switch VAR_FACING
 	case DIR_SOUTH, Route109_EventScript_EnterBoatSouth
@@ -18,20 +17,17 @@ Route109_EventScript_StartDepartForDewford::
 	end
 
 Route109_EventScript_EnterBoatSouth::
-	applymovement LOCALID_PLAYER, Route109_Movement_PlayerEnterBoatSouth
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, Route109_Movement_PlayerEnterBoatSouth
 	goto Route109_EventScript_DoSailToDewford
 	end
 
 Route109_EventScript_EnterBoatEast::
-	applymovement LOCALID_PLAYER, Route109_Movement_PlayerEnterBoatEast
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, Route109_Movement_PlayerEnterBoatEast
 	goto Route109_EventScript_DoSailToDewford
 	end
 
 Route109_EventScript_EnterBoatWest::
-	applymovement LOCALID_PLAYER, Route109_Movement_PlayerEnterBoatWest
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, Route109_Movement_PlayerEnterBoatWest
 	goto Route109_EventScript_DoSailToDewford
 	end
 
@@ -44,15 +40,13 @@ Route109_EventScript_DoSailToDewford::
 	delay 50
 	call Common_EventScript_StopBrineysBoatMusic
 	showobjectat LOCALID_PLAYER, MAP_DEWFORD_TOWN
-	applymovement LOCALID_PLAYER, Route109_Movement_PlayerExitBoat
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, Route109_Movement_PlayerExitBoat
 	addobject LOCALID_DEWFORD_BOAT
 	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	setobjectxyperm LOCALID_DEWFORD_BRINEY, 12, 8
 	addobject LOCALID_DEWFORD_BRINEY
 	setobjectsubpriority LOCALID_DEWFORD_BRINEY, MAP_DEWFORD_TOWN, 0
-	applymovement LOCALID_DEWFORD_BRINEY, Route109_Movement_BrineyExitBoat
-	waitmovement 0
+	applywaitmovement LOCALID_DEWFORD_BRINEY, Route109_Movement_BrineyExitBoat
 	clearflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	hideobjectat LOCALID_ROUTE109_BOAT, MAP_ROUTE109
@@ -321,8 +315,7 @@ Route109_EventScript_SandCastleBoy::
 	faceplayer
 	msgbox Route109_Text_SandCastleTakingLongTime, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	release
 	end
 
@@ -335,16 +328,14 @@ Route109_EventScript_SoftSandGirl::
 	giveitem ITEM_SOFT_SAND
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	setflag FLAG_RECEIVED_SOFT_SAND
 	release
 	end
 
 Route109_EventScript_AlreadyReceivedSoftSand::
 	msgbox Route109_Text_WereGoingToMakeBigCastle, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	release
 	end
 

@@ -67,28 +67,22 @@ JaggedPass_EventScript_MagmaHideoutGuard::
 	goto_if_set FLAG_BEAT_MAGMA_GRUNT_JAGGED_PASS, JaggedPass_EventScript_GuardDefeated
 	waitse
 	playse SE_PIN
-	applymovement LOCALID_MAGMA_HIDEOUT_GUARD, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_MAGMA_HIDEOUT_GUARD, Common_Movement_Delay48
-	waitmovement 0
-	applymovement LOCALID_MAGMA_HIDEOUT_GUARD, Common_Movement_FacePlayer
-	waitmovement 0
+	applywaitmovement LOCALID_MAGMA_HIDEOUT_GUARD, Common_Movement_ExclamationMark
+	applywaitmovement LOCALID_MAGMA_HIDEOUT_GUARD, Common_Movement_Delay48
+	applywaitmovement LOCALID_MAGMA_HIDEOUT_GUARD, Common_Movement_FacePlayer
 	msgbox JaggedPass_Text_GruntIntro, MSGBOX_DEFAULT
 	closemessage
 	trainerbattle_no_intro TRAINER_GRUNT_JAGGED_PASS, JaggedPass_Text_GruntDefeat
 	setflag FLAG_BEAT_MAGMA_GRUNT_JAGGED_PASS
-	applymovement LOCALID_MAGMA_HIDEOUT_GUARD, Common_Movement_FaceOriginalDirection
-	waitmovement 0
+	applywaitmovement LOCALID_MAGMA_HIDEOUT_GUARD, Common_Movement_FaceOriginalDirection
 	releaseall
 	end
 
 JaggedPass_EventScript_GuardDefeated::
-	applymovement LOCALID_MAGMA_HIDEOUT_GUARD, Common_Movement_FacePlayer
-	waitmovement 0
+	applywaitmovement LOCALID_MAGMA_HIDEOUT_GUARD, Common_Movement_FacePlayer
 	msgbox JaggedPass_Text_GoWhereverYouWant, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_MAGMA_HIDEOUT_GUARD, Common_Movement_FaceOriginalDirection
-	waitmovement 0
+	applywaitmovement LOCALID_MAGMA_HIDEOUT_GUARD, Common_Movement_FaceOriginalDirection
 	releaseall
 	end
 
