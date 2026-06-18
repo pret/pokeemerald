@@ -1992,3 +1992,9 @@
 	setvar VAR_0x8006, \item
 	special CreateEnemyEventMon
 	.endm
+
+	@ Applies a movement to an object and waits for it to finish.
+	.macro applywaitmovement localId:req, movements:req, map
+	applymovement \localId, \movements, \map
+	waitmovement
+	.endm
