@@ -1675,11 +1675,13 @@
 	.macro moverotatingtileobjects puzzleNumber:req
 	.byte SCR_OP_MOVEROTATINGTILEOBJECTS
 	.2byte \puzzleNumber
+	waitmovement
 	.endm
 
 	@ For the rotating tile puzzles in Mossdeep Gym / Trick House Room 7. Updates the facing direction of all objects on the puzzle tiles
 	.macro turnrotatingtileobjects
 	.byte SCR_OP_TURNROTATINGTILEOBJECTS
+	waitmovement
 	.endm
 
 	@ For the rotating tile puzzles in Mossdeep Gym / Trick House Room 7. Allocates memory for the puzzle objects.
