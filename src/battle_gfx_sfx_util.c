@@ -150,7 +150,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     {
         if (moveInfo->moves[i] == MOVE_NONE)
             break;
-        if (selectedGroup == GetBattlePalaceMoveGroup(moveInfo->moves[i]) && moveInfo->currentPp[i] != 0)
+        if (selectedGroup == GetBattlePalaceMoveGroup(moveInfo->moves[i]) && moveInfo->currentPP[i] != 0)
             selectedMoves |= gBitTable[i];
     }
 

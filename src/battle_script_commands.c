@@ -3034,7 +3034,7 @@ static void Cmd_tryfaintmon(void)
 
                 gBattleMons[gBattlerAttacker].pp[moveIndex] = 0;
                 BattleScriptPush(gBattlescriptCurrInstr);
-                gBattlescriptCurrInstr = BattleScript_GrudgeTakesPp;
+                gBattlescriptCurrInstr = BattleScript_GrudgeTakesPP;
                 gActiveBattler = gBattlerAttacker;
                 BtlController_EmitSetMonData(B_COMM_TO_CONTROLLER, moveIndex + REQUEST_PPMOVE1_BATTLE, 0, sizeof(gBattleMons[gActiveBattler].pp[moveIndex]), &gBattleMons[gActiveBattler].pp[moveIndex]);
                 MarkBattlerForControllerExec(gActiveBattler);
@@ -8166,7 +8166,7 @@ static void Cmd_copymovepermanently(void)
         }
         else // sketch worked
         {
-            struct MovePpInfo movePpData;
+            struct MovePPInfo movePPData;
 
             gBattleMons[gBattlerAttacker].moves[gCurrMovePos] = gLastPrintedMoves[gBattlerTarget];
             gBattleMons[gBattlerAttacker].pp[gCurrMovePos] = gBattleMoves[gLastPrintedMoves[gBattlerTarget]].pp;
@@ -8174,12 +8174,12 @@ static void Cmd_copymovepermanently(void)
 
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
-                movePpData.moves[i] = gBattleMons[gBattlerAttacker].moves[i];
-                movePpData.pp[i] = gBattleMons[gBattlerAttacker].pp[i];
+                movePPData.moves[i] = gBattleMons[gBattlerAttacker].moves[i];
+                movePPData.pp[i] = gBattleMons[gBattlerAttacker].pp[i];
             }
-            movePpData.ppBonuses = gBattleMons[gBattlerAttacker].ppBonuses;
+            movePPData.ppBonuses = gBattleMons[gBattlerAttacker].ppBonuses;
 
-            BtlController_EmitSetMonData(B_COMM_TO_CONTROLLER, REQUEST_MOVES_PP_BATTLE, 0, sizeof(movePpData), &movePpData);
+            BtlController_EmitSetMonData(B_COMM_TO_CONTROLLER, REQUEST_MOVES_PP_BATTLE, 0, sizeof(movePPData), &movePPData);
             MarkBattlerForControllerExec(gActiveBattler);
 
             PREPARE_MOVE_BUFFER(gBattleTextBuff1, gLastPrintedMoves[gBattlerTarget])

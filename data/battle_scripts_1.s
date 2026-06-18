@@ -2053,7 +2053,7 @@ BattleScript_EffectFakeOut::
 
 BattleScript_FailedFromAtkString::
 	attackstring
-BattleScript_FailedFromPpReduce::
+BattleScript_FailedFromPPReduce::
 	ppreduce
 BattleScript_ButItFailed::
 	pause B_WAIT_TIME_SHORT
@@ -2367,7 +2367,7 @@ BattleScript_EffectWish::
 BattleScript_EffectAssist::
 	attackcanceler
 	attackstring
-	assistattackselect BattleScript_FailedFromPpReduce
+	assistattackselect BattleScript_FailedFromPPReduce
 	attackanimation
 	waitanimation
 	setbyte sB_ANIM_TURN, 0
@@ -3659,7 +3659,7 @@ BattleScript_SelectingImprisonedMoveInPalace::
 	printstring STRINGID_PKMNCANTUSEMOVESEALED
 	goto BattleScript_SelectingUnusableMoveInPalace
 
-BattleScript_GrudgeTakesPp::
+BattleScript_GrudgeTakesPP::
 	printstring STRINGID_PKMNLOSTPPGRUDGE
 	waitmessage B_WAIT_TIME_LONG
 	return

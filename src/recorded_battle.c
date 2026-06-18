@@ -749,7 +749,7 @@ void RecordedBattle_CheckMovesetChanges(u8 mode)
                     u8 ppBonuses[MAX_MON_MOVES];
                     u8 moveSlots[MAX_MON_MOVES];
                     u8 mimickedMoveSlots[MAX_MON_MOVES];
-                    struct ChooseMoveStruct movePp;
+                    struct ChooseMoveStruct movePP;
                     u8 ppBonusSet;
 
                     // We know the current action is ACTION_MOVE_CHANGE, retrieve
@@ -762,21 +762,21 @@ void RecordedBattle_CheckMovesetChanges(u8 mode)
                     for (j = 0; j < MAX_MON_MOVES; j++)
                     {
                         moveSlots[j] = RecordedBattle_GetBattlerAction(battler);
-                        movePp.moves[j] = gBattleMons[battler].moves[moveSlots[j]];
-                        movePp.currentPp[j] = gBattleMons[battler].pp[moveSlots[j]];
-                        movePp.maxPp[j] = ppBonuses[moveSlots[j]];
+                        movePP.moves[j] = gBattleMons[battler].moves[moveSlots[j]];
+                        movePP.currentPP[j] = gBattleMons[battler].pp[moveSlots[j]];
+                        movePP.maxPP[j] = ppBonuses[moveSlots[j]];
                         mimickedMoveSlots[j] = (gDisableStructs[battler].mimickedMoves & gBitTable[j]) >> j;
                     }
                     for (j = 0; j < MAX_MON_MOVES; j++)
                     {
-                        gBattleMons[battler].moves[j] = movePp.moves[j];
-                        gBattleMons[battler].pp[j] = movePp.currentPp[j];
+                        gBattleMons[battler].moves[j] = movePP.moves[j];
+                        gBattleMons[battler].pp[j] = movePP.currentPP[j];
                     }
                     gBattleMons[battler].ppBonuses = 0;
                     gDisableStructs[battler].mimickedMoves = 0;
                     for (j = 0; j < MAX_MON_MOVES; j++)
                     {
-                        gBattleMons[battler].ppBonuses |= movePp.maxPp[j] << (j << 1);
+                        gBattleMons[battler].ppBonuses |= movePP.maxPP[j] << (j << 1);
                         gDisableStructs[battler].mimickedMoves |= mimickedMoveSlots[j] << j;
                     }
 
@@ -787,18 +787,18 @@ void RecordedBattle_CheckMovesetChanges(u8 mode)
 
                         for (j = 0; j < MAX_MON_MOVES; j++)
                         {
-                            movePp.moves[j] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_MOVE1 + moveSlots[j], NULL);
-                            movePp.currentPp[j] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_PP1 + moveSlots[j], NULL);
-                            movePp.maxPp[j] = ppBonuses[moveSlots[j]];
+                            movePP.moves[j] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_MOVE1 + moveSlots[j], NULL);
+                            movePP.currentPP[j] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_PP1 + moveSlots[j], NULL);
+                            movePP.maxPP[j] = ppBonuses[moveSlots[j]];
                         }
                         for (j = 0; j < MAX_MON_MOVES; j++)
                         {
-                            SetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_MOVE1 + j, &movePp.moves[j]);
-                            SetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_PP1 + j, &movePp.currentPp[j]);
+                            SetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_MOVE1 + j, &movePP.moves[j]);
+                            SetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_PP1 + j, &movePP.currentPP[j]);
                         }
                         ppBonusSet = 0;
                         for (j = 0; j < MAX_MON_MOVES; j++)
-                            ppBonusSet |= movePp.maxPp[j] << (j << 1);
+                            ppBonusSet |= movePP.maxPP[j] << (j << 1);
 
                         SetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_PP_BONUSES, &ppBonusSet);
                     }
