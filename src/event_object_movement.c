@@ -1312,8 +1312,8 @@ static u8 InitObjectEventStateFromTemplate(const struct ObjectEventTemplate *tem
     objectEvent->previousCoords.y = y;
     objectEvent->currentElevation = template->elevation;
     objectEvent->previousElevation = template->elevation;
-    objectEvent->range.rangeX = template->movementRangeX;
-    objectEvent->range.rangeY = template->movementRangeY;
+    objectEvent->rangeX = template->movementRangeX;
+    objectEvent->rangeY = template->movementRangeY;
     objectEvent->trainerType = template->trainerType;
     objectEvent->mapNum = mapNum;
     objectEvent->trainerRange_berryTreeId = template->trainerRange_berryTreeId;
@@ -1322,10 +1322,10 @@ static u8 InitObjectEventStateFromTemplate(const struct ObjectEventTemplate *tem
     SetObjectEventDynamicGraphicsId(objectEvent);
     if (sMovementTypeHasRange[objectEvent->movementType])
     {
-        if (objectEvent->range.rangeX == 0)
-            objectEvent->range.rangeX++;
-        if (objectEvent->range.rangeY == 0)
-            objectEvent->range.rangeY++;
+        if (objectEvent->rangeX == 0)
+            objectEvent->rangeX++;
+        if (objectEvent->rangeY == 0)
+            objectEvent->rangeY++;
     }
     return objectEventId;
 }
@@ -4693,18 +4693,18 @@ static bool8 IsCoordOutsideObjectEventMovementRange(struct ObjectEvent *objectEv
     s16 top;
     s16 bottom;
 
-    if (objectEvent->range.rangeX != 0)
+    if (objectEvent->rangeX != 0)
     {
-        left = objectEvent->initialCoords.x - objectEvent->range.rangeX;
-        right = objectEvent->initialCoords.x + objectEvent->range.rangeX;
+        left = objectEvent->initialCoords.x - objectEvent->rangeX;
+        right = objectEvent->initialCoords.x + objectEvent->rangeX;
 
         if (left > x || right < x)
             return TRUE;
     }
-    if (objectEvent->range.rangeY != 0)
+    if (objectEvent->rangeY != 0)
     {
-        top = objectEvent->initialCoords.y - objectEvent->range.rangeY;
-        bottom = objectEvent->initialCoords.y + objectEvent->range.rangeY;
+        top = objectEvent->initialCoords.y - objectEvent->rangeY;
+        bottom = objectEvent->initialCoords.y + objectEvent->rangeY;
 
         if (top > y || bottom < y)
             return TRUE;
