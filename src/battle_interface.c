@@ -2584,16 +2584,14 @@ static void HpTextIntoHealthboxObject(void *dest, u8 *windowTileData, u32 window
 
 static void TextIntoHealthboxObject(void *dest, u8 *windowTileData, s32 windowWidth)
 {
+    int i;
     CpuCopy32(windowTileData + 256, dest + 256, windowWidth * TILE_SIZE_4BPP);
-// + 256 as that prevents the top 4 blank rows of sHealthboxWindowTemplate from being copied
-    if (windowWidth > 0)
+    // + 256 as that prevents the top 4 blank rows of sHealthboxWindowTemplate from being copied
+    for (i = 0; i < windowWidth; i++)
     {
-        do
-        {
-            CpuCopy32(windowTileData + 20, dest + 20, 12);
-            dest += 32, windowTileData += 32;
-            windowWidth--;
-        } while (windowWidth != 0);
+        CpuCopy32(windowTileData + 20, dest + 20, 12);
+        dest += 32;
+        windowTileData += 32;
     }
 }
 
