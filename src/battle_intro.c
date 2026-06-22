@@ -11,11 +11,6 @@
 #include "trig.h"
 #include "constants/trainers.h"
 
-static EWRAM_DATA u16 sBgCnt = 0;
-
-extern const u8 gBattleAnimBgCntSet[];
-extern const u8 gBattleAnimBgCntGet[];
-
 static void BattleIntroSlide1(u8);
 static void BattleIntroSlide2(u8);
 static void BattleIntroSlide3(u8);
@@ -35,69 +30,6 @@ static const TaskFunc sBattleIntroSlideFuncs[] =
     [BATTLE_ENVIRONMENT_BUILDING]   = BattleIntroSlide3,
     [BATTLE_ENVIRONMENT_PLAIN]      = BattleIntroSlide3,
 };
-
-void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value)
-{
-    if (bgId < 4)
-    {
-        sBgCnt = GetGpuReg(gBattleAnimBgCntSet[bgId]);
-        switch (attributeId)
-        {
-        case BG_ANIM_SCREEN_SIZE:
-            ((struct BgCnt *)&sBgCnt)->screenSize = value;
-            break;
-        case BG_ANIM_AREA_OVERFLOW_MODE:
-            ((struct BgCnt *)&sBgCnt)->areaOverflowMode = value;
-            break;
-        case BG_ANIM_MOSAIC:
-            ((struct BgCnt *)&sBgCnt)->mosaic = value;
-            break;
-        case BG_ANIM_CHAR_BASE_BLOCK:
-            ((struct BgCnt *)&sBgCnt)->charBaseBlock = value;
-            break;
-        case BG_ANIM_PRIORITY:
-            ((struct BgCnt *)&sBgCnt)->priority = value;
-            break;
-        case BG_ANIM_PALETTES_MODE:
-            ((struct BgCnt *)&sBgCnt)->palettes = value;
-            break;
-        case BG_ANIM_SCREEN_BASE_BLOCK:
-            ((struct BgCnt *)&sBgCnt)->screenBaseBlock = value;
-            break;
-        }
-
-        SetGpuReg(gBattleAnimBgCntSet[bgId], sBgCnt);
-    }
-}
-
-int GetAnimBgAttribute(u8 bgId, u8 attributeId)
-{
-    u16 bgCnt;
-
-    if (bgId < 4)
-    {
-        bgCnt = GetGpuReg(gBattleAnimBgCntGet[bgId]);
-        switch (attributeId)
-        {
-        case BG_ANIM_SCREEN_SIZE:
-            return ((struct BgCnt *)&bgCnt)->screenSize;
-        case BG_ANIM_AREA_OVERFLOW_MODE:
-            return ((struct BgCnt *)&bgCnt)->areaOverflowMode;
-        case BG_ANIM_MOSAIC:
-            return ((struct BgCnt *)&bgCnt)->mosaic;
-        case BG_ANIM_CHAR_BASE_BLOCK:
-            return ((struct BgCnt *)&bgCnt)->charBaseBlock;
-        case BG_ANIM_PRIORITY:
-            return ((struct BgCnt *)&bgCnt)->priority;
-        case BG_ANIM_PALETTES_MODE:
-            return ((struct BgCnt *)&bgCnt)->palettes;
-        case BG_ANIM_SCREEN_BASE_BLOCK:
-            return ((struct BgCnt *)&bgCnt)->screenBaseBlock;
-        }
-    }
-
-    return 0;
-}
 
 #define tState data[0]
 #define tEnvironment data[1]
