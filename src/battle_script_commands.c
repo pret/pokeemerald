@@ -61,9 +61,12 @@ extern const u8 *const gBattleScriptsForMoveEffects[];
 
 #define TAG_LVLUP_BANNER_MON_ICON 55130
 
+#define TIMING_CHARGING  1
+#define TIMING_ATTACKING 2
+
 static bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);
-static u8 AttacksThisTurn(u8 battler, u16 move); // Note: returns 1 if it's a charging turn, otherwise 2.
+static u8 GetAttackTiming(u8 battler, u16 move);
 static void CheckWonderGuardAndLevitate(void);
 static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8, const u8 *BS_ptr);
 static bool32 IsMonGettingExpSentOut(void);
@@ -1406,7 +1409,8 @@ static void Cmd_typecalc(void)
         }
     }
 
-    if (gBattleMons[gBattlerTarget].ability == ABILITY_WONDER_GUARD && AttacksThisTurn(gBattlerAttacker, gCurrentMove) == 2
+    if (gBattleMons[gBattlerTarget].ability == ABILITY_WONDER_GUARD
+     && GetAttackTiming(gBattlerAttacker, gCurrentMove) == TIMING_ATTACKING
      && (!(gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE) || ((gMoveResultFlags & (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)) == (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)))
      && gBattleMoves[gCurrentMove].power)
     {
@@ -1487,7 +1491,8 @@ static void CheckWonderGuardAndLevitate(void)
         i += 3;
     }
 
-    if (gBattleMons[gBattlerTarget].ability == ABILITY_WONDER_GUARD && AttacksThisTurn(gBattlerAttacker, gCurrentMove) == 2)
+    if (gBattleMons[gBattlerTarget].ability == ABILITY_WONDER_GUARD
+     && GetAttackTiming(gBattlerAttacker, gCurrentMove) == TIMING_ATTACKING)
     {
         if (((flags & 2) || !(flags & 1)) && gBattleMoves[gCurrentMove].power)
         {
@@ -1582,7 +1587,7 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
     }
 
     if (gBattleMons[defender].ability == ABILITY_WONDER_GUARD && !(flags & MOVE_RESULT_MISSED)
-        && AttacksThisTurn(attacker, move) == 2
+        && GetAttackTiming(attacker, move) == TIMING_ATTACKING
         && (!(flags & MOVE_RESULT_SUPER_EFFECTIVE) || ((flags & (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)) == (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)))
         && gBattleMoves[move].power)
     {
@@ -4576,7 +4581,7 @@ static void Cmd_typecalc2(void)
 
     if (gBattleMons[gBattlerTarget].ability == ABILITY_WONDER_GUARD
         && !(flags & MOVE_RESULT_NO_EFFECT)
-        && AttacksThisTurn(gBattlerAttacker, gCurrentMove) == 2
+        && GetAttackTiming(gBattlerAttacker, gCurrentMove) == TIMING_ATTACKING
         && (!(flags & MOVE_RESULT_SUPER_EFFECTIVE) || ((flags & (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)) == (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)))
         && gBattleMoves[gCurrentMove].power)
     {
@@ -8218,12 +8223,12 @@ static bool8 IsInvalidForSleepTalkOrAssist(u16 move)
         return FALSE;
 }
 
-static u8 AttacksThisTurn(u8 battler, u16 move) // Note: returns 1 if it's a charging turn, otherwise 2
+static u8 GetAttackTiming(u8 battler, u16 move)
 {
     // first argument is unused
     if (gBattleMoves[move].effect == EFFECT_SOLAR_BEAM
         && (gBattleWeather & B_WEATHER_SUN))
-        return 2;
+        return TIMING_ATTACKING;
 
     if (gBattleMoves[move].effect == EFFECT_SKULL_BASH
      || gBattleMoves[move].effect == EFFECT_RAZOR_WIND
@@ -8233,9 +8238,9 @@ static u8 AttacksThisTurn(u8 battler, u16 move) // Note: returns 1 if it's a cha
      || gBattleMoves[move].effect == EFFECT_BIDE)
     {
         if ((gHitMarker & HITMARKER_CHARGING))
-            return 1;
+            return TIMING_CHARGING;
     }
-    return 2;
+    return TIMING_ATTACKING;
 }
 
 static void Cmd_trychoosesleeptalkmove(void)
