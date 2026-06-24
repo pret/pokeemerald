@@ -75,7 +75,7 @@ void *const gNullScriptPtr = NULL;
 
 static const u8 sScriptConditionTable[COMPARISON_OPERATORS_COUNT][3] =
 {
-//  <   =  >
+//                              <  =  >
     [LESS_THAN] =              {1, 0, 0},
     [EQUAL] =                  {0, 1, 0},
     [GREATER_THAN] =           {0, 0, 1},
