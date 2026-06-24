@@ -211,31 +211,31 @@ static bool32 IsPrintListItemsTaskActive(void)
 static u32 LoopedTask_PrintListItems(s32 state)
 {
     u32 row;
-    struct PokenavList *listSub = GetSubstructPtr(POKENAV_SUBSTRUCT_LIST);
+    struct PokenavList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_LIST);
 
     switch (state)
     {
     case 0:
-        row = (listSub->listWindow.unkA + listSub->listWindow.numPrinted + listSub->printStart) & 0xF;
-        listSub->bufferItemFunc(listSub->listPtr, listSub->itemTextBuffer);
-        if (listSub->iconDrawFunc != NULL)
-            listSub->iconDrawFunc(listSub->listWindow.windowId, listSub->printIndex, row);
+        row = (list->listWindow.unkA + list->listWindow.numPrinted + list->printStart) & 0xF;
+        list->bufferItemFunc(list->listPtr, list->itemTextBuffer);
+        if (list->iconDrawFunc != NULL)
+            list->iconDrawFunc(list->listWindow.windowId, list->printIndex, row);
 
-        AddTextPrinterParameterized(listSub->listWindow.windowId, listSub->listWindow.fontId, listSub->itemTextBuffer, 8, (row << 4) + 1, TEXT_SKIP_DRAW, NULL);
-        if (++listSub->listWindow.numPrinted >= listSub->listWindow.numToPrint)
+        AddTextPrinterParameterized(list->listWindow.windowId, list->listWindow.fontId, list->itemTextBuffer, 8, (row << 4) + 1, TEXT_SKIP_DRAW, NULL);
+        if (++list->listWindow.numPrinted >= list->listWindow.numToPrint)
         {
             // Finished printing items. If icons were being drawn, draw the
             // window tilemap and graphics. Otherwise just do the graphics
-            if (listSub->iconDrawFunc != NULL)
-                CopyWindowToVram(listSub->listWindow.windowId, COPYWIN_FULL);
+            if (list->iconDrawFunc != NULL)
+                CopyWindowToVram(list->listWindow.windowId, COPYWIN_FULL);
             else
-                CopyWindowToVram(listSub->listWindow.windowId, COPYWIN_GFX);
+                CopyWindowToVram(list->listWindow.windowId, COPYWIN_GFX);
             return LT_INC_AND_PAUSE;
         }
         else
         {
-            listSub->listPtr += listSub->itemSize;
-            listSub->printIndex++;
+            list->listPtr += list->itemSize;
+            list->printIndex++;
             return LT_CONTINUE;
         }
     case 1:
