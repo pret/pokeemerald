@@ -48,7 +48,7 @@ struct PokenavList
     void *listPtr;
     s32 startBgY;
     s32 endBgY;
-    u32 loopedTaskId;
+    u32 moveListWindowLoopedTaskId;
     s32 moveDelta;
     u32 bgMoveType;
     PokenavListBufferItemFunc bufferItemFunc;
@@ -60,7 +60,7 @@ struct PokenavList
     u8 tilemapBuffer[BG_SCREEN_SIZE];
     struct PokenavListWindowState windowState;
     s32 eraseIndex;
-    u32 loopedTaskId2;
+    u32 loopedTaskId;
 };
 
 static void InitPokenavListBg(struct PokenavList *);
@@ -295,7 +295,7 @@ static void CreateMoveListWindowTask(s32 delta, struct PokenavList *list)
     else
         list->bgMoveType = BG_COORD_SUB;
     list->moveDelta = delta;
-    list->loopedTaskId = CreateLoopedTask(LoopedTask_MoveListWindow, 6);
+    list->moveListWindowLoopedTaskId = CreateLoopedTask(LoopedTask_MoveListWindow, 6);
 }
 
 static u32 LoopedTask_MoveListWindow(s32 state)
@@ -339,7 +339,7 @@ static u32 LoopedTask_MoveListWindow(s32 state)
 bool32 PokenavList_IsMoveWindowTaskActive(void)
 {
     struct PokenavList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_LIST);
-    return IsLoopedTaskActive(list->loopedTaskId);
+    return IsLoopedTaskActive(list->moveListWindowLoopedTaskId);
 }
 
 static struct PokenavListWindowState *GetPokenavListWindowState(void)
@@ -460,7 +460,7 @@ void PokenavList_EraseListForCheckPage(void)
 {
     struct PokenavList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_LIST);
     list->eraseIndex = 0;
-    list->loopedTaskId2 = CreateLoopedTask(LoopedTask_EraseListForCheckPage, 6);
+    list->loopedTaskId = CreateLoopedTask(LoopedTask_EraseListForCheckPage, 6);
 }
 
 void PrintCheckPageInfo(s16 delta)
@@ -468,20 +468,20 @@ void PrintCheckPageInfo(s16 delta)
     struct PokenavList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_LIST);
     list->windowState.windowTopIndex += delta;
     list->eraseIndex = 0;
-    list->loopedTaskId2 = CreateLoopedTask(LoopedTask_PrintCheckPageInfo, 6);
+    list->loopedTaskId = CreateLoopedTask(LoopedTask_PrintCheckPageInfo, 6);
 }
 
 void PokenavList_ReshowListFromCheckPage(void)
 {
     struct PokenavList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_LIST);
     list->eraseIndex = 0;
-    list->loopedTaskId2 = CreateLoopedTask(LoopedTask_ReshowListFromCheckPage, 6);
+    list->loopedTaskId = CreateLoopedTask(LoopedTask_ReshowListFromCheckPage, 6);
 }
 
 bool32 PokenavList_IsTaskActive(void)
 {
     struct PokenavList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_LIST);
-    return IsLoopedTaskActive(list->loopedTaskId2);
+    return IsLoopedTaskActive(list->loopedTaskId);
 }
 
 void PokenavList_DrawCurrentItemIcon(void)
