@@ -218,8 +218,8 @@ void BufferStringBattle(u16 stringID);
 u32 BattleStringExpandPlaceholdersToDisplayedString(const u8 *src);
 u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst);
 void BattlePutTextOnWindow(const u8 *text, u8 windowId);
-void SetPpNumbersPaletteInMoveSelection(void);
-u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp);
+void SetPPNumbersPaletteInMoveSelection(void);
+u8 GetCurrentPPToMaxPPState(u8 currentPP, u8 maxPP);
 
 extern struct BattleMsgData *gBattleMsgDataPtr;
 
@@ -241,7 +241,7 @@ extern const u8 gText_BattleMenu[];
 extern const u8 gText_SafariZoneMenu[];
 extern const u8 gText_MoveInterfacePP[];
 extern const u8 gText_MoveInterfaceType[];
-extern const u8 gText_MoveInterfacePpType[];
+extern const u8 gText_MoveInterfacePPType[];
 extern const u8 gText_MoveInterfaceDynamicColors[];
 extern const u8 gText_WhichMoveToForget4[];
 extern const u8 gText_BattleYesNoChoice[];
