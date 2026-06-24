@@ -153,16 +153,4 @@
 #define CONNECTION_DIVE     5
 #define CONNECTION_EMERGE   6
 
-enum ComparisonOperators
-{
-    LESS_THAN,
-    EQUAL,
-    GREATER_THAN,
-    LESS_THAN_OR_EQUAL,
-    GREATER_THAN_OR_EQUAL,
-    NOT_EQUAL,
-    COMPARISON_OPERATORS_COUNT,
-};
-
-
 #endif // GUARD_CONSTANTS_GLOBAL_H
