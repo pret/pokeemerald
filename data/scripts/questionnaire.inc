@@ -16,13 +16,10 @@ EventScript_Questionnaire::
 Questionnaire_EventScript_PlayerInputMysteryEventPhrase::
 	goto_if_unset FLAG_SYS_POKEDEX_GET, Questionnaire_EventScript_ThankYou
 	goto_if_set FLAG_SYS_MYSTERY_EVENT_ENABLE, Questionnaire_EventScript_ThankYou
-	applymovement VAR_0x8008, Common_Movement_FaceDown
-	waitmovement 0
+	applywaitmovement VAR_0x8008, Common_Movement_FaceDown
 	playse SE_PIN
-	applymovement VAR_0x8008, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement VAR_0x8008, Common_Movement_Delay48
-	waitmovement 0
+	applywaitmovement VAR_0x8008, Common_Movement_ExclamationMark
+	applywaitmovement VAR_0x8008, Common_Movement_Delay48
 	msgbox Questionnaire_Text_YouKnowThoseWordsEvent, MSGBOX_DEFAULT
 	setflag FLAG_SYS_MYSTERY_EVENT_ENABLE
 	msgbox Questionnaire_Text_YouCanAccessMysteryEvent, MSGBOX_DEFAULT
@@ -32,13 +29,10 @@ Questionnaire_EventScript_PlayerInputMysteryEventPhrase::
 Questionnaire_EventScript_PlayerInputMysteryGiftPhrase::
 	goto_if_unset FLAG_SYS_POKEDEX_GET, Questionnaire_EventScript_ThankYou
 	goto_if_set FLAG_SYS_MYSTERY_GIFT_ENABLE, Questionnaire_EventScript_ThankYou
-	applymovement VAR_0x8008, Common_Movement_FaceDown
-	waitmovement 0
+	applywaitmovement VAR_0x8008, Common_Movement_FaceDown
 	playse SE_PIN
-	applymovement VAR_0x8008, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement VAR_0x8008, Common_Movement_Delay48
-	waitmovement 0
+	applywaitmovement VAR_0x8008, Common_Movement_ExclamationMark
+	applywaitmovement VAR_0x8008, Common_Movement_Delay48
 	msgbox Questionnaire_Text_YouKnowThoseWordsGift, MSGBOX_DEFAULT
 	setflag FLAG_SYS_MYSTERY_GIFT_ENABLE
 	msgbox Questionnaire_Text_YouCanAccessMysteryGift, MSGBOX_DEFAULT
@@ -50,8 +44,7 @@ Questionnaire_EventScript_Release::
 	end
 
 Questionnaire_EventScript_ThankYou::
-	applymovement VAR_0x8008, Common_Movement_FaceDown
-	waitmovement 0
+	applywaitmovement VAR_0x8008, Common_Movement_FaceDown
 	msgbox Questionnaire_Text_ThankYou, MSGBOX_DEFAULT
 	releaseall
 	end

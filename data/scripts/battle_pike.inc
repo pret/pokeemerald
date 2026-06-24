@@ -106,16 +106,14 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_RoomWarp::
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_WarpNPCRoom::
-	applymovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoom_Movement_HidePlayer
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoom_Movement_HidePlayer
 	call BattleFrontier_BattlePike_EventScript_CloseCurtain
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_NORMAL, 4, 7
 	waitstate
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_WarpWildMonRoom::
-	applymovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoom_Movement_HidePlayer
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoom_Movement_HidePlayer
 	call BattleFrontier_BattlePike_EventScript_CloseCurtain
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS, 4, 19
 	waitstate
@@ -172,15 +170,13 @@ BattleFrontier_BattlePikeRoom_EventScript_EnableHealing::
 	return
 
 BattleFrontier_BattlePikeRoom_EventScript_WarpToFinalRoom::
-	applymovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoom_Movement_HidePlayer
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoom_Movement_HidePlayer
 	call BattleFrontier_BattlePike_EventScript_CloseCurtain
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_FINAL, 2, 7
 	return
 
 BattleFrontier_BattlePikeRoom_EventScript_WarpToThreePathRoom::
-	applymovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoom_Movement_HidePlayer
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, BattleFrontier_BattlePikeRoom_Movement_HidePlayer
 	call BattleFrontier_BattlePike_EventScript_CloseCurtain
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM, 6, 10
 	return

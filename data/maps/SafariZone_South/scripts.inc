@@ -9,10 +9,8 @@ SafariZone_South_OnFrame:
 
 SafariZone_South_EventScript_EnterSafariZone::
 	lockall
-	applymovement LOCALID_PLAYER, SafariZone_South_Movement_PlayerEnter
-	waitmovement 0
-	applymovement LOCALID_SAFARI_EXIT_ATTENDANT, SafariZone_South_Movement_ExitAttendantBlockDoor
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, SafariZone_South_Movement_PlayerEnter
+	applywaitmovement LOCALID_SAFARI_EXIT_ATTENDANT, SafariZone_South_Movement_ExitAttendantBlockDoor
 	setobjectxyperm LOCALID_SAFARI_EXIT_ATTENDANT, 32, 34
 	setvar VAR_SAFARI_ZONE_STATE, 0
 	releaseall
@@ -72,18 +70,14 @@ SafariZone_South_EventScript_ExitEarly::
 	end
 
 SafariZone_South_EventScript_ExitEarlyNorth::
-	applymovement LOCALID_SAFARI_EXIT_ATTENDANT, SafariZone_South_Movement_MoveExitAttendantNorth
-	waitmovement 0
-	applymovement LOCALID_PLAYER, SafariZone_South_Movement_PlayerExitNorth
-	waitmovement 0
+	applywaitmovement LOCALID_SAFARI_EXIT_ATTENDANT, SafariZone_South_Movement_MoveExitAttendantNorth
+	applywaitmovement LOCALID_PLAYER, SafariZone_South_Movement_PlayerExitNorth
 	goto SafariZone_South_EventScript_Exit
 	end
 
 SafariZone_South_EventScript_ExitEarlyEast::
-	applymovement LOCALID_SAFARI_EXIT_ATTENDANT, SafariZone_South_Movement_MoveExitAttendantEast
-	waitmovement 0
-	applymovement LOCALID_PLAYER, SafariZone_South_Movement_PlayerExitEast
-	waitmovement 0
+	applywaitmovement LOCALID_SAFARI_EXIT_ATTENDANT, SafariZone_South_Movement_MoveExitAttendantEast
+	applywaitmovement LOCALID_PLAYER, SafariZone_South_Movement_PlayerExitEast
 	goto SafariZone_South_EventScript_Exit
 	end
 

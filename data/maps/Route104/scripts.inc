@@ -41,8 +41,7 @@ Route104_EventScript_DontSetRivalPos::
 Route104_EventScript_Rival::
 	lockall
 	setvar VAR_0x8008, 1
-	applymovement LOCALID_ROUTE104_RIVAL, Common_Movement_FacePlayer
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE104_RIVAL, Common_Movement_FacePlayer
 	goto Route104_EventScript_RivalEncounter
 
 Route104_EventScript_RivalTrigger::
@@ -50,23 +49,18 @@ Route104_EventScript_RivalTrigger::
 	setflag FLAG_HIDE_RUSTBORO_CITY_RIVAL
 	setvar VAR_RUSTBORO_CITY_STATE, 8
 	setvar VAR_ROUTE104_STATE, 2
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	delay 10
 	addobject LOCALID_ROUTE104_RIVAL
 	clearflag FLAG_HIDE_ROUTE_104_RIVAL
-	applymovement LOCALID_PLAYER, Route104_Movement_PlayerBackUp
-	waitmovement 0
-	applymovement LOCALID_ROUTE104_RIVAL, Route104_Movement_RivalExitBrineysCottage
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, Route104_Movement_PlayerBackUp
+	applywaitmovement LOCALID_ROUTE104_RIVAL, Route104_Movement_RivalExitBrineysCottage
 	delay 20
 	setvar VAR_0x8008, 0
 	call RustboroCity_EventScript_PlayRivalMusic
 	playse SE_PIN
-	applymovement LOCALID_ROUTE104_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_ROUTE104_RIVAL, Common_Movement_Delay48
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE104_RIVAL, Common_Movement_ExclamationMark
+	applywaitmovement LOCALID_ROUTE104_RIVAL, Common_Movement_Delay48
 	goto Route104_EventScript_RivalEncounter
 
 @ Unused, shares script with Rustboro encounter instead
@@ -108,8 +102,7 @@ Route104_EventScript_MayEncounter::
 	msgbox Route104_Text_MayHowsYourPokedex, MSGBOX_DEFAULT
 	closemessage
 	waitmovement 0
-	applymovement LOCALID_ROUTE104_RIVAL, Route104_Movement_RivalApproachPlayer
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE104_RIVAL, Route104_Movement_RivalApproachPlayer
 	copyobjectxytoperm LOCALID_ROUTE104_RIVAL
 	msgbox Route104_Text_MayMinesDecentLetsBattle, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, Route104_EventScript_BattleMay
@@ -194,8 +187,7 @@ Route104_EventScript_BrendanEncounter::
 	msgbox Route104_Text_BrendanHowsYourPokedex, MSGBOX_DEFAULT
 	closemessage
 	waitmovement 0
-	applymovement LOCALID_ROUTE104_RIVAL, Route104_Movement_RivalApproachPlayer
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE104_RIVAL, Route104_Movement_RivalApproachPlayer
 	copyobjectxytoperm LOCALID_ROUTE104_RIVAL
 	msgbox Route104_Text_BrendanDoingGreatLetsBattle, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, Route104_EventScript_BattleBrendan
@@ -345,11 +337,9 @@ Route104_EventScript_Girl2::
 Route104_EventScript_SailToDewford::
 	setobjectsubpriority LOCALID_ROUTE104_BRINEY, MAP_ROUTE104, 0
 	setobjectsubpriority LOCALID_PLAYER, MAP_ROUTE104, 0
-	applymovement LOCALID_ROUTE104_BRINEY, Route104_Movement_BrineyBoardBoat
-	waitmovement 0
+	applywaitmovement LOCALID_ROUTE104_BRINEY, Route104_Movement_BrineyBoardBoat
 	removeobject LOCALID_ROUTE104_BRINEY
-	applymovement LOCALID_PLAYER, Route104_Movement_PlayerBoardBoat
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, Route104_Movement_PlayerBoardBoat
 	hideobjectat LOCALID_PLAYER, MAP_ROUTE104
 	call Common_EventScript_PlayBrineysBoatMusic
 	goto_if_set FLAG_ENABLE_NORMAN_MATCH_CALL, Route104_EventScript_SailToDewfordNoCall
@@ -383,18 +373,15 @@ Route104_EventScript_SailToDewfordDadCalls::
 
 Route104_EventScript_ArriveInDewford::
 	delay 50
-	applymovement LOCALID_PLAYER, Route104_Movement_PlayerExitBoat
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, Route104_Movement_PlayerExitBoat
 	call Common_EventScript_StopBrineysBoatMusic
 	showobjectat LOCALID_PLAYER, MAP_DEWFORD_TOWN
-	applymovement LOCALID_PLAYER, Route104_Movement_PlayerMoveForBriney
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, Route104_Movement_PlayerMoveForBriney
 	setobjectxyperm LOCALID_DEWFORD_BRINEY, 12, 8
 	addobject LOCALID_DEWFORD_BRINEY
 	setobjectsubpriority LOCALID_DEWFORD_BRINEY, MAP_DEWFORD_TOWN, 0
 	clearflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
-	applymovement LOCALID_DEWFORD_BRINEY, Route104_Movement_BrineyExitBoat
-	waitmovement 0
+	applywaitmovement LOCALID_DEWFORD_BRINEY, Route104_Movement_BrineyExitBoat
 	addobject LOCALID_DEWFORD_BOAT
 	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	call Common_EventScript_StopBrineysBoatMusic

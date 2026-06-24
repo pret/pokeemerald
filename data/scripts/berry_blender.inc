@@ -238,8 +238,7 @@ BerryBlender_EventScript_BerryBlender1::
 	lockall
 	goto_if_unset FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER, BerryBlender_EventScript_BlendMasterPresent
 	setvar NUM_OPPONENTS, 1
-	applymovement LOCALID_BLEND_MASTER, BerryBlender_Movement_BlendLeaderWalkInPlace
-	waitmovement 0
+	applywaitmovement LOCALID_BLEND_MASTER, BerryBlender_Movement_BlendLeaderWalkInPlace
 	msgbox BerryBlender_Text_WantToMakePokeblocks, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, BerryBlender_EventScript_TryUseBerryBlender1
 	goto BerryBlender_EventScript_DeclineBlender1

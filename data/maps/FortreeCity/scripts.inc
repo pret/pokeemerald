@@ -70,14 +70,12 @@ FortreeCity_EventScript_AskUseDevonScope::
 FortreeCity_EventScript_UseDevonScope::
 	msgbox FortreeCity_Text_UsedDevonScopePokemonFled, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Movement_KecleonAppears
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, Movement_KecleonAppears
 	waitse
 	playmoncry SPECIES_KECLEON, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
-	applymovement VAR_LAST_TALKED, FortreeCity_Movement_KecleonFlee
-	waitmovement 0
+	applywaitmovement VAR_LAST_TALKED, FortreeCity_Movement_KecleonFlee
 	removeobject VAR_LAST_TALKED
 	setflag FLAG_KECLEON_FLED_FORTREE
 	release

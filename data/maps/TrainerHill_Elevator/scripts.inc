@@ -10,30 +10,24 @@ TrainerHill_Elevator_EventScript_Attendant::
 	end
 
 TrainerHill_Elevator_EventScript_ExitToRoof::
-	applymovement LOCALID_PLAYER, TrainerHill_Elevator_Movement_PlayerExitElevatorToRoof
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, TrainerHill_Elevator_Movement_PlayerExitElevatorToRoof
 	releaseall
 	warp MAP_TRAINER_HILL_ROOF, 15, 5
 	waitstate
 	end
 
 TrainerHill_Elevator_EventScript_EnterElevator::
-	applymovement LOCALID_PLAYER, TrainerHill_Elevator_Movement_PlayerApproachAttendant
-	waitmovement 0
-	applymovement LOCALID_TRAINER_HILL_ELEVATOR_ATTENDANT, TrainerHill_Elevator_Movement_AttendantFacePlayer
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, TrainerHill_Elevator_Movement_PlayerApproachAttendant
+	applywaitmovement LOCALID_TRAINER_HILL_ELEVATOR_ATTENDANT, TrainerHill_Elevator_Movement_AttendantFacePlayer
 	lockall
 	msgbox TrainerHill_Elevator_Text_ReturnToReception, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, TrainerHill_Elevator_EventScript_ExitToRoof
 	releaseall
-	applymovement LOCALID_TRAINER_HILL_ELEVATOR_ATTENDANT, TrainerHill_Elevator_Movement_AttendantFaceDown
-	waitmovement 0
-	applymovement LOCALID_PLAYER, TrainerHill_Elevator_Movement_PlayerMoveToCenterOfElevator
-	waitmovement 0
+	applywaitmovement LOCALID_TRAINER_HILL_ELEVATOR_ATTENDANT, TrainerHill_Elevator_Movement_AttendantFaceDown
+	applywaitmovement LOCALID_PLAYER, TrainerHill_Elevator_Movement_PlayerMoveToCenterOfElevator
 	call TrainerHill_Elevator_EventScript_MoveElevator
 	delay 25
-	applymovement LOCALID_PLAYER, TrainerHill_Elevator_Movement_PlayerExitElevator
-	waitmovement 0
+	applywaitmovement LOCALID_PLAYER, TrainerHill_Elevator_Movement_PlayerExitElevator
 	warp MAP_TRAINER_HILL_ENTRANCE, 17, 8
 	waitstate
 	end

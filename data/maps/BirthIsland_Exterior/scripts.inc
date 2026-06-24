@@ -73,8 +73,7 @@ BirthIsland_Exterior_EventScript_Deoxys::
 	playbgm MUS_RG_ENCOUNTER_DEOXYS, FALSE
 	waitfieldeffect FLDEFF_DESTROY_DEOXYS_ROCK
 	addobject LOCALID_BIRTH_ISLAND_DEOXYS
-	applymovement LOCALID_BIRTH_ISLAND_DEOXYS, BirthIsland_Exterior_Movement_DeoxysApproach
-	waitmovement 0
+	applywaitmovement LOCALID_BIRTH_ISLAND_DEOXYS, BirthIsland_Exterior_Movement_DeoxysApproach
 	waitse
 	playmoncry SPECIES_DEOXYS, CRY_MODE_ENCOUNTER
 	delay 40

@@ -8,44 +8,37 @@ SlateportCity_SternsShipyard_1F_EventScript_Dock::
 	goto_if_set FLAG_DELIVERED_DEVON_GOODS, SlateportCity_SternsShipyard_1F_EventScript_NeedVeteran
 	goto_if_set FLAG_DOCK_REJECTED_DEVON_GOODS, SlateportCity_SternsShipyard_1F_EventScript_GoFindStern
 	msgbox SlateportCity_SternsShipyard_1F_Text_CantMakeHeadsOrTails, MSGBOX_DEFAULT
-	applymovement LOCALID_DOCK, Common_Movement_FacePlayer
-	waitmovement 0
+	applywaitmovement LOCALID_DOCK, Common_Movement_FacePlayer
 	msgbox SlateportCity_SternsShipyard_1F_Text_MeetDockDeliverToStern, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_DOCK, Common_Movement_FaceOriginalDirection
-	waitmovement 0
+	applywaitmovement LOCALID_DOCK, Common_Movement_FaceOriginalDirection
 	setflag FLAG_DOCK_REJECTED_DEVON_GOODS
 	setflag FLAG_HIDE_SLATEPORT_CITY_TEAM_AQUA
 	releaseall
 	end
 
 SlateportCity_SternsShipyard_1F_EventScript_FerryReady::
-	applymovement LOCALID_DOCK, Common_Movement_FacePlayer
-	waitmovement 0
+	applywaitmovement LOCALID_DOCK, Common_Movement_FacePlayer
 	msgbox SlateportCity_SternsShipyard_1F_Text_FerryIsReady, MSGBOX_DEFAULT
 	releaseall
 	end
 
 SlateportCity_SternsShipyard_1F_EventScript_BrineyJoined::
-	applymovement LOCALID_DOCK, Common_Movement_FacePlayer
-	waitmovement 0
+	applywaitmovement LOCALID_DOCK, Common_Movement_FacePlayer
 	msgbox SlateportCity_SternsShipyard_1F_Text_BrineyJoinedUs, MSGBOX_DEFAULT
 	releaseall
 	end
 
 SlateportCity_SternsShipyard_1F_EventScript_GoFindStern::
-	applymovement LOCALID_DOCK, Common_Movement_FacePlayer
-	waitmovement 0
+	applywaitmovement LOCALID_DOCK, Common_Movement_FacePlayer
 	msgbox SlateportCity_SternsShipyard_1F_Text_CouldYouFindStern, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_DOCK, Common_Movement_FaceOriginalDirection
-	waitmovement 0
+	applywaitmovement LOCALID_DOCK, Common_Movement_FaceOriginalDirection
 	releaseall
 	end
 
 SlateportCity_SternsShipyard_1F_EventScript_NeedVeteran::
-	applymovement LOCALID_DOCK, Common_Movement_FacePlayer
-	waitmovement 0
+	applywaitmovement LOCALID_DOCK, Common_Movement_FacePlayer
 	msgbox SlateportCity_SternsShipyard_1F_Text_CouldUseAdviceFromVeteran, MSGBOX_DEFAULT
 	releaseall
 	end

@@ -34,8 +34,7 @@ BattleFrontier_Mart_EventScript_OldMan::
 
 BattleFrontier_Mart_EventScript_OldWoman::
 	lock
-	applymovement LOCALID_FRONTIER_MART_OLD_WOMAN, Common_Movement_FaceDown
-	waitmovement 0
+	applywaitmovement LOCALID_FRONTIER_MART_OLD_WOMAN, Common_Movement_FaceDown
 	msgbox BattleFrontier_Mart_Text_ProteinMakeNiceGift, MSGBOX_DEFAULT
 	release
 	end

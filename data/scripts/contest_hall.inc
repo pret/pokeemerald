@@ -185,10 +185,8 @@ ContestHall_EventScript_DoContest::
 	special LinkContestTryShowWirelessIndicator
 	setvar VAR_0x8006, 0
 	lockall
-	applymovement LOCALID_CONTESTANT_4, ContestHall_Movement_Player4FaceUp
-	waitmovement 0
-	applymovement LOCALID_CONTEST_MC, ContestHall_Movement_MCWalkDown
-	waitmovement 0
+	applywaitmovement LOCALID_CONTESTANT_4, ContestHall_Movement_Player4FaceUp
+	applywaitmovement LOCALID_CONTEST_MC, ContestHall_Movement_MCWalkDown
 	releaseall
 	call ContestHall_EventScript_TryWaitForLink
 	call ContestHall_EventScript_GetContestRankStringId
@@ -263,8 +261,7 @@ ContestHall_EventScript_ContestGettingStarted::
 	bufferstdstring STR_VAR_3, VAR_0x8009
 	call ContestHall_EventScript_GettingStarted
 	lockall
-	applymovement LOCALID_CONTEST_MC, ContestHall_Movement_MCBackUp
-	waitmovement 0
+	applywaitmovement LOCALID_CONTEST_MC, ContestHall_Movement_MCBackUp
 	releaseall
 	return
 
@@ -324,8 +321,7 @@ ContestHall_EventScript_ContestantWalkToCenter::
 ContestHall_EventScript_Player1WalkToCenter::
 	call ContestHall_EventScript_TryWaitForLink
 	lockall
-	applymovement LOCALID_CONTESTANT_1, ContestHall_Movement_Player1WalkToCenter
-	waitmovement 0
+	applywaitmovement LOCALID_CONTESTANT_1, ContestHall_Movement_Player1WalkToCenter
 	releaseall
 	setvar VAR_0x800B, LOCALID_CONTESTANT_1
 	return
@@ -333,8 +329,7 @@ ContestHall_EventScript_Player1WalkToCenter::
 ContestHall_EventScript_Player2WalkToCenter::
 	call ContestHall_EventScript_TryWaitForLink
 	lockall
-	applymovement LOCALID_CONTESTANT_2, ContestHall_Movement_Player2WalkToCenter
-	waitmovement 0
+	applywaitmovement LOCALID_CONTESTANT_2, ContestHall_Movement_Player2WalkToCenter
 	releaseall
 	setvar VAR_0x800B, LOCALID_CONTESTANT_2
 	return
@@ -342,8 +337,7 @@ ContestHall_EventScript_Player2WalkToCenter::
 ContestHall_EventScript_Player3WalkToCenter::
 	call ContestHall_EventScript_TryWaitForLink
 	lockall
-	applymovement LOCALID_CONTESTANT_3, ContestHall_Movement_Player3WalkToCenter
-	waitmovement 0
+	applywaitmovement LOCALID_CONTESTANT_3, ContestHall_Movement_Player3WalkToCenter
 	releaseall
 	setvar VAR_0x800B, LOCALID_CONTESTANT_3
 	return
@@ -351,8 +345,7 @@ ContestHall_EventScript_Player3WalkToCenter::
 ContestHall_EventScript_Player4WalkToCenter::
 	call ContestHall_EventScript_TryWaitForLink
 	lockall
-	applymovement LOCALID_CONTESTANT_4, ContestHall_Movement_Player4WalkToCenter
-	waitmovement 0
+	applywaitmovement LOCALID_CONTESTANT_4, ContestHall_Movement_Player4WalkToCenter
 	releaseall
 	setvar VAR_0x800B, LOCALID_CONTESTANT_4
 	return
@@ -362,16 +355,14 @@ ContestHall_EventScript_ShowContestMonPic::
 	addvar VAR_0x8006, 1
 	buffernumberstring STR_VAR_2, VAR_0x8006
 	lockall
-	applymovement VAR_0x800B, ContestHall_Movement_ContestantDelay32
-	waitmovement 0
+	applywaitmovement VAR_0x800B, ContestHall_Movement_ContestantDelay32
 	releaseall
 	call ContestHall_EventScript_TryWaitForLink
 	call ContestHall_EventScript_CheckIfContestWithRSPlayer
 	addobject LOCALID_CONTEST_POKEBALL
 	playse SE_LEDGE
 	lockall
-	applymovement VAR_0x800B, ContestHall_Movement_ContestantDelay32
-	waitmovement 0
+	applywaitmovement VAR_0x800B, ContestHall_Movement_ContestantDelay32
 	releaseall
 	addvar VAR_0x8006, -1
 	playse SE_BALL_OPEN
@@ -396,10 +387,8 @@ ContestHall_EventScript_AudienceVote::
 	playse SE_M_ENCORE2
 	waitmessage
 	call ContestHall_EventScript_AudienceLookAround
-	applymovement LOCALID_CONTEST_MC, ContestHall_Movement_MCFaceJudge2
-	waitmovement 0
-	applymovement LOCALID_CONTEST_JUDGE, ContestHall_Movement_JudgeFaceMC
-	waitmovement 0
+	applywaitmovement LOCALID_CONTEST_MC, ContestHall_Movement_MCFaceJudge2
+	applywaitmovement LOCALID_CONTEST_JUDGE, ContestHall_Movement_JudgeFaceMC
 	delay 20
 	applymovement LOCALID_CONTEST_MC, ContestHall_Movement_FaceContestants
 	applymovement LOCALID_CONTEST_JUDGE, ContestHall_Movement_FaceContestants
@@ -442,23 +431,20 @@ ContestHall_EventScript_VotingUnderWayLink::
 
 ContestHall_EventScript_AudienceReactToContestant::
 	call ContestHall_EventScript_TryWaitForLink
-	applymovement LOCALID_CONTEST_MC, ContestHall_Movement_AudienceMemberLookLeft
-	waitmovement 0
+	applywaitmovement LOCALID_CONTEST_MC, ContestHall_Movement_AudienceMemberLookLeft
 	playse SE_M_ENCORE2
 	call ContestHall_EventScript_VObjectAudienceLookAround
 	applymovement LOCALID_CONTEST_AUDIENCE_5, ContestHall_Movement_AudienceMemberLookRight
 	applymovement LOCALID_CONTEST_AUDIENCE_2, ContestHall_Movement_AudienceMemberLookDown
 	applymovement LOCALID_CONTEST_AUDIENCE_3, ContestHall_Movement_AudienceMemberLookRight
 	waitmovement 0
-	applymovement LOCALID_CONTEST_MC, ContestHall_Movement_AudienceMemberLookRight
-	waitmovement 0
+	applywaitmovement LOCALID_CONTEST_MC, ContestHall_Movement_AudienceMemberLookRight
 	applymovement LOCALID_CONTEST_AUDIENCE_6, ContestHall_Movement_AudienceMemberLookLeft
 	applymovement LOCALID_CONTEST_AUDIENCE_7, ContestHall_Movement_AudienceMemberLookDown
 	applymovement LOCALID_CONTEST_AUDIENCE_1, ContestHall_Movement_AudienceMemberLookUp
 	applymovement LOCALID_CONTEST_AUDIENCE_4, ContestHall_Movement_AudienceMemberLookLeft
 	waitmovement 0
-	applymovement LOCALID_CONTEST_MC, ContestHall_Movement_MCLookAtJudge
-	waitmovement 0
+	applywaitmovement LOCALID_CONTEST_MC, ContestHall_Movement_MCLookAtJudge
 	applymovement LOCALID_CONTEST_MC, ContestHall_Movement_MCWalkInPlaceDown
 	applymovement LOCALID_CONTEST_JUDGE, ContestHall_Movement_JudgeLookAtMC
 	waitmovement 0
@@ -716,39 +702,34 @@ ContestHall_EventScript_ContestantReturn::
 ContestHall_EventScript_Player1WalkBack::
 	call ContestHall_EventScript_TryWaitForLink
 	lockall
-	applymovement VAR_0x800B, ContestHall_Movement_Player1WalkBack
-	waitmovement 0
+	applywaitmovement VAR_0x800B, ContestHall_Movement_Player1WalkBack
 	releaseall
 	return
 
 ContestHall_EventScript_Player2WalkBack::
 	call ContestHall_EventScript_TryWaitForLink
 	lockall
-	applymovement VAR_0x800B, ContestHall_Movement_Player2WalkBack
-	waitmovement 0
+	applywaitmovement VAR_0x800B, ContestHall_Movement_Player2WalkBack
 	releaseall
 	return
 
 ContestHall_EventScript_Player3WalkBack::
 	call ContestHall_EventScript_TryWaitForLink
 	lockall
-	applymovement VAR_0x800B, ContestHall_Movement_Player3WalkBack
-	waitmovement 0
+	applywaitmovement VAR_0x800B, ContestHall_Movement_Player3WalkBack
 	releaseall
 	return
 
 ContestHall_EventScript_Player4WalkBack::
 	call ContestHall_EventScript_TryWaitForLink
 	lockall
-	applymovement VAR_0x800B, ContestHall_Movement_Player4WalkBack
-	waitmovement 0
+	applywaitmovement VAR_0x800B, ContestHall_Movement_Player4WalkBack
 	releaseall
 	return
 
 ContestHall_EventScript_DoContestAppeals::
 	lockall
-	applymovement LOCALID_CONTEST_MC, ContestHall_Movement_FaceContestants2
-	waitmovement 0
+	applywaitmovement LOCALID_CONTEST_MC, ContestHall_Movement_FaceContestants2
 	call ContestHall_EventScript_TryWaitForLink
 	call ContestHall_EventScript_LetsAppeal
 	waitmessage
@@ -800,14 +781,12 @@ ContestHall_EventScript_ContestResults::
 	call ContestHall_EventScript_TryWaitForLink
 	call ContestHall_EventScript_ThankYouForAppeals
 	call ContestHall_EventScript_TryWaitForLink
-	applymovement LOCALID_CONTEST_MC, ContestHall_Movement_MCFaceJudge
-	waitmovement 0
+	applywaitmovement LOCALID_CONTEST_MC, ContestHall_Movement_MCFaceJudge
 	call ContestHall_EventScript_JudgeLooksReady
 	call ContestHall_EventScript_TryWaitForLink
 	call ContestHall_EventScript_WeWillDeclareWinner
 	call ContestHall_EventScript_TryWaitForLink
-	applymovement LOCALID_CONTEST_MC, ContestHall_Movement_FaceContestants
-	waitmovement 0
+	applywaitmovement LOCALID_CONTEST_MC, ContestHall_Movement_FaceContestants
 	closemessage
 	releaseall
 	special LinkContestTryHideWirelessIndicator
@@ -897,8 +876,7 @@ ContestHall_EventScript_CongratulateWinner::
 	buffernumberstring STR_VAR_2, VAR_0x8005
 	addvar VAR_0x8005, -1
 	call ContestHall_EventScript_CongratsWinner
-	applymovement VAR_TEMP_3, ContestHall_Movement_WinningPlayerWalkUp
-	waitmovement 0
+	applywaitmovement VAR_TEMP_3, ContestHall_Movement_WinningPlayerWalkUp
 	playse SE_M_ENCORE2
 	setvar VAR_TEMP_1, 0
 	return
@@ -1078,29 +1056,25 @@ ContestHall_EventScript_WinnerApproachForPrize::
 
 ContestHall_EventScript_Player1ApproachForPrize::
 	lockall
-	applymovement VAR_TEMP_3, ContestHall_Movement_Player1ApproachForPrize
-	waitmovement 0
+	applywaitmovement VAR_TEMP_3, ContestHall_Movement_Player1ApproachForPrize
 	releaseall
 	return
 
 ContestHall_EventScript_Player2ApproachForPrize::
 	lockall
-	applymovement VAR_TEMP_3, ContestHall_Movement_Player2ApproachForPrize
-	waitmovement 0
+	applywaitmovement VAR_TEMP_3, ContestHall_Movement_Player2ApproachForPrize
 	releaseall
 	return
 
 ContestHall_EventScript_Player3ApproachForPrize::
 	lockall
-	applymovement VAR_TEMP_3, ContestHall_Movement_Player3ApproachForPrize
-	waitmovement 0
+	applywaitmovement VAR_TEMP_3, ContestHall_Movement_Player3ApproachForPrize
 	releaseall
 	return
 
 ContestHall_EventScript_Player4ApproachForPrize::
 	lockall
-	applymovement VAR_TEMP_3, ContestHall_Movement_Player4ApproachForPrize
-	waitmovement 0
+	applywaitmovement VAR_TEMP_3, ContestHall_Movement_Player4ApproachForPrize
 	releaseall
 	return
 
