@@ -4,3 +4,4 @@ layouts.h
 region_map_sections.h
 map_event_ids.h
 heal_locations.h
+wild_encounter.h
