@@ -234,19 +234,20 @@ struct ObjectEvent
     /*0x0C*/ struct Coords16 initialCoords;
     /*0x10*/ struct Coords16 currentCoords;
     /*0x14*/ struct Coords16 previousCoords;
+
     /*0x18*/ u16 facingDirection:4; // current direction?
              u16 movementDirection:4;
-             struct __attribute__((packed))
-             {
-                u8 rangeX:4;
-                u8 rangeY:4;
-             } range;
+             u16 rangeX:4;
+             u16 rangeY:4;
+
     /*0x1A*/ u8 fieldEffectSpriteId;
     /*0x1B*/ u8 warpArrowSpriteId;
+
     /*0x1C*/ u8 movementActionId;
     /*0x1D*/ u8 trainerRange_berryTreeId;
     /*0x1E*/ u8 currentMetatileBehavior;
     /*0x1F*/ u8 previousMetatileBehavior;
+
     /*0x20*/ u8 previousMovementDirection;
     /*0x21*/ u8 directionSequenceIndex;
     /*0x22*/ u8 playerCopyableMovement; // COPY_MOVE_*
