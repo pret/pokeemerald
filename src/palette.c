@@ -81,7 +81,7 @@ static const u8 sRoundedDownGrayscaleMap[] = {
     31, 31
 };
 
-void LoadCompressedPalette(const u32 *src, u16 offset, u16 size)
+void LoadCompressedPalette(const void *src, u16 offset, u16 size)
 {
     LZDecompressWram(src, gPaletteDecompressionBuffer);
     CpuCopy16(gPaletteDecompressionBuffer, &gPlttBufferUnfaded[offset], size);
@@ -156,50 +156,48 @@ static void ReadPlttIntoBuffers(void)
 bool8 BeginNormalPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 targetY, u16 blendColor)
 {
     u8 temp;
-    u16 color = blendColor;
 
     if (gPaletteFade.active)
     {
         return FALSE;
     }
-    else
+
+    gPaletteFade.deltaY = 2;
+
+    if (delay < 0)
     {
-        gPaletteFade.deltaY = 2;
-
-        if (delay < 0)
-        {
-            gPaletteFade.deltaY += (delay * -1);
-            delay = 0;
-        }
-
-        gPaletteFade_selectedPalettes = selectedPalettes;
-        gPaletteFade.delayCounter = delay;
-        gPaletteFade_delay = delay;
-        gPaletteFade.y = startY;
-        gPaletteFade.targetY = targetY;
-        gPaletteFade.blendColor = color;
-        gPaletteFade.active = TRUE;
-        gPaletteFade.mode = NORMAL_FADE;
-
-        if (startY < targetY)
-            gPaletteFade.yDec = 0;
-        else
-            gPaletteFade.yDec = 1;
-
-        UpdatePaletteFade();
-
-        temp = gPaletteFade.bufferTransferDisabled;
-        gPaletteFade.bufferTransferDisabled = FALSE;
-        CpuCopy32(gPlttBufferFaded, (void *)PLTT, PLTT_SIZE);
-        sPlttBufferTransferPending = FALSE;
-        if (gPaletteFade.mode == HARDWARE_FADE && gPaletteFade.active)
-            UpdateBlendRegisters();
-        gPaletteFade.bufferTransferDisabled = temp;
-        return TRUE;
+        gPaletteFade.deltaY += abs(delay);
+        delay = 0;
     }
+
+    gPaletteFade_selectedPalettes = selectedPalettes;
+    gPaletteFade.delayCounter = delay;
+    gPaletteFade_delay = delay;
+    gPaletteFade.y = startY;
+    gPaletteFade.targetY = targetY;
+    gPaletteFade.blendColor = blendColor;
+    gPaletteFade.active = TRUE;
+    gPaletteFade.mode = NORMAL_FADE;
+
+    if (startY < targetY)
+        gPaletteFade.yDec = 0;
+    else
+        gPaletteFade.yDec = 1;
+
+    UpdatePaletteFade();
+
+    temp = gPaletteFade.bufferTransferDisabled;
+    gPaletteFade.bufferTransferDisabled = FALSE;
+
+    CpuCopy32(gPlttBufferFaded, (void *)PLTT, PLTT_SIZE);
+    sPlttBufferTransferPending = FALSE;
+    if (gPaletteFade.mode == HARDWARE_FADE && gPaletteFade.active)
+        UpdateBlendRegisters();
+    gPaletteFade.bufferTransferDisabled = temp;
+    return TRUE;
 }
 
-static bool8 UNUSED BeginPlttFade(u32 selectedPalettes, u8 delay, u8 startY, u8 targetY, u16 blendColor)
+static bool8 UNUSED BeginPlttFade(u32 selectedPalettes, s8 delay, u8 startY, u8 targetY, u16 blendColor)
 {
     ReadPlttIntoBuffers();
     return BeginNormalPaletteFade(selectedPalettes, delay, startY, targetY, blendColor);
@@ -235,8 +233,6 @@ static void UNUSED PaletteStruct_Run(u8 a1, u32 *unkFlags)
 
 static void PaletteStruct_Copy(struct PaletteStruct *palStruct, u32 *unkFlags)
 {
-    s32 srcIndex;
-    s32 srcCount;
     u8 i = 0;
     u16 srcOffset = palStruct->srcIndex * palStruct->template->size;
 
@@ -266,10 +262,7 @@ static void PaletteStruct_Copy(struct PaletteStruct *palStruct, u32 *unkFlags)
     palStruct->countdown1 = palStruct->template->time1;
     palStruct->srcIndex++;
 
-    srcIndex = palStruct->srcIndex;
-    srcCount = palStruct->template->srcCount;
-
-    if (srcIndex >= srcCount)
+    if (palStruct->srcIndex >= palStruct->template->srcCount)
     {
         if (palStruct->countdown2)
             palStruct->countdown2--;
@@ -315,22 +308,18 @@ static void PaletteStruct_TryEnd(struct PaletteStruct *pal)
 {
     if (pal->countdown2 == 0)
     {
-        s32 state = pal->template->state;
-
-        if (state == 0)
+        switch (pal->template->state)
         {
+        case 0:
             pal->srcIndex = 0;
             pal->countdown1 = pal->template->time1;
             pal->countdown2 = pal->template->time2;
             pal->destOffset = pal->baseDestOffset;
-        }
-        else
-        {
-            if (state < 0)
-                return;
-            if (state > 2)
-                return;
+            break;
+        case 1:
+        case 2:
             PaletteStruct_ResetById(pal->template->id);
+            break;
         }
     }
     else
@@ -367,7 +356,6 @@ void ResetPaletteFadeControl(void)
     gPaletteFade.targetY = 0;
     gPaletteFade.blendColor = 0;
     gPaletteFade.active = FALSE;
-    gPaletteFade.multipurpose2 = 0; // assign same value twice
     gPaletteFade.yDec = 0;
     gPaletteFade.bufferTransferDisabled = FALSE;
     gPaletteFade.shouldResetBlendRegisters = FALSE;
@@ -407,86 +395,75 @@ static u8 UpdateNormalPaletteFade(void)
 {
     u16 paletteOffset;
     u16 selectedPalettes;
+    s8 val;
 
     if (!gPaletteFade.active)
         return PALETTE_FADE_STATUS_DONE;
 
     if (IsSoftwarePaletteFadeFinishing())
+        return gPaletteFade.active;
+
+    if (!gPaletteFade.objPaletteToggle)
     {
-        return gPaletteFade.active ? PALETTE_FADE_STATUS_ACTIVE : PALETTE_FADE_STATUS_DONE;
+        if (gPaletteFade.delayCounter < gPaletteFade_delay)
+        {
+            gPaletteFade.delayCounter++;
+            return 2;
+        }
+        gPaletteFade.delayCounter = 0;
+    }
+
+    paletteOffset = 0;
+
+    if (!gPaletteFade.objPaletteToggle)
+    {
+        selectedPalettes = gPaletteFade_selectedPalettes;
     }
     else
     {
-        if (!gPaletteFade.objPaletteToggle)
-        {
-            if (gPaletteFade.delayCounter < gPaletteFade_delay)
-            {
-                gPaletteFade.delayCounter++;
-                return 2;
-            }
-            gPaletteFade.delayCounter = 0;
-        }
+        selectedPalettes = gPaletteFade_selectedPalettes >> 16;
+        paletteOffset = OBJ_PLTT_OFFSET;
+    }
 
-        paletteOffset = 0;
+    while (selectedPalettes)
+    {
+        if (selectedPalettes & 1)
+            BlendPalette(paletteOffset, 16, gPaletteFade.y, gPaletteFade.blendColor);
+        selectedPalettes >>= 1;
+        paletteOffset += 16;
+    }
 
-        if (!gPaletteFade.objPaletteToggle)
-        {
-            selectedPalettes = gPaletteFade_selectedPalettes;
-        }
-        else
-        {
-            selectedPalettes = gPaletteFade_selectedPalettes >> 16;
-            paletteOffset = OBJ_PLTT_OFFSET;
-        }
-
-        while (selectedPalettes)
-        {
-            if (selectedPalettes & 1)
-                BlendPalette(
-                    paletteOffset,
-                    16,
-                    gPaletteFade.y,
-                    gPaletteFade.blendColor);
-            selectedPalettes >>= 1;
-            paletteOffset += 16;
-        }
-
-        gPaletteFade.objPaletteToggle ^= 1;
-
-        if (!gPaletteFade.objPaletteToggle)
-        {
-            if (gPaletteFade.y == gPaletteFade.targetY)
-            {
-                gPaletteFade_selectedPalettes = 0;
-                gPaletteFade.softwareFadeFinishing = TRUE;
-            }
-            else
-            {
-                s8 val;
-
-                if (!gPaletteFade.yDec)
-                {
-                    val = gPaletteFade.y;
-                    val += gPaletteFade.deltaY;
-                    if (val > gPaletteFade.targetY)
-                        val = gPaletteFade.targetY;
-                    gPaletteFade.y = val;
-                }
-                else
-                {
-                    val = gPaletteFade.y;
-                    val -= gPaletteFade.deltaY;
-                    if (val < gPaletteFade.targetY)
-                        val = gPaletteFade.targetY;
-                    gPaletteFade.y = val;
-                }
-            }
-        }
-
+    gPaletteFade.objPaletteToggle ^= 1;
+    if (gPaletteFade.objPaletteToggle)
         // gPaletteFade.active cannot change since the last time it was checked. So this
         // is equivalent to `return PALETTE_FADE_STATUS_ACTIVE;`
-        return gPaletteFade.active ? PALETTE_FADE_STATUS_ACTIVE : PALETTE_FADE_STATUS_DONE;
+        return gPaletteFade.active;
+
+    if (gPaletteFade.y == gPaletteFade.targetY)
+    {
+        gPaletteFade_selectedPalettes = 0;
+        gPaletteFade.softwareFadeFinishing = TRUE;
     }
+    else if (!gPaletteFade.yDec)
+    {
+        val = gPaletteFade.y;
+        val += gPaletteFade.deltaY;
+        if (val > gPaletteFade.targetY)
+            val = gPaletteFade.targetY;
+        gPaletteFade.y = val;
+    }
+    else
+    {
+        val = gPaletteFade.y;
+        val -= gPaletteFade.deltaY;
+        if (val < gPaletteFade.targetY)
+            val = gPaletteFade.targetY;
+        gPaletteFade.y = val;
+    }
+
+    // gPaletteFade.active cannot change since the last time it was checked. So this
+    // is equivalent to `return PALETTE_FADE_STATUS_ACTIVE;`
+    return gPaletteFade.active;
 }
 
 void InvertPlttBuffer(u32 selectedPalettes)
@@ -554,7 +531,7 @@ void BeginFastPaletteFade(u8 submode)
 static void BeginFastPaletteFadeInternal(u8 submode)
 {
     gPaletteFade.y = 31;
-    gPaletteFade_submode = submode & 0x3F;
+    gPaletteFade_submode = submode;
     gPaletteFade.active = TRUE;
     gPaletteFade.mode = FAST_FADE;
 
@@ -693,7 +670,7 @@ static u8 UpdateFastPaletteFade(void)
     if (gPaletteFade.objPaletteToggle)
         // gPaletteFade.active cannot change since the last time it was checked. So this
         // is equivalent to `return PALETTE_FADE_STATUS_ACTIVE;`
-        return gPaletteFade.active ? PALETTE_FADE_STATUS_ACTIVE : PALETTE_FADE_STATUS_DONE;
+        return gPaletteFade.active;
 
     if (gPaletteFade.y - gPaletteFade.deltaY < 0)
         gPaletteFade.y = 0;
@@ -722,7 +699,7 @@ static u8 UpdateFastPaletteFade(void)
 
     // gPaletteFade.active cannot change since the last time it was checked. So this
     // is equivalent to `return PALETTE_FADE_STATUS_ACTIVE;`
-    return gPaletteFade.active ? PALETTE_FADE_STATUS_ACTIVE : PALETTE_FADE_STATUS_DONE;
+    return gPaletteFade.active;
 }
 
 void BeginHardwarePaletteFade(u8 blendCnt, u8 delay, u8 y, u8 targetY, u8 shouldResetBlendRegisters)
@@ -767,8 +744,10 @@ static u8 UpdateHardwarePaletteFade(void)
     }
     else
     {
-        s32 y = gPaletteFade.y--;
-        if (y - 1 < gPaletteFade.targetY)
+        // s8 y = --gPaletteFade.y doesn't match;
+        s8 y = gPaletteFade.y--;
+        y--;
+        if (y < gPaletteFade.targetY)
         {
             gPaletteFade.hardwareFadeFinishing++;
             gPaletteFade.y++;
@@ -787,7 +766,7 @@ static u8 UpdateHardwarePaletteFade(void)
 
     // gPaletteFade.active cannot change since the last time it was checked. So this
     // is equivalent to `return PALETTE_FADE_STATUS_ACTIVE;`
-    return gPaletteFade.active ? PALETTE_FADE_STATUS_ACTIVE : PALETTE_FADE_STATUS_DONE;
+    return gPaletteFade.active;
 }
 
 static void UpdateBlendRegisters(void)
@@ -1006,7 +985,6 @@ static void Task_BlendPalettesGradually(u8 taskId)
 {
     u32 palettes;
     s16 *data;
-    s16 target;
 
     data = gTasks[taskId].data;
     palettes = GetWordTaskArg(taskId, tPalettes);
@@ -1015,24 +993,22 @@ static void Task_BlendPalettesGradually(u8 taskId)
     {
         tDelayTimer = 0;
         BlendPalettes(palettes, tCoeff, tColor);
-        target = tCoeffTarget;
-        if (tCoeff == target)
+
+        if (tCoeff == tCoeffTarget)
         {
             DestroyTask(taskId);
+            return;
         }
-        else
+
+        tCoeff += tCoeffDelta;
+        if (tCoeffDelta >= 0)
         {
-            tCoeff += tCoeffDelta;
-            if (tCoeffDelta >= 0)
-            {
-                if (tCoeff < target)
-                    return;
-            }
-            else if (tCoeff > target)
-            {
-                return;
-            }
-            tCoeff = target;
+            if (tCoeff >= tCoeffTarget)
+                tCoeff = tCoeffTarget;
+        }
+        else if (tCoeff <= tCoeffTarget)
+        {
+            tCoeff = tCoeffTarget;
         }
     }
 }
