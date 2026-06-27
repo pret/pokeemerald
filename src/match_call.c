@@ -1749,44 +1749,38 @@ static u8 GetWaterEncounterSlot(void)
 
 static void PopulateSpeciesFromTrainerLocation(int matchCallId, u8 *destStr)
 {
-    u16 species[2];
-    int numSpecies;
-    u8 slot;
-    int i = 0;
+    int i, slot;
 
-    if (gWildMonHeaders[i].mapGroup != MAP_GROUP(MAP_UNDEFINED)) // ??? This check is nonsense.
+    for (i = 0; gWildMonHeaders[i].mapGroup != MAP_GROUP(MAP_UNDEFINED); i++)
     {
-        while (gWildMonHeaders[i].mapGroup != MAP_GROUP(MAP_UNDEFINED))
-        {
-            if (gWildMonHeaders[i].mapGroup == gRematchTable[matchCallId].mapGroup
-             && gWildMonHeaders[i].mapNum == gRematchTable[matchCallId].mapNum)
-                break;
+        if (gWildMonHeaders[i].mapGroup == gRematchTable[matchCallId].mapGroup &&
+            gWildMonHeaders[i].mapNum == gRematchTable[matchCallId].mapNum)
+            break;
+    }
 
-            i++;
+    if (gWildMonHeaders[i].mapGroup != MAP_GROUP(MAP_UNDEFINED))
+    {
+        int numSpecies;
+        u16 species[2];
+
+        numSpecies = 0;
+        if (gWildMonHeaders[i].landMonsInfo)
+        {
+            slot = GetLandEncounterSlot();
+            species[numSpecies++] = gWildMonHeaders[i].landMonsInfo->wildPokemon[slot].species;
         }
 
-        if (gWildMonHeaders[i].mapGroup != MAP_GROUP(MAP_UNDEFINED))
+        if (gWildMonHeaders[i].waterMonsInfo)
         {
-            numSpecies = 0;
-            if (gWildMonHeaders[i].landMonsInfo)
-            {
-                slot = GetLandEncounterSlot();
-                species[numSpecies] = gWildMonHeaders[i].landMonsInfo->wildPokemon[slot].species;
-                numSpecies++;
-            }
+            slot = GetWaterEncounterSlot();
+            species[numSpecies++] = gWildMonHeaders[i].waterMonsInfo->wildPokemon[slot].species;
+        }
 
-            if (gWildMonHeaders[i].waterMonsInfo)
-            {
-                slot = GetWaterEncounterSlot();
-                species[numSpecies] = gWildMonHeaders[i].waterMonsInfo->wildPokemon[slot].species;
-                numSpecies++;
-            }
-
-            if (numSpecies)
-            {
-                StringCopy(destStr, gSpeciesNames[species[Random() % numSpecies]]);
-                return;
-            }
+        if (numSpecies)
+        {
+            slot = Random() % numSpecies;
+            StringCopy(destStr, gSpeciesNames[species[slot]]);
+            return;
         }
     }
 
