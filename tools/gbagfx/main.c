@@ -641,7 +641,7 @@ int main(int argc, char **argv)
         if (*outputFileExtension == 0)
             FATAL_ERROR("Output file \"%s\" has no extension.\n", outputPath);
 
-        size_t newOutputPathSize = strlen(inputPath) - strlen(inputFileExtension) + strlen(outputFileExtension);
+        size_t newOutputPathSize = strlen(inputPath) - strlen(inputFileExtension) + strlen(outputFileExtension) + 1;
         outputPath = malloc(newOutputPathSize);
 
         if (outputPath == NULL)
@@ -653,7 +653,7 @@ int main(int argc, char **argv)
 
             if (outputPath[i] == '.')
             {
-                strcpy(&outputPath[i + 1], outputFileExtension);
+                memcpy(&outputPath[i + 1], outputFileExtension, strlen(outputFileExtension) + 1);
                 break;
             }
         }
