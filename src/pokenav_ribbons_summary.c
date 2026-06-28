@@ -542,7 +542,7 @@ void FreeRibbonsSummaryScreen2(void)
     RemoveWindow(menu->ribbonCountWindowId);
     RemoveWindow(menu->nameWindowId);
     RemoveWindow(menu->listIdxWindowId);
-#ifndef BUGFIX
+#ifndef UBFIX
     RemoveWindow(menu->unusedWindowId); // Removing window, but window id is never set
 #endif
     DestroyRibbonsMonFrontPic(menu);

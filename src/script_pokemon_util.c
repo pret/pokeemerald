@@ -151,7 +151,7 @@ void CreateScriptedWildMon(u16 species, u8 level, u16 item)
 void ScriptSetMonMoveSlot(u8 monIndex, u16 move, u8 slot)
 {
 // Allows monIndex to go out of bounds of gPlayerParty. Doesn't occur in vanilla
-#ifdef BUGFIX
+#ifdef UBFIX
     if (monIndex >= PARTY_SIZE)
 #else
     if (monIndex > PARTY_SIZE)

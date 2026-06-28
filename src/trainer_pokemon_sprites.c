@@ -86,7 +86,7 @@ static bool16 DecompressPic(u16 picId, u32 personality, bool8 isFrontPic, u8 *de
         }
         else
         {
-#ifdef BUGFIX
+#ifdef UBFIX
             CpuCopy32(gTrainerBackPicTable[trainerPicId].data, dest, gTrainerBackPicTable[trainerPicId].size);
 #else
             // Trainer back pics aren't compressed!
