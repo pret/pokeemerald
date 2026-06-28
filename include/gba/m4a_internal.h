@@ -248,8 +248,8 @@ struct PokemonCrySong
     u8 cont[2]; // 0x1A
     u8 volCmd; // 0x1C
     u8 volumeValue; // 0x1D
-    u8 unkCmd0D[2]; // 0x1E
-    u32 unkCmd0DParam; // 0x20
+    u8 xadctCmd[2]; // 0x1E
+    u32 sampleOffsetValue; // 0x20
     u8 xreleCmd[2]; // 0x24
     u8 releaseValue; // 0x26
     u8 panCmd;
@@ -269,6 +269,12 @@ struct PokemonCrySong
 #define MPT_FLG_START  0x40
 #define MPT_FLG_EXIST  0x80
 
+#define MTRACK_PATSIZ 3
+
+#define MOD_VIB 0
+#define MOD_TRE 1
+#define MOD_PAN 2
+
 struct MusicPlayerTrack
 {
     u8 flags;
@@ -279,7 +285,7 @@ struct MusicPlayerTrack
     u8 key;
     u8 velocity;
     u8 runningStatus;
-    u8 keyM;
+    s8 keyM;
     u8 pitM;
     s8 keyShift;
     s8 keyShiftX;
@@ -307,15 +313,19 @@ struct MusicPlayerTrack
     struct ToneData tone;
     u8 gap[10];
     u16 timer;
-    u32 unk_3C;
+    u32 sampleOffset;
     u8 *cmdPtr;
-    u8 *patternStack[3];
+    u8 *patternStack[MTRACK_PATSIZ];
 };
 
 #define MUSICPLAYER_STATUS_TRACK 0x0000ffff
 #define MUSICPLAYER_STATUS_PAUSE 0x80000000
 
 #define MAX_MUSICPLAYER_TRACKS 16
+
+#define TEMPOBASE 150
+
+#define MPLYJMPTBLSIZ 36
 
 #define TRACKS_ALL 0xFFFF
 
@@ -331,7 +341,7 @@ struct MusicPlayerInfo
     u8 trackCount;
     u8 priority;
     u8 cmd;
-    u8 unk_B;
+    u8 usePriority;
     u32 clock;
     u8 gap[8];
     u8 *memAccArea;
@@ -342,6 +352,7 @@ struct MusicPlayerInfo
     u16 fadeOI;
     u16 fadeOC;
     u16 fadeOV;
+    u16 dummy;
     struct MusicPlayerTrack *tracks;
     struct ToneData *tone;
     u32 ident;
@@ -353,8 +364,8 @@ struct MusicPlayer
 {
     struct MusicPlayerInfo *info;
     struct MusicPlayerTrack *track;
-    u8 numTracks;
-    u16 unk_A;
+    u16 numTracks;
+    u16 usePriority;
 };
 
 struct Song
@@ -371,16 +382,13 @@ extern const struct Song gSongTable[];
 
 extern u8 gMPlayMemAccArea[];
 
-//u8 gPokemonCrySong[52];
-//u8 gPokemonCrySongs[52 * MAX_POKEMON_CRIES];
-
 #define MAX_POKEMON_CRIES 2
 
 extern struct PokemonCrySong gPokemonCrySong;
-extern struct PokemonCrySong gPokemonCrySongs[];
+extern struct PokemonCrySong gPokemonCrySongs[MAX_POKEMON_CRIES];
 
-extern struct MusicPlayerInfo gPokemonCryMusicPlayers[];
-extern struct MusicPlayerTrack gPokemonCryTracks[];
+extern struct MusicPlayerInfo gPokemonCryMusicPlayers[MAX_POKEMON_CRIES];
+extern struct MusicPlayerTrack gPokemonCryTracks[MAX_POKEMON_CRIES][2];
 
 extern char SoundMainRAM[];
 
@@ -496,6 +504,6 @@ void ply_xiecl(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xleng(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xswee(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xwait(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
-void ply_xcmd_0D(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_xadct(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 
 #endif // GUARD_GBA_M4A_INTERNAL_H

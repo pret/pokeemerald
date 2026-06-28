@@ -41,6 +41,29 @@
 	.equiv MPT_FLG_START,  0x40
 	.equiv MPT_FLG_EXIST,  0x80
 
+	.equiv MUSICPLAYER_STATUS_PAUSE, 0x80000000
+
+	.equiv TEMPOBASE, 150
+
+	.equiv MTRACK_PATSIZ, 3
+
+	.equiv MPLYJMPTBLSIZ, 36
+
+	.equiv MOD_VIB, 0
+	.equiv MOD_TRE, 1
+	.equiv MOD_PAN, 2
+
+	@ sequence commands
+	.equiv W00,    0x80 @ wait
+	.equiv W96,    0xB0
+	.equiv RUNSTT, 0xBD @ first command that sets the running status
+	.equiv TIE,    0xCF
+
+	@ compressed samples
+	.equiv PAC_BLK_SIZ, 64 @ samples per block
+	.equiv PAC_BLK_4b,  33 @ bytes per block
+	.equiv PAC_BLK_lsr, 6
+
 	.macro struct_begin
 	.struct 0
 	.endm
@@ -182,7 +205,7 @@
 	struct_field o_MusicPlayerTrack_ToneData_release, 1
 	struct_field o_MusicPlayerTrack_gap, 10
 	struct_field o_MusicPlayerTrack_timer, 2
-	struct_field o_MusicPlayerTrack_unk_3C, 4
+	struct_field o_MusicPlayerTrack_sampleOffset, 4
 	struct_field o_MusicPlayerTrack_cmdPtr, 4
 	struct_field o_MusicPlayerTrack_patternStack, 12
 	struct_field MusicPlayerTrack_size, 0
@@ -195,7 +218,7 @@
 	struct_field o_MusicPlayerInfo_trackCount, 1
 	struct_field o_MusicPlayerInfo_priority, 1
 	struct_field o_MusicPlayerInfo_cmd, 1
-	struct_field o_MusicPlayerInfo_unk_B, 1
+	struct_field o_MusicPlayerInfo_usePriority, 1
 	struct_field o_MusicPlayerInfo_clock, 4
 	struct_field o_MusicPlayerInfo_gap, 8
 	struct_field o_MusicPlayerInfo_memAccArea, 4
