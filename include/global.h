@@ -17,11 +17,12 @@
 #include "constants/easy_chat.h"
 #include "constants/trainer_hill.h"
 
-// Prevent cross-jump optimization.
-#define BLOCK_CROSS_JUMP asm("");
-
-// to help in decompiling
+// Unified Thumb/ARM asm. Modern (Clang): no .syntax divided — Clang rejects it. Legacy agbcc output still expects divided after the block.
+#if MODERN
+#define asm_unified(x) asm(".syntax unified\n" x)
+#else
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided")
+#endif
 #define NAKED __attribute__((naked))
 
 #if MODERN
