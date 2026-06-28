@@ -274,8 +274,8 @@ const struct PokemonCrySong gPokemonCrySongTemplate =
     .cont = {VOICE, 0}, // part0 jumps here with gotoCmd
     .volCmd = VOL,
     .volumeValue = 127,
-    .unkCmd0D = {XCMD, 0x0D},
-    .unkCmd0DParam = 0,
+    .xadctCmd = {XCMD, 0x0D},
+    .sampleOffsetValue = 0,
     .xreleCmd = {XCMD, xRELE},
     .releaseValue = 0,
     .panCmd = PAN,
@@ -303,5 +303,5 @@ const XcmdFunc gXcmdTable[] =
     ply_xleng,
     ply_xswee,
     ply_xwait,
-    ply_xcmd_0D,
+    ply_xadct,
 };

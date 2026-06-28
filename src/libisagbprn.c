@@ -21,13 +21,13 @@
 #define REG_DEBUG_FLAGS  ((vu16*) (0x4FFF700))
 #define REG_DEBUG_STRING ((char*) (0x4FFF600))
 
-struct AGBPrintStruct
+typedef struct
 {
     u16 m_nRequest;
     u16 m_nBank;
     u16 m_nGet;
     u16 m_nPut;
-};
+} CAGBPrint;
 
 typedef void (*LPFN_PRINT_FLUSH)(void);
 
@@ -39,10 +39,10 @@ void AGBPrintFlush1Block(void);
 
 void AGBPrintInit(void)
 {
-    volatile struct AGBPrintStruct *pPrint = (struct AGBPrintStruct *)AGB_PRINT_STRUCT_ADDR;
-    vu16 *pWSCNT = &REG_WAITCNT;
-    u16 *pProtect = (u16 *)AGB_PRINT_PROTECT_ADDR;
-    u16 nOldWSCNT = *pWSCNT;
+    CAGBPrint *pPrint = (CAGBPrint *)AGB_PRINT_STRUCT_ADDR;
+    volatile u16 *pWSCNT = &REG_WAITCNT;
+    volatile u16 *pProtect = (volatile u16 *)AGB_PRINT_PROTECT_ADDR;
+    volatile u16 nOldWSCNT = *pWSCNT;
     *pWSCNT = WSCNT_DATA;
     *pProtect = 0x20;
     pPrint->m_nRequest = pPrint->m_nGet = pPrint->m_nPut = 0;
@@ -53,10 +53,10 @@ void AGBPrintInit(void)
 
 static void AGBPutcInternal(const char cChr)
 {
-    volatile struct AGBPrintStruct *pPrint = (struct AGBPrintStruct *)AGB_PRINT_STRUCT_ADDR;
-    u16 *pPrintBuf = (u16 *)(0x8000000 + (pPrint->m_nBank << 16));
-    u16 *pProtect = (u16 *)AGB_PRINT_PROTECT_ADDR;
-    u16 nData = pPrintBuf[pPrint->m_nPut / 2];
+    volatile CAGBPrint *pPrint = (CAGBPrint *)AGB_PRINT_STRUCT_ADDR;
+    volatile u16 *pPrintBuf = (volatile u16 *)(0x8000000 + (pPrint->m_nBank << 16));
+    volatile u16 *pProtect = (volatile u16 *)AGB_PRINT_PROTECT_ADDR;
+    volatile u16 nData = pPrintBuf[pPrint->m_nPut / 2];
     *pProtect = 0x20;
     nData = (pPrint->m_nPut & 1) ? (nData & 0xFF) | (cChr << 8) : (nData & 0xFF00) | cChr;
     pPrintBuf[pPrint->m_nPut / 2] = nData;
@@ -66,22 +66,23 @@ static void AGBPutcInternal(const char cChr)
 
 void AGBPutc(const char cChr)
 {
-    vu16 *pWSCNT = &REG_WAITCNT;
-    u16 nOldWSCNT = *pWSCNT;
-    volatile struct AGBPrintStruct *pPrint;
+    volatile u16 *pWSCNT = &REG_WAITCNT;
+    volatile u16 nOldWSCNT = *pWSCNT;
     *pWSCNT = WSCNT_DATA;
     AGBPutcInternal(cChr);
     *pWSCNT = nOldWSCNT;
-    pPrint = (struct AGBPrintStruct *)AGB_PRINT_STRUCT_ADDR;
-    if (pPrint->m_nPut == ((pPrint->m_nGet - 1) & 0xFFFF))
-        AGBPrintFlush1Block();
+    {
+        CAGBPrint *pPrint = (CAGBPrint *)AGB_PRINT_STRUCT_ADDR;
+        if (pPrint->m_nPut == ((pPrint->m_nGet - 1) & 0xFFFF))
+            AGBPrintFlush1Block();
+    }
 }
 
 void AGBPrint(const char *pBuf)
 {
-    volatile struct AGBPrintStruct *pPrint = (struct AGBPrintStruct *)AGB_PRINT_STRUCT_ADDR;
-    vu16 *pWSCNT = &REG_WAITCNT;
-    u16 nOldWSCNT = *pWSCNT;
+    CAGBPrint *pPrint = (CAGBPrint *)AGB_PRINT_STRUCT_ADDR;
+    volatile u16 *pWSCNT = &REG_WAITCNT;
+    volatile u16 nOldWSCNT = *pWSCNT;
     *pWSCNT = WSCNT_DATA;
     while (*pBuf)
     {
@@ -97,9 +98,13 @@ void AGBPrintf(const char *pBuf, ...)
     va_list vArgv;
     va_start(vArgv, pBuf);
     #if (PRETTY_PRINT_HANDLER == PRETTY_PRINT_MINI_PRINTF)
-    mini_vsnprintf(bufPrint, 0x100, pBuf, vArgv);
+    mini_vsnprintf(bufPrint, sizeof(bufPrint), pBuf, vArgv);
     #elif (PRETTY_PRINT_HANDLER == PRETTY_PRINT_LIBC)
-    vsnprintf(bufPrint, 0x100, pBuf, vArgv);
+    #ifdef UBFIX
+    vsnprintf(bufPrint, sizeof(bufPrint), pBuf, vArgv);
+    #else
+    vsprintf(bufPrint, pBuf, vArgv); // Can overflow bufPrint
+    #endif
     #else
     #error "unspecified pretty printing handler."
     #endif
@@ -107,18 +112,18 @@ void AGBPrintf(const char *pBuf, ...)
     AGBPrint(bufPrint);
 }
 
-static void AGBPrintTransferDataInternal(u32 bAllData)
+static void AGBPrintTransferDataInternal(int bAllData)
 {
     LPFN_PRINT_FLUSH lpfnFuncFlush;
-    vu16 *pIME;
-    u16 nIME;
-    vu16 *pWSCNT;
-    u16 nOldWSCNT;
-    u16 *pProtect;
-    volatile struct AGBPrintStruct *pPrint;
+    volatile u16 *pIME;
+    volatile u16 nIME;
+    volatile u16 *pWSCNT;
+    volatile u16 nOldWSCNT;
+    volatile u16 *pProtect;
+    volatile CAGBPrint *pPrint;
 
-    pProtect = (u16 *)AGB_PRINT_PROTECT_ADDR;
-    pPrint = (struct AGBPrintStruct *)AGB_PRINT_STRUCT_ADDR;
+    pProtect = (volatile u16 *)AGB_PRINT_PROTECT_ADDR;
+    pPrint = (CAGBPrint *)AGB_PRINT_STRUCT_ADDR;
     lpfnFuncFlush = (LPFN_PRINT_FLUSH)AGB_PRINT_FLUSH_ADDR;
     pIME = &REG_IME;
     nIME = *pIME;
@@ -157,7 +162,7 @@ void AGBPrintFlush(void)
     AGBPrintTransferDataInternal(TRUE);
 }
 
-void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopProgram)
+void AGBAssert(const char *pFile, int nLine, const char *pExpression, const int nStopProgram)
 {
     if (nStopProgram)
     {
