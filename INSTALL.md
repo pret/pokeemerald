@@ -570,22 +570,33 @@ Otherwise, follow the instructions below to install devkitARM.
 devkitARM is now installed.
 
 ### Installing devkitARM on Debian/Ubuntu-based distributions
-1. If `gdebi-core` is not installed, run the following command:
+
+1. If `wget` is not installed, run the following command:
 
     ```bash
-    sudo apt install gdebi-core
+    sudo apt install wget
     ```
-2. Download the devkitPro pacman package [here](https://github.com/devkitPro/pacman/releases). The file to download is `devkitpro-pacman.amd64.deb`.
-3. Change directory to where the package was downloaded. Then, run the following commands to install devkitARM:
+
+2. Run the following commands to download and install the devkitPro pacman package:
 
     ```bash
-    sudo gdebi devkitpro-pacman.amd64.deb
+    wget -U "dkp-apt" https://apt.devkitpro.org/install-devkitpro-pacman
+    chmod +x ./install-devkitpro-pacman
+    sudo ./install-devkitpro-pacman
+    ```
+    <details>
+        <summary><i>Note...</i></summary>
+
+    > If this step didn't work, consult the installation guide from the devkitPro wiki [here](https://devkitpro.org/wiki/devkitPro_pacman#Debian_and_derivatives). The wiki's instructions should be more reliable and up-to-date.
+    </details>
+
+3. Run the following commands to install devkitARM:
+
+    ```bash
     sudo dkp-pacman -Sy
     sudo dkp-pacman -S gba-dev
     ```
     The last command will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation.
-
-    > Note: `devkitpro-pacman.amd64.deb` is the expected filename of the devkitPro package downloaded (for the first command). If the downloaded package filename differs, then use that filename instead.
 
 4. Run the following command to set devkitPro related environment variables (alternatively, close and re-open the Terminal):
 
