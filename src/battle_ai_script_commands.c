@@ -335,16 +335,16 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves)
     // Ignore moves that aren't possible to use.
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (gBitTable[i] & moveLimitations)
+        if (moveLimitations & gBitTable[i])
             AI_THINKING_STRUCT->score[i] = 0;
 
         AI_THINKING_STRUCT->simulatedRNG[i] = 100 - (Random() % 16);
     }
 
     gBattleResources->AI_ScriptsStack->size = 0;
-    sBattler_AI = gActiveBattler;
 
     // Decide a random target battler in doubles.
+    sBattler_AI = gActiveBattler;
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         gBattlerTarget = (Random() & BIT_FLANK) + BATTLE_OPPOSITE(GetBattlerSide(gActiveBattler));
@@ -448,7 +448,7 @@ static u8 ChooseMoveOrAction_Singles(void)
 static u8 ChooseMoveOrAction_Doubles(void)
 {
     s32 i;
-    s32 j;
+    s32 mostViableTargetsNo;
 #ifndef BUGFIX
     s32 scriptsToRun;
 #else
@@ -462,86 +462,86 @@ static u8 ChooseMoveOrAction_Doubles(void)
     s16 bestMovePointsForTarget[MAX_BATTLERS_COUNT];
     s8 mostViableTargetsArray[MAX_BATTLERS_COUNT];
     u8 actionOrMoveIndex[MAX_BATTLERS_COUNT];
-    u8 mostViableMovesScores[MAX_MON_MOVES];
-    u8 mostViableMovesIndices[MAX_MON_MOVES];
-    s32 mostViableTargetsNo;
-    s32 mostViableMovesNo;
+
     s16 mostMovePoints;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         if (i == sBattler_AI || gBattleMons[i].hp == 0)
         {
-            actionOrMoveIndex[i] = 0xFF;
+            actionOrMoveIndex[i] = -1;
             bestMovePointsForTarget[i] = -1;
+            continue;
+        }
+
+        if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
+            BattleAI_SetupAIData(((gBattleStruct->palaceFlags) & 0xf0) >> MAX_BATTLERS_COUNT);
+        else
+            BattleAI_SetupAIData(ALL_MOVES_MASK);
+
+        gBattlerTarget = i;
+
+        if ((i & BIT_SIDE) != (sBattler_AI & BIT_SIDE))
+            RecordLastUsedMoveByTarget();
+
+        AI_THINKING_STRUCT->aiLogicId = 0;
+        AI_THINKING_STRUCT->movesetIndex = 0;
+        scriptsToRun = AI_THINKING_STRUCT->aiFlags;
+        while (scriptsToRun != 0)
+        {
+            if (scriptsToRun & 1)
+            {
+                AI_THINKING_STRUCT->aiState = AIState_SettingUp;
+                BattleAI_DoAIProcessing();
+            }
+            scriptsToRun >>= 1;
+            AI_THINKING_STRUCT->aiLogicId++;
+            AI_THINKING_STRUCT->movesetIndex = 0;
+        }
+
+        if (AI_THINKING_STRUCT->aiAction & AI_ACTION_FLEE)
+        {
+            actionOrMoveIndex[i] = AI_CHOICE_FLEE;
+        }
+        else if (AI_THINKING_STRUCT->aiAction & AI_ACTION_WATCH)
+        {
+            actionOrMoveIndex[i] = AI_CHOICE_WATCH;
         }
         else
         {
-            if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
-                BattleAI_SetupAIData(gBattleStruct->palaceFlags >> MAX_BATTLERS_COUNT);
-            else
-                BattleAI_SetupAIData(ALL_MOVES_MASK);
-
-            gBattlerTarget = i;
-
-            if ((i & BIT_SIDE) != (sBattler_AI & BIT_SIDE))
-                RecordLastUsedMoveByTarget();
-
-            AI_THINKING_STRUCT->aiLogicId = 0;
-            AI_THINKING_STRUCT->movesetIndex = 0;
-            scriptsToRun = AI_THINKING_STRUCT->aiFlags;
-            while (scriptsToRun != 0)
+            u8 mostViableMovesScores[MAX_MON_MOVES];
+            u8 mostViableMovesIndices[MAX_MON_MOVES];
+            s32 mostViableMovesNo, j;
+            
+            mostViableMovesScores[0] = AI_THINKING_STRUCT->score[0];
+            mostViableMovesIndices[0] = 0;
+            mostViableMovesNo = 1;
+        
+            for (j = 1; j < MAX_MON_MOVES; j++)
             {
-                if (scriptsToRun & 1)
+                if (gBattleMons[sBattler_AI].moves[j] != 0)
                 {
-                    AI_THINKING_STRUCT->aiState = AIState_SettingUp;
-                    BattleAI_DoAIProcessing();
-                }
-                scriptsToRun >>= 1;
-                AI_THINKING_STRUCT->aiLogicId++;
-                AI_THINKING_STRUCT->movesetIndex = 0;
-            }
-
-            if (AI_THINKING_STRUCT->aiAction & AI_ACTION_FLEE)
-            {
-                actionOrMoveIndex[i] = AI_CHOICE_FLEE;
-            }
-            else if (AI_THINKING_STRUCT->aiAction & AI_ACTION_WATCH)
-            {
-                actionOrMoveIndex[i] = AI_CHOICE_WATCH;
-            }
-            else
-            {
-                mostViableMovesScores[0] = AI_THINKING_STRUCT->score[0];
-                mostViableMovesIndices[0] = 0;
-                mostViableMovesNo = 1;
-                for (j = 1; j < MAX_MON_MOVES; j++)
-                {
-                    if (gBattleMons[sBattler_AI].moves[j] != 0)
+                    if (mostViableMovesScores[0] == AI_THINKING_STRUCT->score[j])
                     {
-                        if (mostViableMovesScores[0] == AI_THINKING_STRUCT->score[j])
-                        {
-                            mostViableMovesScores[mostViableMovesNo] = AI_THINKING_STRUCT->score[j];
-                            mostViableMovesIndices[mostViableMovesNo] = j;
-                            mostViableMovesNo++;
-                        }
-                        if (mostViableMovesScores[0] < AI_THINKING_STRUCT->score[j])
-                        {
-                            mostViableMovesScores[0] = AI_THINKING_STRUCT->score[j];
-                            mostViableMovesIndices[0] = j;
-                            mostViableMovesNo = 1;
-                        }
+                        mostViableMovesScores[mostViableMovesNo] = AI_THINKING_STRUCT->score[j];
+                        mostViableMovesIndices[mostViableMovesNo] = j;
+                        mostViableMovesNo++;
+                    }
+                    if (mostViableMovesScores[0] < AI_THINKING_STRUCT->score[j])
+                    {
+                        mostViableMovesScores[0] = AI_THINKING_STRUCT->score[j];
+                        mostViableMovesIndices[0] = j;
+                        mostViableMovesNo = 1;
                     }
                 }
-                actionOrMoveIndex[i] = mostViableMovesIndices[Random() % mostViableMovesNo];
-                bestMovePointsForTarget[i] = mostViableMovesScores[0];
+            }
+            actionOrMoveIndex[i] = mostViableMovesIndices[Random() % mostViableMovesNo];
+            bestMovePointsForTarget[i] = mostViableMovesScores[0];
 
-                // Don't use a move against ally if it has less than 100 points.
-                if (i == BATTLE_PARTNER(sBattler_AI) && bestMovePointsForTarget[i] < 100)
-                {
-                    bestMovePointsForTarget[i] = -1;
-                    mostViableMovesScores[0] = mostViableMovesScores[0]; // Needed to match.
-                }
+            // Don't use a move against ally if it has less than 100 points.
+            if (i == BATTLE_PARTNER(sBattler_AI) && bestMovePointsForTarget[i] < 100)
+            {
+                bestMovePointsForTarget[i] = -1;
             }
         }
     }
@@ -549,13 +549,11 @@ static u8 ChooseMoveOrAction_Doubles(void)
     mostMovePoints = bestMovePointsForTarget[0];
     mostViableTargetsArray[0] = 0;
     mostViableTargetsNo = 1;
-
     for (i = 1; i < MAX_BATTLERS_COUNT; i++)
     {
         if (mostMovePoints == bestMovePointsForTarget[i])
         {
-            mostViableTargetsArray[mostViableTargetsNo] = i;
-            mostViableTargetsNo++;
+            mostViableTargetsArray[mostViableTargetsNo++] = i;
         }
         if (mostMovePoints < bestMovePointsForTarget[i])
         {
@@ -575,8 +573,6 @@ static void BattleAI_DoAIProcessing(void)
     {
         switch (AI_THINKING_STRUCT->aiState)
         {
-            case AIState_DoNotProcess: // Needed to match.
-                break;
             case AIState_SettingUp:
                 gAIScriptPtr = gBattleAI_ScriptsTable[AI_THINKING_STRUCT->aiLogicId]; // set AI ptr to logic ID.
                 if (gBattleMons[sBattler_AI].pp[AI_THINKING_STRUCT->movesetIndex] == 0)
@@ -610,6 +606,8 @@ static void BattleAI_DoAIProcessing(void)
 
                     AI_THINKING_STRUCT->aiAction &= ~(AI_ACTION_DONE);
                 }
+                break;
+            case AIState_DoNotProcess:
                 break;
         }
     }
@@ -662,9 +660,7 @@ void ClearBattlerItemEffectHistory(u8 battler)
 
 static void Cmd_if_random_less_than(void)
 {
-    u16 random = Random();
-
-    if (random % 256 < gAIScriptPtr[1])
+    if (Random() % 256 < gAIScriptPtr[1])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -672,9 +668,7 @@ static void Cmd_if_random_less_than(void)
 
 static void Cmd_if_random_greater_than(void)
 {
-    u16 random = Random();
-
-    if (random % 256 > gAIScriptPtr[1])
+    if (Random() % 256 > gAIScriptPtr[1])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -682,9 +676,7 @@ static void Cmd_if_random_greater_than(void)
 
 static void Cmd_if_random_equal(void)
 {
-    u16 random = Random();
-
-    if (random % 256 == gAIScriptPtr[1])
+    if (Random() % 256 == gAIScriptPtr[1])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -692,9 +684,7 @@ static void Cmd_if_random_equal(void)
 
 static void Cmd_if_random_not_equal(void)
 {
-    u16 random = Random();
-
-    if (random % 256 != gAIScriptPtr[1])
+    if (Random() % 256 != gAIScriptPtr[1])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -712,14 +702,17 @@ static void Cmd_score(void)
 
 static void Cmd_if_hp_less_than(void)
 {
-    u16 battler;
+    u8 battler;
+    u32 hp;
 
     if (gAIScriptPtr[1] == AI_USER)
         battler = sBattler_AI;
     else
         battler = gBattlerTarget;
 
-    if ((u32)(100 * gBattleMons[battler].hp / gBattleMons[battler].maxHP) < gAIScriptPtr[2])
+    hp = gBattleMons[battler].hp * 100 / gBattleMons[battler].maxHP;
+
+    if (hp < gAIScriptPtr[2])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
     else
         gAIScriptPtr += 7;
@@ -727,14 +720,17 @@ static void Cmd_if_hp_less_than(void)
 
 static void Cmd_if_hp_more_than(void)
 {
-    u16 battler;
+    u8 battler;
+    u32 hp;
 
     if (gAIScriptPtr[1] == AI_USER)
         battler = sBattler_AI;
     else
         battler = gBattlerTarget;
 
-    if ((u32)(100 * gBattleMons[battler].hp / gBattleMons[battler].maxHP) > gAIScriptPtr[2])
+    hp = gBattleMons[battler].hp * 100 / gBattleMons[battler].maxHP;
+
+    if (hp > gAIScriptPtr[2])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
     else
         gAIScriptPtr += 7;
@@ -742,14 +738,16 @@ static void Cmd_if_hp_more_than(void)
 
 static void Cmd_if_hp_equal(void)
 {
-    u16 battler;
+    u8 battler;
+    u32 hp;
 
     if (gAIScriptPtr[1] == AI_USER)
         battler = sBattler_AI;
     else
         battler = gBattlerTarget;
 
-    if ((u32)(100 * gBattleMons[battler].hp / gBattleMons[battler].maxHP) == gAIScriptPtr[2])
+    hp = gBattleMons[battler].hp * 100 / gBattleMons[battler].maxHP;
+    if (hp == gAIScriptPtr[2])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
     else
         gAIScriptPtr += 7;
@@ -757,14 +755,17 @@ static void Cmd_if_hp_equal(void)
 
 static void Cmd_if_hp_not_equal(void)
 {
-    u16 battler;
+    u8 battler;
+    u32 hp;
 
     if (gAIScriptPtr[1] == AI_USER)
         battler = sBattler_AI;
     else
         battler = gBattlerTarget;
 
-    if ((u32)(100 * gBattleMons[battler].hp / gBattleMons[battler].maxHP) != gAIScriptPtr[2])
+    hp = gBattleMons[battler].hp * 100 / gBattleMons[battler].maxHP;
+
+    if (hp != gAIScriptPtr[2])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
     else
         gAIScriptPtr += 7;
@@ -772,7 +773,7 @@ static void Cmd_if_hp_not_equal(void)
 
 static void Cmd_if_status(void)
 {
-    u16 battler;
+    u8 battler;
     u32 status;
 
     if (gAIScriptPtr[1] == AI_USER)
@@ -790,7 +791,7 @@ static void Cmd_if_status(void)
 
 static void Cmd_if_not_status(void)
 {
-    u16 battler;
+    u8 battler;
     u32 status;
 
     if (gAIScriptPtr[1] == AI_USER)
@@ -808,7 +809,7 @@ static void Cmd_if_not_status(void)
 
 static void Cmd_if_status2(void)
 {
-    u16 battler;
+    u8 battler;
     u32 status;
 
     if (gAIScriptPtr[1] == AI_USER)
@@ -826,7 +827,7 @@ static void Cmd_if_status2(void)
 
 static void Cmd_if_not_status2(void)
 {
-    u16 battler;
+    u8 battler;
     u32 status;
 
     if (gAIScriptPtr[1] == AI_USER)
@@ -862,7 +863,7 @@ static void Cmd_if_status3(void)
 
 static void Cmd_if_not_status3(void)
 {
-    u16 battler;
+    u8 battler;
     u32 status;
 
     if (gAIScriptPtr[1] == AI_USER)
@@ -880,7 +881,7 @@ static void Cmd_if_not_status3(void)
 
 static void Cmd_if_side_affecting(void)
 {
-    u16 battler;
+    u8 battler;
     u32 side, status;
 
     if (gAIScriptPtr[1] == AI_USER)
@@ -899,8 +900,9 @@ static void Cmd_if_side_affecting(void)
 
 static void Cmd_if_not_side_affecting(void)
 {
-    u16 battler;
-    u32 side, status;
+    u8 battler;
+    u8 side;
+    u32 status;
 
     if (gAIScriptPtr[1] == AI_USER)
         battler = sBattler_AI;
@@ -1186,7 +1188,7 @@ static void Cmd_get_how_powerful_move_is(void)
         && sIgnoredPowerfulMoveEffects[i] == IGNORED_MOVES_END)
     {
         gDynamicBasePower = 0;
-        *(&gBattleStruct->dynamicMoveType) = 0;
+        gBattleStruct->dynamicMoveType = 0;
         gBattleScripting.dmgMultiplier = 1;
         gMoveResultFlags = 0;
         gCritMultiplier = 1;
@@ -1310,10 +1312,8 @@ static void Cmd_count_usable_party_mons(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        u32 position;
         battlerOnField1 = gBattlerPartyIndexes[battler];
-        position = BATTLE_PARTNER(GetBattlerPosition(battler));
-        battlerOnField2 = gBattlerPartyIndexes[GetBattlerAtPosition(position)];
+        battlerOnField2 = gBattlerPartyIndexes[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(battler)))];
     }
     else // In singles there's only one battler by side.
     {
@@ -1427,9 +1427,8 @@ static void Cmd_check_ability(void)
         {
             if (gSpeciesInfo[gBattleMons[battler].species].abilities[1] != ABILITY_NONE)
             {
-                u8 abilityDummyVariable = ability; // Needed to match.
-                if (gSpeciesInfo[gBattleMons[battler].species].abilities[0] != abilityDummyVariable
-                && gSpeciesInfo[gBattleMons[battler].species].abilities[1] != abilityDummyVariable)
+                if (gSpeciesInfo[gBattleMons[battler].species].abilities[0] != gAIScriptPtr[2]
+                && gSpeciesInfo[gBattleMons[battler].species].abilities[1] != gAIScriptPtr[2])
                 {
                     ability = gSpeciesInfo[gBattleMons[battler].species].abilities[0];
                 }
@@ -1572,15 +1571,10 @@ static void Cmd_if_status_in_party(void)
     u32 statusToCompareTo;
     u8 battler;
 
-    switch (gAIScriptPtr[1])
-    {
-    case AI_USER:
+    if (gAIScriptPtr[1] == AI_USER)
         battler = sBattler_AI;
-        break;
-    default:
+    else
         battler = gBattlerTarget;
-        break;
-    }
 
     party = (GetBattlerSide(battler) == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
 
@@ -1609,15 +1603,10 @@ static void Cmd_if_status_not_in_party(void)
     u32 statusToCompareTo;
     u8 battler;
 
-    switch(gAIScriptPtr[1])
-    {
-    case 1:
+    if (gAIScriptPtr[1] == AI_USER)
         battler = sBattler_AI;
-        break;
-    default:
+    else
         battler = gBattlerTarget;
-        break;
-    }
 
     party = (GetBattlerSide(battler) == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
 
@@ -1697,7 +1686,7 @@ static void Cmd_if_stat_level_less_than(void)
 
 static void Cmd_if_stat_level_more_than(void)
 {
-    u32 battler;
+    u8 battler;
 
     if (gAIScriptPtr[1] == AI_USER)
         battler = sBattler_AI;
@@ -1712,7 +1701,7 @@ static void Cmd_if_stat_level_more_than(void)
 
 static void Cmd_if_stat_level_equal(void)
 {
-    u32 battler;
+    u8 battler;
 
     if (gAIScriptPtr[1] == AI_USER)
         battler = sBattler_AI;
@@ -1727,7 +1716,7 @@ static void Cmd_if_stat_level_equal(void)
 
 static void Cmd_if_stat_level_not_equal(void)
 {
-    u32 battler;
+    u8 battler;
 
     if (gAIScriptPtr[1] == AI_USER)
         battler = sBattler_AI;
@@ -2029,8 +2018,8 @@ static void Cmd_flee(void)
 static void Cmd_if_random_safari_flee(void)
 {
     u8 safariFleeRate = gBattleStruct->safariEscapeFactor * 5; // Safari flee rate, from 0-20.
-
-    if ((u8)(Random() % 100) < safariFleeRate)
+    u8 random = Random() % 100;
+    if (random < safariFleeRate)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -2297,7 +2286,7 @@ static bool8 AIStackPop(void)
 {
     if (gBattleResources->AI_ScriptsStack->size != 0)
     {
-        --gBattleResources->AI_ScriptsStack->size;
+        gBattleResources->AI_ScriptsStack->size--;
         gAIScriptPtr = gBattleResources->AI_ScriptsStack->ptr[gBattleResources->AI_ScriptsStack->size];
         return TRUE;
     }
