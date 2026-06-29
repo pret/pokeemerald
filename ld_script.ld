@@ -125,6 +125,7 @@ SECTIONS {
         src/field_message_box.o(.text);
         src/event_object_lock.o(.text);
         src/text_window.o(.text);
+        src/script_vm.o(.text);
         src/script.o(.text);
         src/scrcmd.o(.text);
         src/field_control_avatar.o(.text);
@@ -509,6 +510,7 @@ SECTIONS {
         src/field_player_avatar.o(.rodata);
         src/event_object_movement.o(.rodata);
         src/text_window.o(.rodata);
+        src/script_vm.o(.rodata);
         src/scrcmd.o(.rodata);
         src/field_control_avatar.o(.rodata);
         src/coord_event_weather.o(.rodata);
