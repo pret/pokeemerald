@@ -68,10 +68,8 @@ void RelocateBattleBgPal(u16 paletteNum, u16 *dest, u32 offset, bool8 largeScree
 void ResetBattleAnimBg(bool8 toBG2);
 
 // battle_intro.c
-void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value);
 void DrawBattlerOnBg(int bgId, u8 x, u8 y, u8 battlerPosition, u8 paletteId, u8 *tiles, u16 *tilemap, u16 tilesOffset);
 void HandleIntroSlide(u8 environment);
-int GetAnimBgAttribute(u8 bgId, u8 attributeId);
 
 // battle_anim_mons.c
 void TranslateSpriteInEllipse(struct Sprite *sprite);
@@ -226,6 +224,8 @@ u8 LaunchBallFadeMonTask(bool8 unfadeLater, u8 spritePalNum, u32 selectedPalette
 // battle_anim_utility_funcs.c
 void InitStatsChangeAnimation(u8 taskId);
 void StartMonScrollingBgMask(u8 taskId, int UNUSED unused, u16 scrollSpeed, u8 battler, bool8 includePartner, u8 numFadeSteps, u8 fadeStepDelay, u8 duration, const u32 *gfx, const u32 *tilemap, const u32 *palette);
+void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value);
+int GetAnimBgAttribute(u8 bgId, u8 attributeId);
 
 // battle_anim_effects_1.c
 void SetSpriteNextToMonHead(u8 battler, struct Sprite *sprite);
