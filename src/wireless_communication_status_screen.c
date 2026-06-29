@@ -383,29 +383,53 @@ static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *s
 
 static u32 CountPlayersInGroupAndGetActivity(struct RfuPlayer *player, u32 *groupCounts)
 {
-    int i, j, k;
+    int i, j;
     u32 activity = player->rfu.data.activity;
 
-    #define group_activity(i) (sActivityGroupInfo[(i)][0])
-    #define group_type(i)     (sActivityGroupInfo[(i)][1])
-    #define group_players(i)  (sActivityGroupInfo[(i)][2])
+#define group_activity(i) (sActivityGroupInfo[(i)][0])
+#define group_type(i) (sActivityGroupInfo[(i)][1])
+#define group_players(i) (sActivityGroupInfo[(i)][2])
 
+// GROUPTYPE_NONE is 0xFF, and shouldn't be used as an index into groupCounts.
+// In theory the only activity with this group type (ACTIVITY_SEARCH) wouldn't
+// satisfy the condition below, but not necessarily.
+
+// This UBFix mirrors what Nintendo did to fix this issue in FRLG, which is range checking.
+// By doing type < NUM_GROUPTYPES, we ensure that the type is a valid index into groupCounts.
+#ifdef UBFIX
+    if (player->groupScheduledAnim == UNION_ROOM_SPAWN_IN)
+    {
+        for (i = 0; i < ARRAY_COUNT(sActivityGroupInfo); i++)
+        {
+            u8 type = group_type(i);
+
+            if (type < NUM_GROUPTYPES && activity == group_activity(i))
+            {
+                u8 k = group_players(i);
+                if (k == 0)
+                {
+                    for (j = 0; j < RFU_CHILD_MAX; j++)
+                        if (player->rfu.data.partnerInfo[j] != 0)
+                            k++;
+                    k++;
+                }
+
+                groupCounts[type] += k;
+                break;
+            }
+        }
+    }
+#else
     for (i = 0; i < ARRAY_COUNT(sActivityGroupInfo); i++)
     {
-#ifdef UBFIX
-        // GROUPTYPE_NONE is 0xFF, and shouldn't be used as an index into groupCounts.
-        // In theory the only activity with this group type (ACTIVITY_SEARCH) wouldn't
-        // satisfy the condition below, but not necessarily.
-        if (group_type(i) == GROUPTYPE_NONE)
-            continue;
-#endif
         if (activity == group_activity(i) && player->groupScheduledAnim == UNION_ROOM_SPAWN_IN)
         {
             if (group_players(i) == 0)
             {
-                k = 0;
-                for (j = 0; j < RFU_CHILD_MAX; j++)
-                    if (player->rfu.data.partnerInfo[j] != 0) k++;
+                int k;
+                for (k = 0, j = 0; j < RFU_CHILD_MAX; j++)
+                    if (player->rfu.data.partnerInfo[j] != 0)
+                        k++;
                 k++;
                 groupCounts[group_type(i)] += k;
             }
@@ -415,14 +439,15 @@ static u32 CountPlayersInGroupAndGetActivity(struct RfuPlayer *player, u32 *grou
             }
         }
     }
+#endif
     return activity;
 
-    #undef group_activity
-    #undef group_type
-    #undef group_players
+#undef group_activity
+#undef group_type
+#undef group_players
 }
 
-static bool32 HaveCountsChanged(u32 *currCounts, u32 *prevCounts)
+static bool32 HaveCountsChanged(const u32 *currCounts, u32 *prevCounts)
 {
     s32 i;
     for (i = 0; i < NUM_GROUPTYPES; i++)
@@ -438,11 +463,11 @@ static bool32 UpdateCommunicationCounts(u32 *groupCounts, u32 *prevGroupCounts, 
     bool32 activitiesChanged = FALSE;
     u32 groupCountBuffer[NUM_GROUPTYPES] = {0, 0, 0, 0};
     struct RfuPlayer **players = (void *)gTasks[taskId].data;
-    s32 i;
+    s32 i, activity;
 
     for (i = 0; i < NUM_TASK_DATA; i++)
     {
-        u32 activity = CountPlayersInGroupAndGetActivity(&(*players)[i], groupCountBuffer);
+        activity = CountPlayersInGroupAndGetActivity(&(*players)[i], groupCountBuffer);
         if (activity != activities[i])
         {
             activities[i] = activity;
@@ -450,14 +475,7 @@ static bool32 UpdateCommunicationCounts(u32 *groupCounts, u32 *prevGroupCounts, 
         }
     }
 
-    if (!HaveCountsChanged(groupCountBuffer, prevGroupCounts))
-    {
-        if (activitiesChanged == TRUE)
-            return TRUE;
-        else
-            return FALSE;
-    }
-    else
+    if (HaveCountsChanged(groupCountBuffer, prevGroupCounts))
     {
         memcpy(groupCounts,     groupCountBuffer, sizeof(groupCountBuffer));
         memcpy(prevGroupCounts, groupCountBuffer, sizeof(groupCountBuffer));
@@ -468,4 +486,8 @@ static bool32 UpdateCommunicationCounts(u32 *groupCounts, u32 *prevGroupCounts, 
                                      + groupCounts[GROUPTYPE_TOTAL];
         return TRUE;
     }
+
+    if (activitiesChanged == TRUE)
+        return TRUE;
+    return FALSE; 
 }
