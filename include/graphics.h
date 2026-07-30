@@ -3716,6 +3716,12 @@ extern const u32 gItemIcon_ThickClub[];
 extern const u32 gItemIconPalette_ThickClub[];
 extern const u32 gItemIcon_Stick[];
 extern const u32 gItemIconPalette_Stick[];
+extern const u32 gItemIcon_FlameOrb[];
+extern const u32 gItemIconPalette_FlameOrb[];
+extern const u32 gItemIcon_ToxicOrb[];
+extern const u32 gItemIconPalette_ToxicOrb[];
+extern const u32 gItemIcon_MuscleBand[];
+extern const u32 gItemIconPalette_MuscleBand[];
 // Contest hold items
 extern const u32 gItemIcon_Scarf[];
 extern const u32 gItemIconPalette_RedScarf[];
@@ -3793,6 +3799,7 @@ extern const u32 gItemIconPalette_GroundTMHM[];
 extern const u32 gItemIconPalette_GhostTMHM[];
 extern const u32 gItemIconPalette_RockTMHM[];
 extern const u32 gItemIconPalette_FlyingTMHM[];
+extern const u32 gItemIconPalette_FairyTMHM[];
 extern const u32 gItemIcon_HM[];
 // FireRed/LeafGreen key items
 extern const u32 gItemIcon_OaksParcel[];

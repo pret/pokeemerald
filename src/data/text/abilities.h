@@ -76,6 +76,14 @@ static const u8 sPurePowerDescription[] = _("Raises ATTACK.");
 static const u8 sShellArmorDescription[] = _("Blocks critical hits.");
 static const u8 sCacophonyDescription[] = _("Avoids sound-based moves.");
 static const u8 sAirLockDescription[] = _("Negates weather effects.");
+static const u8 sSlushRushDescription[] = _("Raises SPEED in hail.");
+static const u8 sSandRushDescription[] = _("Raises SPEED in sandstorm.");
+static const u8 sSnowWarningDescription[] = _("Summons hailstorm in battle.");
+static const u8 sToughClawsDescription[] = _("Ups moves that make contact");
+static const u8 sSuperLuckDescription[] = _("Ups Critical strike chance");
+static const u8 sMercilessDescription[] = _("Ups damage if foe is poisoned");
+static const u8 sSkillLinkDescription[] = _("Multi-hit always hit max");
+static const u8 sPoisonHealDescription[] = _("Restores HP if poisoned");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -157,6 +165,14 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_SHELL_ARMOR] = _("SHELL ARMOR"),
     [ABILITY_CACOPHONY] = _("CACOPHONY"),
     [ABILITY_AIR_LOCK] = _("AIR LOCK"),
+    [ABILITY_SLUSH_RUSH] = _("SLUSH RUSH"),
+    [ABILITY_SAND_RUSH] = _("SAND RUSH"),
+    [ABILITY_SNOW_WARNING] = _("SNOW WARNING"),
+    [ABILITY_TOUGH_CLAWS] = _("TOUGH CLAWS"),
+    [ABILITY_SUPER_LUCK] = _("SUPER LUCK"),
+    [ABILITY_MERCILESS] = _("MERCILESS"),
+    [ABILITY_SKILL_LINK] = _("SKILL LINK"),
+    [ABILITY_POISON_HEAL] = _("POISON HEAL"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -239,4 +255,12 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_SHELL_ARMOR] = sShellArmorDescription,
     [ABILITY_CACOPHONY] = sCacophonyDescription,
     [ABILITY_AIR_LOCK] = sAirLockDescription,
+    [ABILITY_SLUSH_RUSH] = sSlushRushDescription,
+    [ABILITY_SAND_RUSH] = sSandRushDescription,
+    [ABILITY_SNOW_WARNING] = sSnowWarningDescription,
+    [ABILITY_TOUGH_CLAWS] = sToughClawsDescription,
+    [ABILITY_SUPER_LUCK] = sSuperLuckDescription,
+    [ABILITY_MERCILESS] = sMercilessDescription,
+    [ABILITY_SKILL_LINK] = sSkillLinkDescription,
+    [ABILITY_POISON_HEAL] = sPoisonHealDescription,
 };

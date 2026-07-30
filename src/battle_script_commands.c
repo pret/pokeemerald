@@ -325,6 +325,7 @@ static void Cmd_removeattackerstatus1(void);
 static void Cmd_finishaction(void);
 static void Cmd_finishturn(void);
 static void Cmd_trainerslideout(void);
+static void Cmd_weightdamagereverse(void);
 
 void (*const gBattleScriptingCommandsTable[])(void) =
 {
@@ -576,7 +577,8 @@ void (*const gBattleScriptingCommandsTable[])(void) =
     [B_SCR_OP_REMOVEATTACKERSTATUS1]           = Cmd_removeattackerstatus1,                   //0xF5
     [B_SCR_OP_FINISHACTION]                    = Cmd_finishaction,                            //0xF6
     [B_SCR_OP_FINISHTURN]                      = Cmd_finishturn,                              //0xF7
-    [B_SCR_OP_TRAINERSLIDEOUT]                 = Cmd_trainerslideout                          //0xF8
+    [B_SCR_OP_TRAINERSLIDEOUT]                 = Cmd_trainerslideout,                         //0xF8
+    [B_SCR_OP_WEIGHTDAMAGEREVERSE]             = Cmd_weightdamagereverse                      //0xF9
 };
 
 struct StatFractions
@@ -1269,6 +1271,7 @@ static void Cmd_critcalc(void)
                 + (gBattleMoves[gCurrentMove].effect == EFFECT_SKY_ATTACK)
                 + (gBattleMoves[gCurrentMove].effect == EFFECT_BLAZE_KICK)
                 + (gBattleMoves[gCurrentMove].effect == EFFECT_POISON_TAIL)
+                + (gBattleMons[gBattlerAttacker].ability == ABILITY_SUPER_LUCK)
                 + (holdEffect == HOLD_EFFECT_SCOPE_LENS)
                 + 2 * (holdEffect == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[gBattlerAttacker].species == SPECIES_CHANSEY)
                 + 2 * (holdEffect == HOLD_EFFECT_STICK && gBattleMons[gBattlerAttacker].species == SPECIES_FARFETCHD);
@@ -7142,6 +7145,10 @@ static void Cmd_setmultihitcounter(void)
     {
         gMultiHitCounter = gBattlescriptCurrInstr[1];
     }
+    if (gBattleMons[gBattlerAttacker].ability == ABILITY_SKILL_LINK)
+    {
+        gMultiHitCounter = (3) + 2;
+    }
     else
     {
         gMultiHitCounter = Random() & 3;
@@ -7404,13 +7411,6 @@ static void Cmd_tryconversiontypechange(void)
     {
         moveType = gBattleMoves[gBattleMons[gBattlerAttacker].moves[moveChecked]].type;
 
-        if (moveType == TYPE_MYSTERY)
-        {
-            if (IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
-                moveType = TYPE_GHOST;
-            else
-                moveType = TYPE_NORMAL;
-        }
         if (moveType != gBattleMons[gBattlerAttacker].types[0]
             && moveType != gBattleMons[gBattlerAttacker].types[1])
         {
@@ -7430,13 +7430,6 @@ static void Cmd_tryconversiontypechange(void)
 
             moveType = gBattleMoves[gBattleMons[gBattlerAttacker].moves[moveChecked]].type;
 
-            if (moveType == TYPE_MYSTERY)
-            {
-                if (IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
-                    moveType = TYPE_GHOST;
-                else
-                    moveType = TYPE_NORMAL;
-            }
         }
         while (moveType == gBattleMons[gBattlerAttacker].types[0] || moveType == gBattleMons[gBattlerAttacker].types[1]);
 
@@ -8906,9 +8899,7 @@ static void Cmd_hiddenpowercalc(void)
 
     // Subtract 3 instead of 1 below because 2 types are excluded (TYPE_NORMAL and TYPE_MYSTERY)
     // The final + 1 skips past Normal, and the following conditional skips TYPE_MYSTERY
-    gBattleStruct->dynamicMoveType = ((NUMBER_OF_MON_TYPES - 3) * typeBits) / 63 + 1;
-    if (gBattleStruct->dynamicMoveType >= TYPE_MYSTERY)
-        gBattleStruct->dynamicMoveType++;
+    gBattleStruct->dynamicMoveType = ((NUMBER_OF_MON_TYPES - 1) * typeBits) / 63 + 1;
     gBattleStruct->dynamicMoveType |= F_DYNAMIC_TYPE_IGNORE_PHYSICALITY | F_DYNAMIC_TYPE_SET;
 
     gBattlescriptCurrInstr++;
@@ -10323,4 +10314,21 @@ static void Cmd_trainerslideout(void)
     MarkBattlerForControllerExec(gActiveBattler);
 
     gBattlescriptCurrInstr += 2;
+}
+
+static void Cmd_weightdamagereverse(void)
+{
+    s32 i;
+    for (i = 0; sWeightToDamageTable[i] != 0xFFFF; i += 2)
+    {
+        if (sWeightToDamageTable[i] > GetPokedexHeightWeight(SpeciesToNationalPokedexNum(gBattleMons[gBattlerAttacker].species), 1))
+            break;
+    }
+
+    if (sWeightToDamageTable[i] != 0xFFFF)
+        gDynamicBasePower = sWeightToDamageTable[i + 1];
+    else
+        gDynamicBasePower = 100;
+
+    gBattlescriptCurrInstr++;
 }

@@ -1417,6 +1417,114 @@ static const u8 sPsychoBoostDescription[] = _(
     "Allows a full-power attack,\n"
     "but sharply lowers SP. ATK.");
 
+static const u8 sOminousWindDescription[] = _(
+    "Creates a gust of repulsive\n"
+    "wind, it may raise all stats.");
+
+static const u8 sShadowClawDescription[] = _(
+    "Slashes with a claw made of\n"
+    "shadows, has high crit ratio.");
+
+static const u8 sShadowSneakDescription[] = _(
+    "Uses it's shadow to attack\n"
+    "this move always goes first.");
+
+static const u8 sHexDescription[] = _(
+    "An intense attack that\n"
+    "may double it's damage.");
+
+static const u8 sHammerArmDescription[] = _(
+    "User smacks with its fist\n"
+    "lowers the user speed.");
+
+static const u8 sLowSweepDescription[] = _(
+    "User attacks the foes legs\n"
+    "lowers the targets speed.");
+
+static const u8 sDrainPunchDescription[] = _(
+    "An energy draining punch\n"
+    "restores hp on hit.");
+
+static const u8 sWingbeatDescription[] = _(
+    "user slams the foe with its\n"
+    "wings, hitting it twice.");
+
+static const u8 sRoostDescription[] = _(
+    "User lands and rests its\n"
+    "body, restoring half its HP.");
+
+static const u8 sCrossPoisonDescription[] = _(
+    "A slash attack that may\n"
+    "also leave the foe poisoned.");
+
+static const u8 sGunkShotDescription[] = _(
+    "Shoots filthy garbage at\n"
+    "the foe, may also poison.");
+
+static const u8 sVenoshockDescription[] = _(
+    "Drenches the foe in poison\n"
+    "may double its damage.");
+
+static const u8 sBulldozeDescription[] = _(
+    "Hits the ground and causes a\n"
+    "tremor that also lowers speed.");
+
+static const u8 sDrillRunDescription[] = _(
+    "Rotates into the foe with its\n"
+    "drill, has high crit chance");
+
+static const u8 sPowerGemDescription[] = _(
+    "Attacks with a ray of light\n"
+    "as if it were made of gems");
+
+static const u8 sRockPolishDescription[] = _(
+    "Polishes its body to reduce\n"    
+    "drag, raising its speed.");
+
+static const u8 sStoneEdgeDescription[] = _(
+    "Stabs the foe with sharp\n"
+    "stones, has high crit chance.");
+
+static const u8 sStruggleBugDescription[] = _(
+    "Struggles against the foe\n"
+    "and attacks, reducing SP.ATK.");
+
+static const u8 sPounceDescription[] = _(
+    "Attacks by pouncing on the\n"
+    "foe, lowering its ATK stat.");
+
+static const u8 sUturnDescription[] = _(
+    "After attacking, the user\n"
+    "switches with a party PKMN");
+
+static const u8 sXscissorDescription[] = _(
+    "User attacks by using its\n"
+    "sharp parts like scissors");
+
+static const u8 sBulletPunchDescription[] = _(
+    "Strikes with a punch as fast\n"
+    "as a bullet, always goes 1st.");
+
+static const u8 sHeavySlamDescription[] = _(
+    "Slams the foe with its body\n"
+    "damage is based on weight");
+    
+static const u8 sIronHeadDescription[] = _(
+    "Slams the foe with its steel\n"
+    "-hard head, may cause flinch.");
+
+static const u8 sLavaPlumeDescription[] = _(
+    "Torches everything around in\n"
+    "a flame inferno, may burn.");
+
+static const u8 sFlameChargeDescription[] = _(
+    "Cloaks the user in flames and\n"
+    "attacks, increases SPEED");
+
+static const u8 sIncinerateDescription[] = _(
+    "Attacks the target with fire\n"
+    "may cause a burn");
+    
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
 {
@@ -1774,4 +1882,31 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_WATER_PULSE - 1] = sWaterPulseDescription,
     [MOVE_DOOM_DESIRE - 1] = sDoomDesireDescription,
     [MOVE_PSYCHO_BOOST - 1] = sPsychoBoostDescription,
+    [MOVE_OMINOUS_WIND - 1] = sOminousWindDescription,
+    [MOVE_SHADOW_CLAW - 1] = sShadowClawDescription,
+    [MOVE_SHADOW_SNEAK - 1] = sShadowSneakDescription,
+    [MOVE_HEX - 1] = sHexDescription,
+    [MOVE_HAMMER_ARM - 1] = sHammerArmDescription,
+    [MOVE_LOW_SWEEP - 1] = sLowSweepDescription,
+    [MOVE_DRAIN_PUNCH - 1] = sDrainPunchDescription,
+    [MOVE_WINGBEAT - 1] = sWingbeatDescription,
+    [MOVE_ROOST - 1] = sRoostDescription,
+    [MOVE_CROSS_POISON - 1] = sCrossPoisonDescription,
+    [MOVE_GUNK_SHOT - 1] = sGunkShotDescription,
+    [MOVE_VENOSHOCK - 1] = sVenoshockDescription,
+    [MOVE_BULLDOZE - 1] = sBulldozeDescription,
+    [MOVE_DRILL_RUN - 1] = sDrillRunDescription,
+    [MOVE_POWER_GEM - 1] = sPowerGemDescription,
+    [MOVE_ROCK_POLISH - 1] = sRockPolishDescription,
+    [MOVE_STONE_EDGE - 1] = sStoneEdgeDescription,
+    [MOVE_STRUGGLE_BUG - 1] = sStruggleBugDescription,
+    [MOVE_POUNCE - 1] = sPounceDescription,
+    [MOVE_UTURN - 1] = sUturnDescription,
+    [MOVE_XSCISSOR - 1] = sXscissorDescription,
+    [MOVE_BULLET_PUNCH - 1] = sBulletPunchDescription,
+    [MOVE_HEAVY_SLAM - 1] = sHeavySlamDescription,
+    [MOVE_IRON_HEAD - 1] = sIronHeadDescription,
+    [MOVE_LAVA_PLUME - 1] = sLavaPlumeDescription,
+    [MOVE_FLAME_CHARGE - 1] = sFlameChargeDescription,
+    [MOVE_INCINERATE - 1] = sIncinerateDescription,
 };

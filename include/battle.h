@@ -463,8 +463,8 @@ STATIC_ASSERT(sizeof(((struct BattleStruct *)0)->palaceFlags) * 8 >= MAX_BATTLER
         typeArg = gBattleMoves[move].type;                            \
 }
 
-#define IS_TYPE_PHYSICAL(moveType) (moveType < TYPE_MYSTERY)
-#define IS_TYPE_SPECIAL(moveType) (moveType > TYPE_MYSTERY)
+#define IS_TYPE_PHYSICAL(moveType) ((moveType == TYPE_NORMAL) || (moveType == TYPE_FIGHTING) || (moveType == TYPE_FLYING) || (moveType == TYPE_GROUND) || (moveType == TYPE_ROCK) || (moveType == TYPE_BUG) || (moveType == TYPE_STEEL) || (moveType == TYPE_DRAGON) || (moveType == TYPE_DARK))
+#define IS_TYPE_SPECIAL(moveType) ((moveType == TYPE_POISON) || (moveType == TYPE_GHOST) || (moveType == TYPE_FIRE) || (moveType == TYPE_WATER) || (moveType == TYPE_GRASS) || (moveType == TYPE_ELECTRIC) || (moveType == TYPE_PSYCHIC) || (moveType == TYPE_ICE) || (moveType == TYPE_FAIRY))
 
 #define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0))
 

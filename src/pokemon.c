@@ -54,7 +54,7 @@
 #define NIGHT_EVO_HOUR_BEGIN     0
 #define NIGHT_EVO_HOUR_END       12
 
-#define FRIENDSHIP_EVO_THRESHOLD 220
+#define FRIENDSHIP_EVO_THRESHOLD 160
 
 struct SpeciesItem
 {
@@ -67,7 +67,6 @@ static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 perso
 static void EncryptBoxMon(struct BoxPokemon *boxMon);
 static void DecryptBoxMon(struct BoxPokemon *boxMon);
 static void Task_PlayMapChosenOrBattleBGM(u8 taskId);
-static bool8 ShouldGetStatBadgeBoost(u16 flagId, u8 battler);
 static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static bool8 ShouldSkipFriendshipChange(void);
 static u8 CopyMonToPC(struct Pokemon *mon);
@@ -3131,6 +3130,19 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     spAttack = attacker->spAttack;
     spDefense = defender->spDefense;
 
+    switch (gBattleMoves[move].effect)
+    {
+        case EFFECT_HEX:
+            if (gBattleMons[gBattlerTarget].status1)
+                gBattleMovePower = gBattleMoves[move].power * 2;
+            break;
+
+        case EFFECT_VENOSHOCK:
+            if (gBattleMons[gBattlerTarget].status1 & STATUS1_PSN_ANY)
+                gBattleMovePower = gBattleMoves[move].power * 2;
+            break;
+    }
+
     // Get attacker hold item info
     if (attacker->item == ITEM_ENIGMA_BERRY)
     {
@@ -3157,15 +3169,6 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
     if (attacker->ability == ABILITY_HUGE_POWER || attacker->ability == ABILITY_PURE_POWER)
         attack *= 2;
-
-    if (ShouldGetStatBadgeBoost(FLAG_BADGE01_GET, battlerIdAtk))
-        attack = (110 * attack) / 100;
-    if (ShouldGetStatBadgeBoost(FLAG_BADGE05_GET, battlerIdDef))
-        defense = (110 * defense) / 100;
-    if (ShouldGetStatBadgeBoost(FLAG_BADGE07_GET, battlerIdAtk))
-        spAttack = (110 * spAttack) / 100;
-    if (ShouldGetStatBadgeBoost(FLAG_BADGE07_GET, battlerIdDef))
-        spDefense = (110 * spDefense) / 100;
 
     // Apply type-bonus hold item
     for (i = 0; i < ARRAY_COUNT(sHoldEffectToType); i++)
@@ -3224,6 +3227,10 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         gBattleMovePower = (150 * gBattleMovePower) / 100;
     if (type == TYPE_BUG && attacker->ability == ABILITY_SWARM && attacker->hp <= (attacker->maxHP / 3))
         gBattleMovePower = (150 * gBattleMovePower) / 100;
+    if (attacker->ability == ABILITY_TOUGH_CLAWS && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)) 
+        gBattleMovePower = (130 * gBattleMovePower) / 100;
+    if (attacker->ability == ABILITY_MERCILESS && (gBattleMons[gBattlerTarget].status1 & STATUS1_PSN_ANY))
+        gBattleMovePower = (150 * gBattleMovePower) / 100;
 
     // Self-destruct / Explosion cut defense in half
     if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
@@ -3280,9 +3287,6 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         if (damage == 0)
             damage = 1;
     }
-
-    if (type == TYPE_MYSTERY)
-        damage = 0; // is ??? type. does 0 damage.
 
     if (IS_TYPE_SPECIAL(type))
     {
@@ -3402,20 +3406,6 @@ u8 CountAliveMonsInBattle(u8 caseId)
     }
 
     return retVal;
-}
-
-static bool8 ShouldGetStatBadgeBoost(u16 badgeFlag, u8 battler)
-{
-    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_FRONTIER))
-        return FALSE;
-    else if (GetBattlerSide(battler) != B_SIDE_PLAYER)
-        return FALSE;
-    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
-        return FALSE;
-    else if (FlagGet(badgeFlag))
-        return TRUE;
-    else
-        return FALSE;
 }
 
 u8 GetDefaultMoveTarget(u8 battler)

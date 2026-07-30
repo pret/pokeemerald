@@ -12,7 +12,7 @@
 #define TYPE_BUG              6
 #define TYPE_GHOST            7
 #define TYPE_STEEL            8
-#define TYPE_MYSTERY          9
+#define TYPE_FAIRY            9
 #define TYPE_FIRE             10
 #define TYPE_WATER            11
 #define TYPE_GRASS            12
@@ -251,7 +251,7 @@
 #define EVO_LEVEL_SHEDINJA   14 // Pokémon reaches the specified level (special value for Shedinja)
 #define EVO_BEAUTY           15 // Pokémon levels up with beauty ≥ specified value
 
-#define EVOS_PER_MON 5
+#define EVOS_PER_MON 8
 
 // Evolution 'modes,' for GetEvolutionTargetSpecies
 #define EVO_MODE_NORMAL     0

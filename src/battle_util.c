@@ -1412,7 +1412,7 @@ u8 DoFieldEndTurnEffects(void)
         case ENDTURN_HAIL:
             if (gBattleWeather & B_WEATHER_HAIL)
             {
-                if (--gWishFutureKnock.weatherDuration == 0)
+                if (!(gBattleWeather & B_WEATHER_HAIL_PERMANENT) && --gWishFutureKnock.weatherDuration == 0)
                 {
                     gBattleWeather &= ~B_WEATHER_HAIL_TEMPORARY;
                     gBattlescriptCurrInstr = BattleScript_SandStormHailEnds;
@@ -1523,7 +1523,18 @@ u8 DoBattlerEndTurnEffects(void)
                 gBattleStruct->turnEffectsTracker++;
                 break;
             case ENDTURN_POISON:  // poison
-                if ((gBattleMons[gActiveBattler].status1 & STATUS1_POISON) && gBattleMons[gActiveBattler].hp != 0)
+                if ((gBattleMons[gActiveBattler].status1 & STATUS1_POISON) && gBattleMons[gActiveBattler].ability == ABILITY_POISON_HEAL)
+                {
+                    if (gBattleMons[gActiveBattler].hp < gBattleMons[gActiveBattler].maxHP)
+                    gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    if (gBattleMons[gActiveBattler].hp + gBattleMoveDamage > gBattleMons[gActiveBattler].maxHP)
+                        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP - gBattleMons[gActiveBattler].hp;
+                    gBattleMoveDamage *= -1;
+                    BattleScriptExecute(BattleScript_ItemHealHP_End2);
+                }
+                else if ((gBattleMons[gActiveBattler].status1 & STATUS1_POISON) && gBattleMons[gActiveBattler].hp != 0)
                 {
                     gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
                     if (gBattleMoveDamage == 0)
@@ -1534,7 +1545,18 @@ u8 DoBattlerEndTurnEffects(void)
                 gBattleStruct->turnEffectsTracker++;
                 break;
             case ENDTURN_BAD_POISON:  // toxic poison
-                if ((gBattleMons[gActiveBattler].status1 & STATUS1_TOXIC_POISON) && gBattleMons[gActiveBattler].hp != 0)
+                if ((gBattleMons[gActiveBattler].status1 & STATUS1_POISON) && gBattleMons[gActiveBattler].ability == ABILITY_POISON_HEAL)
+                {
+                    if (gBattleMons[gActiveBattler].hp < gBattleMons[gActiveBattler].maxHP)
+                    gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    if (gBattleMons[gActiveBattler].hp + gBattleMoveDamage > gBattleMons[gActiveBattler].maxHP)
+                        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP - gBattleMons[gActiveBattler].hp;
+                    gBattleMoveDamage *= -1;
+                    BattleScriptExecute(BattleScript_ItemHealHP_End2);
+                }
+                else if ((gBattleMons[gActiveBattler].status1 & STATUS1_TOXIC_POISON) && gBattleMons[gActiveBattler].hp != 0)
                 {
                     gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
                     if (gBattleMoveDamage == 0)
@@ -2521,6 +2543,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                             effect++;
                         }
                         break;
+                    case WEATHER_SNOW:
+                        if (!(gBattleWeather & B_WEATHER_HAIL))
+                        {
+                            gBattleWeather = B_WEATHER_HAIL;
+                            gBattleScripting.animArg1 = B_ANIM_HAIL_CONTINUES;
+                            gBattleScripting.battler = battler;
+                            effect++;
+                        }
+                        break;
                     }
                 }
                 if (effect != 0)
@@ -2552,6 +2583,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 {
                     gBattleWeather = B_WEATHER_SUN;
                     BattleScriptPushCursorAndCallback(BattleScript_DroughtActivates);
+                    gBattleScripting.battler = battler;
+                    effect++;
+                }
+                break;
+            case ABILITY_SNOW_WARNING:
+                if (!(gBattleWeather & B_WEATHER_HAIL_PERMANENT))
+                {
+                    gBattleWeather = B_WEATHER_HAIL;
+                    BattleScriptPushCursorAndCallback(BattleScript_SnowWarningActivates);
                     gBattleScripting.battler = battler;
                     effect++;
                 }
@@ -3944,13 +3984,21 @@ u8 IsMonDisobedient(void)
         if (FlagGet(FLAG_BADGE08_GET))
             return DISOBEDIENCE_OBEDIENT;
 
-        obedienceLevel = 10;
+        obedienceLevel = 15;
 
+        if (FlagGet(FLAG_BADGE01_GET))
+            obedienceLevel = 25;
         if (FlagGet(FLAG_BADGE02_GET))
             obedienceLevel = 30;
+        if (FlagGet(FLAG_BADGE03_GET))
+            obedienceLevel = 35;
         if (FlagGet(FLAG_BADGE04_GET))
-            obedienceLevel = 50;
+            obedienceLevel = 40;
+        if (FlagGet(FLAG_BADGE05_GET))
+            obedienceLevel = 45;
         if (FlagGet(FLAG_BADGE06_GET))
+            obedienceLevel = 50;
+        if (FlagGet(FLAG_BADGE07_GET))
             obedienceLevel = 70;
     }
 

@@ -332,7 +332,7 @@ static const s8 sCenterToCornerVecXs[8] ={-32, -16, -16, -32, -32};
 // 10 is ×1.0 TYPE_MUL_NORMAL
 // 05 is ×0.5 TYPE_MUL_NOT_EFFECTIVE
 // 00 is ×0.0 TYPE_MUL_NO_EFFECT
-const u8 gTypeEffectiveness[336] =
+const u8 gTypeEffectiveness[372] =
 {
     TYPE_NORMAL, TYPE_ROCK, TYPE_MUL_NOT_EFFECTIVE,
     TYPE_NORMAL, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
@@ -445,6 +445,18 @@ const u8 gTypeEffectiveness[336] =
     TYPE_FORESIGHT, TYPE_FORESIGHT, TYPE_MUL_NO_EFFECT,
     TYPE_NORMAL, TYPE_GHOST, TYPE_MUL_NO_EFFECT,
     TYPE_FIGHTING, TYPE_GHOST, TYPE_MUL_NO_EFFECT,
+    TYPE_FAIRY, TYPE_FIGHTING, TYPE_MUL_SUPER_EFFECTIVE,
+    TYPE_FAIRY, TYPE_DRAGON, TYPE_MUL_SUPER_EFFECTIVE,
+    TYPE_FAIRY, TYPE_DARK, TYPE_MUL_SUPER_EFFECTIVE,
+    TYPE_FAIRY, TYPE_POISON, TYPE_MUL_NOT_EFFECTIVE,
+    TYPE_FAIRY, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
+    TYPE_FAIRY, TYPE_FIRE, TYPE_MUL_NOT_EFFECTIVE,
+    TYPE_FIGHTING, TYPE_FAIRY, TYPE_MUL_NOT_EFFECTIVE,
+    TYPE_POISON, TYPE_FAIRY, TYPE_MUL_SUPER_EFFECTIVE,
+    TYPE_BUG, TYPE_FAIRY, TYPE_MUL_NOT_EFFECTIVE,
+    TYPE_DRAGON, TYPE_FAIRY, TYPE_MUL_NO_EFFECT,
+    TYPE_DARK, TYPE_FAIRY, TYPE_MUL_NOT_EFFECTIVE,
+    TYPE_STEEL, TYPE_FAIRY, TYPE_MUL_SUPER_EFFECTIVE,
     TYPE_ENDTABLE, TYPE_ENDTABLE, TYPE_MUL_NO_EFFECT
 };
 
@@ -459,7 +471,7 @@ const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1] =
     [TYPE_BUG] = _("BUG"),
     [TYPE_GHOST] = _("GHOST"),
     [TYPE_STEEL] = _("STEEL"),
-    [TYPE_MYSTERY] = _("???"),
+    [TYPE_FAIRY] = _("FAIRY"),
     [TYPE_FIRE] = _("FIRE"),
     [TYPE_WATER] = _("WATER"),
     [TYPE_GRASS] = _("GRASS"),
@@ -4604,13 +4616,17 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     if (WEATHER_HAS_EFFECT)
     {
         if ((gBattleMons[battler1].ability == ABILITY_SWIFT_SWIM && gBattleWeather & B_WEATHER_RAIN)
-            || (gBattleMons[battler1].ability == ABILITY_CHLOROPHYLL && gBattleWeather & B_WEATHER_SUN))
+            || (gBattleMons[battler1].ability == ABILITY_CHLOROPHYLL && gBattleWeather & B_WEATHER_SUN)
+            || (gBattleMons[battler1].ability == ABILITY_SLUSH_RUSH && gBattleWeather & B_WEATHER_HAIL)
+            || (gBattleMons[battler1].ability == ABILITY_SAND_RUSH && gBattleWeather & B_WEATHER_SANDSTORM))
             speedMultiplierBattler1 = 2;
         else
             speedMultiplierBattler1 = 1;
 
         if ((gBattleMons[battler2].ability == ABILITY_SWIFT_SWIM && gBattleWeather & B_WEATHER_RAIN)
-            || (gBattleMons[battler2].ability == ABILITY_CHLOROPHYLL && gBattleWeather & B_WEATHER_SUN))
+            || (gBattleMons[battler2].ability == ABILITY_CHLOROPHYLL && gBattleWeather & B_WEATHER_SUN)
+            || (gBattleMons[battler2].ability == ABILITY_SLUSH_RUSH && gBattleWeather & B_WEATHER_HAIL)
+            || (gBattleMons[battler2].ability == ABILITY_SAND_RUSH && gBattleWeather & B_WEATHER_SANDSTORM))
             speedMultiplierBattler2 = 2;
         else
             speedMultiplierBattler2 = 1;
@@ -4634,14 +4650,6 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     {
         holdEffect = GetItemHoldEffect(gBattleMons[battler1].item);
         holdEffectParam = GetItemHoldEffectParam(gBattleMons[battler1].item);
-    }
-
-    // badge boost
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_FRONTIER))
-        && FlagGet(FLAG_BADGE03_GET)
-        && GetBattlerSide(battler1) == B_SIDE_PLAYER)
-    {
-        speedBattler1 = (speedBattler1 * 110) / 100;
     }
 
     if (holdEffect == HOLD_EFFECT_MACHO_BRACE)
@@ -4668,14 +4676,6 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     {
         holdEffect = GetItemHoldEffect(gBattleMons[battler2].item);
         holdEffectParam = GetItemHoldEffectParam(gBattleMons[battler2].item);
-    }
-
-    // badge boost
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_FRONTIER))
-        && FlagGet(FLAG_BADGE03_GET)
-        && GetBattlerSide(battler2) == B_SIDE_PLAYER)
-    {
-        speedBattler2 = (speedBattler2 * 110) / 100;
     }
 
     if (holdEffect == HOLD_EFFECT_MACHO_BRACE)

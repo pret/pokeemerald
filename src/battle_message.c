@@ -430,6 +430,7 @@ static const u8 sText_SpAtk2[] = _("SP. ATK");
 static const u8 sText_SpDef2[] = _("SP. DEF");
 static const u8 sText_Accuracy[] = _("accuracy");
 static const u8 sText_Evasiveness[] = _("evasiveness");
+static const u8 sText_PkmnMadeSnowFall[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nstarted a hailstorm");
 
 const u8 *const gStatNamesTable[NUM_BATTLE_STATS] =
 {
@@ -885,6 +886,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNBOXLANETTESPCFULL - BATTLESTRINGS_TABLE_START] = gText_PkmnTransferredLanettesPCBoxFull,
     [STRINGID_TRAINER1WINTEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer1WinText,
     [STRINGID_TRAINER2WINTEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer2WinText,
+    [STRINGID_PKMNMADESNOWFALL - BATTLESTRINGS_TABLE_START] = sText_PkmnMadeSnowFall,
 };
 
 const u16 gMissStringIds[] =
@@ -1336,7 +1338,7 @@ static const u8 sATypeMove_Table[NUMBER_OF_MON_TYPES][17] =
     [TYPE_BUG]      = _("a BUG move"),
     [TYPE_GHOST]    = _("a GHOST move"),
     [TYPE_STEEL]    = _("a STEEL move"),
-    [TYPE_MYSTERY]  = _("a ??? move"),
+    [TYPE_FAIRY]    = _("a FAIRY move"),
     [TYPE_FIRE]     = _("a FIRE move"),
     [TYPE_WATER]    = _("a WATER move"),
     [TYPE_GRASS]    = _("a GRASS move"),
