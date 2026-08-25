@@ -1339,11 +1339,11 @@ static void PrintSafariMonInfo(u8 healthboxSpriteId, struct Pokemon *mon)
 
     for (j = 1; j < var + 1; j++)
     {
-        spriteTileNum = (gSprites[healthboxSpriteId].oam.tileNum + (j - (j / 8 * 8)) + (j / 8 * 64)) * TILE_SIZE_4BPP;
+        spriteTileNum = (gSprites[healthboxSpriteId].oam.tileNum + (j % 8) + (j / 8 * 64)) * TILE_SIZE_4BPP;
         CpuCopy32(barFontGfx, (void *)(OBJ_VRAM0) + (spriteTileNum), 0x20);
         barFontGfx += 0x20;
 
-        spriteTileNum = (8 + gSprites[healthboxSpriteId].oam.tileNum + (j - (j / 8 * 8)) + (j / 8 * 64)) * TILE_SIZE_4BPP;
+        spriteTileNum = (8 + gSprites[healthboxSpriteId].oam.tileNum + (j % 8) + (j / 8 * 64)) * TILE_SIZE_4BPP;
         CpuCopy32(barFontGfx, (void *)(OBJ_VRAM0) + (spriteTileNum), 0x20);
         barFontGfx += 0x20;
     }
