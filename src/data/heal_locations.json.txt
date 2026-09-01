@@ -11,13 +11,19 @@ static const struct HealLocation sHealLocations[NUM_HEAL_LOCATIONS - 1] = {
 ## endfor
 };
 
-static const u16 sWhiteoutRespawnHealCenterMapIdxs[][2] = {
+#define DEFAULT_POKEMON_CENTER_X 7
+#define DEFAULT_POKEMON_CENTER_Y 4
+
+static const u16 sWhiteoutRespawnHealCenterMapIdxs[][4] = {
 ## for heal_location in heal_locations
 {% if existsIn(heal_location, "respawn_map") %}
-    [{{ heal_location.id }} - 1] = { MAP_GROUP({{ heal_location.respawn_map }}), MAP_NUM({{ heal_location.respawn_map }})},
+    [{{ heal_location.id }} - 1] = { MAP_GROUP({{ heal_location.respawn_map }}), MAP_NUM({{ heal_location.respawn_map }}), {% if existsIn(heal_location, "respawn_x") %}{{ heal_location.respawn_x }}{% else %}DEFAULT_POKEMON_CENTER_X{% endif %}, {% if existsIn(heal_location, "respawn_y") %}{{ heal_location.respawn_y }}{% else %}DEFAULT_POKEMON_CENTER_Y{% endif %}},
 {% endif %}
 ## endfor
 };
+
+#undef DEFAULT_POKEMON_CENTER_X
+#undef DEFAULT_POKEMON_CENTER_Y
 
 static const u8 sWhiteoutRespawnHealerNpcIds[] = {
 ## for heal_location in heal_locations

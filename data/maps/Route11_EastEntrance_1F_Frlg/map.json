@@ -1,0 +1,87 @@
+{
+  "id": "MAP_ROUTE11_EAST_ENTRANCE_1F",
+  "name": "Route11_EastEntrance_1F_Frlg",
+  "layout": "LAYOUT_ENTRANCE_1F",
+  "music": "MUS_RG_VERMILLION",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_ROUTE_11",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
+      "x": 6,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route11_EastEntrance_1F_EventScript_TopGuard",
+      "flag": "0"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
+      "x": 4,
+      "y": 10,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route11_EastEntrance_1F_EventScript_BottomGuard",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 1,
+      "y": 6,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE11",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 1,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE11",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 11,
+      "y": 6,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE11",
+      "dest_warp_id": "2"
+    },
+    {
+      "x": 11,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE11",
+      "dest_warp_id": "2"
+    },
+    {
+      "x": 9,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE11_EAST_ENTRANCE_2F",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

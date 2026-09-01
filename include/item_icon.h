@@ -9,8 +9,9 @@ extern const struct SpriteTemplate gItemIconSpriteTemplate;
 bool8 AllocItemIconTemporaryBuffers(void);
 void FreeItemIconTemporaryBuffers(void);
 void CopyItemIconPicTo4x4Buffer(const void *src, void *dest);
-u8 AddItemIconSprite(u16 tilesTag, u16 paletteTag, u16 itemId);
-u8 AddCustomItemIconSprite(const struct SpriteTemplate *customSpriteTemplate, u16 tilesTag, u16 paletteTag, u16 itemId);
-const void *GetItemIconPicOrPalette(u16 itemId, u8 which);
+u8 AddItemIconSprite(u16 tilesTag, u16 paletteTag, enum Item itemId);
+u8 AddCustomItemIconSprite(const struct SpriteTemplate *customSpriteTemplate, u16 tilesTag, u16 paletteTag, enum Item itemId);
+const void *GetItemIconPic(enum Item itemId);
+const u16 *GetItemIconPalette(enum Item itemId);
 
 #endif //GUARD_ITEM_ICON_H

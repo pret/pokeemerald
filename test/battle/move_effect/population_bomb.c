@@ -1,0 +1,116 @@
+#include "global.h"
+#include "test/battle.h"
+
+ASSUMPTIONS
+{
+    ASSUME(GetMoveEffect(MOVE_POPULATION_BOMB) == EFFECT_POPULATION_BOMB);
+    ASSUME(GetMoveStrikeCount(MOVE_POPULATION_BOMB) == 10);
+    ASSUME(GetMoveAccuracy(MOVE_POPULATION_BOMB) == 90);
+}
+
+SINGLE_BATTLE_TEST("Population Bomb can hit ten times")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_POPULATION_BOMB); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        MESSAGE("The Pokémon was hit 10 times!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Accuracy for Population Bomb is checked independently for each hit")
+{
+    GIVEN {
+        ASSUME(MoveMakesContact(MOVE_POPULATION_BOMB));
+        PLAYER(SPECIES_MACHAMP) { Ability(ABILITY_NO_GUARD); }
+        OPPONENT(SPECIES_OINKOLOGNE) { Ability(ABILITY_LINGERING_AROMA); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_POPULATION_BOMB, WITH_RNG(RNG_ACCURACY, FALSE)); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ABILITY_POPUP(opponent, ABILITY_LINGERING_AROMA);
+        MESSAGE("The Pokémon was hit 1 time!");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+            MESSAGE("The Pokémon was hit 2 times!");
+        }
+    } THEN {
+        EXPECT_EQ(player->ability, ABILITY_LINGERING_AROMA);
+    }
+}
+
+SINGLE_BATTLE_TEST("Accuracy for Population Bomb is only checked for the first hit with Skill Link")
+{
+    PASSES_RANDOMLY(9, 10, RNG_ACCURACY);
+    GIVEN {
+        PLAYER(SPECIES_PIKIPEK) { Ability(ABILITY_SKILL_LINK); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_POPULATION_BOMB); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        MESSAGE("The Pokémon was hit 10 times!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Accuracy for Population Bomb is only checked for the first hit with Loaded Dice")
+{
+    PASSES_RANDOMLY(9, 10, RNG_ACCURACY);
+    GIVEN {
+        ASSUME(GetItemHoldEffect(ITEM_LOADED_DICE) == HOLD_EFFECT_LOADED_DICE);
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_LOADED_DICE); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_POPULATION_BOMB, WITH_RNG(RNG_LOADED_DICE, 4)); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        MESSAGE("The Pokémon was hit 4 times!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Population Bomb with Skill Link ignores Loaded Dice roll and still hits ten times")
+{
+    GIVEN {
+        ASSUME(GetItemHoldEffect(ITEM_LOADED_DICE) == HOLD_EFFECT_LOADED_DICE);
+        PLAYER(SPECIES_PIKIPEK) { Ability(ABILITY_SKILL_LINK); Item(ITEM_LOADED_DICE); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_POPULATION_BOMB, WITH_RNG(RNG_LOADED_DICE, 4)); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POPULATION_BOMB, player);
+        MESSAGE("The Pokémon was hit 10 times!");
+    }
+}

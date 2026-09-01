@@ -1,0 +1,149 @@
+{
+  "id": "MAP_TRAINER_TOWER_5F",
+  "name": "TrainerTower_5F_Frlg",
+  "layout": "LAYOUT_TRAINER_TOWER_5F",
+  "music": "MUS_RG_TRAINER_TOWER",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_TRAINER_TOWER_2",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_TRAINER_TOWER_DUDE",
+      "x": 9,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TrainerTower_EventScript_Owner",
+      "flag": "FLAG_TEMP_6"
+    },
+    {
+      "local_id": "LOCALID_TOWER_TRAINER_DOUBLES1",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
+      "x": 10,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TrainerTower_EventScript_DoublesTrainer1",
+      "flag": "FLAG_TEMP_2"
+    },
+    {
+      "local_id": "LOCALID_TOWER_TRAINER_SINGLES",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_1",
+      "x": 15,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TrainerTower_EventScript_SinglesTrainer",
+      "flag": "FLAG_TEMP_3"
+    },
+    {
+      "local_id": "LOCALID_TOWER_TRAINER_KNOCKOUT",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_2",
+      "x": 10,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TrainerTower_EventScript_KnockoutTrainer",
+      "flag": "FLAG_TEMP_4"
+    },
+    {
+      "local_id": "LOCALID_TOWER_TRAINER_DOUBLES2",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_3",
+      "x": 11,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TrainerTower_EventScript_DoublesTrainer2",
+      "flag": "FLAG_TEMP_5"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 15,
+      "y": 6,
+      "elevation": 3,
+      "dest_map": "MAP_TRAINER_TOWER_6F",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 4,
+      "y": 6,
+      "elevation": 3,
+      "dest_map": "MAP_TRAINER_TOWER_4F",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 13,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_TRAINER_TOWER_ELEVATOR",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 13,
+      "elevation": 3,
+      "var": "VAR_TEMP_E",
+      "var_value": "0",
+      "script": "TrainerTower_EventScript_SingleBattleTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 12,
+      "elevation": 3,
+      "var": "VAR_TEMP_F",
+      "var_value": "0",
+      "script": "TrainerTower_EventScript_DoubleBattleTriggerTop"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 13,
+      "elevation": 3,
+      "var": "VAR_TEMP_F",
+      "var_value": "0",
+      "script": "TrainerTower_EventScript_DoubleBattleTriggerBottom"
+    }
+  ],
+  "bg_events": [
+
+  ]
+}

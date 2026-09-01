@@ -1,0 +1,50 @@
+{
+  "id": "MAP_NAVEL_ROCK_FORK_FRLG",
+  "name": "NavelRock_Fork_Frlg",
+  "layout": "LAYOUT_NAVEL_ROCK_FORK_FRLG",
+  "music": "MUS_RG_SEVII_CAVE",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_NAVEL_ROCK_FRLG",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+
+  ],
+  "warp_events": [
+    {
+      "x": 13,
+      "y": 95,
+      "elevation": 3,
+      "dest_map": "MAP_NAVEL_ROCK_B1F_FRLG",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "elevation": 3,
+      "dest_map": "MAP_NAVEL_ROCK_SUMMIT_PATH_2F",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 26,
+      "y": 1,
+      "elevation": 3,
+      "dest_map": "MAP_NAVEL_ROCK_BASE_PATH_B1F",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+
+  ],
+  "bg_events": [
+
+  ]
+}

@@ -39,7 +39,7 @@ static void EndOnPostEvoMon(u8 taskId);
 #define TAG_SPARKLE 1001
 
 static const u16 sEvoSparkle_Pal[] = INCGFX_U16("graphics/misc/evo_sparkle.png", ".gbapal");
-static const u32 sEvoSparkle_Gfx[] = INCGFX_U32("graphics/misc/evo_sparkle.png", ".4bpp.lz");
+static const u32 sEvoSparkle_Gfx[] = INCGFX_U32("graphics/misc/evo_sparkle.png", ".4bpp.smol");
 
 static const struct CompressedSpriteSheet sEvoSparkleSpriteSheets[] =
 {
@@ -87,8 +87,6 @@ static const struct SpriteTemplate sEvoSparkleSpriteTemplate =
     .paletteTag = TAG_SPARKLE,
     .oam = &sOamData_EvoSparkle,
     .anims = sSpriteAnimTable_EvoSparkle,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_Sparkle_Dummy
 };
 
@@ -157,7 +155,7 @@ static void SpriteCB_Sparkle_SpiralUpward(struct Sprite *sprite)
 
 static void CreateSparkle_SpiralUpward(u8 trigIdx)
 {
-    u8 spriteId = CreateSprite(&sEvoSparkleSpriteTemplate, DISPLAY_WIDTH / 2, 88, 0);
+    u8 spriteId = CreateSpriteUnchecked(&sEvoSparkleSpriteTemplate, DISPLAY_WIDTH / 2, 88, 0);
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].sAmplitude = 48;
@@ -187,7 +185,7 @@ static void SpriteCB_Sparkle_ArcDown(struct Sprite *sprite)
 
 static void CreateSparkle_ArcDown(u8 trigIdx)
 {
-    u8 spriteId = CreateSprite(&sEvoSparkleSpriteTemplate, DISPLAY_WIDTH / 2, 8, 0);
+    u8 spriteId = CreateSpriteUnchecked(&sEvoSparkleSpriteTemplate, DISPLAY_WIDTH / 2, 8, 0);
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].sAmplitude = 8;
@@ -217,7 +215,7 @@ static void SpriteCB_Sparkle_CircleInward(struct Sprite *sprite)
 
 static void CreateSparkle_CircleInward(u8 trigIdx, u8 speed)
 {
-    u8 spriteId = CreateSprite(&sEvoSparkleSpriteTemplate, DISPLAY_WIDTH / 2, 56, 0);
+    u8 spriteId = CreateSpriteUnchecked(&sEvoSparkleSpriteTemplate, DISPLAY_WIDTH / 2, 56, 0);
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].sSpeed = speed;
@@ -267,7 +265,7 @@ static void SpriteCB_Sparkle_Spray(struct Sprite *sprite)
 
 static void CreateSparkle_Spray(u8 id)
 {
-    u8 spriteId = CreateSprite(&sEvoSparkleSpriteTemplate, DISPLAY_WIDTH / 2, 56, 0);
+    u8 spriteId = CreateSpriteUnchecked(&sEvoSparkleSpriteTemplate, DISPLAY_WIDTH / 2, 56, 0);
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].sSpeed = 3 - (Random() % 7);
@@ -412,7 +410,7 @@ static void Task_Sparkles_CircleInward_End(u8 taskId)
 
 #define tSpecies data[2] // Never read
 
-u8 EvolutionSparkles_SprayAndFlash(u16 species)
+u8 EvolutionSparkles_SprayAndFlash(enum Species species)
 {
     u8 taskId = CreateTask(Task_Sparkles_SprayAndFlash_Init, 0);
     gTasks[taskId].tSpecies = species;
@@ -463,7 +461,7 @@ static void Task_Sparkles_SprayAndFlash_End(u8 taskId)
 }
 
 // Separate from EvolutionSparkles_SprayAndFlash for difference in fade color
-u8 EvolutionSparkles_SprayAndFlash_Trade(u16 species)
+u8 EvolutionSparkles_SprayAndFlash_Trade(enum Species species)
 {
     u8 taskId = CreateTask(Task_Sparkles_SprayAndFlashTrade_Init, 0);
     gTasks[taskId].tSpecies = species;

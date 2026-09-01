@@ -3,6 +3,7 @@
   "name": "FallarborTown_Mart",
   "layout": "LAYOUT_MART",
   "music": "MUS_POKE_MART",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_FALLARBOR_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

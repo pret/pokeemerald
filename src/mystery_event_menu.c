@@ -28,8 +28,6 @@ enum {
 static void CB2_MysteryEventMenu(void);
 static void PrintMysteryMenuText(u8 windowId, const u8 *text, u8 x, u8 y, s32 speed);
 
-static EWRAM_DATA u8 sUnused = 0; // set but unused
-
 static const struct BgTemplate sBgTemplates[] =
 {
     {
@@ -151,7 +149,7 @@ static void CB2_MysteryEventMenu(void)
         }
         break;
     case 2:
-        if (!IsTextPrinterActive(WIN_MSG))
+        if (!IsTextPrinterActiveOnWindow(WIN_MSG))
         {
             gMain.state++;
             gLinkType = LINKTYPE_MYSTERY_EVENT;
@@ -173,7 +171,7 @@ static void CB2_MysteryEventMenu(void)
         }
         break;
     case 4:
-        if (!IsTextPrinterActive(WIN_MSG))
+        if (!IsTextPrinterActiveOnWindow(WIN_MSG))
             gMain.state++;
         break;
     case 5:
@@ -237,7 +235,7 @@ static void CB2_MysteryEventMenu(void)
         }
         break;
     case 7:
-        if (!IsTextPrinterActive(WIN_MSG))
+        if (!IsTextPrinterActiveOnWindow(WIN_MSG))
             gMain.state++;
         break;
     case 8:
@@ -255,12 +253,17 @@ static void CB2_MysteryEventMenu(void)
         gMain.state++;
         break;
     case 11:
-        if (gReceivedRemoteLinkPlayers == 0)
+        if (!gReceivedRemoteLinkPlayers)
         {
+            // No clue what is going on here, and from where gDecompressionBuffer gets actually populated with mystery event script.
+            /*
+            // WHEN THIS CODE BLOCK GETS REMOVED, DELETE THE RunMysteryEventScript FUNCTION
             u16 status = RunMysteryEventScript(gDecompressionBuffer);
             CpuFill32(0, gDecompressionBuffer, 0x7D4);
+
             if (!GetEventLoadMessage(gStringVar4, status))
                 TrySavingData(SAVE_NORMAL);
+            */
             gMain.state++;
         }
         break;
@@ -269,11 +272,8 @@ static void CB2_MysteryEventMenu(void)
         gMain.state++;
         break;
     case 13:
-        if (!IsTextPrinterActive(WIN_MSG))
-        {
+        if (!IsTextPrinterActiveOnWindow(WIN_MSG))
             gMain.state++;
-            sUnused = 0;
-        }
         break;
     case 14:
         if (JOY_NEW(A_BUTTON))

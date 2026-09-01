@@ -3,6 +3,7 @@
   "name": "BattleColosseum_2P",
   "layout": "LAYOUT_BATTLE_COLOSSEUM_2P",
   "music": "MUS_EVER_GRANDE",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_DYNAMIC",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

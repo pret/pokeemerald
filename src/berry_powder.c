@@ -55,9 +55,6 @@ static const struct BgTemplate UNUSED sBerryPowderBgTemplates[] =
     },
 };
 
-// ? Part of the BG templates?
-static const u32 UNUSED sUnknown[] = {0xFF, 0x00};
-
 static const struct WindowTemplate UNUSED sBerryPowderWindowTemplates[] =
 {
     {

@@ -12,7 +12,7 @@
 #include "sprite.h"
 #include "text.h"
 
-EWRAM_DATA bool8 gUnusedBikeCameraAheadPanback = FALSE;
+//EWRAM_DATA bool8 gUnusedBikeCameraAheadPanback = FALSE;   //  Old EWRAM variable that was never set to anything other than false
 
 struct FieldCameraOffset
 {
@@ -230,14 +230,14 @@ static void DrawMetatileAt(const struct MapLayout *mapLayout, u16 offset, int x,
 
     if (metatileId > NUM_METATILES_TOTAL)
         metatileId = 0;
-    if (metatileId < NUM_METATILES_IN_PRIMARY)
+    if (metatileId < GetNumMetatilesInPrimary(mapLayout))
     {
         metatiles = mapLayout->primaryTileset->metatiles;
     }
     else
     {
         metatiles = mapLayout->secondaryTileset->metatiles;
-        metatileId -= NUM_METATILES_IN_PRIMARY;
+        metatileId -= GetNumMetatilesInPrimary(mapLayout);
     }
     DrawMetatile(MapGridGetMetatileLayerTypeAt(x, y), metatiles + metatileId * NUM_TILES_PER_METATILE, offset);
 }
@@ -357,6 +357,69 @@ u32 InitCameraUpdateCallback(u8 trackedSpriteId)
     return 0;
 }
 
+void CameraUpdateNoObjectRefresh(void)
+{
+    int deltaX;
+    int deltaY;
+    int curMovementOffsetY;
+    int curMovementOffsetX;
+    int movementSpeedX;
+    int movementSpeedY;
+
+    if (gFieldCamera.callback != NULL)
+        gFieldCamera.callback(&gFieldCamera);
+    movementSpeedX = gFieldCamera.movementSpeedX;
+    movementSpeedY = gFieldCamera.movementSpeedY;
+    deltaX = 0;
+    deltaY = 0;
+    curMovementOffsetX = gFieldCamera.x;
+    curMovementOffsetY = gFieldCamera.y;
+
+
+    if (curMovementOffsetX == 0 && movementSpeedX != 0)
+    {
+        if (movementSpeedX > 0)
+            deltaX = 1;
+        else
+            deltaX = -1;
+    }
+    if (curMovementOffsetY == 0 && movementSpeedY != 0)
+    {
+        if (movementSpeedY > 0)
+            deltaY = 1;
+        else
+            deltaY = -1;
+    }
+    if (curMovementOffsetX != 0 && curMovementOffsetX == -movementSpeedX)
+    {
+        if (movementSpeedX > 0)
+            deltaX = 1;
+        else
+            deltaX = -1;
+    }
+    if (curMovementOffsetY != 0 && curMovementOffsetY == -movementSpeedY)
+    {
+        if (movementSpeedY > 0)
+            deltaX = 1;
+        else
+            deltaX = -1;
+    }
+
+    gFieldCamera.x += movementSpeedX;
+    gFieldCamera.x %= 16;
+    gFieldCamera.y += movementSpeedY;
+    gFieldCamera.y %= 16;
+
+    if (deltaX != 0 || deltaY != 0)
+    {
+        CameraMove(deltaX, deltaY);
+        AddCameraTileOffset(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
+        RedrawMapSlicesForCameraUpdate(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
+    }
+
+    AddCameraPixelOffset(&sFieldCameraOffset, movementSpeedX, movementSpeedY);
+}
+
 void CameraUpdate(void)
 {
     int deltaX;
@@ -418,20 +481,12 @@ void CameraUpdate(void)
         SetBerryTreesSeen();
         AddCameraTileOffset(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
         RedrawMapSlicesForCameraUpdate(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
+        TryDespawnOWEsCrossingMapConnection();
     }
 
     AddCameraPixelOffset(&sFieldCameraOffset, movementSpeedX, movementSpeedY);
     gTotalCameraPixelOffsetX -= movementSpeedX;
     gTotalCameraPixelOffsetY -= movementSpeedY;
-}
-
-void MoveCameraAndRedrawMap(int deltaX, int deltaY) //unused
-{
-    CameraMove(deltaX, deltaY);
-    UpdateObjectEventsForCameraUpdate(deltaX, deltaY);
-    DrawWholeMapView();
-    gTotalCameraPixelOffsetX -= deltaX * 16;
-    gTotalCameraPixelOffsetY -= deltaY * 16;
 }
 
 void SetCameraPanningCallback(void (*callback)(void))
@@ -464,6 +519,11 @@ void UpdateCameraPanning(void)
 
 static void CameraPanningCB_PanAhead(void)
 {
+    InstallCameraPanAheadCallback();
+    //  Old code kept for archival purposes
+    //  The else condition could never run since gUnusedBikeCameraAheadPanback was never set to TRUE
+    //  So the behavior should not change
+    /*
     u8 var;
 
     if (gUnusedBikeCameraAheadPanback == FALSE)
@@ -504,4 +564,5 @@ static void CameraPanningCB_PanAhead(void)
             sVerticalCameraPan -= 2;
         }
     }
+    */
 }

@@ -21,6 +21,7 @@ bool8 UpdateRevealDisguise(struct ObjectEvent *objectEvent);
 void StartRevealDisguise(struct ObjectEvent *objectEvent);
 void StartAshFieldEffect(s16 x, s16 y, u16 metatileId, s16 delay);
 void SetUpReflection(struct ObjectEvent *objectEvent, struct Sprite *sprite, bool8 stillReflection);
+void SetUpShadow(struct ObjectEvent *objectEvent);
 u32 StartFieldEffectForObjectEvent(u8 fieldEffectId, struct ObjectEvent *objectEvent);
 u8 FindTallGrassFieldEffectSpriteId(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y);
 void UpdateRayquazaSpotlightEffect(struct Sprite *sprite);
@@ -40,6 +41,8 @@ void UpdateHotSpringsWaterFieldEffect(struct Sprite *sprite);
 void UpdateBubblesFieldEffect(struct Sprite *sprite);
 void UpdateSparkleFieldEffect(struct Sprite *sprite);
 void SetSpriteInvisible(u8 spriteId);
-void ShowWarpArrowSprite(u8 spriteId, u8 direction, s16 x, s16 y);
+void ShowWarpArrowSprite(u8 spriteId, enum Direction direction, s16 x, s16 y);
+
+u32 FldEff_TallGrass(void);
 
 #endif //GUARD_FIELD_EFFECT_HELPERS_H

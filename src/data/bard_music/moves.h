@@ -3,7 +3,7 @@
 
 #include "constants/moves.h"
 
-const u16 gNumBardWords_Moves = MOVES_COUNT;
+const enum Move gNumBardWords_Moves = MOVES_COUNT;
 
 static const struct BardSoundTemplate sBardSoundTemplates_Moves[MOVES_COUNT][MAX_BARD_SOUNDS_PER_WORD] = {
     [MOVE_NONE] = {
@@ -94,7 +94,7 @@ static const struct BardSoundTemplate sBardSoundTemplates_Moves[MOVES_COUNT][MAX
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    [MOVE_VICE_GRIP] = {
+    [MOVE_VISE_GRIP] = {
         { .songId = PHONEME_ID(PH_PRICE_SOLO) },
         { .songId = PHONEME_ID(PH_KIT_SOLO) },
         PREV_BARD_SOUND,
@@ -1094,7 +1094,7 @@ static const struct BardSoundTemplate sBardSoundTemplates_Moves[MOVES_COUNT][MAX
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    [MOVE_HI_JUMP_KICK] = {
+    [MOVE_HIGH_JUMP_KICK] = {
         { .songId = PHONEME_ID(PH_PRICE_BLEND) },
         { .songId = PHONEME_ID(PH_STRUT_SOLO) },
         { .songId = PHONEME_ID(PH_KIT_SOLO) },
@@ -1486,7 +1486,7 @@ static const struct BardSoundTemplate sBardSoundTemplates_Moves[MOVES_COUNT][MAX
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    [MOVE_FAINT_ATTACK] = {
+    [MOVE_FEINT_ATTACK] = {
         { .songId = PHONEME_ID(PH_FACE_BLEND) },
         { .songId = PHONEME_ID(PH_STRUT_BLEND) },
         { .songId = PHONEME_ID(PH_TRAP_BLEND) },
@@ -2126,7 +2126,7 @@ static const struct BardSoundTemplate sBardSoundTemplates_Moves[MOVES_COUNT][MAX
         NULL_BARD_SOUND,
         NULL_BARD_SOUND,
     },
-    [MOVE_SMELLING_SALT] = {
+    [MOVE_SMELLING_SALTS] = {
         { .songId = PHONEME_ID(PH_DRESS_BLEND) },
         { .songId = PHONEME_ID(PH_FLEECE_BLEND) },
         { .songId = PHONEME_ID(PH_THOUGHT_BLEND) },

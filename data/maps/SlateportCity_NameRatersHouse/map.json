@@ -3,6 +3,7 @@
   "name": "SlateportCity_NameRatersHouse",
   "layout": "LAYOUT_HOUSE_WITH_BED",
   "music": "MUS_SLATEPORT",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_SLATEPORT_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

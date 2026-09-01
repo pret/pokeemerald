@@ -1,0 +1,57 @@
+{
+  "id": "MAP_SIX_ISLAND_DOTTED_HOLE_1F",
+  "name": "SixIsland_DottedHole_1F_Frlg",
+  "layout": "LAYOUT_SIX_ISLAND_DOTTED_HOLE_1F",
+  "music": "MUS_RG_SEVII_DUNGEON",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_DOTTED_HOLE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": true,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+
+  ],
+  "warp_events": [
+    {
+      "x": 6,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_RUIN_VALLEY",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 6,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_DOTTED_HOLE_B1F",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 13,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_DOTTED_HOLE_SAPPHIRE_ROOM",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 6,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_DOTTED_HOLE_B1F",
+      "dest_warp_id": "2"
+    }
+  ],
+  "coord_events": [
+
+  ],
+  "bg_events": [
+
+  ]
+}

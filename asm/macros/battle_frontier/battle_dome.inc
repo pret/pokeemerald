@@ -57,7 +57,7 @@
 	special CallBattleDomeFunction
 	.endm
 
-	@ Sets gTrainerBattleOpponent_A to the trainer ID of the next opponent
+	@ Sets gTrainerBattleParameter.params.opponentA to the trainer ID of the next opponent
 	.macro dome_setopponent
 	setvar VAR_0x8004, BATTLE_DOME_FUNC_SET_OPPONENT_ID
 	special CallBattleDomeFunction

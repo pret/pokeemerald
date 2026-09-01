@@ -1,0 +1,67 @@
+{
+  "id": "MAP_SIX_ISLAND_DOTTED_HOLE_B2F",
+  "name": "SixIsland_DottedHole_B2F_Frlg",
+  "layout": "LAYOUT_SIX_ISLAND_DOTTED_HOLE_B2F",
+  "music": "MUS_RG_SEVII_DUNGEON",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_DOTTED_HOLE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": true,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 6,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_DOTTED_HOLE_B1F",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 6,
+      "y": 1,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_DOTTED_HOLE_1F",
+      "dest_warp_id": "3"
+    },
+    {
+      "x": 11,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_DOTTED_HOLE_1F",
+      "dest_warp_id": "3"
+    },
+    {
+      "x": 6,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_DOTTED_HOLE_1F",
+      "dest_warp_id": "3"
+    },
+    {
+      "x": 1,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_SIX_ISLAND_DOTTED_HOLE_B3F",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 5,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "SixIsland_DottedHole_B2F_EventScript_BrailleLeft"
+    }
+  ]
+}

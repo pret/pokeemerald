@@ -3,6 +3,7 @@
   "name": "SlateportCity_Harbor",
   "layout": "LAYOUT_HARBOR",
   "music": "MUS_SLATEPORT",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_SLATEPORT_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

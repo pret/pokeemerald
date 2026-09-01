@@ -3,6 +3,7 @@
   "name": "SlateportCity_OceanicMuseum_1F",
   "layout": "LAYOUT_SLATEPORT_CITY_OCEANIC_MUSEUM_1F",
   "music": "MUS_OCEANIC_MUSEUM",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_SLATEPORT_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

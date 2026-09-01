@@ -26,9 +26,11 @@ static u8 sInitialLoadId; // Never read
 
 const u16 gConditionGraphData_Pal[] = INCGFX_U16("graphics/pokenav/condition/graph_data.pal", ".gbapal");
 const u16 gConditionText_Pal[] = INCGFX_U16("graphics/pokenav/condition/text.pal", ".gbapal");
-static const u32 sConditionGraphData_Gfx[] = INCGFX_U32("graphics/pokenav/condition/graph_data.png", ".4bpp.lz");
-static const u32 sConditionGraphData_Tilemap[] = INCGFX_U32("graphics/pokenav/condition/graph_data.bin", ".lz");
+static const u32 sConditionGraphData_Gfx[] = INCGFX_U32("graphics/pokenav/condition/graph_data.png", ".4bpp.smol");
+static const u32 sConditionGraphData_Tilemap[] = INCGFX_U32("graphics/pokenav/condition/graph_data.bin", ".smolTM");
 static const u16 sMonMarkings_Pal[] = INCGFX_U16("graphics/pokenav/condition/mon_markings.pal", ".gbapal");
+
+static const u8 gText_Number2[] = _("No. ");
 
 static const struct BgTemplate sMenuBgTemplates[3] =
 {
@@ -220,7 +222,7 @@ static u32 LoopedTask_OpenConditionGraphMenu(s32 state)
          if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
 
-        LZ77UnCompVram(gPokenavCondition_Tilemap, menu->tilemapBuffers[0]);
+        DecompressDataWithHeaderVram(gPokenavCondition_Tilemap, menu->tilemapBuffers[0]);
         SetBgTilemapBuffer(3, menu->tilemapBuffers[0]);
         if (IsConditionMenuSearchMode() == TRUE)
             CopyToBgTilemapBufferRect(3, gPokenavOptions_Tilemap, 0, 5, 9, 4);
@@ -234,7 +236,7 @@ static u32 LoopedTask_OpenConditionGraphMenu(s32 state)
         if (FreeTempTileDataBuffersIfPossible())
             return LT_PAUSE;
 
-        LZ77UnCompVram(sConditionGraphData_Tilemap, menu->tilemapBuffers[2]);
+        DecompressDataWithHeaderVram(sConditionGraphData_Tilemap, menu->tilemapBuffers[2]);
         SetBgTilemapBuffer(2, menu->tilemapBuffers[2]);
         CopyBgTilemapBufferToVram(2);
         CopyPaletteIntoBufferUnfaded(gConditionGraphData_Pal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
@@ -579,16 +581,20 @@ static bool32 UpdateConditionGraphMenuWindows(u8 mode, u16 bufferIndex, bool8 wi
     case 2:
         if (IsConditionMenuSearchMode() == TRUE)
         {
+            u32 i = 0;
             str = GetConditionMonLocationText(bufferIndex);
             AddTextPrinterParameterized(menu->nameGenderWindowId, FONT_NORMAL, str, 0, 17, 0, NULL);
-            text[0] = EXT_CTRL_CODE_BEGIN;
-            text[1] = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
-            text[2] = TEXT_COLOR_BLUE;
-            text[3] = TEXT_COLOR_TRANSPARENT;
-            text[4] = TEXT_COLOR_LIGHT_BLUE;
-            StringCopy(&text[5], gText_Number2);
+            text[i++] = EXT_CTRL_CODE_BEGIN;
+            text[i++] = EXT_CTRL_CODE_BACKGROUND;
+            text[i++] = TEXT_COLOR_TRANSPARENT;
+            text[i++] = EXT_CTRL_CODE_BEGIN;
+            text[i++] = EXT_CTRL_CODE_TEXT_COLORS;
+            text[i++] = TEXT_COLOR_BLUE;
+            text[i++] = TEXT_COLOR_LIGHT_BLUE;
+            text[i++] = TEXT_COLOR_TRANSPARENT;
+            StringCopy(&text[i], gText_Number2);
             AddTextPrinterParameterized(menu->listIndexWindowId, FONT_NORMAL, text, 4, 1, 0, NULL);
-            ConvertIntToDecimalStringN(&text[5], GetConditionMonDataBuffer(), STR_CONV_MODE_RIGHT_ALIGN, 4);
+            ConvertIntToDecimalStringN(&text[i], GetConditionMonDataBuffer(), STR_CONV_MODE_RIGHT_ALIGN, 4);
             AddTextPrinterParameterized(menu->listIndexWindowId, FONT_NORMAL, text, 28, 1, 0, NULL);
         }
         break;
@@ -689,7 +695,7 @@ static void CreateMonMarkingsOrPokeballIndicators(void)
         // Add icons for occupied slots
         for (i = 0; i < GetMonListCount() - 1; i++)
         {
-            spriteId = CreateSprite(&sprTemplate, 226, (i * 20) + 8, 0);
+            spriteId = CreateSpriteUnchecked(&sprTemplate, 226, (i * 20) + 8, 0);
             if (spriteId != MAX_SPRITES)
             {
                 menu->partyPokeballSpriteIds[i] = spriteId;
@@ -707,7 +713,7 @@ static void CreateMonMarkingsOrPokeballIndicators(void)
         sprTemplate.callback = SpriteCallbackDummy;
         for (; i < PARTY_SIZE; i++)
         {
-            spriteId = CreateSprite(&sprTemplate, 230, (i * 20) + 8, 0);
+            spriteId = CreateSpriteUnchecked(&sprTemplate, 230, (i * 20) + 8, 0);
             if (spriteId != MAX_SPRITES)
             {
                 menu->partyPokeballSpriteIds[i] = spriteId;
@@ -722,7 +728,7 @@ static void CreateMonMarkingsOrPokeballIndicators(void)
         // Add cancel icon
         sprTemplate.tileTag = TAG_CONDITION_CANCEL;
         sprTemplate.callback = HighlightCurrentPartyIndexPokeball;
-        spriteId = CreateSprite(&sprTemplate, 222, (i * 20) + 8, 0);
+        spriteId = CreateSpriteUnchecked(&sprTemplate, 222, (i * 20) + 8, 0);
         if (spriteId != MAX_SPRITES)
         {
             menu->partyPokeballSpriteIds[i] = spriteId;
@@ -816,7 +822,7 @@ static void CreateConditionMonPic(u8 id)
         sprPal.data = GetConditionMonPal(id);
         menu->monPalIndex = LoadSpritePalette(&sprPal);
         menu->monGfxTileStart = LoadSpriteSheet(&sprSheet);
-        spriteId = CreateSprite(&sprTemplate, 38, 104, 0);
+        spriteId = CreateSpriteUnchecked(&sprTemplate, 38, 104, 0);
         menu->monPicSpriteId = spriteId;
         if (spriteId == MAX_SPRITES)
         {

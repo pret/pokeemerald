@@ -45,6 +45,10 @@ SUPER_ER    = 2C
 LV          = 34
 '='         = 35
 ';'         = 36
+V_D_ARROW   = 38
+NBSP        = 39
+'~'         = 39
+ZWS         = 3A
 '¿'         = 51
 '¡'         = 52
 PK          = 53
@@ -79,6 +83,7 @@ SUPER_RE    = A0
 '?'         = AC
 '.'         = AD
 '-'         = AE
+'_'         = AE @ For autogenerating strings based on label names. Not using {UNDERSCORE} on purpose due to how bad it looks.
 '·'         = AF
 '…'         = B0
 '“'         = B1
@@ -152,6 +157,7 @@ SUPER_RE    = A0
 'ä'         = F4
 'ö'         = F5
 'ü'         = F6
+EMOJI_DIZZYEGG = F7
 TALL_PLUS   = FC 0C FB
 '$'         = FF
 
@@ -345,6 +351,7 @@ ARCHIE         = FD 0A
 MAXIE          = FD 0B
 KYOGRE         = FD 0C
 GROUDON        = FD 0D
+REGION         = FD 0E
 
 @ battle string placeholders
 
@@ -366,15 +373,15 @@ B_ATK_PARTNER_NAME = FD 0E
 B_ATK_NAME_WITH_PREFIX = FD 0F
 B_DEF_NAME_WITH_PREFIX = FD 10
 B_EFF_NAME_WITH_PREFIX = FD 11 @ EFF = short for gEffectBattler
-B_ACTIVE_NAME_WITH_PREFIX = FD 12
-B_SCR_ACTIVE_NAME_WITH_PREFIX = FD 13
+@ FD 12 - previously gActiveBattler with prefix
+B_SCR_NAME_WITH_PREFIX = FD 13
 B_CURRENT_MOVE = FD 14
 B_LAST_MOVE = FD 15
 B_LAST_ITEM = FD 16
 B_LAST_ABILITY = FD 17
 B_ATK_ABILITY = FD 18
 B_DEF_ABILITY = FD 19
-B_SCR_ACTIVE_ABILITY = FD 1A
+B_SCR_ABILITY = FD 1A
 B_EFF_ABILITY = FD 1B
 B_TRAINER1_CLASS = FD 1C
 B_TRAINER1_NAME = FD 1D
@@ -401,6 +408,26 @@ B_TRAINER2_WIN_TEXT = FD 31
 B_PARTNER_CLASS = FD 32
 B_PARTNER_NAME = FD 33
 B_BUFF3 = FD 34
+B_ATK_TRAINER_NAME = FD 35
+B_ATK_TRAINER_CLASS = FD 36
+B_ATK_TEAM1 = FD 37
+B_ATK_TEAM2 = FD 38
+B_DEF_NAME = FD 39
+B_DEF_TEAM1 = FD 3A
+B_DEF_TEAM2 = FD 3B
+B_DEF_PARTNER_NAME = FD 3C
+@ FD 3C - preiously gActiveBattler
+@ FD 3D - preiously gActiveBattler without Illusion Check
+B_ATK_NAME_WITH_PREFIX2 = FD 3E
+B_DEF_NAME_WITH_PREFIX2 = FD 3F
+B_EFF_NAME_WITH_PREFIX2 = FD 40
+B_SCR_NAME_WITH_PREFIX2 = FD 41
+B_TRAINER1_NAME_WITH_CLASS = FD 42
+B_TRAINER2_NAME_WITH_CLASS = FD 43
+B_PARTNER_NAME_WITH_CLASS = FD 44
+B_ATK_TRAINER_NAME_WITH_CLASS = FD 45
+B_EFF_TEAM1 = FD 46
+B_EFF_TEAM2 = FD 47
 
 @ indicates the end of a town/city name (before " TOWN" or " CITY")
 NAME_END = FC 00
@@ -410,10 +437,10 @@ DYNAMIC = F7
 
 @ more text functions
 
-COLOR = FC 01 @ use a color listed below right after
-HIGHLIGHT = FC 02 @ same as fc 01
-SHADOW = FC 03 @ same as fc 01
-COLOR_HIGHLIGHT_SHADOW = FC 04 @ takes 3 bytes
+COLOR = FC 01 @ use a color listed below right after. sets base text color
+HIGHLIGHT = FC 02 @ same as fc 01. sets background and accent color
+SHADOW = FC 03 @ same as fc 01. sets shadow color
+COLOR_HIGHLIGHT_SHADOW = FC 04 @ takes 3 colors
 PALETTE = FC 05 @ used in credits
 FONT = FC 06 @ Given a font id, or use font constants below instead
 RESET_FONT = FC 07
@@ -434,6 +461,16 @@ JPN = FC 15
 ENG = FC 16
 PAUSE_MUSIC = FC 17
 RESUME_MUSIC = FC 18
+SPEAKER = FC 19
+ACCENT = FC 1A @ same as FC 01. sets accent color
+BACKGROUND = FC 1B @ same as FC 01. sets background color
+TEXT_COLORS = FC 1C @ takes 3 colors: text base color, shadow and accent
+
+@ Speaker names, the order must be matching with include/constants/speaker_names.h
+NAME_NONE = 00
+NAME_MOM = 01
+NAME_PLAYER = 02
+NAME_COUNT = 03
 
 @ fonts
 
@@ -442,6 +479,13 @@ FONT_NORMAL = FC 06 01
 FONT_SHORT = FC 06 02
 FONT_NARROW = FC 06 07
 FONT_SMALL_NARROW = FC 06 08
+FONT_NARROWER = FC 06 0A
+FONT_SMALL_NARROWER = FC 06 0B
+FONT_SHORT_NARROW = FC 06 0C
+FONT_SHORT_NARROWER = FC 06 0D
+
+FONT_MALE = FC 06 01
+FONT_FEMALE = FC 06 01
 
 @ colors
 
@@ -1035,6 +1079,9 @@ ROUND_RIGHT_PAREN = F9 14
 CIRCLE_DOT = F9 15
 TRIANGLE = F9 16
 BIG_MULT_X = F9 17
+CIRCLE_HOLLOW = F9 18
+STAR = F9 19
+TRIANGLE_UPSIDE_DOWN = F9 1A
 
 EMOJI_UNDERSCORE = F9 D0
 EMOJI_PIPE = F9 D1

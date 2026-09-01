@@ -3,6 +3,7 @@
   "name": "BattlePyramidSquare15",
   "layout": "LAYOUT_BATTLE_PYRAMID_SQUARE15",
   "music": "MUS_NONE",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_DYNAMIC",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

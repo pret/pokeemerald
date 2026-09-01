@@ -25,8 +25,8 @@ void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *templa
 bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity, u16 max);
 u8 GetLRKeysPressed(void);
 u8 GetLRKeysPressedAndHeld(void);
-bool8 IsHoldingItemAllowed(u16 itemId);
-bool8 IsWritingMailAllowed(u16 itemId);
+bool8 IsHoldingItemAllowed(enum Item itemId);
+bool8 IsWritingMailAllowed(enum Item itemId);
 bool8 MenuHelpers_IsLinkActive(void);
 bool8 MenuHelpers_ShouldWaitForLinkRecv(void);
 void SetItemListPerPageCount(struct ItemSlot *slots, u8 slotsCount, u8 *pageItems, u8 *totalItems, u8 maxPerPage);

@@ -1,12 +1,16 @@
-	.macro def_special ptr:req, waitstate=0
-	.if ALLOCATE_SPECIAL_TABLE
+.macro def_special, ptr:req, requests_effects=0, waitstate=0
+.if ALLOCATE_SPECIAL_TABLE
 	.global SPECIAL_\ptr
 	.set SPECIAL_\ptr, __special__
-	.4byte \ptr
+	.if \requests_effects == 0
+		.4byte \ptr
+	.else
+		.4byte \ptr + ROM_SIZE
 	.endif
-	.set SPECIAL_WAITSTATE_\ptr, \waitstate
-	.set __special__, __special__ + 1
-	.endm
+.endif
+.set SPECIAL_WAITSTATE_\ptr, \waitstate
+.set __special__, __special__ + 1
+.endm
 
 .set __special__, 0
 .if ALLOCATE_SPECIAL_TABLE
@@ -67,7 +71,6 @@ gSpecials::
 	def_special ObjectEventInteractionWaterBerryTree
 	def_special PlayerHasBerries
 	def_special IsEnigmaBerryValid
-	def_special GetTrainerBattleMode
 	def_special ShowTrainerIntroSpeech
 	def_special ShowTrainerCantBattleSpeech
 	def_special GetTrainerFlag
@@ -87,7 +90,6 @@ gSpecials::
 	def_special InterviewAfter
 	def_special IsLeadMonNicknamedOrNotEnglish
 	def_special SetContestCategoryStringVarForInterview
-	def_special GetNextActiveShowIfMassOutbreak
 	def_special IsTVShowAlreadyInQueue
 	def_special CheckForPlayersHouseNews
 	def_special GetMomOrDadStringForTVMessage
@@ -302,7 +304,7 @@ gSpecials::
 	def_special WaitWeather, waitstate=1
 	def_special BufferEReaderTrainerName
 	def_special GetSlotMachineId
-	def_special GetPlayerFacingDirection
+	def_special GetPlayerFacingDirection, requests_effects=TRUE
 	def_special FoundAbandonedShipRoom1Key
 	def_special FoundAbandonedShipRoom2Key
 	def_special FoundAbandonedShipRoom4Key
@@ -344,6 +346,7 @@ gSpecials::
 	def_special GetContestMultiplayerId
 	def_special ScriptGetPartyMonSpecies
 	def_special IsSelectedMonEgg
+	def_special Special_HasMoveToRelearn
 	def_special TryInitBattleTowerAwardManObjectEvent
 	def_special MoveOutOfSecretBaseFromOutside
 	def_special LoadPlayerBag
@@ -491,7 +494,6 @@ gSpecials::
 	def_special CloseBattleFrontierTutorWindow
 	def_special ScrollableMultichoice_RedrawPersistentMenu
 	def_special ChooseMonForMoveTutor, waitstate=1
-	def_special GetBattleFrontierTutorMoveIndex
 	def_special ScrollableMultichoice_ClosePersistentMenu
 	def_special DoDeoxysRockInteraction, waitstate=1
 	def_special SetDeoxysRockPalette
@@ -499,7 +501,6 @@ gSpecials::
 	def_special StartMirageTowerDisintegration, waitstate=1
 	def_special StartMirageTowerShake, waitstate=1
 	def_special StartMirageTowerFossilFallAndSink, waitstate=1
-	def_special ChangeBoxPokemonNickname, waitstate=1
 	def_special GetPCBoxToSendMon
 	def_special ShouldShowBoxWasFullMessage
 	def_special SetMatchCallRegisteredFlag
@@ -537,7 +538,104 @@ gSpecials::
 	def_special IsLastMonThatKnowsSurf
 	def_special CountPartyAliveNonEggMons
 	def_special TryPrepareSecondApproachingTrainer
+	def_special PrepareSecondApproachingTrainer
 	def_special RemoveRecordsWindow
 	def_special CloseDeptStoreElevatorWindow
 	def_special TrySetBattleTowerLinkType
 	def_special GymWarp
+	def_special GetNumberSprayStrength
+	def_special GetSprayId
+	def_special GetLastUsedSprayType
+	def_special TrySkyBattle
+	def_special VsSeekerResetObjectMovementAfterChargeComplete
+	def_special VsSeekerFreezeObjectsAfterChargeComplete
+	def_special PlayerHasMulch
+	def_special Bag_ChooseMulch
+	def_special ObjectEventInteractionApplyMulch
+	def_special ObjectEventInteractionPullBerryWeed
+	def_special ObjectEventInteractionClearBerryPests
+	def_special ObjectEventInteractionBerryHasWeed
+	def_special ObjectEventInteractionBerryHasPests
+	def_special CanWaterBerryPlot
+	def_special Script_GetChosenMonOffensiveEVs
+	def_special Script_GetChosenMonDefensiveEVs
+	def_special Script_GetChosenMonOffensiveIVs
+	def_special Script_GetChosenMonDefensiveIVs
+	def_special UseBlankMessageToCancelPokemonPic
+	def_special EnterCode
+	def_special GetCodeFeedback
+	def_special SetHiddenNature
+	def_special SetAbility
+	def_special CanTeachMoveBoxMon
+	def_special ObjectEventInteractionGetApricornTreeData
+	def_special ObjectEventInteractionPickApricornTree
+	def_special GetFrlgPokedexCount
+	def_special HasAllMons
+	def_special GetProfOaksRatingMessage
+	def_special UpdatePickStateFromSpecialVar8005
+	def_special SetFlavorTextFlagFromSpecialVars
+	def_special DisableMsgBoxWalkaway
+	def_special SetWalkingIntoSignVars
+	def_special StartOldManTutorialBattle
+	def_special DaisyMassageServices
+	def_special GetLeadMonFriendship
+	def_special OpenMuseumFossilPic
+	def_special CloseMuseumFossilPic
+	def_special CapeBrinkGetMoveToTeachLeadPokemon
+	def_special HasLearnedAllMovesFromCapeBrinkTutor
+	def_special SetSeenMon
+	def_special AnimateTeleporterHousing
+	def_special AnimateTeleporterCable
+	def_special IsThereMonInRoute5Daycare
+	def_special PutMonInRoute5Daycare
+	def_special GetNumLevelsGainedForRoute5DaycareMon
+	def_special TakePokemonFromRoute5Daycare
+	def_special GetCostToWithdrawRoute5DaycareMon
+	def_special DrawSeagallopDestinationMenu
+	def_special GetSelectedSeagallopDestination
+	def_special GetSeagallopNumber
+	def_special DoSeagallopFerryScene
+	def_special IsPlayerLeftOfVermilionSailor
+	def_special SetVermilionTrashCans
+	def_special DoSSAnneDepartureCutscene
+	def_special StartMarowakBattle
+	def_special DoesPlayerPartyContainSpecies
+	def_special GetMagikarpSizeRecordInfo
+	def_special CompareMagikarpSize
+	def_special GetHeracrossSizeRecordInfo
+	def_special CompareHeracrossSize
+	def_special GetRandomSlotMachineId
+	def_special HasAllKantoMons
+	def_special AnimateElevator
+	def_special InitElevatorFloorSelectMenuPos
+	def_special CloseElevatorCurrentFloorWindow
+	def_special DrawElevatorCurrentFloorWindow
+	def_special GetElevatorFloor
+	def_special ForcePlayerOntoBike
+	def_special Script_IsFanClubMemberFanOfPlayer
+	def_special Script_GetNumFansOfPlayerInTrainerFanClub
+	def_special Script_BufferFanClubTrainerName
+	def_special Script_TryLoseFansFromPlayTimeAfterLinkBattle
+	def_special Script_TryLoseFansFromPlayTime
+	def_special Script_SetPlayerGotFirstFans
+	def_special Script_UpdateTrainerFanClubGameClear
+	def_special Script_TryGainNewFanFromCounterFrlg
+	def_special IsNationalPokedexEnabled
+	def_special SetPostgameFlags
+	def_special IsPlayerNotInTrainerTowerLobby
+	def_special BrailleCursorToggle
+	def_special EnterHallOfFame
+	def_special CB2_StartCreditsSequence
+	def_special DoPokemonLeagueLightingEffect
+	def_special GetStarterPokemon
+	def_special SetIcefallCaveCrackedIceMetatiles
+	def_special UpdateLoreleiDollCollection
+	def_special SampleResortGorgeousMonAndReward
+	def_special PlayerPartyContainsSpeciesWithPlayerID
+	def_special ShakeScreen
+	def_special CallTrainerTowerFunc
+	def_special ForcePlayerToStartSurfing
+	def_special SeafoamIslandsB4F_CurrentDumpsPlayerOnLand
+	def_special UpdateTrainerCardPhotoIcons
+	def_special StickerManGetBragFlags
+	def_special CheckAddCoins

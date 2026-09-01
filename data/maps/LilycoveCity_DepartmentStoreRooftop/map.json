@@ -3,6 +3,7 @@
   "name": "LilycoveCity_DepartmentStoreRooftop",
   "layout": "LAYOUT_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP",
   "music": "MUS_LILYCOVE",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_LILYCOVE_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

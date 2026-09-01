@@ -1,0 +1,309 @@
+=== TRAINER_NONE ===
+Name:
+Class: Pkmn Trainer 1
+Pic: Hiker
+Gender: Male
+Music: Male
+Double Battle: No
+
+=== 1 ===
+Name: RED
+Class: Rival
+Pic: Red
+Gender: Male
+Music: Male
+Double Battle: No
+
+Charmander
+Level: 5
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== 2 ===
+Name: LEAF
+Class: Rival
+Pic: Leaf
+Gender: Female
+Music: Male
+Double Battle: No
+
+Bulbasaur
+Level: 5
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== 3 ===
+Name: Test1
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Battle Type: Singles
+
+Bubbles (Wobbuffet) (F) @ Assault Vest
+Hasty Nature
+Level: 67
+Ability: Telepathy
+IVs: 25 HP / 26 Atk / 27 Def / 29 SpA / 30 SpD / 28 Spe
+EVs: 252 HP / 4 SpA / 252 Spe
+Happiness: 42
+Shiny: Yes
+Ball: Master
+Dynamax Level: 5
+- Air Slash
+- Barrier
+- Solar Beam
+- Explosion
+
+Wobbuffet
+Level: 5
+Ability: Shadow Tag
+Dynamax Level: 10
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Wynaut
+Level: 5
+Tera Type: Water
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== 4 ===
+Name: Test2
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Battle Type: Singles
+Difficulty: Normal
+
+Mewtwo
+Level: 5
+
+=== 5 ===
+Name: Test2
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Battle Type: Singles
+Difficulty: Normal
+
+Mewtwo
+Level: 50
+
+=== 5 ===
+Name: Test2
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Battle Type: Singles
+Difficulty: Easy
+
+Metapod
+Level: 1
+
+=== 5 ===
+Name: Test2
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Battle Type: Singles
+Difficulty: Hard
+
+Arceus
+Level: 99
+
+=== 6 ===
+Name: Test3
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Battle Type: Singles
+Party Size: 1
+
+Wynaut
+
+Wobbuffet
+
+Eevee
+
+Mew
+
+=== 7 ===
+Name: Test4
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Battle Type: Singles
+Party Size: 3
+
+Wynaut
+
+Wobbuffet
+Tags: Lead
+
+Eevee
+Tags: Ace
+
+Mew
+
+Oddish
+Tags: Ace
+
+Aron
+Tags: Lead
+
+=== 8 ===
+Name: Test5
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Battle Type: Doubles
+Party Size: 3
+Pool Rules: Weather Doubles
+
+Wynaut
+Tags: Lead
+
+Wobbuffet
+Tags: Lead
+
+Vulpix
+Tags: Lead / Weather Setter
+
+Bulbasaur
+Tags: Lead / Weather Abuser
+
+Torkoal
+Tags: Lead / Weather Setter
+
+Cherrim
+Tags: Lead / Weather Abuser
+
+Mew
+Tags: Lead
+
+Aron
+Tags: Lead
+
+Oddish
+
+Eevee
+
+=== 9 ===
+Name: Test6
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Battle Type: Singles
+Party Size: 2
+Pool Rules: Basic
+
+Wynaut
+Tags: Lead
+
+Wobbuffet
+Tags: Lead
+
+Eevee
+Tags: Lead
+
+=== 10 ===
+Name: Test1
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Battle Type: Singles
+Party Size: 2
+Pool Rules: Basic
+Pool Prune: Test
+
+Wynaut
+
+Wobbuffet
+Tags: Lead
+
+Eevee
+
+=== 11 ===
+Name: Test1
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Battle Type: Singles
+Party Size: 2
+Pool Rules: Basic
+Pool Pick Functions: Lowest
+
+Wynaut
+Tags: Ace
+
+Wobbuffet
+
+Eevee
+Tags: Lead
+
+=== 12 ===
+Name: Test9
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Double Battle: Yes
+Party Size: 2
+
+Wynaut
+
+Wobbuffet
+
+=== 13 ===
+Name: Test10
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Battle Type: Doubles
+Party Size: 2
+
+Wynaut
+
+Wobbuffet
+
+=== 14 ===
+Name: Test11
+Class: Black Belt
+Pic: Red
+Gender: Male
+Music: Male
+Battle Type: Singles
+Party Size: 6
+
+Wynaut
+
+Wobbuffet
+
+Eevee
+
+Mew
+
+Oddish
+
+Aron
+
+=== 15 ===
+Name: TestTera
+Class: Black Belt
+Pic: Red
+Gender: Male
+Music: Male
+AI: Smart Tera
+Battle Type: Singles
+Party Size: 1
+
+Wynaut

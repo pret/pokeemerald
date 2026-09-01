@@ -1,22 +1,7 @@
 #ifndef GUARD_POKEBALL_H
 #define GUARD_POKEBALL_H
 
-enum
-{
-    BALL_POKE,
-    BALL_GREAT,
-    BALL_SAFARI,
-    BALL_ULTRA,
-    BALL_MASTER,
-    BALL_NET,
-    BALL_DIVE,
-    BALL_NEST,
-    BALL_REPEAT,
-    BALL_TIMER,
-    BALL_LUXURY,
-    BALL_PREMIER,
-    POKEBALL_COUNT
-};
+#include "constants/pokeball.h"
 
 enum {
     BALL_AFFINE_ANIM_0,
@@ -26,19 +11,27 @@ enum {
     BALL_AFFINE_ANIM_4
 };
 
-extern const struct CompressedSpriteSheet gBallSpriteSheets[];
-extern const struct CompressedSpritePalette gBallSpritePalettes[];
-extern const struct SpriteTemplate gBallSpriteTemplates[];
+struct PokeBallSprite
+{
+    struct CompressedSpriteSheet pic;
+    struct SpritePalette palette;
+    struct SpriteTemplate spriteTemplate;
+    enum Item itemId;
+};
+
+extern const struct PokeBallSprite gPokeBalls[];
 
 #define POKEBALL_PLAYER_SENDOUT     0xFF
 #define POKEBALL_OPPONENT_SENDOUT   0xFE
+#define POKEBALL_PLAYER_SLIDEIN     0xFD
 
-u8 DoPokeballSendOutAnimation(s16 pan, u8 kindOfThrow);
-void CreatePokeballSpriteToReleaseMon(u8 monSpriteId, u8 monPalNum, u8 x, u8 y, u8 oamPriority, u8 subpriority, u8 delay, u32 fadePalettes, u16 species);
+u8 DoPokeballSendOutAnimation(enum BattlerId battler, s16 pan, u8 kindOfThrow);
+void CreatePokeballSpriteToReleaseMon(u8 monSpriteId, u8 monPalNum, u8 x, u8 y, u8 oamPriority, u8 subpriority, u8 delay, u32 fadePalettes, enum Species species);
 u8 CreateTradePokeballSprite(u8 monSpriteId, u8 monPalNum, u8 x, u8 y, u8 oamPriority, u8 subPriority, u8 delay, u32 fadePalettes);
-void StartHealthboxSlideIn(u8 battler);
-void DoHitAnimHealthboxEffect(u8 battler);
-void LoadBallGfx(u8 ballId);
-void FreeBallGfx(u8 ballId);
+void StartHealthboxSlideIn(enum BattlerId battler);
+void DoHitAnimHealthboxEffect(enum BattlerId battler);
+void LoadBallGfx(enum PokeBall ballId);
+void FreeBallGfx(enum PokeBall ballId);
+enum PokeBall ItemIdToBallId(enum Item ballItem);
 
 #endif // GUARD_POKEBALL_H

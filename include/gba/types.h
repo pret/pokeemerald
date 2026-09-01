@@ -2,6 +2,7 @@
 #define GUARD_GBA_TYPES_H
 
 #include <stdint.h>
+#include "gba/defines.h"
 
 typedef uint8_t   u8;
 typedef uint16_t u16;
@@ -41,7 +42,7 @@ struct BgCnt
     u16 screenBaseBlock:5;
     u16 areaOverflowMode:1;
     u16 screenSize:2;
-};
+} PACKED;
 typedef volatile struct BgCnt vBgCnt;
 
 struct PlttData

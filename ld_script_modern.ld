@@ -2,6 +2,7 @@ ENTRY(Start)
 
 gNumMusicPlayers = 4;
 gMaxLines = 0;
+gInitialMainCB2 = CB2_InitCopyrightScreenAfterBootup;
 
 MEMORY
 {
@@ -12,118 +13,97 @@ MEMORY
 
 SECTIONS {
 
-    ewram 0x2000000 (NOLOAD) :
+
+    .ewram ORIGIN(EWRAM) : AT (__ewram_lma)
     ALIGN(4)
     {
-        src/*.o(ewram_data);
+        __ewram_start = .;
+        *(.ewram*)
+        . = ALIGN(4);
+        __ewram_end = .;
     } > EWRAM
 
-    iwram 0x3000000 (NOLOAD) :
+    .ewram.sbss (NOLOAD) :
     ALIGN(4)
     {
-        src/*.o(.bss);
-        data/*.o(.bss);
-        *libc.a:*.o(.bss*);
-        *libnosys.a:*.o(.bss*);
+        *.o(.sbss);
+    } > EWRAM
 
-        src/m4a.o(.bss.code);
+    .iwram ORIGIN(IWRAM) : AT (__iwram_lma)
+    ALIGN(4)
+    {
+        __iwram_start = .;
+        *(.iwram*);
+        . = ALIGN(4);
+        __iwram_end = .;
+    } > IWRAM
 
-        src/*.o(common_data);
+    .iwram.bss (NOLOAD) :
+    ALIGN(4)
+    {
+        *.o(.bss*);
+        *.o(common_data);
         src/*.o(COMMON);
         *libc.a:*.o(COMMON);
         *libnosys.a:*.o(COMMON);
     } > IWRAM
 
     /* BEGIN ROM DATA */
-    . = 0x8000000;
 
-    .text :
+    .text ORIGIN(ROM) :
     ALIGN(4)
     {
         src/rom_header.o(.text*);
-        src/rom_header_gf.o(.text.*);
+        KEEP(*.o(.text.header_gf));
+        KEEP(*.o(.text.header_rhh));
         src/crt0.o(.text);
-        src/main.o(.text);
-        src/*.o(.text*);
+        *libagbsyscall.a:*.o(.text*);
+        *libgcc.a:*.o(.text*);
+        *libc.a:*.o(.text*);
+        *libnosys.a:*.o(.text*);
         asm/*.o(.text*);
+        KEEP(*.o(.text.consts));
+        *.o(.text*);
+        *.o(.eh_frame);
     } > ROM =0
 
     script_data :
     ALIGN(4)
     {
-		data/*.o(script_data);
+        data/*.o(script_data);
     } > ROM =0
 
-    lib_text :
-    ALIGN(4)
+    .rodata.compound_string :
+    SUBALIGN(0)
     {
-        src/libgcnmultiboot.o(.text);
-        src/m4a_1.o(.text);
-        src/m4a.o(.text);
-        src/agb_flash.o(.text);
-        src/agb_flash_1m.o(.text);
-        src/agb_flash_mx.o(.text);
-        src/siirtc.o(.text);
-        src/librfu_stwi.o(.text);
-        src/librfu_intr.o(.text);
-        src/librfu_rfu.o(.text);
-        src/librfu_sio32id.o(.text);
-        *libagbsyscall.a:*.o(.text*);
-        *libgcc.a:*.o(.text*);
-        *libc.a:*.o(.text*);
-        *libnosys.a:*.o(.text*);
-        src/libisagbprn.o(.text);
+        *.o(.rodata.compound_string.*);
     } > ROM =0
 
     .rodata :
     ALIGN(4)
     {
-        src/*.o(.rodata*);
-        data/*.o(.rodata*);
-    } > ROM =0
-
-    song_data :
-    ALIGN(4)
-    {
-        sound/songs/*.o(.rodata);
-    } > ROM =0
-
-    lib_rodata :
-    SUBALIGN(4)
-    {
-        src/m4a.o(.rodata);
-        src/agb_flash.o(.rodata);
-        src/agb_flash_1m.o(.rodata);
-        src/agb_flash_mx.o(.rodata);
-        src/agb_flash_le.o(.rodata);
-        src/siirtc.o(.rodata);
-        src/librfu_rfu.o(.rodata);
-        src/librfu_sio32id.o(.rodata);
+        *.o(.rodata*);
         *libgcc.a:*.o(.rodata*);
         *libc.a:*.o(.rodata*);
         *libc.a:*.o(.data*);
-        src/libisagbprn.o(.rodata);
-    } =0
-
-    multiboot_data :
-    ALIGN(4)
-    {
-        data/multiboot_ereader.o(.rodata);
-        data/multiboot_berry_glitch_fix.o(.rodata);
-        data/multiboot_pokemon_colosseum.o(.rodata);
+        sound/songs/*.o(.rodata);
     } > ROM =0
 
-    anim_mon_front_pic_data :
+    .data.iwram :
     ALIGN(4)
     {
-        src/anim_mon_front_pics.o(.rodata);
-    } > ROM =0
+        __iwram_lma = .;
+        . = . + (__iwram_end - __iwram_start);
+    } > ROM = 0
 
-    gfx_data :
+    .data.ewram :
     ALIGN(4)
     {
-        src/graphics.o(.rodata);
-    } > ROM =0
+        __ewram_lma = .;
+        . = . + (__ewram_end - __ewram_start);
+    } > ROM = 0
+
+    __rom_end = .;
 
     /* DWARF debug sections.
        Symbols in the DWARF debugging sections are relative to the beginning

@@ -1,0 +1,59 @@
+{
+  "id": "MAP_SSANNE_3F_CORRIDOR",
+  "name": "SSAnne_3F_Corridor_Frlg",
+  "layout": "LAYOUT_SSANNE_3F_CORRIDOR",
+  "music": "MUS_RG_SS_ANNE",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_S_S_ANNE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_SAILOR_FRLG",
+      "x": 10,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
+      "movement_range_x": 3,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SSAnne_3F_Corridor_EventScript_Sailor",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 1,
+      "y": 4,
+      "elevation": 3,
+      "dest_map": "MAP_SSANNE_DECK",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 18,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_SSANNE_2F_CORRIDOR",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 0,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_SSANNE_DECK",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

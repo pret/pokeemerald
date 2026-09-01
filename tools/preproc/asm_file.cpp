@@ -162,9 +162,9 @@ Directive AsmFile::GetDirective()
         return Directive::Unknown;
 }
 
-// Checks if we're at label that ends with '::'.
-// Returns the name if so and an empty string if not.
-std::string AsmFile::GetGlobalLabel()
+// Checks if we're at label and if so, returns its symbol and scope.
+// Returns 'label::none' if not.
+Label AsmFile::GetLabel()
 {
     long start = m_pos;
     long pos = m_pos;
@@ -177,14 +177,57 @@ std::string AsmFile::GetGlobalLabel()
             pos++;
     }
 
-    if (m_buffer[pos] == ':' && m_buffer[pos + 1] == ':')
+    if (m_buffer[pos] == ':')
     {
-        m_pos = pos + 2;
-        ExpectEmptyRestOfLine();
-        return std::string(&m_buffer[start], pos - start);
+        std::string symbol(&m_buffer[start], pos - start);
+        if (m_buffer[pos + 1] == ':')
+        {
+            m_pos = pos + 2;
+            ExpectEmptyRestOfLine();
+            return Label(symbol, Label::global);
+        }
+        else
+        {
+            m_pos = pos + 1;
+            return Label(symbol, Label::local);
+        }
     }
 
-    return std::string();
+    return Label("", Label::none);
+}
+
+std::string AsmFile::PeekSection()
+{
+    long oldPos = m_pos;
+    std::string section;
+
+    SkipWhitespace();
+
+    // TODO: Support 'pushsection', 'popsection', '.previous'.
+    if (CheckForDirective(".bss"))
+    {
+        section = ".bss";
+    }
+    else if (CheckForDirective(".data"))
+    {
+        section = ".data";
+    }
+    else if (CheckForDirective(".rodata"))
+    {
+        section = ".rodata";
+    }
+    else if (CheckForDirective(".text"))
+    {
+        section = ".text";
+    }
+    else if (CheckForDirective(".section"))
+    {
+        SkipWhitespace();
+        section = ReadIdentifier();
+    }
+
+    m_pos = oldPos;
+    return section;
 }
 
 // Skips tabs and spaces.
@@ -519,8 +562,53 @@ bool AsmFile::ParseEnum()
 
     long fallbackPosition = m_pos;
     std::string headerFilename = "";
-    long currentHeaderLine = SkipWhitespaceAndEol();
-    std::string enumName = ReadIdentifier();
+    long currentHeaderLine = 0;
+    std::string enumName;
+    while (true)
+    {
+        currentHeaderLine += SkipWhitespaceAndEol();
+        std::string identifier = ReadIdentifier();
+        if (identifier == "__attribute__")
+        {
+            if (m_pos + 1 >= m_size
+             || m_buffer[m_pos] != '('
+             || m_buffer[m_pos + 1] != '(')
+            {
+                m_pos = fallbackPosition - 4;
+                return false;
+            }
+
+            m_pos += 2;
+            int parens = 2;
+            while (true)
+            {
+                char c = m_buffer[m_pos++];
+                if (c == '\n')
+                    currentHeaderLine++;
+
+                if (c == '(')
+                {
+                    parens++;
+                }
+                else if (c == ')')
+                {
+                    parens--;
+                    if (parens == 0)
+                        break;
+                }
+                else if (parens < 2 || m_pos == m_size)
+                {
+                    m_pos = fallbackPosition - 4;
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            enumName = identifier;
+            break;
+        }
+    }
     currentHeaderLine += SkipWhitespaceAndEol();
     std::string enumBase = "0";
     long enumCounter = 0;
@@ -577,6 +665,10 @@ bool AsmFile::ParseEnum()
                 }
                 enumCounter = 0;
             }
+            // HACK(#7394): Make the definitions global so that C 'asm'
+            // statements are able to reference them (if they happen to
+            // be available in an assembled object file).
+            std::printf(".global %s; ", currentIdentName.c_str());
             std::printf(".equiv %s, (%s) + %ld\n", currentIdentName.c_str(), enumBase.c_str(), enumCounter);
             enumCounter++;
             symbolCount++;

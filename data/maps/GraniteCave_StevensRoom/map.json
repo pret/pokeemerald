@@ -3,6 +3,7 @@
   "name": "GraniteCave_StevensRoom",
   "layout": "LAYOUT_GRANITE_CAVE_STEVENS_ROOM",
   "music": "MUS_PETALBURG_WOODS",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_GRANITE_CAVE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

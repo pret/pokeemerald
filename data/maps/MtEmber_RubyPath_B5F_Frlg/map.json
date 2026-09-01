@@ -1,0 +1,54 @@
+{
+  "id": "MAP_MT_EMBER_RUBY_PATH_B5F",
+  "name": "MtEmber_RubyPath_B5F_Frlg",
+  "layout": "LAYOUT_MT_EMBER_RUBY_PATH_B5F",
+  "music": "MUS_RG_SEVII_CAVE",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_MT_EMBER",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": true,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_RUBY",
+      "x": 7,
+      "y": 7,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "MtEmber_RubyPath_B5F_EventScript_Ruby",
+      "flag": "FLAG_HIDE_RUBY"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 11,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_MT_EMBER_RUBY_PATH_B4F",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "MtEmber_RubyPath_B5F_EventScript_BrailleMessage"
+    }
+  ]
+}

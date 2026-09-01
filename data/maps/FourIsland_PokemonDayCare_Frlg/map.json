@@ -1,0 +1,46 @@
+{
+  "id": "MAP_FOUR_ISLAND_POKEMON_DAY_CARE",
+  "name": "FourIsland_PokemonDayCare_Frlg",
+  "layout": "LAYOUT_FOUR_ISLAND_POKEMON_DAY_CARE",
+  "music": "MUS_RG_SEVII_45",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_FOUR_ISLAND",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_FOUR_ISLAND_DAYCARE_WOMAN",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_WOMAN_FRLG",
+      "x": 2,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "FourIsland_PokemonDayCare_EventScript_DaycareWoman",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_FOUR_ISLAND",
+      "dest_warp_id": "1"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

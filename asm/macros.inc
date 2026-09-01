@@ -4,6 +4,7 @@
 	.include "asm/macros/map.inc"
 	.include "asm/macros/field_effect_script.inc"
 	.include "asm/macros/trainer_hill.inc"
+	.include "asm/macros/trainer_tower.inc"
 	.include "asm/macros/battle_tent.inc"
 	.include "asm/macros/gym_helper.inc"
 	.include "asm/macros/battle_frontier/apprentice.inc"

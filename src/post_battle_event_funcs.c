@@ -3,6 +3,7 @@
 #include "credits.h"
 #include "event_data.h"
 #include "hall_of_fame.h"
+#include "hall_of_fame_frlg.h"
 #include "load_save.h"
 #include "overworld.h"
 #include "script_pokemon_util.h"
@@ -44,7 +45,7 @@ int GameClear(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        struct Pokemon *mon = &gPlayerParty[i];
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
 
         ribbonCounts[i].partyIndex = i;
         ribbonCounts[i].count = 0;
@@ -77,7 +78,7 @@ int GameClear(void)
 
         if (ribbonCounts[0].count > NUM_CUTIES_RIBBONS)
         {
-            TryPutSpotTheCutiesOnAir(&gPlayerParty[ribbonCounts[0].partyIndex], MON_DATA_CHAMPION_RIBBON);
+            TryPutSpotTheCutiesOnAir(&gParties[B_TRAINER_PLAYER][ribbonCounts[0].partyIndex], MON_DATA_CHAMPION_RIBBON);
         }
     }
 
@@ -88,5 +89,49 @@ int GameClear(void)
 bool8 SetCB2WhiteOut(void)
 {
     SetMainCallback2(CB2_WhiteOut);
+    return FALSE;
+}
+
+bool8 EnterHallOfFame(void)
+{
+    bool8 ribbonState;
+    bool8 *r7;
+    int i;
+    bool8 gaveAtLeastOneRibbon;
+    HealPlayerParty();
+    if (FlagGet(FLAG_SYS_GAME_CLEAR) == TRUE)
+    {
+        gHasHallOfFameRecords = TRUE;
+    }
+    else
+    {
+        gHasHallOfFameRecords = FALSE;
+        FlagSet(FLAG_SYS_GAME_CLEAR);
+    }
+    if (GetGameStat(GAME_STAT_FIRST_HOF_PLAY_TIME) == 0)
+    {
+        SetGameStat(GAME_STAT_FIRST_HOF_PLAY_TIME, (gSaveBlock2Ptr->playTimeHours << 16) | (gSaveBlock2Ptr->playTimeMinutes << 8) | gSaveBlock2Ptr->playTimeSeconds);
+    }
+    SetContinueGameWarpStatus();
+    SetContinueGameWarpToHealLocation(HEAL_LOCATION_PALLET_TOWN);
+    gaveAtLeastOneRibbon = FALSE;
+    for (i = 0, r7 = &ribbonState; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SANITY_HAS_SPECIES) && !GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SANITY_IS_EGG))
+        {
+            if (!GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_CHAMPION_RIBBON))
+            {
+                *r7 = TRUE;
+                SetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_CHAMPION_RIBBON, &ribbonState);
+                gaveAtLeastOneRibbon = TRUE;
+            }
+        }
+    }
+    if (gaveAtLeastOneRibbon == TRUE)
+    {
+        IncrementGameStat(GAME_STAT_RECEIVED_RIBBONS);
+        FlagSet(FLAG_SYS_RIBBON_GET);
+    }
+    SetMainCallback2(CB2_DoHallOfFameScreenFrlg);
     return FALSE;
 }

@@ -1,0 +1,7 @@
+SevenIsland_TanobyRuins_ScufibChamber_Frlg_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, SevenIsland_TanobyRuins_ScufibChamber_OnTransition
+	.byte 0
+
+SevenIsland_TanobyRuins_ScufibChamber_OnTransition::
+	call EventScript_TryDarkenRuins
+	end

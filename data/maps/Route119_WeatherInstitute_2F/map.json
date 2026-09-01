@@ -3,6 +3,7 @@
   "name": "Route119_WeatherInstitute_2F",
   "layout": "LAYOUT_ROUTE119_WEATHER_INSTITUTE_2F",
   "music": "MUS_RUSTBORO",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ROUTE_119",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

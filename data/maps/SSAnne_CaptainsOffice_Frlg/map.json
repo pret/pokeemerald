@@ -1,0 +1,73 @@
+{
+  "id": "MAP_SSANNE_CAPTAINS_OFFICE",
+  "name": "SSAnne_CaptainsOffice_Frlg",
+  "layout": "LAYOUT_SSANNE_CAPTAINS_OFFICE",
+  "music": "MUS_RG_SS_ANNE",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_S_S_ANNE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+    {
+      "local_id": "LOCALID_SS_ANNE_CAPTAIN",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_CAPTAIN",
+      "x": 5,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SSAnne_CaptainsOffice_EventScript_Captain",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 3,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_SSANNE_2F_CORRIDOR",
+      "dest_warp_id": "2"
+    }
+  ],
+  "coord_events": [
+
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SSAnne_CaptainsOffice_EventScript_Book"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 3,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SSAnne_CaptainsOffice_EventScript_TrashCan"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 3,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SSAnne_CaptainsOffice_EventScript_Book"
+    }
+  ]
+}

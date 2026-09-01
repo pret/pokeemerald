@@ -4,7 +4,7 @@
 #include "main.h"
 
 void StartPokemonJump(u16 partyId, MainCallback exitCallback);
-bool32 IsSpeciesAllowedInPokemonJump(u16 species);
+bool32 IsSpeciesAllowedInPokemonJump(enum Species species);
 void IsPokemonJumpSpeciesInParty(void);
 void ResetPokemonJumpRecords(void);
 void ShowPokemonJumpRecords(void);

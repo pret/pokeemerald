@@ -3,19 +3,35 @@
 
 #define BERRY_NONE 0
 
-#define BERRY_FIRMNESS_UNKNOWN     0
-#define BERRY_FIRMNESS_VERY_SOFT   1
-#define BERRY_FIRMNESS_SOFT        2
-#define BERRY_FIRMNESS_HARD        3
-#define BERRY_FIRMNESS_VERY_HARD   4
-#define BERRY_FIRMNESS_SUPER_HARD  5
+enum BerryFirmness
+{
+    BERRY_FIRMNESS_UNKNOWN,
+    BERRY_FIRMNESS_VERY_SOFT,
+    BERRY_FIRMNESS_SOFT,
+    BERRY_FIRMNESS_HARD,
+    BERRY_FIRMNESS_VERY_HARD,
+    BERRY_FIRMNESS_SUPER_HARD,
+};
 
-#define FLAVOR_SPICY   0
-#define FLAVOR_DRY     1
-#define FLAVOR_SWEET   2
-#define FLAVOR_BITTER  3
-#define FLAVOR_SOUR    4
-#define FLAVOR_COUNT   5
+enum BerryColor
+{
+    BERRY_COLOR_RED,
+    BERRY_COLOR_BLUE,
+    BERRY_COLOR_PURPLE,
+    BERRY_COLOR_GREEN,
+    BERRY_COLOR_YELLOW,
+    BERRY_COLOR_PINK,
+};
+
+enum __attribute__((__packed__)) Flavor
+{
+    FLAVOR_SPICY,
+    FLAVOR_DRY,
+    FLAVOR_SWEET,
+    FLAVOR_BITTER,
+    FLAVOR_SOUR,
+    FLAVOR_COUNT,
+};
 
 #define BERRY_STAGE_NO_BERRY    0  // there is no tree planted and the soil is completely flat.
 #define BERRY_STAGE_PLANTED     1
@@ -23,6 +39,8 @@
 #define BERRY_STAGE_TALLER      3
 #define BERRY_STAGE_FLOWERING   4
 #define BERRY_STAGE_BERRIES     5
+#define BERRY_STAGE_TRUNK       6 // These follow BERRY_STAGE_BERRIES to preserve save compatibility
+#define BERRY_STAGE_BUDDING     7
 #define BERRY_STAGE_SPARKLING   255
 
 // Berries can be watered in the following stages:

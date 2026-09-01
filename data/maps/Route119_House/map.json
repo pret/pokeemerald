@@ -3,6 +3,7 @@
   "name": "Route119_House",
   "layout": "LAYOUT_HOUSE1",
   "music": "MUS_RUSTBORO",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ROUTE_119",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

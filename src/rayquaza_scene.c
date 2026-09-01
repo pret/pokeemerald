@@ -1,5 +1,6 @@
 #include "global.h"
 #include "rayquaza_scene.h"
+#include "event_object_movement.h"
 #include "sprite.h"
 #include "task.h"
 #include "graphics.h"
@@ -14,6 +15,7 @@
 #include "sound.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+#include "constants/event_objects.h"
 #include "random.h"
 
 /*
@@ -316,9 +318,6 @@ static const struct SpriteTemplate sSpriteTemplate_DuoFightPre_Groudon =
     .paletteTag = TAG_DUOFIGHT_GROUDON,
     .oam = &sOam_64x64,
     .anims = sAnims_DuoFightPre_Groudon,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const union AnimCmd sAnim_DuoFightPre_GroudonShoulderKyogreDorsalFin[] =
@@ -338,9 +337,6 @@ static const struct SpriteTemplate sSpriteTemplate_DuoFightPre_GroudonShoulder =
     .paletteTag = TAG_DUOFIGHT_GROUDON,
     .oam = &sOam_32x32,
     .anims = sAnims_DuoFightPre_GroudonShoulderKyogreDorsalFin,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const union AnimCmd sAnim_DuoFightPre_GroudonClaw[] =
@@ -360,9 +356,6 @@ static const struct SpriteTemplate sSpriteTemplate_DuoFightPre_GroudonClaw =
     .paletteTag = TAG_DUOFIGHT_GROUDON,
     .oam = &sOam_64x32,
     .anims = sAnims_DuoFightPre_GroudonClaw,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const union AnimCmd sAnim_DuoFightPre_Kyogre_TopLeft[] =
@@ -448,9 +441,6 @@ static const struct SpriteTemplate sSpriteTemplate_DuoFightPre_Kyogre =
     .paletteTag = TAG_DUOFIGHT_KYOGRE,
     .oam = &sOam_32x16,
     .anims = sAnims_DuoFightPre_Kyogre,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const union AnimCmd sAnim_DuoFightPre_KyogrePectoralFin[] =
@@ -473,9 +463,6 @@ static const struct SpriteTemplate sSpriteTemplate_DuoFightPre_KyogrePectoralFin
     .paletteTag = TAG_DUOFIGHT_KYOGRE,
     .oam = &sOam_16x8,
     .anims = sAnims_DuoFightPre_KyogrePectoralFin,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_DuoFightPre_KyogreDorsalFin =
@@ -484,9 +471,6 @@ static const struct SpriteTemplate sSpriteTemplate_DuoFightPre_KyogreDorsalFin =
     .paletteTag = TAG_DUOFIGHT_KYOGRE,
     .oam = &sOam_32x32,
     .anims = sAnims_DuoFightPre_GroudonShoulderKyogreDorsalFin,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const struct ScanlineEffectParams sScanlineParams_DuoFight_Clouds =
@@ -556,7 +540,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_DuoFight_Groudon =
     gRaySceneDuoFight_Groudon_Gfx, 0x3000, TAG_DUOFIGHT_GROUDON
 };
 
-static const struct CompressedSpritePalette sSpritePal_DuoFight_Groudon =
+static const struct SpritePalette sSpritePal_DuoFight_Groudon =
 {
     gRaySceneDuoFight_Groudon_Pal, TAG_DUOFIGHT_GROUDON
 };
@@ -567,9 +551,6 @@ static const struct SpriteTemplate sSpriteTemplate_DuoFight_Groudon =
     .paletteTag = TAG_DUOFIGHT_GROUDON,
     .oam = &sOam_64x64,
     .anims = sAnims_DuoFight_Groudon,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const union AnimCmd sAnim_DuoFight_GroudonShoulderKyogreDorsalFin[] =
@@ -594,9 +575,6 @@ static const struct SpriteTemplate sSpriteTemplate_DuoFight_GroudonShoulder =
     .paletteTag = TAG_DUOFIGHT_GROUDON,
     .oam = &sOam_32x32,
     .anims = sAnims_DuoFight_GroudonShoulderKyogreDorsalFin,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const union AnimCmd sAnim_DuoFight_GroudonClaw[] =
@@ -621,9 +599,6 @@ static const struct SpriteTemplate sSpriteTemplate_DuoFight_GroudonClaw =
     .paletteTag = TAG_DUOFIGHT_GROUDON,
     .oam = &sOam_64x32,
     .anims = sAnims_DuoFight_GroudonClaw,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const union AnimCmd sAnim_DuoFight_Kyogre_TopLeft[] =
@@ -707,7 +682,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_DuoFight_Kyogre =
     gRaySceneDuoFight_Kyogre_Gfx, 0xF00, TAG_DUOFIGHT_KYOGRE
 };
 
-static const struct CompressedSpritePalette sSpritePal_DuoFight_Kyogre =
+static const struct SpritePalette sSpritePal_DuoFight_Kyogre =
 {
     gRaySceneDuoFight_Kyogre_Pal, TAG_DUOFIGHT_KYOGRE
 };
@@ -718,9 +693,6 @@ static const struct SpriteTemplate sSpriteTemplate_DuoFight_Kyogre =
     .paletteTag = TAG_DUOFIGHT_KYOGRE,
     .oam = &sOam_32x16,
     .anims = sAnims_DuoFight_Kyogre,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const union AnimCmd sAnim_DuoFight_KyogrePectoralFin[] =
@@ -748,9 +720,6 @@ static const struct SpriteTemplate sSpriteTemplate_DuoFight_KyogrePectoralFin =
     .paletteTag = TAG_DUOFIGHT_KYOGRE,
     .oam = &sOam_16x8,
     .anims = sAnims_DuoFight_KyogrePectoralFin,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_DuoFight_KyogreDorsalFin =
@@ -764,9 +733,6 @@ static const struct SpriteTemplate sSpriteTemplate_DuoFight_KyogreDorsalFin =
     .paletteTag = TAG_DUOFIGHT_KYOGRE,
     .oam = &sOam_32x32,
     .anims = sAnims_DuoFight_GroudonShoulderKyogreDorsalFin,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const struct BgTemplate sBgTemplates_TakesFlight[] =
@@ -829,7 +795,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_TakesFlight_Smoke =
     gRaySceneTakesFlight_Smoke_Gfx, 0x100, TAG_FLIGHT_SMOKE
 };
 
-static const struct CompressedSpritePalette sSpritePal_TakesFlight_Smoke =
+static const struct SpritePalette sSpritePal_TakesFlight_Smoke =
 {
     gRaySceneTakesFlight_Smoke_Pal, TAG_FLIGHT_SMOKE
 };
@@ -840,7 +806,6 @@ static const struct SpriteTemplate sSpriteTemplate_TakesFlight_Smoke =
     .paletteTag = TAG_FLIGHT_SMOKE,
     .oam = &sOam_32x16,
     .anims = sAnims_TakesFlight_Smoke,
-    .images = NULL,
     .affineAnims = sAffineAnims_TakesFlight_Smoke,
     .callback = SpriteCB_TakesFlight_Smoke,
 };
@@ -933,7 +898,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_Descends_RayquazaTail =
     gRaySceneDescends_RayquazaTail_Gfx, 0x200, TAG_DESCENDS_RAYQUAZA_TAIL
 };
 
-static const struct CompressedSpritePalette sSpritePal_Descends_Rayquaza =
+static const struct SpritePalette sSpritePal_Descends_Rayquaza =
 {
     gRaySceneTakesFlight_Rayquaza_Pal, TAG_DESCENDS_RAYQUAZA // "Takes flight" palette re-used here
 };
@@ -944,9 +909,6 @@ static const struct SpriteTemplate sSpriteTemplate_Descends_Rayquaza =
     .paletteTag = TAG_DESCENDS_RAYQUAZA,
     .oam = &sOam_64x64,
     .anims = sAnims_Descends_Rayquaza,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Descends_RayquazaTail =
@@ -955,9 +917,6 @@ static const struct SpriteTemplate sSpriteTemplate_Descends_RayquazaTail =
     .paletteTag = TAG_DESCENDS_RAYQUAZA,
     .oam = &sOam_16x32,
     .anims = sAnims_Descends_RayquazaTail,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const struct BgTemplate sBgTemplates_Charges[] =
@@ -1167,22 +1126,22 @@ static const struct CompressedSpriteSheet sSpriteSheet_ChasesAway_KyogreSplash =
     gRaySceneChasesAway_KyogreSplash_Gfx, 0x300, TAG_CHASE_SPLASH
 };
 
-static const struct CompressedSpritePalette sSpritePal_ChasesAway_Groudon =
+static const struct SpritePalette sSpritePal_ChasesAway_Groudon =
 {
     gRaySceneChasesAway_Groudon_Pal, TAG_CHASE_GROUDON
 };
 
-static const struct CompressedSpritePalette sSpritePal_ChasesAway_Kyogre =
+static const struct SpritePalette sSpritePal_ChasesAway_Kyogre =
 {
     gRaySceneChasesAway_Kyogre_Pal, TAG_CHASE_KYOGRE
 };
 
-static const struct CompressedSpritePalette sSpritePal_ChasesAway_Rayquaza =
+static const struct SpritePalette sSpritePal_ChasesAway_Rayquaza =
 {
     gRaySceneChasesAway_Rayquaza_Pal, TAG_CHASE_RAYQUAZA
 };
 
-static const struct CompressedSpritePalette sSpritePal_ChasesAway_KyogreSplash =
+static const struct SpritePalette sSpritePal_ChasesAway_KyogreSplash =
 {
     gRaySceneChasesAway_KyogreSplash_Pal, TAG_CHASE_SPLASH
 };
@@ -1193,9 +1152,6 @@ static const struct SpriteTemplate sSpriteTemplate_ChasesAway_Groudon =
     .paletteTag = TAG_CHASE_GROUDON,
     .oam = &sOam_64x64,
     .anims = sAnims_ChasesAway_Groudon,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_ChasesAway_GroudonTail =
@@ -1204,9 +1160,6 @@ static const struct SpriteTemplate sSpriteTemplate_ChasesAway_GroudonTail =
     .paletteTag = TAG_CHASE_GROUDON,
     .oam = &sOam_16x16,
     .anims = sAnims_ChasesAway_GroudonTail,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_ChasesAway_Kyogre =
@@ -1215,9 +1168,6 @@ static const struct SpriteTemplate sSpriteTemplate_ChasesAway_Kyogre =
     .paletteTag = TAG_CHASE_KYOGRE,
     .oam = &sOam_32x32,
     .anims = sAnims_ChasesAway_Kyogre,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_ChasesAway_Rayquaza =
@@ -1226,8 +1176,6 @@ static const struct SpriteTemplate sSpriteTemplate_ChasesAway_Rayquaza =
     .paletteTag = TAG_CHASE_RAYQUAZA,
     .oam = &sOam_64x64,
     .anims = sAnims_ChasesAway_Rayquaza,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_ChasesAway_Rayquaza,
 };
 
@@ -1237,9 +1185,6 @@ static const struct SpriteTemplate sSpriteTemplate_ChasesAway_RayquazaTail =
     .paletteTag = TAG_CHASE_RAYQUAZA,
     .oam = &sOam_32x32,
     .anims = sAnims_ChasesAway_RayquazaTail,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_ChasesAway_KyogreSplash =
@@ -1248,9 +1193,6 @@ static const struct SpriteTemplate sSpriteTemplate_ChasesAway_KyogreSplash =
     .paletteTag = TAG_CHASE_SPLASH,
     .oam = &sOam_32x8,
     .anims = sAnims_ChasesAway_KyogreSplash,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const struct BgTemplate sBgTemplates_ChasesAway[] =
@@ -1295,9 +1237,15 @@ void DoRayquazaScene(u8 animId, bool8 endEarly, MainCallback exitCallback)
 
 static void CB2_InitRayquazaScene(void)
 {
+    u32 i;
     SetVBlankHBlankCallbacksToNull();
     ClearScheduledBgCopiesToVram();
     ScanlineEffect_Stop();
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].graphicsId == OBJ_EVENT_GFX_RAYQUAZA)
+            gObjectEvents[i].invisible = FALSE;
+    }
     FreeAllSpritePalettes();
     ResetPaletteFade();
     ResetSpriteData();
@@ -1590,18 +1538,18 @@ static void LoadDuoFightSceneGfx(void)
     DecompressAndCopyTileDataToVram(0, gRaySceneDuoFight_Clouds_Gfx, 0, 0, 0);
     while (FreeTempTileDataBuffersIfPossible())
         ;
-    LZDecompressWram(gRaySceneDuoFight_Clouds2_Tilemap, sRayScene->tilemapBuffers[0]);
-    LZDecompressWram(gRaySceneDuoFight_Clouds1_Tilemap, sRayScene->tilemapBuffers[1]);
-    LZDecompressWram(gRaySceneDuoFight_Clouds3_Tilemap, sRayScene->tilemapBuffers[2]);
-    LoadCompressedPalette(gRaySceneDuoFight_Clouds_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+    DecompressDataWithHeaderWram(gRaySceneDuoFight_Clouds2_Tilemap, sRayScene->tilemapBuffers[0]);
+    DecompressDataWithHeaderWram(gRaySceneDuoFight_Clouds1_Tilemap, sRayScene->tilemapBuffers[1]);
+    DecompressDataWithHeaderWram(gRaySceneDuoFight_Clouds3_Tilemap, sRayScene->tilemapBuffers[2]);
+    LoadPalette(gRaySceneDuoFight_Clouds_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
     LoadCompressedSpriteSheet(&sSpriteSheet_DuoFight_Groudon);
     LoadCompressedSpriteSheet(&sSpriteSheet_DuoFight_GroudonShoulder);
     LoadCompressedSpriteSheet(&sSpriteSheet_DuoFight_GroudonClaw);
     LoadCompressedSpriteSheet(&sSpriteSheet_DuoFight_Kyogre);
     LoadCompressedSpriteSheet(&sSpriteSheet_DuoFight_KyogrePectoralFin);
     LoadCompressedSpriteSheet(&sSpriteSheet_DuoFight_KyogreDorsalFin);
-    LoadCompressedSpritePalette(&sSpritePal_DuoFight_Groudon);
-    LoadCompressedSpritePalette(&sSpritePal_DuoFight_Kyogre);
+    LoadSpritePalette(&sSpritePal_DuoFight_Groudon);
+    LoadSpritePalette(&sSpritePal_DuoFight_Kyogre);
 }
 
 static void Task_DuoFightAnim(u8 taskId)
@@ -2030,12 +1978,12 @@ static void LoadTakesFlightSceneGfx(void)
     DecompressAndCopyTileDataToVram(2, gRaySceneTakesFlight_Rayquaza_Gfx, 0, 0, 0);
     while (FreeTempTileDataBuffersIfPossible())
         ;
-    LZDecompressWram(gRaySceneDuoFight_Clouds2_Tilemap, sRayScene->tilemapBuffers[0]);
-    LZDecompressWram(gRaySceneTakesFlight_Bg_Tilemap, sRayScene->tilemapBuffers[1]);
-    LZDecompressWram(gRaySceneTakesFlight_Rayquaza_Tilemap, sRayScene->tilemapBuffers[2]);
-    LoadCompressedPalette(gRaySceneTakesFlight_Rayquaza_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+    DecompressDataWithHeaderWram(gRaySceneDuoFight_Clouds2_Tilemap, sRayScene->tilemapBuffers[0]);
+    DecompressDataWithHeaderWram(gRaySceneTakesFlight_Bg_Tilemap, sRayScene->tilemapBuffers[1]);
+    DecompressDataWithHeaderWram(gRaySceneTakesFlight_Rayquaza_Tilemap, sRayScene->tilemapBuffers[2]);
+    LoadPalette(gRaySceneTakesFlight_Rayquaza_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
     LoadCompressedSpriteSheet(&sSpriteSheet_TakesFlight_Smoke);
-    LoadCompressedSpritePalette(&sSpritePal_TakesFlight_Smoke);
+    LoadSpritePalette(&sSpritePal_TakesFlight_Smoke);
 }
 
 static void Task_RayTakesFlightAnim(u8 taskId)
@@ -2233,18 +2181,18 @@ static void LoadDescendsSceneGfx(void)
     DecompressAndCopyTileDataToVram(1, gRaySceneDescends_Bg_Gfx, 0, 0, 0);
     while (FreeTempTileDataBuffersIfPossible())
         ;
-    LZDecompressWram(gRaySceneDescends_Light_Tilemap, sRayScene->tilemapBuffers[0]);
-    LZDecompressWram(gRaySceneDescends_Bg_Tilemap, sRayScene->tilemapBuffers[3]);
+    DecompressDataWithHeaderWram(gRaySceneDescends_Light_Tilemap, sRayScene->tilemapBuffers[0]);
+    DecompressDataWithHeaderWram(gRaySceneDescends_Bg_Tilemap, sRayScene->tilemapBuffers[3]);
     CpuFastFill16(0, sRayScene->tilemapBuffers[2], BG_SCREEN_SIZE);
     CpuFastCopy(sRayScene->tilemapBuffers[3], sRayScene->tilemapBuffers[1], BG_SCREEN_SIZE);
     CpuFastFill16(0, &sRayScene->tilemapBuffers[1][0x100], 0x340);
 
-    LoadCompressedPalette(gRaySceneDescends_Bg_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+    LoadPalette(gRaySceneDescends_Bg_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
     gPlttBufferUnfaded[0] = RGB_WHITE;
     gPlttBufferFaded[0] = RGB_WHITE;
     LoadCompressedSpriteSheet(&sSpriteSheet_Descends_Rayquaza);
     LoadCompressedSpriteSheet(&sSpriteSheet_Descends_RayquazaTail);
-    LoadCompressedSpritePalette(&sSpritePal_Descends_Rayquaza);
+    LoadSpritePalette(&sSpritePal_Descends_Rayquaza);
 }
 
 // Draw ray of light emerging from the clouds
@@ -2484,11 +2432,11 @@ static void LoadChargesSceneGfx(void)
     DecompressAndCopyTileDataToVram(3, gRaySceneCharges_Bg_Gfx, 0, 0, 0);
     while (FreeTempTileDataBuffersIfPossible())
         ;
-    LZDecompressWram(gRaySceneCharges_Orbs_Tilemap, sRayScene->tilemapBuffers[0]);
-    LZDecompressWram(gRaySceneCharges_Rayquaza_Tilemap, sRayScene->tilemapBuffers[1]);
-    LZDecompressWram(gRaySceneCharges_Streaks_Tilemap, sRayScene->tilemapBuffers[2]);
-    LZDecompressWram(gRaySceneCharges_Bg_Tilemap, sRayScene->tilemapBuffers[3]);
-    LoadCompressedPalette(gRaySceneCharges_Bg_Pal, BG_PLTT_ID(0), 4 * PLTT_SIZE_4BPP);
+    DecompressDataWithHeaderWram(gRaySceneCharges_Orbs_Tilemap, sRayScene->tilemapBuffers[0]);
+    DecompressDataWithHeaderWram(gRaySceneCharges_Rayquaza_Tilemap, sRayScene->tilemapBuffers[1]);
+    DecompressDataWithHeaderWram(gRaySceneCharges_Streaks_Tilemap, sRayScene->tilemapBuffers[2]);
+    DecompressDataWithHeaderWram(gRaySceneCharges_Bg_Tilemap, sRayScene->tilemapBuffers[3]);
+    LoadPalette(gRaySceneCharges_Bg_Pal, BG_PLTT_ID(0), 4 * PLTT_SIZE_4BPP);
 }
 
 #define tState          data[0]
@@ -2669,20 +2617,20 @@ static void LoadChasesAwaySceneGfx(void)
     DecompressAndCopyTileDataToVram(0, gRaySceneChasesAway_Light_Gfx, 0, 0, 0);
     while (FreeTempTileDataBuffersIfPossible())
         ;
-    LZDecompressWram(gRaySceneChasesAway_Bg_Tilemap, sRayScene->tilemapBuffers[1]);
-    LZDecompressWram(gRaySceneChasesAway_Light_Tilemap, sRayScene->tilemapBuffers[0]);
-    LZDecompressWram(gRaySceneChasesAway_Ring_Tilemap, sRayScene->tilemapBuffers[2]);
-    LoadCompressedPalette(gRaySceneChasesAway_Bg_Pal, BG_PLTT_ID(0), 3 * PLTT_SIZE_4BPP);
+    DecompressDataWithHeaderWram(gRaySceneChasesAway_Bg_Tilemap, sRayScene->tilemapBuffers[1]);
+    DecompressDataWithHeaderWram(gRaySceneChasesAway_Light_Tilemap, sRayScene->tilemapBuffers[0]);
+    DecompressDataWithHeaderWram(gRaySceneChasesAway_Ring_Tilemap, sRayScene->tilemapBuffers[2]);
+    LoadPalette(gRaySceneChasesAway_Bg_Pal, BG_PLTT_ID(0), 3 * PLTT_SIZE_4BPP);
     LoadCompressedSpriteSheet(&sSpriteSheet_ChasesAway_Groudon);
     LoadCompressedSpriteSheet(&sSpriteSheet_ChasesAway_GroudonTail);
     LoadCompressedSpriteSheet(&sSpriteSheet_ChasesAway_Kyogre);
     LoadCompressedSpriteSheet(&sSpriteSheet_ChasesAway_Rayquaza);
     LoadCompressedSpriteSheet(&sSpriteSheet_ChasesAway_RayquazaTail);
     LoadCompressedSpriteSheet(&sSpriteSheet_ChasesAway_KyogreSplash);
-    LoadCompressedSpritePalette(&sSpritePal_ChasesAway_Groudon);
-    LoadCompressedSpritePalette(&sSpritePal_ChasesAway_Kyogre);
-    LoadCompressedSpritePalette(&sSpritePal_ChasesAway_Rayquaza);
-    LoadCompressedSpritePalette(&sSpritePal_ChasesAway_KyogreSplash);
+    LoadSpritePalette(&sSpritePal_ChasesAway_Groudon);
+    LoadSpritePalette(&sSpritePal_ChasesAway_Kyogre);
+    LoadSpritePalette(&sSpritePal_ChasesAway_Rayquaza);
+    LoadSpritePalette(&sSpritePal_ChasesAway_KyogreSplash);
 }
 
 #define tState    data[0]

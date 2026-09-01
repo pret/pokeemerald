@@ -9,7 +9,7 @@
 #include "constants/field_effects.h"
 #include "constants/metatile_behaviors.h"
 
-static u8 GetValidMewMoveDirection(u8);
+static enum Direction GetValidMewMoveDirection(enum Direction);
 static bool8 ShouldMewMoveNorth(struct ObjectEvent *, u8);
 static bool8 ShouldMewMoveSouth(struct ObjectEvent *, u8);
 static bool8 ShouldMewMoveEast(struct ObjectEvent *, u8);
@@ -21,7 +21,7 @@ static EWRAM_DATA u8 sGrassSpriteId = 0;
 
 static s16 sPlayerToMewDeltaX;
 static s16 sPlayerToMewDeltaY;
-static u8 sMewDirectionCandidates[4];
+static enum Direction sMewDirectionCandidates[4];
 
 extern const struct SpritePalette gSpritePalette_GeneralFieldEffect1;
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
@@ -43,7 +43,7 @@ static u8 GetMewObjectEventId(void)
 
 // When the player enters Faraway Island interior it begins a "hide and seek" minigame where Mew disappears into the grass
 // This function returns the direction Mew will take a step, and is run every time the player takes a step
-u32 GetMewMoveDirection(void)
+enum Direction GetMewMoveDirection(void)
 {
     u8 i;
     int mewSafeFromTrap;
@@ -67,7 +67,7 @@ u32 GetMewMoveDirection(void)
     else
         mew->invisible = TRUE;
 
-    // Mew will stay in place for 1 step after its visible
+    // Mew will stay in place for 1 step after it's visible
     if (VarGet(VAR_FARAWAY_ISLAND_STEP_COUNTER) % 9 == 0)
         return DIR_NONE;
 
@@ -279,7 +279,7 @@ static bool8 CanMewMoveToCoords(s16 x, s16 y)
 }
 
 // Last ditch effort to move, clear move candidates and try all directions again
-static u8 GetValidMewMoveDirection(u8 ignoredDir)
+static enum Direction GetValidMewMoveDirection(enum Direction ignoredDir)
 {
     u8 i;
     u8 count = 0;
@@ -392,12 +392,13 @@ void SetMewAboveGrass(void)
             gSprites[mew->spriteId].subpriority = 1;
 
         LoadSpritePalette(&gSpritePalette_GeneralFieldEffect1);
-        UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(gSpritePalette_GeneralFieldEffect1.tag));
+        UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(gSpritePalette_GeneralFieldEffect1.tag), FALSE);
+        gSprites[mew->spriteId].subspriteTableNum = 1;
 
         x = mew->currentCoords.x;
         y = mew->currentCoords.y;
         SetSpritePosToOffsetMapCoords(&x, &y, 8, 8);
-        sGrassSpriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_LONG_GRASS], x, y, gSprites[mew->spriteId].subpriority - 1);
+        sGrassSpriteId = CreateSpriteAtEndUnchecked(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_LONG_GRASS], x, y, gSprites[mew->spriteId].subpriority - 1);
         if (sGrassSpriteId != MAX_SPRITES)
         {
             struct Sprite *sprite = &gSprites[sGrassSpriteId];

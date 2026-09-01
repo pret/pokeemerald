@@ -3,6 +3,7 @@
   "name": "MossdeepCity_House4",
   "layout": "LAYOUT_HOUSE_WITH_BED",
   "music": "MUS_RUSTBORO",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_MOSSDEEP_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

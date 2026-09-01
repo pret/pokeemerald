@@ -1,0 +1,22 @@
+{
+  "id": "MAP_SEVEN_ISLAND_UNUSED_HOUSE",
+  "name": "SevenIsland_UnusedHouse",
+  "layout": "LAYOUT_HOUSE4_FRLG",
+  "music": "MUS_RG_SEVII_67",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_SEVEN_ISLAND",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": []
+}

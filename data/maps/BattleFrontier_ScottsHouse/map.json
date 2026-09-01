@@ -3,6 +3,7 @@
   "name": "BattleFrontier_ScottsHouse",
   "layout": "LAYOUT_BATTLE_FRONTIER_SCOTTS_HOUSE",
   "music": "MUS_B_TOWER_RS",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

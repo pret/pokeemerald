@@ -1,0 +1,398 @@
+{
+  "id": "MAP_SAFFRON_CITY_GYM",
+  "name": "SaffronCity_Gym_Frlg",
+  "layout": "LAYOUT_SAFFRON_CITY_GYM",
+  "music": "MUS_RG_GYM",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_SAFFRON_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": true,
+  "allow_running": false,
+  "show_map_name": false,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_GYM",
+  "connections": null,
+  "object_events": [
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_M",
+      "x": 24,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "SaffronCity_Gym_EventScript_Cameron",
+      "flag": "0"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_M",
+      "x": 24,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "SaffronCity_Gym_EventScript_Johan",
+      "flag": "0"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_M",
+      "x": 4,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "SaffronCity_Gym_EventScript_Preston",
+      "flag": "0"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_CHANNELER",
+      "x": 14,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "SaffronCity_Gym_EventScript_Amanda",
+      "flag": "0"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_CHANNELER",
+      "x": 4,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "SaffronCity_Gym_EventScript_Stacy",
+      "flag": "0"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_CHANNELER",
+      "x": 4,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "SaffronCity_Gym_EventScript_Tasha",
+      "flag": "0"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_SABRINA",
+      "x": 14,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SaffronCity_Gym_EventScript_Sabrina",
+      "flag": "0"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_M",
+      "x": 24,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "SaffronCity_Gym_EventScript_Tyron",
+      "flag": "0"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_GYM_GUY",
+      "x": 15,
+      "y": 20,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SaffronCity_Gym_EventScript_GymGuy",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 13,
+      "y": 23,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY",
+      "dest_warp_id": "3"
+    },
+    {
+      "x": 14,
+      "y": 23,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY",
+      "dest_warp_id": "3"
+    },
+    {
+      "x": 15,
+      "y": 23,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY",
+      "dest_warp_id": "3"
+    },
+    {
+      "x": 18,
+      "y": 20,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "32"
+    },
+    {
+      "x": 0,
+      "y": 4,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "22"
+    },
+    {
+      "x": 0,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "20"
+    },
+    {
+      "x": 0,
+      "y": 12,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "30"
+    },
+    {
+      "x": 0,
+      "y": 15,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "11"
+    },
+    {
+      "x": 0,
+      "y": 20,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "28"
+    },
+    {
+      "x": 0,
+      "y": 23,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "19"
+    },
+    {
+      "x": 8,
+      "y": 4,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "18"
+    },
+    {
+      "x": 8,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "7"
+    },
+    {
+      "x": 8,
+      "y": 12,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "17"
+    },
+    {
+      "x": 8,
+      "y": 15,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "15"
+    },
+    {
+      "x": 8,
+      "y": 20,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "26"
+    },
+    {
+      "x": 8,
+      "y": 23,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "13"
+    },
+    {
+      "x": 12,
+      "y": 4,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "24"
+    },
+    {
+      "x": 12,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "12"
+    },
+    {
+      "x": 16,
+      "y": 4,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "10"
+    },
+    {
+      "x": 16,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "9"
+    },
+    {
+      "x": 18,
+      "y": 15,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "5"
+    },
+    {
+      "x": 20,
+      "y": 4,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "23"
+    },
+    {
+      "x": 20,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "4"
+    },
+    {
+      "x": 20,
+      "y": 12,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "21"
+    },
+    {
+      "x": 20,
+      "y": 15,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "16"
+    },
+    {
+      "x": 20,
+      "y": 20,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "27"
+    },
+    {
+      "x": 20,
+      "y": 23,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "14"
+    },
+    {
+      "x": 28,
+      "y": 4,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "25"
+    },
+    {
+      "x": 28,
+      "y": 7,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "8"
+    },
+    {
+      "x": 28,
+      "y": 12,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "31"
+    },
+    {
+      "x": 28,
+      "y": 15,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "6"
+    },
+    {
+      "x": 28,
+      "y": 20,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "29"
+    },
+    {
+      "x": 28,
+      "y": 23,
+      "elevation": 3,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "3"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 20,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SaffronCity_Gym_EventScript_GymStatue"
+    },
+    {
+      "type": "sign",
+      "x": 16,
+      "y": 20,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SaffronCity_Gym_EventScript_GymStatue"
+    }
+  ]
+}

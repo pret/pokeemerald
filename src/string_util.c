@@ -2,6 +2,7 @@
 #include "string_util.h"
 #include "text.h"
 #include "strings.h"
+#include "union_room_chat.h"
 
 EWRAM_DATA u8 gStringVar1[0x100] = {0};
 EWRAM_DATA u8 gStringVar2[0x100] = {0};
@@ -44,7 +45,7 @@ u8 *StringCopy_Nickname(u8 *dest, const u8 *src)
 
 u8 *StringGet_Nickname(u8 *str)
 {
-    u8 i;
+    u32 i;
     u32 limit = POKEMON_NAME_LENGTH;
 
     for (i = 0; i < limit; i++)
@@ -95,7 +96,7 @@ u8 *StringAppend(u8 *dest, const u8 *src)
 
 u8 *StringCopyN(u8 *dest, const u8 *src, u8 n)
 {
-    u16 i;
+    u32 i;
 
     for (i = 0; i < n; i++)
         dest[i] = src[i];
@@ -117,6 +118,27 @@ u16 StringLength(const u8 *str)
 
     while (str[length] != EOS)
         length++;
+
+    return length;
+}
+
+u16 StringLineLength(const u8 *str)
+{
+    u16 length = 0;
+
+    while (str[length] != EOS)
+    {
+        switch (str[length])
+        {
+        case CHAR_PROMPT_SCROLL:
+        case CHAR_PROMPT_CLEAR:
+        case CHAR_NEWLINE:
+            return length;
+        default:
+            length++;
+            break;
+        }
+    }
 
     return length;
 }
@@ -147,17 +169,6 @@ s32 StringCompareN(const u8 *str1, const u8 *str2, u32 n)
     }
 
     return *str1 - *str2;
-}
-
-bool8 IsStringLengthAtLeast(const u8 *str, s32 n)
-{
-    u8 i;
-
-    for (i = 0; i < n; i++)
-        if (str[i] && str[i] != EOS)
-            return TRUE;
-
-    return FALSE;
 }
 
 u8 *ConvertIntToDecimalStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 n)
@@ -275,7 +286,7 @@ u8 *ConvertUIntToDecimalStringN(u8 *dest, u32 value, enum StringConvertMode mode
 u8 *ConvertIntToHexStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 n)
 {
     enum { WAITING_FOR_NONZERO_DIGIT, WRITING_DIGITS, WRITING_SPACES } state;
-    u8 i;
+    u32 i;
     s32 powerOfSixteen;
     s32 largestPowerOfSixteen = 1;
 
@@ -363,6 +374,7 @@ u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
             case EXT_CTRL_CODE_RESUME_MUSIC:
                 break;
             case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
+            case EXT_CTRL_CODE_TEXT_COLORS:
                 *dest++ = *src++;
             case EXT_CTRL_CODE_PLAY_BGM:
                 *dest++ = *src++;
@@ -455,10 +467,15 @@ static const u8 *ExpandPlaceholder_KunChan(void)
 
 static const u8 *ExpandPlaceholder_RivalName(void)
 {
+#if IS_FRLG
+    if (gSaveBlock1Ptr->rivalName[0] != EOS)
+        return gSaveBlock1Ptr->rivalName;
+#endif
+
     if (gSaveBlock2Ptr->playerGender == MALE)
-        return gText_ExpandedPlaceholder_May;
+        return (IS_FRLG ? gText_ExpandedPlaceholder_Green : gText_ExpandedPlaceholder_May);
     else
-        return gText_ExpandedPlaceholder_Brendan;
+        return (IS_FRLG ? gText_ExpandedPlaceholder_Red : gText_ExpandedPlaceholder_Brendan);
 }
 
 static const u8 *ExpandPlaceholder_Version(void)
@@ -496,6 +513,14 @@ static const u8 *ExpandPlaceholder_Groudon(void)
     return gText_ExpandedPlaceholder_Groudon;
 }
 
+static const u8 *ExpandPlaceholder_Region(void)
+{
+    if (IS_FRLG)
+        return gText_Kanto;
+    else
+        return gText_Hoenn;
+}
+
 const u8 *GetExpandedPlaceholder(u32 id)
 {
     typedef const u8 *(*ExpandPlaceholderFunc)(void);
@@ -516,6 +541,7 @@ const u8 *GetExpandedPlaceholder(u32 id)
         [PLACEHOLDER_ID_MAXIE]        = ExpandPlaceholder_Maxie,
         [PLACEHOLDER_ID_KYOGRE]       = ExpandPlaceholder_Kyogre,
         [PLACEHOLDER_ID_GROUDON]      = ExpandPlaceholder_Groudon,
+        [PLACEHOLDER_ID_REGION]       = ExpandPlaceholder_Region,
     };
 
     if (id >= ARRAY_COUNT(funcs))
@@ -526,7 +552,7 @@ const u8 *GetExpandedPlaceholder(u32 id)
 
 u8 *StringFill(u8 *dest, u8 c, u16 n)
 {
-    u16 i;
+    u32 i;
 
     for (i = 0; i < n; i++)
         *dest++ = c;
@@ -599,23 +625,31 @@ u32 StringLength_Multibyte(const u8 *str)
     return length;
 }
 
-u8 *WriteColorChangeControlCode(u8 *dest, u32 colorType, u8 color)
+u8 *WriteColorChangeControlCode(u8 *dest, enum TextColorType colorType, u8 color)
 {
     *dest = EXT_CTRL_CODE_BEGIN;
     dest++;
 
     switch (colorType)
     {
-    case 0:
+    case TEXT_COLOR_TYPE_FOREGROUND:
         *dest = EXT_CTRL_CODE_COLOR;
         dest++;
         break;
-    case 1:
+    case TEXT_COLOR_TYPE_SHADOW:
         *dest = EXT_CTRL_CODE_SHADOW;
         dest++;
         break;
-    case 2:
+    case TEXT_COLOR_TYPE_HIGHLIGHT:
         *dest = EXT_CTRL_CODE_HIGHLIGHT;
+        dest++;
+        break;
+    case TEXT_COLOR_TYPE_ACCENT:
+        *dest = EXT_CTRL_CODE_ACCENT;
+        dest++;
+        break;
+    case TEXT_COLOR_TYPE_BACKGROUND:
+        *dest = EXT_CTRL_CODE_BACKGROUND;
         dest++;
         break;
     }
@@ -629,21 +663,6 @@ u8 *WriteColorChangeControlCode(u8 *dest, u32 colorType, u8 color)
 bool32 IsStringJapanese(u8 *str)
 {
     while (*str != EOS)
-    {
-        if (*str <= JAPANESE_CHAR_END)
-            if (*str != CHAR_SPACE)
-                return TRUE;
-        str++;
-    }
-
-    return FALSE;
-}
-
-bool32 IsStringNJapanese(u8 *str, s32 n)
-{
-    s32 i;
-
-    for (i = 0; *str != EOS && i < n; i++)
     {
         if (*str <= JAPANESE_CHAR_END)
             if (*str != CHAR_SPACE)
@@ -683,6 +702,10 @@ u8 GetExtCtrlCodeLength(u8 code)
         [EXT_CTRL_CODE_ENG]                    = 1,
         [EXT_CTRL_CODE_PAUSE_MUSIC]            = 1,
         [EXT_CTRL_CODE_RESUME_MUSIC]           = 1,
+        [EXT_CTRL_CODE_SPEAKER]                = 1,
+        [EXT_CTRL_CODE_ACCENT]                 = 2,
+        [EXT_CTRL_CODE_BACKGROUND]             = 2,
+        [EXT_CTRL_CODE_TEXT_COLORS]            = 4,
     };
 
     u8 length = 0;
@@ -736,11 +759,11 @@ s32 StringCompareWithoutExtCtrlCodes(const u8 *str1, const u8 *str2)
     return retVal;
 }
 
-void ConvertInternationalString(u8 *s, u8 language)
+void ConvertInternationalString(u8 *s, enum Language language)
 {
     if (language == LANGUAGE_JAPANESE)
     {
-        u8 i;
+        u32 i;
 
         StripExtCtrlCodes(s);
         i = StringLength(s);
@@ -750,7 +773,7 @@ void ConvertInternationalString(u8 *s, u8 language)
 
         i--;
 
-        while (i != (u8)-1)
+        while (i != -1)
         {
             s[i + 2] = s[i];
             i--;
@@ -778,4 +801,47 @@ void StripExtCtrlCodes(u8 *str)
         }
     }
     str[destIndex] = EOS;
+}
+
+u8 *StringCopyUppercase(u8 *dest, const u8 *src)
+{
+    while (*src != EOS)
+    {
+        if (*src >= CHAR_a && *src <= CHAR_z)
+            *dest = gCaseToggleTable[*src];
+        else
+            *dest = *src;
+        dest++;
+        src++;
+    }
+
+    *dest = EOS;
+    return dest;
+}
+
+bool32 DoesStringProperlyTerminate(const u8 *str, u32 last)
+{
+    for (u32 i = 0; i < last; i++)
+    {
+        if (str[i] == EOS)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+u8* const GetStringVar(u8 index)
+{
+    switch (index)
+    {
+    case 0:
+        return gStringVar1;
+    case 1:
+        return gStringVar2;
+    case 2:
+        return gStringVar3;
+    default:
+        errorf("Incorrect StringVar index: %d", index);
+        return gStringVar1;
+    }
 }

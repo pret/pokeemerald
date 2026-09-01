@@ -1,0 +1,146 @@
+{
+  "id": "MAP_SSANNE_2F_CORRIDOR",
+  "name": "SSAnne_2F_Corridor_Frlg",
+  "layout": "LAYOUT_SSANNE_2F_CORRIDOR",
+  "music": "MUS_RG_SS_ANNE",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_S_S_ANNE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+    {
+      "local_id": "LOCALID_SS_ANNE_RIVAL",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_BLUE",
+      "x": 30,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "FLAG_HIDE_SS_ANNE_RIVAL"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_SAILOR_FRLG",
+      "x": 2,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_UP_AND_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 2,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SSAnne_2F_Corridor_EventScript_Sailor",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 2,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_SSANNE_1F_CORRIDOR",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 3,
+      "y": 12,
+      "elevation": 3,
+      "dest_map": "MAP_SSANNE_3F_CORRIDOR",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 30,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_SSANNE_CAPTAINS_OFFICE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 6,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_SSANNE_2F_ROOM1",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 10,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_SSANNE_2F_ROOM2",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 14,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_SSANNE_2F_ROOM3",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 18,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_SSANNE_2F_ROOM4",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 22,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_SSANNE_2F_ROOM5",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 26,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_SSANNE_2F_ROOM6",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 30,
+      "y": 6,
+      "elevation": 3,
+      "var": "VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR",
+      "var_value": "0",
+      "script": "SSAnne_2F_Corridor_EventScript_RivalTriggerLeft"
+    },
+    {
+      "type": "trigger",
+      "x": 31,
+      "y": 6,
+      "elevation": 3,
+      "var": "VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR",
+      "var_value": "0",
+      "script": "SSAnne_2F_Corridor_EventScript_RivalTriggerMid"
+    },
+    {
+      "type": "trigger",
+      "x": 32,
+      "y": 6,
+      "elevation": 3,
+      "var": "VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR",
+      "var_value": "0",
+      "script": "SSAnne_2F_Corridor_EventScript_RivalTriggerRight"
+    }
+  ],
+  "bg_events": [
+
+  ]
+}

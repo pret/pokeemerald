@@ -1,0 +1,213 @@
+{
+  "id": "MAP_PEWTER_CITY_MUSEUM_1F",
+  "name": "PewterCity_Museum_1F_Frlg",
+  "layout": "LAYOUT_PEWTER_CITY_MUSEUM_1F",
+  "music": "MUS_RG_PEWTER",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_PEWTER_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_MUSEUM_SCIENTIST1",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_WORKER_M",
+      "x": 16,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PewterCity_Museum_1F_EventScript_Scientist1",
+      "flag": "0"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
+      "x": 2,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PewterCity_Museum_1F_EventScript_OldMan",
+      "flag": "0"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
+      "x": 21,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PewterCity_Museum_1F_EventScript_OldAmberScientist",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_OLD_AMBER",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_AMBER",
+      "x": 22,
+      "y": 3,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PewterCity_Museum_1F_EventScript_OldAmber",
+      "flag": "FLAG_HIDE_OLD_AMBER"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
+      "x": 26,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PewterCity_Museum_1F_EventScript_Scientist2",
+      "flag": "0"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
+      "x": 26,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PewterCity_Museum_1F_EventScript_SeismicTossTutor",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 13,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_PEWTER_CITY",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 14,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_PEWTER_CITY",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 15,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_PEWTER_CITY",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 21,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_PEWTER_CITY",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 22,
+      "y": 9,
+      "elevation": 3,
+      "dest_map": "MAP_PEWTER_CITY",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 8,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_PEWTER_CITY_MUSEUM_2F",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 5,
+      "elevation": 3,
+      "var": "VAR_MAP_SCENE_PEWTER_CITY_MUSEUM_1F",
+      "var_value": "0",
+      "script": "PewterCity_Museum_1F_EventScript_EntranceTriggerLeft"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 5,
+      "elevation": 3,
+      "var": "VAR_MAP_SCENE_PEWTER_CITY_MUSEUM_1F",
+      "var_value": "0",
+      "script": "PewterCity_Museum_1F_EventScript_EntranceTriggerMid"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 5,
+      "elevation": 3,
+      "var": "VAR_MAP_SCENE_PEWTER_CITY_MUSEUM_1F",
+      "var_value": "0",
+      "script": "PewterCity_Museum_1F_EventScript_EntranceTriggerRight"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PewterCity_Museum_1F_EventScript_AerodactylFossil"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PewterCity_Museum_1F_EventScript_KabutopsFossil"
+    },
+    {
+      "type": "sign",
+      "x": 27,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "PewterCity_Museum_1F_EventScript_PokemonJournalBrock"
+    },
+    {
+      "type": "sign",
+      "x": 26,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "PewterCity_Museum_1F_EventScript_PokemonJournalBrock"
+    }
+  ]
+}

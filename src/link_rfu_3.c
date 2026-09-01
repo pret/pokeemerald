@@ -35,7 +35,7 @@ EWRAM_DATA u8 gWirelessStatusIndicatorSpriteId = 0;
 static u8 sSequenceArrayValOffset;
 
 static const u16 sWirelessLinkIconPalette[] = INCGFX_U16("graphics/link/wireless_icon.png", ".gbapal");
-static const u32 sWirelessLinkIconPic[] = INCGFX_U32("graphics/link/wireless_icon.png", ".4bpp.lz");
+static const u32 sWirelessLinkIconPic[] = INCGFX_U32("graphics/link/wireless_icon.png", ".4bpp.smol");
 
 // Most of the below two tables won't make sense with ASCII encoding.
 static const u8 sWireless_ASCIItoRSETable[256] = {
@@ -134,7 +134,7 @@ static const u8 sWireless_ASCIItoRSETable[256] = {
     0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94
 };
 
-static const u8 sWireless_RSEtoASCIITable[256] = {
+const u8 gWireless_RSEtoASCIITable[256] = {
     [CHAR_SPACE] = ' ',
     0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d,
     0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94, 0x95,
@@ -305,9 +305,6 @@ static const struct SpriteTemplate sWirelessStatusIndicatorSpriteTemplate = {
     .paletteTag = TAG_PAL_STATUS_INDICATOR,
     .oam = &sWirelessStatusIndicatorOamData,
     .anims = sWirelessStatusIndicatorAnims,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 void RfuRecvQueue_Reset(struct RfuRecvQueue *queue)
@@ -611,7 +608,7 @@ static void UNUSED PkmnStrToASCII(u8 *asciiStr, const u8 *pkmnStr)
     s32 i;
 
     for (i = 0; pkmnStr[i] != EOS; i++)
-        asciiStr[i] = sWireless_RSEtoASCIITable[pkmnStr[i]];
+        asciiStr[i] = gWireless_RSEtoASCIITable[pkmnStr[i]];
     asciiStr[i] = 0;
 }
 

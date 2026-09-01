@@ -69,12 +69,6 @@ struct CableCar
 };
 
 static EWRAM_DATA struct CableCar *sCableCar = NULL;
-static EWRAM_DATA u8 sGroundX_Up = 0;
-static EWRAM_DATA u8 sGroundY_Up = 0;
-static EWRAM_DATA u8 sGroundSegmentY_Up = 0;
-static EWRAM_DATA u8 sGroundX_Down = 0;
-static EWRAM_DATA u8 sGroundY_Down = 0;
-static EWRAM_DATA u8 sGroundSegmentY_Down = 0;
 
 static void CB2_LoadCableCar(void);
 static void SetBgRegs(bool8);
@@ -131,11 +125,11 @@ static const struct BgTemplate sBgTemplates[4] = {
     },
 };
 
-static const u16 sGround_Tilemap[] = INCGFX_U16("graphics/cable_car/ground.bin", ".lz");
-static const u16 sTrees_Tilemap[] = INCGFX_U16("graphics/cable_car/trees.bin", ".lz");
-static const u16 sBgMountains_Tilemap[] = INCGFX_U16("graphics/cable_car/bg_mountains.bin", ".lz");
+static const u16 sGround_Tilemap[] = INCBIN_U16("graphics/cable_car/ground.bin.smolTM");
+static const u16 sTrees_Tilemap[] = INCBIN_U16("graphics/cable_car/trees.bin.smolTM");
+static const u16 sBgMountains_Tilemap[] = INCBIN_U16("graphics/cable_car/bg_mountains.bin.smolTM");
 static const u16 sPylonTop_Tilemap[] = INCBIN_U16("graphics/cable_car/pylon_top.bin");
-static const u16 sPylonPole_Tilemap[] = INCGFX_U16("graphics/cable_car/pylon_pole.bin", ".lz");
+static const u16 sPylonPole_Tilemap[] = INCBIN_U16("graphics/cable_car/pylon_pole.bin.smolTM");
 
 static const struct CompressedSpriteSheet sSpriteSheets[] = {
     { gCableCar_Gfx,      0x800, TAG_CABLE_CAR },
@@ -197,18 +191,12 @@ static const struct SpriteTemplate sSpriteTemplates_CableCar[] =
         .tileTag = TAG_CABLE_CAR,
         .paletteTag = TAG_CABLE_CAR,
         .oam = &sOam_CableCar,
-        .anims = gDummySpriteAnimTable,
-        .images = NULL,
-        .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCB_CableCar,
     },
     {
         .tileTag = TAG_DOOR,
         .paletteTag = TAG_CABLE_CAR,
         .oam = &sOam_CableCarDoor,
-        .anims = gDummySpriteAnimTable,
-        .images = NULL,
-        .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCB_CableCar,
     },
 };
@@ -218,9 +206,6 @@ static const struct SpriteTemplate sSpriteTemplate_Cable =
     .tileTag = TAG_CABLE,
     .paletteTag = TAG_CABLE_CAR,
     .oam = &sOam_Cable,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_Cable,
 };
 
@@ -786,12 +771,12 @@ static void CreateCableCarSprites(void)
     u8 spriteId;
     u8 i;
 
-    u8 playerGraphicsIds[2] = {
+    u16 playerGraphicsIds[2] = {
         [MALE]   = OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL,
         [FEMALE] = OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
     };
     u16 rval = Random();
-    u8 hikerGraphicsIds[4] = {
+    u16 hikerGraphicsIds[4] = {
         OBJ_EVENT_GFX_HIKER,
         OBJ_EVENT_GFX_CAMPER,
         OBJ_EVENT_GFX_PICNICKER,
@@ -809,62 +794,62 @@ static void CreateCableCarSprites(void)
 
     switch (GOING_DOWN)
     {
-        case FALSE:
-        default:
-            // Create player sprite
-            spriteId = CreateObjectGraphicsSprite(playerGraphicsIds[gSaveBlock2Ptr->playerGender], SpriteCB_Player, 200, 73, 102);
-            if (spriteId != MAX_SPRITES)
-            {
-                gSprites[spriteId].oam.priority = 2;
-                gSprites[spriteId].x2 = 8;
-                gSprites[spriteId].y2 = 16;
-                gSprites[spriteId].sXPos = 200;
-                gSprites[spriteId].sYPos = 73;
-            }
-            // Create car sprite
-            spriteId = CreateSprite(&sSpriteTemplates_CableCar[0], 176, 43, 0x67);
-            gSprites[spriteId].x2 = gSprites[spriteId].y2 = 32;
-            gSprites[spriteId].sXPos = 176;
-            gSprites[spriteId].sYPos = 43;
-            // Create door sprite
-            spriteId = CreateSprite(&sSpriteTemplates_CableCar[1], 200, 99, 0x65);
+    case FALSE:
+    default:
+        // Create player sprite
+        spriteId = CreateObjectGraphicsSprite(playerGraphicsIds[gSaveBlock2Ptr->playerGender], SpriteCB_Player, 200, 73, 102);
+        if (spriteId != MAX_SPRITES)
+        {
+            gSprites[spriteId].oam.priority = 2;
             gSprites[spriteId].x2 = 8;
-            gSprites[spriteId].y2 = 4;
+            gSprites[spriteId].y2 = 16;
             gSprites[spriteId].sXPos = 200;
-            gSprites[spriteId].sYPos = 99;
-            // Init weather
-            sCableCar->weather = WEATHER_VOLCANIC_ASH;
-            sCableCar->weatherDelay = 350;
-            SetCurrentAndNextWeatherNoDelay(WEATHER_SUNNY);
-            break;
-        case TRUE:
-            CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->groundTilemap + 0x24, 24, 26, 12, 3, 17);
-            // Create player sprite
-            spriteId = CreateObjectGraphicsSprite(playerGraphicsIds[gSaveBlock2Ptr->playerGender], SpriteCB_Player, 128, 39, 102);
-            if (spriteId != MAX_SPRITES)
-            {
-                gSprites[spriteId].oam.priority = 2;
-                gSprites[spriteId].x2 = 8;
-                gSprites[spriteId].y2 = 16;
-                gSprites[spriteId].sXPos = 128;
-                gSprites[spriteId].sYPos = 39;
-            }
-            // Create car sprite
-            spriteId = CreateSprite(&sSpriteTemplates_CableCar[0], 104, 9, 0x67);
-            gSprites[spriteId].x2 = gSprites[spriteId].y2 = 32;
-            gSprites[spriteId].sXPos = 104;
-            gSprites[spriteId].sYPos = 9;
-            // Create door sprite
-            spriteId = CreateSprite(&sSpriteTemplates_CableCar[1], 128, 65, 0x65);
+            gSprites[spriteId].sYPos = 73;
+        }
+        // Create car sprite
+        spriteId = CreateSprite(&sSpriteTemplates_CableCar[0], 176, 43, 0x67);
+        gSprites[spriteId].x2 = gSprites[spriteId].y2 = 32;
+        gSprites[spriteId].sXPos = 176;
+        gSprites[spriteId].sYPos = 43;
+        // Create door sprite
+        spriteId = CreateSprite(&sSpriteTemplates_CableCar[1], 200, 99, 0x65);
+        gSprites[spriteId].x2 = 8;
+        gSprites[spriteId].y2 = 4;
+        gSprites[spriteId].sXPos = 200;
+        gSprites[spriteId].sYPos = 99;
+        // Init weather
+        sCableCar->weather = WEATHER_VOLCANIC_ASH;
+        sCableCar->weatherDelay = 350;
+        SetCurrentAndNextWeatherNoDelay(WEATHER_SUNNY);
+        break;
+    case TRUE:
+        CopyToBgTilemapBufferRect_ChangePalette(0, sCableCar->groundTilemap + 0x24, 24, 26, 12, 3, 17);
+        // Create player sprite
+        spriteId = CreateObjectGraphicsSprite(playerGraphicsIds[gSaveBlock2Ptr->playerGender], SpriteCB_Player, 128, 39, 102);
+        if (spriteId != MAX_SPRITES)
+        {
+            gSprites[spriteId].oam.priority = 2;
             gSprites[spriteId].x2 = 8;
-            gSprites[spriteId].y2 = 4;
+            gSprites[spriteId].y2 = 16;
             gSprites[spriteId].sXPos = 128;
-            gSprites[spriteId].sYPos = 65;
-            // Init weather
-            sCableCar->weather = WEATHER_SUNNY;
-            sCableCar->weatherDelay = 265;
-            SetCurrentAndNextWeatherNoDelay(WEATHER_VOLCANIC_ASH);
-            break;
+            gSprites[spriteId].sYPos = 39;
+        }
+        // Create car sprite
+        spriteId = CreateSprite(&sSpriteTemplates_CableCar[0], 104, 9, 0x67);
+        gSprites[spriteId].x2 = gSprites[spriteId].y2 = 32;
+        gSprites[spriteId].sXPos = 104;
+        gSprites[spriteId].sYPos = 9;
+        // Create door sprite
+        spriteId = CreateSprite(&sSpriteTemplates_CableCar[1], 128, 65, 0x65);
+        gSprites[spriteId].x2 = 8;
+        gSprites[spriteId].y2 = 4;
+        gSprites[spriteId].sXPos = 128;
+        gSprites[spriteId].sYPos = 65;
+        // Init weather
+        sCableCar->weather = WEATHER_SUNNY;
+        sCableCar->weatherDelay = 265;
+        SetCurrentAndNextWeatherNoDelay(WEATHER_VOLCANIC_ASH);
+        break;
     }
     for (i = 0; i < 9; i++)
     {
@@ -970,61 +955,67 @@ static void AnimateGroundGoingDown(void)
 static void DrawNextGroundSegmentGoingUp(void)
 {
     u8 i = 0;
+    u8 groundX_Up = 0;
+    u8 groundY_Up = 0;
+    u8 groundSegmentY_Up = 0;
 
     sCableCar->groundXOffset = sCableCar->groundYOffset = 0;
     sCableCar->groundXBase = sCableCar->bg0HorizontalOffset;
     sCableCar->groundYBase = sCableCar->bg0VerticalOffset;
     sCableCar->groundSegmentXStart = (sCableCar->groundSegmentXStart + 30) % 32;
     sCableCar->groundTileIdx -= 2;
-    sGroundSegmentY_Up = (sCableCar->groundSegmentYStart + 23) % 32;
+    groundSegmentY_Up = (sCableCar->groundSegmentYStart + 23) % 32;
 
     // Draw next segment
     for (i = 0; i < ARRAY_COUNT(sCableCar->groundTileBuffer); i++)
     {
-        sGroundX_Up = sCableCar->groundSegmentXStart;
-        sGroundY_Up = (sGroundSegmentY_Up + i) % 32;
-        FillBgTilemapBufferRect(0, sCableCar->groundTileBuffer[i][sCableCar->groundTileIdx], sGroundX_Up, sGroundY_Up, 1, 1, 17);
-        sGroundX_Up = (sGroundX_Up + 1) % 32;
-        FillBgTilemapBufferRect(0, sCableCar->groundTileBuffer[i][sCableCar->groundTileIdx + 1], sGroundX_Up, sGroundY_Up, 1, 1, 17);
+        groundX_Up = sCableCar->groundSegmentXStart;
+        groundY_Up = (groundSegmentY_Up + i) % 32;
+        FillBgTilemapBufferRect(0, sCableCar->groundTileBuffer[i][sCableCar->groundTileIdx], groundX_Up, groundY_Up, 1, 1, 17);
+        groundX_Up = (groundX_Up + 1) % 32;
+        FillBgTilemapBufferRect(0, sCableCar->groundTileBuffer[i][sCableCar->groundTileIdx + 1], groundX_Up, groundY_Up, 1, 1, 17);
     }
 
     // Erase old segment
-    sGroundX_Up = (sCableCar->groundSegmentXStart + 30) % 32;
-    FillBgTilemapBufferRect(0, 0, sGroundX_Up, 0, 2, 32, 17);
+    groundX_Up = (sCableCar->groundSegmentXStart + 30) % 32;
+    FillBgTilemapBufferRect(0, 0, groundX_Up, 0, 2, 32, 17);
     if (sCableCar->groundTileIdx == 0)
     {
         sCableCar->groundSegmentYStart = (sCableCar->groundSegmentYStart + 29) % 32;
         sCableCar->groundTileIdx = 12;
         BufferNextGroundSegment();
-        sGroundX_Up = (sCableCar->groundSegmentYStart + 1) % 32;
-        FillBgTilemapBufferRect(0, 0, 0, sGroundX_Up, 32, 9, 17);
+        groundX_Up = (sCableCar->groundSegmentYStart + 1) % 32;
+        FillBgTilemapBufferRect(0, 0, 0, groundX_Up, 32, 9, 17);
     }
 }
 
 static void DrawNextGroundSegmentGoingDown(void)
 {
     u8 i = 0;
+    u8 groundX_Down = 0;
+    u8 groundY_Down = 0;
+    u8 groundSegmentY_Down = 0;
 
     sCableCar->groundXOffset = sCableCar->groundYOffset = 0;
     sCableCar->groundXBase = sCableCar->bg0HorizontalOffset;
     sCableCar->groundYBase = sCableCar->bg0VerticalOffset;
     sCableCar->groundSegmentXStart = (sCableCar->groundSegmentXStart + 2) % 32;
     sCableCar->groundTileIdx += 2;
-    sGroundSegmentY_Down = sCableCar->groundSegmentYStart;
+    groundSegmentY_Down = sCableCar->groundSegmentYStart;
 
     // Draw next segment
     for (i = 0; i < ARRAY_COUNT(sCableCar->groundTileBuffer); i++)
     {
-        sGroundX_Down = sCableCar->groundSegmentXStart;
-        sGroundY_Down = (sGroundSegmentY_Down + i) % 32;
-        FillBgTilemapBufferRect(0, sCableCar->groundTileBuffer[i][sCableCar->groundTileIdx], sGroundX_Down, sGroundY_Down, 1, 1, 17);
-        sGroundX_Down = (sGroundX_Down + 1) % 32;
-        FillBgTilemapBufferRect(0, sCableCar->groundTileBuffer[i][sCableCar->groundTileIdx + 1], sGroundX_Down, sGroundY_Down, 1, 1, 17);
+        groundX_Down = sCableCar->groundSegmentXStart;
+        groundY_Down = (groundSegmentY_Down + i) % 32;
+        FillBgTilemapBufferRect(0, sCableCar->groundTileBuffer[i][sCableCar->groundTileIdx], groundX_Down, groundY_Down, 1, 1, 17);
+        groundX_Down = (groundX_Down + 1) % 32;
+        FillBgTilemapBufferRect(0, sCableCar->groundTileBuffer[i][sCableCar->groundTileIdx + 1], groundX_Down, groundY_Down, 1, 1, 17);
     }
 
     // Erase old segment
-    sGroundY_Down = (sCableCar->groundSegmentYStart + 23) % 32;
-    FillBgTilemapBufferRect(0, 0, sCableCar->groundSegmentXStart, sGroundY_Down, 2, 9, 17);
+    groundY_Down = (sCableCar->groundSegmentYStart + 23) % 32;
+    FillBgTilemapBufferRect(0, 0, sCableCar->groundSegmentXStart, groundY_Down, 2, 9, 17);
     if (sCableCar->groundTileIdx == 10)
     {
         sCableCar->groundSegmentYStart = (sCableCar->groundSegmentYStart + 3) % 32;
@@ -1037,25 +1028,24 @@ static void InitGroundTilemapData(bool8 goingDown)
 {
     switch (goingDown)
     {
-        case FALSE:
-        default:
-            sCableCar->groundTilemapOffset = 2;
-            sCableCar->groundSegmentXStart = 0;
-            sCableCar->groundSegmentYStart = 20;
-            sCableCar->groundTileIdx = 12;
-            BufferNextGroundSegment();
-            DrawNextGroundSegmentGoingUp();
-            break;
-        case TRUE:
-            sCableCar->groundTilemapOffset = 2;
-            sCableCar->groundSegmentXStart = 28;
-            sCableCar->groundSegmentYStart = 20;
-            sCableCar->groundTileIdx = 4;
-            BufferNextGroundSegment();
-            DrawNextGroundSegmentGoingDown();
-            break;
+    case FALSE:
+    default:
+        sCableCar->groundTilemapOffset = 2;
+        sCableCar->groundSegmentXStart = 0;
+        sCableCar->groundSegmentYStart = 20;
+        sCableCar->groundTileIdx = 12;
+        BufferNextGroundSegment();
+        DrawNextGroundSegmentGoingUp();
+        break;
+    case TRUE:
+        sCableCar->groundTilemapOffset = 2;
+        sCableCar->groundSegmentXStart = 28;
+        sCableCar->groundSegmentYStart = 20;
+        sCableCar->groundTileIdx = 4;
+        BufferNextGroundSegment();
+        DrawNextGroundSegmentGoingDown();
+        break;
     }
 
     sCableCar->groundTimer = 0;
 }
-

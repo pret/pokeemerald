@@ -19,5 +19,10 @@ void BufferPokedexRatingForMatchCall(u8 *destStr);
 bool32 SelectMatchCallMessage(int trainerId, u8 *str);
 void LoadMatchCallWindowGfx(u32 windowId, u32 destOffset, u32 paletteId);
 void DrawMatchCallTextBoxBorder(u32 windowId, u32 tileOffset, u32 paletteId);
+void RedrawMatchCallTextBoxBorder(void);
+
+bool32 GetActiveTrainerRematches(u32 matchCallId);
+void SetActiveTrainerRematches(u32 matchCallId, u32 value);
+void SetTrainerRematchStepCounter(u32 value);
 
 #endif //GUARD_MATCH_CALL_H

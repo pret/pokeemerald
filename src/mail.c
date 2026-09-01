@@ -68,8 +68,8 @@ struct MailRead
     /*0x021c*/ u8 monIconSpriteId;
     /*0x021d*/ u8 language;
     /*0x021e*/ bool8 international;
-    /*0x0220*/ u8 * (*parserSingle)(u8 *dest, u16 word);
-    /*0x0224*/ u8 * (*parserMultiple)(u8 *dest, const u16 *src, u16 length1, u16 length2);
+    /*0x0220*/ u8 *(*parserSingle)(u8 *dest, u16 word);
+    /*0x0224*/ u8 *(*parserMultiple)(u8 *dest, const u16 *src, u16 length1, u16 length2);
     /*0x0228*/ const struct MailLayout *layout;
     /*0x022c*/ u8 bg1TilemapBuffer[0x1000];
     /*0x122c*/ u8 bg2TilemapBuffer[0x1000];
@@ -85,6 +85,8 @@ static void CB2_MailRead(void);
 static void CB2_WaitForPaletteExitOnKeyPress(void);
 static void CB2_ExitOnKeyPress(void);
 static void CB2_ExitMailReadFreeVars(void);
+
+static const u8 sText_FromSpace[] = _("From ");
 
 static const struct BgTemplate sBgTemplates[] = {
     {
@@ -445,7 +447,7 @@ static const struct MailLayout sMailLayouts_Tall[] = {
 void ReadMail(struct Mail *mail, MainCallback exitCallback, bool8 hasText)
 {
     u16 buffer[2];
-    u16 species;
+    enum Species species;
 
     sMailRead = AllocZeroed(sizeof(*sMailRead));
     sMailRead->language = GAME_LANGUAGE;
@@ -504,121 +506,121 @@ static bool8 MailReadBuildGraphics(void)
 
     switch (gMain.state)
     {
-        case 0:
-            SetVBlankCallback(NULL);
-            ScanlineEffect_Stop();
-            SetGpuReg(REG_OFFSET_DISPCNT, 0);
-            break;
-        case 1:
-            CpuFill16(0, (void *)OAM, OAM_SIZE);
-            break;
-        case 2:
-            ResetPaletteFade();
-            break;
-        case 3:
-            ResetTasks();
-            break;
-        case 4:
-            ResetSpriteData();
-            break;
-        case 5:
-            FreeAllSpritePalettes();
-            ResetTempTileDataBuffers();
-            SetGpuReg(REG_OFFSET_BG0HOFS, 0);
-            SetGpuReg(REG_OFFSET_BG0VOFS, 0);
-            SetGpuReg(REG_OFFSET_BG1HOFS, 0);
-            SetGpuReg(REG_OFFSET_BG1VOFS, 0);
-            SetGpuReg(REG_OFFSET_BG2VOFS, 0);
-            SetGpuReg(REG_OFFSET_BG2HOFS, 0);
-            SetGpuReg(REG_OFFSET_BG3HOFS, 0);
-            SetGpuReg(REG_OFFSET_BG3VOFS, 0);
-            SetGpuReg(REG_OFFSET_BLDCNT,  0);
-            SetGpuReg(REG_OFFSET_BLDALPHA, 0);
-            break;
-        case 6:
-            ResetBgsAndClearDma3BusyFlags(0);
-            InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
-            SetBgTilemapBuffer(1, sMailRead->bg1TilemapBuffer);
-            SetBgTilemapBuffer(2, sMailRead->bg2TilemapBuffer);
-            break;
-        case 7:
-            InitWindows(sWindowTemplates);
-            DeactivateAllTextPrinters();
-            break;
-        case 8:
-            DecompressAndCopyTileDataToVram(1, sMailGraphics[sMailRead->mailType].tiles, 0, 0, 0);
-            break;
-        case 9:
-            if (FreeTempTileDataBuffersIfPossible())
-                return FALSE;
-            break;
-        case 10:
-            FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
-            FillBgTilemapBufferRect_Palette0(2, 1, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
-            CopyToBgTilemapBuffer(1, sMailGraphics[sMailRead->mailType].tileMap, 0, 0);
-            break;
-        case 11:
-            CopyBgTilemapBufferToVram(0);
-            CopyBgTilemapBufferToVram(1);
-            CopyBgTilemapBufferToVram(2);
-            break;
-        case 12:
-            LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
-            gPlttBufferUnfaded[BG_PLTT_ID(15) + 10] = sMailGraphics[sMailRead->mailType].textColor;
-            gPlttBufferFaded[BG_PLTT_ID(15) + 10] = sMailGraphics[sMailRead->mailType].textColor;
-            gPlttBufferUnfaded[BG_PLTT_ID(15) + 11] = sMailGraphics[sMailRead->mailType].textShadow;
-            gPlttBufferFaded[BG_PLTT_ID(15) + 11] = sMailGraphics[sMailRead->mailType].textShadow;
-
-            LoadPalette(sMailGraphics[sMailRead->mailType].palette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-            gPlttBufferUnfaded[BG_PLTT_ID(0) + 10] = sBgColors[gSaveBlock2Ptr->playerGender][0];
-            gPlttBufferFaded[BG_PLTT_ID(0) + 10] = sBgColors[gSaveBlock2Ptr->playerGender][0];
-            gPlttBufferUnfaded[BG_PLTT_ID(0) + 11] = sBgColors[gSaveBlock2Ptr->playerGender][1];
-            gPlttBufferFaded[BG_PLTT_ID(0) + 11] = sBgColors[gSaveBlock2Ptr->playerGender][1];
-            break;
-        case 13:
-            if (sMailRead->hasText)
-                BufferMailText();
-            break;
-        case 14:
-            if (sMailRead->hasText)
-            {
-                PrintMailText();
-                RunTextPrinters();
-            }
-            break;
-        case 15:
-            if (Overworld_IsRecvQueueAtMax() == TRUE)
-                return FALSE;
-            break;
-        case 16:
-            SetVBlankCallback(VBlankCB_MailRead);
-            gPaletteFade.bufferTransferDisabled = TRUE;
-            break;
-        case 17:
-            icon = GetIconSpeciesNoPersonality(sMailRead->mail->species);
-            switch (sMailRead->iconType)
-            {
-            case ICON_TYPE_BEAD:
-                LoadMonIconPalette(icon);
-                sMailRead->monIconSpriteId = CreateMonIconNoPersonality(icon, SpriteCallbackDummy, 96, 128, 0, FALSE);
-                break;
-            case ICON_TYPE_DREAM:
-                LoadMonIconPalette(icon);
-                sMailRead->monIconSpriteId = CreateMonIconNoPersonality(icon, SpriteCallbackDummy, 40, 128, 0, FALSE);
-                break;
-            }
-            break;
-        case 18:
-            SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
-            ShowBg(0);
-            ShowBg(1);
-            ShowBg(2);
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-            gPaletteFade.bufferTransferDisabled = FALSE;
-            sMailRead->callback = CB2_WaitForPaletteExitOnKeyPress;
-            return TRUE;
-        default:
+    case 0:
+        SetVBlankCallback(NULL);
+        ScanlineEffect_Stop();
+        SetGpuReg(REG_OFFSET_DISPCNT, 0);
+        break;
+    case 1:
+        CpuFill16(0, (void *)OAM, OAM_SIZE);
+        break;
+    case 2:
+        ResetPaletteFade();
+        break;
+    case 3:
+        ResetTasks();
+        break;
+    case 4:
+        ResetSpriteData();
+        break;
+    case 5:
+        FreeAllSpritePalettes();
+        ResetTempTileDataBuffers();
+        SetGpuReg(REG_OFFSET_BG0HOFS, 0);
+        SetGpuReg(REG_OFFSET_BG0VOFS, 0);
+        SetGpuReg(REG_OFFSET_BG1HOFS, 0);
+        SetGpuReg(REG_OFFSET_BG1VOFS, 0);
+        SetGpuReg(REG_OFFSET_BG2VOFS, 0);
+        SetGpuReg(REG_OFFSET_BG2HOFS, 0);
+        SetGpuReg(REG_OFFSET_BG3HOFS, 0);
+        SetGpuReg(REG_OFFSET_BG3VOFS, 0);
+        SetGpuReg(REG_OFFSET_BLDCNT,  0);
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+        break;
+    case 6:
+        ResetBgsAndClearDma3BusyFlags(0);
+        InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
+        SetBgTilemapBuffer(1, sMailRead->bg1TilemapBuffer);
+        SetBgTilemapBuffer(2, sMailRead->bg2TilemapBuffer);
+        break;
+    case 7:
+        InitWindows(sWindowTemplates);
+        DeactivateAllTextPrinters();
+        break;
+    case 8:
+        DecompressAndCopyTileDataToVram(1, sMailGraphics[sMailRead->mailType].tiles, 0, 0, 0);
+        break;
+    case 9:
+        if (FreeTempTileDataBuffersIfPossible())
             return FALSE;
+        break;
+    case 10:
+        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
+        FillBgTilemapBufferRect_Palette0(2, 1, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
+        CopyToBgTilemapBuffer(1, sMailGraphics[sMailRead->mailType].tileMap, 0, 0);
+        break;
+    case 11:
+        CopyBgTilemapBufferToVram(0);
+        CopyBgTilemapBufferToVram(1);
+        CopyBgTilemapBufferToVram(2);
+        break;
+    case 12:
+        LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        gPlttBufferUnfaded[BG_PLTT_ID(15) + 10] = sMailGraphics[sMailRead->mailType].textColor;
+        gPlttBufferFaded[BG_PLTT_ID(15) + 10] = sMailGraphics[sMailRead->mailType].textColor;
+        gPlttBufferUnfaded[BG_PLTT_ID(15) + 11] = sMailGraphics[sMailRead->mailType].textShadow;
+        gPlttBufferFaded[BG_PLTT_ID(15) + 11] = sMailGraphics[sMailRead->mailType].textShadow;
+
+        LoadPalette(sMailGraphics[sMailRead->mailType].palette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+        gPlttBufferUnfaded[BG_PLTT_ID(0) + 10] = sBgColors[gSaveBlock2Ptr->playerGender][0];
+        gPlttBufferFaded[BG_PLTT_ID(0) + 10] = sBgColors[gSaveBlock2Ptr->playerGender][0];
+        gPlttBufferUnfaded[BG_PLTT_ID(0) + 11] = sBgColors[gSaveBlock2Ptr->playerGender][1];
+        gPlttBufferFaded[BG_PLTT_ID(0) + 11] = sBgColors[gSaveBlock2Ptr->playerGender][1];
+        break;
+    case 13:
+        if (sMailRead->hasText)
+            BufferMailText();
+        break;
+    case 14:
+        if (sMailRead->hasText)
+        {
+            PrintMailText();
+            RunTextPrinters();
+        }
+        break;
+    case 15:
+        if (Overworld_IsRecvQueueAtMax() == TRUE)
+            return FALSE;
+        break;
+    case 16:
+        SetVBlankCallback(VBlankCB_MailRead);
+        gPaletteFade.bufferTransferDisabled = TRUE;
+        break;
+    case 17:
+        icon = GetIconSpeciesNoPersonality(sMailRead->mail->species);
+        switch (sMailRead->iconType)
+        {
+        case ICON_TYPE_BEAD:
+            LoadMonIconPalette(icon);
+            sMailRead->monIconSpriteId = CreateMonIconNoPersonality(icon, SpriteCallbackDummy, 96, 128, 0);
+            break;
+        case ICON_TYPE_DREAM:
+            LoadMonIconPalette(icon);
+            sMailRead->monIconSpriteId = CreateMonIconNoPersonality(icon, SpriteCallbackDummy, 40, 128, 0);
+            break;
+        }
+        break;
+    case 18:
+        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
+        ShowBg(0);
+        ShowBg(1);
+        ShowBg(2);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        gPaletteFade.bufferTransferDisabled = FALSE;
+        sMailRead->callback = CB2_WaitForPaletteExitOnKeyPress;
+        return TRUE;
+    default:
+        return FALSE;
     }
     gMain.state++;
     return FALSE;
@@ -655,7 +657,7 @@ static void BufferMailText(void)
     if (!sMailRead->international)
     {
         // Never reached
-        StringCopy(ptr, gText_FromSpace); // Odd, "From" text is already printed in PrintMailText
+        StringCopy(ptr, sText_FromSpace); // Odd, "From" text is already printed in PrintMailText
         sMailRead->signatureWidth = sMailRead->layout->signatureWidth - (StringLength(sMailRead->playerName) * 8 - 96);
     }
     else
@@ -687,7 +689,7 @@ static void PrintMailText(void)
         AddTextPrinterParameterized3(0, FONT_NORMAL, sMailRead->layout->lines[i].xOffset + sMailRead->layout->wordsXPos, y + sMailRead->layout->wordsYPos, sTextColors, 0, sMailRead->message[i]);
         y += sMailRead->layout->lines[i].height;
     }
-    bufptr = StringCopy(signature, gText_FromSpace);
+    bufptr = StringCopy(signature, sText_FromSpace);
     StringCopy(bufptr, sMailRead->playerName);
     box_x = GetStringCenterAlignXOffset(FONT_NORMAL, signature, sMailRead->signatureWidth) + 104;
     box_y = sMailRead->layout->signatureYPos + 88;

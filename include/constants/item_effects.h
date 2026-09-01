@@ -2,18 +2,17 @@
 #define GUARD_CONSTANTS_ITEM_EFFECTS_H
 
 // field 0 masks
-#define ITEM0_X_ATTACK          0x0F
 #define ITEM0_DIRE_HIT          0x30 // Works the same way as the move Focus Energy.
 #define ITEM0_SACRED_ASH        0x40
 #define ITEM0_INFATUATION       0x80
 
-// field 1 masks
-#define ITEM1_X_SPEED           0x0F
-#define ITEM1_X_DEFEND          0xF0
-
-// field 2 masks
-#define ITEM2_X_SPATK           0x0F
-#define ITEM2_X_ACCURACY        0xF0
+// new field 1 masks
+#define ITEM1_X_ATTACK          STAT_ATK
+#define ITEM1_X_DEFENSE         STAT_DEF
+#define ITEM1_X_SPEED           STAT_SPEED
+#define ITEM1_X_SPATK           STAT_SPATK
+#define ITEM1_X_SPDEF           STAT_SPDEF
+#define ITEM1_X_ACCURACY        STAT_ACC
 
 // field 3 masks
 #define ITEM3_CONFUSION         0x1
@@ -49,13 +48,16 @@
 
 #define ITEM5_FRIENDSHIP_ALL    (ITEM5_FRIENDSHIP_LOW | ITEM5_FRIENDSHIP_MID | ITEM5_FRIENDSHIP_HIGH)
 
-// fields 6 and onwards are item-specific arguments
+#define ITEM10_IS_VITAMIN       0x1
+
+// fields 6 and onwards (except field 10) are item-specific arguments
 #define ITEM_EFFECT_ARG_START 6
 
 // Special HP recovery amounts for ITEM4_HEAL_HP
-#define ITEM6_HEAL_HP_FULL   ((u8) -1)
-#define ITEM6_HEAL_HP_HALF   ((u8) -2)
-#define ITEM6_HEAL_HP_LVL_UP ((u8) -3)
+#define ITEM6_HEAL_HP_FULL    ((u8) -1)
+#define ITEM6_HEAL_HP_HALF    ((u8) -2)
+#define ITEM6_HEAL_HP_LVL_UP  ((u8) -3)
+#define ITEM6_HEAL_HP_QUARTER ((u8) -4)
 
 // Special PP recovery amounts for ITEM4_HEAL_PP
 #define ITEM6_HEAL_PP_FULL   0x7F
@@ -63,30 +65,42 @@
 // Amount of EV modified by ITEM4_EV_HP, ITEM4_EV_ATK, ITEM5_EV_DEF, ITEM5_EV_SPEED, ITEM5_EV_SPDEF and ITEM5_EV_SPATK
 #define ITEM6_ADD_EV       10
 #define ITEM6_SUBTRACT_EV -10
+#define ITEM6_ADD_ONE_EV    1
+#define ITEM6_RESET_EV      0
 
 // Used for GetItemEffectType.
-#define ITEM_EFFECT_X_ITEM 0
-#define ITEM_EFFECT_RAISE_LEVEL 1
-#define ITEM_EFFECT_HEAL_HP 2
-#define ITEM_EFFECT_CURE_POISON 3
-#define ITEM_EFFECT_CURE_SLEEP 4
-#define ITEM_EFFECT_CURE_BURN 5
-#define ITEM_EFFECT_CURE_FREEZE 6
-#define ITEM_EFFECT_CURE_PARALYSIS 7
-#define ITEM_EFFECT_CURE_CONFUSION 8
-#define ITEM_EFFECT_CURE_INFATUATION 9
-#define ITEM_EFFECT_SACRED_ASH 10
-#define ITEM_EFFECT_CURE_ALL_STATUS 11
-#define ITEM_EFFECT_ATK_EV 12
-#define ITEM_EFFECT_HP_EV 13
-#define ITEM_EFFECT_SPATK_EV 14
-#define ITEM_EFFECT_SPDEF_EV 15
-#define ITEM_EFFECT_SPEED_EV 16
-#define ITEM_EFFECT_DEF_EV 17
-#define ITEM_EFFECT_EVO_STONE 18
-#define ITEM_EFFECT_PP_UP 19
-#define ITEM_EFFECT_PP_MAX 20
-#define ITEM_EFFECT_HEAL_PP 21
-#define ITEM_EFFECT_NONE 22
+enum ItemEffectType
+{
+    ITEM_EFFECT_X_ITEM,
+    ITEM_EFFECT_RAISE_LEVEL,
+    ITEM_EFFECT_HEAL_HP,
+    ITEM_EFFECT_CURE_POISON,
+    ITEM_EFFECT_CURE_SLEEP,
+    ITEM_EFFECT_CURE_BURN,
+    ITEM_EFFECT_CURE_FREEZE_FROSTBITE,
+    ITEM_EFFECT_CURE_PARALYSIS,
+    ITEM_EFFECT_CURE_CONFUSION,
+    ITEM_EFFECT_CURE_INFATUATION,
+    ITEM_EFFECT_SACRED_ASH,
+    ITEM_EFFECT_CURE_ALL_STATUS,
+    ITEM_EFFECT_ATK_EV,
+    ITEM_EFFECT_HP_EV,
+    ITEM_EFFECT_SPATK_EV,
+    ITEM_EFFECT_SPDEF_EV,
+    ITEM_EFFECT_SPEED_EV,
+    ITEM_EFFECT_DEF_EV,
+    ITEM_EFFECT_EVO_STONE,
+    ITEM_EFFECT_PP_UP,
+    ITEM_EFFECT_PP_MAX,
+    ITEM_EFFECT_HEAL_PP,
+    ITEM_EFFECT_NONE
+};
+
+#define ITEM_FRIENDSHIP_MAPSEC_BONUS  1   // The amount of bonus friendship gained when an item is used on a Pokémon whose met location matches the current map section.
+#define ITEM_FRIENDSHIP_LUXURY_BONUS  1   // The amount of bonus friendship gained when a Pokémon is in the Luxury Ball.
+
+// Since X item stat increases are now handled by battle scripts, the friendship increase effect is now handled by the battle controller in HandleAction_UseItem.
+#define X_ITEM_FRIENDSHIP_INCREASE    1   // The amount of friendship gained by using an X item on a Pokémon in battle.
+#define X_ITEM_MAX_FRIENDSHIP         200 // Friendship threshold at which Pokémon stop receiving a friendship increase from using X items on them in battle.
 
 #endif // GUARD_CONSTANTS_ITEM_EFFECTS_H

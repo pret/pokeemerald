@@ -56,6 +56,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_GiveBattlePoints::
 	special LoadPlayerParty
 	pyramid_clearhelditems
 	special HealPlayerParty
+	callnative UpdateFollowingPokemon
 	message BattleFrontier_BattlePyramidLobby_Text_UsedBattleBagWillBeKept
 	waitmessage
 	playse SE_EXP_MAX
@@ -80,6 +81,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_LostChallenge::
 	special LoadPlayerParty
 	pyramid_clearhelditems
 	special HealPlayerParty
+	callnative UpdateFollowingPokemon
 	lockall
 	message BattleFrontier_BattlePyramidLobby_Text_DisappointingHereIsBag
 	waitmessage
@@ -129,6 +131,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_TryEnterChallenge::
 	frontier_set FRONTIER_DATA_LVL_MODE, VAR_RESULT
 	msgbox BattleFrontier_BattlePyramidLobby_Text_SelectThreeMons, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
+	callnative RemoveFollowingPokemon
 	call BattleFrontier_EventScript_GetLvlMode
 	copyvar VAR_0x8004, VAR_RESULT
 	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
@@ -180,10 +183,14 @@ BattleFrontier_BattlePyramidLobby_EventScript_NotEnoughValidMons::
 
 BattleFrontier_BattlePyramidLobby_EventScript_NotEnoughValidMonsLv50::
 	msgbox BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsLv50, MSGBOX_DEFAULT
+	call BattleFrontier_ShowCaughtBannedSpecies
+	msgbox BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsEnd, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePyramidLobby_EventScript_EndCancelChallenge
 
 BattleFrontier_BattlePyramidLobby_EventScript_NotEnoughValidMonsLvOpen::
 	msgbox BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsLvOpen, MSGBOX_DEFAULT
+	call BattleFrontier_ShowCaughtBannedSpecies
+	msgbox BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsEnd, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePyramidLobby_EventScript_EndCancelChallenge
 
 BattleFrontier_BattlePyramidLobby_EventScript_CancelChallengeSaveFailed::
@@ -192,6 +199,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_CancelChallengeSaveFailed::
 
 BattleFrontier_BattlePyramidLobby_EventScript_LoadPartyAndCancelChallenge::
 	special LoadPlayerParty
+	callnative UpdateFollowingPokemon
 BattleFrontier_BattlePyramidLobby_EventScript_CancelChallenge::
 	msgbox BattleFrontier_BattlePyramidLobby_Text_AwaitFutureChallenge, MSGBOX_DEFAULT
 BattleFrontier_BattlePyramidLobby_EventScript_EndCancelChallenge::
@@ -566,9 +574,7 @@ BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsLvOpen:
 	.string "POKéMON qualified for the challenge.\p"
 	.string "Please also remember to take all\n"
 	.string "items from your POKéMON.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
-	.string "When you are ready, please have\n"
-	.string "a word with me.$"
+	.string "EGGS{STR_VAR_1}.$"
 
 BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsLv50:
 	.string "A slight problem, adventurer!\p"
@@ -578,7 +584,9 @@ BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsLv50:
 	.string "and each no higher than Level 50.\p"
 	.string "Please also remember to take all\n"
 	.string "items from your POKéMON.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
+	.string "EGGS{STR_VAR_1}.$"
+
+BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsEnd:
 	.string "When you are ready, please have\n"
 	.string "a word with me.$"
 

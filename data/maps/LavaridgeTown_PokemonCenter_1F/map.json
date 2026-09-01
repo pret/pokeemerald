@@ -3,6 +3,7 @@
   "name": "LavaridgeTown_PokemonCenter_1F",
   "layout": "LAYOUT_LAVARIDGE_TOWN_POKEMON_CENTER_1F",
   "music": "MUS_POKE_CENTER",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_LAVARIDGE_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

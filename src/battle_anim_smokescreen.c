@@ -9,49 +9,17 @@
 
 #define TAG_SMOKESCREEN 55019
 
-#define PALTAG_SHADOW 55039
-#define GFXTAG_SHADOW 55129
-
 static void SpriteCB_SmokescreenImpactMain(struct Sprite *);
 static void SpriteCB_SmokescreenImpact(struct Sprite *);
 
 // The below data for smokescreen starts and ends with some data that belongs to battle_gfx_sfx_util.c
-
-const u8 gBattlePalaceNatureToMoveTarget[NUM_NATURES] =
-{
-    [NATURE_HARDY]   = PALACE_TARGET_STRONGER,
-    [NATURE_LONELY]  = PALACE_TARGET_STRONGER,
-    [NATURE_BRAVE]   = PALACE_TARGET_WEAKER,
-    [NATURE_ADAMANT] = PALACE_TARGET_STRONGER,
-    [NATURE_NAUGHTY] = PALACE_TARGET_WEAKER,
-    [NATURE_BOLD]    = PALACE_TARGET_WEAKER,
-    [NATURE_DOCILE]  = PALACE_TARGET_RANDOM,
-    [NATURE_RELAXED] = PALACE_TARGET_STRONGER,
-    [NATURE_IMPISH]  = PALACE_TARGET_STRONGER,
-    [NATURE_LAX]     = PALACE_TARGET_STRONGER,
-    [NATURE_TIMID]   = PALACE_TARGET_WEAKER,
-    [NATURE_HASTY]   = PALACE_TARGET_WEAKER,
-    [NATURE_SERIOUS] = PALACE_TARGET_WEAKER,
-    [NATURE_JOLLY]   = PALACE_TARGET_STRONGER,
-    [NATURE_NAIVE]   = PALACE_TARGET_RANDOM,
-    [NATURE_MODEST]  = PALACE_TARGET_WEAKER,
-    [NATURE_MILD]    = PALACE_TARGET_STRONGER,
-    [NATURE_QUIET]   = PALACE_TARGET_WEAKER,
-    [NATURE_BASHFUL] = PALACE_TARGET_WEAKER,
-    [NATURE_RASH]    = PALACE_TARGET_STRONGER,
-    [NATURE_CALM]    = PALACE_TARGET_STRONGER,
-    [NATURE_GENTLE]  = PALACE_TARGET_STRONGER,
-    [NATURE_SASSY]   = PALACE_TARGET_WEAKER,
-    [NATURE_CAREFUL] = PALACE_TARGET_WEAKER,
-    [NATURE_QUIRKY]  = PALACE_TARGET_STRONGER,
-};
 
 static const struct CompressedSpriteSheet sSmokescreenImpactSpriteSheet =
 {
     .data = gSmokescreenImpactTiles, .size = 0x180, .tag = TAG_SMOKESCREEN
 };
 
-static const struct CompressedSpritePalette sSmokescreenImpactSpritePalette =
+static const struct SpritePalette sSmokescreenImpactSpritePalette =
 {
     .data = gSmokescreenImpactPalette, .tag = TAG_SMOKESCREEN
 };
@@ -119,42 +87,7 @@ static const struct SpriteTemplate sSmokescreenImpactSpriteTemplate =
     .paletteTag = TAG_SMOKESCREEN,
     .oam = &sOamData_SmokescreenImpact,
     .anims = sAnims_SmokescreenImpact,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_SmokescreenImpact
-};
-
-const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow =
-{
-    .data = gEnemyMonShadow_Gfx, .size = 0x80, .tag = GFXTAG_SHADOW
-};
-
-static const struct OamData sOamData_EnemyShadow =
-{
-    .y = 0,
-    .affineMode = ST_OAM_AFFINE_OFF,
-    .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = FALSE,
-    .bpp = ST_OAM_4BPP,
-    .shape = SPRITE_SHAPE(32x8),
-    .x = 0,
-    .matrixNum = 0,
-    .size = SPRITE_SIZE(32x8),
-    .tileNum = 0,
-    .priority = 3,
-    .paletteNum = 0,
-    .affineParam = 0
-};
-
-const struct SpriteTemplate gSpriteTemplate_EnemyShadow =
-{
-    .tileTag = GFXTAG_SHADOW,
-    .paletteTag = PALTAG_SHADOW,
-    .oam = &sOamData_EnemyShadow,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_SetInvisible
 };
 
 #define sActiveSprites data[0]
@@ -171,7 +104,7 @@ u8 SmokescreenImpact(s16 x, s16 y, bool8 persist)
     if (GetSpriteTileStartByTag(sSmokescreenImpactSpriteSheet.tag) == 0xFFFF)
     {
         LoadCompressedSpriteSheetUsingHeap(&sSmokescreenImpactSpriteSheet);
-        LoadCompressedSpritePaletteUsingHeap(&sSmokescreenImpactSpritePalette);
+        LoadSpritePalette(&sSmokescreenImpactSpritePalette);
     }
 
     mainSpriteId = CreateInvisibleSpriteWithCallback(SpriteCB_SmokescreenImpactMain);

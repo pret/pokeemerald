@@ -4,5 +4,6 @@
 #include "constants/rematches.h"
 
 void UpdateGymLeaderRematch(void);
+s32 GetCurrentGymLeaderRematchLevel(void);
 
 #endif //GUARD_TRAINER_REMATCH_H

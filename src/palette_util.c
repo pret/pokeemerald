@@ -2,6 +2,7 @@
 #include "palette.h"
 #include "palette_util.h"
 #include "util.h"
+#include "overworld.h"
 
 // "RouletteFlash" is more accurately a general flashing/fading util
 // this file handles fading the palettes for the color/icon selections on the Roulette wheel
@@ -384,7 +385,11 @@ void UpdatePulseBlend(struct PulseBlend *pulseBlend)
                 if (--pulseBlendPalette->delayCounter == 0xFF)
                 {
                     pulseBlendPalette->delayCounter = pulseBlendPalette->pulseBlendSettings.delay;
-                    BlendPalette(pulseBlendPalette->pulseBlendSettings.paletteOffset, pulseBlendPalette->pulseBlendSettings.numColors, pulseBlendPalette->blendCoeff, pulseBlendPalette->pulseBlendSettings.blendColor);
+                    CpuFastCopy(gPlttBufferUnfaded + pulseBlendPalette->pulseBlendSettings.paletteOffset, gPlttBufferFaded + pulseBlendPalette->pulseBlendSettings.paletteOffset, PLTT_SIZE_4BPP);
+                    UpdatePalettesWithTime(1 << (pulseBlendPalette->pulseBlendSettings.paletteOffset >> 4));
+                    // pulseBlendSettings has a numColors field, but it is only ever set to 16 (for Mirage Tower)
+                    // So, it's ok to use the fine blending here which blends the entire palette
+                    BlendPalettesFine(1, gPlttBufferFaded + pulseBlendPalette->pulseBlendSettings.paletteOffset, gPlttBufferFaded + pulseBlendPalette->pulseBlendSettings.paletteOffset, pulseBlendPalette->blendCoeff, pulseBlendPalette->pulseBlendSettings.blendColor);
                     switch (pulseBlendPalette->pulseBlendSettings.fadeType)
                     {
                     case 0: // Fade all the way to the max blend amount, then wrap around

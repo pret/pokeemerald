@@ -40,6 +40,8 @@ enum
 #define MON_SPRITE_X_OFF -32
 #define MON_SPRITE_Y     104
 
+static const u8 gText_RibbonsF700[] = _("RIBBONS {DYNAMIC 0}");
+
 struct Pokenav_RibbonsSummaryList
 {
     u8 unused1[8];
@@ -150,8 +152,8 @@ static const u16 sRibbonIcons3_Pal[] = INCGFX_U16("graphics/pokenav/ribbons/icon
 static const u16 sRibbonIcons4_Pal[] = INCGFX_U16("graphics/pokenav/ribbons/icons4.pal", ".gbapal");
 static const u16 sRibbonIcons5_Pal[] = INCGFX_U16("graphics/pokenav/ribbons/icons5.pal", ".gbapal");
 static const u16 sMonInfo_Pal[] = INCGFX_U16("graphics/pokenav/ribbons/mon_info.pal", ".gbapal"); // palette for Pokémon's name/gender/level text
-static const u32 sRibbonIconsSmall_Gfx[] = INCGFX_U32("graphics/pokenav/ribbons/icons.png", ".4bpp.lz");
-static const u32 sRibbonIconsBig_Gfx[] = INCGFX_U32("graphics/pokenav/ribbons/icons_big.png", ".4bpp.lz");
+static const u32 sRibbonIconsSmall_Gfx[] = INCGFX_U32("graphics/pokenav/ribbons/icons.png", ".4bpp.smol");
+static const u32 sRibbonIconsBig_Gfx[] = INCGFX_U32("graphics/pokenav/ribbons/icons_big.png", ".4bpp.smol");
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -385,7 +387,7 @@ static void GetMonNicknameLevelGender(u8 *nick, u8 *level, u8 *gender)
     if (monInfo->boxId == TOTAL_BOXES_COUNT)
     {
         // Get info for party mon
-        struct Pokemon *mon = &gPlayerParty[monInfo->monId];
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][monInfo->monId];
         GetMonData(mon, MON_DATA_NICKNAME, nick);
         *level = GetLevelFromMonExp(mon);
         *gender = GetMonGender(mon);
@@ -401,7 +403,7 @@ static void GetMonNicknameLevelGender(u8 *nick, u8 *level, u8 *gender)
     StringGet_Nickname(nick);
 }
 
-static void GetMonSpeciesPersonalityOtId(u16 *species, u32 *personality, u32 *otId)
+static void GetMonSpeciesPersonalityShiny(enum Species *species, u32 *personality, bool32 *isShiny)
 {
     struct Pokenav_RibbonsSummaryList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
     struct PokenavMonList *mons = list->monList;
@@ -410,10 +412,10 @@ static void GetMonSpeciesPersonalityOtId(u16 *species, u32 *personality, u32 *ot
     if (monInfo->boxId == TOTAL_BOXES_COUNT)
     {
         // Get info for party mon
-        struct Pokemon *mon = &gPlayerParty[monInfo->monId];
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][monInfo->monId];
         *species = GetMonData(mon, MON_DATA_SPECIES);
         *personality = GetMonData(mon, MON_DATA_PERSONALITY);
-        *otId = GetMonData(mon, MON_DATA_OT_ID);
+        *isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
     }
     else
     {
@@ -421,7 +423,7 @@ static void GetMonSpeciesPersonalityOtId(u16 *species, u32 *personality, u32 *ot
         struct BoxPokemon *boxMon = GetBoxedMonPtr(monInfo->boxId, monInfo->monId);
         *species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
         *personality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
-        *otId = GetBoxMonData(boxMon, MON_DATA_OT_ID);
+        *isShiny = GetBoxMonData(boxMon, MON_DATA_IS_SHINY);
     }
 }
 
@@ -432,7 +434,7 @@ static u32 GetCurrMonRibbonCount(void)
     struct PokenavMonListItem *monInfo = &mons->monData[mons->currIndex];
 
     if (monInfo->boxId == TOTAL_BOXES_COUNT)
-        return GetMonData(&gPlayerParty[monInfo->monId], MON_DATA_RIBBON_COUNT);
+        return GetMonData(&gParties[B_TRAINER_PLAYER][monInfo->monId], MON_DATA_RIBBON_COUNT);
     else
         return GetBoxMonDataAt(monInfo->boxId, monInfo->monId, MON_DATA_RIBBON_COUNT);
 }
@@ -445,7 +447,7 @@ static void GetMonRibbons(struct Pokenav_RibbonsSummaryList *list)
     struct PokenavMonListItem *monInfo = &mons->monData[mons->currIndex];
 
     if (monInfo->boxId == TOTAL_BOXES_COUNT)
-        ribbonFlags = GetMonData(&gPlayerParty[monInfo->monId], MON_DATA_RIBBONS);
+        ribbonFlags = GetMonData(&gParties[B_TRAINER_PLAYER][monInfo->monId], MON_DATA_RIBBONS);
     else
         ribbonFlags = GetBoxMonDataAt(monInfo->boxId, monInfo->monId, MON_DATA_RIBBONS);
 
@@ -583,7 +585,11 @@ static u32 LoopedTask_OpenRibbonsSummaryMenu(s32 state)
             DecompressAndCopyTileDataToVram(1, sRibbonIconsSmall_Gfx, 0, 1, 0);
             SetBgTilemapBuffer(1, menu->tilemapBuffers[1]);
             FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 32, 20);
-            CopyPaletteIntoBufferUnfaded(sRibbonIcons1_Pal, BG_PLTT_ID(2), 5 * PLTT_SIZE_4BPP);
+            CopyPaletteIntoBufferUnfaded(sRibbonIcons1_Pal, BG_PLTT_ID(2), PLTT_SIZE_4BPP);
+            CopyPaletteIntoBufferUnfaded(sRibbonIcons2_Pal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
+            CopyPaletteIntoBufferUnfaded(sRibbonIcons3_Pal, BG_PLTT_ID(4), PLTT_SIZE_4BPP);
+            CopyPaletteIntoBufferUnfaded(sRibbonIcons4_Pal, BG_PLTT_ID(5), PLTT_SIZE_4BPP);
+            CopyPaletteIntoBufferUnfaded(sRibbonIcons5_Pal, BG_PLTT_ID(6), PLTT_SIZE_4BPP);
             CopyPaletteIntoBufferUnfaded(sMonInfo_Pal, BG_PLTT_ID(10), sizeof(sMonInfo_Pal));
             CopyBgTilemapBufferToVram(1);
             return LT_INC_AND_PAUSE;
@@ -865,9 +871,9 @@ static void AddRibbonSummaryMonNameWindow(struct Pokenav_RibbonsSummaryMenu *men
     PrintRibbbonsSummaryMonInfo(menu);
 }
 
-static const u8 sText_MaleSymbol[] = _("{COLOR_HIGHLIGHT_SHADOW LIGHT_RED WHITE GREEN}♂{COLOR_HIGHLIGHT_SHADOW DARK_GRAY WHITE LIGHT_GRAY}");
-static const u8 sText_FemaleSymbol[] = _("{COLOR_HIGHLIGHT_SHADOW LIGHT_GREEN WHITE BLUE}♀{COLOR_HIGHLIGHT_SHADOW DARK_GRAY WHITE LIGHT_GRAY}");
-static const u8 sGenderlessIconString[] = _("{UNK_SPACER}");
+static const u8 sText_MaleSymbol[] = _("{TEXT_COLORS LIGHT_RED GREEN WHITE}{BACKGROUND WHITE}♂{TEXT_COLORS DARK_GRAY LIGHT_GRAY WHITE}{BACKGROUND WHITE}");
+static const u8 sText_FemaleSymbol[] = _("{TEXT_COLORS LIGHT_GREEN BLUE WHITE}{BACKGROUND WHITE}♀{TEXT_COLORS DARK_GRAY LIGHT_GRAY WHITE}{BACKGROUND WHITE}");
+static const u8 sText_NoGenderSymbol[] = _("{UNK_SPACER}");
 
 static void PrintRibbbonsSummaryMonInfo(struct Pokenav_RibbonsSummaryMenu *menu)
 {
@@ -878,7 +884,6 @@ static void PrintRibbbonsSummaryMonInfo(struct Pokenav_RibbonsSummaryMenu *menu)
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     GetMonNicknameLevelGender(gStringVar3, &level, &gender);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar3, 0, 1, TEXT_SKIP_DRAW, NULL);
     switch (gender)
     {
     case MON_MALE:
@@ -888,9 +893,10 @@ static void PrintRibbbonsSummaryMonInfo(struct Pokenav_RibbonsSummaryMenu *menu)
         genderTxt = sText_FemaleSymbol;
         break;
     default:
-        genderTxt = sGenderlessIconString;
+        genderTxt = sText_NoGenderSymbol;
         break;
     }
+    AddTextPrinterParameterized(windowId, GetFontIdToFit(gStringVar3, FONT_NORMAL, 0, 60), gStringVar3, 0, 1, TEXT_SKIP_DRAW, NULL);
 
     txtPtr = StringCopy(gStringVar1, genderTxt);
     *(txtPtr++) = CHAR_SLASH;
@@ -940,10 +946,11 @@ static void PrintRibbonsMonListIndex(struct Pokenav_RibbonsSummaryMenu *menu)
 
 static void ResetSpritesAndDrawMonFrontPic(struct Pokenav_RibbonsSummaryMenu *menu)
 {
-    u16 species;
-    u32 personality, otId;
+    enum Species species;
+    u32 personality;
+    bool32 isShiny;
 
-    GetMonSpeciesPersonalityOtId(&species, &personality, &otId);
+    GetMonSpeciesPersonalityShiny(&species, &personality, &isShiny);
     ResetAllPicSprites();
     menu->monSpriteId = DrawRibbonsMonFrontPic(MON_SPRITE_X_ON, MON_SPRITE_Y);
     PokenavFillPalette(15, 0);
@@ -959,11 +966,13 @@ static void DestroyRibbonsMonFrontPic(struct Pokenav_RibbonsSummaryMenu *menu)
 // x is given as either MON_SPRITE_X_ON or MON_SPRITE_X_OFF (but ignored and MON_SPRITE_X_ON is used)
 static u16 DrawRibbonsMonFrontPic(s32 x, s32 y)
 {
-    u16 species, spriteId;
-    u32 personality, otId;
+    enum Species species;
+    u16 spriteId;
+    u32 personality;
+    bool32 isShiny;
 
-    GetMonSpeciesPersonalityOtId(&species, &personality, &otId);
-    spriteId = CreateMonPicSprite_HandleDeoxys(species, otId, personality, TRUE, MON_SPRITE_X_ON, MON_SPRITE_Y, 15, TAG_NONE);
+    GetMonSpeciesPersonalityShiny(&species, &personality, &isShiny);
+    spriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, MON_SPRITE_X_ON, MON_SPRITE_Y, 15, TAG_NONE);
     gSprites[spriteId].oam.priority = 0;
     return spriteId;
 }
@@ -1205,10 +1214,7 @@ static const struct SpriteTemplate sSpriteTemplate_RibbonIconBig =
     .tileTag = GFXTAG_RIBBON_ICONS_BIG,
     .paletteTag = PALTAG_RIBBON_ICONS_1,
     .oam = &sOamData_RibbonIconBig,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
     .affineAnims = sAffineAnims_RibbonIconBig,
-    .callback = SpriteCallbackDummy,
 };
 
 // Create dummy sprite to be used for the zoomed in version of the selected ribbon

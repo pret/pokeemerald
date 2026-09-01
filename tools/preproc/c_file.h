@@ -25,7 +25,11 @@
 #include <cstdint>
 #include <string>
 #include <memory>
+#include <map>
 #include "preproc.h"
+
+#define __STDC_FORMAT_MACROS 1
+#include <inttypes.h>
 
 class CFile
 {
@@ -47,12 +51,16 @@ private:
     } m_location;
     bool m_isStdin;
     std::string m_graphicsRoot;
+    std::map<std::vector<unsigned char>, std::uint64_t> m_compoundStrings;
+    std::string m_output;
 
     bool ConsumeHorizontalWhitespace();
     bool ConsumeNewline();
     void Newline();
     void SkipWhitespace();
+    std::vector<unsigned char> ConvertString();
     void TryConvertString();
+    void TryConvertCompoundString();
     std::unique_ptr<unsigned char[]> ReadWholeFile(const std::string& path, int& size);
     bool CheckIdentifier(const std::string& ident);
     std::string ReadString();
@@ -61,6 +69,8 @@ private:
     void ReportDiagnostic(const char* type, const char* format, std::va_list args);
     void RaiseError(const char* format, ...);
     void RaiseWarning(const char* format, ...);
+    void printf(const char *format, ...);
+    void putchar(char c);
 };
 
 #endif // C_FILE_H

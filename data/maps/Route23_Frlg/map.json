@@ -1,0 +1,636 @@
+{
+  "id": "MAP_ROUTE23",
+  "name": "Route23_Frlg",
+  "layout": "LAYOUT_ROUTE23",
+  "music": "MUS_RG_VICTORY_ROAD",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_ROUTE_23",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "map": "MAP_INDIGO_PLATEAU_EXTERIOR",
+      "offset": 0,
+      "direction": "up"
+    },
+    {
+      "map": "MAP_ROUTE22",
+      "offset": 0,
+      "direction": "down"
+    }
+  ],
+  "object_events": [
+    {
+      "local_id": "LOCALID_CASCADE_BADGE_GUARD",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
+      "x": 15,
+      "y": 149,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route23_EventScript_CascadeBadgeGuard",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_THUNDER_BADGE_GUARD",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
+      "x": 8,
+      "y": 140,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route23_EventScript_ThunderBadgeGuard",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_RAINBOW_BADGE_GUARD",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
+      "x": 14,
+      "y": 123,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route23_EventScript_RainbowBadgeGuard",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_SOUL_BADGE_GUARD",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
+      "x": 16,
+      "y": 112,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route23_EventScript_SoulBadgeGuard",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_MARSH_BADGE_GUARD",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
+      "x": 10,
+      "y": 94,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route23_EventScript_MarshBadgeGuard",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_VOLCANO_BADGE_GUARD",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
+      "x": 14,
+      "y": 61,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route23_EventScript_VolcanoBadgeGuard",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_EARTH_BADGE_GUARD",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
+      "x": 6,
+      "y": 35,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route23_EventScript_EarthBadgeGuard",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 5,
+      "y": 28,
+      "elevation": 3,
+      "dest_map": "MAP_VICTORY_ROAD_1F_FRLG",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 18,
+      "y": 28,
+      "elevation": 3,
+      "dest_map": "MAP_VICTORY_ROAD_2F",
+      "dest_warp_id": "6"
+    },
+    {
+      "x": 8,
+      "y": 153,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE22_NORTH_ENTRANCE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 9,
+      "y": 154,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE22_NORTH_ENTRANCE",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 149,
+      "elevation": 3,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "1",
+      "script": "Route23_EventScript_CascadeBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 140,
+      "elevation": 3,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "2",
+      "script": "Route23_EventScript_ThunderBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 123,
+      "elevation": 3,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "3",
+      "script": "Route23_EventScript_RainbowBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 111,
+      "elevation": 0,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "4",
+      "script": "Route23_EventScript_SoulBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 94,
+      "elevation": 1,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "5",
+      "script": "Route23_EventScript_MarshBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 61,
+      "elevation": 3,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "6",
+      "script": "Route23_EventScript_VolcanoBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 35,
+      "elevation": 0,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "7",
+      "script": "Route23_EventScript_EarthBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 34,
+      "elevation": 0,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "7",
+      "script": "Route23_EventScript_EarthBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 32,
+      "elevation": 3,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "7",
+      "script": "Route23_EventScript_EarthBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 33,
+      "elevation": 0,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "7",
+      "script": "Route23_EventScript_EarthBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 31,
+      "elevation": 0,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "7",
+      "script": "Route23_EventScript_EarthBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "7",
+      "script": "Route23_EventScript_EarthBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 35,
+      "elevation": 3,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "7",
+      "script": "Route23_EventScript_EarthBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 35,
+      "elevation": 3,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "7",
+      "script": "Route23_EventScript_EarthBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 60,
+      "elevation": 0,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "6",
+      "script": "Route23_EventScript_VolcanoBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 61,
+      "elevation": 3,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "6",
+      "script": "Route23_EventScript_VolcanoBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 60,
+      "elevation": 0,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "6",
+      "script": "Route23_EventScript_VolcanoBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 94,
+      "elevation": 1,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "5",
+      "script": "Route23_EventScript_MarshBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 92,
+      "elevation": 1,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "5",
+      "script": "Route23_EventScript_MarshBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 94,
+      "elevation": 1,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "5",
+      "script": "Route23_EventScript_MarshBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 92,
+      "elevation": 1,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "5",
+      "script": "Route23_EventScript_MarshBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 92,
+      "elevation": 1,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "5",
+      "script": "Route23_EventScript_MarshBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 92,
+      "elevation": 1,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "5",
+      "script": "Route23_EventScript_MarshBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 139,
+      "elevation": 0,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "2",
+      "script": "Route23_EventScript_ThunderBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 139,
+      "elevation": 0,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "2",
+      "script": "Route23_EventScript_ThunderBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 140,
+      "elevation": 3,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "2",
+      "script": "Route23_EventScript_ThunderBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 122,
+      "elevation": 0,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "3",
+      "script": "Route23_EventScript_RainbowBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 122,
+      "elevation": 0,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "3",
+      "script": "Route23_EventScript_RainbowBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 123,
+      "elevation": 3,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "3",
+      "script": "Route23_EventScript_RainbowBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 109,
+      "elevation": 1,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "4",
+      "script": "Route23_EventScript_SoulBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 109,
+      "elevation": 1,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "4",
+      "script": "Route23_EventScript_SoulBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 109,
+      "elevation": 1,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "4",
+      "script": "Route23_EventScript_SoulBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 109,
+      "elevation": 1,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "4",
+      "script": "Route23_EventScript_SoulBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 109,
+      "elevation": 1,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "4",
+      "script": "Route23_EventScript_SoulBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 111,
+      "elevation": 0,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "4",
+      "script": "Route23_EventScript_SoulBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 112,
+      "elevation": 1,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "4",
+      "script": "Route23_EventScript_SoulBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 112,
+      "elevation": 1,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "4",
+      "script": "Route23_EventScript_SoulBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 112,
+      "elevation": 1,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "4",
+      "script": "Route23_EventScript_SoulBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 148,
+      "elevation": 0,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "1",
+      "script": "Route23_EventScript_CascadeBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 148,
+      "elevation": 0,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "1",
+      "script": "Route23_EventScript_CascadeBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 149,
+      "elevation": 3,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "1",
+      "script": "Route23_EventScript_CascadeBadgeGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 148,
+      "elevation": 0,
+      "var": "VAR_MAP_SCENE_ROUTE23",
+      "var_value": "1",
+      "script": "Route23_EventScript_CascadeBadgeGuardTrigger"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 19,
+      "y": 42,
+      "elevation": 0,
+      "item": "ITEM_FULL_RESTORE",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_FULL_RESTORE",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 20,
+      "y": 72,
+      "elevation": 0,
+      "item": "ITEM_ULTRA_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_ULTRA_BALL",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 11,
+      "y": 101,
+      "elevation": 3,
+      "item": "ITEM_MAX_ETHER",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_MAX_ETHER",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 3,
+      "y": 18,
+      "elevation": 3,
+      "item": "ITEM_LUM_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_LUM_BERRY",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 2,
+      "y": 29,
+      "elevation": 3,
+      "item": "ITEM_SITRUS_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_SITRUS_BERRY",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 10,
+      "y": 67,
+      "elevation": 3,
+      "item": "ITEM_ASPEAR_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_ASPEAR_BERRY",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 3,
+      "y": 128,
+      "elevation": 3,
+      "item": "ITEM_LEPPA_BERRY",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_LEPPA_BERRY",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 9,
+      "y": 8,
+      "elevation": 3,
+      "item": "ITEM_MAX_ELIXIR",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE23_MAX_ELIXIR",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 31,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route23_EventScript_VictoryRoadGateSign"
+    }
+  ]
+}

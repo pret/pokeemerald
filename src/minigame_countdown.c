@@ -49,7 +49,7 @@ static void Task_StaticCountdown_Start(u8 taskId);
 static void Task_StaticCountdown_Run(u8 taskId);
 
 static const u16 s321Start_Static_Pal[] = INCGFX_U16("graphics/link/321start_static.png", ".gbapal");
-static const u32 s321Start_Static_Gfx[] = INCGFX_U32("graphics/link/321start_static.png", ".4bpp.lz");
+static const u32 s321Start_Static_Gfx[] = INCGFX_U32("graphics/link/321start_static.png", ".4bpp.smol");
 
 static const struct CompressedSpriteSheet sSpriteSheet_321Start_Static[] =
 {
@@ -116,9 +116,6 @@ static const struct SpriteTemplate sSpriteTemplate_StaticCountdown[] =
         .paletteTag = TAG_STATIC_COUNTDOWN,
         .oam = &gOamData_AffineOff_ObjNormal_32x32,
         .anims = sAnims_StaticCountdown,
-        .images = NULL,
-        .affineAnims = gDummySpriteAffineAnimTable,
-        .callback = SpriteCallbackDummy,
     },
 };
 
@@ -374,7 +371,7 @@ static void InitStartGraphic(u8 spriteId1, u8 spriteId2, u8 spriteId3);
 static void SpriteCB_Start(struct Sprite *sprite);
 
 static const u16 s321Start_Pal[] = INCGFX_U16("graphics/link/321start.png", ".gbapal");
-static const u32 s321Start_Gfx[] = INCGFX_U32("graphics/link/321start.png", ".4bpp.lz");
+static const u32 s321Start_Gfx[] = INCGFX_U32("graphics/link/321start.png", ".4bpp.smol");
 
 #define tState       data[0]
 #define tTilesTag    data[2]
@@ -731,7 +728,6 @@ static u8 CreateNumberSprite(u16 tileTag, u16 palTag, s16 x, s16 y, u8 subpriori
         .oam = &sOamData_Numbers,
         .anims = sAnimTable_Numbers,
         .affineAnims = sAffineAnimTable_Numbers,
-        .callback = SpriteCallbackDummy,
     };
 
     spriteTemplate.tileTag = tileTag;
@@ -745,8 +741,6 @@ static void CreateStartSprite(u16 tileTag, u16 palTag, s16 x, s16 y, u8 subprior
     {
         .oam = &sOamData_Start,
         .anims = sAnimTable_Start,
-        .affineAnims = gDummySpriteAffineAnimTable,
-        .callback = SpriteCallbackDummy,
     };
 
     spriteTemplate.tileTag = tileTag;

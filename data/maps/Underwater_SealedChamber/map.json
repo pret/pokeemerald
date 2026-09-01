@@ -3,6 +3,7 @@
   "name": "Underwater_SealedChamber",
   "layout": "LAYOUT_UNDERWATER_SEALED_CHAMBER",
   "music": "MUS_UNDERWATER",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_UNDERWATER_SEALED_CHAMBER",
   "requires_flash": false,
   "weather": "WEATHER_UNDERWATER_BUBBLES",

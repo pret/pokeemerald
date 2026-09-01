@@ -4,6 +4,7 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_camera.h"
+#include "field_effect.h"
 #include "fieldmap.h"
 #include "gpu_regs.h"
 #include "menu.h"
@@ -150,12 +151,9 @@ static const union AnimCmd *const sAnims_FallingFossil[] =
 static const struct SpriteTemplate sSpriteTemplate_FallingFossil =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_1,
     .oam = &sOamData_FallingFossil,
     .anims = sAnims_FallingFossil,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 const struct PulseBlendSettings gMirageTowerPulseBlendSettings = {
@@ -201,11 +199,9 @@ static const struct OamData sOamData_CeilingCrumbleSmall =
 static const struct SpriteTemplate sSpriteTemplate_CeilingCrumbleSmall =
 {
     .tileTag = TAG_CEILING_CRUMBLE,
-    .paletteTag = TAG_NONE,
+    .paletteTag = TAG_CEILING_CRUMBLE,
     .oam = &sOamData_CeilingCrumbleSmall,
     .anims = sAnims_CeilingCrumbleSmall,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_CeilingCrumble
 };
 
@@ -240,11 +236,9 @@ static const struct OamData sOamData_CeilingCrumbleLarge =
 static const struct SpriteTemplate sSpriteTemplate_CeilingCrumbleLarge =
 {
     .tileTag = TAG_CEILING_CRUMBLE,
-    .paletteTag = TAG_NONE,
+    .paletteTag = TAG_CEILING_CRUMBLE,
     .oam = &sOamData_CeilingCrumbleLarge,
     .anims = sAnims_CeilingCrumbleLarge,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_CeilingCrumble
 };
 
@@ -254,17 +248,6 @@ EWRAM_DATA static struct FallAnim_Fossil *sFallingFossil = NULL;
 EWRAM_DATA static struct FallAnim_Tower *sFallingTower = NULL;
 EWRAM_DATA static struct BgRegOffsets *sBgShakeOffsets = NULL;
 EWRAM_DATA static struct MirageTowerPulseBlend *sMirageTowerPulseBlend = NULL;
-
-// Holds data about the disintegration effect for Mirage Tower / the unchosen fossil.
-// Never read, presumably for debugging
-static u16 sDebug_DisintegrationData[8];
-
-bool8 IsMirageTowerVisible(void)
-{
-    if (!(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE111) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE111)))
-        return FALSE;
-    return FlagGet(FLAG_MIRAGE_TOWER_VISIBLE);
-}
 
 static void UpdateMirageTowerPulseBlend(u8 taskId)
 {
@@ -419,6 +402,7 @@ static void IncrementCeilingCrumbleFinishedCount(void)
 
 void DoMirageTowerCeilingCrumble(void)
 {
+    LoadSpritePaletteWithTag(sMirageTowerCrumbles_Palette, TAG_CEILING_CRUMBLE);
     LoadSpriteSheets(sCeilingCrumbleSpriteSheets);
     CreateCeilingCrumbleSprites();
     CreateTask(WaitCeilingCrumble, 8);
@@ -453,17 +437,12 @@ static void CreateCeilingCrumbleSprites(void)
     {
         spriteId = CreateSprite(&sSpriteTemplate_CeilingCrumbleLarge, sCeilingCrumblePositions[i][0] + 120, sCeilingCrumblePositions[i][1], 8);
         gSprites[spriteId].oam.priority = 0;
-        // These sprites use color index 11 from the player's sprite palette. This probably wasn't intentional.
-        // The palettes for Brendan and May have different shades of green at this index, so the color of these sprites changes
-        // depending on the player's gender (and neither shade of green particularly fits a crumbling yellow/brown ceiling).
-        gSprites[spriteId].oam.paletteNum = PALSLOT_PLAYER;
         gSprites[spriteId].sIndex = i;
     }
     for (i = 0; i < ARRAY_COUNT(sCeilingCrumblePositions); i++)
     {
         spriteId = CreateSprite(&sSpriteTemplate_CeilingCrumbleSmall, sCeilingCrumblePositions[i][0] + 115, sCeilingCrumblePositions[i][1] - 3, 8);
         gSprites[spriteId].oam.priority = 0;
-        gSprites[spriteId].oam.paletteNum = PALSLOT_PLAYER;
         gSprites[spriteId].sIndex = i;
     }
 }
@@ -603,13 +582,9 @@ static void DoMirageTowerDisintegration(u8 taskId)
                     sFallingTower[index].disintegrateRand[i] = i;
 
                 // Randomize disintegration pattern
-                for (i = 0; i <= (INNER_BUFFER_LENGTH - 1); i++)
-                {
-                    u16 rand1, rand2, temp;
-                    rand1 = Random() % INNER_BUFFER_LENGTH;
-                    rand2 = Random() % INNER_BUFFER_LENGTH;
-                    SWAP(sFallingTower[index].disintegrateRand[rand2], sFallingTower[index].disintegrateRand[rand1], temp);
-                }
+                Shuffle(sFallingTower[index].disintegrateRand, INNER_BUFFER_LENGTH,
+                    sizeof(sFallingTower[index].disintegrateRand[0]));
+
                 if (gTasks[taskId].data[3] <= (OUTER_BUFFER_LENGTH - 1))
                     gTasks[taskId].data[3]++;
                 gTasks[taskId].data[1] = 0;
@@ -695,6 +670,7 @@ static void Task_FossilFallAndSink(u8 taskId)
         {
             struct SpriteTemplate fossilTemplate = sSpriteTemplate_FallingFossil;
             fossilTemplate.images = sFallingFossil->frameImage;
+            LoadObjectEventPalette(sSpriteTemplate_FallingFossil.paletteTag);
             sFallingFossil->spriteId = CreateSprite(&fossilTemplate, 128, -16, 1);
             gSprites[sFallingFossil->spriteId].centerToCornerVecX = 0;
             gSprites[sFallingFossil->spriteId].data[0] = gSprites[sFallingFossil->spriteId].x;
@@ -707,21 +683,19 @@ static void Task_FossilFallAndSink(u8 taskId)
         break;
     case 6:
         // Randomize disintegration pattern
-        for (i = 0; i < FOSSIL_DISINTEGRATE_LENGTH * sizeof(u16); i++)
-        {
-            u16 rand1, rand2, temp;
-            rand1 = Random() % FOSSIL_DISINTEGRATE_LENGTH;
-            rand2 = Random() % FOSSIL_DISINTEGRATE_LENGTH;
-            SWAP(sFallingFossil->disintegrateRand[rand2], sFallingFossil->disintegrateRand[rand1], temp);
-        }
+        Shuffle(sFallingFossil->disintegrateRand, FOSSIL_DISINTEGRATE_LENGTH,
+            sizeof(sFallingFossil->disintegrateRand[0]));
         gSprites[sFallingFossil->spriteId].callback = SpriteCB_FallingFossil;
         break;
     case 7:
         // Wait for fossil to finish falling / disintegrating
         if (gSprites[sFallingFossil->spriteId].callback != SpriteCallbackDummy)
             return;
+        gSprites[sFallingFossil->spriteId].inUse = FALSE;
+        FieldEffectFreePaletteIfUnused(gSprites[sFallingFossil->spriteId].oam.paletteNum);
+        gSprites[sFallingFossil->spriteId].inUse = TRUE;
         DestroySprite(&gSprites[sFallingFossil->spriteId]);
-        FREE_AND_SET_NULL(sFallingFossil->disintegrateRand);;
+        FREE_AND_SET_NULL(sFallingFossil->disintegrateRand);
         FREE_AND_SET_NULL(sFallingFossil->frameImage);
         FREE_AND_SET_NULL(sFallingFossil->frameImageTiles);
         FREE_AND_SET_NULL(sFallingFossil);
@@ -764,27 +738,19 @@ static void UpdateDisintegrationEffect(u8 *tiles, u16 randId, u8 c, u8 size, u8 
     u8 flag, tileMask;
 
     height = randId / size;
-    sDebug_DisintegrationData[0] = height;
 
     width = randId % size;
-    sDebug_DisintegrationData[1] = width;
 
     row = height & 7;
     col = width & 7;
-    sDebug_DisintegrationData[2] = height & 7;
-    sDebug_DisintegrationData[3] = width & 7;
 
     widthTiles = width / 8;
     heightTiles = height / 8;
-    sDebug_DisintegrationData[4] = width / 8;
-    sDebug_DisintegrationData[5] = height / 8;
 
     var = (size / 8) * (heightTiles * 64) + (widthTiles * 64);
-    sDebug_DisintegrationData[6] = var;
 
     baseOffset = var + ((row * 8) + col);
     baseOffset /= 2;
-    sDebug_DisintegrationData[7] = var + ((row * 8) + col);
 
     flag = ((randId % 2) ^ 1);
     tileMask = (c << (flag << 2)) | 15 << (((flag ^ 1) << 2));

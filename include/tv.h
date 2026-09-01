@@ -1,11 +1,11 @@
 #ifndef GUARD_TV_H
 #define GUARD_TV_H
 
-extern u8 *const gTVStringVarPtrs[3];
+#include "constants/species.h"
 
 void ClearTVShowData(void);
 void TryPutBreakingNewsOnAir(void);
-void TryPutBattleSeminarOnAir(u16 foeSpecies, u16 species, u8 moveIndex, const u16 *movePtr, u16 betterMove);
+void TryPutBattleSeminarOnAir(enum Species foeSpecies, enum Species species, u8 moveIndex, const u16 *movePtr, enum Move betterMove);
 void TryPutFrontierTVShowOnAir(u16 winStreak, u8 facilityAndMode);
 void DoTVShow(void);
 void DoTVShowInSearchOfTrainers(void);
@@ -38,13 +38,13 @@ void IncrementDailyWildBattles(void);
 void IncrementDailyBerryBlender(void);
 void SanitizeTVShowsForRuby(TVShow *shows);
 void TryPutSafariFanClubOnAir(u8 monsCaught, u8 pokeblocksUsed);
-bool8 Put3CheersForPokeblocksOnTheAir(const u8 *partnersName, u8 flavor, u8 color, u8 sheen, u8 language);
-void SetPokemonAnglerSpecies(u16 species);
+bool8 Put3CheersForPokeblocksOnTheAir(const u8 *partnersName, enum Flavor flavor, u8 color, u8 sheen, u8 language);
+void SetPokemonAnglerSpecies(enum Species species);
 void UpdateTVShowsPerDay(u16 days);
 void TryPutPokemonTodayOnAir(void);
 void TryPutSecretBaseVisitOnAir(void);
-void PutBattleUpdateOnTheAir(u8 opponentLinkPlayerId, u16 move, u16 speciesPlayer, u16 speciesOpponent);
-void BravoTrainerPokemonProfile_BeforeInterview1(u16 move);
+void PutBattleUpdateOnTheAir(u8 opponentLinkPlayerId, enum Move move, enum Species speciesPlayer, enum Species speciesOpponent);
+void BravoTrainerPokemonProfile_BeforeInterview1(enum Move move);
 void InterviewBefore(void);
 void InterviewAfter(void);
 void UpdateTVScreensOnMap(int width, int height);
@@ -55,7 +55,7 @@ void BravoTrainerPokemonProfile_BeforeInterview2(u8 contestStandingPlace);
 void ContestLiveUpdates_Init(u8 round1Placing);
 void ContestLiveUpdates_SetRound2Placing(u8 round2Placing);
 void ContestLiveUpdates_SetWinnerAppealFlag(u8 flag);
-void ContestLiveUpdates_SetWinnerMoveUsed(u16 move);
+void ContestLiveUpdates_SetWinnerMoveUsed(enum Move move);
 void ContestLiveUpdates_SetLoserData(u8 flag, u8 loser);
 void ResetGabbyAndTy(void);
 u8 CheckForPlayersHouseNews(void);

@@ -85,6 +85,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_RightRoomWarp::
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_RoomWarp::
+	clearflag FLAG_SAFE_FOLLOWER_MOVEMENT
 	pike_get PIKE_DATA_WIN_STREAK
 	addvar VAR_RESULT, 1
 	pike_set PIKE_DATA_WIN_STREAK, VAR_RESULT
@@ -132,6 +133,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_NoTurningBack::
 	lockall
 	msgbox BattleFrontier_BattlePike_Text_PathBlockedNoTurningBack, MSGBOX_DEFAULT
 	closemessage
+	releaseall
 	end
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_SetEnteredRoom::
@@ -145,6 +147,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_NoTurningBack::
 	lockall
 	msgbox BattleFrontier_BattlePike_Text_PathBlockedNoTurningBack, MSGBOX_DEFAULT
 	closemessage
+	releaseall
 	end
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_Exit::
@@ -213,6 +216,7 @@ BattleFrontier_BattlePikeRoomWildMons_EventScript_NoTurningBack::
 	lockall
 	msgbox BattleFrontier_BattlePike_Text_PathBlockedNoTurningBack, MSGBOX_DEFAULT
 	closemessage
+	releaseall
 	end
 
 BattleFrontier_BattlePike_EventScript_Retire::

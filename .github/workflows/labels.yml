@@ -1,0 +1,40 @@
+name: Labels
+
+on:
+  pull_request:
+    types: [opened, synchronize, labeled, unlabeled]
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  label:
+    if: ${{ github.actor != 'allcontributors[bot]' && github.event.review.state == 'approved' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: check labels
+        uses: mheap/github-action-required-labels@v5
+        with:
+          mode: minimum
+          count: 1
+          labels: |
+            General
+            General Merge
+            category: ability
+            category: battle-ai
+            category: battle-mechanic
+            category: battle-tests
+            category: items
+            category: move animation
+            category: move effect
+            category: overworld
+            category: pokemon
+            category: sprite-issue
+            type: documentation
+  allcontributors:
+    if: github.actor == 'allcontributors[bot]'
+    runs-on: ubuntu-latest
+    needs: []
+    steps:
+      - name: Automatically pass for allcontributors
+        run: echo "CI automatically passes for allcontributors" && exit 0
+

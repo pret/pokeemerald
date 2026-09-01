@@ -3,6 +3,7 @@
   "name": "MarineCave_Entrance",
   "layout": "LAYOUT_MARINE_CAVE_ENTRANCE",
   "music": "MUS_PETALBURG_WOODS",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_MARINE_CAVE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

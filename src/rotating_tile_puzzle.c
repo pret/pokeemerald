@@ -241,7 +241,7 @@ void TurnRotatingTileObjects(void)
         if (objectEventId != OBJECT_EVENTS_COUNT)
         {
             const u8 *movementScript;
-            u8 direction = gObjectEvents[objectEventId].facingDirection;
+            enum Direction direction = gObjectEvents[objectEventId].facingDirection;
             if (rotation == ROTATE_COUNTERCLOCKWISE)
             {
                 switch (direction)

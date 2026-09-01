@@ -40,6 +40,12 @@ enum DecorationCategory
     DECORCAT_COUNT,
 };
 
+struct DecorItem
+{
+    const u32 *pic;
+    const u16 *pal;
+};
+
 struct Decoration
 {
     u8 id;
@@ -50,6 +56,7 @@ struct Decoration
     u16 price;
     const u8 *description;
     const u16 *tiles;
+    struct DecorItem icon;
 };
 
 extern const struct Decoration gDecorations[];

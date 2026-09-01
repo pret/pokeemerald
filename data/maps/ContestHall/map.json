@@ -3,6 +3,7 @@
   "name": "ContestHall",
   "layout": "LAYOUT_CONTEST_HALL",
   "music": "MUS_CONTEST",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_DYNAMIC",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

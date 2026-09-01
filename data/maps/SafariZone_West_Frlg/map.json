@@ -1,0 +1,202 @@
+{
+  "id": "MAP_SAFARI_ZONE_WEST",
+  "name": "SafariZone_West_Frlg",
+  "layout": "LAYOUT_SAFARI_ZONE_WEST",
+  "music": "MUS_EVOLUTION",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_KANTO_SAFARI_ZONE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 28,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SafariZone_West_EventScript_ItemGoldTeeth",
+      "flag": "FLAG_HIDE_SAFARI_ZONE_WEST_GOLD_TEETH"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 17,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SafariZone_West_EventScript_ItemTM32",
+      "flag": "FLAG_HIDE_SAFARI_ZONE_WEST_TM32"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 16,
+      "y": 27,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SafariZone_West_EventScript_ItemMaxPotion",
+      "flag": "FLAG_HIDE_SAFARI_ZONE_WEST_MAX_POTION"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 27,
+      "y": 24,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SafariZone_West_EventScript_ItemMaxRevive",
+      "flag": "FLAG_HIDE_SAFARI_ZONE_WEST_MAX_REVIVE"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 30,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_SAFARI_ZONE_NORTH_FRLG",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 31,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_SAFARI_ZONE_NORTH_FRLG",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 32,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_SAFARI_ZONE_NORTH_FRLG",
+      "dest_warp_id": "2"
+    },
+    {
+      "x": 37,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_SAFARI_ZONE_NORTH_FRLG",
+      "dest_warp_id": "3"
+    },
+    {
+      "x": 38,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_SAFARI_ZONE_NORTH_FRLG",
+      "dest_warp_id": "4"
+    },
+    {
+      "x": 39,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_SAFARI_ZONE_NORTH_FRLG",
+      "dest_warp_id": "5"
+    },
+    {
+      "x": 40,
+      "y": 26,
+      "elevation": 3,
+      "dest_map": "MAP_SAFARI_ZONE_CENTER",
+      "dest_warp_id": "6"
+    },
+    {
+      "x": 40,
+      "y": 27,
+      "elevation": 3,
+      "dest_map": "MAP_SAFARI_ZONE_CENTER",
+      "dest_warp_id": "7"
+    },
+    {
+      "x": 40,
+      "y": 28,
+      "elevation": 0,
+      "dest_map": "MAP_SAFARI_ZONE_CENTER",
+      "dest_warp_id": "8"
+    },
+    {
+      "x": 12,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_SAFARI_ZONE_SECRET_HOUSE",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 19,
+      "y": 18,
+      "elevation": 0,
+      "dest_map": "MAP_SAFARI_ZONE_WEST_REST_HOUSE",
+      "dest_warp_id": "1"
+    }
+  ],
+  "coord_events": [
+
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 27,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SafariZone_West_EventScript_LostTeethNotice"
+    },
+    {
+      "type": "sign",
+      "x": 36,
+      "y": 10,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SafariZone_West_EventScript_TrainerTips"
+    },
+    {
+      "type": "sign",
+      "x": 35,
+      "y": 26,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SafariZone_West_EventScript_AreaSign"
+    },
+    {
+      "type": "sign",
+      "x": 22,
+      "y": 19,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SafariZone_West_EventScript_RestHouseSign"
+    },
+    {
+      "type": "hidden_item",
+      "x": 13,
+      "y": 11,
+      "elevation": 3,
+      "item": "ITEM_REVIVE",
+      "flag": "FLAG_HIDDEN_ITEM_SAFARI_ZONE_WEST_REVIVE",
+      "quantity": 1,
+      "underfoot": false
+    }
+  ]
+}

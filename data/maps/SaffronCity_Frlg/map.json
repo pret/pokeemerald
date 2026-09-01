@@ -1,0 +1,437 @@
+{
+  "id": "MAP_SAFFRON_CITY",
+  "name": "SaffronCity_Frlg",
+  "layout": "LAYOUT_SAFFRON_CITY",
+  "music": "MUS_RG_PEWTER",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_SAFFRON_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_TOWN",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "map": "MAP_ROUTE5",
+      "offset": 0,
+      "direction": "up"
+    },
+    {
+      "map": "MAP_ROUTE6",
+      "offset": 12,
+      "direction": "down"
+    },
+    {
+      "map": "MAP_ROUTE7",
+      "offset": 10,
+      "direction": "left"
+    },
+    {
+      "map": "MAP_ROUTE8",
+      "offset": 10,
+      "direction": "right"
+    }
+  ],
+  "object_events": [
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
+      "x": 22,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SaffronCity_EventScript_RocketGrunt1",
+      "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
+      "x": 26,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
+      "movement_range_x": 4,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SaffronCity_EventScript_RocketGrunt2",
+      "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
+      "x": 46,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SaffronCity_EventScript_RocketGrunt3",
+      "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
+      "x": 27,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SaffronCity_EventScript_RocketGrunt4",
+      "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
+      "x": 25,
+      "y": 33,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
+      "movement_range_x": 7,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SaffronCity_EventScript_RocketGrunt5",
+      "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
+    },
+    {
+      "local_id": "LOCALID_SAFFRON_DOOR_GUARD_GRUNT",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
+      "x": 34,
+      "y": 31,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SaffronCity_EventScript_DoorGuardGrunt",
+      "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
+      "x": 30,
+      "y": 39,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
+      "movement_range_x": 5,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SaffronCity_EventScript_RocketGrunt7",
+      "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
+      "x": 48,
+      "y": 24,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
+      "movement_range_x": 4,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SaffronCity_EventScript_RocketGrunt6",
+      "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER_FRLG",
+      "x": 37,
+      "y": 32,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SaffronCity_EventScript_Youngster",
+      "flag": "FLAG_HIDE_SAFFRON_CIVILIANS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_WORKER_M",
+      "x": 21,
+      "y": 23,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SaffronCity_EventScript_WorkerM",
+      "flag": "FLAG_HIDE_SAFFRON_CIVILIANS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_MAN",
+      "x": 39,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SaffronCity_EventScript_Man",
+      "flag": "FLAG_HIDE_SAFFRON_CIVILIANS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_BOY",
+      "x": 44,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SaffronCity_EventScript_Boy",
+      "flag": "FLAG_HIDE_SAFFRON_CIVILIANS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_PIDGEOT",
+      "x": 45,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SaffronCity_EventScript_Pidgeot",
+      "flag": "FLAG_HIDE_SAFFRON_CIVILIANS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_LASS_FRLG",
+      "x": 32,
+      "y": 39,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
+      "movement_range_x": 5,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SaffronCity_EventScript_Lass",
+      "flag": "FLAG_HIDE_SAFFRON_CIVILIANS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_CRUSH_GIRL",
+      "x": 47,
+      "y": 24,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SaffronCity_EventScript_BattleGirl",
+      "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 33,
+      "y": 30,
+      "elevation": 0,
+      "dest_map": "MAP_SILPH_CO_1F",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 22,
+      "y": 14,
+      "elevation": 0,
+      "dest_map": "MAP_SAFFRON_CITY_COPYCATS_HOUSE_1F",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 40,
+      "y": 12,
+      "elevation": 0,
+      "dest_map": "MAP_SAFFRON_CITY_DOJO",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 46,
+      "y": 12,
+      "elevation": 0,
+      "dest_map": "MAP_SAFFRON_CITY_GYM",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 27,
+      "y": 21,
+      "elevation": 0,
+      "dest_map": "MAP_SAFFRON_CITY_HOUSE",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 40,
+      "y": 21,
+      "elevation": 0,
+      "dest_map": "MAP_SAFFRON_CITY_MART",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 24,
+      "y": 38,
+      "elevation": 0,
+      "dest_map": "MAP_SAFFRON_CITY_POKEMON_CENTER_1F",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 43,
+      "y": 38,
+      "elevation": 0,
+      "dest_map": "MAP_SAFFRON_CITY_MR_PSYCHICS_HOUSE",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 8,
+      "y": 27,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE7_EAST_ENTRANCE",
+      "dest_warp_id": "2"
+    },
+    {
+      "x": 34,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE5_SOUTH_ENTRANCE",
+      "dest_warp_id": "2"
+    },
+    {
+      "x": 58,
+      "y": 27,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE8_WEST_ENTRANCE",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 34,
+      "y": 46,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE6_NORTH_ENTRANCE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 35,
+      "y": 46,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE6_NORTH_ENTRANCE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 35,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE5_SOUTH_ENTRANCE",
+      "dest_warp_id": "2"
+    },
+    {
+      "x": 47,
+      "y": 21,
+      "elevation": 0,
+      "dest_map": "MAP_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 29,
+      "y": 14,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SaffronCity_EventScript_CitySign"
+    },
+    {
+      "type": "sign",
+      "x": 42,
+      "y": 14,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SaffronCity_EventScript_DojoSign"
+    },
+    {
+      "type": "sign",
+      "x": 13,
+      "y": 25,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SaffronCity_EventScript_SilphProductSign"
+    },
+    {
+      "type": "sign",
+      "x": 18,
+      "y": 30,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SaffronCity_EventScript_TrainerTips2"
+    },
+    {
+      "type": "sign",
+      "x": 29,
+      "y": 31,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SaffronCity_EventScript_SilphCoSign"
+    },
+    {
+      "type": "sign",
+      "x": 54,
+      "y": 25,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SaffronCity_EventScript_TrainerTips1"
+    },
+    {
+      "type": "sign",
+      "x": 50,
+      "y": 14,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SaffronCity_EventScript_GymSign"
+    },
+    {
+      "type": "sign",
+      "x": 40,
+      "y": 38,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SaffronCity_EventScript_MrPsychicsHouseSign"
+    },
+    {
+      "type": "sign",
+      "x": 49,
+      "y": 22,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SaffronCity_EventScript_TrainerFanClubSign"
+    }
+  ],
+  "connections_no_include": true
+}

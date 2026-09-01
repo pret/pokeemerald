@@ -1,0 +1,71 @@
+name: 💾 Other errors 🖥️
+description: Everything else that doesn't fit in the above categories.
+labels: ["bug", "status: unconfirmed"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please fill in all fields with as many details as possible.
+        Once your bug is posted, make sure you and your collaborators are added to `CREDITS.md` by [tagging the bot on GitHub](https://github.com/rh-hideout/pokeemerald-expansion/wiki/CREDITS.md-Frequently-Asked-Questions). EVERY contribution matters, even creating issues!
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: |
+        What behavior are you expecting to happen? What behavior are you observing instead?
+      placeholder: |
+        Please be as descriptive as possible.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction Steps
+      description: |
+        What exact steps can somebody else follow in order to recreate the issue on their own?
+      placeholder: |
+        Provide as much context as possible as to what was done to create the issue.
+    validations:
+      required: false
+  - type: textarea
+    id: media
+    attributes:
+      label: Images / Video
+      description: |
+        Do you have images or videos to show the problem happen?
+      placeholder: |
+        Here you can also attach logs, screenshots, gifs or a video.
+    validations:
+      required: false
+  - type: dropdown
+    id: version
+    attributes:
+      label: Version
+      description: What version of pokeemerald-expansion are you using?
+      options:
+        - 1.17.0 (Latest release)
+        - master (default, unreleased bugfixes)
+        - upcoming (Edge)
+        - 1.16.4
+        - 1.16.3
+        - 1.16.2
+        - 1.16.1
+        - 1.16.0
+        - pre-1.16.0
+    validations:
+      required: true
+  - type: input
+    id: upcomingversion
+    attributes:
+      label: Upcoming/master Version
+      description: If you're using the `upcoming` or `master` branches directly, please use the following command to give us the commit hash that you are on. `git log --merges RHH/upcoming -1 --format=%H` Replace `upcoming` with `master` if you're using `master`.
+    validations:
+      required: false
+  - type: input
+    id: contact
+    attributes:
+      label: Discord contact info
+      description: Provide your Discord tag here so we can contact you in case we need more details. Discussion around **`pokeemerald-expansion`** happens in our [Discord server](https://discord.gg/6CzjAG6GZk).
+      placeholder: ex. Lunos#4026
+    validations:
+      required: false

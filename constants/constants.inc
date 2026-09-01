@@ -1,3 +1,2 @@
 	.include "constants/gba_constants.inc"
 	.include "constants/global.inc"
-	.include "constants/tms_hms.inc"

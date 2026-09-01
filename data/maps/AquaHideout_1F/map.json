@@ -3,6 +3,7 @@
   "name": "AquaHideout_1F",
   "layout": "LAYOUT_AQUA_HIDEOUT_1F",
   "music": "MUS_AQUA_MAGMA_HIDEOUT",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_AQUA_HIDEOUT",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

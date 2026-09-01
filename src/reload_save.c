@@ -1,5 +1,6 @@
 #include "global.h"
 #include "main.h"
+#include "crt0.h"
 #include "gpu_regs.h"
 #include "m4a.h"
 #include "load_save.h"
@@ -7,6 +8,7 @@
 #include "new_game.h"
 #include "overworld.h"
 #include "malloc.h"
+#include "text.h"
 
 // Reloads the game, continuing from the point of the last save
 // Used to gracefully exit after a link connection error
@@ -15,10 +17,12 @@ void ReloadSave(void)
     u16 imeBackup = REG_IME;
     REG_IME = 0;
     RegisterRamReset(RESET_EWRAM);
+    ReInitializeEWRAM();
     ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_FORCED_BLANK);
     REG_IME = imeBackup;
     gMain.inBattle = FALSE;
     SetSaveBlocksPointers(GetSaveBlocksPointersBaseOffset());
+    SetDefaultFontsPointer();
     ResetMenuAndMonGlobals();
     Save_ResetSaveCounters();
     LoadGameSave(SAVE_NORMAL);

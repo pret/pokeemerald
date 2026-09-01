@@ -81,6 +81,7 @@ struct MysteryGiftClient
     void *msg;
     struct MysteryGiftLink link;
     bool32 isWonderNews;
+    ALIGNED(4) u8 bufferScript[MG_LINK_BUFFER_SIZE];
 };
 
 void MysteryGiftClient_Create(bool32 isWonderNews);

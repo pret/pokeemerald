@@ -6,6 +6,15 @@
 // Exported type declarations
 #define MAP_NAME_LENGTH 16
 
+enum RegionMapType
+{
+    REGION_MAP_HOENN,
+    REGION_MAP_KANTO,
+    REGION_MAP_SEVII123,
+    REGION_MAP_SEVII45,
+    REGION_MAP_SEVII67
+};
+
 enum
 {
     MAP_INPUT_NONE,
@@ -14,6 +23,7 @@ enum
     MAP_INPUT_MOVE_END,
     MAP_INPUT_A_BUTTON,
     MAP_INPUT_B_BUTTON,
+    MAP_INPUT_R_BUTTON
 };
 
 enum {
@@ -23,6 +33,17 @@ enum {
     MAPSECTYPE_CITY_CANTFLY,
     MAPSECTYPE_BATTLE_FRONTIER,
     NUM_MAPSEC_TYPES
+};
+
+struct RegionMapInfo
+{
+    const u32 *dexMapTilemap;
+    const u32 *dexMapGfx;
+    const u16 *dexMapPalette;
+    const u32 *regionMapTilemap;
+    const u32 *regionMapGfx;
+    const u16 *regionMapPalette;
+    u16 dexMapPaletteSize;
 };
 
 struct RegionMap {
@@ -114,7 +135,13 @@ bool8 IsRegionMapZoomed(void);
 void TrySetPlayerIconBlink(void);
 void BlendRegionMap(u16 color, u32 coeff);
 void SetRegionMapDataForZoom(void);
+enum RegionMapType GetRegionMapType(u32 mapSecId);
+
+//Pokenav Fly funcs
+u32 FilterFlyDestination(struct RegionMap* regionMap);
+void SetFlyDestination(struct RegionMap* regionMap);
 
 extern const struct RegionMapLocation gRegionMapEntries[];
+extern const struct RegionMapInfo gRegionMapInfos[];
 
 #endif //GUARD_REGION_MAP_H

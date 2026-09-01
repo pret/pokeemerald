@@ -1,5 +1,5 @@
 const u16 gSlotMachineMenu_Pal[] = INCGFX_U16("graphics/slot_machine/menu.png", ".gbapal");
-const u32 gSlotMachineMenu_Gfx[] = INCGFX_U32("graphics/slot_machine/menu.png", ".4bpp.lz");
+const u32 gSlotMachineMenu_Gfx[] = INCGFX_U32("graphics/slot_machine/menu.png", ".4bpp.smol");
 const u16 gSlotMachineMenu_Tilemap[] = INCBIN_U16("graphics/slot_machine/menu.bin");
 
 const u16 gSlotMachineInfoBox_Tilemap[] = INCBIN_U16("graphics/slot_machine/info_box.bin");
@@ -20,7 +20,7 @@ const u8 gSlotMachineReelSymbol5Tiles[] = INCGFX_U8("graphics/slot_machine/reel_
 const u8 gSlotMachineReelSymbol6Tiles[] = INCGFX_U8("graphics/slot_machine/reel_symbols/6.png", ".4bpp");
 const u8 gSlotMachineReelSymbol7Tiles[] = INCGFX_U8("graphics/slot_machine/reel_symbols/7.png", ".4bpp");
 
-const u32 gSlotMachineDigitalDisplay_Gfx[] = INCGFX_U32("graphics/slot_machine/digital_display.png", ".4bpp.lz");
+const u32 gSlotMachineDigitalDisplay_Gfx[] = INCGFX_U32("graphics/slot_machine/digital_display.png", ".4bpp.smol");
 
 const u8 gSlotMachineNumber0Tiles[] = INCGFX_U8("graphics/slot_machine/numbers/0.png", ".4bpp");
 const u8 gSlotMachineNumber1Tiles[] = INCGFX_U8("graphics/slot_machine/numbers/1.png", ".4bpp");

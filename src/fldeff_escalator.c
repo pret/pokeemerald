@@ -56,6 +56,55 @@ static const s16 sEscalatorMetatiles_2F_2[ESCALATOR_STAGES] = {
     METATILE_PokemonCenter_Escalator2F_Tile2_Frame2
 };
 
+static const s16 sEscalatorMetatilesFrlg_BottomNextRail[ESCALATOR_STAGES] = 
+{
+    METATILE_PokemonCenterFrlg_Escalator_BottomNextRail_Transition2, 
+    METATILE_PokemonCenterFrlg_Escalator_BottomNextRail_Transition1, 
+    METATILE_PokemonCenterFrlg_Escalator_BottomNextRail_Normal
+};
+
+static const s16 sEscalatorMetatilesFrlg_BottomRail[ESCALATOR_STAGES] = 
+{
+    METATILE_PokemonCenterFrlg_Escalator_BottomRail_Transition2, 
+    METATILE_PokemonCenterFrlg_Escalator_BottomRail_Transition1, 
+    METATILE_PokemonCenterFrlg_Escalator_BottomRail_Normal
+};
+
+static const s16 sEscalatorMetatilesFrlg_BottomNext[ESCALATOR_STAGES] = 
+{
+    METATILE_PokemonCenterFrlg_Escalator_BottomNext_Transition2, 
+    METATILE_PokemonCenterFrlg_Escalator_BottomNext_Transition1, 
+    METATILE_PokemonCenterFrlg_Escalator_BottomNext_Normal
+};
+
+static const s16 sEscalatorMetatilesFrlg_Bottom[ESCALATOR_STAGES] = 
+{
+    METATILE_PokemonCenterFrlg_Escalator_Bottom_Transition2, 
+    METATILE_PokemonCenterFrlg_Escalator_Bottom_Transition1, 
+    METATILE_PokemonCenterFrlg_Escalator_Bottom_Normal
+};
+
+static const s16 sEscalatorMetatilesFrlg_TopNext[ESCALATOR_STAGES] = 
+{
+    METATILE_PokemonCenterFrlg_Escalator_TopNext_Normal, 
+    METATILE_PokemonCenterFrlg_Escalator_TopNext_Transition1, 
+    METATILE_PokemonCenterFrlg_Escalator_TopNext_Transition2
+};
+
+static const s16 sEscalatorMetatilesFrlg_Top[ESCALATOR_STAGES] = 
+{
+    METATILE_PokemonCenterFrlg_Escalator_Top_Normal, 
+    METATILE_PokemonCenterFrlg_Escalator_Top_Transition1, 
+    METATILE_PokemonCenterFrlg_Escalator_Top_Transition2
+};
+
+static const s16 sEscalatorMetatilesFrlg_TopNextRail[ESCALATOR_STAGES] = 
+{
+    METATILE_PokemonCenterFrlg_Escalator_TopNextRail_Normal, 
+    METATILE_PokemonCenterFrlg_Escalator_TopNextRail_Transition1, 
+    METATILE_PokemonCenterFrlg_Escalator_TopNextRail_Transition2
+};
+
 #define tState            data[0]
 #define tTransitionStage  data[1]
 #define tGoingUp          data[2]
@@ -119,27 +168,27 @@ static void Task_DrawEscalator(u8 taskId)
     // Set tile for each section of the escalator in sequence for current transition stage
     switch (tState)
     {
-        case 0:
-            SetEscalatorMetatile(taskId, sEscalatorMetatiles_1F_0, 0);
-            break;
-        case 1:
-            SetEscalatorMetatile(taskId, sEscalatorMetatiles_1F_1, 0);
-            break;
-        case 2:
-            SetEscalatorMetatile(taskId, sEscalatorMetatiles_1F_2, MAPGRID_IMPASSABLE);
-            break;
-        case 3:
-            SetEscalatorMetatile(taskId, sEscalatorMetatiles_1F_3, 0);
-            break;
-        case 4:
-            SetEscalatorMetatile(taskId, sEscalatorMetatiles_2F_0, MAPGRID_IMPASSABLE);
-            break;
-        case 5:
-            SetEscalatorMetatile(taskId, sEscalatorMetatiles_2F_1, 0);
-            break;
-        case 6:
-            SetEscalatorMetatile(taskId, sEscalatorMetatiles_2F_2, 0);
-            break;
+    case 0:
+        SetEscalatorMetatile(taskId, gMapHeader.mapLayout->isFrlg ? sEscalatorMetatilesFrlg_BottomNextRail : sEscalatorMetatiles_1F_0, 0);
+        break;
+    case 1:
+        SetEscalatorMetatile(taskId, gMapHeader.mapLayout->isFrlg ? sEscalatorMetatilesFrlg_BottomRail : sEscalatorMetatiles_1F_1, 0);
+        break;
+    case 2:
+        SetEscalatorMetatile(taskId, gMapHeader.mapLayout->isFrlg ? sEscalatorMetatilesFrlg_BottomNext : sEscalatorMetatiles_1F_2, MAPGRID_IMPASSABLE);
+        break;
+    case 3:
+        SetEscalatorMetatile(taskId, gMapHeader.mapLayout->isFrlg ? sEscalatorMetatilesFrlg_Bottom : sEscalatorMetatiles_1F_3, 0);
+        break;
+    case 4:
+        SetEscalatorMetatile(taskId, gMapHeader.mapLayout->isFrlg ? sEscalatorMetatilesFrlg_TopNext : sEscalatorMetatiles_2F_0, MAPGRID_IMPASSABLE);
+        break;
+    case 5:
+        SetEscalatorMetatile(taskId, gMapHeader.mapLayout->isFrlg ? sEscalatorMetatilesFrlg_Top : sEscalatorMetatiles_2F_1, 0);
+        break;
+    case 6:
+        SetEscalatorMetatile(taskId, gMapHeader.mapLayout->isFrlg ? sEscalatorMetatilesFrlg_TopNextRail : sEscalatorMetatiles_2F_2, 0);
+        break;
     }
 
     tState = (tState + 1) & 7;

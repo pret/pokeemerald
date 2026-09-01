@@ -1,0 +1,73 @@
+#ifndef GUARD_CONSTANTS_BERRIES_H
+#define GUARD_CONSTANTS_BERRIES_H
+
+#define FOREACH_BERRY(F) \
+    F(CHERI) \
+    F(CHESTO) \
+    F(PECHA) \
+    F(RAWST) \
+    F(ASPEAR) \
+    F(LEPPA) \
+    F(ORAN) \
+    F(PERSIM) \
+    F(LUM) \
+    F(SITRUS) \
+    F(FIGY) \
+    F(WIKI) \
+    F(MAGO) \
+    F(AGUAV) \
+    F(IAPAPA) \
+    F(RAZZ) \
+    F(BLUK) \
+    F(NANAB) \
+    F(WEPEAR) \
+    F(PINAP) \
+    F(POMEG) \
+    F(KELPSY) \
+    F(QUALOT) \
+    F(HONDEW) \
+    F(GREPA) \
+    F(TAMATO) \
+    F(CORNN) \
+    F(MAGOST) \
+    F(RABUTA) \
+    F(NOMEL) \
+    F(SPELON) \
+    F(PAMTRE) \
+    F(WATMEL) \
+    F(DURIN) \
+    F(BELUE) \
+    F(OCCA) \
+    F(PASSHO) \
+    F(WACAN) \
+    F(RINDO) \
+    F(YACHE) \
+    F(CHOPLE) \
+    F(KEBIA) \
+    F(SHUCA) \
+    F(COBA) \
+    F(PAYAPA) \
+    F(TANGA) \
+    F(CHARTI) \
+    F(KASIB) \
+    F(HABAN) \
+    F(COLBUR) \
+    F(BABIRI) \
+    F(CHILAN) \
+    F(LIECHI) \
+    F(GANLON) \
+    F(SALAC) \
+    F(PETAYA) \
+    F(APICOT) \
+    F(LANSAT) \
+    F(STARF) \
+    F(ENIGMA) \
+    F(MICLE) \
+    F(CUSTAP) \
+    F(JABOCA) \
+    F(ROWAP) \
+    F(ROSELI) \
+    F(KEE) \
+    F(MARANGA)
+
+#endif

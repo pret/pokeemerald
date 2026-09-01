@@ -40,50 +40,8 @@ enum {
     NUM_ANIMDATA
 };
 
-enum {
-    AFFINE_NONE,
-    AFFINE_TURN_UP,
-    AFFINE_TURN_UP_AND_DOWN,
-    AFFINE_TURN_DOWN,
-    AFFINE_TURN_DOWN_SLOW,
-    AFFINE_TURN_DOWN_SLIGHT,
-    AFFINE_TURN_UP_HIGH,
-    AFFINE_UNUSED_1,
-    AFFINE_UNUSED_2,
-    AFFINE_UNUSED_3,
-    NUM_MON_AFFINES,
-};
-
 #define MON_X 48
 #define MON_Y 80
-
-// The animation the Pokémon does during the feeding scene depends on their nature.
-// The below values are offsets into sMonPokeblockAnims of the animation data for that nature.
-#define ANIM_HARDY   0
-#define ANIM_LONELY  (ANIM_HARDY + 3)
-#define ANIM_BRAVE   (ANIM_LONELY + 1)
-#define ANIM_ADAMANT (ANIM_BRAVE + 1)
-#define ANIM_NAUGHTY (ANIM_ADAMANT + 5)
-#define ANIM_BOLD    (ANIM_NAUGHTY + 3)
-#define ANIM_DOCILE  (ANIM_BOLD + 2)
-#define ANIM_RELAXED (ANIM_DOCILE + 1)
-#define ANIM_IMPISH  (ANIM_RELAXED + 2)
-#define ANIM_LAX     (ANIM_IMPISH + 1)
-#define ANIM_TIMID   (ANIM_LAX + 1)
-#define ANIM_HASTY   (ANIM_TIMID + 5)
-#define ANIM_SERIOUS (ANIM_HASTY + 2)
-#define ANIM_JOLLY   (ANIM_SERIOUS + 1)
-#define ANIM_NAIVE   (ANIM_JOLLY + 1)
-#define ANIM_MODEST  (ANIM_NAIVE + 4)
-#define ANIM_MILD    (ANIM_MODEST + 3)
-#define ANIM_QUIET   (ANIM_MILD + 1)
-#define ANIM_BASHFUL (ANIM_QUIET + 2)
-#define ANIM_RASH    (ANIM_BASHFUL + 3)
-#define ANIM_CALM    (ANIM_RASH + 3)
-#define ANIM_GENTLE  (ANIM_CALM + 1)
-#define ANIM_SASSY   (ANIM_GENTLE + 1)
-#define ANIM_CAREFUL (ANIM_SASSY + 1)
-#define ANIM_QUIRKY  (ANIM_CAREFUL + 5)
 
 struct PokeblockFeed
 {
@@ -97,7 +55,7 @@ struct PokeblockFeed
     u8 animId;
     u8 unused2;
     bool8 noMonFlip;
-    u16 species;
+    enum Species species;
     u16 monAnimLength;
     u16 timer;
     u8 nature;
@@ -138,37 +96,12 @@ static u8 CreatePokeblockCaseSpriteForFeeding(void);
 static u8 CreateMonSprite(struct Pokemon *);
 static void SpriteCB_ThrownPokeblock(struct Sprite *);
 
-EWRAM_DATA static struct PokeblockFeed *sPokeblockFeed = NULL;
-EWRAM_DATA static struct CompressedSpritePalette sPokeblockSpritePal = {0};
+static const u8 sText_Var1AteTheVar2[] = _("{STR_VAR_1} ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_Var1HappilyAteVar2[] = _("{STR_VAR_1} happily ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_Var1DisdainfullyAteVar2[] = _("{STR_VAR_1} disdainfully ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}");
 
-static const u8 sNatureToMonPokeblockAnim[NUM_NATURES][2] =
-{
-    [NATURE_HARDY]   = { ANIM_HARDY,   AFFINE_NONE },
-    [NATURE_LONELY]  = { ANIM_LONELY,  AFFINE_NONE },
-    [NATURE_BRAVE]   = { ANIM_BRAVE,   AFFINE_TURN_UP },
-    [NATURE_ADAMANT] = { ANIM_ADAMANT, AFFINE_NONE },
-    [NATURE_NAUGHTY] = { ANIM_NAUGHTY, AFFINE_NONE },
-    [NATURE_BOLD]    = { ANIM_BOLD,    AFFINE_NONE },
-    [NATURE_DOCILE]  = { ANIM_DOCILE,  AFFINE_NONE },
-    [NATURE_RELAXED] = { ANIM_RELAXED, AFFINE_TURN_UP_AND_DOWN },
-    [NATURE_IMPISH]  = { ANIM_IMPISH,  AFFINE_NONE },
-    [NATURE_LAX]     = { ANIM_LAX,     AFFINE_NONE },
-    [NATURE_TIMID]   = { ANIM_TIMID,   AFFINE_NONE },
-    [NATURE_HASTY]   = { ANIM_HASTY,   AFFINE_NONE },
-    [NATURE_SERIOUS] = { ANIM_SERIOUS, AFFINE_TURN_DOWN },
-    [NATURE_JOLLY]   = { ANIM_JOLLY,   AFFINE_NONE },
-    [NATURE_NAIVE]   = { ANIM_NAIVE,   AFFINE_NONE },
-    [NATURE_MODEST]  = { ANIM_MODEST,  AFFINE_TURN_DOWN_SLOW },
-    [NATURE_MILD]    = { ANIM_MILD,    AFFINE_NONE },
-    [NATURE_QUIET]   = { ANIM_QUIET,   AFFINE_NONE },
-    [NATURE_BASHFUL] = { ANIM_BASHFUL, AFFINE_NONE },
-    [NATURE_RASH]    = { ANIM_RASH,    AFFINE_NONE },
-    [NATURE_CALM]    = { ANIM_CALM,    AFFINE_NONE },
-    [NATURE_GENTLE]  = { ANIM_GENTLE,  AFFINE_TURN_DOWN_SLIGHT },
-    [NATURE_SASSY]   = { ANIM_SASSY,   AFFINE_TURN_UP_HIGH },
-    [NATURE_CAREFUL] = { ANIM_CAREFUL, AFFINE_NONE },
-    [NATURE_QUIRKY]  = { ANIM_QUIRKY,  AFFINE_NONE },
-};
+EWRAM_DATA static struct PokeblockFeed *sPokeblockFeed = NULL;
+EWRAM_DATA static struct SpritePalette sPokeblockSpritePal = {0};
 
 // Data for the animation the Pokémon does while readying to jump for the Pokéblock
 // Each nature can have up to 8 anim 'stages' it progresses through, and each stage has its own array of data.
@@ -466,7 +399,7 @@ static const struct WindowTemplate sWindowTemplates[] =
 };
 
 // - 1 excludes PBLOCK_CLR_NONE
-static const u32 *const sPokeblocksPals[] =
+static const u16 *const sPokeblocksPals[] =
 {
     [PBLOCK_CLR_RED - 1]       = gPokeblockRed_Pal,
     [PBLOCK_CLR_BLUE - 1]      = gPokeblockBlue_Pal,
@@ -591,7 +524,6 @@ static const struct SpriteTemplate sSpriteTemplate_Pokeblock =
     .paletteTag = TAG_POKEBLOCK,
     .oam = &sOamData_Pokeblock,
     .anims = sAnims_Pokeblock,
-    .images = NULL,
     .affineAnims = sAffineAnims_Pokeblock,
     .callback = SpriteCB_ThrownPokeblock
 };
@@ -648,7 +580,7 @@ static bool8 LoadPokeblockFeedScene(void)
         gMain.state++;
         break;
     case 7:
-        if (LoadMonAndSceneGfx(&gPlayerParty[gPokeblockMonId]))
+        if (LoadMonAndSceneGfx(&gParties[B_TRAINER_PLAYER][gPokeblockMonId]))
             gMain.state++;
         break;
     case 8:
@@ -656,7 +588,7 @@ static bool8 LoadPokeblockFeedScene(void)
         gMain.state++;
         break;
     case 9:
-        sPokeblockFeed->monSpriteId = CreateMonSprite(&gPlayerParty[gPokeblockMonId]);
+        sPokeblockFeed->monSpriteId = CreateMonSprite(&gParties[B_TRAINER_PLAYER][gPokeblockMonId]);
         gMain.state++;
         break;
     case 10:
@@ -717,9 +649,9 @@ static void HandleInitBackgrounds(void)
 
 static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
 {
-    u16 species;
-    u32 personality, trainerId;
-    const struct CompressedSpritePalette *palette;
+    enum Species species;
+    u32 personality;
+    bool32 isShiny;
 
     switch (sPokeblockFeed->loadGfxState)
     {
@@ -727,18 +659,16 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
         // Load mon gfx
         species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
         personality = GetMonData(mon, MON_DATA_PERSONALITY);
-        HandleLoadSpecialPokePic_2(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT], species, personality);
+        HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->spritesGfx[B_POSITION_OPPONENT_LEFT], species, personality);
         sPokeblockFeed->loadGfxState++;
         break;
     case 1:
         // Load mon palette
         species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
         personality = GetMonData(mon, MON_DATA_PERSONALITY);
-        trainerId = GetMonData(mon, MON_DATA_OT_ID);
-        palette = GetMonSpritePalStructFromOtIdPersonality(species, trainerId, personality);
-
-        LoadCompressedSpritePalette(palette);
-        SetMultiuseSpriteTemplateToPokemon(palette->tag, B_POSITION_OPPONENT_LEFT);
+        isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
+        LoadSpritePaletteWithTag(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), species);
+        SetMultiuseSpriteTemplateToPokemon(species, B_POSITION_OPPONENT_LEFT);
         sPokeblockFeed->loadGfxState++;
         break;
     case 2:
@@ -746,7 +676,7 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
         sPokeblockFeed->loadGfxState++;
         break;
     case 3:
-        LoadCompressedSpritePalette(&gPokeblockCase_SpritePal);
+        LoadSpritePalette(&gPokeblockCase_SpritePal);
         sPokeblockFeed->loadGfxState++;
         break;
     case 4:
@@ -755,7 +685,7 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
         break;
     case 5:
         SetPokeblockSpritePal(gSpecialVar_ItemId);
-        LoadCompressedSpritePalette(&sPokeblockSpritePal);
+        LoadSpritePalette(&sPokeblockSpritePal);
         sPokeblockFeed->loadGfxState++;
         break;
     case 6:
@@ -766,12 +696,12 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
     case 7:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(gPokeblockFeedBg_Tilemap, sPokeblockFeed->tilemapBuffer);
+            DecompressDataWithHeaderWram(gPokeblockFeedBg_Tilemap, sPokeblockFeed->tilemapBuffer);
             sPokeblockFeed->loadGfxState++;
         }
         break;
     case 8:
-        LoadCompressedPalette(gBattleEnvironmentPalette_Frontier, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
+        LoadPalette(gBattleEnvironmentPalette_Frontier, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
         sPokeblockFeed->loadGfxState = 0;
         return TRUE;
     }
@@ -857,7 +787,7 @@ static void Task_WaitForAtePokeblockMessage(u8 taskId)
 
 static void Task_PrintAtePokeblockMessage(u8 taskId)
 {
-    struct Pokemon *mon = &gPlayerParty[gPokeblockMonId];
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gPokeblockMonId];
     struct Pokeblock *pokeblock = &gSaveBlock1Ptr->pokeblocks[gSpecialVar_ItemId];
 
     gPokeblockGain = PokeblockGetGain(GetNature(mon), pokeblock);
@@ -865,11 +795,11 @@ static void Task_PrintAtePokeblockMessage(u8 taskId)
     PokeblockCopyName(pokeblock, gStringVar2);
 
     if (gPokeblockGain == 0)
-        StringExpandPlaceholders(gStringVar4, gText_Var1AteTheVar2);
+        StringExpandPlaceholders(gStringVar4, sText_Var1AteTheVar2);
     else if (gPokeblockGain > 0)
-        StringExpandPlaceholders(gStringVar4, gText_Var1HappilyAteVar2);
+        StringExpandPlaceholders(gStringVar4, sText_Var1HappilyAteVar2);
     else
-        StringExpandPlaceholders(gStringVar4, gText_Var1DisdainfullyAteVar2);
+        StringExpandPlaceholders(gStringVar4, sText_Var1DisdainfullyAteVar2);
 
     gTextFlags.canABSpeedUpPrint = TRUE;
     AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
@@ -907,7 +837,7 @@ static void Task_FadeOutPokeblockFeed(u8 taskId)
 
 static u8 CreateMonSprite(struct Pokemon *mon)
 {
-    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
     u8 spriteId = CreateSprite(&gMultiuseSpriteTemplate, MON_X, MON_Y, 2);
 
     sPokeblockFeed->species = species;
@@ -998,7 +928,7 @@ static void CalculateMonAnimLength(void)
 
     pokeblockFeed = sPokeblockFeed;
     pokeblockFeed->monAnimLength = 1;
-    animId = sNatureToMonPokeblockAnim[pokeblockFeed->nature][0];
+    animId = gNaturesInfo[pokeblockFeed->nature].pokeBlockAnim[0];
 
     // Add up the time each stage of the animation will take
     for (i = 0; i < 8; i++, animId++)
@@ -1016,7 +946,7 @@ static void UpdateMonAnim(void)
     switch (pokeblockFeed->animRunState)
     {
     case 0:
-        pokeblockFeed->animId = sNatureToMonPokeblockAnim[pokeblockFeed->nature][0];
+        pokeblockFeed->animId = gNaturesInfo[pokeblockFeed->nature].pokeBlockAnim[0];
         pokeblockFeed->monSpritePtr = &gSprites[pokeblockFeed->monSpriteId_];
         pokeblockFeed->savedMonSprite = *pokeblockFeed->monSpritePtr;
         pokeblockFeed->animRunState = 10;
@@ -1025,7 +955,7 @@ static void UpdateMonAnim(void)
         break;
     case 10:
         InitMonAnimStage();
-        if (sNatureToMonPokeblockAnim[pokeblockFeed->nature][1] != AFFINE_NONE)
+        if (gNaturesInfo[pokeblockFeed->nature].pokeBlockAnim[1] != AFFINE_NONE)
         {
             // Initialize affine anim
             pokeblockFeed->monSpritePtr->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
@@ -1035,13 +965,13 @@ static void UpdateMonAnim(void)
         }
         pokeblockFeed->animRunState = 50;
     case 50:
-        if (sNatureToMonPokeblockAnim[pokeblockFeed->nature][1] != AFFINE_NONE)
+        if (gNaturesInfo[pokeblockFeed->nature].pokeBlockAnim[1] != AFFINE_NONE)
         {
             // Start affine anim
             if (!pokeblockFeed->noMonFlip) // double negation, so mon's sprite is flipped
-                StartSpriteAffineAnim(pokeblockFeed->monSpritePtr, sNatureToMonPokeblockAnim[pokeblockFeed->nature][1] + NUM_MON_AFFINES);
+                StartSpriteAffineAnim(pokeblockFeed->monSpritePtr, gNaturesInfo[pokeblockFeed->nature].pokeBlockAnim[1] + NUM_MON_AFFINES);
             else
-                StartSpriteAffineAnim(pokeblockFeed->monSpritePtr, sNatureToMonPokeblockAnim[pokeblockFeed->nature][1]);
+                StartSpriteAffineAnim(pokeblockFeed->monSpritePtr, gNaturesInfo[pokeblockFeed->nature].pokeBlockAnim[1]);
         }
         pokeblockFeed->animRunState = 60;
         break;

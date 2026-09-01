@@ -30,8 +30,6 @@ struct ScanlineEffect
     void (*setFirstScanlineReg)(void);
     u8 srcBuffer;
     u8 state;
-    u8 unused16;
-    u8 unused17;
     u8 waveTaskId;
 };
 

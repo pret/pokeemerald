@@ -1,6 +1,8 @@
 #ifndef GUARD_OVERWORLD_H
 #define GUARD_OVERWORLD_H
 
+#include "constants/map_types.h"
+
 #define LINK_KEY_CODE_NULL 0x00
 #define LINK_KEY_CODE_EMPTY 0x11
 #define LINK_KEY_CODE_DPAD_DOWN 0x12
@@ -26,6 +28,11 @@
 
 #define SKIP_OBJECT_EVENT_LOAD  1
 
+// trigger a time-of-day blend once
+#define HOURS_BLEND_ONCE 25
+// don't update gTimeBlend
+#define HOURS_FREEZE_BLEND 26
+
 struct InitialPlayerAvatarState
 {
     u8 transitionFlags;
@@ -40,6 +47,20 @@ struct LinkPlayerObjectEvent
     u8 movementMode;
 };
 
+struct CreditsOverworldCmd
+{
+    s16 unk_0;
+    s16 unk_2;
+    s16 unk_4;
+};
+
+enum {
+    MUSIC_DISABLE_OFF,
+    MUSIC_DISABLE_STOP,
+    MUSIC_DISABLE_KEEP,
+};
+
+// Exported RAM declarations
 extern struct WarpData gLastUsedWarp;
 extern struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4];
 
@@ -51,6 +72,13 @@ extern void (*gFieldCallback)(void);
 extern bool8 (*gFieldCallback2)(void);
 extern u8 gLocalLinkPlayerId;
 extern u8 gFieldLinkPlayerCount;
+extern bool8 gExitStairsMovementDisabled;
+extern bool8 gSkipShowMonAnim;
+extern u8 gTimeOfDay;
+extern s16 gTimeUpdateCounter;
+extern u8 gDisableMapMusicChangeOnMapLoad;
+
+extern struct TimeBlendSettings gTimeBlend;
 
 extern const struct UCoords32 gDirectionToVectors[];
 
@@ -67,7 +95,7 @@ void LoadObjEventTemplatesFromHeader(void);
 void LoadSaveblockObjEventScripts(void);
 void SetObjEventTemplateCoords(u8 localId, s16 x, s16 y);
 void SetObjEventTemplateMovementType(u8 localId, u8 movementType);
-const struct MapLayout *GetMapLayout(void);
+const struct MapLayout *GetMapLayout(u16 mapLayoutId);
 void ApplyCurrentWarp(void);
 struct MapHeader const *const Overworld_GetMapHeaderByGroupAndId(u16 mapGroup, u16 mapNum);
 struct MapHeader const *const GetDestinationWarpMapHeader(void);
@@ -79,6 +107,7 @@ void SetDynamicWarpWithCoords(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 
 void SetWarpDestinationToDynamicWarp(u8 unusedWarpId);
 void SetWarpDestinationToHealLocation(u8 healLocationId);
 void SetWarpDestinationToLastHealLocation(void);
+void SetWarpDestinationForTeleport(void);
 void SetLastHealLocationWarp(u8 healLocationId);
 void UpdateEscapeWarp(s16 x, s16 y);
 void SetEscapeWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
@@ -114,23 +143,28 @@ void TryFadeOutOldMapMusic(void);
 bool8 BGMusicStopped(void);
 void Overworld_FadeOutMapMusic(void);
 void UpdateAmbientCry(s16 *state, u16 *delayCounter);
-u8 GetMapTypeByGroupAndId(s8 mapGroup, s8 mapNum);
-u8 GetMapTypeByWarpData(struct WarpData *warp);
-u8 GetCurrentMapType(void);
-u8 GetLastUsedWarpMapType(void);
-bool8 IsMapTypeOutdoors(u8 mapType);
-bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 mapType);
-bool8 IsMapTypeIndoors(u8 mapType);
+enum MapType GetMapTypeByGroupAndId(s8 mapGroup, s8 mapNum);
+enum MapType GetMapTypeByWarpData(struct WarpData *warp);
+enum MapType GetCurrentMapType(void);
+enum MapType GetLastUsedWarpMapType(void);
+mapsec_u8_t GetLastUsedWarpMapSectionId(void);
+bool8 IsMapTypeOutdoors(enum MapType mapType);
+bool8 Overworld_MapTypeAllowsTeleportAndFly(enum MapType mapType);
+bool8 IsMapTypeIndoors(enum MapType mapType);
 mapsec_u8_t GetSavedWarpRegionMapSectionId(void);
 mapsec_u8_t GetCurrentRegionMapSectionId(void);
-u8 GetCurrentMapBattleScene(void);
+enum MapBattleScene GetCurrentMapBattleScene(void);
 void CleanupOverworldWindowsAndTilemaps(void);
 bool32 IsOverworldLinkActive(void);
 void CB1_Overworld(void);
 void CB2_OverworldBasic(void);
+void UpdateTimeOfDay(bool32 updateBlend);
+bool32 MapHasNaturalLight(enum MapType mapType);
+bool32 CurrentMapHasShadows(void);
+void UpdateAltBgPalettes(u16 palettes);
+void UpdatePalettesWithTime(u32);
 void CB2_Overworld(void);
 void SetMainCallback1(void (*cb)(void));
-void SetUnusedCallback(void *func);
 void CB2_NewGame(void);
 void CB2_WhiteOut(void);
 void CB2_LoadMap(void);
@@ -154,5 +188,18 @@ bool32 Overworld_RecvKeysFromLinkIsRunning(void);
 bool32 Overworld_SendKeysToLinkIsRunning(void);
 bool32 IsSendingKeysOverCable(void);
 void ClearLinkPlayerObjectEvents(void);
+bool16 SetTimeOfDay(u16 hours);
+bool8 MetatileBehavior_IsSurfableInSeafoamIslands(u16 metatileBehavior);
+
+// Item Description Headers
+enum ItemObtainFlags
+{
+    FLAG_GET_ITEM_OBTAINED,
+    FLAG_SET_ITEM_OBTAINED,
+};
+bool8 GetSetItemObtained(enum Item item, enum ItemObtainFlags caseId);
+
+void Overworld_CreditsMainCB(void);
+bool32 Overworld_DoScrollSceneForCredits(u8 *, const struct CreditsOverworldCmd *);
 
 #endif // GUARD_OVERWORLD_H

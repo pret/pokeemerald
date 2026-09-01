@@ -3,6 +3,7 @@
   "name": "TrainerHill_1F",
   "layout": "LAYOUT_TRAINER_HILL_1F",
   "music": "MUS_B_TOWER_RS",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_TRAINER_HILL",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

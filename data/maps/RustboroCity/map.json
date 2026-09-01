@@ -3,6 +3,7 @@
   "name": "RustboroCity",
   "layout": "LAYOUT_RUSTBORO_CITY",
   "music": "MUS_RUSTBORO",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_RUSTBORO_CITY",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -186,8 +187,8 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "RustboroCity_EventScript_ItemXDefend",
+      "trainer_sight_or_berry_tree_id": "ITEM_X_DEFEND",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_RUSTBORO_CITY_X_DEFEND"
     },
     {

@@ -3,6 +3,7 @@
   "name": "UnusedContestHall2",
   "layout": "LAYOUT_UNUSED_CONTEST_HALL2",
   "music": "MUS_GSC_PEWTER",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_DYNAMIC",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -599,6 +599,7 @@
 #define BLDCNT_EFFECT_BLEND     (1 << 6)   // 1st+2nd targets mixed (controlled by BLDALPHA)
 #define BLDCNT_EFFECT_LIGHTEN   (2 << 6)   // 1st target becomes whiter (controlled by BLDY)
 #define BLDCNT_EFFECT_DARKEN    (3 << 6)   // 1st target becomes blacker (controlled by BLDY)
+#define BLDCNT_EFFECT_EFF_MASK  (3 << 6)   // mask to check effect
 // Bits 8-13 select layers for the 2nd target
 #define BLDCNT_TGT2_BG0      (1 << 8)
 #define BLDCNT_TGT2_BG1      (1 << 9)
@@ -611,6 +612,8 @@
 
 // BLDALPHA
 #define BLDALPHA_BLEND(target1, target2) (((target2) << 8) | (target1))
+#define BLDALPHA_TGT1(bld) ((bld) & 0x1F)
+#define BLDALPHA_TGT2(bld) (((bld) >> 8) & 0x1F)
 
 // SOUNDCNT_H
 #define SOUND_CGB_MIX_QUARTER 0x0000
@@ -664,6 +667,7 @@
 #define TIMER_64CLK       0x01
 #define TIMER_256CLK      0x02
 #define TIMER_1024CLK     0x03
+#define TIMER_COUNTUP     0x04
 #define TIMER_INTR_ENABLE 0x40
 #define TIMER_ENABLE      0x80
 

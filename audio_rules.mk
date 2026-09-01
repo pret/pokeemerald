@@ -6,12 +6,15 @@ MID_ASM_DIR := $(MID_SUBDIR)
 CRY_BIN_DIR := $(CRY_SUBDIR)
 SOUND_BIN_DIR := sound
 
-SPECIAL_OUTDIRS := $(MID_ASM_DIR) $(CRY_BIN_DIR) 
+# Needs to recompile for B_NUM_LOW_HEALTH_BEEPS in battle.h
+EXPANSION_BATTLE_CONFIG := include/config/battle.h
+
+SPECIAL_OUTDIRS := $(MID_ASM_DIR) $(CRY_BIN_DIR)
 SPECIAL_OUTDIRS += $(SOUND_BIN_DIR) $(SOUND_BIN_DIR)/direct_sound_samples/phonemes $(SOUND_BIN_DIR)/direct_sound_samples/cries
 $(shell mkdir -p $(SPECIAL_OUTDIRS) )
 
 # Assembly song compilation
-$(SONG_BUILDDIR)/%.o: $(SONG_SUBDIR)/%.s
+$(SONG_BUILDDIR)/%.o: $(SONG_SUBDIR)/%.s $(EXPANSION_BATTLE_CONFIG)
 	$(AS) $(ASFLAGS) -I sound -o $@ $<
 $(MID_BUILDDIR)/%.o: $(MID_ASM_DIR)/%.s
 	$(AS) $(ASFLAGS) -I sound -o $@ $<
@@ -21,8 +24,12 @@ $(CRY_BIN_DIR)/%.bin: $(CRY_SUBDIR)/%.wav
 # NOTE: If using ipatix's High Quality Audio Mixer, remove "--no-pad" below.
 	$(WAV2AGB) -b -c -l 1 --no-pad $< $@
 
+# Uncompressed cries
+$(CRY_BIN_DIR)/uncomp_%.bin: $(CRY_SUBDIR)/uncomp_%.aif
+	$(AIF) $< $@
+
 # Uncompressed sounds
-$(SOUND_BIN_DIR)/%.bin: sound/%.wav 
+$(SOUND_BIN_DIR)/%.bin: sound/%.wav
 	$(WAV2AGB) -b $< $@
 
 # For each line in midi.cfg, we do some trickery to convert it into a make rule for the `.mid` file described on the line
@@ -31,7 +38,7 @@ MID_CFG_PATH := $(MID_SUBDIR)/midi.cfg
 
 # $1: Source path no extension, $2 Options
 define MID_RULE
-$(MID_ASM_DIR)/$1.s: $(MID_SUBDIR)/$1.mid $(MID_CFG_PATH)
+$(MID_ASM_DIR)/$1.s: $(MID_SUBDIR)/$1.mid $(MID_CFG_PATH) $(EXPANSION_BATTLE_CONFIG)
 	$(MID) $$< $$@ $2
 endef
 #                            source path,                             remaining text (options)

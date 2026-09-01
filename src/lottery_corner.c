@@ -19,13 +19,13 @@ static const u16 sLotteryPrizes[] =
     ITEM_MASTER_BALL,
 };
 
-static u8 GetMatchingDigits(u16, u16);
+static u8 GetMatchingDigits(u16 winNumber, u32 otId);
+
+#define LOTTERY_CORNER_SALT 0x03007173 // Adress of the lottery corner var in vanilla Emerald
 
 void ResetLotteryCorner(void)
 {
-    u16 rand = Random();
-
-    SetLotteryNumber((Random() << 16) | rand);
+    SetLotteryNumber(Random32());
     VarSet(VAR_POKELOT_PRIZE_ITEM, ITEM_NONE);
 }
 
@@ -57,7 +57,7 @@ void PickLotteryCornerTicket(void)
     box = 0;
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        struct Pokemon *mon = &gPlayerParty[i];
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
 
         if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
         {
@@ -108,7 +108,7 @@ void PickLotteryCornerTicket(void)
         if (box == TOTAL_BOXES_COUNT)
         {
             gSpecialVar_0x8006 = 0;
-            GetMonData(&gPlayerParty[slot], MON_DATA_NICKNAME, gStringVar1);
+            GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_NICKNAME, gStringVar1);
         }
         else
         {
@@ -119,11 +119,12 @@ void PickLotteryCornerTicket(void)
     }
 }
 
-static u8 GetMatchingDigits(u16 winNumber, u16 otId)
+static u8 GetMatchingDigits(u16 winNumber, u32 otId)
 {
     u8 i;
     u8 matchingDigits = 0;
 
+    otId = otId & 0xFFFF;
     for (i = 0; i < 5; i++)
     {
         sWinNumberDigit = winNumber % 10;
@@ -143,26 +144,26 @@ static u8 GetMatchingDigits(u16 winNumber, u16 otId)
     return matchingDigits;
 }
 
-// lottery numbers go from 0 to 99999, not 65535 (0xFFFF). interestingly enough, the function that calls GetLotteryNumber shifts to u16, so it cant be anything above 65535 anyway.
+// lottery numbers go from 0 to 99999, not 65535 (0xFFFF). Interestingly enough, the function that calls GetLotteryNumber shifts to u16, so it can't be anything above 65535 anyway.
 void SetLotteryNumber(u32 lotteryNum)
 {
+    #if OW_USE_DAILY_SEED_FOR_VANILLA_VARIABLES == FALSE
     u16 lowNum = lotteryNum >> 16;
     u16 highNum = lotteryNum;
 
     VarSet(VAR_POKELOT_RND1, highNum);
     VarSet(VAR_POKELOT_RND2, lowNum);
+    #endif
 }
 
 u32 GetLotteryNumber(void)
 {
+    #if OW_USE_DAILY_SEED_FOR_VANILLA_VARIABLES == FALSE
     u16 highNum = VarGet(VAR_POKELOT_RND1);
     u16 lowNum = VarGet(VAR_POKELOT_RND2);
-
     return (lowNum << 16) | highNum;
-}
-
-// interestingly, this may have been the original lottery number set function, but GF tried to change it to 32-bit later but didnt finish changing all calls as one GetLotteryNumber still shifts to u16.
-void SetLotteryNumber16_Unused(u16 lotteryNum)
-{
-    SetLotteryNumber(lotteryNum);
+    #else
+    rng_value_t localRngState = LocalRandomSeed(gSaveBlock1Ptr->dailySeed ^ LOTTERY_CORNER_SALT);
+    return LocalRandom32(&localRngState);
+    #endif
 }

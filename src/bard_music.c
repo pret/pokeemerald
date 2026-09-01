@@ -202,17 +202,17 @@ const struct BardSoundTemplate *GetWordSoundTemplates(u16 easyChatWord)
     subword = EC_INDEX(easyChatWord);
     switch (category)
     {
-        case EC_GROUP_POKEMON:
-        case EC_GROUP_POKEMON_NATIONAL:
-            ptr = sBardSoundTemplates_Pokemon;
-            break;
-        case EC_GROUP_MOVE_1:
-        case EC_GROUP_MOVE_2:
-            ptr = sBardSoundTemplates_Moves;
-            break;
-        default:
-            ptr = sBardSoundTemplatesTable[category];
-            break;
+    case EC_GROUP_POKEMON:
+    case EC_GROUP_POKEMON_NATIONAL:
+        ptr = sBardSoundTemplates_Pokemon;
+        break;
+    case EC_GROUP_MOVE_1:
+    case EC_GROUP_MOVE_2:
+        ptr = sBardSoundTemplates_Moves;
+        break;
+    default:
+        ptr = sBardSoundTemplatesTable[category];
+        break;
     }
     ptr += subword;
     return *ptr;

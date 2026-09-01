@@ -3,6 +3,7 @@
   "name": "MtChimney_CableCarStation",
   "layout": "LAYOUT_CABLE_CAR_STATION",
   "music": "MUS_ROUTE110",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_MT_CHIMNEY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

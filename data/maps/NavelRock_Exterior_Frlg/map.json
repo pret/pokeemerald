@@ -1,0 +1,43 @@
+{
+  "id": "MAP_NAVEL_ROCK_EXTERIOR_FRLG",
+  "name": "NavelRock_Exterior_Frlg",
+  "layout": "LAYOUT_NAVEL_ROCK_EXTERIOR_FRLG",
+  "music": "MUS_RG_SEVII_ROUTE",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_NAVEL_ROCK_FRLG",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+
+  ],
+  "warp_events": [
+    {
+      "x": 9,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_NAVEL_ROCK_1F",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 9,
+      "y": 16,
+      "elevation": 3,
+      "dest_map": "MAP_NAVEL_ROCK_HARBOR_FRLG",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+
+  ],
+  "bg_events": [
+
+  ]
+}

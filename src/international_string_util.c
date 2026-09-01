@@ -8,7 +8,6 @@
 #include "text.h"
 #include "window.h"
 
-extern const struct PokedexEntry gPokedexEntries[];
 
 int GetStringCenterAlignXOffset(int fontId, const u8 *str, int totalWidth)
 {
@@ -83,9 +82,9 @@ int Intl_GetListMenuWidth(const struct ListMenuTemplate *listMenu)
     return finalWidth;
 }
 
-void CopyMonCategoryText(int dexNum, u8 *dest)
+void CopyMonCategoryText(enum Species species, u8 *dest)
 {
-    u8 *str = StringCopy(dest, gPokedexEntries[dexNum].categoryName);
+    u8 *str = StringCopy(dest, GetSpeciesCategory(species));
     *str = CHAR_SPACE;
     StringCopy(str + 1, gText_Pokemon);
 }
@@ -204,7 +203,7 @@ void TVShowConvertInternationalString(u8 *dest, const u8 *src, int language)
 }
 
 // It's impossible to distinguish between Latin languages just from a string alone, so the function defaults to LANGUAGE_ENGLISH. This is the case in all of the versions of the game.
-int GetNicknameLanguage(u8 *str)
+enum Language GetNicknameLanguage(u8 *str)
 {
     if (str[0] == EXT_CTRL_CODE_BEGIN && str[1] == EXT_CTRL_CODE_JPN)
         return LANGUAGE_JAPANESE;
@@ -221,7 +220,7 @@ void FillWindowTilesByRow(int windowId, int columnStart, int rowStart, int numFi
 
     fillSize = numFillTiles * TILE_SIZE_4BPP;
     windowRowSize = window->window.width * TILE_SIZE_4BPP;
-    windowTileData = window->tileData + (rowStart * windowRowSize) + (columnStart * TILE_SIZE_4BPP);
+    windowTileData = (u8 *)window->tileData + (rowStart * windowRowSize) + (columnStart * TILE_SIZE_4BPP);
     if (numRows > 0)
     {
         for (i = numRows; i != 0; i--)

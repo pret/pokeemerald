@@ -3,6 +3,7 @@
   "name": "SouthernIsland_Interior",
   "layout": "LAYOUT_SOUTHERN_ISLAND_INTERIOR",
   "music": "MUS_ABANDONED_SHIP",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_SOUTHERN_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_SHADE",

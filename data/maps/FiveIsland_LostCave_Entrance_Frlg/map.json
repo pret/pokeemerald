@@ -1,0 +1,37 @@
+{
+  "id": "MAP_FIVE_ISLAND_LOST_CAVE_ENTRANCE",
+  "name": "FiveIsland_LostCave_Entrance_Frlg",
+  "layout": "LAYOUT_FIVE_ISLAND_LOST_CAVE_ENTRANCE",
+  "music": "MUS_RG_SEVII_CAVE",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_LOST_CAVE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": true,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 5,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_FIVE_ISLAND_RESORT_GORGEOUS",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 5,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_FIVE_ISLAND_LOST_CAVE_ROOM1",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

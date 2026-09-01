@@ -105,22 +105,22 @@
 #define DOME_TEXT_SPEED 12
 #define DOME_TEXT_SPATK 14
 
-// Move point indexes for sBattleStyleMovePoints[][], to determine Battle Dome trainers battle styles
-#define MOVE_POINTS_COMBO      0   // Moves that work well in combination (e.g. Rain Dance + Hydro Pump)
+// Determine Battle Dome trainers battle styles
+#define MOVE_POINTS_COMBO      0   // Moves that work well in combination: moves that cause or are affected by weather/terrain, Stockpile+, entry hazards, sleep inflictions & effects benefiting from it, offensive boosts of a single stat with at least two stages or at least two stats, and several other effects
 #define MOVE_POINTS_STAT_RAISE 1
 #define MOVE_POINTS_STAT_LOWER 2
-#define MOVE_POINTS_RARE       3   // Uncommon moves. Mostly arbitrary
-#define MOVE_POINTS_HEAL       4
-#define MOVE_POINTS_RISKY      5
-#define MOVE_POINTS_STATUS     6
-#define MOVE_POINTS_DMG        7
-#define MOVE_POINTS_DEF        8   // Defensive moves, like Amnesia, Light Screen, or accuracy-lowers
-#define MOVE_POINTS_ACCURATE   9
-#define MOVE_POINTS_POWERFUL   10  // Most of the moves that are >= 100 power
-#define MOVE_POINTS_POPULAR    11  // Group seems arbitrary. All using it are TM/HMs, but its only 11/58
-#define MOVE_POINTS_LUCK       12
-#define MOVE_POINTS_STRONG     13  // Most of the moves that are >= 90 power
-#define MOVE_POINTS_LOW_PP     14
+#define MOVE_POINTS_RARE       3   // Moves that appear in less than 5% of levelup learnsets
+#define MOVE_POINTS_HEAL       4   // Moves that heal
+#define MOVE_POINTS_RISKY      5   // Move effects deemed risky by the Emerald developers (excluding High Jump Kick and others for some reason)
+#define MOVE_POINTS_STATUS     6   // Moves that cause status effects without dealing damage
+#define MOVE_POINTS_DMG        7   // Moves that deal damage (BP > 0)
+#define MOVE_POINTS_DEF        8   // Moves like screens, accuracy-lowers or evasiveness-raisers, (special) defense raisers, protect etc.
+#define MOVE_POINTS_ACCURATE   9   // Moves with 100% accuracy (or that are guaranteed hits)
+#define MOVE_POINTS_POWERFUL   10  // Moves with 100 BP or more
+#define MOVE_POINTS_POPULAR    11  // TM/HM moves with 90 BP or more or those that raise a single offensive stat by at least 2 stages
+#define MOVE_POINTS_LUCK       12  // Move effects that depend on luck and moves with Accuracy of <= 50%
+#define MOVE_POINTS_STRONG     13  // Moves with 90 BP or more
+#define MOVE_POINTS_LOW_PP     14  // Moves with 5 PP or less
 #define MOVE_POINTS_EFFECT     15  // Moves with additional effects
 #define NUM_MOVE_POINT_TYPES   16
 

@@ -1,0 +1,61 @@
+{
+  "id": "MAP_TWO_ISLAND_CAPE_BRINK",
+  "name": "TwoIsland_CapeBrink_Frlg",
+  "layout": "LAYOUT_TWO_ISLAND_CAPE_BRINK",
+  "music": "MUS_RG_ROUTE3",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_CAPE_BRINK",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "map": "MAP_TWO_ISLAND",
+      "offset": -24,
+      "direction": "down"
+    }
+  ],
+  "object_events": [
+
+  ],
+  "warp_events": [
+    {
+      "x": 12,
+      "y": 16,
+      "elevation": 0,
+      "dest_map": "MAP_TWO_ISLAND_CAPE_BRINK_HOUSE",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+
+  ],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 16,
+      "y": 28,
+      "elevation": 3,
+      "item": "ITEM_PP_MAX",
+      "flag": "FLAG_HIDDEN_ITEM_TWO_ISLAND_CAPE_BRINK_PP_MAX",
+      "quantity": 1,
+      "underfoot": true
+    },
+    {
+      "type": "hidden_item",
+      "x": 15,
+      "y": 13,
+      "elevation": 3,
+      "item": "ITEM_RARE_CANDY",
+      "flag": "FLAG_HIDDEN_ITEM_TWO_ISLAND_CAPE_BRINK_RARE_CANDY",
+      "quantity": 1,
+      "underfoot": false
+    }
+  ]
+}

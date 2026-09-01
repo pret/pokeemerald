@@ -1,0 +1,37 @@
+{
+  "universalMoves":
+    [
+      "MOVE_BIDE",
+      "MOVE_FRUSTRATION",
+      "MOVE_HIDDEN_POWER",
+      "MOVE_MIMIC",
+      "MOVE_NATURAL_GIFT",
+      "MOVE_RAGE",
+      "MOVE_RETURN",
+      "MOVE_SECRET_POWER",
+      "MOVE_SUBSTITUTE",
+      "MOVE_TERA_BLAST"
+    ],
+  "signatureTeachables":
+    [
+      "MOVE_BADDY_BAD",
+      "MOVE_BOUNCY_BUBBLE",
+      "MOVE_BUZZY_BUZZ",
+      "MOVE_DRAGON_ASCENT",
+      "MOVE_FLOATY_FALL",
+      "MOVE_FREEZY_FROST",
+      "MOVE_GLITZY_GLOW",
+      "MOVE_RELIC_SONG",
+      "MOVE_SAPPY_SEED",
+      "MOVE_SECRET_SWORD",
+      "MOVE_SIZZLY_SLIDE",
+      "MOVE_SPARKLY_SWIRL",
+      "MOVE_SPLISHY_SPLASH",
+      "MOVE_VOLT_TACKLE",
+      "MOVE_ZIPPY_ZAP"
+    ],
+  "extraTutors":
+    [
+      
+    ]
+}

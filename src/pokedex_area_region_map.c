@@ -5,51 +5,30 @@
 #include "malloc.h"
 #include "palette.h"
 #include "pokedex_area_region_map.h"
+#include "regions.h"
+#include "region_map.h"
 
-static EWRAM_DATA u8 *sPokedexAreaMapBgNum = NULL;
+#define POKEDEX_AREA_MAP_BG 3
 
-static const u16 ALIGNED(4) sPokedexAreaMap_Pal[] = INCGFX_U16("graphics/pokedex/region_map.pal", ".gbapal");
-static const u32 sPokedexAreaMap_Gfx[] = INCGFX_U32("graphics/pokedex/region_map.png", ".8bpp.lz", "-num_tiles 232 -Wnum_tiles");
-static const u32 sPokedexAreaMap_Tilemap[] = INCGFX_U32("graphics/pokedex/region_map.bin", ".lz");
-static const u32 sPokedexAreaMapAffine_Gfx[] = INCGFX_U32("graphics/pokedex/region_map_affine.png", ".8bpp.lz", "-num_tiles 233 -Wnum_tiles");
-static const u32 sPokedexAreaMapAffine_Tilemap[] = INCGFX_U32("graphics/pokedex/region_map_affine.bin", ".lz");
-
-void LoadPokedexAreaMapGfx(const struct PokedexAreaMapTemplate *template)
+void LoadPokedexAreaMapGfx(void)
 {
-    u8 mode;
-    void *tilemap;
-    sPokedexAreaMapBgNum = Alloc(sizeof(sPokedexAreaMapBgNum));
-    mode = template->mode;
+    enum RegionMapType regionMapType = GetRegionMapType(gMapHeader.regionMapSectionId);
 
-    if (mode == 0)
-    {
-        SetBgAttribute(template->bg, BG_ATTR_METRIC, 0);
-        DecompressAndCopyTileDataToVram(template->bg, sPokedexAreaMap_Gfx, 0, template->offset, 0);
-        tilemap = DecompressAndCopyTileDataToVram(template->bg, sPokedexAreaMap_Tilemap, 0, 0, 1);
-        AddValToTilemapBuffer(tilemap, template->offset, 32, 32, FALSE); // template->offset is always 0, so this does nothing.
-    }
-    else
-    {
-        // This is never reached, only a mode of 0 is given
-        SetBgAttribute(template->bg, BG_ATTR_METRIC, 2);
-        SetBgAttribute(template->bg, BG_ATTR_TYPE, BG_TYPE_AFFINE); // This does nothing. BG_ATTR_TYPE can't be set with this function
-        DecompressAndCopyTileDataToVram(template->bg, sPokedexAreaMapAffine_Gfx, 0, template->offset, 0);
-        tilemap = DecompressAndCopyTileDataToVram(template->bg, sPokedexAreaMapAffine_Tilemap, 0, 0, 1);
-        AddValToTilemapBuffer(tilemap, template->offset, 64, 64, TRUE); // template->offset is always 0, so this does nothing.
-    }
+    SetBgAttribute(POKEDEX_AREA_MAP_BG, BG_ATTR_METRIC, 0);
+    DecompressAndCopyTileDataToVram(POKEDEX_AREA_MAP_BG, gRegionMapInfos[regionMapType].dexMapGfx, 0, 0, 0);
+    DecompressAndCopyTileDataToVram(POKEDEX_AREA_MAP_BG, gRegionMapInfos[regionMapType].dexMapTilemap, 0, 0, 1);
 
-    ChangeBgX(template->bg, 0, BG_COORD_SET);
-    ChangeBgY(template->bg, 0, BG_COORD_SET);
-    SetBgAttribute(template->bg, BG_ATTR_PALETTEMODE, 1);
-    CpuCopy32(sPokedexAreaMap_Pal, &gPlttBufferUnfaded[BG_PLTT_ID(7)], sizeof(sPokedexAreaMap_Pal));
-    *sPokedexAreaMapBgNum = template->bg;
+    ChangeBgX(POKEDEX_AREA_MAP_BG, 0, BG_COORD_SET);
+    ChangeBgY(POKEDEX_AREA_MAP_BG, 0, BG_COORD_SET);
+    SetBgAttribute(POKEDEX_AREA_MAP_BG, BG_ATTR_PALETTEMODE, 1);
+    CpuCopy32(gRegionMapInfos[regionMapType].dexMapPalette, &gPlttBufferUnfaded[BG_PLTT_ID(7)], gRegionMapInfos[regionMapType].dexMapPaletteSize);
 }
 
 bool32 TryShowPokedexAreaMap(void)
 {
     if (!FreeTempTileDataBuffersIfPossible())
     {
-        ShowBg(*sPokedexAreaMapBgNum);
+        ShowBg(POKEDEX_AREA_MAP_BG);
         return FALSE;
     }
     else
@@ -58,12 +37,7 @@ bool32 TryShowPokedexAreaMap(void)
     }
 }
 
-void FreePokedexAreaMapBgNum(void)
-{
-    TRY_FREE_AND_SET_NULL(sPokedexAreaMapBgNum);
-}
-
 void PokedexAreaMapChangeBgY(u32 move)
 {
-    ChangeBgY(*sPokedexAreaMapBgNum, move * 0x100, BG_COORD_SET);
+    ChangeBgY(POKEDEX_AREA_MAP_BG, move * 0x100, BG_COORD_SET);
 }

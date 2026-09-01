@@ -3,6 +3,7 @@
   "name": "MauvilleCity_Gym",
   "layout": "LAYOUT_MAUVILLE_CITY_GYM",
   "music": "MUS_GYM",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_MAUVILLE_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -1,0 +1,37 @@
+{
+  "id": "MAP_NAVEL_ROCK_BASE_PATH_B4F",
+  "name": "NavelRock_BasePath_B4F_Frlg",
+  "layout": "LAYOUT_NAVEL_ROCK_BASE_PATH_B4F",
+  "music": "MUS_RG_SEVII_CAVE",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_NAVEL_ROCK_FRLG",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 4,
+      "elevation": 3,
+      "dest_map": "MAP_NAVEL_ROCK_BASE_PATH_B3F",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_NAVEL_ROCK_BASE_PATH_B5F",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

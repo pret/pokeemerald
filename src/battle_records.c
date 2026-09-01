@@ -4,6 +4,7 @@
 #include "window.h"
 #include "link.h"
 #include "battle.h"
+#include "event_data.h"
 #include "overworld.h"
 #include "text.h"
 #include "text_window.h"
@@ -22,6 +23,7 @@
 #include "gpu_regs.h"
 #include "constants/game_stat.h"
 #include "trainer_hill.h"
+#include "trainer_tower.h"
 #include "constants/rgb.h"
 
 static void Task_CloseTrainerHillRecordsOnButton(u8 taskId);
@@ -88,6 +90,7 @@ static const u8 sText_DashesNoPlayer[] = _("-------");
 static const u8 sText_DashesNoScore[] = _("----");
 
 // code
+#if FREE_LINK_BATTLE_RECORDS == FALSE
 static void ClearLinkBattleRecord(struct LinkBattleRecord *record)
 {
     CpuFill16(0, record, sizeof(struct LinkBattleRecord));
@@ -201,7 +204,7 @@ static void UpdateLinkBattleGameStats(s32 battleOutcome)
         IncrementGameStat(stat);
 }
 
-static void UpdateLinkBattleRecords(struct LinkBattleRecords *records, const u8 *name, u16 trainerId, s32 battleOutcome, u8 battler)
+static void UpdateLinkBattleRecords(struct LinkBattleRecords *records, const u8 *name, u16 trainerId, s32 battleOutcome, enum BattlerId battler)
 {
     s32 index;
 
@@ -219,12 +222,16 @@ static void UpdateLinkBattleRecords(struct LinkBattleRecords *records, const u8 
     UpdateLinkBattleRecord(&records->entries[index], battleOutcome);
     SortLinkBattleRecords(records);
 }
+#endif //FREE_LINK_BATTLE_RECORDS
 
 void ClearPlayerLinkBattleRecords(void)
 {
+#if FREE_LINK_BATTLE_RECORDS == FALSE
     ClearLinkBattleRecords(gSaveBlock1Ptr->linkBattleRecords.entries);
+#endif //FREE_LINK_BATTLE_RECORDS
 }
 
+#if FREE_LINK_BATTLE_RECORDS == FALSE
 static void IncTrainerCardWins(s32 battler)
 {
     u16 *wins = &gTrainerCards[battler].linkBattleWins;
@@ -246,18 +253,20 @@ static void UpdateTrainerCardWinsLosses(s32 battler)
     switch (gBattleOutcome)
     {
     case B_OUTCOME_WON:
-        IncTrainerCardWins(BATTLE_OPPOSITE(battler));
+        IncTrainerCardWins(GetOppositeBattler(battler));
         IncTrainerCardLosses(battler);
         break;
     case B_OUTCOME_LOST:
-        IncTrainerCardLosses(BATTLE_OPPOSITE(battler));
+        IncTrainerCardLosses(GetOppositeBattler(battler));
         IncTrainerCardWins(battler);
         break;
     }
 }
+#endif //FREE_LINK_BATTLE_RECORDS
 
 void UpdatePlayerLinkBattleRecords(s32 battler)
 {
+#if FREE_LINK_BATTLE_RECORDS == FALSE
     if (InUnionRoom() != TRUE)
     {
         UpdateTrainerCardWinsLosses(battler);
@@ -268,8 +277,10 @@ void UpdatePlayerLinkBattleRecords(s32 battler)
             gBattleOutcome,
             battler);
     }
+#endif //FREE_LINK_BATTLE_RECORDS
 }
 
+#if FREE_LINK_BATTLE_RECORDS == FALSE
 static void PrintLinkBattleWinsLossesDraws(struct LinkBattleRecord *records)
 {
     s32 x;
@@ -311,10 +322,12 @@ static void PrintLinkBattleRecord(struct LinkBattleRecord *record, u8 y, s32 lan
         AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar1, 176, (y * 8) + 1, 0, NULL);
     }
 }
+#endif //FREE_LINK_BATTLE_RECORDS
 
 void ShowLinkBattleRecords(void)
 {
-    s32 i, x;
+#if FREE_LINK_BATTLE_RECORDS == FALSE
+    s32 x, i;
 
     gRecordsWindowId = AddWindow(&sLinkBattleRecordsWindow);
     DrawStdWindowFrame(gRecordsWindowId, FALSE);
@@ -335,6 +348,7 @@ void ShowLinkBattleRecords(void)
 
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
+#endif //FREE_LINK_BATTLE_RECORDS
 }
 
 void RemoveRecordsWindow(void)
@@ -515,7 +529,10 @@ static void CB2_ShowTrainerHillRecords(void)
     case 7:
         SetDispcntReg();
         SetVBlankCallback(VblankCB_TrainerHillRecords);
-        PrintOnTrainerHillRecordsWindow();
+        if (gSpecialVar_0x8004)
+            PrintTrainerTowerRecords();
+        else
+            PrintOnTrainerHillRecordsWindow();
         CreateTask(Task_TrainerHillWaitForPaletteFade, 8);
         SetMainCallback2(MainCB2_TrainerHillRecords);
         gMain.state = 0;

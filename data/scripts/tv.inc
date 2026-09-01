@@ -15,11 +15,8 @@ EventScript_TV::
 EventScript_TryDoTVShow::
 	specialvar VAR_0x8004, GetRandomActiveShowIdx
 	goto_if_eq VAR_0x8004, 255, EventScript_MomDadMightLikeThis2
-	specialvar VAR_RESULT, GetNextActiveShowIfMassOutbreak
-	goto_if_eq VAR_RESULT, 255, EventScript_MomDadMightLikeThis2
-	copyvar VAR_0x8004, VAR_RESULT
-	specialvar VAR_RESULT, GetSelectedTVShow
-	goto_if_ne VAR_RESULT, 0, EventScript_DoTVShow
+	specialvar VAR_0x8004, GetSelectedTVShow
+	goto_if_ne VAR_0x8004, 0, EventScript_DoTVShow
 	end
 
 EventScript_MomDadMightLikeThis1::

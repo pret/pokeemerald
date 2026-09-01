@@ -88,14 +88,12 @@ void ProcessDma3Requests(void)
         sDma3Requests[sDma3RequestCursor].size = 0;
         sDma3Requests[sDma3RequestCursor].mode = 0;
         sDma3Requests[sDma3RequestCursor].value = 0;
-        sDma3RequestCursor++;
 
-        if (sDma3RequestCursor >= MAX_DMA_REQUESTS) // loop back to the first DMA request
-            sDma3RequestCursor = 0;
+        sDma3RequestCursor = INCREMENT_OR_WRAP(sDma3RequestCursor, MAX_DMA_REQUESTS); // loop back to the first DMA request
     }
 }
 
-s16 RequestDma3Copy(const void *src, void *dest, u16 size, u8 mode)
+s16 RequestDma3Copy(const void *src, void *dest, u16 size, u32 mode)
 {
     int cursor;
     int i = 0;
@@ -119,15 +117,15 @@ s16 RequestDma3Copy(const void *src, void *dest, u16 size, u8 mode)
             sDma3ManagerLocked = FALSE;
             return cursor;
         }
-        if (++cursor >= MAX_DMA_REQUESTS) // loop back to start.
-            cursor = 0;
+
+        cursor = INCREMENT_OR_WRAP(cursor, MAX_DMA_REQUESTS); // loop back to start.
         i++;
     }
     sDma3ManagerLocked = FALSE;
     return -1;  // no free DMA request was found
 }
 
-s16 RequestDma3Fill(s32 value, void *dest, u16 size, u8 mode)
+s16 RequestDma3Fill(s32 value, void *dest, u16 size, u32 mode)
 {
     int cursor;
     int i = 0;
@@ -144,7 +142,7 @@ s16 RequestDma3Fill(s32 value, void *dest, u16 size, u8 mode)
             sDma3Requests[cursor].mode = mode;
             sDma3Requests[cursor].value = value;
 
-            if(mode == 1)
+            if (mode == 1)
                 sDma3Requests[cursor].mode = DMA_REQUEST_FILL32;
             else
                 sDma3Requests[cursor].mode = DMA_REQUEST_FILL16;
@@ -152,8 +150,8 @@ s16 RequestDma3Fill(s32 value, void *dest, u16 size, u8 mode)
             sDma3ManagerLocked = FALSE;
             return cursor;
         }
-        if (++cursor >= MAX_DMA_REQUESTS) // loop back to start.
-            cursor = 0;
+
+        cursor = INCREMENT_OR_WRAP(cursor, MAX_DMA_REQUESTS); // loop back to start.
         i++;
     }
     sDma3ManagerLocked = FALSE;

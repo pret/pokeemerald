@@ -3,6 +3,7 @@
   "name": "MossdeepCity_GameCorner_B1F",
   "layout": "LAYOUT_MOSSDEEP_CITY_GAME_CORNER_B1F",
   "music": "MUS_RUSTBORO",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_MOSSDEEP_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

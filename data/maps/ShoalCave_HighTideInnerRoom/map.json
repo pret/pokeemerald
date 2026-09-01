@@ -3,6 +3,7 @@
   "name": "ShoalCave_HighTideInnerRoom",
   "layout": "LAYOUT_SHOAL_CAVE_HIGH_TIDE_INNER_ROOM",
   "music": "MUS_MT_PYRE",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_SHOAL_CAVE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -1,0 +1,39 @@
+{
+  "id": "MAP_TRAINER_TOWER_ELEVATOR",
+  "name": "TrainerTower_Elevator_Frlg",
+  "layout": "LAYOUT_TRAINER_TOWER_ELEVATOR",
+  "music": "MUS_RG_TRAINER_TOWER",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_TRAINER_TOWER_2",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 2,
+      "y": 5,
+      "elevation": 3,
+      "dest_map": "MAP_DYNAMIC",
+      "dest_warp_id": "WARP_ID_DYNAMIC"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 0,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "TrainerTower_Elevator_EventScript_FloorSelect"
+    }
+  ]
+}

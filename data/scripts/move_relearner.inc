@@ -1,0 +1,99 @@
+Common_EventScript_MoveRelearner::
+	lockall
+	faceplayer
+	message MoveRelearner_Text_WouldLearnNewMoves
+	waitmessage
+	goto Common_EventScript_MoveRelearnerDynMultiChoice
+	end
+
+Common_EventScript_MoveRelearnerDynMultiChoice::
+	dynmultipush MoveRelearner_Text_LevelUpMoves, 0
+	dynmultipush MoveRelearner_Text_EggMoves, 1
+	dynmultipush MoveRelearner_Text_TMMoves, 2
+	dynmultipush MoveRelearner_Text_TutormoveMoves, 3
+	dynmultipush MoveRelearner_Text_SeeYa, 4
+	dynmultistack 0, 0, FALSE, 5, 0, 0, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	switch VAR_RESULT
+	case 0, MoveRelearner_EventScript_TeachLevelUpMoves
+	case 1, MoveRelearner_EventScript_TeachEggMoves
+	case 2, MoveRelearner_EventScript_TeachTMMoves
+	case 3, MoveRelearner_EventScript_TeachTutorMoves
+	case 4, MoveRelearner_EventScript_PleaseComeAgain
+MoveRelearner_EventScript_PleaseComeAgain:
+	msgbox MoveRelearner_Text_ThankYouComeAgain, MSGBOX_DEFAULT
+	releaseall
+	end
+
+MoveRelearner_EventScript_PushEggMoves:
+	dynmultipush MoveRelearner_Text_EggMoves, 1
+	return
+
+MoveRelearner_EventScript_PushTMMoves:
+	dynmultipush MoveRelearner_Text_TMMoves, 2
+	return
+
+MoveRelearner_EventScript_PushTutorMoves:
+	dynmultipush MoveRelearner_Text_TutormoveMoves, 3
+	return
+
+MoveRelearner_EventScript_TeachLevelUpMoves:
+	setmoverelearnerstate MOVE_RELEARNER_LEVEL_UP_MOVES
+	bufferstring STR_VAR_3, MoveRelearner_Text_LevelUpMoveLWR
+	goto MoveRelearner_EventScript_TeachMove
+	end
+
+MoveRelearner_EventScript_TeachEggMoves:
+	setmoverelearnerstate MOVE_RELEARNER_EGG_MOVES
+	bufferstring STR_VAR_3, MoveRelearner_Text_EggMoveLWR
+	goto MoveRelearner_EventScript_TeachMove
+	end
+
+MoveRelearner_EventScript_TeachTMMoves:
+	setmoverelearnerstate MOVE_RELEARNER_TM_MOVES
+	bufferstring STR_VAR_3, MoveRelearner_Text_TMMoveLWR
+	goto MoveRelearner_EventScript_TeachMove
+	end
+
+MoveRelearner_EventScript_TeachTutorMoves:
+	setmoverelearnerstate MOVE_RELEARNER_TUTOR_MOVES
+	bufferstring STR_VAR_3, MoveRelearner_Text_TutorMoveLWR
+	goto MoveRelearner_EventScript_TeachMove
+	end
+
+MoveRelearner_EventScript_TeachMove::
+	getpartysize
+	goto_if_eq VAR_RESULT, 0, MoveRelearner_EventScript_NoPkmn
+	msgbox MoveRelearner_Text_ChoosePkmn, MSGBOX_DEFAULT
+	chooseboxmon SELECT_PC_MON_MOVE_RELEARNER
+	waitstate
+	call_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, MoveRelearner_EventScript_AnythingElse
+	special IsSelectedMonEgg
+	call_if_eq VAR_RESULT, TRUE, MoveRelearner_EventScript_CantTeachMoveToEgg
+	special Special_HasMoveToRelearn
+	call_if_eq VAR_RESULT, FALSE, MoveRelearner_EventScript_CantTeachMoveToPkmn
+	msgbox MoveRelearner_Text_WhichXmoveShouldTeach, MSGBOX_DEFAULT
+	special TeachMoveRelearnerMove
+	goto MoveRelearner_EventScript_AnythingElse
+	end
+
+MoveRelearner_EventScript_NoPkmn:
+	msgbox MoveRelearner_Text_HaveNoPkmn, MSGBOX_AUTOCLOSE
+	releaseall
+	end
+
+MoveRelearner_EventScript_CantTeachMoveToEgg:
+	msgbox MoveRelearner_Text_CantTeachMoveToEgg, MSGBOX_AUTOCLOSE
+	goto MoveRelearner_EventScript_AnythingElse
+	end
+
+MoveRelearner_EventScript_CantTeachMoveToPkmn:
+	msgbox MoveRelearner_Text_CantTeachMoveToPkmn, MSGBOX_AUTOCLOSE
+	goto MoveRelearner_EventScript_AnythingElse
+	end
+
+MoveRelearner_EventScript_AnythingElse::
+	message MoveRelearner_Text_AnythingElse
+	waitmessage
+	goto Common_EventScript_MoveRelearnerDynMultiChoice
+	end

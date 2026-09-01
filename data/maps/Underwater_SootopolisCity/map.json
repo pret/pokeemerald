@@ -3,6 +3,7 @@
   "name": "Underwater_SootopolisCity",
   "layout": "LAYOUT_UNDERWATER_SOOTOPOLIS_CITY",
   "music": "MUS_UNDERWATER",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_UNDERWATER_SOOTOPOLIS",
   "requires_flash": false,
   "weather": "WEATHER_UNDERWATER_BUBBLES",

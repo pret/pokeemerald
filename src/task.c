@@ -174,18 +174,6 @@ u8 FindTaskIdByFunc(TaskFunc func)
     return TASK_NONE; // No task was found.
 }
 
-u8 GetTaskCount(void)
-{
-    u8 i;
-    u8 count = 0;
-
-    for (i = 0; i < NUM_TASKS; i++)
-        if (gTasks[i].isActive == TRUE)
-            count++;
-
-    return count;
-}
-
 void SetWordTaskArg(u8 taskId, u8 dataElem, u32 value)
 {
     if (dataElem < NUM_TASK_DATA - 1)

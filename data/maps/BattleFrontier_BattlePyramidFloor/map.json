@@ -3,6 +3,7 @@
   "name": "BattleFrontier_BattlePyramidFloor",
   "layout": "LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR",
   "music": "MUS_NONE",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

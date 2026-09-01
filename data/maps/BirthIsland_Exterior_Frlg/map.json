@@ -1,0 +1,65 @@
+{
+  "id": "MAP_BIRTH_ISLAND_EXTERIOR_FRLG",
+  "name": "BirthIsland_Exterior_Frlg",
+  "layout": "LAYOUT_BIRTH_ISLAND_EXTERIOR_FRLG",
+  "music": "MUS_NONE",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_BIRTH_ISLAND_FRLG",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+    {
+      "local_id": "LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_METEORITE",
+      "x": 15,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "BirthIsland_Exterior_Frlg_EventScript_Triangle",
+      "flag": "FLAG_HIDE_BIRTH_ISLAND_METEORITE"
+    },
+    {
+      "local_id": "LOCALID_BIRTH_ISLAND_DEOXYS",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
+      "x": 15,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "FLAG_HIDE_DEOXYS"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 15,
+      "y": 24,
+      "elevation": 3,
+      "dest_map": "MAP_BIRTH_ISLAND_HARBOR_FRLG",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+
+  ],
+  "bg_events": [
+
+  ]
+}

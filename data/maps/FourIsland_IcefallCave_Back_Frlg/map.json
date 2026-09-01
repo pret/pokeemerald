@@ -1,0 +1,119 @@
+{
+  "id": "MAP_FOUR_ISLAND_ICEFALL_CAVE_BACK",
+  "name": "FourIsland_IcefallCave_Back_Frlg",
+  "layout": "LAYOUT_FOUR_ISLAND_ICEFALL_CAVE_BACK",
+  "music": "MUS_RG_SEVII_CAVE",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_ICEFALL_CAVE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": true,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_ICEFALL_ROCKET1",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
+      "x": 11,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "FLAG_HIDE_ICEFALL_CAVE_ROCKETS"
+    },
+    {
+      "local_id": "LOCALID_ICEFALL_ROCKET2",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
+      "x": 13,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "FLAG_HIDE_ICEFALL_CAVE_ROCKETS"
+    },
+    {
+      "local_id": "LOCALID_ICEFALL_LORELEI",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_LORELEI",
+      "x": 12,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "FourIsland_IcefallCave_Back_EventScript_Lorelei",
+      "flag": "FLAG_HIDE_ICEFALL_CAVE_LORELEI"
+    },
+    {
+      "local_id": "LOCALID_ICEFALL_ROCKET3",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
+      "x": 10,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "FLAG_HIDE_ICEFALL_CAVE_ROCKETS"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 12,
+      "y": 23,
+      "elevation": 0,
+      "dest_map": "MAP_FOUR_ISLAND_ICEFALL_CAVE_1F",
+      "dest_warp_id": "5"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 18,
+      "elevation": 3,
+      "var": "VAR_MAP_SCENE_ICEFALL_CAVE_BACK",
+      "var_value": "0",
+      "script": "FourIsland_IcefallCave_Back_EventScript_LoreleiRocketsScene"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 18,
+      "elevation": 3,
+      "var": "VAR_MAP_SCENE_ICEFALL_CAVE_BACK",
+      "var_value": "0",
+      "script": "FourIsland_IcefallCave_Back_EventScript_LoreleiRocketsScene"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 18,
+      "elevation": 3,
+      "var": "VAR_MAP_SCENE_ICEFALL_CAVE_BACK",
+      "var_value": "0",
+      "script": "FourIsland_IcefallCave_Back_EventScript_LoreleiRocketsScene"
+    }
+  ],
+  "bg_events": []
+}

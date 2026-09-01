@@ -73,8 +73,8 @@ static const LoopedTask sMonRibbonListLoopTaskFuncs[] =
 };
 
 static const u16 sMonRibbonListFramePal[] = INCGFX_U16("graphics/pokenav/ribbons/list_bg.png", ".gbapal");
-static const u32 sMonRibbonListFrameTiles[] = INCGFX_U32("graphics/pokenav/ribbons/list_bg.png", ".4bpp.lz");
-static const u32 sMonRibbonListFrameTilemap[] = INCGFX_U32("graphics/pokenav/ribbons/list_bg.bin", ".lz");
+static const u32 sMonRibbonListFrameTiles[] = INCGFX_U32("graphics/pokenav/ribbons/list_bg.png", ".4bpp.smol");
+static const u32 sMonRibbonListFrameTilemap[] = INCGFX_U32("graphics/pokenav/ribbons/list_bg.bin", ".smolTM");
 static const u16 sMonRibbonListUi_Pal[] = INCGFX_U16("graphics/pokenav/ribbons/list_ui.pal", ".gbapal");
 
 static const struct BgTemplate sMonRibbonListBgTemplates[] =
@@ -120,8 +120,8 @@ static const struct WindowTemplate sRibbonsMonListWindowTemplate =
     .baseBlock = 20
 };
 
-static const u8 sText_MaleSymbol[] = _("{COLOR_HIGHLIGHT_SHADOW LIGHT_RED WHITE GREEN}♂{COLOR_HIGHLIGHT_SHADOW DARK_GRAY WHITE LIGHT_GRAY}");
-static const u8 sText_FemaleSymbol[] = _("{COLOR_HIGHLIGHT_SHADOW LIGHT_GREEN WHITE BLUE}♀{COLOR_HIGHLIGHT_SHADOW DARK_GRAY WHITE LIGHT_GRAY}");
+static const u8 sText_MaleSymbol[] = _("{TEXT_COLORS LIGHT_RED GREEN WHITE}{BACKGROUND WHITE}♂{TEXT_COLORS DARK_GRAY LIGHT_GRAY WHITE}{BACKGROUND WHITE}");
+static const u8 sText_FemaleSymbol[] = _("{TEXT_COLORS LIGHT_GREEN BLUE WHITE}{BACKGROUND WHITE}♀{TEXT_COLORS DARK_GRAY LIGHT_GRAY WHITE}{BACKGROUND WHITE}");
 static const u8 sText_NoGenderSymbol[] = _("{UNK_SPACER}");
 
 bool32 PokenavCallback_Init_MonRibbonList(void)
@@ -256,7 +256,7 @@ static u32 BuildPartyMonRibbonList(s32 state)
     item.boxId = TOTAL_BOXES_COUNT;
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        struct Pokemon *pokemon = &gPlayerParty[i];
+        struct Pokemon *pokemon = &gParties[B_TRAINER_PLAYER][i];
         if (!GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES))
             return LT_INC_AND_CONTINUE;
         if (!GetMonData(pokemon, MON_DATA_SANITY_IS_EGG) && !GetMonData(pokemon, MON_DATA_SANITY_IS_BAD_EGG))
@@ -348,7 +348,7 @@ static bool32 UNUSED PlayerHasRibbonsMon(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        struct Pokemon *mon = &gPlayerParty[i];
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
         if (!GetMonData(mon, MON_DATA_SANITY_HAS_SPECIES))
             continue;
         if (GetMonData(mon, MON_DATA_SANITY_IS_EGG))
@@ -699,14 +699,15 @@ static void BufferRibbonMonInfoText(struct PokenavListItem *listItem, u8 *dest)
 {
     u8 gender;
     u8 level;
-    u8 *s;
+    u8 *s, *end;
     const u8 *genderStr;
     struct PokenavMonListItem *item = (struct PokenavMonListItem *)listItem;
+    u32 fontId;
 
     // Mon is in party
     if (item->boxId == TOTAL_BOXES_COUNT)
     {
-        struct Pokemon *mon = &gPlayerParty[item->monId];
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][item->monId];
         gender = GetMonGender(mon);
         level = GetLevelFromMonExp(mon);
         GetMonData(mon, MON_DATA_NICKNAME, gStringVar3);
@@ -720,8 +721,6 @@ static void BufferRibbonMonInfoText(struct PokenavListItem *listItem, u8 *dest)
         GetBoxMonData(mon, MON_DATA_NICKNAME, gStringVar3);
     }
 
-    StringGet_Nickname(gStringVar3);
-    dest = GetStringClearToWidth(dest, FONT_NORMAL, gStringVar3, 60);
     switch (gender)
     {
     default:
@@ -734,6 +733,10 @@ static void BufferRibbonMonInfoText(struct PokenavListItem *listItem, u8 *dest)
         genderStr = sText_FemaleSymbol;
         break;
     }
+    end = StringGet_Nickname(gStringVar3);
+    fontId = GetFontIdToFit(gStringVar3, FONT_NORMAL, 0, 60);
+    WrapFontIdToFit(gStringVar3, end, FONT_NORMAL, 60);
+    dest = GetStringClearToWidth(dest, fontId, gStringVar3, 60);
 
     s = StringCopy(gStringVar1, genderStr);
     *s++ = CHAR_SLASH;

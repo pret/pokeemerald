@@ -34,7 +34,7 @@
 #define BOX3_Y_OFFSET  0
 
 // porthole states
-enum
+enum PortholeState
 {
     INIT_PORTHOLE,
     IDLE_CHECK,
@@ -300,7 +300,7 @@ void Task_HandlePorthole(u8 taskId)
     u16 *cruiseState = GetVarPointer(VAR_SS_TIDAL_STATE);
     struct WarpData *location = &gSaveBlock1Ptr->location;
 
-    switch (data[0])
+    switch ((enum PortholeState)data[0])
     {
     case INIT_PORTHOLE: // finish fading before making porthole finish.
         if (!gPaletteFade.active)

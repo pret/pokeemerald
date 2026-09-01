@@ -3,6 +3,7 @@
   "name": "AbandonedShip_Rooms2_1F",
   "layout": "LAYOUT_ABANDONED_SHIP_ROOMS2_1F",
   "music": "MUS_ABANDONED_SHIP",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ABANDONED_SHIP",
   "requires_flash": false,
   "weather": "WEATHER_SHADE",
@@ -49,8 +50,8 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "AbandonedShip_Rooms2_1F_EventScript_ItemRevive",
+      "trainer_sight_or_berry_tree_id": "ITEM_REVIVE",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_ABANDONED_SHIP_ROOMS_2_1F_REVIVE"
     },
     {

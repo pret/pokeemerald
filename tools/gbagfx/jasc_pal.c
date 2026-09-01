@@ -22,7 +22,7 @@
 // Blue  - "0 0 255\r\n"
 // Brown - "150 75 0\r\n"
 
-#define MAX_LINE_LENGTH 11
+#define MAX_LINE_LENGTH 64
 
 void ReadJascPaletteLine(FILE *fp, char *line)
 {
@@ -154,6 +154,42 @@ void ReadJascPalette(char *path, struct Palette *palette)
 
     if (fgetc(fp) != EOF)
         FATAL_ERROR("Garbage after color data.\n");
+
+    fclose(fp);
+
+    // Try to parse alpha/high bit info for colors from auxiliary .pla file
+    char *dot = strrchr(path, '.');
+    if (strcmp(dot, ".pal") != 0)
+        return;
+    strcpy(dot, ".pla"); // replace .pal with .pla
+    fp = fopen(path, "rb");
+
+    if (fp == NULL)
+        return;
+
+    int i = 0;
+    // Keep reading lines until number of colors is reached or we run out
+    while (i < palette->numColors && fgets(line, MAX_LINE_LENGTH, fp) != NULL)
+    {
+        if (line[0] == '#') // comment line; ignore
+            continue;
+
+        char *s = line;
+        char *end;
+        int colorIndex;
+
+        if (!ParseNumber(s, &end, 10, &colorIndex))
+            FATAL_ERROR("Failed to parse aux color index.\n");
+
+        s = end;
+
+        if (colorIndex >= palette->numColors)
+            FATAL_ERROR("Aux color index %d out of bounds.\n", colorIndex);
+
+        palette->colors[colorIndex].alpha = 1; // set alpha color
+        // fprintf(stderr, "Color index: %d\n", colorIndex);
+        i++;
+    }
 
     fclose(fp);
 }

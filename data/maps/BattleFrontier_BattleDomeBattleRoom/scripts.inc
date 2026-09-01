@@ -15,6 +15,7 @@ BattleFrontier_BattleDomeBattleRoom_MapScripts::
 	.byte 0
 
 BattleFrontier_BattleDomeBattleRoom_OnTransition:
+	setflag FLAG_TEMP_HIDE_FOLLOWER
 	dome_setopponentgfx
 	frontier_get FRONTIER_DATA_BATTLE_NUM
 	copyvar VAR_TEMP_F, VAR_RESULT
@@ -444,10 +445,9 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerDraw::
 BattleFrontier_BattleDomeBattleRoom_EventScript_DoDomeBattle::
 	frontier_set FRONTIER_DATA_RECORD_DISABLED, FALSE
 	special HealPlayerParty
-	setvar VAR_0x8004, SPECIAL_BATTLE_DOME
-	setvar VAR_0x8005, 0
 	setvar VAR_TEMP_9, 1
-	special DoSpecialTrainerBattle
+	dofacilitytrainerbattle FACILITY_BATTLE_DOME
+	waitstate
 	setvar VAR_TEMP_9, 0
 	dome_restorehelditems
 	special HealPlayerParty
@@ -472,6 +472,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_SetUpObjects::
 	call BattleFrontier_EventScript_SetBrainObjectGfx
 	setobjectxyperm LOCALID_DOME_OPPONENT, 13, 9
 	removeobject LOCALID_DOME_OPPONENT
+	delay 1
 	addobject LOCALID_DOME_OPPONENT
 	applymovement LOCALID_DOME_OPPONENT, BattleFrontier_BattleDomeBattleRoom_Movement_SetInvisibleFacingUp
 BattleFrontier_BattleDomeBattleRoom_EventScript_EndSetUpObjects::

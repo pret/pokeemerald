@@ -56,6 +56,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_GiveBattlePoints::
 	waitmessage
 	frontier_checkairshow
 	special LoadPlayerParty
+	callnative UpdateFollowingPokemon
 	factory_save 0
 	playse SE_SAVE
 	waitse
@@ -68,6 +69,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_LostChallenge::
 	waitmessage
 	frontier_checkairshow
 	special LoadPlayerParty
+	callnative UpdateFollowingPokemon
 	factory_set FACTORY_DATA_WIN_STREAK_ACTIVE, FALSE
 	factory_save 0
 	playse SE_SAVE
@@ -193,6 +195,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_CancelChallengeSaveFailed::
 
 BattleFrontier_BattleFactoryLobby_EventScript_LoadPartyAndCancelChallenge::
 	special LoadPlayerParty
+	callnative UpdateFollowingPokemon
 BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge::
 	msgbox BattleFrontier_BattleFactoryLobby_Text_LookForwardToNextVisit, MSGBOX_DEFAULT
 	release

@@ -3,6 +3,7 @@
   "name": "MauvilleCity_GameCorner",
   "layout": "LAYOUT_MAUVILLE_CITY_GAME_CORNER",
   "music": "MUS_GAME_CORNER",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_MAUVILLE_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

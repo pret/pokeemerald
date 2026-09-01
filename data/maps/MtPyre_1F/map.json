@@ -3,6 +3,7 @@
   "name": "MtPyre_1F",
   "layout": "LAYOUT_MT_PYRE_1F",
   "music": "MUS_MT_PYRE",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_MT_PYRE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -3,6 +3,7 @@
   "name": "Underwater_SeafloorCavern",
   "layout": "LAYOUT_UNDERWATER_SEAFLOOR_CAVERN",
   "music": "MUS_UNDERWATER",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_UNDERWATER_SEAFLOOR_CAVERN",
   "requires_flash": false,
   "weather": "WEATHER_UNDERWATER_BUBBLES",

@@ -91,6 +91,7 @@ TrainerHill_Entrance_EventScript_PlayerExitChallenge::
 	waitmovement 0
 	setvar VAR_TRAINER_HILL_IS_ACTIVE, 0
 	special HealPlayerParty
+	callnative UpdateFollowingPokemon
 	releaseall
 TrainerHill_Entrance_EventScript_EndExitChallenge::
 	end
@@ -156,6 +157,7 @@ TrainerHill_Entrance_EventScript_ChooseChallenge::
 	setvar VAR_TRAINER_HILL_IS_ACTIVE, 1
 	setvar VAR_TEMP_5, 0
 	special HealPlayerParty
+	callnative UpdateFollowingPokemon
 	msgbox TrainerHill_Entrance_Text_TimeProgessGetSetGo, MSGBOX_DEFAULT
 	trainerhill_start
 	releaseall
@@ -213,6 +215,7 @@ TrainerHill_Entrance_Movement_PlayerExitElevator:
 TrainerHill_Entrance_EventScript_Records::
 	lockall
 	fadescreen FADE_TO_BLACK
+	setvar VAR_0x8004, 0
 	special ShowTrainerHillRecords
 	releaseall
 	end
@@ -253,9 +256,9 @@ TrainerHill_Entrance_Pokemart_Basic:
 	.2byte ITEM_PARALYZE_HEAL
 	.2byte ITEM_AWAKENING
 	.2byte ITEM_X_SPEED
-	.2byte ITEM_X_SPECIAL
+	.2byte ITEM_X_SP_ATK
 	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFEND
+	.2byte ITEM_X_DEFENSE
 	.2byte ITEM_DIRE_HIT
 	.2byte ITEM_GUARD_SPEC
 	.2byte ITEM_X_ACCURACY
@@ -275,9 +278,9 @@ TrainerHill_Entrance_Pokemart_Expanded:
 	.2byte ITEM_FULL_HEAL
 	.2byte ITEM_REVIVE
 	.2byte ITEM_X_SPEED
-	.2byte ITEM_X_SPECIAL
+	.2byte ITEM_X_SP_ATK
 	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFEND
+	.2byte ITEM_X_DEFENSE
 	.2byte ITEM_DIRE_HIT
 	.2byte ITEM_GUARD_SPEC
 	.2byte ITEM_X_ACCURACY

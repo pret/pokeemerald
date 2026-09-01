@@ -3,6 +3,7 @@
   "name": "TradeCenter",
   "layout": "LAYOUT_TRADE_CENTER",
   "music": "MUS_EVER_GRANDE",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_DYNAMIC",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

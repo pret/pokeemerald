@@ -5,6 +5,12 @@
 #include "text.h"
 #include "window.h"
 
+#define DLG_WINDOW_PALETTE_NUM 15
+#define DLG_WINDOW_BASE_TILE_NUM 0x200
+#define STD_WINDOW_PALETTE_NUM 14
+#define STD_WINDOW_PALETTE_SIZE PLTT_SIZEOF(10)
+#define STD_WINDOW_BASE_TILE_NUM 0x214
+
 #define MENU_NOTHING_CHOSEN -2
 #define MENU_B_PRESSED -1
 
@@ -41,6 +47,7 @@ struct MenuAction
 };
 
 extern const u16 gStandardMenuPalette[];
+extern EWRAM_DATA u8 gPopupTaskId;
 
 void FreeAllOverworldWindowBuffers(void);
 void InitStandardTextBoxWindows(void);
@@ -54,8 +61,6 @@ void PrintPlayerNameOnWindow(u8 windowId, const u8 *src, u16 x, u16 y);
 void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram);
 void SetStandardWindowBorderStyle(u8 windowId, bool8 copyToVram);
 void DisplayYesNoMenuDefaultYes(void);
-u32 GetPlayerTextSpeed(void);
-u8 GetPlayerTextSpeedDelay(void);
 void Menu_LoadStdPalAt(u16 offset);
 void AddTextPrinterWithCallbackForMessage(bool8 canSpeedUp, TextPrinterCallback callback);
 void BgDmaFill(u32 bg, u8 value, int offset, int size);
@@ -75,6 +80,7 @@ void *DecompressAndCopyTileDataToVram(u8 bgId, const void *src, u32 size, u16 of
 bool8 FreeTempTileDataBuffersIfPossible(void);
 struct WindowTemplate CreateWindowTemplate(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock);
 void CreateYesNoMenu(const struct WindowTemplate *window, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos);
+void CreateYesNoMenuAtPos(const struct WindowTemplate *window, u8 fontId, u8 left, u8 top, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos);
 void DecompressAndLoadBgGfxUsingHeap(u8 bgId, const void *src, u32 size, u16 offset, u8 mode);
 s8 Menu_ProcessInputNoWrapClearOnChoose(void);
 s8 ProcessMenuInput_other(void);
@@ -82,6 +88,7 @@ void DoScheduledBgTilemapCopiesToVram(void);
 void ClearScheduledBgCopiesToVram(void);
 void AddTextPrinterParameterized4(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineSpacing, const u8 *color, s8 speed, const u8 *str);
 void DrawDialogFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 tileNum, u8 paletteNum);
+void DrawDialogFrameWithCustomTile(u8 windowId, bool8 copyToVram, u16 tileNum);
 void PrintMenuActionTextsInUpperLeftCorner(u8 windowId, u8 itemCount, const struct MenuAction *menuActions, const u8 *actionIds);
 void ClearDialogWindowAndFrameToTransparent(u8 windowId, bool8 copyToVram);
 void *malloc_and_decompress(const void *src, u32 *size);
@@ -99,7 +106,6 @@ void DrawStdWindowFrame(u8 windowId, bool8 copyToVram);
 u8 AddStartMenuWindow(u8 numActions);
 u8 InitMenuNormal(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos);
 void LoadMessageBoxAndFrameGfx(u8 windowId, bool8 copyToVram);
-void AddTextPrinterForMessage_2(bool8 allowSkippingDelayWithButtonPress);
 void RemoveStartMenuWindow(void);
 void DisplayYesNoMenuWithDefault(u8 initialCursorPos);
 void BufferSaveMenuText(u8 textId, u8 *dest, u8 color);
@@ -108,7 +114,6 @@ u8 GetMapNamePopUpWindowId(void);
 u8 AddMapNamePopUpWindow(void);
 void AddTextPrinterParameterized5(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, TextPrinterCallback callback, u8 letterSpacing, u8 lineSpacing);
 void SetBgTilemapPalette(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette);
-void AddValToTilemapBuffer(void *ptr, int delta, int width, int height, bool32 isAffine);
 void EraseFieldMessageBox(bool8 copyToVram);
 void PrintMenuGridTable(u8 windowId, u8 optionWidth, u8 columns, u8 rows, const struct MenuAction *menuActions);
 s8 Menu_ProcessGridInput(void);
@@ -119,10 +124,18 @@ u8 HofPCTopBar_AddWindow(u8 bg, u8 xPos, u8 yPos, u8 palette, u16 baseTile);
 void HofPCTopBar_RemoveWindow(void);
 void HofPCTopBar_Print(const u8 *string, u8 left, bool8 copyToVram);
 void HofPCTopBar_PrintPair(const u8 *string, const u8 *string2, bool8 noBg, u8 left, bool8 copyToVram);
+void HofPCTopBar_Clear(void);
 void ResetBgPositions(void);
 void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonPress, u8 speed);
 void EraseYesNoWindow(void);
 void PrintMenuActionTextsAtPos(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions);
 void Menu_LoadStdPal(void);
+u8 AddSecondaryPopUpWindow(void);
+u8 GetSecondaryPopUpWindowId(void);
+void RemoveSecondaryPopUpWindow(void);
+void HBlankCB_DoublePopupWindow(void);
+void RedrawDialogueFrame(void);
+void StartBlendTask(u8 eva_start, u8 evb_start, u8 eva_end, u8 evb_end, u8 ev_step, u8 priority);
+bool8 IsBlendTaskActive(void);
 
 #endif // GUARD_MENU_H

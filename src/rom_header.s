@@ -7,34 +7,34 @@ Start::
 RomHeaderNintendoLogo::
 	.space 156
 
-RomHeaderGameTitle:
+RomHeaderGameTitle::
 	.space 12
 
 RomHeaderGameCode::
 	.space 4
 
-RomHeaderMakerCode:
+RomHeaderMakerCode::
 	.space 2
 
-RomHeaderMagic:
+RomHeaderMagic::
 	.byte 0
 
-RomHeaderMainUnitCode:
+RomHeaderMainUnitCode::
 	.byte 0
 
-RomHeaderDeviceType:
+RomHeaderDeviceType::
 	.byte 0
 
-RomHeaderReserved1:
+RomHeaderReserved1::
 	.space 7
 
 RomHeaderSoftwareVersion::
 	.byte 0
 
-RomHeaderChecksum:
+RomHeaderChecksum::
 	.byte 0
 
-RomHeaderReserved2:
+RomHeaderReserved2::
 	.space 2
 
 	.word 0

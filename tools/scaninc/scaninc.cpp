@@ -143,12 +143,19 @@ int main(int argc, char **argv)
             auto mk_target_basedir = target_slash_pos == std::string::npos
                 ? ""
                 : "\t@mkdir -p '" + target.substr(0, target_slash_pos) + "'\n";
-            auto rule = mk_target_basedir + "\t$(GFX) $< $@ " + incgfx.arguments + "\n";
+
+            std::string rule;
+            if (incgfx.extensions == ".smol")
+                rule = mk_target_basedir + "\t$(SMOL) -w $< $@ " + incgfx.arguments + "\n";
+            else if (incgfx.extensions == ".smolTM")
+                rule = mk_target_basedir + "\t$(SMOLTM) $< $@ \n";
+            else
+                rule = mk_target_basedir + "\t$(GFX) $< $@ " + incgfx.arguments + "\n";
 
             dependencies.insert(target);
 
-            // If "foo.4bpp.lz" we want a rule for "foo.4bpp", the ".lz"
-            // doesn't require any arguments.
+            // If "foo.4bpp.smol" we want a rule for "foo.4bpp", the
+            // ".smol" doesn't require any arguments.
             size_t dot_pos = incgfx.extensions.find_first_of('.', 1);
             auto firstTarget = gfx_root + incgfx.source + arguments_as_path + incgfx.extensions.substr(0, dot_pos);
             dependencies_gfx_rules[firstTarget] = std::make_pair(incgfx.source, rule);

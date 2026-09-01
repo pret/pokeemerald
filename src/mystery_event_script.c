@@ -1,6 +1,6 @@
 #include "global.h"
 #include "berry.h"
-#include "battle_tower.h"
+#include "battle_special.h"
 #include "easy_chat.h"
 #include "event_data.h"
 #include "mail.h"
@@ -132,7 +132,7 @@ static void ClearRecordMixingGift(void)
     CpuFill16(0, &gSaveBlock1Ptr->recordMixingGift, sizeof(gSaveBlock1Ptr->recordMixingGift));
 }
 
-static void SetRecordMixingGift(u8 unk, u8 quantity, u16 itemId)
+static void SetRecordMixingGift(u8 unk, u8 quantity, enum Item itemId)
 {
     if (!unk || !quantity || !itemId)
     {
@@ -158,7 +158,7 @@ u16 GetRecordMixingGift(void)
     }
     else
     {
-        u16 itemId = data->itemId;
+        enum Item itemId = data->itemId;
         data->quantity--;
         if (data->quantity == 0)
             ClearRecordMixingGift();
@@ -226,6 +226,7 @@ bool8 MEScrCmd_runscript(struct ScriptContext *ctx)
 
 bool8 MEScrCmd_setenigmaberry(struct ScriptContext *ctx)
 {
+#if FREE_ENIGMA_BERRY == FALSE
     u8 *str;
     const u8 *message;
     bool32 haveBerry = IsEnigmaBerryValid();
@@ -258,6 +259,7 @@ bool8 MEScrCmd_setenigmaberry(struct ScriptContext *ctx)
         VarSet(VAR_ENIGMA_BERRY_AVAILABLE, 1);
     else
         ctx->mStatus = MEVENT_STATUS_LOAD_ERROR;
+#endif //FREE_ENIGMA_BERRY
 
     return FALSE;
 }
@@ -303,7 +305,7 @@ bool8 MEScrCmd_setrecordmixinggift(struct ScriptContext *ctx)
 {
     u8 unk = ScriptReadByte(ctx);
     u8 quantity = ScriptReadByte(ctx);
-    u16 itemId = ScriptReadHalfword(ctx);
+    enum Item itemId = ScriptReadHalfword(ctx);
     SetRecordMixingGift(unk, quantity, itemId);
     return FALSE;
 }
@@ -312,8 +314,8 @@ bool8 MEScrCmd_givepokemon(struct ScriptContext *ctx)
 {
     struct Mail mail;
     struct Pokemon pokemon;
-    u16 species;
-    u16 heldItem;
+    enum Species species;
+    enum Item heldItem;
     u32 data = ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase;
     void *pokemonPtr = (void *)data;
     void *mailPtr = (void *)(data + sizeof(struct Pokemon));
@@ -326,26 +328,26 @@ bool8 MEScrCmd_givepokemon(struct ScriptContext *ctx)
     else
         StringCopyN(gStringVar1, gText_Pokemon, POKEMON_NAME_LENGTH + 1);
 
-    if (gPlayerPartyCount == PARTY_SIZE)
+    if (gPartiesCount[B_TRAINER_PLAYER] == PARTY_SIZE)
     {
         StringExpandPlaceholders(gStringVar4, gText_MysteryEventFullParty);
         ctx->mStatus = MEVENT_STATUS_FAILURE;
     }
     else
     {
-        memcpy(&gPlayerParty[PARTY_SIZE - 1], pokemonPtr, sizeof(struct Pokemon));
+        memcpy(&gParties[B_TRAINER_PLAYER][PARTY_SIZE - 1], pokemonPtr, sizeof(struct Pokemon));
         memcpy(&mail, mailPtr, sizeof(struct Mail));
 
         if (species != SPECIES_EGG)
         {
-            u16 pokedexNum = SpeciesToNationalPokedexNum(species);
+            enum NationalDexOrder pokedexNum = SpeciesToNationalPokedexNum(species);
             GetSetPokedexFlag(pokedexNum, FLAG_SET_SEEN);
             GetSetPokedexFlag(pokedexNum, FLAG_SET_CAUGHT);
         }
 
-        heldItem = GetMonData(&gPlayerParty[PARTY_SIZE - 1], MON_DATA_HELD_ITEM);
+        heldItem = GetMonData(&gParties[B_TRAINER_PLAYER][PARTY_SIZE - 1], MON_DATA_HELD_ITEM);
         if (ItemIsMail(heldItem))
-            GiveMailToMon(&gPlayerParty[PARTY_SIZE - 1], &mail);
+            GiveMailToMon(&gParties[B_TRAINER_PLAYER][PARTY_SIZE - 1], &mail);
         CompactPartySlots();
         CalculatePlayerPartyCount();
         StringExpandPlaceholders(gStringVar4, gText_MysteryEventSentOver);
@@ -357,11 +359,13 @@ bool8 MEScrCmd_givepokemon(struct ScriptContext *ctx)
 
 bool8 MEScrCmd_addtrainer(struct ScriptContext *ctx)
 {
+#if FREE_BATTLE_TOWER_E_READER == FALSE
     u32 data = ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase;
     memcpy(&gSaveBlock2Ptr->frontier.ereaderTrainer, (void *)data, sizeof(gSaveBlock2Ptr->frontier.ereaderTrainer));
     ValidateEReaderTrainer();
     StringExpandPlaceholders(gStringVar4, gText_MysteryEventNewTrainer);
     ctx->mStatus = MEVENT_STATUS_SUCCESS;
+#endif //FREE_BATTLE_TOWER_E_READER
     return FALSE;
 }
 

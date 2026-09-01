@@ -3,6 +3,7 @@
   "name": "OldaleTown_House1",
   "layout": "LAYOUT_HOUSE1",
   "music": "MUS_OLDALE",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_OLDALE_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

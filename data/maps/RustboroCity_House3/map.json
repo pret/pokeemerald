@@ -3,6 +3,7 @@
   "name": "RustboroCity_House3",
   "layout": "LAYOUT_RUSTBORO_CITY_HOUSE",
   "music": "MUS_RUSTBORO",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_RUSTBORO_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

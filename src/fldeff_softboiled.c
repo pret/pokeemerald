@@ -15,14 +15,14 @@ static void Task_DisplayHPRestoredMessage(u8 taskId);
 static void Task_FinishSoftboiled(u8 taskId);
 static void CantUseSoftboiledOnMon(u8 taskId);
 
-bool8 SetUpFieldMove_SoftBoiled(void)
+bool32 SetUpFieldMove_SoftBoiled(void)
 {
     u16 maxHp;
     u16 hp;
     u16 minHp;
 
-    maxHp = GetMonData(&gPlayerParty[GetCursorSelectionMonId()], MON_DATA_MAX_HP);
-    hp = GetMonData(&gPlayerParty[GetCursorSelectionMonId()], MON_DATA_HP);
+    maxHp = GetMonData(&gParties[B_TRAINER_PLAYER][GetCursorSelectionMonId()], MON_DATA_MAX_HP);
+    hp = GetMonData(&gParties[B_TRAINER_PLAYER][GetCursorSelectionMonId()], MON_DATA_HP);
 
     minHp = (maxHp / 5);
     if (hp > minHp)
@@ -45,7 +45,7 @@ void Task_TryUseSoftboiledOnPartyMon(u8 taskId)
 
     u8 userPartyId = gPartyMenu.slotId;
     u8 recipientPartyId = gPartyMenu.slotId2;
-    if(recipientPartyId > PARTY_SIZE)
+    if (recipientPartyId > PARTY_SIZE)
     {
         gPartyMenu.action = 0;
         DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON);
@@ -53,8 +53,8 @@ void Task_TryUseSoftboiledOnPartyMon(u8 taskId)
         return;
     }
 
-    hp = GetMonData(&gPlayerParty[recipientPartyId], MON_DATA_HP);
-    if(hp == 0 || userPartyId == recipientPartyId || GetMonData(&gPlayerParty[recipientPartyId], MON_DATA_MAX_HP) == hp)
+    hp = GetMonData(&gParties[B_TRAINER_PLAYER][recipientPartyId], MON_DATA_HP);
+    if (hp == 0 || userPartyId == recipientPartyId || GetMonData(&gParties[B_TRAINER_PLAYER][recipientPartyId], MON_DATA_MAX_HP) == hp)
     {
         CantUseSoftboiledOnMon(taskId);
         return;
@@ -62,18 +62,18 @@ void Task_TryUseSoftboiledOnPartyMon(u8 taskId)
 
     // Take away Softboiled user's health first (-1)
     PlaySE(SE_USE_ITEM);
-    PartyMenuModifyHP(taskId, userPartyId, -1, GetMonData(&gPlayerParty[userPartyId], MON_DATA_MAX_HP)/5, Task_SoftboiledRestoreHealth);
+    PartyMenuModifyHP(taskId, userPartyId, -1, GetMonData(&gParties[B_TRAINER_PLAYER][userPartyId], MON_DATA_MAX_HP)/5, Task_SoftboiledRestoreHealth);
 }
 
 static void Task_SoftboiledRestoreHealth(u8 taskId)
 {
     PlaySE(SE_USE_ITEM);
-    PartyMenuModifyHP(taskId, gPartyMenu.slotId2, 1, GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_MAX_HP)/5, Task_DisplayHPRestoredMessage);
+    PartyMenuModifyHP(taskId, gPartyMenu.slotId2, 1, GetMonData(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], MON_DATA_MAX_HP)/5, Task_DisplayHPRestoredMessage);
 }
 
 static void Task_DisplayHPRestoredMessage(u8 taskId)
 {
-    GetMonNickname(&gPlayerParty[gPartyMenu.slotId2], gStringVar1);
+    GetMonNickname(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId2], gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_PkmnHPRestoredByVar2);
     DisplayPartyMenuMessage(gStringVar4, FALSE);
     ScheduleBgCopyTilemapToVram(2);
@@ -82,7 +82,7 @@ static void Task_DisplayHPRestoredMessage(u8 taskId)
 
 static void Task_FinishSoftboiled(u8 taskId)
 {
-    if(IsPartyMenuTextPrinterActive() == TRUE)
+    if (IsPartyMenuTextPrinterActive() == TRUE)
         return;
     gPartyMenu.action = 0;
     AnimatePartySlot(gPartyMenu.slotId, 0);
@@ -96,7 +96,7 @@ static void Task_FinishSoftboiled(u8 taskId)
 
 static void Task_ChooseNewMonForSoftboiled(u8 taskId)
 {
-    if(IsPartyMenuTextPrinterActive() == TRUE)
+    if (IsPartyMenuTextPrinterActive() == TRUE)
         return;
     DisplayPartyMenuStdMessage(PARTY_MSG_USE_ON_WHICH_MON);
     gTasks[taskId].func = Task_HandleChooseMonInput;

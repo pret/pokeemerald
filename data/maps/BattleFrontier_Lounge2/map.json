@@ -3,6 +3,7 @@
   "name": "BattleFrontier_Lounge2",
   "layout": "LAYOUT_BATTLE_FRONTIER_LOUNGE1",
   "music": "MUS_B_TOWER_RS",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

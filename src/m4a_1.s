@@ -52,11 +52,11 @@ SoundMain_3:
 	cmp r3, 0
 	beq SoundMain_4
 	ldr r0, [r0, o_SoundInfo_musicPlayerHead]
-	bl _081DD25E
+	bl call_r3
 	ldr r0, [sp, 0x18]
 SoundMain_4:
 	ldr r3, [r0, o_SoundInfo_CgbSound]
-	bl _081DD25E
+	bl call_r3
 	ldr r0, [sp, 0x18]
 	ldr r3, [r0, o_SoundInfo_pcmSamplesPerVBlank]
 	mov r8, r3
@@ -73,18 +73,19 @@ SoundMain_4:
 SoundMain_5:
 	str r5, [sp, 0x8]
 	ldr r6, lt_PCM_DMA_BUF_SIZE
-	ldr r3, lt_SoundMainRAM_Buffer
+	ldr r3, lt_SoundMainRAM
 	bx r3
 
 	.align 2, 0
 lt_SOUND_INFO_PTR:        .word SOUND_INFO_PTR
 lt_ID_NUMBER:             .word ID_NUMBER
-lt_SoundMainRAM_Buffer:   .word SoundMainRAM_Buffer + 1
+lt_SoundMainRAM:          .word SoundMainRAM + 1
 lt_REG_VCOUNT:            .word REG_VCOUNT
 lt_o_SoundInfo_pcmBuffer: .word o_SoundInfo_pcmBuffer
 lt_PCM_DMA_BUF_SIZE:      .word PCM_DMA_BUF_SIZE
 	thumb_func_end SoundMain
 
+	.section .iwram.code, "ax", %progbits
 	thumb_func_start SoundMainRAM
 SoundMainRAM:
 	ldrb r3, [r0, o_SoundInfo_reverb]
@@ -708,6 +709,7 @@ _081DD594:
 	.pool
 	arm_func_end SoundMainRAM_Unk2
 
+	.text
 	thumb_func_start SoundMainBTM
 SoundMainBTM:
 	mov r12, r4

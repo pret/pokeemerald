@@ -137,7 +137,7 @@ static void sio32intr_clock_master(void)
                 gSTWIStatus->state = 4; // error
             }
         }
-        gSTWIStatus->sending = 0;
+        gSTWIStatus->sending = FALSE;
         if (gSTWIStatus->callbackM != NULL)
 #if __STDC_VERSION__ < 202311L
             Callback_Dummy_M(gSTWIStatus->reqActiveCommand, gSTWIStatus->error, gSTWIStatus->callbackM);

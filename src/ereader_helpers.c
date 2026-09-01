@@ -31,7 +31,6 @@ struct SendRecvMgr
     int checksum;
 };
 
-static void GetKeyInput(void);
 static u16 DetermineSendRecvState(u8);
 static void EnableSio(void);
 static void DisableTm3(void);
@@ -39,9 +38,6 @@ static void SetUpTransferManager(size_t, const void *, void *);
 static void StartTm3(void);
 
 static struct SendRecvMgr sSendRecvMgr;
-static u16 sJoyNewOrRepeated;
-static u16 sJoyNew;
-static u16 sSendRecvStatus;
 static u16 sCounter1;
 static u32 sCounter2;
 static u16 sSavedIme;
@@ -146,7 +142,7 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
             [3] = {
                 .species = SPECIES_CACTURNE,
                 .heldItem = ITEM_QUICK_CLAW,
-                .moves = { MOVE_GIGA_DRAIN, MOVE_FAINT_ATTACK, MOVE_THUNDER_PUNCH, MOVE_GROWTH },
+                .moves = { MOVE_GIGA_DRAIN, MOVE_FEINT_ATTACK, MOVE_THUNDER_PUNCH, MOVE_GROWTH },
                 .hpEV = 55,
                 .attackEV = 0,
                 .defenseEV = 100,
@@ -375,7 +371,11 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
 
 static u8 GetTrainerHillUnkVal(void)
 {
+#if FREE_TRAINER_HILL == FALSE
     return (gSaveBlock1Ptr->trainerHill.unused + 1) % 256;
+#else
+    return 0;
+#endif //FREE_TRAINER_HILL
 }
 
 static bool32 ValidateTrainerChecksum(struct EReaderTrainerHillTrainer *hillTrainer)
@@ -501,88 +501,6 @@ bool32 ReadTrainerHillAndValidate(void)
     return result;
 }
 
-int EReader_Send(int size, const void *src)
-{
-    int result;
-    int sendStatus;
-
-    EReaderHelper_SaveRegsState();
-    while (1)
-    {
-        GetKeyInput();
-        if (sJoyNew & B_BUTTON)
-            gShouldAdvanceLinkState = 2;
-
-        sendStatus = EReaderHandleTransfer(1, size, src, NULL);
-        sSendRecvStatus = sendStatus;
-        if ((sSendRecvStatus & EREADER_XFER_MASK) == 0 && sSendRecvStatus & EREADER_CHECKSUM_OK_MASK)
-        {
-            result = 0;
-            break;
-        }
-        else if (sSendRecvStatus & EREADER_CANCEL_KEY_MASK)
-        {
-            result = 1;
-            break;
-        }
-        else if (sSendRecvStatus & EREADER_CANCEL_TIMEOUT_MASK)
-        {
-            result = 2;
-            break;
-        }
-        else
-        {
-            gShouldAdvanceLinkState = 0;
-            VBlankIntrWait();
-        }
-    }
-
-    CpuFill32(0, &sSendRecvMgr, sizeof(sSendRecvMgr));
-    EReaderHelper_RestoreRegsState();
-    return result;
-}
-
-int EReader_Recv(void *dest)
-{
-    int result;
-    int recvStatus;
-
-    EReaderHelper_SaveRegsState();
-    while (1)
-    {
-        GetKeyInput();
-        if (sJoyNew & B_BUTTON)
-            gShouldAdvanceLinkState = 2;
-
-        recvStatus = EReaderHandleTransfer(0, 0, NULL, dest);
-        sSendRecvStatus = recvStatus;
-        if ((sSendRecvStatus & EREADER_XFER_MASK) == 0 && sSendRecvStatus & EREADER_CHECKSUM_OK_MASK)
-        {
-            result = 0;
-            break;
-        }
-        else if (sSendRecvStatus & EREADER_CANCEL_KEY_MASK)
-        {
-            result = 1;
-            break;
-        }
-        else if (sSendRecvStatus & EREADER_CANCEL_TIMEOUT_MASK)
-        {
-            result = 2;
-            break;
-        }
-        else
-        {
-            gShouldAdvanceLinkState = 0;
-            VBlankIntrWait();
-        }
-    }
-
-    CpuFill32(0, &sSendRecvMgr, sizeof(sSendRecvMgr));
-    EReaderHelper_RestoreRegsState();
-    return result;
-}
-
 static void CloseSerial(void)
 {
     REG_IME = 0;
@@ -661,16 +579,8 @@ int EReaderHandleTransfer(u8 mode, size_t size, const void *data, void *recvBuff
 
             if (sSendRecvMgr.xferState != EREADER_XFER_CHK)
             {
-                if (sSendRecvMgr.isParent && sCounter1 > 2)
-                {
-                    EnableSio();
-                    sSendRecvMgr.xferState = EREADER_XFER_CHK;
-                }
-                else
-                {
-                    EnableSio();
-                    sSendRecvMgr.xferState = EREADER_XFER_CHK;
-                }
+                EnableSio();
+                sSendRecvMgr.xferState = EREADER_XFER_CHK;
             }
         }
         break;
@@ -842,13 +752,6 @@ static void DisableTm3(void)
 {
     REG_TM3CNT_H &= ~TIMER_ENABLE;
     REG_TM3CNT_L = 0xFDA7;
-}
-
-static void GetKeyInput(void)
-{
-    int rawKeys = REG_KEYINPUT ^ KEYS_MASK;
-    sJoyNew = rawKeys & ~sJoyNewOrRepeated;
-    sJoyNewOrRepeated = rawKeys;
 }
 
 void EReaderHelper_SaveRegsState(void)

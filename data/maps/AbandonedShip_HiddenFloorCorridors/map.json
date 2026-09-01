@@ -3,6 +3,7 @@
   "name": "AbandonedShip_HiddenFloorCorridors",
   "layout": "LAYOUT_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
   "music": "MUS_ABANDONED_SHIP",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ABANDONED_SHIP",
   "requires_flash": false,
   "weather": "WEATHER_SHADE",

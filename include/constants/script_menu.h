@@ -8,120 +8,170 @@
 #define MULTI_B_PRESSED  127
 
 // Multichoice Ids
-#define MULTI_BRINEY_ON_DEWFORD            0
-#define MULTI_PC                           1 // Exit only, populated by CreatePCMultichoice
-#define MULTI_ENTERINFO                    2
-#define MULTI_CONTEST_INFO                 3
-#define MULTI_CONTEST_TYPE                 4
-#define MULTI_BASE_PC_NO_REGISTRY          5
-#define MULTI_BASE_PC_WITH_REGISTRY        6
-#define MULTI_REGISTER_MENU                7
-#define MULTI_SSTIDAL_LILYCOVE             8 // Exit only, populated by CreateLilycoveSSTidalMultichoice
-#define MULTI_UNUSED_9                     9
-#define MULTI_UNUSED_10                    10
-#define MULTI_FRONTIER_PASS_INFO           11
-#define MULTI_BIKE                         12
-#define MULTI_STATUS_INFO                  13
-#define MULTI_BRINEY_OFF_DEWFORD           14
-#define MULTI_UNUSED_15                    15
-#define MULTI_VIEWED_PAINTINGS             16
-#define MULTI_YESNOINFO                    17
-#define MULTI_BATTLE_MODE                  18
-#define MULTI_UNUSED_19                    19
-#define MULTI_YESNOINFO_2                  20
-#define MULTI_UNUSED_21                    21
-#define MULTI_UNUSED_22                    22
-#define MULTI_CHALLENGEINFO                23
-#define MULTI_LEVEL_MODE                   24
-#define MULTI_MECHADOLL1_Q1                25
-#define MULTI_MECHADOLL1_Q2                26
-#define MULTI_MECHADOLL1_Q3                27
-#define MULTI_MECHADOLL2_Q1                28
-#define MULTI_MECHADOLL2_Q2                29
-#define MULTI_MECHADOLL2_Q3                30
-#define MULTI_MECHADOLL3_Q1                31
-#define MULTI_MECHADOLL3_Q2                32
-#define MULTI_MECHADOLL3_Q3                33
-#define MULTI_MECHADOLL4_Q1                34
-#define MULTI_MECHADOLL4_Q2                35
-#define MULTI_MECHADOLL4_Q3                36
-#define MULTI_MECHADOLL5_Q1                37
-#define MULTI_MECHADOLL5_Q2                38
-#define MULTI_MECHADOLL5_Q3                39
-#define MULTI_UNUSED_40                    40
-#define MULTI_UNUSED_41                    41
-#define MULTI_VENDING_MACHINE              42
-#define MULTI_MACH_BIKE_INFO               43
-#define MULTI_ACRO_BIKE_INFO               44
-#define MULTI_SATISFACTION                 45
-#define MULTI_STERN_DEEPSEA                46
-#define MULTI_UNUSED_ASH_VENDOR            47 // Replaced by scrollable multichoice
-#define MULTI_GAME_CORNER_DOLLS            48
-#define MULTI_GAME_CORNER_COINS            49
-#define MULTI_HOWS_FISHING                 50
-#define MULTI_UNUSED_51                    51
-#define MULTI_SSTIDAL_SLATEPORT_WITH_BF    52
-#define MULTI_SSTIDAL_BATTLE_FRONTIER      53
-#define MULTI_RIGHTLEFT                    54
-#define MULTI_GAME_CORNER_TMS              55
-#define MULTI_SSTIDAL_SLATEPORT_NO_BF      56
-#define MULTI_FLOORS                       57
-#define MULTI_SHARDS_R                     58
-#define MULTI_SHARDS_Y                     59
-#define MULTI_SHARDS_RY                    60
-#define MULTI_SHARDS_B                     61
-#define MULTI_SHARDS_RB                    62
-#define MULTI_SHARDS_YB                    63
-#define MULTI_SHARDS_RYB                   64
-#define MULTI_SHARDS_G                     65
-#define MULTI_SHARDS_RG                    66
-#define MULTI_SHARDS_YG                    67
-#define MULTI_SHARDS_RYG                   68
-#define MULTI_SHARDS_BG                    69
-#define MULTI_SHARDS_RBG                   70
-#define MULTI_SHARDS_YBG                   71
-#define MULTI_SHARDS_RYBG                  72
-#define MULTI_TOURNEY_WITH_RECORD          73
-#define MULTI_CABLE_CLUB_NO_RECORD_MIX     74
-#define MULTI_WIRELESS_NO_RECORD_BERRY     75
-#define MULTI_CABLE_CLUB_WITH_RECORD_MIX   76
-#define MULTI_WIRELESS_NO_BERRY            77
-#define MULTI_WIRELESS_NO_RECORD           78
-#define MULTI_WIRELESS_ALL_SERVICES        79
-#define MULTI_WIRELESS_MINIGAME            80
-#define MULTI_LINK_LEADER                  81
-#define MULTI_CONTEST_RANK                 82
-#define MULTI_FRONTIER_ITEM_CHOOSE         83
-#define MULTI_LINK_CONTEST_INFO            84
-#define MULTI_LINK_CONTEST_MODE            85
-#define MULTI_FORCED_START_MENU            86
-#define MULTI_FRONTIER_GAMBLER_BET         87
-#define MULTI_TENT                         88
-#define MULTI_UNUSED_SSTIDAL_1             89 // These 4 were replaced by CreateLilycoveSSTidalMultichoice
-#define MULTI_UNUSED_SSTIDAL_2             90 //
-#define MULTI_UNUSED_SSTIDAL_3             91 //
-#define MULTI_UNUSED_SSTIDAL_4             92 //
-#define MULTI_FOSSIL                       93
-#define MULTI_YESNO                        94
-#define MULTI_FRONTIER_RULES               95
-#define MULTI_BATTLE_ARENA_RULES           96
-#define MULTI_BATTLE_TOWER_RULES           97
-#define MULTI_BATTLE_DOME_RULES            98
-#define MULTI_BATTLE_FACTORY_RULES         99
-#define MULTI_BATTLE_PALACE_RULES          100
-#define MULTI_BATTLE_PYRAMID_RULES         101
-#define MULTI_BATTLE_PIKE_RULES            102
-#define MULTI_GO_ON_RECORD_REST_RETIRE     103
-#define MULTI_GO_ON_REST_RETIRE            104
-#define MULTI_GO_ON_RECORD_RETIRE          105
-#define MULTI_GO_ON_RETIRE                 106
-#define MULTI_TOURNEY_NO_RECORD            107
-#define MULTI_TV_LATI                      108
-#define MULTI_BATTLE_TOWER_FEELINGS        109
-#define MULTI_WHERES_RAYQUAZA              110
-#define MULTI_SLATEPORT_TENT_RULES         111
-#define MULTI_FALLARBOR_TENT_RULES         112
-#define MULTI_TAG_MATCH_TYPE               113
+enum
+{
+    MULTI_BRINEY_ON_DEWFORD,
+    MULTI_PC,                           // Exit only, populated by CreatePCMultichoice
+    MULTI_ENTERINFO,
+    MULTI_CONTEST_INFO,
+    MULTI_CONTEST_TYPE,
+    MULTI_BASE_PC_NO_REGISTRY,
+    MULTI_BASE_PC_WITH_REGISTRY,
+    MULTI_REGISTER_MENU,
+    MULTI_SSTIDAL_LILYCOVE,             // Exit only, populated by CreateLilycoveSSTidalMultichoice
+    MULTI_UNUSED_9,
+    MULTI_UNUSED_10,
+    MULTI_FRONTIER_PASS_INFO,
+    MULTI_BIKE,
+    MULTI_STATUS_INFO,
+    MULTI_BRINEY_OFF_DEWFORD,
+    MULTI_UNUSED_15,
+    MULTI_VIEWED_PAINTINGS,
+    MULTI_YESNOINFO,
+    MULTI_BATTLE_MODE,
+    MULTI_UNUSED_19,
+    MULTI_YESNOINFO_2,
+    MULTI_UNUSED_21,
+    MULTI_UNUSED_22,
+    MULTI_CHALLENGEINFO,
+    MULTI_LEVEL_MODE,
+    MULTI_MECHADOLL1_Q1,
+    MULTI_MECHADOLL1_Q2,
+    MULTI_MECHADOLL1_Q3,
+    MULTI_MECHADOLL2_Q1,
+    MULTI_MECHADOLL2_Q2,
+    MULTI_MECHADOLL2_Q3,
+    MULTI_MECHADOLL3_Q1,
+    MULTI_MECHADOLL3_Q2,
+    MULTI_MECHADOLL3_Q3,
+    MULTI_MECHADOLL4_Q1,
+    MULTI_MECHADOLL4_Q2,
+    MULTI_MECHADOLL4_Q3,
+    MULTI_MECHADOLL5_Q1,
+    MULTI_MECHADOLL5_Q2,
+    MULTI_MECHADOLL5_Q3,
+    MULTI_UNUSED_40,
+    MULTI_UNUSED_41,
+    MULTI_VENDING_MACHINE,
+    MULTI_MACH_BIKE_INFO,
+    MULTI_ACRO_BIKE_INFO,
+    MULTI_SATISFACTION,
+    MULTI_STERN_DEEPSEA,
+    MULTI_UNUSED_ASH_VENDOR,            // Replaced by scrollable multichoice
+    MULTI_GAME_CORNER_DOLLS,
+    MULTI_GAME_CORNER_COINS,
+    MULTI_HOWS_FISHING,
+    MULTI_UNUSED_51,
+    MULTI_SSTIDAL_SLATEPORT_WITH_BF,
+    MULTI_SSTIDAL_BATTLE_FRONTIER,
+    MULTI_RIGHTLEFT,
+    MULTI_GAME_CORNER_TMS,
+    MULTI_SSTIDAL_SLATEPORT_NO_BF,
+    MULTI_FLOORS,
+    MULTI_SHARDS_R,
+    MULTI_SHARDS_Y,
+    MULTI_SHARDS_RY,
+    MULTI_SHARDS_B,
+    MULTI_SHARDS_RB,
+    MULTI_SHARDS_YB,
+    MULTI_SHARDS_RYB,
+    MULTI_SHARDS_G,
+    MULTI_SHARDS_RG,
+    MULTI_SHARDS_YG,
+    MULTI_SHARDS_RYG,
+    MULTI_SHARDS_BG,
+    MULTI_SHARDS_RBG,
+    MULTI_SHARDS_YBG,
+    MULTI_SHARDS_RYBG,
+    MULTI_TOURNEY_WITH_RECORD,
+    MULTI_CABLE_CLUB_NO_RECORD_MIX,
+    MULTI_WIRELESS_NO_RECORD_BERRY,
+    MULTI_CABLE_CLUB_WITH_RECORD_MIX,
+    MULTI_WIRELESS_NO_BERRY,
+    MULTI_WIRELESS_NO_RECORD,
+    MULTI_WIRELESS_ALL_SERVICES,
+    MULTI_WIRELESS_MINIGAME,
+    MULTI_LINK_LEADER,
+    MULTI_CONTEST_RANK,
+    MULTI_FRONTIER_ITEM_CHOOSE,
+    MULTI_LINK_CONTEST_INFO,
+    MULTI_LINK_CONTEST_MODE,
+    MULTI_FORCED_START_MENU,
+    MULTI_FRONTIER_GAMBLER_BET,
+    MULTI_TENT,
+    MULTI_UNUSED_SSTIDAL_1,             // These 4 were replaced by CreateLilycoveSSTidalMultichoice
+    MULTI_UNUSED_SSTIDAL_2,
+    MULTI_UNUSED_SSTIDAL_3,
+    MULTI_UNUSED_SSTIDAL_4,
+    MULTI_FOSSIL,
+    MULTI_YESNO,
+    MULTI_FRONTIER_RULES,
+    MULTI_BATTLE_ARENA_RULES,
+    MULTI_BATTLE_TOWER_RULES,
+    MULTI_BATTLE_DOME_RULES,
+    MULTI_BATTLE_FACTORY_RULES,
+    MULTI_BATTLE_PALACE_RULES,
+    MULTI_BATTLE_PYRAMID_RULES,
+    MULTI_BATTLE_PIKE_RULES,
+    MULTI_GO_ON_RECORD_REST_RETIRE,
+    MULTI_GO_ON_REST_RETIRE,
+    MULTI_GO_ON_RECORD_RETIRE,
+    MULTI_GO_ON_RETIRE,
+    MULTI_TOURNEY_NO_RECORD,
+    MULTI_TV_LATI,
+    MULTI_BATTLE_TOWER_FEELINGS,
+    MULTI_WHERES_RAYQUAZA,
+    MULTI_SLATEPORT_TENT_RULES,
+    MULTI_FALLARBOR_TENT_RULES,
+    MULTI_TAG_MATCH_TYPE,
+    MULTI_BERRY_PLOT,
+    MULTI_BIKE_SHOP,
+    MULTI_EEVEELUTIONS,
+    MULTI_ISLAND_23,
+    MULTI_ISLAND_13,
+    MULTI_ISLAND_12,
+    MULTI_SEVII_NAVEL,
+    MULTI_SEVII_BIRTH,
+    MULTI_SEVII_NAVEL_BIRTH,
+    MULTI_SEAGALLOP_123,
+    MULTI_SEAGALLOP_V23,
+    MULTI_SEAGALLOP_V13,
+    MULTI_SEAGALLOP_V12,
+    MULTI_SEAGALLOP_VERMILION,
+    MULTI_GAME_CORNER_POKEMON_PRIZES,
+    MULTI_GAME_CORNER_TMPRIZES,
+    MULTI_GAME_CORNER_BATTLE_ITEM_PRIZES,
+    MULTI_DEPT_STORE_ELEVATOR,
+    MULTI_GAME_CORNER_COIN_PURCHASE_COUNTER,
+    MULTI_LINKED_DIRECT_UNION,
+    MULTI_CELADON_VENDING_MACHINE,
+    MULTI_THIRSTY_GIRL_FRESH_WATER,
+    MULTI_THIRSTY_GIRL_SODA_POP,
+    MULTI_THIRSTY_GIRL_FRESH_WATER_SODA_POP,
+    MULTI_THIRSTY_GIRL_LEMONADE,
+    MULTI_THIRSTY_GIRL_FRESH_WATER_LEMONADE,
+    MULTI_THIRSTY_GIRL_SODA_POP_LEMONADE,
+    MULTI_THIRSTY_GIRL_FRESH_WATER_SODA_POP_LEMONADE,
+    MULTI_ROCKET_HIDEOUT_ELEVATOR,
+    MULTI_HELIX,
+    MULTI_DOME,
+    MULTI_AMBER,
+    MULTI_HELIX_AMBER,
+    MULTI_DOME_AMBER,
+    MULTI_MUSHROOMS,
+    MULTI_ROOFTOP_B1F,
+    MULTI_TRAINER_TOWER_MODE,
+    MULTI_TRAINER_CARD_ICON_TINT,
+    MULTI_HOF_QUIT,
+    MULTI_EGGS_QUIT,
+    MULTI_VICTORIES_QUIT,
+    MULTI_HOF_EGGS_QUIT,
+    MULTI_HOF_VICTORIES_QUIT,
+    MULTI_EGGS_VICTORIES_QUIT,
+    MULTI_HOF_EGGS_VICTORIES_QUIT,
+};
+
+#define MULTI_NONE 255
 
 // Lilycove SS Tidal Multichoice Selections
 #define SSTIDAL_SELECTION_SLATEPORT        0
@@ -164,5 +214,27 @@
 #define STDSTRING_BATTLE_ARENA     27
 #define STDSTRING_BATTLE_PIKE      28
 #define STDSTRING_BATTLE_PYRAMID   29
+#define STDSTRING_BOULDER_BADGE    30
+#define STDSTRING_CASCADE_BADGE    31
+#define STDSTRING_THUNDER_BADGE    32
+#define STDSTRING_RAINBOW_BADGE    33
+#define STDSTRING_SOUL_BADGE       34
+#define STDSTRING_MARSH_BADGE      35
+#define STDSTRING_VOLCANO_BADGE    36
+#define STDSTRING_EARTH_BADGE      37
+#define STDSTRING_COINS            38
+
+// Dynamic Multichoice Callbacks
+
+enum 
+{
+    DYN_MULTICHOICE_CB_DEBUG,
+    DYN_MULTICHOICE_CB_SHOW_ITEM,
+    DYN_MULTICHOICE_CB_SHOW_PKMN,
+    //add new callback choices after this comment!
+    
+    DYN_MULTICHOICE_CB_NONE,
+};
+
 
 #endif //GUARD_SCRIPT_MENU_CONSTANTS_H

@@ -127,16 +127,16 @@ static const u16 sWonderCardBgPal5[]     = INCGFX_U16("graphics/wonder_card/bg5.
 static const u16 sWonderCardBgPal6[]     = INCGFX_U16("graphics/wonder_card/bg6.png", ".gbapal");
 static const u16 sWonderCardBgPal7[]     = INCGFX_U16("graphics/wonder_card/bg7.png", ".gbapal");
 static const u16 sWonderCardBgPal8[]     = INCGFX_U16("graphics/wonder_card/bg8.png", ".gbapal");
-static const u32 sWonderCardBgGfx1[]     = INCGFX_U32("graphics/wonder_card/bg1.png", ".4bpp.lz");
-static const u32 sWonderCardBgTilemap1[] = INCGFX_U32("graphics/wonder_card/bg1.bin", ".lz");
-static const u32 sWonderCardBgGfx2[]     = INCGFX_U32("graphics/wonder_card/bg2.png", ".4bpp.lz");
-static const u32 sWonderCardBgTilemap2[] = INCGFX_U32("graphics/wonder_card/bg2.bin", ".lz");
-static const u32 sWonderCardBgGfx3[]     = INCGFX_U32("graphics/wonder_card/bg3.png", ".4bpp.lz");
-static const u32 sWonderCardBgTilemap3[] = INCGFX_U32("graphics/wonder_card/bg3.bin", ".lz");
-static const u32 sWonderCardBgGfx7[]     = INCGFX_U32("graphics/wonder_card/bg7.png", ".4bpp.lz");
-static const u32 sWonderCardBgTilemap7[] = INCGFX_U32("graphics/wonder_card/bg7.bin", ".lz");
-static const u32 sWonderCardBgGfx8[]     = INCGFX_U32("graphics/wonder_card/bg8.png", ".4bpp.lz");
-static const u32 sWonderCardBgTilemap8[] = INCGFX_U32("graphics/wonder_card/bg8.bin", ".lz");
+static const u32 sWonderCardBgGfx1[]     = INCGFX_U32("graphics/wonder_card/bg1.png", ".4bpp.smol");
+static const u32 sWonderCardBgTilemap1[] = INCGFX_U32("graphics/wonder_card/bg1.bin", ".smolTM");
+static const u32 sWonderCardBgGfx2[]     = INCGFX_U32("graphics/wonder_card/bg2.png", ".4bpp.smol");
+static const u32 sWonderCardBgTilemap2[] = INCGFX_U32("graphics/wonder_card/bg2.bin", ".smolTM");
+static const u32 sWonderCardBgGfx3[]     = INCGFX_U32("graphics/wonder_card/bg3.png", ".4bpp.smol");
+static const u32 sWonderCardBgTilemap3[] = INCGFX_U32("graphics/wonder_card/bg3.bin", ".smolTM");
+static const u32 sWonderCardBgGfx7[]     = INCGFX_U32("graphics/wonder_card/bg7.png", ".4bpp.smol");
+static const u32 sWonderCardBgTilemap7[] = INCGFX_U32("graphics/wonder_card/bg7.bin", ".smolTM");
+static const u32 sWonderCardBgGfx8[]     = INCGFX_U32("graphics/wonder_card/bg8.png", ".4bpp.smol");
+static const u32 sWonderCardBgTilemap8[] = INCGFX_U32("graphics/wonder_card/bg8.bin", ".smolTM");
 static const u16 sStampShadowPal1[]      = INCGFX_U16("graphics/wonder_card/stamp_shadow_1.pal", ".gbapal");
 static const u16 sStampShadowPal2[]      = INCGFX_U16("graphics/wonder_card/stamp_shadow_2.pal", ".gbapal");
 static const u16 sStampShadowPal3[]      = INCGFX_U16("graphics/wonder_card/stamp_shadow_3.pal", ".gbapal");
@@ -145,7 +145,7 @@ static const u16 sStampShadowPal5[]      = INCGFX_U16("graphics/wonder_card/stam
 static const u16 sStampShadowPal6[]      = INCGFX_U16("graphics/wonder_card/stamp_shadow_6.pal", ".gbapal");
 static const u16 sStampShadowPal7[]      = INCGFX_U16("graphics/wonder_card/stamp_shadow_7.pal", ".gbapal");
 static const u16 sStampShadowPal8[]      = INCGFX_U16("graphics/wonder_card/stamp_shadow_8.pal", ".gbapal");
-static const u32 sStampShadowGfx[]       = INCGFX_U32("graphics/wonder_card/stamp_shadow.png", ".4bpp.lz");
+static const u32 sStampShadowGfx[]       = INCGFX_U32("graphics/wonder_card/stamp_shadow.png", ".4bpp.smol");
 
 static const struct CompressedSpriteSheet sSpriteSheet_StampShadow = {
     sStampShadowGfx, 0x100, TAG_STAMP_SHADOW
@@ -167,10 +167,6 @@ static const struct SpriteTemplate sSpriteTemplate_StampShadow =
     .tileTag = TAG_STAMP_SHADOW,
     .paletteTag = TAG_STAMP_SHADOW,
     .oam = &gOamData_AffineOff_ObjNormal_32x16,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 static const struct WonderGraphics sCardGraphics[NUM_WONDER_BGS] = {
@@ -216,7 +212,7 @@ s32 WonderCard_Enter(void)
 {
     if (sWonderCardData == NULL)
         return -1;
-    switch(sWonderCardData->enterExitState)
+    switch (sWonderCardData->enterExitState)
     {
     case 0:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
@@ -243,7 +239,7 @@ s32 WonderCard_Enter(void)
         LoadPalette(GetTextWindowPalette(1), BG_PLTT_ID(2), PLTT_SIZE_4BPP);
         gPaletteFade.bufferTransferDisabled = TRUE;
         LoadPalette(sWonderCardData->gfx->pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
-        LZ77UnCompWram(sWonderCardData->gfx->map, sWonderCardData->bgTilemapBuffer);
+        DecompressDataWithHeaderWram(sWonderCardData->gfx->map, sWonderCardData->bgTilemapBuffer);
         CopyRectToBgTilemapBufferRect(2, sWonderCardData->bgTilemapBuffer, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT, 1, 0x008, 0);
         CopyBgTilemapBufferToVram(2);
         break;
@@ -490,7 +486,7 @@ static void CreateCardSprites(void)
     // Create icon sprite
     if (sWonderCardData->cardMetadata.iconSpecies != SPECIES_NONE)
     {
-        sWonderCardData->monIconSpriteId = CreateMonIconNoPersonality(GetIconSpeciesNoPersonality(sWonderCardData->cardMetadata.iconSpecies), SpriteCallbackDummy, 220, 20, 0, FALSE);
+        sWonderCardData->monIconSpriteId = CreateMonIconNoPersonality(GetIconSpeciesNoPersonality(sWonderCardData->cardMetadata.iconSpecies), SpriteCallbackDummy, 220, 20, 0);
         gSprites[sWonderCardData->monIconSpriteId].oam.priority = 2;
     }
 
@@ -508,7 +504,7 @@ static void CreateCardSprites(void)
                 sWonderCardData->stampSpriteIds[i][1] = CreateMonIconNoPersonality(GetIconSpeciesNoPersonality(sWonderCardData->cardMetadata.stampData[STAMP_SPECIES][i]),
                                                                                SpriteCallbackDummy,
                                                                                216 - 32 * i,
-                                                                               136, 0, 0);
+                                                                               136, 0);
         }
     }
 }
@@ -618,16 +614,16 @@ static const struct ScrollArrowsTemplate sNews_ArrowsTemplate = {
 static const u16 sWonderNewsPal1[]     = INCGFX_U16("graphics/wonder_news/bg1.png", ".gbapal");
 static const u16 sWonderNewsPal7[]     = INCGFX_U16("graphics/wonder_news/bg7.png", ".gbapal");
 static const u16 sWonderNewsPal8[]     = INCGFX_U16("graphics/wonder_news/bg8.png", ".gbapal");
-static const u32 sWonderNewsGfx1[]     = INCGFX_U32("graphics/wonder_news/bg1.png", ".4bpp.lz");
-static const u32 sWonderNewsTilemap1[] = INCGFX_U32("graphics/wonder_news/bg1.bin", ".lz");
-static const u32 sWonderNewsGfx2[]     = INCGFX_U32("graphics/wonder_news/bg2.png", ".4bpp.lz");
-static const u32 sWonderNewsTilemap2[] = INCGFX_U32("graphics/wonder_news/bg2.bin", ".lz");
-static const u32 sWonderNewsGfx3[]     = INCGFX_U32("graphics/wonder_news/bg3.png", ".4bpp.lz");
-static const u32 sWonderNewsTilemap3[] = INCGFX_U32("graphics/wonder_news/bg3.bin", ".lz");
-static const u32 sWonderNewsGfx7[]     = INCGFX_U32("graphics/wonder_news/bg7.png", ".4bpp.lz");
-static const u32 sWonderNewsTilemap7[] = INCGFX_U32("graphics/wonder_news/bg7.bin", ".lz");
-static const u32 sWonderNewsGfx8[]     = INCGFX_U32("graphics/wonder_news/bg8.png", ".4bpp.lz");
-static const u32 sWonderNewsTilemap8[] = INCGFX_U32("graphics/wonder_news/bg8.bin", ".lz");
+static const u32 sWonderNewsGfx1[]     = INCGFX_U32("graphics/wonder_news/bg1.png", ".4bpp.smol");
+static const u32 sWonderNewsTilemap1[] = INCGFX_U32("graphics/wonder_news/bg1.bin", ".smolTM");
+static const u32 sWonderNewsGfx2[]     = INCGFX_U32("graphics/wonder_news/bg2.png", ".4bpp.smol");
+static const u32 sWonderNewsTilemap2[] = INCGFX_U32("graphics/wonder_news/bg2.bin", ".smolTM");
+static const u32 sWonderNewsGfx3[]     = INCGFX_U32("graphics/wonder_news/bg3.png", ".4bpp.smol");
+static const u32 sWonderNewsTilemap3[] = INCGFX_U32("graphics/wonder_news/bg3.bin", ".smolTM");
+static const u32 sWonderNewsGfx7[]     = INCGFX_U32("graphics/wonder_news/bg7.png", ".4bpp.smol");
+static const u32 sWonderNewsTilemap7[] = INCGFX_U32("graphics/wonder_news/bg7.bin", ".smolTM");
+static const u32 sWonderNewsGfx8[]     = INCGFX_U32("graphics/wonder_news/bg8.png", ".4bpp.smol");
+static const u32 sWonderNewsTilemap8[] = INCGFX_U32("graphics/wonder_news/bg8.bin", ".smolTM");
 
 static const struct WonderGraphics sNewsGraphics[NUM_WONDER_BGS] = {
     {.titleTextPal = 1, .bodyTextPal = 0, .tiles = sWonderNewsGfx1, .map = sWonderNewsTilemap1, .pal = sWonderNewsPal1},
@@ -706,7 +702,7 @@ s32 WonderNews_Enter(void)
         LoadPalette(GetTextWindowPalette(1), BG_PLTT_ID(2), PLTT_SIZE_4BPP);
         gPaletteFade.bufferTransferDisabled = TRUE;
         LoadPalette(sWonderNewsData->gfx->pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
-        LZ77UnCompWram(sWonderNewsData->gfx->map, sWonderNewsData->bgTilemapBuffer);
+        DecompressDataWithHeaderWram(sWonderNewsData->gfx->map, sWonderNewsData->bgTilemapBuffer);
         CopyRectToBgTilemapBufferRect(1, sWonderNewsData->bgTilemapBuffer, 0, 0, DISPLAY_TILE_WIDTH, 3, 0, 0, DISPLAY_TILE_WIDTH, 3, 1, 8, 0);
         CopyRectToBgTilemapBufferRect(3, sWonderNewsData->bgTilemapBuffer, 0, 3, DISPLAY_TILE_WIDTH, 3 + DISPLAY_TILE_HEIGHT, 0, 3, DISPLAY_TILE_WIDTH, 3 + DISPLAY_TILE_HEIGHT, 1, 8, 0);
         CopyBgTilemapBufferToVram(1);

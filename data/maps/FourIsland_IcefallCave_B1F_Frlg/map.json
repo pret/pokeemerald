@@ -1,0 +1,73 @@
+{
+  "id": "MAP_FOUR_ISLAND_ICEFALL_CAVE_B1F",
+  "name": "FourIsland_IcefallCave_B1F_Frlg",
+  "layout": "LAYOUT_FOUR_ISLAND_ICEFALL_CAVE_B1F",
+  "music": "MUS_RG_SEVII_CAVE",
+  "region": "REGION_KANTO",
+  "region_map_section": "MAPSEC_ICEFALL_CAVE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": true,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 10,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "FourIsland_IcefallCave_B1F_EventScript_ItemFullRestore",
+      "flag": "FLAG_HIDE_FOUR_ISLAND_ICEFALL_CAVE_B1F_FULL_RESTORE"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 21,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "FourIsland_IcefallCave_B1F_EventScript_ItemNeverMeltIce",
+      "flag": "FLAG_HIDE_FOUR_ISLAND_ICEFALL_CAVE_B1F_NEVER_MELT_ICE"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 12,
+      "y": 12,
+      "elevation": 3,
+      "dest_map": "MAP_FOUR_ISLAND_ICEFALL_CAVE_1F",
+      "dest_warp_id": "2"
+    },
+    {
+      "x": 12,
+      "y": 3,
+      "elevation": 3,
+      "dest_map": "MAP_FOUR_ISLAND_ICEFALL_CAVE_1F",
+      "dest_warp_id": "3"
+    },
+    {
+      "x": 15,
+      "y": 16,
+      "elevation": 3,
+      "dest_map": "MAP_FOUR_ISLAND_ICEFALL_CAVE_1F",
+      "dest_warp_id": "4"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

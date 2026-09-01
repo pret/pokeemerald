@@ -57,19 +57,19 @@ static void CB2_SetUpPartiesAndStartBattle(void)
     StartUnionRoomBattle(BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER);
     for (i = 0; i < UNION_ROOM_PARTY_SIZE; i++)
     {
-        gEnemyParty[i] = gPlayerParty[gSelectedOrderFromParty[i] - 1];
+        gParties[B_TRAINER_OPPONENT_A][i] = gParties[B_TRAINER_PLAYER][gSelectedOrderFromParty[i] - 1];
     }
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        ZeroMonData(&gPlayerParty[i]);
+        ZeroMonData(&gParties[B_TRAINER_PLAYER][i]);
     }
     for (i = 0; i < UNION_ROOM_PARTY_SIZE; i++)
     {
-        gPlayerParty[i] = gEnemyParty[i];
+        gParties[B_TRAINER_PLAYER][i] = gParties[B_TRAINER_OPPONENT_A][i];
     }
     IncrementGameStat(GAME_STAT_NUM_UNION_ROOM_BATTLES);
     CalculatePlayerPartyCount();
-    gTrainerBattleOpponent_A = TRAINER_UNION_ROOM;
+    TRAINER_BATTLE_PARAM.opponentA = TRAINER_UNION_ROOM;
     SetMainCallback2(CB2_InitBattle);
 }
 
@@ -93,7 +93,7 @@ static bool32 PrintUnionRoomBattleMessage(s16 *state, const u8 *str, s32 speed)
         (*state)++;
         break;
     case 1:
-        if (!IsTextPrinterActive(0))
+        if (!IsTextPrinterActiveOnWindow(0))
         {
             *state = 0;
             return TRUE;

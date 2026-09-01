@@ -335,7 +335,7 @@ static const u8 sKeyboardPageMaxRow[UNION_ROOM_KB_PAGE_COUNT] =
     [UNION_ROOM_KB_PAGE_REGISTER] = 9
 };
 
-static const u8 sCaseToggleTable[256] = {
+const u8 gCaseToggleTable[256] = {
     [CHAR_A] = CHAR_a,
     [CHAR_B] = CHAR_b,
     [CHAR_C] = CHAR_c,
@@ -752,10 +752,10 @@ static const struct MenuAction sKeyboardPageTitleTexts[UNION_ROOM_KB_PAGE_COUNT 
 };
 
 static const u16 sUnionRoomChatInterfacePal[] = INCGFX_U16("graphics/union_room_chat/interface.pal", ".gbapal");
-static const u32 sKeyboardCursorTiles[] = INCGFX_U32("graphics/union_room_chat/keyboard_cursor.png", ".4bpp.lz");
-static const u32 sTextEntryCursorTiles[] = INCGFX_U32("graphics/union_room_chat/text_entry_cursor.png", ".4bpp.lz");
-static const u32 sTextEntryArrowTiles[] = INCGFX_U32("graphics/union_room_chat/text_entry_arrow.png", ".4bpp.lz");
-static const u32 sRButtonGfxTiles[] = INCGFX_U32("graphics/union_room_chat/r_button.png", ".4bpp.lz");
+static const u32 sKeyboardCursorTiles[] = INCGFX_U32("graphics/union_room_chat/keyboard_cursor.png", ".4bpp.smol");
+static const u32 sTextEntryCursorTiles[] = INCGFX_U32("graphics/union_room_chat/text_entry_cursor.png", ".4bpp.smol");
+static const u32 sTextEntryArrowTiles[] = INCGFX_U32("graphics/union_room_chat/text_entry_arrow.png", ".4bpp.smol");
+static const u32 sRButtonGfxTiles[] = INCGFX_U32("graphics/union_room_chat/r_button.png", ".4bpp.smol");
 
 static const struct CompressedSpriteSheet sSpriteSheets[] = {
     {.data = sKeyboardCursorTiles,         .size = 0x1000, .tag = GFXTAG_KEYBOARD_CURSOR},
@@ -808,9 +808,6 @@ static const struct SpriteTemplate sSpriteTemplate_KeyboardCursor =
     .paletteTag = PALTAG_INTERFACE,
     .oam = &sOam_KeyboardCursor,
     .anims = sAnims_KeyboardCursor,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 static const struct OamData sOam_TextEntrySprite = {
@@ -824,9 +821,6 @@ static const struct SpriteTemplate sSpriteTemplate_TextEntryCursor =
     .tileTag = GFXTAG_TEXT_ENTRY_CURSOR,
     .paletteTag = PALTAG_INTERFACE,
     .oam = &sOam_TextEntrySprite,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_TextEntryCursor
 };
 
@@ -835,9 +829,6 @@ static const struct SpriteTemplate sSpriteTemplate_TextEntryArrow =
     .tileTag = GFXTAG_TEXT_ENTRY_ARROW,
     .paletteTag = PALTAG_INTERFACE,
     .oam = &sOam_TextEntrySprite,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_TextEntryArrow
 };
 
@@ -885,10 +876,6 @@ static const struct SpriteTemplate sSpriteTemplate_RButtonIcon =
     .tileTag = GFXTAG_RBUTTON_ICON,
     .paletteTag = PALTAG_INTERFACE,
     .oam = &sOam_RButtonIcon,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 static const struct SpriteTemplate sSpriteTemplate_RButtonLabels =
@@ -897,9 +884,6 @@ static const struct SpriteTemplate sSpriteTemplate_RButtonLabels =
     .paletteTag = PALTAG_INTERFACE,
     .oam = &sOam_RButtonLabel,
     .anims = sAnims_RButtonLabels,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 void EnterUnionRoomChat(void)
@@ -913,7 +897,9 @@ void EnterUnionRoomChat(void)
 
 static void InitUnionRoomChat(struct UnionRoomChat *chat)
 {
+#if FREE_UNION_ROOM_CHAT == FALSE
     int i;
+#endif //FREE_UNION_ROOM_CHAT
 
     chat->funcId = CHAT_FUNC_JOIN;
     chat->funcState = 0;
@@ -929,8 +915,10 @@ static void InitUnionRoomChat(struct UnionRoomChat *chat)
     chat->exitType = CHAT_EXIT_NONE;
     chat->changedRegisteredTexts = FALSE;
     PrepareSendBuffer_Null(chat->sendMessageBuffer);
+#if FREE_UNION_ROOM_CHAT == FALSE
     for (i = 0; i < UNION_ROOM_KB_ROW_COUNT; i++)
         StringCopy(chat->registeredTexts[i], gSaveBlock1Ptr->registeredTexts[i]);
+#endif //FREE_UNION_ROOM_CHAT
 }
 
 static void FreeUnionRoomChat(void)
@@ -1734,7 +1722,7 @@ static void SwitchCaseOfLastMessageCharacter(void)
     str = GetLastCharOfMessagePtr();
     if (*str != CHAR_EXTRA_SYMBOL)
     {
-        character = sCaseToggleTable[*str];
+        character = gCaseToggleTable[*str];
         if (character)
             *str = character;
     }
@@ -1764,9 +1752,11 @@ static void ResetMessageEntryBuffer(void)
 
 static void SaveRegisteredTexts(void)
 {
+#if FREE_UNION_ROOM_CHAT == FALSE
     int i;
     for (i = 0; i < UNION_ROOM_KB_ROW_COUNT; i++)
         StringCopy(gSaveBlock1Ptr->registeredTexts[i], sChat->registeredTexts[i]);
+#endif //FREE_UNION_ROOM_CHAT
 }
 
 static u8 *GetRegisteredTextByRow(int row)
@@ -1997,7 +1987,7 @@ static int GetShouldShowCaseToggleIcon(void)
 {
     u8 *str = GetLastCharOfMessagePtr();
     u32 character = *str;
-    if (character > EOS || sCaseToggleTable[character] == character || sCaseToggleTable[character] == CHAR_SPACE)
+    if (character > EOS || gCaseToggleTable[character] == character || gCaseToggleTable[character] == CHAR_SPACE)
         return 3; // Don't show
     else
         return 0; // Show
@@ -2010,6 +2000,7 @@ static u8 *GetChatHostName(void)
 
 void InitUnionRoomChatRegisteredTexts(void)
 {
+#if FREE_UNION_ROOM_CHAT == FALSE
     StringCopy(gSaveBlock1Ptr->registeredTexts[0], gText_Hello);
     StringCopy(gSaveBlock1Ptr->registeredTexts[1], gText_Pokemon2);
     StringCopy(gSaveBlock1Ptr->registeredTexts[2], gText_Trade);
@@ -2020,6 +2011,7 @@ void InitUnionRoomChatRegisteredTexts(void)
     StringCopy(gSaveBlock1Ptr->registeredTexts[7], gText_YaySmileEmoji);
     StringCopy(gSaveBlock1Ptr->registeredTexts[8], gText_ThankYou);
     StringCopy(gSaveBlock1Ptr->registeredTexts[9], gText_ByeBye);
+#endif //FREE_UNION_ROOM_CHAT
 }
 
 #define tState               data[0]
@@ -2076,12 +2068,12 @@ static void Task_ReceiveChatMessage(u8 taskId)
         buffer = (u8 *)gBlockRecvBuffer[tI];
         switch (buffer[0])
         {
-            default:
-            case CHAT_MESSAGE_CHAT:    tNextState = 3; break;
-            case CHAT_MESSAGE_JOIN:    tNextState = 3; break;
-            case CHAT_MESSAGE_LEAVE:   tNextState = 4; break;
-            case CHAT_MESSAGE_DROP:    tNextState = 5; break;
-            case CHAT_MESSAGE_DISBAND: tNextState = 6; break;
+        default:
+        case CHAT_MESSAGE_CHAT:    tNextState = 3; break;
+        case CHAT_MESSAGE_JOIN:    tNextState = 3; break;
+        case CHAT_MESSAGE_LEAVE:   tNextState = 4; break;
+        case CHAT_MESSAGE_DROP:    tNextState = 5; break;
+        case CHAT_MESSAGE_DISBAND: tNextState = 6; break;
         }
 
         if (ProcessReceivedChatMessage(sChat->receivedMessage, (u8 *)gBlockRecvBuffer[tI]))
@@ -3115,9 +3107,6 @@ static void DrawKeyboardWindow(void)
 static void LoadTextEntryWindow(void)
 {
     int i;
-    u8 unused[2];
-    unused[0] = 0;
-    unused[1] = 0xFF;
 
     // Pointless, cleared below. The tiles are nonsense anyway, see LoadChatWindowGfx.
     for (i = 0; i < MAX_MESSAGE_LENGTH; i++)

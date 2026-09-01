@@ -524,6 +524,117 @@ void PrintAgbTrack(std::vector<Event>& events)
     PrintByte("FINE");
 }
 
+void PrintAgbTrackLoop(std::vector<Event>& events, int trackLoops)
+{
+    std::fprintf(g_outputFile, "\n@**************** Track %u (Midi-Chn.%u) ****************@\n\n", g_agbTrack, g_midiChan + 1);
+    std::fprintf(g_outputFile, "%s_%u:\n", g_asmLabel.c_str(), g_agbTrack);
+    int wholeNoteCount = 0;
+
+    ResetTrackVars();
+
+    bool foundVolBeforeNote = false;
+
+    for (const Event& event : events)
+    {
+        if (event.type == EventType::Note)
+            break;
+
+        if (event.type == EventType::Controller && event.param1 == 0x07)
+        {
+            foundVolBeforeNote = true;
+            break;
+        }
+    }
+
+    if (!foundVolBeforeNote)
+        PrintByte("\tVOL   , 127*%s_mvl/mxv", g_asmLabel.c_str());
+
+    PrintWait(g_initialWait);
+    if (trackLoops > 0)
+        PrintByte("KEYSH , %s_key%+d", g_asmLabel.c_str(), 0);
+
+    for (int k = 0; k < trackLoops; k++)
+    {
+        for (unsigned i = 0; events[i].type != EventType::EndOfTrack; i++)
+        {
+            const Event& event = events[i];
+
+            if (IsPatternBoundary(event.type))
+            {
+                if (s_inPattern)
+                    PrintByte("PEND");
+                s_inPattern = false;
+            }
+
+            // added `&& (i % 2 == 0)` to cut down on excess comments created in the .s file
+            if ((event.type == EventType::WholeNoteMark || event.type == EventType::Pattern) && (i % 2 == 0))
+                std::fprintf(g_outputFile, "@ %03d   ----------------------------------------\n", wholeNoteCount++);
+
+            switch (event.type)
+            {
+            case EventType::Note:
+                PrintNote(event);
+                break;
+            case EventType::EndOfTie:
+                PrintEndOfTieOp(event);
+                break;
+            case EventType::Label:
+                if (k == 0)
+                    PrintSeqLoopLabel(event);
+                break;
+            case EventType::LoopEnd:
+            case EventType::LoopEndBegin:
+                break;
+            case EventType::LoopBegin:
+                if (k == 0)
+                    PrintSeqLoopLabel(event);
+                break;
+            case EventType::WholeNoteMark:
+                if (event.param2 & 0x80000000)
+                {
+                    std::fprintf(g_outputFile, "%s_%u_%03lu:\n", g_asmLabel.c_str(), g_agbTrack, (unsigned long)(event.param2 & 0x7FFFFFFF));
+                    ResetTrackVars();
+                    s_inPattern = true;
+                }
+                PrintWait(event.time);
+                break;
+            case EventType::Pattern:
+                PrintByte("PATT");
+                PrintWord("%s_%u_%03lu", g_asmLabel.c_str(), g_agbTrack, event.param2);
+
+                while (!IsPatternBoundary(events[i + 1].type))
+                    i++;
+
+                ResetTrackVars();
+                break;
+            case EventType::Tempo:
+                if (k == 0)
+                {
+                    PrintByte("TEMPO , %u*%s_tbs/2", static_cast<int>(round(60000000.0f / static_cast<float>(event.param2))), g_asmLabel.c_str());
+                    PrintWait(event.time);
+                }
+                break;
+            case EventType::InstrumentChange:
+                if (k == 0)
+                    PrintOp(event.time, "VOICE ", "%u", event.param1);
+                break;
+            case EventType::PitchBend:
+                PrintOp(event.time, "BEND  ", "c_v%+d", event.param2 - 64);
+                break;
+            case EventType::Controller:
+                if (k == 0)
+                    PrintControllerOp(event);
+                break;
+            default:
+                PrintWait(event.time);
+                break;
+            }
+        }
+    }
+
+    PrintByte("FINE");
+}
+
 void PrintAgbFooter()
 {
     int trackCount = g_agbTrack - 1;

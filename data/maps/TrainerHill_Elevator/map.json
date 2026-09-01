@@ -3,6 +3,7 @@
   "name": "TrainerHill_Elevator",
   "layout": "LAYOUT_BATTLE_ELEVATOR",
   "music": "MUS_B_TOWER_RS",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_TRAINER_HILL",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
