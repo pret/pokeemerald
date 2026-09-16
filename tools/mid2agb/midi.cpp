@@ -149,7 +149,7 @@ void ReadMidiFileHeader()
     g_midiTrackCount = ReadInt16();
     g_midiTimeDiv = ReadInt16();
 
-    if (g_midiTimeDiv < 0)
+    if (g_midiTimeDiv <= 0)
         RaiseError("unsupported MIDI time division (%d)", g_midiTimeDiv);
 }
 
@@ -238,7 +238,7 @@ std::string ReadEventText()
 
     if (length <= 2)
     {
-        if (fread(buffer, length, 1, g_inputFile) != 1)
+        if (length > 0 && fread(buffer, length, 1, g_inputFile) != 1)
             RaiseError("failed to read event text");
     }
     else
@@ -636,7 +636,7 @@ void ConvertTimes(std::vector<Event>& events)
 
         if (event.type == EventType::Note)
         {
-            event.param1 = g_noteVelocityLUT[event.param1];
+            event.param1 = g_noteVelocityLUT[event.param1 & 0x7F];
 
             std::uint32_t duration = (24 * g_clocksPerBeat * event.param2) / g_midiTimeDiv;
 
