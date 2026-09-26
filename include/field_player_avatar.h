@@ -43,7 +43,7 @@ void SetPlayerAvatarFieldMove(void);
 u8 GetPlayerAvatarGraphicsIdByCurrentState(void);
 void SetPlayerAvatarStateMask(u8 flags);
 u8 GetPlayerAvatarGraphicsIdByStateId(u8 state);
-u8 GetJumpSpecialMovementAction(u32);
+u8 GetJumpSpecialMovementAction(u8);
 bool8 PartyHasMonWithSurf(void);
 bool8 IsPlayerFacingSurfableFishableWater(void);
 bool8 IsPlayerSurfingNorth(void);
