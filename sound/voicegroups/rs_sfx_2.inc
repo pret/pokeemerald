@@ -1,6 +1,6 @@
 voice_group rs_sfx_2
 	voice_directsound_no_resample 60, 0, DirectSoundWaveData_bicycle_bell, 255, 249, 0, 165
-	voice_directsound_alt 60, 0, DirectSoundWaveData_bicycle_bell, 255, 0, 255, 165
+	voice_directsound_reverse 60, 0, DirectSoundWaveData_bicycle_bell, 255, 0, 255, 165
 	voice_directsound 60, 0, DirectSoundWaveData_unknown_synth_snare, 255, 0, 255, 165
 	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_glockenspiel, 255, 242, 0, 127
 	voice_noise_alt 60, 0, 0, 0, 1, 0, 1
@@ -32,7 +32,7 @@ voice_group rs_sfx_2
 	voice_square_1_alt 60, 0, 19, 2, 0, 2, 0, 0
 	voice_directsound 60, 0, DirectSoundWaveData_trinity_30303_mega_bass, 255, 0, 255, 127
 	voice_square_1 60, 0, 103, 0, 0, 0, 15, 0
-	voice_directsound_alt 60, 0, DirectSoundWaveData_unknown_6, 255, 0, 255, 127
+	voice_directsound_reverse 60, 0, DirectSoundWaveData_unknown_6, 255, 0, 255, 127
 	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_fretless_bass, 255, 255, 255, 127
 	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_synth_bass, 255, 0, 255, 127
 	voice_directsound 60, 0, DirectSoundWaveData_unknown_7, 255, 0, 255, 127
