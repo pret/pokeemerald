@@ -277,7 +277,7 @@ const struct SpriteTemplate gTwisterRockSpriteTemplate =
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = &sAnims_BasicRock[4],
+    .anims = &sAnims_BasicRock[ANIM_ROCK_SMALLER],
     .images = NULL,
     .affineAnims = sAffineAnims_BasicRock,
     .callback = AnimMoveTwisterParticle,
@@ -288,7 +288,7 @@ const struct SpriteTemplate gWeatherBallRockDownSpriteTemplate =
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
-    .anims = &sAnims_BasicRock[2],
+    .anims = &sAnims_BasicRock[ANIM_ROCK_BIG],
     .images = NULL,
     .affineAnims = sAffineAnims_BasicRock,
     .callback = AnimWeatherBallDown,
@@ -504,10 +504,10 @@ static void AnimTask_LoadSandstormBackground_Step(u8 taskId)
 #define sFractionalY data[4] // 256ths of a pixel
 #define sMirroredX   data[5] // init'd from gBattleAnimArgs[3]
 
-// The fields named "velocity" are arguably more like "acceleration," 
+// The fields named "velocity" are arguably more like "acceleration,"
 // and the fields named "fractional" are arguably more like "velocity."
 //
-// ...is what I WOULD say if the "fractional" fields weren't AND'd with 
+// ...is what I WOULD say if the "fractional" fields weren't AND'd with
 // 0xFF after every frame.
 
 static void AnimFlyingSandCrescent(struct Sprite *sprite)
