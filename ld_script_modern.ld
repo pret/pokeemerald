@@ -16,6 +16,9 @@ SECTIONS {
     ALIGN(4)
     {
         src/*.o(ewram_data);
+        *libc.a:impure.o(.data);
+        *libc.a:locale.o(.data);
+        *libc.a:mallocr.o(.data);
     } > EWRAM
 
     iwram 0x3000000 (NOLOAD) :
@@ -41,11 +44,15 @@ SECTIONS {
     ALIGN(4)
     {
         src/rom_header.o(.text*);
-        src/rom_header_gf.o(.text.*);
+        src/rom_header_gf.o(.text*);
         src/crt0.o(.text);
         src/main.o(.text);
         src/*.o(.text*);
         asm/*.o(.text*);
+        *libagbsyscall.a:*.o(.text*);
+        *libgcc.a:*.o(.text*);
+        *libc.a:*.o(.text*);
+        *libnosys.a:*.o(.text*);
     } > ROM =0
 
     script_data :
@@ -54,75 +61,20 @@ SECTIONS {
 		data/*.o(script_data);
     } > ROM =0
 
-    lib_text :
-    ALIGN(4)
-    {
-        src/libgcnmultiboot.o(.text);
-        src/m4a_1.o(.text);
-        src/m4a.o(.text);
-        src/agb_flash.o(.text);
-        src/agb_flash_1m.o(.text);
-        src/agb_flash_mx.o(.text);
-        src/siirtc.o(.text);
-        src/librfu_stwi.o(.text);
-        src/librfu_intr.o(.text);
-        src/librfu_rfu.o(.text);
-        src/librfu_sio32id.o(.text);
-        *libagbsyscall.a:*.o(.text*);
-        *libgcc.a:*.o(.text*);
-        *libc.a:*.o(.text*);
-        *libnosys.a:*.o(.text*);
-        src/libisagbprn.o(.text);
-    } > ROM =0
-
     .rodata :
     ALIGN(4)
     {
         src/*.o(.rodata*);
         data/*.o(.rodata*);
+        *libgcc.a:*.o(.rodata*);
+        *libc.a:*.o(.rodata*);
+        *libnosys.a:*.o(.rodata*);
     } > ROM =0
 
     song_data :
     ALIGN(4)
     {
         sound/songs/*.o(.rodata);
-    } > ROM =0
-
-    lib_rodata :
-    SUBALIGN(4)
-    {
-        src/m4a.o(.rodata);
-        src/agb_flash.o(.rodata);
-        src/agb_flash_1m.o(.rodata);
-        src/agb_flash_mx.o(.rodata);
-        src/agb_flash_le.o(.rodata);
-        src/siirtc.o(.rodata);
-        src/librfu_rfu.o(.rodata);
-        src/librfu_sio32id.o(.rodata);
-        *libgcc.a:*.o(.rodata*);
-        *libc.a:*.o(.rodata*);
-        *libc.a:*.o(.data*);
-        src/libisagbprn.o(.rodata);
-    } =0
-
-    multiboot_data :
-    ALIGN(4)
-    {
-        data/multiboot_ereader.o(.rodata);
-        data/multiboot_berry_glitch_fix.o(.rodata);
-        data/multiboot_pokemon_colosseum.o(.rodata);
-    } > ROM =0
-
-    anim_mon_front_pic_data :
-    ALIGN(4)
-    {
-        src/anim_mon_front_pics.o(.rodata);
-    } > ROM =0
-
-    gfx_data :
-    ALIGN(4)
-    {
-        src/graphics.o(.rodata);
     } > ROM =0
 
     /* DWARF debug sections.
