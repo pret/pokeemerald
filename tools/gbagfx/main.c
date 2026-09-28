@@ -641,22 +641,16 @@ int main(int argc, char **argv)
         if (*outputFileExtension == 0)
             FATAL_ERROR("Output file \"%s\" has no extension.\n", outputPath);
 
-        size_t newOutputPathSize = strlen(inputPath) - strlen(inputFileExtension) + strlen(outputFileExtension);
+        int prefixLen = inputFileExtension - inputPath;
+        size_t newOutputPathSize = prefixLen + strlen(outputFileExtension) + 1;
+
         outputPath = malloc(newOutputPathSize);
 
         if (outputPath == NULL)
             FATAL_ERROR("Failed to allocate memory for new output path.\n");
 
-        for (int i = 0; i < newOutputPathSize; i++)
-        {
-            outputPath[i] = inputPath[i];
-
-            if (outputPath[i] == '.')
-            {
-                strcpy(&outputPath[i + 1], outputFileExtension);
-                break;
-            }
-        }
+        if (snprintf(outputPath, newOutputPathSize, "%.*s%s", prefixLen, inputPath, outputFileExtension) >= (int)newOutputPathSize)
+            FATAL_ERROR("Failed to build output path.\n");
     }
 
     for (int i = 0; handlers[i].function != NULL; i++)
