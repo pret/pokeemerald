@@ -4049,21 +4049,21 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         {
             retVal = substruct3->championRibbon
                 | (substruct3->coolRibbon << 1)
-                | (substruct3->beautyRibbon << 4)
-                | (substruct3->cuteRibbon << 7)
-                | (substruct3->smartRibbon << 10)
-                | (substruct3->toughRibbon << 13)
-                | (substruct3->winningRibbon << 16)
-                | (substruct3->victoryRibbon << 17)
-                | (substruct3->artistRibbon << 18)
-                | (substruct3->effortRibbon << 19)
-                | (substruct3->marineRibbon << 20)
-                | (substruct3->landRibbon << 21)
-                | (substruct3->skyRibbon << 22)
-                | (substruct3->countryRibbon << 23)
-                | (substruct3->nationalRibbon << 24)
-                | (substruct3->earthRibbon << 25)
-                | (substruct3->worldRibbon << 26);
+                | (substruct3->beautyRibbon << (1 + CONTEST_RIBBON_BITS * 1))
+                | (substruct3->cuteRibbon << (1 + CONTEST_RIBBON_BITS * 2))
+                | (substruct3->smartRibbon << (1 + CONTEST_RIBBON_BITS * 3))
+                | (substruct3->toughRibbon << (1 + CONTEST_RIBBON_BITS * 4))
+                | (substruct3->winningRibbon << (1 + CONTEST_RIBBON_BITS * 5 + 0))
+                | (substruct3->victoryRibbon << (1 + CONTEST_RIBBON_BITS * 5 + 1))
+                | (substruct3->artistRibbon << (1 + CONTEST_RIBBON_BITS * 5 + 2))
+                | (substruct3->effortRibbon << (1 + CONTEST_RIBBON_BITS * 5 + 3))
+                | (substruct3->marineRibbon << (1 + CONTEST_RIBBON_BITS * 5 + 4))
+                | (substruct3->landRibbon << (1 + CONTEST_RIBBON_BITS * 5 + 5))
+                | (substruct3->skyRibbon << (1 + CONTEST_RIBBON_BITS * 5 + 6))
+                | (substruct3->countryRibbon << (1 + CONTEST_RIBBON_BITS * 5 + 7))
+                | (substruct3->nationalRibbon << (1 + CONTEST_RIBBON_BITS * 5 + 8))
+                | (substruct3->earthRibbon << (1 + CONTEST_RIBBON_BITS * 5 + 9))
+                | (substruct3->worldRibbon << (1 + CONTEST_RIBBON_BITS * 5 + 10));
         }
         break;
     default:

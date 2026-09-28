@@ -93,6 +93,9 @@
 // Shiny odds
 #define SHINY_ODDS 8 // Actual probability is SHINY_ODDS/65536
 
+// Number of bits used to store each contest ribbon (the highest rank achieved)
+#define CONTEST_RIBBON_BITS 3
+
 // Ribbon IDs used by TV and Pokénav
 #define CHAMPION_RIBBON       0
 #define COOL_RIBBON_NORMAL    1
