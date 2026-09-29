@@ -422,7 +422,7 @@ struct BattleFrontier
     /*0xDDE*/ u16 arenaRecordStreaks[FRONTIER_LVL_MODE_COUNT];
     /*0xDE2*/ u16 factoryWinStreaks[2][FRONTIER_LVL_MODE_COUNT];
     /*0xDEA*/ u16 factoryRecordWinStreaks[2][FRONTIER_LVL_MODE_COUNT];
-    /*0xDF6*/ u16 factoryRentsCount[2][FRONTIER_LVL_MODE_COUNT];
+    /*0xDF2*/ u16 factoryRentsCount[2][FRONTIER_LVL_MODE_COUNT];
     /*0xDFA*/ u16 factoryRecordRentsCount[2][FRONTIER_LVL_MODE_COUNT];
     /*0xE02*/ u16 pikePrize;
     /*0xE04*/ u16 pikeWinStreaks[FRONTIER_LVL_MODE_COUNT];
