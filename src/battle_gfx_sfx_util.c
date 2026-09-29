@@ -710,7 +710,7 @@ void DecompressTrainerFrontPic(u16 frontPicId, u8 battler)
 void DecompressTrainerBackPic(u16 backPicId, u8 battler)
 {
     u8 position = GetBattlerPosition(battler);
-#ifdef BUGFIX
+#ifdef UBFIX
     CpuCopy32(gTrainerBackPicTable[backPicId].data, gMonSpritesGfxPtr->sprites.ptr[position], gTrainerBackPicTable[backPicId].size);
 #else
     // Trainer back pics aren't compressed!
