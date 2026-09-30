@@ -20,11 +20,11 @@ COMMON_DATA struct RfuSIO32Id gRfuSIO32Id = {0};
 static const u16 Sio32ConnectionData[] = { 0x494e, 0x544e, 0x4e45, 0x4f44 }; // NINTENDO
 static const char Sio32IDLib_Var[] = "Sio32ID_030820";
 
-s32 AgbRFU_checkID(u8 maxTries)
+u32 AgbRFU_checkID(u8 maxTries)
 {
     u16 ieBak;
     vu16 *regTMCNTL;
-    s32 id;
+    u32 id;
 
     // Interrupts must be enabled
     if (REG_IME == 0)
@@ -59,7 +59,7 @@ s32 AgbRFU_checkID(u8 maxTries)
 static void Sio32IDInit(void)
 {
     REG_IME = 0;
-    REG_IE &= ~((8 << gSTWIStatus->timerSelect) | INTR_FLAG_SERIAL);
+    REG_IE &= ~((INTR_FLAG_TIMER0 << gSTWIStatus->timerSelect) | INTR_FLAG_SERIAL);
     REG_IME = 1;
     REG_RCNT = 0;
     REG_SIOCNT = SIO_32BIT_MODE;
