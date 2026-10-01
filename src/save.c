@@ -72,11 +72,12 @@ struct
     SAVEBLOCK_CHUNK(struct PokemonStorage, 8), // SECTOR_ID_PKMN_STORAGE_END
 };
 
-// These will produce an error if a save struct is larger than the space
-// alloted for it in the flash.
-STATIC_ASSERT(sizeof(struct SaveBlock2) <= SECTOR_DATA_SIZE, SaveBlock2FreeSpace);
-STATIC_ASSERT(sizeof(struct SaveBlock1) <= SECTOR_DATA_SIZE * (SECTOR_ID_SAVEBLOCK1_END - SECTOR_ID_SAVEBLOCK1_START + 1), SaveBlock1FreeSpace);
-STATIC_ASSERT(sizeof(struct PokemonStorage) <= SECTOR_DATA_SIZE * (SECTOR_ID_PKMN_STORAGE_END - SECTOR_ID_PKMN_STORAGE_START + 1), PokemonStorageFreeSpace);
+// 1. Produce a link error if a struct is larger than the space allotted
+//    for it in the flash.
+// 2. Produce a summary of space used/available during the build.
+__attribute__((section(".pseudo.save_block_1"))) const struct SaveBlock1 _saveBlock1 = {0};
+__attribute__((section(".pseudo.save_block_2"))) const struct SaveBlock2 _saveBlock2 = {0};
+__attribute__((section(".pseudo.pokemon_storage"))) const struct PokemonStorage _pokemonStorage = {0};
 
 COMMON_DATA u16 gLastWrittenSector = 0;
 COMMON_DATA u32 gLastSaveCounter = 0;

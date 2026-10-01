@@ -52,7 +52,9 @@ struct HallofFameTeam
     struct HallofFameMon mon[PARTY_SIZE];
 };
 
-STATIC_ASSERT(sizeof(struct HallofFameTeam) * HALL_OF_FAME_MAX_TEAMS <= SECTOR_DATA_SIZE * NUM_HOF_SECTORS, HallOfFameFreeSpace);
+// Produce a link error if the Hall of Fame is larger than the space
+// allotted for it in the flash.
+__attribute__((section(".pseudo.hall_of_fame"))) const struct HallofFameTeam _hallOfFame[HALL_OF_FAME_MAX_TEAMS] = {0};
 
 struct HofGfx
 {

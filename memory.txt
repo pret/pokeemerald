@@ -1,0 +1,38 @@
+#include "gba/defines.h"
+#include "save.h"
+
+/* WARNING: 'cpp' cannot resolve 'offsetof' so this won't stay in sync
+ * if 'struct SaveSector's 'counter' member moves. */
+#undef SECTOR_COUNTER_OFFSET
+#define SECTOR_COUNTER_OFFSET (SECTOR_SIZE - 4)
+
+MEMORY
+{
+    EWRAM (rwx) : ORIGIN = EWRAM_START, LENGTH = EWRAM_SIZE
+    IWRAM (rwx) : ORIGIN = IWRAM_START, LENGTH = IWRAM_SIZE
+    ROM    (rx) : ORIGIN = ROM_START, LENGTH = ROM_SIZE
+
+    /* Psuedo-regions: not actually mapped, used for reporting flash
+     * usage and detecting OOMs.
+     *
+     * NOTE: 'Makefile' discards memory regions beginning with '_' from
+     * the '--print-memory-usage' output. */
+    SaveBlock1 : ORIGIN = 0, LENGTH = SECTOR_DATA_SIZE * NUM_SAVEBLOCK1_SECTORS
+    SaveBlock2 : ORIGIN = 0, LENGTH = SECTOR_DATA_SIZE * NUM_SAVEBLOCK2_SECTORS
+    PokemonStorage : ORIGIN = 0, LENGTH = SECTOR_DATA_SIZE * NUM_PKMN_STORAGE_SECTORS
+    _HallOfFame : ORIGIN = 0, LENGTH = SECTOR_DATA_SIZE * NUM_HOF_SECTORS
+    /* 'TryWriteSpecialSaveSector' writes up to 'SECTOR_COUNTER_OFFSET'
+     * rather than 'SECTOR_DATA_SIZE'. */
+    _RecordedBattleSave : ORIGIN = 0, LENGTH = SECTOR_COUNTER_OFFSET
+    _TrainerHillChallenge : ORIGIN = 0, LENGTH = SECTOR_COUNTER_OFFSET
+}
+
+SECTIONS
+{
+    .pseudo.save_block_1 (NOLOAD) : { KEEP(*(.pseudo.save_block_1)) } > SaveBlock1
+    .pseudo.save_block_2 (NOLOAD) : { KEEP(*(.pseudo.save_block_2)) } > SaveBlock2
+    .pseudo.pokemon_storage (NOLOAD) : { KEEP(*(.pseudo.pokemon_storage)) } > PokemonStorage
+    .pseudo.hall_of_fame (NOLOAD) : { KEEP(*(.pseudo.hall_of_fame)) } > _HallOfFame
+    .pseudo.recorded_battle_save (NOLOAD) : { KEEP(*(.pseudo.recorded_battle_save)) } > _RecordedBattleSave
+    .pseudo.trainer_hill_challenge (NOLOAD) : { KEEP(*(.pseudo.trainer_hill_challenge)) } > _TrainerHillChallenge
+}

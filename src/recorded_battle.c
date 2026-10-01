@@ -62,8 +62,9 @@ struct RecordedBattleSave
     u32 checksum;
 };
 
-// Save data using TryWriteSpecialSaveSector is allowed to exceed SECTOR_DATA_SIZE (up to the counter field)
-STATIC_ASSERT(sizeof(struct RecordedBattleSave) <= SECTOR_COUNTER_OFFSET, RecordedBattleSaveFreeSpace);
+// Produce a link error if 'RecordedBattleSave' is larger than the space
+// allotted for it in the flash.
+__attribute__((section(".pseudo.recorded_battle_save"))) const struct RecordedBattleSave _recordedBattleSave = {0};
 
 EWRAM_DATA u32 gRecordedBattleRngSeed = 0;
 EWRAM_DATA u32 gBattlePalaceMoveSelectionRngValue = 0;
