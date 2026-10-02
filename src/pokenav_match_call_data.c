@@ -1029,6 +1029,7 @@ static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_d
         if (textData[i].availabilityFlag != ALWAYS_AVAILABLE && !FlagGet(textData[i].availabilityFlag))
             break;
     }
+
     if (textData[i].availabilityFlag != REMATCH_CALL_START)
     {
         if (i)
@@ -1036,26 +1037,31 @@ static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_d
         if (textData[i].flagToSetOnCompletion != NO_FLAG_TO_SET)
             FlagSet(textData[i].flagToSetOnCompletion);
         StringExpandPlaceholders(dest, textData[i].text);
+        return;
     }
-    else
+
+    do
     {
-        if (FlagGet(FLAG_SYS_GAME_CLEAR))
-        {
-            do
-            {
-                // If the rematch is ready, advance to the rematch call.
-                if (gSaveBlock1Ptr->trainerRematches[idx]) i += 2;
-                // No rematch ready, but if the player has defeated them in
-                // a rematch before, advance to the final call.
-                // Note: The 2 "rematch" teams battled includes the first non-rematch battle.
-                else if (CountBattledRematchTeams(idx) >= 2) i += 3; 
-                // No rematch ready and never defeated in a rematch, advance to congratulations call.
-                else i++;
-            } while (0);
-        }
-        // If the game hasn't been cleared yet, the index remains on the basic "preparing for rematch" call.
-        StringExpandPlaceholders(dest, textData[i].text);
-    }
+        if (!FlagGet(FLAG_SYS_GAME_CLEAR))
+            break;
+
+        // If the rematch is ready, advance to the rematch call.
+        if (gSaveBlock1Ptr->trainerRematches[idx])
+            i += 2;
+        // No rematch ready, but if the player has defeated them in
+        // a rematch before, advance to the final call.
+        // Note: The 2 "rematch" teams battled includes the first non-rematch battle.
+        else if (CountBattledRematchTeams(idx) >= 2)
+            i += 3;
+        // No rematch ready and never defeated in a rematch, advance to congratulations call.
+        else
+            i++;
+
+    } while (0);
+
+    // If the game hasn't been cleared yet, the index remains on the basic "preparing for rematch"
+    // call.
+    StringExpandPlaceholders(dest, textData[i].text);
 }
 
 void MatchCall_GetNameAndDesc(u32 idx, const u8 **desc, const u8 **name)
