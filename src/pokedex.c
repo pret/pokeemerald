@@ -4669,7 +4669,15 @@ static u32 GetPokedexMonPersonality(u16 species)
 u16 CreateMonSpriteFromNationalDexNumber(u16 nationalNum, s16 x, s16 y, u16 paletteSlot)
 {
     nationalNum = NationalPokedexNumToSpecies(nationalNum);
+
+    // Prevent cases where a pokedex pokemon can be shiny.
+    #ifdef BUGFIX
+    u32 personality = GetPokedexMonPersonality(nationalNum);
+    u32 pokedexOTID = personality ^ SHINY_ODDS; // Make sure the XOR comes out as not shiny.
+    return CreateMonPicSprite_HandleDeoxys(nationalNum, pokedexOTID, personality, TRUE, x, y, paletteSlot, TAG_NONE);
+    #else
     return CreateMonPicSprite_HandleDeoxys(nationalNum, SHINY_ODDS, GetPokedexMonPersonality(nationalNum), TRUE, x, y, paletteSlot, TAG_NONE);
+    #endif
 }
 
 static u16 CreateSizeScreenTrainerPic(u16 species, s16 x, s16 y, s8 paletteSlot)
