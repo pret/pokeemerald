@@ -1804,7 +1804,7 @@ static void Cmd_if_has_move(void)
 {
     s32 i;
 
-#ifdef BUGFIX
+#ifdef UBFIX
     const u16 move = T1_READ_16(gAIScriptPtr + 2);
     const u16 *movePtr = &move;    
 #else
@@ -1862,7 +1862,7 @@ static void Cmd_if_doesnt_have_move(void)
 {
     s32 i;
 
-#ifdef BUGFIX
+#ifdef UBFIX
     const u16 move = T1_READ_16(gAIScriptPtr + 2);
     const u16 *movePtr = &move;    
 #else
