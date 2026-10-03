@@ -1,5 +1,5 @@
 LilycoveCity_MoveDeletersHouse_MapScripts::
-	.byte 0
+	end_map_scripts
 
 LilycoveCity_MoveDeletersHouse_EventScript_MoveDeleter::
 	lockall

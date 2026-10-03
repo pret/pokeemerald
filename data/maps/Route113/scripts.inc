@@ -1,7 +1,7 @@
 Route113_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, Route113_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, Route113_OnTransition
-	.byte 0
+	end_map_scripts
 
 Route113_OnResume:
 	setstepcallback STEP_CB_ASH

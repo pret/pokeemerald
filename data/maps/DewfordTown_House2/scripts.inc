@@ -1,5 +1,5 @@
 DewfordTown_House2_MapScripts::
-	.byte 0
+	end_map_scripts
 
 DewfordTown_House2_EventScript_Man::
 	lock

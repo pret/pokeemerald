@@ -1,5 +1,5 @@
 Route110_TrickHousePuzzle8_MapScripts::
-	.byte 0
+	end_map_scripts
 
 Route110_TrickHousePuzzle8_EventScript_Scroll::
 	lockall

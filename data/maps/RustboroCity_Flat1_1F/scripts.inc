@@ -1,5 +1,5 @@
 RustboroCity_Flat1_1F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 RustboroCity_Flat1_1F_EventScript_Man::
 	msgbox RustboroCity_Flat1_1F_Text_EveryPokemonHasAbility, MSGBOX_NPC

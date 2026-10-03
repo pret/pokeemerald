@@ -1,7 +1,7 @@
 UnionRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, UnionRoom_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, UnionRoom_OnTransition
-	.byte 0
+	end_map_scripts
 
 UnionRoom_OnResume:
 	setflag FLAG_HIDE_UNION_ROOM_PLAYER_1

@@ -3,11 +3,11 @@ SecretBase_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SecretBase_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SecretBase_OnFrame
 	map_script MAP_SCRIPT_ON_RESUME, SecretBase_OnResume
-	.byte 0
+	end_map_scripts
 
 SecretBase_OnWarp:
 	map_script_2 VAR_SECRET_BASE_INITIALIZED, 0, SecretBase_EventScript_InitDecorations
-	.2byte 0
+	end_map_script_table
 
 SecretBase_OnTransition:
 	call SecretBase_EventScript_SetDecorationFlags
@@ -17,7 +17,7 @@ SecretBase_OnTransition:
 
 SecretBase_OnFrame:
 	map_script_2 VAR_INIT_SECRET_BASE, 0, SecretBase_EventScript_FirstEntrance
-	.2byte 0
+	end_map_script_table
 
 SecretBase_OnResume:
 	setstepcallback STEP_CB_SECRET_BASE

@@ -1,5 +1,5 @@
 SSTidalLowerDeck_MapScripts::
-	.byte 0
+	end_map_scripts
 
 SSTidalLowerDeck_EventScript_Phillip::
 	trainerbattle_single TRAINER_PHILLIP, SSTidalLowerDeck_Text_PhillipIntro, SSTidalLowerDeck_Text_PhillipDefeat

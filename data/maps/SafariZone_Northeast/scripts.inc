@@ -1,4 +1,4 @@
 SafariZone_Northeast_MapScripts::
-	.byte 0
+	end_map_scripts
 
 @ Event scripts for SafariZone_Northeast are in SafariZone_South/scripts.inc

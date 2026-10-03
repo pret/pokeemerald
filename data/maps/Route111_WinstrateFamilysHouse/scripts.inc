@@ -1,5 +1,5 @@
 Route111_WinstrateFamilysHouse_MapScripts::
-	.byte 0
+	end_map_scripts
 
 Route111_WinstrateFamilysHouse_EventScript_Victor::
 	lock

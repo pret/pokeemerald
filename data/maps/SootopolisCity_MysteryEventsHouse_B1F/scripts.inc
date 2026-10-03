@@ -1,7 +1,7 @@
 SootopolisCity_MysteryEventsHouse_B1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_MysteryEventsHouse_B1F_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SootopolisCity_MysteryEventsHouse_B1F_OnFrame
-	.byte 0
+	end_map_scripts
 
 SootopolisCity_MysteryEventsHouse_B1F_OnTransition:
 	special SetEReaderTrainerGfxId
@@ -9,7 +9,7 @@ SootopolisCity_MysteryEventsHouse_B1F_OnTransition:
 
 SootopolisCity_MysteryEventsHouse_B1F_OnFrame:
 	map_script_2 VAR_TEMP_1, 0, SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleVisitingTrainer
-	.2byte 0
+	end_map_script_table
 
 SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleVisitingTrainer::
 	lockall

@@ -3,7 +3,7 @@ SootopolisCity_Gym_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, SootopolisCity_Gym_1F_OnResume
 	map_script MAP_SCRIPT_ON_LOAD, SootopolisCity_Gym_1F_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_Gym_1F_OnTransition
-	.byte 0
+	end_map_scripts
 
 SootopolisCity_Gym_1F_OnTransition:
 	setvar VAR_ICE_STEP_COUNT, 1
@@ -38,7 +38,7 @@ SootopolisCity_Gym_1F_OnFrame:
 	map_script_2 VAR_ICE_STEP_COUNT, 28, SootopolisCity_Gym_1F_EventScript_UnlockSecondStairs
 	map_script_2 VAR_ICE_STEP_COUNT, 67, SootopolisCity_Gym_1F_EventScript_UnlockThirdStairs
 	map_script_2 VAR_ICE_STEP_COUNT, 0, SootopolisCity_Gym_1F_EventScript_FallThroughIce
-	.2byte 0
+	end_map_script_table
 
 SootopolisCity_Gym_1F_EventScript_UnlockFirstStairs::
 	addvar VAR_ICE_STEP_COUNT, 1

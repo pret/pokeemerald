@@ -2,7 +2,7 @@ Route129_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route129_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route129_OnLoad
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route129_OnFrame
-	.byte 0
+	end_map_scripts
 
 Route129_OnLoad:
 	call_if_eq VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_129_WEST, AbnormalWeather_EventScript_PlaceTilesRoute129West
@@ -22,7 +22,7 @@ Route129_EventScript_CheckSetAbnormalWeather::
 
 Route129_OnFrame:
 	map_script_2 VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_EndEventAndCleanup_1
-	.2byte 0
+	end_map_script_table
 
 Route129_EventScript_Chase::
 	trainerbattle_single TRAINER_CHASE, Route129_Text_ChaseIntro, Route129_Text_ChaseDefeat

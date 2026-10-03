@@ -1,5 +1,5 @@
 SeafloorCavern_Room4_MapScripts::
-	.byte 0
+	end_map_scripts
 
 SeafloorCavern_Room4_EventScript_Grunt3::
 	trainerbattle_single TRAINER_GRUNT_SEAFLOOR_CAVERN_3, SeafloorCavern_Room4_Text_Grunt3Intro, SeafloorCavern_Room4_Text_Grunt3Defeat

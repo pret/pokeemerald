@@ -1,7 +1,7 @@
 PacifidlogTown_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, PacifidlogTown_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, PacifidlogTown_OnResume
-	.byte 0
+	end_map_scripts
 
 PacifidlogTown_OnTransition:
 	setflag FLAG_VISITED_PACIFIDLOG_TOWN

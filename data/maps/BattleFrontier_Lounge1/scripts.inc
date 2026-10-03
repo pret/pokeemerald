@@ -1,5 +1,5 @@
 BattleFrontier_Lounge1_MapScripts::
-	.byte 0
+	end_map_scripts
 
 @ NPC that rates pokemon based on their IVs
 BattleFrontier_Lounge1_EventScript_Breeder::

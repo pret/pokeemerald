@@ -1,5 +1,5 @@
 VerdanturfTown_House_MapScripts::
-	.byte 0
+	end_map_scripts
 
 VerdanturfTown_House_EventScript_Woman1::
 	msgbox VerdanturfTown_House_Text_TrainersGatherAtPokemonLeague, MSGBOX_NPC

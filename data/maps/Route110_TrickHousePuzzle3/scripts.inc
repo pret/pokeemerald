@@ -1,7 +1,7 @@
 Route110_TrickHousePuzzle3_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, Route110_TrickHousePuzzle3_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle3_OnTransition
-	.byte 0
+	end_map_scripts
 
 Route110_TrickHousePuzzle3_OnResume:
 	call Route110_TrickHousePuzzle3_EventScript_UpdateButtonMetatiles

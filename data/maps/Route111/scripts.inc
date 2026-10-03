@@ -3,7 +3,7 @@ Route111_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route111_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, Route111_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route111_OnFrame
-	.byte 0
+	end_map_scripts
 
 Route111_OnLoad:
 	call_if_unset FLAG_REGI_DOORS_OPENED, Route111_EventScript_CloseDesertRuins
@@ -94,7 +94,7 @@ Route111_EventScript_SetMirageTowerGone::
 
 Route111_OnWarp:
 	map_script_2 VAR_MIRAGE_TOWER_STATE, 1, Route111_EventScript_HidePlayerForMirageTower
-	.2byte 0
+	end_map_script_table
 
 Route111_EventScript_HidePlayerForMirageTower::
 	hideobjectat LOCALID_PLAYER, MAP_LITTLEROOT_TOWN
@@ -102,7 +102,7 @@ Route111_EventScript_HidePlayerForMirageTower::
 
 Route111_OnFrame:
 	map_script_2 VAR_MIRAGE_TOWER_STATE, 1, Route111_EventScript_MirageTowerDisappear
-	.2byte 0
+	end_map_script_table
 
 Route111_EventScript_MirageTowerDisappear::
 	lockall

@@ -1,5 +1,5 @@
 BattleFrontier_Lounge2_MapScripts::
-	.byte 0
+	end_map_scripts
 
 @ This NPC gives hints about a random facility or battle mode.
 @ For battle modes he gives generic advice

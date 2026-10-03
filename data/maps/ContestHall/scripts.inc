@@ -4,7 +4,7 @@ ContestHall_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, ContestHall_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, ContestHall_OnResume
 	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, ContestHall_OnReturn
-	.byte 0
+	end_map_scripts
 
 ContestHall_OnReturn:
 	special LoadLinkContestPlayerPalettes
@@ -56,11 +56,11 @@ ContestHall_EventScript_ReShowAudience::
 
 ContestHall_OnFrame:
 	map_script_2 VAR_CONTEST_HALL_STATE, 1, ContestHall_EventScript_Contest
-	.2byte 0
+	end_map_script_table
 
 ContestHall_OnWarp:
 	map_script_2 VAR_CONTEST_HALL_STATE, 1, ContestHall_EventScript_SetContestObjects
-	.2byte 0
+	end_map_script_table
 
 ContestHall_EventScript_Contest::
 	call ContestHall_EventScript_DoContest

@@ -1,5 +1,5 @@
 RustboroCity_House2_MapScripts::
-	.byte 0
+	end_map_scripts
 
 RustboroCity_House2_EventScript_PokefanF::
 	msgbox RustboroCity_House2_Text_TrainerSchoolExcellent, MSGBOX_NPC

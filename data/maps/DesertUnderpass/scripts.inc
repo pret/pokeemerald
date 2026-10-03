@@ -1,6 +1,6 @@
 DesertUnderpass_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, DesertUnderpass_OnTransition
-	.byte 0
+	end_map_scripts
 
 DesertUnderpass_OnTransition:
 	setflag FLAG_LANDMARK_DESERT_UNDERPASS

@@ -3,7 +3,7 @@
 @ their original direction (because they're watching/participating in the contests).
 @ They could all be substituted for VAR_LAST_TALKED.
 LilycoveCity_ContestHall_MapScripts::
-	.byte 0
+	end_map_scripts
 
 LilycoveCity_ContestHall_EventScript_Boy1::
 	msgbox LilycoveCity_ContestHall_Text_TodayWonSmartnessContest, MSGBOX_NPC

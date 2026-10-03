@@ -1,5 +1,5 @@
 Route106_MapScripts::
-	.byte 0
+	end_map_scripts
 
 Route106_EventScript_TrainerTipsSign::
 	msgbox Route106_Text_TrainerTips, MSGBOX_SIGN

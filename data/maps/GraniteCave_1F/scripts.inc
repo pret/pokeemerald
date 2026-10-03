@@ -1,5 +1,5 @@
 GraniteCave_1F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 GraniteCave_1F_EventScript_Hiker::
 	lock

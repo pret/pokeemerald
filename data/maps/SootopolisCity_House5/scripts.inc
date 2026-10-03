@@ -1,5 +1,5 @@
 SootopolisCity_House5_MapScripts::
-	.byte 0
+	end_map_scripts
 
 SootopolisCity_House5_EventScript_Maniac::
 	msgbox SootopolisCity_House5_Text_SootopolisMtPyreConnection, MSGBOX_NPC
