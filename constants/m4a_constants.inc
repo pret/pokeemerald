@@ -1,45 +1,7 @@
 #ifndef GUARD_CONSTANTS_M4A_CONSTANTS_INC
 #define GUARD_CONSTANTS_M4A_CONSTANTS_INC
 
-	.equiv ID_NUMBER, 0x68736d53
-
-	.equiv PCM_DMA_BUF_SIZE, 1584
-	.equiv MAX_DIRECTSOUND_CHANNELS, 12
-
-	.equiv C_V, 0x40
-
-	.equiv TONEDATA_TYPE_CGB, 0x07
-	.equiv TONEDATA_TYPE_FIX, 0x08
-	.equiv TONEDATA_TYPE_REV, 0x10
-	.equiv TONEDATA_TYPE_CMP, 0x20
-	.equiv TONEDATA_TYPE_SPL, 0x40 @ key split
-	.equiv TONEDATA_TYPE_RHY, 0x80 @ rhythm
-
-	.equiv TONEDATA_P_S_PAN,  0xc0
-
-	.equiv SOUND_CHANNEL_SF_START,       0x80
-	.equiv SOUND_CHANNEL_SF_STOP,        0x40
-	.equiv SOUND_CHANNEL_SF_SPECIAL,     0x20
-	.equiv SOUND_CHANNEL_SF_LOOP,        0x10
-	.equiv SOUND_CHANNEL_SF_IEC,         0x04
-	.equiv SOUND_CHANNEL_SF_ENV,         0x03
-	.equiv SOUND_CHANNEL_SF_ENV_ATTACK,  0x03
-	.equiv SOUND_CHANNEL_SF_ENV_DECAY,   0x02
-	.equiv SOUND_CHANNEL_SF_ENV_SUSTAIN, 0x01
-	.equiv SOUND_CHANNEL_SF_ENV_RELEASE, 0x00
-	.equiv SOUND_CHANNEL_SF_ON, (SOUND_CHANNEL_SF_START | SOUND_CHANNEL_SF_STOP | SOUND_CHANNEL_SF_IEC | SOUND_CHANNEL_SF_ENV)
-
-	.equiv CGB_CHANNEL_MO_PIT, 0x02
-	.equiv CGB_CHANNEL_MO_VOL, 0x01
-
-	.equiv WAVE_DATA_FLAG_LOOP, 0xC0
-
-	.equiv MPT_FLG_VOLSET, 0x01
-	.equiv MPT_FLG_VOLCHG, 0x03
-	.equiv MPT_FLG_PITSET, 0x04
-	.equiv MPT_FLG_PITCHG, 0x0C
-	.equiv MPT_FLG_START,  0x40
-	.equiv MPT_FLG_EXIST,  0x80
+#include "constants/m4a.h"
 
 	.macro struct_begin
 	.struct 0
@@ -71,35 +33,6 @@
 	struct_field o_ToneData_sustain, 1
 	struct_field o_ToneData_release, 1
 	struct_field ToneData_size, 0
-
-	struct_begin
-	struct_field o_SoundInfo_ident, 4
-	struct_field o_SoundInfo_pcmDmaCounter, 1
-	struct_field o_SoundInfo_reverb, 1
-	struct_field o_SoundInfo_maxChans, 1
-	struct_field o_SoundInfo_masterVolume, 1
-	struct_field o_SoundInfo_freq, 1
-	struct_field o_SoundInfo_mode, 1
-	struct_field o_SoundInfo_c15, 1
-	struct_field o_SoundInfo_pcmDmaPeriod, 1
-	struct_field o_SoundInfo_maxLines, 1
-	struct_field o_SoundInfo_gap, 3
-	struct_field o_SoundInfo_pcmSamplesPerVBlank, 4
-	struct_field o_SoundInfo_pcmFreq, 4
-	struct_field o_SoundInfo_divFreq, 4
-	struct_field o_SoundInfo_cgbChans, 4
-	struct_field o_SoundInfo_MPlayMainHead, 4
-	struct_field o_SoundInfo_musicPlayerHead, 4
-	struct_field o_SoundInfo_CgbSound, 4
-	struct_field o_SoundInfo_CgbOscOff, 4
-	struct_field o_SoundInfo_MidiKeyToCgbFreq, 4
-	struct_field o_SoundInfo_MPlayJumpTable, 4
-	struct_field o_SoundInfo_plynote, 4
-	struct_field o_SoundInfo_ExtVolPit, 4
-	struct_field o_SoundInfo_gap2, 16
-	struct_field o_SoundInfo_chans, MAX_DIRECTSOUND_CHANNELS * 64
-	struct_field o_SoundInfo_pcmBuffer, PCM_DMA_BUF_SIZE * 2
-	struct_field SoundInfo_size, 0
 
 	struct_begin
 	struct_field o_SoundChannel_statusFlags, 1
@@ -136,6 +69,35 @@
 	struct_field o_SoundChannel_xpi, 2
 	struct_field o_SoundChannel_xpc, 2
 	struct_field SoundChannel_size, 0
+
+	struct_begin
+	struct_field o_SoundInfo_ident, 4
+	struct_field o_SoundInfo_pcmDmaCounter, 1
+	struct_field o_SoundInfo_reverb, 1
+	struct_field o_SoundInfo_maxChans, 1
+	struct_field o_SoundInfo_masterVolume, 1
+	struct_field o_SoundInfo_freq, 1
+	struct_field o_SoundInfo_mode, 1
+	struct_field o_SoundInfo_c15, 1
+	struct_field o_SoundInfo_pcmDmaPeriod, 1
+	struct_field o_SoundInfo_maxLines, 1
+	struct_field o_SoundInfo_gap, 3
+	struct_field o_SoundInfo_pcmSamplesPerVBlank, 4
+	struct_field o_SoundInfo_pcmFreq, 4
+	struct_field o_SoundInfo_divFreq, 4
+	struct_field o_SoundInfo_cgbChans, 4
+	struct_field o_SoundInfo_MPlayMainHead, 4
+	struct_field o_SoundInfo_musicPlayerHead, 4
+	struct_field o_SoundInfo_CgbSound, 4
+	struct_field o_SoundInfo_CgbOscOff, 4
+	struct_field o_SoundInfo_MidiKeyToCgbFreq, 4
+	struct_field o_SoundInfo_MPlayJumpTable, 4
+	struct_field o_SoundInfo_plynote, 4
+	struct_field o_SoundInfo_ExtVolPit, 4
+	struct_field o_SoundInfo_gap2, 16
+	struct_field o_SoundInfo_chans, MAX_DIRECTSOUND_CHANNELS * SoundChannel_size
+	struct_field o_SoundInfo_pcmBuffer, PCM_DMA_BUF_SIZE * 2
+	struct_field SoundInfo_size, 0
 
 	struct_begin
 	struct_field o_MusicPlayerTrack_flags, 1

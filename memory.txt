@@ -1,10 +1,14 @@
 #include "gba/defines.h"
 #include "save.h"
+#include "constants/m4a.h"
 
 /* WARNING: 'cpp' cannot resolve 'offsetof' so this won't stay in sync
  * if 'struct SaveSector's 'counter' member moves. */
 #undef SECTOR_COUNTER_OFFSET
 #define SECTOR_COUNTER_OFFSET (SECTOR_SIZE - 4)
+
+gNumMusicPlayers = MUSIC_PLAYER_COUNT;
+gMaxLines = MAX_SCANLINES;
 
 MEMORY
 {
