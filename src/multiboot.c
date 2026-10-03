@@ -441,16 +441,16 @@ static void MultiBootWaitCycles(u32 cycles)
 {
     asm_unified("\
     mov  r2, pc\n\
-    lsrs r2, 24\n\
-    movs r1, 12\n\
-    cmp  r2, 2\n\
+    lsrs r2, r2, #24\n\
+    movs r1, #12\n\
+    cmp  r2, #2\n\
     beq  MultiBootWaitCyclesLoop\n\
-    movs r1, 13\n\
-    cmp  r2, 8\n\
+    movs r1, #13\n\
+    cmp  r2, #8\n\
     beq  MultiBootWaitCyclesLoop\n\
-    movs r1, 4\n\
+    movs r1, #4\n\
 MultiBootWaitCyclesLoop:\n\
-    subs r0, r1\n\
+    subs r0, r0, r1\n\
     bgt  MultiBootWaitCyclesLoop\n\
     bx   lr\n");
 }
