@@ -516,12 +516,12 @@
 	createsprite gFlashingHitSplatSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \relative_to, \animation
 	.endm
 
-	.macro create_fist_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, duration:req, initPosition=ANIM_TARGET
-	createsprite gFistFootSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \duration, \initPosition, 0
+	.macro create_fist_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, duration:req, relative_to=ANIM_TARGET
+	createsprite gFistFootSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \duration, \relative_to, ANIM_FIST
 	.endm
 
-	.macro create_wide_foot_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, duration:req, initPosition=ANIM_TARGET
-	createsprite gFistFootSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \duration, \initPosition, 1
+	.macro create_wide_foot_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, duration:req, relative_to=ANIM_TARGET
+	createsprite gFistFootSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \duration, \relative_to, ANIM_FOOT_WIDE
 	.endm
 
 	.macro create_electric_puff_sprite anim_battler:req, subpriority_offset:req, relative_to:req, x:req, y:req

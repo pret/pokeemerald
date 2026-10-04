@@ -944,7 +944,7 @@ Move_MEGA_PUNCH:
 	simple_palette_blend selector=F_PAL_BG, delay=0, initial_blend_y=0, target_blend_y=16, color=RGB_BLACK
 	setalpha 12, 8
 	playsewithpan SE_M_MEGA_KICK, SOUND_PAN_TARGET
-	createsprite gMegaPunchKickSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 50
+	createsprite gMegaPunchKickSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, ANIM_FIST, 50
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 0, 7, RGB_WHITE
 	delay 50
 	call SetImpactBackground
@@ -987,7 +987,7 @@ Move_MEGA_KICK:
 	simple_palette_blend selector=F_PAL_BG, delay=0, initial_blend_y=0, target_blend_y=16, color=RGB_BLACK
 	setalpha 12, 8
 	playsewithpan SE_M_MEGA_KICK, SOUND_PAN_TARGET
-	createsprite gMegaPunchKickSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 1, 50
+	createsprite gMegaPunchKickSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, ANIM_FOOT_WIDE, 50
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 0, 7, RGB_WHITE
 	delay 50
 	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
@@ -2534,15 +2534,15 @@ Move_THRASH:
 	loadspritegfx ANIM_TAG_HANDS_AND_FEET
 	createvisualtask AnimTask_ThrashMoveMonHorizontal, 2
 	createvisualtask AnimTask_ThrashMoveMonVertical, 2
-	createsprite gFistFootRandomPosSpriteTemplate, ANIM_TARGET, 3, 1, 10, 0
+	createsprite gFistFootRandomPosSpriteTemplate, ANIM_TARGET, 3, 1, 10, ANIM_FIST
 	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_TARGET, 4, 0, 7, 1
 	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
 	delay 28
-	createsprite gFistFootRandomPosSpriteTemplate, ANIM_TARGET, 3, 1, 10, 1
+	createsprite gFistFootRandomPosSpriteTemplate, ANIM_TARGET, 3, 1, 10, ANIM_FOOT_WIDE
 	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_TARGET, 4, 0, 7, 1
 	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
 	delay 28
-	createsprite gFistFootRandomPosSpriteTemplate, ANIM_TARGET, 3, 1, 10, 3
+	createsprite gFistFootRandomPosSpriteTemplate, ANIM_TARGET, 3, 1, 10, ANIM_HAND_LEFT
 	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_TARGET, 8, 0, 16, 1
 	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
 	end
@@ -6455,7 +6455,7 @@ Move_KARATE_CHOP:
 	splitbgprio ANIM_TARGET
 	setalpha 12, 8
 	playsewithpan SE_M_DOUBLE_TEAM, SOUND_PAN_TARGET
-	createsprite gKarateChopSpriteTemplate, ANIM_ATTACKER, 2, -16, 0, 0, 0, 10, 1, 3, 0
+	createsprite gKarateChopSpriteTemplate, ANIM_ATTACKER, 2, -16, 0, 0, 0, 10, ANIM_TARGET, ANIM_HAND_LEFT, 0
 	waitforvisualfinish
 	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
 	create_basic_hitsplat_sprite ANIM_ATTACKER, 3, x=0, y=0, relative_to=ANIM_TARGET, animation=2
@@ -6490,7 +6490,7 @@ Move_JUMP_KICK:
 	setalpha 12, 8
 	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 4, 4
 	delay 3
-	createsprite gJumpKickSpriteTemplate, ANIM_ATTACKER, 2, -16, 8, 0, 0, 10, ANIM_TARGET, 1, 1
+	createsprite gJumpKickSpriteTemplate, ANIM_ATTACKER, 2, -16, 8, 0, 0, 10, ANIM_TARGET, ANIM_FOOT_WIDE, 1
 	playsewithpan SE_M_JUMP_KICK, SOUND_PAN_TARGET
 	waitforvisualfinish
 	create_basic_hitsplat_sprite ANIM_ATTACKER, 1, x=0, y=0, relative_to=ANIM_TARGET, animation=1
@@ -6511,7 +6511,7 @@ Move_HI_JUMP_KICK:
 	delay 10
 	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 3
 	delay 2
-	createsprite gJumpKickSpriteTemplate, ANIM_ATTACKER, 2, -16, 8, 0, 0, 10, ANIM_TARGET, 1, 1
+	createsprite gJumpKickSpriteTemplate, ANIM_ATTACKER, 2, -16, 8, 0, 0, 10, ANIM_TARGET, ANIM_FOOT_WIDE, 1
 	playsewithpan SE_M_JUMP_KICK, SOUND_PAN_TARGET
 	waitforvisualfinish
 	create_basic_hitsplat_sprite ANIM_ATTACKER, 2, x=0, y=0, relative_to=ANIM_TARGET, animation=1
@@ -6532,7 +6532,7 @@ Move_DOUBLE_KICK:
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_DEF_PARTNER
 	setalpha 12, 8
-	createsprite gFistFootRandomPosSpriteTemplate, ANIM_ATTACKER, 3, 1, 20, 1
+	createsprite gFistFootRandomPosSpriteTemplate, ANIM_ATTACKER, 3, 1, 20, ANIM_FOOT_WIDE
 	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 4, 0, 6, 1
 	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
 	waitforvisualfinish
@@ -6878,20 +6878,20 @@ Move_ANCIENT_POWER:
 	monbg ANIM_DEF_PARTNER
 	setalpha 12, 8
 	shake_mon_or_platform velocity=4, shake_timer=1, shake_duration=10, type=SHAKE_BG_Y
-	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, 20, 32, -48, 50, 2
-	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, 0, 32, -38, 25, 5
-	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, 32, 32, -28, 40, 3
-	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, -20, 32, -48, 50, 2
-	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, 20, 32, -28, 60, 1
-	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, 0, 32, -28, 30, 4
+	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, 20, 32, -48, 50, ANIM_ROCK_BIG
+	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, 0, 32, -38, 25, ANIM_ROCK_SMALLEST
+	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, 32, 32, -28, 40, ANIM_ROCK_SMALL
+	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, -20, 32, -48, 50, ANIM_ROCK_BIG
+	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, 20, 32, -28, 60, ANIM_ROCK_BIGGER
+	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, 0, 32, -28, 30, ANIM_ROCK_SMALLER
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 30, 1
 	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
 	delay 10
-	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, 15, 32, -48, 25, 5
-	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, -10, 32, -42, 30, 4
+	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, 15, 32, -48, 25, ANIM_ROCK_SMALLEST
+	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, -10, 32, -42, 30, ANIM_ROCK_SMALLER
 	delay 10
-	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, 0, 32, -42, 25, 5
-	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, -25, 32, -48, 30, 4
+	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, 0, 32, -42, 25, ANIM_ROCK_SMALLEST
+	createsprite gAncientPowerRockSpriteTemplate, ANIM_ATTACKER, 2, -25, 32, -48, 30, ANIM_ROCK_SMALLER
 	waitforvisualfinish
 	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 0, 16, 0, 0, 4
 	delay 3
@@ -8490,7 +8490,7 @@ Move_BLAZE_KICK:
 	monbg ANIM_TARGET
 	setalpha 12, 8
 	playsewithpan SE_M_FLAME_WHEEL, SOUND_PAN_TARGET
-	createsprite gSpinningHandOrFootSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 30
+	createsprite gSpinningHandOrFootSpriteTemplate, ANIM_TARGET, 3, 0, 0, ANIM_FOOT_WIDE, 30
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 0, 7, RGB_WHITE
 	delay 30
 	playsewithpan SE_M_FIRE_PUNCH, SOUND_PAN_TARGET
@@ -8581,7 +8581,7 @@ Move_ARM_THRUST:
 	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 4, 3
 	delay 4
 	playsewithpan SE_M_SWAGGER, SOUND_PAN_TARGET
-	createsprite gArmThrustHandSpriteTemplate, ANIM_TARGET, 2, 10, -8, 14, 3
+	createsprite gArmThrustHandSpriteTemplate, ANIM_TARGET, 2, 10, -8, 14, ANIM_HAND_LEFT
 	waitforvisualfinish
 	createvisualtask AnimTask_RotateMonSpriteToSide, 5, 8, 5, ANIM_ATTACKER, 1
 	playsewithpan SE_M_DOUBLE_SLAP, SOUND_PAN_TARGET
@@ -8733,7 +8733,7 @@ Move_METEOR_MASH:
 	delay 10
 	createsprite gMeteorMashStarSpriteTemplate, ANIM_TARGET, 3, -112, -64, 8, 32, 30
 	delay 40
-	createsprite gSpinningHandOrFootSpriteTemplate, ANIM_TARGET, 3, 0, 0, 0, 30
+	createsprite gSpinningHandOrFootSpriteTemplate, ANIM_TARGET, 3, 0, 0, ANIM_FIST, 30
 	createsprite gMeteorMashStarSpriteTemplate, ANIM_TARGET, 3, -80, -64, 40, 32, 30
 	delay 20
 	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
@@ -9473,19 +9473,19 @@ SeismicTossRockScatter1:
 	create_basic_hitsplat_sprite ANIM_TARGET, 3, x=-10, y=-8, relative_to=ANIM_TARGET, animation=1
 	playsewithpan SE_M_STRENGTH, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 3, 5, 1
-	createsprite gRockScatterSpriteTemplate, ANIM_TARGET, 2, -12, 27, 2, 3
-	createsprite gRockScatterSpriteTemplate, ANIM_TARGET, 2, 8, 28, 3, 4
-	createsprite gRockScatterSpriteTemplate, ANIM_TARGET, 2, -4, 30, 2, 3
-	createsprite gRockScatterSpriteTemplate, ANIM_TARGET, 2, 12, 25, 4, 4
+	createsprite gRockScatterSpriteTemplate, ANIM_TARGET, 2, -12, 27, 2, ANIM_ROCK_SMALL
+	createsprite gRockScatterSpriteTemplate, ANIM_TARGET, 2, 8, 28, 3, ANIM_ROCK_SMALLER
+	createsprite gRockScatterSpriteTemplate, ANIM_TARGET, 2, -4, 30, 2, ANIM_ROCK_SMALL
+	createsprite gRockScatterSpriteTemplate, ANIM_TARGET, 2, 12, 25, 4, ANIM_ROCK_SMALLER
 	return
 SeismicTossRockScatter2:
 	create_basic_hitsplat_sprite ANIM_TARGET, 3, x=10, y=-8, relative_to=ANIM_TARGET, animation=1
 	playsewithpan SE_M_ROCK_THROW, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 3, 5, 1
-	createsprite gRockScatterSpriteTemplate, ANIM_TARGET, 2, -12, 32, 3, 4
-	createsprite gRockScatterSpriteTemplate, ANIM_TARGET, 2, 8, 31, 2, 2
-	createsprite gRockScatterSpriteTemplate, ANIM_TARGET, 2, -4, 28, 2, 3
-	createsprite gRockScatterSpriteTemplate, ANIM_TARGET, 2, 12, 30, 4, 3
+	createsprite gRockScatterSpriteTemplate, ANIM_TARGET, 2, -12, 32, 3, ANIM_ROCK_SMALLER
+	createsprite gRockScatterSpriteTemplate, ANIM_TARGET, 2, 8, 31, 2, ANIM_ROCK_BIG
+	createsprite gRockScatterSpriteTemplate, ANIM_TARGET, 2, -4, 28, 2, ANIM_ROCK_SMALL
+	createsprite gRockScatterSpriteTemplate, ANIM_TARGET, 2, 12, 30, 4, ANIM_ROCK_SMALL
 	return
 
 Move_MAGIC_COAT:
