@@ -1,3 +1,4 @@
+	.include "constants/m4a_constants.inc"
 	.section .rodata
 
 	.include "asm/macros/m4a.inc"

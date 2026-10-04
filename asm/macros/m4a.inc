@@ -1,13 +1,13 @@
-	.macro song label:req, music_player:req, unknown:req
+	.macro song label:req, music_player:req
 	.4byte \label
 	.2byte \music_player
-	.2byte \unknown
+	.2byte \music_player
 	.endm
 
-	.macro music_player info_struct:req, track_struct:req, num_tracks:req, unknown:req
+	.macro music_player info_struct:req, track_struct:req, unknown:req
 	.4byte \info_struct
 	.4byte \track_struct
-	.byte \num_tracks
+	.byte NUM_TRACKS_\track_struct
 	.space 1  @ Padding
 	.2byte \unknown
 	.endm
@@ -18,7 +18,7 @@
 		.global voicegroup_\label 
 		voicegroup_\label:
 	.else
-		.set voicegroup_\label, . - \starting_note * 0xC
+		.set voicegroup_\label, . - \starting_note * ToneData_size
 	.endif
 	.endm
 
@@ -48,4 +48,12 @@
 	.endif
 	.set _last_note, \ending_note
 	.set _last_split, 1
+	.endm
+
+	.macro mplay_track label:req, num_tracks:req
+	.set NUM_TRACKS_\label, \num_tracks
+	.global \label
+	\label:
+	.space \num_tracks * MusicPlayerTrack_size
+	.size \label, .-\label
 	.endm

@@ -1,8 +1,5 @@
 ENTRY(Start)
 
-gNumMusicPlayers = 4;
-gMaxLines = 0;
-
 INCLUDE "memory.ld"
 
 /* Modify the following load addresses as needed to make more room. Alternately, delete both the
@@ -13,7 +10,7 @@ __gfx_load_address = 0x8c00000;
 
 SECTIONS {
 
-    ewram 0x2000000 (NOLOAD) :
+    ewram ORIGIN(EWRAM) (NOLOAD) :
     ALIGN(4)
     {
         INCLUDE "sym_ewram.ld"
@@ -24,7 +21,7 @@ SECTIONS {
         *libc.a:mallocr.o(.data);
     } > EWRAM
 
-    iwram 0x3000000 (NOLOAD) :
+    iwram ORIGIN(IWRAM) (NOLOAD) :
     ALIGN(4)
     {
         /* .bss starts at 0x3000000 */
@@ -42,9 +39,8 @@ SECTIONS {
     } > IWRAM
 
     /* BEGIN ROM DATA */
-    . = 0x8000000;
 
-    .text :
+    .text ORIGIN(ROM) :
     ALIGN(4)
     {
         src/rom_header.o(.text);
@@ -697,13 +693,13 @@ SECTIONS {
         src/international_string_util.o(.rodata);
         src/mystery_event_msg.o(.rodata);
         data/mystery_gift.o(.rodata);
-        src/m4a_tables.o(.rodata);
-        data/sound_data.o(.rodata);
     } > ROM =0
 
-    song_data :
+    sound_data :
     ALIGN(4)
     {
+        src/m4a_tables.o(.rodata);
+        data/sound_data.o(.rodata);
         sound/songs/midi/mus_dummy.o(.rodata);
         sound/songs/midi/se_use_item.o(.rodata);
         sound/songs/midi/se_pc_login.o(.rodata);
