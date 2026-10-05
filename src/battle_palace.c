@@ -172,9 +172,18 @@ static void IncrementPalaceStreak(void)
     {
         gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode]++;
 
-        // Whatever GF planned to do here, they messed up big time.
-        if (gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][(lvlMode > gSaveBlock2Ptr->frontier.palaceRecordWinStreaks[battleMode][lvlMode]) ? 1 : 0])
-            gSaveBlock2Ptr->frontier.palaceRecordWinStreaks[battleMode][lvlMode] = gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode];
+        // BUG: Missing ']' after [lvlMode] parses the comparison as an array index, so the
+        // wrong win streak slot is checked and the record is overwritten every Spenser win,
+        // even when the current streak is below the saved record.
+#ifdef BUGFIX
+        if (gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode] > gSaveBlock2Ptr->frontier.palaceRecordWinStreaks[battleMode][lvlMode])
+            gSaveBlock2Ptr->frontier.palaceRecordWinStreaks[battleMode][lvlMode] =
+                gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode];
+#else
+        if (gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode > gSaveBlock2Ptr->frontier.palaceRecordWinStreaks[battleMode][lvlMode]])
+            gSaveBlock2Ptr->frontier.palaceRecordWinStreaks[battleMode][lvlMode] =
+                gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode];
+#endif
     }
 }
 
@@ -189,9 +198,8 @@ static void SavePalaceChallenge(void)
 static void SetRandomPalacePrize(void)
 {
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
-    if (gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode] > 41)
+    if (gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][gSaveBlock2Ptr->frontier.lvlMode] > 41)
         gSaveBlock2Ptr->frontier.palacePrize = sBattlePalaceLatePrizes[Random() % ARRAY_COUNT(sBattlePalaceLatePrizes)];
     else
         gSaveBlock2Ptr->frontier.palacePrize = sBattlePalaceEarlyPrizes[Random() % ARRAY_COUNT(sBattlePalaceEarlyPrizes)];
