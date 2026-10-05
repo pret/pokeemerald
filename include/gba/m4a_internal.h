@@ -279,7 +279,7 @@ struct MusicPlayerTrack
     u8 key;
     u8 velocity;
     u8 runningStatus;
-    u8 keyM;
+    s8 keyM;
     u8 pitM;
     s8 keyShift;
     s8 keyShiftX;
@@ -342,6 +342,7 @@ struct MusicPlayerInfo
     u16 fadeOI;
     u16 fadeOC;
     u16 fadeOV;
+    u16 dummy;
     struct MusicPlayerTrack *tracks;
     struct ToneData *tone;
     u32 ident;
@@ -371,16 +372,13 @@ extern const struct Song gSongTable[];
 
 extern u8 gMPlayMemAccArea[];
 
-//u8 gPokemonCrySong[52];
-//u8 gPokemonCrySongs[52 * MAX_POKEMON_CRIES];
-
 #define MAX_POKEMON_CRIES 2
 
 extern struct PokemonCrySong gPokemonCrySong;
-extern struct PokemonCrySong gPokemonCrySongs[];
+extern struct PokemonCrySong gPokemonCrySongs[MAX_POKEMON_CRIES];
 
-extern struct MusicPlayerInfo gPokemonCryMusicPlayers[];
-extern struct MusicPlayerTrack gPokemonCryTracks[];
+extern struct MusicPlayerInfo gPokemonCryMusicPlayers[MAX_POKEMON_CRIES];
+extern struct MusicPlayerTrack gPokemonCryTracks[MAX_POKEMON_CRIES][2];
 
 extern char SoundMainRAM[];
 

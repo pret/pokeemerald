@@ -308,7 +308,7 @@ _081DD068:
 	mov r10, r10, lsl 16
 	mov r11, r11, lsl 16
 	ldrb r0, [r4, o_SoundChannel_type]
-	tst r0, 0x8
+	tst r0, TONEDATA_TYPE_FIX
 	beq _081DD19C
 _081DD07C:
 	cmp r2, 0x4
