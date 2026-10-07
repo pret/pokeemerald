@@ -475,219 +475,219 @@ static const u8 sRetroMailDesc[] = _(
 
 // Berries
 static const u8 sCheriBerryDesc[] = _(
-    "A hold item that\n"
-    "heals paralysis\n"
-    "in battle.");
+    "Om vast te houden.\n"
+    "Geneest verlamming\n"
+    "in gevecht.");
 
 static const u8 sChestoBerryDesc[] = _(
-    "A hold item that\n"
-    "awakens POKéMON\n"
-    "in battle.");
+    "Om vast te houden.\n"
+    "Maakt wakker in\n"
+    "gevecht.");
 
 static const u8 sPechaBerryDesc[] = _(
-    "A hold item that\n"
-    "heals poisoning\n"
-    "in battle.");
+    "Om vast te houden.\n"
+    "Geneest gif in\n"
+    "gevecht.");
 
 static const u8 sRawstBerryDesc[] = _(
-    "A hold item that\n"
-    "heals a burn in\n"
-    "battle.");
+    "Om vast te houden.\n"
+    "Geneest brandwond\n"
+    "in gevecht.");
 
 static const u8 sAspearBerryDesc[] = _(
-    "A hold item that\n"
-    "defrosts POKéMON\n"
-    "in battle.");
+    "Om vast te houden.\n"
+    "Ontdooit in\n"
+    "gevecht.");
 
 static const u8 sLeppaBerryDesc[] = _(
-    "A hold item that\n"
-    "restores 10 PP in\n"
-    "battle.");
+    "Om vast te houden.\n"
+    "Geeft 10 PP terug\n"
+    "in gevecht.");
 
 static const u8 sOranBerryDesc[] = _(
-    "A hold item that\n"
-    "restores 10 HP in\n"
-    "battle.");
+    "Om vast te houden.\n"
+    "Geeft 10 HP terug\n"
+    "in gevecht.");
 
 static const u8 sPersimBerryDesc[] = _(
-    "A hold item that\n"
-    "heals confusion\n"
-    "in battle.");
+    "Om vast te houden.\n"
+    "Haalt uit de war\n"
+    "in gevecht.");
 
 static const u8 sLumBerryDesc[] = _(
-    "A hold item that\n"
-    "heals any status\n"
-    "problem in battle.");
+    "Om vast te houden.\n"
+    "Geneest elk\n"
+    "kwaaltje in gevecht.");
 
 static const u8 sSitrusBerryDesc[] = _(
-    "A hold item that\n"
-    "restores 30 HP in\n"
-    "battle.");
+    "Om vast te houden.\n"
+    "Geeft 30 HP terug\n"
+    "in gevecht.");
 
 static const u8 sFigyBerryDesc[] = _(
-    "A hold item that\n"
-    "restores HP but\n"
-    "may confuse.");
+    "Om vast te houden.\n"
+    "Geeft HP terug,\n"
+    "maar kan verwarren.");
 
 static const u8 sWikiBerryDesc[] = _(
-    "A hold item that\n"
-    "restores HP but\n"
-    "may confuse.");
+    "Om vast te houden.\n"
+    "Geeft HP terug,\n"
+    "maar kan verwarren.");
 
 static const u8 sMagoBerryDesc[] = _(
-    "A hold item that\n"
-    "restores HP but\n"
-    "may confuse.");
+    "Om vast te houden.\n"
+    "Geeft HP terug,\n"
+    "maar kan verwarren.");
 
 static const u8 sAguavBerryDesc[] = _(
-    "A hold item that\n"
-    "restores HP but\n"
-    "may confuse.");
+    "Om vast te houden.\n"
+    "Geeft HP terug,\n"
+    "maar kan verwarren.");
 
 static const u8 sIapapaBerryDesc[] = _(
-    "A hold item that\n"
-    "restores HP but\n"
-    "may confuse.");
+    "Om vast te houden.\n"
+    "Geeft HP terug,\n"
+    "maar kan verwarren.");
 
 static const u8 sRazzBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow RAZZ.");
+    "Voor {POKEBLOCK}S.\n"
+    "Plant hem voor\n"
+    "meer RAZZ.");
 
 static const u8 sBlukBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow BLUK.");
+    "Voor {POKEBLOCK}S.\n"
+    "Plant hem voor\n"
+    "meer BLUK.");
 
 static const u8 sNanabBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow NANAB.");
+    "Voor {POKEBLOCK}S.\n"
+    "Plant hem voor\n"
+    "meer NANAB.");
 
 static const u8 sWepearBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow WEPEAR.");
+    "Voor {POKEBLOCK}S.\n"
+    "Plant hem voor\n"
+    "meer WEPEAR.");
 
 static const u8 sPinapBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow PINAP.");
+    "Voor {POKEBLOCK}S.\n"
+    "Plant hem voor\n"
+    "meer PINAP.");
 
 static const u8 sPomegBerryDesc[] = _(
-    "Makes a POKéMON\n"
-    "friendly but lowers\n"
-    "base HP.");
+    "POKéMON wordt\n"
+    "vriendelijker.\n"
+    "Minder HP.");
 
 static const u8 sKelpsyBerryDesc[] = _(
-    "Makes a POKéMON\n"
-    "friendly but lowers\n"
-    "base ATTACK.");
+    "POKéMON wordt\n"
+    "vriendelijker.\n"
+    "Minder AANVAL.");
 
 static const u8 sQualotBerryDesc[] = _(
-    "Makes a POKéMON\n"
-    "friendly but lowers\n"
-    "base DEFENSE.");
+    "POKéMON wordt\n"
+    "vriendelijker.\n"
+    "Minder VERDEDIGING.");
 
 static const u8 sHondewBerryDesc[] = _(
-    "Makes a POKéMON\n"
-    "friendly but lowers\n"
-    "base SP. ATK.");
+    "POKéMON wordt\n"
+    "vriendelijker.\n"
+    "Minder SP. AANV.");
 
 static const u8 sGrepaBerryDesc[] = _(
-    "Makes a POKéMON\n"
-    "friendly but lowers\n"
-    "base SP. DEF.");
+    "POKéMON wordt\n"
+    "vriendelijker.\n"
+    "Minder SP. VERD.");
 
 static const u8 sTamatoBerryDesc[] = _(
-    "Makes a POKéMON\n"
-    "friendly but lowers\n"
-    "base SPEED.");
+    "POKéMON wordt\n"
+    "vriendelijker.\n"
+    "Minder SNELHEID.");
 
 static const u8 sCornnBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow CORNN.");
+    "Voor {POKEBLOCK}S.\n"
+    "Plant hem voor\n"
+    "meer CORNN.");
 
 static const u8 sMagostBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow MAGOST.");
+    "Voor {POKEBLOCK}S.\n"
+    "Plant hem voor\n"
+    "meer MAGOST.");
 
 static const u8 sRabutaBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow RABUTA.");
+    "Voor {POKEBLOCK}S.\n"
+    "Plant hem voor\n"
+    "meer RABUTA.");
 
 static const u8 sNomelBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow NOMEL.");
+    "Voor {POKEBLOCK}S.\n"
+    "Plant hem voor\n"
+    "meer NOMEL.");
 
 static const u8 sSpelonBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow SPELON.");
+    "Voor {POKEBLOCK}S.\n"
+    "Plant hem voor\n"
+    "meer SPELON.");
 
 static const u8 sPamtreBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow PAMTRE.");
+    "Voor {POKEBLOCK}S.\n"
+    "Plant hem voor\n"
+    "meer PAMTRE.");
 
 static const u8 sWatmelBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow WATMEL.");
+    "Voor {POKEBLOCK}S.\n"
+    "Plant hem voor\n"
+    "meer WATMEL.");
 
 static const u8 sDurinBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow DURIN.");
+    "Voor {POKEBLOCK}S.\n"
+    "Plant hem voor\n"
+    "meer DURIN.");
 
 static const u8 sBelueBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow BELUE.");
+    "Voor {POKEBLOCK}S.\n"
+    "Plant hem voor\n"
+    "meer BELUE.");
 
 static const u8 sLiechiBerryDesc[] = _(
-    "A hold item that\n"
-    "raises ATTACK in\n"
-    "a pinch.");
+    "Om vast te houden.\n"
+    "Meer AANVAL\n"
+    "in nood.");
 
 static const u8 sGanlonBerryDesc[] = _(
-    "A hold item that\n"
-    "raises DEFENSE in\n"
-    "a pinch.");
+    "Om vast te houden.\n"
+    "Meer VERDEDIGING\n"
+    "in nood.");
 
 static const u8 sSalacBerryDesc[] = _(
-    "A hold item that\n"
-    "raises SPEED in\n"
-    "a pinch.");
+    "Om vast te houden.\n"
+    "Meer SNELHEID\n"
+    "in nood.");
 
 static const u8 sPetayaBerryDesc[] = _(
-    "A hold item that\n"
-    "raises SP. ATK in\n"
-    "a pinch.");
+    "Om vast te houden.\n"
+    "Meer SP. AANV\n"
+    "in nood.");
 
 static const u8 sApicotBerryDesc[] = _(
-    "A hold item that\n"
-    "raises SP. DEF in\n"
-    "a pinch.");
+    "Om vast te houden.\n"
+    "Meer SP. VERD\n"
+    "in nood.");
 
 static const u8 sLansatBerryDesc[] = _(
-    "A hold item that\n"
-    "ups the critical-\n"
-    "hit rate in a pinch.");
+    "Om vast te houden.\n"
+    "Vaker voltreffer\n"
+    "in nood.");
 
 static const u8 sStarfBerryDesc[] = _(
-    "A hold item that\n"
-    "sharply boosts a\n"
-    "stat in a pinch.");
+    "Om vast te houden.\n"
+    "Iets wordt flink\n"
+    "sterker in nood.");
 
 static const u8 sEnigmaBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow a mystery.");
+    "Voor {POKEBLOCK}S.\n"
+    "Plant hem voor\n"
+    "een verrassing.");
 
 // Hold items
 static const u8 sBrightPowderDesc[] = _(

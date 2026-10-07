@@ -71,3 +71,10 @@ CONTEST_SMART	SMART	SLIM
 CONTEST_TOUGH	TOUGH	STERK	
 WORD_CONFUSE	confuse	verwarren	"Kan verwarren." (short form of in de war brengen)
 WORD_PHYSICAL	physical attack	klap	"Minder schade van klappen."
+WORD_COINS	COINS	MUNTEN	game corner coins
+WORD_MAIL	MAIL	BRIEF	mail items: ORANJEBRIEF etc.
+WORD_HOLD_ITEM	a hold item that	Om vast te houden.	first line of held-item descriptions
+WORD_KEY_ITEMS	KEY ITEMS	BELANGRIJK	bag pocket
+WORD_ITEMS	ITEMS	VOORWERPEN	bag pocket
+NAME_BERRY_BLENDER	BERRY BLENDER	BESSENMIXER	used in POKéBLOCK CASE description; apply in dialogue phase
+WORD_FIRMNESS	FIRM / SIZE	HARD / MAAT	berry tag labels

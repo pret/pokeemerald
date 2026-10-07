@@ -135,3 +135,13 @@ Until then dialogue is English text with Dutch names inserted where the game fil
   | Moves | Summary moves page (names + descriptions), battle move menu, contest description toggle |
   | Items | Bag (every pocket, incl. the TM/HM pocket `No01 …` rows), a Poké Mart buy list, "obtained X" message |
   | Berries | Berry tag screen (name, firmness, both description lines), berry pocket |
+
+## Status (2026-10-07)
+- [x] Batch 0: tooling, CLAUDE.md, glossary
+- [x] Batch 1: abilities
+- [x] Batch 2+3: moves + contest effect descriptions
+- [x] Batch 4+5: items (incl. key items, TM/HM descriptions)
+- [x] Batch 6: berries (names stay, "CHERI BES", descriptions, firmness, suffix)
+- [x] Batch 7: hardcoded duplicates in `src/strings.c` / `src/battle_message.c` (pockets, flutes, shards, fossils, vending drinks)
+- [ ] In-game review by the user
+- [ ] Later: dialogue phase (map scripts, battle messages, berry blender text, `{POKEBLOCK} CASE` in dialogue)

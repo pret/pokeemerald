@@ -132,49 +132,49 @@ ITEM_TROPIC_MAIL	TROPIC MAIL	TROPENBRIEF
 ITEM_DREAM_MAIL	DREAM MAIL	DROOMBRIEF	
 ITEM_FAB_MAIL	FAB MAIL	TOPBRIEF	
 ITEM_RETRO_MAIL	RETRO MAIL	RETROBRIEF	
-ITEM_CHERI_BERRY	CHERI BERRY		
-ITEM_CHESTO_BERRY	CHESTO BERRY		
-ITEM_PECHA_BERRY	PECHA BERRY		
-ITEM_RAWST_BERRY	RAWST BERRY		
-ITEM_ASPEAR_BERRY	ASPEAR BERRY		
-ITEM_LEPPA_BERRY	LEPPA BERRY		
-ITEM_ORAN_BERRY	ORAN BERRY		
-ITEM_PERSIM_BERRY	PERSIM BERRY		
-ITEM_LUM_BERRY	LUM BERRY		
-ITEM_SITRUS_BERRY	SITRUS BERRY		
-ITEM_FIGY_BERRY	FIGY BERRY		
-ITEM_WIKI_BERRY	WIKI BERRY		
-ITEM_MAGO_BERRY	MAGO BERRY		
-ITEM_AGUAV_BERRY	AGUAV BERRY		
-ITEM_IAPAPA_BERRY	IAPAPA BERRY		
-ITEM_RAZZ_BERRY	RAZZ BERRY		
-ITEM_BLUK_BERRY	BLUK BERRY		
-ITEM_NANAB_BERRY	NANAB BERRY		
-ITEM_WEPEAR_BERRY	WEPEAR BERRY		
-ITEM_PINAP_BERRY	PINAP BERRY		
-ITEM_POMEG_BERRY	POMEG BERRY		
-ITEM_KELPSY_BERRY	KELPSY BERRY		
-ITEM_QUALOT_BERRY	QUALOT BERRY		
-ITEM_HONDEW_BERRY	HONDEW BERRY		
-ITEM_GREPA_BERRY	GREPA BERRY		
-ITEM_TAMATO_BERRY	TAMATO BERRY		
-ITEM_CORNN_BERRY	CORNN BERRY		
-ITEM_MAGOST_BERRY	MAGOST BERRY		
-ITEM_RABUTA_BERRY	RABUTA BERRY		
-ITEM_NOMEL_BERRY	NOMEL BERRY		
-ITEM_SPELON_BERRY	SPELON BERRY		
-ITEM_PAMTRE_BERRY	PAMTRE BERRY		
-ITEM_WATMEL_BERRY	WATMEL BERRY		
-ITEM_DURIN_BERRY	DURIN BERRY		
-ITEM_BELUE_BERRY	BELUE BERRY		
-ITEM_LIECHI_BERRY	LIECHI BERRY		
-ITEM_GANLON_BERRY	GANLON BERRY		
-ITEM_SALAC_BERRY	SALAC BERRY		
-ITEM_PETAYA_BERRY	PETAYA BERRY		
-ITEM_APICOT_BERRY	APICOT BERRY		
-ITEM_LANSAT_BERRY	LANSAT BERRY		
-ITEM_STARF_BERRY	STARF BERRY		
-ITEM_ENIGMA_BERRY	ENIGMA BERRY		
+ITEM_CHERI_BERRY	CHERI BERRY	CHERI BES	
+ITEM_CHESTO_BERRY	CHESTO BERRY	CHESTO BES	
+ITEM_PECHA_BERRY	PECHA BERRY	PECHA BES	
+ITEM_RAWST_BERRY	RAWST BERRY	RAWST BES	
+ITEM_ASPEAR_BERRY	ASPEAR BERRY	ASPEAR BES	
+ITEM_LEPPA_BERRY	LEPPA BERRY	LEPPA BES	
+ITEM_ORAN_BERRY	ORAN BERRY	ORAN BES	
+ITEM_PERSIM_BERRY	PERSIM BERRY	PERSIM BES	
+ITEM_LUM_BERRY	LUM BERRY	LUM BES	
+ITEM_SITRUS_BERRY	SITRUS BERRY	SITRUS BES	
+ITEM_FIGY_BERRY	FIGY BERRY	FIGY BES	
+ITEM_WIKI_BERRY	WIKI BERRY	WIKI BES	
+ITEM_MAGO_BERRY	MAGO BERRY	MAGO BES	
+ITEM_AGUAV_BERRY	AGUAV BERRY	AGUAV BES	
+ITEM_IAPAPA_BERRY	IAPAPA BERRY	IAPAPA BES	
+ITEM_RAZZ_BERRY	RAZZ BERRY	RAZZ BES	
+ITEM_BLUK_BERRY	BLUK BERRY	BLUK BES	
+ITEM_NANAB_BERRY	NANAB BERRY	NANAB BES	
+ITEM_WEPEAR_BERRY	WEPEAR BERRY	WEPEAR BES	
+ITEM_PINAP_BERRY	PINAP BERRY	PINAP BES	
+ITEM_POMEG_BERRY	POMEG BERRY	POMEG BES	
+ITEM_KELPSY_BERRY	KELPSY BERRY	KELPSY BES	
+ITEM_QUALOT_BERRY	QUALOT BERRY	QUALOT BES	
+ITEM_HONDEW_BERRY	HONDEW BERRY	HONDEW BES	
+ITEM_GREPA_BERRY	GREPA BERRY	GREPA BES	
+ITEM_TAMATO_BERRY	TAMATO BERRY	TAMATO BES	
+ITEM_CORNN_BERRY	CORNN BERRY	CORNN BES	
+ITEM_MAGOST_BERRY	MAGOST BERRY	MAGOST BES	
+ITEM_RABUTA_BERRY	RABUTA BERRY	RABUTA BES	
+ITEM_NOMEL_BERRY	NOMEL BERRY	NOMEL BES	
+ITEM_SPELON_BERRY	SPELON BERRY	SPELON BES	
+ITEM_PAMTRE_BERRY	PAMTRE BERRY	PAMTRE BES	
+ITEM_WATMEL_BERRY	WATMEL BERRY	WATMEL BES	
+ITEM_DURIN_BERRY	DURIN BERRY	DURIN BES	
+ITEM_BELUE_BERRY	BELUE BERRY	BELUE BES	
+ITEM_LIECHI_BERRY	LIECHI BERRY	LIECHI BES	
+ITEM_GANLON_BERRY	GANLON BERRY	GANLON BES	
+ITEM_SALAC_BERRY	SALAC BERRY	SALAC BES	
+ITEM_PETAYA_BERRY	PETAYA BERRY	PETAYA BES	
+ITEM_APICOT_BERRY	APICOT BERRY	APICOT BES	
+ITEM_LANSAT_BERRY	LANSAT BERRY	LANSAT BES	
+ITEM_STARF_BERRY	STARF BERRY	STARF BES	
+ITEM_ENIGMA_BERRY	ENIGMA BERRY	ENIGMA BES	
 ITEM_UNUSED_BERRY_1	????????		
 ITEM_UNUSED_BERRY_2	????????		
 ITEM_UNUSED_BERRY_3	????????		
@@ -476,49 +476,49 @@ sTropicMailDesc	A BELLOSSOM-print\nMAIL to be held by\na POKéMON.	Een brief met
 sDreamMailDesc	MAIL featuring a\nsketch of the\nholding POKéMON.	Een brief met een\ntekening van de\nPOKéMON zelf.	
 sFabMailDesc	A gorgeous-print\nMAIL to be held\nby a POKéMON.	Een prachtige\nbrief. Voor een\nPOKéMON.	
 sRetroMailDesc	MAIL featuring the\ndrawings of three\nPOKéMON.	Een brief met\ntekeningen van\ndrie POKéMON.	
-sCheriBerryDesc	A hold item that\nheals paralysis\nin battle.		
-sChestoBerryDesc	A hold item that\nawakens POKéMON\nin battle.		
-sPechaBerryDesc	A hold item that\nheals poisoning\nin battle.		
-sRawstBerryDesc	A hold item that\nheals a burn in\nbattle.		
-sAspearBerryDesc	A hold item that\ndefrosts POKéMON\nin battle.		
-sLeppaBerryDesc	A hold item that\nrestores 10 PP in\nbattle.		
-sOranBerryDesc	A hold item that\nrestores 10 HP in\nbattle.		
-sPersimBerryDesc	A hold item that\nheals confusion\nin battle.		
-sLumBerryDesc	A hold item that\nheals any status\nproblem in battle.		
-sSitrusBerryDesc	A hold item that\nrestores 30 HP in\nbattle.		
-sFigyBerryDesc	A hold item that\nrestores HP but\nmay confuse.		
-sWikiBerryDesc	A hold item that\nrestores HP but\nmay confuse.		
-sMagoBerryDesc	A hold item that\nrestores HP but\nmay confuse.		
-sAguavBerryDesc	A hold item that\nrestores HP but\nmay confuse.		
-sIapapaBerryDesc	A hold item that\nrestores HP but\nmay confuse.		
-sRazzBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow RAZZ.		
-sBlukBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow BLUK.		
-sNanabBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow NANAB.		
-sWepearBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow WEPEAR.		
-sPinapBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow PINAP.		
-sPomegBerryDesc	Makes a POKéMON\nfriendly but lowers\nbase HP.		
-sKelpsyBerryDesc	Makes a POKéMON\nfriendly but lowers\nbase ATTACK.		
-sQualotBerryDesc	Makes a POKéMON\nfriendly but lowers\nbase DEFENSE.		
-sHondewBerryDesc	Makes a POKéMON\nfriendly but lowers\nbase SP. ATK.		
-sGrepaBerryDesc	Makes a POKéMON\nfriendly but lowers\nbase SP. DEF.		
-sTamatoBerryDesc	Makes a POKéMON\nfriendly but lowers\nbase SPEED.		
-sCornnBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow CORNN.		
-sMagostBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow MAGOST.		
-sRabutaBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow RABUTA.		
-sNomelBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow NOMEL.		
-sSpelonBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow SPELON.		
-sPamtreBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow PAMTRE.		
-sWatmelBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow WATMEL.		
-sDurinBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow DURIN.		
-sBelueBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow BELUE.		
-sLiechiBerryDesc	A hold item that\nraises ATTACK in\na pinch.		
-sGanlonBerryDesc	A hold item that\nraises DEFENSE in\na pinch.		
-sSalacBerryDesc	A hold item that\nraises SPEED in\na pinch.		
-sPetayaBerryDesc	A hold item that\nraises SP. ATK in\na pinch.		
-sApicotBerryDesc	A hold item that\nraises SP. DEF in\na pinch.		
-sLansatBerryDesc	A hold item that\nups the critical-\nhit rate in a pinch.		
-sStarfBerryDesc	A hold item that\nsharply boosts a\nstat in a pinch.		
-sEnigmaBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow a mystery.		
+sCheriBerryDesc	A hold item that\nheals paralysis\nin battle.	Om vast te houden.\nGeneest verlamming\nin gevecht.	
+sChestoBerryDesc	A hold item that\nawakens POKéMON\nin battle.	Om vast te houden.\nMaakt wakker in\ngevecht.	
+sPechaBerryDesc	A hold item that\nheals poisoning\nin battle.	Om vast te houden.\nGeneest gif in\ngevecht.	
+sRawstBerryDesc	A hold item that\nheals a burn in\nbattle.	Om vast te houden.\nGeneest brandwond\nin gevecht.	
+sAspearBerryDesc	A hold item that\ndefrosts POKéMON\nin battle.	Om vast te houden.\nOntdooit in\ngevecht.	
+sLeppaBerryDesc	A hold item that\nrestores 10 PP in\nbattle.	Om vast te houden.\nGeeft 10 PP terug\nin gevecht.	
+sOranBerryDesc	A hold item that\nrestores 10 HP in\nbattle.	Om vast te houden.\nGeeft 10 HP terug\nin gevecht.	
+sPersimBerryDesc	A hold item that\nheals confusion\nin battle.	Om vast te houden.\nHaalt uit de war\nin gevecht.	
+sLumBerryDesc	A hold item that\nheals any status\nproblem in battle.	Om vast te houden.\nGeneest elk\nkwaaltje in gevecht.	
+sSitrusBerryDesc	A hold item that\nrestores 30 HP in\nbattle.	Om vast te houden.\nGeeft 30 HP terug\nin gevecht.	
+sFigyBerryDesc	A hold item that\nrestores HP but\nmay confuse.	Om vast te houden.\nGeeft HP terug,\nmaar kan verwarren.	
+sWikiBerryDesc	A hold item that\nrestores HP but\nmay confuse.	Om vast te houden.\nGeeft HP terug,\nmaar kan verwarren.	
+sMagoBerryDesc	A hold item that\nrestores HP but\nmay confuse.	Om vast te houden.\nGeeft HP terug,\nmaar kan verwarren.	
+sAguavBerryDesc	A hold item that\nrestores HP but\nmay confuse.	Om vast te houden.\nGeeft HP terug,\nmaar kan verwarren.	
+sIapapaBerryDesc	A hold item that\nrestores HP but\nmay confuse.	Om vast te houden.\nGeeft HP terug,\nmaar kan verwarren.	
+sRazzBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow RAZZ.	Voor {POKEBLOCK}S.\nPlant hem voor\nmeer RAZZ.	
+sBlukBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow BLUK.	Voor {POKEBLOCK}S.\nPlant hem voor\nmeer BLUK.	
+sNanabBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow NANAB.	Voor {POKEBLOCK}S.\nPlant hem voor\nmeer NANAB.	
+sWepearBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow WEPEAR.	Voor {POKEBLOCK}S.\nPlant hem voor\nmeer WEPEAR.	
+sPinapBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow PINAP.	Voor {POKEBLOCK}S.\nPlant hem voor\nmeer PINAP.	
+sPomegBerryDesc	Makes a POKéMON\nfriendly but lowers\nbase HP.	POKéMON wordt\nvriendelijker.\nMinder HP.	
+sKelpsyBerryDesc	Makes a POKéMON\nfriendly but lowers\nbase ATTACK.	POKéMON wordt\nvriendelijker.\nMinder AANVAL.	
+sQualotBerryDesc	Makes a POKéMON\nfriendly but lowers\nbase DEFENSE.	POKéMON wordt\nvriendelijker.\nMinder VERDEDIGING.	
+sHondewBerryDesc	Makes a POKéMON\nfriendly but lowers\nbase SP. ATK.	POKéMON wordt\nvriendelijker.\nMinder SP. AANV.	
+sGrepaBerryDesc	Makes a POKéMON\nfriendly but lowers\nbase SP. DEF.	POKéMON wordt\nvriendelijker.\nMinder SP. VERD.	
+sTamatoBerryDesc	Makes a POKéMON\nfriendly but lowers\nbase SPEED.	POKéMON wordt\nvriendelijker.\nMinder SNELHEID.	
+sCornnBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow CORNN.	Voor {POKEBLOCK}S.\nPlant hem voor\nmeer CORNN.	
+sMagostBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow MAGOST.	Voor {POKEBLOCK}S.\nPlant hem voor\nmeer MAGOST.	
+sRabutaBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow RABUTA.	Voor {POKEBLOCK}S.\nPlant hem voor\nmeer RABUTA.	
+sNomelBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow NOMEL.	Voor {POKEBLOCK}S.\nPlant hem voor\nmeer NOMEL.	
+sSpelonBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow SPELON.	Voor {POKEBLOCK}S.\nPlant hem voor\nmeer SPELON.	
+sPamtreBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow PAMTRE.	Voor {POKEBLOCK}S.\nPlant hem voor\nmeer PAMTRE.	
+sWatmelBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow WATMEL.	Voor {POKEBLOCK}S.\nPlant hem voor\nmeer WATMEL.	
+sDurinBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow DURIN.	Voor {POKEBLOCK}S.\nPlant hem voor\nmeer DURIN.	
+sBelueBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow BELUE.	Voor {POKEBLOCK}S.\nPlant hem voor\nmeer BELUE.	
+sLiechiBerryDesc	A hold item that\nraises ATTACK in\na pinch.	Om vast te houden.\nMeer AANVAL\nin nood.	
+sGanlonBerryDesc	A hold item that\nraises DEFENSE in\na pinch.	Om vast te houden.\nMeer VERDEDIGING\nin nood.	
+sSalacBerryDesc	A hold item that\nraises SPEED in\na pinch.	Om vast te houden.\nMeer SNELHEID\nin nood.	
+sPetayaBerryDesc	A hold item that\nraises SP. ATK in\na pinch.	Om vast te houden.\nMeer SP. AANV\nin nood.	
+sApicotBerryDesc	A hold item that\nraises SP. DEF in\na pinch.	Om vast te houden.\nMeer SP. VERD\nin nood.	
+sLansatBerryDesc	A hold item that\nups the critical-\nhit rate in a pinch.	Om vast te houden.\nVaker voltreffer\nin nood.	
+sStarfBerryDesc	A hold item that\nsharply boosts a\nstat in a pinch.	Om vast te houden.\nIets wordt flink\nsterker in nood.	
+sEnigmaBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow a mystery.	Voor {POKEBLOCK}S.\nPlant hem voor\neen verrassing.	
 sBrightPowderDesc	A hold item that\ncasts a glare to\nreduce accuracy.	Om vast te houden.\nVerblindt en\nverlaagt raakkans.	
 sWhiteHerbDesc	A hold item that\nrestores any\nlowered stat.	Om vast te houden.\nHeft verzwakking\nweer op.	
 sMachoBraceDesc	A hold item that\npromotes growth,\nbut reduces SPEED.	Om vast te houden.\nGroeit beter, maar\nis trager.	
