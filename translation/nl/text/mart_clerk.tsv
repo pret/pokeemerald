@@ -1,4 +1,4 @@
 key	english	dutch	notes
-gText_HowMayIServeYou	Welcome!\pHow may I serve you?		
-gText_PleaseComeAgain	Please come again!		
-gText_PlayerWhatCanIDoForYou	{PLAYER}{KUN}, welcome!\pWhat can I do for you?		
+gText_HowMayIServeYou	Welcome!\pHow may I serve you?	Welkom!\pWat mag het zijn?	
+gText_PleaseComeAgain	Please come again!	Kom gauw weer terug!	
+gText_PlayerWhatCanIDoForYou	{PLAYER}{KUN}, welcome!\pWhat can I do for you?	{PLAYER}{KUN}, welkom!\pWat kan ik voor je doen?	

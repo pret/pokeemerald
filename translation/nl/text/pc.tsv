@@ -1,7 +1,7 @@
 key	english	dutch	notes
-Text_BootUpPC	{PLAYER} booted up the PC.		
-gText_WhichPCShouldBeAccessed	Which PC should be accessed?		
-gText_AccessedSomeonesPC	Accessed SOMEONE'S PC.		
-gText_StorageSystemOpened	POKéMON Storage System opened.		
-gText_AccessedPlayersPC	Accessed {PLAYER}'s PC.		
-gText_AccessedLanettesPC	Accessed LANETTE's PC.		
+Text_BootUpPC	{PLAYER} booted up the PC.	{PLAYER} zet de PC aan.	
+gText_WhichPCShouldBeAccessed	Which PC should be accessed?	Welke PC wil je openen?	
+gText_AccessedSomeonesPC	Accessed SOMEONE'S PC.	PC VAN IEMAND geopend.	
+gText_StorageSystemOpened	POKéMON Storage System opened.	POKéMON-opslag geopend.	
+gText_AccessedPlayersPC	Accessed {PLAYER}'s PC.	PC van {PLAYER} geopend.	
+gText_AccessedLanettesPC	Accessed LANETTE's PC.	PC VAN LANETTE geopend.	

@@ -1,6 +1,6 @@
 key	english	dutch	notes
-PlayersHouse_2F_Text_ClockIsStopped	The clock is stopped…\pBetter set it and start it!		
-PlayersHouse_2F_Text_HowDoYouLikeYourRoom	MOM: {PLAYER}, how do you like your\nnew room?\pGood! Everything's put away neatly!\pThey finished moving everything in\ndownstairs, too.\pPOKéMON movers are so convenient!\pOh, you should make sure that\neverything's all there on your desk.		
-PlayersHouse_2F_Text_Notebook	{PLAYER} flipped open the notebook.\pADVENTURE RULE NO. 1\nOpen the MENU with START.\pADVENTURE RULE NO. 2\nRecord your progress with SAVE.\pThe remaining pages are blank…		
-Common_Text_LookCloserAtMap	{PLAYER} took a closer look at the\nHOENN region map.		
-PlayersHouse_2F_Text_ItsAGameCube	It's a Nintendo GameCube.\pA Game Boy Advance is connected to\nserve as the Controller.		
+PlayersHouse_2F_Text_ClockIsStopped	The clock is stopped…\pBetter set it and start it!	De klok staat stil…\pZet hem op tijd en laat hem lopen!	
+PlayersHouse_2F_Text_HowDoYouLikeYourRoom	MOM: {PLAYER}, how do you like your\nnew room?\pGood! Everything's put away neatly!\pThey finished moving everything in\ndownstairs, too.\pPOKéMON movers are so convenient!\pOh, you should make sure that\neverything's all there on your desk.	MAMA: {PLAYER}, hoe vind je je\nnieuwe kamer?\pGoed zo! Alles staat netjes!\pBeneden is ook alles al\nuitgepakt.\pPOKéMON-verhuizers zijn zo handig!\pO, kijk even of alles op je\nbureau ligt.	
+PlayersHouse_2F_Text_Notebook	{PLAYER} flipped open the notebook.\pADVENTURE RULE NO. 1\nOpen the MENU with START.\pADVENTURE RULE NO. 2\nRecord your progress with SAVE.\pThe remaining pages are blank…	{PLAYER} slaat het schrift open.\pAVONTUURREGEL NR. 1\nOpen het MENU met START.\pAVONTUURREGEL NR. 2\nBewaar je voortgang met OPSLAAN.\pDe andere bladzijden zijn leeg…	
+Common_Text_LookCloserAtMap	{PLAYER} took a closer look at the\nHOENN region map.	{PLAYER} kijkt goed naar de\nkaart van HOENN.	
+PlayersHouse_2F_Text_ItsAGameCube	It's a Nintendo GameCube.\pA Game Boy Advance is connected to\nserve as the Controller.	Het is een Nintendo GameCube.\pEr zit een Game Boy Advance aan\ndie werkt als controller.	

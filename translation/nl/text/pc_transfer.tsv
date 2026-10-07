@@ -1,7 +1,7 @@
 key	english	dutch	notes
-gText_PkmnTransferredSomeonesPC	{STR_VAR_2} was transferred to\nSOMEONE'S PC.\pIt was placed in \nBOX “{STR_VAR_1}.”		
-gText_PkmnTransferredLanettesPC	{STR_VAR_2} was transferred to\nLANETTE'S PC.\pIt was placed in \nBOX “{STR_VAR_1}.”		
-gText_PkmnTransferredSomeonesPCBoxFull	BOX “{STR_VAR_3}” on\nSOMEONE'S PC was full.\p{STR_VAR_2} was transferred to\nBOX “{STR_VAR_1}.”		
-gText_PkmnTransferredLanettesPCBoxFull	BOX “{STR_VAR_3}” on\nLANETTE'S PC was full.\p{STR_VAR_2} was transferred to\nBOX “{STR_VAR_1}.”		
-gText_NoMoreRoomForPokemon	There's no more room for POKéMON!\pThe POKéMON BOXES are full and\ncan't accept any more!		
-gText_NicknameThisPokemon	Do you want to give a nickname to\nthis {STR_VAR_1}?		
+gText_PkmnTransferredSomeonesPC	{STR_VAR_2} was transferred to\nSOMEONE'S PC.\pIt was placed in \nBOX “{STR_VAR_1}.”	{STR_VAR_2} is naar de\nPC VAN IEMAND gestuurd.\pHij staat in\nBOX “{STR_VAR_1}”.	
+gText_PkmnTransferredLanettesPC	{STR_VAR_2} was transferred to\nLANETTE'S PC.\pIt was placed in \nBOX “{STR_VAR_1}.”	{STR_VAR_2} is naar de\nPC VAN LANETTE gestuurd.\pHij staat in\nBOX “{STR_VAR_1}”.	
+gText_PkmnTransferredSomeonesPCBoxFull	BOX “{STR_VAR_3}” on\nSOMEONE'S PC was full.\p{STR_VAR_2} was transferred to\nBOX “{STR_VAR_1}.”	BOX “{STR_VAR_3}” in de\nPC VAN IEMAND was vol.\p{STR_VAR_2} staat nu in\nBOX “{STR_VAR_1}”.	
+gText_PkmnTransferredLanettesPCBoxFull	BOX “{STR_VAR_3}” on\nLANETTE'S PC was full.\p{STR_VAR_2} was transferred to\nBOX “{STR_VAR_1}.”	BOX “{STR_VAR_3}” in de\nPC VAN LANETTE was vol.\p{STR_VAR_2} staat nu in\nBOX “{STR_VAR_1}”.	
+gText_NoMoreRoomForPokemon	There's no more room for POKéMON!\pThe POKéMON BOXES are full and\ncan't accept any more!	Er is geen plek meer voor POKéMON!\pDe POKéMON-BOXEN zijn vol!	
+gText_NicknameThisPokemon	Do you want to give a nickname to\nthis {STR_VAR_1}?	Wil je deze {STR_VAR_1} een\nbijnaam geven?	

@@ -258,32 +258,32 @@ PlayersHouse_2F_EventScript_GameCube::
 	end
 
 PlayersHouse_2F_Text_ClockIsStopped:
-	.string "The clock is stopped…\p"
-	.string "Better set it and start it!$"
+	.string "De klok staat stil…\p"
+	.string "Zet hem op tijd en laat hem lopen!$"
 
 PlayersHouse_2F_Text_HowDoYouLikeYourRoom:
-	.string "MOM: {PLAYER}, how do you like your\n"
-	.string "new room?\p"
-	.string "Good! Everything's put away neatly!\p"
-	.string "They finished moving everything in\n"
-	.string "downstairs, too.\p"
-	.string "POKéMON movers are so convenient!\p"
-	.string "Oh, you should make sure that\n"
-	.string "everything's all there on your desk.$"
+	.string "MAMA: {PLAYER}, hoe vind je je\n"
+	.string "nieuwe kamer?\p"
+	.string "Goed zo! Alles staat netjes!\p"
+	.string "Beneden is ook alles al\n"
+	.string "uitgepakt.\p"
+	.string "POKéMON-verhuizers zijn zo handig!\p"
+	.string "O, kijk even of alles op je\n"
+	.string "bureau ligt.$"
 
 PlayersHouse_2F_Text_Notebook:
-	.string "{PLAYER} flipped open the notebook.\p"
-	.string "ADVENTURE RULE NO. 1\n"
-	.string "Open the MENU with START.\p"
-	.string "ADVENTURE RULE NO. 2\n"
-	.string "Record your progress with SAVE.\p"
-	.string "The remaining pages are blank…$"
+	.string "{PLAYER} slaat het schrift open.\p"
+	.string "AVONTUURREGEL NR. 1\n"
+	.string "Open het MENU met START.\p"
+	.string "AVONTUURREGEL NR. 2\n"
+	.string "Bewaar je voortgang met OPSLAAN.\p"
+	.string "De andere bladzijden zijn leeg…$"
 
 Common_Text_LookCloserAtMap:
-	.string "{PLAYER} took a closer look at the\n"
-	.string "HOENN region map.$"
+	.string "{PLAYER} kijkt goed naar de\n"
+	.string "kaart van HOENN.$"
 
 PlayersHouse_2F_Text_ItsAGameCube:
-	.string "It's a Nintendo GameCube.\p"
-	.string "A Game Boy Advance is connected to\n"
-	.string "serve as the Controller.$"
+	.string "Het is een Nintendo GameCube.\p"
+	.string "Er zit een Game Boy Advance aan\n"
+	.string "die werkt als controller.$"

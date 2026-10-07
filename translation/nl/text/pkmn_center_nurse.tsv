@@ -1,11 +1,11 @@
 key	english	dutch	notes
-gText_WouldYouLikeToRestYourPkmn	Hello, and welcome to\nthe POKéMON CENTER.\pWe restore your tired POKéMON\nto full health.\pWould you like to rest your POKéMON?		
-gText_IllTakeYourPkmn	Okay, I'll take your POKéMON\nfor a few seconds.		
-gText_RestoredPkmnToFullHealth	Thank you for waiting.\pWe've restored your POKéMON\nto full health.		
-gText_WeHopeToSeeYouAgain	We hope to see you again!		
-gText_WelcomeCutShort	Hello, and welcome to\nthe POKéMON CENTER.\pWe restore your tired POKéMON\nto full health.\pWould you like to…		
-gText_NoticesGoldCard	Th-that card…\nCould it be… The GOLD CARD?!\pOh, the gold color is brilliant!\nThe four stars seem to sparkle!\pI've seen several TRAINERS with\na SILVER CARD before, but, {PLAYER},\lyou're the first TRAINER I've ever\lseen with a GOLD CARD!\pOkay, {PLAYER}, please allow me\nthe honor of resting your POKéMON!		
-gText_YouWantTheUsual	I'm delighted to see you, {PLAYER}!\nYou want the usual, am I right?		
-gText_IllTakeYourPkmn2	Okay, I'll take your POKéMON\nfor a few seconds.		
-gText_ThankYouForWaiting	Thank you for waiting.		
-gText_WeHopeToSeeYouAgain2	We hope to see you again!		
+gText_WouldYouLikeToRestYourPkmn	Hello, and welcome to\nthe POKéMON CENTER.\pWe restore your tired POKéMON\nto full health.\pWould you like to rest your POKéMON?	Hallo, welkom in het\nPOKéMON CENTER.\pWe maken je moeie POKéMON\nweer helemaal fit.\pZullen we je POKéMON laten rusten?	
+gText_IllTakeYourPkmn	Okay, I'll take your POKéMON\nfor a few seconds.	Goed, ik neem je POKéMON\neven een paar tellen mee.	
+gText_RestoredPkmnToFullHealth	Thank you for waiting.\pWe've restored your POKéMON\nto full health.	Bedankt voor het wachten.\pJe POKéMON zijn weer\nhelemaal fit.	
+gText_WeHopeToSeeYouAgain	We hope to see you again!	Tot de volgende keer!	
+gText_WelcomeCutShort	Hello, and welcome to\nthe POKéMON CENTER.\pWe restore your tired POKéMON\nto full health.\pWould you like to…	Hallo, welkom in het\nPOKéMON CENTER.\pWe maken je moeie POKéMON\nweer helemaal fit.\pZullen we je…	
+gText_NoticesGoldCard	Th-that card…\nCould it be… The GOLD CARD?!\pOh, the gold color is brilliant!\nThe four stars seem to sparkle!\pI've seen several TRAINERS with\na SILVER CARD before, but, {PLAYER},\lyou're the first TRAINER I've ever\lseen with a GOLD CARD!\pOkay, {PLAYER}, please allow me\nthe honor of resting your POKéMON!	D-die kaart…\nIs dat… De GOUDEN KAART?!\pO, wat glanst dat goud mooi!\nDe vier sterren schitteren!\pIk heb al TRAINERS gezien met een\nZILVEREN KAART, maar {PLAYER},\ljij bent de eerste TRAINER die ik\lzie met een GOUDEN KAART!\pGoed, {PLAYER}, ik ben vereerd dat\nik je POKéMON mag verzorgen!	
+gText_YouWantTheUsual	I'm delighted to see you, {PLAYER}!\nYou want the usual, am I right?	Wat leuk je te zien, {PLAYER}!\nHetzelfde als altijd, toch?	
+gText_IllTakeYourPkmn2	Okay, I'll take your POKéMON\nfor a few seconds.	Goed, ik neem je POKéMON\neven een paar tellen mee.	
+gText_ThankYouForWaiting	Thank you for waiting.	Bedankt voor het wachten.	
+gText_WeHopeToSeeYouAgain2	We hope to see you again!	Tot de volgende keer!	

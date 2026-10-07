@@ -1,33 +1,33 @@
 	.align 2
 gText_ConfirmSave::
-	.string "Would you like to save the game?$"
+	.string "Wil je het spel opslaan?$"
 
 gText_AlreadySavedFile::
-	.string "There is already a saved file.\n"
-	.string "Is it okay to overwrite it?$"
+	.string "Er is al een opgeslagen spel.\n"
+	.string "Wil je dat overschrijven?$"
 
 gText_SavingDontTurnOff::
-	.string "SAVING…\n"
-	.string "DON'T TURN OFF THE POWER.$"
+	.string "OPSLAAN…\n"
+	.string "ZET HET SPEL NIET UIT.$"
 
 gText_PlayerSavedGame::
-	.string "{PLAYER} saved the game.$"
+	.string "{PLAYER} heeft het spel opgeslagen.$"
 
 gText_DifferentSaveFile::
-	.string "WARNING!\p"
-	.string "There is a different game file that\n"
-	.string "is already saved.\p"
-	.string "If you save now, the other file's\n"
-	.string "adventure, including items and\l"
-	.string "POKéMON, will be entirely lost.\p"
-	.string "Are you sure you want to save now\n"
-	.string "and overwrite the other save file?$"
+	.string "LET OP!\p"
+	.string "Er is al een ander spel\n"
+	.string "opgeslagen.\p"
+	.string "Als je nu opslaat, ben je het\n"
+	.string "avontuur van dat andere spel kwijt,\l"
+	.string "met alle voorwerpen en POKéMON.\p"
+	.string "Weet je zeker dat je nu wilt opslaan\n"
+	.string "en het andere spel wilt overschrijven?$"
 
 gText_SaveError::
-	.string "Save error.\p"
-	.string "Please exchange the\n"
-	.string "backup memory.$"
+	.string "Fout bij opslaan.\p"
+	.string "Vervang het\n"
+	.string "geheugen.$"
 
 gText_SavingDontTurnOffPower::
-	.string "SAVING…\n"
-	.string "DON'T TURN OFF THE POWER.$"
+	.string "OPSLAAN…\n"
+	.string "ZET HET SPEL NIET UIT.$"

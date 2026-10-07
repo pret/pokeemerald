@@ -1,8 +1,8 @@
 key	english	dutch	notes
-Route101_Text_HelpMe	H-help me!		
-Route101_Text_PleaseHelp	Hello! You over there!\nPlease! Help!\pIn my BAG!\nThere's a POKé BALL!		
-Route101_Text_DontLeaveMe	Wh-Where are you going?!\nDon't leave me like this!		
-Route101_Text_YouSavedMe	PROF. BIRCH: Whew…\pI was in the tall grass studying wild\nPOKéMON when I was jumped.\pYou saved me.\nThanks a lot!\pOh?\pHi, you're {PLAYER}{KUN}!\pThis is not the place to chat, so come\nby my POKéMON LAB later, okay?		
-Route101_Text_TakeTiredPokemonToPokeCenter	If POKéMON get tired, take them to\na POKéMON CENTER.\pThere's a POKéMON CENTER in OLDALE\nTOWN right close by.		
-Route101_Text_WildPokemonInTallGrass	Wild POKéMON will jump out at you in\ntall grass.\pIf you want to catch POKéMON, you have\nto go into the tall grass and search.		
+Route101_Text_HelpMe	H-help me!	H-help!	
+Route101_Text_PleaseHelp	Hello! You over there!\nPlease! Help!\pIn my BAG!\nThere's a POKé BALL!	Hallo! Jij daar!\nAlsjeblieft! Help me!\pIn mijn TAS!\nDaar zit een POKé BALL in!	
+Route101_Text_DontLeaveMe	Wh-Where are you going?!\nDon't leave me like this!	W-waar ga je heen?!\nLaat me niet zo achter!	
+Route101_Text_YouSavedMe	PROF. BIRCH: Whew…\pI was in the tall grass studying wild\nPOKéMON when I was jumped.\pYou saved me.\nThanks a lot!\pOh?\pHi, you're {PLAYER}{KUN}!\pThis is not the place to chat, so come\nby my POKéMON LAB later, okay?	PROF. BIRCH: Pfoe…\pIk onderzocht wilde POKéMON in het\nhoge gras, en toen werd ik aangevallen.\pJe hebt me gered.\nHeel erg bedankt!\pO?\pHoi, jij bent {PLAYER}{KUN}!\pDit is geen plek om te kletsen. Kom\nstraks naar mijn POKéMON-LAB, oké?	
+Route101_Text_TakeTiredPokemonToPokeCenter	If POKéMON get tired, take them to\na POKéMON CENTER.\pThere's a POKéMON CENTER in OLDALE\nTOWN right close by.	Zijn je POKéMON moe? Breng ze dan\nnaar een POKéMON CENTER.\pIn OLDALE TOWN, hier vlakbij, is\neen POKéMON CENTER.	
+Route101_Text_WildPokemonInTallGrass	Wild POKéMON will jump out at you in\ntall grass.\pIf you want to catch POKéMON, you have\nto go into the tall grass and search.	In hoog gras springen wilde\nPOKéMON op je af.\pWil je POKéMON vangen? Ga dan het\nhoge gras in en zoek goed.	
 Route101_Text_RouteSign	ROUTE 101\n{UP_ARROW} OLDALE TOWN		

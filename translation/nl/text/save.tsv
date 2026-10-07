@@ -1,8 +1,8 @@
 key	english	dutch	notes
-gText_ConfirmSave	Would you like to save the game?		
-gText_AlreadySavedFile	There is already a saved file.\nIs it okay to overwrite it?		
-gText_SavingDontTurnOff	SAVING…\nDON'T TURN OFF THE POWER.		
-gText_PlayerSavedGame	{PLAYER} saved the game.		
-gText_DifferentSaveFile	WARNING!\pThere is a different game file that\nis already saved.\pIf you save now, the other file's\nadventure, including items and\lPOKéMON, will be entirely lost.\pAre you sure you want to save now\nand overwrite the other save file?		
-gText_SaveError	Save error.\pPlease exchange the\nbackup memory.		
-gText_SavingDontTurnOffPower	SAVING…\nDON'T TURN OFF THE POWER.		
+gText_ConfirmSave	Would you like to save the game?	Wil je het spel opslaan?	
+gText_AlreadySavedFile	There is already a saved file.\nIs it okay to overwrite it?	Er is al een opgeslagen spel.\nWil je dat overschrijven?	
+gText_SavingDontTurnOff	SAVING…\nDON'T TURN OFF THE POWER.	OPSLAAN…\nZET HET SPEL NIET UIT.	
+gText_PlayerSavedGame	{PLAYER} saved the game.	{PLAYER} heeft het spel opgeslagen.	
+gText_DifferentSaveFile	WARNING!\pThere is a different game file that\nis already saved.\pIf you save now, the other file's\nadventure, including items and\lPOKéMON, will be entirely lost.\pAre you sure you want to save now\nand overwrite the other save file?	LET OP!\pEr is al een ander spel\nopgeslagen.\pAls je nu opslaat, ben je het\navontuur van dat andere spel kwijt,\lmet alle voorwerpen en POKéMON.\pWeet je zeker dat je nu wilt opslaan\nen het andere spel wilt overschrijven?	
+gText_SaveError	Save error.\pPlease exchange the\nbackup memory.	Fout bij opslaan.\pVervang het\ngeheugen.	
+gText_SavingDontTurnOffPower	SAVING…\nDON'T TURN OFF THE POWER.	OPSLAAN…\nZET HET SPEL NIET UIT.	

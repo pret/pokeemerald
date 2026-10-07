@@ -851,112 +851,112 @@ LittlerootTown_EventScript_GiveRunningShoes::
 	return
 
 LittlerootTown_Text_OurNewHomeLetsGoInside:
-	.string "MOM: {PLAYER}, we're here, honey!\p"
-	.string "It must be tiring riding with our things\n"
-	.string "in the moving truck.\p"
-	.string "Well, this is LITTLEROOT TOWN.\p"
-	.string "How do you like it?\n"
-	.string "This is our new home!\p"
-	.string "It has a quaint feel, but it seems to be\n"
-	.string "an easy place to live, don't you think?\p"
-	.string "And, you get your own room, {PLAYER}!\n"
-	.string "Let's go inside.$"
+	.string "MAMA: {PLAYER}, we zijn er, lieverd!\p"
+	.string "De rit in de verhuiswagen was\n"
+	.string "vast vermoeiend.\p"
+	.string "Dit is LITTLEROOT TOWN.\p"
+	.string "Wat vind je ervan?\n"
+	.string "Dit is ons nieuwe huis!\p"
+	.string "Het is een klein dorp, maar het\n"
+	.string "woont hier vast heel fijn.\p"
+	.string "En je krijgt je eigen kamer, {PLAYER}!\n"
+	.string "Kom, we gaan naar binnen.$"
 
 LittlerootTown_Text_WaitPlayer:
-	.string "MOM: Wait, {PLAYER}!$"
+	.string "MAMA: Wacht even, {PLAYER}!$"
 
 LittlerootTown_Text_WearTheseRunningShoes:
-	.string "MOM: {PLAYER}! {PLAYER}! Did you\n"
-	.string "introduce yourself to PROF. BIRCH?\p"
-	.string "Oh! What an adorable POKéMON!\n"
-	.string "You got it from PROF. BIRCH. How nice!\p"
-	.string "You're your father's child, all right.\n"
-	.string "You look good together with POKéMON!\p"
-	.string "Here, honey! If you're going out on an\n"
-	.string "adventure, wear these RUNNING SHOES.\p"
-	.string "They'll put a zip in your step!$"
+	.string "MAMA: {PLAYER}! {PLAYER}! Heb je je\n"
+	.string "voorgesteld aan PROF. BIRCH?\p"
+	.string "O! Wat een schattige POKéMON!\n"
+	.string "Gekregen van PROF. BIRCH? Wat leuk!\p"
+	.string "Je lijkt echt op je vader.\n"
+	.string "Je past goed bij POKéMON!\p"
+	.string "Hier, lieverd! Ga je op avontuur,\n"
+	.string "doe dan deze RENSCHOENEN aan.\p"
+	.string "Daarmee ben je supersnel!$"
 
 LittlerootTown_Text_SwitchShoesWithRunningShoes:
-	.string "{PLAYER} switched shoes with the\n"
-	.string "RUNNING SHOES.$"
+	.string "{PLAYER} doet de RENSCHOENEN\n"
+	.string "aan.$"
 
 LittlerootTown_Text_ExplainRunningShoes:
-	.string "MOM: {PLAYER}, those shoes came with\n"
-	.string "instructions.\p"
-	.string "“Press the B Button while wearing these\n"
-	.string "RUNNING SHOES to run extra-fast!\p"
-	.string "“Slip on these RUNNING SHOES and race\n"
-	.string "in the great outdoors!”$"
+	.string "MAMA: {PLAYER}, er zit uitleg bij\n"
+	.string "de schoenen.\p"
+	.string "“Houd de B-knop ingedrukt met deze\n"
+	.string "RENSCHOENEN aan om snel te rennen!\p"
+	.string "“Trek de RENSCHOENEN aan en ren\n"
+	.string "lekker door de natuur!”$"
 
 LittlerootTown_Text_ComeHomeIfAnythingHappens:
 	.string "… … … … … … … …\n"
 	.string "… … … … … … … …\p"
-	.string "To think that you have your very own\n"
-	.string "POKéMON now…\l"
-	.string "Your father will be overjoyed.\p"
-	.string "…But please be careful.\n"
-	.string "If anything happens, you can come home.\p"
-	.string "Go on, go get them, honey!$"
+	.string "Je hebt nu je eigen\n"
+	.string "POKéMON…\l"
+	.string "Je vader zal zo blij zijn.\p"
+	.string "…Maar wees wel voorzichtig.\n"
+	.string "Als er iets is, kom je gewoon thuis.\p"
+	.string "Ga maar, lieverd, zet 'm op!$"
 
 LittlerootTown_Text_CanUsePCToStoreItems:
-	.string "If you use a PC, you can store items\n"
-	.string "and POKéMON.\p"
-	.string "The power of science is staggering!$"
+	.string "Met een PC kun je voorwerpen\n"
+	.string "en POKéMON bewaren.\p"
+	.string "Wetenschap is echt geweldig!$"
 
 LittlerootTown_Text_BirchSpendsDaysInLab:
-	.string "PROF. BIRCH spends days in his LAB\n"
-	.string "studying, then he'll suddenly go out in\l"
-	.string "the wild to do more research…\p"
-	.string "When does PROF. BIRCH spend time\n"
-	.string "at home?$"
+	.string "PROF. BIRCH zit dagenlang in zijn LAB.\n"
+	.string "Dan gaat hij ineens weer naar buiten\l"
+	.string "voor nog meer onderzoek…\p"
+	.string "Wanneer is PROF. BIRCH nou\n"
+	.string "eens thuis?$"
 
 LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut:
-	.string "Um, um, um!\p"
-	.string "If you go outside and go in the grass,\n"
-	.string "wild POKéMON will jump out!$"
+	.string "Eh, eh, eh!\p"
+	.string "Als je buiten in het hoge gras loopt,\n"
+	.string "springen er wilde POKéMON uit!$"
 
 LittlerootTown_Text_DangerousIfYouDontHavePokemon:
-	.string "It's dangerous if you don't have\n"
-	.string "your own POKéMON.$"
+	.string "Het is gevaarlijk als je geen\n"
+	.string "eigen POKéMON hebt.$"
 
 LittlerootTown_Text_CanYouGoSeeWhatsHappening:
-	.string "Um, hi!\p"
-	.string "There are scary POKéMON outside!\n"
-	.string "I can hear their cries!\p"
-	.string "I want to go see what's going on,\n"
-	.string "but I don't have any POKéMON…\p"
-	.string "Can you go see what's happening\n"
-	.string "for me?$"
+	.string "Eh, hoi!\p"
+	.string "Er zijn enge POKéMON buiten!\n"
+	.string "Ik hoor ze roepen!\p"
+	.string "Ik wil gaan kijken wat er is,\n"
+	.string "maar ik heb geen POKéMON…\p"
+	.string "Wil jij voor mij gaan kijken\n"
+	.string "wat er gebeurt?$"
 
 LittlerootTown_Text_YouSavedBirch:
-	.string "You saved PROF. BIRCH!\n"
-	.string "I'm so glad!$"
+	.string "Je hebt PROF. BIRCH gered!\n"
+	.string "Wat fijn!$"
 
 LittlerootTown_Text_GoodLuckCatchingPokemon:
-	.string "Are you going to catch POKéMON?\n"
-	.string "Good luck!$"
+	.string "Ga je POKéMON vangen?\n"
+	.string "Veel succes!$"
 
 LittlerootTown_Text_TownSign:
 	.string "LITTLEROOT TOWN\n"
-	.string "“A town that can't be shaded any hue.”$"
+	.string "“Een dorp dat geen kleur kan krijgen.”$"
 
 LittlerootTown_Text_ProfBirchsLab:
-	.string "PROF. BIRCH'S POKéMON LAB$"
+	.string "POKéMON-LAB VAN PROF. BIRCH$"
 
 LittlerootTown_Text_PlayersHouse:
-	.string "{PLAYER}'s HOUSE$"
+	.string "HUIS VAN {PLAYER}$"
 
 LittlerootTown_Text_ProfBirchsHouse:
-	.string "PROF. BIRCH'S HOUSE$"
+	.string "HUIS VAN PROF. BIRCH$"
 
 LittlerootTown_Text_BirchSomethingToShowYouAtLab:
-	.string "PROF. BIRCH: Well, well, {PLAYER}{KUN}!\n"
-	.string "That was good work out there!\p"
-	.string "I knew there was something special\n"
-	.string "about you when I first saw you,\l"
-	.string "but I never expected this.\p"
-	.string "Oh, yes. Do you still have the POKéDEX\n"
-	.string "I gave you?\p"
-	.string "I have something to show you.\n"
-	.string "Let's go to my LAB.$"
+	.string "PROF. BIRCH: Zo, zo, {PLAYER}{KUN}!\n"
+	.string "Dat heb je goed gedaan!\p"
+	.string "Ik zag meteen dat je bijzonder\n"
+	.string "was toen ik je voor het eerst zag,\l"
+	.string "maar dit had ik niet verwacht.\p"
+	.string "O ja. Heb je de POKéDEX nog\n"
+	.string "die ik je gaf?\p"
+	.string "Ik wil je iets laten zien.\n"
+	.string "Kom mee naar mijn LAB.$"
 

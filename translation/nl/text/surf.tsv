@@ -1,3 +1,3 @@
 key	english	dutch	notes
-gText_WantToUseSurf	The water is dyed a deep blue…\nWould you like to SURF?		
-gText_PlayerUsedSurf	{STR_VAR_1} used SURF!		
+gText_WantToUseSurf	The water is dyed a deep blue…\nWould you like to SURF?	Het water is diepblauw…\nWil je SURFEN?	
+gText_PlayerUsedSurf	{STR_VAR_1} used SURF!	{STR_VAR_1} gebruikt SURFEN!	

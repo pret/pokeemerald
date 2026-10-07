@@ -1,51 +1,51 @@
 gText_WouldYouLikeToRestYourPkmn::
-	.string "Hello, and welcome to\n"
-	.string "the POKéMON CENTER.\p"
-	.string "We restore your tired POKéMON\n"
-	.string "to full health.\p"
-	.string "Would you like to rest your POKéMON?$"
+	.string "Hallo, welkom in het\n"
+	.string "POKéMON CENTER.\p"
+	.string "We maken je moeie POKéMON\n"
+	.string "weer helemaal fit.\p"
+	.string "Zullen we je POKéMON laten rusten?$"
 
 gText_IllTakeYourPkmn::
-	.string "Okay, I'll take your POKéMON\n"
-	.string "for a few seconds.$"
+	.string "Goed, ik neem je POKéMON\n"
+	.string "even een paar tellen mee.$"
 
 gText_RestoredPkmnToFullHealth::
-	.string "Thank you for waiting.\p"
-	.string "We've restored your POKéMON\n"
-	.string "to full health.$"
+	.string "Bedankt voor het wachten.\p"
+	.string "Je POKéMON zijn weer\n"
+	.string "helemaal fit.$"
 
 gText_WeHopeToSeeYouAgain::
-	.string "We hope to see you again!$"
+	.string "Tot de volgende keer!$"
 
 gText_WelcomeCutShort::
-	.string "Hello, and welcome to\n"
-	.string "the POKéMON CENTER.\p"
-	.string "We restore your tired POKéMON\n"
-	.string "to full health.\p"
-	.string "Would you like to…$"
+	.string "Hallo, welkom in het\n"
+	.string "POKéMON CENTER.\p"
+	.string "We maken je moeie POKéMON\n"
+	.string "weer helemaal fit.\p"
+	.string "Zullen we je…$"
 
 gText_NoticesGoldCard::
-	.string "Th-that card…\n"
-	.string "Could it be… The GOLD CARD?!\p"
-	.string "Oh, the gold color is brilliant!\n"
-	.string "The four stars seem to sparkle!\p"
-	.string "I've seen several TRAINERS with\n"
-	.string "a SILVER CARD before, but, {PLAYER},\l"
-	.string "you're the first TRAINER I've ever\l"
-	.string "seen with a GOLD CARD!\p"
-	.string "Okay, {PLAYER}, please allow me\n"
-	.string "the honor of resting your POKéMON!$"
+	.string "D-die kaart…\n"
+	.string "Is dat… De GOUDEN KAART?!\p"
+	.string "O, wat glanst dat goud mooi!\n"
+	.string "De vier sterren schitteren!\p"
+	.string "Ik heb al TRAINERS gezien met een\n"
+	.string "ZILVEREN KAART, maar {PLAYER},\l"
+	.string "jij bent de eerste TRAINER die ik\l"
+	.string "zie met een GOUDEN KAART!\p"
+	.string "Goed, {PLAYER}, ik ben vereerd dat\n"
+	.string "ik je POKéMON mag verzorgen!$"
 
 gText_YouWantTheUsual::
-	.string "I'm delighted to see you, {PLAYER}!\n"
-	.string "You want the usual, am I right?$"
+	.string "Wat leuk je te zien, {PLAYER}!\n"
+	.string "Hetzelfde als altijd, toch?$"
 
 gText_IllTakeYourPkmn2::
-	.string "Okay, I'll take your POKéMON\n"
-	.string "for a few seconds.$"
+	.string "Goed, ik neem je POKéMON\n"
+	.string "even een paar tellen mee.$"
 
 gText_ThankYouForWaiting::
-	.string "Thank you for waiting.$"
+	.string "Bedankt voor het wachten.$"
 
 gText_WeHopeToSeeYouAgain2::
-	.string "We hope to see you again!$"
+	.string "Tot de volgende keer!$"

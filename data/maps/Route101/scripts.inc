@@ -251,40 +251,40 @@ Route101_Movement_BirchApproachPlayer:
 	step_end
 
 Route101_Text_HelpMe:
-	.string "H-help me!$"
+	.string "H-help!$"
 
 Route101_Text_PleaseHelp:
-	.string "Hello! You over there!\n"
-	.string "Please! Help!\p"
-	.string "In my BAG!\n"
-	.string "There's a POKé BALL!$"
+	.string "Hallo! Jij daar!\n"
+	.string "Alsjeblieft! Help me!\p"
+	.string "In mijn TAS!\n"
+	.string "Daar zit een POKé BALL in!$"
 
 Route101_Text_DontLeaveMe:
-	.string "Wh-Where are you going?!\n"
-	.string "Don't leave me like this!$"
+	.string "W-waar ga je heen?!\n"
+	.string "Laat me niet zo achter!$"
 
 Route101_Text_YouSavedMe:
-	.string "PROF. BIRCH: Whew…\p"
-	.string "I was in the tall grass studying wild\n"
-	.string "POKéMON when I was jumped.\p"
-	.string "You saved me.\n"
-	.string "Thanks a lot!\p"
-	.string "Oh?\p"
-	.string "Hi, you're {PLAYER}{KUN}!\p"
-	.string "This is not the place to chat, so come\n"
-	.string "by my POKéMON LAB later, okay?$"
+	.string "PROF. BIRCH: Pfoe…\p"
+	.string "Ik onderzocht wilde POKéMON in het\n"
+	.string "hoge gras, en toen werd ik aangevallen.\p"
+	.string "Je hebt me gered.\n"
+	.string "Heel erg bedankt!\p"
+	.string "O?\p"
+	.string "Hoi, jij bent {PLAYER}{KUN}!\p"
+	.string "Dit is geen plek om te kletsen. Kom\n"
+	.string "straks naar mijn POKéMON-LAB, oké?$"
 
 Route101_Text_TakeTiredPokemonToPokeCenter:
-	.string "If POKéMON get tired, take them to\n"
-	.string "a POKéMON CENTER.\p"
-	.string "There's a POKéMON CENTER in OLDALE\n"
-	.string "TOWN right close by.$"
+	.string "Zijn je POKéMON moe? Breng ze dan\n"
+	.string "naar een POKéMON CENTER.\p"
+	.string "In OLDALE TOWN, hier vlakbij, is\n"
+	.string "een POKéMON CENTER.$"
 
 Route101_Text_WildPokemonInTallGrass:
-	.string "Wild POKéMON will jump out at you in\n"
-	.string "tall grass.\p"
-	.string "If you want to catch POKéMON, you have\n"
-	.string "to go into the tall grass and search.$"
+	.string "In hoog gras springen wilde\n"
+	.string "POKéMON op je af.\p"
+	.string "Wil je POKéMON vangen? Ga dan het\n"
+	.string "hoge gras in en zoek goed.$"
 
 Route101_Text_RouteSign:
 	.string "ROUTE 101\n"
