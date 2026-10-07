@@ -492,64 +492,64 @@ gText_Decorate	DECORATE	VERSIER
 gText_PutAway	PUT AWAY	OPRUIMEN	label-ok: reviewed
 gText_Toss2	TOSS	WEG	
 gText_Color161Shadow161	{COLOR 161}{SHADOW 161}		
-gText_PutOutSelectedDecorItem	Put out the selected decoration item.		
-gText_StoreChosenDecorInPC	Store the chosen decoration in the PC.		
-gText_ThrowAwayUnwantedDecors	Throw away unwanted decorations.		
-gText_NoDecorations	There are no decorations.{PAUSE_UNTIL_PRESS}		
-gText_Desk	DESK		
-gText_Chair	CHAIR		
-gText_Plant	PLANT		
-gText_Ornament	ORNAMENT		
-gText_Mat	MAT		
-gText_Poster	POSTER		
-gText_Doll	DOLL		
-gText_Cushion	CUSHION		
-gText_Gold	GOLD		
-gText_Silver	SILVER		
-gText_PlaceItHere	Place it here?		
-gText_CantBePlacedHere	It can't be placed here.		
-gText_CancelDecorating	Cancel decorating?		
-gText_InUseAlready	This is in use already.		
-gText_NoMoreDecorations	No more decorations can be placed.\nThe most that can be placed are {STR_VAR_1}.		width-ok: STR_VAR_1 is a number
-gText_NoMoreDecorations2	No more decorations can be placed.\nThe most that can be placed are {STR_VAR_1}.		width-ok: STR_VAR_1 is a number
-gText_MustBePlacedOnDesk	This can't be placed here.\nIt must be on a DESK, etc.		
-gText_CantPlaceInRoom	This decoration can't be placed in\nyour own room.		
-gText_CantThrowAwayInUse	This decoration is in use.\nIt can't be thrown away.		
-gText_DecorationWillBeDiscarded	This {STR_VAR_1} will be discarded.\nIs that okay?		
-gText_DecorationThrownAway	The decoration item was thrown away.		
-gText_StopPuttingAwayDecorations	Stop putting away decorations?		
-gText_NoDecorationHere	There is no decoration item here.		
-gText_ReturnDecorationToPC	Return this decoration to the PC?		
-gText_DecorationReturnedToPC	The decoration was returned to the PC.		
-gText_NoDecorationsInUse	There are no decorations in use.{PAUSE_UNTIL_PRESS}		
+gText_PutOutSelectedDecorItem	Put out the selected decoration item.	Zet de gekozen versiering neer.	
+gText_StoreChosenDecorInPC	Store the chosen decoration in the PC.	Berg de versiering op in de PC.	
+gText_ThrowAwayUnwantedDecors	Throw away unwanted decorations.	Gooi versiering weg.	
+gText_NoDecorations	There are no decorations.{PAUSE_UNTIL_PRESS}	Er is geen versiering.{PAUSE_UNTIL_PRESS}	
+gText_Desk	DESK	BUREAU	label-ok: reviewed
+gText_Chair	CHAIR	STOEL	
+gText_Plant	PLANT	PLANT	
+gText_Ornament	ORNAMENT	BEELDJE	
+gText_Mat	MAT	MAT	
+gText_Poster	POSTER	POSTER	
+gText_Doll	DOLL	POP	
+gText_Cushion	CUSHION	KUSSEN	
+gText_Gold	GOLD	GOUD	
+gText_Silver	SILVER	ZILVER	
+gText_PlaceItHere	Place it here?	Hier neerzetten?	label-ok: reviewed
+gText_CantBePlacedHere	It can't be placed here.	Dat kan hier niet.	
+gText_CancelDecorating	Cancel decorating?	Stoppen met versieren?	label-ok: reviewed
+gText_InUseAlready	This is in use already.	Dit wordt al gebruikt.	
+gText_NoMoreDecorations	No more decorations can be placed.\nThe most that can be placed are {STR_VAR_1}.	Je kunt niets meer neerzetten.\nJe mag er maximaal {STR_VAR_1} neerzetten.	width-ok: STR_VAR_1 is a number
+gText_NoMoreDecorations2	No more decorations can be placed.\nThe most that can be placed are {STR_VAR_1}.	Je kunt niets meer neerzetten.\nJe mag er maximaal {STR_VAR_1} neerzetten.	width-ok: STR_VAR_1 is a number
+gText_MustBePlacedOnDesk	This can't be placed here.\nIt must be on a DESK, etc.	Dat kan hier niet.\nHet moet op een BUREAU of zo.	
+gText_CantPlaceInRoom	This decoration can't be placed in\nyour own room.	Deze versiering kan niet in je\neigen kamer.	
+gText_CantThrowAwayInUse	This decoration is in use.\nIt can't be thrown away.	Deze versiering staat neer.\nJe kunt hem niet weggooien.	
+gText_DecorationWillBeDiscarded	This {STR_VAR_1} will be discarded.\nIs that okay?	{STR_VAR_1} wordt weggegooid.\nIs dat goed?	
+gText_DecorationThrownAway	The decoration item was thrown away.	De versiering is weggegooid.	
+gText_StopPuttingAwayDecorations	Stop putting away decorations?	Stoppen met opruimen?	
+gText_NoDecorationHere	There is no decoration item here.	Hier staat geen versiering.	
+gText_ReturnDecorationToPC	Return this decoration to the PC?	Deze versiering terug in de PC?	
+gText_DecorationReturnedToPC	The decoration was returned to the PC.	De versiering is terug in de PC.	
+gText_NoDecorationsInUse	There are no decorations in use.{PAUSE_UNTIL_PRESS}	Er staat geen versiering.{PAUSE_UNTIL_PRESS}	
 gText_Tristan	TRISTAN		
 gText_Philip	PHILIP		
 gText_Dennis	DENNIS		
 gText_Roberto	ROBERTO		
-gText_TurnOff	TURN OFF		
-gText_Decoration	DECORATION		
-gText_ItemStorage	ITEM STORAGE		
-gText_Mailbox	MAILBOX		
-gText_DepositItem	DEPOSIT ITEM		
-gText_WithdrawItem	WITHDRAW ITEM		
-gText_TossItem	TOSS ITEM		
-gText_StoreItemsInPC	Store items in the PC.		
-gText_TakeOutItemsFromPC	Take out items from the PC.		
-gText_ThrowAwayItemsInPC	Throw away items stored in the PC.		
-gText_NoItems	There are no items.{PAUSE_UNTIL_PRESS}		
-gText_NoRoomInBag	There is no more\nroom in the BAG.		
-gText_WithdrawHowManyItems	Withdraw how many\n{STR_VAR_1}(s)?		
-gText_WithdrawXItems	Withdrew {STR_VAR_2}\n{STR_VAR_1}(s).		
-gText_Read	READ		
-gText_MoveToBag	MOVE TO BAG		
-gText_Give2	GIVE		
-gText_NoMailHere	There's no MAIL here.{PAUSE_UNTIL_PRESS}		
-gText_WhatToDoWithVar1sMail	What would you like to do with\n{STR_VAR_1}'s MAIL?		
-gText_MessageWillBeLost	The message will be lost.\nIs that okay?		
-gText_BagIsFull	The BAG is full.{PAUSE_UNTIL_PRESS}		
-gText_MailToBagMessageErased	The MAIL was returned to the BAG\nwith its message erased.{PAUSE_UNTIL_PRESS}		
-gText_Dad	DAD		
-gText_Mom	MOM		
+gText_TurnOff	TURN OFF	UIT	
+gText_Decoration	DECORATION	VERSIERING	
+gText_ItemStorage	ITEM STORAGE	VOORWERPEN	
+gText_Mailbox	MAILBOX	BRIEVENBUS	label-ok: reviewed
+gText_DepositItem	DEPOSIT ITEM	OPBERGEN	
+gText_WithdrawItem	WITHDRAW ITEM	PAKKEN	
+gText_TossItem	TOSS ITEM	WEGGOOIEN	label-ok: reviewed
+gText_StoreItemsInPC	Store items in the PC.	Berg voorwerpen op in de PC.	label-ok: reviewed
+gText_TakeOutItemsFromPC	Take out items from the PC.	Pak voorwerpen uit de PC.	
+gText_ThrowAwayItemsInPC	Throw away items stored in the PC.	Gooi voorwerpen uit de PC weg.	
+gText_NoItems	There are no items.{PAUSE_UNTIL_PRESS}	Er zijn geen voorwerpen.{PAUSE_UNTIL_PRESS}	label-ok: reviewed
+gText_NoRoomInBag	There is no more\nroom in the BAG.	Er is geen plek\nmeer in de TAS.	
+gText_WithdrawHowManyItems	Withdraw how many\n{STR_VAR_1}(s)?	Hoeveel\n{STR_VAR_1}\npakken?	
+gText_WithdrawXItems	Withdrew {STR_VAR_2}\n{STR_VAR_1}(s).	{STR_VAR_2}x\n{STR_VAR_1}\ngepakt.	
+gText_Read	READ	LEES	
+gText_MoveToBag	MOVE TO BAG	NAAR TAS	
+gText_Give2	GIVE	GEEF	
+gText_NoMailHere	There's no MAIL here.{PAUSE_UNTIL_PRESS}	Hier is geen BRIEF.{PAUSE_UNTIL_PRESS}	
+gText_WhatToDoWithVar1sMail	What would you like to do with\n{STR_VAR_1}'s MAIL?	Wat wil je doen met de BRIEF\nvan {STR_VAR_1}?	
+gText_MessageWillBeLost	The message will be lost.\nIs that okay?	Het bericht is dan weg.\nIs dat goed?	
+gText_BagIsFull	The BAG is full.{PAUSE_UNTIL_PRESS}	De TAS is vol.{PAUSE_UNTIL_PRESS}	
+gText_MailToBagMessageErased	The MAIL was returned to the BAG\nwith its message erased.{PAUSE_UNTIL_PRESS}	De BRIEF is terug in de TAS.\nHet bericht is gewist.{PAUSE_UNTIL_PRESS}	
+gText_Dad	DAD	PAPA	label-ok: reviewed
+gText_Mom	MOM	MAMA	label-ok: reviewed
 gText_Wallace	WALLACE		
 gText_Steven	STEVEN		
 gText_Brawly	BRAWLY		
@@ -561,56 +561,56 @@ gText_Slateport	SLATEPORT
 gText_Littleroot	LITTLEROOT		
 gText_Lilycove	LILYCOVE		
 gText_Dewford	DEWFORD		
-gText_Enter2	ENTER		
+gText_Enter2	ENTER	MEEDOEN	label-ok: reviewed
 gText_Info2	INFO		
-gText_WhatsAContest	What's a CONTEST?		
-gText_TypesOfContests	Types of CONTESTS		
-gText_Ranks	Ranks		
-gText_Judging	Judging		
-gText_CoolnessContest	COOLNESS CONTEST		
-gText_BeautyContest	BEAUTY CONTEST		
-gText_CutenessContest	CUTENESS CONTEST		
-gText_SmartnessContest	SMARTNESS CONTEST		
-gText_ToughnessContest	TOUGHNESS CONTEST		
-gText_Decoration2	DECORATION		
-gText_PackUp	PACK UP		
-gText_Count	COUNT		
-gText_Registry	REGISTRY		
-gText_Information	INFORMATION		
-gText_Mach	MACH		
-gText_Acro	ACRO		
-gText_Psn	PSN		
-gText_Par	PAR		
-gText_Slp	SLP		
-gText_Brn	BRN		
-gText_Frz	FRZ		
-gText_Toxic	TOXIC		
+gText_WhatsAContest	What's a CONTEST?	Wat is een WEDSTRIJD?	label-ok: reviewed
+gText_TypesOfContests	Types of CONTESTS	Soorten WEDSTRIJDEN	label-ok: reviewed
+gText_Ranks	Ranks	Niveaus	label-ok: reviewed
+gText_Judging	Judging	Jury	
+gText_CoolnessContest	COOLNESS CONTEST	STOER-WEDSTRIJD	
+gText_BeautyContest	BEAUTY CONTEST	MOOI-WEDSTRIJD	label-ok: reviewed
+gText_CutenessContest	CUTENESS CONTEST	SCHATTIG-WEDSTRIJD	label-ok: reviewed
+gText_SmartnessContest	SMARTNESS CONTEST	SLIM-WEDSTRIJD	
+gText_ToughnessContest	TOUGHNESS CONTEST	STERK-WEDSTRIJD	
+gText_Decoration2	DECORATION	VERSIERING	
+gText_PackUp	PACK UP	INPAKKEN	label-ok: reviewed
+gText_Count	COUNT	TELLEN	label-ok: reviewed
+gText_Registry	REGISTRY	LIJST	
+gText_Information	INFORMATION	INFORMATIE	
+gText_Mach	MACH	RACE	
+gText_Acro	ACRO	STUNT	label-ok: reviewed
+gText_Psn	PSN	GIF	
+gText_Par	PAR	VLM	
+gText_Slp	SLP	SLP	
+gText_Brn	BRN	BRW	
+gText_Frz	FRZ	IJS	
+gText_Toxic	TOXIC	GIFTIG	label-ok: reviewed
 gText_Ok3	OK		
-gText_Quit	QUIT		
-gText_SawIt	Saw it		
-gText_NotYet	Not yet		
-gText_Yes	YES		
+gText_Quit	QUIT	STOP	
+gText_SawIt	Saw it	Gezien	label-ok: reviewed
+gText_NotYet	Not yet	Nog niet	label-ok: reviewed
+gText_Yes	YES	JA	
 gText_No	NO		
 gText_Info4	INFO		
-gText_SingleBattle	SINGLE BATTLE		
-gText_DoubleBattle	DOUBLE BATTLE		
-gText_MultiBattle	MULTI BATTLE		
+gText_SingleBattle	SINGLE BATTLE	ENKEL GEVECHT	
+gText_DoubleBattle	DOUBLE BATTLE	DUBBEL GEVECHT	label-ok: reviewed
+gText_MultiBattle	MULTI BATTLE	MULTI-GEVECHT	label-ok: reviewed
 gText_MrBriney	MR. BRINEY		
-gText_Challenge	CHALLENGE		
+gText_Challenge	CHALLENGE	UITDAGING	
 gText_Info3	INFO		
 gText_Lv50	LV. 50		
-gText_OpenLevel	OPEN LEVEL		
+gText_OpenLevel	OPEN LEVEL	OPEN NIVEAU	label-ok: reviewed
 gText_FreshWaterAndPrice	FRESH WATER{CLEAR_TO 72}¥200	VERS WATER{CLEAR_TO 72}¥200	
 gText_SodaPopAndPrice	SODA POP{CLEAR_TO 72}¥300	FRISDRANK{CLEAR_TO 72}¥300	label-ok: reviewed
 gText_LemonadeAndPrice	LEMONADE{CLEAR_TO 72}¥350	LIMONADE{CLEAR_TO 72}¥350	
-gText_HowToRide	HOW TO RIDE		
-gText_HowToTurn	HOW TO TURN		
-gText_SandySlopes	SANDY SLOPES		
-gText_Wheelies	WHEELIES		
-gText_BunnyHops	BUNNY-HOPS		
-gText_Jump	JUMP		
-gText_Satisfied	Satisfied		
-gText_Dissatisfied	Dissatisfied		
+gText_HowToRide	HOW TO RIDE	ZO RIJD JE	
+gText_HowToTurn	HOW TO TURN	ZO DRAAI JE	
+gText_SandySlopes	SANDY SLOPES	ZANDHELLINGEN	label-ok: reviewed
+gText_Wheelies	WHEELIES	WHEELIES	
+gText_BunnyHops	BUNNY-HOPS	BUNNY-HOPS	
+gText_Jump	JUMP	SPRINGEN	label-ok: reviewed
+gText_Satisfied	Satisfied	Tevreden	
+gText_Dissatisfied	Dissatisfied	Niet tevreden	label-ok: reviewed
 gText_DeepSeaTooth	DEEPSEATOOTH	DIEPZEETAND	width-ok: list menu sizes itself
 gText_DeepSeaScale	DEEPSEASCALE	DIEPZEESCHUB	width-ok: list menu sizes itself
 gText_BlueFlute2	BLUE FLUTE	BLAUWE FLUIT	width-ok: list menu sizes itself
@@ -618,82 +618,82 @@ gText_YellowFlute2	YELLOW FLUTE	GELE FLUIT	width-ok: list menu sizes itself
 gText_RedFlute2	RED FLUTE	RODE FLUIT	width-ok: list menu sizes itself
 gText_WhiteFlute2	WHITE FLUTE	WITTE FLUIT	width-ok: list menu sizes itself
 gText_BlackFlute2	BLACK FLUTE	ZWARTE FLUIT	width-ok: list menu sizes itself
-gText_GlassChair	GLASS CHAIR		
-gText_GlassDesk	GLASS DESK		
-gText_TreeckoDollAndPrice	TREECKO DOLL 1,000 COINS		
-gText_TorchicDollAndPrice	TORCHIC DOLL 1,000 COINS		
-gText_MudkipDollAndPrice	MUDKIP DOLL   1,000 COINS		
-gText_50CoinsAndPrice	  50 COINS    ¥1,000		
-gText_500CoinsAndPrice	500 COINS  ¥10,000		
-gText_Excellent2	Excellent		
-gText_NotSoGood	Not so good		
+gText_GlassChair	GLASS CHAIR	GLAZEN STOEL	label-ok: reviewed
+gText_GlassDesk	GLASS DESK	GLAZEN BUREAU	label-ok: reviewed
+gText_TreeckoDollAndPrice	TREECKO DOLL 1,000 COINS	TREECKO-POP 1.000 MUNTEN	
+gText_TorchicDollAndPrice	TORCHIC DOLL 1,000 COINS	TORCHIC-POP 1.000 MUNTEN	
+gText_MudkipDollAndPrice	MUDKIP DOLL   1,000 COINS	MUDKIP-POP   1.000 MUNTEN	
+gText_50CoinsAndPrice	  50 COINS    ¥1,000	  50 MUNTEN   ¥1.000	label-ok: reviewed
+gText_500CoinsAndPrice	500 COINS  ¥10,000	500 MUNTEN ¥10.000	label-ok: reviewed
+gText_Excellent2	Excellent	Geweldig	
+gText_NotSoGood	Not so good	Niet zo goed	label-ok: reviewed
 gText_RedShard	RED SHARD	RODE SCHERF	width-ok: list menu sizes itself
 gText_YellowShard	YELLOW SHARD	GELE SCHERF	width-ok: list menu sizes itself
 gText_BlueShard	BLUE SHARD	BLAUWE SCHERF	width-ok: list menu sizes itself
 gText_GreenShard	GREEN SHARD	GROENE SCHERF	width-ok: list menu sizes itself
 gText_BattleFrontier	BATTLE FRONTIER		
-gText_Right	Right		
-gText_Left	Left		
-gText_TM32AndPrice	TM32{CLEAR_TO 72}1,500 COINS		
-gText_TM29AndPrice	TM29{CLEAR_TO 72}3,500 COINS		
-gText_TM35AndPrice	TM35{CLEAR_TO 72}4,000 COINS		
-gText_TM24AndPrice	TM24{CLEAR_TO 72}4,000 COINS		
-gText_TM13AndPrice	TM13{CLEAR_TO 72}4,000 COINS		
-gText_Cool	COOL		
-gText_Beauty	BEAUTY		
-gText_Cute	CUTE		
-gText_Smart	SMART		
-gText_Tough	TOUGH		
-gText_Normal	NORMAL		
-gText_Super	SUPER		
-gText_Hyper	HYPER		
-gText_Master	MASTER		
-gText_Cool2	COOL		
-gText_Beauty2	BEAUTY		
-gText_Cute2	CUTE		
-gText_Smart2	SMART		
-gText_Tough2	TOUGH		
-gText_Items	ITEMS		
+gText_Right	Right	Rechts	label-ok: reviewed
+gText_Left	Left	Links	label-ok: reviewed
+gText_TM32AndPrice	TM32{CLEAR_TO 72}1,500 COINS	TM32{CLEAR_TO 72}1.500 MUNTEN	label-ok: reviewed
+gText_TM29AndPrice	TM29{CLEAR_TO 72}3,500 COINS	TM29{CLEAR_TO 72}3.500 MUNTEN	label-ok: reviewed
+gText_TM35AndPrice	TM35{CLEAR_TO 72}4,000 COINS	TM35{CLEAR_TO 72}4.000 MUNTEN	label-ok: reviewed
+gText_TM24AndPrice	TM24{CLEAR_TO 72}4,000 COINS	TM24{CLEAR_TO 72}4.000 MUNTEN	label-ok: reviewed
+gText_TM13AndPrice	TM13{CLEAR_TO 72}4,000 COINS	TM13{CLEAR_TO 72}4.000 MUNTEN	label-ok: reviewed
+gText_Cool	COOL	STOER	label-ok: reviewed
+gText_Beauty	BEAUTY	MOOI	
+gText_Cute	CUTE	SCHATTIG	label-ok: reviewed
+gText_Smart	SMART	SLIM	
+gText_Tough	TOUGH	STERK	
+gText_Normal	NORMAL	NORMAAL	label-ok: reviewed
+gText_Super	SUPER	SUPER	
+gText_Hyper	HYPER	HYPER	
+gText_Master	MASTER	MEESTER	label-ok: reviewed
+gText_Cool2	COOL	STOER	label-ok: reviewed
+gText_Beauty2	BEAUTY	MOOI	
+gText_Cute2	CUTE	SCHATTIG	label-ok: reviewed
+gText_Smart2	SMART	SLIM	
+gText_Tough2	TOUGH	STERK	
+gText_Items	ITEMS	VOORWERPEN	label-ok: reviewed
 gText_Key_Items	KEY ITEMS	BELANGRIJK	label-ok: reviewed
 gText_Poke_Balls	POKé BALLS		
 gText_TMs_Hms	TMs & HMs	TM's & HM's	label-ok: reviewed
 gText_Berries2	BERRIES	BESSEN	
-gText_SomeonesPC	SOMEONE'S PC		
-gText_LanettesPC	LANETTE'S PC		
-gText_PlayersPC	{PLAYER}'s PC		
+gText_SomeonesPC	SOMEONE'S PC	PC VAN IEMAND	label-ok: reviewed
+gText_LanettesPC	LANETTE'S PC	PC VAN LANETTE	label-ok: reviewed
+gText_PlayersPC	{PLAYER}'s PC	PC van {PLAYER}	label-ok: reviewed
 gText_HallOfFame	HALL OF FAME		
-gText_LogOff	LOG OFF		
-gText_Opponent	OPPONENT		
-gText_Tourney_Tree	TOURNEY TREE		
-gText_ReadyToStart	READY TO START		
-gText_NormalRank	NORMAL RANK		
-gText_SuperRank	SUPER RANK		
-gText_HyperRank	HYPER RANK		
-gText_MasterRank	MASTER RANK		
-gText_Single2	SINGLE		
-gText_Double2	DOUBLE		
-gText_Multi	MULTI		
-gText_MultiLink	MULTI-LINK		
-gText_BattleBag	BATTLE BAG		
-gText_HeldItem	HELD ITEM		
-gText_LinkContest	LINK CONTEST		
-gText_AboutE_Mode	ABOUT E-MODE		
-gText_AboutG_Mode	ABOUT G-MODE		
-gText_E_Mode	E-MODE		
-gText_G_Mode	G-MODE		
+gText_LogOff	LOG OFF	UITLOGGEN	label-ok: reviewed
+gText_Opponent	OPPONENT	TEGENSTANDER	label-ok: reviewed
+gText_Tourney_Tree	TOURNEY TREE	TOERNOOI	
+gText_ReadyToStart	READY TO START	KLAAR VOOR START	label-ok: reviewed
+gText_NormalRank	NORMAL RANK	NORMAAL NIVEAU	label-ok: reviewed
+gText_SuperRank	SUPER RANK	SUPER NIVEAU	label-ok: reviewed
+gText_HyperRank	HYPER RANK	HYPER NIVEAU	label-ok: reviewed
+gText_MasterRank	MASTER RANK	MEESTER NIVEAU	label-ok: reviewed
+gText_Single2	SINGLE	ENKEL	
+gText_Double2	DOUBLE	DUBBEL	
+gText_Multi	MULTI	MULTI	
+gText_MultiLink	MULTI-LINK	MULTI-LINK	
+gText_BattleBag	BATTLE BAG	GEVECHTSTAS	label-ok: reviewed
+gText_HeldItem	HELD ITEM	VOORWERP	
+gText_LinkContest	LINK CONTEST	LINK-WEDSTRIJD	label-ok: reviewed
+gText_AboutE_Mode	ABOUT E-MODE	OVER E-MODUS	
+gText_AboutG_Mode	ABOUT G-MODE	OVER G-MODUS	
+gText_E_Mode	E-MODE	E-MODUS	label-ok: reviewed
+gText_G_Mode	G-MODE	G-MODUS	label-ok: reviewed
 gText_MenuOptionPokedex	POKéDEX		
 gText_MenuOptionPokemon	POKéMON		
-gText_MenuOptionBag	BAG		
+gText_MenuOptionBag	BAG	TAS	
 gText_MenuOptionPokenav	POKéNAV		
 gText_Blank			
-gText_MenuOptionSave	SAVE		
-gText_MenuOptionOption	OPTION		
-gText_MenuOptionExit	EXIT		
+gText_MenuOptionSave	SAVE	OPSLAAN	label-ok: reviewed
+gText_MenuOptionOption	OPTION	OPTIES	
+gText_MenuOptionExit	EXIT	SLUIT	label-ok: reviewed
 gText_5BP	  5BP		
 gText_10BP	10BP		
 gText_15BP	15BP		
-gText_RedTent	RED TENT		
-gText_BlueTent	BLUE TENT		
+gText_RedTent	RED TENT	RODE TENT	label-ok: reviewed
+gText_BlueTent	BLUE TENT	BLAUWE TENT	label-ok: reviewed
 gText_SouthernIsland	SOUTHERN ISLAND		
 gText_BirthIsland	BIRTH ISLAND		
 gText_FarawayIsland	FARAWAY ISLAND		
@@ -701,14 +701,14 @@ gText_NavelRock	NAVEL ROCK
 gText_ClawFossil	CLAW FOSSIL	KLAUWFOSSIEL	width-ok: list menu sizes itself
 gText_RootFossil	ROOT FOSSIL	WORTELFOSSIEL	width-ok: list menu sizes itself
 gText_No4	NO		
-gText_IllBattleNow	I'll battle now!		
-gText_IWon	I won!		
-gText_ILost	I lost!		
-gText_IWontTell	I won't tell.		
-gText_NormalTagMatch	NORMAL TAG MATCH		
-gText_VarietyTagMatch	VARIETY TAG MATCH		
-gText_UniqueTagMatch	UNIQUE TAG MATCH		
-gText_ExpertTagMatch	EXPERT TAG MATCH		
+gText_IllBattleNow	I'll battle now!	Ik ga nu vechten!	label-ok: reviewed
+gText_IWon	I won!	Ik heb gewonnen!	label-ok: reviewed
+gText_ILost	I lost!	Ik heb verloren!	label-ok: reviewed
+gText_IWontTell	I won't tell.	Dat zeg ik niet.	label-ok: reviewed
+gText_NormalTagMatch	NORMAL TAG MATCH	NORMAAL DUOGEVECHT	label-ok: reviewed
+gText_VarietyTagMatch	VARIETY TAG MATCH	GEVARIEERD DUOGEVECHT	label-ok: reviewed
+gText_UniqueTagMatch	UNIQUE TAG MATCH	UNIEK DUOGEVECHT	label-ok: reviewed
+gText_ExpertTagMatch	EXPERT TAG MATCH	EXPERT DUOGEVECHT	label-ok: reviewed
 gText_TradeCenter	TRADE CENTER		
 gText_Colosseum	COLOSSEUM		
 gText_RecordCorner	RECORD CORNER		
@@ -716,25 +716,25 @@ gText_BerryCrush3	BERRY CRUSH
 gText_EmptyLinkService			
 gText_PokemonJump	POKéMON JUMP		
 gText_DodrioBerryPicking	DODRIO BERRY-PICKING		
-gText_BecomeLeader	BECOME LEADER		
-gText_JoinGroup	JOIN GROUP		
-gText_TwoStyles	TWO STYLES		
+gText_BecomeLeader	BECOME LEADER	WORD LEIDER	
+gText_JoinGroup	JOIN GROUP	DOE MEE	
+gText_TwoStyles	TWO STYLES	TWEE STIJLEN	label-ok: reviewed
 gText_Lv50_3	LV. 50		
-gText_OpenLevel2	OPEN LEVEL		
-gText_MonTypeAndNo	{PKMN} TYPE & NO.		
-gText_HoldItems	HOLD ITEMS		
-gText_Symbols2	SYMBOLS		
-gText_Record3	RECORD		
-gText_BattlePts	BATTLE PTS		
-gText_TowerInfo	TOWER INFO		
-gText_BattleMon	BATTLE {PKMN}		
+gText_OpenLevel2	OPEN LEVEL	OPEN NIVEAU	label-ok: reviewed
+gText_MonTypeAndNo	{PKMN} TYPE & NO.	{PKMN} TYPE & NR.	
+gText_HoldItems	HOLD ITEMS	VOORWERPEN	label-ok: reviewed
+gText_Symbols2	SYMBOLS	SYMBOLEN	label-ok: reviewed
+gText_Record3	RECORD	RECORD	
+gText_BattlePts	BATTLE PTS	GEVECHTSPUNTEN	label-ok: reviewed
+gText_TowerInfo	TOWER INFO	TOREN-INFO	label-ok: reviewed
+gText_BattleMon	BATTLE {PKMN}	GEVECHTS-{PKMN}	label-ok: reviewed
 gText_BattleSalon	BATTLE SALON		
-gText_MultiLink2	MULTI-LINK		
-gText_BattleRules	BATTLE RULES		
-gText_JudgeMind	JUDGE: MIND		
-gText_JudgeSkill	JUDGE: SKILL		
-gText_JudgeBody	JUDGE: BODY		
-gText_Matchup	MATCHUP		
+gText_MultiLink2	MULTI-LINK	MULTI-LINK	
+gText_BattleRules	BATTLE RULES	REGELS	
+gText_JudgeMind	JUDGE: MIND	JURY: MOED	
+gText_JudgeSkill	JUDGE: SKILL	JURY: KUNDE	
+gText_JudgeBody	JUDGE: BODY	JURY: KRACHT	label-ok: reviewed
+gText_Matchup	MATCHUP	WIE TEGEN WIE	label-ok: reviewed
 gText_TourneyTree	TOURNEY TREE		
 gText_DoubleKO	DOUBLE KO		
 gText_BasicRules	BASIC RULES		
