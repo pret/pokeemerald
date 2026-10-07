@@ -36,6 +36,8 @@ KINDS = {
     "berry_name": Kind("berry_name", 6, 1, [("normal", 64, "berry tag")]),
     "berry_desc": Kind("berry_desc", None, 1, [("normal", 200, "berry tag")]),
     "contest_desc": Kind("contest_desc", None, 2, [("normal", 154, "summary move description")]),
+    "battle_msg": Kind("battle_msg", None, 99, [("normal", 208, "battle text box")]),
+    "battle_type_move": Kind("battle_type_move", 16, 1, [("normal", 208, "battle text box")]),
 }
 
 LIT = r'"(?:[^"\\]|\\.)*"'
@@ -77,6 +79,10 @@ SPECS = [
          rf'static const u8 (?P<key>sBerryDescriptionPart\d_\w+)\[\] = _\((?P<body>(?:\s*{LIT})+\s*)\)'),
     Spec("contest", "contest_desc", "data/text/contest_strings.inc", INC_ENTRY,
          style="inc", section_end="@ Unused move names"),
+    Spec("battle", "battle_msg", "src/battle_message.c",
+         rf'^(?:static )?const u8 (?P<key>[sg]Text_\w+)\[\] = _\((?P<body>(?:\s*{LIT})+\s*)\)'),
+    Spec("battle", "battle_type_move", "src/battle_message.c",
+         rf'\[(?P<key>TYPE_\w+)\]\s*= _\((?P<body>(?:\s*{LIT})+\s*)\)', "MOVETYPE_{}"),
 ]
 
 
@@ -200,15 +206,52 @@ def encode(text):
     return out, errors
 
 
+NAME = "N" * 10
+PREFIX = "Vijandige "  # longest battle name prefix (sText_FoePkmnPrefix)
+
+
+def placeholder_sample(token):
+    """Worst-case text a {PLACEHOLDER} can expand to, or "" for formatting codes."""
+    name = token.split()[0]
+    if "WITH_PREFIX" in name:
+        return globals()["PREFIX"] + NAME
+    if "_PREFIX" in name:  # B_ATK_PREFIX1..3: the side, "Ally"/"Foe"
+        return "het vijandige team"
+    if "MOVE" in name or "ABILITY" in name:
+        return "N" * 12
+    if "ITEM" in name:
+        return "N" * 13
+    if "CLASS" in name:
+        return "N" * 12
+    if name in ("PLAYER", "RIVAL") or "PLAYER_NAME" in name or "TRAINER" in name and "NAME" in name \
+            or "PARTNER_NAME" in name or "LINK_" in name and "NAME" in name:
+        return "N" * 7
+    if "NAME" in name or "BUFF" in name or name.startswith("STR_VAR"):
+        return NAME
+    return ""
+
+
+def split_lines(text):
+    """Split on the line codes \\n, \\l and \\p."""
+    return re.split(r"\\[nlp]", text)
+
+
 def line_widths(text, font):
-    """Pixel width of each line (split on \\n). Control codes ({PLAYER} etc.) count 0 px."""
+    """Pixel width of each line. Name placeholders count as their worst case."""
     widths = WIDTHS[font]
     out = []
-    for line in text.split("\\n"):
+    for line in split_lines(text):
         px = 0
         for part in re.split(r"(\{[^}]*\})", line):
+            if part.startswith("{"):
+                part = placeholder_sample(part[1:-1])
             seq = encode(part)[0]
             if seq and seq[0] < 0xF7:
                 px += sum(widths[b] for b in seq)
         out.append(px)
     return out
+
+
+def control_codes(text):
+    """Sorted list of the {...} codes in a string."""
+    return sorted(re.findall(r"\{[^}]*\}", text))

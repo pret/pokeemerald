@@ -35,6 +35,22 @@ The player is a **Dutch kid (about 8–10 years old)**. Every Dutch string must 
   2. else use a clear abbreviation (`SP. AANV`),
   3. never cut a word silently.
 
+## Battle messages (`battle.tsv` → `src/battle_message.c`)
+- **Name prefixes are separate strings** glued before `{B_*_NAME_WITH_PREFIX}`:
+  - `Wilde `
+  - `Vijandige `
+  - nothing for your own POKéMON
+
+  So **put the name first** in the sentence: `{B_ATK_NAME_WITH_PREFIX} gebruikt\n{B_BUFF2}` → "Wilde ZIGZAGOON gebruikt TACKLE!".
+- `{B_ATK_PREFIX1/2/3}` expand to `jouw team` / `het vijandige team` (lowercase). Never put them at the start of a sentence.
+- **No possessive 's.** Use "X van Y", or start with the name.
+- **Stat changes** are `{NAME}: {STAT}\n{flink }{omhoog!|omlaag!}`, assembled by the game.
+- **Present tense:** "gebruikt", "is verslagen", "gaat naar LV. 5!".
+- **Ability messages:** "X laat het regenen met MOTREGEN!". When a line is too long, use "X gebruikt\nTALENT!\p" plus a new sentence.
+- **Referee:** `SCHEIDS:`.
+- **Control codes:** the Dutch must contain exactly the same `{...}` codes as the English; `check.py` enforces this.
+- **Widths:** placeholders are measured at worst case (name with prefix = "Vijandige " + 10 letters). If a line is too wide, break it with `\l`. In the rare case where the worst case can't happen (e.g. a buffer that's always a digit), put `width-ok: <reason>` in the notes column.
+
 ## Technical limits (the check script enforces these)
 | String | Limit |
 |---|---|
@@ -67,6 +83,7 @@ The player is a **Dutch kid (about 8–10 years old)**. Every Dutch string must 
 - `python3 translation/fill.py <tsv-name> <file>` bulk-fills Dutch cells from a `KEY<TAB>dutch` text file.
 - Which source strings each TSV manages is defined in `SPECS` in `translation/common.py`. It supports both `_("...")` C strings and `.string "...$"` blocks in `.inc` files.
 - `contest.tsv` holds the contest move effect descriptions (`data/text/contest_strings.inc`).
+- `battle.tsv` holds all strings in `src/battle_message.c` (battle messages, battle menu, stat names, Battle Frontier referee).
 - **Always edit the TSV, then apply.** Never hand-edit strings that a TSV manages (move/ability/item/berry names and descriptions), or the next apply will overwrite them.
 
 ## Workflow per batch

@@ -10,7 +10,7 @@ The next goal is to give these Dutch names **and** descriptions, so a Dutch play
 - abilities (77)
 - items (~377, berries included)
 
-These stay English: Pokémon names, character names, and town/route names (towns are undecided and will be revisited later).
+These stay English: Pokémon names, character names, and town/route/place names (decided: easy to look up, and the Dutch anime keeps them English too).
 
 No official Dutch Gen 3 names exist, so the names are our own. They have to:
 - be consistent everywhere,

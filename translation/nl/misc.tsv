@@ -78,3 +78,18 @@ WORD_KEY_ITEMS	KEY ITEMS	BELANGRIJK	bag pocket
 WORD_ITEMS	ITEMS	VOORWERPEN	bag pocket
 NAME_BERRY_BLENDER	BERRY BLENDER	BESSENMIXER	used in POKéBLOCK CASE description; apply in dialogue phase
 WORD_FIRMNESS	FIRM / SIZE	HARD / MAAT	berry tag labels
+BATTLE_PREFIX_WILD	Wild 	Wilde 	name prefix
+BATTLE_PREFIX_FOE	Foe 	Vijandige 	name prefix
+BATTLE_SIDE	Ally / Foe	jouw team / het vijandige team	B_ATK_PREFIX1..3, lowercase
+BATTLE_USED	X used Y!	X gebruikt Y!	
+BATTLE_SUPER	It's super effective!	Dat is super effectief!	
+BATTLE_NOTVERY	It's not very effective…	Dat is niet erg effectief…	
+BATTLE_CRIT	A critical hit!	Een voltreffer!	
+BATTLE_FAINT	fainted!	is verslagen!	
+BATTLE_GOTCHA	Gotcha!	Gelukt!	
+BATTLE_MENU	FIGHT / BAG / POKéMON / RUN	VECHT / TAS / POKéMON / VLUCHT	
+BATTLE_SAFARI_NEAR	GO NEAR	NADER	safari menu
+BATTLE_REFEREE	REFEREE	SCHEIDS	
+BATTLE_STAT_UP	rose! / sharply	omhoog! / flink	"AANVAL\nflink omhoog!"
+BATTLE_STAT_DOWN	fell! / harshly	omlaag! / flink	
+WORD_EVOLVE	evolve	evolueren	"X evolueert!"

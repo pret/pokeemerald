@@ -1,0 +1,542 @@
+key	english	dutch	notes
+sText_Trainer1LoseText	{B_TRAINER1_LOSE_TEXT}		
+sText_PkmnGainedEXP	{B_BUFF1} gained{B_BUFF2}\n{B_BUFF3} EXP. Points!\p	{B_BUFF1} krijgt{B_BUFF2}\n{B_BUFF3} EXP.-punten!\p	
+sText_EmptyString4			
+sText_ABoosted	 a boosted	 extra	
+sText_PkmnGrewToLv	{B_BUFF1} grew to\nLV. {B_BUFF2}!{WAIT_SE}\p	{B_BUFF1} gaat naar\nLV. {B_BUFF2}!{WAIT_SE}\p	
+sText_PkmnLearnedMove	{B_BUFF1} learned\n{B_BUFF2}!{WAIT_SE}\p	{B_BUFF1} leert\n{B_BUFF2}!{WAIT_SE}\p	
+sText_TryToLearnMove1	{B_BUFF1} is trying to\nlearn {B_BUFF2}.\p	{B_BUFF1} wil\n{B_BUFF2} leren.\p	
+sText_TryToLearnMove2	But, {B_BUFF1} can't learn\nmore than four moves.\p	Maar {B_BUFF1} kan niet\nmeer dan vier aanvallen.\p	
+sText_TryToLearnMove3	Delete a move to make\nroom for {B_BUFF2}?	Een aanval vergeten voor\n{B_BUFF2}?	
+sText_PkmnForgotMove	{B_BUFF1} forgot\n{B_BUFF2}.\p	{B_BUFF1} vergeet\n{B_BUFF2}.\p	
+sText_StopLearningMove	{PAUSE 32}Stop learning\n{B_BUFF2}?	{PAUSE 32}Stoppen met\n{B_BUFF2} leren?	
+sText_DidNotLearnMove	{B_BUFF1} did not learn\n{B_BUFF2}.\p	{B_BUFF1} leert\n{B_BUFF2} niet.\p	
+sText_UseNextPkmn	Use next POKéMON?	Volgende POKéMON?	
+sText_AttackMissed	{B_ATK_NAME_WITH_PREFIX}'s\nattack missed!	{B_ATK_NAME_WITH_PREFIX}\nmist!	
+sText_PkmnProtectedItself	{B_DEF_NAME_WITH_PREFIX}\nprotected itself!	{B_DEF_NAME_WITH_PREFIX}\nbeschermt zich!	
+sText_AvoidedDamage	{B_DEF_NAME_WITH_PREFIX} avoided\ndamage with {B_DEF_ABILITY}!	{B_DEF_NAME_WITH_PREFIX} krijgt geen\nschade door {B_DEF_ABILITY}!	
+sText_PkmnMakesGroundMiss	{B_DEF_NAME_WITH_PREFIX} makes GROUND\nmoves miss with {B_DEF_ABILITY}!	{B_DEF_NAME_WITH_PREFIX} laat GROND-\naanvallen missen met {B_DEF_ABILITY}!	
+sText_PkmnAvoidedAttack	{B_DEF_NAME_WITH_PREFIX} avoided\nthe attack!	{B_DEF_NAME_WITH_PREFIX}\nontwijkt de aanval!	
+sText_ItDoesntAffect	It doesn't affect\n{B_DEF_NAME_WITH_PREFIX}…	Het heeft geen effect op\n{B_DEF_NAME_WITH_PREFIX}…	
+sText_AttackerFainted	{B_ATK_NAME_WITH_PREFIX}\nfainted!\p	{B_ATK_NAME_WITH_PREFIX}\nis verslagen!\p	
+sText_TargetFainted	{B_DEF_NAME_WITH_PREFIX}\nfainted!\p	{B_DEF_NAME_WITH_PREFIX}\nis verslagen!\p	
+sText_PlayerGotMoney	{B_PLAYER_NAME} got ¥{B_BUFF1}\nfor winning!\p	{B_PLAYER_NAME} krijgt ¥{B_BUFF1}\nvoor het winnen!\p	
+sText_PlayerWhiteout	{B_PLAYER_NAME} is out of\nusable POKéMON!\p	{B_PLAYER_NAME} heeft geen\nPOKéMON meer over!\p	
+sText_PlayerWhiteout2	{B_PLAYER_NAME} whited out!{PAUSE_UNTIL_PRESS}	{B_PLAYER_NAME} valt flauw!{PAUSE_UNTIL_PRESS}	
+sText_PreventsEscape	{B_SCR_ACTIVE_NAME_WITH_PREFIX} prevents\nescape with {B_SCR_ACTIVE_ABILITY}!\p	{B_SCR_ACTIVE_NAME_WITH_PREFIX} houdt je\ntegen met {B_SCR_ACTIVE_ABILITY}!\p	
+sText_CantEscape2	Can't escape!\p	Vluchten lukt niet!\p	
+sText_AttackerCantEscape	{B_ATK_NAME_WITH_PREFIX} can't escape!	{B_ATK_NAME_WITH_PREFIX}\nkan niet vluchten!	
+sText_HitXTimes	Hit {B_BUFF1} time(s)!	{B_BUFF1} keer geraakt!	
+sText_PkmnFellAsleep	{B_EFF_NAME_WITH_PREFIX}\nfell asleep!	{B_EFF_NAME_WITH_PREFIX}\nvalt in slaap!	
+sText_PkmnMadeSleep	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nmade {B_EFF_NAME_WITH_PREFIX} sleep!	{B_SCR_ACTIVE_NAME_WITH_PREFIX} gebruikt\n{B_SCR_ACTIVE_ABILITY}!\p{B_EFF_NAME_WITH_PREFIX}\nvalt in slaap!	
+sText_PkmnAlreadyAsleep	{B_DEF_NAME_WITH_PREFIX} is\nalready asleep!	{B_DEF_NAME_WITH_PREFIX}\nslaapt al!	
+sText_PkmnAlreadyAsleep2	{B_ATK_NAME_WITH_PREFIX} is\nalready asleep!	{B_ATK_NAME_WITH_PREFIX}\nslaapt al!	
+sText_PkmnWasntAffected	{B_DEF_NAME_WITH_PREFIX}\nwasn't affected!	{B_DEF_NAME_WITH_PREFIX}\nmerkt er niets van!	
+sText_PkmnWasPoisoned	{B_EFF_NAME_WITH_PREFIX}\nwas poisoned!	{B_EFF_NAME_WITH_PREFIX}\nis vergiftigd!	
+sText_PkmnPoisonedBy	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\npoisoned {B_EFF_NAME_WITH_PREFIX}!	{B_SCR_ACTIVE_NAME_WITH_PREFIX} gebruikt\n{B_SCR_ACTIVE_ABILITY}!\p{B_EFF_NAME_WITH_PREFIX}\nis vergiftigd!	
+sText_PkmnHurtByPoison	{B_ATK_NAME_WITH_PREFIX} is hurt\nby poison!	{B_ATK_NAME_WITH_PREFIX}\nheeft pijn door gif!	
+sText_PkmnAlreadyPoisoned	{B_DEF_NAME_WITH_PREFIX} is already\npoisoned.	{B_DEF_NAME_WITH_PREFIX}\nis al vergiftigd.	
+sText_PkmnBadlyPoisoned	{B_EFF_NAME_WITH_PREFIX} is badly\npoisoned!	{B_EFF_NAME_WITH_PREFIX}\nis zwaar vergiftigd!	
+sText_PkmnEnergyDrained	{B_DEF_NAME_WITH_PREFIX} had its\nenergy drained!	{B_DEF_NAME_WITH_PREFIX}\nverliest energie!	
+sText_PkmnWasBurned	{B_EFF_NAME_WITH_PREFIX} was burned!	{B_EFF_NAME_WITH_PREFIX}\nis verbrand!	
+sText_PkmnBurnedBy	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nburned {B_EFF_NAME_WITH_PREFIX}!	{B_SCR_ACTIVE_NAME_WITH_PREFIX} gebruikt\n{B_SCR_ACTIVE_ABILITY}!\p{B_EFF_NAME_WITH_PREFIX}\nis verbrand!	
+sText_PkmnHurtByBurn	{B_ATK_NAME_WITH_PREFIX} is hurt\nby its burn!	{B_ATK_NAME_WITH_PREFIX}\nheeft pijn door de brandwond!	
+sText_PkmnAlreadyHasBurn	{B_DEF_NAME_WITH_PREFIX} already\nhas a burn.	{B_DEF_NAME_WITH_PREFIX}\nis al verbrand.	
+sText_PkmnWasFrozen	{B_EFF_NAME_WITH_PREFIX} was\nfrozen solid!	{B_EFF_NAME_WITH_PREFIX}\nis bevroren!	
+sText_PkmnFrozenBy	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nfroze {B_EFF_NAME_WITH_PREFIX} solid!	{B_SCR_ACTIVE_NAME_WITH_PREFIX} gebruikt\n{B_SCR_ACTIVE_ABILITY}!\p{B_EFF_NAME_WITH_PREFIX}\nis bevroren!	
+sText_PkmnIsFrozen	{B_ATK_NAME_WITH_PREFIX} is\nfrozen solid!	{B_ATK_NAME_WITH_PREFIX}\nis bevroren!	
+sText_PkmnWasDefrosted	{B_DEF_NAME_WITH_PREFIX} was\ndefrosted!	{B_DEF_NAME_WITH_PREFIX}\nis ontdooid!	
+sText_PkmnWasDefrosted2	{B_ATK_NAME_WITH_PREFIX} was\ndefrosted!	{B_ATK_NAME_WITH_PREFIX}\nis ontdooid!	
+sText_PkmnWasDefrostedBy	{B_ATK_NAME_WITH_PREFIX} was\ndefrosted by {B_CURRENT_MOVE}!	{B_ATK_NAME_WITH_PREFIX} is\nontdooid door {B_CURRENT_MOVE}!	
+sText_PkmnWasParalyzed	{B_EFF_NAME_WITH_PREFIX} is paralyzed!\nIt may be unable to move!	{B_EFF_NAME_WITH_PREFIX} is verlamd!\nMisschien kan hij niet bewegen!	
+sText_PkmnWasParalyzedBy	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nparalyzed {B_EFF_NAME_WITH_PREFIX}!\lIt may be unable to move!	{B_SCR_ACTIVE_NAME_WITH_PREFIX} gebruikt\n{B_SCR_ACTIVE_ABILITY}!\p{B_EFF_NAME_WITH_PREFIX} is verlamd!\nMisschien kan hij niet bewegen!	
+sText_PkmnIsParalyzed	{B_ATK_NAME_WITH_PREFIX} is paralyzed!\nIt can't move!	{B_ATK_NAME_WITH_PREFIX} is verlamd!\nHij kan niet bewegen!	
+sText_PkmnIsAlreadyParalyzed	{B_DEF_NAME_WITH_PREFIX} is\nalready paralyzed!	{B_DEF_NAME_WITH_PREFIX}\nis al verlamd!	
+sText_PkmnHealedParalysis	{B_DEF_NAME_WITH_PREFIX} was\nhealed of paralysis!	{B_DEF_NAME_WITH_PREFIX}\nis niet meer verlamd!	
+sText_PkmnDreamEaten	{B_DEF_NAME_WITH_PREFIX}'s\ndream was eaten!	De droom van\n{B_DEF_NAME_WITH_PREFIX} is opgegeten!	
+sText_StatsWontIncrease	{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\nwon't go higher!	{B_ATK_NAME_WITH_PREFIX}: {B_BUFF1}\nkan niet hoger!	
+sText_StatsWontDecrease	{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\nwon't go lower!	{B_DEF_NAME_WITH_PREFIX}: {B_BUFF1}\nkan niet lager!	
+sText_TeamStoppedWorking	Your team's {B_BUFF1}\nstopped working!	{B_BUFF1} van je team\nwerkt niet meer!	
+sText_FoeStoppedWorking	The foe's {B_BUFF1}\nstopped working!	{B_BUFF1} van de vijand\nwerkt niet meer!	
+sText_PkmnIsConfused	{B_ATK_NAME_WITH_PREFIX} is\nconfused!	{B_ATK_NAME_WITH_PREFIX}\nis in de war!	
+sText_PkmnHealedConfusion	{B_ATK_NAME_WITH_PREFIX} snapped\nout of confusion!	{B_ATK_NAME_WITH_PREFIX}\nis niet meer in de war!	
+sText_PkmnWasConfused	{B_EFF_NAME_WITH_PREFIX} became\nconfused!	{B_EFF_NAME_WITH_PREFIX}\nraakt in de war!	
+sText_PkmnAlreadyConfused	{B_DEF_NAME_WITH_PREFIX} is\nalready confused!	{B_DEF_NAME_WITH_PREFIX}\nis al in de war!	
+sText_PkmnFellInLove	{B_DEF_NAME_WITH_PREFIX}\nfell in love!	{B_DEF_NAME_WITH_PREFIX}\nwordt verliefd!	
+sText_PkmnInLove	{B_ATK_NAME_WITH_PREFIX} is in love\nwith {B_SCR_ACTIVE_NAME_WITH_PREFIX}!	{B_ATK_NAME_WITH_PREFIX} is verliefd\nop {B_SCR_ACTIVE_NAME_WITH_PREFIX}!	
+sText_PkmnImmobilizedByLove	{B_ATK_NAME_WITH_PREFIX} is\nimmobilized by love!	{B_ATK_NAME_WITH_PREFIX} is te\nverliefd om aan te vallen!	
+sText_PkmnBlownAway	{B_DEF_NAME_WITH_PREFIX} was\nblown away!	{B_DEF_NAME_WITH_PREFIX}\nis weggeblazen!	
+sText_PkmnChangedType	{B_ATK_NAME_WITH_PREFIX} transformed\ninto the {B_BUFF1} type!	{B_ATK_NAME_WITH_PREFIX} wordt\nhet type {B_BUFF1}!	
+sText_PkmnFlinched	{B_ATK_NAME_WITH_PREFIX} flinched!	{B_ATK_NAME_WITH_PREFIX}\ndeinst terug!	
+sText_PkmnRegainedHealth	{B_DEF_NAME_WITH_PREFIX} regained\nhealth!	{B_DEF_NAME_WITH_PREFIX}\nkrijgt HP terug!	
+sText_PkmnHPFull	{B_DEF_NAME_WITH_PREFIX}'s\nHP is full!	{B_DEF_NAME_WITH_PREFIX}\nheeft al volle HP!	
+sText_PkmnRaisedSpDef	{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\nraised SP. DEF!	{B_CURRENT_MOVE} van {B_ATK_PREFIX2}\nverhoogt SP. VERD!	
+sText_PkmnRaisedSpDefALittle	{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\nraised SP. DEF a little!	{B_CURRENT_MOVE} van {B_ATK_PREFIX2}\nverhoogt SP. VERD een beetje!	
+sText_PkmnRaisedDef	{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\nraised DEFENSE!	{B_CURRENT_MOVE} van {B_ATK_PREFIX2}\nverhoogt VERDEDIGING!	
+sText_PkmnRaisedDefALittle	{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\nraised DEFENSE a little!	{B_CURRENT_MOVE} van {B_ATK_PREFIX2}\nverhoogt VERDEDIGING een beetje!	
+sText_PkmnCoveredByVeil	{B_ATK_PREFIX2}'s party is covered\nby a veil!	Er ligt een sluier over\n{B_ATK_PREFIX2}!	
+sText_PkmnUsedSafeguard	{B_DEF_NAME_WITH_PREFIX}'s party is protected\nby SAFEGUARD!	Het team van {B_DEF_NAME_WITH_PREFIX}\nis beschermd door VEILIGHEID!	
+sText_PkmnSafeguardExpired	{B_ATK_PREFIX3}'s party is no longer\nprotected by SAFEGUARD!	VEILIGHEID beschermt\n{B_ATK_PREFIX3} niet meer!	
+sText_PkmnWentToSleep	{B_ATK_NAME_WITH_PREFIX} went\nto sleep!	{B_ATK_NAME_WITH_PREFIX}\ngaat slapen!	
+sText_PkmnSleptHealthy	{B_ATK_NAME_WITH_PREFIX} slept and\nbecame healthy!	{B_ATK_NAME_WITH_PREFIX} slaapt\nen is weer gezond!	
+sText_PkmnWhippedWhirlwind	{B_ATK_NAME_WITH_PREFIX} whipped\nup a whirlwind!	{B_ATK_NAME_WITH_PREFIX}\nmaakt een wervelwind!	
+sText_PkmnTookSunlight	{B_ATK_NAME_WITH_PREFIX} took\nin sunlight!	{B_ATK_NAME_WITH_PREFIX}\nvangt zonlicht!	
+sText_PkmnLoweredHead	{B_ATK_NAME_WITH_PREFIX} lowered\nits head!	{B_ATK_NAME_WITH_PREFIX}\nbuigt zijn hoofd!	
+sText_PkmnIsGlowing	{B_ATK_NAME_WITH_PREFIX} is glowing!	{B_ATK_NAME_WITH_PREFIX} gloeit!	
+sText_PkmnFlewHigh	{B_ATK_NAME_WITH_PREFIX} flew\nup high!	{B_ATK_NAME_WITH_PREFIX}\nvliegt hoog de lucht in!	
+sText_PkmnDugHole	{B_ATK_NAME_WITH_PREFIX} dug a hole!	{B_ATK_NAME_WITH_PREFIX}\ngraaft een gat!	
+sText_PkmnHidUnderwater	{B_ATK_NAME_WITH_PREFIX} hid\nunderwater!	{B_ATK_NAME_WITH_PREFIX}\nverstopt zich onder water!	
+sText_PkmnSprangUp	{B_ATK_NAME_WITH_PREFIX} sprang up!	{B_ATK_NAME_WITH_PREFIX}\nspringt omhoog!	
+sText_PkmnSqueezedByBind	{B_DEF_NAME_WITH_PREFIX} was squeezed by\n{B_ATK_NAME_WITH_PREFIX}'s BIND!	{B_DEF_NAME_WITH_PREFIX} wordt\nvastgeknepen door BINDEN\lvan {B_ATK_NAME_WITH_PREFIX}!	
+sText_PkmnTrappedInVortex	{B_DEF_NAME_WITH_PREFIX} was trapped\nin the vortex!	{B_DEF_NAME_WITH_PREFIX} zit vast\nin de draaikolk!	
+sText_PkmnTrappedBySandTomb	{B_DEF_NAME_WITH_PREFIX} was trapped\nby SAND TOMB!	{B_DEF_NAME_WITH_PREFIX} zit vast\nin ZANDGRAF!	
+sText_PkmnWrappedBy	{B_DEF_NAME_WITH_PREFIX} was WRAPPED by\n{B_ATK_NAME_WITH_PREFIX}!	{B_ATK_NAME_WITH_PREFIX} wikkelt\n{B_DEF_NAME_WITH_PREFIX} in!	
+sText_PkmnClamped	{B_ATK_NAME_WITH_PREFIX} CLAMPED\n{B_DEF_NAME_WITH_PREFIX}!	{B_ATK_NAME_WITH_PREFIX} klemt\n{B_DEF_NAME_WITH_PREFIX} vast!	
+sText_PkmnHurtBy	{B_ATK_NAME_WITH_PREFIX} is hurt\nby {B_BUFF1}!	{B_ATK_NAME_WITH_PREFIX} heeft\npijn door {B_BUFF1}!	
+sText_PkmnFreedFrom	{B_ATK_NAME_WITH_PREFIX} was freed\nfrom {B_BUFF1}!	{B_ATK_NAME_WITH_PREFIX} is vrij\nvan {B_BUFF1}!	
+sText_PkmnCrashed	{B_ATK_NAME_WITH_PREFIX} kept going\nand crashed!	{B_ATK_NAME_WITH_PREFIX} gaat door\nen valt hard neer!	
+gText_PkmnShroudedInMist	{B_ATK_PREFIX2} became\nshrouded in MIST!	{B_ATK_PREFIX2} zit nu\nin de MIST!	
+sText_PkmnProtectedByMist	{B_SCR_ACTIVE_NAME_WITH_PREFIX} is protected\nby MIST!	{B_SCR_ACTIVE_NAME_WITH_PREFIX}\nwordt beschermd door MIST!	
+gText_PkmnGettingPumped	{B_ATK_NAME_WITH_PREFIX} is getting\npumped!	{B_ATK_NAME_WITH_PREFIX}\nmaakt zich klaar!	
+sText_PkmnHitWithRecoil	{B_ATK_NAME_WITH_PREFIX} is hit\nwith recoil!	{B_ATK_NAME_WITH_PREFIX} krijgt\nzelf ook een klap!	
+sText_PkmnProtectedItself2	{B_ATK_NAME_WITH_PREFIX} protected\nitself!	{B_ATK_NAME_WITH_PREFIX}\nbeschermt zich!	
+sText_PkmnBuffetedBySandstorm	{B_ATK_NAME_WITH_PREFIX} is buffeted\nby the sandstorm!	{B_ATK_NAME_WITH_PREFIX} heeft\nlast van de zandstorm!	
+sText_PkmnPeltedByHail	{B_ATK_NAME_WITH_PREFIX} is pelted\nby HAIL!	{B_ATK_NAME_WITH_PREFIX} wordt\ngeraakt door HAGEL!	
+sText_PkmnsXWoreOff	{B_ATK_PREFIX1}'s {B_BUFF1}\nwore off!	{B_BUFF1} van {B_ATK_PREFIX1}\nwerkt niet meer!	
+sText_PkmnSeeded	{B_DEF_NAME_WITH_PREFIX} was seeded!	{B_DEF_NAME_WITH_PREFIX}\nkrijgt een zaadje!	
+sText_PkmnEvadedAttack	{B_DEF_NAME_WITH_PREFIX} evaded\nthe attack!	{B_DEF_NAME_WITH_PREFIX}\nontwijkt de aanval!	
+sText_PkmnSappedByLeechSeed	{B_ATK_NAME_WITH_PREFIX}'s health is\nsapped by LEECH SEED!	ZUIGZAAD steelt HP van\n{B_ATK_NAME_WITH_PREFIX}!	
+sText_PkmnFastAsleep	{B_ATK_NAME_WITH_PREFIX} is fast\nasleep.	{B_ATK_NAME_WITH_PREFIX}\nslaapt diep.	
+sText_PkmnWokeUp	{B_ATK_NAME_WITH_PREFIX} woke up!	{B_ATK_NAME_WITH_PREFIX}\nwordt wakker!	
+sText_PkmnUproarKeptAwake	But {B_SCR_ACTIVE_NAME_WITH_PREFIX}'s UPROAR\nkept it awake!	Maar door KABAAL van\n{B_SCR_ACTIVE_NAME_WITH_PREFIX} blijft hij wakker!	
+sText_PkmnWokeUpInUproar	{B_ATK_NAME_WITH_PREFIX} woke up\nin the UPROAR!	{B_ATK_NAME_WITH_PREFIX} wordt\nwakker van het KABAAL!	
+sText_PkmnCausedUproar	{B_ATK_NAME_WITH_PREFIX} caused\nan UPROAR!	{B_ATK_NAME_WITH_PREFIX}\nmaakt KABAAL!	
+sText_PkmnMakingUproar	{B_ATK_NAME_WITH_PREFIX} is making\nan UPROAR!	{B_ATK_NAME_WITH_PREFIX}\nmaakt nog steeds KABAAL!	
+sText_PkmnCalmedDown	{B_ATK_NAME_WITH_PREFIX} calmed down.	{B_ATK_NAME_WITH_PREFIX}\nis weer rustig.	
+sText_PkmnCantSleepInUproar	But {B_DEF_NAME_WITH_PREFIX} can't\nsleep in an UPROAR!	Maar {B_DEF_NAME_WITH_PREFIX} kan\nniet slapen door het KABAAL!	
+sText_PkmnStockpiled	{B_ATK_NAME_WITH_PREFIX} STOCKPILED\n{B_BUFF1}!	{B_ATK_NAME_WITH_PREFIX} spaart\n{B_BUFF1} op!	
+sText_PkmnCantStockpile	{B_ATK_NAME_WITH_PREFIX} can't\nSTOCKPILE any more!	{B_ATK_NAME_WITH_PREFIX} kan\nniet meer OPSPAREN!	
+sText_PkmnCantSleepInUproar2	But {B_DEF_NAME_WITH_PREFIX} can't\nsleep in an UPROAR!	Maar {B_DEF_NAME_WITH_PREFIX} kan\nniet slapen door het KABAAL!	
+sText_UproarKeptPkmnAwake	But the UPROAR kept\n{B_DEF_NAME_WITH_PREFIX} awake!	Maar door het KABAAL blijft\n{B_DEF_NAME_WITH_PREFIX} wakker!	
+sText_PkmnStayedAwakeUsing	{B_DEF_NAME_WITH_PREFIX} stayed awake\nusing its {B_DEF_ABILITY}!	{B_DEF_NAME_WITH_PREFIX} blijft\nwakker door {B_DEF_ABILITY}!	
+sText_PkmnStoringEnergy	{B_ATK_NAME_WITH_PREFIX} is storing\nenergy!	{B_ATK_NAME_WITH_PREFIX}\nspaart energie op!	
+sText_PkmnUnleashedEnergy	{B_ATK_NAME_WITH_PREFIX} unleashed\nenergy!	{B_ATK_NAME_WITH_PREFIX}\nlaat de energie los!	
+sText_PkmnFatigueConfusion	{B_ATK_NAME_WITH_PREFIX} became\nconfused due to fatigue!	{B_ATK_NAME_WITH_PREFIX} is moe\nen raakt in de war!	
+sText_PlayerPickedUpMoney	{B_PLAYER_NAME} picked up\n¥{B_BUFF1}!\p	{B_PLAYER_NAME} raapt\n¥{B_BUFF1} op!\p	
+sText_PkmnUnaffected	{B_DEF_NAME_WITH_PREFIX} is\nunaffected!	{B_DEF_NAME_WITH_PREFIX}\nmerkt er niets van!	
+sText_PkmnTransformedInto	{B_ATK_NAME_WITH_PREFIX} transformed\ninto {B_BUFF1}!	{B_ATK_NAME_WITH_PREFIX} verandert\nin {B_BUFF1}!	
+sText_PkmnMadeSubstitute	{B_ATK_NAME_WITH_PREFIX} made\na SUBSTITUTE!	{B_ATK_NAME_WITH_PREFIX}\nmaakt een INVALLER!	
+sText_PkmnHasSubstitute	{B_ATK_NAME_WITH_PREFIX} already\nhas a SUBSTITUTE!	{B_ATK_NAME_WITH_PREFIX} heeft\nal een INVALLER!	
+sText_SubstituteDamaged	The SUBSTITUTE took damage\nfor {B_DEF_NAME_WITH_PREFIX}!\p	De INVALLER krijgt de schade\nvoor {B_DEF_NAME_WITH_PREFIX}!\p	
+sText_PkmnSubstituteFaded	{B_DEF_NAME_WITH_PREFIX}'s\nSUBSTITUTE faded!\p	De INVALLER van\n{B_DEF_NAME_WITH_PREFIX} is weg!\p	
+sText_PkmnMustRecharge	{B_ATK_NAME_WITH_PREFIX} must\nrecharge!	{B_ATK_NAME_WITH_PREFIX}\nmoet uitrusten!	
+sText_PkmnRageBuilding	{B_DEF_NAME_WITH_PREFIX}'s RAGE\nis building!	{B_DEF_NAME_WITH_PREFIX}\nwordt steeds bozer!	
+sText_PkmnMoveWasDisabled	{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\nwas disabled!	{B_BUFF1} van\n{B_DEF_NAME_WITH_PREFIX} is geblokkeerd!	
+sText_PkmnMoveDisabledNoMore	{B_ATK_NAME_WITH_PREFIX} is disabled\nno more!	{B_ATK_NAME_WITH_PREFIX} is\nniet meer geblokkeerd!	
+sText_PkmnGotEncore	{B_DEF_NAME_WITH_PREFIX} got\nan ENCORE!	{B_DEF_NAME_WITH_PREFIX} moet\nhet NOG EENS doen!	
+sText_PkmnEncoreEnded	{B_ATK_NAME_WITH_PREFIX}'s ENCORE\nended!	{B_ATK_NAME_WITH_PREFIX} hoeft\nniet meer NOG EENS!	
+sText_PkmnTookAim	{B_ATK_NAME_WITH_PREFIX} took aim\nat {B_DEF_NAME_WITH_PREFIX}!	{B_ATK_NAME_WITH_PREFIX} richt op\n{B_DEF_NAME_WITH_PREFIX}!	
+sText_PkmnSketchedMove	{B_ATK_NAME_WITH_PREFIX} SKETCHED\n{B_BUFF1}!	{B_ATK_NAME_WITH_PREFIX} schetst\n{B_BUFF1}!	
+sText_PkmnTryingToTakeFoe	{B_ATK_NAME_WITH_PREFIX} is trying\nto take its foe with it!	{B_ATK_NAME_WITH_PREFIX} wil de\nvijand meenemen!	
+sText_PkmnTookFoe	{B_DEF_NAME_WITH_PREFIX} took\n{B_ATK_NAME_WITH_PREFIX} with it!	{B_DEF_NAME_WITH_PREFIX} neemt\n{B_ATK_NAME_WITH_PREFIX} mee!	
+sText_PkmnReducedPP	Reduced {B_DEF_NAME_WITH_PREFIX}'s\n{B_BUFF1} by {B_BUFF2}!	PP van {B_BUFF1} van\n{B_DEF_NAME_WITH_PREFIX}\lzakt met {B_BUFF2}!	
+sText_PkmnStoleItem	{B_ATK_NAME_WITH_PREFIX} stole\n{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ITEM}!	{B_ATK_NAME_WITH_PREFIX} steelt\n{B_LAST_ITEM} van\l{B_DEF_NAME_WITH_PREFIX}!	
+sText_TargetCantEscapeNow	{B_DEF_NAME_WITH_PREFIX} can't\nescape now!	{B_DEF_NAME_WITH_PREFIX} kan\nnu niet meer vluchten!	
+sText_PkmnFellIntoNightmare	{B_DEF_NAME_WITH_PREFIX} fell into\na NIGHTMARE!	{B_DEF_NAME_WITH_PREFIX} heeft\neen NACHTMERRIE!	
+sText_PkmnLockedInNightmare	{B_ATK_NAME_WITH_PREFIX} is locked\nin a NIGHTMARE!	{B_ATK_NAME_WITH_PREFIX} zit\nvast in een NACHTMERRIE!	
+sText_PkmnLaidCurse	{B_ATK_NAME_WITH_PREFIX} cut its own HP and\nlaid a CURSE on {B_DEF_NAME_WITH_PREFIX}!	{B_ATK_NAME_WITH_PREFIX} geeft HP op\nen legt een VLOEK op\l{B_DEF_NAME_WITH_PREFIX}!	
+sText_PkmnAfflictedByCurse	{B_ATK_NAME_WITH_PREFIX} is afflicted\nby the CURSE!	{B_ATK_NAME_WITH_PREFIX} heeft\nlast van de VLOEK!	
+sText_SpikesScattered	SPIKES were scattered all around\nthe opponent's side!	Er liggen nu SPIJKERS\nbij de vijand!	
+sText_PkmnHurtBySpikes	{B_SCR_ACTIVE_NAME_WITH_PREFIX} is hurt\nby SPIKES!	{B_SCR_ACTIVE_NAME_WITH_PREFIX} heeft\npijn door de SPIJKERS!	
+sText_PkmnIdentified	{B_ATK_NAME_WITH_PREFIX} identified\n{B_DEF_NAME_WITH_PREFIX}!	{B_ATK_NAME_WITH_PREFIX} doorziet\n{B_DEF_NAME_WITH_PREFIX}!	
+sText_PkmnPerishCountFell	{B_ATK_NAME_WITH_PREFIX}'s PERISH count\nfell to {B_BUFF1}!	EINDLIED-teller van\n{B_ATK_NAME_WITH_PREFIX} is nu {B_BUFF1}!	
+sText_PkmnBracedItself	{B_ATK_NAME_WITH_PREFIX} braced\nitself!	{B_ATK_NAME_WITH_PREFIX}\nzet zich schrap!	
+sText_PkmnEnduredHit	{B_DEF_NAME_WITH_PREFIX} ENDURED\nthe hit!	{B_DEF_NAME_WITH_PREFIX}\nhoudt het VOL!	
+sText_MagnitudeStrength	MAGNITUDE {B_BUFF1}!	BEVING {B_BUFF1}!	
+sText_PkmnCutHPMaxedAttack	{B_ATK_NAME_WITH_PREFIX} cut its own HP\nand maximized ATTACK!	{B_ATK_NAME_WITH_PREFIX} geeft HP op\nen maakt AANVAL maximaal!	
+sText_PkmnCopiedStatChanges	{B_ATK_NAME_WITH_PREFIX} copied\n{B_DEF_NAME_WITH_PREFIX}'s stat changes!	{B_ATK_NAME_WITH_PREFIX} kopieert\nde krachten van {B_DEF_NAME_WITH_PREFIX}!	
+sText_PkmnGotFree	{B_ATK_NAME_WITH_PREFIX} got free of\n{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}!	{B_ATK_NAME_WITH_PREFIX} is vrij van\n{B_BUFF1} van {B_DEF_NAME_WITH_PREFIX}!	
+sText_PkmnShedLeechSeed	{B_ATK_NAME_WITH_PREFIX} shed\nLEECH SEED!	{B_ATK_NAME_WITH_PREFIX} is\nvan ZUIGZAAD af!	
+sText_PkmnBlewAwaySpikes	{B_ATK_NAME_WITH_PREFIX} blew away\nSPIKES!	{B_ATK_NAME_WITH_PREFIX} blaast\nde SPIJKERS weg!	
+sText_PkmnFledFromBattle	{B_ATK_NAME_WITH_PREFIX} fled from\nbattle!	{B_ATK_NAME_WITH_PREFIX}\nvlucht uit het gevecht!	
+sText_PkmnForesawAttack	{B_ATK_NAME_WITH_PREFIX} foresaw\nan attack!	{B_ATK_NAME_WITH_PREFIX} ziet\neen aanval aankomen!	
+sText_PkmnTookAttack	{B_DEF_NAME_WITH_PREFIX} took the\n{B_BUFF1} attack!	{B_DEF_NAME_WITH_PREFIX} krijgt\nde aanval {B_BUFF1}!	
+sText_PkmnChoseXAsDestiny	{B_ATK_NAME_WITH_PREFIX} chose\n{B_CURRENT_MOVE} as its destiny!	{B_ATK_NAME_WITH_PREFIX} kiest\n{B_CURRENT_MOVE} als lot!	
+sText_PkmnAttack	{B_BUFF1}'s attack!	Aanval van {B_BUFF1}!	
+sText_PkmnCenterAttention	{B_ATK_NAME_WITH_PREFIX} became the\ncenter of attention!	{B_ATK_NAME_WITH_PREFIX} trekt\nalle aandacht!	
+sText_PkmnChargingPower	{B_ATK_NAME_WITH_PREFIX} began\ncharging power!	{B_ATK_NAME_WITH_PREFIX}\nlaadt zich op!	
+sText_NaturePowerTurnedInto	NATURE POWER turned into\n{B_CURRENT_MOVE}!	NATUURKRACHT wordt\n{B_CURRENT_MOVE}!	
+sText_PkmnStatusNormal	{B_ATK_NAME_WITH_PREFIX}'s status\nreturned to normal!	{B_ATK_NAME_WITH_PREFIX} is\nweer helemaal gezond!	
+sText_PkmnSubjectedToTorment	{B_DEF_NAME_WITH_PREFIX} was subjected\nto TORMENT!	{B_DEF_NAME_WITH_PREFIX}\nwordt GEPEST!	
+sText_PkmnTighteningFocus	{B_ATK_NAME_WITH_PREFIX} is tightening\nits focus!	{B_ATK_NAME_WITH_PREFIX}\nconcentreert zich!	
+sText_PkmnFellForTaunt	{B_DEF_NAME_WITH_PREFIX} fell for\nthe TAUNT!	{B_DEF_NAME_WITH_PREFIX} trapt\nin de UITDAGING!	
+sText_PkmnReadyToHelp	{B_ATK_NAME_WITH_PREFIX} is ready to\nhelp {B_DEF_NAME_WITH_PREFIX}!	{B_ATK_NAME_WITH_PREFIX} wil\n{B_DEF_NAME_WITH_PREFIX} helpen!	
+sText_PkmnSwitchedItems	{B_ATK_NAME_WITH_PREFIX} switched\nitems with its opponent!	{B_ATK_NAME_WITH_PREFIX} ruilt\nvan voorwerp met de vijand!	
+sText_PkmnObtainedX	{B_ATK_NAME_WITH_PREFIX} obtained\n{B_BUFF1}.	{B_ATK_NAME_WITH_PREFIX} krijgt\n{B_BUFF1}.	
+sText_PkmnObtainedX2	{B_DEF_NAME_WITH_PREFIX} obtained\n{B_BUFF2}.	{B_DEF_NAME_WITH_PREFIX} krijgt\n{B_BUFF2}.	
+sText_PkmnObtainedXYObtainedZ	{B_ATK_NAME_WITH_PREFIX} obtained\n{B_BUFF1}.\p{B_DEF_NAME_WITH_PREFIX} obtained\n{B_BUFF2}.	{B_ATK_NAME_WITH_PREFIX} krijgt\n{B_BUFF1}.\p{B_DEF_NAME_WITH_PREFIX} krijgt\n{B_BUFF2}.	
+sText_PkmnCopiedFoe	{B_ATK_NAME_WITH_PREFIX} copied\n{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}!	{B_ATK_NAME_WITH_PREFIX} kopieert\n{B_DEF_ABILITY} van\l{B_DEF_NAME_WITH_PREFIX}!	
+sText_PkmnMadeWish	{B_ATK_NAME_WITH_PREFIX} made a WISH!	{B_ATK_NAME_WITH_PREFIX}\ndoet een WENS!	
+sText_PkmnWishCameTrue	{B_BUFF1}'s WISH\ncame true!	De WENS van {B_BUFF1}\nkomt uit!	
+sText_PkmnPlantedRoots	{B_ATK_NAME_WITH_PREFIX} planted its roots!	{B_ATK_NAME_WITH_PREFIX}\nschiet wortel!	
+sText_PkmnAbsorbedNutrients	{B_ATK_NAME_WITH_PREFIX} absorbed\nnutrients with its roots!	{B_ATK_NAME_WITH_PREFIX} haalt\nvoeding uit zijn wortels!	
+sText_PkmnAnchoredItself	{B_DEF_NAME_WITH_PREFIX} anchored\nitself with its roots!	{B_DEF_NAME_WITH_PREFIX} zit\nvast met zijn wortels!	
+sText_PkmnWasMadeDrowsy	{B_ATK_NAME_WITH_PREFIX} made\n{B_DEF_NAME_WITH_PREFIX} drowsy!	{B_ATK_NAME_WITH_PREFIX} maakt\n{B_DEF_NAME_WITH_PREFIX} slaperig!	
+sText_PkmnKnockedOff	{B_ATK_NAME_WITH_PREFIX} knocked off\n{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ITEM}!	{B_ATK_NAME_WITH_PREFIX} slaat\n{B_LAST_ITEM} weg van\l{B_DEF_NAME_WITH_PREFIX}!	
+sText_PkmnSwappedAbilities	{B_ATK_NAME_WITH_PREFIX} swapped abilities\nwith its opponent!	{B_ATK_NAME_WITH_PREFIX} ruilt\ntalenten met de vijand!	
+sText_PkmnSealedOpponentMove	{B_ATK_NAME_WITH_PREFIX} sealed the\nopponent's move(s)!	{B_ATK_NAME_WITH_PREFIX} sluit\naanvallen van de vijand op!	
+sText_PkmnWantsGrudge	{B_ATK_NAME_WITH_PREFIX} wants the\nopponent to bear a GRUDGE!	{B_ATK_NAME_WITH_PREFIX} wil dat\nde vijand WROK krijgt!	
+sText_PkmnLostPPGrudge	{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1} lost\nall its PP due to the GRUDGE!	{B_BUFF1} van {B_ATK_NAME_WITH_PREFIX}\nverliest alle PP door WROK!	
+sText_PkmnShroudedItself	{B_ATK_NAME_WITH_PREFIX} shrouded\nitself in {B_CURRENT_MOVE}!	{B_ATK_NAME_WITH_PREFIX} hult\nzich in {B_CURRENT_MOVE}!	
+sText_PkmnMoveBounced	{B_ATK_NAME_WITH_PREFIX}'s {B_CURRENT_MOVE}\nwas bounced back by MAGIC COAT!	{B_CURRENT_MOVE} van {B_ATK_NAME_WITH_PREFIX}\nkaatst terug door TOVERJAS!	
+sText_PkmnWaitsForTarget	{B_ATK_NAME_WITH_PREFIX} waits for a target\nto make a move!	{B_ATK_NAME_WITH_PREFIX} wacht\nop een aanval van de vijand!	
+sText_PkmnSnatchedMove	{B_DEF_NAME_WITH_PREFIX} SNATCHED\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s move!	{B_DEF_NAME_WITH_PREFIX} pikt\nde aanval van {B_SCR_ACTIVE_NAME_WITH_PREFIX}!	
+sText_ElectricityWeakened	Electricity's power was\nweakened!	Stroom is nu\nminder sterk!	
+sText_FireWeakened	Fire's power was\nweakened!	Vuur is nu\nminder sterk!	
+sText_XFoundOneY	{B_ATK_NAME_WITH_PREFIX} found\none {B_LAST_ITEM}!	{B_ATK_NAME_WITH_PREFIX} vindt\n{B_LAST_ITEM}!	
+sText_SoothingAroma	A soothing aroma wafted\nthrough the area!	Er hangt een fijne\ngeur in de lucht!	
+sText_ItemsCantBeUsedNow	Items can't be used now.{PAUSE 64}	Je kunt nu geen voorwerpen\ngebruiken.{PAUSE 64}	
+sText_ForXCommaYZ	For {B_SCR_ACTIVE_NAME_WITH_PREFIX},\n{B_LAST_ITEM} {B_BUFF1}	Voor {B_SCR_ACTIVE_NAME_WITH_PREFIX}:\n{B_LAST_ITEM} {B_BUFF1}	
+sText_PkmnUsedXToGetPumped	{B_SCR_ACTIVE_NAME_WITH_PREFIX} used\n{B_LAST_ITEM} to get pumped!	{B_SCR_ACTIVE_NAME_WITH_PREFIX} gebruikt\n{B_LAST_ITEM} en maakt zich klaar!	
+sText_PkmnLostFocus	{B_ATK_NAME_WITH_PREFIX} lost its\nfocus and couldn't move!	{B_ATK_NAME_WITH_PREFIX} verliest\nconcentratie en kan niet aanvallen!	
+sText_PkmnWasDraggedOut	{B_DEF_NAME_WITH_PREFIX} was\ndragged out!\p	{B_DEF_NAME_WITH_PREFIX} wordt\nhet gevecht in gesleurd!\p	
+sText_TheWallShattered	The wall shattered!	De muur is kapot!	
+sText_ButNoEffect	But it had no effect!	Maar het heeft geen effect!	
+sText_PkmnHasNoMovesLeft	{B_ACTIVE_NAME_WITH_PREFIX} has no\nmoves left!\p	{B_ACTIVE_NAME_WITH_PREFIX} heeft\ngeen aanvallen meer!\p	
+sText_PkmnMoveIsDisabled	{B_ACTIVE_NAME_WITH_PREFIX}'s {B_CURRENT_MOVE}\nis disabled!\p	{B_CURRENT_MOVE} van\n{B_ACTIVE_NAME_WITH_PREFIX} is geblokkeerd!\p	
+sText_PkmnCantUseMoveTorment	{B_ACTIVE_NAME_WITH_PREFIX} can't use the same\nmove in a row due to the TORMENT!\p	{B_ACTIVE_NAME_WITH_PREFIX} wordt GEPEST\nen kan niet 2x hetzelfde doen!\p	
+sText_PkmnCantUseMoveTaunt	{B_ACTIVE_NAME_WITH_PREFIX} can't use\n{B_CURRENT_MOVE} after the TAUNT!\p	{B_ACTIVE_NAME_WITH_PREFIX} kan na de\nUITDAGING geen {B_CURRENT_MOVE} doen!\p	
+sText_PkmnCantUseMoveSealed	{B_ACTIVE_NAME_WITH_PREFIX} can't use the\nsealed {B_CURRENT_MOVE}!\p	{B_ACTIVE_NAME_WITH_PREFIX} kan\n{B_CURRENT_MOVE} niet gebruiken!\p	
+sText_PkmnMadeItRain	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nmade it rain!	{B_SCR_ACTIVE_NAME_WITH_PREFIX} laat het\nregenen met {B_SCR_ACTIVE_ABILITY}!	
+sText_PkmnRaisedSpeed	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nraised its SPEED!	{B_SCR_ACTIVE_NAME_WITH_PREFIX} wordt\nsneller door {B_SCR_ACTIVE_ABILITY}!	
+sText_PkmnProtectedBy	{B_DEF_NAME_WITH_PREFIX} was protected\nby {B_DEF_ABILITY}!	{B_DEF_NAME_WITH_PREFIX} wordt\nbeschermd door {B_DEF_ABILITY}!	
+sText_PkmnPreventsUsage	{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents {B_ATK_NAME_WITH_PREFIX}\lfrom using {B_CURRENT_MOVE}!	{B_DEF_ABILITY} van {B_DEF_NAME_WITH_PREFIX}\nstopt {B_CURRENT_MOVE} van\l{B_ATK_NAME_WITH_PREFIX}!	
+sText_PkmnRestoredHPUsing	{B_DEF_NAME_WITH_PREFIX} restored HP\nusing its {B_DEF_ABILITY}!	{B_DEF_NAME_WITH_PREFIX} krijgt\nHP terug door {B_DEF_ABILITY}!	
+sText_PkmnsXMadeYUseless	{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nmade {B_CURRENT_MOVE} useless!	{B_DEF_ABILITY} van {B_DEF_NAME_WITH_PREFIX}\nmaakt {B_CURRENT_MOVE} nutteloos!	
+sText_PkmnChangedTypeWith	{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nmade it the {B_BUFF1} type!	{B_DEF_NAME_WITH_PREFIX} wordt het\ntype {B_BUFF1} door {B_DEF_ABILITY}!	
+sText_PkmnPreventsParalysisWith	{B_EFF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents paralysis!	{B_EFF_NAME_WITH_PREFIX} raakt niet\nverlamd door {B_DEF_ABILITY}!	
+sText_PkmnPreventsRomanceWith	{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents romance!	{B_DEF_NAME_WITH_PREFIX} wordt niet\nverliefd door {B_DEF_ABILITY}!	
+sText_PkmnPreventsPoisoningWith	{B_EFF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents poisoning!	{B_EFF_NAME_WITH_PREFIX} raakt niet\nvergiftigd door {B_DEF_ABILITY}!	
+sText_PkmnPreventsConfusionWith	{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents confusion!	{B_DEF_NAME_WITH_PREFIX} raakt niet\nin de war door {B_DEF_ABILITY}!	
+sText_PkmnRaisedFirePowerWith	{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nraised its FIRE power!	{B_DEF_NAME_WITH_PREFIX} krijgt meer\nVUUR-kracht door {B_DEF_ABILITY}!	
+sText_PkmnAnchorsItselfWith	{B_DEF_NAME_WITH_PREFIX} anchors\nitself with {B_DEF_ABILITY}!	{B_DEF_NAME_WITH_PREFIX} zit vast\ndoor {B_DEF_ABILITY}!	
+sText_PkmnCutsAttackWith	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\ncuts {B_DEF_NAME_WITH_PREFIX}'s ATTACK!	{B_SCR_ACTIVE_NAME_WITH_PREFIX} gebruikt\n{B_SCR_ACTIVE_ABILITY}!\pAANVAL van {B_DEF_NAME_WITH_PREFIX}\nzakt!	
+sText_PkmnPreventsStatLossWith	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nprevents stat loss!	{B_SCR_ACTIVE_NAME_WITH_PREFIX} wordt niet\nzwakker door {B_SCR_ACTIVE_ABILITY}!	
+sText_PkmnHurtsWith	{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nhurt {B_ATK_NAME_WITH_PREFIX}!	{B_DEF_ABILITY} van {B_DEF_NAME_WITH_PREFIX}\ndoet {B_ATK_NAME_WITH_PREFIX} pijn!	
+sText_PkmnTraced	{B_SCR_ACTIVE_NAME_WITH_PREFIX} TRACED\n{B_BUFF1}'s {B_BUFF2}!	{B_SCR_ACTIVE_NAME_WITH_PREFIX} kopieert\n{B_BUFF2} van {B_BUFF1}!	
+sText_PkmnsXPreventsBurns	{B_EFF_NAME_WITH_PREFIX}'s {B_EFF_ABILITY}\nprevents burns!	{B_EFF_NAME_WITH_PREFIX} verbrandt\nniet door {B_EFF_ABILITY}!	
+sText_PkmnsXBlocksY	{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nblocks {B_CURRENT_MOVE}!	{B_DEF_ABILITY} van {B_DEF_NAME_WITH_PREFIX}\nblokkeert {B_CURRENT_MOVE}!	
+sText_PkmnsXBlocksY2	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nblocks {B_CURRENT_MOVE}!	{B_SCR_ACTIVE_ABILITY} van {B_SCR_ACTIVE_NAME_WITH_PREFIX}\nblokkeert {B_CURRENT_MOVE}!	
+sText_PkmnsXRestoredHPALittle2	{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nrestored its HP a little!	{B_ATK_NAME_WITH_PREFIX} krijgt wat\nHP terug door {B_ATK_ABILITY}!	
+sText_PkmnsXWhippedUpSandstorm	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nwhipped up a sandstorm!	{B_SCR_ACTIVE_NAME_WITH_PREFIX} maakt\neen zandstorm met {B_SCR_ACTIVE_ABILITY}!	
+sText_PkmnsXIntensifiedSun	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nintensified the sun's rays!	{B_SCR_ACTIVE_NAME_WITH_PREFIX} laat de\nzon fel schijnen met {B_SCR_ACTIVE_ABILITY}!	
+sText_PkmnsXPreventsYLoss	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nprevents {B_BUFF1} loss!	{B_SCR_ACTIVE_NAME_WITH_PREFIX} houdt\n{B_BUFF1} door {B_SCR_ACTIVE_ABILITY}!	
+sText_PkmnsXInfatuatedY	{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\ninfatuated {B_ATK_NAME_WITH_PREFIX}!	{B_DEF_ABILITY} van {B_DEF_NAME_WITH_PREFIX}\nmaakt {B_ATK_NAME_WITH_PREFIX} verliefd!	
+sText_PkmnsXMadeYIneffective	{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nmade {B_CURRENT_MOVE} ineffective!	{B_DEF_ABILITY} van {B_DEF_NAME_WITH_PREFIX}\nmaakt {B_CURRENT_MOVE} nutteloos!	
+sText_PkmnsXCuredYProblem	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\ncured its {B_BUFF1} problem!	{B_SCR_ACTIVE_NAME_WITH_PREFIX} geneest\n{B_BUFF1} met {B_SCR_ACTIVE_ABILITY}!	
+sText_ItSuckedLiquidOoze	It sucked up the\nLIQUID OOZE!	Hij zoog GIFSLIJM op!	
+sText_PkmnTransformed	{B_SCR_ACTIVE_NAME_WITH_PREFIX} transformed!	{B_SCR_ACTIVE_NAME_WITH_PREFIX} verandert!	
+sText_PkmnsXTookAttack	{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\ntook the attack!	{B_DEF_ABILITY} van {B_DEF_NAME_WITH_PREFIX}\nvangt de aanval op!	
+gText_PkmnsXPreventsSwitching	{B_BUFF1}'s {B_LAST_ABILITY}\nprevents switching!\p	{B_LAST_ABILITY} van {B_BUFF1}\nhoudt je tegen!\p	
+sText_PreventedFromWorking	{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevented {B_SCR_ACTIVE_NAME_WITH_PREFIX}'s\l{B_BUFF1} from working!	{B_DEF_ABILITY} van {B_DEF_NAME_WITH_PREFIX}\nstopt {B_BUFF1} van\l{B_SCR_ACTIVE_NAME_WITH_PREFIX}!	
+sText_PkmnsXMadeItIneffective	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nmade it ineffective!	{B_SCR_ACTIVE_ABILITY} van {B_SCR_ACTIVE_NAME_WITH_PREFIX}\nmaakt het nutteloos!	
+sText_PkmnsXPreventsFlinching	{B_EFF_NAME_WITH_PREFIX}'s {B_EFF_ABILITY}\nprevents flinching!	{B_EFF_NAME_WITH_PREFIX} deinst niet\nterug door {B_EFF_ABILITY}!	
+sText_PkmnsXPreventsYsZ	{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nprevents {B_DEF_NAME_WITH_PREFIX}'s\l{B_DEF_ABILITY} from working!	{B_ATK_ABILITY} van {B_ATK_NAME_WITH_PREFIX}\nstopt {B_DEF_ABILITY} van\l{B_DEF_NAME_WITH_PREFIX}!	
+sText_PkmnsXCuredItsYProblem	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\ncured its {B_BUFF1} problem!	{B_SCR_ACTIVE_NAME_WITH_PREFIX} geneest\n{B_BUFF1} met {B_SCR_ACTIVE_ABILITY}!	
+sText_PkmnsXHadNoEffectOnY	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nhad no effect on {B_EFF_NAME_WITH_PREFIX}!	{B_SCR_ACTIVE_ABILITY} van {B_SCR_ACTIVE_NAME_WITH_PREFIX}\nwerkt niet op {B_EFF_NAME_WITH_PREFIX}!	
+sText_StatSharply	sharply 	flink 	
+gText_StatRose	rose!	omhoog!	
+sText_StatHarshly	harshly 	flink 	
+sText_StatFell	fell!	omlaag!	
+sText_AttackersStatRose	{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}	{B_ATK_NAME_WITH_PREFIX}: {B_BUFF1}\n{B_BUFF2}	
+gText_DefendersStatRose	{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}	{B_DEF_NAME_WITH_PREFIX}: {B_BUFF1}\n{B_BUFF2}	
+sText_UsingItemTheStatOfPkmnRose	Using {B_LAST_ITEM}, the {B_BUFF1}\nof {B_SCR_ACTIVE_NAME_WITH_PREFIX} {B_BUFF2}	{B_LAST_ITEM}: {B_BUFF1} van\n{B_SCR_ACTIVE_NAME_WITH_PREFIX} {B_BUFF2}	
+sText_AttackersStatFell	{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}	{B_ATK_NAME_WITH_PREFIX}: {B_BUFF1}\n{B_BUFF2}	
+sText_DefendersStatFell	{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}	{B_DEF_NAME_WITH_PREFIX}: {B_BUFF1}\n{B_BUFF2}	
+sText_StatsWontIncrease2	{B_ATK_NAME_WITH_PREFIX}'s stats won't\ngo any higher!	{B_ATK_NAME_WITH_PREFIX} kan niet\nnog sterker worden!	
+sText_StatsWontDecrease2	{B_DEF_NAME_WITH_PREFIX}'s stats won't\ngo any lower!	{B_DEF_NAME_WITH_PREFIX} kan niet\nnog zwakker worden!	
+sText_CriticalHit	A critical hit!	Een voltreffer!	
+sText_OneHitKO	It's a one-hit KO!	In één klap KO!	
+sText_123Poof	{PAUSE 32}1, {PAUSE 15}2, and{PAUSE 15}… {PAUSE 15}… {PAUSE 15}… {PAUSE 15}{PLAY_SE SE_BALL_BOUNCE_1}Poof!\p	{PAUSE 32}1, {PAUSE 15}2 en{PAUSE 15}… {PAUSE 15}… {PAUSE 15}… {PAUSE 15}{PLAY_SE SE_BALL_BOUNCE_1}Poef!\p	
+sText_AndEllipsis	And…\p	En…\p	
+sText_HMMovesCantBeForgotten	HM moves can't be\nforgotten now.\p	HM-aanvallen kun je nu\nniet vergeten.\p	
+sText_NotVeryEffective	It's not very effective…	Dat is niet erg effectief…	
+sText_SuperEffective	It's super effective!	Dat is super effectief!	
+sText_GotAwaySafely	{PLAY_SE SE_FLEE}Got away safely!\p	{PLAY_SE SE_FLEE}Je bent veilig gevlucht!\p	
+sText_PkmnFledUsingIts	{PLAY_SE SE_FLEE}{B_ATK_NAME_WITH_PREFIX} fled\nusing its {B_LAST_ITEM}!\p	{PLAY_SE SE_FLEE}{B_ATK_NAME_WITH_PREFIX} vlucht\nmet {B_LAST_ITEM}!\p	
+sText_PkmnFledUsing	{PLAY_SE SE_FLEE}{B_ATK_NAME_WITH_PREFIX} fled\nusing {B_ATK_ABILITY}!\p	{PLAY_SE SE_FLEE}{B_ATK_NAME_WITH_PREFIX} vlucht\nmet {B_ATK_ABILITY}!\p	
+sText_WildPkmnFled	{PLAY_SE SE_FLEE}Wild {B_BUFF1} fled!	{PLAY_SE SE_FLEE}Wilde {B_BUFF1} vlucht!	
+sText_PlayerDefeatedLinkTrainer	Player defeated\n{B_LINK_OPPONENT1_NAME}!	Je hebt\n{B_LINK_OPPONENT1_NAME} verslagen!	
+sText_TwoLinkTrainersDefeated	Player beat {B_LINK_OPPONENT1_NAME}\nand {B_LINK_OPPONENT2_NAME}!	Je hebt {B_LINK_OPPONENT1_NAME} en\n{B_LINK_OPPONENT2_NAME} verslagen!	
+sText_PlayerLostAgainstLinkTrainer	Player lost against\n{B_LINK_OPPONENT1_NAME}!	Je hebt verloren van\n{B_LINK_OPPONENT1_NAME}!	
+sText_PlayerLostToTwo	Player lost to {B_LINK_OPPONENT1_NAME}\nand {B_LINK_OPPONENT2_NAME}!	Je hebt verloren van {B_LINK_OPPONENT1_NAME}\nen {B_LINK_OPPONENT2_NAME}!	
+sText_PlayerBattledToDrawLinkTrainer	Player battled to a draw against\n{B_LINK_OPPONENT1_NAME}!	Gelijkspel tegen\n{B_LINK_OPPONENT1_NAME}!	
+sText_PlayerBattledToDrawVsTwo	Player battled to a draw against\n{B_LINK_OPPONENT1_NAME} and {B_LINK_OPPONENT2_NAME}!	Gelijkspel tegen\n{B_LINK_OPPONENT1_NAME} en {B_LINK_OPPONENT2_NAME}!	
+sText_WildFled	{PLAY_SE SE_FLEE}{B_LINK_OPPONENT1_NAME} fled!	{PLAY_SE SE_FLEE}{B_LINK_OPPONENT1_NAME} is gevlucht!	
+sText_TwoWildFled	{PLAY_SE SE_FLEE}{B_LINK_OPPONENT1_NAME} and\n{B_LINK_OPPONENT2_NAME} fled!	{PLAY_SE SE_FLEE}{B_LINK_OPPONENT1_NAME} en\n{B_LINK_OPPONENT2_NAME} zijn gevlucht!	
+sText_NoRunningFromTrainers	No! There's no running\nfrom a TRAINER battle!\p	Nee! Je kunt niet vluchten\nvoor een TRAINER!\p	
+sText_CantEscape	Can't escape!\p	Vluchten lukt niet!\p	
+sText_DontLeaveBirch	PROF. BIRCH: Don't leave me like this!\p	PROF. BIRCH: Laat me niet alleen!\p	
+sText_ButNothingHappened	But nothing happened!	Maar er gebeurt niets!	
+sText_ButItFailed	But it failed!	Maar het mislukt!	
+sText_ItHurtConfusion	It hurt itself in its\nconfusion!	Hij is in de war en\ndoet zichzelf pijn!	
+sText_MirrorMoveFailed	The MIRROR MOVE failed!	SPIEGELEN mislukt!	
+sText_StartedToRain	It started to rain!	Het begint te regenen!	
+sText_DownpourStarted	A downpour started!	Het begint te stortregenen!	
+sText_RainContinues	Rain continues to fall.	Het regent nog steeds.	
+sText_DownpourContinues	The downpour continues.	Het stortregent nog steeds.	
+sText_RainStopped	The rain stopped.	Het is gestopt met regenen.	
+sText_SandstormBrewed	A sandstorm brewed!	Er komt een zandstorm!	
+sText_SandstormRages	The sandstorm rages.	De zandstorm raast.	
+sText_SandstormSubsided	The sandstorm subsided.	De zandstorm is voorbij.	
+sText_SunlightGotBright	The sunlight got bright!	De zon schijnt fel!	
+sText_SunlightStrong	The sunlight is strong.	De zon is sterk.	
+sText_SunlightFaded	The sunlight faded.	De zon is weer zwakker.	
+sText_StartedHail	It started to hail!	Het begint te hagelen!	
+sText_HailContinues	Hail continues to fall.	Het hagelt nog steeds.	
+sText_HailStopped	The hail stopped.	Het is gestopt met hagelen.	
+sText_FailedToSpitUp	But it failed to SPIT UP\na thing!	Maar er valt niets\nUIT TE SPUGEN!	
+sText_FailedToSwallow	But it failed to SWALLOW\na thing!	Maar er valt niets\nDOOR TE SLIKKEN!	
+sText_WindBecameHeatWave	The wind turned into a\nHEAT WAVE!	De wind wordt een\nHITTEGOLF!	
+sText_StatChangesGone	All stat changes were\neliminated!	Alles is weer\nnormaal!	
+sText_CoinsScattered	Coins scattered everywhere!	Overal liggen munten!	
+sText_TooWeakForSubstitute	It was too weak to make\na SUBSTITUTE!	Te zwak om een\nINVALLER te maken!	
+sText_SharedPain	The battlers shared\ntheir pain!	De POKéMON delen\nhun pijn!	
+sText_BellChimed	A bell chimed!	Er klinkt een bel!	
+sText_FaintInThree	All affected POKéMON will\nfaint in three turns!	Wie dit hoort, is na\ndrie beurten verslagen!	
+sText_NoPPLeft	There's no PP left for\nthis move!\p	Deze aanval heeft\ngeen PP meer!\p	
+sText_ButNoPPLeft	But there was no PP left\nfor the move!	Maar de aanval heeft\ngeen PP meer!	
+sText_PkmnIgnoresAsleep	{B_ATK_NAME_WITH_PREFIX} ignored\norders while asleep!	{B_ATK_NAME_WITH_PREFIX} slaapt\nen luistert niet!	
+sText_PkmnIgnoredOrders	{B_ATK_NAME_WITH_PREFIX} ignored\norders!	{B_ATK_NAME_WITH_PREFIX}\nluistert niet!	
+sText_PkmnBeganToNap	{B_ATK_NAME_WITH_PREFIX} began to nap!	{B_ATK_NAME_WITH_PREFIX} doet een dutje!	
+sText_PkmnLoafing	{B_ATK_NAME_WITH_PREFIX} is\nloafing around!	{B_ATK_NAME_WITH_PREFIX}\nluiert maar wat!	
+sText_PkmnWontObey	{B_ATK_NAME_WITH_PREFIX} won't\nobey!	{B_ATK_NAME_WITH_PREFIX}\nwil niet luisteren!	
+sText_PkmnTurnedAway	{B_ATK_NAME_WITH_PREFIX} turned away!	{B_ATK_NAME_WITH_PREFIX}\nkijkt de andere kant op!	
+sText_PkmnPretendNotNotice	{B_ATK_NAME_WITH_PREFIX} pretended\nnot to notice!	{B_ATK_NAME_WITH_PREFIX} doet\nalsof hij niets hoort!	
+sText_EnemyAboutToSwitchPkmn	{B_TRAINER1_CLASS} {B_TRAINER1_NAME} is\nabout to use {B_BUFF2}.\pWill {B_PLAYER_NAME} change\nPOKéMON?	{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nkiest nu {B_BUFF2}.\pWil {B_PLAYER_NAME} ook een\nandere POKéMON?	
+sText_PkmnLearnedMove2	{B_ATK_NAME_WITH_PREFIX} learned\n{B_BUFF1}!	{B_ATK_NAME_WITH_PREFIX} leert\n{B_BUFF1}!	
+sText_PlayerDefeatedLinkTrainerTrainer1	Player defeated\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!\p	Je hebt {B_TRAINER1_CLASS}\n{B_TRAINER1_NAME} verslagen!\p	
+sText_CreptCloser	{B_PLAYER_NAME} crept closer to\n{B_OPPONENT_MON1_NAME}!	{B_PLAYER_NAME} sluipt dichter\nnaar {B_OPPONENT_MON1_NAME}!	
+sText_CantGetCloser	{B_PLAYER_NAME} can't get any closer!	{B_PLAYER_NAME} kan niet dichterbij!	
+sText_PkmnWatchingCarefully	{B_OPPONENT_MON1_NAME} is watching\ncarefully!	{B_OPPONENT_MON1_NAME} kijkt\ngoed op!	
+sText_PkmnCuriousAboutX	{B_OPPONENT_MON1_NAME} is curious about\nthe {B_BUFF1}!	{B_OPPONENT_MON1_NAME} is nieuwsgierig\nnaar {B_BUFF1}!	
+sText_PkmnEnthralledByX	{B_OPPONENT_MON1_NAME} is enthralled by\nthe {B_BUFF1}!	{B_OPPONENT_MON1_NAME} is helemaal\nweg van {B_BUFF1}!	
+sText_PkmnIgnoredX	{B_OPPONENT_MON1_NAME} completely ignored\nthe {B_BUFF1}!	{B_OPPONENT_MON1_NAME} doet niets\nmet {B_BUFF1}!	
+sText_ThrewPokeblockAtPkmn	{B_PLAYER_NAME} threw a {POKEBLOCK}\nat the {B_OPPONENT_MON1_NAME}!	{B_PLAYER_NAME} gooit een {POKEBLOCK}\nnaar {B_OPPONENT_MON1_NAME}!	
+sText_OutOfSafariBalls	{PLAY_SE SE_DING_DONG}ANNOUNCER: You're out of\nSAFARI BALLS! Game over!\p	{PLAY_SE SE_DING_DONG}OMROEPER: Je SAFARIBALLS\nzijn op! Het spel is voorbij!\p	
+sText_OpponentMon1Appeared	{B_OPPONENT_MON1_NAME} appeared!\p	{B_OPPONENT_MON1_NAME} verschijnt!\p	
+sText_WildPkmnAppeared	Wild {B_OPPONENT_MON1_NAME} appeared!\p	Een wilde {B_OPPONENT_MON1_NAME}\nverschijnt!\p	
+sText_LegendaryPkmnAppeared	Wild {B_OPPONENT_MON1_NAME} appeared!\p	Een wilde {B_OPPONENT_MON1_NAME}\nverschijnt!\p	
+sText_WildPkmnAppearedPause	Wild {B_OPPONENT_MON1_NAME} appeared!{PAUSE 127}	Een wilde {B_OPPONENT_MON1_NAME}\nverschijnt!{PAUSE 127}	
+sText_TwoWildPkmnAppeared	Wild {B_OPPONENT_MON1_NAME} and\n{B_OPPONENT_MON2_NAME} appeared!\p	Een wilde {B_OPPONENT_MON1_NAME} en\n{B_OPPONENT_MON2_NAME} verschijnen!\p	
+sText_Trainer1WantsToBattle	{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nwould like to battle!\p	{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nwil vechten!\p	
+sText_LinkTrainerWantsToBattle	{B_LINK_OPPONENT1_NAME}\nwants to battle!	{B_LINK_OPPONENT1_NAME}\nwil vechten!	
+sText_TwoLinkTrainersWantToBattle	{B_LINK_OPPONENT1_NAME} and {B_LINK_OPPONENT2_NAME}\nwant to battle!	{B_LINK_OPPONENT1_NAME} en {B_LINK_OPPONENT2_NAME}\nwillen vechten!	
+sText_Trainer1SentOutPkmn	{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\nout {B_OPPONENT_MON1_NAME}!	{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nstuurt {B_OPPONENT_MON1_NAME}!	
+sText_Trainer1SentOutTwoPkmn	{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\nout {B_OPPONENT_MON1_NAME} and {B_OPPONENT_MON2_NAME}!	{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nstuurt {B_OPPONENT_MON1_NAME} en {B_OPPONENT_MON2_NAME}!	
+sText_Trainer1SentOutPkmn2	{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\nout {B_BUFF1}!	{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nstuurt {B_BUFF1}!	
+sText_LinkTrainerSentOutPkmn	{B_LINK_OPPONENT1_NAME} sent out\n{B_OPPONENT_MON1_NAME}!	{B_LINK_OPPONENT1_NAME} stuurt\n{B_OPPONENT_MON1_NAME}!	
+sText_LinkTrainerSentOutTwoPkmn	{B_LINK_OPPONENT1_NAME} sent out\n{B_OPPONENT_MON1_NAME} and {B_OPPONENT_MON2_NAME}!	{B_LINK_OPPONENT1_NAME} stuurt\n{B_OPPONENT_MON1_NAME} en {B_OPPONENT_MON2_NAME}!	
+sText_TwoLinkTrainersSentOutPkmn	{B_LINK_OPPONENT1_NAME} sent out {B_LINK_OPPONENT_MON1_NAME}!\n{B_LINK_OPPONENT2_NAME} sent out {B_LINK_OPPONENT_MON2_NAME}!	{B_LINK_OPPONENT1_NAME} stuurt {B_LINK_OPPONENT_MON1_NAME}!\n{B_LINK_OPPONENT2_NAME} stuurt {B_LINK_OPPONENT_MON2_NAME}!	
+sText_LinkTrainerSentOutPkmn2	{B_LINK_OPPONENT1_NAME} sent out\n{B_BUFF1}!	{B_LINK_OPPONENT1_NAME} stuurt\n{B_BUFF1}!	
+sText_LinkTrainerMultiSentOutPkmn	{B_LINK_SCR_TRAINER_NAME} sent out\n{B_BUFF1}!	{B_LINK_SCR_TRAINER_NAME} stuurt\n{B_BUFF1}!	
+sText_GoPkmn	Go! {B_PLAYER_MON1_NAME}!	Ga! {B_PLAYER_MON1_NAME}!	
+sText_GoTwoPkmn	Go! {B_PLAYER_MON1_NAME} and\n{B_PLAYER_MON2_NAME}!	Ga! {B_PLAYER_MON1_NAME} en\n{B_PLAYER_MON2_NAME}!	
+sText_GoPkmn2	Go! {B_BUFF1}!	Ga! {B_BUFF1}!	
+sText_DoItPkmn	Do it! {B_BUFF1}!	Doe je best! {B_BUFF1}!	
+sText_GoForItPkmn	Go for it, {B_BUFF1}!	Zet 'm op, {B_BUFF1}!	
+sText_YourFoesWeakGetEmPkmn	Your foe's weak!\nGet 'em, {B_BUFF1}!	De vijand is zwak!\nPak 'm, {B_BUFF1}!	
+sText_LinkPartnerSentOutPkmnGoPkmn	{B_LINK_PARTNER_NAME} sent out {B_LINK_PLAYER_MON2_NAME}!\nGo! {B_LINK_PLAYER_MON1_NAME}!	{B_LINK_PARTNER_NAME} stuurt {B_LINK_PLAYER_MON2_NAME}!\nGa! {B_LINK_PLAYER_MON1_NAME}!	
+sText_PkmnThatsEnough	{B_BUFF1}, that's enough!\nCome back!	{B_BUFF1}, genoeg zo!\nKom terug!	
+sText_PkmnComeBack	{B_BUFF1}, come back!	{B_BUFF1}, kom terug!	
+sText_PkmnOkComeBack	{B_BUFF1}, OK!\nCome back!	{B_BUFF1}, oké!\nKom terug!	
+sText_PkmnGoodComeBack	{B_BUFF1}, good!\nCome back!	{B_BUFF1}, goed zo!\nKom terug!	
+sText_Trainer1WithdrewPkmn	{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nwithdrew {B_BUFF1}!	{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nroept {B_BUFF1} terug!	
+sText_LinkTrainer1WithdrewPkmn	{B_LINK_OPPONENT1_NAME} withdrew\n{B_BUFF1}!	{B_LINK_OPPONENT1_NAME} roept\n{B_BUFF1} terug!	
+sText_LinkTrainer2WithdrewPkmn	{B_LINK_SCR_TRAINER_NAME} withdrew\n{B_BUFF1}!	{B_LINK_SCR_TRAINER_NAME} roept\n{B_BUFF1} terug!	
+sText_WildPkmnPrefix	Wild 	Wilde 	
+sText_FoePkmnPrefix	Foe 	Vijandige 	
+sText_EmptyString8			
+sText_FoePkmnPrefix2	Foe	het vijandige team	
+sText_AllyPkmnPrefix	Ally	jouw team	
+sText_FoePkmnPrefix3	Foe	het vijandige team	
+sText_AllyPkmnPrefix2	Ally	jouw team	
+sText_FoePkmnPrefix4	Foe	het vijandige team	
+sText_AllyPkmnPrefix3	Ally	jouw team	
+sText_AttackerUsedX	{B_ATK_NAME_WITH_PREFIX} used\n{B_BUFF2}	{B_ATK_NAME_WITH_PREFIX} gebruikt\n{B_BUFF2}	
+sText_ExclamationMark	!		
+sText_ExclamationMark2	!		
+sText_ExclamationMark3	!		
+sText_ExclamationMark4	!		
+sText_ExclamationMark5	!		
+sText_HP2	HP		
+sText_Attack2	ATTACK	AANVAL	
+sText_Defense2	DEFENSE	VERDEDIGING	
+sText_Speed	SPEED	SNELHEID	
+sText_SpAtk2	SP. ATK	SP. AANV	
+sText_SpDef2	SP. DEF	SP. VERD	
+sText_Accuracy	accuracy	raakkans	
+sText_Evasiveness	evasiveness	ontwijken	
+sText_PokeblockWasTooSpicy	was too spicy!	was te pittig!	
+sText_PokeblockWasTooDry	was too dry!	was te droog!	
+sText_PokeblockWasTooSweet	was too sweet!	was te zoet!	
+sText_PokeblockWasTooBitter	was too bitter!	was te bitter!	
+sText_PokeblockWasTooSour	was too sour!	was te zuur!	
+sText_PlayerUsedItem	{B_PLAYER_NAME} used\n{B_LAST_ITEM}!	{B_PLAYER_NAME} gebruikt\n{B_LAST_ITEM}!	
+sText_WallyUsedItem	WALLY used\n{B_LAST_ITEM}!	WALLY gebruikt\n{B_LAST_ITEM}!	
+sText_Trainer1UsedItem	{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nused {B_LAST_ITEM}!	{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\ngebruikt {B_LAST_ITEM}!	
+sText_TrainerBlockedBall	The TRAINER blocked the BALL!	De TRAINER houdt de BALL tegen!	
+sText_DontBeAThief	Don't be a thief!	Je mag niet stelen!	
+sText_ItDodgedBall	It dodged the thrown BALL!\nThis POKéMON can't be caught!	Hij ontwijkt de BALL!\nDeze POKéMON kun je niet vangen!	
+sText_YouMissedPkmn	You missed the POKéMON!	Je gooit mis!	
+sText_PkmnBrokeFree	Oh, no!\nThe POKéMON broke free!	O nee!\nDe POKéMON is ontsnapt!	
+sText_ItAppearedCaught	Aww!\nIt appeared to be caught!	Ah!\nHij leek al gevangen!	
+sText_AarghAlmostHadIt	Aargh!\nAlmost had it!	Argh!\nBijna!	
+sText_ShootSoClose	Shoot!\nIt was so close, too!	Balen!\nHet was zo dichtbij!	
+sText_GotchaPkmnCaughtPlayer	Gotcha!\n{B_OPPONENT_MON1_NAME} was caught!{WAIT_SE}{PLAY_BGM MUS_CAUGHT}\p	Gelukt!\n{B_OPPONENT_MON1_NAME} is gevangen!{WAIT_SE}{PLAY_BGM MUS_CAUGHT}\p	
+sText_GotchaPkmnCaughtWally	Gotcha!\n{B_OPPONENT_MON1_NAME} was caught!{WAIT_SE}{PLAY_BGM MUS_CAUGHT}{PAUSE 127}	Gelukt!\n{B_OPPONENT_MON1_NAME} is gevangen!{WAIT_SE}{PLAY_BGM MUS_CAUGHT}{PAUSE 127}	
+sText_GiveNicknameCaptured	Give a nickname to the\ncaptured {B_OPPONENT_MON1_NAME}?	Wil je {B_OPPONENT_MON1_NAME}\neen bijnaam geven?	
+sText_PkmnSentToPC	{B_OPPONENT_MON1_NAME} was sent to\n{B_PC_CREATOR_NAME} PC.	{B_OPPONENT_MON1_NAME} is naar de PC\nvan {B_PC_CREATOR_NAME} gestuurd.	
+sText_Someones	someone's	iemand	
+sText_Lanettes	LANETTE's	LANETTE	
+sText_PkmnDataAddedToDex	{B_OPPONENT_MON1_NAME}'s data was\nadded to the POKéDEX.\p	{B_OPPONENT_MON1_NAME} staat nu\nin de POKéDEX.\p	
+sText_ItIsRaining	It is raining.	Het regent.	
+sText_SandstormIsRaging	A sandstorm is raging.	Er raast een zandstorm.	
+sText_BoxIsFull	The BOX is full!\nYou can't catch any more!\p	De BOX is vol!\nJe kunt niets meer vangen!\p	
+sText_EnigmaBerry	ENIGMA BES		
+sText_BerrySuffix	 BES		
+sText_PkmnsItemCuredParalysis	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\ncured paralysis!	{B_LAST_ITEM} geneest\n{B_SCR_ACTIVE_NAME_WITH_PREFIX} van verlamming!	
+sText_PkmnsItemCuredPoison	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\ncured poison!	{B_LAST_ITEM} geneest\n{B_SCR_ACTIVE_NAME_WITH_PREFIX} van gif!	
+sText_PkmnsItemHealedBurn	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nhealed its burn!	{B_LAST_ITEM} geneest de\nbrandwond van {B_SCR_ACTIVE_NAME_WITH_PREFIX}!	
+sText_PkmnsItemDefrostedIt	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\ndefrosted it!	{B_LAST_ITEM} ontdooit\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}!	
+sText_PkmnsItemWokeIt	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nwoke it from its sleep!	{B_LAST_ITEM} maakt\n{B_SCR_ACTIVE_NAME_WITH_PREFIX} wakker!	
+sText_PkmnsItemSnappedOut	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nsnapped it out of confusion!	{B_LAST_ITEM} haalt\n{B_SCR_ACTIVE_NAME_WITH_PREFIX} uit de war!	
+sText_PkmnsItemCuredProblem	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\ncured its {B_BUFF1} problem!	{B_LAST_ITEM} geneest\n{B_BUFF1} van {B_SCR_ACTIVE_NAME_WITH_PREFIX}!	
+sText_PkmnsItemNormalizedStatus	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nnormalized its status!	{B_LAST_ITEM} maakt\n{B_SCR_ACTIVE_NAME_WITH_PREFIX} weer gezond!	
+sText_PkmnsItemRestoredHealth	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nrestored health!	{B_LAST_ITEM} geeft\n{B_SCR_ACTIVE_NAME_WITH_PREFIX} HP terug!	
+sText_PkmnsItemRestoredPP	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nrestored {B_BUFF1}'s PP!	{B_LAST_ITEM} geeft PP\nterug aan {B_BUFF1} van\l{B_SCR_ACTIVE_NAME_WITH_PREFIX}!	
+sText_PkmnsItemRestoredStatus	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nrestored its status!	{B_LAST_ITEM} maakt\n{B_SCR_ACTIVE_NAME_WITH_PREFIX} weer normaal!	
+sText_PkmnsItemRestoredHPALittle	{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nrestored its HP a little!	{B_LAST_ITEM} geeft\n{B_SCR_ACTIVE_NAME_WITH_PREFIX} wat HP terug!	
+sText_ItemAllowsOnlyYMove	{B_LAST_ITEM} allows the\nuse of only {B_CURRENT_MOVE}!\p	Door {B_LAST_ITEM} kan alleen\n{B_CURRENT_MOVE} gebruikt worden!\p	
+sText_PkmnHungOnWithX	{B_DEF_NAME_WITH_PREFIX} hung on\nusing its {B_LAST_ITEM}!	{B_DEF_NAME_WITH_PREFIX} houdt\nvol door {B_LAST_ITEM}!	
+gText_EmptyString3			
+sText_YouThrowABallNowRight	You throw a BALL now, right?\nI… I'll do my best!	Jij gooit nu een BALL, toch?\nIk… Ik doe mijn best!	
+gText_PkmnIsEvolving	What?\n{STR_VAR_1} is evolving!	Wat?\n{STR_VAR_1} evolueert!	
+gText_CongratsPkmnEvolved	Congratulations! Your {STR_VAR_1}\nevolved into {STR_VAR_2}!{WAIT_SE}\p	Gefeliciteerd! Je {STR_VAR_1}\nis geëvolueerd tot {STR_VAR_2}!{WAIT_SE}\p	
+gText_PkmnStoppedEvolving	Huh? {STR_VAR_1}\nstopped evolving!\p	Hè? {STR_VAR_1}\nstopt met evolueren!\p	
+gText_EllipsisQuestionMark	……?\p		
+gText_WhatWillPkmnDo	What will\n{B_ACTIVE_NAME_WITH_PREFIX} do?	Wat gaat\n{B_ACTIVE_NAME_WITH_PREFIX} doen?	
+gText_WhatWillPkmnDo2	What will\n{B_PLAYER_NAME} do?	Wat gaat\n{B_PLAYER_NAME} doen?	
+gText_WhatWillWallyDo	What will\nWALLY do?	Wat gaat\nWALLY doen?	
+gText_LinkStandby	{PAUSE 16}Link standby…	{PAUSE 16}Even wachten…	
+gText_BattleMenu	FIGHT{CLEAR_TO 56}BAG\nPOKéMON{CLEAR_TO 56}RUN	VECHT{CLEAR_TO 56}TAS\nPOKéMON{CLEAR_TO 56}VLUCHT	
+gText_SafariZoneMenu	BALL{CLEAR_TO 56}{POKEBLOCK}\nGO NEAR{CLEAR_TO 56}RUN	BALL{CLEAR_TO 56}{POKEBLOCK}\nNADER{CLEAR_TO 56}VLUCHT	
+gText_MoveInterfacePP	PP 		
+gText_MoveInterfaceType	TYPE/		
+gText_MoveInterfacePPType	{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}PP\nTYPE/		
+gText_MoveInterfaceDynamicColors	{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}		
+gText_WhichMoveToForget4	{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}Which move should\nbe forgotten?	{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}Welke aanval\nwil je vergeten?	
+gText_BattleYesNoChoice	{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}Yes\nNo	{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}Ja\nNee	
+gText_BattleSwitchWhich	{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}Switch\nwhich?	{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}Wissel\nmet?	
+gText_BattleSwitchWhich2	{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}		
+gText_BattleSwitchWhich3	{UP_ARROW}		
+gText_BattleSwitchWhich4	{ESCAPE 4}		
+gText_BattleSwitchWhich5	-		
+sText_HP	HP		
+sText_Attack	ATTACK	AANVAL	
+sText_Defense	DEFENSE	VERDEDIGING	
+sText_SpAtk	SP. ATK	SP. AANV	
+sText_SpDef	SP. DEF	SP. VERD	
+gText_SafariBalls	{HIGHLIGHT DARK_GRAY}SAFARI BALLS	{HIGHLIGHT DARK_GRAY}SAFARIBALLS	
+gText_SafariBallLeft	{HIGHLIGHT DARK_GRAY}Left: ${HIGHLIGHT DARK_GRAY}	{HIGHLIGHT DARK_GRAY}Over: ${HIGHLIGHT DARK_GRAY}	
+gText_Sleep	sleep	slaap	
+gText_Poison	poison	gif	
+gText_Burn	burn	brandwond	
+gText_Paralysis	paralysis	verlamming	
+gText_Ice	ice	bevriezing	
+gText_Confusion	confusion	verwarring	
+gText_Love	love	verliefdheid	
+gText_SpaceAndSpace	 and 		
+gText_CommaSpace	, 		
+gText_Space2	 		
+gText_LineBreak	\l		
+gText_NewLine	\n		
+gText_Are	are		
+gText_Are2	are		
+gText_BadEgg	Bad EGG	Slecht EI	
+gText_BattleWallyName	WALLY		
+gText_Win	{HIGHLIGHT TRANSPARENT}Win	{HIGHLIGHT TRANSPARENT}Winst	
+gText_Loss	{HIGHLIGHT TRANSPARENT}Loss	{HIGHLIGHT TRANSPARENT}Verlies	
+gText_Draw	{HIGHLIGHT TRANSPARENT}Draw	{HIGHLIGHT TRANSPARENT}Gelijk	
+sText_SpaceIs	 is		
+sText_ApostropheS	's		
+gText_BattleTourney	BATTLE TOURNEY		
+sText_Round1	Round 1	Ronde 1	
+sText_Round2	Round 2	Ronde 2	
+sText_Semifinal	Semifinal	Halve finale	
+sText_Final	Final	Finale	
+gText_TheGreatNewHope	The great new hope!\p	De grote nieuwe hoop!\p	
+gText_WillChampionshipDreamComeTrue	Will the championship dream come true?!\p	Komt de droom van de titel uit?!\p	
+gText_AFormerChampion	A former CHAMPION!\p	Een oud-KAMPIOEN!\p	
+gText_ThePreviousChampion	The previous CHAMPION!\p	De vorige KAMPIOEN!\p	
+gText_TheUnbeatenChampion	The unbeaten CHAMPION!\p	De onverslagen KAMPIOEN!\p	
+gText_PlayerMon1Name	{B_PLAYER_MON1_NAME}		
+gText_Vs	VS		
+gText_OpponentMon1Name	{B_OPPONENT_MON1_NAME}		
+gText_Mind	Mind	Moed	
+gText_Skill	Skill	Kunde	
+gText_Body	Body	Kracht	
+gText_Judgment	{B_BUFF1}{CLEAR 13}Judgment{CLEAR 13}{B_BUFF2}	{B_BUFF1}{CLEAR 13}Oordeel{CLEAR 13}{B_BUFF2}	
+sText_TwoTrainersSentPkmn	{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\nout {B_OPPONENT_MON1_NAME}!\p{B_TRAINER2_CLASS} {B_TRAINER2_NAME} sent\nout {B_OPPONENT_MON2_NAME}!	{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nstuurt {B_OPPONENT_MON1_NAME}!\p{B_TRAINER2_CLASS} {B_TRAINER2_NAME}\nstuurt {B_OPPONENT_MON2_NAME}!	
+sText_Trainer2SentOutPkmn	{B_TRAINER2_CLASS} {B_TRAINER2_NAME} sent\nout {B_BUFF1}!	{B_TRAINER2_CLASS} {B_TRAINER2_NAME}\nstuurt {B_BUFF1}!	
+sText_TwoTrainersWantToBattle	{B_TRAINER1_CLASS} {B_TRAINER1_NAME} and\n{B_TRAINER2_CLASS} {B_TRAINER2_NAME}\lwant to battle!\p	{B_TRAINER1_CLASS} {B_TRAINER1_NAME} en\n{B_TRAINER2_CLASS} {B_TRAINER2_NAME}\lwillen vechten!\p	
+sText_InGamePartnerSentOutZGoN	{B_PARTNER_CLASS} {B_PARTNER_NAME} sent\nout {B_PLAYER_MON2_NAME}!\lGo, {B_PLAYER_MON1_NAME}!	{B_PARTNER_CLASS} {B_PARTNER_NAME}\nstuurt {B_PLAYER_MON2_NAME}!\lGa, {B_PLAYER_MON1_NAME}!	
+sText_TwoInGameTrainersDefeated	{B_TRAINER1_CLASS} {B_TRAINER1_NAME} and\n{B_TRAINER2_CLASS} {B_TRAINER2_NAME}\lwere defeated!\p	{B_TRAINER1_CLASS} {B_TRAINER1_NAME} en\n{B_TRAINER2_CLASS} {B_TRAINER2_NAME}\lzijn verslagen!\p	
+sText_Trainer2LoseText	{B_TRAINER2_LOSE_TEXT}		
+sText_PkmnIncapableOfPower	{B_ATK_NAME_WITH_PREFIX} appears incapable\nof using its power!	{B_ATK_NAME_WITH_PREFIX} lijkt zijn\nkracht niet te kunnen gebruiken!	
+sText_GlintAppearsInEye	A glint appears in\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s eyes!	Er verschijnt een glinstering in\nde ogen van {B_SCR_ACTIVE_NAME_WITH_PREFIX}!	
+sText_PkmnGettingIntoPosition	{B_SCR_ACTIVE_NAME_WITH_PREFIX} is getting into\nposition!	{B_SCR_ACTIVE_NAME_WITH_PREFIX}\ngaat klaarstaan!	
+sText_PkmnBeganGrowlingDeeply	{B_SCR_ACTIVE_NAME_WITH_PREFIX} began growling deeply!	{B_SCR_ACTIVE_NAME_WITH_PREFIX}\ngromt heel diep!	
+sText_PkmnEagerForMore	{B_SCR_ACTIVE_NAME_WITH_PREFIX} is eager for more!	{B_SCR_ACTIVE_NAME_WITH_PREFIX}\nwil nog meer!	
+sText_RefIfNothingIsDecided	REFEREE: If nothing is decided in\n3 turns, we will go to judging!	SCHEIDS: Is er na 3 beurten\ngeen winnaar, dan beslist de jury!	
+sText_RefThatsIt	REFEREE: That's it! We will now go to\njudging to determine the winner!	SCHEIDS: Tijd! De jury\nkiest nu de winnaar!	
+sText_RefJudgeMind	REFEREE: Judging category 1, Mind!\nThe POKéMON showing the most guts!\p	SCHEIDS: Punt 1, Moed!\nWelke POKéMON durft het meest?\p	
+sText_RefJudgeSkill	REFEREE: Judging category 2, Skill!\nThe POKéMON using moves the best!\p	SCHEIDS: Punt 2, Kunde!\nWie valt het beste aan?\p	
+sText_RefJudgeBody	REFEREE: Judging category 3, Body!\nThe POKéMON with the most vitality!\p	SCHEIDS: Punt 3, Kracht!\nWie heeft de meeste energie?\p	
+sText_RefPlayerWon	REFEREE: Judgment: {B_BUFF1} to {B_BUFF2}!\nThe winner is {B_PLAYER_NAME}'s {B_PLAYER_MON1_NAME}!\p	SCHEIDS: {B_BUFF1} tegen {B_BUFF2}!\nDe winnaar is {B_PLAYER_MON1_NAME}\lvan {B_PLAYER_NAME}!\p	width-ok: B_BUFF1/2 are 1-digit scores
+sText_RefOpponentWon	REFEREE: Judgment: {B_BUFF1} to {B_BUFF2}!\nThe winner is {B_TRAINER1_NAME}'s {B_OPPONENT_MON1_NAME}!\p	SCHEIDS: {B_BUFF1} tegen {B_BUFF2}!\nDe winnaar is {B_OPPONENT_MON1_NAME}\lvan {B_TRAINER1_NAME}!\p	width-ok: B_BUFF1/2 are 1-digit scores
+sText_RefDraw	REFEREE: Judgment: 3 to 3!\nWe have a draw!\p	SCHEIDS: 3 tegen 3!\nHet is gelijkspel!\p	
+sText_DefeatedOpponentByReferee	{B_PLAYER_MON1_NAME} defeated the opponent\n{B_OPPONENT_MON1_NAME} in a REFEREE's decision!	{B_PLAYER_MON1_NAME} wint van\n{B_OPPONENT_MON1_NAME} door de jury!	
+sText_LostToOpponentByReferee	{B_PLAYER_MON1_NAME} lost to the opponent\n{B_OPPONENT_MON1_NAME} in a REFEREE's decision!	{B_PLAYER_MON1_NAME} verliest van\n{B_OPPONENT_MON1_NAME} door de jury!	
+sText_TiedOpponentByReferee	{B_PLAYER_MON1_NAME} tied the opponent\n{B_OPPONENT_MON1_NAME} in a REFEREE's decision!	{B_PLAYER_MON1_NAME} speelt gelijk tegen\n{B_OPPONENT_MON1_NAME} door de jury!	
+sText_RefCommenceBattle	REFEREE: {B_PLAYER_MON1_NAME} VS {B_OPPONENT_MON1_NAME}!\nCommence battling!	SCHEIDS: {B_PLAYER_MON1_NAME} VS {B_OPPONENT_MON1_NAME}!\nBegin het gevecht!	
+sText_QuestionForfeitMatch	Would you like to forfeit the match\nand quit now?	Wil je opgeven en\nnu stoppen?	
+sText_ForfeitedMatch	{B_PLAYER_NAME} forfeited the match!	{B_PLAYER_NAME} geeft op!	
+sText_Trainer1WinText	{B_TRAINER1_WIN_TEXT}		
+sText_Trainer2WinText	{B_TRAINER2_WIN_TEXT}		
+sText_Trainer1Fled	{PLAY_SE SE_FLEE}{B_TRAINER1_CLASS} {B_TRAINER1_NAME} fled!	{PLAY_SE SE_FLEE}{B_TRAINER1_CLASS} {B_TRAINER1_NAME} vlucht!	
+sText_PlayerLostAgainstTrainer1	Player lost against\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!	Je hebt verloren van\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!	
+sText_PlayerBattledToDrawTrainer1	Player battled to a draw against\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!	Gelijkspel tegen\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!	
+gText_RecordBattleToPass	Would you like to record your battle\non your FRONTIER PASS?	Wil je je gevecht opslaan\nop je FRONTIER PASS?	
+gText_BattleRecordedOnPass	{B_PLAYER_NAME}'s battle result was recorded\non the FRONTIER PASS.	Het gevecht van {B_PLAYER_NAME} is\nopgeslagen op de FRONTIER PASS.	
+sText_LinkTrainerWantsToBattlePause	{B_LINK_OPPONENT1_NAME}\nwants to battle!{PAUSE 49}	{B_LINK_OPPONENT1_NAME}\nwil vechten!{PAUSE 49}	
+sText_TwoLinkTrainersWantToBattlePause	{B_LINK_OPPONENT1_NAME} and {B_LINK_OPPONENT2_NAME}\nwant to battle!{PAUSE 49}	{B_LINK_OPPONENT1_NAME} en {B_LINK_OPPONENT2_NAME}\nwillen vechten!{PAUSE 49}	
+sText_EmptyStatus	$$$$$$$		
+MOVETYPE_TYPE_NORMAL	a NORMAL move	NORMAAL-aanval	
+MOVETYPE_TYPE_FIGHTING	a FIGHTING move	VECHT-aanval	
+MOVETYPE_TYPE_FLYING	a FLYING move	VLIEG-aanval	
+MOVETYPE_TYPE_POISON	a POISON move	GIF-aanval	
+MOVETYPE_TYPE_GROUND	a GROUND move	GROND-aanval	
+MOVETYPE_TYPE_ROCK	a ROCK move	STEEN-aanval	
+MOVETYPE_TYPE_BUG	a BUG move	INSECT-aanval	
+MOVETYPE_TYPE_GHOST	a GHOST move	GEEST-aanval	
+MOVETYPE_TYPE_STEEL	a STEEL move	STAAL-aanval	
+MOVETYPE_TYPE_MYSTERY	a ??? move	???-aanval	
+MOVETYPE_TYPE_FIRE	a FIRE move	VUUR-aanval	
+MOVETYPE_TYPE_WATER	a WATER move	WATER-aanval	
+MOVETYPE_TYPE_GRASS	a GRASS move	GRAS-aanval	
+MOVETYPE_TYPE_ELECTRIC	an ELECTRIC move	STROOM-aanval	
+MOVETYPE_TYPE_PSYCHIC	a PSYCHIC move	PSYCHISCH-aanval	
+MOVETYPE_TYPE_ICE	an ICE move	IJS-aanval	
+MOVETYPE_TYPE_DRAGON	a DRAGON move	DRAAK-aanval	
+MOVETYPE_TYPE_DARK	a DARK move	DUISTER-aanval	
