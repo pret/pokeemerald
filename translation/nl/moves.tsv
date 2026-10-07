@@ -1,183 +1,183 @@
 key	english	dutch	notes
 MOVE_NONE	-		
-MOVE_POUND	POUND		
-MOVE_KARATE_CHOP	KARATE CHOP		
-MOVE_DOUBLE_SLAP	DOUBLESLAP		
-MOVE_COMET_PUNCH	COMET PUNCH		
-MOVE_MEGA_PUNCH	MEGA PUNCH		
-MOVE_PAY_DAY	PAY DAY		
-MOVE_FIRE_PUNCH	FIRE PUNCH		
-MOVE_ICE_PUNCH	ICE PUNCH		
-MOVE_THUNDER_PUNCH	THUNDERPUNCH		
-MOVE_SCRATCH	SCRATCH		
-MOVE_VICE_GRIP	VICEGRIP		
-MOVE_GUILLOTINE	GUILLOTINE		
-MOVE_RAZOR_WIND	RAZOR WIND		
-MOVE_SWORDS_DANCE	SWORDS DANCE		
-MOVE_CUT	CUT		
-MOVE_GUST	GUST		
-MOVE_WING_ATTACK	WING ATTACK		
-MOVE_WHIRLWIND	WHIRLWIND		
-MOVE_FLY	FLY		
-MOVE_BIND	BIND		
-MOVE_SLAM	SLAM		
-MOVE_VINE_WHIP	VINE WHIP		
-MOVE_STOMP	STOMP		
-MOVE_DOUBLE_KICK	DOUBLE KICK		
-MOVE_MEGA_KICK	MEGA KICK		
-MOVE_JUMP_KICK	JUMP KICK		
-MOVE_ROLLING_KICK	ROLLING KICK		
-MOVE_SAND_ATTACK	SAND-ATTACK		
-MOVE_HEADBUTT	HEADBUTT		
-MOVE_HORN_ATTACK	HORN ATTACK		
-MOVE_FURY_ATTACK	FURY ATTACK		
-MOVE_HORN_DRILL	HORN DRILL		
-MOVE_TACKLE	TACKLE		
-MOVE_BODY_SLAM	BODY SLAM		
-MOVE_WRAP	WRAP		
-MOVE_TAKE_DOWN	TAKE DOWN		
-MOVE_THRASH	THRASH		
-MOVE_DOUBLE_EDGE	DOUBLE-EDGE		
-MOVE_TAIL_WHIP	TAIL WHIP		
-MOVE_POISON_STING	POISON STING		
-MOVE_TWINEEDLE	TWINEEDLE		
-MOVE_PIN_MISSILE	PIN MISSILE		
-MOVE_LEER	LEER		
-MOVE_BITE	BITE		
-MOVE_GROWL	GROWL		
-MOVE_ROAR	ROAR		
-MOVE_SING	SING		
-MOVE_SUPERSONIC	SUPERSONIC		
-MOVE_SONIC_BOOM	SONICBOOM		
-MOVE_DISABLE	DISABLE		
-MOVE_ACID	ACID		
-MOVE_EMBER	EMBER		
-MOVE_FLAMETHROWER	FLAMETHROWER		
-MOVE_MIST	MIST		
-MOVE_WATER_GUN	WATER GUN		
-MOVE_HYDRO_PUMP	HYDRO PUMP		
-MOVE_SURF	SURF		
-MOVE_ICE_BEAM	ICE BEAM		
-MOVE_BLIZZARD	BLIZZARD		
-MOVE_PSYBEAM	PSYBEAM		
-MOVE_BUBBLE_BEAM	BUBBLEBEAM		
-MOVE_AURORA_BEAM	AURORA BEAM		
-MOVE_HYPER_BEAM	HYPER BEAM		
-MOVE_PECK	PECK		
-MOVE_DRILL_PECK	DRILL PECK		
-MOVE_SUBMISSION	SUBMISSION		
-MOVE_LOW_KICK	LOW KICK		
-MOVE_COUNTER	COUNTER		
-MOVE_SEISMIC_TOSS	SEISMIC TOSS		
-MOVE_STRENGTH	STRENGTH		
-MOVE_ABSORB	ABSORB		
-MOVE_MEGA_DRAIN	MEGA DRAIN		
-MOVE_LEECH_SEED	LEECH SEED		
-MOVE_GROWTH	GROWTH		
-MOVE_RAZOR_LEAF	RAZOR LEAF		
-MOVE_SOLAR_BEAM	SOLARBEAM		
-MOVE_POISON_POWDER	POISONPOWDER		
-MOVE_STUN_SPORE	STUN SPORE		
-MOVE_SLEEP_POWDER	SLEEP POWDER		
-MOVE_PETAL_DANCE	PETAL DANCE		
-MOVE_STRING_SHOT	STRING SHOT		
-MOVE_DRAGON_RAGE	DRAGON RAGE		
-MOVE_FIRE_SPIN	FIRE SPIN		
-MOVE_THUNDER_SHOCK	THUNDERSHOCK		
-MOVE_THUNDERBOLT	THUNDERBOLT		
-MOVE_THUNDER_WAVE	THUNDER WAVE		
-MOVE_THUNDER	THUNDER		
-MOVE_ROCK_THROW	ROCK THROW		
-MOVE_EARTHQUAKE	EARTHQUAKE		
-MOVE_FISSURE	FISSURE		
-MOVE_DIG	DIG		
-MOVE_TOXIC	TOXIC		
-MOVE_CONFUSION	CONFUSION		
-MOVE_PSYCHIC	PSYCHIC		
-MOVE_HYPNOSIS	HYPNOSIS		
-MOVE_MEDITATE	MEDITATE		
-MOVE_AGILITY	AGILITY		
-MOVE_QUICK_ATTACK	QUICK ATTACK		
-MOVE_RAGE	RAGE		
-MOVE_TELEPORT	TELEPORT		
-MOVE_NIGHT_SHADE	NIGHT SHADE		
-MOVE_MIMIC	MIMIC		
-MOVE_SCREECH	SCREECH		
-MOVE_DOUBLE_TEAM	DOUBLE TEAM		
-MOVE_RECOVER	RECOVER		
-MOVE_HARDEN	HARDEN		
-MOVE_MINIMIZE	MINIMIZE		
-MOVE_SMOKESCREEN	SMOKESCREEN		
-MOVE_CONFUSE_RAY	CONFUSE RAY		
-MOVE_WITHDRAW	WITHDRAW		
-MOVE_DEFENSE_CURL	DEFENSE CURL		
-MOVE_BARRIER	BARRIER		
-MOVE_LIGHT_SCREEN	LIGHT SCREEN		
-MOVE_HAZE	HAZE		
-MOVE_REFLECT	REFLECT		
-MOVE_FOCUS_ENERGY	FOCUS ENERGY		
-MOVE_BIDE	BIDE		
-MOVE_METRONOME	METRONOME		
-MOVE_MIRROR_MOVE	MIRROR MOVE		
-MOVE_SELF_DESTRUCT	SELFDESTRUCT		
-MOVE_EGG_BOMB	EGG BOMB		
-MOVE_LICK	LICK		
-MOVE_SMOG	SMOG		
-MOVE_SLUDGE	SLUDGE		
-MOVE_BONE_CLUB	BONE CLUB		
-MOVE_FIRE_BLAST	FIRE BLAST		
-MOVE_WATERFALL	WATERFALL		
-MOVE_CLAMP	CLAMP		
-MOVE_SWIFT	SWIFT		
-MOVE_SKULL_BASH	SKULL BASH		
-MOVE_SPIKE_CANNON	SPIKE CANNON		
-MOVE_CONSTRICT	CONSTRICT		
-MOVE_AMNESIA	AMNESIA		
-MOVE_KINESIS	KINESIS		
-MOVE_SOFT_BOILED	SOFTBOILED		
-MOVE_HI_JUMP_KICK	HI JUMP KICK		
-MOVE_GLARE	GLARE		
-MOVE_DREAM_EATER	DREAM EATER		
-MOVE_POISON_GAS	POISON GAS		
-MOVE_BARRAGE	BARRAGE		
-MOVE_LEECH_LIFE	LEECH LIFE		
-MOVE_LOVELY_KISS	LOVELY KISS		
-MOVE_SKY_ATTACK	SKY ATTACK		
-MOVE_TRANSFORM	TRANSFORM		
-MOVE_BUBBLE	BUBBLE		
-MOVE_DIZZY_PUNCH	DIZZY PUNCH		
-MOVE_SPORE	SPORE		
-MOVE_FLASH	FLASH		
-MOVE_PSYWAVE	PSYWAVE		
-MOVE_SPLASH	SPLASH		
-MOVE_ACID_ARMOR	ACID ARMOR		
-MOVE_CRABHAMMER	CRABHAMMER		
-MOVE_EXPLOSION	EXPLOSION		
-MOVE_FURY_SWIPES	FURY SWIPES		
-MOVE_BONEMERANG	BONEMERANG		
-MOVE_REST	REST		
-MOVE_ROCK_SLIDE	ROCK SLIDE		
-MOVE_HYPER_FANG	HYPER FANG		
-MOVE_SHARPEN	SHARPEN		
-MOVE_CONVERSION	CONVERSION		
-MOVE_TRI_ATTACK	TRI ATTACK		
-MOVE_SUPER_FANG	SUPER FANG		
-MOVE_SLASH	SLASH		
-MOVE_SUBSTITUTE	SUBSTITUTE		
-MOVE_STRUGGLE	STRUGGLE		
-MOVE_SKETCH	SKETCH		
-MOVE_TRIPLE_KICK	TRIPLE KICK		
-MOVE_THIEF	THIEF		
-MOVE_SPIDER_WEB	SPIDER WEB		
-MOVE_MIND_READER	MIND READER		
-MOVE_NIGHTMARE	NIGHTMARE		
-MOVE_FLAME_WHEEL	FLAME WHEEL		
-MOVE_SNORE	SNORE		
-MOVE_CURSE	CURSE		
-MOVE_FLAIL	FLAIL		
-MOVE_CONVERSION_2	CONVERSION 2		
-MOVE_AEROBLAST	AEROBLAST		
-MOVE_COTTON_SPORE	COTTON SPORE		
+MOVE_POUND	POUND	MEP	
+MOVE_KARATE_CHOP	KARATE CHOP	KARATESLAG	
+MOVE_DOUBLE_SLAP	DOUBLESLAP	DUBBELMEP	
+MOVE_COMET_PUNCH	COMET PUNCH	KOMEETSTOMP	
+MOVE_MEGA_PUNCH	MEGA PUNCH	MEGASTOMP	
+MOVE_PAY_DAY	PAY DAY	GELDREGEN	
+MOVE_FIRE_PUNCH	FIRE PUNCH	VUURSTOMP	
+MOVE_ICE_PUNCH	ICE PUNCH	IJSSTOMP	
+MOVE_THUNDER_PUNCH	THUNDERPUNCH	DONDERSTOMP	
+MOVE_SCRATCH	SCRATCH	KRASSEN	
+MOVE_VICE_GRIP	VICEGRIP	KNIJPGREEP	
+MOVE_GUILLOTINE	GUILLOTINE	SCHAARKNIP	
+MOVE_RAZOR_WIND	RAZOR WIND	SNIJWIND	
+MOVE_SWORDS_DANCE	SWORDS DANCE	ZWAARDDANS	
+MOVE_CUT	CUT	SNIJDEN	
+MOVE_GUST	GUST	WINDSTOOT	
+MOVE_WING_ATTACK	WING ATTACK	VLEUGELSLAG	
+MOVE_WHIRLWIND	WHIRLWIND	WERVELWIND	
+MOVE_FLY	FLY	VLIEGEN	
+MOVE_BIND	BIND	BINDEN	
+MOVE_SLAM	SLAM	SMAK	
+MOVE_VINE_WHIP	VINE WHIP	RANKZWEEP	
+MOVE_STOMP	STOMP	STAMPEN	
+MOVE_DOUBLE_KICK	DOUBLE KICK	DUBBELSCHOP	
+MOVE_MEGA_KICK	MEGA KICK	MEGASCHOP	
+MOVE_JUMP_KICK	JUMP KICK	SPRONGSCHOP	
+MOVE_ROLLING_KICK	ROLLING KICK	DRAAISCHOP	
+MOVE_SAND_ATTACK	SAND-ATTACK	ZANDGOOI	
+MOVE_HEADBUTT	HEADBUTT	KOPSTOOT	
+MOVE_HORN_ATTACK	HORN ATTACK	HOORNSTOOT	
+MOVE_FURY_ATTACK	FURY ATTACK	WILDE STOOT	
+MOVE_HORN_DRILL	HORN DRILL	HOORNBOOR	
+MOVE_TACKLE	TACKLE	TACKLE	
+MOVE_BODY_SLAM	BODY SLAM	PLETTEREN	
+MOVE_WRAP	WRAP	OMWIKKELEN	
+MOVE_TAKE_DOWN	TAKE DOWN	OMVERDUWEN	
+MOVE_THRASH	THRASH	RAZERNIJ	
+MOVE_DOUBLE_EDGE	DOUBLE-EDGE	WAAGHALS	
+MOVE_TAIL_WHIP	TAIL WHIP	STAARTZWAAI	
+MOVE_POISON_STING	POISON STING	GIFSTEEK	
+MOVE_TWINEEDLE	TWINEEDLE	DUBBELNAALD	
+MOVE_PIN_MISSILE	PIN MISSILE	NAALDRAKET	
+MOVE_LEER	LEER	BOZE BLIK	
+MOVE_BITE	BITE	BIJTEN	
+MOVE_GROWL	GROWL	GROMMEN	
+MOVE_ROAR	ROAR	BRULLEN	
+MOVE_SING	SING	ZINGEN	
+MOVE_SUPERSONIC	SUPERSONIC	PIEPTOON	
+MOVE_SONIC_BOOM	SONICBOOM	KNALGOLF	
+MOVE_DISABLE	DISABLE	BLOKKEREN	
+MOVE_ACID	ACID	ZUUR	
+MOVE_EMBER	EMBER	VUURVONK	
+MOVE_FLAMETHROWER	FLAMETHROWER	VLAMWERPER	
+MOVE_MIST	MIST	MIST	
+MOVE_WATER_GUN	WATER GUN	WATERPISTOOL	
+MOVE_HYDRO_PUMP	HYDRO PUMP	HYDROPOMP	
+MOVE_SURF	SURF	SURFEN	
+MOVE_ICE_BEAM	ICE BEAM	IJSSTRAAL	
+MOVE_BLIZZARD	BLIZZARD	SNEEUWSTORM	
+MOVE_PSYBEAM	PSYBEAM	PSYSTRAAL	
+MOVE_BUBBLE_BEAM	BUBBLEBEAM	BELLENSTRAAL	
+MOVE_AURORA_BEAM	AURORA BEAM	NOORDERLICHT	
+MOVE_HYPER_BEAM	HYPER BEAM	HYPERSTRAAL	
+MOVE_PECK	PECK	PIKKEN	
+MOVE_DRILL_PECK	DRILL PECK	BOORPIK	
+MOVE_SUBMISSION	SUBMISSION	WORSTELING	
+MOVE_LOW_KICK	LOW KICK	LAGE SCHOP	
+MOVE_COUNTER	COUNTER	COUNTER	
+MOVE_SEISMIC_TOSS	SEISMIC TOSS	AARDWORP	
+MOVE_STRENGTH	STRENGTH	KRACHT	
+MOVE_ABSORB	ABSORB	OPZUIGEN	
+MOVE_MEGA_DRAIN	MEGA DRAIN	MEGAZUIGEN	
+MOVE_LEECH_SEED	LEECH SEED	ZUIGZAAD	
+MOVE_GROWTH	GROWTH	GROEI	
+MOVE_RAZOR_LEAF	RAZOR LEAF	SCHERP BLAD	
+MOVE_SOLAR_BEAM	SOLARBEAM	ZONNESTRAAL	
+MOVE_POISON_POWDER	POISONPOWDER	GIFPOEDER	
+MOVE_STUN_SPORE	STUN SPORE	VERLAMSPORE	
+MOVE_SLEEP_POWDER	SLEEP POWDER	SLAAPPOEDER	
+MOVE_PETAL_DANCE	PETAL DANCE	BLAADJESDANS	
+MOVE_STRING_SHOT	STRING SHOT	DRAADSCHOT	
+MOVE_DRAGON_RAGE	DRAGON RAGE	DRAKENWOEDE	
+MOVE_FIRE_SPIN	FIRE SPIN	VUURWERVEL	
+MOVE_THUNDER_SHOCK	THUNDERSHOCK	DONDERSCHOK	
+MOVE_THUNDERBOLT	THUNDERBOLT	DONDERFLITS	
+MOVE_THUNDER_WAVE	THUNDER WAVE	DONDERGOLF	
+MOVE_THUNDER	THUNDER	DONDER	
+MOVE_ROCK_THROW	ROCK THROW	STEENWORP	
+MOVE_EARTHQUAKE	EARTHQUAKE	AARDBEVING	
+MOVE_FISSURE	FISSURE	AARDSCHEUR	
+MOVE_DIG	DIG	GRAVEN	
+MOVE_TOXIC	TOXIC	GIFTIG	
+MOVE_CONFUSION	CONFUSION	VERWARRING	
+MOVE_PSYCHIC	PSYCHIC	PSYCHISCH	
+MOVE_HYPNOSIS	HYPNOSIS	HYPNOSE	
+MOVE_MEDITATE	MEDITATE	MEDITEREN	
+MOVE_AGILITY	AGILITY	VLUGHEID	
+MOVE_QUICK_ATTACK	QUICK ATTACK	SNELAANVAL	
+MOVE_RAGE	RAGE	WOEDE	
+MOVE_TELEPORT	TELEPORT	TELEPORT	
+MOVE_NIGHT_SHADE	NIGHT SHADE	NACHTSCHADUW	
+MOVE_MIMIC	MIMIC	NADOEN	
+MOVE_SCREECH	SCREECH	KRIJSEN	
+MOVE_DOUBLE_TEAM	DOUBLE TEAM	DUBBELGANGER	
+MOVE_RECOVER	RECOVER	HERSTEL	
+MOVE_HARDEN	HARDEN	VERHARDEN	
+MOVE_MINIMIZE	MINIMIZE	KRIMPEN	
+MOVE_SMOKESCREEN	SMOKESCREEN	ROOKGORDIJN	
+MOVE_CONFUSE_RAY	CONFUSE RAY	WARSTRAAL	
+MOVE_WITHDRAW	WITHDRAW	INTREKKEN	
+MOVE_DEFENSE_CURL	DEFENSE CURL	OPROLLEN	
+MOVE_BARRIER	BARRIER	MUUR	
+MOVE_LIGHT_SCREEN	LIGHT SCREEN	LICHTSCHERM	
+MOVE_HAZE	HAZE	ZWARTE NEVEL	
+MOVE_REFLECT	REFLECT	REFLECTIE	
+MOVE_FOCUS_ENERGY	FOCUS ENERGY	FOCUSKRACHT	
+MOVE_BIDE	BIDE	AFWACHTEN	
+MOVE_METRONOME	METRONOME	METRONOOM	
+MOVE_MIRROR_MOVE	MIRROR MOVE	SPIEGELEN	
+MOVE_SELF_DESTRUCT	SELFDESTRUCT	ZELFBOM	
+MOVE_EGG_BOMB	EGG BOMB	EIERBOM	
+MOVE_LICK	LICK	LIKKEN	
+MOVE_SMOG	SMOG	SMOG	
+MOVE_SLUDGE	SLUDGE	SLIJK	
+MOVE_BONE_CLUB	BONE CLUB	BOTKNUPPEL	
+MOVE_FIRE_BLAST	FIRE BLAST	VUURKNAL	
+MOVE_WATERFALL	WATERFALL	WATERVAL	
+MOVE_CLAMP	CLAMP	KLEMMEN	
+MOVE_SWIFT	SWIFT	STERRENREGEN	
+MOVE_SKULL_BASH	SKULL BASH	KOPRAM	
+MOVE_SPIKE_CANNON	SPIKE CANNON	STEKELKANON	
+MOVE_CONSTRICT	CONSTRICT	KNELLEN	
+MOVE_AMNESIA	AMNESIA	VERGETEN	
+MOVE_KINESIS	KINESIS	LEPELBUIGEN	
+MOVE_SOFT_BOILED	SOFTBOILED	ZACHT EITJE	
+MOVE_HI_JUMP_KICK	HI JUMP KICK	HOGE SCHOP	
+MOVE_GLARE	GLARE	STAREN	
+MOVE_DREAM_EATER	DREAM EATER	DROOMETER	
+MOVE_POISON_GAS	POISON GAS	GIFGAS	
+MOVE_BARRAGE	BARRAGE	SPERVUUR	
+MOVE_LEECH_LIFE	LEECH LIFE	LEVENSZUIGER	
+MOVE_LOVELY_KISS	LOVELY KISS	LIEVE KUS	
+MOVE_SKY_ATTACK	SKY ATTACK	LUCHTAANVAL	
+MOVE_TRANSFORM	TRANSFORM	VERANDEREN	
+MOVE_BUBBLE	BUBBLE	BELLEN	
+MOVE_DIZZY_PUNCH	DIZZY PUNCH	DUIZELSTOMP	
+MOVE_SPORE	SPORE	SPOREN	
+MOVE_FLASH	FLASH	FLITS	
+MOVE_PSYWAVE	PSYWAVE	PSYGOLF	
+MOVE_SPLASH	SPLASH	PLONS	
+MOVE_ACID_ARMOR	ACID ARMOR	ZUURPANTSER	
+MOVE_CRABHAMMER	CRABHAMMER	KRABHAMER	
+MOVE_EXPLOSION	EXPLOSION	ONTPLOFFING	
+MOVE_FURY_SWIPES	FURY SWIPES	WILDE KLAUW	
+MOVE_BONEMERANG	BONEMERANG	BOTMERANG	
+MOVE_REST	REST	RUSTEN	
+MOVE_ROCK_SLIDE	ROCK SLIDE	STEENLAWINE	
+MOVE_HYPER_FANG	HYPER FANG	HYPERTAND	
+MOVE_SHARPEN	SHARPEN	SLIJPEN	
+MOVE_CONVERSION	CONVERSION	OMBOUWEN	
+MOVE_TRI_ATTACK	TRI ATTACK	DRIEAANVAL	
+MOVE_SUPER_FANG	SUPER FANG	SUPERTAND	
+MOVE_SLASH	SLASH	UITHALEN	
+MOVE_SUBSTITUTE	SUBSTITUTE	INVALLER	
+MOVE_STRUGGLE	STRUGGLE	SPARTELEN	
+MOVE_SKETCH	SKETCH	SCHETS	
+MOVE_TRIPLE_KICK	TRIPLE KICK	DRIESCHOP	
+MOVE_THIEF	THIEF	DIEF	
+MOVE_SPIDER_WEB	SPIDER WEB	SPINNENWEB	
+MOVE_MIND_READER	MIND READER	GEESTLEZER	
+MOVE_NIGHTMARE	NIGHTMARE	NACHTMERRIE	
+MOVE_FLAME_WHEEL	FLAME WHEEL	VLAMMENWIEL	
+MOVE_SNORE	SNORE	SNURKEN	
+MOVE_CURSE	CURSE	VLOEK	
+MOVE_FLAIL	FLAIL	ZWAAIEN	
+MOVE_CONVERSION_2	CONVERSION 2	OMBOUWEN 2	
+MOVE_AEROBLAST	AEROBLAST	LUCHTKNAL	
+MOVE_COTTON_SPORE	COTTON SPORE	WATTENWOLK	
 MOVE_REVERSAL	REVERSAL		
 MOVE_SPITE	SPITE		
 MOVE_POWDER_SNOW	POWDER SNOW		
@@ -355,184 +355,184 @@ MOVE_WATER_PULSE	WATER PULSE
 MOVE_DOOM_DESIRE	DOOM DESIRE		
 MOVE_PSYCHO_BOOST	PSYCHO BOOST		
 sNullDescription			
-sPoundDescription	Pounds the foe with\nforelegs or tail.		
-sKarateChopDescription	A chopping attack with a\nhigh critical-hit ratio.		
-sDoubleSlapDescription	Repeatedly slaps the foe\n2 to 5 times.		
-sCometPunchDescription	Repeatedly punches the foe\n2 to 5 times.		
-sMegaPunchDescription	A strong punch thrown with\nincredible power.		
-sPayDayDescription	Throws coins at the foe.\nMoney is recovered after.		
-sFirePunchDescription	A fiery punch that may burn\nthe foe.		
-sIcePunchDescription	An icy punch that may\nfreeze the foe.		
-sThunderPunchDescription	An electrified punch that\nmay paralyze the foe.		
-sScratchDescription	Scratches the foe with\nsharp claws.		
-sViceGripDescription	Grips the foe with large and\npowerful pincers.		
-sGuillotineDescription	A powerful pincer attack\nthat may cause fainting.		
-sRazorWindDescription	A 2-turn move that strikes\nthe foe on the 2nd turn.		
-sSwordsDanceDescription	A fighting dance that\nsharply raises ATTACK.		
-sCutDescription	Cuts the foe with sharp\nscythes, claws, etc.		
-sGustDescription	Strikes the foe with a gust\nof wind whipped up by wings.		
-sWingAttackDescription	Strikes the foe with wings\nspread wide.		
-sWhirlwindDescription	Blows away the foe with\nwind and ends the battle.		
-sFlyDescription	Flies up on the first turn,\nthen strikes the next turn.		
-sBindDescription	Binds and squeezes the foe\nfor 2 to 5 turns.		
-sSlamDescription	Slams the foe with a long\ntail, vine, etc.		
-sVineWhipDescription	Strikes the foe with\nslender, whiplike vines.		
-sStompDescription	Stomps the enemy with a big\nfoot. May cause flinching.		
-sDoubleKickDescription	A double-kicking attack\nthat strikes the foe twice.		
-sMegaKickDescription	An extremely powerful kick\nwith intense force.		
-sJumpKickDescription	A strong jumping kick. May\nmiss and hurt the kicker.		
-sRollingKickDescription	A fast kick delivered from\na rapid spin.		
-sSandAttackDescription	Reduces the foe's accuracy\nby hurling sand in its face.		
-sHeadbuttDescription	A ramming attack that may\ncause flinching.		
-sHornAttackDescription	Jabs the foe with sharp\nhorns.		
-sFuryAttackDescription	Jabs the foe 2 to 5 times\nwith sharp horns, etc.		
-sHornDrillDescription	A one-hit KO attack that\nuses a horn like a drill.		
-sTackleDescription	Charges the foe with a full-\nbody tackle.		
-sBodySlamDescription	A full-body slam that may\ncause paralysis.		
-sWrapDescription	Wraps and squeezes the foe\n2 to 5 times with vines, etc.		
-sTakeDownDescription	A reckless charge attack\nthat also hurts the user.		
-sThrashDescription	A rampage of 2 to 3 turns\nthat confuses the user.		
-sDoubleEdgeDescription	A life-risking tackle that\nalso hurts the user.		
-sTailWhipDescription	Wags the tail to lower the\nfoe's DEFENSE.		
-sPoisonStingDescription	A toxic attack with barbs,\netc., that may poison.		
-sTwineedleDescription	Stingers on the forelegs\njab the foe twice.		
-sPinMissileDescription	Sharp pins are fired to\nstrike 2 to 5 times.		
-sLeerDescription	Frightens the foe with a\nleer to lower DEFENSE.		
-sBiteDescription	Bites with vicious fangs.\nMay cause flinching.		
-sGrowlDescription	Growls cutely to reduce the\nfoe's ATTACK.		
-sRoarDescription	Makes the foe flee to end\nthe battle.		
-sSingDescription	A soothing song lulls the\nfoe into a deep slumber.		
-sSupersonicDescription	Emits bizarre sound waves\nthat may confuse the foe.		
-sSonicBoomDescription	Launches shock waves that\nalways inflict 20 HP damage.		
-sDisableDescription	Psychically disables one of\nthe foe's moves.		
-sAcidDescription	Sprays a hide-melting acid.\nMay lower DEFENSE.		
-sEmberDescription	A weak fire attack that may\ninflict a burn.		
-sFlamethrowerDescription	A powerful fire attack that\nmay inflict a burn.		
-sMistDescription	Creates a mist that stops\nreduction of abilities.		
-sWaterGunDescription	Squirts water to attack\nthe foe.		
-sHydroPumpDescription	Blasts water at high power\nto strike the foe.		
-sSurfDescription	Creates a huge wave, then\ncrashes it down on the foe.		
-sIceBeamDescription	Blasts the foe with an icy\nbeam that may freeze it.		
-sBlizzardDescription	Hits the foe with an icy\nstorm that may freeze it.		
-sPsybeamDescription	Fires a peculiar ray that\nmay confuse the foe.		
-sBubbleBeamDescription	Forcefully sprays bubbles\nthat may lower SPEED.		
-sAuroraBeamDescription	Fires a rainbow-colored\nbeam that may lower ATTACK.		
-sHyperBeamDescription	Powerful, but leaves the\nuser immobile the next turn.		
-sPeckDescription	Attacks the foe with a\njabbing beak, etc.		
-sDrillPeckDescription	A corkscrewing attack with\nthe beak acting as a drill.		
-sSubmissionDescription	A reckless body slam that\nalso hurts the user.		
-sLowKickDescription	A kick that inflicts more\ndamage on heavier foes.		
-sCounterDescription	Retaliates any physical hit\nwith double the power.		
-sSeismicTossDescription	Inflicts damage identical\nto the user's level.		
-sStrengthDescription	Builds enormous power,\nthen slams the foe.		
-sAbsorbDescription	An attack that absorbs\nhalf the damage inflicted.		
-sMegaDrainDescription	An attack that absorbs\nhalf the damage inflicted.		
-sLeechSeedDescription	Plants a seed on the foe to\nsteal HP on every turn.		
-sGrowthDescription	Forces the body to grow\nand heightens SP. ATK.		
-sRazorLeafDescription	Cuts the enemy with leaves.\nHigh critical-hit ratio.		
-sSolarBeamDescription	Absorbs light in one turn,\nthen attacks next turn.		
-sPoisonPowderDescription	Scatters a toxic powder\nthat may poison the foe.		
-sStunSporeDescription	Scatters a powder that may\nparalyze the foe.		
-sSleepPowderDescription	Scatters a powder that may\ncause the foe to sleep.		
-sPetalDanceDescription	A rampage of 2 to 3 turns\nthat confuses the user.		
-sStringShotDescription	Binds the foe with string\nto reduce its SPEED.		
-sDragonRageDescription	Launches shock waves that\nalways inflict 40 HP damage.		
-sFireSpinDescription	Traps the foe in a ring of\nfire for 2 to 5 turns.		
-sThunderShockDescription	An electrical attack that\nmay paralyze the foe.		
-sThunderboltDescription	A strong electrical attack\nthat may paralyze the foe.		
-sThunderWaveDescription	A weak jolt of electricity\nthat paralyzes the foe.		
-sThunderDescription	A lightning attack that may\ncause paralysis.		
-sRockThrowDescription	Throws small rocks to\nstrike the foe.		
-sEarthquakeDescription	A powerful quake, but has\nno effect on flying foes.		
-sFissureDescription	A one-hit KO move that\ndrops the foe in a fissure.		
-sDigDescription	Digs underground the first\nturn and strikes next turn.		
-sToxicDescription	Poisons the foe with an\nintensifying toxin.		
-sConfusionDescription	A psychic attack that may\ncause confusion.		
-sPsychicDescription	A powerful psychic attack\nthat may lower SP. DEF.		
-sHypnosisDescription	A hypnotizing move that\nmay induce sleep.		
-sMeditateDescription	Meditates in a peaceful\nfashion to raise ATTACK.		
-sAgilityDescription	Relaxes the body to sharply\nboost SPEED.		
-sQuickAttackDescription	An extremely fast attack\nthat always strikes first.		
-sRageDescription	Raises the user's ATTACK\nevery time it is hit.		
-sTeleportDescription	A psychic move for fleeing\nfrom battle instantly.		
-sNightShadeDescription	Inflicts damage identical\nto the user's level.		
-sMimicDescription	Copies a move used by the\nfoe during one battle.		
-sScreechDescription	Emits a screech to sharply\nreduce the foe's DEFENSE.		
-sDoubleTeamDescription	Creates illusory copies to\nraise evasiveness.		
-sRecoverDescription	Recovers up to half the\nuser's maximum HP.		
-sHardenDescription	Stiffens the body's \nmuscles to raise DEFENSE.		
-sMinimizeDescription	Minimizes the user's size\nto raise evasiveness.		
-sSmokescreenDescription	Lowers the foe's accuracy\nusing smoke, ink, etc.		
-sConfuseRayDescription	A sinister ray that\nconfuses the foe.		
-sWithdrawDescription	Withdraws the body into its\nhard shell to raise DEFENSE.		
-sDefenseCurlDescription	Curls up to conceal weak\nspots and raise DEFENSE.		
-sBarrierDescription	Creates a barrier that\nsharply raises DEFENSE.		
-sLightScreenDescription	Creates a wall of light that\nlowers SP. ATK damage.		
-sHazeDescription	Creates a black haze that\neliminates all stat changes.		
-sReflectDescription	Creates a wall of light that\nweakens physical attacks.		
-sFocusEnergyDescription	Focuses power to raise the\ncritical-hit ratio.		
-sBideDescription	Endures attack for 2\nturns to retaliate double.		
-sMetronomeDescription	Waggles a finger to use any\nPOKéMON move at random.		
-sMirrorMoveDescription	Counters the foe's attack\nwith the same move.		
-sSelfDestructDescription	Inflicts severe damage but\nmakes the user faint.		
-sEggBombDescription	An egg is forcibly hurled at\nthe foe.		
-sLickDescription	Licks with a long tongue to\ninjure. May also paralyze.		
-sSmogDescription	An exhaust-gas attack\nthat may also poison.		
-sSludgeDescription	Sludge is hurled to inflict\ndamage. May also poison.		
-sBoneClubDescription	Clubs the foe with a bone.\nMay cause flinching.		
-sFireBlastDescription	Incinerates everything it\nstrikes. May cause a burn.		
-sWaterfallDescription	Charges the foe with speed\nto climb waterfalls.		
-sClampDescription	Traps and squeezes the\nfoe for 2 to 5 turns.		
-sSwiftDescription	Sprays star-shaped rays\nthat never miss.		
-sSkullBashDescription	Tucks in the head, then\nattacks on the next turn.		
-sSpikeCannonDescription	Launches sharp spikes that\nstrike 2 to 5 times.		
-sConstrictDescription	Constricts to inflict pain.\nMay lower SPEED.		
-sAmnesiaDescription	Forgets about something\nand sharply raises SP. DEF.		
-sKinesisDescription	Distracts the foe.\nMay lower accuracy.		
-sSoftBoiledDescription	Recovers up to half the\nuser's maximum HP.		
-sHiJumpKickDescription	A jumping knee kick. If it\nmisses, the user is hurt.		
-sGlareDescription	Intimidates and frightens\nthe foe into paralysis.		
-sDreamEaterDescription	Takes one half the damage\ninflicted on a sleeping foe.		
-sPoisonGasDescription	Envelops the foe in a toxic\ngas that may poison.		
-sBarrageDescription	Hurls round objects at the\nfoe 2 to 5 times.		
-sLeechLifeDescription	An attack that steals half\nthe damage inflicted.		
-sLovelyKissDescription	Demands a kiss with a scary\nface that induces sleep.		
-sSkyAttackDescription	Searches out weak spots,\nthen strikes the next turn.		
-sTransformDescription	Alters the user's cells to\nbecome a copy of the foe.		
-sBubbleDescription	An attack using bubbles.\nMay lower the foe's SPEED.		
-sDizzyPunchDescription	A rhythmic punch that may\nconfuse the foe.		
-sSporeDescription	Scatters a cloud of spores\nthat always induce sleep.		
-sFlashDescription	Looses a powerful blast of\nlight that cuts accuracy.		
-sPsywaveDescription	Attacks with a psychic\nwave of varying intensity.		
-sSplashDescription	It's just a splash...\nHas no effect whatsoever.		
-sAcidArmorDescription	Liquifies the user's body\nto sharply raise DEFENSE.		
-sCrabhammerDescription	Hammers with a pincer. Has a\nhigh critical-hit ratio.		
-sExplosionDescription	Inflicts severe damage but\nmakes the user faint.		
-sFurySwipesDescription	Rakes the foe with sharp\nclaws, etc., 2 to 5 times.		
-sBonemerangDescription	Throws a bone boomerang\nthat strikes twice.		
-sRestDescription	The user sleeps for 2 turns,\nrestoring HP and status.		
-sRockSlideDescription	Large boulders are hurled.\nMay cause flinching.		
-sHyperFangDescription	Attacks with sharp fangs.\nMay cause flinching.		
-sSharpenDescription	Reduces the polygon count\nand raises ATTACK.		
-sConversionDescription	Changes the user's type\ninto a known move's type.		
-sTriAttackDescription	Fires three types of beams\nat the same time.		
-sSuperFangDescription	Attacks with sharp fangs\nand cuts half the foe's HP.		
-sSlashDescription	Slashes with claws, etc. Has\na high critical-hit ratio.		
-sSubstituteDescription	Creates a decoy using 1/4\nof the user's maximum HP.		
-sStruggleDescription	Used only if all PP are gone.\nAlso hurts the user a little.		
-sSketchDescription	Copies the foe's last move\npermanently.		
-sTripleKickDescription	Kicks the foe 3 times in a\nrow with rising intensity.		
-sThiefDescription	While attacking, it may\nsteal the foe's held item.		
-sSpiderWebDescription	Ensnares the foe to stop it\nfrom fleeing or switching.		
-sMindReaderDescription	Senses the foe's action to\nensure the next move's hit.		
-sNightmareDescription	Inflicts 1/4 damage on a\nsleeping foe every turn.		
-sFlameWheelDescription	A fiery charge attack that\nmay inflict a burn.		
-sSnoreDescription	A loud attack that can be\nused only while asleep.		
-sCurseDescription	A move that functions\ndifferently for GHOSTS.		
-sFlailDescription	Inflicts more damage when\nthe user's HP is down.		
-sConversion2Description	Makes the user resistant\nto the last attack's type.		
-sAeroblastDescription	Launches a vacuumed blast.\nHigh critical-hit ratio.		
-sCottonSporeDescription	Spores cling to the foe,\nsharply reducing SPEED.		
+sPoundDescription	Pounds the foe with\nforelegs or tail.	Slaat de vijand met\npoten of staart.	
+sKarateChopDescription	A chopping attack with a\nhigh critical-hit ratio.	Een karateslag met veel\nkans op een voltreffer.	
+sDoubleSlapDescription	Repeatedly slaps the foe\n2 to 5 times.	Slaat de vijand\n2 tot 5 keer.	
+sCometPunchDescription	Repeatedly punches the foe\n2 to 5 times.	Stompt de vijand\n2 tot 5 keer.	
+sMegaPunchDescription	A strong punch thrown with\nincredible power.	Een stomp met heel\nveel kracht.	
+sPayDayDescription	Throws coins at the foe.\nMoney is recovered after.	Gooit munten. Na het\ngevecht krijg je geld.	
+sFirePunchDescription	A fiery punch that may burn\nthe foe.	Een vurige stomp. Kan de\nvijand verbranden.	
+sIcePunchDescription	An icy punch that may\nfreeze the foe.	Een ijzige stomp. Kan de\nvijand bevriezen.	
+sThunderPunchDescription	An electrified punch that\nmay paralyze the foe.	Een stomp vol stroom. Kan\nde vijand verlammen.	
+sScratchDescription	Scratches the foe with\nsharp claws.	Krast de vijand met\nscherpe klauwen.	
+sViceGripDescription	Grips the foe with large and\npowerful pincers.	Knijpt de vijand met\ngrote, sterke scharen.	
+sGuillotineDescription	A powerful pincer attack\nthat may cause fainting.	Een harde knip. Als hij\nraakt, is de vijand KO.	
+sRazorWindDescription	A 2-turn move that strikes\nthe foe on the 2nd turn.	Laadt 1 beurt op en\nraakt in de 2e beurt.	
+sSwordsDanceDescription	A fighting dance that\nsharply raises ATTACK.	Een vechtdans. Verhoogt\nAANVAL flink.	
+sCutDescription	Cuts the foe with sharp\nscythes, claws, etc.	Snijdt de vijand met\nscherpe klauwen.	
+sGustDescription	Strikes the foe with a gust\nof wind whipped up by wings.	Maakt wind met de\nvleugels en raakt de vijand.	
+sWingAttackDescription	Strikes the foe with wings\nspread wide.	Slaat de vijand met\nwijde vleugels.	
+sWhirlwindDescription	Blows away the foe with\nwind and ends the battle.	Blaast de vijand weg.\nHet gevecht stopt.	
+sFlyDescription	Flies up on the first turn,\nthen strikes the next turn.	Vliegt omhoog in beurt 1\nen raakt in beurt 2.	
+sBindDescription	Binds and squeezes the foe\nfor 2 to 5 turns.	Knelt de vijand vast\nvoor 2 tot 5 beurten.	
+sSlamDescription	Slams the foe with a long\ntail, vine, etc.	Slaat met een lange\nstaart, rank, enz.	
+sVineWhipDescription	Strikes the foe with\nslender, whiplike vines.	Zweept de vijand met\ndunne ranken.	
+sStompDescription	Stomps the enemy with a big\nfoot. May cause flinching.	Stampt met een grote voet.\nVijand kan terugdeinzen.	
+sDoubleKickDescription	A double-kicking attack\nthat strikes the foe twice.	Schopt de vijand\n2 keer.	
+sMegaKickDescription	An extremely powerful kick\nwith intense force.	Een heel harde schop\nmet veel kracht.	
+sJumpKickDescription	A strong jumping kick. May\nmiss and hurt the kicker.	Een sprong met een schop.\nMis je, dan doet het pijn.	
+sRollingKickDescription	A fast kick delivered from\na rapid spin.	Een snelle schop vanuit\neen draai.	
+sSandAttackDescription	Reduces the foe's accuracy\nby hurling sand in its face.	Gooit zand in de ogen.\nVerlaagt de raakkans.	
+sHeadbuttDescription	A ramming attack that may\ncause flinching.	Ramt met het hoofd.\nVijand kan terugdeinzen.	
+sHornAttackDescription	Jabs the foe with sharp\nhorns.	Prikt de vijand met\nscherpe hoorns.	
+sFuryAttackDescription	Jabs the foe 2 to 5 times\nwith sharp horns, etc.	Prikt de vijand 2 tot\n5 keer met hoorns.	
+sHornDrillDescription	A one-hit KO attack that\nuses a horn like a drill.	Boort met een hoorn.\nAls hij raakt: KO.	
+sTackleDescription	Charges the foe with a full-\nbody tackle.	Rent met het hele lijf\ntegen de vijand aan.	
+sBodySlamDescription	A full-body slam that may\ncause paralysis.	Springt op de vijand.\nKan verlammen.	
+sWrapDescription	Wraps and squeezes the foe\n2 to 5 times with vines, etc.	Wikkelt de vijand in voor\n2 tot 5 beurten.	
+sTakeDownDescription	A reckless charge attack\nthat also hurts the user.	Een wilde ren-aanval.\nDoet zelf ook pijn.	
+sThrashDescription	A rampage of 2 to 3 turns\nthat confuses the user.	Raast 2 tot 3 beurten.\nRaakt daarna in de war.	
+sDoubleEdgeDescription	A life-risking tackle that\nalso hurts the user.	Een gevaarlijke duw.\nDoet zelf ook pijn.	
+sTailWhipDescription	Wags the tail to lower the\nfoe's DEFENSE.	Zwaait met de staart.\nVerlaagt VERDEDIGING.	
+sPoisonStingDescription	A toxic attack with barbs,\netc., that may poison.	Een giftige steek.\nKan vergiftigen.	
+sTwineedleDescription	Stingers on the forelegs\njab the foe twice.	Steekt de vijand 2 keer\nmet stekels.	
+sPinMissileDescription	Sharp pins are fired to\nstrike 2 to 5 times.	Schiet scherpe naalden\ndie 2 tot 5 keer raken.	
+sLeerDescription	Frightens the foe with a\nleer to lower DEFENSE.	Kijkt de vijand boos aan.\nVerlaagt VERDEDIGING.	
+sBiteDescription	Bites with vicious fangs.\nMay cause flinching.	Bijt met scherpe tanden.\nVijand kan terugdeinzen.	
+sGrowlDescription	Growls cutely to reduce the\nfoe's ATTACK.	Gromt heel schattig.\nVerlaagt AANVAL.	
+sRoarDescription	Makes the foe flee to end\nthe battle.	Jaagt de vijand weg.\nHet gevecht stopt.	
+sSingDescription	A soothing song lulls the\nfoe into a deep slumber.	Een rustig liedje laat de\nvijand in slaap vallen.	
+sSupersonicDescription	Emits bizarre sound waves\nthat may confuse the foe.	Een rare pieptoon. Kan\nde vijand verwarren.	
+sSonicBoomDescription	Launches shock waves that\nalways inflict 20 HP damage.	Een knalgolf die altijd\n20 HP schade doet.	
+sDisableDescription	Psychically disables one of\nthe foe's moves.	Blokkeert 1 aanval\nvan de vijand.	
+sAcidDescription	Sprays a hide-melting acid.\nMay lower DEFENSE.	Spuit bijtend zuur.\nKan VERDEDIGING verlagen.	
+sEmberDescription	A weak fire attack that may\ninflict a burn.	Een zwakke vuuraanval.\nKan verbranden.	
+sFlamethrowerDescription	A powerful fire attack that\nmay inflict a burn.	Een sterke vuuraanval.\nKan verbranden.	
+sMistDescription	Creates a mist that stops\nreduction of abilities.	Maakt mist. Niemand kan\nje zwakker maken.	
+sWaterGunDescription	Squirts water to attack\nthe foe.	Spuit water naar\nde vijand.	
+sHydroPumpDescription	Blasts water at high power\nto strike the foe.	Spuit water met heel\nveel kracht.	
+sSurfDescription	Creates a huge wave, then\ncrashes it down on the foe.	Maakt een grote golf die\nop de vijand valt.	
+sIceBeamDescription	Blasts the foe with an icy\nbeam that may freeze it.	Een ijzige straal.\nKan de vijand bevriezen.	
+sBlizzardDescription	Hits the foe with an icy\nstorm that may freeze it.	Een ijzige storm.\nKan de vijand bevriezen.	
+sPsybeamDescription	Fires a peculiar ray that\nmay confuse the foe.	Een vreemde straal.\nKan de vijand verwarren.	
+sBubbleBeamDescription	Forcefully sprays bubbles\nthat may lower SPEED.	Spuit bellen met kracht.\nKan SNELHEID verlagen.	
+sAuroraBeamDescription	Fires a rainbow-colored\nbeam that may lower ATTACK.	Een regenboogstraal.\nKan AANVAL verlagen.	
+sHyperBeamDescription	Powerful, but leaves the\nuser immobile the next turn.	Heel sterk, maar daarna\nmoet je 1 beurt rusten.	
+sPeckDescription	Attacks the foe with a\njabbing beak, etc.	Pikt de vijand met\neen snavel.	
+sDrillPeckDescription	A corkscrewing attack with\nthe beak acting as a drill.	Draait en boort met\nde snavel.	
+sSubmissionDescription	A reckless body slam that\nalso hurts the user.	Een wilde worp.\nDoet zelf ook pijn.	
+sLowKickDescription	A kick that inflicts more\ndamage on heavier foes.	Doet meer schade bij\nzware vijanden.	
+sCounterDescription	Retaliates any physical hit\nwith double the power.	Slaat terug met dubbele\nkracht na een klap.	
+sSeismicTossDescription	Inflicts damage identical\nto the user's level.	Doet schade gelijk aan\nhet eigen level.	
+sStrengthDescription	Builds enormous power,\nthen slams the foe.	Bouwt veel kracht op en\nslaat dan de vijand.	
+sAbsorbDescription	An attack that absorbs\nhalf the damage inflicted.	Zuigt HP op: de helft\nvan de schade.	
+sMegaDrainDescription	An attack that absorbs\nhalf the damage inflicted.	Zuigt HP op: de helft\nvan de schade.	
+sLeechSeedDescription	Plants a seed on the foe to\nsteal HP on every turn.	Plant een zaadje dat elke\nbeurt HP steelt.	
+sGrowthDescription	Forces the body to grow\nand heightens SP. ATK.	Het lijf groeit.\nVerhoogt SP. AANV.	
+sRazorLeafDescription	Cuts the enemy with leaves.\nHigh critical-hit ratio.	Snijdt met bladeren.\nVeel kans op voltreffer.	
+sSolarBeamDescription	Absorbs light in one turn,\nthen attacks next turn.	Vangt licht in beurt 1.\nValt aan in beurt 2.	
+sPoisonPowderDescription	Scatters a toxic powder\nthat may poison the foe.	Strooit giftig poeder.\nKan vergiftigen.	
+sStunSporeDescription	Scatters a powder that may\nparalyze the foe.	Strooit poeder dat de\nvijand kan verlammen.	
+sSleepPowderDescription	Scatters a powder that may\ncause the foe to sleep.	Strooit slaappoeder.\nKan in slaap brengen.	
+sPetalDanceDescription	A rampage of 2 to 3 turns\nthat confuses the user.	Raast 2 tot 3 beurten.\nRaakt daarna in de war.	
+sStringShotDescription	Binds the foe with string\nto reduce its SPEED.	Bindt de vijand met draad.\nVerlaagt SNELHEID.	
+sDragonRageDescription	Launches shock waves that\nalways inflict 40 HP damage.	Een golf die altijd\n40 HP schade doet.	
+sFireSpinDescription	Traps the foe in a ring of\nfire for 2 to 5 turns.	Sluit de vijand 2 tot 5\nbeurten op in vuur.	
+sThunderShockDescription	An electrical attack that\nmay paralyze the foe.	Een stroomaanval.\nKan verlammen.	
+sThunderboltDescription	A strong electrical attack\nthat may paralyze the foe.	Een sterke stroomaanval.\nKan verlammen.	
+sThunderWaveDescription	A weak jolt of electricity\nthat paralyzes the foe.	Een klein stroomschokje.\nVerlamt de vijand.	
+sThunderDescription	A lightning attack that may\ncause paralysis.	Een bliksemaanval.\nKan verlammen.	
+sRockThrowDescription	Throws small rocks to\nstrike the foe.	Gooit kleine stenen\nnaar de vijand.	
+sEarthquakeDescription	A powerful quake, but has\nno effect on flying foes.	Een harde aardbeving. Raakt\ngeen vliegende vijand.	
+sFissureDescription	A one-hit KO move that\ndrops the foe in a fissure.	Laat de vijand in een\nscheur vallen. Raak: KO.	
+sDigDescription	Digs underground the first\nturn and strikes next turn.	Graaft in beurt 1 onder de\ngrond. Raakt in beurt 2.	
+sToxicDescription	Poisons the foe with an\nintensifying toxin.	Vergiftigt de vijand.\nHet gif wordt steeds erger.	
+sConfusionDescription	A psychic attack that may\ncause confusion.	Een psychische aanval.\nKan verwarren.	
+sPsychicDescription	A powerful psychic attack\nthat may lower SP. DEF.	Sterke psychische aanval.\nKan SP. VERD verlagen.	
+sHypnosisDescription	A hypnotizing move that\nmay induce sleep.	Hypnotiseert de vijand.\nKan in slaap brengen.	
+sMeditateDescription	Meditates in a peaceful\nfashion to raise ATTACK.	Mediteert rustig.\nVerhoogt AANVAL.	
+sAgilityDescription	Relaxes the body to sharply\nboost SPEED.	Ontspant het lijf.\nVerhoogt SNELHEID flink.	
+sQuickAttackDescription	An extremely fast attack\nthat always strikes first.	Een supersnelle aanval.\nValt altijd eerst aan.	
+sRageDescription	Raises the user's ATTACK\nevery time it is hit.	AANVAL stijgt elke keer\nals hij geraakt wordt.	
+sTeleportDescription	A psychic move for fleeing\nfrom battle instantly.	Teleporteert weg. Vlucht\nmeteen uit het gevecht.	
+sNightShadeDescription	Inflicts damage identical\nto the user's level.	Doet schade gelijk aan\nhet eigen level.	
+sMimicDescription	Copies a move used by the\nfoe during one battle.	Kopieert een aanval van\nde vijand voor 1 gevecht.	
+sScreechDescription	Emits a screech to sharply\nreduce the foe's DEFENSE.	Een hard gekrijs.\nVerlaagt VERDEDIGING flink.	
+sDoubleTeamDescription	Creates illusory copies to\nraise evasiveness.	Maakt nepkopieën.\nOntwijkt beter.	
+sRecoverDescription	Recovers up to half the\nuser's maximum HP.	Herstelt de helft van\nde max. HP.	
+sHardenDescription	Stiffens the body's \nmuscles to raise DEFENSE.	Maakt de spieren hard.\nVerhoogt VERDEDIGING.	
+sMinimizeDescription	Minimizes the user's size\nto raise evasiveness.	Wordt heel klein.\nOntwijkt beter.	
+sSmokescreenDescription	Lowers the foe's accuracy\nusing smoke, ink, etc.	Rook of inkt verlaagt de\nraakkans van de vijand.	
+sConfuseRayDescription	A sinister ray that\nconfuses the foe.	Een enge straal.\nVerwart de vijand.	
+sWithdrawDescription	Withdraws the body into its\nhard shell to raise DEFENSE.	Kruipt in de harde schelp.\nVerhoogt VERDEDIGING.	
+sDefenseCurlDescription	Curls up to conceal weak\nspots and raise DEFENSE.	Rolt zich op.\nVerhoogt VERDEDIGING.	
+sBarrierDescription	Creates a barrier that\nsharply raises DEFENSE.	Maakt een muur.\nVerhoogt VERDEDIGING flink.	
+sLightScreenDescription	Creates a wall of light that\nlowers SP. ATK damage.	Een muur van licht.\nMinder schade van SP. AANV.	
+sHazeDescription	Creates a black haze that\neliminates all stat changes.	Zwarte nevel zet alles\nweer terug naar normaal.	
+sReflectDescription	Creates a wall of light that\nweakens physical attacks.	Een muur van licht.\nMinder schade van klappen.	
+sFocusEnergyDescription	Focuses power to raise the\ncritical-hit ratio.	Concentreert zich.\nMeer kans op voltreffer.	
+sBideDescription	Endures attack for 2\nturns to retaliate double.	Houdt 2 beurten vol.\nSlaat dan dubbel terug.	
+sMetronomeDescription	Waggles a finger to use any\nPOKéMON move at random.	Zwaait met een vinger.\nDoet zomaar een aanval.	
+sMirrorMoveDescription	Counters the foe's attack\nwith the same move.	Doet de laatste aanval\nvan de vijand na.	
+sSelfDestructDescription	Inflicts severe damage but\nmakes the user faint.	Heel veel schade, maar\nis zelf daarna verslagen.	
+sEggBombDescription	An egg is forcibly hurled at\nthe foe.	Gooit hard een ei naar\nde vijand.	
+sLickDescription	Licks with a long tongue to\ninjure. May also paralyze.	Likt met een lange tong.\nKan verlammen.	
+sSmogDescription	An exhaust-gas attack\nthat may also poison.	Een aanval met vies gas.\nKan vergiftigen.	
+sSludgeDescription	Sludge is hurled to inflict\ndamage. May also poison.	Gooit vies slijk.\nKan vergiftigen.	
+sBoneClubDescription	Clubs the foe with a bone.\nMay cause flinching.	Slaat met een bot.\nVijand kan terugdeinzen.	
+sFireBlastDescription	Incinerates everything it\nstrikes. May cause a burn.	Een enorme vuuraanval.\nKan verbranden.	
+sWaterfallDescription	Charges the foe with speed\nto climb waterfalls.	Klimt watervallen op.\nRamt de vijand hard.	
+sClampDescription	Traps and squeezes the\nfoe for 2 to 5 turns.	Klemt de vijand vast\nvoor 2 tot 5 beurten.	
+sSwiftDescription	Sprays star-shaped rays\nthat never miss.	Schiet sterren die\nnooit missen.	
+sSkullBashDescription	Tucks in the head, then\nattacks on the next turn.	Trekt het hoofd in.\nRamt in de volgende beurt.	
+sSpikeCannonDescription	Launches sharp spikes that\nstrike 2 to 5 times.	Schiet stekels die\n2 tot 5 keer raken.	
+sConstrictDescription	Constricts to inflict pain.\nMay lower SPEED.	Knelt de vijand.\nKan SNELHEID verlagen.	
+sAmnesiaDescription	Forgets about something\nand sharply raises SP. DEF.	Vergeet iets.\nVerhoogt SP. VERD flink.	
+sKinesisDescription	Distracts the foe.\nMay lower accuracy.	Leidt de vijand af.\nKan raakkans verlagen.	
+sSoftBoiledDescription	Recovers up to half the\nuser's maximum HP.	Herstelt de helft van\nde max. HP.	
+sHiJumpKickDescription	A jumping knee kick. If it\nmisses, the user is hurt.	Een hoge knieschop.\nMis je, dan doet het pijn.	
+sGlareDescription	Intimidates and frightens\nthe foe into paralysis.	Kijkt zo eng dat de\nvijand verlamd raakt.	
+sDreamEaterDescription	Takes one half the damage\ninflicted on a sleeping foe.	Steelt HP van een\nslapende vijand.	
+sPoisonGasDescription	Envelops the foe in a toxic\ngas that may poison.	Hult de vijand in gifgas.\nKan vergiftigen.	
+sBarrageDescription	Hurls round objects at the\nfoe 2 to 5 times.	Gooit ronde dingen\n2 tot 5 keer.	
+sLeechLifeDescription	An attack that steals half\nthe damage inflicted.	Steelt HP: de helft\nvan de schade.	
+sLovelyKissDescription	Demands a kiss with a scary\nface that induces sleep.	Een kus met een eng\ngezicht. Vijand slaapt.	
+sSkyAttackDescription	Searches out weak spots,\nthen strikes the next turn.	Zoekt zwakke plekken.\nValt aan in beurt 2.	
+sTransformDescription	Alters the user's cells to\nbecome a copy of the foe.	Verandert in een kopie\nvan de vijand.	
+sBubbleDescription	An attack using bubbles.\nMay lower the foe's SPEED.	Een aanval met bellen.\nKan SNELHEID verlagen.	
+sDizzyPunchDescription	A rhythmic punch that may\nconfuse the foe.	Een ritmische stomp.\nKan verwarren.	
+sSporeDescription	Scatters a cloud of spores\nthat always induce sleep.	Strooit sporen. Vijand\nvalt altijd in slaap.	
+sFlashDescription	Looses a powerful blast of\nlight that cuts accuracy.	Een felle lichtflits.\nVerlaagt de raakkans.	
+sPsywaveDescription	Attacks with a psychic\nwave of varying intensity.	Een psychische golf.\nKracht wisselt steeds.	
+sSplashDescription	It's just a splash...\nHas no effect whatsoever.	Het is maar een plons...\nEr gebeurt helemaal niets.	
+sAcidArmorDescription	Liquifies the user's body\nto sharply raise DEFENSE.	Maakt het lijf vloeibaar.\nVerhoogt VERD. flink.	
+sCrabhammerDescription	Hammers with a pincer. Has a\nhigh critical-hit ratio.	Slaat met een schaar.\nVeel kans op voltreffer.	
+sExplosionDescription	Inflicts severe damage but\nmakes the user faint.	Heel veel schade, maar\nis zelf daarna verslagen.	
+sFurySwipesDescription	Rakes the foe with sharp\nclaws, etc., 2 to 5 times.	Krabt de vijand 2 tot\n5 keer met klauwen.	
+sBonemerangDescription	Throws a bone boomerang\nthat strikes twice.	Gooit een bot als boemerang.\nRaakt 2 keer.	
+sRestDescription	The user sleeps for 2 turns,\nrestoring HP and status.	Slaapt 2 beurten. Herstelt\nalle HP en kwaaltjes.	
+sRockSlideDescription	Large boulders are hurled.\nMay cause flinching.	Gooit grote rotsen.\nVijand kan terugdeinzen.	
+sHyperFangDescription	Attacks with sharp fangs.\nMay cause flinching.	Bijt met scherpe tanden.\nVijand kan terugdeinzen.	
+sSharpenDescription	Reduces the polygon count\nand raises ATTACK.	Wordt scherper.\nVerhoogt AANVAL.	
+sConversionDescription	Changes the user's type\ninto a known move's type.	Krijgt het type van\neen eigen aanval.	
+sTriAttackDescription	Fires three types of beams\nat the same time.	Schiet 3 soorten\nstralen tegelijk.	
+sSuperFangDescription	Attacks with sharp fangs\nand cuts half the foe's HP.	Bijt met scherpe tanden.\nHalveert HP van vijand.	
+sSlashDescription	Slashes with claws, etc. Has\na high critical-hit ratio.	Haalt uit met klauwen.\nVeel kans op voltreffer.	
+sSubstituteDescription	Creates a decoy using 1/4\nof the user's maximum HP.	Maakt een nepkopie met\n1/4 van de max. HP.	
+sStruggleDescription	Used only if all PP are gone.\nAlso hurts the user a little.	Alleen als alle PP op is.\nDoet zelf ook wat pijn.	
+sSketchDescription	Copies the foe's last move\npermanently.	Leert voorgoed de laatste\naanval van de vijand.	
+sTripleKickDescription	Kicks the foe 3 times in a\nrow with rising intensity.	Schopt 3 keer achter\nelkaar, steeds harder.	
+sThiefDescription	While attacking, it may\nsteal the foe's held item.	Steelt misschien het\nvoorwerp van de vijand.	
+sSpiderWebDescription	Ensnares the foe to stop it\nfrom fleeing or switching.	Vangt de vijand in een\nweb. Hij kan niet weg.	
+sMindReaderDescription	Senses the foe's action to\nensure the next move's hit.	Leest de vijand.\nDe volgende aanval raakt.	
+sNightmareDescription	Inflicts 1/4 damage on a\nsleeping foe every turn.	Een slapende vijand\nverliest elke beurt HP.	
+sFlameWheelDescription	A fiery charge attack that\nmay inflict a burn.	Rolt in vuur naar de\nvijand. Kan verbranden.	
+sSnoreDescription	A loud attack that can be\nused only while asleep.	Een harde aanval. Werkt\nalleen als hij slaapt.	
+sCurseDescription	A move that functions\ndifferently for GHOSTS.	Werkt anders voor\nGEEST-POKéMON.	
+sFlailDescription	Inflicts more damage when\nthe user's HP is down.	Meer schade als de\neigen HP laag is.	
+sConversion2Description	Makes the user resistant\nto the last attack's type.	Wordt bestand tegen het\ntype van de laatste aanval.	
+sAeroblastDescription	Launches a vacuumed blast.\nHigh critical-hit ratio.	Een harde luchtknal.\nVeel kans op voltreffer.	
+sCottonSporeDescription	Spores cling to the foe,\nsharply reducing SPEED.	Plakt watten op de vijand.\nVerlaagt SNELHEID flink.	
 sReversalDescription	Inflicts more damage when\nthe user's HP is down.		
 sSpiteDescription	Spitefully cuts the PP\nof the foe's last move.		
 sPowderSnowDescription	Blasts the foe with a snowy\ngust. May cause freezing.		
