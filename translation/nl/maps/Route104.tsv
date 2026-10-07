@@ -1,33 +1,33 @@
 key	english	dutch	notes
-Route104_Text_BrineyLivesInSeasideCottage	That seaside cottage is where\nMR. BRINEY lives.\pHe was once a mighty sailor who never\nfeared the sea, however stormy.		
-Route104_Text_WhatsItLikeAtBottomOfSea	The sea, huh?\pI wonder what it's like at the bottom\nof the sea?		
-Route104_Text_ThrowBallAtWeakenedPokemon	If you're going to throw a POKé BALL,\nweaken the wild POKéMON first.\pIt will be easier to catch if it's been\npoisoned, burned, or lulled to sleep.		
-Route104_Text_OnlyThrowBallAtWildPokemon	You're a thief if you try to steal\nsomeone else's POKéMON.\pYou should throw POKé BALLS only at\nwild POKéMON.		
-Route104_Text_ImNotATrainer	Oh, no, I'm not a TRAINER.\pBut that's right, if TRAINERS lock eyes,\nit's a challenge to battle.\pIf you don't want to battle, stay out\nof their sight.		
-Route104_Text_LikeFillingMouthWithSeedsTakeThis	I like filling my mouth with seeds,\nthen spitting them out fast!\pYou can have this, so you try it out!\pUse it on a POKéMON, and it will learn\na move for firing seeds rapidly.		
-Route104_Text_TMsAreOneTimeUse	A word of advice!\pA TM, TECHNICAL MACHINE, is good only\nfor one-time use.\pOnce you use it, it's gone.\nThink twice before using it!		
-Route104_Text_DontNeedThisTakeIt	This FLOWER SHOP started selling\nsaplings recently.\pIt made me so happy, I went overboard\nshopping.\pI don't need this WHITE HERB anymore.\nWould you take it, please?		
-Route104_Text_FlowerShopSellingSaplings	This FLOWER SHOP started selling\nsaplings recently.\pIt made me so happy, I went overboard\nshopping. Where should I put them?		
-Route104_Text_MrBrineysCottage	MR. BRINEY'S COTTAGE		
+Route104_Text_BrineyLivesInSeasideCottage	That seaside cottage is where\nMR. BRINEY lives.\pHe was once a mighty sailor who never\nfeared the sea, however stormy.	In dat huisje aan zee woont\nMR. BRINEY.\pVroeger was hij een stoere zeeman.\nHij was nooit bang, zelfs niet bij storm.	
+Route104_Text_WhatsItLikeAtBottomOfSea	The sea, huh?\pI wonder what it's like at the bottom\nof the sea?	De zee, hè?\pHoe zou het op de bodem van de zee\neruitzien?	
+Route104_Text_ThrowBallAtWeakenedPokemon	If you're going to throw a POKé BALL,\nweaken the wild POKéMON first.\pIt will be easier to catch if it's been\npoisoned, burned, or lulled to sleep.	Wil je een POKé BALL gooien?\nMaak de wilde POKéMON eerst zwakker.\pHij is makkelijker te vangen als hij\nvergiftigd, verbrand of in slaap is.	
+Route104_Text_OnlyThrowBallAtWildPokemon	You're a thief if you try to steal\nsomeone else's POKéMON.\pYou should throw POKé BALLS only at\nwild POKéMON.	Als je de POKéMON van iemand anders\nprobeert te pakken, ben je een dief.\pGooi alleen POKé BALLS naar\nwilde POKéMON.	
+Route104_Text_ImNotATrainer	Oh, no, I'm not a TRAINER.\pBut that's right, if TRAINERS lock eyes,\nit's a challenge to battle.\pIf you don't want to battle, stay out\nof their sight.	O nee, ik ben geen TRAINER.\pMaar het klopt: als TRAINERS elkaar\naankijken, moeten ze vechten.\pWil je niet vechten? Blijf dan uit\nhun zicht.	
+Route104_Text_LikeFillingMouthWithSeedsTakeThis	I like filling my mouth with seeds,\nthen spitting them out fast!\pYou can have this, so you try it out!\pUse it on a POKéMON, and it will learn\na move for firing seeds rapidly.	Ik vul graag mijn mond met zaadjes\nen spuug ze dan snel uit!\pHier, voor jou. Probeer het zelf!\pGeef het aan een POKéMON en hij\nleert zaadjes snel te schieten.	
+Route104_Text_TMsAreOneTimeUse	A word of advice!\pA TM, TECHNICAL MACHINE, is good only\nfor one-time use.\pOnce you use it, it's gone.\nThink twice before using it!	Een tip!\pEen TM, TECHNISCHE MACHINE, kun je\nmaar één keer gebruiken.\pDaarna is hij weg.\nDenk goed na voor je hem gebruikt!	
+Route104_Text_DontNeedThisTakeIt	This FLOWER SHOP started selling\nsaplings recently.\pIt made me so happy, I went overboard\nshopping.\pI don't need this WHITE HERB anymore.\nWould you take it, please?	Deze BLOEMENWINKEL verkoopt\nsinds kort jonge plantjes.\pIk was zo blij dat ik veel te veel\nheb gekocht.\pDit WIT KRUID heb ik niet meer nodig.\nWil jij het hebben?	
+Route104_Text_FlowerShopSellingSaplings	This FLOWER SHOP started selling\nsaplings recently.\pIt made me so happy, I went overboard\nshopping. Where should I put them?	Deze BLOEMENWINKEL verkoopt\nsinds kort jonge plantjes.\pIk was zo blij dat ik veel te veel\nheb gekocht. Waar laat ik ze nou?	
+Route104_Text_MrBrineysCottage	MR. BRINEY'S COTTAGE	HUISJE VAN MR. BRINEY	
 Route104_Text_RouteSignPetalburg	ROUTE 1O4\n{RIGHT_ARROW} PETALBURG CITY		
 Route104_Text_RouteSignRustboro	ROUTE 1O4\n{UP_ARROW} RUSTBORO CITY		
 Route104_Text_PrettyPetalFlowShop	PRETTY PETAL FLOWER SHOP		
-Route104_Text_TrainerTipsDoubleBattles	TRAINER TIPS\pIn the HOENN region there are pairs\nof TRAINERS who challenge others\lfor 2-on-2 POKéMON battles called\lDOUBLE BATTLES.\pIn a DOUBLE BATTLE, the TRAINER must\nsend out two POKéMON, the one at the\lleft of the list and the top one.\lWatch how POKéMON are lined up.		
-Route104_Text_MayWeShouldRegister	MAY: Oh, hi, {PLAYER}{KUN}!\pDEVON upgraded your POKéNAV with\nthe MATCH CALL system, huh?\pWe should register each other so we\ncan get in contact anytime.		
-Route104_Text_RegisteredMay	{PLAYER} registered MAY\nin the POKéNAV.		
-Route104_Text_MayHowsYourPokedex	MAY: Oh, by the way, {PLAYER}{KUN},\nhow's your POKéDEX coming along?		
-Route104_Text_MayMinesDecentLetsBattle	Mine's looking pretty decent.\nSo…\lHow about a little battle?		
-Route104_Text_MayHaventRaisedPokemon	MAY: Oh, what's the matter?\pHaven't you caught or raised your\nPOKéMON very much?\pThat's not very good for a TRAINER!		
-Route104_Text_MayLetsBattle	MAY: So, what do you think?\nHow about a little battle here?		
-Route104_Text_MayIntro	MAY: You just became a TRAINER,\n{PLAYER}{KUN}. I'm not going to lose!		
-Route104_Text_MayDefeat	Yikes!\nYou're better than I expected!		
-Route104_Text_MayPostBattle	MAY: I can tell you've gotten pretty\ngood with the way you handle POKéMON.\pBut instead of only making them\nbattle, you should be like MR. BRINEY.\pIt's important to become friends with\nPOKéMON, too.		
-Route104_Text_BrendanWeShouldRegister	BRENDAN: Oh, hey, {PLAYER}!\pCool, you had DEVON install the MATCH\nCALL system on your POKéNAV!\pLet's register each other in our\nPOKéNAVS so we can keep in touch.		
-Route104_Text_RegisteredBrendan	{PLAYER} registered BRENDAN\nin the POKéNAV.		
-Route104_Text_BrendanHowsYourPokedex	BRENDAN: {PLAYER}, how's your POKéDEX?\nHave you filled in any pages yet?		
-Route104_Text_BrendanDoingGreatLetsBattle	Me, I'm doing great!\pWant to check out how good I am with\na battle?		
-Route104_Text_BrendanNoConfidence	BRENDAN: What's the matter? Don't have\nany confidence in your POKéMON?		
-Route104_Text_BrendanLetsBattle	BRENDAN: What's up?\nWant to have a battle with me?		
-Route104_Text_BrendanIntro	BRENDAN: I know you just became\na TRAINER, but I won't go easy!		
-Route104_Text_BrendanDefeat	Hmm…\nYou're pretty good.		
-Route104_Text_BrendanPostBattle	BRENDAN: You've gotten pretty decent\nat handling POKéMON.\pBut, you know, you shouldn't just be\nmaking POKéMON battle.\pLike MR. BRINEY, it's important to\nbecome friends with your POKéMON.		
+Route104_Text_TrainerTipsDoubleBattles	TRAINER TIPS\pIn the HOENN region there are pairs\nof TRAINERS who challenge others\lfor 2-on-2 POKéMON battles called\lDOUBLE BATTLES.\pIn a DOUBLE BATTLE, the TRAINER must\nsend out two POKéMON, the one at the\lleft of the list and the top one.\lWatch how POKéMON are lined up.	TRAINERTIPS\pIn HOENN zijn er TRAINERS die met z'n\ntweeën vechten, 2 tegen 2. Dat heet\leen DUBBEL GEVECHT.\pDan stuurt de TRAINER twee\nPOKéMON: de eerste en de\ltweede in de lijst.\lLet dus op de volgorde.	
+Route104_Text_MayWeShouldRegister	MAY: Oh, hi, {PLAYER}{KUN}!\pDEVON upgraded your POKéNAV with\nthe MATCH CALL system, huh?\pWe should register each other so we\ncan get in contact anytime.	MAY: O, hoi, {PLAYER}{KUN}!\pDEVON heeft MATCH CALL in je\nPOKéNAV gezet, hè?\pLaten we elkaar opslaan, dan kunnen\nwe elkaar altijd bellen.	
+Route104_Text_RegisteredMay	{PLAYER} registered MAY\nin the POKéNAV.	{PLAYER} zet MAY\nin de POKéNAV.	
+Route104_Text_MayHowsYourPokedex	MAY: Oh, by the way, {PLAYER}{KUN},\nhow's your POKéDEX coming along?	MAY: O, trouwens, {PLAYER}{KUN},\nhoe gaat het met je POKéDEX?	
+Route104_Text_MayMinesDecentLetsBattle	Mine's looking pretty decent.\nSo…\lHow about a little battle?	Die van mij ziet er goed uit.\nDus…\lZullen we even vechten?	
+Route104_Text_MayHaventRaisedPokemon	MAY: Oh, what's the matter?\pHaven't you caught or raised your\nPOKéMON very much?\pThat's not very good for a TRAINER!	MAY: O, wat is er?\pHeb je nog niet zoveel POKéMON\ngevangen of getraind?\pDat is niet zo goed voor een TRAINER!	
+Route104_Text_MayLetsBattle	MAY: So, what do you think?\nHow about a little battle here?	MAY: Nou, wat vind je?\nZullen we hier even vechten?	
+Route104_Text_MayIntro	MAY: You just became a TRAINER,\n{PLAYER}{KUN}. I'm not going to lose!	MAY: Je bent net TRAINER,\n{PLAYER}{KUN}. Ik ga niet verliezen!	
+Route104_Text_MayDefeat	Yikes!\nYou're better than I expected!	Help!\nJe bent beter dan ik dacht!	
+Route104_Text_MayPostBattle	MAY: I can tell you've gotten pretty\ngood with the way you handle POKéMON.\pBut instead of only making them\nbattle, you should be like MR. BRINEY.\pIt's important to become friends with\nPOKéMON, too.	MAY: Ik zie dat je al goed met\nPOKéMON omgaat.\pMaar laat ze niet alleen vechten.\nDoe zoals MR. BRINEY.\pHet is ook belangrijk om vrienden\nte zijn met POKéMON.	
+Route104_Text_BrendanWeShouldRegister	BRENDAN: Oh, hey, {PLAYER}!\pCool, you had DEVON install the MATCH\nCALL system on your POKéNAV!\pLet's register each other in our\nPOKéNAVS so we can keep in touch.	BRENDAN: O, hé, {PLAYER}!\pCool, DEVON heeft MATCH CALL in je\nPOKéNAV gezet!\pLaten we elkaar opslaan in onze\nPOKéNAVS, dan blijven we in contact.	
+Route104_Text_RegisteredBrendan	{PLAYER} registered BRENDAN\nin the POKéNAV.	{PLAYER} zet BRENDAN\nin de POKéNAV.	
+Route104_Text_BrendanHowsYourPokedex	BRENDAN: {PLAYER}, how's your POKéDEX?\nHave you filled in any pages yet?	BRENDAN: {PLAYER}, hoe gaat je POKéDEX?\nStaat er al wat in?	
+Route104_Text_BrendanDoingGreatLetsBattle	Me, I'm doing great!\pWant to check out how good I am with\na battle?	Bij mij gaat het super!\pZullen we vechten, dan zie je\nhoe goed ik ben?	
+Route104_Text_BrendanNoConfidence	BRENDAN: What's the matter? Don't have\nany confidence in your POKéMON?	BRENDAN: Wat is er? Vertrouw je je\nPOKéMON niet?	
+Route104_Text_BrendanLetsBattle	BRENDAN: What's up?\nWant to have a battle with me?	BRENDAN: Hé!\nZin om tegen me te vechten?	
+Route104_Text_BrendanIntro	BRENDAN: I know you just became\na TRAINER, but I won't go easy!	BRENDAN: Je bent net TRAINER,\nmaar ik doe niet zacht!	
+Route104_Text_BrendanDefeat	Hmm…\nYou're pretty good.	Hmm…\nJe bent best goed.	
+Route104_Text_BrendanPostBattle	BRENDAN: You've gotten pretty decent\nat handling POKéMON.\pBut, you know, you shouldn't just be\nmaking POKéMON battle.\pLike MR. BRINEY, it's important to\nbecome friends with your POKéMON.	BRENDAN: Je kunt al best goed met\nPOKéMON omgaan.\pMaar je moet POKéMON niet alleen\nmaar laten vechten.\pZoals MR. BRINEY: het is belangrijk\nom vrienden te zijn met je POKéMON.	

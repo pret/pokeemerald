@@ -248,186 +248,186 @@ Route103_Text_MarcosPostBattle:
 	.string "Hé, misschien moet ik beroemd worden.$"
 
 Route104_Text_GinaIntro:
-	.string "GINA: Okay, let's battle with our\n"
-	.string "POKéMON!$"
+	.string "GINA: Oké, laten we vechten met\n"
+	.string "onze POKéMON!$"
 
 Route104_Text_GinaDefeat:
-	.string "GINA: Losing upsets me!$"
+	.string "GINA: Verliezen vind ik stom!$"
 
 Route104_Text_GinaPostBattle:
-	.string "GINA: You are strong!\n"
-	.string "We have to train lots more!$"
+	.string "GINA: Jij bent sterk!\n"
+	.string "We moeten nog veel meer trainen!$"
 
 Route104_Text_GinaNotEnoughMons:
-	.string "GINA: Oh? Only one POKéMON?\n"
-	.string "Then, we don't battle with you.\p"
-	.string "If there's only one POKéMON, it will\n"
-	.string "be lonesome. That's not nice.$"
+	.string "GINA: O? Maar één POKéMON?\n"
+	.string "Dan vechten we niet met je.\p"
+	.string "Als er maar één POKéMON is, is hij\n"
+	.string "eenzaam. Dat is niet leuk.$"
 
 Route104_Text_MiaIntro:
-	.string "MIA: We are twins, so we battle\n"
-	.string "POKéMON together.$"
+	.string "MIA: We zijn een tweeling, dus we\n"
+	.string "vechten samen.$"
 
 Route104_Text_MiaDefeat:
-	.string "MIA: We battled together, but we\n"
-	.string "both lost…$"
+	.string "MIA: We vochten samen, maar we\n"
+	.string "hebben allebei verloren…$"
 
 Route104_Text_MiaPostBattle:
-	.string "MIA: We will train our POKéMON more\n"
-	.string "and be strong like you.$"
+	.string "MIA: We gaan onze POKéMON meer trainen\n"
+	.string "en worden net zo sterk als jij.$"
 
 Route104_Text_MiaNotEnoughMons:
-	.string "MIA: You want to battle with us?\p"
-	.string "It's a big no-no if you don't have two\n"
-	.string "POKéMON with you.\l"
-	.string "We're too strong for you!$"
+	.string "MIA: Wil je tegen ons vechten?\p"
+	.string "Dat kan echt niet als je geen twee\n"
+	.string "POKéMON bij je hebt.\l"
+	.string "We zijn te sterk voor je!$"
 
 Route104_Text_IvanIntro:
-	.string "Why keep it a secret?\n"
-	.string "I'm the WATER POKéMON expert!\p"
-	.string "Huh?\n"
-	.string "You don't know me?$"
+	.string "Waarom zou ik het geheim houden?\n"
+	.string "Ik ben de WATER-POKéMON-expert!\p"
+	.string "Hè?\n"
+	.string "Ken je me niet?$"
 
 Route104_Text_IvanDefeat:
-	.string "I thought I wasn't too bad, if I may\n"
-	.string "say so, but I guess not… Bleah…$"
+	.string "Ik dacht dat ik best goed was,\n"
+	.string "maar niet dus… Bah…$"
 
 Route104_Text_IvanPostBattle:
-	.string "I got too into fishing.\n"
-	.string "I forgot I had to raise my POKéMON…$"
+	.string "Ik was te druk met vissen.\n"
+	.string "Ik vergat mijn POKéMON te trainen…$"
 
 Route104_Text_BillyIntro:
-	.string "Leaving footprints in the sand is\n"
-	.string "so fun!$"
+	.string "Voetafdrukken maken in het zand\n"
+	.string "is zo leuk!$"
 
 Route104_Text_BillyDefeat:
-	.string "Waah! I got sand in my runners!\n"
-	.string "They're all gritty!$"
+	.string "Waah! Zand in mijn schoenen!\n"
+	.string "Het kriebelt!$"
 
 Route104_Text_BillyPostBattle:
-	.string "I want to leave my footprints in\n"
-	.string "the sand everywhere, but they\l"
-	.string "disappear quickly…$"
+	.string "Ik wil overal voetafdrukken maken\n"
+	.string "in het zand, maar ze zijn\l"
+	.string "meteen weer weg…$"
 
 Route104_Text_HaleyIntro:
-	.string "Should I…\n"
-	.string "Or shouldn't I?\p"
-	.string "Okay, sure, I will battle!$"
+	.string "Zal ik…\n"
+	.string "Of zal ik niet?\p"
+	.string "Oké, goed, ik ga vechten!$"
 
 Route104_Text_HaleyDefeat:
-	.string "I shouldn't have battled…$"
+	.string "Ik had niet moeten vechten…$"
 
 Route104_Text_HaleyPostBattle:
-	.string "If you're faced with a decision and\n"
-	.string "you let someone else choose for you,\l"
-	.string "you will regret it, however things\l"
-	.string "turn out.$"
+	.string "Als je iets moet beslissen en je laat\n"
+	.string "iemand anders kiezen, krijg je\l"
+	.string "spijt, hoe het ook afloopt.$"
 
 Route104_Text_HaleyRegister1:
-	.string "You're strong, but should I register\n"
-	.string "you in my POKéNAV?\l"
-	.string "Maybe I shouldn't…\p"
-	.string "Okay, sure, I will register you!$"
+	.string "Je bent sterk, maar zal ik je in\n"
+	.string "mijn POKéNAV zetten?\l"
+	.string "Misschien niet…\p"
+	.string "Oké, goed, ik zet je erin!$"
 
 Route104_Text_HaleyRegister2:
-	.string "You're strong, but should I register\n"
-	.string "you in my POKéNAV?\l"
-	.string "Maybe I shouldn't…\p"
-	.string "Okay, sure, I will register you!$"
+	.string "Je bent sterk, maar zal ik je in\n"
+	.string "mijn POKéNAV zetten?\l"
+	.string "Misschien niet…\p"
+	.string "Oké, goed, ik zet je erin!$"
 
 Route104_Text_HaleyRematchIntro:
-	.string "Come on, battle with me!$"
+	.string "Kom op, vecht tegen me!$"
 
 Route104_Text_HaleyRematchDefeat:
 	.string "Ohh…\n"
-	.string "I thought I could win…$"
+	.string "Ik dacht dat ik kon winnen…$"
 
 Route104_Text_HaleyPostRematch:
-	.string "I made the decision to battle, so\n"
-	.string "I can accept this loss with grace.\p"
-	.string "I am still upset about losing!$"
+	.string "Ik koos zelf om te vechten, dus\n"
+	.string "ik kan dit verlies wel hebben.\p"
+	.string "Maar ik baal er nog steeds van!$"
 
 Route104_Text_WinstonIntro:
-	.string "Oh, sure, I'll accept your challenge.\n"
-	.string "I have a lot of money.$"
+	.string "O, natuurlijk vecht ik tegen je.\n"
+	.string "Ik heb heel veel geld.$"
 
 Route104_Text_WinstonDefeat:
-	.string "Why couldn't I win?$"
+	.string "Waarom won ik niet?$"
 
 Route104_Text_WinstonPostBattle:
-	.string "There are some things money can't buy.\n"
-	.string "That's POKéMON…$"
+	.string "Sommige dingen kun je niet kopen.\n"
+	.string "Zoals POKéMON…$"
 
 Route104_Text_WinstonRegister1:
 	.string "Hm?\n"
-	.string "Ah, you've obtained a POKéNAV.\p"
-	.string "I will gladly register you.\n"
-	.string "After all, I have plenty of money.$"
+	.string "Ah, je hebt een POKéNAV.\p"
+	.string "Ik zet je er graag in.\n"
+	.string "Ik heb toch genoeg geld.$"
 
 Route104_Text_WinstonRegister2:
 	.string "Hm?\n"
-	.string "Ah, you've obtained a POKéNAV.\p"
-	.string "I will gladly register you.\n"
-	.string "After all, I have plenty of money.$"
+	.string "Ah, je hebt een POKéNAV.\p"
+	.string "Ik zet je er graag in.\n"
+	.string "Ik heb toch genoeg geld.$"
 
 Route104_Text_WinstonRematchIntro:
-	.string "After I lost to you, I learned a bunch\n"
-	.string "of things about POKéMON.$"
+	.string "Sinds ik van je verloor, heb ik veel\n"
+	.string "geleerd over POKéMON.$"
 
 Route104_Text_WinstonRematchDefeat:
-	.string "I lost again?\n"
-	.string "Why couldn't I win?$"
+	.string "Weer verloren?\n"
+	.string "Waarom won ik niet?$"
 
 Route104_Text_WinstonPostRematch:
-	.string "I'm fabulously wealthy, but I can't\n"
-	.string "seem to win at POKéMON…\p"
-	.string "It's so deep, the world of POKéMON…$"
+	.string "Ik ben superrijk, maar met POKéMON\n"
+	.string "win ik maar niet…\p"
+	.string "Wat is de wereld van POKéMON diep…$"
 
 Route104_Text_CindyIntro:
-	.string "We must have been fated to meet.\n"
-	.string "May I ask you for a battle?$"
+	.string "Het moest zo zijn dat we elkaar\n"
+	.string "zagen. Zullen we vechten?$"
 
 Route104_Text_CindyDefeat:
-	.string "Oh, my!$"
+	.string "O, jeetje!$"
 
 Route104_Text_CindyPostBattle:
-	.string "“Hello” is the beginning of “good-bye.”\n"
-	.string "I hope we meet again.$"
+	.string "Na “hallo” komt altijd “dag”.\n"
+	.string "Ik hoop dat we elkaar weer zien.$"
 
 Route104_Text_CindyRegister1:
-	.string "Hello, we meet again.\p"
-	.string "We seem to be drawn together. Let's\n"
-	.string "register each other in our POKéNAVS.$"
+	.string "Hallo, daar zijn we weer.\p"
+	.string "We komen elkaar steeds tegen. Laten we\n"
+	.string "elkaar in onze POKéNAVS zetten.$"
 
 Route104_Text_CindyRegister2:
-	.string "We should commemorate how we seem\n"
-	.string "to be drawn to each other.\p"
-	.string "Let's register each other in our\n"
-	.string "POKéNAVS.$"
+	.string "We komen elkaar steeds tegen.\n"
+	.string "Dat moeten we vieren.\p"
+	.string "Laten we elkaar in onze\n"
+	.string "POKéNAVS zetten.$"
 
 Route104_Text_CindyRematchIntro:
-	.string "Hello, we meet again.\n"
-	.string "May I ask you for a battle?$"
+	.string "Hallo, daar zijn we weer.\n"
+	.string "Zullen we vechten?$"
 
 Route104_Text_CindyRematchDefeat:
-	.string "Oh, my…\n"
-	.string "I did the best that I could…$"
+	.string "O, jeetje…\n"
+	.string "Ik heb mijn best gedaan…$"
 
 Route104_Text_CindyPostRematch:
-	.string "“Hello” is the beginning of “good-bye.”\n"
-	.string "I hope we meet again.$"
+	.string "Na “hallo” komt altijd “dag”.\n"
+	.string "Ik hoop dat we elkaar weer zien.$"
 
 Route104_Text_DarianIntro:
-	.string "I fished up a tough-looking POKéMON!\p"
-	.string "It has this magical quality to it!\n"
-	.string "It surely looks tough, yes it does!$"
+	.string "Ik heb een sterke POKéMON\n"
+	.string "opgevist!\p"
+	.string "Hij lijkt wel magisch!\n"
+	.string "Hij ziet er echt sterk uit!$"
 
 Route104_Text_DarianDefeat:
-	.string "What the…$"
+	.string "Wat krijgen we nou…$"
 
 Route104_Text_DarianPostBattle:
-	.string "Hey, MAGIKARP, you sure don't live up\n"
-	.string "to your name, do you?$"
+	.string "Hé, MAGIKARP, je bent helemaal niet\n"
+	.string "zo sterk als je naam doet denken!$"
 
 Route105_Text_FosterIntro:
 	.string "There's supposed to be a mystical\n"

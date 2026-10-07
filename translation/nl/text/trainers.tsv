@@ -58,47 +58,47 @@ Route103_Text_RhettPostBattle	Do you like cramped quarters\nlike this?	Hou je va
 Route103_Text_MarcosIntro	Did my guitar's wailing draw you in?	Kwam je op mijn gitaarmuziek af?	
 Route103_Text_MarcosDefeated	My one-man show is ruined…	Mijn optreden is verpest…	
 Route103_Text_MarcosPostBattle	I was playing my guitar where few\npeople were around, but a lot of fans\lhave gathered.\pHeh, maybe I should turn pro.	Ik speelde gitaar op een plek waar\nweinig mensen kwamen, maar nu\lstaan er toch veel fans.\pHé, misschien moet ik beroemd worden.	
-Route104_Text_GinaIntro	GINA: Okay, let's battle with our\nPOKéMON!		
-Route104_Text_GinaDefeat	GINA: Losing upsets me!		
-Route104_Text_GinaPostBattle	GINA: You are strong!\nWe have to train lots more!		
-Route104_Text_GinaNotEnoughMons	GINA: Oh? Only one POKéMON?\nThen, we don't battle with you.\pIf there's only one POKéMON, it will\nbe lonesome. That's not nice.		
-Route104_Text_MiaIntro	MIA: We are twins, so we battle\nPOKéMON together.		
-Route104_Text_MiaDefeat	MIA: We battled together, but we\nboth lost…		
-Route104_Text_MiaPostBattle	MIA: We will train our POKéMON more\nand be strong like you.		
-Route104_Text_MiaNotEnoughMons	MIA: You want to battle with us?\pIt's a big no-no if you don't have two\nPOKéMON with you.\lWe're too strong for you!		
-Route104_Text_IvanIntro	Why keep it a secret?\nI'm the WATER POKéMON expert!\pHuh?\nYou don't know me?		
-Route104_Text_IvanDefeat	I thought I wasn't too bad, if I may\nsay so, but I guess not… Bleah…		
-Route104_Text_IvanPostBattle	I got too into fishing.\nI forgot I had to raise my POKéMON…		
-Route104_Text_BillyIntro	Leaving footprints in the sand is\nso fun!		
-Route104_Text_BillyDefeat	Waah! I got sand in my runners!\nThey're all gritty!		
-Route104_Text_BillyPostBattle	I want to leave my footprints in\nthe sand everywhere, but they\ldisappear quickly…		
-Route104_Text_HaleyIntro	Should I…\nOr shouldn't I?\pOkay, sure, I will battle!		
-Route104_Text_HaleyDefeat	I shouldn't have battled…		
-Route104_Text_HaleyPostBattle	If you're faced with a decision and\nyou let someone else choose for you,\lyou will regret it, however things\lturn out.		
-Route104_Text_HaleyRegister1	You're strong, but should I register\nyou in my POKéNAV?\lMaybe I shouldn't…\pOkay, sure, I will register you!		
-Route104_Text_HaleyRegister2	You're strong, but should I register\nyou in my POKéNAV?\lMaybe I shouldn't…\pOkay, sure, I will register you!		
-Route104_Text_HaleyRematchIntro	Come on, battle with me!		
-Route104_Text_HaleyRematchDefeat	Ohh…\nI thought I could win…		
-Route104_Text_HaleyPostRematch	I made the decision to battle, so\nI can accept this loss with grace.\pI am still upset about losing!		
-Route104_Text_WinstonIntro	Oh, sure, I'll accept your challenge.\nI have a lot of money.		
-Route104_Text_WinstonDefeat	Why couldn't I win?		
-Route104_Text_WinstonPostBattle	There are some things money can't buy.\nThat's POKéMON…		
-Route104_Text_WinstonRegister1	Hm?\nAh, you've obtained a POKéNAV.\pI will gladly register you.\nAfter all, I have plenty of money.		
-Route104_Text_WinstonRegister2	Hm?\nAh, you've obtained a POKéNAV.\pI will gladly register you.\nAfter all, I have plenty of money.		
-Route104_Text_WinstonRematchIntro	After I lost to you, I learned a bunch\nof things about POKéMON.		
-Route104_Text_WinstonRematchDefeat	I lost again?\nWhy couldn't I win?		
-Route104_Text_WinstonPostRematch	I'm fabulously wealthy, but I can't\nseem to win at POKéMON…\pIt's so deep, the world of POKéMON…		
-Route104_Text_CindyIntro	We must have been fated to meet.\nMay I ask you for a battle?		
-Route104_Text_CindyDefeat	Oh, my!		
-Route104_Text_CindyPostBattle	“Hello” is the beginning of “good-bye.”\nI hope we meet again.		
-Route104_Text_CindyRegister1	Hello, we meet again.\pWe seem to be drawn together. Let's\nregister each other in our POKéNAVS.		
-Route104_Text_CindyRegister2	We should commemorate how we seem\nto be drawn to each other.\pLet's register each other in our\nPOKéNAVS.		
-Route104_Text_CindyRematchIntro	Hello, we meet again.\nMay I ask you for a battle?		
-Route104_Text_CindyRematchDefeat	Oh, my…\nI did the best that I could…		
-Route104_Text_CindyPostRematch	“Hello” is the beginning of “good-bye.”\nI hope we meet again.		
-Route104_Text_DarianIntro	I fished up a tough-looking POKéMON!\pIt has this magical quality to it!\nIt surely looks tough, yes it does!		
-Route104_Text_DarianDefeat	What the…		
-Route104_Text_DarianPostBattle	Hey, MAGIKARP, you sure don't live up\nto your name, do you?		
+Route104_Text_GinaIntro	GINA: Okay, let's battle with our\nPOKéMON!	GINA: Oké, laten we vechten met\nonze POKéMON!	
+Route104_Text_GinaDefeat	GINA: Losing upsets me!	GINA: Verliezen vind ik stom!	
+Route104_Text_GinaPostBattle	GINA: You are strong!\nWe have to train lots more!	GINA: Jij bent sterk!\nWe moeten nog veel meer trainen!	
+Route104_Text_GinaNotEnoughMons	GINA: Oh? Only one POKéMON?\nThen, we don't battle with you.\pIf there's only one POKéMON, it will\nbe lonesome. That's not nice.	GINA: O? Maar één POKéMON?\nDan vechten we niet met je.\pAls er maar één POKéMON is, is hij\neenzaam. Dat is niet leuk.	
+Route104_Text_MiaIntro	MIA: We are twins, so we battle\nPOKéMON together.	MIA: We zijn een tweeling, dus we\nvechten samen.	
+Route104_Text_MiaDefeat	MIA: We battled together, but we\nboth lost…	MIA: We vochten samen, maar we\nhebben allebei verloren…	
+Route104_Text_MiaPostBattle	MIA: We will train our POKéMON more\nand be strong like you.	MIA: We gaan onze POKéMON meer trainen\nen worden net zo sterk als jij.	
+Route104_Text_MiaNotEnoughMons	MIA: You want to battle with us?\pIt's a big no-no if you don't have two\nPOKéMON with you.\lWe're too strong for you!	MIA: Wil je tegen ons vechten?\pDat kan echt niet als je geen twee\nPOKéMON bij je hebt.\lWe zijn te sterk voor je!	
+Route104_Text_IvanIntro	Why keep it a secret?\nI'm the WATER POKéMON expert!\pHuh?\nYou don't know me?	Waarom zou ik het geheim houden?\nIk ben de WATER-POKéMON-expert!\pHè?\nKen je me niet?	
+Route104_Text_IvanDefeat	I thought I wasn't too bad, if I may\nsay so, but I guess not… Bleah…	Ik dacht dat ik best goed was,\nmaar niet dus… Bah…	
+Route104_Text_IvanPostBattle	I got too into fishing.\nI forgot I had to raise my POKéMON…	Ik was te druk met vissen.\nIk vergat mijn POKéMON te trainen…	
+Route104_Text_BillyIntro	Leaving footprints in the sand is\nso fun!	Voetafdrukken maken in het zand\nis zo leuk!	
+Route104_Text_BillyDefeat	Waah! I got sand in my runners!\nThey're all gritty!	Waah! Zand in mijn schoenen!\nHet kriebelt!	
+Route104_Text_BillyPostBattle	I want to leave my footprints in\nthe sand everywhere, but they\ldisappear quickly…	Ik wil overal voetafdrukken maken\nin het zand, maar ze zijn\lmeteen weer weg…	
+Route104_Text_HaleyIntro	Should I…\nOr shouldn't I?\pOkay, sure, I will battle!	Zal ik…\nOf zal ik niet?\pOké, goed, ik ga vechten!	
+Route104_Text_HaleyDefeat	I shouldn't have battled…	Ik had niet moeten vechten…	
+Route104_Text_HaleyPostBattle	If you're faced with a decision and\nyou let someone else choose for you,\lyou will regret it, however things\lturn out.	Als je iets moet beslissen en je laat\niemand anders kiezen, krijg je\lspijt, hoe het ook afloopt.	
+Route104_Text_HaleyRegister1	You're strong, but should I register\nyou in my POKéNAV?\lMaybe I shouldn't…\pOkay, sure, I will register you!	Je bent sterk, maar zal ik je in\nmijn POKéNAV zetten?\lMisschien niet…\pOké, goed, ik zet je erin!	
+Route104_Text_HaleyRegister2	You're strong, but should I register\nyou in my POKéNAV?\lMaybe I shouldn't…\pOkay, sure, I will register you!	Je bent sterk, maar zal ik je in\nmijn POKéNAV zetten?\lMisschien niet…\pOké, goed, ik zet je erin!	
+Route104_Text_HaleyRematchIntro	Come on, battle with me!	Kom op, vecht tegen me!	
+Route104_Text_HaleyRematchDefeat	Ohh…\nI thought I could win…	Ohh…\nIk dacht dat ik kon winnen…	
+Route104_Text_HaleyPostRematch	I made the decision to battle, so\nI can accept this loss with grace.\pI am still upset about losing!	Ik koos zelf om te vechten, dus\nik kan dit verlies wel hebben.\pMaar ik baal er nog steeds van!	
+Route104_Text_WinstonIntro	Oh, sure, I'll accept your challenge.\nI have a lot of money.	O, natuurlijk vecht ik tegen je.\nIk heb heel veel geld.	
+Route104_Text_WinstonDefeat	Why couldn't I win?	Waarom won ik niet?	
+Route104_Text_WinstonPostBattle	There are some things money can't buy.\nThat's POKéMON…	Sommige dingen kun je niet kopen.\nZoals POKéMON…	
+Route104_Text_WinstonRegister1	Hm?\nAh, you've obtained a POKéNAV.\pI will gladly register you.\nAfter all, I have plenty of money.	Hm?\nAh, je hebt een POKéNAV.\pIk zet je er graag in.\nIk heb toch genoeg geld.	
+Route104_Text_WinstonRegister2	Hm?\nAh, you've obtained a POKéNAV.\pI will gladly register you.\nAfter all, I have plenty of money.	Hm?\nAh, je hebt een POKéNAV.\pIk zet je er graag in.\nIk heb toch genoeg geld.	
+Route104_Text_WinstonRematchIntro	After I lost to you, I learned a bunch\nof things about POKéMON.	Sinds ik van je verloor, heb ik veel\ngeleerd over POKéMON.	
+Route104_Text_WinstonRematchDefeat	I lost again?\nWhy couldn't I win?	Weer verloren?\nWaarom won ik niet?	
+Route104_Text_WinstonPostRematch	I'm fabulously wealthy, but I can't\nseem to win at POKéMON…\pIt's so deep, the world of POKéMON…	Ik ben superrijk, maar met POKéMON\nwin ik maar niet…\pWat is de wereld van POKéMON diep…	
+Route104_Text_CindyIntro	We must have been fated to meet.\nMay I ask you for a battle?	Het moest zo zijn dat we elkaar\nzagen. Zullen we vechten?	
+Route104_Text_CindyDefeat	Oh, my!	O, jeetje!	
+Route104_Text_CindyPostBattle	“Hello” is the beginning of “good-bye.”\nI hope we meet again.	Na “hallo” komt altijd “dag”.\nIk hoop dat we elkaar weer zien.	
+Route104_Text_CindyRegister1	Hello, we meet again.\pWe seem to be drawn together. Let's\nregister each other in our POKéNAVS.	Hallo, daar zijn we weer.\pWe komen elkaar steeds tegen. Laten we\nelkaar in onze POKéNAVS zetten.	
+Route104_Text_CindyRegister2	We should commemorate how we seem\nto be drawn to each other.\pLet's register each other in our\nPOKéNAVS.	We komen elkaar steeds tegen.\nDat moeten we vieren.\pLaten we elkaar in onze\nPOKéNAVS zetten.	
+Route104_Text_CindyRematchIntro	Hello, we meet again.\nMay I ask you for a battle?	Hallo, daar zijn we weer.\nZullen we vechten?	
+Route104_Text_CindyRematchDefeat	Oh, my…\nI did the best that I could…	O, jeetje…\nIk heb mijn best gedaan…	
+Route104_Text_CindyPostRematch	“Hello” is the beginning of “good-bye.”\nI hope we meet again.	Na “hallo” komt altijd “dag”.\nIk hoop dat we elkaar weer zien.	
+Route104_Text_DarianIntro	I fished up a tough-looking POKéMON!\pIt has this magical quality to it!\nIt surely looks tough, yes it does!	Ik heb een sterke POKéMON\nopgevist!\pHij lijkt wel magisch!\nHij ziet er echt sterk uit!	
+Route104_Text_DarianDefeat	What the…	Wat krijgen we nou…	
+Route104_Text_DarianPostBattle	Hey, MAGIKARP, you sure don't live up\nto your name, do you?	Hé, MAGIKARP, je bent helemaal niet\nzo sterk als je naam doet denken!	
 Route105_Text_FosterIntro	There's supposed to be a mystical\nrock around here.\lDo you know anything about it?		
 Route105_Text_FosterDefeated	I was thinking too much about that\nrock, while my POKéMON remained weak…		
 Route105_Text_FosterPostBattle	I can spend hours and hours staring\nat a nice rock without growing bored.		
