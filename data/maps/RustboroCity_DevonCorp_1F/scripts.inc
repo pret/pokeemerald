@@ -79,66 +79,66 @@ RustboroCity_DevonCorp_1F_EventScript_ProductsDisplay::
 	end
 
 RustboroCity_DevonCorp_1F_Text_WelcomeToDevonCorp:
-	.string "Hello and welcome to the DEVON\n"
+	.string "Hallo en welkom bij de DEVON\n"
 	.string "CORPORATION.\p"
-	.string "We're proud producers of items and\n"
-	.string "medicine that enhance your life.$"
+	.string "We maken met trots spullen en\n"
+	.string "medicijnen die je leven beter maken.$"
 
 RustboroCity_DevonCorp_1F_Text_StaffGotRobbed:
-	.string "One of our research staff stupidly\n"
-	.string "got robbed of an important parcel.$"
+	.string "Een onderzoeker van ons is zo dom\n"
+	.string "geweest: hij is een pakket kwijt.$"
 
 RustboroCity_DevonCorp_1F_Text_ThoseShoesAreOurProduct:
-	.string "Hey, those RUNNING SHOES!\n"
-	.string "They're one of our products!\p"
-	.string "It makes me happy when I see someone\n"
-	.string "using something we made.$"
+	.string "Hé, die RENSCHOENEN!\n"
+	.string "Die hebben wij gemaakt!\p"
+	.string "Ik word er blij van als iemand\n"
+	.string "iets gebruikt wat wij maakten.$"
 
 RustboroCity_DevonCorp_1F_Text_RobberWasntVeryBright:
-	.string "That stolen parcel…\p"
-	.string "Well, sure it's important, but it's not\n"
-	.string "anything that anyone can use.\p"
-	.string "In my estimation, that robber must not\n"
-	.string "have been very bright.$"
+	.string "Dat gestolen pakket…\p"
+	.string "Het is wel belangrijk, maar niemand\n"
+	.string "anders kan er iets mee.\p"
+	.string "Volgens mij was die dief niet\n"
+	.string "zo slim.$"
 
 RustboroCity_DevonCorp_1F_Text_SoundsLikeStolenGoodsRecovered:
-	.string "It sounds like they've recovered\n"
-	.string "the ripped-off DEVON GOODS.$"
+	.string "Het gestolen DEVONPAKKET is\n"
+	.string "blijkbaar terug.$"
 
 RustboroCity_DevonCorp_1F_Text_OnlyAuthorizedPeopleEnter:
-	.string "I'm sorry, only authorized people\n"
-	.string "are allowed to enter here.$"
+	.string "Sorry, alleen mensen met\n"
+	.string "toestemming mogen hier naar binnen.$"
 
 RustboroCity_DevonCorp_1F_Text_HowCouldWeGetRobbed:
-	.string "It's beyond stupid.\n"
-	.string "How could we get robbed?$"
+	.string "Dit is echt superdom.\n"
+	.string "Hoe konden we beroofd worden?$"
 
 RustboroCity_DevonCorp_1F_Text_YoureAlwaysWelcomeHere:
-	.string "Hi, there!\n"
-	.string "You're always welcome here!$"
+	.string "Hoi!\n"
+	.string "Je bent hier altijd welkom!$"
 
 RustboroCity_DevonCorp_1F_Text_RocksMetalDisplay:
-	.string "Samples of rocks and metal are\n"
-	.string "displayed in the glass case.\p"
-	.string "There's a panel with some writing\n"
-	.string "on it…\p"
-	.string "“DEVON CORPORATION got its start as\n"
-	.string "a producer of stones from quarries.\p"
-	.string "“The company also produced iron from\n"
-	.string "filings in the sand.\p"
-	.string "“From that humble start as a producer\n"
-	.string "of raw materials, DEVON developed.\p"
-	.string "“DEVON is now a manufacturer of a wide\n"
-	.string "range of industrial products.”$"
+	.string "In de glazen kast liggen stukjes\n"
+	.string "steen en metaal.\p"
+	.string "Er staat een bordje met tekst\n"
+	.string "erbij…\p"
+	.string "“DEVON CORPORATION begon als\n"
+	.string "bedrijf dat stenen uit groeven haalde.\p"
+	.string "“Ook maakte het ijzer van\n"
+	.string "ijzervijlsel uit het zand.\p"
+	.string "“Zo begon DEVON klein, met\n"
+	.string "ruwe materialen.\p"
+	.string "“Nu maakt DEVON allerlei\n"
+	.string "verschillende producten.”$"
 
 RustboroCity_DevonCorp_1F_Text_ProductDisplay:
-	.string "Prototypes and test products fill\n"
-	.string "the glass display case.\p"
-	.string "There's a panel with a description…\p"
-	.string "“In addition to industrial products,\n"
-	.string "DEVON now markets sundries and\l"
-	.string "pharmaceuticals for better lifestyles.\p"
-	.string "“Recently, DEVON has begun marketing\n"
-	.string "tools for POKéMON TRAINERS, including\l"
-	.string "POKé BALLS and POKéNAV systems.”$"
+	.string "In de glazen kast staan proefmodellen\n"
+	.string "en nieuwe producten.\p"
+	.string "Er staat een bordje bij…\p"
+	.string "“Naast producten voor fabrieken\n"
+	.string "maakt DEVON nu ook spullen en\l"
+	.string "medicijnen voor een fijner leven.\p"
+	.string "“Sinds kort maakt DEVON ook spullen\n"
+	.string "voor POKéMON TRAINERS, zoals\l"
+	.string "POKé BALLS en de POKéNAV.”$"
 

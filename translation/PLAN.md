@@ -147,3 +147,9 @@ Until then dialogue is English text with Dutch names inserted where the game fil
 - [x] Battle messages (`battle.tsv`)
 - [x] Trainer class names, type names, menus and system text in `src/strings.c`
 - [ ] Later: dialogue phase (map scripts, Easy Chat words, decoration names, berry blender text, `{POKEBLOCK} CASE` in dialogue)
+
+## Dialogue progress (area by area)
+- [x] Littleroot Town (+ houses, lab), Route 101, Oldale Town, shared texts (Center, Mart, items, PC, save)
+- [x] Route 103, Route 102, Petalburg City (+ gym)
+- [x] Route 104, Petalburg Woods, Rustboro City (+ gym, DEVON, school)
+- [ ] Route 116, Rusturf Tunnel, Dewford Town (+ gym), Granite Cave, Route 106-109, Slateport …

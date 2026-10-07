@@ -108,6 +108,16 @@ The player is a **Dutch kid (about 8–10 years old)**. Every Dutch string must 
   | Trainer card | value right-aligned at 216px | |
 
 - `check.py` also verifies text fits before a `{CLEAR_TO n}` column.
+- **Dialogue** lives in one TSV per file:
+  - `maps/<MapName>.tsv` for `data/maps/*/scripts.inc`
+  - `text/<name>.tsv` for `data/text/*.inc` (shared texts; `text/trainers.tsv` holds every trainer's battle lines)
+  - `scripts/<name>.tsv` for `data/scripts/*.inc`
+
+  Keys are the script labels.
+  - `fill.py '*/*' file.txt` finds each key wherever it lives.
+  - Dialogue lines may be as wide as the widest English line of the same string (min. 208px).
+  - Translate area by area in the order the game is played. `PLAN.md` tracks which areas are done.
+- `natures.tsv` holds the nature names (NAÏEF, VROLIJK…).
 - **Always edit the TSV, then apply.** Never hand-edit strings that a TSV manages (move/ability/item/berry names and descriptions), or the next apply will overwrite them.
 
 ## Workflow per batch
