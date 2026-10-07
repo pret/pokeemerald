@@ -7,13 +7,14 @@ line. Exits non-zero on any violation.
     check.py               check Dutch cells
     check.py --english     check the English text instead (to calibrate limits)
 """
+import re
 import sys
 
 import common
 from common import KINDS, SPECS, control_codes, encode, line_widths, read_tsv, scan
 
 
-def problems(text, kind, english=None, skip_width=False):
+def problems(text, kind, english=None, skip_width=False, max_px=None):
     out = []
     data, errors = encode(text)
     out += errors
@@ -26,11 +27,19 @@ def problems(text, kind, english=None, skip_width=False):
     lines = text.count("\\n") + 1
     if lines > kind.max_lines:
         out.append(f"{lines} lines > {kind.max_lines}")
-    for font, max_px, where in ([] if skip_width else kind.limits):
+    limits = [("normal", max_px, "window from notes")] if max_px else kind.limits
+    for font, max_px, where in ([] if skip_width else limits):
         for i, w in enumerate(line_widths(text, font), 1):
             if w > max_px:
                 out.append(f"line {i} is {w}px > {max_px}px ({where})")
     return out
+
+
+def warn_label(key, text, english):
+    """Narrow English text often sits in a small window: flag Dutch that is wider."""
+    en, nl = max(line_widths(english, "normal")), max(line_widths(text, "normal"))
+    if en <= 130 and nl > en:
+        print(f"WARN strings.tsv  {key}: {nl}px wider than English {en}px\n    {english} -> {text}")
 
 
 def main():
@@ -54,7 +63,11 @@ def main():
                     widest[where] = (w, text)
             english = row.get("english") if column == "dutch" else None
             skip = "width-ok" in row.get("notes", "")
-            for p in problems(text, kind, english, skip):
+            m = re.search(r"max:(\d+)", row.get("notes", ""))
+            if spec.kind == "ui" and english and column == "dutch" and not skip \
+                    and "label-ok" not in row.get("notes", ""):
+                warn_label(e.key, text, english)
+            for p in problems(text, kind, english, skip, int(m[1]) if m else None):
                 bad += 1
                 print(f"{spec.tsv}.tsv  {e.key}: {p}\n    {text}")
     if column == "english":

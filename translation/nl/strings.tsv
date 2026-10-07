@@ -1,0 +1,1736 @@
+key	english	dutch	notes
+gText_ExpandedPlaceholder_Empty			
+gText_ExpandedPlaceholder_Kun			
+gText_ExpandedPlaceholder_Chan			
+gText_ExpandedPlaceholder_Sapphire	SAPPHIRE		
+gText_ExpandedPlaceholder_Ruby	RUBY		
+gText_ExpandedPlaceholder_Emerald	EMERALD		
+gText_ExpandedPlaceholder_Aqua	AQUA		
+gText_ExpandedPlaceholder_Magma	MAGMA		
+gText_ExpandedPlaceholder_Archie	ARCHIE		
+gText_ExpandedPlaceholder_Maxie	MAXIE		
+gText_ExpandedPlaceholder_Kyogre	KYOGRE		
+gText_ExpandedPlaceholder_Groudon	GROUDON		
+gText_ExpandedPlaceholder_Brendan	BRENDAN		
+gText_ExpandedPlaceholder_May	MAY		
+gText_EggNickname	EGG	EI	
+gText_Pokemon	POKéMON		
+gText_ProfBirchMatchCallName	PROF. BIRCH		
+gText_MainMenuNewGame	NEW GAME	NIEUW SPEL	label-ok: reviewed
+gText_MainMenuContinue	CONTINUE	VERDER	
+gText_MainMenuOption	OPTION	OPTIES	
+gText_MainMenuMysteryGift	MYSTERY GIFT	GEHEIM CADEAU	label-ok: reviewed
+gText_MainMenuMysteryGift2	MYSTERY GIFT	GEHEIM CADEAU	label-ok: reviewed
+gText_MainMenuMysteryEvents	MYSTERY EVENTS	GEHEIME EVENTS	
+gText_WirelessNotConnected	The Wireless Adapter is not\nconnected.	De Wireless Adapter is niet\naangesloten.	
+gText_MysteryGiftCantUse	MYSTERY GIFT can't be used while\nthe Wireless Adapter is attached.	GEHEIM CADEAU werkt niet als de\nWireless Adapter vastzit.	
+gText_MysteryEventsCantUse	MYSTERY EVENTS can't be used while\nthe Wireless Adapter is attached.	GEHEIME EVENTS werken niet als de\nWireless Adapter vastzit.	
+gText_UpdatingSaveExternalData	Updating save file using external\ndata. Please wait.	Opgeslagen spel wordt bijgewerkt.\nEven geduld.	
+gText_SaveFileUpdated	The save file has been updated.	Het opgeslagen spel is bijgewerkt.	
+gText_SaveFileCorrupted	The save file is corrupted. The\nprevious save file will be loaded.	Het opgeslagen spel is kapot. Het\nvorige opgeslagen spel wordt geladen.	
+gText_SaveFileErased	The save file has been erased\ndue to corruption or damage.	Het opgeslagen spel is gewist,\nomdat het kapot was.	
+gText_BatteryRunDry	The internal battery has run dry.\nThe game can be played.\pHowever, clock-based events will\nno longer occur.	De batterij in het spel is leeg.\nJe kunt nog wel spelen.\pMaar dingen die met de klok te\nmaken hebben, gebeuren niet meer.	
+gText_Player	PLAYER	SPELER	
+gText_Pokedex	POKéDEX		
+gText_Time	TIME	TIJD	
+gText_Badges	BADGES	BADGES	
+gText_AButton	A Button	A-knop	
+gText_BButton	B Button	B-knop	
+gText_RButton	R Button	R-knop	
+gText_LButton	L Button	L-knop	
+gText_Start	START		
+gText_Select	SELECT		
+gText_ControlPad	+ Control Pad	+ Kruisknop	
+gText_LButtonRButton	L Button  R Button	L-knop  R-knop	
+gText_Controls	CONTROLS	KNOPPEN	
+gText_PickOk	{DPAD_UPDOWN}PICK {A_BUTTON}OK	{DPAD_UPDOWN}KIES {A_BUTTON}OK	
+gText_Next	{A_BUTTON}NEXT	{A_BUTTON}VERDER	label-ok: reviewed
+gText_NextBack	{A_BUTTON}NEXT {B_BUTTON}BACK	{A_BUTTON}VERDER {B_BUTTON}TERUG	label-ok: reviewed
+gText_PickNextCancel	{DPAD_UPDOWN}PICK {A_BUTTON}NEXT {B_BUTTON}CANCEL	{DPAD_UPDOWN}KIES {A_BUTTON}VERDER {B_BUTTON}TERUG	label-ok: reviewed
+gText_PickCancel	{DPAD_UPDOWN}PICK {A_BUTTON}{B_BUTTON}CANCEL	{DPAD_UPDOWN}KIES {A_BUTTON}{B_BUTTON}TERUG	
+gText_AButtonExit	{A_BUTTON}EXIT	{A_BUTTON}SLUIT	label-ok: reviewed
+gText_BirchBoy	BOY	JONGEN	label-ok: reviewed
+gText_BirchGirl	GIRL	MEISJE	label-ok: reviewed
+gText_DefaultNameStu	STU		
+gText_DefaultNameMilton	MILTON		
+gText_DefaultNameTom	TOM		
+gText_DefaultNameKenny	KENNY		
+gText_DefaultNameReid	REID		
+gText_DefaultNameJude	JUDE		
+gText_DefaultNameJaxson	JAXSON		
+gText_DefaultNameEaston	EASTON		
+gText_DefaultNameWalker	WALKER		
+gText_DefaultNameTeru	TERU		
+gText_DefaultNameJohnny	JOHNNY		
+gText_DefaultNameBrett	BRETT		
+gText_DefaultNameSeth	SETH		
+gText_DefaultNameTerry	TERRY		
+gText_DefaultNameCasey	CASEY		
+gText_DefaultNameDarren	DARREN		
+gText_DefaultNameLandon	LANDON		
+gText_DefaultNameCollin	COLLIN		
+gText_DefaultNameStanley	STANLEY		
+gText_DefaultNameQuincy	QUINCY		
+gText_DefaultNameKimmy	KIMMY		
+gText_DefaultNameTiara	TIARA		
+gText_DefaultNameBella	BELLA		
+gText_DefaultNameJayla	JAYLA		
+gText_DefaultNameAllie	ALLIE		
+gText_DefaultNameLianna	LIANNA		
+gText_DefaultNameSara	SARA		
+gText_DefaultNameMonica	MONICA		
+gText_DefaultNameCamila	CAMILA		
+gText_DefaultNameAubree	AUBREE		
+gText_DefaultNameRuthie	RUTHIE		
+gText_DefaultNameHazel	HAZEL		
+gText_DefaultNameNadine	NADINE		
+gText_DefaultNameTanja	TANJA		
+gText_DefaultNameYasmin	YASMIN		
+gText_DefaultNameNicola	NICOLA		
+gText_DefaultNameLillie	LILLIE		
+gText_DefaultNameTerra	TERRA		
+gText_DefaultNameLucy	LUCY		
+gText_DefaultNameHalie	HALIE		
+gText_ThisIsAPokemon	This is what we call a “POKéMON.”{PAUSE 96}\p	Dit noemen wij een “POKéMON”.{PAUSE 96}\p	
+gText_5MarksPokemon	????? POKéMON		
+gText_UnkHeight	{CLEAR_TO 12}??'??”		
+gText_UnkWeight	????.? lbs.		
+gText_EmptyPkmnCategory	                       POKéMON		
+gText_EmptyHeight	{CLEAR_TO 12}    '    ”		
+gText_EmptyWeight	        .   lbs.		
+gText_EmptyPokedexInfo1			
+gText_CryOf	CRY OF	GELUID VAN	label-ok: reviewed
+gText_EmptyPokedexInfo2			
+gText_SizeComparedTo	SIZE COMPARED TO 	VERGELEKEN MET 	
+gText_PokedexRegistration	POKéDEX registration completed.	Opgeslagen in de POKéDEX.	
+gText_HTHeight	HT		
+gText_WTWeight	WT		
+gText_SearchingPleaseWait	Searching…\nPlease wait.	Zoeken…\nEven geduld.	label-ok: reviewed
+gText_SearchCompleted	Search completed.	Klaar met zoeken.	
+gText_NoMatchingPkmnWereFound	No matching POKéMON were found.	Geen POKéMON gevonden.	
+gText_SearchForPkmnBasedOnParameters	Search for POKéMON based on\nselected parameters.	Zoek POKéMON met de\ngekozen instellingen.	
+gText_SwitchPokedexListings	Switch POKéDEX listings.	Wissel de POKéDEX-lijst.	
+gText_ReturnToPokedex	Return to the POKéDEX.	Terug naar de POKéDEX.	
+gText_SelectPokedexMode	Select the POKéDEX mode.	Kies een POKéDEX-stand.	
+gText_SelectPokedexListingMode	Select the POKéDEX listing mode.	Kies hoe de lijst eruitziet.	
+gText_ListByFirstLetter	List by the first letter in the name.\nSpotted POKéMON only.	Lijst op eerste letter van de naam.\nAlleen geziene POKéMON.	
+gText_ListByBodyColor	List by body color.\nSpotted POKéMON only.	Lijst op kleur.\nAlleen geziene POKéMON.	label-ok: reviewed
+gText_ListByType	List by type.\nOwned POKéMON only.	Lijst op type.\nAlleen gevangen POKéMON.	label-ok: reviewed
+gText_ExecuteSearchSwitch	Execute search/switch.	Zoeken of wisselen.	
+gText_DexHoennTitle	HOENN DEX		
+gText_DexNatTitle	NATIONAL DEX	WERELD DEX	
+gText_DexSortNumericalTitle	NUMERICAL MODE	OP NUMMER	
+gText_DexSortAtoZTitle	A TO Z MODE	A TOT Z	
+gText_DexSortHeaviestTitle	HEAVIEST MODE	ZWAARSTE	
+gText_DexSortLightestTitle	LIGHTEST MODE	LICHTSTE	
+gText_DexSortTallestTitle	TALLEST MODE	GROOTSTE	
+gText_DexSortSmallestTitle	SMALLEST MODE	KLEINSTE	
+gText_DexSearchAlphaABC	ABC		
+gText_DexSearchAlphaDEF	DEF		
+gText_DexSearchAlphaGHI	GHI		
+gText_DexSearchAlphaJKL	JKL		
+gText_DexSearchAlphaMNO	MNO		
+gText_DexSearchAlphaPQR	PQR		
+gText_DexSearchAlphaSTU	STU		
+gText_DexSearchAlphaVWX	VWX		
+gText_DexSearchAlphaYZ	YZ		
+gText_DexSearchColorRed	RED	ROOD	label-ok: reviewed
+gText_DexSearchColorBlue	BLUE	BLAUW	label-ok: reviewed
+gText_DexSearchColorYellow	YELLOW	GEEL	
+gText_DexSearchColorGreen	GREEN	GROEN	
+gText_DexSearchColorBlack	BLACK	ZWART	
+gText_DexSearchColorBrown	BROWN	BRUIN	
+gText_DexSearchColorPurple	PURPLE	PAARS	
+gText_DexSearchColorGray	GRAY	GRIJS	label-ok: reviewed
+gText_DexSearchColorWhite	WHITE	WIT	
+gText_DexSearchColorPink	PINK	ROZE	
+gText_DexHoennDescription	HOENN region's POKéDEX	POKéDEX van HOENN	
+gText_DexNatDescription	National edition POKéDEX	POKéDEX van de wereld	
+gText_DexSortNumericalDescription	POKéMON are listed according to their\nnumber.	POKéMON staan op volgorde\nvan hun nummer.	
+gText_DexSortAtoZDescription	Spotted and owned POKéMON are listed\nalphabetically.	Geziene en gevangen POKéMON\nstaan op alfabet.	
+gText_DexSortHeaviestDescription	Owned POKéMON are listed from the\nheaviest to the lightest.	Gevangen POKéMON van\nzwaarste naar lichtste.	
+gText_DexSortLightestDescription	Owned POKéMON are listed from the\nlightest to the heaviest.	Gevangen POKéMON van\nlichtste naar zwaarste.	
+gText_DexSortTallestDescription	Owned POKéMON are listed from the\ntallest to the smallest.	Gevangen POKéMON van\ngrootste naar kleinste.	
+gText_DexSortSmallestDescription	Owned POKéMON are listed from the\nsmallest to the tallest.	Gevangen POKéMON van\nkleinste naar grootste.	
+gText_DexEmptyString			
+gText_DexSearchDontSpecify	DON'T SPECIFY.	MAAKT NIET UIT.	label-ok: reviewed
+gText_DexSearchTypeNone	NONE	GEEN	
+gText_SelectorArrow	▶		
+gText_EmptySpace	 		
+gText_WelcomeToHOF	Welcome to the HALL OF FAME!	Welkom in de HALL OF FAME!	
+gText_HOFDexRating	Spotted POKéMON: {STR_VAR_1}!\nOwned POKéMON: {STR_VAR_2}!\pPROF. BIRCH's POKéDEX rating!\pPROF. BIRCH: Let's see…\p	Gezien: {STR_VAR_1} POKéMON!\nGevangen: {STR_VAR_2} POKéMON!\pPROF. BIRCH bekijkt je POKéDEX!\pPROF. BIRCH: Eens kijken…\p	
+gText_HOFDexSaving	SAVING…\nDON'T TURN OFF THE POWER.	OPSLAAN…\nZET HET SPEL NIET UIT.	
+gText_HOFCorrupted	The HALL OF FAME data is corrupted.	De HALL OF FAME is kapot.	
+gText_HOFNumber	HALL OF FAME No. {STR_VAR_1}	HALL OF FAME Nr. {STR_VAR_1}	
+gText_LeagueChamp	LEAGUE CHAMPION!\nCONGRATULATIONS!	KAMPIOEN VAN DE LEAGUE!\nGEFELICITEERD!	label-ok: reviewed
+gText_Number	No. 	Nr. 	
+gText_Level	Lv. 		
+gText_IdNumberSlash	IDNo. /		
+gText_Name	NAME	NAAM	
+gText_IDNumber	IDNo.		
+gText_BirchInTrouble	PROF. BIRCH is in trouble!\nRelease a POKéMON and rescue him!	PROF. BIRCH is in gevaar!\nKies een POKéMON en red hem!	
+gText_ConfirmStarterChoice	Do you choose this POKéMON?	Kies je deze POKéMON?	
+gText_Pokemon4	POKéMON		
+gText_FlyToWhere	FLY to where?	VLIEGEN naar?	label-ok: reviewed
+gMenuText_Use	USE	GEBRUIK	label-ok: reviewed
+gMenuText_Toss	TOSS	WEG	
+gMenuText_Register	REGISTER	KOPPEL	
+gMenuText_Give	GIVE	GEEF	
+gMenuText_CheckTag	CHECK TAG	LABEL	
+gMenuText_Confirm	CONFIRM	OK	
+gMenuText_Walk	WALK	LOOP	
+gText_Cancel	CANCEL	TERUG	
+gText_Cancel2	CANCEL	TERUG	
+gMenuText_Show	SHOW	TOON	
+gText_EmptyString2			
+gText_Cancel7	CANCEL	TERUG	
+gText_Item	ITEM	VOORWERP	label-ok: reviewed
+gText_Mail	MAIL	BRIEF	label-ok: reviewed
+gText_Take	TAKE	PAK	
+gText_Store	STORE	BERG OP	label-ok: reviewed
+gMenuText_Check	CHECK	BEKIJK	label-ok: reviewed
+gText_None	NONE	GEEN	
+gMenuText_Deselect	DESELECT	UIT	
+gText_ThreeMarks	???		
+gText_FiveMarks	?????		
+gText_Slash	/		
+gText_OneDash	-		
+gText_TwoDashes	--		
+gText_ThreeDashes	---		
+gText_MaleSymbol	♂		
+gText_FemaleSymbol	♀		
+gText_LevelSymbol	{LV}		
+gText_NumberClear01	{NO}{CLEAR 1}		
+gText_PlusSymbol	+		
+gText_RightArrow	{RIGHT_ARROW}		
+gText_IDNumber2	{ID}{NO}		
+gText_Space	 		
+gText_SelectorArrow2	▶		
+gText_GoBackPrevMenu	Go back to the\nprevious menu.	Terug naar het\nvorige menu.	label-ok: reviewed
+gText_WhatWouldYouLike	What would you like to do?	Wat wil je doen?	
+gMenuText_Give2	GIVE	GEEF	
+gText_xVar1	×{STR_VAR_1}		
+gText_Berry2	 BERRY	 BES	
+gText_Coins	{STR_VAR_1} COINS	{STR_VAR_1} MUNTEN	width-ok: 4-digit number + MUNTEN fits the 64px coin box
+gText_CloseBag	CLOSE BAG	TAS DICHT	
+gText_Var1IsSelected	{STR_VAR_1} is\nselected.	{STR_VAR_1}\nis gekozen.	max:106 bag description box
+gText_CantWriteMail	You can't write\nMAIL here.	Je kunt hier geen\nBRIEF schrijven.	label-ok: reviewed
+gText_NoPokemon	There is no\nPOKéMON.	Er is geen\nPOKéMON.	
+gText_MoveVar1Where	Move the\n{STR_VAR_1}\nwhere?	Waar moet\n{STR_VAR_1}\nnaartoe?	
+gText_Var1CantBeHeld	The {STR_VAR_1} can't be held.	Je kunt {STR_VAR_1}\nniet vasthouden.	
+gText_Var1CantBeHeldHere	The {STR_VAR_1} can't be held\nhere.	Je kunt {STR_VAR_1}\nhier niet vasthouden.	
+gText_DepositHowManyVar1	Deposit how many\n{STR_VAR_1}(s)?	Hoeveel\n{STR_VAR_1}\nopbergen?	max:106 bag description box
+gText_DepositedVar2Var1s	Deposited {STR_VAR_2}\n{STR_VAR_1}(s).	{STR_VAR_2}x\n{STR_VAR_1}\nopgeborgen.	max:106 bag description box
+gText_NoRoomForItems	There's no room to\nstore items.	Er is geen plek\nvoor voorwerpen.	max:106 bag description box
+gText_CantStoreImportantItems	Important items\ncan't be stored in\nthe PC!	Belangrijke\nvoorwerpen mogen\nniet in de PC!	max:106 bag description box
+gText_TooImportantToToss	That's much too\nimportant to toss\nout!	Dat is veel te\nbelangrijk om weg\nte gooien!	max:106 bag description box
+gText_TossHowManyVar1s	Toss out how many\n{STR_VAR_1}(s)?	Hoeveel\n{STR_VAR_1}\nweggooien?	max:106 bag description box
+gText_ThrewAwayVar2Var1s	Threw away {STR_VAR_2}\n{STR_VAR_1}(s).	{STR_VAR_2}x\n{STR_VAR_1}\nweggegooid.	max:106 bag description box
+gText_ConfirmTossItems	Is it okay to\nthrow away {STR_VAR_2}\n{STR_VAR_1}(s)?	Echt {STR_VAR_2}x\n{STR_VAR_1}\nweggooien?	max:106 bag description box
+gText_DadsAdvice	DAD's advice…\n{PLAYER}, there's a time and place for\leverything!{PAUSE_UNTIL_PRESS}	Advies van PAPA…\n{PLAYER}, alles heeft een tijd en\leen plek!{PAUSE_UNTIL_PRESS}	
+gText_CantDismountBike	You can't dismount your BIKE here.{PAUSE_UNTIL_PRESS}	Hier kun je niet van je FIETS af.{PAUSE_UNTIL_PRESS}	
+gText_ItemFinderNearby	Huh?\nThe ITEMFINDER's responding!\pThere's an item buried around here!{PAUSE_UNTIL_PRESS}	Hè?\nDe SCHATZOEKER piept!\pHier ligt iets begraven!{PAUSE_UNTIL_PRESS}	
+gText_ItemFinderOnTop	Oh!\nThe ITEMFINDER's shaking wildly!{PAUSE_UNTIL_PRESS}	O!\nDe SCHATZOEKER trilt heel hard!{PAUSE_UNTIL_PRESS}	
+gText_ItemFinderNothing	… … … …Nope!\nThere's no response.{PAUSE_UNTIL_PRESS}	… … … …Niks!\nGeen reactie.{PAUSE_UNTIL_PRESS}	
+gText_CoinCase	Your COINS:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}		
+gText_BootedUpTM	Booted up a TM.		
+gText_BootedUpHM	Booted up an HM.		
+gText_TMHMContainedVar1	It contained\n{STR_VAR_1}.\pTeach {STR_VAR_1}\nto a POKéMON?		
+gText_PlayerUsedVar2	{PLAYER} used the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}		
+gText_RepelEffectsLingered	But the effects of a REPEL\nlingered from earlier.{PAUSE_UNTIL_PRESS}		
+gText_UsedVar2WildLured	{PLAYER} used the\n{STR_VAR_2}.\pWild POKéMON will be lured.{PAUSE_UNTIL_PRESS}		
+gText_UsedVar2WildRepelled	{PLAYER} used the\n{STR_VAR_2}.\pWild POKéMON will be repelled.{PAUSE_UNTIL_PRESS}		
+gText_BoxFull	The BOX is full.{PAUSE_UNTIL_PRESS}		
+gText_PowderQty	POWDER QTY: {STR_VAR_1}{PAUSE_UNTIL_PRESS}		
+gText_TheField	the field		
+gText_TheBattle	the battle		
+gText_ThePokemonList	the POKéMON LIST		
+gText_TheShop	the shop		
+gText_ThePC	the PC		
+gText_ReturnToVar1	Return to\n{STR_VAR_1}.		
+gText_ItemsPocket	ITEMS	VOORWERPEN	label-ok: reviewed
+gText_PokeBallsPocket	POKé BALLS		
+gText_TMHMPocket	TMs & HMs	TM's & HM's	label-ok: reviewed
+gText_BerriesPocket	BERRIES	BESSEN	
+gText_KeyItemsPocket	KEY ITEMS	BELANGRIJK	label-ok: reviewed
+gText_NumberItem_TMBerry	{NO}{STR_VAR_1}{CLEAR 7}{STR_VAR_2}		
+gText_NumberItem_HM	{CLEAR_TO 17}{STR_VAR_1}{CLEAR 5}{STR_VAR_2}		
+gText_SizeSlash	SIZE /	MAAT /	
+gText_FirmSlash	FIRM /	HARD /	
+gText_Var1DotVar2	{STR_VAR_1}.{STR_VAR_2}”		
+gBerryFirmnessString_VerySoft	Very soft	Heel zacht	label-ok: reviewed
+gBerryFirmnessString_Soft	Soft	Zacht	label-ok: reviewed
+gBerryFirmnessString_Hard	Hard		
+gBerryFirmnessString_VeryHard	Very hard	Heel hard	
+gBerryFirmnessString_SuperHard	Super hard	Superhard	
+gText_NumberVar1Var2	{NO}{STR_VAR_1} {STR_VAR_2}		
+gText_BerryTag	BERRY TAG		
+gText_RedPokeblock	RED {POKEBLOCK}		
+gText_BluePokeblock	BLUE {POKEBLOCK}		
+gText_PinkPokeblock	PINK {POKEBLOCK}		
+gText_GreenPokeblock	GREEN {POKEBLOCK}		
+gText_YellowPokeblock	YELLOW {POKEBLOCK}		
+gText_PurplePokeblock	PURPLE {POKEBLOCK}		
+gText_IndigoPokeblock	INDIGO {POKEBLOCK}		
+gText_BrownPokeblock	BROWN {POKEBLOCK}		
+gText_LiteBluePokeblock	LITEBLUE {POKEBLOCK}		
+gText_OlivePokeblock	OLIVE {POKEBLOCK}		
+gText_GrayPokeblock	GRAY {POKEBLOCK}		
+gText_BlackPokeblock	BLACK {POKEBLOCK}		
+gText_WhitePokeblock	WHITE {POKEBLOCK}		
+gText_GoldPokeblock	GOLD {POKEBLOCK}		
+gText_Spicy	SPICY		
+gText_Dry	DRY		
+gText_Sweet	SWEET		
+gText_Bitter	BITTER		
+gText_Sour	SOUR		
+gText_Tasty	TASTY		
+gText_Feel	FEEL		
+gText_StowCase	Stow CASE.		
+gText_LvVar1	{LV}{STR_VAR_1}		
+gText_ThrowAwayVar1	Throw away this\n{STR_VAR_1}?		
+gText_Var1ThrownAway	The {STR_VAR_1}\nwas thrown away.		
+gText_Var1AteTheVar2	{STR_VAR_1} ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}		
+gText_Var1HappilyAteVar2	{STR_VAR_1} happily ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}		
+gText_Var1DisdainfullyAteVar2	{STR_VAR_1} disdainfully ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}		
+gText_ShopBuy	BUY		
+gText_ShopSell	SELL		
+gText_ShopQuit	QUIT		
+gText_InBagVar1	IN BAG: {STR_VAR_1}		
+gText_QuitShopping	Quit shopping.		
+gText_Var1CertainlyHowMany	{STR_VAR_1}? Certainly.\nHow many would you like?		
+gText_Var1CertainlyHowMany2	{STR_VAR_1}? Certainly.\nHow many would you like?		
+gText_Var1AndYouWantedVar2	{STR_VAR_1}? And you wanted {STR_VAR_2}?\nThat will be ¥{STR_VAR_3}.		width-ok: STR_VAR_3 is a price
+gText_Var1IsItThatllBeVar2	{STR_VAR_1}, is it?\nThat'll be ¥{STR_VAR_2}. Do you want it?		
+gText_YouWantedVar1ThatllBeVar2	You wanted {STR_VAR_1}?\nThat'll be ¥{STR_VAR_2}. Will that be okay?		width-ok: STR_VAR_2 is a price
+gText_HereYouGoThankYou	Here you go!\nThank you very much.		
+gText_ThankYouIllSendItHome	Thank you!\nI'll send it to your home PC.		
+gText_ThanksIllSendItHome	Thanks!\nI'll send it to your PC at home.		
+gText_YouDontHaveMoney	You don't have enough money.{PAUSE_UNTIL_PRESS}		
+gText_NoMoreRoomForThis	You have no more room for this\nitem.{PAUSE_UNTIL_PRESS}		
+gText_SpaceForVar1Full	The space for {STR_VAR_1} is full.{PAUSE_UNTIL_PRESS}		
+gText_AnythingElseICanHelp	Is there anything else I can help\nyou with?		
+gText_CanIHelpWithAnythingElse	Can I help you with anything else?		
+gText_ThrowInPremierBall	I'll throw in a PREMIER BALL, too.{PAUSE_UNTIL_PRESS}		
+gText_CantBuyKeyItem	{STR_VAR_2}? Oh, no.\nI can't buy that.{PAUSE_UNTIL_PRESS}		
+gText_HowManyToSell	{STR_VAR_2}?\nHow many would you like to sell?		
+gText_ICanPayVar1	I can pay ¥{STR_VAR_1}.\nWould that be okay?		
+gText_TurnedOverVar1ForVar2	Turned over the {STR_VAR_2}\nand received ¥{STR_VAR_1}.		
+gText_PokedollarVar1	¥{STR_VAR_1}		
+gText_Shift	SHIFT		
+gText_SendOut	SEND OUT		
+gText_Switch2	SWITCH		
+gText_Summary5	SUMMARY		
+gText_Moves	MOVES		
+gText_Enter	ENTER		
+gText_NoEntry	NO ENTRY		
+gText_Take2	TAKE		
+gText_Read2	READ		
+gText_Trade4	TRADE		
+gText_HP3	HP		
+gText_SpAtk3	SP. ATK		
+gText_SpDef3	SP. DEF		
+gText_WontHaveEffect	It won't have any effect.{PAUSE_UNTIL_PRESS}		
+gText_CantBeUsedOnPkmn	This can't be used on\nthat POKéMON.{PAUSE_UNTIL_PRESS}		
+gText_PkmnCantSwitchOut	{STR_VAR_1} can't be switched\nout!{PAUSE_UNTIL_PRESS}		
+gText_PkmnAlreadyInBattle	{STR_VAR_1} is already\nin battle!{PAUSE_UNTIL_PRESS}		
+gText_PkmnAlreadySelected	{STR_VAR_1} has already been\nselected.{PAUSE_UNTIL_PRESS}		
+gText_PkmnHasNoEnergy	{STR_VAR_1} has no energy\nleft to battle!{PAUSE_UNTIL_PRESS}		
+gText_CantSwitchWithAlly	You can't switch {STR_VAR_1}'s\nPOKéMON with one of yours!{PAUSE_UNTIL_PRESS}		
+gText_EggCantBattle	An EGG can't battle!{PAUSE_UNTIL_PRESS}		
+gText_CantUseUntilNewBadge	This can't be used until a new\nBADGE is obtained.{PAUSE_UNTIL_PRESS}		
+gText_NoMoreThanVar1Pkmn	No more than {STR_VAR_1} POKéMON\nmay enter.{PAUSE_UNTIL_PRESS}		
+gText_SendMailToPC	Send the removed MAIL to\nyour PC?		
+gText_MailSentToPC	The MAIL was sent to your PC.{PAUSE_UNTIL_PRESS}		
+gText_PCMailboxFull	Your PC's MAILBOX is full.{PAUSE_UNTIL_PRESS}		
+gText_MailMessageWillBeLost	If the MAIL is removed, the\nmessage will be lost. Okay?		
+gText_RemoveMailBeforeItem	MAIL must be removed before\nholding an item.{PAUSE_UNTIL_PRESS}		
+gText_PkmnWasGivenItem	{STR_VAR_1} was given the\n{STR_VAR_2} to hold.{PAUSE_UNTIL_PRESS}		
+gText_PkmnAlreadyHoldingItemSwitch	{STR_VAR_1} is already holding\none {STR_VAR_2}.\pWould you like to switch the\ntwo items?		
+gText_PkmnNotHolding	{STR_VAR_1} isn't holding\nanything.{PAUSE_UNTIL_PRESS}		
+gText_ReceivedItemFromPkmn	Received the {STR_VAR_2}\nfrom {STR_VAR_1}.{PAUSE_UNTIL_PRESS}		
+gText_MailTakenFromPkmn	MAIL was taken from the\nPOKéMON.{PAUSE_UNTIL_PRESS}		
+gText_SwitchedPkmnItem	The {STR_VAR_2} was taken and\nreplaced with the {STR_VAR_1}.{PAUSE_UNTIL_PRESS}		
+gText_PkmnHoldingItemCantHoldMail	This POKéMON is holding an\nitem. It cannot hold MAIL.{PAUSE_UNTIL_PRESS}		
+gText_MailTransferredFromMailbox	MAIL was transferred from\nthe MAILBOX.{PAUSE_UNTIL_PRESS}		
+gText_BagFullCouldNotRemoveItem	The BAG is full. The POKéMON's\nitem could not be removed.{PAUSE_UNTIL_PRESS}		
+gText_PkmnLearnedMove3	{STR_VAR_1} learned\n{STR_VAR_2}!		
+gText_PkmnCantLearnMove	{STR_VAR_1} and {STR_VAR_2}\nare not compatible.\p{STR_VAR_2} can't be\nlearned.{PAUSE_UNTIL_PRESS}		
+gText_PkmnNeedsToReplaceMove	{STR_VAR_1} wants to learn the\nmove {STR_VAR_2}.\pHowever, {STR_VAR_1} already\nknows four moves.\pShould a move be deleted and\nreplaced with {STR_VAR_2}?		
+gText_StopLearningMove2	Stop trying to teach\n{STR_VAR_2}?		
+gText_MoveNotLearned	{STR_VAR_1} did not learn the\nmove {STR_VAR_2}.{PAUSE_UNTIL_PRESS}		
+gText_WhichMoveToForget	Which move should be forgotten?{PAUSE_UNTIL_PRESS}		
+gText_12PoofForgotMove	1, {PAUSE 15}2, and{PAUSE 15}… {PAUSE 15}… {PAUSE 15}… {PAUSE 15}{PLAY_SE SE_BALL_BOUNCE_1}Poof!\p{STR_VAR_1} forgot how to\nuse {STR_VAR_2}.\pAnd…{PAUSE_UNTIL_PRESS}		
+gText_PkmnAlreadyKnows	{STR_VAR_1} already knows\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}		
+gText_PkmnHPRestoredByVar2	{STR_VAR_1}'s HP was restored\nby {STR_VAR_2} point(s).{PAUSE_UNTIL_PRESS}		
+gText_PkmnCuredOfPoison	{STR_VAR_1} was cured of its\npoisoning.{PAUSE_UNTIL_PRESS}		
+gText_PkmnCuredOfParalysis	{STR_VAR_1} was cured of\nparalysis.{PAUSE_UNTIL_PRESS}		
+gText_PkmnWokeUp2	{STR_VAR_1} woke up.{PAUSE_UNTIL_PRESS}		
+gText_PkmnBurnHealed	{STR_VAR_1}'s burn was healed.{PAUSE_UNTIL_PRESS}		
+gText_PkmnThawedOut	{STR_VAR_1} was thawed out.{PAUSE_UNTIL_PRESS}		
+gText_PPWasRestored	PP was restored.{PAUSE_UNTIL_PRESS}		
+gText_PkmnRegainhedHealth	{STR_VAR_1} regained health.{PAUSE_UNTIL_PRESS}		
+gText_PkmnBecameHealthy	{STR_VAR_1} became healthy.{PAUSE_UNTIL_PRESS}		
+gText_MovesPPIncreased	{STR_VAR_1}'s PP increased.{PAUSE_UNTIL_PRESS}		
+gText_PkmnElevatedToLvVar2	{STR_VAR_1} was elevated to\nLv. {STR_VAR_2}.		
+gText_PkmnBaseVar2StatIncreased	{STR_VAR_1}'s base {STR_VAR_2}\nstat was raised.{PAUSE_UNTIL_PRESS}		
+gText_PkmnFriendlyBaseVar2Fell	{STR_VAR_1} turned friendly.\nThe base {STR_VAR_2} fell!{PAUSE_UNTIL_PRESS}		
+gText_PkmnAdoresBaseVar2Fell	{STR_VAR_1} adores you!\nThe base {STR_VAR_2} fell!{PAUSE_UNTIL_PRESS}		
+gText_PkmnFriendlyBaseVar2CantFall	{STR_VAR_1} turned friendly.\nThe base {STR_VAR_2} can't fall!{PAUSE_UNTIL_PRESS}		
+gText_PkmnSnappedOutOfConfusion	{STR_VAR_1} snapped out of its\nconfusion.{PAUSE_UNTIL_PRESS}		
+gText_PkmnGotOverInfatuation	{STR_VAR_1} got over its\ninfatuation.{PAUSE_UNTIL_PRESS}		
+gText_ThrowAwayItem	Throw away this\n{STR_VAR_1}?		
+gText_ItemThrownAway	The {STR_VAR_1}\nwas thrown away.{PAUSE_UNTIL_PRESS}		
+gText_TeachWhichPokemon2	Teach which POKéMON?		
+gText_ChoosePokemon	Choose a POKéMON.		
+gText_MoveToWhere	Move to where?		
+gText_TeachWhichPokemon	Teach which POKéMON?		
+gText_UseOnWhichPokemon	Use on which POKéMON?		
+gText_GiveToWhichPokemon	Give to which POKéMON?		
+gText_DoWhatWithPokemon	Do what with this {PKMN}?		
+gText_NothingToCut	There's nothing to CUT.		
+gText_CantSurfHere	You can't SURF here.		
+gText_AlreadySurfing	You're already SURFING.		
+gText_CantUseHere	Can't use that here.		
+gText_RestoreWhichMove	Restore which move?		
+gText_BoostPP	Boost PP of which move?		
+gText_DoWhatWithItem	Do what with an item?		
+gText_NoPokemonForBattle	No POKéMON for battle!		
+gText_ChoosePokemon2	Choose a POKéMON.		
+gText_NotEnoughHp	Not enough HP…		
+gText_PokemonAreNeeded	{STR_VAR_1} POKéMON are needed.		
+gText_PokemonCantBeSame	POKéMON can't be the same.		
+gText_NoIdenticalHoldItems	No identical hold items.		
+gText_CurrentIsTooFast	The current is much too fast!		
+gText_DoWhatWithMail	Do what with the MAIL?		
+gText_ChoosePokemonCancel	Choose POKéMON or CANCEL.		
+gText_ChoosePokemonConfirm	Choose POKéMON and confirm.		
+gText_EnjoyCycling	Let's enjoy cycling!		
+gText_InUseAlready_PM	This is in use already.		
+gText_AlreadyHoldingOne	{STR_VAR_1} is already holding\none {STR_VAR_2}.		
+gText_NoUse	No use.		
+gText_Able	ABLE		
+gText_First_PM	FIRST		
+gText_Second_PM	SECOND		
+gText_Third_PM	THIRD		
+gText_Able2	ABLE		
+gText_NotAble	NOT ABLE		
+gText_Able3	ABLE!		
+gText_NotAble2	NOT ABLE!		
+gText_Learned	LEARNED		
+gText_Have	HAVE		
+gText_DontHave	DON'T HAVE		
+gText_Fourth	FOURTH		
+gText_PkmnCantParticipate	That POKéMON can't participate.{PAUSE_UNTIL_PRESS}		
+gText_CancelParticipation	Cancel participation?		
+gText_CancelBattle	Cancel the battle?		
+gText_ReturnToWaitingRoom	Return to the WAITING ROOM?		
+gText_CancelChallenge	Cancel the challenge?		
+gText_EscapeFromHere	Want to escape from here and return\nto {STR_VAR_1}?		
+gText_ReturnToHealingSpot	Want to return to the healing spot\nused last in {STR_VAR_1}?		
+gText_PauseUntilPress	{PAUSE_UNTIL_PRESS}		
+gText_OnlyPkmnForBattle	That's your only\nPOKéMON for battle.		
+gText_PkmnCantBeTradedNow	That POKéMON can't be traded\nnow.		
+gText_EggCantBeTradedNow	An EGG can't be traded now.		
+gText_OtherTrainersPkmnCantBeTraded	The other TRAINER's POKéMON\ncan't be traded now.		
+gText_OtherTrainerCantAcceptPkmn	The other TRAINER can't accept\nthat POKéMON now.		
+gText_CantTradeWithTrainer	You can't trade with that\nTRAINER now.		
+gText_NotPkmnOtherTrainerWants	That isn't the type of POKéMON\nthat the other TRAINER wants.		
+gText_ThatIsntAnEgg	That isn't an EGG.		
+gText_Register	REGISTER		
+gText_Attack3	ATTACK		
+gText_Defense3	DEFENSE		
+gText_SpAtk4	SP. ATK		
+gText_SpDef4	SP. DEF		
+gText_Speed2	SPEED		
+gText_HP4	HP		
+gText_EmptyString8			
+gText_OTSlash	OT/		
+gText_RentalPkmn	RENTAL POKéMON		
+gText_TypeSlash	TYPE/		
+gText_Power	POWER		
+gText_Accuracy2	ACCURACY		
+gText_Appeal	APPEAL		
+gText_Jam	JAM		
+gText_Status	STATUS		
+gText_ExpPoints	EXP. POINTS		
+gText_NextLv	NEXT LV.		
+gText_RibbonsVar1	RIBBONS: {STR_VAR_1}		
+gText_EmptyString5			
+gText_Events	EVENTS		
+gText_Switch	SWITCH		
+gText_PkmnInfo	POKéMON INFO		
+gText_PkmnSkills	POKéMON SKILLS		
+gText_BattleMoves	BATTLE MOVES		
+gText_ContestMoves	C0NTEST MOVES		
+gText_Info	INFO		
+gText_EggWillTakeALongTime	It looks like this EGG will\ntake a long time to hatch.		
+gText_EggWillTakeSomeTime	What will hatch from this?\nIt will take some time.		
+gText_EggWillHatchSoon	It moves occasionally.\nIt should hatch soon.		
+gText_EggAboutToHatch	It's making sounds.\nIt's about to hatch!		
+gText_HMMovesCantBeForgotten2	HM moves can't be\nforgotten now.		
+gText_XNatureMetAtYZ	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nmet at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.		
+gText_XNatureHatchedAtYZ	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nhatched at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.		
+gText_XNatureObtainedInTrade	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nobtained in a trade.		
+gText_XNatureFatefulEncounter	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nobtained in a fateful\nencounter at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.		
+gText_XNatureProbablyMetAt	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nprobably met at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.		
+gText_XNature	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature		
+gText_XNatureMetSomewhereAt	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nmet somewhere at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.		
+gText_XNatureHatchedSomewhereAt	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nhatched somewhere at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.		
+gText_OddEggFoundByCouple	An odd POKéMON EGG found\nby the DAY CARE couple.		
+gText_PeculiarEggNicePlace	A peculiar POKéMON EGG\nobtained at the nice place.		
+gText_PeculiarEggTrade	A peculiar POKéMON EGG\nobtained in a trade.		
+gText_EggFromHotSprings	A POKéMON EGG obtained\nat the hot springs.		
+gText_EggFromTraveler	An odd POKéMON EGG\nobtained from a traveler.		
+gText_ApostropheSBase	's BASE		
+gText_OkayToDeleteFromRegistry	Is it okay to delete {STR_VAR_1}\nfrom the REGISTRY?		
+gText_RegisteredDataDeleted	The registered data was deleted.{PAUSE_UNTIL_PRESS}		
+gText_NoRegistry	There is no REGISTRY.{PAUSE_UNTIL_PRESS}		
+gText_DelRegist	DEL REGIST.		
+gText_Var3Var1SlashVar2	{STR_VAR_3}{STR_VAR_1}/{STR_VAR_2}		
+gText_Decorate	DECORATE		
+gText_PutAway	PUT AWAY		
+gText_Toss2	TOSS		
+gText_Color161Shadow161	{COLOR 161}{SHADOW 161}		
+gText_PutOutSelectedDecorItem	Put out the selected decoration item.		
+gText_StoreChosenDecorInPC	Store the chosen decoration in the PC.		
+gText_ThrowAwayUnwantedDecors	Throw away unwanted decorations.		
+gText_NoDecorations	There are no decorations.{PAUSE_UNTIL_PRESS}		
+gText_Desk	DESK		
+gText_Chair	CHAIR		
+gText_Plant	PLANT		
+gText_Ornament	ORNAMENT		
+gText_Mat	MAT		
+gText_Poster	POSTER		
+gText_Doll	DOLL		
+gText_Cushion	CUSHION		
+gText_Gold	GOLD		
+gText_Silver	SILVER		
+gText_PlaceItHere	Place it here?		
+gText_CantBePlacedHere	It can't be placed here.		
+gText_CancelDecorating	Cancel decorating?		
+gText_InUseAlready	This is in use already.		
+gText_NoMoreDecorations	No more decorations can be placed.\nThe most that can be placed are {STR_VAR_1}.		width-ok: STR_VAR_1 is a number
+gText_NoMoreDecorations2	No more decorations can be placed.\nThe most that can be placed are {STR_VAR_1}.		width-ok: STR_VAR_1 is a number
+gText_MustBePlacedOnDesk	This can't be placed here.\nIt must be on a DESK, etc.		
+gText_CantPlaceInRoom	This decoration can't be placed in\nyour own room.		
+gText_CantThrowAwayInUse	This decoration is in use.\nIt can't be thrown away.		
+gText_DecorationWillBeDiscarded	This {STR_VAR_1} will be discarded.\nIs that okay?		
+gText_DecorationThrownAway	The decoration item was thrown away.		
+gText_StopPuttingAwayDecorations	Stop putting away decorations?		
+gText_NoDecorationHere	There is no decoration item here.		
+gText_ReturnDecorationToPC	Return this decoration to the PC?		
+gText_DecorationReturnedToPC	The decoration was returned to the PC.		
+gText_NoDecorationsInUse	There are no decorations in use.{PAUSE_UNTIL_PRESS}		
+gText_Tristan	TRISTAN		
+gText_Philip	PHILIP		
+gText_Dennis	DENNIS		
+gText_Roberto	ROBERTO		
+gText_TurnOff	TURN OFF		
+gText_Decoration	DECORATION		
+gText_ItemStorage	ITEM STORAGE		
+gText_Mailbox	MAILBOX		
+gText_DepositItem	DEPOSIT ITEM		
+gText_WithdrawItem	WITHDRAW ITEM		
+gText_TossItem	TOSS ITEM		
+gText_StoreItemsInPC	Store items in the PC.		
+gText_TakeOutItemsFromPC	Take out items from the PC.		
+gText_ThrowAwayItemsInPC	Throw away items stored in the PC.		
+gText_NoItems	There are no items.{PAUSE_UNTIL_PRESS}		
+gText_NoRoomInBag	There is no more\nroom in the BAG.		
+gText_WithdrawHowManyItems	Withdraw how many\n{STR_VAR_1}(s)?		
+gText_WithdrawXItems	Withdrew {STR_VAR_2}\n{STR_VAR_1}(s).		
+gText_Read	READ		
+gText_MoveToBag	MOVE TO BAG		
+gText_Give2	GIVE		
+gText_NoMailHere	There's no MAIL here.{PAUSE_UNTIL_PRESS}		
+gText_WhatToDoWithVar1sMail	What would you like to do with\n{STR_VAR_1}'s MAIL?		
+gText_MessageWillBeLost	The message will be lost.\nIs that okay?		
+gText_BagIsFull	The BAG is full.{PAUSE_UNTIL_PRESS}		
+gText_MailToBagMessageErased	The MAIL was returned to the BAG\nwith its message erased.{PAUSE_UNTIL_PRESS}		
+gText_Dad	DAD		
+gText_Mom	MOM		
+gText_Wallace	WALLACE		
+gText_Steven	STEVEN		
+gText_Brawly	BRAWLY		
+gText_Winona	WINONA		
+gText_Phoebe	PHOEBE		
+gText_Glacia	GLACIA		
+gText_Petalburg	PETALBURG		
+gText_Slateport	SLATEPORT		
+gText_Littleroot	LITTLEROOT		
+gText_Lilycove	LILYCOVE		
+gText_Dewford	DEWFORD		
+gText_Enter2	ENTER		
+gText_Info2	INFO		
+gText_WhatsAContest	What's a CONTEST?		
+gText_TypesOfContests	Types of CONTESTS		
+gText_Ranks	Ranks		
+gText_Judging	Judging		
+gText_CoolnessContest	COOLNESS CONTEST		
+gText_BeautyContest	BEAUTY CONTEST		
+gText_CutenessContest	CUTENESS CONTEST		
+gText_SmartnessContest	SMARTNESS CONTEST		
+gText_ToughnessContest	TOUGHNESS CONTEST		
+gText_Decoration2	DECORATION		
+gText_PackUp	PACK UP		
+gText_Count	COUNT		
+gText_Registry	REGISTRY		
+gText_Information	INFORMATION		
+gText_Mach	MACH		
+gText_Acro	ACRO		
+gText_Psn	PSN		
+gText_Par	PAR		
+gText_Slp	SLP		
+gText_Brn	BRN		
+gText_Frz	FRZ		
+gText_Toxic	TOXIC		
+gText_Ok3	OK		
+gText_Quit	QUIT		
+gText_SawIt	Saw it		
+gText_NotYet	Not yet		
+gText_Yes	YES		
+gText_No	NO		
+gText_Info4	INFO		
+gText_SingleBattle	SINGLE BATTLE		
+gText_DoubleBattle	DOUBLE BATTLE		
+gText_MultiBattle	MULTI BATTLE		
+gText_MrBriney	MR. BRINEY		
+gText_Challenge	CHALLENGE		
+gText_Info3	INFO		
+gText_Lv50	LV. 50		
+gText_OpenLevel	OPEN LEVEL		
+gText_FreshWaterAndPrice	FRESH WATER{CLEAR_TO 72}¥200	VERS WATER{CLEAR_TO 72}¥200	
+gText_SodaPopAndPrice	SODA POP{CLEAR_TO 72}¥300	FRISDRANK{CLEAR_TO 72}¥300	label-ok: reviewed
+gText_LemonadeAndPrice	LEMONADE{CLEAR_TO 72}¥350	LIMONADE{CLEAR_TO 72}¥350	
+gText_HowToRide	HOW TO RIDE		
+gText_HowToTurn	HOW TO TURN		
+gText_SandySlopes	SANDY SLOPES		
+gText_Wheelies	WHEELIES		
+gText_BunnyHops	BUNNY-HOPS		
+gText_Jump	JUMP		
+gText_Satisfied	Satisfied		
+gText_Dissatisfied	Dissatisfied		
+gText_DeepSeaTooth	DEEPSEATOOTH	DIEPZEETAND	width-ok: list menu sizes itself
+gText_DeepSeaScale	DEEPSEASCALE	DIEPZEESCHUB	width-ok: list menu sizes itself
+gText_BlueFlute2	BLUE FLUTE	BLAUWE FLUIT	width-ok: list menu sizes itself
+gText_YellowFlute2	YELLOW FLUTE	GELE FLUIT	width-ok: list menu sizes itself
+gText_RedFlute2	RED FLUTE	RODE FLUIT	width-ok: list menu sizes itself
+gText_WhiteFlute2	WHITE FLUTE	WITTE FLUIT	width-ok: list menu sizes itself
+gText_BlackFlute2	BLACK FLUTE	ZWARTE FLUIT	width-ok: list menu sizes itself
+gText_GlassChair	GLASS CHAIR		
+gText_GlassDesk	GLASS DESK		
+gText_TreeckoDollAndPrice	TREECKO DOLL 1,000 COINS		
+gText_TorchicDollAndPrice	TORCHIC DOLL 1,000 COINS		
+gText_MudkipDollAndPrice	MUDKIP DOLL   1,000 COINS		
+gText_50CoinsAndPrice	  50 COINS    ¥1,000		
+gText_500CoinsAndPrice	500 COINS  ¥10,000		
+gText_Excellent2	Excellent		
+gText_NotSoGood	Not so good		
+gText_RedShard	RED SHARD	RODE SCHERF	width-ok: list menu sizes itself
+gText_YellowShard	YELLOW SHARD	GELE SCHERF	width-ok: list menu sizes itself
+gText_BlueShard	BLUE SHARD	BLAUWE SCHERF	width-ok: list menu sizes itself
+gText_GreenShard	GREEN SHARD	GROENE SCHERF	width-ok: list menu sizes itself
+gText_BattleFrontier	BATTLE FRONTIER		
+gText_Right	Right		
+gText_Left	Left		
+gText_TM32AndPrice	TM32{CLEAR_TO 72}1,500 COINS		
+gText_TM29AndPrice	TM29{CLEAR_TO 72}3,500 COINS		
+gText_TM35AndPrice	TM35{CLEAR_TO 72}4,000 COINS		
+gText_TM24AndPrice	TM24{CLEAR_TO 72}4,000 COINS		
+gText_TM13AndPrice	TM13{CLEAR_TO 72}4,000 COINS		
+gText_Cool	COOL		
+gText_Beauty	BEAUTY		
+gText_Cute	CUTE		
+gText_Smart	SMART		
+gText_Tough	TOUGH		
+gText_Normal	NORMAL		
+gText_Super	SUPER		
+gText_Hyper	HYPER		
+gText_Master	MASTER		
+gText_Cool2	COOL		
+gText_Beauty2	BEAUTY		
+gText_Cute2	CUTE		
+gText_Smart2	SMART		
+gText_Tough2	TOUGH		
+gText_Items	ITEMS		
+gText_Key_Items	KEY ITEMS	BELANGRIJK	label-ok: reviewed
+gText_Poke_Balls	POKé BALLS		
+gText_TMs_Hms	TMs & HMs	TM's & HM's	label-ok: reviewed
+gText_Berries2	BERRIES	BESSEN	
+gText_SomeonesPC	SOMEONE'S PC		
+gText_LanettesPC	LANETTE'S PC		
+gText_PlayersPC	{PLAYER}'s PC		
+gText_HallOfFame	HALL OF FAME		
+gText_LogOff	LOG OFF		
+gText_Opponent	OPPONENT		
+gText_Tourney_Tree	TOURNEY TREE		
+gText_ReadyToStart	READY TO START		
+gText_NormalRank	NORMAL RANK		
+gText_SuperRank	SUPER RANK		
+gText_HyperRank	HYPER RANK		
+gText_MasterRank	MASTER RANK		
+gText_Single2	SINGLE		
+gText_Double2	DOUBLE		
+gText_Multi	MULTI		
+gText_MultiLink	MULTI-LINK		
+gText_BattleBag	BATTLE BAG		
+gText_HeldItem	HELD ITEM		
+gText_LinkContest	LINK CONTEST		
+gText_AboutE_Mode	ABOUT E-MODE		
+gText_AboutG_Mode	ABOUT G-MODE		
+gText_E_Mode	E-MODE		
+gText_G_Mode	G-MODE		
+gText_MenuOptionPokedex	POKéDEX		
+gText_MenuOptionPokemon	POKéMON		
+gText_MenuOptionBag	BAG		
+gText_MenuOptionPokenav	POKéNAV		
+gText_Blank			
+gText_MenuOptionSave	SAVE		
+gText_MenuOptionOption	OPTION		
+gText_MenuOptionExit	EXIT		
+gText_5BP	  5BP		
+gText_10BP	10BP		
+gText_15BP	15BP		
+gText_RedTent	RED TENT		
+gText_BlueTent	BLUE TENT		
+gText_SouthernIsland	SOUTHERN ISLAND		
+gText_BirthIsland	BIRTH ISLAND		
+gText_FarawayIsland	FARAWAY ISLAND		
+gText_NavelRock	NAVEL ROCK		
+gText_ClawFossil	CLAW FOSSIL	KLAUWFOSSIEL	width-ok: list menu sizes itself
+gText_RootFossil	ROOT FOSSIL	WORTELFOSSIEL	width-ok: list menu sizes itself
+gText_No4	NO		
+gText_IllBattleNow	I'll battle now!		
+gText_IWon	I won!		
+gText_ILost	I lost!		
+gText_IWontTell	I won't tell.		
+gText_NormalTagMatch	NORMAL TAG MATCH		
+gText_VarietyTagMatch	VARIETY TAG MATCH		
+gText_UniqueTagMatch	UNIQUE TAG MATCH		
+gText_ExpertTagMatch	EXPERT TAG MATCH		
+gText_TradeCenter	TRADE CENTER		
+gText_Colosseum	COLOSSEUM		
+gText_RecordCorner	RECORD CORNER		
+gText_BerryCrush3	BERRY CRUSH		
+gText_EmptyLinkService			
+gText_PokemonJump	POKéMON JUMP		
+gText_DodrioBerryPicking	DODRIO BERRY-PICKING		
+gText_BecomeLeader	BECOME LEADER		
+gText_JoinGroup	JOIN GROUP		
+gText_TwoStyles	TWO STYLES		
+gText_Lv50_3	LV. 50		
+gText_OpenLevel2	OPEN LEVEL		
+gText_MonTypeAndNo	{PKMN} TYPE & NO.		
+gText_HoldItems	HOLD ITEMS		
+gText_Symbols2	SYMBOLS		
+gText_Record3	RECORD		
+gText_BattlePts	BATTLE PTS		
+gText_TowerInfo	TOWER INFO		
+gText_BattleMon	BATTLE {PKMN}		
+gText_BattleSalon	BATTLE SALON		
+gText_MultiLink2	MULTI-LINK		
+gText_BattleRules	BATTLE RULES		
+gText_JudgeMind	JUDGE: MIND		
+gText_JudgeSkill	JUDGE: SKILL		
+gText_JudgeBody	JUDGE: BODY		
+gText_Matchup	MATCHUP		
+gText_TourneyTree	TOURNEY TREE		
+gText_DoubleKO	DOUBLE KO		
+gText_BasicRules	BASIC RULES		
+gText_SwapPartners	SWAP: PARTNER		
+gText_SwapNumber	SWAP: NUMBER		
+gText_SwapNotes	SWAP: NOTES		
+gText_OpenLevel3	OPEN LEVEL		
+gText_BattleBasics	BATTLE BASICS		
+gText_PokemonNature	POKéMON NATURE		
+gText_PokemonMoves	POKéMON MOVES		
+gText_Underpowered	UNDERPOWERED		
+gText_WhenInDanger	WHEN IN DANGER		
+gText_PyramidPokemon	PYRAMID: POKéMON		
+gText_PyramidTrainers	PYRAMID: TRAINERS		
+gText_PyramidMaze	PYRAMID: MAZE		
+gText_BattleBag2	BATTLE BAG		
+gText_PokenavAndBag	POKéNAV AND BAG		
+gText_HeldItems	HELD ITEMS		
+gText_PokemonOrder	POKéMON ORDER		
+gText_BattlePokemon	BATTLE POKéMON		
+gText_BattleTrainers	BATTLE TRAINERS		
+gText_GoOn	GO ON		
+gText_Record2	RECORD		
+gText_Rest	REST		
+gText_Retire	RETIRE		
+gText_99TimesPlus	99 times +		
+gText_1MinutePlus	1 minute +		
+gText_SpaceSeconds	 seconds		
+gText_SpaceTimes	 time(s)		
+gText_Dot	.		
+gText_BigGuy	Big guy		
+gText_BigGirl	Big girl		
+gText_Son	son		
+gText_Daughter	daughter		
+gText_BlueFlute	BLUE FLUTE	BLAUWE FLUIT	width-ok: list menu sizes itself
+gText_YellowFlute	YELLOW FLUTE	GELE FLUIT	width-ok: list menu sizes itself
+gText_RedFlute	RED FLUTE	RODE FLUIT	width-ok: list menu sizes itself
+gText_WhiteFlute	WHITE FLUTE	WITTE FLUIT	width-ok: list menu sizes itself
+gText_BlackFlute	BLACK FLUTE	ZWARTE FLUIT	width-ok: list menu sizes itself
+gText_PrettyChair	PRETTY CHAIR		
+gText_PrettyDesk	PRETTY DESK		
+gText_1F	1F		
+gText_2F	2F		
+gText_3F	3F		
+gText_4F	4F		
+gText_5F	5F		
+gText_6F	6F		
+gText_7F	7F		
+gText_8F	8F		
+gText_9F	9F		
+gText_10F	10F		
+gText_11F	11F		
+gText_B1F	B1F		
+gText_B2F	B2F		
+gText_B3F	B3F		
+gText_B4F	B4F		
+gText_Rooftop	ROOFTOP		
+gText_ElevatorNowOn	Now on:		
+gText_BP	BP		
+gText_EnergyPowder50	ENERGYPOWDER{CLEAR_TO 114}{FONT_SMALL}50		
+gText_EnergyRoot80	ENERGY ROOT{CLEAR_TO 114}{FONT_SMALL}80		
+gText_HealPowder50	HEAL POWDER{CLEAR_TO 114}{FONT_SMALL}50		
+gText_RevivalHerb300	REVIVAL HERB{CLEAR_TO 108}{FONT_SMALL}300		
+gText_Protein1000	PROTEIN{CLEAR_TO 99}{FONT_SMALL}1,000		
+gText_Iron1000	IRON{CLEAR_TO 99}{FONT_SMALL}1,000		
+gText_Carbos1000	CARBOS{CLEAR_TO 99}{FONT_SMALL}1,000		
+gText_Calcium1000	CALCIUM{CLEAR_TO 99}{FONT_SMALL}1,000		
+gText_Zinc1000	ZINC{CLEAR_TO 99}{FONT_SMALL}1,000		
+gText_HPUp1000	HP UP{CLEAR_TO 99}{FONT_SMALL}1,000		
+gText_PPUp3000	PP UP{CLEAR_TO 99}{FONT_SMALL}3,000		
+gText_RankingHall	RANKING HALL		
+gText_ExchangeService	EXCHANGE SERVICE		
+gText_LilycoveCity	LILYCOVE CITY		
+gText_SlateportCity	SLATEPORT CITY		
+gText_CaveOfOrigin	CAVE OF ORIGIN		
+gText_MtPyre	MT. PYRE		
+gText_SkyPillar	SKY PILLAR		
+gText_DontRemember	Don't remember		
+gText_Exit	EXIT		
+gText_ExitFromBox	Exit from the BOX?		
+gText_WhatDoYouWantToDo	What do you want to do?		
+gText_PleasePickATheme	Please pick a theme.		
+gText_PickTheWallpaper	Pick the wallpaper.		
+gText_PkmnIsSelected	{DYNAMIC 0} is selected.		
+gText_JumpToWhichBox	Jump to which BOX?		
+gText_DepositInWhichBox	Deposit in which BOX?		
+gText_PkmnWasDeposited	{DYNAMIC 0} was deposited.		
+gText_BoxIsFull2	The BOX is full.		
+gText_ReleaseThisPokemon	Release this POKéMON?		
+gText_PkmnWasReleased	{DYNAMIC 0} was released.		
+gText_ByeByePkmn	Bye-bye, {DYNAMIC 0}!		
+gText_MarkYourPkmn	Mark your POKéMON.		
+gText_ThatsYourLastPkmn	That's your last POKéMON!		
+gText_YourPartysFull	Your party's full!		
+gText_YoureHoldingAPkmn	You're holding a POKéMON!		
+gText_WhichOneWillYouTake	Which one will you take?		
+gText_YouCantReleaseAnEgg	You can't release an EGG.		
+gText_ContinueBoxOperations	Continue BOX operations?		
+gText_PkmnCameBack	{DYNAMIC 0} came back!		
+gText_WasItWorriedAboutYou	Was it worried about you?		
+gText_FourEllipsesExclamation	… … … … !		
+gText_PleaseRemoveTheMail	Please remove the MAIL.		
+gText_GiveToAPkmn	GIVE to a POKéMON?		
+gText_PlacedItemInBag	Placed item in the BAG.		
+gText_BagIsFull2	The BAG is full.		
+gText_PutItemInBag	Put this item in the BAG?		
+gText_ItemIsNowHeld	{DYNAMIC 0} is now held.		
+gText_ChangedToNewItem	Changed to {DYNAMIC 0}.		
+gText_MailCantBeStored	MAIL can't be stored!		
+gPCText_Cancel	CANCEL		
+gPCText_Store	STORE		
+gPCText_Withdraw	WITHDRAW		
+gPCText_Shift	SHIFT		
+gPCText_Move	MOVE		
+gPCText_Place	PLACE		
+gPCText_Summary	SUMMARY		
+gPCText_Release	RELEASE		
+gPCText_Mark	MARK		
+gPCText_Name	NAME		
+gPCText_Jump	JUMP		
+gPCText_Wallpaper	WALLPAPER		
+gPCText_Take	TAKE		
+gPCText_Give	GIVE		
+gPCText_Switch	SWITCH		
+gPCText_Bag	BAG		
+gPCText_Info	INFO		
+gPCText_Scenery1	SCENERY 1		
+gPCText_Scenery2	SCENERY 2		
+gPCText_Scenery3	SCENERY 3		
+gPCText_Etcetera	ETCETERA		
+gPCText_Friends	FRIENDS		
+gPCText_Forest	FOREST		
+gPCText_City	CITY		
+gPCText_Desert	DESERT		
+gPCText_Savanna	SAVANNA		
+gPCText_Crag	CRAG		
+gPCText_Volcano	VOLCANO		
+gPCText_Snow	SNOW		
+gPCText_Cave	CAVE		
+gPCText_Beach	BEACH		
+gPCText_Seafloor	SEAFLOOR		
+gPCText_River	RIVER		
+gPCText_Sky	SKY		
+gPCText_PolkaDot	POLKA-DOT		
+gPCText_Pokecenter	POKéCENTER		
+gPCText_Machine	MACHINE		
+gPCText_Simple	SIMPLE		
+gText_WhatWouldYouLikeToDo	What would you like to do?		
+gText_WithdrawPokemon	WITHDRAW POKéMON		
+gText_DepositPokemon	DEPOSIT POKéMON		
+gText_MovePokemon	MOVE POKéMON		
+gText_MoveItems	MOVE ITEMS		
+gText_SeeYa	SEE YA!		
+gText_WithdrawMonDescription	Move POKéMON stored in BOXES to\nyour party.		
+gText_DepositMonDescription	Store POKéMON in your party in BOXES.		
+gText_MoveMonDescription	Organize the POKéMON in BOXES and\nin your party.		
+gText_MoveItemsDescription	Move items held by any POKéMON\nin a BOX or your party.		
+gText_SeeYaDescription	Return to the previous menu.		
+gText_JustOnePkmn	There is just one POKéMON with you.		
+gText_PartyFull	Your party is full!		
+gText_Box	BOX		
+gText_CheckMapOfHoenn	Check the map of the HOENN region.		
+gText_CheckPokemonInDetail	Check POKéMON in detail.		
+gText_CallRegisteredTrainer	Call a registered TRAINER.		
+gText_CheckObtainedRibbons	Check obtained RIBBONS.		
+gText_PutAwayPokenav	Put away the POKéNAV.		
+gText_NoRibbonWinners	There are no RIBBON winners.		
+gText_NoTrainersRegistered	No TRAINERS are registered.		
+gText_CheckPartyPokemonInDetail	Check party POKéMON in detail.		
+gText_CheckAllPokemonInDetail	Check all POKéMON in detail.		
+gText_ReturnToPokenavMenu	Return to the POKéNAV menu.		
+gText_FindCoolPokemon	Find cool POKéMON.		
+gText_FindBeautifulPokemon	Find beautiful POKéMON.		
+gText_FindCutePokemon	Find cute POKéMON.		
+gText_FindSmartPokemon	Find smart POKéMON.		
+gText_FindToughPokemon	Find tough POKéMON.		
+gText_ReturnToConditionMenu	Return to the CONDITION menu.		
+gText_NumberRegistered	No. registered		
+gText_NumberOfBattles	No. of battles		
+gText_Detail	DETAIL		
+gText_Call2	CALL		
+gText_UnusedExit	EXIT		
+gText_CantCallOpponentHere	Can't call opponent here.		
+gText_PokenavMatchCall_Strategy	STRATEGY		
+gText_PokenavMatchCall_TrainerPokemon	TRAINER'S POKéMON		
+gText_PokenavMatchCall_SelfIntroduction	SELF-INTRODUCTION		
+gText_Pokenav_ClearButtonList	{CLEAR 128}		
+gText_PokenavMap_ZoomedOutButtons	{A_BUTTON}ZOOM {B_BUTTON}CANCEL		
+gText_PokenavMap_ZoomedInButtons	{A_BUTTON}FULL {B_BUTTON}CANCEL		
+gText_PokenavCondition_MonListButtons	{A_BUTTON}CONDITION {B_BUTTON}CANCEL		
+gText_PokenavCondition_MonStatusButtons	{A_BUTTON}MARKINGS {B_BUTTON}CANCEL		
+gText_PokenavCondition_MarkingButtons	{A_BUTTON}SELECT MARK {B_BUTTON}CANCEL		
+gText_PokenavMatchCall_TrainerListButtons	{A_BUTTON}MENU {B_BUTTON}CANCEL		
+gText_PokenavMatchCall_CallMenuButtons	{A_BUTTON}OK {B_BUTTON}CANCEL		
+gText_PokenavMatchCall_CheckTrainerButtons	{B_BUTTON}CANCEL		
+gText_PokenavRibbons_MonListButtons	{A_BUTTON}RIBBONS {B_BUTTON}CANCEL		
+gText_PokenavRibbons_RibbonListButtons	{A_BUTTON}CHECK {B_BUTTON}CANCEL		
+gText_PokenavRibbons_RibbonCheckButtons	{B_BUTTON}CANCEL		
+gText_NatureSlash	NATURE/		
+gText_TrainerCloseBy	That TRAINER is close by.\nTalk to the TRAINER in person!		
+gText_InParty	IN PARTY		
+gText_Number2	No. 		
+gText_Ribbons	RIBBONS		
+gText_PokemonMaleLv	{DYNAMIC 0}{COLOR_HIGHLIGHT_SHADOW LIGHT_RED WHITE GREEN}♂{COLOR_HIGHLIGHT_SHADOW DARK_GRAY WHITE LIGHT_GRAY}/{LV}{DYNAMIC 1}		
+gText_PokemonFemaleLv	{DYNAMIC 0}{COLOR_HIGHLIGHT_SHADOW LIGHT_GREEN WHITE BLUE}♀{COLOR_HIGHLIGHT_SHADOW DARK_GRAY WHITE LIGHT_GRAY}/{LV}{DYNAMIC 1}		
+gText_PokemonNoGenderLv	{DYNAMIC 0}/{LV}{DYNAMIC 1}		
+gText_Unknown	UNKNOWN		
+gText_Call	CALL		
+gText_Check	CHECK		
+gText_Cancel6	CANCEL		
+gText_NumberIndex	No. {DYNAMIC 0}		
+gText_RibbonsF700	RIBBONS {DYNAMIC 0}		
+gText_PokemonMaleLv2	{DYNAMIC 0}{COLOR_HIGHLIGHT_SHADOW LIGHT_RED WHITE GREEN}♂{COLOR_HIGHLIGHT_SHADOW DARK_GRAY WHITE LIGHT_GRAY}/{LV}{DYNAMIC 1}{DYNAMIC 2}		
+gText_PokemonFemaleLv2	{DYNAMIC 0}{COLOR_HIGHLIGHT_SHADOW LIGHT_GREEN WHITE BLUE}♀{COLOR_HIGHLIGHT_SHADOW DARK_GRAY WHITE LIGHT_GRAY}/{LV}{DYNAMIC 1}{DYNAMIC 2}		
+gText_PokemonNoGenderLv2	{DYNAMIC 0}/{LV}{DYNAMIC 1}{DYNAMIC 2}		
+gText_CombineFourWordsOrPhrases	Combine four words or phrases		
+gText_AndMakeYourProfile	and make your profile.		
+gText_CombineSixWordsOrPhrases	Combine six words or phrases		
+gText_AndMakeAMessage	and make a message.		
+gText_FindWordsThatDescribeYour	Find words that describe your		
+gText_FeelingsRightNow	feelings right now.		
+gText_WithFourPhrases	With four phrases,		
+gText_CombineNineWordsOrPhrases	Combine nine words or phrases		
+gText_AndMakeAMessage2	and make a message.		
+gText_ChangeJustOneWordOrPhrase	Change just one word or phrase		
+gText_AndImproveTheBardsSong	and improve the BARD's song.		
+gText_YourProfile	Your profile		
+gText_YourFeelingAtTheBattlesStart	Your feeling at the battle's start		
+gText_WhatYouSayIfYouWin	What you say if you win a battle		
+gText_WhatYouSayIfYouLose	What you say if you lose a battle		
+gText_TheAnswer	The answer		
+gText_TheMailMessage	The MAIL message		
+gText_TheMailSalutation	The MAIL salutation		
+gText_TheBardsSong2	The new song		
+gText_CombineTwoWordsOrPhrases	Combine two words or phrases		
+gText_AndMakeATrendySaying	and make a trendy saying.		
+gText_TheTrendySaying	The trendy saying		
+gText_IsAsShownOkay	is as shown. Okay?		
+gText_CombineTwoWordsOrPhrases2	Combine two words or phrases		
+gText_ToTeachHerAGoodSaying	to teach her a good saying.		
+gText_FindWordsWhichFit	Find words which fit		
+gText_TheTrainersImage	the TRAINER's image.		
+gText_TheImage	The image:		
+gText_OutOfTheListedChoices	Out of the listed choices,		
+gText_SelectTheAnswerToTheQuiz	select the answer to the quiz!		
+gText_AndCreateAQuiz	and create a quiz!		
+gText_PickAWordOrPhraseAnd	Pick a word or phrase and		
+gText_SetTheQuizAnswer	set the quiz answer.		
+gText_TheAnswerColon	The answer:		
+gText_TheQuizColon	The quiz:		
+gText_ApprenticePhrase	Apprentice's phrase:		
+gText_QuitEditing	Quit editing?		
+gText_StopGivingPkmnMail	Stop giving the POKéMON MAIL?		
+gText_AndFillOutTheQuestionnaire	and fill out the questionnaire.		
+gText_LetsReplyToTheInterview	Let's reply to the interview!		
+gText_AllTextBeingEditedWill	All the text being edited will		
+gText_BeDeletedThatOkay	be deleted. Is that okay?		
+gText_QuitEditing2	Quit editing?		
+gText_EditedTextWillNotBeSaved	The edited text will not be saved.		
+gText_IsThatOkay	Is that okay?		
+gText_PleaseEnterPhraseOrWord	Please enter a phrase or word.		
+gText_EntireTextCantBeDeleted	The entire text can't be deleted.		
+gText_OnlyOnePhrase	Only one phrase may be changed.		
+gText_OriginalSongWillBeUsed	The original song will be used.		
+gText_ThatsTrendyAlready	That's trendy already!		
+gText_CombineTwoWordsOrPhrases3	Combine two words or phrases.		
+gText_QuitGivingInfo	Quit giving information?		
+gText_StopGivingPkmnMail2	Stop giving the POKéMON MAIL?		
+gText_CreateAQuiz2	Create a quiz!		
+gText_SetTheAnswer	Set the answer!		
+gText_CancelSelection	Cancel the selection?		
+gText_Profile	PROFILE		
+gText_AtTheBattlesStart	At the battle's start:		
+gText_UponWinningABattle	Upon winning a battle:		
+gText_UponLosingABattle	Upon losing a battle:		
+gText_TheBardsSong	The BARD's Song		
+gText_WhatsHipAndHappening	What's hip and happening?		
+gText_Interview	Interview		
+gText_GoodSaying	Good saying		
+gText_FansQuestion	Fan's question		
+gText_ApprenticesPhrase	Apprentice's phrase		
+gText_Questionnaire	QUESTIONNAIRE		
+gText_YouCannotQuitHere	You cannot quit here.		
+gText_SectionMustBeCompleted	This section must be completed.		
+gText_F700sQuiz	{DYNAMIC 0}'s quiz		
+gText_Lady	Lady		
+gText_AfterYouHaveReadTheQuiz	After you have read the quiz		
+gText_QuestionPressTheAButton	question, press the A Button.		
+gText_TheQuizAnswerIs	The quiz answer is?		
+gText_LikeToQuitQuiz	Would you like to quit this quiz		
+gText_ChallengeQuestionMark	challenge?		
+gText_IsThisQuizOK	Is this quiz OK?		
+gText_CreateAQuiz	Create a quiz!		
+gText_SelectTheAnswer	Select the answer!		
+gText_LyricsCantBeDeleted	The lyrics can't be deleted.		
+gText_PokemonLeague	POKéMON LEAGUE		
+gText_PokemonCenter	POKéMON CENTER		
+gText_GetsAPokeBlockQuestion	 gets a {POKEBLOCK}?		
+gText_Coolness	Coolness 		
+gText_Beauty3	Beauty 		
+gText_Cuteness	Cuteness 		
+gText_Smartness	Smartness 		
+gText_Toughness	Toughness 		
+gText_WasEnhanced	was enhanced!		
+gText_NothingChanged	Nothing changed!		
+gText_WontEatAnymore	It won't eat anymore…		
+gText_SaveFailedCheckingBackup	Save failed. Checking the backup\nmemory… Please wait.\n{COLOR RED}“Time required: about 1 minute”		
+gText_BackupMemoryDamaged	The backup memory is damaged, or\nthe internal battery has run dry.\nYou can still play, but not save.		
+gText_GamePlayCannotBeContinued	{COLOR RED}“Game play cannot be continued.\nReturning to the title screen…”		
+gText_CheckCompleted	Check completed.\nAttempting to save again.\nPlease wait.		
+gText_SaveCompleteGameCannotContinue	Save completed.\n{COLOR RED}“Game play cannot be continued.\nReturning to the title screen.”		
+gText_SaveCompletePressA	Save completed.\n{COLOR RED}“Please press the A Button.”		
+gText_Ferry	FERRY		
+gText_SecretBase	SECRET BASE		
+gText_Hideout	HIDEOUT		
+gText_ResetRTCConfirmCancel	Reset RTC?\nA: Confirm, B: Cancel		
+gText_PresentTime	Present time in game		
+gText_PreviousTime	Previous time in game		
+gText_PleaseResetTime	Please reset the time.		
+gText_ClockHasBeenReset	The clock has been reset.\nData will be saved. Please wait.		
+gText_SaveCompleted	Save completed.		
+gText_SaveFailed	Save failed…		
+gText_NoSaveFileCantSetTime	There is no save file, so the time\ncan't be set.		
+gText_InGameClockUsable	The in-game clock adjustment system\nis now useable.		
+gText_Slots	SLOTS		
+gText_Roulette	ROULETTE		
+gText_Good	Good		
+gText_VeryGood	Very good		
+gText_Excellent	Excellent		
+gText_SoSo	So-so		
+gText_Bad	Bad		
+gText_TheWorst	The worst		
+gText_Spicy2	spicy		
+gText_Dry2	dry		
+gText_Sweet2	sweet		
+gText_Bitter2	bitter		
+gText_Sour2	sour		
+gText_Single	SINGLE		
+gText_Double	DOUBLE		
+gText_Jackpot	jackpot		
+gText_First	first		
+gText_Second	second		
+gText_Third	third		
+gText_0Pts	0 pts		
+gText_10Pts	10 pts		
+gText_20Pts	20 pts		
+gText_30Pts	30 pts		
+gText_40Pts	40 pts		
+gText_50Pts	50 pts		
+gText_60Pts	60 pts		
+gText_70Pts	70 pts		
+gText_80Pts	80 pts		
+gText_90Pts	90 pts		
+gText_100Pts	100 pts		
+gText_QuestionMark	?		
+gText_KissPoster16BP	KISS POSTER{CLEAR_TO 94}16BP		
+gText_KissCushion32BP	KISS CUSHION{CLEAR_TO 94}32BP		
+gText_SmoochumDoll32BP	SMOOCHUM DOLL{CLEAR_TO 94}32BP		
+gText_TogepiDoll48BP	TOGEPI DOLL{CLEAR_TO 94}48BP		
+gText_MeowthDoll48BP	MEOWTH DOLL{CLEAR_TO 94}48BP		
+gText_ClefairyDoll48BP	CLEFAIRY DOLL{CLEAR_TO 94}48BP		
+gText_DittoDoll48BP	DITTO DOLL{CLEAR_TO 94}48BP		
+gText_CyndaquilDoll80BP	CYNDAQUIL DOLL{CLEAR_TO 94}80BP		
+gText_ChikoritaDoll80BP	CHIKORITA DOLL{CLEAR_TO 94}80BP		
+gText_TotodileDoll80BP	TOTODILE DOLL{CLEAR_TO 94}80BP		
+gText_LaprasDoll128BP	LAPRAS DOLL{CLEAR_TO 88}128BP		
+gText_SnorlaxDoll128BP	SNORLAX DOLL{CLEAR_TO 88}128BP		
+gText_VenusaurDoll256BP	VENUSAUR DOLL{CLEAR_TO 88}256BP		
+gText_CharizardDoll256BP	CHARIZARD DOLL{CLEAR_TO 88}256BP		
+gText_BlastoiseDoll256BP	BLASTOISE DOLL{CLEAR_TO 88}256BP		
+gText_Protein1BP	PROTEIN{CLEAR_TO 100}1BP		
+gText_Calcium1BP	CALCIUM{CLEAR_TO 100}1BP		
+gText_Iron1BP	IRON{CLEAR_TO 100}1BP		
+gText_Zinc1BP	ZINC{CLEAR_TO 100}1BP		
+gText_Carbos1BP	CARBOS{CLEAR_TO 100}1BP		
+gText_HpUp1BP	HP UP{CLEAR_TO 100}1BP		
+gText_Leftovers48BP	LEFTOVERS{CLEAR_TO 94}48BP		
+gText_WhiteHerb48BP	WHITE HERB{CLEAR_TO 94}48BP		
+gText_QuickClaw48BP	QUICK CLAW{CLEAR_TO 94}48BP		
+gText_MentalHerb48BP	MENTAL HERB{CLEAR_TO 94}48BP		
+gText_BrightPowder64BP	BRIGHTPOWDER{CLEAR_TO 94}64BP		
+gText_ChoiceBand64BP	CHOICE BAND{CLEAR_TO 94}64BP		
+gText_KingsRock64BP	KING'S ROCK{CLEAR_TO 94}64BP		
+gText_FocusBand64BP	FOCUS BAND{CLEAR_TO 94}64BP		
+gText_ScopeLens64BP	SCOPE LENS{CLEAR_TO 94}64BP		
+gText_Softboiled16BP	SOFTBOILED{CLEAR_TO 78}16BP		
+gText_SeismicToss24BP	SEISMIC TOSS{CLEAR_TO 78}24BP		
+gText_DreamEater24BP	DREAM EATER{CLEAR_TO 78}24BP		
+gText_MegaPunch24BP	MEGA PUNCH{CLEAR_TO 78}24BP		
+gText_MegaKick48BP	MEGA KICK{CLEAR_TO 78}48BP		
+gText_BodySlam48BP	BODY SLAM{CLEAR_TO 78}48BP		
+gText_RockSlide48BP	ROCK SLIDE{CLEAR_TO 78}48BP		
+gText_Counter48BP	COUNTER{CLEAR_TO 78}48BP		
+gText_ThunderWave48BP	THUNDER WAVE{CLEAR_TO 78}48BP		
+gText_SwordsDance48BP	SWORDS DANCE{CLEAR_TO 78}48BP		
+gText_DefenseCurl16BP	DEFENSE CURL{CLEAR_TO 78}16BP		
+gText_Snore24BP	SNORE{CLEAR_TO 78}24BP		
+gText_MudSlap24BP	MUD-SLAP{CLEAR_TO 78}24BP		
+gText_Swift24BP	SWIFT{CLEAR_TO 78}24BP		
+gText_IcyWind24BP	ICY WIND{CLEAR_TO 78}24BP		
+gText_Endure48BP	ENDURE{CLEAR_TO 78}48BP		
+gText_PsychUp48BP	PSYCH UP{CLEAR_TO 78}48BP		
+gText_IcePunch48BP	ICE PUNCH{CLEAR_TO 78}48BP		
+gText_ThunderPunch48BP	THUNDERPUNCH{CLEAR_TO 78}48BP		
+gText_FirePunch48BP	FIRE PUNCH{CLEAR_TO 78}48BP		
+gText_PkmnFainted_FldPsn	{STR_VAR_1} fainted…\p\n		
+gText_Marco	MARCO		
+gText_TrainerCardName	NAME: 		
+gText_TrainerCardIDNo	IDNo.		
+gText_TrainerCardMoney	MONEY		
+gText_PokeDollar	¥		
+gText_TrainerCardPokedex	POKéDEX		
+gText_EmptyString6			
+gText_Colon2	:		
+gText_Points	 points		
+gText_TrainerCardTime	TIME		
+gText_Var1sTrainerCard	{STR_VAR_1}'s TRAINER CARD		
+gText_HallOfFameDebut	HALL OF FAME DEBUT  		
+gText_LinkBattles	LINK BATTLES		
+gText_LinkCableBattles	LINK CABLE BATTLES		
+gText_WinsLosses	W:{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}  L:{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_2}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}		
+gText_PokemonTrades	POKéMON TRADES		
+gText_UnionTradesAndBattles	UNION TRADES & BATTLES		
+gText_BerryCrush	BERRY CRUSH		
+gText_WaitingTrainerFinishReading	Waiting for the other TRAINER to\nfinish reading your TRAINER CARD.		
+gText_PokeblocksWithFriends	{POKEBLOCK}S W/FRIENDS		
+gText_NumPokeblocks	{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}		
+gText_WonContestsWFriends	WON CONTESTS W/FRIENDS		
+gText_BattlePtsWon	BATTLE POINTS WON		
+gText_NumBP	{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BP		
+gText_BattleTower	BATTLE TOWER		
+gText_WinsStraight	W/{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}  STRAIGHT/{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_2}		
+gText_BattleTower2	BATTLE TOWER		
+gText_BattleDome	BATTLE DOME		
+gText_BattlePalace	BATTLE PALACE		
+gText_BattleFactory	BATTLE FACTORY		
+gText_BattleArena	BATTLE ARENA		
+gText_BattlePike	BATTLE PIKE		
+gText_BattlePyramid	BATTLE PYRAMID		
+gText_FacilitySingle	{STR_VAR_1} SINGLE		
+gText_FacilityDouble	{STR_VAR_1} DOUBLE		
+gText_FacilityMulti	{STR_VAR_1} MULTI		
+gText_FacilityLink	{STR_VAR_1} LINK		
+gText_Facility	{STR_VAR_1}		
+gText_Give	Give		
+gText_NoNeed	No need		
+gText_ColorLightShadowDarkGray	{COLOR LIGHT_GRAY}{SHADOW DARK_GRAY}		
+gText_ColorBlue	{COLOR BLUE}		
+gText_ColorTransparent	{HIGHLIGHT TRANSPARENT}{COLOR TRANSPARENT}		
+gText_CDot	C.		
+gText_BDot	B.		
+gText_AnnouncingResults	Announcing the results!		
+gText_PreliminaryResults	The preliminary results!		
+gText_Round2Results	Round 2 results!		
+gText_ContestantsMonWon	{STR_VAR_1}'s {STR_VAR_2} won!		
+gText_CommunicationStandby	Communication standby…		
+gText_ColorDarkGray	{COLOR DARK_GRAY}		
+gText_ColorDynamic6WhiteDynamic5	{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR6 WHITE DYNAMIC_COLOR5}		
+gText_HealthboxNickname	{HIGHLIGHT DARK_GRAY}		
+gText_EmptySpace2	 		
+gText_HealthboxGender_Male	{COLOR DYNAMIC_COLOR2}♂		
+gText_HealthboxGender_Female	{COLOR DYNAMIC_COLOR1}♀		
+gText_HealthboxGender_None	{COLOR DYNAMIC_COLOR2}		
+gText_Upper	UPPER		
+gText_Lower	lower		
+gText_Others	OTHERS		
+gText_Symbols	SYMBOLS		
+gText_Register2	REGISTER		
+gText_Exit2	EXIT		
+gText_QuitChatting	Quit chatting?		
+gText_RegisterTextWhere	Register text where?		
+gText_RegisterTextHere	Register text here?		
+gText_InputText	Input text.		
+gText_F700JoinedChat	{DYNAMIC 0} joined the chat!		
+gText_F700LeftChat	{DYNAMIC 0} left the chat.		
+gText_ExitingChat	Exiting the chat…		
+gText_LeaderLeftEndingChat	The LEADER, {DYNAMIC 0}, has\nleft, ending the chat.		
+gText_RegisteredTextChangedOKToSave	The registered text has been changed.\nIs it okay to save the game?		
+gText_AlreadySavedFile_Chat	There is already a saved file.\nIs it okay to overwrite it?		
+gText_SavingDontTurnOff_Chat	SAVING…\nDON'T TURN OFF THE POWER.		
+gText_PlayerSavedGame_Chat	{DYNAMIC 0} saved the game.		
+gText_IfLeaderLeavesChatEnds	If the LEADER leaves, the chat\nwill end. Is that okay?		
+gText_Hello	HELLO		
+gText_Pokemon2	POKéMON		
+gText_Trade	TRADE		
+gText_Battle	BATTLE		
+gText_Lets	LET'S		
+gText_Ok	OK!		
+gText_Sorry	SORRY		
+gText_YaySmileEmoji	YAY{EMOJI_BIGSMILE}		
+gText_ThankYou	THANK YOU		
+gText_ByeBye	BYE-BYE!		
+gText_MatchCallSteven_Strategy	Attack the weak points!		
+gText_MatchCallSteven_Pokemon	Ultimate STEEL POKéMON.		
+gText_MatchCallSteven_Intro1_BeforeMeteorFallsBattle	I'd climb even waterfalls		
+gText_MatchCallSteven_Intro2_BeforeMeteorFallsBattle	to find a rare stone!		
+gText_MatchCallSteven_Intro1_AfterMeteorFallsBattle	I'm the strongest and most		
+gText_MatchCallSteven_Intro2_AfterMeteorFallsBattle	energetic after all!		
+gText_MatchCallBrendan_Strategy	Battle with knowledge!		
+gText_MatchCallBrendan_Pokemon	I will use various POKéMON.		
+gText_MatchCallBrendan_Intro1	I'll be a better POKéMON		
+gText_MatchCallBrendan_Intro2	prof than my father is!		
+gText_MatchCallMay_Strategy	I'm not so good at battles.		
+gText_MatchCallMay_Pokemon	I'll use any POKéMON!		
+gText_MatchCallMay_Intro1	My POKéMON and I help		
+gText_MatchCallMay_Intro2	my father's research.		
+gText_HatchedFromEgg	{STR_VAR_1} hatched from the EGG!		
+gText_NicknameHatchPrompt	Would you like to nickname the newly\nhatched {STR_VAR_1}?		
+gText_ReadyPickBerry	Are you ready to BERRY-CRUSH?\nPlease pick a BERRY for use.\p		
+gText_WaitForAllChooseBerry	Please wait while each member\nchooses a BERRY.		
+gText_EndedWithXUnitsPowder	{PAUSE_MUSIC}{PLAY_BGM MUS_LEVEL_UP}You ended up with {STR_VAR_1} units of\nsilky-smooth BERRY POWDER.{RESUME_MUSIC}\pYour total amount of BERRY POWDER\nis {STR_VAR_2}.\p		
+gText_RecordingGameResults	Recording your game results in the\nsave file.\lPlease wait.		
+gText_PlayBerryCrushAgain	Want to play BERRY CRUSH again?		
+gText_YouHaveNoBerries	You have no BERRIES.\nThe game will be canceled.		
+gText_MemberDroppedOut	A member dropped out.\nThe game will be canceled.		
+gText_TimesUpNoGoodPowder	Time's up.\pGood BERRY POWDER could not be\nmade…\p		
+gText_CommunicationStandby2	Communication standby…		
+gText_1DotBlueF700	1. {COLOR BLUE}{SHADOW LIGHT_BLUE}{DYNAMIC 0}		
+gText_1DotF700	1. {DYNAMIC 0}		
+gText_SpaceTimes2	 time(s)		
+gText_XDotY	{STR_VAR_1}.{STR_VAR_2}		
+gText_Var1Berry	{STR_VAR_1} BERRY	{STR_VAR_1} BES	
+gText_TimeColon	Time:		
+gText_PressingSpeed	Pressing Speed:		
+gText_Silkiness	Silkiness:		
+gText_StrVar1	{STR_VAR_1}		
+gText_SpaceMin	 min. 		
+gText_XDotY2	{STR_VAR_1}.{STR_VAR_2}		
+gText_SpaceSec	 sec.		
+gText_XDotY3	{STR_VAR_1}.{STR_VAR_2}		
+gText_TimesPerSec	 Times/sec.		
+gText_Var1Percent	{STR_VAR_1}%		
+gText_PressesRankings	No. of Presses Rankings		
+gText_CrushingResults	Crushing Results		
+gText_NeatnessRankings	Neatness Rankings		
+gText_CoopRankings	Cooperative Rankings		
+gText_PressingPowerRankings	Pressing-Power Rankings		
+gText_BerryCrush2	BERRY CRUSH		
+gText_PressingSpeedRankings	Pressing-Speed Rankings		
+gText_Var1Players	{STR_VAR_1} PLAYERS		
+gText_SymbolsEarned	Symbols Earned		
+gText_BattleRecord	Battle Record		
+gText_BattlePoints	Battle Points		
+gText_UnusedCancel	CANCEL		
+gText_EmptyString7			
+gText_CheckFrontierMap	Check BATTLE FRONTIER MAP.		
+gText_CheckTrainerCard	Check TRAINER CARD.		
+gText_ViewRecordedBattle	View recorded battle.		
+gText_PutAwayFrontierPass	Put away the FRONTIER PASS.		
+gText_CurrentBattlePoints	Your current Battle Points.		
+gText_CollectedSymbols	Your collected Symbols.		
+gText_BattleTowerAbilitySymbol	Battle Tower - Ability Symbol		
+gText_BattleDomeTacticsSymbol	Battle Dome - Tactics Symbol		
+gText_BattlePalaceSpiritsSymbol	Battle Palace - Spirits Symbol		
+gText_BattleArenaGutsSymbol	Battle Arena - Guts Symbol		
+gText_BattleFactoryKnowledgeSymbol	Battle Factory - Knowledge Symbol		
+gText_BattlePikeLuckSymbol	Battle Pike - Luck Symbol		
+gText_BattlePyramidBraveSymbol	Battle Pyramid - Brave Symbol		
+gText_ThereIsNoBattleRecord	There is no Battle Record.		
+gText_BattleTower3	BATTLE TOWER		
+gText_BattleDome2	BATTLE DOME		
+gText_BattlePalace2	BATTLE PALACE		
+gText_BattleArena2	BATTLE ARENA		
+gText_BattleFactory2	BATTLE FACTORY		
+gText_BattlePike2	BATTLE PIKE		
+gText_BattlePyramid2	BATTLE PYRAMID		
+gText_BattleTowerDesc	KO opponents and aim for the top!\nYour ability will be tested.		
+gText_BattleDomeDesc	Keep winning at the tournament!\nYour tactics will be tested.		
+gText_BattlePalaceDesc	Watch your POKéMON battle!\nYour spirit will be tested.		
+gText_BattleArenaDesc	Win battles with teamed-up POKéMON!\nYour guts will be tested.		
+gText_BattleFactoryDesc	Aim for victory using rental POKéMON!\nYour knowledge will be tested.		
+gText_BattlePikeDesc	Select one of three paths to battle!\nYour luck will be tested.		
+gText_BattlePyramidDesc	Aim for the top with exploration!\nYour bravery will be tested.		
+gText_ContinueMenuPlayer	PLAYER		
+gText_ContinueMenuTime	TIME		
+gText_ContinueMenuPokedex	POKéDEX		
+gText_ContinueMenuBadges	BADGES		
+gText_Powder	POWDER		
+gText_BerryPickingRecords	DODRIO BERRY-PICKING RECORDS		
+gText_BerriesPicked	BERRIES picked:		
+gText_BestScore	Best score:		
+gText_BerriesInRowFivePlayers	BERRIES picked in a row with\nfive players:		
+gText_BerryPickingResults	Announcing BERRY-PICKING results!		
+gText_10P30P50P50P	{CLEAR_TO 3}10P{CLEAR_TO 43}30P{CLEAR_TO 83}50P{CLEAR_TO 119}{EMOJI_MINUS}50P		
+gText_AnnouncingRankings	Announcing rankings!		
+gText_AnnouncingPrizes	Announcing prizes!		
+gText_1Colon	1:		
+gText_2Colon	2:		
+gText_3Colon	3:		
+gText_4Colon	4:		
+gText_5Colon	5:		
+gText_FirstPlacePrize	The first-place winner gets\nthis {DYNAMIC 0}!		
+gText_CantHoldAnyMore	You can't hold any more!		
+gText_FilledStorageSpace	It filled its storage space.		
+gText_WantToPlayAgain	Want to play again?		
+gText_SomeoneDroppedOut	Somebody dropped out.\nThe link will be canceled.		
+gText_SpacePoints	 points		
+gText_CommunicationStandby3	Communication standby…		
+gText_SpacePoints2	 points		
+gText_SpaceTimes3	 time(s)		
+gText_PkmnJumpRecords	POKéMON JUMP RECORDS		
+gText_JumpsInARow	Jumps in a row:		
+gText_BestScore2	Best score:		
+gText_ExcellentsInARow	EXCELLENTS in a row:		
+gText_AwesomeWonF701F700	Awesome score! You've\nwon {DYNAMIC 1} {DYNAMIC 0}!		
+gText_FilledStorageSpace2	It filled its storage space.		
+gText_CantHoldMore	You can't hold any more!		
+gText_WantToPlayAgain2	Want to play again?		
+gText_SomeoneDroppedOut2	Somebody dropped out.\nThe link will be canceled.		
+gText_CommunicationStandby4	Communication standby…		
+gText_LinkContestResults	{PLAYER}'s Link Contest Results		
+gText_1st	1st		
+gText_2nd	2nd		
+gText_3rd	3rd		
+gText_4th	4th		
+gText_Friend	Friend		
+gText_Pokemon3	POKeMON		
+gText_Red	RED		
+gText_Blue	BLUE		
+gText_3Dashes	---		
+gText_SingleBattleRoomResults	{PLAYER}'s Single Battle Room Results		
+gText_DoubleBattleRoomResults	{PLAYER}'s Double Battle Room Results		
+gText_MultiBattleRoomResults	{PLAYER}'s Multi Battle Room Results		
+gText_LinkMultiBattleRoomResults	{PLAYER}'s Link Multi Battle Room Results		width-ok: title in wide window
+gText_SingleBattleTourneyResults	{PLAYER}'s Single Battle Tourney Results		width-ok: title in wide window
+gText_DoubleBattleTourneyResults	{PLAYER}'s Double Battle Tourney Results		width-ok: title in wide window
+gText_SingleBattleHallResults	{PLAYER}'s Single Battle Hall Results		
+gText_DoubleBattleHallResults	{PLAYER}'s Double Battle Hall Results		
+gText_BattleChoiceResults	{PLAYER}'s Battle Choice Results		
+gText_SetKOTourneyResults	{PLAYER}'s Set KO Tourney Results		
+gText_BattleSwapSingleResults	{PLAYER}'s Battle Swap Single Results		
+gText_BattleSwapDoubleResults	{PLAYER}'s Battle Swap Double Results		
+gText_BattleQuestResults	{PLAYER}'s Battle Quest Results		
+gText_Lv502	LV. 50		
+gText_OpenLv	OPEN LV.		
+gText_WinStreak	Win streak: {STR_VAR_1}		
+gText_Current	CURRENT		
+gText_Record	RECORD		
+gText_Prev	PREV.		
+gText_RentalSwap	Rental/Swap		
+gText_Total	Total		
+gText_ClearStreak	Clear streak: {STR_VAR_1}		
+gText_Championships	Championships: {STR_VAR_1}		
+gText_RoomsCleared	Rooms cleared: {STR_VAR_1}		
+gText_TimesCleared	Times cleared:{CLEAR 5}{STR_VAR_1}		
+gText_KOsInARow	KOs in a row: {STR_VAR_1}		
+gText_TimesVar1	Times: {STR_VAR_1}		
+gText_FloorsCleared	Floors cleared: {STR_VAR_1}		
+gText_RecordsLv50	LV. 50		
+gText_RecordsOpenLevel	OPEN LEVEL		
+gText_FrontierFacilityWinStreak	Win streak: {STR_VAR_2}		
+gText_FrontierFacilityClearStreak	Clear streak: {STR_VAR_2}		
+gText_FrontierFacilityRoomsCleared	Rooms cleared: {STR_VAR_2}		
+gText_FrontierFacilityKOsStreak	KOs in a row: {STR_VAR_2}		
+gText_FrontierFacilityFloorsCleared	Floors cleared: {STR_VAR_2}		
+gText_SavingDontTurnOff2	SAVING…\nDON'T TURN OFF THE POWER.		
+gText_BlenderMaxSpeedRecord	BERRY BLENDER\nMAXIMUM SPEED RECORD!		
+gText_234Players	2 PLAYERS\n3 PLAYERS\n4 PLAYERS		
+gText_YesNo	YES\nNO		
+gText_SelectorArrow3	▶		
+gText_Peekaboo	PEEKABOO!		
+gText_CommErrorCheckConnections	Communication error…\nPlease check all connections,\nthen turn the power OFF and ON.		
+gText_CommErrorEllipsis	Communication error…		
+gText_MoveCloserToLinkPartner	Move closer to your link partner(s).\nAvoid obstacles between partners.		
+gText_ABtnRegistrationCounter	A Button: Registration Counter		
+gText_ABtnTitleScreen	A Button: Title Screen		
+gText_Option	OPTION		
+gText_TextSpeed	TEXT SPEED		
+gText_BattleScene	BATTLE SCENE		
+gText_BattleStyle	BATTLE STYLE		
+gText_Sound	SOUND		
+gText_Frame	FRAME		
+gText_OptionMenuCancel	CANCEL		
+gText_ButtonMode	BUTTON MODE		
+gText_TextSpeedSlow	{COLOR GREEN}{SHADOW LIGHT_GREEN}SLOW		
+gText_TextSpeedMid	{COLOR GREEN}{SHADOW LIGHT_GREEN}MID		
+gText_TextSpeedFast	{COLOR GREEN}{SHADOW LIGHT_GREEN}FAST		
+gText_BattleSceneOn	{COLOR GREEN}{SHADOW LIGHT_GREEN}ON		
+gText_BattleSceneOff	{COLOR GREEN}{SHADOW LIGHT_GREEN}OFF		
+gText_BattleStyleShift	{COLOR GREEN}{SHADOW LIGHT_GREEN}SHIFT		
+gText_BattleStyleSet	{COLOR GREEN}{SHADOW LIGHT_GREEN}SET		
+gText_SoundMono	{COLOR GREEN}{SHADOW LIGHT_GREEN}MONO		
+gText_SoundStereo	{COLOR GREEN}{SHADOW LIGHT_GREEN}STEREO		
+gText_FrameType	{COLOR GREEN}{SHADOW LIGHT_GREEN}TYPE		
+gText_FrameTypeNumber	{COLOR GREEN}{SHADOW LIGHT_GREEN}		
+gText_ButtonTypeNormal	{COLOR GREEN}{SHADOW LIGHT_GREEN}NORMAL		
+gText_ButtonTypeLR	{COLOR GREEN}{SHADOW LIGHT_GREEN}LR		
+gText_ButtonTypeLEqualsA	{COLOR GREEN}{SHADOW LIGHT_GREEN}L=A		
+gText_NumPlayerLink	{STR_VAR_1}P LINK		
+gText_BronzeCard	BRONZE		
+gText_CopperCard	COPPER		
+gText_SilverCard	SILVER		
+gText_GoldCard	GOLD		
+gText_Day	DAY		
+gText_Colon3	:		
+gText_Confirm2	CONFIRM		
+gText_Days	Days		
+gText_TimeColon2	Time:		
+gText_GameTime	Game time		
+gText_RTCTime	RTC time		
+gText_UpdatedTime	Updated time		
+gText_MenuPokedex	POKéDEX		
+gText_MenuPokemon	POKéMON		
+gText_MenuBag	BAG		
+gText_MenuPokenav	POKéNAV		
+gText_MenuPlayer	{PLAYER}		
+gText_MenuSave	SAVE		
+gText_MenuOption	OPTION		
+gText_MenuExit	EXIT		
+gText_MenuRetire	RETIRE		
+gText_MenuRest	REST		
+gText_SafariBallStock	SAFARI BALLS\nStock: {STR_VAR_1}		
+gText_BattlePyramidFloor	Battle Pyramid\n{STR_VAR_1}		
+gText_Floor1	Floor 1		
+gText_Floor2	Floor 2		
+gText_Floor3	Floor 3		
+gText_Floor4	Floor 4		
+gText_Floor5	Floor 5		
+gText_Floor6	Floor 6		
+gText_Floor7	Floor 7		
+gText_Peak	Peak		
+gText_LinkStandby2	Link standby…\n… … B Button: Cancel		
+gText_PressAToLoadEvent	Press the A Button to load event.\n… … B Button: Cancel		
+gText_LoadingEvent	Loading event…		
+gText_DontRemoveCableTurnOff	Don't remove the Game Link cable.\nDon't turn off the power.		
+gText_EventSafelyLoaded	The event was safely loaded.		
+gText_LoadErrorEndingSession	Loading error.\nEnding session.		
+gText_DexHoenn	HOENN		
+gText_DexNational	NATIONAL		
+gText_PokedexDiploma	PLAYER: {CLEAR 16}{COLOR RED}{SHADOW LIGHT_RED}{PLAYER}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}\n\nThis document certifies\nthat you have successfully\ncompleted your\n{STR_VAR_1} POKéDEX.\n\n{CLEAR_TO 66}{COLOR RED}{SHADOW LIGHT_RED}GAME FREAK		
+gText_DiplomaEmpty	{COLOR RED}{SHADOW LIGHT_RED}		
+gText_Hoenn	HOENN		
+gText_OhABite	Oh! A bite!		
+gText_PokemonOnHook	A POKéMON's on the hook!{PAUSE_UNTIL_PRESS}		
+gText_NotEvenANibble	Not even a nibble…{PAUSE_UNTIL_PRESS}		
+gText_ItGotAway	It got away…{PAUSE_UNTIL_PRESS}		
+gText_XWillBeSentToY	{STR_VAR_2} will be\nsent to {STR_VAR_1}.		
+gText_ByeByeVar1	Bye-bye, {STR_VAR_2}!		
+gText_XSentOverY	{STR_VAR_1} sent over {STR_VAR_3}.		
+gText_TakeGoodCareOfX	Take good care of {STR_VAR_3}!		
+gEasyChatGroupName_Pokemon	POKéMON		
+gEasyChatGroupName_Trainer	TRAINER		
+gEasyChatGroupName_Status	STATUS		
+gEasyChatGroupName_Battle	BATTLE		
+gEasyChatGroupName_Greetings	GREETINGS		
+gEasyChatGroupName_People	PEOPLE		
+gEasyChatGroupName_Voices	VOICES		
+gEasyChatGroupName_Speech	SPEECH		
+gEasyChatGroupName_Endings	ENDINGS		
+gEasyChatGroupName_Feelings	FEELINGS		
+gEasyChatGroupName_Conditions	CONDITIONS		
+gEasyChatGroupName_Actions	ACTIONS		
+gEasyChatGroupName_Lifestyle	LIFESTYLE		
+gEasyChatGroupName_Hobbies	HOBBIES		
+gEasyChatGroupName_Time	TIME		
+gEasyChatGroupName_Misc	MISC.		
+gEasyChatGroupName_Adjectives	ADJECTIVES		
+gEasyChatGroupName_Events	EVENTS		
+gEasyChatGroupName_Move1	MOVE 1		
+gEasyChatGroupName_Move2	MOVE 2		
+gEasyChatGroupName_TrendySaying	TRENDY SAYING		
+gEasyChatGroupName_Pokemon2	POKéMON2		
+gText_ThreeQuestionMarks	???		
+gText_MaxHP	MAX. HP		
+gText_Attack	ATTACK		
+gText_Defense	DEFENSE		
+gText_Speed	SPEED		
+gText_SpAtk	SP. ATK		
+gText_SpDef	SP. DEF		
+gText_Plus	{PLUS}		
+gText_Dash	-		
+gText_FromSpace	From 		
+gText_MixingRecords	Mixing records…		
+gText_RecordMixingComplete	Record mixing completed.\nThank you for waiting.		
+gText_YourName	YOUR NAME?	JE NAAM?	
+gText_BoxName	BOX NAME?		
+gText_PkmnsNickname	{STR_VAR_1}'s nickname?		
+gText_TellHimTheWords	Tell him the words.		
+gText_MoveOkBack	{DPAD_NONE}MOVE  {A_BUTTON}OK  {B_BUTTON}BACK		
+gText_CallCantBeMadeHere	A call can't be made from here.		
+gText_ContestLady_Handsome	HANDSOME		
+gText_ContestLady_Vinny	VINNY		
+gText_ContestLady_Moreme	MOREME		
+gText_ContestLady_Ironhard	IRONHARD		
+gText_ContestLady_Muscle	MUSCLE		
+gText_ContestLady_Coolness	coolness		
+gText_ContestLady_Beauty	beauty		
+gText_ContestLady_Cuteness	cuteness		
+gText_ContestLady_Smartness	smartness		
+gText_ContestLady_Toughness	toughness		
+gText_QuizLady_Lady	Lady		
+gText_FavorLady_Slippery	slippery		
+gText_FavorLady_Roundish	roundish		
+gText_FavorLady_Whamish	wham-ish		
+gText_FavorLady_Shiny	shiny		
+gText_FavorLady_Sticky	sticky		
+gText_FavorLady_Pointy	pointy		
+gText_RentalPkmn2	RENTAL POKéMON		
+gText_SelectFirstPkmn	Select the first POKéMON.		
+gText_SelectSecondPkmn	Select the second POKéMON.		
+gText_SelectThirdPkmn	Select the third POKéMON.		
+gText_Rent	RENT		
+gText_Summary	SUMMARY		
+gText_Others2	OTHERS		
+gText_Deselect	DESELECT		
+gText_TheseThreePkmnOkay	Are these three POKéMON OK?		
+gText_Yes2	YES		
+gText_No2	NO		
+gText_CantSelectSamePkmn	Can't select same {PKMN}.		
+gText_PkmnSwap	POKéMON SWAP		
+gText_SelectPkmnToSwap	Select POKéMON to swap.		
+gText_SelectPkmnToAccept	Select POKéMON to accept.		
+gText_Swap	SWAP		
+gText_Summary2	SUMMARY		
+gText_Rechoose	RECHOOSE		
+gText_QuitSwapping	Quit swapping?		
+gText_Yes3	YES		
+gText_No3	NO		
+gText_PkmnForSwap	{PKMN} FOR SWAP		
+gText_Cancel3	CANCEL		
+gText_Swap2	SWAP		
+gText_Accept	ACCEPT		
+gText_AcceptThisPkmn	Accept this POKéMON?		
+gText_4Spaces	    		
+gText_SamePkmnInPartyAlready	Same {PKMN} in party already.		
+gText_DecimalPoint	.		
+gText_SavingPlayer	PLAYER		
+gText_SavingBadges	BADGES		
+gText_SavingPokedex	POKéDEX		
+gText_SavingTime	TIME		
+gText_WirelessCommStatus	Wireless Communication Status		
+gText_PeopleTrading	People trading:		
+gText_PeopleBattling	People battling:		
+gText_PeopleInUnionRoom	People in the UNION ROOM:		
+gText_PeopleCommunicating	People communicating:		
+gText_F700Players	{DYNAMIC 0} players		
+gText_F701Players	{DYNAMIC 1} players		
+gText_F702Players	{DYNAMIC 2} players		
+gText_F703Players	{DYNAMIC 3} players		
+gText_WonderCards	WONDER CARDS		
+gText_WonderNews	WONDER NEWS		
+gText_WirelessCommunication	WIRELESS COMMUNICATION		
+gText_Friend2	FRIEND		
+gText_Exit3	EXIT		
+gText_Receive	RECEIVE		
+gText_Send	SEND		
+gText_Toss	TOSS		
+gText_VarietyOfEventsImportedWireless	A variety of events will be imported\nover Wireless Communication.		
+gText_WonderCardsInPossession	Read the WONDER CARDS in your\npossession.		
+gText_ReadNewsThatArrived	Read the NEWS that arrived.		
+gText_ReturnToTitle	Return to the title screen.		
+gText_DontHaveCardNewOneInput	You don't have a WONDER CARD,\nso a new CARD will be input.		
+gText_DontHaveNewsNewOneInput	You don't have any WONDER NEWS,\nso new NEWS will be input.		
+gText_WhereShouldCardBeAccessed	Where should the WONDER CARD\nbe accessed?		
+gText_WhereShouldNewsBeAccessed	Where should the WONDER NEWS\nbe accessed?		
+gText_CommunicationStandbyBButtonCancel	Communication standby…\nB Button: Cancel		
+gText_Communicating	Communicating…		
+gText_CommunicationCompleted	Communication completed.		
+gText_CommunicationError	Communication error.		
+gText_CommunicationCanceled	Communication has been canceled.		
+gText_ThrowAwayWonderCard	Throw away the WONDER CARD\nand input a new CARD?		
+gText_HaventReceivedCardsGift	You haven't received the CARD's gift\nyet. Input a new CARD anyway?		
+gText_WonderCardReceivedFrom	A WONDER CARD has been received\nfrom {STR_VAR_1}.		
+gText_WonderNewsReceivedFrom	A WONDER NEWS item has been\nreceived from {STR_VAR_1}.		
+gText_WonderCardReceived	A new WONDER CARD has been\nreceived.		
+gText_WonderNewsReceived	A new WONDER NEWS item has been\nreceived.		
+gText_NewStampReceived	A new STAMP has been received.		
+gText_NewTrainerReceived	A new TRAINER has arrived.		
+gText_AlreadyHadCard	You already had that\nWONDER CARD.		
+gText_AlreadyHadNews	You already had that\nWONDER NEWS item.		
+gText_AlreadyHadStamp	You already had that\nSTAMP.		
+gText_NoMoreRoomForStamps	There's no more room for adding\nSTAMPS.		
+gText_RecordUploadedViaWireless	Your record has been uploaded via\nWIRELESS COMMUNICATION.		
+gText_CantAcceptCardFromTrainer	You can't accept a WONDER CARD\nfrom this TRAINER.		
+gText_CantAcceptNewsFromTrainer	You can't accept WONDER NEWS\nfrom this TRAINER.		
+gText_NothingSentOver	Nothing was sent over…		
+gText_WhatToDoWithCards	What would you like to do\nwith the WONDER CARDS?		
+gText_WhatToDoWithNews	What would you like to do\nwith the WONDER NEWS?		
+gText_SendingWonderCard	Sending your WONDER CARD…		
+gText_SendingWonderNews	Sending your WONDER NEWS item…		
+gText_WonderCardSentTo	Your WONDER CARD has been sent\nto {STR_VAR_1}.		
+gText_WonderNewsSentTo	Your WONDER NEWS item has been\nsent to {STR_VAR_1}.		
+gText_StampSentTo	A STAMP has been sent to {STR_VAR_1}.		
+gText_GiftSentTo	A GIFT has been sent to {STR_VAR_1}.		
+gText_OtherTrainerHasCard	The other TRAINER has the same\nWONDER CARD already.		
+gText_OtherTrainerHasNews	The other TRAINER has the same\nWONDER NEWS already.		
+gText_OtherTrainerHasStamp	The other TRAINER has the same\nSTAMP already.		
+gText_OtherTrainerCanceled	The other TRAINER canceled\ncommunication.		
+gText_CantSendGiftToTrainer	You can't send a MYSTERY GIFT to\nthis TRAINER.		
+gText_IfThrowAwayCardEventWontHappen	If you throw away the CARD,\nits event won't happen. Okay?		
+gText_OkayToDiscardNews	Is it okay to discard this\nNEWS item?		
+gText_HaventReceivedGiftOkayToDiscard	You haven't received the\nGIFT. Is it okay to discard?		
+gText_DataWillBeSaved	Data will be saved.\nPlease wait.		
+gText_SaveCompletedPressA	Save completed.\nPlease press the A Button.		
+gText_WonderCardThrownAway	The WONDER CARD was thrown away.		
+gText_WonderNewsThrownAway	The WONDER NEWS was thrown away.		
+gText_MysteryGift	MYSTERY GIFT		
+gText_PickOKExit	{DPAD_UPDOWN}PICK {A_BUTTON}OK {B_BUTTON}EXIT		
+gText_PickOKCancel	{DPAD_UPDOWN}PICK {A_BUTTON}OK {B_BUTTON}CANCEL		
+gText_PlayersBattleResults	{PLAYER}'s BATTLE RESULTS		
+gText_TotalRecordWLD	TOTAL RECORD W:{STR_VAR_1} L:{STR_VAR_2} D:{STR_VAR_3}		width-ok: STR_VARs are numbers
+gText_WinLoseDraw	{CLEAR_TO 83}WIN{CLEAR_TO 128}LOSE{CLEAR_TO 176}DRAW		
+gText_CommunicationStandby5	Communication standby…		
+gText_QuitTheGame	Quit the game?		
+gText_YouveGot9999Coins	You've got 9,999 COINS.		
+gText_YouveRunOutOfCoins	You've run out of COINS.\nGame over!		
+gText_YouDontHaveThreeCoins	You don't have three COINS.		
+gText_ReelTimeHelp	REEL TIME\nHere's your chance to take\naim and nail marks!\nReel Time continues for the\nawarded number of spins.\nIt all ends on a Big Bonus.		
+gDaycareText_GetAlongVeryWell	The two seem to get along\nvery well.		
+gDaycareText_GetAlong	The two seem to get along.		
+gDaycareText_DontLikeOther	The two don't seem to like\neach other much.		
+gDaycareText_PlayOther	The two prefer to play with other\nPOKéMON than each other.		
+gText_NewLine2	\n		
+gText_Exit4	EXIT		
+gText_Lv	{LV}		
+gText_TimeBoard	TIME BOARD		
+gText_TimeCleared	TIME CLEARED 		
+gText_XMinYDotZSec	{STR_VAR_1} min. {STR_VAR_2}.{STR_VAR_3} sec.		width-ok: STR_VARs are numbers
+gText_TrainerHill1F	1F		
+gText_TrainerHill2F	2F		
+gText_TrainerHill3F	3F		
+gText_TrainerHill4F	4F		
+gText_TeachWhichMoveToPkmn	Teach which move to {STR_VAR_1}?		
+gText_MoveRelearnerTeachMoveConfirm	Teach {STR_VAR_2}?		
+gText_MoveRelearnerPkmnLearnedMove	{STR_VAR_1} learned\n{STR_VAR_2}!		
+gText_MoveRelearnerPkmnTryingToLearnMove	{STR_VAR_1} is trying to learn\n{STR_VAR_2}.\pBut {STR_VAR_1} can't learn more\nthan four moves.\pDelete an older move to make\nroom for {STR_VAR_2}?		
+gText_MoveRelearnerStopTryingToTeachMove	Stop trying to teach\n{STR_VAR_2}?		
+gText_MoveRelearnerAndPoof	{PAUSE 32}1, {PAUSE 15}2, and {PAUSE 15}… {PAUSE 15}… {PAUSE 15}… {PAUSE 15}{PLAY_SE SE_BALL_BOUNCE_1}Poof!\p		
+gText_MoveRelearnerPkmnForgotMoveAndLearnedNew	{STR_VAR_1} forgot {STR_VAR_3}.\pAnd…\p{STR_VAR_1} learned {STR_VAR_2}.		
+gText_MoveRelearnedPkmnDidNotLearnMove	{STR_VAR_1} did not learn the\nmove {STR_VAR_2}.		
+gText_MoveRelearnerGiveUp	Give up trying to teach a new\nmove to {STR_VAR_1}?		
+gText_MoveRelearnerWhichMoveToForget	Which move should be\nforgotten?\p		
+gText_MoveRelearnerBattleMoves	BATTLE MOVES		
+gText_MoveRelearnerContestMovesTitle	CONTEST MOVES		
+gText_MoveRelearnerType	TYPE/		
+gText_MoveRelearnerPP	PP/		
+gText_MoveRelearnerPower	POWER/		
+gText_MoveRelearnerAccuracy	ACCURACY/		
+gText_MoveRelearnerAppeal	APPEAL		
+gText_MoveRelearnerJam	JAM		
+gText_Kira	KIRA		
+gText_Amy	AMY		
+gText_John	JOHN		
+gText_Roy	ROY		
+gText_Gabby	GABBY		
+gText_Anna	ANNA		
+gText_ClearAllSaveData	Clear all save data areas?		
+gText_ClearingData	Clearing data…\nPlease wait.		
+gText_IsThisTheCorrectTime	Is this the correct time?		
+gText_Confirm3	CONFIRM		
+gText_Cancel4	CANCEL		
+gText_MrStoneMatchCallDesc	DEVON PRES		
+gText_MrStoneMatchCallName	MR. STONE		
+gText_StevenMatchCallDesc	HARD AS ROCK		
+gText_StevenMatchCallName	STEVEN		
+gText_MayBrendanMatchCallDesc	RAD NEIGHBOR		
+gText_NormanMatchCallDesc	RELIABLE ONE		
+gText_MomMatchCallDesc	CALM & KIND		
+gText_WallyMatchCallDesc	{PKMN} LOVER		
+gText_NormanMatchCallName	DAD		
+gText_MomMatchCallName	MOM		
+gText_ScottMatchCallDesc	ELUSIVE EYES		
+gText_ScottMatchCallName	SCOTT		
+gText_RoxanneMatchCallDesc	ROCKIN' WHIZ		
+gText_BrawlyMatchCallDesc	THE BIG HIT		
+gText_WattsonMatchCallDesc	SWELL SHOCK		
+gText_FlanneryMatchCallDesc	PASSION BURN		
+gText_WinonaMatchCallDesc	SKY TAMER		
+gText_TateLizaMatchCallDesc	MYSTIC DUO		
+gText_JuanMatchCallDesc	DANDY CHARM		
+gText_EliteFourMatchCallDesc	ELITE FOUR		
+gText_ChampionMatchCallDesc	CHAMPION		
+gText_ProfBirchMatchCallDesc	{PKMN} PROF.		
+gText_CommStandbyAwaitingOtherPlayer	Communication standby…\nAwaiting another player to choose.		
+gText_BattleWasRefused	The battle was refused.{PAUSE 60}		
+gText_RefusedBattle	Refused the battle.{PAUSE 60}		
+gText_NoWeather	NO WEATHER		
+gText_Sunny	SUNNY		
+gText_Sunny2	SUNNY2		
+gText_Rain	RAIN		
+gText_Snow	SNOW		
+gText_Lightning	LIGHTNING		
+gText_Fog	FOG		
+gText_VolcanoAsh	VOLCANO ASH		
+gText_Sandstorm	SANDSTORM		
+gText_Fog2	FOG2		
+gText_Seafloor	SEAFLOOR		
+gText_Cloudy	CLOUDY		
+gText_Sunny3	SUNNY3		
+gText_HeavyRain	HEAVY RAIN		
+gText_Seafloor2	SEAFLOOR2		
+gText_DelAll	DEL. ALL		
+gText_Cancel5	CANCEL		
+gText_Ok2	OK		
+gText_Quiz	QUIZ		
+gText_Answer	ANSWER		
+gText_PokeBalls	POKé BALLS		
+gText_Berry	BERRY	BES	
+gText_Berries	BERRIES	BESSEN	
