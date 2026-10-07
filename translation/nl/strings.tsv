@@ -94,7 +94,7 @@ gText_DefaultNameHalie	HALIE
 gText_ThisIsAPokemon	This is what we call a “POKéMON.”{PAUSE 96}\p	Dit noemen wij een “POKéMON”.{PAUSE 96}\p	
 gText_5MarksPokemon	????? POKéMON		
 gText_UnkHeight	{CLEAR_TO 12}??'??”		
-gText_UnkWeight	????.? lbs.		
+gText_UnkWeight	????.? lbs.	????.? lbs.	
 gText_EmptyPkmnCategory	                       POKéMON		
 gText_EmptyHeight	{CLEAR_TO 12}    '    ”		
 gText_EmptyWeight	        .   lbs.		
@@ -232,22 +232,22 @@ gText_CantDismountBike	You can't dismount your BIKE here.{PAUSE_UNTIL_PRESS}	Hie
 gText_ItemFinderNearby	Huh?\nThe ITEMFINDER's responding!\pThere's an item buried around here!{PAUSE_UNTIL_PRESS}	Hè?\nDe SCHATZOEKER piept!\pHier ligt iets begraven!{PAUSE_UNTIL_PRESS}	
 gText_ItemFinderOnTop	Oh!\nThe ITEMFINDER's shaking wildly!{PAUSE_UNTIL_PRESS}	O!\nDe SCHATZOEKER trilt heel hard!{PAUSE_UNTIL_PRESS}	
 gText_ItemFinderNothing	… … … …Nope!\nThere's no response.{PAUSE_UNTIL_PRESS}	… … … …Niks!\nGeen reactie.{PAUSE_UNTIL_PRESS}	
-gText_CoinCase	Your COINS:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}		
-gText_BootedUpTM	Booted up a TM.		
-gText_BootedUpHM	Booted up an HM.		
-gText_TMHMContainedVar1	It contained\n{STR_VAR_1}.\pTeach {STR_VAR_1}\nto a POKéMON?		
-gText_PlayerUsedVar2	{PLAYER} used the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}		
-gText_RepelEffectsLingered	But the effects of a REPEL\nlingered from earlier.{PAUSE_UNTIL_PRESS}		
-gText_UsedVar2WildLured	{PLAYER} used the\n{STR_VAR_2}.\pWild POKéMON will be lured.{PAUSE_UNTIL_PRESS}		
-gText_UsedVar2WildRepelled	{PLAYER} used the\n{STR_VAR_2}.\pWild POKéMON will be repelled.{PAUSE_UNTIL_PRESS}		
-gText_BoxFull	The BOX is full.{PAUSE_UNTIL_PRESS}		
-gText_PowderQty	POWDER QTY: {STR_VAR_1}{PAUSE_UNTIL_PRESS}		
-gText_TheField	the field		
-gText_TheBattle	the battle		
-gText_ThePokemonList	the POKéMON LIST		
-gText_TheShop	the shop		
-gText_ThePC	the PC		
-gText_ReturnToVar1	Return to\n{STR_VAR_1}.		
+gText_CoinCase	Your COINS:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}	Je MUNTEN:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}	
+gText_BootedUpTM	Booted up a TM.	Je zet een TM aan.	label-ok: reviewed
+gText_BootedUpHM	Booted up an HM.	Je zet een HM aan.	label-ok: reviewed
+gText_TMHMContainedVar1	It contained\n{STR_VAR_1}.\pTeach {STR_VAR_1}\nto a POKéMON?	Er staat\n{STR_VAR_1} op.\pWil je {STR_VAR_1}\naan een POKéMON leren?	label-ok: reviewed
+gText_PlayerUsedVar2	{PLAYER} used the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}	{PLAYER} gebruikt\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}	
+gText_RepelEffectsLingered	But the effects of a REPEL\nlingered from earlier.{PAUSE_UNTIL_PRESS}	Maar het vorige AFWEER\nwerkt nog.{PAUSE_UNTIL_PRESS}	
+gText_UsedVar2WildLured	{PLAYER} used the\n{STR_VAR_2}.\pWild POKéMON will be lured.{PAUSE_UNTIL_PRESS}	{PLAYER} gebruikt\n{STR_VAR_2}.\pWilde POKéMON komen eraan.{PAUSE_UNTIL_PRESS}	
+gText_UsedVar2WildRepelled	{PLAYER} used the\n{STR_VAR_2}.\pWild POKéMON will be repelled.{PAUSE_UNTIL_PRESS}	{PLAYER} gebruikt\n{STR_VAR_2}.\pWilde POKéMON blijven weg.{PAUSE_UNTIL_PRESS}	
+gText_BoxFull	The BOX is full.{PAUSE_UNTIL_PRESS}	De BOX is vol.{PAUSE_UNTIL_PRESS}	
+gText_PowderQty	POWDER QTY: {STR_VAR_1}{PAUSE_UNTIL_PRESS}	POEDER: {STR_VAR_1}{PAUSE_UNTIL_PRESS}	
+gText_TheField	the field	buiten	
+gText_TheBattle	the battle	het gevecht	label-ok: reviewed
+gText_ThePokemonList	the POKéMON LIST	de POKéMON-LIJST	label-ok: reviewed
+gText_TheShop	the shop	de winkel	label-ok: reviewed
+gText_ThePC	the PC	de PC	
+gText_ReturnToVar1	Return to\n{STR_VAR_1}.	Terug naar\n{STR_VAR_1}.	
 gText_ItemsPocket	ITEMS	VOORWERPEN	label-ok: reviewed
 gText_PokeBallsPocket	POKé BALLS		
 gText_TMHMPocket	TMs & HMs	TM's & HM's	label-ok: reviewed
@@ -264,233 +264,233 @@ gBerryFirmnessString_Hard	Hard
 gBerryFirmnessString_VeryHard	Very hard	Heel hard	
 gBerryFirmnessString_SuperHard	Super hard	Superhard	
 gText_NumberVar1Var2	{NO}{STR_VAR_1} {STR_VAR_2}		
-gText_BerryTag	BERRY TAG		
-gText_RedPokeblock	RED {POKEBLOCK}		
-gText_BluePokeblock	BLUE {POKEBLOCK}		
-gText_PinkPokeblock	PINK {POKEBLOCK}		
-gText_GreenPokeblock	GREEN {POKEBLOCK}		
-gText_YellowPokeblock	YELLOW {POKEBLOCK}		
-gText_PurplePokeblock	PURPLE {POKEBLOCK}		
-gText_IndigoPokeblock	INDIGO {POKEBLOCK}		
-gText_BrownPokeblock	BROWN {POKEBLOCK}		
-gText_LiteBluePokeblock	LITEBLUE {POKEBLOCK}		
-gText_OlivePokeblock	OLIVE {POKEBLOCK}		
-gText_GrayPokeblock	GRAY {POKEBLOCK}		
-gText_BlackPokeblock	BLACK {POKEBLOCK}		
-gText_WhitePokeblock	WHITE {POKEBLOCK}		
-gText_GoldPokeblock	GOLD {POKEBLOCK}		
-gText_Spicy	SPICY		
-gText_Dry	DRY		
-gText_Sweet	SWEET		
-gText_Bitter	BITTER		
-gText_Sour	SOUR		
-gText_Tasty	TASTY		
-gText_Feel	FEEL		
-gText_StowCase	Stow CASE.		
+gText_BerryTag	BERRY TAG	BESSENLABEL	label-ok: reviewed
+gText_RedPokeblock	RED {POKEBLOCK}	RODE {POKEBLOCK}	label-ok: reviewed
+gText_BluePokeblock	BLUE {POKEBLOCK}	BLAUWE {POKEBLOCK}	label-ok: reviewed
+gText_PinkPokeblock	PINK {POKEBLOCK}	ROZE {POKEBLOCK}	
+gText_GreenPokeblock	GREEN {POKEBLOCK}	GROENE {POKEBLOCK}	label-ok: reviewed
+gText_YellowPokeblock	YELLOW {POKEBLOCK}	GELE {POKEBLOCK}	
+gText_PurplePokeblock	PURPLE {POKEBLOCK}	PAARSE {POKEBLOCK}	
+gText_IndigoPokeblock	INDIGO {POKEBLOCK}	INDIGO {POKEBLOCK}	
+gText_BrownPokeblock	BROWN {POKEBLOCK}	BRUINE {POKEBLOCK}	label-ok: reviewed
+gText_LiteBluePokeblock	LITEBLUE {POKEBLOCK}	IJSBLAUWE {POKEBLOCK}	label-ok: reviewed
+gText_OlivePokeblock	OLIVE {POKEBLOCK}	OLIJF {POKEBLOCK}	
+gText_GrayPokeblock	GRAY {POKEBLOCK}	GRIJZE {POKEBLOCK}	label-ok: reviewed
+gText_BlackPokeblock	BLACK {POKEBLOCK}	ZWARTE {POKEBLOCK}	label-ok: reviewed
+gText_WhitePokeblock	WHITE {POKEBLOCK}	WITTE {POKEBLOCK}	
+gText_GoldPokeblock	GOLD {POKEBLOCK}	GOUDEN {POKEBLOCK}	label-ok: reviewed
+gText_Spicy	SPICY	PITTIG	label-ok: reviewed
+gText_Dry	DRY	DROOG	label-ok: reviewed
+gText_Sweet	SWEET	ZOET	
+gText_Bitter	BITTER	BITTER	
+gText_Sour	SOUR	ZUUR	
+gText_Tasty	TASTY	LEKKER	label-ok: reviewed
+gText_Feel	FEEL	GEVOEL	label-ok: reviewed
+gText_StowCase	Stow CASE.	Doos wegleggen.	label-ok: reviewed
 gText_LvVar1	{LV}{STR_VAR_1}		
-gText_ThrowAwayVar1	Throw away this\n{STR_VAR_1}?		
-gText_Var1ThrownAway	The {STR_VAR_1}\nwas thrown away.		
-gText_Var1AteTheVar2	{STR_VAR_1} ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}		
-gText_Var1HappilyAteVar2	{STR_VAR_1} happily ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}		
-gText_Var1DisdainfullyAteVar2	{STR_VAR_1} disdainfully ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}		
-gText_ShopBuy	BUY		
-gText_ShopSell	SELL		
-gText_ShopQuit	QUIT		
-gText_InBagVar1	IN BAG: {STR_VAR_1}		
-gText_QuitShopping	Quit shopping.		
-gText_Var1CertainlyHowMany	{STR_VAR_1}? Certainly.\nHow many would you like?		
-gText_Var1CertainlyHowMany2	{STR_VAR_1}? Certainly.\nHow many would you like?		
-gText_Var1AndYouWantedVar2	{STR_VAR_1}? And you wanted {STR_VAR_2}?\nThat will be ¥{STR_VAR_3}.		width-ok: STR_VAR_3 is a price
-gText_Var1IsItThatllBeVar2	{STR_VAR_1}, is it?\nThat'll be ¥{STR_VAR_2}. Do you want it?		
-gText_YouWantedVar1ThatllBeVar2	You wanted {STR_VAR_1}?\nThat'll be ¥{STR_VAR_2}. Will that be okay?		width-ok: STR_VAR_2 is a price
-gText_HereYouGoThankYou	Here you go!\nThank you very much.		
-gText_ThankYouIllSendItHome	Thank you!\nI'll send it to your home PC.		
-gText_ThanksIllSendItHome	Thanks!\nI'll send it to your PC at home.		
-gText_YouDontHaveMoney	You don't have enough money.{PAUSE_UNTIL_PRESS}		
-gText_NoMoreRoomForThis	You have no more room for this\nitem.{PAUSE_UNTIL_PRESS}		
-gText_SpaceForVar1Full	The space for {STR_VAR_1} is full.{PAUSE_UNTIL_PRESS}		
-gText_AnythingElseICanHelp	Is there anything else I can help\nyou with?		
-gText_CanIHelpWithAnythingElse	Can I help you with anything else?		
-gText_ThrowInPremierBall	I'll throw in a PREMIER BALL, too.{PAUSE_UNTIL_PRESS}		
-gText_CantBuyKeyItem	{STR_VAR_2}? Oh, no.\nI can't buy that.{PAUSE_UNTIL_PRESS}		
-gText_HowManyToSell	{STR_VAR_2}?\nHow many would you like to sell?		
-gText_ICanPayVar1	I can pay ¥{STR_VAR_1}.\nWould that be okay?		
-gText_TurnedOverVar1ForVar2	Turned over the {STR_VAR_2}\nand received ¥{STR_VAR_1}.		
+gText_ThrowAwayVar1	Throw away this\n{STR_VAR_1}?	Deze {STR_VAR_1}\nweggooien?	label-ok: reviewed
+gText_Var1ThrownAway	The {STR_VAR_1}\nwas thrown away.	{STR_VAR_1}\nis weggegooid.	
+gText_Var1AteTheVar2	{STR_VAR_1} ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}	{STR_VAR_1} eet\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}	
+gText_Var1HappilyAteVar2	{STR_VAR_1} happily ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}	{STR_VAR_1} eet blij\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}	
+gText_Var1DisdainfullyAteVar2	{STR_VAR_1} disdainfully ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}	{STR_VAR_1} eet met tegenzin\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}	
+gText_ShopBuy	BUY	KOOP	label-ok: reviewed
+gText_ShopSell	SELL	VERKOOP	label-ok: reviewed
+gText_ShopQuit	QUIT	STOP	
+gText_InBagVar1	IN BAG: {STR_VAR_1}	IN TAS: {STR_VAR_1}	
+gText_QuitShopping	Quit shopping.	Stoppen met winkelen.	label-ok: reviewed
+gText_Var1CertainlyHowMany	{STR_VAR_1}? Certainly.\nHow many would you like?	{STR_VAR_1}? Prima.\nHoeveel wil je er?	
+gText_Var1CertainlyHowMany2	{STR_VAR_1}? Certainly.\nHow many would you like?	{STR_VAR_1}? Prima.\nHoeveel wil je er?	
+gText_Var1AndYouWantedVar2	{STR_VAR_1}? And you wanted {STR_VAR_2}?\nThat will be ¥{STR_VAR_3}.	{STR_VAR_1}? En je wilt er {STR_VAR_2}?\nDat is dan ¥{STR_VAR_3}.	width-ok: STR_VAR_3 is a price
+gText_Var1IsItThatllBeVar2	{STR_VAR_1}, is it?\nThat'll be ¥{STR_VAR_2}. Do you want it?	{STR_VAR_1}, toch?\nDat is ¥{STR_VAR_2}. Wil je hem?	
+gText_YouWantedVar1ThatllBeVar2	You wanted {STR_VAR_1}?\nThat'll be ¥{STR_VAR_2}. Will that be okay?	Je wilt {STR_VAR_1}?\nDat is ¥{STR_VAR_2}. Is dat goed?	width-ok: STR_VAR_2 is a price
+gText_HereYouGoThankYou	Here you go!\nThank you very much.	Alsjeblieft!\nHeel erg bedankt.	
+gText_ThankYouIllSendItHome	Thank you!\nI'll send it to your home PC.	Bedankt!\nIk stuur het naar je PC thuis.	
+gText_ThanksIllSendItHome	Thanks!\nI'll send it to your PC at home.	Dank je!\nIk stuur het naar je PC thuis.	
+gText_YouDontHaveMoney	You don't have enough money.{PAUSE_UNTIL_PRESS}	Je hebt niet genoeg geld.{PAUSE_UNTIL_PRESS}	
+gText_NoMoreRoomForThis	You have no more room for this\nitem.{PAUSE_UNTIL_PRESS}	Je hebt geen plek meer voor dit\nvoorwerp.{PAUSE_UNTIL_PRESS}	
+gText_SpaceForVar1Full	The space for {STR_VAR_1} is full.{PAUSE_UNTIL_PRESS}	Er is geen plek meer voor {STR_VAR_1}.{PAUSE_UNTIL_PRESS}	
+gText_AnythingElseICanHelp	Is there anything else I can help\nyou with?	Kan ik je nog ergens anders\nmee helpen?	
+gText_CanIHelpWithAnythingElse	Can I help you with anything else?	Kan ik je nog ergens mee helpen?	
+gText_ThrowInPremierBall	I'll throw in a PREMIER BALL, too.{PAUSE_UNTIL_PRESS}	Je krijgt er een PREMIERBALL bij.{PAUSE_UNTIL_PRESS}	
+gText_CantBuyKeyItem	{STR_VAR_2}? Oh, no.\nI can't buy that.{PAUSE_UNTIL_PRESS}	{STR_VAR_2}? O nee.\nDat kan ik niet kopen.{PAUSE_UNTIL_PRESS}	label-ok: reviewed
+gText_HowManyToSell	{STR_VAR_2}?\nHow many would you like to sell?	{STR_VAR_2}?\nHoeveel wil je verkopen?	
+gText_ICanPayVar1	I can pay ¥{STR_VAR_1}.\nWould that be okay?	Ik kan je ¥{STR_VAR_1} geven.\nIs dat goed?	label-ok: reviewed
+gText_TurnedOverVar1ForVar2	Turned over the {STR_VAR_2}\nand received ¥{STR_VAR_1}.	Je geeft {STR_VAR_2}\nen krijgt ¥{STR_VAR_1}.	
 gText_PokedollarVar1	¥{STR_VAR_1}		
-gText_Shift	SHIFT		
-gText_SendOut	SEND OUT		
-gText_Switch2	SWITCH		
-gText_Summary5	SUMMARY		
-gText_Moves	MOVES		
-gText_Enter	ENTER		
-gText_NoEntry	NO ENTRY		
-gText_Take2	TAKE		
-gText_Read2	READ		
-gText_Trade4	TRADE		
+gText_Shift	SHIFT	WISSEL	label-ok: reviewed
+gText_SendOut	SEND OUT	STUUR	
+gText_Switch2	SWITCH	WISSEL	
+gText_Summary5	SUMMARY	INFO	
+gText_Moves	MOVES	AANVALLEN	label-ok: reviewed
+gText_Enter	ENTER	MEEDOEN	label-ok: reviewed
+gText_NoEntry	NO ENTRY	NIET MEE	
+gText_Take2	TAKE	PAK	
+gText_Read2	READ	LEES	
+gText_Trade4	TRADE	RUIL	
 gText_HP3	HP		
-gText_SpAtk3	SP. ATK		
-gText_SpDef3	SP. DEF		
-gText_WontHaveEffect	It won't have any effect.{PAUSE_UNTIL_PRESS}		
-gText_CantBeUsedOnPkmn	This can't be used on\nthat POKéMON.{PAUSE_UNTIL_PRESS}		
-gText_PkmnCantSwitchOut	{STR_VAR_1} can't be switched\nout!{PAUSE_UNTIL_PRESS}		
-gText_PkmnAlreadyInBattle	{STR_VAR_1} is already\nin battle!{PAUSE_UNTIL_PRESS}		
-gText_PkmnAlreadySelected	{STR_VAR_1} has already been\nselected.{PAUSE_UNTIL_PRESS}		
-gText_PkmnHasNoEnergy	{STR_VAR_1} has no energy\nleft to battle!{PAUSE_UNTIL_PRESS}		
-gText_CantSwitchWithAlly	You can't switch {STR_VAR_1}'s\nPOKéMON with one of yours!{PAUSE_UNTIL_PRESS}		
-gText_EggCantBattle	An EGG can't battle!{PAUSE_UNTIL_PRESS}		
-gText_CantUseUntilNewBadge	This can't be used until a new\nBADGE is obtained.{PAUSE_UNTIL_PRESS}		
-gText_NoMoreThanVar1Pkmn	No more than {STR_VAR_1} POKéMON\nmay enter.{PAUSE_UNTIL_PRESS}		
-gText_SendMailToPC	Send the removed MAIL to\nyour PC?		
-gText_MailSentToPC	The MAIL was sent to your PC.{PAUSE_UNTIL_PRESS}		
-gText_PCMailboxFull	Your PC's MAILBOX is full.{PAUSE_UNTIL_PRESS}		
-gText_MailMessageWillBeLost	If the MAIL is removed, the\nmessage will be lost. Okay?		
-gText_RemoveMailBeforeItem	MAIL must be removed before\nholding an item.{PAUSE_UNTIL_PRESS}		
-gText_PkmnWasGivenItem	{STR_VAR_1} was given the\n{STR_VAR_2} to hold.{PAUSE_UNTIL_PRESS}		
-gText_PkmnAlreadyHoldingItemSwitch	{STR_VAR_1} is already holding\none {STR_VAR_2}.\pWould you like to switch the\ntwo items?		
-gText_PkmnNotHolding	{STR_VAR_1} isn't holding\nanything.{PAUSE_UNTIL_PRESS}		
-gText_ReceivedItemFromPkmn	Received the {STR_VAR_2}\nfrom {STR_VAR_1}.{PAUSE_UNTIL_PRESS}		
-gText_MailTakenFromPkmn	MAIL was taken from the\nPOKéMON.{PAUSE_UNTIL_PRESS}		
-gText_SwitchedPkmnItem	The {STR_VAR_2} was taken and\nreplaced with the {STR_VAR_1}.{PAUSE_UNTIL_PRESS}		
-gText_PkmnHoldingItemCantHoldMail	This POKéMON is holding an\nitem. It cannot hold MAIL.{PAUSE_UNTIL_PRESS}		
-gText_MailTransferredFromMailbox	MAIL was transferred from\nthe MAILBOX.{PAUSE_UNTIL_PRESS}		
-gText_BagFullCouldNotRemoveItem	The BAG is full. The POKéMON's\nitem could not be removed.{PAUSE_UNTIL_PRESS}		
-gText_PkmnLearnedMove3	{STR_VAR_1} learned\n{STR_VAR_2}!		
-gText_PkmnCantLearnMove	{STR_VAR_1} and {STR_VAR_2}\nare not compatible.\p{STR_VAR_2} can't be\nlearned.{PAUSE_UNTIL_PRESS}		
-gText_PkmnNeedsToReplaceMove	{STR_VAR_1} wants to learn the\nmove {STR_VAR_2}.\pHowever, {STR_VAR_1} already\nknows four moves.\pShould a move be deleted and\nreplaced with {STR_VAR_2}?		
-gText_StopLearningMove2	Stop trying to teach\n{STR_VAR_2}?		
-gText_MoveNotLearned	{STR_VAR_1} did not learn the\nmove {STR_VAR_2}.{PAUSE_UNTIL_PRESS}		
-gText_WhichMoveToForget	Which move should be forgotten?{PAUSE_UNTIL_PRESS}		
-gText_12PoofForgotMove	1, {PAUSE 15}2, and{PAUSE 15}… {PAUSE 15}… {PAUSE 15}… {PAUSE 15}{PLAY_SE SE_BALL_BOUNCE_1}Poof!\p{STR_VAR_1} forgot how to\nuse {STR_VAR_2}.\pAnd…{PAUSE_UNTIL_PRESS}		
-gText_PkmnAlreadyKnows	{STR_VAR_1} already knows\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}		
-gText_PkmnHPRestoredByVar2	{STR_VAR_1}'s HP was restored\nby {STR_VAR_2} point(s).{PAUSE_UNTIL_PRESS}		
-gText_PkmnCuredOfPoison	{STR_VAR_1} was cured of its\npoisoning.{PAUSE_UNTIL_PRESS}		
-gText_PkmnCuredOfParalysis	{STR_VAR_1} was cured of\nparalysis.{PAUSE_UNTIL_PRESS}		
-gText_PkmnWokeUp2	{STR_VAR_1} woke up.{PAUSE_UNTIL_PRESS}		
-gText_PkmnBurnHealed	{STR_VAR_1}'s burn was healed.{PAUSE_UNTIL_PRESS}		
-gText_PkmnThawedOut	{STR_VAR_1} was thawed out.{PAUSE_UNTIL_PRESS}		
-gText_PPWasRestored	PP was restored.{PAUSE_UNTIL_PRESS}		
-gText_PkmnRegainhedHealth	{STR_VAR_1} regained health.{PAUSE_UNTIL_PRESS}		
-gText_PkmnBecameHealthy	{STR_VAR_1} became healthy.{PAUSE_UNTIL_PRESS}		
-gText_MovesPPIncreased	{STR_VAR_1}'s PP increased.{PAUSE_UNTIL_PRESS}		
-gText_PkmnElevatedToLvVar2	{STR_VAR_1} was elevated to\nLv. {STR_VAR_2}.		
-gText_PkmnBaseVar2StatIncreased	{STR_VAR_1}'s base {STR_VAR_2}\nstat was raised.{PAUSE_UNTIL_PRESS}		
-gText_PkmnFriendlyBaseVar2Fell	{STR_VAR_1} turned friendly.\nThe base {STR_VAR_2} fell!{PAUSE_UNTIL_PRESS}		
-gText_PkmnAdoresBaseVar2Fell	{STR_VAR_1} adores you!\nThe base {STR_VAR_2} fell!{PAUSE_UNTIL_PRESS}		
-gText_PkmnFriendlyBaseVar2CantFall	{STR_VAR_1} turned friendly.\nThe base {STR_VAR_2} can't fall!{PAUSE_UNTIL_PRESS}		
-gText_PkmnSnappedOutOfConfusion	{STR_VAR_1} snapped out of its\nconfusion.{PAUSE_UNTIL_PRESS}		
-gText_PkmnGotOverInfatuation	{STR_VAR_1} got over its\ninfatuation.{PAUSE_UNTIL_PRESS}		
-gText_ThrowAwayItem	Throw away this\n{STR_VAR_1}?		
-gText_ItemThrownAway	The {STR_VAR_1}\nwas thrown away.{PAUSE_UNTIL_PRESS}		
-gText_TeachWhichPokemon2	Teach which POKéMON?		
-gText_ChoosePokemon	Choose a POKéMON.		
-gText_MoveToWhere	Move to where?		
-gText_TeachWhichPokemon	Teach which POKéMON?		
-gText_UseOnWhichPokemon	Use on which POKéMON?		
-gText_GiveToWhichPokemon	Give to which POKéMON?		
-gText_DoWhatWithPokemon	Do what with this {PKMN}?		
-gText_NothingToCut	There's nothing to CUT.		
-gText_CantSurfHere	You can't SURF here.		
-gText_AlreadySurfing	You're already SURFING.		
-gText_CantUseHere	Can't use that here.		
-gText_RestoreWhichMove	Restore which move?		
-gText_BoostPP	Boost PP of which move?		
-gText_DoWhatWithItem	Do what with an item?		
-gText_NoPokemonForBattle	No POKéMON for battle!		
-gText_ChoosePokemon2	Choose a POKéMON.		
-gText_NotEnoughHp	Not enough HP…		
-gText_PokemonAreNeeded	{STR_VAR_1} POKéMON are needed.		
-gText_PokemonCantBeSame	POKéMON can't be the same.		
-gText_NoIdenticalHoldItems	No identical hold items.		
-gText_CurrentIsTooFast	The current is much too fast!		
-gText_DoWhatWithMail	Do what with the MAIL?		
-gText_ChoosePokemonCancel	Choose POKéMON or CANCEL.		
-gText_ChoosePokemonConfirm	Choose POKéMON and confirm.		
-gText_EnjoyCycling	Let's enjoy cycling!		
-gText_InUseAlready_PM	This is in use already.		
-gText_AlreadyHoldingOne	{STR_VAR_1} is already holding\none {STR_VAR_2}.		
-gText_NoUse	No use.		
-gText_Able	ABLE		
-gText_First_PM	FIRST		
-gText_Second_PM	SECOND		
-gText_Third_PM	THIRD		
-gText_Able2	ABLE		
-gText_NotAble	NOT ABLE		
-gText_Able3	ABLE!		
-gText_NotAble2	NOT ABLE!		
-gText_Learned	LEARNED		
-gText_Have	HAVE		
-gText_DontHave	DON'T HAVE		
-gText_Fourth	FOURTH		
-gText_PkmnCantParticipate	That POKéMON can't participate.{PAUSE_UNTIL_PRESS}		
-gText_CancelParticipation	Cancel participation?		
-gText_CancelBattle	Cancel the battle?		
-gText_ReturnToWaitingRoom	Return to the WAITING ROOM?		
-gText_CancelChallenge	Cancel the challenge?		
-gText_EscapeFromHere	Want to escape from here and return\nto {STR_VAR_1}?		
-gText_ReturnToHealingSpot	Want to return to the healing spot\nused last in {STR_VAR_1}?		
+gText_SpAtk3	SP. ATK	SP. AANV	label-ok: reviewed
+gText_SpDef3	SP. DEF	SP. VERD	label-ok: reviewed
+gText_WontHaveEffect	It won't have any effect.{PAUSE_UNTIL_PRESS}	Dat heeft geen effect.{PAUSE_UNTIL_PRESS}	
+gText_CantBeUsedOnPkmn	This can't be used on\nthat POKéMON.{PAUSE_UNTIL_PRESS}	Dit werkt niet op\ndie POKéMON.{PAUSE_UNTIL_PRESS}	
+gText_PkmnCantSwitchOut	{STR_VAR_1} can't be switched\nout!{PAUSE_UNTIL_PRESS}	{STR_VAR_1} kan niet\nwisselen!{PAUSE_UNTIL_PRESS}	
+gText_PkmnAlreadyInBattle	{STR_VAR_1} is already\nin battle!{PAUSE_UNTIL_PRESS}	{STR_VAR_1} vecht\nal!{PAUSE_UNTIL_PRESS}	
+gText_PkmnAlreadySelected	{STR_VAR_1} has already been\nselected.{PAUSE_UNTIL_PRESS}	{STR_VAR_1} is al\ngekozen.{PAUSE_UNTIL_PRESS}	
+gText_PkmnHasNoEnergy	{STR_VAR_1} has no energy\nleft to battle!{PAUSE_UNTIL_PRESS}	{STR_VAR_1} heeft geen\nenergie meer!{PAUSE_UNTIL_PRESS}	
+gText_CantSwitchWithAlly	You can't switch {STR_VAR_1}'s\nPOKéMON with one of yours!{PAUSE_UNTIL_PRESS}	Je kunt een POKéMON van {STR_VAR_1}\nniet ruilen met een van jou!{PAUSE_UNTIL_PRESS}	
+gText_EggCantBattle	An EGG can't battle!{PAUSE_UNTIL_PRESS}	Een EI kan niet vechten!{PAUSE_UNTIL_PRESS}	label-ok: reviewed
+gText_CantUseUntilNewBadge	This can't be used until a new\nBADGE is obtained.{PAUSE_UNTIL_PRESS}	Dit kan pas met een nieuwe\nBADGE.{PAUSE_UNTIL_PRESS}	
+gText_NoMoreThanVar1Pkmn	No more than {STR_VAR_1} POKéMON\nmay enter.{PAUSE_UNTIL_PRESS}	Niet meer dan {STR_VAR_1} POKéMON\nmogen meedoen.{PAUSE_UNTIL_PRESS}	
+gText_SendMailToPC	Send the removed MAIL to\nyour PC?	De BRIEF naar je PC\nsturen?	
+gText_MailSentToPC	The MAIL was sent to your PC.{PAUSE_UNTIL_PRESS}	De BRIEF is naar je PC gestuurd.{PAUSE_UNTIL_PRESS}	
+gText_PCMailboxFull	Your PC's MAILBOX is full.{PAUSE_UNTIL_PRESS}	De BRIEVENBUS in je PC is vol.{PAUSE_UNTIL_PRESS}	
+gText_MailMessageWillBeLost	If the MAIL is removed, the\nmessage will be lost. Okay?	Als je de BRIEF weghaalt, is het\nbericht weg. Is dat goed?	
+gText_RemoveMailBeforeItem	MAIL must be removed before\nholding an item.{PAUSE_UNTIL_PRESS}	Haal eerst de BRIEF weg om een\nvoorwerp te geven.{PAUSE_UNTIL_PRESS}	
+gText_PkmnWasGivenItem	{STR_VAR_1} was given the\n{STR_VAR_2} to hold.{PAUSE_UNTIL_PRESS}	{STR_VAR_1} houdt nu\n{STR_VAR_2} vast.{PAUSE_UNTIL_PRESS}	
+gText_PkmnAlreadyHoldingItemSwitch	{STR_VAR_1} is already holding\none {STR_VAR_2}.\pWould you like to switch the\ntwo items?	{STR_VAR_1} houdt al\n{STR_VAR_2} vast.\pWil je de twee voorwerpen\nruilen?	
+gText_PkmnNotHolding	{STR_VAR_1} isn't holding\nanything.{PAUSE_UNTIL_PRESS}	{STR_VAR_1} houdt\nniets vast.{PAUSE_UNTIL_PRESS}	
+gText_ReceivedItemFromPkmn	Received the {STR_VAR_2}\nfrom {STR_VAR_1}.{PAUSE_UNTIL_PRESS}	Je krijgt {STR_VAR_2}\nvan {STR_VAR_1}.{PAUSE_UNTIL_PRESS}	
+gText_MailTakenFromPkmn	MAIL was taken from the\nPOKéMON.{PAUSE_UNTIL_PRESS}	De BRIEF is van de\nPOKéMON afgepakt.{PAUSE_UNTIL_PRESS}	
+gText_SwitchedPkmnItem	The {STR_VAR_2} was taken and\nreplaced with the {STR_VAR_1}.{PAUSE_UNTIL_PRESS}	{STR_VAR_2} is afgepakt en\n{STR_VAR_1} zit ervoor in de plaats.{PAUSE_UNTIL_PRESS}	
+gText_PkmnHoldingItemCantHoldMail	This POKéMON is holding an\nitem. It cannot hold MAIL.{PAUSE_UNTIL_PRESS}	Deze POKéMON houdt al iets\nvast. Een BRIEF kan niet.{PAUSE_UNTIL_PRESS}	
+gText_MailTransferredFromMailbox	MAIL was transferred from\nthe MAILBOX.{PAUSE_UNTIL_PRESS}	De BRIEF komt uit de\nBRIEVENBUS.{PAUSE_UNTIL_PRESS}	
+gText_BagFullCouldNotRemoveItem	The BAG is full. The POKéMON's\nitem could not be removed.{PAUSE_UNTIL_PRESS}	De TAS is vol. Het voorwerp van\nde POKéMON kan er niet in.{PAUSE_UNTIL_PRESS}	
+gText_PkmnLearnedMove3	{STR_VAR_1} learned\n{STR_VAR_2}!	{STR_VAR_1} leert\n{STR_VAR_2}!	
+gText_PkmnCantLearnMove	{STR_VAR_1} and {STR_VAR_2}\nare not compatible.\p{STR_VAR_2} can't be\nlearned.{PAUSE_UNTIL_PRESS}	{STR_VAR_1} en {STR_VAR_2}\npassen niet bij elkaar.\p{STR_VAR_2} kan niet\ngeleerd worden.{PAUSE_UNTIL_PRESS}	
+gText_PkmnNeedsToReplaceMove	{STR_VAR_1} wants to learn the\nmove {STR_VAR_2}.\pHowever, {STR_VAR_1} already\nknows four moves.\pShould a move be deleted and\nreplaced with {STR_VAR_2}?	{STR_VAR_1} wil de aanval\n{STR_VAR_2} leren.\pMaar {STR_VAR_1} kent al\nvier aanvallen.\pWil je een aanval vergeten voor\n{STR_VAR_2}?	
+gText_StopLearningMove2	Stop trying to teach\n{STR_VAR_2}?	Stoppen met\n{STR_VAR_2} leren?	
+gText_MoveNotLearned	{STR_VAR_1} did not learn the\nmove {STR_VAR_2}.{PAUSE_UNTIL_PRESS}	{STR_VAR_1} leert de aanval\n{STR_VAR_2} niet.{PAUSE_UNTIL_PRESS}	
+gText_WhichMoveToForget	Which move should be forgotten?{PAUSE_UNTIL_PRESS}	Welke aanval wil je vergeten?{PAUSE_UNTIL_PRESS}	
+gText_12PoofForgotMove	1, {PAUSE 15}2, and{PAUSE 15}… {PAUSE 15}… {PAUSE 15}… {PAUSE 15}{PLAY_SE SE_BALL_BOUNCE_1}Poof!\p{STR_VAR_1} forgot how to\nuse {STR_VAR_2}.\pAnd…{PAUSE_UNTIL_PRESS}	1, {PAUSE 15}2 en{PAUSE 15}… {PAUSE 15}… {PAUSE 15}… {PAUSE 15}{PLAY_SE SE_BALL_BOUNCE_1}Poef!\p{STR_VAR_1} is\n{STR_VAR_2} vergeten.\pEn…{PAUSE_UNTIL_PRESS}	
+gText_PkmnAlreadyKnows	{STR_VAR_1} already knows\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}	{STR_VAR_1} kent\n{STR_VAR_2} al.{PAUSE_UNTIL_PRESS}	
+gText_PkmnHPRestoredByVar2	{STR_VAR_1}'s HP was restored\nby {STR_VAR_2} point(s).{PAUSE_UNTIL_PRESS}	{STR_VAR_1} krijgt\n{STR_VAR_2} HP terug.{PAUSE_UNTIL_PRESS}	
+gText_PkmnCuredOfPoison	{STR_VAR_1} was cured of its\npoisoning.{PAUSE_UNTIL_PRESS}	{STR_VAR_1} is niet\nmeer vergiftigd.{PAUSE_UNTIL_PRESS}	
+gText_PkmnCuredOfParalysis	{STR_VAR_1} was cured of\nparalysis.{PAUSE_UNTIL_PRESS}	{STR_VAR_1} is niet\nmeer verlamd.{PAUSE_UNTIL_PRESS}	
+gText_PkmnWokeUp2	{STR_VAR_1} woke up.{PAUSE_UNTIL_PRESS}	{STR_VAR_1} is wakker.{PAUSE_UNTIL_PRESS}	label-ok: reviewed
+gText_PkmnBurnHealed	{STR_VAR_1}'s burn was healed.{PAUSE_UNTIL_PRESS}	De brandwond van {STR_VAR_1} is weg.{PAUSE_UNTIL_PRESS}	
+gText_PkmnThawedOut	{STR_VAR_1} was thawed out.{PAUSE_UNTIL_PRESS}	{STR_VAR_1} is ontdooid.{PAUSE_UNTIL_PRESS}	
+gText_PPWasRestored	PP was restored.{PAUSE_UNTIL_PRESS}	PP is hersteld.{PAUSE_UNTIL_PRESS}	
+gText_PkmnRegainhedHealth	{STR_VAR_1} regained health.{PAUSE_UNTIL_PRESS}	{STR_VAR_1} is weer gezond.{PAUSE_UNTIL_PRESS}	
+gText_PkmnBecameHealthy	{STR_VAR_1} became healthy.{PAUSE_UNTIL_PRESS}	{STR_VAR_1} is weer gezond.{PAUSE_UNTIL_PRESS}	
+gText_MovesPPIncreased	{STR_VAR_1}'s PP increased.{PAUSE_UNTIL_PRESS}	PP van {STR_VAR_1} is hoger.{PAUSE_UNTIL_PRESS}	
+gText_PkmnElevatedToLvVar2	{STR_VAR_1} was elevated to\nLv. {STR_VAR_2}.	{STR_VAR_1} gaat naar\nLv. {STR_VAR_2}.	
+gText_PkmnBaseVar2StatIncreased	{STR_VAR_1}'s base {STR_VAR_2}\nstat was raised.{PAUSE_UNTIL_PRESS}	{STR_VAR_1}: {STR_VAR_2}\nis hoger.{PAUSE_UNTIL_PRESS}	
+gText_PkmnFriendlyBaseVar2Fell	{STR_VAR_1} turned friendly.\nThe base {STR_VAR_2} fell!{PAUSE_UNTIL_PRESS}	{STR_VAR_1} wordt vriendelijker.\n{STR_VAR_2} is lager!{PAUSE_UNTIL_PRESS}	
+gText_PkmnAdoresBaseVar2Fell	{STR_VAR_1} adores you!\nThe base {STR_VAR_2} fell!{PAUSE_UNTIL_PRESS}	{STR_VAR_1} is dol op je!\n{STR_VAR_2} is lager!{PAUSE_UNTIL_PRESS}	
+gText_PkmnFriendlyBaseVar2CantFall	{STR_VAR_1} turned friendly.\nThe base {STR_VAR_2} can't fall!{PAUSE_UNTIL_PRESS}	{STR_VAR_1} wordt vriendelijker.\n{STR_VAR_2} kan niet lager!{PAUSE_UNTIL_PRESS}	
+gText_PkmnSnappedOutOfConfusion	{STR_VAR_1} snapped out of its\nconfusion.{PAUSE_UNTIL_PRESS}	{STR_VAR_1} is niet meer\nin de war.{PAUSE_UNTIL_PRESS}	
+gText_PkmnGotOverInfatuation	{STR_VAR_1} got over its\ninfatuation.{PAUSE_UNTIL_PRESS}	{STR_VAR_1} is niet meer\nverliefd.{PAUSE_UNTIL_PRESS}	
+gText_ThrowAwayItem	Throw away this\n{STR_VAR_1}?	Deze {STR_VAR_1}\nweggooien?	label-ok: reviewed
+gText_ItemThrownAway	The {STR_VAR_1}\nwas thrown away.{PAUSE_UNTIL_PRESS}	{STR_VAR_1}\nis weggegooid.{PAUSE_UNTIL_PRESS}	
+gText_TeachWhichPokemon2	Teach which POKéMON?	Welke POKéMON leren?	
+gText_ChoosePokemon	Choose a POKéMON.	Kies een POKéMON.	
+gText_MoveToWhere	Move to where?	Waarheen?	
+gText_TeachWhichPokemon	Teach which POKéMON?	Welke POKéMON leren?	
+gText_UseOnWhichPokemon	Use on which POKéMON?	Op welke POKéMON?	
+gText_GiveToWhichPokemon	Give to which POKéMON?	Aan welke POKéMON?	
+gText_DoWhatWithPokemon	Do what with this {PKMN}?	Wat doe je met deze {PKMN}?	label-ok: reviewed
+gText_NothingToCut	There's nothing to CUT.	Er is niets om te SNIJDEN.	label-ok: reviewed
+gText_CantSurfHere	You can't SURF here.	Hier kun je niet SURFEN.	label-ok: reviewed
+gText_AlreadySurfing	You're already SURFING.	Je bent al aan het SURFEN.	label-ok: reviewed
+gText_CantUseHere	Can't use that here.	Dat werkt hier niet.	
+gText_RestoreWhichMove	Restore which move?	Welke aanval?	
+gText_BoostPP	Boost PP of which move?	PP van welke aanval?	
+gText_DoWhatWithItem	Do what with an item?	Wat doe je met een voorwerp?	label-ok: reviewed
+gText_NoPokemonForBattle	No POKéMON for battle!	Geen POKéMON om te vechten!	label-ok: reviewed
+gText_ChoosePokemon2	Choose a POKéMON.	Kies een POKéMON.	
+gText_NotEnoughHp	Not enough HP…	Niet genoeg HP…	label-ok: reviewed
+gText_PokemonAreNeeded	{STR_VAR_1} POKéMON are needed.	Je hebt {STR_VAR_1} POKéMON nodig.	
+gText_PokemonCantBeSame	POKéMON can't be the same.	POKéMON mogen niet hetzelfde zijn.	
+gText_NoIdenticalHoldItems	No identical hold items.	Niet 2x hetzelfde voorwerp.	label-ok: reviewed
+gText_CurrentIsTooFast	The current is much too fast!	De stroming is veel te snel!	
+gText_DoWhatWithMail	Do what with the MAIL?	Wat doe je met de BRIEF?	label-ok: reviewed
+gText_ChoosePokemonCancel	Choose POKéMON or CANCEL.	Kies POKéMON of TERUG.	
+gText_ChoosePokemonConfirm	Choose POKéMON and confirm.	Kies POKéMON en bevestig.	
+gText_EnjoyCycling	Let's enjoy cycling!	Veel fietsplezier!	
+gText_InUseAlready_PM	This is in use already.	Dit wordt al gebruikt.	
+gText_AlreadyHoldingOne	{STR_VAR_1} is already holding\none {STR_VAR_2}.	{STR_VAR_1} houdt al\n{STR_VAR_2} vast.	
+gText_NoUse	No use.	Werkt niet.	label-ok: reviewed
+gText_Able	ABLE	KAN	
+gText_First_PM	FIRST	EERSTE	label-ok: reviewed
+gText_Second_PM	SECOND	TWEEDE	
+gText_Third_PM	THIRD	DERDE	
+gText_Able2	ABLE	KAN	
+gText_NotAble	NOT ABLE	KAN NIET	
+gText_Able3	ABLE!	KAN!	
+gText_NotAble2	NOT ABLE!	KAN NIET!	
+gText_Learned	LEARNED	GELEERD	
+gText_Have	HAVE	HEB IK	label-ok: reviewed
+gText_DontHave	DON'T HAVE	HEB IK NIET	label-ok: reviewed
+gText_Fourth	FOURTH	VIERDE	
+gText_PkmnCantParticipate	That POKéMON can't participate.{PAUSE_UNTIL_PRESS}	Die POKéMON mag niet meedoen.{PAUSE_UNTIL_PRESS}	
+gText_CancelParticipation	Cancel participation?	Stoppen met meedoen?	
+gText_CancelBattle	Cancel the battle?	Gevecht stoppen?	
+gText_ReturnToWaitingRoom	Return to the WAITING ROOM?	Terug naar de WACHTKAMER?	
+gText_CancelChallenge	Cancel the challenge?	Uitdaging stoppen?	
+gText_EscapeFromHere	Want to escape from here and return\nto {STR_VAR_1}?	Wil je hier weg en terug\nnaar {STR_VAR_1}?	
+gText_ReturnToHealingSpot	Want to return to the healing spot\nused last in {STR_VAR_1}?	Wil je terug naar de laatste\ngeneesplek in {STR_VAR_1}?	
 gText_PauseUntilPress	{PAUSE_UNTIL_PRESS}		
-gText_OnlyPkmnForBattle	That's your only\nPOKéMON for battle.		
-gText_PkmnCantBeTradedNow	That POKéMON can't be traded\nnow.		
-gText_EggCantBeTradedNow	An EGG can't be traded now.		
-gText_OtherTrainersPkmnCantBeTraded	The other TRAINER's POKéMON\ncan't be traded now.		
-gText_OtherTrainerCantAcceptPkmn	The other TRAINER can't accept\nthat POKéMON now.		
-gText_CantTradeWithTrainer	You can't trade with that\nTRAINER now.		
-gText_NotPkmnOtherTrainerWants	That isn't the type of POKéMON\nthat the other TRAINER wants.		
-gText_ThatIsntAnEgg	That isn't an EGG.		
-gText_Register	REGISTER		
-gText_Attack3	ATTACK		
-gText_Defense3	DEFENSE		
-gText_SpAtk4	SP. ATK		
-gText_SpDef4	SP. DEF		
-gText_Speed2	SPEED		
+gText_OnlyPkmnForBattle	That's your only\nPOKéMON for battle.	Dat is je enige\nPOKéMON om te vechten.	label-ok: reviewed
+gText_PkmnCantBeTradedNow	That POKéMON can't be traded\nnow.	Die POKéMON kun je nu niet\nruilen.	
+gText_EggCantBeTradedNow	An EGG can't be traded now.	Een EI kun je nu niet ruilen.	
+gText_OtherTrainersPkmnCantBeTraded	The other TRAINER's POKéMON\ncan't be traded now.	De POKéMON van de andere TRAINER\nkun je nu niet ruilen.	
+gText_OtherTrainerCantAcceptPkmn	The other TRAINER can't accept\nthat POKéMON now.	De andere TRAINER kan die\nPOKéMON nu niet aannemen.	
+gText_CantTradeWithTrainer	You can't trade with that\nTRAINER now.	Je kunt nu niet ruilen met\ndie TRAINER.	
+gText_NotPkmnOtherTrainerWants	That isn't the type of POKéMON\nthat the other TRAINER wants.	Dat is niet de POKéMON die\nde andere TRAINER wil.	
+gText_ThatIsntAnEgg	That isn't an EGG.	Dat is geen EI.	
+gText_Register	REGISTER	KOPPEL	
+gText_Attack3	ATTACK	AANVAL	
+gText_Defense3	DEFENSE	VERD.	
+gText_SpAtk4	SP. ATK	SP.AAN	
+gText_SpDef4	SP. DEF	SP.VER	
+gText_Speed2	SPEED	SNELH.	label-ok: reviewed
 gText_HP4	HP		
 gText_EmptyString8			
-gText_OTSlash	OT/		
-gText_RentalPkmn	RENTAL POKéMON		
-gText_TypeSlash	TYPE/		
-gText_Power	POWER		
-gText_Accuracy2	ACCURACY		
-gText_Appeal	APPEAL		
-gText_Jam	JAM		
-gText_Status	STATUS		
-gText_ExpPoints	EXP. POINTS		
-gText_NextLv	NEXT LV.		
-gText_RibbonsVar1	RIBBONS: {STR_VAR_1}		
+gText_OTSlash	OT/	OT/	
+gText_RentalPkmn	RENTAL POKéMON	HUUR-POKéMON	
+gText_TypeSlash	TYPE/	TYPE/	
+gText_Power	POWER	KRACHT	label-ok: reviewed
+gText_Accuracy2	ACCURACY	RAAKKANS	
+gText_Appeal	APPEAL	SHOW	
+gText_Jam	JAM	STOREN	label-ok: reviewed
+gText_Status	STATUS	STATUS	
+gText_ExpPoints	EXP. POINTS	EXP.-PUNTEN	label-ok: reviewed
+gText_NextLv	NEXT LV.	VOLG. LV.	label-ok: reviewed
+gText_RibbonsVar1	RIBBONS: {STR_VAR_1}	LINTEN: {STR_VAR_1}	
 gText_EmptyString5			
-gText_Events	EVENTS		
-gText_Switch	SWITCH		
-gText_PkmnInfo	POKéMON INFO		
-gText_PkmnSkills	POKéMON SKILLS		
-gText_BattleMoves	BATTLE MOVES		
-gText_ContestMoves	C0NTEST MOVES		
-gText_Info	INFO		
-gText_EggWillTakeALongTime	It looks like this EGG will\ntake a long time to hatch.		
-gText_EggWillTakeSomeTime	What will hatch from this?\nIt will take some time.		
-gText_EggWillHatchSoon	It moves occasionally.\nIt should hatch soon.		
-gText_EggAboutToHatch	It's making sounds.\nIt's about to hatch!		
-gText_HMMovesCantBeForgotten2	HM moves can't be\nforgotten now.		
-gText_XNatureMetAtYZ	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nmet at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.		
-gText_XNatureHatchedAtYZ	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nhatched at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.		
-gText_XNatureObtainedInTrade	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nobtained in a trade.		
-gText_XNatureFatefulEncounter	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nobtained in a fateful\nencounter at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.		
-gText_XNatureProbablyMetAt	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nprobably met at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.		
-gText_XNature	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature		
-gText_XNatureMetSomewhereAt	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nmet somewhere at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.		
-gText_XNatureHatchedSomewhereAt	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nhatched somewhere at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.		
-gText_OddEggFoundByCouple	An odd POKéMON EGG found\nby the DAY CARE couple.		
-gText_PeculiarEggNicePlace	A peculiar POKéMON EGG\nobtained at the nice place.		
-gText_PeculiarEggTrade	A peculiar POKéMON EGG\nobtained in a trade.		
-gText_EggFromHotSprings	A POKéMON EGG obtained\nat the hot springs.		
-gText_EggFromTraveler	An odd POKéMON EGG\nobtained from a traveler.		
-gText_ApostropheSBase	's BASE		
-gText_OkayToDeleteFromRegistry	Is it okay to delete {STR_VAR_1}\nfrom the REGISTRY?		
-gText_RegisteredDataDeleted	The registered data was deleted.{PAUSE_UNTIL_PRESS}		
-gText_NoRegistry	There is no REGISTRY.{PAUSE_UNTIL_PRESS}		
-gText_DelRegist	DEL REGIST.		
+gText_Events	EVENTS	EVENTS	
+gText_Switch	SWITCH	WISSEL	
+gText_PkmnInfo	POKéMON INFO	POKéMON-INFO	label-ok: reviewed
+gText_PkmnSkills	POKéMON SKILLS	VAARDIGHEDEN	
+gText_BattleMoves	BATTLE MOVES	AANVALLEN	
+gText_ContestMoves	C0NTEST MOVES	WEDSTRIJD	
+gText_Info	INFO	INFO	
+gText_EggWillTakeALongTime	It looks like this EGG will\ntake a long time to hatch.	Dit EI heeft nog heel lang\nnodig om uit te komen.	
+gText_EggWillTakeSomeTime	What will hatch from this?\nIt will take some time.	Wat komt hier uit?\nHet duurt nog even.	
+gText_EggWillHatchSoon	It moves occasionally.\nIt should hatch soon.	Het beweegt soms.\nHet komt vast snel uit.	label-ok: reviewed
+gText_EggAboutToHatch	It's making sounds.\nIt's about to hatch!	Het maakt geluid.\nHet komt bijna uit!	
+gText_HMMovesCantBeForgotten2	HM moves can't be\nforgotten now.	HM-aanvallen kun je nu\nniet vergeten.	label-ok: reviewed
+gText_XNatureMetAtYZ	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nmet at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} karakter,\nontmoet op {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.	label-ok: reviewed
+gText_XNatureHatchedAtYZ	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nhatched at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} karakter,\nuitgekomen op {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.	label-ok: reviewed
+gText_XNatureObtainedInTrade	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nobtained in a trade.	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} karakter,\ngekregen bij een ruil.	label-ok: reviewed
+gText_XNatureFatefulEncounter	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nobtained in a fateful\nencounter at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} karakter,\ngekregen bij een speciale\nontmoeting op {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.	label-ok: reviewed
+gText_XNatureProbablyMetAt	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nprobably met at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} karakter,\nontmoet op {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.	
+gText_XNature	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} karakter	label-ok: reviewed
+gText_XNatureMetSomewhereAt	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nmet somewhere at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} karakter,\nergens ontmoet op {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.	label-ok: reviewed
+gText_XNatureHatchedSomewhereAt	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nhatched somewhere at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.	{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} karakter,\nuitgekomen op {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.	
+gText_OddEggFoundByCouple	An odd POKéMON EGG found\nby the DAY CARE couple.	Een vreemd POKéMON-EI van\nhet oppas-echtpaar.	
+gText_PeculiarEggNicePlace	A peculiar POKéMON EGG\nobtained at the nice place.	Een vreemd POKéMON-EI van\neen fijne plek.	
+gText_PeculiarEggTrade	A peculiar POKéMON EGG\nobtained in a trade.	Een vreemd POKéMON-EI\ngekregen bij een ruil.	label-ok: reviewed
+gText_EggFromHotSprings	A POKéMON EGG obtained\nat the hot springs.	Een POKéMON-EI van\nde warmwaterbronnen.	
+gText_EggFromTraveler	An odd POKéMON EGG\nobtained from a traveler.	Een vreemd POKéMON-EI\nvan een reiziger.	
+gText_ApostropheSBase	's BASE	's BASIS	label-ok: reviewed
+gText_OkayToDeleteFromRegistry	Is it okay to delete {STR_VAR_1}\nfrom the REGISTRY?	Wil je {STR_VAR_1} wissen\nuit de LIJST?	
+gText_RegisteredDataDeleted	The registered data was deleted.{PAUSE_UNTIL_PRESS}	De gegevens zijn gewist.{PAUSE_UNTIL_PRESS}	
+gText_NoRegistry	There is no REGISTRY.{PAUSE_UNTIL_PRESS}	Er is geen LIJST.{PAUSE_UNTIL_PRESS}	
+gText_DelRegist	DEL REGIST.	WIS UIT LIJST	label-ok: reviewed
 gText_Var3Var1SlashVar2	{STR_VAR_3}{STR_VAR_1}/{STR_VAR_2}		
-gText_Decorate	DECORATE		
-gText_PutAway	PUT AWAY		
-gText_Toss2	TOSS		
+gText_Decorate	DECORATE	VERSIER	
+gText_PutAway	PUT AWAY	OPRUIMEN	label-ok: reviewed
+gText_Toss2	TOSS	WEG	
 gText_Color161Shadow161	{COLOR 161}{SHADOW 161}		
 gText_PutOutSelectedDecorItem	Put out the selected decoration item.		
 gText_StoreChosenDecorInPC	Store the chosen decoration in the PC.		
