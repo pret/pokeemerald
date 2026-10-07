@@ -1,195 +1,195 @@
 @ Contest move effect descriptions
 
 gText_HighlyAppealingMove::
-	.string "A highly appealing move.$"
+	.string "Een heel mooi optreden.$"
 
 gText_UserMoreEasilyStartled::
-	.string "After this move, the user is\n"
-	.string "more easily startled.$"
+	.string "Hierna schrikt de POKéMON\n"
+	.string "zelf sneller.$"
 
 gText_GreatAppealButNoMoreToEnd::
-	.string "Makes a great appeal, but\n"
-	.string "allows no more to the end.$"
+	.string "Een super optreden, maar\n"
+	.string "hierna mag je niet meer.$"
 
 gText_UsedRepeatedlyWithoutBoringJudge::
-	.string "Can be repeatedly used\n"
-	.string "without boring the JUDGE.$"
+	.string "Kan vaak achter elkaar, de\n"
+	.string "JURY verveelt zich niet.$"
 
 gText_AvoidStartledByOthersOnce::
-	.string "Can avoid being startled\n"
-	.string "by others once.$"
+	.string "Schrikt 1 keer niet van\n"
+	.string "de anderen.$"
 
 gText_AvoidStartledByOthers::
-	.string "Can avoid being startled\n"
-	.string "by others.$"
+	.string "Schrikt niet van\n"
+	.string "de anderen.$"
 
 gText_AvoidStartledByOthersLittle::
-	.string "Can avoid being startled\n"
-	.string "by others a little.$"
+	.string "Schrikt iets minder van\n"
+	.string "de anderen.$"
 
 gText_UserLessLikelyStartled::
-	.string "After this move, the user is\n"
-	.string "less likely to be startled.$"
+	.string "Hierna schrikt de POKéMON\n"
+	.string "zelf minder snel.$"
 
 gText_SlightlyStartleFrontMon::
-	.string "Slightly startles the\n"
-	.string "POKéMON in front.$"
+	.string "Laat de POKéMON ervoor\n"
+	.string "een beetje schrikken.$"
 
 gText_SlightlyStartleAppealed::
-	.string "Slightly startles those\n"
-	.string "that have made appeals.$"
+	.string "Laat wie al optrad een\n"
+	.string "beetje schrikken.$"
 
 gText_StartleAppealedBeforeUser::
-	.string "Startles the POKéMON that\n"
-	.string "appealed before the user.$"
+	.string "Laat de POKéMON die net\n"
+	.string "optrad schrikken.$"
 
 gText_StartleAllAppealed::
-	.string "Startles all POKéMON that\n"
-	.string "have done their appeals.$"
+	.string "Laat iedereen die al\n"
+	.string "optrad schrikken.$"
 
 gText_BadlyStartleFrontMon::
-	.string "Badly startles the\n"
-	.string "POKéMON in front.$"
+	.string "Laat de POKéMON ervoor\n"
+	.string "flink schrikken.$"
 
 gText_BadlyStartleAppealed::
-	.string "Badly startles those that\n"
-	.string "have made appeals.$"
+	.string "Laat wie al optrad\n"
+	.string "flink schrikken.$"
 
 gText_StartleAppealedBeforeUser2::
-	.string "Startles the POKéMON that\n"
-	.string "appealed before the user.$"
+	.string "Laat de POKéMON die net\n"
+	.string "optrad schrikken.$"
 
 gText_StartleAllAppealed2::
-	.string "Startles all POKéMON that\n"
-	.string "have done their appeals.$"
+	.string "Laat iedereen die al\n"
+	.string "optrad schrikken.$"
 
 gText_ShiftJudgesAttentionFromOthers::
-	.string "Shifts the JUDGE's\n"
-	.string "attention from others.$"
+	.string "De JURY kijkt niet meer\n"
+	.string "naar de anderen.$"
 
 gText_StartleMonHasJudgesAttention::
-	.string "Startles the POKéMON that\n"
-	.string "has the JUDGE's attention.$"
+	.string "Laat schrikken wie de\n"
+	.string "aandacht van de JURY heeft.$"
 
 gText_JamOthersMissesTurn::
-	.string "Jams the others, and misses\n"
-	.string "one turn of appeals.$"
+	.string "Stoort de anderen, maar\n"
+	.string "slaat 1 beurt over.$"
 
 gText_StartleMonsMadeSameTypeAppeal::
-	.string "Startles POKéMON that\n"
-	.string "made a same-type appeal.$"
+	.string "Laat schrikken wie net zo'n\n"
+	.string "soort optreden deed.$"
 
 gText_BadlyStartleCoolAppeals::
-	.string "Badly startles POKéMON\n"
-	.string "that made COOL appeals.$"
+	.string "Laat wie STOER optrad\n"
+	.string "flink schrikken.$"
 
 gText_BadlyStartleBeautyAppeals::
-	.string "Badly startles POKéMON\n"
-	.string "that made BEAUTY appeals.$"
+	.string "Laat wie MOOI optrad\n"
+	.string "flink schrikken.$"
 
 gText_BadlyStartleCuteAppeals::
-	.string "Badly startles POKéMON\n"
-	.string "that made CUTE appeals.$"
+	.string "Laat wie SCHATTIG optrad\n"
+	.string "flink schrikken.$"
 
 gText_BadlyStartleSmartAppeals::
-	.string "Badly startles POKéMON\n"
-	.string "that made SMART appeals.$"
+	.string "Laat wie SLIM optrad\n"
+	.string "flink schrikken.$"
 
 gText_BadlyStartleToughAppeals::
-	.string "Badly startles POKéMON\n"
-	.string "that made TOUGH appeals.$"
+	.string "Laat wie STERK optrad\n"
+	.string "flink schrikken.$"
 
 gText_MakeMonAfterUserNervous::
-	.string "Makes one POKéMON after\n"
-	.string "the user nervous.$"
+	.string "Maakt 1 POKéMON na jou\n"
+	.string "zenuwachtig.$"
 
 gText_MakeAllMonsAfterUserNervous::
-	.string "Makes all POKéMON after\n"
-	.string "the user nervous.$"
+	.string "Maakt alle POKéMON na jou\n"
+	.string "zenuwachtig.$"
 
 gText_WorsenConditionOfThoseMadeAppeals::
-	.string "Worsens the condition of\n"
-	.string "those that made appeals.$"
+	.string "Wie al optrad, raakt\n"
+	.string "uit vorm.$"
 
 gText_BadlyStartleMonsGoodCondition::
-	.string "Badly startles POKéMON in\n"
-	.string "good condition.$"
+	.string "Laat POKéMON in goede vorm\n"
+	.string "flink schrikken.$"
 
 gText_AppealGreatIfPerformedFirst::
-	.string "The appeal works great if\n"
-	.string "performed first.$"
+	.string "Werkt super als je als\n"
+	.string "eerste optreedt.$"
 
 gText_AppealGreatIfPerformedLast::
-	.string "The appeal works great if\n"
-	.string "performed last.$"
+	.string "Werkt super als je als\n"
+	.string "laatste optreedt.$"
 
 gText_AppealAsGoodAsThoseBeforeIt::
-	.string "Makes the appeal as good\n"
-	.string "as those before it.$"
+	.string "Net zo goed als alle\n"
+	.string "optredens ervoor.$"
 
 gText_AppealAsGoodAsOneBeforeIt::
-	.string "Makes the appeal as good\n"
-	.string "as the one before it.$"
+	.string "Net zo goed als het\n"
+	.string "optreden ervoor.$"
 
 gText_AppealBetterLaterItsPerformed::
-	.string "The appeal works better\n"
-	.string "the later it is performed.$"
+	.string "Hoe later je optreedt,\n"
+	.string "hoe beter het werkt.$"
 
 gText_AppealVariesDependingOnTiming::
-	.string "The appeal's quality varies\n"
-	.string "depending on its timing.$"
+	.string "Hoe goed het is, hangt af\n"
+	.string "van het moment.$"
 
 gText_WorksWellIfSameTypeAsBefore::
-	.string "Works well if it's the same\n"
-	.string "type as the one before.$"
+	.string "Werkt goed na een optreden\n"
+	.string "van hetzelfde soort.$"
 
 gText_WorksWellIfDifferentTypeAsBefore::
-	.string "Works well if different in\n"
-	.string "type than the one before.$"
+	.string "Werkt goed na een optreden\n"
+	.string "van een ander soort.$"
 
 gText_AffectedByAppealInFront::
-	.string "Affected by how well the\n"
-	.string "appeal in front goes.$"
+	.string "Hangt af van hoe goed het\n"
+	.string "optreden ervoor ging.$"
 
 gText_UpsConditionHelpsPreventNervousness::
-	.string "Ups the user's condition.\n"
-	.string "Helps prevent nervousness.$"
+	.string "Brengt je in vorm. Minder\n"
+	.string "kans op zenuwen.$"
 
 gText_AppealWorksWellIfConditionGood::
-	.string "The appeal works well if the\n"
-	.string "user's condition is good.$"
+	.string "Werkt goed als je POKéMON\n"
+	.string "in goede vorm is.$"
 
 gText_NextAppealMadeEarlier::
-	.string "The next appeal can be\n"
-	.string "made earlier next turn.$"
+	.string "Je volgende optreden\n"
+	.string "komt eerder.$"
 
 gText_NextAppealMadeLater::
-	.string "The next appeal can be\n"
-	.string "made later next turn.$"
+	.string "Je volgende optreden\n"
+	.string "komt later.$"
 
 gText_TurnOrderMoreEasilyScrambled::
-	.string "Makes the next turn's order\n"
-	.string "more easily scrambled.$"
+	.string "De volgende beurt raakt de\n"
+	.string "volgorde sneller door elkaar.$"
 
 gText_ScrambleOrderOfNextAppeals::
-	.string "Scrambles the order of\n"
-	.string "appeals on the next turn.$"
+	.string "Gooit de volgorde van de\n"
+	.string "volgende beurt door elkaar.$"
 
 gText_AppealExcitesAudienceInAnyContest::
-	.string "An appeal that excites the\n"
-	.string "audience in any CONTEST.$"
+	.string "Maakt het publiek blij in\n"
+	.string "elke WEDSTRIJD.$"
 
 gText_BadlyStartlesMonsGoodAppeals::
-	.string "Badly startles all POKéMON\n"
-	.string "that made good appeals.$"
+	.string "Laat iedereen met een goed\n"
+	.string "optreden flink schrikken.$"
 
 gText_AppealBestMoreCrowdExcited::
-	.string "The appeal works best the\n"
-	.string "more the crowd is excited.$"
+	.string "Werkt beter als het publiek\n"
+	.string "enthousiaster is.$"
 
 gText_TemporarilyStopCrowdExcited::
-	.string "Temporarily stops the\n"
-	.string "crowd from growing excited.$"
+	.string "Het publiek wordt even\n"
+	.string "niet enthousiaster.$"
 
 @ Unused move names
 

@@ -714,708 +714,708 @@ static const u8 sCottonSporeDescription[] = _(
     "Verlaagt SNELHEID flink.");
 
 static const u8 sReversalDescription[] = _(
-    "Inflicts more damage when\n"
-    "the user's HP is down.");
+    "Meer schade als de\n"
+    "eigen HP laag is.");
 
 static const u8 sSpiteDescription[] = _(
-    "Spitefully cuts the PP\n"
-    "of the foe's last move.");
+    "Verlaagt PP van de laatste\n"
+    "aanval van de vijand.");
 
 static const u8 sPowderSnowDescription[] = _(
-    "Blasts the foe with a snowy\n"
-    "gust. May cause freezing.");
+    "Blaast sneeuw naar de\n"
+    "vijand. Kan bevriezen.");
 
 static const u8 sProtectDescription[] = _(
-    "Evades attack, but may fail\n"
-    "if used in succession.");
+    "Houdt alle aanvallen tegen.\n"
+    "Twee keer kan mislukken.");
 
 static const u8 sMachPunchDescription[] = _(
-    "A punch is thrown at wicked\n"
-    "speed to strike first.");
+    "Een supersnelle stomp.\n"
+    "Valt altijd eerst aan.");
 
 static const u8 sScaryFaceDescription[] = _(
-    "Frightens with a scary face\n"
-    "to sharply reduce SPEED.");
+    "Trekt een eng gezicht.\n"
+    "Verlaagt SNELHEID flink.");
 
 static const u8 sFaintAttackDescription[] = _(
-    "Draws the foe close, then\n"
-    "strikes without fail.");
+    "Lokt de vijand dichtbij.\n"
+    "Mist nooit.");
 
 static const u8 sSweetKissDescription[] = _(
-    "Demands a kiss with a cute\n"
-    "look. May cause confusion.");
+    "Vraagt lief om een kus.\n"
+    "Kan verwarren.");
 
 static const u8 sBellyDrumDescription[] = _(
-    "Maximizes ATTACK while\n"
-    "sacrificing HP.");
+    "Maakt AANVAL maximaal,\n"
+    "maar kost HP.");
 
 static const u8 sSludgeBombDescription[] = _(
-    "Sludge is hurled to inflict\n"
-    "damage. May also poison.");
+    "Gooit vies slijk.\n"
+    "Kan vergiftigen.");
 
 static const u8 sMudSlapDescription[] = _(
-    "Hurls mud in the foe's face\n"
-    "to reduce its accuracy.");
+    "Gooit modder in de ogen.\n"
+    "Verlaagt de raakkans.");
 
 static const u8 sOctazookaDescription[] = _(
-    "Fires a lump of ink to\n"
-    "damage and cut accuracy.");
+    "Schiet een klodder inkt.\n"
+    "Kan raakkans verlagen.");
 
 static const u8 sSpikesDescription[] = _(
-    "Sets spikes that hurt a \n"
-    "foe switching in.");
+    "Legt spijkers neer. Doet\n"
+    "pijn bij wisselen.");
 
 static const u8 sZapCannonDescription[] = _(
-    "Powerful and sure to cause\n"
-    "paralysis, but inaccurate.");
+    "Verlamt altijd, maar\n"
+    "mist vaak.");
 
 static const u8 sForesightDescription[] = _(
-    "Negates the foe's efforts\n"
-    "to heighten evasiveness.");
+    "Ontwijken helpt de\n"
+    "vijand niet meer.");
 
 static const u8 sDestinyBondDescription[] = _(
-    "If the user faints, the foe\n"
-    "is also made to faint.");
+    "Ben jij verslagen, dan de\n"
+    "vijand ook.");
 
 static const u8 sPerishSongDescription[] = _(
-    "Any POKéMON hearing this\n"
-    "song faints in 3 turns.");
+    "Wie dit lied hoort, is na\n"
+    "3 beurten verslagen.");
 
 static const u8 sIcyWindDescription[] = _(
-    "A chilling attack that\n"
-    "lowers the foe's SPEED.");
+    "Een koude wind.\n"
+    "Verlaagt SNELHEID.");
 
 static const u8 sDetectDescription[] = _(
-    "Evades attack, but may fail\n"
-    "if used in succession.");
+    "Houdt alle aanvallen tegen.\n"
+    "Twee keer kan mislukken.");
 
 static const u8 sBoneRushDescription[] = _(
-    "Strikes the foe with a bone\n"
-    "in hand 2 to 5 times.");
+    "Slaat met een bot\n"
+    "2 tot 5 keer.");
 
 static const u8 sLockOnDescription[] = _(
-    "Locks on to the foe to\n"
-    "ensure the next move hits.");
+    "Richt op de vijand.\n"
+    "De volgende aanval raakt.");
 
 static const u8 sOutrageDescription[] = _(
-    "A rampage of 2 to 3 turns\n"
-    "that confuses the user.");
+    "Raast 2 tot 3 beurten.\n"
+    "Raakt daarna in de war.");
 
 static const u8 sSandstormDescription[] = _(
-    "Causes a sandstorm that\n"
-    "rages for several turns.");
+    "Maakt een zandstorm\n"
+    "voor een paar beurten.");
 
 static const u8 sGigaDrainDescription[] = _(
-    "An attack that steals half\n"
-    "the damage inflicted.");
+    "Steelt HP: de helft\n"
+    "van de schade.");
 
 static const u8 sEndureDescription[] = _(
-    "Endures any attack for\n"
-    "1 turn, leaving at least 1HP.");
+    "Houdt 1 beurt alles vol.\n"
+    "Houdt minstens 1 HP over.");
 
 static const u8 sCharmDescription[] = _(
-    "Charms the foe and sharply\n"
-    "reduces its ATTACK.");
+    "Doet heel schattig.\n"
+    "Verlaagt AANVAL flink.");
 
 static const u8 sRolloutDescription[] = _(
-    "An attack lasting 5 turns\n"
-    "with rising intensity.");
+    "Rolt 5 beurten lang,\n"
+    "steeds harder.");
 
 static const u8 sFalseSwipeDescription[] = _(
-    "An attack that leaves the\n"
-    "foe with at least 1 HP.");
+    "Laat de vijand altijd\n"
+    "met 1 HP over.");
 
 static const u8 sSwaggerDescription[] = _(
-    "Confuses the foe, but also\n"
-    "sharply raises ATTACK.");
+    "Verwart de vijand. Zijn\n"
+    "AANVAL stijgt wel flink.");
 
 static const u8 sMilkDrinkDescription[] = _(
-    "Recovers up to half the\n"
-    "user's maximum HP.");
+    "Herstelt de helft van\n"
+    "de max. HP.");
 
 static const u8 sSparkDescription[] = _(
-    "An electrified tackle that\n"
-    "may paralyze the foe.");
+    "Een tackle vol stroom.\n"
+    "Kan verlammen.");
 
 static const u8 sFuryCutterDescription[] = _(
-    "An attack that intensifies\n"
-    "on each successive hit.");
+    "Wordt sterker bij elke\n"
+    "keer dat hij raakt.");
 
 static const u8 sSteelWingDescription[] = _(
-    "Strikes the foe with hard\n"
-    "wings spread wide.");
+    "Slaat met harde\n"
+    "vleugels.");
 
 static const u8 sMeanLookDescription[] = _(
-    "Fixes the foe with a mean\n"
-    "look that prevents escape.");
+    "Kijkt zo gemeen dat de\n"
+    "vijand niet kan vluchten.");
 
 static const u8 sAttractDescription[] = _(
-    "Makes the opposite gender\n"
-    "less likely to attack.");
+    "Maakt de vijand verliefd.\n"
+    "Dan valt hij minder aan.");
 
 static const u8 sSleepTalkDescription[] = _(
-    "Uses an available move\n"
-    "randomly while asleep.");
+    "Doet zomaar een aanval\n"
+    "terwijl hij slaapt.");
 
 static const u8 sHealBellDescription[] = _(
-    "Chimes soothingly to heal\n"
-    "all status abnormalities.");
+    "Een rustig belletje\n"
+    "geneest alle kwaaltjes.");
 
 static const u8 sReturnDescription[] = _(
-    "An attack that increases\n"
-    "in power with friendship.");
+    "Sterker als je POKéMON\n"
+    "veel van je houdt.");
 
 static const u8 sPresentDescription[] = _(
-    "A gift in the form of a\n"
-    "bomb. May restore HP.");
+    "Een cadeau met een bom.\n"
+    "Kan ook HP geven.");
 
 static const u8 sFrustrationDescription[] = _(
-    "An attack that is stronger\n"
-    "if the TRAINER is disliked.");
+    "Sterker als je POKéMON\n"
+    "niet van je houdt.");
 
 static const u8 sSafeguardDescription[] = _(
-    "A mystical force prevents\n"
-    "all status problems.");
+    "Een magische kracht stopt\n"
+    "alle kwaaltjes.");
 
 static const u8 sPainSplitDescription[] = _(
-    "Adds the user and foe's HP,\n"
-    "then shares them equally.");
+    "Telt jouw HP en die van de\n"
+    "vijand op en deelt het.");
 
 static const u8 sSacredFireDescription[] = _(
-    "A mystical fire attack that\n"
-    "may inflict a burn.");
+    "Een magisch vuur.\n"
+    "Kan verbranden.");
 
 static const u8 sMagnitudeDescription[] = _(
-    "A ground-shaking attack\n"
-    "of random intensity.");
+    "Laat de grond beven.\n"
+    "Kracht is steeds anders.");
 
 static const u8 sDynamicPunchDescription[] = _(
-    "Powerful and sure to cause\n"
-    "confusion, but inaccurate.");
+    "Verwart altijd, maar\n"
+    "mist vaak.");
 
 static const u8 sMegahornDescription[] = _(
-    "A brutal ramming attack\n"
-    "using out-thrust horns.");
+    "Een woeste ram met\n"
+    "de hoorns.");
 
 static const u8 sDragonBreathDescription[] = _(
-    "Strikes the foe with an\n"
-    "incredible blast of breath.");
+    "Blaast een enorme adem\n"
+    "naar de vijand.");
 
 static const u8 sBatonPassDescription[] = _(
-    "Switches out the user while\n"
-    "keeping effects in play.");
+    "Wisselt en geeft de\n"
+    "effecten door.");
 
 static const u8 sEncoreDescription[] = _(
-    "Makes the foe repeat its\n"
-    "last move over 2 to 6 turns.");
+    "Vijand moet 2 tot 6 beurten\n"
+    "dezelfde aanval doen.");
 
 static const u8 sPursuitDescription[] = _(
-    "Inflicts bad damage if used\n"
-    "on a foe switching out.");
+    "Extra schade als de\n"
+    "vijand wil wisselen.");
 
 static const u8 sRapidSpinDescription[] = _(
-    "Spins the body at high\n"
-    "speed to strike the foe.");
+    "Draait heel snel rond\n"
+    "en raakt de vijand.");
 
 static const u8 sSweetScentDescription[] = _(
-    "Allures the foe to reduce\n"
-    "evasiveness.");
+    "Lokt met een zoete geur.\n"
+    "Vijand ontwijkt slechter.");
 
 static const u8 sIronTailDescription[] = _(
-    "Attacks with a rock-hard\n"
-    "tail. May lower DEFENSE.");
+    "Slaat met een harde staart.\n"
+    "Kan VERDEDIGING verlagen.");
 
 static const u8 sMetalClawDescription[] = _(
-    "A claw attack that may\n"
-    "raise the user's ATTACK.");
+    "Een klauwaanval. Kan\n"
+    "eigen AANVAL verhogen.");
 
 static const u8 sVitalThrowDescription[] = _(
-    "Makes the user's move last,\n"
-    "but it never misses.");
+    "Valt als laatste aan,\n"
+    "maar mist nooit.");
 
 static const u8 sMorningSunDescription[] = _(
-    "Restores HP. The amount\n"
-    "varies with the weather.");
+    "Herstelt HP. Hoeveel\n"
+    "hangt af van het weer.");
 
 static const u8 sSynthesisDescription[] = _(
-    "Restores HP. The amount\n"
-    "varies with the weather.");
+    "Herstelt HP. Hoeveel\n"
+    "hangt af van het weer.");
 
 static const u8 sMoonlightDescription[] = _(
-    "Restores HP. The amount\n"
-    "varies with the weather.");
+    "Herstelt HP. Hoeveel\n"
+    "hangt af van het weer.");
 
 static const u8 sHiddenPowerDescription[] = _(
-    "The effectiveness varies\n"
-    "with the user.");
+    "Het effect hangt af\n"
+    "van de POKéMON.");
 
 static const u8 sCrossChopDescription[] = _(
-    "A double-chopping attack.\n"
-    "High critical-hit ratio.");
+    "Een dubbele slag.\n"
+    "Veel kans op voltreffer.");
 
 static const u8 sTwisterDescription[] = _(
-    "Whips up a vicious twister\n"
-    "to tear at the foe.");
+    "Maakt een wilde windhoos\n"
+    "die de vijand raakt.");
 
 static const u8 sRainDanceDescription[] = _(
-    "Boosts the power of WATER-\n"
-    "type moves for 5 turns.");
+    "Maakt 5 beurten regen.\n"
+    "WATER-aanvallen sterker.");
 
 static const u8 sSunnyDayDescription[] = _(
-    "Boosts the power of FIRE-\n"
-    "type moves for 5 turns.");
+    "Maakt 5 beurten zon.\n"
+    "VUUR-aanvallen sterker.");
 
 static const u8 sCrunchDescription[] = _(
-    "Crunches with sharp fangs.\n"
-    "May lower SP. DEF.");
+    "Bijt met scherpe tanden.\n"
+    "Kan SP. VERD verlagen.");
 
 static const u8 sMirrorCoatDescription[] = _(
-    "Counters the foe's special\n"
-    "attack at double the power.");
+    "Geeft speciale aanvallen\n"
+    "dubbel hard terug.");
 
 static const u8 sPsychUpDescription[] = _(
-    "Copies the foe's effect(s)\n"
-    "and gives to the user.");
+    "Kopieert de effecten\n"
+    "van de vijand.");
 
 static const u8 sExtremeSpeedDescription[] = _(
-    "An extremely fast and\n"
-    "powerful attack.");
+    "Een supersnelle en\n"
+    "sterke aanval.");
 
 static const u8 sAncientPowerDescription[] = _(
-    "An attack that may raise\n"
-    "all stats.");
+    "Een oeroude kracht. Maakt\n"
+    "misschien alles sterker.");
 
 static const u8 sShadowBallDescription[] = _(
-    "Hurls a black blob that may\n"
-    "lower the foe's SP. DEF.");
+    "Gooit een zwarte bal.\n"
+    "Kan SP. VERD verlagen.");
 
 static const u8 sFutureSightDescription[] = _(
-    "Heightens inner power to\n"
-    "strike 2 turns later.");
+    "Laadt kracht op. Raakt\n"
+    "2 beurten later.");
 
 static const u8 sRockSmashDescription[] = _(
-    "A rock-crushing attack\n"
-    "that may lower DEFENSE.");
+    "Slaat stenen kapot.\n"
+    "Kan VERDEDIGING verlagen.");
 
 static const u8 sWhirlpoolDescription[] = _(
-    "Traps and hurts the foe in\n"
-    "a whirlpool for 2 to 5 turns.");
+    "Vangt de vijand 2 tot 5\n"
+    "beurten in een draaikolk.");
 
 static const u8 sBeatUpDescription[] = _(
-    "Summons party POKéMON to\n"
-    "join in the attack.");
+    "Je hele team helpt\n"
+    "mee met de aanval.");
 
 static const u8 sFakeOutDescription[] = _(
-    "A 1st-turn, 1st-strike move\n"
-    "that causes flinching.");
+    "Alleen in de 1e beurt.\n"
+    "Vijand deinst terug.");
 
 static const u8 sUproarDescription[] = _(
-    "Causes an uproar for 2 to 5\n"
-    "turns and prevents sleep.");
+    "Maakt 2 tot 5 beurten\n"
+    "kabaal. Niemand slaapt.");
 
 static const u8 sStockpileDescription[] = _(
-    "Charges up power for up to\n"
-    "3 turns.");
+    "Spaart kracht op, tot\n"
+    "3 beurten lang.");
 
 static const u8 sSpitUpDescription[] = _(
-    "Releases stockpiled power\n"
-    "(the more the better).");
+    "Spuugt de gespaarde\n"
+    "kracht uit.");
 
 static const u8 sSwallowDescription[] = _(
-    "Absorbs stockpiled power\n"
-    "and restores HP.");
+    "Slikt de gespaarde kracht\n"
+    "in. Herstelt HP.");
 
 static const u8 sHeatWaveDescription[] = _(
-    "Exhales a hot breath on the\n"
-    "foe. May inflict a burn.");
+    "Blaast hete adem.\n"
+    "Kan verbranden.");
 
 static const u8 sHailDescription[] = _(
-    "Summons a hailstorm that\n"
-    "strikes every turn.");
+    "Laat het hagelen. Raakt\n"
+    "elke beurt.");
 
 static const u8 sTormentDescription[] = _(
-    "Torments the foe and stops\n"
-    "successive use of a move.");
+    "Pest de vijand: geen\n"
+    "2x dezelfde aanval.");
 
 static const u8 sFlatterDescription[] = _(
-    "Confuses the foe, but\n"
-    "raises its SP. ATK.");
+    "Verwart de vijand, maar\n"
+    "verhoogt zijn SP. AANV.");
 
 static const u8 sWillOWispDescription[] = _(
-    "Inflicts a burn on the foe\n"
-    "with intense fire.");
+    "Een eng vuurtje dat de\n"
+    "vijand verbrandt.");
 
 static const u8 sMementoDescription[] = _(
-    "The user faints and lowers\n"
-    "the foe's abilities.");
+    "Je bent zelf verslagen,\n"
+    "maar de vijand wordt zwak.");
 
 static const u8 sFacadeDescription[] = _(
-    "Boosts ATTACK when burned,\n"
-    "paralyzed, or poisoned.");
+    "Meer AANVAL bij gif,\n"
+    "verlamming of brandwond.");
 
 static const u8 sFocusPunchDescription[] = _(
-    "A powerful loyalty attack.\n"
-    "The user flinches if hit.");
+    "Een heel sterke stomp.\n"
+    "Mislukt als je geraakt wordt.");
 
 static const u8 sSmellingSaltDescription[] = _(
-    "Powerful against paralyzed\n"
-    "foes, but also heals them.");
+    "Sterk tegen verlamde\n"
+    "vijand, maar geneest hem.");
 
 static const u8 sFollowMeDescription[] = _(
-    "Draws attention to make\n"
-    "foes attack only the user.");
+    "Lokt de vijand. Hij valt\n"
+    "alleen jou aan.");
 
 static const u8 sNaturePowerDescription[] = _(
-    "The type of attack varies\n"
-    "depending on the location.");
+    "Het soort aanval hangt\n"
+    "af van de plek.");
 
 static const u8 sChargeDescription[] = _(
-    "Charges power to boost the\n"
-    "electric move used next.");
+    "Laadt op. Volgende\n"
+    "stroomaanval is sterker.");
 
 static const u8 sTauntDescription[] = _(
-    "Taunts the foe into only\n"
-    "using attack moves.");
+    "Daagt de vijand uit. Hij\n"
+    "kan alleen aanvallen.");
 
 static const u8 sHelpingHandDescription[] = _(
-    "Boosts the power of the\n"
-    "recipient's moves.");
+    "Maakt de aanval van je\n"
+    "maatje sterker.");
 
 static const u8 sTrickDescription[] = _(
-    "Tricks the foe into trading\n"
-    "held items.");
+    "Ruilt stiekem van\n"
+    "voorwerp met de vijand.");
 
 static const u8 sRolePlayDescription[] = _(
-    "Mimics the target and\n"
-    "copies its special ability.");
+    "Doet de vijand na en\n"
+    "kopieert zijn talent.");
 
 static const u8 sWishDescription[] = _(
-    "A wish that restores HP.\n"
-    "It takes time to work.");
+    "Een wens die HP geeft.\n"
+    "Het duurt even.");
 
 static const u8 sAssistDescription[] = _(
-    "Attacks randomly with one\n"
-    "of the partner's moves.");
+    "Doet zomaar een aanval\n"
+    "van een teamgenoot.");
 
 static const u8 sIngrainDescription[] = _(
-    "Lays roots that restore HP.\n"
-    "The user can't switch out.");
+    "Wortelt en krijgt HP.\n"
+    "Kan niet meer wisselen.");
 
 static const u8 sSuperpowerDescription[] = _(
-    "Boosts strength sharply,\n"
-    "but lowers abilities.");
+    "Heel sterk, maar je\n"
+    "wordt zelf zwakker.");
 
 static const u8 sMagicCoatDescription[] = _(
-    "Reflects special effects\n"
-    "back to the attacker.");
+    "Kaatst effecten terug\n"
+    "naar de aanvaller.");
 
 static const u8 sRecycleDescription[] = _(
-    "Recycles a used item for\n"
-    "one more use.");
+    "Maakt een gebruikt\n"
+    "voorwerp weer heel.");
 
 static const u8 sRevengeDescription[] = _(
-    "An attack that gains power\n"
-    "if injured by the foe.");
+    "Sterker als de vijand\n"
+    "jou eerst raakte.");
 
 static const u8 sBrickBreakDescription[] = _(
-    "Destroys barriers such as\n"
-    "REFLECT and causes damage.");
+    "Breekt muren zoals\n"
+    "REFLECTIE en doet schade.");
 
 static const u8 sYawnDescription[] = _(
-    "Lulls the foe into yawning,\n"
-    "then sleeping next turn.");
+    "Laat de vijand gapen.\n"
+    "Volgende beurt slaapt hij.");
 
 static const u8 sKnockOffDescription[] = _(
-    "Knocks down the foe's held\n"
-    "item to prevent its use.");
+    "Slaat het voorwerp van\n"
+    "de vijand weg.");
 
 static const u8 sEndeavorDescription[] = _(
-    "Gains power if the user's HP\n"
-    "is lower than the foe's HP.");
+    "Maakt de HP van de vijand\n"
+    "gelijk aan jouw HP.");
 
 static const u8 sEruptionDescription[] = _(
-    "The higher the user's HP,\n"
-    "the more damage caused.");
+    "Hoe meer HP je hebt,\n"
+    "hoe meer schade.");
 
 static const u8 sSkillSwapDescription[] = _(
-    "The user swaps special\n"
-    "abilities with the target.");
+    "Ruilt talenten met\n"
+    "de vijand.");
 
 static const u8 sImprisonDescription[] = _(
-    "Prevents foes from using\n"
-    "moves known by the user.");
+    "Vijand kan jouw aanvallen\n"
+    "niet gebruiken.");
 
 static const u8 sRefreshDescription[] = _(
-    "Heals poisoning, paralysis,\n"
-    "or a burn.");
+    "Geneest gif, verlamming\n"
+    "of een brandwond.");
 
 static const u8 sGrudgeDescription[] = _(
-    "If the user faints, deletes\n"
-    "all PP of foe's last move.");
+    "Ben je verslagen, dan is\n"
+    "de PP van die aanval op.");
 
 static const u8 sSnatchDescription[] = _(
-    "Steals the effects of the\n"
-    "move the target uses next.");
+    "Steelt het effect van de\n"
+    "volgende aanval.");
 
 static const u8 sSecretPowerDescription[] = _(
-    "An attack with effects\n"
-    "that vary by location.");
+    "Het effect hangt af\n"
+    "van de plek.");
 
 static const u8 sDiveDescription[] = _(
-    "Dives underwater the first\n"
-    "turn and strikes next turn.");
+    "Duikt in beurt 1 onder\n"
+    "water. Raakt in beurt 2.");
 
 static const u8 sArmThrustDescription[] = _(
-    "Straight-arm punches that\n"
-    "strike the foe 2 to 5 times.");
+    "Stoot met gestrekte\n"
+    "arm 2 tot 5 keer.");
 
 static const u8 sCamouflageDescription[] = _(
-    "Alters the POKéMON's type\n"
-    "depending on the location.");
+    "Het type verandert\n"
+    "met de plek.");
 
 static const u8 sTailGlowDescription[] = _(
-    "Flashes a light that sharply\n"
-    "raises SP. ATK.");
+    "Een fel licht.\n"
+    "Verhoogt SP. AANV flink.");
 
 static const u8 sLusterPurgeDescription[] = _(
-    "Attacks with a burst of\n"
-    "light. May lower SP. DEF.");
+    "Een flits van licht.\n"
+    "Kan SP. VERD verlagen.");
 
 static const u8 sMistBallDescription[] = _(
-    "Attacks with a flurry of\n"
-    "down. May lower SP. ATK.");
+    "Een wolk van dons.\n"
+    "Kan SP. AANV verlagen.");
 
 static const u8 sFeatherDanceDescription[] = _(
-    "Envelops the foe with down\n"
-    "to sharply reduce ATTACK.");
+    "Bedekt de vijand met dons.\n"
+    "Verlaagt AANVAL flink.");
 
 static const u8 sTeeterDanceDescription[] = _(
-    "Confuses all POKéMON on\n"
-    "the scene.");
+    "Verwart alle POKéMON\n"
+    "in het gevecht.");
 
 static const u8 sBlazeKickDescription[] = _(
-    "A kick with a high critical-\n"
-    "hit ratio. May cause a burn.");
+    "Vurige schop, vaak een\n"
+    "voltreffer. Kan verbranden.");
 
 static const u8 sMudSportDescription[] = _(
-    "Covers the user in mud to\n"
-    "raise electrical resistance.");
+    "Rolt in modder. Minder\n"
+    "schade van stroom.");
 
 static const u8 sIceBallDescription[] = _(
-    "A 5-turn attack that gains\n"
-    "power on successive hits.");
+    "Rolt 5 beurten lang,\n"
+    "steeds harder.");
 
 static const u8 sNeedleArmDescription[] = _(
-    "Attacks with thorny arms.\n"
-    "May cause flinching.");
+    "Slaat met stekelarmen.\n"
+    "Vijand kan terugdeinzen.");
 
 static const u8 sSlackOffDescription[] = _(
-    "Slacks off and restores\n"
-    "half the maximum HP.");
+    "Luiert lekker. Herstelt\n"
+    "de helft van de max. HP.");
 
 static const u8 sHyperVoiceDescription[] = _(
-    "A loud attack that uses\n"
-    "sound waves to injure.");
+    "Een harde schreeuw\n"
+    "die pijn doet.");
 
 static const u8 sPoisonFangDescription[] = _(
-    "A sharp-fanged attack.\n"
-    "May badly poison the foe.");
+    "Bijt met giftanden. Kan\n"
+    "zwaar vergiftigen.");
 
 static const u8 sCrushClawDescription[] = _(
-    "Tears at the foe with sharp\n"
-    "claws. May lower DEFENSE.");
+    "Krabt met scherpe klauwen.\n"
+    "Kan VERDEDIGING verlagen.");
 
 static const u8 sBlastBurnDescription[] = _(
-    "Powerful, but leaves the\n"
-    "user immobile the next turn.");
+    "Heel sterk, maar daarna\n"
+    "moet je 1 beurt rusten.");
 
 static const u8 sHydroCannonDescription[] = _(
-    "Powerful, but leaves the\n"
-    "user immobile the next turn.");
+    "Heel sterk, maar daarna\n"
+    "moet je 1 beurt rusten.");
 
 static const u8 sMeteorMashDescription[] = _(
-    "Fires a meteor-like punch.\n"
-    "May raise ATTACK.");
+    "Een stomp als een meteoor.\n"
+    "Kan AANVAL verhogen.");
 
 static const u8 sAstonishDescription[] = _(
-    "An attack that may shock\n"
-    "the foe into flinching.");
+    "Laat de vijand schrikken.\n"
+    "Kan terugdeinzen.");
 
 static const u8 sWeatherBallDescription[] = _(
-    "The move's type and power\n"
-    "change with the weather.");
+    "Type en kracht hangen\n"
+    "af van het weer.");
 
 static const u8 sAromatherapyDescription[] = _(
-    "Heals all status problems\n"
-    "with a soothing scent.");
+    "Een fijne geur geneest\n"
+    "alle kwaaltjes.");
 
 static const u8 sFakeTearsDescription[] = _(
-    "Feigns crying to sharply\n"
-    "lower the foe's SP. DEF.");
+    "Doet alsof hij huilt.\n"
+    "Verlaagt SP. VERD flink.");
 
 static const u8 sAirCutterDescription[] = _(
-    "Hacks with razorlike wind.\n"
-    "High critical-hit ratio.");
+    "Snijdt met scherpe wind.\n"
+    "Veel kans op voltreffer.");
 
 static const u8 sOverheatDescription[] = _(
-    "Allows a full-power attack,\n"
-    "but sharply lowers SP. ATK.");
+    "Een aanval met volle kracht.\n"
+    "SP. AANV zakt flink.");
 
 static const u8 sOdorSleuthDescription[] = _(
-    "Negates the foe's efforts\n"
-    "to heighten evasiveness.");
+    "Ontwijken helpt de\n"
+    "vijand niet meer.");
 
 static const u8 sRockTombDescription[] = _(
-    "Stops the foe from moving\n"
-    "with rocks and cuts SPEED.");
+    "Sluit de vijand in met\n"
+    "stenen. Verlaagt SNELHEID.");
 
 static const u8 sSilverWindDescription[] = _(
-    "A powdery attack that may\n"
-    "raise abilities.");
+    "Een poederaanval. Maakt\n"
+    "misschien alles sterker.");
 
 static const u8 sMetalSoundDescription[] = _(
-    "Emits a horrible screech\n"
-    "that sharply lowers SP. DEF.");
+    "Een naar metaalgeluid.\n"
+    "Verlaagt SP. VERD flink.");
 
 static const u8 sGrassWhistleDescription[] = _(
-    "Lulls the foe into sleep\n"
-    "with a pleasant melody.");
+    "Een mooi liedje laat de\n"
+    "vijand in slaap vallen.");
 
 static const u8 sTickleDescription[] = _(
-    "Makes the foe laugh to\n"
-    "lower ATTACK and DEFENSE.");
+    "Laat de vijand lachen.\n"
+    "Verlaagt AANVAL en VERD.");
 
 static const u8 sCosmicPowerDescription[] = _(
-    "Raises DEFENSE and SP. DEF\n"
-    "with a mystic power.");
+    "Een magische kracht.\n"
+    "Verhoogt VERD. en SP. VERD.");
 
 static const u8 sWaterSpoutDescription[] = _(
-    "Inflicts more damage if the\n"
-    "user's HP is high.");
+    "Meer schade als de\n"
+    "eigen HP hoog is.");
 
 static const u8 sSignalBeamDescription[] = _(
-    "A strange beam attack that\n"
-    "may confuse the foe.");
+    "Een vreemde straal.\n"
+    "Kan de vijand verwarren.");
 
 static const u8 sShadowPunchDescription[] = _(
-    "An unavoidable punch that\n"
-    "is thrown from shadows.");
+    "Een stomp uit de schaduw.\n"
+    "Mist nooit.");
 
 static const u8 sExtrasensoryDescription[] = _(
-    "Attacks with a peculiar\n"
-    "power. May cause flinching.");
+    "Een vreemde kracht.\n"
+    "Vijand kan terugdeinzen.");
 
 static const u8 sSkyUppercutDescription[] = _(
-    "An uppercut thrown as if\n"
-    "leaping into the sky.");
+    "Een stomp omhoog, alsof\n"
+    "hij de lucht in springt.");
 
 static const u8 sSandTombDescription[] = _(
-    "Traps and hurts the foe in\n"
-    "quicksand for 2 to 5 turns.");
+    "Vangt de vijand 2 tot 5\n"
+    "beurten in drijfzand.");
 
 static const u8 sSheerColdDescription[] = _(
-    "A chilling attack that\n"
-    "causes fainting if it hits.");
+    "Een ijskoude aanval.\n"
+    "Als hij raakt: KO.");
 
 static const u8 sMuddyWaterDescription[] = _(
-    "Attacks with muddy water.\n"
-    "May lower accuracy.");
+    "Spuit modderwater.\n"
+    "Kan raakkans verlagen.");
 
 static const u8 sBulletSeedDescription[] = _(
-    "Shoots 2 to 5 seeds in a row\n"
-    "to strike the foe.");
+    "Schiet 2 tot 5 zaadjes\n"
+    "achter elkaar.");
 
 static const u8 sAerialAceDescription[] = _(
-    "An extremely speedy and\n"
-    "unavoidable attack.");
+    "Een supersnelle aanval\n"
+    "die nooit mist.");
 
 static const u8 sIcicleSpearDescription[] = _(
-    "Attacks the foe by firing\n"
-    "2 to 5 icicles in a row.");
+    "Schiet 2 tot 5\n"
+    "ijspegels achter elkaar.");
 
 static const u8 sIronDefenseDescription[] = _(
-    "Hardens the body's surface\n"
-    "to sharply raise DEFENSE.");
+    "Maakt de huid hard.\n"
+    "Verhoogt VERDEDIGING flink.");
 
 static const u8 sBlockDescription[] = _(
-    "Blocks the foe's way to\n"
-    "prevent escape.");
+    "Staat in de weg. Vijand\n"
+    "kan niet vluchten.");
 
 static const u8 sHowlDescription[] = _(
-    "Howls to raise the spirit\n"
-    "and boosts ATTACK.");
+    "Huilt zich moed in.\n"
+    "Verhoogt AANVAL.");
 
 static const u8 sDragonClawDescription[] = _(
-    "Slashes the foe with sharp\n"
-    "claws.");
+    "Krabt de vijand met\n"
+    "scherpe klauwen.");
 
 static const u8 sFrenzyPlantDescription[] = _(
-    "Powerful, but leaves the\n"
-    "user immobile the next turn.");
+    "Heel sterk, maar daarna\n"
+    "moet je 1 beurt rusten.");
 
 static const u8 sBulkUpDescription[] = _(
-    "Bulks up the body to boost\n"
-    "both ATTACK and DEFENSE.");
+    "Spant de spieren.\n"
+    "Verhoogt AANVAL en VERD.");
 
 static const u8 sBounceDescription[] = _(
-    "Bounces up, then down the\n"
-    "next turn. May paralyze.");
+    "Stuitert hoog op en valt\n"
+    "neer. Kan verlammen.");
 
 static const u8 sMudShotDescription[] = _(
-    "Hurls mud at the foe and\n"
-    "reduces SPEED.");
+    "Gooit modder.\n"
+    "Verlaagt SNELHEID.");
 
 static const u8 sPoisonTailDescription[] = _(
-    "Has a high critical-hit\n"
-    "ratio. May also poison.");
+    "Vaak een voltreffer.\n"
+    "Kan ook vergiftigen.");
 
 static const u8 sCovetDescription[] = _(
-    "Cutely begs to obtain an\n"
-    "item held by the foe.");
+    "Bedelt lief om het\n"
+    "voorwerp van de vijand.");
 
 static const u8 sVoltTackleDescription[] = _(
-    "A life-risking tackle that\n"
-    "slightly hurts the user.");
+    "Een gevaarlijke tackle.\n"
+    "Doet zelf ook wat pijn.");
 
 static const u8 sMagicalLeafDescription[] = _(
-    "Attacks with a strange leaf\n"
-    "that cannot be evaded.");
+    "Een vreemd blad dat\n"
+    "nooit mist.");
 
 static const u8 sWaterSportDescription[] = _(
-    "The user becomes soaked to\n"
-    "raise resistance to fire.");
+    "Wordt kletsnat. Minder\n"
+    "schade van vuur.");
 
 static const u8 sCalmMindDescription[] = _(
-    "Raises SP. ATK and SP. DEF\n"
-    "by focusing the mind.");
+    "Wordt heel rustig. Verhoogt\n"
+    "SP. AANV en SP. VERD.");
 
 static const u8 sLeafBladeDescription[] = _(
-    "Slashes with a sharp leaf.\n"
-    "High critical-hit ratio.");
+    "Snijdt met een scherp blad.\n"
+    "Veel kans op voltreffer.");
 
 static const u8 sDragonDanceDescription[] = _(
-    "A mystical dance that ups\n"
-    "ATTACK and SPEED.");
+    "Een magische dans. Meer\n"
+    "AANVAL en SNELHEID.");
 
 static const u8 sRockBlastDescription[] = _(
-    "Hurls boulders at the foe\n"
-    "2 to 5 times in a row.");
+    "Gooit 2 tot 5 keer\n"
+    "rotsen naar de vijand.");
 
 static const u8 sShockWaveDescription[] = _(
-    "A fast and unavoidable\n"
-    "electric attack.");
+    "Een snelle stroomaanval\n"
+    "die nooit mist.");
 
 static const u8 sWaterPulseDescription[] = _(
-    "Attacks with ultrasonic\n"
-    "waves. May confuse the foe.");
+    "Een golf van water.\n"
+    "Kan de vijand verwarren.");
 
 static const u8 sDoomDesireDescription[] = _(
-    "Summons strong sunlight to\n"
-    "attack 2 turns later.");
+    "Roept fel licht op.\n"
+    "Raakt 2 beurten later.");
 
 static const u8 sPsychoBoostDescription[] = _(
-    "Allows a full-power attack,\n"
-    "but sharply lowers SP. ATK.");
+    "Een aanval met volle kracht.\n"
+    "SP. AANV zakt flink.");
 
 // MOVE_NONE is ignored in this table. Make sure to always subtract 1 before getting the right pointer.
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =

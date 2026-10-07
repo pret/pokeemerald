@@ -1,0 +1,49 @@
+key	english	dutch	notes
+gText_HighlyAppealingMove	A highly appealing move.	Een heel mooi optreden.	
+gText_UserMoreEasilyStartled	After this move, the user is\nmore easily startled.	Hierna schrikt de POKéMON\nzelf sneller.	
+gText_GreatAppealButNoMoreToEnd	Makes a great appeal, but\nallows no more to the end.	Een super optreden, maar\nhierna mag je niet meer.	
+gText_UsedRepeatedlyWithoutBoringJudge	Can be repeatedly used\nwithout boring the JUDGE.	Kan vaak achter elkaar, de\nJURY verveelt zich niet.	
+gText_AvoidStartledByOthersOnce	Can avoid being startled\nby others once.	Schrikt 1 keer niet van\nde anderen.	
+gText_AvoidStartledByOthers	Can avoid being startled\nby others.	Schrikt niet van\nde anderen.	
+gText_AvoidStartledByOthersLittle	Can avoid being startled\nby others a little.	Schrikt iets minder van\nde anderen.	
+gText_UserLessLikelyStartled	After this move, the user is\nless likely to be startled.	Hierna schrikt de POKéMON\nzelf minder snel.	
+gText_SlightlyStartleFrontMon	Slightly startles the\nPOKéMON in front.	Laat de POKéMON ervoor\neen beetje schrikken.	
+gText_SlightlyStartleAppealed	Slightly startles those\nthat have made appeals.	Laat wie al optrad een\nbeetje schrikken.	
+gText_StartleAppealedBeforeUser	Startles the POKéMON that\nappealed before the user.	Laat de POKéMON die net\noptrad schrikken.	
+gText_StartleAllAppealed	Startles all POKéMON that\nhave done their appeals.	Laat iedereen die al\noptrad schrikken.	
+gText_BadlyStartleFrontMon	Badly startles the\nPOKéMON in front.	Laat de POKéMON ervoor\nflink schrikken.	
+gText_BadlyStartleAppealed	Badly startles those that\nhave made appeals.	Laat wie al optrad\nflink schrikken.	
+gText_StartleAppealedBeforeUser2	Startles the POKéMON that\nappealed before the user.	Laat de POKéMON die net\noptrad schrikken.	
+gText_StartleAllAppealed2	Startles all POKéMON that\nhave done their appeals.	Laat iedereen die al\noptrad schrikken.	
+gText_ShiftJudgesAttentionFromOthers	Shifts the JUDGE's\nattention from others.	De JURY kijkt niet meer\nnaar de anderen.	
+gText_StartleMonHasJudgesAttention	Startles the POKéMON that\nhas the JUDGE's attention.	Laat schrikken wie de\naandacht van de JURY heeft.	
+gText_JamOthersMissesTurn	Jams the others, and misses\none turn of appeals.	Stoort de anderen, maar\nslaat 1 beurt over.	
+gText_StartleMonsMadeSameTypeAppeal	Startles POKéMON that\nmade a same-type appeal.	Laat schrikken wie net zo'n\nsoort optreden deed.	
+gText_BadlyStartleCoolAppeals	Badly startles POKéMON\nthat made COOL appeals.	Laat wie STOER optrad\nflink schrikken.	
+gText_BadlyStartleBeautyAppeals	Badly startles POKéMON\nthat made BEAUTY appeals.	Laat wie MOOI optrad\nflink schrikken.	
+gText_BadlyStartleCuteAppeals	Badly startles POKéMON\nthat made CUTE appeals.	Laat wie SCHATTIG optrad\nflink schrikken.	
+gText_BadlyStartleSmartAppeals	Badly startles POKéMON\nthat made SMART appeals.	Laat wie SLIM optrad\nflink schrikken.	
+gText_BadlyStartleToughAppeals	Badly startles POKéMON\nthat made TOUGH appeals.	Laat wie STERK optrad\nflink schrikken.	
+gText_MakeMonAfterUserNervous	Makes one POKéMON after\nthe user nervous.	Maakt 1 POKéMON na jou\nzenuwachtig.	
+gText_MakeAllMonsAfterUserNervous	Makes all POKéMON after\nthe user nervous.	Maakt alle POKéMON na jou\nzenuwachtig.	
+gText_WorsenConditionOfThoseMadeAppeals	Worsens the condition of\nthose that made appeals.	Wie al optrad, raakt\nuit vorm.	
+gText_BadlyStartleMonsGoodCondition	Badly startles POKéMON in\ngood condition.	Laat POKéMON in goede vorm\nflink schrikken.	
+gText_AppealGreatIfPerformedFirst	The appeal works great if\nperformed first.	Werkt super als je als\neerste optreedt.	
+gText_AppealGreatIfPerformedLast	The appeal works great if\nperformed last.	Werkt super als je als\nlaatste optreedt.	
+gText_AppealAsGoodAsThoseBeforeIt	Makes the appeal as good\nas those before it.	Net zo goed als alle\noptredens ervoor.	
+gText_AppealAsGoodAsOneBeforeIt	Makes the appeal as good\nas the one before it.	Net zo goed als het\noptreden ervoor.	
+gText_AppealBetterLaterItsPerformed	The appeal works better\nthe later it is performed.	Hoe later je optreedt,\nhoe beter het werkt.	
+gText_AppealVariesDependingOnTiming	The appeal's quality varies\ndepending on its timing.	Hoe goed het is, hangt af\nvan het moment.	
+gText_WorksWellIfSameTypeAsBefore	Works well if it's the same\ntype as the one before.	Werkt goed na een optreden\nvan hetzelfde soort.	
+gText_WorksWellIfDifferentTypeAsBefore	Works well if different in\ntype than the one before.	Werkt goed na een optreden\nvan een ander soort.	
+gText_AffectedByAppealInFront	Affected by how well the\nappeal in front goes.	Hangt af van hoe goed het\noptreden ervoor ging.	
+gText_UpsConditionHelpsPreventNervousness	Ups the user's condition.\nHelps prevent nervousness.	Brengt je in vorm. Minder\nkans op zenuwen.	
+gText_AppealWorksWellIfConditionGood	The appeal works well if the\nuser's condition is good.	Werkt goed als je POKéMON\nin goede vorm is.	
+gText_NextAppealMadeEarlier	The next appeal can be\nmade earlier next turn.	Je volgende optreden\nkomt eerder.	
+gText_NextAppealMadeLater	The next appeal can be\nmade later next turn.	Je volgende optreden\nkomt later.	
+gText_TurnOrderMoreEasilyScrambled	Makes the next turn's order\nmore easily scrambled.	De volgende beurt raakt de\nvolgorde sneller door elkaar.	
+gText_ScrambleOrderOfNextAppeals	Scrambles the order of\nappeals on the next turn.	Gooit de volgorde van de\nvolgende beurt door elkaar.	
+gText_AppealExcitesAudienceInAnyContest	An appeal that excites the\naudience in any CONTEST.	Maakt het publiek blij in\nelke WEDSTRIJD.	
+gText_BadlyStartlesMonsGoodAppeals	Badly startles all POKéMON\nthat made good appeals.	Laat iedereen met een goed\noptreden flink schrikken.	
+gText_AppealBestMoreCrowdExcited	The appeal works best the\nmore the crowd is excited.	Werkt beter als het publiek\nenthousiaster is.	
+gText_TemporarilyStopCrowdExcited	Temporarily stops the\ncrowd from growing excited.	Het publiek wordt even\nniet enthousiaster.	

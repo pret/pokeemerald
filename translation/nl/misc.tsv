@@ -57,3 +57,17 @@ WORD_ABILITY	ability	talent	"Kopieert een talent."
 WORD_STATUS	status problem	kwaaltje	poison/burn/paralysis/sleep/freeze
 WORD_PINCH	in a pinch	in nood	"GRAS sterker in nood."
 WORD_SUPER_EFFECTIVE	super effective	super effectief	descriptions may say "zwakke plek"
+CONTEST_APPEAL	appeal	optreden	"Een heel mooi optreden."
+CONTEST_STARTLE	startle	laten schrikken	
+CONTEST_JUDGE	JUDGE	JURY	
+CONTEST_NERVOUS	nervous	zenuwachtig	
+CONTEST_CONDITION	condition	vorm	"in goede vorm"
+CONTEST_CROWD	crowd / audience	publiek	
+CONTEST_CONTEST	CONTEST	WEDSTRIJD	
+CONTEST_COOL	COOL	STOER	
+CONTEST_BEAUTY	BEAUTY	MOOI	
+CONTEST_CUTE	CUTE	SCHATTIG	
+CONTEST_SMART	SMART	SLIM	
+CONTEST_TOUGH	TOUGH	STERK	
+WORD_CONFUSE	confuse	verwarren	"Kan verwarren." (short form of in de war brengen)
+WORD_PHYSICAL	physical attack	klap	"Minder schade van klappen."

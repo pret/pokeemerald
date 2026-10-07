@@ -64,6 +64,9 @@ The player is a **Dutch kid (about 8–10 years old)**. Every Dutch string must 
 - `python3 translation/extract.py` refreshes the `english` column from the source and keeps existing `dutch`/`notes`.
 - `python3 translation/check.py` validates all Dutch cells (characters, byte length, line count, pixel width). It must pass before building.
 - `python3 translation/apply.py` writes the Dutch cells into the source files.
+- `python3 translation/fill.py <tsv-name> <file>` bulk-fills Dutch cells from a `KEY<TAB>dutch` text file.
+- Which source strings each TSV manages is defined in `SPECS` in `translation/common.py`. It supports both `_("...")` C strings and `.string "...$"` blocks in `.inc` files.
+- `contest.tsv` holds the contest move effect descriptions (`data/text/contest_strings.inc`).
 - **Always edit the TSV, then apply.** Never hand-edit strings that a TSV manages (move/ability/item/berry names and descriptions), or the next apply will overwrite them.
 
 ## Workflow per batch

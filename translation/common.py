@@ -35,6 +35,7 @@ KINDS = {
     "item_desc": Kind("item_desc", None, 3, [("normal", 109, "bag description")]),
     "berry_name": Kind("berry_name", 6, 1, [("normal", 64, "berry tag")]),
     "berry_desc": Kind("berry_desc", None, 1, [("normal", 200, "berry tag")]),
+    "contest_desc": Kind("contest_desc", None, 2, [("normal", 154, "summary move description")]),
 }
 
 LIT = r'"(?:[^"\\]|\\.)*"'
@@ -47,8 +48,13 @@ class Spec:
     tsv: str
     kind: str
     path: str
-    pattern: str  # group "key" + group "body" (the inside of `_( ... )`)
+    pattern: str  # group "key" + group "body" (the inside of `_( ... )`, or the .string lines)
     key_fmt: str = "{}"
+    style: str = "c"  # "c" for _("...") strings, "inc" for `.string "...$"` lines
+    section_end: str | None = None  # only scan the file up to this marker
+
+
+INC_ENTRY = rf'^(?P<key>gText_\w+)::\n(?P<body>(?:\t\.string {LIT}\n)+)'
 
 
 SPECS = [
@@ -69,6 +75,8 @@ SPECS = [
          "BERRYNAME_{}"),
     Spec("berries", "berry_desc", "src/berry.c",
          rf'static const u8 (?P<key>sBerryDescriptionPart\d_\w+)\[\] = _\((?P<body>(?:\s*{LIT})+\s*)\)'),
+    Spec("contest", "contest_desc", "data/text/contest_strings.inc", INC_ENTRY,
+         style="inc", section_end="@ Unused move names"),
 ]
 
 
@@ -81,13 +89,17 @@ class Entry:
     end: int
 
 
-def body_to_text(body):
-    """Join the C literals of a `_()` body into one raw string."""
-    return "".join(m[1:-1] for m in re.findall(LIT, body))
+def body_to_text(body, style="c"):
+    """Join the literals of a body into one raw string (.inc: without the final $)."""
+    text = "".join(m[1:-1] for m in re.findall(LIT, body))
+    return text[:-1] if style == "inc" and text.endswith("$") else text
 
 
-def text_to_body(text, old_body):
-    """Render raw text back as C literals, in the same layout as old_body."""
+def text_to_body(text, old_body, style="c"):
+    """Render raw text back as literals, in the same layout as old_body."""
+    if style == "inc":
+        parts = re.split(r"(?<=\\[nlp])", text + "$")
+        return "".join(f'\t.string "{p}"\n' for p in parts if p)
     if "\n" not in old_body:
         return f'"{text}"'
     indent = re.search(r'\n([ \t]*)"', old_body).group(1)
@@ -98,10 +110,13 @@ def text_to_body(text, old_body):
 
 def scan(spec):
     src = (ROOT / spec.path).read_text(encoding="utf-8")
+    if spec.section_end:
+        src = src[:src.index(spec.section_end)]
     out = []
-    for m in re.finditer(spec.pattern, src):
+    for m in re.finditer(spec.pattern, src, re.M):
         key = spec.key_fmt.format(m["key"])
-        out.append(Entry(key, body_to_text(m["body"]), spec, m.start("body"), m.end("body")))
+        text = body_to_text(m["body"], spec.style)
+        out.append(Entry(key, text, spec, m.start("body"), m.end("body")))
     return out
 
 

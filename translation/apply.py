@@ -23,7 +23,8 @@ def main():
         for e, text in sorted(items, key=lambda x: x[0].start, reverse=True):
             if text == e.text:
                 continue
-            src = src[:e.start] + text_to_body(text, src[e.start:e.end]) + src[e.end:]
+            body = text_to_body(text, src[e.start:e.end], e.spec.style)
+            src = src[:e.start] + body + src[e.end:]
             changed += 1
         if changed:
             file.write_text(src, encoding="utf-8")
