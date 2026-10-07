@@ -37,6 +37,7 @@ KINDS = {
     "berry_desc": Kind("berry_desc", None, 1, [("normal", 200, "berry tag")]),
     "contest_desc": Kind("contest_desc", None, 2, [("normal", 154, "summary move description")]),
     "battle_msg": Kind("battle_msg", None, 99, [("normal", 208, "battle text box")]),
+    "trainer_class": Kind("trainer_class", 12, 1, [("normal", 78, "trainer class in messages")]),
     "battle_type_move": Kind("battle_type_move", 16, 1, [("normal", 208, "battle text box")]),
 }
 
@@ -81,6 +82,8 @@ SPECS = [
          style="inc", section_end="@ Unused move names"),
     Spec("battle", "battle_msg", "src/battle_message.c",
          rf'^(?:static )?const u8 (?P<key>[sg]Text_\w+)\[\] = _\((?P<body>(?:\s*{LIT})+\s*)\)'),
+    Spec("trainers", "trainer_class", "src/data/text/trainer_class_names.h",
+         rf'\[(?P<key>TRAINER_CLASS_\w+)\] = _\((?P<body>(?:\s*{LIT})+\s*)\)'),
     Spec("battle", "battle_type_move", "src/battle_message.c",
          rf'\[(?P<key>TYPE_\w+)\]\s*= _\((?P<body>(?:\s*{LIT})+\s*)\)', "MOVETYPE_{}"),
 ]
