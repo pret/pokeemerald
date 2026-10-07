@@ -38,6 +38,7 @@ KINDS = {
     "contest_desc": Kind("contest_desc", None, 2, [("normal", 154, "summary move description")]),
     "battle_msg": Kind("battle_msg", None, 99, [("normal", 208, "battle text box")]),
     "ui": Kind("ui", None, 99, [("normal", 208, "text box")]),
+    "type_name": Kind("type_name", 6, 1, [("normal", 36, "TYPE/ in battle menu")]),
     "trainer_class": Kind("trainer_class", 12, 1, [("normal", 78, "trainer class in messages")]),
     "battle_type_move": Kind("battle_type_move", 16, 1, [("normal", 208, "battle text box")]),
 }
@@ -85,6 +86,8 @@ SPECS = [
          rf'^(?:static )?const u8 (?P<key>[sg]Text_\w+)\[\] = _\((?P<body>(?:\s*{LIT})+\s*)\)'),
     Spec("trainers", "trainer_class", "src/data/text/trainer_class_names.h",
          rf'\[(?P<key>TRAINER_CLASS_\w+)\] = _\((?P<body>(?:\s*{LIT})+\s*)\)'),
+    Spec("types", "type_name", "src/battle_main.c",
+         rf'\[(?P<key>TYPE_\w+)\] = _\((?P<body>(?:\s*{LIT})+\s*)\)', "TYPENAME_{}"),
     Spec("strings", "ui", "src/strings.c",
          rf'^(?:ALIGNED\(4\) )?(?:static )?const u8 (?P<key>(?!gJPText)\w+)\[\] = _\((?P<body>(?:\s*{LIT})+\s*)\)'),
     Spec("battle", "battle_type_move", "src/battle_message.c",

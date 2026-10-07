@@ -85,6 +85,29 @@ The player is a **Dutch kid (about 8–10 years old)**. Every Dutch string must 
 - `contest.tsv` holds the contest move effect descriptions (`data/text/contest_strings.inc`).
 - `trainers.tsv` holds trainer class names (max 12 bytes). Team names, ELITE FOUR and Battle Frontier titles stay English.
 - `battle.tsv` holds all strings in `src/battle_message.c` (battle messages, battle menu, stat names, Battle Frontier referee).
+- `types.tsv` holds the type names (`gTypeNames`, max 6 bytes, e.g. "TYPE/VUUR" in the battle move menu).
+- `strings.tsv` holds `src/strings.c` (menus, bag, PC, PokéNav, options, Mystery Gift…).
+  - Place and attraction names stay English (BATTLE TOWER, TRADE CENTER, BERRY CRUSH).
+  - Character names stay too, except MOM/DAD → MAMA/PAPA.
+- **UI text windows are often small.** `check.py` prints `WARN` when narrow English UI text (≤130px) gets wider in Dutch.
+  - For each warning, look up the window in the C code: `WindowTemplate .width` × 8px, minus the cursor or x offset. Many menus size themselves via `GetMaxWidthInMenuTable` / `DisplayTextAndGetWidth`.
+  - Shorten the text if it doesn't fit, then run `python3 translation/review.py` to mark the remaining warnings `label-ok: reviewed`.
+- **Notes-column markers** (in `check.py`):
+  - `max:NNN` sets a pixel limit for that string.
+  - `width-ok: <reason>` skips the width checks.
+  - `label-ok` silences the narrow-window warning.
+- **Known tight spots, with short forms in use:**
+
+  | Where | Width | Short forms |
+  |---|---|---|
+  | Summary stat labels | 36-42px | VERD., SP.AAN, SP.VER, SNELH. |
+  | Level-up box | 54px | VERD. |
+  | Bag description box | 106px, 3 lines | |
+  | PC box messages | 144px, 1 line | |
+  | Options values | x=104-198 | TRAAG / NORM / SNEL |
+  | Trainer card | value right-aligned at 216px | |
+
+- `check.py` also verifies text fits before a `{CLEAR_TO n}` column.
 - **Always edit the TSV, then apply.** Never hand-edit strings that a TSV manages (move/ability/item/berry names and descriptions), or the next apply will overwrite them.
 
 ## Workflow per batch

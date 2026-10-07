@@ -145,4 +145,5 @@ Until then dialogue is English text with Dutch names inserted where the game fil
 - [x] Batch 7: hardcoded duplicates in `src/strings.c` / `src/battle_message.c` (pockets, flutes, shards, fossils, vending drinks)
 - [ ] In-game review by the user
 - [x] Battle messages (`battle.tsv`)
-- [ ] Later: dialogue phase (trainer class names, menus in `src/strings.c`, map scripts, berry blender text, `{POKEBLOCK} CASE` in dialogue)
+- [x] Trainer class names, type names, menus and system text in `src/strings.c`
+- [ ] Later: dialogue phase (map scripts, Easy Chat words, decoration names, berry blender text, `{POKEBLOCK} CASE` in dialogue)

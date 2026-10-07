@@ -1662,75 +1662,75 @@ gText_MoveRelearnerTeachMoveConfirm	Teach {STR_VAR_2}?	{STR_VAR_2} leren?
 gText_MoveRelearnerPkmnLearnedMove	{STR_VAR_1} learned\n{STR_VAR_2}!	{STR_VAR_1} leert\n{STR_VAR_2}!	
 gText_MoveRelearnerPkmnTryingToLearnMove	{STR_VAR_1} is trying to learn\n{STR_VAR_2}.\pBut {STR_VAR_1} can't learn more\nthan four moves.\pDelete an older move to make\nroom for {STR_VAR_2}?	{STR_VAR_1} wil\n{STR_VAR_2} leren.\pMaar {STR_VAR_1} kan niet meer\ndan vier aanvallen.\pEen oude aanval vergeten voor\n{STR_VAR_2}?	
 gText_MoveRelearnerStopTryingToTeachMove	Stop trying to teach\n{STR_VAR_2}?	Stoppen met\n{STR_VAR_2} leren?	
-gText_MoveRelearnerAndPoof	{PAUSE 32}1, {PAUSE 15}2, and {PAUSE 15}… {PAUSE 15}… {PAUSE 15}… {PAUSE 15}{PLAY_SE SE_BALL_BOUNCE_1}Poof!\p		
-gText_MoveRelearnerPkmnForgotMoveAndLearnedNew	{STR_VAR_1} forgot {STR_VAR_3}.\pAnd…\p{STR_VAR_1} learned {STR_VAR_2}.		
-gText_MoveRelearnedPkmnDidNotLearnMove	{STR_VAR_1} did not learn the\nmove {STR_VAR_2}.		
-gText_MoveRelearnerGiveUp	Give up trying to teach a new\nmove to {STR_VAR_1}?		
-gText_MoveRelearnerWhichMoveToForget	Which move should be\nforgotten?\p		
-gText_MoveRelearnerBattleMoves	BATTLE MOVES		
-gText_MoveRelearnerContestMovesTitle	CONTEST MOVES		
+gText_MoveRelearnerAndPoof	{PAUSE 32}1, {PAUSE 15}2, and {PAUSE 15}… {PAUSE 15}… {PAUSE 15}… {PAUSE 15}{PLAY_SE SE_BALL_BOUNCE_1}Poof!\p	{PAUSE 32}1, {PAUSE 15}2 en {PAUSE 15}… {PAUSE 15}… {PAUSE 15}… {PAUSE 15}{PLAY_SE SE_BALL_BOUNCE_1}Poef!\p	
+gText_MoveRelearnerPkmnForgotMoveAndLearnedNew	{STR_VAR_1} forgot {STR_VAR_3}.\pAnd…\p{STR_VAR_1} learned {STR_VAR_2}.	{STR_VAR_1} vergeet {STR_VAR_3}.\pEn…\p{STR_VAR_1} leert {STR_VAR_2}.	
+gText_MoveRelearnedPkmnDidNotLearnMove	{STR_VAR_1} did not learn the\nmove {STR_VAR_2}.	{STR_VAR_1} leert de aanval\n{STR_VAR_2} niet.	
+gText_MoveRelearnerGiveUp	Give up trying to teach a new\nmove to {STR_VAR_1}?	Wil je stoppen met een nieuwe\naanval leren aan {STR_VAR_1}?	
+gText_MoveRelearnerWhichMoveToForget	Which move should be\nforgotten?\p	Welke aanval wil je\nvergeten?\p	
+gText_MoveRelearnerBattleMoves	BATTLE MOVES	AANVALLEN	
+gText_MoveRelearnerContestMovesTitle	CONTEST MOVES	WEDSTRIJD	
 gText_MoveRelearnerType	TYPE/		
 gText_MoveRelearnerPP	PP/		
-gText_MoveRelearnerPower	POWER/		
-gText_MoveRelearnerAccuracy	ACCURACY/		
-gText_MoveRelearnerAppeal	APPEAL		
-gText_MoveRelearnerJam	JAM		
+gText_MoveRelearnerPower	POWER/	KRACHT/	label-ok: reviewed
+gText_MoveRelearnerAccuracy	ACCURACY/	RAAKKANS/	
+gText_MoveRelearnerAppeal	APPEAL	SHOW	
+gText_MoveRelearnerJam	JAM	STOREN	label-ok: reviewed
 gText_Kira	KIRA		
 gText_Amy	AMY		
 gText_John	JOHN		
 gText_Roy	ROY		
 gText_Gabby	GABBY		
 gText_Anna	ANNA		
-gText_ClearAllSaveData	Clear all save data areas?		
-gText_ClearingData	Clearing data…\nPlease wait.		
-gText_IsThisTheCorrectTime	Is this the correct time?		
-gText_Confirm3	CONFIRM		
-gText_Cancel4	CANCEL		
-gText_MrStoneMatchCallDesc	DEVON PRES		
+gText_ClearAllSaveData	Clear all save data areas?	Alles van het opgeslagen spel wissen?	
+gText_ClearingData	Clearing data…\nPlease wait.	Bezig met wissen…\nEven geduld.	label-ok: reviewed
+gText_IsThisTheCorrectTime	Is this the correct time?	Is dit de goede tijd?	
+gText_Confirm3	CONFIRM	OK	
+gText_Cancel4	CANCEL	TERUG	
+gText_MrStoneMatchCallDesc	DEVON PRES	DEVON-BAAS	label-ok: reviewed
 gText_MrStoneMatchCallName	MR. STONE		
-gText_StevenMatchCallDesc	HARD AS ROCK		
+gText_StevenMatchCallDesc	HARD AS ROCK	KEIHARD	
 gText_StevenMatchCallName	STEVEN		
-gText_MayBrendanMatchCallDesc	RAD NEIGHBOR		
-gText_NormanMatchCallDesc	RELIABLE ONE		
-gText_MomMatchCallDesc	CALM & KIND		
-gText_WallyMatchCallDesc	{PKMN} LOVER		
-gText_NormanMatchCallName	DAD		
-gText_MomMatchCallName	MOM		
-gText_ScottMatchCallDesc	ELUSIVE EYES		
+gText_MayBrendanMatchCallDesc	RAD NEIGHBOR	TOFFE BUUR	
+gText_NormanMatchCallDesc	RELIABLE ONE	BETROUWBAAR	
+gText_MomMatchCallDesc	CALM & KIND	RUSTIG & LIEF	label-ok: reviewed
+gText_WallyMatchCallDesc	{PKMN} LOVER	{PKMN}-FAN	
+gText_NormanMatchCallName	DAD	PAPA	label-ok: reviewed
+gText_MomMatchCallName	MOM	MAMA	label-ok: reviewed
+gText_ScottMatchCallDesc	ELUSIVE EYES	GEHEIMZINNIG	label-ok: reviewed
 gText_ScottMatchCallName	SCOTT		
-gText_RoxanneMatchCallDesc	ROCKIN' WHIZ		
-gText_BrawlyMatchCallDesc	THE BIG HIT		
-gText_WattsonMatchCallDesc	SWELL SHOCK		
-gText_FlanneryMatchCallDesc	PASSION BURN		
-gText_WinonaMatchCallDesc	SKY TAMER		
-gText_TateLizaMatchCallDesc	MYSTIC DUO		
-gText_JuanMatchCallDesc	DANDY CHARM		
+gText_RoxanneMatchCallDesc	ROCKIN' WHIZ	ROTSSLIM	
+gText_BrawlyMatchCallDesc	THE BIG HIT	HARDE KLAP	
+gText_WattsonMatchCallDesc	SWELL SHOCK	SUPERSCHOK	
+gText_FlanneryMatchCallDesc	PASSION BURN	VURIG	
+gText_WinonaMatchCallDesc	SKY TAMER	LUCHTTEMMER	label-ok: reviewed
+gText_TateLizaMatchCallDesc	MYSTIC DUO	MAGISCH DUO	label-ok: reviewed
+gText_JuanMatchCallDesc	DANDY CHARM	CHARMEUR	
 gText_EliteFourMatchCallDesc	ELITE FOUR		
-gText_ChampionMatchCallDesc	CHAMPION		
-gText_ProfBirchMatchCallDesc	{PKMN} PROF.		
-gText_CommStandbyAwaitingOtherPlayer	Communication standby…\nAwaiting another player to choose.		
-gText_BattleWasRefused	The battle was refused.{PAUSE 60}		
-gText_RefusedBattle	Refused the battle.{PAUSE 60}		
-gText_NoWeather	NO WEATHER		
-gText_Sunny	SUNNY		
-gText_Sunny2	SUNNY2		
-gText_Rain	RAIN		
-gText_Snow	SNOW		
-gText_Lightning	LIGHTNING		
-gText_Fog	FOG		
-gText_VolcanoAsh	VOLCANO ASH		
-gText_Sandstorm	SANDSTORM		
-gText_Fog2	FOG2		
-gText_Seafloor	SEAFLOOR		
-gText_Cloudy	CLOUDY		
-gText_Sunny3	SUNNY3		
-gText_HeavyRain	HEAVY RAIN		
-gText_Seafloor2	SEAFLOOR2		
-gText_DelAll	DEL. ALL		
-gText_Cancel5	CANCEL		
+gText_ChampionMatchCallDesc	CHAMPION	KAMPIOEN	
+gText_ProfBirchMatchCallDesc	{PKMN} PROF.	{PKMN}-PROF.	label-ok: reviewed
+gText_CommStandbyAwaitingOtherPlayer	Communication standby…\nAwaiting another player to choose.	Verbinding maken…\nWachten tot de ander kiest.	
+gText_BattleWasRefused	The battle was refused.{PAUSE 60}	Het gevecht is geweigerd.{PAUSE 60}	label-ok: reviewed
+gText_RefusedBattle	Refused the battle.{PAUSE 60}	Gevecht geweigerd.{PAUSE 60}	
+gText_NoWeather	NO WEATHER	GEEN WEER	
+gText_Sunny	SUNNY	ZONNIG	label-ok: reviewed
+gText_Sunny2	SUNNY2	ZONNIG2	label-ok: reviewed
+gText_Rain	RAIN	REGEN	label-ok: reviewed
+gText_Snow	SNOW	SNEEUW	label-ok: reviewed
+gText_Lightning	LIGHTNING	ONWEER	
+gText_Fog	FOG	MIST	label-ok: reviewed
+gText_VolcanoAsh	VOLCANO ASH	VULKAANAS	
+gText_Sandstorm	SANDSTORM	ZANDSTORM	
+gText_Fog2	FOG2	MIST2	label-ok: reviewed
+gText_Seafloor	SEAFLOOR	ZEEBODEM	
+gText_Cloudy	CLOUDY	BEWOLKT	label-ok: reviewed
+gText_Sunny3	SUNNY3	ZONNIG3	label-ok: reviewed
+gText_HeavyRain	HEAVY RAIN	STORTREGEN	label-ok: reviewed
+gText_Seafloor2	SEAFLOOR2	ZEEBODEM2	
+gText_DelAll	DEL. ALL	WIS ALLES	label-ok: reviewed
+gText_Cancel5	CANCEL	TERUG	
 gText_Ok2	OK		
-gText_Quiz	QUIZ		
-gText_Answer	ANSWER		
+gText_Quiz	QUIZ	QUIZ	
+gText_Answer	ANSWER	ANTWOORD	label-ok: reviewed
 gText_PokeBalls	POKé BALLS		
 gText_Berry	BERRY	BES	
 gText_Berries	BERRIES	BESSEN	
