@@ -1,157 +1,157 @@
 key	english	dutch	notes
 ABILITY_NONE	-------		
-ABILITY_STENCH	STENCH		
-ABILITY_DRIZZLE	DRIZZLE		
-ABILITY_SPEED_BOOST	SPEED BOOST		
-ABILITY_BATTLE_ARMOR	BATTLE ARMOR		
-ABILITY_STURDY	STURDY		
-ABILITY_DAMP	DAMP		
-ABILITY_LIMBER	LIMBER		
-ABILITY_SAND_VEIL	SAND VEIL		
-ABILITY_STATIC	STATIC		
-ABILITY_VOLT_ABSORB	VOLT ABSORB		
-ABILITY_WATER_ABSORB	WATER ABSORB		
-ABILITY_OBLIVIOUS	OBLIVIOUS		
-ABILITY_CLOUD_NINE	CLOUD NINE		
-ABILITY_COMPOUND_EYES	COMPOUNDEYES		
-ABILITY_INSOMNIA	INSOMNIA		
-ABILITY_COLOR_CHANGE	COLOR CHANGE		
-ABILITY_IMMUNITY	IMMUNITY		
-ABILITY_FLASH_FIRE	FLASH FIRE		
-ABILITY_SHIELD_DUST	SHIELD DUST		
-ABILITY_OWN_TEMPO	OWN TEMPO		
-ABILITY_SUCTION_CUPS	SUCTION CUPS		
-ABILITY_INTIMIDATE	INTIMIDATE		
-ABILITY_SHADOW_TAG	SHADOW TAG		
-ABILITY_ROUGH_SKIN	ROUGH SKIN		
-ABILITY_WONDER_GUARD	WONDER GUARD		
-ABILITY_LEVITATE	LEVITATE		
-ABILITY_EFFECT_SPORE	EFFECT SPORE		
-ABILITY_SYNCHRONIZE	SYNCHRONIZE		
-ABILITY_CLEAR_BODY	CLEAR BODY		
-ABILITY_NATURAL_CURE	NATURAL CURE		
-ABILITY_LIGHTNING_ROD	LIGHTNINGROD		
-ABILITY_SERENE_GRACE	SERENE GRACE		
-ABILITY_SWIFT_SWIM	SWIFT SWIM		
-ABILITY_CHLOROPHYLL	CHLOROPHYLL		
-ABILITY_ILLUMINATE	ILLUMINATE		
-ABILITY_TRACE	TRACE		
-ABILITY_HUGE_POWER	HUGE POWER		
-ABILITY_POISON_POINT	POISON POINT		
-ABILITY_INNER_FOCUS	INNER FOCUS		
-ABILITY_MAGMA_ARMOR	MAGMA ARMOR		
-ABILITY_WATER_VEIL	WATER VEIL		
-ABILITY_MAGNET_PULL	MAGNET PULL		
-ABILITY_SOUNDPROOF	SOUNDPROOF		
-ABILITY_RAIN_DISH	RAIN DISH		
-ABILITY_SAND_STREAM	SAND STREAM		
-ABILITY_PRESSURE	PRESSURE		
-ABILITY_THICK_FAT	THICK FAT		
-ABILITY_EARLY_BIRD	EARLY BIRD		
-ABILITY_FLAME_BODY	FLAME BODY		
-ABILITY_RUN_AWAY	RUN AWAY		
-ABILITY_KEEN_EYE	KEEN EYE		
-ABILITY_HYPER_CUTTER	HYPER CUTTER		
-ABILITY_PICKUP	PICKUP		
-ABILITY_TRUANT	TRUANT		
-ABILITY_HUSTLE	HUSTLE		
-ABILITY_CUTE_CHARM	CUTE CHARM		
-ABILITY_PLUS	PLUS		
-ABILITY_MINUS	MINUS		
-ABILITY_FORECAST	FORECAST		
-ABILITY_STICKY_HOLD	STICKY HOLD		
-ABILITY_SHED_SKIN	SHED SKIN		
-ABILITY_GUTS	GUTS		
-ABILITY_MARVEL_SCALE	MARVEL SCALE		
-ABILITY_LIQUID_OOZE	LIQUID OOZE		
-ABILITY_OVERGROW	OVERGROW		
-ABILITY_BLAZE	BLAZE		
-ABILITY_TORRENT	TORRENT		
-ABILITY_SWARM	SWARM		
-ABILITY_ROCK_HEAD	ROCK HEAD		
-ABILITY_DROUGHT	DROUGHT		
-ABILITY_ARENA_TRAP	ARENA TRAP		
-ABILITY_VITAL_SPIRIT	VITAL SPIRIT		
-ABILITY_WHITE_SMOKE	WHITE SMOKE		
-ABILITY_PURE_POWER	PURE POWER		
-ABILITY_SHELL_ARMOR	SHELL ARMOR		
-ABILITY_CACOPHONY	CACOPHONY		
-ABILITY_AIR_LOCK	AIR LOCK		
-sNoneDescription	No special ability.		
-sStenchDescription	Helps repel wild POKéMON.		
-sDrizzleDescription	Summons rain in battle.		
-sSpeedBoostDescription	Gradually boosts SPEED.		
-sBattleArmorDescription	Blocks critical hits.		
-sSturdyDescription	Negates 1-hit KO attacks.		
-sDampDescription	Prevents self-destruction.		
-sLimberDescription	Prevents paralysis.		
-sSandVeilDescription	Ups evasion in a sandstorm.		
-sStaticDescription	Paralyzes on contact.		
-sVoltAbsorbDescription	Turns electricity into HP.		
-sWaterAbsorbDescription	Changes water into HP.		
-sObliviousDescription	Prevents attraction.		
-sCloudNineDescription	Negates weather effects.		
-sCompoundEyesDescription	Raises accuracy.		
-sInsomniaDescription	Prevents sleep.		
-sColorChangeDescription	Changes type to foe's move.		
-sImmunityDescription	Prevents poisoning.		
-sFlashFireDescription	Powers up if hit by fire.		
-sShieldDustDescription	Prevents added effects.		
-sOwnTempoDescription	Prevents confusion.		
-sSuctionCupsDescription	Firmly anchors the body.		
-sIntimidateDescription	Lowers the foe's ATTACK.		
-sShadowTagDescription	Prevents the foe's escape.		
-sRoughSkinDescription	Hurts to touch.		
-sWonderGuardDescription	“Super effective” hits.		
-sLevitateDescription	Not hit by GROUND attacks.		
-sEffectSporeDescription	Leaves spores on contact.		
-sSynchronizeDescription	Passes on status problems.		
-sClearBodyDescription	Prevents ability reduction.		
-sNaturalCureDescription	Heals upon switching out.		
-sLightningRodDescription	Draws electrical moves.		
-sSereneGraceDescription	Promotes added effects.		
-sSwiftSwimDescription	Raises SPEED in rain.		
-sChlorophyllDescription	Raises SPEED in sunshine.		
-sIlluminateDescription	Encounter rate increases.		
-sTraceDescription	Copies special ability.		
-sHugePowerDescription	Raises ATTACK.		
-sPoisonPointDescription	Poisons foe on contact.		
-sInnerFocusDescription	Prevents flinching.		
-sMagmaArmorDescription	Prevents freezing.		
-sWaterVeilDescription	Prevents burns.		
-sMagnetPullDescription	Traps STEEL-type POKéMON.		
-sSoundproofDescription	Avoids sound-based moves.		
-sRainDishDescription	Slight HP recovery in rain.		
-sSandStreamDescription	Summons a sandstorm.		
-sPressureDescription	Raises foe's PP usage.		
-sThickFatDescription	Heat-and-cold protection.		
-sEarlyBirdDescription	Awakens quickly from sleep.		
-sFlameBodyDescription	Burns the foe on contact.		
-sRunAwayDescription	Makes escaping easier.		
-sKeenEyeDescription	Prevents loss of accuracy.		
-sHyperCutterDescription	Prevents ATTACK reduction.		
-sPickupDescription	May pick up items.		
-sTruantDescription	Moves only every two turns.		
-sHustleDescription	Trades accuracy for power.		
-sCuteCharmDescription	Infatuates on contact.		
-sPlusDescription	Powers up with MINUS.		
-sMinusDescription	Powers up with PLUS.		
-sForecastDescription	Changes with the weather.		
-sStickyHoldDescription	Prevents item theft.		
-sShedSkinDescription	Heals the body by shedding.		
-sGutsDescription	Ups ATTACK if suffering.		
-sMarvelScaleDescription	Ups DEFENSE if suffering.		
-sLiquidOozeDescription	Draining causes injury.		
-sOvergrowDescription	Ups GRASS moves in a pinch.		
-sBlazeDescription	Ups FIRE moves in a pinch.		
-sTorrentDescription	Ups WATER moves in a pinch.		
-sSwarmDescription	Ups BUG moves in a pinch.		
-sRockHeadDescription	Prevents recoil damage.		
-sDroughtDescription	Summons sunlight in battle.		
-sArenaTrapDescription	Prevents fleeing.		
-sVitalSpiritDescription	Prevents sleep.		
-sWhiteSmokeDescription	Prevents ability reduction.		
-sPurePowerDescription	Raises ATTACK.		
-sShellArmorDescription	Blocks critical hits.		
-sCacophonyDescription	Avoids sound-based moves.		
-sAirLockDescription	Negates weather effects.		
+ABILITY_STENCH	STENCH	STANK	
+ABILITY_DRIZZLE	DRIZZLE	MOTREGEN	
+ABILITY_SPEED_BOOST	SPEED BOOST	TURBO	
+ABILITY_BATTLE_ARMOR	BATTLE ARMOR	HARNAS	
+ABILITY_STURDY	STURDY	STEVIG	
+ABILITY_DAMP	DAMP	VOCHTIG	
+ABILITY_LIMBER	LIMBER	LENIG	
+ABILITY_SAND_VEIL	SAND VEIL	ZANDWOLK	
+ABILITY_STATIC	STATIC	VONKEN	
+ABILITY_VOLT_ABSORB	VOLT ABSORB	STROOMVRETER	
+ABILITY_WATER_ABSORB	WATER ABSORB	WATERDRINKER	
+ABILITY_OBLIVIOUS	OBLIVIOUS	SUFFIG	
+ABILITY_CLOUD_NINE	CLOUD NINE	WOLKVRIJ	
+ABILITY_COMPOUND_EYES	COMPOUNDEYES	FACETOGEN	
+ABILITY_INSOMNIA	INSOMNIA	SLAPELOOS	
+ABILITY_COLOR_CHANGE	COLOR CHANGE	KLEURWISSEL	
+ABILITY_IMMUNITY	IMMUNITY	IMMUUN	
+ABILITY_FLASH_FIRE	FLASH FIRE	VUURVANGER	
+ABILITY_SHIELD_DUST	SHIELD DUST	SCHILDSTOF	
+ABILITY_OWN_TEMPO	OWN TEMPO	EIGEN TEMPO	
+ABILITY_SUCTION_CUPS	SUCTION CUPS	ZUIGNAPPEN	
+ABILITY_INTIMIDATE	INTIMIDATE	BANGMAKER	
+ABILITY_SHADOW_TAG	SHADOW TAG	SCHADUWVANG	
+ABILITY_ROUGH_SKIN	ROUGH SKIN	RUWE HUID	
+ABILITY_WONDER_GUARD	WONDER GUARD	WONDERSCHILD	
+ABILITY_LEVITATE	LEVITATE	ZWEVEN	
+ABILITY_EFFECT_SPORE	EFFECT SPORE	SPORENWOLK	
+ABILITY_SYNCHRONIZE	SYNCHRONIZE	DOORGEVEN	
+ABILITY_CLEAR_BODY	CLEAR BODY	HELDER LIJF	
+ABILITY_NATURAL_CURE	NATURAL CURE	ZELFGENEZER	
+ABILITY_LIGHTNING_ROD	LIGHTNINGROD	BLIKSEMVANG	
+ABILITY_SERENE_GRACE	SERENE GRACE	GELUKSKIND	
+ABILITY_SWIFT_SWIM	SWIFT SWIM	SNELZWEMMER	
+ABILITY_CHLOROPHYLL	CHLOROPHYLL	BLADGROEN	
+ABILITY_ILLUMINATE	ILLUMINATE	LICHTGEVEN	
+ABILITY_TRACE	TRACE	KOPIEERDER	
+ABILITY_HUGE_POWER	HUGE POWER	REUZENKRACHT	
+ABILITY_POISON_POINT	POISON POINT	GIFPUNT	
+ABILITY_INNER_FOCUS	INNER FOCUS	KALMTE	
+ABILITY_MAGMA_ARMOR	MAGMA ARMOR	MAGMAPANTSER	
+ABILITY_WATER_VEIL	WATER VEIL	WATERLAAG	
+ABILITY_MAGNET_PULL	MAGNET PULL	MAGNEET	
+ABILITY_SOUNDPROOF	SOUNDPROOF	OORDOPJES	
+ABILITY_RAIN_DISH	RAIN DISH	REGENHAP	
+ABILITY_SAND_STREAM	SAND STREAM	ZANDSTROOM	
+ABILITY_PRESSURE	PRESSURE	DRUK	
+ABILITY_THICK_FAT	THICK FAT	SPEKLAAG	
+ABILITY_EARLY_BIRD	EARLY BIRD	VROEGE VOGEL	
+ABILITY_FLAME_BODY	FLAME BODY	VLAMMENLIJF	
+ABILITY_RUN_AWAY	RUN AWAY	WEGRENNEN	
+ABILITY_KEEN_EYE	KEEN EYE	SCHERP OOG	
+ABILITY_HYPER_CUTTER	HYPER CUTTER	SUPERSCHAAR	
+ABILITY_PICKUP	PICKUP	OPRAPEN	
+ABILITY_TRUANT	TRUANT	LUIAARD	
+ABILITY_HUSTLE	HUSTLE	HAASTWERK	
+ABILITY_CUTE_CHARM	CUTE CHARM	SCHATTIG	
+ABILITY_PLUS	PLUS	PLUS	
+ABILITY_MINUS	MINUS	MINUS	
+ABILITY_FORECAST	FORECAST	WEERBERICHT	
+ABILITY_STICKY_HOLD	STICKY HOLD	KLEEFGREEP	
+ABILITY_SHED_SKIN	SHED SKIN	VERVELLEN	
+ABILITY_GUTS	GUTS	DURF	
+ABILITY_MARVEL_SCALE	MARVEL SCALE	WONDERSCHUB	
+ABILITY_LIQUID_OOZE	LIQUID OOZE	GIFSLIJM	
+ABILITY_OVERGROW	OVERGROW	WILDGROEI	
+ABILITY_BLAZE	BLAZE	VUURZEE	
+ABILITY_TORRENT	TORRENT	STORTVLOED	
+ABILITY_SWARM	SWARM	ZWERM	
+ABILITY_ROCK_HEAD	ROCK HEAD	STEENHOOFD	
+ABILITY_DROUGHT	DROUGHT	DROOGTE	
+ABILITY_ARENA_TRAP	ARENA TRAP	KUILVAL	
+ABILITY_VITAL_SPIRIT	VITAL SPIRIT	LEVENSLUST	
+ABILITY_WHITE_SMOKE	WHITE SMOKE	WITTE ROOK	
+ABILITY_PURE_POWER	PURE POWER	PURE KRACHT	
+ABILITY_SHELL_ARMOR	SHELL ARMOR	SCHELPSCHILD	
+ABILITY_CACOPHONY	CACOPHONY	HERRIE	
+ABILITY_AIR_LOCK	AIR LOCK	LUCHTSLOT	
+sNoneDescription	No special ability.	Geen speciaal talent.	
+sStenchDescription	Helps repel wild POKéMON.	Houdt wilde POKéMON weg.	
+sDrizzleDescription	Summons rain in battle.	Laat het regenen.	
+sSpeedBoostDescription	Gradually boosts SPEED.	Wordt steeds sneller.	
+sBattleArmorDescription	Blocks critical hits.	Blokkeert voltreffers.	
+sSturdyDescription	Negates 1-hit KO attacks.	Niet in 1 klap KO.	
+sDampDescription	Prevents self-destruction.	Niemand kan ontploffen.	
+sLimberDescription	Prevents paralysis.	Raakt nooit verlamd.	
+sSandVeilDescription	Ups evasion in a sandstorm.	Ontwijkt goed in zandstorm.	
+sStaticDescription	Paralyzes on contact.	Verlamt bij aanraking.	
+sVoltAbsorbDescription	Turns electricity into HP.	Maakt van stroom HP.	
+sWaterAbsorbDescription	Changes water into HP.	Maakt van water HP.	
+sObliviousDescription	Prevents attraction.	Wordt nooit verliefd.	
+sCloudNineDescription	Negates weather effects.	Het weer werkt niet meer.	
+sCompoundEyesDescription	Raises accuracy.	Verhoogt de raakkans.	
+sInsomniaDescription	Prevents sleep.	Valt nooit in slaap.	
+sColorChangeDescription	Changes type to foe's move.	Neemt type van aanval aan.	
+sImmunityDescription	Prevents poisoning.	Raakt nooit vergiftigd.	
+sFlashFireDescription	Powers up if hit by fire.	Vuur maakt hem sterker.	
+sShieldDustDescription	Prevents added effects.	Stopt extra effecten.	
+sOwnTempoDescription	Prevents confusion.	Raakt nooit in de war.	
+sSuctionCupsDescription	Firmly anchors the body.	Zit stevig vast.	
+sIntimidateDescription	Lowers the foe's ATTACK.	Verlaagt AANVAL van vijand.	
+sShadowTagDescription	Prevents the foe's escape.	Vijand kan niet vluchten.	
+sRoughSkinDescription	Hurts to touch.	Aanraken doet pijn.	
+sWonderGuardDescription	“Super effective” hits.	Alleen zwakke plek raakt.	
+sLevitateDescription	Not hit by GROUND attacks.	GROND-aanvallen missen.	
+sEffectSporeDescription	Leaves spores on contact.	Sporen bij aanraking.	
+sSynchronizeDescription	Passes on status problems.	Geeft kwaaltjes door.	
+sClearBodyDescription	Prevents ability reduction.	Kan niet verzwakt worden.	
+sNaturalCureDescription	Heals upon switching out.	Geneest bij wisselen.	
+sLightningRodDescription	Draws electrical moves.	Trekt bliksem aan.	
+sSereneGraceDescription	Promotes added effects.	Meer kans op extra effect.	
+sSwiftSwimDescription	Raises SPEED in rain.	Sneller in de regen.	
+sChlorophyllDescription	Raises SPEED in sunshine.	Sneller in de zon.	
+sIlluminateDescription	Encounter rate increases.	Meer wilde POKéMON.	
+sTraceDescription	Copies special ability.	Kopieert een talent.	
+sHugePowerDescription	Raises ATTACK.	Verhoogt AANVAL.	
+sPoisonPointDescription	Poisons foe on contact.	Vergiftigt bij aanraking.	
+sInnerFocusDescription	Prevents flinching.	Deinst nooit terug.	
+sMagmaArmorDescription	Prevents freezing.	Bevriest nooit.	
+sWaterVeilDescription	Prevents burns.	Verbrandt nooit.	
+sMagnetPullDescription	Traps STEEL-type POKéMON.	Vangt STAAL-POKéMON.	
+sSoundproofDescription	Avoids sound-based moves.	Doof voor geluidsaanvallen.	
+sRainDishDescription	Slight HP recovery in rain.	Krijgt HP in de regen.	
+sSandStreamDescription	Summons a sandstorm.	Maakt een zandstorm.	
+sPressureDescription	Raises foe's PP usage.	Vijand verbruikt meer PP.	
+sThickFatDescription	Heat-and-cold protection.	VUUR en IJS doen minder.	
+sEarlyBirdDescription	Awakens quickly from sleep.	Wordt snel wakker.	
+sFlameBodyDescription	Burns the foe on contact.	Verbrandt bij aanraking.	
+sRunAwayDescription	Makes escaping easier.	Kan altijd vluchten.	
+sKeenEyeDescription	Prevents loss of accuracy.	Raakkans zakt nooit.	
+sHyperCutterDescription	Prevents ATTACK reduction.	AANVAL zakt nooit.	
+sPickupDescription	May pick up items.	Raapt soms iets op.	
+sTruantDescription	Moves only every two turns.	Rust elke 2e beurt uit.	
+sHustleDescription	Trades accuracy for power.	Sterker, maar mist vaker.	
+sCuteCharmDescription	Infatuates on contact.	Aanraken maakt verliefd.	
+sPlusDescription	Powers up with MINUS.	Sterker samen met MINUS.	
+sMinusDescription	Powers up with PLUS.	Sterker samen met PLUS.	
+sForecastDescription	Changes with the weather.	Verandert met het weer.	
+sStickyHoldDescription	Prevents item theft.	Voorwerp is niet te stelen.	
+sShedSkinDescription	Heals the body by shedding.	Vervelt en geneest zo.	
+sGutsDescription	Ups ATTACK if suffering.	Meer AANVAL bij kwaaltje.	
+sMarvelScaleDescription	Ups DEFENSE if suffering.	Meer VERD. bij kwaaltje.	
+sLiquidOozeDescription	Draining causes injury.	Wie HP zuigt, krijgt schade.	
+sOvergrowDescription	Ups GRASS moves in a pinch.	GRAS sterker in nood.	
+sBlazeDescription	Ups FIRE moves in a pinch.	VUUR sterker in nood.	
+sTorrentDescription	Ups WATER moves in a pinch.	WATER sterker in nood.	
+sSwarmDescription	Ups BUG moves in a pinch.	INSECT sterker in nood.	
+sRockHeadDescription	Prevents recoil damage.	Geen schade van terugslag.	
+sDroughtDescription	Summons sunlight in battle.	Laat de zon fel schijnen.	
+sArenaTrapDescription	Prevents fleeing.	Vijand kan niet wegrennen.	
+sVitalSpiritDescription	Prevents sleep.	Valt nooit in slaap.	
+sWhiteSmokeDescription	Prevents ability reduction.	Kan niet verzwakt worden.	
+sPurePowerDescription	Raises ATTACK.	Verhoogt AANVAL.	
+sShellArmorDescription	Blocks critical hits.	Blokkeert voltreffers.	
+sCacophonyDescription	Avoids sound-based moves.	Doof voor geluidsaanvallen.	
+sAirLockDescription	Negates weather effects.	Het weer werkt niet meer.	

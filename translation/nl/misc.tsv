@@ -53,3 +53,7 @@ WORD_SANDSTORM	sandstorm	zandstorm
 WORD_HAIL	hail	hagel
 WORD_BERRY	BERRY / BERRIES	BES / BESSEN
 WORD_WILD	wild POKéMON	wilde POKéMON
+WORD_ABILITY	ability	talent	"Kopieert een talent."
+WORD_STATUS	status problem	kwaaltje	poison/burn/paralysis/sleep/freeze
+WORD_PINCH	in a pinch	in nood	"GRAS sterker in nood."
+WORD_SUPER_EFFECTIVE	super effective	super effectief	descriptions may say "zwakke plek"
