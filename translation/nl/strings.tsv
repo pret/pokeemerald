@@ -917,216 +917,216 @@ gText_NumberOfBattles	No. of battles	Gevechten
 gText_Detail	DETAIL	DETAIL	
 gText_Call2	CALL	BEL	
 gText_UnusedExit	EXIT	SLUIT	label-ok: reviewed
-gText_CantCallOpponentHere	Can't call opponent here.		
-gText_PokenavMatchCall_Strategy	STRATEGY		
-gText_PokenavMatchCall_TrainerPokemon	TRAINER'S POKéMON		
-gText_PokenavMatchCall_SelfIntroduction	SELF-INTRODUCTION		
+gText_CantCallOpponentHere	Can't call opponent here.	Je kunt hier niet bellen.	
+gText_PokenavMatchCall_Strategy	STRATEGY	TACTIEK	
+gText_PokenavMatchCall_TrainerPokemon	TRAINER'S POKéMON	POKéMON VAN TRAINER	label-ok: reviewed
+gText_PokenavMatchCall_SelfIntroduction	SELF-INTRODUCTION	OVER MIJ	
 gText_Pokenav_ClearButtonList	{CLEAR 128}		
-gText_PokenavMap_ZoomedOutButtons	{A_BUTTON}ZOOM {B_BUTTON}CANCEL		
-gText_PokenavMap_ZoomedInButtons	{A_BUTTON}FULL {B_BUTTON}CANCEL		
-gText_PokenavCondition_MonListButtons	{A_BUTTON}CONDITION {B_BUTTON}CANCEL		
-gText_PokenavCondition_MonStatusButtons	{A_BUTTON}MARKINGS {B_BUTTON}CANCEL		
-gText_PokenavCondition_MarkingButtons	{A_BUTTON}SELECT MARK {B_BUTTON}CANCEL		
-gText_PokenavMatchCall_TrainerListButtons	{A_BUTTON}MENU {B_BUTTON}CANCEL		
-gText_PokenavMatchCall_CallMenuButtons	{A_BUTTON}OK {B_BUTTON}CANCEL		
-gText_PokenavMatchCall_CheckTrainerButtons	{B_BUTTON}CANCEL		
-gText_PokenavRibbons_MonListButtons	{A_BUTTON}RIBBONS {B_BUTTON}CANCEL		
-gText_PokenavRibbons_RibbonListButtons	{A_BUTTON}CHECK {B_BUTTON}CANCEL		
-gText_PokenavRibbons_RibbonCheckButtons	{B_BUTTON}CANCEL		
-gText_NatureSlash	NATURE/		
-gText_TrainerCloseBy	That TRAINER is close by.\nTalk to the TRAINER in person!		
-gText_InParty	IN PARTY		
+gText_PokenavMap_ZoomedOutButtons	{A_BUTTON}ZOOM {B_BUTTON}CANCEL	{A_BUTTON}ZOOM {B_BUTTON}TERUG	
+gText_PokenavMap_ZoomedInButtons	{A_BUTTON}FULL {B_BUTTON}CANCEL	{A_BUTTON}HEEL {B_BUTTON}TERUG	
+gText_PokenavCondition_MonListButtons	{A_BUTTON}CONDITION {B_BUTTON}CANCEL	{A_BUTTON}CONDITIE {B_BUTTON}TERUG	
+gText_PokenavCondition_MonStatusButtons	{A_BUTTON}MARKINGS {B_BUTTON}CANCEL	{A_BUTTON}MARKEREN {B_BUTTON}TERUG	
+gText_PokenavCondition_MarkingButtons	{A_BUTTON}SELECT MARK {B_BUTTON}CANCEL	{A_BUTTON}KIES MARKERING {B_BUTTON}TERUG	label-ok: reviewed
+gText_PokenavMatchCall_TrainerListButtons	{A_BUTTON}MENU {B_BUTTON}CANCEL	{A_BUTTON}MENU {B_BUTTON}TERUG	
+gText_PokenavMatchCall_CallMenuButtons	{A_BUTTON}OK {B_BUTTON}CANCEL	{A_BUTTON}OK {B_BUTTON}TERUG	
+gText_PokenavMatchCall_CheckTrainerButtons	{B_BUTTON}CANCEL	{B_BUTTON}TERUG	
+gText_PokenavRibbons_MonListButtons	{A_BUTTON}RIBBONS {B_BUTTON}CANCEL	{A_BUTTON}LINTEN {B_BUTTON}TERUG	
+gText_PokenavRibbons_RibbonListButtons	{A_BUTTON}CHECK {B_BUTTON}CANCEL	{A_BUTTON}BEKIJK {B_BUTTON}TERUG	
+gText_PokenavRibbons_RibbonCheckButtons	{B_BUTTON}CANCEL	{B_BUTTON}TERUG	
+gText_NatureSlash	NATURE/	KARAKTER/	label-ok: reviewed
+gText_TrainerCloseBy	That TRAINER is close by.\nTalk to the TRAINER in person!	Die TRAINER is vlakbij.\nPraat gewoon met de TRAINER!	
+gText_InParty	IN PARTY	IN TEAM	
 gText_Number2	No. 		
-gText_Ribbons	RIBBONS		
+gText_Ribbons	RIBBONS	LINTEN	
 gText_PokemonMaleLv	{DYNAMIC 0}{COLOR_HIGHLIGHT_SHADOW LIGHT_RED WHITE GREEN}♂{COLOR_HIGHLIGHT_SHADOW DARK_GRAY WHITE LIGHT_GRAY}/{LV}{DYNAMIC 1}		
 gText_PokemonFemaleLv	{DYNAMIC 0}{COLOR_HIGHLIGHT_SHADOW LIGHT_GREEN WHITE BLUE}♀{COLOR_HIGHLIGHT_SHADOW DARK_GRAY WHITE LIGHT_GRAY}/{LV}{DYNAMIC 1}		
 gText_PokemonNoGenderLv	{DYNAMIC 0}/{LV}{DYNAMIC 1}		
-gText_Unknown	UNKNOWN		
-gText_Call	CALL		
-gText_Check	CHECK		
-gText_Cancel6	CANCEL		
-gText_NumberIndex	No. {DYNAMIC 0}		
-gText_RibbonsF700	RIBBONS {DYNAMIC 0}		
+gText_Unknown	UNKNOWN	ONBEKEND	label-ok: reviewed
+gText_Call	CALL	BEL	
+gText_Check	CHECK	BEKIJK	label-ok: reviewed
+gText_Cancel6	CANCEL	TERUG	
+gText_NumberIndex	No. {DYNAMIC 0}	Nr. {DYNAMIC 0}	
+gText_RibbonsF700	RIBBONS {DYNAMIC 0}	LINTEN {DYNAMIC 0}	
 gText_PokemonMaleLv2	{DYNAMIC 0}{COLOR_HIGHLIGHT_SHADOW LIGHT_RED WHITE GREEN}♂{COLOR_HIGHLIGHT_SHADOW DARK_GRAY WHITE LIGHT_GRAY}/{LV}{DYNAMIC 1}{DYNAMIC 2}		
 gText_PokemonFemaleLv2	{DYNAMIC 0}{COLOR_HIGHLIGHT_SHADOW LIGHT_GREEN WHITE BLUE}♀{COLOR_HIGHLIGHT_SHADOW DARK_GRAY WHITE LIGHT_GRAY}/{LV}{DYNAMIC 1}{DYNAMIC 2}		
 gText_PokemonNoGenderLv2	{DYNAMIC 0}/{LV}{DYNAMIC 1}{DYNAMIC 2}		
-gText_CombineFourWordsOrPhrases	Combine four words or phrases		
-gText_AndMakeYourProfile	and make your profile.		
-gText_CombineSixWordsOrPhrases	Combine six words or phrases		
-gText_AndMakeAMessage	and make a message.		
-gText_FindWordsThatDescribeYour	Find words that describe your		
-gText_FeelingsRightNow	feelings right now.		
-gText_WithFourPhrases	With four phrases,		
-gText_CombineNineWordsOrPhrases	Combine nine words or phrases		
-gText_AndMakeAMessage2	and make a message.		
-gText_ChangeJustOneWordOrPhrase	Change just one word or phrase		
-gText_AndImproveTheBardsSong	and improve the BARD's song.		
-gText_YourProfile	Your profile		
-gText_YourFeelingAtTheBattlesStart	Your feeling at the battle's start		
-gText_WhatYouSayIfYouWin	What you say if you win a battle		
-gText_WhatYouSayIfYouLose	What you say if you lose a battle		
-gText_TheAnswer	The answer		
-gText_TheMailMessage	The MAIL message		
-gText_TheMailSalutation	The MAIL salutation		
-gText_TheBardsSong2	The new song		
-gText_CombineTwoWordsOrPhrases	Combine two words or phrases		
-gText_AndMakeATrendySaying	and make a trendy saying.		
-gText_TheTrendySaying	The trendy saying		
-gText_IsAsShownOkay	is as shown. Okay?		
-gText_CombineTwoWordsOrPhrases2	Combine two words or phrases		
-gText_ToTeachHerAGoodSaying	to teach her a good saying.		
-gText_FindWordsWhichFit	Find words which fit		
-gText_TheTrainersImage	the TRAINER's image.		
-gText_TheImage	The image:		
-gText_OutOfTheListedChoices	Out of the listed choices,		
-gText_SelectTheAnswerToTheQuiz	select the answer to the quiz!		
-gText_AndCreateAQuiz	and create a quiz!		
-gText_PickAWordOrPhraseAnd	Pick a word or phrase and		
-gText_SetTheQuizAnswer	set the quiz answer.		
-gText_TheAnswerColon	The answer:		
-gText_TheQuizColon	The quiz:		
-gText_ApprenticePhrase	Apprentice's phrase:		
-gText_QuitEditing	Quit editing?		
-gText_StopGivingPkmnMail	Stop giving the POKéMON MAIL?		
-gText_AndFillOutTheQuestionnaire	and fill out the questionnaire.		
-gText_LetsReplyToTheInterview	Let's reply to the interview!		
-gText_AllTextBeingEditedWill	All the text being edited will		
-gText_BeDeletedThatOkay	be deleted. Is that okay?		
-gText_QuitEditing2	Quit editing?		
-gText_EditedTextWillNotBeSaved	The edited text will not be saved.		
-gText_IsThatOkay	Is that okay?		
-gText_PleaseEnterPhraseOrWord	Please enter a phrase or word.		
-gText_EntireTextCantBeDeleted	The entire text can't be deleted.		
-gText_OnlyOnePhrase	Only one phrase may be changed.		
-gText_OriginalSongWillBeUsed	The original song will be used.		
-gText_ThatsTrendyAlready	That's trendy already!		
-gText_CombineTwoWordsOrPhrases3	Combine two words or phrases.		
-gText_QuitGivingInfo	Quit giving information?		
-gText_StopGivingPkmnMail2	Stop giving the POKéMON MAIL?		
-gText_CreateAQuiz2	Create a quiz!		
-gText_SetTheAnswer	Set the answer!		
-gText_CancelSelection	Cancel the selection?		
-gText_Profile	PROFILE		
-gText_AtTheBattlesStart	At the battle's start:		
-gText_UponWinningABattle	Upon winning a battle:		
-gText_UponLosingABattle	Upon losing a battle:		
-gText_TheBardsSong	The BARD's Song		
-gText_WhatsHipAndHappening	What's hip and happening?		
-gText_Interview	Interview		
-gText_GoodSaying	Good saying		
-gText_FansQuestion	Fan's question		
-gText_ApprenticesPhrase	Apprentice's phrase		
-gText_Questionnaire	QUESTIONNAIRE		
-gText_YouCannotQuitHere	You cannot quit here.		
-gText_SectionMustBeCompleted	This section must be completed.		
-gText_F700sQuiz	{DYNAMIC 0}'s quiz		
-gText_Lady	Lady		
-gText_AfterYouHaveReadTheQuiz	After you have read the quiz		
-gText_QuestionPressTheAButton	question, press the A Button.		
-gText_TheQuizAnswerIs	The quiz answer is?		
-gText_LikeToQuitQuiz	Would you like to quit this quiz		
-gText_ChallengeQuestionMark	challenge?		
-gText_IsThisQuizOK	Is this quiz OK?		
-gText_CreateAQuiz	Create a quiz!		
-gText_SelectTheAnswer	Select the answer!		
-gText_LyricsCantBeDeleted	The lyrics can't be deleted.		
+gText_CombineFourWordsOrPhrases	Combine four words or phrases	Zet vier woorden achter elkaar	
+gText_AndMakeYourProfile	and make your profile.	en maak je profiel.	
+gText_CombineSixWordsOrPhrases	Combine six words or phrases	Zet zes woorden achter elkaar	
+gText_AndMakeAMessage	and make a message.	en maak een bericht.	label-ok: reviewed
+gText_FindWordsThatDescribeYour	Find words that describe your	Zoek woorden die laten zien	
+gText_FeelingsRightNow	feelings right now.	hoe je je nu voelt.	
+gText_WithFourPhrases	With four phrases,	Met vier woorden,	
+gText_CombineNineWordsOrPhrases	Combine nine words or phrases	Zet negen woorden achter elkaar	
+gText_AndMakeAMessage2	and make a message.	en maak een bericht.	label-ok: reviewed
+gText_ChangeJustOneWordOrPhrase	Change just one word or phrase	Verander maar één woord	
+gText_AndImproveTheBardsSong	and improve the BARD's song.	en maak het lied van de BARD beter.	
+gText_YourProfile	Your profile	Je profiel	
+gText_YourFeelingAtTheBattlesStart	Your feeling at the battle's start	Hoe je je voelt bij de start	
+gText_WhatYouSayIfYouWin	What you say if you win a battle	Wat je zegt als je wint	
+gText_WhatYouSayIfYouLose	What you say if you lose a battle	Wat je zegt als je verliest	
+gText_TheAnswer	The answer	Het antwoord	label-ok: reviewed
+gText_TheMailMessage	The MAIL message	Het bericht in de BRIEF	label-ok: reviewed
+gText_TheMailSalutation	The MAIL salutation	De aanhef van de BRIEF	label-ok: reviewed
+gText_TheBardsSong2	The new song	Het nieuwe lied	label-ok: reviewed
+gText_CombineTwoWordsOrPhrases	Combine two words or phrases	Zet twee woorden achter elkaar	
+gText_AndMakeATrendySaying	and make a trendy saying.	en maak een hippe uitspraak.	
+gText_TheTrendySaying	The trendy saying	De hippe uitspraak	label-ok: reviewed
+gText_IsAsShownOkay	is as shown. Okay?	is zoals hier staat. Goed?	label-ok: reviewed
+gText_CombineTwoWordsOrPhrases2	Combine two words or phrases	Zet twee woorden achter elkaar	
+gText_ToTeachHerAGoodSaying	to teach her a good saying.	en leer haar een goede uitspraak.	
+gText_FindWordsWhichFit	Find words which fit	Zoek woorden die passen	label-ok: reviewed
+gText_TheTrainersImage	the TRAINER's image.	bij hoe de TRAINER is.	label-ok: reviewed
+gText_TheImage	The image:	Het beeld:	
+gText_OutOfTheListedChoices	Out of the listed choices,	Kies uit de lijst	
+gText_SelectTheAnswerToTheQuiz	select the answer to the quiz!	het antwoord op de quiz!	
+gText_AndCreateAQuiz	and create a quiz!	en maak een quiz!	
+gText_PickAWordOrPhraseAnd	Pick a word or phrase and	Kies een woord en	
+gText_SetTheQuizAnswer	set the quiz answer.	maak het antwoord van de quiz.	label-ok: reviewed
+gText_TheAnswerColon	The answer:	Het antwoord:	label-ok: reviewed
+gText_TheQuizColon	The quiz:	De quiz:	
+gText_ApprenticePhrase	Apprentice's phrase:	Zin van de leerling:	
+gText_QuitEditing	Quit editing?	Stoppen met schrijven?	label-ok: reviewed
+gText_StopGivingPkmnMail	Stop giving the POKéMON MAIL?	Stoppen met een BRIEF geven?	
+gText_AndFillOutTheQuestionnaire	and fill out the questionnaire.	en vul de vragenlijst in.	
+gText_LetsReplyToTheInterview	Let's reply to the interview!	Geef antwoord in het interview!	
+gText_AllTextBeingEditedWill	All the text being edited will	Alle tekst die je schrijft wordt	
+gText_BeDeletedThatOkay	be deleted. Is that okay?	gewist. Is dat goed?	
+gText_QuitEditing2	Quit editing?	Stoppen met schrijven?	label-ok: reviewed
+gText_EditedTextWillNotBeSaved	The edited text will not be saved.	Je tekst wordt niet bewaard.	
+gText_IsThatOkay	Is that okay?	Is dat goed?	
+gText_PleaseEnterPhraseOrWord	Please enter a phrase or word.	Vul een woord in.	
+gText_EntireTextCantBeDeleted	The entire text can't be deleted.	Je kunt niet alles wissen.	
+gText_OnlyOnePhrase	Only one phrase may be changed.	Je mag maar één woord veranderen.	
+gText_OriginalSongWillBeUsed	The original song will be used.	Het oude lied blijft.	
+gText_ThatsTrendyAlready	That's trendy already!	Dat is al hip!	
+gText_CombineTwoWordsOrPhrases3	Combine two words or phrases.	Zet twee woorden achter elkaar.	
+gText_QuitGivingInfo	Quit giving information?	Stoppen met info geven?	
+gText_StopGivingPkmnMail2	Stop giving the POKéMON MAIL?	Stoppen met een BRIEF geven?	
+gText_CreateAQuiz2	Create a quiz!	Maak een quiz!	label-ok: reviewed
+gText_SetTheAnswer	Set the answer!	Kies het antwoord!	label-ok: reviewed
+gText_CancelSelection	Cancel the selection?	Stoppen met kiezen?	
+gText_Profile	PROFILE	PROFIEL	
+gText_AtTheBattlesStart	At the battle's start:	Aan het begin:	
+gText_UponWinningABattle	Upon winning a battle:	Als je wint:	
+gText_UponLosingABattle	Upon losing a battle:	Als je verliest:	
+gText_TheBardsSong	The BARD's Song	Het lied van de BARD	label-ok: reviewed
+gText_WhatsHipAndHappening	What's hip and happening?	Wat is hip?	
+gText_Interview	Interview	Interview	
+gText_GoodSaying	Good saying	Goede uitspraak	label-ok: reviewed
+gText_FansQuestion	Fan's question	Vraag van een fan	label-ok: reviewed
+gText_ApprenticesPhrase	Apprentice's phrase	Zin van de leerling	
+gText_Questionnaire	QUESTIONNAIRE	VRAGENLIJST	
+gText_YouCannotQuitHere	You cannot quit here.	Hier kun je niet stoppen.	label-ok: reviewed
+gText_SectionMustBeCompleted	This section must be completed.	Je moet dit deel invullen.	
+gText_F700sQuiz	{DYNAMIC 0}'s quiz	Quiz van {DYNAMIC 0}	label-ok: reviewed
+gText_Lady	Lady	Dame	
+gText_AfterYouHaveReadTheQuiz	After you have read the quiz	Lees eerst de quizvraag	
+gText_QuestionPressTheAButton	question, press the A Button.	en druk dan op de A-knop.	
+gText_TheQuizAnswerIs	The quiz answer is?	Wat is het antwoord?	label-ok: reviewed
+gText_LikeToQuitQuiz	Would you like to quit this quiz	Wil je stoppen met deze	
+gText_ChallengeQuestionMark	challenge?	quiz?	
+gText_IsThisQuizOK	Is this quiz OK?	Is deze quiz goed?	label-ok: reviewed
+gText_CreateAQuiz	Create a quiz!	Maak een quiz!	label-ok: reviewed
+gText_SelectTheAnswer	Select the answer!	Kies het antwoord!	
+gText_LyricsCantBeDeleted	The lyrics can't be deleted.	De songtekst kun je niet wissen.	
 gText_PokemonLeague	POKéMON LEAGUE		
 gText_PokemonCenter	POKéMON CENTER		
-gText_GetsAPokeBlockQuestion	 gets a {POKEBLOCK}?		
-gText_Coolness	Coolness 		
-gText_Beauty3	Beauty 		
-gText_Cuteness	Cuteness 		
-gText_Smartness	Smartness 		
-gText_Toughness	Toughness 		
-gText_WasEnhanced	was enhanced!		
-gText_NothingChanged	Nothing changed!		
-gText_WontEatAnymore	It won't eat anymore…		
-gText_SaveFailedCheckingBackup	Save failed. Checking the backup\nmemory… Please wait.\n{COLOR RED}“Time required: about 1 minute”		
-gText_BackupMemoryDamaged	The backup memory is damaged, or\nthe internal battery has run dry.\nYou can still play, but not save.		
-gText_GamePlayCannotBeContinued	{COLOR RED}“Game play cannot be continued.\nReturning to the title screen…”		
-gText_CheckCompleted	Check completed.\nAttempting to save again.\nPlease wait.		
-gText_SaveCompleteGameCannotContinue	Save completed.\n{COLOR RED}“Game play cannot be continued.\nReturning to the title screen.”		
-gText_SaveCompletePressA	Save completed.\n{COLOR RED}“Please press the A Button.”		
-gText_Ferry	FERRY		
-gText_SecretBase	SECRET BASE		
-gText_Hideout	HIDEOUT		
-gText_ResetRTCConfirmCancel	Reset RTC?\nA: Confirm, B: Cancel		
-gText_PresentTime	Present time in game		
-gText_PreviousTime	Previous time in game		
-gText_PleaseResetTime	Please reset the time.		
-gText_ClockHasBeenReset	The clock has been reset.\nData will be saved. Please wait.		
-gText_SaveCompleted	Save completed.		
-gText_SaveFailed	Save failed…		
-gText_NoSaveFileCantSetTime	There is no save file, so the time\ncan't be set.		
-gText_InGameClockUsable	The in-game clock adjustment system\nis now useable.		
-gText_Slots	SLOTS		
-gText_Roulette	ROULETTE		
-gText_Good	Good		
-gText_VeryGood	Very good		
-gText_Excellent	Excellent		
-gText_SoSo	So-so		
-gText_Bad	Bad		
-gText_TheWorst	The worst		
-gText_Spicy2	spicy		
-gText_Dry2	dry		
-gText_Sweet2	sweet		
-gText_Bitter2	bitter		
-gText_Sour2	sour		
-gText_Single	SINGLE		
-gText_Double	DOUBLE		
-gText_Jackpot	jackpot		
-gText_First	first		
-gText_Second	second		
-gText_Third	third		
-gText_0Pts	0 pts		
-gText_10Pts	10 pts		
-gText_20Pts	20 pts		
-gText_30Pts	30 pts		
-gText_40Pts	40 pts		
-gText_50Pts	50 pts		
-gText_60Pts	60 pts		
-gText_70Pts	70 pts		
-gText_80Pts	80 pts		
-gText_90Pts	90 pts		
-gText_100Pts	100 pts		
+gText_GetsAPokeBlockQuestion	 gets a {POKEBLOCK}?	 krijgt een {POKEBLOCK}?	label-ok: reviewed
+gText_Coolness	Coolness 	Stoer 	
+gText_Beauty3	Beauty 	Mooi 	
+gText_Cuteness	Cuteness 	Schattig 	
+gText_Smartness	Smartness 	Slim 	
+gText_Toughness	Toughness 	Sterk 	
+gText_WasEnhanced	was enhanced!	gaat omhoog!	
+gText_NothingChanged	Nothing changed!	Er verandert niets!	label-ok: reviewed
+gText_WontEatAnymore	It won't eat anymore…	Hij wil niet meer eten…	label-ok: reviewed
+gText_SaveFailedCheckingBackup	Save failed. Checking the backup\nmemory… Please wait.\n{COLOR RED}“Time required: about 1 minute”	Opslaan mislukt. Het geheugen\nwordt gecontroleerd… Even geduld.\n{COLOR RED}“Dit duurt ongeveer 1 minuut”	
+gText_BackupMemoryDamaged	The backup memory is damaged, or\nthe internal battery has run dry.\nYou can still play, but not save.	Het geheugen is kapot, of de\nbatterij in het spel is leeg.\nJe kunt spelen, maar niet opslaan.	
+gText_GamePlayCannotBeContinued	{COLOR RED}“Game play cannot be continued.\nReturning to the title screen…”	{COLOR RED}“Je kunt niet verder spelen.\nTerug naar het beginscherm…”	
+gText_CheckCompleted	Check completed.\nAttempting to save again.\nPlease wait.	Controle klaar.\nWe proberen opnieuw op te slaan.\nEven geduld.	
+gText_SaveCompleteGameCannotContinue	Save completed.\n{COLOR RED}“Game play cannot be continued.\nReturning to the title screen.”	Opslaan gelukt.\n{COLOR RED}“Je kunt niet verder spelen.\nTerug naar het beginscherm.”	
+gText_SaveCompletePressA	Save completed.\n{COLOR RED}“Please press the A Button.”	Opslaan gelukt.\n{COLOR RED}“Druk op de A-knop.”	
+gText_Ferry	FERRY	VEERBOOT	label-ok: reviewed
+gText_SecretBase	SECRET BASE	GEHEIME BASIS	label-ok: reviewed
+gText_Hideout	HIDEOUT	SCHUILPLEK	label-ok: reviewed
+gText_ResetRTCConfirmCancel	Reset RTC?\nA: Confirm, B: Cancel	Klok resetten?\nA: Ja, B: Terug	
+gText_PresentTime	Present time in game	Tijd nu in het spel	
+gText_PreviousTime	Previous time in game	Vorige tijd in het spel	label-ok: reviewed
+gText_PleaseResetTime	Please reset the time.	Zet de tijd opnieuw.	
+gText_ClockHasBeenReset	The clock has been reset.\nData will be saved. Please wait.	De klok is gereset.\nHet spel wordt opgeslagen. Even geduld.	
+gText_SaveCompleted	Save completed.	Opslaan gelukt.	
+gText_SaveFailed	Save failed…	Opslaan mislukt…	label-ok: reviewed
+gText_NoSaveFileCantSetTime	There is no save file, so the time\ncan't be set.	Er is geen opgeslagen spel, dus de\ntijd kan niet worden gezet.	
+gText_InGameClockUsable	The in-game clock adjustment system\nis now useable.	Je kunt de klok in het spel\nnu instellen.	
+gText_Slots	SLOTS	GOKKAST	label-ok: reviewed
+gText_Roulette	ROULETTE	ROULETTE	
+gText_Good	Good	Goed	
+gText_VeryGood	Very good	Heel goed	
+gText_Excellent	Excellent	Geweldig	
+gText_SoSo	So-so	Gaat wel	label-ok: reviewed
+gText_Bad	Bad	Slecht	label-ok: reviewed
+gText_TheWorst	The worst	Heel slecht	label-ok: reviewed
+gText_Spicy2	spicy	pittig	label-ok: reviewed
+gText_Dry2	dry	droog	label-ok: reviewed
+gText_Sweet2	sweet	zoet	
+gText_Bitter2	bitter	bitter	
+gText_Sour2	sour	zuur	
+gText_Single	SINGLE	ENKEL	
+gText_Double	DOUBLE	DUBBEL	
+gText_Jackpot	jackpot	jackpot	
+gText_First	first	eerste	label-ok: reviewed
+gText_Second	second	tweede	
+gText_Third	third	derde	label-ok: reviewed
+gText_0Pts	0 pts	0 pnt	
+gText_10Pts	10 pts	10 pnt	
+gText_20Pts	20 pts	20 pnt	
+gText_30Pts	30 pts	30 pnt	
+gText_40Pts	40 pts	40 pnt	
+gText_50Pts	50 pts	50 pnt	
+gText_60Pts	60 pts	60 pnt	
+gText_70Pts	70 pts	70 pnt	
+gText_80Pts	80 pts	80 pnt	
+gText_90Pts	90 pts	90 pnt	
+gText_100Pts	100 pts	100 pnt	
 gText_QuestionMark	?		
-gText_KissPoster16BP	KISS POSTER{CLEAR_TO 94}16BP		
-gText_KissCushion32BP	KISS CUSHION{CLEAR_TO 94}32BP		
-gText_SmoochumDoll32BP	SMOOCHUM DOLL{CLEAR_TO 94}32BP		
-gText_TogepiDoll48BP	TOGEPI DOLL{CLEAR_TO 94}48BP		
-gText_MeowthDoll48BP	MEOWTH DOLL{CLEAR_TO 94}48BP		
-gText_ClefairyDoll48BP	CLEFAIRY DOLL{CLEAR_TO 94}48BP		
-gText_DittoDoll48BP	DITTO DOLL{CLEAR_TO 94}48BP		
-gText_CyndaquilDoll80BP	CYNDAQUIL DOLL{CLEAR_TO 94}80BP		
-gText_ChikoritaDoll80BP	CHIKORITA DOLL{CLEAR_TO 94}80BP		
-gText_TotodileDoll80BP	TOTODILE DOLL{CLEAR_TO 94}80BP		
-gText_LaprasDoll128BP	LAPRAS DOLL{CLEAR_TO 88}128BP		
-gText_SnorlaxDoll128BP	SNORLAX DOLL{CLEAR_TO 88}128BP		
-gText_VenusaurDoll256BP	VENUSAUR DOLL{CLEAR_TO 88}256BP		
-gText_CharizardDoll256BP	CHARIZARD DOLL{CLEAR_TO 88}256BP		
-gText_BlastoiseDoll256BP	BLASTOISE DOLL{CLEAR_TO 88}256BP		
-gText_Protein1BP	PROTEIN{CLEAR_TO 100}1BP		
-gText_Calcium1BP	CALCIUM{CLEAR_TO 100}1BP		
-gText_Iron1BP	IRON{CLEAR_TO 100}1BP		
-gText_Zinc1BP	ZINC{CLEAR_TO 100}1BP		
-gText_Carbos1BP	CARBOS{CLEAR_TO 100}1BP		
-gText_HpUp1BP	HP UP{CLEAR_TO 100}1BP		
-gText_Leftovers48BP	LEFTOVERS{CLEAR_TO 94}48BP		
-gText_WhiteHerb48BP	WHITE HERB{CLEAR_TO 94}48BP		
-gText_QuickClaw48BP	QUICK CLAW{CLEAR_TO 94}48BP		
-gText_MentalHerb48BP	MENTAL HERB{CLEAR_TO 94}48BP		
-gText_BrightPowder64BP	BRIGHTPOWDER{CLEAR_TO 94}64BP		
-gText_ChoiceBand64BP	CHOICE BAND{CLEAR_TO 94}64BP		
-gText_KingsRock64BP	KING'S ROCK{CLEAR_TO 94}64BP		
-gText_FocusBand64BP	FOCUS BAND{CLEAR_TO 94}64BP		
-gText_ScopeLens64BP	SCOPE LENS{CLEAR_TO 94}64BP		
-gText_Softboiled16BP	SOFTBOILED{CLEAR_TO 78}16BP		
-gText_SeismicToss24BP	SEISMIC TOSS{CLEAR_TO 78}24BP		
-gText_DreamEater24BP	DREAM EATER{CLEAR_TO 78}24BP		
-gText_MegaPunch24BP	MEGA PUNCH{CLEAR_TO 78}24BP		
-gText_MegaKick48BP	MEGA KICK{CLEAR_TO 78}48BP		
-gText_BodySlam48BP	BODY SLAM{CLEAR_TO 78}48BP		
-gText_RockSlide48BP	ROCK SLIDE{CLEAR_TO 78}48BP		
+gText_KissPoster16BP	KISS POSTER{CLEAR_TO 94}16BP	KUSPOSTER{CLEAR_TO 94}16BP	
+gText_KissCushion32BP	KISS CUSHION{CLEAR_TO 94}32BP	KUSKUSSEN{CLEAR_TO 94}32BP	
+gText_SmoochumDoll32BP	SMOOCHUM DOLL{CLEAR_TO 94}32BP	SMOOCHUM-POP{CLEAR_TO 94}32BP	
+gText_TogepiDoll48BP	TOGEPI DOLL{CLEAR_TO 94}48BP	TOGEPI-POP{CLEAR_TO 94}48BP	
+gText_MeowthDoll48BP	MEOWTH DOLL{CLEAR_TO 94}48BP	MEOWTH-POP{CLEAR_TO 94}48BP	
+gText_ClefairyDoll48BP	CLEFAIRY DOLL{CLEAR_TO 94}48BP	CLEFAIRY-POP{CLEAR_TO 94}48BP	
+gText_DittoDoll48BP	DITTO DOLL{CLEAR_TO 94}48BP	DITTO-POP{CLEAR_TO 94}48BP	
+gText_CyndaquilDoll80BP	CYNDAQUIL DOLL{CLEAR_TO 94}80BP	CYNDAQUIL-POP{CLEAR_TO 94}80BP	
+gText_ChikoritaDoll80BP	CHIKORITA DOLL{CLEAR_TO 94}80BP	CHIKORITA-POP{CLEAR_TO 94}80BP	
+gText_TotodileDoll80BP	TOTODILE DOLL{CLEAR_TO 94}80BP	TOTODILE-POP{CLEAR_TO 94}80BP	
+gText_LaprasDoll128BP	LAPRAS DOLL{CLEAR_TO 88}128BP	LAPRAS-POP{CLEAR_TO 88}128BP	
+gText_SnorlaxDoll128BP	SNORLAX DOLL{CLEAR_TO 88}128BP	SNORLAX-POP{CLEAR_TO 88}128BP	
+gText_VenusaurDoll256BP	VENUSAUR DOLL{CLEAR_TO 88}256BP	VENUSAUR-POP{CLEAR_TO 88}256BP	
+gText_CharizardDoll256BP	CHARIZARD DOLL{CLEAR_TO 88}256BP	CHARIZARD-POP{CLEAR_TO 88}256BP	
+gText_BlastoiseDoll256BP	BLASTOISE DOLL{CLEAR_TO 88}256BP	BLASTOISE-POP{CLEAR_TO 88}256BP	
+gText_Protein1BP	PROTEIN{CLEAR_TO 100}1BP	PROTEÏNE{CLEAR_TO 100}1BP	label-ok: reviewed
+gText_Calcium1BP	CALCIUM{CLEAR_TO 100}1BP	CALCIUM{CLEAR_TO 100}1BP	
+gText_Iron1BP	IRON{CLEAR_TO 100}1BP	IJZER{CLEAR_TO 100}1BP	label-ok: reviewed
+gText_Zinc1BP	ZINC{CLEAR_TO 100}1BP	ZINK{CLEAR_TO 100}1BP	
+gText_Carbos1BP	CARBOS{CLEAR_TO 100}1BP	CARBOS{CLEAR_TO 100}1BP	
+gText_HpUp1BP	HP UP{CLEAR_TO 100}1BP	HP UP{CLEAR_TO 100}1BP	
+gText_Leftovers48BP	LEFTOVERS{CLEAR_TO 94}48BP	RESTJES{CLEAR_TO 94}48BP	
+gText_WhiteHerb48BP	WHITE HERB{CLEAR_TO 94}48BP	WIT KRUID{CLEAR_TO 94}48BP	
+gText_QuickClaw48BP	QUICK CLAW{CLEAR_TO 94}48BP	SNELKLAUW{CLEAR_TO 94}48BP	
+gText_MentalHerb48BP	MENTAL HERB{CLEAR_TO 94}48BP	HOOFDKRUID{CLEAR_TO 94}48BP	
+gText_BrightPowder64BP	BRIGHTPOWDER{CLEAR_TO 94}64BP	GLANSPOEDER{CLEAR_TO 94}64BP	
+gText_ChoiceBand64BP	CHOICE BAND{CLEAR_TO 94}64BP	KEUZEBAND{CLEAR_TO 94}64BP	
+gText_KingsRock64BP	KING'S ROCK{CLEAR_TO 94}64BP	KONINGSSTEEN{CLEAR_TO 94}64BP	label-ok: reviewed
+gText_FocusBand64BP	FOCUS BAND{CLEAR_TO 94}64BP	FOCUSBAND{CLEAR_TO 94}64BP	
+gText_ScopeLens64BP	SCOPE LENS{CLEAR_TO 94}64BP	VIZIERLENS{CLEAR_TO 94}64BP	label-ok: reviewed
+gText_Softboiled16BP	SOFTBOILED{CLEAR_TO 78}16BP	ZACHT EITJE{CLEAR_TO 78}16BP	label-ok: reviewed
+gText_SeismicToss24BP	SEISMIC TOSS{CLEAR_TO 78}24BP	AARDWORP{CLEAR_TO 78}24BP	
+gText_DreamEater24BP	DREAM EATER{CLEAR_TO 78}24BP	DROOMETER{CLEAR_TO 78}24BP	
+gText_MegaPunch24BP	MEGA PUNCH{CLEAR_TO 78}24BP	MEGASTOMP{CLEAR_TO 78}24BP	
+gText_MegaKick48BP	MEGA KICK{CLEAR_TO 78}48BP	MEGASCHOP{CLEAR_TO 78}48BP	label-ok: reviewed
+gText_BodySlam48BP	BODY SLAM{CLEAR_TO 78}48BP	PLETTEREN{CLEAR_TO 78}48BP	label-ok: reviewed
+gText_RockSlide48BP	ROCK SLIDE{CLEAR_TO 78}48BP	STEENLAWINE{CLEAR_TO 78}48BP	label-ok: reviewed
 gText_Counter48BP	COUNTER{CLEAR_TO 78}48BP		
 gText_ThunderWave48BP	THUNDER WAVE{CLEAR_TO 78}48BP		
 gText_SwordsDance48BP	SWORDS DANCE{CLEAR_TO 78}48BP		

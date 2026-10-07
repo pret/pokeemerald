@@ -11,7 +11,7 @@ import re
 import sys
 
 import common
-from common import KINDS, SPECS, control_codes, encode, line_widths, read_tsv, scan
+from common import KINDS, SPECS, control_codes, encode, line_widths, read_tsv, scan, split_lines
 
 
 def problems(text, kind, english=None, skip_width=False, max_px=None):
@@ -24,6 +24,11 @@ def problems(text, kind, english=None, skip_width=False, max_px=None):
         out.append(f"{len(data)} bytes > {kind.max_bytes}")
     if english is not None and control_codes(text) != control_codes(english):
         out.append(f"control codes differ from English: {control_codes(english)}")
+    for line in split_lines(text):
+        for m in re.finditer(r"\{CLEAR_TO (\d+)\}", line):
+            w = line_widths(line[:m.start()], "normal")[0]
+            if w > int(m[1]):
+                out.append(f"text before {{CLEAR_TO {m[1]}}} is {w}px")
     lines = text.count("\\n") + 1
     if lines > kind.max_lines:
         out.append(f"{lines} lines > {kind.max_lines}")
