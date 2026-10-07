@@ -1,56 +1,56 @@
 key	english	dutch	notes
 ITEM_NONE	????????		
-ITEM_MASTER_BALL	MASTER BALL		
-ITEM_ULTRA_BALL	ULTRA BALL		
-ITEM_GREAT_BALL	GREAT BALL		
+ITEM_MASTER_BALL	MASTER BALL	MEESTERBALL	
+ITEM_ULTRA_BALL	ULTRA BALL	ULTRABALL	
+ITEM_GREAT_BALL	GREAT BALL	SUPERBALL	
 ITEM_POKE_BALL	POKé BALL		
-ITEM_SAFARI_BALL	SAFARI BALL		
-ITEM_NET_BALL	NET BALL		
-ITEM_DIVE_BALL	DIVE BALL		
-ITEM_NEST_BALL	NEST BALL		
-ITEM_REPEAT_BALL	REPEAT BALL		
-ITEM_TIMER_BALL	TIMER BALL		
-ITEM_LUXURY_BALL	LUXURY BALL		
-ITEM_PREMIER_BALL	PREMIER BALL		
-ITEM_POTION	POTION		
-ITEM_ANTIDOTE	ANTIDOTE		
-ITEM_BURN_HEAL	BURN HEAL		
-ITEM_ICE_HEAL	ICE HEAL		
-ITEM_AWAKENING	AWAKENING		
-ITEM_PARALYZE_HEAL	PARLYZ HEAL		
-ITEM_FULL_RESTORE	FULL RESTORE		
-ITEM_MAX_POTION	MAX POTION		
-ITEM_HYPER_POTION	HYPER POTION		
-ITEM_SUPER_POTION	SUPER POTION		
-ITEM_FULL_HEAL	FULL HEAL		
-ITEM_REVIVE	REVIVE		
-ITEM_MAX_REVIVE	MAX REVIVE		
-ITEM_FRESH_WATER	FRESH WATER		
-ITEM_SODA_POP	SODA POP		
-ITEM_LEMONADE	LEMONADE		
-ITEM_MOOMOO_MILK	MOOMOO MILK		
-ITEM_ENERGY_POWDER	ENERGYPOWDER		
-ITEM_ENERGY_ROOT	ENERGY ROOT		
-ITEM_HEAL_POWDER	HEAL POWDER		
-ITEM_REVIVAL_HERB	REVIVAL HERB		
-ITEM_ETHER	ETHER		
-ITEM_MAX_ETHER	MAX ETHER		
-ITEM_ELIXIR	ELIXIR		
-ITEM_MAX_ELIXIR	MAX ELIXIR		
-ITEM_LAVA_COOKIE	LAVA COOKIE		
-ITEM_BLUE_FLUTE	BLUE FLUTE		
-ITEM_YELLOW_FLUTE	YELLOW FLUTE		
-ITEM_RED_FLUTE	RED FLUTE		
-ITEM_BLACK_FLUTE	BLACK FLUTE		
-ITEM_WHITE_FLUTE	WHITE FLUTE		
-ITEM_BERRY_JUICE	BERRY JUICE		
-ITEM_SACRED_ASH	SACRED ASH		
-ITEM_SHOAL_SALT	SHOAL SALT		
-ITEM_SHOAL_SHELL	SHOAL SHELL		
-ITEM_RED_SHARD	RED SHARD		
-ITEM_BLUE_SHARD	BLUE SHARD		
-ITEM_YELLOW_SHARD	YELLOW SHARD		
-ITEM_GREEN_SHARD	GREEN SHARD		
+ITEM_SAFARI_BALL	SAFARI BALL	SAFARIBALL	
+ITEM_NET_BALL	NET BALL	NETBALL	
+ITEM_DIVE_BALL	DIVE BALL	DUIKBALL	
+ITEM_NEST_BALL	NEST BALL	NESTBALL	
+ITEM_REPEAT_BALL	REPEAT BALL	HERHAALBALL	
+ITEM_TIMER_BALL	TIMER BALL	KLOKBALL	
+ITEM_LUXURY_BALL	LUXURY BALL	LUXEBALL	
+ITEM_PREMIER_BALL	PREMIER BALL	PREMIERBALL	
+ITEM_POTION	POTION	DRANKJE	
+ITEM_ANTIDOTE	ANTIDOTE	TEGENGIF	
+ITEM_BURN_HEAL	BURN HEAL	BRANDZALF	
+ITEM_ICE_HEAL	ICE HEAL	ONTDOOIER	
+ITEM_AWAKENING	AWAKENING	WEKKER	
+ITEM_PARALYZE_HEAL	PARLYZ HEAL	VERLAMZALF	
+ITEM_FULL_RESTORE	FULL RESTORE	ALLESHERSTEL	
+ITEM_MAX_POTION	MAX POTION	MAXDRANKJE	
+ITEM_HYPER_POTION	HYPER POTION	HYPERDRANKJE	
+ITEM_SUPER_POTION	SUPER POTION	SUPERDRANKJE	
+ITEM_FULL_HEAL	FULL HEAL	TOTAALZALF	
+ITEM_REVIVE	REVIVE	OPKIKKER	
+ITEM_MAX_REVIVE	MAX REVIVE	MAXOPKIKKER	
+ITEM_FRESH_WATER	FRESH WATER	VERS WATER	
+ITEM_SODA_POP	SODA POP	FRISDRANK	
+ITEM_LEMONADE	LEMONADE	LIMONADE	
+ITEM_MOOMOO_MILK	MOOMOO MILK	MOEMOEMELK	
+ITEM_ENERGY_POWDER	ENERGYPOWDER	KRACHTPOEDER	
+ITEM_ENERGY_ROOT	ENERGY ROOT	KRACHTWORTEL	
+ITEM_HEAL_POWDER	HEAL POWDER	GENEESPOEDER	
+ITEM_REVIVAL_HERB	REVIVAL HERB	LEVENSKRUID	
+ITEM_ETHER	ETHER	ETHER	
+ITEM_MAX_ETHER	MAX ETHER	MAX ETHER	
+ITEM_ELIXIR	ELIXIR	ELIXER	
+ITEM_MAX_ELIXIR	MAX ELIXIR	MAX ELIXER	
+ITEM_LAVA_COOKIE	LAVA COOKIE	LAVAKOEKJE	
+ITEM_BLUE_FLUTE	BLUE FLUTE	BLAUWE FLUIT	
+ITEM_YELLOW_FLUTE	YELLOW FLUTE	GELE FLUIT	
+ITEM_RED_FLUTE	RED FLUTE	RODE FLUIT	
+ITEM_BLACK_FLUTE	BLACK FLUTE	ZWARTE FLUIT	
+ITEM_WHITE_FLUTE	WHITE FLUTE	WITTE FLUIT	
+ITEM_BERRY_JUICE	BERRY JUICE	BESSENSAP	
+ITEM_SACRED_ASH	SACRED ASH	HEILIGE AS	
+ITEM_SHOAL_SALT	SHOAL SALT	GROTZOUT	
+ITEM_SHOAL_SHELL	SHOAL SHELL	GROTSCHELP	
+ITEM_RED_SHARD	RED SHARD	RODE SCHERF	
+ITEM_BLUE_SHARD	BLUE SHARD	BLAUWE SCHERF	
+ITEM_YELLOW_SHARD	YELLOW SHARD	GELE SCHERF	
+ITEM_GREEN_SHARD	GREEN SHARD	GROENE SCHERF	
 ITEM_034	????????		
 ITEM_035	????????		
 ITEM_036	????????		
@@ -62,55 +62,55 @@ ITEM_03B	????????
 ITEM_03C	????????		
 ITEM_03D	????????		
 ITEM_03E	????????		
-ITEM_HP_UP	HP UP		
-ITEM_PROTEIN	PROTEIN		
-ITEM_IRON	IRON		
-ITEM_CARBOS	CARBOS		
-ITEM_CALCIUM	CALCIUM		
-ITEM_RARE_CANDY	RARE CANDY		
-ITEM_PP_UP	PP UP		
-ITEM_ZINC	ZINC		
-ITEM_PP_MAX	PP MAX		
+ITEM_HP_UP	HP UP	HP UP	
+ITEM_PROTEIN	PROTEIN	PROTEÏNE	
+ITEM_IRON	IRON	IJZER	
+ITEM_CARBOS	CARBOS	CARBOS	
+ITEM_CALCIUM	CALCIUM	CALCIUM	
+ITEM_RARE_CANDY	RARE CANDY	SUPERSNOEP	
+ITEM_PP_UP	PP UP	PP UP	
+ITEM_ZINC	ZINC	ZINK	
+ITEM_PP_MAX	PP MAX	PP MAX	
 ITEM_048	????????		
-ITEM_GUARD_SPEC	GUARD SPEC.		
-ITEM_DIRE_HIT	DIRE HIT		
-ITEM_X_ATTACK	X ATTACK		
-ITEM_X_DEFEND	X DEFEND		
-ITEM_X_SPEED	X SPEED		
-ITEM_X_ACCURACY	X ACCURACY		
-ITEM_X_SPECIAL	X SPECIAL		
-ITEM_POKE_DOLL	POKé DOLL		
-ITEM_FLUFFY_TAIL	FLUFFY TAIL		
+ITEM_GUARD_SPEC	GUARD SPEC.	MISTSPRAY	
+ITEM_DIRE_HIT	DIRE HIT	VOLTREFFER	
+ITEM_X_ATTACK	X ATTACK	X AANVAL	
+ITEM_X_DEFEND	X DEFEND	X VERDEDIG	
+ITEM_X_SPEED	X SPEED	X SNELHEID	
+ITEM_X_ACCURACY	X ACCURACY	X RAAKKANS	
+ITEM_X_SPECIAL	X SPECIAL	X SPECIAAL	
+ITEM_POKE_DOLL	POKé DOLL	POKéPOP	
+ITEM_FLUFFY_TAIL	FLUFFY TAIL	PLUISSTAART	
 ITEM_052	????????		
-ITEM_SUPER_REPEL	SUPER REPEL		
-ITEM_MAX_REPEL	MAX REPEL		
-ITEM_ESCAPE_ROPE	ESCAPE ROPE		
-ITEM_REPEL	REPEL		
+ITEM_SUPER_REPEL	SUPER REPEL	SUPERAFWEER	
+ITEM_MAX_REPEL	MAX REPEL	MAXAFWEER	
+ITEM_ESCAPE_ROPE	ESCAPE ROPE	ONTSNAPTOUW	
+ITEM_REPEL	REPEL	AFWEER	
 ITEM_057	????????		
 ITEM_058	????????		
 ITEM_059	????????		
 ITEM_05A	????????		
 ITEM_05B	????????		
 ITEM_05C	????????		
-ITEM_SUN_STONE	SUN STONE		
-ITEM_MOON_STONE	MOON STONE		
-ITEM_FIRE_STONE	FIRE STONE		
-ITEM_THUNDER_STONE	THUNDERSTONE		
-ITEM_WATER_STONE	WATER STONE		
-ITEM_LEAF_STONE	LEAF STONE		
+ITEM_SUN_STONE	SUN STONE	ZONNESTEEN	
+ITEM_MOON_STONE	MOON STONE	MAANSTEEN	
+ITEM_FIRE_STONE	FIRE STONE	VUURSTEEN	
+ITEM_THUNDER_STONE	THUNDERSTONE	DONDERSTEEN	
+ITEM_WATER_STONE	WATER STONE	WATERSTEEN	
+ITEM_LEAF_STONE	LEAF STONE	BLADSTEEN	
 ITEM_063	????????		
 ITEM_064	????????		
 ITEM_065	????????		
 ITEM_066	????????		
-ITEM_TINY_MUSHROOM	TINYMUSHROOM		
-ITEM_BIG_MUSHROOM	BIG MUSHROOM		
+ITEM_TINY_MUSHROOM	TINYMUSHROOM	KLEINE ZWAM	
+ITEM_BIG_MUSHROOM	BIG MUSHROOM	GROTE ZWAM	
 ITEM_069	????????		
-ITEM_PEARL	PEARL		
-ITEM_BIG_PEARL	BIG PEARL		
-ITEM_STARDUST	STARDUST		
-ITEM_STAR_PIECE	STAR PIECE		
-ITEM_NUGGET	NUGGET		
-ITEM_HEART_SCALE	HEART SCALE		
+ITEM_PEARL	PEARL	PAREL	
+ITEM_BIG_PEARL	BIG PEARL	GROTE PAREL	
+ITEM_STARDUST	STARDUST	STERRENSTOF	
+ITEM_STAR_PIECE	STAR PIECE	STERRENSTUK	
+ITEM_NUGGET	NUGGET	GOUDKLOMP	
+ITEM_HEART_SCALE	HEART SCALE	HARTSCHUB	
 ITEM_070	????????		
 ITEM_071	????????		
 ITEM_072	????????		
@@ -120,18 +120,18 @@ ITEM_075	????????
 ITEM_076	????????		
 ITEM_077	????????		
 ITEM_078	????????		
-ITEM_ORANGE_MAIL	ORANGE MAIL		
-ITEM_HARBOR_MAIL	HARBOR MAIL		
-ITEM_GLITTER_MAIL	GLITTER MAIL		
-ITEM_MECH_MAIL	MECH MAIL		
-ITEM_WOOD_MAIL	WOOD MAIL		
-ITEM_WAVE_MAIL	WAVE MAIL		
-ITEM_BEAD_MAIL	BEAD MAIL		
-ITEM_SHADOW_MAIL	SHADOW MAIL		
-ITEM_TROPIC_MAIL	TROPIC MAIL		
-ITEM_DREAM_MAIL	DREAM MAIL		
-ITEM_FAB_MAIL	FAB MAIL		
-ITEM_RETRO_MAIL	RETRO MAIL		
+ITEM_ORANGE_MAIL	ORANGE MAIL	ORANJEBRIEF	
+ITEM_HARBOR_MAIL	HARBOR MAIL	HAVENBRIEF	
+ITEM_GLITTER_MAIL	GLITTER MAIL	GLITTERBRIEF	
+ITEM_MECH_MAIL	MECH MAIL	MECHABRIEF	
+ITEM_WOOD_MAIL	WOOD MAIL	HOUTBRIEF	
+ITEM_WAVE_MAIL	WAVE MAIL	GOLFBRIEF	
+ITEM_BEAD_MAIL	BEAD MAIL	KRALENBRIEF	
+ITEM_SHADOW_MAIL	SHADOW MAIL	SCHADUWBRIEF	
+ITEM_TROPIC_MAIL	TROPIC MAIL	TROPENBRIEF	
+ITEM_DREAM_MAIL	DREAM MAIL	DROOMBRIEF	
+ITEM_FAB_MAIL	FAB MAIL	TOPBRIEF	
+ITEM_RETRO_MAIL	RETRO MAIL	RETROBRIEF	
 ITEM_CHERI_BERRY	CHERI BERRY		
 ITEM_CHESTO_BERRY	CHESTO BERRY		
 ITEM_PECHA_BERRY	PECHA BERRY		
@@ -178,53 +178,53 @@ ITEM_ENIGMA_BERRY	ENIGMA BERRY
 ITEM_UNUSED_BERRY_1	????????		
 ITEM_UNUSED_BERRY_2	????????		
 ITEM_UNUSED_BERRY_3	????????		
-ITEM_BRIGHT_POWDER	BRIGHTPOWDER		
-ITEM_WHITE_HERB	WHITE HERB		
-ITEM_MACHO_BRACE	MACHO BRACE		
-ITEM_EXP_SHARE	EXP. SHARE		
-ITEM_QUICK_CLAW	QUICK CLAW		
-ITEM_SOOTHE_BELL	SOOTHE BELL		
-ITEM_MENTAL_HERB	MENTAL HERB		
-ITEM_CHOICE_BAND	CHOICE BAND		
-ITEM_KINGS_ROCK	KING'S ROCK		
-ITEM_SILVER_POWDER	SILVERPOWDER		
-ITEM_AMULET_COIN	AMULET COIN		
-ITEM_CLEANSE_TAG	CLEANSE TAG		
-ITEM_SOUL_DEW	SOUL DEW		
-ITEM_DEEP_SEA_TOOTH	DEEPSEATOOTH		
-ITEM_DEEP_SEA_SCALE	DEEPSEASCALE		
-ITEM_SMOKE_BALL	SMOKE BALL		
-ITEM_EVERSTONE	EVERSTONE		
-ITEM_FOCUS_BAND	FOCUS BAND		
-ITEM_LUCKY_EGG	LUCKY EGG		
-ITEM_SCOPE_LENS	SCOPE LENS		
-ITEM_METAL_COAT	METAL COAT		
-ITEM_LEFTOVERS	LEFTOVERS		
-ITEM_DRAGON_SCALE	DRAGON SCALE		
-ITEM_LIGHT_BALL	LIGHT BALL		
-ITEM_SOFT_SAND	SOFT SAND		
-ITEM_HARD_STONE	HARD STONE		
-ITEM_MIRACLE_SEED	MIRACLE SEED		
-ITEM_BLACK_GLASSES	BLACKGLASSES		
-ITEM_BLACK_BELT	BLACK BELT		
-ITEM_MAGNET	MAGNET		
-ITEM_MYSTIC_WATER	MYSTIC WATER		
-ITEM_SHARP_BEAK	SHARP BEAK		
-ITEM_POISON_BARB	POISON BARB		
-ITEM_NEVER_MELT_ICE	NEVERMELTICE		
-ITEM_SPELL_TAG	SPELL TAG		
-ITEM_TWISTED_SPOON	TWISTEDSPOON		
-ITEM_CHARCOAL	CHARCOAL		
-ITEM_DRAGON_FANG	DRAGON FANG		
-ITEM_SILK_SCARF	SILK SCARF		
-ITEM_UP_GRADE	UP-GRADE		
-ITEM_SHELL_BELL	SHELL BELL		
-ITEM_SEA_INCENSE	SEA INCENSE		
-ITEM_LAX_INCENSE	LAX INCENSE		
-ITEM_LUCKY_PUNCH	LUCKY PUNCH		
-ITEM_METAL_POWDER	METAL POWDER		
-ITEM_THICK_CLUB	THICK CLUB		
-ITEM_STICK	STICK		
+ITEM_BRIGHT_POWDER	BRIGHTPOWDER	GLANSPOEDER	
+ITEM_WHITE_HERB	WHITE HERB	WIT KRUID	
+ITEM_MACHO_BRACE	MACHO BRACE	MACHOBAND	
+ITEM_EXP_SHARE	EXP. SHARE	EXP. DELER	
+ITEM_QUICK_CLAW	QUICK CLAW	SNELKLAUW	
+ITEM_SOOTHE_BELL	SOOTHE BELL	RUSTBEL	
+ITEM_MENTAL_HERB	MENTAL HERB	HOOFDKRUID	
+ITEM_CHOICE_BAND	CHOICE BAND	KEUZEBAND	
+ITEM_KINGS_ROCK	KING'S ROCK	KONINGSSTEEN	
+ITEM_SILVER_POWDER	SILVERPOWDER	ZILVERPOEDER	
+ITEM_AMULET_COIN	AMULET COIN	GELUKSMUNT	
+ITEM_CLEANSE_TAG	CLEANSE TAG	AFWEERLABEL	
+ITEM_SOUL_DEW	SOUL DEW	ZIELEDAUW	
+ITEM_DEEP_SEA_TOOTH	DEEPSEATOOTH	DIEPZEETAND	
+ITEM_DEEP_SEA_SCALE	DEEPSEASCALE	DIEPZEESCHUB	
+ITEM_SMOKE_BALL	SMOKE BALL	ROOKBAL	
+ITEM_EVERSTONE	EVERSTONE	EEUWSTEEN	
+ITEM_FOCUS_BAND	FOCUS BAND	FOCUSBAND	
+ITEM_LUCKY_EGG	LUCKY EGG	GELUKSEI	
+ITEM_SCOPE_LENS	SCOPE LENS	VIZIERLENS	
+ITEM_METAL_COAT	METAL COAT	METAALLAAG	
+ITEM_LEFTOVERS	LEFTOVERS	RESTJES	
+ITEM_DRAGON_SCALE	DRAGON SCALE	DRAKENSCHUB	
+ITEM_LIGHT_BALL	LIGHT BALL	LICHTBAL	
+ITEM_SOFT_SAND	SOFT SAND	ZACHT ZAND	
+ITEM_HARD_STONE	HARD STONE	HARDE STEEN	
+ITEM_MIRACLE_SEED	MIRACLE SEED	WONDERZAAD	
+ITEM_BLACK_GLASSES	BLACKGLASSES	ZWARTE BRIL	
+ITEM_BLACK_BELT	BLACK BELT	ZWARTE BAND	
+ITEM_MAGNET	MAGNET	MAGNEET	
+ITEM_MYSTIC_WATER	MYSTIC WATER	TOVERWATER	
+ITEM_SHARP_BEAK	SHARP BEAK	SCHERPSNAVEL	
+ITEM_POISON_BARB	POISON BARB	GIFSTEKEL	
+ITEM_NEVER_MELT_ICE	NEVERMELTICE	EEUWIG IJS	
+ITEM_SPELL_TAG	SPELL TAG	TOVERLABEL	
+ITEM_TWISTED_SPOON	TWISTEDSPOON	KROMME LEPEL	
+ITEM_CHARCOAL	CHARCOAL	HOUTSKOOL	
+ITEM_DRAGON_FANG	DRAGON FANG	DRAKENTAND	
+ITEM_SILK_SCARF	SILK SCARF	ZIJDEN SJAAL	
+ITEM_UP_GRADE	UP-GRADE	UP-GRADE	
+ITEM_SHELL_BELL	SHELL BELL	SCHELPBEL	
+ITEM_SEA_INCENSE	SEA INCENSE	ZEEGEUR	
+ITEM_LAX_INCENSE	LAX INCENSE	WAZIGE GEUR	
+ITEM_LUCKY_PUNCH	LUCKY PUNCH	GELUKSSTOMP	
+ITEM_METAL_POWDER	METAL POWDER	METAALPOEDER	
+ITEM_THICK_CLUB	THICK CLUB	KNUPPEL	
+ITEM_STICK	STICK	STOKJE	
 ITEM_0E2	????????		
 ITEM_0E3	????????		
 ITEM_0E4	????????		
@@ -253,11 +253,11 @@ ITEM_0FA	????????
 ITEM_0FB	????????		
 ITEM_0FC	????????		
 ITEM_0FD	????????		
-ITEM_RED_SCARF	RED SCARF		
-ITEM_BLUE_SCARF	BLUE SCARF		
-ITEM_PINK_SCARF	PINK SCARF		
-ITEM_GREEN_SCARF	GREEN SCARF		
-ITEM_YELLOW_SCARF	YELLOW SCARF		
+ITEM_RED_SCARF	RED SCARF	RODE SJAAL	
+ITEM_BLUE_SCARF	BLUE SCARF	BLAUWE SJAAL	
+ITEM_PINK_SCARF	PINK SCARF	ROZE SJAAL	
+ITEM_GREEN_SCARF	GREEN SCARF	GROENE SJAAL	
+ITEM_YELLOW_SCARF	YELLOW SCARF	GELE SJAAL	
 ITEM_MACH_BIKE	MACH BIKE		
 ITEM_COIN_CASE	COIN CASE		
 ITEM_ITEMFINDER	ITEMFINDER		
@@ -377,105 +377,105 @@ ITEM_SAPPHIRE	SAPPHIRE
 ITEM_MAGMA_EMBLEM	MAGMA EMBLEM		
 ITEM_OLD_SEA_MAP	OLD SEA MAP		
 sDummyDesc	?????		
-sMasterBallDesc	The best BALL that\ncatches a POKéMON\nwithout fail.		
-sUltraBallDesc	A better BALL with\na higher catch rate\nthan a GREAT BALL.		
-sGreatBallDesc	A good BALL with a\nhigher catch rate\nthan a POKé BALL.		
-sPokeBallDesc	A tool used for\ncatching wild\nPOKéMON.		
-sSafariBallDesc	A special BALL that\nis used only in the\nSAFARI ZONE.		
-sNetBallDesc	A BALL that works\nwell on WATER- and\nBUG-type POKéMON.		
-sDiveBallDesc	A BALL that works\nbetter on POKéMON\non the ocean floor.		
-sNestBallDesc	A BALL that works\nbetter on weaker\nPOKéMON.		
-sRepeatBallDesc	A BALL that works\nbetter on POKéMON\ncaught before.		
-sTimerBallDesc	A BALL that gains\npower in battles\ntaking many turns.		
-sLuxuryBallDesc	A cozy BALL that\nmakes POKéMON\nmore friendly.		
-sPremierBallDesc	A rare BALL made\nin commemoration\nof some event.		
-sPotionDesc	Restores the HP of\na POKéMON by\n20 points.		
-sAntidoteDesc	Heals a poisoned\nPOKéMON.		
-sBurnHealDesc	Heals POKéMON\nof a burn.		
-sIceHealDesc	Defrosts a frozen\nPOKéMON.		
-sAwakeningDesc	Awakens a sleeping\nPOKéMON.		
-sParalyzeHealDesc	Heals a paralyzed\nPOKéMON.		
-sFullRestoreDesc	Fully restores the\nHP and status of a\nPOKéMON.		
-sMaxPotionDesc	Fully restores the\nHP of a POKéMON.		
-sHyperPotionDesc	Restores the HP of\na POKéMON by\n200 points.		
-sSuperPotionDesc	Restores the HP of\na POKéMON by\n50 points.		
-sFullHealDesc	Heals all the\nstatus problems of\none POKéMON.		
-sReviveDesc	Revives a fainted\nPOKéMON with half\nits HP.		
-sMaxReviveDesc	Revives a fainted\nPOKéMON with all\nits HP.		
-sFreshWaterDesc	A mineral water\nthat restores HP\nby 50 points.		
-sSodaPopDesc	A fizzy soda drink\nthat restores HP\nby 60 points.		
-sLemonadeDesc	A very sweet drink\nthat restores HP\nby 80 points.		
-sMoomooMilkDesc	A nutritious milk\nthat restores HP\nby 100 points.		
-sEnergyPowderDesc	A bitter powder\nthat restores HP\nby 50 points.		
-sEnergyRootDesc	A bitter root\nthat restores HP\nby 200 points.		
-sHealPowderDesc	A bitter powder\nthat heals all\nstatus problems.		
-sRevivalHerbDesc	A very bitter herb\nthat revives a\nfainted POKéMON.		
-sEtherDesc	Restores the PP\nof a selected move\nby 10.		
-sMaxEtherDesc	Fully restores the\nPP of a selected\nmove.		
-sElixirDesc	Restores the PP\nof all moves by 10.		
-sMaxElixirDesc	Fully restores the\nPP of a POKéMON's\nmoves.		
-sLavaCookieDesc	A local specialty\nthat heals all\nstatus problems.		
-sBlueFluteDesc	A glass flute that\nawakens sleeping\nPOKéMON.		
-sYellowFluteDesc	A glass flute that\nsnaps POKéMON\nout of confusion.		
-sRedFluteDesc	A glass flute that\nsnaps POKéMON\nout of attraction.		
-sBlackFluteDesc	A glass flute that\nkeeps away wild\nPOKéMON.		
-sWhiteFluteDesc	A glass flute that\nlures wild POKéMON.		
-sBerryJuiceDesc	A 100% pure juice\nthat restores HP\nby 20 points.		
-sSacredAshDesc	Fully revives and\nrestores all\nfainted POKéMON.		
-sShoalSaltDesc	Salt obtained from\ndeep inside the\nSHOAL CAVE.		
-sShoalShellDesc	A seashell found\ndeep inside the\nSHOAL CAVE.		
-sRedShardDesc	A shard from an\nancient item. Can\nbe sold cheaply.		
-sBlueShardDesc	A shard from an\nancient item. Can\nbe sold cheaply.		
-sYellowShardDesc	A shard from an\nancient item. Can\nbe sold cheaply.		
-sGreenShardDesc	A shard from an\nancient item. Can\nbe sold cheaply.		
-sHPUpDesc	Raises the base HP\nof one POKéMON.		
-sProteinDesc	Raises the base\nATTACK stat of one\nPOKéMON.		
-sIronDesc	Raises the base\nDEFENSE stat of\none POKéMON.		
-sCarbosDesc	Raises the base\nSPEED stat of one\nPOKéMON.		
-sCalciumDesc	Raises the base\nSP. ATK stat of one\nPOKéMON.		
-sRareCandyDesc	Raises the level\nof a POKéMON by\none.		
-sPPUpDesc	Raises the maximum\nPP of a selected\nmove.		
-sZincDesc	Raises the base\nSP. DEF stat of one\nPOKéMON.		
-sPPMaxDesc	Raises the PP of a\nmove to its maximum\npoints.		
-sGuardSpecDesc	Prevents stat\nreduction when\nused in battle.		
-sDireHitDesc	Raises the\ncritical-hit ratio\nduring one battle.		
-sXAttackDesc	Raises the stat\nATTACK during one\nbattle.		
-sXDefendDesc	Raises the stat\nDEFENSE during one\nbattle.		
-sXSpeedDesc	Raises the stat\nSPEED during one\nbattle.		
-sXAccuracyDesc	Raises accuracy\nof attack moves\nduring one battle.		
-sXSpecialDesc	Raises the stat\nSP. ATK during one\nbattle.		
-sPokeDollDesc	Use to flee from\nany battle with\na wild POKéMON.		
-sFluffyTailDesc	Use to flee from\nany battle with\na wild POKéMON.		
-sSuperRepelDesc	Repels weak wild\nPOKéMON for 200\nsteps.		
-sMaxRepelDesc	Repels weak wild\nPOKéMON for 250\nsteps.		
-sEscapeRopeDesc	Use to escape\ninstantly from a\ncave or a dungeon.		
-sRepelDesc	Repels weak wild\nPOKéMON for 100\nsteps.		
-sSunStoneDesc	Makes certain\nspecies of POKéMON\nevolve.		
-sMoonStoneDesc	Makes certain\nspecies of POKéMON\nevolve.		
-sFireStoneDesc	Makes certain\nspecies of POKéMON\nevolve.		
-sThunderStoneDesc	Makes certain\nspecies of POKéMON\nevolve.		
-sWaterStoneDesc	Makes certain\nspecies of POKéMON\nevolve.		
-sLeafStoneDesc	Makes certain\nspecies of POKéMON\nevolve.		
-sTinyMushroomDesc	A plain mushroom\nthat would sell\nat a cheap price.		
-sBigMushroomDesc	A rare mushroom\nthat would sell at a\nhigh price.		
-sPearlDesc	A pretty pearl\nthat would sell at a\ncheap price.		
-sBigPearlDesc	A lovely large pearl\nthat would sell at a\nhigh price.		
-sStardustDesc	Beautiful red sand.\nCan be sold at a\nhigh price.		
-sStarPieceDesc	A red gem shard.\nIt would sell for a\nvery high price.		
-sNuggetDesc	A nugget of pure\ngold. Can be sold at\na high price.		
-sHeartScaleDesc	A lovely scale.\nIt is coveted by\ncollectors.		
-sOrangeMailDesc	A ZIGZAGOON-print\nMAIL to be held by\na POKéMON.		
-sHarborMailDesc	A WINGULL-print\nMAIL to be held by\na POKéMON.		
-sGlitterMailDesc	A PIKACHU-print\nMAIL to be held by\na POKéMON.		
-sMechMailDesc	A MAGNEMITE-print\nMAIL to be held by\na POKéMON.		
-sWoodMailDesc	A SLAKOTH-print\nMAIL to be held by\na POKéMON.		
-sWaveMailDesc	A WAILMER-print\nMAIL to be held by\na POKéMON.		
-sBeadMailDesc	MAIL featuring a\nsketch of the\nholding POKéMON.		
-sShadowMailDesc	A DUSKULL-print\nMAIL to be held by\na POKéMON.		
-sTropicMailDesc	A BELLOSSOM-print\nMAIL to be held by\na POKéMON.		
-sDreamMailDesc	MAIL featuring a\nsketch of the\nholding POKéMON.		
-sFabMailDesc	A gorgeous-print\nMAIL to be held\nby a POKéMON.		
-sRetroMailDesc	MAIL featuring the\ndrawings of three\nPOKéMON.		
+sMasterBallDesc	The best BALL that\ncatches a POKéMON\nwithout fail.	De beste BALL.\nVangt elke POKéMON\nzonder te missen.	
+sUltraBallDesc	A better BALL with\na higher catch rate\nthan a GREAT BALL.	Een betere BALL.\nVangt beter dan\neen SUPERBALL.	
+sGreatBallDesc	A good BALL with a\nhigher catch rate\nthan a POKé BALL.	Een goede BALL.\nVangt beter dan\neen POKé BALL.	
+sPokeBallDesc	A tool used for\ncatching wild\nPOKéMON.	Hiermee vang je\nwilde POKéMON.	
+sSafariBallDesc	A special BALL that\nis used only in the\nSAFARI ZONE.	Een speciale BALL.\nAlleen voor de\nSAFARI ZONE.	
+sNetBallDesc	A BALL that works\nwell on WATER- and\nBUG-type POKéMON.	Werkt goed op\nWATER- en INSECT-\nPOKéMON.	
+sDiveBallDesc	A BALL that works\nbetter on POKéMON\non the ocean floor.	Werkt beter op\nPOKéMON onder\nwater.	
+sNestBallDesc	A BALL that works\nbetter on weaker\nPOKéMON.	Werkt beter op\nzwakke POKéMON.	
+sRepeatBallDesc	A BALL that works\nbetter on POKéMON\ncaught before.	Werkt beter op\nPOKéMON die je al\neens ving.	
+sTimerBallDesc	A BALL that gains\npower in battles\ntaking many turns.	Wordt sterker als\nhet gevecht lang\nduurt.	
+sLuxuryBallDesc	A cozy BALL that\nmakes POKéMON\nmore friendly.	Een fijne BALL.\nPOKéMON worden er\nvriendelijker van.	
+sPremierBallDesc	A rare BALL made\nin commemoration\nof some event.	Een zeldzame BALL\nvoor een speciaal\nfeest.	
+sPotionDesc	Restores the HP of\na POKéMON by\n20 points.	Geeft een POKéMON\n20 HP terug.	
+sAntidoteDesc	Heals a poisoned\nPOKéMON.	Geneest een\nvergiftigde\nPOKéMON.	
+sBurnHealDesc	Heals POKéMON\nof a burn.	Geneest een\nbrandwond.	
+sIceHealDesc	Defrosts a frozen\nPOKéMON.	Ontdooit een\nbevroren POKéMON.	
+sAwakeningDesc	Awakens a sleeping\nPOKéMON.	Maakt een slapende\nPOKéMON wakker.	
+sParalyzeHealDesc	Heals a paralyzed\nPOKéMON.	Geneest een\nverlamde POKéMON.	
+sFullRestoreDesc	Fully restores the\nHP and status of a\nPOKéMON.	Geeft alle HP\nterug en geneest\nalle kwaaltjes.	
+sMaxPotionDesc	Fully restores the\nHP of a POKéMON.	Geeft een POKéMON\nalle HP terug.	
+sHyperPotionDesc	Restores the HP of\na POKéMON by\n200 points.	Geeft een POKéMON\n200 HP terug.	
+sSuperPotionDesc	Restores the HP of\na POKéMON by\n50 points.	Geeft een POKéMON\n50 HP terug.	
+sFullHealDesc	Heals all the\nstatus problems of\none POKéMON.	Geneest alle\nkwaaltjes van\neen POKéMON.	
+sReviveDesc	Revives a fainted\nPOKéMON with half\nits HP.	Een verslagen\nPOKéMON staat op\nmet de helft HP.	
+sMaxReviveDesc	Revives a fainted\nPOKéMON with all\nits HP.	Een verslagen\nPOKéMON staat op\nmet alle HP.	
+sFreshWaterDesc	A mineral water\nthat restores HP\nby 50 points.	Lekker bronwater.\nGeeft 50 HP terug.	
+sSodaPopDesc	A fizzy soda drink\nthat restores HP\nby 60 points.	Een bruisend\ndrankje. Geeft\n60 HP terug.	
+sLemonadeDesc	A very sweet drink\nthat restores HP\nby 80 points.	Heel zoete\nlimonade. Geeft\n80 HP terug.	
+sMoomooMilkDesc	A nutritious milk\nthat restores HP\nby 100 points.	Gezonde melk.\nGeeft 100 HP\nterug.	
+sEnergyPowderDesc	A bitter powder\nthat restores HP\nby 50 points.	Een bitter poeder.\nGeeft 50 HP terug.	
+sEnergyRootDesc	A bitter root\nthat restores HP\nby 200 points.	Een bittere\nwortel. Geeft\n200 HP terug.	
+sHealPowderDesc	A bitter powder\nthat heals all\nstatus problems.	Een bitter poeder.\nGeneest alle\nkwaaltjes.	
+sRevivalHerbDesc	A very bitter herb\nthat revives a\nfainted POKéMON.	Heel bitter kruid.\nWekt een verslagen\nPOKéMON op.	
+sEtherDesc	Restores the PP\nof a selected move\nby 10.	Geeft 10 PP terug\naan 1 aanval.	
+sMaxEtherDesc	Fully restores the\nPP of a selected\nmove.	Geeft alle PP\nterug aan 1 aanval.	
+sElixirDesc	Restores the PP\nof all moves by 10.	Geeft 10 PP terug\naan alle aanvallen.	
+sMaxElixirDesc	Fully restores the\nPP of a POKéMON's\nmoves.	Geeft alle PP\nterug aan alle\naanvallen.	
+sLavaCookieDesc	A local specialty\nthat heals all\nstatus problems.	Een koekje uit\nde buurt. Geneest\nalle kwaaltjes.	
+sBlueFluteDesc	A glass flute that\nawakens sleeping\nPOKéMON.	Een glazen fluit.\nMaakt slapende\nPOKéMON wakker.	
+sYellowFluteDesc	A glass flute that\nsnaps POKéMON\nout of confusion.	Een glazen fluit.\nHaalt POKéMON\nuit de war.	
+sRedFluteDesc	A glass flute that\nsnaps POKéMON\nout of attraction.	Een glazen fluit.\nPOKéMON zijn niet\nmeer verliefd.	
+sBlackFluteDesc	A glass flute that\nkeeps away wild\nPOKéMON.	Een glazen fluit.\nHoudt wilde\nPOKéMON weg.	
+sWhiteFluteDesc	A glass flute that\nlures wild POKéMON.	Een glazen fluit.\nLokt wilde\nPOKéMON.	
+sBerryJuiceDesc	A 100% pure juice\nthat restores HP\nby 20 points.	100% bessensap.\nGeeft 20 HP terug.	
+sSacredAshDesc	Fully revives and\nrestores all\nfainted POKéMON.	Alle verslagen\nPOKéMON staan op\nmet alle HP.	
+sShoalSaltDesc	Salt obtained from\ndeep inside the\nSHOAL CAVE.	Zout van diep in\nde SHOAL CAVE.	
+sShoalShellDesc	A seashell found\ndeep inside the\nSHOAL CAVE.	Een schelp van diep\nin de SHOAL CAVE.	
+sRedShardDesc	A shard from an\nancient item. Can\nbe sold cheaply.	Een stukje van een\noud voorwerp. Bijna\nniets waard.	
+sBlueShardDesc	A shard from an\nancient item. Can\nbe sold cheaply.	Een stukje van een\noud voorwerp. Bijna\nniets waard.	
+sYellowShardDesc	A shard from an\nancient item. Can\nbe sold cheaply.	Een stukje van een\noud voorwerp. Bijna\nniets waard.	
+sGreenShardDesc	A shard from an\nancient item. Can\nbe sold cheaply.	Een stukje van een\noud voorwerp. Bijna\nniets waard.	
+sHPUpDesc	Raises the base HP\nof one POKéMON.	Verhoogt de HP\nvan 1 POKéMON.	
+sProteinDesc	Raises the base\nATTACK stat of one\nPOKéMON.	Verhoogt de AANVAL\nvan 1 POKéMON.	
+sIronDesc	Raises the base\nDEFENSE stat of\none POKéMON.	Verhoogt de\nVERDEDIGING van\n1 POKéMON.	
+sCarbosDesc	Raises the base\nSPEED stat of one\nPOKéMON.	Verhoogt de\nSNELHEID van\n1 POKéMON.	
+sCalciumDesc	Raises the base\nSP. ATK stat of one\nPOKéMON.	Verhoogt de\nSP. AANV van\n1 POKéMON.	
+sRareCandyDesc	Raises the level\nof a POKéMON by\none.	Een POKéMON gaat\n1 level omhoog.	
+sPPUpDesc	Raises the maximum\nPP of a selected\nmove.	Verhoogt de max.\nPP van 1 aanval.	
+sZincDesc	Raises the base\nSP. DEF stat of one\nPOKéMON.	Verhoogt de\nSP. VERD van\n1 POKéMON.	
+sPPMaxDesc	Raises the PP of a\nmove to its maximum\npoints.	Maakt de PP van\n1 aanval maximaal.	
+sGuardSpecDesc	Prevents stat\nreduction when\nused in battle.	In 1 gevecht kan\nniemand je zwakker\nmaken.	
+sDireHitDesc	Raises the\ncritical-hit ratio\nduring one battle.	Meer kans op een\nvoltreffer in\n1 gevecht.	
+sXAttackDesc	Raises the stat\nATTACK during one\nbattle.	Verhoogt AANVAL\nin 1 gevecht.	
+sXDefendDesc	Raises the stat\nDEFENSE during one\nbattle.	Verhoogt\nVERDEDIGING in\n1 gevecht.	
+sXSpeedDesc	Raises the stat\nSPEED during one\nbattle.	Verhoogt SNELHEID\nin 1 gevecht.	
+sXAccuracyDesc	Raises accuracy\nof attack moves\nduring one battle.	Verhoogt de\nraakkans in\n1 gevecht.	
+sXSpecialDesc	Raises the stat\nSP. ATK during one\nbattle.	Verhoogt SP. AANV\nin 1 gevecht.	
+sPokeDollDesc	Use to flee from\nany battle with\na wild POKéMON.	Vlucht altijd uit\neen gevecht met\neen wilde POKéMON.	
+sFluffyTailDesc	Use to flee from\nany battle with\na wild POKéMON.	Vlucht altijd uit\neen gevecht met\neen wilde POKéMON.	
+sSuperRepelDesc	Repels weak wild\nPOKéMON for 200\nsteps.	Houdt zwakke wilde\nPOKéMON weg voor\n200 stappen.	
+sMaxRepelDesc	Repels weak wild\nPOKéMON for 250\nsteps.	Houdt zwakke wilde\nPOKéMON weg voor\n250 stappen.	
+sEscapeRopeDesc	Use to escape\ninstantly from a\ncave or a dungeon.	Ontsnap meteen\nuit een grot of\ndoolhof.	
+sRepelDesc	Repels weak wild\nPOKéMON for 100\nsteps.	Houdt zwakke wilde\nPOKéMON weg voor\n100 stappen.	
+sSunStoneDesc	Makes certain\nspecies of POKéMON\nevolve.	Sommige POKéMON\nevolueren hiermee.	
+sMoonStoneDesc	Makes certain\nspecies of POKéMON\nevolve.	Sommige POKéMON\nevolueren hiermee.	
+sFireStoneDesc	Makes certain\nspecies of POKéMON\nevolve.	Sommige POKéMON\nevolueren hiermee.	
+sThunderStoneDesc	Makes certain\nspecies of POKéMON\nevolve.	Sommige POKéMON\nevolueren hiermee.	
+sWaterStoneDesc	Makes certain\nspecies of POKéMON\nevolve.	Sommige POKéMON\nevolueren hiermee.	
+sLeafStoneDesc	Makes certain\nspecies of POKéMON\nevolve.	Sommige POKéMON\nevolueren hiermee.	
+sTinyMushroomDesc	A plain mushroom\nthat would sell\nat a cheap price.	Een gewone zwam.\nBrengt weinig\ngeld op.	
+sBigMushroomDesc	A rare mushroom\nthat would sell at a\nhigh price.	Een zeldzame zwam.\nBrengt veel geld\nop.	
+sPearlDesc	A pretty pearl\nthat would sell at a\ncheap price.	Een mooie parel.\nBrengt weinig\ngeld op.	
+sBigPearlDesc	A lovely large pearl\nthat would sell at a\nhigh price.	Een grote parel.\nBrengt veel geld\nop.	
+sStardustDesc	Beautiful red sand.\nCan be sold at a\nhigh price.	Mooi rood zand.\nBrengt veel geld\nop.	
+sStarPieceDesc	A red gem shard.\nIt would sell for a\nvery high price.	Een rood stukje\nedelsteen. Brengt\nheel veel geld op.	
+sNuggetDesc	A nugget of pure\ngold. Can be sold at\na high price.	Een klomp puur\ngoud. Brengt veel\ngeld op.	
+sHeartScaleDesc	A lovely scale.\nIt is coveted by\ncollectors.	Een mooie schub.\nVerzamelaars\nwillen hem graag.	
+sOrangeMailDesc	A ZIGZAGOON-print\nMAIL to be held by\na POKéMON.	Een brief met\nZIGZAGOON erop.\nVoor een POKéMON.	
+sHarborMailDesc	A WINGULL-print\nMAIL to be held by\na POKéMON.	Een brief met\nWINGULL erop.\nVoor een POKéMON.	
+sGlitterMailDesc	A PIKACHU-print\nMAIL to be held by\na POKéMON.	Een brief met\nPIKACHU erop.\nVoor een POKéMON.	
+sMechMailDesc	A MAGNEMITE-print\nMAIL to be held by\na POKéMON.	Een brief met\nMAGNEMITE erop.\nVoor een POKéMON.	
+sWoodMailDesc	A SLAKOTH-print\nMAIL to be held by\na POKéMON.	Een brief met\nSLAKOTH erop.\nVoor een POKéMON.	
+sWaveMailDesc	A WAILMER-print\nMAIL to be held by\na POKéMON.	Een brief met\nWAILMER erop.\nVoor een POKéMON.	
+sBeadMailDesc	MAIL featuring a\nsketch of the\nholding POKéMON.	Een brief met een\ntekening van de\nPOKéMON zelf.	
+sShadowMailDesc	A DUSKULL-print\nMAIL to be held by\na POKéMON.	Een brief met\nDUSKULL erop.\nVoor een POKéMON.	
+sTropicMailDesc	A BELLOSSOM-print\nMAIL to be held by\na POKéMON.	Een brief met\nBELLOSSOM erop.\nVoor een POKéMON.	
+sDreamMailDesc	MAIL featuring a\nsketch of the\nholding POKéMON.	Een brief met een\ntekening van de\nPOKéMON zelf.	
+sFabMailDesc	A gorgeous-print\nMAIL to be held\nby a POKéMON.	Een prachtige\nbrief. Voor een\nPOKéMON.	
+sRetroMailDesc	MAIL featuring the\ndrawings of three\nPOKéMON.	Een brief met\ntekeningen van\ndrie POKéMON.	
 sCheriBerryDesc	A hold item that\nheals paralysis\nin battle.		
 sChestoBerryDesc	A hold item that\nawakens POKéMON\nin battle.		
 sPechaBerryDesc	A hold item that\nheals poisoning\nin battle.		
@@ -519,58 +519,58 @@ sApicotBerryDesc	A hold item that\nraises SP. DEF in\na pinch.
 sLansatBerryDesc	A hold item that\nups the critical-\nhit rate in a pinch.		
 sStarfBerryDesc	A hold item that\nsharply boosts a\nstat in a pinch.		
 sEnigmaBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow a mystery.		
-sBrightPowderDesc	A hold item that\ncasts a glare to\nreduce accuracy.		
-sWhiteHerbDesc	A hold item that\nrestores any\nlowered stat.		
-sMachoBraceDesc	A hold item that\npromotes growth,\nbut reduces SPEED.		
-sExpShareDesc	A hold item that\ngets EXP. points\nfrom battles.		
-sQuickClawDesc	A hold item that\noccasionally allows\nthe first strike.		
-sSootheBellDesc	A hold item that\ncalms spirits and\nfosters friendship.		
-sMentalHerbDesc	A hold item that\nsnaps POKéMON out\nof infatuation.		
-sChoiceBandDesc	Raises a move's\npower, but permits\nonly that move.		
-sKingsRockDesc	A hold item that\nmay cause flinching\nwhen the foe is hit.		
-sSilverPowderDesc	A hold item that\nraises the power of\nBUG-type moves.		
-sAmuletCoinDesc	Doubles money in\nbattle if the\nholder takes part.		
-sCleanseTagDesc	A hold item that\nhelps repel wild\nPOKéMON.		
-sSoulDewDesc	Hold item: raises\nSP. ATK & SP. DEF of\nLATIOS & LATIAS.		
-sDeepSeaToothDesc	A hold item that\nraises the SP. ATK\nof CLAMPERL.		
-sDeepSeaScaleDesc	A hold item that\nraises the SP. DEF\nof CLAMPERL.		
-sSmokeBallDesc	A hold item that\nassures fleeing\nfrom wild POKéMON.		
-sEverstoneDesc	A wondrous hold\nitem that prevents\nevolution.		
-sFocusBandDesc	A hold item that\noccasionally\nprevents fainting.		
-sLuckyEggDesc	A hold item that\nboosts EXP. points\nearned in battle.		
-sScopeLensDesc	A hold item that\nimproves the\ncritical-hit rate.		
-sMetalCoatDesc	A hold item that\nraises the power of\nSTEEL-type moves.		
-sLeftoversDesc	A hold item that\ngradually restores\nHP in battle.		
-sDragonScaleDesc	A strange scale\nheld by DRAGON-\ntype POKéMON.		
-sLightBallDesc	A hold item that\nraises the SP. ATK\nof PIKACHU.		
-sSoftSandDesc	A hold item that\nraises the power of\nGROUND-type moves.		
-sHardStoneDesc	A hold item that\nraises the power of\nROCK-type moves.		
-sMiracleSeedDesc	A hold item that\nraises the power of\nGRASS-type moves.		
-sBlackGlassesDesc	A hold item that\nraises the power of\nDARK-type moves.		
-sBlackBeltDesc	A hold item that\nboosts FIGHTING-\ntype moves.		
-sMagnetDesc	A hold item that\nboosts ELECTRIC-\ntype moves.		
-sMysticWaterDesc	A hold item that\nraises the power of\nWATER-type moves.		
-sSharpBeakDesc	A hold item that\nraises the power of\nFLYING-type moves.		
-sPoisonBarbDesc	A hold item that\nraises the power of\nPOISON-type moves.		
-sNeverMeltIceDesc	A hold item that\nraises the power of\nICE-type moves.		
-sSpellTagDesc	A hold item that\nraises the power of\nGHOST-type moves.		
-sTwistedSpoonDesc	A hold item that\nboosts PSYCHIC-\ntype moves.		
-sCharcoalDesc	A hold item that\nraises the power of\nFIRE-type moves.		
-sDragonFangDesc	A hold item that\nraises the power of\nDRAGON-type moves.		
-sSilkScarfDesc	A hold item that\nraises the power of\nNORMAL-type moves.		
-sUpGradeDesc	A peculiar box made\nby SILPH CO.		
-sShellBellDesc	A hold item that\nrestores HP upon\nstriking the foe.		
-sSeaIncenseDesc	A hold item that\nslightly boosts\nWATER-type moves.		
-sLaxIncenseDesc	A hold item that\nslightly lowers the\nfoe's accuracy.		
-sLuckyPunchDesc	A hold item that\nraises CHANSEY's\ncritical-hit rate.		
-sMetalPowderDesc	A hold item that\nraises DITTO's\nDEFENSE.		
-sThickClubDesc	A hold item that \nraises CUBONE or\nMAROWAK's ATTACK.		
-sStickDesc	A hold item that\nraises FARFETCH'D's\ncritical-hit ratio.		
-sRedScarfDesc	A hold item that\nraises COOL in\nCONTESTS.		
-sBlueScarfDesc	A hold item that\nraises BEAUTY in\nCONTESTS.		
-sPinkScarfDesc	A hold item that\nraises CUTE in\nCONTESTS.		
-sGreenScarfDesc	A hold item that\nraises SMART in\nCONTESTS.		
-sYellowScarfDesc	A hold item that\nraises TOUGH in\nCONTESTS.		
+sBrightPowderDesc	A hold item that\ncasts a glare to\nreduce accuracy.	Om vast te houden.\nVerblindt en\nverlaagt raakkans.	
+sWhiteHerbDesc	A hold item that\nrestores any\nlowered stat.	Om vast te houden.\nHeft verzwakking\nweer op.	
+sMachoBraceDesc	A hold item that\npromotes growth,\nbut reduces SPEED.	Om vast te houden.\nGroeit beter, maar\nis trager.	
+sExpShareDesc	A hold item that\ngets EXP. points\nfrom battles.	Om vast te houden.\nKrijgt EXP. zonder\nmee te vechten.	
+sQuickClawDesc	A hold item that\noccasionally allows\nthe first strike.	Om vast te houden.\nValt soms als\neerste aan.	
+sSootheBellDesc	A hold item that\ncalms spirits and\nfosters friendship.	Om vast te houden.\nMaakt rustig en\nvriendelijker.	
+sMentalHerbDesc	A hold item that\nsnaps POKéMON out\nof infatuation.	Om vast te houden.\nPOKéMON is niet\nmeer verliefd.	
+sChoiceBandDesc	Raises a move's\npower, but permits\nonly that move.	Maakt een aanval\nsterker, maar je\nkunt alleen die.	
+sKingsRockDesc	A hold item that\nmay cause flinching\nwhen the foe is hit.	Om vast te houden.\nVijand kan bij een\nraak terugdeinzen.	
+sSilverPowderDesc	A hold item that\nraises the power of\nBUG-type moves.	Om vast te houden.\nINSECT-aanvallen\nworden sterker.	
+sAmuletCoinDesc	Doubles money in\nbattle if the\nholder takes part.	Dubbel geld na\nhet gevecht als hij\nmeedoet.	
+sCleanseTagDesc	A hold item that\nhelps repel wild\nPOKéMON.	Om vast te houden.\nHoudt wilde\nPOKéMON weg.	
+sSoulDewDesc	Hold item: raises\nSP. ATK & SP. DEF of\nLATIOS & LATIAS.	SP. AANV & SP. VERD\nomhoog voor LATIOS\n& LATIAS.	
+sDeepSeaToothDesc	A hold item that\nraises the SP. ATK\nof CLAMPERL.	Om vast te houden.\nMeer SP. AANV voor\nCLAMPERL.	
+sDeepSeaScaleDesc	A hold item that\nraises the SP. DEF\nof CLAMPERL.	Om vast te houden.\nMeer SP. VERD voor\nCLAMPERL.	
+sSmokeBallDesc	A hold item that\nassures fleeing\nfrom wild POKéMON.	Om vast te houden.\nVlucht altijd van\nwilde POKéMON.	
+sEverstoneDesc	A wondrous hold\nitem that prevents\nevolution.	Om vast te houden.\nStopt evolutie.	
+sFocusBandDesc	A hold item that\noccasionally\nprevents fainting.	Om vast te houden.\nBlijft soms staan\nmet 1 HP.	
+sLuckyEggDesc	A hold item that\nboosts EXP. points\nearned in battle.	Om vast te houden.\nMeer EXP. na een\ngevecht.	
+sScopeLensDesc	A hold item that\nimproves the\ncritical-hit rate.	Om vast te houden.\nMeer kans op een\nvoltreffer.	
+sMetalCoatDesc	A hold item that\nraises the power of\nSTEEL-type moves.	Om vast te houden.\nSTAAL-aanvallen\nworden sterker.	
+sLeftoversDesc	A hold item that\ngradually restores\nHP in battle.	Om vast te houden.\nKrijgt in gevecht\nlangzaam HP terug.	
+sDragonScaleDesc	A strange scale\nheld by DRAGON-\ntype POKéMON.	Een vreemde schub\nvan DRAAK-POKéMON.	
+sLightBallDesc	A hold item that\nraises the SP. ATK\nof PIKACHU.	Om vast te houden.\nMeer SP. AANV voor\nPIKACHU.	
+sSoftSandDesc	A hold item that\nraises the power of\nGROUND-type moves.	Om vast te houden.\nGROND-aanvallen\nworden sterker.	
+sHardStoneDesc	A hold item that\nraises the power of\nROCK-type moves.	Om vast te houden.\nSTEEN-aanvallen\nworden sterker.	
+sMiracleSeedDesc	A hold item that\nraises the power of\nGRASS-type moves.	Om vast te houden.\nGRAS-aanvallen\nworden sterker.	
+sBlackGlassesDesc	A hold item that\nraises the power of\nDARK-type moves.	Om vast te houden.\nDUISTER-aanvallen\nworden sterker.	
+sBlackBeltDesc	A hold item that\nboosts FIGHTING-\ntype moves.	Om vast te houden.\nVECHT-aanvallen\nworden sterker.	
+sMagnetDesc	A hold item that\nboosts ELECTRIC-\ntype moves.	Om vast te houden.\nELEKTRISCH-\naanvallen sterker.	
+sMysticWaterDesc	A hold item that\nraises the power of\nWATER-type moves.	Om vast te houden.\nWATER-aanvallen\nworden sterker.	
+sSharpBeakDesc	A hold item that\nraises the power of\nFLYING-type moves.	Om vast te houden.\nVLIEG-aanvallen\nworden sterker.	
+sPoisonBarbDesc	A hold item that\nraises the power of\nPOISON-type moves.	Om vast te houden.\nGIF-aanvallen\nworden sterker.	
+sNeverMeltIceDesc	A hold item that\nraises the power of\nICE-type moves.	Om vast te houden.\nIJS-aanvallen\nworden sterker.	
+sSpellTagDesc	A hold item that\nraises the power of\nGHOST-type moves.	Om vast te houden.\nGEEST-aanvallen\nworden sterker.	
+sTwistedSpoonDesc	A hold item that\nboosts PSYCHIC-\ntype moves.	Om vast te houden.\nPSYCHISCH-\naanvallen sterker.	
+sCharcoalDesc	A hold item that\nraises the power of\nFIRE-type moves.	Om vast te houden.\nVUUR-aanvallen\nworden sterker.	
+sDragonFangDesc	A hold item that\nraises the power of\nDRAGON-type moves.	Om vast te houden.\nDRAAK-aanvallen\nworden sterker.	
+sSilkScarfDesc	A hold item that\nraises the power of\nNORMAL-type moves.	Om vast te houden.\nNORMAAL-aanvallen\nworden sterker.	
+sUpGradeDesc	A peculiar box made\nby SILPH CO.	Een vreemd doosje\nvan SILPH CO.	
+sShellBellDesc	A hold item that\nrestores HP upon\nstriking the foe.	Om vast te houden.\nKrijgt HP als hij\nde vijand raakt.	
+sSeaIncenseDesc	A hold item that\nslightly boosts\nWATER-type moves.	Om vast te houden.\nWATER-aanvallen\niets sterker.	
+sLaxIncenseDesc	A hold item that\nslightly lowers the\nfoe's accuracy.	Om vast te houden.\nVijand raakt iets\nminder vaak.	
+sLuckyPunchDesc	A hold item that\nraises CHANSEY's\ncritical-hit rate.	Meer kans op een\nvoltreffer voor\nCHANSEY.	
+sMetalPowderDesc	A hold item that\nraises DITTO's\nDEFENSE.	Om vast te houden.\nMeer VERDEDIGING\nvoor DITTO.	
+sThickClubDesc	A hold item that \nraises CUBONE or\nMAROWAK's ATTACK.	Meer AANVAL voor\nCUBONE of\nMAROWAK.	
+sStickDesc	A hold item that\nraises FARFETCH'D's\ncritical-hit ratio.	Meer kans op een\nvoltreffer voor\nFARFETCH'D.	
+sRedScarfDesc	A hold item that\nraises COOL in\nCONTESTS.	Om vast te houden.\nHelpt bij STOER in\nWEDSTRIJDEN.	
+sBlueScarfDesc	A hold item that\nraises BEAUTY in\nCONTESTS.	Om vast te houden.\nHelpt bij MOOI in\nWEDSTRIJDEN.	
+sPinkScarfDesc	A hold item that\nraises CUTE in\nCONTESTS.	Om vast te houden.\nHelpt bij SCHATTIG\nin WEDSTRIJDEN.	
+sGreenScarfDesc	A hold item that\nraises SMART in\nCONTESTS.	Om vast te houden.\nHelpt bij SLIM in\nWEDSTRIJDEN.	
+sYellowScarfDesc	A hold item that\nraises TOUGH in\nCONTESTS.	Om vast te houden.\nHelpt bij STERK in\nWEDSTRIJDEN.	
 sMachBikeDesc	A folding bicycle\nthat doubles your\nspeed or better.		
 sCoinCaseDesc	A case that holds\nup to 9,999 COINS.		
 sItemfinderDesc	A device that\nsignals an invisible\nitem by sound.		
