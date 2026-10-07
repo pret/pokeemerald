@@ -1127,46 +1127,46 @@ gText_MegaPunch24BP	MEGA PUNCH{CLEAR_TO 78}24BP	MEGASTOMP{CLEAR_TO 78}24BP
 gText_MegaKick48BP	MEGA KICK{CLEAR_TO 78}48BP	MEGASCHOP{CLEAR_TO 78}48BP	label-ok: reviewed
 gText_BodySlam48BP	BODY SLAM{CLEAR_TO 78}48BP	PLETTEREN{CLEAR_TO 78}48BP	label-ok: reviewed
 gText_RockSlide48BP	ROCK SLIDE{CLEAR_TO 78}48BP	STEENLAWINE{CLEAR_TO 78}48BP	label-ok: reviewed
-gText_Counter48BP	COUNTER{CLEAR_TO 78}48BP		
-gText_ThunderWave48BP	THUNDER WAVE{CLEAR_TO 78}48BP		
-gText_SwordsDance48BP	SWORDS DANCE{CLEAR_TO 78}48BP		
-gText_DefenseCurl16BP	DEFENSE CURL{CLEAR_TO 78}16BP		
-gText_Snore24BP	SNORE{CLEAR_TO 78}24BP		
-gText_MudSlap24BP	MUD-SLAP{CLEAR_TO 78}24BP		
-gText_Swift24BP	SWIFT{CLEAR_TO 78}24BP		
-gText_IcyWind24BP	ICY WIND{CLEAR_TO 78}24BP		
-gText_Endure48BP	ENDURE{CLEAR_TO 78}48BP		
-gText_PsychUp48BP	PSYCH UP{CLEAR_TO 78}48BP		
-gText_IcePunch48BP	ICE PUNCH{CLEAR_TO 78}48BP		
-gText_ThunderPunch48BP	THUNDERPUNCH{CLEAR_TO 78}48BP		
-gText_FirePunch48BP	FIRE PUNCH{CLEAR_TO 78}48BP		
-gText_PkmnFainted_FldPsn	{STR_VAR_1} fainted…\p\n		
+gText_Counter48BP	COUNTER{CLEAR_TO 78}48BP	COUNTER{CLEAR_TO 78}48BP	
+gText_ThunderWave48BP	THUNDER WAVE{CLEAR_TO 78}48BP	DONDERGOLF{CLEAR_TO 78}48BP	
+gText_SwordsDance48BP	SWORDS DANCE{CLEAR_TO 78}48BP	ZWAARDDANS{CLEAR_TO 78}48BP	
+gText_DefenseCurl16BP	DEFENSE CURL{CLEAR_TO 78}16BP	OPROLLEN{CLEAR_TO 78}16BP	
+gText_Snore24BP	SNORE{CLEAR_TO 78}24BP	SNURKEN{CLEAR_TO 78}24BP	label-ok: reviewed
+gText_MudSlap24BP	MUD-SLAP{CLEAR_TO 78}24BP	MODDERKLAP{CLEAR_TO 78}24BP	label-ok: reviewed
+gText_Swift24BP	SWIFT{CLEAR_TO 78}24BP	STERRENREGEN{CLEAR_TO 78}24BP	label-ok: reviewed
+gText_IcyWind24BP	ICY WIND{CLEAR_TO 78}24BP	IJZIGE WIND{CLEAR_TO 78}24BP	label-ok: reviewed
+gText_Endure48BP	ENDURE{CLEAR_TO 78}48BP	VOLHOUDEN{CLEAR_TO 78}48BP	label-ok: reviewed
+gText_PsychUp48BP	PSYCH UP{CLEAR_TO 78}48BP	OPPEPPEN{CLEAR_TO 78}48BP	label-ok: reviewed
+gText_IcePunch48BP	ICE PUNCH{CLEAR_TO 78}48BP	IJSSTOMP{CLEAR_TO 78}48BP	
+gText_ThunderPunch48BP	THUNDERPUNCH{CLEAR_TO 78}48BP	DONDERSTOMP{CLEAR_TO 78}48BP	
+gText_FirePunch48BP	FIRE PUNCH{CLEAR_TO 78}48BP	VUURSTOMP{CLEAR_TO 78}48BP	
+gText_PkmnFainted_FldPsn	{STR_VAR_1} fainted…\p\n	{STR_VAR_1} is flauwgevallen…\p\n	label-ok: reviewed
 gText_Marco	MARCO		
-gText_TrainerCardName	NAME: 		
+gText_TrainerCardName	NAME: 	NAAM: 	
 gText_TrainerCardIDNo	IDNo.		
-gText_TrainerCardMoney	MONEY		
+gText_TrainerCardMoney	MONEY	GELD	
 gText_PokeDollar	¥		
 gText_TrainerCardPokedex	POKéDEX		
 gText_EmptyString6			
 gText_Colon2	:		
-gText_Points	 points		
-gText_TrainerCardTime	TIME		
-gText_Var1sTrainerCard	{STR_VAR_1}'s TRAINER CARD		
-gText_HallOfFameDebut	HALL OF FAME DEBUT  		
-gText_LinkBattles	LINK BATTLES		
-gText_LinkCableBattles	LINK CABLE BATTLES		
-gText_WinsLosses	W:{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}  L:{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_2}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}		
-gText_PokemonTrades	POKéMON TRADES		
-gText_UnionTradesAndBattles	UNION TRADES & BATTLES		
+gText_Points	 points	 punten	label-ok: reviewed
+gText_TrainerCardTime	TIME	TIJD	
+gText_Var1sTrainerCard	{STR_VAR_1}'s TRAINER CARD	TRAINERKAART van {STR_VAR_1}	
+gText_HallOfFameDebut	HALL OF FAME DEBUT  	EERSTE KEER HALL OF FAME  	label-ok: reviewed
+gText_LinkBattles	LINK BATTLES	LINK-GEVECHTEN	label-ok: reviewed
+gText_LinkCableBattles	LINK CABLE BATTLES	KABELGEVECHTEN	
+gText_WinsLosses	W:{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}  L:{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_2}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}	W:{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}  V:{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_2}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}	
+gText_PokemonTrades	POKéMON TRADES	POKéMON-RUILEN	label-ok: reviewed
+gText_UnionTradesAndBattles	UNION TRADES & BATTLES	UNION RUIL & GEVECHT	
 gText_BerryCrush	BERRY CRUSH		
-gText_WaitingTrainerFinishReading	Waiting for the other TRAINER to\nfinish reading your TRAINER CARD.		
-gText_PokeblocksWithFriends	{POKEBLOCK}S W/FRIENDS		
+gText_WaitingTrainerFinishReading	Waiting for the other TRAINER to\nfinish reading your TRAINER CARD.	Wacht tot de andere TRAINER je\nTRAINERKAART heeft gelezen.	
+gText_PokeblocksWithFriends	{POKEBLOCK}S W/FRIENDS	{POKEBLOCK}S MET VRIENDEN	label-ok: reviewed
 gText_NumPokeblocks	{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}		
-gText_WonContestsWFriends	WON CONTESTS W/FRIENDS		
-gText_BattlePtsWon	BATTLE POINTS WON		
+gText_WonContestsWFriends	WON CONTESTS W/FRIENDS	WEDSTRIJDEN GEWONNEN	
+gText_BattlePtsWon	BATTLE POINTS WON	GEVECHTSPUNTEN GEWONNEN	label-ok: reviewed
 gText_NumBP	{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BP		
 gText_BattleTower	BATTLE TOWER		
-gText_WinsStraight	W/{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}  STRAIGHT/{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_2}		
+gText_WinsStraight	W/{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}  STRAIGHT/{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_2}	W/{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}  REEKS/{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_2}	
 gText_BattleTower2	BATTLE TOWER		
 gText_BattleDome	BATTLE DOME		
 gText_BattlePalace	BATTLE PALACE		
@@ -1174,23 +1174,23 @@ gText_BattleFactory	BATTLE FACTORY
 gText_BattleArena	BATTLE ARENA		
 gText_BattlePike	BATTLE PIKE		
 gText_BattlePyramid	BATTLE PYRAMID		
-gText_FacilitySingle	{STR_VAR_1} SINGLE		
-gText_FacilityDouble	{STR_VAR_1} DOUBLE		
+gText_FacilitySingle	{STR_VAR_1} SINGLE	{STR_VAR_1} ENKEL	
+gText_FacilityDouble	{STR_VAR_1} DOUBLE	{STR_VAR_1} DUBBEL	
 gText_FacilityMulti	{STR_VAR_1} MULTI		
 gText_FacilityLink	{STR_VAR_1} LINK		
 gText_Facility	{STR_VAR_1}		
-gText_Give	Give		
-gText_NoNeed	No need		
+gText_Give	Give	Geven	label-ok: reviewed
+gText_NoNeed	No need	Hoeft niet	label-ok: reviewed
 gText_ColorLightShadowDarkGray	{COLOR LIGHT_GRAY}{SHADOW DARK_GRAY}		
 gText_ColorBlue	{COLOR BLUE}		
 gText_ColorTransparent	{HIGHLIGHT TRANSPARENT}{COLOR TRANSPARENT}		
 gText_CDot	C.		
 gText_BDot	B.		
-gText_AnnouncingResults	Announcing the results!		
-gText_PreliminaryResults	The preliminary results!		
-gText_Round2Results	Round 2 results!		
-gText_ContestantsMonWon	{STR_VAR_1}'s {STR_VAR_2} won!		
-gText_CommunicationStandby	Communication standby…		
+gText_AnnouncingResults	Announcing the results!	En nu de uitslag!	
+gText_PreliminaryResults	The preliminary results!	De voorronde-uitslag!	
+gText_Round2Results	Round 2 results!	Uitslag ronde 2!	
+gText_ContestantsMonWon	{STR_VAR_1}'s {STR_VAR_2} won!	{STR_VAR_2} van {STR_VAR_1} wint!	
+gText_CommunicationStandby	Communication standby…	Verbinding maken…	
 gText_ColorDarkGray	{COLOR DARK_GRAY}		
 gText_ColorDynamic6WhiteDynamic5	{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR6 WHITE DYNAMIC_COLOR5}		
 gText_HealthboxNickname	{HIGHLIGHT DARK_GRAY}		
@@ -1198,102 +1198,102 @@ gText_EmptySpace2
 gText_HealthboxGender_Male	{COLOR DYNAMIC_COLOR2}♂		
 gText_HealthboxGender_Female	{COLOR DYNAMIC_COLOR1}♀		
 gText_HealthboxGender_None	{COLOR DYNAMIC_COLOR2}		
-gText_Upper	UPPER		
-gText_Lower	lower		
-gText_Others	OTHERS		
-gText_Symbols	SYMBOLS		
-gText_Register2	REGISTER		
-gText_Exit2	EXIT		
-gText_QuitChatting	Quit chatting?		
-gText_RegisterTextWhere	Register text where?		
-gText_RegisterTextHere	Register text here?		
-gText_InputText	Input text.		
-gText_F700JoinedChat	{DYNAMIC 0} joined the chat!		
-gText_F700LeftChat	{DYNAMIC 0} left the chat.		
-gText_ExitingChat	Exiting the chat…		
-gText_LeaderLeftEndingChat	The LEADER, {DYNAMIC 0}, has\nleft, ending the chat.		
-gText_RegisteredTextChangedOKToSave	The registered text has been changed.\nIs it okay to save the game?		
-gText_AlreadySavedFile_Chat	There is already a saved file.\nIs it okay to overwrite it?		
-gText_SavingDontTurnOff_Chat	SAVING…\nDON'T TURN OFF THE POWER.		
-gText_PlayerSavedGame_Chat	{DYNAMIC 0} saved the game.		
-gText_IfLeaderLeavesChatEnds	If the LEADER leaves, the chat\nwill end. Is that okay?		
-gText_Hello	HELLO		
+gText_Upper	UPPER	HOOFD	
+gText_Lower	lower	klein	
+gText_Others	OTHERS	OVERIG	
+gText_Symbols	SYMBOLS	SYMBOLEN	label-ok: reviewed
+gText_Register2	REGISTER	OPSLAAN	
+gText_Exit2	EXIT	SLUIT	label-ok: reviewed
+gText_QuitChatting	Quit chatting?	Stoppen met chatten?	label-ok: reviewed
+gText_RegisterTextWhere	Register text where?	Tekst waar opslaan?	
+gText_RegisterTextHere	Register text here?	Tekst hier opslaan?	
+gText_InputText	Input text.	Typ een tekst.	label-ok: reviewed
+gText_F700JoinedChat	{DYNAMIC 0} joined the chat!	{DYNAMIC 0} doet mee met de chat!	
+gText_F700LeftChat	{DYNAMIC 0} left the chat.	{DYNAMIC 0} is weg uit de chat.	
+gText_ExitingChat	Exiting the chat…	Chat sluiten…	
+gText_LeaderLeftEndingChat	The LEADER, {DYNAMIC 0}, has\nleft, ending the chat.	De LEIDER, {DYNAMIC 0}, is\nweg. De chat stopt.	
+gText_RegisteredTextChangedOKToSave	The registered text has been changed.\nIs it okay to save the game?	De opgeslagen tekst is veranderd.\nWil je het spel opslaan?	
+gText_AlreadySavedFile_Chat	There is already a saved file.\nIs it okay to overwrite it?	Er is al een opgeslagen spel.\nWil je dat overschrijven?	
+gText_SavingDontTurnOff_Chat	SAVING…\nDON'T TURN OFF THE POWER.	OPSLAAN…\nZET HET SPEL NIET UIT.	
+gText_PlayerSavedGame_Chat	{DYNAMIC 0} saved the game.	{DYNAMIC 0} heeft opgeslagen.	
+gText_IfLeaderLeavesChatEnds	If the LEADER leaves, the chat\nwill end. Is that okay?	Als de LEIDER weggaat, stopt\nde chat. Is dat goed?	
+gText_Hello	HELLO	HALLO	
 gText_Pokemon2	POKéMON		
-gText_Trade	TRADE		
-gText_Battle	BATTLE		
-gText_Lets	LET'S		
+gText_Trade	TRADE	RUILEN	label-ok: reviewed
+gText_Battle	BATTLE	VECHTEN	label-ok: reviewed
+gText_Lets	LET'S	ZULLEN WE	label-ok: reviewed
 gText_Ok	OK!		
-gText_Sorry	SORRY		
-gText_YaySmileEmoji	YAY{EMOJI_BIGSMILE}		
-gText_ThankYou	THANK YOU		
-gText_ByeBye	BYE-BYE!		
-gText_MatchCallSteven_Strategy	Attack the weak points!		
-gText_MatchCallSteven_Pokemon	Ultimate STEEL POKéMON.		
-gText_MatchCallSteven_Intro1_BeforeMeteorFallsBattle	I'd climb even waterfalls		
-gText_MatchCallSteven_Intro2_BeforeMeteorFallsBattle	to find a rare stone!		
-gText_MatchCallSteven_Intro1_AfterMeteorFallsBattle	I'm the strongest and most		
-gText_MatchCallSteven_Intro2_AfterMeteorFallsBattle	energetic after all!		
-gText_MatchCallBrendan_Strategy	Battle with knowledge!		
-gText_MatchCallBrendan_Pokemon	I will use various POKéMON.		
-gText_MatchCallBrendan_Intro1	I'll be a better POKéMON		
-gText_MatchCallBrendan_Intro2	prof than my father is!		
-gText_MatchCallMay_Strategy	I'm not so good at battles.		
-gText_MatchCallMay_Pokemon	I'll use any POKéMON!		
-gText_MatchCallMay_Intro1	My POKéMON and I help		
-gText_MatchCallMay_Intro2	my father's research.		
-gText_HatchedFromEgg	{STR_VAR_1} hatched from the EGG!		
-gText_NicknameHatchPrompt	Would you like to nickname the newly\nhatched {STR_VAR_1}?		
-gText_ReadyPickBerry	Are you ready to BERRY-CRUSH?\nPlease pick a BERRY for use.\p		
-gText_WaitForAllChooseBerry	Please wait while each member\nchooses a BERRY.		
-gText_EndedWithXUnitsPowder	{PAUSE_MUSIC}{PLAY_BGM MUS_LEVEL_UP}You ended up with {STR_VAR_1} units of\nsilky-smooth BERRY POWDER.{RESUME_MUSIC}\pYour total amount of BERRY POWDER\nis {STR_VAR_2}.\p		
-gText_RecordingGameResults	Recording your game results in the\nsave file.\lPlease wait.		
-gText_PlayBerryCrushAgain	Want to play BERRY CRUSH again?		
-gText_YouHaveNoBerries	You have no BERRIES.\nThe game will be canceled.		
-gText_MemberDroppedOut	A member dropped out.\nThe game will be canceled.		
-gText_TimesUpNoGoodPowder	Time's up.\pGood BERRY POWDER could not be\nmade…\p		
-gText_CommunicationStandby2	Communication standby…		
+gText_Sorry	SORRY	SORRY	
+gText_YaySmileEmoji	YAY{EMOJI_BIGSMILE}	JEEJ{EMOJI_BIGSMILE}	label-ok: reviewed
+gText_ThankYou	THANK YOU	DANK JE	
+gText_ByeBye	BYE-BYE!	DOEI!	
+gText_MatchCallSteven_Strategy	Attack the weak points!	Val de zwakke plekken aan!	label-ok: reviewed
+gText_MatchCallSteven_Pokemon	Ultimate STEEL POKéMON.	De beste STAAL-POKéMON.	label-ok: reviewed
+gText_MatchCallSteven_Intro1_BeforeMeteorFallsBattle	I'd climb even waterfalls	Ik klim zelfs watervallen op	label-ok: reviewed
+gText_MatchCallSteven_Intro2_BeforeMeteorFallsBattle	to find a rare stone!	voor een zeldzame steen!	label-ok: reviewed
+gText_MatchCallSteven_Intro1_AfterMeteorFallsBattle	I'm the strongest and most	Ik ben toch de sterkste	
+gText_MatchCallSteven_Intro2_AfterMeteorFallsBattle	energetic after all!	en heb de meeste energie!	label-ok: reviewed
+gText_MatchCallBrendan_Strategy	Battle with knowledge!	Vecht met kennis!	
+gText_MatchCallBrendan_Pokemon	I will use various POKéMON.	Ik gebruik allerlei POKéMON.	
+gText_MatchCallBrendan_Intro1	I'll be a better POKéMON	Ik word een betere POKéMON-	label-ok: reviewed
+gText_MatchCallBrendan_Intro2	prof than my father is!	prof dan mijn vader!	
+gText_MatchCallMay_Strategy	I'm not so good at battles.	Ik ben niet zo goed in vechten.	
+gText_MatchCallMay_Pokemon	I'll use any POKéMON!	Ik gebruik elke POKéMON!	label-ok: reviewed
+gText_MatchCallMay_Intro1	My POKéMON and I help	Mijn POKéMON en ik helpen	label-ok: reviewed
+gText_MatchCallMay_Intro2	my father's research.	mijn vader met zijn onderzoek.	label-ok: reviewed
+gText_HatchedFromEgg	{STR_VAR_1} hatched from the EGG!	{STR_VAR_1} komt uit het EI!	
+gText_NicknameHatchPrompt	Would you like to nickname the newly\nhatched {STR_VAR_1}?	Wil je de nieuwe {STR_VAR_1}\neen bijnaam geven?	
+gText_ReadyPickBerry	Are you ready to BERRY-CRUSH?\nPlease pick a BERRY for use.\p	Klaar voor BERRY CRUSH?\nKies een BES om te gebruiken.\p	
+gText_WaitForAllChooseBerry	Please wait while each member\nchooses a BERRY.	Wacht tot iedereen een\nBES heeft gekozen.	
+gText_EndedWithXUnitsPowder	{PAUSE_MUSIC}{PLAY_BGM MUS_LEVEL_UP}You ended up with {STR_VAR_1} units of\nsilky-smooth BERRY POWDER.{RESUME_MUSIC}\pYour total amount of BERRY POWDER\nis {STR_VAR_2}.\p	{PAUSE_MUSIC}{PLAY_BGM MUS_LEVEL_UP}Je krijgt {STR_VAR_1} schepjes\nzacht BESSENPOEDER.{RESUME_MUSIC}\pJe hebt nu in totaal {STR_VAR_2}\nBESSENPOEDER.\p	
+gText_RecordingGameResults	Recording your game results in the\nsave file.\lPlease wait.	Je uitslag wordt opgeslagen.\lEven geduld.	
+gText_PlayBerryCrushAgain	Want to play BERRY CRUSH again?	Nog een keer BERRY CRUSH spelen?	
+gText_YouHaveNoBerries	You have no BERRIES.\nThe game will be canceled.	Je hebt geen BESSEN.\nHet spel stopt.	
+gText_MemberDroppedOut	A member dropped out.\nThe game will be canceled.	Iemand is weggegaan.\nHet spel stopt.	
+gText_TimesUpNoGoodPowder	Time's up.\pGood BERRY POWDER could not be\nmade…\p	De tijd is op.\pEr is geen goed BESSENPOEDER\ngemaakt…\p	
+gText_CommunicationStandby2	Communication standby…	Verbinding maken…	
 gText_1DotBlueF700	1. {COLOR BLUE}{SHADOW LIGHT_BLUE}{DYNAMIC 0}		
 gText_1DotF700	1. {DYNAMIC 0}		
-gText_SpaceTimes2	 time(s)		
+gText_SpaceTimes2	 time(s)	 keer	
 gText_XDotY	{STR_VAR_1}.{STR_VAR_2}		
 gText_Var1Berry	{STR_VAR_1} BERRY	{STR_VAR_1} BES	
-gText_TimeColon	Time:		
-gText_PressingSpeed	Pressing Speed:		
-gText_Silkiness	Silkiness:		
+gText_TimeColon	Time:	Tijd:	
+gText_PressingSpeed	Pressing Speed:	Druksnelheid:	
+gText_Silkiness	Silkiness:	Zachtheid:	label-ok: reviewed
 gText_StrVar1	{STR_VAR_1}		
-gText_SpaceMin	 min. 		
+gText_SpaceMin	 min. 	 min. 	
 gText_XDotY2	{STR_VAR_1}.{STR_VAR_2}		
-gText_SpaceSec	 sec.		
+gText_SpaceSec	 sec.	 sec.	
 gText_XDotY3	{STR_VAR_1}.{STR_VAR_2}		
-gText_TimesPerSec	 Times/sec.		
+gText_TimesPerSec	 Times/sec.	 keer/sec.	
 gText_Var1Percent	{STR_VAR_1}%		
-gText_PressesRankings	No. of Presses Rankings		
-gText_CrushingResults	Crushing Results		
-gText_NeatnessRankings	Neatness Rankings		
-gText_CoopRankings	Cooperative Rankings		
-gText_PressingPowerRankings	Pressing-Power Rankings		
+gText_PressesRankings	No. of Presses Rankings	Ranglijst: keer drukken	
+gText_CrushingResults	Crushing Results	Uitslag pletten	
+gText_NeatnessRankings	Neatness Rankings	Ranglijst: netheid	
+gText_CoopRankings	Cooperative Rankings	Ranglijst: samenwerken	label-ok: reviewed
+gText_PressingPowerRankings	Pressing-Power Rankings	Ranglijst: drukkracht	
 gText_BerryCrush2	BERRY CRUSH		
-gText_PressingSpeedRankings	Pressing-Speed Rankings		
-gText_Var1Players	{STR_VAR_1} PLAYERS		
-gText_SymbolsEarned	Symbols Earned		
-gText_BattleRecord	Battle Record		
-gText_BattlePoints	Battle Points		
-gText_UnusedCancel	CANCEL		
+gText_PressingSpeedRankings	Pressing-Speed Rankings	Ranglijst: druksnelheid	
+gText_Var1Players	{STR_VAR_1} PLAYERS	{STR_VAR_1} SPELERS	
+gText_SymbolsEarned	Symbols Earned	Gewonnen symbolen	label-ok: reviewed
+gText_BattleRecord	Battle Record	Gevechtsrecord	label-ok: reviewed
+gText_BattlePoints	Battle Points	Gevechtspunten	label-ok: reviewed
+gText_UnusedCancel	CANCEL	TERUG	
 gText_EmptyString7			
-gText_CheckFrontierMap	Check BATTLE FRONTIER MAP.		
-gText_CheckTrainerCard	Check TRAINER CARD.		
-gText_ViewRecordedBattle	View recorded battle.		
-gText_PutAwayFrontierPass	Put away the FRONTIER PASS.		
-gText_CurrentBattlePoints	Your current Battle Points.		
-gText_CollectedSymbols	Your collected Symbols.		
-gText_BattleTowerAbilitySymbol	Battle Tower - Ability Symbol		
-gText_BattleDomeTacticsSymbol	Battle Dome - Tactics Symbol		
-gText_BattlePalaceSpiritsSymbol	Battle Palace - Spirits Symbol		
-gText_BattleArenaGutsSymbol	Battle Arena - Guts Symbol		
-gText_BattleFactoryKnowledgeSymbol	Battle Factory - Knowledge Symbol		
-gText_BattlePikeLuckSymbol	Battle Pike - Luck Symbol		
-gText_BattlePyramidBraveSymbol	Battle Pyramid - Brave Symbol		
-gText_ThereIsNoBattleRecord	There is no Battle Record.		
+gText_CheckFrontierMap	Check BATTLE FRONTIER MAP.	Bekijk de BATTLE FRONTIER-kaart.	
+gText_CheckTrainerCard	Check TRAINER CARD.	Bekijk je TRAINERKAART.	label-ok: reviewed
+gText_ViewRecordedBattle	View recorded battle.	Bekijk een opgenomen gevecht.	label-ok: reviewed
+gText_PutAwayFrontierPass	Put away the FRONTIER PASS.	Berg de FRONTIER PASS op.	
+gText_CurrentBattlePoints	Your current Battle Points.	Je gevechtspunten nu.	
+gText_CollectedSymbols	Your collected Symbols.	Je verzamelde symbolen.	label-ok: reviewed
+gText_BattleTowerAbilitySymbol	Battle Tower - Ability Symbol	Battle Tower - Talentsymbool	
+gText_BattleDomeTacticsSymbol	Battle Dome - Tactics Symbol	Battle Dome - Tactieksymbool	
+gText_BattlePalaceSpiritsSymbol	Battle Palace - Spirits Symbol	Battle Palace - Geestsymbool	
+gText_BattleArenaGutsSymbol	Battle Arena - Guts Symbol	Battle Arena - Moedsymbool	
+gText_BattleFactoryKnowledgeSymbol	Battle Factory - Knowledge Symbol	Battle Factory - Kennissymbool	
+gText_BattlePikeLuckSymbol	Battle Pike - Luck Symbol	Battle Pike - Geluksymbool	
+gText_BattlePyramidBraveSymbol	Battle Pyramid - Brave Symbol	Battle Pyramid - Dapperheidsymbool	
+gText_ThereIsNoBattleRecord	There is no Battle Record.	Er is geen opgenomen gevecht.	
 gText_BattleTower3	BATTLE TOWER		
 gText_BattleDome2	BATTLE DOME		
 gText_BattlePalace2	BATTLE PALACE		
@@ -1301,87 +1301,87 @@ gText_BattleArena2	BATTLE ARENA
 gText_BattleFactory2	BATTLE FACTORY		
 gText_BattlePike2	BATTLE PIKE		
 gText_BattlePyramid2	BATTLE PYRAMID		
-gText_BattleTowerDesc	KO opponents and aim for the top!\nYour ability will be tested.		
-gText_BattleDomeDesc	Keep winning at the tournament!\nYour tactics will be tested.		
-gText_BattlePalaceDesc	Watch your POKéMON battle!\nYour spirit will be tested.		
-gText_BattleArenaDesc	Win battles with teamed-up POKéMON!\nYour guts will be tested.		
-gText_BattleFactoryDesc	Aim for victory using rental POKéMON!\nYour knowledge will be tested.		
-gText_BattlePikeDesc	Select one of three paths to battle!\nYour luck will be tested.		
-gText_BattlePyramidDesc	Aim for the top with exploration!\nYour bravery will be tested.		
-gText_ContinueMenuPlayer	PLAYER		
-gText_ContinueMenuTime	TIME		
+gText_BattleTowerDesc	KO opponents and aim for the top!\nYour ability will be tested.	Versla iedereen en ga naar de top!\nJe talent wordt getest.	
+gText_BattleDomeDesc	Keep winning at the tournament!\nYour tactics will be tested.	Blijf winnen in het toernooi!\nJe tactiek wordt getest.	
+gText_BattlePalaceDesc	Watch your POKéMON battle!\nYour spirit will be tested.	Kijk hoe je POKéMON vechten!\nJe geest wordt getest.	
+gText_BattleArenaDesc	Win battles with teamed-up POKéMON!\nYour guts will be tested.	Win met je POKéMON-team!\nJe moed wordt getest.	
+gText_BattleFactoryDesc	Aim for victory using rental POKéMON!\nYour knowledge will be tested.	Win met gehuurde POKéMON!\nJe kennis wordt getest.	
+gText_BattlePikeDesc	Select one of three paths to battle!\nYour luck will be tested.	Kies een van drie paden!\nJe geluk wordt getest.	
+gText_BattlePyramidDesc	Aim for the top with exploration!\nYour bravery will be tested.	Ga op ontdekkingstocht naar de top!\nJe durf wordt getest.	
+gText_ContinueMenuPlayer	PLAYER	SPELER	
+gText_ContinueMenuTime	TIME	TIJD	
 gText_ContinueMenuPokedex	POKéDEX		
-gText_ContinueMenuBadges	BADGES		
-gText_Powder	POWDER		
-gText_BerryPickingRecords	DODRIO BERRY-PICKING RECORDS		
-gText_BerriesPicked	BERRIES picked:		
-gText_BestScore	Best score:		
-gText_BerriesInRowFivePlayers	BERRIES picked in a row with\nfive players:		
-gText_BerryPickingResults	Announcing BERRY-PICKING results!		
+gText_ContinueMenuBadges	BADGES	BADGES	
+gText_Powder	POWDER	POEDER	
+gText_BerryPickingRecords	DODRIO BERRY-PICKING RECORDS	DODRIO BERRY-PICKING RECORDS	
+gText_BerriesPicked	BERRIES picked:	BESSEN geplukt:	
+gText_BestScore	Best score:	Beste score:	label-ok: reviewed
+gText_BerriesInRowFivePlayers	BERRIES picked in a row with\nfive players:	BESSEN op rij met\nvijf spelers:	
+gText_BerryPickingResults	Announcing BERRY-PICKING results!	De uitslag van BERRY-PICKING!	
 gText_10P30P50P50P	{CLEAR_TO 3}10P{CLEAR_TO 43}30P{CLEAR_TO 83}50P{CLEAR_TO 119}{EMOJI_MINUS}50P		
-gText_AnnouncingRankings	Announcing rankings!		
-gText_AnnouncingPrizes	Announcing prizes!		
+gText_AnnouncingRankings	Announcing rankings!	En nu de ranglijst!	
+gText_AnnouncingPrizes	Announcing prizes!	En nu de prijzen!	
 gText_1Colon	1:		
 gText_2Colon	2:		
 gText_3Colon	3:		
 gText_4Colon	4:		
 gText_5Colon	5:		
-gText_FirstPlacePrize	The first-place winner gets\nthis {DYNAMIC 0}!		
-gText_CantHoldAnyMore	You can't hold any more!		
-gText_FilledStorageSpace	It filled its storage space.		
-gText_WantToPlayAgain	Want to play again?		
-gText_SomeoneDroppedOut	Somebody dropped out.\nThe link will be canceled.		
-gText_SpacePoints	 points		
-gText_CommunicationStandby3	Communication standby…		
-gText_SpacePoints2	 points		
-gText_SpaceTimes3	 time(s)		
-gText_PkmnJumpRecords	POKéMON JUMP RECORDS		
-gText_JumpsInARow	Jumps in a row:		
-gText_BestScore2	Best score:		
-gText_ExcellentsInARow	EXCELLENTS in a row:		
-gText_AwesomeWonF701F700	Awesome score! You've\nwon {DYNAMIC 1} {DYNAMIC 0}!		
-gText_FilledStorageSpace2	It filled its storage space.		
-gText_CantHoldMore	You can't hold any more!		
-gText_WantToPlayAgain2	Want to play again?		
-gText_SomeoneDroppedOut2	Somebody dropped out.\nThe link will be canceled.		
-gText_CommunicationStandby4	Communication standby…		
-gText_LinkContestResults	{PLAYER}'s Link Contest Results		
-gText_1st	1st		
-gText_2nd	2nd		
-gText_3rd	3rd		
-gText_4th	4th		
-gText_Friend	Friend		
+gText_FirstPlacePrize	The first-place winner gets\nthis {DYNAMIC 0}!	De winnaar krijgt\ndeze {DYNAMIC 0}!	
+gText_CantHoldAnyMore	You can't hold any more!	Je kunt niets meer meenemen!	label-ok: reviewed
+gText_FilledStorageSpace	It filled its storage space.	Er past niets meer bij.	
+gText_WantToPlayAgain	Want to play again?	Nog een keer spelen?	label-ok: reviewed
+gText_SomeoneDroppedOut	Somebody dropped out.\nThe link will be canceled.	Iemand is weggegaan.\nDe verbinding stopt.	
+gText_SpacePoints	 points	 punten	label-ok: reviewed
+gText_CommunicationStandby3	Communication standby…	Verbinding maken…	
+gText_SpacePoints2	 points	 punten	label-ok: reviewed
+gText_SpaceTimes3	 time(s)	 keer	
+gText_PkmnJumpRecords	POKéMON JUMP RECORDS	POKéMON JUMP RECORDS	
+gText_JumpsInARow	Jumps in a row:	Sprongen op rij:	label-ok: reviewed
+gText_BestScore2	Best score:	Beste score:	label-ok: reviewed
+gText_ExcellentsInARow	EXCELLENTS in a row:	SUPER op rij:	
+gText_AwesomeWonF701F700	Awesome score! You've\nwon {DYNAMIC 1} {DYNAMIC 0}!	Super score! Je hebt\n{DYNAMIC 1} {DYNAMIC 0} gewonnen!	label-ok: reviewed
+gText_FilledStorageSpace2	It filled its storage space.	Er past niets meer bij.	
+gText_CantHoldMore	You can't hold any more!	Je kunt niets meer meenemen!	label-ok: reviewed
+gText_WantToPlayAgain2	Want to play again?	Nog een keer spelen?	label-ok: reviewed
+gText_SomeoneDroppedOut2	Somebody dropped out.\nThe link will be canceled.	Iemand is weggegaan.\nDe verbinding stopt.	
+gText_CommunicationStandby4	Communication standby…	Verbinding maken…	
+gText_LinkContestResults	{PLAYER}'s Link Contest Results	Link-wedstrijduitslag van {PLAYER}	
+gText_1st	1st	1e	
+gText_2nd	2nd	2e	
+gText_3rd	3rd	3e	
+gText_4th	4th	4e	
+gText_Friend	Friend	Vriend	
 gText_Pokemon3	POKeMON		
-gText_Red	RED		
-gText_Blue	BLUE		
+gText_Red	RED	ROOD	label-ok: reviewed
+gText_Blue	BLUE	BLAUW	label-ok: reviewed
 gText_3Dashes	---		
-gText_SingleBattleRoomResults	{PLAYER}'s Single Battle Room Results		
-gText_DoubleBattleRoomResults	{PLAYER}'s Double Battle Room Results		
-gText_MultiBattleRoomResults	{PLAYER}'s Multi Battle Room Results		
-gText_LinkMultiBattleRoomResults	{PLAYER}'s Link Multi Battle Room Results		width-ok: title in wide window
-gText_SingleBattleTourneyResults	{PLAYER}'s Single Battle Tourney Results		width-ok: title in wide window
-gText_DoubleBattleTourneyResults	{PLAYER}'s Double Battle Tourney Results		width-ok: title in wide window
-gText_SingleBattleHallResults	{PLAYER}'s Single Battle Hall Results		
-gText_DoubleBattleHallResults	{PLAYER}'s Double Battle Hall Results		
-gText_BattleChoiceResults	{PLAYER}'s Battle Choice Results		
-gText_SetKOTourneyResults	{PLAYER}'s Set KO Tourney Results		
-gText_BattleSwapSingleResults	{PLAYER}'s Battle Swap Single Results		
-gText_BattleSwapDoubleResults	{PLAYER}'s Battle Swap Double Results		
-gText_BattleQuestResults	{PLAYER}'s Battle Quest Results		
+gText_SingleBattleRoomResults	{PLAYER}'s Single Battle Room Results	Enkel-gevechtsuitslag van {PLAYER}	
+gText_DoubleBattleRoomResults	{PLAYER}'s Double Battle Room Results	Dubbel-gevechtsuitslag van {PLAYER}	
+gText_MultiBattleRoomResults	{PLAYER}'s Multi Battle Room Results	Multi-gevechtsuitslag van {PLAYER}	
+gText_LinkMultiBattleRoomResults	{PLAYER}'s Link Multi Battle Room Results	Link-multi-uitslag van {PLAYER}	width-ok: title in wide window
+gText_SingleBattleTourneyResults	{PLAYER}'s Single Battle Tourney Results	Enkel-toernooiuitslag van {PLAYER}	width-ok: title in wide window
+gText_DoubleBattleTourneyResults	{PLAYER}'s Double Battle Tourney Results	Dubbel-toernooiuitslag van {PLAYER}	width-ok: title in wide window
+gText_SingleBattleHallResults	{PLAYER}'s Single Battle Hall Results	Enkel-zaaluitslag van {PLAYER}	
+gText_DoubleBattleHallResults	{PLAYER}'s Double Battle Hall Results	Dubbel-zaaluitslag van {PLAYER}	
+gText_BattleChoiceResults	{PLAYER}'s Battle Choice Results	Keuzegevecht-uitslag van {PLAYER}	
+gText_SetKOTourneyResults	{PLAYER}'s Set KO Tourney Results	KO-toernooiuitslag van {PLAYER}	
+gText_BattleSwapSingleResults	{PLAYER}'s Battle Swap Single Results	Ruilgevecht enkel van {PLAYER}	
+gText_BattleSwapDoubleResults	{PLAYER}'s Battle Swap Double Results	Ruilgevecht dubbel van {PLAYER}	
+gText_BattleQuestResults	{PLAYER}'s Battle Quest Results	Speurtocht-uitslag van {PLAYER}	
 gText_Lv502	LV. 50		
-gText_OpenLv	OPEN LV.		
-gText_WinStreak	Win streak: {STR_VAR_1}		
-gText_Current	CURRENT		
-gText_Record	RECORD		
-gText_Prev	PREV.		
-gText_RentalSwap	Rental/Swap		
-gText_Total	Total		
-gText_ClearStreak	Clear streak: {STR_VAR_1}		
-gText_Championships	Championships: {STR_VAR_1}		
-gText_RoomsCleared	Rooms cleared: {STR_VAR_1}		
-gText_TimesCleared	Times cleared:{CLEAR 5}{STR_VAR_1}		
-gText_KOsInARow	KOs in a row: {STR_VAR_1}		
-gText_TimesVar1	Times: {STR_VAR_1}		
+gText_OpenLv	OPEN LV.	OPEN NIV.	label-ok: reviewed
+gText_WinStreak	Win streak: {STR_VAR_1}	Reeks: {STR_VAR_1}	
+gText_Current	CURRENT	NU	
+gText_Record	RECORD	RECORD	
+gText_Prev	PREV.	VORIGE	label-ok: reviewed
+gText_RentalSwap	Rental/Swap	Huur/Ruil	
+gText_Total	Total	Totaal	label-ok: reviewed
+gText_ClearStreak	Clear streak: {STR_VAR_1}	Reeks: {STR_VAR_1}	
+gText_Championships	Championships: {STR_VAR_1}	Kampioen: {STR_VAR_1}	
+gText_RoomsCleared	Rooms cleared: {STR_VAR_1}	Kamers klaar: {STR_VAR_1}	
+gText_TimesCleared	Times cleared:{CLEAR 5}{STR_VAR_1}	Keer klaar:{CLEAR 5}{STR_VAR_1}	
+gText_KOsInARow	KOs in a row: {STR_VAR_1}	KO's op rij: {STR_VAR_1}	
+gText_TimesVar1	Times: {STR_VAR_1}	Keer: {STR_VAR_1}	
 gText_FloorsCleared	Floors cleared: {STR_VAR_1}		
 gText_RecordsLv50	LV. 50		
 gText_RecordsOpenLevel	OPEN LEVEL		
