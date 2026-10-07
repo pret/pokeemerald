@@ -1382,286 +1382,286 @@ gText_RoomsCleared	Rooms cleared: {STR_VAR_1}	Kamers klaar: {STR_VAR_1}
 gText_TimesCleared	Times cleared:{CLEAR 5}{STR_VAR_1}	Keer klaar:{CLEAR 5}{STR_VAR_1}	
 gText_KOsInARow	KOs in a row: {STR_VAR_1}	KO's op rij: {STR_VAR_1}	
 gText_TimesVar1	Times: {STR_VAR_1}	Keer: {STR_VAR_1}	
-gText_FloorsCleared	Floors cleared: {STR_VAR_1}		
+gText_FloorsCleared	Floors cleared: {STR_VAR_1}	Verdiepingen: {STR_VAR_1}	
 gText_RecordsLv50	LV. 50		
-gText_RecordsOpenLevel	OPEN LEVEL		
-gText_FrontierFacilityWinStreak	Win streak: {STR_VAR_2}		
-gText_FrontierFacilityClearStreak	Clear streak: {STR_VAR_2}		
-gText_FrontierFacilityRoomsCleared	Rooms cleared: {STR_VAR_2}		
-gText_FrontierFacilityKOsStreak	KOs in a row: {STR_VAR_2}		
-gText_FrontierFacilityFloorsCleared	Floors cleared: {STR_VAR_2}		
-gText_SavingDontTurnOff2	SAVING…\nDON'T TURN OFF THE POWER.		
-gText_BlenderMaxSpeedRecord	BERRY BLENDER\nMAXIMUM SPEED RECORD!		
-gText_234Players	2 PLAYERS\n3 PLAYERS\n4 PLAYERS		
-gText_YesNo	YES\nNO		
+gText_RecordsOpenLevel	OPEN LEVEL	OPEN NIVEAU	label-ok: reviewed
+gText_FrontierFacilityWinStreak	Win streak: {STR_VAR_2}	Reeks: {STR_VAR_2}	
+gText_FrontierFacilityClearStreak	Clear streak: {STR_VAR_2}	Reeks: {STR_VAR_2}	
+gText_FrontierFacilityRoomsCleared	Rooms cleared: {STR_VAR_2}	Kamers klaar: {STR_VAR_2}	
+gText_FrontierFacilityKOsStreak	KOs in a row: {STR_VAR_2}	KO's op rij: {STR_VAR_2}	
+gText_FrontierFacilityFloorsCleared	Floors cleared: {STR_VAR_2}	Verdiepingen: {STR_VAR_2}	
+gText_SavingDontTurnOff2	SAVING…\nDON'T TURN OFF THE POWER.	OPSLAAN…\nZET HET SPEL NIET UIT.	
+gText_BlenderMaxSpeedRecord	BERRY BLENDER\nMAXIMUM SPEED RECORD!	BESSENMIXER\nSNELHEIDSRECORD!	
+gText_234Players	2 PLAYERS\n3 PLAYERS\n4 PLAYERS	2 SPELERS\n3 SPELERS\n4 SPELERS	
+gText_YesNo	YES\nNO	JA\nNEE	
 gText_SelectorArrow3	▶		
-gText_Peekaboo	PEEKABOO!		
-gText_CommErrorCheckConnections	Communication error…\nPlease check all connections,\nthen turn the power OFF and ON.		
-gText_CommErrorEllipsis	Communication error…		
-gText_MoveCloserToLinkPartner	Move closer to your link partner(s).\nAvoid obstacles between partners.		
-gText_ABtnRegistrationCounter	A Button: Registration Counter		
-gText_ABtnTitleScreen	A Button: Title Screen		
-gText_Option	OPTION		
-gText_TextSpeed	TEXT SPEED		
-gText_BattleScene	BATTLE SCENE		
-gText_BattleStyle	BATTLE STYLE		
-gText_Sound	SOUND		
-gText_Frame	FRAME		
-gText_OptionMenuCancel	CANCEL		
-gText_ButtonMode	BUTTON MODE		
-gText_TextSpeedSlow	{COLOR GREEN}{SHADOW LIGHT_GREEN}SLOW		
-gText_TextSpeedMid	{COLOR GREEN}{SHADOW LIGHT_GREEN}MID		
-gText_TextSpeedFast	{COLOR GREEN}{SHADOW LIGHT_GREEN}FAST		
-gText_BattleSceneOn	{COLOR GREEN}{SHADOW LIGHT_GREEN}ON		
-gText_BattleSceneOff	{COLOR GREEN}{SHADOW LIGHT_GREEN}OFF		
-gText_BattleStyleShift	{COLOR GREEN}{SHADOW LIGHT_GREEN}SHIFT		
-gText_BattleStyleSet	{COLOR GREEN}{SHADOW LIGHT_GREEN}SET		
-gText_SoundMono	{COLOR GREEN}{SHADOW LIGHT_GREEN}MONO		
-gText_SoundStereo	{COLOR GREEN}{SHADOW LIGHT_GREEN}STEREO		
-gText_FrameType	{COLOR GREEN}{SHADOW LIGHT_GREEN}TYPE		
+gText_Peekaboo	PEEKABOO!	KIEKEBOE!	
+gText_CommErrorCheckConnections	Communication error…\nPlease check all connections,\nthen turn the power OFF and ON.	Verbindingsfout…\nControleer alle kabels en zet\nhet spel UIT en weer AAN.	
+gText_CommErrorEllipsis	Communication error…	Verbindingsfout…	
+gText_MoveCloserToLinkPartner	Move closer to your link partner(s).\nAvoid obstacles between partners.	Ga dichter bij je link-partner staan.\nZorg dat er niets tussen zit.	
+gText_ABtnRegistrationCounter	A Button: Registration Counter	A-knop: naar de balie	
+gText_ABtnTitleScreen	A Button: Title Screen	A-knop: beginscherm	
+gText_Option	OPTION	OPTIES	
+gText_TextSpeed	TEXT SPEED	TEKSTSNELHEID	label-ok: reviewed
+gText_BattleScene	BATTLE SCENE	ANIMATIES	
+gText_BattleStyle	BATTLE STYLE	GEVECHTSSTIJL	label-ok: reviewed
+gText_Sound	SOUND	GELUID	label-ok: reviewed
+gText_Frame	FRAME	RAND	
+gText_OptionMenuCancel	CANCEL	TERUG	
+gText_ButtonMode	BUTTON MODE	KNOPPEN	
+gText_TextSpeedSlow	{COLOR GREEN}{SHADOW LIGHT_GREEN}SLOW	{COLOR GREEN}{SHADOW LIGHT_GREEN}TRAAG	label-ok: reviewed
+gText_TextSpeedMid	{COLOR GREEN}{SHADOW LIGHT_GREEN}MID	{COLOR GREEN}{SHADOW LIGHT_GREEN}NORM	label-ok: reviewed
+gText_TextSpeedFast	{COLOR GREEN}{SHADOW LIGHT_GREEN}FAST	{COLOR GREEN}{SHADOW LIGHT_GREEN}SNEL	
+gText_BattleSceneOn	{COLOR GREEN}{SHADOW LIGHT_GREEN}ON	{COLOR GREEN}{SHADOW LIGHT_GREEN}AAN	label-ok: reviewed
+gText_BattleSceneOff	{COLOR GREEN}{SHADOW LIGHT_GREEN}OFF	{COLOR GREEN}{SHADOW LIGHT_GREEN}UIT	
+gText_BattleStyleShift	{COLOR GREEN}{SHADOW LIGHT_GREEN}SHIFT	{COLOR GREEN}{SHADOW LIGHT_GREEN}WISSEL	label-ok: reviewed
+gText_BattleStyleSet	{COLOR GREEN}{SHADOW LIGHT_GREEN}SET	{COLOR GREEN}{SHADOW LIGHT_GREEN}VAST	label-ok: reviewed
+gText_SoundMono	{COLOR GREEN}{SHADOW LIGHT_GREEN}MONO	{COLOR GREEN}{SHADOW LIGHT_GREEN}MONO	
+gText_SoundStereo	{COLOR GREEN}{SHADOW LIGHT_GREEN}STEREO	{COLOR GREEN}{SHADOW LIGHT_GREEN}STEREO	
+gText_FrameType	{COLOR GREEN}{SHADOW LIGHT_GREEN}TYPE	{COLOR GREEN}{SHADOW LIGHT_GREEN}SOORT	label-ok: reviewed
 gText_FrameTypeNumber	{COLOR GREEN}{SHADOW LIGHT_GREEN}		
-gText_ButtonTypeNormal	{COLOR GREEN}{SHADOW LIGHT_GREEN}NORMAL		
+gText_ButtonTypeNormal	{COLOR GREEN}{SHADOW LIGHT_GREEN}NORMAL	{COLOR GREEN}{SHADOW LIGHT_GREEN}NORMAAL	label-ok: reviewed
 gText_ButtonTypeLR	{COLOR GREEN}{SHADOW LIGHT_GREEN}LR		
 gText_ButtonTypeLEqualsA	{COLOR GREEN}{SHADOW LIGHT_GREEN}L=A		
-gText_NumPlayerLink	{STR_VAR_1}P LINK		
-gText_BronzeCard	BRONZE		
-gText_CopperCard	COPPER		
-gText_SilverCard	SILVER		
-gText_GoldCard	GOLD		
-gText_Day	DAY		
+gText_NumPlayerLink	{STR_VAR_1}P LINK	{STR_VAR_1}P LINK	
+gText_BronzeCard	BRONZE	BRONS	
+gText_CopperCard	COPPER	KOPER	
+gText_SilverCard	SILVER	ZILVER	
+gText_GoldCard	GOLD	GOUD	
+gText_Day	DAY	DAG	
 gText_Colon3	:		
-gText_Confirm2	CONFIRM		
-gText_Days	Days		
-gText_TimeColon2	Time:		
-gText_GameTime	Game time		
-gText_RTCTime	RTC time		
-gText_UpdatedTime	Updated time		
+gText_Confirm2	CONFIRM	OK	
+gText_Days	Days	Dagen	label-ok: reviewed
+gText_TimeColon2	Time:	Tijd:	
+gText_GameTime	Game time	Speltijd	
+gText_RTCTime	RTC time	Kloktijd	
+gText_UpdatedTime	Updated time	Nieuwe tijd	
 gText_MenuPokedex	POKéDEX		
 gText_MenuPokemon	POKéMON		
-gText_MenuBag	BAG		
+gText_MenuBag	BAG	TAS	
 gText_MenuPokenav	POKéNAV		
 gText_MenuPlayer	{PLAYER}		
-gText_MenuSave	SAVE		
-gText_MenuOption	OPTION		
-gText_MenuExit	EXIT		
-gText_MenuRetire	RETIRE		
-gText_MenuRest	REST		
-gText_SafariBallStock	SAFARI BALLS\nStock: {STR_VAR_1}		
-gText_BattlePyramidFloor	Battle Pyramid\n{STR_VAR_1}		
-gText_Floor1	Floor 1		
-gText_Floor2	Floor 2		
-gText_Floor3	Floor 3		
-gText_Floor4	Floor 4		
-gText_Floor5	Floor 5		
-gText_Floor6	Floor 6		
-gText_Floor7	Floor 7		
-gText_Peak	Peak		
-gText_LinkStandby2	Link standby…\n… … B Button: Cancel		
-gText_PressAToLoadEvent	Press the A Button to load event.\n… … B Button: Cancel		
-gText_LoadingEvent	Loading event…		
-gText_DontRemoveCableTurnOff	Don't remove the Game Link cable.\nDon't turn off the power.		
-gText_EventSafelyLoaded	The event was safely loaded.		
-gText_LoadErrorEndingSession	Loading error.\nEnding session.		
+gText_MenuSave	SAVE	OPSLAAN	label-ok: reviewed
+gText_MenuOption	OPTION	OPTIES	
+gText_MenuExit	EXIT	SLUIT	label-ok: reviewed
+gText_MenuRetire	RETIRE	STOPPEN	label-ok: reviewed
+gText_MenuRest	REST	RUST	
+gText_SafariBallStock	SAFARI BALLS\nStock: {STR_VAR_1}	SAFARIBALLS\nOver: {STR_VAR_1}	
+gText_BattlePyramidFloor	Battle Pyramid\n{STR_VAR_1}	Battle Pyramid\n{STR_VAR_1}	
+gText_Floor1	Floor 1	Verdieping 1	label-ok: reviewed
+gText_Floor2	Floor 2	Verdieping 2	label-ok: reviewed
+gText_Floor3	Floor 3	Verdieping 3	label-ok: reviewed
+gText_Floor4	Floor 4	Verdieping 4	label-ok: reviewed
+gText_Floor5	Floor 5	Verdieping 5	label-ok: reviewed
+gText_Floor6	Floor 6	Verdieping 6	label-ok: reviewed
+gText_Floor7	Floor 7	Verdieping 7	label-ok: reviewed
+gText_Peak	Peak	Top	
+gText_LinkStandby2	Link standby…\n… … B Button: Cancel	Even wachten…\n… … B-knop: terug	
+gText_PressAToLoadEvent	Press the A Button to load event.\n… … B Button: Cancel	Druk op de A-knop om het event\nte laden. … … B-knop: terug	
+gText_LoadingEvent	Loading event…	Event laden…	
+gText_DontRemoveCableTurnOff	Don't remove the Game Link cable.\nDon't turn off the power.	Haal de link-kabel er niet uit.\nZet het spel niet uit.	
+gText_EventSafelyLoaded	The event was safely loaded.	Het event is goed geladen.	
+gText_LoadErrorEndingSession	Loading error.\nEnding session.	Fout bij laden.\nWe stoppen.	
 gText_DexHoenn	HOENN		
-gText_DexNational	NATIONAL		
-gText_PokedexDiploma	PLAYER: {CLEAR 16}{COLOR RED}{SHADOW LIGHT_RED}{PLAYER}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}\n\nThis document certifies\nthat you have successfully\ncompleted your\n{STR_VAR_1} POKéDEX.\n\n{CLEAR_TO 66}{COLOR RED}{SHADOW LIGHT_RED}GAME FREAK		
+gText_DexNational	NATIONAL	WERELD	
+gText_PokedexDiploma	PLAYER: {CLEAR 16}{COLOR RED}{SHADOW LIGHT_RED}{PLAYER}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}\n\nThis document certifies\nthat you have successfully\ncompleted your\n{STR_VAR_1} POKéDEX.\n\n{CLEAR_TO 66}{COLOR RED}{SHADOW LIGHT_RED}GAME FREAK	SPELER: {CLEAR 16}{COLOR RED}{SHADOW LIGHT_RED}{PLAYER}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}\n\nDit diploma laat zien\ndat je de {STR_VAR_1}\nPOKéDEX helemaal\nhebt afgemaakt.\n\n{CLEAR_TO 66}{COLOR RED}{SHADOW LIGHT_RED}GAME FREAK	
 gText_DiplomaEmpty	{COLOR RED}{SHADOW LIGHT_RED}		
 gText_Hoenn	HOENN		
-gText_OhABite	Oh! A bite!		
-gText_PokemonOnHook	A POKéMON's on the hook!{PAUSE_UNTIL_PRESS}		
-gText_NotEvenANibble	Not even a nibble…{PAUSE_UNTIL_PRESS}		
-gText_ItGotAway	It got away…{PAUSE_UNTIL_PRESS}		
-gText_XWillBeSentToY	{STR_VAR_2} will be\nsent to {STR_VAR_1}.		
-gText_ByeByeVar1	Bye-bye, {STR_VAR_2}!		
-gText_XSentOverY	{STR_VAR_1} sent over {STR_VAR_3}.		
-gText_TakeGoodCareOfX	Take good care of {STR_VAR_3}!		
+gText_OhABite	Oh! A bite!	O! Beet!	
+gText_PokemonOnHook	A POKéMON's on the hook!{PAUSE_UNTIL_PRESS}	Er hangt een POKéMON aan de haak!{PAUSE_UNTIL_PRESS}	label-ok: reviewed
+gText_NotEvenANibble	Not even a nibble…{PAUSE_UNTIL_PRESS}	Helemaal niets…{PAUSE_UNTIL_PRESS}	
+gText_ItGotAway	It got away…{PAUSE_UNTIL_PRESS}	Hij is ontsnapt…{PAUSE_UNTIL_PRESS}	label-ok: reviewed
+gText_XWillBeSentToY	{STR_VAR_2} will be\nsent to {STR_VAR_1}.	{STR_VAR_2} gaat\nnaar {STR_VAR_1}.	
+gText_ByeByeVar1	Bye-bye, {STR_VAR_2}!	Doei, {STR_VAR_2}!	
+gText_XSentOverY	{STR_VAR_1} sent over {STR_VAR_3}.	{STR_VAR_1} stuurt {STR_VAR_3}.	
+gText_TakeGoodCareOfX	Take good care of {STR_VAR_3}!	Zorg goed voor {STR_VAR_3}!	
 gEasyChatGroupName_Pokemon	POKéMON		
 gEasyChatGroupName_Trainer	TRAINER		
-gEasyChatGroupName_Status	STATUS		
-gEasyChatGroupName_Battle	BATTLE		
-gEasyChatGroupName_Greetings	GREETINGS		
-gEasyChatGroupName_People	PEOPLE		
-gEasyChatGroupName_Voices	VOICES		
-gEasyChatGroupName_Speech	SPEECH		
-gEasyChatGroupName_Endings	ENDINGS		
-gEasyChatGroupName_Feelings	FEELINGS		
-gEasyChatGroupName_Conditions	CONDITIONS		
-gEasyChatGroupName_Actions	ACTIONS		
-gEasyChatGroupName_Lifestyle	LIFESTYLE		
-gEasyChatGroupName_Hobbies	HOBBIES		
-gEasyChatGroupName_Time	TIME		
-gEasyChatGroupName_Misc	MISC.		
-gEasyChatGroupName_Adjectives	ADJECTIVES		
-gEasyChatGroupName_Events	EVENTS		
-gEasyChatGroupName_Move1	MOVE 1		
-gEasyChatGroupName_Move2	MOVE 2		
-gEasyChatGroupName_TrendySaying	TRENDY SAYING		
+gEasyChatGroupName_Status	STATUS	STATUS	
+gEasyChatGroupName_Battle	BATTLE	GEVECHT	label-ok: reviewed
+gEasyChatGroupName_Greetings	GREETINGS	GROETEN	
+gEasyChatGroupName_People	PEOPLE	MENSEN	
+gEasyChatGroupName_Voices	VOICES	GELUIDEN	label-ok: reviewed
+gEasyChatGroupName_Speech	SPEECH	PRATEN	
+gEasyChatGroupName_Endings	ENDINGS	EINDES	
+gEasyChatGroupName_Feelings	FEELINGS	GEVOEL	
+gEasyChatGroupName_Conditions	CONDITIONS	CONDITIE	
+gEasyChatGroupName_Actions	ACTIONS	DOEN	
+gEasyChatGroupName_Lifestyle	LIFESTYLE	LEVEN	
+gEasyChatGroupName_Hobbies	HOBBIES	HOBBY'S	
+gEasyChatGroupName_Time	TIME	TIJD	
+gEasyChatGroupName_Misc	MISC.	OVERIG	label-ok: reviewed
+gEasyChatGroupName_Adjectives	ADJECTIVES	ZO IS HET	
+gEasyChatGroupName_Events	EVENTS	EVENTS	
+gEasyChatGroupName_Move1	MOVE 1	AANVAL 1	label-ok: reviewed
+gEasyChatGroupName_Move2	MOVE 2	AANVAL 2	label-ok: reviewed
+gEasyChatGroupName_TrendySaying	TRENDY SAYING	HIPPE ZIN	
 gEasyChatGroupName_Pokemon2	POKéMON2		
 gText_ThreeQuestionMarks	???		
-gText_MaxHP	MAX. HP		
-gText_Attack	ATTACK		
-gText_Defense	DEFENSE		
-gText_Speed	SPEED		
-gText_SpAtk	SP. ATK		
-gText_SpDef	SP. DEF		
+gText_MaxHP	MAX. HP	MAX. HP	
+gText_Attack	ATTACK	AANVAL	
+gText_Defense	DEFENSE	VERD.	
+gText_Speed	SPEED	SNELHEID	label-ok: reviewed
+gText_SpAtk	SP. ATK	SP. AANV	label-ok: reviewed
+gText_SpDef	SP. DEF	SP. VERD	label-ok: reviewed
 gText_Plus	{PLUS}		
 gText_Dash	-		
-gText_FromSpace	From 		
-gText_MixingRecords	Mixing records…		
-gText_RecordMixingComplete	Record mixing completed.\nThank you for waiting.		
+gText_FromSpace	From 	Van 	
+gText_MixingRecords	Mixing records…	Records mixen…	
+gText_RecordMixingComplete	Record mixing completed.\nThank you for waiting.	Records mixen klaar.\nBedankt voor het wachten.	label-ok: reviewed
 gText_YourName	YOUR NAME?	JE NAAM?	
-gText_BoxName	BOX NAME?		
-gText_PkmnsNickname	{STR_VAR_1}'s nickname?		
-gText_TellHimTheWords	Tell him the words.		
-gText_MoveOkBack	{DPAD_NONE}MOVE  {A_BUTTON}OK  {B_BUTTON}BACK		
-gText_CallCantBeMadeHere	A call can't be made from here.		
+gText_BoxName	BOX NAME?	NAAM BOX?	
+gText_PkmnsNickname	{STR_VAR_1}'s nickname?	Bijnaam {STR_VAR_1}?	
+gText_TellHimTheWords	Tell him the words.	Vertel hem de woorden.	label-ok: reviewed
+gText_MoveOkBack	{DPAD_NONE}MOVE  {A_BUTTON}OK  {B_BUTTON}BACK	{DPAD_NONE}KIES  {A_BUTTON}OK  {B_BUTTON}TERUG	label-ok: reviewed
+gText_CallCantBeMadeHere	A call can't be made from here.	Je kunt hier niet bellen.	
 gText_ContestLady_Handsome	HANDSOME		
 gText_ContestLady_Vinny	VINNY		
 gText_ContestLady_Moreme	MOREME		
 gText_ContestLady_Ironhard	IRONHARD		
 gText_ContestLady_Muscle	MUSCLE		
-gText_ContestLady_Coolness	coolness		
-gText_ContestLady_Beauty	beauty		
-gText_ContestLady_Cuteness	cuteness		
-gText_ContestLady_Smartness	smartness		
-gText_ContestLady_Toughness	toughness		
-gText_QuizLady_Lady	Lady		
-gText_FavorLady_Slippery	slippery		
-gText_FavorLady_Roundish	roundish		
-gText_FavorLady_Whamish	wham-ish		
-gText_FavorLady_Shiny	shiny		
-gText_FavorLady_Sticky	sticky		
-gText_FavorLady_Pointy	pointy		
-gText_RentalPkmn2	RENTAL POKéMON		
-gText_SelectFirstPkmn	Select the first POKéMON.		
-gText_SelectSecondPkmn	Select the second POKéMON.		
-gText_SelectThirdPkmn	Select the third POKéMON.		
-gText_Rent	RENT		
-gText_Summary	SUMMARY		
-gText_Others2	OTHERS		
-gText_Deselect	DESELECT		
-gText_TheseThreePkmnOkay	Are these three POKéMON OK?		
-gText_Yes2	YES		
+gText_ContestLady_Coolness	coolness	stoerheid	label-ok: reviewed
+gText_ContestLady_Beauty	beauty	schoonheid	label-ok: reviewed
+gText_ContestLady_Cuteness	cuteness	schattigheid	label-ok: reviewed
+gText_ContestLady_Smartness	smartness	slimheid	
+gText_ContestLady_Toughness	toughness	kracht	
+gText_QuizLady_Lady	Lady	Dame	
+gText_FavorLady_Slippery	slippery	glad	
+gText_FavorLady_Roundish	roundish	rond	
+gText_FavorLady_Whamish	wham-ish	bonkig	
+gText_FavorLady_Shiny	shiny	glimmend	label-ok: reviewed
+gText_FavorLady_Sticky	sticky	plakkerig	label-ok: reviewed
+gText_FavorLady_Pointy	pointy	puntig	
+gText_RentalPkmn2	RENTAL POKéMON	HUUR-POKéMON	
+gText_SelectFirstPkmn	Select the first POKéMON.	Kies de eerste POKéMON.	
+gText_SelectSecondPkmn	Select the second POKéMON.	Kies de tweede POKéMON.	
+gText_SelectThirdPkmn	Select the third POKéMON.	Kies de derde POKéMON.	
+gText_Rent	RENT	HUUR	
+gText_Summary	SUMMARY	INFO	
+gText_Others2	OTHERS	ANDERE	
+gText_Deselect	DESELECT	UIT	
+gText_TheseThreePkmnOkay	Are these three POKéMON OK?	Zijn deze drie POKéMON goed?	
+gText_Yes2	YES	JA	
 gText_No2	NO		
-gText_CantSelectSamePkmn	Can't select same {PKMN}.		
-gText_PkmnSwap	POKéMON SWAP		
-gText_SelectPkmnToSwap	Select POKéMON to swap.		
-gText_SelectPkmnToAccept	Select POKéMON to accept.		
-gText_Swap	SWAP		
-gText_Summary2	SUMMARY		
-gText_Rechoose	RECHOOSE		
-gText_QuitSwapping	Quit swapping?		
-gText_Yes3	YES		
+gText_CantSelectSamePkmn	Can't select same {PKMN}.	Niet 2x dezelfde {PKMN}.	
+gText_PkmnSwap	POKéMON SWAP	POKéMON RUILEN	label-ok: reviewed
+gText_SelectPkmnToSwap	Select POKéMON to swap.	Kies een POKéMON om te ruilen.	label-ok: reviewed
+gText_SelectPkmnToAccept	Select POKéMON to accept.	Kies een POKéMON om te nemen.	
+gText_Swap	SWAP	RUIL	
+gText_Summary2	SUMMARY	INFO	
+gText_Rechoose	RECHOOSE	OPNIEUW	
+gText_QuitSwapping	Quit swapping?	Stoppen met ruilen?	label-ok: reviewed
+gText_Yes3	YES	JA	
 gText_No3	NO		
-gText_PkmnForSwap	{PKMN} FOR SWAP		
-gText_Cancel3	CANCEL		
-gText_Swap2	SWAP		
-gText_Accept	ACCEPT		
-gText_AcceptThisPkmn	Accept this POKéMON?		
+gText_PkmnForSwap	{PKMN} FOR SWAP	{PKMN} OM TE RUILEN	label-ok: reviewed
+gText_Cancel3	CANCEL	TERUG	
+gText_Swap2	SWAP	RUIL	
+gText_Accept	ACCEPT	NEEM	
+gText_AcceptThisPkmn	Accept this POKéMON?	Deze POKéMON nemen?	
 gText_4Spaces	    		
-gText_SamePkmnInPartyAlready	Same {PKMN} in party already.		
+gText_SamePkmnInPartyAlready	Same {PKMN} in party already.	Die {PKMN} zit al in je team.	
 gText_DecimalPoint	.		
-gText_SavingPlayer	PLAYER		
-gText_SavingBadges	BADGES		
+gText_SavingPlayer	PLAYER	SPELER	
+gText_SavingBadges	BADGES	BADGES	
 gText_SavingPokedex	POKéDEX		
-gText_SavingTime	TIME		
-gText_WirelessCommStatus	Wireless Communication Status		
-gText_PeopleTrading	People trading:		
-gText_PeopleBattling	People battling:		
-gText_PeopleInUnionRoom	People in the UNION ROOM:		
-gText_PeopleCommunicating	People communicating:		
-gText_F700Players	{DYNAMIC 0} players		
-gText_F701Players	{DYNAMIC 1} players		
-gText_F702Players	{DYNAMIC 2} players		
-gText_F703Players	{DYNAMIC 3} players		
-gText_WonderCards	WONDER CARDS		
-gText_WonderNews	WONDER NEWS		
-gText_WirelessCommunication	WIRELESS COMMUNICATION		
-gText_Friend2	FRIEND		
-gText_Exit3	EXIT		
-gText_Receive	RECEIVE		
-gText_Send	SEND		
-gText_Toss	TOSS		
-gText_VarietyOfEventsImportedWireless	A variety of events will be imported\nover Wireless Communication.		
-gText_WonderCardsInPossession	Read the WONDER CARDS in your\npossession.		
-gText_ReadNewsThatArrived	Read the NEWS that arrived.		
-gText_ReturnToTitle	Return to the title screen.		
-gText_DontHaveCardNewOneInput	You don't have a WONDER CARD,\nso a new CARD will be input.		
-gText_DontHaveNewsNewOneInput	You don't have any WONDER NEWS,\nso new NEWS will be input.		
-gText_WhereShouldCardBeAccessed	Where should the WONDER CARD\nbe accessed?		
-gText_WhereShouldNewsBeAccessed	Where should the WONDER NEWS\nbe accessed?		
-gText_CommunicationStandbyBButtonCancel	Communication standby…\nB Button: Cancel		
-gText_Communicating	Communicating…		
-gText_CommunicationCompleted	Communication completed.		
-gText_CommunicationError	Communication error.		
-gText_CommunicationCanceled	Communication has been canceled.		
-gText_ThrowAwayWonderCard	Throw away the WONDER CARD\nand input a new CARD?		
-gText_HaventReceivedCardsGift	You haven't received the CARD's gift\nyet. Input a new CARD anyway?		
-gText_WonderCardReceivedFrom	A WONDER CARD has been received\nfrom {STR_VAR_1}.		
-gText_WonderNewsReceivedFrom	A WONDER NEWS item has been\nreceived from {STR_VAR_1}.		
-gText_WonderCardReceived	A new WONDER CARD has been\nreceived.		
-gText_WonderNewsReceived	A new WONDER NEWS item has been\nreceived.		
-gText_NewStampReceived	A new STAMP has been received.		
-gText_NewTrainerReceived	A new TRAINER has arrived.		
-gText_AlreadyHadCard	You already had that\nWONDER CARD.		
-gText_AlreadyHadNews	You already had that\nWONDER NEWS item.		
-gText_AlreadyHadStamp	You already had that\nSTAMP.		
-gText_NoMoreRoomForStamps	There's no more room for adding\nSTAMPS.		
-gText_RecordUploadedViaWireless	Your record has been uploaded via\nWIRELESS COMMUNICATION.		
-gText_CantAcceptCardFromTrainer	You can't accept a WONDER CARD\nfrom this TRAINER.		
-gText_CantAcceptNewsFromTrainer	You can't accept WONDER NEWS\nfrom this TRAINER.		
-gText_NothingSentOver	Nothing was sent over…		
-gText_WhatToDoWithCards	What would you like to do\nwith the WONDER CARDS?		
-gText_WhatToDoWithNews	What would you like to do\nwith the WONDER NEWS?		
-gText_SendingWonderCard	Sending your WONDER CARD…		
-gText_SendingWonderNews	Sending your WONDER NEWS item…		
-gText_WonderCardSentTo	Your WONDER CARD has been sent\nto {STR_VAR_1}.		
-gText_WonderNewsSentTo	Your WONDER NEWS item has been\nsent to {STR_VAR_1}.		
-gText_StampSentTo	A STAMP has been sent to {STR_VAR_1}.		
-gText_GiftSentTo	A GIFT has been sent to {STR_VAR_1}.		
-gText_OtherTrainerHasCard	The other TRAINER has the same\nWONDER CARD already.		
-gText_OtherTrainerHasNews	The other TRAINER has the same\nWONDER NEWS already.		
-gText_OtherTrainerHasStamp	The other TRAINER has the same\nSTAMP already.		
-gText_OtherTrainerCanceled	The other TRAINER canceled\ncommunication.		
-gText_CantSendGiftToTrainer	You can't send a MYSTERY GIFT to\nthis TRAINER.		
-gText_IfThrowAwayCardEventWontHappen	If you throw away the CARD,\nits event won't happen. Okay?		
-gText_OkayToDiscardNews	Is it okay to discard this\nNEWS item?		
-gText_HaventReceivedGiftOkayToDiscard	You haven't received the\nGIFT. Is it okay to discard?		
-gText_DataWillBeSaved	Data will be saved.\nPlease wait.		
-gText_SaveCompletedPressA	Save completed.\nPlease press the A Button.		
-gText_WonderCardThrownAway	The WONDER CARD was thrown away.		
-gText_WonderNewsThrownAway	The WONDER NEWS was thrown away.		
-gText_MysteryGift	MYSTERY GIFT		
-gText_PickOKExit	{DPAD_UPDOWN}PICK {A_BUTTON}OK {B_BUTTON}EXIT		
-gText_PickOKCancel	{DPAD_UPDOWN}PICK {A_BUTTON}OK {B_BUTTON}CANCEL		
-gText_PlayersBattleResults	{PLAYER}'s BATTLE RESULTS		
-gText_TotalRecordWLD	TOTAL RECORD W:{STR_VAR_1} L:{STR_VAR_2} D:{STR_VAR_3}		width-ok: STR_VARs are numbers
-gText_WinLoseDraw	{CLEAR_TO 83}WIN{CLEAR_TO 128}LOSE{CLEAR_TO 176}DRAW		
-gText_CommunicationStandby5	Communication standby…		
-gText_QuitTheGame	Quit the game?		
-gText_YouveGot9999Coins	You've got 9,999 COINS.		
-gText_YouveRunOutOfCoins	You've run out of COINS.\nGame over!		
-gText_YouDontHaveThreeCoins	You don't have three COINS.		
-gText_ReelTimeHelp	REEL TIME\nHere's your chance to take\naim and nail marks!\nReel Time continues for the\nawarded number of spins.\nIt all ends on a Big Bonus.		
-gDaycareText_GetAlongVeryWell	The two seem to get along\nvery well.		
-gDaycareText_GetAlong	The two seem to get along.		
-gDaycareText_DontLikeOther	The two don't seem to like\neach other much.		
-gDaycareText_PlayOther	The two prefer to play with other\nPOKéMON than each other.		
+gText_SavingTime	TIME	TIJD	
+gText_WirelessCommStatus	Wireless Communication Status	Draadloze verbinding	
+gText_PeopleTrading	People trading:	Ruilen:	
+gText_PeopleBattling	People battling:	Vechten:	
+gText_PeopleInUnionRoom	People in the UNION ROOM:	In de UNION ROOM:	
+gText_PeopleCommunicating	People communicating:	Verbonden:	
+gText_F700Players	{DYNAMIC 0} players	{DYNAMIC 0} spelers	
+gText_F701Players	{DYNAMIC 1} players	{DYNAMIC 1} spelers	
+gText_F702Players	{DYNAMIC 2} players	{DYNAMIC 2} spelers	
+gText_F703Players	{DYNAMIC 3} players	{DYNAMIC 3} spelers	
+gText_WonderCards	WONDER CARDS	WONDERKAARTEN	label-ok: reviewed
+gText_WonderNews	WONDER NEWS	WONDERNIEUWS	label-ok: reviewed
+gText_WirelessCommunication	WIRELESS COMMUNICATION	DRAADLOZE VERBINDING	
+gText_Friend2	FRIEND	VRIEND	
+gText_Exit3	EXIT	SLUIT	label-ok: reviewed
+gText_Receive	RECEIVE	ONTVANG	
+gText_Send	SEND	STUUR	label-ok: reviewed
+gText_Toss	TOSS	WEG	
+gText_VarietyOfEventsImportedWireless	A variety of events will be imported\nover Wireless Communication.	Allerlei events komen binnen via\neen draadloze verbinding.	
+gText_WonderCardsInPossession	Read the WONDER CARDS in your\npossession.	Lees je WONDERKAARTEN.	
+gText_ReadNewsThatArrived	Read the NEWS that arrived.	Lees het NIEUWS dat binnenkwam.	
+gText_ReturnToTitle	Return to the title screen.	Terug naar het beginscherm.	
+gText_DontHaveCardNewOneInput	You don't have a WONDER CARD,\nso a new CARD will be input.	Je hebt geen WONDERKAART,\ndus komt er een nieuwe KAART.	
+gText_DontHaveNewsNewOneInput	You don't have any WONDER NEWS,\nso new NEWS will be input.	Je hebt geen WONDERNIEUWS,\ndus komt er nieuw NIEUWS.	
+gText_WhereShouldCardBeAccessed	Where should the WONDER CARD\nbe accessed?	Waar moet de WONDERKAART\nvandaan komen?	
+gText_WhereShouldNewsBeAccessed	Where should the WONDER NEWS\nbe accessed?	Waar moet het WONDERNIEUWS\nvandaan komen?	
+gText_CommunicationStandbyBButtonCancel	Communication standby…\nB Button: Cancel	Verbinding maken…\nB-knop: terug	
+gText_Communicating	Communicating…	Bezig met verbinden…	label-ok: reviewed
+gText_CommunicationCompleted	Communication completed.	Verbinding klaar.	
+gText_CommunicationError	Communication error.	Verbindingsfout.	
+gText_CommunicationCanceled	Communication has been canceled.	De verbinding is gestopt.	
+gText_ThrowAwayWonderCard	Throw away the WONDER CARD\nand input a new CARD?	De WONDERKAART weggooien en\neen nieuwe KAART nemen?	
+gText_HaventReceivedCardsGift	You haven't received the CARD's gift\nyet. Input a new CARD anyway?	Je hebt het cadeau van de KAART nog\nniet. Toch een nieuwe KAART nemen?	
+gText_WonderCardReceivedFrom	A WONDER CARD has been received\nfrom {STR_VAR_1}.	Je hebt een WONDERKAART\ngekregen van {STR_VAR_1}.	
+gText_WonderNewsReceivedFrom	A WONDER NEWS item has been\nreceived from {STR_VAR_1}.	Je hebt WONDERNIEUWS\ngekregen van {STR_VAR_1}.	
+gText_WonderCardReceived	A new WONDER CARD has been\nreceived.	Je hebt een nieuwe\nWONDERKAART gekregen.	
+gText_WonderNewsReceived	A new WONDER NEWS item has been\nreceived.	Je hebt nieuw\nWONDERNIEUWS gekregen.	
+gText_NewStampReceived	A new STAMP has been received.	Je hebt een nieuwe STEMPEL.	
+gText_NewTrainerReceived	A new TRAINER has arrived.	Er is een nieuwe TRAINER.	
+gText_AlreadyHadCard	You already had that\nWONDER CARD.	Je had die WONDERKAART\nal.	label-ok: reviewed
+gText_AlreadyHadNews	You already had that\nWONDER NEWS item.	Je had dat WONDERNIEUWS\nal.	label-ok: reviewed
+gText_AlreadyHadStamp	You already had that\nSTAMP.	Je had die STEMPEL\nal.	
+gText_NoMoreRoomForStamps	There's no more room for adding\nSTAMPS.	Er is geen plek meer voor\nSTEMPELS.	
+gText_RecordUploadedViaWireless	Your record has been uploaded via\nWIRELESS COMMUNICATION.	Je record is verstuurd via\nDRAADLOZE VERBINDING.	
+gText_CantAcceptCardFromTrainer	You can't accept a WONDER CARD\nfrom this TRAINER.	Je kunt geen WONDERKAART\nvan deze TRAINER aannemen.	
+gText_CantAcceptNewsFromTrainer	You can't accept WONDER NEWS\nfrom this TRAINER.	Je kunt geen WONDERNIEUWS\nvan deze TRAINER aannemen.	
+gText_NothingSentOver	Nothing was sent over…	Er is niets gestuurd…	
+gText_WhatToDoWithCards	What would you like to do\nwith the WONDER CARDS?	Wat wil je doen met\nde WONDERKAARTEN?	
+gText_WhatToDoWithNews	What would you like to do\nwith the WONDER NEWS?	Wat wil je doen met\nhet WONDERNIEUWS?	
+gText_SendingWonderCard	Sending your WONDER CARD…	Je WONDERKAART versturen…	
+gText_SendingWonderNews	Sending your WONDER NEWS item…	Je WONDERNIEUWS versturen…	
+gText_WonderCardSentTo	Your WONDER CARD has been sent\nto {STR_VAR_1}.	Je WONDERKAART is gestuurd\nnaar {STR_VAR_1}.	
+gText_WonderNewsSentTo	Your WONDER NEWS item has been\nsent to {STR_VAR_1}.	Je WONDERNIEUWS is gestuurd\nnaar {STR_VAR_1}.	
+gText_StampSentTo	A STAMP has been sent to {STR_VAR_1}.	STEMPEL gestuurd naar {STR_VAR_1}.	
+gText_GiftSentTo	A GIFT has been sent to {STR_VAR_1}.	CADEAU gestuurd naar {STR_VAR_1}.	
+gText_OtherTrainerHasCard	The other TRAINER has the same\nWONDER CARD already.	De andere TRAINER heeft die\nWONDERKAART al.	
+gText_OtherTrainerHasNews	The other TRAINER has the same\nWONDER NEWS already.	De andere TRAINER heeft dat\nWONDERNIEUWS al.	
+gText_OtherTrainerHasStamp	The other TRAINER has the same\nSTAMP already.	De andere TRAINER heeft die\nSTEMPEL al.	
+gText_OtherTrainerCanceled	The other TRAINER canceled\ncommunication.	De andere TRAINER heeft de\nverbinding gestopt.	
+gText_CantSendGiftToTrainer	You can't send a MYSTERY GIFT to\nthis TRAINER.	Je kunt geen GEHEIM CADEAU sturen\nnaar deze TRAINER.	
+gText_IfThrowAwayCardEventWontHappen	If you throw away the CARD,\nits event won't happen. Okay?	Als je de KAART weggooit, gebeurt\nhet event niet. Is dat goed?	
+gText_OkayToDiscardNews	Is it okay to discard this\nNEWS item?	Mag dit NIEUWS\nweg?	
+gText_HaventReceivedGiftOkayToDiscard	You haven't received the\nGIFT. Is it okay to discard?	Je hebt het CADEAU nog niet\ngekregen. Mag het toch weg?	
+gText_DataWillBeSaved	Data will be saved.\nPlease wait.	Het spel wordt opgeslagen.\nEven geduld.	label-ok: reviewed
+gText_SaveCompletedPressA	Save completed.\nPlease press the A Button.	Opslaan gelukt.\nDruk op de A-knop.	
+gText_WonderCardThrownAway	The WONDER CARD was thrown away.	De WONDERKAART is weggegooid.	
+gText_WonderNewsThrownAway	The WONDER NEWS was thrown away.	Het WONDERNIEUWS is weggegooid.	
+gText_MysteryGift	MYSTERY GIFT	GEHEIM CADEAU	label-ok: reviewed
+gText_PickOKExit	{DPAD_UPDOWN}PICK {A_BUTTON}OK {B_BUTTON}EXIT	{DPAD_UPDOWN}KIES {A_BUTTON}OK {B_BUTTON}SLUIT	label-ok: reviewed
+gText_PickOKCancel	{DPAD_UPDOWN}PICK {A_BUTTON}OK {B_BUTTON}CANCEL	{DPAD_UPDOWN}KIES {A_BUTTON}OK {B_BUTTON}TERUG	
+gText_PlayersBattleResults	{PLAYER}'s BATTLE RESULTS	GEVECHTSUITSLAG van {PLAYER}	
+gText_TotalRecordWLD	TOTAL RECORD W:{STR_VAR_1} L:{STR_VAR_2} D:{STR_VAR_3}	TOTAAL W:{STR_VAR_1} V:{STR_VAR_2} G:{STR_VAR_3}	width-ok: STR_VARs are numbers
+gText_WinLoseDraw	{CLEAR_TO 83}WIN{CLEAR_TO 128}LOSE{CLEAR_TO 176}DRAW	{CLEAR_TO 83}WINST{CLEAR_TO 128}VERLIES{CLEAR_TO 176}GELIJK	label-ok: reviewed
+gText_CommunicationStandby5	Communication standby…	Verbinding maken…	
+gText_QuitTheGame	Quit the game?	Stoppen met spelen?	label-ok: reviewed
+gText_YouveGot9999Coins	You've got 9,999 COINS.	Je hebt 9.999 MUNTEN.	
+gText_YouveRunOutOfCoins	You've run out of COINS.\nGame over!	Je MUNTEN zijn op.\nHet spel is voorbij!	
+gText_YouDontHaveThreeCoins	You don't have three COINS.	Je hebt geen drie MUNTEN.	
+gText_ReelTimeHelp	REEL TIME\nHere's your chance to take\naim and nail marks!\nReel Time continues for the\nawarded number of spins.\nIt all ends on a Big Bonus.	REEL TIME\nDit is je kans om te mikken\nen raak te draaien!\nREEL TIME duurt zo veel\nkeer als je hebt gewonnen.\nAan het eind: grote bonus.	
+gDaycareText_GetAlongVeryWell	The two seem to get along\nvery well.	Die twee kunnen heel goed\nmet elkaar opschieten.	
+gDaycareText_GetAlong	The two seem to get along.	Die twee kunnen goed samen.	
+gDaycareText_DontLikeOther	The two don't seem to like\neach other much.	Die twee vinden elkaar\nniet zo leuk.	
+gDaycareText_PlayOther	The two prefer to play with other\nPOKéMON than each other.	Die twee spelen liever met\nandere POKéMON.	
 gText_NewLine2	\n		
-gText_Exit4	EXIT		
+gText_Exit4	EXIT	SLUIT	label-ok: reviewed
 gText_Lv	{LV}		
-gText_TimeBoard	TIME BOARD		
-gText_TimeCleared	TIME CLEARED 		
-gText_XMinYDotZSec	{STR_VAR_1} min. {STR_VAR_2}.{STR_VAR_3} sec.		width-ok: STR_VARs are numbers
+gText_TimeBoard	TIME BOARD	TIJDBORD	
+gText_TimeCleared	TIME CLEARED 	TIJD 	
+gText_XMinYDotZSec	{STR_VAR_1} min. {STR_VAR_2}.{STR_VAR_3} sec.	{STR_VAR_1} min. {STR_VAR_2}.{STR_VAR_3} sec.	width-ok: STR_VARs are numbers
 gText_TrainerHill1F	1F		
 gText_TrainerHill2F	2F		
 gText_TrainerHill3F	3F		
 gText_TrainerHill4F	4F		
-gText_TeachWhichMoveToPkmn	Teach which move to {STR_VAR_1}?		
-gText_MoveRelearnerTeachMoveConfirm	Teach {STR_VAR_2}?		
-gText_MoveRelearnerPkmnLearnedMove	{STR_VAR_1} learned\n{STR_VAR_2}!		
-gText_MoveRelearnerPkmnTryingToLearnMove	{STR_VAR_1} is trying to learn\n{STR_VAR_2}.\pBut {STR_VAR_1} can't learn more\nthan four moves.\pDelete an older move to make\nroom for {STR_VAR_2}?		
-gText_MoveRelearnerStopTryingToTeachMove	Stop trying to teach\n{STR_VAR_2}?		
+gText_TeachWhichMoveToPkmn	Teach which move to {STR_VAR_1}?	Welke aanval leren aan {STR_VAR_1}?	
+gText_MoveRelearnerTeachMoveConfirm	Teach {STR_VAR_2}?	{STR_VAR_2} leren?	
+gText_MoveRelearnerPkmnLearnedMove	{STR_VAR_1} learned\n{STR_VAR_2}!	{STR_VAR_1} leert\n{STR_VAR_2}!	
+gText_MoveRelearnerPkmnTryingToLearnMove	{STR_VAR_1} is trying to learn\n{STR_VAR_2}.\pBut {STR_VAR_1} can't learn more\nthan four moves.\pDelete an older move to make\nroom for {STR_VAR_2}?	{STR_VAR_1} wil\n{STR_VAR_2} leren.\pMaar {STR_VAR_1} kan niet meer\ndan vier aanvallen.\pEen oude aanval vergeten voor\n{STR_VAR_2}?	
+gText_MoveRelearnerStopTryingToTeachMove	Stop trying to teach\n{STR_VAR_2}?	Stoppen met\n{STR_VAR_2} leren?	
 gText_MoveRelearnerAndPoof	{PAUSE 32}1, {PAUSE 15}2, and {PAUSE 15}… {PAUSE 15}… {PAUSE 15}… {PAUSE 15}{PLAY_SE SE_BALL_BOUNCE_1}Poof!\p		
 gText_MoveRelearnerPkmnForgotMoveAndLearnedNew	{STR_VAR_1} forgot {STR_VAR_3}.\pAnd…\p{STR_VAR_1} learned {STR_VAR_2}.		
 gText_MoveRelearnedPkmnDidNotLearnMove	{STR_VAR_1} did not learn the\nmove {STR_VAR_2}.		
