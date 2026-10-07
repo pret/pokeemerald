@@ -1,8 +1,8 @@
 key	english	dutch	notes
-Route102_Text_WatchMeCatchPokemon	WALLY: {PLAYER}…\nPOKéMON hide in tall grass like this,\ldon't they?\pPlease watch me and see if I can\ncatch one properly.\p…Whoa!		
-Route102_Text_WallyIDidIt	WALLY: I did it… It's my…\nMy POKéMON!		
-Route102_Text_LetsGoBack	{PLAYER}, thank you!\nLet's go back to the GYM!		
-Route102_Text_ImNotVeryTall	I'm…not very tall, so I sink right\ninto tall grass.\pThe grass goes up my nose and…\nFwafwafwafwafwa…\pFwatchoo!		
-Route102_Text_CatchWholeBunchOfPokemon	I'm going to catch a whole bunch of\nPOKéMON!		
+Route102_Text_WatchMeCatchPokemon	WALLY: {PLAYER}…\nPOKéMON hide in tall grass like this,\ldon't they?\pPlease watch me and see if I can\ncatch one properly.\p…Whoa!	WALLY: {PLAYER}…\nPOKéMON verstoppen zich in hoog\lgras zoals dit, toch?\pKijk je even of ik er goed\neen kan vangen?\p…Wow!	
+Route102_Text_WallyIDidIt	WALLY: I did it… It's my…\nMy POKéMON!	WALLY: Het is gelukt… Het is mijn…\nMijn eigen POKéMON!	
+Route102_Text_LetsGoBack	{PLAYER}, thank you!\nLet's go back to the GYM!	{PLAYER}, bedankt!\nKom, terug naar de GYM!	
+Route102_Text_ImNotVeryTall	I'm…not very tall, so I sink right\ninto tall grass.\pThe grass goes up my nose and…\nFwafwafwafwafwa…\pFwatchoo!	Ik ben… niet zo groot, dus ik zak\nhelemaal weg in het hoge gras.\pHet gras kriebelt in mijn neus en…\nHa… ha… ha…\pHATSJOE!	
+Route102_Text_CatchWholeBunchOfPokemon	I'm going to catch a whole bunch of\nPOKéMON!	Ik ga heel veel POKéMON\nvangen!	
 Route102_Text_RouteSignOldale	ROUTE 102\n{RIGHT_ARROW} OLDALE TOWN		
 Route102_Text_RouteSignPetalburg	ROUTE 102\n{LEFT_ARROW} PETALBURG CITY		

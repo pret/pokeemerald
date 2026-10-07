@@ -1,63 +1,63 @@
 key	english	dutch	notes
-Route102_Text_CalvinIntro	If you have POKéMON with you, then\nyou're an official POKéMON TRAINER!\lYou can't say no to my challenge!		
-Route102_Text_CalvinDefeated	Arrgh, I lost…\nI should have trained mine more…		
-Route102_Text_CalvinPostBattle	Listen, you. If you're strong,\nyou should have told me before!		
-Route102_Text_CalvinRegister	I've been working hard at this since\nI saw you before.\pI'd like to battle you again, so can\nyou register me in your POKéNAV?		
-Route102_Text_CalvinRegisterShort	I'd like to battle you again, so can\nyou register me in your POKéNAV?		
-Route102_Text_CalvinRematchIntro	Ever since I lost to you, I desperately\ntrained my POKéMON.\lYou can't say no to my challenge!		
-Route102_Text_CalvinRematchDefeated	Arrgh, I lost…\nIs my training method not right?		
-Route102_Text_CalvinRematchPostBattle	If you're going to get stronger,\nI'll get stronger, too.		
-Route102_Text_AllenIntro	Did you just become a TRAINER?\nWe're both beginners!		
-Route102_Text_AllenDefeated	I called you because I thought\nI could beat you…		
-Route102_Text_AllenPostBattle	I haven't won once yet…\nI wish I would win soon…		
-Route102_Text_RickIntro	Hahah! Our eyes met!\nI'll take you on with my BUG POKéMON!		
-Route102_Text_RickDefeated	Ow! Down and out!		
-Route102_Text_RickPostBattle	If you lock eyes with a TRAINER,\nyou have to challenge! It's a rule!		
-Route102_Text_TianaIntro	I'm going to keep winning and aim\nto be the best TRAINER.\pHelp me further my career!		
-Route102_Text_TianaDefeated	I ended up furthering your career…		
-Route102_Text_TianaPostBattle	To keep winning my way up, I see that\nI have to catch more POKéMON.		
-Route103_Text_DaisyIntro	Did you feel the tug of our\nsoul-soothing fragrance?		
-Route103_Text_DaisyDefeated	You weren't led astray by our aroma…		
-Route103_Text_DaisyPostBattle	Aromatherapy is a form of mental\nhealing that works with fragrances.		
-Route103_Text_AmyIntro	AMY: I'm AMY.\nAnd this is my little sister LIV.\lWe battle together!		
-Route103_Text_AmyDefeated	AMY: Uh-oh, we lost.		
-Route103_Text_AmyPostBattle	AMY: You have to think about all\nkinds of things when you're battling\lagainst two TRAINERS.		
-Route103_Text_AmyNotEnoughPokemon	AMY: Uh-oh, you have only one\nPOKéMON with you.\lYou can't battle us like that.		
-Route103_Text_LivIntro	LIV: We battle together as one\nteam.		
-Route103_Text_LivDefeated	LIV: Oh, we lost, big sister…		
-Route103_Text_LivPostBattle	LIV: We work perfectly together,\nme and my big sister…\pBut we still lost…		
-Route103_Text_AmyLivRegister	LIV: Really, we're a lot better…\nIt's true! We'll show you next time!		
-Route103_Text_LivNotEnoughPokemon	LIV: If you want to battle us,\nyou have to have two POKéMON!\lIt's not fair if you don't!		
-Route103_Text_AmyRematchIntro	AMY: I'm AMY.\nAnd this is my little sister LIV.\lWe battle together!		
-Route103_Text_AmyRematchDefeated	AMY: Aww, boo!\nWe couldn't win again…		
-Route103_Text_AmyRematchPostBattle	AMY: You have to think about all\nkinds of things when you're battling\lagainst two TRAINERS.		
-Route103_Text_AmyRematchNotEnoughPokemon	AMY: Uh-oh, you have only one\nPOKéMON with you.\lYou can't battle us like that.		
-Route103_Text_LivRematchIntro	LIV: We battle together as one\nteam.		
-Route103_Text_LivRematchDefeated	LIV: Awww, we lost again…\nBig sister…		
-Route103_Text_LivRematchPostBattle	LIV: We work perfectly together,\nme and my big sister…\pBut why did we lose again?		
-Route103_Text_LivRematchNotEnoughPokemon	LIV: If you want to battle us, you\nhave to have two POKéMON!\lIt's not fair if you don't!		
-Route103_Text_AndrewIntro	Gah! My fishing line's all snarled up!\nI'm getting frustrated and mean!\lThat's it! Battle me!		
-Route103_Text_AndrewDefeated	Gah! Lost it!\nI'm even more annoyed now!		
-Route103_Text_AndrewPostBattle	Gah, I'm still boiling mad…\nGrrrrr…		
-Route103_Text_MiguelIntro	My POKéMON is delightfully adorable!\nDon't be shy--I'll show you!		
-Route103_Text_MiguelDefeated	Oh, my gosh!\nMy darling POKéMON!		
-Route103_Text_MiguelPostBattle	My delightful POKéMON looks darling\neven when it's fainted!		
-Route103_Text_MiguelRegister	I'll get you to come out and look in\non my delightful POKéMON again!		
-Route103_Text_MiguelRematchIntro	Hi, you! My delightfully adorable\nPOKéMON has become more darling!		
-Route103_Text_MiguelRematchDefeated	Oh!\nMy darling POKéMON!		
-Route103_Text_MiguelRematchPostBattle	The more I spend time with it,\nthe more adorable my POKéMON becomes.		
-Route103_Text_PeteIntro	This sort of distance…\nYou should just swim it!		
-Route103_Text_PeteDefeated	Oh, that's good going!		
-Route103_Text_PetePostBattle	Oh, I understand where you're coming\nfrom now.\pIf I had a POKéMON that trusty,\nI'd want to SURF on it, too!		
-Route103_Text_IsabelleIntro	Watch where you're going!\nWe're going to crash!		
-Route103_Text_IsabelleDefeated	Groan…		
-Route103_Text_IsabellePostBattle	I'm a poor swimmer so I was practicing…\nSorry for almost crashing into you.		
-Route103_Text_RhettIntro	Whoa!\nHow'd you get into a space this small?		
-Route103_Text_RhettDefeated	Whoa!\nThe kid can rock!		
-Route103_Text_RhettPostBattle	Do you like cramped quarters\nlike this?		
-Route103_Text_MarcosIntro	Did my guitar's wailing draw you in?		
-Route103_Text_MarcosDefeated	My one-man show is ruined…		
-Route103_Text_MarcosPostBattle	I was playing my guitar where few\npeople were around, but a lot of fans\lhave gathered.\pHeh, maybe I should turn pro.		
+Route102_Text_CalvinIntro	If you have POKéMON with you, then\nyou're an official POKéMON TRAINER!\lYou can't say no to my challenge!	Als je POKéMON bij je hebt, ben je\neen echte POKéMON TRAINER!\lDan moet je tegen mij vechten!	
+Route102_Text_CalvinDefeated	Arrgh, I lost…\nI should have trained mine more…	Argh, verloren…\nIk had meer moeten trainen…	
+Route102_Text_CalvinPostBattle	Listen, you. If you're strong,\nyou should have told me before!	Hé jij. Als je zo sterk bent,\nhad je dat eerder moeten zeggen!	
+Route102_Text_CalvinRegister	I've been working hard at this since\nI saw you before.\pI'd like to battle you again, so can\nyou register me in your POKéNAV?	Ik heb hard getraind sinds ik\nje laatst zag.\pIk wil nog eens tegen je vechten.\nZet je me in je POKéNAV?	
+Route102_Text_CalvinRegisterShort	I'd like to battle you again, so can\nyou register me in your POKéNAV?	Ik wil nog eens tegen je vechten.\nZet je me in je POKéNAV?	
+Route102_Text_CalvinRematchIntro	Ever since I lost to you, I desperately\ntrained my POKéMON.\lYou can't say no to my challenge!	Sinds ik van je verloor, heb ik mijn\nPOKéMON keihard getraind.\lJe moet nu tegen mij vechten!	
+Route102_Text_CalvinRematchDefeated	Arrgh, I lost…\nIs my training method not right?	Argh, verloren…\nTrain ik niet op de goede manier?	
+Route102_Text_CalvinRematchPostBattle	If you're going to get stronger,\nI'll get stronger, too.	Als jij sterker wordt, word ik\nook sterker.	
+Route102_Text_AllenIntro	Did you just become a TRAINER?\nWe're both beginners!	Ben je net TRAINER geworden?\nWe zijn allebei beginners!	
+Route102_Text_AllenDefeated	I called you because I thought\nI could beat you…	Ik dacht dat ik je kon\nverslaan…	
+Route102_Text_AllenPostBattle	I haven't won once yet…\nI wish I would win soon…	Ik heb nog nooit gewonnen…\nWas het maar snel zover…	
+Route102_Text_RickIntro	Hahah! Our eyes met!\nI'll take you on with my BUG POKéMON!	Haha! We keken elkaar aan!\nIk vecht tegen je met mijn INSECTEN!	
+Route102_Text_RickDefeated	Ow! Down and out!	Au! Verslagen!	
+Route102_Text_RickPostBattle	If you lock eyes with a TRAINER,\nyou have to challenge! It's a rule!	Als je een TRAINER aankijkt, moet\nje vechten! Dat is de regel!	
+Route102_Text_TianaIntro	I'm going to keep winning and aim\nto be the best TRAINER.\pHelp me further my career!	Ik blijf winnen en word de\nbeste TRAINER.\pHelp me een stapje verder!	
+Route102_Text_TianaDefeated	I ended up furthering your career…	Nu heb ik jou een stapje verder\ngeholpen…	
+Route102_Text_TianaPostBattle	To keep winning my way up, I see that\nI have to catch more POKéMON.	Om te blijven winnen, moet ik meer\nPOKéMON vangen.	
+Route103_Text_DaisyIntro	Did you feel the tug of our\nsoul-soothing fragrance?	Ruik je onze rustgevende\ngeur?	
+Route103_Text_DaisyDefeated	You weren't led astray by our aroma…	Jij liet je niet afleiden door\nonze geur…	
+Route103_Text_DaisyPostBattle	Aromatherapy is a form of mental\nhealing that works with fragrances.	Geurtherapie helpt je om je\nrustig te voelen met lekkere geuren.	
+Route103_Text_AmyIntro	AMY: I'm AMY.\nAnd this is my little sister LIV.\lWe battle together!	AMY: Ik ben AMY.\nEn dit is mijn zusje LIV.\lWe vechten samen!	
+Route103_Text_AmyDefeated	AMY: Uh-oh, we lost.	AMY: O jee, we hebben verloren.	
+Route103_Text_AmyPostBattle	AMY: You have to think about all\nkinds of things when you're battling\lagainst two TRAINERS.	AMY: Je moet aan heel veel dingen\ndenken als je tegen twee\lTRAINERS vecht.	
+Route103_Text_AmyNotEnoughPokemon	AMY: Uh-oh, you have only one\nPOKéMON with you.\lYou can't battle us like that.	AMY: O jee, je hebt maar één\nPOKéMON bij je.\lZo kun je niet tegen ons vechten.	
+Route103_Text_LivIntro	LIV: We battle together as one\nteam.	LIV: Wij vechten samen als één\nteam.	
+Route103_Text_LivDefeated	LIV: Oh, we lost, big sister…	LIV: O, we hebben verloren, grote zus…	
+Route103_Text_LivPostBattle	LIV: We work perfectly together,\nme and my big sister…\pBut we still lost…	LIV: Mijn grote zus en ik werken\nperfect samen…\pMaar we hebben toch verloren…	
+Route103_Text_AmyLivRegister	LIV: Really, we're a lot better…\nIt's true! We'll show you next time!	LIV: Echt, we zijn veel beter…\nHet is waar! Volgende keer zul je zien!	
+Route103_Text_LivNotEnoughPokemon	LIV: If you want to battle us,\nyou have to have two POKéMON!\lIt's not fair if you don't!	LIV: Wil je tegen ons vechten,\ndan moet je twee POKéMON hebben!\lAnders is het niet eerlijk!	
+Route103_Text_AmyRematchIntro	AMY: I'm AMY.\nAnd this is my little sister LIV.\lWe battle together!	AMY: Ik ben AMY.\nEn dit is mijn zusje LIV.\lWe vechten samen!	
+Route103_Text_AmyRematchDefeated	AMY: Aww, boo!\nWe couldn't win again…	AMY: Ahh, balen!\nWeer niet gewonnen…	
+Route103_Text_AmyRematchPostBattle	AMY: You have to think about all\nkinds of things when you're battling\lagainst two TRAINERS.	AMY: Je moet aan heel veel dingen\ndenken als je tegen twee\lTRAINERS vecht.	
+Route103_Text_AmyRematchNotEnoughPokemon	AMY: Uh-oh, you have only one\nPOKéMON with you.\lYou can't battle us like that.	AMY: O jee, je hebt maar één\nPOKéMON bij je.\lZo kun je niet tegen ons vechten.	
+Route103_Text_LivRematchIntro	LIV: We battle together as one\nteam.	LIV: Wij vechten samen als één\nteam.	
+Route103_Text_LivRematchDefeated	LIV: Awww, we lost again…\nBig sister…	LIV: Ahh, weer verloren…\nGrote zus…	
+Route103_Text_LivRematchPostBattle	LIV: We work perfectly together,\nme and my big sister…\pBut why did we lose again?	LIV: Mijn grote zus en ik werken\nperfect samen…\pMaar waarom verloren we weer?	
+Route103_Text_LivRematchNotEnoughPokemon	LIV: If you want to battle us, you\nhave to have two POKéMON!\lIt's not fair if you don't!	LIV: Wil je tegen ons vechten,\ndan moet je twee POKéMON hebben!\lAnders is het niet eerlijk!	
+Route103_Text_AndrewIntro	Gah! My fishing line's all snarled up!\nI'm getting frustrated and mean!\lThat's it! Battle me!	Gah! Mijn vislijn zit helemaal in\nde knoop! Ik word er chagrijnig van!\lGenoeg! Vecht tegen mij!	
+Route103_Text_AndrewDefeated	Gah! Lost it!\nI'm even more annoyed now!	Gah! Verloren!\nNu ben ik nog bozer!	
+Route103_Text_AndrewPostBattle	Gah, I'm still boiling mad…\nGrrrrr…	Gah, ik ben nog steeds woedend…\nGrrrrr…	
+Route103_Text_MiguelIntro	My POKéMON is delightfully adorable!\nDon't be shy--I'll show you!	Mijn POKéMON is zo schattig!\nNiet verlegen zijn, ik laat hem zien!	
+Route103_Text_MiguelDefeated	Oh, my gosh!\nMy darling POKéMON!	O, nee toch!\nMijn lieve POKéMON!	
+Route103_Text_MiguelPostBattle	My delightful POKéMON looks darling\neven when it's fainted!	Mijn lieve POKéMON is zelfs\nschattig als hij verslagen is!	
+Route103_Text_MiguelRegister	I'll get you to come out and look in\non my delightful POKéMON again!	Kom nog eens kijken naar mijn\nlieve POKéMON!	
+Route103_Text_MiguelRematchIntro	Hi, you! My delightfully adorable\nPOKéMON has become more darling!	Hoi! Mijn schattige POKéMON is\nnóg liever geworden!	
+Route103_Text_MiguelRematchDefeated	Oh!\nMy darling POKéMON!	O!\nMijn lieve POKéMON!	
+Route103_Text_MiguelRematchPostBattle	The more I spend time with it,\nthe more adorable my POKéMON becomes.	Hoe meer tijd ik met hem doorbreng,\nhoe schattiger mijn POKéMON wordt.	
+Route103_Text_PeteIntro	This sort of distance…\nYou should just swim it!	Zo'n klein stukje…\nDat moet je gewoon zwemmen!	
+Route103_Text_PeteDefeated	Oh, that's good going!	O, dat ging goed!	
+Route103_Text_PetePostBattle	Oh, I understand where you're coming\nfrom now.\pIf I had a POKéMON that trusty,\nI'd want to SURF on it, too!	O, nu snap ik waarom je\nsurft.\pAls ik zo'n trouwe POKéMON had,\nwilde ik er ook op SURFEN!	
+Route103_Text_IsabelleIntro	Watch where you're going!\nWe're going to crash!	Kijk uit waar je gaat!\nWe gaan botsen!	
+Route103_Text_IsabelleDefeated	Groan…	Kreun…	
+Route103_Text_IsabellePostBattle	I'm a poor swimmer so I was practicing…\nSorry for almost crashing into you.	Ik kan niet goed zwemmen, dus ik\noefende… Sorry dat ik bijna botste.	
+Route103_Text_RhettIntro	Whoa!\nHow'd you get into a space this small?	Wow!\nHoe kom jij in zo'n klein hoekje?	
+Route103_Text_RhettDefeated	Whoa!\nThe kid can rock!	Wow!\nDat kind kan rocken!	
+Route103_Text_RhettPostBattle	Do you like cramped quarters\nlike this?	Hou je van kleine plekjes\nzoals dit?	
+Route103_Text_MarcosIntro	Did my guitar's wailing draw you in?	Kwam je op mijn gitaarmuziek af?	
+Route103_Text_MarcosDefeated	My one-man show is ruined…	Mijn optreden is verpest…	
+Route103_Text_MarcosPostBattle	I was playing my guitar where few\npeople were around, but a lot of fans\lhave gathered.\pHeh, maybe I should turn pro.	Ik speelde gitaar op een plek waar\nweinig mensen kwamen, maar nu\lstaan er toch veel fans.\pHé, misschien moet ik beroemd worden.	
 Route104_Text_GinaIntro	GINA: Okay, let's battle with our\nPOKéMON!		
 Route104_Text_GinaDefeat	GINA: Losing upsets me!		
 Route104_Text_GinaPostBattle	GINA: You are strong!\nWe have to train lots more!		
