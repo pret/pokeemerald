@@ -232,7 +232,7 @@ def placeholder_sample(token):
     if name in ("PLAYER", "RIVAL") or "PLAYER_NAME" in name or "TRAINER" in name and "NAME" in name \
             or "PARTNER_NAME" in name or "LINK_" in name and "NAME" in name:
         return "N" * 7
-    if "NAME" in name or "BUFF" in name or name.startswith("STR_VAR"):
+    if "NAME" in name or "BUFF" in name or name.startswith("STR_VAR") or name == "DYNAMIC" and token.split()[1:] == ["0"]:
         return NAME
     return ""
 

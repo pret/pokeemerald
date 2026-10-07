@@ -736,46 +736,46 @@ gText_JudgeSkill	JUDGE: SKILL	JURY: KUNDE
 gText_JudgeBody	JUDGE: BODY	JURY: KRACHT	label-ok: reviewed
 gText_Matchup	MATCHUP	WIE TEGEN WIE	label-ok: reviewed
 gText_TourneyTree	TOURNEY TREE		
-gText_DoubleKO	DOUBLE KO		
-gText_BasicRules	BASIC RULES		
-gText_SwapPartners	SWAP: PARTNER		
-gText_SwapNumber	SWAP: NUMBER		
-gText_SwapNotes	SWAP: NOTES		
-gText_OpenLevel3	OPEN LEVEL		
-gText_BattleBasics	BATTLE BASICS		
-gText_PokemonNature	POKéMON NATURE		
-gText_PokemonMoves	POKéMON MOVES		
-gText_Underpowered	UNDERPOWERED		
-gText_WhenInDanger	WHEN IN DANGER		
-gText_PyramidPokemon	PYRAMID: POKéMON		
-gText_PyramidTrainers	PYRAMID: TRAINERS		
-gText_PyramidMaze	PYRAMID: MAZE		
-gText_BattleBag2	BATTLE BAG		
-gText_PokenavAndBag	POKéNAV AND BAG		
-gText_HeldItems	HELD ITEMS		
-gText_PokemonOrder	POKéMON ORDER		
-gText_BattlePokemon	BATTLE POKéMON		
-gText_BattleTrainers	BATTLE TRAINERS		
+gText_DoubleKO	DOUBLE KO	DUBBEL KO	
+gText_BasicRules	BASIC RULES	SPELREGELS	
+gText_SwapPartners	SWAP: PARTNER	RUIL: PARTNER	
+gText_SwapNumber	SWAP: NUMBER	RUIL: AANTAL	
+gText_SwapNotes	SWAP: NOTES	RUIL: TIPS	
+gText_OpenLevel3	OPEN LEVEL	OPEN NIVEAU	label-ok: reviewed
+gText_BattleBasics	BATTLE BASICS	GEVECHTSUITLEG	label-ok: reviewed
+gText_PokemonNature	POKéMON NATURE	POKéMON-KARAKTER	label-ok: reviewed
+gText_PokemonMoves	POKéMON MOVES	POKéMON-AANVALLEN	label-ok: reviewed
+gText_Underpowered	UNDERPOWERED	TE ZWAK	
+gText_WhenInDanger	WHEN IN DANGER	IN GEVAAR	
+gText_PyramidPokemon	PYRAMID: POKéMON	PIRAMIDE: POKéMON	label-ok: reviewed
+gText_PyramidTrainers	PYRAMID: TRAINERS	PIRAMIDE: TRAINERS	label-ok: reviewed
+gText_PyramidMaze	PYRAMID: MAZE	PIRAMIDE: DOOLHOF	label-ok: reviewed
+gText_BattleBag2	BATTLE BAG	GEVECHTSTAS	label-ok: reviewed
+gText_PokenavAndBag	POKéNAV AND BAG	POKéNAV EN TAS	
+gText_HeldItems	HELD ITEMS	VOORWERPEN	label-ok: reviewed
+gText_PokemonOrder	POKéMON ORDER	VOLGORDE	
+gText_BattlePokemon	BATTLE POKéMON	GEVECHTS-POKéMON	label-ok: reviewed
+gText_BattleTrainers	BATTLE TRAINERS	TRAINERS	
 gText_GoOn	GO ON		
-gText_Record2	RECORD		
-gText_Rest	REST		
-gText_Retire	RETIRE		
-gText_99TimesPlus	99 times +		
-gText_1MinutePlus	1 minute +		
-gText_SpaceSeconds	 seconds		
-gText_SpaceTimes	 time(s)		
+gText_Record2	RECORD	RECORD	
+gText_Rest	REST	RUST	
+gText_Retire	RETIRE	STOPPEN	label-ok: reviewed
+gText_99TimesPlus	99 times +	99 keer +	
+gText_1MinutePlus	1 minute +	1 minuut +	
+gText_SpaceSeconds	 seconds	 seconden	label-ok: reviewed
+gText_SpaceTimes	 time(s)	 keer	
 gText_Dot	.		
-gText_BigGuy	Big guy		
-gText_BigGirl	Big girl		
-gText_Son	son		
-gText_Daughter	daughter		
+gText_BigGuy	Big guy	Grote jongen	label-ok: reviewed
+gText_BigGirl	Big girl	Grote meid	label-ok: reviewed
+gText_Son	son	zoon	label-ok: reviewed
+gText_Daughter	daughter	dochter	
 gText_BlueFlute	BLUE FLUTE	BLAUWE FLUIT	width-ok: list menu sizes itself
 gText_YellowFlute	YELLOW FLUTE	GELE FLUIT	width-ok: list menu sizes itself
 gText_RedFlute	RED FLUTE	RODE FLUIT	width-ok: list menu sizes itself
 gText_WhiteFlute	WHITE FLUTE	WITTE FLUIT	width-ok: list menu sizes itself
 gText_BlackFlute	BLACK FLUTE	ZWARTE FLUIT	width-ok: list menu sizes itself
-gText_PrettyChair	PRETTY CHAIR		
-gText_PrettyDesk	PRETTY DESK		
+gText_PrettyChair	PRETTY CHAIR	MOOIE STOEL	
+gText_PrettyDesk	PRETTY DESK	MOOI BUREAU	
 gText_1F	1F		
 gText_2F	2F		
 gText_3F	3F		
@@ -791,20 +791,20 @@ gText_B1F	B1F
 gText_B2F	B2F		
 gText_B3F	B3F		
 gText_B4F	B4F		
-gText_Rooftop	ROOFTOP		
-gText_ElevatorNowOn	Now on:		
+gText_Rooftop	ROOFTOP	DAK	
+gText_ElevatorNowOn	Now on:	Nu op:	
 gText_BP	BP		
-gText_EnergyPowder50	ENERGYPOWDER{CLEAR_TO 114}{FONT_SMALL}50		
-gText_EnergyRoot80	ENERGY ROOT{CLEAR_TO 114}{FONT_SMALL}80		
-gText_HealPowder50	HEAL POWDER{CLEAR_TO 114}{FONT_SMALL}50		
-gText_RevivalHerb300	REVIVAL HERB{CLEAR_TO 108}{FONT_SMALL}300		
-gText_Protein1000	PROTEIN{CLEAR_TO 99}{FONT_SMALL}1,000		
-gText_Iron1000	IRON{CLEAR_TO 99}{FONT_SMALL}1,000		
-gText_Carbos1000	CARBOS{CLEAR_TO 99}{FONT_SMALL}1,000		
-gText_Calcium1000	CALCIUM{CLEAR_TO 99}{FONT_SMALL}1,000		
-gText_Zinc1000	ZINC{CLEAR_TO 99}{FONT_SMALL}1,000		
-gText_HPUp1000	HP UP{CLEAR_TO 99}{FONT_SMALL}1,000		
-gText_PPUp3000	PP UP{CLEAR_TO 99}{FONT_SMALL}3,000		
+gText_EnergyPowder50	ENERGYPOWDER{CLEAR_TO 114}{FONT_SMALL}50	KRACHTPOEDER{CLEAR_TO 114}{FONT_SMALL}50	
+gText_EnergyRoot80	ENERGY ROOT{CLEAR_TO 114}{FONT_SMALL}80	KRACHTWORTEL{CLEAR_TO 114}{FONT_SMALL}80	label-ok: reviewed
+gText_HealPowder50	HEAL POWDER{CLEAR_TO 114}{FONT_SMALL}50	GENEESPOEDER{CLEAR_TO 114}{FONT_SMALL}50	label-ok: reviewed
+gText_RevivalHerb300	REVIVAL HERB{CLEAR_TO 108}{FONT_SMALL}300	LEVENSKRUID{CLEAR_TO 108}{FONT_SMALL}300	
+gText_Protein1000	PROTEIN{CLEAR_TO 99}{FONT_SMALL}1,000	PROTEÏNE{CLEAR_TO 99}{FONT_SMALL}1.000	label-ok: reviewed
+gText_Iron1000	IRON{CLEAR_TO 99}{FONT_SMALL}1,000	IJZER{CLEAR_TO 99}{FONT_SMALL}1.000	label-ok: reviewed
+gText_Carbos1000	CARBOS{CLEAR_TO 99}{FONT_SMALL}1,000	CARBOS{CLEAR_TO 99}{FONT_SMALL}1.000	
+gText_Calcium1000	CALCIUM{CLEAR_TO 99}{FONT_SMALL}1,000	CALCIUM{CLEAR_TO 99}{FONT_SMALL}1.000	
+gText_Zinc1000	ZINC{CLEAR_TO 99}{FONT_SMALL}1,000	ZINK{CLEAR_TO 99}{FONT_SMALL}1.000	
+gText_HPUp1000	HP UP{CLEAR_TO 99}{FONT_SMALL}1,000	HP UP{CLEAR_TO 99}{FONT_SMALL}1.000	
+gText_PPUp3000	PP UP{CLEAR_TO 99}{FONT_SMALL}3,000	PP UP{CLEAR_TO 99}{FONT_SMALL}3.000	
 gText_RankingHall	RANKING HALL		
 gText_ExchangeService	EXCHANGE SERVICE		
 gText_LilycoveCity	LILYCOVE CITY		
@@ -812,111 +812,111 @@ gText_SlateportCity	SLATEPORT CITY
 gText_CaveOfOrigin	CAVE OF ORIGIN		
 gText_MtPyre	MT. PYRE		
 gText_SkyPillar	SKY PILLAR		
-gText_DontRemember	Don't remember		
-gText_Exit	EXIT		
-gText_ExitFromBox	Exit from the BOX?		
-gText_WhatDoYouWantToDo	What do you want to do?		
-gText_PleasePickATheme	Please pick a theme.		
-gText_PickTheWallpaper	Pick the wallpaper.		
-gText_PkmnIsSelected	{DYNAMIC 0} is selected.		
-gText_JumpToWhichBox	Jump to which BOX?		
-gText_DepositInWhichBox	Deposit in which BOX?		
-gText_PkmnWasDeposited	{DYNAMIC 0} was deposited.		
-gText_BoxIsFull2	The BOX is full.		
-gText_ReleaseThisPokemon	Release this POKéMON?		
-gText_PkmnWasReleased	{DYNAMIC 0} was released.		
-gText_ByeByePkmn	Bye-bye, {DYNAMIC 0}!		
-gText_MarkYourPkmn	Mark your POKéMON.		
-gText_ThatsYourLastPkmn	That's your last POKéMON!		
-gText_YourPartysFull	Your party's full!		
-gText_YoureHoldingAPkmn	You're holding a POKéMON!		
-gText_WhichOneWillYouTake	Which one will you take?		
-gText_YouCantReleaseAnEgg	You can't release an EGG.		
-gText_ContinueBoxOperations	Continue BOX operations?		
-gText_PkmnCameBack	{DYNAMIC 0} came back!		
-gText_WasItWorriedAboutYou	Was it worried about you?		
-gText_FourEllipsesExclamation	… … … … !		
-gText_PleaseRemoveTheMail	Please remove the MAIL.		
-gText_GiveToAPkmn	GIVE to a POKéMON?		
-gText_PlacedItemInBag	Placed item in the BAG.		
-gText_BagIsFull2	The BAG is full.		
-gText_PutItemInBag	Put this item in the BAG?		
-gText_ItemIsNowHeld	{DYNAMIC 0} is now held.		
-gText_ChangedToNewItem	Changed to {DYNAMIC 0}.		
-gText_MailCantBeStored	MAIL can't be stored!		
-gPCText_Cancel	CANCEL		
-gPCText_Store	STORE		
-gPCText_Withdraw	WITHDRAW		
-gPCText_Shift	SHIFT		
-gPCText_Move	MOVE		
-gPCText_Place	PLACE		
-gPCText_Summary	SUMMARY		
-gPCText_Release	RELEASE		
-gPCText_Mark	MARK		
-gPCText_Name	NAME		
-gPCText_Jump	JUMP		
-gPCText_Wallpaper	WALLPAPER		
-gPCText_Take	TAKE		
-gPCText_Give	GIVE		
-gPCText_Switch	SWITCH		
-gPCText_Bag	BAG		
-gPCText_Info	INFO		
-gPCText_Scenery1	SCENERY 1		
-gPCText_Scenery2	SCENERY 2		
-gPCText_Scenery3	SCENERY 3		
-gPCText_Etcetera	ETCETERA		
-gPCText_Friends	FRIENDS		
-gPCText_Forest	FOREST		
-gPCText_City	CITY		
-gPCText_Desert	DESERT		
-gPCText_Savanna	SAVANNA		
-gPCText_Crag	CRAG		
-gPCText_Volcano	VOLCANO		
-gPCText_Snow	SNOW		
-gPCText_Cave	CAVE		
-gPCText_Beach	BEACH		
-gPCText_Seafloor	SEAFLOOR		
-gPCText_River	RIVER		
-gPCText_Sky	SKY		
-gPCText_PolkaDot	POLKA-DOT		
+gText_DontRemember	Don't remember	Weet ik niet meer	label-ok: reviewed
+gText_Exit	EXIT	SLUIT	label-ok: reviewed
+gText_ExitFromBox	Exit from the BOX?	De BOX sluiten?	max:144 box message, 1 line
+gText_WhatDoYouWantToDo	What do you want to do?	Wat wil je doen?	max:144 box message, 1 line
+gText_PleasePickATheme	Please pick a theme.	Kies een thema.	max:144 box message, 1 line
+gText_PickTheWallpaper	Pick the wallpaper.	Kies de achtergrond.	max:144 box message, 1 line; label-ok: reviewed
+gText_PkmnIsSelected	{DYNAMIC 0} is selected.	{DYNAMIC 0} gekozen.	max:144 box message, 1 line
+gText_JumpToWhichBox	Jump to which BOX?	Naar welke BOX?	max:144 box message, 1 line
+gText_DepositInWhichBox	Deposit in which BOX?	In welke BOX?	max:144 box message, 1 line
+gText_PkmnWasDeposited	{DYNAMIC 0} was deposited.	{DYNAMIC 0} opgeborgen.	max:144 box message, 1 line
+gText_BoxIsFull2	The BOX is full.	De BOX is vol.	max:144 box message, 1 line
+gText_ReleaseThisPokemon	Release this POKéMON?	Deze POKéMON vrijlaten?	max:144 box message, 1 line; label-ok: reviewed
+gText_PkmnWasReleased	{DYNAMIC 0} was released.	{DYNAMIC 0} is vrij.	max:144 box message, 1 line
+gText_ByeByePkmn	Bye-bye, {DYNAMIC 0}!	Doei, {DYNAMIC 0}!	max:144 box message, 1 line
+gText_MarkYourPkmn	Mark your POKéMON.	Markeer je POKéMON.	max:144 box message, 1 line; label-ok: reviewed
+gText_ThatsYourLastPkmn	That's your last POKéMON!	Dat is je laatste POKéMON!	max:144 box message, 1 line
+gText_YourPartysFull	Your party's full!	Je team is vol!	max:144 box message, 1 line
+gText_YoureHoldingAPkmn	You're holding a POKéMON!	Je hebt al een POKéMON!	max:144 box message, 1 line
+gText_WhichOneWillYouTake	Which one will you take?	Welke neem je?	max:144 box message, 1 line
+gText_YouCantReleaseAnEgg	You can't release an EGG.	Je kunt geen EI vrijlaten.	max:144 box message, 1 line; label-ok: reviewed
+gText_ContinueBoxOperations	Continue BOX operations?	Verder met de BOX?	max:144 box message, 1 line
+gText_PkmnCameBack	{DYNAMIC 0} came back!	{DYNAMIC 0} komt terug!	max:144 box message, 1 line; label-ok: reviewed
+gText_WasItWorriedAboutYou	Was it worried about you?	Was hij bezorgd om je?	max:144 box message, 1 line
+gText_FourEllipsesExclamation	… … … … !		max:144 box message, 1 line
+gText_PleaseRemoveTheMail	Please remove the MAIL.	Haal eerst de BRIEF weg.	max:144 box message, 1 line; label-ok: reviewed
+gText_GiveToAPkmn	GIVE to a POKéMON?	Aan een POKéMON GEVEN?	max:144 box message, 1 line; label-ok: reviewed
+gText_PlacedItemInBag	Placed item in the BAG.	Voorwerp in de TAS gedaan.	max:144 box message, 1 line; label-ok: reviewed
+gText_BagIsFull2	The BAG is full.	De TAS is vol.	max:144 box message, 1 line
+gText_PutItemInBag	Put this item in the BAG?	Dit voorwerp in de TAS?	max:144 box message, 1 line
+gText_ItemIsNowHeld	{DYNAMIC 0} is now held.	Houdt {DYNAMIC 0} vast.	max:144 box message, 1 line; label-ok: reviewed
+gText_ChangedToNewItem	Changed to {DYNAMIC 0}.	Geruild: {DYNAMIC 0}.	max:144 box message, 1 line
+gText_MailCantBeStored	MAIL can't be stored!	Een BRIEF kan hier niet in!	max:144 box message, 1 line; label-ok: reviewed
+gPCText_Cancel	CANCEL	TERUG	
+gPCText_Store	STORE	OPBERGEN	label-ok: reviewed
+gPCText_Withdraw	WITHDRAW	PAKKEN	
+gPCText_Shift	SHIFT	WISSEL	label-ok: reviewed
+gPCText_Move	MOVE	VERPLAATS	label-ok: reviewed
+gPCText_Place	PLACE	NEERZETTEN	label-ok: reviewed
+gPCText_Summary	SUMMARY	INFO	
+gPCText_Release	RELEASE	VRIJLATEN	label-ok: reviewed
+gPCText_Mark	MARK	MARKEER	label-ok: reviewed
+gPCText_Name	NAME	NAAM	
+gPCText_Jump	JUMP	SPRING	label-ok: reviewed
+gPCText_Wallpaper	WALLPAPER	ACHTERGROND	label-ok: reviewed
+gPCText_Take	TAKE	PAK	
+gPCText_Give	GIVE	GEEF	
+gPCText_Switch	SWITCH	RUIL	
+gPCText_Bag	BAG	TAS	
+gPCText_Info	INFO	INFO	
+gPCText_Scenery1	SCENERY 1	LANDSCHAP 1	label-ok: reviewed
+gPCText_Scenery2	SCENERY 2	LANDSCHAP 2	label-ok: reviewed
+gPCText_Scenery3	SCENERY 3	LANDSCHAP 3	label-ok: reviewed
+gPCText_Etcetera	ETCETERA	ENZOVOORT	label-ok: reviewed
+gPCText_Friends	FRIENDS	VRIENDEN	label-ok: reviewed
+gPCText_Forest	FOREST	BOS	
+gPCText_City	CITY	STAD	
+gPCText_Desert	DESERT	WOESTIJN	label-ok: reviewed
+gPCText_Savanna	SAVANNA	SAVANNE	
+gPCText_Crag	CRAG	ROTSEN	label-ok: reviewed
+gPCText_Volcano	VOLCANO	VULKAAN	
+gPCText_Snow	SNOW	SNEEUW	label-ok: reviewed
+gPCText_Cave	CAVE	GROT	
+gPCText_Beach	BEACH	STRAND	label-ok: reviewed
+gPCText_Seafloor	SEAFLOOR	ZEEBODEM	
+gPCText_River	RIVER	RIVIER	label-ok: reviewed
+gPCText_Sky	SKY	LUCHT	label-ok: reviewed
+gPCText_PolkaDot	POLKA-DOT	STIPPEN	
 gPCText_Pokecenter	POKéCENTER		
-gPCText_Machine	MACHINE		
-gPCText_Simple	SIMPLE		
-gText_WhatWouldYouLikeToDo	What would you like to do?		
-gText_WithdrawPokemon	WITHDRAW POKéMON		
-gText_DepositPokemon	DEPOSIT POKéMON		
-gText_MovePokemon	MOVE POKéMON		
-gText_MoveItems	MOVE ITEMS		
-gText_SeeYa	SEE YA!		
-gText_WithdrawMonDescription	Move POKéMON stored in BOXES to\nyour party.		
-gText_DepositMonDescription	Store POKéMON in your party in BOXES.		
-gText_MoveMonDescription	Organize the POKéMON in BOXES and\nin your party.		
-gText_MoveItemsDescription	Move items held by any POKéMON\nin a BOX or your party.		
-gText_SeeYaDescription	Return to the previous menu.		
-gText_JustOnePkmn	There is just one POKéMON with you.		
-gText_PartyFull	Your party is full!		
+gPCText_Machine	MACHINE	MACHINE	
+gPCText_Simple	SIMPLE	SIMPEL	
+gText_WhatWouldYouLikeToDo	What would you like to do?	Wat wil je doen?	
+gText_WithdrawPokemon	WITHDRAW POKéMON	POKéMON PAKKEN	
+gText_DepositPokemon	DEPOSIT POKéMON	POKéMON OPBERGEN	label-ok: reviewed
+gText_MovePokemon	MOVE POKéMON	POKéMON VERPLAATSEN	label-ok: reviewed
+gText_MoveItems	MOVE ITEMS	VOORWERPEN VERPLAATSEN	label-ok: reviewed
+gText_SeeYa	SEE YA!	DOEI!	
+gText_WithdrawMonDescription	Move POKéMON stored in BOXES to\nyour party.	Haal POKéMON uit de BOXEN naar\nje team.	
+gText_DepositMonDescription	Store POKéMON in your party in BOXES.	Berg POKéMON uit je team op in BOXEN.	
+gText_MoveMonDescription	Organize the POKéMON in BOXES and\nin your party.	Zet de POKéMON in BOXEN en in je\nteam op een andere plek.	
+gText_MoveItemsDescription	Move items held by any POKéMON\nin a BOX or your party.	Verplaats voorwerpen van POKéMON\nin een BOX of in je team.	
+gText_SeeYaDescription	Return to the previous menu.	Terug naar het vorige menu.	
+gText_JustOnePkmn	There is just one POKéMON with you.	Je hebt maar één POKéMON bij je.	
+gText_PartyFull	Your party is full!	Je team is vol!	
 gText_Box	BOX		
-gText_CheckMapOfHoenn	Check the map of the HOENN region.		
-gText_CheckPokemonInDetail	Check POKéMON in detail.		
-gText_CallRegisteredTrainer	Call a registered TRAINER.		
-gText_CheckObtainedRibbons	Check obtained RIBBONS.		
-gText_PutAwayPokenav	Put away the POKéNAV.		
-gText_NoRibbonWinners	There are no RIBBON winners.		
-gText_NoTrainersRegistered	No TRAINERS are registered.		
-gText_CheckPartyPokemonInDetail	Check party POKéMON in detail.		
-gText_CheckAllPokemonInDetail	Check all POKéMON in detail.		
-gText_ReturnToPokenavMenu	Return to the POKéNAV menu.		
-gText_FindCoolPokemon	Find cool POKéMON.		
-gText_FindBeautifulPokemon	Find beautiful POKéMON.		
-gText_FindCutePokemon	Find cute POKéMON.		
-gText_FindSmartPokemon	Find smart POKéMON.		
-gText_FindToughPokemon	Find tough POKéMON.		
-gText_ReturnToConditionMenu	Return to the CONDITION menu.		
-gText_NumberRegistered	No. registered		
-gText_NumberOfBattles	No. of battles		
-gText_Detail	DETAIL		
-gText_Call2	CALL		
-gText_UnusedExit	EXIT		
+gText_CheckMapOfHoenn	Check the map of the HOENN region.	Bekijk de kaart van HOENN.	
+gText_CheckPokemonInDetail	Check POKéMON in detail.	Bekijk POKéMON van dichtbij.	label-ok: reviewed
+gText_CallRegisteredTrainer	Call a registered TRAINER.	Bel een TRAINER uit je lijst.	
+gText_CheckObtainedRibbons	Check obtained RIBBONS.	Bekijk je LINTEN.	
+gText_PutAwayPokenav	Put away the POKéNAV.	Berg de POKéNAV op.	
+gText_NoRibbonWinners	There are no RIBBON winners.	Er zijn geen LINT-winnaars.	
+gText_NoTrainersRegistered	No TRAINERS are registered.	Er staan geen TRAINERS in je lijst.	
+gText_CheckPartyPokemonInDetail	Check party POKéMON in detail.	Bekijk je team van dichtbij.	
+gText_CheckAllPokemonInDetail	Check all POKéMON in detail.	Bekijk alle POKéMON van dichtbij.	
+gText_ReturnToPokenavMenu	Return to the POKéNAV menu.	Terug naar het POKéNAV-menu.	
+gText_FindCoolPokemon	Find cool POKéMON.	Zoek stoere POKéMON.	label-ok: reviewed
+gText_FindBeautifulPokemon	Find beautiful POKéMON.	Zoek mooie POKéMON.	
+gText_FindCutePokemon	Find cute POKéMON.	Zoek schattige POKéMON.	label-ok: reviewed
+gText_FindSmartPokemon	Find smart POKéMON.	Zoek slimme POKéMON.	label-ok: reviewed
+gText_FindToughPokemon	Find tough POKéMON.	Zoek sterke POKéMON.	label-ok: reviewed
+gText_ReturnToConditionMenu	Return to the CONDITION menu.	Terug naar het CONDITIE-menu.	
+gText_NumberRegistered	No. registered	Nr. in lijst	
+gText_NumberOfBattles	No. of battles	Gevechten	
+gText_Detail	DETAIL	DETAIL	
+gText_Call2	CALL	BEL	
+gText_UnusedExit	EXIT	SLUIT	label-ok: reviewed
 gText_CantCallOpponentHere	Can't call opponent here.		
 gText_PokenavMatchCall_Strategy	STRATEGY		
 gText_PokenavMatchCall_TrainerPokemon	TRAINER'S POKéMON		
