@@ -258,36 +258,36 @@ ITEM_BLUE_SCARF	BLUE SCARF	BLAUWE SJAAL
 ITEM_PINK_SCARF	PINK SCARF	ROZE SJAAL	
 ITEM_GREEN_SCARF	GREEN SCARF	GROENE SJAAL	
 ITEM_YELLOW_SCARF	YELLOW SCARF	GELE SJAAL	
-ITEM_MACH_BIKE	MACH BIKE		
-ITEM_COIN_CASE	COIN CASE		
-ITEM_ITEMFINDER	ITEMFINDER		
-ITEM_OLD_ROD	OLD ROD		
-ITEM_GOOD_ROD	GOOD ROD		
-ITEM_SUPER_ROD	SUPER ROD		
-ITEM_SS_TICKET	S.S. TICKET		
-ITEM_CONTEST_PASS	CONTEST PASS		
+ITEM_MACH_BIKE	MACH BIKE	RACEFIETS	
+ITEM_COIN_CASE	COIN CASE	MUNTENDOOS	
+ITEM_ITEMFINDER	ITEMFINDER	SCHATZOEKER	
+ITEM_OLD_ROD	OLD ROD	OUDE HENGEL	
+ITEM_GOOD_ROD	GOOD ROD	GOEDE HENGEL	
+ITEM_SUPER_ROD	SUPER ROD	SUPERHENGEL	
+ITEM_SS_TICKET	S.S. TICKET	S.S. KAARTJE	
+ITEM_CONTEST_PASS	CONTEST PASS	WEDSTRIJDPAS	
 ITEM_10B	????????		
-ITEM_WAILMER_PAIL	WAILMER PAIL		
-ITEM_DEVON_GOODS	DEVON GOODS		
-ITEM_SOOT_SACK	SOOT SACK		
-ITEM_BASEMENT_KEY	BASEMENT KEY		
-ITEM_ACRO_BIKE	ACRO BIKE		
-ITEM_POKEBLOCK_CASE	{POKEBLOCK} CASE		
-ITEM_LETTER	LETTER		
-ITEM_EON_TICKET	EON TICKET		
-ITEM_RED_ORB	RED ORB		
-ITEM_BLUE_ORB	BLUE ORB		
-ITEM_SCANNER	SCANNER		
-ITEM_GO_GOGGLES	GO-GOGGLES		
-ITEM_METEORITE	METEORITE		
-ITEM_ROOM_1_KEY	RM. 1 KEY		
-ITEM_ROOM_2_KEY	RM. 2 KEY		
-ITEM_ROOM_4_KEY	RM. 4 KEY		
-ITEM_ROOM_6_KEY	RM. 6 KEY		
-ITEM_STORAGE_KEY	STORAGE KEY		
-ITEM_ROOT_FOSSIL	ROOT FOSSIL		
-ITEM_CLAW_FOSSIL	CLAW FOSSIL		
-ITEM_DEVON_SCOPE	DEVON SCOPE		
+ITEM_WAILMER_PAIL	WAILMER PAIL	WAILMERKAN	
+ITEM_DEVON_GOODS	DEVON GOODS	DEVONPAKKET	
+ITEM_SOOT_SACK	SOOT SACK	ASZAK	
+ITEM_BASEMENT_KEY	BASEMENT KEY	KELDERSLEUTEL	
+ITEM_ACRO_BIKE	ACRO BIKE	STUNTFIETS	
+ITEM_POKEBLOCK_CASE	{POKEBLOCK} CASE	{POKEBLOCK} DOOS	
+ITEM_LETTER	LETTER	BRIEF	
+ITEM_EON_TICKET	EON TICKET	EON-KAARTJE	
+ITEM_RED_ORB	RED ORB	RODE BOL	
+ITEM_BLUE_ORB	BLUE ORB	BLAUWE BOL	
+ITEM_SCANNER	SCANNER	SCANNER	
+ITEM_GO_GOGGLES	GO-GOGGLES	ZANDBRIL	
+ITEM_METEORITE	METEORITE	METEORIET	
+ITEM_ROOM_1_KEY	RM. 1 KEY	SLEUTEL 1	
+ITEM_ROOM_2_KEY	RM. 2 KEY	SLEUTEL 2	
+ITEM_ROOM_4_KEY	RM. 4 KEY	SLEUTEL 4	
+ITEM_ROOM_6_KEY	RM. 6 KEY	SLEUTEL 6	
+ITEM_STORAGE_KEY	STORAGE KEY	OPSLAGSLEUTEL	
+ITEM_ROOT_FOSSIL	ROOT FOSSIL	WORTELFOSSIEL	
+ITEM_CLAW_FOSSIL	CLAW FOSSIL	KLAUWFOSSIEL	
+ITEM_DEVON_SCOPE	DEVON SCOPE	DEVONKIJKER	
 ITEM_TM_FOCUS_PUNCH	TM01		
 ITEM_TM_DRAGON_CLAW	TM02		
 ITEM_TM_WATER_PULSE	TM03		
@@ -348,34 +348,34 @@ ITEM_HM_WATERFALL	HM07
 ITEM_HM_DIVE	HM08		
 ITEM_15B	????????		
 ITEM_15C	????????		
-ITEM_OAKS_PARCEL	OAK'S PARCEL		
-ITEM_POKE_FLUTE	POKé FLUTE		
-ITEM_SECRET_KEY	SECRET KEY		
-ITEM_BIKE_VOUCHER	BIKE VOUCHER		
-ITEM_GOLD_TEETH	GOLD TEETH		
-ITEM_OLD_AMBER	OLD AMBER		
-ITEM_CARD_KEY	CARD KEY		
-ITEM_LIFT_KEY	LIFT KEY		
-ITEM_HELIX_FOSSIL	HELIX FOSSIL		
-ITEM_DOME_FOSSIL	DOME FOSSIL		
-ITEM_SILPH_SCOPE	SILPH SCOPE		
-ITEM_BICYCLE	BICYCLE		
-ITEM_TOWN_MAP	TOWN MAP		
-ITEM_VS_SEEKER	VS SEEKER		
-ITEM_FAME_CHECKER	FAME CHECKER		
-ITEM_TM_CASE	TM CASE		
-ITEM_BERRY_POUCH	BERRY POUCH		
-ITEM_TEACHY_TV	TEACHY TV		
-ITEM_TRI_PASS	TRI-PASS		
-ITEM_RAINBOW_PASS	RAINBOW PASS		
-ITEM_TEA	TEA		
-ITEM_MYSTIC_TICKET	MYSTICTICKET		
-ITEM_AURORA_TICKET	AURORATICKET		
-ITEM_POWDER_JAR	POWDER JAR		
-ITEM_RUBY	RUBY		
-ITEM_SAPPHIRE	SAPPHIRE		
-ITEM_MAGMA_EMBLEM	MAGMA EMBLEM		
-ITEM_OLD_SEA_MAP	OLD SEA MAP		
+ITEM_OAKS_PARCEL	OAK'S PARCEL	OAKS PAKKET	
+ITEM_POKE_FLUTE	POKé FLUTE	POKéFLUIT	
+ITEM_SECRET_KEY	SECRET KEY	GEHEIMSLEUTEL	
+ITEM_BIKE_VOUCHER	BIKE VOUCHER	FIETSBON	
+ITEM_GOLD_TEETH	GOLD TEETH	GOUDGEBIT	
+ITEM_OLD_AMBER	OLD AMBER	OUD AMBER	
+ITEM_CARD_KEY	CARD KEY	SLEUTELPAS	
+ITEM_LIFT_KEY	LIFT KEY	LIFTSLEUTEL	
+ITEM_HELIX_FOSSIL	HELIX FOSSIL	HELIXFOSSIEL	
+ITEM_DOME_FOSSIL	DOME FOSSIL	DOMEFOSSIEL	
+ITEM_SILPH_SCOPE	SILPH SCOPE	SILPHKIJKER	
+ITEM_BICYCLE	BICYCLE	FIETS	
+ITEM_TOWN_MAP	TOWN MAP	KAART	
+ITEM_VS_SEEKER	VS SEEKER	VS ZOEKER	
+ITEM_FAME_CHECKER	FAME CHECKER	STERRENBOEK	
+ITEM_TM_CASE	TM CASE	TM-DOOS	
+ITEM_BERRY_POUCH	BERRY POUCH	BESSENZAK	
+ITEM_TEACHY_TV	TEACHY TV	LEER-TV	
+ITEM_TRI_PASS	TRI-PASS	TRI-PAS	
+ITEM_RAINBOW_PASS	RAINBOW PASS	REGENBOOGPAS	
+ITEM_TEA	TEA	THEE	
+ITEM_MYSTIC_TICKET	MYSTICTICKET	MYSTIEKKAART	
+ITEM_AURORA_TICKET	AURORATICKET	AURORAKAART	
+ITEM_POWDER_JAR	POWDER JAR	POEDERPOT	
+ITEM_RUBY	RUBY	ROBIJN	
+ITEM_SAPPHIRE	SAPPHIRE	SAFFIER	
+ITEM_MAGMA_EMBLEM	MAGMA EMBLEM	MAGMAEMBLEEM	
+ITEM_OLD_SEA_MAP	OLD SEA MAP	ZEEKAART	
 sDummyDesc	?????		
 sMasterBallDesc	The best BALL that\ncatches a POKéMON\nwithout fail.	De beste BALL.\nVangt elke POKéMON\nzonder te missen.	
 sUltraBallDesc	A better BALL with\na higher catch rate\nthan a GREAT BALL.	Een betere BALL.\nVangt beter dan\neen SUPERBALL.	
@@ -571,118 +571,118 @@ sBlueScarfDesc	A hold item that\nraises BEAUTY in\nCONTESTS.	Om vast te houden.\
 sPinkScarfDesc	A hold item that\nraises CUTE in\nCONTESTS.	Om vast te houden.\nHelpt bij SCHATTIG\nin WEDSTRIJDEN.	
 sGreenScarfDesc	A hold item that\nraises SMART in\nCONTESTS.	Om vast te houden.\nHelpt bij SLIM in\nWEDSTRIJDEN.	
 sYellowScarfDesc	A hold item that\nraises TOUGH in\nCONTESTS.	Om vast te houden.\nHelpt bij STERK in\nWEDSTRIJDEN.	
-sMachBikeDesc	A folding bicycle\nthat doubles your\nspeed or better.		
-sCoinCaseDesc	A case that holds\nup to 9,999 COINS.		
-sItemfinderDesc	A device that\nsignals an invisible\nitem by sound.		
-sOldRodDesc	Use by any body of\nwater to fish for\nwild POKéMON.		
-sGoodRodDesc	A decent fishing\nrod for catching\nwild POKéMON.		
-sSuperRodDesc	The best fishing\nrod for catching\nwild POKéMON.		
-sSSTicketDesc	The ticket required\nfor sailing on a\nferry.		
-sContestPassDesc	The pass required\nfor entering\nPOKéMON CONTESTS.		
-sWailmerPailDesc	A tool used for\nwatering BERRIES\nand plants.		
-sDevonGoodsDesc	A package that\ncontains DEVON's\nmachine parts.		
-sSootSackDesc	A sack used to\ngather and hold\nvolcanic ash.		
-sBasementKeyDesc	The key for NEW\nMAUVILLE beneath\nMAUVILLE CITY.		
-sAcroBikeDesc	A folding bicycle\ncapable of jumps\nand wheelies.		
-sPokeblockCaseDesc	A case for holding\n{POKEBLOCK}S made with\na BERRY BLENDER.		
-sLetterDesc	A letter to STEVEN\nfrom the PRESIDENT\nof the DEVON CORP.		
-sEonTicketDesc	The ticket for a\nferry to a distant\nsouthern island.		
-sRedOrbDesc	A red, glowing orb\nsaid to contain an\nancient power.		
-sBlueOrbDesc	A blue, glowing orb\nsaid to contain an\nancient power.		
-sScannerDesc	A device found\ninside the\nABANDONED SHIP.		
-sGoGogglesDesc	Nifty goggles that\nprotect eyes from\ndesert sandstorms.		
-sMeteoriteDesc	A meteorite found\nat METEOR FALLS.		
-sRoom1KeyDesc	A key that opens a\ndoor inside the\nABANDONED SHIP.		
-sRoom2KeyDesc	A key that opens a\ndoor inside the\nABANDONED SHIP.		
-sRoom4KeyDesc	A key that opens a\ndoor inside the\nABANDONED SHIP.		
-sRoom6KeyDesc	A key that opens a\ndoor inside the\nABANDONED SHIP.		
-sStorageKeyDesc	The key to the\nstorage inside the\nABANDONED SHIP.		
-sRootFossilDesc	A fossil of an\nancient, seafloor-\ndwelling POKéMON.		
-sClawFossilDesc	A fossil of an\nancient, seafloor-\ndwelling POKéMON.		
-sDevonScopeDesc	A device by DEVON\nthat signals any\nunseeable POKéMON.		
-sTM01Desc	Powerful, but makes\nthe user flinch if\nhit by the foe.		
-sTM02Desc	Hooks and slashes\nthe foe with long,\nsharp claws.		
-sTM03Desc	Generates an\nultrasonic wave\nthat may confuse.		
-sTM04Desc	Raises SP. ATK and\nSP. DEF by focusing\nthe mind.		
-sTM05Desc	A savage roar that\nmakes the foe flee \nto end the battle.		
-sTM06Desc	Poisons the foe\nwith a toxin that\ngradually worsens.		
-sTM07Desc	Creates a hailstorm\nthat damages all\ntypes except ICE.		
-sTM08Desc	Bulks up the body\nto boost both\nATTACK & DEFENSE.		
-sTM09Desc	Shoots 2 to 5 seeds\nin a row to strike\nthe foe.		
-sTM10Desc	The attack power\nvaries among\ndifferent POKéMON.		
-sTM11Desc	Raises the power of\nFIRE-type moves\nfor 5 turns.		
-sTM12Desc	Enrages the foe so\nit can only use\nattack moves.		
-sTM13Desc	Fires an icy cold\nbeam that may\nfreeze the foe.		
-sTM14Desc	A brutal snow-and-\nwind attack that\nmay freeze the foe.		
-sTM15Desc	Powerful, but needs\nrecharging the\nnext turn.		
-sTM16Desc	Creates a wall of\nlight that lowers\nSP. ATK damage.		
-sTM17Desc	Negates all damage,\nbut may fail if used\nin succession.		
-sTM18Desc	Raises the power of\nWATER-type moves\nfor 5 turns.		
-sTM19Desc	Recovers half the\nHP of the damage \nthis move inflicts.		
-sTM20Desc	Prevents status\nabnormality with a\nmystical power.		
-sTM21Desc	The less the user\nlikes you, the more\npowerful this move.		
-sTM22Desc	Absorbs sunlight in\nthe 1st turn, then\nattacks next turn.		
-sTM23Desc	Slams the foe with\na hard tail. It may\nlower DEFENSE.		
-sTM24Desc	A powerful electric\nattack that may\ncause paralysis.		
-sTM25Desc	Strikes the foe\nwith a thunderbolt.\nIt may paralyze.		
-sTM26Desc	Causes a quake\nthat has no effect\non flying foes.		
-sTM27Desc	The more the user\nlikes you, the more\npowerful this move.		
-sTM28Desc	Digs underground\nthe 1st turn, then\nstrikes next turn.		
-sTM29Desc	A powerful psychic\nattack that may\nlower SP. DEF.		
-sTM30Desc	Hurls a dark lump\nat the foe. It may\nlower SP. DEF.		
-sTM31Desc	Destroys barriers\nlike LIGHT SCREEN\nand causes damage.		
-sTM32Desc	Creates illusory\ncopies to enhance\nelusiveness.		
-sTM33Desc	Creates a wall of\nlight that weakens\nphysical attacks.		
-sTM34Desc	Zaps the foe with a\njolt of electricity\nthat never misses.		
-sTM35Desc	Looses a stream of\nfire that may burn\nthe foe.		
-sTM36Desc	Hurls sludge at the\nfoe. It may poison\nthe foe.		
-sTM37Desc	Causes a sandstorm\nthat hits the foe\nover several turns.		
-sTM38Desc	A powerful fire\nattack that may\nburn the foe.		
-sTM39Desc	Stops the foe from\nmoving with rocks.\nMay lower SPEED.		
-sTM40Desc	An extremely fast\nattack that can't\nbe avoided.		
-sTM41Desc	Prevents the foe\nfrom using the same\nmove in a row.		
-sTM42Desc	Raises ATTACK when\npoisoned, burned,\nor paralyzed.		
-sTM43Desc	Adds an effect to\nattack depending\non the location.		
-sTM44Desc	The user sleeps for\n2 turns to restore\nhealth and status.		
-sTM45Desc	Makes it tough to\nattack a foe of the\nopposite gender.		
-sTM46Desc	While attacking,\nit may steal the\nfoe's held item.		
-sTM47Desc	Spreads hard-\nedged wings and\nslams into the foe.		
-sTM48Desc	Switches abilities\nwith the foe on the\nturn this is used.		
-sTM49Desc	Steals the effects\nof the move the foe\nis trying to use.		
-sTM50Desc	Enables full-power\nattack, but sharply\nlowers SP. ATK.		
-sHM01Desc	Attacks the foe\nwith sharp blades\nor claws.		
-sHM02Desc	Flies up on the\nfirst turn, then\nattacks next turn.		
-sHM03Desc	Creates a huge\nwave, then crashes\nit down on the foe.		
-sHM04Desc	Builds enormous\npower, then slams\nthe foe.		
-sHM05Desc	Looses a powerful\nblast of light that\nreduces accuracy.		
-sHM06Desc	A rock-crushingly\ntough attack that\nmay lower DEFENSE.		
-sHM07Desc	Attacks the foe\nwith enough power\nto climb waterfalls.		
-sHM08Desc	Dives underwater\nthe 1st turn, then\nattacks next turn.		
-sOaksParcelDesc	A parcel for PROF.\nOAK from a POKéMON\nMART's clerk.		
-sPokeFluteDesc	A sweet-sounding\nflute that awakens\nPOKéMON.		
-sSecretKeyDesc	The key to the\nCINNABAR ISLAND\nGYM's entrance.		
-sBikeVoucherDesc	A voucher for\nobtaining a bicycle\nfrom the BIKE SHOP.		
-sGoldTeethDesc	Gold dentures lost\nby the SAFARI\nZONE's WARDEN.		
-sOldAmberDesc	A stone containing\nthe genes of an\nancient POKéMON.		
-sCardKeyDesc	A card-type door\nkey used in SILPH\nCO's office.		
-sLiftKeyDesc	An elevator key\nused in TEAM\nROCKET's HIDEOUT.		
-sHelixFossilDesc	A piece of an\nancient marine\nPOKéMON's seashell.		
-sDomeFossilDesc	A piece of an\nancient marine\nPOKéMON's shell.		
-sSilphScopeDesc	SILPH CO's scope\nmakes unseeable\nPOKéMON visible.		
-sBicycleDesc	A folding bicycle\nthat is faster than\nthe RUNNING SHOES.		
-sTownMapDesc	Can be viewed\nanytime. Shows your\npresent location.		
-sVSSeekerDesc	A rechargeable unit\nthat flags battle-\nready TRAINERS.		
-sFameCheckerDesc	Stores information\non famous people\nfor instant recall.		
-sTMCaseDesc	A convenient case \nthat holds TMs and\nHMs.		
-sBerryPouchDesc	A convenient\ncontainer that\nholds BERRIES.		
-sTeachyTVDesc	A TV set tuned to\nan advice program\nfor TRAINERS.		
-sTriPassDesc	A pass for ferries\nbetween ONE, TWO,\nand THREE ISLAND.		
-sRainbowPassDesc	For ferries serving\nVERMILION and the\nSEVII ISLANDS.		
-sTeaDesc	A thirst-quenching\ntea prepared by an\nold lady.		
-sMysticTicketDesc	A ticket required\nto board the ship\nto NAVEL ROCK.		
-sAuroraTicketDesc	A ticket required\nto board the ship\nto BIRTH ISLAND.		
-sPowderJarDesc	Stores BERRY\nPOWDER made using\na BERRY CRUSHER.		
-sRubyDesc	An exquisite, red-\nglowing gem that\nsymbolizes passion.		
-sSapphireDesc	A brilliant blue gem\nthat symbolizes\nhonesty.		
-sMagmaEmblemDesc	A medal-like item in\nthe same shape as\nTEAM MAGMA's mark.		
-sOldSeaMapDesc	A faded sea chart\nthat shows the way\nto a certain island.		
+sMachBikeDesc	A folding bicycle\nthat doubles your\nspeed or better.	Een vouwfiets.\nMinstens 2x zo\nsnel als lopen.	
+sCoinCaseDesc	A case that holds\nup to 9,999 COINS.	Een doosje voor\nmax. 9.999 MUNTEN.	
+sItemfinderDesc	A device that\nsignals an invisible\nitem by sound.	Piept als er een\nverstopt voorwerp\nin de buurt is.	
+sOldRodDesc	Use by any body of\nwater to fish for\nwild POKéMON.	Vis bij water naar\nwilde POKéMON.	
+sGoodRodDesc	A decent fishing\nrod for catching\nwild POKéMON.	Een goede hengel\nom wilde POKéMON\nte vangen.	
+sSuperRodDesc	The best fishing\nrod for catching\nwild POKéMON.	De beste hengel\nom wilde POKéMON\nte vangen.	
+sSSTicketDesc	The ticket required\nfor sailing on a\nferry.	Het kaartje voor\neen boottocht.	
+sContestPassDesc	The pass required\nfor entering\nPOKéMON CONTESTS.	De pas om mee te\ndoen aan POKéMON-\nWEDSTRIJDEN.	
+sWailmerPailDesc	A tool used for\nwatering BERRIES\nand plants.	Een gieter om\nBESSEN en planten\nwater te geven.	
+sDevonGoodsDesc	A package that\ncontains DEVON's\nmachine parts.	Een pakket met\nonderdelen van\nDEVON.	
+sSootSackDesc	A sack used to\ngather and hold\nvolcanic ash.	Een zak om\nvulkaanas in te\ndoen.	
+sBasementKeyDesc	The key for NEW\nMAUVILLE beneath\nMAUVILLE CITY.	De sleutel van\nNEW MAUVILLE onder\nMAUVILLE CITY.	
+sAcroBikeDesc	A folding bicycle\ncapable of jumps\nand wheelies.	Een vouwfiets\nwaarmee je kunt\nspringen en stunten.	
+sPokeblockCaseDesc	A case for holding\n{POKEBLOCK}S made with\na BERRY BLENDER.	Een doos voor\n{POKEBLOCK}S uit de\nBESSENMIXER.	
+sLetterDesc	A letter to STEVEN\nfrom the PRESIDENT\nof the DEVON CORP.	Een brief voor\nSTEVEN van de\nbaas van DEVON.	
+sEonTicketDesc	The ticket for a\nferry to a distant\nsouthern island.	Kaartje voor een\nboot naar een ver,\nzuidelijk eiland.	
+sRedOrbDesc	A red, glowing orb\nsaid to contain an\nancient power.	Een rode,\ngloeiende bol met\neen oude kracht.	
+sBlueOrbDesc	A blue, glowing orb\nsaid to contain an\nancient power.	Een blauwe,\ngloeiende bol met\neen oude kracht.	
+sScannerDesc	A device found\ninside the\nABANDONED SHIP.	Een apparaat.\nGevonden in het\nABANDONED SHIP.	
+sGoGogglesDesc	Nifty goggles that\nprotect eyes from\ndesert sandstorms.	Een coole bril\ntegen zand in een\nzandstorm.	
+sMeteoriteDesc	A meteorite found\nat METEOR FALLS.	Een meteoriet uit\nMETEOR FALLS.	
+sRoom1KeyDesc	A key that opens a\ndoor inside the\nABANDONED SHIP.	Een sleutel voor\neen deur in het\nABANDONED SHIP.	
+sRoom2KeyDesc	A key that opens a\ndoor inside the\nABANDONED SHIP.	Een sleutel voor\neen deur in het\nABANDONED SHIP.	
+sRoom4KeyDesc	A key that opens a\ndoor inside the\nABANDONED SHIP.	Een sleutel voor\neen deur in het\nABANDONED SHIP.	
+sRoom6KeyDesc	A key that opens a\ndoor inside the\nABANDONED SHIP.	Een sleutel voor\neen deur in het\nABANDONED SHIP.	
+sStorageKeyDesc	The key to the\nstorage inside the\nABANDONED SHIP.	De sleutel van de\nopslag in het\nABANDONED SHIP.	
+sRootFossilDesc	A fossil of an\nancient, seafloor-\ndwelling POKéMON.	Een fossiel van een\noude POKéMON uit\nde zee.	
+sClawFossilDesc	A fossil of an\nancient, seafloor-\ndwelling POKéMON.	Een fossiel van een\noude POKéMON uit\nde zee.	
+sDevonScopeDesc	A device by DEVON\nthat signals any\nunseeable POKéMON.	Van DEVON. Ziet\nPOKéMON die je\nniet kunt zien.	
+sTM01Desc	Powerful, but makes\nthe user flinch if\nhit by the foe.	Heel sterk, maar\nmislukt als je\ngeraakt wordt.	
+sTM02Desc	Hooks and slashes\nthe foe with long,\nsharp claws.	Krabt de vijand\nmet lange, scherpe\nklauwen.	
+sTM03Desc	Generates an\nultrasonic wave\nthat may confuse.	Een golf van water.\nKan de vijand\nverwarren.	
+sTM04Desc	Raises SP. ATK and\nSP. DEF by focusing\nthe mind.	Verhoogt SP. AANV\nen SP. VERD door\nrustig te worden.	
+sTM05Desc	A savage roar that\nmakes the foe flee \nto end the battle.	Een harde brul\njaagt de vijand\nweg.	
+sTM06Desc	Poisons the foe\nwith a toxin that\ngradually worsens.	Vergiftigt de\nvijand. Het gif\nwordt steeds erger.	
+sTM07Desc	Creates a hailstorm\nthat damages all\ntypes except ICE.	Laat het hagelen.\nRaakt alles behalve\nIJS-POKéMON.	
+sTM08Desc	Bulks up the body\nto boost both\nATTACK & DEFENSE.	Spant de spieren.\nVerhoogt AANVAL\nen VERDEDIGING.	
+sTM09Desc	Shoots 2 to 5 seeds\nin a row to strike\nthe foe.	Schiet 2 tot 5\nzaadjes achter\nelkaar.	
+sTM10Desc	The attack power\nvaries among\ndifferent POKéMON.	De kracht is bij\nelke POKéMON\nanders.	
+sTM11Desc	Raises the power of\nFIRE-type moves\nfor 5 turns.	VUUR-aanvallen\nzijn 5 beurten\nsterker.	
+sTM12Desc	Enrages the foe so\nit can only use\nattack moves.	Maakt de vijand\nboos. Hij kan alleen\nnog aanvallen.	
+sTM13Desc	Fires an icy cold\nbeam that may\nfreeze the foe.	Een ijskoude\nstraal. Kan de\nvijand bevriezen.	
+sTM14Desc	A brutal snow-and-\nwind attack that\nmay freeze the foe.	Een storm van\nsneeuw en wind. Kan\nbevriezen.	
+sTM15Desc	Powerful, but needs\nrecharging the\nnext turn.	Heel sterk, maar\ndaarna moet je\n1 beurt rusten.	
+sTM16Desc	Creates a wall of\nlight that lowers\nSP. ATK damage.	Een muur van licht.\nMinder schade van\nSP. AANV.	
+sTM17Desc	Negates all damage,\nbut may fail if used\nin succession.	Houdt alle\naanvallen tegen.\nTwee keer kan falen.	
+sTM18Desc	Raises the power of\nWATER-type moves\nfor 5 turns.	WATER-aanvallen\nzijn 5 beurten\nsterker.	
+sTM19Desc	Recovers half the\nHP of the damage \nthis move inflicts.	Steelt HP: de\nhelft van de\nschade.	
+sTM20Desc	Prevents status\nabnormality with a\nmystical power.	Een magische\nkracht stopt alle\nkwaaltjes.	
+sTM21Desc	The less the user\nlikes you, the more\npowerful this move.	Hoe minder je\nPOKéMON van je\nhoudt, hoe sterker.	
+sTM22Desc	Absorbs sunlight in\nthe 1st turn, then\nattacks next turn.	Vangt zonlicht in\nbeurt 1. Valt aan\nin beurt 2.	
+sTM23Desc	Slams the foe with\na hard tail. It may\nlower DEFENSE.	Slaat met een harde\nstaart. Kan VERD.\nverlagen.	
+sTM24Desc	A powerful electric\nattack that may\ncause paralysis.	Een sterke\nstroomaanval.\nKan verlammen.	
+sTM25Desc	Strikes the foe\nwith a thunderbolt.\nIt may paralyze.	Raakt de vijand\nmet een bliksem.\nKan verlammen.	
+sTM26Desc	Causes a quake\nthat has no effect\non flying foes.	Een aardbeving.\nRaakt geen\nvliegende vijand.	
+sTM27Desc	The more the user\nlikes you, the more\npowerful this move.	Hoe meer je\nPOKéMON van je\nhoudt, hoe sterker.	
+sTM28Desc	Digs underground\nthe 1st turn, then\nstrikes next turn.	Graaft in beurt 1\nonder de grond.\nRaakt in beurt 2.	
+sTM29Desc	A powerful psychic\nattack that may\nlower SP. DEF.	Sterke psychische\naanval. Kan SP.\nVERD verlagen.	
+sTM30Desc	Hurls a dark lump\nat the foe. It may\nlower SP. DEF.	Gooit een zwarte\nbal. Kan SP. VERD\nverlagen.	
+sTM31Desc	Destroys barriers\nlike LIGHT SCREEN\nand causes damage.	Breekt muren zoals\nLICHTSCHERM en\ndoet schade.	
+sTM32Desc	Creates illusory\ncopies to enhance\nelusiveness.	Maakt nepkopieën.\nOntwijkt beter.	
+sTM33Desc	Creates a wall of\nlight that weakens\nphysical attacks.	Een muur van licht.\nMinder schade van\nklappen.	
+sTM34Desc	Zaps the foe with a\njolt of electricity\nthat never misses.	Een stroomschok\ndie nooit mist.	
+sTM35Desc	Looses a stream of\nfire that may burn\nthe foe.	Een straal vuur.\nKan de vijand\nverbranden.	
+sTM36Desc	Hurls sludge at the\nfoe. It may poison\nthe foe.	Gooit vies slijk.\nKan de vijand\nvergiftigen.	
+sTM37Desc	Causes a sandstorm\nthat hits the foe\nover several turns.	Een zandstorm die\nde vijand een paar\nbeurten raakt.	
+sTM38Desc	A powerful fire\nattack that may\nburn the foe.	Een sterke\nvuuraanval. Kan\nverbranden.	
+sTM39Desc	Stops the foe from\nmoving with rocks.\nMay lower SPEED.	Sluit de vijand in\nmet stenen. Kan\nSNELHEID verlagen.	
+sTM40Desc	An extremely fast\nattack that can't\nbe avoided.	Een supersnelle\naanval die nooit\nmist.	
+sTM41Desc	Prevents the foe\nfrom using the same\nmove in a row.	De vijand kan niet\n2x dezelfde aanval\ndoen.	
+sTM42Desc	Raises ATTACK when\npoisoned, burned,\nor paralyzed.	Meer AANVAL bij\ngif, brandwond of\nverlamming.	
+sTM43Desc	Adds an effect to\nattack depending\non the location.	Het effect hangt\naf van de plek.	
+sTM44Desc	The user sleeps for\n2 turns to restore\nhealth and status.	Slaapt 2 beurten.\nHerstelt HP en\nkwaaltjes.	
+sTM45Desc	Makes it tough to\nattack a foe of the\nopposite gender.	Maakt de vijand\nverliefd. Dan valt\nhij minder aan.	
+sTM46Desc	While attacking,\nit may steal the\nfoe's held item.	Steelt misschien\nhet voorwerp van\nde vijand.	
+sTM47Desc	Spreads hard-\nedged wings and\nslams into the foe.	Slaat de vijand\nmet harde\nvleugels.	
+sTM48Desc	Switches abilities\nwith the foe on the\nturn this is used.	Ruilt talenten\nmet de vijand.	
+sTM49Desc	Steals the effects\nof the move the foe\nis trying to use.	Steelt het effect\nvan de aanval van\nde vijand.	
+sTM50Desc	Enables full-power\nattack, but sharply\nlowers SP. ATK.	Volle kracht, maar\nSP. AANV zakt\nflink.	
+sHM01Desc	Attacks the foe\nwith sharp blades\nor claws.	Snijdt de vijand\nmet scherpe\nklauwen.	
+sHM02Desc	Flies up on the\nfirst turn, then\nattacks next turn.	Vliegt omhoog in\nbeurt 1 en valt\naan in beurt 2.	
+sHM03Desc	Creates a huge\nwave, then crashes\nit down on the foe.	Maakt een grote\ngolf die op de\nvijand valt.	
+sHM04Desc	Builds enormous\npower, then slams\nthe foe.	Bouwt veel kracht\nop en slaat dan\nde vijand.	
+sHM05Desc	Looses a powerful\nblast of light that\nreduces accuracy.	Een felle flits.\nVerlaagt de\nraakkans.	
+sHM06Desc	A rock-crushingly\ntough attack that\nmay lower DEFENSE.	Slaat stenen kapot.\nKan VERDEDIGING\nverlagen.	
+sHM07Desc	Attacks the foe\nwith enough power\nto climb waterfalls.	Zo sterk dat je\nwatervallen op\nkunt klimmen.	
+sHM08Desc	Dives underwater\nthe 1st turn, then\nattacks next turn.	Duikt in beurt 1\nonder water. Raakt\nin beurt 2.	
+sOaksParcelDesc	A parcel for PROF.\nOAK from a POKéMON\nMART's clerk.	Een pakketje voor\nPROF. OAK van de\nPOKéMON MART.	
+sPokeFluteDesc	A sweet-sounding\nflute that awakens\nPOKéMON.	Een mooie fluit.\nMaakt POKéMON\nwakker.	
+sSecretKeyDesc	The key to the\nCINNABAR ISLAND\nGYM's entrance.	De sleutel van de\nGYM op CINNABAR\nISLAND.	
+sBikeVoucherDesc	A voucher for\nobtaining a bicycle\nfrom the BIKE SHOP.	Een bon voor een\nfiets bij de\nBIKE SHOP.	
+sGoldTeethDesc	Gold dentures lost\nby the SAFARI\nZONE's WARDEN.	Het gouden gebit\nvan de WARDEN van\nde SAFARI ZONE.	
+sOldAmberDesc	A stone containing\nthe genes of an\nancient POKéMON.	Een steen met het\nDNA van een oude\nPOKéMON.	
+sCardKeyDesc	A card-type door\nkey used in SILPH\nCO's office.	Een sleutelpas\nvoor het kantoor\nvan SILPH CO.	
+sLiftKeyDesc	An elevator key\nused in TEAM\nROCKET's HIDEOUT.	Een liftsleutel\nvoor de schuilplek\nvan TEAM ROCKET.	
+sHelixFossilDesc	A piece of an\nancient marine\nPOKéMON's seashell.	Een stukje schelp\nvan een oude\nzee-POKéMON.	
+sDomeFossilDesc	A piece of an\nancient marine\nPOKéMON's shell.	Een stukje schild\nvan een oude\nzee-POKéMON.	
+sSilphScopeDesc	SILPH CO's scope\nmakes unseeable\nPOKéMON visible.	Van SILPH CO. Ziet\nPOKéMON die je\nniet kunt zien.	
+sBicycleDesc	A folding bicycle\nthat is faster than\nthe RUNNING SHOES.	Een vouwfiets.\nSneller dan\nhardloopschoenen.	
+sTownMapDesc	Can be viewed\nanytime. Shows your\npresent location.	Altijd te bekijken.\nToont waar je\nnu bent.	
+sVSSeekerDesc	A rechargeable unit\nthat flags battle-\nready TRAINERS.	Vindt TRAINERS\ndie weer willen\nvechten.	
+sFameCheckerDesc	Stores information\non famous people\nfor instant recall.	Bewaart alles over\nberoemde mensen.	
+sTMCaseDesc	A convenient case \nthat holds TMs and\nHMs.	Een handige doos\nvoor TM's en HM's.	
+sBerryPouchDesc	A convenient\ncontainer that\nholds BERRIES.	Een handige zak\nvoor BESSEN.	
+sTeachyTVDesc	A TV set tuned to\nan advice program\nfor TRAINERS.	Een tv met tips\nvoor TRAINERS.	
+sTriPassDesc	A pass for ferries\nbetween ONE, TWO,\nand THREE ISLAND.	Een pas voor de\nboot naar ONE, TWO\nen THREE ISLAND.	
+sRainbowPassDesc	For ferries serving\nVERMILION and the\nSEVII ISLANDS.	Voor boten naar\nVERMILION en de\nSEVII ISLANDS.	
+sTeaDesc	A thirst-quenching\ntea prepared by an\nold lady.	Lekkere thee van\neen oude dame.	
+sMysticTicketDesc	A ticket required\nto board the ship\nto NAVEL ROCK.	Kaartje voor de\nboot naar\nNAVEL ROCK.	
+sAuroraTicketDesc	A ticket required\nto board the ship\nto BIRTH ISLAND.	Kaartje voor de\nboot naar\nBIRTH ISLAND.	
+sPowderJarDesc	Stores BERRY\nPOWDER made using\na BERRY CRUSHER.	Bewaart BESSEN-\nPOEDER uit de\nBERRY CRUSHER.	
+sRubyDesc	An exquisite, red-\nglowing gem that\nsymbolizes passion.	Een prachtige rode\nedelsteen. Staat\nvoor passie.	
+sSapphireDesc	A brilliant blue gem\nthat symbolizes\nhonesty.	Een prachtige\nblauwe edelsteen\nvoor eerlijkheid.	
+sMagmaEmblemDesc	A medal-like item in\nthe same shape as\nTEAM MAGMA's mark.	Een soort medaille\nmet het teken van\nTEAM MAGMA.	
+sOldSeaMapDesc	A faded sea chart\nthat shows the way\nto a certain island.	Een oude zeekaart\nnaar een\nbepaald eiland.	

@@ -949,578 +949,567 @@ static const u8 sYellowScarfDesc[] = _(
 
 // Key items
 static const u8 sMachBikeDesc[] = _(
-    "A folding bicycle\n"
-    "that doubles your\n"
-    "speed or better.");
+    "Een vouwfiets.\n"
+    "Minstens 2x zo\n"
+    "snel als lopen.");
 
 static const u8 sCoinCaseDesc[] = _(
-    "A case that holds\n"
-    "up to 9,999 COINS.");
+    "Een doosje voor\n"
+    "max. 9.999 MUNTEN.");
 
 static const u8 sItemfinderDesc[] = _(
-    "A device that\n"
-    "signals an invisible\n"
-    "item by sound.");
+    "Piept als er een\n"
+    "verstopt voorwerp\n"
+    "in de buurt is.");
 
 static const u8 sOldRodDesc[] = _(
-    "Use by any body of\n"
-    "water to fish for\n"
-    "wild POKéMON.");
+    "Vis bij water naar\n"
+    "wilde POKéMON.");
 
 static const u8 sGoodRodDesc[] = _(
-    "A decent fishing\n"
-    "rod for catching\n"
-    "wild POKéMON.");
+    "Een goede hengel\n"
+    "om wilde POKéMON\n"
+    "te vangen.");
 
 static const u8 sSuperRodDesc[] = _(
-    "The best fishing\n"
-    "rod for catching\n"
-    "wild POKéMON.");
+    "De beste hengel\n"
+    "om wilde POKéMON\n"
+    "te vangen.");
 
 static const u8 sSSTicketDesc[] = _(
-    "The ticket required\n"
-    "for sailing on a\n"
-    "ferry.");
+    "Het kaartje voor\n"
+    "een boottocht.");
 
 static const u8 sContestPassDesc[] = _(
-    "The pass required\n"
-    "for entering\n"
-    "POKéMON CONTESTS.");
+    "De pas om mee te\n"
+    "doen aan POKéMON-\n"
+    "WEDSTRIJDEN.");
 
 static const u8 sWailmerPailDesc[] = _(
-    "A tool used for\n"
-    "watering BERRIES\n"
-    "and plants.");
+    "Een gieter om\n"
+    "BESSEN en planten\n"
+    "water te geven.");
 
 static const u8 sDevonGoodsDesc[] = _(
-    "A package that\n"
-    "contains DEVON's\n"
-    "machine parts.");
+    "Een pakket met\n"
+    "onderdelen van\n"
+    "DEVON.");
 
 static const u8 sSootSackDesc[] = _(
-    "A sack used to\n"
-    "gather and hold\n"
-    "volcanic ash.");
+    "Een zak om\n"
+    "vulkaanas in te\n"
+    "doen.");
 
 static const u8 sBasementKeyDesc[] = _(
-    "The key for NEW\n"
-    "MAUVILLE beneath\n"
+    "De sleutel van\n"
+    "NEW MAUVILLE onder\n"
     "MAUVILLE CITY.");
 
 static const u8 sAcroBikeDesc[] = _(
-    "A folding bicycle\n"
-    "capable of jumps\n"
-    "and wheelies.");
+    "Een vouwfiets\n"
+    "waarmee je kunt\n"
+    "springen en stunten.");
 
 static const u8 sPokeblockCaseDesc[] = _(
-    "A case for holding\n"
-    "{POKEBLOCK}S made with\n"
-    "a BERRY BLENDER.");
+    "Een doos voor\n"
+    "{POKEBLOCK}S uit de\n"
+    "BESSENMIXER.");
 
 static const u8 sLetterDesc[] = _(
-    "A letter to STEVEN\n"
-    "from the PRESIDENT\n"
-    "of the DEVON CORP.");
+    "Een brief voor\n"
+    "STEVEN van de\n"
+    "baas van DEVON.");
 
 static const u8 sEonTicketDesc[] = _(
-    "The ticket for a\n"
-    "ferry to a distant\n"
-    "southern island.");
+    "Kaartje voor een\n"
+    "boot naar een ver,\n"
+    "zuidelijk eiland.");
 
 static const u8 sRedOrbDesc[] = _(
-    "A red, glowing orb\n"
-    "said to contain an\n"
-    "ancient power.");
+    "Een rode,\n"
+    "gloeiende bol met\n"
+    "een oude kracht.");
 
 static const u8 sBlueOrbDesc[] = _(
-    "A blue, glowing orb\n"
-    "said to contain an\n"
-    "ancient power.");
+    "Een blauwe,\n"
+    "gloeiende bol met\n"
+    "een oude kracht.");
 
 static const u8 sScannerDesc[] = _(
-    "A device found\n"
-    "inside the\n"
+    "Een apparaat.\n"
+    "Gevonden in het\n"
     "ABANDONED SHIP.");
 
 static const u8 sGoGogglesDesc[] = _(
-    "Nifty goggles that\n"
-    "protect eyes from\n"
-    "desert sandstorms.");
+    "Een coole bril\n"
+    "tegen zand in een\n"
+    "zandstorm.");
 
 static const u8 sMeteoriteDesc[] = _(
-    "A meteorite found\n"
-    "at METEOR FALLS.");
+    "Een meteoriet uit\n"
+    "METEOR FALLS.");
 
 static const u8 sRoom1KeyDesc[] = _(
-    "A key that opens a\n"
-    "door inside the\n"
+    "Een sleutel voor\n"
+    "een deur in het\n"
     "ABANDONED SHIP.");
 
 static const u8 sRoom2KeyDesc[] = _(
-    "A key that opens a\n"
-    "door inside the\n"
+    "Een sleutel voor\n"
+    "een deur in het\n"
     "ABANDONED SHIP.");
 
 static const u8 sRoom4KeyDesc[] = _(
-    "A key that opens a\n"
-    "door inside the\n"
+    "Een sleutel voor\n"
+    "een deur in het\n"
     "ABANDONED SHIP.");
 
 static const u8 sRoom6KeyDesc[] = _(
-    "A key that opens a\n"
-    "door inside the\n"
+    "Een sleutel voor\n"
+    "een deur in het\n"
     "ABANDONED SHIP.");
 
 static const u8 sStorageKeyDesc[] = _(
-    "The key to the\n"
-    "storage inside the\n"
+    "De sleutel van de\n"
+    "opslag in het\n"
     "ABANDONED SHIP.");
 
 static const u8 sRootFossilDesc[] = _(
-    "A fossil of an\n"
-    "ancient, seafloor-\n"
-    "dwelling POKéMON.");
+    "Een fossiel van een\n"
+    "oude POKéMON uit\n"
+    "de zee.");
 
 static const u8 sClawFossilDesc[] = _(
-    "A fossil of an\n"
-    "ancient, seafloor-\n"
-    "dwelling POKéMON.");
+    "Een fossiel van een\n"
+    "oude POKéMON uit\n"
+    "de zee.");
 
 static const u8 sDevonScopeDesc[] = _(
-    "A device by DEVON\n"
-    "that signals any\n"
-    "unseeable POKéMON.");
+    "Van DEVON. Ziet\n"
+    "POKéMON die je\n"
+    "niet kunt zien.");
 
 // TMs/HMs
 static const u8 sTM01Desc[] = _(
-    "Powerful, but makes\n"
-    "the user flinch if\n"
-    "hit by the foe.");
+    "Heel sterk, maar\n"
+    "mislukt als je\n"
+    "geraakt wordt.");
 
 static const u8 sTM02Desc[] = _(
-    "Hooks and slashes\n"
-    "the foe with long,\n"
-    "sharp claws.");
+    "Krabt de vijand\n"
+    "met lange, scherpe\n"
+    "klauwen.");
 
 static const u8 sTM03Desc[] = _(
-    "Generates an\n"
-    "ultrasonic wave\n"
-    "that may confuse.");
+    "Een golf van water.\n"
+    "Kan de vijand\n"
+    "verwarren.");
 
 static const u8 sTM04Desc[] = _(
-    "Raises SP. ATK and\n"
-    "SP. DEF by focusing\n"
-    "the mind.");
+    "Verhoogt SP. AANV\n"
+    "en SP. VERD door\n"
+    "rustig te worden.");
 
 static const u8 sTM05Desc[] = _(
-    "A savage roar that\n"
-    "makes the foe flee \n"
-    "to end the battle.");
+    "Een harde brul\n"
+    "jaagt de vijand\n"
+    "weg.");
 
 static const u8 sTM06Desc[] = _(
-    "Poisons the foe\n"
-    "with a toxin that\n"
-    "gradually worsens.");
+    "Vergiftigt de\n"
+    "vijand. Het gif\n"
+    "wordt steeds erger.");
 
 static const u8 sTM07Desc[] = _(
-    "Creates a hailstorm\n"
-    "that damages all\n"
-    "types except ICE.");
+    "Laat het hagelen.\n"
+    "Raakt alles behalve\n"
+    "IJS-POKéMON.");
 
 static const u8 sTM08Desc[] = _(
-    "Bulks up the body\n"
-    "to boost both\n"
-    "ATTACK & DEFENSE.");
+    "Spant de spieren.\n"
+    "Verhoogt AANVAL\n"
+    "en VERDEDIGING.");
 
 static const u8 sTM09Desc[] = _(
-    "Shoots 2 to 5 seeds\n"
-    "in a row to strike\n"
-    "the foe.");
+    "Schiet 2 tot 5\n"
+    "zaadjes achter\n"
+    "elkaar.");
 
 static const u8 sTM10Desc[] = _(
-    "The attack power\n"
-    "varies among\n"
-    "different POKéMON.");
+    "De kracht is bij\n"
+    "elke POKéMON\n"
+    "anders.");
 
 static const u8 sTM11Desc[] = _(
-    "Raises the power of\n"
-    "FIRE-type moves\n"
-    "for 5 turns.");
+    "VUUR-aanvallen\n"
+    "zijn 5 beurten\n"
+    "sterker.");
 
 static const u8 sTM12Desc[] = _(
-    "Enrages the foe so\n"
-    "it can only use\n"
-    "attack moves.");
+    "Maakt de vijand\n"
+    "boos. Hij kan alleen\n"
+    "nog aanvallen.");
 
 static const u8 sTM13Desc[] = _(
-    "Fires an icy cold\n"
-    "beam that may\n"
-    "freeze the foe.");
+    "Een ijskoude\n"
+    "straal. Kan de\n"
+    "vijand bevriezen.");
 
 static const u8 sTM14Desc[] = _(
-    "A brutal snow-and-\n"
-    "wind attack that\n"
-    "may freeze the foe.");
+    "Een storm van\n"
+    "sneeuw en wind. Kan\n"
+    "bevriezen.");
 
 static const u8 sTM15Desc[] = _(
-    "Powerful, but needs\n"
-    "recharging the\n"
-    "next turn.");
+    "Heel sterk, maar\n"
+    "daarna moet je\n"
+    "1 beurt rusten.");
 
 static const u8 sTM16Desc[] = _(
-    "Creates a wall of\n"
-    "light that lowers\n"
-    "SP. ATK damage.");
+    "Een muur van licht.\n"
+    "Minder schade van\n"
+    "SP. AANV.");
 
 static const u8 sTM17Desc[] = _(
-    "Negates all damage,\n"
-    "but may fail if used\n"
-    "in succession.");
+    "Houdt alle\n"
+    "aanvallen tegen.\n"
+    "Twee keer kan falen.");
 
 static const u8 sTM18Desc[] = _(
-    "Raises the power of\n"
-    "WATER-type moves\n"
-    "for 5 turns.");
+    "WATER-aanvallen\n"
+    "zijn 5 beurten\n"
+    "sterker.");
 
 static const u8 sTM19Desc[] = _(
-    "Recovers half the\n"
-    "HP of the damage \n"
-    "this move inflicts.");
+    "Steelt HP: de\n"
+    "helft van de\n"
+    "schade.");
 
 static const u8 sTM20Desc[] = _(
-    "Prevents status\n"
-    "abnormality with a\n"
-    "mystical power.");
+    "Een magische\n"
+    "kracht stopt alle\n"
+    "kwaaltjes.");
 
 static const u8 sTM21Desc[] = _(
-    "The less the user\n"
-    "likes you, the more\n"
-    "powerful this move.");
+    "Hoe minder je\n"
+    "POKéMON van je\n"
+    "houdt, hoe sterker.");
 
 static const u8 sTM22Desc[] = _(
-    "Absorbs sunlight in\n"
-    "the 1st turn, then\n"
-    "attacks next turn.");
+    "Vangt zonlicht in\n"
+    "beurt 1. Valt aan\n"
+    "in beurt 2.");
 
 static const u8 sTM23Desc[] = _(
-    "Slams the foe with\n"
-    "a hard tail. It may\n"
-    "lower DEFENSE.");
+    "Slaat met een harde\n"
+    "staart. Kan VERD.\n"
+    "verlagen.");
 
 static const u8 sTM24Desc[] = _(
-    "A powerful electric\n"
-    "attack that may\n"
-    "cause paralysis.");
+    "Een sterke\n"
+    "stroomaanval.\n"
+    "Kan verlammen.");
 
 static const u8 sTM25Desc[] = _(
-    "Strikes the foe\n"
-    "with a thunderbolt.\n"
-    "It may paralyze.");
+    "Raakt de vijand\n"
+    "met een bliksem.\n"
+    "Kan verlammen.");
 
 static const u8 sTM26Desc[] = _(
-    "Causes a quake\n"
-    "that has no effect\n"
-    "on flying foes.");
+    "Een aardbeving.\n"
+    "Raakt geen\n"
+    "vliegende vijand.");
 
 static const u8 sTM27Desc[] = _(
-    "The more the user\n"
-    "likes you, the more\n"
-    "powerful this move.");
+    "Hoe meer je\n"
+    "POKéMON van je\n"
+    "houdt, hoe sterker.");
 
 static const u8 sTM28Desc[] = _(
-    "Digs underground\n"
-    "the 1st turn, then\n"
-    "strikes next turn.");
+    "Graaft in beurt 1\n"
+    "onder de grond.\n"
+    "Raakt in beurt 2.");
 
 static const u8 sTM29Desc[] = _(
-    "A powerful psychic\n"
-    "attack that may\n"
-    "lower SP. DEF.");
+    "Sterke psychische\n"
+    "aanval. Kan SP.\n"
+    "VERD verlagen.");
 
 static const u8 sTM30Desc[] = _(
-    "Hurls a dark lump\n"
-    "at the foe. It may\n"
-    "lower SP. DEF.");
+    "Gooit een zwarte\n"
+    "bal. Kan SP. VERD\n"
+    "verlagen.");
 
 static const u8 sTM31Desc[] = _(
-    "Destroys barriers\n"
-    "like LIGHT SCREEN\n"
-    "and causes damage.");
+    "Breekt muren zoals\n"
+    "LICHTSCHERM en\n"
+    "doet schade.");
 
 static const u8 sTM32Desc[] = _(
-    "Creates illusory\n"
-    "copies to enhance\n"
-    "elusiveness.");
+    "Maakt nepkopieën.\n"
+    "Ontwijkt beter.");
 
 static const u8 sTM33Desc[] = _(
-    "Creates a wall of\n"
-    "light that weakens\n"
-    "physical attacks.");
+    "Een muur van licht.\n"
+    "Minder schade van\n"
+    "klappen.");
 
 static const u8 sTM34Desc[] = _(
-    "Zaps the foe with a\n"
-    "jolt of electricity\n"
-    "that never misses.");
+    "Een stroomschok\n"
+    "die nooit mist.");
 
 static const u8 sTM35Desc[] = _(
-    "Looses a stream of\n"
-    "fire that may burn\n"
-    "the foe.");
+    "Een straal vuur.\n"
+    "Kan de vijand\n"
+    "verbranden.");
 
 static const u8 sTM36Desc[] = _(
-    "Hurls sludge at the\n"
-    "foe. It may poison\n"
-    "the foe.");
+    "Gooit vies slijk.\n"
+    "Kan de vijand\n"
+    "vergiftigen.");
 
 static const u8 sTM37Desc[] = _(
-    "Causes a sandstorm\n"
-    "that hits the foe\n"
-    "over several turns.");
+    "Een zandstorm die\n"
+    "de vijand een paar\n"
+    "beurten raakt.");
 
 static const u8 sTM38Desc[] = _(
-    "A powerful fire\n"
-    "attack that may\n"
-    "burn the foe.");
+    "Een sterke\n"
+    "vuuraanval. Kan\n"
+    "verbranden.");
 
 static const u8 sTM39Desc[] = _(
-    "Stops the foe from\n"
-    "moving with rocks.\n"
-    "May lower SPEED.");
+    "Sluit de vijand in\n"
+    "met stenen. Kan\n"
+    "SNELHEID verlagen.");
 
 static const u8 sTM40Desc[] = _(
-    "An extremely fast\n"
-    "attack that can't\n"
-    "be avoided.");
+    "Een supersnelle\n"
+    "aanval die nooit\n"
+    "mist.");
 
 static const u8 sTM41Desc[] = _(
-    "Prevents the foe\n"
-    "from using the same\n"
-    "move in a row.");
+    "De vijand kan niet\n"
+    "2x dezelfde aanval\n"
+    "doen.");
 
 static const u8 sTM42Desc[] = _(
-    "Raises ATTACK when\n"
-    "poisoned, burned,\n"
-    "or paralyzed.");
+    "Meer AANVAL bij\n"
+    "gif, brandwond of\n"
+    "verlamming.");
 
 static const u8 sTM43Desc[] = _(
-    "Adds an effect to\n"
-    "attack depending\n"
-    "on the location.");
+    "Het effect hangt\n"
+    "af van de plek.");
 
 static const u8 sTM44Desc[] = _(
-    "The user sleeps for\n"
-    "2 turns to restore\n"
-    "health and status.");
+    "Slaapt 2 beurten.\n"
+    "Herstelt HP en\n"
+    "kwaaltjes.");
 
 static const u8 sTM45Desc[] = _(
-    "Makes it tough to\n"
-    "attack a foe of the\n"
-    "opposite gender.");
+    "Maakt de vijand\n"
+    "verliefd. Dan valt\n"
+    "hij minder aan.");
 
 static const u8 sTM46Desc[] = _(
-    "While attacking,\n"
-    "it may steal the\n"
-    "foe's held item.");
+    "Steelt misschien\n"
+    "het voorwerp van\n"
+    "de vijand.");
 
 static const u8 sTM47Desc[] = _(
-    "Spreads hard-\n"
-    "edged wings and\n"
-    "slams into the foe.");
+    "Slaat de vijand\n"
+    "met harde\n"
+    "vleugels.");
 
 static const u8 sTM48Desc[] = _(
-    "Switches abilities\n"
-    "with the foe on the\n"
-    "turn this is used.");
+    "Ruilt talenten\n"
+    "met de vijand.");
 
 static const u8 sTM49Desc[] = _(
-    "Steals the effects\n"
-    "of the move the foe\n"
-    "is trying to use.");
+    "Steelt het effect\n"
+    "van de aanval van\n"
+    "de vijand.");
 
 static const u8 sTM50Desc[] = _(
-    "Enables full-power\n"
-    "attack, but sharply\n"
-    "lowers SP. ATK.");
+    "Volle kracht, maar\n"
+    "SP. AANV zakt\n"
+    "flink.");
 
 
 static const u8 sHM01Desc[] = _(
-    "Attacks the foe\n"
-    "with sharp blades\n"
-    "or claws.");
+    "Snijdt de vijand\n"
+    "met scherpe\n"
+    "klauwen.");
 
 static const u8 sHM02Desc[] = _(
-    "Flies up on the\n"
-    "first turn, then\n"
-    "attacks next turn.");
+    "Vliegt omhoog in\n"
+    "beurt 1 en valt\n"
+    "aan in beurt 2.");
 
 static const u8 sHM03Desc[] = _(
-    "Creates a huge\n"
-    "wave, then crashes\n"
-    "it down on the foe.");
+    "Maakt een grote\n"
+    "golf die op de\n"
+    "vijand valt.");
 
 static const u8 sHM04Desc[] = _(
-    "Builds enormous\n"
-    "power, then slams\n"
-    "the foe.");
+    "Bouwt veel kracht\n"
+    "op en slaat dan\n"
+    "de vijand.");
 
 static const u8 sHM05Desc[] = _(
-    "Looses a powerful\n"
-    "blast of light that\n"
-    "reduces accuracy.");
+    "Een felle flits.\n"
+    "Verlaagt de\n"
+    "raakkans.");
 
 static const u8 sHM06Desc[] = _(
-    "A rock-crushingly\n"
-    "tough attack that\n"
-    "may lower DEFENSE.");
+    "Slaat stenen kapot.\n"
+    "Kan VERDEDIGING\n"
+    "verlagen.");
 
 static const u8 sHM07Desc[] = _(
-    "Attacks the foe\n"
-    "with enough power\n"
-    "to climb waterfalls.");
+    "Zo sterk dat je\n"
+    "watervallen op\n"
+    "kunt klimmen.");
 
 static const u8 sHM08Desc[] = _(
-    "Dives underwater\n"
-    "the 1st turn, then\n"
-    "attacks next turn.");
+    "Duikt in beurt 1\n"
+    "onder water. Raakt\n"
+    "in beurt 2.");
 
 // FireRed/LeafGreen key items
 static const u8 sOaksParcelDesc[] = _(
-    "A parcel for PROF.\n"
-    "OAK from a POKéMON\n"
-    "MART's clerk.");
+    "Een pakketje voor\n"
+    "PROF. OAK van de\n"
+    "POKéMON MART.");
 
 static const u8 sPokeFluteDesc[] = _(
-    "A sweet-sounding\n"
-    "flute that awakens\n"
-    "POKéMON.");
+    "Een mooie fluit.\n"
+    "Maakt POKéMON\n"
+    "wakker.");
 
 static const u8 sSecretKeyDesc[] = _(
-    "The key to the\n"
-    "CINNABAR ISLAND\n"
-    "GYM's entrance.");
+    "De sleutel van de\n"
+    "GYM op CINNABAR\n"
+    "ISLAND.");
 
 static const u8 sBikeVoucherDesc[] = _(
-    "A voucher for\n"
-    "obtaining a bicycle\n"
-    "from the BIKE SHOP.");
+    "Een bon voor een\n"
+    "fiets bij de\n"
+    "BIKE SHOP.");
 
 static const u8 sGoldTeethDesc[] = _(
-    "Gold dentures lost\n"
-    "by the SAFARI\n"
-    "ZONE's WARDEN.");
+    "Het gouden gebit\n"
+    "van de WARDEN van\n"
+    "de SAFARI ZONE.");
 
 static const u8 sOldAmberDesc[] = _(
-    "A stone containing\n"
-    "the genes of an\n"
-    "ancient POKéMON.");
+    "Een steen met het\n"
+    "DNA van een oude\n"
+    "POKéMON.");
 
 static const u8 sCardKeyDesc[] = _(
-    "A card-type door\n"
-    "key used in SILPH\n"
-    "CO's office.");
+    "Een sleutelpas\n"
+    "voor het kantoor\n"
+    "van SILPH CO.");
 
 static const u8 sLiftKeyDesc[] = _(
-    "An elevator key\n"
-    "used in TEAM\n"
-    "ROCKET's HIDEOUT.");
+    "Een liftsleutel\n"
+    "voor de schuilplek\n"
+    "van TEAM ROCKET.");
 
 static const u8 sHelixFossilDesc[] = _(
-    "A piece of an\n"
-    "ancient marine\n"
-    "POKéMON's seashell.");
+    "Een stukje schelp\n"
+    "van een oude\n"
+    "zee-POKéMON.");
 
 static const u8 sDomeFossilDesc[] = _(
-    "A piece of an\n"
-    "ancient marine\n"
-    "POKéMON's shell.");
+    "Een stukje schild\n"
+    "van een oude\n"
+    "zee-POKéMON.");
 
 static const u8 sSilphScopeDesc[] = _(
-    "SILPH CO's scope\n"
-    "makes unseeable\n"
-    "POKéMON visible.");
+    "Van SILPH CO. Ziet\n"
+    "POKéMON die je\n"
+    "niet kunt zien.");
 
 static const u8 sBicycleDesc[] = _(
-    "A folding bicycle\n"
-    "that is faster than\n"
-    "the RUNNING SHOES.");
+    "Een vouwfiets.\n"
+    "Sneller dan\n"
+    "hardloopschoenen.");
 
 static const u8 sTownMapDesc[] = _(
-    "Can be viewed\n"
-    "anytime. Shows your\n"
-    "present location.");
+    "Altijd te bekijken.\n"
+    "Toont waar je\n"
+    "nu bent.");
 
 static const u8 sVSSeekerDesc[] = _(
-    "A rechargeable unit\n"
-    "that flags battle-\n"
-    "ready TRAINERS.");
+    "Vindt TRAINERS\n"
+    "die weer willen\n"
+    "vechten.");
 
 static const u8 sFameCheckerDesc[] = _(
-    "Stores information\n"
-    "on famous people\n"
-    "for instant recall.");
+    "Bewaart alles over\n"
+    "beroemde mensen.");
 
 static const u8 sTMCaseDesc[] = _(
-    "A convenient case \n"
-    "that holds TMs and\n"
-    "HMs.");
+    "Een handige doos\n"
+    "voor TM's en HM's.");
 
 static const u8 sBerryPouchDesc[] = _(
-    "A convenient\n"
-    "container that\n"
-    "holds BERRIES.");
+    "Een handige zak\n"
+    "voor BESSEN.");
 
 static const u8 sTeachyTVDesc[] = _(
-    "A TV set tuned to\n"
-    "an advice program\n"
-    "for TRAINERS.");
+    "Een tv met tips\n"
+    "voor TRAINERS.");
 
 static const u8 sTriPassDesc[] = _(
-    "A pass for ferries\n"
-    "between ONE, TWO,\n"
-    "and THREE ISLAND.");
+    "Een pas voor de\n"
+    "boot naar ONE, TWO\n"
+    "en THREE ISLAND.");
 
 static const u8 sRainbowPassDesc[] = _(
-    "For ferries serving\n"
-    "VERMILION and the\n"
+    "Voor boten naar\n"
+    "VERMILION en de\n"
     "SEVII ISLANDS.");
 
 static const u8 sTeaDesc[] = _(
-    "A thirst-quenching\n"
-    "tea prepared by an\n"
-    "old lady.");
+    "Lekkere thee van\n"
+    "een oude dame.");
 
 static const u8 sMysticTicketDesc[] = _(
-    "A ticket required\n"
-    "to board the ship\n"
-    "to NAVEL ROCK.");
+    "Kaartje voor de\n"
+    "boot naar\n"
+    "NAVEL ROCK.");
 
 static const u8 sAuroraTicketDesc[] = _(
-    "A ticket required\n"
-    "to board the ship\n"
-    "to BIRTH ISLAND.");
+    "Kaartje voor de\n"
+    "boot naar\n"
+    "BIRTH ISLAND.");
 
 static const u8 sPowderJarDesc[] = _(
-    "Stores BERRY\n"
-    "POWDER made using\n"
-    "a BERRY CRUSHER.");
+    "Bewaart BESSEN-\n"
+    "POEDER uit de\n"
+    "BERRY CRUSHER.");
 
 static const u8 sRubyDesc[] = _(
-    "An exquisite, red-\n"
-    "glowing gem that\n"
-    "symbolizes passion.");
+    "Een prachtige rode\n"
+    "edelsteen. Staat\n"
+    "voor passie.");
 
 static const u8 sSapphireDesc[] = _(
-    "A brilliant blue gem\n"
-    "that symbolizes\n"
-    "honesty.");
+    "Een prachtige\n"
+    "blauwe edelsteen\n"
+    "voor eerlijkheid.");
 
 // Emerald-specific key items
 static const u8 sMagmaEmblemDesc[] = _(
-    "A medal-like item in\n"
-    "the same shape as\n"
-    "TEAM MAGMA's mark.");
+    "Een soort medaille\n"
+    "met het teken van\n"
+    "TEAM MAGMA.");
 
 static const u8 sOldSeaMapDesc[] = _(
-    "A faded sea chart\n"
-    "that shows the way\n"
-    "to a certain island.");
+    "Een oude zeekaart\n"
+    "naar een\n"
+    "bepaald eiland.");
