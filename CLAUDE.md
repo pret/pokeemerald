@@ -21,7 +21,7 @@ The player is a **Dutch kid (about 8–10 years old)**. Every Dutch string must 
 | Stays English | Gets translated |
 |---|---|
 | Pokémon names (CHARIZARD), character names (BIRCH), POKéMON, POKé BALL, TM/HM, berry names (CHERI) | All dialogue and menus |
-| Town and route names (LITTLEROOT): **undecided**, ask before translating | Move names + descriptions |
+| Town, route and place names (LITTLEROOT, ROUTE 101, ABANDONED SHIP): easy to look up online, and the Dutch anime keeps them English too | Move names + descriptions |
 | | Ability names + descriptions |
 | | Item names + descriptions |
 | | Berry descriptions, firmness, the word BERRY → BES / BESSEN |
