@@ -1,0 +1,688 @@
+key	english	dutch	notes
+ITEM_NONE	????????		
+ITEM_MASTER_BALL	MASTER BALL		
+ITEM_ULTRA_BALL	ULTRA BALL		
+ITEM_GREAT_BALL	GREAT BALL		
+ITEM_POKE_BALL	POKé BALL		
+ITEM_SAFARI_BALL	SAFARI BALL		
+ITEM_NET_BALL	NET BALL		
+ITEM_DIVE_BALL	DIVE BALL		
+ITEM_NEST_BALL	NEST BALL		
+ITEM_REPEAT_BALL	REPEAT BALL		
+ITEM_TIMER_BALL	TIMER BALL		
+ITEM_LUXURY_BALL	LUXURY BALL		
+ITEM_PREMIER_BALL	PREMIER BALL		
+ITEM_POTION	POTION		
+ITEM_ANTIDOTE	ANTIDOTE		
+ITEM_BURN_HEAL	BURN HEAL		
+ITEM_ICE_HEAL	ICE HEAL		
+ITEM_AWAKENING	AWAKENING		
+ITEM_PARALYZE_HEAL	PARLYZ HEAL		
+ITEM_FULL_RESTORE	FULL RESTORE		
+ITEM_MAX_POTION	MAX POTION		
+ITEM_HYPER_POTION	HYPER POTION		
+ITEM_SUPER_POTION	SUPER POTION		
+ITEM_FULL_HEAL	FULL HEAL		
+ITEM_REVIVE	REVIVE		
+ITEM_MAX_REVIVE	MAX REVIVE		
+ITEM_FRESH_WATER	FRESH WATER		
+ITEM_SODA_POP	SODA POP		
+ITEM_LEMONADE	LEMONADE		
+ITEM_MOOMOO_MILK	MOOMOO MILK		
+ITEM_ENERGY_POWDER	ENERGYPOWDER		
+ITEM_ENERGY_ROOT	ENERGY ROOT		
+ITEM_HEAL_POWDER	HEAL POWDER		
+ITEM_REVIVAL_HERB	REVIVAL HERB		
+ITEM_ETHER	ETHER		
+ITEM_MAX_ETHER	MAX ETHER		
+ITEM_ELIXIR	ELIXIR		
+ITEM_MAX_ELIXIR	MAX ELIXIR		
+ITEM_LAVA_COOKIE	LAVA COOKIE		
+ITEM_BLUE_FLUTE	BLUE FLUTE		
+ITEM_YELLOW_FLUTE	YELLOW FLUTE		
+ITEM_RED_FLUTE	RED FLUTE		
+ITEM_BLACK_FLUTE	BLACK FLUTE		
+ITEM_WHITE_FLUTE	WHITE FLUTE		
+ITEM_BERRY_JUICE	BERRY JUICE		
+ITEM_SACRED_ASH	SACRED ASH		
+ITEM_SHOAL_SALT	SHOAL SALT		
+ITEM_SHOAL_SHELL	SHOAL SHELL		
+ITEM_RED_SHARD	RED SHARD		
+ITEM_BLUE_SHARD	BLUE SHARD		
+ITEM_YELLOW_SHARD	YELLOW SHARD		
+ITEM_GREEN_SHARD	GREEN SHARD		
+ITEM_034	????????		
+ITEM_035	????????		
+ITEM_036	????????		
+ITEM_037	????????		
+ITEM_038	????????		
+ITEM_039	????????		
+ITEM_03A	????????		
+ITEM_03B	????????		
+ITEM_03C	????????		
+ITEM_03D	????????		
+ITEM_03E	????????		
+ITEM_HP_UP	HP UP		
+ITEM_PROTEIN	PROTEIN		
+ITEM_IRON	IRON		
+ITEM_CARBOS	CARBOS		
+ITEM_CALCIUM	CALCIUM		
+ITEM_RARE_CANDY	RARE CANDY		
+ITEM_PP_UP	PP UP		
+ITEM_ZINC	ZINC		
+ITEM_PP_MAX	PP MAX		
+ITEM_048	????????		
+ITEM_GUARD_SPEC	GUARD SPEC.		
+ITEM_DIRE_HIT	DIRE HIT		
+ITEM_X_ATTACK	X ATTACK		
+ITEM_X_DEFEND	X DEFEND		
+ITEM_X_SPEED	X SPEED		
+ITEM_X_ACCURACY	X ACCURACY		
+ITEM_X_SPECIAL	X SPECIAL		
+ITEM_POKE_DOLL	POKé DOLL		
+ITEM_FLUFFY_TAIL	FLUFFY TAIL		
+ITEM_052	????????		
+ITEM_SUPER_REPEL	SUPER REPEL		
+ITEM_MAX_REPEL	MAX REPEL		
+ITEM_ESCAPE_ROPE	ESCAPE ROPE		
+ITEM_REPEL	REPEL		
+ITEM_057	????????		
+ITEM_058	????????		
+ITEM_059	????????		
+ITEM_05A	????????		
+ITEM_05B	????????		
+ITEM_05C	????????		
+ITEM_SUN_STONE	SUN STONE		
+ITEM_MOON_STONE	MOON STONE		
+ITEM_FIRE_STONE	FIRE STONE		
+ITEM_THUNDER_STONE	THUNDERSTONE		
+ITEM_WATER_STONE	WATER STONE		
+ITEM_LEAF_STONE	LEAF STONE		
+ITEM_063	????????		
+ITEM_064	????????		
+ITEM_065	????????		
+ITEM_066	????????		
+ITEM_TINY_MUSHROOM	TINYMUSHROOM		
+ITEM_BIG_MUSHROOM	BIG MUSHROOM		
+ITEM_069	????????		
+ITEM_PEARL	PEARL		
+ITEM_BIG_PEARL	BIG PEARL		
+ITEM_STARDUST	STARDUST		
+ITEM_STAR_PIECE	STAR PIECE		
+ITEM_NUGGET	NUGGET		
+ITEM_HEART_SCALE	HEART SCALE		
+ITEM_070	????????		
+ITEM_071	????????		
+ITEM_072	????????		
+ITEM_073	????????		
+ITEM_074	????????		
+ITEM_075	????????		
+ITEM_076	????????		
+ITEM_077	????????		
+ITEM_078	????????		
+ITEM_ORANGE_MAIL	ORANGE MAIL		
+ITEM_HARBOR_MAIL	HARBOR MAIL		
+ITEM_GLITTER_MAIL	GLITTER MAIL		
+ITEM_MECH_MAIL	MECH MAIL		
+ITEM_WOOD_MAIL	WOOD MAIL		
+ITEM_WAVE_MAIL	WAVE MAIL		
+ITEM_BEAD_MAIL	BEAD MAIL		
+ITEM_SHADOW_MAIL	SHADOW MAIL		
+ITEM_TROPIC_MAIL	TROPIC MAIL		
+ITEM_DREAM_MAIL	DREAM MAIL		
+ITEM_FAB_MAIL	FAB MAIL		
+ITEM_RETRO_MAIL	RETRO MAIL		
+ITEM_CHERI_BERRY	CHERI BERRY		
+ITEM_CHESTO_BERRY	CHESTO BERRY		
+ITEM_PECHA_BERRY	PECHA BERRY		
+ITEM_RAWST_BERRY	RAWST BERRY		
+ITEM_ASPEAR_BERRY	ASPEAR BERRY		
+ITEM_LEPPA_BERRY	LEPPA BERRY		
+ITEM_ORAN_BERRY	ORAN BERRY		
+ITEM_PERSIM_BERRY	PERSIM BERRY		
+ITEM_LUM_BERRY	LUM BERRY		
+ITEM_SITRUS_BERRY	SITRUS BERRY		
+ITEM_FIGY_BERRY	FIGY BERRY		
+ITEM_WIKI_BERRY	WIKI BERRY		
+ITEM_MAGO_BERRY	MAGO BERRY		
+ITEM_AGUAV_BERRY	AGUAV BERRY		
+ITEM_IAPAPA_BERRY	IAPAPA BERRY		
+ITEM_RAZZ_BERRY	RAZZ BERRY		
+ITEM_BLUK_BERRY	BLUK BERRY		
+ITEM_NANAB_BERRY	NANAB BERRY		
+ITEM_WEPEAR_BERRY	WEPEAR BERRY		
+ITEM_PINAP_BERRY	PINAP BERRY		
+ITEM_POMEG_BERRY	POMEG BERRY		
+ITEM_KELPSY_BERRY	KELPSY BERRY		
+ITEM_QUALOT_BERRY	QUALOT BERRY		
+ITEM_HONDEW_BERRY	HONDEW BERRY		
+ITEM_GREPA_BERRY	GREPA BERRY		
+ITEM_TAMATO_BERRY	TAMATO BERRY		
+ITEM_CORNN_BERRY	CORNN BERRY		
+ITEM_MAGOST_BERRY	MAGOST BERRY		
+ITEM_RABUTA_BERRY	RABUTA BERRY		
+ITEM_NOMEL_BERRY	NOMEL BERRY		
+ITEM_SPELON_BERRY	SPELON BERRY		
+ITEM_PAMTRE_BERRY	PAMTRE BERRY		
+ITEM_WATMEL_BERRY	WATMEL BERRY		
+ITEM_DURIN_BERRY	DURIN BERRY		
+ITEM_BELUE_BERRY	BELUE BERRY		
+ITEM_LIECHI_BERRY	LIECHI BERRY		
+ITEM_GANLON_BERRY	GANLON BERRY		
+ITEM_SALAC_BERRY	SALAC BERRY		
+ITEM_PETAYA_BERRY	PETAYA BERRY		
+ITEM_APICOT_BERRY	APICOT BERRY		
+ITEM_LANSAT_BERRY	LANSAT BERRY		
+ITEM_STARF_BERRY	STARF BERRY		
+ITEM_ENIGMA_BERRY	ENIGMA BERRY		
+ITEM_UNUSED_BERRY_1	????????		
+ITEM_UNUSED_BERRY_2	????????		
+ITEM_UNUSED_BERRY_3	????????		
+ITEM_BRIGHT_POWDER	BRIGHTPOWDER		
+ITEM_WHITE_HERB	WHITE HERB		
+ITEM_MACHO_BRACE	MACHO BRACE		
+ITEM_EXP_SHARE	EXP. SHARE		
+ITEM_QUICK_CLAW	QUICK CLAW		
+ITEM_SOOTHE_BELL	SOOTHE BELL		
+ITEM_MENTAL_HERB	MENTAL HERB		
+ITEM_CHOICE_BAND	CHOICE BAND		
+ITEM_KINGS_ROCK	KING'S ROCK		
+ITEM_SILVER_POWDER	SILVERPOWDER		
+ITEM_AMULET_COIN	AMULET COIN		
+ITEM_CLEANSE_TAG	CLEANSE TAG		
+ITEM_SOUL_DEW	SOUL DEW		
+ITEM_DEEP_SEA_TOOTH	DEEPSEATOOTH		
+ITEM_DEEP_SEA_SCALE	DEEPSEASCALE		
+ITEM_SMOKE_BALL	SMOKE BALL		
+ITEM_EVERSTONE	EVERSTONE		
+ITEM_FOCUS_BAND	FOCUS BAND		
+ITEM_LUCKY_EGG	LUCKY EGG		
+ITEM_SCOPE_LENS	SCOPE LENS		
+ITEM_METAL_COAT	METAL COAT		
+ITEM_LEFTOVERS	LEFTOVERS		
+ITEM_DRAGON_SCALE	DRAGON SCALE		
+ITEM_LIGHT_BALL	LIGHT BALL		
+ITEM_SOFT_SAND	SOFT SAND		
+ITEM_HARD_STONE	HARD STONE		
+ITEM_MIRACLE_SEED	MIRACLE SEED		
+ITEM_BLACK_GLASSES	BLACKGLASSES		
+ITEM_BLACK_BELT	BLACK BELT		
+ITEM_MAGNET	MAGNET		
+ITEM_MYSTIC_WATER	MYSTIC WATER		
+ITEM_SHARP_BEAK	SHARP BEAK		
+ITEM_POISON_BARB	POISON BARB		
+ITEM_NEVER_MELT_ICE	NEVERMELTICE		
+ITEM_SPELL_TAG	SPELL TAG		
+ITEM_TWISTED_SPOON	TWISTEDSPOON		
+ITEM_CHARCOAL	CHARCOAL		
+ITEM_DRAGON_FANG	DRAGON FANG		
+ITEM_SILK_SCARF	SILK SCARF		
+ITEM_UP_GRADE	UP-GRADE		
+ITEM_SHELL_BELL	SHELL BELL		
+ITEM_SEA_INCENSE	SEA INCENSE		
+ITEM_LAX_INCENSE	LAX INCENSE		
+ITEM_LUCKY_PUNCH	LUCKY PUNCH		
+ITEM_METAL_POWDER	METAL POWDER		
+ITEM_THICK_CLUB	THICK CLUB		
+ITEM_STICK	STICK		
+ITEM_0E2	????????		
+ITEM_0E3	????????		
+ITEM_0E4	????????		
+ITEM_0E5	????????		
+ITEM_0E6	????????		
+ITEM_0E7	????????		
+ITEM_0E8	????????		
+ITEM_0E9	????????		
+ITEM_0EA	????????		
+ITEM_0EB	????????		
+ITEM_0EC	????????		
+ITEM_0ED	????????		
+ITEM_0EE	????????		
+ITEM_0EF	????????		
+ITEM_0F0	????????		
+ITEM_0F1	????????		
+ITEM_0F2	????????		
+ITEM_0F3	????????		
+ITEM_0F4	????????		
+ITEM_0F5	????????		
+ITEM_0F6	????????		
+ITEM_0F7	????????		
+ITEM_0F8	????????		
+ITEM_0F9	????????		
+ITEM_0FA	????????		
+ITEM_0FB	????????		
+ITEM_0FC	????????		
+ITEM_0FD	????????		
+ITEM_RED_SCARF	RED SCARF		
+ITEM_BLUE_SCARF	BLUE SCARF		
+ITEM_PINK_SCARF	PINK SCARF		
+ITEM_GREEN_SCARF	GREEN SCARF		
+ITEM_YELLOW_SCARF	YELLOW SCARF		
+ITEM_MACH_BIKE	MACH BIKE		
+ITEM_COIN_CASE	COIN CASE		
+ITEM_ITEMFINDER	ITEMFINDER		
+ITEM_OLD_ROD	OLD ROD		
+ITEM_GOOD_ROD	GOOD ROD		
+ITEM_SUPER_ROD	SUPER ROD		
+ITEM_SS_TICKET	S.S. TICKET		
+ITEM_CONTEST_PASS	CONTEST PASS		
+ITEM_10B	????????		
+ITEM_WAILMER_PAIL	WAILMER PAIL		
+ITEM_DEVON_GOODS	DEVON GOODS		
+ITEM_SOOT_SACK	SOOT SACK		
+ITEM_BASEMENT_KEY	BASEMENT KEY		
+ITEM_ACRO_BIKE	ACRO BIKE		
+ITEM_POKEBLOCK_CASE	{POKEBLOCK} CASE		
+ITEM_LETTER	LETTER		
+ITEM_EON_TICKET	EON TICKET		
+ITEM_RED_ORB	RED ORB		
+ITEM_BLUE_ORB	BLUE ORB		
+ITEM_SCANNER	SCANNER		
+ITEM_GO_GOGGLES	GO-GOGGLES		
+ITEM_METEORITE	METEORITE		
+ITEM_ROOM_1_KEY	RM. 1 KEY		
+ITEM_ROOM_2_KEY	RM. 2 KEY		
+ITEM_ROOM_4_KEY	RM. 4 KEY		
+ITEM_ROOM_6_KEY	RM. 6 KEY		
+ITEM_STORAGE_KEY	STORAGE KEY		
+ITEM_ROOT_FOSSIL	ROOT FOSSIL		
+ITEM_CLAW_FOSSIL	CLAW FOSSIL		
+ITEM_DEVON_SCOPE	DEVON SCOPE		
+ITEM_TM_FOCUS_PUNCH	TM01		
+ITEM_TM_DRAGON_CLAW	TM02		
+ITEM_TM_WATER_PULSE	TM03		
+ITEM_TM_CALM_MIND	TM04		
+ITEM_TM_ROAR	TM05		
+ITEM_TM_TOXIC	TM06		
+ITEM_TM_HAIL	TM07		
+ITEM_TM_BULK_UP	TM08		
+ITEM_TM_BULLET_SEED	TM09		
+ITEM_TM_HIDDEN_POWER	TM10		
+ITEM_TM_SUNNY_DAY	TM11		
+ITEM_TM_TAUNT	TM12		
+ITEM_TM_ICE_BEAM	TM13		
+ITEM_TM_BLIZZARD	TM14		
+ITEM_TM_HYPER_BEAM	TM15		
+ITEM_TM_LIGHT_SCREEN	TM16		
+ITEM_TM_PROTECT	TM17		
+ITEM_TM_RAIN_DANCE	TM18		
+ITEM_TM_GIGA_DRAIN	TM19		
+ITEM_TM_SAFEGUARD	TM20		
+ITEM_TM_FRUSTRATION	TM21		
+ITEM_TM_SOLAR_BEAM	TM22		
+ITEM_TM_IRON_TAIL	TM23		
+ITEM_TM_THUNDERBOLT	TM24		
+ITEM_TM_THUNDER	TM25		
+ITEM_TM_EARTHQUAKE	TM26		
+ITEM_TM_RETURN	TM27		
+ITEM_TM_DIG	TM28		
+ITEM_TM_PSYCHIC	TM29		
+ITEM_TM_SHADOW_BALL	TM30		
+ITEM_TM_BRICK_BREAK	TM31		
+ITEM_TM_DOUBLE_TEAM	TM32		
+ITEM_TM_REFLECT	TM33		
+ITEM_TM_SHOCK_WAVE	TM34		
+ITEM_TM_FLAMETHROWER	TM35		
+ITEM_TM_SLUDGE_BOMB	TM36		
+ITEM_TM_SANDSTORM	TM37		
+ITEM_TM_FIRE_BLAST	TM38		
+ITEM_TM_ROCK_TOMB	TM39		
+ITEM_TM_AERIAL_ACE	TM40		
+ITEM_TM_TORMENT	TM41		
+ITEM_TM_FACADE	TM42		
+ITEM_TM_SECRET_POWER	TM43		
+ITEM_TM_REST	TM44		
+ITEM_TM_ATTRACT	TM45		
+ITEM_TM_THIEF	TM46		
+ITEM_TM_STEEL_WING	TM47		
+ITEM_TM_SKILL_SWAP	TM48		
+ITEM_TM_SNATCH	TM49		
+ITEM_TM_OVERHEAT	TM50		
+ITEM_HM_CUT	HM01		
+ITEM_HM_FLY	HM02		
+ITEM_HM_SURF	HM03		
+ITEM_HM_STRENGTH	HM04		
+ITEM_HM_FLASH	HM05		
+ITEM_HM_ROCK_SMASH	HM06		
+ITEM_HM_WATERFALL	HM07		
+ITEM_HM_DIVE	HM08		
+ITEM_15B	????????		
+ITEM_15C	????????		
+ITEM_OAKS_PARCEL	OAK'S PARCEL		
+ITEM_POKE_FLUTE	POKé FLUTE		
+ITEM_SECRET_KEY	SECRET KEY		
+ITEM_BIKE_VOUCHER	BIKE VOUCHER		
+ITEM_GOLD_TEETH	GOLD TEETH		
+ITEM_OLD_AMBER	OLD AMBER		
+ITEM_CARD_KEY	CARD KEY		
+ITEM_LIFT_KEY	LIFT KEY		
+ITEM_HELIX_FOSSIL	HELIX FOSSIL		
+ITEM_DOME_FOSSIL	DOME FOSSIL		
+ITEM_SILPH_SCOPE	SILPH SCOPE		
+ITEM_BICYCLE	BICYCLE		
+ITEM_TOWN_MAP	TOWN MAP		
+ITEM_VS_SEEKER	VS SEEKER		
+ITEM_FAME_CHECKER	FAME CHECKER		
+ITEM_TM_CASE	TM CASE		
+ITEM_BERRY_POUCH	BERRY POUCH		
+ITEM_TEACHY_TV	TEACHY TV		
+ITEM_TRI_PASS	TRI-PASS		
+ITEM_RAINBOW_PASS	RAINBOW PASS		
+ITEM_TEA	TEA		
+ITEM_MYSTIC_TICKET	MYSTICTICKET		
+ITEM_AURORA_TICKET	AURORATICKET		
+ITEM_POWDER_JAR	POWDER JAR		
+ITEM_RUBY	RUBY		
+ITEM_SAPPHIRE	SAPPHIRE		
+ITEM_MAGMA_EMBLEM	MAGMA EMBLEM		
+ITEM_OLD_SEA_MAP	OLD SEA MAP		
+sDummyDesc	?????		
+sMasterBallDesc	The best BALL that\ncatches a POKéMON\nwithout fail.		
+sUltraBallDesc	A better BALL with\na higher catch rate\nthan a GREAT BALL.		
+sGreatBallDesc	A good BALL with a\nhigher catch rate\nthan a POKé BALL.		
+sPokeBallDesc	A tool used for\ncatching wild\nPOKéMON.		
+sSafariBallDesc	A special BALL that\nis used only in the\nSAFARI ZONE.		
+sNetBallDesc	A BALL that works\nwell on WATER- and\nBUG-type POKéMON.		
+sDiveBallDesc	A BALL that works\nbetter on POKéMON\non the ocean floor.		
+sNestBallDesc	A BALL that works\nbetter on weaker\nPOKéMON.		
+sRepeatBallDesc	A BALL that works\nbetter on POKéMON\ncaught before.		
+sTimerBallDesc	A BALL that gains\npower in battles\ntaking many turns.		
+sLuxuryBallDesc	A cozy BALL that\nmakes POKéMON\nmore friendly.		
+sPremierBallDesc	A rare BALL made\nin commemoration\nof some event.		
+sPotionDesc	Restores the HP of\na POKéMON by\n20 points.		
+sAntidoteDesc	Heals a poisoned\nPOKéMON.		
+sBurnHealDesc	Heals POKéMON\nof a burn.		
+sIceHealDesc	Defrosts a frozen\nPOKéMON.		
+sAwakeningDesc	Awakens a sleeping\nPOKéMON.		
+sParalyzeHealDesc	Heals a paralyzed\nPOKéMON.		
+sFullRestoreDesc	Fully restores the\nHP and status of a\nPOKéMON.		
+sMaxPotionDesc	Fully restores the\nHP of a POKéMON.		
+sHyperPotionDesc	Restores the HP of\na POKéMON by\n200 points.		
+sSuperPotionDesc	Restores the HP of\na POKéMON by\n50 points.		
+sFullHealDesc	Heals all the\nstatus problems of\none POKéMON.		
+sReviveDesc	Revives a fainted\nPOKéMON with half\nits HP.		
+sMaxReviveDesc	Revives a fainted\nPOKéMON with all\nits HP.		
+sFreshWaterDesc	A mineral water\nthat restores HP\nby 50 points.		
+sSodaPopDesc	A fizzy soda drink\nthat restores HP\nby 60 points.		
+sLemonadeDesc	A very sweet drink\nthat restores HP\nby 80 points.		
+sMoomooMilkDesc	A nutritious milk\nthat restores HP\nby 100 points.		
+sEnergyPowderDesc	A bitter powder\nthat restores HP\nby 50 points.		
+sEnergyRootDesc	A bitter root\nthat restores HP\nby 200 points.		
+sHealPowderDesc	A bitter powder\nthat heals all\nstatus problems.		
+sRevivalHerbDesc	A very bitter herb\nthat revives a\nfainted POKéMON.		
+sEtherDesc	Restores the PP\nof a selected move\nby 10.		
+sMaxEtherDesc	Fully restores the\nPP of a selected\nmove.		
+sElixirDesc	Restores the PP\nof all moves by 10.		
+sMaxElixirDesc	Fully restores the\nPP of a POKéMON's\nmoves.		
+sLavaCookieDesc	A local specialty\nthat heals all\nstatus problems.		
+sBlueFluteDesc	A glass flute that\nawakens sleeping\nPOKéMON.		
+sYellowFluteDesc	A glass flute that\nsnaps POKéMON\nout of confusion.		
+sRedFluteDesc	A glass flute that\nsnaps POKéMON\nout of attraction.		
+sBlackFluteDesc	A glass flute that\nkeeps away wild\nPOKéMON.		
+sWhiteFluteDesc	A glass flute that\nlures wild POKéMON.		
+sBerryJuiceDesc	A 100% pure juice\nthat restores HP\nby 20 points.		
+sSacredAshDesc	Fully revives and\nrestores all\nfainted POKéMON.		
+sShoalSaltDesc	Salt obtained from\ndeep inside the\nSHOAL CAVE.		
+sShoalShellDesc	A seashell found\ndeep inside the\nSHOAL CAVE.		
+sRedShardDesc	A shard from an\nancient item. Can\nbe sold cheaply.		
+sBlueShardDesc	A shard from an\nancient item. Can\nbe sold cheaply.		
+sYellowShardDesc	A shard from an\nancient item. Can\nbe sold cheaply.		
+sGreenShardDesc	A shard from an\nancient item. Can\nbe sold cheaply.		
+sHPUpDesc	Raises the base HP\nof one POKéMON.		
+sProteinDesc	Raises the base\nATTACK stat of one\nPOKéMON.		
+sIronDesc	Raises the base\nDEFENSE stat of\none POKéMON.		
+sCarbosDesc	Raises the base\nSPEED stat of one\nPOKéMON.		
+sCalciumDesc	Raises the base\nSP. ATK stat of one\nPOKéMON.		
+sRareCandyDesc	Raises the level\nof a POKéMON by\none.		
+sPPUpDesc	Raises the maximum\nPP of a selected\nmove.		
+sZincDesc	Raises the base\nSP. DEF stat of one\nPOKéMON.		
+sPPMaxDesc	Raises the PP of a\nmove to its maximum\npoints.		
+sGuardSpecDesc	Prevents stat\nreduction when\nused in battle.		
+sDireHitDesc	Raises the\ncritical-hit ratio\nduring one battle.		
+sXAttackDesc	Raises the stat\nATTACK during one\nbattle.		
+sXDefendDesc	Raises the stat\nDEFENSE during one\nbattle.		
+sXSpeedDesc	Raises the stat\nSPEED during one\nbattle.		
+sXAccuracyDesc	Raises accuracy\nof attack moves\nduring one battle.		
+sXSpecialDesc	Raises the stat\nSP. ATK during one\nbattle.		
+sPokeDollDesc	Use to flee from\nany battle with\na wild POKéMON.		
+sFluffyTailDesc	Use to flee from\nany battle with\na wild POKéMON.		
+sSuperRepelDesc	Repels weak wild\nPOKéMON for 200\nsteps.		
+sMaxRepelDesc	Repels weak wild\nPOKéMON for 250\nsteps.		
+sEscapeRopeDesc	Use to escape\ninstantly from a\ncave or a dungeon.		
+sRepelDesc	Repels weak wild\nPOKéMON for 100\nsteps.		
+sSunStoneDesc	Makes certain\nspecies of POKéMON\nevolve.		
+sMoonStoneDesc	Makes certain\nspecies of POKéMON\nevolve.		
+sFireStoneDesc	Makes certain\nspecies of POKéMON\nevolve.		
+sThunderStoneDesc	Makes certain\nspecies of POKéMON\nevolve.		
+sWaterStoneDesc	Makes certain\nspecies of POKéMON\nevolve.		
+sLeafStoneDesc	Makes certain\nspecies of POKéMON\nevolve.		
+sTinyMushroomDesc	A plain mushroom\nthat would sell\nat a cheap price.		
+sBigMushroomDesc	A rare mushroom\nthat would sell at a\nhigh price.		
+sPearlDesc	A pretty pearl\nthat would sell at a\ncheap price.		
+sBigPearlDesc	A lovely large pearl\nthat would sell at a\nhigh price.		
+sStardustDesc	Beautiful red sand.\nCan be sold at a\nhigh price.		
+sStarPieceDesc	A red gem shard.\nIt would sell for a\nvery high price.		
+sNuggetDesc	A nugget of pure\ngold. Can be sold at\na high price.		
+sHeartScaleDesc	A lovely scale.\nIt is coveted by\ncollectors.		
+sOrangeMailDesc	A ZIGZAGOON-print\nMAIL to be held by\na POKéMON.		
+sHarborMailDesc	A WINGULL-print\nMAIL to be held by\na POKéMON.		
+sGlitterMailDesc	A PIKACHU-print\nMAIL to be held by\na POKéMON.		
+sMechMailDesc	A MAGNEMITE-print\nMAIL to be held by\na POKéMON.		
+sWoodMailDesc	A SLAKOTH-print\nMAIL to be held by\na POKéMON.		
+sWaveMailDesc	A WAILMER-print\nMAIL to be held by\na POKéMON.		
+sBeadMailDesc	MAIL featuring a\nsketch of the\nholding POKéMON.		
+sShadowMailDesc	A DUSKULL-print\nMAIL to be held by\na POKéMON.		
+sTropicMailDesc	A BELLOSSOM-print\nMAIL to be held by\na POKéMON.		
+sDreamMailDesc	MAIL featuring a\nsketch of the\nholding POKéMON.		
+sFabMailDesc	A gorgeous-print\nMAIL to be held\nby a POKéMON.		
+sRetroMailDesc	MAIL featuring the\ndrawings of three\nPOKéMON.		
+sCheriBerryDesc	A hold item that\nheals paralysis\nin battle.		
+sChestoBerryDesc	A hold item that\nawakens POKéMON\nin battle.		
+sPechaBerryDesc	A hold item that\nheals poisoning\nin battle.		
+sRawstBerryDesc	A hold item that\nheals a burn in\nbattle.		
+sAspearBerryDesc	A hold item that\ndefrosts POKéMON\nin battle.		
+sLeppaBerryDesc	A hold item that\nrestores 10 PP in\nbattle.		
+sOranBerryDesc	A hold item that\nrestores 10 HP in\nbattle.		
+sPersimBerryDesc	A hold item that\nheals confusion\nin battle.		
+sLumBerryDesc	A hold item that\nheals any status\nproblem in battle.		
+sSitrusBerryDesc	A hold item that\nrestores 30 HP in\nbattle.		
+sFigyBerryDesc	A hold item that\nrestores HP but\nmay confuse.		
+sWikiBerryDesc	A hold item that\nrestores HP but\nmay confuse.		
+sMagoBerryDesc	A hold item that\nrestores HP but\nmay confuse.		
+sAguavBerryDesc	A hold item that\nrestores HP but\nmay confuse.		
+sIapapaBerryDesc	A hold item that\nrestores HP but\nmay confuse.		
+sRazzBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow RAZZ.		
+sBlukBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow BLUK.		
+sNanabBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow NANAB.		
+sWepearBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow WEPEAR.		
+sPinapBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow PINAP.		
+sPomegBerryDesc	Makes a POKéMON\nfriendly but lowers\nbase HP.		
+sKelpsyBerryDesc	Makes a POKéMON\nfriendly but lowers\nbase ATTACK.		
+sQualotBerryDesc	Makes a POKéMON\nfriendly but lowers\nbase DEFENSE.		
+sHondewBerryDesc	Makes a POKéMON\nfriendly but lowers\nbase SP. ATK.		
+sGrepaBerryDesc	Makes a POKéMON\nfriendly but lowers\nbase SP. DEF.		
+sTamatoBerryDesc	Makes a POKéMON\nfriendly but lowers\nbase SPEED.		
+sCornnBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow CORNN.		
+sMagostBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow MAGOST.		
+sRabutaBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow RABUTA.		
+sNomelBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow NOMEL.		
+sSpelonBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow SPELON.		
+sPamtreBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow PAMTRE.		
+sWatmelBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow WATMEL.		
+sDurinBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow DURIN.		
+sBelueBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow BELUE.		
+sLiechiBerryDesc	A hold item that\nraises ATTACK in\na pinch.		
+sGanlonBerryDesc	A hold item that\nraises DEFENSE in\na pinch.		
+sSalacBerryDesc	A hold item that\nraises SPEED in\na pinch.		
+sPetayaBerryDesc	A hold item that\nraises SP. ATK in\na pinch.		
+sApicotBerryDesc	A hold item that\nraises SP. DEF in\na pinch.		
+sLansatBerryDesc	A hold item that\nups the critical-\nhit rate in a pinch.		
+sStarfBerryDesc	A hold item that\nsharply boosts a\nstat in a pinch.		
+sEnigmaBerryDesc	{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow a mystery.		
+sBrightPowderDesc	A hold item that\ncasts a glare to\nreduce accuracy.		
+sWhiteHerbDesc	A hold item that\nrestores any\nlowered stat.		
+sMachoBraceDesc	A hold item that\npromotes growth,\nbut reduces SPEED.		
+sExpShareDesc	A hold item that\ngets EXP. points\nfrom battles.		
+sQuickClawDesc	A hold item that\noccasionally allows\nthe first strike.		
+sSootheBellDesc	A hold item that\ncalms spirits and\nfosters friendship.		
+sMentalHerbDesc	A hold item that\nsnaps POKéMON out\nof infatuation.		
+sChoiceBandDesc	Raises a move's\npower, but permits\nonly that move.		
+sKingsRockDesc	A hold item that\nmay cause flinching\nwhen the foe is hit.		
+sSilverPowderDesc	A hold item that\nraises the power of\nBUG-type moves.		
+sAmuletCoinDesc	Doubles money in\nbattle if the\nholder takes part.		
+sCleanseTagDesc	A hold item that\nhelps repel wild\nPOKéMON.		
+sSoulDewDesc	Hold item: raises\nSP. ATK & SP. DEF of\nLATIOS & LATIAS.		
+sDeepSeaToothDesc	A hold item that\nraises the SP. ATK\nof CLAMPERL.		
+sDeepSeaScaleDesc	A hold item that\nraises the SP. DEF\nof CLAMPERL.		
+sSmokeBallDesc	A hold item that\nassures fleeing\nfrom wild POKéMON.		
+sEverstoneDesc	A wondrous hold\nitem that prevents\nevolution.		
+sFocusBandDesc	A hold item that\noccasionally\nprevents fainting.		
+sLuckyEggDesc	A hold item that\nboosts EXP. points\nearned in battle.		
+sScopeLensDesc	A hold item that\nimproves the\ncritical-hit rate.		
+sMetalCoatDesc	A hold item that\nraises the power of\nSTEEL-type moves.		
+sLeftoversDesc	A hold item that\ngradually restores\nHP in battle.		
+sDragonScaleDesc	A strange scale\nheld by DRAGON-\ntype POKéMON.		
+sLightBallDesc	A hold item that\nraises the SP. ATK\nof PIKACHU.		
+sSoftSandDesc	A hold item that\nraises the power of\nGROUND-type moves.		
+sHardStoneDesc	A hold item that\nraises the power of\nROCK-type moves.		
+sMiracleSeedDesc	A hold item that\nraises the power of\nGRASS-type moves.		
+sBlackGlassesDesc	A hold item that\nraises the power of\nDARK-type moves.		
+sBlackBeltDesc	A hold item that\nboosts FIGHTING-\ntype moves.		
+sMagnetDesc	A hold item that\nboosts ELECTRIC-\ntype moves.		
+sMysticWaterDesc	A hold item that\nraises the power of\nWATER-type moves.		
+sSharpBeakDesc	A hold item that\nraises the power of\nFLYING-type moves.		
+sPoisonBarbDesc	A hold item that\nraises the power of\nPOISON-type moves.		
+sNeverMeltIceDesc	A hold item that\nraises the power of\nICE-type moves.		
+sSpellTagDesc	A hold item that\nraises the power of\nGHOST-type moves.		
+sTwistedSpoonDesc	A hold item that\nboosts PSYCHIC-\ntype moves.		
+sCharcoalDesc	A hold item that\nraises the power of\nFIRE-type moves.		
+sDragonFangDesc	A hold item that\nraises the power of\nDRAGON-type moves.		
+sSilkScarfDesc	A hold item that\nraises the power of\nNORMAL-type moves.		
+sUpGradeDesc	A peculiar box made\nby SILPH CO.		
+sShellBellDesc	A hold item that\nrestores HP upon\nstriking the foe.		
+sSeaIncenseDesc	A hold item that\nslightly boosts\nWATER-type moves.		
+sLaxIncenseDesc	A hold item that\nslightly lowers the\nfoe's accuracy.		
+sLuckyPunchDesc	A hold item that\nraises CHANSEY's\ncritical-hit rate.		
+sMetalPowderDesc	A hold item that\nraises DITTO's\nDEFENSE.		
+sThickClubDesc	A hold item that \nraises CUBONE or\nMAROWAK's ATTACK.		
+sStickDesc	A hold item that\nraises FARFETCH'D's\ncritical-hit ratio.		
+sRedScarfDesc	A hold item that\nraises COOL in\nCONTESTS.		
+sBlueScarfDesc	A hold item that\nraises BEAUTY in\nCONTESTS.		
+sPinkScarfDesc	A hold item that\nraises CUTE in\nCONTESTS.		
+sGreenScarfDesc	A hold item that\nraises SMART in\nCONTESTS.		
+sYellowScarfDesc	A hold item that\nraises TOUGH in\nCONTESTS.		
+sMachBikeDesc	A folding bicycle\nthat doubles your\nspeed or better.		
+sCoinCaseDesc	A case that holds\nup to 9,999 COINS.		
+sItemfinderDesc	A device that\nsignals an invisible\nitem by sound.		
+sOldRodDesc	Use by any body of\nwater to fish for\nwild POKéMON.		
+sGoodRodDesc	A decent fishing\nrod for catching\nwild POKéMON.		
+sSuperRodDesc	The best fishing\nrod for catching\nwild POKéMON.		
+sSSTicketDesc	The ticket required\nfor sailing on a\nferry.		
+sContestPassDesc	The pass required\nfor entering\nPOKéMON CONTESTS.		
+sWailmerPailDesc	A tool used for\nwatering BERRIES\nand plants.		
+sDevonGoodsDesc	A package that\ncontains DEVON's\nmachine parts.		
+sSootSackDesc	A sack used to\ngather and hold\nvolcanic ash.		
+sBasementKeyDesc	The key for NEW\nMAUVILLE beneath\nMAUVILLE CITY.		
+sAcroBikeDesc	A folding bicycle\ncapable of jumps\nand wheelies.		
+sPokeblockCaseDesc	A case for holding\n{POKEBLOCK}S made with\na BERRY BLENDER.		
+sLetterDesc	A letter to STEVEN\nfrom the PRESIDENT\nof the DEVON CORP.		
+sEonTicketDesc	The ticket for a\nferry to a distant\nsouthern island.		
+sRedOrbDesc	A red, glowing orb\nsaid to contain an\nancient power.		
+sBlueOrbDesc	A blue, glowing orb\nsaid to contain an\nancient power.		
+sScannerDesc	A device found\ninside the\nABANDONED SHIP.		
+sGoGogglesDesc	Nifty goggles that\nprotect eyes from\ndesert sandstorms.		
+sMeteoriteDesc	A meteorite found\nat METEOR FALLS.		
+sRoom1KeyDesc	A key that opens a\ndoor inside the\nABANDONED SHIP.		
+sRoom2KeyDesc	A key that opens a\ndoor inside the\nABANDONED SHIP.		
+sRoom4KeyDesc	A key that opens a\ndoor inside the\nABANDONED SHIP.		
+sRoom6KeyDesc	A key that opens a\ndoor inside the\nABANDONED SHIP.		
+sStorageKeyDesc	The key to the\nstorage inside the\nABANDONED SHIP.		
+sRootFossilDesc	A fossil of an\nancient, seafloor-\ndwelling POKéMON.		
+sClawFossilDesc	A fossil of an\nancient, seafloor-\ndwelling POKéMON.		
+sDevonScopeDesc	A device by DEVON\nthat signals any\nunseeable POKéMON.		
+sTM01Desc	Powerful, but makes\nthe user flinch if\nhit by the foe.		
+sTM02Desc	Hooks and slashes\nthe foe with long,\nsharp claws.		
+sTM03Desc	Generates an\nultrasonic wave\nthat may confuse.		
+sTM04Desc	Raises SP. ATK and\nSP. DEF by focusing\nthe mind.		
+sTM05Desc	A savage roar that\nmakes the foe flee \nto end the battle.		
+sTM06Desc	Poisons the foe\nwith a toxin that\ngradually worsens.		
+sTM07Desc	Creates a hailstorm\nthat damages all\ntypes except ICE.		
+sTM08Desc	Bulks up the body\nto boost both\nATTACK & DEFENSE.		
+sTM09Desc	Shoots 2 to 5 seeds\nin a row to strike\nthe foe.		
+sTM10Desc	The attack power\nvaries among\ndifferent POKéMON.		
+sTM11Desc	Raises the power of\nFIRE-type moves\nfor 5 turns.		
+sTM12Desc	Enrages the foe so\nit can only use\nattack moves.		
+sTM13Desc	Fires an icy cold\nbeam that may\nfreeze the foe.		
+sTM14Desc	A brutal snow-and-\nwind attack that\nmay freeze the foe.		
+sTM15Desc	Powerful, but needs\nrecharging the\nnext turn.		
+sTM16Desc	Creates a wall of\nlight that lowers\nSP. ATK damage.		
+sTM17Desc	Negates all damage,\nbut may fail if used\nin succession.		
+sTM18Desc	Raises the power of\nWATER-type moves\nfor 5 turns.		
+sTM19Desc	Recovers half the\nHP of the damage \nthis move inflicts.		
+sTM20Desc	Prevents status\nabnormality with a\nmystical power.		
+sTM21Desc	The less the user\nlikes you, the more\npowerful this move.		
+sTM22Desc	Absorbs sunlight in\nthe 1st turn, then\nattacks next turn.		
+sTM23Desc	Slams the foe with\na hard tail. It may\nlower DEFENSE.		
+sTM24Desc	A powerful electric\nattack that may\ncause paralysis.		
+sTM25Desc	Strikes the foe\nwith a thunderbolt.\nIt may paralyze.		
+sTM26Desc	Causes a quake\nthat has no effect\non flying foes.		
+sTM27Desc	The more the user\nlikes you, the more\npowerful this move.		
+sTM28Desc	Digs underground\nthe 1st turn, then\nstrikes next turn.		
+sTM29Desc	A powerful psychic\nattack that may\nlower SP. DEF.		
+sTM30Desc	Hurls a dark lump\nat the foe. It may\nlower SP. DEF.		
+sTM31Desc	Destroys barriers\nlike LIGHT SCREEN\nand causes damage.		
+sTM32Desc	Creates illusory\ncopies to enhance\nelusiveness.		
+sTM33Desc	Creates a wall of\nlight that weakens\nphysical attacks.		
+sTM34Desc	Zaps the foe with a\njolt of electricity\nthat never misses.		
+sTM35Desc	Looses a stream of\nfire that may burn\nthe foe.		
+sTM36Desc	Hurls sludge at the\nfoe. It may poison\nthe foe.		
+sTM37Desc	Causes a sandstorm\nthat hits the foe\nover several turns.		
+sTM38Desc	A powerful fire\nattack that may\nburn the foe.		
+sTM39Desc	Stops the foe from\nmoving with rocks.\nMay lower SPEED.		
+sTM40Desc	An extremely fast\nattack that can't\nbe avoided.		
+sTM41Desc	Prevents the foe\nfrom using the same\nmove in a row.		
+sTM42Desc	Raises ATTACK when\npoisoned, burned,\nor paralyzed.		
+sTM43Desc	Adds an effect to\nattack depending\non the location.		
+sTM44Desc	The user sleeps for\n2 turns to restore\nhealth and status.		
+sTM45Desc	Makes it tough to\nattack a foe of the\nopposite gender.		
+sTM46Desc	While attacking,\nit may steal the\nfoe's held item.		
+sTM47Desc	Spreads hard-\nedged wings and\nslams into the foe.		
+sTM48Desc	Switches abilities\nwith the foe on the\nturn this is used.		
+sTM49Desc	Steals the effects\nof the move the foe\nis trying to use.		
+sTM50Desc	Enables full-power\nattack, but sharply\nlowers SP. ATK.		
+sHM01Desc	Attacks the foe\nwith sharp blades\nor claws.		
+sHM02Desc	Flies up on the\nfirst turn, then\nattacks next turn.		
+sHM03Desc	Creates a huge\nwave, then crashes\nit down on the foe.		
+sHM04Desc	Builds enormous\npower, then slams\nthe foe.		
+sHM05Desc	Looses a powerful\nblast of light that\nreduces accuracy.		
+sHM06Desc	A rock-crushingly\ntough attack that\nmay lower DEFENSE.		
+sHM07Desc	Attacks the foe\nwith enough power\nto climb waterfalls.		
+sHM08Desc	Dives underwater\nthe 1st turn, then\nattacks next turn.		
+sOaksParcelDesc	A parcel for PROF.\nOAK from a POKéMON\nMART's clerk.		
+sPokeFluteDesc	A sweet-sounding\nflute that awakens\nPOKéMON.		
+sSecretKeyDesc	The key to the\nCINNABAR ISLAND\nGYM's entrance.		
+sBikeVoucherDesc	A voucher for\nobtaining a bicycle\nfrom the BIKE SHOP.		
+sGoldTeethDesc	Gold dentures lost\nby the SAFARI\nZONE's WARDEN.		
+sOldAmberDesc	A stone containing\nthe genes of an\nancient POKéMON.		
+sCardKeyDesc	A card-type door\nkey used in SILPH\nCO's office.		
+sLiftKeyDesc	An elevator key\nused in TEAM\nROCKET's HIDEOUT.		
+sHelixFossilDesc	A piece of an\nancient marine\nPOKéMON's seashell.		
+sDomeFossilDesc	A piece of an\nancient marine\nPOKéMON's shell.		
+sSilphScopeDesc	SILPH CO's scope\nmakes unseeable\nPOKéMON visible.		
+sBicycleDesc	A folding bicycle\nthat is faster than\nthe RUNNING SHOES.		
+sTownMapDesc	Can be viewed\nanytime. Shows your\npresent location.		
+sVSSeekerDesc	A rechargeable unit\nthat flags battle-\nready TRAINERS.		
+sFameCheckerDesc	Stores information\non famous people\nfor instant recall.		
+sTMCaseDesc	A convenient case \nthat holds TMs and\nHMs.		
+sBerryPouchDesc	A convenient\ncontainer that\nholds BERRIES.		
+sTeachyTVDesc	A TV set tuned to\nan advice program\nfor TRAINERS.		
+sTriPassDesc	A pass for ferries\nbetween ONE, TWO,\nand THREE ISLAND.		
+sRainbowPassDesc	For ferries serving\nVERMILION and the\nSEVII ISLANDS.		
+sTeaDesc	A thirst-quenching\ntea prepared by an\nold lady.		
+sMysticTicketDesc	A ticket required\nto board the ship\nto NAVEL ROCK.		
+sAuroraTicketDesc	A ticket required\nto board the ship\nto BIRTH ISLAND.		
+sPowderJarDesc	Stores BERRY\nPOWDER made using\na BERRY CRUSHER.		
+sRubyDesc	An exquisite, red-\nglowing gem that\nsymbolizes passion.		
+sSapphireDesc	A brilliant blue gem\nthat symbolizes\nhonesty.		
+sMagmaEmblemDesc	A medal-like item in\nthe same shape as\nTEAM MAGMA's mark.		
+sOldSeaMapDesc	A faded sea chart\nthat shows the way\nto a certain island.		

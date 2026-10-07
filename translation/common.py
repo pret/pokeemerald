@@ -1,0 +1,199 @@
+"""Shared helpers for the Dutch translation tooling.
+
+Every translatable string is a Source entry: a key, the raw C text (with
+literal backslash escapes such as \\n), the file it lives in, and the span of
+the `_(...)` contents so it can be rewritten in place.
+"""
+import csv
+import re
+from dataclasses import dataclass
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+TSV_DIR = ROOT / "translation" / "nl"
+TSV_FIELDS = ["key", "english", "dutch", "notes"]
+
+
+@dataclass
+class Kind:
+    name: str
+    max_bytes: int | None  # encoded length, terminator excluded
+    max_lines: int
+    limits: list  # (font, max px per line, where it is shown)
+
+
+# Pixel limits come from the window templates (see translation/PLAN.md) and
+# are never below the widest English string, which is known to fit.
+KINDS = {
+    "move_name": Kind("move_name", 12, 1, [("narrow", 64, "battle move menu"),
+                                            ("normal", 72, "summary moves page")]),
+    "move_desc": Kind("move_desc", None, 2, [("normal", 154, "summary move description")]),
+    "ability_name": Kind("ability_name", 12, 1, [("normal", 144, "summary info page")]),
+    "ability_desc": Kind("ability_desc", None, 1, [("normal", 144, "summary info page")]),
+    "item_name": Kind("item_name", 13, 1, [("narrow", 112, "bag/shop list"),
+                                            ("normal", 80, "summary held item")]),
+    "item_desc": Kind("item_desc", None, 3, [("normal", 109, "bag description")]),
+    "berry_name": Kind("berry_name", 6, 1, [("normal", 64, "berry tag")]),
+    "berry_desc": Kind("berry_desc", None, 1, [("normal", 200, "berry tag")]),
+}
+
+LIT = r'"(?:[^"\\]|\\.)*"'
+# `_(` + one or more string literals + `)`; group 1 is the inside of the parens
+CALL = rf'_\(((?:\s*{LIT})+\s*)\)'
+
+
+@dataclass
+class Spec:
+    tsv: str
+    kind: str
+    path: str
+    pattern: str  # group "key" + group "body" (the inside of `_( ... )`)
+    key_fmt: str = "{}"
+
+
+SPECS = [
+    Spec("abilities", "ability_name", "src/data/text/abilities.h",
+         rf'\[(?P<key>ABILITY_\w+)\] = _\((?P<body>(?:\s*{LIT})+\s*)\)'),
+    Spec("abilities", "ability_desc", "src/data/text/abilities.h",
+         rf'static const u8 (?P<key>s\w+Description)\[\] = _\((?P<body>(?:\s*{LIT})+\s*)\)'),
+    Spec("moves", "move_name", "src/data/text/move_names.h",
+         rf'\[(?P<key>MOVE_\w+)\] = _\((?P<body>(?:\s*{LIT})+\s*)\)'),
+    Spec("moves", "move_desc", "src/data/text/move_descriptions.h",
+         rf'static const u8 (?P<key>s\w+Description)\[\] = _\((?P<body>(?:\s*{LIT})+\s*)\)'),
+    Spec("items", "item_name", "src/data/items.h",
+         rf'\[(?P<key>ITEM_\w+)\] =\s*\{{\s*\.name = _\((?P<body>(?:\s*{LIT})+\s*)\)'),
+    Spec("items", "item_desc", "src/data/text/item_descriptions.h",
+         rf'static const u8 (?P<key>s\w+Desc)\[\] = _\((?P<body>(?:\s*{LIT})+\s*)\)'),
+    Spec("berries", "berry_name", "src/berry.c",
+         rf'\[(?P<key>ITEM_\w+) - FIRST_BERRY_INDEX\] =\s*\{{\s*\.name = _\((?P<body>(?:\s*{LIT})+\s*)\)',
+         "BERRYNAME_{}"),
+    Spec("berries", "berry_desc", "src/berry.c",
+         rf'static const u8 (?P<key>sBerryDescriptionPart\d_\w+)\[\] = _\((?P<body>(?:\s*{LIT})+\s*)\)'),
+]
+
+
+@dataclass
+class Entry:
+    key: str
+    text: str
+    spec: Spec
+    start: int  # span of the body inside the file
+    end: int
+
+
+def body_to_text(body):
+    """Join the C literals of a `_()` body into one raw string."""
+    return "".join(m[1:-1] for m in re.findall(LIT, body))
+
+
+def text_to_body(text, old_body):
+    """Render raw text back as C literals, in the same layout as old_body."""
+    if "\n" not in old_body:
+        return f'"{text}"'
+    indent = re.search(r'\n([ \t]*)"', old_body).group(1)
+    lines = text.split("\\n")
+    lits = [f'"{l}\\n"' for l in lines[:-1]] + [f'"{lines[-1]}"']
+    return "".join(f"\n{indent}{l}" for l in lits)
+
+
+def scan(spec):
+    src = (ROOT / spec.path).read_text(encoding="utf-8")
+    out = []
+    for m in re.finditer(spec.pattern, src):
+        key = spec.key_fmt.format(m["key"])
+        out.append(Entry(key, body_to_text(m["body"]), spec, m.start("body"), m.end("body")))
+    return out
+
+
+def read_tsv(name):
+    path = TSV_DIR / f"{name}.tsv"
+    if not path.exists():
+        return []
+    with path.open(encoding="utf-8", newline="") as f:
+        rows = csv.DictReader(f, delimiter="\t", quoting=csv.QUOTE_NONE, quotechar=None)
+        return [{k: (v or "") for k, v in r.items()} for r in rows]
+
+
+def write_tsv(name, rows):
+    TSV_DIR.mkdir(parents=True, exist_ok=True)
+    with (TSV_DIR / f"{name}.tsv").open("w", encoding="utf-8", newline="") as f:
+        w = csv.DictWriter(f, TSV_FIELDS, delimiter="\t", quoting=csv.QUOTE_NONE,
+                           quotechar=None, lineterminator="\n")
+        w.writeheader()
+        for r in rows:
+            w.writerow({k: r.get(k, "") for k in TSV_FIELDS})
+
+
+# --- charmap + font widths -------------------------------------------------
+
+def load_charmap():
+    chars, tokens = {}, {}
+    for line in (ROOT / "charmap.txt").read_text(encoding="utf-8").splitlines():
+        line = line.split("@")[0].strip()
+        m = re.match(r"^'(.+)'\s*=\s*([0-9A-Fa-f ]+)$", line)
+        if m:
+            chars[m[1]] = [int(b, 16) for b in m[2].split()]
+            if m[1] == "\\'":  # the apostrophe is written unescaped in C strings
+                chars["'"] = chars[m[1]]
+            continue
+        m = re.match(r"^(\w+)\s*=\s*([0-9A-Fa-f ]+)$", line)
+        if m:
+            tokens[m[1]] = [int(b, 16) for b in m[2].split()]
+    return chars, tokens
+
+
+def load_widths():
+    src = (ROOT / "src/fonts.c").read_text(encoding="utf-8")
+    out = {}
+    for font, sym in (("normal", "gFontNormalLatinGlyphWidths"),
+                      ("narrow", "gFontNarrowLatinGlyphWidths")):
+        body = re.search(sym + r"\[\] = \{(.*?)\};", src, re.S)[1]
+        out[font] = [int(x) for x in re.findall(r"\d+", body)]
+    return out
+
+
+CHARS, TOKENS = load_charmap()
+WIDTHS = load_widths()
+
+
+def encode(text):
+    """Encode raw C text to (bytes, errors). Escapes like \\n become one byte."""
+    out, errors, i = [], [], 0
+    while i < len(text):
+        c = text[i]
+        if c == "\\" and i + 1 < len(text):
+            esc = "\\" + text[i + 1]
+            if esc in CHARS:
+                out += CHARS[esc]
+            else:
+                errors.append(f"unknown escape {esc}")
+            i += 2
+        elif c == "{":
+            j = text.find("}", i)
+            tok = text[i + 1:j].split()[0] if j > 0 else ""
+            if tok in TOKENS:
+                out += TOKENS[tok]
+            else:
+                errors.append(f"unknown token {{{tok}}}")
+            i = j + 1 if j > 0 else len(text)
+        else:
+            if c in CHARS:
+                out += CHARS[c]
+            else:
+                errors.append(f"character {c!r} not in charmap.txt")
+            i += 1
+    return out, errors
+
+
+def line_widths(text, font):
+    """Pixel width of each line (split on \\n). Control codes ({PLAYER} etc.) count 0 px."""
+    widths = WIDTHS[font]
+    out = []
+    for line in text.split("\\n"):
+        px = 0
+        for part in re.split(r"(\{[^}]*\})", line):
+            seq = encode(part)[0]
+            if seq and seq[0] < 0xF7:
+                px += sum(widths[b] for b in seq)
+        out.append(px)
+    return out

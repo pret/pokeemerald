@@ -1,0 +1,711 @@
+key	english	dutch	notes
+MOVE_NONE	-		
+MOVE_POUND	POUND		
+MOVE_KARATE_CHOP	KARATE CHOP		
+MOVE_DOUBLE_SLAP	DOUBLESLAP		
+MOVE_COMET_PUNCH	COMET PUNCH		
+MOVE_MEGA_PUNCH	MEGA PUNCH		
+MOVE_PAY_DAY	PAY DAY		
+MOVE_FIRE_PUNCH	FIRE PUNCH		
+MOVE_ICE_PUNCH	ICE PUNCH		
+MOVE_THUNDER_PUNCH	THUNDERPUNCH		
+MOVE_SCRATCH	SCRATCH		
+MOVE_VICE_GRIP	VICEGRIP		
+MOVE_GUILLOTINE	GUILLOTINE		
+MOVE_RAZOR_WIND	RAZOR WIND		
+MOVE_SWORDS_DANCE	SWORDS DANCE		
+MOVE_CUT	CUT		
+MOVE_GUST	GUST		
+MOVE_WING_ATTACK	WING ATTACK		
+MOVE_WHIRLWIND	WHIRLWIND		
+MOVE_FLY	FLY		
+MOVE_BIND	BIND		
+MOVE_SLAM	SLAM		
+MOVE_VINE_WHIP	VINE WHIP		
+MOVE_STOMP	STOMP		
+MOVE_DOUBLE_KICK	DOUBLE KICK		
+MOVE_MEGA_KICK	MEGA KICK		
+MOVE_JUMP_KICK	JUMP KICK		
+MOVE_ROLLING_KICK	ROLLING KICK		
+MOVE_SAND_ATTACK	SAND-ATTACK		
+MOVE_HEADBUTT	HEADBUTT		
+MOVE_HORN_ATTACK	HORN ATTACK		
+MOVE_FURY_ATTACK	FURY ATTACK		
+MOVE_HORN_DRILL	HORN DRILL		
+MOVE_TACKLE	TACKLE		
+MOVE_BODY_SLAM	BODY SLAM		
+MOVE_WRAP	WRAP		
+MOVE_TAKE_DOWN	TAKE DOWN		
+MOVE_THRASH	THRASH		
+MOVE_DOUBLE_EDGE	DOUBLE-EDGE		
+MOVE_TAIL_WHIP	TAIL WHIP		
+MOVE_POISON_STING	POISON STING		
+MOVE_TWINEEDLE	TWINEEDLE		
+MOVE_PIN_MISSILE	PIN MISSILE		
+MOVE_LEER	LEER		
+MOVE_BITE	BITE		
+MOVE_GROWL	GROWL		
+MOVE_ROAR	ROAR		
+MOVE_SING	SING		
+MOVE_SUPERSONIC	SUPERSONIC		
+MOVE_SONIC_BOOM	SONICBOOM		
+MOVE_DISABLE	DISABLE		
+MOVE_ACID	ACID		
+MOVE_EMBER	EMBER		
+MOVE_FLAMETHROWER	FLAMETHROWER		
+MOVE_MIST	MIST		
+MOVE_WATER_GUN	WATER GUN		
+MOVE_HYDRO_PUMP	HYDRO PUMP		
+MOVE_SURF	SURF		
+MOVE_ICE_BEAM	ICE BEAM		
+MOVE_BLIZZARD	BLIZZARD		
+MOVE_PSYBEAM	PSYBEAM		
+MOVE_BUBBLE_BEAM	BUBBLEBEAM		
+MOVE_AURORA_BEAM	AURORA BEAM		
+MOVE_HYPER_BEAM	HYPER BEAM		
+MOVE_PECK	PECK		
+MOVE_DRILL_PECK	DRILL PECK		
+MOVE_SUBMISSION	SUBMISSION		
+MOVE_LOW_KICK	LOW KICK		
+MOVE_COUNTER	COUNTER		
+MOVE_SEISMIC_TOSS	SEISMIC TOSS		
+MOVE_STRENGTH	STRENGTH		
+MOVE_ABSORB	ABSORB		
+MOVE_MEGA_DRAIN	MEGA DRAIN		
+MOVE_LEECH_SEED	LEECH SEED		
+MOVE_GROWTH	GROWTH		
+MOVE_RAZOR_LEAF	RAZOR LEAF		
+MOVE_SOLAR_BEAM	SOLARBEAM		
+MOVE_POISON_POWDER	POISONPOWDER		
+MOVE_STUN_SPORE	STUN SPORE		
+MOVE_SLEEP_POWDER	SLEEP POWDER		
+MOVE_PETAL_DANCE	PETAL DANCE		
+MOVE_STRING_SHOT	STRING SHOT		
+MOVE_DRAGON_RAGE	DRAGON RAGE		
+MOVE_FIRE_SPIN	FIRE SPIN		
+MOVE_THUNDER_SHOCK	THUNDERSHOCK		
+MOVE_THUNDERBOLT	THUNDERBOLT		
+MOVE_THUNDER_WAVE	THUNDER WAVE		
+MOVE_THUNDER	THUNDER		
+MOVE_ROCK_THROW	ROCK THROW		
+MOVE_EARTHQUAKE	EARTHQUAKE		
+MOVE_FISSURE	FISSURE		
+MOVE_DIG	DIG		
+MOVE_TOXIC	TOXIC		
+MOVE_CONFUSION	CONFUSION		
+MOVE_PSYCHIC	PSYCHIC		
+MOVE_HYPNOSIS	HYPNOSIS		
+MOVE_MEDITATE	MEDITATE		
+MOVE_AGILITY	AGILITY		
+MOVE_QUICK_ATTACK	QUICK ATTACK		
+MOVE_RAGE	RAGE		
+MOVE_TELEPORT	TELEPORT		
+MOVE_NIGHT_SHADE	NIGHT SHADE		
+MOVE_MIMIC	MIMIC		
+MOVE_SCREECH	SCREECH		
+MOVE_DOUBLE_TEAM	DOUBLE TEAM		
+MOVE_RECOVER	RECOVER		
+MOVE_HARDEN	HARDEN		
+MOVE_MINIMIZE	MINIMIZE		
+MOVE_SMOKESCREEN	SMOKESCREEN		
+MOVE_CONFUSE_RAY	CONFUSE RAY		
+MOVE_WITHDRAW	WITHDRAW		
+MOVE_DEFENSE_CURL	DEFENSE CURL		
+MOVE_BARRIER	BARRIER		
+MOVE_LIGHT_SCREEN	LIGHT SCREEN		
+MOVE_HAZE	HAZE		
+MOVE_REFLECT	REFLECT		
+MOVE_FOCUS_ENERGY	FOCUS ENERGY		
+MOVE_BIDE	BIDE		
+MOVE_METRONOME	METRONOME		
+MOVE_MIRROR_MOVE	MIRROR MOVE		
+MOVE_SELF_DESTRUCT	SELFDESTRUCT		
+MOVE_EGG_BOMB	EGG BOMB		
+MOVE_LICK	LICK		
+MOVE_SMOG	SMOG		
+MOVE_SLUDGE	SLUDGE		
+MOVE_BONE_CLUB	BONE CLUB		
+MOVE_FIRE_BLAST	FIRE BLAST		
+MOVE_WATERFALL	WATERFALL		
+MOVE_CLAMP	CLAMP		
+MOVE_SWIFT	SWIFT		
+MOVE_SKULL_BASH	SKULL BASH		
+MOVE_SPIKE_CANNON	SPIKE CANNON		
+MOVE_CONSTRICT	CONSTRICT		
+MOVE_AMNESIA	AMNESIA		
+MOVE_KINESIS	KINESIS		
+MOVE_SOFT_BOILED	SOFTBOILED		
+MOVE_HI_JUMP_KICK	HI JUMP KICK		
+MOVE_GLARE	GLARE		
+MOVE_DREAM_EATER	DREAM EATER		
+MOVE_POISON_GAS	POISON GAS		
+MOVE_BARRAGE	BARRAGE		
+MOVE_LEECH_LIFE	LEECH LIFE		
+MOVE_LOVELY_KISS	LOVELY KISS		
+MOVE_SKY_ATTACK	SKY ATTACK		
+MOVE_TRANSFORM	TRANSFORM		
+MOVE_BUBBLE	BUBBLE		
+MOVE_DIZZY_PUNCH	DIZZY PUNCH		
+MOVE_SPORE	SPORE		
+MOVE_FLASH	FLASH		
+MOVE_PSYWAVE	PSYWAVE		
+MOVE_SPLASH	SPLASH		
+MOVE_ACID_ARMOR	ACID ARMOR		
+MOVE_CRABHAMMER	CRABHAMMER		
+MOVE_EXPLOSION	EXPLOSION		
+MOVE_FURY_SWIPES	FURY SWIPES		
+MOVE_BONEMERANG	BONEMERANG		
+MOVE_REST	REST		
+MOVE_ROCK_SLIDE	ROCK SLIDE		
+MOVE_HYPER_FANG	HYPER FANG		
+MOVE_SHARPEN	SHARPEN		
+MOVE_CONVERSION	CONVERSION		
+MOVE_TRI_ATTACK	TRI ATTACK		
+MOVE_SUPER_FANG	SUPER FANG		
+MOVE_SLASH	SLASH		
+MOVE_SUBSTITUTE	SUBSTITUTE		
+MOVE_STRUGGLE	STRUGGLE		
+MOVE_SKETCH	SKETCH		
+MOVE_TRIPLE_KICK	TRIPLE KICK		
+MOVE_THIEF	THIEF		
+MOVE_SPIDER_WEB	SPIDER WEB		
+MOVE_MIND_READER	MIND READER		
+MOVE_NIGHTMARE	NIGHTMARE		
+MOVE_FLAME_WHEEL	FLAME WHEEL		
+MOVE_SNORE	SNORE		
+MOVE_CURSE	CURSE		
+MOVE_FLAIL	FLAIL		
+MOVE_CONVERSION_2	CONVERSION 2		
+MOVE_AEROBLAST	AEROBLAST		
+MOVE_COTTON_SPORE	COTTON SPORE		
+MOVE_REVERSAL	REVERSAL		
+MOVE_SPITE	SPITE		
+MOVE_POWDER_SNOW	POWDER SNOW		
+MOVE_PROTECT	PROTECT		
+MOVE_MACH_PUNCH	MACH PUNCH		
+MOVE_SCARY_FACE	SCARY FACE		
+MOVE_FAINT_ATTACK	FAINT ATTACK		
+MOVE_SWEET_KISS	SWEET KISS		
+MOVE_BELLY_DRUM	BELLY DRUM		
+MOVE_SLUDGE_BOMB	SLUDGE BOMB		
+MOVE_MUD_SLAP	MUD-SLAP		
+MOVE_OCTAZOOKA	OCTAZOOKA		
+MOVE_SPIKES	SPIKES		
+MOVE_ZAP_CANNON	ZAP CANNON		
+MOVE_FORESIGHT	FORESIGHT		
+MOVE_DESTINY_BOND	DESTINY BOND		
+MOVE_PERISH_SONG	PERISH SONG		
+MOVE_ICY_WIND	ICY WIND		
+MOVE_DETECT	DETECT		
+MOVE_BONE_RUSH	BONE RUSH		
+MOVE_LOCK_ON	LOCK-ON		
+MOVE_OUTRAGE	OUTRAGE		
+MOVE_SANDSTORM	SANDSTORM		
+MOVE_GIGA_DRAIN	GIGA DRAIN		
+MOVE_ENDURE	ENDURE		
+MOVE_CHARM	CHARM		
+MOVE_ROLLOUT	ROLLOUT		
+MOVE_FALSE_SWIPE	FALSE SWIPE		
+MOVE_SWAGGER	SWAGGER		
+MOVE_MILK_DRINK	MILK DRINK		
+MOVE_SPARK	SPARK		
+MOVE_FURY_CUTTER	FURY CUTTER		
+MOVE_STEEL_WING	STEEL WING		
+MOVE_MEAN_LOOK	MEAN LOOK		
+MOVE_ATTRACT	ATTRACT		
+MOVE_SLEEP_TALK	SLEEP TALK		
+MOVE_HEAL_BELL	HEAL BELL		
+MOVE_RETURN	RETURN		
+MOVE_PRESENT	PRESENT		
+MOVE_FRUSTRATION	FRUSTRATION		
+MOVE_SAFEGUARD	SAFEGUARD		
+MOVE_PAIN_SPLIT	PAIN SPLIT		
+MOVE_SACRED_FIRE	SACRED FIRE		
+MOVE_MAGNITUDE	MAGNITUDE		
+MOVE_DYNAMIC_PUNCH	DYNAMICPUNCH		
+MOVE_MEGAHORN	MEGAHORN		
+MOVE_DRAGON_BREATH	DRAGONBREATH		
+MOVE_BATON_PASS	BATON PASS		
+MOVE_ENCORE	ENCORE		
+MOVE_PURSUIT	PURSUIT		
+MOVE_RAPID_SPIN	RAPID SPIN		
+MOVE_SWEET_SCENT	SWEET SCENT		
+MOVE_IRON_TAIL	IRON TAIL		
+MOVE_METAL_CLAW	METAL CLAW		
+MOVE_VITAL_THROW	VITAL THROW		
+MOVE_MORNING_SUN	MORNING SUN		
+MOVE_SYNTHESIS	SYNTHESIS		
+MOVE_MOONLIGHT	MOONLIGHT		
+MOVE_HIDDEN_POWER	HIDDEN POWER		
+MOVE_CROSS_CHOP	CROSS CHOP		
+MOVE_TWISTER	TWISTER		
+MOVE_RAIN_DANCE	RAIN DANCE		
+MOVE_SUNNY_DAY	SUNNY DAY		
+MOVE_CRUNCH	CRUNCH		
+MOVE_MIRROR_COAT	MIRROR COAT		
+MOVE_PSYCH_UP	PSYCH UP		
+MOVE_EXTREME_SPEED	EXTREMESPEED		
+MOVE_ANCIENT_POWER	ANCIENTPOWER		
+MOVE_SHADOW_BALL	SHADOW BALL		
+MOVE_FUTURE_SIGHT	FUTURE SIGHT		
+MOVE_ROCK_SMASH	ROCK SMASH		
+MOVE_WHIRLPOOL	WHIRLPOOL		
+MOVE_BEAT_UP	BEAT UP		
+MOVE_FAKE_OUT	FAKE OUT		
+MOVE_UPROAR	UPROAR		
+MOVE_STOCKPILE	STOCKPILE		
+MOVE_SPIT_UP	SPIT UP		
+MOVE_SWALLOW	SWALLOW		
+MOVE_HEAT_WAVE	HEAT WAVE		
+MOVE_HAIL	HAIL		
+MOVE_TORMENT	TORMENT		
+MOVE_FLATTER	FLATTER		
+MOVE_WILL_O_WISP	WILL-O-WISP		
+MOVE_MEMENTO	MEMENTO		
+MOVE_FACADE	FACADE		
+MOVE_FOCUS_PUNCH	FOCUS PUNCH		
+MOVE_SMELLING_SALT	SMELLINGSALT		
+MOVE_FOLLOW_ME	FOLLOW ME		
+MOVE_NATURE_POWER	NATURE POWER		
+MOVE_CHARGE	CHARGE		
+MOVE_TAUNT	TAUNT		
+MOVE_HELPING_HAND	HELPING HAND		
+MOVE_TRICK	TRICK		
+MOVE_ROLE_PLAY	ROLE PLAY		
+MOVE_WISH	WISH		
+MOVE_ASSIST	ASSIST		
+MOVE_INGRAIN	INGRAIN		
+MOVE_SUPERPOWER	SUPERPOWER		
+MOVE_MAGIC_COAT	MAGIC COAT		
+MOVE_RECYCLE	RECYCLE		
+MOVE_REVENGE	REVENGE		
+MOVE_BRICK_BREAK	BRICK BREAK		
+MOVE_YAWN	YAWN		
+MOVE_KNOCK_OFF	KNOCK OFF		
+MOVE_ENDEAVOR	ENDEAVOR		
+MOVE_ERUPTION	ERUPTION		
+MOVE_SKILL_SWAP	SKILL SWAP		
+MOVE_IMPRISON	IMPRISON		
+MOVE_REFRESH	REFRESH		
+MOVE_GRUDGE	GRUDGE		
+MOVE_SNATCH	SNATCH		
+MOVE_SECRET_POWER	SECRET POWER		
+MOVE_DIVE	DIVE		
+MOVE_ARM_THRUST	ARM THRUST		
+MOVE_CAMOUFLAGE	CAMOUFLAGE		
+MOVE_TAIL_GLOW	TAIL GLOW		
+MOVE_LUSTER_PURGE	LUSTER PURGE		
+MOVE_MIST_BALL	MIST BALL		
+MOVE_FEATHER_DANCE	FEATHERDANCE		
+MOVE_TEETER_DANCE	TEETER DANCE		
+MOVE_BLAZE_KICK	BLAZE KICK		
+MOVE_MUD_SPORT	MUD SPORT		
+MOVE_ICE_BALL	ICE BALL		
+MOVE_NEEDLE_ARM	NEEDLE ARM		
+MOVE_SLACK_OFF	SLACK OFF		
+MOVE_HYPER_VOICE	HYPER VOICE		
+MOVE_POISON_FANG	POISON FANG		
+MOVE_CRUSH_CLAW	CRUSH CLAW		
+MOVE_BLAST_BURN	BLAST BURN		
+MOVE_HYDRO_CANNON	HYDRO CANNON		
+MOVE_METEOR_MASH	METEOR MASH		
+MOVE_ASTONISH	ASTONISH		
+MOVE_WEATHER_BALL	WEATHER BALL		
+MOVE_AROMATHERAPY	AROMATHERAPY		
+MOVE_FAKE_TEARS	FAKE TEARS		
+MOVE_AIR_CUTTER	AIR CUTTER		
+MOVE_OVERHEAT	OVERHEAT		
+MOVE_ODOR_SLEUTH	ODOR SLEUTH		
+MOVE_ROCK_TOMB	ROCK TOMB		
+MOVE_SILVER_WIND	SILVER WIND		
+MOVE_METAL_SOUND	METAL SOUND		
+MOVE_GRASS_WHISTLE	GRASSWHISTLE		
+MOVE_TICKLE	TICKLE		
+MOVE_COSMIC_POWER	COSMIC POWER		
+MOVE_WATER_SPOUT	WATER SPOUT		
+MOVE_SIGNAL_BEAM	SIGNAL BEAM		
+MOVE_SHADOW_PUNCH	SHADOW PUNCH		
+MOVE_EXTRASENSORY	EXTRASENSORY		
+MOVE_SKY_UPPERCUT	SKY UPPERCUT		
+MOVE_SAND_TOMB	SAND TOMB		
+MOVE_SHEER_COLD	SHEER COLD		
+MOVE_MUDDY_WATER	MUDDY WATER		
+MOVE_BULLET_SEED	BULLET SEED		
+MOVE_AERIAL_ACE	AERIAL ACE		
+MOVE_ICICLE_SPEAR	ICICLE SPEAR		
+MOVE_IRON_DEFENSE	IRON DEFENSE		
+MOVE_BLOCK	BLOCK		
+MOVE_HOWL	HOWL		
+MOVE_DRAGON_CLAW	DRAGON CLAW		
+MOVE_FRENZY_PLANT	FRENZY PLANT		
+MOVE_BULK_UP	BULK UP		
+MOVE_BOUNCE	BOUNCE		
+MOVE_MUD_SHOT	MUD SHOT		
+MOVE_POISON_TAIL	POISON TAIL		
+MOVE_COVET	COVET		
+MOVE_VOLT_TACKLE	VOLT TACKLE		
+MOVE_MAGICAL_LEAF	MAGICAL LEAF		
+MOVE_WATER_SPORT	WATER SPORT		
+MOVE_CALM_MIND	CALM MIND		
+MOVE_LEAF_BLADE	LEAF BLADE		
+MOVE_DRAGON_DANCE	DRAGON DANCE		
+MOVE_ROCK_BLAST	ROCK BLAST		
+MOVE_SHOCK_WAVE	SHOCK WAVE		
+MOVE_WATER_PULSE	WATER PULSE		
+MOVE_DOOM_DESIRE	DOOM DESIRE		
+MOVE_PSYCHO_BOOST	PSYCHO BOOST		
+sNullDescription			
+sPoundDescription	Pounds the foe with\nforelegs or tail.		
+sKarateChopDescription	A chopping attack with a\nhigh critical-hit ratio.		
+sDoubleSlapDescription	Repeatedly slaps the foe\n2 to 5 times.		
+sCometPunchDescription	Repeatedly punches the foe\n2 to 5 times.		
+sMegaPunchDescription	A strong punch thrown with\nincredible power.		
+sPayDayDescription	Throws coins at the foe.\nMoney is recovered after.		
+sFirePunchDescription	A fiery punch that may burn\nthe foe.		
+sIcePunchDescription	An icy punch that may\nfreeze the foe.		
+sThunderPunchDescription	An electrified punch that\nmay paralyze the foe.		
+sScratchDescription	Scratches the foe with\nsharp claws.		
+sViceGripDescription	Grips the foe with large and\npowerful pincers.		
+sGuillotineDescription	A powerful pincer attack\nthat may cause fainting.		
+sRazorWindDescription	A 2-turn move that strikes\nthe foe on the 2nd turn.		
+sSwordsDanceDescription	A fighting dance that\nsharply raises ATTACK.		
+sCutDescription	Cuts the foe with sharp\nscythes, claws, etc.		
+sGustDescription	Strikes the foe with a gust\nof wind whipped up by wings.		
+sWingAttackDescription	Strikes the foe with wings\nspread wide.		
+sWhirlwindDescription	Blows away the foe with\nwind and ends the battle.		
+sFlyDescription	Flies up on the first turn,\nthen strikes the next turn.		
+sBindDescription	Binds and squeezes the foe\nfor 2 to 5 turns.		
+sSlamDescription	Slams the foe with a long\ntail, vine, etc.		
+sVineWhipDescription	Strikes the foe with\nslender, whiplike vines.		
+sStompDescription	Stomps the enemy with a big\nfoot. May cause flinching.		
+sDoubleKickDescription	A double-kicking attack\nthat strikes the foe twice.		
+sMegaKickDescription	An extremely powerful kick\nwith intense force.		
+sJumpKickDescription	A strong jumping kick. May\nmiss and hurt the kicker.		
+sRollingKickDescription	A fast kick delivered from\na rapid spin.		
+sSandAttackDescription	Reduces the foe's accuracy\nby hurling sand in its face.		
+sHeadbuttDescription	A ramming attack that may\ncause flinching.		
+sHornAttackDescription	Jabs the foe with sharp\nhorns.		
+sFuryAttackDescription	Jabs the foe 2 to 5 times\nwith sharp horns, etc.		
+sHornDrillDescription	A one-hit KO attack that\nuses a horn like a drill.		
+sTackleDescription	Charges the foe with a full-\nbody tackle.		
+sBodySlamDescription	A full-body slam that may\ncause paralysis.		
+sWrapDescription	Wraps and squeezes the foe\n2 to 5 times with vines, etc.		
+sTakeDownDescription	A reckless charge attack\nthat also hurts the user.		
+sThrashDescription	A rampage of 2 to 3 turns\nthat confuses the user.		
+sDoubleEdgeDescription	A life-risking tackle that\nalso hurts the user.		
+sTailWhipDescription	Wags the tail to lower the\nfoe's DEFENSE.		
+sPoisonStingDescription	A toxic attack with barbs,\netc., that may poison.		
+sTwineedleDescription	Stingers on the forelegs\njab the foe twice.		
+sPinMissileDescription	Sharp pins are fired to\nstrike 2 to 5 times.		
+sLeerDescription	Frightens the foe with a\nleer to lower DEFENSE.		
+sBiteDescription	Bites with vicious fangs.\nMay cause flinching.		
+sGrowlDescription	Growls cutely to reduce the\nfoe's ATTACK.		
+sRoarDescription	Makes the foe flee to end\nthe battle.		
+sSingDescription	A soothing song lulls the\nfoe into a deep slumber.		
+sSupersonicDescription	Emits bizarre sound waves\nthat may confuse the foe.		
+sSonicBoomDescription	Launches shock waves that\nalways inflict 20 HP damage.		
+sDisableDescription	Psychically disables one of\nthe foe's moves.		
+sAcidDescription	Sprays a hide-melting acid.\nMay lower DEFENSE.		
+sEmberDescription	A weak fire attack that may\ninflict a burn.		
+sFlamethrowerDescription	A powerful fire attack that\nmay inflict a burn.		
+sMistDescription	Creates a mist that stops\nreduction of abilities.		
+sWaterGunDescription	Squirts water to attack\nthe foe.		
+sHydroPumpDescription	Blasts water at high power\nto strike the foe.		
+sSurfDescription	Creates a huge wave, then\ncrashes it down on the foe.		
+sIceBeamDescription	Blasts the foe with an icy\nbeam that may freeze it.		
+sBlizzardDescription	Hits the foe with an icy\nstorm that may freeze it.		
+sPsybeamDescription	Fires a peculiar ray that\nmay confuse the foe.		
+sBubbleBeamDescription	Forcefully sprays bubbles\nthat may lower SPEED.		
+sAuroraBeamDescription	Fires a rainbow-colored\nbeam that may lower ATTACK.		
+sHyperBeamDescription	Powerful, but leaves the\nuser immobile the next turn.		
+sPeckDescription	Attacks the foe with a\njabbing beak, etc.		
+sDrillPeckDescription	A corkscrewing attack with\nthe beak acting as a drill.		
+sSubmissionDescription	A reckless body slam that\nalso hurts the user.		
+sLowKickDescription	A kick that inflicts more\ndamage on heavier foes.		
+sCounterDescription	Retaliates any physical hit\nwith double the power.		
+sSeismicTossDescription	Inflicts damage identical\nto the user's level.		
+sStrengthDescription	Builds enormous power,\nthen slams the foe.		
+sAbsorbDescription	An attack that absorbs\nhalf the damage inflicted.		
+sMegaDrainDescription	An attack that absorbs\nhalf the damage inflicted.		
+sLeechSeedDescription	Plants a seed on the foe to\nsteal HP on every turn.		
+sGrowthDescription	Forces the body to grow\nand heightens SP. ATK.		
+sRazorLeafDescription	Cuts the enemy with leaves.\nHigh critical-hit ratio.		
+sSolarBeamDescription	Absorbs light in one turn,\nthen attacks next turn.		
+sPoisonPowderDescription	Scatters a toxic powder\nthat may poison the foe.		
+sStunSporeDescription	Scatters a powder that may\nparalyze the foe.		
+sSleepPowderDescription	Scatters a powder that may\ncause the foe to sleep.		
+sPetalDanceDescription	A rampage of 2 to 3 turns\nthat confuses the user.		
+sStringShotDescription	Binds the foe with string\nto reduce its SPEED.		
+sDragonRageDescription	Launches shock waves that\nalways inflict 40 HP damage.		
+sFireSpinDescription	Traps the foe in a ring of\nfire for 2 to 5 turns.		
+sThunderShockDescription	An electrical attack that\nmay paralyze the foe.		
+sThunderboltDescription	A strong electrical attack\nthat may paralyze the foe.		
+sThunderWaveDescription	A weak jolt of electricity\nthat paralyzes the foe.		
+sThunderDescription	A lightning attack that may\ncause paralysis.		
+sRockThrowDescription	Throws small rocks to\nstrike the foe.		
+sEarthquakeDescription	A powerful quake, but has\nno effect on flying foes.		
+sFissureDescription	A one-hit KO move that\ndrops the foe in a fissure.		
+sDigDescription	Digs underground the first\nturn and strikes next turn.		
+sToxicDescription	Poisons the foe with an\nintensifying toxin.		
+sConfusionDescription	A psychic attack that may\ncause confusion.		
+sPsychicDescription	A powerful psychic attack\nthat may lower SP. DEF.		
+sHypnosisDescription	A hypnotizing move that\nmay induce sleep.		
+sMeditateDescription	Meditates in a peaceful\nfashion to raise ATTACK.		
+sAgilityDescription	Relaxes the body to sharply\nboost SPEED.		
+sQuickAttackDescription	An extremely fast attack\nthat always strikes first.		
+sRageDescription	Raises the user's ATTACK\nevery time it is hit.		
+sTeleportDescription	A psychic move for fleeing\nfrom battle instantly.		
+sNightShadeDescription	Inflicts damage identical\nto the user's level.		
+sMimicDescription	Copies a move used by the\nfoe during one battle.		
+sScreechDescription	Emits a screech to sharply\nreduce the foe's DEFENSE.		
+sDoubleTeamDescription	Creates illusory copies to\nraise evasiveness.		
+sRecoverDescription	Recovers up to half the\nuser's maximum HP.		
+sHardenDescription	Stiffens the body's \nmuscles to raise DEFENSE.		
+sMinimizeDescription	Minimizes the user's size\nto raise evasiveness.		
+sSmokescreenDescription	Lowers the foe's accuracy\nusing smoke, ink, etc.		
+sConfuseRayDescription	A sinister ray that\nconfuses the foe.		
+sWithdrawDescription	Withdraws the body into its\nhard shell to raise DEFENSE.		
+sDefenseCurlDescription	Curls up to conceal weak\nspots and raise DEFENSE.		
+sBarrierDescription	Creates a barrier that\nsharply raises DEFENSE.		
+sLightScreenDescription	Creates a wall of light that\nlowers SP. ATK damage.		
+sHazeDescription	Creates a black haze that\neliminates all stat changes.		
+sReflectDescription	Creates a wall of light that\nweakens physical attacks.		
+sFocusEnergyDescription	Focuses power to raise the\ncritical-hit ratio.		
+sBideDescription	Endures attack for 2\nturns to retaliate double.		
+sMetronomeDescription	Waggles a finger to use any\nPOKéMON move at random.		
+sMirrorMoveDescription	Counters the foe's attack\nwith the same move.		
+sSelfDestructDescription	Inflicts severe damage but\nmakes the user faint.		
+sEggBombDescription	An egg is forcibly hurled at\nthe foe.		
+sLickDescription	Licks with a long tongue to\ninjure. May also paralyze.		
+sSmogDescription	An exhaust-gas attack\nthat may also poison.		
+sSludgeDescription	Sludge is hurled to inflict\ndamage. May also poison.		
+sBoneClubDescription	Clubs the foe with a bone.\nMay cause flinching.		
+sFireBlastDescription	Incinerates everything it\nstrikes. May cause a burn.		
+sWaterfallDescription	Charges the foe with speed\nto climb waterfalls.		
+sClampDescription	Traps and squeezes the\nfoe for 2 to 5 turns.		
+sSwiftDescription	Sprays star-shaped rays\nthat never miss.		
+sSkullBashDescription	Tucks in the head, then\nattacks on the next turn.		
+sSpikeCannonDescription	Launches sharp spikes that\nstrike 2 to 5 times.		
+sConstrictDescription	Constricts to inflict pain.\nMay lower SPEED.		
+sAmnesiaDescription	Forgets about something\nand sharply raises SP. DEF.		
+sKinesisDescription	Distracts the foe.\nMay lower accuracy.		
+sSoftBoiledDescription	Recovers up to half the\nuser's maximum HP.		
+sHiJumpKickDescription	A jumping knee kick. If it\nmisses, the user is hurt.		
+sGlareDescription	Intimidates and frightens\nthe foe into paralysis.		
+sDreamEaterDescription	Takes one half the damage\ninflicted on a sleeping foe.		
+sPoisonGasDescription	Envelops the foe in a toxic\ngas that may poison.		
+sBarrageDescription	Hurls round objects at the\nfoe 2 to 5 times.		
+sLeechLifeDescription	An attack that steals half\nthe damage inflicted.		
+sLovelyKissDescription	Demands a kiss with a scary\nface that induces sleep.		
+sSkyAttackDescription	Searches out weak spots,\nthen strikes the next turn.		
+sTransformDescription	Alters the user's cells to\nbecome a copy of the foe.		
+sBubbleDescription	An attack using bubbles.\nMay lower the foe's SPEED.		
+sDizzyPunchDescription	A rhythmic punch that may\nconfuse the foe.		
+sSporeDescription	Scatters a cloud of spores\nthat always induce sleep.		
+sFlashDescription	Looses a powerful blast of\nlight that cuts accuracy.		
+sPsywaveDescription	Attacks with a psychic\nwave of varying intensity.		
+sSplashDescription	It's just a splash...\nHas no effect whatsoever.		
+sAcidArmorDescription	Liquifies the user's body\nto sharply raise DEFENSE.		
+sCrabhammerDescription	Hammers with a pincer. Has a\nhigh critical-hit ratio.		
+sExplosionDescription	Inflicts severe damage but\nmakes the user faint.		
+sFurySwipesDescription	Rakes the foe with sharp\nclaws, etc., 2 to 5 times.		
+sBonemerangDescription	Throws a bone boomerang\nthat strikes twice.		
+sRestDescription	The user sleeps for 2 turns,\nrestoring HP and status.		
+sRockSlideDescription	Large boulders are hurled.\nMay cause flinching.		
+sHyperFangDescription	Attacks with sharp fangs.\nMay cause flinching.		
+sSharpenDescription	Reduces the polygon count\nand raises ATTACK.		
+sConversionDescription	Changes the user's type\ninto a known move's type.		
+sTriAttackDescription	Fires three types of beams\nat the same time.		
+sSuperFangDescription	Attacks with sharp fangs\nand cuts half the foe's HP.		
+sSlashDescription	Slashes with claws, etc. Has\na high critical-hit ratio.		
+sSubstituteDescription	Creates a decoy using 1/4\nof the user's maximum HP.		
+sStruggleDescription	Used only if all PP are gone.\nAlso hurts the user a little.		
+sSketchDescription	Copies the foe's last move\npermanently.		
+sTripleKickDescription	Kicks the foe 3 times in a\nrow with rising intensity.		
+sThiefDescription	While attacking, it may\nsteal the foe's held item.		
+sSpiderWebDescription	Ensnares the foe to stop it\nfrom fleeing or switching.		
+sMindReaderDescription	Senses the foe's action to\nensure the next move's hit.		
+sNightmareDescription	Inflicts 1/4 damage on a\nsleeping foe every turn.		
+sFlameWheelDescription	A fiery charge attack that\nmay inflict a burn.		
+sSnoreDescription	A loud attack that can be\nused only while asleep.		
+sCurseDescription	A move that functions\ndifferently for GHOSTS.		
+sFlailDescription	Inflicts more damage when\nthe user's HP is down.		
+sConversion2Description	Makes the user resistant\nto the last attack's type.		
+sAeroblastDescription	Launches a vacuumed blast.\nHigh critical-hit ratio.		
+sCottonSporeDescription	Spores cling to the foe,\nsharply reducing SPEED.		
+sReversalDescription	Inflicts more damage when\nthe user's HP is down.		
+sSpiteDescription	Spitefully cuts the PP\nof the foe's last move.		
+sPowderSnowDescription	Blasts the foe with a snowy\ngust. May cause freezing.		
+sProtectDescription	Evades attack, but may fail\nif used in succession.		
+sMachPunchDescription	A punch is thrown at wicked\nspeed to strike first.		
+sScaryFaceDescription	Frightens with a scary face\nto sharply reduce SPEED.		
+sFaintAttackDescription	Draws the foe close, then\nstrikes without fail.		
+sSweetKissDescription	Demands a kiss with a cute\nlook. May cause confusion.		
+sBellyDrumDescription	Maximizes ATTACK while\nsacrificing HP.		
+sSludgeBombDescription	Sludge is hurled to inflict\ndamage. May also poison.		
+sMudSlapDescription	Hurls mud in the foe's face\nto reduce its accuracy.		
+sOctazookaDescription	Fires a lump of ink to\ndamage and cut accuracy.		
+sSpikesDescription	Sets spikes that hurt a \nfoe switching in.		
+sZapCannonDescription	Powerful and sure to cause\nparalysis, but inaccurate.		
+sForesightDescription	Negates the foe's efforts\nto heighten evasiveness.		
+sDestinyBondDescription	If the user faints, the foe\nis also made to faint.		
+sPerishSongDescription	Any POKéMON hearing this\nsong faints in 3 turns.		
+sIcyWindDescription	A chilling attack that\nlowers the foe's SPEED.		
+sDetectDescription	Evades attack, but may fail\nif used in succession.		
+sBoneRushDescription	Strikes the foe with a bone\nin hand 2 to 5 times.		
+sLockOnDescription	Locks on to the foe to\nensure the next move hits.		
+sOutrageDescription	A rampage of 2 to 3 turns\nthat confuses the user.		
+sSandstormDescription	Causes a sandstorm that\nrages for several turns.		
+sGigaDrainDescription	An attack that steals half\nthe damage inflicted.		
+sEndureDescription	Endures any attack for\n1 turn, leaving at least 1HP.		
+sCharmDescription	Charms the foe and sharply\nreduces its ATTACK.		
+sRolloutDescription	An attack lasting 5 turns\nwith rising intensity.		
+sFalseSwipeDescription	An attack that leaves the\nfoe with at least 1 HP.		
+sSwaggerDescription	Confuses the foe, but also\nsharply raises ATTACK.		
+sMilkDrinkDescription	Recovers up to half the\nuser's maximum HP.		
+sSparkDescription	An electrified tackle that\nmay paralyze the foe.		
+sFuryCutterDescription	An attack that intensifies\non each successive hit.		
+sSteelWingDescription	Strikes the foe with hard\nwings spread wide.		
+sMeanLookDescription	Fixes the foe with a mean\nlook that prevents escape.		
+sAttractDescription	Makes the opposite gender\nless likely to attack.		
+sSleepTalkDescription	Uses an available move\nrandomly while asleep.		
+sHealBellDescription	Chimes soothingly to heal\nall status abnormalities.		
+sReturnDescription	An attack that increases\nin power with friendship.		
+sPresentDescription	A gift in the form of a\nbomb. May restore HP.		
+sFrustrationDescription	An attack that is stronger\nif the TRAINER is disliked.		
+sSafeguardDescription	A mystical force prevents\nall status problems.		
+sPainSplitDescription	Adds the user and foe's HP,\nthen shares them equally.		
+sSacredFireDescription	A mystical fire attack that\nmay inflict a burn.		
+sMagnitudeDescription	A ground-shaking attack\nof random intensity.		
+sDynamicPunchDescription	Powerful and sure to cause\nconfusion, but inaccurate.		
+sMegahornDescription	A brutal ramming attack\nusing out-thrust horns.		
+sDragonBreathDescription	Strikes the foe with an\nincredible blast of breath.		
+sBatonPassDescription	Switches out the user while\nkeeping effects in play.		
+sEncoreDescription	Makes the foe repeat its\nlast move over 2 to 6 turns.		
+sPursuitDescription	Inflicts bad damage if used\non a foe switching out.		
+sRapidSpinDescription	Spins the body at high\nspeed to strike the foe.		
+sSweetScentDescription	Allures the foe to reduce\nevasiveness.		
+sIronTailDescription	Attacks with a rock-hard\ntail. May lower DEFENSE.		
+sMetalClawDescription	A claw attack that may\nraise the user's ATTACK.		
+sVitalThrowDescription	Makes the user's move last,\nbut it never misses.		
+sMorningSunDescription	Restores HP. The amount\nvaries with the weather.		
+sSynthesisDescription	Restores HP. The amount\nvaries with the weather.		
+sMoonlightDescription	Restores HP. The amount\nvaries with the weather.		
+sHiddenPowerDescription	The effectiveness varies\nwith the user.		
+sCrossChopDescription	A double-chopping attack.\nHigh critical-hit ratio.		
+sTwisterDescription	Whips up a vicious twister\nto tear at the foe.		
+sRainDanceDescription	Boosts the power of WATER-\ntype moves for 5 turns.		
+sSunnyDayDescription	Boosts the power of FIRE-\ntype moves for 5 turns.		
+sCrunchDescription	Crunches with sharp fangs.\nMay lower SP. DEF.		
+sMirrorCoatDescription	Counters the foe's special\nattack at double the power.		
+sPsychUpDescription	Copies the foe's effect(s)\nand gives to the user.		
+sExtremeSpeedDescription	An extremely fast and\npowerful attack.		
+sAncientPowerDescription	An attack that may raise\nall stats.		
+sShadowBallDescription	Hurls a black blob that may\nlower the foe's SP. DEF.		
+sFutureSightDescription	Heightens inner power to\nstrike 2 turns later.		
+sRockSmashDescription	A rock-crushing attack\nthat may lower DEFENSE.		
+sWhirlpoolDescription	Traps and hurts the foe in\na whirlpool for 2 to 5 turns.		
+sBeatUpDescription	Summons party POKéMON to\njoin in the attack.		
+sFakeOutDescription	A 1st-turn, 1st-strike move\nthat causes flinching.		
+sUproarDescription	Causes an uproar for 2 to 5\nturns and prevents sleep.		
+sStockpileDescription	Charges up power for up to\n3 turns.		
+sSpitUpDescription	Releases stockpiled power\n(the more the better).		
+sSwallowDescription	Absorbs stockpiled power\nand restores HP.		
+sHeatWaveDescription	Exhales a hot breath on the\nfoe. May inflict a burn.		
+sHailDescription	Summons a hailstorm that\nstrikes every turn.		
+sTormentDescription	Torments the foe and stops\nsuccessive use of a move.		
+sFlatterDescription	Confuses the foe, but\nraises its SP. ATK.		
+sWillOWispDescription	Inflicts a burn on the foe\nwith intense fire.		
+sMementoDescription	The user faints and lowers\nthe foe's abilities.		
+sFacadeDescription	Boosts ATTACK when burned,\nparalyzed, or poisoned.		
+sFocusPunchDescription	A powerful loyalty attack.\nThe user flinches if hit.		
+sSmellingSaltDescription	Powerful against paralyzed\nfoes, but also heals them.		
+sFollowMeDescription	Draws attention to make\nfoes attack only the user.		
+sNaturePowerDescription	The type of attack varies\ndepending on the location.		
+sChargeDescription	Charges power to boost the\nelectric move used next.		
+sTauntDescription	Taunts the foe into only\nusing attack moves.		
+sHelpingHandDescription	Boosts the power of the\nrecipient's moves.		
+sTrickDescription	Tricks the foe into trading\nheld items.		
+sRolePlayDescription	Mimics the target and\ncopies its special ability.		
+sWishDescription	A wish that restores HP.\nIt takes time to work.		
+sAssistDescription	Attacks randomly with one\nof the partner's moves.		
+sIngrainDescription	Lays roots that restore HP.\nThe user can't switch out.		
+sSuperpowerDescription	Boosts strength sharply,\nbut lowers abilities.		
+sMagicCoatDescription	Reflects special effects\nback to the attacker.		
+sRecycleDescription	Recycles a used item for\none more use.		
+sRevengeDescription	An attack that gains power\nif injured by the foe.		
+sBrickBreakDescription	Destroys barriers such as\nREFLECT and causes damage.		
+sYawnDescription	Lulls the foe into yawning,\nthen sleeping next turn.		
+sKnockOffDescription	Knocks down the foe's held\nitem to prevent its use.		
+sEndeavorDescription	Gains power if the user's HP\nis lower than the foe's HP.		
+sEruptionDescription	The higher the user's HP,\nthe more damage caused.		
+sSkillSwapDescription	The user swaps special\nabilities with the target.		
+sImprisonDescription	Prevents foes from using\nmoves known by the user.		
+sRefreshDescription	Heals poisoning, paralysis,\nor a burn.		
+sGrudgeDescription	If the user faints, deletes\nall PP of foe's last move.		
+sSnatchDescription	Steals the effects of the\nmove the target uses next.		
+sSecretPowerDescription	An attack with effects\nthat vary by location.		
+sDiveDescription	Dives underwater the first\nturn and strikes next turn.		
+sArmThrustDescription	Straight-arm punches that\nstrike the foe 2 to 5 times.		
+sCamouflageDescription	Alters the POKéMON's type\ndepending on the location.		
+sTailGlowDescription	Flashes a light that sharply\nraises SP. ATK.		
+sLusterPurgeDescription	Attacks with a burst of\nlight. May lower SP. DEF.		
+sMistBallDescription	Attacks with a flurry of\ndown. May lower SP. ATK.		
+sFeatherDanceDescription	Envelops the foe with down\nto sharply reduce ATTACK.		
+sTeeterDanceDescription	Confuses all POKéMON on\nthe scene.		
+sBlazeKickDescription	A kick with a high critical-\nhit ratio. May cause a burn.		
+sMudSportDescription	Covers the user in mud to\nraise electrical resistance.		
+sIceBallDescription	A 5-turn attack that gains\npower on successive hits.		
+sNeedleArmDescription	Attacks with thorny arms.\nMay cause flinching.		
+sSlackOffDescription	Slacks off and restores\nhalf the maximum HP.		
+sHyperVoiceDescription	A loud attack that uses\nsound waves to injure.		
+sPoisonFangDescription	A sharp-fanged attack.\nMay badly poison the foe.		
+sCrushClawDescription	Tears at the foe with sharp\nclaws. May lower DEFENSE.		
+sBlastBurnDescription	Powerful, but leaves the\nuser immobile the next turn.		
+sHydroCannonDescription	Powerful, but leaves the\nuser immobile the next turn.		
+sMeteorMashDescription	Fires a meteor-like punch.\nMay raise ATTACK.		
+sAstonishDescription	An attack that may shock\nthe foe into flinching.		
+sWeatherBallDescription	The move's type and power\nchange with the weather.		
+sAromatherapyDescription	Heals all status problems\nwith a soothing scent.		
+sFakeTearsDescription	Feigns crying to sharply\nlower the foe's SP. DEF.		
+sAirCutterDescription	Hacks with razorlike wind.\nHigh critical-hit ratio.		
+sOverheatDescription	Allows a full-power attack,\nbut sharply lowers SP. ATK.		
+sOdorSleuthDescription	Negates the foe's efforts\nto heighten evasiveness.		
+sRockTombDescription	Stops the foe from moving\nwith rocks and cuts SPEED.		
+sSilverWindDescription	A powdery attack that may\nraise abilities.		
+sMetalSoundDescription	Emits a horrible screech\nthat sharply lowers SP. DEF.		
+sGrassWhistleDescription	Lulls the foe into sleep\nwith a pleasant melody.		
+sTickleDescription	Makes the foe laugh to\nlower ATTACK and DEFENSE.		
+sCosmicPowerDescription	Raises DEFENSE and SP. DEF\nwith a mystic power.		
+sWaterSpoutDescription	Inflicts more damage if the\nuser's HP is high.		
+sSignalBeamDescription	A strange beam attack that\nmay confuse the foe.		
+sShadowPunchDescription	An unavoidable punch that\nis thrown from shadows.		
+sExtrasensoryDescription	Attacks with a peculiar\npower. May cause flinching.		
+sSkyUppercutDescription	An uppercut thrown as if\nleaping into the sky.		
+sSandTombDescription	Traps and hurts the foe in\nquicksand for 2 to 5 turns.		
+sSheerColdDescription	A chilling attack that\ncauses fainting if it hits.		
+sMuddyWaterDescription	Attacks with muddy water.\nMay lower accuracy.		
+sBulletSeedDescription	Shoots 2 to 5 seeds in a row\nto strike the foe.		
+sAerialAceDescription	An extremely speedy and\nunavoidable attack.		
+sIcicleSpearDescription	Attacks the foe by firing\n2 to 5 icicles in a row.		
+sIronDefenseDescription	Hardens the body's surface\nto sharply raise DEFENSE.		
+sBlockDescription	Blocks the foe's way to\nprevent escape.		
+sHowlDescription	Howls to raise the spirit\nand boosts ATTACK.		
+sDragonClawDescription	Slashes the foe with sharp\nclaws.		
+sFrenzyPlantDescription	Powerful, but leaves the\nuser immobile the next turn.		
+sBulkUpDescription	Bulks up the body to boost\nboth ATTACK and DEFENSE.		
+sBounceDescription	Bounces up, then down the\nnext turn. May paralyze.		
+sMudShotDescription	Hurls mud at the foe and\nreduces SPEED.		
+sPoisonTailDescription	Has a high critical-hit\nratio. May also poison.		
+sCovetDescription	Cutely begs to obtain an\nitem held by the foe.		
+sVoltTackleDescription	A life-risking tackle that\nslightly hurts the user.		
+sMagicalLeafDescription	Attacks with a strange leaf\nthat cannot be evaded.		
+sWaterSportDescription	The user becomes soaked to\nraise resistance to fire.		
+sCalmMindDescription	Raises SP. ATK and SP. DEF\nby focusing the mind.		
+sLeafBladeDescription	Slashes with a sharp leaf.\nHigh critical-hit ratio.		
+sDragonDanceDescription	A mystical dance that ups\nATTACK and SPEED.		
+sRockBlastDescription	Hurls boulders at the foe\n2 to 5 times in a row.		
+sShockWaveDescription	A fast and unavoidable\nelectric attack.		
+sWaterPulseDescription	Attacks with ultrasonic\nwaves. May confuse the foe.		
+sDoomDesireDescription	Summons strong sunlight to\nattack 2 turns later.		
+sPsychoBoostDescription	Allows a full-power attack,\nbut sharply lowers SP. ATK.		

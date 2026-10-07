@@ -1,0 +1,55 @@
+key	english	dutch	notes
+STAT_HP	HP	HP	stays, as on screen
+STAT_ATTACK	ATTACK	AANVAL	capitals, like English
+STAT_DEFENSE	DEFENSE	VERDEDIGING	short form when needed: VERD.
+STAT_SPEED	SPEED	SNELHEID
+STAT_SPATK	SP. ATK	SP. AANV
+STAT_SPDEF	SP. DEF	SP. VERD
+STAT_ACCURACY	accuracy	raakkans	lowercase, like English
+STAT_EVASION	evasiveness	ontwijken	"het ontwijken"
+TYPE_NORMAL	NORMAL	NORMAAL	in descriptions: "NORMAAL-aanvallen"
+TYPE_FIRE	FIRE	VUUR
+TYPE_WATER	WATER	WATER
+TYPE_GRASS	GRASS	GRAS
+TYPE_ELECTRIC	ELECTRIC	ELEKTRISCH
+TYPE_ICE	ICE	IJS
+TYPE_FIGHTING	FIGHTING	VECHT
+TYPE_POISON	POISON	GIF
+TYPE_GROUND	GROUND	GROND
+TYPE_FLYING	FLYING	VLIEG
+TYPE_PSYCHIC	PSYCHIC	PSYCHISCH
+TYPE_BUG	BUG	INSECT
+TYPE_ROCK	ROCK	STEEN
+TYPE_GHOST	GHOST	GEEST
+TYPE_DRAGON	DRAGON	DRAAK
+TYPE_DARK	DARK	DUISTER
+TYPE_STEEL	STEEL	STAAL
+STATUS_POISON	poison	vergiftigen / vergiftigd
+STATUS_BAD_POISON	badly poison	zwaar vergiftigen
+STATUS_BURN	burn	verbranden / brandwond
+STATUS_PARALYZE	paralyze	verlammen / verlamd
+STATUS_SLEEP	sleep	slaap / in slaap brengen
+STATUS_FREEZE	freeze	bevriezen / bevroren
+STATUS_CONFUSE	confuse	in de war brengen / in de war
+STATUS_FLINCH	flinch	terugdeinzen	"kan de vijand laten terugdeinzen"
+STATUS_INFATUATE	infatuate	verliefd maken
+WORD_MOVE	move	aanval	also for moves that do no damage
+WORD_FOE	foe	vijand	"de vijand"
+WORD_USER	user	zelf / eigen	"Verhoogt eigen AANVAL." / "raakt zichzelf"
+WORD_TURN	turn	beurt
+WORD_BATTLE	battle	gevecht
+WORD_TRAINER	TRAINER	TRAINER
+WORD_ITEM	item	voorwerp
+WORD_HOLD	hold (an item)	vasthouden	"Als een POKéMON dit vasthoudt,"
+WORD_CRIT	critical hit	voltreffer
+WORD_FAINT	faint	verslagen	"is verslagen"
+WORD_RAISE	raises	verhoogt
+WORD_LOWER	lowers	verlaagt
+WORD_SHARPLY	sharply	flink	"verhoogt AANVAL flink"
+WORD_DAMAGE	damage	schade
+WORD_RAIN	rain	regen
+WORD_SUN	sunlight	zon
+WORD_SANDSTORM	sandstorm	zandstorm
+WORD_HAIL	hail	hagel
+WORD_BERRY	BERRY / BERRIES	BES / BESSEN
+WORD_WILD	wild POKéMON	wilde POKéMON
